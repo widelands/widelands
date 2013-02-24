@@ -49,8 +49,8 @@ struct WarehouseSupply;
 struct Warehouse_Descr : public Building_Descr {
 	Warehouse_Descr
 		(char const * name, char const * descname,
-		 std::string const & directory, Profile &, Section & global_s,
-		 Tribe_Descr const &);
+		 const std::string & directory, Profile &, Section & global_s,
+		 const Tribe_Descr &);
 
 	virtual Building & create_object() const;
 
@@ -137,8 +137,8 @@ public:
 
 	virtual void set_economy(Economy *);
 
-	WareList const & get_wares() const;
-	WareList const & get_workers() const;
+	const WareList & get_wares() const;
+	const WareList & get_workers() const;
 
 	void insert_wares  (Ware_Index, uint32_t count);
 	void remove_wares  (Ware_Index, uint32_t count);
@@ -164,8 +164,8 @@ public:
 
 	virtual bool fetch_from_flag(Game &);
 
-	uint32_t count_workers(Game const &, Ware_Index, Requirements const &);
-	Worker & launch_worker(Game &, Ware_Index, Requirements const &);
+	uint32_t count_workers(const Game &, Ware_Index, const Requirements &);
+	Worker & launch_worker(Game &, Ware_Index, const Requirements &);
 	void incorporate_worker(Editor_Game_Base &, Worker &);
 
 	WareInstance & launch_item(Game &, Ware_Index);
@@ -221,7 +221,7 @@ public:
 	void handle_expedition_worker_callback(Game &, Request &, Worker *);
 
 
-	virtual void log_general_info(Editor_Game_Base const &);
+	virtual void log_general_info(const Editor_Game_Base &);
 
 protected:
 

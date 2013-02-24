@@ -38,7 +38,7 @@
 
 using boost::format;
 
-void writeCrossReferences(FileWrite & fw, HTMLReferences const & references) {
+void writeCrossReferences(FileWrite & fw, const HTMLReferences & references) {
 	if (references[HTMLReferences::Input].size()) {
 		fw.Text("<h2 id=\"requesters\">");
 		fw.Text(_("Requesters"));
@@ -120,16 +120,16 @@ namespace Widelands {
 
 void Tribe_Descr::referenceBuilding
 	(::FileWrite        &       fw,
-	 std::string  const &       backlink,
+	 const std::string  &       backlink,
 	 HTMLReferences::Role const role,
 	 Building_Index       const index)
 	const
 {
 	assert(index < get_nrbuildings());
 	m_building_references[index.value()][role].insert(backlink);
-	Building_Descr const & descr = *get_building_descr(index);
-	std::string const & building_name     = descr.name    ();
-	std::string const & building_descname = descr.descname();
+	const Building_Descr & descr = *get_building_descr(index);
+	const std::string & building_name     = descr.name    ();
+	const std::string & building_descname = descr.descname();
 	fw.Text(building_name);
 	fw.Text("\" href=\"../");
 	if (descr.global())
@@ -147,7 +147,7 @@ void Tribe_Descr::referenceBuilding
 }
 void Tribe_Descr::referenceWorker
 	(::FileWrite        &       fw,
-	 std::string  const &       backlink,
+	 const std::string  &       backlink,
 	 HTMLReferences::Role const role,
 	 Ware_Index           const index,
 	 uint8_t                    multiplicity)
@@ -155,9 +155,9 @@ void Tribe_Descr::referenceWorker
 {
 	assert(index < get_nrworkers());
 	m_worker_references[index.value()][role].insert(backlink);
-	Worker_Descr const & descr = *get_worker_descr(index);
-	std::string const & worker_name     = descr.name    ();
-	std::string const & worker_descname = descr.descname();
+	const Worker_Descr & descr = *get_worker_descr(index);
+	const std::string & worker_name     = descr.name    ();
+	const std::string & worker_descname = descr.descname();
 	fw.Text(worker_name);
 	fw.Text("\" href=\"../");
 	fw.Text(worker_name);
@@ -174,7 +174,7 @@ void Tribe_Descr::referenceWorker
 }
 void Tribe_Descr::referenceWare
 	(::FileWrite        &       fw,
-	 std::string  const &       backlink,
+	 const std::string  &       backlink,
 	 HTMLReferences::Role const role,
 	 Ware_Index           const index,
 	 uint8_t                    multiplicity)
@@ -182,9 +182,9 @@ void Tribe_Descr::referenceWare
 {
 	assert(index < get_nrwares());
 	m_ware_references[index.value()][role].insert(backlink);
-	Item_Ware_Descr const & descr = *get_ware_descr(index);
-	std::string const & ware_name     = descr.name    ();
-	std::string const & ware_descname = descr.descname();
+	const Item_Ware_Descr & descr = *get_ware_descr(index);
+	const std::string & ware_name     = descr.name    ();
+	const std::string & ware_descname = descr.descname();
 	fw.Text(ware_name);
 	fw.Text("\" href=\"../");
 	fw.Text(ware_name);
@@ -232,7 +232,7 @@ struct orderer {
    typedef std::multimap<std::string const *, index_type, orderer> Ordered;   \
    Ordered ordered;                                                           \
 
-void Tribe_Descr::writeHTMLBuildings(std::string const & directory) {
+void Tribe_Descr::writeHTMLBuildings(const std::string & directory) {
 	assert(directory.size());
 	assert(*directory.rbegin() == '/');
 	ORDERED(Building_Index);
@@ -243,7 +243,7 @@ void Tribe_Descr::writeHTMLBuildings(std::string const & directory) {
 		(Building_Index i = m_buildings.get_nitems();
 		 Building_Index::First() < i;)
 	{
-		Building_Descr const & building_descr = *get_building_descr(--i);
+		const Building_Descr & building_descr = *get_building_descr(--i);
 		::FileWrite fw;
 		building_descr.writeHTML(fw);
 		writeCrossReferences(fw, m_building_references[i.value()]);
@@ -292,10 +292,10 @@ void Tribe_Descr::writeHTMLBuildings(std::string const & directory) {
 		("</th></tr></thead>\n"
 		 "<tbody>\n");
 	container_iterate_const(Ordered, ordered, i) {
-		Building_Descr const & building_descr =
+		const Building_Descr & building_descr =
 			*get_building_descr(i.current->second);
 		std::string         building_name     = building_descr    .name();
-		std::string const & building_descname = building_descr.descname();
+		const std::string & building_descname = building_descr.descname();
 		if (building_descr.global())
 			building_name = "../../global/militarysites/" + building_descr.name();
 		fw.Text("<tr><td><a href=\"");
@@ -472,7 +472,7 @@ void Building_Descr::writeHTML(::FileWrite & fw) const {
 }
 
 
-void Tribe_Descr::writeHTMLWorkers(std::string const & directory) {
+void Tribe_Descr::writeHTMLWorkers(const std::string & directory) {
 	assert(directory.size());
 	assert(*directory.rbegin() == '/');
 	ORDERED(Ware_Index);
@@ -480,7 +480,7 @@ void Tribe_Descr::writeHTMLWorkers(std::string const & directory) {
 	//  Write an index_<locale>.xhtml in each worker type's directory and add
 	//  the worker type to ordered for the table of contents.
 	for (Ware_Index i = m_workers.get_nitems(); Ware_Index::First() < i;) {
-		Worker_Descr const & worker_descr = *get_worker_descr(--i);
+		const Worker_Descr & worker_descr = *get_worker_descr(--i);
 		::FileWrite fw;
 		worker_descr.writeHTML(fw);
 		writeCrossReferences(fw, m_worker_references[i.value()]);
@@ -522,9 +522,9 @@ void Tribe_Descr::writeHTMLWorkers(std::string const & directory) {
 		("</th></tr></thead>\n"
 		 "<tbody>\n");
 	container_iterate_const(Ordered, ordered, i) {
-		Worker_Descr const & worker_descr = *get_worker_descr(i.current->second);
-		std::string const & worker_name     = worker_descr.    name();
-		std::string const & worker_descname = worker_descr.descname();
+		const Worker_Descr & worker_descr = *get_worker_descr(i.current->second);
+		const std::string & worker_name     = worker_descr.    name();
+		const std::string & worker_descname = worker_descr.descname();
 		fw.Text("<tr><td><a href=\"");
 		fw.Text(worker_name);
 		fw.Text("/index_" + i18n::get_locale() + ".xhtml\" title=\"");
@@ -546,9 +546,9 @@ void Tribe_Descr::writeHTMLWorkers(std::string const & directory) {
 			fw.Text("<td align=\"right\">");
 			sprintf(buffer, "%u", worker_descr.get_level_experience());
 			fw.Text(buffer);
-			Worker_Descr const & becomes_descr = *get_worker_descr(becomes);
-			std::string const & becomes_name     = becomes_descr.    name();
-			std::string const & becomes_descname = becomes_descr.descname();
+			const Worker_Descr & becomes_descr = *get_worker_descr(becomes);
+			const std::string & becomes_name     = becomes_descr.    name();
+			const std::string & becomes_descname = becomes_descr.descname();
 			fw.Text("</td><td sorttable_customkey=\"");
 			fw.Text(becomes_descname);
 			fw.Text("\"><a href=\"");
@@ -721,7 +721,7 @@ void Worker_Descr::writeHTML(::FileWrite & fw) const {
 
 
 void WorkerProgram::writeHTML
-	(::FileWrite & fw, Worker_Descr const & worker) const
+	(::FileWrite & fw, const Worker_Descr & worker) const
 {
 	fw.Text("<h3 id=\"program_");
 	fw.Text(get_name());
@@ -744,7 +744,7 @@ void WorkerProgram::writeHTML
 }
 
 
-void Worker::Action::writeHTML(::FileWrite & fw, Worker_Descr const &) const {
+void Worker::Action::writeHTML(::FileWrite & fw, const Worker_Descr &) const {
 	fw.Text
 		(function == &Worker::run_mine              ? "mine"               :
 		 function == &Worker::run_breed             ? "breed"              :
@@ -863,7 +863,7 @@ void ProductionSite_Descr::writeHTMLProduction(::FileWrite & fw) const {
 
 
 void ProductionProgram::writeHTML
-	(::FileWrite & fw, ProductionSite_Descr const & site) const
+	(::FileWrite & fw, const ProductionSite_Descr & site) const
 {
 	fw.Text("<h4 id=\"program_");
 	fw.Text(name());
@@ -887,7 +887,7 @@ void ProductionProgram::writeHTML
 
 
 void ProductionProgram::ActReturn::writeHTML
-	(::FileWrite & fw, ProductionSite_Descr const & site) const
+	(::FileWrite & fw, const ProductionSite_Descr & site) const
 {
 	fw.Text("<a href=\"../../../doc/");
 	fw.Text("productionsite_program_reference.xhtml");
@@ -927,7 +927,7 @@ void ProductionProgram::ActReturn::writeHTML
 
 
 void ProductionProgram::ActReturn::Negation::writeHTML
-	(::FileWrite & fw, ProductionSite_Descr const & site) const
+	(::FileWrite & fw, const ProductionSite_Descr & site) const
 {
 	fw.Text("<span class=\"keyword\">not</span> "); //&not; gives errors during rendering
 	operand->writeHTML(fw, site);
@@ -935,11 +935,11 @@ void ProductionProgram::ActReturn::Negation::writeHTML
 
 
 void ProductionProgram::ActReturn::Economy_Needs_Ware::writeHTML
-	(::FileWrite & fw, ProductionSite_Descr const & site) const
+	(::FileWrite & fw, const ProductionSite_Descr & site) const
 {
-	Item_Ware_Descr const & ware = *site.tribe().get_ware_descr(ware_type);
-	std::string const & ware_name     = ware.    name();
-	std::string const & ware_descname = ware.descname();
+	const Item_Ware_Descr & ware = *site.tribe().get_ware_descr(ware_type);
+	const std::string & ware_name     = ware.    name();
+	const std::string & ware_descname = ware.descname();
 	fw.Text("<span class=\"keyword\">");
 	fw.Text("economy");
 	fw.Text("</span> <span class=\"keyword\">");
@@ -957,11 +957,11 @@ void ProductionProgram::ActReturn::Economy_Needs_Ware::writeHTML
 
 
 void ProductionProgram::ActReturn::Economy_Needs_Worker::writeHTML
-	(::FileWrite & fw, ProductionSite_Descr const & site) const
+	(::FileWrite & fw, const ProductionSite_Descr & site) const
 {
-	Worker_Descr const & worker = *site.tribe().get_worker_descr(worker_type);
-	std::string const & worker_name     = worker.    name();
-	std::string const & worker_descname = worker.descname();
+	const Worker_Descr & worker = *site.tribe().get_worker_descr(worker_type);
+	const std::string & worker_name     = worker.    name();
+	const std::string & worker_descname = worker.descname();
 	fw.Text("<span class=\"keyword\">");
 	fw.Text("economy");
 	fw.Text("</span> <span class=\"keyword\">");
@@ -979,9 +979,9 @@ void ProductionProgram::ActReturn::Economy_Needs_Worker::writeHTML
 
 
 void ProductionProgram::ActReturn::Site_Has::writeHTML
-	(::FileWrite & fw, ProductionSite_Descr const & site) const
+	(::FileWrite & fw, const ProductionSite_Descr & site) const
 {
-	Tribe_Descr const & tribe = site.tribe();
+	const Tribe_Descr & tribe = site.tribe();
 	fw.Text("<span class=\"keyword\">");
 	fw.Text("site");
 	fw.Text("</span> <span class=\"keyword\">");
@@ -989,9 +989,9 @@ void ProductionProgram::ActReturn::Site_Has::writeHTML
 	fw.Text("</span>");
 	for (wl_const_range<std::set<Ware_Index> > i(group.first);;)
 	{
-		Item_Ware_Descr const & ware_type = *tribe.get_ware_descr(*i.current);
-		std::string const & ware_type_name     = ware_type.    name();
-		std::string const & ware_type_descname = ware_type.descname();
+		const Item_Ware_Descr & ware_type = *tribe.get_ware_descr(*i.current);
+		const std::string & ware_type_name     = ware_type.    name();
+		const std::string & ware_type_descname = ware_type.descname();
 		fw.Text("<a href=\"../");
 		fw.Text(ware_type_name);
 		fw.Text("/index_" + i18n::get_locale() + ".xhtml\" title=\"");
@@ -1013,7 +1013,7 @@ void ProductionProgram::ActReturn::Site_Has::writeHTML
 }
 
 void ProductionProgram::ActReturn::Workers_Need_Experience::writeHTML
-	(::FileWrite & fw, ProductionSite_Descr const &) const
+	(::FileWrite & fw, const ProductionSite_Descr &) const
 {
 	fw.Text("<a href=\"#workers\" title=\"");
 	fw.Text(_("workers of this site"));
@@ -1030,9 +1030,9 @@ static char const * const program_result_handling_method_names[5] =
 	{"fail", "complete", "skip", "continue", "repeat"};
 
 void ProductionProgram::ActCall::writeHTML
-	(::FileWrite & fw, ProductionSite_Descr const &) const
+	(::FileWrite & fw, const ProductionSite_Descr &) const
 {
-	std::string const & program_name = m_program->name();
+	const std::string & program_name = m_program->name();
 	fw.Text("<a href=\"../../../doc/");
 	fw.Text("productionsite_program_reference.xhtml");
 	fw.Text("#call\" title=\"");
@@ -1094,7 +1094,7 @@ void ProductionProgram::ActCall::writeHTML
 
 
 void ProductionProgram::ActWorker::writeHTML
-	(::FileWrite & fw, ProductionSite_Descr const & site) const
+	(::FileWrite & fw, const ProductionSite_Descr & site) const
 {
 	fw.Text("<a href=\"../../../doc/");
 	fw.Text("productionsite_program_reference.xhtml");
@@ -1104,7 +1104,7 @@ void ProductionProgram::ActWorker::writeHTML
 	fw.Text("\">");
 	fw.Text("worker");
 	fw.Text("</a> <a href=\"../");
-	Worker_Descr const & worker_descr =
+	const Worker_Descr & worker_descr =
 		*site.tribe().get_worker_descr(site.working_positions().at(0).first);
 	fw.Text(worker_descr.name());
 	fw.Text("/index_" + i18n::get_locale() + ".xhtml#program_");
@@ -1123,7 +1123,7 @@ void ProductionProgram::ActWorker::writeHTML
 
 
 void ProductionProgram::ActSleep::writeHTML
-	(::FileWrite & fw, ProductionSite_Descr const &) const
+	(::FileWrite & fw, const ProductionSite_Descr &) const
 {
 	fw.Text("<a href=\"../../../doc/");
 	fw.Text("productionsite_program_reference.xhtml");
@@ -1144,7 +1144,7 @@ void ProductionProgram::ActSleep::writeHTML
 
 
 void ProductionProgram::ActCheck_Map::writeHTML
-	(::FileWrite & fw, ProductionSite_Descr const &) const
+	(::FileWrite & fw, const ProductionSite_Descr &) const
 {
 	fw.Text("<a href=\"../../../doc/");
 	fw.Text("productionsite_program_reference.xhtml");
@@ -1164,7 +1164,7 @@ void ProductionProgram::ActCheck_Map::writeHTML
 
 
 void ProductionProgram::ActAnimate::writeHTML
-	(::FileWrite & fw, ProductionSite_Descr const &) const
+	(::FileWrite & fw, const ProductionSite_Descr &) const
 {
 	fw.Text("<a href=\"../../../doc/");
 	fw.Text("productionsite_program_reference.xhtml");
@@ -1185,9 +1185,9 @@ void ProductionProgram::ActAnimate::writeHTML
 
 
 void ProductionProgram::ActConsume::writeHTML
-	(::FileWrite & fw, ProductionSite_Descr const & site) const
+	(::FileWrite & fw, const ProductionSite_Descr & site) const
 {
-	Tribe_Descr const & tribe = site.tribe();
+	const Tribe_Descr & tribe = site.tribe();
 	fw.Text("<a href=\"../../../doc/");
 	fw.Text("productionsite_program_reference.xhtml");
 	fw.Text("#consume\" title=\"");
@@ -1200,9 +1200,9 @@ void ProductionProgram::ActConsume::writeHTML
 	{
 		for (wl_const_range<std::set<Ware_Index> > i(j.current->first);;)
 		{
-			Item_Ware_Descr const & ware = *tribe.get_ware_descr(*i.current);
-			std::string const & ware_name     = ware.    name();
-			std::string const & ware_descname = ware.descname();
+			const Item_Ware_Descr & ware = *tribe.get_ware_descr(*i.current);
+			const std::string & ware_name     = ware.    name();
+			const std::string & ware_descname = ware.descname();
 			fw.Text("<a href=\"../");
 			fw.Text(ware_name);
 			fw.Text("/index_" + i18n::get_locale() + ".xhtml\" title=\"");
@@ -1229,9 +1229,9 @@ void ProductionProgram::ActConsume::writeHTML
 
 
 void ProductionProgram::ActProduce::writeHTML
-	(::FileWrite & fw, ProductionSite_Descr const & site) const
+	(::FileWrite & fw, const ProductionSite_Descr & site) const
 {
-	Tribe_Descr const & tribe = site.tribe();
+	const Tribe_Descr & tribe = site.tribe();
 	fw.Text("<a href=\"../../../doc/");
 	fw.Text("productionsite_program_reference.xhtml");
 	fw.Text("#produce\" title=\"");
@@ -1242,9 +1242,9 @@ void ProductionProgram::ActProduce::writeHTML
 	fw.Text("</a> ");
 	for (wl_const_range<Items> i(items());;)
 	{
-		Item_Ware_Descr const & ware = *tribe.get_ware_descr(i.current->first);
-		std::string const & ware_name     = ware.    name();
-		std::string const & ware_descname = ware.descname();
+		const Item_Ware_Descr & ware = *tribe.get_ware_descr(i.current->first);
+		const std::string & ware_name     = ware.    name();
+		const std::string & ware_descname = ware.descname();
 		fw.Text("<a href=\"../");
 		fw.Text(ware_name);
 		fw.Text("/index_" + i18n::get_locale() + ".xhtml\" title=\"");
@@ -1267,9 +1267,9 @@ void ProductionProgram::ActProduce::writeHTML
 
 
 void ProductionProgram::ActRecruit::writeHTML
-	(::FileWrite & fw, ProductionSite_Descr const & site) const
+	(::FileWrite & fw, const ProductionSite_Descr & site) const
 {
-	Tribe_Descr const & tribe = site.tribe();
+	const Tribe_Descr & tribe = site.tribe();
 	fw.Text("<a href=\"../../../doc/");
 	fw.Text("productionsite_program_reference.xhtml");
 	fw.Text("#recruit\" title=\"");
@@ -1280,9 +1280,9 @@ void ProductionProgram::ActRecruit::writeHTML
 	fw.Text("</a> ");
 	for (wl_const_range<Items> i(items());;)
 	{
-		Worker_Descr const & worker = *tribe.get_worker_descr(i.current->first);
-		std::string const & worker_name     = worker.    name();
-		std::string const & worker_descname = worker.descname();
+		const Worker_Descr & worker = *tribe.get_worker_descr(i.current->first);
+		const std::string & worker_name     = worker.    name();
+		const std::string & worker_descname = worker.descname();
 		fw.Text("<a href=\"../");
 		fw.Text(worker_name);
 		fw.Text("/index_" + i18n::get_locale() + ".xhtml\" title=\"");
@@ -1305,13 +1305,13 @@ void ProductionProgram::ActRecruit::writeHTML
 
 
 void ProductionProgram::ActMine::writeHTML
-	(::FileWrite & fw, ProductionSite_Descr const & site) const
+	(::FileWrite & fw, const ProductionSite_Descr & site) const
 {
-	World          const & world             = site.tribe().world();
-	Resource_Descr const & resource          = *world.get_resource(m_resource);
-	std::string    const & world_basedir     = world.basedir();
-	std::string    const & resource_name     = resource.    name();
-	std::string    const & resource_descname = resource.descname();
+	const World          & world             = site.tribe().world();
+	const Resource_Descr & resource          = *world.get_resource(m_resource);
+	const std::string    & world_basedir     = world.basedir();
+	const std::string    & resource_name     = resource.    name();
+	const std::string    & resource_descname = resource.descname();
 	fw.Text("<a href=\"../../../doc/");
 	fw.Text("productionsite_program_reference.xhtml");
 	fw.Text("#mine\" title=\"");
@@ -1338,7 +1338,7 @@ void ProductionProgram::ActMine::writeHTML
 
 
 void ProductionProgram::ActCheck_Soldier::writeHTML
-	(::FileWrite & fw, ProductionSite_Descr const &) const
+	(::FileWrite & fw, const ProductionSite_Descr &) const
 {
 	fw.Text("<a href=\"../../../doc/");
 	fw.Text("productionsite_program_reference.xhtml");
@@ -1363,7 +1363,7 @@ void ProductionProgram::ActCheck_Soldier::writeHTML
 
 
 void ProductionProgram::ActTrain::writeHTML
-	(::FileWrite & fw, ProductionSite_Descr const &) const
+	(::FileWrite & fw, const ProductionSite_Descr &) const
 {
 	fw.Text("<a href=\"../../../doc/");
 	fw.Text("productionsite_program_reference.xhtml");
@@ -1388,7 +1388,7 @@ void ProductionProgram::ActTrain::writeHTML
 
 
 void ProductionProgram::ActPlayFX::writeHTML
-	(::FileWrite & fw, ProductionSite_Descr const &) const
+	(::FileWrite & fw, const ProductionSite_Descr &) const
 {
 	fw.Text("<a href=\"../../../doc/");
 	fw.Text("productionsite_program_reference.xhtml");
@@ -1406,7 +1406,7 @@ void ProductionProgram::ActPlayFX::writeHTML
 
 
 void ProductionProgram::ActConstruct::writeHTML
-	(::FileWrite & fw, ProductionSite_Descr const &) const
+	(::FileWrite & fw, const ProductionSite_Descr &) const
 {
 	fw.Text("<a href=\"../../../doc/");
 	fw.Text("productionsite_program_reference.xhtml");
@@ -1425,7 +1425,7 @@ void ProductionProgram::ActConstruct::writeHTML
 }
 
 
-void Tribe_Descr::writeHTMLWares(std::string const & directory) {
+void Tribe_Descr::writeHTMLWares(const std::string & directory) {
 	assert(directory.size());
 	assert(*directory.rbegin() == '/');
 	ORDERED(Ware_Index);
@@ -1433,7 +1433,7 @@ void Tribe_Descr::writeHTMLWares(std::string const & directory) {
 	//  Write an index_<locale>.xhtml in each ware type's directory and add the
 	//  ware type to ordered for the table of contents.
 	for (Ware_Index i = m_wares.get_nitems(); Ware_Index::First() < i;) {
-		Item_Ware_Descr const & ware_descr = *get_ware_descr(--i);
+		const Item_Ware_Descr & ware_descr = *get_ware_descr(--i);
 		::FileWrite fw;
 		ware_descr.writeHTML(fw);
 		writeCrossReferences(fw, m_ware_references[i.value()]);
@@ -1469,9 +1469,9 @@ void Tribe_Descr::writeHTMLWares(std::string const & directory) {
 		("</th></tr></thead>\n"
 		 "<tbody>\n");
 	container_iterate_const(Ordered, ordered, i) {
-		Item_Ware_Descr const & ware_descr = *get_ware_descr(i.current->second);
-		std::string const & ware_name     = ware_descr.    name();
-		std::string const & ware_descname = ware_descr.descname();
+		const Item_Ware_Descr & ware_descr = *get_ware_descr(i.current->second);
+		const std::string & ware_name     = ware_descr.    name();
+		const std::string & ware_descname = ware_descr.descname();
 		fw.Text("<tr><td><a href=\"");
 		fw.Text(ware_name);
 		fw.Text("/index_" + i18n::get_locale() + ".xhtml\" title=\"");

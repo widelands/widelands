@@ -33,7 +33,7 @@
 struct Fullscreen_Menu_LoadReplay : public Fullscreen_Menu_Base {
 	Fullscreen_Menu_LoadReplay();
 
-	std::string const & filename() {return m_filename;}
+	const std::string & filename() {return m_filename;}
 
 	void clicked_ok();
 	void clicked_delete();

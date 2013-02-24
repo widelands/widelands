@@ -37,7 +37,7 @@ struct SupplyList {
 	void remove_supply(Supply &);
 
 	size_t get_nrsupplies() const {return m_supplies.size();}
-	Supply const & operator[](size_t const idx) const {return *m_supplies[idx];}
+	const Supply & operator[](size_t const idx) const {return *m_supplies[idx];}
 	Supply & operator[](size_t const idx) {return *m_supplies[idx];}
 
 	bool have_supplies(Game & game, const Request &);

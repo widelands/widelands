@@ -79,7 +79,7 @@ FileSystem::FileSystem()
  * \param path A file or directory name
  * \return True if ref path is absolute and within this FileSystem, false otherwise
  */
-bool FileSystem::pathIsAbsolute(std::string const & path) const {
+bool FileSystem::pathIsAbsolute(const std::string & path) const {
 	std::string::size_type const path_size = path  .size();
 	std::string::size_type const root_size = m_root.size();
 
@@ -111,7 +111,7 @@ bool FileSystem::pathIsAbsolute(std::string const & path) const {
  * This function is used to make sure that paths send via network are usable
  * on locale OS.
  */
-std::string FileSystem::fixCrossFile(std::string const & path) const {
+std::string FileSystem::fixCrossFile(const std::string & path) const {
 	uint32_t path_size = path.size();
 	std::string fixedPath(path);
 	std::string temp;
@@ -204,7 +204,7 @@ std::string FileSystem::GetHomedir()
  */
 template<typename Inserter>
 static void FS_Tokenize
-	(std::string const & path, char const filesep, Inserter components)
+	(const std::string & path, char const filesep, Inserter components)
 {
 	std::string::size_type pos;  //  start of token
 	std::string::size_type pos2; //  next filesep character
@@ -361,7 +361,7 @@ std::string FileSystem::FS_FilenameWoExt(const char * const p)
 /// \throw FileTypeError if root is neither a directory or regular file
 /// \todo throw FileTypeError if root is not a zipfile (exception from
 /// ZipFilesystem)
-FileSystem & FileSystem::Create(std::string const & root)
+FileSystem & FileSystem::Create(const std::string & root)
 throw (FileType_error, FileNotFound_error, FileAccessDenied_error)
 {
 	struct stat statinfo;

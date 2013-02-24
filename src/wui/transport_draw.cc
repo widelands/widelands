@@ -27,7 +27,7 @@
 namespace Widelands {
 
 void Flag::draw
-	(Editor_Game_Base const &       game,
+	(const Editor_Game_Base &       game,
 	 RenderTarget           &       dst,
 	 FCoords,
 	 Point                    const pos)
@@ -63,6 +63,6 @@ void Flag::draw
 }
 
 /** The road is drawn by the terrain renderer via marked fields. */
-void Road::draw(Editor_Game_Base const &, RenderTarget &, FCoords, Point) {}
+void Road::draw(const Editor_Game_Base &, RenderTarget &, FCoords, Point) {}
 
 }

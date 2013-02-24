@@ -56,7 +56,7 @@ struct Path {
 		return m_path[m_path.size() - i - 1];
 	}
 
-	void append(Map const & map, Direction);
+	void append(const Map & map, Direction);
 
 	void reorigin(const Coords & new_origin, const Extent & extent) {
 		m_start.reorigin(new_origin, extent);
@@ -64,7 +64,7 @@ struct Path {
 	}
 
 	void save(FileWrite & fw) const;
-	void load(FileRead & fr, Map const & map);
+	void load(FileRead & fr, const Map & map);
 
 private:
 	Coords m_start;
@@ -96,7 +96,7 @@ struct CoordPath {
 	void truncate (const std::vector<char>::size_type after);
 	void starttrim(const std::vector<char>::size_type before);
 	void append(const Map & map, const Path & tail);
-	void append(CoordPath const & tail);
+	void append(const CoordPath & tail);
 
 private:
 	Step_Vector          m_path;   //  directions

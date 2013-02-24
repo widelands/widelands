@@ -78,7 +78,7 @@ struct FindNodeUnowned {
 
 
 struct FindNodeWater {
-	bool accept(Map const & map, FCoords const & coord) const {
+	bool accept(const Map & map, const FCoords & coord) const {
 		return
 			(map.world().terrain_descr(coord.field->terrain_d()).get_is()
 			 & TERRAIN_WATER)
@@ -100,18 +100,18 @@ struct NearFlag {
 	int32_t  cost;
 	int32_t  distance;
 
-	NearFlag (Flag const & f, int32_t const c, int32_t const d) :
+	NearFlag (const Flag & f, int32_t const c, int32_t const d) :
 		flag(&f), cost(c), distance(d)
 	{}
 
-	bool operator< (NearFlag const & f) const {return cost > f.cost;}
+	bool operator< (const NearFlag & f) const {return cost > f.cost;}
 
 	bool operator== (Flag const * const f) const {return flag == f;}
 };
 
 
 struct CompareDistance {
-	bool operator() (NearFlag const & a, NearFlag const & b) const {
+	bool operator() (const NearFlag & a, const NearFlag & b) const {
 		return a.distance < b.distance;
 	}
 };
@@ -163,7 +163,7 @@ struct BuildableField {
 	std::vector<uint8_t> consumers_nearby;
 	std::vector<uint8_t> producers_nearby;
 
-	BuildableField (Widelands::FCoords const & fc)
+	BuildableField (const Widelands::FCoords & fc)
 		:
 		coords             (fc),
 		next_update_due    (0),
@@ -190,7 +190,7 @@ struct MineableField {
 
 	int32_t mines_nearby;
 
-	MineableField (Widelands::FCoords const & fc) :
+	MineableField (const Widelands::FCoords & fc) :
 		coords         (fc),
 		next_update_due(0),
 		reachable      (false),

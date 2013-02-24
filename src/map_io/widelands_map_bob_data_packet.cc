@@ -51,14 +51,14 @@ void Map_Bob_Data_Packet::ReadBob
 			if (subtype != Bob::CRITTER)
 				throw game_data_error("world bob is not a critter!");
 
-			Map   const & map   = egbase.map();
-			World const & world = map.world();
+			const Map   & map   = egbase.map();
+			const World & world = map.world();
 			int32_t const idx = world.get_bob(name);
 			if (idx == -1)
 				throw game_data_error
 					("world %s does not define bob type \"%s\"",
 					 world.get_name(), name);
-			Bob::Descr const & descr = *world.get_bob_descr(idx);
+			const Bob::Descr & descr = *world.get_bob_descr(idx);
 			if (not (map[coords].nodecaps() & descr.movecaps()))
 				log
 					("WARNING: Found a %s at (%i, %i), but it can not move "
@@ -101,7 +101,7 @@ void Map_Bob_Data_Packet::ReadBob
 			} else
 				throw game_data_error(_("tribe \"%s\" does not exist"), owner);
 		}
-	} catch (_wexception const & e) {
+	} catch (const _wexception & e) {
 		throw game_data_error
 			("%u (owner = \"%s\", name = \"%s\"): %s",
 			 serial, owner, name, e.what());
@@ -135,7 +135,7 @@ throw (_wexception)
 		else
 			throw game_data_error
 				(_("unknown/unhandled version %u"), packet_version);
-	} catch (_wexception const & e) {
+	} catch (const _wexception & e) {
 		throw game_data_error(_("bobs: %s"), e.what());
 	}
 }

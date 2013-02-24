@@ -39,8 +39,8 @@ namespace Widelands {
 
 TrainingSite_Descr::TrainingSite_Descr
 	(char const * const _name, char const * const _descname,
-	 std::string const & directory, Profile & prof, Section & global_s,
-	 Tribe_Descr const & _tribe)
+	 const std::string & directory, Profile & prof, Section & global_s,
+	 const Tribe_Descr & _tribe)
 	:
 	ProductionSite_Descr
 		(_name, _descname, directory, prof, global_s, _tribe),
@@ -606,7 +606,7 @@ void TrainingSite::set_pri(tAttribute atr, int32_t prio)
  * Only called from \ref calc_upgrades
  */
 void TrainingSite::add_upgrade
-	(tAttribute const atr, std::string const & prefix)
+	(tAttribute const atr, const std::string & prefix)
 {
 	Upgrade u;
 	u.attribute = atr;

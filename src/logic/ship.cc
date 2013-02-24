@@ -35,10 +35,10 @@
 namespace Widelands {
 
 Ship_Descr::Ship_Descr
-	(const char * given_name, const char * descname,
+	(const char * given_name, const char * gdescname,
 	 const std::string & directory, Profile & prof, Section & global_s,
-	 const Widelands::Tribe_Descr & tribe)
-: Descr(given_name, descname, directory, prof, global_s, &tribe)
+	 const Widelands::Tribe_Descr & gtribe)
+: Descr(given_name, gdescname, directory, prof, global_s, &gtribe)
 {
 	m_sail_anims.parse
 		(*this,
@@ -61,8 +61,8 @@ Bob & Ship_Descr::create_object() const
 }
 
 
-Ship::Ship(const Ship_Descr & descr) :
-	Bob(descr),
+Ship::Ship(const Ship_Descr & gdescr) :
+	Bob(gdescr),
 	m_window(0),
 	m_fleet(0),
 	m_economy(0)

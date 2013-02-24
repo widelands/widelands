@@ -30,14 +30,14 @@ struct RGBColor : public SDL_Color {
 		SDL_Color::r = R, SDL_Color::g = G, SDL_Color::b = B;
 	}
 
-	Uint32 map(SDL_PixelFormat const & fmt) const {
+	Uint32 map(const SDL_PixelFormat & fmt) const {
 		return SDL_MapRGB(&const_cast<SDL_PixelFormat &>(fmt), r, g, b);
 	}
 	void set(SDL_PixelFormat * const fmt, Uint32 const clr) {
 		SDL_GetRGB(clr, fmt, &r, &g, &b);
 	}
 
-	bool operator== (RGBColor const & other) const throw () {
+	bool operator== (const RGBColor & other) const throw () {
 		return r == other.r and g == other.g and b == other.b;
 	}
 };
@@ -69,7 +69,7 @@ struct RGBAColor {
 	Uint32 map(const SDL_PixelFormat & fmt) const {
 		return SDL_MapRGBA(&const_cast<SDL_PixelFormat &>(fmt), r, g, b, a);
 	}
-	void set(SDL_PixelFormat const & fmt, Uint32 const clr) {
+	void set(const SDL_PixelFormat & fmt, Uint32 const clr) {
 		SDL_GetRGBA(clr, const_cast<SDL_PixelFormat *>(&fmt), &r, &g, &b, &a);
 	}
 };

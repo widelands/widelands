@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2011 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2013 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -40,7 +40,7 @@
 
 struct Overlay_Manager;
 struct S2_Map_Loader;
-class IPicture;
+class Image;
 
 namespace Widelands {
 
@@ -84,7 +84,7 @@ CheckStep
 Predicates used in path finding and find functions.
 */
 struct FindImmovable;
-FindImmovable const & FindImmovableAlwaysTrue();
+const FindImmovable & FindImmovableAlwaysTrue();
 
 struct FindBob {
 	//  Return true if this bob should be returned by find_bobs.
@@ -149,8 +149,8 @@ struct Map :
 	Map ();
 	virtual ~Map();
 
-	Overlay_Manager * get_overlay_manager()       {return  m_overlay_manager;}
-	Overlay_Manager & get_overlay_manager() const {return *m_overlay_manager;}
+	Overlay_Manager * get_overlay_manager()       {return m_overlay_manager;}
+	Overlay_Manager * get_overlay_manager() const {return m_overlay_manager;}
 	const Overlay_Manager & overlay_manager() const {return *m_overlay_manager;}
 	Overlay_Manager       & overlay_manager()       {return *m_overlay_manager;}
 
@@ -160,7 +160,7 @@ struct Map :
 
 	void create_empty_map // for editor
 		(uint32_t w = 64, uint32_t h = 64,
-		 std::string const & worldname   =   "greenland",
+		 const std::string & worldname   =   "greenland",
 		 char        const * name        = _("No Name"),
 		 char        const * author      = _("Unknown"),
 		 char        const * description = _("no description defined"));
@@ -348,7 +348,7 @@ struct Map :
 	//  change terrain of a triangle, recalculate buildcaps
 	int32_t change_terrain(TCoords<FCoords>, Terrain_Index);
 
-	Manager<Objective>  const & mom() const {return m_mom;}
+	const Manager<Objective>  & mom() const {return m_mom;}
 	Manager<Objective>        & mom()       {return m_mom;}
 
 	/// Returns the military influence on a location from an area.
@@ -361,6 +361,7 @@ struct Map :
 	bool is_port_space(Coords c);
 	void set_port_space(Coords c, bool allowed);
 	std::vector<Coords> get_port_spaces() {return m_port_spaces;}
+	std::vector<Coords> find_portdock(const Widelands::Coords& c) const;
 
 protected: /// These functions are needed in Testclasses
 	void set_size(uint32_t w, uint32_t h);
@@ -404,7 +405,7 @@ private:
 		enum Type {
 			PIC,
 		};
-		const IPicture* data;
+		const Image* data;
 		std::string filename;
 		Type        type;
 	};
@@ -415,11 +416,14 @@ private:
 
 	void recalc_brightness(FCoords);
 	void recalc_nodecaps_pass1(FCoords);
-	void recalc_nodecaps_pass2(FCoords);
+	void recalc_nodecaps_pass2(const FCoords & f);
 	void check_neighbour_heights(FCoords, uint32_t & radius);
+	int calc_buildsize(const Widelands::FCoords& f, bool avoidnature, bool* ismine = 0);
+	bool is_cycle_connected
+		(const FCoords & start, uint32_t length, const WalkingDir * dirs);
 
 	template<typename functorT>
-		void find_reachable(Area<FCoords>, CheckStep const &, functorT &);
+		void find_reachable(Area<FCoords>, const CheckStep &, functorT &);
 
 	template<typename functorT> void find(const Area<FCoords>, functorT &) const;
 };

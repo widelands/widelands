@@ -25,14 +25,11 @@
 #include <boost/noncopyable.hpp>
 
 #include "point.h"
+#include "align.h"
 
-#include "ui_basic/align.h"
-
-class RenderTarget;
 class FileSystem;
-
-class IPicture;
-class IGraphic;
+class Image;
+class Graphic;
 
 namespace UI {
 
@@ -43,22 +40,15 @@ class IFont_Handler1 : boost::noncopyable {
 public:
 	virtual ~IFont_Handler1() {};
 
-	virtual void draw_text
-		(RenderTarget &,
-		 Point dstpoint,
-		 const std::string & text,
-		 uint32_t w = 0,
-		 Align = Align_TopLeft) = 0;
-
 	/*
-	 * Renders the given text into an image. Will return NULL on error or if the
-	 * resulting image would have no size. The image is cached and therefore
-	 * ownership remains with this class.
+	 * Renders the given text into an image. The image is cached and therefore
+	 * ownership remains with this class. Will throw on error.
 	 */
-	virtual const IPicture* render(const std::string& text, uint32_t w = 0) = 0;
+	virtual const Image* render(const std::string& text, uint16_t w = 0) = 0;
 };
 
-IFont_Handler1 * create_fonthandler(IGraphic& gr, FileSystem* lfs);
+// Create a new Font_Handler1. Ownership for the objects is not taken.
+IFont_Handler1 * create_fonthandler(Graphic* gr, FileSystem* fs);
 
 extern IFont_Handler1 * g_fh1;
 

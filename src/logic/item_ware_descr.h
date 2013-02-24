@@ -32,7 +32,7 @@
 
 struct Profile;
 struct Section;
-class IPicture;
+class Image;
 
 #define WARE_MENU_PIC_WIDTH   24  //< Default width for ware's menu icons
 #define WARE_MENU_PIC_HEIGHT  24  //< Default height for ware's menu icons
@@ -60,7 +60,7 @@ struct Item_Ware_Descr : public Map_Object_Descr {
 	typedef Ware_Index::value_t Index;
 	Item_Ware_Descr
 		(const Tribe_Descr & tribe, char const * const name,
-		 char const * const descname, std::string const & directory,
+		 char const * const descname, const std::string & directory,
 		 Profile &, Section & global_s);
 
 	virtual ~Item_Ware_Descr() {};
@@ -68,11 +68,11 @@ struct Item_Ware_Descr : public Map_Object_Descr {
 	const Tribe_Descr & tribe() const {return m_tribe;}
 
 	/// \return index to ware's icon inside picture stack
-	const IPicture* icon() const throw () {return m_icon;}
+	const Image* icon() const throw () {return m_icon;}
 	std::string icon_name() const throw () {return m_icon_fname;}
 
 	/// \return ware's localized descriptive text
-	std::string const & helptext() const throw () {return m_helptext;}
+	const std::string & helptext() const throw () {return m_helptext;}
 
 	/// How much of the ware type that an economy should store in warehouses.
 	/// The special value std::numeric_limits<uint32_t>::max() means that the
@@ -105,7 +105,7 @@ private:
 	std::string m_helptext;   ///< Long descriptive text
 	uint32_t    m_default_target_quantity;
 	std::string m_icon_fname; ///< Filename of ware's main picture
-	const IPicture* m_icon;       ///< Index of ware's picture in picture stack
+	const Image* m_icon;       ///< Index of ware's picture in picture stack
 	uint8_t     m_preciousness;
 };
 

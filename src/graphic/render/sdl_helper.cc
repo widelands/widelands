@@ -17,18 +17,13 @@
  *
  */
 
-#include <boost/format.hpp>
-#include <SDL.h>
+#include <cassert>
 
-#include "rt_errors.h"
+#include <SDL.h>
 
 #include "sdl_helper.h"
 
-using namespace boost;
-
-namespace RT {
-
-SDL_Surface * empty_sdl_surface(int32_t w, int32_t h, bool alpha) {
+SDL_Surface * empty_sdl_surface(int16_t w, int16_t h) {
 	SDL_Surface* surface;
 	Uint32 rmask, gmask, bmask, amask;
 	/* SDL interprets each pixel as a 32-bit number, so our masks must depend
@@ -37,22 +32,17 @@ SDL_Surface * empty_sdl_surface(int32_t w, int32_t h, bool alpha) {
 	rmask = 0xff000000;
 	gmask = 0x00ff0000;
 	bmask = 0x0000ff00;
-	amask = alpha ? 0x000000ff : 0;
+	amask = 0x000000ff;
 #else
 	rmask = 0x000000ff;
 	gmask = 0x0000ff00;
 	bmask = 0x00ff0000;
-	amask = alpha ? 0xff000000 : 0;
+	amask = 0xff000000;
 #endif
 
-	surface = SDL_CreateRGBSurface
-		(SDL_SWSURFACE, w, h, 32, rmask, gmask, bmask, amask);
-	if (!surface)
-		throw RenderError((format("Was unable to create a Surface: %s") % SDL_GetError()).str());
+	surface = SDL_CreateRGBSurface(SDL_SWSURFACE, w, h, 32, rmask, gmask, bmask, amask);
+	assert(surface);
 
 	return surface;
 }
-
-}
-
 

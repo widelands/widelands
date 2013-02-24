@@ -115,7 +115,7 @@ void Map_Saver::save() throw (_wexception) {
 	{Map_Extradata_Data_Packet               p; p.Write(m_fs, m_egbase, *m_mos);}
 	log("done!\n ");
 
-	Map const & map = m_egbase.map();
+	const Map & map = m_egbase.map();
 
 	Player_Number const nr_players = map.get_nrplayers();
 

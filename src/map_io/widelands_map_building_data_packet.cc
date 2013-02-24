@@ -19,17 +19,18 @@
 
 #include "widelands_map_building_data_packet.h"
 
+#include "economy/request.h"
+#include "graphic/graphic.h"
 #include "logic/constructionsite.h"
 #include "logic/editor_game_base.h"
-#include "wui/interactive_base.h"
 #include "logic/map.h"
 #include "logic/player.h"
-#include "economy/request.h"
 #include "logic/tribe.h"
 #include "logic/widelands_fileread.h"
 #include "logic/widelands_filewrite.h"
 #include "widelands_map_map_object_loader.h"
 #include "widelands_map_map_object_saver.h"
+#include "wui/interactive_base.h"
 
 #include "upcast.h"
 
@@ -73,7 +74,7 @@ throw (_wexception)
 
 						//  Get the tribe and the building index.
 						if (Player * const player = egbase.get_safe_player(p)) {
-							Tribe_Descr const & tribe = player->tribe();
+							const Tribe_Descr & tribe = player->tribe();
 							Building_Index const index = tribe.building_index(name);
 							if (not index)
 								throw game_data_error
@@ -105,7 +106,7 @@ throw (_wexception)
 		} else
 			throw game_data_error
 				(_("unknown/unhandled version %u"), packet_version);
-	} catch (_wexception const & e) {
+	} catch (const _wexception & e) {
 		throw game_data_error(_("buildings: %s"), e.what());
 	}
 }
@@ -125,7 +126,7 @@ throw (_wexception)
 
 	// Write buildings and owner, register this with the map_object_saver so that
 	// it's data can be saved later.
-	Map const &  map    = egbase.map();
+	const Map &  map    = egbase.map();
 	Extent const extent = map.extent();
 	iterate_Map_FCoords(map, extent, fc) {
 		upcast(Building const, building, fc.field->get_immovable());
@@ -163,14 +164,14 @@ throw (_wexception)
 
 
 void Map_Building_Data_Packet::write_priorities
-	(Building const & building, FileWrite & fw)
+	(const Building & building, FileWrite & fw)
 {
 	fw.Unsigned32(building.get_base_priority());
 
 	std::map<int32_t, std::map<Ware_Index, int32_t> > type_to_priorities;
 	std::map<int32_t, std::map<Ware_Index, int32_t> >::iterator it;
 
-	Tribe_Descr const & tribe = building.tribe();
+	const Tribe_Descr & tribe = building.tribe();
 	building.collect_priorities(type_to_priorities);
 	for (it = type_to_priorities.begin(); it != type_to_priorities.end(); ++it)
 	{
@@ -210,7 +211,7 @@ void Map_Building_Data_Packet::read_priorities
 {
 	building.set_priority(fr.Unsigned32());
 
-	Tribe_Descr const & tribe = building.tribe();
+	const Tribe_Descr & tribe = building.tribe();
 	int32_t ware_type = -1;
 	// read ware type
 	while (0xff != (ware_type = fr.Unsigned8())) {

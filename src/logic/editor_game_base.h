@@ -119,7 +119,7 @@ struct Editor_Game_Base :
 		(Coords, const std::string & name, Tribe_Descr const * const = 0, Player * owner = 0);
 	Immovable & create_immovable(Coords, uint32_t idx, Tribe_Descr const *);
 	Immovable & create_immovable
-		(Coords, std::string const & name, Tribe_Descr const *);
+		(Coords, const std::string & name, Tribe_Descr const *);
 
 	int32_t get_gametime() const {return m_gametime;}
 	Interactive_Base * get_ibase() const {return m_ibase;}
@@ -133,7 +133,7 @@ struct Editor_Game_Base :
 
 	// Manually load a tribe into memory. Used by the editor
 	const Tribe_Descr & manually_load_tribe(const std::string & tribe);
-	Tribe_Descr const & manually_load_tribe(Player_Number const p) {
+	const Tribe_Descr & manually_load_tribe(Player_Number const p) {
 		return manually_load_tribe(map().get_scenario_player_tribe(p));
 	}
 	// Get a tribe from the loaded list, when available
@@ -151,9 +151,9 @@ struct Editor_Game_Base :
 	void   conquer_area            (Player_Area<Area<FCoords> >);
 	void   conquer_area_no_building(Player_Area<Area<FCoords> > const);
 
-	void receive(NoteImmovable const &);
-	void receive(NoteFieldPossession     const &);
-	void receive(NoteFieldTransformed    const &);
+	void receive(const NoteImmovable &);
+	void receive(const NoteFieldPossession     &);
+	void receive(const NoteFieldTransformed    &);
 
 	void cleanup_objects() throw () {
 		objects().cleanup(*this);

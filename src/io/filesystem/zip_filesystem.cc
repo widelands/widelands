@@ -33,7 +33,7 @@
 /**
  * Initialize the real file-system
  */
-ZipFilesystem::ZipFilesystem(std::string const & zipfile)
+ZipFilesystem::ZipFilesystem(const std::string & zipfile)
 :
 m_state      (STATE_IDLE),
 m_zipfile    (0),
@@ -67,11 +67,11 @@ bool ZipFilesystem::IsWritable() const {
  * cross-platform way of doing this
  */
 int32_t ZipFilesystem::FindFiles
-	(std::string const & path_in,
+	(const std::string & path_in,
 #ifndef NDEBUG
-	 std::string const & pattern,
+	 const std::string & pattern,
 #else
-	 std::string const &,
+	 const std::string &,
 #endif
 	 filenameset_t     * const results,
 	 uint32_t)
@@ -126,7 +126,7 @@ int32_t ZipFilesystem::FindFiles
  * Returns true if the given file exists, and false if it doesn't.
  * Also returns false if the pathname is invalid
  */
-bool ZipFilesystem::FileExists(std::string const & path) {
+bool ZipFilesystem::FileExists(const std::string & path) {
 	try {
 		m_OpenUnzip(); //  FIXME check return value
 	} catch (...) {
@@ -167,7 +167,7 @@ bool ZipFilesystem::FileExists(std::string const & path) {
  * Returns true if the given file is a directory, and false if it doesn't.
  * Also returns false if the pathname is invalid
  */
-bool ZipFilesystem::IsDirectory(std::string const & path) {
+bool ZipFilesystem::IsDirectory(const std::string & path) {
 
 	if (!FileExists(path))
 		return false;
@@ -185,7 +185,7 @@ bool ZipFilesystem::IsDirectory(std::string const & path) {
 /**
  * Create a sub filesystem out of this filesystem
  */
-FileSystem & ZipFilesystem::MakeSubFileSystem(std::string const & path) {
+FileSystem & ZipFilesystem::MakeSubFileSystem(const std::string & path) {
 	m_OpenUnzip();
 
 	assert(FileExists(path));
@@ -210,7 +210,7 @@ FileSystem & ZipFilesystem::MakeSubFileSystem(std::string const & path) {
  * \throw ZipOperation_error
  */
 FileSystem & ZipFilesystem::CreateSubFileSystem
-	(std::string const & path, Type const type)
+	(const std::string & path, Type const type)
 {
 	assert(!FileExists(path));
 
@@ -239,7 +239,7 @@ FileSystem & ZipFilesystem::CreateSubFileSystem
  * Remove a number of files
  * \throw ZipOperation_error
  */
-void ZipFilesystem::Unlink(std::string const & filename) {
+void ZipFilesystem::Unlink(const std::string & filename) {
 	throw ZipOperation_error
 		("ZipFilesystem::Unlink",
 		 filename,
@@ -251,7 +251,7 @@ void ZipFilesystem::Unlink(std::string const & filename) {
  * Create this directory if it doesn't exist, throws an error
  * if the dir can't be created or if a file with this name exists
  */
-void ZipFilesystem::EnsureDirectoryExists(std::string const & dirname) {
+void ZipFilesystem::EnsureDirectoryExists(const std::string & dirname) {
 	if (FileExists(dirname) && IsDirectory(dirname))
 		return;
 
@@ -266,7 +266,7 @@ void ZipFilesystem::EnsureDirectoryExists(std::string const & dirname) {
  * MakeDirectory("onedir/otherdir/onemoredir") will fail
  * if either ondir or otherdir is missing
  */
-void ZipFilesystem::MakeDirectory(std::string const & dirname) {
+void ZipFilesystem::MakeDirectory(const std::string & dirname) {
 	m_OpenZip();
 
 	zip_fileinfo zi;
@@ -374,7 +374,7 @@ void * ZipFilesystem::fastLoad
  * Throws an exception if it fails.
  */
 void ZipFilesystem::Write
-	(std::string const & fname, void const * const data, int32_t const length)
+	(const std::string & fname, void const * const data, int32_t const length)
 {
 	m_OpenZip();
 
@@ -419,13 +419,13 @@ void ZipFilesystem::Write
 	zipCloseFileInZip(m_zipfile);
 }
 
-StreamRead  * ZipFilesystem::OpenStreamRead (std::string const & fname) {
+StreamRead  * ZipFilesystem::OpenStreamRead (const std::string & fname) {
 	throw wexception
 		("OpenStreamRead(%s) not yet supported in ZipFilesystem",
 		 fname.c_str());
 }
 
-StreamWrite * ZipFilesystem::OpenStreamWrite(std::string const & fname) {
+StreamWrite * ZipFilesystem::OpenStreamWrite(const std::string & fname) {
 	throw wexception
 		("OpenStreamWrite(%s) not yet supported in ZipFilesystem",
 		 fname.c_str());
@@ -480,7 +480,7 @@ void ZipFilesystem::m_OpenUnzip() {
 	m_state = STATE_UNZIPPPING;
 }
 
-void ZipFilesystem::Rename(std::string const &, std::string const &) {
+void ZipFilesystem::Rename(const std::string &, const std::string &) {
 	throw wexception("rename inside zip FS is not implemented yet");
 }
 

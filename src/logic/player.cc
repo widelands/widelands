@@ -68,8 +68,8 @@ Player::Player
 	(Editor_Game_Base  & the_egbase,
 	 Player_Number         const plnum,
 	 uint8_t               const initialization_index,
-	 Tribe_Descr   const &       tribe_descr,
-	 std::string   const &       name)
+	 const Tribe_Descr   &       tribe_descr,
+	 const std::string   &       name)
 	:
 	m_egbase              (the_egbase),
 	m_initialization_index(initialization_index),
@@ -111,7 +111,7 @@ void Player::create_default_infrastructure() {
 	const Map & map = egbase().map();
 	if (map.get_starting_pos(m_plnum)) {
 		try {
-			Tribe_Descr::Initialization const & initialization =
+			const Tribe_Descr::Initialization & initialization =
 				tribe().initialization(m_initialization_index);
 
 			Game & game = ref_cast<Game, Editor_Game_Base>(egbase());
@@ -253,7 +253,7 @@ Message_Id Player::add_message
 Message_Id Player::add_message_with_timeout
 	(Game & game, Message & m, uint32_t const timeout, uint32_t const radius)
 {
-	Map const &       map      = game.map         ();
+	const Map &       map      = game.map         ();
 	uint32_t    const gametime = game.get_gametime();
 	Coords      const position = m   .position    ();
 	container_iterate_const(MessageQueue, messages(), i)
@@ -319,7 +319,7 @@ Flag * Player::build_flag(Coords const c) {
 
 Flag & Player::force_flag(FCoords const c) {
 	log("Forcing flag at (%i, %i)\n", c.x, c.y);
-	Map const & map = egbase().map();
+	const Map & map = egbase().map();
 	if (BaseImmovable * const immovable = c.field->get_immovable()) {
 		if (upcast(Flag, existing_flag, immovable)) {
 			if (&existing_flag->owner() == this)
@@ -380,7 +380,7 @@ Road * Player::build_road(const Path & path) {
 }
 
 
-Road & Player::force_road(Path const & path) {
+Road & Player::force_road(const Path & path) {
 	Map & map = egbase().map();
 	FCoords c = map.get_fcoords(path.get_start());
 	Flag & start = force_flag(c);
@@ -417,7 +417,7 @@ Building & Player::force_building
 	force_flag(c[1]);
 	if (BaseImmovable * const immovable = c[0].field->get_immovable())
 		immovable->remove(egbase());
-	Building_Descr const & descr = *tribe().get_building_descr(idx);
+	const Building_Descr & descr = *tribe().get_building_descr(idx);
 	{
 		size_t nr_locations = 1;
 		if ((descr.get_size() & BUILDCAPS_SIZEMASK) == BUILDCAPS_BIG) {
@@ -458,7 +458,7 @@ Building * Player::build
 	// Validate building type
 	if (not (idx and idx < tribe().get_nrbuildings()))
 		return 0;
-	Building_Descr const & descr = *tribe().get_building_descr(idx);
+	const Building_Descr & descr = *tribe().get_building_descr(idx);
 
 	if (!descr.is_buildable())
 		return 0;
@@ -808,22 +808,22 @@ uint32_t Player::findAttackSoldiers
 		soldiers->clear();
 
 	Map & map = egbase().map();
-	std::vector<BaseImmovable *> immovables;
+	std::vector<BaseImmovable *> flags;
 
 	map.find_reachable_immovables_unique
 		(Area<FCoords>(map.get_fcoords(flag.get_position()), 25),
-		 immovables,
-		 CheckStepWalkOn(MOVECAPS_WALK, false),
-		 FindImmovablePlayerMilitarySite(*this));
+		 flags,
+		 CheckStepDefault(MOVECAPS_WALK),
+		 FindFlagOf(FindImmovablePlayerMilitarySite(*this)));
 
-	if (immovables.empty())
+	if (flags.empty())
 		return 0;
 
-	container_iterate_const(std::vector<BaseImmovable *>, immovables, i) {
-		MilitarySite const & ms =
-			ref_cast<MilitarySite, BaseImmovable>(**i.current);
-		std::vector<Soldier *> const present = ms.presentSoldiers();
-		uint32_t const nr_staying = ms.minSoldierCapacity();
+	container_iterate_const(std::vector<BaseImmovable *>, flags, i) {
+		const Flag * attackerflag = static_cast<Flag *>(*i.current);
+		const MilitarySite * ms = static_cast<MilitarySite *>(attackerflag->get_building());
+		std::vector<Soldier *> const present = ms->presentSoldiers();
+		uint32_t const nr_staying = ms->minSoldierCapacity();
 		uint32_t const nr_present = present.size();
 		if (nr_staying < nr_present) {
 			uint32_t const nr_taken =
@@ -879,8 +879,8 @@ void Player::enemyflagaction
 
 
 void Player::rediscover_node
-	(Map              const &       map,
-	 Widelands::Field const &       first_map_field,
+	(const Map              &       map,
+	 const Widelands::Field &       first_map_field,
 	 FCoords          const f)
 throw ()
 {
@@ -1001,8 +1001,8 @@ throw ()
 }
 
 void Player::see_node
-	(Map              const &       map,
-	 Widelands::Field const &       first_map_field,
+	(const Map              &       map,
+	 const Widelands::Field &       first_map_field,
 	 FCoords                  const f,
 	 Time                     const gametime,
 	 bool                     const forward)
@@ -1086,7 +1086,7 @@ void Player::sample_statistics()
 			 it != warehouses.end();
 			 ++it)
 		{
-			Widelands::WareList const & wares = (*it)->get_wares();
+			const Widelands::WareList & wares = (*it)->get_wares();
 			for (uint32_t id = 0; id < stocks.size(); ++id) {
 				stocks[id] += wares.stock(Ware_Index(static_cast<size_t>(id)));
 			}
@@ -1208,7 +1208,7 @@ void Player::update_building_statistics
 }
 
 
-void Player::receive(NoteImmovable const & note)
+void Player::receive(const NoteImmovable & note)
 {
 	if (upcast(Building, building, note.pi))
 		update_building_statistics(*building, note.lg);
@@ -1217,7 +1217,7 @@ void Player::receive(NoteImmovable const & note)
 }
 
 
-void Player::receive(NoteFieldPossession const & note)
+void Player::receive(const NoteFieldPossession & note)
 {
 	NoteSender<NoteFieldPossession>::send(note);
 }

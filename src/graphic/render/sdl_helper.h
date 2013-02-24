@@ -17,27 +17,13 @@
  *
  */
 
-#ifndef IGRAPHIC_H
-#define IGRAPHIC_H
-
-#include <string>
-
-#include "iblitable_surface.h"
-#include "picture.h"
+#ifndef SDL_HELPER_H
+#define SDL_HELPER_H
 
 struct SDL_Surface;
-class ImageCache;
 
-class IGraphic {
-public:
-	virtual ~IGraphic() {};
+SDL_Surface * empty_sdl_surface(int16_t w, int16_t h);
 
-	virtual IPicture* convert_sdl_surface_to_picture(SDL_Surface*, bool alpha = false) const = 0;
-	virtual IBlitableSurface * create_surface(int32_t w, int32_t h, bool alpha = false) const = 0;
+#endif /* end of include guard: SDL_HELPER_H */
 
-	virtual ImageCache& imgcache() const = 0;
-};
-
-
-#endif /* end of include guard: IGRAPHIC_H */
 

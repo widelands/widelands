@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2011 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2013 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -19,7 +19,6 @@
 
 #include "mapview.h"
 
-
 #include "interactive_base.h"
 #include "interactive_player.h"
 #include "mapviewpixelfunctions.h"
@@ -30,9 +29,8 @@
 
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
-#include "graphic/render/gameview.h"
-#include "graphic/render/gameview_opengl.h"
-#include "graphic/render/gameview_sdl.h"
+#include "graphic/render/gamerenderer_gl.h"
+#include "graphic/render/gamerenderer_sdl.h"
 
 #include "upcast.h"
 
@@ -48,10 +46,15 @@ m_dragging              (false),
 m_complete_redraw_needed(true)
 {}
 
+Map_View::~Map_View()
+{
+	// explicit destructor so that smart pointer destructors
+	// with forward-declared types are properly instantiated
+}
 
 /// Moves the mouse cursor so that it is directly above the given node
 void Map_View::warp_mouse_to_node(Widelands::Coords const c) {
-	Widelands::Map const & map = intbase().egbase().map();
+	const Widelands::Map & map = intbase().egbase().map();
 	Point p;
 	MapviewPixelFunctions::get_save_pix(map, c, p.x, p.y);
 	p -= m_viewpoint;
@@ -95,21 +98,21 @@ void Map_View::draw(RenderTarget & dst)
 
 	egbase.map().overlay_manager().load_graphics();
 
-	GameView * gameview;
+	if (!m_renderer) {
 #ifdef USE_OPENGL
-	if (g_opengl) {
-		gameview = new GameViewOpenGL(dst);
-	} else
+		if (g_opengl) {
+			m_renderer.reset(new GameRendererGL());
+		} else
 #endif
-	{
-		gameview = new GameViewSDL(dst);
+		{
+			m_renderer.reset(new GameRendererSDL());
+		}
 	}
 	if (upcast(Interactive_Player const, interactive_player, &intbase())) {
-		gameview->rendermap(egbase, interactive_player->player(), m_viewpoint);
+		m_renderer->rendermap(dst, egbase, interactive_player->player(), m_viewpoint);
 	} else {
-		gameview->rendermap(egbase, m_viewpoint);
+		m_renderer->rendermap(dst, egbase, m_viewpoint);
 	}
-	delete gameview;
 
 	m_complete_redraw_needed = false;
 	draw_tooltip(dst, tooltip());

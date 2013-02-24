@@ -50,7 +50,7 @@ namespace Widelands {
 Parse a resource description section.
 ==============
 */
-void Resource_Descr::parse(Section & s, std::string const & basedir)
+void Resource_Descr::parse(Section & s, const std::string & basedir)
 {
 	m_name = s.get_name();
 	m_descname = s.get_string("name", s.get_name());
@@ -342,7 +342,7 @@ uint32_t MapGenInfo::getSumLandWeight() const
 	return m_land_weight;
 }
 
-MapGenBobArea const & MapGenInfo::getBobArea(size_t index) const
+const MapGenBobArea & MapGenInfo::getBobArea(size_t index) const
 {
 	return m_BobAreas[index];
 }
@@ -378,7 +378,7 @@ size_t MapGenInfo::getNumAreas
 	throw wexception("invalid MapGenAreaType %u", areaType);
 }
 
-MapGenAreaInfo const & MapGenInfo::getArea
+const MapGenAreaInfo & MapGenInfo::getArea
 	(MapGenAreaInfo::MapGenAreaType const areaType,
 	 uint32_t const index)
 	const
@@ -393,7 +393,7 @@ MapGenAreaInfo const & MapGenInfo::getArea
 }
 
 const MapGenBobKind * MapGenInfo::getBobKind
-	(std::string const & bobKindName) const
+	(const std::string & bobKindName) const
 {
 	if (m_BobKinds.find(bobKindName) == m_BobKinds.end())
 		throw wexception("invalid MapGenBobKind %s", bobKindName.c_str());
@@ -517,7 +517,7 @@ World
 =============================================================================
 */
 
-World::World(std::string const & name) : m_basedir("worlds/" + name + '/') {
+World::World(const std::string & name) : m_basedir("worlds/" + name + '/') {
 	try {
 		i18n::Textdomain textdomain("world_" + name);
 
@@ -546,7 +546,7 @@ World::World(std::string const & name) : m_basedir("worlds/" + name + '/') {
 			log("Parsing map gen info...\n");
 			parse_mapgen();
 		}
-	} catch (std::exception const & e) {
+	} catch (const std::exception & e) {
 		throw game_data_error("world %s: %s", name.c_str(), e.what());
 	}
 }
@@ -576,7 +576,7 @@ void World::load_graphics()
 /**
  * Read the <world-directory>/conf
  */
-void World::parse_root_conf(std::string const & name, Profile & root_conf)
+void World::parse_root_conf(const std::string & name, Profile & root_conf)
 {
 	Section & s = root_conf.get_safe_section("world");
 	snprintf
@@ -600,7 +600,7 @@ void World::parse_resources()
 			descr.parse(*section, m_basedir);
 			m_resources.add(&descr);
 		}
-	} catch (std::exception const & e) {
+	} catch (const std::exception & e) {
 		throw game_data_error("%s: %s", fname, e.what());
 	}
 }
@@ -626,7 +626,7 @@ void World::parse_terrains()
 		}
 
 		prof.check_used();
-	} catch (game_data_error const & e) {
+	} catch (const game_data_error & e) {
 		throw game_data_error("%s: %s", fname, e.what());
 	}
 }
@@ -752,7 +752,7 @@ void World::parse_mapgen   ()
 			throw game_data_error("missing a land/land terrain type");
 
 		prof.check_used();
-	} catch (_wexception const & e) {
+	} catch (const _wexception & e) {
 		throw game_data_error("%s: %s", fname, e.what());
 	}
 }
@@ -821,6 +821,7 @@ Terrain_Descr::Terrain_Descr
 m_name              (s->get_name()),
 m_descname          (s->get_string("name", s->get_name())),
 m_frametime         (FRAME_LENGTH),
+m_dither_layer   (0),
 m_valid_resources   (0),
 m_nr_valid_resources(0),
 m_default_resources (-1),
@@ -895,6 +896,8 @@ m_texture           (0)
 		else
 			throw game_data_error("%s: invalid type '%s'", m_name.c_str(), is);
 	}
+
+	m_dither_layer = s->get_int("dither_layer", 0);
 
 	// Determine template of the texture animation pictures
 	char fnametmpl[256];

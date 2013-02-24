@@ -44,7 +44,7 @@ public:
 	std::string create_file_name(std::string dir, std::string filename);
 	bool save_game
 		(Widelands::Game   &,
-		 std::string const & filename,
+		 const std::string & filename,
 		 std::string       * error = 0);
 
 	static std::string get_base_dir() {return "save";}

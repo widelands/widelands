@@ -39,7 +39,7 @@ namespace UI {class Window;}
 struct BuildingHints;
 class Interactive_GameBase;
 struct Profile;
-class IPicture;
+class Image;
 
 namespace Widelands {
 
@@ -60,22 +60,22 @@ class Building;
 struct Building_Descr : public Map_Object_Descr {
 	Building_Descr
 		(char const * _name, char const * _descname,
-		 std::string const & directory, Profile &, Section & global_s,
-		 Tribe_Descr const &);
+		 const std::string & directory, Profile &, Section & global_s,
+		 const Tribe_Descr &);
 
 	bool is_buildable   () const {return m_buildable;}
 	bool is_destructible() const {return m_destructible;}
 	bool is_enhanced    () const {return m_enhanced_building;}
 	bool global() const {return m_global;}
-	Buildcost const & buildcost() const throw () {return m_buildcost;}
-	const IPicture* get_buildicon() const {return m_buildicon;}
+	const Buildcost & buildcost() const throw () {return m_buildcost;}
+	const Image* get_buildicon() const {return m_buildicon;}
 	int32_t get_size() const throw () {return m_size;}
 	bool get_ismine() const {return m_mine;}
 	bool get_isport() const {return m_port;}
 	virtual uint32_t get_ui_anim() const {return get_animation("idle");}
 
 	typedef std::set<Building_Index> Enhancements;
-	Enhancements const & enhancements() const throw () {return m_enhancements;}
+	const Enhancements & enhancements() const throw () {return m_enhancements;}
 	void add_enhancement(const Building_Index & i) {
 		assert(not m_enhancements.count(i));
 		m_enhancements.insert(i);
@@ -109,8 +109,8 @@ struct Building_Descr : public Map_Object_Descr {
 	const Tribe_Descr & tribe() const throw () {return m_tribe;}
 	Workarea_Info m_workarea_info;
 
-	virtual int32_t suitability(Map const &, FCoords) const;
-	BuildingHints const & hints() const {return m_hints;}
+	virtual int32_t suitability(const Map &, FCoords) const;
+	const BuildingHints & hints() const {return m_hints;}
 
 protected:
 	virtual Building & create_object() const = 0;
@@ -121,7 +121,7 @@ private:
 	bool          m_buildable;       // the player can build this himself
 	bool          m_destructible;    // the player can destruct this himself
 	Buildcost     m_buildcost;
-	const IPicture*     m_buildicon;       // if buildable: picture in the build dialog
+	const Image*     m_buildicon;       // if buildable: picture in the build dialog
 	std::string   m_buildicon_fname; // filename for this icon
 	int32_t       m_size;            // size of the building
 	bool          m_mine;
@@ -157,7 +157,7 @@ public:
 
 	void load_finish(Editor_Game_Base &);
 
-	Tribe_Descr const & tribe() const throw () {return descr().tribe();}
+	const Tribe_Descr & tribe() const throw () {return descr().tribe();}
 
 	virtual int32_t  get_type    () const throw ();
 	char const * type_name() const throw () {return "building";}
@@ -171,10 +171,10 @@ public:
 	virtual Coords get_position() const throw () {return m_position;}
 	virtual PositionList get_positions (const Editor_Game_Base &) const throw ();
 
-	std::string const & name() const throw ();
+	const std::string & name() const throw ();
 	const std::string & descname() const throw () {return descr().descname();}
 
-	std::string info_string(std::string const & format);
+	std::string info_string(const std::string & format);
 	virtual std::string get_statistics_string();
 
 	/// \returns the queue for a ware type or \throws _wexception.
@@ -205,11 +205,11 @@ public:
 	void collect_priorities
 		(std::map<int32_t, std::map<Ware_Index, int32_t> > & p) const;
 
-	std::set<Building_Index> const & enhancements() const throw () {
+	const std::set<Building_Index> & enhancements() const throw () {
 		return descr().enhancements();
 	}
 
-	virtual void log_general_info(Editor_Game_Base const &);
+	virtual void log_general_info(const Editor_Game_Base &);
 
 	//  Use on training sites only.
 	virtual void change_train_priority(uint32_t, int32_t) {};
@@ -238,8 +238,8 @@ protected:
 	virtual void cleanup(Editor_Game_Base &);
 	virtual void act(Game &, uint32_t data);
 
-	virtual void draw(Editor_Game_Base const &, RenderTarget &, FCoords, Point);
-	void draw_help(Editor_Game_Base const &, RenderTarget &, FCoords, Point);
+	virtual void draw(const Editor_Game_Base &, RenderTarget &, FCoords, Point);
+	void draw_help(const Editor_Game_Base &, RenderTarget &, FCoords, Point);
 
 	virtual void create_options_window
 		(Interactive_GameBase &, UI::Window * & registry)

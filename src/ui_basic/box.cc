@@ -324,7 +324,7 @@ void Box::get_item_desired_size
 {
 	assert(idx < m_items.size());
 
-	Item const & it = m_items[idx];
+	const Item & it = m_items[idx];
 
 	switch (it.type) {
 	case Item::ItemPanel:
@@ -354,7 +354,7 @@ void Box::get_item_size
 {
 	assert(idx < m_items.size());
 
-	Item const & it = m_items[idx];
+	const Item & it = m_items[idx];
 
 	get_item_desired_size(idx, depth, breadth);
 	depth += it.assigned_var_depth;
@@ -367,7 +367,7 @@ void Box::set_item_size(uint32_t idx, uint32_t depth, uint32_t breadth)
 {
 	assert(idx < m_items.size());
 
-	Item const & it = m_items[idx];
+	const Item & it = m_items[idx];
 
 	if (it.type == Item::ItemPanel) {
 		if (m_orientation == Horizontal)
@@ -386,7 +386,7 @@ void Box::set_item_pos(uint32_t idx, int32_t pos)
 {
 	assert(idx < m_items.size());
 
-	Item const & it = m_items[idx];
+	const Item & it = m_items[idx];
 
 	switch (it.type) {
 	case Item::ItemPanel: {

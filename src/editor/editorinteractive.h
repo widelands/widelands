@@ -48,14 +48,14 @@ class Editor_Tool;
 struct Editor_Interactive : public Interactive_Base {
 	friend struct Editor_Tool_Menu;
 
-	static void run_editor(std::string const & filename);
+	static void run_editor(const std::string & filename);
 
 private:
 	Editor_Interactive(Widelands::Editor_Game_Base &);
 
 public:
 	void register_overlays();
-	void load(std::string const & filename);
+	void load(const std::string & filename);
 
 	// leaf functions from base class
 	void start();

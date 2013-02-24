@@ -68,14 +68,14 @@ void GameChatPanel::focusEdit()
 	editbox.focus();
 }
 
-void GameChatPanel::receive(ChatMessage const &)
+void GameChatPanel::receive(const ChatMessage &)
 {
 	recalculate();
 }
 
 void GameChatPanel::keyEnter()
 {
-	std::string const & str = editbox.text();
+	const std::string & str = editbox.text();
 
 	if (str.size())
 		m_chat.send(str);

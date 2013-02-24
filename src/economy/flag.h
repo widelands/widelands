@@ -70,7 +70,7 @@ struct Flag : public PlayerImmovable, public RoutingNode {
 	char const * type_name() const throw () {return "flag";}
 	virtual int32_t  get_size    () const throw ();
 	virtual bool get_passable() const throw ();
-	std::string const & name() const throw ();
+	const std::string & name() const throw ();
 
 	virtual Flag & base_flag();
 
@@ -116,15 +116,15 @@ struct Flag : public PlayerImmovable, public RoutingNode {
 
 	void remove_item(Editor_Game_Base &, WareInstance * const);
 
-	void add_flag_job(Game &, Ware_Index workerware, std::string const & programname);
+	void add_flag_job(Game &, Ware_Index workerware, const std::string & programname);
 
-	virtual void log_general_info(Editor_Game_Base const &);
+	virtual void log_general_info(const Editor_Game_Base &);
 
 protected:
 	virtual void init(Editor_Game_Base &);
 	virtual void cleanup(Editor_Game_Base &);
 
-	virtual void draw(Editor_Game_Base const &, RenderTarget &, FCoords, Point);
+	virtual void draw(const Editor_Game_Base &, RenderTarget &, FCoords, Point);
 
 	void wake_up_capacity_queue(Game &);
 

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2011-2012 by the Widelands Development Team
+ * Copyright (C) 2006-2012 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -17,34 +17,20 @@
  *
  */
 
-#ifndef GAMEVIEW_SDL_H_
-#define GAMEVIEW_SDL_H_
+#ifndef IMAGE_LOADER_IMPL_H
+#define IMAGE_LOADER_IMPL_H
 
-#include "gameview.h"
+#include <string>
 
-class GameViewSDL : public GameView
-{
+#include "image_loader.h"
+
+class ImageLoaderImpl : public IImageLoader {
 public:
-	GameViewSDL(RenderTarget & rt):
-		GameView(rt) {}
-	~GameViewSDL() {}
+	virtual ~ImageLoaderImpl() {}
 
-protected:
-	/**
-	 * Helper function to draw two terrain triangles. This is called from the
-	 * rendermap() functions.
-	 */
-	void draw_field
-		(Rect          & subwin,
-		 Vertex  const &  f_vert,
-		 Vertex  const &  r_vert,
-		 Vertex  const & bl_vert,
-		 Vertex  const & br_vert,
-		 uint8_t         roads,
-		 Texture const & tr_d_texture,
-		 Texture const &  l_r_texture,
-		 Texture const &  f_d_texture,
-		 Texture const &  f_r_texture);
+	Surface* load(const std::string& fname) const;
 };
 
-#endif /* GAMEVIEW_SDL_H_ */
+
+#endif /* end of include guard: IMAGE_LOADER_IMPL_H */
+

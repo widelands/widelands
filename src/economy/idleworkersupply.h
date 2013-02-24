@@ -42,9 +42,9 @@ struct IdleWorkerSupply : public Supply {
 	virtual void get_ware_type(WareWorker & type, Ware_Index & ware) const;
 	virtual void send_to_storage(Game &, Warehouse * wh);
 
-	virtual uint32_t nr_supplies(Game const &, Request const &) const;
-	virtual WareInstance & launch_item(Game &, Request const &);
-	virtual Worker & launch_worker(Game &, Request const &);
+	virtual uint32_t nr_supplies(const Game &, const Request &) const;
+	virtual WareInstance & launch_item(Game &, const Request &);
+	virtual Worker & launch_worker(Game &, const Request &);
 
 private:
 	Worker  & m_worker;

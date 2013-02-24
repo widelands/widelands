@@ -16,7 +16,6 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-
 #include "wexception.h"
 #include "graphic/graphic.h"
 
@@ -70,9 +69,8 @@ void GLSurfaceTexture::Cleanup() {
  *
  * The initial data of the texture is undefined.
  */
-GLSurfaceTexture::GLSurfaceTexture(int w, int h, bool alpha)
+GLSurfaceTexture::GLSurfaceTexture(int w, int h)
 {
-	has_alpha_ = alpha;
 	init(w, h);
 
 	glTexImage2D
@@ -85,7 +83,7 @@ GLSurfaceTexture::GLSurfaceTexture(int w, int h, bool alpha)
  *
  * \note Takes ownership of the given surface.
  */
-GLSurfaceTexture::GLSurfaceTexture(SDL_Surface * surface)
+GLSurfaceTexture::GLSurfaceTexture(SDL_Surface * surface, bool intensity)
 {
 	init(surface->w, surface->h);
 
@@ -110,7 +108,7 @@ GLSurfaceTexture::GLSurfaceTexture(SDL_Surface * surface)
 		bpp = surface->format->BytesPerPixel;
 	}
 
-	SDL_PixelFormat const & fmt = *surface->format;
+	const SDL_PixelFormat & fmt = *surface->format;
 	GLenum pixels_format;
 
 	glPushAttrib(GL_PIXEL_MODE_BIT);
@@ -122,13 +120,11 @@ GLSurfaceTexture::GLSurfaceTexture(SDL_Surface * surface)
 		{
 			if (fmt.Amask == 0xff000000) {
 				pixels_format = GL_RGBA;
-				has_alpha_ = true;
 			} else {
 				pixels_format = GL_RGBA;
 				// Read four bytes per pixel but ignore the alpha value
 				glPixelTransferi(GL_ALPHA_SCALE, 0.0f);
 				glPixelTransferi(GL_ALPHA_BIAS, 1.0f);
-				has_alpha_ = false;
 			}
 		} else if
 			(fmt.Bmask == 0x000000ff and fmt.Gmask == 0x0000ff00 and
@@ -136,18 +132,15 @@ GLSurfaceTexture::GLSurfaceTexture(SDL_Surface * surface)
 		{
 			if (fmt.Amask == 0xff000000) {
 				pixels_format = GL_BGRA;
-				has_alpha_ = true;
 			} else {
 				pixels_format = GL_BGRA;
 				// Read four bytes per pixel but ignore the alpha value
 				glPixelTransferi(GL_ALPHA_SCALE, 0.0f);
 				glPixelTransferi(GL_ALPHA_BIAS, 1.0f);
-				has_alpha_ = false;
 			}
 		} else
 			throw wexception("OpenGL: Unknown pixel format");
 	} else  if (bpp == 3) {
-		has_alpha_ = false;
 		if
 			(fmt.Rmask == 0x000000ff and fmt.Gmask == 0x0000ff00 and
 			 fmt.Bmask == 0x00ff0000)
@@ -166,7 +159,7 @@ GLSurfaceTexture::GLSurfaceTexture(SDL_Surface * surface)
 	SDL_LockSurface(surface);
 
 	glTexImage2D
-		(GL_TEXTURE_2D, 0, GL_RGBA, m_tex_w, m_tex_h, 0,
+		(GL_TEXTURE_2D, 0, intensity ? GL_INTENSITY : GL_RGBA, m_tex_w, m_tex_h, 0,
 		 pixels_format, GL_UNSIGNED_BYTE, surface->pixels);
 
 	SDL_UnlockSurface(surface);
@@ -181,7 +174,7 @@ GLSurfaceTexture::~GLSurfaceTexture()
 	glDeleteTextures(1, &m_texture);
 }
 
-void GLSurfaceTexture::init(uint32_t w, uint32_t h)
+void GLSurfaceTexture::init(uint16_t w, uint16_t h)
 {
 	handle_glerror();
 	m_w = w;
@@ -208,7 +201,7 @@ void GLSurfaceTexture::init(uint32_t w, uint32_t h)
 }
 
 const SDL_PixelFormat & GLSurfaceTexture::format() const {
-	return has_alpha_ ? gl_rgba_format() : gl_rgba_format();
+	return gl_rgba_format();
 }
 
 void GLSurfaceTexture::lock(LockMode mode) {
@@ -267,17 +260,17 @@ void GLSurfaceTexture::brighten_rect(const Rect& rc, const int32_t factor)
 }
 
 void GLSurfaceTexture::draw_line
-		(int32_t x1, int32_t y1, int32_t x2, int32_t y2, const RGBColor& color, uint8_t width)
+		(int32_t x1, int32_t y1, int32_t x2, int32_t y2, const RGBColor& color, uint8_t gwidth)
 {
 	setup_gl();
-	GLSurface::draw_line(x1, y1, x2, y2, color, width);
+	GLSurface::draw_line(x1, y1, x2, y2, color, gwidth);
 	reset_gl();
 }
 
 void GLSurfaceTexture::blit
-	(const Point& dst, const IPicture* src, const Rect& srcrc, Composite cm) {
+	(const Point& dst, const Surface* src, const Rect& srcrc, Composite cm) {
 	setup_gl();
-	GLSurface::blit(dst, static_cast<const GLSurfaceTexture*>(src), srcrc, cm);
+	GLSurface::blit(dst, src, srcrc, cm);
 	reset_gl();
 }
 

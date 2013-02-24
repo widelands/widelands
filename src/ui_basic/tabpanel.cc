@@ -21,7 +21,6 @@
 
 #include "mouse_constants.h"
 
-#include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
 
 #include "compile_assert.h"
@@ -41,9 +40,9 @@ namespace UI {
 Tab::Tab
 	(Tab_Panel         * const parent,
 	 uint32_t            const id,
-	 std::string const &       name,
-	 const IPicture* gpic,
-	 std::string const &       gtooltip,
+	 const std::string &       name,
+	 const Image* gpic,
+	 const std::string &       gtooltip,
 	 Panel             * const gpanel)
 	:
 	NamedPanel
@@ -78,7 +77,7 @@ void Tab::activate() {
 Tab_Panel::Tab_Panel
 	(Panel * const parent,
 	 int32_t const x, int32_t const y,
-	 const IPicture* background)
+	 const Image* background)
 	:
 	Panel            (parent, x, y, 0, 0),
 	m_active         (0),
@@ -88,7 +87,7 @@ Tab_Panel::Tab_Panel
 Tab_Panel::Tab_Panel
 	(Panel * const parent,
 	 int32_t const x, int32_t const y, int32_t const w, int32_t const h,
-	 const IPicture* background)
+	 const Image* background)
 	:
 	Panel            (parent, x, y, w, h),
 	m_active         (0),
@@ -149,10 +148,10 @@ void Tab_Panel::update_desired_size()
  * Add a new tab
 */
 uint32_t Tab_Panel::add
-	(std::string const & name,
-	 const IPicture* pic,
+	(const std::string & name,
+	 const Image* pic,
 	 Panel             * const panel,
-	 std::string const &       tooltip_text)
+	 const std::string &       tooltip_text)
 {
 	assert(panel);
 	assert(panel->get_parent() == this);
@@ -183,7 +182,7 @@ void Tab_Panel::activate(uint32_t idx)
 	update_desired_size();
 }
 
-void Tab_Panel::activate(std::string const & name)
+void Tab_Panel::activate(const std::string & name)
 {
 	for (uint32_t t = 0; t < m_tabs.size(); ++t)
 		if (m_tabs[t]->get_name() == name)
@@ -231,8 +230,8 @@ void Tab_Panel::draw(RenderTarget & dst)
 
 		// Draw the icon
 		assert(m_tabs[idx]->pic);
-		uint32_t cpw = m_tabs[idx]->pic->get_w();
-		uint32_t cph = m_tabs[idx]->pic->get_h();
+		uint16_t cpw = m_tabs[idx]->pic->width();
+		uint16_t cph = m_tabs[idx]->pic->height();
 		dst.blit
 			(Point(x + (TP_BUTTON_WIDTH - cpw) / 2, (TP_BUTTON_HEIGHT - cph) / 2),
 			 m_tabs[idx]->pic);

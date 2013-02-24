@@ -71,7 +71,7 @@ void Map_Bobdata_Data_Packet::Read
 	try {
 		uint16_t const packet_version = fr.Unsigned16();
 		if (1 <= packet_version and packet_version <= CURRENT_PACKET_VERSION) {
-			Map   const &       map        = egbase.map();
+			const Map   &       map        = egbase.map();
 			Extent        const extent     = map.extent();
 			Player_Number const nr_players = map.get_nrplayers();
 			for (;;) {
@@ -86,7 +86,7 @@ void Map_Bobdata_Data_Packet::Read
 				}
 				try {
 					Bob & bob = mol.get<Bob>(serial);
-					Bob::Descr const & bob_descr = bob.descr();
+					const Bob::Descr & bob_descr = bob.descr();
 
 					if (Player_Number const read_owner = fr.Player_Number8()) {
 						if (nr_players < read_owner)
@@ -134,7 +134,7 @@ void Map_Bobdata_Data_Packet::Read
 						try {
 							bob.m_walking =
 								static_cast<WalkingDir>(fr.Direction8_allow_null());
-						} catch (StreamRead::direction_invalid const & e) {
+						} catch (const StreamRead::direction_invalid & e) {
 							throw game_data_error
 								("walking dir is %u but must be one of {0 (idle), 1 "
 								 "(northeast), 2 (east), 3 (southeast), 4 "
@@ -241,7 +241,7 @@ void Map_Bobdata_Data_Packet::Read
 								try {
 									state.objvar1 =
 										&mol.get<Map_Object>(objvar1_serial);
-								} catch (_wexception const & e) {
+								} catch (const _wexception & e) {
 									throw game_data_error
 										("objvar1 (%u): %s", objvar1_serial, e.what());
 								}
@@ -296,12 +296,12 @@ void Map_Bobdata_Data_Packet::Read
 									for (uint32_t step = pathsteps; step; --step)
 										try {
 											state.path->append(map, fr.Direction8());
-										} catch (_wexception const & e) {
+										} catch (const _wexception & e) {
 											throw game_data_error
 												("step #%u: %s",
 												 pathsteps - step, e.what());
 										}
-								} catch (_wexception const & e) {
+								} catch (const _wexception & e) {
 									throw game_data_error
 										(_("reading path: %s"), e.what());
 								}
@@ -343,7 +343,7 @@ void Map_Bobdata_Data_Packet::Read
 							} else
 								state.program = 0;
 
-						} catch (_wexception const & e) {
+						} catch (const _wexception & e) {
 							throw game_data_error
 								("(%s) reading state %u: %s",
 								 bob.descr().descname().c_str(), i, e.what());
@@ -365,14 +365,14 @@ void Map_Bobdata_Data_Packet::Read
 						assert(false);
 
 					mol.mark_object_as_loaded(bob);
-				} catch (_wexception const & e) {
+				} catch (const _wexception & e) {
 					throw game_data_error(_("bob %u: %s"), serial, e.what());
 				}
 			}
 		} else
 			throw game_data_error
 				(_("unknown/unhandled version %u"), packet_version);
-	} catch (_wexception const & e) {
+	} catch (const _wexception & e) {
 		throw game_data_error(_("bobdata: %s"), e.what());
 	}
 }
@@ -387,7 +387,7 @@ void Map_Bobdata_Data_Packet::read_critter_bob
 		} else
 			throw game_data_error
 				(_("unknown/unhandled version %u"), packet_version);
-	} catch (_wexception const & e) {
+	} catch (const _wexception & e) {
 		throw game_data_error(_("critter bob: %s"), e.what());
 	}
 }
@@ -412,7 +412,7 @@ void Map_Bobdata_Data_Packet::read_worker_bob
 						 <=
 						 SOLDIER_WORKER_BOB_PACKET_VERSION)
 					{
-						Soldier_Descr const & descr = soldier->descr();
+						const Soldier_Descr & descr = soldier->descr();
 
 						soldier->m_hp_current = fr.Unsigned32() * 100; // balance change: multiply times 100
 
@@ -459,7 +459,7 @@ void Map_Bobdata_Data_Packet::read_worker_bob
 								soldier->m_combat_walking =
 									static_cast<CombatWalkingDir>
 										(fr.Direction8_allow_null());
-							} catch (StreamRead::direction_invalid const & e) {
+							} catch (const StreamRead::direction_invalid & e) {
 								throw game_data_error
 									("combat walking dir is %u but must be one of {0 "
 									 "(none), 1 (combat walk to west), 2 (combat walk"
@@ -482,7 +482,7 @@ void Map_Bobdata_Data_Packet::read_worker_bob
 						throw game_data_error
 							(_("unknown/unhandled version %u"),
 							 soldier_worker_bob_packet_version);
-				} catch (_wexception const & e) {
+				} catch (const _wexception & e) {
 					throw game_data_error(_("soldier: %s"), e.what());
 				}
 			} else if (upcast(Carrier, carrier, &worker)) {
@@ -498,7 +498,7 @@ void Map_Bobdata_Data_Packet::read_worker_bob
 						throw game_data_error
 							(_("unknown/unhandled version %u"),
 							 carrier_worker_bob_packet_version);
-				} catch (_wexception const & e) {
+				} catch (const _wexception & e) {
 					throw game_data_error(_("carrier: %s"), e.what());
 				}
 			}
@@ -506,7 +506,7 @@ void Map_Bobdata_Data_Packet::read_worker_bob
 			if (uint32_t const location_serial = fr.Unsigned32()) {
 				try {
 					worker.set_location(&mol.get<PlayerImmovable>(location_serial));
-				} catch (_wexception const & e) {
+				} catch (const _wexception & e) {
 					throw game_data_error
 						("location (%u): %s", location_serial, e.what());
 				}
@@ -517,7 +517,7 @@ void Map_Bobdata_Data_Packet::read_worker_bob
 				try {
 					worker.m_carried_item =
 						&mol.get<WareInstance>(carried_item_serial);
-				} catch (_wexception const & e) {
+				} catch (const _wexception & e) {
 					throw game_data_error
 						("carried item (%u): %s", carried_item_serial, e.what());
 				}
@@ -549,7 +549,7 @@ void Map_Bobdata_Data_Packet::read_worker_bob
 		} else
 			throw game_data_error
 				(_("unknown/unhandled version %u"), packet_version);
-	} catch (_wexception const & e) {
+	} catch (const _wexception & e) {
 		throw game_data_error
 			("worker %p (%u): %s", &worker, worker.serial(), e.what());
 	}

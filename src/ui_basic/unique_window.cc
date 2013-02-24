@@ -71,10 +71,10 @@ UniqueWindow::Registry::~Registry() {delete window;}
 */
 UniqueWindow::UniqueWindow
 	(Panel                  * const parent,
-	 std::string const & name,
+	 const std::string & name,
 	 UniqueWindow::Registry * const reg,
 	 int32_t const w, int32_t const h,
-	 std::string      const & title)
+	 const std::string      & title)
 	:
 	Window         (parent, name, 0, 0, w, h, title.c_str()),
 	m_registry     (reg),

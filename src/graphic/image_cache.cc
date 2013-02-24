@@ -19,101 +19,113 @@
 
 #include <string>
 #include <map>
-#include <vector>
 
-#include <boost/scoped_ptr.hpp>
 #include <boost/foreach.hpp>
+#include <boost/scoped_ptr.hpp>
 
-#include "picture.h"
-
+#include "image.h"
 #include "image_loader.h"
+#include "log.h"
+#include "surface.h"
+#include "surface_cache.h"
+
 #include "image_cache.h"
 
 using namespace std;
 
-class ImageCacheImpl : public ImageCache {
-public:
-	// Ownership of loader is not taken.
-	ImageCacheImpl(IImageLoader* loader) : img_loader_(loader) {}
-	~ImageCacheImpl();
 
-	// Implements ImageCache
-	virtual const IPicture* get(PicMod, const string& hash) const;
-	virtual const IPicture* insert(PicMod, const string& hash, const IPicture*);
-	virtual const IPicture* load(PicMod, const string& fn, bool alpha);
-	virtual void flush(PicMod);
+namespace  {
+
+// Image Implementation that loads images from disc when they should be drawn.
+// Uses SurfaceCache. These images are meant to be cached in ImageCache.
+class FromDiskImage : public Image {
+public:
+	FromDiskImage(const string& filename, SurfaceCache* surface_cache, IImageLoader* image_loader) :
+		filename_(filename),
+		image_loader_(image_loader),
+		surface_cache_(surface_cache) {
+			Surface* surf = reload_image_();
+			w_ = surf->width();
+			h_ = surf->height();
+		}
+	virtual ~FromDiskImage() {}
+
+	// Implements Image.
+	virtual uint16_t width() const {return w_; }
+	virtual uint16_t height() const {return h_;}
+	virtual const string& hash() const {return filename_;}
+	virtual Surface* surface() const {
+		Surface* surf = surface_cache_->get(filename_);
+		if (surf)
+			return surf;
+		return reload_image_();
+	}
 
 private:
-	struct PictureRec {
-		const IPicture* picture;
+	Surface* reload_image_() const {
+		Surface* surf = surface_cache_->insert(filename_, image_loader_->load(filename_));
+		return surf;
+	}
+	uint16_t w_, h_;
+	const string filename_;
 
-		/// bit-mask of modules that this picture exists in
-		uint32_t modules;
-	};
+	// Nothing owned
+	IImageLoader* const image_loader_;
+	SurfaceCache* const surface_cache_;
+};
 
-	typedef map<string, PictureRec> PictureMap;
+class ImageCacheImpl : public ImageCache {
+public:
+	// No ownership is taken here.
+	ImageCacheImpl(IImageLoader* loader, SurfaceCache* surface_cache)
+		: image_loader_(loader), surface_cache_(surface_cache) {
+		}
+	virtual ~ImageCacheImpl();
 
-	/// hash of cached filename/picture pairs
-	PictureMap m_picturemap;
+	// Implements ImageCache.
+	const Image* insert(const Image*);
+	bool has(const std::string& hash) const;
+	virtual const Image* get(const std::string& hash);
 
-	IImageLoader* img_loader_;
+private:
+	typedef map<string, const Image*> ImageMap;
+
+	// hash of cached filename/image pairs
+	ImageMap images_;
+
+	// None of these are owned.
+	IImageLoader* const image_loader_;
+	SurfaceCache* const surface_cache_;
 };
 
 ImageCacheImpl::~ImageCacheImpl() {
-	BOOST_FOREACH(PictureMap::value_type& p, m_picturemap)
-		delete p.second.picture;
-	m_picturemap.clear();
+	BOOST_FOREACH(ImageMap::value_type& p, images_)
+		delete p.second;
+	images_.clear();
 }
 
-const IPicture* ImageCacheImpl::get(PicMod module, const string& hash) const {
-	PictureMap::const_iterator it = m_picturemap.find(hash);
-	if (it == m_picturemap.end())
-		return NULL;
-	return (it->second.modules & (1 << module)) ? it->second.picture : NULL;
+bool ImageCacheImpl::has(const string& hash) const {
+	return images_.count(hash);
 }
 
-const IPicture* ImageCacheImpl::insert(PicMod module, const string& name, const IPicture* pic) {
-	PictureRec rec;
-	rec.picture = pic;
-	rec.modules = 1 << module;
-	m_picturemap.insert(make_pair(name, rec));
-	return pic;
+const Image* ImageCacheImpl::insert(const Image* image) {
+	assert(!has(image->hash()));
+	images_.insert(make_pair(image->hash(), image));
+	return image;
 }
 
-void ImageCacheImpl::flush(PicMod module) {
-	vector<string> eraselist;
-
-	BOOST_FOREACH(PictureMap::value_type& entry, m_picturemap) {
-		entry.second.modules &= ~(1 << module);
-		if (!entry.second.modules)
-			eraselist.push_back(entry.first);
+const Image* ImageCacheImpl::get(const string& hash) {
+	ImageMap::const_iterator it = images_.find(hash);
+	if (it == images_.end()) {
+		images_.insert(make_pair(hash, new FromDiskImage(hash, surface_cache_, image_loader_)));
+		return get(hash);
 	}
-
-	while (!eraselist.empty()) {
-		m_picturemap.erase(eraselist.back());
-		eraselist.pop_back();
-	}
+	return it->second;
 }
 
-const IPicture* ImageCacheImpl::load
-		(PicMod module, const string& fname, bool alpha)
-{
-	//  Check if the picture is already loaded.
-	PictureMap::iterator it = m_picturemap.find(fname);
+}  // namespace
 
-	if (it == m_picturemap.end()) {
-		PictureRec rec;
-
-		rec.picture = img_loader_->load(fname, alpha);
-		rec.modules = 0;
-
-		it = m_picturemap.insert(make_pair(fname, rec)).first;
-	}
-
-	it->second.modules |= 1 << module;
-	return it->second.picture;
+ImageCache* create_image_cache(IImageLoader* loader, SurfaceCache* surface_cache) {
+	return new ImageCacheImpl(loader, surface_cache);
 }
 
-ImageCache* create_image_cache(IImageLoader* loader) {
-	return new ImageCacheImpl(loader);
-}

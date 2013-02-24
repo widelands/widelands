@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2009 by the Widelands Development Team
+ * Copyright (C) 2008-2013 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -39,14 +39,14 @@ private:
 			if (--refcount == 0)
 				delete this;
 		}
-		virtual bool accept(BaseImmovable const &) const = 0;
+		virtual bool accept(const BaseImmovable &) const = 0;
 
 		int refcount;
 	};
 	template<typename T>
 	struct Capsule : public BaseCapsule {
-		Capsule(T const & _op) : op(_op) {}
-		bool accept(BaseImmovable const & imm) const {return op.accept(imm);}
+		Capsule(const T & _op) : op(_op) {}
+		bool accept(const BaseImmovable & imm) const {return op.accept(imm);}
 
 		const T op;
 	};
@@ -54,7 +54,7 @@ private:
 	BaseCapsule * capsule;
 
 public:
-	FindImmovable(FindImmovable const & o) {
+	FindImmovable(const FindImmovable & o) {
 		capsule = o.capsule;
 		capsule->addref();
 	}
@@ -62,7 +62,7 @@ public:
 		capsule->deref();
 		capsule = 0;
 	}
-	FindImmovable & operator= (FindImmovable const & o) {
+	FindImmovable & operator= (const FindImmovable & o) {
 		capsule->deref();
 		capsule = o.capsule;
 		capsule->addref();
@@ -70,12 +70,12 @@ public:
 	}
 
 	template<typename T>
-	FindImmovable(T const & op) {
+	FindImmovable(const T & op) {
 		capsule = new Capsule<T>(op);
 	}
 
 	// Return true if this node should be returned by find_fields()
-	bool accept(BaseImmovable const & imm) const {
+	bool accept(const BaseImmovable & imm) const {
 		return capsule->accept(imm);
 	}
 };
@@ -86,7 +86,7 @@ struct FindImmovableSize {
 		: m_min(min), m_max(max)
 	{}
 
-	bool accept(BaseImmovable const &) const;
+	bool accept(const BaseImmovable &) const;
 
 private:
 	int32_t m_min, m_max;
@@ -94,7 +94,7 @@ private:
 struct FindImmovableType {
 	FindImmovableType(int32_t const type) : m_type(type) {}
 
-	bool accept(BaseImmovable const &) const;
+	bool accept(const BaseImmovable &) const;
 
 private:
 	int32_t m_type;
@@ -102,7 +102,7 @@ private:
 struct FindImmovableAttribute {
 	FindImmovableAttribute(uint32_t const attrib) : m_attrib(attrib) {}
 
-	bool accept(BaseImmovable const &) const;
+	bool accept(const BaseImmovable &) const;
 
 private:
 	int32_t m_attrib;
@@ -110,29 +110,36 @@ private:
 struct FindImmovablePlayerImmovable {
 	FindImmovablePlayerImmovable() {}
 
-	bool accept(BaseImmovable const &) const;
+	bool accept(const BaseImmovable &) const;
 };
 struct FindImmovablePlayerMilitarySite {
-	FindImmovablePlayerMilitarySite(Player const & _player) : player(_player) {}
+	FindImmovablePlayerMilitarySite(const Player & _player) : player(_player) {}
 
-	bool accept(BaseImmovable const &) const;
+	bool accept(const BaseImmovable &) const;
 
-	Player const & player;
+	const Player & player;
 };
 struct FindImmovableAttackable {
 	FindImmovableAttackable()  {}
 
-	bool accept(BaseImmovable const &) const;
+	bool accept(const BaseImmovable &) const;
 };
 struct FindImmovableByDescr {
 	FindImmovableByDescr(const Immovable_Descr & _descr) : descr(_descr) {}
 
-	bool accept(BaseImmovable const &) const;
+	bool accept(const BaseImmovable &) const;
 
 	const Immovable_Descr & descr;
 };
+struct FindFlagOf {
+	FindFlagOf(const FindImmovable & finder) : finder_(finder) {}
+
+	bool accept(const BaseImmovable &) const;
+
+	const FindImmovable finder_;
+};
 
 
-}
+} // namespace Widelands
 
 #endif

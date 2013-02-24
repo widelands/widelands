@@ -57,7 +57,7 @@ int32_t Editor_Place_Bob_Tool::handle_click_impl
 		 (map.get_fcoords(center.node), args.sel_radius));
 		std::list< const Bob::Descr * >::iterator i = args.nbob_type.begin();
 		do {
-			Bob::Descr const & descr = *(*i);
+			const Bob::Descr & descr = *(*i);
 			if (mr.location().field->nodecaps() & descr.movecaps()) {
 				if (Bob * const bob = mr.location().field->get_first_bob())
 					bob->remove(egbase); //  There is already a bob. Remove it.
@@ -83,7 +83,7 @@ int32_t Editor_Place_Bob_Tool::handle_undo_impl
 		std::list<const Bob::Descr *>::iterator i = args.obob_type.begin();
 		do {
 			if (*i) {
-				Bob::Descr const & descr = *(*i);
+				const Bob::Descr & descr = *(*i);
 				if (mr.location().field->nodecaps() & descr.movecaps()) {
 					if (Bob * const bob = mr.location().field->get_first_bob())
 						bob->remove(egbase); //  There is already a bob. Remove it.

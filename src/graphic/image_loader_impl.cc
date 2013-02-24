@@ -17,17 +17,30 @@
  *
  */
 
-#ifndef SDL_HELPER_H
-#define SDL_HELPER_H
+#include <SDL.h>
+#include <SDL_image.h>
 
-struct SDL_Surface;
+#include "io/fileread.h"
+#include "io/filesystem/layered_filesystem.h"
+#include "log.h"
+#include "wexception.h"
 
-namespace RT {
+#include "surface.h"
 
-SDL_Surface * empty_sdl_surface(int32_t w, int32_t h, bool alpha);
+#include "image_loader_impl.h"
 
-};
+using namespace std;
 
-#endif /* end of include guard: SDL_HELPER_H */
+Surface* ImageLoaderImpl::load(const string& fname) const {
+	FileRead fr;
+	log("Loading image %s.\n", fname.c_str());
 
+	fr.fastOpen(*g_fs, fname.c_str());
+	SDL_Surface* sdlsurf = IMG_Load_RW(SDL_RWFromMem(fr.Data(0), fr.GetSize()), 1);
+
+	if (!sdlsurf)
+		throw wexception("Could not open image %s: %s", fname.c_str(), IMG_GetError());
+
+	return Surface::create(sdlsurf);
+}
 

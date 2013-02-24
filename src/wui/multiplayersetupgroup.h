@@ -20,12 +20,13 @@
 #ifndef MULTIPLAYERSETUPGROUP_H
 #define MULTIPLAYERSETUPGROUP_H
 
+#include <map>
+#include <string>
+
 #include "constants.h"
 #include "ui_basic/box.h"
 #include "ui_basic/panel.h"
 #include "ui_basic/textarea.h"
-
-#include <string>
 
 #define MAXCLIENTS 64
 
@@ -47,7 +48,7 @@ struct MultiPlayerSetupGroup : public UI::Panel {
 		 int32_t x, int32_t y, int32_t w, int32_t h,
 		 GameSettingsProvider * settings,
 		 uint32_t butw, uint32_t buth,
-		 std::string const & fname = UI_FONT_NAME,
+		 const std::string & fname = UI_FONT_NAME,
 		 uint32_t fsize = UI_FONT_SIZE_SMALL);
 	~MultiPlayerSetupGroup();
 
@@ -63,7 +64,7 @@ private:
 	uint32_t    m_buth, m_fsize;
 	std::string m_fname;
 
-	std::map<std::string, const IPicture* > m_tribepics;
+	std::map<std::string, const Image* > m_tribepics;
 	std::map<std::string, std::string> m_tribenames;
 };
 

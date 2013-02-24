@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2011-2012 by the Widelands Development Team
+ * Copyright (C) 2011-2013 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -152,10 +152,10 @@ void PortDock::draw
 	// do nothing
 }
 
-std::string const & PortDock::name() const throw ()
+const std::string & PortDock::name() const throw ()
 {
-	static std::string name("portdock");
-	return name;
+	static const std::string name_("portdock");
+	return name_;
 }
 
 void PortDock::init(Editor_Game_Base & egbase)
@@ -376,19 +376,19 @@ void PortDock::start_expedition() {
 	std::map<Ware_Index, uint8_t> const & buildcost = m_warehouse->descr().buildcost();
 	size_t const buildcost_size = buildcost.size();
 	// Now try to cache all the wares directly from the portdocks warehouse, if they exist.
-	std::vector<WaresQueue *> & expedition_wares = m_warehouse->get_wares_queue_vector();
+	std::vector<WaresQueue *> & l_expedition_wares = m_warehouse->get_wares_queue_vector();
 	if (m_warehouse->size_of_expedition_wares_queue() != buildcost_size) {
 		// Initialize the wares queue
-		expedition_wares.resize(buildcost_size);
+		l_expedition_wares.resize(buildcost_size);
 		std::map<Ware_Index, uint8_t>::const_iterator it = buildcost.begin();
 		for (size_t i = 0; i < buildcost_size; ++i, ++it) {
-			WaresQueue & wq = *(expedition_wares[i] = new WaresQueue(*m_warehouse, it->first, it->second));
+			WaresQueue & wq = *(l_expedition_wares[i] = new WaresQueue(*m_warehouse, it->first, it->second));
 			wq.set_callback(PortDock::expedition_wares_queue_callback, this);
 		}
 	} else {
 		// reresize the WaresQueues
-		for (size_t i = 0; i < expedition_wares.size(); ++i) {
-			expedition_wares[i]->set_max_fill(expedition_wares[i]->get_max_size());
+		for (size_t i = 0; i < l_expedition_wares.size(); ++i) {
+			l_expedition_wares[i]->set_max_fill(l_expedition_wares[i]->get_max_size());
 		}
 	}
 
@@ -409,18 +409,18 @@ void PortDock::start_expedition() {
 std::vector<ShippingItem> * PortDock::expedition_wares(Game & game) {
 	std::vector<ShippingItem> * wares = new std::vector<ShippingItem>;
 
-	std::vector<WaresQueue *> & expedition_wares = m_warehouse->get_wares_queue_vector();
-	for (uint8_t i = 0; i < expedition_wares.size(); ++i) {
-		Ware_Index wi = expedition_wares.at(i)->get_ware();
-		uint32_t numb = expedition_wares.at(i)->get_filled();
+	std::vector<WaresQueue *> & l_expedition_wares = m_warehouse->get_wares_queue_vector();
+	for (uint8_t i = 0; i < l_expedition_wares.size(); ++i) {
+		Ware_Index wi = l_expedition_wares.at(i)->get_ware();
+		uint32_t numb = l_expedition_wares.at(i)->get_filled();
 		for (uint32_t j = 0; j < numb; ++j) {
 			WareInstance * temp = new WareInstance(wi, owner().tribe().get_ware_descr(wi));
 			temp->init(game);
 			wares->push_back(ShippingItem(*temp));
 		}
 		// Reset wares queue
-		expedition_wares.at(i)->set_filled(0);
-		expedition_wares.at(i)->set_max_fill(0);
+		l_expedition_wares.at(i)->set_filled(0);
+		l_expedition_wares.at(i)->set_max_fill(0);
 	}
 	std::vector<Warehouse::Expedition_Worker *> & ew = m_warehouse->get_expedition_workers();
 	for (uint8_t i = 0; i < ew.size(); ++i) {
@@ -452,7 +452,7 @@ void PortDock::check_expedition_wares_and_workers(Game & game) {
 
 	std::vector<Warehouse::Expedition_Worker *> & ew = m_warehouse->get_expedition_workers();
 	for (uint8_t i = 0; i < ew.size(); ++i) {
-		if (ew.at(i)->worker_request);
+		if (ew.at(i)->worker_request)
 			return;
 	}
 	// If this point is reached, all needed wares and workers are stored and waiting for a ship
@@ -466,11 +466,11 @@ void PortDock::cancel_expedition(Game & game) {
 	m_expedition_ready = false;
 
 	// Put all wares from the WaresQueues back into the warehouse
-	std::vector<WaresQueue *> & expedition_wares = m_warehouse->get_wares_queue_vector();
-	for (uint8_t i = 0; i < expedition_wares.size(); ++i) {
-		m_warehouse->insert_wares(expedition_wares.at(i)->get_ware(), expedition_wares.at(i)->get_filled());
-		expedition_wares.at(i)->set_filled(0);
-		expedition_wares.at(i)->set_max_fill(0);
+	std::vector<WaresQueue *> & l_expedition_wares = m_warehouse->get_wares_queue_vector();
+	for (uint8_t i = 0; i < l_expedition_wares.size(); ++i) {
+		m_warehouse->insert_wares(l_expedition_wares.at(i)->get_ware(), l_expedition_wares.at(i)->get_filled());
+		l_expedition_wares.at(i)->set_filled(0);
+		l_expedition_wares.at(i)->set_max_fill(0);
 	}
 
 	// Send all workers from the expedition list back inside the warehouse
@@ -486,7 +486,7 @@ void PortDock::cancel_expedition(Game & game) {
 }
 
 
-void PortDock::log_general_info(Editor_Game_Base const & egbase)
+void PortDock::log_general_info(const Editor_Game_Base & egbase)
 {
 	PlayerImmovable::log_general_info(egbase);
 

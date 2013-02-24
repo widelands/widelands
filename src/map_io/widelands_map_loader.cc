@@ -283,7 +283,7 @@ int32_t WL_Map_Loader::load_map_complete
 	log("Second and third phase loading Map Objects ... ");
 	mapobjects.LoadFinish();
 	{
-		Field const & fields_end = map()[map().max_index()];
+		const Field & fields_end = map()[map().max_index()];
 		for (Field * field = &map()[0]; field < &fields_end; ++field)
 			if (BaseImmovable * const imm = field->get_immovable()) {
 				if (upcast(Building const, building, imm))

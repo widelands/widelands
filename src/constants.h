@@ -20,6 +20,8 @@
 #ifndef CONSTANTS_H
 #define CONSTANTS_H
 
+#include <stdint.h>
+
 /**
  * \file constants.h
  * \brief Global compile time configuration and important constants
@@ -105,6 +107,15 @@
 #define WIDELANDS_PORT               7396
 //@}
 
+/// Maximum numbers of players in a game. The game logic code reserves 5 bits
+/// for player numbers, so it can keep track of 32 different player numbers, of
+/// which the value 0 means neutral and the values 1 .. 31 can be used as the
+/// numbers for actual players. So the upper limit of this value is 31.
+#define MAX_PLAYERS 8
+
+/// How often are statistics to be sampled.
+#define STATISTICS_SAMPLE_TIME 30000
+
 /// Constants for user-defined SDL events that get handled by SDL's mainloop
 //@{
 enum {
@@ -117,5 +128,10 @@ enum {
  * recognized as a valid value of type Workarea_Info::size_type without a cast.
  */
 #define NUMBER_OF_WORKAREA_PICS static_cast<Workarea_Info::size_type>(3)
+
+/// The size of the surface cache in bytes. This is the amount of graphics
+/// memory widelands uses  approximately. Note that not every Surface is also in
+/// the cache, so the actual value will be different - but not by much.
+const uint32_t SURFACE_CACHE_SIZE = 150 << 20;   // shifting converts to MB
 
 #endif

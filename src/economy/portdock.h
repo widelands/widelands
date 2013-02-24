@@ -80,7 +80,7 @@ struct PortDock : PlayerImmovable {
 		(const Editor_Game_Base &) const throw ();
 	virtual void draw
 		(const Editor_Game_Base &, RenderTarget &, const FCoords, const Point);
-	virtual std::string const & name() const throw ();
+	virtual const std::string & name() const throw ();
 
 	virtual void init(Editor_Game_Base &);
 	virtual void cleanup(Editor_Game_Base &);
@@ -95,7 +95,7 @@ struct PortDock : PlayerImmovable {
 
 	void ship_arrived(Game &, Ship &);
 
-	virtual void log_general_info(Editor_Game_Base const &);
+	virtual void log_general_info(const Editor_Game_Base &);
 
 	uint32_t count_waiting(WareWorker waretype, Ware_Index wareindex);
 

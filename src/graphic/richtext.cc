@@ -20,12 +20,12 @@
 #include "richtext.h"
 
 #include "font.h"
-#include "graphic.h"
-#include "picture.h"
-#include "rect.h"
-#include "text_parser.h"
-#include "rendertarget.h"
 #include "font_handler.h"
+#include "graphic.h"
+#include "image.h"
+#include "rect.h"
+#include "rendertarget.h"
+#include "text_parser.h"
 
 namespace UI {
 
@@ -51,7 +51,7 @@ struct Element {
 };
 
 struct ImageElement : Element {
-	ImageElement(const Rect & _bbox, const IPicture* _image)
+	ImageElement(const Rect & _bbox, const Image* _image)
 		: Element(_bbox), image(_image) {}
 
 	virtual void draw(RenderTarget & dst)
@@ -59,7 +59,7 @@ struct ImageElement : Element {
 		dst.blit(Point(0, 0), image);
 	}
 
-	const IPicture* image;
+	const Image* image;
 };
 
 struct TextlineElement : Element {
@@ -151,9 +151,9 @@ void RichTextImpl::clear()
  * Set the width for the rich text field.
  * Default width is undefined. This must be called before @ref parse.
  */
-void RichText::set_width(uint32_t width)
+void RichText::set_width(uint32_t gwidth)
 {
-	m->width = width;
+	m->width = gwidth;
 }
 
 /**
@@ -333,19 +333,19 @@ void RichText::parse(const std::string & rtext)
 		text.images_width = 0;
 
 		for
-			(std::vector<std::string>::const_iterator img_it = cur_block_images.begin();
-			 img_it != cur_block_images.end();
-			 ++img_it)
+			(std::vector<std::string>::const_iterator image_it = cur_block_images.begin();
+			 image_it != cur_block_images.end();
+			 ++image_it)
 		{
-			const IPicture* image = g_gr->imgcache().load(PicMod_Game, *img_it);
+			const Image* image = g_gr->images().get(*image_it);
 			if (!image)
 				continue;
 
 			Rect bbox;
 			bbox.x = text.images_width;
 			bbox.y = m->height;
-			bbox.w = image->get_w();
-			bbox.h = image->get_h();
+			bbox.w = image->width();
+			bbox.h = image->height();
 
 			text.images_height = std::max(text.images_height, bbox.h);
 			text.images_width += bbox.w;

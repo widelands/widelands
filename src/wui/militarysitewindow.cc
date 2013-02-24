@@ -18,6 +18,7 @@
  */
 
 #include "buildingwindow.h"
+#include "graphic/graphic.h"
 #include "logic/militarysite.h"
 #include "soldiercapacitycontrol.h"
 #include "soldierlist.h"
@@ -53,7 +54,7 @@ MilitarySite_Window::MilitarySite_Window
 Building_Window(parent, ms, registry)
 {
 	get_tabs()->add
-		("soldiers", g_gr->imgcache().load(PicMod_Game, pic_tab_military),
+		("soldiers", g_gr->images().get(pic_tab_military),
 		 create_soldier_list(*get_tabs(), parent, militarysite()),
 		 _("Soldiers"));
 }

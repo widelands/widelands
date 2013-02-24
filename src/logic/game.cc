@@ -78,7 +78,7 @@ Game::SyncWrapper::~SyncWrapper() {
 	}
 }
 
-void Game::SyncWrapper::StartDump(std::string const & fname) {
+void Game::SyncWrapper::StartDump(const std::string & fname) {
 	m_dumpfname = fname + ".wss";
 	m_dump = g_fs->OpenStreamWrite(m_dumpfname);
 }
@@ -110,7 +110,7 @@ void Game::SyncWrapper::Data(void const * const data, size_t const size) {
 	if (m_dump) {
 		try {
 			m_dump->Data(data, size);
-		} catch (_wexception const & e) {
+		} catch (const _wexception & e) {
 			log
 				("Writing to syncstream file %s failed. Stop synctream dump.\n",
 				 m_dumpfname.c_str());
@@ -273,10 +273,9 @@ bool Game::run_splayer_scenario_direct(char const * const mapname) {
  * \note loaderUI can be NULL, if this is run as dedicated server.
  */
 void Game::init_newgame
-	(UI::ProgressWindow * loaderUI, GameSettings const & settings)
+	(UI::ProgressWindow * loaderUI, const GameSettings & settings)
 {
 	if (loaderUI) {
-		g_gr->imgcache().flush(PicMod_Menu);
 		loaderUI->step(_("Preloading map"));
 	}
 
@@ -297,7 +296,7 @@ void Game::init_newgame
 	std::vector<PlayerSettings> shared;
 	std::vector<uint8_t>        shared_num;
 	for (uint32_t i = 0; i < settings.players.size(); ++i) {
-		PlayerSettings const & playersettings = settings.players[i];
+		const PlayerSettings & playersettings = settings.players[i];
 
 		if
 			(playersettings.state == PlayerSettings::stateClosed ||
@@ -349,10 +348,9 @@ void Game::init_newgame
  * \note loaderUI can be NULL, if this is run as dedicated server.
  */
 void Game::init_savegame
-	(UI::ProgressWindow * loaderUI, GameSettings const & settings)
+	(UI::ProgressWindow * loaderUI, const GameSettings & settings)
 {
 	if (loaderUI) {
-		g_gr->imgcache().flush(PicMod_Menu);
 		loaderUI->step(_("Preloading map"));
 	}
 
@@ -577,7 +575,6 @@ bool Game::run
 		delete get_ibase();
 		set_ibase(0);
 
-		g_gr->imgcache().flush(PicMod_Game);
 		g_anim.flush();
 		g_gr->flush_animations();
 
@@ -856,7 +853,7 @@ void Game::send_player_change_soldier_capacity
 
 /////////////////////// TESTING STUFF
 void Game::send_player_enemyflagaction
-	(Flag  const &       flag,
+	(const Flag  &       flag,
 	 Player_Number const who_attacks,
 	 uint32_t      const num_soldiers,
 	 uint8_t       const retreat)
@@ -917,7 +914,7 @@ void Game::sample_statistics()
 	custom_statistic      .resize(nr_plrs);
 
 	//  We walk the map, to gain all needed information.
-	Map const &  themap = map();
+	const Map &  themap = map();
 	Extent const extent = themap.extent();
 	iterate_Map_FCoords(themap, extent, fc) {
 		if (Player_Number const owner = fc.field->get_owned_by())

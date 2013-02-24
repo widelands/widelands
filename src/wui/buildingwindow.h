@@ -91,7 +91,7 @@ private:
 	bool m_caps_setup;
 
 	Overlay_Manager::Job_Id m_workarea_job_id;
-	const IPicture* workarea_cumulative_pic[NUMBER_OF_WORKAREA_PICS];
+	const Image* workarea_cumulative_pic[NUMBER_OF_WORKAREA_PICS];
 };
 
 #endif // _BUILDINGWINDOW_H_

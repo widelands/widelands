@@ -22,6 +22,8 @@
 #include "constants.h"
 #include "graphic/font.h"
 #include "graphic/font_handler.h"
+#include "graphic/graphic.h"
+#include "graphic/image_transformations.h"
 #include "graphic/rendertarget.h"
 #include "i18n.h"
 #include "io/filesystem/layered_filesystem.h"
@@ -65,14 +67,7 @@ void ProgressWindow::draw_background
 
 	if (!m_background_pic or xres != m_xres or yres != m_yres) {
 		// (Re-)Load background graphics
-		// Note that the old pic is freed automatically
-		const IPicture* background_original =
-			g_gr->imgcache().load(PicMod_Menu, m_background.c_str());
-
-		const IPicture* background_resized  =
-			g_gr->get_resized_picture(background_original, xres, yres);
-
-		m_background_pic = background_resized;
+		m_background_pic = ImageTransformations::resize(g_gr->images().get(m_background), xres, yres);
 
 		const uint32_t h = g_fh->get_fontheight (UI_FONT_SMALL);
 		m_label_rectangle.x = xres / 4;

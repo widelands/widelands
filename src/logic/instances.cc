@@ -63,7 +63,7 @@ void Cmd_Destroy_Map_Object::Read
 			if (Serial const serial = fr.Unsigned32())
 				try {
 					obj_serial = mol.get<Map_Object>(serial).serial();
-				} catch (_wexception const & e) {
+				} catch (const _wexception & e) {
 					throw game_data_error("%u: %s", serial, e.what());
 				}
 			else
@@ -71,7 +71,7 @@ void Cmd_Destroy_Map_Object::Read
 		} else
 			throw game_data_error
 				(_("unknown/unhandled version %u"), packet_version);
-	} catch (_wexception const & e) {
+	} catch (const _wexception & e) {
 		throw game_data_error(_("destroy map object: %s"), e.what());
 	}
 }
@@ -119,7 +119,7 @@ void Cmd_Act::Read
 			if (Serial const object_serial = fr.Unsigned32())
 				try {
 					obj_serial = mol.get<Map_Object>(object_serial).serial();
-				} catch (_wexception const & e) {
+				} catch (const _wexception & e) {
 					throw game_data_error
 						(_("object %u: %s"), object_serial, e.what());
 				}
@@ -129,7 +129,7 @@ void Cmd_Act::Read
 		} else
 			throw game_data_error
 				(_("unknown/unhandled version %u"), packet_version);
-	} catch (_wexception const & e) {
+	} catch (const _wexception & e) {
 		throw wexception(_("act: %s"), e.what());
 	}
 }
@@ -209,7 +209,7 @@ std::vector<Serial> Object_Manager::all_object_serials_ordered () const throw ()
 	return rv;
 }
 
-Map_Object * Object_Ptr::get(Editor_Game_Base const & egbase)
+Map_Object * Object_Ptr::get(const Editor_Game_Base & egbase)
 {
 	if (!m_serial)
 		return 0;
@@ -223,7 +223,7 @@ Map_Object * Object_Ptr::get(Editor_Game_Base const & egbase)
 // because it is logically the pointer that is const, not the object
 // that is pointed to.
 // That is, a 'const Object_Ptr' behaves like a 'Object_Ptr * const'.
-Map_Object * Object_Ptr::get(Editor_Game_Base const & egbase) const {
+Map_Object * Object_Ptr::get(const Editor_Game_Base & egbase) const {
 	return m_serial ? egbase.objects().get_object(m_serial) : 0;
 }
 
@@ -301,7 +301,7 @@ void Map_Object_Descr::add_attribute(uint32_t const attr)
  * Lookup an attribute by name. If the attribute name hasn't been encountered
  * before, we add it to the map.
  */
-uint32_t Map_Object_Descr::get_attribute_id(std::string const & name) {
+uint32_t Map_Object_Descr::get_attribute_id(const std::string & name) {
 	AttribMap::iterator it = s_dyn_attribs.find(name);
 
 	if (it != s_dyn_attribs.end())
@@ -324,7 +324,7 @@ uint32_t Map_Object_Descr::get_attribute_id(std::string const & name) {
  * Lookup an attribute by id. If the attribute isn't found,
  * returns an emtpy string.
  */
-std::string Map_Object_Descr::get_attribute_name(uint32_t const & id) {
+std::string Map_Object_Descr::get_attribute_name(uint32_t id) {
 	for
 		(AttribMap::iterator iter = s_dyn_attribs.begin();
 		 iter != s_dyn_attribs.end(); ++iter)
@@ -448,7 +448,7 @@ void Map_Object::set_logsink(LogSink * const sink)
 }
 
 
-void Map_Object::log_general_info(Editor_Game_Base const &) {}
+void Map_Object::log_general_info(const Editor_Game_Base &) {}
 
 /**
  * Prints a log message prepended by the object's serial number.
@@ -498,10 +498,10 @@ void Map_Object::Loader::load(FileRead & fr)
 		Serial const serial = fr.Unsigned32();
 		try {
 			mol().register_object<Map_Object>(serial, *get_object());
-		} catch (_wexception const & e) {
+		} catch (const _wexception & e) {
 			throw wexception("%u: %s", serial, e.what());
 		}
-	} catch (_wexception const & e) {
+	} catch (const _wexception & e) {
 		throw wexception("map object: %s", e.what());
 	}
 

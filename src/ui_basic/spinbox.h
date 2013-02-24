@@ -20,10 +20,12 @@
 #ifndef UI_SPINBOX_H
 #define UI_SPINBOX_H
 
-#include "align.h"
-#include "button.h"
-#include "graphic/graphic.h"
 #include <cstring>
+
+#include "align.h"
+#include "graphic/graphic.h"
+
+#include "button.h"
 
 namespace UI {
 
@@ -37,21 +39,21 @@ struct SpinBox : public Panel {
 		(Panel *,
 		 int32_t x, int32_t y, uint32_t w, uint32_t h,
 		 int32_t startval, int32_t minval, int32_t maxval,
-		 std::string const & unit             = std::string(),
-		 const IPicture* buttonbackground =
-		 	g_gr->imgcache().load(PicMod_UI, "pics/but2.png"),
+		 const std::string & unit             = std::string(),
+		 const Image* buttonbackground =
+		 	g_gr->images().get("pics/but2.png"),
 		 bool big = false,
 		 Align align = Align_Center);
 	~SpinBox();
 
 	void setValue(int32_t);
 	void setInterval(int32_t min, int32_t max);
-	void setUnit(std::string const &);
+	void setUnit(const std::string &);
 	int32_t getValue();
 	std::string getUnit();
 	Align align() const;
 	void setAlign(Align);
-	void set_font(std::string const &, int32_t, RGBColor);
+	void set_font(const std::string &, int32_t, RGBColor);
 	void set_textstyle(const TextStyle & style);
 	void add_replacement(int32_t, std::string);
 	void remove_replacement(int32_t);

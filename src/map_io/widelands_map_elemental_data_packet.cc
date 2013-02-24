@@ -67,7 +67,7 @@ throw (_wexception)
 		} else
 			throw game_data_error
 				(_("unknown/unhandled version %i"), packet_version);
-	} catch (_wexception const & e) {
+	} catch (const _wexception & e) {
 		throw game_data_error(_("elemental data: %s"), e.what());
 	}
 }
@@ -90,7 +90,7 @@ throw (_wexception)
 	Section & s = prof.create_section("global");
 
 	s.set_int   ("packet_version", CURRENT_PACKET_VERSION);
-	Map const & map = egbase.map();
+	const Map & map = egbase.map();
 	s.set_int   ("map_w",          map.get_width      ());
 	s.set_int   ("map_h",          map.get_height     ());
 	s.set_int   ("nr_players",     map.get_nrplayers  ());

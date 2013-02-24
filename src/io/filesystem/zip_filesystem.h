@@ -35,43 +35,43 @@
 
 class ZipFilesystem : public FileSystem {
 public:
-	ZipFilesystem(std::string const &);
+	ZipFilesystem(const std::string &);
 	virtual ~ZipFilesystem();
 
 	virtual bool IsWritable() const;
 
 	virtual int32_t FindFiles
-		(std::string const & path,
-		 std::string const & pattern,
+		(const std::string & path,
+		 const std::string & pattern,
 		 filenameset_t     * results,
 		 uint32_t            depth = 0);
 
-	virtual bool IsDirectory(std::string const & path);
-	virtual bool FileExists (std::string const & path);
+	virtual bool IsDirectory(const std::string & path);
+	virtual bool FileExists (const std::string & path);
 
-	virtual void * Load(std::string const & fname, size_t & length);
+	virtual void * Load(const std::string & fname, size_t & length);
 	virtual void * fastLoad
-		(std::string const & fname, size_t & length, bool & fast);
+		(const std::string & fname, size_t & length, bool & fast);
 
 	virtual void Write
-		(std::string const & fname, void const * data, int32_t length);
-	virtual void EnsureDirectoryExists(std::string const & dirname);
-	virtual void   MakeDirectory      (std::string const & dirname);
+		(const std::string & fname, void const * data, int32_t length);
+	virtual void EnsureDirectoryExists(const std::string & dirname);
+	virtual void   MakeDirectory      (const std::string & dirname);
 
 	virtual StreamRead  * OpenStreamRead
 		(const std::string & fname);
 	virtual StreamWrite * OpenStreamWrite
 		(const std::string & fname);
 
-	virtual FileSystem &   MakeSubFileSystem(std::string const & dirname);
+	virtual FileSystem &   MakeSubFileSystem(const std::string & dirname);
 	virtual FileSystem & CreateSubFileSystem
-		(std::string const & dirname, Type);
-	virtual void Unlink(std::string const & filename);
-	virtual void Rename(std::string const &, std::string const &);
+		(const std::string & dirname, Type);
+	virtual void Unlink(const std::string & filename);
+	virtual void Rename(const std::string &, const std::string &);
 
 	virtual unsigned long long DiskSpace();
 
-	static FileSystem * CreateFromDirectory(std::string const & directory);
+	static FileSystem * CreateFromDirectory(const std::string & directory);
 
 	virtual std::string getBasename() {return m_zipfilename;};
 

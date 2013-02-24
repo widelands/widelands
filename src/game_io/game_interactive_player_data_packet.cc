@@ -76,7 +76,7 @@ void Game_Interactive_Player_Data_Packet::Read
 		} else
 			throw game_data_error
 				(_("unknown/unhandled version %u"), packet_version);
-	} catch (_wexception const & e) {
+	} catch (const _wexception & e) {
 		throw game_data_error(_("interactive player: %s"), e.what());
 	}
 }

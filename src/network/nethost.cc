@@ -71,7 +71,7 @@ struct HostGameSettingsProvider : public GameSettingsProvider {
 
 	virtual void setScenario(bool is_scenario) {h->setScenario(is_scenario);}
 
-	virtual GameSettings const & settings() {return h->settings();}
+	virtual const GameSettings & settings() {return h->settings();}
 
 	virtual bool canChangeMap() {return true;}
 	virtual bool canChangePlayerState(uint8_t const number) {
@@ -110,8 +110,8 @@ struct HostGameSettingsProvider : public GameSettingsProvider {
 	virtual bool canLaunch() {return h->canLaunch();}
 
 	virtual void setMap
-		(std::string const &       mapname,
-		 std::string const &       mapfilename,
+		(const std::string &       mapname,
+		 const std::string &       mapfilename,
 		 uint32_t            const maxplayers,
 		 bool                const savegame = false)
 	{
@@ -146,7 +146,7 @@ struct HostGameSettingsProvider : public GameSettingsProvider {
 			/* no break */
 		case PlayerSettings::stateComputer:
 			{
-				Computer_Player::ImplementationVector const & impls =
+				const Computer_Player::ImplementationVector & impls =
 					Computer_Player::getImplementations();
 				Computer_Player::ImplementationVector::const_iterator it =
 					impls.begin();
@@ -209,7 +209,7 @@ struct HostGameSettingsProvider : public GameSettingsProvider {
 		h->setPlayerState(number, newstate, true);
 	}
 
-	virtual void setPlayerTribe(uint8_t const number, std::string const & tribe, bool const random_tribe)
+	virtual void setPlayerTribe(uint8_t const number, const std::string & tribe, bool const random_tribe)
 	{
 		if (number >= h->settings().players.size())
 			return;
@@ -256,11 +256,11 @@ struct HostGameSettingsProvider : public GameSettingsProvider {
 		h->setPlayerInit(number, index);
 	}
 
-	virtual void setPlayerAI(uint8_t number, std::string const & name, bool const random_ai = false) {
+	virtual void setPlayerAI(uint8_t number, const std::string & name, bool const random_ai = false) {
 		h->setPlayerAI(number, name, random_ai);
 	}
 
-	virtual void setPlayerName(uint8_t const number, std::string const & name) {
+	virtual void setPlayerName(uint8_t const number, const std::string & name) {
 		if (number >= h->settings().players.size())
 			return;
 		h->setPlayerName(number, name);
@@ -317,7 +317,7 @@ private:
 struct HostChatProvider : public ChatProvider {
 	HostChatProvider(NetHost * const _h) : h(_h), kickClient(0) {}
 
-	void send(std::string const & msg) {
+	void send(const std::string & msg) {
 		ChatMessage c;
 		c.time = time(0);
 		c.playern = h->getLocalPlayerposition();
@@ -496,11 +496,11 @@ struct HostChatProvider : public ChatProvider {
 		h->send(c);
 	}
 
-	std::vector<ChatMessage> const & getMessages() const {
+	const std::vector<ChatMessage> & getMessages() const {
 		return messages;
 	}
 
-	void receive(ChatMessage const & msg) {
+	void receive(const ChatMessage & msg) {
 		messages.push_back(msg);
 		ChatProvider::send(msg);
 	}
@@ -608,7 +608,7 @@ struct NetHostImpl {
 	}
 };
 
-NetHost::NetHost (std::string const & playername, bool internet)
+NetHost::NetHost (const std::string & playername, bool internet)
 	:
 	d(new NetHostImpl(this)),
 	m_internet(internet),
@@ -671,7 +671,7 @@ NetHost::~NetHost ()
 	delete d;
 }
 
-std::string const & NetHost::getLocalPlayername() const
+const std::string & NetHost::getLocalPlayername() const
 {
 	return d->localplayername;
 }
@@ -802,7 +802,7 @@ void NetHost::run(bool const autorun)
 	broadcast(s);
 
 	Widelands::Game game;
-#ifdef DEBUG
+#ifndef NDEBUG
 	game.set_write_syncstream(true);
 #endif
 
@@ -1071,7 +1071,7 @@ void NetHost::send(ChatMessage msg)
 				return; // There will be an immediate answer from the host
 			uint16_t i = 0;
 			for (; i < d->settings.users.size(); ++i) {
-				UserSettings const & user = d->settings.users.at(i);
+				const UserSettings & user = d->settings.users.at(i);
 				if (user.name == msg.sender)
 					break;
 			}
@@ -1109,7 +1109,7 @@ int32_t NetHost::checkClient(std::string name)
 	uint16_t i = 0;
 	uint32_t client = 0;
 	for (; i < d->settings.users.size(); ++i) {
-		UserSettings const & user = d->settings.users.at(i);
+		const UserSettings & user = d->settings.users.at(i);
 		if (user.name == name)
 			break;
 	}
@@ -1342,7 +1342,7 @@ void NetHost::dserver_send_maps_and_saves(Client & client) {
 				info.path     = name;
 				info.players  = static_cast<uint8_t>(s.get_safe_int("nr_players"));
 				d->settings.saved_games.push_back(info);
-			} catch (_wexception const & e) {}
+			} catch (const _wexception & e) {}
 		}
 	}
 
@@ -1369,7 +1369,7 @@ void NetHost::dserver_send_maps_and_saves(Client & client) {
 }
 
 void NetHost::sendSystemMessageCode
-	(std::string const & code, std::string const & a, std::string const & b, std::string const & c)
+	(const std::string & code, const std::string & a, const std::string & b, const std::string & c)
 {
 	// First send to all clients
 	SendPacket s;
@@ -1405,7 +1405,7 @@ std::string NetHost::getGameDescription()
 	return buf;
 }
 
-GameSettings const & NetHost::settings()
+const GameSettings& NetHost::settings()
 {
 	return d->settings;
 }
@@ -1438,8 +1438,8 @@ bool NetHost::canLaunch()
 }
 
 void NetHost::setMap
-	(std::string const &       mapname,
-	 std::string const &       mapfilename,
+	(const std::string &       mapname,
+	 const std::string &       mapfilename,
 	 uint32_t            const maxplayers,
 	 bool                const savegame)
 {
@@ -1607,7 +1607,7 @@ void NetHost::setPlayerState
 }
 
 
-void NetHost::setPlayerTribe(uint8_t const number, std::string const & tribe, bool const random_tribe)
+void NetHost::setPlayerTribe(uint8_t const number, const std::string & tribe, bool const random_tribe)
 {
 	if (number >= d->settings.players.size())
 		return;
@@ -1677,7 +1677,7 @@ void NetHost::setPlayerInit(uint8_t const number, uint8_t const index)
 }
 
 
-void NetHost::setPlayerAI(uint8_t number, std::string const & name, bool const random_ai)
+void NetHost::setPlayerAI(uint8_t number, const std::string & name, bool const random_ai)
 {
 	if (number >= d->settings.players.size())
 		return;
@@ -1695,7 +1695,7 @@ void NetHost::setPlayerAI(uint8_t number, std::string const & name, bool const r
 }
 
 
-void NetHost::setPlayerName(uint8_t const number, std::string const & name)
+void NetHost::setPlayerName(uint8_t const number, const std::string & name)
 {
 	if (number >= d->settings.players.size())
 		return;
@@ -1992,7 +1992,7 @@ std::string NetHost::getComputerPlayerName(uint8_t const playernum)
  * If \p ignoreplayer < UserSettings::highestPlayernum(), the user with this
  * number will be ignored.
  */
-bool NetHost::haveUserName(std::string const & name, uint8_t ignoreplayer) {
+bool NetHost::haveUserName(const std::string & name, uint8_t ignoreplayer) {
 	for (uint32_t i = 0; i < d->settings.users.size(); ++i)
 		if (i != ignoreplayer and d->settings.users.at(i).name == name)
 			return true;
@@ -2509,11 +2509,11 @@ void NetHost::handle_network ()
 						handle_packet(i, r);
 					}
 				}
-			} catch (DisconnectException const & e) {
+			} catch (const DisconnectException & e) {
 				disconnectClient(i, e.what());
-			} catch (ProtocolException const & e) {
+			} catch (const ProtocolException & e) {
 				disconnectClient(i, "PROTOCOL_EXCEPTION", true, boost::lexical_cast<std::string>(e.number()));
-			} catch (std::exception const & e) {
+			} catch (const std::exception & e) {
 				disconnectClient(i, "MALFORMED_COMMANDS", true, e.what());
 			}
 		}
@@ -2627,7 +2627,7 @@ void NetHost::handle_packet(uint32_t const i, RecvPacket & r)
 
 						d->settings.scenario = false;
 						d->hp.setMap(gpdp.get_mapname(), path, nr_players, true);
-					} catch (_wexception const & e) {}
+					} catch (const _wexception & e) {}
 				}
 			} else {
 				if (g_fs->FileExists(path)) {
@@ -2858,7 +2858,7 @@ void NetHost::sendFilePart(TCPsocket csock, uint32_t part) {
 }
 
 
-void NetHost::disconnectPlayerController(uint8_t const number, std::string const & name)
+void NetHost::disconnectPlayerController(uint8_t const number, const std::string & name)
 {
 	dedicatedlog("[Host]: disconnectPlayerController(%u, %s)\n", number, name.c_str());
 
@@ -2884,7 +2884,7 @@ void NetHost::disconnectPlayerController(uint8_t const number, std::string const
 }
 
 void NetHost::disconnectClient
-	(uint32_t const number, std::string const & reason, bool const sendreason, std::string const & arg)
+	(uint32_t const number, const std::string & reason, bool const sendreason, const std::string & arg)
 {
 	assert(number < d->clients.size());
 

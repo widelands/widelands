@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002, 2006-2011 by the Widelands Development Team
+ * Copyright (C) 2002, 2006-2013 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -61,11 +61,11 @@ struct Tribe_Descr : boost::noncopyable {
 		ERR_WRONGVERSION
 	};
 
-	Tribe_Descr(std::string const & name, Editor_Game_Base &);
+	Tribe_Descr(const std::string & name, Editor_Game_Base &);
 
 	//  Static function to check for tribes.
 	static bool exists_tribe
-		(std::string const & name, TribeBasicInfo * info = 0);
+		(const std::string & name, TribeBasicInfo * info = 0);
 	static void get_all_tribenames(std::vector<std::string> &);
 	static void get_all_tribe_infos(std::vector<TribeBasicInfo> &);
 
@@ -77,7 +77,7 @@ struct Tribe_Descr : boost::noncopyable {
 	Worker_Descr const * get_worker_descr(Ware_Index const index) const {
 		return m_workers.get(index);
 	}
-	Ware_Index worker_index(std::string const & workername) const {
+	Ware_Index worker_index(const std::string & workername) const {
 		return m_workers.get_index(workername);
 	}
 	Ware_Index worker_index(char const * const workername) const {
@@ -89,9 +89,9 @@ struct Tribe_Descr : boost::noncopyable {
 		return worker_index("carrier");
 	}
 	Ware_Index get_nrwares() const {return m_wares.get_nitems();}
-	Ware_Index safe_ware_index(std::string const & warename) const;
+	Ware_Index safe_ware_index(const std::string & warename) const;
 	Ware_Index safe_ware_index(const char * const warename) const;
-	Ware_Index ware_index(std::string const & warename) const;
+	Ware_Index ware_index(const std::string & warename) const;
 	Ware_Index ware_index(char const * const warename) const;
 	Item_Ware_Descr const * get_ware_descr(Ware_Index const index) const {
 		return m_wares.get(index);
@@ -102,7 +102,7 @@ struct Tribe_Descr : boost::noncopyable {
 	void set_worker_type_has_demand_check(Ware_Index const index) const {
 		m_workers.get(index)->set_has_demand_check();
 	}
-	Ware_Index safe_worker_index(std::string const & workername) const;
+	Ware_Index safe_worker_index(const std::string & workername) const;
 	Ware_Index safe_worker_index(const char * const workername) const;
 	Building_Index get_nrbuildings() const {
 		return m_buildings.get_nitems();
@@ -112,7 +112,7 @@ struct Tribe_Descr : boost::noncopyable {
 	{
 		return m_buildings.get(index);
 	}
-	Building_Index building_index(std::string const & buildingname) const {
+	Building_Index building_index(const std::string & buildingname) const {
 		return m_buildings.get_index(buildingname);
 	}
 	Building_Index building_index(char const * const buildingname) const {
@@ -140,13 +140,13 @@ struct Tribe_Descr : boost::noncopyable {
 	}
 	int32_t get_nr_bobs() {return m_bobs.get_nitems();}
 
-	std::vector<Ware_Index> const & worker_types_without_cost() const {
+	const std::vector<Ware_Index> & worker_types_without_cost() const {
 		return m_worker_types_without_cost;
 	}
 
 	typedef std::vector<std::pair<std::string, uint32_t> > AnimationStyles;
 	struct Nonexistent {};
-	uint8_t frontier_style_index(std::string const & stylename) const {
+	uint8_t frontier_style_index(const std::string & stylename) const {
 		for (uint8_t result = m_anim_frontier.size();;)
 			if (m_anim_frontier.at(--result).first == stylename)
 				return result;
@@ -155,7 +155,7 @@ struct Tribe_Descr : boost::noncopyable {
 
 		return 0;
 	}
-	uint8_t flag_style_index    (std::string const & stylename) const {
+	uint8_t flag_style_index    (const std::string & stylename) const {
 		for (uint8_t result = m_anim_flag.size();;)
 			if (m_anim_flag.at(--result).first == stylename)
 				return result;
@@ -188,10 +188,10 @@ struct Tribe_Descr : boost::noncopyable {
 	uint8_t next_flag_style_index    (uint8_t i) const {
 		return ++i == m_anim_flag    .size() ? 0 : i;
 	}
-	std::string const & frontier_style_name (uint8_t const i) const {
+	const std::string & frontier_style_name (uint8_t const i) const {
 		return m_anim_frontier.at(i).first;
 	}
-	std::string const & flag_style_name     (uint8_t const i) const {
+	const std::string & flag_style_name     (uint8_t const i) const {
 		return m_anim_flag    .at(i).first;
 	}
 	uint32_t frontier_animation  (uint8_t const i) const {
@@ -216,7 +216,7 @@ struct Tribe_Descr : boost::noncopyable {
 		std::string          descname;
 	};
 	typedef std::vector<Initialization> Initializations;
-	Initialization const & initialization(uint8_t const index) const {
+	const Initialization & initialization(uint8_t const index) const {
 		if (m_initializations.size() <= index)
 			throw Nonexistent();
 		return m_initializations[index];
@@ -224,13 +224,13 @@ struct Tribe_Descr : boost::noncopyable {
 
 	typedef std::vector<std::vector<Widelands::Ware_Index> > WaresOrder;
 	typedef std::vector<std::pair<uint32_t, uint32_t> > WaresOrderCoords;
-	WaresOrder const & wares_order() const {return m_wares_order;}
-	WaresOrderCoords const & wares_order_coords() const {
+	const WaresOrder & wares_order() const {return m_wares_order;}
+	const WaresOrderCoords & wares_order_coords() const {
 		return m_wares_order_coords;
 	}
 
-	WaresOrder const & workers_order() const {return m_workers_order;}
-	WaresOrderCoords const & workers_order_coords() const {
+	const WaresOrder & workers_order() const {return m_workers_order;}
+	const WaresOrderCoords & workers_order_coords() const {
 		return m_workers_order_coords;
 	}
 
@@ -240,15 +240,15 @@ struct Tribe_Descr : boost::noncopyable {
 
 #ifdef WRITE_GAME_DATA_AS_HTML
 	void referenceBuilding
-		(::FileWrite &, std::string const &, HTMLReferences::Role,
+		(::FileWrite &, const std::string &, HTMLReferences::Role,
 		 Building_Index)
 		const;
 	void referenceWorker
-		(::FileWrite &, std::string const &, HTMLReferences::Role,
+		(::FileWrite &, const std::string &, HTMLReferences::Role,
 		 Ware_Index,     uint8_t multiplicity = 1)
 		const;
 	void referenceWare
-		(::FileWrite &, std::string const &, HTMLReferences::Role,
+		(::FileWrite &, const std::string &, HTMLReferences::Role,
 		 Ware_Index,     uint8_t multiplicity = 1)
 		const;
 #endif
@@ -287,10 +287,10 @@ private:
 	std::map<std::string, std::string> m_compatibility_wares;
 
 #ifdef WRITE_GAME_DATA_AS_HTML
-	void writeHTMLBuildings(std::string const & directory);
-	void writeHTMLWorkers  (std::string const & directory);
-	void writeHTMLWares    (std::string const & directory);
-	void writeHTMLBobs     (std::string const & directory);
+	void writeHTMLBuildings(const std::string & directory);
+	void writeHTMLWorkers  (const std::string & directory);
+	void writeHTMLWares    (const std::string & directory);
+	void writeHTMLBobs     (const std::string & directory);
 	HTMLReferences * m_ware_references;
 	HTMLReferences * m_worker_references;
 	HTMLReferences * m_building_references;

@@ -104,11 +104,11 @@ private:
 
 SoldierPanel::SoldierPanel
 	(UI::Panel & parent,
-	 Widelands::Editor_Game_Base & egbase,
+	 Widelands::Editor_Game_Base & gegbase,
 	 Widelands::Building & building)
 :
 Panel(&parent, 0, 0, 0, 0),
-m_egbase(egbase),
+m_egbase(gegbase),
 m_soldiers(*dynamic_cast<SoldierControl *>(&building)),
 m_last_animate_time(0)
 {
@@ -221,7 +221,7 @@ void SoldierPanel::think()
 			if (icon_it.current->row <= icon.row)
 				insertpos = icon_it.current + 1;
 
-			icon.pos.x = std::max(icon.pos.x, static_cast<int32_t>(icon_it.current->pos.x + m_icon_width));
+			icon.pos.x = std::max<int32_t>(icon.pos.x, icon_it.current->pos.x + m_icon_width);
 		}
 
 		icon.cache_health = 0;

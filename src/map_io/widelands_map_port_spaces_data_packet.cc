@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2011 by the Widelands Development Team
+ * Copyright (C) 2011-2013 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -60,7 +60,7 @@ void Map_Port_Spaces_Data_Packet::Read
 		} else
 			throw game_data_error
 				(_("unknown/unhandled version %i"), packet_version);
-	} catch (_wexception const & e) {
+	} catch (const _wexception & e) {
 		throw game_data_error(_("port_spaces data: %s"), e.what());
 	}
 }
@@ -70,21 +70,28 @@ void Map_Port_Spaces_Data_Packet::Write(FileSystem & fs, Editor_Game_Base & egba
 	throw (_wexception)
 {
 	Profile prof;
-	Section & s1 = prof.create_section("global");
-	s1.set_int("packet_version", CURRENT_PACKET_VERSION);
+	prof.create_section("global").set_int("packet_version", CURRENT_PACKET_VERSION);
 
 	Map & map = egbase.map();
 	std::vector<Coords> port_spaces = map.get_port_spaces();
-	const uint16_t num = port_spaces.size();
-	char buf[8]; // there won't be that many port spaces... definitely!
-	s1.set_int("number_of_port_spaces", num);
-
+	uint32_t count = 0;
 	Section & s2 = prof.create_section("port_spaces");
-	for (uint16_t i = 0; i < num; ++i) {
-		snprintf(buf, sizeof(buf), "%u", i);
-		s2.set_Coords(buf, port_spaces.at(i));
+	for (uint32_t i = 0; i < port_spaces.size(); ++i) {
+		const FCoords f = map.get_fcoords(port_spaces[i]);
+		// Perform some implicit cleanup while saving
+		if (f.field->get_caps() & BUILDCAPS_PORT) {
+			char buf[8];
+			snprintf(buf, sizeof(buf), "%u", count);
+			s2.set_Coords(buf, f);
+			++count;
+		}
 	}
+
+	// Note that we do not keep a pointer to the global section around
+	// because it may have become invalid by creating the "port_spaces" section
+	prof.get_section("global")->set_int("number_of_port_spaces", count);
+
 	prof.write("port_spaces", false, fs);
 }
 
-}
+} // namespace Widelands

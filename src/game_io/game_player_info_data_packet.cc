@@ -80,7 +80,7 @@ void Game_Player_Info_Data_Packet::Read
 					game.add_player(plnum, 0, tribe_name, name, team);
 					Player & player = game.player(plnum);
 					{
-						Tribe_Descr const & tribe = player.tribe();
+						const Tribe_Descr & tribe = player.tribe();
 						try {
 							player.m_frontier_style_index =
 								frontier_style_name ?
@@ -141,7 +141,7 @@ void Game_Player_Info_Data_Packet::Read
 		} else
 			throw game_data_error
 				(_("unknown/unhandled version %u"), packet_version);
-	} catch (_wexception const & e) {
+	} catch (const _wexception & e) {
 		throw game_data_error(_("player info: %s"), e.what());
 	}
 }
@@ -167,7 +167,7 @@ void Game_Player_Info_Data_Packet::Write
 		fw.Unsigned8(plr->team_number());
 
 		{
-			Tribe_Descr const & tribe = plr->tribe();
+			const Tribe_Descr & tribe = plr->tribe();
 			fw.CString(tribe.name().c_str());
 			fw.CString(tribe.frontier_style_name(plr->m_frontier_style_index));
 			fw.CString(tribe.flag_style_name    (plr->m_flag_style_index));

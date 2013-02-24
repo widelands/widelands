@@ -30,8 +30,9 @@ public:
 	static void Initialize();
 	static void Cleanup();
 
-	GLSurfaceTexture(SDL_Surface * surface);
-	GLSurfaceTexture(int w, int h, bool alpha);
+	GLSurfaceTexture(SDL_Surface * surface, bool intensity = false);
+	GLSurfaceTexture(int w, int h);
+
 	virtual ~GLSurfaceTexture();
 
 	/// Interface implementation
@@ -53,14 +54,14 @@ public:
 	virtual void brighten_rect(const Rect&, int32_t factor);
 	virtual void draw_line
 		(int32_t x1, int32_t y1, int32_t x2, int32_t y2, const RGBColor&, uint8_t width);
-	virtual void blit(const Point&, const IPicture*, const Rect& srcrc, Composite cm);
+	virtual void blit(const Point&, const Surface*, const Rect& srcrc, Composite cm);
 
 	GLuint get_gl_texture() const {return m_texture;}
-	uint32_t get_tex_w() const {return m_tex_w;}
-	uint32_t get_tex_h() const {return m_tex_h;}
+	uint16_t get_tex_w() const {return m_tex_w;}
+	uint16_t get_tex_h() const {return m_tex_h;}
 
 private:
-	void init(uint32_t w, uint32_t h);
+	void init(uint16_t w, uint16_t h);
 	void setup_gl();
 	void reset_gl();
 
@@ -69,11 +70,7 @@ private:
 
 	/// Keep the size of the opengl texture. This is necessary because some
 	/// systems support only a power of two for texture sizes.
-	uint32_t m_tex_w, m_tex_h;
-
-	/// Internally, all surfaces are with alpha channel. We can ignore it, when
-	/// we should not have one, though.
-	bool has_alpha_;
+	uint16_t m_tex_w, m_tex_h;
 };
 
 #endif //GL_SURFACE_TEXTURE_H

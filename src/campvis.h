@@ -27,12 +27,12 @@
 
 struct Campaign_visibility_save {
 	std::string get_path();
-	void set_campaign_visibility(std::string const &, bool);
-	void set_map_visibility     (std::string const &, bool);
+	void set_campaign_visibility(const std::string &, bool);
+	void set_map_visibility     (const std::string &, bool);
 
 private:
-	void make_campvis  (std::string const &);
-	void update_campvis(std::string const &);
+	void make_campvis  (const std::string &);
+	void update_campvis(const std::string &);
 };
 
 

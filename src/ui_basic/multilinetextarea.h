@@ -20,7 +20,9 @@
 #ifndef UI_MULTILINE_TEXTAREA_H
 #define UI_MULTILINE_TEXTAREA_H
 
+#include "rgbcolor.h"
 #include "align.h"
+
 #include "panel.h"
 #include "scrollbar.h"
 
@@ -47,10 +49,10 @@ struct Multiline_Textarea : public Panel {
 		 const bool always_show_scrollbar = false);
 	~Multiline_Textarea();
 
-	std::string const & get_text() const {return m_text;}
+	const std::string & get_text() const {return m_text;}
 	ScrollMode get_scrollmode() const {return m_scrollmode;}
 
-	void set_text(std::string const &);
+	void set_text(const std::string &);
 	void set_align(Align);
 	void set_scrollmode(ScrollMode mode);
 

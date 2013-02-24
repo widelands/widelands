@@ -99,8 +99,8 @@ struct Request : public Trackable {
 	void transfer_finish(Game &, Transfer &);
 	void transfer_fail  (Game &, Transfer &);
 
-	void set_requirements (Requirements const & r) {m_requirements = r;}
-	Requirements const & get_requirements () const {return m_requirements;}
+	void set_requirements (const Requirements & r) {m_requirements = r;}
+	const Requirements & get_requirements () const {return m_requirements;}
 
 private:
 	int32_t get_base_required_time(Editor_Game_Base &, uint32_t nr) const;

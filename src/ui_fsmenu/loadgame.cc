@@ -49,17 +49,17 @@ Fullscreen_Menu_LoadGame::Fullscreen_Menu_LoadGame
 	m_back
 		(this, "back",
 		 get_w() * 71 / 100, get_h() * 9 / 10, m_butw, m_buth,
-		 g_gr->imgcache().load(PicMod_UI, "pics/but0.png"),
+		 g_gr->images().get("pics/but0.png"),
 		 _("Back"), std::string(), true, false),
 	m_ok
 		(this, "ok",
 		 get_w() * 71 / 100, get_h() * 15 / 20, m_butw, m_buth,
-		 g_gr->imgcache().load(PicMod_UI, "pics/but2.png"),
+		 g_gr->images().get("pics/but2.png"),
 		 _("OK"), std::string(), false, false),
 	m_delete
 		(this, "delete",
 		 get_w() * 71 / 100, get_h() * 17 / 20, m_butw, m_buth,
-		 g_gr->imgcache().load(PicMod_UI, "pics/but0.png"),
+		 g_gr->images().get("pics/but0.png"),
 		 _("Delete"), std::string(), false, false),
 
 // Savegame list
@@ -237,7 +237,7 @@ void Fullscreen_Menu_LoadGame::fill_list() {
 				gl.preload_game(gpdp);
 
 				m_list.add(FileSystem::FS_FilenameWoExt(name).c_str(), name);
-			} catch (_wexception const & e) {
+			} catch (const _wexception & e) {
 				//  we simply skip illegal entries
 			}
 		}

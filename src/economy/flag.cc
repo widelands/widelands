@@ -163,7 +163,7 @@ bool Flag::get_passable() const throw ()
 
 
 static std::string const flag_name = "flag";
-std::string const & Flag::name() const throw () {return flag_name;}
+const std::string & Flag::name() const throw () {return flag_name;}
 
 
 Flag & Flag::base_flag()
@@ -207,7 +207,7 @@ void Flag::attach_building(Editor_Game_Base & egbase, Building & building)
 
 	m_building = &building;
 
-	Map const & map = egbase.map();
+	const Map & map = egbase.map();
 	egbase.set_road
 		(map.get_fcoords(map.tl_n(m_position)), Road_SouthEast, Road_Normal);
 
@@ -223,7 +223,7 @@ void Flag::detach_building(Editor_Game_Base & egbase)
 
 	m_building->set_economy(0);
 
-	Map const & map = egbase.map();
+	const Map & map = egbase.map();
 	egbase.set_road
 		(map.get_fcoords(map.tl_n(m_position)), Road_SouthEast, Road_None);
 
@@ -773,7 +773,7 @@ void Flag::destroy(Editor_Game_Base & egbase)
  * the given program once it's completed.
 */
 void Flag::add_flag_job
-	(Game &, Ware_Index const workerware, std::string const & programname)
+	(Game &, Ware_Index const workerware, const std::string & programname)
 {
 	FlagJob j;
 

@@ -29,6 +29,7 @@
 #include "economy/flag.h"
 #include "economy/road.h"
 #include "graphic/font_handler.h"
+#include "graphic/graphic.h"
 #include "scripting/scripting.h"
 #include "sound/sound_handler.h"
 #include "ui_basic/progresswindow.h"
@@ -58,9 +59,9 @@ Editor_Game_Base::Editor_Game_Base()
 initialization
 ============
 */
-Editor_Game_Base::Editor_Game_Base(LuaInterface * lua) :
+Editor_Game_Base::Editor_Game_Base(LuaInterface * lua_interface) :
 m_gametime          (0),
-m_lua               (lua),
+m_lua               (lua_interface),
 m_ibase             (0),
 m_map               (0),
 m_lasttrackserial   (0)
@@ -98,17 +99,17 @@ void Editor_Game_Base::think()
 	// by a given number of milliseconds
 }
 
-void Editor_Game_Base::receive(NoteImmovable const & note)
+void Editor_Game_Base::receive(const NoteImmovable & note)
 {
 	note.pi->owner().receive(note);
 }
 
-void Editor_Game_Base::receive(NoteFieldPossession const & note)
+void Editor_Game_Base::receive(const NoteFieldPossession & note)
 {
 	get_player(note.fc.field->get_owned_by())->receive(note);
 }
 
-void Editor_Game_Base::receive(NoteFieldTransformed const & note)
+void Editor_Game_Base::receive(const NoteFieldTransformed & note)
 {
 	Widelands::Map_Index const i = note.fc.field - &(*m_map)[0];
 
@@ -137,8 +138,8 @@ the game starts. Similar for remote players.
 Player * Editor_Game_Base::add_player
 	(Player_Number       const player_number,
 	 uint8_t             const initialization_index,
-	 std::string const &       tribe,
-	 std::string const &       name,
+	 const std::string &       tribe,
+	 const std::string &       name,
 	 TeamNumber                team)
 {
 	assert(1 <= player_number);
@@ -158,7 +159,7 @@ Player * Editor_Game_Base::add_player
 
 /// Load the given tribe into structure
 const Tribe_Descr & Editor_Game_Base::manually_load_tribe
-	(std::string const & tribe)
+	(const std::string & tribe)
 {
 	container_iterate_const(Tribe_Vector, m_tribes, i)
 		if ((*i.current)->name() == tribe)
@@ -299,7 +300,7 @@ Building & Editor_Game_Base::warp_building
 	(Coords const c, Player_Number const owner, Building_Index const idx)
 {
 	Player & plr = player(owner);
-	Tribe_Descr const & tribe = plr.tribe();
+	const Tribe_Descr & tribe = plr.tribe();
 	return tribe.get_building_descr(idx)->create(*this, plr, c, false, 0, true);
 }
 
@@ -314,7 +315,7 @@ Building & Editor_Game_Base::warp_constructionsite
 	 Building_Index idx, Building_Index old_id, bool loading)
 {
 	Player            & plr   = player(owner);
-	Tribe_Descr const & tribe = plr.tribe();
+	const Tribe_Descr & tribe = plr.tribe();
 	return
 		tribe.get_building_descr(idx)->create
 			(*this, plr, c, true, old_id ? tribe.get_building_descr(old_id) : 0, loading);
@@ -328,7 +329,7 @@ Building & Editor_Game_Base::warp_dismantlesite
 	 Building_Index idx, bool loading)
 {
 	Player            & plr   = player(owner);
-	Tribe_Descr const & tribe = plr.tribe();
+	const Tribe_Descr & tribe = plr.tribe();
 
 	Building_Descr const * const descr =
 		tribe.get_building_descr
@@ -357,7 +358,7 @@ Bob & Editor_Game_Base::create_bob
 	(Coords const c,
 	 Bob::Descr::Index const idx, Tribe_Descr const * const tribe, Player * owner)
 {
-	Bob::Descr const & descr =
+	const Bob::Descr & descr =
 		*
 		(tribe ?
 		 tribe->get_bob_descr(idx)
@@ -396,7 +397,7 @@ Does not perform any placability checks.
 Immovable & Editor_Game_Base::create_immovable
 	(Coords const c, uint32_t const idx, Tribe_Descr const * const tribe)
 {
-	Immovable_Descr const & descr =
+	const Immovable_Descr & descr =
 		*
 		(tribe ?
 		 tribe->get_immovable_descr(idx)
@@ -409,7 +410,7 @@ Immovable & Editor_Game_Base::create_immovable
 }
 
 Immovable & Editor_Game_Base::create_immovable
-	(Coords const c, std::string const & name, Tribe_Descr const * const tribe)
+	(Coords const c, const std::string & name, Tribe_Descr const * const tribe)
 {
 	const int32_t idx =
 		tribe ?
@@ -594,7 +595,7 @@ void Editor_Game_Base::unconquer_area
 
 	//  Here must be a building.
 	assert
-		(dynamic_cast<Building const &>(*map().get_immovable(player_area))
+		(dynamic_cast<const Building &>(*map().get_immovable(player_area))
 		 .owner().player_number()
 		 ==
 		 player_area.player_number);
@@ -646,7 +647,7 @@ void Editor_Game_Base::conquer_area_no_building
 	assert     (player_area.x < map().get_width());
 	assert(0 <= player_area.y);
 	assert     (player_area.y < map().get_height());
-	Field const & first_field = map()[0];
+	const Field & first_field = map()[0];
 	assert(&first_field <= player_area.field);
 	assert(player_area.field < &first_field + map().max_index());
 	assert(0 < player_area.player_number);
@@ -689,7 +690,7 @@ void Editor_Game_Base::do_conquer_area
 	assert(player_area.x < map().get_width());
 	assert(0 <= player_area.y);
 	assert(player_area.y < map().get_height());
-	Field const & first_field = map()[0];
+	const Field & first_field = map()[0];
 	assert(&first_field <= player_area.field);
 	assert                (player_area.field < &first_field + map().max_index());
 	assert(0 < player_area.player_number);

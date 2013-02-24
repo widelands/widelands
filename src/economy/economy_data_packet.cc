@@ -39,7 +39,7 @@ void EconomyDataPacket::Read(FileRead & fr)
 		if (1 <= version and version <= CURRENT_ECONOMY_VERSION) {
 			if (2 <= version)
 				try {
-					Tribe_Descr const & tribe = m_eco->owner().tribe();
+					const Tribe_Descr & tribe = m_eco->owner().tribe();
 					while (Time const last_modified = fr.Unsigned32()) {
 						char const * const type_name = fr.CString();
 						uint32_t const permanent = fr.Unsigned32();
@@ -90,14 +90,14 @@ void EconomyDataPacket::Read(FileRead & fr)
 								 "%s, ignoring\n",
 								 type_name, tribe.name().c_str());
 					}
-				} catch (_wexception const & e) {
+				} catch (const _wexception & e) {
 					throw game_data_error(_("target quantities: %s"), e.what());
 				}
 			m_eco->m_request_timerid = fr.Unsigned32();
 		} else {
 			throw game_data_error(_("unknown version %u"), version);
 		}
-	} catch (std::exception const & e) {
+	} catch (const std::exception & e) {
 		throw game_data_error(_("economy: %s"), e.what());
 	}
 }
@@ -105,10 +105,10 @@ void EconomyDataPacket::Read(FileRead & fr)
 void EconomyDataPacket::Write(FileWrite & fw)
 {
 	fw.Unsigned16(CURRENT_ECONOMY_VERSION);
-	Tribe_Descr const & tribe = m_eco->owner().tribe();
+	const Tribe_Descr & tribe = m_eco->owner().tribe();
 	for (Ware_Index i = tribe.get_nrwares(); i.value();) {
 		--i;
-		Economy::Target_Quantity const & tq =
+		const Economy::Target_Quantity & tq =
 			m_eco->m_ware_target_quantities[i.value()];
 		if (Time const last_modified = tq.last_modified) {
 			fw.Unsigned32(last_modified);
@@ -118,7 +118,7 @@ void EconomyDataPacket::Write(FileWrite & fw)
 	}
 	for (Ware_Index i = tribe.get_nrworkers(); i.value();) {
 		--i;
-		Economy::Target_Quantity const & tq =
+		const Economy::Target_Quantity & tq =
 			m_eco->m_worker_target_quantities[i.value()];
 		if (Time const last_modified = tq.last_modified) {
 			fw.Unsigned32(last_modified);

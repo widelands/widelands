@@ -61,7 +61,7 @@ std::string Campaign_visibility_save::get_path()
 /**
  * Create the campaign visibility save-file of the user
  */
-void Campaign_visibility_save::make_campvis(std::string const & savepath)
+void Campaign_visibility_save::make_campvis(const std::string & savepath)
 {
 	// Only prepare campvis-file -> data will be written via update_campvis
 	Profile campvis(savepath.c_str());
@@ -77,7 +77,7 @@ void Campaign_visibility_save::make_campvis(std::string const & savepath)
 /**
  * Update the campaign visibility save-file of the user
  */
-void Campaign_visibility_save::update_campvis(std::string const & savepath)
+void Campaign_visibility_save::update_campvis(const std::string & savepath)
 {
 	// Variable declaration
 	int32_t i = 0;
@@ -163,7 +163,7 @@ void Campaign_visibility_save::update_campvis(std::string const & savepath)
  * \param visible should the map be visible?
  */
 void Campaign_visibility_save::set_campaign_visibility
-	(std::string const & entry, bool visible)
+	(const std::string & entry, bool visible)
 {
 	std::string savepath = get_path();
 	Profile campvis(savepath.c_str());
@@ -181,7 +181,7 @@ void Campaign_visibility_save::set_campaign_visibility
  * \param visible should the map be visible?
  */
 void Campaign_visibility_save::set_map_visibility
-	(std::string const & entry, bool visible)
+	(const std::string & entry, bool visible)
 {
 	std::string savepath = get_path();
 	Profile campvis(savepath.c_str());

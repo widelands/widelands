@@ -22,11 +22,12 @@
 #include "ui_basic/box.h"
 
 #include "economy/portdock.h"
-#include "logic/warehouse.h"
+#include "economy/ware_instance.h"
+#include "graphic/graphic.h"
 #include "interactive_gamebase.h"
 #include "itemwaresdisplay.h"
-#include <economy/ware_instance.h>
-#include <logic/worker.h>
+#include "logic/warehouse.h"
+#include "logic/worker.h"
 
 static const char pic_goto[] = "pics/menu_ship_goto.png";
 static const char pic_destination[] = "pics/menu_ship_destination.png";
@@ -134,8 +135,8 @@ UI::Button * ShipWindow::make_button
 	UI::Button * btn =
 		new UI::Button
 			(parent, name, 0, 0, 34, 34,
-			 g_gr->imgcache().load(PicMod_UI, "pics/but4.png"),
-			 g_gr->imgcache().load(PicMod_Game, picname),
+			 g_gr->images().get("pics/but4.png"),
+			 g_gr->images().get(picname),
 			 title);
 	btn->sigclicked.connect(callback);
 	return btn;

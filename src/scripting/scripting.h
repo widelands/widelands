@@ -42,15 +42,15 @@ namespace Widelands {
 }
 
 struct LuaError : public _wexception {
-	LuaError(std::string const & reason) : wexception("%s", reason.c_str()) {}
+	LuaError(const std::string & reason) : wexception("%s", reason.c_str()) {}
 };
 struct LuaValueError : public LuaError {
-	LuaValueError(std::string const & wanted) :
+	LuaValueError(const std::string & wanted) :
 		LuaError("Variable not of expected type: " + wanted)
 	{}
 };
 struct LuaTableKeyError : public LuaError {
-	LuaTableKeyError(std::string const & wanted) :
+	LuaTableKeyError(const std::string & wanted) :
 		LuaError(wanted + " is not a field in this table.")
 	{}
 };
@@ -96,7 +96,7 @@ struct LuaInterface {
 	virtual ~LuaInterface() {}
 
 	virtual void interpret_string(std::string) = 0;
-	virtual std::string const & get_last_error() const = 0;
+	virtual const std::string & get_last_error() const = 0;
 
 	virtual void register_scripts
 		(FileSystem &, std::string, std::string = "scripting") = 0;

@@ -36,8 +36,8 @@ struct PortDock;
 struct Ship_Descr : Bob::Descr {
 	Ship_Descr
 		(char const * name, char const * descname,
-		 std::string const & directory, Profile &, Section & global_s,
-		 Tribe_Descr const &);
+		 const std::string & directory, Profile &, Section & global_s,
+		 const Tribe_Descr &);
 
 	virtual uint32_t movecaps() const throw ();
 	const DirAnimations & get_sail_anims() const {return m_sail_anims;}
@@ -78,7 +78,7 @@ struct Ship : Bob {
 	void start_task_movetodock(Game &, PortDock &);
 	void start_task_expedition(Game &);
 
-	virtual void log_general_info(Editor_Game_Base const &);
+	virtual void log_general_info(const Editor_Game_Base &);
 
 	uint32_t get_capacity() const {return descr().get_capacity();}
 	uint32_t get_nritems() const {return m_items.size();}

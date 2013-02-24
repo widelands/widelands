@@ -22,6 +22,7 @@
 #include "waresqueuedisplay.h"
 
 #include "economy/request.h"
+#include "graphic/graphic.h"
 #include "logic/constructionsite.h"
 #include "logic/militarysite.h"
 #include "logic/trainingsite.h"
@@ -47,7 +48,7 @@ ProductionSite_Window::ProductionSite_Window
 	 UI::Window *         & registry)
 	: Building_Window(parent, ps, registry)
 {
-	std::vector<Widelands::WaresQueue *> const & warequeues = ps.warequeues();
+	const std::vector<Widelands::WaresQueue*>& warequeues = ps.warequeues();
 
 	if (warequeues.size()) {
 		// Add the wares tab
@@ -62,7 +63,7 @@ ProductionSite_Window::ProductionSite_Window
 				 UI::Box::AlignLeft);
 
 		get_tabs()->add
-			("wares", g_gr->imgcache().load(PicMod_Game, pic_tab_wares),
+			("wares", g_gr->images().get(pic_tab_wares),
 			 prod_box, _("Wares"));
 	}
 
@@ -89,8 +90,8 @@ ProductionSite_Window::ProductionSite_Window
 			m_worker_caps->add_inf_space();
 			UI::Button * evict_button = new UI::Button
 							(m_worker_caps, "evict", 0, 0, 34, 34,
-							 g_gr->imgcache().load(PicMod_UI, "pics/but4.png"),
-							 g_gr->imgcache().load(PicMod_Game, "pics/menu_drop_soldier.png"),
+							 g_gr->images().get("pics/but4.png"),
+							 g_gr->images().get("pics/menu_drop_soldier.png"),
 							 _("Terminate the employment of the selected worker"));
 			evict_button->sigclicked.connect
 					(boost::bind(&ProductionSite_Window::evict_worker, boost::ref(*this)));
@@ -100,7 +101,7 @@ ProductionSite_Window::ProductionSite_Window
 		worker_box->add(m_worker_table, UI::Box::AlignLeft, true);
 		worker_box->add(m_worker_caps, UI::Box::AlignLeft, true);
 		get_tabs()->add
-			("workers", g_gr->imgcache().load(PicMod_UI, pic_tab_workers),
+			("workers", g_gr->images().get(pic_tab_workers),
 			 worker_box,
 			 productionsite().descr().nr_working_positions() > 1 ?
 			 _("Workers") : _("Worker"));

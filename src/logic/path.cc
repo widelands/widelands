@@ -78,7 +78,7 @@ void Path::save(FileWrite & fw) const
  * The path previously contained in \p this object is entirely
  * replaced by the path from the file.
  */
-void Path::load(FileRead & fr, Map const & map)
+void Path::load(FileRead & fr, const Map & map)
 {
 	uint8_t version = fr.Unsigned8();
 	if (version != 1)
@@ -191,7 +191,7 @@ void CoordPath::append(const Map & map, const Path & tail) {
 Append the given path.
 ===============
 */
-void CoordPath::append(CoordPath const & tail)
+void CoordPath::append(const CoordPath & tail)
 {
 	assert(tail.get_start() == get_end());
 

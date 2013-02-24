@@ -64,19 +64,19 @@ private:
 		(ProductionSite         &, FileRead  &, Game &, Map_Map_Object_Loader &);
 
 	virtual void write_constructionsite
-		(ConstructionSite const &, FileWrite &, Game &, Map_Map_Object_Saver  &);
+		(const ConstructionSite &, FileWrite &, Game &, Map_Map_Object_Saver  &);
 	virtual void write_dismantlesite
-		(DismantleSite const &, FileWrite &, Game &, Map_Map_Object_Saver  &);
+		(const DismantleSite &, FileWrite &, Game &, Map_Map_Object_Saver  &);
 	virtual void write_partially_finished_building
-		(Partially_Finished_Building const &, FileWrite &, Game &, Map_Map_Object_Saver  &);
+		(const Partially_Finished_Building &, FileWrite &, Game &, Map_Map_Object_Saver  &);
 	virtual void write_warehouse
-		(Warehouse        const &, FileWrite &, Game &, Map_Map_Object_Saver  &);
+		(const Warehouse        &, FileWrite &, Game &, Map_Map_Object_Saver  &);
 	virtual void write_militarysite
-		(MilitarySite     const &, FileWrite &, Game &, Map_Map_Object_Saver  &);
+		(const MilitarySite     &, FileWrite &, Game &, Map_Map_Object_Saver  &);
 	virtual void write_trainingsite
-		(TrainingSite     const &, FileWrite &, Game &, Map_Map_Object_Saver  &);
+		(const TrainingSite     &, FileWrite &, Game &, Map_Map_Object_Saver  &);
 	virtual void write_productionsite
-		(ProductionSite   const &, FileWrite &, Game &, Map_Map_Object_Saver  &);
+		(const ProductionSite   &, FileWrite &, Game &, Map_Map_Object_Saver  &);
 };
 
 }

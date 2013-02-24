@@ -60,33 +60,10 @@ const SDL_PixelFormat & gl_rgba_format()
 	return format;
 }
 
-const SDL_PixelFormat & gl_rgb_format()
-{
-	static SDL_PixelFormat format;
-	static bool init = false;
-	if (init)
-		return format;
-
-	init = true;
-	memset(&format, 0, sizeof(format));
-	format.BitsPerPixel = 32;
-	format.BytesPerPixel = 4;
-	format.Rmask = 0x000000ff;
-	format.Gmask = 0x0000ff00;
-	format.Bmask = 0x00ff0000;
-	format.Amask = 0x00000000;
-	format.Rshift = 0;
-	format.Gshift = 8;
-	format.Bshift = 16;
-	format.Ashift = 24;
-	return format;
-}
-
-
 GLenum _handle_glerror(const char * file, unsigned int line)
 {
 	GLenum err = glGetError();
-#ifdef DEBUG
+#ifndef NDEBUG
 	if (err == GL_NO_ERROR)
 		return err;
 

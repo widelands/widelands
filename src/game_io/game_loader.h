@@ -35,7 +35,7 @@ struct Game_Preload_Data_Packet;
  * of a game out to a file.
  */
 struct Game_Loader {
-	Game_Loader(std::string const & path, Game &);
+	Game_Loader(const std::string & path, Game &);
 	~Game_Loader();
 
 	int32_t preload_game(Game_Preload_Data_Packet &);

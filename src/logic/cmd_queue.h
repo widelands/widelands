@@ -130,7 +130,7 @@ class Cmd_Queue {
 		int32_t category;
 		uint32_t serial;
 
-		bool operator< (cmditem const & c) const
+		bool operator< (const cmditem & c) const
 		{
 			if (cmd->duetime() != c.cmd->duetime())
 				return cmd->duetime() > c.cmd->duetime();

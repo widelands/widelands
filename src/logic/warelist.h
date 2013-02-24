@@ -50,9 +50,9 @@ struct WareList {
 	Ware_Index get_nrwareids() const {return Ware_Index(m_wares.size());}
 
 	void add   (Ware_Index, count_type = 1);
-	void add(WareList const &);
+	void add(const WareList &);
 	void remove(Ware_Index, count_type = 1);
-	void remove(WareList const & wl);
+	void remove(const WareList & wl);
 	count_type stock(Ware_Index) const;
 
 	void set_nrwares(Ware_Index const i) {
@@ -60,8 +60,8 @@ struct WareList {
 		m_wares.resize(i.value(), 0);
 	}
 
-	bool operator== (WareList const &)    const;
-	bool operator!= (WareList const & wl) const {return not (*this == wl);}
+	bool operator== (const WareList &)    const;
+	bool operator!= (const WareList & wl) const {return not (*this == wl);}
 
 	mutable boost::signal<void ()> changed;
 

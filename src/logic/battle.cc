@@ -365,16 +365,16 @@ void Battle::Loader::load_pointers()
 		if (m_first)
 			try {
 				battle.m_first = &mol().get<Soldier>(m_first);
-			} catch (_wexception const & e) {
+			} catch (const _wexception & e) {
 				throw wexception("soldier 1 (%u): %s", m_first, e.what());
 			}
 		if (m_second)
 			try {
 				battle.m_second = &mol().get<Soldier>(m_second);
-			} catch (_wexception const & e) {
+			} catch (const _wexception & e) {
 				throw wexception("soldier 2 (%u): %s", m_second, e.what());
 			}
-	} catch (_wexception const & e) {
+	} catch (const _wexception & e) {
 		throw wexception("battle: %s", e.what());
 	}
 }

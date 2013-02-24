@@ -26,7 +26,7 @@
 /// a string with newline characters into lines, because it would ignore empty
 /// lines.
 std::vector<std::string> split_string
-	(std::string const & s, char const * const separators)
+	(const std::string & s, char const * const separators)
 {
 	std::vector<std::string> result;
 	for

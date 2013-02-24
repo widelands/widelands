@@ -17,6 +17,7 @@
  *
  */
 
+#include "graphic/graphic.h"
 #include "logic/trainingsite.h"
 #include "productionsitewindow.h"
 #include "soldiercapacitycontrol.h"
@@ -52,7 +53,7 @@ TrainingSite_Window::TrainingSite_Window
 ProductionSite_Window  (parent, ts, registry)
 {
 	get_tabs()->add
-		("soldiers", g_gr->imgcache().load(PicMod_Game, pic_tab_military),
+		("soldiers", g_gr->images().get(pic_tab_military),
 		 create_soldier_list(*get_tabs(), parent, trainingsite()),
 		 _("Soldiers in training"));
 }
