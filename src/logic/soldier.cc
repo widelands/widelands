@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2011 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2013 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -345,6 +345,11 @@ void Soldier::init(Editor_Game_Base & egbase)
 void Soldier::cleanup(Editor_Game_Base & egbase)
 {
 	Worker::cleanup(egbase);
+}
+
+bool Soldier::is_evict_allowed()
+{
+	return !isOnBattlefield();
 }
 
 /*

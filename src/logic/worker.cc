@@ -1671,6 +1671,7 @@ void Worker::shipping_update(Game & game, State & state)
  *
  * ivar1 - 0: no task has failed; 1: currently in buildingwork;
  *         2: signal failure of buildingwork
+ * ivar2 - whether the worker is to be evicted
  */
 const Bob::Task Worker::taskBuildingwork = {
 	"buildingwork",
@@ -1687,7 +1688,9 @@ const Bob::Task Worker::taskBuildingwork = {
 void Worker::start_task_buildingwork(Game & game)
 {
 	push_task(game, taskBuildingwork);
-	top_state().ivar1 = 0;
+	State & state = top_state();
+	state.ivar1 = 0;
+	state.ivar2 = 0;
 }
 
 
@@ -1699,6 +1702,9 @@ void Worker::buildingwork_update(Game & game, State & state)
 
 	if (state.ivar1 == 1)
 		state.ivar1 = (signal == "fail") * 2;
+
+	if (state.ivar2 == 1)
+		return pop_task(game); // evict worker
 
 	// Return to building, if necessary
 	upcast(Building, building, get_location(game));
@@ -1733,6 +1739,23 @@ void Worker::update_task_buildingwork(Game & game)
 		send_signal(game, "update");
 }
 
+/**
+ * Evict the worker from its current building.
+ */
+void Worker::evict(Game & game)
+{
+	if (State * state = get_state(taskBuildingwork)) {
+		if (is_evict_allowed()) {
+			state->ivar2 = 1;
+			send_signal(game, "evict");
+		}
+	}
+}
+
+bool Worker::is_evict_allowed()
+{
+	return true;
+}
 
 /**
  * Return to our owning building.
