@@ -295,9 +295,8 @@ Tribe_Descr::Tribe_Descr
 
 			// Register Lua scripts
 			if (g_fs->IsDirectory(path + "scripting")) {
-				boost::scoped_ptr<FileSystem> sub_fs(&g_fs->MakeSubFileSystem(path));
-				egbase.lua().register_scripts
-					(*sub_fs.get(), "tribe_" + tribename);
+				boost::scoped_ptr<FileSystem> sub_fs(g_fs->MakeSubFileSystem(path));
+				egbase.lua().register_scripts(*sub_fs, "tribe_" + tribename);
 			}
 
 			// Read initializations -- all scripts are initializations currently
@@ -403,9 +402,10 @@ bool Tribe_Descr::exists_tribe
 					prof.get_safe_section("tribe").get_int("uiposition", 0);
 
 				std::string path = "tribes/" + name + "/scripting";
-				if (g_fs->IsDirectory(path))
-					lua->register_scripts
-						(g_fs->MakeSubFileSystem(path), "tribe_" + name, "");
+				if (g_fs->IsDirectory(path)) {
+					boost::scoped_ptr<FileSystem> sub_fs(g_fs->MakeSubFileSystem(path));
+					lua->register_scripts(*sub_fs, "tribe_" + name, "");
+				}
 
 				ScriptContainer & scripts = lua->get_scripts_for("tribe_" + name);
 				container_iterate_const(ScriptContainer, scripts, s) {

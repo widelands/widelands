@@ -63,9 +63,8 @@ public:
 	virtual StreamWrite * OpenStreamWrite
 		(const std::string & fname);
 
-	virtual FileSystem &   MakeSubFileSystem(const std::string & dirname);
-	virtual FileSystem & CreateSubFileSystem
-		(const std::string & dirname, Type);
+	virtual FileSystem * MakeSubFileSystem(const std::string & dirname);
+	virtual FileSystem * CreateSubFileSystem(const std::string & dirname, Type);
 	virtual void Unlink(const std::string & filename);
 	virtual void Rename(const std::string &, const std::string &);
 

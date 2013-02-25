@@ -905,9 +905,8 @@ void NetClient::handle_packet(RecvPacket & packet)
 			LuaInterface * lua = create_LuaInterface();
 			std::string path = "tribes/" + info.name;
 			if (g_fs->IsDirectory(path)) {
-				boost::scoped_ptr<FileSystem> sub_fs(&g_fs->MakeSubFileSystem(path));
-				lua->register_scripts
-					(*sub_fs.get(), "tribe_" + info.name);
+				boost::scoped_ptr<FileSystem> sub_fs(g_fs->MakeSubFileSystem(path));
+				lua->register_scripts(*sub_fs, "tribe_" + info.name);
 			}
 
 			for (uint8_t j = packet.Unsigned8(); j; --j) {

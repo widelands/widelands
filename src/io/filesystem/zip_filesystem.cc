@@ -185,7 +185,7 @@ bool ZipFilesystem::IsDirectory(const std::string & path) {
 /**
  * Create a sub filesystem out of this filesystem
  */
-FileSystem & ZipFilesystem::MakeSubFileSystem(const std::string & path) {
+FileSystem * ZipFilesystem::MakeSubFileSystem(const std::string & path) {
 	m_OpenUnzip();
 
 	assert(FileExists(path));
@@ -198,8 +198,8 @@ FileSystem & ZipFilesystem::MakeSubFileSystem(const std::string & path) {
 	if (*localpath.begin() == '/')
 		localpath = localpath.substr(1);
 
-	ZipFilesystem & newfs = *new ZipFilesystem(m_zipfilename);
-	newfs.m_basename = m_basename + "/" + localpath;
+	ZipFilesystem * newfs = new ZipFilesystem(m_zipfilename);
+	newfs->m_basename = m_basename + "/" + localpath;
 
 	return newfs;
 }
@@ -209,8 +209,7 @@ FileSystem & ZipFilesystem::MakeSubFileSystem(const std::string & path) {
  * \todo type should be recognized automatically, \see Filesystem::Create
  * \throw ZipOperation_error
  */
-FileSystem & ZipFilesystem::CreateSubFileSystem
-	(const std::string & path, Type const type)
+FileSystem * ZipFilesystem::CreateSubFileSystem(const std::string & path, Type const type)
 {
 	assert(!FileExists(path));
 
@@ -229,9 +228,9 @@ FileSystem & ZipFilesystem::CreateSubFileSystem
 	if (*localpath.begin() == '/')
 		localpath = localpath.substr(1);
 
-	ZipFilesystem & newfs = *new ZipFilesystem(*this);
+	ZipFilesystem * newfs = new ZipFilesystem(*this);
 
-	newfs.m_basename = m_basename + "/" + localpath;
+	newfs->m_basename = m_basename + "/" + localpath;
 
 	return newfs;
 }
