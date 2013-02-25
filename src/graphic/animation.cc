@@ -18,7 +18,6 @@
  */
 
 // NOCOM(#sirver): check for ME also in conf files and therelike.
-// NOCOM(#sirver): check includes I guess
 #include <cassert>
 
 #include <boost/algorithm/string/replace.hpp>
@@ -52,7 +51,7 @@ using namespace std;
 
 namespace  {
 
-// NOCOM(#sirver): docu
+// Parses a point from a string like 'p=x,y' into p. Throws on error.
 void parse_point(const string& def, Point* p) {
 	vector<string> split_vector;
 	boost::split(split_vector, def, boost::is_any_of(","));
@@ -63,6 +62,7 @@ void parse_point(const string& def, Point* p) {
 	p->y = boost::lexical_cast<int32_t>(split_vector[1]);
 }
 
+// Parses a rect from a string like 'p=x,y,w,h' into r. Throws on error.
 void parse_rect(const string& def, Rect* r) {
 	vector<string> split_vector;
 	boost::split(split_vector, def, boost::is_any_of(","));
@@ -95,6 +95,7 @@ public:
 		if (surf)
 			return surf;
 
+		// Blit the animation on a freshly wiped surface.
 		surf = Surface::create(width(), height());
 		surf->fill_rect(Rect(0, 0, surf->width(), surf->height()), RGBAColor(255, 255, 255, 0));
 		anim_->blit(0, Point(0,0), Rect(0,0,width(), height()), &clr_, surf);
@@ -112,7 +113,7 @@ private:
 
 /**
  * Implements the Animation interface for a packed animation, that is an animation
- * that is contained in a singular image.
+ * that is contained in a singular image (plus one for player color).
  */
 class PackedAnimation : public Animation {
 public:
@@ -142,8 +143,8 @@ private:
 	Point hotspot_;
 	Point base_offset_;
 
-	const Image* image_;
-	const Image* pcmask_;
+	const Image* image_;  // Not owned
+	const Image* pcmask_;  // Not owned
 	std::vector<Region> regions_;
 	string hash_;
 
@@ -179,11 +180,12 @@ PackedAnimation::PackedAnimation(const string& directory, Section& s)
 		sfx_cues[frame_number] = parameters;
 	}
 
-	int32_t const fps = s.get_int("fps");
+	const int32_t fps = s.get_int("fps");
 	if (fps < 0)
 		throw wexception("fps is %i, must be non-negative", fps);
 	if (fps > 0)
 		frametime_ = 1000 / fps;
+
 	hotspot_ = s.get_Point("hotspot");
 
 	// Load the graphis
@@ -233,6 +235,7 @@ PackedAnimation::PackedAnimation(const string& directory, Section& s)
 		r.target_offset.y = region_rect.y;
 		r.w = region_rect.w;
 		r.h = region_rect.h;
+
 		BOOST_FOREACH(const string& offset_string, offset_strings) {
 			parse_point(offset_string, &p);
 			r.source_offsets.push_back(p);
@@ -242,8 +245,6 @@ PackedAnimation::PackedAnimation(const string& directory, Section& s)
 
 	if (!regions_.size())  // No regions? Only one frame then.
 		nr_frames_ = 1;
-	log("#sirver regions_.size(): %u\n", regions_.size());
-	log("#sirver nr_frames(): %u\n", nr_frames());
 }
 
 void PackedAnimation::trigger_soundfx
@@ -282,20 +283,31 @@ void PackedAnimation::blit
 		(dst, use_image->surface(), Rect(base_offset_.x + srcrc.x, base_offset_.y + srcrc.y, srcrc.w, srcrc.h));
 
 	BOOST_FOREACH(const Region& r, regions_) {
-		// Rect rsrc = Rect(r.source_offsets[framenumber], r.w, r.h);
-		// if (srcrc.x > r.target_offset.x + rsrc.w)
-			// continue;
-		// if (srcrc.y > r.target_offset.y + rsrc.w)
-			// continue;
+		Rect rsrc = Rect(r.source_offsets[framenumber], r.w, r.h);
+		Point rdst = dst + r.target_offset - srcrc;
 
-		// rsrc.w -= max(0, srcrc.x - r.target_offset.x);
-		// rsrc.x += max(0, srcrc.x - r.target_offset.x);
-		// rsrc.h -= max(0, srcrc.y - r.target_offset.y);
-		// rsrc.y += max(0, srcrc.y - r.target_offset.y);
-		// NOCOM(#sirver): figure this one out... cheees
-		// target->blit(dst + r.target_offset, use_image->surface(), rsrc);
+		if (srcrc.x > r.target_offset.x) {
+			rdst.x += srcrc.x - r.target_offset.x;
+			rsrc.x += srcrc.x - r.target_offset.x;
+			rsrc.w -= srcrc.x - r.target_offset.x;
+			if (rsrc.w > r.w)
+				continue;
+		}
+		if (srcrc.y > r.target_offset.y) {
+			rdst.y += srcrc.y - r.target_offset.y;
+			rsrc.y += srcrc.y - r.target_offset.y;
+			rsrc.h -= srcrc.y - r.target_offset.y;
+			if (rsrc.h > r.h)
+				continue;
+		}
+		if (r.target_offset.x + rsrc.w > srcrc.x + srcrc.w) {
+			rsrc.w = srcrc.x + srcrc.w - r.target_offset.x;
+		}
+		if (r.target_offset.y + rsrc.h > srcrc.y + srcrc.h) {
+			rsrc.h = srcrc.y + srcrc.h - r.target_offset.y;
+		}
 
-		target->blit(dst + r.target_offset, use_image->surface(), Rect(r.source_offsets[framenumber], r.w, r.h));
+		target->blit(rdst, use_image->surface(), rsrc);
 	}
 }
 
