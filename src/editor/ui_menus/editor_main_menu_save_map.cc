@@ -390,8 +390,8 @@ bool Main_Menu_Save_Map::save_map(std::string filename, bool binary) {
 		g_fs->Unlink(complete_filename);
 	}
 
-	boost::scoped_ptr<FileSystem> fs(
-		g_fs->CreateSubFileSystem(complete_filename, binary ? FileSystem::ZIP : FileSystem::DIR));
+	boost::scoped_ptr<FileSystem> fs
+			(g_fs->CreateSubFileSystem(complete_filename, binary ? FileSystem::ZIP : FileSystem::DIR));
 	Widelands::Map_Saver wms(*fs, eia().egbase());
 	try {
 		wms.save();
