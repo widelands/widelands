@@ -18,13 +18,14 @@
  */
 
 // NOCOM(#sirver): check for ME also in conf files and therelike.
-// // NOCOM(#sirver): add progress bar in loading screen back in.
+// NOCOM(#sirver): check includes I guess
 #include <cassert>
 
 #include <boost/algorithm/string/replace.hpp>
 #include <boost/algorithm/string/split.hpp>
 #include <boost/algorithm/string/trim.hpp>
 #include <boost/foreach.hpp>
+#include <boost/format.hpp>
 #include <boost/lexical_cast.hpp>
 
 #include "constants.h"
@@ -42,6 +43,7 @@
 #include "image_transformations.h"
 #include "logic/instances.h"  // For Map_Object_Descr.
 #include "surface.h"
+#include "surface_cache.h"
 
 #include "animation.h"
 
@@ -74,6 +76,41 @@ void parse_rect(const string& def, Rect* r) {
 }
 
 /**
+ * An Image Implementation that draws a static animation into a surface.
+ */
+class AnimationImage : public Image {
+public:
+	AnimationImage
+		(const string& ghash, const Animation* anim, const RGBColor& clr)
+		: hash_(ghash), anim_(anim), clr_(clr)	{}
+	virtual ~AnimationImage() {}
+
+	// Implements Image.
+	virtual uint16_t width() const {return anim_->width();}
+	virtual uint16_t height() const {return anim_->height();}
+	virtual const string& hash() const {return hash_;}
+	virtual Surface* surface() const {
+		SurfaceCache& surface_cache = g_gr->surfaces();
+		Surface* surf = surface_cache.get(hash_);
+		if (surf)
+			return surf;
+
+		surf = Surface::create(width(), height());
+		surf->fill_rect(Rect(0, 0, surf->width(), surf->height()), RGBAColor(255, 255, 255, 0));
+		anim_->blit(0, Point(0,0), Rect(0,0,width(), height()), &clr_, surf);
+		surface_cache.insert(hash_, surf);
+
+		return surf;
+	}
+
+private:
+	const string hash_;
+	const Animation* const anim_;   // Not owned.
+	const RGBColor clr_;
+};
+
+
+/**
  * Implements the Animation interface for a packed animation, that is an animation
  * that is contained in a singular image.
  */
@@ -93,7 +130,6 @@ public:
 	virtual void trigger_soundfx(uint32_t framenumber, uint32_t stereo_position) const;
 
 private:
-	// NOCOM(#sirver): no support for playercolor at the moment.
 	struct Region {
 		Point target_offset;
 		uint16_t w, h;
@@ -109,6 +145,7 @@ private:
 	const Image* image_;
 	const Image* pcmask_;
 	std::vector<Region> regions_;
+	string hash_;
 
 	/// mapping of soundeffect name to frame number, indexed by frame number .
 	map<uint32_t, string> sfx_cues;
@@ -116,6 +153,8 @@ private:
 
 PackedAnimation::PackedAnimation(const string& directory, Section& s)
 		: width_(0), height_(0), nr_frames_(0), frametime_(FRAME_LENGTH), image_(NULL), pcmask_(NULL) {
+	hash_ = directory + s.get_name();
+
 	// Read mapping from frame numbers to sound effect names and load effects
 	while (Section::Value * const v = s.get_next_val("sfx")) {
 		char * parameters = v->get_string(), * endp;
@@ -216,8 +255,16 @@ void PackedAnimation::trigger_soundfx
 }
 
 const Image& PackedAnimation::representative_image(const RGBColor& clr) const {
-// NOCOM(#sirver): implement this
-	return *g_gr->images().get("pics/but1.png");
+	const string hash =
+		(boost::format("%s:%02x%02x%02x:animation_pic") % hash_ % static_cast<int>(clr.r) %
+		 static_cast<int>(clr.g) % static_cast<int>(clr.b))
+			.str();
+
+	ImageCache& image_cache = g_gr->images();
+	if (image_cache.has(hash))
+		return *image_cache.get(hash);
+
+	return *image_cache.insert(new AnimationImage(hash, this, clr));
 }
 
 void PackedAnimation::blit
@@ -231,10 +278,23 @@ void PackedAnimation::blit
 		use_image = ImageTransformations::player_colored(*clr, image_, pcmask_);
 	}
 
-	// NOCOM(#sirver): do not ignore srcrc
-	target->blit(dst, use_image->surface(), Rect(base_offset_.x, base_offset_.y, width_, height_));
+	target->blit
+		(dst, use_image->surface(), Rect(base_offset_.x + srcrc.x, base_offset_.y + srcrc.y, srcrc.w, srcrc.h));
 
 	BOOST_FOREACH(const Region& r, regions_) {
+		// Rect rsrc = Rect(r.source_offsets[framenumber], r.w, r.h);
+		// if (srcrc.x > r.target_offset.x + rsrc.w)
+			// continue;
+		// if (srcrc.y > r.target_offset.y + rsrc.w)
+			// continue;
+
+		// rsrc.w -= max(0, srcrc.x - r.target_offset.x);
+		// rsrc.x += max(0, srcrc.x - r.target_offset.x);
+		// rsrc.h -= max(0, srcrc.y - r.target_offset.y);
+		// rsrc.y += max(0, srcrc.y - r.target_offset.y);
+		// NOCOM(#sirver): figure this one out... cheees
+		// target->blit(dst + r.target_offset, use_image->surface(), rsrc);
+
 		target->blit(dst + r.target_offset, use_image->surface(), Rect(r.source_offsets[framenumber], r.w, r.h));
 	}
 }
