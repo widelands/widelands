@@ -193,7 +193,7 @@ IF (Compiler_old-style-cast_supported)
     IF (CMAKE_BUILD_TYPE STREQUAL "Debug")
       set (WL_COMPILERFLAG_OLDSTYLECAST " ${PARAMETER_COMPILERFLAG_OLDSTYLECAST_EXTENDED}") #the space is on purpose!
     ELSE (CMAKE_BUILD_TYPE STREQUAL "Debug")
-      include_directories(SYSTEM path ${Boost_INCLUDE_DIR})
+      include_directories(SYSTEM ${Boost_INCLUDE_DIR})
     ENDIF (CMAKE_BUILD_TYPE STREQUAL "Debug")
   ENDIF (WLBUILD_COMPILERVERSION_REP STREQUAL "4.3.2" OR WLBUILD_COMPILERVERSION_REP STREQUAL "4.3.1")
 ENDIF (Compiler_old-style-cast_supported)
