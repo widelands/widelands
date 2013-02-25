@@ -36,8 +36,10 @@ Songset::~Songset()
 	if (m_m)
 		Mix_FreeMusic(m_m);
 
-	if (m_rwops)
+	if (m_rwops) {
 		SDL_FreeRW(m_rwops);
+		m_fr.Close();
+	}
 }
 
 /** Append a song to the end of the songset
@@ -82,12 +84,16 @@ Mix_Music * Songset::get_song()
 	if (m_rwops) {
 		SDL_FreeRW(m_rwops);
 		m_rwops = 0;
-		m_fr.Close();  //TODO: make sure it's open, because otherwise this is a false assert
+		m_fr.Close();
 	}
 
 	//then open the new song
-	if (m_fr.TryOpen(*g_fs, filename.c_str()))
-		m_rwops = SDL_RWFromMem(m_fr.Data(0), m_fr.GetSize());
+	if (m_fr.TryOpen(*g_fs, filename.c_str())) {
+		if (!(m_rwops = SDL_RWFromMem(m_fr.Data(0), m_fr.GetSize()))) {
+			m_fr.Close();  // m_fr should be Open iff m_rwops != 0
+			return 0;
+		}
+	}
 	else
 		return 0;
 
