@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2013-01-25 08:23+0100\n"
-"PO-Revision-Date: 2013-01-30 21:49+0000\n"
-"Last-Translator: Rafael Neri <Unknown>\n"
+"PO-Revision-Date: 2013-02-25 22:44+0000\n"
+"Last-Translator: Israel <Unknown>\n"
 "Language-Team: Brazilian Portuguese <pt_BR@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Launchpad-Export-Date: 2013-01-31 04:32+0000\n"
-"X-Generator: Launchpad (build 16455)\n"
+"X-Launchpad-Export-Date: 2013-02-26 04:31+0000\n"
+"X-Generator: Launchpad (build 16506)\n"
 
 #: ../../src/computer_player.cc:38
 msgid "None"
@@ -39,6 +39,8 @@ msgid ""
 "Waited 5 seconds to close audio. Problems here so killing Widelands. Update "
 "your sound driver and/or SDL to fix this problem\n"
 msgstr ""
+"Esperei 5 segundos para fechar o áudio. Problemas aqui então fechando "
+"Widelands. Atualize seu driver de som e/ou SDL para corrigir esse problema\n"
 
 #: ../../src/wlapplication.cc:1218
 msgid ""
@@ -149,24 +151,25 @@ msgid ""
 " --loadgame=FILENAME  Directly loads the savegame FILENAME.\n"
 msgstr ""
 "Opções de som:\n"
-" --nosound            Inicia o jogo com o som desactivado.\n"
-" --disable_fx         Desactiva os efeitos sonoros.\n"
-" --disable_music      Desactiva a música.\n"
+" --nosound Inicia o jogo com o som desativado.\n"
+" --disable_fx Desativa os efeitos sonoros.\n"
+" --disable_music Desativa a música.\n"
 "\n"
-" --nozip              Não guarda os arquivos em zip binários.\n"
+" --nozip Não guarda os arquivos em zip binários.\n"
 "\n"
-" --editor             Inicia directamente no Editor Widelands.\n"
+" --editor Inicia diretamente no Editor Widelands.\n"
 "                      Pode adicionar =ARQUIVO para carregar o mapa\n"
 "                       nome do ARQUIVO no editor.\n"
-" --scenario=ARQUIVO   Inicia directamente o nome de ARQUIVO como \n"
+" --scenario=ARQUIVO Inicia diretamente o nome de ARQUIVO como\n"
 "                      mapa de cenário.\n"
 "\n"
-" --loadgame=FICHEIRO  Inicia directamente o FICHEIRO do jogo guardado.\n"
+"--loadgame=ARQUIVO Inicia diretamente o ARQUIVO do jogo salvo.\n"
 
 #: ../../src/wlapplication.cc:1388
 msgid ""
 " --dedicated=FILENAME Starts a dedicated server with FILENAME as map\n"
 msgstr ""
+" --dedicated=FILENAME Inicia um servidor dedicado com FILENAME como mapa\n"
 
 #: ../../src/wlapplication.cc:1391
 msgid ""
@@ -211,6 +214,8 @@ msgid ""
 " --opengl=[0|1]\n"
 "                      Enables OpenGL rendering\n"
 msgstr ""
+" --opengl=[0|1]\n"
+"                      Ativa renderização por OpenGL\n"
 
 #: ../../src/wlapplication.cc:1416
 msgid ""
@@ -606,7 +611,7 @@ msgstr "saída de %s"
 #: ../../src/writeHTML.cc:1346 ../../src/writeHTML.cc:1371
 #: ../../src/writeHTML.cc:1396 ../../src/writeHTML.cc:1414
 msgid "Documentation for program command "
-msgstr ""
+msgstr "Documentação para comando de programa "
 
 #: ../../src/writeHTML.cc:1019
 msgid "workers of this site"
@@ -720,7 +725,7 @@ msgstr "economia: %s"
 #: ../../src/economy/fleet.cc:748 ../../src/economy/portdock.cc:443
 #, c-format
 msgid "loading portdock: %s"
-msgstr ""
+msgstr "Carregando cais do porto: %s"
 
 #: ../../src/economy/wares_queue.cc:291
 #, c-format
@@ -979,7 +984,7 @@ msgstr "lógica do jogo : %s"
 #: ../../src/logic/constructionsite.cc:97
 #, c-format
 msgid "%s%% built"
-msgstr ""
+msgstr "%s%% construído"
 
 #: ../../src/logic/critter_bob.cc:388
 #, c-format
@@ -989,7 +994,7 @@ msgstr "carregando animais: %s"
 #: ../../src/logic/dismantlesite.cc:94
 #, c-format
 msgid "%u%% dismantled"
-msgstr ""
+msgstr "%u%% desmontado"
 
 #: ../../src/logic/editor_game_base.cc:284
 msgid "Loading tribes"
@@ -1524,11 +1529,11 @@ msgstr "hibernação: %s"
 #: ../../src/logic/production_program.cc:679
 #, c-format
 msgid "Unknown parameter \"%s\""
-msgstr ""
+msgstr "Parâmetro desconhecido \"%s\""
 
 #: ../../src/logic/production_program.cc:681
 msgid "No parameter given!"
-msgstr ""
+msgstr "Nenhum parâmetro foi dado!"
 
 #: ../../src/logic/production_program.cc:714
 msgid "idle animation is default; calling is not allowed"
@@ -1590,13 +1595,16 @@ msgstr "Não há mais recursos !"
 
 #: ../../src/logic/production_program.cc:1221
 msgid "Main vein exhausted"
-msgstr ""
+msgstr "Veia principal esgotada"
 
 #: ../../src/logic/production_program.cc:1223
 msgid ""
 "This mines' main vein exhausted. Expect strongly diminished returns on "
 "investment. You should consider to expand, dismantle or destruct it."
 msgstr ""
+"A veia principal desta mina está esgotada. Espere um retorno sobre o "
+"investimento fortemente diminuído. Você deve considerar expandir, desmontar "
+"ou destruir a mina."
 
 #: ../../src/logic/production_program.cc:1237
 #: ../../src/logic/production_program.cc:1310
@@ -2068,6 +2076,9 @@ msgid ""
 "forever, which is the default; omit the duration key to make the message "
 "exist forever"
 msgstr ""
+"o valor%u não é permitido como duração; é um valor especial que significa "
+"infinito, que é o padrão; omita a chave de duração para fazer a mensagem "
+"existir para sempre."
 
 #: ../../src/map_io/widelands_map_players_messages_data_packet.cc:111
 #, c-format
@@ -2158,7 +2169,7 @@ msgstr "Problema na conexão"
 
 #: ../../src/network/internet_gaming.cc:115
 msgid "Widelands has not been able to connect to the metaserver."
-msgstr ""
+msgstr "Widelands não conseguiu conectar com o metaservidor."
 
 #: ../../src/network/internet_gaming.cc:121 ../../src/network/netclient.cc:103
 msgid "Could not establish connection to host"
