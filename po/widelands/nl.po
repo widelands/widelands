@@ -7,15 +7,15 @@ msgstr ""
 "Project-Id-Version: Widelands svn4575\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2013-01-25 08:23+0100\n"
-"PO-Revision-Date: 2013-01-03 00:34+0000\n"
-"Last-Translator: Nasenbaer <Unknown>\n"
+"PO-Revision-Date: 2013-02-26 08:05+0000\n"
+"Last-Translator: RickvanderZwet <info@rickvanderzwet.nl>\n"
 "Language-Team: Dutch <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2013-01-26 04:36+0000\n"
-"X-Generator: Launchpad (build 16451)\n"
+"X-Launchpad-Export-Date: 2013-02-27 04:31+0000\n"
+"X-Generator: Launchpad (build 16506)\n"
 "X-Poedit-Country: NETHERLANDS\n"
 "X-Poedit-Language: Dutch\n"
 
@@ -2269,7 +2269,7 @@ msgstr ""
 
 #: ../../src/network/internet_gaming.cc:779
 msgid "Conversion error"
-msgstr ""
+msgstr "Conversie fout"
 
 #: ../../src/network/internet_gaming.cc:780
 #, c-format
