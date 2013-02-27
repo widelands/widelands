@@ -127,6 +127,13 @@ Graphic::Graphic
 #endif
 
 	if (!sdlsurface)
+	{
+		log("Graphics: Could not set videomode: %s\n", SDL_GetError());
+		log("Falling back to default (minimum) graphics settings as last resort\n");
+		flags &= ~SDL_FULLSCREEN;
+		sdlsurface = SDL_SetVideoMode(640, 480, 16, flags);
+	}
+	if (!sdlsurface)
 		throw wexception
 			("Graphics: could not set video mode: %s", SDL_GetError());
 
