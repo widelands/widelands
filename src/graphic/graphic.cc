@@ -119,8 +119,7 @@ Graphic::Graphic
 	// If we tried opengl and it was not successful try without opengl
 	if (!sdlsurface and opengl)
 	{
-		log("Graphics: Could not set videomode: %s\n", SDL_GetError());
-		log("Graphics: Trying without opengl\n");
+		log("Graphics: Could not set videomode: %s, trying without opengl\n", SDL_GetError());
 		flags &= ~SDL_OPENGL;
 		sdlsurface = SDL_SetVideoMode(w, h, bpp, flags);
 	}
@@ -128,14 +127,16 @@ Graphic::Graphic
 
 	if (!sdlsurface)
 	{
-		log("Graphics: Could not set videomode: %s\n", SDL_GetError());
-		log("Falling back to default (minimum) graphics settings as last resort\n");
+		log
+			("Graphics: Could not set videomode: %s, trying minimum graphics settings\n",
+			 SDL_GetError());
 		flags &= ~SDL_FULLSCREEN;
-		sdlsurface = SDL_SetVideoMode(640, 480, 16, flags);
+		sdlsurface = SDL_SetVideoMode
+			(FALLBACK_GRAPHICS_WIDTH, FALLBACK_GRAPHICS_HEIGHT, FALLBACK_GRAPHICS_DEPTH, flags);
+		if (!sdlsurface)
+			throw wexception
+				("Graphics: could not set video mode: %s", SDL_GetError());
 	}
-	if (!sdlsurface)
-		throw wexception
-			("Graphics: could not set video mode: %s", SDL_GetError());
 
 	// setting the videomode was successful. Print some information now
 	log("Graphics: Setting video mode was successful\n");
