@@ -395,7 +395,7 @@ void LayeredFileSystem::EnsureDirectoryExists(const std::string & dirname) {
 /**
  * Create a subfilesystem from an existing file/directory
  */
-FileSystem & LayeredFileSystem::MakeSubFileSystem(const std::string & dirname)
+FileSystem * LayeredFileSystem::MakeSubFileSystem(const std::string & dirname)
 {
 	if (m_home and m_home->IsWritable() and m_home->FileExists(dirname))
 		return m_home->MakeSubFileSystem(dirname);
@@ -414,8 +414,7 @@ FileSystem & LayeredFileSystem::MakeSubFileSystem(const std::string & dirname)
 /**
  * Create a subfilesystem from a new file/directory
  */
-FileSystem & LayeredFileSystem::CreateSubFileSystem
-	(const std::string & dirname, Type const type)
+FileSystem * LayeredFileSystem::CreateSubFileSystem(const std::string & dirname, Type const type)
 {
 	if (m_home and m_home->IsWritable() and not m_home->FileExists(dirname))
 		return m_home->CreateSubFileSystem(dirname, type);

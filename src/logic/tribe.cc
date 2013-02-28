@@ -48,6 +48,7 @@
 
 #include <iostream>
 #include <boost/algorithm/string.hpp>
+#include <boost/scoped_ptr.hpp>
 
 using namespace std;
 
@@ -98,7 +99,7 @@ Tribe_Descr::Tribe_Descr
 			if (Section * const section = root_conf.get_section("compatibility_wares")) {
 				while (Section::Value const * const v = section->get_next_val()) {
 					log("Compatibility ware \"%s\"=\"%s\" loaded.\n", v->get_name(), v->get_string());
-					m_compatibility_wares[* new std::string(v->get_name())] = * new std::string(v->get_string());
+					m_compatibility_wares[v->get_name()] = v->get_string();
 				}
 			}
 
@@ -293,9 +294,10 @@ Tribe_Descr::Tribe_Descr
 			}
 
 			// Register Lua scripts
-			if (g_fs->IsDirectory(path + "scripting"))
-				egbase.lua().register_scripts
-					(g_fs->MakeSubFileSystem(path), "tribe_" + tribename);
+			if (g_fs->IsDirectory(path + "scripting")) {
+				boost::scoped_ptr<FileSystem> sub_fs(g_fs->MakeSubFileSystem(path));
+				egbase.lua().register_scripts(*sub_fs, "tribe_" + tribename);
+			}
 
 			// Read initializations -- all scripts are initializations currently
 			ScriptContainer & scripts =
@@ -400,9 +402,10 @@ bool Tribe_Descr::exists_tribe
 					prof.get_safe_section("tribe").get_int("uiposition", 0);
 
 				std::string path = "tribes/" + name + "/scripting";
-				if (g_fs->IsDirectory(path))
-					lua->register_scripts
-						(g_fs->MakeSubFileSystem(path), "tribe_" + name, "");
+				if (g_fs->IsDirectory(path)) {
+					boost::scoped_ptr<FileSystem> sub_fs(g_fs->MakeSubFileSystem(path));
+					lua->register_scripts(*sub_fs, "tribe_" + name, "");
+				}
 
 				ScriptContainer & scripts = lua->get_scripts_for("tribe_" + name);
 				container_iterate_const(ScriptContainer, scripts, s) {

@@ -41,6 +41,8 @@
 
 #include "upcast.h"
 
+#include <boost/scoped_ptr.hpp>
+
 #include <cstdio>
 #include <cstring>
 #include <string>
@@ -388,10 +390,9 @@ bool Main_Menu_Save_Map::save_map(std::string filename, bool binary) {
 		g_fs->Unlink(complete_filename);
 	}
 
-	FileSystem & fs =
-		g_fs->CreateSubFileSystem
-			(complete_filename, binary ? FileSystem::ZIP : FileSystem::DIR);
-	Widelands::Map_Saver wms(fs, eia().egbase());
+	boost::scoped_ptr<FileSystem> fs
+			(g_fs->CreateSubFileSystem(complete_filename, binary ? FileSystem::ZIP : FileSystem::DIR));
+	Widelands::Map_Saver wms(*fs, eia().egbase());
 	try {
 		wms.save();
 		eia().set_need_save(false);
@@ -405,7 +406,6 @@ bool Main_Menu_Save_Map::save_map(std::string filename, bool binary) {
 			(&eia(), _("Save Map Error!!"), s, UI::WLMessageBox::OK);
 		mbox.run();
 	}
-	delete &fs;
 	die();
 
 	return true;

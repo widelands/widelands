@@ -20,6 +20,8 @@
 #include <cstring>
 #include <iostream>
 
+#include <boost/foreach.hpp>
+
 #include <SDL_image.h>
 #include <config.h>
 
@@ -298,6 +300,8 @@ GCC_DIAG_ON ("-Wold-style-cast")
 */
 Graphic::~Graphic()
 {
+	BOOST_FOREACH(Texture* texture, m_maptextures)
+		delete texture;
 	delete m_rendertarget;
 
 #if USE_OPENGL
