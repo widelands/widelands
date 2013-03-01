@@ -1969,29 +1969,10 @@ bool Map::can_reach_by_water(const Coords field) const
 
 	FCoords neighb;
 
-	get_tln(fc, &neighb);
-	if (fc.field->nodecaps() & MOVECAPS_SWIM)
-		return true;
-
-	get_trn(fc, &neighb);
-	if (fc.field->nodecaps() & MOVECAPS_SWIM)
-		return true;
-
-	get_rn(fc, &neighb);
-	if (fc.field->nodecaps() & MOVECAPS_SWIM)
-		return true;
-
-	get_brn(fc, &neighb);
-	if (fc.field->nodecaps() & MOVECAPS_SWIM)
-		return true;
-
-	get_bln(fc, &neighb);
-	if (fc.field->nodecaps() & MOVECAPS_SWIM)
-		return true;
-
-	get_ln(fc, &neighb);
-	if (fc.field->nodecaps() & MOVECAPS_SWIM)
-		return true;
+	for (Direction dir = FIRST_DIRECTION; dir <= LAST_DIRECTION; ++dir) {
+		if (get_neighbour(fc, dir).field->nodecaps() & MOVECAPS_SWIM)
+			return true;
+	}
 
 	return false;
 }
