@@ -503,6 +503,12 @@ void Graphic::save_png_(Surface & surf, StreamWrite * sw) const
 	png_destroy_write_struct(&png_ptr, &info_ptr);
 }
 
+void Graphic::flush_maptextures()
+{
+	BOOST_FOREACH(Texture* texture, m_maptextures)
+		delete texture;
+	m_maptextures.clear();
+}
 
 /**
  * Creates a terrain texture.
