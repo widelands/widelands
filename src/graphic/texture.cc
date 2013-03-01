@@ -45,6 +45,7 @@ Texture::Texture(const string& fnametmpl, uint32_t frametime, const SDL_PixelFor
 		m_pixels   (0),
 		m_curframe (0),
 		m_frame_num(0),
+		m_texture_image(NULL),
 		m_nrframes (0),
 		m_frametime(frametime),
 		is_32bit   (format.BytesPerPixel == 4),
@@ -75,6 +76,7 @@ Texture::Texture(const string& fnametmpl, uint32_t frametime, const SDL_PixelFor
 
 		SDL_Surface * surf;
 
+		if (m_texture_image) free(m_texture_image);
 		m_texture_image = strdup(fname);
 
 		FileRead fr;
