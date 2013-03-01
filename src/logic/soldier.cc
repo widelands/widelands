@@ -404,8 +404,9 @@ uint32_t Soldier::get_level(tAttribute const at) const {
 	case atrEvade:   return m_evade_level;
 	case atrTotal:
 		return m_hp_level + m_attack_level + m_defense_level + m_evade_level;
+	default:
+		throw wexception ("Soldier::get_level attribute not identified.");
 	}
-	throw wexception ("Soldier::get_level attribute not identified.");
 }
 
 
@@ -418,9 +419,9 @@ int32_t Soldier::get_tattribute(uint32_t const attr) const
 	case atrEvade: return m_evade_level;
 	case atrTotal:
 		return m_hp_level + m_attack_level + m_defense_level + m_evade_level;
+	default:
+		return Worker::get_tattribute(attr);
 	}
-
-	return Worker::get_tattribute(attr);
 }
 
 uint32_t Soldier::get_max_hitpoints() const
@@ -524,6 +525,8 @@ Point Soldier::calc_drawpos
 			break;
 		case CD_NONE:
 			break;
+		default:
+			assert(false);
 	}
 
 	if (moving) {
@@ -1308,6 +1311,8 @@ void Soldier::move_in_battle_update(Game & game, State &)
 			case CD_COMBAT_E:
 				m_combat_walking = CD_NONE;
 				break;
+			default:
+				assert(false);
 		}
 		return pop_task(game);
 	} else

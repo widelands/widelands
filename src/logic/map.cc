@@ -46,11 +46,6 @@
 
 
 
-#define AVG_ELEVATION   (0x80000000)
-#define MAX_ELEVATION   (0xffffffff)
-#define MAP_ID_DIGITS   20
-#define ISLAND_BORDER   10
-
 namespace Widelands {
 
 
