@@ -1441,30 +1441,20 @@ void Worker::transfer_update(Game & game, State & /* state */) {
 		}
 	}
 
-	// If our location is a building, make sure we're actually in it.
-	// If we're a building's worker, and we've just been released from
-	// the building, we may be somewhere else entirely (e.g. lumberjack, soldier)
-	// or we may be on the building's flag for a fetch_from_flag or dropoff
-	// task.
+	// If our location is a building, our position may be somewhere else:
+	// We may be on the building's flag for a fetch_from_flag or dropoff task.
+	// We may also be somewhere else entirely (e.g. lumberjack, soldier).
 	// Similarly for flags.
-	if (dynamic_cast<Building const *>(location)) {
-		BaseImmovable * const position = map[get_position()].get_immovable();
-
-		if (position != location) {
-			if (upcast(Flag, flag, position)) {
-				location = flag;
-				set_location(flag);
-			} else
-				return set_location(0);
-		}
+	if (upcast(Building, building, location)) {
+		if (building->get_position() != get_position())
+			return start_task_leavebuilding(game, true);
 	} else if (upcast(Flag, flag, location)) {
 		BaseImmovable * const position = map[get_position()].get_immovable();
 
 		if (position != flag) {
 			if (position == flag->get_building()) {
-				upcast(Building, building, position);
-				set_location(building);
-				location = building;
+				location = flag->get_building();
+				set_location(location);
 			} else
 				return set_location(0);
 		}
@@ -1681,6 +1671,7 @@ void Worker::shipping_update(Game & game, State & state)
  *
  * ivar1 - 0: no task has failed; 1: currently in buildingwork;
  *         2: signal failure of buildingwork
+ * ivar2 - whether the worker is to be evicted
  */
 const Bob::Task Worker::taskBuildingwork = {
 	"buildingwork",
@@ -1697,7 +1688,9 @@ const Bob::Task Worker::taskBuildingwork = {
 void Worker::start_task_buildingwork(Game & game)
 {
 	push_task(game, taskBuildingwork);
-	top_state().ivar1 = 0;
+	State & state = top_state();
+	state.ivar1 = 0;
+	state.ivar2 = 0;
 }
 
 
@@ -1709,6 +1702,9 @@ void Worker::buildingwork_update(Game & game, State & state)
 
 	if (state.ivar1 == 1)
 		state.ivar1 = (signal == "fail") * 2;
+
+	if (state.ivar2 == 1)
+		return pop_task(game); // evict worker
 
 	// Return to building, if necessary
 	upcast(Building, building, get_location(game));
@@ -1743,6 +1739,23 @@ void Worker::update_task_buildingwork(Game & game)
 		send_signal(game, "update");
 }
 
+/**
+ * Evict the worker from its current building.
+ */
+void Worker::evict(Game & game)
+{
+	if (State * state = get_state(taskBuildingwork)) {
+		if (is_evict_allowed()) {
+			state->ivar2 = 1;
+			send_signal(game, "evict");
+		}
+	}
+}
+
+bool Worker::is_evict_allowed()
+{
+	return true;
+}
 
 /**
  * Return to our owning building.
@@ -1998,9 +2011,7 @@ void Worker::gowarehouse_update(Game & game, State & /* state */)
 
 	// Always leave buildings in an orderly manner,
 	// even when no warehouses are left to return to
-	if
-		(location->get_type() == BUILDING &&
-		 get_position() == static_cast<Building *>(location)->get_position())
+	if (location->get_type() == BUILDING)
 		return start_task_leavebuilding(game, true);
 
 	if (!get_economy()->warehouses().size()) {
@@ -2384,14 +2395,19 @@ void Worker::leavebuilding_update(Game & game, State & state)
 	else if (signal.size())
 		return pop_task(game);
 
-	if (upcast(Building, building, game.map().get_immovable(get_position()))) {
-		assert(building == state.objvar1.get(game));
+	upcast(Building, building, get_location(game));
+	if (!building)
+		return pop_task(game);
 
+	Flag & baseflag = building->base_flag();
+
+	if (get_position() == building->get_position()) {
+		assert(building == state.objvar1.get(game));
 		if (!building->leave_check_and_wait(game, *this))
 			return skip_act();
 
 		if (state.ivar1)
-			set_location(&building->base_flag());
+			set_location(&baseflag);
 
 		return
 			start_task_move
@@ -2399,8 +2415,22 @@ void Worker::leavebuilding_update(Game & game, State & state)
 				 WALK_SE,
 				 &descr().get_right_walk_anims(does_carry_ware()),
 				 true);
-	} else
-		return pop_task(game);
+	} else {
+		const Coords & flagpos = baseflag.get_position();
+
+		if (state.ivar1)
+			set_location(&baseflag);
+
+		if (get_position() == flagpos)
+			return pop_task(game);
+
+		if (!start_task_movepath(game, flagpos, 0, descr().get_right_walk_anims(does_carry_ware()))) {
+			molog("[leavebuilding]: outside of building, but failed to walk back to flag");
+			set_location(0);
+			return pop_task(game);
+		}
+		return;
+	}
 }
 
 

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2010 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2013 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -286,6 +286,8 @@ protected:
 	static Task const taskMoveInBattle;
 	// May be this can be moved this to bob when finished
 	static Task const taskDie;
+
+	virtual bool is_evict_allowed();
 
 private:
 	uint32_t m_hp_current;
