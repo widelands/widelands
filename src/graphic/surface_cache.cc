@@ -64,6 +64,9 @@ private:
 };
 
 SurfaceCacheImpl::~SurfaceCacheImpl() {
+	for (Container::iterator it = map_.begin(); it != map_.end(); ++it) {
+		delete it->second;
+	}
 }
 
 Surface* SurfaceCacheImpl::get(const std::string& hash) {
