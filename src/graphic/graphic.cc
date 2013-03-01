@@ -304,6 +304,8 @@ Graphic::~Graphic()
 		delete texture;
 	delete m_rendertarget;
 
+	flush_animations();
+
 #if USE_OPENGL
 	if (g_opengl)
 		GLSurfaceTexture::Cleanup();
