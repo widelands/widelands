@@ -130,6 +130,7 @@ uint32_t AnimationManager::get
 	// Read mapping from frame numbers to sound effect names and load effects
 	while (Section::Value * const v = s.get_next_val("sfx")) {
 		char * parameters = v->get_string(), * endp;
+		std::string fx_name;
 		unsigned long long int const value = strtoull(parameters, &endp, 0);
 		uint32_t const frame_number = value;
 		try {
@@ -139,7 +140,8 @@ uint32_t AnimationManager::get
 					 _("frame number"), parameters);
 			parameters = endp;
 			force_skip(parameters);
-			g_sound_handler.load_fx(directory, parameters);
+			fx_name = std::string(directory) + "/" + std::string(parameters);
+			g_sound_handler.load_fx_if_needed(directory, parameters, fx_name);
 			std::map<uint32_t, std::string>::const_iterator const it =
 				ad.sfx_cues.find(frame_number);
 			if (it != ad.sfx_cues.end())
@@ -150,7 +152,7 @@ uint32_t AnimationManager::get
 		} catch (const _wexception & e) {
 			throw wexception("sfx: %s", e.what());
 		}
-		ad.sfx_cues[frame_number] = parameters;
+		ad.sfx_cues[frame_number] = fx_name;
 	}
 
 	ad.hasplrclrs = s.get_bool("playercolor", false);

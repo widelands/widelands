@@ -19,10 +19,11 @@
 
 #include "worker_program.h"
 
-#include "profile/profile.h"
 #include "findnode.h"
 #include "game_data_error.h"
 #include "helper.h"
+#include "profile/profile.h"
+#include "sound/sound_handler.h"
 #include "tribe.h"
 
 namespace Widelands {
@@ -639,13 +640,16 @@ void WorkerProgram::parse_scout
 void WorkerProgram::parse_playFX
 	(Worker_Descr                   *,
 	 Worker::Action                 * act,
-	 Parser                         *,
+	 Parser                         * parser,
 	 const std::vector<std::string> & cmd)
 {
 	if (cmd.size() < 2 || cmd.size() > 3)
 		throw wexception("Usage: playFX <fx_name> [priority]");
 
-	act->sparam1 = cmd[1];
+	act->sparam1 = parser->directory + "/" + cmd[1];
+
+	g_sound_handler.load_fx_if_needed(parser->directory, cmd[1], act->sparam1);
+
 	act->function = &Worker::run_playFX;
 	act->iparam1 =
 		cmd.size() == 2 ?

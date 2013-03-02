@@ -768,7 +768,7 @@ void Panel::die()
  */
 void Panel::play_click()
 {
-	g_sound_handler.play_fx("click", 128, PRIO_ALWAYS_PLAY);
+	g_sound_handler.play_fx("sound/click", 128, PRIO_ALWAYS_PLAY);
 }
 
 /**

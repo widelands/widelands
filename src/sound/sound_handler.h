@@ -176,9 +176,10 @@ public:
 	void read_config();
 	void load_system_sounds();
 
-	void load_fx
+	void load_fx_if_needed
 		(const std::string & dir,
-		 const std::string & basename,
+		 const std::string & filename,
+		 const std::string & fx_name,
 		 bool                recursive = false);
 	void play_fx
 		(const std::string & fx_name,

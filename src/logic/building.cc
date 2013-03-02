@@ -164,9 +164,6 @@ Building_Descr::Building_Descr
 				add_animation("empty", g_anim.get(directory.c_str(), *empty, 0));
 	}
 
-	while (Section::Value const * const v = global_s.get_next_val("soundfx"))
-		g_sound_handler.load_fx(directory, v->get_string());
-
 	m_vision_range = global_s.get_int("vision_range");
 }
 

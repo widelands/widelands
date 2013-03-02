@@ -129,6 +129,8 @@ struct ImmovableProgram {
 	/// Parameter syntax:
 	///    parameters ::= soundFX [priority]
 	/// Parameter semantics:
+	///    directory:
+	///       The directory of the productionsite.
 	///    soundFX:
 	///       The filename of an soundFX (relative to the productionsite's
 	///       directory).
@@ -138,7 +140,7 @@ struct ImmovableProgram {
 	/// Plays the specified soundFX with the specified priority. Whether the
 	/// soundFX is actually played is determined by the sound handler.
 	struct ActPlayFX : public Action {
-		ActPlayFX(char * parameters, const Immovable_Descr &);
+		ActPlayFX(const std::string & directory, char * parameters, const Immovable_Descr &);
 		virtual void execute(Game &, Immovable &) const;
 	private:
 		std::string name;

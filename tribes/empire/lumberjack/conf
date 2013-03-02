@@ -1,7 +1,5 @@
 help=_Fells trees.
 program=chop
-soundfx=../../../sound/spoken/timber
-soundfx=../../../sound/woodcutting/fast_woodcutting
 
 [buildcost]
 carrier=1

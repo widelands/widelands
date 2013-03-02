@@ -1,7 +1,6 @@
 help=_Discovers resources for mining.
 program=expedition
 program=search
-soundfx=../../../sound/hammering/geologist_hammer
 
 [buildcost]
 carrier=1

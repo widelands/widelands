@@ -215,16 +215,16 @@ void Player::update_team_players() {
  * enabled.
  */
 void Player::play_message_sound(const std::string & sender) {
-#define MAYBE_PLAY(a) if (sender == a) { \
-	g_sound_handler.play_fx(a, 200, PRIO_ALWAYS_PLAY); \
+#define MAYBE_PLAY(a, b) if (sender == a) { \
+	g_sound_handler.play_fx(b, 200, PRIO_ALWAYS_PLAY); \
 	return; \
 	}
 
 	if (g_options.pull_section("global").get_bool("sound_at_message", true)) {
-		MAYBE_PLAY("site_occupied");
-		MAYBE_PLAY("under_attack");
+		MAYBE_PLAY("site_occupied", "sound/military/site_occupied");
+		MAYBE_PLAY("under_attack", "sound/military/under_attack");
 
-		g_sound_handler.play_fx("message", 200, PRIO_ALWAYS_PLAY);
+		g_sound_handler.play_fx("sound/message", 200, PRIO_ALWAYS_PLAY);
 	}
 }
 
