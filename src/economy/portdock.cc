@@ -476,10 +476,12 @@ void PortDock::cancel_expedition(Game & game) {
 	// Send all workers from the expedition list back inside the warehouse
 	std::vector<Warehouse::Expedition_Worker *> & ew = m_warehouse->get_expedition_workers();
 	for (uint8_t i = 0; i < ew.size(); ++i) {
-		if (ew.at(i)->worker_request)
+		if (ew.at(i)->worker_request) {
 			delete &ew.at(i)->worker_request;
-		else
-			m_warehouse->incorporate_worker(game, *ew.at(i)->worker);
+		} else {;}
+		// NOTE Nothing to do at the moment - in the current way the builder is already listed inside the
+		// NOTE the warehouse, so incoporating the worker again would increase the number of builders
+		// NOTE although nothing actually changed. Maybe this behaviour can be improved???
 	}
 	// Reset expedition workers list
 	ew.resize(0);
