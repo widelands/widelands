@@ -1324,7 +1324,7 @@ void Map::recalc_nodecaps_pass2(const FCoords & f)
 		// order neighbour is >= 3, we can only build a small house here.
 		// Additionally, we can potentially build a port on this field
 		// if one of the second order neighbours is swimmable.
-		if (buildsize == BaseImmovable::BIG) {
+		if (buildsize >= BaseImmovable::MEDIUM) {
 			MapFringeRegion<Area<FCoords> > mr(*this, Area<FCoords>(f, 2));
 
 			do {
