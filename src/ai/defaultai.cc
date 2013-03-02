@@ -88,6 +88,10 @@ DefaultAI::~DefaultAI()
 		delete mineable_fields.back();
 		mineable_fields.pop_back();
 	}
+	while (not economies.empty()) {
+		delete economies.back();
+		economies.pop_back();
+	}
 
 }
 
