@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2011 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2013 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -879,6 +879,8 @@ void ProductionSite::program_end(Game & game, Program_Result const result)
 		break;
 	case None:
 		break;
+	default:
+		throw wexception("[ProductionSite::program_end]: impossible result");
 	}
 
 	m_program_timer = true;

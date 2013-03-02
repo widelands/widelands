@@ -638,8 +638,7 @@ void Cmd_EvictWorker::execute (Game & game)
 {
 	upcast(Worker, worker, game.objects().get_object(serial));
 	if (worker && worker->owner().player_number() == sender()) {
-		worker->reset_tasks(game);
-		worker->start_task_gowarehouse(game);
+		worker->evict(game);
 	}
 }
 
