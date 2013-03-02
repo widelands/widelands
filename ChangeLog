@@ -1,3 +1,100 @@
+### Build 18 until now
+- Added a preview for the costs of a building and the resources gained
+  through buildingdismantling.
+- Added a button to productionsites to evict workers.
+- Added new win condition: Territorial time similar to territorial lord.
+- Added support for a "message of the day" to Widelands and
+  Widelands' dedicated server.
+- Added new game tips.
+- Improved start up time through on demand loading of graphics.
+- Improved Widelands' rich text rendering engine a lot and improved
+  all kind of text in different places..
+- Improved OpenGL rendering leading to a huge speed up.
+- Improved the old stock charts and added some new ones.
+- Improved graphics and animations on many places.
+- Improved graphics used in road building mode to indicate the steepness.
+- Improved multiplayer scenario "Smugglers".
+- Improved Empire Inn to be backward compatible.
+- Improved Widelands' translations and added some new ones.
+- Fixed a bunch of memory leaks.
+- Fixed a bunch of compiler warnings.
+- Fixed an editor crash when trying to save a map inside a subdirectory.
+- Fixed bug #536161:  Widelands bundles internal copy of unzip.cc 
+- Fixed bug #535806:  Loading images takes a tremendous amount of time 
+- Fixed bug #536482:  Downgrade skilled workers when possible 
+- Fixed bug #536571:  Empire Inns should be able to produce rations. 
+- Fixed bug #566970:  Unable to attack castle 
+- Fixed bug #714036:  Add evict worker button to productionsites 
+- Fixed bug #726139:  Numeric wares display in warehouses not updating correctly 
+- Fixed bug #740401:  Preview required building costs before building or upgrading 
+- Fixed bug #744595:  clang llvm 2.9 compiler widelands crash 
+- Fixed bug #787464:  Hard to tell the difference between actual flags and possible flags for the yellow player 
+- Fixed bug #796673:  Roads "light up" in the fog of war 
+- Fixed bug #796690:  Atleantean resource signs have a red tint 
+- Fixed bug #802432:  wreck sail is blue instead of white 
+- Fixed bug #818823:  Multiplayer game kicked out players after being paused for a while (Broken pipe) 
+- Fixed bug #825957:  Warnings at compile-time (GCC) 
+- Fixed bug #861840:  building near shoreline 
+- Fixed bug #900784:  Screen resolution can be set too large in windowed mode 
+- Fixed bug #902464:  Upgrading building: number of wares in stock window not updated 
+- Fixed bug #913369:  Warnings at compile-time (clang/llvm) 
+- Fixed bug #939709:  Make OpenGL terrain rendering less demanding on hardware 
+- Fixed bug #955908:  Open stockstatistics with a button 
+- Fixed bug #961548:  widelands executable links against boost_unit_test_framework in Debug mode 
+- Fixed bug #963963:  Game crashes when ship construction site cannot be cleared for a new ship 
+- Fixed bug #970264:  Missing SDL_* libraries lead to rather useless messages 
+- Fixed bug #970840:  new graph: availability of wares 
+- Fixed bug #972759:  barbarian beer icons misleading 
+- Fixed bug #974679:  Inconsistent behaviour in soldier creation leads to irregular economy state 
+- Fixed bug #975495:  lua bug in "Together we are strong" map 
+- Fixed bug #975840:  test_routing.cc:97 Same expression on both sides of '-' 
+- Fixed bug #975847:  increase and decrese resource tool has methods with multiple consecutive returns 
+- Fixed bug #976077:  x\y axis in ware statistics are wrong 
+- Fixed bug #976551:  ftbfs with gcc 4.7 if not including <unistd.h> 
+- Fixed bug #978169:  Global militarysites icons not updated 
+- Fixed bug #979937:  Coal can be replaced by other ressources in the editor 
+- Fixed bug #983448:  Improve OpenBSD support 
+- Fixed bug #984110:  memory leak in src/ai/defaultai.cc:1439 
+- Fixed bug #984165:  Make the increase/reduce wares buttons repeatable 
+- Fixed bug #984197:  Suggestion: Confirmation window for dismantling production building 
+- Fixed bug #986534:  Improve in-game checkboxes 
+- Fixed bug #986910:  Multiplayer game setup does not show team suggestions for maps 
+- Fixed bug #988498:  Suggestion: remove cppcheck related stuff from build 
+- Fixed bug #989483:  Widelands host crashes if a client connection breaks 
+- Fixed bug #989489:  After leaving an internet game, Widelands freezes in the lobby 
+- Fixed bug #992466:  dedicated server regression: not able to choose map 
+- Fixed bug #993293:  EnsureDirectoryExists() does only work with a path deepth of 1. 
+- Fixed bug #995011:  They can attack me but I can't attack them 
+- Fixed bug #996965:  Fail to build on amd64 
+- Fixed bug #998828:  Only coal can be placed in the editor 
+- Fixed bug #1016104: The stock plot is quite wrong 
+- Fixed bug #1019585: Building window background "jumping" when previewing upgrade build cost 
+- Fixed bug #1020736: CrossPlatform Path fix: remove ":" in path names on Windows 
+- Fixed bug #1022267: stock chart counts wares in every building 
+- Fixed bug #1023264: Scouts explore consistently to the west 
+- Fixed bug #1024549: Crash in Build Cost Preview in Observer Mode 
+- Fixed bug #1025014: segmentation fault in widelands 
+- Fixed bug #1025848: --version prints more and less than it should 
+- Fixed bug #1027058: Connection lost after some time if all players pause in multiplayer 
+- Fixed bug #1033213: Assertion in nethost is always true 
+- Fixed bug #1033216: Undefined identifiers used 
+- Fixed bug #1050431: Worker icons should not contain letters for levels 
+- Fixed bug #1063233: Starting game while savegame is still being transferred 
+- Fixed bug #1074979: economy mismatch after building a third port 
+- Fixed bug #1090433: dedicated server module not working on windows 
+- Fixed bug #1093848: Remove ware removes wares without placing them outside the building 
+- Fixed bug #1095695: Middle-clicking in any window will crash the game (assertion error) 
+- Fixed bug #1095702: Game crashed with OpenGL ERROR: out of memory 
+- Fixed bug #1096362: Crash when increasing speed in a internet game as observer
+                      (only happens on dedicated servers) 
+- Fixed bug #1096651: Windowed graphics resolution change does not resize window
+- Fixed bug #1097420: Window tabs in map editor cause exception 
+- Fixed bug #1099094: Tutorial description bug 
+- Fixed bug #1104462: Untranslatable strings 
+- Fixed bug #1115664: Extremely slow framerate/performance with OpenGL
+- Fixed bug #1125539: Roads not rendered in road building mode 
+
+
 ### Build 17
 - Diversified heal rate for military buildings - the bigger, the quicker.
 - Improved and remodelled a lot of the buildings' animations.

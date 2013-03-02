@@ -75,10 +75,14 @@ throw (_wexception)
 					if (!surf)
 						continue; //  Illegal pic. Skip it.
 
-					const Image* image =
-					g_gr->images().insert
-					(new_in_memory_image
-					 (std::string("map:") + FileSystem::FS_Filename(pname->c_str()), Surface::create(surf)));
+					const std::string hash = std::string("map:") + FileSystem::FS_Filename(pname->c_str());
+					const Image* image = NULL;
+					if (!g_gr->images().has(hash)) {
+						image = g_gr->images().insert(new_in_memory_image(hash, Surface::create(surf)));
+					} else {
+						image = g_gr->images().get(hash);
+					}
+					assert(image);
 
 					//  OK, the pic is now known to the game. But when the game is
 					//  saved, this data has to be regenerated.

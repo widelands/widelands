@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2008, 2010-2011 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2008, 2010-2013 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -43,7 +43,6 @@ Game_Main_Menu_Save_Game::Game_Main_Menu_Save_Game
 #define WINDOW_WIDTH                                                        440
 #define WINDOW_HEIGHT                                                       440
 #define VMARGIN                                                               5
-#define HMARGIN                                                               5
 #define VSPACING                                                              5
 #define HSPACING                                                              5
 #define EDITBOX_HEIGHT                                                       20
