@@ -254,7 +254,7 @@ void Carrier::deliver_to_building(Game & game, State & state)
 			start_task_move
 				(game,
 				 WALK_SE,
-				 &descr().get_right_walk_anims(does_carry_ware()),
+				 descr().get_right_walk_anims(does_carry_ware()),
 				 true);
 	} else {
 		//  tough luck, the building has disappeared
@@ -358,7 +358,7 @@ void Carrier::enter_building(Game & game, State & state)
 			start_task_move
 				(game,
 				 WALK_NW,
-				 &descr().get_right_walk_anims(does_carry_ware()),
+				 descr().get_right_walk_anims(does_carry_ware()),
 				 true);
 	}
 }

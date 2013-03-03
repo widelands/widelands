@@ -50,7 +50,6 @@ struct Map_Map_Object_Loader;
  * link them together
  */
 struct Map_Object_Descr : boost::noncopyable {
-	friend struct ::DirAnimations;
 	typedef uint8_t Index;
 	Map_Object_Descr(char const * const _name, char const * const _descname)
 		: m_name(_name), m_descname(_descname)

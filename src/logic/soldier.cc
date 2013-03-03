@@ -920,7 +920,7 @@ void Soldier::attack_update(Game & game, State & state)
 				start_task_move
 					(game,
 					 WALK_NW,
-					 &descr().get_right_walk_anims(does_carry_ware()),
+					 descr().get_right_walk_anims(does_carry_ware()),
 					 true);
 
 		if
@@ -1170,7 +1170,7 @@ void Soldier::defense_update(Game & game, State & state)
 				start_task_move
 					(game,
 					 WALK_NW,
-					 &descr().get_right_walk_anims(does_carry_ware()),
+					 descr().get_right_walk_anims(does_carry_ware()),
 					 true);
 		}
 
@@ -1402,7 +1402,7 @@ void Soldier::battle_update(Game & game, State &)
 				start_task_move
 					(game,
 					 WALK_SE,
-					 &descr().get_right_walk_anims(does_carry_ware()),
+					 descr().get_right_walk_anims(does_carry_ware()),
 					 true);
 		}
 	}

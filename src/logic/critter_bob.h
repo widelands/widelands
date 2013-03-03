@@ -50,7 +50,7 @@ private:
 	DirAnimations m_walk_anims;
 	bool          m_swimming;
 	typedef std::map<std::string, Critter_BobProgram *> Programs;
-	Programs    m_programs;
+	Programs      m_programs;
 };
 
 class Critter_Bob : public Bob {
