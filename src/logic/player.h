@@ -129,7 +129,7 @@ struct Player :
 	/// Per-player and per-field constructionsite information
 	struct Constructionsite_Information {
 		Constructionsite_Information() : becomes(0), was(0), totaltime(0), completedtime(0) {}
-		const Building_Descr * becomes;
+		const Building_Descr * becomes; // Also works as a marker telling whether there is a construction site.
 		const Building_Descr * was; // only valid if "becomes" is an enhanced building.
 		uint32_t               totaltime;
 		uint32_t               completedtime;
