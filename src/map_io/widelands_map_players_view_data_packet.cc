@@ -823,10 +823,10 @@ throw (_wexception)
 								(f_player_field.time_node_last_unseen);
 							assert(f_player_field.owner < 0x20);
 							owners_file.Unsigned8(f_player_field.owner);
-							Map_Object_Data * mod = new Map_Object_Data;
-							mod->map_object_descr = f_player_field.map_object_descr[TCoords<>::None];
-							mod->csi              = f_player_field.constructionsite;
-							write_unseen_immovable(mod, node_immovable_kinds_file, node_immovables_file);
+							Map_Object_Data mod;
+							mod.map_object_descr = f_player_field.map_object_descr[TCoords<>::None];
+							mod.csi              = f_player_field.constructionsite;
+							write_unseen_immovable(&mod, node_immovable_kinds_file, node_immovables_file);
 
 							// write whether this field had a border the last time it was seen
 							border_file.put(f_player_field.border    ? 1 : 0);
@@ -843,9 +843,9 @@ throw (_wexception)
 							 (f_everseen | bl_everseen | br_everseen))
 						{
 							terrains_file.put(f_player_field.terrains.d);
-							Map_Object_Data * mod = new Map_Object_Data;
-							mod->map_object_descr = f_player_field.map_object_descr[TCoords<>::D];
-							write_unseen_immovable(mod, triangle_immovable_kinds_file, triangle_immovables_file);
+							Map_Object_Data mod;
+							mod.map_object_descr = f_player_field.map_object_descr[TCoords<>::D];
+							write_unseen_immovable(&mod, triangle_immovable_kinds_file, triangle_immovables_file);
 						}
 						if
 							//  the player does not see the R triangle now but has
@@ -854,9 +854,9 @@ throw (_wexception)
 							 (f_everseen | br_everseen |  r_everseen))
 						{
 							terrains_file.put(f_player_field.terrains.r);
-							Map_Object_Data * mod = new Map_Object_Data;
-							mod->map_object_descr = f_player_field.map_object_descr[TCoords<>::R];
-							write_unseen_immovable(mod, triangle_immovable_kinds_file, triangle_immovables_file);
+							Map_Object_Data mod;
+							mod.map_object_descr = f_player_field.map_object_descr[TCoords<>::R];
+							write_unseen_immovable(&mod, triangle_immovable_kinds_file, triangle_immovables_file);
 						}
 
 						//  edges
