@@ -92,6 +92,10 @@ DefaultAI::~DefaultAI()
 		delete economies.back();
 		economies.pop_back();
 	}
+	while (not blocked_fields.empty()) {
+		delete blocked_fields.back();
+		blocked_fields.pop_back();
+	}
 
 }
 
@@ -409,6 +413,7 @@ void DefaultAI::update_all_mineable_fields(const int32_t gametime)
 
 		//  check whether we lost ownership of the node
 		if (mf->coords.field->get_owned_by() != player_number()) {
+			delete mf;
 			mineable_fields.pop_front();
 			continue;
 		}
@@ -814,8 +819,10 @@ bool DefaultAI::construct_building (int32_t) // (int32_t gametime)
 	for
 		(std::list<BlockedField *>::iterator i = blocked_fields.begin();
 		 i != blocked_fields.end();)
-		if ((*i)->blocked_until < game().get_gametime())
+		if ((*i)->blocked_until < game().get_gametime()){
+			delete *i;
 			i = blocked_fields.erase(i);
+		}
 		else ++i;
 
 	// first scan all buildable fields for regular buildings
