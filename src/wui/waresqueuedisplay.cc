@@ -79,6 +79,7 @@ m_show_only(show_only)
 
 WaresQueueDisplay::~WaresQueueDisplay()
 {
+	delete m_priority_radiogroup;
 }
 
 /**
