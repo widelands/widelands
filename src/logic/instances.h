@@ -348,7 +348,7 @@ struct Object_Manager : boost::noncopyable {
 		return it != m_objects.end() ? it->second : 0;
 	}
 
-	void insert(Map_Object &);
+	void insert(Map_Object *);
 	void remove(Map_Object &);
 
 	bool object_still_available(const Map_Object * const t) const {
