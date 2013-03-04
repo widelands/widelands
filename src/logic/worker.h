@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2010 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2013 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -171,6 +171,7 @@ public:
 
 	void start_task_buildingwork(Game &);
 	void update_task_buildingwork(Game &);
+	void evict(Game &);
 
 	void start_task_return(Game & game, bool dropitem);
 	void start_task_program(Game & game, const std::string & programname);
@@ -192,6 +193,7 @@ public:
 	void start_task_scout(Game &, uint16_t, uint32_t);
 
 protected:
+	virtual bool is_evict_allowed();
 	void draw_inner(const Editor_Game_Base &, RenderTarget &, Point) const;
 	virtual void draw(const Editor_Game_Base &, RenderTarget &, Point) const;
 	virtual void init_auto_task(Game &);

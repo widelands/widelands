@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2008-2009 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2008-2013 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -115,20 +115,20 @@ WUIPlot_Area::UNIT WUIPlot_Area::get_suggested_unit(uint32_t game_time) {
 
 std::string WUIPlot_Area::get_unit_name(UNIT unit) {
 	switch (unit) {
-		case UNIT_DAY:  return _("d");
-		case UNIT_HOUR: return _("h");
-		case UNIT_MIN:  return _("min");
+	case UNIT_DAY:  return _("d");
+	case UNIT_HOUR: return _("h");
+	case UNIT_MIN:  return _("min");
+	default: return "invalid";
 	}
-	return "invalid";
 }
 
 uint32_t WUIPlot_Area::ms_to_unit(UNIT unit, uint32_t ms) {
 	switch (unit) {
-		case UNIT_DAY: return ms / days;
-		case UNIT_HOUR: return ms / hours;
-		case UNIT_MIN: return ms / minutes;
+	case UNIT_DAY: return ms / days;
+	case UNIT_HOUR: return ms / hours;
+	case UNIT_MIN: return ms / minutes;
+	default: return -1;
 	}
-	return -1;
 }
 
 std::vector<std::string> WUIPlot_Area::get_labels() {

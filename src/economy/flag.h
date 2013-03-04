@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004, 2006-2012 by the Widelands Development Team
+ * Copyright (C) 2004, 2006-2013 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -74,7 +74,7 @@ struct Flag : public PlayerImmovable, public RoutingNode {
 
 	virtual Flag & base_flag();
 
-	Coords get_position() const {return m_position;}
+	const Coords & get_position() const {return m_position;}
 	virtual PositionList get_positions (const Editor_Game_Base &) const throw ();
 	void get_neighbours(WareWorker type, RoutingNodeNeighbours &);
 	int32_t get_waitcost() const {return m_item_filled;}

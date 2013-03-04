@@ -117,9 +117,7 @@ void Sound_Handler::init()
 	if
 		(SDL_InitSubSystem(SDL_INIT_AUDIO) == -1
 		 or
-		 Mix_OpenAudio(MIX_DEFAULT_FREQUENCY, MIX_DEFAULT_FORMAT, 2, bufsize)
-		 ==
-		 -1)
+		 Mix_OpenAudio(MIX_DEFAULT_FREQUENCY, MIX_DEFAULT_FORMAT, 2, bufsize) == -1)
 	{
 		SDL_QuitSubSystem(SDL_INIT_AUDIO);
 		log("WARNING: Failed to initialize sound system: %s\n", Mix_GetError());
@@ -159,7 +157,7 @@ void Sound_Handler::shutdown()
 	if (SDL_InitSubSystem(SDL_INIT_AUDIO) == -1) {
 		log ("audio error %s\n", SDL_GetError());
 	}
-	char * text = new char[15];
+	char * text = new char[21];
 	SDL_AudioDriverName(text, 20);
 	log("SDL_AUDIODRIVER %s\n", text);
 	delete text;

@@ -25,6 +25,8 @@
 #include "map_io/widelands_map_loader.h"
 #include "map_io/widelands_map_saver.h"
 
+#include <boost/scoped_ptr.hpp>
+
 namespace Widelands {
 
 #define CURRENT_PACKET_VERSION 1
@@ -44,7 +46,7 @@ void Game_Map_Data_Packet::Read
 	//  Now Load the map as it would be a normal map saving.
 	delete m_wml;
 
-	m_wml = new WL_Map_Loader(fs.MakeSubFileSystem("map"), &game.map());
+	m_wml = new WL_Map_Loader(*fs.MakeSubFileSystem("map"), &game.map());
 
 	m_wml->preload_map(true);
 	m_wml->load_world();
@@ -65,8 +67,8 @@ void Game_Map_Data_Packet::Write
 	(FileSystem & fs, Game & game, Map_Map_Object_Saver * const)
 {
 
-	std::auto_ptr<FileSystem> mapfs
-		(&fs.CreateSubFileSystem("map", FileSystem::DIR));
+	boost::scoped_ptr<FileSystem> mapfs
+		(fs.CreateSubFileSystem("map", FileSystem::DIR));
 
 	//  Now Write the map as it would be a normal map saving.
 	delete m_wms;

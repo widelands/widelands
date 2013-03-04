@@ -333,8 +333,9 @@ void Editor_Interactive::set_sel_radius_and_update_menu(uint32_t const val) {
 bool Editor_Interactive::handle_key(bool const down, SDL_keysym const code) {
 	bool handled = Interactive_Base::handle_key(down, code);
 
-	if (down)
+	if (down) {
 		// only on down events
+
 		switch (code.sym) {
 			// Sel radius
 		case SDLK_1:
@@ -463,7 +464,7 @@ bool Editor_Interactive::handle_key(bool const down, SDL_keysym const code) {
 			break;
 
 		}
-	else
+	} else {
 		// key up events
 		switch (code.sym) {
 		case SDLK_LSHIFT:
@@ -478,7 +479,7 @@ bool Editor_Interactive::handle_key(bool const down, SDL_keysym const code) {
 		default:
 			break;
 		}
-
+	}
 	return handled;
 }
 

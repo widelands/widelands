@@ -45,6 +45,7 @@
 #include "ui_basic/progresswindow.h"
 
 #include <boost/lexical_cast.hpp>
+#include <boost/scoped_ptr.hpp>
 #include <config.h>
 #ifndef HAVE_VARARRAY
 #include <climits>
@@ -904,8 +905,8 @@ void NetClient::handle_packet(RecvPacket & packet)
 			LuaInterface * lua = create_LuaInterface();
 			std::string path = "tribes/" + info.name;
 			if (g_fs->IsDirectory(path)) {
-				lua->register_scripts
-					(g_fs->MakeSubFileSystem(path), "tribe_" + info.name);
+				boost::scoped_ptr<FileSystem> sub_fs(g_fs->MakeSubFileSystem(path));
+				lua->register_scripts(*sub_fs, "tribe_" + info.name);
 			}
 
 			for (uint8_t j = packet.Unsigned8(); j; --j) {

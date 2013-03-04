@@ -30,7 +30,9 @@
 // Widelands: silence warnings about unused variables, usually because they
 //are only used in conditional asserts
 #include "compile_diagnostics.h"
+GCC_DIAG_OFF("-Wunused-macros")
 GCC_DIAG_OFF("-Wunused-variable")
+CLANG_DIAG_OFF("-Wunused-macros")
 CLANG_DIAG_OFF("-Wunused-variable")
 
 // Forward declarated from lua_impl.h. So we do not need to include it

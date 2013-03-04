@@ -46,11 +46,6 @@
 
 
 
-#define AVG_ELEVATION   (0x80000000)
-#define MAX_ELEVATION   (0xffffffff)
-#define MAP_ID_DIGITS   20
-#define ISLAND_BORDER   10
-
 namespace Widelands {
 
 
@@ -1329,7 +1324,7 @@ void Map::recalc_nodecaps_pass2(const FCoords & f)
 		// order neighbour is >= 3, we can only build a small house here.
 		// Additionally, we can potentially build a port on this field
 		// if one of the second order neighbours is swimmable.
-		if (buildsize == BaseImmovable::BIG) {
+		if (buildsize >= BaseImmovable::MEDIUM) {
 			MapFringeRegion<Area<FCoords> > mr(*this, Area<FCoords>(f, 2));
 
 			do {
@@ -1772,7 +1767,7 @@ Map_Loader * Map::get_correct_loader(char const * const filename) {
 		 strcasecmp
 		 	(filename + (strlen(filename) - strlen(WLMF_SUFFIX)), WLMF_SUFFIX))
 		try {
-			result = new WL_Map_Loader(g_fs->MakeSubFileSystem(filename), this);
+			result = new WL_Map_Loader(*g_fs->MakeSubFileSystem(filename), this);
 		} catch (...) {
 			//  If this fails, it is an illegal file (maybe old plain binary map
 			//  format)
@@ -1969,29 +1964,10 @@ bool Map::can_reach_by_water(const Coords field) const
 
 	FCoords neighb;
 
-	get_tln(fc, &neighb);
-	if (fc.field->nodecaps() & MOVECAPS_SWIM)
-		return true;
-
-	get_trn(fc, &neighb);
-	if (fc.field->nodecaps() & MOVECAPS_SWIM)
-		return true;
-
-	get_rn(fc, &neighb);
-	if (fc.field->nodecaps() & MOVECAPS_SWIM)
-		return true;
-
-	get_brn(fc, &neighb);
-	if (fc.field->nodecaps() & MOVECAPS_SWIM)
-		return true;
-
-	get_bln(fc, &neighb);
-	if (fc.field->nodecaps() & MOVECAPS_SWIM)
-		return true;
-
-	get_ln(fc, &neighb);
-	if (fc.field->nodecaps() & MOVECAPS_SWIM)
-		return true;
+	for (Direction dir = FIRST_DIRECTION; dir <= LAST_DIRECTION; ++dir) {
+		if (get_neighbour(fc, dir).field->nodecaps() & MOVECAPS_SWIM)
+			return true;
+	}
 
 	return false;
 }

@@ -40,6 +40,7 @@
 #include "launchMPG.h"
 
 #include <boost/format.hpp>
+#include <boost/scoped_ptr.hpp>
 using boost::format;
 
 
@@ -376,9 +377,9 @@ void Fullscreen_Menu_LaunchMPG::select_saved_game() {
 
 	if (g_fs->FileExists(filename.c_str())) {
 		// Read the needed data from file "elemental" of the used map.
-		FileSystem & l_fs = g_fs->MakeSubFileSystem(filename.c_str());
+		boost::scoped_ptr<FileSystem> l_fs(g_fs->MakeSubFileSystem(filename.c_str()));
 		Profile prof;
-		prof.read("map/elemental", 0, l_fs);
+		prof.read("map/elemental", 0, *l_fs);
 		Section & s = prof.get_safe_section("global");
 
 		std::string mapname = s.get_safe_string("name");
@@ -539,9 +540,9 @@ void Fullscreen_Menu_LaunchMPG::set_scenario_values()
  */
 void Fullscreen_Menu_LaunchMPG::load_previous_playerdata()
 {
-	FileSystem & l_fs = g_fs->MakeSubFileSystem(m_settings->settings().mapfilename.c_str());
+	boost::scoped_ptr<FileSystem> l_fs(g_fs->MakeSubFileSystem(m_settings->settings().mapfilename.c_str()));
 	Profile prof;
-	prof.read("map/player_names", 0, l_fs);
+	prof.read("map/player_names", 0, *l_fs);
 	std::string strbuf;
 	std::string infotext = _("Saved players are:");
 	std::string player_save_name [MAX_PLAYERS];

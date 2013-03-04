@@ -28,6 +28,8 @@
 
 #include "log.h"
 
+#include <boost/scoped_ptr.hpp>
+
 using Widelands::Game_Saver;
 
 /**
@@ -142,11 +144,11 @@ bool SaveHandler::save_game
 	g_fs->EnsureDirectoryExists(get_base_dir());
 
 	// Make a filesystem out of this
-	FileSystem * fs = 0;
+	boost::scoped_ptr<FileSystem> fs;
 	if (!binary) {
-		fs = &g_fs->CreateSubFileSystem(complete_filename, FileSystem::DIR);
+		fs.reset(g_fs->CreateSubFileSystem(complete_filename, FileSystem::DIR));
 	} else {
-		fs = &g_fs->CreateSubFileSystem(complete_filename, FileSystem::ZIP);
+		fs.reset(g_fs->CreateSubFileSystem(complete_filename, FileSystem::ZIP));
 	}
 
 	bool result = true;
@@ -158,7 +160,6 @@ bool SaveHandler::save_game
 			*error = e.what();
 		result = false;
 	}
-	delete fs;
 
 	if (result)
 		m_lastSaveTime = WLApplication::get()->get_time();

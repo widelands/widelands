@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2011 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2013 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -131,6 +131,9 @@ void ProductionProgram::parse_ware_type_group
 		case ',':
 			++parameters;
 			break;
+		default:
+			// scan for terminator should ensure that this cannot happen
+			assert(false);
 		}
 	}
 }
@@ -577,6 +580,8 @@ void ProductionProgram::ActCall::execute
 		ps.m_program_timer   = true;
 		ps.m_program_time    = ps.schedule_act(game, 10);
 		break;
+	default:
+		throw wexception("ProductionProgram call: bad result handling method");
 	}
 }
 
@@ -864,8 +869,10 @@ ProductionProgram::ActProduce::ActProduce
 			std::pair<Ware_Index, uint8_t> & item = *m_items.rbegin();
 			skip(parameters);
 			char const * ware = parameters;
-			for (;; ++parameters)
+			for (;; ++parameters) {
 				switch (*parameters) {
+				default:
+					break;
 				case '\0':
 				case ' ':
 					item.second = 1;
@@ -888,6 +895,7 @@ ProductionProgram::ActProduce::ActProduce
 					goto item_end;
 				}
 				}
+			}
 		item_end:
 			more = *parameters != '\0';
 			*parameters = '\0';
@@ -959,8 +967,10 @@ ProductionProgram::ActRecruit::ActRecruit
 			std::pair<Ware_Index, uint8_t> & item = *m_items.rbegin();
 			skip(parameters);
 			char const * worker = parameters;
-			for (;; ++parameters)
+			for (;; ++parameters) {
 				switch (*parameters) {
+				default:
+					break;
 				case '\0':
 				case ' ':
 					item.second = 1;
@@ -983,6 +993,7 @@ ProductionProgram::ActRecruit::ActRecruit
 					goto item_end;
 				}
 				}
+			}
 		item_end:
 			more = *parameters != '\0';
 			*parameters = '\0';

@@ -32,6 +32,10 @@ struct Cmd_LuaCoroutine : public GameLogicCommand {
 	Cmd_LuaCoroutine(int32_t const _duetime, LuaCoroutine * const cr) :
 		GameLogicCommand(_duetime), m_cr(cr) {}
 
+	~Cmd_LuaCoroutine() {
+		delete m_cr;
+	}
+
 	// Write these commands to a file (for savegames)
 	void Write(FileWrite &, Editor_Game_Base &, Map_Map_Object_Saver  &);
 	void Read (FileRead  &, Editor_Game_Base &, Map_Map_Object_Loader &);

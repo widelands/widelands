@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002, 2004, 2006-2010 by the Widelands Development Team
+ * Copyright (C) 2002, 2004, 2006-2013 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -35,6 +35,8 @@
 #include "worlddata.h"
 
 #include "container_iterate.h"
+
+#include <boost/scoped_ptr.hpp>
 
 #include <iostream>
 #include <sstream>
@@ -279,6 +281,8 @@ void MapGenAreaInfo::parseSection
 			readTerrains(m_Terrains1, s, "inner_terrains");
 			readTerrains(m_Terrains2, s, "outer_terrains");
 			break;
+		default:
+			throw wexception("MapGenAreaInfo::parseSection: bad areaType");
 	}
 }
 
@@ -374,8 +378,9 @@ size_t MapGenInfo::getNumAreas
 	case MapGenAreaInfo::atLand:      return m_LandAreas     .size();
 	case MapGenAreaInfo::atMountains: return m_MountainAreas .size();
 	case MapGenAreaInfo::atWasteland: return m_WasteLandAreas.size();
+	default:
+		throw wexception("invalid MapGenAreaType %u", areaType);
 	}
-	throw wexception("invalid MapGenAreaType %u", areaType);
 }
 
 const MapGenAreaInfo & MapGenInfo::getArea
@@ -388,8 +393,9 @@ const MapGenAreaInfo & MapGenInfo::getArea
 	case MapGenAreaInfo::atLand:      return m_LandAreas     .at(index);
 	case MapGenAreaInfo::atMountains: return m_MountainAreas .at(index);
 	case MapGenAreaInfo::atWasteland: return m_WasteLandAreas.at(index);
+	default:
+		throw wexception("invalid MapGenAreaType %u", areaType);
 	}
-	throw wexception("invalid MapGenAreaType %u", areaType);
 }
 
 const MapGenBobKind * MapGenInfo::getBobKind
@@ -521,7 +527,7 @@ World::World(const std::string & name) : m_basedir("worlds/" + name + '/') {
 	try {
 		i18n::Textdomain textdomain("world_" + name);
 
-		std::auto_ptr<FileSystem> fs(&g_fs->MakeSubFileSystem(m_basedir));
+		boost::scoped_ptr<FileSystem> fs(g_fs->MakeSubFileSystem(m_basedir));
 		FileSystemLayer filesystemlayer(*fs);
 
 		{
@@ -766,8 +772,8 @@ bool World::exists_world(std::string worldname)
 	return
 		f.TryOpen
 			(*
-			 std::auto_ptr<FileSystem>
-			 	(&g_fs->MakeSubFileSystem("worlds/" + worldname)),
+			 boost::scoped_ptr<FileSystem>
+				(g_fs->MakeSubFileSystem("worlds/" + worldname)),
 			 "conf");
 }
 

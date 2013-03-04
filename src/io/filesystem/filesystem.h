@@ -95,9 +95,16 @@ public:
 	 */
 	virtual StreamWrite * OpenStreamWrite(const std::string & fname) = 0;
 
-	virtual FileSystem & MakeSubFileSystem(const std::string & dirname) = 0;
-	virtual FileSystem & CreateSubFileSystem
-		(const std::string & dirname, Type) = 0;
+	/**
+	 * Creates a subfilesystem from an existing file/directory.
+	 * Passes ownership to caller.
+	 */
+	virtual FileSystem * MakeSubFileSystem(const std::string & dirname) = 0;
+	/**
+	 * Creates a subfilesystem from a new file/directory.
+	 * Passes ownership to caller.
+	 */
+	virtual FileSystem * CreateSubFileSystem(const std::string & dirname, Type) = 0;
 	virtual void Unlink(const std::string &) = 0;
 	virtual void Rename(const std::string &, const std::string &) = 0;
 

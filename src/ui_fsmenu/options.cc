@@ -355,10 +355,8 @@ void Fullscreen_Menu_Options::advanced_options() {
 
 bool Fullscreen_Menu_Options::handle_key(bool down, SDL_keysym code)
 {
-	if (down)
-	{
-		switch (code.sym)
-		{
+	if (down) {
+		switch (code.sym) {
 			case SDLK_KP_ENTER:
 			case SDLK_RETURN:
 				end_modal(static_cast<int32_t>(om_ok));
@@ -593,10 +591,8 @@ Fullscreen_Menu_Advanced_Options::Fullscreen_Menu_Advanced_Options
 
 bool Fullscreen_Menu_Advanced_Options::handle_key(bool down, SDL_keysym code)
 {
-	if (down)
-	{
-		switch (code.sym)
-		{
+	if (down) {
+		switch (code.sym) {
 			case SDLK_KP_ENTER:
 			case SDLK_RETURN:
 				end_modal(static_cast<int32_t>(om_ok));

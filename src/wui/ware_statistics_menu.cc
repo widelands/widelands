@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2011 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2013 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -36,9 +36,6 @@
 #include "ui_basic/tabpanel.h"
 #include "ui_basic/slider.h"
 
-
-#define MIN_WARES_PER_LINE 7
-#define MAX_WARES_PER_LINE 11
 
 #define PLOT_HEIGHT 100
 

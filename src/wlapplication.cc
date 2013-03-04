@@ -349,6 +349,8 @@ WLApplication::~WLApplication()
 		std::cerr.flush();
 		fclose(stderr);
 	}
+
+	SDL_Quit();
 }
 
 /**

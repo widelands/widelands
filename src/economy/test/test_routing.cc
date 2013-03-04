@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007-2010 by the Widelands Development Team
+ * Copyright (C) 2007-2013 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -60,7 +60,7 @@ public:
 	virtual Flag & base_flag() {return _flag;}
 	void set_waitcost(int32_t const wc) {_waitcost = wc;}
 	int32_t get_waitcost() const {return _waitcost;}
-	Coords get_position() const {return _position;}
+	const Coords & get_position() const {return _position;}
 
 	void get_neighbours(WareWorker type, RoutingNodeNeighbours &);
 

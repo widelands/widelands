@@ -52,6 +52,7 @@
 
 #include <boost/format.hpp>
 #include <boost/lexical_cast.hpp>
+#include <boost/scoped_ptr.hpp>
 #include <sstream>
 
 #ifndef WIN32
@@ -1333,9 +1334,9 @@ void NetHost::dserver_send_maps_and_saves(Client & client) {
 				gl.preload_game(gpdp);
 
 				// If we are here, the saved game is valid
-				FileSystem & sg_fs = g_fs->MakeSubFileSystem(name);
+				boost::scoped_ptr<FileSystem> sg_fs(g_fs->MakeSubFileSystem(name));
 				Profile prof;
-				prof.read("map/elemental", 0, sg_fs);
+				prof.read("map/elemental", 0, *sg_fs);
 				Section & s = prof.get_safe_section("global");
 
 				DedicatedMapInfos info;
@@ -2619,9 +2620,9 @@ void NetHost::handle_packet(uint32_t const i, RecvPacket & r)
 
 						// If we are here, it is a saved game file :)
 						// Read the needed data from file "elemental" of the used map.
-						FileSystem & sg_fs = g_fs->MakeSubFileSystem(path.c_str());
+						boost::scoped_ptr<FileSystem> sg_fs(g_fs->MakeSubFileSystem(path.c_str()));
 						Profile prof;
-						prof.read("map/elemental", 0, sg_fs);
+						prof.read("map/elemental", 0, *sg_fs);
 						Section & s = prof.get_safe_section("global");
 						uint8_t nr_players = s.get_safe_int("nr_players");
 
