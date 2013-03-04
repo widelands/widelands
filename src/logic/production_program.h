@@ -535,6 +535,8 @@ struct ProductionProgram {
 	/// Parameter syntax:
 	///    parameters ::= soundFX [priority]
 	/// Parameter semantics:
+	///    directory:
+	///       The directory of the productionsite.
 	///    soundFX:
 	///       The filename of an soundFX (relative to the productionsite's
 	///       directory).
@@ -544,7 +546,7 @@ struct ProductionProgram {
 	/// Plays the specified soundFX with the specified priority. Whether the
 	/// soundFX is actually played is determined by the sound handler.
 	struct ActPlayFX : public Action {
-		ActPlayFX(char * parameters, const ProductionSite_Descr &);
+		ActPlayFX(const std::string & directory, char * parameters, const ProductionSite_Descr &);
 		virtual void execute(Game &, ProductionSite &) const;
 #ifdef WRITE_GAME_DATA_AS_HTML
 		virtual void writeHTML

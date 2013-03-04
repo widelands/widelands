@@ -136,7 +136,7 @@ ImmovableProgram::ImmovableProgram
 		else if (not strcmp(v->get_name(), "seed"))
 			action = new ActSeed     (v->get_string(), immovable);
 		else if (not strcmp(v->get_name(), "playFX"))
-			action = new ActPlayFX   (v->get_string(), immovable);
+			action = new ActPlayFX   (directory, v->get_string(), immovable);
 		else if (not strcmp(v->get_name(), "construction"))
 			action = new ActConstruction(v->get_string(), immovable, directory, prof);
 		else
@@ -849,11 +849,12 @@ void ImmovableProgram::ActAnimate::execute
 
 
 ImmovableProgram::ActPlayFX::ActPlayFX
-	(char * parameters, const Immovable_Descr &)
+	(const std::string & directory, char * parameters, const Immovable_Descr &)
 {
 	try {
 		bool reached_end;
-		name = match(parameters, reached_end);
+		std::string filename = match(parameters, reached_end);
+		name = directory + "/" + filename;
 
 		if (not reached_end) {
 			char * endp;
@@ -864,6 +865,8 @@ ImmovableProgram::ActPlayFX::ActPlayFX
 					(_("expected %s but found \"%s\""), _("priority"), parameters);
 		} else
 			priority = 127;
+
+		g_sound_handler.load_fx_if_needed(directory, filename, name);
 	} catch (const _wexception & e) {
 		throw game_data_error("playFX: %s", e.what());
 	}

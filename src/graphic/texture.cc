@@ -74,8 +74,8 @@ Texture::Texture(const string& fnametmpl, uint32_t frametime, const SDL_PixelFor
 			break;
 
 		SDL_Surface * surf;
-
-		m_texture_image = strdup(fname);
+    
+		m_texture_image = fname;
 
 		FileRead fr;
 
@@ -203,7 +203,6 @@ Texture::~Texture ()
 {
 	delete m_colormap;
 	free(m_pixels);
-	free(m_texture_image);
 
 	BOOST_FOREACH(GLSurfaceTexture* surf, m_glFrames)
 		delete surf;
