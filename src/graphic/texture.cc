@@ -74,7 +74,7 @@ Texture::Texture(const string& fnametmpl, uint32_t frametime, const SDL_PixelFor
 			break;
 
 		SDL_Surface * surf;
-    
+
 		m_texture_image = fname;
 
 		FileRead fr;
