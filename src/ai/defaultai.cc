@@ -92,10 +92,6 @@ DefaultAI::~DefaultAI()
 		delete economies.back();
 		economies.pop_back();
 	}
-	while (not blocked_fields.empty()) {
-		blocked_fields.pop_back();
-	}
-
 }
 
 
