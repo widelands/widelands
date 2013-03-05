@@ -670,6 +670,7 @@ NetHost::~NetHost ()
 
 	delete d->promoter;
 	delete d;
+	delete file;
 }
 
 const std::string & NetHost::getLocalPlayername() const
@@ -809,7 +810,7 @@ void NetHost::run(bool const autorun)
 	try {
 		// NOTE  loaderUI will stay uninitialized, if this is run as dedicated, so all called functions need
 		// NOTE  to check whether the pointer is valid.
-		UI::ProgressWindow * loaderUI = 0;
+		boost::scoped_ptr<UI::ProgressWindow> loaderUI(0);
 		GameTips * tips = 0;
 		if (m_is_dedicated) {
 			log ("[Dedicated] Starting the game...\n");
@@ -825,7 +826,7 @@ void NetHost::run(bool const autorun)
 				setWinCondition(gpdp.get_win_condition());
 			}
 		} else {
-			loaderUI = new UI::ProgressWindow ("pics/progress.png");
+			loaderUI.reset(new UI::ProgressWindow ("pics/progress.png"));
 			std::vector<std::string> tipstext;
 			tipstext.push_back("general_game");
 			tipstext.push_back("multiplayer");
@@ -864,9 +865,9 @@ void NetHost::run(bool const autorun)
 		}
 
 		if (!d->settings.savegame) // new game
-			game.init_newgame (loaderUI, d->settings);
+			game.init_newgame (loaderUI.get(), d->settings);
 		else                      // savegame
-			game.init_savegame(loaderUI, d->settings);
+			game.init_savegame(loaderUI.get(), d->settings);
 		d->pseudo_networktime = game.get_gametime();
 		d->time.reset(d->pseudo_networktime);
 		d->lastframe = WLApplication::get()->get_time();
@@ -891,7 +892,7 @@ void NetHost::run(bool const autorun)
 			DedicatedLog::get()->game_start(clients, game.map().get_name());
 		}
 		game.run
-			(loaderUI,
+			(loaderUI.get(),
 			 d->settings.savegame ? Widelands::Game::Loaded : d->settings.scenario ?
 			 Widelands::Game::NewMPScenario : Widelands::Game::NewNonScenario);
 
