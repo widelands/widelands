@@ -42,7 +42,7 @@ struct Texture {
 		(const std::string& fnametempl, uint32_t frametime, const SDL_PixelFormat&);
 	~Texture();
 
-	const char * get_texture_image() const {return m_texture_image;}
+	const std::string & get_texture_image() const {return m_texture_image;}
 
 	uint8_t * get_pixels   () const {return m_pixels;}
 	uint8_t * get_curpixels() const {return m_curframe;}
@@ -59,16 +59,16 @@ struct Texture {
 #endif
 
 private:
-	Colormap * m_colormap;
-	uint8_t  * m_pixels;
-	uint32_t   m_mmap_color[256];
-	uint8_t  * m_curframe;
-	int32_t    m_frame_num;
-	char     * m_texture_image;
-	uint32_t   m_nrframes;
-	uint32_t   m_frametime;
-	bool       is_32bit;
-	bool       m_was_animated;
+	Colormap  * m_colormap;
+	uint8_t   * m_pixels;
+	uint32_t    m_mmap_color[256];
+	uint8_t   * m_curframe;
+	int32_t     m_frame_num;
+	std::string m_texture_image;
+	uint32_t    m_nrframes;
+	uint32_t    m_frametime;
+	bool        is_32bit;
+	bool        m_was_animated;
 #ifdef USE_OPENGL
 	std::vector<GLSurfaceTexture*> m_glFrames;
 #endif
