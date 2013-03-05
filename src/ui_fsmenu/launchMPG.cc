@@ -237,6 +237,7 @@ Fullscreen_Menu_LaunchMPG::~Fullscreen_Menu_LaunchMPG() {
 	delete m_mpsg;
 	if (m_help)
 		delete m_help;
+	delete m_chat;
 }
 
 

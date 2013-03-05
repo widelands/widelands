@@ -777,16 +777,15 @@ void NetHost::run(bool const autorun)
 		}
 		d->dedicated_start = false;
 	} else {
-		Fullscreen_Menu_LaunchMPG * lm = new Fullscreen_Menu_LaunchMPG(&d->hp, this);
-		lm->setChatProvider(d->chat);
-		const int32_t code = lm->run();
+		Fullscreen_Menu_LaunchMPG lm(&d->hp, this);
+		lm.setChatProvider(d->chat);
+		const int32_t code = lm.run();
 		if (code <= 0) {
 			// if this is an internet game, tell the metaserver that client is back in the lobby.
 			if (m_internet)
 				InternetGaming::ref().set_game_done();
 			return;
 		}
-		delete lm;
 	}
 
 	// if this is an internet game, tell the metaserver that the game started

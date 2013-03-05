@@ -26,7 +26,6 @@
 #include "logic/game.h"
 #include "logic/player.h"
 #include "logic/tribe.h"
-#include "network/network_player_settings_backend.h"
 #include "profile/profile.h"
 #include "wexception.h"
 
@@ -389,6 +388,7 @@ MultiPlayerSetupGroup::MultiPlayerSetupGroup
 :
 UI::Panel(parent, x, y, w, h),
 s(settings),
+npsb(new NetworkPlayerSettingsBackend(s)),
 clientbox(this, 0, buth, UI::Box::Vertical, w / 3, h - buth),
 playerbox(this, w * 6 / 15, buth, UI::Box::Vertical, w * 9 / 15, h - buth),
 m_buth(buth),
@@ -460,12 +460,11 @@ m_fname(fname)
 
 	playerbox.set_size(w * 9 / 15, h - buth);
 	p.resize(MAX_PLAYERS);
-	NetworkPlayerSettingsBackend * npsb = new NetworkPlayerSettingsBackend(s);
 	for (uint8_t i = 0; i < p.size(); ++i) {
 		p.at(i) = new MultiPlayerPlayerGroup
 			(&playerbox, i,
 			 0, 0, playerbox.get_w(), buth,
-			 s, npsb, UI::Font::get(fname, fsize),
+			 s, npsb.get(), UI::Font::get(fname, fsize),
 			 m_tribepics, m_tribenames);
 		playerbox.add(&*p.at(i), 1);
 	}
