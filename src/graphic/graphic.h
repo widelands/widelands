@@ -130,8 +130,11 @@ public:
 
 	const GraphicCaps& caps() const throw () {return m_caps;}
 
+	bool check_fallback_settings_in_effect();
+
 private:
 	void save_png_(Surface & surf, StreamWrite*) const;
+	bool fallback_settings_in_effect;
 
 protected:
 	// Static helper function for png writing
