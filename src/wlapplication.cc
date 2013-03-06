@@ -1536,6 +1536,7 @@ void WLApplication::mainmenu()
 
 	if (g_gr->check_fallback_settings_in_effect())
 	{
+		messagetitle = _("Fallback settings in effect");
 		message = _
 			("Your video settings could not be enabled, and fallback settings are in effect. "
 				"Please check the graphics options!");

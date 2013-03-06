@@ -73,13 +73,10 @@ Graphic::Graphic
 	m_update_fullscreen(true),
 	image_loader_(new ImageLoaderImpl()),
 	surface_cache_(create_surface_cache(SURFACE_CACHE_SIZE)),
-	image_cache_(create_image_cache(image_loader_.get(), surface_cache_.get()))
+	image_cache_(create_image_cache(image_loader_.get(), surface_cache_.get())),
+	m_fallback_settings_in_effect (false)
 {
 	ImageTransformations::initialize();
-
-	//preset flag, if at the end this is true, a message is displayed
-	//in wlapplication.cc
-	fallback_settings_in_effect = false;
 
 	//fastOpen tries to use mmap
 	FileRead fr;
@@ -137,7 +134,7 @@ Graphic::Graphic
 		flags &= ~SDL_FULLSCREEN;
 		sdlsurface = SDL_SetVideoMode
 			(FALLBACK_GRAPHICS_WIDTH, FALLBACK_GRAPHICS_HEIGHT, FALLBACK_GRAPHICS_DEPTH, flags);
-		fallback_settings_in_effect = true;
+		m_fallback_settings_in_effect = true;
 		if (!sdlsurface)
 			throw wexception
 				("Graphics: could not set video mode: %s", SDL_GetError());
@@ -310,7 +307,7 @@ GCC_DIAG_ON ("-Wold-style-cast")
 
 bool Graphic::check_fallback_settings_in_effect()
 {
-	return fallback_settings_in_effect;
+	return m_fallback_settings_in_effect;
 }
 
 /**
