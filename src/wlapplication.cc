@@ -296,20 +296,21 @@ m_redirected_stdio(false)
 	init_language(); // search paths must already be set up
 	cleanup_replays();
 
-	if (!dedicated)
+	if (!dedicated) {
+		// handling of graphics
 		init_hardware();
-	else
-		g_gr = 0;
 
-	if (TTF_Init() == -1)
-		throw wexception
-			("True Type library did not initialize: %s\n", TTF_GetError());
+		if (TTF_Init() == -1)
+			throw wexception
+				("True Type library did not initialize: %s\n", TTF_GetError());
+
+		UI::g_fh = new UI::Font_Handler();
+		UI::g_fh1 = UI::create_fonthandler(g_gr, g_fs);
+	} else
+		g_gr = 0;
 
 	if (SDLNet_Init() == -1)
 		throw wexception("SDLNet_Init failed: %s\n", SDLNet_GetError());
-
-	UI::g_fh = new UI::Font_Handler();
-	UI::g_fh1 = UI::create_fonthandler(g_gr, g_fs);
 
 	//make sure we didn't forget to read any global option
 	g_options.check_used();
