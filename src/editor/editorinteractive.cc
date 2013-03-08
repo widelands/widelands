@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2003, 2006-2011 by the Widelands Development Team
+ * Copyright (C) 2002-2003, 2006-2011, 2013 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -163,15 +163,12 @@ void Editor_Interactive::load(const std::string & filename) {
 	egbase().cleanup_for_load(true, false);
 	m_history.reset();
 
-	std::auto_ptr<Widelands::Map_Loader> const ml
-	(map.get_correct_loader(filename.c_str()));
+	std::auto_ptr<Widelands::Map_Loader> const ml(map.get_correct_loader(filename.c_str()));
 	if (not ml.get())
 		throw warning
-		(_("Unsupported format"),
-		 _
-		 ("Widelands could not load the file \"%s\". The file format seems "
-		  "to be incompatible."),
-		 filename.c_str());
+			(_("Unsupported format"),
+			 _("Widelands could not load the file \"%s\". The file format seems to be incompatible."),
+			 filename.c_str());
 
 	UI::ProgressWindow loader_ui("pics/editor.jpg");
 	std::vector<std::string> tipstext;

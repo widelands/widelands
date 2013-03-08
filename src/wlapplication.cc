@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2012 by the Widelands Development Team
+ * Copyright (C) 2006-2013 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -433,6 +433,12 @@ void WLApplication::run()
 				i18n::Textdomain td("maps");
 				map.set_filename(m_filename.c_str());
 				Widelands::Map_Loader * const ml = map.get_correct_loader(m_filename.c_str());
+				if (!ml) {
+					throw warning
+						(_("Unsupported format"),
+						 _("Widelands could not load the file \"%s\". The file format seems to be incompatible."),
+						 m_filename.c_str());
+				}
 				ml->preload_map(true);
 
 				// fill in the mapdata structure
@@ -546,6 +552,7 @@ restart:
 				//log ("SDL Video Window expose event: %i\n", ev.expose.type);
 				g_gr->update_fullscreen();
 				break;
+			default:;
 			}
 		}
 	}
@@ -621,6 +628,7 @@ void WLApplication::handle_input(InputCallback const * cb)
 			case SDL_QUIT:
 				m_should_die = true;
 				break;
+			default:;
 			}
 		}
 	}
@@ -683,6 +691,7 @@ void WLApplication::handle_input(InputCallback const * cb)
 					case SDL_BUTTON_RIGHT:
 						ev.button.button = SDL_BUTTON_LEFT;
 						break;
+					default:;
 					}
 				}
 				assert(ev.button.state == SDL_PRESSED);
@@ -699,6 +708,7 @@ void WLApplication::handle_input(InputCallback const * cb)
 					case SDL_BUTTON_RIGHT:
 						ev.button.button = SDL_BUTTON_LEFT;
 						break;
+					default:;
 					}
 				}
 				assert(ev.button.state == SDL_RELEASED);
@@ -719,6 +729,7 @@ void WLApplication::handle_input(InputCallback const * cb)
 		case SDL_QUIT:
 			m_should_die = true;
 			break;
+		default:;
 		}
 	}
 }
