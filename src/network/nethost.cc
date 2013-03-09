@@ -205,6 +205,7 @@ struct HostGameSettingsProvider : public GameSettingsProvider {
 					newstate = PlayerSettings::stateClosed;
 				break;
 			}
+		default:;
 		}
 
 		h->setPlayerState(number, newstate, true);
@@ -2204,6 +2205,8 @@ void NetHost::recvClientTime(uint32_t const number, int32_t const time)
 
 void NetHost::checkHungClients()
 {
+	assert(d->game != 0);
+
 	int nrready = 0;
 	int nrdelayed = 0;
 	int nrhung = 0;
@@ -2219,6 +2222,7 @@ void NetHost::checkHungClients()
 			// reset the hung_since time
 			d->clients.at(i).hung_since = 0;
 		} else {
+			assert(d->game != 0);
 			++nrdelayed;
 			if
 				(delta
