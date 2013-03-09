@@ -170,7 +170,7 @@ private:
 
 	std::list<Widelands::FCoords>      unusable_fields;
 	std::list<BuildableField *>        buildable_fields;
-	std::list<BlockedField *>          blocked_fields;
+	std::list<BlockedField>          blocked_fields;
 	std::list<MineableField *>         mineable_fields;
 	std::list<Widelands::Flag const *> new_flags;
 	std::list<Widelands::Coords>       flags_to_be_removed;

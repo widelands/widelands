@@ -76,8 +76,7 @@ void BaseImmovable::set_position(Editor_Game_Base & egbase, Coords const c)
 	if (f.field->immovable && f.field->immovable != this) {
 		assert(f.field->immovable->get_size() == NONE);
 
-		f.field->immovable->cleanup(egbase);
-		delete f.field->immovable;
+		f.field->immovable->remove(egbase);
 	}
 
 	f.field->immovable = this;

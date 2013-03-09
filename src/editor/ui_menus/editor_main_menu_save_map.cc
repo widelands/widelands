@@ -327,15 +327,15 @@ void Main_Menu_Save_Map::fill_list() {
 		char const * const name = pname->c_str();
 
 		// we do not list S2 files since we only write wmf
-		if (upcast(Widelands::WL_Map_Loader, ml, map.get_correct_loader(name))) {
+		boost::scoped_ptr<Widelands::Map_Loader> ml(map.get_correct_loader(name));
+		if (upcast(Widelands::WL_Map_Loader, wml, ml.get())) {
 			try {
-				ml->preload_map(true);
+				wml->preload_map(true);
 				m_ls->add
 					(FileSystem::FS_Filename(name),
 					 name,
 					 g_gr->images().get("pics/ls_wlmap.png"));
 			} catch (const _wexception &) {} //  we simply skip illegal entries
-			delete ml;
 		}
 	}
 	if (m_ls->size())

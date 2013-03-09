@@ -72,7 +72,7 @@ public:
 	char const * type_name() const throw () {return "constructionsite";}
 	virtual std::string get_statistics_string();
 
-	const Player::Constructionsite_Information * get_info() {return m_info;}
+	const Player::Constructionsite_Information & get_info() {return m_info;}
 
 	virtual WaresQueue & waresqueue(Ware_Index);
 
@@ -104,7 +104,7 @@ private:
 	int32_t  m_fetchfromflag;  // # of items to fetch from flag
 
 	bool     m_builder_idle;   // used to determine whether the builder is idle
-	Player::Constructionsite_Information * m_info; // asked for by player point of view for the gameview
+	Player::Constructionsite_Information m_info; // asked for by player point of view for the gameview
 };
 
 }

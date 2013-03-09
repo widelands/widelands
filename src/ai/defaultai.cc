@@ -88,7 +88,10 @@ DefaultAI::~DefaultAI()
 		delete mineable_fields.back();
 		mineable_fields.pop_back();
 	}
-
+	while (not economies.empty()) {
+		delete economies.back();
+		economies.pop_back();
+	}
 }
 
 
@@ -405,6 +408,7 @@ void DefaultAI::update_all_mineable_fields(const int32_t gametime)
 
 		//  check whether we lost ownership of the node
 		if (mf->coords.field->get_owned_by() != player_number()) {
+			delete mf;
 			mineable_fields.pop_front();
 			continue;
 		}
@@ -808,10 +812,11 @@ bool DefaultAI::construct_building (int32_t) // (int32_t gametime)
 
 	// Remove outdated fields from blocker list
 	for
-		(std::list<BlockedField *>::iterator i = blocked_fields.begin();
+		(std::list<BlockedField>::iterator i = blocked_fields.begin();
 		 i != blocked_fields.end();)
-		if ((*i)->blocked_until < game().get_gametime())
+		if (i->blocked_until < game().get_gametime()) {
 			i = blocked_fields.erase(i);
+		}
 		else ++i;
 
 	// first scan all buildable fields for regular buildings
@@ -827,10 +832,10 @@ bool DefaultAI::construct_building (int32_t) // (int32_t gametime)
 
 		// Continue if field is blocked at the moment
 		for
-			(std::list<BlockedField *>::iterator j = blocked_fields.begin();
+			(std::list<BlockedField>::iterator j = blocked_fields.begin();
 			 j != blocked_fields.end();
 			 ++j)
-			if ((*j)->coords == bf->coords)
+			if (j->coords == bf->coords)
 				continue;
 
 		assert(player);
@@ -1182,12 +1187,16 @@ bool DefaultAI::construct_building (int32_t) // (int32_t gametime)
 				continue;
 
 			// Continue if field is blocked at the moment
+			bool blocked = false;
 			for
-				(std::list<BlockedField *>::iterator k = blocked_fields.begin();
+				(std::list<BlockedField>::iterator k = blocked_fields.begin();
 				 k != blocked_fields.end();
 				 ++k)
-				if ((*k)->coords == (*k)->coords)
-					continue;
+				if ((*j)->coords == k->coords) {
+					blocked = true;
+					break;
+				}
+			if (blocked) continue;
 
 			// Check if current economy can supply enough food for production.
 			for (uint32_t k = 0; k < bo.inputs.size(); ++k) {
@@ -1317,7 +1326,7 @@ bool DefaultAI::construct_roads (int32_t gametime)
 				eo_to_connect->flags.pop_front();
 				// Block the field at constructionsites coords for 5 minutes
 				// against new construction tries.
-				BlockedField * blocked = new BlockedField
+				BlockedField blocked
 					(game().map().get_fcoords(bld->get_position()),
 					 game().get_gametime() + 300000);
 				blocked_fields.push_back(blocked);

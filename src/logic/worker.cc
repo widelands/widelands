@@ -1500,7 +1500,7 @@ void Worker::transfer_update(Game & game, State & /* state */) {
 			if (&nextbuild->base_flag() != location)
 				throw wexception("MO(%u): [transfer]: next step is building, but we are nowhere near", serial());
 
-			return start_task_move(game, WALK_NW, &descr().get_right_walk_anims(does_carry_ware()), true);
+			return start_task_move(game, WALK_NW, descr().get_right_walk_anims(does_carry_ware()), true);
 		} else if (upcast(Flag,     nextflag,  nextstep)) { //  Flag to Flag
 			Road & road = *flag->get_road(*nextflag);
 
@@ -1830,7 +1830,7 @@ void Worker::return_update(Game & game, State & state)
 					start_task_move
 						(game,
 						 WALK_NW,
-						 &descr().get_right_walk_anims(does_carry_ware()),
+						 descr().get_right_walk_anims(does_carry_ware()),
 						 true);
 			}
 		}
@@ -2118,7 +2118,7 @@ void Worker::dropoff_update(Game & game, State &)
 			start_task_move
 				(game,
 				 WALK_NW,
-				 &descr().get_right_walk_anims(does_carry_ware()),
+				 descr().get_right_walk_anims(does_carry_ware()),
 				 true);
 			return;
 		}
@@ -2133,7 +2133,7 @@ void Worker::dropoff_update(Game & game, State &)
 			start_task_move
 				(game,
 				 WALK_NW,
-				 &descr().get_right_walk_anims(does_carry_ware()),
+				 descr().get_right_walk_anims(does_carry_ware()),
 				 true);
 
 	if (location->get_type() != Map_Object::BUILDING)
@@ -2231,7 +2231,7 @@ void Worker::fetchfromflag_update(Game & game, State & state)
 			start_task_move
 				(game,
 				 WALK_NW,
-				 &descr().get_right_walk_anims(does_carry_ware()), true);
+				 descr().get_right_walk_anims(does_carry_ware()), true);
 	}
 
 	if (not dynamic_cast<Building const *>(location)) {
@@ -2413,7 +2413,7 @@ void Worker::leavebuilding_update(Game & game, State & state)
 			start_task_move
 				(game,
 				 WALK_SE,
-				 &descr().get_right_walk_anims(does_carry_ware()),
+				 descr().get_right_walk_anims(does_carry_ware()),
 				 true);
 	} else {
 		const Coords & flagpos = baseflag.get_position();
