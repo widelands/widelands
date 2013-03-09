@@ -134,6 +134,7 @@ public:
 
 private:
 	void save_png_(Surface & surf, StreamWrite*) const;
+
 	bool m_fallback_settings_in_effect;
 
 protected:

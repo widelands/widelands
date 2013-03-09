@@ -68,13 +68,13 @@ Graphic::Graphic
 	 bool    fullscreen,
 	 bool    opengl)
 	:
+	m_fallback_settings_in_effect (false),
 	m_rendertarget     (0),
 	m_nr_update_rects  (0),
 	m_update_fullscreen(true),
 	image_loader_(new ImageLoaderImpl()),
 	surface_cache_(create_surface_cache(SURFACE_CACHE_SIZE)),
-	image_cache_(create_image_cache(image_loader_.get(), surface_cache_.get())),
-	m_fallback_settings_in_effect (false)
+	image_cache_(create_image_cache(image_loader_.get(), surface_cache_.get()))
 {
 	ImageTransformations::initialize();
 
