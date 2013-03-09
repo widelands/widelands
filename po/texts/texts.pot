@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2013-01-25 07:23+0000\n"
+"POT-Creation-Date: 2013-03-09 16:57+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -147,6 +147,11 @@ msgstr ""
 #: ../../txts/tips/barbarians.tip:10
 msgid ""
 "Always build a ranger's and a gamekeeper's hut, so you will not run out of trunks and food."
+msgstr ""
+
+#: ../../txts/tips/general_game.tip:70
+msgid ""
+"An economy consists of all buildings and flags connected by roads. The supplies and demands of buildings are handled in its economy."
 msgstr ""
 
 #: ../../txts/tips/general_game.tip:22
@@ -759,6 +764,11 @@ msgstr ""
 #: ../../txts/editor_readme:35
 msgid ""
 "T        Toggles tools menu"
+msgstr ""
+
+#: ../../txts/tips/general_game.tip:66
+msgid ""
+"The 'configure economy' menu for setting up target quantities can be accessed via the flag menu."
 msgstr ""
 
 #: ../../txts/tips/general_game.tip:2
