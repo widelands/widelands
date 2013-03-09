@@ -160,7 +160,7 @@ void Sound_Handler::shutdown()
 	char * text = new char[21];
 	SDL_AudioDriverName(text, 20);
 	log("SDL_AUDIODRIVER %s\n", text);
-	delete text;
+	delete[] text;
 	text = 0;
 
 	if (numtimesopened != 1) {
