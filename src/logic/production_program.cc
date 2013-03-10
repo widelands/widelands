@@ -1411,15 +1411,13 @@ void ProductionProgram::ActTrain::execute
 	return ps.program_step(game);
 }
 
-
-//TODO: check if fx exists, load fx, lots of other checks for
-//parameter correctness
 ProductionProgram::ActPlayFX::ActPlayFX
-	(char * parameters, const ProductionSite_Descr &)
+	(const std::string & directory, char * parameters, const ProductionSite_Descr &)
 {
 	try {
 		bool reached_end;
-		name = match(parameters, reached_end);
+		std::string filename = match(parameters, reached_end);
+		name = directory + "/" + filename;
 
 		if (not reached_end) {
 			char * endp;
@@ -1430,6 +1428,8 @@ ProductionProgram::ActPlayFX::ActPlayFX
 					(_("expected %s but found \"%s\""), _("priority"), parameters);
 		} else
 			priority = 127;
+
+		g_sound_handler.load_fx_if_needed(directory, filename, name);
 	} catch (const _wexception & e) {
 		throw game_data_error("playFX: %s", e.what());
 	}
@@ -1627,7 +1627,7 @@ ProductionProgram::ProductionProgram
 		else if (not strcmp(v->get_name(), "train"))
 			action = new ActTrain  (v->get_string(), *building);
 		else if (not strcmp(v->get_name(), "playFX"))
-			action = new ActPlayFX (v->get_string(), *building);
+			action = new ActPlayFX (directory, v->get_string(), *building);
 		else if (not strcmp(v->get_name(), "construct"))
 			action = new ActConstruct (v->get_string(), *building, _name);
 		else if (not strcmp(v->get_name(), "check_map"))

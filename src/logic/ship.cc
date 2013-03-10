@@ -338,7 +338,7 @@ void Ship::ship_update_idle(Game & game, Bob::State & state)
 		}
 
 		state.ivar1 = 1;
-		start_task_move(game, dir, &descr().get_sail_anims(), false);
+		start_task_move(game, dir, descr().get_sail_anims(), false);
 		return;
 	}
 

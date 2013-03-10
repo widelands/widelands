@@ -62,3 +62,10 @@ sec=6
 text=_Press I to quickly toggle the display of your stock inventory.
 sec=4
 
+[Tip 17]
+text=_The 'configure economy' menu for setting up target quantities can be accessed via the flag menu.
+sec=5
+
+[Tip 18]
+text=_An economy consists of all buildings and flags connected by roads. The supplies and demands of buildings are handled in its economy.
+sec=8

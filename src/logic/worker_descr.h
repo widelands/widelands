@@ -126,7 +126,7 @@ protected:
 	Point             m_ware_hotspot;
 	uint32_t          m_default_target_quantity;
 	std::string const m_icon_fname; ///< Filename of worker's icon
-	const Image* m_icon;       ///< Pointer to icon into picture stack
+	const Image     * m_icon;       ///< Pointer to icon into picture stack
 	DirAnimations     m_walk_anims;
 	DirAnimations     m_walkload_anims;
 	bool              m_buildable;

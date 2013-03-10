@@ -179,12 +179,12 @@ void Object_Manager::cleanup(Editor_Game_Base & egbase)
 /**
  * Insert the given Map_Object into the object manager
  */
-void Object_Manager::insert(Map_Object & obj)
+void Object_Manager::insert(Map_Object * obj)
 {
 	++m_lastserial;
 	assert(m_lastserial);
-	obj.m_serial = m_lastserial;
-	m_objects[m_lastserial] = &obj;
+	obj->m_serial = m_lastserial;
+	m_objects[m_lastserial] = obj;
 }
 
 /**
@@ -394,7 +394,7 @@ void Map_Object::schedule_destroy(Game & game)
  */
 void Map_Object::init(Editor_Game_Base & egbase)
 {
-	egbase.objects().insert(*this);
+	egbase.objects().insert(this);
 }
 
 /**
@@ -505,7 +505,7 @@ void Map_Object::Loader::load(FileRead & fr)
 		throw wexception("map object: %s", e.what());
 	}
 
-	egbase().objects().insert(*get_object());
+	egbase().objects().insert(get_object());
 }
 
 

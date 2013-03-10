@@ -401,7 +401,8 @@ public:
 	virtual uint16_t width() {return INFINITE_WIDTH; }
 	virtual uint16_t hotspot_y() {return 0;}
 	virtual Surface* render(SurfaceCache* /* surface_cache */) {
-		assert(false); // This should never be called
+		assert(false);
+		throw RenderError("This should never be called. This is a bug, please submit a report.");
 	}
 	virtual bool is_non_mandatory_space() {return true;}
 };

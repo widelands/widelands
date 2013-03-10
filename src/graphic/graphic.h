@@ -110,6 +110,7 @@ public:
 
 	void save_png(const Image*, StreamWrite*) const;
 
+	void flush_maptextures();
 	uint32_t get_maptexture(const std::string& fnametempl, uint32_t frametime);
 	void animate_maptextures(uint32_t time);
 	void reset_texture_animation_reminder();
@@ -129,8 +130,12 @@ public:
 
 	const GraphicCaps& caps() const throw () {return m_caps;}
 
+	bool check_fallback_settings_in_effect();
+
 private:
 	void save_png_(Surface & surf, StreamWrite*) const;
+
+	bool m_fallback_settings_in_effect;
 
 protected:
 	// Static helper function for png writing

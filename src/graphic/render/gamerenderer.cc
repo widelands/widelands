@@ -164,29 +164,29 @@ void GameRenderer::draw_objects()
 						f_pl.map_object_descr[TCoords<>::None])
 				{
 					if
-						(const Player::Constructionsite_Information * const csinf =
-						 f_pl.constructionsite[TCoords<>::None])
+						(f_pl.constructionsite.becomes)
 					{
+						const Player::Constructionsite_Information & csinf = f_pl.constructionsite;
 						// draw the partly finished constructionsite
 						uint32_t anim;
 						try {
-							anim = csinf->becomes->get_animation("build");
+							anim = csinf.becomes->get_animation("build");
 						} catch (Map_Object_Descr::Animation_Nonexistent & e) {
 							try {
-								anim = csinf->becomes->get_animation("unoccupied");
+								anim = csinf.becomes->get_animation("unoccupied");
 							} catch (Map_Object_Descr::Animation_Nonexistent) {
-								anim = csinf->becomes->get_animation("idle");
+								anim = csinf.becomes->get_animation("idle");
 							}
 						}
 						const size_t nr_frames = g_gr->nr_frames(anim);
 						uint32_t cur_frame =
-							csinf->totaltime ? csinf->completedtime * nr_frames / csinf->totaltime : 0;
+							csinf.totaltime ? csinf.completedtime * nr_frames / csinf.totaltime : 0;
 						uint32_t tanim = cur_frame * FRAME_LENGTH;
 						uint32_t w, h;
 						g_gr->get_animation_size(anim, tanim, w, h);
-						uint32_t lines = h * csinf->completedtime * nr_frames;
-						if (csinf->totaltime)
-							lines /= csinf->totaltime;
+						uint32_t lines = h * csinf.completedtime * nr_frames;
+						if (csinf.totaltime)
+							lines /= csinf.totaltime;
 						assert(h * cur_frame <= lines);
 						lines -= h * cur_frame; //  This won't work if pictures have various sizes.
 
@@ -194,14 +194,14 @@ void GameRenderer::draw_objects()
 							// draw the prev frame from top to where next image will be drawing
 							m_dst->drawanimrect
 								(pos[F], anim, tanim - FRAME_LENGTH, owner, Rect(Point(0, 0), w, h - lines));
-						else if (csinf->was) {
+						else if (csinf.was) {
 							// Is the first frame, but there was another building here before,
 							// get its last build picture and draw it instead.
 							uint32_t a;
 							try {
-								a = csinf->was->get_animation("unoccupied");
+								a = csinf.was->get_animation("unoccupied");
 							} catch (Map_Object_Descr::Animation_Nonexistent & e) {
-								a = csinf->was->get_animation("idle");
+								a = csinf.was->get_animation("idle");
 							}
 							m_dst->drawanimrect
 								(pos[F], a, tanim - FRAME_LENGTH, owner, Rect(Point(0, 0), w, h - lines));

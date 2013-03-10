@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2012 by the Widelands Development Team
+ * Copyright (C) 2006-2013 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -296,20 +296,21 @@ m_redirected_stdio(false)
 	init_language(); // search paths must already be set up
 	cleanup_replays();
 
-	if (!dedicated)
+	if (!dedicated) {
+		// handling of graphics
 		init_hardware();
-	else
-		g_gr = 0;
 
-	if (TTF_Init() == -1)
-		throw wexception
-			("True Type library did not initialize: %s\n", TTF_GetError());
+		if (TTF_Init() == -1)
+			throw wexception
+				("True Type library did not initialize: %s\n", TTF_GetError());
+
+		UI::g_fh = new UI::Font_Handler();
+		UI::g_fh1 = UI::create_fonthandler(g_gr, g_fs);
+	} else
+		g_gr = 0;
 
 	if (SDLNet_Init() == -1)
 		throw wexception("SDLNet_Init failed: %s\n", SDLNet_GetError());
-
-	UI::g_fh = new UI::Font_Handler();
-	UI::g_fh1 = UI::create_fonthandler(g_gr, g_fs);
 
 	//make sure we didn't forget to read any global option
 	g_options.check_used();
@@ -432,6 +433,12 @@ void WLApplication::run()
 				i18n::Textdomain td("maps");
 				map.set_filename(m_filename.c_str());
 				Widelands::Map_Loader * const ml = map.get_correct_loader(m_filename.c_str());
+				if (!ml) {
+					throw warning
+						(_("Unsupported format"),
+						 _("Widelands could not load the file \"%s\". The file format seems to be incompatible."),
+						 m_filename.c_str());
+				}
 				ml->preload_map(true);
 
 				// fill in the mapdata structure
@@ -545,6 +552,7 @@ restart:
 				//log ("SDL Video Window expose event: %i\n", ev.expose.type);
 				g_gr->update_fullscreen();
 				break;
+			default:;
 			}
 		}
 	}
@@ -620,6 +628,7 @@ void WLApplication::handle_input(InputCallback const * cb)
 			case SDL_QUIT:
 				m_should_die = true;
 				break;
+			default:;
 			}
 		}
 	}
@@ -682,6 +691,7 @@ void WLApplication::handle_input(InputCallback const * cb)
 					case SDL_BUTTON_RIGHT:
 						ev.button.button = SDL_BUTTON_LEFT;
 						break;
+					default:;
 					}
 				}
 				assert(ev.button.state == SDL_PRESSED);
@@ -698,6 +708,7 @@ void WLApplication::handle_input(InputCallback const * cb)
 					case SDL_BUTTON_RIGHT:
 						ev.button.button = SDL_BUTTON_LEFT;
 						break;
+					default:;
 					}
 				}
 				assert(ev.button.state == SDL_RELEASED);
@@ -718,6 +729,7 @@ void WLApplication::handle_input(InputCallback const * cb)
 		case SDL_QUIT:
 			m_should_die = true;
 			break;
+		default:;
 		}
 	}
 }
@@ -1533,6 +1545,14 @@ void WLApplication::mainmenu()
 {
 	std::string messagetitle;
 	std::string message;
+
+	if (g_gr->check_fallback_settings_in_effect())
+	{
+		messagetitle = _("Fallback settings in effect");
+		message = _
+			("Your video settings could not be enabled, and fallback settings are in effect. "
+				"Please check the graphics options!");
+	}
 
 	for (;;) {
 		// Refresh graphics system in case we just changed resolution.

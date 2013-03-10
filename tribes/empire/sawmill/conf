@@ -1,6 +1,5 @@
 size=medium
 output=wood
-soundfx=../../../sound/sawmill/sawmill
 
 [aihints]
 is_basic=true

@@ -66,6 +66,13 @@ struct Font_Handler::Data {
 
 	const LineCacheEntry & get_line(const TextStyle & style, const std::string & text);
 
+	~Data() {
+		while (!linecache.empty()) {
+			delete linecache.back().image;
+			linecache.pop_back();
+		}
+	}
+
 private:
 	void render_line(LineCacheEntry & lce);
 };

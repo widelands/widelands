@@ -67,17 +67,16 @@ throw (_wexception)
 					if (fs.IsDirectory(pname->c_str())) // Might be a dir, maybe CVS
 						continue;
 
-					FileRead fr;
-
-					fr.Open(fs, pname->c_str());
-					SDL_Surface * const surf =
-						IMG_Load_RW(SDL_RWFromMem(fr.Data(0), fr.GetSize()), 1);
-					if (!surf)
-						continue; //  Illegal pic. Skip it.
-
 					const std::string hash = std::string("map:") + FileSystem::FS_Filename(pname->c_str());
 					const Image* image = NULL;
 					if (!g_gr->images().has(hash)) {
+						FileRead fr;
+
+						fr.Open(fs, pname->c_str());
+						SDL_Surface * const surf =
+							IMG_Load_RW(SDL_RWFromMem(fr.Data(0), fr.GetSize()), 1);
+						if (!surf)
+							continue; //  Illegal pic. Skip it.
 						image = g_gr->images().insert(new_in_memory_image(hash, Surface::create(surf)));
 					} else {
 						image = g_gr->images().get(hash);

@@ -130,7 +130,7 @@ struct Player :
 	/// Per-player and per-field constructionsite information
 	struct Constructionsite_Information {
 		Constructionsite_Information() : becomes(0), was(0), totaltime(0), completedtime(0) {}
-		const Building_Descr * becomes;
+		const Building_Descr * becomes; // Also works as a marker telling whether there is a construction site.
 		const Building_Descr * was; // only valid if "becomes" is an enhanced building.
 		uint32_t               totaltime;
 		uint32_t               completedtime;
@@ -320,7 +320,7 @@ struct Player :
 
 		/// Information for constructionsite's animation.
 		/// only valid, if there is a constructionsite on this node
-		const Constructionsite_Information * constructionsite[3];
+		Constructionsite_Information constructionsite;
 
 		/// Save whether the player saw a border the last time (s)he saw the node.
 		bool border;
@@ -347,9 +347,7 @@ struct Player :
 		//  map_object_descr[0]             0x0a0  0x20   0x0a0  0x40
 		//  map_object_descr[1]             0x0c0  0x20   0x0e0  0x40
 		//  map_object_descr[2]             0x0e0  0x20   0x120  0x40
-		//  Constructionsite_Information[0]
-		//  Constructionsite_Information[1]
-		//  Constructionsite_Information[2]
+		//  Constructionsite_Information
 		//  border
 		//  border_r
 		//  border_br

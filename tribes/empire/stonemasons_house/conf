@@ -1,6 +1,5 @@
 size=medium
 output=marblecolumn
-soundfx=../../../sound/stonecutting/stonemason
 
 [aihints]
 is_basic=true
