@@ -6,15 +6,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4804\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2013-01-25 07:23+0000\n"
+"POT-Creation-Date: 2013-03-09 16:57+0000\n"
 "PO-Revision-Date: 2013-02-05 13:58+0000\n"
 "Last-Translator: Wesmania <ikk_pl@yahoo.co.uk>\n"
 "Language-Team: Language <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-02-06 05:08+0000\n"
-"X-Generator: Launchpad (build 16468)\n"
+"X-Launchpad-Export-Date: 2013-03-10 04:33+0000\n"
+"X-Generator: Launchpad (build 16523)\n"
 
 #: ../../txts/README:71
 msgid "(CTRL+) 0-9  Remember and go to previously remembered locations"
@@ -454,6 +454,12 @@ msgid ""
 msgstr ""
 "Zawsze buduj leśniczówkę i opiekuna zwierząt, żeby zapewnić sobie stałe "
 "dostawy belek i jedzenia."
+
+#: ../../txts/tips/general_game.tip:70
+msgid ""
+"An economy consists of all buildings and flags connected by roads. The "
+"supplies and demands of buildings are handled in its economy."
+msgstr ""
 
 #: ../../txts/tips/general_game.tip:22
 msgid ""
@@ -1126,6 +1132,12 @@ msgstr "Szwedzki"
 #: ../../txts/editor_readme:35
 msgid "T        Toggles tools menu"
 msgstr "T        otwiera okno narzędzi"
+
+#: ../../txts/tips/general_game.tip:66
+msgid ""
+"The 'configure economy' menu for setting up target quantities can be "
+"accessed via the flag menu."
+msgstr ""
 
 #: ../../txts/tips/general_game.tip:2
 msgid ""
