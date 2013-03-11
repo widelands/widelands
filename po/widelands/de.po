@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: Widelands unofficial-bzr-launchpad-i18n-4955\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2013-03-09 17:57+0100\n"
-"PO-Revision-Date: 2013-02-14 20:06+0000\n"
-"Last-Translator: raymond <Unknown>\n"
+"PO-Revision-Date: 2013-03-10 19:57+0000\n"
+"Last-Translator: Nasenbaer <Unknown>\n"
 "Language-Team: German <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2013-03-10 04:36+0000\n"
+"X-Launchpad-Export-Date: 2013-03-11 04:31+0000\n"
 "X-Generator: Launchpad (build 16523)\n"
 
 #: ../../src/s2map.cc:222
@@ -302,13 +302,16 @@ msgstr ""
 
 #: ../../src/wlapplication.cc:1551
 msgid "Fallback settings in effect"
-msgstr ""
+msgstr "Sichere Alternativ-Konfiguration wird verwendet"
 
 #: ../../src/wlapplication.cc:1553
 msgid ""
 "Your video settings could not be enabled, and fallback settings are in "
 "effect. Please check the graphics options!"
 msgstr ""
+"Deine Monitoreinstellungen konnten nicht angewendet werden, die sichere "
+"Fallback-Einstellungen werden verwendet. Bitte überprüfe Deine "
+"Grafikeinstellungen!"
 
 #: ../../src/wlapplication.cc:1624
 msgid "Warning: "
@@ -3267,7 +3270,7 @@ msgstr "Nächste Ebene"
 
 #: ../../src/wui/productionsitewindow.cc:95
 msgid "Terminate the employment of the selected worker"
-msgstr ""
+msgstr "Beende die Beschäftigung für den gewählten Arbeiter"
 
 #: ../../src/wui/productionsitewindow.cc:163
 msgid "(vacant)"
