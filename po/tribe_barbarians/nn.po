@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2013-03-09 16:57+0000\n"
-"PO-Revision-Date: 2013-03-11 20:49+0000\n"
+"PO-Revision-Date: 2013-03-12 17:58+0000\n"
 "Last-Translator: Alexander Mackinnon Jansen <alexander.jansen@hesbynett.no>\n"
 "Language-Team: Norwegian Nynorsk <nn@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-03-12 04:31+0000\n"
-"X-Generator: Launchpad (build 16524)\n"
+"X-Launchpad-Export-Date: 2013-03-13 04:31+0000\n"
+"X-Generator: Launchpad (build 16532)\n"
 
 #: ../../tribes/barbarians/axefactory/help.lua:12
 #: ../../tribes/barbarians/warmill/help.lua:12
@@ -95,13 +95,15 @@ msgstr ""
 #: ../../tribes/barbarians/battlearena/help.lua:12
 msgid ""
 "\"No better friend you have in battle than the enemy's blow that misses.\""
-msgstr ""
+msgstr "«Ingen betre ven i slag enn fiendens slag som bommar.»"
 
 #: ../../tribes/barbarians/well/help.lua:12
 msgid ""
 "\"Oh how sweet is the source of life,<br> that comes down from the sky <br> "
 "and lets the earth drink.\""
 msgstr ""
+"«Kor søt er livskjelda,<br> som kjem ned frå himmelen <br> og lét jorda "
+"drikka.»"
 
 #: ../../tribes/barbarians/deep_goldmine/help.lua:12
 #: ../../tribes/barbarians/deeper_goldmine/help.lua:12
@@ -110,6 +112,8 @@ msgid ""
 "\"Soft and supple.<br> And yet untouched by time and weather.<br> Rays of "
 "sun, wrought into eternity ...\""
 msgstr ""
+"«Mjuk og smidig.<br> Likevel urørt av tid og vêr.<br> Solstrålar smidd inn i "
+"æva …»"
 
 #: ../../tribes/barbarians/lumberjacks_hut/help.lua:12
 msgid ""
@@ -117,22 +121,25 @@ msgid ""
 "soldier. Take 50 and you're a hero. Take 20 and soon you will be a honorable "
 "lumberjack.\""
 msgstr ""
+"«Viss det tek 200 slag for å fella eit tre er du ein snørrunge. Tek det 100 "
+"er du ein soldat. Viss du treng 50 slag er du ein helt. Høgg du treet på 20 "
+"slag er du snart ein skikkeleg tømrar.»"
 
 #: ../../tribes/barbarians/hunters_hut/help.lua:13
 msgid "\"The Art of Hunting\""
-msgstr ""
+msgstr "«Kunsten å jakta»"
 
 #: ../../tribes/barbarians/fernery/help.lua:12
 msgid "\"We grow roofs\""
-msgstr ""
+msgstr "«Me dyrkar tak»"
 
 #: ../../tribes/barbarians/metalworks/help.lua:12
 msgid "\"We make it work!\""
-msgstr ""
+msgstr "«Me får det til å virka!»"
 
 #: ../../tribes/barbarians/fishers_hut/help.lua:12
 msgid "\"What do you mean, my fish ain't fresh?!\""
-msgstr ""
+msgstr "«Kva meiner du med at fiskem min ikkje er fersk?!»"
 
 #: ../../tribes/barbarians/deep_goldmine/help.lua:30
 #: ../../tribes/barbarians/deep_oremine/help.lua:30
@@ -141,7 +148,7 @@ msgstr ""
 #: ../../tribes/barbarians/goldmine/help.lua:31
 #: ../../tribes/barbarians/oremine/help.lua:31
 msgid "%s always goes to the %s. It has no other use."
-msgstr ""
+msgstr "%s går alltid til %sen. Han har ingen annan hensikt."
 
 #: ../../tribes/barbarians/battlearena/help.lua:27
 #: ../../tribes/barbarians/battlearena/help.lua:28
@@ -151,7 +158,7 @@ msgstr ""
 #: ../../tribes/barbarians/trainingscamp/help.lua:34
 #: ../../tribes/barbarians/warmill/help.lua:58
 msgid "%s and"
-msgstr ""
+msgstr "%s og"
 
 #: ../../tribes/barbarians/coalmine/help.lua:28
 #: ../../tribes/barbarians/deep_coalmine/help.lua:27
@@ -164,14 +171,14 @@ msgstr ""
 #: ../../tribes/barbarians/granitemine/help.lua:27
 #: ../../tribes/barbarians/oremine/help.lua:27
 msgid "%s from a Big Inn"
-msgstr ""
+msgstr "%s frå eit stort vertshus"
 
 #: ../../tribes/barbarians/coalmine/help.lua:26
 #: ../../tribes/barbarians/goldmine/help.lua:25
 #: ../../tribes/barbarians/granitemine/help.lua:25
 #: ../../tribes/barbarians/oremine/help.lua:25
 msgid "%s from a Tavern"
-msgstr ""
+msgstr "%s frå ei kro"
 
 #: ../../tribes/barbarians/coalmine/help.lua:27
 #: ../../tribes/barbarians/deep_coalmine/help.lua:26
@@ -181,32 +188,32 @@ msgstr ""
 #: ../../tribes/barbarians/granitemine/help.lua:26
 #: ../../tribes/barbarians/oremine/help.lua:26
 msgid "%s from an Inn"
-msgstr ""
+msgstr "%s frå eit vertshus"
 
 #: ../../tribes/barbarians/axefactory/help.lua:26
 #: ../../tribes/barbarians/lime_kiln/help.lua:26
 msgid "%s from the Coal mine or the Charcoal Burner's House"
-msgstr ""
+msgstr "%s frå kolgruva eller kolbrennarhuset"
 
 #: ../../tribes/barbarians/metalworks/help.lua:26
 msgid "%s from the Lumberjack's hut"
-msgstr ""
+msgstr "%s frå tømmerhytta"
 
 #: ../../tribes/barbarians/axefactory/help.lua:24
 #: ../../tribes/barbarians/metalworks/help.lua:25
 #: ../../tribes/barbarians/warmill/help.lua:24
 #: ../../tribes/barbarians/warmill/help.lua:25
 msgid "%s from the Smelting Works"
-msgstr ""
+msgstr "%s frå smelteverka"
 
 #: ../../tribes/barbarians/rangers_hut/help.lua:14
 msgid "%s in a conversation with a %s"
-msgstr ""
+msgstr "%s har ein samtale med ein %s"
 
 #: ../../tribes/barbarians/battlearena/help.lua:29
 #: ../../tribes/barbarians/trainingscamp/help.lua:35
 msgid "%s or %s"
-msgstr ""
+msgstr "%s eller %s"
 
 #: ../../tribes/barbarians/axefactory/help.lua:56
 #: ../../tribes/barbarians/coalmine/help.lua:50
@@ -225,13 +232,13 @@ msgstr ""
 #: ../../tribes/barbarians/oremine/help.lua:46
 #: ../../tribes/barbarians/warmill/help.lua:59
 msgid "%s or better"
-msgstr ""
+msgstr "%s eller betre"
 
 #: ../../tribes/barbarians/deeper_coalmine/help.lua:53
 #: ../../tribes/barbarians/deeper_goldmine/help.lua:49
 #: ../../tribes/barbarians/deeper_oremine/help.lua:49
 msgid "%s or better and"
-msgstr ""
+msgstr "%s eller betre og"
 
 #: ../../tribes/barbarians/axefactory/help.lua:60
 #: ../../tribes/barbarians/coalmine/help.lua:53
