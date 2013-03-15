@@ -43,5 +43,8 @@ playFX=../../../sound/farm/farm_animal 192
 return=skipped
 
 [idle]
-pics=farm_i_??.png  # ???
+packed=true
+pics=farm.png
+dimensions=116,84
+base_offset=0,0
 hotspot=72 73

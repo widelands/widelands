@@ -4,5 +4,8 @@ default_target_quantity=5
 preciousness=3
 
 [idle]
-pics=idle.png
+packed=true
+pics=felling_axe.png
+dimensions=17,20
+base_offset=0,0
 hotspot=6 7

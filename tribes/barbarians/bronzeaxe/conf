@@ -2,5 +2,8 @@ help=_The bronze axe is considered a hard to handle weapon. Only skilled warrior
 preciousness=1
 
 [idle]
+packed=true
 pics=idle.png
+dimensions=16,20
+base_offset=0,0
 hotspot=7 7

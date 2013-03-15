@@ -8,5 +8,8 @@ preciousness=10
 # not trunks any longer
 
 [idle]
+packed=true
 pics=idle.png
+dimensions=16,11
+base_offset=0,0
 hotspot=10 10
