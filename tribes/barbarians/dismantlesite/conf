@@ -3,6 +3,9 @@ buildable=no
 vision_range=2
 
 [idle]
-pics=dismanteling_i_??.png
+packed=true
+pics=dismantlesite.png
+dimensions=9x8
+base_offset=0,0
 hotspot=5 5
  

@@ -28,8 +28,15 @@ animate=working 30000
 produce=strongbeer
 
 [idle]
-pics=brewery_i_??.png  # ???
+packed=true
+pics=brewery.png
+dimensions=99,92
+base_offset=0,0
 hotspot=60 59
+
 [working]
-pics=brewery_i_??.png  # ???
+packed=true
+pics=brewery.png
+dimensions=99,92
+base_offset=0,0
 hotspot=60 59

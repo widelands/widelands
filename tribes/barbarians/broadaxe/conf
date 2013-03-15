@@ -4,5 +4,8 @@ help=_The broad axe is produced in the axefactory and the war mill. It is used i
 preciousness=1
 
 [idle]
+packed=true
 pics=idle.png
+dimensions=16,20
+base_offset=0,0
 hotspot=7 6

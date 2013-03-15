@@ -1,12 +1,15 @@
 size=small
 program=program
-picture=field0m_00.png
+picture=field0m.png  # Note - this is a 1-frame image
 
 [program]
 animate=midd 50000
 transform=field1
 
 [midd]
-pics=field0m_??.png
+packed=true
+pics=field0m.png
+dimensions=40,26
+base_offset=0,0
 fps=5
 hotspot=15 12
