@@ -832,11 +832,10 @@ void Soldier::attack_update(Game & game, State & state)
 		return start_task_idle(game, get_animation("idle"), -1);
 	}
 
-	PlayerImmovable * const location = get_location(game);
-	BaseImmovable * const imm = game.map()[get_position()].get_immovable();
+	upcast(Building, location, get_location(game));
 	upcast(Building, enemy, state.objvar1.get(game));
 
-	if (imm == location) {
+	if (get_position() == location->get_position()) {
 		if (!enemy) {
 			molog("[attack] returned home\n");
 			return pop_task(game);
@@ -847,12 +846,13 @@ void Soldier::attack_update(Game & game, State & state)
 	if (m_battle)
 		return start_task_battle(game);
 
-	if (signal == "blocked")
+	if (signal == "blocked") {
 		// Wait before we try again. Note that this must come *after*
 		// we check for a battle
 		// Note that we *should* be woken via sendSpaceSignals,
 		// so the timeout is just an additional safety net.
 		return start_task_idle(game, get_animation("idle"), 5000);
+	}
 
 	if (!location) {
 		molog("[attack] our location disappeared during a battle\n");
