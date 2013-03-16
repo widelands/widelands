@@ -915,7 +915,7 @@ void Soldier::attack_update(Game & game, State & state)
 			}
 		}
 		Flag & baseflag = location->base_flag();
-		if (imm == &baseflag)
+		if (get_position() == baseflag.get_position())
 			return
 				start_task_move
 					(game,
@@ -938,7 +938,7 @@ void Soldier::attack_update(Game & game, State & state)
 
 	// At this point, we know that the enemy building still stands,
 	// and that we're outside in the plains.
-	if (imm != &enemy->base_flag()) {
+	if (get_position() != enemy->base_flag().get_position()) {
 		if
 			(start_task_movepath
 			 	(game,
