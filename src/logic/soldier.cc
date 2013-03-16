@@ -292,7 +292,6 @@ uint32_t Soldier_Descr::get_rand_anim
 		run = m_die_e_name[i];
 	}
 
-	log(" get %s\n", run.c_str());
 	return get_animation(run.c_str());
 }
 
