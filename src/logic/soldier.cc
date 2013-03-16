@@ -834,7 +834,7 @@ void Soldier::attack_update(Game & game, State & state)
 	upcast(Building, location, get_location(game));
 	upcast(Building, enemy, state.objvar1.get(game));
 
-	if (get_position() == location->get_position()) {
+	if (location && get_position() == location->get_position()) {
 		if (!enemy) {
 			molog("[attack] returned home\n");
 			return pop_task(game);
