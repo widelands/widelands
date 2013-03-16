@@ -1413,6 +1413,7 @@ void Soldier::battle_update(Game & game, State &)
 			return skip_act(); //  we will get a signal via setBattle()
 		} else {
 			if (m_combat_walking != CD_COMBAT_E) {
+				opponent.send_signal(game, "wakeup");
 				return start_task_move_in_battle(game, CD_WALK_E);
 			}
 		}
@@ -1494,7 +1495,6 @@ void Soldier::battle_update(Game & game, State &)
 				}
 			}
 		} else {
-
 			assert(opponent.get_position() == get_position());
 			assert(m_battle == opponent.getBattle());
 
@@ -1502,22 +1502,21 @@ void Soldier::battle_update(Game & game, State &)
 				molog
 					("[battle]: Opponent '%d' is walking, sleeping\n",
 					 opponent.serial());
-				return start_task_idle(game, descr().get_animation("idle"), 100);
+				// We should be woken up by our opponent, but add a timeout anyway for robustness
+				return start_task_idle(game, descr().get_animation("idle"), 5000);
 			}
 
 			if (m_battle->first()->serial() == serial()) {
-				molog("[battle]: I am first: '%d'\n", m_combat_walking);
 				if (m_combat_walking != CD_COMBAT_W) {
-					start_task_move_in_battle(game, CD_WALK_W);
-					return;
+					molog("[battle]: Moving west\n");
+					opponent.send_signal(game, "wakeup");
+					return start_task_move_in_battle(game, CD_WALK_W);
 				}
-			}
-
-			if (m_battle->second()->serial() == serial()) {
-				molog("[battle]: I am second: '%d'\n", m_combat_walking);
+			} else {
 				if (m_combat_walking != CD_COMBAT_E) {
-					start_task_move_in_battle(game, CD_WALK_E);
-					return;
+					molog("[battle]: Moving east\n");
+					opponent.send_signal(game, "wakeup");
+					return start_task_move_in_battle(game, CD_WALK_E);
 				}
 			}
 		}
