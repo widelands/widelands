@@ -25,9 +25,15 @@ animate=working 32000
 produce=grout:2
 
 [idle]
-pics=stonegrinder_i_??.png  # ???
+packed=true
+pics=lime_kiln.png
+dimensions=100,78
+base_offset=0,0
 hotspot=45 53
 
 [working]
-pics=stonegrinder_i_??.png  # ???
+packed=true
+pics=lime_kiln.png
+dimensions=100,78
+base_offset=0,0
 hotspot=45 53

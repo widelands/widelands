@@ -4,5 +4,8 @@ preciousness=4
 default_target_quantity=20
 
 [idle]
-pics=bread_idle.png
+packed=true
+pics=pittabread.png
+dimensions=12,11
+base_offset=0,0
 hotspot=5 11

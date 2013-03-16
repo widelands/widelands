@@ -19,5 +19,9 @@ sleep=35000
 worker=hunt
 
 [idle]
-pics=hunter_i_??.png
+packed=true
+pics=hunters_hut.png
+dimensions=69,63
+base_offset=0,0
 hotspot=45 40
+

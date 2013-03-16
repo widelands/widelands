@@ -44,9 +44,16 @@ call=produce_snack
 return=skipped
 
 [idle]
-pics=inn_i_??.png  # ???
+packed=true
+pics=inn.png
+dimensions=100,87
+base_offset=0,0
 hotspot=48 59
 
 [working]
-pics=inn_i_??.png  # ???
+packed=true
+pics=inn.png
+dimensions=100,87
+base_offset=0,0
 hotspot=48 59
+
