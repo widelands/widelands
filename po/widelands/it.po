@@ -7,15 +7,15 @@ msgstr ""
 "Project-Id-Version: Widelands svn4530\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2013-03-09 17:57+0100\n"
-"PO-Revision-Date: 2013-01-08 10:12+0000\n"
+"PO-Revision-Date: 2013-03-15 10:11+0000\n"
 "Last-Translator: Guybrush88 <Unknown>\n"
 "Language-Team: Italiano <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2013-03-10 04:37+0000\n"
-"X-Generator: Launchpad (build 16523)\n"
+"X-Launchpad-Export-Date: 2013-03-16 04:30+0000\n"
+"X-Generator: Launchpad (build 16532)\n"
 "X-Poedit-Country: ITALY\n"
 "X-Poedit-Language: Italian\n"
 "X-Poedit-SourceCharset: utf-8\n"
@@ -2911,7 +2911,7 @@ msgstr "NESSUN CONTROLLORE DI GIOCO"
 
 #: ../../src/wui/fieldaction.cc:114 ../../src/wui/buildingwindow.cc:206
 msgid "Construction costs:"
-msgstr ""
+msgstr "Costi di costruzione:"
 
 #: ../../src/wui/fieldaction.cc:250
 msgid "Build small buildings"
@@ -3024,7 +3024,7 @@ msgstr "Smantella"
 
 #: ../../src/wui/buildingwindow.cc:244
 msgid "Returns:"
-msgstr ""
+msgstr "Ritorna:"
 
 #: ../../src/wui/buildingwindow.cc:270 ../../src/wui/buildingwindow.cc:479
 msgid "Hide workarea"
@@ -3239,7 +3239,7 @@ msgstr "Livello Successivo"
 
 #: ../../src/wui/productionsitewindow.cc:95
 msgid "Terminate the employment of the selected worker"
-msgstr ""
+msgstr "Termina l'impiego del lavoratore selezionato"
 
 #: ../../src/wui/productionsitewindow.cc:163
 msgid "(vacant)"
