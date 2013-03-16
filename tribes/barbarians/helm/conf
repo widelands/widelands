@@ -2,5 +2,8 @@ help=_A helmet is basic tool to protect warriors. It is produced in the helmsmit
 preciousness=1
 
 [idle]
-pics=idle.png
+packed=true
+pics=helm.png
+dimensions=15,11
+base_offset=0,0
 hotspot=7 8
