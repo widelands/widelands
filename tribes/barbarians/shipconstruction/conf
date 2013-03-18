@@ -12,5 +12,9 @@ construction=idle 5000 210000
 transform=bob tribe:ship
 
 [idle]
-pics=build_??.png
-hotspot=115 82
+packed=true
+pics=shipconstruction.png
+dimensions=195,143
+base_offset=195,286
+region_00=0,0,195,143:0,286;390,143;390,0;195,143;0,143;195,0;0,0
+hotspot=95 75

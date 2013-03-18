@@ -34,11 +34,17 @@ produce=ration
 call=produce_ration
 return=skipped
 
-
 [idle]
-pics=tavern_i_??.png  # ???
+packed=true
+pics=tavern.png
+dimensions=97,77
+base_offset=0,0
 hotspot=32 56
 
 [working]
-pics=tavern_i_??.png  # ???
+packed=true
+pics=tavern.png
+dimensions=97,77
+base_offset=0,0
 hotspot=32 56
+

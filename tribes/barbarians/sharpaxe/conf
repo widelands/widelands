@@ -5,5 +5,8 @@ help=_Young warriors are proud to learn to fight with this powerful weapon. It i
 preciousness=1
 
 [idle]
-pics=idle.png
+packed=true
+pics=sharpaxe.png
+dimensions=17,20
+base_offset=0,0
 hotspot=7 7

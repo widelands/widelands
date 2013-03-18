@@ -7,6 +7,9 @@ animate=midd 40000
 transform=reed1
 
 [midd]
-pics=field0m_??.png
+packed=true
+pics=reed0.png
+dimensions=27,21
+base_offset=0,0
 fps=5
 hotspot=13 14
