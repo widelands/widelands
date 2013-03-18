@@ -7,6 +7,6 @@ preciousness=1
 [idle]
 packed=true
 pics=coal.png
-dimensions=<correct w and height>
+dimensions=8,8
 base_offset=0,0
 hotspot=4 6
