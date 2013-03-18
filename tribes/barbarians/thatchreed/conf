@@ -4,5 +4,8 @@ preciousness=5
 # Reed is growing near by watersides.
 
 [idle]
-pics=idle.png
+packed=true
+pics=thatchreed.png
+dimensions=7,12
+base_offset=0,0
 hotspot=3 12
