@@ -55,7 +55,7 @@ base_offset=0,0
 region_00=2,25,106,44:234,44
 hotspot=62 48
 
-[work]
+[working]
 packed=true
 pics=shipyard.png
 dimensions=117,69

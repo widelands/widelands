@@ -5,7 +5,7 @@ vision_range=2
 [idle]
 packed=true
 pics=dismantlesite.png
-dimensions=9x8
+dimensions=9,8
 base_offset=0,0
 hotspot=5 5
  
