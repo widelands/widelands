@@ -27,15 +27,17 @@
 
 #include <utility>
 
-// The behaviour of whether SDL_Mixer frees the RW it uses was changed with SDL_Mixer version 1.2.12, this
-// check is so that we don't have a memory leak in the new version.
-// TODO: Once we can demand that everyone use SDL_Mixer version >= 1.2.12, this function should be removed,
-// and all usages replaced supposing it's true.
-bool have_to_free_rw() {
-	return
+namespace {
+	// The behaviour of whether SDL_Mixer frees the RW it uses was changed with SDL_Mixer version 1.2.12, this
+	// check is so that we don't have a memory leak in the new version.
+	// TODO: Once we can demand that everyone use SDL_Mixer version >= 1.2.12, this function should be removed,
+	// and all usages replaced supposing it's true.
+	bool have_to_free_rw() {
+		return
 			std::make_pair
 				(SDL_MIXER_MAJOR_VERSION, std::make_pair(SDL_MIXER_MINOR_VERSION, SDL_MIXER_PATCHLEVEL)) >=
 			std::make_pair(1, std::make_pair(2, 12));
+	}
 }
 
 /// Prepare infrastructure for reading song files from disk
