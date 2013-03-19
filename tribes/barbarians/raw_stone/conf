@@ -9,6 +9,6 @@ preciousness=5
 [idle]
 packed=true
 pics=raw_stone.png
-dimensions=<correct w and height>
+dimensions=15,15
 base_offset=0,0
 hotspot=7 8

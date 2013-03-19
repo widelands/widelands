@@ -5,6 +5,6 @@ default_target_quantity=10
 [idle]
 packed=true
 pics=iron.png
-dimensions=<correct w and height>
+dimensions=16,10
 base_offset=0,0
 hotspot=7 9
