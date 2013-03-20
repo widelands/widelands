@@ -568,7 +568,7 @@ void Sound_Handler::start_music
 	if (get_disable_music() or m_nosound)
 		return;
 
-	if (fadein_ms == 0) fadein_ms = 50; //  avoid clicks
+	if (fadein_ms == 0) fadein_ms = 250; //  avoid clicks
 
 	if (Mix_PlayingMusic())
 		change_music(songset_name, 0, fadein_ms);
@@ -598,7 +598,7 @@ void Sound_Handler::stop_music(int32_t fadeout_ms)
 	if (get_disable_music() or m_nosound)
 		return;
 
-	if (fadeout_ms == 0) fadeout_ms = 50; //  avoid clicks
+	if (fadeout_ms == 0) fadeout_ms = 250; //  avoid clicks
 
 	Mix_FadeOutMusic(fadeout_ms);
 }
