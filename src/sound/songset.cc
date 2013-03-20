@@ -34,9 +34,8 @@ namespace {
 	// and all usages replaced supposing it's true.
 	bool have_to_free_rw() {
 		return
-			std::make_pair
-				(SDL_MIXER_MAJOR_VERSION, std::make_pair(SDL_MIXER_MINOR_VERSION, SDL_MIXER_PATCHLEVEL)) >=
-			std::make_pair(1, std::make_pair(2, 12));
+			SDL_VERSIONNUM(SDL_MIXER_MAJOR_VERSION, SDL_MIXER_MINOR_VERSION, SDL_MIXER_PATCHLEVEL) >=
+			SDL_VERSIONNUM(1, 2, 12);
 	}
 }
 
