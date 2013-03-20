@@ -26,9 +26,15 @@ animate=working 25000
 produce=goldyarn
 
 [idle]
-pics=goldweaver_i_??.png  # ???
+packed=true
+pics=goldweaver.png
+dimensions=60,80
+base_offset=0,0
 hotspot=33 64
 
 [working]
-pics=goldweaver_i_??.png  # ???
+packed=true
+pics=goldweaver.png
+dimensions=60,80
+base_offset=0,0
 hotspot=33 64

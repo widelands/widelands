@@ -4,5 +4,8 @@ preciousness=1
 default_target_quantity=20
 
 [idle]
-pics=idle.png
+packed=true
+pics=tabard.png
+dimensions=12,14
+base_offset=0,0
 hotspot=5 10

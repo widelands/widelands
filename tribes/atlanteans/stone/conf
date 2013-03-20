@@ -3,5 +3,8 @@ help=_Stone is one basic building ware of the Atlanteans. It is produced in a qu
 preciousness=5
 
 [idle]
-pics=idle.png
+packed=true
+pics=stone.png
+dimensions=15,15
+base_offset=0,0
 hotspot=7 8

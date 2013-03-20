@@ -1,12 +1,15 @@
 size=small
 program=program
-picture=cornfield_m_00.png
+picture=cornfield_m.png
 
 [program]
 animate=midd 50000
 transform=cornfield_b
 
 [midd]
-pics=cornfield_m_??.png
+packed=true
+pics=cornfield_m.png
+dimensions=57,42
+base_offset=0,0
 fps=5
 hotspot=31 35

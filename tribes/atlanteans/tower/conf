@@ -12,5 +12,8 @@ stone=4
 spidercloth=1
 
 [idle]
-pics=tower_i_??.png
+packed=true
+pics=tower.png
+dimensions=78,82
+base_offset=0,0
 hotspot=55 60

@@ -5,5 +5,8 @@ animate=idle 50000
 remove=
 
 [idle]
-pics=cornfield_harvested_??.png
+packed=true
+pics=cornfield_harvested.png
+dimensions=59,37
+base_offset=0,0
 hotspot=31 30

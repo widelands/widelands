@@ -1,12 +1,16 @@
 size=small
 program=program
-picture=blackrootfield_t_00.png
+picture=blackrootfield_t.png
 
 [program]
 animate=tiny 30000
 transform=blackrootfield_s
 
 [tiny]
-pics=blackrootfield_t_??.png
+packed=true
+pics=blackrootfield_t.png
+dimensions=56,34
+base_offset=0,0
 fps=5
 hotspot=26 27
+

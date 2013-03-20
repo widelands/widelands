@@ -1,12 +1,17 @@
 size=big
 program=program
-picture=fire_burn_00.png
+picture=destroyed_building_picture.png  # Single frame image
 
 [program]
 animate=burn 30000
 transform=ashes
 
 [burn]
-pics=fire_burn_??.png
+packed=true
+pics=destroyed_building.png
+dimensions=84,69
+base_offset=0,0
+region_00=2,0,78,60:162,60;162,0;78,69;0,69;84,0
 fps=10
 hotspot=40 57
+

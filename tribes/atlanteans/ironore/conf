@@ -4,5 +4,8 @@ help=_Iron ores are mined in iron mines. They get smelted in a smelting works to
 preciousness=4
 
 [idle]
-pics=idle.png
+packed=true
+pics=ironore.png
+dimensions=8,8
+base_offset=0,0
 hotspot=4 4

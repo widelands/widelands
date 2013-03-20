@@ -4,5 +4,8 @@ preciousness=1
 
 # A golden doubled trident
 [idle]
-pics=idle.png
+packed=true
+pics=heavy_double_trident.png
+dimensions=16,16
+base_offset=0,0
 hotspot=10 17

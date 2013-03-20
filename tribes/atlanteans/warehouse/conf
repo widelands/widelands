@@ -9,5 +9,8 @@ quartz=1
 spidercloth=1
 
 [idle]
-pics=warehouse_i_??.png  # ???
+packed=true
+pics=warehouse.png
+dimensions=100,88
+base_offset=0,0
 hotspot=58 62

@@ -6,5 +6,8 @@ default_target_quantity=40
 preciousness=7
 
 [idle]
-pics=idle.png
+packed=true
+pics=planks.png
+dimensions=23,19
+base_offset=0,0
 hotspot=12 17

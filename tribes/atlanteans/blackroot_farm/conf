@@ -42,5 +42,8 @@ call=harvest_blackroot
 return=skipped
 
 [idle]
-pics=blackroot_farm_i_??.png  # ???
+packed=true
+pics=blackroot_farm.png
+dimensions=128,90
+base_offset=0,0
 hotspot=74 60

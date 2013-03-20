@@ -3,5 +3,8 @@ help=_Cornflour is produced in a mill out of corn and is one of three parts of t
 preciousness=2
 
 [idle]
-pics=idle.png
+packed=true
+pics=cornflour.png
+dimensions=12,16
+base_offset=0,0
 hotspot=4 15

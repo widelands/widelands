@@ -144,9 +144,15 @@ call=produce_shovel
 return=skipped
 
 [idle]
-pics=toolsmith_i_??.png
+packed=true
+pics=toolsmithy.png
+dimensions=100,83
+base_offset=0,0
 hotspot=50 53
 
 [working]
-pics=toolsmith_i_??.png
+packed=true
+pics=toolsmithy.png
+dimensions=100,83
+base_offset=0,0
 hotspot=50 53
