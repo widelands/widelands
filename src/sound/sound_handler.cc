@@ -600,9 +600,7 @@ void Sound_Handler::stop_music(int32_t fadeout_ms)
 
 	if (fadeout_ms == 0) fadeout_ms = 50; //  avoid clicks
 
-	// Don't try to fade out if we already shut down the music subsystem.
-	if (Mix_QuerySpec(NULL, NULL, NULL))
-		Mix_FadeOutMusic(fadeout_ms);
+	Mix_FadeOutMusic(fadeout_ms);
 }
 
 /** Play an other piece of music.
