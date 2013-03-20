@@ -2,5 +2,8 @@ help=_Shovels are needed for proper handling of plants. Therefore the forester a
 default_target_quantity=2
 
 [idle]
-pics=idle.png
+packed=true
+pics=shovel.png
+dimensions=13,12
+base_offset=0,0
 hotspot=5 8

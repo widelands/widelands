@@ -10,5 +10,8 @@ planks=2
 stone=2
 
 [idle]
-pics=small_tower_i_??.png
+packed=true
+pics=small_tower.png
+dimensions=66,80
+base_offset=0,0
 hotspot=42 65

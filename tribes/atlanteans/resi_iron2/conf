@@ -1,5 +1,5 @@
 program=program
-picture=resi_00.png
+picture=resi_iron2.png
 attrib=resi
 
 [program]
@@ -7,5 +7,8 @@ animate=idle 600000
 remove=
 
 [idle]
-pics=resi_??.png
+packed=true
+pics=resi_iron2.png
+dimensions=12,13
+base_offset=0,0
 hotspot=7 10

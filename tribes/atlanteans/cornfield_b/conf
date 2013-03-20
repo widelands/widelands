@@ -11,5 +11,8 @@ remove=
 transform=cornfield_harvested
 
 [idle]
-pics=cornfield_b_??.png
+packed=true
+pics=cornfield.png
+dimensions=58,48
+base_offset=0,0
 hotspot=31 41

@@ -1,5 +1,8 @@
 help=_This bow is used by the Atlantean hunter. It is produced by the toolsmith.
 
 [idle]
-pics=idle.png
+packed=true
+pics=hunting_bow.png
+dimensions=14,14
+base_offset=0,0
 hotspot=9 16

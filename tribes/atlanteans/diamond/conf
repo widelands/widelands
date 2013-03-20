@@ -4,5 +4,8 @@ preciousness=2
 
 # No description yet
 [idle]
-pics=idle.png
+packed=true
+pics=diamond.png
+dimensions=7,8
+base_offset=0,0
 hotspot=4 7

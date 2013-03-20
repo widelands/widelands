@@ -3,5 +3,8 @@ help=_Gold ores are mined in gold mines and processed to gold in smelting works.
 preciousness=2
 
 [idle]
-pics=idle.png
+packed=true
+pics=goldore.png
+dimensions=8,8
+base_offset=0,0
 hotspot=4 4

@@ -3,5 +3,8 @@ help=_A saw is needed by the woodcutter and the carpenter. It is produced by the
 default_target_quantity=2
 
 [idle]
-pics=idle.png
+packed=true
+pics=saw.png
+dimensions=21,18
+base_offset=0,0
 hotspot=7 5

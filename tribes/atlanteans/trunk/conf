@@ -5,6 +5,9 @@ preciousness=14
 default_target_quantity=40
 
 [idle]
-pics=idle.png
+packed=true
+pics=trunk.png
+dimensions=15,15
+base_offset=0,0
 hotspot=5 13
 

@@ -12,5 +12,8 @@ planks=1
 stone=2
 
 [idle]
-pics=high_tower_i_??.png
+packed=true
+pics=high_tower.png
+dimensions=78,100
+base_offset=0,0
 hotspot=50 73

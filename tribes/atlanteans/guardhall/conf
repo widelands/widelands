@@ -10,5 +10,8 @@ stone=4
 diamond=1
 
 [idle]
-pics=guardhall_i_??.png
+packed=true
+pics=guardhall.png
+dimensions=100,85
+base_offset=0,0
 hotspot=58 72

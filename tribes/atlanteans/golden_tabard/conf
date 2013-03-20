@@ -4,5 +4,8 @@ help=_A golden tabard is produced in an Atlatean weaving-mill out of gold yarn. 
 preciousness=1
 
 [idle]
-pics=idle.png
+packed=true
+pics=golden_tabbard.png
+dimensions=12,15
+base_offset=0,0
 hotspot=5 10

@@ -5,5 +5,8 @@ default_target_quantity=20
 
 # No description yet
 [idle]
-pics=idle.png
+packed=true
+pics=bread.png
+dimensions=15,8
+base_offset=0,0
 hotspot=9 13

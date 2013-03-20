@@ -1,5 +1,5 @@
 program=program
-picture=ashes_00.png  # Intentionally kept this separate single-image file
+picture=ashes.png  # Single-image file
 
 [program]
 animate=idle 45000

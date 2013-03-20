@@ -20,5 +20,8 @@ sleep=25000
 worker=cut_stone
 
 [idle]
-pics=quarry_i_??.png  # ???
+packed=true
+pics=quarry.png
+dimensions=60,66
+base_offset=0,0
 hotspot=40 45

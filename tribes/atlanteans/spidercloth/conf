@@ -4,6 +4,9 @@ default_target_quantity=10
 preciousness=1
 
 [idle]
-pics=idle.png
+packed=true
+pics=spidercloth.png
+dimensions=10,10
+base_offset=0,0
 hotspot=6 9
 

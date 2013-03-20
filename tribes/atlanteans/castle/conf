@@ -12,5 +12,8 @@ diamond=1
 quartz=1
 
 [idle]
-pics=castle_i_??.png
+packed=true
+pics=castle.png
+dimensions=121,103
+base_offset=0,0
 hotspot=91 91

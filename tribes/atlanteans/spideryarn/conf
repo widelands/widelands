@@ -3,5 +3,8 @@ help=_This yarn is produced by spiders, which are bred on spiderfarms. It is pro
 preciousness=2
 
 [idle]
+packed=true
 pics=idle.png
+dimensions=14,15
+base_offset=0,0
 hotspot=9 16

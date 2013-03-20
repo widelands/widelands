@@ -9,5 +9,8 @@ planks=1
 stone=1
 
 [idle]
-pics=guardhouse_i_??.png
+packed=true
+pics=guardhouse.png
+dimensions=60,44
+base_offset=0,0
 hotspot=33 41
