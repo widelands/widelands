@@ -344,7 +344,7 @@ def output_results(anim, img_name, dimensions, regions, offsets_by_id, args):
                 id = (anim, ridx, cur_fr)
                 if id not in offsets_by_id:
                     break
-                rv.append("%i,%i" % offsets_by_id[id])
+                rv.append("%i %i" % offsets_by_id[id])
                 cur_fr += 1
             return ";".join(rv)
 
