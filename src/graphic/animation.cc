@@ -51,10 +51,10 @@ using namespace std;
 
 namespace  {
 
-// Parses a point from a string like 'p=x,y' into p. Throws on error.
+// Parses a point from a string like 'p=x y' into p. Throws on error.
 void parse_point(const string& def, Point* p) {
 	vector<string> split_vector;
-	boost::split(split_vector, def, boost::is_any_of(","));
+	boost::split(split_vector, def, boost::is_any_of(" "));
 	if (split_vector.size() != 2)
 		throw wexception("Invalid point definition: %s", def.c_str());
 
@@ -62,10 +62,10 @@ void parse_point(const string& def, Point* p) {
 	p->y = boost::lexical_cast<int32_t>(split_vector[1]);
 }
 
-// Parses a rect from a string like 'p=x,y,w,h' into r. Throws on error.
+// Parses a rect from a string like 'p=x y w h' into r. Throws on error.
 void parse_rect(const string& def, Rect* r) {
 	vector<string> split_vector;
-	boost::split(split_vector, def, boost::is_any_of(","));
+	boost::split(split_vector, def, boost::is_any_of(" "));
 	if (split_vector.size() != 4)
 		throw wexception("Invalid rect definition: %s", def.c_str());
 

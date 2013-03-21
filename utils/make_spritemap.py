@@ -351,7 +351,7 @@ def output_results(anim, img_name, dimensions, regions, offsets_by_id, args):
         f.write("base_offset=%i %i\n" % offsets_by_id[anim, -1, -1])
 
         for ridx,r in enumerate(regions):
-            f.write("region_%02i=%i,%i,%i,%i:%s\n" % (
+            f.write("region_%02i=%i %i %i %i:%s\n" % (
                 ridx, r.left, r.top, r.right - r.left + 1,
                 r.bottom - r.top + 1, _find_offsets(anim, ridx)
                 ))
