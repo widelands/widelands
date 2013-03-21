@@ -21,6 +21,6 @@ packed=true
 pics=warehouse.png
 dimensions=103 101
 base_offset=0 0
-region_00=0 0 97 92:103,0
+region_00=0 0 97 92:103 0
 hotspot=58 75
 

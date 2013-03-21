@@ -44,7 +44,7 @@ packed=true
 pics=shipyard.png
 dimensions=117 69
 base_offset=0 0
-region_00=2 25 106 44:234,88
+region_00=2 25 106 44:234 88
 hotspot=62 48
 
 [unoccupied]
@@ -52,7 +52,7 @@ packed=true
 pics=shipyard.png
 dimensions=117 69
 base_offset=0 0
-region_00=2 25 106 44:234,44
+region_00=2 25 106 44:234 44
 hotspot=62 48
 
 [working]
@@ -60,5 +60,5 @@ packed=true
 pics=shipyard.png
 dimensions=117 69
 base_offset=0 0
-region_00=2 25 106 44:234,0
+region_00=2 25 106 44:234 0
 hotspot=62 48
