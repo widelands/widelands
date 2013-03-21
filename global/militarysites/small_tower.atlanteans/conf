@@ -6,5 +6,5 @@ max_soldiers=3
 buildable=no
 
 [idle]
-pics=../../../tribes/atlanteans/small_tower/small_tower_i_??.png
+pics=../../../tribes/atlanteans/small_tower/small_tower.png
 hotspot=41 63

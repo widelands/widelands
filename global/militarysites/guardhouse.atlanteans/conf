@@ -5,5 +5,5 @@ max_soldiers=2
 buildable=no
 
 [idle]
-pics=../../../tribes/atlanteans/guardhouse/guardhouse_i_??.png
+pics=../../../tribes/atlanteans/guardhouse/guardhouse.png
 hotspot=35 42

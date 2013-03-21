@@ -5,5 +5,5 @@ conquers=12
 buildable=no
 
 [idle]
-pics=../../../tribes/atlanteans/castle/castle_i_??.png
+pics=../../../tribes/atlanteans/castle/castle.png
 hotspot=92 90

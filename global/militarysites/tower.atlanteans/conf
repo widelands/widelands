@@ -6,5 +6,5 @@ vision_range=17
 buildable=no
 
 [idle]
-pics=../../../tribes/atlanteans/tower/tower_i_??.png
+pics=../../../tribes/atlanteans/tower/tower.png
 hotspot=55 70
