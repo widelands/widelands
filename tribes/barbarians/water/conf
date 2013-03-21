@@ -7,6 +7,6 @@ default_target_quantity=25
 [idle]
 packed=true
 pics=water.png
-dimensions=8,11
-base_offset=0,0
+dimensions=8 11
+base_offset=0 0
 hotspot=4 8

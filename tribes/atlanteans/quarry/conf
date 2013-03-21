@@ -22,6 +22,6 @@ worker=cut_stone
 [idle]
 packed=true
 pics=quarry.png
-dimensions=60,66
-base_offset=0,0
+dimensions=60 66
+base_offset=0 0
 hotspot=40 45

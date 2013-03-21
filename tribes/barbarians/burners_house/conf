@@ -28,13 +28,13 @@ produce=coal
 [idle]
 packed=true
 pics=burners_house.png
-dimensions=93,81
-base_offset=0,0
+dimensions=93 81
+base_offset=0 0
 hotspot=47 54
 
 [working]
 packed=true
 pics=burners_house.png
-dimensions=93,81
-base_offset=0,0
+dimensions=93 81
+base_offset=0 0
 hotspot=47 54

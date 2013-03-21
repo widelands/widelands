@@ -62,13 +62,13 @@ return=skipped
 [idle]
 packed=true
 pics=armoursmithy.png
-dimensions=100,84
-base_offset=0,0
+dimensions=100 84
+base_offset=0 0
 hotspot=53 60
 
 [working]
 packed=true
 pics=armoursmithy.png
-dimensions=100,84
-base_offset=0,0
+dimensions=100 84
+base_offset=0 0
 hotspot=53 60

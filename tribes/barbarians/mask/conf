@@ -5,6 +5,6 @@ preciousness=1
 [idle]
 packed=true
 pics=mask.png
-dimensions=15,15
-base_offset=0,0
+dimensions=15 15
+base_offset=0 0
 hotspot=7 10

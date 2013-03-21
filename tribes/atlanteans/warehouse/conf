@@ -11,6 +11,6 @@ spidercloth=1
 [idle]
 packed=true
 pics=warehouse.png
-dimensions=100,88
-base_offset=0,0
+dimensions=100 88
+base_offset=0 0
 hotspot=58 62

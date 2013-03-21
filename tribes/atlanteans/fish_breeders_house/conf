@@ -23,6 +23,6 @@ worker=breed
 [idle]
 packed=true
 pics=fish_breeders_house.png
-dimensions=68,61
-base_offset=0,0
+dimensions=68 61
+base_offset=0 0
 hotspot=34 42

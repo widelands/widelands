@@ -48,6 +48,6 @@ return=skipped
 [idle]
 packed=true
 pics=weaving-mill.png
-dimensions=128,85
-base_offset=0,0
+dimensions=128 85
+base_offset=0 0
 hotspot=65 69

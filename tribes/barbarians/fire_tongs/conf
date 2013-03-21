@@ -3,6 +3,6 @@ help=_Fire tongs are tools of the smelter, who works in the smelting works. Prod
 [idle]
 packed=true
 pics=fire_tongs.png
-dimensions=11,13
-base_offset=0,0
+dimensions=11 13
+base_offset=0 0
 hotspot=5 5

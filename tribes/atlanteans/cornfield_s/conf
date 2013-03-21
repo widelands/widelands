@@ -9,7 +9,7 @@ transform=cornfield_m
 [small]
 packed=true
 pics=cornfield_s.png
-dimensions=64,40
-base_offset=0,0
+dimensions=64 40
+base_offset=0 0
 fps=5
 hotspot=35 34

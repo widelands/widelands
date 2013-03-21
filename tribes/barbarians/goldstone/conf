@@ -8,6 +8,6 @@ preciousness=2
 [idle]
 packed=true
 pics=goldstone.png
-dimensions=8,8
-base_offset=0,0
+dimensions=8 8
+base_offset=0 0
 hotspot=4 4

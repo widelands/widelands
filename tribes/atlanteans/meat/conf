@@ -5,6 +5,6 @@ preciousness=2
 [idle]
 packed=true
 pics=meat.png
-dimensions=11,10
-base_offset=0,0
+dimensions=11 10
+base_offset=0 0
 hotspot=7 9

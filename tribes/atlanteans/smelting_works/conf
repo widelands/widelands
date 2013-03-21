@@ -47,13 +47,13 @@ return=skipped
 [idle]
 packed=true
 pics=smelting_works.png
-dimensions=91,100
-base_offset=0,0
+dimensions=91 100
+base_offset=0 0
 hotspot=57 72
 
 [working]
 packed=true
 pics=smelting_works.png
-dimensions=91,100
-base_offset=0,0
+dimensions=91 100
+base_offset=0 0
 hotspot=57 72

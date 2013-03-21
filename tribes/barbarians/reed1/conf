@@ -13,6 +13,6 @@ remove=
 [idle]
 packed=true
 pics=reed1.png
-dimensions=27,25
-base_offset=0,0
+dimensions=27 25
+base_offset=0 0
 hotspot=13 18

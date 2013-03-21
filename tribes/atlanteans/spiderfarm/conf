@@ -27,13 +27,13 @@ produce=spideryarn
 [idle]
 packed=true
 pics=spiderfarm.png
-dimensions=128,101
-base_offset=0,0
+dimensions=128 101
+base_offset=0 0
 hotspot=87 75
 
 [working]
 packed=true
 pics=spiderfarm.png
-dimensions=128,101
-base_offset=0,0
+dimensions=128 101
+base_offset=0 0
 hotspot=87 75

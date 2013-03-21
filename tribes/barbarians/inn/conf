@@ -46,14 +46,14 @@ return=skipped
 [idle]
 packed=true
 pics=inn.png
-dimensions=100,87
-base_offset=0,0
+dimensions=100 87
+base_offset=0 0
 hotspot=48 59
 
 [working]
 packed=true
 pics=inn.png
-dimensions=100,87
-base_offset=0,0
+dimensions=100 87
+base_offset=0 0
 hotspot=48 59
 

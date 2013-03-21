@@ -5,6 +5,6 @@ preciousness=1
 [idle]
 packed=true
 pics=idle.png
-dimensions=14,20
-base_offset=0,0
+dimensions=14 20
+base_offset=0 0
 hotspot=7 7

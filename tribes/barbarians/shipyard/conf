@@ -34,31 +34,31 @@ return=completed
 [build]
 packed=true
 pics=shipyard.png
-dimensions=117,69
-base_offset=117,138
+dimensions=117 69
+base_offset=117 138
 region_00=0,0,117,69:0,138;117,69;0,69;117,0
 hotspot=62 48
 
 [idle]
 packed=true
 pics=shipyard.png
-dimensions=117,69
-base_offset=0,0
+dimensions=117 69
+base_offset=0 0
 region_00=2,25,106,44:234,88
 hotspot=62 48
 
 [unoccupied]
 packed=true
 pics=shipyard.png
-dimensions=117,69
-base_offset=0,0
+dimensions=117 69
+base_offset=0 0
 region_00=2,25,106,44:234,44
 hotspot=62 48
 
 [working]
 packed=true
 pics=shipyard.png
-dimensions=117,69
-base_offset=0,0
+dimensions=117 69
+base_offset=0 0
 region_00=2,25,106,44:234,0
 hotspot=62 48

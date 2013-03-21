@@ -31,13 +31,13 @@ produce=beer
 [idle]
 packed=true
 pics=micro-brewery.png
-dimensions=87,75
-base_offset=0,0
+dimensions=87 75
+base_offset=0 0
 hotspot=42 50
 
 [working]
 packed=true
 pics=micro-brewery.png
-dimensions=87,75
-base_offset=0,0
+dimensions=87 75
+base_offset=0 0
 hotspot=42 50

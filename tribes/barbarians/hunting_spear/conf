@@ -3,6 +3,6 @@ help=_This spear is light enough to be thrown, but heavy enough to kill any anim
 [idle]
 packed=true
 pics=hunting_spear.png
-dimensions=14,14
-base_offset=0,0
+dimensions=14 14
+base_offset=0 0
 hotspot=6 5

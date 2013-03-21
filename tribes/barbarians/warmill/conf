@@ -105,30 +105,30 @@ return=skipped
 [build]
 packed=true
 pics=warmill.png
-dimensions=117,101
-base_offset=117,101
+dimensions=117 101
+base_offset=117 101
 region_00=0,0,114,101:228,202;114,202;0,202;237,101;237,0
 hotspot=57 76
 
 [idle]
 packed=true
 pics=warmill.png
-dimensions=117,101
-base_offset=0,101
+dimensions=117 101
+base_offset=0 101
 hotspot=57 76
 
 [unoccupied]
 packed=true
 pics=warmill.png
-dimensions=117,101
-base_offset=120,0
+dimensions=117 101
+base_offset=120 0
 hotspot=57 76
 
 [working]
 packed=true
 pics=warmill.png
-dimensions=120,101
-base_offset=0,0
+dimensions=120 101
+base_offset=0 0
 region_00=15,51,2,2:553,372;553,372;553,372;553,372;553,372;553,372;553,372;551,372;549,372;549,372;549,372;549,372;549,372;549,372;549,372;549,372;549,372;553,372;553,372;553,372
 region_01=66,94,1,1:556,372;556,372;556,372;555,372;555,372;555,372;555,372;555,372;555,372;555,372;555,372;555,372;555,372;555,372;555,372;555,372;555,372;555,372;555,372;556,372
 region_02=21,1,99,93:549,279;549,186;549,93;549,0;396,396;297,396;198,396;99,396;0,396;450,279;450,186;450,93;450,0;297,303;198,303;99,303;0,303;351,186;351,93;351,0

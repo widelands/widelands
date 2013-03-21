@@ -21,6 +21,6 @@ worker=fish
 [idle]
 packed=true
 pics=fishers_hut.png
-dimensions=76,50
-base_offset=0,0
+dimensions=76 50
+base_offset=0 0
 hotspot=39 40

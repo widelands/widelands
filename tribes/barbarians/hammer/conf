@@ -4,6 +4,6 @@ preciousness=1
 [idle]
 packed=true
 pics=hammer.png
-dimensions=9,10
-base_offset=0,0
+dimensions=9 10
+base_offset=0 0
 hotspot=3 4

@@ -4,6 +4,6 @@ help=_Cloth is needed for barbarian ships. It is produced out of thatch reed.
 [idle]
 packed=true
 pics=cloth.png
-dimensions=10,10
-base_offset=0,0
+dimensions=10 10
+base_offset=0 0
 hotspot=6 9

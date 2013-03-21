@@ -146,13 +146,13 @@ return=skipped
 [idle]
 packed=true
 pics=toolsmithy.png
-dimensions=100,83
-base_offset=0,0
+dimensions=100 83
+base_offset=0 0
 hotspot=50 53
 
 [working]
 packed=true
 pics=toolsmithy.png
-dimensions=100,83
-base_offset=0,0
+dimensions=100 83
+base_offset=0 0
 hotspot=50 53

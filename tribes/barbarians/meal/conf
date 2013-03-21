@@ -6,6 +6,6 @@ preciousness=5
 [idle]
 packed=true
 pics=meal.png
-dimensions=15,12
-base_offset=0,0
+dimensions=15 12
+base_offset=0 0
 hotspot=6 11

@@ -9,7 +9,7 @@ transform=field1
 [midd]
 packed=true
 pics=field0m.png
-dimensions=40,26
-base_offset=0,0
+dimensions=40 26
+base_offset=0 0
 fps=5
 hotspot=15 12

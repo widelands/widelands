@@ -141,30 +141,30 @@ return=skipped
 [build]
 packed=true
 pics=metalworks.png
-dimensions=108,89
-base_offset=108,89
+dimensions=108 89
+base_offset=108 89
 region_00=0,0,104,88:104,178;0,178;220,88;220,0
 hotspot=57 66
 
 [idle]
 packed=true
 pics=metalworks.png
-dimensions=108,89
-base_offset=0,89
+dimensions=108 89
+base_offset=0 89
 hotspot=57 66
 
 [unoccupied]
 packed=true
 pics=metalworks.png
-dimensions=108,89
-base_offset=112,0
+dimensions=108 89
+base_offset=112 0
 hotspot=57 66
 
 [working]
 packed=true
 pics=metalworks.png
-dimensions=112,89
-base_offset=0,0
+dimensions=112 89
+base_offset=0 0
 region_00=30,58,3,3:375,280;375,280;372,280;369,280;369,280;366,280;363,280;360,280;357,280;354,280;354,280;351,280;348,280;345,280;345,280;348,280;342,280;363,280;369,280;372,280
 region_01=30,62,3,1:387,280;387,280;387,280;387,280;387,280;387,280;387,280;387,280;384,280;384,280;384,280;381,280;381,280;378,280;378,280;381,280;384,280;387,280;387,280;387,280
 region_02=29,66,3,3:339,280;339,280;339,280;339,280;336,280;333,280;330,280;330,280;327,280;324,280;324,280;324,280;324,280;324,280;324,280;324,280;327,280;330,280;339,280;339,280

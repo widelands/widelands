@@ -4,6 +4,6 @@ default_target_quantity=2
 [idle]
 packed=true
 pics=shovel.png
-dimensions=13,12
-base_offset=0,0
+dimensions=13 12
+base_offset=0 0
 hotspot=5 8

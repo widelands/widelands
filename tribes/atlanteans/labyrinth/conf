@@ -121,6 +121,6 @@ train=soldier evade 1 2
 [idle]
 packed=true
 pics=labyrinth.png
-dimensions=128,98
-base_offset=0,0
+dimensions=128 98
+base_offset=0 0
 hotspot=80 88

@@ -9,6 +9,6 @@ remove=
 [idle]
 packed=true
 pics=resi_coal2.png
-dimensions=12,13
-base_offset=0,0
+dimensions=12 13
+base_offset=0 0
 hotspot=7 10

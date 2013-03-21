@@ -7,6 +7,6 @@ remove=
 [idle]
 packed=true
 pics=field2.png
-dimensions=40,32
-base_offset=0,0
+dimensions=40 32
+base_offset=0 0
 hotspot=15 18

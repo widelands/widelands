@@ -4,6 +4,6 @@ help=_Big buckets for the fish breeder - produced by the toolsmith.
 [idle]
 packed=true
 pics=bucket.png
-dimensions=16,16
-base_offset=0,0
+dimensions=16 16
+base_offset=0 0
 hotspot=10 17

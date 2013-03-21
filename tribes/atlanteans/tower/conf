@@ -14,6 +14,6 @@ spidercloth=1
 [idle]
 packed=true
 pics=tower.png
-dimensions=78,82
-base_offset=0,0
+dimensions=78 82
+base_offset=0 0
 hotspot=55 60

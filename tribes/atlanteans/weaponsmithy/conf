@@ -90,13 +90,13 @@ return=skipped
 [idle]
 packed=true
 pics=weaponsmithy.png
-dimensions=100,89
-base_offset=0,0
+dimensions=100 89
+base_offset=0 0
 hotspot=50 58
 
 [working]
 packed=true
 pics=weaponsmithy.png
-dimensions=100,89
-base_offset=0,0
+dimensions=100 89
+base_offset=0 0
 hotspot=50 58

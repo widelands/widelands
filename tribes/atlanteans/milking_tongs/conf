@@ -3,6 +3,6 @@ help=_Milking tongs are used by the spider breeder, to milk the spiders. They ar
 [idle]
 packed=true
 pics=milking_tongs.png
-dimensions=12,12
-base_offset=0,0
+dimensions=12 12
+base_offset=0 0
 hotspot=6 9

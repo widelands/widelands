@@ -7,6 +7,6 @@ remove=
 [idle]
 packed=true
 pics=cornfield_harvested.png
-dimensions=59,37
-base_offset=0,0
+dimensions=59 37
+base_offset=0 0
 hotspot=31 30

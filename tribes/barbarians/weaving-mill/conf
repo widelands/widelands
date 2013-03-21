@@ -27,8 +27,8 @@ produce=cloth
 [build]
 packed=true
 pics=weaving-mill.png
-dimensions=120,100
-base_offset=0,0
+dimensions=120 100
+base_offset=0 0
 region_00=114,31,1,1:146,84
 region_01=115,32,1,1:145,84
 region_02=92,42,10,19:130,100
@@ -44,8 +44,8 @@ hotspot=36 74
 [idle]
 packed=true
 pics=weaving-mill.png
-dimensions=120,100
-base_offset=0,0
+dimensions=120 100
+base_offset=0 0
 region_00=114,31,1,1:146,84
 region_01=115,32,1,1:145,84
 region_02=92,42,10,19:120,100
@@ -61,8 +61,8 @@ hotspot=36 74
 [working]
 packed=true
 pics=weaving-mill.png
-dimensions=120,100
-base_offset=0,0
+dimensions=120 100
+base_offset=0 0
 region_00=114,31,1,1:142,84
 region_01=115,32,1,1:141,84
 region_02=92,42,10,19:130,100

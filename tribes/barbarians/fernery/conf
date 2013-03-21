@@ -50,6 +50,6 @@ return=skipped
 [idle]
 packed=true
 pics=fernery.png
-dimensions=89,69
-base_offset=0,0
+dimensions=89 69
+base_offset=0 0
 hotspot=46 44

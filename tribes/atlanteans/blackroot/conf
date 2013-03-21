@@ -7,6 +7,6 @@ preciousness=10
 [idle]
 packed=true
 pics=blackroot.png
-dimensions=14,14
-base_offset=0,0
+dimensions=14 14
+base_offset=0 0
 hotspot=9 15

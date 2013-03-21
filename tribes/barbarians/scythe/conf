@@ -3,6 +3,6 @@ help=_The scythe is the tool of the farmers. It is produced in the metalwork sho
 [idle]
 packed=true
 pics=scythe.png
-dimensions=15,11
-base_offset=0,0
+dimensions=15 11
+base_offset=0 0
 hotspot=6 2

@@ -28,13 +28,13 @@ produce=goldyarn
 [idle]
 packed=true
 pics=goldweaver.png
-dimensions=60,80
-base_offset=0,0
+dimensions=60 80
+base_offset=0 0
 hotspot=33 64
 
 [working]
 packed=true
 pics=goldweaver.png
-dimensions=60,80
-base_offset=0,0
+dimensions=60 80
+base_offset=0 0
 hotspot=33 64

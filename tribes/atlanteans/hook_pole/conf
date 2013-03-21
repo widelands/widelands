@@ -4,6 +4,6 @@ help=_This hook pole is used by the smoker to hang up all the meat and fish to t
 [idle]
 packed=true
 pics=hook_pole.png
-dimensions=14,12
-base_offset=0,0
+dimensions=14 12
+base_offset=0 0
 hotspot=9 14

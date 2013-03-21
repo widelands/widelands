@@ -14,6 +14,6 @@ quartz=1
 [idle]
 packed=true
 pics=castle.png
-dimensions=121,103
-base_offset=0,0
+dimensions=121 103
+base_offset=0 0
 hotspot=91 91

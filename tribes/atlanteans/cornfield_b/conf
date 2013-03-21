@@ -13,6 +13,6 @@ transform=cornfield_harvested
 [idle]
 packed=true
 pics=cornfield.png
-dimensions=58,48
-base_offset=0,0
+dimensions=58 48
+base_offset=0 0
 hotspot=31 41

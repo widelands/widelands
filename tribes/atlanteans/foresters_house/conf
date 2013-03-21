@@ -22,7 +22,7 @@ worker=plant
 [idle]
 packed=true
 pics=foresters_house.png
-dimensions=58,55
-base_offset=0,0
+dimensions=58 55
+base_offset=0 0
 hotspot=37 44
 

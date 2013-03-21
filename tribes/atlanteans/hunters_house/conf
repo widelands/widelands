@@ -22,6 +22,6 @@ worker=hunt
 [idle]
 packed=true
 pics=hunters_house.png
-dimensions=66,53
-base_offset=0,0
+dimensions=66 53
+base_offset=0 0
 hotspot=36 44

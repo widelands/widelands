@@ -8,6 +8,6 @@ default_target_quantity=10
 [idle]
 packed=true
 pics=strongbeer.png
-dimensions=9,9
-base_offset=0,0
+dimensions=9 9
+base_offset=0 0
 hotspot=5 8

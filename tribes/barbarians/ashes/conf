@@ -8,6 +8,6 @@ remove=
 [idle]
 packed=true
 pics=ashes.png
-dimensions=84,51
-base_offset=0,0
+dimensions=84 51
+base_offset=0 0
 hotspot=40 39

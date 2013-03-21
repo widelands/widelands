@@ -3,6 +3,6 @@ help=_Fishing rods are needed by barbarian fishers for fishing. It is one of the
 [idle]
 packed=true
 pics=fishing_rod.png
-dimensions=16,16
-base_offset=0,0
+dimensions=16 16
+base_offset=0 0
 hotspot=4 5

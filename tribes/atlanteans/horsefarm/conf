@@ -32,14 +32,14 @@ recruit=horse
 [idle]
 packed=true
 pics=horsefarm.png
-dimensions=135,96
-base_offset=0,0
+dimensions=135 96
+base_offset=0 0
 hotspot=81 62
 
 [working]
 packed=true
 pics=horsefarm.png
-dimensions=135,96
-base_offset=0,0
+dimensions=135 96
+base_offset=0 0
 hotspot=81 62
 

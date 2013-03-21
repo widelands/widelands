@@ -24,7 +24,7 @@ worker=scout
 [idle]
 packed=true
 pics=scouts_hut.png
-dimensions=68,54
-base_offset=0,0
+dimensions=68 54
+base_offset=0 0
 hotspot=45 43
 

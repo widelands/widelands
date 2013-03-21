@@ -27,14 +27,14 @@ produce=blackwood
 [idle]
 packed=true
 pics=hardener.png
-dimensions=93,74
-base_offset=0,0
+dimensions=93 74
+base_offset=0 0
 hotspot=38 50
 
 [working]
 packed=true
 pics=hardener.png
-dimensions=93,74
-base_offset=0,0
+dimensions=93 74
+base_offset=0 0
 hotspot=38 50
 

@@ -67,30 +67,30 @@ return=skipped
 [build]
 packed=true
 pics=axefactory.png
-dimensions=117,89
-base_offset=117,100
+dimensions=117 89
+base_offset=117 100
 region_00=23,6,94,81:94,189;0,189;234,81;234,0
 hotspot=57 76
 
 [idle]
 packed=true
 pics=axefactory.png
-dimensions=117,89
-base_offset=0,100
+dimensions=117 89
+base_offset=0 100
 hotspot=57 76
 
 [unoccupied]
 packed=true
 pics=axefactory.png
-dimensions=117,89
-base_offset=117,0
+dimensions=117 89
+base_offset=117 0
 hotspot=57 76
 
 [working]
 packed=true
 pics=axefactory.png
-dimensions=117,100
-base_offset=0,0
+dimensions=117 100
+base_offset=0 0
 region_00=89,0,23,25:161,302;138,302;115,302;92,302;69,302;46,302;23,302;0,302;303,162;280,162;257,162;234,162;328,271;328,246;328,221;328,196;328,171;328,146;328,121;328,96
 region_01=89,25,1,4:360,101;360,101;360,101;360,101;360,101;360,101;360,101;362,96;360,101;360,101;360,101;361,96;360,96;360,101;360,101;360,101;360,101;360,101;360,101;360,101
 region_02=79,61,14,13:310,302;296,302;282,302;268,302;254,302;240,302;226,302;212,302;198,302;184,302;314,253;300,253;286,253;272,253;258,253;244,253;230,253;216,253;202,253;188,253

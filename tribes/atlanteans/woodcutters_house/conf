@@ -22,6 +22,6 @@ worker=harvest
 [idle]
 packed=true
 pics=woodcutter.png
-dimensions=58,60
-base_offset=0,0
+dimensions=58 60
+base_offset=0 0
 hotspot=37 44

@@ -3,6 +3,6 @@ help=_How can one create a meal, snack or ration, if there are no kitchen tools?
 [idle]
 packed=true
 pics=kitchen_tools.png
-dimensions=16,18
-base_offset=0,0
+dimensions=16 18
+base_offset=0 0
 hotspot=8 8

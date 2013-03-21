@@ -22,7 +22,7 @@ worker=fish
 [idle]
 packed=true
 pics=fishers_house.png
-dimensions=59,50
-base_offset=0,0
+dimensions=59 50
+base_offset=0 0
 hotspot=34 42
 

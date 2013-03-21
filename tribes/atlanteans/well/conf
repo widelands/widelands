@@ -21,13 +21,13 @@ produce=water
 [idle]
 packed=true
 pics=well.png
-dimensions=56,49
-base_offset=0,0
+dimensions=56 49
+base_offset=0 0
 hotspot=31 32
 
 [working]
 packed=true
 pics=well.png
-dimensions=56,49
-base_offset=0,0
+dimensions=56 49
+base_offset=0 0
 hotspot=31 32

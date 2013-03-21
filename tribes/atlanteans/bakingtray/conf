@@ -3,6 +3,6 @@ help=_The bread paddle is the tool of the baker, each baker needs its own. It is
 [idle]
 packed=true
 pics=bakingtray.png
-dimensions=11,10
-base_offset=0,0
+dimensions=11 10
+base_offset=0 0
 hotspot=6 6

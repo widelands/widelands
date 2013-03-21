@@ -37,14 +37,14 @@ return=skipped
 [idle]
 packed=true
 pics=tavern.png
-dimensions=97,77
-base_offset=0,0
+dimensions=97 77
+base_offset=0 0
 hotspot=32 56
 
 [working]
 packed=true
 pics=tavern.png
-dimensions=97,77
-base_offset=0,0
+dimensions=97 77
+base_offset=0 0
 hotspot=32 56
 

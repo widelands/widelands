@@ -11,16 +11,16 @@ thatchreed=1
 [build]
 packed=true
 pics=warehouse.png
-dimensions=103,101
-base_offset=0,0
+dimensions=103 101
+base_offset=0 0
 region_00=0,0,97,92:0,101;103,0
 hotspot=58 75
 
 [idle]
 packed=true
 pics=warehouse.png
-dimensions=103,101
-base_offset=0,0
+dimensions=103 101
+base_offset=0 0
 region_00=0,0,97,92:103,0
 hotspot=58 75
 

@@ -47,6 +47,6 @@ playFX=../../../sound/farm/farm_animal 192
 [idle]
 packed=true
 pics=farm.png
-dimensions=128,101
-base_offset=0,0
+dimensions=128 101
+base_offset=0 0
 hotspot=74 60

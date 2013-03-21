@@ -10,6 +10,6 @@ default_target_quantity=40
 [idle]
 packed=true
 pics=trunk.png
-dimensions=15,15
-base_offset=0,0
+dimensions=15 15
+base_offset=0 0
 hotspot=6 7

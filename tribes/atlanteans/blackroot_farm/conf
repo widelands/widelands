@@ -44,6 +44,6 @@ return=skipped
 [idle]
 packed=true
 pics=blackroot_farm.png
-dimensions=128,90
-base_offset=0,0
+dimensions=128 90
+base_offset=0 0
 hotspot=74 60

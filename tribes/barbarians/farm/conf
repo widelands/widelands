@@ -45,6 +45,6 @@ return=skipped
 [idle]
 packed=true
 pics=farm.png
-dimensions=116,84
-base_offset=0,0
+dimensions=116 84
+base_offset=0 0
 hotspot=72 73

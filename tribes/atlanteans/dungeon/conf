@@ -99,6 +99,6 @@ train=soldier attack 3 4
 [idle]
 packed=true
 pics=dungeon_i.png
-dimensions=90,81
-base_offset=0,0
+dimensions=90 81
+base_offset=0 0
 hotspot=47 48
