@@ -16,6 +16,6 @@ packed=true
 pics=shipconstruction.png
 dimensions=141 125
 base_offset=0 0
-region_00=0,0,136,125:136,250;0,250;277,125;277,0;136,125;0,125;141,0
+region_00=0 0 136 125:136 250;0 250;277 125;277 0;136 125;0 125;141 0
 hotspot=79 75
 

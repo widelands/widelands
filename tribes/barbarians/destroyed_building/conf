@@ -11,6 +11,6 @@ packed=true
 pics=destroyed_building.png
 dimensions=84 69
 base_offset=0 0
-region_00=2,0,78,60:162,60;162,0;78,69;0,69;84,0
+region_00=2 0 78 60:162 60;162 0;78 69;0 69;84 0
 hotspot=40 57
 fps=10
