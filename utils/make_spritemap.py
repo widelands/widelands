@@ -332,7 +332,7 @@ def output_results(anim, img_name, dimensions, regions, offsets_by_id, args):
         f.write("[%s]\n" % anim)
         f.write("packed=true\n")  # NOCOM(#sirver): get rid of this again.
         f.write("pics=%s\n" % img_name)
-        f.write("dimensions=%i,%i\n" % (dimensions[0], dimensions[1]))
+        f.write("dimensions=%i %i\n" % (dimensions[0], dimensions[1]))
         has_plr_clr = False
         if len(regions) and (anim + "_pc", 0, 0) in offsets_by_id:
             has_plr_clr = True
@@ -348,7 +348,7 @@ def output_results(anim, img_name, dimensions, regions, offsets_by_id, args):
                 cur_fr += 1
             return ";".join(rv)
 
-        f.write("base_offset=%i,%i\n" % offsets_by_id[anim, -1, -1])
+        f.write("base_offset=%i %i\n" % offsets_by_id[anim, -1, -1])
 
         for ridx,r in enumerate(regions):
             f.write("region_%02i=%i,%i,%i,%i:%s\n" % (
