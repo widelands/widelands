@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: Widelands svn4804\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2013-03-09 17:57+0100\n"
-"PO-Revision-Date: 2013-01-29 12:48+0000\n"
+"PO-Revision-Date: 2013-03-27 12:36+0000\n"
 "Last-Translator: Wesmania <ikk_pl@yahoo.co.uk>\n"
 "Language-Team: Language <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -15,8 +15,8 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2013-03-10 04:37+0000\n"
-"X-Generator: Launchpad (build 16523)\n"
+"X-Launchpad-Export-Date: 2013-03-28 04:33+0000\n"
+"X-Generator: Launchpad (build 16546)\n"
 
 #: ../../src/s2map.cc:222
 msgid "Bluebyte Settlers II Map. No comment defined!"
@@ -299,13 +299,15 @@ msgstr ""
 
 #: ../../src/wlapplication.cc:1551
 msgid "Fallback settings in effect"
-msgstr ""
+msgstr "Ustawienia awaryjne aktywne"
 
 #: ../../src/wlapplication.cc:1553
 msgid ""
 "Your video settings could not be enabled, and fallback settings are in "
 "effect. Please check the graphics options!"
 msgstr ""
+"Nie udało się skonfigurować ustawień graficznych, aktywne są ustawienia "
+"awaryjne. Sprawdź ustawienia grafiki!"
 
 #: ../../src/wlapplication.cc:1624
 msgid "Warning: "
@@ -3216,7 +3218,7 @@ msgstr "Następny poziom"
 
 #: ../../src/wui/productionsitewindow.cc:95
 msgid "Terminate the employment of the selected worker"
-msgstr ""
+msgstr "Usuń pracownika ze stanowiska"
 
 #: ../../src/wui/productionsitewindow.cc:163
 msgid "(vacant)"
