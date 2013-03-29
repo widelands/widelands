@@ -1,6 +1,5 @@
 size=small
 program=program
-picture=reed0s.png  # Single image
 
 [program]
 animate=small 28000

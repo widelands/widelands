@@ -1,6 +1,5 @@
 size=small
 program=program
-picture=s3tree6_00.png
 
 [terrain affinity]
 desert1=              2

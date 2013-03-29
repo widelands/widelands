@@ -1,6 +1,5 @@
 size=big
 program=program
-picture=destroyed_building_picture.png  # Single frame image
 
 [program]
 animate=burn 30000

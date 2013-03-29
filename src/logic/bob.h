@@ -202,8 +202,6 @@ struct Bob : public Map_Object {
 		Bob & create(Editor_Game_Base &, Player * owner, const Coords &) const;
 		bool is_world_bob() const {return not m_owner_tribe;}
 
-		char const * get_picture() const {return m_picture.c_str();}
-
 		Tribe_Descr const * get_owner_tribe() const throw () {
 			return m_owner_tribe;
 		}
@@ -214,7 +212,6 @@ struct Bob : public Map_Object {
 	protected:
 		virtual Bob & create_object() const = 0;
 
-		std::string         m_picture;
 		const Tribe_Descr * const m_owner_tribe; //  0 if world bob
 	};
 

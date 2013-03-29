@@ -1,5 +1,4 @@
 program=program
-picture=ashes.png
 
 [program]
 animate=idle 45000

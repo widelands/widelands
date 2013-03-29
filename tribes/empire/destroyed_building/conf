@@ -1,6 +1,5 @@
 size=big
 program=program
-picture=fire_burn_00.png
 
 [program]
 animate=burn 30000

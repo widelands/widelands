@@ -80,7 +80,8 @@ public:
 /**
 * The animation manager manages a list of all active animations.
 */
-struct AnimationManager {
+class AnimationManager {
+public:
 	/**
 	 * Loads an animation, graphics sound and everything.
 	 *

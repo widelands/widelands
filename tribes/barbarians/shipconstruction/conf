@@ -1,6 +1,5 @@
 size=small
 program=program
-picture=build_06.png
 
 [buildcost]
 blackwood=10
