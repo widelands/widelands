@@ -69,7 +69,6 @@ Bob::Descr::Descr
 	 Tribe_Descr const * const tribe)
 	:
 	Map_Object_Descr(_name, _descname),
-	m_picture       (directory + global_s.get_string("picture", "menu.png")),
 	m_owner_tribe(tribe)
 {
 	{ //  global options

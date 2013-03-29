@@ -59,9 +59,12 @@ m_click_recursion_protect(false)
 	uint32_t width = 0, height = 0;
 	for (int32_t j = 0; j < nr_immovables; ++j) {
 		const Immovable_Descr & descr = *world.get_immovable_descr(j);
-		const Image* pic = g_gr->images().get(descr.get_picture());
-		uint16_t w = pic->width();
-		uint16_t h = pic->height();
+		ALIVE();
+		const Image& pic = g_gr->animations().get_animation(descr.main_animation())
+				.representative_image(RGBColor(0,0,0));
+		ALIVE();
+		uint16_t w = pic.width();
+		uint16_t h = pic.height();
 		if (w > width)
 			width  = w;
 		if (h > height)
@@ -90,9 +93,13 @@ m_click_recursion_protect(false)
 		}
 		assert(box);
 
+		ALIVE();
+		// NOCOM(#sirver): hier ist noch was kaputt
 		UI::Checkbox & cb = *new UI::Checkbox
 			(box, pos,
-			 g_gr->images().get(world.get_immovable_descr(i)->get_picture()));
+			 &g_gr->animations().get_animation(world.get_immovable_descr(i)->main_animation())
+				.representative_image(RGBColor(0,0,0)));
+		ALIVE();
 
 		cb.set_desired_size(width, height);
 		cb.set_state(m_pit.is_enabled(i));

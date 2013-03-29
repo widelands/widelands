@@ -1,6 +1,5 @@
 size=small
 program=program
-picture=idle_00.png
 
 [buildcost]
 wood=10

@@ -1,6 +1,5 @@
 size=small
 program=program
-picture=s3tree2_00.png
 
 [terrain affinity]
 steppe=    120
