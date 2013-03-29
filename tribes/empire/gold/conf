@@ -4,5 +4,8 @@ preciousness=2
 default_target_quantity=10
 
 [idle]
-pics=idle.png
+packed=true
+pics=gold.png
+dimensions=13 12
+base_offset=0 0
 hotspot=6 10

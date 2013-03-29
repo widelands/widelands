@@ -3,5 +3,8 @@ help=_Goldstones are mined in goldmines and processed in smelting works.
 preciousness=2
 
 [idle]
-pics=idle.png
+packed=true
+pics=goldstone.png
+dimensions=8 8
+base_offset=0 0
 hotspot=4 4

@@ -5,5 +5,8 @@ conquers=8
 buildable=no
 
 [idle]
-pics=../../../tribes/empire/barrier/barrier_i_??.png
-hotspot=55 80
+packed=true
+pics=barrier.png
+dimensions=91 97
+base_offset=0 0
+hotspot=49 77

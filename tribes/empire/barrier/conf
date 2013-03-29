@@ -11,5 +11,9 @@ stone=2
 marble=1
 
 [idle]
-pics=barrier_i_??.png
+packed=true
+pics=barrier.png
+dimensions=91 97
+base_offset=0 0
 hotspot=49 77
+

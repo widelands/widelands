@@ -4,5 +4,8 @@ default_target_quantity=20
 preciousness=3
 
 [idle]
-pics=flour_idle.png
+packed=true
+pics=flour.png
+dimensions=12 16
+base_offset=0 0
 hotspot=5 15

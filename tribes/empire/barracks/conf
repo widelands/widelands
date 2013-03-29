@@ -9,5 +9,9 @@ trunk=1
 wood=2
 
 [idle]
-pics=barracks_i_??.png
+packed=true
+pics=barracks.png
+dimensions=75 68
+base_offset=0 0
 hotspot=37 58
+
