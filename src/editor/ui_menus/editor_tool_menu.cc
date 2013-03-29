@@ -102,8 +102,8 @@ void Editor_Tool_Menu::changed_to() {
 	Editor_Interactive & parent =
 		ref_cast<Editor_Interactive, UI::Panel>(*get_parent());
 
-	Editor_Tool                * current_tool_pointer;
-	UI::UniqueWindow::Registry * current_registry_pointer;
+	Editor_Tool                * current_tool_pointer = NULL;
+	UI::UniqueWindow::Registry * current_registry_pointer = NULL;
 	switch (n) {
 	case 0:
 		current_tool_pointer     = &parent.tools.increase_height;
