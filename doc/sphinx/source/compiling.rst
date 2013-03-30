@@ -17,12 +17,13 @@ for Widelands makes direct use of them:
 - SDL_net
 - SDL_ttf >= 2.0.0
 - SDL_gfx
-- GLEW, when compiling with OpenGL support
+- GLEW
+- OpenGL
 - boost >= 1.35
 - lua >= 5.1
 - gettext (look at FAQ if you have problems with -lintl)
 - libpng
-- zlib
+- zlib (including minizip library if available for your system)
 - libiconv (only needed under win32)
 - libintl (only needed under win32)
 
