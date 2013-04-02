@@ -33,15 +33,46 @@ animate=working 18000
 mine=coal 2 100 5
 produce=coal:3
 
+[empty]
+packed=true
+pics=deep_coalmine.png
+dimensions=78 83
+base_offset=78 0
+region_00=41 53 2 1:172 54
+region_01=39 54 1 1:173 79
+region_02=44 54 1 1:172 79
+region_03=46 58 1 5:173 70
+region_04=30 69 1 1:173 78
+region_05=36 70 1 1:172 78
+region_06=31 55 14 15:156 55
+hotspot=49 61
+
 [idle]
-pics=deep_coalmine_i_??.png
+packed=true
+pics=deep_coalmine.png
+dimensions=78 83
+base_offset=78 0
+region_00=41 53 2 1:170 54
+region_01=39 54 1 1:173 77
+region_02=44 54 1 1:172 77
+region_03=46 58 1 5:172 70
+region_04=30 69 1 1:173 76
+region_05=36 70 1 1:172 76
+region_06=31 55 14 15:156 40
 hotspot=49 61
 
 [working]
-pics=deep_coalmine_w_??.png
+packed=true
+pics=deep_coalmine.png
+dimensions=78 83
+base_offset=0 0
+region_00=21 6 18 20:156 20;156 0;126 131;108 131;90 131;72 131;54 131;36 131;18 131;0 131
+region_01=58 38 1 1:173 75;173 75;172 75;173 69;173 69;173 69;172 75;172 75;172 69;173 75
+region_02=61 38 1 1:171 69;171 69;170 69;170 69;170 69;170 69;170 69;170 69;171 69;171 69
+region_03=52 24 8 14:164 126;156 126;164 112;156 112;164 98;156 98;164 84;156 84;164 70;156 70
+region_04=20 47 4 7:152 95;152 83;168 140;164 140;160 140;156 140;170 62;170 55;170 47;170 40
+region_05=40 48 28 24:112 107;84 107;56 107;28 107;0 107;112 83;84 83;56 83;28 83;0 83
+region_06=19 54 6 12:144 131;146 119;140 119;146 107;140 107;146 95;140 95;140 119;146 83;140 83
 hotspot=49 61
 fps=10
 
-[empty]
-pics=deep_coalmine_e_??.png
-hotspot=49 61

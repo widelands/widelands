@@ -6,6 +6,9 @@ animate=tiny 22000
 transform=wine0s
 
 [tiny]
-pics=wine0t_??.png
+packed=true
+pics=wine0t.png
+dimensions=21 26
+base_offset=0 0
 fps=5
 hotspot=15 18

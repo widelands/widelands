@@ -28,10 +28,18 @@ animate=working 10000
 produce=flour
 
 [idle]
-pics=windmill_i_??.png  # ???
+packed=true
+pics=mill.png
+dimensions=95 94
+base_offset=0 376
 hotspot=41 87
 
 [working]
-pics=windmill_w_??.png  # lets see the mill turn!
+packed=true
+pics=mill.png
+dimensions=96 94
+base_offset=384 282
+region_00=0 0 96 94:384 188;384 94;384 0;288 282;192 282;96 282;0 282;288 188;288 94;288 0;192 188;96 188;0 188;192 94;192 0;96 94;0 94;96 0;0 0;384 188
 hotspot=41 87
 fps=25
+

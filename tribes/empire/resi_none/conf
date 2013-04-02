@@ -6,5 +6,8 @@ animate=idle 600000
 remove=
 
 [idle]
-pics=resi_??.png
+packed=true
+pics=resi_none.png
+dimensions=12 13
+base_offset=0 0
 hotspot=7 10

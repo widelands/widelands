@@ -6,6 +6,10 @@ heal_per_second=220
 conquers=9
 
 [idle]
-pics=headquarters_i_??.png
 # sfx=0 ../../../sound/spoken/warehouse-bringitin
+packed=true
+pics=headquarters.png
+dimensions=128 121
+base_offset=0 0
 hotspot=95 109
+

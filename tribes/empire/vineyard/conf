@@ -44,5 +44,9 @@ call=harvest_vine
 return=skipped
 
 [idle]
-pics=vineyard_i_??.png  # ???
+packed=true
+pics=vineyard.png
+dimensions=96 74
+base_offset=0 0
 hotspot=53 53
+

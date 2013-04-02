@@ -20,5 +20,9 @@ sleep=11000
 worker=plant
 
 [idle]
-pics=forester_i_??.png  # ???
+packed=true
+pics=foresters_house.png
+dimensions=75 73
+base_offset=0 0
 hotspot=52 54
+

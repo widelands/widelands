@@ -27,9 +27,16 @@ animate=working 30000
 produce=wine
 
 [idle]
-pics=vintagery_i_??.png  # ???
+packed=true
+pics=winery.png
+dimensions=97 86
+base_offset=0 0
 hotspot=39 62
 
 [working]
-pics=vintagery_i_??.png  # ???
+packed=true
+pics=winery.png
+dimensions=97 86
+base_offset=0 0
 hotspot=39 62
+

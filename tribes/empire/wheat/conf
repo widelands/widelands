@@ -5,5 +5,8 @@ preciousness=12
 default_target_quantity=25
 
 [idle]
-pics=wheat_idle.png
+packed=true
+pics=wheat.png
+dimensions=7 12
+base_offset=0 0
 hotspot=-1 6

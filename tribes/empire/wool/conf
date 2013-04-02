@@ -3,5 +3,8 @@ default_target_quantity=4
 preciousness=2
 
 [idle]
-pics=idle.png
+packed=true
+pics=wool.png
+dimensions=23 24
+base_offset=0 0
 hotspot=8 18

@@ -29,9 +29,16 @@ animate=working 32000
 produce=marblecolumn
 
 [idle]
-pics=stonemason_i_??.png  # ???
+packed=true
+pics=stonemasons_house.png
+dimensions=100 92
+base_offset=0 0
 hotspot=58 61
 
 [working]
-pics=stonemason_i_??.png  # ???
+packed=true
+pics=stonemasons_house.png
+dimensions=100 92
+base_offset=0 0
 hotspot=58 61
+

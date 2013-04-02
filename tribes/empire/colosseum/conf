@@ -62,5 +62,8 @@ consume=bread:2 fish,meat:2
 train=soldier evade 1 2
 
 [idle]
-pics=colosseum_i_??.png  # ???
+packed=true
+pics=colosseum.png
+dimensions=117 116
+base_offset=0 0
 hotspot=81 106

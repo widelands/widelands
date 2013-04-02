@@ -5,5 +5,8 @@ conquers=12
 buildable=no
 
 [idle]
-pics=../../../tribes/empire/castle/castle_i_??.png
-hotspot=90 106
+packed=true
+pics=../../../tribes/empire/castle/castle.png
+dimensions=120 118
+base_offset=0 0
+hotspot=94 106

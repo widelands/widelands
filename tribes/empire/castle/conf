@@ -12,5 +12,9 @@ marble=4
 stone=2
 
 [idle]
-pics=castle_i_??.png
+packed=true
+pics=castle.png
+dimensions=120 118
+base_offset=0 0
 hotspot=94 106
+

@@ -5,5 +5,8 @@ animate=idle 50000
 remove=
 
 [idle]
-pics=field2_??.png
+packed=true
+pics=field2.png
+dimensions=40 23
+base_offset=0 0
 hotspot=15 9

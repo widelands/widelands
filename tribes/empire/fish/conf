@@ -3,5 +3,8 @@ help=_Besides bread and meat, fish is also a foodstuff for the Empire. Fish are 
 preciousness=3
 
 [idle]
-pics=idle.png
+packed=true
+pics=fish.png
+dimensions=12 12
+base_offset=0 0
 hotspot=8 6

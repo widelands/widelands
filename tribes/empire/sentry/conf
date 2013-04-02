@@ -10,5 +10,9 @@ trunk=1
 stone=1
 
 [idle]
-pics=sentry_i_??.png
+packed=true
+pics=sentry.png
+dimensions=74 74
+base_offset=0 0
 hotspot=37 60
+

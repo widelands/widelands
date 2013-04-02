@@ -33,15 +33,46 @@ animate=working 20000
 mine=gold 2 50 5
 produce=goldstone
 
+[empty]
+packed=true
+pics=goldmine.png
+dimensions=77 70
+base_offset=77 0
+region_00=40 47 2 1:158 109
+region_01=38 48 1 1:158 122
+region_02=43 48 1 1:159 121
+region_03=45 56 1 2:159 114
+region_04=29 63 1 1:158 121
+region_05=30 64 1 1:159 120
+region_06=30 49 14 15:140 130
+hotspot=49 49
+
 [idle]
-pics=goldmine_i_??.png
+packed=true
+pics=goldmine.png
+dimensions=77 70
+base_offset=77 0
+region_00=40 47 2 1:158 102
+region_01=38 48 1 1:158 120
+region_02=43 48 1 1:159 119
+region_03=45 56 1 2:158 114
+region_04=29 63 1 1:158 119
+region_05=30 64 1 1:159 118
+region_06=30 49 14 15:140 106
 hotspot=49 49
 
 [working]
-pics=goldmine_w_??.png
+packed=true
+pics=goldmine.png
+dimensions=77 70
+base_offset=0 0
+region_00=59 25 1 1:158 118;158 118;158 118;159 117;159 117;159 117;159 117;158 118;158 118;158 118
+region_01=61 26 1 1:158 117;158 117;158 117;159 116;158 116;158 116;159 116;158 117;158 117;158 117
+region_02=38 58 2 2:158 112;158 110;158 107;158 105;158 103;158 100;158 98;158 107;158 96;158 112
+region_03=31 7 29 18:116 88;87 88;58 88;29 88;0 88;116 70;87 70;58 70;29 70;0 70
+region_04=20 35 4 7:154 145;154 138;154 131;154 124;154 117;154 124;154 110;154 131;154 103;154 96
+region_05=19 42 6 12:154 84;154 72;154 60;154 48;154 36;154 24;154 12;154 0;145 88;145 70
+region_06=40 36 28 24:112 130;84 130;56 130;28 130;0 130;112 106;84 106;56 106;28 106;0 106
 hotspot=49 49
 fps=10
 
-[empty]
-pics=goldmine_e_??.png
-hotspot=49 49

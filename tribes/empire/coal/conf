@@ -4,5 +4,8 @@ default_target_quantity=25
 preciousness=1
 
 [idle]
-pics=idle.png
+packed=true
+pics=coal.png
+dimensions=8 8
+base_offset=0 0
 hotspot=4 6

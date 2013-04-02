@@ -29,9 +29,16 @@ animate=working 30000
 produce=wool
 
 [idle]
-pics=sheepfarm_i_??.png  # ???
+packed=true
+pics=sheepfarm.png
+dimensions=120 92
+base_offset=0 0
 hotspot=73 60
 
 [working]
-pics=sheepfarm_i_??.png  # ???
+packed=true
+pics=sheepfarm.png
+dimensions=120 92
+base_offset=0 0
 hotspot=73 60
+

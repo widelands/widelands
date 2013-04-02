@@ -3,5 +3,8 @@ help=_This is the best and sharpest weapon the Empire weaponsmith creates for th
 preciousness=1
 
 [idle]
-pics=idle.png
+packed=true
+pics=war_lance.png
+dimensions=16 16
+base_offset=0 0
 hotspot=4 3

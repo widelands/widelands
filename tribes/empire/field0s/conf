@@ -6,6 +6,9 @@ animate=small 45000
 transform=field0
 
 [small]
-pics=field0s_??.png
+packed=true
+pics=field0s.png
+dimensions=40 23
+base_offset=0 0
 fps=5
 hotspot=15 9
