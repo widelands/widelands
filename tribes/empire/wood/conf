@@ -4,8 +4,11 @@ default_target_quantity=40
 preciousness=7
 
 # These are planks created out of trunks.
-# The roman sawmiller know exactly, howto cut the trunks.
+# The roman sawmiller knows exactly, how to cut the trunks.
 
 [idle]
-pics=idle.png
+packed=true
+pics=wood.png
+dimensions=23 19
+base_offset=0 0
 hotspot=10 12

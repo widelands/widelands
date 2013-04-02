@@ -5,5 +5,8 @@ default_target_quantity=20
 preciousness=5
 
 [idle]
-pics=idle.png
+packed=true
+pics=ration.png
+dimensions=11 6
+base_offset=0 0
 hotspot=5 5

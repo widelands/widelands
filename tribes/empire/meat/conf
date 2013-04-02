@@ -5,6 +5,9 @@ default_target_quantity=15
 preciousness=2
 
 [idle]
-pics=meat_idle.png
+packed=true
+pics=meat.png
+dimensions=11 10
+base_offset=0 0
 hotspot=5 6
 

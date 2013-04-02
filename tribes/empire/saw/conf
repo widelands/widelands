@@ -1,5 +1,8 @@
 help=_This saw is needed by the sawyer. It is produced by the toolsmith.
 
 [idle]
-pics=idle.png
+packed=true
+pics=saw.png
+dimensions=21 18
+base_offset=0 0
 hotspot=7 5

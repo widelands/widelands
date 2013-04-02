@@ -6,7 +6,7 @@ buildable=no
 
 [idle]
 packed=true
-pics=barracks.png
+pics=../../../tribes/empire/barracks/barracks.png
 dimensions=75 68
 base_offset=0 0
 hotspot=37 58

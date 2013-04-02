@@ -9,5 +9,9 @@ marble=3
 marblecolumn=2
 
 [idle]
-pics=warehouse_i_??.png  # ???
+packed=true
+pics=warehouse.png
+dimensions=98 80
+base_offset=0 0
 hotspot=58 55
+

@@ -70,15 +70,67 @@ call=mine_marble
 call=mine_stone
 return=skipped
 
+[empty]
+packed=true
+pics=marblemine.png
+dimensions=77 70
+base_offset=77 0
+region_00=40 47 2 1:158 103
+region_01=38 48 1 1:158 119
+region_02=43 48 1 1:159 118
+region_03=45 56 1 2:159 104
+region_04=75 57 1 1:158 118
+region_05=76 58 1 1:159 117
+region_06=76 61 1 1:158 117
+region_07=74 62 1 1:159 116
+region_08=29 63 1 1:158 116
+region_09=72 63 1 1:159 115
+region_10=30 64 1 1:158 115
+region_11=69 64 1 1:159 114
+region_12=66 65 2 1:158 102
+region_13=63 66 2 1:158 101
+region_14=61 67 2 1:158 100
+region_15=58 68 3 1:157 152
+region_16=56 69 1 1:158 114
+region_17=30 49 14 15:140 130
+hotspot=49 49
+
 [idle]
-pics=marblemine_i_??.png
+packed=true
+pics=marblemine.png
+dimensions=77 70
+base_offset=77 0
+region_00=40 47 2 1:158 99
+region_01=38 48 1 1:159 113
+region_02=43 48 1 1:158 113
+region_03=45 56 1 2:158 104
+region_04=75 57 1 1:159 112
+region_05=76 58 1 1:158 112
+region_06=76 61 1 1:159 111
+region_07=74 62 1 1:158 111
+region_08=29 63 1 1:159 110
+region_09=72 63 1 1:158 110
+region_10=30 64 1 1:159 109
+region_11=69 64 1 1:158 109
+region_12=66 65 2 1:158 98
+region_13=63 66 2 1:158 97
+region_14=61 67 2 1:158 96
+region_15=58 68 3 1:154 152
+region_16=56 69 1 1:159 108
+region_17=30 49 14 15:140 106
 hotspot=49 49
 
 [working]
-pics=marblemine_w_??.png
+packed=true
+pics=marblemine.png
+dimensions=77 70
+base_offset=0 0
+region_00=59 25 1 1:158 108;158 108;158 108;159 107;159 107;159 107;159 107;158 108;158 108;158 108
+region_01=61 26 1 1:158 107;158 107;158 107;159 106;158 106;158 106;159 106;158 107;158 107;158 107
+region_02=31 7 29 18:116 88;87 88;58 88;29 88;0 88;116 70;87 70;58 70;29 70;0 70
+region_03=20 35 4 7:154 145;154 138;154 131;154 124;154 117;154 124;154 110;154 131;154 103;154 96
+region_04=40 36 28 24:112 130;84 130;56 130;28 130;0 130;112 106;84 106;56 106;28 106;0 106
+region_05=19 42 6 12:154 84;154 72;154 60;154 48;154 36;154 24;154 12;154 0;145 88;145 70
 hotspot=49 49
 fps=10
 
-[empty]
-pics=marblemine_e_??.png
-hotspot=49 49

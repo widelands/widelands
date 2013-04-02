@@ -6,7 +6,7 @@ buildable=no
 
 [idle]
 packed=true
-pics=barrier.png
+pics=../../../tribes/empire/barrier/barrier.png
 dimensions=91 97
 base_offset=0 0
 hotspot=49 77

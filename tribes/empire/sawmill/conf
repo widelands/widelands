@@ -31,9 +31,16 @@ animate=working 20000 # much more faster than barbarians hardener
 produce=wood
 
 [idle]
-pics=sawmill_i_??.png  # ???
+packed=true
+pics=sawmill.png
+dimensions=98 81
+base_offset=0 0
 hotspot=54 70
 
 [working]
-pics=sawmill_i_??.png  # ???
+packed=true
+pics=sawmill.png
+dimensions=98 81
+base_offset=0 0
 hotspot=54 70
+
