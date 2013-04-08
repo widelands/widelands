@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2013-03-09 16:57+0000\n"
-"PO-Revision-Date: 2013-03-12 17:58+0000\n"
+"PO-Revision-Date: 2013-04-07 18:15+0000\n"
 "Last-Translator: Alexander Mackinnon Jansen <alexander.jansen@hesbynett.no>\n"
 "Language-Team: Norwegian Nynorsk <nn@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-03-13 04:31+0000\n"
-"X-Generator: Launchpad (build 16532)\n"
+"X-Launchpad-Export-Date: 2013-04-08 05:10+0000\n"
+"X-Generator: Launchpad (build 16550)\n"
 
 #: ../../tribes/barbarians/axefactory/help.lua:12
 #: ../../tribes/barbarians/warmill/help.lua:12
@@ -275,6 +275,8 @@ msgid ""
 "A %s exploits all of the resource down to the deepest level.<br>But even "
 "after having done so, it will still have a %s chance of finding some more %s."
 msgstr ""
+"Ei %s utnyttar alle resursane ned til djpaste nivå.<br>Men sjølv etter å ha "
+"gjort dette har ho framleis eit sansyn på %s for å finna meir %s."
 
 #: ../../tribes/barbarians/coalmine/help.lua:17
 #: ../../tribes/barbarians/goldmine/help.lua:16
@@ -282,6 +284,8 @@ msgid ""
 "A %s exploits only %s of the resource. <br> From there on, it will only have "
 "a 5%% chance of finding %s."
 msgstr ""
+"Ei %s utnyttar berre %s av resursane. <br> Derfrå har han berre 5%% sansyn "
+"for å finna &s."
 
 #: ../../tribes/barbarians/deep_coalmine/help.lua:17
 #: ../../tribes/barbarians/deep_goldmine/help.lua:16
@@ -290,16 +294,20 @@ msgid ""
 "A %s exploits only %s of the resource.<br>From there on, it will only have a "
 "5%% chance of finding %s."
 msgstr ""
+"Ei %s utnyttar berre %s av resursane. <br> Derfrå har han berre 5%% sansyn "
+"for å finna &s."
 
 #: ../../tribes/barbarians/fernery/help.lua:47
 msgid "A Fernery can produce a sheaf of Thatch Reed in about %s on average."
-msgstr ""
+msgstr "Eit bregneri kan laga ein bunt taksiv på omtrent %s."
 
 #: ../../tribes/barbarians/snack/conf:1
 msgid ""
 "A bigger morsel than the ration to provide miners in deep mines. It is "
 "produced in an inn or a big inn out of fish/meat, pitta bread and beer."
 msgstr ""
+"Eit større stykke enn rasjonen til gruvearbeidarar i djupe gruver. Det blir "
+"laga i eit vertshus eller eit stort vertshus av fisk/kjøtt, pitabrød og øl."
 
 #: ../../tribes/barbarians/helm/conf:1
 msgid ""
@@ -307,16 +315,21 @@ msgid ""
 "and used in the trainingscamp - together with food -  to train soldiers from "
 "healthpoints level 0 to healphpoints level 1."
 msgstr ""
+"Ein hjelm er eit grunnleggande verktøy for å verna krigarar.  Det blir laga "
+"i hjelmsmia og brukt i treneleiren, saman med mat, for å trena soldatar frå "
+"0 til 1 livspoeng."
 
 #: ../../tribes/barbarians/meal/conf:1
 msgid ""
 "A meal is made out of pitta bread, strongbeer and fish/meat in a big inn. "
 "This substantial food is exactly what workers in a deeper mine need."
 msgstr ""
+"Eit måltid blir laga av pitabrød, sterkt øl og fisk/kjøt i eit stort "
+"vertshus. Denne maten er akkurat det arbeidarar i djupare gruver treng."
 
 #: ../../tribes/barbarians/ship/conf:1
 msgid "A sea-worthy ship"
-msgstr ""
+msgstr "Eit sjødyktig skip"
 
 #: ../../tribes/barbarians/ration/conf:1
 msgid ""
@@ -324,6 +337,9 @@ msgid ""
 "rations on his scouting trips. Rations are produced in a tavern, an inn or a "
 "big inn out of fish or meat or pitta bread."
 msgstr ""
+"Ein liten bete for å halda gruvearbeidarar sterke og i arbeid.  I tillegg et "
+"speidaren rasjonar på speidingane sine.  Rasjonar blir lagde av fisk, kjøt "
+"eller pitabrød i ei kro, eit vertshus eller eit stort vertshus."
 
 #: ../../tribes/barbarians/warhelmet/conf:1
 msgid ""
@@ -331,6 +347,9 @@ msgid ""
 "a helmsmithy and used in a trainingscamp - together with food - to train "
 "soldiers from healthpoints level 1 to level 2."
 msgstr ""
+"Ein krigshjelm er ei tilpassa rustning for barbarkrigarar. Han blir laga i "
+"ei hjelmsmie og brukt i ein treneleir, med mat, for å trena soldatar frå 1 "
+"til 2 livsnivå."
 
 #: ../../tribes/barbarians/coalmine/help.lua:12
 #: ../../tribes/barbarians/deep_coalmine/help.lua:12
@@ -341,12 +360,18 @@ msgid ""
 "\t\t\tWood may serve for a household fire and to keep you warm, but when it "
 "comes to working with iron or gold, there is no way around coal."
 msgstr ""
+"For lenge sidan lærte barbarane å dukka inn i fjellsidene etter det svarte "
+"stoffet som matar ovnane. <br>\n"
+"\t\t\tVed kan passa til eit hushaldningsbål og halda deg varm, men når ein "
+"skal arbeida med jern eller gull må ein ha kol."
 
 #: ../../tribes/barbarians/axefactory/help.lua:64
 msgid ""
 "All three weapons take the same time for making, but the required raw "
 "materials vary."
 msgstr ""
+"Alle tri våpna tek like lang tid å laga, men det varierar kva dei treng av "
+"råmateriale."
 
 #: ../../tribes/barbarians/warmill/help.lua:66
 msgid ""
