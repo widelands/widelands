@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: Widelands unofficial-git-6aa148a(svn4769+changes)\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2013-03-09 17:57+0100\n"
-"PO-Revision-Date: 2013-01-03 00:21+0000\n"
-"Last-Translator: Nasenbaer <Unknown>\n"
+"PO-Revision-Date: 2013-04-10 20:50+0000\n"
+"Last-Translator: Kiibakun <kibafang@gmail.com>\n"
 "Language-Team: Español <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2013-03-10 04:38+0000\n"
-"X-Generator: Launchpad (build 16523)\n"
+"X-Launchpad-Export-Date: 2013-04-11 05:05+0000\n"
+"X-Generator: Launchpad (build 16550)\n"
 "X-Poedit-Country: SPAIN\n"
 "X-Poedit-Language: Spanish\n"
 "X-Poedit-SourceCharset: utf-8\n"
@@ -51,6 +51,9 @@ msgid ""
 "Waited 5 seconds to close audio. Problems here so killing Widelands. Update "
 "your sound driver and/or SDL to fix this problem\n"
 msgstr ""
+"Se han esperado 5 segundos para cerrar el audio. Matando el proceso "
+"Widelands debido a este problema. Actualiza tu controladora de sonido y/o "
+"SDL para solucionarlo.\n"
 
 #: ../../src/wlapplication.cc:1232
 msgid ""
@@ -1648,7 +1651,7 @@ msgstr "El jugador \"%s\" fue derrotado y se convirtió en espectador."
 #: ../../src/network/network_gaming_messages.cc:161
 #, c-format
 msgid "Client %s did not answer for more than %s seconds."
-msgstr ""
+msgstr "El cliente %s no ha respondido desde hace más de %s segundos."
 
 #: ../../src/network/network_gaming_messages.cc:163
 #, c-format
@@ -1656,6 +1659,8 @@ msgid ""
 "Client %s will automatically be kicked, if no answer is received within %s "
 "seconds."
 msgstr ""
+"El cliente %s será expulsado automáticamente si no se recibe respuesta en %s "
+"segundos."
 
 #: ../../src/network/internet_gaming_messages.cc:42
 #, c-format
@@ -1829,12 +1834,12 @@ msgstr "La compensacion del horario del servidor es %i segundos."
 
 #: ../../src/network/internet_gaming.cc:453
 msgid "Invalid message type"
-msgstr ""
+msgstr "Tipo de mensaje inválido"
 
 #: ../../src/network/internet_gaming.cc:453
 #, c-format
 msgid "Invalid chat message type \"%s\"."
-msgstr ""
+msgstr "Tipo de mensaje inválido \"%s\"."
 
 #: ../../src/network/internet_gaming.cc:534
 msgid "ERROR: "
@@ -1859,7 +1864,7 @@ msgstr "El mensaje no pudo ser enviado: se supone que es un mensaje privado?"
 
 #: ../../src/network/internet_gaming.cc:779
 msgid "Conversion error"
-msgstr ""
+msgstr "Error de conversión"
 
 #: ../../src/network/internet_gaming.cc:780
 #, c-format
@@ -2915,7 +2920,7 @@ msgstr "FALTA CONTROLADOR DE JUEGOS"
 
 #: ../../src/wui/fieldaction.cc:114 ../../src/wui/buildingwindow.cc:206
 msgid "Construction costs:"
-msgstr ""
+msgstr "Costes de construcción:"
 
 #: ../../src/wui/fieldaction.cc:250
 msgid "Build small buildings"
@@ -3245,7 +3250,7 @@ msgstr "Siguiente nivel"
 
 #: ../../src/wui/productionsitewindow.cc:95
 msgid "Terminate the employment of the selected worker"
-msgstr ""
+msgstr "Acabar con el empleo del trabajador seleccionado"
 
 #: ../../src/wui/productionsitewindow.cc:163
 msgid "(vacant)"
@@ -3347,7 +3352,7 @@ msgstr "¿Estás seguro en destruir este(a) %s?"
 
 #: ../../src/wui/buildingconfirm.cc:223
 msgid "Dismantle building?"
-msgstr ""
+msgstr "¿Desmantelar edificio?"
 
 #: ../../src/wui/buildingconfirm.cc:224
 #, c-format
@@ -3356,7 +3361,7 @@ msgstr ""
 
 #: ../../src/wui/buildingconfirm.cc:284
 msgid "Enhance building?"
-msgstr ""
+msgstr "¿Mejorar edificio?"
 
 #: ../../src/wui/buildingconfirm.cc:285
 #, c-format
