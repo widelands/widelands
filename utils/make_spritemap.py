@@ -483,6 +483,16 @@ def draw_rectangles_over_bitmask(bitmask, rectangles):
     for bmrow, crow in zip(bitmask, coverage):
         print ''.join([str(c) if c > 0 else '*' if b else ' ' for b, c in zip(bmrow, crow)])
 
+def draw_frame_diffs(frames):
+    npframes = np.array([frame.pic for frame in frames])
+    any_not_transparent = np.any(npframes[:,:,:,3] != 0, axis=0)
+    all_equal_not_transparent = np.logical_and(
+        npframes[0,:,:,3] != 0,
+        np.all(np.all(npframes[0:1,:,:,:] == npframes, axis=-1), axis=0)
+    )
+    for eqrow, ntrow in zip(all_equal_not_transparent, any_not_transparent):
+        print ''.join(['.' if eq else '*' if nt else ' ' for eq, nt in zip(eqrow, ntrow)])
+
 def rectangle_cost(rectangle, FRAGMENT_COST=FRAGMENT_COST):
     return FRAGMENT_COST + (rectangle[2] - rectangle[0]) * (rectangle[3] - rectangle[1])
 
@@ -523,9 +533,12 @@ def compute_rectangle_covering(bitmask, FRAGMENT_COST=FRAGMENT_COST):
         )
     return sum([rectangle_cost(rect, FRAGMENT_COST=FRAGMENT_COST) for rect in rectangles]), rectangles
 
-def build_frame_group(frames):
+def build_frame_group(frames, FRAGMENT_COST=FRAGMENT_COST):
     """
-    Given a list of frames, find a combination of shared base picture plus individual deltas
+    Given a list of frames, find a shared base picture based on the first frame,
+    as well as individual deltas.
+
+    Returns (cost, base_pic, base_pic_rect, [frame_rectangles])
     """
     shape = frames[0].pic.shape
     all_opaque_mask = np.all([frame.pic[:,:,3] == 255 for frame in frames], 0)
@@ -535,29 +548,115 @@ def build_frame_group(frames):
     p = np.argwhere(base_pic_mask)
     base_pic_min = np.min(p, 0)
     base_pic_max = np.max(p, 0)
-    base_pic_pixels = (base_pic_max[0] - base_pic_min[0] + 1) * (base_pic_max[1] - base_pic_min[0] + 1)
+    base_pic_rect = (base_pic_min[0], base_pic_min[1], base_pic_max[0] + 1, base_pic_max[1] + 1)
+    base_pic_cost = rectangle_cost(base_pic_rect, FRAGMENT_COST=FRAGMENT_COST)
     base_pic = np.where(np.reshape(base_pic_mask, (shape[0], shape[1], 1)), frames[0].pic, 0)
 
+    total_cost = base_pic_cost
+    frame_rectangles = []
     for frame in frames:
         delta_mask = (frame.pic[:,:,3] != 0) & np.any(frame.pic != base_pic, -1)
-        #cost, covering = compute_rectangle_covering(delta_mask)
-        print delta_mask
-        print 'number pix', np.count_nonzero(delta_mask)
-    return delta_mask
+        cost, rectangles = compute_rectangle_covering(delta_mask, FRAGMENT_COST=FRAGMENT_COST)
+        total_cost += cost
+        frame_rectangles.append(rectangles)
+
+    return (total_cost, base_pic, base_pic_rect, [frame_rectangles])
+
+def pack_frames_stupid(frames, FRAGMENT_COST=FRAGMENT_COST):
+    """
+    No-op approach to frame packing, as a benchmark comparison.
+    """
+    shape = frames[0].pic.shape
+    total_cost = len(frames) * rectangle_cost((0, 0) + shape[:2], FRAGMENT_COST=FRAGMENT_COST)
+    return total_cost
+
+def pack_frames_bbox(frames, FRAGMENT_COST=FRAGMENT_COST):
+    """
+    Pack frames by simply taking the bounding box of each frame
+    """
+    shape = frames[0].pic.shape
+    total_cost = 0
+
+    print 'pack_frames_bbox: packing', len(frames), 'frames'
+    for idx, frame in enumerate(frames):
+        print ' frame', idx,
+        pic_mask = frame.pic[:,:,3] != 0
+        p = np.argwhere(pic_mask)
+        pic_min = np.min(p, 0)
+        pic_max = np.max(p, 0)
+        bbox_rect = (pic_min[0], pic_min[1], pic_max[0] + 1, pic_max[1] + 1)
+        cost = rectangle_cost(bbox_rect, FRAGMENT_COST=FRAGMENT_COST)
+        print 'cost', cost
+        total_cost += cost
+
+    return total_cost
+
+def pack_frames_greedy(frames, FRAGMENT_COST=FRAGMENT_COST):
+    """
+    Find a packing of the frames into frame groups.
+
+    Greedily adds frames to frame groups as long as the average cost per frame
+    decreases. As a heuristic, frames with high pixel overlap are combined first.
+    """
+    MAXREJECT = 10
+    shape = frames[0].pic.shape
+    uncovered = [idx for idx in range(len(frames))]
+    framegroups = []
+    total_cost = 0
+
+    print 'pack_frames_greedy: packing', len(frames), 'frames'
+    while uncovered:
+        leader = uncovered[0]
+        del uncovered[0]
+        print ' start new framegroup with leader', leader,
+        framegroup = build_frame_group([frames[leader]], FRAGMENT_COST=FRAGMENT_COST)
+        avgcost = framegroup[0]
+        print 'cost', avgcost
+
+        leader_pic = frames[leader].pic
+        trials = zip(uncovered, [
+            np.count_nonzero(np.all(leader_pic == frames[u].pic, -1))
+            for u in uncovered
+        ])
+        trials.sort(key=lambda t: -t[1])
+
+        followers = []
+        rejections = 0
+        for trial, nrcommonpix in trials:
+            try_frames = [leader] + followers + [trial]
+            print '  try adding %d with %d common pixels for %s...' % (
+                trial, nrcommonpix, try_frames
+            ),
+            new_framegroup = build_frame_group(
+                [frames[i] for i in try_frames],
+                FRAGMENT_COST=FRAGMENT_COST
+            )
+            new_avgcost = float(new_framegroup[0]) / (len(followers) + 2)
+            print 'avgcost', new_avgcost,
+            if new_avgcost > avgcost:
+                rejections += 1
+                if rejections >= MAXREJECT:
+                    print 'reject and stop'
+                    break
+                else:
+                    print 'reject'
+            else:
+                print 'add'
+                framegroup = new_framegroup
+                avgcost = new_avgcost
+                followers.append(trial)
+                uncovered.remove(trial)
+                rejections = 0
+
+        print ' adding framegroup', [leader] + followers, 'cost', framegroup[0]
+        framegroups.append(framegroup)
+        total_cost += framegroup[0]
+
+    return total_cost
 
 def pack_animations(anims):
     frames = load_animations(anims)
-    shape = frames[0].pic.shape
-
-    pixelcounts = [np.count_nonzero(frame.pic[:,:,3]) for frame in frames]
-    commoncounts = [[np.count_nonzero(np.all(a.pic == b.pic, -1) & (a.pic[:,:,3] != 0)) for a in frames] for b in frames]
-    commonfrac = [
-        [math.sqrt(float(cc)**2 / (float(pca) * float(pcb))) for cc, pca in zip(row, pixelcounts)]
-        for row, pcb in zip(commoncounts, pixelcounts)
-    ]
-    threshold = 0.8
-    for row in commonfrac:
-        print ''.join([[' ', '*'][int(frac >= threshold)] for frac in row])
+    pack_frames(frames)
 
     #pics_to_fit = []
     #dimensions = {}
