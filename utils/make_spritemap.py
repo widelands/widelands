@@ -473,18 +473,18 @@ def bitmask_from_rectangle(shape, rectangle):
     )
 
 def draw_rectangles_over_bitmask(bitmask, rectangles):
-    coverage = np.max(
-        [np.where(bitmask_from_rectangle(bitmask.shape, rect), num+1, 0) for num, rect in enumerate(rectangles)],
-        axis=0
-    )
+    if rectangles:
+        coverage = np.max(
+            [np.where(bitmask_from_rectangle(bitmask.shape, rect), num+1, 0) for num, rect in enumerate(rectangles)],
+            axis=0
+        )
+    else:
+        coverage = np.zeros(bitmask.shape)
     for bmrow, crow in zip(bitmask, coverage):
         print ''.join([str(c) if c > 0 else '*' if b else ' ' for b, c in zip(bmrow, crow)])
 
 def rectangle_cost(rectangle, FRAGMENT_COST=FRAGMENT_COST):
-    print 'cost of rectangle', rectangle, 'at', FRAGMENT_COST, 'is',
-    cost = FRAGMENT_COST + (rectangle[2] - rectangle[0]) * (rectangle[3] - rectangle[1])
-    print cost
-    return cost
+    return FRAGMENT_COST + (rectangle[2] - rectangle[0]) * (rectangle[3] - rectangle[1])
 
 def compute_rectangle_covering(bitmask, FRAGMENT_COST=FRAGMENT_COST):
     """
@@ -506,20 +506,19 @@ def compute_rectangle_covering(bitmask, FRAGMENT_COST=FRAGMENT_COST):
 
         for idx, rect in enumerate(rectangles):
             grow_score, grow_rect = minimum_average_cost_grow(remainder, rect)
-            if grow_score <= best_score:
+            if grow_score is not None and grow_score <= best_score:
                 best_score = grow_score
                 best_rectangles = rectangles[:idx] + rectangles[idx + 1:] + [grow_rect]
 
-        print 'best score', best_score
-        print 'rectangles:', best_rectangles
+        #print 'best score', best_score
+        #print 'rectangles:', best_rectangles
 
         rectangles = best_rectangles
-        rectangles.append(new_rectangle)
         remainder = np.logical_and(
             remainder,
             np.logical_or(
-                np.logical_or(indices[0] < new_rectangle[0], indices[0] >= new_rectangle[2]),
-                np.logical_or(indices[1] < new_rectangle[1], indices[1] >= new_rectangle[3])
+                np.logical_or(indices[0] < rectangles[-1][0], indices[0] >= rectangles[-1][2]),
+                np.logical_or(indices[1] < rectangles[-1][1], indices[1] >= rectangles[-1][3])
             )
         )
     return sum([rectangle_cost(rect, FRAGMENT_COST=FRAGMENT_COST) for rect in rectangles]), rectangles

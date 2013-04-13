@@ -139,5 +139,23 @@ class TestComputeRectangleCovering(unittest.TestCase):
         self.assertEqual(cost, 2 * FRAGMENT_COST + 6)
         self.assertItemsEqual(rectangles, [(2, 1, 6, 2), (2, 2, 3, 4)])
 
+    def test_diag_growth_bug(self):
+        """
+        Regression test for a silly bug.
+        """
+        FRAGMENT_COST = 4
+        bitmask = np.array([
+            [True,  False, False, False],
+            [False, False, False, False],
+            [False, False, False, False],
+            [False, False, False, True],
+        ])
+        cost, rectangles = make_spritemap.compute_rectangle_covering(
+            bitmask,
+            FRAGMENT_COST=FRAGMENT_COST
+        )
+        self.assertEqual(cost, 2 * FRAGMENT_COST + 2)
+        self.assertItemsEqual(rectangles, [(0, 0, 1, 1), (3, 3, 4, 4)])
+
 if __name__ == '__main__':
     unittest.main()
