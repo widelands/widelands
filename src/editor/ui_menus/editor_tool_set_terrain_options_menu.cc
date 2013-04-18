@@ -17,6 +17,7 @@
  *
  */
 
+
 #include <SDL_keysym.h>
 #include <boost/foreach.hpp>
 
@@ -54,7 +55,7 @@ Editor_Tool_Set_Terrain_Options_Menu:: Editor_Tool_Set_Terrain_Options_Menu
 	const uint32_t terrains_in_row = static_cast<uint32_t>
 		(ceil(sqrt(static_cast<float>(nr_terrains))));
 
-	int32_t check[] = {
+	static const int32_t check[] = {
 		0,                                            //  "green"
 		TERRAIN_DRY,                                  //  "dry"
 		TERRAIN_DRY|TERRAIN_MOUNTAIN,                 //  "mountain"
@@ -98,7 +99,7 @@ Editor_Tool_Set_Terrain_Options_Menu:: Editor_Tool_Set_Terrain_Options_Menu
 			Surface* surf = Surface::create(64, 64);
 			const Image* tex = g_gr->images().get
 				(g_gr->get_maptexture_data(world.terrain_descr(i).get_texture())->get_texture_image());
-			surf->blit(Point(0, 0), tex->surface(), Rect(0, 0, tex->width(), tex->height()));
+			surf->blit(Point(0, 0), tex->surface(), Rect(0, 0, tex->width(), tex->height()), CM_Solid);
 
 			Point pt(1, 64 - small_pich - 1);
 
