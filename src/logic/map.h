@@ -20,6 +20,11 @@
 #ifndef MAP_H
 #define MAP_H
 
+#include <cstring>
+#include <set>
+#include <string>
+#include <vector>
+
 #include "economy/itransport_cost_calculator.h"
 #include "field.h"
 #include "objective.h"
@@ -30,10 +35,6 @@
 #include "manager.h"
 #include "notification.h"
 
-#include <set>
-#include <string>
-#include <cstring>
-#include <vector>
 #include <boost/scoped_ptr.hpp>
 
 #include "random.h"
@@ -358,9 +359,9 @@ struct Map :
 	void set_origin(Coords);
 
 	/// Port space specific functions
-	bool is_port_space(Coords c);
+	bool is_port_space(const Coords& c);
 	void set_port_space(Coords c, bool allowed);
-	std::vector<Coords> get_port_spaces() {return m_port_spaces;}
+	const std::set<Coords>& get_port_spaces() {return m_port_spaces;}
 	std::vector<Coords> find_portdock(const Widelands::Coords& c) const;
 
 protected: /// These functions are needed in Testclasses
@@ -397,7 +398,7 @@ private:
 	std::vector<std::string> m_scenario_ais;
 	std::vector<bool>        m_scenario_closeables;
 
-	std::vector<Coords>        m_port_spaces;
+	std::set<Coords>        m_port_spaces;
 
 	Manager<Objective>  m_mom;
 

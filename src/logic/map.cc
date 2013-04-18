@@ -1486,32 +1486,16 @@ std::vector<Coords> Map::find_portdock(const Coords & c) const
 }
 
 /// \returns true, if Coordinates are in port space list
-bool Map::is_port_space(Coords c) {
-	for (std::vector<Coords>::iterator i = m_port_spaces.begin(); i != m_port_spaces.end(); ++i) {
-		if (*i == c) {
-			return true;
-		}
-	}
-	return false;
+bool Map::is_port_space(const Coords& c) {
+	return m_port_spaces.count(c);
 }
 
 /// Set or unset a space as port space
 void Map::set_port_space(Coords c, bool allowed) {
 	if (allowed) {
-		// First check, if the coordinates are already in the list
-		for (std::vector<Coords>::iterator i = m_port_spaces.begin(); i != m_port_spaces.end(); ++i) {
-			if (*i == c)
-				return;
-		}
-		m_port_spaces.push_back(c);
+		m_port_spaces.insert(c);
 	} else {
-		// Try to find the coordinates, if they are found, remove them
-		for (std::vector<Coords>::iterator i = m_port_spaces.begin(); i != m_port_spaces.end(); ++i) {
-			if (*i == c) {
-				m_port_spaces.erase(i);
-				return;
-			}
-		}
+		m_port_spaces.erase(c);
 	}
 }
 
