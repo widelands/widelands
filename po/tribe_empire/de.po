@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: Widelands unofficial-bzr-launchpad-i18n-4955\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2013-03-09 16:57+0000\n"
-"PO-Revision-Date: 2012-10-06 11:30+0000\n"
+"PO-Revision-Date: 2013-04-17 19:30+0000\n"
 "Last-Translator: Nasenbaer <Unknown>\n"
 "Language-Team: German <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-03-10 04:35+0000\n"
-"X-Generator: Launchpad (build 16523)\n"
+"X-Launchpad-Export-Date: 2013-04-18 05:06+0000\n"
+"X-Generator: Launchpad (build 16567)\n"
 "X-Poedit-Country: GERMANY\n"
 "X-Poedit-Language: German\n"
 
@@ -499,7 +499,7 @@ msgstr "Eisenerz"
 
 #: ../../tribes/empire/conf:201
 msgid "Iron Ore Mine"
-msgstr "Eisenerzmine"
+msgstr "Eisenmine"
 
 #: ../../tribes/empire/ironore/conf:1
 msgid ""
