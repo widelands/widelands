@@ -1,0 +1,8 @@
+# Automatically created by Widelands bzr6553[trunk] (RelWithDebInfo)
+
+[global]
+packet_version="1"
+number_of_port_spaces="1"
+
+[port_spaces]
+0="9 56"
