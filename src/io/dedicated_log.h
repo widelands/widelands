@@ -23,6 +23,9 @@
 #include "chat.h"
 #include "filesystem/disk_filesystem.h"
 #include "filewrite.h"
+#include "log.h"
+
+void dedicatedlog(const char *, ...) PRINTF_FORMAT(1, 2);
 
 /// This struct writes some statistics and chat data to commandline defined files
 struct DedicatedLog {

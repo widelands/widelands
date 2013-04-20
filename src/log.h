@@ -20,6 +20,8 @@
 #ifndef LOG_H
 #define LOG_H
 
+#include <iostream>
+
 #ifdef __GNUC__
 #define PRINTF_FORMAT(b, c) __attribute__ ((__format__ (__printf__, b, c)))
 #else
@@ -44,16 +46,12 @@
 #define PRIXS __PRIS_PREFIX "X"
 #define PRIoS __PRIS_PREFIX "o"
 
-// Informational messages that can aid in debugging
-#define ALIVE() log("Alive in %s line %i\n", __FILE__, __LINE__)
-
 // Print a formatted log messages to wout.
 // wout is either std::cout or specified logfile.
+extern std::ostream & wout;
 void log(const char *, ...) PRINTF_FORMAT(1, 2);
 
-void dedicatedlog(const char *, ...) PRINTF_FORMAT(1, 2);
-
-
 extern bool g_verbose;
+
 
 #endif

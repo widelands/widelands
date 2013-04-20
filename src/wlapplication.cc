@@ -21,14 +21,33 @@
 
 #include "build_info.h"
 #include "computer_player.h"
-#include "io/filesystem/disk_filesystem.h"
 #include "editor/editorinteractive.h"
+#include "gamesettings.h"
 #include "graphic/font_handler.h"
 #include "graphic/font_handler1.h"
+#include "i18n.h"
+#include "io/dedicated_log.h"
+#include "io/filesystem/disk_filesystem.h"
+#include "io/filesystem/layered_filesystem.h"
+#include "journal.h"
+#include "logic/game.h"
+#include "logic/game_data_error.h"
+#include "logic/map.h"
+#include "logic/replay.h"
+#include "logic/tribe.h"
+#include "map_io/map_loader.h"
+#include "network/internet_gaming.h"
+#include "network/netclient.h"
+#include "network/nethost.h"
+#include "profile/profile.h"
+#include "sound/sound_handler.h"
+#include "ui_basic/messagebox.h"
+#include "ui_basic/progresswindow.h"
 #include "ui_fsmenu/campaign_select.h"
 #include "ui_fsmenu/editor.h"
 #include "ui_fsmenu/editor_mapselect.h"
 #include "ui_fsmenu/fileview.h"
+#include "ui_fsmenu/internet_lobby.h"
 #include "ui_fsmenu/intro.h"
 #include "ui_fsmenu/launchSPG.h"
 #include "ui_fsmenu/loadgame.h"
@@ -36,32 +55,14 @@
 #include "ui_fsmenu/main.h"
 #include "ui_fsmenu/mapselect.h"
 #include "ui_fsmenu/multiplayer.h"
-#include "ui_fsmenu/internet_lobby.h"
 #include "ui_fsmenu/netsetup_lan.h"
 #include "ui_fsmenu/options.h"
 #include "ui_fsmenu/singleplayer.h"
-#include "logic/game.h"
-#include "logic/game_data_error.h"
-#include "wui/game_tips.h"
-#include "gamesettings.h"
-#include "i18n.h"
-#include "wui/interactive_player.h"
-#include "wui/interactive_spectator.h"
-#include "journal.h"
-#include "io/filesystem/layered_filesystem.h"
-#include "logic/map.h"
-#include "map_io/map_loader.h"
-#include "network/internet_gaming.h"
-#include "network/netclient.h"
-#include "network/nethost.h"
-#include "profile/profile.h"
-#include "logic/replay.h"
-#include "sound/sound_handler.h"
-#include "logic/tribe.h"
-#include "ui_basic/messagebox.h"
-#include "ui_basic/progresswindow.h"
 #include "warning.h"
 #include "wexception.h"
+#include "wui/game_tips.h"
+#include "wui/interactive_player.h"
+#include "wui/interactive_spectator.h"
 
 #include "log.h"
 
@@ -100,8 +101,6 @@ volatile int32_t WLApplication::may_run = 0;
 #define SCREENSHOT_DIR "screenshots"
 
 //Always specifying namespaces is good, but let's not go too far ;-)
-//using std::cout;
-std::ostream & wout = std::cout;
 using std::endl;
 
 /**
@@ -1188,8 +1187,6 @@ void WLApplication::handle_commandline_parameters() throw (Parameter_error)
 			std::ofstream * widelands_out = new std::ofstream(m_logfile.c_str());
 			std::streambuf * logbuf = widelands_out->rdbuf();
 			wout.rdbuf(logbuf);
-		} else {
-			//wout = std::cout;
 		}
 		m_commandline.erase("logfile");
 	}

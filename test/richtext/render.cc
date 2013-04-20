@@ -17,22 +17,74 @@
  *
  */
 
-#include <iostream>
 #include <fstream>
+#include <iostream>
 #include <string>
 
+#include <boost/scoped_ptr.hpp>
 #include <SDL.h>
 #undef main // No, we do not want SDL_main
 #include "lodepng.h"
 
-#include "rt_parse.h"
-#include "rt_render.h"
-#include "sdl_ttf_font.h"
-#include "thin_graphic.h"
+#include "graphic/image_cache.h"
+#include "graphic/render/sdl_helper.h"
+#include "graphic/render/sdl_surface.h"
+#include "graphic/surface_cache.h"
+#include "graphic/text/rt_parse.h"
+#include "graphic/text/rt_render.h"
+#include "graphic/text/sdl_ttf_font.h"
+
+#include "from_file_image_loader.h"
 
 using namespace std;
 
-int save_png(const string& fn, const ThinSDLSurface& surf) {
+namespace {
+class OwningRenderer : public RT::IRenderer {
+	public:
+		OwningRenderer() {
+			image_loader_.reset(create_from_file_image_loader());
+			surface_cache_.reset(create_surface_cache(500 << 20));  // 500 MB
+			image_cache_.reset
+				(create_image_cache(image_loader_.get(), surface_cache_.get()));
+			renderer_.reset
+				(RT::setup_renderer
+				 (image_cache_.get(), surface_cache_.get(),
+				  RT::ttf_fontloader_from_file("../../fonts")));
+		}
+		virtual ~OwningRenderer() {}
+
+		// Implements RT::IRenderer.
+		virtual Surface* render(const std::string& text, uint16_t w, const RT::TagSet & tagset = RT::TagSet()) {
+			return renderer_->render(text, w, tagset);
+		}
+		virtual RT::IRefMap* make_reference_map(const std::string& text, uint16_t w, const RT::TagSet & tagset = RT::TagSet()) {
+			return renderer_->make_reference_map(text, w, tagset);
+		}
+
+	private:
+		boost::scoped_ptr<IImageLoader> image_loader_;
+		boost::scoped_ptr<SurfaceCache> surface_cache_;
+		boost::scoped_ptr<ImageCache> image_cache_;
+		boost::scoped_ptr<RT::IRenderer> renderer_;
+};
+
+}  // namespace
+
+RT::IRenderer* setup_standalone_renderer() {
+	return new OwningRenderer();
+}
+
+Surface* Surface::create(SDL_Surface* surf) {
+	return new SDLSurface(surf);
+}
+Surface* Surface::create(uint16_t w, uint16_t h) {
+	SDL_Surface* surf = empty_sdl_surface(w, h);
+	return new SDLSurface(surf);
+}
+
+
+#ifdef RENDER_AS_PROGRAM
+int save_png(const string& fn, const SDLSurface& surf) {
 	// Save png data
 	std::vector<unsigned char> png;
 
@@ -42,7 +94,7 @@ int save_png(const string& fn, const ThinSDLSurface& surf) {
 	st.encoder.force_palette = LAC_NO;
 	vector<unsigned char> out;
 	int error = lodepng::encode
-		(out, static_cast<const unsigned char*>(surf.get_pixels()), surf.get_w(), surf.get_h(), st);
+		(out, static_cast<const unsigned char*>(surf.get_pixels()), surf.width(), surf.height(), st);
 	if (error) {
 		std::cout << "PNG encoding error: " << lodepng_error_text(error) << std::endl;
 		return 0;
@@ -111,23 +163,20 @@ int main(int argc, char** argv)
 	else
 		txt = read_file(inname);
 
-	IGraphic * thin_graphic = create_thin_graphic();
-	RT::IFontLoader * floader = RT::ttf_fontloader_from_file("../../fonts");
-	RT::IRenderer * renderer = RT::setup_renderer(*thin_graphic, floader);
+	boost::scoped_ptr<RT::IRenderer> renderer(setup_standalone_renderer());
 
 	try {
-		const ThinSDLSurface& surf = *static_cast<const ThinSDLSurface*>
+		SDLSurface& surf = *static_cast<SDLSurface*>
 			(renderer->render(txt, w, allowed_tags));
-		surf.lock();
+		surf.lock(Surface::Lock_Normal);
 		save_png(outname, surf);
-		surf.unlock();
+		surf.unlock(Surface::Unlock_NoChange);
 	} catch (RT::Exception & e) {
 		cout << e.what() << endl;
 	}
-	delete renderer;
-	delete thin_graphic;  // Will free all images
 
 	SDL_Quit();
 
 	return 0;
 }
+#endif
