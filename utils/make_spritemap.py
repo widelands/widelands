@@ -337,6 +337,9 @@ def macr_exact_bruteforce(bitmask, lower_range=None, upper_range=None, FRAGMENT_
     Note: Returns a rectangle with cost strictly greater than FRAGMENT_COST + 1 if bitmask contains
     no set pixels.
     """
+    if bitmask.shape[0] * bitmask.shape[1] > 4000:
+        raise Exception('macr_exact_bruteforce called on a large bitmask')
+
     lower_range = lower_range or ((0, 0), bitmask.shape)
     upper_range = upper_range or ((0, 0), bitmask.shape)
     lower_ext = tuple(np.subtract(lower_range[1], lower_range[0]))
@@ -503,6 +506,9 @@ def compute_rectangle_covering(bitmask, FRAGMENT_COST=FRAGMENT_COST):
 
     Returns (cost, list of rectangles)
     """
+    # This implements the simple set cover heuristic,
+    # i.e. it greedily covers pixels by adding a rectangle with minimum cost
+    # per covered pixel, or by extending an existing rectangle.
     rectangles = []
     indices = np.indices(bitmask.shape)
     remainder = bitmask
@@ -562,12 +568,17 @@ def build_frame_group(frames, FRAGMENT_COST=FRAGMENT_COST):
 
     return (total_cost, base_pic, base_pic_rect, [frame_rectangles])
 
-def pack_frames_stupid(frames, FRAGMENT_COST=FRAGMENT_COST):
+def pack_frames_global_bbox(frames, FRAGMENT_COST=FRAGMENT_COST):
     """
-    No-op approach to frame packing, as a benchmark comparison.
+    Pack frames by taking a global bounding box
     """
-    shape = frames[0].pic.shape
-    total_cost = len(frames) * rectangle_cost((0, 0) + shape[:2], FRAGMENT_COST=FRAGMENT_COST)
+    npframes = np.array([frame.pic for frame in frames])
+    any_transparent = np.any(npframes[:,:,:,3] != 0, axis=0)
+    p = np.argwhere(any_transparent)
+    pic_min = np.min(p, 0)
+    pic_max = np.max(p, 0)
+    bbox_rect = (pic_min[0], pic_min[1], pic_max[0] + 1, pic_max[1] + 1)
+    total_cost = len(frames) * rectangle_cost(bbox_rect, FRAGMENT_COST=FRAGMENT_COST)
     return total_cost
 
 def pack_frames_bbox(frames, FRAGMENT_COST=FRAGMENT_COST):
