@@ -25,8 +25,8 @@ rt_lib = env.Library([
 
 # Debug program that renders one text
 render_env = env.Clone()
+render_env.Append(CXXFLAGS=["-DRENDER_AS_PROGRAM"])
 render_env.Append(LIBS=[rt_lib])
-render_env.Append(CPPPATH="../../src/")
 render_env.Program("render", ["render.cc", "lodepng.cc", "from_file_image_loader.cc"])
 
 # Python library
@@ -39,5 +39,5 @@ pylib_env.Append(CPPPATH="../../src/")
 pylib_env.Append(LIBS=["SDL_ttf", rt_lib])
 pylib_env.Append(CPPPATH=numpy.get_include())
 ext = pylib_env.PythonExtension("pyrt_render",
-    ["pyrt_render.pyx", "lodepng.cc"],
+    ["pyrt_render.pyx", "lodepng.cc", "render.cc", "from_file_image_loader.cc"],
 )

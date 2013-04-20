@@ -27,8 +27,9 @@
 #include "lodepng.h"
 
 #include "graphic/image_cache.h"
-#include "graphic/surface_cache.h"
+#include "graphic/render/sdl_helper.h"
 #include "graphic/render/sdl_surface.h"
+#include "graphic/surface_cache.h"
 #include "graphic/text/rt_parse.h"
 #include "graphic/text/rt_render.h"
 #include "graphic/text/sdl_ttf_font.h"
@@ -37,6 +38,52 @@
 
 using namespace std;
 
+namespace {
+class OwningRenderer : public RT::IRenderer {
+	public:
+		OwningRenderer() {
+			image_loader_.reset(create_from_file_image_loader());
+			surface_cache_.reset(create_surface_cache(500 << 20));  // 500 MB
+			image_cache_.reset
+				(create_image_cache(image_loader_.get(), surface_cache_.get()));
+			renderer_.reset
+				(RT::setup_renderer
+				 (image_cache_.get(), surface_cache_.get(),
+				  RT::ttf_fontloader_from_file("../../fonts")));
+		}
+		virtual ~OwningRenderer() {}
+
+		// Implements RT::IRenderer.
+		virtual Surface* render(const std::string& text, uint16_t w, const RT::TagSet & tagset = RT::TagSet()) {
+			return renderer_->render(text, w, tagset);
+		}
+		virtual RT::IRefMap* make_reference_map(const std::string& text, uint16_t w, const RT::TagSet & tagset = RT::TagSet()) {
+			return renderer_->make_reference_map(text, w, tagset);
+		}
+
+	private:
+		boost::scoped_ptr<IImageLoader> image_loader_;
+		boost::scoped_ptr<SurfaceCache> surface_cache_;
+		boost::scoped_ptr<ImageCache> image_cache_;
+		boost::scoped_ptr<RT::IRenderer> renderer_;
+};
+
+}  // namespace
+
+RT::IRenderer* setup_standalone_renderer() {
+	return new OwningRenderer();
+}
+
+Surface* Surface::create(SDL_Surface* surf) {
+	return new SDLSurface(surf);
+}
+Surface* Surface::create(uint16_t w, uint16_t h) {
+	SDL_Surface* surf = empty_sdl_surface(w, h);
+	return new SDLSurface(surf);
+}
+
+
+#ifdef RENDER_AS_PROGRAM
 int save_png(const string& fn, const SDLSurface& surf) {
 	// Save png data
 	std::vector<unsigned char> png;
@@ -116,11 +163,7 @@ int main(int argc, char** argv)
 	else
 		txt = read_file(inname);
 
-	boost::scoped_ptr<IImageLoader> image_loader(create_from_file_image_loader());
-	boost::scoped_ptr<SurfaceCache> surface_cache(create_surface_cache(500 << 20));  // 500 MB
-	boost::scoped_ptr<ImageCache> image_cache(create_image_cache(image_loader.get(), surface_cache.get()));
-	boost::scoped_ptr<RT::IRenderer> renderer
-		(RT::setup_renderer(image_cache.get(), surface_cache.get(), RT::ttf_fontloader_from_file("../../fonts")));
+	boost::scoped_ptr<RT::IRenderer> renderer(setup_standalone_renderer());
 
 	try {
 		SDLSurface& surf = *static_cast<SDLSurface*>
@@ -136,3 +179,4 @@ int main(int argc, char** argv)
 
 	return 0;
 }
+#endif

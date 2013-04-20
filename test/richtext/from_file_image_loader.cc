@@ -21,7 +21,6 @@
 
 #include <boost/format.hpp>
 
-#include "graphic/render/sdl_helper.h"
 #include "graphic/render/sdl_surface.h"
 #include "graphic/text/rt_errors.h"
 
@@ -30,15 +29,6 @@
 
 using namespace boost;
 using namespace std;
-
-// NOCOM(#sirver): this does not really belong here, but so what?
-Surface* Surface::create(SDL_Surface* surf) {
-	return new SDLSurface(surf);
-}
-Surface* Surface::create(uint16_t w, uint16_t h) {
-	SDL_Surface* surf = empty_sdl_surface(w, h);
-	return new SDLSurface(surf);
-}
 
 class FromFileImageLoader : public IImageLoader {
 public:
