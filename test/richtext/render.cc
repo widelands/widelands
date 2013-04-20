@@ -17,22 +17,27 @@
  *
  */
 
-#include <iostream>
 #include <fstream>
+#include <iostream>
 #include <string>
 
+#include <boost/scoped_ptr.hpp>
 #include <SDL.h>
 #undef main // No, we do not want SDL_main
 #include "lodepng.h"
 
-#include "rt_parse.h"
-#include "rt_render.h"
-#include "sdl_ttf_font.h"
-#include "thin_graphic.h"
+#include "graphic/image_cache.h"
+#include "graphic/surface_cache.h"
+#include "graphic/render/sdl_surface.h"
+#include "graphic/text/rt_parse.h"
+#include "graphic/text/rt_render.h"
+#include "graphic/text/sdl_ttf_font.h"
+
+#include "from_file_image_loader.h"
 
 using namespace std;
 
-int save_png(const string& fn, const ThinSDLSurface& surf) {
+int save_png(const string& fn, const SDLSurface& surf) {
 	// Save png data
 	std::vector<unsigned char> png;
 
@@ -42,7 +47,7 @@ int save_png(const string& fn, const ThinSDLSurface& surf) {
 	st.encoder.force_palette = LAC_NO;
 	vector<unsigned char> out;
 	int error = lodepng::encode
-		(out, static_cast<const unsigned char*>(surf.get_pixels()), surf.get_w(), surf.get_h(), st);
+		(out, static_cast<const unsigned char*>(surf.get_pixels()), surf.width(), surf.height(), st);
 	if (error) {
 		std::cout << "PNG encoding error: " << lodepng_error_text(error) << std::endl;
 		return 0;
@@ -111,21 +116,21 @@ int main(int argc, char** argv)
 	else
 		txt = read_file(inname);
 
-	IGraphic * thin_graphic = create_thin_graphic();
-	RT::IFontLoader * floader = RT::ttf_fontloader_from_file("../../fonts");
-	RT::IRenderer * renderer = RT::setup_renderer(*thin_graphic, floader);
+	boost::scoped_ptr<IImageLoader> image_loader(create_from_file_image_loader());
+	boost::scoped_ptr<SurfaceCache> surface_cache(create_surface_cache(500 << 20));  // 500 MB
+	boost::scoped_ptr<ImageCache> image_cache(create_image_cache(image_loader.get(), surface_cache.get()));
+	boost::scoped_ptr<RT::IRenderer> renderer
+		(RT::setup_renderer(image_cache.get(), surface_cache.get(), RT::ttf_fontloader_from_file("../../fonts")));
 
 	try {
-		const ThinSDLSurface& surf = *static_cast<const ThinSDLSurface*>
+		SDLSurface& surf = *static_cast<SDLSurface*>
 			(renderer->render(txt, w, allowed_tags));
-		surf.lock();
+		surf.lock(Surface::Lock_Normal);
 		save_png(outname, surf);
-		surf.unlock();
+		surf.unlock(Surface::Unlock_NoChange);
 	} catch (RT::Exception & e) {
 		cout << e.what() << endl;
 	}
-	delete renderer;
-	delete thin_graphic;  // Will free all images
 
 	SDL_Quit();
 

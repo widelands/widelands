@@ -26,6 +26,23 @@
 /// The dedicated server logger
 static DedicatedLog * logger;
 
+extern std::ostream & wout;
+
+void dedicatedlog(const char * const fmt, ...) {
+	char buffer[2048];
+	va_list va;
+
+	va_start(va, fmt);
+	vsnprintf(buffer, sizeof(buffer), fmt, va);
+	va_end(va);
+
+	// Here comes the difference to widelands standard log() ;)
+	DedicatedLog::get()->dlog(buffer);
+
+	wout << buffer;
+	wout.flush();
+}
+
 /// protected constructor
 DedicatedLog::DedicatedLog()
 :
