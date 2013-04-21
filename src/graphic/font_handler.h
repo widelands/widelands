@@ -68,6 +68,9 @@ struct Font_Handler {
 	void do_align
 		(Align, int32_t & dstx, int32_t & dsty, int32_t w, int32_t h);
 
+	// Delete the whole cache.
+	void flush();
+
 private:
 	struct Data;
 	boost::scoped_ptr<Data> d;

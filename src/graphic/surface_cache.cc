@@ -40,6 +40,7 @@ public:
 	virtual ~SurfaceCacheImpl();
 
 	// Implements SurfaceCache.
+	virtual void flush();
 	virtual Surface* get(const std::string& hash);
 	virtual Surface* insert(const std::string& hash, Surface*);
 
@@ -64,9 +65,16 @@ private:
 };
 
 SurfaceCacheImpl::~SurfaceCacheImpl() {
+	flush();
+}
+
+void SurfaceCacheImpl::flush() {
 	for (Container::iterator it = map_.begin(); it != map_.end(); ++it) {
 		delete it->second;
 	}
+	map_.clear();
+	hist_.clear();
+	used_memory_ = 0;
 }
 
 Surface* SurfaceCacheImpl::get(const std::string& hash) {

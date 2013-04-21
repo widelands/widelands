@@ -33,10 +33,13 @@
 */
 class SDLSurface : public Surface {
 public:
-	SDLSurface(SDL_Surface* surface) :
+	// The surface set by SetVideoMode must not be freed according to the SDL
+	// docs, so we need an extra param to be sure we do net.
+	SDLSurface(SDL_Surface* surface, bool free_surface_on_delete = true) :
 		m_surface(surface),
 		m_offsx(0), m_offsy(0),
-		m_w(surface->w), m_h(surface->h)
+		m_w(surface->w), m_h(surface->h),
+		m_free_surface_on_delete(free_surface_on_delete)
 	{}
 	virtual ~SDLSurface();
 
@@ -72,6 +75,7 @@ protected:
 	int32_t m_offsx;
 	int32_t m_offsy;
 	uint16_t m_w, m_h;
+	bool m_free_surface_on_delete;
 };
 
 

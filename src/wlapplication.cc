@@ -262,9 +262,6 @@ m_mouse_position       (0, 0),
 m_mouse_locked         (0),
 m_mouse_compensate_warp(0, 0),
 m_should_die           (false),
-m_gfx_w(0), m_gfx_h(0), m_gfx_bpp(0),
-m_gfx_fullscreen       (false),
-m_gfx_opengl           (true),
 m_default_datadirs     (true),
 #ifdef WIN32
 m_homedir(FileSystem::GetHomedir() + "\\.widelands"),
@@ -469,7 +466,6 @@ void WLApplication::run()
 			throw;
 		}
 	} else {
-
 		g_sound_handler.start_music("intro");
 
 		{
@@ -791,42 +787,25 @@ void WLApplication::set_input_grab(bool grab)
 }
 
 /**
- * Initialize the graphics subsystem (or shutdown, if system == GFXSYS_NONE)
+ * Initialize the graphics subsystem (or shutdown, if w and h are 0)
  * with the given resolution.
  * Throws an exception on failure.
- *
- * \note Because of the way pictures are handled now, this function must not be
- * called while UI elements are active.
- *
- * \todo Ensure that calling this with active UI elements does barf
- * \todo Document parameters
  */
-
 void WLApplication::init_graphics
 	(const int32_t w, const int32_t h, const int32_t bpp,
 	 const bool fullscreen, const bool opengl)
 {
-	if
-		(w == m_gfx_w && h == m_gfx_h && bpp == m_gfx_bpp &&
-		 fullscreen == m_gfx_fullscreen &&
-		 opengl == m_gfx_opengl)
+	if (!w && !h) { // shutdown.
+		delete g_gr;
+		g_gr = 0;
 		return;
-
-	delete g_gr;
-	g_gr = 0;
-
-	m_gfx_w = w;
-	m_gfx_h = h;
-	m_gfx_bpp = bpp;
-	m_gfx_fullscreen = fullscreen;
-	m_gfx_opengl = opengl;
-
-
-	// If we are not to be shut down
-	if (w && h) {
-		g_gr = new Graphic
-			(w, h, bpp, fullscreen, opengl);
 	}
+	assert(w > 0 && h > 0);
+
+	if (!g_gr) {
+		g_gr = new Graphic();
+	}
+	g_gr->initialize(w, h, bpp, fullscreen, opengl);
 }
 
 void WLApplication::refresh_graphics()
@@ -837,7 +816,7 @@ void WLApplication::refresh_graphics()
 	init_graphics
 		(s.get_int("xres", XRES),
 		 s.get_int("yres", YRES),
-		 s.get_int("depth", 16),
+		 s.get_int("depth", 32),
 		 s.get_bool("fullscreen", false),
 #if USE_OPENGL
 		 s.get_bool("opengl", true));
@@ -866,16 +845,12 @@ bool WLApplication::init_settings() {
 	set_input_grab(s.get_bool("inputgrab", false));
 	set_mouse_swap(s.get_bool("swapmouse", false));
 
-	m_gfx_fullscreen = s.get_bool("fullscreen", false);
-
-#if USE_OPENGL
-	m_gfx_opengl = s.get_bool("opengl", true);
-#endif
-
 	// KLUDGE!
 	// Without this the following config options get dropped by check_used().
 	// Profile needs support for a Syntax definition to solve this in a
 	// sensible way
+	s.get_bool("fullscreen");
+	s.get_bool("opengl");
 	s.get_int("xres");
 	s.get_int("yres");
 	s.get_int("border_snap_distance");
@@ -1072,12 +1047,7 @@ bool WLApplication::init_hardware() {
 	SDL_EnableUNICODE(1); //needed by helper.h:is_printable()
 	SDL_EnableKeyRepeat(SDL_DEFAULT_REPEAT_DELAY, SDL_DEFAULT_REPEAT_INTERVAL);
 
-	uint32_t xres = s.get_int("xres", XRES);
-	uint32_t yres = s.get_int("yres", YRES);
-
-	init_graphics
-		(xres, yres, s.get_int("depth", 16),
-		 m_gfx_fullscreen, m_gfx_opengl);
+	refresh_graphics();
 
 	// Start the audio subsystem
 	// must know the locale before calling this!
