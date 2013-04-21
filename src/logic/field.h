@@ -236,7 +236,7 @@ public:
 #pragma pack(0)
 
 // Check that Field is tightly packed.
-compile_assert(sizeof(Field) == sizeof(void*)*2 + 9);
+compile_assert(sizeof(Field) == sizeof(void*)*2 + 10);
 
 }
 
