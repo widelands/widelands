@@ -62,7 +62,7 @@ int32_t Editor_Decrease_Height_Tool::handle_undo_impl
 	std::list<Widelands::Field::Height>::iterator i = args.origHights.begin();
 
 	do {
-		mr.location().field->set_height(*i); i++;
+		mr.location().field->set_height(*i); ++i;
 	} while (mr.advance(map));
 
 	map.recalc_for_field_area

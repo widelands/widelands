@@ -142,7 +142,7 @@ public:
 	Terrain_Index terrain_r   () const throw () {return terrains.r;}
 	void          set_terrains(const Terrains & i) throw () {terrains = i;}
 	void set_terrain
-		(const TCoords<FCoords>::TriangleIndex t, Terrain_Index const i)
+		(const TCoords<FCoords>::TriangleIndex& t, Terrain_Index const i)
 		throw ()
 	{
 		if (t == TCoords<FCoords>::D) set_terrain_d(i);

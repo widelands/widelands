@@ -108,9 +108,8 @@ Request::~Request()
 void Request::Read
 	(FileRead & fr, Game & game, Map_Map_Object_Loader & mol)
 {
-	bool fudged_type = false;
-
 	try {
+		bool fudged_type = false;
 		uint16_t const version = fr.Unsigned16();
 		if (2 <= version and version <= REQUEST_VERSION) {
 			const Tribe_Descr & tribe = m_target.owner().tribe();

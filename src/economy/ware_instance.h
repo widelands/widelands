@@ -29,7 +29,7 @@
 namespace Widelands {
 
 class Building;
-struct Economy;
+class Economy;
 struct Editor_Game_Base;
 struct Game;
 struct IdleWareSupply;

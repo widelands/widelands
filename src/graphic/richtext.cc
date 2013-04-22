@@ -392,7 +392,7 @@ void RichText::parse(const std::string & rtext)
 			while (word_cnt < words.size() || br_it != line_breaks.end()) {
 				if (br_it != line_breaks.end() && *br_it <= word_cnt) {
 					text.advance_line();
-					br_it++;
+					++br_it;
 					continue;
 				}
 
