@@ -39,6 +39,7 @@
 #include "tribe.h"
 #include "upcast.h"
 #include "worker_program.h"
+#include "trainingsite.h"
 
 #include <libintl.h>
 #include <boost/format.hpp>
@@ -1305,6 +1306,9 @@ void ProductionProgram::ActCheck_Soldier::execute
 	}
 	ps.molog("    okay\n"); // okay, do nothing
 
+	TrainingSite& ts=dynamic_cast<TrainingSite &>(ps);
+	ts.trainingAttempted(attribute, level);
+
 	ps.molog("  Check done!\n");
 
 	return ps.program_step(game);
@@ -1407,6 +1411,10 @@ void ProductionProgram::ActTrain::execute
 			throw wexception ("Fail training soldier!!");
 		}
 		ps.molog("  Training done!\n");
+
+	TrainingSite& ts=dynamic_cast<TrainingSite &>(ps);
+        ts.trainingSuccessful(attribute, level);
+
 
 	return ps.program_step(game);
 }
