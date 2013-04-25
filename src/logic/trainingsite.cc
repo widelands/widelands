@@ -488,7 +488,7 @@ void TrainingSite::drop_stalled_soldiers(Game &)
 	                if (it == m_upgrades.end() && bloodthirsty)
 				{
 	                        droplist.push_back(m_soldiers[i]);
-				std::cout <<" TM  -- Kicking somebody out! (sl " << level << " limit " << train_tl.second<<" stallval "<<tstep->second<<"/"<<maxStallVal<<")"<<std::endl;
+				//std::cout <<"Kicking somebody out of training ! (sl " << level << " limit " << train_tl.second<<" stallval "<<tstep->second<<"/"<<maxStallVal<<")"<<std::endl;
 				if ( 0 < tstep->second )
 					tstep->second--;
 				bloodthirsty=false;
@@ -522,14 +522,11 @@ void TrainingSite::program_end(Game & game, Program_Result const result)
 
 	if (m_current_upgrade) {
 		if (m_result == Completed) {
-			std::cout <<" TM  -- program-end -- complete "<<std::endl;
-
 			drop_unupgradable_soldiers(game);
 			m_current_upgrade->lastsuccess = true;
 			m_current_upgrade->failures = 0;
 		}
 		else {
-			std::cout <<" TM  -- program-end -- incomplete "<<std::endl;
 			m_current_upgrade->failures++;
 			drop_stalled_soldiers(game);
 		}
@@ -733,7 +730,6 @@ TrainingSite::trainingAttempted(uint32_t type, uint32_t level)
 			trainingFailureCount[key]=1;
 		else
 			trainingFailureCount[key]++;
-		std::cout <<" TM  -- trainingAttempted("<<type<<","<<level<<") -> "<<trainingFailureCount[key]<<std::endl;
 	}
 
 /**
@@ -745,7 +741,6 @@ TrainingSite::trainingSuccessful(uint32_t type, uint32_t level)
 	{
 		uint32_t key=bitbang_training_type_and_level_to_uint(type, level);
 		trainingFailureCount[key]=0;
-		std::cout <<" TM  -- trainingSuccessful("<<type<<","<<level<<") -> "<<trainingFailureCount[key]<<std::endl;
 		for(trainingFailureCount_t::iterator it = trainingFailureCount.begin(); it != trainingFailureCount.end(); ++it)
 		if ( 0== it->second)
 			trainingFailureCount[it->first]=0;
