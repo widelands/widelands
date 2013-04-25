@@ -703,7 +703,9 @@ void TrainingSite::calc_upgrades() {
 
 
 /**
- * ugly hack
+ * training status info is stored into a single int, to keep it simple and efficient.
+ * If this is an overly ugly hack, please yell at me. Here I assume that there are always
+ * less than 256 training steps for each art.
  */
 
 uint32_t
