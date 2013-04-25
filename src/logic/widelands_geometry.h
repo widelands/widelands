@@ -49,7 +49,7 @@ struct Coords {
 	/// Returns a special value indicating invalidity.
 	static Coords Null() throw () {return Coords(-1, -1);}
 
-	bool operator== (const Coords & other) const throw () {
+	bool operator== (const Coords& other) const throw () {
 		return x == other.x and y == other.y;
 	}
 	bool operator!= (const Coords & other) const throw () {
