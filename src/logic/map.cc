@@ -621,8 +621,8 @@ void Map::set_nrplayers(Player_Number const nrplayers) {
 		return;
 	}
 
-	Coords* new_starting_pos = static_cast<Coords *> (realloc(m_starting_pos,
-				sizeof(Coords) * nrplayers));
+	Coords* new_starting_pos = static_cast<Coords *>
+		(realloc(m_starting_pos, sizeof(Coords) * nrplayers));
 	if (!new_starting_pos)
 		throw wexception("Out of memory.");
 	m_starting_pos = new_starting_pos;

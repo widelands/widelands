@@ -183,6 +183,7 @@ Texture::Texture(const string& fnametmpl, uint32_t frametime, const SDL_PixelFor
 			throw wexception("Out of memory.");
 		m_pixels = new_ptr;
 
+
 		m_curframe = &m_pixels[TEXTURE_WIDTH * TEXTURE_HEIGHT * m_nrframes];
 		++m_nrframes;
 
