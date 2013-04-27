@@ -55,7 +55,7 @@ private:
 	/** Maximum number of soldiers for a training site*/
 	uint32_t m_num_soldiers;
 	/** Number of rounds w/o successful training, after which a soldier is kicked out.**/
-	uint32_t m_trainer_patience;
+	uint32_t m_max_stall;
 	/** Whether this site can train hitpoints*/
 	bool m_train_hp;
 	/** Whether this site can train attack*/
@@ -110,7 +110,7 @@ class TrainingSite : public ProductionSite, public SoldierControl {
 
 		// whether the last attempt in this upgrade category was successful
 		bool lastsuccess;
-		unsigned failures;
+		uint32_t failures;
 	};
 
 public:
@@ -153,8 +153,10 @@ public:
 	int32_t get_pri(enum tAttribute atr);
 	void set_pri(enum tAttribute atr, int32_t prio);
 
-	void trainingAttempted(unsigned type, unsigned level);
-	void trainingSuccessful(unsigned type, unsigned level);
+	// These are for premature soldier kick-out
+	void trainingAttempted(uint32_t type, uint32_t level);
+	void trainingSuccessful(uint32_t type, uint32_t level);
+	void trainingDone();
 
 
 protected:
@@ -200,12 +202,12 @@ private:
 	Program_Result m_result; /// The result of the last training program.
 
 	// These are used for kicking out soldiers prematurely
+	static const uint32_t training_state_multiplier = 12;
 	typedef std::pair<uint32_t, uint32_t> type_and_level_t;
-	typedef std::map<uint32_t, uint32_t> trainingFailureCount_t;
-	uint32_t bitbang_training_type_and_level_to_uint(uint32_t, uint32_t);
-	type_and_level_t unbang_training_type_and_level(uint32_t);
-	trainingFailureCount_t trainingFailureCount; // FIXME: should this go to a savegame?
-	uint32_t maxStallVal;
+	typedef std::map<type_and_level_t, uint32_t> training_failure_count_t;
+	training_failure_count_t training_failure_count; // FIXME: should this go to a savegame?
+	uint32_t max_stall_val;
+
 
 };
 
