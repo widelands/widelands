@@ -166,19 +166,19 @@ m_result         (Failed)
 	m_current_upgrade = 0;
 	set_post_timer(6000);
 	training_failure_count.clear();
-	max_stall_val=training_state_multiplier*d.get_max_stall();
+	max_stall_val = training_state_multiplier * d.get_max_stall();
 
 	if (d.get_train_hp())
-	    for ( int t= d.get_min_level(atrHP); t<d.get_max_level(atrHP); t++)
+	    for (int t = d.get_min_level(atrHP); t <= d.get_max_level(atrHP); t++)
 	      trainingSuccessful(atrHP, t);
 	if (d.get_train_attack())
-	    for ( int t= d.get_min_level(atrAttack); t<d.get_max_level(atrAttack); t++)
+	    for (int t = d.get_min_level(atrAttack); t <= d.get_max_level(atrAttack); t++)
 	      trainingSuccessful(atrAttack, t);
 	if (d.get_train_defense())
-	    for ( int t= d.get_min_level(atrDefense); t<d.get_max_level(atrDefense); t++)
+	    for (int t = d.get_min_level(atrDefense); t <= d.get_max_level(atrDefense); t++)
 	      trainingSuccessful(atrDefense, t);
 	if (d.get_train_evade())
-	    for ( int t= d.get_min_level(atrEvade); t<d.get_max_level(atrEvade); t++)
+	    for (int t = d.get_min_level(atrEvade); t <= d.get_max_level(atrEvade); t++)
 	      trainingSuccessful(atrEvade, t);
 
 }
@@ -476,66 +476,45 @@ void TrainingSite::drop_unupgradable_soldiers(Game &)
  */
 void TrainingSite::drop_stalled_soldiers(Game &)
 {
-  Soldier * droplist=NULL;
-  
-  for (uint32_t i = 0; i < m_soldiers.size(); ++i)
-    {
-      std::vector<Upgrade>::iterator it = m_upgrades.begin();
-      bool this_soldier_is_safe=false;
-      for (; it != m_upgrades.end(); ++it)
-	if ( ! this_soldier_is_safe)
-	  {
-	    // Soldier is safe, if he is below maximum and not in a stalled state, separately for each art.
-	    int32_t level = m_soldiers[i]->get_level(it->attribute);
-	    if (level > it->max) // if soldier is at maximum, he remains unsafe
-		break;
-	    for ( training_failure_count_t::iterator tstep=training_failure_count.begin(); tstep!=training_failure_count.end(); tstep++)
-	      {
-		const type_and_level_t& train_tl=tstep->first;
-		if ( level == ( static_cast<int32_t> (train_tl.second ))) // soldier can only be safe, if training at this level works.
-		if (max_stall_val > tstep->second) // if training works at soldier's level he/she is safe
-		  if ( ( static_cast<int> (train_tl.first) ) == it->attribute )
-		    {
-		      this_soldier_is_safe=true;
-		      //log("Soldier %2d/%u is safe: art %d trainlevel %d not stalled.  TM\n",i,(unsigned)m_soldiers.size(),train_tl.first,level);
-		      break;
-		    }
-	  }
-    }
-      if ( ! this_soldier_is_safe )
-      {
-	   if (NULL== droplist)
-	       droplist=m_soldiers[i];
-	   else  // Here I drop the most-trained stalled soldier. One could argue, that it would be better to drop the least trained stalled soldier. Just replace > with < to change behaviour like that.
-	   if ( m_soldiers[i]->get_level(atrTotal) > droplist->get_level(atrTotal) )
-	       droplist=m_soldiers[i];
-      }  
-  }
-  
-  // Finally drop the soldier.
-  if ( NULL != droplist)
-    {
-      /* oh, uh. This is not c++ for sure.
-      char  reasoning[1024];
-      memset((void*)reasoning,1024,1);
-      std::vector<Upgrade>::iterator it = m_upgrades.begin();
-      for (; it != m_upgrades.end(); ++it)
+	Soldier * droplist = NULL;
+
+	for (uint32_t i = 0; i < m_soldiers.size(); ++i)
 	{
-	  int32_t level = droplist->get_level(it->attribute);
-	  for ( training_failure_count_t::iterator tstep=training_failure_count.begin(); tstep!=training_failure_count.end(); tstep++)
-	    {
-	      const type_and_level_t &train_tl=tstep->first;
-	      if ( level == (int32_t) (train_tl.second )) // soldier can only be safe, if training at this level works.
-		if ( ( static_cast<int> (train_tl.first) ) == it->attribute )
-		  {
-		    snprintf(reasoning+strlen(reasoning), 1000-strlen(reasoning),"a%d l%d st%2d/%02d   ",train_tl.first,level,tstep->second,max_stall_val);
-		  }
-	    }
+		std::vector<Upgrade>::iterator it = m_upgrades.begin();
+		bool this_soldier_is_safe = false;
+		for (; it != m_upgrades.end(); ++it)
+		if  (! this_soldier_is_safe)
+		{
+			// Soldier is safe, if he is below maximum and not in a stalled state, separately for each art.
+			int32_t level = m_soldiers[i]->get_level(it->attribute);
+			if (level > it->max) // if soldier is at maximum, he remains unsafe
+				break;
+			for (training_failure_count_t::iterator tstep = training_failure_count.begin(); tstep != training_failure_count.end(); tstep++)
+			{
+				const type_and_level_t& train_tl = tstep->first;
+				if (level == (static_cast<int32_t> (train_tl.second))) // soldier can only be safe, if training at this level works.
+				if (max_stall_val > tstep->second) // if training works at soldier's level he/she is safe
+				if ((static_cast<int> (train_tl.first)) == it->attribute)
+				{
+					this_soldier_is_safe = true;
+					break;
+				}
+			}
+		}
+		if (!this_soldier_is_safe)
+		{
+			// Here I drop the most-trained stalled soldier. One could argue, that it would be better to drop the least trained stalled soldier. Just replace > with < to change behaviour like that.
+			if (NULL == droplist)
+				droplist = m_soldiers[i];
+			else
+			if (m_soldiers[i]->get_level(atrTotal) > droplist->get_level(atrTotal))
+				droplist = m_soldiers[i];
+		}
 	}
-      log("Kicking somebody out of training! (%s)\n",reasoning);
-      */
-      dropSoldier(*droplist);
-    }
+
+	// Finally drop the soldier.
+	if (NULL != droplist)
+		dropSoldier(*droplist);
 }
 
 
@@ -570,23 +549,6 @@ void TrainingSite::program_end(Game & game, Program_Result const result)
 		m_current_upgrade = 0;
 	}
 	trainingDone();
-	/* just close your eyes and scroll down few lines. This is both inefficient and ugly.
-	{
-	  char  reasoning[1024];
-	  memset((void*)reasoning,1024,1);
-	  for ( uint32_t mytype=0 ; 10>mytype ; mytype++)
-	    for ( uint32_t mylevel=0 ; 15>mylevel ; mylevel++)
-	      for ( training_failure_count_t::iterator tstep=training_failure_count.begin(); tstep!=training_failure_count.end(); tstep++)
-		{
-		  const type_and_level_t &train_tl=tstep->first;
-		  if (train_tl.first==mytype)
-		    if (train_tl.second==mylevel)
-		      snprintf(reasoning+strlen(reasoning), 1000-strlen(reasoning),"t%d l%d st%2d ",mytype,mylevel,tstep->second);
-		}
-	  
-	  log("ts programEnd. Stallv: %s\n",reasoning);
-	}
-	*/
 }
 
 
@@ -734,7 +696,7 @@ void TrainingSite::add_upgrade
 	u.credit = 0;
 	u.lastattempt = -1;
 	u.lastsuccess = false;
-	u.failures=0;
+	u.failures = 0;
 	m_upgrades.push_back(u);
 }
 
@@ -760,11 +722,11 @@ void TrainingSite::calc_upgrades() {
 void
 TrainingSite::trainingAttempted(uint32_t type, uint32_t level)
 	{
-	        type_and_level_t key(type,level);
-		if(training_failure_count.find(key) == training_failure_count.end())
-			training_failure_count[key]=training_state_multiplier;
+	        type_and_level_t key(type, level);
+		if (training_failure_count.find(key) == training_failure_count.end())
+			training_failure_count[key] =   training_state_multiplier;
 		else
-			training_failure_count[key]+=training_state_multiplier;
+			training_failure_count[key] +=  training_state_multiplier;
 	}
 
 /**
@@ -773,19 +735,18 @@ TrainingSite::trainingAttempted(uint32_t type, uint32_t level)
 
 void
 TrainingSite::trainingSuccessful(uint32_t type, uint32_t level)
+{
+	type_and_level_t key(type, level);
+	training_failure_count[key] = 0;
+}
+
+void
+TrainingSite::trainingDone()
+{
+	for (training_failure_count_t::iterator it = training_failure_count.begin(); it != training_failure_count.end(); it++)
 	{
-	        type_and_level_t key(type,level);
-		training_failure_count[key]=0;
+		//if ( type == it->first.first )
+		it->second++;
 	}
-
-void 
-TrainingSite::trainingDone(             )
-       {
-
-	for (training_failure_count_t::iterator it =training_failure_count.begin(); it!= training_failure_count.end(); it++)
-	  {
-	    //if ( type == it->first.first )
-	      it->second++;
-	  }
-       }
+}
 }

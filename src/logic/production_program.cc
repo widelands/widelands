@@ -1306,7 +1306,7 @@ void ProductionProgram::ActCheck_Soldier::execute
 	}
 	ps.molog("    okay\n"); // okay, do nothing
 
-	upcast(TrainingSite,ts,&ps);
+	upcast(TrainingSite, ts, &ps);
 	ts->trainingAttempted(attribute, level);
 
 	ps.molog("  Check done!\n");
@@ -1412,8 +1412,8 @@ void ProductionProgram::ActTrain::execute
 		}
 		ps.molog("  Training done!\n");
 
-	upcast(TrainingSite,ts,&ps);
-        ts->trainingSuccessful(attribute, level);
+	upcast(TrainingSite, ts, &ps);
+	ts->trainingSuccessful(attribute, level);
 
 
 	return ps.program_step(game);
