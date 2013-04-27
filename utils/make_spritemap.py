@@ -4,6 +4,7 @@
 from glob import glob
 from itertools import chain, combinations, permutations
 import collections
+import md5
 import re
 import argparse
 import math
@@ -13,6 +14,10 @@ import sys
 import Image
 import numpy as np
 from scipy import ndimage
+
+import pywi.animation
+import pywi.config
+import pywi.packing
 
 OriginalFrame = collections.namedtuple('OriginalFrame', ('pic', 'pc_pic', 'anim', 'idx'))
 
@@ -113,133 +118,7 @@ class ImageWrapper(object):
         if self.h > o.h: return False
         return self.id < o.id
 
-# NOCOM(#sirver): give credit heer
 
-class Packer(object):
-    def fit(self, blocks):
-        self.root = { "x": 0, "y": 0, "w": blocks[0].w, "h": blocks[0].h, "used": False }
-        self.blocks = blocks
-        for b in blocks:
-            node = self.find_node(self.root, b.w, b.h)
-            if node:
-                b.node = self.split_node(node, b.w, b.h)
-            else:
-                b.node = self.grow_node(b.w, b.h);
-            assert(b.node)
-
-
-    def find_node(self, root, w, h):
-        if root["used"]:
-            return self.find_node(root["right"], w, h) or self.find_node(root["down"], w, h)
-        if (w <= root["w"] and h <= root["h"]):
-            return root
-
-    def split_node(self, node, w, h):
-        node['used'] = True
-        node['down'] = { "x": node["x"], "y": node["y"] + h, "w": node["w"], "h": node["h"] - h, "used": False }
-        node['right'] = { "x": node["x"] + w, "y": node["y"], "w": node["w"] - w, "h": h, "used": False};
-        return node
-
-    def grow_node(self, w, h):
-        can_grow_down = w <= self.root["w"]
-        can_grow_right = h <= self.root["h"]
-
-        # Grow to stay 'squarish'
-        should_grow_right = can_grow_right and (self.root["h"] >= (self.root["w"] + w))
-        should_grow_down = can_grow_down and (self.root["w"] >= (self.root["h"] + h))
-
-        if (should_grow_right):
-          return self.grow_right(w, h);
-        elif (should_grow_down):
-          return self.grow_down(w, h);
-        elif (can_grow_right):
-          return self.grow_right(w, h);
-        elif (can_grow_down):
-         return self.grow_down(w, h);
-        # Damn, no space for this. Should never happen.
-        assert(0)
-
-    def grow_right(self, w, h):
-        self.root = {
-                'used': True,
-                'x': 0, 'y': 0, 'w': self.root['w'] + w, 'h': self.root['h'], 'down': self.root,
-                'right': { 'x': self.root["w"], 'y': 0, 'w': w, 'h': self.root['h'], 'used': False },
-                }
-        node = self.find_node(self.root, w, h)
-        if node:
-            return self.split_node(node, w, h)
-
-    def grow_down(self, w, h):
-        self.root = {
-                'used': True,
-                'x': 0, 'y': 0, 'w': self.root['w'], 'h': self.root['h'] + h, 'right': self.root,
-                'down': { 'x': 0, 'y': self.root["h"], 'w': self.root["w"], 'h': h, 'used': False },
-                }
-        node = self.find_node(self.root, w, h)
-        if node:
-            return self.split_node(node, w, h)
-
-
-    def get_result(self):
-        img = np.empty((self.root['h'], self.root['w'], 4), np.uint8)
-        pc_img = np.empty((self.root['h'], self.root['w'], 4), np.uint8)
-        offsets = {}
-
-        for b in self.blocks:
-            assert(b.node)
-            n = b.node
-            x, y = n['x'], n['y']
-            img[y:y+b.h,x:x+b.w] = b.img.astype(np.uint8)
-            if b.pc_img is not None:
-                pc_img[y:y+b.h,x:x+b.w] = b.pc_img.astype(np.uint8)
-            else:
-                pc_img = None
-            for id in b.id:
-                offsets[id] = (x, y)
-        return offsets, img, pc_img
-
-def load_animations(anims):
-    rv = []
-    rv_pc = []
-
-    def _load(fn, seen_shape):
-        img = np.asarray(Image.open(fn))
-        if seen_shape and seen_shape != img.shape:
-            print "This file has different dimensions than the others before. Terminating."
-            sys.exit(-1)
-        return img
-
-    for anim in anims:
-        seen_shape = None
-        for idx, fn in enumerate(sorted(glob(anim + "??.png"))):
-            pic = _load(fn, seen_shape)
-            if seen_shape is None:
-                seen_shape = pic.shape
-            pc_fn = os.path.splitext(fn)[0] + "_pc.png"
-            if os.path.exists(pc_fn):
-                pc_pic = _load(pc_fn, seen_shape)
-            else:
-                pc_pic = None
-
-            rv.append(OriginalFrame(pic, pc_pic, anim, idx))
-
-    # Crop the Images.
-    #line_x_all_alpha = lambda x,idx: (rv[idx][0][x,:,-1] == 0).all()
-    #col_x_all_alpha = lambda x,idx: (rv[idx][0][:,x,-1] == 0).all()
-    #while all(line_x_all_alpha(0,i) for i in range(len(rv))):
-        #rv = [(img[1:], anim, idx) for img, anim, idx in rv]
-        #rv_pc = [img[1:] for img in rv_pc]
-    #while all(line_x_all_alpha(-1,i) for i in range(len(rv))):
-        #rv = [(img[:-1], anim, idx) for img, anim, idx in rv]
-        #rv_pc = [img[:-1] for img in rv_pc]
-    #while all(col_x_all_alpha(0,i) for i in range(len(rv))):
-        #rv = [(img[:,1:], anim, idx) for img, anim, idx in rv]
-        #rv_pc = [img[:,1:] for img in rv_pc]
-    #while all(col_x_all_alpha(-1,i) for i in range(len(rv))):
-        #rv = [(img[:,:-1], anim, idx) for img, anim, idx in rv]
-        #rv_pc = [img[:,:-1] for img in rv_pc]
-
-    return rv
 
 def merge_overlapping(regions):
     for i in range(len(regions)):
@@ -316,15 +195,12 @@ def prepare_animations(anims):
             pics_to_fit.append(ImageWrapper(subimg, pc_subimg, r, id))
     return pics_to_fit, regions, base_pic.shape[1], base_pic.shape[0]
 
+##############################################
+##############################################
+##############################################
+
 # Consider an additional fragment/rectangle to be beneficial if it saves this many pixels in image data
 FRAGMENT_COST = 32
-
-def average_cost_lower_bounds(tiles, tileshape):
-    cumulative = tiles.cumsum(0).cumsum(1)
-    print cumulative
-
-    indices = np.indices(tiles.shape * 2)
-    print indices
 
 
 def macr_exact_bruteforce(bitmask, lower_range=None, upper_range=None, FRAGMENT_COST=FRAGMENT_COST):
@@ -665,25 +541,9 @@ def pack_frames_greedy(frames, FRAGMENT_COST=FRAGMENT_COST):
 
     return total_cost
 
-def pack_animations(anims):
-    frames = load_animations(anims)
-    pack_frames(frames)
-
-    #pics_to_fit = []
-    #dimensions = {}
-    #regions = {}
-    #for anims in anim_sets:
-        #new_pics_to_fit, anim_regions, w, h = prepare_animations(anims)
-        #pics_to_fit.extend(new_pics_to_fit)
-        #for anim in anims:
-            #dimensions[anim] = (w, h)
-            #regions[anim] = anim_regions
-
-    #pics_to_fit.sort(reverse=True)
-    #p = Packer()
-    #p.fit(pics_to_fit)
-    #offsets_by_id, result_img, pc_result_img = p.get_result()
-    #return regions, dimensions, offsets_by_id, result_img, pc_result_img
+##############################################
+##############################################
+##############################################
 
 def output_results(anim, img_name, dimensions, regions, offsets_by_id, args):
     with open("conf", "a") as f:
@@ -720,58 +580,216 @@ def output_results(anim, img_name, dimensions, regions, offsets_by_id, args):
             f.write("hotspot=%s\n" % args.hotspot)
         f.write("\n")
 
+#############################################
+#############################################
+#############################################
+
+
+def optimize_bbox(animations, chunksets):
+    """
+    Joint optimization of the given animations using a simple bounding box routine
+    """
+    print 'Running bbox optimization...'
+    new_animations = {}
+    for name, anim in animations.iteritems():
+        print 'Optimizing %s' % (name)
+        if chunksets[anim.has_player_color] is None:
+            chunksets[anim.has_player_color] = pywi.animation.ChunkSet(anim.has_player_color)
+        chunkset = chunksets[anim.has_player_color]
+        new_anim = pywi.animation.AnimationBlits(chunkset)
+        new_anim.options.update(anim.options)
+        for idx in xrange(anim.get_nrframes()):
+            frame = anim.get_frame(idx)
+            pic_mask = frame.pic[:,:,3] != 0
+            p = np.argwhere(pic_mask)
+            pic_min = np.min(p, 0)
+            pic_max = np.max(p, 0)
+            bbox_rect = (pic_min[0], pic_min[1], pic_max[0] + 1, pic_max[1] + 1)
+            chunk = chunkset.make_chunk(frame.pic, frame.pc_pic, bbox_rect)
+            offset = (pic_min[0] - anim.hotspot[0], pic_min[1] - anim.hotspot[1])
+            new_anim.append_frame([pywi.animation.Blit(chunk, offset)])
+        new_animations[name] = new_anim
+    return new_animations
+
+def compute_animations_hash(animations):
+    """
+    Compute a hash of animation data that should be independent of
+    any form of optimization.
+    """
+    m = md5.new()
+    m.update('%d' % len(animations))
+    for name in sorted(animations.keys()):
+        anim = animations[name]
+        m.update('=%s:%s:%d;%s;%d' % (
+            name, anim.has_player_color, len(anim.options),
+            ':'.join(['%s=%s' % (key, anim.options[key]) for key in sorted(anim.options.keys())]),
+            anim.get_nrframes()
+        ))
+        for idx in xrange(anim.get_nrframes()):
+            m.update(':')
+            frame = anim.get_frame(idx)
+            for y in xrange(frame.pic.shape[0]):
+                for x in xrange(frame.pic.shape[1]):
+                    if frame.pic[y,x,3] != 0:
+                        m.update('.%d,%d.%d.%d.%d.%d' % (
+                            y - anim.hotspot[0], x - anim.hotspot[1],
+                            frame.pic[y,x,0], frame.pic[y,x,1], frame.pic[y,x,2], frame.pic[y,x,3]
+                        ))
+                        if frame.pc_pic is not None:
+                            m.update('.%d.%d.%d' % (frame.pc_pic[y,x,0], frame.pc_pic[y,x,1], frame.pc_pic[y,x,2]))
+    return m.hexdigest()
+
+def add_animation(arg):
+    try:
+        m = re.match(r'(\w+),(\d+),(\d+)$', arg)
+        return (m.group(1), int(m.group(3)), int(m.group(2)))
+    except:
+        raise argparse.ArgumentTypeError('must be of the form "<name>,<x>,<y>", where x,y is the hotspot')
+
 # NOCOM(#sirver): support for dirpics.
 def parse_args():
     p = argparse.ArgumentParser(description=
-        "Creates a Spritemap of the animation pictures found in the current directory."
+        """
+        Transform the animation pictures found in the given directory
+        into a (possibly optimized) spritemap.
+        """
     )
 
-    p.add_argument("-o", "--output", type=str, default=None, help = "Output picture name. Default is <current dir>.png")
-    p.add_argument("-f", "--fps", type=str, default=None, help="Specify frames per second for all the animations. This will be outputted into the conf file and is just there to spare typing.")
-    p.add_argument("-s", "--hotspot", type=str, default=None, help="Specify hotspot as 'x y' for all the animations. This will be outputted into the conf file and is just there to spare typing.")
+    p.add_argument(
+        'directory', type=str, default='.',
+        help=''
+    )
+    p.add_argument(
+        '-a', '--add', action='append', type=add_animation, metavar='name,x,y',
+        default=[],
+        help='Add an animation of the given name and with the given hotspot from <name>_??.png and <name>_??_pc.png files'
+    )
+    p.add_argument(
+        '-o', '--optimize', type=str, choices=['bbox', 'greedy'], default='bbox',
+        help="Frame optimization routine ('bbox' is very fast, but 'greedy' can give better results)"
+    )
+    p.add_argument(
+        '-d', '--dry-run', action='store_true',
+        help="Perform all optimizations, but do not write the final result"
+    )
 
-    args = p.parse_args()
+    return p.parse_args()
 
-    # Find the animations in the current directory
-    anims = set()
-    for fn in glob('*.png'):
-        m = re.match(r'(.*?)\d+\.png', fn)
-        if m is None: continue
-        anims.add(m.group(1))
-    args.anim = sorted(anims)
-
-    if args.output is None:
-        args.output = os.path.basename(os.getcwd()) + '.png'
-    return args
+def error(msg):
+    print >>sys.stderr, msg
+    sys.exit(1)
 
 def main():
     args = parse_args()
 
-    best = 10000**2
-    best_result = None
-    pack_animations(args.anim)
-    sys.exit()
-    for anim_sets in set_partitions_all_permutation(args.anim):
-        print "Trying: ", anim_sets
-        regions, dimensions, offsets_by_id, result_img, pc_result_img = pack_animations(anim_sets)
-        size = result_img.shape[0]*result_img.shape[1]
-        print "Size: %i x %i = %i pixels" % (result_img.shape[1],result_img.shape[0], size)
-        if size < best:
-            best = size
-            best_result = regions, dimensions, offsets_by_id, result_img, pc_result_img
+    animations = {}
+    if os.path.exists(args.directory + '/conf'):
+        with open(args.directory + '/conf', 'r') as filp:
+            print 'Loading existing conf file...'
+            conf = pywi.config.read(filp)
+        for name, section in conf.itersections():
+            if 'pics' not in section:
+                continue
+            if name in animations:
+                error('conf file contains multiply defined animation')
+            print 'Loading animation %s...' % (name)
+            animations[name] = pywi.animation.load_section(args.directory, section)
+    else:
+        conf = pywi.config.File()
 
-    regions, dimensions, offsets_by_id, result_img, pc_result_img = best_result
-    for anim in args.anim:
-        output_results(anim, args.output, dimensions[anim], regions[anim], offsets_by_id, args)
-    print "Results were appended to conf."
+    for name, y, x in args.add:
+        if name in animations:
+            error('Trying to add animation %s, but name already exists' % (name))
+        print 'Loading added animation %s...' % (name)
+        anim = pywi.animation.load_glob(args.directory + '/%s_??.png' % (name))
+        anim.hotspot = (y,x)
+        animations[name] = anim
 
-    Image.fromarray(result_img).save(args.output)
-    if pc_result_img is not None:
-        pc_fn = os.path.splitext(args.output)[0] + "_pc.png"
-        Image.fromarray(pc_result_img).save(pc_fn)
+    if not animations:
+        print 'No animations loaded.'
+        sys.exit()
 
+    orighash = compute_animations_hash(animations)
+    origcost = sum([anim.get_cost(FRAGMENT_COST) for anim in animations.itervalues()])
+    print 'Loaded %d animation with %d frames of cost %d, hash %s' % (
+        len(animations),
+        sum([anim.get_nrframes() for anim in animations.itervalues()]),
+        origcost, orighash
+    )
+
+    chunksets = [None, None]
+    if args.optimize == 'bbox':
+        animations = optimize_bbox(animations, chunksets)
+    elif args.optimize == 'greedy':
+        raise
+    else:
+        error('Unknown optimization method %s' % (arg.optimize))
+
+    newhash = compute_animations_hash(animations)
+    newcost = 0
+    for chunkset in chunksets:
+        if chunkset is not None:
+            newcost += chunkset.get_cost(FRAGMENT_COST)
+    print 'Resulting animations of cost %d, hash %s' % (newcost, newhash)
+    if newhash != orighash:
+        print 'ERROR: Animations incorrectly modified'
+        sys.exit(1)
+
+    spritemap_files = [None, None]
+    for idx, chunkset in enumerate(chunksets):
+        if chunkset is None:
+            continue
+        rects = [(chunk.pic.shape[0], chunk.pic.shape[1]) for chunk in chunkset.chunks]
+        chunk_area = sum([r[0] * r[1] for r in rects])
+        print 'Packing chunks of area %d pixels' % (chunk_area)
+        ext0, ext1, offsets = pywi.packing.pack(rects)
+        packed_area = ext0 * ext1
+        overhead = float(packed_area - chunk_area) / chunk_area * 100
+        print '  packed into %dx%d = %d pixels (%.1f%% overhead)' % (
+            ext1, ext0, packed_area, overhead)
+        chunkset.assign_packing(ext0, ext1, offsets)
+
+        if not args.dry_run:
+            n = 0
+            while (os.path.exists(args.directory + '/spritemap' + str(n) + '.png') or
+                os.path.exists(args.directory + '/spritemap' + str(n) + '_pc.png')):
+                n += 1
+
+            spritemap_files[idx] = 'spritemap%d' % (n)
+            pic_name = args.directory + '/spritemap%d.png' % (n)
+            if chunkset.has_player_color:
+                pc_pic_name = args.directory + '/spritemap%d_pc.png' % (n)
+            else:
+                pc_pic_name = None
+            print 'Writing spritemap file %s...' % (pic_name)
+            chunkset.write_images(pic_name, pc_pic_name)
+
+    if not args.dry_run:
+        for name, anim in animations.iteritems():
+            s = conf.make_section(name)
+            for key, value in anim.options.iteritems():
+                s.set(key, value)
+            s.set('format', 'blits')
+            s.set('nrframes', str(anim.get_nrframes()))
+            for idx, chunkset in enumerate(chunksets):
+                if anim.chunkset is chunkset:
+                    s.set('spritemap', spritemap_files[idx])
+            for idx, blits in enumerate(anim.frames):
+                s.set(
+                    'frame%d' % (idx),
+                    ';'.join([
+                        '%d,%d,%d,%d@%d,%d' % (
+                            blit.chunk.spritemap_ofs[1], blit.chunk.spritemap_ofs[0],
+                            blit.chunk.pic.shape[1], blit.chunk.pic.shape[0],
+                            blit.offset[1], blit.offset[0]
+                        )
+                        for blit in anim.frames[idx]
+                    ])
+                )
+
+        with open(args.directory + '/conf', 'w') as filp:
+            print 'Writing animation data to %s...' % (args.directory + '/conf')
+            conf.write(filp)
 
 if __name__ == '__main__':
     main()
-
-

@@ -16,9 +16,6 @@ FullFrame = collections.namedtuple('FullFrame', ('pic', 'pc_pic'))
 
 _re_point = re.compile('(\\d+)\\s+(\\d+)$')
 
-class Group(object):
-    pass
-
 
 class Animation(object):
     """
@@ -26,8 +23,7 @@ class Animation(object):
     Note that all coordinates are in a numpy-friendly format,
     that is, rows come first.
     """
-    def __init__(self, group=None):
-        self.group = group or Group()
+    def __init__(self):
         self.options = {}
         self.shape = None
         self.hotspot = None
@@ -45,13 +41,15 @@ class Animation(object):
         """
         raise NotImplemented()
 
+    def get_cost(self, rectcost):
+        raise NotImplemented()
 
 class AnimationFullFrames(Animation):
     """
     Animation represented by full pictures for each frame
     """
-    def __init__(self, frames=None, group=None):
-        super(AnimationFullFrames, self).__init__(group)
+    def __init__(self, frames=None):
+        super(AnimationFullFrames, self).__init__()
         self.frames = frames or []
         if self.frames:
             self.shape = self.frames[0].pic.shape[:2]
@@ -64,8 +62,136 @@ class AnimationFullFrames(Animation):
     def get_frame(self, nr):
         return self.frames[nr]
 
+    def get_cost(self, rectcost):
+        return len(self.frames) * (rectcost + self.shape[0] * self.shape[1])
 
-def load_glob(filename_glob, group=None):
+
+class Chunk(object):
+    def __init__(self, pic, pc_pic=None):
+        self.pic = pic
+        self.pc_pic = pc_pic
+        self.spritemap_ofs = None
+
+Blit = collections.namedtuple('Blit', ('chunk', 'offset'))
+
+class ChunkSet(object):
+    def __init__(self, has_player_color):
+        self.has_player_color = has_player_color
+        self.chunks = []
+        self.packing_shape = None
+
+    def make_chunk(self, base_pic, base_pc_pic, rect):
+        pic = base_pic[rect[0]:rect[2], rect[1]:rect[3]]
+        if (base_pc_pic is not None) != self.has_player_color:
+            raise Exception('inconsistent whether chunks have player color or not')
+        if base_pc_pic is not None:
+            pc_pic = base_pc_pic[rect[0]:rect[2], rect[1]:rect[3]]
+        else:
+            pc_pic = None
+        for chunk in self.chunks:
+            if chunk.pic.shape != pic.shape:
+                continue
+            if not np.all(chunk.pic == pic):
+                continue
+            if pc_pic is not None and not np.all(chunk.pc_pic == pc_pic):
+                continue
+            return chunk
+        chunk = Chunk(pic, pc_pic)
+        self.chunks.append(chunk)
+        self.packing_shape = None
+        return chunk
+
+    def assign_packing(self, h, w, offsets):
+        self.packing_shape = (h, w)
+        for chunk, offset in zip(self.chunks, offsets):
+            chunk.spritemap_ofs = offset
+
+    def get_cost(self, rectcost):
+        return sum([rectcost + chunk.pic.shape[0] * chunk.pic.shape[1] for chunk in self.chunks])
+
+    def write_images(self, pic_name, pc_pic_name):
+        pic = np.zeros(self.packing_shape + (4,), np.uint8)
+        if self.has_player_color:
+            pc_pic = np.zeros(self.packing_shape + (4,), np.uint8)
+        for chunk in self.chunks:
+            pic[chunk.spritemap_ofs[0]:chunk.spritemap_ofs[0] + chunk.pic.shape[0],
+                chunk.spritemap_ofs[1]:chunk.spritemap_ofs[1] + chunk.pic.shape[1]] = chunk.pic
+            if self.has_player_color:
+                pc_pic[chunk.spritemap_ofs[0]:chunk.spritemap_ofs[0] + chunk.pic.shape[0],
+                       chunk.spritemap_ofs[1]:chunk.spritemap_ofs[1] + chunk.pic.shape[1]] = chunk.pc_pic
+
+        Image.fromarray(pic).save(pic_name)
+        if self.has_player_color:
+            Image.fromarray(pc_pic).save(pc_pic_name)
+
+
+class AnimationBlits(Animation):
+    def __init__(self, chunkset):
+        super(AnimationBlits, self).__init__()
+        self.chunkset = chunkset
+        self.frames = []
+        self.has_player_color = chunkset.has_player_color
+        self.shape = (0, 0)
+        self.hotspot = (0, 0)
+        self.bbox = (0, 0, 0, 0)
+
+    def append_frame(self, blits):
+        self.frames.append(blits)
+        bbox = (
+            min([blit.offset[0] for blit in blits]),
+            min([blit.offset[1] for blit in blits]),
+            max([blit.offset[0] + blit.chunk.pic.shape[0] for blit in blits]),
+            max([blit.offset[1] + blit.chunk.pic.shape[1] for blit in blits]),
+        )
+        self.bbox = (
+            min(self.bbox[0], bbox[0]),
+            min(self.bbox[1], bbox[1]),
+            max(self.bbox[2], bbox[2]),
+            max(self.bbox[3], bbox[3]),
+        )
+        self.shape = (self.bbox[2] - self.bbox[0], self.bbox[3] - self.bbox[1])
+        self.hotspot = (-self.bbox[0], -self.bbox[1])
+
+    def get_nrframes(self):
+        return len(self.frames)
+
+    def get_frame(self, idx):
+        frame = self.frames[idx]
+        pic = np.zeros(self.shape + (4,))
+        if self.has_player_color:
+            pc_pic = np.zeros(self.shape + (4,))
+        else:
+            pc_pic = None
+
+        for blit in frame:
+            destrect = (
+                blit.offset[0] + self.hotspot[0],
+                blit.offset[1] + self.hotspot[1],
+                blit.offset[0] + self.hotspot[0] + blit.chunk.pic.shape[0],
+                blit.offset[1] + self.hotspot[1] + blit.chunk.pic.shape[1],
+            )
+            pic[destrect[0]:destrect[2], destrect[1]:destrect[3]] = blit.chunk.pic
+            if pc_pic is not None:
+                pc_pic[destrect[0]:destrect[2], destrect[1]:destrect[3]] = blit.chunk.pc_pic
+
+        return FullFrame(pic, pc_pic)
+
+    def get_cost(self, rectcost):
+        chunks = []
+        for frame in self.frames:
+            for blit in frame:
+                for chunk in chunks:
+                    if chunk is blit.chunk:
+                        break
+                else:
+                    chunks.append(blit.chunk)
+        return sum([
+            rectcost + chunk.pic.shape[0] * chunk.pic.shape[1]
+            for chunk in chunks
+        ])
+
+
+def load_glob(filename_glob):
     """
     Load an animation from a list of image files matching
     the given glob pattern.
@@ -97,20 +223,23 @@ def load_glob(filename_glob, group=None):
 
         rv.append(FullFrame(pic, pc_pic))
 
-    return AnimationFullFrames(rv, group)
+    return AnimationFullFrames(rv)
 
 
-def load_conf(directory, anim, subanim=None, group=None):
-    with open(directory + '/conf', 'r') as filp:
-        conf = config.read(filp)
-    section = conf.get_section(anim)
+def load_section(directory, section):
     d = dict([(key, value) for key, value in section.iterentries()])
     typ = 1 if d.pop('packed', 'false').lower() == 'true' else 0
     if typ == 0:
         pics = d.pop('pics')
-        anim = load_glob(directory + '/' + pics, group)
+        anim = load_glob(directory + '/' + pics)
         anim.hotspot = tuple([int(v) for v in _re_point.match(d.pop('hotspot')).groups()[::-1]])
         anim.options.update(d)
     else:
         raise Exception('cannot load this type of animation yet')
     return anim
+
+def load_conf(directory, anim):
+    with open(directory + '/conf', 'r') as filp:
+        conf = config.read(filp)
+    section = conf.get_section(anim)
+    return load_section(directory, section)

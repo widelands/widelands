@@ -29,7 +29,41 @@ baz= quux
         s = c.get_section('section')
         self.assertEqual(s['foo'], 'bar')
         self.assertEqual(s['baz'], 'quux')
+        self.assertFalse('none' in s)
 
+    def test_itersections(self):
+        c = config.read(StringIO.StringIO(self.sample_text()))
+        self.assertEqual([name for name, section in c.itersections()], ['section'])
+
+    def test_modify(self):
+        c = config.read(StringIO.StringIO(self.sample_text()))
+        s = c.get_section('section')
+        s.set('foo', 'other')
+        s.set('tst', 'blah')
+        self.assertEqual(s['foo'], 'other')
+        self.assertEqual(s['tst'], 'blah')
+        stringio = StringIO.StringIO()
+        c.write(stringio)
+        c = config.read(StringIO.StringIO(stringio.getvalue()))
+        s = c.get_section('section')
+        self.assertEqual(s['foo'], 'other')
+        self.assertEqual(s['baz'], 'quux')
+        self.assertEqual(s['tst'], 'blah')
+
+    def test_make_section(self):
+        c = config.read(StringIO.StringIO(self.sample_text()))
+        s = c.make_section('section')
+        self.assertEqual([(k,v) for k,v in s.iterentries()], [])
+        s.set('foo', 'written')
+        s2 = c.make_section('new')
+        s2.set('bar', 'baz')
+        stringio = StringIO.StringIO()
+        c.write(stringio)
+        c = config.read(StringIO.StringIO(stringio.getvalue()))
+        s = c.get_section('section')
+        self.assertItemsEqual([(k,v) for k,v in s.iterentries()], [('foo', 'written')])
+        s2 = c.get_section('new')
+        self.assertItemsEqual([(k,v) for k,v in s2.iterentries()], [('bar', 'baz')])
 
 class TestAnimation(unittest.TestCase):
     def test_load_conf(self):
