@@ -294,6 +294,18 @@ def load_section(directory, section):
     anim.options.update(d)
     return anim
 
+def load_legacy_diranims(directory, name, section):
+    d = dict([(key, value) for key, value in section.iterentries()])
+    dirpics = d.pop('dirpics')
+    hotspot = tuple([int(v) for v in _re_point.match(d.pop('hotspot')).groups()[::-1]])
+    animations = {}
+    for direction in ['e', 'ne', 'nw', 'w', 'sw', 'se']:
+        anim = load_glob(directory + '/' + dirpics.replace('!!', direction))
+        anim.hotspot = hotspot
+        anim.options.update(d)
+        animations['%s_%s' % (name, direction)] = anim
+    return animations
+
 def load_conf(directory, anim):
     with open(directory + '/conf', 'r') as filp:
         conf = config.read(filp)

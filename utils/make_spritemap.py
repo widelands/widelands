@@ -698,13 +698,21 @@ def main():
         with open(args.directory + '/conf', 'r') as filp:
             print 'Loading existing conf file...'
             conf = pywi.config.read(filp)
+        sections_to_remove = []
         for name, section in conf.itersections():
-            if 'pics' not in section and 'spritemap' not in section:
-                continue
-            if name in animations:
-                error('conf file contains multiply defined animation')
-            print 'Loading animation %s...' % (name)
-            animations[name] = pywi.animation.load_section(args.directory, section)
+            if 'dirpics' not in section:
+                if 'pics' not in section and 'spritemap' not in section:
+                    continue
+                if name in animations:
+                    error('conf file contains multiply defined animation')
+                print 'Loading animation %s...' % (name)
+                animations[name] = pywi.animation.load_section(args.directory, section)
+            else:
+                print 'Loading legacy diranimations %s_!!...' % (name)
+                animations.update(pywi.animation.load_legacy_diranims(args.directory, name, section))
+                sections_to_remove.append(name)
+        for name in sections_to_remove:
+            conf.remove_section(name)
     else:
         conf = pywi.config.File()
 

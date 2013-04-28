@@ -147,10 +147,19 @@ class File(object):
                     self._sections[idx] = Section(self, idx)
                 return self._sections[idx]
         if self.lines and self.lines[-1].text:
-            self.insert_line(-1, '')
-        self.insert_line(-1, '[%s]' % (name))
+            self.insert_line(len(self.lines), '')
+        self.insert_line(len(self.lines), '[%s]' % (name))
         self._sections[len(self.lines)] = Section(self, len(self.lines))
         return self._sections[len(self.lines)]
+
+    def remove_section(self, name):
+        for idx, line in enumerate(self.lines):
+            if line.type == SECTION and line.value == name:
+                self.remove_line(idx)
+                while idx < len(self.lines) and self.lines[idx].type != SECTION:
+                    self.remove_line(idx)
+                return
+        raise KeyError("no section '%s' found" % (name))
 
     def itersections(self):
         """
