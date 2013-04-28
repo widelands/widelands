@@ -15,7 +15,7 @@ import config
 FullFrame = collections.namedtuple('FullFrame', ('pic', 'pc_pic'))
 
 _re_point = re.compile('(\\d+)\\s+(\\d+)$')
-
+_re_blit = re.compile(r'(\d+),(\d+),(\d+),(\d+)@(-?\d+),(-?\d+)$')
 
 class Animation(object):
     """
@@ -79,6 +79,7 @@ class ChunkSet(object):
         self.has_player_color = has_player_color
         self.chunks = []
         self.packing_shape = None
+        self.spritemap_name = None
 
     def make_chunk(self, base_pic, base_pc_pic, rect):
         pic = base_pic[rect[0]:rect[2], rect[1]:rect[3]]
@@ -99,6 +100,7 @@ class ChunkSet(object):
         chunk = Chunk(pic, pc_pic)
         self.chunks.append(chunk)
         self.packing_shape = None
+        self.spritemap_name = None
         return chunk
 
     def assign_packing(self, h, w, offsets):
@@ -109,7 +111,7 @@ class ChunkSet(object):
     def get_cost(self, rectcost):
         return sum([rectcost + chunk.pic.shape[0] * chunk.pic.shape[1] for chunk in self.chunks])
 
-    def write_images(self, pic_name, pc_pic_name):
+    def write_images(self, directory, spritemap_name):
         pic = np.zeros(self.packing_shape + (4,), np.uint8)
         if self.has_player_color:
             pc_pic = np.zeros(self.packing_shape + (4,), np.uint8)
@@ -120,9 +122,10 @@ class ChunkSet(object):
                 pc_pic[chunk.spritemap_ofs[0]:chunk.spritemap_ofs[0] + chunk.pic.shape[0],
                        chunk.spritemap_ofs[1]:chunk.spritemap_ofs[1] + chunk.pic.shape[1]] = chunk.pc_pic
 
-        Image.fromarray(pic).save(pic_name)
+        self.spritemap_name = spritemap_name
+        Image.fromarray(pic).save(directory + spritemap_name + '.png')
         if self.has_player_color:
-            Image.fromarray(pc_pic).save(pc_pic_name)
+            Image.fromarray(pc_pic).save(directory + spritemap_name + '_pc.png')
 
 
 class AnimationBlits(Animation):
@@ -190,6 +193,56 @@ class AnimationBlits(Animation):
             for chunk in chunks
         ])
 
+    def write(self, directory, conf_section):
+        for key, value in self.options.iteritems():
+            conf_section.set(key, value)
+        conf_section.set('format', 'blits')
+        conf_section.set('nrframes', str(len(self.frames)))
+        conf_section.set('spritemap', self.chunkset.spritemap_name)
+        for idx, blits in enumerate(self.frames):
+            conf_section.set(
+                '%d' % (idx),
+                ';'.join([
+                    '%d,%d,%d,%d@%d,%d' % (
+                        blit.chunk.spritemap_ofs[1], blit.chunk.spritemap_ofs[0],
+                        blit.chunk.pic.shape[1], blit.chunk.pic.shape[0],
+                        blit.offset[1], blit.offset[0]
+                    )
+                    for blit in self.frames[idx]
+                ])
+            )
+
+    @staticmethod
+    def load(directory, section_dict):
+        spritemap_name = section_dict.pop('spritemap')
+        nrframes = int(section_dict.pop('nrframes'))
+
+        spritemap = np.asarray(Image.open(directory + '/' + spritemap_name + '.png'))
+        fn = directory + '/' + spritemap_name + '_pc.png'
+        has_player_color = os.path.exists(fn)
+        if has_player_color:
+            spritemap_pc = np.asarray(Image.open(fn))
+        else:
+            spritemap_pc = None
+
+        chunkset = ChunkSet(has_player_color)
+        anim = AnimationBlits(chunkset)
+        for framenr in xrange(nrframes):
+            blitdescrs = [
+                [int(s) for s in _re_blit.match(blit).groups()]
+                for blit in section_dict.pop(str(framenr)).split(';')
+            ]
+            blits = []
+            for blitdescr in blitdescrs:
+                chunk = chunkset.make_chunk(
+                    spritemap, spritemap_pc,
+                    (blitdescr[1], blitdescr[0], blitdescr[1] + blitdescr[3], blitdescr[0] + blitdescr[2])
+                )
+                blits.append(Blit(chunk, (blitdescr[5], blitdescr[4])))
+            anim.append_frame(blits)
+
+        return anim
+
 
 def load_glob(filename_glob):
     """
@@ -228,14 +281,17 @@ def load_glob(filename_glob):
 
 def load_section(directory, section):
     d = dict([(key, value) for key, value in section.iterentries()])
-    typ = 1 if d.pop('packed', 'false').lower() == 'true' else 0
+    format = d.pop('format', None)
+    typ = 2 if format == 'blits' else 1 if d.pop('packed', 'false').lower() == 'true' else 0
     if typ == 0:
         pics = d.pop('pics')
         anim = load_glob(directory + '/' + pics)
         anim.hotspot = tuple([int(v) for v in _re_point.match(d.pop('hotspot')).groups()[::-1]])
-        anim.options.update(d)
+    elif typ == 2:
+        anim = AnimationBlits.load(directory, d)
     else:
         raise Exception('cannot load this type of animation yet')
+    anim.options.update(d)
     return anim
 
 def load_conf(directory, anim):

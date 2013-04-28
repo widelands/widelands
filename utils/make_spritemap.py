@@ -611,6 +611,17 @@ def optimize_bbox(animations, chunksets):
         new_animations[name] = new_anim
     return new_animations
 
+def optimize_greedy(animations, chunksets):
+    print 'Running greedy optimization...'
+    new_animations = {}
+    for name, anim in animations.iteritems():
+        print 'Optimizing %s' % (name)
+        if chunksets[anim.has_player_color] is None:
+            chunksets[anim.has_player_color] = pywi.animation.ChunkSet(anim.has_player_color)
+        chunkset = chunksets[anim.has_player_color]
+        new_anim = pywi.animation.AnimationBlits(chunkset)
+        new_anim.options.update(anim.options)
+
 def compute_animations_hash(animations):
     """
     Compute a hash of animation data that should be independent of
@@ -688,7 +699,7 @@ def main():
             print 'Loading existing conf file...'
             conf = pywi.config.read(filp)
         for name, section in conf.itersections():
-            if 'pics' not in section:
+            if 'pics' not in section and 'spritemap' not in section:
                 continue
             if name in animations:
                 error('conf file contains multiply defined animation')
@@ -721,7 +732,7 @@ def main():
     if args.optimize == 'bbox':
         animations = optimize_bbox(animations, chunksets)
     elif args.optimize == 'greedy':
-        raise
+        animations = optimize_greedy(animations, chunksets)
     else:
         error('Unknown optimization method %s' % (arg.optimize))
 
@@ -735,7 +746,6 @@ def main():
         print 'ERROR: Animations incorrectly modified'
         sys.exit(1)
 
-    spritemap_files = [None, None]
     for idx, chunkset in enumerate(chunksets):
         if chunkset is None:
             continue
@@ -755,40 +765,18 @@ def main():
                 os.path.exists(args.directory + '/spritemap' + str(n) + '_pc.png')):
                 n += 1
 
-            spritemap_files[idx] = 'spritemap%d' % (n)
-            pic_name = args.directory + '/spritemap%d.png' % (n)
-            if chunkset.has_player_color:
-                pc_pic_name = args.directory + '/spritemap%d_pc.png' % (n)
-            else:
-                pc_pic_name = None
-            print 'Writing spritemap file %s...' % (pic_name)
-            chunkset.write_images(pic_name, pc_pic_name)
+            spritemap = 'spritemap%d' % (n)
+            print 'Writing spritemap file %s.png...' % (spritemap)
+            chunkset.write_images(args.directory, spritemap)
 
     if not args.dry_run:
         for name, anim in animations.iteritems():
+            print 'Writing animation %s...' % (name)
             s = conf.make_section(name)
-            for key, value in anim.options.iteritems():
-                s.set(key, value)
-            s.set('format', 'blits')
-            s.set('nrframes', str(anim.get_nrframes()))
-            for idx, chunkset in enumerate(chunksets):
-                if anim.chunkset is chunkset:
-                    s.set('spritemap', spritemap_files[idx])
-            for idx, blits in enumerate(anim.frames):
-                s.set(
-                    'frame%d' % (idx),
-                    ';'.join([
-                        '%d,%d,%d,%d@%d,%d' % (
-                            blit.chunk.spritemap_ofs[1], blit.chunk.spritemap_ofs[0],
-                            blit.chunk.pic.shape[1], blit.chunk.pic.shape[0],
-                            blit.offset[1], blit.offset[0]
-                        )
-                        for blit in anim.frames[idx]
-                    ])
-                )
+            anim.write(args.directory, s)
 
         with open(args.directory + '/conf', 'w') as filp:
-            print 'Writing animation data to %s...' % (args.directory + '/conf')
+            print 'Writing conf data to %s...' % (args.directory + '/conf')
             conf.write(filp)
 
 if __name__ == '__main__':
