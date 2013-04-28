@@ -485,14 +485,17 @@ void TrainingSite::drop_stalled_soldiers(Game &)
 		for (; it != m_upgrades.end(); ++it)
 		if  (! this_soldier_is_safe)
 		{
-			// Soldier is safe, if he is below maximum and not in a stalled state, separately for each art.
+			// Soldier is safe, if he:
+			//  - is below maximum, and
+			//  - is not in a stalled state
+			// Check done separately for each art.
 			int32_t level = m_soldiers[i]->get_level(it->attribute);
 			if (level > it->max) // if soldier is at maximum, he remains unsafe
 				break;
 			for (training_failure_count_t::iterator tstep = training_failure_count.begin(); tstep != training_failure_count.end(); tstep++)
 			{
 				const type_and_level_t& train_tl = tstep->first;
-				if (level == (static_cast<int32_t> (train_tl.second))) // soldier can only be safe, if training at this level works.
+				if (level == (static_cast<int32_t> (train_tl.second)))
 				if (max_stall_val > tstep->second) // if training works at soldier's level he/she is safe
 				if ((static_cast<int> (train_tl.first)) == it->attribute)
 				{
@@ -503,7 +506,10 @@ void TrainingSite::drop_stalled_soldiers(Game &)
 		}
 		if (!this_soldier_is_safe)
 		{
-			// Here I drop the most-trained stalled soldier. One could argue, that it would be better to drop the least trained stalled soldier. Just replace > with < to change behaviour like that.
+			// Here I drop the most-trained stalled soldier.
+			// One could argue, that it would be better to drop the least trained stalled soldier.
+			// Just replace greater-than with a less-than in the if-statement
+			// below to change behaviour like that.
 			if (NULL == droplist)
 				droplist = m_soldiers[i];
 			else
@@ -512,9 +518,10 @@ void TrainingSite::drop_stalled_soldiers(Game &)
 		}
 	}
 
-	// Finally drop the soldier.
+	// Finally drop the soldier. Exception: Level zero soldiers are never released.
 	if (NULL != droplist)
-		dropSoldier(*droplist);
+		if (0 < droplist->get_level(atrTotal))
+			dropSoldier (*droplist);
 }
 
 
