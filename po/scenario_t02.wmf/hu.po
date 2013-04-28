@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2013-03-09 16:57+0000\n"
-"PO-Revision-Date: 2010-02-10 22:40+0000\n"
-"Last-Translator: Varga Dániel <vargad88@gmail.com>\n"
+"PO-Revision-Date: 2013-04-27 20:41+0000\n"
+"Last-Translator: István Kiss <kiemc@citromail.hu>\n"
 "Language-Team: Language <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-03-10 04:33+0000\n"
-"X-Generator: Launchpad (build 16523)\n"
+"X-Launchpad-Export-Date: 2013-04-28 04:31+0000\n"
+"X-Generator: Launchpad (build 16580)\n"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:333
 msgid ""
@@ -100,6 +100,12 @@ msgid ""
 "Throne Among the Trees, the symbol of unity and peace among our kin, became "
 "the wedge that drives us apart.\" "
 msgstr ""
+" „A háború csak megy tovább. Egyre több testvérünk menekül az erdők övezte "
+"fővárosban dúló szörnyű harcok elől.<br> Szomorú hallani tőlük, miket tesz a "
+"fajtánk. Éjszakák óta álmatlanul fekszem, fáradtabb vagyok, mint hittem, "
+"hogy valaha is lehetek. Mégis, ha csak lehunyom a szemem, az apám építette "
+"erődöt látom, amint lángok emésztik. Az Erdők Övezte Trón, fajtánk "
+"egységének és békéjének jelképe, most épp megosztottságunk okozója.” "
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:433
 msgid ""
@@ -122,6 +128,14 @@ msgid ""
 "whoever threatens our very existence, may it even be one of your blood or "
 "mind?\" "
 msgstr ""
+" „Ma vadászaim férfiakat, nőket és kisgyermekeket hoztak, akik az erdőben "
+"rejtőzködtek, menekülve a háború, gyűlölet és bosszú elől, ami az egymással "
+"harcoló törzsek között dúl, épp mint a régi időkben, amikor még csupán "
+"vadállatok módjára mentünk ösztöneink után. Egy testvérem sem fogja soha "
+"megszerezni és megtartani a fatrónt, egyik törzs sem lesz elég erős, hogy "
+"leigázza a másikat. Sosem lesz vége ennek a mészárlásnak, hacsak... ez lenne "
+"az? Amit apám mondott?<br> Szállj szembe mindenkivel, aki már a létezésünket "
+"veszélyezteti, még ha az saját véredből való is?” "
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:440
 msgid ""
@@ -266,7 +280,7 @@ msgstr ""
 
 #: ../../campaigns/t02.wmf/elemental:7
 msgid "02 - A Place to call Home"
-msgstr ""
+msgstr "02 - Egy hely, amit otthonnak hívunk"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:331
 msgid "A beautiful morning"
@@ -461,6 +475,8 @@ msgid ""
 "In this scenario the higher production buildings, including mining and the "
 "military expansions will be introduced."
 msgstr ""
+"Ez a pálya a nagyobb termelő épületeket, például a bányákat, illetve a "
+"katonai terjeszkedést mutatja be."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:325
 msgid "Khantrukh gazes over the plains..."
@@ -556,7 +572,7 @@ msgstr ""
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:217
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:225
 msgid "The story continues"
-msgstr ""
+msgstr "A történet folytatódik"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:187
 msgid ""
@@ -575,7 +591,7 @@ msgstr ""
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:211
 msgid "Thron shakes his head..."
-msgstr ""
+msgstr "Thron csóválja a fejét..."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:425
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:439
