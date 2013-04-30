@@ -203,10 +203,11 @@ private:
 
 	// These are used for kicking out soldiers prematurely
 	static const uint32_t training_state_multiplier = 12;
-	typedef std::pair<uint32_t, uint32_t> type_and_level_t;
-	typedef std::map<type_and_level_t, uint32_t> training_failure_count_t;
-	training_failure_count_t training_failure_count; // FIXME: should this go to a savegame?
+	typedef std::pair<uint32_t, uint32_t> TypeAndLevel_t;
+	typedef std::map<TypeAndLevel_t, uint32_t> TrainFailCount_t;
+	TrainFailCount_t training_failure_count; // FIXME: should this go to a savegame?
 	uint32_t max_stall_val;
+	void init_kick_state(const tAttribute&, const TrainingSite_Descr&);
 
 
 };
