@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2013-03-09 16:57+0000\n"
-"PO-Revision-Date: 2012-10-29 15:51+0000\n"
-"Last-Translator: Major Gabesz <major.gabesz@gmail.com>\n"
+"PO-Revision-Date: 2013-04-30 19:06+0000\n"
+"Last-Translator: István Kiss <kiemc@citromail.hu>\n"
 "Language-Team: Language <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-03-10 04:34+0000\n"
-"X-Generator: Launchpad (build 16523)\n"
+"X-Launchpad-Export-Date: 2013-05-01 04:31+0000\n"
+"X-Generator: Launchpad (build 16580)\n"
 
 #: ../../tribes/barbarians/axefactory/help.lua:12
 #: ../../tribes/barbarians/warmill/help.lua:12
@@ -528,7 +528,7 @@ msgstr "Kovácsműhely"
 #: ../../tribes/barbarians/warmill/help.lua:43
 #: ../../tribes/barbarians/warmill/help.lua:49
 msgid "Blackwood"
-msgstr "Gerenda"
+msgstr "Edzett fa"
 
 #: ../../tribes/barbarians/trainingscamp/help.lua:33
 msgid "Both Trainings:"
@@ -3265,7 +3265,7 @@ msgstr "Vaddisznó"
 #: ../../tribes/barbarians/conf:190
 #: ../../tribes/barbarians/lumberjacks_hut/help.lua:30
 msgid "Wood Hardener"
-msgstr "Fűrészmalom"
+msgstr "Faedző műhely"
 
 #: ../../tribes/barbarians/axefactory/conf:30
 #: ../../tribes/barbarians/bakery/conf:21

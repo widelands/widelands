@@ -7,13 +7,13 @@ msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2013-03-09 16:57+0000\n"
-"PO-Revision-Date: 2013-04-28 19:33+0000\n"
+"PO-Revision-Date: 2013-04-30 20:15+0000\n"
 "Last-Translator: István Kiss <kiemc@citromail.hu>\n"
 "Language-Team: Language <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-04-29 04:33+0000\n"
+"X-Launchpad-Export-Date: 2013-05-01 04:31+0000\n"
 "X-Generator: Launchpad (build 16580)\n"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:333
@@ -131,6 +131,10 @@ msgid ""
 "would finally come to an end.<br> So far, it seems that neither prayer was "
 "fulfilled.\" "
 msgstr ""
+" „Nyakunkon a tél. Sokunk szenved a hidegtől, de ki kell tartanunk. A nap, "
+"melyen visszatérhetünk, nem lehet már messze – nem szabad messze lennie!<br> "
+"Fohászkodtam, hogy enyhüljön az idő, csakúgy, mint azért, hogy a háború "
+"valahára véget érjen.<br> Eddig, úgy tűnik, egyik kérésem se teljesült.” "
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:219
 msgid ""
@@ -181,9 +185,9 @@ msgid ""
 "as\n"
 "ours!<br> We need a wood hardener, and we need one now!\""
 msgstr ""
-"„Amint épp látom, fogytán van a gerendánk! Nem tehetjük\n"
+"„Amint épp látom, fogytán van az edzett fánk! Nem tehetjük\n"
 "harcosainkat omladozó viskókba, pláne nem ilyen veszélyes időkben,\n"
-"mint a mostani!<br> Szükségünk van egy fűrészmalomra, mégpedig máris!”"
+"mint a mostani!<br> Szükségünk van egy faedző műhelyre, mégpedig máris!”"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:414
 msgid ""
@@ -277,6 +281,11 @@ msgid ""
 "could,\n"
 "in times of need, build a fortress as the world has not seen before!\""
 msgstr ""
+"„Nos, öreg barátom, így már nem szabad, hogy erődítményeink összeomoljanak\n"
+"ellenségeink első csatakiáltásától! Most már biztonságosan "
+"terjeszkedhetünk!<br> Mégsem\n"
+"ártana némi cementet is felhalmozni a további hadjáratunkra; így\n"
+"szükség esetén építhetnénk egy olyan erődöt, amilyet még nem látott a világ!”"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:251
 msgid ""
@@ -339,7 +348,7 @@ msgstr ""
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:431
 msgid "Another cold day"
-msgstr ""
+msgstr "Egy újabb hideg nap"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:119
 msgid "Bake bread"
@@ -357,6 +366,15 @@ msgid ""
 "a\n"
 "mountain. Coal can be obtained by building a charcoal burner or a coal mine."
 msgstr ""
+"A jobb épületekhez szükség lehet az edzett fán kívül még más fejlett "
+"anyagokra is.\n"
+"Ezek egyike a cement, amit nyerskő, víz és szén felhasználásával gyártanak "
+"a\n"
+"mészégetőben. Vízet úgy szerezhetsz, ha kutat építesz egy vízforrás fölé, "
+"amit\n"
+"pedig geológusaid fedezhetnek fel, ha odaküldöd őket bármelyik olyan "
+"zászlóhoz, amelyik nem\n"
+"hegyen van. Szénhez pedig szénégető vagy szénbánya építésével juthatsz."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:164
 msgid ""
@@ -367,6 +385,13 @@ msgid ""
 "wood\n"
 "hardener before you run out of blackwood, as without it you cannot expand."
 msgstr ""
+"A nagyobb és jobb épületek – beleértve az összes katonait is – jobb "
+"építőanyagokat\n"
+"igényelnek. Nem lehet őket egyszerű farönkökből építeni – a fát először meg "
+"kell\n"
+"edzeni egy faedző műhelyben. Sose feledkezz meg egy faedző műhely "
+"építéséről,\n"
+"még mielőtt kifogysz az edzett fából, hiszen enélkül nem tudsz terjeszkedni."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:318
 msgid "Boldreth cheers up..."
@@ -436,11 +461,12 @@ msgstr ""
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:173
 msgid "Build a lime kiln and coal economy"
-msgstr ""
+msgstr "Építs ki egy mész- és széngazdaságot"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:174
 msgid "Build a lime kiln, a well and a charcoal burner or coal mine"
 msgstr ""
+"Építs egy mészégetőt, egy kutat, illetve egy szénégetőt vagy szénbányát"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:131
 msgid "Build a smelting works"
@@ -453,7 +479,7 @@ msgstr ""
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:162
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:163
 msgid "Build a wood hardener"
-msgstr ""
+msgstr "Építs egy faedző műhelyt"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:93
 msgid "Build coal and iron ore mines"
@@ -610,7 +636,7 @@ msgstr ""
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:432
 msgid "Thron looks worried..."
-msgstr ""
+msgstr "Thron gondterheltnek tűnik..."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:332
 msgid "Thron recognizes..."
