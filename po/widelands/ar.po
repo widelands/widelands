@@ -8,16 +8,16 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2013-03-09 17:57+0100\n"
-"PO-Revision-Date: 2012-03-09 02:13+0000\n"
-"Last-Translator: Nasenbaer <Unknown>\n"
+"PO-Revision-Date: 2013-05-01 09:02+0000\n"
+"Last-Translator: m-abudrais <m.abudrais@yahoo.com>\n"
 "Language-Team: Arabic <ar@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n % 100 >= "
 "3 && n % 100 <= 10 ? 3 : n % 100 >= 11 && n % 100 <= 99 ? 4 : 5;\n"
-"X-Launchpad-Export-Date: 2013-03-10 04:35+0000\n"
-"X-Generator: Launchpad (build 16523)\n"
+"X-Launchpad-Export-Date: 2013-05-02 05:07+0000\n"
+"X-Generator: Launchpad (build 16580)\n"
 
 #: ../../src/s2map.cc:222
 msgid "Bluebyte Settlers II Map. No comment defined!"
@@ -29,18 +29,18 @@ msgstr ""
 
 #: ../../src/wlapplication.cc:438 ../../src/editor/editorinteractive.cc:169
 msgid "Unsupported format"
-msgstr ""
+msgstr "صيغة غير مدعومة"
 
 #: ../../src/wlapplication.cc:439 ../../src/editor/editorinteractive.cc:170
 #, c-format
 msgid ""
 "Widelands could not load the file \"%s\". The file format seems to be "
 "incompatible."
-msgstr ""
+msgstr "وايد لاند غير قادرة على فتح الملف \"%s\". يبدو ان الملف غير مكتمل."
 
 #: ../../src/wlapplication.cc:962 ../../src/wlapplication.cc:971
 msgid "could not find the path of the main executable"
-msgstr ""
+msgstr "غير قادر على ايجاد مسار الملف التنفيذي الرئيسي"
 
 #: ../../src/wlapplication.cc:1096
 msgid ""
@@ -61,7 +61,7 @@ msgstr ""
 
 #: ../../src/wlapplication.cc:1356
 msgid "This is Widelands-"
-msgstr ""
+msgstr "هذه وايلاند-"
 
 #: ../../src/wlapplication.cc:1358
 msgid ""
