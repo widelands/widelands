@@ -123,9 +123,9 @@ class ChunkSet(object):
                        chunk.spritemap_ofs[1]:chunk.spritemap_ofs[1] + chunk.pic.shape[1]] = chunk.pc_pic
 
         self.spritemap_name = spritemap_name
-        Image.fromarray(pic).save(directory + spritemap_name + '.png')
+        Image.fromarray(pic).save(directory + '/' + spritemap_name + '.png')
         if self.has_player_color:
-            Image.fromarray(pc_pic).save(directory + spritemap_name + '_pc.png')
+            Image.fromarray(pc_pic).save(directory + '/' + spritemap_name + '_pc.png')
 
 
 class AnimationBlits(Animation):

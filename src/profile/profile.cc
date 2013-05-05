@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002, 2006-2010 by the Widelands Development Team
+ * Copyright (C) 2002, 2006-2013 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -367,6 +367,15 @@ char const * Section::get_safe_string(char const * const name)
 	if (!v)
 		throw wexception("[%s]: missing key '%s'", get_name(), name);
 	return v->get_string();
+}
+
+/**
+ * Return the key value as a plain string or throw an exception if the key
+ * does not exist.
+ */
+const char * Section::get_safe_string(const std::string & name)
+{
+	return get_safe_string(name.c_str());
 }
 
 /** Section::get_safe_Coords(const char * const name)
@@ -741,14 +750,14 @@ void Profile::check_used() const
 /**
  * Retrieve the first section of the given name and mark it used.
  *
- * Args: name  name of the section
+ * @param name name of the section
  *
- * Returns: pointer to the section (or 0 if the section doesn't exist)
+ * @return pointer to the section (or 0 if the section doesn't exist)
  */
-Section * Profile::get_section(char const * const name)
+Section * Profile::get_section(const std::string & name)
 {
 	container_iterate(Section_list, m_sections, i)
-		if (!strcasecmp(i.current->get_name(), name)) {
+		if (!strcasecmp(i.current->get_name(), name.c_str())) {
 			i.current->mark_used();
 			return &*i.current;
 		}

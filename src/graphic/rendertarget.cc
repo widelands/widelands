@@ -191,7 +191,7 @@ void RenderTarget::blitrect
 	Rect srcrc(gsrcrc);
 	Point dstpt(dst);
 
-	if(to_surface_geometry(&dstpt, &srcrc))
+	if (to_surface_geometry(&dstpt, &srcrc))
 		m_surface->blit(dstpt, image->surface(), srcrc, cm);
 }
 
