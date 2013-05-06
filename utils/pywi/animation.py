@@ -130,7 +130,7 @@ class ChunkSet(object):
         self.spritemap_name = spritemap_name
         Image.fromarray(pic).save(directory + '/' + spritemap_name + '.png')
         if self.has_player_color:
-            Image.fromarray(pc_pic).save(directory + '/' + spritemap_name + '_pc.png')
+            Image.fromarray(pc_pic[:,:,0]).save(directory + '/' + spritemap_name + '_pc.png')
 
 
 class AnimationBlits(Animation):
@@ -234,6 +234,13 @@ class AnimationBlits(Animation):
             spritemap_pc = np.asarray(Image.open(fn))
             if context is not None:
                 context.filenames.add(fn)
+            if len(spritemap_pc.shape) == 2:
+                rgba = np.zeros(spritemap_pc.shape + (4,))
+                rgba[:,:,0] = spritemap_pc
+                rgba[:,:,1] = spritemap_pc
+                rgba[:,:,2] = spritemap_pc
+                rgba[:,:,3] = 255
+                spritemap_pc = rgba
         else:
             spritemap_pc = None
 
@@ -267,6 +274,13 @@ def load_glob(filename_glob, context=None):
         if context is not None:
             context.filenames.add(fn)
         img = np.asarray(Image.open(fn))
+        if len(img.shape) == 2:
+            rgba = np.zeros(img.shape + (4,))
+            rgba[:,:,0] = img
+            rgba[:,:,1] = img
+            rgba[:,:,2] = img
+            rgba[:,:,3] = 255
+            img = rgba
         if seen_shape and seen_shape != img.shape:
             raise Exception('Frame %s has different dimensions from previous frames' % (fn))
         return img
