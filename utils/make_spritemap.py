@@ -9,6 +9,7 @@ import re
 import argparse
 import math
 import os
+import subprocess
 import sys
 
 import Image
@@ -591,7 +592,8 @@ def optimize_bbox(animations, chunksets):
     """
     print 'Running bbox optimization...'
     new_animations = {}
-    for name, anim in animations.iteritems():
+    for name in sorted(animations.iterkeys()):
+        anim = animations[name]
         print 'Optimizing %s' % (name)
         if chunksets[anim.has_player_color] is None:
             chunksets[anim.has_player_color] = pywi.animation.ChunkSet(anim.has_player_color)
@@ -676,12 +678,20 @@ def parse_args():
         help='Add an animation of the given name and with the given hotspot from <name>_??.png and <name>_??_pc.png files'
     )
     p.add_argument(
+        '-i', '--in-place', action='store_true',
+        help="Reuse the same filename for new spritemap if a spritemap already exists"
+    )
+    p.add_argument(
         '-o', '--optimize', type=str, choices=['bbox', 'greedy'], default='bbox',
         help="Frame optimization routine ('bbox' is very fast, but 'greedy' can give better results)"
     )
     p.add_argument(
         '-d', '--dry-run', action='store_true',
         help="Perform all optimizations, but do not write the final result"
+    )
+    p.add_argument(
+        '-b', '--bzr', action='store_true',
+        help="Automatically remove old files from Bazaar and add new ones"
     )
 
     return p.parse_args()
@@ -693,6 +703,7 @@ def error(msg):
 def main():
     args = parse_args()
 
+    context = pywi.animation.Context()
     animations = {}
     if os.path.exists(args.directory + '/conf'):
         with open(args.directory + '/conf', 'r') as filp:
@@ -706,10 +717,10 @@ def main():
                 if name in animations:
                     error('conf file contains multiply defined animation')
                 print 'Loading animation %s...' % (name)
-                animations[name] = pywi.animation.load_section(args.directory, section)
+                animations[name] = pywi.animation.load_section(args.directory, section, context)
             else:
                 print 'Loading legacy diranimations %s_!!...' % (name)
-                animations.update(pywi.animation.load_legacy_diranims(args.directory, name, section))
+                animations.update(pywi.animation.load_legacy_diranims(args.directory, name, section, context))
                 sections_to_remove.append(name)
         for name in sections_to_remove:
             conf.remove_section(name)
@@ -754,6 +765,8 @@ def main():
         print 'ERROR: Animations incorrectly modified'
         sys.exit(1)
 
+    spritemap_names = set()
+    created_files = set()
     for idx, chunkset in enumerate(chunksets):
         if chunkset is None:
             continue
@@ -768,14 +781,25 @@ def main():
         chunkset.assign_packing(ext0, ext1, offsets)
 
         if not args.dry_run:
-            n = 0
-            while (os.path.exists(args.directory + '/spritemap' + str(n) + '.png') or
-                os.path.exists(args.directory + '/spritemap' + str(n) + '_pc.png')):
-                n += 1
+            spritemap = None
+            if args.in_place:
+                possible_names = context.spritemap_names.difference(spritemap_names)
+                if possible_names:
+                    spritemap = possible_names.pop()
 
-            spritemap = 'spritemap%d' % (n)
+            if spritemap is None:
+                n = 0
+                while (os.path.exists(args.directory + '/spritemap' + str(n) + '.png') or
+                    os.path.exists(args.directory + '/spritemap' + str(n) + '_pc.png')):
+                    n += 1
+                spritemap = 'spritemap%d' % (n)
+
+            spritemap_names.add(spritemap)
             print 'Writing spritemap file %s.png...' % (spritemap)
             chunkset.write_images(args.directory, spritemap)
+            created_files.add(os.path.abspath(args.directory + '/' + spritemap + '.png'))
+            if chunkset.has_player_color:
+                created_files.add(os.path.abspath(args.directory + '/' + spritemap + '_pc.png'))
 
     if not args.dry_run:
         for name, anim in animations.iteritems():
@@ -786,6 +810,19 @@ def main():
         with open(args.directory + '/conf', 'w') as filp:
             print 'Writing conf data to %s...' % (args.directory + '/conf')
             conf.write(filp)
+
+        if args.bzr:
+            read_files = set([
+                os.path.abspath(fn) for fn in context.filenames
+            ])
+            print 'Adding and removing files from Bazaar...'
+            remove_files = read_files.difference(created_files)
+            if remove_files:
+                subprocess.call(['bzr', 'remove'] + list(remove_files))
+            add_files = created_files.difference(read_files)
+            if add_files:
+                subprocess.call(['bzr', 'add'] + list(add_files))
+
 
 if __name__ == '__main__':
     main()

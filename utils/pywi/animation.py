@@ -17,6 +17,11 @@ FullFrame = collections.namedtuple('FullFrame', ('pic', 'pc_pic'))
 _re_point = re.compile('(\\d+)\\s+(\\d+)$')
 _re_blit = re.compile(r'(\d+),(\d+),(\d+),(\d+)@(-?\d+),(-?\d+)$')
 
+class Context(object):
+    def __init__(self):
+        self.filenames = set()
+        self.spritemap_names = set()
+
 class Animation(object):
     """
     Base class for various Animation representations.
@@ -213,15 +218,22 @@ class AnimationBlits(Animation):
             )
 
     @staticmethod
-    def load(directory, section_dict):
+    def load(directory, section_dict, context=None):
         spritemap_name = section_dict.pop('spritemap')
         nrframes = int(section_dict.pop('nrframes'))
 
-        spritemap = np.asarray(Image.open(directory + '/' + spritemap_name + '.png'))
+        fn = directory + '/' + spritemap_name + '.png'
+        spritemap = np.asarray(Image.open(fn))
+        if context is not None:
+            context.filenames.add(fn)
+            context.spritemap_names.add(spritemap_name)
+
         fn = directory + '/' + spritemap_name + '_pc.png'
         has_player_color = os.path.exists(fn)
         if has_player_color:
             spritemap_pc = np.asarray(Image.open(fn))
+            if context is not None:
+                context.filenames.add(fn)
         else:
             spritemap_pc = None
 
@@ -244,7 +256,7 @@ class AnimationBlits(Animation):
         return anim
 
 
-def load_glob(filename_glob):
+def load_glob(filename_glob, context=None):
     """
     Load an animation from a list of image files matching
     the given glob pattern.
@@ -252,6 +264,8 @@ def load_glob(filename_glob):
     rv = []
 
     def _load(fn, seen_shape):
+        if context is not None:
+            context.filenames.add(fn)
         img = np.asarray(Image.open(fn))
         if seen_shape and seen_shape != img.shape:
             raise Exception('Frame %s has different dimensions from previous frames' % (fn))
@@ -279,35 +293,35 @@ def load_glob(filename_glob):
     return AnimationFullFrames(rv)
 
 
-def load_section(directory, section):
+def load_section(directory, section, context=None):
     d = dict([(key, value) for key, value in section.iterentries()])
     format = d.pop('format', None)
     typ = 2 if format == 'blits' else 1 if d.pop('packed', 'false').lower() == 'true' else 0
     if typ == 0:
         pics = d.pop('pics')
-        anim = load_glob(directory + '/' + pics)
+        anim = load_glob(directory + '/' + pics, context)
         anim.hotspot = tuple([int(v) for v in _re_point.match(d.pop('hotspot')).groups()[::-1]])
     elif typ == 2:
-        anim = AnimationBlits.load(directory, d)
+        anim = AnimationBlits.load(directory, d, context)
     else:
         raise Exception('cannot load this type of animation yet')
     anim.options.update(d)
     return anim
 
-def load_legacy_diranims(directory, name, section):
+def load_legacy_diranims(directory, name, section, context=None):
     d = dict([(key, value) for key, value in section.iterentries()])
     dirpics = d.pop('dirpics')
     hotspot = tuple([int(v) for v in _re_point.match(d.pop('hotspot')).groups()[::-1]])
     animations = {}
     for direction in ['e', 'ne', 'nw', 'w', 'sw', 'se']:
-        anim = load_glob(directory + '/' + dirpics.replace('!!', direction))
+        anim = load_glob(directory + '/' + dirpics.replace('!!', direction), context)
         anim.hotspot = hotspot
         anim.options.update(d)
         animations['%s_%s' % (name, direction)] = anim
     return animations
 
-def load_conf(directory, anim):
+def load_conf(directory, anim, context=None):
     with open(directory + '/conf', 'r') as filp:
         conf = config.read(filp)
     section = conf.get_section(anim)
-    return load_section(directory, section)
+    return load_section(directory, section, context)
