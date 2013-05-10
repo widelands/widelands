@@ -7,15 +7,15 @@ msgstr ""
 "Project-Id-Version: Widelands unofficial-bzr-launchpad-i18n-4955\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2013-03-09 17:57+0100\n"
-"PO-Revision-Date: 2013-03-10 19:57+0000\n"
-"Last-Translator: Nasenbaer <Unknown>\n"
+"PO-Revision-Date: 2013-05-09 23:09+0000\n"
+"Last-Translator: Das MC <Unknown>\n"
 "Language-Team: German <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2013-03-11 04:31+0000\n"
-"X-Generator: Launchpad (build 16523)\n"
+"X-Launchpad-Export-Date: 2013-05-10 05:08+0000\n"
+"X-Generator: Launchpad (build 16598)\n"
 
 #: ../../src/s2map.cc:222
 msgid "Bluebyte Settlers II Map. No comment defined!"
@@ -213,7 +213,7 @@ msgstr ""
 "\n"
 "Grafikoptionen:\n"
 " --fullscreen=[yes|no]\n"
-"                      Ob der ganze Bildschirm für fürs Anzeigen des Spieles\n"
+"                      Ob der ganze Bildschirm fürs Anzeigen des Spieles\n"
 "                      verwendet werden soll.\n"
 " --depth=[16|32]      Farbtiefe in Bits pro Pixel.\n"
 " --xres=[...]         Breite des Fensters in Pixel.\n"
@@ -225,7 +225,7 @@ msgid ""
 "                      Enables OpenGL rendering\n"
 msgstr ""
 " --opengl=[0|1]\n"
-"                      Schaltet die OpenGL Engine an.\n"
+"                      Schaltet die OpenGL-Engine an.\n"
 
 #: ../../src/wlapplication.cc:1430
 msgid ""
@@ -959,7 +959,7 @@ msgstr "Unzulässige Welt"
 #, c-format
 msgid "The world \"%s\" set by the map, does not exist on your filesystem."
 msgstr ""
-"Die Welt \"%s\" die von der Karte vorgegeben wird, exisitiert nicht auf "
+"Die Welt \"%s\" die von der Karte vorgegeben wird, existiert nicht auf "
 "deinem Dateisystem."
 
 #: ../../src/map_io/widelands_map_player_position_data_packet.cc:55
@@ -1306,7 +1306,7 @@ msgstr "Warum willst du dich selbst warnen?"
 
 #: ../../src/network/nethost.cc:405
 msgid "Why would you want to warn the dedicated server?"
-msgstr "Warum willst du denn dedizierten Server warnen?"
+msgstr "Warum willst du den dedizierten Server warnen?"
 
 #: ../../src/network/nethost.cc:409 ../../src/network/nethost.cc:435
 #, c-format
@@ -1319,7 +1319,7 @@ msgstr "Falsche Verwendung. Der Befehl sollte \"/kick <Name> <Grund>\" sein"
 
 #: ../../src/network/nethost.cc:431
 msgid "You can not kick yourself!"
-msgstr "Du kannst dich nicht selber rausschmeissen!"
+msgstr "Du kannst dich nicht selber rausschmeißen!"
 
 #: ../../src/network/nethost.cc:433
 msgid "You can not kick the dedicated server"
@@ -1342,7 +1342,7 @@ msgstr "Falls ja, tippe: /ack_kick %s"
 
 #: ../../src/network/nethost.cc:451
 msgid "kick acknowledgement cancelled: No name given!"
-msgstr "kick Zustimmung abgebrochen: Es wurde kein Name angegeben!"
+msgstr "Kick-Zustimmung abgebrochen: Es wurde kein Name angegeben!"
 
 #: ../../src/network/nethost.cc:453
 msgid "Wrong use, should be: /ack_kick <name>"
@@ -1350,7 +1350,7 @@ msgstr "Falsche Verwendung. Der Befehl sollte \"/ack_kick <Name>\" sein"
 
 #: ../../src/network/nethost.cc:459
 msgid "kick acknowledgement cancelled: Wrong name given!"
-msgstr "kick Zustimmung abgebrochen: Es wurde ein falscher Name angegeben!"
+msgstr "Kick-Zustimmung abgebrochen: Es wurde ein falscher Name angegeben!"
 
 #: ../../src/network/nethost.cc:470
 msgid "Pause was already forced - game should be paused."
@@ -1371,7 +1371,7 @@ msgid ""
 "This is a dedicated server send \"@%s help\" to get a full list of available "
 "commands."
 msgstr ""
-"Dies ist ein dedizierter Server, sende \"@%s help\" um eine komplette Liste "
+"Dies ist ein dedizierter Server, sende \"@%s help\", um eine komplette Liste "
 "von verfügbaren Befehlen zu erhalten."
 
 #: ../../src/network/nethost.cc:1201
@@ -1508,7 +1508,7 @@ msgstr "Benutzer hat ein nicht bearbeitbares Befehl gesendet: %s"
 #: ../../src/network/network_gaming_messages.cc:131
 #, c-format
 msgid "Something went wrong: %s"
-msgstr "Etwas is schief gelaufen: %s"
+msgstr "Etwas ist schief gelaufen: %s"
 
 #: ../../src/network/network_gaming_messages.cc:132
 #, c-format
@@ -1531,7 +1531,7 @@ msgstr "Ein PLAYERCOMMAND wurde empfangen, obwohl kein Spiel läuft."
 
 #: ../../src/network/network_gaming_messages.cc:136
 msgid "Unexpectedly received LAUNCH command from server."
-msgstr "Ich habe unerwartet ein LAUNCH-Befehl vom Server erhalten."
+msgstr "Ich habe unerwartet einen LAUNCH-Befehl vom Server erhalten."
 
 #: ../../src/network/network_gaming_messages.cc:137
 msgid "Server sent a player update for a player that does not exist."
@@ -1579,12 +1579,12 @@ msgstr "Benutzer hat kein Zugriff auf die Einstellungen anderer Spieler"
 
 #: ../../src/network/network_gaming_messages.cc:146
 msgid "Client has no access to server settings."
-msgstr "Benutzer hat kein Zugriff auf die Server Einstellungen"
+msgstr "Benutzer hat kein Zugriff auf die Server-Einstellungen."
 
 #: ../../src/network/network_gaming_messages.cc:147
 msgid "Client sent start command, although server is not yet ready."
 msgstr ""
-"Der Benutzer hat ein start Kommando gesendet, obwohl der Server noch nicht "
+"Der Benutzer hat ein Start-Kommando gesendet, obwohl der Server noch nicht "
 "für einen Start bereit war."
 
 #: ../../src/network/network_gaming_messages.cc:148
@@ -1671,11 +1671,11 @@ msgstr ""
 #: ../../src/network/internet_gaming_messages.cc:42
 #, c-format
 msgid "No user with the name %s is logged in!"
-msgstr "Es ist kein Benutzer mit dem Namen %s eingelogt!"
+msgstr "Es ist kein Benutzer mit dem Namen %s eingeloggt!"
 
 #: ../../src/network/internet_gaming_messages.cc:44
 msgid "The protocol version you are using is not supported!"
-msgstr "Die Protokolversion, die du benutzt, wird nicht unterstützt!"
+msgstr "Die Protokollversion, die du benutzt, wird nicht unterstützt!"
 
 #: ../../src/network/internet_gaming_messages.cc:45
 msgid "You are already logged in!"
@@ -1686,7 +1686,7 @@ msgid ""
 "You got disconnected, as you send a superuser command without superuser "
 "permission.This incident will be logged and reported to the administrator."
 msgstr ""
-"Deine Verbindung wurde geschlossen, da du versucht hast, ein Superuser "
+"Deine Verbindung wurde geschlossen, da du versucht hast, ein Superuser-"
 "Kommando zu senden, ohne die Berechtigung dafür zu haben. Dieser Vorfall "
 "wird gespeichert und dem Administrator gemeldet."
 
@@ -1716,7 +1716,7 @@ msgid ""
 "You got disconnected from the metaserver, as you did not answer a PING "
 "request in time."
 msgstr ""
-"Du wurdest vom Server getrennt, da du nicht rechtzeitig auf eine PING "
+"Du wurdest vom Server getrennt, da du nicht rechtzeitig auf eine PING-"
 "Anfrage geantwortet hast."
 
 #: ../../src/network/internet_gaming_messages.cc:60
@@ -1729,7 +1729,7 @@ msgstr ""
 "Der Metaserver war nicht in der Lage sich zu deinem Spiel zu verbinden. "
 "Höchstwahrscheinlich ist es nicht vom Internet aus erreichbar! Bitte schaue "
 "dir die Wiki-Seite http://wl.widelands.org/wiki/InternetGaming an, um deine "
-"Internetverbindung für das Öffnen von Online Spielen einzurichten."
+"Internetverbindung für das Öffnen von Online-Spielen einzurichten."
 
 #: ../../src/network/internet_gaming_messages.cc:64
 msgid ""
@@ -1755,14 +1755,14 @@ msgstr ""
 
 #: ../../src/network/netclient.cc:860
 msgid "/me 's file failed md5 checksumming."
-msgstr "/me 's Datei hat die Überprüfung mit MD5 nicht bestanden."
+msgstr "/me s Datei hat die Überprüfung mit MD5 nicht bestanden."
 
 #: ../../src/network/netclient.cc:890
 msgid ""
 "/me checked the received file. Although md5 check summing succeeded, I can "
 "not handle the file."
 msgstr ""
-"/me überprüft die empfangene Datei. Obwohl md5 Prüfsummenverfahren gelungen, "
+"/me überprüft die empfangene Datei. Obwohl md5-Prüfsummenverfahren gelungen, "
 "kann ich die Datei nicht verarbeiten."
 
 #: ../../src/network/netclient.cc:1105
@@ -1825,9 +1825,9 @@ msgid ""
 "Expected a LOGIN, RELOGIN or REJECTED packet from server, but received "
 "command %s. Maybe the metaserver is using a different protocol version ?"
 msgstr ""
-"Ein LOGIN, RELOGIN oder REJECTED Packet wurde als Antwort des Servers "
-"erwartet, es wurde jedoch ein %s Kommando empfangen. Vielleicht verwendet "
-"der Metaserver eine andere Protokolversion?"
+"Ein LOGIN-, RELOGIN- oder REJECTED-Paket wurde als Antwort des Servers "
+"erwartet, es wurde jedoch ein %s-Kommando empfangen. Vielleicht verwendet "
+"der Metaserver eine andere Protokollversion?"
 
 #: ../../src/network/internet_gaming.cc:424
 #, c-format
@@ -2008,7 +2008,7 @@ msgstr ""
 "oder den Spielstand manuell entpackt hast.\n"
 "Widelands ist nicht in der Lage Verzeichnisstrukturen zu anderen Mitspielern "
 "zu versenden. Bitte wähle entweder einen anderen Spielstand oder verpacke "
-"den Inhalt des Spielstand Verzeichnises in eine Zip-Datei mit der Endung "
+"den Inhalt des Spielstand-Verzeichnisses in eine Zip-Datei mit der Endung "
 "\".wgf\" ."
 
 #: ../../src/ui_fsmenu/launchMPG.cc:425 ../../src/ui_fsmenu/launchSPG.cc:259
@@ -2166,7 +2166,7 @@ msgid ""
 "hover texts indicates the strength of the currently selected computer "
 "player)."
 msgstr ""
-"Mit einem Computer Spieler verknüpft (das gesicht und der Hovertext deuten "
+"Mit einem Computerspieler verknüpft (das Gesicht und der Hovertext deuten "
 "die Stärke des derzeitig ausgewählten Computer Spielers an)."
 
 #: ../../src/ui_fsmenu/launchMPG.cc:693
@@ -2185,8 +2185,8 @@ msgid ""
 "player starts with) and the tribe an team for computer players"
 msgstr ""
 "Die letzten drei können nur durch den Gastgeber, durch Klicken auf den "
-"\"Typ\" Knopf des Spielers gesetzt werden. Der Gastgeber kann darüber hinaus "
-"die Startbedingungen der einzelnen Spieler (Die Menge von Gebäuden, Waren "
+"\"Typ\"-Knopf des Spielers gesetzt werden. Der Gastgeber kann darüber hinaus "
+"die Startbedingungen der einzelnen Spieler (die Menge von Gebäuden, Waren "
 "und Arbeitern mit denen der Spieler beginnt) und den Stamm für die "
 "Computerspieler einstellen."
 
@@ -2210,7 +2210,7 @@ msgid ""
 "start the game as soon as all players are set up."
 msgstr ""
 "Auf der rechten Seite sind Informationen über die ausgewählte Karte oder "
-"Spielstände. Ein Symbol rechts neben dem Kartenname erlaubt dem Gastgeber "
+"Spielstände. Ein Symbol rechts neben dem Kartennamen erlaubt dem Gastgeber, "
 "eine andere Karte zu wählen. Der Gastgeber kann des Weiteren die "
 "Siegesbedingung ändern und das Spiel starten, sobald alle Teilnehmer bereit "
 "sind."
