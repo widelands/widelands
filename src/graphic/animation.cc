@@ -197,7 +197,8 @@ private:
 	Point hotspot_;
 };
 
-BlitsAnimation::BlitsAnimation(const string & directory, Section & s)
+BlitsAnimation::BlitsAnimation(const string & directory, Section & s) :
+	frametime_(FRAME_LENGTH)
 {
 	hash_ = directory + s.get_name();
 
@@ -296,7 +297,7 @@ void BlitsAnimation::blit
 	BOOST_FOREACH(const Blit & blt, frames_[framenumber]) {
 		Rect framerect(blt.dstx + hotspot_.x, blt.dsty + hotspot_.y, blt.w, blt.h);
 		Rect bsrc(blt.srcx, blt.srcy, blt.w, blt.h);
-		Point bdst(dst.x + hotspot_.x + blt.dstx, dst.y + hotspot_.y + blt.dsty);
+		Point bdst(dst.x + hotspot_.x + blt.dstx - srcrc.x, dst.y + hotspot_.y + blt.dsty - srcrc.y);
 
 		if (srcrc.x > framerect.x) {
 			if (srcrc.x >= framerect.x + int(framerect.w))
@@ -711,6 +712,7 @@ void DirAnimations::parse
 	 const string & default_dirpics)
 {
 	if (Section * section = prof.get_section(name)) {
+		// NOTE: deprecate this format eventually
 		char dirpictempl[256];
 		char * repl;
 

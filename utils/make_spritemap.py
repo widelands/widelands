@@ -416,7 +416,7 @@ def compute_rectangle_covering(bitmask, FRAGMENT_COST=FRAGMENT_COST):
         )
     return sum([rectangle_cost(rect, FRAGMENT_COST=FRAGMENT_COST) for rect in rectangles]), rectangles
 
-def build_frame_group(frames, FRAGMENT_COST=FRAGMENT_COST):
+def build_frame_group_rectangle_covering(frames, FRAGMENT_COST=FRAGMENT_COST):
     """
     Given a list of frames, find a shared base picture based on the first frame,
     as well as individual deltas.
@@ -445,50 +445,77 @@ def build_frame_group(frames, FRAGMENT_COST=FRAGMENT_COST):
 
     return (total_cost, base_pic, base_pic_rect, [frame_rectangles])
 
-def pack_frames_global_bbox(frames, FRAGMENT_COST=FRAGMENT_COST):
+def build_frame_group_regions(frames):
     """
-    Pack frames by taking a global bounding box
+    Given a list of frame, identify variable subregions
+    and split frames into blits accordingly
+
+    Return (avgcost, list of list of ((x, y), pic, pc_pic))
     """
-    npframes = np.array([frame.pic for frame in frames])
-    any_transparent = np.any(npframes[:,:,:,3] != 0, axis=0)
-    p = np.argwhere(any_transparent)
-    pic_min = np.min(p, 0)
-    pic_max = np.max(p, 0)
-    bbox_rect = (pic_min[0], pic_min[1], pic_max[0] + 1, pic_max[1] + 1)
-    total_cost = len(frames) * rectangle_cost(bbox_rect, FRAGMENT_COST=FRAGMENT_COST)
-    return total_cost
+    pc = frames[0].pc_pic is not None
+    regions = []
 
-def pack_frames_bbox(frames, FRAGMENT_COST=FRAGMENT_COST):
+    if len(frames) > 1:
+        # Find the regions that are not equal over all frames
+        followers = np.asarray([frame.pic for frame in frames[1:]])
+        diff = np.any(np.any(frames[0].pic != followers, 3), 0)
+        if pc:
+            followers_pc = np.asarray([frame.pc_pic for frame in frames[1:]])
+            diff = diff | np.any(np.any(frames[0].pc_pic != followers_pc, 3) & followers[:,:,:,3] != 0, 0)
+
+        #TODO: use rectangle covering instead, once it becomes more efficient
+        label_img, nlabels = ndimage.label(diff)
+        for i in range(1, nlabels + 1):
+            ys, xs = np.where(label_img == i)
+            regions.append((ys.min(), xs.min(), ys.max() + 1, xs.max() + 1))
+    else:
+        diff = np.zeros(frames[0].pic.shape[:2], np.bool)
+
+    base_pic_mask = frames[0].pic[:,:,3] != 0 & ~diff
+    for region in regions:
+        base_pic_mask[region[0]:region[2], region[1]:region[3]] = False
+    ys, xs = np.where(base_pic_mask)
+    base_pic_rect = (ys.min(), xs.min(), ys.max() + 1, xs.max() + 1)
+    base_pic_base = frames[0].pic.copy()
+    base_pic_base[:,:,3] = np.choose(base_pic_mask, [0, base_pic_base[:,:,3]])
+    base_pic = base_pic_base[base_pic_rect[0]:base_pic_rect[2], base_pic_rect[1]:base_pic_rect[3]]
+    if pc:
+        base_pic_pc = frames[0].pc_pic[base_pic_rect[0]:base_pic_rect[2], base_pic_rect[1]:base_pic_rect[3]]
+    else:
+        base_pic_pc = None
+    cost = rectangle_cost(base_pic_rect)
+
+    newframes = []
+    for frame in frames:
+        newframe = [((base_pic_rect[0], base_pic_rect[1]), base_pic, base_pic_pc)]
+        for region in regions:
+            pic = frame.pic[region[0]:region[2], region[1]:region[3]]
+            if pc:
+                pc_pic = frame.pc_pic[region[0]:region[2], region[1]:region[3]]
+            else:
+                pc_pic = None
+            newframe.append(((region[0], region[1]), pic, pc_pic))
+            cost += rectangle_cost(region)
+        newframes.append(newframe)
+
+    return (float(cost) / len(frames), newframes)
+
+
+def do_optimize_greedy(frames):
     """
-    Pack frames by simply taking the bounding box of each frame
-    """
-    shape = frames[0].pic.shape
-    total_cost = 0
+    Find a packing of the frame into frame groups.
 
-    print 'pack_frames_bbox: packing', len(frames), 'frames'
-    for idx, frame in enumerate(frames):
-        print ' frame', idx,
-        pic_mask = frame.pic[:,:,3] != 0
-        p = np.argwhere(pic_mask)
-        pic_min = np.min(p, 0)
-        pic_max = np.max(p, 0)
-        bbox_rect = (pic_min[0], pic_min[1], pic_max[0] + 1, pic_max[1] + 1)
-        cost = rectangle_cost(bbox_rect, FRAGMENT_COST=FRAGMENT_COST)
-        print 'cost', cost
-        total_cost += cost
+    Return list of lists of ((x, y), pic, pc_pic), one list for the blits of each frame.
 
-    return total_cost
+    Frame groups are optimized together, either based on a simple region heuristic,
+    or with a slightly more complicated rectangle covering technique.
 
-def pack_frames_greedy(frames, FRAGMENT_COST=FRAGMENT_COST):
-    """
-    Find a packing of the frames into frame groups.
-
-    Greedily adds frames to frame groups as long as the average cost per frame
+    We add frames to candidate frame groups greedily as long as the average cost per frame
     decreases. As a heuristic, frames with high pixel overlap are combined first.
     """
     MAXREJECT = 10
-    shape = frames[0].pic.shape
-    uncovered = [idx for idx in range(len(frames))]
+    uncovered = [idx for idx in xrange(len(frames))]
+    covered_frames = [None for frame in frames]
     framegroups = []
     total_cost = 0
 
@@ -497,8 +524,7 @@ def pack_frames_greedy(frames, FRAGMENT_COST=FRAGMENT_COST):
         leader = uncovered[0]
         del uncovered[0]
         print ' start new framegroup with leader', leader,
-        framegroup = build_frame_group([frames[leader]], FRAGMENT_COST=FRAGMENT_COST)
-        avgcost = framegroup[0]
+        avgcost, newframes = build_frame_group_regions([frames[leader]])
         print 'cost', avgcost
 
         leader_pic = frames[leader].pic
@@ -515,11 +541,9 @@ def pack_frames_greedy(frames, FRAGMENT_COST=FRAGMENT_COST):
             print '  try adding %d with %d common pixels for %s...' % (
                 trial, nrcommonpix, try_frames
             ),
-            new_framegroup = build_frame_group(
-                [frames[i] for i in try_frames],
-                FRAGMENT_COST=FRAGMENT_COST
+            new_avgcost, newframes_try = build_frame_group_regions(
+                [frames[i] for i in try_frames]
             )
-            new_avgcost = float(new_framegroup[0]) / (len(followers) + 2)
             print 'avgcost', new_avgcost,
             if new_avgcost > avgcost:
                 rejections += 1
@@ -530,63 +554,25 @@ def pack_frames_greedy(frames, FRAGMENT_COST=FRAGMENT_COST):
                     print 'reject'
             else:
                 print 'add'
-                framegroup = new_framegroup
                 avgcost = new_avgcost
+                newframes = newframes_try
                 followers.append(trial)
                 uncovered.remove(trial)
                 rejections = 0
 
-        print ' adding framegroup', [leader] + followers, 'cost', framegroup[0]
-        framegroups.append(framegroup)
-        total_cost += framegroup[0]
+        print ' adding framegroup', [leader] + followers, 'avgcost', avgcost
 
-    return total_cost
+        for framenr, newframe in zip([leader] + followers, newframes):
+            covered_frames[framenr] = newframe
 
-##############################################
-##############################################
-##############################################
-
-def output_results(anim, img_name, dimensions, regions, offsets_by_id, args):
-    with open("conf", "a") as f:
-        f.write("[%s]\n" % anim)
-        f.write("packed=true\n")  # NOCOM(#sirver): get rid of this again.
-        f.write("pics=%s\n" % img_name)
-        f.write("dimensions=%i %i\n" % (dimensions[0], dimensions[1]))
-        has_plr_clr = False
-        if len(regions) and (anim + "_pc", 0, 0) in offsets_by_id:
-            has_plr_clr = True
-
-        def _find_offsets(anim, ridx):
-            cur_fr = 0
-            rv = []
-            while True:
-                id = (anim, ridx, cur_fr)
-                if id not in offsets_by_id:
-                    break
-                rv.append("%i %i" % offsets_by_id[id])
-                cur_fr += 1
-            return ";".join(rv)
-
-        f.write("base_offset=%i %i\n" % offsets_by_id[anim, -1, -1])
-
-        for ridx,r in enumerate(regions):
-            f.write("region_%02i=%i %i %i %i:%s\n" % (
-                ridx, r.left, r.top, r.right - r.left + 1,
-                r.bottom - r.top + 1, _find_offsets(anim, ridx)
-                ))
-
-        if args.fps:
-            f.write("fps=%s\n" % args.fps)
-        if args.hotspot:
-            f.write("hotspot=%s\n" % args.hotspot)
-        f.write("\n")
+    return covered_frames
 
 #############################################
 #############################################
 #############################################
 
 
-def optimize_bbox(animations, chunksets):
+def optimize_bbox(animations, chunksets, args):
     """
     Joint optimization of the given animations using a simple bounding box routine
     """
@@ -594,35 +580,156 @@ def optimize_bbox(animations, chunksets):
     new_animations = {}
     for name in sorted(animations.iterkeys()):
         anim = animations[name]
-        print 'Optimizing %s' % (name)
         if chunksets[anim.has_player_color] is None:
             chunksets[anim.has_player_color] = pywi.animation.ChunkSet(anim.has_player_color)
         chunkset = chunksets[anim.has_player_color]
         new_anim = pywi.animation.AnimationBlits(chunkset)
         new_anim.options.update(anim.options)
-        for idx in xrange(anim.get_nrframes()):
-            frame = anim.get_frame(idx)
-            pic_mask = frame.pic[:,:,3] != 0
-            p = np.argwhere(pic_mask)
-            pic_min = np.min(p, 0)
-            pic_max = np.max(p, 0)
-            bbox_rect = (pic_min[0], pic_min[1], pic_max[0] + 1, pic_max[1] + 1)
-            chunk = chunkset.make_chunk(frame.pic, frame.pc_pic, bbox_rect)
-            offset = (pic_min[0] - anim.hotspot[0], pic_min[1] - anim.hotspot[1])
-            new_anim.append_frame([pywi.animation.Blit(chunk, offset)])
+        if not args.reopt and type(anim) == pywi.animation.AnimationBlits:
+            print 'Copying %s' % (name)
+            for frame in anim.frames:
+                blits = []
+                for blit in frame:
+                    chunk = chunkset.make_chunk(
+                        blit.chunk.pic, blit.chunk.pc_pic,
+                        (0,0) + blit.chunk.pic.shape[0:2]
+                    )
+                    blits.append(pywi.animation.Blit(chunk, blit.offset))
+                new_anim.append_frame(blits)
+        else:
+            print 'Optimizing %s' % (name)
+            for idx in xrange(anim.get_nrframes()):
+                frame = anim.get_frame(idx)
+                pic_mask = frame.pic[:,:,3] != 0
+                p = np.argwhere(pic_mask)
+                pic_min = np.min(p, 0)
+                pic_max = np.max(p, 0)
+                bbox_rect = (pic_min[0], pic_min[1], pic_max[0] + 1, pic_max[1] + 1)
+                chunk = chunkset.make_chunk(frame.pic, frame.pc_pic, bbox_rect)
+                offset = (pic_min[0] - anim.hotspot[0], pic_min[1] - anim.hotspot[1])
+                new_anim.append_frame([pywi.animation.Blit(chunk, offset)])
         new_animations[name] = new_anim
     return new_animations
 
-def optimize_greedy(animations, chunksets):
-    print 'Running greedy optimization...'
+def do_crossframe_optimization(animations, chunkset, optimizer):
+    """
+    Helper function in which animations have already been reduced
+    to those that should be (re-)optimized, and either all animations
+    are pc or all are non-pc.
+
+    Aligns all frames of all animations, and submits them together
+    to the optimizer. The optimizer takes a list of FullFrame tuples
+    and returns a list of (offset, pic, pc_pic) tuple lists, one list for each frame.
+    """
+    pc = chunkset.has_player_color
+
+    # Step 1: Align all frames of all animations
+    frame_min = (1000,1000)
+    frame_max = (-1000,-1000)
+    for anim in animations.itervalues():
+        frame_min = (
+            min(frame_min[0], -anim.hotspot[0]),
+            min(frame_min[1], -anim.hotspot[1])
+        )
+        frame_max = (
+            max(frame_max[0], anim.shape[0] - anim.hotspot[0]),
+            max(frame_max[1], anim.shape[1] - anim.hotspot[1])
+        )
+    shape = (frame_max[0] - frame_min[0], frame_max[1] - frame_min[1])
+    hotspot = (-frame_min[0], -frame_min[1])
+
+    frames = []
+    for name in sorted(animations.iterkeys()):
+        anim = animations[name]
+        rect = (
+            hotspot[0] - anim.hotspot[0],
+            hotspot[1] - anim.hotspot[1],
+            hotspot[0] - anim.hotspot[0] + anim.shape[0],
+            hotspot[1] - anim.hotspot[1] + anim.shape[1]
+        )
+        for framenr in xrange(anim.get_nrframes()):
+            frame = anim.get_frame(framenr)
+            pic = np.zeros(shape + (4,), np.uint8)
+            pic[rect[0]:rect[2], rect[1]:rect[3]] = frame.pic
+            if pc:
+                pc_pic = np.zeros(shape + (4,), np.uint8)
+                pc_pic[rect[0]:rect[2], rect[1]:rect[3]] = frame.pc_pic
+            else:
+                pc_pic = None
+            frames.append((name, framenr, pywi.animation.FullFrame(pic, pc_pic)))
+
+    # Step 2: Perform the actual optimization
+    optimized = optimizer([frame[2] for frame in frames])
+
+    # Step 3: Recreate animations
     new_animations = {}
     for name, anim in animations.iteritems():
-        print 'Optimizing %s' % (name)
-        if chunksets[anim.has_player_color] is None:
-            chunksets[anim.has_player_color] = pywi.animation.ChunkSet(anim.has_player_color)
-        chunkset = chunksets[anim.has_player_color]
         new_anim = pywi.animation.AnimationBlits(chunkset)
         new_anim.options.update(anim.options)
+        new_animations[name] = new_anim
+
+    for oldframe, newframe in zip(frames, optimized):
+        blits = []
+        for blit in newframe:
+            chunk = chunkset.make_chunk(
+                blit[1], blit[2],
+                (0,0) + blit[1].shape[0:2]
+            )
+            blits.append(pywi.animation.Blit(chunk, (blit[0][0] - hotspot[0], blit[0][1] - hotspot[1])))
+        assert new_animations[oldframe[0]].get_nrframes() == oldframe[1]
+        new_animations[oldframe[0]].append_frame(blits)
+
+    return new_animations
+
+def optimize_greedy(animations, chunksets, args):
+    """
+    Joint optimization of the given animations, using a greedy set cover
+    heuristic to 'cover' animation frames by packed groups.
+    """
+    new_animations = {}
+    if not args.reopt:
+        for name in sorted(animations.iterkeys()):
+            if type(name) == pywi.animation.AnimationBlits:
+                print 'Copying %s' % (name)
+                if chunksets[anim.has_player_color] is None:
+                    chunksets[anim.has_player_color] = pywi.animation.ChunkSet(anim.has_player_color)
+                chunkset = chunksets[anim.has_player_color]
+                new_anim = pywi.animation.AnimationBlits(chunkset)
+                new_anim.options.update(anim.options)
+                for frame in anim.frames:
+                    blits = []
+                    for blit in frame:
+                        chunk = chunkset.make_chunk(
+                            blit.chunk.pic, blit.chunk.pc_pic,
+                            (0,0) + blit.chunk.pic.shape[0:2]
+                        )
+                        blits.append(pywi.animation.Blit(chunk, blit.offset))
+                    new_anim.append_frame(blits)
+                new_animations[name] = new_anim
+                del animations[name]
+
+    pc_animations = dict([
+        (name, anim) for name, anim in animations.iteritems() if anim.has_player_color
+    ])
+    nonpc_animations = dict([
+        (name, anim) for name, anim in animations.iteritems() if not anim.has_player_color
+    ])
+
+    if pc_animations:
+        print 'Running greedy optimization for pc animations...'
+        if chunksets[True] is None:
+            chunksets[True] = pywi.animation.ChunkSet(True)
+        new_animations.update(do_crossframe_optimization(
+            pc_animations, chunksets[True], do_optimize_greedy
+        ))
+    if nonpc_animations:
+        print 'Running greedy optimization for non-pc animations...'
+        if chunksets[False] is None:
+            chunksets[False] = pywi.animation.ChunkSet(False)
+        new_animations.update(do_crossframe_optimization(
+            nonpc_animations, chunksets[False], do_optimize_greedy
+        ))
+    return new_animations
 
 def compute_animations_hash(animations):
     """
@@ -684,6 +791,10 @@ def parse_args():
     p.add_argument(
         '-o', '--optimize', type=str, choices=['bbox', 'greedy'], default='bbox',
         help="Frame optimization routine ('bbox' is very fast, but 'greedy' can give better results)"
+    )
+    p.add_argument(
+        '-r', '--reopt', action='store_true',
+        help="Re-optimize also those animations that are already in spritemap format"
     )
     p.add_argument(
         '-d', '--dry-run', action='store_true',
@@ -749,9 +860,9 @@ def main():
 
     chunksets = [None, None]
     if args.optimize == 'bbox':
-        animations = optimize_bbox(animations, chunksets)
+        animations = optimize_bbox(animations, chunksets, args)
     elif args.optimize == 'greedy':
-        animations = optimize_greedy(animations, chunksets)
+        animations = optimize_greedy(animations, chunksets, args)
     else:
         error('Unknown optimization method %s' % (arg.optimize))
 
