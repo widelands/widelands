@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2010, 2012 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2010, 2012-2013 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -89,19 +89,8 @@ Worker_Descr::Worker_Descr
 		add_animation("work", g_gr->animations().load(directory, *work_s));
 
 	// Read the walking animations
-	m_walk_anims.parse
-		(*this, directory, prof, "walk_??", prof.get_section("walk"));
-
-	// Some workers have no workload. If this is the case, do not try to
-	// load it.
-	if (prof.get_section("walkload")) {
-		m_walkload_anims.parse
-			(*this,
-			 directory,
-			 prof,
-			 "walkload_??",
-			 prof.get_section("walkload"));
-	}
+	m_walk_anims.parse(*this, directory, prof, "walk");
+	m_walkload_anims.parse(*this, directory, prof, "walkload", true);
 
 	while (Section::Value const * const v = global_s.get_next_val("soundfx"))
 		g_sound_handler.load_fx(directory, v->get_string());

@@ -19,6 +19,7 @@
 
 // NOCOM(#sirver): check for ME also in conf files and therelike.
 #include <cassert>
+#include <limits>
 
 #include <boost/algorithm/string/replace.hpp>
 #include <boost/algorithm/string/split.hpp>
@@ -35,6 +36,7 @@
 #include "sound/sound_handler.h"
 #include "wexception.h"
 
+#include "container_iterate.h"
 #include "diranimations.h"
 #include "graphic.h"
 #include "image.h"
@@ -82,7 +84,7 @@ class AnimationImage : public Image {
 public:
 	AnimationImage
 		(const string& ghash, const Animation* anim, const RGBColor& clr)
-		: hash_(ghash), anim_(anim), clr_(clr)	{}
+		: hash_(ghash), anim_(anim), clr_(clr) {}
 	virtual ~AnimationImage() {}
 
 	// Implements Image.
@@ -98,7 +100,7 @@ public:
 		// Blit the animation on a freshly wiped surface.
 		surf = Surface::create(width(), height());
 		surf->fill_rect(Rect(0, 0, surf->width(), surf->height()), RGBAColor(255, 255, 255, 0));
-		anim_->blit(0, Point(0,0), Rect(0,0,width(), height()), &clr_, surf);
+		anim_->blit(0, Point(0, 0), Rect(0, 0, width(), height()), &clr_, surf);
 		surface_cache.insert(hash_, surf);
 
 		return surf;
@@ -109,6 +111,229 @@ private:
 	const Animation* const anim_;   // Not owned.
 	const RGBColor clr_;
 };
+
+struct SfxCues {
+	void read(const string & directory, Section & s);
+	void trigger_soundfx(uint32_t framenumber, uint32_t stereo_position) const;
+
+private:
+	/// mapping of soundeffect name to frame number, indexed by frame number .
+	map<uint32_t, string> cues_;
+};
+
+/**
+ * Read mapping from frame numbers to sound effect names and load effects
+ */
+void SfxCues::read(const string & directory, Section & s)
+{
+	while (Section::Value * const v = s.get_next_val("sfx")) {
+		char * parameters = v->get_string(), * endp;
+		unsigned long long int const value = strtoull(parameters, &endp, 0);
+		const uint32_t frame_number = value;
+		try {
+			if (endp == parameters or frame_number != value)
+				throw wexception("expected %s but found \"%s\"", "frame number", parameters);
+			parameters = endp;
+			force_skip(parameters);
+			g_sound_handler.load_fx(directory, parameters);
+			map<uint32_t, string>::const_iterator const it =
+				cues_.find(frame_number);
+			if (it != cues_.end())
+				throw wexception
+					("redefinition for frame %u to \"%s\" (previously defined to "
+					 "\"%s\")",
+					 frame_number, parameters, it->second.c_str());
+		} catch (const _wexception & e) {
+			throw wexception("sfx: %s", e.what());
+		}
+		cues_[frame_number] = parameters;
+	}
+}
+
+void SfxCues::trigger_soundfx(uint32_t framenumber, uint32_t stereo_position) const
+{
+	const map<uint32_t, string>::const_iterator sfx_cue = cues_.find(framenumber);
+	if (sfx_cue != cues_.end())
+		g_sound_handler.play_fx(sfx_cue->second, stereo_position, 1);
+}
+
+
+/**
+ * Animation in blits-format; that is, a list of blit rectangles
+ * is maintained for every frame.
+ */
+class BlitsAnimation : public Animation {
+public:
+	BlitsAnimation(const string & directory, Section & s);
+	virtual ~BlitsAnimation() {}
+
+	// Implements Animation.
+	virtual uint16_t width() const {return width_;}
+	virtual uint16_t height() const {return height_;}
+	virtual uint16_t nr_frames() const {return frames_.size();}
+	virtual uint32_t frametime() const {return frametime_;}
+	virtual const Point& hotspot() const {return hotspot_;};
+	virtual const Image& representative_image(const RGBColor& clr) const;
+	void blit(uint32_t time, const Point&, const Rect& srcrc, const RGBColor* clr, Surface*) const;
+	virtual void trigger_soundfx(uint32_t framenumber, uint32_t stereo_position) const;
+
+private:
+	struct Blit {
+		uint16_t srcx, srcy;
+		uint16_t w, h;
+		int16_t dstx, dsty;
+	};
+
+	// loaded from game data
+	string hash_;
+	vector<vector<Blit> > frames_;
+	uint32_t frametime_;
+	SfxCues sfx_cues_;
+	const Image * spritemap_;
+	const Image * spritemap_pc_;
+
+	// derived data
+	uint16_t width_, height_;
+	Point hotspot_;
+};
+
+BlitsAnimation::BlitsAnimation(const string & directory, Section & s) :
+	frametime_(FRAME_LENGTH)
+{
+	hash_ = directory + s.get_name();
+
+	sfx_cues_.read(directory, s);
+
+	const int32_t fps = s.get_int("fps");
+	if (fps < 0)
+		throw wexception("fps is %i, must be non-negative", fps);
+	if (fps > 0)
+		frametime_ = 1000 / fps;
+
+	// Load the graphis
+	string spritemap = directory + s.get_safe_string("spritemap");
+	spritemap_ = g_gr->images().get(spritemap + ".png");
+	if (g_fs->FileExists(spritemap + "_pc.png")) {
+		spritemap_pc_ = g_gr->images().get(spritemap + "_pc.png");
+	} else {
+		spritemap_pc_ = 0;
+	}
+
+	// Parse frames
+	const int32_t nrframes = s.get_int("nrframes");
+	if (nrframes <= 0)
+		throw wexception("nrframes must be at least 1");
+
+	int16_t minx = numeric_limits<int16_t>::max();
+	int16_t miny = numeric_limits<int16_t>::max();
+	int16_t maxx = numeric_limits<int16_t>::min();
+	int16_t maxy = numeric_limits<int16_t>::min();
+
+	for (int32_t framenr = 0; framenr < nrframes; ++framenr) {
+		vector<Blit> blits;
+		string framedata = s.get_safe_string(boost::lexical_cast<string>(framenr));
+		vector<string> blitsdata;
+		boost::split(blitsdata, framedata, boost::is_any_of(";"));
+
+		BOOST_FOREACH(const string & it, blitsdata) {
+			vector<string> coords;
+			boost::split(coords, it, boost::is_any_of(",@"));
+			if (coords.size() != 6)
+				throw wexception("blit code '%s' is malformed", it.c_str());
+
+			Blit blt;
+			blt.srcx = boost::lexical_cast<int16_t>(coords[0]);
+			blt.srcy = boost::lexical_cast<int16_t>(coords[1]);
+			blt.w = boost::lexical_cast<int16_t>(coords[2]);
+			blt.h = boost::lexical_cast<int16_t>(coords[3]);
+			blt.dstx = boost::lexical_cast<int16_t>(coords[4]);
+			blt.dsty = boost::lexical_cast<int16_t>(coords[5]);
+			blits.push_back(blt);
+
+			minx = min(blt.dstx, minx);
+			miny = min(blt.dsty, miny);
+			maxx = max<int>(blt.dstx + blt.w, maxx);
+			maxy = max<int>(blt.dsty + blt.h, maxy);
+		}
+
+		frames_.push_back(blits);
+	}
+
+	width_ = maxx - minx;
+	height_ = maxy - miny;
+	hotspot_ = Point(-minx, -miny);
+}
+
+void BlitsAnimation::trigger_soundfx(uint32_t time, uint32_t stereo_position) const
+{
+	const uint32_t framenumber = time / frametime_ % nr_frames();
+	sfx_cues_.trigger_soundfx(framenumber, stereo_position);
+}
+
+const Image & BlitsAnimation::representative_image(const RGBColor& clr) const {
+	const string hash =
+		(boost::format("%s:%02x%02x%02x:animation_pic") % hash_ % static_cast<int>(clr.r) %
+		 static_cast<int>(clr.g) % static_cast<int>(clr.b))
+			.str();
+
+	ImageCache& image_cache = g_gr->images();
+	if (image_cache.has(hash))
+		return *image_cache.get(hash);
+
+	return *image_cache.insert(new AnimationImage(hash, this, clr));
+}
+
+void BlitsAnimation::blit
+	(uint32_t time, const Point & dst, const Rect & srcrc, const RGBColor * clr, Surface * target) const
+{
+	assert(target);
+	const uint32_t framenumber = time / frametime_ % nr_frames();
+
+	const Image* use_image = spritemap_;
+	if (clr && spritemap_pc_) {
+		use_image = ImageTransformations::player_colored(*clr, spritemap_, spritemap_pc_);
+	}
+
+	BOOST_FOREACH(const Blit & blt, frames_[framenumber]) {
+		Rect framerect(blt.dstx + hotspot_.x, blt.dsty + hotspot_.y, blt.w, blt.h);
+		Rect bsrc(blt.srcx, blt.srcy, blt.w, blt.h);
+		Point bdst(dst.x + hotspot_.x + blt.dstx - srcrc.x, dst.y + hotspot_.y + blt.dsty - srcrc.y);
+
+		if (srcrc.x > framerect.x) {
+			if (srcrc.x >= framerect.x + int(framerect.w))
+				continue;
+			int16_t delta = srcrc.x - framerect.x;
+			framerect.x += delta;
+			framerect.w -= delta;
+			bsrc.x += delta;
+			bsrc.w -= delta;
+			bdst.x += delta;
+		}
+		if (srcrc.x + int(srcrc.w) <= framerect.x)
+			continue;
+		if (srcrc.x + int(srcrc.w) < framerect.x + int(framerect.w)) {
+			bsrc.w = srcrc.x + srcrc.w - framerect.x;
+		}
+
+		if (srcrc.y > framerect.y) {
+			if (srcrc.y >= framerect.y + int(framerect.h))
+				continue;
+			int16_t delta = srcrc.y - framerect.y;
+			framerect.y += delta;
+			framerect.h -= delta;
+			bsrc.y += delta;
+			bsrc.h -= delta;
+			bdst.y += delta;
+		}
+		if (srcrc.y + int(srcrc.h) <= framerect.y)
+			continue;
+		if (srcrc.y + int(srcrc.h) < framerect.y + int(framerect.h)) {
+			bsrc.h = srcrc.y + srcrc.h - framerect.y;
+		}
+
+		target->blit(bdst, use_image->surface(), bsrc);
+	}
+}
 
 
 /**
@@ -148,37 +373,14 @@ private:
 	std::vector<Region> regions_;
 	string hash_;
 
-	/// mapping of soundeffect name to frame number, indexed by frame number .
-	map<uint32_t, string> sfx_cues;
+	SfxCues sfx_cues;
 };
 
 PackedAnimation::PackedAnimation(const string& directory, Section& s)
 		: width_(0), height_(0), nr_frames_(0), frametime_(FRAME_LENGTH), image_(NULL), pcmask_(NULL) {
 	hash_ = directory + s.get_name();
 
-	// Read mapping from frame numbers to sound effect names and load effects
-	while (Section::Value * const v = s.get_next_val("sfx")) {
-		char * parameters = v->get_string(), * endp;
-		unsigned long long int const value = strtoull(parameters, &endp, 0);
-		const uint32_t frame_number = value;
-		try {
-			if (endp == parameters or frame_number != value)
-				throw wexception("expected %s but found \"%s\"", "frame number", parameters);
-			parameters = endp;
-			force_skip(parameters);
-			g_sound_handler.load_fx(directory, parameters);
-			map<uint32_t, string>::const_iterator const it =
-				sfx_cues.find(frame_number);
-			if (it != sfx_cues.end())
-				throw wexception
-					("redefinition for frame %u to \"%s\" (previously defined to "
-					 "\"%s\")",
-					 frame_number, parameters, it->second.c_str());
-		} catch (const _wexception & e) {
-			throw wexception("sfx: %s", e.what());
-		}
-		sfx_cues[frame_number] = parameters;
-	}
+	sfx_cues.read(directory, s);
 
 	const int32_t fps = s.get_int("fps");
 	if (fps < 0)
@@ -209,7 +411,7 @@ PackedAnimation::PackedAnimation(const string& directory, Section& s)
 	NumberGlob glob("region_??");
 	string region_name;
 	while (glob.next(&region_name)) {
-		string value=s.get_string(region_name.c_str(), "");
+		string value = s.get_string(region_name.c_str(), "");
 		if (value.empty())
 			break;
 
@@ -243,16 +445,14 @@ PackedAnimation::PackedAnimation(const string& directory, Section& s)
 		regions_.push_back(r);
 	}
 
-	if (!regions_.size())  // No regions? Only one frame then.
+	if (regions_.empty())  // No regions? Only one frame then.
 		nr_frames_ = 1;
 }
 
-void PackedAnimation::trigger_soundfx
-	(uint32_t time, uint32_t stereo_position) const {
+void PackedAnimation::trigger_soundfx(uint32_t time, uint32_t stereo_position) const
+{
 	const uint32_t framenumber = time / frametime_ % nr_frames();
-	const map<uint32_t, string>::const_iterator sfx_cue = sfx_cues.find(framenumber);
-	if (sfx_cue != sfx_cues.end())
-		g_sound_handler.play_fx(sfx_cue->second, stereo_position, 1);
+	sfx_cues.trigger_soundfx(framenumber, stereo_position);
 }
 
 const Image& PackedAnimation::representative_image(const RGBColor& clr) const {
@@ -491,86 +691,75 @@ DirAnimations::DirAnimations
 }
 
 
-/*
-===============
-Parse an animation from the given directory and config.
-sectnametempl is of the form "foowalk_??", where ?? will be replaced with
-nw, ne, e, se, sw and w to get the section names for the animations.
-
-If defaults is not zero, the additional sections are not actually necessary.
-If they don't exist, the data is taken from defaults and the bitmaps
-foowalk_??_nn.png are used.
-===============
-*/
-// NOCOM(#sirver): eventually kill this method as well - it seems unnecessary when
-// so much data has to be given for each walk animation anyway.
+/**
+ * Load direction animations of the given name.
+ *
+ * If a section of the given name exists, it is expected to contain a 'dirpics'
+ * key and assorted information of the old direction animation format.
+ *
+ * Otherwise, sections with the names 'name_??', with ?? replaced
+ * by nw, ne, e, se, sw, and w are expected to exist and describe
+ * the corresponding animations.
+ *
+ * @param optional No error if animations do not exist
+ */
 void DirAnimations::parse
 	(Widelands::Map_Object_Descr & b,
 	 const string & directory,
 	 Profile & prof,
-	 char const * const sectnametempl,
-	 Section * const defaults)
+	 const string & name,
+	 bool optional,
+	 const string & default_dirpics)
 {
-	char dirpictempl[256];
-	char sectnamebase[256];
-	char * repl;
+	if (Section * section = prof.get_section(name)) {
+		// NOTE: deprecate this format eventually
+		char dirpictempl[256];
+		char * repl;
 
-	if (strchr(sectnametempl, '%'))
-		throw wexception("sectnametempl %s contains %%", sectnametempl);
-
-	snprintf(sectnamebase, sizeof(sectnamebase), "%s", sectnametempl);
-	repl = strstr(sectnamebase, "??");
-	if (!repl)
-		throw wexception
-			("DirAnimations section name template %s does not contain %%s",
-			 sectnametempl);
-
-	strncpy(repl, "%s", 2);
-
-	if
-		(char const * const string =
-		 defaults ? defaults->get_string("dirpics", 0) : 0)
-	{
-		snprintf(dirpictempl, sizeof(dirpictempl), "%s", string);
+		snprintf
+			(dirpictempl, sizeof(dirpictempl), "%s",
+			 section->get_string("dirpics", default_dirpics.c_str()));
 		repl = strstr(dirpictempl, "!!");
 		if (!repl)
 			throw wexception
 				("DirAnimations dirpics name templates %s does not contain !!",
 				 dirpictempl);
-
 		strncpy(repl, "%s", 2);
-	} else {
-		snprintf(dirpictempl, sizeof(dirpictempl), "%s_??", sectnamebase);
-	}
 
-	for (int32_t dir = 0; dir < 6; ++dir) {
-		static char const * const dirstrings[6] =
-			{"ne", "e", "se", "sw", "w", "nw"};
-		char sectname[300];
+		for (int32_t dir = 0; dir < 6; ++dir) {
+			static char const * const dirstrings[6] =
+				{"ne", "e", "se", "sw", "w", "nw"};
 
-		snprintf(sectname, sizeof(sectname), sectnamebase, dirstrings[dir]);
+			// Fake the section name here, so that the animation loading code is
+			// using the correct glob pattern to load the images from.
+			char pictempl[256];
+			snprintf(pictempl, sizeof(pictempl), dirpictempl, dirstrings[dir]);
+			section->set_name(pictempl);
+			m_animations[dir] = g_gr->animations().load(directory, *section);
 
-		string const anim_name = sectname;
-
-		Section * s = prof.get_section(sectname);
-		if (!s) {
-			if (!defaults)
-				throw wexception
-					("Section [%s] missing and no default supplied",
-					 sectname);
-
-			s = defaults;
+			char animname[256];
+			snprintf(animname, sizeof(animname), "%s_%s", name.c_str(), dirstrings[dir]);
+			b.add_animation(animname, m_animations[dir]);
 		}
+	} else {
+		for (int32_t dir = 0; dir < 6; ++dir) {
+			static char const * const dirstrings[6] =
+				{"ne", "e", "se", "sw", "w", "nw"};
 
-		snprintf(sectname, sizeof(sectname), dirpictempl, dirstrings[dir]);
-
-		// Fake the section name here, so that the animation loading code is
-		// using the correct glob pattern to load the images from.
-		s->set_name(sectname);
-		m_animations[dir] = g_gr->animations().load(directory, *s);
-		b.add_animation(anim_name.c_str(), m_animations[dir]);
+			char animname[256];
+			snprintf(animname, sizeof(animname), "%s_%s", name.c_str(), dirstrings[dir]);
+			Section * dirsection = prof.get_section(animname);
+			if (dirsection) {
+				m_animations[dir] = g_gr->animations().load(directory, *dirsection);
+				b.add_animation(animname, m_animations[dir]);
+			} else {
+				if (!optional)
+					throw wexception("DirAnimations: did not find section %s", animname);
+			}
+		}
 	}
 }
+
 
 /*
 ==============================================================================
@@ -581,7 +770,10 @@ AnimationManager IMPLEMENTATION
 */
 
 uint32_t AnimationManager::load(const string& directory, Section & s) {
-	if (s.get_bool("packed", false)) {
+	std::string format = s.get_string("format", "");
+	if (format == "blits") {
+		m_animations.push_back(new BlitsAnimation(directory, s));
+	} else if (s.get_bool("packed", false)) {
 		m_animations.push_back(new PackedAnimation(directory, s));
 	} else {
 		m_animations.push_back(new NonPackedAnimation(directory, s));

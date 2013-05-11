@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2010-2011 by the Widelands Development Team
+ * Copyright (C) 2010-2013 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -40,12 +40,7 @@ Ship_Descr::Ship_Descr
 	 const Widelands::Tribe_Descr & gtribe)
 : Descr(given_name, gdescname, directory, prof, global_s, &gtribe)
 {
-	m_sail_anims.parse
-		(*this,
-		 directory,
-		 prof,
-		 (name() + "_sail_??").c_str(),
-		 prof.get_section("sail"));
+	m_sail_anims.parse(*this, directory, prof, "sail");
 
 	m_capacity = global_s.get_natural("capacity", 20);
 }
