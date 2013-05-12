@@ -5,8 +5,8 @@ animate=idle 45000
 remove=
 
 [idle]
-packed=true
-pics=ashes.png
-dimensions=84 51
-base_offset=0 0
-hotspot=40 39
+format = blits
+nrframes = 1
+spritemap = ashes
+0 = 0,0,84,51@-40,-39
+

@@ -31,22 +31,20 @@ animate=working 20000
 produce=pittabread
 
 [idle]
-packed=true
-pics=bakery.png
-dimensions=100 78
-base_offset=0 0
-hotspot=41 58
+format = blits
+nrframes = 1
+spritemap = bakery
+0 = 0,0,100,78@-41,-58
 
 [unoccupied]
-packed=true
-pics=bakery.png
-dimensions=100 74
-base_offset=100 0
-hotspot=41 58
+format = blits
+nrframes = 1
+spritemap = bakery
+0 = 0,78,100,74@-41,-58
 
 [working]
-packed=true
-pics=bakery.png
-dimensions=100 78
-base_offset=0 0
-hotspot=41 58
+format = blits
+nrframes = 1
+spritemap = bakery
+0 = 0,0,100,78@-41,-58
+

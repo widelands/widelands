@@ -1,8 +1,8 @@
 help=_The bread paddle is a tool of the baker and each baker needs his own. It is produced in the metal works like all other tools (but it ceases to be produced by the building if the metal works is enhanced to an axefactory and war mill).
 
 [idle]
-packed=true
-pics=idle.png
-dimensions=11 10
-base_offset=0 0
-hotspot=6 6
+format = blits
+nrframes = 1
+spritemap = idle
+0 = 0,0,11,10@-6,-6
+
