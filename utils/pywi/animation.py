@@ -217,6 +217,25 @@ class AnimationBlits(Animation):
                 ])
             )
 
+    def copy(self, chunkset):
+        """
+        Create a copy of this animation that stores its chunk in the given chunkset
+        """
+        if chunkset.has_player_color != self.has_player_color:
+            raise Exception('AnimationBlits.copy: inconsistent has_player_color')
+        new_anim = AnimationBlits(chunkset)
+        new_anim.options.update(self.options)
+        for frame in self.frames:
+            blits = []
+            for blit in frame:
+                chunk = chunkset.make_chunk(
+                    blit.chunk.pic, blit.chunk.pc_pic,
+                    (0,0) + blit.chunk.pic.shape[0:2]
+                )
+                blits.append(Blit(chunk, blit.offset))
+            new_anim.append_frame(blits)
+        return new_anim
+
     @staticmethod
     def load(directory, section_dict, context=None):
         spritemap_name = section_dict.pop('spritemap')
@@ -306,6 +325,70 @@ def load_glob(filename_glob, context=None):
 
     return AnimationFullFrames(rv)
 
+def load_packed(directory, section_dict, context=None):
+    pics = section_dict.pop('pics')
+    hotspot = tuple(reversed([int(x) for x in section_dict.pop('hotspot').split()]))
+    dims = tuple(reversed([int(x) for x in section_dict.pop('dimensions').split()]))
+    base_offset = tuple(reversed([int(x) for x in section_dict.pop('base_offset').split()]))
+
+    fn = directory + '/' + pics
+    spritemap = np.asarray(Image.open(fn))
+    if context is not None:
+        context.filenames.add(fn)
+        context.spritemap_names.add(pics.replace('.png', ''))
+
+    fn = directory + '/' + pics.replace('.png', '_pc.png')
+    has_player_color = os.path.exists(fn)
+    if has_player_color:
+        spritemap_pc = np.asarray(Image.open(fn))
+        if context is not None:
+            context.filenames.add(fn)
+        if len(spritemap_pc.shape) == 2:
+            rgba = np.zeros(spritemap_pc.shape + (4,))
+            rgba[:,:,0] = spritemap_pc
+            rgba[:,:,1] = spritemap_pc
+            rgba[:,:,2] = spritemap_pc
+            rgba[:,:,3] = 255
+            spritemap_pc = rgba
+    else:
+        spritemap_pc = None
+
+    nrframes = 1
+    regions = []
+    for name in section_dict.keys():
+        if not name.startswith('region_'):
+            continue
+        region_descr = section_dict.pop(name).split(':')
+        region = (tuple([int(x) for x in region_descr[0].split()]), [
+            tuple([int(x) for x in frame.split()])
+            for frame in region_descr[1].split(';')
+        ])
+        if not regions:
+            nrframes = len(region[1])
+        else:
+            if nrframes != len(region[1]):
+                raise Exception('inconsistent number of frames in packed=true animation')
+        regions.append(region)
+
+    chunkset = ChunkSet(has_player_color)
+    anim = AnimationBlits(chunkset)
+
+    base_chunk = chunkset.make_chunk(
+        spritemap, spritemap_pc,
+        (base_offset[0], base_offset[1], base_offset[0] + dims[0], base_offset[1] + dims[1])
+    )
+    for framenr in xrange(nrframes):
+        blits = [Blit(base_chunk, (-hotspot[0], -hotspot[1]))]
+        for region in regions:
+            ofs = (region[1][framenr][1], region[1][framenr][0])
+            chunk = chunkset.make_chunk(
+                spritemap, spritemap_pc,
+                (ofs[0], ofs[1], ofs[0] + region[0][3], ofs[1] + region[0][2])
+            )
+            blits.append(Blit(chunk, (region[0][1] - hotspot[0], region[0][0] - hotspot[1])))
+        anim.append_frame(blits)
+
+    return anim
 
 def load_section(directory, section, context=None):
     d = dict([(key, value) for key, value in section.iterentries()])
@@ -317,6 +400,8 @@ def load_section(directory, section, context=None):
         anim.hotspot = tuple([int(v) for v in _re_point.match(d.pop('hotspot')).groups()[::-1]])
     elif typ == 2:
         anim = AnimationBlits.load(directory, d, context)
+    elif typ == 1:
+        anim = load_packed(directory, d, context)
     else:
         raise Exception('cannot load this type of animation yet')
     anim.options.update(d)

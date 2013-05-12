@@ -572,6 +572,17 @@ def do_optimize_greedy(frames):
 #############################################
 
 
+def copy_blits_animation(anim, chunksets):
+    """
+    Copy the given animation (which must be of type AnimationBlits)
+    into a new animation using the given chunksets
+    """
+    if chunksets[anim.has_player_color] is None:
+        chunksets[anim.has_player_color] = pywi.animation.ChunkSet(anim.has_player_color)
+    chunkset = chunksets[anim.has_player_color]
+    return anim.copy(chunkset)
+
+
 def optimize_bbox(animations, chunksets, args):
     """
     Joint optimization of the given animations using a simple bounding box routine
@@ -689,23 +700,10 @@ def optimize_greedy(animations, chunksets, args):
     new_animations = {}
     if not args.reopt:
         for name in sorted(animations.iterkeys()):
-            if type(name) == pywi.animation.AnimationBlits:
+            anim = animations[name]
+            if type(anim) == pywi.animation.AnimationBlits:
                 print 'Copying %s' % (name)
-                if chunksets[anim.has_player_color] is None:
-                    chunksets[anim.has_player_color] = pywi.animation.ChunkSet(anim.has_player_color)
-                chunkset = chunksets[anim.has_player_color]
-                new_anim = pywi.animation.AnimationBlits(chunkset)
-                new_anim.options.update(anim.options)
-                for frame in anim.frames:
-                    blits = []
-                    for blit in frame:
-                        chunk = chunkset.make_chunk(
-                            blit.chunk.pic, blit.chunk.pc_pic,
-                            (0,0) + blit.chunk.pic.shape[0:2]
-                        )
-                        blits.append(pywi.animation.Blit(chunk, blit.offset))
-                    new_anim.append_frame(blits)
-                new_animations[name] = new_anim
+                new_animations[name] = copy_blits_animation(anim, chunksets)
                 del animations[name]
 
     pc_animations = dict([
@@ -865,6 +863,16 @@ def main():
         animations = optimize_greedy(animations, chunksets, args)
     else:
         error('Unknown optimization method %s' % (arg.optimize))
+
+    # This is perhaps a bit of an excessive way for achieving this,
+    # but re-copy all animations in sorted order. The intention of this
+    # is to make the resulting spritemaps be more stable when the same
+    # directory is re-optimized
+    chunksets = [None, None]
+    animations = dict([
+        (name, copy_blits_animation(animations[name], chunksets))
+        for name in sorted(animations.iterkeys())
+    ])
 
     newhash = compute_animations_hash(animations)
     newcost = 0
