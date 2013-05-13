@@ -18,6 +18,7 @@
  */
 
 #include <boost/algorithm/string.hpp>
+#include <boost/foreach.hpp>
 
 #include "container_iterate.h"
 
@@ -74,15 +75,16 @@ void Map_Port_Spaces_Data_Packet::Write(FileSystem & fs, Editor_Game_Base & egba
 	s1.set_int("packet_version", CURRENT_PACKET_VERSION);
 
 	Map & map = egbase.map();
-	std::vector<Coords> port_spaces = map.get_port_spaces();
+	const Map::PortSpacesSet& port_spaces = map.get_port_spaces();
 	const uint16_t num = port_spaces.size();
-	char buf[8]; // there won't be that many port spaces... definitely!
+	char buf[8]; // there won't be that many port spaces... Definitely!
 	s1.set_int("number_of_port_spaces", num);
 
 	Section & s2 = prof.create_section("port_spaces");
-	for (uint16_t i = 0; i < num; ++i) {
-		snprintf(buf, sizeof(buf), "%u", i);
-		s2.set_Coords(buf, port_spaces.at(i));
+	int i = 0;
+	BOOST_FOREACH(const Coords& c, port_spaces) {
+		snprintf(buf, sizeof(buf), "%u", i++);
+		s2.set_Coords(buf, c);
 	}
 	prof.write("port_spaces", false, fs);
 }

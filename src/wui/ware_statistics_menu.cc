@@ -20,14 +20,13 @@
 #include "ware_statistics_menu.h"
 
 #include "graphic/graphic.h"
+#include "graphic/rendertarget.h"
 #include "i18n.h"
 #include "interactive_player.h"
 #include "logic/player.h"
-#include "graphic/rendertarget.h"
 #include "logic/tribe.h"
 #include "logic/warelist.h"
 #include "plot_area.h"
-#include "differential_plot_area.h"
 #include "waresdisplay.h"
 
 #include "ui_basic/button.h"

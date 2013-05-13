@@ -52,7 +52,7 @@ class WareInstance;
 struct Flag : public PlayerImmovable, public RoutingNode {
 	typedef std::vector<const WareInstance *> Wares;
 
-	friend struct Economy;
+	friend class Economy;
 	friend struct Router;
 	friend class FlagQueue;
 	friend struct Map_Ware_Data_Packet;     // has to look at pending items

@@ -34,7 +34,7 @@
 
 namespace Widelands {
 
-struct Economy;
+class Economy;
 struct Path;
 struct PlayerImmovable;
 class Soldier;
@@ -100,7 +100,7 @@ struct Player :
 	Message_Id add_message_with_timeout
 		(Game &, Message &, uint32_t timeout, uint32_t radius);
 
-	void set_message_status(Message_Id const id, Message::Status const status) {
+	void set_message_status(const Message_Id& id, Message::Status const status) {
 		messages().set_message_status(id, status);
 	}
 
@@ -395,7 +395,7 @@ struct Player :
 		throw ();
 
 	/// Call see_node for each node in the area.
-	void see_area(const Area<FCoords> area)
+	void see_area(const Area<FCoords>& area)
 		throw ()
 	{
 		const Time gametime = egbase().get_gametime();
@@ -408,7 +408,7 @@ struct Player :
 	}
 
 	/// Decrement this player's vision for each node in an area.
-	void unsee_area(const Area<FCoords> area) throw () {
+	void unsee_area(const Area<FCoords>& area) throw () {
 		const Time gametime = egbase().get_gametime();
 		const Map &                  map      = egbase().map         ();
 		const Widelands::Field & first_map_field = map[0];
@@ -426,13 +426,13 @@ struct Player :
 		return m_fields[i].military_influence;
 	}
 
-	bool is_worker_type_allowed(Ware_Index const i) const throw () {
+	bool is_worker_type_allowed(const Ware_Index& i) const throw () {
 		return m_allowed_worker_types.at(i);
 	}
 	void allow_worker_type(Ware_Index, bool allow);
 
 	// Allowed buildings
-	bool is_building_type_allowed(Building_Index const i) const throw () {
+	bool is_building_type_allowed(const Building_Index& i) const throw () {
 		return m_allowed_building_types[i];
 	}
 	void allow_building_type(Building_Index, bool allow);
@@ -530,7 +530,7 @@ struct Player :
 
 	// Statistics
 	const Building_Stats_vector & get_building_statistics
-		(Building_Index const i) const
+		(const Building_Index& i) const
 	{
 		return m_building_stats[i];
 	}

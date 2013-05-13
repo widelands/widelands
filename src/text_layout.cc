@@ -42,13 +42,13 @@ string as_window_title(const string& txt) {
 	f % txt;
 	return f.str();
 }
-string as_uifont(const string & txt, int size) {
+string as_uifont(const string & txt, int size, const RGBColor& clr) {
 	// UI Text is always bold due to historic reasons
 	static format f("<rt><p><font face=%s size=%i bold=1 shadow=1 color=%02x%02x%02x>%s</font></p></rt>");
 
 	f % UI_FONT_NAME_NO_EXT;
 	f % size;
-	f % int(UI_FONT_CLR_FG.r) % int(UI_FONT_CLR_FG.g) % int(UI_FONT_CLR_FG.b);
+	f % int(clr.r) % int(clr.g) % int(clr.b);
 	f % txt;
 	return f.str();
 }

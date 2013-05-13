@@ -29,7 +29,7 @@ class Interactive_GameBase;
 
 namespace Widelands {
 
-struct Economy;
+class Economy;
 struct Fleet;
 struct PortDock;
 

@@ -630,7 +630,6 @@ protected:
 void TagHandler::m_make_text_nodes(const string& txt, vector<RenderNode*>& nodes, NodeStyle& ns) {
 	TextStream ts(txt);
 
-	vector<string> words;
 	while (ts.pos() < txt.size()) {
 		size_t cpos = ts.pos();
 		ts.skip_ws();
@@ -711,7 +710,7 @@ private:
 class ImgTagHandler : public TagHandler {
 public:
 	ImgTagHandler(ITag& tag, FontCache& fc, NodeStyle ns, ImageCache* image_cache) :
-		TagHandler(tag, fc, ns, image_cache) {
+		TagHandler(tag, fc, ns, image_cache), m_rn(NULL) {
 	}
 
 	void enter() {

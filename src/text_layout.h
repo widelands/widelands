@@ -37,7 +37,8 @@ inline bool is_richtext(const std::string& text) {
  * Convenience functions to convert simple text into a valid block
  * of rich text which can be rendered.
  */
-std::string as_uifont (const std::string&, int ptsize = UI_FONT_SIZE_SMALL);
+std::string as_uifont
+	(const std::string&, int ptsize = UI_FONT_SIZE_SMALL, const RGBColor& clr = UI_FONT_CLR_FG);
 std::string as_tooltip(const std::string&);
 std::string as_waresinfo(const std::string&);
 std::string as_window_title(const std::string&);

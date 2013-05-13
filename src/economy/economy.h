@@ -20,9 +20,11 @@
 #ifndef ECONOMY_H
 #define ECONOMY_H
 
-#include <boost/function.hpp>
 #include <set>
 #include <vector>
+
+#include <boost/function.hpp>
+#include <boost/utility.hpp>
 
 #include "supply_list.h"
 #include "ui_basic/unique_window.h"
@@ -66,7 +68,8 @@ struct Router;
  * connected by roads or the seafaring network - though of course, most code operates
  * on the assumption that they are, with fallbacks for when they aren't.
  */
-struct Economy {
+class Economy : boost::noncopyable {
+public:
 	friend class EconomyDataPacket;
 
 	/// Configurable target quantity for the supply of a ware type in the

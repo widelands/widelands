@@ -1040,7 +1040,7 @@ void Bob::log_general_info(const Editor_Game_Base & egbase)
 		molog("* svar1: %s\n", m_stack[i].svar1.c_str());
 
 		molog("* coords: (%i, %i)\n", m_stack[i].coords.x, m_stack[i].coords.y);
-		molog("* diranims:",  m_stack[i].diranims);
+		molog("* diranims:");
 		for (Direction dir = FIRST_DIRECTION; dir <= LAST_DIRECTION; ++dir) {
 			molog(" %d", m_stack[i].diranims.get_animation(dir));
 		}

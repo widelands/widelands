@@ -21,12 +21,7 @@
 #include <stdint.h>
 #include <ctime>
 
-char timestring_buffer[] =
-#ifdef WIN32
-"YYYY-MM-DDThh.mm.ss"; //  ':' is not a valid file name character under Windows
-#else
-"YYYY-MM-DDThh:mm:ss"; //  use proper ISO 8601 format on all other systems
-#endif
+char timestring_buffer[] = "YYYY-MM-DDThh.mm.ss"; //  ':' is not a valid file name character for FAT FS
 
 char * timestring() {
 	time_t t;

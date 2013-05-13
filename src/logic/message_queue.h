@@ -67,7 +67,7 @@ struct MessageQueue : boost::noncopyable, private std::map<Message_Id, Message *
 	}
 
 	/// \returns a pointer to the message if it exists, otherwise 0.
-	Message const * operator[](Message_Id const id) const {
+	Message const * operator[](const Message_Id& id) const {
 		assert_counts();
 		const_iterator const it = find(Message_Id(id));
 		return it != end() ? it->second : 0;
@@ -106,7 +106,7 @@ struct MessageQueue : boost::noncopyable, private std::map<Message_Id, Message *
 	}
 
 	/// Sets the status of the message with the given id, if it exists.
-	void set_message_status(Message_Id const id, Message::Status const status) {
+	void set_message_status(const Message_Id& id, Message::Status const status) {
 		assert_counts();
 		assert(status < 3);
 		iterator const it = find(id);
@@ -122,7 +122,7 @@ struct MessageQueue : boost::noncopyable, private std::map<Message_Id, Message *
 
 	/// Expire the message with the given id so that it no longer exists.
 	/// Assumes that a message with the given id exists.
-	void expire_message(Message_Id const id) {
+	void expire_message(const Message_Id& id) {
 		assert_counts();
 		iterator const it = find(id);
 		assert(it != end());

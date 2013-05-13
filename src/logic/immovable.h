@@ -29,7 +29,7 @@ struct Profile;
 
 namespace Widelands {
 
-struct Economy;
+class Economy;
 struct Flag;
 struct Map;
 struct Tribe_Descr;

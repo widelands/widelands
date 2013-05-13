@@ -29,7 +29,7 @@
 
 namespace Widelands {
 
-struct Economy;
+class Economy;
 struct Editor_Game_Base;
 struct Flag;
 struct Game;
@@ -58,7 +58,7 @@ class ConstructionSite;
  * The required time has no meaning for idle requests.
  */
 struct Request : public Trackable {
-	friend struct Economy;
+	friend class Economy;
 	friend class RequestList;
 
 	typedef void (*callback_t)

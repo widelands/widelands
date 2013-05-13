@@ -56,6 +56,8 @@ struct Terrain_Descr;
 struct Bob;
 struct BaseImmovable;
 
+// Field is used so often, make sure it is as small as possible.
+#pragma pack(1)
 /// a field like it is represented in the game
 /// \todo This is all one evil hack :(
 struct Field {
@@ -77,17 +79,13 @@ struct Field {
 	typedef uint8_t Resource_Amount;
 
 	struct Terrains         {Terrain_Index   d : 4, r : 4;};
+	compile_assert(sizeof(Terrains) == 1);
 	struct Resources        {Resource_Index  d : 4, r : 4;};
+	compile_assert(sizeof(Resources) == 1);
 	struct Resource_Amounts {Resource_Amount d : 4, r : 4;};
+	compile_assert(sizeof(Resource_Amounts) == 1);
 
 private:
-	Height height;
-	int8_t brightness;
-
-	uint16_t caps                    : 7;
-	uint16_t buildhelp_overlay_index : 3;
-	uint16_t roads                   : 6;
-
 	/**
 	 * A field can be selected in one of 2 selections. This allows the user to
 	 * use selection tools to select a set of fields and then perform a command
@@ -113,6 +111,19 @@ private:
 	static const Owner_Info_and_Selections_Type Owner_Info_Bitmask =
 		Player_Number_Bitmask + Border_Bitmask;
 	compile_assert(MAX_PLAYERS <= Player_Number_Bitmask);
+
+	// Data Members
+	/** linked list, \sa Bob::m_linknext*/
+	Bob           * bobs;
+	BaseImmovable * immovable;
+
+	uint8_t caps                    : 7;
+	uint8_t buildhelp_overlay_index : 3;
+	uint8_t roads                   : 6;
+
+	Height height;
+	int8_t brightness;
+
 	Owner_Info_and_Selections_Type owner_info_and_selections;
 
 	Resource_Index m_resources; ///< Resource type on this field, if any
@@ -120,10 +131,6 @@ private:
 	uint8_t m_res_amount; ///< Current amount of m_resources
 
 	Terrains terrains;
-
-	/** linked list, \sa Bob::m_linknext*/
-	Bob           * bobs;
-	BaseImmovable * immovable;
 
 public:
 	Height get_height() const throw () {return height;}
@@ -135,7 +142,7 @@ public:
 	Terrain_Index terrain_r   () const throw () {return terrains.r;}
 	void          set_terrains(const Terrains & i) throw () {terrains = i;}
 	void set_terrain
-		(const TCoords<FCoords>::TriangleIndex t, Terrain_Index const i)
+		(const TCoords<FCoords>::TriangleIndex& t, Terrain_Index const i)
 		throw ()
 	{
 		if (t == TCoords<FCoords>::D) set_terrain_d(i);
@@ -226,7 +233,10 @@ public:
 			MAX_FIELD_HEIGHT       < h ? MAX_FIELD_HEIGHT : h;
 	}
 };
+#pragma pack(0)
 
+// Check that Field is tightly packed.
+compile_assert(sizeof(Field) <= sizeof(void *) * 2 + 10);
 }
 
 #endif
