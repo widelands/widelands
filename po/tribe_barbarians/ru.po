@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2013-03-09 16:57+0000\n"
-"PO-Revision-Date: 2013-05-12 03:12+0000\n"
+"PO-Revision-Date: 2013-05-12 05:22+0000\n"
 "Last-Translator: Konstantin Shchukin <k.s@sign-support.ru>\n"
 "Language-Team: русский <ru@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-05-12 05:09+0000\n"
-"X-Generator: Launchpad (build 16598)\n"
+"X-Launchpad-Export-Date: 2013-05-13 05:12+0000\n"
+"X-Generator: Launchpad (build 16614)\n"
 "X-Poedit-Country: RUSSIAN FEDERATION\n"
 "X-Poedit-Language: Russian\n"
 
@@ -553,7 +553,7 @@ msgstr "Разводите волов, чтобы добавить их в тр�
 
 #: ../../tribes/barbarians/cattlebreeder/conf:1
 msgid "Breeds the strong oxen that help in the transportation of wares."
-msgstr "Разводит сильных быков, которые помогают в перевозке товаров."
+msgstr "Разводит сильных волов, которые помогают в перевозке товаров."
 
 #: ../../tribes/barbarians/conf:126
 #: ../../tribes/barbarians/micro-brewery/help.lua:47
@@ -649,7 +649,7 @@ msgstr "Отжигает известь в печах для обжига."
 
 #: ../../tribes/barbarians/farm/help.lua:50
 msgid "Calculation needed"
-msgstr ""
+msgstr "Нужно посчитать."
 
 #: ../../tribes/barbarians/conf:115
 #: ../../tribes/barbarians/well/help.lua:42
@@ -666,7 +666,7 @@ msgstr "Каменоломня %s без камней осталась возл�
 
 #: ../../tribes/barbarians/granitemine/help.lua:18
 msgid "Carve %s out of the rock in mountain terrain."
-msgstr ""
+msgstr "Каменоломня %s без булыжника в горной местности."
 
 #: ../../tribes/barbarians/conf:161
 #: ../../tribes/barbarians/conf:170
@@ -691,7 +691,7 @@ msgstr "Домик углежога"
 
 #: ../../tribes/barbarians/trainingscamp/help.lua:13
 msgid "Chief Chat'Karuth in a speech to his army."
-msgstr ""
+msgstr "Вождь Чат'Каруч обращается к своей армии."
 
 #: ../../tribes/barbarians/coalmine/help.lua:53
 #: ../../tribes/barbarians/coalmine/help.lua:53
@@ -761,7 +761,7 @@ msgstr "Уголь"
 
 #: ../../tribes/barbarians/warmill/help.lua:27
 msgid "Coal from the Coal mine or the Charcoal Burner's House"
-msgstr ""
+msgstr "Уголь из угольной шахты или из домика углежога."
 
 #: ../../tribes/barbarians/coalmine/help.lua:17
 #: ../../tribes/barbarians/conf:212
@@ -811,7 +811,7 @@ msgstr "Строительство корабля"
 #: ../../tribes/barbarians/lumberjacks_hut/help.lua:27
 #: ../../tribes/barbarians/quarry/help.lua:27
 msgid "Construction Site"
-msgstr "Стройка"
+msgstr "Строительная площадка"
 
 #: ../../tribes/barbarians/axefactory/help.lua:40
 #: ../../tribes/barbarians/deep_coalmine/help.lua:42
