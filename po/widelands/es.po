@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: Widelands unofficial-git-6aa148a(svn4769+changes)\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2013-03-09 17:57+0100\n"
-"PO-Revision-Date: 2013-05-13 23:19+0000\n"
+"PO-Revision-Date: 2013-05-14 19:53+0000\n"
 "Last-Translator: Adolfo Jayme Barrientos <fitoschido@gmail.com>\n"
 "Language-Team: Español <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2013-05-14 05:12+0000\n"
+"X-Launchpad-Export-Date: 2013-05-15 05:10+0000\n"
 "X-Generator: Launchpad (build 16617)\n"
 "X-Poedit-Country: SPAIN\n"
 "X-Poedit-Language: Spanish\n"
@@ -39,8 +39,8 @@ msgid ""
 "Widelands could not load the file \"%s\". The file format seems to be "
 "incompatible."
 msgstr ""
-"Widelands no puede cargar el fichero \"%s\". El formato de fichero parece "
-"que no es compatible."
+"Widelands no pudo cargar el archivo «%s». Parece que el formato del archivo "
+"no es compatible."
 
 #: ../../src/wlapplication.cc:962 ../../src/wlapplication.cc:971
 msgid "could not find the path of the main executable"
@@ -62,7 +62,7 @@ msgid ""
 "\n"
 msgstr ""
 "\n"
-"Lo siento, no se permite depuración de doble instancia en WIN32.\n"
+"No se permite la depuración de instancia doble en WIN32.\n"
 "\n"
 
 #: ../../src/wlapplication.cc:1235
@@ -311,7 +311,7 @@ msgstr ""
 
 #: ../../src/wlapplication.cc:1551
 msgid "Fallback settings in effect"
-msgstr ""
+msgstr "Configuración alternativa en vigor"
 
 #: ../../src/wlapplication.cc:1553
 msgid ""
@@ -352,11 +352,10 @@ msgid ""
 "Widelands attempts to create a savegame when errors occur during the game. "
 "It is often - though not always - possible to load it and continue playing.\n"
 msgstr ""
-". Por favor, incluya esta información en su informe.\n"
+". Añade esta información a tu informe.\n"
 "\n"
-"Widelands intentó guardar el juego cuando sucedió el error durante el juego. "
-"A veces es posible - aunque no siempre - cargar el juego y continuar "
-"jugando.\n"
+"Widelands intenta guardar la partida cuando suceden errores. A menudo "
+"—aunque no siempre— es posible cargarla y continuar jugando.\n"
 
 #: ../../src/wlapplication.cc:1754
 msgid "The address of the game server is invalid"
@@ -369,7 +368,7 @@ msgstr "Jugador"
 #: ../../src/wlapplication.cc:2048 ../../src/network/nethost.cc:839
 #: ../../src/network/netclient.cc:199
 msgid "Preparing game"
-msgstr "Preparando juego"
+msgstr "Preparando la partida"
 
 #: ../../src/wlapplication.cc:2159
 msgid "End of replay"
@@ -386,7 +385,7 @@ msgstr ""
 #: ../../src/wlapplication.cc:2244 ../../src/logic/game.cc:369
 #: ../../src/logic/game.cc:409
 msgid "Loading..."
-msgstr "Cargando..."
+msgstr "Cargando…"
 
 #: ../../src/computer_player.cc:38
 msgid "None"
@@ -414,7 +413,7 @@ msgstr "Empleados"
 
 #: ../../src/writeHTML.cc:267 ../../src/writeHTML.cc:273
 msgid "Building types"
-msgstr "Tipos de Construcciones"
+msgstr "Tipos de construcciones"
 
 #: ../../src/writeHTML.cc:278 ../../src/writeHTML.cc:512
 #: ../../src/writeHTML.cc:1465
@@ -536,7 +535,7 @@ msgstr "Mejora de %s"
 
 #: ../../src/writeHTML.cc:501 ../../src/writeHTML.cc:507
 msgid "Worker types"
-msgstr "Tipos de Trabajadores"
+msgstr "Tipos de trabajadores"
 
 #: ../../src/writeHTML.cc:518
 msgid "Needed<br/>experience"
