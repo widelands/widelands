@@ -34,11 +34,11 @@ static const char pic_destination[] = "pics/menu_ship_destination.png";
 static const char pic_explore_cw[]  = "pics/ship_explore_island_cw.png";
 static const char pic_explore_ccw[] = "pics/ship_explore_island_ccw.png";
 static const char pic_scout_nw[] = "pics/ship_scout_nw.png";
-static const char pic_scout_w[]  = "pics/ship_scout_w.png";
 static const char pic_scout_ne[] = "pics/ship_scout_ne.png";
+static const char pic_scout_w[]  = "pics/ship_scout_w.png";
 static const char pic_scout_e[]  = "pics/ship_scout_e.png";
-static const char pic_scout_se[] = "pics/ship_scout_se.png";
 static const char pic_scout_sw[] = "pics/ship_scout_sw.png";
+static const char pic_scout_se[] = "pics/ship_scout_se.png";
 static const char pic_construct_port[] = "pics/fsel_editor_set_port_space.png";
 
 namespace Widelands {
@@ -70,12 +70,12 @@ private:
 	UI::Button * m_btn_destination;
 	UI::Button * m_btn_explore_island_cw;
 	UI::Button * m_btn_explore_island_ccw;
-	UI::Button * m_btn_scout_w;
 	UI::Button * m_btn_scout_nw;
 	UI::Button * m_btn_scout_ne;
+	UI::Button * m_btn_scout_w;
 	UI::Button * m_btn_scout_e;
-	UI::Button * m_btn_scout_se;
 	UI::Button * m_btn_scout_sw;
+	UI::Button * m_btn_scout_se;
 	UI::Button * m_btn_construct_port;
 	ItemWaresDisplay * m_display;
 };
@@ -95,6 +95,75 @@ ShipWindow::ShipWindow(Interactive_GameBase & igb, Ship & ship) :
 	m_display->set_capacity(ship.get_capacity());
 	vbox->add(m_display, UI::Box::AlignCenter, false);
 
+	// Expedition buttons
+	if (m_ship.get_ship_state() != Ship::TRANSPORT) {
+		UI::Box * exp_top = new UI::Box(vbox, 0, 0, UI::Box::Horizontal);
+		vbox->add(exp_top, UI::Box::AlignCenter, false);
+		UI::Box * exp_mid = new UI::Box(vbox, 0, 0, UI::Box::Horizontal);
+		vbox->add(exp_mid, UI::Box::AlignCenter, false);
+		UI::Box * exp_bot = new UI::Box(vbox, 0, 0, UI::Box::Horizontal);
+		vbox->add(exp_bot, UI::Box::AlignCenter, false);
+		UI::Box * spacer = new UI::Box(vbox, 0, 20, UI::Box::Horizontal);
+		vbox->add(spacer, UI::Box::AlignCenter, false);
+		spacer->add_space(20);
+
+		m_btn_scout_nw =
+			make_button
+				(exp_top, "scnw", _("Scout towards the north west"), pic_scout_nw,
+				 boost::bind(&ShipWindow::act_goto, this));
+		exp_top->add(m_btn_scout_nw, 0, false);
+
+		m_btn_explore_island_cw =
+			make_button
+				(exp_top, "expcw", _("Explore the island's coast clockwise"), pic_explore_cw,
+				 boost::bind(&ShipWindow::act_goto, this));
+		exp_top->add(m_btn_explore_island_cw, 0, false);
+
+		m_btn_scout_ne =
+			make_button
+				(exp_top, "scne", _("Scout towards the north east"), pic_scout_ne,
+				 boost::bind(&ShipWindow::act_goto, this));
+		exp_top->add(m_btn_scout_ne, 0, false);
+
+		m_btn_scout_w =
+			make_button
+				(exp_mid, "scnw", _("Scout towards the west"), pic_scout_w,
+				 boost::bind(&ShipWindow::act_goto, this));
+		exp_mid->add(m_btn_scout_w, 0, false);
+
+		m_btn_construct_port =
+			make_button
+				(exp_mid, "buildport", _("Construct a port at the current location"), pic_construct_port,
+				 boost::bind(&ShipWindow::act_goto, this));
+		exp_mid->add(m_btn_construct_port, 0, false);
+
+		m_btn_scout_e =
+			make_button
+				(exp_mid, "scne", _("Scout towards the east"), pic_scout_e,
+				 boost::bind(&ShipWindow::act_goto, this));
+		exp_mid->add(m_btn_scout_e, 0, false);
+
+		m_btn_scout_sw =
+			make_button
+				(exp_bot, "scnw", _("Scout towards the south west"), pic_scout_sw,
+				 boost::bind(&ShipWindow::act_goto, this));
+		exp_bot->add(m_btn_scout_sw, 0, false);
+
+		m_btn_explore_island_ccw =
+			make_button
+				(exp_bot, "expccw", _("Explore the island's coast counter clockwise"), pic_explore_ccw,
+				 boost::bind(&ShipWindow::act_goto, this));
+		exp_bot->add(m_btn_explore_island_ccw, 0, false);
+
+		m_btn_scout_se =
+			make_button
+				(exp_bot, "scne", _("Scout towards the south east"), pic_scout_se,
+				 boost::bind(&ShipWindow::act_goto, this));
+		exp_bot->add(m_btn_scout_se, 0, false);
+
+	}
+
+	// Bottom buttons
 	UI::Box * buttons = new UI::Box(vbox, 0, 0, UI::Box::Horizontal);
 	vbox->add(buttons, UI::Box::AlignLeft, false);
 

@@ -1,6 +1,6 @@
 #help=_A sea-worthy ship
 
-capacity=20
+capacity=30
 
 [idle]
 pics=idle_??.png
