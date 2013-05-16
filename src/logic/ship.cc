@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2010-2011 by the Widelands Development Team
+ * Copyright (C) 2010-2013 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -65,7 +65,8 @@ Ship::Ship(const Ship_Descr & gdescr) :
 	Bob(gdescr),
 	m_window(0),
 	m_fleet(0),
-	m_economy(0)
+	m_economy(0),
+	m_ship_state(TRANSPORT)
 {
 }
 
@@ -429,8 +430,8 @@ void Ship::start_task_expedition(Game &) {
 	// way the ship should take until the next event occurs. It will than follow that path until the coords
 	// of the event are reached, or the user cancels the path through a direction change.
 	//
-	// The EXP_WAITING state means, that the an event happend and thus the ship stopped
-	// and waits for a new command. Such an event can be:
+	// The EXP_WAITING state means, that an event happend and thus the ship stopped
+	// and waits for a new command by the owner. An event leading to a EXP_WAITING state can be:
 	// * expedition is ready to start
 	// * new island appeared in vision range (only outer ring of vision range has to be checked due to the
 	//   always ongoing movement.
@@ -439,6 +440,7 @@ void Ship::start_task_expedition(Game &) {
 	//
 	// Following this logic, we set the state to EXP_WAITING and send a message to the player as information,
 	// that a user interaction is needed.
+	m_ship_state = EXP_WAITING;
 #warning send message to player so the player can select in a UI where the ship should move to
 }
 
@@ -469,7 +471,7 @@ Load / Save implementation
 ==============================
 */
 
-#define SHIP_SAVEGAME_VERSION 2
+#define SHIP_SAVEGAME_VERSION 3
 
 Ship::Loader::Loader() :
 	m_lastdock(0),
@@ -488,6 +490,12 @@ void Ship::Loader::load(FileRead & fr, uint8_t version)
 	Bob::Loader::load(fr);
 
 	if (version >= 2) {
+		// The state the ship is in
+		if (version >= 3)
+			m_ship_state = fr.Unsigned8();
+		else
+			m_ship_state = TRANSPORT;
+
 		m_lastdock = fr.Unsigned32();
 		m_destination = fr.Unsigned32();
 
@@ -520,6 +528,10 @@ void Ship::Loader::load_finish()
 	Bob::Loader::load_finish();
 
 	Ship & ship = get<Ship>();
+
+	// restore the state the ship is in
+	ship.m_ship_state = m_ship_state;
+
 	// For robustness, in case our fleet did not get restored from the savegame
 	// for whatever reason
 	if (!ship.m_fleet)
@@ -572,6 +584,8 @@ void Ship::save
 	fw.CString(descr().name());
 
 	Bob::save(egbase, mos, fw);
+
+	fw.Unsigned8(m_ship_state);
 
 	fw.Unsigned32(mos.get_object_file_index_or_zero(m_lastdock.get(egbase)));
 	fw.Unsigned32(mos.get_object_file_index_or_zero(m_destination.get(egbase)));

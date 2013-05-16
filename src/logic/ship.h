@@ -90,6 +90,15 @@ struct Ship : Bob {
 	void show_window(Interactive_GameBase & igb);
 	void close_window();
 
+	enum {
+		TRANSPORT    = 0,
+		EXP_WAITING  = 1,
+		EXP_SCOUTING = 2
+	};
+
+	/// returns the current state the ship is in
+	uint8_t get_ship_state() {return m_ship_state;}
+
 private:
 	friend struct Fleet;
 	friend struct ShipWindow;
@@ -113,6 +122,7 @@ private:
 	OPtr<PortDock> m_lastdock;
 	OPtr<PortDock> m_destination;
 	std::vector<ShippingItem> m_items;
+	uint8_t m_ship_state;
 
 	// saving and loading
 protected:
@@ -128,6 +138,7 @@ protected:
 	private:
 		uint32_t m_lastdock;
 		uint32_t m_destination;
+		uint8_t  m_ship_state;
 		std::vector<ShippingItem::Loader> m_items;
 	};
 

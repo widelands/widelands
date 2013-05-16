@@ -629,7 +629,12 @@ void Fleet::act(Game & game, uint32_t /* data */)
 			bool success = false;
 			container_iterate_const(std::vector<Ship *>, m_ships, shipit) {
 				Ship & ship = **shipit.current;
+				// Check whether ship is in TRANSPORT state
+				if (ship.get_ship_state() != Ship::TRANSPORT)
+					continue;
+
 				PortDock * dst = ship.get_destination(game);
+				// Check if ship has currently a different destination
 				if (dst && dst != &pd)
 					continue;
 				if (ship.get_nritems() >= ship.get_capacity())

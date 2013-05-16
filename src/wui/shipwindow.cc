@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2011 by the Widelands Development Team
+ * Copyright (C) 2011, 2013 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -31,6 +31,15 @@
 
 static const char pic_goto[] = "pics/menu_ship_goto.png";
 static const char pic_destination[] = "pics/menu_ship_destination.png";
+static const char pic_explore_cw[]  = "pics/ship_explore_island_cw.png";
+static const char pic_explore_ccw[] = "pics/ship_explore_island_ccw.png";
+static const char pic_scout_nw[] = "pics/ship_scout_nw.png";
+static const char pic_scout_w[]  = "pics/ship_scout_w.png";
+static const char pic_scout_ne[] = "pics/ship_scout_ne.png";
+static const char pic_scout_e[]  = "pics/ship_scout_e.png";
+static const char pic_scout_se[] = "pics/ship_scout_se.png";
+static const char pic_scout_sw[] = "pics/ship_scout_sw.png";
+static const char pic_construct_port[] = "pics/fsel_editor_set_port_space.png";
 
 namespace Widelands {
 
@@ -59,6 +68,15 @@ private:
 
 	UI::Button * m_btn_goto;
 	UI::Button * m_btn_destination;
+	UI::Button * m_btn_explore_island_cw;
+	UI::Button * m_btn_explore_island_ccw;
+	UI::Button * m_btn_scout_w;
+	UI::Button * m_btn_scout_nw;
+	UI::Button * m_btn_scout_ne;
+	UI::Button * m_btn_scout_e;
+	UI::Button * m_btn_scout_se;
+	UI::Button * m_btn_scout_sw;
+	UI::Button * m_btn_construct_port;
 	ItemWaresDisplay * m_display;
 };
 
