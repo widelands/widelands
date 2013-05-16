@@ -506,7 +506,7 @@ void Cmd_StartStopBuilding::Write
 	PlayerCommand::Write(fw, egbase, mos);
 
 	// Now serial
-	Map_Object const & obj = *egbase.objects().get_object(serial);
+	const Map_Object & obj = *egbase.objects().get_object(serial);
 	fw.Unsigned32(mos.get_object_file_index(obj));
 }
 
@@ -541,14 +541,14 @@ void Cmd_Start_or_Cancel_Expedition::Read
 			uint32_t const building_serial = fr.Unsigned32();
 			try {
 				serial = mol.get<Map_Object>(building_serial).serial();
-			} catch (_wexception const & e) {
+			} catch (const _wexception & e) {
 				throw game_data_error
 					(_("building %u: %s"), building_serial, e.what());
 			}
 		} else
 			throw game_data_error
 				(_("unknown/unhandled version %u"), packet_version);
-	} catch (_wexception const & e) {
+	} catch (const _wexception & e) {
 		throw game_data_error(_("start/stop building: %s"), e.what());
 	}
 }

@@ -373,7 +373,7 @@ void PortDock::start_expedition() {
 	m_start_expedition = true;
 
 	// Load the buildcosts for the port building + builder
-	std::map<Ware_Index, uint8_t> const & buildcost = m_warehouse->descr().buildcost();
+	const std::map<Ware_Index, uint8_t> & buildcost = m_warehouse->descr().buildcost();
 	size_t const buildcost_size = buildcost.size();
 	// Now try to cache all the wares directly from the portdocks warehouse, if they exist.
 	std::vector<WaresQueue *> & l_expedition_wares = m_warehouse->get_wares_queue_vector();
