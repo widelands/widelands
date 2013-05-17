@@ -61,6 +61,9 @@ struct ShipWindow : UI::Window {
 
 	void act_goto();
 	void act_destination();
+	void act_scout_towards(uint8_t);
+	void act_construct_port();
+	void act_explore_island(uint8_t);
 
 private:
 	Interactive_GameBase & m_igbase;
@@ -78,6 +81,17 @@ private:
 	UI::Button * m_btn_scout_se;
 	UI::Button * m_btn_construct_port;
 	ItemWaresDisplay * m_display;
+
+	enum {
+		dir_w,
+		dir_nw,
+		dir_ne,
+		dir_e,
+		dir_se,
+		dir_sw,
+		exp_cw,
+		exp_ccw
+	};
 };
 
 ShipWindow::ShipWindow(Interactive_GameBase & igb, Ship & ship) :
@@ -103,62 +117,61 @@ ShipWindow::ShipWindow(Interactive_GameBase & igb, Ship & ship) :
 		vbox->add(exp_mid, UI::Box::AlignCenter, false);
 		UI::Box * exp_bot = new UI::Box(vbox, 0, 0, UI::Box::Horizontal);
 		vbox->add(exp_bot, UI::Box::AlignCenter, false);
-		UI::Box * spacer = new UI::Box(vbox, 0, 20, UI::Box::Horizontal);
-		vbox->add(spacer, UI::Box::AlignCenter, false);
-		spacer->add_space(20);
+
+		// TODO: Add a spacer between navigation block and bottom buttons?
 
 		m_btn_scout_nw =
 			make_button
 				(exp_top, "scnw", _("Scout towards the north west"), pic_scout_nw,
-				 boost::bind(&ShipWindow::act_goto, this));
+				 boost::bind(&ShipWindow::act_scout_towards, this, dir_nw));
 		exp_top->add(m_btn_scout_nw, 0, false);
 
 		m_btn_explore_island_cw =
 			make_button
 				(exp_top, "expcw", _("Explore the island's coast clockwise"), pic_explore_cw,
-				 boost::bind(&ShipWindow::act_goto, this));
+				 boost::bind(&ShipWindow::act_explore_island, this, exp_cw));
 		exp_top->add(m_btn_explore_island_cw, 0, false);
 
 		m_btn_scout_ne =
 			make_button
 				(exp_top, "scne", _("Scout towards the north east"), pic_scout_ne,
-				 boost::bind(&ShipWindow::act_goto, this));
+				 boost::bind(&ShipWindow::act_scout_towards, this, dir_ne));
 		exp_top->add(m_btn_scout_ne, 0, false);
 
 		m_btn_scout_w =
 			make_button
-				(exp_mid, "scnw", _("Scout towards the west"), pic_scout_w,
-				 boost::bind(&ShipWindow::act_goto, this));
+				(exp_mid, "scw", _("Scout towards the west"), pic_scout_w,
+				 boost::bind(&ShipWindow::act_scout_towards, this, dir_w));
 		exp_mid->add(m_btn_scout_w, 0, false);
 
 		m_btn_construct_port =
 			make_button
 				(exp_mid, "buildport", _("Construct a port at the current location"), pic_construct_port,
-				 boost::bind(&ShipWindow::act_goto, this));
+				 boost::bind(&ShipWindow::act_construct_port, this));
 		exp_mid->add(m_btn_construct_port, 0, false);
 
 		m_btn_scout_e =
 			make_button
-				(exp_mid, "scne", _("Scout towards the east"), pic_scout_e,
-				 boost::bind(&ShipWindow::act_goto, this));
+				(exp_mid, "sce", _("Scout towards the east"), pic_scout_e,
+				 boost::bind(&ShipWindow::act_scout_towards, this, dir_e));
 		exp_mid->add(m_btn_scout_e, 0, false);
 
 		m_btn_scout_sw =
 			make_button
-				(exp_bot, "scnw", _("Scout towards the south west"), pic_scout_sw,
-				 boost::bind(&ShipWindow::act_goto, this));
+				(exp_bot, "scsw", _("Scout towards the south west"), pic_scout_sw,
+				 boost::bind(&ShipWindow::act_scout_towards, this, dir_sw));
 		exp_bot->add(m_btn_scout_sw, 0, false);
 
 		m_btn_explore_island_ccw =
 			make_button
 				(exp_bot, "expccw", _("Explore the island's coast counter clockwise"), pic_explore_ccw,
-				 boost::bind(&ShipWindow::act_goto, this));
+				 boost::bind(&ShipWindow::act_explore_island, this, exp_ccw));
 		exp_bot->add(m_btn_explore_island_ccw, 0, false);
 
 		m_btn_scout_se =
 			make_button
-				(exp_bot, "scne", _("Scout towards the south east"), pic_scout_se,
-				 boost::bind(&ShipWindow::act_goto, this));
+				(exp_bot, "scse", _("Scout towards the south east"), pic_scout_se,
+				 boost::bind(&ShipWindow::act_scout_towards, this, dir_se));
 		exp_bot->add(m_btn_scout_se, 0, false);
 
 	}
@@ -229,16 +242,30 @@ UI::Button * ShipWindow::make_button
 	return btn;
 }
 
+/// Move the main view towards the current ship location
 void ShipWindow::act_goto()
 {
 	m_igbase.move_view_to(m_ship.get_position());
 }
 
+/// Move the main view towards the current destination of the ship
 void ShipWindow::act_destination()
 {
 	if (PortDock * destination = m_ship.get_destination(m_igbase.egbase())) {
 		m_igbase.move_view_to(destination->get_warehouse()->get_position());
 	}
+}
+
+/// Sends a player command to the ship to scout towards a specific direction
+void ShipWindow::act_scout_towards(uint8_t direction) {
+}
+
+/// Constructs a port at the port build space in vision range
+void ShipWindow::act_construct_port() {
+}
+
+/// Explores the island cw or ccw
+void ShipWindow::act_explore_island(uint8_t direction) {
 }
 
 
