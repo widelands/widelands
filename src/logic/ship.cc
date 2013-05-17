@@ -192,72 +192,84 @@ void Ship::ship_update(Game & game, Bob::State & state)
 
 	Map & map = game.map();
 
-	if (PortDock * dst = get_destination(game)) {
-		FCoords position = map.get_fcoords(get_position());
-		if (position.field->get_immovable() == dst) {
-			molog("ship_update: Arrived at dock %u\n", dst->serial());
-			m_lastdock = dst;
-			m_destination = 0;
-			dst->ship_arrived(game, *this);
-			start_task_idle(game, descr().main_animation(), 250);
+	if (m_ship_state == TRANSPORT) {
+		if (PortDock * dst = get_destination(game)) {
+			FCoords position = map.get_fcoords(get_position());
+			if (position.field->get_immovable() == dst) {
+				molog("ship_update: Arrived at dock %u\n", dst->serial());
+				m_lastdock = dst;
+				m_destination = 0;
+				dst->ship_arrived(game, *this);
+				start_task_idle(game, descr().main_animation(), 250);
+				return;
+			}
+
+			molog("ship_update: Go to dock %u\n", dst->serial());
+
+			PortDock * lastdock = m_lastdock.get(game);
+			if (lastdock && lastdock != dst) {
+				molog("ship_update: Have lastdock %u\n", lastdock->serial());
+
+				Path path;
+				if (m_fleet->get_path(*lastdock, *dst, path)) {
+					uint32_t closest_idx = std::numeric_limits<uint32_t>::max();
+					uint32_t closest_dist = std::numeric_limits<uint32_t>::max();
+					Coords closest_target(Coords::Null());
+
+					Coords cur(path.get_start());
+					for (uint32_t idx = 0; idx <= path.get_nsteps(); ++idx) {
+						uint32_t dist = map.calc_distance(get_position(), cur);
+
+						if (dist == 0) {
+							molog("Follow pre-computed path from (%i,%i)  [idx = %u]\n", cur.x, cur.y, idx);
+
+							Path subpath(cur);
+							while (idx < path.get_nsteps()) {
+								subpath.append(map, path[idx]);
+								idx++;
+							}
+
+							start_task_movepath(game, subpath, descr().get_sail_anims());
+							return;
+						}
+
+						if (dist < closest_dist) {
+							closest_dist = dist;
+							closest_idx = idx;
+						}
+
+						if (idx == closest_idx + closest_dist)
+							closest_target = cur;
+
+						if (idx < path.get_nsteps())
+							map.get_neighbour(cur, path[idx], &cur);
+					}
+
+					if (closest_target) {
+						molog("Closest target en route is (%i,%i)\n", closest_target.x, closest_target.y);
+						if (start_task_movepath(game, closest_target, 0, descr().get_sail_anims()))
+							return;
+
+						molog("  Failed to find path!!! Retry full search\n");
+					}
+				}
+
+				m_lastdock = 0;
+			}
+
+			start_task_movetodock(game, *dst);
 			return;
 		}
 
-		molog("ship_update: Go to dock %u\n", dst->serial());
-
-		PortDock * lastdock = m_lastdock.get(game);
-		if (lastdock && lastdock != dst) {
-			molog("ship_update: Have lastdock %u\n", lastdock->serial());
-
-			Path path;
-			if (m_fleet->get_path(*lastdock, *dst, path)) {
-				uint32_t closest_idx = std::numeric_limits<uint32_t>::max();
-				uint32_t closest_dist = std::numeric_limits<uint32_t>::max();
-				Coords closest_target(Coords::Null());
-
-				Coords cur(path.get_start());
-				for (uint32_t idx = 0; idx <= path.get_nsteps(); ++idx) {
-					uint32_t dist = map.calc_distance(get_position(), cur);
-
-					if (dist == 0) {
-						molog("Follow pre-computed path from (%i,%i)  [idx = %u]\n", cur.x, cur.y, idx);
-
-						Path subpath(cur);
-						while (idx < path.get_nsteps()) {
-							subpath.append(map, path[idx]);
-							idx++;
-						}
-
-						start_task_movepath(game, subpath, descr().get_sail_anims());
-						return;
-					}
-
-					if (dist < closest_dist) {
-						closest_dist = dist;
-						closest_idx = idx;
-					}
-
-					if (idx == closest_idx + closest_dist)
-						closest_target = cur;
-
-					if (idx < path.get_nsteps())
-						map.get_neighbour(cur, path[idx], &cur);
-				}
-
-				if (closest_target) {
-					molog("Closest target en route is (%i,%i)\n", closest_target.x, closest_target.y);
-					if (start_task_movepath(game, closest_target, 0, descr().get_sail_anims()))
-						return;
-
-					molog("  Failed to find path!!! Retry full search\n");
-				}
-			}
-
-			m_lastdock = 0;
+	} else { // m_ship_state != TRANSPORT
+		// Update the knowledge of the surrounding fields
+		FCoords position = get_position();
+		for (Direction dir = 1; dir <= LAST_DIRECTION; ++dir) {
+			assert(m_expedition);
+			// the ship fills all fields in the radius of 1, therefore we check the fields in r = 2
+			FCoords node = map.get_neighbour(map.get_neighbour(position, dir), dir);
+			m_expedition->swimable[dir - 1] = node.field->nodecaps() & MOVECAPS_SWIM;
 		}
-
-		start_task_movetodock(game, *dst);
-		return;
 	}
 
 	ship_update_idle(game, state);
@@ -441,6 +453,7 @@ void Ship::start_task_expedition(Game &) {
 	// Following this logic, we set the state to EXP_WAITING and send a message to the player as information,
 	// that a user interaction is needed.
 	m_ship_state = EXP_WAITING;
+	m_expedition = new Expedition;
 #warning send message to player so the player can select in a UI where the ship should move to
 }
 
@@ -491,9 +504,22 @@ void Ship::Loader::load(FileRead & fr, uint8_t version)
 
 	if (version >= 2) {
 		// The state the ship is in
-		if (version >= 3)
+		if (version >= 3) {
 			m_ship_state = fr.Unsigned8();
-		else
+
+			// Expedition specific data
+			if (m_ship_state != TRANSPORT) {
+				m_expedition = new Expedition;
+				// Currently seen port build spaces
+				uint8_t numofports = fr.Unsigned8();
+				m_expedition->seen_port_buildspaces.resize(numofports);
+				for (uint8_t i = 0; i < numofports; ++i)
+					m_expedition->seen_port_buildspaces[i] = fr.Coords32();
+				// Swimability of the directions
+				for (uint8_t i = 0; i < LAST_DIRECTION; ++i)
+					m_expedition->swimable[i] = (fr.Unsigned8() == 1);
+			}
+		} else
 			m_ship_state = TRANSPORT;
 
 		m_lastdock = fr.Unsigned32();
@@ -531,6 +557,12 @@ void Ship::Loader::load_finish()
 
 	// restore the state the ship is in
 	ship.m_ship_state = m_ship_state;
+
+	// if the ship is on an expedition, restore the expedition specific data
+	if (m_expedition)
+		ship.m_expedition = m_expedition;
+	else
+		assert(m_ship_state == TRANSPORT);
 
 	// For robustness, in case our fleet did not get restored from the savegame
 	// for whatever reason
@@ -585,7 +617,19 @@ void Ship::save
 
 	Bob::save(egbase, mos, fw);
 
+	// state the ship is in
 	fw.Unsigned8(m_ship_state);
+
+	// expedition specific data
+	if (m_ship_state != TRANSPORT) {
+		// currently seen port buildspaces
+		fw.Unsigned8(m_expedition->seen_port_buildspaces.size());
+		for (uint8_t i = 0; i < m_expedition->seen_port_buildspaces.size(); ++i)
+			fw.Coords32(m_expedition->seen_port_buildspaces[i]);
+		// swimability of the directions
+		for (uint8_t i = 0; i < LAST_DIRECTION; ++i)
+			fw.Unsigned8(m_expedition->swimable[i] ? 1 : 0);
+	}
 
 	fw.Unsigned32(mos.get_object_file_index_or_zero(m_lastdock.get(egbase)));
 	fw.Unsigned32(mos.get_object_file_index_or_zero(m_destination.get(egbase)));

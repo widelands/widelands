@@ -91,13 +91,22 @@ struct Ship : Bob {
 	void close_window();
 
 	enum {
-		TRANSPORT    = 0,
-		EXP_WAITING  = 1,
-		EXP_SCOUTING = 2
+		TRANSPORT          = 0,
+		EXP_WAITING        = 1,
+		EXP_SCOUTING       = 2,
+		EXP_FOUNDPORTSPACE = 3
 	};
 
-	/// returns the current state the ship is in
+	/// \returns the current state the ship is in
 	uint8_t get_ship_state() {return m_ship_state;}
+
+	/// \returns (in expedition mode only!) whether the next field in direction \arg dir is swimable
+	bool exp_dir_swimable(Direction dir) {
+		if (m_ship_state == TRANSPORT)
+			return false;
+		assert(m_expedition);
+		return m_expedition->swimable[dir - 1];
+	}
 
 private:
 	friend struct Fleet;
@@ -117,12 +126,18 @@ private:
 
 	UI::Window * m_window;
 
-	Fleet * m_fleet;
+	Fleet   * m_fleet;
 	Economy * m_economy;
 	OPtr<PortDock> m_lastdock;
 	OPtr<PortDock> m_destination;
 	std::vector<ShippingItem> m_items;
 	uint8_t m_ship_state;
+
+	struct Expedition {
+		std::vector<Coords> seen_port_buildspaces;
+		bool swimable[LAST_DIRECTION];
+	};
+	Expedition * m_expedition;
 
 	// saving and loading
 protected:
@@ -139,6 +154,7 @@ protected:
 		uint32_t m_lastdock;
 		uint32_t m_destination;
 		uint8_t  m_ship_state;
+		Expedition * m_expedition;
 		std::vector<ShippingItem::Loader> m_items;
 	};
 
