@@ -478,7 +478,7 @@ void TrainingSite::drop_unupgradable_soldiers(Game &)
  */
 void TrainingSite::drop_stalled_soldiers(Game &)
 {
-	Soldier * droplist = NULL;
+	Soldier * soldier_to_drop = NULL;
 	uint32_t highest_soldier_level_seen = 0;
 
 	for (uint32_t i = 0; i < m_soldiers.size(); ++i)
@@ -488,7 +488,7 @@ void TrainingSite::drop_stalled_soldiers(Game &)
 		if (this_soldier_level <= highest_soldier_level_seen)
 		{
 			// Skip the innermost loop for soldiers that would not be kicked out anyway.
-			// level-zero soldiers are excepted implicitely. This is intentional.
+			// level-zero soldiers are excepted from kick-out implicitly. This is intentional.
 			this_soldier_is_safe = true;
 		}
 		else
@@ -527,16 +527,16 @@ void TrainingSite::drop_stalled_soldiers(Game &)
 		if (!this_soldier_is_safe)
 		{
 			// Make this soldier a kick-out candidate
-			droplist = m_soldiers[i];
+			soldier_to_drop = m_soldiers[i];
 			highest_soldier_level_seen = this_soldier_level;
 		}
 	}
 
 	// Finally drop the soldier.
-	if (NULL != droplist)
+	if (NULL != soldier_to_drop)
 		{
 			log("TrainingSite::drop_stalled_soldiers: Kicking somebody out!");
-			dropSoldier (*droplist);
+			dropSoldier (*soldier_to_drop);
 		}
 }
 
@@ -770,7 +770,6 @@ TrainingSite::trainingDone()
 	log("TrainingSite::trainingDone() ");
 	for (it = training_failure_count.begin(); it != training_failure_count.end(); it++)
 	{
-		//if ( type == it->first.first )
 		it->second++;
 		log("%d.%d %3d || ", it->first.first, it->first.second, it->second);
 	}
