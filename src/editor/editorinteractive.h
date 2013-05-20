@@ -65,8 +65,10 @@ public:
 	virtual void set_sel_pos(Widelands::Node_and_Triangle<>);
 	void set_sel_radius_and_update_menu(uint32_t);
 
-	//  gets called when a keyboard event occurs
+	//  Handle UI elements.
 	bool handle_key(bool down, SDL_keysym);
+	bool handle_mousepress(Uint8 btn, int32_t x, int32_t y);
+	bool handle_mouserelease(Uint8 btn, int32_t x, int32_t y);
 
 	struct Tools {
 		Tools()
@@ -140,6 +142,7 @@ private:
 	std::vector<Player_References> m_player_tribe_references;
 
 	int32_t m_realtime;
+	bool m_left_mouse_button_is_down;
 
 	Editor_History m_history;
 
