@@ -180,7 +180,7 @@ m_result         (Failed)
 void
 TrainingSite::init_kick_state(const tAttribute & art, const TrainingSite_Descr & d)
 {
-		// At first, trainingsite kicks very eagerly.
+		// Now with kick-out state saving implemented, initializing is an overkill
 		for (int t = d.get_min_level(art); t <= d.get_max_level(art); t++)
 			trainingAttempted(art, t);
 }
@@ -484,12 +484,15 @@ void TrainingSite::drop_stalled_soldiers(Game &)
 	for (uint32_t i = 0; i < m_soldiers.size(); ++i)
 	{
 		uint32_t this_soldier_level = m_soldiers[i]->get_level(atrTotal);
+		//log("TrainingSite::drop_stalled_soldiers: soldier %2d ", i);
+
 		bool this_soldier_is_safe = false;
 		if (this_soldier_level <= highest_soldier_level_seen)
 		{
 			// Skip the innermost loop for soldiers that would not be kicked out anyway.
 			// level-zero soldiers are excepted from kick-out implicitly. This is intentional.
 			this_soldier_is_safe = true;
+			//log("is a zero-level guy ");
 		}
 		else
 		{
@@ -502,22 +505,28 @@ void TrainingSite::drop_stalled_soldiers(Game &)
 				//  - is not in a stalled state
 				// Check done separately for each art.
 				int32_t level = m_soldiers[i]->get_level(it->attribute);
+				//log ("art %d lvl %d ", it->attribute, level);
 
 				 // Below maximum -check
 				if (level > it->max)
+				{
+					//log ("at max level  ");
 					break;
+				}
 
 				TypeAndLevel_t train_tl(it->attribute, level);
 				TrainFailCount_t::iterator tstep = training_failure_count.find(train_tl);
 				if (tstep ==  training_failure_count.end())
 					{
-						log("TrainingSite::drop_stalled_soldiers: ");
+						log("\nTrainingSite::drop_stalled_soldiers: ");
 						log("training step %d,%d not found in this school!\n", it->attribute, level);
 						break;
 					}
 
+				tstep->second.second = 1; // a soldier is present at this level
+				//log("stall %3d/%3d ", tstep->second.first, max_stall_val);
 				// Stalled state -check
-				if (max_stall_val > tstep->second)
+				if (max_stall_val > tstep->second.first)
 				{
 					this_soldier_is_safe = true;
 					break;
@@ -526,16 +535,19 @@ void TrainingSite::drop_stalled_soldiers(Game &)
 		}
 		if (!this_soldier_is_safe)
 		{
+			//log(" -- unsafe.\n");
 			// Make this soldier a kick-out candidate
 			soldier_to_drop = m_soldiers[i];
 			highest_soldier_level_seen = this_soldier_level;
 		}
+		else
+			//log(" -- safe.\n");
 	}
 
 	// Finally drop the soldier.
 	if (NULL != soldier_to_drop)
 		{
-			log("TrainingSite::drop_stalled_soldiers: Kicking somebody out!");
+			log("TrainingSite::drop_stalled_soldiers: Kicking somebody out.\n");
 			dropSoldier (*soldier_to_drop);
 		}
 }
@@ -747,9 +759,9 @@ TrainingSite::trainingAttempted(uint32_t type, uint32_t level)
 	{
 	        TypeAndLevel_t key(type, level);
 		if (training_failure_count.find(key) == training_failure_count.end())
-			training_failure_count[key]  =  max_stall_val;
+			training_failure_count[key]  = std::make_pair(training_state_multiplier, 0);
 		else
-			training_failure_count[key] +=  training_state_multiplier;
+			training_failure_count[key].first +=  training_state_multiplier;
 	}
 
 /**
@@ -760,7 +772,8 @@ void
 TrainingSite::trainingSuccessful(uint32_t type, uint32_t level)
 {
 	TypeAndLevel_t key(type, level);
-	training_failure_count[key] = 0;
+	// Here I assume that key exists: training has been attempted before it can succeed.
+	training_failure_count[key].first = 0;
 }
 
 void
@@ -770,8 +783,13 @@ TrainingSite::trainingDone()
 	log("TrainingSite::trainingDone() ");
 	for (it = training_failure_count.begin(); it != training_failure_count.end(); it++)
 	{
-		it->second++;
-		log("%d.%d %3d || ", it->first.first, it->first.second, it->second);
+		// If a soldier is present at this training level, deteoriate
+		if (it->second.second)
+			it->second.first++;
+		else // If no soldier, let's become optimistic
+		if (0 < it->second.first)
+			it->second.first--;
+		log("%d.%d %3d || ", it->first.first, it->first.second, it->second.first);
 	}
 	log(" / %3d\n", max_stall_val);
 }

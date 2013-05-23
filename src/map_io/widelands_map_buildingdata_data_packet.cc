@@ -59,7 +59,7 @@ namespace Widelands {
 #define CURRENT_WAREHOUSE_PACKET_VERSION        6
 #define CURRENT_MILITARYSITE_PACKET_VERSION     3
 #define CURRENT_PRODUCTIONSITE_PACKET_VERSION   5
-#define CURRENT_TRAININGSITE_PACKET_VERSION     3
+#define CURRENT_TRAININGSITE_PACKET_VERSION     4
 
 
 void Map_Buildingdata_Data_Packet::Read
@@ -1069,6 +1069,18 @@ void Map_Buildingdata_Data_Packet::read_trainingsite
 					fr.Signed32();
 				}
 			}
+			// load premature kick-out state (forum thread 978)
+			uint16_t mapsize = fr.Unsigned16();
+			while (mapsize)
+			{
+				uint16_t traintype  = fr.Unsigned16();
+				uint16_t trainlevel = fr.Unsigned16();
+				uint16_t trainstall = fr.Unsigned16();
+				uint16_t spresence  = fr.Unsigned8();
+				mapsize--;
+				std::pair<uint16_t, uint8_t> t = std::make_pair(trainstall, spresence);
+				trainingsite.training_failure_count[std::make_pair(traintype, trainlevel)] = t;
+			}
 		} else
 			throw game_data_error
 				(_("unknown/unhandled version %u"), trainingsite_packet_version);
@@ -1503,6 +1515,20 @@ void Map_Buildingdata_Data_Packet::write_trainingsite
 		fw.Unsigned8(upgrade.credit);
 		fw.Signed32(upgrade.lastattempt);
 		fw.Signed8(upgrade.lastsuccess);
+	}
+	if (255 < trainingsite.training_failure_count.size())
+		log
+("Save TrainingSite: Failure counter has ridiculously many entries! (%ld)\n",
+			trainingsite.training_failure_count.size());
+	fw.Unsigned16(static_cast<uint16_t> (trainingsite.training_failure_count.size()));
+	for
+(TrainingSite::TrainFailCount_t::const_iterator i = trainingsite.training_failure_count.begin();
+		i != trainingsite.training_failure_count.end(); i++)
+	{
+		fw.Unsigned16(i->first.first);
+		fw.Unsigned16(i->first.second);
+		fw.Unsigned16(i->second.first);
+		fw.Unsigned8(i->second.second);
 	}
 
 	// DONE
