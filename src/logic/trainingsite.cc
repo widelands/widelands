@@ -484,7 +484,6 @@ void TrainingSite::drop_stalled_soldiers(Game &)
 	for (uint32_t i = 0; i < m_soldiers.size(); ++i)
 	{
 		uint32_t this_soldier_level = m_soldiers[i]->get_level(atrTotal);
-		//log("TrainingSite::drop_stalled_soldiers: soldier %2d ", i);
 
 		bool this_soldier_is_safe = false;
 		if (this_soldier_level <= highest_soldier_level_seen)
@@ -492,7 +491,6 @@ void TrainingSite::drop_stalled_soldiers(Game &)
 			// Skip the innermost loop for soldiers that would not be kicked out anyway.
 			// level-zero soldiers are excepted from kick-out implicitly. This is intentional.
 			this_soldier_is_safe = true;
-			//log("is a zero-level guy ");
 		}
 		else
 		{
@@ -505,12 +503,10 @@ void TrainingSite::drop_stalled_soldiers(Game &)
 				//  - is not in a stalled state
 				// Check done separately for each art.
 				int32_t level = m_soldiers[i]->get_level(it->attribute);
-				//log ("art %d lvl %d ", it->attribute, level);
 
 				 // Below maximum -check
 				if (level > it->max)
 				{
-					//log ("at max level  ");
 					break;
 				}
 
@@ -524,7 +520,7 @@ void TrainingSite::drop_stalled_soldiers(Game &)
 					}
 
 				tstep->second.second = 1; // a soldier is present at this level
-				//log("stall %3d/%3d ", tstep->second.first, max_stall_val);
+
 				// Stalled state -check
 				if (max_stall_val > tstep->second.first)
 				{
@@ -535,13 +531,10 @@ void TrainingSite::drop_stalled_soldiers(Game &)
 		}
 		if (!this_soldier_is_safe)
 		{
-			//log(" -- unsafe.\n");
 			// Make this soldier a kick-out candidate
 			soldier_to_drop = m_soldiers[i];
 			highest_soldier_level_seen = this_soldier_level;
 		}
-		else
-			//log(" -- safe.\n");
 	}
 
 	// Finally drop the soldier.
@@ -785,7 +778,10 @@ TrainingSite::trainingDone()
 	{
 		// If a soldier is present at this training level, deteoriate
 		if (it->second.second)
+		{
 			it->second.first++;
+			it->second.second=0;
+		}
 		else // If no soldier, let's become optimistic
 		if (0 < it->second.first)
 			it->second.first--;
