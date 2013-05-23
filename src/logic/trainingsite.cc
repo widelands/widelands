@@ -780,7 +780,7 @@ TrainingSite::trainingDone()
 		if (it->second.second)
 		{
 			it->second.first++;
-			it->second.second=0;
+			it->second.second = 0;
 		}
 		else // If no soldier, let's become optimistic
 		if (0 < it->second.first)
