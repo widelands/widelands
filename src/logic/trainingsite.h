@@ -46,6 +46,7 @@ struct TrainingSite_Descr : public ProductionSite_Descr {
 
 	int32_t get_min_level(tAttribute) const;
 	int32_t get_max_level(tAttribute) const;
+	int32_t get_max_stall() const;
 private:
 	//  FIXME These variables should be per soldier type. They should be in a
 	//  FIXME struct and there should be a vector, indexed by Soldier_Index,
@@ -53,6 +54,8 @@ private:
 
 	/** Maximum number of soldiers for a training site*/
 	uint32_t m_num_soldiers;
+	/** Number of rounds w/o successful training, after which a soldier is kicked out.**/
+	uint32_t m_max_stall;
 	/** Whether this site can train hitpoints*/
 	bool m_train_hp;
 	/** Whether this site can train attack*/
@@ -107,6 +110,7 @@ class TrainingSite : public ProductionSite, public SoldierControl {
 
 		// whether the last attempt in this upgrade category was successful
 		bool lastsuccess;
+		uint32_t failures;
 	};
 
 public:
@@ -149,6 +153,11 @@ public:
 	int32_t get_pri(enum tAttribute atr);
 	void set_pri(enum tAttribute atr, int32_t prio);
 
+	// These are for premature soldier kick-out
+	void trainingAttempted(uint32_t type, uint32_t level);
+	void trainingSuccessful(uint32_t type, uint32_t level);
+	void trainingDone();
+
 
 protected:
 	virtual void create_options_window
@@ -166,6 +175,7 @@ private:
 	void calc_upgrades();
 
 	void drop_unupgradable_soldiers(Game &);
+	void drop_stalled_soldiers(Game &);
 	Upgrade * get_upgrade(tAttribute);
 
 private:
@@ -190,6 +200,19 @@ private:
 	Upgrade * m_current_upgrade;
 
 	Program_Result m_result; /// The result of the last training program.
+
+	// These are used for kicking out soldiers prematurely
+	static const uint32_t training_state_multiplier = 12;
+	// Unuque key to address each training level of each war art
+	typedef std::pair<uint16_t, uint16_t> TypeAndLevel_t;
+	// First entry is the "stallness", second is a bool
+	typedef std::pair<uint16_t, uint8_t> FailAndPresence_t; // first might wrap in a long play..
+	typedef std::map<TypeAndLevel_t, FailAndPresence_t> TrainFailCount_t;
+	TrainFailCount_t training_failure_count;
+	uint32_t max_stall_val;
+	void init_kick_state(const tAttribute&, const TrainingSite_Descr&);
+
+
 };
 
 }
