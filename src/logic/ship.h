@@ -108,6 +108,14 @@ struct Ship : Bob {
 		return m_expedition->swimable[dir - 1];
 	}
 
+	/// \returns (in expedition mode only!) the list of currently seen port build spaces
+	std::vector<Coords> exp_port_spaces() {
+		if (m_ship_state == TRANSPORT)
+			return std::vector<Coords>();
+		assert(m_expedition);
+		return m_expedition->seen_port_buildspaces;
+	}
+
 private:
 	friend struct Fleet;
 	friend struct ShipWindow;

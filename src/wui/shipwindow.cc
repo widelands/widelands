@@ -63,7 +63,7 @@ struct ShipWindow : UI::Window {
 	void act_destination();
 	void act_scout_towards(uint8_t);
 	void act_construct_port();
-	void act_explore_island(uint8_t);
+	void act_explore_island(bool);
 
 private:
 	Interactive_GameBase & m_igbase;
@@ -76,11 +76,6 @@ private:
 	UI::Button * m_btn_scout[LAST_DIRECTION]; // format: DIRECTION - 1, as 0 is normally the current location.
 	UI::Button * m_btn_construct_port;
 	ItemWaresDisplay * m_display;
-
-	enum {
-		exp_cw,
-		exp_ccw
-	};
 };
 
 ShipWindow::ShipWindow(Interactive_GameBase & igb, Ship & ship) :
@@ -118,7 +113,7 @@ ShipWindow::ShipWindow(Interactive_GameBase & igb, Ship & ship) :
 		m_btn_explore_island_cw =
 			make_button
 				(exp_top, "expcw", _("Explore the island's coast clockwise"), pic_explore_cw,
-				 boost::bind(&ShipWindow::act_explore_island, this, exp_cw));
+				 boost::bind(&ShipWindow::act_explore_island, this, true));
 		exp_top->add(m_btn_explore_island_cw, 0, false);
 
 		m_btn_scout[WALK_NE - 1] =
@@ -154,7 +149,7 @@ ShipWindow::ShipWindow(Interactive_GameBase & igb, Ship & ship) :
 		m_btn_explore_island_ccw =
 			make_button
 				(exp_bot, "expccw", _("Explore the island's coast counter clockwise"), pic_explore_ccw,
-				 boost::bind(&ShipWindow::act_explore_island, this, exp_ccw));
+				 boost::bind(&ShipWindow::act_explore_island, this, false));
 		exp_bot->add(m_btn_explore_island_ccw, 0, false);
 
 		m_btn_scout[WALK_SE - 1] =
@@ -269,17 +264,30 @@ void ShipWindow::act_destination()
 
 /// Sends a player command to the ship to scout towards a specific direction
 void ShipWindow::act_scout_towards(uint8_t direction) {
-#warning not yet implemented
+	// ignore request if the direction is not swimable at all
+	if (!m_ship.exp_dir_swimable(direction - 1))
+		return;
+	m_igbase.game().send_player_ship_scout_direction(m_ship, direction);
 }
 
 /// Constructs a port at the port build space in vision range
 void ShipWindow::act_construct_port() {
-#warning not yet implemented
+	if (m_ship.exp_port_spaces().empty())
+		return;
+	m_igbase.game().send_player_ship_construct_port(m_ship, m_ship.exp_port_spaces()[0]);
+	die();
 }
 
 /// Explores the island cw or ccw
-void ShipWindow::act_explore_island(uint8_t direction) {
-#warning not yet implemented
+void ShipWindow::act_explore_island(bool cw) {
+	bool coast_nearby = false;
+	for (Direction dir = 1; (dir <= LAST_DIRECTION) && !coast_nearby; ++dir) {
+		if (m_ship.exp_dir_swimable(dir))
+			coast_nearby = true;
+	}
+	if (!coast_nearby)
+		return;
+	m_igbase.game().send_player_ship_explore_island(m_ship, cw);
 }
 
 

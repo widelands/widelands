@@ -153,7 +153,7 @@ private:
 	char                       * steps;
 };
 
-struct Cmd_FlagAction:public PlayerCommand {
+struct Cmd_FlagAction : public PlayerCommand {
 	Cmd_FlagAction() : PlayerCommand(), serial(0) {} // For savegame loading
 	Cmd_FlagAction (const int32_t t, const int32_t p, const Flag & f) :
 		PlayerCommand(t, p), serial(f.serial())
@@ -194,18 +194,18 @@ private:
 	Serial serial;
 };
 
-struct Cmd_Start_or_Cancel_Expedition : public PlayerCommand {
-	Cmd_Start_or_Cancel_Expedition() : PlayerCommand() {} // For savegame loading
-	Cmd_Start_or_Cancel_Expedition (int32_t const t, Player_Number const p, Building & b)
+struct Cmd_StartOrCancelExpedition : public PlayerCommand {
+	Cmd_StartOrCancelExpedition() : PlayerCommand() {} // For savegame loading
+	Cmd_StartOrCancelExpedition (int32_t const t, Player_Number const p, Building & b)
 		: PlayerCommand(t, p), serial(b.serial())
 	{}
 
 	void Write(FileWrite &, Editor_Game_Base &, Map_Map_Object_Saver  &);
 	void Read (FileRead  &, Editor_Game_Base &, Map_Map_Object_Loader &);
 
-	virtual uint8_t id() const {return QUEUE_CMD_EXPEDITION;}
+	virtual uint8_t id() const {return QUEUE_CMD_PORT_START_EXPEDITION;}
 
-	Cmd_Start_or_Cancel_Expedition (StreamRead &);
+	Cmd_StartOrCancelExpedition (StreamRead &);
 
 	virtual void execute (Game &);
 	virtual void serialize (StreamWrite &);
@@ -284,6 +284,72 @@ struct Cmd_EvictWorker : public PlayerCommand {
 
 private:
 	Serial serial;
+};
+
+struct Cmd_ShipScoutDirection : public PlayerCommand {
+	Cmd_ShipScoutDirection() : PlayerCommand(), serial(0) {} // For savegame loading
+	Cmd_ShipScoutDirection
+		(int32_t const t, Player_Number const p, Serial s, uint8_t direction)
+		: PlayerCommand(t, p), serial(s), dir(direction)
+	{}
+
+	void Write(FileWrite &, Editor_Game_Base &, Map_Map_Object_Saver  &);
+	void Read (FileRead  &, Editor_Game_Base &, Map_Map_Object_Loader &);
+
+	virtual uint8_t id() const {return QUEUE_CMD_SHIP_SCOUT;}
+
+	Cmd_ShipScoutDirection (StreamRead &);
+
+	virtual void execute (Game &);
+	virtual void serialize (StreamWrite &);
+
+private:
+	Serial serial;
+	uint8_t dir;
+};
+
+struct Cmd_ShipConstructPort : public PlayerCommand {
+	Cmd_ShipConstructPort() : PlayerCommand(), serial(0) {} // For savegame loading
+	Cmd_ShipConstructPort
+		(int32_t const t, Player_Number const p, Serial s, Coords c)
+		: PlayerCommand(t, p), serial(s), coords(c)
+	{}
+
+	void Write(FileWrite &, Editor_Game_Base &, Map_Map_Object_Saver  &);
+	void Read (FileRead  &, Editor_Game_Base &, Map_Map_Object_Loader &);
+
+	virtual uint8_t id() const {return QUEUE_CMD_SHIP_CONSTRUCT_PORT;}
+
+	Cmd_ShipConstructPort (StreamRead &);
+
+	virtual void execute (Game &);
+	virtual void serialize (StreamWrite &);
+
+private:
+	Serial serial;
+	Coords coords;
+};
+
+struct Cmd_ShipExploreIsland : public PlayerCommand {
+	Cmd_ShipExploreIsland() : PlayerCommand(), serial(0) {} // For savegame loading
+	Cmd_ShipExploreIsland
+		(int32_t const t, Player_Number const p, Serial s, bool cw)
+		: PlayerCommand(t, p), serial(s), clockwise(cw)
+	{}
+
+	void Write(FileWrite &, Editor_Game_Base &, Map_Map_Object_Saver  &);
+	void Read (FileRead  &, Editor_Game_Base &, Map_Map_Object_Loader &);
+
+	virtual uint8_t id() const {return QUEUE_CMD_SHIP_EXPLORE;}
+
+	Cmd_ShipExploreIsland (StreamRead &);
+
+	virtual void execute (Game &);
+	virtual void serialize (StreamWrite &);
+
+private:
+	Serial serial;
+	bool clockwise;
 };
 
 struct Cmd_SetWarePriority : public PlayerCommand {

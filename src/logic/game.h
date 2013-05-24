@@ -39,6 +39,7 @@ namespace Widelands {
 struct Flag;
 struct Path;
 struct PlayerImmovable;
+struct Ship;
 class TrainingSite;
 
 #define WLGF_SUFFIX ".wgf"
@@ -166,6 +167,10 @@ struct Game : Editor_Game_Base {
 	void send_player_enemyflagaction
 		(const Flag &, Player_Number, uint32_t count, uint8_t retreat);
 	void send_player_changemilitaryconfig(Player_Number, uint8_t);
+
+	void send_player_ship_scout_direction(Ship &, uint8_t);
+	void send_player_ship_construct_port(Ship &, Coords);
+	void send_player_ship_explore_island(Ship &, bool);
 
 	Interactive_Player * get_ipl();
 

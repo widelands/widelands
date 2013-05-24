@@ -40,6 +40,7 @@
 #include "profile/profile.h"
 #include "replay.h"
 #include "scripting/scripting.h"
+#include "ship.h"
 #include "soldier.h"
 #include "sound/sound_handler.h"
 #include "timestring.h"
@@ -775,7 +776,7 @@ void Game::send_player_start_stop_building (Building & building)
 void Game::send_player_start_or_cancel_expedition (Building & building)
 {
 	send_player_command
-		(*new Cmd_Start_or_Cancel_Expedition
+		(*new Cmd_StartOrCancelExpedition
 		 	(get_gametime(), building.owner().player_number(), building));
 }
 
@@ -870,12 +871,33 @@ void Game::send_player_enemyflagaction
 }
 
 
-void Game::send_player_changemilitaryconfig
-	(Player_Number const pid, uint8_t const retreat)
+void Game::send_player_changemilitaryconfig(Player_Number const pid, uint8_t const retreat)
 {
 	send_player_command
 		(*new Cmd_ChangeMilitaryConfig(get_gametime(), pid, retreat));
 }
+
+void Game::send_player_ship_scout_direction(Ship & ship, uint8_t direction)
+{
+	send_player_command
+		(*new Cmd_ShipScoutDirection
+			(get_gametime(), ship.get_economy()->owner().player_number(), ship.serial(), direction));
+}
+
+void Game::send_player_ship_construct_port(Ship & ship, Coords coords)
+{
+	send_player_command
+		(*new Cmd_ShipConstructPort
+			(get_gametime(), ship.get_economy()->owner().player_number(), ship.serial(), coords));
+}
+
+void Game::send_player_ship_explore_island(Ship & ship, bool cw)
+{
+	send_player_command
+		(*new Cmd_ShipExploreIsland
+			(get_gametime(), ship.get_economy()->owner().player_number(), ship.serial(), cw));
+}
+
 
 /**
  * Sample global statistics for the game.

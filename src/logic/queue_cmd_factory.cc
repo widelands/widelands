@@ -45,8 +45,14 @@ GameLogicCommand & Queue_Cmd_Factory::create_correct_queue_command
 		return *new Cmd_FlagAction                ();
 	case QUEUE_CMD_STOPBUILDING:
 		return *new Cmd_StartStopBuilding         ();
-	case QUEUE_CMD_EXPEDITION:
-		return *new Cmd_Start_or_Cancel_Expedition();
+	case QUEUE_CMD_PORT_START_EXPEDITION:
+		return *new Cmd_StartOrCancelExpedition   ();
+	case QUEUE_CMD_SHIP_CONSTRUCT_PORT:
+		return *new Cmd_ShipConstructPort         ();
+	case QUEUE_CMD_SHIP_SCOUT:
+		return *new Cmd_ShipScoutDirection        ();
+	case QUEUE_CMD_SHIP_EXPLORE:
+		return *new Cmd_ShipExploreIsland         ();
 	case QUEUE_CMD_ENHANCEBUILDING:
 		return *new Cmd_EnhanceBuilding           ();
 	case QUEUE_CMD_BULLDOZE:
