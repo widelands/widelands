@@ -1032,7 +1032,12 @@ void Map_Buildingdata_Data_Packet::read_trainingsite
 {
 	try {
 		uint16_t const trainingsite_packet_version = fr.Unsigned16();
-		if (trainingsite_packet_version == CURRENT_TRAININGSITE_PACKET_VERSION)
+
+		bool rel17comp = false; // compatibility with release 17
+		if (4 == CURRENT_TRAININGSITE_PACKET_VERSION && 3 == trainingsite_packet_version)
+			rel17comp = true;
+
+		if (trainingsite_packet_version == CURRENT_TRAININGSITE_PACKET_VERSION or rel17comp)
 		{
 			read_productionsite(trainingsite, fr, game, mol);
 
@@ -1069,17 +1074,20 @@ void Map_Buildingdata_Data_Packet::read_trainingsite
 					fr.Signed32();
 				}
 			}
-			// load premature kick-out state (forum thread 978)
-			uint16_t mapsize = fr.Unsigned16();
-			while (mapsize)
+			// load premature kick-out state, was not in release 17..
+			if (not rel17comp)
 			{
-				uint16_t traintype  = fr.Unsigned16();
-				uint16_t trainlevel = fr.Unsigned16();
-				uint16_t trainstall = fr.Unsigned16();
-				uint16_t spresence  = fr.Unsigned8();
-				mapsize--;
-				std::pair<uint16_t, uint8_t> t = std::make_pair(trainstall, spresence);
-				trainingsite.training_failure_count[std::make_pair(traintype, trainlevel)] = t;
+				uint16_t mapsize = fr.Unsigned16();
+				while (mapsize)
+				{
+					uint16_t traintype  = fr.Unsigned16();
+					uint16_t trainlevel = fr.Unsigned16();
+					uint16_t trainstall = fr.Unsigned16();
+					uint16_t spresence  = fr.Unsigned8();
+					mapsize--;
+					std::pair<uint16_t, uint8_t> t = std::make_pair(trainstall, spresence);
+					trainingsite.training_failure_count[std::make_pair(traintype, trainlevel)] = t;
+				}
 			}
 		} else
 			throw game_data_error
