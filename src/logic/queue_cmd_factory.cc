@@ -97,6 +97,8 @@ GameLogicCommand & Queue_Cmd_Factory::create_correct_queue_command
 		return *new Cmd_SetWareMaxFill            ();
 	case QUEUE_CMD_DISMANTLEBUILDING:
 		return *new Cmd_DismantleBuilding         ();
+	case QUEUE_CMD_EVICTWORKER:
+		return *new Cmd_EvictWorker();
 	default:
 		throw wexception("Unknown Queue_Cmd_Id in file: %u", id);
 	}

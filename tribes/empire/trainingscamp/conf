@@ -1,5 +1,6 @@
 size=big
 soldier_capacity=12
+trainer_patience=12
 
 [buildcost]
 trunk=2

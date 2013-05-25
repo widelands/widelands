@@ -404,7 +404,7 @@ uint32_t Soldier::get_level(tAttribute const at) const {
 	case atrTotal:
 		return m_hp_level + m_attack_level + m_defense_level + m_evade_level;
 	default:
-		throw wexception ("Soldier::get_level attribute not identified.");
+		throw wexception ("Soldier::get_level attribute %d not identified.", at);
 	}
 }
 
