@@ -29,13 +29,10 @@
 
 namespace Widelands {
 
-#define CURRENT_PACKET_VERSION 1
-
 Game_Map_Data_Packet::~Game_Map_Data_Packet() {
 	delete m_wms;
 	delete m_wml;
 }
-
 
 void Game_Map_Data_Packet::Read
 	(FileSystem & fs, Game & game, Map_Map_Object_Loader * const)

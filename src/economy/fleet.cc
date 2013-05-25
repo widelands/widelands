@@ -245,7 +245,7 @@ void Fleet::cleanup(Editor_Game_Base & egbase)
 		m_ports.pop_back();
 
 		pd->set_fleet(0);
-		if (!m_ports.empty()) {
+		if (!m_ports.empty() && !m_ships.empty()) {
 			// This is required when, during end-of-game cleanup,
 			// the fleet gets removed before the ports
 			Flag & base = m_ports[0]->base_flag();

@@ -94,7 +94,9 @@ template <typename Base> struct basic_FileWrite : public Base {
 				maxsize += 4096;
 				if (maxsize < i + size)
 					maxsize = i + size;
-				data = static_cast<char *>(realloc(data, maxsize));
+				char* new_data = static_cast<char *>(realloc(data, maxsize));
+				assert(new_data);
+				data = new_data;
 			}
 			filelength = i + size;
 		}

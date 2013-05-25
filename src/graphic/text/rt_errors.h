@@ -26,8 +26,7 @@ namespace RT {
 
 class Exception : public std::exception {
 public:
-	Exception(std::string msg) : std::exception() {
-		m_msg = msg;
+	Exception(std::string msg) : std::exception(), m_msg(msg) {
 	}
 	virtual ~Exception() throw () {}
 	virtual const char* what() const throw () {return m_msg.c_str();}

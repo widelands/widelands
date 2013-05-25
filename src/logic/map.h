@@ -132,6 +132,8 @@ struct Map :
 	friend struct MapGenerator;
 	friend struct MapAStarBase;
 
+	typedef std::set<Coords, Coords::ordering_functor> PortSpacesSet;
+
 	enum { // flags for findpath()
 
 		//  use bidirection cost instead of normal cost calculations
@@ -361,7 +363,7 @@ struct Map :
 	/// Port space specific functions
 	bool is_port_space(const Coords& c);
 	void set_port_space(Coords c, bool allowed);
-	const std::set<Coords>& get_port_spaces() {return m_port_spaces;}
+	const PortSpacesSet& get_port_spaces() {return m_port_spaces;}
 	std::vector<Coords> find_portdock(const Widelands::Coords& c) const;
 
 protected: /// These functions are needed in Testclasses
@@ -398,7 +400,7 @@ private:
 	std::vector<std::string> m_scenario_ais;
 	std::vector<bool>        m_scenario_closeables;
 
-	std::set<Coords>        m_port_spaces;
+	PortSpacesSet m_port_spaces;
 
 	Manager<Objective>  m_mom;
 

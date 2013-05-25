@@ -30,7 +30,6 @@
 #define MAX_ELEVATION   (0xffffffff)
 #define MAP_ID_DIGITS   24
 #define ISLAND_BORDER   10
-#define MAX_ELEVATION_3_4  (0xc0000000)
 #define MAX_ELEVATION_HALF (0x80000000)
 
 using boost::scoped_array;

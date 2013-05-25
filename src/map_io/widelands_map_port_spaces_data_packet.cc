@@ -75,7 +75,7 @@ void Map_Port_Spaces_Data_Packet::Write(FileSystem & fs, Editor_Game_Base & egba
 	s1.set_int("packet_version", CURRENT_PACKET_VERSION);
 
 	Map & map = egbase.map();
-	const std::set<Coords>& port_spaces = map.get_port_spaces();
+	const Map::PortSpacesSet& port_spaces = map.get_port_spaces();
 	const uint16_t num = port_spaces.size();
 	char buf[8]; // there won't be that many port spaces... Definitely!
 	s1.set_int("number_of_port_spaces", num);

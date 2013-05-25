@@ -25,7 +25,7 @@
 #include "logic/instances.h"
 
 namespace Widelands {
-struct Economy;
+class Economy;
 struct Game;
 struct Map_Map_Object_Loader;
 struct Map_Map_Object_Loader;

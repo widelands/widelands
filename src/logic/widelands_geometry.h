@@ -49,7 +49,7 @@ struct Coords {
 	/// Returns a special value indicating invalidity.
 	static Coords Null() throw () {return Coords(-1, -1);}
 
-	bool operator== (const Coords & other) const throw () {
+	bool operator== (const Coords& other) const throw () {
 		return x == other.x and y == other.y;
 	}
 	bool operator!= (const Coords & other) const throw () {
@@ -94,10 +94,10 @@ struct Area : public _Coords_type
 		: Coords_type(center), radius(Radius)
 	{}
 
-	bool operator== (Area const other) const throw () {
+	bool operator== (const Area& other) const throw () {
 		return Coords_type::operator== (other) and radius == other.radius;
 	}
-	bool operator!= (Area const other) const throw () {
+	bool operator!= (const Area& other) const throw () {
 		return Coords_type::operator!= (other) or  radius != other.radius;
 	}
 
@@ -110,11 +110,11 @@ template <typename Area_type = Area<> > struct HollowArea : public Area_type {
 		: Area_type(area), hole_radius(Hole_Radius)
 	{}
 
-	bool operator== (HollowArea const other) const throw () {
+	bool operator== (const HollowArea& other) const throw () {
 		return
 			Area_type::operator== (other) and hole_radius == other.hole_radius;
 	}
-	bool operator!= (HollowArea const other) const throw () {
+	bool operator!= (const HollowArea& other) const throw () {
 		return not (*this == other);
 	}
 
@@ -148,10 +148,10 @@ template <typename Coords_type = Coords> struct TCoords : public Coords_type {
 		: Coords_type(C), t(T)
 	{}
 
-	bool operator== (TCoords const other) const throw () {
+	bool operator== (const TCoords& other) const throw () {
 		return Coords_type::operator== (other) and t == other.t;
 	}
-	bool operator!= (TCoords const other) const throw () {
+	bool operator!= (const TCoords& other) const throw () {
 		return Coords_type::operator!= (other) or  t != other.t;
 	}
 
@@ -165,7 +165,7 @@ struct Node_and_Triangle {
 	Node_and_Triangle() throw () {}
 	Node_and_Triangle
 		(const Node_Coords_type              Node,
-		 const TCoords<Triangle_Coords_type> Triangle)
+		 const TCoords<Triangle_Coords_type>& Triangle)
 		throw ()
 			: node(Node), triangle(Triangle)
 	{}

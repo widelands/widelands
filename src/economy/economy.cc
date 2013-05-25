@@ -768,7 +768,7 @@ void Economy::_balance_requestsupply(Game & game)
 	_process_requests(game, rsps);
 
 	//  Now execute request/supply pairs.
-	while (rsps.queue.size()) {
+	while (!rsps.queue.empty()) {
 		RequestSupplyPair rsp = rsps.queue.top();
 
 		rsps.queue.pop();

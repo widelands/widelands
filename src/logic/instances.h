@@ -376,7 +376,9 @@ private:
  * Provides a safe pointer to a Map_Object
  */
 struct Object_Ptr {
-	Object_Ptr(Map_Object * const obj = 0) {m_serial = obj ? obj->m_serial : 0;}
+	// Provide default constructor to shut up cppcheck.
+	Object_Ptr() {m_serial = 0;}
+	Object_Ptr(Map_Object * const obj) {m_serial = obj ? obj->m_serial : 0;}
 	// can use standard copy constructor and assignment operator
 
 	Object_Ptr & operator= (Map_Object * const obj) {

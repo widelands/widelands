@@ -175,10 +175,15 @@ Texture::Texture(const string& fnametmpl, uint32_t frametime, const SDL_PixelFor
 		SDL_Surface * const cv = SDL_ConvertSurface(surf, &fmt, 0);
 
 		// Add the frame
-		m_pixels =
+		uint8_t* new_ptr =
 			static_cast<uint8_t *>
 				(realloc
 				 	(m_pixels, TEXTURE_WIDTH * TEXTURE_HEIGHT * (m_nrframes + 1)));
+		if (!new_ptr)
+			throw wexception("Out of memory.");
+		m_pixels = new_ptr;
+
+
 		m_curframe = &m_pixels[TEXTURE_WIDTH * TEXTURE_HEIGHT * m_nrframes];
 		++m_nrframes;
 
