@@ -457,6 +457,24 @@ void Ship::start_task_expedition(Game &) {
 #warning send message to player so the player can select in a UI where the ship should move to
 }
 
+/// Initializes / changes the direction of scouting to @arg direction
+/// @note only called via player command
+void Ship::exp_scout_direction(Game & game, uint8_t direction) {
+#warning not yet implemented
+}
+
+/// Initializes the construction of a port at @arg c
+/// @note only called via player command
+void Ship::exp_construct_port (Game & game, Coords c) {
+#warning not yet implemented
+}
+
+/// Initializes / changes the direction the island exploration in @arg clockwise direction
+/// @note only called via player command
+void Ship::exp_explore_island (Game & game, bool clockwise) {
+#warning not yet implemented
+}
+
 void Ship::log_general_info(const Editor_Game_Base & egbase)
 {
 	Bob::log_general_info(egbase);

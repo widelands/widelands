@@ -30,6 +30,7 @@
 #include "game.h"
 #include "instances.h"
 #include "player.h"
+#include "ship.h"
 #include "soldier.h"
 #include "tribe.h"
 #include "widelands_fileread.h"
@@ -749,7 +750,10 @@ Cmd_ShipScoutDirection::Cmd_ShipScoutDirection (StreamRead& des) :
 
 void Cmd_ShipScoutDirection::execute (Game & game)
 {
-# warning not yet implemented
+	upcast(Ship, ship, game.objects().get_object(serial));
+	if (ship && ship->get_economy()->owner().player_number() == sender()) {
+		ship->exp_scout_direction(game, dir);
+	}
 }
 
 void Cmd_ShipScoutDirection::serialize (StreamWrite & ser)
@@ -809,7 +813,10 @@ Cmd_ShipConstructPort::Cmd_ShipConstructPort (StreamRead& des) :
 
 void Cmd_ShipConstructPort::execute (Game & game)
 {
-# warning not yet implemented
+	upcast(Ship, ship, game.objects().get_object(serial));
+	if (ship && ship->get_economy()->owner().player_number() == sender()) {
+		ship->exp_construct_port(game, coords);
+	}
 }
 
 void Cmd_ShipConstructPort::serialize (StreamWrite & ser)
@@ -869,7 +876,10 @@ Cmd_ShipExploreIsland::Cmd_ShipExploreIsland (StreamRead& des) :
 
 void Cmd_ShipExploreIsland::execute (Game & game)
 {
-# warning not yet implemented
+	upcast(Ship, ship, game.objects().get_object(serial));
+	if (ship && ship->get_economy()->owner().player_number() == sender()) {
+		ship->exp_explore_island(game, clockwise);
+	}
 }
 
 void Cmd_ShipExploreIsland::serialize (StreamWrite & ser)

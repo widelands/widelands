@@ -116,6 +116,10 @@ struct Ship : Bob {
 		return m_expedition->seen_port_buildspaces;
 	}
 
+	void exp_scout_direction(Game &, uint8_t);
+	void exp_construct_port (Game &, Coords);
+	void exp_explore_island (Game &, bool);
+
 private:
 	friend struct Fleet;
 	friend struct ShipWindow;
