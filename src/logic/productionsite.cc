@@ -467,19 +467,22 @@ int ProductionSite::warp_worker
 void ProductionSite::remove_worker(Worker & w)
 {
 	molog("%s leaving\n", w.descname().c_str());
-	Working_Position * current = m_working_positions;
-	for
-		(Working_Position * const end = current + descr().nr_working_positions();
-		 current < end;
-		 ++current)
-		if (current->worker == &w) {
-			*current =
-				Working_Position
-					(&request_worker
-					 	(descr().tribe().worker_index(w.name().c_str())),
-					 0);
-			break;
+	Working_Position * wp = m_working_positions;
+
+	container_iterate_const(Ware_Types, descr().working_positions(), i) {
+		Ware_Index const worker_index = i.current->first;
+		for (uint32_t j = i.current->second; j; --j, ++wp) {
+			Worker * const worker = wp->worker;
+			if (worker && worker == &w) {
+				// do not request the type of worker that is currently assigned - maybe a trained worker was
+				// evicted to make place for a level 0 worker.
+				// Therefore we again request the worker from the Working_Position of descr()
+				*wp = Working_Position(&request_worker(worker_index), 0);
+				Building::remove_worker(w);
+				return;
+			}
 		}
+	}
 
 	Building::remove_worker(w);
 }
