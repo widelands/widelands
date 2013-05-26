@@ -1,6 +1,7 @@
 #help=_A sea-worthy ship
 
 capacity=30
+vision_range=4
 
 [idle]
 pics=ship_i_??.png

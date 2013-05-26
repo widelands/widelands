@@ -28,6 +28,7 @@
 #include "mapastar.h"
 #include "map_io/widelands_map_map_object_loader.h"
 #include "map_io/widelands_map_map_object_saver.h"
+#include "mapregion.h"
 #include "path.h"
 #include "tribe.h"
 #include "warehouse.h"
@@ -47,7 +48,8 @@ Ship_Descr::Ship_Descr
 		 (name() + "_sail_??").c_str(),
 		 prof.get_section("sail"));
 
-	m_capacity = global_s.get_natural("capacity", 20);
+	m_capacity     = global_s.get_natural("capacity", 20);
+	m_vision_range = global_s.get_natural("vision_range", 7);
 }
 
 uint32_t Ship_Descr::movecaps() const throw ()
@@ -270,6 +272,42 @@ void Ship::ship_update(Game & game, Bob::State & state)
 			FCoords node = map.get_neighbour(map.get_neighbour(position, dir), dir);
 			m_expedition->swimable[dir - 1] = node.field->nodecaps() & MOVECAPS_SWIM;
 		}
+
+		if (m_ship_state == EXP_SCOUTING) {
+			// Check surrounding fields for port buildspaces
+			std::list<Coords> * temp_port_buildspaces = new std::list<Coords>();
+			Widelands::MapRegion<Widelands::Area<Widelands::Coords> > mr
+				(map, Widelands::Area<Widelands::Coords>(position, vision_range()));
+			bool new_port_space = false;
+			do {
+				if (map.is_port_space(mr.location())) {
+					#warning check if port space is already occupied by a player immovable
+					bool pbs_saved = false;
+					for
+						(std::list<Coords>::const_iterator it = m_expedition->seen_port_buildspaces->begin();
+						 it != m_expedition->seen_port_buildspaces->end() && !pbs_saved;
+						 ++it)
+					{
+						// Check if the ship knows this port space already from its last check
+						if (*it == mr.location()) {
+							temp_port_buildspaces->push_back(mr.location());
+							pbs_saved = true;
+						}
+					}
+					if (!pbs_saved) {
+						new_port_space = true;
+						temp_port_buildspaces->push_front(mr.location());
+					}
+				}
+			} while (mr.advance(map));
+
+			if (new_port_space) {
+				m_ship_state = EXP_FOUNDPORTSPACE;
+				#warning inform player, that a new port buildspace was found
+			}
+			delete m_expedition->seen_port_buildspaces;
+			m_expedition->seen_port_buildspaces = temp_port_buildspaces;
+		}
 	}
 
 	ship_update_idle(game, state);
@@ -286,77 +324,112 @@ void Ship::ship_update_idle(Game & game, Bob::State & state)
 		return;
 	}
 
-	// Check if we should move away from ships and shores
-	FCoords position = get_position();
-	Map & map = game.map();
-	unsigned int dirs[LAST_DIRECTION + 1];
-	unsigned int dirmax = 0;
+	// If we are waiting for the next transport job, check if we should move away from ships and shores
+	switch (m_ship_state) {
+		case TRANSPORT: {
+			FCoords position = get_position();
+			Map & map = game.map();
+			unsigned int dirs[LAST_DIRECTION + 1];
+			unsigned int dirmax = 0;
 
-	for (Direction dir = 0; dir <= LAST_DIRECTION; ++dir) {
-		FCoords node = dir ? map.get_neighbour(position, dir) : position;
-		dirs[dir] = node.field->nodecaps() & MOVECAPS_WALK ? 10 : 0;
+			for (Direction dir = 0; dir <= LAST_DIRECTION; ++dir) {
+				FCoords node = dir ? map.get_neighbour(position, dir) : position;
+				dirs[dir] = node.field->nodecaps() & MOVECAPS_WALK ? 10 : 0;
 
-		Area<FCoords> area(node, 0);
-		std::vector<Bob *> ships;
-		game.map().find_bobs(area, &ships, FindBobShip());
+				Area<FCoords> area(node, 0);
+				std::vector<Bob *> ships;
+				game.map().find_bobs(area, &ships, FindBobShip());
 
-		for (std::vector<Bob *>::const_iterator it = ships.begin(); it != ships.end(); ++it) {
-			if (*it == this)
-				continue;
+				for (std::vector<Bob *>::const_iterator it = ships.begin(); it != ships.end(); ++it) {
+					if (*it == this)
+						continue;
 
-			dirs[dir] += 3;
-		}
+					dirs[dir] += 3;
+				}
 
-		dirmax = std::max(dirmax, dirs[dir]);
-	}
-
-	if (dirmax) {
-		unsigned int prob[LAST_DIRECTION + 1];
-		unsigned int totalprob = 0;
-
-		// The probability for moving into a given direction is also
-		// affected by the "close" directions.
-		for (Direction dir = 0; dir <= LAST_DIRECTION; ++dir) {
-			prob[dir] = 10 * dirmax - 10 * dirs[dir];
-
-			if (dir > 0) {
-				unsigned int delta = std::min(prob[dir], dirs[(dir % 6) + 1] + dirs[1 + ((dir - 1) % 6)]);
-				prob[dir] -= delta;
+				dirmax = std::max(dirmax, dirs[dir]);
 			}
 
-			totalprob += prob[dir];
-		}
+			if (dirmax) {
+				unsigned int prob[LAST_DIRECTION + 1];
+				unsigned int totalprob = 0;
 
-		if (totalprob == 0) {
+				// The probability for moving into a given direction is also
+				// affected by the "close" directions.
+				for (Direction dir = 0; dir <= LAST_DIRECTION; ++dir) {
+					prob[dir] = 10 * dirmax - 10 * dirs[dir];
+
+					if (dir > 0) {
+						unsigned int delta = std::min(prob[dir], dirs[(dir % 6) + 1] + dirs[1 + ((dir - 1) % 6)]);
+						prob[dir] -= delta;
+					}
+
+					totalprob += prob[dir];
+				}
+
+				if (totalprob == 0) {
+					start_task_idle(game, descr().main_animation(), 1500);
+					return;
+				}
+
+				unsigned int rnd = game.logic_rand() % totalprob;
+				Direction dir = 0;
+				while (rnd >= prob[dir]) {
+					rnd -= prob[dir];
+					++dir;
+				}
+
+				if (dir == 0 || dir > LAST_DIRECTION) {
+					start_task_idle(game, descr().main_animation(), 1500);
+					return;
+				}
+
+				FCoords neighbour = map.get_neighbour(position, dir);
+				if (!(neighbour.field->nodecaps() & MOVECAPS_SWIM)) {
+					start_task_idle(game, descr().main_animation(), 1500);
+					return;
+				}
+
+				state.ivar1 = 1;
+				start_task_move(game, dir, descr().get_sail_anims(), false);
+				return;
+			}
+			// No desire to move around, so sleep
+			start_task_idle(game, descr().main_animation(), -1);
+			return;
+		}
+		case EXP_SCOUTING: {
+			FCoords position = get_position();
+			Map & map = game.map();
+			if (m_expedition->island_exploration) {
+				// Exploration of the island
+				#warning exploration of islands not yet implemented
+				return;
+			} else {
+				// scouting towards a specific direction
+				if (exp_dir_swimable(m_expedition->direction)) {
+					// the scouting direction is still free to move
+					state.ivar1 = 1;
+					start_task_move(game, m_expedition->direction, descr().get_sail_anims(), false);
+					return;
+				} else { // coast reached
+					m_ship_state = EXP_WAITING;
+					start_task_idle(game, descr().main_animation(), 1500);
+					#warning send message, that coast was reached
+					return;
+				}
+			}
+			break;
+		}
+		default: {
+			// wait for input
 			start_task_idle(game, descr().main_animation(), 1500);
 			return;
 		}
-
-		unsigned int rnd = game.logic_rand() % totalprob;
-		Direction dir = 0;
-		while (rnd >= prob[dir]) {
-			rnd -= prob[dir];
-			++dir;
-		}
-
-		if (dir == 0 || dir > LAST_DIRECTION) {
-			start_task_idle(game, descr().main_animation(), 1500);
-			return;
-		}
-
-		FCoords neighbour = map.get_neighbour(position, dir);
-		if (!(neighbour.field->nodecaps() & MOVECAPS_SWIM)) {
-			start_task_idle(game, descr().main_animation(), 1500);
-			return;
-		}
-
-		state.ivar1 = 1;
-		start_task_move(game, dir, descr().get_sail_anims(), false);
-		return;
 	}
 
-	// No desire to move around, so sleep
-	start_task_idle(game, descr().main_animation(), -1);
+	// never here
+	assert (false);
 }
 
 void Ship::set_economy(Game & game, Economy * e)
@@ -454,25 +527,35 @@ void Ship::start_task_expedition(Game &) {
 	// that a user interaction is needed.
 	m_ship_state = EXP_WAITING;
 	m_expedition = new Expedition;
+	m_expedition->seen_port_buildspaces = new std::list<Coords>();
+	m_expedition->island_exploration = false;
+	m_expedition->direction = 0;
 #warning send message to player so the player can select in a UI where the ship should move to
 }
 
 /// Initializes / changes the direction of scouting to @arg direction
 /// @note only called via player command
 void Ship::exp_scout_direction(Game & game, uint8_t direction) {
-#warning not yet implemented
+	assert(m_expedition);
+	m_ship_state = EXP_SCOUTING;
+	m_expedition->direction = direction;
+	m_expedition->island_exploration = false;
 }
 
 /// Initializes the construction of a port at @arg c
 /// @note only called via player command
 void Ship::exp_construct_port (Game & game, Coords c) {
-#warning not yet implemented
+	assert(m_expedition);
+#warning construction of port not yet implemented
 }
 
 /// Initializes / changes the direction the island exploration in @arg clockwise direction
 /// @note only called via player command
 void Ship::exp_explore_island (Game & game, bool clockwise) {
-#warning not yet implemented
+	assert(m_expedition);
+	m_ship_state = EXP_SCOUTING;
+	m_expedition->direction = clockwise ? 1 : 0;
+	m_expedition->island_exploration = true;
 }
 
 void Ship::log_general_info(const Editor_Game_Base & egbase)
@@ -529,13 +612,17 @@ void Ship::Loader::load(FileRead & fr, uint8_t version)
 			if (m_ship_state != TRANSPORT) {
 				m_expedition = new Expedition;
 				// Currently seen port build spaces
+				m_expedition->seen_port_buildspaces = new std::list<Coords>();
 				uint8_t numofports = fr.Unsigned8();
-				m_expedition->seen_port_buildspaces.resize(numofports);
 				for (uint8_t i = 0; i < numofports; ++i)
-					m_expedition->seen_port_buildspaces[i] = fr.Coords32();
+					m_expedition->seen_port_buildspaces->push_back(fr.Coords32());
 				// Swimability of the directions
 				for (uint8_t i = 0; i < LAST_DIRECTION; ++i)
 					m_expedition->swimable[i] = (fr.Unsigned8() == 1);
+				// whether scouting or exploring
+				m_expedition->island_exploration = fr.Unsigned8() == 1;
+				// current direction
+				m_expedition->direction = fr.Unsigned8();
 			}
 		} else
 			m_ship_state = TRANSPORT;
@@ -641,12 +728,22 @@ void Ship::save
 	// expedition specific data
 	if (m_ship_state != TRANSPORT) {
 		// currently seen port buildspaces
-		fw.Unsigned8(m_expedition->seen_port_buildspaces.size());
-		for (uint8_t i = 0; i < m_expedition->seen_port_buildspaces.size(); ++i)
-			fw.Coords32(m_expedition->seen_port_buildspaces[i]);
+		assert(m_expedition->seen_port_buildspaces);
+		fw.Unsigned8(m_expedition->seen_port_buildspaces->size());
+		for
+			(std::list<Coords>::const_iterator it = m_expedition->seen_port_buildspaces->begin();
+			 it != m_expedition->seen_port_buildspaces->end();
+			 ++it)
+		{
+			fw.Coords32(*it);
+		}
 		// swimability of the directions
 		for (uint8_t i = 0; i < LAST_DIRECTION; ++i)
 			fw.Unsigned8(m_expedition->swimable[i] ? 1 : 0);
+		// whether scouting or exploring
+		fw.Unsigned8(m_expedition->island_exploration ? 1 : 0);
+		// current direction
+		fw.Unsigned8(m_expedition->direction);
 	}
 
 	fw.Unsigned32(mos.get_object_file_index_or_zero(m_lastdock.get(egbase)));

@@ -43,12 +43,14 @@ struct Ship_Descr : Bob::Descr {
 	const DirAnimations & get_sail_anims() const {return m_sail_anims;}
 
 	uint32_t get_capacity() const throw () {return m_capacity;}
+	uint32_t vision_range() const throw () {return m_vision_range;}
 
 	virtual Bob & create_object() const;
 
 private:
 	DirAnimations m_sail_anims;
 	uint32_t m_capacity;
+	uint32_t m_vision_range;
 };
 
 /**
@@ -81,6 +83,7 @@ struct Ship : Bob {
 	virtual void log_general_info(const Editor_Game_Base &);
 
 	uint32_t get_capacity() const {return descr().get_capacity();}
+	virtual uint32_t vision_range() const throw () {return descr().vision_range();}
 	uint32_t get_nritems() const {return m_items.size();}
 	const ShippingItem & get_item(uint32_t idx) const {return m_items[idx];}
 
@@ -109,9 +112,9 @@ struct Ship : Bob {
 	}
 
 	/// \returns (in expedition mode only!) the list of currently seen port build spaces
-	std::vector<Coords> exp_port_spaces() {
+	std::list<Coords> * exp_port_spaces() {
 		if (m_ship_state == TRANSPORT)
-			return std::vector<Coords>();
+			return 0;
 		assert(m_expedition);
 		return m_expedition->seen_port_buildspaces;
 	}
@@ -146,8 +149,10 @@ private:
 	uint8_t m_ship_state;
 
 	struct Expedition {
-		std::vector<Coords> seen_port_buildspaces;
+		std::list<Coords> * seen_port_buildspaces;
 		bool swimable[LAST_DIRECTION];
+		bool island_exploration;
+		uint8_t direction;
 	};
 	Expedition * m_expedition;
 

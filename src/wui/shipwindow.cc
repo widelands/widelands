@@ -265,16 +265,16 @@ void ShipWindow::act_destination()
 /// Sends a player command to the ship to scout towards a specific direction
 void ShipWindow::act_scout_towards(uint8_t direction) {
 	// ignore request if the direction is not swimable at all
-	if (!m_ship.exp_dir_swimable(direction - 1))
+	if (!m_ship.exp_dir_swimable(direction))
 		return;
 	m_igbase.game().send_player_ship_scout_direction(m_ship, direction);
 }
 
 /// Constructs a port at the port build space in vision range
 void ShipWindow::act_construct_port() {
-	if (m_ship.exp_port_spaces().empty())
+	if (!m_ship.exp_port_spaces() || m_ship.exp_port_spaces()->empty())
 		return;
-	m_igbase.game().send_player_ship_construct_port(m_ship, m_ship.exp_port_spaces()[0]);
+	m_igbase.game().send_player_ship_construct_port(m_ship, m_ship.exp_port_spaces()->front());
 	die();
 }
 
