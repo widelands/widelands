@@ -258,6 +258,7 @@ m_commandline          (std::map<std::string, std::string>()),
 m_game_type            (NONE),
 journal                (0),
 m_mouse_swapped        (false),
+m_faking_middle_mouse_button(false),
 m_mouse_position       (0, 0),
 m_mouse_locked         (0),
 m_mouse_compensate_warp(0, 0),
@@ -680,39 +681,10 @@ void WLApplication::handle_input(InputCallback const * cb)
 				cb->key(ev.type == SDL_KEYDOWN, ev.key.keysym);
 			}
 			break;
+
 		case SDL_MOUSEBUTTONDOWN:
-			if (cb and cb->mouse_press) {
-				if (m_mouse_swapped) {
-					switch (ev.button.button) {
-					case SDL_BUTTON_LEFT:
-						ev.button.button = SDL_BUTTON_RIGHT;
-						break;
-					case SDL_BUTTON_RIGHT:
-						ev.button.button = SDL_BUTTON_LEFT;
-						break;
-					default:;
-					}
-				}
-				assert(ev.button.state == SDL_PRESSED);
-				cb->mouse_press(ev.button.button, ev.button.x, ev.button.y);
-			}
-			break;
 		case SDL_MOUSEBUTTONUP:
-			if (cb and cb->mouse_release) {
-				if (m_mouse_swapped) {
-					switch (ev.button.button) {
-					case SDL_BUTTON_LEFT:
-						ev.button.button = SDL_BUTTON_RIGHT;
-						break;
-					case SDL_BUTTON_RIGHT:
-						ev.button.button = SDL_BUTTON_LEFT;
-						break;
-					default:;
-					}
-				}
-				assert(ev.button.state == SDL_RELEASED);
-				cb->mouse_release(ev.button.button, ev.button.x, ev.button.y);
-			}
+			_handle_mousebutton(ev, cb);
 			break;
 
 		case SDL_MOUSEMOTION:
@@ -731,6 +703,51 @@ void WLApplication::handle_input(InputCallback const * cb)
 		default:;
 		}
 	}
+}
+
+/*
+ * Capsule repetitive code for mouse buttons
+ */
+void WLApplication::_handle_mousebutton
+	(SDL_Event & ev, InputCallback const * cb)
+{
+		if (m_mouse_swapped) {
+			switch (ev.button.button) {
+				case SDL_BUTTON_LEFT:
+					ev.button.button = SDL_BUTTON_RIGHT;
+					break;
+				case SDL_BUTTON_RIGHT:
+					ev.button.button = SDL_BUTTON_LEFT;
+					break;
+			}
+		}
+
+#ifdef __APPLE__
+		//  On Mac, SDL does middle mouse button emulation (alt+left). This
+		//  interferes with the editor, which is using alt+left click for
+		//  third tool. So if we ever see a middle mouse button on Mac,
+		//  check if any ALT Key is pressed and if, treat it like a left
+		//  mouse button.
+		if
+			(ev.button.button == SDL_BUTTON_MIDDLE and
+			 (get_key_state(SDLK_LALT) || get_key_state(SDLK_RALT)))
+		{
+			ev.button.button = SDL_BUTTON_LEFT;
+			m_faking_middle_mouse_button = true;
+		}
+#endif
+
+		if (ev.type == SDL_MOUSEBUTTONDOWN && cb and cb->mouse_press)
+			cb->mouse_press(ev.button.button, ev.button.x, ev.button.y);
+		else if (ev.type == SDL_MOUSEBUTTONUP) {
+			if (cb and cb->mouse_release) {
+				if (ev.button.button == SDL_BUTTON_MIDDLE and m_faking_middle_mouse_button) {
+					cb->mouse_release(SDL_BUTTON_LEFT, ev.button.x, ev.button.y);
+					m_faking_middle_mouse_button = false;
+				}
+				cb->mouse_release(ev.button.button, ev.button.x, ev.button.y);
+			}
+		}
 }
 
 /**
