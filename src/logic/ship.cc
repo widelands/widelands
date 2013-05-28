@@ -413,14 +413,42 @@ void Ship::ship_update_idle(Game & game, Bob::State & state)
 			return;
 		}
 		case EXP_SCOUTING: {
-			if (m_expedition->island_exploration) {
-				// Exploration of the island
-				// FCoords position = get_position();
-				// Map & map = game.map();
-				#warning exploration of islands not yet implemented
-				return;
-			} else {
-				// scouting towards a specific direction
+			if (m_expedition->island_exploration) { // Exploration of the island
+				if (m_expedition->direction == 0) {
+					m_expedition->direction = m_expedition->clockwise ? WALK_E : WALK_W;
+				} else {
+					// Check whether the island was completely surrounded
+					if (get_position() == m_expedition->exploration_start) {
+						std::string msg_head = _("Island surrounded");
+						std::string msg_body = _("An expedition ship surrounded its island without any events.");
+						send_message(game, "exp_island", msg_head, msg_body, "ship_explore_island_cw.png");
+						m_ship_state = EXP_WAITING;
+						return start_task_idle(game, descr().main_animation(), 1500);
+					}
+				}
+
+				if (m_expedition->clockwise) {
+					if (exp_dir_swimable(m_expedition->direction)) {
+						while (exp_dir_swimable(get_cw_neighbour(m_expedition->direction)))
+							m_expedition->direction = get_cw_neighbour(m_expedition->direction);
+					} else {
+						do {
+							m_expedition->direction = get_ccw_neighbour(m_expedition->direction);
+						} while (!exp_dir_swimable(m_expedition->direction));
+					}
+				} else {
+					if (exp_dir_swimable(m_expedition->direction)) {
+						while (exp_dir_swimable(get_ccw_neighbour(m_expedition->direction)))
+							m_expedition->direction = get_ccw_neighbour(m_expedition->direction);
+					} else {
+						do {
+							m_expedition->direction = get_cw_neighbour(m_expedition->direction);
+						} while (!exp_dir_swimable(m_expedition->direction));
+					}
+				}
+				state.ivar1 = 1;
+				return start_task_move(game, m_expedition->direction, descr().get_sail_anims(), false);
+			} else { // scouting towards a specific direction
 				if (exp_dir_swimable(m_expedition->direction)) {
 					// the scouting direction is still free to move
 					state.ivar1 = 1;
@@ -429,7 +457,11 @@ void Ship::ship_update_idle(Game & game, Bob::State & state)
 				} else { // coast reached
 					m_ship_state = EXP_WAITING;
 					start_task_idle(game, descr().main_animation(), 1500);
-					#warning send message, that coast was reached
+					// Send a message to the player, that a new coast was reached
+					std::string msg_head = _("Coast reached");
+					std::string msg_body =
+						_("An expedition ship reached a coast and is waiting for further commands.");
+					send_message(game, "exp_coast", msg_head, msg_body, "ship_explore_island_cw.png");
 					return;
 				}
 			}
@@ -554,32 +586,17 @@ void Ship::start_task_movetodock(Game & game, PortDock & pd)
 	start_task_idle(game, descr().main_animation(), 5000);
 }
 
-/**
- * Send a message to the player, that an expedition is ready to start.
- */
+/// Prepare everything for the coming exploration
 void Ship::start_task_expedition(Game & game) {
-	// A ship with task expedition can be in four states: EXP_WAITING, EXP_SCOUTING, EXP_FOUNDPORTSPACE
-	// or EXP_COLONIZING in the first states, the owning player of this ship can give direction change commands
-	// to change the direction of the moving ship / send the ship in a direction. Once the ship is on it's way,
-	// it is in EXP_SCOUTING state. in the backend, a click on a direction button leads to the movement towards
-	// that diection until a coast is reached or the user cancels the direction through a direction change.
-	//
-	// The EXP_WAITING state means, that an event happend and thus the ship stopped
-	// and waits for a new command by the owner. An event leading to a EXP_WAITING state can be:
-	// * expedition is ready to start
-	// * new island appeared in vision range (only outer ring of vision range has to be checked due to the
-	//   always ongoing movement.
-	// * island was completely sourrounded
-	//
-	// The EXP_FOUNDPORTSPACE state means, that a port build space was found
-	//
-	// Following this logic, we set the state to EXP_WAITING and send a message to the player as information,
-	// that a user interaction is needed.
+	// Now we are waiting
 	m_ship_state = EXP_WAITING;
+	// Initialize a new, yet empty expedition
 	m_expedition = new Expedition;
 	m_expedition->seen_port_buildspaces = new std::list<Coords>();
 	m_expedition->island_exploration = false;
 	m_expedition->direction = 0;
+	m_expedition->exploration_start = Coords(0, 0);
+	m_expedition->clockwise = false;
 
 	// Send a message to the player, that an expedition is ready to go
 	std::string msg_head = _("Expedition ready");
@@ -609,8 +626,10 @@ void Ship::exp_construct_port (Game &, Coords c) {
 void Ship::exp_explore_island (Game &, bool clockwise) {
 	assert(m_expedition);
 	m_ship_state = EXP_SCOUTING;
-	m_expedition->direction = clockwise ? 1 : 0;
+	m_expedition->clockwise = clockwise;
+	m_expedition->direction = 0;
 	m_expedition->island_exploration = true;
+	m_expedition->exploration_start = get_position();
 }
 
 void Ship::log_general_info(const Editor_Game_Base & egbase)
@@ -711,6 +730,10 @@ void Ship::Loader::load(FileRead & fr, uint8_t version)
 				m_expedition->island_exploration = fr.Unsigned8() == 1;
 				// current direction
 				m_expedition->direction = fr.Unsigned8();
+				// Start coordinates of an island exploration
+				m_expedition->exploration_start = fr.Coords32();
+				// Whether the exploration is done clockwise or counter clockwise
+				m_expedition->clockwise = fr.Unsigned8() == 1;
 			}
 		} else
 			m_ship_state = TRANSPORT;
@@ -832,6 +855,10 @@ void Ship::save
 		fw.Unsigned8(m_expedition->island_exploration ? 1 : 0);
 		// current direction
 		fw.Unsigned8(m_expedition->direction);
+		// Start coordinates of an island exploration
+		fw.Coords32(m_expedition->exploration_start);
+		// Whether the exploration is done clockwise or counter clockwise
+		fw.Unsigned8(m_expedition->clockwise ? 1 : 0);
 	}
 
 	fw.Unsigned32(mos.get_object_file_index_or_zero(m_lastdock.get(egbase)));

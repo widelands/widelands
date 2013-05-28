@@ -87,6 +87,9 @@ PlayerCommand * PlayerCommand::deserialize (StreamRead & des)
 	case PLCMD_FLAGACTION:                return new Cmd_FlagAction               (des);
 	case PLCMD_STARTSTOPBUILDING:         return new Cmd_StartStopBuilding        (des);
 	case PLCMD_SHIP_EXPEDITION:           return new Cmd_StartOrCancelExpedition  (des);
+	case PLCMD_SHIP_SCOUT:                return new Cmd_ShipScoutDirection       (des);
+	case PLCMD_SHIP_EXPLORE:              return new Cmd_ShipExploreIsland        (des);
+	case PLCMD_SHIP_CONSTRUCT:            return new Cmd_ShipConstructPort        (des);
 	case PLCMD_ENHANCEBUILDING:           return new Cmd_EnhanceBuilding          (des);
 	case PLCMD_CHANGETRAININGOPTIONS:     return new Cmd_ChangeTrainingOptions    (des);
 	case PLCMD_DROPSOLDIER:               return new Cmd_DropSoldier              (des);

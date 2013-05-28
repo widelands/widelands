@@ -93,6 +93,21 @@ struct Ship : Bob {
 	void show_window(Interactive_GameBase & igb);
 	void close_window();
 
+	// A ship with task expedition can be in four states: EXP_WAITING, EXP_SCOUTING, EXP_FOUNDPORTSPACE
+	// or EXP_COLONIZING in the first states, the owning player of this ship can give direction change commands
+	// to change the direction of the moving ship / send the ship in a direction. Once the ship is on it's way,
+	// it is in EXP_SCOUTING state. in the backend, a click on a direction button leads to the movement towards
+	// that diection until a coast is reached or the user cancels the direction through a direction change.
+	//
+	// The EXP_WAITING state means, that an event happend and thus the ship stopped
+	// and waits for a new command by the owner. An event leading to a EXP_WAITING state can be:
+	// * expedition is ready to start
+	// * new island appeared in vision range (only outer ring of vision range has to be checked due to the
+	//   always ongoing movement.
+	// * island was completely sourrounded
+	//
+	// The EXP_FOUNDPORTSPACE state means, that a port build space was found
+	//
 	enum {
 		TRANSPORT          = 0,
 		EXP_WAITING        = 1,
@@ -143,6 +158,46 @@ private:
 	void send_message
 		(Game &, const std::string &, const std::string &, const std::string &, const std::string &);
 
+	/// \returns the neighbour direction in clockwise
+	uint8_t get_cw_neighbour(uint8_t dir) {
+		switch (dir) {
+			case WALK_NE:
+				return WALK_E;
+			case WALK_E:
+				return WALK_SE;
+			case WALK_SE:
+				return WALK_SW;
+			case WALK_SW:
+				return WALK_W;
+			case WALK_W:
+				return WALK_NW;
+			case WALK_NW:
+				return WALK_NE;
+			default:
+				return 0;
+		}
+	}
+
+	/// \returns the neighbour direction in counterclockwise
+	uint8_t get_ccw_neighbour(uint8_t dir) {
+		switch (dir) {
+			case WALK_E:
+				return WALK_NE;
+			case WALK_NE:
+				return WALK_NW;
+			case WALK_NW:
+				return WALK_W;
+			case WALK_W:
+				return WALK_SW;
+			case WALK_SW:
+				return WALK_SE;
+			case WALK_SE:
+				return WALK_E;
+			default:
+				return 0;
+		}
+	}
+
 	UI::Window * m_window;
 
 	Fleet   * m_fleet;
@@ -157,6 +212,8 @@ private:
 		bool swimable[LAST_DIRECTION];
 		bool island_exploration;
 		uint8_t direction;
+		Coords exploration_start;
+		bool clockwise;
 	};
 	Expedition * m_expedition;
 
