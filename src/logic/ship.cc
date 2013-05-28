@@ -314,7 +314,10 @@ void Ship::ship_update(Game & game, Bob::State & state)
 
 			if (new_port_space) {
 				m_ship_state = EXP_FOUNDPORTSPACE;
-				#warning inform player, that a new port buildspace was found
+				// Send a message to the player, that a new port space was found
+				std::string msg_head = _("Port space found");
+				std::string msg_body = _("An expedition ship found a new port build space.");
+				send_message(game, "exp_port_space", msg_head, msg_body, "port.png");
 			}
 			delete m_expedition->seen_port_buildspaces;
 			m_expedition->seen_port_buildspaces = temp_port_buildspaces;
@@ -410,10 +413,10 @@ void Ship::ship_update_idle(Game & game, Bob::State & state)
 			return;
 		}
 		case EXP_SCOUTING: {
-			FCoords position = get_position();
-			Map & map = game.map();
 			if (m_expedition->island_exploration) {
 				// Exploration of the island
+				// FCoords position = get_position();
+				// Map & map = game.map();
 				#warning exploration of islands not yet implemented
 				return;
 			} else {
@@ -438,7 +441,7 @@ void Ship::ship_update_idle(Game & game, Bob::State & state)
 			assert(baim);
 			upcast(ConstructionSite, cs, baim);
 
-			for (uint8_t i = m_items.size() - 1; i >= 0; --i) {
+			for (int8_t i = m_items.size() - 1; i >= 0; --i) {
 				WareInstance * ware;
 				Worker * worker;
 				m_items.at(i).get(game, ware, worker);
@@ -554,7 +557,7 @@ void Ship::start_task_movetodock(Game & game, PortDock & pd)
 /**
  * Send a message to the player, that an expedition is ready to start.
  */
-void Ship::start_task_expedition(Game &) {
+void Ship::start_task_expedition(Game & game) {
 	// A ship with task expedition can be in four states: EXP_WAITING, EXP_SCOUTING, EXP_FOUNDPORTSPACE
 	// or EXP_COLONIZING in the first states, the owning player of this ship can give direction change commands
 	// to change the direction of the moving ship / send the ship in a direction. Once the ship is on it's way,
@@ -577,12 +580,16 @@ void Ship::start_task_expedition(Game &) {
 	m_expedition->seen_port_buildspaces = new std::list<Coords>();
 	m_expedition->island_exploration = false;
 	m_expedition->direction = 0;
-#warning send message to player so the player can select in a UI where the ship should move to
+
+	// Send a message to the player, that an expedition is ready to go
+	std::string msg_head = _("Expedition ready");
+	std::string msg_body = _("An expedition ship is waiting for your commands.");
+	send_message(game, "exp_ready", msg_head, msg_body, "start_expedition.png");
 }
 
 /// Initializes / changes the direction of scouting to @arg direction
 /// @note only called via player command
-void Ship::exp_scout_direction(Game & game, uint8_t direction) {
+void Ship::exp_scout_direction(Game &, uint8_t direction) {
 	assert(m_expedition);
 	m_ship_state = EXP_SCOUTING;
 	m_expedition->direction = direction;
@@ -591,7 +598,7 @@ void Ship::exp_scout_direction(Game & game, uint8_t direction) {
 
 /// Initializes the construction of a port at @arg c
 /// @note only called via player command
-void Ship::exp_construct_port (Game & game, Coords c) {
+void Ship::exp_construct_port (Game &, Coords c) {
 	assert(m_expedition);
 	m_economy->owner().force_building(c, m_economy->owner().tribe().safe_building_index("port"), true);
 	m_ship_state = EXP_COLONIZING;
@@ -599,7 +606,7 @@ void Ship::exp_construct_port (Game & game, Coords c) {
 
 /// Initializes / changes the direction the island exploration in @arg clockwise direction
 /// @note only called via player command
-void Ship::exp_explore_island (Game & game, bool clockwise) {
+void Ship::exp_explore_island (Game &, bool clockwise) {
 	assert(m_expedition);
 	m_ship_state = EXP_SCOUTING;
 	m_expedition->direction = clockwise ? 1 : 0;
@@ -622,6 +629,39 @@ void Ship::log_general_info(const Editor_Game_Base & egbase)
 			 it.current->m_object.serial(),
 			 it.current->m_destination_dock.serial());
 	}
+}
+
+
+/**
+ * Send a message to the owning player.
+ *
+ * It will have the ship's coordinates, and display a picture in its description.
+ *
+ * \param msgsender a computer-readable description of why the message was sent
+ * \param title user-visible title of the message
+ * \param description user-visible message body, will be placed in an appropriate rich-text paragraph
+ * \param picture picture name relative to the pics directory
+ */
+void Ship::send_message
+	(Game & game, const std::string & msgsender,
+	 const std::string & title, const std::string & description,
+	 const std::string & picture)
+{
+	std::string rt_description;
+	if (picture.size() > 3) {
+		rt_description  = "<rt image=pics/";
+		rt_description += picture;
+		rt_description += "><p font-size=14 font-face=DejaVuSerif>";
+	} else
+		rt_description  = "<rt><p font-size=14 font-face=DejaVuSerif>";;
+	rt_description += description;
+	rt_description += "</p></rt>";
+
+	Message * msg = new Message
+		(msgsender, game.get_gametime(), 60 * 60 * 1000,
+		 title, rt_description, get_position());
+
+	m_economy->owner().add_message(game, *msg);
 }
 
 
