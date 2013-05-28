@@ -276,7 +276,7 @@ private:
 	// PortDock stuff
 	PortDock * m_portdock;
 	std::vector<WaresQueue *> m_expedition_wares;
-	std::vector<Expedition_Worker  *> m_expedition_workers;
+	std::vector<Expedition_Worker *> m_expedition_workers;
 
 };
 

@@ -19,8 +19,11 @@
 
 #include "ship.h"
 
+#include "constructionsite.h"
+#include "economy/economy.h"
 #include "economy/fleet.h"
 #include "economy/portdock.h"
+#include "economy/wares_queue.h"
 #include "findbob.h"
 #include "game.h"
 #include "game_data_error.h"
@@ -30,6 +33,7 @@
 #include "map_io/widelands_map_map_object_saver.h"
 #include "mapregion.h"
 #include "path.h"
+#include "player.h"
 #include "tribe.h"
 #include "warehouse.h"
 
@@ -281,7 +285,14 @@ void Ship::ship_update(Game & game, Bob::State & state)
 			bool new_port_space = false;
 			do {
 				if (map.is_port_space(mr.location())) {
-					#warning check if port space is already occupied by a player immovable
+
+					// Check if there is a PlayerImmovable on the port build space
+					// FIXME handle this more gracefully - opposing player? etc.
+					BaseImmovable * baim = map.get_fcoords(mr.location()).field->get_immovable();
+					if (baim)
+						if (upcast(PlayerImmovable, plim, baim))
+							continue;
+
 					bool pbs_saved = false;
 					for
 						(std::list<Coords>::const_iterator it = m_expedition->seen_port_buildspaces->begin();
@@ -421,6 +432,42 @@ void Ship::ship_update_idle(Game & game, Bob::State & state)
 			}
 			break;
 		}
+		case EXP_COLONIZING: {
+			assert(m_expedition->seen_port_buildspaces && !m_expedition->seen_port_buildspaces->empty());
+			BaseImmovable * baim = game.map()[m_expedition->seen_port_buildspaces->front()].get_immovable();
+			assert(baim);
+			upcast(ConstructionSite, cs, baim);
+
+			for (uint8_t i = m_items.size() - 1; i >= 0; --i) {
+				WareInstance * ware;
+				Worker * worker;
+				m_items.at(i).get(game, ware, worker);
+				if (ware) {
+					// no, we don't transfer the wares, we create new ones out of air and remove the old ones ;)
+					WaresQueue & wq = cs->waresqueue(ware->descr_index());
+					uint32_t max = wq.get_max_fill();
+					uint32_t cur = wq.get_filled();
+					assert(max > cur);
+					wq.set_filled(cur + 1);
+					m_items.at(i).remove(game);
+					m_items.resize(i);
+					break;
+				} else {
+					assert(worker);
+					worker->set_economy(0);
+					worker->set_location(cs);
+					worker->set_position(game, cs->get_position());
+					worker->reset_tasks(game);
+					Partially_Finished_Building::request_builder_callback
+						(game, *cs->get_builder_request(), worker->worker_index(), worker, *cs);
+					m_items.resize(i);
+				}
+			}
+			if (m_items.empty())
+				m_ship_state = TRANSPORT; // That's it, expedition finished
+			return start_task_idle(game, descr().main_animation(), 1500); // unload the next item
+		}
+
 		default: {
 			// wait for input
 			start_task_idle(game, descr().main_animation(), 1500);
@@ -508,12 +555,11 @@ void Ship::start_task_movetodock(Game & game, PortDock & pd)
  * Send a message to the player, that an expedition is ready to start.
  */
 void Ship::start_task_expedition(Game &) {
-	// A ship with task expedition can be in two states: EXP_WAITING or EXP_SCOUTING (or EXP_COLONIZING)
-	// in both states, the owning player of this ship can give direction change commands to change the
-	// direction of the moving ship / send the ship in a direction. Once the ship is on it's way, it is in
-	// EXP_SCOUTING state. in the backend, a click on a direction button leads to the calculation of the
-	// way the ship should take until the next event occurs. It will than follow that path until the coords
-	// of the event are reached, or the user cancels the path through a direction change.
+	// A ship with task expedition can be in four states: EXP_WAITING, EXP_SCOUTING, EXP_FOUNDPORTSPACE
+	// or EXP_COLONIZING in the first states, the owning player of this ship can give direction change commands
+	// to change the direction of the moving ship / send the ship in a direction. Once the ship is on it's way,
+	// it is in EXP_SCOUTING state. in the backend, a click on a direction button leads to the movement towards
+	// that diection until a coast is reached or the user cancels the direction through a direction change.
 	//
 	// The EXP_WAITING state means, that an event happend and thus the ship stopped
 	// and waits for a new command by the owner. An event leading to a EXP_WAITING state can be:
@@ -521,7 +567,8 @@ void Ship::start_task_expedition(Game &) {
 	// * new island appeared in vision range (only outer ring of vision range has to be checked due to the
 	//   always ongoing movement.
 	// * island was completely sourrounded
-	// * a port build space was found
+	//
+	// The EXP_FOUNDPORTSPACE state means, that a port build space was found
 	//
 	// Following this logic, we set the state to EXP_WAITING and send a message to the player as information,
 	// that a user interaction is needed.
@@ -546,7 +593,8 @@ void Ship::exp_scout_direction(Game & game, uint8_t direction) {
 /// @note only called via player command
 void Ship::exp_construct_port (Game & game, Coords c) {
 	assert(m_expedition);
-#warning construction of port not yet implemented
+	m_economy->owner().force_building(c, m_economy->owner().tribe().safe_building_index("port"), true);
+	m_ship_state = EXP_COLONIZING;
 }
 
 /// Initializes / changes the direction the island exploration in @arg clockwise direction

@@ -867,26 +867,35 @@ void Warehouse::incorporate_worker(Editor_Game_Base & egbase, Worker & w)
 {
 	assert(w.get_owner() == &owner());
 
-	if (WareInstance * const item = w.fetch_carried_item(egbase))
-		incorporate_item(egbase, *item); //  rescue an item
+	// Do not add workers, that are in the expedition list
+	bool expedition_worker = false;
+	if (!m_expedition_workers.empty())
+		for (uint8_t i = 0; i < m_expedition_workers.size() && !expedition_worker; ++i)
+			if (m_expedition_workers.at(i)->worker && &w == m_expedition_workers.at(i)->worker)
+				expedition_worker = true;
 
-	Ware_Index worker_index = tribe().worker_index(w.name().c_str());
-	m_supply->add_workers(worker_index, 1);
+	if (!expedition_worker) {
+		if (WareInstance * const item = w.fetch_carried_item(egbase))
+			incorporate_item(egbase, *item); //  rescue an item
 
-	//  We remove carriers, but we keep other workers around.
-	//  FIXME Remove all workers that do not have properties such as experience.
-	//  FIXME And even such workers should be removed and only a small record
-	//  FIXME with the experience (and possibly other data that must survive)
-	//  FIXME may be kept.
-	if (dynamic_cast<Carrier const *>(&w)) {
-		w.remove(egbase);
-		return;
+		Ware_Index worker_index = tribe().worker_index(w.name().c_str());
+		m_supply->add_workers(worker_index, 1);
+
+		//  We remove carriers, but we keep other workers around.
+		//  FIXME Remove all workers that do not have properties such as experience.
+		//  FIXME And even such workers should be removed and only a small record
+		//  FIXME with the experience (and possibly other data that must survive)
+		//  FIXME may be kept.
+		if (dynamic_cast<Carrier const *>(&w)) {
+			w.remove(egbase);
+			return;
+		}
+
+		// Incorporate the worker
+		if (!m_incorporated_workers.count(worker_index))
+			m_incorporated_workers[worker_index] = std::vector<Worker *>();
+		m_incorporated_workers[worker_index].push_back(&w);
 	}
-
-	// Incorporate the worker
-	if (!m_incorporated_workers.count(worker_index))
-		m_incorporated_workers[worker_index] = std::vector<Worker *>();
-	m_incorporated_workers[worker_index].push_back(&w);
 	w.set_location(0); //  no longer in an economy
 
 	if (upcast(Game, game, &egbase)) {

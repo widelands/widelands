@@ -226,11 +226,11 @@ void ShipWindow::think()
 		bool coast_nearby = false;
 		for (Direction dir = 1; dir <= LAST_DIRECTION; ++dir) {
 			// NOTE buttons are saved in the format DIRECTION - 1
-			m_btn_scout[dir - 1]->set_enabled(m_ship.exp_dir_swimable(dir));
+			m_btn_scout[dir - 1]->set_enabled(m_ship.exp_dir_swimable(dir) && (state != Ship::EXP_COLONIZING));
 			coast_nearby |= m_ship.exp_dir_swimable(dir);
 		}
-		m_btn_explore_island_cw ->set_enabled(coast_nearby);
-		m_btn_explore_island_ccw->set_enabled(coast_nearby);
+		m_btn_explore_island_cw ->set_enabled(coast_nearby && (state != Ship::EXP_COLONIZING));
+		m_btn_explore_island_ccw->set_enabled(coast_nearby && (state != Ship::EXP_COLONIZING));
 	}
 }
 

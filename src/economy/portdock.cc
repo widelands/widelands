@@ -407,7 +407,16 @@ void PortDock::start_expedition() {
 /// Converts the expeditions WaresQueues as well as workers to ShippingItems
 /// \note Should only be called if all wares and workers arrived.
 std::vector<ShippingItem> * PortDock::expedition_wares(Game & game) {
+
 	std::vector<ShippingItem> * wares = new std::vector<ShippingItem>;
+
+	std::vector<Warehouse::Expedition_Worker *> & ew = m_warehouse->get_expedition_workers();
+	for (uint8_t i = 0; i < ew.size(); ++i) {
+		assert(!ew.at(i)->worker_request);
+		wares->push_back(ShippingItem(*ew.at(i)->worker));
+	}
+	// Reset expedition workers list
+	ew.resize(0);
 
 	std::vector<WaresQueue *> & l_expedition_wares = m_warehouse->get_wares_queue_vector();
 	for (uint8_t i = 0; i < l_expedition_wares.size(); ++i) {
@@ -422,13 +431,7 @@ std::vector<ShippingItem> * PortDock::expedition_wares(Game & game) {
 		l_expedition_wares.at(i)->set_filled(0);
 		l_expedition_wares.at(i)->set_max_fill(0);
 	}
-	std::vector<Warehouse::Expedition_Worker *> & ew = m_warehouse->get_expedition_workers();
-	for (uint8_t i = 0; i < ew.size(); ++i) {
-		assert(!ew.at(i)->worker_request);
-		wares->push_back(ShippingItem(*ew.at(i)->worker));
-	}
-	// Reset expedition workers list
-	ew.resize(0);
+
 	return wares;
 }
 
@@ -478,10 +481,11 @@ void PortDock::cancel_expedition(Game & game) {
 	for (uint8_t i = 0; i < ew.size(); ++i) {
 		if (ew.at(i)->worker_request) {
 			delete &ew.at(i)->worker_request;
-		} else {;}
-		// NOTE Nothing to do at the moment - in the current way the builder is already listed inside the
-		// NOTE the warehouse, so incoporating the worker again would increase the number of builders
-		// NOTE although nothing actually changed. Maybe this behaviour can be improved???
+		} else {
+			Worker * temp = ew.at(i)->worker;
+			ew.at(i)->worker = 0;
+			m_warehouse->incorporate_worker(game, *temp);
+		}
 	}
 	// Reset expedition workers list
 	ew.resize(0);

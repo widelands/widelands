@@ -97,7 +97,8 @@ struct Ship : Bob {
 		TRANSPORT          = 0,
 		EXP_WAITING        = 1,
 		EXP_SCOUTING       = 2,
-		EXP_FOUNDPORTSPACE = 3
+		EXP_FOUNDPORTSPACE = 3,
+		EXP_COLONIZING     = 4
 	};
 
 	/// \returns the current state the ship is in
