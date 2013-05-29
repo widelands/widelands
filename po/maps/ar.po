@@ -8,18 +8,18 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2013-03-09 16:57+0000\n"
-"PO-Revision-Date: 2013-05-01 09:21+0000\n"
+"PO-Revision-Date: 2013-05-28 21:54+0000\n"
 "Last-Translator: m-abudrais <m.abudrais@yahoo.com>\n"
 "Language-Team: Arabic <ar@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-05-02 05:07+0000\n"
-"X-Generator: Launchpad (build 16580)\n"
+"X-Launchpad-Export-Date: 2013-05-29 05:09+0000\n"
+"X-Generator: Launchpad (build 16640)\n"
 
 #: ../../campaigns/cconfig:64
 msgid "01 - Eyes in the Dark"
-msgstr ""
+msgstr "01-عيون في الظلام"
 
 #: ../../campaigns/cconfig:98
 msgid "01 - From Nemesis to Genesis"
@@ -39,7 +39,7 @@ msgstr ""
 
 #: ../../campaigns/cconfig:74
 msgid "03 - This Land is our Land"
-msgstr ""
+msgstr "03-هذه الارض ارضنا"
 
 #: ../../maps/Comet Island.wmf/elemental:9
 msgid ""
@@ -67,13 +67,13 @@ msgstr ""
 
 #: ../../maps/Two frontiers.wmf/elemental:9
 msgid "A multiplayer-battle-map on a small circle-shaped island."
-msgstr ""
+msgstr "خرطة متعددة اللاعبين في جزيرة دائرية صغيرة"
 
 #: ../../maps/Riverlands.wmf/elemental:9
 msgid ""
 "A mystical land, full of different landscapes, which are all crossed by a "
 "handful of big rivers."
-msgstr ""
+msgstr "أرضٌ غامضة،بها مشاهد طبيعية مختلفة، ويشقها نهر بحجم قبضة اليد."
 
 #: ../../maps/MP Scenarios/Island Hopping.wmf/elemental:9
 msgid ""
@@ -82,6 +82,9 @@ msgid ""
 "as possible, to be the first building up a castle on the top of the center "
 "mountain."
 msgstr ""
+"منافسة خاصة في التراث الاطلانطي تعرف ب\"حلم الجزيرة\"، حيث تحاول مجموعتان "
+"الوصول مركز الجزيرة باقصى سرعة ممكنة، وبناء قلعة في مركز الجبل قبل المجموعة "
+"الاخرى."
 
 #: ../../maps/Impact.wmf/elemental:9
 msgid ""
@@ -89,12 +92,16 @@ msgid ""
 "are connected by ice and stone, setting an end to the peaceful coexistence "
 "of three tribes."
 msgstr ""
+"بعد سقوط كويكب تلاه شتاء قاسي، اتصلت جزيرتان بالثلج والحجارة، منهية فترة "
+"سلام بين ثلالثة قبائل."
 
 #: ../../maps/The long way.wmf/elemental:9
 msgid ""
 "Another strange test by the Gods. To reach the other side, there seems to be "
 "no other way, than occupying the land of your enemies."
 msgstr ""
+"اختبار قاس اخر. يبدو انه لا سبيل للوصول الى الجانب الاخر الا باحتلال ارض "
+"اعدائك."
 
 #: ../../maps/The Thaw.wmf/elemental:11
 msgid ""
@@ -104,42 +111,45 @@ msgid ""
 "ancient altar, build there a splendid castle and gain goodwill and the "
 "respect of the Gods."
 msgstr ""
+"حل جو دافئ اخر، ثلاثة قبائل احتمت من الشتاء القارس في جبال عظيمة، في الوحدة "
+"استمعو للكهنة وتجهزوا للحرب، الناجي الوحيد سيقدم كنوز اعداءه كقرابين في مذبح "
+"الجبل، ويبني قلعة شهيرة هناك ويحصل على ارادة قوية."
 
 #: ../../campaigns/cconfig:41
 msgid "Atlanteans - The Run for the Fire"
-msgstr ""
+msgstr "اطلنطسي- الجري للنار"
 
 #: ../../maps/Atoll.wmf/elemental:7
 msgid "Atoll"
-msgstr ""
+msgstr "جزيرة مرجانية"
 
 #: ../../campaigns/cconfig:27
 msgid "Barbarians - The second Empire"
-msgstr ""
+msgstr "البربري- الامبراطورية الثانية"
 
 #: ../../campaigns/cconfig:44
 msgid "Challenging. Introduces the Atlanteans"
-msgstr ""
+msgstr "تحدي. مقدمة الاطلنطيسي"
 
 #: ../../maps/Checkmate.wmf/elemental:7
 msgid "Checkmate"
-msgstr ""
+msgstr "مات الملك"
 
 #: ../../maps/Comet Island.wmf/elemental:7
 msgid "Comet Island"
-msgstr ""
+msgstr "ارض المذنب"
 
 #: ../../maps/Crater.wmf/elemental:7
 msgid "Crater"
-msgstr ""
+msgstr "فوهة"
 
 #: ../../maps/Desert Tournament.wmf/elemental:7
 msgid "Desert Tournament"
-msgstr ""
+msgstr "مباراة الصحراء"
 
 #: ../../maps/Dry Riverbed.wmf/elemental:7
 msgid "Dry Riverbed"
-msgstr ""
+msgstr "مجرى نهر جاف"
 
 #: ../../maps/Four Mountains.wmf/elemental:9
 msgid ""
@@ -148,6 +158,8 @@ msgid ""
 "along the river. Hint II: Snowmen mark additional water sources. Hint 3: "
 "Each mountain contains only one resource."
 msgstr ""
+"كل قبيلة محاطة بجبال ضخمة. من سيتملكها  اولا و يطالب بمصادر الثروة لمجموعته؟ "
+"تلميح أ- يمكن ايجاد الماء في النهر. تلميح ب- يحتوي كل بل على مصدر واحد فقط."
 
 #: ../../campaigns/cconfig:30
 msgid "Easy. Introduces the Barbarians"
@@ -159,19 +171,19 @@ msgstr ""
 
 #: ../../maps/Elven Forests.wmf/elemental:7
 msgid "Elven Forests"
-msgstr ""
+msgstr "احدى عشرة غابة"
 
 #: ../../campaigns/cconfig:34
 msgid "Empire - The Months of Exile"
-msgstr ""
+msgstr "امبراطورية -شهور المنفى"
 
 #: ../../maps/Finlakes.wmf/elemental:9
 msgid "Finnish Lakes"
-msgstr ""
+msgstr "بحيرات فنلندية"
 
 #: ../../maps/Firegames.wmf/elemental:7
 msgid "Firegames"
-msgstr ""
+msgstr "العاب النار"
 
 #: ../../maps/Islands at war.wmf/elemental:11
 msgid ""
@@ -187,14 +199,17 @@ msgid ""
 "barefaced enough to settle on the coast of that island, a lot others "
 "followed afterwards."
 msgstr ""
+"لمئات السنين تم الاحتفاظ بهذه الارض كمعابد للالهة. لم يتجرأ شخص على وضع قدمه "
+"عليها. لكن الان تلك القبيلة لديه من قلة الحياء للنزول على تلك الجزيرة، "
+"وتبعها الكثيرون."
 
 #: ../../maps/Four Castles.wmf/elemental:7
 msgid "Four Castles"
-msgstr ""
+msgstr "اربع قلاع"
 
 #: ../../maps/Four Mountains.wmf/elemental:7
 msgid "Four Mountains"
-msgstr ""
+msgstr "اربعة جبال"
 
 #: ../../maps/Desert Tournament.wmf/elemental:9
 msgid ""
@@ -202,6 +217,9 @@ msgid ""
 "the mountain of gold that promises riches beyond belief. But can the two "
 "remaining ones share the resources wisely?"
 msgstr ""
+"اربع قبائل تتصارع مع اقرب جاراتها من اجل ان تتمكن احداها من الوصول اولا الى "
+"جبل الذهب والذي يحتوي على كمية من الذهب تفوق الخيال. لكن هل ستتمكن القبيلتان "
+"الناجيتان من مشاركة مصدر الذهب بحكمة."
 
 #: ../../maps/Glacier Lake.wmf/elemental:7
 msgid "Glacier Lake"
@@ -209,11 +227,11 @@ msgstr ""
 
 #: ../../maps/Golden Peninsula.wmf/elemental:7
 msgid "Golden Peninsula"
-msgstr ""
+msgstr "شبه الجزيرة الذهبية"
 
 #: ../../maps/Impact.wmf/elemental:7
 msgid "Impact"
-msgstr ""
+msgstr "تصادم"
 
 #: ../../maps/The pass through the mountains.wmf/elemental:11
 msgid ""
