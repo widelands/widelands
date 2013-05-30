@@ -89,7 +89,7 @@ Player::Player
 	m_allow_retreat_change(false),
 	m_retreat_percentage  (50),
 	m_fields            (0),
-	m_allowed_worker_types  (tribe_descr.get_nrworkers  (), false),
+	m_allowed_worker_types  (tribe_descr.get_nrworkers  (), true),
 	m_allowed_building_types(tribe_descr.get_nrbuildings(), true),
 	m_ai(""),
 	m_current_produced_statistics(tribe_descr.get_nrwares    ()),
