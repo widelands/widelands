@@ -93,20 +93,21 @@ struct Ship : Bob {
 	void show_window(Interactive_GameBase & igb);
 	void close_window();
 
-	// A ship with task expedition can be in four states: EXP_WAITING, EXP_SCOUTING, EXP_FOUNDPORTSPACE
-	// or EXP_COLONIZING in the first states, the owning player of this ship can give direction change commands
-	// to change the direction of the moving ship / send the ship in a direction. Once the ship is on it's way,
-	// it is in EXP_SCOUTING state. in the backend, a click on a direction button leads to the movement towards
-	// that diection until a coast is reached or the user cancels the direction through a direction change.
+	// A ship with task expedition can be in four states: EXP_WAITING, EXP_SCOUTING,
+	// EXP_FOUNDPORTSPACE or EXP_COLONIZING in the first states, the owning player of this ship can
+	// give direction change commands to change the direction of the moving ship / send the ship in a
+	// direction. Once the ship is on its way, it is in EXP_SCOUTING state. In the backend, a click
+	// on a direction begins to the movement into that direction until a coast is reached or the user
+	// cancels the direction through a direction change.
 	//
-	// The EXP_WAITING state means, that an event happend and thus the ship stopped
-	// and waits for a new command by the owner. An event leading to a EXP_WAITING state can be:
+	// The EXP_WAITING state means, that an event happend and thus the ship stopped and waits for a
+	// new command by the owner. An event leading to a EXP_WAITING state can be:
 	// * expedition is ready to start
 	// * new island appeared in vision range (only outer ring of vision range has to be checked due to the
-	//   always ongoing movement.
-	// * island was completely sourrounded
+	//   always ongoing movement).
+	// * island was completely surrounded
 	//
-	// The EXP_FOUNDPORTSPACE state means, that a port build space was found
+	// The EXP_FOUNDPORTSPACE state means, that a port build space was found.
 	//
 	enum {
 		TRANSPORT          = 0,
@@ -128,15 +129,15 @@ struct Ship : Bob {
 	}
 
 	/// \returns (in expedition mode only!) the list of currently seen port build spaces
-	std::list<Coords> * exp_port_spaces() {
+	const std::list<Coords>* exp_port_spaces() {
 		if (m_ship_state == TRANSPORT)
 			return 0;
 		assert(m_expedition);
-		return m_expedition->seen_port_buildspaces;
+		return m_expedition->seen_port_buildspaces.get();
 	}
 
 	void exp_scout_direction(Game &, uint8_t);
-	void exp_construct_port (Game &, Coords);
+	void exp_construct_port (Game &, const Coords&);
 	void exp_explore_island (Game &, bool);
 
 private:
@@ -159,6 +160,7 @@ private:
 		(Game &, const std::string &, const std::string &, const std::string &, const std::string &);
 
 	/// \returns the neighbour direction in clockwise
+	// NOCOM(#peter): How about pulling them out into a new file 'walkingdir.cc' and make them stand alone methods? There is nothing Ship specific about them and they use no ship data.
 	uint8_t get_cw_neighbour(uint8_t dir) {
 		switch (dir) {
 			case WALK_NE:
@@ -208,14 +210,16 @@ private:
 	uint8_t m_ship_state;
 
 	struct Expedition {
-		std::list<Coords> * seen_port_buildspaces;
+		// NOCOM(#peter): converted this into a scoped_ptr, so it can never leak.
+		boost::scoped_ptr<std::list<Coords> > seen_port_buildspaces;
 		bool swimable[LAST_DIRECTION];
 		bool island_exploration;
 		uint8_t direction;
 		Coords exploration_start;
 		bool clockwise;
 	};
-	Expedition * m_expedition;
+	// NOCOM(#peter): Made this a scoped_ptr as well
+	boost::scoped_ptr<Expedition> m_expedition;
 
 	// saving and loading
 protected:
@@ -232,7 +236,8 @@ protected:
 		uint32_t m_lastdock;
 		uint32_t m_destination;
 		uint8_t  m_ship_state;
-		Expedition * m_expedition;
+		// NOCOM(#peter): this as well
+		boost::scoped_ptr<Expedition> m_expedition;
 		std::vector<ShippingItem::Loader> m_items;
 	};
 

@@ -34,6 +34,39 @@
 
 namespace Widelands {
 
+namespace {
+
+// NOCOM(#peter): moved this method to be a static local one and it gets a vector passed in (instead of creating a new one which needs to be freed - which you didn't do :) ).
+
+/// Converts the expeditions WaresQueues as well as workers to ShippingItems
+/// \note Should only be called if all wares and workers arrived.
+void expedition_wares(Game & game, const Tribe_Descr& tribe, Warehouse* warehouse, std::vector<ShippingItem>* wares) {
+	std::vector<Warehouse::Expedition_Worker *> & ew = warehouse->get_expedition_workers();
+	for (uint8_t i = 0; i < ew.size(); ++i) {
+		assert(!ew.at(i)->worker_request);
+		wares->push_back(ShippingItem(*ew.at(i)->worker));
+	}
+	// Reset expedition workers list
+	ew.resize(0);
+
+	std::vector<WaresQueue *> & l_expedition_wares = warehouse->get_wares_queue_vector();
+	for (uint8_t i = 0; i < l_expedition_wares.size(); ++i) {
+		Ware_Index wi = l_expedition_wares.at(i)->get_ware();
+		uint32_t numb = l_expedition_wares.at(i)->get_filled();
+		for (uint32_t j = 0; j < numb; ++j) {
+			WareInstance * temp = new WareInstance(wi, tribe.get_ware_descr(wi));
+			temp->init(game);
+			wares->push_back(ShippingItem(*temp));
+		}
+		// Reset wares queue
+		l_expedition_wares.at(i)->set_filled(0);
+		l_expedition_wares.at(i)->set_max_fill(0);
+	}
+}
+
+
+}  // namespace
+
 Map_Object_Descr portdock_descr("portdock", "Port Dock");
 
 PortDock::PortDock() :
@@ -296,10 +329,11 @@ void PortDock::ship_arrived(Game & game, Ship & ship)
 	if (m_expedition_ready)
 		if (ship.get_nritems() < 1) {
 			// Load the ship
-			std::vector<ShippingItem> * wares = expedition_wares(game);
-			while (wares->size() > 0) {
-				ship.add_item(game, wares->back());
-				wares->pop_back();
+			std::vector<ShippingItem> wares;
+			expedition_wares(game, owner().tribe(), m_warehouse, &wares);
+			while (!wares.empty()) {
+				ship.add_item(game, wares.back());
+				wares.pop_back();
 			}
 			ship.start_task_expedition(game);
 			// The expedition goods are now on the ship, so from now on it is independent from the port
@@ -375,6 +409,7 @@ void PortDock::start_expedition() {
 	// Load the buildcosts for the port building + builder
 	const std::map<Ware_Index, uint8_t> & buildcost = m_warehouse->descr().buildcost();
 	size_t const buildcost_size = buildcost.size();
+	// NOCOM(#peter): cache -> catch?
 	// Now try to cache all the wares directly from the portdocks warehouse, if they exist.
 	std::vector<WaresQueue *> & l_expedition_wares = m_warehouse->get_wares_queue_vector();
 	if (m_warehouse->size_of_expedition_wares_queue() != buildcost_size) {
@@ -382,6 +417,7 @@ void PortDock::start_expedition() {
 		l_expedition_wares.resize(buildcost_size);
 		std::map<Ware_Index, uint8_t>::const_iterator it = buildcost.begin();
 		for (size_t i = 0; i < buildcost_size; ++i, ++it) {
+			// NOCOM(#peter): I worry about memory leaks here - who destroys the WaresQueue created here?
 			WaresQueue & wq = *(l_expedition_wares[i] = new WaresQueue(*m_warehouse, it->first, it->second));
 			wq.set_callback(PortDock::expedition_wares_queue_callback, this);
 		}
@@ -404,37 +440,6 @@ void PortDock::start_expedition() {
 			 wwWORKER);
 }
 
-/// Converts the expeditions WaresQueues as well as workers to ShippingItems
-/// \note Should only be called if all wares and workers arrived.
-std::vector<ShippingItem> * PortDock::expedition_wares(Game & game) {
-
-	std::vector<ShippingItem> * wares = new std::vector<ShippingItem>;
-
-	std::vector<Warehouse::Expedition_Worker *> & ew = m_warehouse->get_expedition_workers();
-	for (uint8_t i = 0; i < ew.size(); ++i) {
-		assert(!ew.at(i)->worker_request);
-		wares->push_back(ShippingItem(*ew.at(i)->worker));
-	}
-	// Reset expedition workers list
-	ew.resize(0);
-
-	std::vector<WaresQueue *> & l_expedition_wares = m_warehouse->get_wares_queue_vector();
-	for (uint8_t i = 0; i < l_expedition_wares.size(); ++i) {
-		Ware_Index wi = l_expedition_wares.at(i)->get_ware();
-		uint32_t numb = l_expedition_wares.at(i)->get_filled();
-		for (uint32_t j = 0; j < numb; ++j) {
-			WareInstance * temp = new WareInstance(wi, owner().tribe().get_ware_descr(wi));
-			temp->init(game);
-			wares->push_back(ShippingItem(*temp));
-		}
-		// Reset wares queue
-		l_expedition_wares.at(i)->set_filled(0);
-		l_expedition_wares.at(i)->set_max_fill(0);
-	}
-
-	return wares;
-}
-
 
 /// Called everytime a ware is added to the expedition's wares queue
 void PortDock::expedition_wares_queue_callback(Game & game, WaresQueue *, Ware_Index, void * const data)
@@ -447,14 +452,15 @@ void PortDock::expedition_wares_queue_callback(Game & game, WaresQueue *, Ware_I
 void PortDock::check_expedition_wares_and_workers(Game & game) {
 	set_expedition_ready(false);
 
-	for (uint8_t n = 0; n < m_warehouse->size_of_expedition_wares_queue(); ++n) {
+	for (size_t n = 0; n < m_warehouse->size_of_expedition_wares_queue(); ++n) {
 		WaresQueue * wq = m_warehouse->get_wares_queue(n);
 		if (wq->get_max_fill() != wq->get_filled())
 			return;
 	}
 
-	std::vector<Warehouse::Expedition_Worker *> & ew = m_warehouse->get_expedition_workers();
-	for (uint8_t i = 0; i < ew.size(); ++i) {
+	// NOCOM(#peter): can get_expedition_workers() be const?
+	const std::vector<Warehouse::Expedition_Worker *> & ew = m_warehouse->get_expedition_workers();
+	for (size_t i = 0; i < ew.size(); ++i) {
 		if (ew.at(i)->worker_request)
 			return;
 	}
@@ -469,7 +475,7 @@ void PortDock::cancel_expedition(Game & game) {
 	m_expedition_ready = false;
 
 	// Put all wares from the WaresQueues back into the warehouse
-	std::vector<WaresQueue *> & l_expedition_wares = m_warehouse->get_wares_queue_vector();
+	const std::vector<WaresQueue *> & l_expedition_wares = m_warehouse->get_wares_queue_vector();
 	for (uint8_t i = 0; i < l_expedition_wares.size(); ++i) {
 		m_warehouse->insert_wares(l_expedition_wares.at(i)->get_ware(), l_expedition_wares.at(i)->get_filled());
 		l_expedition_wares.at(i)->set_filled(0);

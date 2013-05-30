@@ -199,6 +199,7 @@ void Ship::ship_update(Game & game, Bob::State & state)
 	Map & map = game.map();
 
 	if (m_ship_state == TRANSPORT) {
+		// NOCOM(#peter): I feel splitting the two branches of this if into their own methods would make this method more readable.
 		if (PortDock * dst = get_destination(game)) {
 			FCoords position = map.get_fcoords(get_position());
 			if (position.field->get_immovable() == dst) {
@@ -273,13 +274,14 @@ void Ship::ship_update(Game & game, Bob::State & state)
 		for (Direction dir = 1; dir <= LAST_DIRECTION; ++dir) {
 			assert(m_expedition);
 			// the ship fills all fields in the radius of 1, therefore we check the fields in r = 2
-			FCoords node = map.get_neighbour(map.get_neighbour(position, dir), dir);
+			const FCoords node = map.get_neighbour(map.get_neighbour(position, dir), dir);
 			m_expedition->swimable[dir - 1] = node.field->nodecaps() & MOVECAPS_SWIM;
 		}
 
 		if (m_ship_state == EXP_SCOUTING) {
 			// Check surrounding fields for port buildspaces
-			std::list<Coords> * temp_port_buildspaces = new std::list<Coords>();
+			// NOCOM(#peter): converted this to a scoped ptr, so it never leaks memory.
+			boost::scoped_ptr<std::list<Coords> > temp_port_buildspaces(new std::list<Coords>());
 			Widelands::MapRegion<Widelands::Area<Widelands::Coords> > mr
 				(map, Widelands::Area<Widelands::Coords>(position, vision_range()));
 			bool new_port_space = false;
@@ -290,7 +292,7 @@ void Ship::ship_update(Game & game, Bob::State & state)
 					// FIXME handle this more gracefully - opposing player? etc.
 					BaseImmovable * baim = map.get_fcoords(mr.location()).field->get_immovable();
 					if (baim)
-						if (upcast(PlayerImmovable, plim, baim))
+						if (is_a(PlayerImmovable, baim))
 							continue;
 
 					bool pbs_saved = false;
@@ -319,8 +321,7 @@ void Ship::ship_update(Game & game, Bob::State & state)
 				std::string msg_body = _("An expedition ship found a new port build space.");
 				send_message(game, "exp_port_space", msg_head, msg_body, "port.png");
 			}
-			delete m_expedition->seen_port_buildspaces;
-			m_expedition->seen_port_buildspaces = temp_port_buildspaces;
+			m_expedition->seen_port_buildspaces.swap(temp_port_buildspaces);
 		}
 	}
 
@@ -473,15 +474,15 @@ void Ship::ship_update_idle(Game & game, Bob::State & state)
 			assert(baim);
 			upcast(ConstructionSite, cs, baim);
 
-			for (int8_t i = m_items.size() - 1; i >= 0; --i) {
+			for (int i = m_items.size() - 1; i >= 0; --i) {
 				WareInstance * ware;
 				Worker * worker;
 				m_items.at(i).get(game, ware, worker);
 				if (ware) {
 					// no, we don't transfer the wares, we create new ones out of air and remove the old ones ;)
 					WaresQueue & wq = cs->waresqueue(ware->descr_index());
-					uint32_t max = wq.get_max_fill();
-					uint32_t cur = wq.get_filled();
+					const uint32_t max = wq.get_max_fill();
+					const uint32_t cur = wq.get_filled();
 					assert(max > cur);
 					wq.set_filled(cur + 1);
 					m_items.at(i).remove(game);
@@ -489,7 +490,7 @@ void Ship::ship_update_idle(Game & game, Bob::State & state)
 					break;
 				} else {
 					assert(worker);
-					worker->set_economy(0);
+					worker->set_economy(NULL);
 					worker->set_location(cs);
 					worker->set_position(game, cs->get_position());
 					worker->reset_tasks(game);
@@ -591,16 +592,16 @@ void Ship::start_task_expedition(Game & game) {
 	// Now we are waiting
 	m_ship_state = EXP_WAITING;
 	// Initialize a new, yet empty expedition
-	m_expedition = new Expedition;
-	m_expedition->seen_port_buildspaces = new std::list<Coords>();
+	m_expedition.reset(new Expedition());
+	m_expedition->seen_port_buildspaces.reset(new std::list<Coords>());
 	m_expedition->island_exploration = false;
 	m_expedition->direction = 0;
 	m_expedition->exploration_start = Coords(0, 0);
 	m_expedition->clockwise = false;
 
 	// Send a message to the player, that an expedition is ready to go
-	std::string msg_head = _("Expedition ready");
-	std::string msg_body = _("An expedition ship is waiting for your commands.");
+	const std::string msg_head = _("Expedition ready");
+	const std::string msg_body = _("An expedition ship is waiting for your commands.");
 	send_message(game, "exp_ready", msg_head, msg_body, "start_expedition.png");
 }
 
@@ -615,7 +616,7 @@ void Ship::exp_scout_direction(Game &, uint8_t direction) {
 
 /// Initializes the construction of a port at @arg c
 /// @note only called via player command
-void Ship::exp_construct_port (Game &, Coords c) {
+void Ship::exp_construct_port (Game &, const Coords& c) {
 	assert(m_expedition);
 	m_economy->owner().force_building(c, m_economy->owner().tribe().safe_building_index("port"), true);
 	m_ship_state = EXP_COLONIZING;
@@ -717,9 +718,9 @@ void Ship::Loader::load(FileRead & fr, uint8_t version)
 
 			// Expedition specific data
 			if (m_ship_state != TRANSPORT) {
-				m_expedition = new Expedition;
+				m_expedition.reset(new Expedition());
 				// Currently seen port build spaces
-				m_expedition->seen_port_buildspaces = new std::list<Coords>();
+				m_expedition->seen_port_buildspaces.reset(new std::list<Coords>());
 				uint8_t numofports = fr.Unsigned8();
 				for (uint8_t i = 0; i < numofports; ++i)
 					m_expedition->seen_port_buildspaces->push_back(fr.Coords32());
@@ -776,7 +777,7 @@ void Ship::Loader::load_finish()
 
 	// if the ship is on an expedition, restore the expedition specific data
 	if (m_expedition)
-		ship.m_expedition = m_expedition;
+		ship.m_expedition.swap(m_expedition);
 	else
 		assert(m_ship_state == TRANSPORT);
 

@@ -36,10 +36,10 @@ struct Ship;
  * Manage all ships and ports of a player that are connected
  * by ocean.
  *
- * That is, two ports belong to the same fleet if ships can travel
- * between them, and so on. Players may have several fleets, if they
- * build ports that cannot communicate (e.g. one port on the ocean,
- * and another in a lake).
+ * That is, two ports belong to the same fleet if (and only if) ships can
+ * travel between them, and so on. Players may have several fleets, if they
+ * build ports that cannot communicate (e.g. one port on the ocean, and another
+ * in a lake).
  *
  * @paragraph Lifetime
  *
