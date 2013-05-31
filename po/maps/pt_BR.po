@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2012-10-04 15:25+0000\n"
-"PO-Revision-Date: 2012-11-02 16:15+0000\n"
-"Last-Translator: SirVer <Unknown>\n"
+"POT-Creation-Date: 2013-03-09 16:57+0000\n"
+"PO-Revision-Date: 2013-01-23 20:06+0000\n"
+"Last-Translator: Rubens Bueno <rubensvsbueno@gmail.com>\n"
 "Language-Team: Brazilian Portuguese <pt_BR@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-11-03 04:32+0000\n"
-"X-Generator: Launchpad (build 16218)\n"
+"X-Launchpad-Export-Date: 2013-03-10 04:32+0000\n"
+"X-Generator: Launchpad (build 16523)\n"
 
 #: ../../campaigns/cconfig:64
 msgid "01 - Eyes in the Dark"
@@ -167,6 +167,10 @@ msgid ""
 "along the river. Hint II: Snowmen mark additional water sources. Hint 3: "
 "Each mountain contains only one resource."
 msgstr ""
+"Cada tribo está rodeada de quatro poderosas montanhas. Quem será o primeiro "
+"a conquistá-las e reivindicar seus recursos para sua tribo? Dica I: Pode-se "
+"encontrar água ao longo do rio. Dica II: Bonecos de neve marcam fontes de "
+"água adicionais. Dica 3: Cada montanha contém apenas um recurso."
 
 #: ../../campaigns/cconfig:30
 msgid "Easy. Introduces the Barbarians"
@@ -209,6 +213,10 @@ msgid ""
 "barefaced enough to settle on the coast of that island, a lot others "
 "followed afterwards."
 msgstr ""
+"Por centenas de anos esta ilha foi mantida como um santuário dos Deuses. "
+"Nunca um homem sequer se aventurou a nela pôr os pés. Mas agora que uma "
+"tribo finalmente teve a ousadia de se instalar na costa daquela ilha, várias "
+"outras a seguiram."
 
 #: ../../maps/Four Castles.wmf/elemental:7
 msgid "Four Castles"
@@ -224,6 +232,9 @@ msgid ""
 "the mountain of gold that promises riches beyond belief. But can the two "
 "remaining ones share the resources wisely?"
 msgstr ""
+"Quatro tribos disputam com seu vizinho mais próximo quem será o primeiro a "
+"alcançar a montanha de outro que promete riquezas além da imaginação. Mas "
+"poderão os outros dois remanescentes dividir os recursos de forma sábia?"
 
 #: ../../maps/Glacier Lake.wmf/elemental:7
 msgid "Glacier Lake"
@@ -281,6 +292,8 @@ msgid ""
 "It is said, that the old war monks, living in the even older swamps are the "
 "key to the control of the whole island."
 msgstr ""
+"Diz-se que os velhos monges guerreiros, que vivem nos pântanos ainda mais "
+"antigos, são a chave para o controle de toda a ilha."
 
 #: ../../maps/Wisent Valley.wmf/elemental:11
 msgid ""
@@ -300,8 +313,8 @@ msgid ""
 "place you were born and you lived your whole life. If you don't want to lose "
 "it, defend it! "
 msgstr ""
-"Tem cheiro de pântano, parece pântano e é pântano. Mas é o lugar onde nasceu "
-"e você viveu sua vida inteira. Se você não quer perdê-lo, defendê-la! "
+"Tem cheiro de pântano, parece pântano e é pântano. Mas é o lugar onde você "
+"nasceu e viveu sua vida inteira. Se você não quer perdê-lo, defenda-o! "
 
 #: ../../maps/Dry Riverbed.wmf/elemental:9
 msgid ""
@@ -492,6 +505,8 @@ msgid ""
 "The breath-taking beauty of these emerald lands has lured many tribes into "
 "an attempt of taking them for themselves."
 msgstr ""
+"A beleza de tirar o fôlego destas terras de esmeralda tem atraído muitas "
+"tribos em uma tentativa de tomá-las para si."
 
 #: ../../maps/MP Scenarios/Together we're strong.wmf/elemental:11
 msgid ""
@@ -572,7 +587,7 @@ msgstr "Três Guerreiros"
 
 #: ../../maps/MP Scenarios/Together we're strong.wmf/elemental:9
 msgid "Together we're strong"
-msgstr ""
+msgstr "Juntos somos mais fortes"
 
 #: ../../maps/Twinkling Waves.wmf/elemental:9
 msgid "Twinkling Waves"
@@ -595,6 +610,8 @@ msgid ""
 "Well protected in their mighty fortresses, four power-hungry warlords are "
 "completing their schemes to dominate these lands..."
 msgstr ""
+"Bem protegidos em suas poderosas fortalezas, quatro ambiciosos senhores da "
+"guerra completam seus planos para dominar estas terras..."
 
 #: ../../campaigns/cconfig:31
 msgid ""
@@ -677,7 +694,7 @@ msgstr ""
 
 #: ../../maps/Atoll.wmf/elemental:9
 msgid "Who will be the real King of the big atoll?"
-msgstr ""
+msgstr "Quem será o verdadeiro Rei do grande atol?"
 
 #: ../../maps/Wisent Valley.wmf/elemental:9
 msgid "Wisent Valley"

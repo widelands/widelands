@@ -6,15 +6,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands unofficial-git-6aa148a(svn4769+changes)\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2012-10-04 15:25+0000\n"
-"PO-Revision-Date: 2012-12-24 16:32+0000\n"
+"POT-Creation-Date: 2013-03-09 16:57+0000\n"
+"PO-Revision-Date: 2013-02-14 20:18+0000\n"
 "Last-Translator: Ivan Camilo Quintero Santacruz <Unknown>\n"
 "Language-Team: Español <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-12-25 04:31+0000\n"
-"X-Generator: Launchpad (build 16378)\n"
+"X-Launchpad-Export-Date: 2013-03-10 04:35+0000\n"
+"X-Generator: Launchpad (build 16523)\n"
 "X-Poedit-Country: SPAIN\n"
 "X-Poedit-Language: Spanish\n"
 "X-Poedit-SourceCharset: utf-8\n"
@@ -340,7 +340,7 @@ msgid ""
 "a helmsmithy and used in a trainingscamp - together with food - to train "
 "soldiers from healthpoints level 1 to level 2."
 msgstr ""
-"Un casco de guerrra es un blindaje mejorado para los guerreros bárbaros. Se "
+"Un casco de guerra es un blindaje mejorado para los guerreros bárbaros. Se "
 "produce en una herrería y son empleados en el campamento de entrenamiento  - "
 "junto con la comida - para entrenar a los soldados desde el nivel de vida 1 "
 "al nivel 2."
@@ -857,7 +857,7 @@ msgstr "Costo acumulativo:"
 msgid "Crew required:"
 msgstr "Tripulación requerida"
 
-#: ../../tribes/barbarians/stonemason/conf:2
+#: ../../tribes/barbarians/stonemason/conf:1
 msgid "Cuts raw pieces of granite out of laying stones."
 msgstr "Corta trozos en bruto de granito a partir de piedras sueltas."
 
@@ -1313,7 +1313,7 @@ msgstr "Martillo"
 msgid "Harvest reed"
 msgstr "Cosechar caña"
 
-#: ../../tribes/barbarians/farm/conf:19
+#: ../../tribes/barbarians/farm/conf:18
 msgid "Harvest wheat"
 msgstr "Cosechar trigo"
 
@@ -1346,7 +1346,7 @@ msgstr "Herrería de cascos"
 
 #: ../../tribes/barbarians/ox/conf:1
 msgid "Helps to carry items at heavily used roads."
-msgstr "Ayuda al transporte a llevar carga pesada en las carreteras."
+msgstr "Ayuda a transportar la carga pesada en las carreteras."
 
 #: ../../tribes/barbarians/conf:164
 msgid "High Tower"
@@ -1849,11 +1849,11 @@ msgstr "Plantar caña"
 msgid "Plant trees in the surrounding area."
 msgstr "Planta árboles en el área circundante."
 
-#: ../../tribes/barbarians/farm/conf:17
+#: ../../tribes/barbarians/farm/conf:16
 msgid "Plant wheat"
 msgstr "Plantar trigo"
 
-#: ../../tribes/barbarians/farmer/conf:2
+#: ../../tribes/barbarians/farmer/conf:1
 msgid "Plants fields."
 msgstr "Planta campos."
 
@@ -1865,41 +1865,41 @@ msgstr "Planta árboles."
 msgid "Port"
 msgstr "Puerto"
 
-#: ../../tribes/barbarians/axefactory/conf:29
-#: ../../tribes/barbarians/warmill/conf:33
+#: ../../tribes/barbarians/axefactory/conf:27
+#: ../../tribes/barbarians/warmill/conf:31
 msgid "Produce axe"
 msgstr "Fabricar hacha"
 
-#: ../../tribes/barbarians/metalworks/conf:34
+#: ../../tribes/barbarians/metalworks/conf:33
 msgid "Produce bakingtray"
 msgstr "Fabricar bandeja de hornear"
 
-#: ../../tribes/barbarians/warmill/conf:37
+#: ../../tribes/barbarians/warmill/conf:35
 msgid "Produce battleaxe"
 msgstr "Fabricar hacha de guerra"
 
-#: ../../tribes/barbarians/axefactory/conf:31
-#: ../../tribes/barbarians/warmill/conf:35
+#: ../../tribes/barbarians/axefactory/conf:29
+#: ../../tribes/barbarians/warmill/conf:33
 msgid "Produce broadaxe"
 msgstr "Fabricar hacha grande"
 
-#: ../../tribes/barbarians/warmill/conf:36
+#: ../../tribes/barbarians/warmill/conf:34
 msgid "Produce bronzeaxe"
 msgstr "Fabricar hacha de bronce"
 
-#: ../../tribes/barbarians/metalworks/conf:33
+#: ../../tribes/barbarians/metalworks/conf:32
 msgid "Produce felling axe"
 msgstr "Producir hacha para talar"
 
-#: ../../tribes/barbarians/metalworks/conf:35
+#: ../../tribes/barbarians/metalworks/conf:34
 msgid "Produce fire tongs"
 msgstr "Fabricar tenazas"
 
-#: ../../tribes/barbarians/metalworks/conf:36
+#: ../../tribes/barbarians/metalworks/conf:35
 msgid "Produce fishing rod"
 msgstr "Fabricar caña de pescar"
 
-#: ../../tribes/barbarians/metalworks/conf:37
+#: ../../tribes/barbarians/metalworks/conf:36
 msgid "Produce hammer"
 msgstr "Fabricar martillo"
 
@@ -1907,11 +1907,11 @@ msgstr "Fabricar martillo"
 msgid "Produce helm"
 msgstr "Fabricar casco"
 
-#: ../../tribes/barbarians/metalworks/conf:42
+#: ../../tribes/barbarians/metalworks/conf:41
 msgid "Produce hunting spear"
 msgstr "Fabricar lanza de caza"
 
-#: ../../tribes/barbarians/metalworks/conf:38
+#: ../../tribes/barbarians/metalworks/conf:37
 msgid "Produce kitchen tools"
 msgstr "Fabricar utensilios de cocina"
 
@@ -1923,7 +1923,7 @@ msgstr "Fabricar máscara"
 msgid "Produce meal"
 msgstr "Fabricar comida"
 
-#: ../../tribes/barbarians/metalworks/conf:39
+#: ../../tribes/barbarians/metalworks/conf:38
 msgid "Produce pick"
 msgstr "Fabricar pico"
 
@@ -1933,16 +1933,16 @@ msgstr "Fabricar pico"
 msgid "Produce ration"
 msgstr "Fabricar ración"
 
-#: ../../tribes/barbarians/metalworks/conf:40
+#: ../../tribes/barbarians/metalworks/conf:39
 msgid "Produce scythe"
 msgstr "Fabricar guadaña"
 
-#: ../../tribes/barbarians/axefactory/conf:30
-#: ../../tribes/barbarians/warmill/conf:34
+#: ../../tribes/barbarians/axefactory/conf:28
+#: ../../tribes/barbarians/warmill/conf:32
 msgid "Produce sharpaxe"
 msgstr "Fabricar hacha afilada"
 
-#: ../../tribes/barbarians/metalworks/conf:41
+#: ../../tribes/barbarians/metalworks/conf:40
 msgid "Produce shovel"
 msgstr "Pala"
 
@@ -1955,7 +1955,7 @@ msgstr "Fabricar aperitivo"
 msgid "Produce warhelmet"
 msgstr "Fabricar casco de guerra"
 
-#: ../../tribes/barbarians/warmill/conf:38
+#: ../../tribes/barbarians/warmill/conf:36
 msgid "Produce warriorsaxe"
 msgstr "Fabricar hacha de guerrero"
 
@@ -2063,6 +2063,9 @@ msgid ""
 "Ragnald the Child's answer to the question, what he's doing in the dirt. His "
 "\"new stone\" now is an important building material."
 msgstr ""
+"Ragnald el niño respondió a la pregunta, sobre que es lo que el estaba "
+"haciendo en la basura. Su \"nueva piedra\" es ahora un importante material "
+"de contrucción"
 
 #: ../../tribes/barbarians/conf:142
 #: ../../tribes/barbarians/metalworks/help.lua:41
@@ -2689,10 +2692,13 @@ msgid ""
 "The Lumberjack needs %s to fell a tree, not counting the time he needs to "
 "reach the destination and go home again."
 msgstr ""
+"El leñador necesita %s para cortar un árbol, sin contar el tiempo que "
+"necesita para llegar a su destino y volver a casa de nuevo."
 
 #: ../../tribes/barbarians/lumberjacks_hut/help.lua:23
 msgid "The Lumberjack's Hut needs trees in the immediate vicinity to fell."
 msgstr ""
+"La Cabaña del leñador necesita arboles en las cercanías para talarlos."
 
 #: ../../tribes/barbarians/micro-brewery/help.lua:16
 msgid ""
@@ -3365,12 +3371,12 @@ msgstr "Jabalí"
 msgid "Wood Hardener"
 msgstr "Endurecedor de madera"
 
-#: ../../tribes/barbarians/axefactory/conf:32
+#: ../../tribes/barbarians/axefactory/conf:30
 #: ../../tribes/barbarians/bakery/conf:21
 #: ../../tribes/barbarians/big_inn/conf:27
 #: ../../tribes/barbarians/brewery/conf:20
 #: ../../tribes/barbarians/burners_house/conf:19
-#: ../../tribes/barbarians/cattlefarm/conf:22
+#: ../../tribes/barbarians/cattlefarm/conf:21
 #: ../../tribes/barbarians/coalmine/conf:20
 #: ../../tribes/barbarians/deep_coalmine/conf:23
 #: ../../tribes/barbarians/deep_goldmine/conf:23
@@ -3378,7 +3384,7 @@ msgstr "Endurecedor de madera"
 #: ../../tribes/barbarians/deeper_coalmine/conf:22
 #: ../../tribes/barbarians/deeper_goldmine/conf:22
 #: ../../tribes/barbarians/deeper_oremine/conf:22
-#: ../../tribes/barbarians/farm/conf:21
+#: ../../tribes/barbarians/farm/conf:20
 #: ../../tribes/barbarians/fernery/conf:19
 #: ../../tribes/barbarians/fishers_hut/conf:15
 #: ../../tribes/barbarians/gamekeepers_hut/conf:15
@@ -3390,7 +3396,7 @@ msgstr "Endurecedor de madera"
 #: ../../tribes/barbarians/inn/conf:25
 #: ../../tribes/barbarians/lime_kiln/conf:18
 #: ../../tribes/barbarians/lumberjacks_hut/conf:15
-#: ../../tribes/barbarians/metalworks/conf:43
+#: ../../tribes/barbarians/metalworks/conf:42
 #: ../../tribes/barbarians/micro-brewery/conf:22
 #: ../../tribes/barbarians/oremine/conf:21
 #: ../../tribes/barbarians/quarry/conf:15
@@ -3399,7 +3405,7 @@ msgstr "Endurecedor de madera"
 #: ../../tribes/barbarians/shipyard/conf:22
 #: ../../tribes/barbarians/smelting_works/conf:26
 #: ../../tribes/barbarians/tavern/conf:24
-#: ../../tribes/barbarians/warmill/conf:39
+#: ../../tribes/barbarians/warmill/conf:37
 #: ../../tribes/barbarians/weaving-mill/conf:19
 #: ../../tribes/barbarians/well/conf:14
 msgid "Work"
@@ -3508,7 +3514,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/shipwright/conf:1
 msgid "Works at the shipyard and constructs new ships."
-msgstr "Trabaja en el puerto y construye nuevos barcos."
+msgstr "Trabaja en el astillero y construye nuevos barcos."
 
 #: ../../tribes/barbarians/chief-miner/conf:1
 #: ../../tribes/barbarians/master-miner/conf:1
@@ -3526,7 +3532,7 @@ msgid ""
 msgstr ""
 "Los jóvenes guerreros están orgullosos de aprender a luchar con esta "
 "poderosa arma. Es más pesada y más cortante que el hacha normal. Se produce "
-"en fabricas de hachas y los molinos de guerra. En campos los de "
+"en fabricas de hachas y los molinos de guerra. En los campos de "
 "entrenamiento se utiliza - junto con los alimentos - para entrenar a "
 "soldados desde el nivel de ataque 0 a nivel 1"
 

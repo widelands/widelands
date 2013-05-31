@@ -6,15 +6,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4530\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2012-10-04 15:25+0000\n"
+"POT-Creation-Date: 2013-03-09 16:57+0000\n"
 "PO-Revision-Date: 2012-11-22 10:06+0000\n"
 "Last-Translator: Guybrush88 <Unknown>\n"
 "Language-Team: Italiano <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-11-23 04:39+0000\n"
-"X-Generator: Launchpad (build 16293)\n"
+"X-Launchpad-Export-Date: 2013-03-10 04:35+0000\n"
+"X-Generator: Launchpad (build 16523)\n"
 
 #: ../../tribes/empire/meal/conf:1
 msgid ""
@@ -425,7 +425,7 @@ msgstr "Martello"
 msgid "Harvest vine"
 msgstr "Raccolto vino"
 
-#: ../../tribes/empire/farm/conf:20
+#: ../../tribes/empire/farm/conf:19
 msgid "Harvest wheat"
 msgstr "Raccolto di grano"
 
@@ -646,11 +646,11 @@ msgstr "Porcilaia"
 msgid "Plant vine"
 msgstr "Pianta vigna"
 
-#: ../../tribes/empire/farm/conf:18
+#: ../../tribes/empire/farm/conf:17
 msgid "Plant wheat"
 msgstr "Pianta di grano"
 
-#: ../../tribes/empire/farmer/conf:2
+#: ../../tribes/empire/farmer/conf:1
 msgid "Plants fields."
 msgstr "Pianta campi."
 
@@ -666,7 +666,7 @@ msgstr "Armatura di Piastre"
 msgid "Port"
 msgstr "Porto"
 
-#: ../../tribes/empire/weaponsmithy/conf:31
+#: ../../tribes/empire/weaponsmithy/conf:29
 msgid "Produce advanced lance"
 msgstr "Produzione lancia avanzata"
 
@@ -674,15 +674,15 @@ msgstr "Produzione lancia avanzata"
 msgid "Produce armour"
 msgstr "Produzione corazza"
 
-#: ../../tribes/empire/toolsmithy/conf:44
+#: ../../tribes/empire/toolsmithy/conf:43
 msgid "Produce axe"
 msgstr "Produzione ascia"
 
-#: ../../tribes/empire/toolsmithy/conf:33
+#: ../../tribes/empire/toolsmithy/conf:32
 msgid "Produce bakingtray"
 msgstr "Produzione pala da fornaio"
 
-#: ../../tribes/empire/toolsmithy/conf:42
+#: ../../tribes/empire/toolsmithy/conf:41
 msgid "Produce basket"
 msgstr "Produzione canestro"
 
@@ -690,19 +690,19 @@ msgstr "Produzione canestro"
 msgid "Produce chain armour"
 msgstr "Produzione corazza di maglia"
 
-#: ../../tribes/empire/toolsmithy/conf:34
+#: ../../tribes/empire/toolsmithy/conf:33
 msgid "Produce fire tongs"
 msgstr "Produzione pinze per il fuoco"
 
-#: ../../tribes/empire/toolsmithy/conf:35
+#: ../../tribes/empire/toolsmithy/conf:34
 msgid "Produce fishing rod"
 msgstr "Produzione canna da pesca"
 
-#: ../../tribes/empire/toolsmithy/conf:36
+#: ../../tribes/empire/toolsmithy/conf:35
 msgid "Produce hammer"
 msgstr "Produzione martello"
 
-#: ../../tribes/empire/weaponsmithy/conf:32
+#: ../../tribes/empire/weaponsmithy/conf:30
 msgid "Produce heavy lance"
 msgstr "Produzione lancia pesante"
 
@@ -710,15 +710,15 @@ msgstr "Produzione lancia pesante"
 msgid "Produce helm"
 msgstr "Produzione elmo"
 
-#: ../../tribes/empire/toolsmithy/conf:41
+#: ../../tribes/empire/toolsmithy/conf:40
 msgid "Produce hunting spear"
 msgstr "Produzione lancia da caccia"
 
-#: ../../tribes/empire/toolsmithy/conf:37
+#: ../../tribes/empire/toolsmithy/conf:36
 msgid "Produce kitchen tools"
 msgstr "Produzione strumenti da cucina"
 
-#: ../../tribes/empire/weaponsmithy/conf:30
+#: ../../tribes/empire/weaponsmithy/conf:28
 msgid "Produce lance"
 msgstr "Produzione lancia"
 
@@ -726,7 +726,7 @@ msgstr "Produzione lancia"
 msgid "Produce meal"
 msgstr "Produce un pasto"
 
-#: ../../tribes/empire/toolsmithy/conf:38
+#: ../../tribes/empire/toolsmithy/conf:37
 msgid "Produce pick"
 msgstr "Produzione piccone"
 
@@ -738,23 +738,23 @@ msgstr "Produzione armatura di piastre"
 msgid "Produce ration"
 msgstr "Produce una razione"
 
-#: ../../tribes/empire/toolsmithy/conf:43
+#: ../../tribes/empire/toolsmithy/conf:42
 msgid "Produce saw"
 msgstr "Produzione sega"
 
-#: ../../tribes/empire/toolsmithy/conf:39
+#: ../../tribes/empire/toolsmithy/conf:38
 msgid "Produce scythe"
 msgstr "Produzione falce"
 
-#: ../../tribes/empire/toolsmithy/conf:40
+#: ../../tribes/empire/toolsmithy/conf:39
 msgid "Produce shovel"
 msgstr "Produzione vanga"
 
-#: ../../tribes/empire/weaponsmithy/conf:33
+#: ../../tribes/empire/weaponsmithy/conf:31
 msgid "Produce war lance"
 msgstr "Produzione lancia da guerra"
 
-#: ../../tribes/empire/weaponsmithy/conf:29
+#: ../../tribes/empire/weaponsmithy/conf:27
 msgid "Produce wood lance"
 msgstr "Produzione lancia di legno"
 
@@ -1462,8 +1462,8 @@ msgstr ""
 #: ../../tribes/empire/deep_goldmine/conf:22
 #: ../../tribes/empire/deep_marblemine/conf:23
 #: ../../tribes/empire/deep_oremine/conf:22
-#: ../../tribes/empire/donkeyfarm/conf:22
-#: ../../tribes/empire/farm/conf:22
+#: ../../tribes/empire/donkeyfarm/conf:21
+#: ../../tribes/empire/farm/conf:21
 #: ../../tribes/empire/fishers_house/conf:17
 #: ../../tribes/empire/foresters_house/conf:16
 #: ../../tribes/empire/goldmine/conf:22
@@ -1471,20 +1471,20 @@ msgstr ""
 #: ../../tribes/empire/inn/conf:23
 #: ../../tribes/empire/lumberjacks_house/conf:16
 #: ../../tribes/empire/marblemine/conf:26
-#: ../../tribes/empire/mill/conf:20
+#: ../../tribes/empire/mill/conf:19
 #: ../../tribes/empire/oremine/conf:22
-#: ../../tribes/empire/piggery/conf:21
+#: ../../tribes/empire/piggery/conf:20
 #: ../../tribes/empire/quarry/conf:21
-#: ../../tribes/empire/sawmill/conf:23
+#: ../../tribes/empire/sawmill/conf:22
 #: ../../tribes/empire/scouts_house/conf:17
-#: ../../tribes/empire/sheepfarm/conf:21
+#: ../../tribes/empire/sheepfarm/conf:20
 #: ../../tribes/empire/shipyard/conf:22
 #: ../../tribes/empire/smelting_works/conf:24
-#: ../../tribes/empire/stonemasons_house/conf:21
+#: ../../tribes/empire/stonemasons_house/conf:20
 #: ../../tribes/empire/tavern/conf:22
-#: ../../tribes/empire/toolsmithy/conf:45
+#: ../../tribes/empire/toolsmithy/conf:44
 #: ../../tribes/empire/vineyard/conf:23
-#: ../../tribes/empire/weaponsmithy/conf:34
+#: ../../tribes/empire/weaponsmithy/conf:32
 #: ../../tribes/empire/weaving-mill/conf:16
 #: ../../tribes/empire/well/conf:16
 #: ../../tribes/empire/winery/conf:20

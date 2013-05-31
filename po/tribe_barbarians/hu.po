@@ -6,15 +6,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2012-10-04 15:25+0000\n"
-"PO-Revision-Date: 2012-10-29 15:51+0000\n"
-"Last-Translator: Major Gabesz <major.gabesz@gmail.com>\n"
+"POT-Creation-Date: 2013-03-09 16:57+0000\n"
+"PO-Revision-Date: 2013-04-30 19:06+0000\n"
+"Last-Translator: István Kiss <kiemc@citromail.hu>\n"
 "Language-Team: Language <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-10-30 04:31+0000\n"
-"X-Generator: Launchpad (build 16206)\n"
+"X-Launchpad-Export-Date: 2013-05-01 04:31+0000\n"
+"X-Generator: Launchpad (build 16580)\n"
 
 #: ../../tribes/barbarians/axefactory/help.lua:12
 #: ../../tribes/barbarians/warmill/help.lua:12
@@ -528,7 +528,7 @@ msgstr "Kovácsműhely"
 #: ../../tribes/barbarians/warmill/help.lua:43
 #: ../../tribes/barbarians/warmill/help.lua:49
 msgid "Blackwood"
-msgstr "Gerenda"
+msgstr "Edzett fa"
 
 #: ../../tribes/barbarians/trainingscamp/help.lua:33
 msgid "Both Trainings:"
@@ -847,7 +847,7 @@ msgstr ""
 msgid "Crew required:"
 msgstr ""
 
-#: ../../tribes/barbarians/stonemason/conf:2
+#: ../../tribes/barbarians/stonemason/conf:1
 msgid "Cuts raw pieces of granite out of laying stones."
 msgstr "Nyers gránit darabokat vág ki a kövekből."
 
@@ -1296,7 +1296,7 @@ msgstr "Kalapács"
 msgid "Harvest reed"
 msgstr "Nád betakarítása"
 
-#: ../../tribes/barbarians/farm/conf:19
+#: ../../tribes/barbarians/farm/conf:18
 msgid "Harvest wheat"
 msgstr "Búza betakarítása"
 
@@ -1829,11 +1829,11 @@ msgstr "Nádat termeszt"
 msgid "Plant trees in the surrounding area."
 msgstr ""
 
-#: ../../tribes/barbarians/farm/conf:17
+#: ../../tribes/barbarians/farm/conf:16
 msgid "Plant wheat"
 msgstr "Búzát vet"
 
-#: ../../tribes/barbarians/farmer/conf:2
+#: ../../tribes/barbarians/farmer/conf:1
 msgid "Plants fields."
 msgstr "Mezőn dolgozik."
 
@@ -1845,41 +1845,41 @@ msgstr "Fákat ültet"
 msgid "Port"
 msgstr ""
 
-#: ../../tribes/barbarians/axefactory/conf:29
-#: ../../tribes/barbarians/warmill/conf:33
+#: ../../tribes/barbarians/axefactory/conf:27
+#: ../../tribes/barbarians/warmill/conf:31
 msgid "Produce axe"
 msgstr "Fejszét készít"
 
-#: ../../tribes/barbarians/metalworks/conf:34
+#: ../../tribes/barbarians/metalworks/conf:33
 msgid "Produce bakingtray"
 msgstr "Sütőtálcát készít"
 
-#: ../../tribes/barbarians/warmill/conf:37
+#: ../../tribes/barbarians/warmill/conf:35
 msgid "Produce battleaxe"
 msgstr "Harci fejszét készít"
 
-#: ../../tribes/barbarians/axefactory/conf:31
-#: ../../tribes/barbarians/warmill/conf:35
+#: ../../tribes/barbarians/axefactory/conf:29
+#: ../../tribes/barbarians/warmill/conf:33
 msgid "Produce broadaxe"
 msgstr "Széles fejszét készít"
 
-#: ../../tribes/barbarians/warmill/conf:36
+#: ../../tribes/barbarians/warmill/conf:34
 msgid "Produce bronzeaxe"
 msgstr "Bronzfejszét készít"
 
-#: ../../tribes/barbarians/metalworks/conf:33
+#: ../../tribes/barbarians/metalworks/conf:32
 msgid "Produce felling axe"
 msgstr "Favágó fejszét készít"
 
-#: ../../tribes/barbarians/metalworks/conf:35
+#: ../../tribes/barbarians/metalworks/conf:34
 msgid "Produce fire tongs"
 msgstr "Fogót készít"
 
-#: ../../tribes/barbarians/metalworks/conf:36
+#: ../../tribes/barbarians/metalworks/conf:35
 msgid "Produce fishing rod"
 msgstr "Horgászbotot készít"
 
-#: ../../tribes/barbarians/metalworks/conf:37
+#: ../../tribes/barbarians/metalworks/conf:36
 msgid "Produce hammer"
 msgstr "Kalapácsot készít"
 
@@ -1887,11 +1887,11 @@ msgstr "Kalapácsot készít"
 msgid "Produce helm"
 msgstr "Sisakot készít"
 
-#: ../../tribes/barbarians/metalworks/conf:42
+#: ../../tribes/barbarians/metalworks/conf:41
 msgid "Produce hunting spear"
 msgstr "Vadászlándzsát készít"
 
-#: ../../tribes/barbarians/metalworks/conf:38
+#: ../../tribes/barbarians/metalworks/conf:37
 msgid "Produce kitchen tools"
 msgstr "Konyhai eszközöket készít"
 
@@ -1903,7 +1903,7 @@ msgstr "Maszkot készít"
 msgid "Produce meal"
 msgstr "Ebédet készít"
 
-#: ../../tribes/barbarians/metalworks/conf:39
+#: ../../tribes/barbarians/metalworks/conf:38
 msgid "Produce pick"
 msgstr "Csákányt készít"
 
@@ -1913,16 +1913,16 @@ msgstr "Csákányt készít"
 msgid "Produce ration"
 msgstr "Fejadagot készít"
 
-#: ../../tribes/barbarians/metalworks/conf:40
+#: ../../tribes/barbarians/metalworks/conf:39
 msgid "Produce scythe"
 msgstr "Kaszát készít"
 
-#: ../../tribes/barbarians/axefactory/conf:30
-#: ../../tribes/barbarians/warmill/conf:34
+#: ../../tribes/barbarians/axefactory/conf:28
+#: ../../tribes/barbarians/warmill/conf:32
 msgid "Produce sharpaxe"
 msgstr "Éles fejszét készít"
 
-#: ../../tribes/barbarians/metalworks/conf:41
+#: ../../tribes/barbarians/metalworks/conf:40
 msgid "Produce shovel"
 msgstr "Lapátot készít"
 
@@ -1935,7 +1935,7 @@ msgstr "Harapnivalót készít"
 msgid "Produce warhelmet"
 msgstr "Harci sisakot készít"
 
-#: ../../tribes/barbarians/warmill/conf:38
+#: ../../tribes/barbarians/warmill/conf:36
 msgid "Produce warriorsaxe"
 msgstr "Harci fejszét készít"
 
@@ -3265,14 +3265,14 @@ msgstr "Vaddisznó"
 #: ../../tribes/barbarians/conf:190
 #: ../../tribes/barbarians/lumberjacks_hut/help.lua:30
 msgid "Wood Hardener"
-msgstr "Fűrészmalom"
+msgstr "Faedző műhely"
 
-#: ../../tribes/barbarians/axefactory/conf:32
+#: ../../tribes/barbarians/axefactory/conf:30
 #: ../../tribes/barbarians/bakery/conf:21
 #: ../../tribes/barbarians/big_inn/conf:27
 #: ../../tribes/barbarians/brewery/conf:20
 #: ../../tribes/barbarians/burners_house/conf:19
-#: ../../tribes/barbarians/cattlefarm/conf:22
+#: ../../tribes/barbarians/cattlefarm/conf:21
 #: ../../tribes/barbarians/coalmine/conf:20
 #: ../../tribes/barbarians/deep_coalmine/conf:23
 #: ../../tribes/barbarians/deep_goldmine/conf:23
@@ -3280,7 +3280,7 @@ msgstr "Fűrészmalom"
 #: ../../tribes/barbarians/deeper_coalmine/conf:22
 #: ../../tribes/barbarians/deeper_goldmine/conf:22
 #: ../../tribes/barbarians/deeper_oremine/conf:22
-#: ../../tribes/barbarians/farm/conf:21
+#: ../../tribes/barbarians/farm/conf:20
 #: ../../tribes/barbarians/fernery/conf:19
 #: ../../tribes/barbarians/fishers_hut/conf:15
 #: ../../tribes/barbarians/gamekeepers_hut/conf:15
@@ -3292,7 +3292,7 @@ msgstr "Fűrészmalom"
 #: ../../tribes/barbarians/inn/conf:25
 #: ../../tribes/barbarians/lime_kiln/conf:18
 #: ../../tribes/barbarians/lumberjacks_hut/conf:15
-#: ../../tribes/barbarians/metalworks/conf:43
+#: ../../tribes/barbarians/metalworks/conf:42
 #: ../../tribes/barbarians/micro-brewery/conf:22
 #: ../../tribes/barbarians/oremine/conf:21
 #: ../../tribes/barbarians/quarry/conf:15
@@ -3301,7 +3301,7 @@ msgstr "Fűrészmalom"
 #: ../../tribes/barbarians/shipyard/conf:22
 #: ../../tribes/barbarians/smelting_works/conf:26
 #: ../../tribes/barbarians/tavern/conf:24
-#: ../../tribes/barbarians/warmill/conf:39
+#: ../../tribes/barbarians/warmill/conf:37
 #: ../../tribes/barbarians/weaving-mill/conf:19
 #: ../../tribes/barbarians/well/conf:14
 msgid "Work"
