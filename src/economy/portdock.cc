@@ -36,11 +36,10 @@ namespace Widelands {
 
 namespace {
 
-// NOCOM(#peter): moved this method to be a static local one and it gets a vector passed in (instead of creating a new one which needs to be freed - which you didn't do :) ).
-
 /// Converts the expeditions WaresQueues as well as workers to ShippingItems
 /// \note Should only be called if all wares and workers arrived.
-void expedition_wares(Game & game, const Tribe_Descr& tribe, Warehouse* warehouse, std::vector<ShippingItem>* wares) {
+void expedition_wares
+	(Game & game, const Tribe_Descr& tribe, Warehouse* warehouse, std::vector<ShippingItem>* wares) {
 	std::vector<Warehouse::Expedition_Worker *> & ew = warehouse->get_expedition_workers();
 	for (uint8_t i = 0; i < ew.size(); ++i) {
 		assert(!ew.at(i)->worker_request);
@@ -409,15 +408,14 @@ void PortDock::start_expedition() {
 	// Load the buildcosts for the port building + builder
 	const std::map<Ware_Index, uint8_t> & buildcost = m_warehouse->descr().buildcost();
 	size_t const buildcost_size = buildcost.size();
-	// NOCOM(#peter): cache -> catch?
-	// Now try to cache all the wares directly from the portdocks warehouse, if they exist.
+	// Now try to catch all the wares directly from the portdocks warehouse, if they exist.
 	std::vector<WaresQueue *> & l_expedition_wares = m_warehouse->get_wares_queue_vector();
 	if (m_warehouse->size_of_expedition_wares_queue() != buildcost_size) {
 		// Initialize the wares queue
 		l_expedition_wares.resize(buildcost_size);
 		std::map<Ware_Index, uint8_t>::const_iterator it = buildcost.begin();
 		for (size_t i = 0; i < buildcost_size; ++i, ++it) {
-			// NOCOM(#peter): I worry about memory leaks here - who destroys the WaresQueue created here?
+			// WaresQueues created here get destroyed in the Warehouse destructer
 			WaresQueue & wq = *(l_expedition_wares[i] = new WaresQueue(*m_warehouse, it->first, it->second));
 			wq.set_callback(PortDock::expedition_wares_queue_callback, this);
 		}
@@ -458,7 +456,6 @@ void PortDock::check_expedition_wares_and_workers(Game & game) {
 			return;
 	}
 
-	// NOCOM(#peter): can get_expedition_workers() be const?
 	const std::vector<Warehouse::Expedition_Worker *> & ew = m_warehouse->get_expedition_workers();
 	for (size_t i = 0; i < ew.size(); ++i) {
 		if (ew.at(i)->worker_request)

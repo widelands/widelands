@@ -159,47 +159,6 @@ private:
 	void send_message
 		(Game &, const std::string &, const std::string &, const std::string &, const std::string &);
 
-	/// \returns the neighbour direction in clockwise
-	// NOCOM(#peter): How about pulling them out into a new file 'walkingdir.cc' and make them stand alone methods? There is nothing Ship specific about them and they use no ship data.
-	uint8_t get_cw_neighbour(uint8_t dir) {
-		switch (dir) {
-			case WALK_NE:
-				return WALK_E;
-			case WALK_E:
-				return WALK_SE;
-			case WALK_SE:
-				return WALK_SW;
-			case WALK_SW:
-				return WALK_W;
-			case WALK_W:
-				return WALK_NW;
-			case WALK_NW:
-				return WALK_NE;
-			default:
-				return 0;
-		}
-	}
-
-	/// \returns the neighbour direction in counterclockwise
-	uint8_t get_ccw_neighbour(uint8_t dir) {
-		switch (dir) {
-			case WALK_E:
-				return WALK_NE;
-			case WALK_NE:
-				return WALK_NW;
-			case WALK_NW:
-				return WALK_W;
-			case WALK_W:
-				return WALK_SW;
-			case WALK_SW:
-				return WALK_SE;
-			case WALK_SE:
-				return WALK_E;
-			default:
-				return 0;
-		}
-	}
-
 	UI::Window * m_window;
 
 	Fleet   * m_fleet;
@@ -210,7 +169,6 @@ private:
 	uint8_t m_ship_state;
 
 	struct Expedition {
-		// NOCOM(#peter): converted this into a scoped_ptr, so it can never leak.
 		boost::scoped_ptr<std::list<Coords> > seen_port_buildspaces;
 		bool swimable[LAST_DIRECTION];
 		bool island_exploration;
@@ -218,7 +176,6 @@ private:
 		Coords exploration_start;
 		bool clockwise;
 	};
-	// NOCOM(#peter): Made this a scoped_ptr as well
 	boost::scoped_ptr<Expedition> m_expedition;
 
 	// saving and loading
@@ -236,7 +193,6 @@ protected:
 		uint32_t m_lastdock;
 		uint32_t m_destination;
 		uint8_t  m_ship_state;
-		// NOCOM(#peter): this as well
 		boost::scoped_ptr<Expedition> m_expedition;
 		std::vector<ShippingItem::Loader> m_items;
 	};

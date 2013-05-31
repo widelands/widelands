@@ -199,7 +199,8 @@ void Ship::ship_update(Game & game, Bob::State & state)
 	Map & map = game.map();
 
 	if (m_ship_state == TRANSPORT) {
-		// NOCOM(#peter): I feel splitting the two branches of this if into their own methods would make this method more readable.
+		// FIXME Splitting the two branches of this if into their own methods
+		// FIXME would make this method more readable.
 		if (PortDock * dst = get_destination(game)) {
 			FCoords position = map.get_fcoords(get_position());
 			if (position.field->get_immovable() == dst) {
@@ -273,14 +274,14 @@ void Ship::ship_update(Game & game, Bob::State & state)
 		FCoords position = get_position();
 		for (Direction dir = 1; dir <= LAST_DIRECTION; ++dir) {
 			assert(m_expedition);
-			// the ship fills all fields in the radius of 1, therefore we check the fields in r = 2
+			// the ship fills all fields in the radius of 1 (with exception of NW and NE), therefore we check the
+			// fields in r = 2
 			const FCoords node = map.get_neighbour(map.get_neighbour(position, dir), dir);
 			m_expedition->swimable[dir - 1] = node.field->nodecaps() & MOVECAPS_SWIM;
 		}
 
 		if (m_ship_state == EXP_SCOUTING) {
 			// Check surrounding fields for port buildspaces
-			// NOCOM(#peter): converted this to a scoped ptr, so it never leaks memory.
 			boost::scoped_ptr<std::list<Coords> > temp_port_buildspaces(new std::list<Coords>());
 			Widelands::MapRegion<Widelands::Area<Widelands::Coords> > mr
 				(map, Widelands::Area<Widelands::Coords>(position, vision_range()));

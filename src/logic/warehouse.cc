@@ -289,6 +289,17 @@ Warehouse::~Warehouse()
 {
 	delete m_supply;
 	delete[] m_next_worker_without_cost_spawn;
+	for (uint8_t i = 0; i < m_expedition_wares.size(); ++i) {
+		delete m_expedition_wares.at(i);
+	}
+	for (uint8_t i = 0; i < m_expedition_workers.size(); ++i) {
+		if (m_expedition_workers.at(i)->worker_request)
+			delete m_expedition_workers.at(i)->worker_request;
+		if (m_expedition_workers.at(i)->worker)
+			delete m_expedition_workers.at(i)->worker;
+		delete m_expedition_workers.at(i);
+	}
+
 }
 
 /**
