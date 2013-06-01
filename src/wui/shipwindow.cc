@@ -224,10 +224,12 @@ void ShipWindow::think()
 		 */
 		m_btn_construct_port->set_enabled(state == Ship::EXP_FOUNDPORTSPACE);
 		bool coast_nearby = false;
+		bool moveable = false;
 		for (Direction dir = 1; dir <= LAST_DIRECTION; ++dir) {
 			// NOTE buttons are saved in the format DIRECTION - 1
 			m_btn_scout[dir - 1]->set_enabled(m_ship.exp_dir_swimable(dir) && (state != Ship::EXP_COLONIZING));
 			coast_nearby |= !m_ship.exp_dir_swimable(dir);
+			moveable |= m_ship.exp_dir_swimable(dir);
 		}
 		m_btn_explore_island_cw ->set_enabled(coast_nearby && (state != Ship::EXP_COLONIZING));
 		m_btn_explore_island_ccw->set_enabled(coast_nearby && (state != Ship::EXP_COLONIZING));
@@ -281,11 +283,14 @@ void ShipWindow::act_construct_port() {
 /// Explores the island cw or ccw
 void ShipWindow::act_explore_island(bool cw) {
 	bool coast_nearby = false;
-	for (Direction dir = 1; (dir <= LAST_DIRECTION) && !coast_nearby; ++dir) {
+	bool moveable = false;
+	for (Direction dir = 1; (dir <= LAST_DIRECTION) && (!coast_nearby || !moveable); ++dir) {
 		if (!m_ship.exp_dir_swimable(dir))
 			coast_nearby = true;
+		else
+			moveable = true;
 	}
-	if (!coast_nearby)
+	if (!coast_nearby || !moveable)
 		return;
 	m_igbase.game().send_player_ship_explore_island(m_ship, cw);
 }

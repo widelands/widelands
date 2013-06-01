@@ -276,8 +276,12 @@ void Ship::ship_update(Game & game, Bob::State & state)
 			assert(m_expedition);
 			// the ship fills all fields in the radius of 1 (with exception of NW and NE), therefore we check the
 			// fields in r = 2
-			const FCoords node = map.get_neighbour(map.get_neighbour(position, dir), dir);
-			m_expedition->swimable[dir - 1] = node.field->nodecaps() & MOVECAPS_SWIM;
+			m_expedition->swimable[dir - 1] =
+				map.get_neighbour(map.get_neighbour(position, dir), dir).field->nodecaps() & MOVECAPS_SWIM
+				&&
+				map.get_neighbour(position, get_cw_neighbour(dir)).field->nodecaps() & MOVECAPS_SWIM
+				&&
+				map.get_neighbour(position, get_ccw_neighbour(dir)).field->nodecaps() & MOVECAPS_SWIM;
 		}
 
 		if (m_ship_state == EXP_SCOUTING) {
