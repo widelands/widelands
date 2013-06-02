@@ -83,16 +83,23 @@ class MilitarySite
 
 MilitarySite::MilitarySite(const MilitarySite_Descr & ms_descr) :
 ProductionSite(ms_descr),
-m_soldier_request(0),
+m_soldier_normal_request(0),
 m_didconquer  (false),
 m_capacity    (ms_descr.get_max_number_of_soldiers()),
 m_nexthealtime(0)
-{}
+{
+	preferAnySoldiers();
+	m_soldier_upgrade_required_max = 10101;
+	m_soldier_upgrade_required_min = 0; // The values do not matter, but I still like to initialize
+	soldier_upgrade_try = false;
+	doing_upgrade_request = false;
+	m_soldier_upgrade_request = NULL;
+}
 
 
 MilitarySite::~MilitarySite()
 {
-	assert(!m_soldier_request);
+	assert(!m_soldier_normal_request);
 }
 
 
@@ -163,8 +170,8 @@ void MilitarySite::set_economy(Economy * const e)
 {
 	ProductionSite::set_economy(e);
 
-	if (m_soldier_request && e)
-		m_soldier_request->set_economy(e);
+	if (m_soldier_normal_request && e)
+		m_soldier_normal_request->set_economy(e);
 }
 
 /**
@@ -187,8 +194,8 @@ void MilitarySite::cleanup(Editor_Game_Base & egbase)
 
 	// Note that removing workers during ProductionSite::cleanup can generate
 	// new requests; that's why we delete it at the end of this function.
-	delete m_soldier_request;
-	m_soldier_request = 0;
+	delete m_soldier_normal_request;
+	m_soldier_normal_request = 0;
 }
 
 
@@ -199,13 +206,25 @@ Takes one soldier and adds him to ours
 returns 0 on succes, -1 if there was no room for this soldier
 ===============
 */
-int MilitarySite::incorporateSoldier(Editor_Game_Base & egbase, Soldier & s) {
-	if (s.get_location(egbase) != this) {
-		if (stationedSoldiers().size() + 1 > descr().get_max_number_of_soldiers())
-			return -1;
-
+int MilitarySite::incorporateSoldier(Editor_Game_Base & egbase, Soldier & s)
+{
+	//log ("msited %4x debu incS enter stationed %d max# %d\n",
+	//(uint16_t)((uint64_t((void*)this))&0xffff),
+	//stationedSoldiers().size(),descr().get_max_number_of_soldiers());
+	if (s.get_location(egbase) != this)
+	{
+		//log ("msited %4x debu incS ldiff\n",(uint16_t)((uint64_t((void*)this))&0xffff));
 		s.set_location(this);
 	}
+	//else  log ("msited %4x debu incS location was same..\n",(uint16_t)((uint64_t((void*)this))&0xffff));
+
+	if (stationedSoldiers().size()  > descr().get_max_number_of_soldiers())
+	{
+		return incorporateUpgradedSoldier(egbase, s);
+	}
+	//else log ("msited %4x debu incS sss %d <= max %d\n",
+	//(uint16_t)((uint64_t((void*)this))&0xffff),
+	//stationedSoldiers().size(),descr().get_max_number_of_soldiers());
 
 	if (not m_didconquer) {
 		conquer_area(egbase);
@@ -233,11 +252,76 @@ int MilitarySite::incorporateSoldier(Editor_Game_Base & egbase, Soldier & s) {
 	}
 
 	// Make sure the request count is reduced or the request is deleted.
-	update_soldier_request();
+	update_soldier_request_impl(true);
 
 	return 0;
 }
 
+// This find room for a soldier in an already full occupied military building.
+int
+MilitarySite::incorporateUpgradedSoldier(Editor_Game_Base & egbase, Soldier & s)
+{
+	//log ("msited %4x debu incUS enter\n",(uint16_t)((uint64_t((void*)this))&0xffff));
+	std::vector<Soldier *> present = presentSoldiers();
+	bool heros = soldier_trainlevel_hero == soldier_preference;
+	const int32_t multiplier = heros ? -1:1;
+	static const int32_t level_offset = 10000;
+	int32_t ng_level = level_offset + multiplier * s.get_level(atrTotal);
+	Soldier* kickoutCandidate = NULL;
+
+	//log("msited %4x debu incUS arriving_soldier_level %2d (%4d)\n",
+	//  (uint16_t)((uint64_t((void*)this))&0xffff), s.get_level(atrTotal), ng_level);
+
+
+	// Once more, I check whether this guy is "better" that the least suited
+	// soldier currently present in the building. This could also result a
+	// not-found, if the worst stationed is currently not present. If so, I could
+	// still do the exchange, but prefer not to (less debugging, with soldiers
+	// ejected in the middle of a battle)
+	//
+	// It looks a bit silly, that a hero leaves a military site because it is
+	// under attack. Should I reconsider using stationed soldiers instead of
+	// present soldiers in this check?
+	for (uint32_t i = 0; i < present.size(); ++i)
+	{
+		int32_t this_soldier_level = level_offset + multiplier* present[i]->get_level(atrTotal);
+		//log ("msited %4x debu incUS present_soldier_level %2d (%4d)",
+		//(uint16_t)((uint64_t((void*)this))&0xffff), present[i]->get_level(atrTotal), this_soldier_level);
+		if (this_soldier_level > ng_level)
+		{
+			ng_level = this_soldier_level;
+			kickoutCandidate = present[i];
+			//log(" kickout-candidate");
+		}
+		//log("\n");
+	}
+	if (kickoutCandidate)
+	{
+		//log ("msited %4x debu incUS kicking out!\n",(uint16_t)((uint64_t((void*)this))&0xffff));
+		// I drop a soldier here. In a way, I already have a "dropSoldier" routine.
+		// However, that one calls update_soldier_request. I do not like recursion
+		// like that. This is the straightforward albeit clumsy way to get over.
+		//Game & game = ref_cast<Game, Editor_Game_Base>(owner().egbase());
+		Game & game = ref_cast<Game, Editor_Game_Base>(egbase);
+
+		// Should never happen, I was iterating through presentSoldiers..
+		if (!isPresent(*kickoutCandidate))
+		{
+			//log
+			//("MilitarySite::incorporateUpgradedSoldier: %4x Soldier is not present ???\n",
+			//  (uint16_t)((uint64_t((void*)this))&0xffff));
+			return -1;
+		}
+		kickoutCandidate->reset_tasks(game);
+		kickoutCandidate->start_task_leavebuilding(game, true);
+		s.set_location(this);
+		s.reset_tasks(game);
+		s.start_task_buildingwork(game);
+		return 0;
+	}
+	//log ("msited %4x debu incUS failed.\n",(uint16_t)((uint64_t((void*)this))&0xffff));
+	return -1;
+}
 /*
 ===============
 Called when our soldier arrives.
@@ -261,26 +345,26 @@ void MilitarySite::request_soldier_callback
  * Update the request for soldiers and cause soldiers to be evicted
  * as appropriate.
  */
-void MilitarySite::update_soldier_request()
+void MilitarySite::update_normal_soldier_request()
 {
 	std::vector<Soldier *> present = presentSoldiers();
 	uint32_t const stationed = stationedSoldiers().size();
 
 	if (stationed < m_capacity) {
-		if (!m_soldier_request) {
-			m_soldier_request =
+		if (!m_soldier_normal_request) {
+			m_soldier_normal_request =
 				new Request
 					(*this,
 					 tribe().safe_worker_index("soldier"),
 					 MilitarySite::request_soldier_callback,
 					 wwWORKER);
-			m_soldier_request->set_requirements (m_soldier_requirements);
+			m_soldier_normal_request->set_requirements (m_soldier_requirements);
 		}
 
-		m_soldier_request->set_count(m_capacity - stationed);
+		m_soldier_normal_request->set_count(m_capacity - stationed);
 	} else {
-		delete m_soldier_request;
-		m_soldier_request = 0;
+		delete m_soldier_normal_request;
+		m_soldier_normal_request = 0;
 	}
 
 	if (m_capacity < present.size()) {
@@ -292,13 +376,146 @@ void MilitarySite::update_soldier_request()
 		}
 	}
 }
+void MilitarySite::update_upgrade_soldier_request()
+{
+	//log ("msited %4x debu uusr enter\n",(uint16_t)((uint64_t((void*)this))&0xffff));
+	bool reqch = update_upgrade_requirements();
+	if (not soldier_upgrade_try)
+		return;
+	bool dosomething = reqch;
+	//log ("msited %4x debu uusr tp1\n",(uint16_t)((uint64_t((void*)this))&0xffff));
 
+	if (NULL != m_soldier_upgrade_request)
+	{
+		if (not (m_soldier_upgrade_request->is_open()))
+			dosomething = false;
+		if (0 == m_soldier_upgrade_request->get_count())
+			dosomething = true;
+	}
+	else
+		dosomething = true;
+	//log ("msited %4x debu uusr tp2\n",(uint16_t)((uint64_t((void*)this))&0xffff));
+	if (dosomething)
+	{
+		if (NULL != m_soldier_upgrade_request)
+		{
+			//log ("msited %4x debu uusr deleting sur\n",(uint16_t)((uint64_t((void*)this))&0xffff));
+			delete m_soldier_upgrade_request;
+			m_soldier_upgrade_request = NULL;
+		}
+
+		//log ("msited %4x debu uusr making request\n",(uint16_t)((uint64_t((void*)this))&0xffff));
+		m_soldier_upgrade_request =
+				new Request
+				(*this,
+				tribe().safe_worker_index("soldier"),
+				MilitarySite::request_soldier_callback,
+				wwWORKER);
+		//if ( NULL==m_soldier_upgrade_request) log ("msited %4x debu uusr request is null..\n",
+		//                          (uint16_t)((uint64_t((void*)this))&0xffff));
+
+
+		//log ("msited %4x debu uusr setting requirements\n",(uint16_t)((uint64_t((void*)this))&0xffff));
+		m_soldier_upgrade_request->set_requirements (m_soldier_upgrade_requirements);
+
+		//log ("msited %4x debu uusr setting request counter\n",(uint16_t)((uint64_t((void*)this))&0xffff));
+		m_soldier_upgrade_request->set_count(1);
+		//log ("msited %4x debu uusr setting count\n",(uint16_t)((uint64_t((void*)this))&0xffff));
+
+	}
+	//log ("msited %4x debu uusr return\n",(uint16_t)((uint64_t((void*)this))&0xffff));
+}
+
+void MilitarySite::update_soldier_request_impl(bool incd)
+{
+	int32_t sc = soldierCapacity();
+	int32_t sss = stationedSoldiers().size();
+
+	//log ("msited %4x debu usri enter %d\n",(uint16_t)((uint64_t((void*)this))&0xffff),incd);
+	if (doing_upgrade_request)
+	{
+		if (incd) // update requests always ask for one soldier at time!
+		{
+		  //log ("msited %4x debu usri deleting msur\n",(uint16_t)(((unsigned long)((void*)this))&0xffff));
+
+			delete m_soldier_upgrade_request;
+			m_soldier_upgrade_request = NULL;
+		}
+		if (sc > sss)
+		{
+			// Somebody is killing my soldiers in the middle of upgrade -- bad luck!
+			if (NULL != m_soldier_upgrade_request)
+			if (m_soldier_upgrade_request->is_open())
+			{
+				// Economy was not able to find the soldiers I need. Discarding request.
+
+				//log ("msited %4x debu usri deleting an open msur\n",
+				// (uint16_t)(((unsigned long) ((void*)this))&0xffff));
+				delete m_soldier_upgrade_request;
+				m_soldier_upgrade_request = NULL;
+			}
+			if (NULL == m_soldier_upgrade_request)
+			{
+				//log ("msited %4x debu usri returning to normal mode\n",
+				// (uint16_t)(((unsigned long)((void*)this))&0xffff));
+				doing_upgrade_request = false;
+				update_normal_soldier_request();
+			}
+			// else -- ohno please help me! Player is in trouble -- evil grin
+		}
+		else
+		if (sc < sss) // player is reducing capacity
+		{
+			if (m_soldier_upgrade_request)
+				delete m_soldier_upgrade_request;
+			m_soldier_upgrade_request = NULL;
+			doing_upgrade_request = false;
+			update_normal_soldier_request();
+		}
+		else
+		{
+			update_upgrade_soldier_request();
+		}
+	}
+	else // not doing upgrade request
+	{
+		if ((sc != sss) or (NULL != m_soldier_normal_request))
+		{
+			update_normal_soldier_request();
+		}
+		if ((sc == sss) and (NULL == m_soldier_normal_request))
+		if (soldier_trainlevel_any != soldier_preference)
+		{
+			//log ("msited %4x debu usri switching to upgrade\n",
+			//  (uint16_t)(((unsigned long) ((void*)this))&0xffff));
+			int32_t pss = presentSoldiers().size();
+			if (pss == sc)
+			{
+				doing_upgrade_request = true;
+				//log ("msited %4x debu usri calling uusr\n",(uint16_t)(((unsigned long) ((void*)this))&0xffff));
+
+				update_upgrade_soldier_request();
+				//log ("msited %4x debu usri return  uusr\n",(uint16_t)(((unsigned long)((void*)this))&0xffff));
+			}
+			// Note -- if there are non-present stationed soldiers, nothing gets
+			// called. Therefore, I revisit this routine periodically without apparent
+			// reason, hoping that all stationed soldiers would be present.
+		}
+	}
+	//log ("msited %4x debu usri exit\n",(uint16_t)((uint64_t((void*)this))&0xffff));
+}
+void MilitarySite::update_soldier_request()
+{
+	update_soldier_request_impl(false);
+}
 
 /*
 ===============
 Advance the program state if applicable.
 ===============
 */
+
+
 void MilitarySite::act(Game & game, uint32_t const data)
 {
 	// TODO: do all kinds of stuff, but if you do nothing, let
@@ -306,7 +523,30 @@ void MilitarySite::act(Game & game, uint32_t const data)
 	// commands rely, that ProductionSite::act() is not called for a certain
 	// period (like cmdAnimation). This should be reworked.
 	// Maybe a new queueing system like MilitaryAct could be introduced.
+
 	ProductionSite::act(game, data);
+
+	int32_t timeofgame = game.get_gametime();
+
+	// gametime might be 2048 ticks per second
+	//log ("f978 MilitarySite::act: gametime %d wctime %ld cap %2d stationed %2ld present %2ld", timeofgame,
+	// time(NULL), soldierCapacity(), stationedSoldiers().size(), presentSoldiers().size());
+	//if (m_soldier_normal_request)
+	//{
+	//  if (m_soldier_normal_request->is_open())
+	// log(" open request\n");
+	// else
+	//  log(" Filled request\n");
+	//}
+	//else
+	// log (" no request\n");
+	// present is the list of soldiers actually sitting in the building.
+	if ((soldier_trainlevel_any != soldier_preference) or doing_upgrade_request)
+		if (timeofgame > next_swap_soldiers_time)
+			{
+				next_swap_soldiers_time = 20000 + timeofgame;
+				update_soldier_request();
+			}
 
 	if (m_nexthealtime <= game.get_gametime()) {
 		uint32_t total_heal = descr().get_heal_per_second();
@@ -755,5 +995,115 @@ Map_Object * MilitarySite::popSoldierJob
 		}
 	return 0;
 }
+
+
+bool
+MilitarySite::update_upgrade_requirements()
+{
+	// Fixme -- here are bugs -- find and fix
+	bool heros = true;
+	switch (soldier_preference)
+	{
+		case soldier_trainlevel_hero:
+			heros = true;
+			//log ("msited %4x debu uur heros\n",(uint16_t)((uint64_t((void*)this))&0xffff));
+			break;
+		case soldier_trainlevel_rookie:
+			heros = false;
+			//log ("msited %4x debu uur rookies\n",(uint16_t)((uint64_t((void*)this))&0xffff));
+			break;
+		default:
+			log("MilitarySite::swapSoldiers: error: Unknown player preference %d.\n", soldier_preference);
+			//log ("msited %4x debu urr dunno\n",(uint16_t)((uint64_t((void*)this))&0xffff));
+			soldier_upgrade_try = false;
+			return false;
+	}
+
+	std::vector<Soldier *> svec = stationedSoldiers();
+	int32_t multiplier = heros ? -1:1;
+	int32_t wg_level = 0;
+	int32_t level_offset = 10000;
+	int32_t wg_actual_level = heros ? 0 : 101;
+	for (uint32_t i = 0; i < svec.size(); ++i)
+	{
+		int32_t this_soldier_level = level_offset + multiplier* svec[i]->get_level(atrTotal);
+		if (this_soldier_level > wg_level)
+		{
+			wg_level = this_soldier_level;
+			wg_actual_level = svec[i]->get_level(atrTotal);
+
+		}
+	}
+	soldier_upgrade_try = true;
+	if (! heros)
+		if (level_offset == wg_level)
+			{
+				soldier_upgrade_try = false;
+				return false;
+			}
+	int32_t reqmin = heros ? 1 + wg_actual_level : 0;
+	int32_t reqmax = heros ? 10000 : wg_actual_level - 1;
+
+	bool maxchanged = reqmax != static_cast<int32_t>(m_soldier_upgrade_required_max);
+	bool minchanged = reqmin != static_cast<int32_t>(m_soldier_upgrade_required_min);
+
+	if (maxchanged or minchanged)
+	{
+		if (NULL == m_soldier_normal_request or (m_soldier_normal_request->is_open()))
+		{
+			if (m_soldier_normal_request)
+			{
+				delete m_soldier_normal_request;
+				m_soldier_normal_request = 0;
+			}
+			m_soldier_upgrade_requirements = RequireAttribute(atrTotal, reqmin, reqmax);
+			m_soldier_upgrade_required_max = reqmax;
+			m_soldier_upgrade_required_min = reqmin;
+			//m_soldier_upgrade_requirements=RequireOr();
+			//m_soldier_upgrade_requirements.add(RequireAttribute(atrTotal,reqmin, reqmax));
+			//log ("msited %4x debu urr making requirements [%d,%d]\n",
+			//(uint16_t)((uint64_t((void*)this))&0xffff),reqmin, reqmax);
+
+			return true;
+		}
+	}
+
+	return false;
+}
+
+void
+MilitarySite::preferSkilledSoldiers()
+{
+	soldier_preference = soldier_trainlevel_hero;
+}
+
+void
+MilitarySite::preferAnySoldiers()
+{
+	soldier_preference = soldier_trainlevel_any;
+}
+void
+MilitarySite::preferCheapSoldiers()
+{
+	soldier_preference = soldier_trainlevel_rookie;
+}
+
+bool
+MilitarySite::preferringSkilledSoldiers() const
+{
+	return  soldier_trainlevel_hero == soldier_preference;
+}
+
+bool
+MilitarySite::preferringAnySoldiers() const
+{
+	return  soldier_trainlevel_any == soldier_preference;
+}
+bool
+MilitarySite::preferringCheapSoldiers() const
+{
+	return  soldier_trainlevel_rookie == soldier_preference;
+}
+
 
 }

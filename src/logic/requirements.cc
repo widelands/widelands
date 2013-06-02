@@ -197,9 +197,21 @@ const RequirementsStorage RequireAnd::storage(requirementIdAnd, readAnd);
 
 bool RequireAttribute::check(const Map_Object & obj) const
 {
-	int32_t const value = obj.get_tattribute(at);
+	if (atrTotal != at)
+	{
+		int32_t const value = obj.get_tattribute(at);
 
-	return value >= min && value <= max;
+		return value >= min && value <= max;
+	}
+	else
+	{
+		int32_t value = 0;
+		value += obj.get_tattribute(atrHP);
+		value += obj.get_tattribute(atrAttack);
+		value += obj.get_tattribute(atrDefense);
+		value += obj.get_tattribute(atrEvade);
+		return value >= min && value <= max;
+	}
 }
 
 void RequireAttribute::write

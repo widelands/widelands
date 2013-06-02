@@ -53,6 +53,7 @@
 #include "wlapplication.h"
 #include "wui/game_tips.h"
 #include "wui/interactive_player.h"
+#include "militarysite.h"
 
 #include <cstring>
 #include <string>
@@ -770,6 +771,13 @@ void Game::send_player_start_stop_building (Building & building)
 	send_player_command
 		(*new Cmd_StartStopBuilding
 		 	(get_gametime(), building.owner().player_number(), building));
+}
+
+void Game::send_player_prefers_certain_soldiers (Building & building, uint8_t my_preference)
+{
+	send_player_command
+		(*new Cmd_PreferCertainSoldiers
+		 (get_gametime(), building.owner().player_number(), building, my_preference));
 }
 
 void Game::send_player_enhance_building

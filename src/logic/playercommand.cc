@@ -26,6 +26,7 @@
 #include "io/streamwrite.h"
 #include "map_io/widelands_map_map_object_loader.h"
 #include "map_io/widelands_map_map_object_saver.h"
+#include "militarysite.h"
 
 #include "game.h"
 #include "instances.h"
@@ -64,6 +65,7 @@ enum {
 	PLCMD_SETWAREMAXFILL,
 	PLCMD_DISMANTLEBUILDING,
 	PLCMD_EVICTWORKER,
+	PLCMD_PREFERCERTAINSOLDIERS,
 };
 
 /*** class PlayerCommand ***/
@@ -103,6 +105,7 @@ PlayerCommand * PlayerCommand::deserialize (StreamRead & des)
 	case PLCMD_SETWAREMAXFILL: return new Cmd_SetWareMaxFill(des);
 	case PLCMD_DISMANTLEBUILDING: return new Cmd_DismantleBuilding(des);
 	case PLCMD_EVICTWORKER: return new Cmd_EvictWorker(des);
+	case PLCMD_PREFERCERTAINSOLDIERS: return new Cmd_PreferCertainSoldiers(des);
 	default:
 		throw wexception
 			("PlayerCommand::deserialize(): Invalid command id encountered");
@@ -507,6 +510,70 @@ void Cmd_StartStopBuilding::Write
 	const Map_Object & obj = *egbase.objects().get_object(serial);
 	fw.Unsigned32(mos.get_object_file_index(obj));
 }
+
+
+Cmd_PreferCertainSoldiers::Cmd_PreferCertainSoldiers (StreamRead & des) :
+PlayerCommand (0, des.Unsigned8())
+{
+	serial = des.Unsigned32();
+	preference = des.Unsigned8();
+}
+
+void Cmd_PreferCertainSoldiers::serialize (StreamWrite & ser)
+{
+	ser.Unsigned8 (PLCMD_PREFERCERTAINSOLDIERS);
+	ser.Unsigned8 (sender());
+	ser.Unsigned32(serial);
+	ser.Unsigned8 (preference);
+}
+
+void Cmd_PreferCertainSoldiers::execute (Game & game)
+{
+	if (upcast(MilitarySite, building, game.objects().get_object(serial)))
+		game.player(sender()).prefer_certain_soldiers(*building, preference);
+
+}
+
+#define PLAYER_CMD_SOLDIERPREFERENCE_VERSION 1
+  // FIXME -- these are just placeholders ! Do not commit like this !
+void Cmd_PreferCertainSoldiers::Write
+	(FileWrite & fw, Editor_Game_Base & egbase, Map_Map_Object_Saver & mos)
+{
+	// First, write version
+	fw.Unsigned16(PLAYER_CMD_SOLDIERPREFERENCE_VERSION);
+	// Write base classes
+	PlayerCommand::Write(fw, egbase, mos);
+
+	// Now serial
+	const Map_Object & obj = *egbase.objects().get_object(serial);
+	fw.Unsigned8(preference);
+	fw.Unsigned32(mos.get_object_file_index(obj));
+}
+
+void Cmd_PreferCertainSoldiers::Read
+	(FileRead & fr, Editor_Game_Base & egbase, Map_Map_Object_Loader & mol)
+{
+	try
+	{
+		const uint16_t packet_version = fr.Unsigned16();
+		if (packet_version == PLAYER_CMD_SOLDIERPREFERENCE_VERSION) {
+			PlayerCommand::Read(fr, egbase, mol);
+			preference = fr.Unsigned8();
+			const uint32_t building_serial = fr.Unsigned32();
+			try {
+				serial = mol.get<Map_Object>(building_serial).serial();
+			} catch (const _wexception & e) {
+				throw game_data_error
+					(_("building %u: %s"), building_serial, e.what());
+			}
+		} else
+			throw game_data_error
+				(_("unknown/unhandled version %u"), packet_version);
+	} catch (const _wexception & e) {
+		throw game_data_error(_("start/stop building: %s"), e.what());
+	}
+}
+
 
 
 /*** Cmd_EnhanceBuilding ***/

@@ -35,6 +35,7 @@
 #include "waresqueuedisplay.h"
 
 #include "buildingwindow.h"
+#include "logic/militarysite.h"
 
 static const char * pic_bulldoze           = "pics/menu_bld_bulldoze.png";
 static const char * pic_dismantle          = "pics/menu_bld_dismantle.png";
@@ -164,7 +165,7 @@ void Building_Window::create_capsbuttons(UI::Box * capsbuttons)
 
 	bool requires_destruction_separator = false;
 	if (can_act) {
-		if (upcast(const Widelands::ProductionSite, productionsite, &m_building))
+		if (upcast(const Widelands::ProductionSite, productionsite, &m_building)) {
 			if (not dynamic_cast<const Widelands::MilitarySite *>(productionsite)) {
 				const bool is_stopped = productionsite->is_stopped();
 				UI::Button * stopbtn =
@@ -178,6 +179,7 @@ void Building_Window::create_capsbuttons(UI::Box * capsbuttons)
 					(stopbtn,
 					 UI::Box::AlignCenter);
 
+
 				// Add a fixed width separator rather than infinite space so the
 				// enhance/destroy/dismantle buttons are fixed in their position
 				// and not subject to the number of buttons on the right of the
@@ -185,6 +187,50 @@ void Building_Window::create_capsbuttons(UI::Box * capsbuttons)
 				UI::Panel * spacer = new UI::Panel(capsbuttons, 0, 0, 17, 34);
 				capsbuttons->add(spacer, UI::Box::AlignCenter);
 			}
+			else // is a military site
+			{
+				upcast(const Widelands::MilitarySite, ms, productionsite);
+				if (ms)
+				{
+					if (! ms->preferringCheapSoldiers())
+					{
+						UI::Button * cs_btn =
+						new UI::Button
+						(capsbuttons, "rookies", 0, 0, 34, 34,
+							g_gr->images().get("pics/but4.png"),
+							g_gr->images().get("pics/msite_prefer_cheap.png"),
+							_("Rookies"));
+						cs_btn->sigclicked.connect
+						(boost::bind(&Building_Window::act_prefer_cheap_soldiers, boost::ref(*this)));
+						capsbuttons->add (cs_btn, UI::Box::AlignCenter);
+					}
+					if (! ms->preferringAnySoldiers())
+					{
+						UI::Button * cs_btn =
+						new UI::Button
+						(capsbuttons, "whatever", 0, 0, 34, 34,
+							g_gr->images().get("pics/but4.png"),
+							g_gr->images().get("pics/msite_prefer_any.png"),
+							_("Anything"));
+						cs_btn->sigclicked.connect
+						(boost::bind(&Building_Window::act_prefer_any_soldiers, boost::ref(*this)));
+						capsbuttons->add (cs_btn, UI::Box::AlignCenter);
+					}
+					if (! ms->preferringSkilledSoldiers())
+					{
+						UI::Button * cs_btn =
+						new UI::Button
+						(capsbuttons, "heroes", 0, 0, 34, 34,
+							g_gr->images().get("pics/but4.png"),
+							g_gr->images().get("pics/msite_prefer_skilled.png"),
+							_("Heroes"));
+						cs_btn->sigclicked.connect
+						(boost::bind(&Building_Window::act_prefer_skilled_soldiers, boost::ref(*this)));
+						capsbuttons->add (cs_btn, UI::Box::AlignCenter);
+					}
+				} // if-upcast-to-milsite-succeeded
+			} // else branch of if is-a-non-milsite
+		} // upcast to productionsite
 
 		if (m_capscache & Widelands::Building::PCap_Enhancable) {
 			const std::set<Widelands::Building_Index> & enhancements =
@@ -370,13 +416,36 @@ void Building_Window::act_dismantle()
 	}
 }
 
-void Building_Window::act_start_stop() {
+void Building_Window::act_start_stop()
+{
 	if (dynamic_cast<const Widelands::ProductionSite *>(&m_building))
 		igbase().game().send_player_start_stop_building (m_building);
 
 	die();
 }
 
+void Building_Window::act_prefer_cheap_soldiers()
+{
+	if (upcast(const Widelands::MilitarySite, ms, &m_building))
+		igbase().game().send_player_prefers_certain_soldiers (m_building, ms->soldier_trainlevel_rookie);
+	die();
+}
+
+void
+Building_Window::act_prefer_any_soldiers()
+{
+	if (upcast(const Widelands::MilitarySite, ms, &m_building))
+		igbase().game().send_player_prefers_certain_soldiers (m_building, ms->soldier_trainlevel_any);
+	die();
+}
+
+void
+Building_Window::act_prefer_skilled_soldiers()
+{
+	if (upcast(const Widelands::MilitarySite, ms, &m_building))
+		igbase().game().send_player_prefers_certain_soldiers (m_building, ms->soldier_trainlevel_hero);
+	die();
+}
 /*
 ===============
 Callback for enhancement request

@@ -594,6 +594,28 @@ void Player::start_stop_building(PlayerImmovable & imm) {
 			productionsite->set_stopped(!productionsite->is_stopped());
 }
 
+void Player::prefer_certain_soldiers(PlayerImmovable & imm, uint8_t soldier_preference)
+{
+	log("f978: player.cc Player::prefer_certain_soldiers() enter\n");
+	if (&imm.owner() == this)
+	if (upcast(MilitarySite, milsite, &imm))
+	{
+		if (soldier_preference == milsite->soldier_trainlevel_rookie)
+			milsite->preferCheapSoldiers();
+		else
+		if (soldier_preference == milsite->soldier_trainlevel_any)
+			milsite->preferAnySoldiers();
+		else
+		if (soldier_preference == milsite->soldier_trainlevel_hero)
+			milsite->preferSkilledSoldiers();
+		else
+			log
+			("player.cc: Error: Player::prefer_certain_soldiers(): traintype %d not known! \n",
+			soldier_preference);
+	}
+}
+
+
 /*
  * enhance this building, remove it, but give the constructionsite
  * an idea of enhancing

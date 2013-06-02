@@ -107,6 +107,18 @@ public:
 
 	void update_soldier_request();
 
+	void preferSkilledSoldiers();
+	void preferAnySoldiers();
+	void preferCheapSoldiers();
+
+	bool preferringSkilledSoldiers() const;
+	bool preferringAnySoldiers() const;
+	bool preferringCheapSoldiers() const;
+
+	static const uint8_t soldier_trainlevel_any = 0;
+	static const uint8_t soldier_trainlevel_rookie = 1;
+	static const uint8_t soldier_trainlevel_hero = 2;
+
 protected:
 	void conquer_area(Editor_Game_Base &);
 
@@ -123,10 +135,21 @@ private:
 	bool haveSoldierJob(Soldier &);
 	bool military_presence_kept(Game &);
 	void informPlayer(Game &, bool discovered = false);
+	bool update_upgrade_requirements();
+	void update_normal_soldier_request();
+	void update_upgrade_soldier_request();
+	int incorporateUpgradedSoldier(Editor_Game_Base & game, Soldier & s);
+	void update_soldier_request_impl(bool incd);
+
 
 private:
 	Requirements m_soldier_requirements;
-	Request    * m_soldier_request;
+	//RequireOr m_soldier_upgrade_requirements;
+	Requirements m_soldier_upgrade_requirements;
+	uint32_t     m_soldier_upgrade_required_min;
+	uint32_t     m_soldier_upgrade_required_max;
+	Request    * m_soldier_normal_request;
+	Request    * m_soldier_upgrade_request;
 	bool m_didconquer;
 	uint32_t m_capacity;
 
@@ -142,6 +165,10 @@ private:
 		uint8_t     retreat;
 	};
 	std::vector<SoldierJob> m_soldierjobs;
+	uint8_t soldier_preference;
+	int32_t next_swap_soldiers_time;
+	bool soldier_upgrade_try; // optimization -- if everybody is zero-level, do not downgrade
+	bool doing_upgrade_request;
 };
 
 }

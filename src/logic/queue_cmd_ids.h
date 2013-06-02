@@ -63,6 +63,9 @@
 
 #define QUEUE_CMD_EVICTWORKER           25
 
+#define QUEUE_CMD_PREFERCHEAPSOLDIERS   26
+
+
 #define QUEUE_CMD_DESTROY_MAPOBJECT    127
 #define QUEUE_CMD_ACT                  128
 // 129 was a command related to old events. removed

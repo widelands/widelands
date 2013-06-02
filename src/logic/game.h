@@ -40,6 +40,7 @@ struct Flag;
 struct Path;
 struct PlayerImmovable;
 class TrainingSite;
+class MilitarySite;
 
 #define WLGF_SUFFIX ".wgf"
 #define WLGF_MAGIC      "WLgf"
@@ -153,6 +154,7 @@ struct Game : Editor_Game_Base {
 	void send_player_build_road (int32_t, Path &);
 	void send_player_flagaction (Flag &);
 	void send_player_start_stop_building (Building &);
+	void send_player_prefers_certain_soldiers (Building &, uint8_t preference);
 	void send_player_enhance_building (Building &, Building_Index);
 	void send_player_evict_worker (Worker &);
 	void send_player_set_ware_priority

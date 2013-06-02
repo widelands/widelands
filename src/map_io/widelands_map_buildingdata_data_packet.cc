@@ -57,7 +57,7 @@ namespace Widelands {
 #define CURRENT_CONSTRUCTIONSITE_PACKET_VERSION 2
 #define CURRENT_PARTIALLYFB_PACKET_VERSION      1
 #define CURRENT_WAREHOUSE_PACKET_VERSION        6
-#define CURRENT_MILITARYSITE_PACKET_VERSION     3
+#define CURRENT_MILITARYSITE_PACKET_VERSION     4
 #define CURRENT_PRODUCTIONSITE_PACKET_VERSION   5
 #define CURRENT_TRAININGSITE_PACKET_VERSION     4
 
@@ -677,21 +677,24 @@ void Map_Buildingdata_Data_Packet::read_militarysite
 {
 	try {
 		uint16_t const packet_version = fr.Unsigned16();
-		if (packet_version == CURRENT_MILITARYSITE_PACKET_VERSION)
+		bool rel17comp = false;
+		if (3 == packet_version and 4 == CURRENT_MILITARYSITE_PACKET_VERSION)
+			rel17comp = true;
+		if (packet_version == CURRENT_MILITARYSITE_PACKET_VERSION or rel17comp)
 		{
 			read_productionsite(militarysite, fr, game, mol);
 
-			delete militarysite.m_soldier_request;
-			militarysite.m_soldier_request = 0;
+			delete militarysite.m_soldier_normal_request;
+			militarysite.m_soldier_normal_request = 0;
 
 			if (fr.Unsigned8()) {
-				militarysite.m_soldier_request =
+				militarysite.m_soldier_normal_request =
 					new Request
 						(militarysite,
 						 Ware_Index::First(),
 						 MilitarySite::request_soldier_callback,
 						 wwWORKER);
-				militarysite.m_soldier_request->Read(fr, game, mol);
+				militarysite.m_soldier_normal_request->Read(fr, game, mol);
 			}
 
 			if ((militarysite.m_didconquer = fr.Unsigned8())) {
@@ -714,6 +717,29 @@ void Map_Buildingdata_Data_Packet::read_militarysite
 			//  capacity (modified by user)
 			militarysite.m_capacity = fr.Unsigned8();
 			militarysite.m_nexthealtime = fr.Signed32();
+			if (not (rel17comp)) // compatibility with release 17 savegames
+			{
+				if (fr.Unsigned8())
+				{
+					militarysite.m_soldier_upgrade_request =
+						new Request
+							(militarysite,
+							Ware_Index::First(),
+							MilitarySite::request_soldier_callback,
+							wwWORKER);
+					militarysite.m_soldier_upgrade_request->Read(fr, game, mol);
+				}
+				else
+					militarysite.m_soldier_upgrade_request = NULL;
+				militarysite.m_soldier_upgrade_required_min = fr.Unsigned8();
+				militarysite.m_soldier_upgrade_required_max = fr.Unsigned8();
+				militarysite.soldier_preference = fr.Unsigned8();
+				militarysite.next_swap_soldiers_time = fr.Signed32();
+				uint8_t sd = fr.Unsigned8();
+				militarysite.soldier_upgrade_try = (0 != (sd & 1));
+				militarysite.doing_upgrade_request = (0 != (sd & 2));
+			}
+
 		} else
 			throw game_data_error
 				(_("unknown/unhandled version %u"), packet_version);
@@ -1400,9 +1426,9 @@ void Map_Buildingdata_Data_Packet::write_militarysite
 	fw.Unsigned16(CURRENT_MILITARYSITE_PACKET_VERSION);
 	write_productionsite(militarysite, fw, game, mos);
 
-	if (militarysite.m_soldier_request) {
+	if (militarysite.m_soldier_normal_request) {
 		fw.Unsigned8(1);
-		militarysite.m_soldier_request->Write(fw, game, mos);
+		militarysite.m_soldier_normal_request->Write(fw, game, mos);
 	} else {
 		fw.Unsigned8(0);
 	}
@@ -1410,6 +1436,32 @@ void Map_Buildingdata_Data_Packet::write_militarysite
 	fw.Unsigned8(militarysite.m_didconquer);
 	fw.Unsigned8(militarysite.m_capacity);
 	fw.Signed32(militarysite.m_nexthealtime);
+
+	if (militarysite.m_soldier_upgrade_request)
+	{
+		fw.Unsigned8(1);
+		militarysite.m_soldier_upgrade_request->Write(fw, game, mos);
+	}
+	else
+		fw.Unsigned8(0);
+#warning "FIXME: does upgrade write its requirements to savegame or should I do that??"
+	if (255 < militarysite.m_soldier_upgrade_required_min)
+		fw.Unsigned8(255);
+	else
+		fw.Unsigned8(militarysite.m_soldier_upgrade_required_min);
+	if (255 < militarysite.m_soldier_upgrade_required_max)
+		fw.Unsigned8(255);
+	else
+		fw.Unsigned8(militarysite.m_soldier_upgrade_required_max);
+	fw.Unsigned8(militarysite.soldier_preference);
+	fw.Signed32(militarysite.next_swap_soldiers_time);
+	uint8_t sd = 0;
+	if (militarysite.soldier_upgrade_try)
+		sd += 1;
+	if (militarysite.doing_upgrade_request)
+		sd += 2;
+	fw.Unsigned8(sd);
+
 }
 
 
