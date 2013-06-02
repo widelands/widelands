@@ -220,7 +220,6 @@ public:
 	}
 	void handle_expedition_worker_callback(Game &, Request &, Worker *);
 
-
 	virtual void log_general_info(const Editor_Game_Base &);
 
 protected:

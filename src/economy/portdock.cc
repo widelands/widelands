@@ -442,20 +442,18 @@ void PortDock::start_expedition() {
 /// Called everytime a ware is added to the expedition's wares queue
 void PortDock::expedition_wares_queue_callback(Game & game, WaresQueue *, Ware_Index, void * const data)
 {
-	PortDock  & pd = *static_cast<PortDock *>(data);
+	PortDock & pd = *static_cast<PortDock *>(data);
 	pd.check_expedition_wares_and_workers(game);
 }
 
 /// Gets called if a ware or a worker arrives to check if everything is available
 void PortDock::check_expedition_wares_and_workers(Game & game) {
 	set_expedition_ready(false);
-
 	for (size_t n = 0; n < m_warehouse->size_of_expedition_wares_queue(); ++n) {
 		WaresQueue * wq = m_warehouse->get_wares_queue(n);
 		if (wq->get_max_fill() != wq->get_filled())
 			return;
 	}
-
 	const std::vector<Warehouse::Expedition_Worker *> & ew = m_warehouse->get_expedition_workers();
 	for (size_t i = 0; i < ew.size(); ++i) {
 		if (ew.at(i)->worker_request)
@@ -515,7 +513,7 @@ void PortDock::log_general_info(const Editor_Game_Base & egbase)
 	}
 }
 
-#define PORTDOCK_SAVEGAME_VERSION 2
+#define PORTDOCK_SAVEGAME_VERSION 3
 
 PortDock::Loader::Loader() : m_warehouse(0)
 {
@@ -542,6 +540,15 @@ void PortDock::Loader::load(FileRead & fr, uint8_t version)
 		m_waiting.resize(fr.Unsigned32());
 		container_iterate(std::vector<ShippingItem::Loader>, m_waiting, it) {
 			it->load(fr);
+		}
+
+		if (version >= 3) {
+			// All the other expedition specific stuff is saved in the warehouse
+			pd.m_start_expedition = (fr.Unsigned8() == 1) ? true : false;
+			pd.m_expedition_ready = (fr.Unsigned8() == 1) ? true : false;
+		} else {
+			pd.m_start_expedition = false;
+			pd.m_expedition_ready = false;
 		}
 	}
 }
@@ -616,6 +623,10 @@ void PortDock::save(Editor_Game_Base & egbase, Map_Map_Object_Saver & mos, FileW
 	container_iterate(std::vector<ShippingItem>, m_waiting, it) {
 		it->save(egbase, mos, fw);
 	}
+
+	// Expedition specific stuff
+	fw.Unsigned8(m_start_expedition ? 1 : 0);
+	fw.Unsigned8(m_expedition_ready ? 1 : 0);
 }
 
 } // namespace Widelands

@@ -290,16 +290,11 @@ Warehouse::~Warehouse()
 	delete m_supply;
 	delete[] m_next_worker_without_cost_spawn;
 	for (uint8_t i = 0; i < m_expedition_wares.size(); ++i) {
-		delete m_expedition_wares.at(i);
+		if (m_expedition_wares.at(i)) {
+			m_expedition_wares.at(i)->cleanup();
+			delete m_expedition_wares.at(i);
+		}
 	}
-	for (uint8_t i = 0; i < m_expedition_workers.size(); ++i) {
-		if (m_expedition_workers.at(i)->worker_request)
-			delete m_expedition_workers.at(i)->worker_request;
-		if (m_expedition_workers.at(i)->worker)
-			delete m_expedition_workers.at(i)->worker;
-		delete m_expedition_workers.at(i);
-	}
-
 }
 
 /**
@@ -567,6 +562,16 @@ void Warehouse::cleanup(Editor_Game_Base & egbase)
 	if (m_portdock) {
 		m_portdock->remove(egbase);
 		m_portdock = 0;
+		// Wares are deleted later on, after Building::cleanup was run
+		for (uint8_t i = 0; i < m_expedition_workers.size(); ++i) {
+			if (m_expedition_workers.at(i)->worker_request)
+				delete m_expedition_workers.at(i)->worker_request;
+			if (m_expedition_workers.at(i)->worker) {
+				m_expedition_workers.at(i)->worker->cleanup(egbase);
+				delete m_expedition_workers.at(i)->worker;
+			}
+			delete m_expedition_workers.at(i);
+		}
 	}
 
 	while (!m_planned_workers.empty()) {
