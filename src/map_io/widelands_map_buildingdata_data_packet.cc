@@ -696,7 +696,9 @@ void Map_Buildingdata_Data_Packet::read_militarysite
 						 wwWORKER);
 				militarysite.m_soldier_normal_request->Read(fr, game, mol);
 			}
-			if (not (rel17comp)) // compatibility with release 17 savegames
+			if (rel17comp) // compatibility with release 17 savegames
+				militarysite.m_soldier_upgrade_request = NULL;
+			else
 				switch (fr.Unsigned8())
 				{
 					case 42:
@@ -717,6 +719,7 @@ void Map_Buildingdata_Data_Packet::read_militarysite
 						log("militarysite load error\n");
 						exit(1);
 				}
+
 
 			if ((militarysite.m_didconquer = fr.Unsigned8())) {
 				//  Add to map of military influence.
@@ -769,6 +772,15 @@ void Map_Buildingdata_Data_Packet::read_militarysite
 						log(" reading military site packed failed.\n");
 						exit(-1); // What is a better way to scream aloud ?
 				}
+			}
+			else // Release 17 compatibility branch. Some safe values.
+			{
+				militarysite.m_soldier_upgrade_required_min = 0;
+				militarysite.m_soldier_upgrade_required_max = 999;
+				militarysite.soldier_preference = militarysite.soldier_trainlevel_any;
+				militarysite.doing_upgrade_request = false;
+				militarysite.soldier_upgrade_try = false;
+				militarysite.next_swap_soldiers_time = militarysite.m_nexthealtime;
 			}
 
 		} else

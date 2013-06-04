@@ -1888,7 +1888,7 @@ bool DefaultAI::check_militarysites(int32_t gametime)
 		// same economy where the thrown out soldiers can go to.
 		if (ms->economy().warehouses().size()) {
 			uint32_t const j = ms->soldierCapacity();
-			if (not ms->preferringCheapSoldiers())
+			if (not (ms->preferringCheapSoldiers() or ms_can_attack))
 			{
 					game().send_player_prefers_certain_soldiers(*ms, ms->soldier_trainlevel_rookie);
 			}

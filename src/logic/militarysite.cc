@@ -83,17 +83,17 @@ class MilitarySite
 
 MilitarySite::MilitarySite(const MilitarySite_Descr & ms_descr) :
 ProductionSite(ms_descr),
+m_soldier_upgrade_required_min(0),
+m_soldier_upgrade_required_max(252),
 m_soldier_normal_request(0),
+m_soldier_upgrade_request(NULL),
 m_didconquer  (false),
 m_capacity    (ms_descr.get_max_number_of_soldiers()),
-m_nexthealtime(0)
+m_nexthealtime(0),
+soldier_upgrade_try(false),
+doing_upgrade_request(false)
 {
 	preferAnySoldiers();
-	m_soldier_upgrade_required_max = 10101;
-	m_soldier_upgrade_required_min = 0; // The values do not matter, but I still like to initialize
-	soldier_upgrade_try = false;
-	doing_upgrade_request = false;
-	m_soldier_upgrade_request = NULL;
 }
 
 
@@ -213,23 +213,16 @@ returns 0 on succes, -1 if there was no room for this soldier
 */
 int MilitarySite::incorporateSoldier(Editor_Game_Base & egbase, Soldier & s)
 {
-	//log ("msited %4x debu incS enter stationed %d max# %d\n",
-	//(uint16_t)((uint64_t((void*)this))&0xffff),
-	//stationedSoldiers().size(),descr().get_max_number_of_soldiers());
+
 	if (s.get_location(egbase) != this)
 	{
-		//log ("msited %4x debu incS ldiff\n",(uint16_t)((uint64_t((void*)this))&0xffff));
 		s.set_location(this);
 	}
-	//else  log ("msited %4x debu incS location was same..\n",(uint16_t)((uint64_t((void*)this))&0xffff));
 
 	if (stationedSoldiers().size()  > descr().get_max_number_of_soldiers())
 	{
 		return incorporateUpgradedSoldier(egbase, s);
 	}
-	//else log ("msited %4x debu incS sss %d <= max %d\n",
-	//(uint16_t)((uint64_t((void*)this))&0xffff),
-	//stationedSoldiers().size(),descr().get_max_number_of_soldiers());
 
 	if (not m_didconquer) {
 		conquer_area(egbase);
@@ -261,6 +254,12 @@ int MilitarySite::incorporateSoldier(Editor_Game_Base & egbase, Soldier & s)
 
 	return 0;
 }
+
+/*
+ *	Kicks out the least wanted soldier --
+ *	If player prefers zero-level guys, the most
+ *	trained soldier is the "weakest guy".
+ */
 
 bool
 MilitarySite::drop_weakest_soldier(bool new_soldier_has_arrived, Soldier * newguy)
@@ -366,12 +365,10 @@ void MilitarySite::update_normal_soldier_request()
 }
 void MilitarySite::update_upgrade_soldier_request()
 {
-	//log ("msited %4x debu uusr enter\n",(uint16_t)((uint64_t((void*)this))&0xffff));
 	bool reqch = update_upgrade_requirements();
 	if (not soldier_upgrade_try)
 		return;
 	bool dosomething = reqch;
-	//log ("msited %4x debu uusr tp1\n",(uint16_t)((uint64_t((void*)this))&0xffff));
 
 	if (NULL != m_soldier_upgrade_request)
 	{
@@ -382,36 +379,28 @@ void MilitarySite::update_upgrade_soldier_request()
 	}
 	else
 		dosomething = true;
-	//log ("msited %4x debu uusr tp2\n",(uint16_t)((uint64_t((void*)this))&0xffff));
+
 	if (dosomething)
 	{
 		if (NULL != m_soldier_upgrade_request)
 		{
-			//log ("msited %4x debu uusr deleting sur\n",(uint16_t)((uint64_t((void*)this))&0xffff));
 			delete m_soldier_upgrade_request;
 			m_soldier_upgrade_request = NULL;
 		}
 
-		//log ("msited %4x debu uusr making request\n",(uint16_t)((uint64_t((void*)this))&0xffff));
 		m_soldier_upgrade_request =
 				new Request
 				(*this,
 				tribe().safe_worker_index("soldier"),
 				MilitarySite::request_soldier_callback,
 				wwWORKER);
-		//if ( NULL==m_soldier_upgrade_request) log ("msited %4x debu uusr request is null..\n",
-		//                          (uint16_t)((uint64_t((void*)this))&0xffff));
 
 
-		//log ("msited %4x debu uusr setting requirements\n",(uint16_t)((uint64_t((void*)this))&0xffff));
 		m_soldier_upgrade_request->set_requirements (m_soldier_upgrade_requirements);
 
-		//log ("msited %4x debu uusr setting request counter\n",(uint16_t)((uint64_t((void*)this))&0xffff));
 		m_soldier_upgrade_request->set_count(1);
-		//log ("msited %4x debu uusr setting count\n",(uint16_t)((uint64_t((void*)this))&0xffff));
 
 	}
-	//log ("msited %4x debu uusr return\n",(uint16_t)((uint64_t((void*)this))&0xffff));
 }
 
 void MilitarySite::update_soldier_request_impl(bool incd)
@@ -419,14 +408,11 @@ void MilitarySite::update_soldier_request_impl(bool incd)
 	int32_t sc = soldierCapacity();
 	int32_t sss = stationedSoldiers().size();
 
-	//log ("msited %4x debu usri enter %d\n",(uint16_t)((uint64_t((void*)this))&0xffff),incd);
 	if (doing_upgrade_request)
 	{
 		if (incd) // update requests always ask for one soldier at time!
 		if (m_soldier_upgrade_request)
 		{
-		  //log ("msited %4x debu usri deleting msur\n",(uint16_t)(((unsigned long)((void*)this))&0xffff));
-
 			delete m_soldier_upgrade_request;
 			m_soldier_upgrade_request = NULL;
 		}
@@ -438,15 +424,11 @@ void MilitarySite::update_soldier_request_impl(bool incd)
 			{
 				// Economy was not able to find the soldiers I need. Discarding request.
 
-				//log ("msited %4x debu usri deleting an open msur\n",
-				// (uint16_t)(((unsigned long) ((void*)this))&0xffff));
 				delete m_soldier_upgrade_request;
 				m_soldier_upgrade_request = NULL;
 			}
 			if (NULL == m_soldier_upgrade_request)
 			{
-				//log ("msited %4x debu usri returning to normal mode\n",
-				// (uint16_t)(((unsigned long)((void*)this))&0xffff));
 				doing_upgrade_request = false;
 				update_normal_soldier_request();
 			}
@@ -490,17 +472,13 @@ void MilitarySite::update_soldier_request_impl(bool incd)
 			if (pss == sc)
 			{
 				doing_upgrade_request = true;
-				//log ("msited %4x debu usri calling uusr\n",(uint16_t)(((unsigned long) ((void*)this))&0xffff));
-
 				update_upgrade_soldier_request();
-				//log ("msited %4x debu usri return  uusr\n",(uint16_t)(((unsigned long)((void*)this))&0xffff));
 			}
 			// Note -- if there are non-present stationed soldiers, nothing gets
 			// called. Therefore, I revisit this routine periodically without apparent
 			// reason, hoping that all stationed soldiers would be present.
 		}
 	}
-	//log ("msited %4x debu usri exit\n",(uint16_t)((uint64_t((void*)this))&0xffff));
 }
 void MilitarySite::update_soldier_request()
 {
@@ -526,31 +504,15 @@ void MilitarySite::act(Game & game, uint32_t const data)
 
 	int32_t timeofgame = game.get_gametime();
 
-	// gametime might be 2048 ticks per second
-	//log ("f978 MilitarySite::act: gametime %d wctime %ld cap %2d stationed %2ld present %2ld || %4x\n",
-	// timeofgame,
-	//time(NULL), soldierCapacity(), stationedSoldiers().size(), presentSoldiers().size(),
-	//(uint16_t)((uint64_t((void*)this))&0xffff));
 	if (NULL != m_soldier_normal_request && NULL != m_soldier_upgrade_request)
 	{
 		log ("f978 MilitarySite::act: error: TWO REQUESTS ACTIVE!\n");
 		exit (-1);
 	}
 
-        //log ("msited %4x debu incS enter stationed %d max# %d\n",
-        //(uint16_t)((uint64_t((void*)this))&0xffff),
-
-
-	//if (m_soldier_normal_request)
-	//{
-	//  if (m_soldier_normal_request->is_open())
-	// log(" open request\n");
-	// else
-	//  log(" Filled request\n");
-	//}
-	//else
-	// log (" no request\n");
-	// present is the list of soldiers actually sitting in the building.
+	// I do not get a callback when stationed, non-present soldier returns --
+	// Therefore I must poll in some occasions. Let's do that rather infrequently,
+	// to keep the game lightweight.
 	if ((soldier_trainlevel_any != soldier_preference) or doing_upgrade_request)
 		if (timeofgame > next_swap_soldiers_time)
 			{
@@ -1016,15 +978,12 @@ MilitarySite::update_upgrade_requirements()
 	{
 		case soldier_trainlevel_hero:
 			heros = true;
-			//log ("msited %4x debu uur heros\n",(uint16_t)((uint64_t((void*)this))&0xffff));
 			break;
 		case soldier_trainlevel_rookie:
 			heros = false;
-			//log ("msited %4x debu uur rookies\n",(uint16_t)((uint64_t((void*)this))&0xffff));
 			break;
 		default:
 			log("MilitarySite::swapSoldiers: error: Unknown player preference %d.\n", soldier_preference);
-			//log ("msited %4x debu urr dunno\n",(uint16_t)((uint64_t((void*)this))&0xffff));
 			soldier_upgrade_try = false;
 			return false;
 	}
@@ -1069,10 +1028,6 @@ MilitarySite::update_upgrade_requirements()
 			m_soldier_upgrade_requirements = RequireAttribute(atrTotal, reqmin, reqmax);
 			m_soldier_upgrade_required_max = reqmax;
 			m_soldier_upgrade_required_min = reqmin;
-			//m_soldier_upgrade_requirements=RequireOr();
-			//m_soldier_upgrade_requirements.add(RequireAttribute(atrTotal,reqmin, reqmax));
-			//log ("msited %4x debu urr making requirements [%d,%d]\n",
-			//(uint16_t)((uint64_t((void*)this))&0xffff),reqmin, reqmax);
 
 			return true;
 		}
