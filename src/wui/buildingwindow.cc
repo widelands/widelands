@@ -428,7 +428,7 @@ void Building_Window::act_prefer_cheap_soldiers()
 {
 	if (upcast(const Widelands::MilitarySite, ms, &m_building))
 		igbase().game().send_player_prefers_certain_soldiers (m_building, ms->soldier_trainlevel_rookie);
-	die();
+	die(); // // m_caps_setup = false; think(); // die();
 }
 
 void
@@ -436,7 +436,7 @@ Building_Window::act_prefer_any_soldiers()
 {
 	if (upcast(const Widelands::MilitarySite, ms, &m_building))
 		igbase().game().send_player_prefers_certain_soldiers (m_building, ms->soldier_trainlevel_any);
-	die();
+	die(); // // m_caps_setup = false; think(); // die();
 }
 
 void
@@ -444,7 +444,7 @@ Building_Window::act_prefer_skilled_soldiers()
 {
 	if (upcast(const Widelands::MilitarySite, ms, &m_building))
 		igbase().game().send_player_prefers_certain_soldiers (m_building, ms->soldier_trainlevel_hero);
-	die();
+	die(); // // m_caps_setup = false; think(); // die();
 }
 /*
 ===============

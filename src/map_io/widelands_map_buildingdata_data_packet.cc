@@ -696,6 +696,27 @@ void Map_Buildingdata_Data_Packet::read_militarysite
 						 wwWORKER);
 				militarysite.m_soldier_normal_request->Read(fr, game, mol);
 			}
+			if (not (rel17comp)) // compatibility with release 17 savegames
+				switch (fr.Unsigned8())
+				{
+					case 42:
+						militarysite.m_soldier_upgrade_request =
+							new Request
+								(militarysite,
+								 NULL == militarysite.m_soldier_normal_request ? Ware_Index::First()
+								: militarysite.descr().tribe().safe_worker_index("soldier"),
+								MilitarySite::request_soldier_callback,
+								wwWORKER);
+						militarysite.m_soldier_upgrade_request->Read(fr, game, mol);
+						break;
+					case 55:
+						militarysite.m_soldier_upgrade_request = NULL;
+						break;
+					default:
+						log("widelands_map_buildingdata_data_packet.cc: ");
+						log("militarysite load error\n");
+						exit(1);
+				}
 
 			if ((militarysite.m_didconquer = fr.Unsigned8())) {
 				//  Add to map of military influence.
@@ -719,25 +740,35 @@ void Map_Buildingdata_Data_Packet::read_militarysite
 			militarysite.m_nexthealtime = fr.Signed32();
 			if (not (rel17comp)) // compatibility with release 17 savegames
 			{
-				if (fr.Unsigned8())
-				{
-					militarysite.m_soldier_upgrade_request =
-						new Request
-							(militarysite,
-							Ware_Index::First(),
-							MilitarySite::request_soldier_callback,
-							wwWORKER);
-					militarysite.m_soldier_upgrade_request->Read(fr, game, mol);
-				}
-				else
-					militarysite.m_soldier_upgrade_request = NULL;
+
 				militarysite.m_soldier_upgrade_required_min = fr.Unsigned8();
 				militarysite.m_soldier_upgrade_required_max = fr.Unsigned8();
 				militarysite.soldier_preference = fr.Unsigned8();
 				militarysite.next_swap_soldiers_time = fr.Signed32();
 				uint8_t sd = fr.Unsigned8();
-				militarysite.soldier_upgrade_try = (0 != (sd & 1));
-				militarysite.doing_upgrade_request = (0 != (sd & 2));
+				switch (sd)
+				{
+					case 0xf0:
+						militarysite.soldier_upgrade_try = false;
+						militarysite.doing_upgrade_request = false;
+						break;
+					case 0xf1:
+						militarysite.soldier_upgrade_try = true;
+						militarysite.doing_upgrade_request = false;
+						break;
+					case 0xf2:
+						militarysite.soldier_upgrade_try = false;
+						militarysite.doing_upgrade_request = true;
+						break;
+					case 0xf3:
+						militarysite.soldier_upgrade_try = true;
+						militarysite.doing_upgrade_request = true;
+						break;
+					default:
+						log("widelands_map_buildingdata_data_packet.cc: error: ");
+						log(" reading military site packed failed.\n");
+						exit(-1); // What is a better way to scream aloud ?
+				}
 			}
 
 		} else
@@ -1433,18 +1464,24 @@ void Map_Buildingdata_Data_Packet::write_militarysite
 		fw.Unsigned8(0);
 	}
 
+	// 42 and 55 are values that do not appear frequently in the save stream
+	// Used to detect out-of-synch problems.
+	if (militarysite.m_soldier_upgrade_request)
+	{
+		fw.Unsigned8(42);
+		militarysite.m_soldier_upgrade_request->Write(fw, game, mos);
+	}
+	else
+		fw.Unsigned8(55);
+
+
 	fw.Unsigned8(militarysite.m_didconquer);
 	fw.Unsigned8(militarysite.m_capacity);
 	fw.Signed32(militarysite.m_nexthealtime);
 
+	if (militarysite.m_soldier_normal_request)
 	if (militarysite.m_soldier_upgrade_request)
-	{
-		fw.Unsigned8(1);
-		militarysite.m_soldier_upgrade_request->Write(fw, game, mos);
-	}
-	else
-		fw.Unsigned8(0);
-#warning "FIXME: does upgrade write its requirements to savegame or should I do that??"
+	  log("map_buildingdata_-data_packet: There is something fishy going on.. debug me please!\n");
 	if (255 < militarysite.m_soldier_upgrade_required_min)
 		fw.Unsigned8(255);
 	else
@@ -1455,7 +1492,7 @@ void Map_Buildingdata_Data_Packet::write_militarysite
 		fw.Unsigned8(militarysite.m_soldier_upgrade_required_max);
 	fw.Unsigned8(militarysite.soldier_preference);
 	fw.Signed32(militarysite.next_swap_soldiers_time);
-	uint8_t sd = 0;
+	uint8_t sd = 0xf0;
 	if (militarysite.soldier_upgrade_try)
 		sd += 1;
 	if (militarysite.doing_upgrade_request)

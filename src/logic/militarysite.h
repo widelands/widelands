@@ -140,6 +140,7 @@ private:
 	void update_upgrade_soldier_request();
 	int incorporateUpgradedSoldier(Editor_Game_Base & game, Soldier & s);
 	void update_soldier_request_impl(bool incd);
+	bool drop_weakest_soldier(bool new_has_arrived, Soldier * s);
 
 
 private:

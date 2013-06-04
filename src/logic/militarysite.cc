@@ -172,6 +172,8 @@ void MilitarySite::set_economy(Economy * const e)
 
 	if (m_soldier_normal_request && e)
 		m_soldier_normal_request->set_economy(e);
+	if (m_soldier_upgrade_request && e)
+		m_soldier_upgrade_request->set_economy(e);
 }
 
 /**
@@ -196,6 +198,9 @@ void MilitarySite::cleanup(Editor_Game_Base & egbase)
 	// new requests; that's why we delete it at the end of this function.
 	delete m_soldier_normal_request;
 	m_soldier_normal_request = 0;
+	if (m_soldier_upgrade_request)
+		delete m_soldier_upgrade_request;
+	m_soldier_upgrade_request = 0;
 }
 
 
@@ -257,69 +262,52 @@ int MilitarySite::incorporateSoldier(Editor_Game_Base & egbase, Soldier & s)
 	return 0;
 }
 
+bool
+MilitarySite::drop_weakest_soldier(bool new_soldier_has_arrived, Soldier * newguy)
+{
+	std::vector<Soldier *> present = presentSoldiers();
+	if (new_soldier_has_arrived or 1 < present.size())
+	{
+		bool heros = soldier_trainlevel_hero == soldier_preference;
+		const int32_t multiplier = heros ? -1:1;
+		static const int32_t level_offset = 10000;
+		int32_t worst_soldier_level = 0;
+		if (new_soldier_has_arrived)
+			worst_soldier_level = level_offset + multiplier * newguy->get_level(atrTotal);
+		Soldier* kickoutCandidate = NULL;
+		for (uint32_t i = 0; i < present.size(); ++i)
+		{
+			int32_t this_soldier_level = level_offset + multiplier* present[i]->get_level(atrTotal);
+			if (this_soldier_level > worst_soldier_level)
+			{
+				worst_soldier_level = this_soldier_level;
+				kickoutCandidate = present[i];
+			}
+		}
+		if (kickoutCandidate)
+		{
+			Game & game = ref_cast<Game, Editor_Game_Base>(owner().egbase());
+			kickoutCandidate->reset_tasks(game);
+			kickoutCandidate->start_task_leavebuilding(game, true);
+			return true;
+		}
+	}
+	return false;
+}
+
 // This find room for a soldier in an already full occupied military building.
 int
 MilitarySite::incorporateUpgradedSoldier(Editor_Game_Base & egbase, Soldier & s)
 {
-	//log ("msited %4x debu incUS enter\n",(uint16_t)((uint64_t((void*)this))&0xffff));
-	std::vector<Soldier *> present = presentSoldiers();
-	bool heros = soldier_trainlevel_hero == soldier_preference;
-	const int32_t multiplier = heros ? -1:1;
-	static const int32_t level_offset = 10000;
-	int32_t ng_level = level_offset + multiplier * s.get_level(atrTotal);
-	Soldier* kickoutCandidate = NULL;
 
-	//log("msited %4x debu incUS arriving_soldier_level %2d (%4d)\n",
-	//  (uint16_t)((uint64_t((void*)this))&0xffff), s.get_level(atrTotal), ng_level);
-
-
-	// Once more, I check whether this guy is "better" that the least suited
-	// soldier currently present in the building. This could also result a
-	// not-found, if the worst stationed is currently not present. If so, I could
-	// still do the exchange, but prefer not to (less debugging, with soldiers
-	// ejected in the middle of a battle)
-	//
-	// It looks a bit silly, that a hero leaves a military site because it is
-	// under attack. Should I reconsider using stationed soldiers instead of
-	// present soldiers in this check?
-	for (uint32_t i = 0; i < present.size(); ++i)
+	if (drop_weakest_soldier(true, &s))
 	{
-		int32_t this_soldier_level = level_offset + multiplier* present[i]->get_level(atrTotal);
-		//log ("msited %4x debu incUS present_soldier_level %2d (%4d)",
-		//(uint16_t)((uint64_t((void*)this))&0xffff), present[i]->get_level(atrTotal), this_soldier_level);
-		if (this_soldier_level > ng_level)
-		{
-			ng_level = this_soldier_level;
-			kickoutCandidate = present[i];
-			//log(" kickout-candidate");
-		}
-		//log("\n");
-	}
-	if (kickoutCandidate)
-	{
-		//log ("msited %4x debu incUS kicking out!\n",(uint16_t)((uint64_t((void*)this))&0xffff));
-		// I drop a soldier here. In a way, I already have a "dropSoldier" routine.
-		// However, that one calls update_soldier_request. I do not like recursion
-		// like that. This is the straightforward albeit clumsy way to get over.
-		//Game & game = ref_cast<Game, Editor_Game_Base>(owner().egbase());
 		Game & game = ref_cast<Game, Editor_Game_Base>(egbase);
-
-		// Should never happen, I was iterating through presentSoldiers..
-		if (!isPresent(*kickoutCandidate))
-		{
-			//log
-			//("MilitarySite::incorporateUpgradedSoldier: %4x Soldier is not present ???\n",
-			//  (uint16_t)((uint64_t((void*)this))&0xffff));
-			return -1;
-		}
-		kickoutCandidate->reset_tasks(game);
-		kickoutCandidate->start_task_leavebuilding(game, true);
 		s.set_location(this);
 		s.reset_tasks(game);
 		s.start_task_buildingwork(game);
 		return 0;
 	}
-	//log ("msited %4x debu incUS failed.\n",(uint16_t)((uint64_t((void*)this))&0xffff));
 	return -1;
 }
 /*
@@ -435,6 +423,7 @@ void MilitarySite::update_soldier_request_impl(bool incd)
 	if (doing_upgrade_request)
 	{
 		if (incd) // update requests always ask for one soldier at time!
+		if (m_soldier_upgrade_request)
 		{
 		  //log ("msited %4x debu usri deleting msur\n",(uint16_t)(((unsigned long)((void*)this))&0xffff));
 
@@ -445,7 +434,7 @@ void MilitarySite::update_soldier_request_impl(bool incd)
 		{
 			// Somebody is killing my soldiers in the middle of upgrade -- bad luck!
 			if (NULL != m_soldier_upgrade_request)
-			if (m_soldier_upgrade_request->is_open())
+			if (m_soldier_upgrade_request->is_open() or 0 == m_soldier_upgrade_request->get_count())
 			{
 				// Economy was not able to find the soldiers I need. Discarding request.
 
@@ -472,9 +461,18 @@ void MilitarySite::update_soldier_request_impl(bool incd)
 			doing_upgrade_request = false;
 			update_normal_soldier_request();
 		}
-		else
+		else // capacity == stationed size
 		{
-			update_upgrade_soldier_request();
+			bool kick = false;
+			if (NULL != m_soldier_upgrade_request)
+			if (not m_soldier_upgrade_request->is_open())
+			{
+				// A new guy is arriving -- let's make room now.
+				kick = true;
+				drop_weakest_soldier(false, NULL);
+			}
+			if (not kick)
+				update_upgrade_soldier_request();
 		}
 	}
 	else // not doing upgrade request
@@ -529,8 +527,20 @@ void MilitarySite::act(Game & game, uint32_t const data)
 	int32_t timeofgame = game.get_gametime();
 
 	// gametime might be 2048 ticks per second
-	//log ("f978 MilitarySite::act: gametime %d wctime %ld cap %2d stationed %2ld present %2ld", timeofgame,
-	// time(NULL), soldierCapacity(), stationedSoldiers().size(), presentSoldiers().size());
+	//log ("f978 MilitarySite::act: gametime %d wctime %ld cap %2d stationed %2ld present %2ld || %4x\n",
+	// timeofgame,
+	//time(NULL), soldierCapacity(), stationedSoldiers().size(), presentSoldiers().size(),
+	//(uint16_t)((uint64_t((void*)this))&0xffff));
+	if (NULL != m_soldier_normal_request && NULL != m_soldier_upgrade_request)
+	{
+		log ("f978 MilitarySite::act: error: TWO REQUESTS ACTIVE!\n");
+		exit (-1);
+	}
+
+        //log ("msited %4x debu incS enter stationed %d max# %d\n",
+        //(uint16_t)((uint64_t((void*)this))&0xffff),
+
+
 	//if (m_soldier_normal_request)
 	//{
 	//  if (m_soldier_normal_request->is_open())
@@ -544,7 +554,7 @@ void MilitarySite::act(Game & game, uint32_t const data)
 	if ((soldier_trainlevel_any != soldier_preference) or doing_upgrade_request)
 		if (timeofgame > next_swap_soldiers_time)
 			{
-				next_swap_soldiers_time = 20000 + timeofgame;
+				next_swap_soldiers_time = timeofgame + soldier_upgrade_try ? 20000 : 100000;
 				update_soldier_request();
 			}
 
