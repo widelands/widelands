@@ -256,9 +256,9 @@ int MilitarySite::incorporateSoldier(Editor_Game_Base & egbase, Soldier & s)
 }
 
 /*
- *	Kicks out the least wanted soldier --
- *	If player prefers zero-level guys, the most
- *	trained soldier is the "weakest guy".
+ * Kicks out the least wanted soldier --
+ * If player prefers zero-level guys, the most
+ * trained soldier is the "weakest guy".
  */
 
 bool
