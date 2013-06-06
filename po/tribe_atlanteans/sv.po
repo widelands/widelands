@@ -6,15 +6,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2012-10-04 15:25+0000\n"
+"POT-Creation-Date: 2013-03-09 16:57+0000\n"
 "PO-Revision-Date: 2012-04-22 06:46+0000\n"
 "Last-Translator: Patrick H. <dajgtre@gmail.com>\n"
 "Language-Team: Language <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-10-05 04:35+0000\n"
-"X-Generator: Launchpad (build 16061)\n"
+"X-Launchpad-Export-Date: 2013-03-10 04:34+0000\n"
+"X-Generator: Launchpad (build 16523)\n"
 
 #: ../../tribes/atlanteans/golden_tabard/conf:1
 msgid ""
@@ -435,7 +435,7 @@ msgstr "Hammare"
 msgid "Harvest blackroot"
 msgstr "Skörda svartrot"
 
-#: ../../tribes/atlanteans/farm/conf:22
+#: ../../tribes/atlanteans/farm/conf:21
 msgid "Harvest corn"
 msgstr "Skörda majs"
 
@@ -623,7 +623,7 @@ msgstr ""
 msgid "Plant blackroot"
 msgstr "Plantera svartrot"
 
-#: ../../tribes/atlanteans/farm/conf:20
+#: ../../tribes/atlanteans/farm/conf:19
 msgid "Plant corn"
 msgstr "Plantera majs"
 
@@ -631,7 +631,7 @@ msgstr "Plantera majs"
 msgid "Plants and harvests blackroot."
 msgstr "Planterar och skördar svartrot."
 
-#: ../../tribes/atlanteans/farmer/conf:2
+#: ../../tribes/atlanteans/farmer/conf:1
 msgid "Plants fields."
 msgstr "Plantera fält"
 
@@ -674,7 +674,7 @@ msgstr "Tillverka hink"
 msgid "Produce cornflour"
 msgstr "Framställ majsmjöl"
 
-#: ../../tribes/atlanteans/weaponsmithy/conf:33
+#: ../../tribes/atlanteans/weaponsmithy/conf:31
 msgid "Produce double trident"
 msgstr "Tillverka dubbeltreudd"
 
@@ -694,7 +694,7 @@ msgstr "Tillverka gyllentabard"
 msgid "Produce hammer"
 msgstr "Tillverka hammare"
 
-#: ../../tribes/atlanteans/weaponsmithy/conf:34
+#: ../../tribes/atlanteans/weaponsmithy/conf:32
 msgid "Produce heavy double trident"
 msgstr "Tillverka tung dubbeltreudd"
 
@@ -702,11 +702,11 @@ msgstr "Tillverka tung dubbeltreudd"
 msgid "Produce hook pole"
 msgstr "Tillverka skaftad krok"
 
-#: ../../tribes/atlanteans/weaponsmithy/conf:30
+#: ../../tribes/atlanteans/weaponsmithy/conf:28
 msgid "Produce light trident"
 msgstr "Tillverka lätt treudd"
 
-#: ../../tribes/atlanteans/weaponsmithy/conf:31
+#: ../../tribes/atlanteans/weaponsmithy/conf:29
 msgid "Produce long trident"
 msgstr "Tillverka lång treudd"
 
@@ -745,7 +745,7 @@ msgstr ""
 "Framställ stålsköld (endast för kompatibilitet med gamla sparade spel "
 "(build13))"
 
-#: ../../tribes/atlanteans/weaponsmithy/conf:32
+#: ../../tribes/atlanteans/weaponsmithy/conf:30
 msgid "Produce steel trident"
 msgstr "Tillverka ståltreudd"
 
@@ -1398,25 +1398,25 @@ msgstr "Skogshuggarstuga"
 #: ../../tribes/atlanteans/burners_house/conf:19
 #: ../../tribes/atlanteans/coalmine/conf:21
 #: ../../tribes/atlanteans/crystalmine/conf:26
-#: ../../tribes/atlanteans/farm/conf:24
+#: ../../tribes/atlanteans/farm/conf:23
 #: ../../tribes/atlanteans/fish_breeders_house/conf:17
 #: ../../tribes/atlanteans/fishers_house/conf:16
 #: ../../tribes/atlanteans/foresters_house/conf:16
 #: ../../tribes/atlanteans/goldmine/conf:22
 #: ../../tribes/atlanteans/goldweaver/conf:19
-#: ../../tribes/atlanteans/horsefarm/conf:22
+#: ../../tribes/atlanteans/horsefarm/conf:21
 #: ../../tribes/atlanteans/hunters_house/conf:16
 #: ../../tribes/atlanteans/ironmine/conf:22
 #: ../../tribes/atlanteans/mill/conf:23
 #: ../../tribes/atlanteans/quarry/conf:16
-#: ../../tribes/atlanteans/sawmill/conf:19
+#: ../../tribes/atlanteans/sawmill/conf:18
 #: ../../tribes/atlanteans/scouts_house/conf:18
 #: ../../tribes/atlanteans/shipyard/conf:22
 #: ../../tribes/atlanteans/smelting_works/conf:25
 #: ../../tribes/atlanteans/smokery/conf:27
 #: ../../tribes/atlanteans/spiderfarm/conf:17
 #: ../../tribes/atlanteans/toolsmithy/conf:45
-#: ../../tribes/atlanteans/weaponsmithy/conf:35
+#: ../../tribes/atlanteans/weaponsmithy/conf:33
 #: ../../tribes/atlanteans/weaving-mill/conf:22
 #: ../../tribes/atlanteans/well/conf:13
 #: ../../tribes/atlanteans/woodcutters_house/conf:16

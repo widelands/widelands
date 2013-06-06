@@ -6,15 +6,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4575\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2012-10-04 15:25+0000\n"
+"POT-Creation-Date: 2013-03-09 16:57+0000\n"
 "PO-Revision-Date: 2012-07-27 10:41+0000\n"
 "Last-Translator: BenW <Big_ben_lair@hotmail.com>\n"
 "Language-Team: Dutch <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-10-05 04:36+0000\n"
-"X-Generator: Launchpad (build 16061)\n"
+"X-Launchpad-Export-Date: 2013-03-10 04:35+0000\n"
+"X-Generator: Launchpad (build 16523)\n"
 
 #: ../../tribes/empire/meal/conf:1
 msgid ""
@@ -423,7 +423,7 @@ msgstr "Hamer"
 msgid "Harvest vine"
 msgstr "Oogst wijnrank"
 
-#: ../../tribes/empire/farm/conf:20
+#: ../../tribes/empire/farm/conf:19
 msgid "Harvest wheat"
 msgstr "Oogst tarwe"
 
@@ -645,11 +645,11 @@ msgstr "Varkensfokkerij"
 msgid "Plant vine"
 msgstr "Plant wijnrank"
 
-#: ../../tribes/empire/farm/conf:18
+#: ../../tribes/empire/farm/conf:17
 msgid "Plant wheat"
 msgstr "Plant tarwe"
 
-#: ../../tribes/empire/farmer/conf:2
+#: ../../tribes/empire/farmer/conf:1
 msgid "Plants fields."
 msgstr "Plant velden."
 
@@ -665,7 +665,7 @@ msgstr "Pantser"
 msgid "Port"
 msgstr "Haven"
 
-#: ../../tribes/empire/weaponsmithy/conf:31
+#: ../../tribes/empire/weaponsmithy/conf:29
 msgid "Produce advanced lance"
 msgstr "Maak verbeterde Lans"
 
@@ -673,15 +673,15 @@ msgstr "Maak verbeterde Lans"
 msgid "Produce armour"
 msgstr "Maak harnas"
 
-#: ../../tribes/empire/toolsmithy/conf:44
+#: ../../tribes/empire/toolsmithy/conf:43
 msgid "Produce axe"
 msgstr "Maak bijl"
 
-#: ../../tribes/empire/toolsmithy/conf:33
+#: ../../tribes/empire/toolsmithy/conf:32
 msgid "Produce bakingtray"
 msgstr "Maak baklade"
 
-#: ../../tribes/empire/toolsmithy/conf:42
+#: ../../tribes/empire/toolsmithy/conf:41
 msgid "Produce basket"
 msgstr "Maak mand"
 
@@ -689,19 +689,19 @@ msgstr "Maak mand"
 msgid "Produce chain armour"
 msgstr "Maak maliënkolder"
 
-#: ../../tribes/empire/toolsmithy/conf:34
+#: ../../tribes/empire/toolsmithy/conf:33
 msgid "Produce fire tongs"
 msgstr "Maak vuurtang"
 
-#: ../../tribes/empire/toolsmithy/conf:35
+#: ../../tribes/empire/toolsmithy/conf:34
 msgid "Produce fishing rod"
 msgstr "Maak vishengel"
 
-#: ../../tribes/empire/toolsmithy/conf:36
+#: ../../tribes/empire/toolsmithy/conf:35
 msgid "Produce hammer"
 msgstr "Maak hamer"
 
-#: ../../tribes/empire/weaponsmithy/conf:32
+#: ../../tribes/empire/weaponsmithy/conf:30
 msgid "Produce heavy lance"
 msgstr "Maak zware Lans"
 
@@ -709,15 +709,15 @@ msgstr "Maak zware Lans"
 msgid "Produce helm"
 msgstr "Maak helm"
 
-#: ../../tribes/empire/toolsmithy/conf:41
+#: ../../tribes/empire/toolsmithy/conf:40
 msgid "Produce hunting spear"
 msgstr "Maak jachtspeer"
 
-#: ../../tribes/empire/toolsmithy/conf:37
+#: ../../tribes/empire/toolsmithy/conf:36
 msgid "Produce kitchen tools"
 msgstr "Maak keukengerei"
 
-#: ../../tribes/empire/weaponsmithy/conf:30
+#: ../../tribes/empire/weaponsmithy/conf:28
 msgid "Produce lance"
 msgstr "Maak lans"
 
@@ -725,7 +725,7 @@ msgstr "Maak lans"
 msgid "Produce meal"
 msgstr ""
 
-#: ../../tribes/empire/toolsmithy/conf:38
+#: ../../tribes/empire/toolsmithy/conf:37
 msgid "Produce pick"
 msgstr "Maak pikhouweel"
 
@@ -737,23 +737,23 @@ msgstr "Maak pantser"
 msgid "Produce ration"
 msgstr ""
 
-#: ../../tribes/empire/toolsmithy/conf:43
+#: ../../tribes/empire/toolsmithy/conf:42
 msgid "Produce saw"
 msgstr "Maak zaag"
 
-#: ../../tribes/empire/toolsmithy/conf:39
+#: ../../tribes/empire/toolsmithy/conf:38
 msgid "Produce scythe"
 msgstr "Maak zeis"
 
-#: ../../tribes/empire/toolsmithy/conf:40
+#: ../../tribes/empire/toolsmithy/conf:39
 msgid "Produce shovel"
 msgstr "Maak schep"
 
-#: ../../tribes/empire/weaponsmithy/conf:33
+#: ../../tribes/empire/weaponsmithy/conf:31
 msgid "Produce war lance"
 msgstr "Produceer oorlogslans"
 
-#: ../../tribes/empire/weaponsmithy/conf:29
+#: ../../tribes/empire/weaponsmithy/conf:27
 msgid "Produce wood lance"
 msgstr "Maak houten Lans"
 
@@ -1460,8 +1460,8 @@ msgstr "Wol bestaat uit de haren van schapen. Weverijen maken er kleren van."
 #: ../../tribes/empire/deep_goldmine/conf:22
 #: ../../tribes/empire/deep_marblemine/conf:23
 #: ../../tribes/empire/deep_oremine/conf:22
-#: ../../tribes/empire/donkeyfarm/conf:22
-#: ../../tribes/empire/farm/conf:22
+#: ../../tribes/empire/donkeyfarm/conf:21
+#: ../../tribes/empire/farm/conf:21
 #: ../../tribes/empire/fishers_house/conf:17
 #: ../../tribes/empire/foresters_house/conf:16
 #: ../../tribes/empire/goldmine/conf:22
@@ -1469,20 +1469,20 @@ msgstr "Wol bestaat uit de haren van schapen. Weverijen maken er kleren van."
 #: ../../tribes/empire/inn/conf:23
 #: ../../tribes/empire/lumberjacks_house/conf:16
 #: ../../tribes/empire/marblemine/conf:26
-#: ../../tribes/empire/mill/conf:20
+#: ../../tribes/empire/mill/conf:19
 #: ../../tribes/empire/oremine/conf:22
-#: ../../tribes/empire/piggery/conf:21
+#: ../../tribes/empire/piggery/conf:20
 #: ../../tribes/empire/quarry/conf:21
-#: ../../tribes/empire/sawmill/conf:23
+#: ../../tribes/empire/sawmill/conf:22
 #: ../../tribes/empire/scouts_house/conf:17
-#: ../../tribes/empire/sheepfarm/conf:21
+#: ../../tribes/empire/sheepfarm/conf:20
 #: ../../tribes/empire/shipyard/conf:22
 #: ../../tribes/empire/smelting_works/conf:24
-#: ../../tribes/empire/stonemasons_house/conf:21
+#: ../../tribes/empire/stonemasons_house/conf:20
 #: ../../tribes/empire/tavern/conf:22
-#: ../../tribes/empire/toolsmithy/conf:45
+#: ../../tribes/empire/toolsmithy/conf:44
 #: ../../tribes/empire/vineyard/conf:23
-#: ../../tribes/empire/weaponsmithy/conf:34
+#: ../../tribes/empire/weaponsmithy/conf:32
 #: ../../tribes/empire/weaving-mill/conf:16
 #: ../../tribes/empire/well/conf:16
 #: ../../tribes/empire/winery/conf:20

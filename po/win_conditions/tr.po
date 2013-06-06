@@ -7,35 +7,35 @@ msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2012-10-04 15:25+0000\n"
-"PO-Revision-Date: 2010-08-30 23:32+0000\n"
-"Last-Translator: Nasenbaer <Unknown>\n"
+"POT-Creation-Date: 2013-03-09 16:57+0000\n"
+"PO-Revision-Date: 2013-02-14 04:07+0000\n"
+"Last-Translator: Volkan Gezer <Unknown>\n"
 "Language-Team: Turkish <tr@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-10-05 04:40+0000\n"
-"X-Generator: Launchpad (build 16061)\n"
+"X-Launchpad-Export-Date: 2013-03-10 04:39+0000\n"
+"X-Generator: Launchpad (build 16523)\n"
 
 #: ../../scripting/win_condition_texts.lua:31
 msgid "%i trees."
-msgstr ""
+msgstr "%i ağaç."
 
 #: ../../scripting/win_condition_texts.lua:54
 msgid "%s %s %i%% of the land (%i of %i)."
-msgstr ""
+msgstr "%s %s bölgenin %%i% kısmı (%i / %i)."
 
 #: ../../scripting/win_condition_texts.lua:30
 msgid "%s had "
-msgstr ""
+msgstr "%s sahip "
 
 #: ../../scripting/win_condition_texts.lua:28
 msgid "%s has %i trees at the moment."
-msgstr ""
+msgstr "%s şuanda %i ağaca sahip."
 
 #: ../../scripting/win_condition_texts.lua:46
 msgid "%s owns more than half of the maps area."
-msgstr ""
+msgstr "%s harita alanının yarısından fazlasına sahip."
 
 #: ../../scripting/win_conditions/04_wood_gnome.lua:16
 msgid ""
@@ -54,7 +54,7 @@ msgstr "Toplayıcılar"
 
 #: ../../scripting/win_condition_texts.lua:2
 msgid "Congratulations!"
-msgstr ""
+msgstr "Tebrikler!"
 
 #: ../../scripting/win_conditions/03_territorial_time.lua:15
 msgid ""
@@ -77,7 +77,7 @@ msgstr "Süresiz Oyun"
 
 #: ../../scripting/win_conditions/05_endless_game_fogless.lua:12
 msgid "Endless Game (no fog)"
-msgstr ""
+msgstr "Bitmez Oyun (sis yok)"
 
 #: ../../scripting/win_condition_texts.lua:49
 msgid "Keep it for %i more minutes to win the game."

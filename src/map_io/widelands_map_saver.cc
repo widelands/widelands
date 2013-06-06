@@ -120,19 +120,11 @@ void Map_Saver::save() throw (_wexception) {
 	Player_Number const nr_players = map.get_nrplayers();
 
 	//  allowed worker types
-	iterate_players_existing_const(plnum, nr_players, m_egbase, player) {
-		Ware_Index const nr_workers = player->tribe().get_nrworkers();
-		for (Ware_Index i = Ware_Index::First(); i < nr_workers; ++i)
-			if (not player->is_worker_type_allowed(i)) {
-				log("Writing Allowed Worker Types Data ... ");
-				Map_Allowed_Worker_Types_Data_Packet p;
-				p                                  .Write(m_fs, m_egbase, *m_mos);
-				log("done!\n ");
-				goto end_find_a_forbidden_worker_type_loop;
-			}
-	} end_find_a_forbidden_worker_type_loop:;
+	log("Writing Allowed Worker Types Data ... ");
+	{Map_Allowed_Worker_Types_Data_Packet p; p.Write(m_fs, m_egbase, *m_mos);}
+	log("done!\n ");
 
-	//  allowed building types
+ //  allowed building types
 	iterate_players_existing_const(plnum, nr_players, m_egbase, player) {
 		Building_Index const nr_buildings = player->tribe().get_nrbuildings();
 		for (Building_Index i = Building_Index::First(); i < nr_buildings; ++i)

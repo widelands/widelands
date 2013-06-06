@@ -34,43 +34,41 @@ namespace Widelands {
 void Map_Allowed_Worker_Types_Data_Packet::Read
 	(FileSystem            &       fs,
 	 Editor_Game_Base      &       egbase,
-	 bool                    const skip,
+	 bool                    skip,
 	 Map_Map_Object_Loader &)
 throw (_wexception)
 {
 	if (skip)
 		return;
 
-	Player_Number const nr_players = egbase.map().get_nrplayers();
+	// Worker types are allowed by default - this is to make sure that old maps
+	// remain playable without change even if new worker types are introduced. If
+	// our file is not there, there is nothing to be done.
 	Profile prof;
 	try {
 		prof.read("allowed_worker_types", 0, fs);
 	} catch (...) {
-		//  Could not read data, must allow buildable worker types for players.
-		iterate_players_existing(p, nr_players, egbase, player) {
-			const Tribe_Descr & tribe = player->tribe();
-			for (Ware_Index i = tribe.get_nrworkers(); Ware_Index::First() < i;)
-				if (tribe.get_worker_descr(--i)->is_buildable())
-					player->allow_worker_type(i, true);
-		}
 		return;
 	}
+
 	try {
-		int32_t const packet_version =
+		const int32_t packet_version =
 			prof.get_safe_section("global").get_safe_int("packet_version");
 		if (packet_version == CURRENT_PACKET_VERSION) {
-			iterate_players_existing(p, nr_players, egbase, player) {
+			iterate_players_existing(p, egbase.map().get_nrplayers(), egbase, player) {
 				const Tribe_Descr & tribe = player->tribe();
 				char buffer[10];
 				snprintf(buffer, sizeof(buffer), "player_%u", p);
 				try {
-					Section & s = prof.get_safe_section(buffer);
-					Ware_Index const nr_workers = tribe.get_nrworkers();
-					for (Ware_Index w = Ware_Index::First(); w < nr_workers; ++w) {
+					Section* s = prof.get_section(buffer);
+					if (s == NULL)
+						continue;
+
+					for (Ware_Index w = Ware_Index::First(); w < tribe.get_nrworkers(); ++w) {
 						const Worker_Descr & w_descr = *tribe.get_worker_descr(w);
 						if (w_descr.is_buildable())
 							player->allow_worker_type
-								(w, s.get_bool(w_descr.name().c_str(), false));
+								(w, s->get_bool(w_descr.name().c_str(), true));
 					}
 				} catch (const _wexception & e) {
 					throw game_data_error
@@ -94,22 +92,26 @@ throw (_wexception)
 	prof.create_section("global").set_int
 		("packet_version", CURRENT_PACKET_VERSION);
 
-	Player_Number const nr_players = egbase.map().get_nrplayers();
-	iterate_players_existing_const(p, nr_players, egbase, player) {
+	bool forbidden_worker_seen = false;
+	iterate_players_existing_const(p, egbase.map().get_nrplayers(), egbase, player) {
 		const Tribe_Descr & tribe = player->tribe();
 		char buffer[10];
 		snprintf(buffer, sizeof(buffer), "player_%u", p);
 		Section & section = prof.create_section(buffer);
 
-		//  Write for all workers if it is enabled.
-		Ware_Index const nr_workers = tribe.get_nrworkers();
-		for (Ware_Index b = Ware_Index::First(); b < nr_workers; ++b)
-			if (player->is_worker_type_allowed(b))
-				section.set_bool
-					(tribe.get_worker_descr(b)->name().c_str(), true);
+		// Only write the workers which are disabled.
+		for (Ware_Index b = Ware_Index::First(); b < tribe.get_nrworkers(); ++b) {
+			if (!player->is_worker_type_allowed(b)) {
+				section.set_bool(tribe.get_worker_descr(b)->name().c_str(), false);
+				forbidden_worker_seen = true;
+			}
+		}
 	}
 
-	prof.write("allowed_worker_types", false, fs);
+	// Only write this package if there is a forbidden worker type.
+	if (forbidden_worker_seen) {
+		prof.write("allowed_worker_types", false, fs);
+	}
 }
 
 }
