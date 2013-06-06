@@ -158,7 +158,8 @@ ProductionSite   (d),
 m_soldier_request(0),
 m_capacity       (descr().get_max_number_of_soldiers()),
 m_build_heros    (false),
-m_result         (Failed)
+m_result         (Failed),
+kickout_randomizer(0)
 {
 	// Initialize this in the constructor so that loading code may
 	// overwrite priorities.
@@ -484,6 +485,19 @@ void TrainingSite::drop_stalled_soldiers(Game &)
 	for (uint32_t i = 0; i < m_soldiers.size(); ++i)
 	{
 		uint32_t this_soldier_level = m_soldiers[i]->get_level(atrTotal);
+		if (0 < this_soldier_level)
+		if (73 == ++kickout_randomizer)
+		{
+			// The idea here is to kick the most trained stalled soldier.
+			// However, playtest feedback suggests that while this is generally
+			// good, in some cases this leads to (small) problems. Hence I introduce
+			// a little bit of "randomness" to the kickout routine.
+			// When this fires, an apparently-random guy is selected.
+			// 73 in the if statement above is a prime number. If you change it,
+			// please choose another prime. HAMs -- don't.
+			kickout_randomizer =  0;
+			this_soldier_level += 50;
+		}
 
 		bool this_soldier_is_safe = false;
 		if (this_soldier_level <= highest_soldier_level_seen)
@@ -540,7 +554,26 @@ void TrainingSite::drop_stalled_soldiers(Game &)
 	// Finally drop the soldier.
 	if (NULL != soldier_to_drop)
 		{
-			log("TrainingSite::drop_stalled_soldiers: Kicking somebody out.\n");
+			log("TrainingSite::drop_stalled_soldiers: Kicking somebody out ");
+			//log("(%3d,%3d): ", get_positions(g)[0].x, get_positions(g)[0].y);
+
+			// Kicking out a soldier diminishes "stallness" of his levels a bit.
+			std::vector<Upgrade>::iterator it = m_upgrades.begin();
+			for (; it != m_upgrades.end(); ++it)
+			{
+				int32_t level = soldier_to_drop->get_level(it->attribute);
+				log (" %2d.%2d ", it->attribute, level);
+				TypeAndLevel_t train_tl(it->attribute, level);
+				TrainFailCount_t::iterator tstep = training_failure_count.find(train_tl);
+				int32_t destall_val = max_stall_val - 5 * training_state_multiplier / 2;
+				if (0 >  destall_val)
+					destall_val = 0;
+				log(" %3d ->", tstep->second.first);
+				if (tstep->second.first > destall_val)
+					tstep->second.first = destall_val;
+				log(" %3d   ", tstep->second.first);
+			}
+			log("\n");
 			dropSoldier (*soldier_to_drop);
 		}
 }
@@ -576,7 +609,7 @@ void TrainingSite::program_end(Game & game, Program_Result const result)
 		}
 		m_current_upgrade = 0;
 	}
-	trainingDone();
+	trainingDone(game);
 }
 
 
@@ -754,7 +787,11 @@ TrainingSite::trainingAttempted(uint32_t type, uint32_t level)
 		if (training_failure_count.find(key) == training_failure_count.end())
 			training_failure_count[key]  = std::make_pair(training_state_multiplier, 0);
 		else
-			training_failure_count[key].first +=  training_state_multiplier;
+			{
+				//log ("ts: trainingAttempt %d.%d : %3d ->", type, level, training_failure_count[key].first);
+				training_failure_count[key].first +=  training_state_multiplier;
+				//log(" %3d\n", training_failure_count[key].first);
+			}
 	}
 
 /**
@@ -770,10 +807,11 @@ TrainingSite::trainingSuccessful(uint32_t type, uint32_t level)
 }
 
 void
-TrainingSite::trainingDone()
+TrainingSite::trainingDone(Game &)
 {
 	TrainFailCount_t::iterator it;
 	log("TrainingSite::trainingDone() ");
+	//log("(%3d,%3d): ", get_positions(g)[0].x, get_positions(g)[0].y);
 	for (it = training_failure_count.begin(); it != training_failure_count.end(); it++)
 	{
 		// If a soldier is present at this training level, deteoriate

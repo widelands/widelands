@@ -156,7 +156,7 @@ public:
 	// These are for premature soldier kick-out
 	void trainingAttempted(uint32_t type, uint32_t level);
 	void trainingSuccessful(uint32_t type, uint32_t level);
-	void trainingDone();
+	void trainingDone(Game & game);
 
 
 protected:
@@ -211,7 +211,7 @@ private:
 	TrainFailCount_t training_failure_count;
 	uint32_t max_stall_val;
 	void init_kick_state(const tAttribute&, const TrainingSite_Descr&);
-
+	uint16_t kickout_randomizer;
 
 };
 

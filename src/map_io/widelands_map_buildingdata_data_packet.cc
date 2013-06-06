@@ -1078,6 +1078,14 @@ void Map_Buildingdata_Data_Packet::read_trainingsite
 			if (not rel17comp)
 			{
 				uint16_t mapsize = fr.Unsigned16();
+				if (0xF000 < mapsize) // compatibility with some non-release saves.
+				{
+					trainingsite.kickout_randomizer = compl mapsize;
+					mapsize = fr.Unsigned16();
+					log("Loading trainingsite with randomizer %3d\n", trainingsite.kickout_randomizer);
+				}
+				else
+					log ("Warning: Something is probably wrong.\n");
 				while (mapsize)
 				{
 					uint16_t traintype  = fr.Unsigned16();
@@ -1526,8 +1534,9 @@ void Map_Buildingdata_Data_Packet::write_trainingsite
 	}
 	if (255 < trainingsite.training_failure_count.size())
 		log
-("Save TrainingSite: Failure counter has ridiculously many entries! (%ld)\n",
+			("Save TrainingSite: Failure counter has ridiculously many entries! (%ld)\n",
 			trainingsite.training_failure_count.size());
+	fw.Unsigned16(compl (0xfff bitand trainingsite.kickout_randomizer));
 	fw.Unsigned16(static_cast<uint16_t> (trainingsite.training_failure_count.size()));
 	for
 (TrainingSite::TrainFailCount_t::const_iterator i = trainingsite.training_failure_count.begin();
