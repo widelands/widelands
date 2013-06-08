@@ -746,26 +746,26 @@ void Map_Buildingdata_Data_Packet::read_militarysite
 
 				militarysite.m_soldier_upgrade_required_min = fr.Unsigned8();
 				militarysite.m_soldier_upgrade_required_max = fr.Unsigned8();
-				militarysite.soldier_preference = fr.Unsigned8();
-				militarysite.next_swap_soldiers_time = fr.Signed32();
+				militarysite.m_soldier_preference = fr.Unsigned8();
+				militarysite.m_next_swap_soldiers_time = fr.Signed32();
 				uint8_t sd = fr.Unsigned8();
 				switch (sd)
 				{
 					case 0xf0:
-						militarysite.soldier_upgrade_try = false;
-						militarysite.doing_upgrade_request = false;
+						militarysite.m_soldier_upgrade_try = false;
+						militarysite.m_doing_upgrade_request = false;
 						break;
 					case 0xf1:
-						militarysite.soldier_upgrade_try = true;
-						militarysite.doing_upgrade_request = false;
+						militarysite.m_soldier_upgrade_try = true;
+						militarysite.m_doing_upgrade_request = false;
 						break;
 					case 0xf2:
-						militarysite.soldier_upgrade_try = false;
-						militarysite.doing_upgrade_request = true;
+						militarysite.m_soldier_upgrade_try = false;
+						militarysite.m_doing_upgrade_request = true;
 						break;
 					case 0xf3:
-						militarysite.soldier_upgrade_try = true;
-						militarysite.doing_upgrade_request = true;
+						militarysite.m_soldier_upgrade_try = true;
+						militarysite.m_doing_upgrade_request = true;
 						break;
 					default:
 						log("widelands_map_buildingdata_data_packet.cc: error: ");
@@ -777,10 +777,10 @@ void Map_Buildingdata_Data_Packet::read_militarysite
 			{
 				militarysite.m_soldier_upgrade_required_min = 0;
 				militarysite.m_soldier_upgrade_required_max = 999;
-				militarysite.soldier_preference = militarysite.soldier_trainlevel_any;
-				militarysite.doing_upgrade_request = false;
-				militarysite.soldier_upgrade_try = false;
-				militarysite.next_swap_soldiers_time = militarysite.m_nexthealtime;
+				militarysite.m_soldier_preference = militarysite.soldier_trainlevel_any;
+				militarysite.m_doing_upgrade_request = false;
+				militarysite.m_soldier_upgrade_try = false;
+				militarysite.m_next_swap_soldiers_time = militarysite.m_nexthealtime;
 			}
 
 		} else
@@ -1502,12 +1502,12 @@ void Map_Buildingdata_Data_Packet::write_militarysite
 		fw.Unsigned8(255);
 	else
 		fw.Unsigned8(militarysite.m_soldier_upgrade_required_max);
-	fw.Unsigned8(militarysite.soldier_preference);
-	fw.Signed32(militarysite.next_swap_soldiers_time);
+	fw.Unsigned8(militarysite.m_soldier_preference);
+	fw.Signed32(militarysite.m_next_swap_soldiers_time);
 	uint8_t sd = 0xf0;
-	if (militarysite.soldier_upgrade_try)
+	if (militarysite.m_soldier_upgrade_try)
 		sd += 1;
-	if (militarysite.doing_upgrade_request)
+	if (militarysite.m_doing_upgrade_request)
 		sd += 2;
 	fw.Unsigned8(sd);
 

@@ -90,8 +90,8 @@ m_soldier_upgrade_request(NULL),
 m_didconquer  (false),
 m_capacity    (ms_descr.get_max_number_of_soldiers()),
 m_nexthealtime(0),
-soldier_upgrade_try(false),
-doing_upgrade_request(false)
+m_soldier_upgrade_try(false),
+m_doing_upgrade_request(false)
 {
 	preferAnySoldiers();
 }
@@ -267,7 +267,7 @@ MilitarySite::drop_weakest_soldier(bool new_soldier_has_arrived, Soldier * newgu
 	std::vector<Soldier *> present = presentSoldiers();
 	if (new_soldier_has_arrived or 1 < present.size())
 	{
-		bool heros = soldier_trainlevel_hero == soldier_preference;
+		bool heros = soldier_trainlevel_hero == m_soldier_preference;
 		const int32_t multiplier = heros ? -1:1;
 		static const int32_t level_offset = 10000;
 		int32_t worst_soldier_level = 0;
@@ -363,10 +363,28 @@ void MilitarySite::update_normal_soldier_request()
 		}
 	}
 }
+
+/* There are two kinds of soldier requests:
+ * "normal", which is used whenever the military site
+ * needs more soldiers, and "upgrade" which is used
+ * when well (or less) trained soldiers are preferred.
+ *
+ * IN case of normal requests, the military site is
+ * filled. In case of upgrade requests, only one guy
+ * is exchanged at a time.
+ *
+ * There would be more efficient ways to get well trained
+ * soldiers. This way, new buildings appearing in battle
+ * field are more vulnerable at the beginning. This is
+ * intentional. The purpose of this upgade thing is
+ * to reduce the benefits of site micromanagement. The
+ * intention is not to make gameplay easier in other ways.
+ */
+
 void MilitarySite::update_upgrade_soldier_request()
 {
 	bool reqch = update_upgrade_requirements();
-	if (not soldier_upgrade_try)
+	if (not m_soldier_upgrade_try)
 		return;
 	bool dosomething = reqch;
 
@@ -403,12 +421,15 @@ void MilitarySite::update_upgrade_soldier_request()
 	}
 }
 
+
+
+
 void MilitarySite::update_soldier_request_impl(bool incd)
 {
 	int32_t sc = soldierCapacity();
 	int32_t sss = stationedSoldiers().size();
 
-	if (doing_upgrade_request)
+	if (m_doing_upgrade_request)
 	{
 		if (incd) // update requests always ask for one soldier at time!
 		if (m_soldier_upgrade_request)
@@ -429,7 +450,7 @@ void MilitarySite::update_soldier_request_impl(bool incd)
 			}
 			if (NULL == m_soldier_upgrade_request)
 			{
-				doing_upgrade_request = false;
+				m_doing_upgrade_request = false;
 				update_normal_soldier_request();
 			}
 			// else -- ohno please help me! Player is in trouble -- evil grin
@@ -440,7 +461,7 @@ void MilitarySite::update_soldier_request_impl(bool incd)
 			if (m_soldier_upgrade_request)
 				delete m_soldier_upgrade_request;
 			m_soldier_upgrade_request = NULL;
-			doing_upgrade_request = false;
+			m_doing_upgrade_request = false;
 			update_normal_soldier_request();
 		}
 		else // capacity == stationed size
@@ -464,14 +485,14 @@ void MilitarySite::update_soldier_request_impl(bool incd)
 			update_normal_soldier_request();
 		}
 		if ((sc == sss) and (NULL == m_soldier_normal_request))
-		if (soldier_trainlevel_any != soldier_preference)
+		if (soldier_trainlevel_any != m_soldier_preference)
 		{
 			//log ("msited %4x debu usri switching to upgrade\n",
 			//  (uint16_t)(((unsigned long) ((void*)this))&0xffff));
 			int32_t pss = presentSoldiers().size();
 			if (pss == sc)
 			{
-				doing_upgrade_request = true;
+				m_doing_upgrade_request = true;
 				update_upgrade_soldier_request();
 			}
 			// Note -- if there are non-present stationed soldiers, nothing gets
@@ -513,10 +534,10 @@ void MilitarySite::act(Game & game, uint32_t const data)
 	// I do not get a callback when stationed, non-present soldier returns --
 	// Therefore I must poll in some occasions. Let's do that rather infrequently,
 	// to keep the game lightweight.
-	if ((soldier_trainlevel_any != soldier_preference) or doing_upgrade_request)
-		if (timeofgame > next_swap_soldiers_time)
+	if ((soldier_trainlevel_any != m_soldier_preference) or m_doing_upgrade_request)
+		if (timeofgame > m_next_swap_soldiers_time)
 			{
-				next_swap_soldiers_time = timeofgame + soldier_upgrade_try ? 20000 : 100000;
+				m_next_swap_soldiers_time = timeofgame + m_soldier_upgrade_try ? 20000 : 100000;
 				update_soldier_request();
 			}
 
@@ -974,7 +995,7 @@ MilitarySite::update_upgrade_requirements()
 {
 	// Fixme -- here are bugs -- find and fix
 	bool heros = true;
-	switch (soldier_preference)
+	switch (m_soldier_preference)
 	{
 		case soldier_trainlevel_hero:
 			heros = true;
@@ -983,8 +1004,8 @@ MilitarySite::update_upgrade_requirements()
 			heros = false;
 			break;
 		default:
-			log("MilitarySite::swapSoldiers: error: Unknown player preference %d.\n", soldier_preference);
-			soldier_upgrade_try = false;
+			log("MilitarySite::swapSoldiers: error: Unknown player preference %d.\n", m_soldier_preference);
+			m_soldier_upgrade_try = false;
 			return false;
 	}
 
@@ -1003,11 +1024,11 @@ MilitarySite::update_upgrade_requirements()
 
 		}
 	}
-	soldier_upgrade_try = true;
+	m_soldier_upgrade_try = true;
 	if (! heros)
 		if (level_offset == wg_level)
 			{
-				soldier_upgrade_try = false;
+				m_soldier_upgrade_try = false;
 				return false;
 			}
 	int32_t reqmin = heros ? 1 + wg_actual_level : 0;
@@ -1039,35 +1060,35 @@ MilitarySite::update_upgrade_requirements()
 void
 MilitarySite::preferSkilledSoldiers()
 {
-	soldier_preference = soldier_trainlevel_hero;
+	m_soldier_preference = soldier_trainlevel_hero;
 }
 
 void
 MilitarySite::preferAnySoldiers()
 {
-	soldier_preference = soldier_trainlevel_any;
+	m_soldier_preference = soldier_trainlevel_any;
 }
 void
 MilitarySite::preferCheapSoldiers()
 {
-	soldier_preference = soldier_trainlevel_rookie;
+	m_soldier_preference = soldier_trainlevel_rookie;
 }
 
 bool
 MilitarySite::preferringSkilledSoldiers() const
 {
-	return  soldier_trainlevel_hero == soldier_preference;
+	return  soldier_trainlevel_hero == m_soldier_preference;
 }
 
 bool
 MilitarySite::preferringAnySoldiers() const
 {
-	return  soldier_trainlevel_any == soldier_preference;
+	return  soldier_trainlevel_any == m_soldier_preference;
 }
 bool
 MilitarySite::preferringCheapSoldiers() const
 {
-	return  soldier_trainlevel_rookie == soldier_preference;
+	return  soldier_trainlevel_rookie == m_soldier_preference;
 }
 
 

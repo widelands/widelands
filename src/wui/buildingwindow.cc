@@ -199,7 +199,7 @@ void Building_Window::create_capsbuttons(UI::Box * capsbuttons)
 						(capsbuttons, "rookies", 0, 0, 34, 34,
 							g_gr->images().get("pics/but4.png"),
 							g_gr->images().get("pics/msite_prefer_cheap.png"),
-							_("Rookies"));
+							_("Prefer rookies"));
 						cs_btn->sigclicked.connect
 						(boost::bind(&Building_Window::act_prefer_cheap_soldiers, boost::ref(*this)));
 						capsbuttons->add (cs_btn, UI::Box::AlignCenter);
@@ -211,7 +211,7 @@ void Building_Window::create_capsbuttons(UI::Box * capsbuttons)
 						(capsbuttons, "whatever", 0, 0, 34, 34,
 							g_gr->images().get("pics/but4.png"),
 							g_gr->images().get("pics/msite_prefer_any.png"),
-							_("Anything"));
+							_("No soldier preference"));
 						cs_btn->sigclicked.connect
 						(boost::bind(&Building_Window::act_prefer_any_soldiers, boost::ref(*this)));
 						capsbuttons->add (cs_btn, UI::Box::AlignCenter);
@@ -223,7 +223,7 @@ void Building_Window::create_capsbuttons(UI::Box * capsbuttons)
 						(capsbuttons, "heroes", 0, 0, 34, 34,
 							g_gr->images().get("pics/but4.png"),
 							g_gr->images().get("pics/msite_prefer_skilled.png"),
-							_("Heroes"));
+							_("Prefer heroes"));
 						cs_btn->sigclicked.connect
 						(boost::bind(&Building_Window::act_prefer_skilled_soldiers, boost::ref(*this)));
 						capsbuttons->add (cs_btn, UI::Box::AlignCenter);

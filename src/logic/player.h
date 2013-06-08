@@ -460,7 +460,7 @@ struct Player :
 	void bulldoze(PlayerImmovable &, bool recurse = false);
 	void flagaction(Flag &);
 	void start_stop_building(PlayerImmovable &);
-	void prefer_certain_soldiers(PlayerImmovable &, uint8_t soldier_preference);
+	void prefer_certain_soldiers(PlayerImmovable &, uint8_t m_soldier_preference);
 	void enhance_building
 		(Building *, Building_Index index_of_new_building);
 	void dismantle_building (Building *);
