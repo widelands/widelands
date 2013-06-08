@@ -1,0 +1,23 @@
+# Automatically created by Widelands bzr6567[trunk] (RelWithDebInfo)
+
+[global]
+packet_version="1"
+number_of_port_spaces="16"
+
+[port_spaces]
+0="80 15"
+1="93 15"
+2="133 20"
+3="76 28"
+4="37 37"
+5="51 49"
+6="47 59"
+7="86 66"
+8="27 92"
+9="61 102"
+10="59 117"
+11="122 123"
+12="32 127"
+13="71 127"
+14="22 140"
+15="11 141"
