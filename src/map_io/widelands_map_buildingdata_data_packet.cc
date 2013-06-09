@@ -744,43 +744,21 @@ void Map_Buildingdata_Data_Packet::read_militarysite
 			if (not (rel17comp)) // compatibility with release 17 savegames
 			{
 
-				militarysite.m_soldier_upgrade_required_min = fr.Unsigned8();
-				militarysite.m_soldier_upgrade_required_max = fr.Unsigned8();
+				militarysite.m_soldier_upgrade_required_min = fr.Unsigned16();
+				militarysite.m_soldier_upgrade_required_max = fr.Unsigned16();
 				militarysite.m_soldier_preference = fr.Unsigned8();
 				militarysite.m_next_swap_soldiers_time = fr.Signed32();
-				uint8_t sd = fr.Unsigned8();
-				switch (sd)
-				{
-					case 0xf0:
-						militarysite.m_soldier_upgrade_try = false;
-						militarysite.m_doing_upgrade_request = false;
-						break;
-					case 0xf1:
-						militarysite.m_soldier_upgrade_try = true;
-						militarysite.m_doing_upgrade_request = false;
-						break;
-					case 0xf2:
-						militarysite.m_soldier_upgrade_try = false;
-						militarysite.m_doing_upgrade_request = true;
-						break;
-					case 0xf3:
-						militarysite.m_soldier_upgrade_try = true;
-						militarysite.m_doing_upgrade_request = true;
-						break;
-					default:
-						log("widelands_map_buildingdata_data_packet.cc: error: ");
-						log(" reading military site packed failed.\n");
-						exit(-1); // What is a better way to scream aloud ?
-				}
+				militarysite.m_soldier_upgrade_try = 0 != fr.Unsigned8() ? true : false;
+				militarysite.m_doing_upgrade_request = 0 != fr.Unsigned8() ? true : false;
 			}
 			else // Release 17 compatibility branch. Some safe values.
 			{
 				militarysite.m_soldier_upgrade_required_min = 0;
 				militarysite.m_soldier_upgrade_required_max = 999;
 				militarysite.m_soldier_preference = militarysite.soldier_trainlevel_any;
-				militarysite.m_doing_upgrade_request = false;
-				militarysite.m_soldier_upgrade_try = false;
 				militarysite.m_next_swap_soldiers_time = militarysite.m_nexthealtime;
+				militarysite.m_soldier_upgrade_try = false;
+				militarysite.m_doing_upgrade_request = false;
 			}
 
 		} else
@@ -1494,22 +1472,12 @@ void Map_Buildingdata_Data_Packet::write_militarysite
 	if (militarysite.m_soldier_normal_request)
 	if (militarysite.m_soldier_upgrade_request)
 	  log("map_buildingdata_-data_packet: There is something fishy going on.. debug me please!\n");
-	if (255 < militarysite.m_soldier_upgrade_required_min)
-		fw.Unsigned8(255);
-	else
-		fw.Unsigned8(militarysite.m_soldier_upgrade_required_min);
-	if (255 < militarysite.m_soldier_upgrade_required_max)
-		fw.Unsigned8(255);
-	else
-		fw.Unsigned8(militarysite.m_soldier_upgrade_required_max);
+	fw.Unsigned16(militarysite.m_soldier_upgrade_required_min);
+	fw.Unsigned16(militarysite.m_soldier_upgrade_required_max);
 	fw.Unsigned8(militarysite.m_soldier_preference);
 	fw.Signed32(militarysite.m_next_swap_soldiers_time);
-	uint8_t sd = 0xf0;
-	if (militarysite.m_soldier_upgrade_try)
-		sd += 1;
-	if (militarysite.m_doing_upgrade_request)
-		sd += 2;
-	fw.Unsigned8(sd);
+	fw.Unsigned8(militarysite.m_soldier_upgrade_try ? 1 : 0);
+	fw.Unsigned8(militarysite.m_doing_upgrade_request ? 1 : 0);
 
 }
 

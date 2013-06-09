@@ -1047,8 +1047,8 @@ MilitarySite::update_upgrade_requirements()
 				m_soldier_normal_request = 0;
 			}
 			m_soldier_upgrade_requirements = RequireAttribute(atrTotal, reqmin, reqmax);
-			m_soldier_upgrade_required_max = reqmax;
-			m_soldier_upgrade_required_min = reqmin;
+			m_soldier_upgrade_required_max = static_cast<uint16_t> (reqmax);
+			m_soldier_upgrade_required_min = static_cast<uint16_t> (reqmin);
 
 			return true;
 		}

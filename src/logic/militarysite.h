@@ -147,8 +147,8 @@ private:
 	Requirements m_soldier_requirements;
 	//RequireOr m_soldier_upgrade_requirements;
 	Requirements m_soldier_upgrade_requirements;
-	uint32_t     m_soldier_upgrade_required_min;
-	uint32_t     m_soldier_upgrade_required_max;
+	uint16_t     m_soldier_upgrade_required_min;
+	uint16_t     m_soldier_upgrade_required_max;
 	Request    * m_soldier_normal_request;
 	Request    * m_soldier_upgrade_request;
 	bool m_didconquer;
