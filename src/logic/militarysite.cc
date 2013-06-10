@@ -94,6 +94,8 @@ m_soldier_upgrade_try(false),
 m_doing_upgrade_request(false)
 {
 	preferAnySoldiers();
+	m_next_swap_soldiers_time = 0;
+
 }
 
 
@@ -199,7 +201,10 @@ void MilitarySite::cleanup(Editor_Game_Base & egbase)
 	delete m_soldier_normal_request;
 	m_soldier_normal_request = 0;
 	if (m_soldier_upgrade_request)
+	{
 		delete m_soldier_upgrade_request;
+		m_soldier_upgrade_request = 0;
+	}
 	m_soldier_upgrade_request = 0;
 }
 
@@ -256,9 +261,17 @@ int MilitarySite::incorporateSoldier(Editor_Game_Base & egbase, Soldier & s)
 }
 
 /*
- * Kicks out the least wanted soldier --
- * If player prefers zero-level guys, the most
- * trained soldier is the "weakest guy".
+ * Kicks out the least wanted soldier -- If player prefers zero-level guys,
+ * the most trained soldier is the "weakest guy".
+ *
+ * Returns false, if there is only one soldier (won't drop last soldier)
+ * or the new guy is not better than the weakest one present, in which case
+ * nobody is dropped. If a new guy arrived and nobody was dropped, then
+ * caller of this should not allow the new guy to enter.
+ *
+ * Situations like the above may happen if, for example, when weakest guy
+ * that was supposed to be dropped is not present at the moment his replacement
+ * arrives.
  */
 
 bool
@@ -364,21 +377,15 @@ void MilitarySite::update_normal_soldier_request()
 	}
 }
 
-/* There are two kinds of soldier requests:
- * "normal", which is used whenever the military site
- * needs more soldiers, and "upgrade" which is used
- * when well (or less) trained soldiers are preferred.
+/* There are two kinds of soldier requests: "normal", which is used whenever the military site
+ * needs more soldiers, and "upgrade" which is used when well (or less) trained soldiers are preferred.
  *
- * IN case of normal requests, the military site is
- * filled. In case of upgrade requests, only one guy
+ * In case of normal requests, the military site is filled. In case of upgrade requests, only one guy
  * is exchanged at a time.
  *
- * There would be more efficient ways to get well trained
- * soldiers. This way, new buildings appearing in battle
- * field are more vulnerable at the beginning. This is
- * intentional. The purpose of this upgade thing is
- * to reduce the benefits of site micromanagement. The
- * intention is not to make gameplay easier in other ways.
+ * There would be more efficient ways to get well trained soldiers. Now, new buildings appearing in battle
+ * field are more vulnerable at the beginning. This is intentional. The purpose of this upgade thing is
+ * to reduce the benefits of site micromanagement. The intention is not to make gameplay easier in other ways.
  */
 
 void MilitarySite::update_upgrade_soldier_request()
@@ -421,8 +428,17 @@ void MilitarySite::update_upgrade_soldier_request()
 	}
 }
 
-
-
+/*
+ * I have update_soldier_request
+ *        update_soldier_request_impl
+ *        update_upgrade_soldier_request
+ *        update_normal_soldier_request
+ *
+ * The first one is just for convenience reasons (keep interface unchanged).
+ * The next one handles state switching between site fill (normal more)
+ * and grabbing soldiers with proper training (upgrade mode). The last
+ * two actually make the requests.
+ */
 
 void MilitarySite::update_soldier_request_impl(bool incd)
 {
@@ -450,12 +466,13 @@ void MilitarySite::update_soldier_request_impl(bool incd)
 			}
 			if (NULL == m_soldier_upgrade_request)
 			{
+				//phoo -- I can safely request new soldiers.
 				m_doing_upgrade_request = false;
 				update_normal_soldier_request();
 			}
 			// else -- ohno please help me! Player is in trouble -- evil grin
 		}
-		else
+		else // military site is full or overfull
 		if (sc < sss) // player is reducing capacity
 		{
 			if (m_soldier_upgrade_request)
@@ -466,29 +483,28 @@ void MilitarySite::update_soldier_request_impl(bool incd)
 		}
 		else // capacity == stationed size
 		{
-			bool kick = false;
 			if (NULL != m_soldier_upgrade_request)
-			if (not m_soldier_upgrade_request->is_open())
 			{
-				// A new guy is arriving -- let's make room now.
-				kick = true;
-				drop_weakest_soldier(false, NULL);
+				if (not m_soldier_upgrade_request -> is_open())
+					// A new guy is arriving -- let's make room now.
+					drop_weakest_soldier(false, NULL);
+				else
+					// We should hit this only if Requirement changed -- are there such paths?
+					update_upgrade_soldier_request();
 			}
-			if (not kick)
+			else
 				update_upgrade_soldier_request();
+
 		}
 	}
 	else // not doing upgrade request
 	{
 		if ((sc != sss) or (NULL != m_soldier_normal_request))
-		{
 			update_normal_soldier_request();
-		}
+
 		if ((sc == sss) and (NULL == m_soldier_normal_request))
 		if (soldier_trainlevel_any != m_soldier_preference)
 		{
-			//log ("msited %4x debu usri switching to upgrade\n",
-			//  (uint16_t)(((unsigned long) ((void*)this))&0xffff));
 			int32_t pss = presentSoldiers().size();
 			if (pss == sc)
 			{
@@ -525,10 +541,11 @@ void MilitarySite::act(Game & game, uint32_t const data)
 
 	int32_t timeofgame = game.get_gametime();
 
+
 	if (NULL != m_soldier_normal_request && NULL != m_soldier_upgrade_request)
 	{
 		log ("f978 MilitarySite::act: error: TWO REQUESTS ACTIVE!\n");
-		exit (-1);
+		throw wexception("MilitarySite::act: Two soldier requests are ongoing -- should never happen!\n");
 	}
 
 	// I do not get a callback when stationed, non-present soldier returns --
@@ -990,10 +1007,18 @@ Map_Object * MilitarySite::popSoldierJob
 }
 
 
+/*
+ * When upgrading soldiers, we do not ask for just any soldiers, but soldiers
+ * that are better than what we already have. This routine sets the requirements
+ * used by the request.
+ *
+ * There is also one small optimization -- if the player asks for zero-level guys,
+ * and all soldiers already are zero-level guys, we do not do anything.
+ */
+
 bool
 MilitarySite::update_upgrade_requirements()
 {
-	// Fixme -- here are bugs -- find and fix
 	bool heros = true;
 	switch (m_soldier_preference)
 	{
@@ -1008,6 +1033,9 @@ MilitarySite::update_upgrade_requirements()
 			m_soldier_upgrade_try = false;
 			return false;
 	}
+
+
+	// Find the level of the soldier that is currently least-suited.
 
 	std::vector<Soldier *> svec = stationedSoldiers();
 	int32_t multiplier = heros ? -1:1;
@@ -1024,6 +1052,8 @@ MilitarySite::update_upgrade_requirements()
 
 		}
 	}
+
+	// micro-optimization
 	m_soldier_upgrade_try = true;
 	if (! heros)
 		if (level_offset == wg_level)
@@ -1031,6 +1061,9 @@ MilitarySite::update_upgrade_requirements()
 				m_soldier_upgrade_try = false;
 				return false;
 			}
+
+
+	// Now I actually build the new reuirements
 	int32_t reqmin = heros ? 1 + wg_actual_level : 0;
 	int32_t reqmax = heros ? 10000 : wg_actual_level - 1;
 
@@ -1057,6 +1090,7 @@ MilitarySite::update_upgrade_requirements()
 	return false;
 }
 
+// setters
 void
 MilitarySite::preferSkilledSoldiers()
 {
@@ -1074,6 +1108,7 @@ MilitarySite::preferCheapSoldiers()
 	m_soldier_preference = soldier_trainlevel_rookie;
 }
 
+// getters
 bool
 MilitarySite::preferringSkilledSoldiers() const
 {
