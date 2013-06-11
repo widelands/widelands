@@ -5,6 +5,7 @@ heal_per_second=170
 conquers=9
 vision_range=21
 enhanced_building=yes
+prefer_heroes=true
 
 [buildcost]
 trunk=1

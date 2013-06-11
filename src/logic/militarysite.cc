@@ -61,6 +61,8 @@ m_heal_per_second    (0)
 	m_heal_per_second     = global_s.get_safe_int("heal_per_second");
 	if (m_conquer_radius > 0)
 		m_workarea_info[m_conquer_radius].insert(descname() + _(" conquer"));
+	m_prefers_heroes_at_start = global_s.get_safe_bool("prefer_heroes");
+
 }
 
 /**
@@ -90,10 +92,10 @@ m_soldier_upgrade_request(NULL),
 m_didconquer  (false),
 m_capacity    (ms_descr.get_max_number_of_soldiers()),
 m_nexthealtime(0),
+m_soldier_preference(ms_descr.m_prefers_heroes_at_start),
 m_soldier_upgrade_try(false),
 m_doing_upgrade_request(false)
 {
-	preferAnySoldiers();
 	m_next_swap_soldiers_time = 0;
 
 }
@@ -503,7 +505,6 @@ void MilitarySite::update_soldier_request_impl(bool incd)
 			update_normal_soldier_request();
 
 		if ((sc == sss) and (NULL == m_soldier_normal_request))
-		if (soldier_trainlevel_any != m_soldier_preference)
 		{
 			int32_t pss = presentSoldiers().size();
 			if (pss == sc)
@@ -551,12 +552,13 @@ void MilitarySite::act(Game & game, uint32_t const data)
 	// I do not get a callback when stationed, non-present soldier returns --
 	// Therefore I must poll in some occasions. Let's do that rather infrequently,
 	// to keep the game lightweight.
-	if ((soldier_trainlevel_any != m_soldier_preference) or m_doing_upgrade_request)
-		if (timeofgame > m_next_swap_soldiers_time)
-			{
-				m_next_swap_soldiers_time = timeofgame + m_soldier_upgrade_try ? 20000 : 100000;
-				update_soldier_request();
-			}
+
+	//FIXME: I would need two new callbacks, to get rid ot this polling.
+	if (timeofgame > m_next_swap_soldiers_time)
+		{
+			m_next_swap_soldiers_time = timeofgame + m_soldier_upgrade_try ? 20000 : 100000;
+			update_soldier_request();
+		}
 
 	if (m_nexthealtime <= game.get_gametime()) {
 		uint32_t total_heal = descr().get_heal_per_second();
@@ -1098,11 +1100,6 @@ MilitarySite::preferSkilledSoldiers()
 }
 
 void
-MilitarySite::preferAnySoldiers()
-{
-	m_soldier_preference = soldier_trainlevel_any;
-}
-void
 MilitarySite::preferCheapSoldiers()
 {
 	m_soldier_preference = soldier_trainlevel_rookie;
@@ -1115,11 +1112,6 @@ MilitarySite::preferringSkilledSoldiers() const
 	return  soldier_trainlevel_hero == m_soldier_preference;
 }
 
-bool
-MilitarySite::preferringAnySoldiers() const
-{
-	return  soldier_trainlevel_any == m_soldier_preference;
-}
 bool
 MilitarySite::preferringCheapSoldiers() const
 {

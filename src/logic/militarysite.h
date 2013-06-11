@@ -45,6 +45,7 @@ struct MilitarySite_Descr : public ProductionSite_Descr {
 		return m_heal_per_second;
 	}
 
+	bool     m_prefers_heroes_at_start;
 private:
 	uint32_t m_conquer_radius;
 	uint32_t m_num_soldiers;
@@ -108,11 +109,9 @@ public:
 	void update_soldier_request();
 
 	void preferSkilledSoldiers();
-	void preferAnySoldiers();
 	void preferCheapSoldiers();
 
 	bool preferringSkilledSoldiers() const;
-	bool preferringAnySoldiers() const;
 	bool preferringCheapSoldiers() const;
 
 	static const uint8_t soldier_trainlevel_any = 0;

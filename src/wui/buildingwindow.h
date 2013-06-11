@@ -66,7 +66,6 @@ protected:
 	void configure_workarea_button();
 	void act_start_stop();
 	void act_prefer_cheap_soldiers();
-	void act_prefer_any_soldiers();
 	void act_prefer_skilled_soldiers();
 	void act_enhance(Widelands::Building_Index);
 	void clicked_goto();

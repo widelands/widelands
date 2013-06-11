@@ -192,7 +192,7 @@ void Building_Window::create_capsbuttons(UI::Box * capsbuttons)
 				upcast(const Widelands::MilitarySite, ms, productionsite);
 				if (ms)
 				{
-					if (! ms->preferringCheapSoldiers())
+					if (ms->preferringSkilledSoldiers())
 					{
 						UI::Button * cs_btn =
 						new UI::Button
@@ -204,19 +204,7 @@ void Building_Window::create_capsbuttons(UI::Box * capsbuttons)
 						(boost::bind(&Building_Window::act_prefer_cheap_soldiers, boost::ref(*this)));
 						capsbuttons->add (cs_btn, UI::Box::AlignCenter);
 					}
-					if (! ms->preferringAnySoldiers())
-					{
-						UI::Button * cs_btn =
-						new UI::Button
-						(capsbuttons, "whatever", 0, 0, 34, 34,
-							g_gr->images().get("pics/but4.png"),
-							g_gr->images().get("pics/msite_prefer_any.png"),
-							_("No soldier preference"));
-						cs_btn->sigclicked.connect
-						(boost::bind(&Building_Window::act_prefer_any_soldiers, boost::ref(*this)));
-						capsbuttons->add (cs_btn, UI::Box::AlignCenter);
-					}
-					if (! ms->preferringSkilledSoldiers())
+					else
 					{
 						UI::Button * cs_btn =
 						new UI::Button
@@ -428,14 +416,6 @@ void Building_Window::act_prefer_cheap_soldiers()
 {
 	if (upcast(const Widelands::MilitarySite, ms, &m_building))
 		igbase().game().send_player_prefers_certain_soldiers (m_building, ms->soldier_trainlevel_rookie);
-	die(); // // m_caps_setup = false; think(); // die();
-}
-
-void
-Building_Window::act_prefer_any_soldiers()
-{
-	if (upcast(const Widelands::MilitarySite, ms, &m_building))
-		igbase().game().send_player_prefers_certain_soldiers (m_building, ms->soldier_trainlevel_any);
 	die(); // // m_caps_setup = false; think(); // die();
 }
 

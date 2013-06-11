@@ -755,7 +755,9 @@ void Map_Buildingdata_Data_Packet::read_militarysite
 			{
 				militarysite.m_soldier_upgrade_required_min = 0;
 				militarysite.m_soldier_upgrade_required_max = 999;
-				militarysite.m_soldier_preference = militarysite.soldier_trainlevel_any;
+				militarysite.m_soldier_preference = militarysite.soldier_trainlevel_rookie;
+				if (2 < militarysite.m_capacity)
+					militarysite.m_soldier_preference = militarysite.soldier_trainlevel_hero;
 				militarysite.m_next_swap_soldiers_time = militarysite.m_nexthealtime;
 				militarysite.m_soldier_upgrade_try = false;
 				militarysite.m_doing_upgrade_request = false;

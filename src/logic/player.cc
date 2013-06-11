@@ -603,9 +603,6 @@ void Player::prefer_certain_soldiers(PlayerImmovable & imm, uint8_t m_soldier_pr
 		if (m_soldier_preference == milsite->soldier_trainlevel_rookie)
 			milsite->preferCheapSoldiers();
 		else
-		if (m_soldier_preference == milsite->soldier_trainlevel_any)
-			milsite->preferAnySoldiers();
-		else
 		if (m_soldier_preference == milsite->soldier_trainlevel_hero)
 			milsite->preferSkilledSoldiers();
 		else

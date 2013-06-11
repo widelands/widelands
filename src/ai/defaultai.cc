@@ -1875,7 +1875,6 @@ bool DefaultAI::check_militarysites(int32_t gametime)
 	bool changed = false;
 	Map & map = game().map();
 	MilitarySite * ms = militarysites.front().site;
-	bool ms_can_attack = militarysites.front().can_attack;
 	uint32_t const vision = ms->vision_range();
 	FCoords f = map.get_fcoords(ms->get_position());
 
@@ -1888,11 +1887,12 @@ bool DefaultAI::check_militarysites(int32_t gametime)
 		// same economy where the thrown out soldiers can go to.
 		if (ms->economy().warehouses().size()) {
 			uint32_t const j = ms->soldierCapacity();
-			if (not (ms->preferringCheapSoldiers() or ms_can_attack))
+			if (not (ms->preferringCheapSoldiers()))
 			{
 					game().send_player_prefers_certain_soldiers(*ms, ms->soldier_trainlevel_rookie);
 			}
-			else if (j > 1)
+			else
+			if (j > 1)
 				game().send_player_change_soldier_capacity(*ms, -1);
 
 			// if the building is in inner land and other militarysites still
@@ -1971,12 +1971,8 @@ bool DefaultAI::check_militarysites(int32_t gametime)
 		uint32_t const k = ms->soldierCapacity();
 		if (j > k)
 			game().send_player_change_soldier_capacity(*ms, j - k);
-		if (ms_can_attack)
-			if (not (ms->preferringSkilledSoldiers()))
-				game().send_player_prefers_certain_soldiers(*ms, ms->soldier_trainlevel_hero);
-		if (not ms_can_attack)
-			if (not (ms->preferringAnySoldiers()))
-				game().send_player_prefers_certain_soldiers(*ms, ms->soldier_trainlevel_any);
+		if (not (ms->preferringSkilledSoldiers()))
+			game().send_player_prefers_certain_soldiers(*ms, ms->soldier_trainlevel_hero);
 		changed = true;
 	}
 	reorder:;
@@ -2188,7 +2184,6 @@ void DefaultAI::gain_building(Building & b)
 			militarysites.back().site = &ref_cast<MilitarySite, Building>(b);
 			militarysites.back().bo = &bo;
 			militarysites.back().checks = bo.desc->get_size();
-			militarysites.back().can_attack = false;
 		} else if (bo.type == BuildingObserver::WAREHOUSE)
 			++numof_warehouses;
 	}
@@ -2318,12 +2313,10 @@ bool DefaultAI::consider_attack(int32_t const gametime) {
 	map.find_immovables
 		(Area<FCoords>(f, vision), &immovables, FindImmovableAttackable());
 
-	bool i_might_be_able_to_attack = false;
 	for (uint32_t j = 0; j < immovables.size(); ++j)
 		if (upcast(MilitarySite, bld, immovables.at(j).object)) {
 			if (!player->is_hostile(bld->owner()))
 				continue;
-			i_might_be_able_to_attack = true;
 			if (bld->canAttack()) {
 				int32_t ta = player->findAttackSoldiers(bld->base_flag());
 				if (type == NORMAL)
@@ -2341,7 +2334,6 @@ bool DefaultAI::consider_attack(int32_t const gametime) {
 		} else if (upcast(Warehouse, wh, immovables.at(j).object)) {
 			if (!player->is_hostile(wh->owner()))
 				continue;
-			i_might_be_able_to_attack = true;
 			if (wh->canAttack()) {
 				int32_t ta = player->findAttackSoldiers(wh->base_flag());
 				if (ta < 1)
@@ -2357,11 +2349,6 @@ bool DefaultAI::consider_attack(int32_t const gametime) {
 			}
 		}
 
-	// This info is benefitted when deciding which kind of soldiers to call..
-	if (i_might_be_able_to_attack)
-		militarysites.front().can_attack = true;
-	else
-		militarysites.front().can_attack = false;
 
 	// Reenque militarysite at the end of list
 	militarysites.push_back(militarysites.front());
