@@ -1,6 +1,8 @@
 size=big
 soldier_capacity=8
 trainer_patience=3
+soldier_patience=120
+# soldier patience: for reference, training levels times capacity == 16
 
 [buildcost]
 trunk=6

@@ -331,6 +331,7 @@ protected:
 	virtual Loader * create_loader();
 
 public:
+	uint32_t m_training_rounds; // Used by a training site to bookkeep length of stay.
 	virtual void do_save
 		(Editor_Game_Base &, Map_Map_Object_Saver &, FileWrite &);
 };

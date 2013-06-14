@@ -49,6 +49,7 @@ TrainingSite_Descr::TrainingSite_Descr
 	//  FIXME soldier type name.
 	m_num_soldiers      (global_s.get_safe_int("soldier_capacity")),
 	m_max_stall (global_s.get_safe_int("trainer_patience")),
+	m_soldier_max_presence_time (global_s.get_safe_int("soldier_patience")),
 
 m_train_hp          (false),
 m_train_attack      (false),
@@ -139,11 +140,18 @@ int32_t TrainingSite_Descr::get_max_level(const tAttribute at) const {
 	}
 }
 
-int32_t
+uint32_t
 TrainingSite_Descr::get_max_stall() const
 {
 	return m_max_stall;
 }
+
+uint32_t
+TrainingSite_Descr::get_max_soldier_presence() const
+{
+	return m_soldier_max_presence_time;
+}
+
 
 /*
 =============================
@@ -158,8 +166,7 @@ ProductionSite   (d),
 m_soldier_request(0),
 m_capacity       (descr().get_max_number_of_soldiers()),
 m_build_heros    (false),
-m_result         (Failed),
-kickout_randomizer(0)
+m_result         (Failed)
 {
 	// Initialize this in the constructor so that loading code may
 	// overwrite priorities.
@@ -377,6 +384,7 @@ int TrainingSite::incorporateSoldier(Editor_Game_Base & egbase, Soldier & s) {
 
 		s.set_location(this);
 	}
+	s.m_training_rounds = 0; // used in kick-out routine
 
 	// Bind the worker into this house, hide him on the map
 	if (upcast(Game, game, &egbase))
@@ -481,25 +489,20 @@ void TrainingSite::drop_stalled_soldiers(Game &)
 {
 	Soldier * soldier_to_drop = NULL;
 	uint32_t highest_soldier_level_seen = 0;
+	uint32_t soldier_max_presence_time = descr().get_max_soldier_presence();
 
 	for (uint32_t i = 0; i < m_soldiers.size(); ++i)
 	{
 		uint32_t this_soldier_level = m_soldiers[i]->get_level(atrTotal);
-		if (0 < this_soldier_level)
-		if (73 == ++kickout_randomizer)
-		{
-			// The idea here is to kick the most trained stalled soldier.
-			// However, playtest feedback suggests that while this is generally
-			// good, in some cases this leads to (small) problems. Hence I introduce
-			// a little bit of "randomness" to the kickout routine.
-			// When this fires, an apparently-random guy is selected.
-			// 73 in the if statement above is a prime number. If you change it,
-			// please choose another prime. HAMs -- don't.
-			kickout_randomizer =  0;
-			this_soldier_level += 50;
-		}
-
 		bool this_soldier_is_safe = false;
+
+		m_soldiers[i]->m_training_rounds += 1;
+		if (m_soldiers[i]->m_training_rounds > soldier_max_presence_time)
+			// If soldier has spent here above his maximum time,
+			// his apparent level and therefore changes of departure are increased:
+			this_soldier_level += m_soldiers[i]->m_training_rounds - soldier_max_presence_time;
+
+
 		if (this_soldier_level <= highest_soldier_level_seen)
 		{
 			// Skip the innermost loop for soldiers that would not be kicked out anyway.
@@ -507,6 +510,7 @@ void TrainingSite::drop_stalled_soldiers(Game &)
 			this_soldier_is_safe = true;
 		}
 		else
+		if (m_soldiers[i]->m_training_rounds <= soldier_max_presence_time)
 		{
 			std::vector<Upgrade>::iterator it = m_upgrades.begin();
 			for (; it != m_upgrades.end(); ++it)

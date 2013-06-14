@@ -3,6 +3,8 @@ buildable=no
 enhanced_building=yes
 soldier_capacity=8
 trainer_patience=9
+soldier_patience=100
+# soldier patience: for reference, training levels times capacity == 16
 
 [buildcost]
 wood=2

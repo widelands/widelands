@@ -2,6 +2,8 @@ size=big
 enhancement=colosseum
 soldier_capacity=8
 trainer_patience=8
+soldier_patience=45
+# soldier patience: for reference, training levels times capacity == 8
 
 [working positions]
 carrier=1

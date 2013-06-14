@@ -1,6 +1,9 @@
 size=medium
 soldier_capacity=8
 trainer_patience=16
+soldier_patience=35
+# soldier patience: for reference, training levels times capacity == 32
+# Player can increase the odds of heroes by reducing site fill.
 
 [buildcost]
 planks=2

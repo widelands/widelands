@@ -46,7 +46,9 @@ struct TrainingSite_Descr : public ProductionSite_Descr {
 
 	int32_t get_min_level(tAttribute) const;
 	int32_t get_max_level(tAttribute) const;
-	int32_t get_max_stall() const;
+	uint32_t get_max_stall() const;
+	uint32_t get_max_soldier_presence() const;
+
 private:
 	//  FIXME These variables should be per soldier type. They should be in a
 	//  FIXME struct and there should be a vector, indexed by Soldier_Index,
@@ -56,6 +58,8 @@ private:
 	uint32_t m_num_soldiers;
 	/** Number of rounds w/o successful training, after which a soldier is kicked out.**/
 	uint32_t m_max_stall;
+	/** Number of rounds an individual soldier agrees to stay at site **/
+	uint32_t m_soldier_max_presence_time;
 	/** Whether this site can train hitpoints*/
 	bool m_train_hp;
 	/** Whether this site can train attack*/
@@ -211,7 +215,6 @@ private:
 	TrainFailCount_t training_failure_count;
 	uint32_t max_stall_val;
 	void init_kick_state(const tAttribute&, const TrainingSite_Descr&);
-	uint16_t kickout_randomizer;
 
 };
 
