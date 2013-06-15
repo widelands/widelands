@@ -193,6 +193,7 @@ void Button::draw(RenderTarget & dst)
 		ts.font = m_font;
 		ts.bold = true;
 		ts.fg = m_enabled ? UI_FONT_CLR_FG : UI_FONT_CLR_DISABLED;
+
 		UI::g_fh->draw_text
 			(dst, ts, Point(get_w() / 2, get_h() / 2),
 			 m_title, Align_Center,
