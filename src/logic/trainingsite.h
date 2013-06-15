@@ -178,7 +178,7 @@ private:
 	void add_upgrade(tAttribute, const std::string & prefix);
 	void calc_upgrades();
 
-	void drop_unupgradable_soldiers(Game &);
+	bool drop_unupgradable_soldiers(Game &);
 	void drop_stalled_soldiers(Game &);
 	Upgrade * get_upgrade(tAttribute);
 

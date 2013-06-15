@@ -459,7 +459,7 @@ void TrainingSite::dropSoldier(Soldier & soldier)
 /**
  * Drop all the soldiers that can not be upgraded further at this building.
  */
-void TrainingSite::drop_unupgradable_soldiers(Game &)
+bool TrainingSite::drop_unupgradable_soldiers(Game &)
 {
 	std::vector<Soldier *> droplist;
 
@@ -479,6 +479,7 @@ void TrainingSite::drop_unupgradable_soldiers(Game &)
 	// mess things up
 	container_iterate_const(std::vector<Soldier *>, droplist, i)
 		dropSoldier(**i.current);
+	return (0 < droplist.size());
 }
 
 /**
@@ -603,7 +604,10 @@ void TrainingSite::program_end(Game & game, Program_Result const result)
 
 	if (m_current_upgrade) {
 		if (m_result == Completed) {
-			drop_unupgradable_soldiers(game);
+			if (not (drop_unupgradable_soldiers(game)))
+				// If there were no unupgradeable soldiers,
+				// I'll drop those who have been here for too long.
+				drop_stalled_soldiers(game);
 			m_current_upgrade->lastsuccess = true;
 			m_current_upgrade->failures = 0;
 		}

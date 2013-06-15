@@ -322,6 +322,7 @@ Soldier::Soldier(const Soldier_Descr & soldier_descr) : Worker(soldier_descr)
 	m_combat_walking   = CD_NONE;
 	m_combat_walkstart = 0;
 	m_combat_walkend   = 0;
+	m_training_rounds  = 0;
 }
 
 
@@ -337,6 +338,7 @@ void Soldier::init(Editor_Game_Base & egbase)
 	m_combat_walking   = CD_NONE;
 	m_combat_walkstart = 0;
 	m_combat_walkend   = 0;
+	m_training_rounds  = 0;
 
 	Worker::init(egbase);
 }
@@ -1743,7 +1745,7 @@ Load/save support
 ==============================
 */
 
-#define SOLDIER_SAVEGAME_VERSION 2
+#define SOLDIER_SAVEGAME_VERSION 3
 
 Soldier::Loader::Loader() :
 		m_battle(0)
@@ -1782,6 +1784,10 @@ void Soldier::Loader::load(FileRead & fr)
 	}
 
 	m_battle = fr.Unsigned32();
+	if (2 < version)
+		soldier.m_training_rounds = fr.Unsigned32();
+	else
+		soldier.m_training_rounds = 0;
 }
 
 void Soldier::Loader::load_pointers()
@@ -1828,6 +1834,7 @@ void Soldier::do_save
 	}
 
 	fw.Unsigned32(mos.get_object_file_index_or_zero(m_battle));
+	fw.Unsigned32(m_training_rounds);
 }
 
 }
