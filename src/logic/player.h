@@ -28,6 +28,7 @@
 #include "notification.h"
 #include "rgbcolor.h"
 #include "tribe.h"
+#include "warehouse.h"
 
 #include "widelands.h"
 
@@ -460,6 +461,7 @@ struct Player :
 	void bulldoze(PlayerImmovable &, bool recurse = false);
 	void flagaction(Flag &);
 	void start_stop_building(PlayerImmovable &);
+	void start_or_cancel_expedition(Warehouse &);
 	void enhance_building
 		(Building *, Building_Index index_of_new_building);
 	void dismantle_building (Building *);
