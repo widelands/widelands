@@ -85,17 +85,6 @@ void Textarea::init()
 }
 
 /**
- * Set the layout mode of this textarea.
- *
- * See the description of this class for the different modes.
- */
-void Textarea::set_layout_mode(Textarea::LayoutMode lm)
-{
-	m_layoutmode = lm;
-}
-
-
-/**
  * Set the font of the textarea.
  */
 void Textarea::set_textstyle(const TextStyle & style)
@@ -141,22 +130,9 @@ void Textarea::set_text(const std::string & text)
 	update();
 }
 
-std::string Textarea::get_text()
+const std::string& Textarea::get_text()
 {
 	return m_text;
-}
-
-
-/**
- * Change the alignment
- */
-void Textarea::set_align(const Align align)
-{
-	if (m_layoutmode == AutoMove)
-		collapse();
-	m_align = align;
-	if (m_layoutmode == AutoMove)
-		expand();
 }
 
 
@@ -247,6 +223,7 @@ void Textarea::set_fixed_size(const std::string & /* text */)
 	uint16_t h = m_textstyle.font->height();
 	set_size(w, h);
 	set_desired_size(w, h);
+	m_layoutmode = Static;
 }
 
 }

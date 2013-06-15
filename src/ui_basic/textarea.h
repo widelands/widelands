@@ -51,12 +51,6 @@ namespace UI {
  * the latter provides scrollbars.
  */
 struct Textarea : public Panel {
-	enum LayoutMode {
-		AutoMove,
-		Layouted,
-		Static
-	};
-
 	Textarea
 		(Panel * parent,
 		 int32_t x, int32_t y,
@@ -76,11 +70,9 @@ struct Textarea : public Panel {
 		 const std::string & text = std::string(),
 		 Align align = Align_Left, uint32_t width = 0);
 
-	void set_layout_mode(LayoutMode lm);
 	void set_fixed_size(const std::string & text);
 	void set_text(const std::string &);
-	std::string get_text();
-	void set_align(Align);
+	const std::string& get_text();
 
 	// Drawing and event handlers
 	void draw(RenderTarget &);
@@ -94,6 +86,12 @@ protected:
 	virtual void update_desired_size();
 
 private:
+	enum LayoutMode {
+		AutoMove,
+		Layouted,
+		Static
+	};
+
 	void init();
 	void collapse();
 	void expand();

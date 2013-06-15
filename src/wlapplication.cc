@@ -1581,8 +1581,8 @@ void WLApplication::mainmenu()
 				(&mm,
 				 messagetitle,
 				 message,
-				 UI::WLMessageBox::OK);
-			mmb.set_align(UI::Align_Left);
+				 UI::WLMessageBox::OK,
+				 UI::Align_Left);
 			mmb.run();
 
 			message.clear();

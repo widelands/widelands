@@ -54,7 +54,8 @@ Multiline_Textarea::Multiline_Textarea
 	assert(scrollbar_w() <= w);
 	set_think(false);
 
-	set_align(align);
+	//  do not allow vertical alignment as it does not make sense
+	m_align = static_cast<Align>(align & Align_Horizontal);
 
 	m_scrollbar.moved.connect(boost::bind(&Multiline_Textarea::scrollpos_changed, this, _1));
 
@@ -135,16 +136,6 @@ void Multiline_Textarea::recompute()
 		m_scrollbar.set_scrollpos(height - get_h());
 
 	update(0, 0, get_eff_w(), get_h());
-}
-
-
-/**
- * Change alignment of the textarea
- */
-void Multiline_Textarea::set_align(Align const align)
-{
-	//  do not allow vertical alignment as it does not make sense
-	m_align = static_cast<Align>(align & Align_Horizontal);
 }
 
 /**

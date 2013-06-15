@@ -53,7 +53,6 @@ struct Multiline_Textarea : public Panel {
 	ScrollMode get_scrollmode() const {return m_scrollmode;}
 
 	void set_text(const std::string &);
-	void set_align(Align);
 	void set_scrollmode(ScrollMode mode);
 
 	void set_font(std::string name, int32_t size, RGBColor fg);

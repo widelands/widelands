@@ -59,14 +59,13 @@ struct WLMessageBox : public Window {
 		(Panel * parent,
 		 const std::string & caption,
 		 const std::string & text,
-		 MB_Type);
+		 MB_Type,
+		 Align = Align_Center);
 	~WLMessageBox();
 
 	boost::signal<void ()> ok;
 	boost::signal<void ()> yes;
 	boost::signal<void ()> no;
-
-	void set_align(Align);
 
 	bool handle_mousepress  (Uint8 btn, int32_t mx, int32_t my);
 	bool handle_mouserelease(Uint8 btn, int32_t mx, int32_t my);

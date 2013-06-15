@@ -80,7 +80,6 @@ m_value(this, "", UI::Align_Center)
 	add(&m_value, AlignCenter);
 	add(&m_increase, AlignCenter);
 
-	m_value.set_layout_mode(UI::Textarea::Static);
 	m_value.set_fixed_size("199");
 
 	m_decrease.set_repeating(true);
