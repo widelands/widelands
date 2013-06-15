@@ -70,7 +70,7 @@ m_increase
 	(this, "increase", 0, 0, 24, 24,
 	 g_gr->images().get("pics/but4.png"),
 	 g_gr->images().get(pic_up_train), _("Increase capacity")),
-m_value(this, "", UI::Align_Center)
+m_value(this, "199", UI::Align_Center)
 {
 	m_decrease.sigclicked.connect(boost::bind(&SoldierCapacityControl::click_decrease, boost::ref(*this)));
 	m_increase.sigclicked.connect(boost::bind(&SoldierCapacityControl::click_increase, boost::ref(*this)));
@@ -79,8 +79,6 @@ m_value(this, "", UI::Align_Center)
 	add(&m_decrease, AlignCenter);
 	add(&m_value, AlignCenter);
 	add(&m_increase, AlignCenter);
-
-	m_value.set_fixed_size("199");
 
 	m_decrease.set_repeating(true);
 	m_increase.set_repeating(true);
@@ -92,16 +90,15 @@ void SoldierCapacityControl::think()
 {
 	SoldierControl * soldiers = dynamic_cast<SoldierControl *>(&m_building);
 	uint32_t const capacity = soldiers->soldierCapacity();
-	uint32_t const min_capacity = soldiers->minSoldierCapacity();
-	uint32_t const max_capacity = soldiers->maxSoldierCapacity();
 	char buffer[sizeof("4294967295")];
 
 	sprintf(buffer, "%2u", capacity);
+	// NOCOM(#sirver): this resizes the textarea
 	m_value.set_text(buffer);
 
 	bool const can_act = m_igb.can_act(m_building.owner().player_number());
-	m_decrease.set_enabled(can_act && min_capacity < capacity);
-	m_increase.set_enabled(can_act && max_capacity > capacity);
+	m_decrease.set_enabled(can_act && soldiers->minSoldierCapacity() < capacity);
+	m_increase.set_enabled(can_act && soldiers->maxSoldierCapacity() > capacity);
 }
 
 void SoldierCapacityControl::change_soldier_capacity(int delta)

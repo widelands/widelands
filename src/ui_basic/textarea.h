@@ -68,7 +68,7 @@ struct Textarea : public Panel {
 	Textarea
 		(Panel * parent,
 		 const std::string & text = std::string(),
-		 Align align = Align_Left, uint32_t width = 0);
+		 Align align = Align_Left);
 
 	void set_fixed_size(const std::string & text);
 	void set_text(const std::string &);
