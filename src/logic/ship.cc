@@ -274,14 +274,8 @@ void Ship::ship_update(Game & game, Bob::State & state)
 		FCoords position = get_position();
 		for (Direction dir = 1; dir <= LAST_DIRECTION; ++dir) {
 			assert(m_expedition);
-			// the ship fills all fields in the radius of 1 (with exception of NW and NE), therefore we check the
-			// fields in r = 2
 			m_expedition->swimable[dir - 1] =
-				map.get_neighbour(map.get_neighbour(position, dir), dir).field->nodecaps() & MOVECAPS_SWIM
-				&&
-				map.get_neighbour(position, get_cw_neighbour(dir)).field->nodecaps() & MOVECAPS_SWIM
-				&&
-				map.get_neighbour(position, get_ccw_neighbour(dir)).field->nodecaps() & MOVECAPS_SWIM;
+				map.get_neighbour(position, dir).field->nodecaps() & MOVECAPS_SWIM;
 		}
 
 		if (m_ship_state == EXP_SCOUTING) {
@@ -432,23 +426,29 @@ void Ship::ship_update_idle(Game & game, Bob::State & state)
 						return start_task_idle(game, descr().main_animation(), 1500);
 					}
 				}
-
+				uint8_t last_dir = m_expedition->direction;
 				if (m_expedition->clockwise) {
 					if (exp_dir_swimable(m_expedition->direction)) {
-						while (exp_dir_swimable(get_cw_neighbour(m_expedition->direction)))
+						while (exp_dir_swimable(get_cw_neighbour(m_expedition->direction))) {
 							m_expedition->direction = get_cw_neighbour(m_expedition->direction);
+							assert (last_dir != m_expedition->direction);
+						}
 					} else {
 						do {
 							m_expedition->direction = get_ccw_neighbour(m_expedition->direction);
+							assert (last_dir != m_expedition->direction);
 						} while (!exp_dir_swimable(m_expedition->direction));
 					}
 				} else {
 					if (exp_dir_swimable(m_expedition->direction)) {
-						while (exp_dir_swimable(get_ccw_neighbour(m_expedition->direction)))
+						while (exp_dir_swimable(get_ccw_neighbour(m_expedition->direction))) {
 							m_expedition->direction = get_ccw_neighbour(m_expedition->direction);
+							assert (last_dir != m_expedition->direction);
+						}
 					} else {
 						do {
 							m_expedition->direction = get_cw_neighbour(m_expedition->direction);
+							assert (last_dir != m_expedition->direction);
 						} while (!exp_dir_swimable(m_expedition->direction));
 					}
 				}
