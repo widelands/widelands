@@ -105,7 +105,6 @@ private:
 	std::vector<PortDock *> m_ports;
 
 	bool m_act_pending;
-	uint32_t m_port_roundrobin;
 
 	/**
 	 * Store all pairs shortest paths between port docks

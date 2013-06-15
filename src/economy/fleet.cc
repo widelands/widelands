@@ -48,8 +48,7 @@ Map_Object_Descr fleet_descr("fleet", "Fleet");
 Fleet::Fleet(Player & player) :
 	Map_Object(&fleet_descr),
 	m_owner(player),
-	m_act_pending(false),
-	m_port_roundrobin(0)
+	m_act_pending(false)
 {
 }
 
@@ -595,9 +594,13 @@ void Fleet::update(Editor_Game_Base & egbase)
 void Fleet::act(Game & game, uint32_t /* data */)
 {
 	m_act_pending = false;
-
-	if (!active())
+	if (!active()) {
+		// If we are here, most likely act() was called by a port with waiting wares or an expedition ready
+		// although there are still no ships. We can't handle it now, so we reschedule the act()
+		schedule_act(game, 5000); // retry in the next time
+		m_act_pending = true;
 		return;
+	}
 
 	molog("Fleet::act\n");
 
@@ -616,12 +619,8 @@ void Fleet::act(Game & game, uint32_t /* data */)
 		}
 	}
 
-	if (m_port_roundrobin >= m_ports.size())
-		m_port_roundrobin = 0;
-
-	uint32_t rr = m_port_roundrobin;
-	do {
-		PortDock & pd = *m_ports[rr];
+	for (uint32_t i = 0; i < m_ports.size(); ++i) {
+		PortDock & pd = *m_ports[i];
 
 		if (pd.get_need_ship()) {
 			molog("Port %u needs ship\n", pd.serial());
@@ -649,13 +648,13 @@ void Fleet::act(Game & game, uint32_t /* data */)
 				break;
 			}
 
-			if (!success)
+			if (!success) {
+				schedule_act(game, 5000); // retry in the next time
+				m_act_pending = true;
 				break;
+			}
 		}
-
-		if (++rr >= m_ports.size())
-			rr = 0;
-	} while (rr != m_port_roundrobin);
+	}
 }
 
 void Fleet::log_general_info(const Editor_Game_Base & egbase)
@@ -666,7 +665,7 @@ void Fleet::log_general_info(const Editor_Game_Base & egbase)
 		("%"PRIuS" ships and %"PRIuS" ports\n",  m_ships.size(), m_ports.size());
 }
 
-#define FLEET_SAVEGAME_VERSION 3
+#define FLEET_SAVEGAME_VERSION 4
 
 Fleet::Loader::Loader()
 {
@@ -692,7 +691,8 @@ void Fleet::Loader::load(FileRead & fr, uint8_t version)
 		fleet.m_act_pending = fr.Unsigned8();
 		if (version < 3)
 			fleet.m_act_pending = false;
-		fleet.m_port_roundrobin = fr.Unsigned32();
+		if (version < 4)
+			fr.Unsigned32(); // m_roundrobin
 	}
 }
 
@@ -784,7 +784,6 @@ void Fleet::save(Editor_Game_Base & egbase, Map_Map_Object_Saver & mos, FileWrit
 	}
 
 	fw.Unsigned8(m_act_pending);
-	fw.Unsigned32(m_port_roundrobin);
 }
 
 } // namespace Widelands
