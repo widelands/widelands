@@ -604,17 +604,12 @@ void TrainingSite::program_end(Game & game, Program_Result const result)
 
 	if (m_current_upgrade) {
 		if (m_result == Completed) {
-			if (not (drop_unupgradable_soldiers(game)))
-				// If there were no unupgradeable soldiers,
-				// I'll drop those who have been here for too long.
-				drop_stalled_soldiers(game);
+			drop_unupgradable_soldiers(game);
 			m_current_upgrade->lastsuccess = true;
 			m_current_upgrade->failures = 0;
 		}
-		else {
+		else
 			m_current_upgrade->failures++;
-			drop_stalled_soldiers(game);
-		}
 		m_current_upgrade = 0;
 	}
 	trainingDone(game);
@@ -630,6 +625,9 @@ void TrainingSite::program_end(Game & game, Program_Result const result)
  */
 void TrainingSite::find_and_start_next_program(Game & game)
 {
+	//log ("tsited %4x time=%12.3f find_and_start_next_program\n", ((float)game.get_gametime())/1000.,
+	//(uint16_t)(((unsigned long) ((void*)this))&0xffff)); // teppo9
+	drop_stalled_soldiers(game);
 	for (;;) {
 		uint32_t maxprio = 0;
 		uint32_t maxcredit = 0;
