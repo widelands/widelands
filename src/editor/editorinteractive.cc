@@ -328,6 +328,8 @@ void Editor_Interactive::toolsize_menu_btn() {
 }
 
 void Editor_Interactive::set_sel_radius_and_update_menu(uint32_t const val) {
+	if (tools.current().has_size_one())
+		return;
 	if (UI::UniqueWindow * const w = m_toolsizemenu.window)
 		ref_cast<Editor_Toolsize_Menu, UI::UniqueWindow>(*w).update(val);
 	else
@@ -492,6 +494,8 @@ bool Editor_Interactive::handle_key(bool const down, SDL_keysym const code) {
 void Editor_Interactive::select_tool
 (Editor_Tool & primary, Editor_Tool::Tool_Index const which) {
 	if (which == Editor_Tool::First and & primary != tools.current_pointer) {
+		if (primary.has_size_one())
+			set_sel_radius_and_update_menu(0);
 		Widelands::Map & map = egbase().map();
 		//  A new tool has been selected. Remove all registered overlay callback
 		//  functions.
