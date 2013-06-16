@@ -166,6 +166,8 @@ void Building_Window::create_capsbuttons(UI::Box * capsbuttons)
 	bool requires_destruction_separator = false;
 	if (can_act) {
 		if (upcast(const Widelands::ProductionSite, productionsite, &m_building)) {
+			// NOCOM(#kxq): pull out the dynamic_cast (replace it through an upcast though) and check if the variable is NULL.
+			// you avoid one cast and one if statement
 			if (not dynamic_cast<const Widelands::MilitarySite *>(productionsite)) {
 				const bool is_stopped = productionsite->is_stopped();
 				UI::Button * stopbtn =
@@ -190,7 +192,7 @@ void Building_Window::create_capsbuttons(UI::Box * capsbuttons)
 			else // is a military site
 			{
 				upcast(const Widelands::MilitarySite, ms, productionsite);
-				if (ms)
+				if (ms) // NOCOM(#kxq): you should not need this one, see above
 				{
 					if (ms->preferringSkilledSoldiers())
 					{
@@ -198,6 +200,7 @@ void Building_Window::create_capsbuttons(UI::Box * capsbuttons)
 						new UI::Button
 						(capsbuttons, "rookies", 0, 0, 34, 34,
 							g_gr->images().get("pics/but4.png"),
+							// NOCOM(#kxq): Rename the images to rookies and heroes as well.
 							g_gr->images().get("pics/msite_prefer_cheap.png"),
 							_("Prefer rookies"));
 						cs_btn->sigclicked.connect
@@ -412,19 +415,25 @@ void Building_Window::act_start_stop()
 	die();
 }
 
+// NOCOM(#kxq): rename to rookie
 void Building_Window::act_prefer_cheap_soldiers()
 {
 	if (upcast(const Widelands::MilitarySite, ms, &m_building))
-		igbase().game().send_player_prefers_certain_soldiers (m_building, ms->soldier_trainlevel_rookie);
-	die(); // // m_caps_setup = false; think(); // die();
+		igbase().game().send_player_militarysite_set_soldier_preference
+			(m_building, Widelands::MilitarySite::kPrefersRookies);
+
+	die();
 }
 
 void
+// NOCOM(#kxq): rename to heroes
 Building_Window::act_prefer_skilled_soldiers()
 {
 	if (upcast(const Widelands::MilitarySite, ms, &m_building))
-		igbase().game().send_player_prefers_certain_soldiers (m_building, ms->soldier_trainlevel_hero);
-	die(); // // m_caps_setup = false; think(); // die();
+		igbase().game().send_player_militarysite_set_soldier_preference
+			(m_building, Widelands::MilitarySite::kPrefersHeroes);
+
+	die();
 }
 /*
 ===============

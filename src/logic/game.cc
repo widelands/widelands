@@ -773,10 +773,10 @@ void Game::send_player_start_stop_building (Building & building)
 		 	(get_gametime(), building.owner().player_number(), building));
 }
 
-void Game::send_player_prefers_certain_soldiers (Building & building, uint8_t my_preference)
+void Game::send_player_militarysite_set_soldier_preference (Building & building, uint8_t my_preference)
 {
 	send_player_command
-		(*new Cmd_PreferCertainSoldiers
+		(*new Cmd_MilitarySiteSetSoldierPreference
 		 (get_gametime(), building.owner().player_number(), building, my_preference));
 }
 

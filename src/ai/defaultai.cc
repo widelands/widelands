@@ -1889,7 +1889,7 @@ bool DefaultAI::check_militarysites(int32_t gametime)
 			uint32_t const j = ms->soldierCapacity();
 			if (not (ms->preferringCheapSoldiers()))
 			{
-					game().send_player_prefers_certain_soldiers(*ms, ms->soldier_trainlevel_rookie);
+					game().send_player_militarysite_set_soldier_preference(*ms, MilitarySite::kPrefersRookies);
 			}
 			else
 			if (j > 1)
@@ -1972,7 +1972,7 @@ bool DefaultAI::check_militarysites(int32_t gametime)
 		if (j > k)
 			game().send_player_change_soldier_capacity(*ms, j - k);
 		if (not (ms->preferringSkilledSoldiers()))
-			game().send_player_prefers_certain_soldiers(*ms, ms->soldier_trainlevel_hero);
+			game().send_player_militarysite_set_soldier_preference(*ms, MilitarySite::kPrefersHeroes);
 		changed = true;
 	}
 	reorder:;
@@ -2348,7 +2348,6 @@ bool DefaultAI::consider_attack(int32_t const gametime) {
 				}
 			}
 		}
-
 
 	// Reenque militarysite at the end of list
 	militarysites.push_back(militarysites.front());

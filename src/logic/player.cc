@@ -594,20 +594,25 @@ void Player::start_stop_building(PlayerImmovable & imm) {
 			productionsite->set_stopped(!productionsite->is_stopped());
 }
 
-void Player::prefer_certain_soldiers(PlayerImmovable & imm, uint8_t m_soldier_preference)
+// NOCOM(#kxq): this method should just hand through to the militarysite, another reason to only have one
+// setter in the militarysite.
+void Player::military_site_set_soldier_preference(PlayerImmovable & imm, uint8_t m_soldier_preference)
 {
-	log("f978: player.cc Player::prefer_certain_soldiers() enter\n");
+	// NOCOM(#kxq): debug cruft?
+	log("f978: player.cc Player::military_site_set_soldier_preference() enter\n");
+	// NOCOM(#kxq): only one if, code like this is hard to understand to me.
 	if (&imm.owner() == this)
 	if (upcast(MilitarySite, milsite, &imm))
 	{
-		if (m_soldier_preference == milsite->soldier_trainlevel_rookie)
+		// NOCOM(#kxq): when accessing statics, prefer Typename to instances for readability
+		if (m_soldier_preference == MilitarySite::kPrefersRookies)
 			milsite->preferCheapSoldiers();
 		else
-		if (m_soldier_preference == milsite->soldier_trainlevel_hero)
+		if (m_soldier_preference == MilitarySite::kPrefersHeroes)
 			milsite->preferSkilledSoldiers();
 		else
 			log
-			("player.cc: Error: Player::prefer_certain_soldiers(): traintype %d not known! \n",
+			("player.cc: Error: Player::military_site_set_soldier_preference(): traintype %d not known! \n",
 			m_soldier_preference);
 	}
 }

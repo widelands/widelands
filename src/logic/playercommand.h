@@ -195,18 +195,18 @@ private:
 };
 
 
-struct Cmd_PreferCertainSoldiers : public PlayerCommand {
-	Cmd_PreferCertainSoldiers() : PlayerCommand(), serial(0) {} // For savegame loading
-	Cmd_PreferCertainSoldiers (const int32_t t, const Player_Number p, Building & b, uint8_t prefs)
+struct Cmd_MilitarySiteSetSoldierPreference : public PlayerCommand {
+	Cmd_MilitarySiteSetSoldierPreference() : PlayerCommand(), serial(0) {} // For savegame loading
+	Cmd_MilitarySiteSetSoldierPreference (const int32_t t, const Player_Number p, Building & b, uint8_t prefs)
 		: PlayerCommand(t, p), serial(b.serial()), preference(prefs)
 	{}
 
 	void Write(FileWrite &, Editor_Game_Base &, Map_Map_Object_Saver  &);
 	void Read (FileRead  &, Editor_Game_Base &, Map_Map_Object_Loader &);
 
-	virtual uint8_t id() const {return QUEUE_CMD_PREFERCHEAPSOLDIERS;}
+	virtual uint8_t id() const {return QUEUE_CMD_MILITARYSITESETSOLDIERPREFERENCE;}
 
-	Cmd_PreferCertainSoldiers (StreamRead &);
+	Cmd_MilitarySiteSetSoldierPreference (StreamRead &);
 
 	virtual void execute (Game &);
 	virtual void serialize (StreamWrite &);

@@ -126,15 +126,15 @@ public:
 	virtual void add_worker   (Worker &);
 	virtual void remove_worker(Worker &);
 
-	bool get_build_heros() {
-		return m_build_heros;
+	bool get_build_heroes() {
+		return m_build_heroes;
 	}
-	void set_build_heros(bool b_heros) {
-		m_build_heros = b_heros;
+	void set_build_heroes(bool b_heroes) {
+		m_build_heroes = b_heroes;
 	}
-	void switch_heros() {
-		m_build_heros = !m_build_heros;
-		molog("BUILD_HEROS: %s", m_build_heros ? "TRUE" : "FALSE");
+	void switch_heroes() {
+		m_build_heroes = !m_build_heroes;
+		molog("BUILD_HEROES: %s", m_build_heroes ? "TRUE" : "FALSE");
 	}
 
 	virtual void set_economy(Economy * e);
@@ -194,7 +194,7 @@ private:
 
 	/** True, \b always upgrade already experienced soldiers first, when possible
 	 * False, \b always upgrade inexperienced soldiers first, when possible */
-	bool m_build_heros;
+	bool m_build_heroes;
 
 	std::vector<Upgrade> m_upgrades;
 	Upgrade * m_current_upgrade;

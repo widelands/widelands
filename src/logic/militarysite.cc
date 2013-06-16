@@ -87,12 +87,12 @@ MilitarySite::MilitarySite(const MilitarySite_Descr & ms_descr) :
 ProductionSite(ms_descr),
 m_soldier_upgrade_required_min(0),
 m_soldier_upgrade_required_max(252),
-m_soldier_normal_request(0),
-m_soldier_upgrade_request(NULL),
+m_normal_soldier_request(NULL),
+m_upgrade_soldier_request(NULL),
 m_didconquer  (false),
 m_capacity    (ms_descr.get_max_number_of_soldiers()),
 m_nexthealtime(0),
-m_soldier_preference(ms_descr.m_prefers_heroes_at_start),
+m_soldier_preference(ms_descr.m_prefers_heroes_at_start ? kPrefersHeroes : kNoPreference),
 m_soldier_upgrade_try(false),
 m_doing_upgrade_request(false)
 {
@@ -103,7 +103,8 @@ m_doing_upgrade_request(false)
 
 MilitarySite::~MilitarySite()
 {
-	assert(!m_soldier_normal_request);
+	assert(!m_normal_soldier_request);
+	// NOCOM(#kxq): Add in an assert for the upgrade request?
 }
 
 
@@ -151,7 +152,7 @@ void MilitarySite::init(Editor_Game_Base & egbase)
 	container_iterate_const(std::vector<Worker *>, ws, i)
 		if (upcast(Soldier, soldier, *i.current)) {
 			soldier->set_location_initially(*this);
-			assert(not soldier->get_state()); //  Should be newly created.
+			assert(!soldier->get_state()); //  Should be newly created.
 			if (game)
 				soldier->start_task_buildingwork(*game);
 		}
@@ -174,10 +175,10 @@ void MilitarySite::set_economy(Economy * const e)
 {
 	ProductionSite::set_economy(e);
 
-	if (m_soldier_normal_request && e)
-		m_soldier_normal_request->set_economy(e);
-	if (m_soldier_upgrade_request && e)
-		m_soldier_upgrade_request->set_economy(e);
+	if (m_normal_soldier_request && e)
+		m_normal_soldier_request->set_economy(e);
+	if (m_upgrade_soldier_request && e)
+		m_upgrade_soldier_request->set_economy(e);
 }
 
 /**
@@ -200,14 +201,15 @@ void MilitarySite::cleanup(Editor_Game_Base & egbase)
 
 	// Note that removing workers during ProductionSite::cleanup can generate
 	// new requests; that's why we delete it at the end of this function.
-	delete m_soldier_normal_request;
-	m_soldier_normal_request = 0;
-	if (m_soldier_upgrade_request)
+	delete m_normal_soldier_request;
+	m_normal_soldier_request = 0;
+	// NOCOM(#kxq): consider using a boost::scoped_ptr? This code would read a little cleaner.
+	if (m_upgrade_soldier_request)
 	{
-		delete m_soldier_upgrade_request;
-		m_soldier_upgrade_request = 0;
+		delete m_upgrade_soldier_request;
+		m_upgrade_soldier_request = 0;
 	}
-	m_soldier_upgrade_request = 0;
+	m_upgrade_soldier_request = 0;
 }
 
 
@@ -226,12 +228,14 @@ int MilitarySite::incorporateSoldier(Editor_Game_Base & egbase, Soldier & s)
 		s.set_location(this);
 	}
 
+	// NOCOM(#kxq): I do not get this code - it seems like a weaker soldier is leaving the building immediately and
+	// a strong way leaves the HQ. Why does the stationedSoldiers() property do not drop by one?
 	if (stationedSoldiers().size()  > descr().get_max_number_of_soldiers())
 	{
 		return incorporateUpgradedSoldier(egbase, s);
 	}
 
-	if (not m_didconquer) {
+	if (!m_didconquer) {
 		conquer_area(egbase);
 		// Building is now occupied - idle animation should be played
 		start_animation(egbase, descr().get_animation("idle"));
@@ -279,16 +283,17 @@ int MilitarySite::incorporateSoldier(Editor_Game_Base & egbase, Soldier & s)
 bool
 MilitarySite::drop_weakest_soldier(bool new_soldier_has_arrived, Soldier * newguy)
 {
-	std::vector<Soldier *> present = presentSoldiers();
-	if (new_soldier_has_arrived or 1 < present.size())
+	const std::vector<Soldier *> present = presentSoldiers();
+	if (new_soldier_has_arrived || 1 < present.size())
 	{
-		bool heros = soldier_trainlevel_hero == m_soldier_preference;
-		const int32_t multiplier = heros ? -1:1;
+		const int32_t multiplier = kPrefersHeroes == m_soldier_preference ? -1:1;
+		// NOCOM(#kxq): document this level offset, call it kLevelOffset.
 		static const int32_t level_offset = 10000;
 		int32_t worst_soldier_level = 0;
 		if (new_soldier_has_arrived)
 			worst_soldier_level = level_offset + multiplier * newguy->get_level(atrTotal);
 		Soldier* kickoutCandidate = NULL;
+		// NOCOM(#kxq): Use boost foreach here, you never use the index.
 		for (uint32_t i = 0; i < present.size(); ++i)
 		{
 			int32_t this_soldier_level = level_offset + multiplier* present[i]->get_level(atrTotal);
@@ -310,10 +315,12 @@ MilitarySite::drop_weakest_soldier(bool new_soldier_has_arrived, Soldier * newgu
 }
 
 // This find room for a soldier in an already full occupied military building.
+// NOCOM(#kxq): Is this ever called? See my comments up there, it seems like a soldier is dropped as soon
+// as a new one is requested when I playtested this.
+// // NOCOM(#kxq): Also, comment the return values.
 int
 MilitarySite::incorporateUpgradedSoldier(Editor_Game_Base & egbase, Soldier & s)
 {
-
 	if (drop_weakest_soldier(true, &s))
 	{
 		Game & game = ref_cast<Game, Editor_Game_Base>(egbase);
@@ -353,20 +360,20 @@ void MilitarySite::update_normal_soldier_request()
 	uint32_t const stationed = stationedSoldiers().size();
 
 	if (stationed < m_capacity) {
-		if (!m_soldier_normal_request) {
-			m_soldier_normal_request =
+		if (!m_normal_soldier_request) {
+			m_normal_soldier_request =
 				new Request
 					(*this,
 					 tribe().safe_worker_index("soldier"),
 					 MilitarySite::request_soldier_callback,
 					 wwWORKER);
-			m_soldier_normal_request->set_requirements (m_soldier_requirements);
+			m_normal_soldier_request->set_requirements (m_soldier_requirements);
 		}
 
-		m_soldier_normal_request->set_count(m_capacity - stationed);
+		m_normal_soldier_request->set_count(m_capacity - stationed);
 	} else {
-		delete m_soldier_normal_request;
-		m_soldier_normal_request = 0;
+		delete m_normal_soldier_request;
+		m_normal_soldier_request = 0;
 	}
 
 	if (m_capacity < present.size()) {
@@ -384,24 +391,29 @@ void MilitarySite::update_normal_soldier_request()
  *
  * In case of normal requests, the military site is filled. In case of upgrade requests, only one guy
  * is exchanged at a time.
+ * // NOCOM(#kxq): this does not seem to work for me.
  *
  * There would be more efficient ways to get well trained soldiers. Now, new buildings appearing in battle
- * field are more vulnerable at the beginning. This is intentional. The purpose of this upgade thing is
+ * field are more vulnerable at the beginning. This is intentional. The purpose of this upgrade thing is
  * to reduce the benefits of site micromanagement. The intention is not to make gameplay easier in other ways.
  */
-
 void MilitarySite::update_upgrade_soldier_request()
 {
 	bool reqch = update_upgrade_requirements();
-	if (not m_soldier_upgrade_try)
+	// NOCOM(#kxq): m_soldier_requirements and the return value of update_upgrade_requirements
+	// have the same meaning, nor? Why not return m_soldier_upgrade_try from the method and get rid of
+	// the variable in the class?
+	if (!m_soldier_upgrade_try)
 		return;
+
+	// NOCOM(#kxq): do what?
 	bool dosomething = reqch;
 
-	if (NULL != m_soldier_upgrade_request)
+	if (NULL != m_upgrade_soldier_request)
 	{
-		if (not (m_soldier_upgrade_request->is_open()))
+		if (!(m_upgrade_soldier_request->is_open()))
 			dosomething = false;
-		if (0 == m_soldier_upgrade_request->get_count())
+		if (0 == m_upgrade_soldier_request->get_count())
 			dosomething = true;
 	}
 	else
@@ -409,13 +421,13 @@ void MilitarySite::update_upgrade_soldier_request()
 
 	if (dosomething)
 	{
-		if (NULL != m_soldier_upgrade_request)
+		if (NULL != m_upgrade_soldier_request)
 		{
-			delete m_soldier_upgrade_request;
-			m_soldier_upgrade_request = NULL;
+			delete m_upgrade_soldier_request;
+			m_upgrade_soldier_request = NULL;
 		}
 
-		m_soldier_upgrade_request =
+		m_upgrade_soldier_request =
 				new Request
 				(*this,
 				tribe().safe_worker_index("soldier"),
@@ -423,10 +435,8 @@ void MilitarySite::update_upgrade_soldier_request()
 				wwWORKER);
 
 
-		m_soldier_upgrade_request->set_requirements (m_soldier_upgrade_requirements);
-
-		m_soldier_upgrade_request->set_count(1);
-
+		m_upgrade_soldier_request->set_requirements (m_soldier_upgrade_requirements);
+		m_upgrade_soldier_request->set_count(1);
 	}
 }
 
@@ -442,31 +452,36 @@ void MilitarySite::update_upgrade_soldier_request()
  * two actually make the requests.
  */
 
+// NOCOM(#kxq): incd? Please document the parameter.
 void MilitarySite::update_soldier_request_impl(bool incd)
 {
-	int32_t sc = soldierCapacity();
-	int32_t sss = stationedSoldiers().size();
+	const int32_t capacity = soldierCapacity();
+	const int32_t stationed = stationedSoldiers().size();
 
 	if (m_doing_upgrade_request)
 	{
+		// NOCOM(#kxq): please add {} in every if that is not just one line (and even then prefer to add it :), it
+		// is usually more readable). This method is very hard to read for me.
+
+		// NOCOM(#kxq): why not include the if's into one &&ded condition?
 		if (incd) // update requests always ask for one soldier at time!
-		if (m_soldier_upgrade_request)
+		if (m_upgrade_soldier_request)
 		{
-			delete m_soldier_upgrade_request;
-			m_soldier_upgrade_request = NULL;
+			delete m_upgrade_soldier_request;
+			m_upgrade_soldier_request = NULL;
 		}
-		if (sc > sss)
+		if (capacity > stationed)
 		{
 			// Somebody is killing my soldiers in the middle of upgrade -- bad luck!
-			if (NULL != m_soldier_upgrade_request)
-			if (m_soldier_upgrade_request->is_open() or 0 == m_soldier_upgrade_request->get_count())
+			if (NULL != m_upgrade_soldier_request) // NOCOM(#kxq): same here.
+			if (m_upgrade_soldier_request->is_open() or 0 == m_upgrade_soldier_request->get_count())
 			{
 				// Economy was not able to find the soldiers I need. Discarding request.
 
-				delete m_soldier_upgrade_request;
-				m_soldier_upgrade_request = NULL;
+				delete m_upgrade_soldier_request;
+				m_upgrade_soldier_request = NULL;
 			}
-			if (NULL == m_soldier_upgrade_request)
+			if (NULL == m_upgrade_soldier_request)
 			{
 				//phoo -- I can safely request new soldiers.
 				m_doing_upgrade_request = false;
@@ -474,20 +489,22 @@ void MilitarySite::update_soldier_request_impl(bool incd)
 			}
 			// else -- ohno please help me! Player is in trouble -- evil grin
 		}
+		// NOCOM(#kxq): consider pulling some of the branches in helper methods of their own,
+		// that way you can get rid of the branching comments as well
 		else // military site is full or overfull
-		if (sc < sss) // player is reducing capacity
+		if (capacity < stationed) // player is reducing capacity
 		{
-			if (m_soldier_upgrade_request)
-				delete m_soldier_upgrade_request;
-			m_soldier_upgrade_request = NULL;
+			if (m_upgrade_soldier_request)
+				delete m_upgrade_soldier_request;
+			m_upgrade_soldier_request = NULL;
 			m_doing_upgrade_request = false;
 			update_normal_soldier_request();
 		}
 		else // capacity == stationed size
 		{
-			if (NULL != m_soldier_upgrade_request)
+			if (NULL != m_upgrade_soldier_request)
 			{
-				if (not m_soldier_upgrade_request -> is_open())
+				if (!m_upgrade_soldier_request -> is_open())
 					// A new guy is arriving -- let's make room now.
 					drop_weakest_soldier(false, NULL);
 				else
@@ -501,13 +518,13 @@ void MilitarySite::update_soldier_request_impl(bool incd)
 	}
 	else // not doing upgrade request
 	{
-		if ((sc != sss) or (NULL != m_soldier_normal_request))
+		if ((capacity != stationed) or (NULL != m_normal_soldier_request))
 			update_normal_soldier_request();
 
-		if ((sc == sss) and (NULL == m_soldier_normal_request))
+		if ((capacity == stationed) and (NULL == m_normal_soldier_request))
 		{
 			int32_t pss = presentSoldiers().size();
-			if (pss == sc)
+			if (pss == capacity)
 			{
 				m_doing_upgrade_request = true;
 				update_upgrade_soldier_request();
@@ -520,6 +537,8 @@ void MilitarySite::update_soldier_request_impl(bool incd)
 }
 void MilitarySite::update_soldier_request()
 {
+	// NOCOM(#kxq): you could make this method take a bool and default this to false if you want to keep the interface.
+	// this would get rid of the _impl. I do not see why you need to have the same interface though.
 	update_soldier_request_impl(false);
 }
 
@@ -528,8 +547,6 @@ void MilitarySite::update_soldier_request()
 Advance the program state if applicable.
 ===============
 */
-
-
 void MilitarySite::act(Game & game, uint32_t const data)
 {
 	// TODO: do all kinds of stuff, but if you do nothing, let
@@ -540,11 +557,10 @@ void MilitarySite::act(Game & game, uint32_t const data)
 
 	ProductionSite::act(game, data);
 
-	int32_t timeofgame = game.get_gametime();
-
-
-	if (NULL != m_soldier_normal_request && NULL != m_soldier_upgrade_request)
+	const int32_t timeofgame = game.get_gametime();
+	if (NULL != m_normal_soldier_request && NULL != m_upgrade_soldier_request)
 	{
+		// NOCOM(#kxq): is this log a debug leftover?
 		log ("f978 MilitarySite::act: error: TWO REQUESTS ACTIVE!\n");
 		throw wexception("MilitarySite::act: Two soldier requests are ongoing -- should never happen!\n");
 	}
@@ -554,9 +570,12 @@ void MilitarySite::act(Game & game, uint32_t const data)
 	// to keep the game lightweight.
 
 	//FIXME: I would need two new callbacks, to get rid ot this polling.
+	// NOCOM(#kxq): I do not mind the polling this much - I think callbacks will be much cleaner though. Your call.
 	if (timeofgame > m_next_swap_soldiers_time)
 		{
-			m_next_swap_soldiers_time = timeofgame + m_soldier_upgrade_try ? 20000 : 100000;
+			// NOCOM(#kxq): the next line was bugged. + binds tighter than ?. I believe the parenthesis were
+			// what you actually wanted - please verify.
+			m_next_swap_soldiers_time = timeofgame + (m_soldier_upgrade_try ? 20000 : 100000);
 			update_soldier_request();
 		}
 
@@ -649,6 +668,7 @@ bool MilitarySite::isPresent(Soldier & soldier) const
 		soldier.get_position() == get_position();
 }
 
+// TODO(sirver): This method should probably return a const reference.
 std::vector<Soldier *> MilitarySite::presentSoldiers() const
 {
 	std::vector<Soldier *> soldiers;
@@ -662,6 +682,7 @@ std::vector<Soldier *> MilitarySite::presentSoldiers() const
 	return soldiers;
 }
 
+// TODO(sirver): This method should probably return a const reference.
 std::vector<Soldier *> MilitarySite::stationedSoldiers() const
 {
 	std::vector<Soldier *> soldiers;
@@ -716,7 +737,7 @@ void MilitarySite::dropSoldier(Soldier & soldier)
 
 
 void MilitarySite::conquer_area(Editor_Game_Base & egbase) {
-	assert(not m_didconquer);
+	assert(!m_didconquer);
 	egbase.conquer_area
 		(Player_Area<Area<FCoords> >
 		 	(owner().player_number(),
@@ -1013,7 +1034,9 @@ Map_Object * MilitarySite::popSoldierJob
  * When upgrading soldiers, we do not ask for just any soldiers, but soldiers
  * that are better than what we already have. This routine sets the requirements
  * used by the request.
+ * // NOCOM(#kxq): return value?
  *
+ * // NOCOM(#kxq): the next paragraph should probably be in the method.
  * There is also one small optimization -- if the player asks for zero-level guys,
  * and all soldiers already are zero-level guys, we do not do anything.
  */
@@ -1021,29 +1044,34 @@ Map_Object * MilitarySite::popSoldierJob
 bool
 MilitarySite::update_upgrade_requirements()
 {
-	bool heros = true;
+	// NOCOM(#kxq): with two states you neither need the switch nor the bool.
+	bool heroes = true;
 	switch (m_soldier_preference)
 	{
-		case soldier_trainlevel_hero:
-			heros = true;
+		case kPrefersHeroes:
+			heroes = true;
 			break;
-		case soldier_trainlevel_rookie:
-			heros = false;
+		case kPrefersRookies:
+			heroes = false;
 			break;
 		default:
+			// NOCOM(#kxq): This and the m_soldier_upgrade_try variable should probably go away - have only
+			// two states.
 			log("MilitarySite::swapSoldiers: error: Unknown player preference %d.\n", m_soldier_preference);
 			m_soldier_upgrade_try = false;
 			return false;
 	}
 
 
+	// NOCOM(#kxq): this code seems flawed - When I set a sentry to prefer heros, I see lvl 0 soldier exchange places
+	// all the time in my little test scenario I got going here.
 	// Find the level of the soldier that is currently least-suited.
-
-	std::vector<Soldier *> svec = stationedSoldiers();
-	int32_t multiplier = heros ? -1:1;
+	const std::vector<Soldier *> svec = stationedSoldiers();
+	int32_t multiplier = heroes ? -1:1;
 	int32_t wg_level = 0;
+	// NOCOM(#kxq): you use this in other places - pull it up into an anonymous namespace in this file and add a comment.
 	int32_t level_offset = 10000;
-	int32_t wg_actual_level = heros ? 0 : 101;
+	int32_t wg_actual_level = heroes ? 0 : 101;
 	for (uint32_t i = 0; i < svec.size(); ++i)
 	{
 		int32_t this_soldier_level = level_offset + multiplier* svec[i]->get_level(atrTotal);
@@ -1056,30 +1084,32 @@ MilitarySite::update_upgrade_requirements()
 	}
 
 	// micro-optimization
+	// // NOCOM(#kxq): please expand this comment and explain what you optimize.
 	m_soldier_upgrade_try = true;
-	if (! heros)
+	if (! heroes) {
 		if (level_offset == wg_level)
 			{
 				m_soldier_upgrade_try = false;
 				return false;
 			}
+	}
 
 
-	// Now I actually build the new reuirements
-	int32_t reqmin = heros ? 1 + wg_actual_level : 0;
-	int32_t reqmax = heros ? 10000 : wg_actual_level - 1;
+	// Now I actually build the new requirements.
+	int32_t reqmin = heroes ? 1 + wg_actual_level : 0;
+	int32_t reqmax = heroes ? 10000 : wg_actual_level - 1;
 
 	bool maxchanged = reqmax != static_cast<int32_t>(m_soldier_upgrade_required_max);
 	bool minchanged = reqmin != static_cast<int32_t>(m_soldier_upgrade_required_min);
 
 	if (maxchanged or minchanged)
 	{
-		if (NULL == m_soldier_normal_request or (m_soldier_normal_request->is_open()))
+		if (NULL == m_normal_soldier_request or (m_normal_soldier_request->is_open()))
 		{
-			if (m_soldier_normal_request)
+			if (m_normal_soldier_request)
 			{
-				delete m_soldier_normal_request;
-				m_soldier_normal_request = 0;
+				delete m_normal_soldier_request;
+				m_normal_soldier_request = 0;
 			}
 			m_soldier_upgrade_requirements = RequireAttribute(atrTotal, reqmin, reqmax);
 			m_soldier_upgrade_required_max = static_cast<uint16_t> (reqmax);
@@ -1093,29 +1123,32 @@ MilitarySite::update_upgrade_requirements()
 }
 
 // setters
+// NOCOM(#kxq): these should only be one getter (called soldier_preference()) and one setter
+// called (set_soldier_preferencen(MilitarySite::SoldierPreference)). I also prefer Rookie and Hero to
+// cheap and skilled
 void
 MilitarySite::preferSkilledSoldiers()
 {
-	m_soldier_preference = soldier_trainlevel_hero;
+	m_soldier_preference = kPrefersHeroes;
 }
 
 void
 MilitarySite::preferCheapSoldiers()
 {
-	m_soldier_preference = soldier_trainlevel_rookie;
+	m_soldier_preference = kPrefersRookies;
 }
 
 // getters
 bool
 MilitarySite::preferringSkilledSoldiers() const
 {
-	return  soldier_trainlevel_hero == m_soldier_preference;
+	return  kPrefersHeroes == m_soldier_preference;
 }
 
 bool
 MilitarySite::preferringCheapSoldiers() const
 {
-	return  soldier_trainlevel_rookie == m_soldier_preference;
+	return  kPrefersRookies == m_soldier_preference;
 }
 
 

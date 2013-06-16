@@ -65,7 +65,7 @@ enum {
 	PLCMD_SETWAREMAXFILL,
 	PLCMD_DISMANTLEBUILDING,
 	PLCMD_EVICTWORKER,
-	PLCMD_PREFERCERTAINSOLDIERS,
+	PLCMD_MILITARYSITESETSOLDIERPREFERENCE,
 };
 
 /*** class PlayerCommand ***/
@@ -105,7 +105,7 @@ PlayerCommand * PlayerCommand::deserialize (StreamRead & des)
 	case PLCMD_SETWAREMAXFILL: return new Cmd_SetWareMaxFill(des);
 	case PLCMD_DISMANTLEBUILDING: return new Cmd_DismantleBuilding(des);
 	case PLCMD_EVICTWORKER: return new Cmd_EvictWorker(des);
-	case PLCMD_PREFERCERTAINSOLDIERS: return new Cmd_PreferCertainSoldiers(des);
+	case PLCMD_MILITARYSITESETSOLDIERPREFERENCE: return new Cmd_MilitarySiteSetSoldierPreference(des);
 	default:
 		throw wexception
 			("PlayerCommand::deserialize(): Invalid command id encountered");
@@ -512,31 +512,33 @@ void Cmd_StartStopBuilding::Write
 }
 
 
-Cmd_PreferCertainSoldiers::Cmd_PreferCertainSoldiers (StreamRead & des) :
+Cmd_MilitarySiteSetSoldierPreference::Cmd_MilitarySiteSetSoldierPreference (StreamRead & des) :
 PlayerCommand (0, des.Unsigned8())
 {
 	serial = des.Unsigned32();
 	preference = des.Unsigned8();
 }
 
-void Cmd_PreferCertainSoldiers::serialize (StreamWrite & ser)
+void Cmd_MilitarySiteSetSoldierPreference::serialize (StreamWrite & ser)
 {
-	ser.Unsigned8 (PLCMD_PREFERCERTAINSOLDIERS);
+	ser.Unsigned8 (PLCMD_MILITARYSITESETSOLDIERPREFERENCE);
 	ser.Unsigned8 (sender());
 	ser.Unsigned32(serial);
 	ser.Unsigned8 (preference);
 }
 
-void Cmd_PreferCertainSoldiers::execute (Game & game)
+void Cmd_MilitarySiteSetSoldierPreference::execute (Game & game)
 {
 	if (upcast(MilitarySite, building, game.objects().get_object(serial)))
-		game.player(sender()).prefer_certain_soldiers(*building, preference);
+		game.player(sender()).military_site_set_soldier_preference(*building, preference);
 
 }
 
 #define PLAYER_CMD_SOLDIERPREFERENCE_VERSION 1
+// NOCOM(#kxq): This is quite dangerous :). I myself use NOCOM markers with
+// my user name and grep for them. Using FIXME makes it easier to miss.
   // FIXME -- these are just placeholders ! Do not commit like this !
-void Cmd_PreferCertainSoldiers::Write
+void Cmd_MilitarySiteSetSoldierPreference::Write
 	(FileWrite & fw, Editor_Game_Base & egbase, Map_Map_Object_Saver & mos)
 {
 	// First, write version
@@ -550,7 +552,7 @@ void Cmd_PreferCertainSoldiers::Write
 	fw.Unsigned32(mos.get_object_file_index(obj));
 }
 
-void Cmd_PreferCertainSoldiers::Read
+void Cmd_MilitarySiteSetSoldierPreference::Read
 	(FileRead & fr, Editor_Game_Base & egbase, Map_Map_Object_Loader & mol)
 {
 	try

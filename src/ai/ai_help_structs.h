@@ -268,7 +268,6 @@ struct MilitarySiteObserver {
 	Widelands::MilitarySite * site;
 	BuildingObserver * bo;
 	uint8_t checks;
-	//bool can_attack;
 };
 
 struct WareObserver {

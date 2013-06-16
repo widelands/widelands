@@ -59,6 +59,13 @@ class MilitarySite :
 	MO_DESCR(MilitarySite_Descr);
 
 public:
+	// NOCOM(#kxq): I converted the constants to an enum - this has a self documenting effect.
+	enum SoldierPreference {
+		kNoPreference,
+	   kPrefersRookies,
+		kPrefersHeroes,
+	};
+
 	MilitarySite(const MilitarySite_Descr &);
 	virtual ~MilitarySite();
 
@@ -114,10 +121,6 @@ public:
 	bool preferringSkilledSoldiers() const;
 	bool preferringCheapSoldiers() const;
 
-	static const uint8_t soldier_trainlevel_any = 0;
-	static const uint8_t soldier_trainlevel_rookie = 1;
-	static const uint8_t soldier_trainlevel_hero = 2;
-
 protected:
 	void conquer_area(Editor_Game_Base &);
 
@@ -144,12 +147,12 @@ private:
 
 private:
 	Requirements m_soldier_requirements;
-	//RequireOr m_soldier_upgrade_requirements;
+	// NOCOM(#kxq): comment these variables, the min and max are not apparent what they do to me.
 	Requirements m_soldier_upgrade_requirements;
 	uint16_t     m_soldier_upgrade_required_min;
 	uint16_t     m_soldier_upgrade_required_max;
-	Request    * m_soldier_normal_request;
-	Request    * m_soldier_upgrade_request;
+	Request    * m_normal_soldier_request;
+	Request    * m_upgrade_soldier_request;
 	bool m_didconquer;
 	uint32_t m_capacity;
 
@@ -165,7 +168,7 @@ private:
 		uint8_t     retreat;
 	};
 	std::vector<SoldierJob> m_soldierjobs;
-	uint8_t m_soldier_preference;
+	SoldierPreference m_soldier_preference;
 	int32_t m_next_swap_soldiers_time;
 	bool m_soldier_upgrade_try; // optimization -- if everybody is zero-level, do not downgrade
 	bool m_doing_upgrade_request;

@@ -684,35 +684,35 @@ void Map_Buildingdata_Data_Packet::read_militarysite
 		{
 			read_productionsite(militarysite, fr, game, mol);
 
-			delete militarysite.m_soldier_normal_request;
-			militarysite.m_soldier_normal_request = 0;
+			delete militarysite.m_normal_soldier_request;
+			militarysite.m_normal_soldier_request = 0;
 
 			if (fr.Unsigned8()) {
-				militarysite.m_soldier_normal_request =
+				militarysite.m_normal_soldier_request =
 					new Request
 						(militarysite,
 						 Ware_Index::First(),
 						 MilitarySite::request_soldier_callback,
 						 wwWORKER);
-				militarysite.m_soldier_normal_request->Read(fr, game, mol);
+				militarysite.m_normal_soldier_request->Read(fr, game, mol);
 			}
 			if (rel17comp) // compatibility with release 17 savegames
-				militarysite.m_soldier_upgrade_request = NULL;
+				militarysite.m_upgrade_soldier_request = NULL;
 			else
 				switch (fr.Unsigned8())
 				{
 					case 42:
-						militarysite.m_soldier_upgrade_request =
+						militarysite.m_upgrade_soldier_request =
 							new Request
 								(militarysite,
-								 NULL == militarysite.m_soldier_normal_request ? Ware_Index::First()
+								 NULL == militarysite.m_normal_soldier_request ? Ware_Index::First()
 								: militarysite.descr().tribe().safe_worker_index("soldier"),
 								MilitarySite::request_soldier_callback,
 								wwWORKER);
-						militarysite.m_soldier_upgrade_request->Read(fr, game, mol);
+						militarysite.m_upgrade_soldier_request->Read(fr, game, mol);
 						break;
 					case 55:
-						militarysite.m_soldier_upgrade_request = NULL;
+						militarysite.m_upgrade_soldier_request = NULL;
 						break;
 					default:
 						log("widelands_map_buildingdata_data_packet.cc: ");
@@ -746,7 +746,7 @@ void Map_Buildingdata_Data_Packet::read_militarysite
 
 				militarysite.m_soldier_upgrade_required_min = fr.Unsigned16();
 				militarysite.m_soldier_upgrade_required_max = fr.Unsigned16();
-				militarysite.m_soldier_preference = fr.Unsigned8();
+				militarysite.m_soldier_preference = static_cast<MilitarySite::SoldierPreference>(fr.Unsigned8());
 				militarysite.m_next_swap_soldiers_time = fr.Signed32();
 				militarysite.m_soldier_upgrade_try = 0 != fr.Unsigned8() ? true : false;
 				militarysite.m_doing_upgrade_request = 0 != fr.Unsigned8() ? true : false;
@@ -755,9 +755,9 @@ void Map_Buildingdata_Data_Packet::read_militarysite
 			{
 				militarysite.m_soldier_upgrade_required_min = 0;
 				militarysite.m_soldier_upgrade_required_max = 999;
-				militarysite.m_soldier_preference = militarysite.soldier_trainlevel_rookie;
+				militarysite.m_soldier_preference = MilitarySite::kPrefersRookies;
 				if (2 < militarysite.m_capacity)
-					militarysite.m_soldier_preference = militarysite.soldier_trainlevel_hero;
+					militarysite.m_soldier_preference = MilitarySite::kPrefersHeroes;
 				militarysite.m_next_swap_soldiers_time = militarysite.m_nexthealtime;
 				militarysite.m_soldier_upgrade_try = false;
 				militarysite.m_doing_upgrade_request = false;
@@ -1103,7 +1103,7 @@ void Map_Buildingdata_Data_Packet::read_trainingsite
 			}
 
 			trainingsite.m_capacity = fr.Unsigned8();
-			trainingsite.m_build_heros = fr.Unsigned8();
+			trainingsite.m_build_heroes = fr.Unsigned8();
 
 			uint8_t const nr_upgrades = fr.Unsigned8();
 			for (uint8_t i = 0; i < nr_upgrades; ++i) {
@@ -1449,19 +1449,24 @@ void Map_Buildingdata_Data_Packet::write_militarysite
 	fw.Unsigned16(CURRENT_MILITARYSITE_PACKET_VERSION);
 	write_productionsite(militarysite, fw, game, mos);
 
-	if (militarysite.m_soldier_normal_request) {
+	if (militarysite.m_normal_soldier_request) {
 		fw.Unsigned8(1);
-		militarysite.m_soldier_normal_request->Write(fw, game, mos);
+		militarysite.m_normal_soldier_request->Write(fw, game, mos);
 	} else {
 		fw.Unsigned8(0);
 	}
 
+	// NOCOM(#kxq): seriously? If your code is correct with the loading and saving, then it should just work.
+	// this is not the place to check for out of sync errors - also the correct thing is just to blow up and die and
+	// not try to continue.
+	// I stop reviewing this file - this needs some cleanup before I'll look at it again.
+
 	// 42 and 55 are values that do not appear frequently in the save stream
 	// Used to detect out-of-synch problems.
-	if (militarysite.m_soldier_upgrade_request)
+	if (militarysite.m_upgrade_soldier_request)
 	{
 		fw.Unsigned8(42);
-		militarysite.m_soldier_upgrade_request->Write(fw, game, mos);
+		militarysite.m_upgrade_soldier_request->Write(fw, game, mos);
 	}
 	else
 		fw.Unsigned8(55);
@@ -1471,8 +1476,8 @@ void Map_Buildingdata_Data_Packet::write_militarysite
 	fw.Unsigned8(militarysite.m_capacity);
 	fw.Signed32(militarysite.m_nexthealtime);
 
-	if (militarysite.m_soldier_normal_request)
-	if (militarysite.m_soldier_upgrade_request)
+	if (militarysite.m_normal_soldier_request)
+	if (militarysite.m_upgrade_soldier_request)
 	  log("map_buildingdata_-data_packet: There is something fishy going on.. debug me please!\n");
 	fw.Unsigned16(militarysite.m_soldier_upgrade_required_min);
 	fw.Unsigned16(militarysite.m_soldier_upgrade_required_max);
@@ -1583,7 +1588,7 @@ void Map_Buildingdata_Data_Packet::write_trainingsite
 	}
 
 	fw.Unsigned8(trainingsite.m_capacity);
-	fw.Unsigned8(trainingsite.m_build_heros);
+	fw.Unsigned8(trainingsite.m_build_heroes);
 
 	// upgrades
 	fw.Unsigned8(trainingsite.m_upgrades.size());
