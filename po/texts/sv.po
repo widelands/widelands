@@ -2,15 +2,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4688\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2013-03-09 16:57+0000\n"
+"POT-Creation-Date: 2013-06-16 09:11+0000\n"
 "PO-Revision-Date: 2012-03-01 17:20+0000\n"
 "Last-Translator: Marcus E <Unknown>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-03-10 04:33+0000\n"
-"X-Generator: Launchpad (build 16523)\n"
+"X-Launchpad-Export-Date: 2013-06-17 05:10+0000\n"
+"X-Generator: Launchpad (build 16667)\n"
 
 #: ../../txts/README:71
 msgid "(CTRL+) 0-9  Remember and go to previously remembered locations"
@@ -307,11 +307,11 @@ msgstr ""
 "Har Du fler frågor? Vår FAQ, wiki och så klart vårt gemensamma forum hittar "
 "Du på www.widelands.org."
 
-#: ../../txts/developers:162
+#: ../../txts/developers:164
 msgid "Atlantean"
 msgstr "Atlantean"
 
-#: ../../txts/developers:152
+#: ../../txts/developers:154
 msgid "Barbarian"
 msgstr "Barbarer"
 
@@ -338,7 +338,7 @@ msgstr "CTRL+L   Ladda bana"
 msgid "CTRL+S   Save Map"
 msgstr "CTRL+S   Spara bana"
 
-#: ../../txts/developers:149
+#: ../../txts/developers:151
 msgid "Campaign Story"
 msgstr "Kampanjberättelse"
 
@@ -374,7 +374,7 @@ msgstr "Skapa en inspelad session</p>"
 msgid "Ctrl+F10    Quit the game immediately"
 msgstr "Ctrl+F10 Avsluta spelet omedelbart"
 
-#: ../../txts/developers:177
+#: ../../txts/developers:179
 msgid "Czech"
 msgstr "Tjeckiska"
 
@@ -382,7 +382,7 @@ msgstr "Tjeckiska"
 msgid "DELETE      Archive the current message"
 msgstr "DELETE Arkivera aktuellt meddelande"
 
-#: ../../txts/developers:184
+#: ../../txts/developers:186
 msgid "Dansk"
 msgstr "Danska"
 
@@ -390,11 +390,11 @@ msgstr "Danska"
 msgid "Development"
 msgstr "Utveckling"
 
-#: ../../txts/developers:319
+#: ../../txts/developers:321
 msgid "Documentation, Help and Wiki"
 msgstr "Dokumentation, hjälp och wiki"
 
-#: ../../txts/developers:190
+#: ../../txts/developers:192
 msgid "Dutch"
 msgstr "Holländska"
 
@@ -406,7 +406,7 @@ msgstr "E        Visa/dölj händelsemeny"
 msgid "Elders"
 msgstr "Överste"
 
-#: ../../txts/developers:158
+#: ../../txts/developers:160
 msgid "Empire"
 msgstr "Imperiet"
 
@@ -430,15 +430,15 @@ msgstr "F11         Tar en skärmdump"
 msgid "F6           Shows the debug console (only in debug-builds)"
 msgstr "F6           Visar avlusningskonsolen (endast i avlusningsversioner)"
 
-#: ../../txts/developers:197
+#: ../../txts/developers:199
 msgid "Finnish"
 msgstr "Finska"
 
-#: ../../txts/developers:334
+#: ../../txts/developers:336
 msgid "Former elders"
 msgstr "Före detta åldermän"
 
-#: ../../txts/developers:203
+#: ../../txts/developers:205
 msgid "French"
 msgstr "Franska"
 
@@ -457,7 +457,7 @@ msgid ""
 msgstr ""
 "GNU general public license vilkor för kopiering, spridning och modifiering."
 
-#: ../../txts/developers:210
+#: ../../txts/developers:212
 msgid "Galician"
 msgstr "Galliska"
 
@@ -465,16 +465,16 @@ msgstr "Galliska"
 msgid "General game control"
 msgstr "Allmän spelstyrning"
 
-#: ../../txts/developers:215
+#: ../../txts/developers:217
 msgid "German"
 msgstr "Tyska"
 
-#: ../../txts/developers:83
+#: ../../txts/developers:85
 msgid "Graphicians"
 msgstr "Grafiska designers"
 
 #: ../../txts/developers:18
-#: ../../txts/developers:345
+#: ../../txts/developers:347
 msgid "Graphics"
 msgstr "Grafik"
 
@@ -482,7 +482,7 @@ msgstr "Grafik"
 msgid "H        Toggles main menu"
 msgstr "H        Visa/dölj huvudmeny"
 
-#: ../../txts/developers:227
+#: ../../txts/developers:229
 msgid "Hebrew"
 msgstr "Hebreiska"
 
@@ -507,11 +507,11 @@ msgid "Home        Center main mapview on starting location"
 msgstr "Home        Centrerar huvudvyn på startläget"
 
 #: ../../txts/developers:23
-#: ../../txts/developers:338
+#: ../../txts/developers:340
 msgid "Homepage"
 msgstr "Hemsida"
 
-#: ../../txts/developers:310
+#: ../../txts/developers:312
 msgid "Homepage Coders"
 msgstr "Hemsidans kodare"
 
@@ -519,7 +519,7 @@ msgstr "Hemsidans kodare"
 msgid "How to Apply These Terms to Your New Programs"
 msgstr "Metod för att använda dessa villkor för dina nya program"
 
-#: ../../txts/developers:232
+#: ../../txts/developers:234
 msgid "Hungarian"
 msgstr "Ungerska"
 
@@ -618,7 +618,7 @@ msgid ""
 "licensee cannot impose that choice."
 msgstr ""
 
-#: ../../txts/developers:237
+#: ../../txts/developers:239
 msgid "Italian"
 msgstr "Italienska"
 
@@ -651,7 +651,7 @@ msgstr ""
 "Som med naturliga objekt (bobs), kan du också markera flera djur eller "
 "marktexturer met Ctrl + musklick."
 
-#: ../../txts/developers:276
+#: ../../txts/developers:278
 msgid "Linux Distributions"
 msgstr "Linuxdistributioner"
 
@@ -670,7 +670,7 @@ msgid ""
 "messages."
 msgstr ""
 
-#: ../../txts/developers:135
+#: ../../txts/developers:137
 msgid "Maps and Missions"
 msgstr "Banor och uppdrag"
 
@@ -678,7 +678,7 @@ msgstr "Banor och uppdrag"
 msgid "Miners will only work if supplied with food."
 msgstr "Gruvarbetare behöver mat för att arbeta."
 
-#: ../../txts/developers:113
+#: ../../txts/developers:115
 msgid "Musicians"
 msgstr "Musikskapare"
 
@@ -686,7 +686,7 @@ msgstr "Musikskapare"
 msgid "N               Toggle messages ('news')"
 msgstr "N Växla meddelanden ('nyheter')"
 
-#: ../../txts/developers:172
+#: ../../txts/developers:174
 msgid ""
 "NOTE: this list holds people that translated Widelands before we moved to "
 "launchpad.net. "
@@ -704,7 +704,7 @@ msgstr ""
 msgid "No warranty"
 msgstr "Ingen garanti"
 
-#: ../../txts/developers:298
+#: ../../txts/developers:300
 msgid "Non Unix Distributions"
 msgstr "Icke-UNIX-distributioner"
 
@@ -745,11 +745,11 @@ msgstr ""
 msgid "Online Help"
 msgstr "Hjälp på nätet"
 
-#: ../../txts/developers:363
+#: ../../txts/developers:366
 msgid "Other"
 msgstr "Övrigt"
 
-#: ../../txts/developers:287
+#: ../../txts/developers:289
 msgid "Other Unix Distributions"
 msgstr "Övriga Unixdistributioner"
 
@@ -777,7 +777,7 @@ msgstr "PAGEUP         Ökar hastigheten i spelet"
 msgid "PAUSE         Pauses the game (only for local games)"
 msgstr "PAUSE Pausar spelet (bara för lokala spel)"
 
-#: ../../txts/developers:272
+#: ../../txts/developers:274
 msgid "Packagers"
 msgstr "Paketerare"
 
@@ -789,7 +789,7 @@ msgstr "Var god och titta i våra användarmanualer på vår wiki-sida:"
 msgid "Please provide enough background information. Tell us:"
 msgstr "Var vänlig och bidra med tillräcklig bakgrundsinformation. Berätta:"
 
-#: ../../txts/developers:242
+#: ../../txts/developers:244
 msgid "Polish"
 msgstr "Polska"
 
@@ -852,7 +852,7 @@ msgstr "Repriser</p>"
 msgid "Reporting Bugs"
 msgstr "Rapportera buggar"
 
-#: ../../txts/developers:250
+#: ../../txts/developers:252
 msgid "Russian"
 msgstr "Ryska"
 
@@ -879,7 +879,7 @@ msgstr ""
 "SPACE-tangenten fungerar som i normalt spel. Den slår på och av bygghjälpen "
 "(buildhelp)."
 
-#: ../../txts/developers:173
+#: ../../txts/developers:175
 msgid ""
 "See https://translations.launchpad.net/widelands for a list of people that "
 "helped to translate Widelands via launchpad.net."
@@ -887,7 +887,7 @@ msgstr ""
 "Se https://translations.launchpad.net/widelands för en lista över människor "
 "som har hjälpt till att översätta WIdelands via launchpad.net"
 
-#: ../../txts/developers:255
+#: ../../txts/developers:257
 msgid "Slovak"
 msgstr "Slovakiska"
 
@@ -902,15 +902,15 @@ msgstr ""
 "byggnaden är kringgärdad av träd eller vägar så kommer produktionen avstanna."
 
 #: ../../txts/developers:28
-#: ../../txts/developers:351
+#: ../../txts/developers:354
 msgid "Sound"
 msgstr "Ljud"
 
-#: ../../txts/developers:125
+#: ../../txts/developers:127
 msgid "Sound Effects"
 msgstr "Ljudeffekter"
 
-#: ../../txts/developers:260
+#: ../../txts/developers:262
 msgid "Spanish"
 msgstr "Spanska"
 
@@ -926,7 +926,7 @@ msgstr ""
 msgid "Status"
 msgstr "Status"
 
-#: ../../txts/developers:265
+#: ../../txts/developers:267
 msgid "Swedish"
 msgstr "Svenska"
 
@@ -1104,11 +1104,11 @@ msgstr ""
 "För att minimera/maximera ett fönster, mittenklicka eller Ctrl-klicka på "
 "namnlisten."
 
-#: ../../txts/developers:356
+#: ../../txts/developers:359
 msgid "Translation"
 msgstr "Översättning"
 
-#: ../../txts/developers:169
+#: ../../txts/developers:171
 msgid "Translators"
 msgstr "Översättare"
 

@@ -6,15 +6,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2013-03-09 16:57+0000\n"
+"POT-Creation-Date: 2013-06-16 09:11+0000\n"
 "PO-Revision-Date: 2012-04-22 16:00+0000\n"
 "Last-Translator: Patrick H. <dajgtre@gmail.com>\n"
 "Language-Team: Language <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-03-10 04:35+0000\n"
-"X-Generator: Launchpad (build 16523)\n"
+"X-Launchpad-Export-Date: 2013-06-17 05:12+0000\n"
+"X-Generator: Launchpad (build 16667)\n"
 "X-Poedit-Country: swe\n"
 "X-Poedit-Language: swe\n"
 
@@ -885,9 +885,9 @@ msgstr "Skeppsvarv"
 msgid "Shovel"
 msgstr "Spade"
 
-#: ../../tribes/empire/arena/conf:13
-#: ../../tribes/empire/colosseum/conf:27
-#: ../../tribes/empire/trainingscamp/conf:38
+#: ../../tribes/empire/arena/conf:14
+#: ../../tribes/empire/colosseum/conf:28
+#: ../../tribes/empire/trainingscamp/conf:39
 msgid "Sleep"
 msgstr "Vila"
 
@@ -1198,11 +1198,11 @@ msgstr ""
 "fäller träden; skogsvaktarna ser om tillgången på träd. Trädstammar används "
 "också av kolbrännaren, verktygssmedjan, och sågverket."
 
-#: ../../tribes/empire/trainingscamp/conf:39
+#: ../../tribes/empire/trainingscamp/conf:40
 msgid "Upgrade soldier attack 0"
 msgstr "Uppgradera soldatattack 0"
 
-#: ../../tribes/empire/trainingscamp/conf:40
+#: ../../tribes/empire/trainingscamp/conf:41
 msgid ""
 "Upgrade soldier attack 0 (only for compatibility with old savegames "
 "(build13))"
@@ -1210,11 +1210,11 @@ msgstr ""
 "Uppgradera soldatattack 0 (endast för kompatibilitet med gamla sparade spel "
 "(build13))"
 
-#: ../../tribes/empire/trainingscamp/conf:41
+#: ../../tribes/empire/trainingscamp/conf:42
 msgid "Upgrade soldier attack 1"
 msgstr "Uppgradera soldatattack 1"
 
-#: ../../tribes/empire/trainingscamp/conf:42
+#: ../../tribes/empire/trainingscamp/conf:43
 msgid ""
 "Upgrade soldier attack 1 (only for compatibility with old savegames "
 "(build13))"
@@ -1222,11 +1222,11 @@ msgstr ""
 "Uppgradera soldatattack 1 (endast för kompatibilitet med gamla sparade spel "
 "(build13))"
 
-#: ../../tribes/empire/trainingscamp/conf:43
+#: ../../tribes/empire/trainingscamp/conf:44
 msgid "Upgrade soldier attack 2"
 msgstr "Uppgradera soldatattack 2"
 
-#: ../../tribes/empire/trainingscamp/conf:44
+#: ../../tribes/empire/trainingscamp/conf:45
 msgid ""
 "Upgrade soldier attack 2 (only for compatibility with old savegames "
 "(build13))"
@@ -1234,11 +1234,11 @@ msgstr ""
 "Uppgradera soldatattack 2 (endast för kompatibilitet med gamla sparade spel "
 "(build13))"
 
-#: ../../tribes/empire/trainingscamp/conf:45
+#: ../../tribes/empire/trainingscamp/conf:46
 msgid "Upgrade soldier attack 3"
 msgstr "Uppgradera soldatattack 3"
 
-#: ../../tribes/empire/trainingscamp/conf:46
+#: ../../tribes/empire/trainingscamp/conf:47
 msgid ""
 "Upgrade soldier attack 3 (only for compatibility with old savegames "
 "(build13))"
@@ -1246,35 +1246,35 @@ msgstr ""
 "Uppgradera soldatattack 3 (endast för kompatibilitet med gamla sparade spel "
 "(build13))"
 
-#: ../../tribes/empire/arena/conf:14
-#: ../../tribes/empire/colosseum/conf:28
+#: ../../tribes/empire/arena/conf:15
+#: ../../tribes/empire/colosseum/conf:29
 msgid "Upgrade soldier evade 0"
 msgstr "Uppgradera undvik 0 för soldat"
 
-#: ../../tribes/empire/arena/conf:15
-#: ../../tribes/empire/colosseum/conf:29
+#: ../../tribes/empire/arena/conf:16
+#: ../../tribes/empire/colosseum/conf:30
 msgid ""
 "Upgrade soldier evade 0 (only for compatibility with old savegames (build13))"
 msgstr ""
 "Uppgradera undvik 0 för soldat  (endast för kompatibilitet med gamla sparade "
 "spel (build13))"
 
-#: ../../tribes/empire/colosseum/conf:30
+#: ../../tribes/empire/colosseum/conf:31
 msgid "Upgrade soldier evade 1"
 msgstr "Uppgradera undvik 1 för soldat"
 
-#: ../../tribes/empire/colosseum/conf:31
+#: ../../tribes/empire/colosseum/conf:32
 msgid ""
 "Upgrade soldier evade 1 (only for compatibility with old savegames (build13))"
 msgstr ""
 "Uppgradera undvik 1 för soldat  (endast för kompatibilitet med gamla sparade "
 "spel (build13))"
 
-#: ../../tribes/empire/trainingscamp/conf:47
+#: ../../tribes/empire/trainingscamp/conf:48
 msgid "Upgrade soldier hitpoints 0"
 msgstr "Uppgradera träffpoäng 0 för soldater"
 
-#: ../../tribes/empire/trainingscamp/conf:48
+#: ../../tribes/empire/trainingscamp/conf:49
 msgid ""
 "Upgrade soldier hitpoints 0 (only for compatibility with old savegames "
 "(build13))"
@@ -1282,11 +1282,11 @@ msgstr ""
 "Uppgradera träffpoäng 0 för soldater (endast för kompatibilitet med gamla "
 "sparade spel (build13))"
 
-#: ../../tribes/empire/trainingscamp/conf:49
+#: ../../tribes/empire/trainingscamp/conf:50
 msgid "Upgrade soldier hitpoints 1"
 msgstr "Uppgradera träffpoäng 1 för soldat"
 
-#: ../../tribes/empire/trainingscamp/conf:50
+#: ../../tribes/empire/trainingscamp/conf:51
 msgid ""
 "Upgrade soldier hitpoints 1 (only for compatibility with old savegames "
 "(build13))"
@@ -1294,11 +1294,11 @@ msgstr ""
 "Uppgradera träffpoäng 1 för soldat (endast för kompatibilitet med gamla "
 "sparade spel (build13))"
 
-#: ../../tribes/empire/trainingscamp/conf:51
+#: ../../tribes/empire/trainingscamp/conf:52
 msgid "Upgrade soldier hitpoints 2"
 msgstr "Uppgradera träffpoäng 2 för soldat"
 
-#: ../../tribes/empire/trainingscamp/conf:52
+#: ../../tribes/empire/trainingscamp/conf:53
 msgid ""
 "Upgrade soldier hitpoints 2 (only for compatibility with old savegames "
 "(build13))"
@@ -1306,11 +1306,11 @@ msgstr ""
 "Uppgradera träffpoäng 2 för soldat (endast för kompatibilitet med gamla "
 "sparade spel (build13))"
 
-#: ../../tribes/empire/trainingscamp/conf:53
+#: ../../tribes/empire/trainingscamp/conf:54
 msgid "Upgrade soldier hitpoints 3"
 msgstr "Uppgradera träffpoäng 3 för soldat"
 
-#: ../../tribes/empire/trainingscamp/conf:54
+#: ../../tribes/empire/trainingscamp/conf:55
 msgid ""
 "Upgrade soldier hitpoints 3 (only for compatibility with old savegames "
 "(build13))"
