@@ -744,8 +744,9 @@ void Map_Buildingdata_Data_Packet::read_militarysite
 			if (not (rel17comp)) // compatibility with release 17 savegames
 			{
 
-				militarysite.m_soldier_upgrade_required_min = fr.Unsigned16();
-				militarysite.m_soldier_upgrade_required_max = fr.Unsigned16();
+				uint16_t reqmin = fr.Unsigned16();
+				uint16_t reqmax = fr.Unsigned16();
+				militarysite.m_soldier_upgrade_requirements = RequireAttribute(atrTotal, reqmin, reqmax);
 				militarysite.m_soldier_preference = static_cast<MilitarySite::SoldierPreference>(fr.Unsigned8());
 				militarysite.m_next_swap_soldiers_time = fr.Signed32();
 				militarysite.m_soldier_upgrade_try = 0 != fr.Unsigned8() ? true : false;
@@ -753,8 +754,6 @@ void Map_Buildingdata_Data_Packet::read_militarysite
 			}
 			else // Release 17 compatibility branch. Some safe values.
 			{
-				militarysite.m_soldier_upgrade_required_min = 0;
-				militarysite.m_soldier_upgrade_required_max = 999;
 				militarysite.m_soldier_preference = MilitarySite::kPrefersRookies;
 				if (2 < militarysite.m_capacity)
 					militarysite.m_soldier_preference = MilitarySite::kPrefersHeroes;
@@ -1457,8 +1456,8 @@ void Map_Buildingdata_Data_Packet::write_militarysite
 	}
 
 	// NOCOM(#kxq): seriously? If your code is correct with the loading and saving, then it should just work.
-	// this is not the place to check for out of sync errors - also the correct thing is just to blow up and die and
-	// not try to continue.
+	// this is not the place to check for out of sync errors - also the correct thing is just to blow up
+	// and die and not try to continue.
 	// I stop reviewing this file - this needs some cleanup before I'll look at it again.
 
 	// 42 and 55 are values that do not appear frequently in the save stream
@@ -1479,8 +1478,8 @@ void Map_Buildingdata_Data_Packet::write_militarysite
 	if (militarysite.m_normal_soldier_request)
 	if (militarysite.m_upgrade_soldier_request)
 	  log("map_buildingdata_-data_packet: There is something fishy going on.. debug me please!\n");
-	fw.Unsigned16(militarysite.m_soldier_upgrade_required_min);
-	fw.Unsigned16(militarysite.m_soldier_upgrade_required_max);
+	fw.Unsigned16(militarysite.m_soldier_upgrade_requirements.getMin());
+	fw.Unsigned16(militarysite.m_soldier_upgrade_requirements.getMax());
 	fw.Unsigned8(militarysite.m_soldier_preference);
 	fw.Signed32(militarysite.m_next_swap_soldiers_time);
 	fw.Unsigned8(militarysite.m_soldier_upgrade_try ? 1 : 0);

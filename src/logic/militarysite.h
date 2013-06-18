@@ -59,8 +59,8 @@ class MilitarySite :
 	MO_DESCR(MilitarySite_Descr);
 
 public:
-	// NOCOM(#kxq): I converted the constants to an enum - this has a self documenting effect.
-	enum SoldierPreference {
+	// I assume elsewhere, that this SoldierPreference fits to uint8_t.
+	enum SoldierPreference : uint8_t {
 		kNoPreference,
 	   kPrefersRookies,
 		kPrefersHeroes,
@@ -146,13 +146,10 @@ private:
 
 
 private:
-	Requirements m_soldier_requirements;
-	// NOCOM(#kxq): comment these variables, the min and max are not apparent what they do to me.
-	Requirements m_soldier_upgrade_requirements;
-	uint16_t     m_soldier_upgrade_required_min;
-	uint16_t     m_soldier_upgrade_required_max;
-	Request    * m_normal_soldier_request;
-	Request    * m_upgrade_soldier_request;
+	Requirements m_soldier_requirements; // This is used to grab a bunch of soldiers: Anything goes
+	RequireAttribute m_soldier_upgrade_requirements; // This is used when exchanging soldiers.
+	Request    * m_normal_soldier_request;  // filling the site
+	Request    * m_upgrade_soldier_request; // seeking for a better soldier to replace the current one
 	bool m_didconquer;
 	uint32_t m_capacity;
 

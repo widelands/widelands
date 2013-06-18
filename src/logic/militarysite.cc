@@ -85,8 +85,6 @@ class MilitarySite
 
 MilitarySite::MilitarySite(const MilitarySite_Descr & ms_descr) :
 ProductionSite(ms_descr),
-m_soldier_upgrade_required_min(0),
-m_soldier_upgrade_required_max(252),
 m_normal_soldier_request(NULL),
 m_upgrade_soldier_request(NULL),
 m_didconquer  (false),
@@ -104,7 +102,7 @@ m_doing_upgrade_request(false)
 MilitarySite::~MilitarySite()
 {
 	assert(!m_normal_soldier_request);
-	// NOCOM(#kxq): Add in an assert for the upgrade request?
+	assert(!m_upgrade_soldier_request);
 }
 
 
@@ -228,8 +226,14 @@ int MilitarySite::incorporateSoldier(Editor_Game_Base & egbase, Soldier & s)
 		s.set_location(this);
 	}
 
-	// NOCOM(#kxq): I do not get this code - it seems like a weaker soldier is leaving the building immediately and
-	// a strong way leaves the HQ. Why does the stationedSoldiers() property do not drop by one?
+	// Soldier upgrade is done once the site is full. In soldier upgrade,
+	// I request one new soldier who is better suited than the existing ones.
+	// Once a new guy starts walking towards here, the old guy is kicked out.
+	// That kick-out happens as a result of polling. The "if" statement below
+	// Checks for such "overbooking" situation. The same happens also when
+	// a militarysite can only house one soldier: The one and only guy leaves
+	// only when his replacement is at the front door.
+
 	if (stationedSoldiers().size()  > descr().get_max_number_of_soldiers())
 	{
 		return incorporateUpgradedSoldier(egbase, s);
@@ -1044,6 +1048,9 @@ Map_Object * MilitarySite::popSoldierJob
 bool
 MilitarySite::update_upgrade_requirements()
 {
+	int32_t soldier_upgrade_required_min = m_soldier_upgrade_requirements.getMin();
+	int32_t soldier_upgrade_required_max = m_soldier_upgrade_requirements.getMax();
+
 	// NOCOM(#kxq): with two states you neither need the switch nor the bool.
 	bool heroes = true;
 	switch (m_soldier_preference)
@@ -1099,8 +1106,8 @@ MilitarySite::update_upgrade_requirements()
 	int32_t reqmin = heroes ? 1 + wg_actual_level : 0;
 	int32_t reqmax = heroes ? 10000 : wg_actual_level - 1;
 
-	bool maxchanged = reqmax != static_cast<int32_t>(m_soldier_upgrade_required_max);
-	bool minchanged = reqmin != static_cast<int32_t>(m_soldier_upgrade_required_min);
+	bool maxchanged = reqmax != soldier_upgrade_required_max;
+	bool minchanged = reqmin != soldier_upgrade_required_min;
 
 	if (maxchanged or minchanged)
 	{
@@ -1112,8 +1119,6 @@ MilitarySite::update_upgrade_requirements()
 				m_normal_soldier_request = 0;
 			}
 			m_soldier_upgrade_requirements = RequireAttribute(atrTotal, reqmin, reqmax);
-			m_soldier_upgrade_required_max = static_cast<uint16_t> (reqmax);
-			m_soldier_upgrade_required_min = static_cast<uint16_t> (reqmin);
 
 			return true;
 		}
