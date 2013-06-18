@@ -164,34 +164,34 @@ void Building_Window::create_capsbuttons(UI::Box * capsbuttons)
 	const bool can_act = igbase().can_act(owner_number);
 
 	bool requires_destruction_separator = false;
-	// Check if this is a port building and if yes show expedition button
-	if (upcast(Widelands::Warehouse const, warehouse, &m_building)) {
-		if (Widelands::PortDock * pd = warehouse->get_portdock()) {
-			if (pd->expedition_started()) {
-				UI::Button * expeditionbtn =
-					new UI::Button
-						(capsbuttons, "cancel_expedition", 0, 0, 34, 34,
-						g_gr->images().get("pics/but4.png"),
-						g_gr->images().get("pics/cancel_expedition.png"),
-						_("Cancel the expedition"));
-				expeditionbtn->sigclicked.connect
-					(boost::bind(&Building_Window::act_start_or_cancel_expedition, boost::ref(*this)));
-				capsbuttons->add(expeditionbtn, UI::Box::AlignCenter);
-			} else {
-				UI::Button * expeditionbtn =
-					new UI::Button
-						(capsbuttons, "start_expedition", 0, 0, 34, 34,
-						g_gr->images().get("pics/but4.png"),
-						g_gr->images().get("pics/start_expedition.png"),
-						_("Start an expedition"));
-				expeditionbtn->sigclicked.connect
-					(boost::bind(&Building_Window::act_start_or_cancel_expedition, boost::ref(*this)));
-				capsbuttons->add(expeditionbtn, UI::Box::AlignCenter);
+	if (can_act) {
+		// Check if this is a port building and if yes show expedition button
+		if (upcast(Widelands::Warehouse const, warehouse, &m_building)) {
+			if (Widelands::PortDock * pd = warehouse->get_portdock()) {
+				if (pd->expedition_started()) {
+					UI::Button * expeditionbtn =
+						new UI::Button
+							(capsbuttons, "cancel_expedition", 0, 0, 34, 34,
+							g_gr->images().get("pics/but4.png"),
+							g_gr->images().get("pics/cancel_expedition.png"),
+							_("Cancel the expedition"));
+					expeditionbtn->sigclicked.connect
+						(boost::bind(&Building_Window::act_start_or_cancel_expedition, boost::ref(*this)));
+					capsbuttons->add(expeditionbtn, UI::Box::AlignCenter);
+				} else {
+					UI::Button * expeditionbtn =
+						new UI::Button
+							(capsbuttons, "start_expedition", 0, 0, 34, 34,
+							g_gr->images().get("pics/but4.png"),
+							g_gr->images().get("pics/start_expedition.png"),
+							_("Start an expedition"));
+					expeditionbtn->sigclicked.connect
+						(boost::bind(&Building_Window::act_start_or_cancel_expedition, boost::ref(*this)));
+					capsbuttons->add(expeditionbtn, UI::Box::AlignCenter);
+				}
 			}
 		}
-	}
 
-	if (can_act) {
 		if (upcast(const Widelands::ProductionSite, productionsite, &m_building))
 			if (not dynamic_cast<const Widelands::MilitarySite *>(productionsite)) {
 				const bool is_stopped = productionsite->is_stopped();
