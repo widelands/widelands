@@ -166,9 +166,36 @@ void Building_Window::create_capsbuttons(UI::Box * capsbuttons)
 	bool requires_destruction_separator = false;
 	if (can_act) {
 		if (upcast(const Widelands::ProductionSite, productionsite, &m_building)) {
-			// NOCOM(#kxq): pull out the dynamic_cast (replace it through an upcast though) and check if the variable is NULL.
-			// you avoid one cast and one if statement
-			if (not dynamic_cast<const Widelands::MilitarySite *>(productionsite)) {
+			if (upcast(const Widelands::MilitarySite, ms, productionsite))
+			{
+				if (Widelands::MilitarySite::kPrefersHeroes == ms->get_soldier_preference())
+				{
+					UI::Button * cs_btn =
+					new UI::Button
+					(capsbuttons, "rookies", 0, 0, 34, 34,
+						g_gr->images().get("pics/but4.png"),
+						// NOCOM(#kxq): Rename the images to rookies and heroes as well.
+						g_gr->images().get("pics/msite_prefer_cheap.png"),
+						_("Prefer rookies"));
+					cs_btn->sigclicked.connect
+					(boost::bind(&Building_Window::act_prefer_rookies, boost::ref(*this)));
+					capsbuttons->add (cs_btn, UI::Box::AlignCenter);
+				}
+				else
+				{
+					UI::Button * cs_btn =
+					new UI::Button
+					(capsbuttons, "heroes", 0, 0, 34, 34,
+						g_gr->images().get("pics/but4.png"),
+						g_gr->images().get("pics/msite_prefer_skilled.png"),
+						_("Prefer heroes"));
+					cs_btn->sigclicked.connect
+					(boost::bind(&Building_Window::act_prefer_heroes, boost::ref(*this)));
+					capsbuttons->add (cs_btn, UI::Box::AlignCenter);
+				}
+			}
+			else // is not a MilitarySite (but is still a productionsite)
+			{
 				const bool is_stopped = productionsite->is_stopped();
 				UI::Button * stopbtn =
 					new UI::Button
@@ -189,38 +216,6 @@ void Building_Window::create_capsbuttons(UI::Box * capsbuttons)
 				UI::Panel * spacer = new UI::Panel(capsbuttons, 0, 0, 17, 34);
 				capsbuttons->add(spacer, UI::Box::AlignCenter);
 			}
-			else // is a military site
-			{
-				upcast(const Widelands::MilitarySite, ms, productionsite);
-				if (ms) // NOCOM(#kxq): you should not need this one, see above
-				{
-					if (ms->preferringSkilledSoldiers())
-					{
-						UI::Button * cs_btn =
-						new UI::Button
-						(capsbuttons, "rookies", 0, 0, 34, 34,
-							g_gr->images().get("pics/but4.png"),
-							// NOCOM(#kxq): Rename the images to rookies and heroes as well.
-							g_gr->images().get("pics/msite_prefer_cheap.png"),
-							_("Prefer rookies"));
-						cs_btn->sigclicked.connect
-						(boost::bind(&Building_Window::act_prefer_cheap_soldiers, boost::ref(*this)));
-						capsbuttons->add (cs_btn, UI::Box::AlignCenter);
-					}
-					else
-					{
-						UI::Button * cs_btn =
-						new UI::Button
-						(capsbuttons, "heroes", 0, 0, 34, 34,
-							g_gr->images().get("pics/but4.png"),
-							g_gr->images().get("pics/msite_prefer_skilled.png"),
-							_("Prefer heroes"));
-						cs_btn->sigclicked.connect
-						(boost::bind(&Building_Window::act_prefer_skilled_soldiers, boost::ref(*this)));
-						capsbuttons->add (cs_btn, UI::Box::AlignCenter);
-					}
-				} // if-upcast-to-milsite-succeeded
-			} // else branch of if is-a-non-milsite
 		} // upcast to productionsite
 
 		if (m_capscache & Widelands::Building::PCap_Enhancable) {
@@ -415,8 +410,7 @@ void Building_Window::act_start_stop()
 	die();
 }
 
-// NOCOM(#kxq): rename to rookie
-void Building_Window::act_prefer_cheap_soldiers()
+void Building_Window::act_prefer_rookies()
 {
 	if (upcast(const Widelands::MilitarySite, ms, &m_building))
 		igbase().game().send_player_militarysite_set_soldier_preference
@@ -426,8 +420,7 @@ void Building_Window::act_prefer_cheap_soldiers()
 }
 
 void
-// NOCOM(#kxq): rename to heroes
-Building_Window::act_prefer_skilled_soldiers()
+Building_Window::act_prefer_heroes()
 {
 	if (upcast(const Widelands::MilitarySite, ms, &m_building))
 		igbase().game().send_player_militarysite_set_soldier_preference

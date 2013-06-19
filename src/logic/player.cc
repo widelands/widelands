@@ -594,25 +594,11 @@ void Player::start_stop_building(PlayerImmovable & imm) {
 			productionsite->set_stopped(!productionsite->is_stopped());
 }
 
-// NOCOM(#kxq): this method should just hand through to the militarysite, another reason to only have one
-// setter in the militarysite.
 void Player::military_site_set_soldier_preference(PlayerImmovable & imm, uint8_t m_soldier_preference)
 {
 	if (&imm.owner() == this)
-	{
 		if (upcast(MilitarySite, milsite, &imm))
-		{
-			if (m_soldier_preference == MilitarySite::kPrefersRookies)
-				milsite->preferCheapSoldiers();
-			else
-			if (m_soldier_preference == MilitarySite::kPrefersHeroes)
-				milsite->preferSkilledSoldiers();
-			else
-				log
-				("player.cc: Error: Player::military_site_set_soldier_preference(): traintype %d not known! \n",
-				m_soldier_preference);
-		}
-	}
+			milsite->set_soldier_preference(static_cast<MilitarySite::SoldierPreference>(m_soldier_preference));
 }
 
 

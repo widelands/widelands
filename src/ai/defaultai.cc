@@ -1887,7 +1887,7 @@ bool DefaultAI::check_militarysites(int32_t gametime)
 		// same economy where the thrown out soldiers can go to.
 		if (ms->economy().warehouses().size()) {
 			uint32_t const j = ms->soldierCapacity();
-			if (not (ms->preferringCheapSoldiers()))
+			if (MilitarySite::kPrefersRookies != ms->get_soldier_preference())
 			{
 					game().send_player_militarysite_set_soldier_preference(*ms, MilitarySite::kPrefersRookies);
 			}
@@ -1971,7 +1971,7 @@ bool DefaultAI::check_militarysites(int32_t gametime)
 		uint32_t const k = ms->soldierCapacity();
 		if (j > k)
 			game().send_player_change_soldier_capacity(*ms, j - k);
-		if (not (ms->preferringSkilledSoldiers()))
+		if (MilitarySite::kPrefersHeroes != ms->get_soldier_preference())
 			game().send_player_militarysite_set_soldier_preference(*ms, MilitarySite::kPrefersHeroes);
 		changed = true;
 	}

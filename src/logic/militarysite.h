@@ -113,13 +113,12 @@ public:
 
 	void reinit_after_conqueration(Game &);
 
-	void update_soldier_request();
+	void update_soldier_request(bool i = false);
 
-	void preferSkilledSoldiers();
-	void preferCheapSoldiers();
-
-	bool preferringSkilledSoldiers() const;
-	bool preferringCheapSoldiers() const;
+	void set_soldier_preference(SoldierPreference);
+	SoldierPreference get_soldier_preference() const {
+			return m_soldier_preference;
+	}
 
 protected:
 	void conquer_area(Editor_Game_Base &);
@@ -140,9 +139,9 @@ private:
 	bool update_upgrade_requirements();
 	void update_normal_soldier_request();
 	void update_upgrade_soldier_request();
-	int incorporateUpgradedSoldier(Editor_Game_Base & game, Soldier & s);
-	void update_soldier_request_impl(bool incd);
-	bool drop_weakest_soldier(bool new_has_arrived, Soldier * s);
+	bool incorporateUpgradedSoldier(Editor_Game_Base & game, Soldier & s);
+	Soldier * find_least_suited_soldier();
+	bool drop_least_suited_soldier(bool new_has_arrived, Soldier * s);
 
 
 private:
