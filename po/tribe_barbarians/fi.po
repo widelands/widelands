@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4208\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2013-03-09 16:57+0000\n"
+"POT-Creation-Date: 2013-06-16 09:11+0000\n"
 "PO-Revision-Date: 2011-03-21 20:26+0000\n"
 "Last-Translator: Jari Hautio <Unknown>\n"
 "Language-Team: Finnish <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-03-10 04:34+0000\n"
-"X-Generator: Launchpad (build 16523)\n"
+"X-Launchpad-Export-Date: 2013-06-17 05:11+0000\n"
+"X-Generator: Launchpad (build 16667)\n"
 "X-Poedit-Country: FINLAND\n"
 "X-Poedit-Language: Finnish\n"
 "X-Poedit-SourceCharset: utf-8\n"
@@ -2266,8 +2266,8 @@ msgstr ""
 msgid "Shovel"
 msgstr "Lapio"
 
-#: ../../tribes/barbarians/battlearena/conf:28
-#: ../../tribes/barbarians/trainingscamp/conf:36
+#: ../../tribes/barbarians/battlearena/conf:29
+#: ../../tribes/barbarians/trainingscamp/conf:37
 msgid "Sleep"
 msgstr "Lepää"
 
@@ -3011,11 +3011,11 @@ msgstr ""
 msgid "Upgrade cost:"
 msgstr ""
 
-#: ../../tribes/barbarians/trainingscamp/conf:37
+#: ../../tribes/barbarians/trainingscamp/conf:38
 msgid "Upgrade soldier attack 0"
 msgstr "Paranna sotilaan hyökkäystä (0)"
 
-#: ../../tribes/barbarians/trainingscamp/conf:38
+#: ../../tribes/barbarians/trainingscamp/conf:39
 msgid ""
 "Upgrade soldier attack 0 (only for compatibility with old savegames "
 "(build13))"
@@ -3023,11 +3023,11 @@ msgstr ""
 "Paranna sotilaan hyökkäystä (0) (vain tallennustiedostojen taaksepäin "
 "yhteensopivuuden varalta (build13))"
 
-#: ../../tribes/barbarians/trainingscamp/conf:39
+#: ../../tribes/barbarians/trainingscamp/conf:40
 msgid "Upgrade soldier attack 1"
 msgstr "Paranna sotilaan hyökkäystä (1)"
 
-#: ../../tribes/barbarians/trainingscamp/conf:40
+#: ../../tribes/barbarians/trainingscamp/conf:41
 msgid ""
 "Upgrade soldier attack 1 (only for compatibility with old savegames "
 "(build13))"
@@ -3035,11 +3035,11 @@ msgstr ""
 "Paranna sotilaan hyökkäystä (1) (vain tallennustiedostojen taaksepäin "
 "yhteensopivuuden varalta (build13))"
 
-#: ../../tribes/barbarians/trainingscamp/conf:41
+#: ../../tribes/barbarians/trainingscamp/conf:42
 msgid "Upgrade soldier attack 2"
 msgstr "Paranna sotilaan hyökkäystä (2)"
 
-#: ../../tribes/barbarians/trainingscamp/conf:42
+#: ../../tribes/barbarians/trainingscamp/conf:43
 msgid ""
 "Upgrade soldier attack 2 (only for compatibility with old savegames "
 "(build13))"
@@ -3047,11 +3047,11 @@ msgstr ""
 "Paranna sotilaan hyökkäystä (2) (vain tallennustiedostojen taaksepäin "
 "yhteensopivuuden varalta (build13))"
 
-#: ../../tribes/barbarians/trainingscamp/conf:43
+#: ../../tribes/barbarians/trainingscamp/conf:44
 msgid "Upgrade soldier attack 3"
 msgstr "Paranna sotilaan hyökkäystä (3)"
 
-#: ../../tribes/barbarians/trainingscamp/conf:44
+#: ../../tribes/barbarians/trainingscamp/conf:45
 msgid ""
 "Upgrade soldier attack 3 (only for compatibility with old savegames "
 "(build13))"
@@ -3059,11 +3059,11 @@ msgstr ""
 "Paranna sotilaan hyökkäystä (3) (vain tallennustiedostojen taaksepäin "
 "yhteensopivuuden varalta (build13))"
 
-#: ../../tribes/barbarians/trainingscamp/conf:45
+#: ../../tribes/barbarians/trainingscamp/conf:46
 msgid "Upgrade soldier attack 4"
 msgstr "Paranna sotilaan hyökkäystä (4)"
 
-#: ../../tribes/barbarians/trainingscamp/conf:46
+#: ../../tribes/barbarians/trainingscamp/conf:47
 msgid ""
 "Upgrade soldier attack 4 (only for compatibility with old savegames "
 "(build13))"
@@ -3071,33 +3071,33 @@ msgstr ""
 "Paranna sotilaan hyökkäystä (4) (vain tallennustiedostojen taaksepäin "
 "yhteensopivuuden varalta (build13))<"
 
-#: ../../tribes/barbarians/battlearena/conf:29
+#: ../../tribes/barbarians/battlearena/conf:30
 msgid "Upgrade soldier evade 0"
 msgstr "Paranna sotilaan välttökykyä (0)"
 
-#: ../../tribes/barbarians/battlearena/conf:30
+#: ../../tribes/barbarians/battlearena/conf:31
 msgid ""
 "Upgrade soldier evade 0 (only for compatibility with old savegames (build13))"
 msgstr ""
 "Paranna sotilaan välttökykyä (0) (vain tallennustiedostojen taaksepäin "
 "yhteensopivuuden varalta (build13))"
 
-#: ../../tribes/barbarians/battlearena/conf:31
+#: ../../tribes/barbarians/battlearena/conf:32
 msgid "Upgrade soldier evade 1"
 msgstr "Paranna sotilaan välttökykyä (1)"
 
-#: ../../tribes/barbarians/battlearena/conf:32
+#: ../../tribes/barbarians/battlearena/conf:33
 msgid ""
 "Upgrade soldier evade 1 (only for compatibility with old savegames (build13))"
 msgstr ""
 "Paranna sotilaan välttökykyä (1) (vain tallennustiedostojen taaksepäin "
 "yhteensopivuuden varalta (build13))"
 
-#: ../../tribes/barbarians/trainingscamp/conf:47
+#: ../../tribes/barbarians/trainingscamp/conf:48
 msgid "Upgrade soldier hitpoints 0"
 msgstr "Paranna sotilaan voimapisteitä (0)"
 
-#: ../../tribes/barbarians/trainingscamp/conf:48
+#: ../../tribes/barbarians/trainingscamp/conf:49
 msgid ""
 "Upgrade soldier hitpoints 0 (only for compatibility with old savegames "
 "(build13))"
@@ -3105,11 +3105,11 @@ msgstr ""
 "Paranna sotilaan voimapisteitä (0) (vain tallennustiedostojen taaksepäin "
 "yhteensopivuuden varalta (build13))"
 
-#: ../../tribes/barbarians/trainingscamp/conf:49
+#: ../../tribes/barbarians/trainingscamp/conf:50
 msgid "Upgrade soldier hitpoints 1"
 msgstr "Paranna sotilaan voimapisteitä (1)"
 
-#: ../../tribes/barbarians/trainingscamp/conf:50
+#: ../../tribes/barbarians/trainingscamp/conf:51
 msgid ""
 "Upgrade soldier hitpoints 1 (only for compatibility with old savegames "
 "(build13))"
@@ -3117,11 +3117,11 @@ msgstr ""
 "Paranna sotilaan voimapisteitä (1) (vain tallennustiedostojen taaksepäin "
 "yhteensopivuuden varalta (build13))"
 
-#: ../../tribes/barbarians/trainingscamp/conf:51
+#: ../../tribes/barbarians/trainingscamp/conf:52
 msgid "Upgrade soldier hitpoints 2"
 msgstr "Paranna sotilaan voimapisteitä (2)"
 
-#: ../../tribes/barbarians/trainingscamp/conf:52
+#: ../../tribes/barbarians/trainingscamp/conf:53
 msgid ""
 "Upgrade soldier hitpoints 2 (only for compatibility with old savegames "
 "(build13))"
