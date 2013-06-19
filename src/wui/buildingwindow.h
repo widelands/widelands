@@ -52,6 +52,7 @@ struct Building_Window : public UI::Window {
 
 	virtual void draw(RenderTarget &);
 	virtual void think();
+	void set_avoid_fastclick(bool afc) {m_avoid_fastclick = afc;}
 
 protected:
 	UI::Tab_Panel * get_tabs() {return m_tabs;}
@@ -92,6 +93,7 @@ private:
 
 	Overlay_Manager::Job_Id m_workarea_job_id;
 	const Image* workarea_cumulative_pic[NUMBER_OF_WORKAREA_PICS];
+	bool m_avoid_fastclick;
 };
 
 #endif // _BUILDINGWINDOW_H_

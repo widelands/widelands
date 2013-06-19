@@ -90,8 +90,9 @@ struct Ship : Bob {
 	void withdraw_items(Game & game, PortDock & pd, std::vector<ShippingItem> & items);
 	void add_item(Game &, const ShippingItem & item);
 
-	void show_window(Interactive_GameBase & igb);
+	void show_window(Interactive_GameBase &, bool avoid_fastclick = false);
 	void close_window();
+	void refresh_window(Interactive_GameBase &);
 
 	// A ship with task expedition can be in four states: EXP_WAITING, EXP_SCOUTING,
 	// EXP_FOUNDPORTSPACE or EXP_COLONIZING in the first states, the owning player of this ship can

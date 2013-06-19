@@ -21,13 +21,16 @@
 
 #include "ui_basic/box.h"
 
+#include "economy/economy.h"
 #include "economy/portdock.h"
 #include "economy/ware_instance.h"
 #include "graphic/graphic.h"
 #include "interactive_gamebase.h"
 #include "itemwaresdisplay.h"
+#include "logic/player.h"
 #include "logic/warehouse.h"
 #include "logic/worker.h"
+#include "upcast.h"
 
 static const char pic_goto[] = "pics/menu_ship_goto.png";
 static const char pic_destination[] = "pics/menu_ship_destination.png";
@@ -222,17 +225,24 @@ void ShipWindow::think()
 		 * - The "explore island's coast" buttons are only active, if a coast is in vision range (no matter if
 		 *   in waiting or already expedition/scouting mode)
 		 */
-		m_btn_construct_port->set_enabled(state == Ship::EXP_FOUNDPORTSPACE);
+
+		Interactive_Base * ib = m_ship.get_economy()->owner().egbase().get_ibase();
+		bool can_act = false;
+		if (upcast(Interactive_GameBase, igb, ib))
+			can_act = igb->can_act(m_ship.get_economy()->owner().player_number());
+
+		m_btn_construct_port->set_enabled(can_act && (state == Ship::EXP_FOUNDPORTSPACE));
 		bool coast_nearby = false;
 		bool moveable = false;
 		for (Direction dir = 1; dir <= LAST_DIRECTION; ++dir) {
 			// NOTE buttons are saved in the format DIRECTION - 1
-			m_btn_scout[dir - 1]->set_enabled(m_ship.exp_dir_swimable(dir) && (state != Ship::EXP_COLONIZING));
+			m_btn_scout[dir - 1]->set_enabled
+				(can_act && m_ship.exp_dir_swimable(dir) && (state != Ship::EXP_COLONIZING));
 			coast_nearby |= !m_ship.exp_dir_swimable(dir);
 			moveable |= m_ship.exp_dir_swimable(dir);
 		}
-		m_btn_explore_island_cw ->set_enabled(coast_nearby && (state != Ship::EXP_COLONIZING));
-		m_btn_explore_island_ccw->set_enabled(coast_nearby && (state != Ship::EXP_COLONIZING));
+		m_btn_explore_island_cw ->set_enabled(can_act && coast_nearby && (state != Ship::EXP_COLONIZING));
+		m_btn_explore_island_ccw->set_enabled(can_act && coast_nearby && (state != Ship::EXP_COLONIZING));
 	}
 }
 
@@ -300,7 +310,7 @@ void ShipWindow::act_explore_island(bool cw) {
  * Show the window for this ship: either bring it to the front,
  * or create it.
  */
-void Ship::show_window(Interactive_GameBase & igb)
+void Ship::show_window(Interactive_GameBase & igb, bool avoid_fastclick)
 {
 	if (m_window) {
 		if (m_window->is_minimal())
@@ -308,7 +318,8 @@ void Ship::show_window(Interactive_GameBase & igb)
 		m_window->move_to_top();
 	} else {
 		new ShipWindow(igb, *this);
-		m_window->warp_mouse_to_fastclick_panel();
+		if (!avoid_fastclick)
+			m_window->warp_mouse_to_fastclick_panel();
 	}
 }
 
@@ -318,6 +329,19 @@ void Ship::show_window(Interactive_GameBase & igb)
 void Ship::close_window()
 {
 	delete m_window;
+}
+
+/**
+ * refreshs the window of this ship - useful if some ui elements have to be removed or added
+ */
+void Ship::refresh_window(Interactive_GameBase & igb) {
+	// Only do something if there is actually a window
+	if (m_window) {
+		Point window_position = m_window->get_pos();
+		close_window();
+		show_window(igb, true);
+		m_window->set_pos(window_position);
+	}
 }
 
 } // namespace Widelands

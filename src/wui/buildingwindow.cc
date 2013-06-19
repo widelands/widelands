@@ -53,7 +53,8 @@ Building_Window::Building_Window
 		 b.descname()),
 	m_registry(registry),
 	m_building       (b),
-	m_workarea_job_id(Overlay_Manager::Job_Id::Null())
+	m_workarea_job_id(Overlay_Manager::Job_Id::Null()),
+	m_avoid_fastclick(false)
 {
 	delete m_registry;
 	m_registry = this;
@@ -138,7 +139,8 @@ void Building_Window::think()
 		m_capsbuttons->free_children();
 		create_capsbuttons(m_capsbuttons);
 		move_out_of_the_way();
-		warp_mouse_to_fastclick_panel();
+		if (!m_avoid_fastclick)
+			warp_mouse_to_fastclick_panel();
 		m_caps_setup = true;
 	}
 
@@ -420,7 +422,8 @@ void Building_Window::act_start_or_cancel_expedition() {
 		if (warehouse->get_portdock())
 			igbase().game().send_player_start_or_cancel_expedition(m_building);
 
-	die();
+	// No need to die here - as soon as the request is handled, the UI will get updated by the portdock
+	//die();
 }
 
 /**
@@ -558,3 +561,4 @@ void Building_Window::clicked_goto()
 {
 	igbase().move_view_to(building().get_position());
 }
+

@@ -183,8 +183,9 @@ public:
 	virtual bool burn_on_destroy();
 	virtual void destroy(Editor_Game_Base &);
 
-	void show_options(Interactive_GameBase &);
+	void show_options(Interactive_GameBase &, bool avoid_fastclick = false);
 	void hide_options();
+	void refresh_options(Interactive_GameBase &);
 
 	virtual bool fetch_from_flag(Game &);
 	virtual bool get_building_work(Game &, Worker &, bool success);

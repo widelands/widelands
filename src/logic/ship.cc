@@ -36,6 +36,7 @@
 #include "player.h"
 #include "tribe.h"
 #include "warehouse.h"
+#include "wui/interactive_gamebase.h"
 
 namespace Widelands {
 
@@ -506,6 +507,8 @@ void Ship::ship_update_idle(Game & game, Bob::State & state)
 			}
 			if (m_items.empty())
 				m_ship_state = TRANSPORT; // That's it, expedition finished
+				if (upcast(Interactive_GameBase, igb, game.get_ibase()))
+					refresh_window(*igb);
 			return start_task_idle(game, descr().main_animation(), 1500); // unload the next item
 		}
 

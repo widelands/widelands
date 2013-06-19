@@ -31,6 +31,7 @@
 #include "map_io/widelands_map_map_object_loader.h"
 #include "map_io/widelands_map_map_object_saver.h"
 #include "ware_instance.h"
+#include "wui/interactive_gamebase.h"
 
 namespace Widelands {
 
@@ -338,6 +339,9 @@ void PortDock::ship_arrived(Game & game, Ship & ship)
 			// The expedition goods are now on the ship, so from now on it is independent from the port
 			// and thus we switch the port to normal, so we could even start a new expedition,
 			cancel_expedition(game);
+			if (upcast(Interactive_GameBase, igb, game.get_ibase()))
+				ship.refresh_window(*igb);
+			return m_fleet->update(game);
 		}
 
 	if (ship.get_nritems() < ship.get_capacity() && !m_waiting.empty()) {
@@ -436,6 +440,10 @@ void PortDock::start_expedition() {
 			 owner().tribe().safe_worker_index("builder"),
 			 Warehouse::request_expedition_worker_callback,
 			 wwWORKER);
+
+	// Update the user interface
+	if (upcast(Interactive_GameBase, igb, owner().egbase().get_ibase()))
+		m_warehouse->refresh_options(*igb);
 }
 
 
@@ -490,6 +498,10 @@ void PortDock::cancel_expedition(Game & game) {
 	}
 	// Reset expedition workers list
 	ew.resize(0);
+
+	// Update the user interface
+	if (upcast(Interactive_GameBase, igb, owner().egbase().get_ibase()))
+		m_warehouse->refresh_options(*igb);
 }
 
 
