@@ -616,6 +616,9 @@ void Fleet::act(Game & game, uint32_t /* data */)
 					break;
 				}
 			}
+			// If we end here, we just send the ship to the first port - maybe the old port got destroyed
+			assert(!m_ports.empty());
+			ship.set_destination(game, *m_ports[0]);
 		}
 	}
 

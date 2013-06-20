@@ -348,7 +348,15 @@ void PortDock::ship_arrived(Game & game, Ship & ship)
 		uint32_t nrload = std::min<uint32_t>(m_waiting.size(), ship.get_capacity() - ship.get_nritems());
 
 		while (nrload--) {
-			ship.add_item(game, m_waiting.back());
+			// Check if the item has still a valid destination
+			if (!m_waiting.back().get_destination(game)) {
+				// Destination is valid, so we load the item onto the ship
+				ship.add_item(game, m_waiting.back());
+			} else {
+				// Obviously the item has no valid destination anymore, so we just carry it back in the warehouse
+				m_waiting.back().set_location(game, m_warehouse);
+				m_waiting.back().end_shipping(game);
+			}
 			m_waiting.pop_back();
 		}
 
