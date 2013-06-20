@@ -287,7 +287,6 @@ void ShipWindow::act_construct_port() {
 	if (!m_ship.exp_port_spaces() || m_ship.exp_port_spaces()->empty())
 		return;
 	m_igbase.game().send_player_ship_construct_port(m_ship, m_ship.exp_port_spaces()->front());
-	die();
 }
 
 /// Explores the island cw or ccw
