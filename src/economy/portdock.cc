@@ -349,7 +349,7 @@ void PortDock::ship_arrived(Game & game, Ship & ship)
 
 		while (nrload--) {
 			// Check if the item has still a valid destination
-			if (!m_waiting.back().get_destination(game)) {
+			if (m_waiting.back().get_destination(game)) {
 				// Destination is valid, so we load the item onto the ship
 				ship.add_item(game, m_waiting.back());
 			} else {

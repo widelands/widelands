@@ -608,17 +608,21 @@ void Fleet::act(Game & game, uint32_t /* data */)
 		Ship & ship = **shipit.current;
 		if (ship.get_nritems() > 0 && !ship.get_destination(game)) {
 			molog("Ship %u has items\n", ship.serial());
+			bool found_dst = false;
 			container_iterate(std::vector<ShippingItem>, ship.m_items, it) {
 				PortDock * dst = it->get_destination(game);
 				if (dst) {
 					molog("... sending to portdock %u\n", dst->serial());
 					ship.set_destination(game, *dst);
+					found_dst = true;
 					break;
 				}
 			}
 			// If we end here, we just send the ship to the first port - maybe the old port got destroyed
-			assert(!m_ports.empty());
-			ship.set_destination(game, *m_ports[0]);
+			if (!found_dst) {
+				assert(!m_ports.empty());
+				ship.set_destination(game, *m_ports[0]);
+			}
 		}
 	}
 
