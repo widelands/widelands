@@ -41,6 +41,7 @@
 
 #include <clocale>
 #include <cstdio>
+#include "boost/foreach.hpp"
 
 namespace Widelands {
 
@@ -199,11 +200,8 @@ void MilitarySite::cleanup(Editor_Game_Base & egbase)
 
 	// Note that removing workers during ProductionSite::cleanup can generate
 	// new requests; that's why we delete it at the end of this function.
-	delete m_normal_soldier_request;
-	m_normal_soldier_request = 0;
-	// NOCOM(#kxq): consider using a boost::scoped_ptr? This code would read a little cleaner.
-	delete m_upgrade_soldier_request;
-	m_upgrade_soldier_request = 0;
+	m_normal_soldier_request.reset();
+	m_upgrade_soldier_request.reset();
 }
 
 
@@ -279,14 +277,13 @@ MilitarySite::find_least_suited_soldier()
 	const int32_t multiplier = kPrefersHeroes == m_soldier_preference ? -1:1;
 	int worst_soldier_level = INT_MIN;
 	Soldier * worst_soldier = NULL;
-	// NOCOM(#kxq): Use boost foreach here, you never use the index.
-	for (uint32_t i = 0; i < present.size(); ++i)
+	BOOST_FOREACH (Soldier * sld, present)
 	{
-		int this_soldier_level = multiplier * static_cast<int> (present[i]->get_level(atrTotal));
+		int this_soldier_level = multiplier * static_cast<int> (sld->get_level(atrTotal));
 		if (this_soldier_level > worst_soldier_level)
 		{
 			worst_soldier_level = this_soldier_level;
-			worst_soldier = present[i];
+			worst_soldier = sld;
 		}
 	}
 	return worst_soldier;
@@ -323,13 +320,15 @@ MilitarySite::drop_least_suited_soldier(bool new_soldier_has_arrived, Soldier * 
 			int32_t old_level = kickoutCandidate->get_level(atrTotal);
 			int32_t new_level = newguy->get_level(atrTotal);
 			if (kPrefersHeroes == m_soldier_preference && old_level >= new_level)
+			{
 				return false;
+			}
 			else
 			if (kPrefersRookies == m_soldier_preference && old_level <= new_level)
+			{
 				return false;
+			}
 		}
-		else // should never happen
-			log("MilitarySite::drop_least_suited_soldier: internal error\n");
 
 		// Now I know that the new guy is worthy.
 		if (NULL != kickoutCandidate)
@@ -352,7 +351,10 @@ MilitarySite::drop_least_suited_soldier(bool new_soldier_has_arrived, Soldier * 
 bool
 MilitarySite::incorporateUpgradedSoldier(Editor_Game_Base & egbase, Soldier & s)
 {
-	if (drop_least_suited_soldier(true, &s))
+	uint32_t const stationed = stationedSoldiers().size();
+
+	// Call to drop_least routine has side effects: it tries to drop a soldier. Order is important!
+	if (stationed < m_capacity || drop_least_suited_soldier(true, &s))
 	{
 		Game & game = ref_cast<Game, Editor_Game_Base>(egbase);
 		s.set_location(this);
@@ -392,19 +394,18 @@ void MilitarySite::update_normal_soldier_request()
 
 	if (stationed < m_capacity) {
 		if (!m_normal_soldier_request) {
-			m_normal_soldier_request =
-				new Request
+			m_normal_soldier_request.reset
+				(new Request
 					(*this,
 					 tribe().safe_worker_index("soldier"),
 					 MilitarySite::request_soldier_callback,
-					 wwWORKER);
+					 wwWORKER));
 			m_normal_soldier_request->set_requirements (m_soldier_requirements);
 		}
 
 		m_normal_soldier_request->set_count(m_capacity - stationed);
 	} else {
-		delete m_normal_soldier_request;
-		m_normal_soldier_request = 0;
+		m_normal_soldier_request.reset();
 	}
 
 	if (m_capacity < present.size()) {
@@ -430,15 +431,12 @@ void MilitarySite::update_normal_soldier_request()
 void MilitarySite::update_upgrade_soldier_request()
 {
 	bool reqch = update_upgrade_requirements();
-	// NOCOM(#kxq): m_soldier_requirements and the return value of update_upgrade_requirements
-	// have the same meaning, nor? Why not return m_soldier_upgrade_try from the method and get rid of
-	// the variable in the class?
 	if (!m_soldier_upgrade_try)
 		return;
 
 	bool do_rebuild_request = reqch;
 
-	if (NULL != m_upgrade_soldier_request)
+	if (m_upgrade_soldier_request)
 	{
 		if (!(m_upgrade_soldier_request->is_open()))
 			// If a replacement is already walking this way, let's not change our minds.
@@ -451,18 +449,12 @@ void MilitarySite::update_upgrade_soldier_request()
 
 	if (do_rebuild_request)
 	{
-		if (NULL != m_upgrade_soldier_request)
-		{
-			delete m_upgrade_soldier_request;
-			m_upgrade_soldier_request = NULL;
-		}
-
-		m_upgrade_soldier_request =
-				new Request
+		m_upgrade_soldier_request.reset
+				(new Request
 				(*this,
 				tribe().safe_worker_index("soldier"),
 				MilitarySite::request_soldier_callback,
-				wwWORKER);
+				wwWORKER));
 
 
 		m_upgrade_soldier_request->set_requirements (m_soldier_upgrade_requirements);
@@ -492,27 +484,23 @@ void MilitarySite::update_soldier_request(bool incd)
 
 	if (m_doing_upgrade_request)
 	{
-		if (incd) // update requests always ask for one soldier at time!
+		if (incd && m_upgrade_soldier_request) // update requests always ask for one soldier at time!
 		{
-			delete m_upgrade_soldier_request;
-			m_upgrade_soldier_request = NULL;
+			m_upgrade_soldier_request.reset();
 		}
 		if (capacity > stationed)
 		{
 			// Somebody is killing my soldiers in the middle of upgrade
 			// or I have kicked out his predecessor already.
 			if
-			((NULL != m_upgrade_soldier_request)
-				&&
-				(m_upgrade_soldier_request->is_open()
-					|| 0 == m_upgrade_soldier_request->get_count()))
+				((m_upgrade_soldier_request)
+				&& (m_upgrade_soldier_request->is_open() || 0 == m_upgrade_soldier_request->get_count()))
 			{
 				// Economy was not able to find the soldiers I need.
 				// I can safely drop the upgrade request and go to fill mode.
-				delete m_upgrade_soldier_request;
-				m_upgrade_soldier_request = NULL;
+				m_upgrade_soldier_request.reset();
 			}
-			if (NULL == m_upgrade_soldier_request)
+			if (! m_upgrade_soldier_request)
 			{
 				//phoo -- I can safely request new soldiers.
 				m_doing_upgrade_request = false;
@@ -520,39 +508,33 @@ void MilitarySite::update_soldier_request(bool incd)
 			}
 			// else -- ohno please help me! Player is in trouble -- evil grin
 		}
-		// NOCOM(#kxq): consider pulling some of the branches in helper methods of their own,
-		// that way you can get rid of the branching comments as well
 		else // military site is full or overfull
 		if (capacity < stationed) // player is reducing capacity
 		{
-			if (m_upgrade_soldier_request)
-				delete m_upgrade_soldier_request;
-			m_upgrade_soldier_request = NULL;
-			m_doing_upgrade_request = false;
-			update_normal_soldier_request();
+			drop_least_suited_soldier(false, NULL);
 		}
 		else // capacity == stationed size
 		{
-			if (NULL != m_upgrade_soldier_request)
+			if
+				(m_upgrade_soldier_request
+				&& (!(m_upgrade_soldier_request->is_open()))
+				&& 1 == m_upgrade_soldier_request->get_count()
+				&& (!incd))
 			{
-				if (!m_upgrade_soldier_request -> is_open())
-					// A new guy is arriving -- let's make room now.
-					drop_least_suited_soldier(false, NULL);
-				else
-					// We should hit this only if Requirement changed -- are there such paths?
-					update_upgrade_soldier_request();
+				drop_least_suited_soldier(false, NULL);
 			}
 			else
+			{
 				update_upgrade_soldier_request();
-
+			}
 		}
 	}
 	else // not doing upgrade request
 	{
-		if ((capacity != stationed) or (NULL != m_normal_soldier_request))
+		if ((capacity != stationed) or (m_normal_soldier_request))
 			update_normal_soldier_request();
 
-		if ((capacity == stationed) and (NULL == m_normal_soldier_request))
+		if ((capacity == stationed) and (! m_normal_soldier_request))
 		{
 			int32_t pss = presentSoldiers().size();
 			if (pss == capacity)
@@ -583,7 +565,7 @@ void MilitarySite::act(Game & game, uint32_t const data)
 	ProductionSite::act(game, data);
 
 	const int32_t timeofgame = game.get_gametime();
-	if (NULL != m_normal_soldier_request && NULL != m_upgrade_soldier_request)
+	if (m_normal_soldier_request && m_upgrade_soldier_request)
 	{
 		throw wexception("MilitarySite::act: Two soldier requests are ongoing -- should never happen!\n");
 	}
@@ -1097,17 +1079,13 @@ MilitarySite::update_upgrade_requirements()
 
 	if (maxchanged or minchanged)
 	{
-		if (NULL == m_normal_soldier_request or (m_normal_soldier_request->is_open()))
+		if (m_upgrade_soldier_request && (m_upgrade_soldier_request->is_open()))
 		{
-			if (m_normal_soldier_request)
-			{
-				delete m_normal_soldier_request;
-				m_normal_soldier_request = 0;
-			}
-			m_soldier_upgrade_requirements = RequireAttribute(atrTotal, reqmin, reqmax);
-
-			return true;
+			m_upgrade_soldier_request.reset();
 		}
+		m_soldier_upgrade_requirements = RequireAttribute(atrTotal, reqmin, reqmax);
+
+		return true;
 	}
 
 	return false;

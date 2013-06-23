@@ -24,6 +24,7 @@
 #include "productionsite.h"
 #include "requirements.h"
 #include "soldiercontrol.h"
+#include <boost/scoped_ptr.hpp>
 
 namespace Widelands {
 
@@ -147,8 +148,8 @@ private:
 private:
 	Requirements m_soldier_requirements; // This is used to grab a bunch of soldiers: Anything goes
 	RequireAttribute m_soldier_upgrade_requirements; // This is used when exchanging soldiers.
-	Request    * m_normal_soldier_request;  // filling the site
-	Request    * m_upgrade_soldier_request; // seeking for a better soldier to replace the current one
+	boost::scoped_ptr<Request> m_normal_soldier_request;  // filling the site
+	boost::scoped_ptr<Request> m_upgrade_soldier_request; // seeking for better soldiers
 	bool m_didconquer;
 	uint32_t m_capacity;
 

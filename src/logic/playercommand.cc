@@ -535,9 +535,6 @@ void Cmd_MilitarySiteSetSoldierPreference::execute (Game & game)
 }
 
 #define PLAYER_CMD_SOLDIERPREFERENCE_VERSION 1
-// NOCOM(#kxq): This is quite dangerous :). I myself use NOCOM markers with
-// my user name and grep for them. Using FIXME makes it easier to miss.
-  // FIXME -- these are just placeholders ! Do not commit like this !
 void Cmd_MilitarySiteSetSoldierPreference::Write
 	(FileWrite & fw, Editor_Game_Base & egbase, Map_Map_Object_Saver & mos)
 {

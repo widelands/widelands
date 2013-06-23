@@ -684,40 +684,38 @@ void Map_Buildingdata_Data_Packet::read_militarysite
 		{
 			read_productionsite(militarysite, fr, game, mol);
 
-			delete militarysite.m_normal_soldier_request;
-			militarysite.m_normal_soldier_request = 0;
+			militarysite.m_normal_soldier_request.reset();
 
 			if (fr.Unsigned8()) {
-				militarysite.m_normal_soldier_request =
-					new Request
+				militarysite.m_normal_soldier_request.reset
+					(new Request
 						(militarysite,
 						 Ware_Index::First(),
 						 MilitarySite::request_soldier_callback,
-						 wwWORKER);
+						 wwWORKER));
 				militarysite.m_normal_soldier_request->Read(fr, game, mol);
 			}
 			if (rel17comp) // compatibility with release 17 savegames
-				militarysite.m_upgrade_soldier_request = NULL;
+				militarysite.m_upgrade_soldier_request.reset();
 			else
 				switch (fr.Unsigned8())
 				{
 					case 42:
-						militarysite.m_upgrade_soldier_request =
-							new Request
+						militarysite.m_upgrade_soldier_request.reset
+							(new Request
 								(militarysite,
-								 NULL == militarysite.m_normal_soldier_request ? Ware_Index::First()
+								 (!militarysite.m_normal_soldier_request) ? Ware_Index::First()
 								: militarysite.descr().tribe().safe_worker_index("soldier"),
 								MilitarySite::request_soldier_callback,
-								wwWORKER);
+								wwWORKER));
 						militarysite.m_upgrade_soldier_request->Read(fr, game, mol);
 						break;
 					case 55:
-						militarysite.m_upgrade_soldier_request = NULL;
+						militarysite.m_upgrade_soldier_request.reset();
 						break;
 					default:
-						log("widelands_map_buildingdata_data_packet.cc: ");
-						log("militarysite load error\n");
-						exit(1);
+						throw game_data_error
+						("widelands_map_buildingdata_data_packet.cc: militarysite load error\n");
 				}
 
 
@@ -1476,8 +1474,13 @@ void Map_Buildingdata_Data_Packet::write_militarysite
 	fw.Signed32(militarysite.m_nexthealtime);
 
 	if (militarysite.m_normal_soldier_request)
-	if (militarysite.m_upgrade_soldier_request)
-	  log("map_buildingdata_-data_packet: There is something fishy going on.. debug me please!\n");
+	{
+		if (militarysite.m_upgrade_soldier_request)
+			{
+				throw game_data_error
+				("Internal error in a MilitarySite -- cannot continue. Use previous autosave.");
+			}
+	}
 	fw.Unsigned16(militarysite.m_soldier_upgrade_requirements.getMin());
 	fw.Unsigned16(militarysite.m_soldier_upgrade_requirements.getMax());
 	fw.Unsigned8(militarysite.m_soldier_preference);
