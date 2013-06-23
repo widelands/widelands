@@ -561,7 +561,7 @@ void Fullscreen_Menu_LaunchMPG::load_previous_playerdata()
 		player_save_tribe[i - 1] = s.get_string("tribe");
 		player_save_ai   [i - 1] = s.get_string("ai");
 
-		snprintf(buf, sizeof(buf), "Player %u", i);
+		snprintf(buf, sizeof(buf), _("Player %u"), i);
 		infotext += buf;
 		if (player_save_tribe[i - 1].empty()) {
 			infotext += ":\n    ";
