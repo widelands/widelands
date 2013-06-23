@@ -1098,6 +1098,7 @@ MilitarySite::set_soldier_preference(MilitarySite::SoldierPreference p)
 {
 	assert (kPrefersHeroes == p || kPrefersRookies == p);
 	m_soldier_preference = p;
+	m_next_swap_soldiers_time = 0;
 }
 
 }
