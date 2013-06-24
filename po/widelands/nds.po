@@ -7,16 +7,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2013-06-16 11:11+0200\n"
-"PO-Revision-Date: 2013-06-16 17:20+0000\n"
+"POT-Creation-Date: 2013-06-23 19:28+0200\n"
+"PO-Revision-Date: 2013-06-23 16:43+0000\n"
 "Last-Translator: Nasenbaer <Unknown>\n"
 "Language-Team: Low German <nds@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2013-06-17 05:14+0000\n"
-"X-Generator: Launchpad (build 16667)\n"
+"X-Launchpad-Export-Date: 2013-06-24 04:36+0000\n"
+"X-Generator: Launchpad (build 16677)\n"
 
 #: ../../src/s2map.cc:222
 msgid "Bluebyte Settlers II Map. No comment defined!"
@@ -251,7 +251,7 @@ msgstr ""
 
 #: ../../src/wlapplication.cc:1872 ../../src/network/nethost.cc:2052
 msgid "Player"
-msgstr "Speler"
+msgstr "Speeler"
 
 #: ../../src/wlapplication.cc:2062 ../../src/network/nethost.cc:839
 #: ../../src/network/netclient.cc:200
@@ -578,7 +578,7 @@ msgstr "Buhelp"
 #: ../../src/editor/editorinteractive.cc:79
 #: ../../src/ui_fsmenu/launchMPG.cc:162
 msgid "Players"
-msgstr "Spelers"
+msgstr "Speelers"
 
 #: ../../src/editor/editorinteractive.cc:82
 msgid "Undo"
@@ -589,7 +589,7 @@ msgid "Redo"
 msgstr "Wedderhalen"
 
 #: ../../src/editor/editorinteractive.cc:189
-#: ../../src/editor/editorinteractive.cc:605
+#: ../../src/editor/editorinteractive.cc:609
 #, c-format
 msgid "Loading tribe: %s"
 msgstr ""
@@ -604,7 +604,7 @@ msgid "Loading world data"
 msgstr ""
 
 #: ../../src/editor/editorinteractive.cc:205
-#: ../../src/editor/editorinteractive.cc:609
+#: ../../src/editor/editorinteractive.cc:613
 msgid "Loading graphics..."
 msgstr ""
 
@@ -616,7 +616,7 @@ msgstr ""
 msgid "The Map is unsaved, do you really want to quit?"
 msgstr ""
 
-#: ../../src/editor/editorinteractive.cc:596
+#: ../../src/editor/editorinteractive.cc:600
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:185
 #: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:180
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:486
@@ -624,7 +624,7 @@ msgstr ""
 msgid "No Name"
 msgstr "Keen Naam"
 
-#: ../../src/editor/editorinteractive.cc:598
+#: ../../src/editor/editorinteractive.cc:602
 #: ../../src/ui_fsmenu/netsetup_lan.cc:198
 #: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:181
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:487
@@ -730,7 +730,7 @@ msgstr ""
 #: ../../src/map_io/widelands_map_player_names_and_tribes_data_packet.cc:81
 #, c-format
 msgid "player names and tribes: %s"
-msgstr ""
+msgstr "Speeler  Naam ün Volk: %s"
 
 #: ../../src/map_io/widelands_map_road_data_packet.cc:67
 #: ../../src/map_io/widelands_map_waredata_data_packet.cc:206
@@ -765,8 +765,8 @@ msgstr ""
 #: ../../src/game_io/game_interactive_player_data_packet.cc:78
 #: ../../src/game_io/game_game_class_data_packet.cc:44
 #: ../../src/game_io/game_player_info_data_packet.cc:143
-#: ../../src/economy/wares_queue.cc:289 ../../src/economy/portdock.cc:599
-#: ../../src/economy/fleet.cc:760
+#: ../../src/economy/wares_queue.cc:289 ../../src/economy/portdock.cc:619
+#: ../../src/economy/fleet.cc:767
 #: ../../src/economy/cmd_call_economy_balance.cc:86
 #: ../../src/economy/request.cc:242 ../../src/logic/replay.cc:117
 #: ../../src/logic/cmd_incorporate.cc:46 ../../src/logic/playercommand.cc:145
@@ -787,7 +787,7 @@ msgstr ""
 #: ../../src/logic/battle.cc:414 ../../src/logic/cmd_queue.cc:192
 #: ../../src/logic/critter_bob.cc:386 ../../src/logic/legacy.cc:428
 #: ../../src/logic/legacy.cc:486 ../../src/logic/requirements.cc:50
-#: ../../src/logic/ship.cc:823 ../../src/logic/cmd_luascript.cc:56
+#: ../../src/logic/ship.cc:826 ../../src/logic/cmd_luascript.cc:56
 #, c-format
 msgid "unknown/unhandled version %u"
 msgstr ""
@@ -817,7 +817,7 @@ msgstr ""
 #: ../../src/map_io/widelands_map_bob_data_packet.cc:102
 #, c-format
 msgid "tribe \"%s\" does not exist"
-msgstr ""
+msgstr "Volk \"%s\" gibbet nich."
 
 #: ../../src/map_io/widelands_map_bob_data_packet.cc:139
 #, c-format
@@ -847,12 +847,12 @@ msgstr ""
 #: ../../src/game_io/game_player_economies_data_packet.cc:68
 #, c-format
 msgid "player %u: %s"
-msgstr ""
+msgstr "Speeler %u: %s"
 
 #: ../../src/map_io/widelands_map_player_position_data_packet.cc:61
 #, c-format
 msgid "player positions: %s"
-msgstr ""
+msgstr "Speeler Positschon: %s"
 
 #: ../../src/map_io/widelands_map_roaddata_data_packet.cc:129
 msgid "no carrier slot"
@@ -914,7 +914,7 @@ msgstr ""
 #: ../../src/map_io/widelands_map_players_messages_data_packet.cc:155
 #, c-format
 msgid "messages for player %u: %s"
-msgstr ""
+msgstr "Nahricht för Speeler %u: %s"
 
 #: ../../src/map_io/widelands_map_bobdata_data_packet.cc:227
 #, c-format
@@ -970,7 +970,7 @@ msgstr ""
 #: ../../src/logic/playercommand.cc:141
 #, c-format
 msgid "player %u does not exist"
-msgstr ""
+msgstr "Speeler %u gibbet nich."
 
 #: ../../src/map_io/widelands_map_building_data_packet.cc:110
 #, c-format
@@ -1743,7 +1743,7 @@ msgstr "Wies de Helpfinster"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:150 ../../src/ui_fsmenu/launchMPG.cc:666
 msgid "Multiplayer Game Setup"
-msgstr ""
+msgstr "Moerspeeler Speel-Instellungen"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:158
 msgid "Clients"
@@ -1841,6 +1841,11 @@ msgstr "Grabbel de \"?\" babben rechts för Help."
 msgid "Saved players are:"
 msgstr ""
 
+#: ../../src/ui_fsmenu/launchMPG.cc:564
+#, c-format
+msgid "Player %u"
+msgstr ""
+
 #: ../../src/ui_fsmenu/launchMPG.cc:568
 msgid "<closed>"
 msgstr ""
@@ -1865,7 +1870,7 @@ msgstr ""
 #: ../../src/ui_fsmenu/launchMPG.cc:649
 #, c-format
 msgid "* %i Players\n"
-msgstr ""
+msgstr "* %i Speeler\n"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:650
 #, c-format
@@ -1905,7 +1910,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/launchMPG.cc:681
 msgid "Player settings"
-msgstr ""
+msgstr "Speeler Instellung"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:684
 msgid ""
@@ -2125,11 +2130,11 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/launchSPG.cc:84
 msgid "Player's name"
-msgstr ""
+msgstr "Speelernaam"
 
 #: ../../src/ui_fsmenu/launchSPG.cc:88
 msgid "Player's type"
-msgstr ""
+msgstr "Speelerart"
 
 #: ../../src/ui_fsmenu/launchSPG.cc:92
 #: ../../src/wui/multiplayersetupgroup.cc:458
@@ -2138,15 +2143,15 @@ msgstr "Mannschop"
 
 #: ../../src/ui_fsmenu/launchSPG.cc:96
 msgid "Player's tribe"
-msgstr ""
+msgstr "Speelervolk"
 
 #: ../../src/ui_fsmenu/launchSPG.cc:100
 msgid "Start type"
-msgstr ""
+msgstr "Startart"
 
 #: ../../src/ui_fsmenu/launchSPG.cc:160
 msgid "Switch to position"
-msgstr ""
+msgstr "Wessel tau Positschon"
 
 #: ../../src/ui_fsmenu/launchSPG.cc:261
 #, c-format
@@ -2162,7 +2167,7 @@ msgstr ""
 #: ../../src/ui_fsmenu/loadgame.cc:63 ../../src/ui_fsmenu/loadreplay.cc:54
 #: ../../src/wui/game_main_menu_save_game.cc:102
 msgid "Delete"
-msgstr ""
+msgstr "Wegdoon"
 
 #: ../../src/ui_fsmenu/loadgame.cc:74
 msgid "Choose saved game!"
@@ -2171,15 +2176,15 @@ msgstr ""
 #: ../../src/ui_fsmenu/loadgame.cc:78 ../../src/ui_fsmenu/loadreplay.cc:70
 #: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:57
 msgid "Map Name:"
-msgstr ""
+msgstr "Naam vun de Koort:"
 
 #: ../../src/ui_fsmenu/loadgame.cc:83 ../../src/ui_fsmenu/loadreplay.cc:75
 msgid "Gametime:"
-msgstr ""
+msgstr "Speeltied:"
 
 #: ../../src/ui_fsmenu/loadgame.cc:128 ../../src/ui_fsmenu/loadreplay.cc:117
 msgid "Delete file"
-msgstr ""
+msgstr "Lösch de Datei"
 
 #: ../../src/ui_fsmenu/loadgame.cc:129 ../../src/ui_fsmenu/loadreplay.cc:118
 msgid "Do you really want to delete "
@@ -2197,37 +2202,37 @@ msgstr ""
 #: ../../src/ui_fsmenu/campaign_select.cc:266
 #: ../../src/ui_fsmenu/mapselect.cc:54
 msgid "Choose your map!"
-msgstr ""
+msgstr "Wähl dien Koort!"
 
 #: ../../src/ui_fsmenu/editor_mapselect.cc:55
 #: ../../src/ui_fsmenu/campaign_select.cc:268
 #: ../../src/ui_fsmenu/mapselect.cc:64
 msgid "Name:"
-msgstr ""
+msgstr "Naam:"
 
 #: ../../src/ui_fsmenu/editor_mapselect.cc:60
 #: ../../src/ui_fsmenu/campaign_select.cc:270
 #: ../../src/ui_fsmenu/mapselect.cc:70
 #: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:80
 msgid "Author:"
-msgstr ""
+msgstr "Autor:"
 
 #: ../../src/ui_fsmenu/editor_mapselect.cc:65
 #: ../../src/ui_fsmenu/mapselect.cc:76
 #: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:66
 msgid "Size:"
-msgstr ""
+msgstr "Gröte:"
 
 #: ../../src/ui_fsmenu/editor_mapselect.cc:70
 #: ../../src/ui_fsmenu/mapselect.cc:82
 #: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:75
 msgid "World:"
-msgstr ""
+msgstr "Welt:"
 
 #: ../../src/ui_fsmenu/editor_mapselect.cc:75
 #: ../../src/ui_fsmenu/mapselect.cc:88
 msgid "Players:"
-msgstr ""
+msgstr "Speeler:"
 
 #: ../../src/ui_fsmenu/editor_mapselect.cc:80
 #: ../../src/ui_fsmenu/mapselect.cc:94
@@ -2247,15 +2252,15 @@ msgstr "Bugseer ESC or grabbel mit di muus för dallig wieder ..."
 
 #: ../../src/ui_fsmenu/multiplayer.cc:41
 msgid "Choose game type"
-msgstr ""
+msgstr "Wähl Speelart"
 
 #: ../../src/ui_fsmenu/multiplayer.cc:48
 msgid "Internet game"
-msgstr ""
+msgstr "Internetspeel"
 
 #: ../../src/ui_fsmenu/multiplayer.cc:53
 msgid "LAN / Direct IP"
-msgstr ""
+msgstr "LAN / Direkt IP"
 
 #: ../../src/ui_fsmenu/multiplayer.cc:84
 msgid "Show login dialog"
@@ -2276,12 +2281,12 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/campaign_select.cc:60
 msgid "Difficulty:"
-msgstr ""
+msgstr "Swoorheit:"
 
 #: ../../src/ui_fsmenu/campaign_select.cc:64
 #: ../../src/ui_fsmenu/campaign_select.cc:272
 msgid "Description:"
-msgstr ""
+msgstr "Beschrieven:"
 
 #: ../../src/ui_fsmenu/campaign_select.cc:165
 #: ../../src/ui_fsmenu/campaign_select.cc:167
@@ -2306,11 +2311,11 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/mapselect.cc:149
 msgid "#"
-msgstr ""
+msgstr "Nr."
 
 #: ../../src/ui_fsmenu/mapselect.cc:151
 msgid "Map Name"
-msgstr ""
+msgstr "Naam vun de Koort"
 
 #: ../../src/ui_fsmenu/mapselect.cc:166
 msgid "Show all maps"
@@ -2342,7 +2347,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/mapselect.cc:181
 msgid "Unbalanced"
-msgstr ""
+msgstr "Nich utglekt"
 
 #: ../../src/ui_fsmenu/mapselect.cc:277
 msgid "(directory)"
@@ -2350,7 +2355,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/mapselect.cc:498 ../../src/ui_fsmenu/mapselect.cc:502
 msgid "unknown"
-msgstr ""
+msgstr "nich bekannt"
 
 #: ../../src/ui_fsmenu/mapselect.cc:500
 msgid ""
@@ -2368,20 +2373,20 @@ msgstr "Brukers online:"
 
 #: ../../src/ui_fsmenu/internet_lobby.cc:60
 msgid "List of games:"
-msgstr ""
+msgstr "Liste vun Speeln:"
 
 #: ../../src/ui_fsmenu/internet_lobby.cc:64
 msgid "Name of your server:"
-msgstr ""
+msgstr "Naam vun dien Server:"
 
 #: ../../src/ui_fsmenu/internet_lobby.cc:68
 msgid "Maximum of players:"
-msgstr ""
+msgstr "Gröttste Nummer vun Speelers:"
 
 #: ../../src/ui_fsmenu/internet_lobby.cc:81
 #: ../../src/ui_fsmenu/netsetup_lan.cc:61
 msgid "Join this game"
-msgstr ""
+msgstr "Bi dit Speel mitmaken"
 
 #: ../../src/ui_fsmenu/internet_lobby.cc:86
 msgid "Open a new game"
@@ -2389,15 +2394,15 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/internet_lobby.cc:156
 msgid "Points"
-msgstr ""
+msgstr "Pünkt"
 
 #: ../../src/ui_fsmenu/internet_lobby.cc:157
 msgid "Game"
-msgstr ""
+msgstr "Speel"
 
 #: ../../src/ui_fsmenu/internet_lobby.cc:379
 msgid "Connection timed out"
-msgstr ""
+msgstr "Tiet för de Verbinnen is aflopen"
 
 #: ../../src/ui_fsmenu/internet_lobby.cc:382
 msgid ""
@@ -2412,11 +2417,11 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/singleplayer.cc:40
 msgid "Single Player Menu"
-msgstr ""
+msgstr "Eenspeeler Menü"
 
 #: ../../src/ui_fsmenu/singleplayer.cc:47
 msgid "New Game"
-msgstr ""
+msgstr "Nieg Speel"
 
 #: ../../src/ui_fsmenu/singleplayer.cc:52
 msgid "Campaigns"
@@ -2424,7 +2429,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/singleplayer.cc:57
 msgid "Load Game"
-msgstr ""
+msgstr "Speel laden"
 
 #: ../../src/ui_fsmenu/netsetup_lan.cc:42
 msgid "Begin Network Game"
@@ -2436,7 +2441,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/netsetup_lan.cc:50
 msgid "Your nickname:"
-msgstr ""
+msgstr "Dien Ökelnaam:"
 
 #: ../../src/ui_fsmenu/netsetup_lan.cc:54
 msgid "Host to connect:"
@@ -2456,13 +2461,13 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/netsetup_lan.cc:127
 msgid "State"
-msgstr ""
+msgstr "Tostand"
 
 #: ../../src/ui_fsmenu/netsetup_lan.cc:196
 #: ../../src/wui/multiplayersetupgroup.cc:266
 #: ../../src/wui/playerdescrgroup.cc:158
 msgid "Open"
-msgstr "Apen"
+msgstr "Opmaken"
 
 #: ../../src/ui_fsmenu/netsetup_lan.cc:197
 #: ../../src/wui/multiplayersetupgroup.cc:255
@@ -2481,13 +2486,13 @@ msgstr ""
 #: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:47
 #: ../../src/editor/ui_menus/editor_main_menu.cc:55
 msgid "New Map"
-msgstr ""
+msgstr "Nee Koort"
 
 #: ../../src/ui_fsmenu/editor.cc:48
 #: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:51
 #: ../../src/editor/ui_menus/editor_main_menu.cc:65
 msgid "Load Map"
-msgstr ""
+msgstr "Lade Koort"
 
 #: ../../src/ui_fsmenu/main.cc:40
 msgid "Play Tutorial"
@@ -2495,11 +2500,11 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/main.cc:45
 msgid "Single Player"
-msgstr ""
+msgstr "Eenspeeler"
 
 #: ../../src/ui_fsmenu/main.cc:50
 msgid "Multi Player"
-msgstr ""
+msgstr "Moerspeeler"
 
 #: ../../src/ui_fsmenu/main.cc:55
 msgid "Watch Replay"
@@ -2518,7 +2523,7 @@ msgstr "Instellungen"
 #: ../../src/ui_fsmenu/main.cc:70
 #: ../../src/editor/ui_menus/editor_main_menu.cc:80
 msgid "View Readme"
-msgstr ""
+msgstr "Wies Lesmi"
 
 #: ../../src/ui_fsmenu/main.cc:75 ../../src/wui/game_options_menu.cc:63
 msgid "License"
@@ -2552,7 +2557,7 @@ msgstr ""
 
 #: ../../src/game_io/game_interactive_player_data_packet.cc:57
 msgid "The game has no players!"
-msgstr ""
+msgstr "De Speel het keen Speeler!"
 
 #: ../../src/game_io/game_interactive_player_data_packet.cc:80
 #, c-format
@@ -2669,7 +2674,7 @@ msgstr ""
 msgid "NO GAME CONTROLLER"
 msgstr ""
 
-#: ../../src/wui/fieldaction.cc:114 ../../src/wui/buildingwindow.cc:234
+#: ../../src/wui/fieldaction.cc:114 ../../src/wui/buildingwindow.cc:236
 msgid "Construction costs:"
 msgstr ""
 
@@ -2761,56 +2766,56 @@ msgstr ""
 msgid "Cancel road"
 msgstr ""
 
-#: ../../src/wui/buildingwindow.cc:176
+#: ../../src/wui/buildingwindow.cc:179
 msgid "Cancel the expedition"
 msgstr ""
 
-#: ../../src/wui/buildingwindow.cc:186
+#: ../../src/wui/buildingwindow.cc:189
 msgid "Start an expedition"
 msgstr ""
 
-#: ../../src/wui/buildingwindow.cc:203
+#: ../../src/wui/buildingwindow.cc:205
 msgid "Continue"
 msgstr "Wietermaken"
 
-#: ../../src/wui/buildingwindow.cc:203
+#: ../../src/wui/buildingwindow.cc:205
 msgid "Stop"
 msgstr "Anhollen"
 
-#: ../../src/wui/buildingwindow.cc:228
+#: ../../src/wui/buildingwindow.cc:230
 #, c-format
 msgid "Enhance to %s"
 msgstr ""
 
-#: ../../src/wui/buildingwindow.cc:254
+#: ../../src/wui/buildingwindow.cc:256
 msgid "Destroy"
 msgstr ""
 
-#: ../../src/wui/buildingwindow.cc:272
+#: ../../src/wui/buildingwindow.cc:274
 msgid "Dismantle"
 msgstr ""
 
-#: ../../src/wui/buildingwindow.cc:272
+#: ../../src/wui/buildingwindow.cc:274
 msgid "Returns:"
 msgstr ""
 
-#: ../../src/wui/buildingwindow.cc:298 ../../src/wui/buildingwindow.cc:525
+#: ../../src/wui/buildingwindow.cc:300 ../../src/wui/buildingwindow.cc:528
 msgid "Hide workarea"
 msgstr ""
 
-#: ../../src/wui/buildingwindow.cc:313
+#: ../../src/wui/buildingwindow.cc:315
 msgid "Debug"
 msgstr "Fehlersök"
 
-#: ../../src/wui/buildingwindow.cc:324
+#: ../../src/wui/buildingwindow.cc:326
 msgid "Center view on this"
 msgstr ""
 
-#: ../../src/wui/buildingwindow.cc:342
+#: ../../src/wui/buildingwindow.cc:344
 msgid "Help"
 msgstr "Help"
 
-#: ../../src/wui/buildingwindow.cc:528
+#: ../../src/wui/buildingwindow.cc:531
 msgid "Show workarea"
 msgstr "Wies Arbeidsgegend"
 
@@ -3330,51 +3335,51 @@ msgstr "LIESMI"
 msgid "Authors"
 msgstr "Makers"
 
-#: ../../src/wui/shipwindow.cc:82
+#: ../../src/wui/shipwindow.cc:85
 msgid "Ship"
 msgstr "Schipp"
 
-#: ../../src/wui/shipwindow.cc:109
+#: ../../src/wui/shipwindow.cc:112
 msgid "Scout towards the north west"
 msgstr ""
 
-#: ../../src/wui/shipwindow.cc:115
+#: ../../src/wui/shipwindow.cc:118
 msgid "Explore the island's coast clockwise"
 msgstr ""
 
-#: ../../src/wui/shipwindow.cc:121
+#: ../../src/wui/shipwindow.cc:124
 msgid "Scout towards the north east"
 msgstr ""
 
-#: ../../src/wui/shipwindow.cc:127
+#: ../../src/wui/shipwindow.cc:130
 msgid "Scout towards the west"
 msgstr ""
 
-#: ../../src/wui/shipwindow.cc:133
+#: ../../src/wui/shipwindow.cc:136
 msgid "Construct a port at the current location"
 msgstr ""
 
-#: ../../src/wui/shipwindow.cc:139
+#: ../../src/wui/shipwindow.cc:142
 msgid "Scout towards the east"
 msgstr ""
 
-#: ../../src/wui/shipwindow.cc:145
+#: ../../src/wui/shipwindow.cc:148
 msgid "Scout towards the south west"
 msgstr ""
 
-#: ../../src/wui/shipwindow.cc:151
+#: ../../src/wui/shipwindow.cc:154
 msgid "Explore the island's coast counter clockwise"
 msgstr ""
 
-#: ../../src/wui/shipwindow.cc:157
+#: ../../src/wui/shipwindow.cc:160
 msgid "Scout towards the south east"
 msgstr ""
 
-#: ../../src/wui/shipwindow.cc:169
+#: ../../src/wui/shipwindow.cc:172
 msgid "Go to ship"
 msgstr ""
 
-#: ../../src/wui/shipwindow.cc:174
+#: ../../src/wui/shipwindow.cc:177
 msgid "Go to destination"
 msgstr ""
 
@@ -3445,7 +3450,7 @@ msgstr "Aart"
 
 #: ../../src/wui/multiplayersetupgroup.cc:446
 msgid "Tribe"
-msgstr ""
+msgstr "Volk"
 
 #: ../../src/wui/multiplayersetupgroup.cc:454
 #: ../../src/wui/playerdescrgroup.cc:102
@@ -3478,7 +3483,7 @@ msgstr ""
 msgid "waresqueue: %s"
 msgstr ""
 
-#: ../../src/economy/portdock.cc:601 ../../src/economy/fleet.cc:762
+#: ../../src/economy/portdock.cc:621 ../../src/economy/fleet.cc:769
 #, c-format
 msgid "loading portdock: %s"
 msgstr ""
@@ -3623,7 +3628,7 @@ msgstr ""
 #: ../../src/logic/playercommand.cc:1796
 #, c-format
 msgid "player message: %s"
-msgstr ""
+msgstr "Speeler Nahricht: %s"
 
 #: ../../src/logic/military_data.cc:51 ../../src/logic/soldier.cc:68
 msgid "\"min-max\""
@@ -3950,7 +3955,7 @@ msgstr ""
 
 #: ../../src/logic/map.cc:361
 msgid "Player 1"
-msgstr ""
+msgstr "Speeler 1"
 
 #: ../../src/logic/cmd_calculate_statistics.cc:47
 #, c-format
@@ -4002,7 +4007,7 @@ msgstr ""
 #: ../../src/logic/immovable.cc:775
 #, c-format
 msgid "unknown tribe %s"
-msgstr ""
+msgstr "unbekanntes Volk %s"
 
 #: ../../src/logic/immovable.cc:781
 #, c-format
@@ -4175,7 +4180,7 @@ msgstr ""
 
 #: ../../src/logic/game.cc:295
 msgid "Configuring players"
-msgstr ""
+msgstr "Stell Speelers in"
 
 #: ../../src/logic/game.cc:328
 msgid "Loading map"
@@ -4282,7 +4287,7 @@ msgstr ""
 #: ../../src/logic/tribe.cc:336
 #, c-format
 msgid "tribe %s: %s"
-msgstr ""
+msgstr "Volk %s:%s"
 
 #: ../../src/logic/requirements.cc:223
 #, c-format
@@ -4333,40 +4338,40 @@ msgstr ""
 msgid "loading worker: %s"
 msgstr ""
 
-#: ../../src/logic/ship.cc:319
+#: ../../src/logic/ship.cc:320
 msgid "Port space found"
 msgstr ""
 
-#: ../../src/logic/ship.cc:320
+#: ../../src/logic/ship.cc:321
 msgid "An expedition ship found a new port build space."
 msgstr ""
 
-#: ../../src/logic/ship.cc:422
+#: ../../src/logic/ship.cc:423
 msgid "Island surrounded"
 msgstr ""
 
-#: ../../src/logic/ship.cc:423
+#: ../../src/logic/ship.cc:424
 msgid "An expedition ship surrounded its island without any events."
 msgstr ""
 
-#: ../../src/logic/ship.cc:467
+#: ../../src/logic/ship.cc:468
 msgid "Coast reached"
 msgstr ""
 
-#: ../../src/logic/ship.cc:469
+#: ../../src/logic/ship.cc:470
 msgid ""
 "An expedition ship reached a coast and is waiting for further commands."
 msgstr ""
 
-#: ../../src/logic/ship.cc:608
+#: ../../src/logic/ship.cc:611
 msgid "Expedition ready"
 msgstr ""
 
-#: ../../src/logic/ship.cc:609
+#: ../../src/logic/ship.cc:612
 msgid "An expedition ship is waiting for your commands."
 msgstr ""
 
-#: ../../src/logic/ship.cc:825
+#: ../../src/logic/ship.cc:828
 #, c-format
 msgid "loading ship: %s"
 msgstr ""
@@ -4556,7 +4561,7 @@ msgstr ""
 
 #: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:71
 msgid "Nr Players:"
-msgstr ""
+msgstr "Nr Speelers:"
 
 #: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:102
 msgid "Set origin"
@@ -4694,7 +4699,7 @@ msgstr ""
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:451
 #, c-format
 msgid "Players: %u"
-msgstr ""
+msgstr "Speelers: %u"
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:342
 msgid "Generate Map"

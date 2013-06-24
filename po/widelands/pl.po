@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4804\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2013-06-16 11:11+0200\n"
-"PO-Revision-Date: 2013-06-16 17:37+0000\n"
+"POT-Creation-Date: 2013-06-23 19:28+0200\n"
+"PO-Revision-Date: 2013-06-23 21:09+0000\n"
 "Last-Translator: Wesmania <ikk_pl@yahoo.co.uk>\n"
 "Language-Team: Language <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -15,8 +15,8 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2013-06-17 05:14+0000\n"
-"X-Generator: Launchpad (build 16667)\n"
+"X-Launchpad-Export-Date: 2013-06-24 04:37+0000\n"
+"X-Generator: Launchpad (build 16677)\n"
 
 #: ../../src/s2map.cc:222
 msgid "Bluebyte Settlers II Map. No comment defined!"
@@ -700,7 +700,7 @@ msgid "Redo"
 msgstr "Ponów"
 
 #: ../../src/editor/editorinteractive.cc:189
-#: ../../src/editor/editorinteractive.cc:605
+#: ../../src/editor/editorinteractive.cc:609
 #, c-format
 msgid "Loading tribe: %s"
 msgstr "Wczytywanie plemienia: %s"
@@ -715,7 +715,7 @@ msgid "Loading world data"
 msgstr "Wczytywanie danych świata"
 
 #: ../../src/editor/editorinteractive.cc:205
-#: ../../src/editor/editorinteractive.cc:609
+#: ../../src/editor/editorinteractive.cc:613
 msgid "Loading graphics..."
 msgstr "Ładowanie grafiki..."
 
@@ -727,7 +727,7 @@ msgstr "Mapa niezapisana"
 msgid "The Map is unsaved, do you really want to quit?"
 msgstr "Mapa nie jest zapisana, czy na pewno chcesz wyjść?"
 
-#: ../../src/editor/editorinteractive.cc:596
+#: ../../src/editor/editorinteractive.cc:600
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:185
 #: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:180
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:486
@@ -735,7 +735,7 @@ msgstr "Mapa nie jest zapisana, czy na pewno chcesz wyjść?"
 msgid "No Name"
 msgstr "Bez nazwy"
 
-#: ../../src/editor/editorinteractive.cc:598
+#: ../../src/editor/editorinteractive.cc:602
 #: ../../src/ui_fsmenu/netsetup_lan.cc:198
 #: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:181
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:487
@@ -877,8 +877,8 @@ msgstr "nazwy graczy i plemion: %s"
 #: ../../src/game_io/game_interactive_player_data_packet.cc:78
 #: ../../src/game_io/game_game_class_data_packet.cc:44
 #: ../../src/game_io/game_player_info_data_packet.cc:143
-#: ../../src/economy/wares_queue.cc:289 ../../src/economy/portdock.cc:599
-#: ../../src/economy/fleet.cc:760
+#: ../../src/economy/wares_queue.cc:289 ../../src/economy/portdock.cc:619
+#: ../../src/economy/fleet.cc:767
 #: ../../src/economy/cmd_call_economy_balance.cc:86
 #: ../../src/economy/request.cc:242 ../../src/logic/replay.cc:117
 #: ../../src/logic/cmd_incorporate.cc:46 ../../src/logic/playercommand.cc:145
@@ -899,7 +899,7 @@ msgstr "nazwy graczy i plemion: %s"
 #: ../../src/logic/battle.cc:414 ../../src/logic/cmd_queue.cc:192
 #: ../../src/logic/critter_bob.cc:386 ../../src/logic/legacy.cc:428
 #: ../../src/logic/legacy.cc:486 ../../src/logic/requirements.cc:50
-#: ../../src/logic/ship.cc:823 ../../src/logic/cmd_luascript.cc:56
+#: ../../src/logic/ship.cc:826 ../../src/logic/cmd_luascript.cc:56
 #, c-format
 msgid "unknown/unhandled version %u"
 msgstr "nieznana/nieobsługiwana wersja %u"
@@ -2032,6 +2032,11 @@ msgstr "Naciśnij \"?\" w prawym górnym rogu, aby otrzymać pomoc."
 msgid "Saved players are:"
 msgstr "Zapisanie gracze to:"
 
+#: ../../src/ui_fsmenu/launchMPG.cc:564
+#, c-format
+msgid "Player %u"
+msgstr "Gracz %u"
+
 #: ../../src/ui_fsmenu/launchMPG.cc:568
 msgid "<closed>"
 msgstr "<zamknięty>"
@@ -2890,7 +2895,7 @@ msgstr "%s (%s)"
 msgid "NO GAME CONTROLLER"
 msgstr "BRAK KONTROLERA GRY"
 
-#: ../../src/wui/fieldaction.cc:114 ../../src/wui/buildingwindow.cc:234
+#: ../../src/wui/fieldaction.cc:114 ../../src/wui/buildingwindow.cc:236
 msgid "Construction costs:"
 msgstr "Koszty konstrukcji:"
 
@@ -2982,56 +2987,56 @@ msgstr "Postaw flagę"
 msgid "Cancel road"
 msgstr "Anuluj budowę drogi"
 
-#: ../../src/wui/buildingwindow.cc:176
+#: ../../src/wui/buildingwindow.cc:179
 msgid "Cancel the expedition"
 msgstr "Anuluj ekspedycję"
 
-#: ../../src/wui/buildingwindow.cc:186
+#: ../../src/wui/buildingwindow.cc:189
 msgid "Start an expedition"
 msgstr "Rozpocznij ekspedycję"
 
-#: ../../src/wui/buildingwindow.cc:203
+#: ../../src/wui/buildingwindow.cc:205
 msgid "Continue"
 msgstr "Kontynuuj"
 
-#: ../../src/wui/buildingwindow.cc:203
+#: ../../src/wui/buildingwindow.cc:205
 msgid "Stop"
 msgstr "Stop"
 
-#: ../../src/wui/buildingwindow.cc:228
+#: ../../src/wui/buildingwindow.cc:230
 #, c-format
 msgid "Enhance to %s"
 msgstr "Ulepsz do %s"
 
-#: ../../src/wui/buildingwindow.cc:254
+#: ../../src/wui/buildingwindow.cc:256
 msgid "Destroy"
 msgstr "Zniszcz"
 
-#: ../../src/wui/buildingwindow.cc:272
+#: ../../src/wui/buildingwindow.cc:274
 msgid "Dismantle"
 msgstr "Rozbierz"
 
-#: ../../src/wui/buildingwindow.cc:272
+#: ../../src/wui/buildingwindow.cc:274
 msgid "Returns:"
 msgstr "Zwraca:"
 
-#: ../../src/wui/buildingwindow.cc:298 ../../src/wui/buildingwindow.cc:525
+#: ../../src/wui/buildingwindow.cc:300 ../../src/wui/buildingwindow.cc:528
 msgid "Hide workarea"
 msgstr "Ukryj zasięg"
 
-#: ../../src/wui/buildingwindow.cc:313
+#: ../../src/wui/buildingwindow.cc:315
 msgid "Debug"
 msgstr "Debug"
 
-#: ../../src/wui/buildingwindow.cc:324
+#: ../../src/wui/buildingwindow.cc:326
 msgid "Center view on this"
 msgstr "Wycentruj na tym widok"
 
-#: ../../src/wui/buildingwindow.cc:342
+#: ../../src/wui/buildingwindow.cc:344
 msgid "Help"
 msgstr "Pomoc"
 
-#: ../../src/wui/buildingwindow.cc:528
+#: ../../src/wui/buildingwindow.cc:531
 msgid "Show workarea"
 msgstr "Wyświetl zasięg"
 
@@ -3555,52 +3560,52 @@ msgstr "CZYTAJTO"
 msgid "Authors"
 msgstr "Autorzy"
 
-#: ../../src/wui/shipwindow.cc:82
+#: ../../src/wui/shipwindow.cc:85
 msgid "Ship"
 msgstr "Statek"
 
-#: ../../src/wui/shipwindow.cc:109
+#: ../../src/wui/shipwindow.cc:112
 msgid "Scout towards the north west"
 msgstr "Przeprowadź zwiad na północnym zachodzie"
 
-#: ../../src/wui/shipwindow.cc:115
+#: ../../src/wui/shipwindow.cc:118
 msgid "Explore the island's coast clockwise"
 msgstr "Zbadaj wybrzeże wyspy w kierunku zgodnym z ruchem wskazówek zegara"
 
-#: ../../src/wui/shipwindow.cc:121
+#: ../../src/wui/shipwindow.cc:124
 msgid "Scout towards the north east"
 msgstr "Przeprowadź zwiad na północnym wschodzie"
 
-#: ../../src/wui/shipwindow.cc:127
+#: ../../src/wui/shipwindow.cc:130
 msgid "Scout towards the west"
 msgstr "Przeprowadź zwiad na zachodzie"
 
-#: ../../src/wui/shipwindow.cc:133
+#: ../../src/wui/shipwindow.cc:136
 msgid "Construct a port at the current location"
 msgstr "Zbuduj port w tym miejscu"
 
-#: ../../src/wui/shipwindow.cc:139
+#: ../../src/wui/shipwindow.cc:142
 msgid "Scout towards the east"
 msgstr "Przeprowadź zwiad na wschodzie"
 
-#: ../../src/wui/shipwindow.cc:145
+#: ../../src/wui/shipwindow.cc:148
 msgid "Scout towards the south west"
 msgstr "Przeprowadź zwiad na południowym zachodzie"
 
-#: ../../src/wui/shipwindow.cc:151
+#: ../../src/wui/shipwindow.cc:154
 msgid "Explore the island's coast counter clockwise"
 msgstr ""
 "Zbadaj wybrzeże wyspy w kierunku przeciwnym do ruchu wskazówek zegara"
 
-#: ../../src/wui/shipwindow.cc:157
+#: ../../src/wui/shipwindow.cc:160
 msgid "Scout towards the south east"
 msgstr "Przeprowadź zwiad na południowym wschodzie"
 
-#: ../../src/wui/shipwindow.cc:169
+#: ../../src/wui/shipwindow.cc:172
 msgid "Go to ship"
 msgstr "Idź do statku"
 
-#: ../../src/wui/shipwindow.cc:174
+#: ../../src/wui/shipwindow.cc:177
 msgid "Go to destination"
 msgstr "Idź do celu"
 
@@ -3704,7 +3709,7 @@ msgstr "Przybliż"
 msgid "waresqueue: %s"
 msgstr "kolejkatowarów: %s"
 
-#: ../../src/economy/portdock.cc:601 ../../src/economy/fleet.cc:762
+#: ../../src/economy/portdock.cc:621 ../../src/economy/fleet.cc:769
 #, c-format
 msgid "loading portdock: %s"
 msgstr "wczytywanie doku: %s"
@@ -4596,40 +4601,40 @@ msgstr "Zaginął robotnik!"
 msgid "loading worker: %s"
 msgstr "wczytywanie pracownika: %s"
 
-#: ../../src/logic/ship.cc:319
+#: ../../src/logic/ship.cc:320
 msgid "Port space found"
 msgstr "Znaleziono miejsce na port"
 
-#: ../../src/logic/ship.cc:320
+#: ../../src/logic/ship.cc:321
 msgid "An expedition ship found a new port build space."
 msgstr "Ekspedycja znalazła miejsce zdatne do budowy portu."
 
-#: ../../src/logic/ship.cc:422
+#: ../../src/logic/ship.cc:423
 msgid "Island surrounded"
 msgstr "Opłynięto wyspę"
 
-#: ../../src/logic/ship.cc:423
+#: ../../src/logic/ship.cc:424
 msgid "An expedition ship surrounded its island without any events."
 msgstr "Ekspedycja opłynęła wyspę nie natrafiając na nic szczególnego."
 
-#: ../../src/logic/ship.cc:467
+#: ../../src/logic/ship.cc:468
 msgid "Coast reached"
 msgstr "Dotarto do brzegu"
 
-#: ../../src/logic/ship.cc:469
+#: ../../src/logic/ship.cc:470
 msgid ""
 "An expedition ship reached a coast and is waiting for further commands."
 msgstr "Ekspedycja dotarła do brzegu i oczekuje dalszych rozkazów."
 
-#: ../../src/logic/ship.cc:608
+#: ../../src/logic/ship.cc:611
 msgid "Expedition ready"
 msgstr "Ekspedycja gotowa"
 
-#: ../../src/logic/ship.cc:609
+#: ../../src/logic/ship.cc:612
 msgid "An expedition ship is waiting for your commands."
 msgstr "Statek ekspedycyjny oczekuje na twoje rozkazy."
 
-#: ../../src/logic/ship.cc:825
+#: ../../src/logic/ship.cc:828
 #, c-format
 msgid "loading ship: %s"
 msgstr "ładowanie statku: %s"
