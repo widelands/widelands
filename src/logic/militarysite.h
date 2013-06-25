@@ -60,10 +60,10 @@ class MilitarySite :
 	MO_DESCR(MilitarySite_Descr);
 
 public:
-	// I assume elsewhere, that this SoldierPreference fits to uint8_t.
-	enum SoldierPreference : uint8_t {
+	// I assume elsewhere, that enum SoldierPreference fits to uint8_t.
+	enum SoldierPreference {
 		kNoPreference,
-	   kPrefersRookies,
+		kPrefersRookies,
 		kPrefersHeroes,
 	};
 

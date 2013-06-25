@@ -175,7 +175,7 @@ void Building_Window::create_capsbuttons(UI::Box * capsbuttons)
 					(capsbuttons, "rookies", 0, 0, 34, 34,
 						g_gr->images().get("pics/but4.png"),
 						// NOCOM(#kxq): Rename the images to rookies and heroes as well.
-						g_gr->images().get("pics/msite_prefer_cheap.png"),
+						g_gr->images().get("pics/msite_prefer_rookies.png"),
 						_("Prefer rookies"));
 					cs_btn->sigclicked.connect
 					(boost::bind(&Building_Window::act_prefer_rookies, boost::ref(*this)));
@@ -187,7 +187,7 @@ void Building_Window::create_capsbuttons(UI::Box * capsbuttons)
 					new UI::Button
 					(capsbuttons, "heroes", 0, 0, 34, 34,
 						g_gr->images().get("pics/but4.png"),
-						g_gr->images().get("pics/msite_prefer_skilled.png"),
+						g_gr->images().get("pics/msite_prefer_heroes.png"),
 						_("Prefer heroes"));
 					cs_btn->sigclicked.connect
 					(boost::bind(&Building_Window::act_prefer_heroes, boost::ref(*this)));

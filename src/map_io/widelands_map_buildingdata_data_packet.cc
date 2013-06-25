@@ -695,28 +695,25 @@ void Map_Buildingdata_Data_Packet::read_militarysite
 						 wwWORKER));
 				militarysite.m_normal_soldier_request->Read(fr, game, mol);
 			}
+			else
+				militarysite.m_normal_soldier_request.reset();
+
 			if (rel17comp) // compatibility with release 17 savegames
 				militarysite.m_upgrade_soldier_request.reset();
 			else
-				switch (fr.Unsigned8())
-				{
-					case 42:
-						militarysite.m_upgrade_soldier_request.reset
-							(new Request
-								(militarysite,
-								 (!militarysite.m_normal_soldier_request) ? Ware_Index::First()
-								: militarysite.descr().tribe().safe_worker_index("soldier"),
-								MilitarySite::request_soldier_callback,
-								wwWORKER));
-						militarysite.m_upgrade_soldier_request->Read(fr, game, mol);
-						break;
-					case 55:
-						militarysite.m_upgrade_soldier_request.reset();
-						break;
-					default:
-						throw game_data_error
-						("widelands_map_buildingdata_data_packet.cc: militarysite load error\n");
-				}
+			if (fr.Unsigned8())
+			{
+				militarysite.m_upgrade_soldier_request.reset
+					(new Request
+						(militarysite,
+						 (!militarysite.m_normal_soldier_request) ? Ware_Index::First()
+						: militarysite.descr().tribe().safe_worker_index("soldier"),
+						MilitarySite::request_soldier_callback,
+						wwWORKER));
+				militarysite.m_upgrade_soldier_request->Read(fr, game, mol);
+			}
+			else
+				militarysite.m_upgrade_soldier_request.reset();
 
 
 			if ((militarysite.m_didconquer = fr.Unsigned8())) {
@@ -1453,20 +1450,13 @@ void Map_Buildingdata_Data_Packet::write_militarysite
 		fw.Unsigned8(0);
 	}
 
-	// NOCOM(#kxq): seriously? If your code is correct with the loading and saving, then it should just work.
-	// this is not the place to check for out of sync errors - also the correct thing is just to blow up
-	// and die and not try to continue.
-	// I stop reviewing this file - this needs some cleanup before I'll look at it again.
-
-	// 42 and 55 are values that do not appear frequently in the save stream
-	// Used to detect out-of-synch problems.
 	if (militarysite.m_upgrade_soldier_request)
 	{
-		fw.Unsigned8(42);
+		fw.Unsigned8(1);
 		militarysite.m_upgrade_soldier_request->Write(fw, game, mos);
 	}
 	else
-		fw.Unsigned8(55);
+		fw.Unsigned8(0);
 
 
 	fw.Unsigned8(militarysite.m_didconquer);
