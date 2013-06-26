@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2013-06-23 17:28+0000\n"
-"PO-Revision-Date: 2013-06-24 15:39+0000\n"
+"PO-Revision-Date: 2013-06-25 13:38+0000\n"
 "Last-Translator: LiSrt <Unknown>\n"
 "Language-Team: English (United Kingdom) <en_GB@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-06-25 05:10+0000\n"
-"X-Generator: Launchpad (build 16677)\n"
+"X-Launchpad-Export-Date: 2013-06-26 05:09+0000\n"
+"X-Generator: Launchpad (build 16681)\n"
 
 #: ../../campaigns/atl01.wmf/elemental:9
 msgid "01 - From Nemesis to Genesis"
@@ -88,7 +88,7 @@ msgstr ""
 "food is something deeply ingrained in us Atlanteans — it is a personal "
 "ceremony\n"
 "that we need for our well being.  So I guess we cannot take this away from\n"
-"individuals completely.  However, there may be a compromise...\n"
+"individuals completely.  However, there may be a compromise…\n"
 "For me, making bread is a troublesome task; grinding the blackroot and corn "
 "to\n"
 "flour, and then baking the bread, is tedious and boring.  I feel a more "
@@ -242,7 +242,7 @@ msgstr ""
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:195
 msgid "Chaos emerges..."
-msgstr "Chaos emerges..."
+msgstr "Chaos emerges…"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:289
 msgid "Colionder arrives"
@@ -348,7 +348,7 @@ msgstr ""
 "Guilt-ridden, the king committed suicide.  Without a monarch, the people\n"
 "turned to the clerics, but they had no substantial help to offer.  Most\n"
 "accepted their fate while others tried to change the god's mind by offering\n"
-"sacrifices in his temple, but to no avail..."
+"sacrifices in his temple, but to no avail…"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:419
 msgid ""
@@ -696,7 +696,7 @@ msgstr ""
 "we\n"
 "find an ample supply of those commodities, we could start producing weapons\n"
 "and tools; this would help enormously.  Of course, we would need smelters,\n"
-"a weapon smithy, an armour smithy, and a tool smithy, and maybe even more..."
+"a weapon smithy, an armour smithy, and a tool smithy, and maybe even more…"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:345
 msgid ""
@@ -745,7 +745,7 @@ msgstr ""
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:30
 msgid "New Objectives"
-msgstr ""
+msgstr "New Objectives"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:160
 msgid ""
@@ -757,18 +757,23 @@ msgid ""
 "wise clerics, who provided the link to Lutas - they prospered and became\n"
 "civilized."
 msgstr ""
+"On the lost and hidden island of Atlantis, a proud tribe settled when the\n"
+"world was young.  Ruled by the bloodline of King Ajanthul, the first human\n"
+"empowered by the sea god Lutas to breathe air above the waves, and the\n"
+"wise clerics, who provided the link to Lutas, they prospered and became\n"
+"civilized."
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:510
 msgid "One more building"
-msgstr ""
+msgstr "One more building"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:367
 msgid "Opol seeks out Jundlina"
-msgstr ""
+msgstr "Opol seeks out Jundlina"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:556
 msgid "Ostur seems confident"
-msgstr ""
+msgstr "Ostur seems confident"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:549
 msgid ""
@@ -777,6 +782,10 @@ msgid ""
 "shore they will vanish in the sea before they can float. I fear we are "
 "doomed!"
 msgstr ""
+"Ostur, we have no time.  The water rises too fast and if we build the ships "
+"on\n"
+"shore they will vanish in the sea before they can float.  I fear we are "
+"doomed!"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:282
 msgid ""
@@ -786,6 +795,11 @@ msgid ""
 "things\n"
 "out."
 msgstr ""
+"Our building infrastructure is complete and I spent several days making "
+"sure\n"
+"that they work well together.  Now there are other pressing matters.  I "
+"called\n"
+"on Colionder, my personal cook, for his help."
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:455
 msgid ""
@@ -798,6 +812,15 @@ msgid ""
 "to\n"
 "avoid having to transport everything up and down the slopes."
 msgstr ""
+"People are complaining about crowded streets and slow transportation.  We\n"
+"need to help out our carriers on the roads.  I decided to build a horse "
+"farm\n"
+"so that the horses can help move the heavy wares.<br>\n"
+"Another way to take load from our roads is to build warehouses. We have "
+"claimed\n"
+"the mountain now, and it seems a good idea to have a warehouse on the "
+"plateau\n"
+"to avoid having to transport everything up and down the slopes."
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:587
 msgid ""
@@ -814,10 +837,18 @@ msgid ""
 "people.\n"
 "And myself."
 msgstr ""
+"Praise Satul!  Ostur the young ship builder did it!  We have three ships —\n"
+"never have I seen sturdier ones — with enough room to carry all of us and\n"
+"some cargo too.  This rescue came just in time: Lutas is about to swallow\n"
+"the rest of this island.  The water rises faster by the hour, but we can\n"
+"make our escape now and start over in some country farther away…  I\n"
+"expect a long journey, but we will find the land of Satul in the end. This\n"
+"is the promise I made to my people.\n"
+"…and myself."
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:156
 msgid "Proudest to the death"
-msgstr ""
+msgstr "Proudest to the death"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:335
 msgid ""
@@ -825,18 +856,20 @@ msgid ""
 "together\n"
 "nicely. It is really starting to feel like home here."
 msgstr ""
+"It seems our food production is finished and everybody is working together\n"
+"nicely.  It is really starting to feel like home here."
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:387
 msgid "Sidolus seeks out Jundlina"
-msgstr ""
+msgstr "Sidolus seeks out Jundlina"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:417
 msgid "Sidolus seems contrite"
-msgstr ""
+msgstr "Sidolus seems contrite"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:267
 msgid "Sidolus speaks"
-msgstr ""
+msgstr "Sidolus speaks"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:184
 msgid ""
@@ -849,14 +882,22 @@ msgid ""
 "sea\n"
 "again."
 msgstr ""
+"The clerics began their meditation and the reason for the rising water was "
+"soon\n"
+"discovered: the god Lutas had broken faith with the Atlanteans because of "
+"the\n"
+"boldness of their king.  He would withdraw the gifts that were granted to "
+"King\n"
+"Ajanthul and his children, and so he would call them back below the sea "
+"again."
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:175
 msgid "The god's disgrace"
-msgstr ""
+msgstr "The god's disgrace"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:177
 msgid "The god's punishment"
-msgstr ""
+msgstr "The god's punishment"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:54
 msgid ""
@@ -864,18 +905,21 @@ msgid ""
 "here, we cannot relax. Explore and conquer it, this is the\n"
 "only way to protect us from threats on the island and from Atlantis."
 msgstr ""
+"The island is huge and as long as we are unsure we are alone here,\n"
+"we cannot relax.  Explore and conquer it, this is the only way to\n"
+"protect us from threats on the island, and from Atlantis."
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:225
 msgid "The princess' memoir"
-msgstr ""
+msgstr "The princess's memoir"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:44
 msgid "The supply of build wares"
-msgstr ""
+msgstr "The supply of building wares"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:529
 msgid "The water is rising!"
-msgstr ""
+msgstr "The water is rising!"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:89
 msgid ""
@@ -890,6 +934,18 @@ msgid ""
 "- Build a Spiderfarm<br>\n"
 "- Build a Goldweaver<br>"
 msgstr ""
+"The weavers produce spider cloth and tabards in the weaving-mill.  Spider "
+"cloth\n"
+"is needed for the construction of some buildings and clothing while tabards "
+"are\n"
+"the uniforms of soldiers.  The weaving-mill needs gold yarn and spider yarn "
+"as\n"
+"inputs.  Spider yarn is produced by the spider farm while gold yarn is "
+"produced\n"
+"by the gold weaver out of gold.<br><br>\n"
+"- Build a Weaving-Mill<br>\n"
+"- Build a Spider farm<br>\n"
+"- Build a Goldweaver<br>"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:142
 msgid ""
@@ -898,6 +954,11 @@ msgid ""
 "completely by the ocean. Build a shipyard close to the lake to start\n"
 "building ships."
 msgstr ""
+"There is a lake at the top of the island.  Build three ships in these "
+"waters\n"
+"and you may be able to rescue your people when the island is swallowed\n"
+"completely by the ocean.  Build a shipyard close to the lake to start\n"
+"building ships."
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:378
 msgid ""
@@ -905,6 +966,8 @@ msgid ""
 "back\n"
 "to your work now, Opol, and may Satul warm you and all your guild members!"
 msgstr ""
+"This is good news indeed Opol.  Our economy is developing very well.  Go\n"
+"back to your work now, and may Satul warm you and all your guild members!"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:166
 msgid ""
@@ -917,10 +980,19 @@ msgid ""
 "life\n"
 "was only for the gods and to seek for it was forbidden."
 msgstr ""
+"This story happens during the regency of King Askandor, the 43rd successor "
+"of\n"
+"King Ajanthul.  He has been a good king, ruling Atlantis with wisdom and\n"
+"foresight, but with old age coming upon him, he became afraid of dying and "
+"so\n"
+"began seeking a cure for death, despite the warnings of the clerics.  As "
+"some\n"
+"said, endless life was only for the gods and for mortals to seek it was "
+"forbidden."
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:193
 msgid "Uproar and confusion"
-msgstr ""
+msgstr "Uproar and confusion"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:474
 msgid ""
@@ -943,6 +1015,22 @@ msgid ""
 "fortification\n"
 "of our borders."
 msgstr ""
+"We found an old building, destroyed and burned by flames. I am very worried\n"
+"about this finding.  The building is not of any kind I've ever seen and it "
+"is\n"
+"certainly not designed by any Atlantean architect I've ever heard about.  "
+"The\n"
+"building is crude, the assemblage is sloppy, but the materials are very "
+"durable;\n"
+"the wood seems to have been burned in some way before it was used as\n"
+"building material — it is as hard as stone.<br><br>\n"
+"The implications frighten me.  Are there others on this island?  Where are\n"
+"they then?  They work with fire, are they praying to Satul too?  Are they\n"
+"friends or foes?  More importantly, why is the building burned down?   Has\n"
+"this island seen war?  Is a war being waged on it right now?<br><br>\n"
+"We must improve our military capabilities.  If there are foes on the island, "
+"we\n"
+"have to be prepared to meet them, and we should also fortify our borders."
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:497
 msgid ""
@@ -955,6 +1043,12 @@ msgid ""
 "with my generals. I will not allow that a potential enemy will find us\n"
 "unprepared."
 msgstr ""
+"We found one more building of this strange making.  We have yet to see any\n"
+"of its builders. But obviously there has been a community on this island "
+"before\n"
+"and obviously it has been militarised. I have to check on our military "
+"status\n"
+"with my generals.  I will not allow a potential enemy to find us unprepared."
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:240
 msgid ""
@@ -963,6 +1057,10 @@ msgid ""
 "a home. I reckon we need to establish a sustainable economy and explore our\n"
 "surroundings. I called for specialists and will follow their advice."
 msgstr ""
+"We have established ourselves on this island.  The next step is to make it "
+"a\n"
+"home.  I reckon we need to establish a sustainable economy and explore our\n"
+"surroundings.  I have called for specialists and will follow their advice."
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:227
 msgid ""
@@ -974,10 +1072,17 @@ msgid ""
 "this\n"
 "a sign from the fire god and we landed on its shore."
 msgstr ""
+"We left Atlantis and sailed east.  We entered the forbidden sea on the "
+"sixth\n"
+"day without noticing any pursuers, and without Lutas having smashed our\n"
+"ship.  Now, we are out of his reach.\n"
+"One day later, we sighted an island which seems to have one of these fire\n"
+"spitting mountains on it.  I deemed this a sign from the fire god and we\n"
+"landed on its shore."
 
 #: ../../campaigns/atl01.wmf/scripting/init.lua:77
 msgid "We lost a %s to the ocean!"
-msgstr ""
+msgstr "We lost a %s to the ocean!"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:233
 msgid ""
@@ -990,6 +1095,16 @@ msgid ""
 "inhabited,\n"
 "we will see attackers a long time before they arrive."
 msgstr ""
+"We spent the last week building two watchtowers on the mountains close to\n"
+"our landing; and, of course, a hall for us all.  We have very talented "
+"builders in\n"
+"our group — still, the buildings do not match the art we mastered on "
+"Atlantis.\n"
+"I hope they will withstand the next rain.  At least, the towers will warn us "
+"if\n"
+"a ship from Atlantis follows us, and if the island is inhabited, we will "
+"see\n"
+"attackers long before they arrive."
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:410
 msgid ""
@@ -999,12 +1114,19 @@ msgid ""
 "are servants for the common good and must not misuse their powers. This is\n"
 "inexcusable! Explain this, if you will!"
 msgstr ""
+"What is this I hear Sidolus?  I received reports about your soldiers\n"
+"misbehaving and bullying the common folk.  What is the meaning\n"
+"of this nonsense?  They are servants of the common good and\n"
+"must not misuse their position.  This is inexcusable!  Explain, if\n"
+"you will!"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:595
 msgid ""
 "You have won this mission. Continue with the next one or keep playing for\n"
 "as long as you like."
 msgstr ""
+"You have won this mission.  Continue with the next one or keep\n"
+"playing for as long as you like."
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:573
 msgid ""
@@ -1016,7 +1138,14 @@ msgid ""
 "everything else, we need those wares on top of the mountain before our\n"
 "warehouses are all swallowed by the sea."
 msgstr ""
+"Your red hair is a signal from the fire god.  I will trust you and support "
+"your\n"
+"plan.  Our survival lays in your hands now Ostur.\n"
+"<br><br>Swift now, we need a house for Ostur next to the lake and we\n"
+"need planks, timber and spider cloth for the construction there.  Forget\n"
+"all else, we need those wares at the top of the mountain before our\n"
+"warehouses are all swallowed by the sea."
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:326
 msgid "Your words sound wise to me, Colionder. So be it then."
-msgstr ""
+msgstr "Your words sound wise to me Colionder.  So be it then."

@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2013-06-23 17:28+0000\n"
-"PO-Revision-Date: 2011-02-14 15:50+0000\n"
+"PO-Revision-Date: 2013-06-25 13:49+0000\n"
 "Last-Translator: LiSrt <Unknown>\n"
 "Language-Team: English (United Kingdom) <en_GB@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-06-24 04:32+0000\n"
-"X-Generator: Launchpad (build 16677)\n"
+"X-Launchpad-Export-Date: 2013-06-26 05:09+0000\n"
+"X-Generator: Launchpad (build 16681)\n"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:93
 msgid ""
@@ -165,8 +165,8 @@ msgstr ""
 "mines, which will give us a more comfortable life,<br> but the people "
 "working in the mines are unhappy with the current situation. They have to do "
 "hard work and have no time for making their own food.<br> What do you think "
-"about helping them out?<br> I can't tell you what exactly we need... but "
-"here are my recommendations:\"<br><br>-- NEW OBJECTIVE --<br> "
+"about helping them out?<br> I can't tell you what exactly we need… but here "
+"are my recommendations:\"<br><br>-- NEW OBJECTIVE --<br> "
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:104
 msgid ""
@@ -229,8 +229,8 @@ msgstr ""
 "addressed to me, begging me to come back to Fremil.<br> It says that the "
 "Empire is at war with the Barbarians. They were attacked from the north by "
 "the tribe I was forbidden to attack.<br> For me, it is clear what I must "
-"do...<br><br> You have completed this mission. You may continue playing if "
-"you wish, otherwise move on to the next mission.\" "
+"do…<br><br> You have completed this mission. You may continue playing if you "
+"wish, otherwise move on to the next mission.\" "
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:197
 msgid ""
@@ -339,7 +339,7 @@ msgstr "02 — An Outpost for Exile"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:206
 msgid "7 days later..."
-msgstr "7 days later..."
+msgstr "7 days later…"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:211
 msgid "A Message"
@@ -351,7 +351,7 @@ msgstr "A new island"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:163
 msgid "Amalea comes in..."
-msgstr "Amalea comes in..."
+msgstr "Amalea enters…"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:223
 msgid "Amalea smiles"

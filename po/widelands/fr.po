@@ -7,15 +7,15 @@ msgstr ""
 "Project-Id-Version: Widelands svn4866\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2013-06-23 19:28+0200\n"
-"PO-Revision-Date: 2013-03-07 21:16+0000\n"
-"Last-Translator: Tubuntu <Unknown>\n"
+"PO-Revision-Date: 2013-06-25 17:15+0000\n"
+"Last-Translator: David Ouillères <Unknown>\n"
 "Language-Team: French <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Launchpad-Export-Date: 2013-06-24 04:35+0000\n"
-"X-Generator: Launchpad (build 16677)\n"
+"X-Launchpad-Export-Date: 2013-06-26 05:09+0000\n"
+"X-Generator: Launchpad (build 16681)\n"
 
 #: ../../src/s2map.cc:222
 msgid "Bluebyte Settlers II Map. No comment defined!"
@@ -310,13 +310,15 @@ msgstr ""
 
 #: ../../src/wlapplication.cc:1565
 msgid "Fallback settings in effect"
-msgstr ""
+msgstr "Paramètres de secours en effet"
 
 #: ../../src/wlapplication.cc:1567
 msgid ""
 "Your video settings could not be enabled, and fallback settings are in "
 "effect. Please check the graphics options!"
 msgstr ""
+"Vos paramètres vidéo n'ont pas peuvent être activés, et les paramètres de "
+"secours sont en vigueur. S'il vous plaît vérifier les options graphiques !"
 
 #: ../../src/wlapplication.cc:1638
 msgid "Warning: "
@@ -3027,7 +3029,7 @@ msgstr ""
 
 #: ../../src/wui/buildingwindow.cc:189
 msgid "Start an expedition"
-msgstr ""
+msgstr "Lancer une expédition"
 
 #: ../../src/wui/buildingwindow.cc:205
 msgid "Continue"
@@ -3619,7 +3621,7 @@ msgstr ""
 
 #: ../../src/wui/shipwindow.cc:136
 msgid "Construct a port at the current location"
-msgstr ""
+msgstr "Construire un port à l'emplacement actuel"
 
 #: ../../src/wui/shipwindow.cc:142
 msgid "Scout towards the east"
@@ -3631,7 +3633,7 @@ msgstr ""
 
 #: ../../src/wui/shipwindow.cc:154
 msgid "Explore the island's coast counter clockwise"
-msgstr ""
+msgstr "Explorez la côte vers la gauche"
 
 #: ../../src/wui/shipwindow.cc:160
 msgid "Scout towards the south east"
@@ -4654,16 +4656,17 @@ msgstr ""
 
 #: ../../src/logic/ship.cc:468
 msgid "Coast reached"
-msgstr ""
+msgstr "Côte atteint"
 
 #: ../../src/logic/ship.cc:470
 msgid ""
 "An expedition ship reached a coast and is waiting for further commands."
 msgstr ""
+"Un navire de l'expédition atteint une côte et attend plus de commandes."
 
 #: ../../src/logic/ship.cc:611
 msgid "Expedition ready"
-msgstr ""
+msgstr "Expédition prête"
 
 #: ../../src/logic/ship.cc:612
 msgid "An expedition ship is waiting for your commands."

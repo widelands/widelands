@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2013-06-23 17:28+0000\n"
-"PO-Revision-Date: 2011-11-11 12:29+0000\n"
-"Last-Translator: Rafael Neri <Unknown>\n"
+"PO-Revision-Date: 2013-06-25 13:48+0000\n"
+"Last-Translator: LiSrt <Unknown>\n"
 "Language-Team: English (United Kingdom) <en_GB@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-06-24 04:32+0000\n"
-"X-Generator: Launchpad (build 16677)\n"
+"X-Launchpad-Export-Date: 2013-06-26 05:09+0000\n"
+"X-Generator: Launchpad (build 16681)\n"
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:36
 msgid ""
@@ -106,7 +106,7 @@ msgid ""
 "this island a complete desert.<br> Lutius, I beg you: find someone who takes "
 "care about planting new trees.\"<br><br>-- NEW OBJECTIVE --<br> "
 msgstr ""
-" \"Lutius! I have two important things to talk about... First the good "
+" \"Lutius! I have two important things to talk about… First the good "
 "news:<br> I see that the construction of the sawmill is complete, so we can "
 "begin to refine the trunks that the lumberjacks bring us.<br> But that's "
 "just about the only good news at the moment. The bad news is that our "
@@ -329,15 +329,15 @@ msgstr ""
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:93
 msgid "Amalea comes in..."
-msgstr "Amalea comes in..."
+msgstr "Amalea enters…"
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:82
 msgid "Amalea recommends..."
-msgstr "Amalea recommends..."
+msgstr "Amalea recommends…"
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:66
 msgid "Amalea smiles..."
-msgstr "Amalea smiles..."
+msgstr "Amalea smiles…"
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:144
 msgid "Build a barracks"
@@ -379,19 +379,19 @@ msgstr "Safe for now"
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:45
 msgid "Saledus looks around nervously..."
-msgstr "Saledus looks around nervously..."
+msgstr "Saledus looks around nervously…"
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:115
 msgid "Saledus looks promising..."
-msgstr "Saledus looks promising..."
+msgstr "Saledus looks promising…"
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:104
 msgid "Saledus notes..."
-msgstr "Saledus notes..."
+msgstr "Saledus notes…"
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:57
 msgid "Saledus speaks with a sigh of relief..."
-msgstr "Saledus speaks with a sigh of relief..."
+msgstr "Saledus speaks, with a sigh of relief…"
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:133
 msgid "Saledus speaks:"

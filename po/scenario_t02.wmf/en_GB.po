@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2013-06-23 17:28+0000\n"
-"PO-Revision-Date: 2012-09-19 16:01+0000\n"
-"Last-Translator: Biffaboy <Unknown>\n"
+"PO-Revision-Date: 2013-06-25 13:55+0000\n"
+"Last-Translator: LiSrt <Unknown>\n"
 "Language-Team: English (United Kingdom) <en_GB@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-06-24 04:32+0000\n"
-"X-Generator: Launchpad (build 16677)\n"
+"X-Launchpad-Export-Date: 2013-06-26 05:09+0000\n"
+"X-Generator: Launchpad (build 16681)\n"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:333
 msgid ""
@@ -29,7 +29,7 @@ msgstr ""
 "for celebration, I noticed how much this tiny bit of home meant to my "
 "people. Their songs filled the air until late in the night, and they were in "
 "higher spirits still the day after.<br> Maybe we actually are slowly "
-"creating a place here which we can call... home.\" "
+"creating a place here which we can call… home.\" "
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:269
 msgid " \"At last! These rocks should last for a while.\" "
@@ -53,7 +53,7 @@ msgstr ""
 "this senseless battle for so long either.<br> Perhaps it's time to make "
 "ourselves feel a little more at ease here. Perhaps it's time to give those "
 "who still live and think united a new home, replacing what is now lost to "
-"us? Until we can return to the place we once called our home...\" "
+"us? Until we can return to the place we once called our home…\" "
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:286
 msgid ""
@@ -61,7 +61,7 @@ msgid ""
 "this coal and iron ore for!<br> It might even be enough to...\" "
 msgstr ""
 " \"By Chat'Karuth's beard, this is awesome! Just imagine what we can use "
-"this coal and iron ore for!<br> It might even be enough to...\" "
+"this coal and iron ore for!<br> It might even be enough to…\" "
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:243
 msgid ""
@@ -175,8 +175,8 @@ msgstr ""
 "when we were no more but wild beasts driven and controlled by instincts. "
 "None of my brothers will ever gain and hold control over the wooden throne, "
 "none of the tribes will be strong enough to subdue the other. There will be "
-"no end to this slaughtering, unless... is this it? As father told me?<br> "
-"Rise against whoever threatens our very existence, even if it be one of your "
+"no end to this slaughtering, unless… is this it? As father told me?<br> Rise "
+"against whoever threatens our very existence, even if it be one of your "
 "blood or mind?\" "
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:440
@@ -350,7 +350,7 @@ msgstr ""
 "He\n"
 "had been far out in the forest for the past days and I could see how weary "
 "he\n"
-"was.<br> The news he brought changed everything...\""
+"was.<br> The news he brought changed everything…\""
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:370
 msgid ""
@@ -396,7 +396,7 @@ msgstr ""
 "large\n"
 "plain - why don't we use the space Mother Nature gave us and build a farm? "
 "I\n"
-"sure would enjoy a freshly baked pitta bread for a change...\""
+"sure would enjoy a freshly baked pitta bread for a change…\""
 
 #: ../../campaigns/t02.wmf/elemental:7
 msgid "02 - A Place to call Home"
@@ -503,35 +503,35 @@ msgstr ""
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:318
 msgid "Boldreth cheers up..."
-msgstr "Boldreth cheers up..."
+msgstr "Boldreth cheers up…"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:275
 msgid "Boldreth exclaims..."
-msgstr "Boldreth exclaims..."
+msgstr "Boldreth exclaims…"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:250
 msgid "Boldreth jumps up..."
-msgstr "Boldreth jumps up..."
+msgstr "Boldreth jumps up…"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:285
 msgid "Boldreth laughs..."
-msgstr "Boldreth laughs..."
+msgstr "Boldreth laughs…"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:300
 msgid "Boldreth nods..."
-msgstr "Boldreth nods..."
+msgstr "Boldreth nods…"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:339
 msgid "Boldreth remarks..."
-msgstr "Boldreth remarks..."
+msgstr "Boldreth remarks…"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:360
 msgid "Boldreth seems concerned..."
-msgstr "Boldreth seems concerned..."
+msgstr "Boldreth seems concerned…"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:369
 msgid "Boldreth smiles..."
-msgstr "Boldreth smiles..."
+msgstr "Boldreth smiles…"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:234
 msgid "Brave Boldreth steps aside you..."
@@ -657,27 +657,27 @@ msgstr ""
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:325
 msgid "Khantrukh gazes over the plains..."
-msgstr "Khantrukh gazes over the plains..."
+msgstr "Khantrukh gazes over the plains…"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:261
 msgid "Khantrukh grumbles..."
-msgstr "Khantrukh grumbles..."
+msgstr "Khantrukh grumbles…"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:292
 msgid "Khantrukh interrupts..."
-msgstr "Khantrukh interrupts..."
+msgstr "Khantrukh interrupts…"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:242
 msgid "Khantrukh joins in ..."
-msgstr "Khantrukh joins in ..."
+msgstr "Khantrukh joins in…"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:268
 msgid "Khantrukh nods satisfied..."
-msgstr "Khantrukh nods satisfied..."
+msgstr "Khantrukh nods satisfied…"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:390
 msgid "Khantrukh seems relieved..."
-msgstr "Khantrukh seems relieved..."
+msgstr "Khantrukh seems relieved…"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:413
 msgid "Khantrukh speaks"
@@ -685,11 +685,11 @@ msgstr "Khantrukh speaks"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:349
 msgid "Khantrukh speaks..."
-msgstr "Khantrukh speaks..."
+msgstr "Khantrukh speaks…"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:379
 msgid "Khantrukh steps in..."
-msgstr "Khantrukh steps in..."
+msgstr "Khantrukh steps in…"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:396
 msgid "Mission Complete"
@@ -741,7 +741,7 @@ msgstr "The advisor"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:309
 msgid "The elder jumps into the air..."
-msgstr "The elder jumps into the air..."
+msgstr "The elder jumps into the air…"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:132
 msgid ""
@@ -770,20 +770,20 @@ msgstr ""
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:432
 msgid "Thron looks worried..."
-msgstr "Thron looks worried..."
+msgstr "Thron looks worried…"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:332
 msgid "Thron recognizes..."
-msgstr "Thron recognizes..."
+msgstr "Thron recognizes…"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:211
 msgid "Thron shakes his head..."
-msgstr "Thron shakes his head..."
+msgstr "Thron shakes his head…"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:425
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:439
 msgid "Thron speaks..."
-msgstr "Thron speaks..."
+msgstr "Thron speaks…"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:404
 msgid "Victory"
