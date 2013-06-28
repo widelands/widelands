@@ -1,21 +1,17 @@
-# Portuguese translation for widelands
-# Copyright (c) 2010 Rosetta Contributors and Canonical Ltd 2010
-# This file is distributed under the same license as the widelands package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, 2010.
-#
 msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
-"Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
+"Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2013-06-23 17:28+0000\n"
-"PO-Revision-Date: 2011-08-14 10:42+0000\n"
+"PO-Revision-Date: 2013-06-27 16:58+0000\n"
 "Last-Translator: trewe <Unknown>\n"
 "Language-Team: Portuguese <pt@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-06-24 04:33+0000\n"
-"X-Generator: Launchpad (build 16677)\n"
+"X-Launchpad-Export-Date: 2013-06-28 05:11+0000\n"
+"X-Generator: Launchpad (build 16681)\n"
+"Language: pt\n"
 
 #: ../../txts/README:71
 msgid "(CTRL+) 0-9  Remember and go to previously remembered locations"
@@ -25,9 +21,11 @@ msgstr "(CTRL+) 0-9  Lembrar e ir para locais previamente marcados"
 msgid ", / .       Go to previous / next location"
 msgstr ", / .       Ir para a anterior / próxima localização"
 
+# File: ../../txts/README, line: 126
+# File: ../../txts/README, line: 128
 #: ../../txts/README:128
 msgid "- how to reproduce the bug"
-msgstr "- Como reproduzir o erro (\"bug\")"
+msgstr "- Como reproduzir o erro (“bug”)"
 
 #: ../../txts/README:132
 msgid ""
@@ -63,6 +61,8 @@ msgstr ""
 msgid "- which map you were playing"
 msgstr "- que mapa estavas a jogar"
 
+# File: ../../txts/COPYING, line: 20
+# File: ../../txts/COPYING, line: 20
 #: ../../txts/COPYING:20
 msgid ""
 "0. This License applies to any program or other work which contains a notice "
@@ -83,13 +83,13 @@ msgstr ""
 "0. Esta licença aplica-se a qualquer programa ou outro trabalho que contenha "
 "um aviso colocado pelo detentor dos direitos de autor dizendo que este pode "
 "ser distribuido com base nos termos da licença GPL (General Public Licence - "
-"Licença Pública Geral). Quando abaixo se menciona \"Programa\", isso refere-"
-"se a qualquer programa informático ou outro trabalho incluso e a trabalhos "
+"Licença Pública Geral). Quando abaixo se menciona “Programa”, isso refere-se "
+"a qualquer programa informático ou outro trabalho incluso e a trabalhos "
 "baseados no Programa  quer significar o programa em si ou qualquer trabalho "
 "derivado, segundo a lei dos direitos de autor. Isto quer dizer que qualquer  "
 "trabalho que o contenha no todo ou em parte, seja completamente igual, com "
-"modificações ou traduzido noutro idioma (A partir daqui \"tradução\" está "
-"subentendida quando se use o termo \" modificação\").  Cada licenciador é "
+"modificações ou traduzido noutro idioma (A partir daqui “tradução” está "
+"subentendida quando se use o termo “ modificação”).  Cada licenciador é "
 "tratado por você.<br> Outras actividades que não sejam a de cópia, "
 "distribuição e modificação saem do âmbito desta licença pelo que não "
 "cobertas por esta licença. O acto de executar este Programa não está "
@@ -123,6 +123,9 @@ msgstr ""
 "cópia e pode ainda optar por oferecer uma protecção de garantia em troca de "
 "um pagamento.<br>"
 
+#
+# File: ../../txts/COPYING, line: 66
+# File: ../../txts/COPYING, line: 66
 #: ../../txts/COPYING:66
 msgid ""
 "10. If you wish to incorporate parts of the Program into other free programs "
@@ -135,7 +138,7 @@ msgid ""
 msgstr ""
 "10. Se desejar incorporar partes deste Programa noutros programas livres em "
 "que as condições de distribuição sejam diferentes, escreva ao autor deste e "
-"peça permissão. Para software que esteja sob \"copyright\" da Free Software "
+"peça permissão. Para software que esteja sob “copyright” da Free Software "
 "Foundation, escreva à Free Software Foundation, que por vezes abre "
 "excepções. A nossa decisão é guiada pelo objectivo de preservar o estatuto "
 "livre dos derivados do nosso software livre e promover em geral a partilha e "
@@ -315,6 +318,9 @@ msgstr ""
 "restrição ao exercício dos direitos então adquiridos. Você não é responsável "
 "em garantir a concordância de terceiros a esta Licença."
 
+#
+# File: ../../txts/COPYING, line: 48
+# File: ../../txts/COPYING, line: 48
 #: ../../txts/COPYING:48
 msgid ""
 "7. If, as a consequence of a court judgment or allegation of patent "
@@ -338,7 +344,7 @@ msgstr ""
 "satisfazer simultaneamente as suas obrigações para com esta Licença e para "
 "com as outras obrigações pertinentes, então como consequência você não "
 "poderá distribuir o Programa. Por exemplo, se uma licença de patente não "
-"permitir a redistribuição do Programa, livre de \"royalties\", por todos "
+"permitir a redistribuição do Programa, livre de “royalties”, por todos "
 "aqueles que receberem, directa ou indirectamente, cópias fornecidas por si, "
 "então a única forma de você satisfazer tanto a obrigação como esta Licença, "
 "será a de abster-se completamente de distribuir o Programa."
@@ -362,6 +368,9 @@ msgstr ""
 "Licença incorpora a limitação como se a mesma constasse escrita nesta "
 "Licença."
 
+#
+# File: ../../txts/COPYING, line: 63
+# File: ../../txts/COPYING, line: 63
 #: ../../txts/COPYING:63
 msgid ""
 "9. The Free Software Foundation may publish revised and/or new versions of "
@@ -380,8 +389,8 @@ msgstr ""
 "similares em espírito à versão actual, mas podem diferir em detalhes que "
 "resolvem novos problemas ou situações.<br>A cada versão é dada um número "
 "distinto. Se o Programa especifica um número de versão específico desta "
-"Licença que se aplica a ele e a \"qualquer nova versão\", você tem a opção "
-"de aceitar os termos e condições daquela versão ou de qualquer outra versão "
+"Licença que se aplica a ele e a “qualquer nova versão”, você tem a opção de "
+"aceitar os termos e condições daquela versão ou de qualquer outra versão "
 "publicada pela Free Software Foundation. Se o programa não especifica um "
 "número de versão desta Licença, você pode escolher qualquer versão já "
 "publicada pela Free Software Foundation."
@@ -456,11 +465,15 @@ msgstr ""
 "Constrói sempre uma Cabana do Caçador e uma Coutada, para que não fiques sem "
 "comida."
 
+# File: ../../txts/tips/general_game.tip, line: 70
 #: ../../txts/tips/general_game.tip:70
 msgid ""
 "An economy consists of all buildings and flags connected by roads. The "
 "supplies and demands of buildings are handled in its economy."
 msgstr ""
+"Uma economia consiste de todos os edifícios e bandeiras que estão ligados "
+"por estradas. O abastecimento e as exigências dos edifícios serão tratados "
+"por esta."
 
 #: ../../txts/tips/general_game.tip:22
 msgid ""
@@ -645,9 +658,11 @@ msgstr "Objectos gráficos"
 msgid "H        Toggles main menu"
 msgstr "H        Alterna o Menu Principal"
 
+# File: ../../txts/developers, line: 222
+# File: ../../txts/developers, line: 229
 #: ../../txts/developers:229
 msgid "Hebrew"
-msgstr "Hebrew"
+msgstr "Hebraico"
 
 #: ../../txts/tips/editor.tip:18
 msgid "Holding down ALT switches second alternative tool on (if it exists)."
@@ -686,9 +701,12 @@ msgstr "Como Aplicar Estes Termos Aos Seus novos Programas"
 msgid "Hungarian"
 msgstr "Húngaro"
 
+# File: ../../txts/README, line: 61
+# File: ../../txts/README, line: 61
 #: ../../txts/README:61
 msgid "I               Toggle stock inventory display"
 msgstr ""
+"I               Liga/desliga a apresentação do inventário das mercadorias"
 
 #: ../../txts/editor_readme:37
 msgid "I        Activates information tool"
@@ -746,11 +764,14 @@ msgstr ""
 "livre para que todos o possam redistribuir e modificar, de acordo com estes "
 "termos."
 
+# File: ../../txts/tips/general_game.tip, line: 58
 #: ../../txts/tips/general_game.tip:58
 msgid ""
 "If you like to live dangerously, pressing Ctrl while clicking the enhance, "
 "dismantle or destroy building buttons will skip the confirmation."
 msgstr ""
+"Se gostares do risco, carregando “Ctrl“ enquanto melhorares,  pausares ou "
+"destruíres um edifício irá suprimir uma confirmação."
 
 #: ../../txts/README:106
 msgid ""
@@ -849,12 +870,18 @@ msgstr "M               Alterna o mini-mapa"
 msgid "M        Toggles minimap"
 msgstr "M        Liga e desliga o mini-mapa"
 
+#
+# File: ../../txts/tips/general_game.tip, line: 34
+# File: ../../txts/tips/general_game.tip, line: 34
 #: ../../txts/tips/general_game.tip:34
 msgid ""
 "Manage your messages more efficiently: press 'N' for News to access the "
 "messages window, then use 'G' for Go To and the Delete key to archive "
 "messages."
 msgstr ""
+"Maneja as tuas mensagens de forma eficiente: prima “N” para as notícias "
+"acedam a caixa de correio, e depois “G” para ir ao Ir Para e arquivar as "
+"mensagens."
 
 #: ../../txts/developers:137
 msgid "Maps and Missions"
@@ -880,11 +907,15 @@ msgstr ""
 "NOTA: Esta é a lista das pessoas que traduziram o Widelands antes de nos "
 "mudarmos para o launchpad.net. "
 
+# File: ../../txts/tips/general_game.tip, line: 54
 #: ../../txts/tips/general_game.tip:54
 msgid ""
 "New soldiers are recruited in the headquarters or a warehouse if all needed "
 "tools are available. Training sites are for improving their abilities."
 msgstr ""
+"Novos soldados serão recrutados no quartel-geral ou nos armazéns se tiverem "
+"todas as armas necessárias. Sítios de treino somente são para melhorar as "
+"suas capacidades."
 
 #: ../../txts/COPYING:70
 msgid "No warranty"
@@ -986,20 +1017,31 @@ msgstr "Polaco"
 msgid "Preamble"
 msgstr "Preâmbulo"
 
+#
+# File: ../../txts/tips/general_game.tip, line: 42
+# File: ../../txts/tips/general_game.tip, line: 42
 #: ../../txts/tips/general_game.tip:42
 msgid ""
 "Press Ctrl+(0-9) to store important locations, then press 0-9 to recall them."
 msgstr ""
+"Prima Ctrl+(0-9) para guardar locais importantes, e prima 0-9 para revisitar-"
+"os."
 
+# File: ../../txts/tips/general_game.tip, line: 62
 #: ../../txts/tips/general_game.tip:62
 msgid "Press I to quickly toggle the display of your stock inventory."
 msgstr ""
+"Carrega “I” para rapidamente visualizar o inventário das tuas mercadorias."
 
+#
+# File: ../../txts/tips/general_game.tip, line: 46
+# File: ../../txts/tips/general_game.tip, line: 46
 #: ../../txts/tips/general_game.tip:46
 msgid ""
 "Pressing and holding ALT GR key lets you drag the window below the mouse "
 "pointer."
 msgstr ""
+"Ao premir e manter a tecla “Alt Gr” podes mover a janela sob o teu rato."
 
 #: ../../txts/README:1
 msgid "README"
@@ -1013,11 +1055,16 @@ msgstr "LEIA-ME do Editor"
 msgid "README for the Widelands Editor"
 msgstr "LEIA-ME do Editor do Widelands"
 
+#
+# File: ../../txts/tips/general_game.tip, line: 50
+# File: ../../txts/tips/general_game.tip, line: 50
 #: ../../txts/tips/general_game.tip:50
 msgid ""
 "Removing a road holding Ctrl let you remove all flags up to the first "
 "junction."
 msgstr ""
+"Ao remover uma estrada com a tecla de controlo permite-te remover todas as "
+"bandeiras até a primeira encruzilhada."
 
 #: ../../txts/README:146
 msgid ""
@@ -1127,11 +1174,15 @@ msgstr "Sueco"
 msgid "T        Toggles tools menu"
 msgstr "T        Alterna o Menu de Ferramentas"
 
+# File: ../../txts/tips/general_game.tip, line: 30
+# File: ../../txts/tips/general_game.tip, line: 66
 #: ../../txts/tips/general_game.tip:66
 msgid ""
 "The 'configure economy' menu for setting up target quantities can be "
 "accessed via the flag menu."
 msgstr ""
+"O menu “configurar economia” para ajustar a quantidade requerida de uma "
+"mercadoria específica pode ser acedido a partir do botão direito do rato."
 
 #: ../../txts/tips/general_game.tip:2
 msgid ""
@@ -1246,6 +1297,9 @@ msgstr ""
 "As teclas dos números (1 a 0) permitem definir directamente o tamanho da "
 "área seleccionada à volta do ponteiro do rato."
 
+#
+# File: ../../txts/COPYING, line: 33
+# File: ../../txts/COPYING, line: 33
 #: ../../txts/COPYING:33
 msgid ""
 "The source code for a work means the preferred form of the work for making "
@@ -1262,7 +1316,7 @@ msgstr ""
 "para lhe fazer modificações. Para um trabalho executável, o código-fonte "
 "completo quer dizer todas as linhas de código-fonte de todos os módulos que "
 "este contem, mais quaisquer ficheiros de definição do interface associado, "
-"mais os \"scripts\" usados para controlar a compilação e instalação do "
+"mais os “scripts” usados para controlar a compilação e instalação do "
 "executável. Porém, como excepção especial, o código-fonte distribuído não "
 "necessita incluir o que é normalmente distribuído (na forma de código-fonte "
 "ou binário) com os componentes principais (tais como compilador, kernel, "
@@ -1360,6 +1414,9 @@ msgstr ""
 "Linux basta iniciar o Widelands desta forma: $ ./widelands --"
 "record=filename.rec"
 
+#
+# File: ../../txts/COPYING, line: 93
+# File: ../../txts/COPYING, line: 93
 #: ../../txts/COPYING:93
 msgid ""
 "To do so, attach the following notices to the program.  It is safest to "
@@ -1370,8 +1427,8 @@ msgstr ""
 "Para isso, anexe os seguintes avisos ao programa. É mais seguro anexá-los "
 "logo no início de cada arquivo-fonte para reforçarem mais efectivamente a "
 "inexistência de garantias; e cada arquivo deve possuir pelo menos a linha de "
-"direitos de autor (\"copyright\") e uma indicação de onde o texto completo "
-"se encontra."
+"direitos de autor (“copyright”) e uma indicação de onde o texto completo se "
+"encontra."
 
 #: ../../txts/README:42
 msgid ""
@@ -1389,11 +1446,14 @@ msgstr "Tradução"
 msgid "Translators"
 msgstr "Tradutores"
 
+#
+# File: ../../txts/tips/multiplayer.tip, line: 10
+# File: ../../txts/tips/multiplayer.tip, line: 10
 #: ../../txts/tips/multiplayer.tip:10
 msgid ""
 "Use '@name' at the beginning of a chat message to send it to only one player."
 msgstr ""
-"Usa \"@nome\" no inicio la linha da mensagens do chat  para enviá-la apenas "
+"Usa “@nome” no inicio la linha da mensagens do chat  para enviá-la apenas "
 "para esse jogador."
 
 #: ../../txts/tips/general_game.tip:26
@@ -1404,20 +1464,31 @@ msgstr ""
 "Usa os botões de prioridade na janela do edifício para ajustar a entrega de "
 "uma mercadoria específica."
 
+#
+# File: ../../txts/tips/general_game.tip, line: 38
+# File: ../../txts/tips/general_game.tip, line: 38
 #: ../../txts/tips/general_game.tip:38
 msgid ""
 "Use the ',' (comma) and '.' (period) keys to go back and forth between "
 "recently visited places in the world."
 msgstr ""
+"Usa as teclas “,” (virgula) e “.” (ponto) para ir e revir entre os lugares "
+"recentemente visitados no mundo."
 
+#
+# File: ../../txts/tips/general_game.tip, line: 30
+# File: ../../txts/tips/general_game.tip, line: 30
 #: ../../txts/tips/general_game.tip:30
 msgid ""
 "Use the 'configure economy' menu to adjust the target quantity of a specific "
 "ware."
 msgstr ""
-"Usa o menu \"configurar economia\" para ajustar a quantidade requerida de "
-"uma mercadoria específica."
+"Usa o menu “configurar economia” para ajustar a quantidade requerida de uma "
+"mercadoria específica."
 
+#
+# File: ../../txts/README, line: 142
+# File: ../../txts/README, line: 144
 #: ../../txts/README:144
 msgid ""
 "Using the Watch Replay option in the main menu, a previously played game "
@@ -1430,7 +1501,7 @@ msgstr ""
 "Usando a opção Ver Repetição no menu Principal, um jogo anteriormente jogado "
 "será reconstruído com precisão para que o possas ver. Nota porém que mesmo "
 "pequenas alterações nos ficheiros de dados ou do executável do Widelands "
-"podem tornar a Repetição incompatível e ficar \"fora de sintonia\". Isto é "
+"podem tornar a Repetição incompatível e ficar “fora de sintonia”. Isto é "
 "semelhante ao problemas de dessincronização dos jogos de rede se um dos "
 "jogadores usar uma versão diferente do jogo."
 
@@ -1449,11 +1520,16 @@ msgstr ""
 "para o principio da estrada. Se o SHIFT estiver também premido, as bandeiras "
 "serão dispostas do inicio da estrada para o fim."
 
+#
+# File: ../../txts/README, line: 88
+# File: ../../txts/README, line: 90
 #: ../../txts/README:90
 msgid ""
 "When removing a road, if Ctrl is pressed all flags up to the first junction "
 "are removed."
 msgstr ""
+"Ao remover uma estrada, se Ctrl estiver premido todas as bandeiras até à "
+"primeira encruzilhada serão removidos."
 
 #: ../../txts/developers:3
 msgid "Widelands Development Team"
@@ -1544,12 +1620,15 @@ msgstr ""
 "mantiveres premida a tecla CTRL durante a selecção. Se depois clicares no "
 "mapa, uma instância de uma dos objectos seleccionados será colocada no mapa."
 
+#
+# File: ../../txts/tips/multiplayer.tip, line: 6
+# File: ../../txts/tips/multiplayer.tip, line: 6
 #: ../../txts/tips/multiplayer.tip:6
 msgid ""
 "You can use '/me' at the beginning of a chatmessage: '/me is tired' will be "
 "printed as '-> Nickname is tired'."
 msgstr ""
-"Podes usar \"/me\" no início da mensagem de chat: por exemplo '/me está "
+"Podes usar “/me” no início da mensagem de chat: por exemplo '/me está "
 "cansado'  para que seja apresentado assim '-> Nickname está cansado'."
 
 #: ../../txts/tips/multiplayer.tip:2
