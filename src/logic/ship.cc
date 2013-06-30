@@ -353,7 +353,7 @@ void Ship::ship_update_idle(Game & game, Bob::State & state)
 
 				Area<FCoords> area(node, 0);
 				std::vector<Bob *> ships;
-				game.map().find_bobs(area, &ships, FindBobShip());
+				map.find_bobs(area, &ships, FindBobShip());
 
 				for (std::vector<Bob *>::const_iterator it = ships.begin(); it != ships.end(); ++it) {
 					if (*it == this)
@@ -415,46 +415,65 @@ void Ship::ship_update_idle(Game & game, Bob::State & state)
 		}
 		case EXP_SCOUTING: {
 			if (m_expedition->island_exploration) { // Exploration of the island
-				if (m_expedition->direction == 0) {
-					m_expedition->direction = m_expedition->clockwise ? WALK_E : WALK_W;
-				} else {
-					// Check whether the island was completely surrounded
-					if (get_position() == m_expedition->exploration_start) {
-						std::string msg_head = _("Island surrounded");
-						std::string msg_body = _("An expedition ship surrounded its island without any events.");
-						send_message(game, "exp_island", msg_head, msg_body, "ship_explore_island_cw.png");
-						m_ship_state = EXP_WAITING;
-						return start_task_idle(game, descr().main_animation(), 1500);
+				if (exp_close_to_coast()) {
+					if (m_expedition->direction == 0) {
+						m_expedition->direction = m_expedition->clockwise ? WALK_E : WALK_W;
+						m_expedition->exploration_start = get_position();
+					} else {
+						// Check whether the island was completely surrounded
+						if (get_position() == m_expedition->exploration_start) {
+							std::string msg_head = _("Island surrounded");
+							std::string msg_body = _("An expedition ship surrounded its island without any events.");
+							send_message(game, "exp_island", msg_head, msg_body, "ship_explore_island_cw.png");
+							m_ship_state = EXP_WAITING;
+							return start_task_idle(game, descr().main_animation(), 1500);
+						}
 					}
-				}
-				uint8_t last_dir = m_expedition->direction;
-				if (m_expedition->clockwise) {
-					if (exp_dir_swimable(m_expedition->direction)) {
-						while (exp_dir_swimable(get_cw_neighbour(m_expedition->direction))) {
-							m_expedition->direction = get_cw_neighbour(m_expedition->direction);
-							assert (last_dir != m_expedition->direction);
+					if (m_expedition->clockwise) {
+						if (exp_dir_swimable(m_expedition->direction)) {
+							while (exp_dir_swimable(get_cw_neighbour(m_expedition->direction))) {
+								m_expedition->direction = get_cw_neighbour(m_expedition->direction);
+							}
+						} else {
+							do {
+								m_expedition->direction = get_ccw_neighbour(m_expedition->direction);
+							} while (!exp_dir_swimable(m_expedition->direction));
 						}
 					} else {
-						do {
-							m_expedition->direction = get_ccw_neighbour(m_expedition->direction);
-							assert (last_dir != m_expedition->direction);
-						} while (!exp_dir_swimable(m_expedition->direction));
-					}
-				} else {
-					if (exp_dir_swimable(m_expedition->direction)) {
-						while (exp_dir_swimable(get_ccw_neighbour(m_expedition->direction))) {
-							m_expedition->direction = get_ccw_neighbour(m_expedition->direction);
-							assert (last_dir != m_expedition->direction);
+						if (exp_dir_swimable(m_expedition->direction)) {
+							while (exp_dir_swimable(get_ccw_neighbour(m_expedition->direction))) {
+								m_expedition->direction = get_ccw_neighbour(m_expedition->direction);
+							}
+						} else {
+							do {
+								m_expedition->direction = get_cw_neighbour(m_expedition->direction);
+							} while (!exp_dir_swimable(m_expedition->direction));
 						}
-					} else {
-						do {
-							m_expedition->direction = get_cw_neighbour(m_expedition->direction);
-							assert (last_dir != m_expedition->direction);
-						} while (!exp_dir_swimable(m_expedition->direction));
 					}
+					state.ivar1 = 1;
+					return start_task_move(game, m_expedition->direction, descr().get_sail_anims(), false);
+				} else {
+					// The ship got the command to scout around an island, but is not close to any island
+					// Most likely the command was send as the ship was on an exploration and just leaving
+					// the island - therefore we try to find the island again.
+					FCoords position = get_position();
+					Map & map = game.map();
+					for (uint8_t dir = FIRST_DIRECTION; dir <= LAST_DIRECTION; ++dir) {
+						FCoords neighbour = map.get_neighbour(position, dir);
+						for (uint8_t sur = FIRST_DIRECTION; sur <= LAST_DIRECTION; ++sur)
+							if (!(map.get_neighbour(neighbour, sur).field->nodecaps() & MOVECAPS_SWIM)) {
+								// Okay we found the next coast, so now the ship should go there.
+								// However, we do neither save the position as starting position, nor do we save
+								// the direction we currently go. So the ship can start exploring normally
+								state.ivar1 = 1;
+								return start_task_move(game, dir, descr().get_sail_anims(), false);
+							}
+					}
+					// if we are here, it seems something really strange happend.
+					log("WARNING: ship was not able to start exploration. Entering WAIT mode.");
+					m_ship_state = EXP_WAITING;
+					return start_task_idle(game, descr().main_animation(), 1500);
 				}
-				state.ivar1 = 1;
-				return start_task_move(game, m_expedition->direction, descr().get_sail_anims(), false);
 			} else { // scouting towards a specific direction
 				if (exp_dir_swimable(m_expedition->direction)) {
 					// the scouting direction is still free to move
@@ -638,7 +657,6 @@ void Ship::exp_explore_island (Game &, bool clockwise) {
 	m_expedition->clockwise = clockwise;
 	m_expedition->direction = 0;
 	m_expedition->island_exploration = true;
-	m_expedition->exploration_start = get_position();
 }
 
 void Ship::log_general_info(const Editor_Game_Base & egbase)

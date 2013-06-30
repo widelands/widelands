@@ -129,6 +129,17 @@ struct Ship : Bob {
 		return m_expedition->swimable[dir - 1];
 	}
 
+	/// \returns whether the expedition ship is close to the coast
+	bool exp_close_to_coast() {
+		if (m_ship_state == TRANSPORT)
+			return false;
+		assert(m_expedition);
+		for (uint8_t dir = FIRST_DIRECTION; dir <= LAST_DIRECTION; ++dir)
+			if (!m_expedition->swimable[dir - 1])
+				return true;
+		return false;
+	}
+
 	/// \returns (in expedition mode only!) the list of currently seen port build spaces
 	const std::list<Coords>* exp_port_spaces() {
 		if (m_ship_state == TRANSPORT)
