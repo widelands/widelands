@@ -7,15 +7,15 @@ msgstr ""
 "Project-Id-Version: Widelands svn4866\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2013-06-23 19:28+0200\n"
-"PO-Revision-Date: 2013-06-25 17:15+0000\n"
-"Last-Translator: David Ouillères <Unknown>\n"
+"PO-Revision-Date: 2013-07-02 09:53+0000\n"
+"Last-Translator: bouchard renaud <Unknown>\n"
 "Language-Team: French <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Launchpad-Export-Date: 2013-06-26 05:09+0000\n"
-"X-Generator: Launchpad (build 16681)\n"
+"X-Launchpad-Export-Date: 2013-07-03 05:09+0000\n"
+"X-Generator: Launchpad (build 16692)\n"
 
 #: ../../src/s2map.cc:222
 msgid "Bluebyte Settlers II Map. No comment defined!"
@@ -2062,7 +2062,7 @@ msgstr "Les joueurs sauverdardés sont:"
 #: ../../src/ui_fsmenu/launchMPG.cc:564
 #, c-format
 msgid "Player %u"
-msgstr ""
+msgstr "Joueur %u"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:568
 msgid "<closed>"
@@ -3025,7 +3025,7 @@ msgstr "Annuler la route"
 
 #: ../../src/wui/buildingwindow.cc:179
 msgid "Cancel the expedition"
-msgstr ""
+msgstr "Annuler l'expédition"
 
 #: ../../src/wui/buildingwindow.cc:189
 msgid "Start an expedition"
@@ -3272,7 +3272,7 @@ msgstr "Niveau suivant"
 
 #: ../../src/wui/productionsitewindow.cc:95
 msgid "Terminate the employment of the selected worker"
-msgstr ""
+msgstr "Arrêter la tâche du travailleur sélectionné"
 
 #: ../../src/wui/productionsitewindow.cc:163
 msgid "(vacant)"
@@ -3460,7 +3460,7 @@ msgstr "Travailleurs sur le quai"
 
 #: ../../src/wui/warehousewindow.cc:224
 msgid "Expedition"
-msgstr ""
+msgstr "Expédition"
 
 #: ../../src/wui/building_statistics_menu.cc:79
 #: ../../src/wui/game_main_menu.cc:63
@@ -3605,19 +3605,19 @@ msgstr "Navire"
 
 #: ../../src/wui/shipwindow.cc:112
 msgid "Scout towards the north west"
-msgstr ""
+msgstr "Reconnaitre le terrain vers le Nord-Ouest"
 
 #: ../../src/wui/shipwindow.cc:118
 msgid "Explore the island's coast clockwise"
-msgstr ""
+msgstr "Explorer les côtes de l'île dans le sens horaire"
 
 #: ../../src/wui/shipwindow.cc:124
 msgid "Scout towards the north east"
-msgstr ""
+msgstr "Reconnaitre le terrain vers le Nord-Est"
 
 #: ../../src/wui/shipwindow.cc:130
 msgid "Scout towards the west"
-msgstr ""
+msgstr "Reconnaitre le terrain vers l' Ouest"
 
 #: ../../src/wui/shipwindow.cc:136
 msgid "Construct a port at the current location"
@@ -3625,11 +3625,11 @@ msgstr "Construire un port à l'emplacement actuel"
 
 #: ../../src/wui/shipwindow.cc:142
 msgid "Scout towards the east"
-msgstr ""
+msgstr "Reconnaitre le terrain vers l' Est"
 
 #: ../../src/wui/shipwindow.cc:148
 msgid "Scout towards the south west"
-msgstr ""
+msgstr "Reconnaitre le terrain vers le Sud-Ouest"
 
 #: ../../src/wui/shipwindow.cc:154
 msgid "Explore the island's coast counter clockwise"
@@ -3637,7 +3637,7 @@ msgstr "Explorez la côte vers la gauche"
 
 #: ../../src/wui/shipwindow.cc:160
 msgid "Scout towards the south east"
-msgstr ""
+msgstr "Reconnaitre le terrain vers le Sud-Est"
 
 #: ../../src/wui/shipwindow.cc:172
 msgid "Go to ship"
@@ -4640,19 +4640,22 @@ msgstr "Travailleurs en cours:%s"
 
 #: ../../src/logic/ship.cc:320
 msgid "Port space found"
-msgstr ""
+msgstr "Espace portuaire trouvé"
 
 #: ../../src/logic/ship.cc:321
 msgid "An expedition ship found a new port build space."
 msgstr ""
+"Un navire de l'expédition à trouvé un nouvel emplacement portuaire à "
+"construire."
 
 #: ../../src/logic/ship.cc:423
 msgid "Island surrounded"
-msgstr ""
+msgstr "Île encerclée"
 
 #: ../../src/logic/ship.cc:424
 msgid "An expedition ship surrounded its island without any events."
 msgstr ""
+"Un navire de l'expédition à fait le tour de l'île sans aucun évènement."
 
 #: ../../src/logic/ship.cc:468
 msgid "Coast reached"
@@ -4670,7 +4673,7 @@ msgstr "Expédition prête"
 
 #: ../../src/logic/ship.cc:612
 msgid "An expedition ship is waiting for your commands."
-msgstr ""
+msgstr "Un navire de l'expédition attend vos ordres."
 
 #: ../../src/logic/ship.cc:828
 #, c-format

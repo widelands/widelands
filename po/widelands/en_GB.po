@@ -8,19 +8,19 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2013-06-23 19:28+0200\n"
-"PO-Revision-Date: 2013-06-25 13:46+0000\n"
+"PO-Revision-Date: 2013-07-02 09:18+0000\n"
 "Last-Translator: LiSrt <Unknown>\n"
 "Language-Team: English (United Kingdom) <en_GB@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2013-06-26 05:10+0000\n"
-"X-Generator: Launchpad (build 16681)\n"
+"X-Launchpad-Export-Date: 2013-07-03 05:09+0000\n"
+"X-Generator: Launchpad (build 16692)\n"
 
 #: ../../src/s2map.cc:222
 msgid "Bluebyte Settlers II Map. No comment defined!"
-msgstr "Bluebyte Settlers II Map.  No comment defined!"
+msgstr "Bluebyte Settlers II Map. No comment defined!"
 
 #: ../../src/wlapplication.cc:410
 msgid "ERROR: Could not connect to metaserver (reason above)!\n"
@@ -36,7 +36,7 @@ msgid ""
 "Widelands could not load the file \"%s\". The file format seems to be "
 "incompatible."
 msgstr ""
-"Widelands could not load the file \"%s\".  The file format seems to be "
+"Widelands could not load the file \"%s\". The file format seems to be "
 "incompatible."
 
 #: ../../src/wlapplication.cc:978 ../../src/wlapplication.cc:987
@@ -48,7 +48,7 @@ msgid ""
 "Waited 5 seconds to close audio. Problems here so killing Widelands. Update "
 "your sound driver and/or SDL to fix this problem\n"
 msgstr ""
-"Waited 5 seconds to close audio.  Unsuccessful so killing Widelands.  Update "
+"Waited 5 seconds to close audio. Unsuccessful so killing Widelands. Update "
 "your sound driver and/or SDL to fix this problem\n"
 
 #: ../../src/wlapplication.cc:1246
@@ -63,7 +63,7 @@ msgstr ""
 
 #: ../../src/wlapplication.cc:1249
 msgid "--double is disabled. This is not a debug build!"
-msgstr "--double is disabled.  This is not a debug build!"
+msgstr "--double is disabled. This is not a debug build!"
 
 #: ../../src/wlapplication.cc:1370
 msgid "This is Widelands-"
@@ -198,22 +198,22 @@ msgid ""
 " --yres=[...]         Height of the window in pixel.\n"
 msgstr ""
 " --speed_of_new_game  The speed that the new game will run at\n"
-"                      when started, with factor 1000 (0 is paused,\n"
+"                      when started, with factor 1000 (0 is pause,\n"
 "                      1000 is normal speed).\n"
 " --auto_roadbuild_mode=[yes|no]\n"
-"                      Whether to enter road building mode\n"
-"                      automatically after planting a flag that is\n"
+"                      Whether to enter roadbuilding mode\n"
+"                      automatically after placing a flag that is\n"
 "                      not connected to a road.\n"
 " --write_HTML=[yes|no]\n"
-"                      Write HTML help files for parsed game data.\n"
+"                      Write HTML-helpfiles for parsed game data.\n"
 "\n"
 "Graphic options:\n"
 " --fullscreen=[yes|no]\n"
 "                      Whether to use the whole display for the\n"
 "                      game screen.\n"
-" --depth=[16|32]      Colour depth in number of bits per pixel.\n"
-" --xres=[...]         Width of the window in pixels.\n"
-" --yres=[...]         Height of the window in pixels.\n"
+" --depth=[16|32]      Color depth in number of bits per pixel.\n"
+" --xres=[...]         Width of the window in pixel.\n"
+" --yres=[...]         Height of the window in pixel.\n"
 
 #: ../../src/wlapplication.cc:1439
 msgid ""
@@ -291,7 +291,7 @@ msgid ""
 "Hope you enjoy this game!\n"
 "\n"
 msgstr ""
-"Bug reports? Suggestions? Check out the project website:\n"
+"Bug reports? Suggestions? Check out the project website:\n"
 "        https://launchpad.net/widelands\n"
 "\n"
 "Hope you enjoy this game!\n"
@@ -307,7 +307,7 @@ msgid ""
 "effect. Please check the graphics options!"
 msgstr ""
 "Your video settings could not be enabled, and fallback settings are in "
-"effect.  Please check the graphics options!"
+"effect. Please check the graphics options!"
 
 #: ../../src/wlapplication.cc:1638
 msgid "Warning: "
@@ -331,7 +331,7 @@ msgid ""
 msgstr ""
 "\n"
 "\n"
-"Please report this problem to help us improve Widelands.  You will find "
+"Please report this problem to help us improve Widelands. You will find "
 "related messages in the standard output (stdout.txt on Windows). You are "
 "using build "
 
@@ -342,10 +342,11 @@ msgid ""
 "Widelands attempts to create a savegame when errors occur during the game. "
 "It is often - though not always - possible to load it and continue playing.\n"
 msgstr ""
-". Please add this information to your report.\n"
+". Please add this information to your report.\n"
 "\n"
-"Widelands attempts to create a savegame when errors occur during the game.  "
-"It is often (but not always) possible to load it and continue playing.\n"
+"Widelands attempts to create a savegame when errors occur during the "
+"game. It is often (but not always) possible to load it and continue "
+"playing.\n"
 
 #: ../../src/wlapplication.cc:1768
 msgid "The address of the game server is invalid"
@@ -369,8 +370,8 @@ msgid ""
 "The end of the replay has been reached and the game has been paused. You may "
 "unpause the game and continue watching if you want to."
 msgstr ""
-"The end of the replay has been reached and the game has been paused.  You "
-"may unpause the game and continue watching if you want to."
+"The end of the replay has been reached and the game has been paused. You may "
+"unpause the game and continue watching if you want to."
 
 #: ../../src/wlapplication.cc:2258 ../../src/logic/game.cc:370
 #: ../../src/logic/game.cc:410
@@ -1001,9 +1002,9 @@ msgid ""
 "forever, which is the default; omit the duration key to make the message "
 "exist forever"
 msgstr ""
-"the value %u is not allowed as duration as it is the special value meaning "
-"\"forever\", which is the default.  Omit the duration key to make the "
-"message exist forever"
+"the value %u is not allowed as duration as it has the special value meaning "
+"\"forever\", which is the default. Omit the duration key to make the message "
+"exist forever"
 
 #: ../../src/map_io/widelands_map_players_messages_data_packet.cc:111
 #, c-format
@@ -1354,7 +1355,7 @@ msgid ""
 "This is a dedicated server send \"@%s help\" to get a full list of available "
 "commands."
 msgstr ""
-"This is a dedicated server.  Send \"@%s help\" to get a full list of "
+"This is a dedicated server. Send \"@%s help\" to get a full list of "
 "available commands."
 
 #: ../../src/network/nethost.cc:1201
@@ -1384,7 +1385,7 @@ msgid ""
 "Access to host commands denied. To gain access, send the password with pwd "
 "command."
 msgstr ""
-"Access to host commands denied.  To gain access, send the password with pwd "
+"Access to host commands denied. To gain access, send the password with pwd "
 "command."
 
 #: ../../src/network/nethost.cc:1225
@@ -1394,7 +1395,7 @@ msgstr "%s told me to run the command: \"%s\""
 
 #: ../../src/network/nethost.cc:1234
 msgid "Sorry! Saving was deactivated on this dedicated server!"
-msgstr "Sorry!  Saving is disabled on this dedicated server."
+msgstr "Sorry! Saving is disabled on this dedicated server."
 
 #: ../../src/network/nethost.cc:1237
 msgid "Can not save, as long as no game is running!"
@@ -1420,7 +1421,7 @@ msgstr "Password incorrect."
 
 #: ../../src/network/nethost.cc:1273
 msgid "The password was correct, access was granted!"
-msgstr "Password accepted.  Access granted."
+msgstr "Password accepted. Access granted."
 
 #: ../../src/network/nethost.cc:1279
 #, c-format
@@ -1438,8 +1439,8 @@ msgid ""
 "This server is password protected. You can send the password with: \"@%s pwd "
 "PASSWORD\""
 msgstr ""
-"This server is password protected.  You can send the password with: \"@%s "
-"pwd PASSWORD\""
+"This server is password protected. You can send the password with: \"@%s pwd "
+"PASSWORD\""
 
 #: ../../src/network/network_gaming_messages.cc:121
 msgid "Client has left the game."
@@ -1647,8 +1648,8 @@ msgid ""
 "You got disconnected, as you send a superuser command without superuser "
 "permission.This incident will be logged and reported to the administrator."
 msgstr ""
-"You were disconnected  as you sent a superuser command without permission.  "
-"This will be logged and reported to the administrator."
+"You were disconnected because you sent a superuser command without "
+"permission. This will be logged and reported to the administrator."
 
 #: ../../src/network/internet_gaming_messages.cc:50
 msgid "You got disconnected, as the metaserver is currently restarting."
@@ -1685,8 +1686,8 @@ msgid ""
 "http://wl.widelands.org/wiki/InternetGaming for setting up your internet "
 "connection for hosting a game online."
 msgstr ""
-"The metaserver was unable to connect to your game.  Most likely it is not "
-"available to the Internet.  Please take a look at "
+"The metaserver was unable to connect to your game. Most likely it is not "
+"available to the Internet. Please take a look at "
 "http://wl.widelands.org/wiki/InternetGaming for setting up your Internet "
 "connection for hosting a game online."
 
@@ -1721,8 +1722,8 @@ msgid ""
 "/me checked the received file. Although md5 check summing succeeded, I can "
 "not handle the file."
 msgstr ""
-"/me checked the received file.  Although md5 checksumming succeeded, I "
-"cannot handle the file."
+"/me checked the received file. Although md5 checksumming succeeded, I cannot "
+"handle the file."
 
 #: ../../src/network/netclient.cc:1106
 msgid " An automatic savegame will be created."
@@ -1782,7 +1783,7 @@ msgid ""
 "command %s. Maybe the metaserver is using a different protocol version ?"
 msgstr ""
 "Expected a LOGIN, RELOGIN or REJECTED packet from server, but received "
-"command %s.  Maybe the metaserver is using a different protocol version."
+"command %s. Maybe the metaserver is using a different protocol version."
 
 #: ../../src/network/internet_gaming.cc:425
 #, c-format
@@ -1950,10 +1951,10 @@ msgid ""
 "please select another saved game or zip the directories content."
 msgstr ""
 "WARNING:\n"
-"The saved game you selected is a directory.  This happens if you set the "
-"option \"nozip\" to true or manually unzipped the saved game.\n"
+"The saved game you selected is a directory. This happens if you set the "
+"option \"nozip\" to true, or manually unzipped the saved game.\n"
 "Widelands is not able to transfer directories to clients; please select "
-"another saved game or zip the directory's content."
+"another saved game, or zip the directory's content."
 
 #: ../../src/ui_fsmenu/launchMPG.cc:425 ../../src/ui_fsmenu/launchSPG.cc:259
 msgid "File not found"
@@ -1972,17 +1973,17 @@ msgstr ""
 "Widelands tried to start a game with a file that could not be found at the "
 "given path.\n"
 "The file was: %s\n"
-"If this happens, the host might have selected a file that you do not have.  "
-"Normally such a file would be automatically downloaded from the host.  "
-"Perhaps the transfer was not yet finished."
+"If this happens, the host might have selected a file that you do not "
+"have. Normally such a file would be automatically downloaded from the "
+"host. Perhaps the transfer was not yet finished."
 
 #: ../../src/ui_fsmenu/launchMPG.cc:451
 msgid ""
 "The selected file can not be found. If it is not automatically transferred "
 "to you, please write the host about this problem."
 msgstr ""
-"The selected file cannot be found.  If it is not automatically transferred "
-"to you, please inform the host."
+"The selected file cannot be found. If it is not automatically transferred to "
+"you, please inform the host."
 
 #: ../../src/ui_fsmenu/launchMPG.cc:483
 #: ../../src/wui/multiplayersetupgroup.cc:116
@@ -2067,23 +2068,22 @@ msgid ""
 "On the left side is a list of all clients including you. With the button in "
 "the rear of your nickname, you can set your role. Available roles are:"
 msgstr ""
-"On the left side is a list of all players, including you.  Set your role "
-"using the button beside your nickname.  Available roles are:"
+"On the left side is a list of all players, including you. Set your role "
+"using the button beside your nickname. Available roles are:"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:675
 msgid ""
 "The player with the color of the flag. If more than one client selected the "
 "same color, these share the control over the player (\"shared kingdom "
 "mode\")."
-msgstr ""
-"Player flag colour.  Players with the same flag share their kingdoms."
+msgstr "Player flag colour. Players with the same flag share their kingdoms."
 
 #: ../../src/ui_fsmenu/launchMPG.cc:679
 msgid ""
 "And spectator mode, meaning you can see everything, but can not control any "
 "player"
 msgstr ""
-"Spectator mode.  Spectators can see everything but do not participate in the "
+"Spectator mode. Spectators can see everything but do not participate in the "
 "game."
 
 #: ../../src/ui_fsmenu/launchMPG.cc:681
@@ -2108,8 +2108,8 @@ msgid ""
 "hover texts indicates the strength of the currently selected computer "
 "player)."
 msgstr ""
-"Connected to a computer player.  The face in the picture as well as the "
-"mouse hover text indicate the strength of the currently selected computer "
+"Connected to a computer player. The face in the picture, as well as the "
+"mouse hover text, indicate the strength of the currently selected computer "
 "player."
 
 #: ../../src/ui_fsmenu/launchMPG.cc:693
@@ -2128,7 +2128,7 @@ msgid ""
 "player starts with) and the tribe an team for computer players"
 msgstr ""
 "The latter three are only configurable by the host by left clicking the "
-"player's \"type\" button.  Hosts can further change the settings of each "
+"player's \"type\" button. Hosts can further change the settings of each "
 "player (the set of buildings, wares and workers the player starts with), the "
 "tribe and team for computer players."
 
@@ -2151,10 +2151,10 @@ msgid ""
 "Further the host is able to set a specific win condition and finally can "
 "start the game as soon as all players are set up."
 msgstr ""
-"On the right side is information about the selected map or savegame.  A "
+"On the right side is information about the selected map or savegame. A "
 "button to the right of the map name allows the host to change to a different "
-"one.  The host is also able to set a specific win condition, and finally, "
-"can start the game as soon as all players are set up."
+"one. The host is also able to set a specific win condition, and finally, can "
+"start the game as soon as all players are set up."
 
 #: ../../src/ui_fsmenu/fileview.cc:45 ../../src/wui/watchwindow.cc:142
 msgid "Close"
@@ -2360,8 +2360,8 @@ msgstr ""
 "path.\n"
 "The file was: %s\n"
 "If this happens in a network game, the host might have selected a file that "
-"you do not have.  Normally such a file would be automatically downloaded "
-"from the host.  Perhaps the transfer has not yet finished."
+"you do not have. Normally such a file would be automatically downloaded from "
+"the host. Perhaps the transfer has not yet finished."
 
 #: ../../src/ui_fsmenu/loadgame.cc:63 ../../src/ui_fsmenu/loadreplay.cc:54
 #: ../../src/wui/game_main_menu_save_game.cc:102
@@ -2561,8 +2561,8 @@ msgid ""
 "This map file is not present on your filesystem. Data shown here was sent by "
 "the server."
 msgstr ""
-"This map file is not present on your system.  Data shown here was sent by "
-"the server."
+"This map file is not present on your system. Data shown here was sent by the "
+"server."
 
 #: ../../src/ui_fsmenu/internet_lobby.cc:52
 msgid "Metaserver Lobby"
@@ -3821,7 +3821,7 @@ msgstr "change soldier capacity: %s"
 #: ../../src/logic/playercommand.cc:1741
 #, c-format
 msgid "retreat: value out of range. Received %u expected %u-%u"
-msgstr "retreat: value out of range.  Received %u expected %u-%u"
+msgstr "retreat: value out of range. Received %u expected %u-%u"
 
 #: ../../src/logic/playercommand.cc:1752
 #, c-format
@@ -4082,8 +4082,8 @@ msgid ""
 "This mines' main vein exhausted. Expect strongly diminished returns on "
 "investment. You should consider to expand, dismantle or destruct it."
 msgstr ""
-"This mine's main vein is exhausted.  Expect strongly diminished returns on "
-"investment.  You should consider expanding, dismantling or destroying it."
+"This mine's main vein is exhausted. Expect strongly diminished returns on "
+"investment. You should consider expanding, dismantling or destroying it."
 
 #: ../../src/logic/production_program.cc:1249
 #: ../../src/logic/production_program.cc:1325
@@ -4147,12 +4147,11 @@ msgid ""
 "not be executed). Strange things may happen. No solution for this problem "
 "has been implemented yet. (bug #1951113) (The game has been paused.)"
 msgstr ""
-"The game engine has encountered a logic error.  The %s #%u of player %u "
-"could not find a way from (%i, %i) (with %s immovable) to the opponent (%s "
-"#%u of player %u) at (%i, %i) (with %s immovable).  The %s will now desert "
-"(but will not be executed).  Strange things may happen.  No solution for "
-"this problem has been implemented yet. (bug #1951113) (The game has been "
-"paused.)"
+"The game engine has encountered a logic error. The %s #%u of player %u could "
+"not find a way from (%i, %i) (with %s immovable) to the opponent (%s #%u of "
+"player %u) at (%i, %i) (with %s immovable). The %s will now desert (but will "
+"not be executed). Strange things may happen. No solution for this problem "
+"has been implemented yet. (bug #1951113) (The game has been paused.)"
 
 #: ../../src/logic/soldier.cc:1470 ../../src/logic/soldier.cc:1475
 msgid "no"
@@ -4649,7 +4648,7 @@ msgid ""
 "Can not remove player. It is referenced in some place. Remove all buildings "
 "and bobs that depend on this player and try again."
 msgstr ""
-"Cannot remove player.  It is referenced in some place.  Remove all buildings "
+"Cannot remove player. It is referenced in some place. Remove all buildings "
 "and bobs that depend on this player and try again."
 
 #: ../../src/editor/ui_menus/editor_tool_noise_height_options_menu.cc:41
@@ -4753,7 +4752,7 @@ msgstr "<Not a map file>"
 
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:384
 msgid " exists already. Overwrite?"
-msgstr " exists already.  Overwrite?"
+msgstr " exists already. Overwrite?"
 
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:386
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:406
@@ -4817,8 +4816,8 @@ msgid ""
 "Set the position that will have the coordinates (0, 0). This will be the top-"
 "left corner of a generated minimap."
 msgstr ""
-"Set the position that will have the coordinates (0, 0).  This will be the "
-"top-left corner of a generated minimap."
+"Set the position that will have the coordinates (0, 0). This will be the top-"
+"left corner of a generated minimap."
 
 #: ../../src/editor/ui_menus/editor_tool_change_resources_options_menu.cc:45
 msgid "Resources Tools Options"
