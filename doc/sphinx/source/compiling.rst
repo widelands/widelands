@@ -28,8 +28,8 @@ If you are a developer, you might (optionally!) make use of the following softwa
 
 Windows
 -------
-If you're searching for a good SVN tool for windows, we recommend Tortoise SVN.
-Check http://tortoisesvn.sourceforge.net.
+If you're searching for a good BZR tool for windows, we recommend Tortoise BZR.
+Check http://wiki.bazaar.canonical.com/WindowsDownloads
 
 InnoSetup
 ^^^^^^^^^
