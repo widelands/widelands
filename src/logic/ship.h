@@ -23,6 +23,7 @@
 #include "bob.h"
 #include "economy/shippingitem.h"
 #include "graphic/diranimations.h"
+#include <list>
 
 namespace UI {class Window;}
 class Interactive_GameBase;
