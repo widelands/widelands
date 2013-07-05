@@ -96,7 +96,6 @@ m_soldier_upgrade_try(false),
 m_doing_upgrade_request(false)
 {
 	m_next_swap_soldiers_time = 0;
-
 }
 
 
@@ -220,14 +219,14 @@ int MilitarySite::incorporateSoldier(Editor_Game_Base & egbase, Soldier & s)
 		s.set_location(this);
 	}
 
-	// Soldier upgrade is done once the site is full. In soldier upgrade,
-	// I request one new soldier who is better suited than the existing ones.
-	// Once a new guy starts walking towards here, the old guy is kicked out.
-	// That kick-out happens as a result of polling. The "if" statement below
-	// Checks for such "overbooking" situation. The same happens also when
-	// a militarysite can only house one soldier: The one and only guy leaves
-	// only when his replacement is at the front door.
+	// NOCOM(#kxq): I do not quite understand this comment. Is the following
+	// code meant to avoid that a soldier leaves until the next one is there? I
+	// changed this comment to make this a little clearer (to me at least) :)
 
+	// Soldier upgrade is done once the site is full. In soldier upgrade, we
+	// request one new soldier who is better suited than the existing ones. Once
+	// a new guy starts walking towards here, we have to make sure that none of
+	// the soldiers leave the building until he is here.
 	if (stationedSoldiers().size()  > descr().get_max_number_of_soldiers())
 	{
 		return incorporateUpgradedSoldier(egbase, s) ? 0 : -1;
@@ -343,18 +342,15 @@ MilitarySite::drop_least_suited_soldier(bool new_soldier_has_arrived, Soldier * 
 }
 
 /*
- * This find room for a soldier in an already full occupied military building.
+ * This finds room for a soldier in an already full occupied military building.
  *
- * Returns false if the soldier was not incorporated
+ * Returns false if the soldier was not incorporated.
  */
-
 bool
 MilitarySite::incorporateUpgradedSoldier(Editor_Game_Base & egbase, Soldier & s)
 {
-	uint32_t const stationed = stationedSoldiers().size();
-
 	// Call to drop_least routine has side effects: it tries to drop a soldier. Order is important!
-	if (stationed < m_capacity || drop_least_suited_soldier(true, &s))
+	if (stationedSoldiers().size() < m_capacity || drop_least_suited_soldier(true, &s))
 	{
 		Game & game = ref_cast<Game, Editor_Game_Base>(egbase);
 		s.set_location(this);
@@ -364,6 +360,8 @@ MilitarySite::incorporateUpgradedSoldier(Editor_Game_Base & egbase, Soldier & s)
 	}
 	return false;
 }
+// NOCOM(#kxq): You have to merge trunk before this can be merged. I saw there are some conflicts.
+
 /*
 ===============
 Called when our soldier arrives.
@@ -418,8 +416,9 @@ void MilitarySite::update_normal_soldier_request()
 	}
 }
 
-/* There are two kinds of soldier requests: "normal", which is used whenever the military site
- * needs more soldiers, and "upgrade" which is used when well (or less) trained soldiers are preferred.
+/* There are two kinds of soldier requests: "normal", which is used whenever the military site needs
+ * more soldiers, and "upgrade" which is used when there is a preference for either heroes or
+ * rookies.
  *
  * In case of normal requests, the military site is filled. In case of upgrade requests, only one guy
  * is exchanged at a time.
@@ -438,7 +437,7 @@ void MilitarySite::update_upgrade_soldier_request()
 
 	if (m_upgrade_soldier_request)
 	{
-		if (!(m_upgrade_soldier_request->is_open()))
+		if (!m_upgrade_soldier_request->is_open())
 			// If a replacement is already walking this way, let's not change our minds.
 			do_rebuild_request = false;
 		if (0 == m_upgrade_soldier_request->get_count())
@@ -456,13 +455,13 @@ void MilitarySite::update_upgrade_soldier_request()
 				MilitarySite::request_soldier_callback,
 				wwWORKER));
 
-
-		m_upgrade_soldier_request->set_requirements (m_soldier_upgrade_requirements);
+		m_upgrade_soldier_request->set_requirements(m_soldier_upgrade_requirements);
 		m_upgrade_soldier_request->set_count(1);
 	}
 }
 
 /*
+ * // NOCOM(#kxq): comment is outdated.
  * I have update_soldier_request
  *        update_soldier_request_impl
  *        update_upgrade_soldier_request
@@ -478,6 +477,8 @@ void MilitarySite::update_upgrade_soldier_request()
  */
 
 void MilitarySite::update_soldier_request(bool incd)
+// NOCOM(#kxq): incd is not very descriptive and I do not understand the last paragraph
+// in the comment.
 {
 	const int32_t capacity = soldierCapacity();
 	const int32_t stationed = stationedSoldiers().size();
@@ -536,8 +537,7 @@ void MilitarySite::update_soldier_request(bool incd)
 
 		if ((capacity == stationed) and (! m_normal_soldier_request))
 		{
-			int32_t pss = presentSoldiers().size();
-			if (pss == capacity)
+			if (presentSoldiers().size() == capacity)
 			{
 				m_doing_upgrade_request = true;
 				update_upgrade_soldier_request();
@@ -564,6 +564,7 @@ void MilitarySite::act(Game & game, uint32_t const data)
 
 	ProductionSite::act(game, data);
 
+	// NOCOM(#kxq): Is this intentional? get_gametime() returns an uint32.
 	const int32_t timeofgame = game.get_gametime();
 	if (m_normal_soldier_request && m_upgrade_soldier_request)
 	{
@@ -1037,10 +1038,9 @@ Map_Object * MilitarySite::popSoldierJob
  * that are better than what we already have. This routine sets the requirements
  * used by the request.
  *
- * The routine returns a true if upgrade request thresholds have changed.
- * This information could be used to decide whether the soldier-Request should be upgraded.
+ * The routine returns true if upgrade request thresholds have changed. This information could be
+ * used to decide whether the soldier-Request should be upgraded.
  */
-
 bool
 MilitarySite::update_upgrade_requirements()
 {
@@ -1055,7 +1055,6 @@ MilitarySite::update_upgrade_requirements()
 	}
 
 	// Find the level of the soldier that is currently least-suited.
-
 	Soldier * worst_guy = find_least_suited_soldier();
 	int32_t wg_level = worst_guy->get_level(atrTotal);
 
@@ -1096,7 +1095,7 @@ MilitarySite::update_upgrade_requirements()
 void
 MilitarySite::set_soldier_preference(MilitarySite::SoldierPreference p)
 {
-	assert (kPrefersHeroes == p || kPrefersRookies == p);
+	assert(kPrefersHeroes == p || kPrefersRookies == p);
 	m_soldier_preference = p;
 	m_next_swap_soldiers_time = 0;
 }
