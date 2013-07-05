@@ -74,10 +74,10 @@ struct ProductionSite_Descr : public Building_Descr {
 	const Ware_Types & working_positions() const throw () {
 		return m_working_positions;
 	}
-	bool is_output_ware_type  (Ware_Index const i) const throw () {
+	bool is_output_ware_type  (const Ware_Index& i) const throw () {
 		return m_output_ware_types  .count(i);
 	}
-	bool is_output_worker_type(Ware_Index const i) const throw () {
+	bool is_output_worker_type(const Ware_Index& i) const throw () {
 		return m_output_worker_types.count(i);
 	}
 	const Ware_Types & inputs() const throw () {return m_inputs;}
@@ -270,7 +270,7 @@ protected:  // TrainingSite must have access to this stuff
  * releasing some wares out of a building
 */
 struct Input {
-	Input(Ware_Index const Ware, uint8_t const Max) : m_ware(Ware), m_max(Max)
+	Input(const Ware_Index& Ware, uint8_t const Max) : m_ware(Ware), m_max(Max)
 	{}
 	~Input() {}
 

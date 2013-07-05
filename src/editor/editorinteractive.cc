@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2003, 2006-2011 by the Widelands Development Team
+ * Copyright (C) 2002-2003, 2006-2011, 2013 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -50,6 +50,7 @@ Editor_Interactive::Editor_Interactive(Widelands::Editor_Game_Base & e) :
 	Interactive_Base(e, g_options.pull_section("global")),
 	m_need_save(false),
 	m_realtime(WLApplication::get()->get_time()),
+	m_left_mouse_button_is_down(false),
 	m_history(m_undo, m_redo),
 
 #define INIT_BUTTON(picture, name, tooltip)                         \
@@ -163,15 +164,12 @@ void Editor_Interactive::load(const std::string & filename) {
 	egbase().cleanup_for_load();
 	m_history.reset();
 
-	std::auto_ptr<Widelands::Map_Loader> const ml
-	(map.get_correct_loader(filename.c_str()));
+	std::auto_ptr<Widelands::Map_Loader> const ml(map.get_correct_loader(filename.c_str()));
 	if (not ml.get())
 		throw warning
-		(_("Unsupported format"),
-		 _
-		 ("Widelands could not load the file \"%s\". The file format seems "
-		  "to be incompatible."),
-		 filename.c_str());
+			(_("Unsupported format"),
+			 _("Widelands could not load the file \"%s\". The file format seems to be incompatible."),
+			 filename.c_str());
 
 	UI::ProgressWindow loader_ui("pics/editor.jpg");
 	std::vector<std::string> tipstext;
@@ -275,18 +273,27 @@ void Editor_Interactive::map_clicked(bool should_draw) {
 	set_need_save(true);
 }
 
+bool Editor_Interactive::handle_mouserelease(Uint8 btn, int32_t x, int32_t y) {
+	if (btn == SDL_BUTTON_LEFT) {
+		m_left_mouse_button_is_down = false;
+	}
+	return Interactive_Base::handle_mouserelease(btn, x, y);
+}
+
+bool Editor_Interactive::handle_mousepress(Uint8 btn, int32_t x, int32_t y) {
+	if (btn == SDL_BUTTON_LEFT) {
+		m_left_mouse_button_is_down = true;
+	}
+	return Interactive_Base::handle_mousepress(btn, x, y);
+}
+
 /// Needed to get freehand painting tools (hold down mouse and move to edit).
 void Editor_Interactive::set_sel_pos(Widelands::Node_and_Triangle<> const sel) {
 	bool const target_changed =
 	    tools.current().operates_on_triangles() ?
 	    sel.triangle != get_sel_pos().triangle : sel.node != get_sel_pos().node;
 	Interactive_Base::set_sel_pos(sel);
-	int32_t mask = SDL_BUTTON_LMASK;
-#ifdef __APPLE__
-	// workaround for SDLs middle button emulation
-	mask |= SDL_BUTTON_MMASK;
-#endif
-	if (target_changed and (SDL_GetMouseState(0, 0) & mask))
+	if (target_changed and m_left_mouse_button_is_down)
 		map_clicked(true);
 }
 
@@ -313,7 +320,6 @@ void Editor_Interactive::toggle_playermenu() {
 
 }
 
-
 void Editor_Interactive::toolsize_menu_btn() {
 	if (m_toolsizemenu.window)
 		delete m_toolsizemenu.window;
@@ -321,8 +327,9 @@ void Editor_Interactive::toolsize_menu_btn() {
 		new Editor_Toolsize_Menu(*this, m_toolsizemenu);
 }
 
-
 void Editor_Interactive::set_sel_radius_and_update_menu(uint32_t const val) {
+	if (tools.current().has_size_one())
+		return;
 	if (UI::UniqueWindow * const w = m_toolsizemenu.window)
 		ref_cast<Editor_Toolsize_Menu, UI::UniqueWindow>(*w).update(val);
 	else
@@ -487,6 +494,8 @@ bool Editor_Interactive::handle_key(bool const down, SDL_keysym const code) {
 void Editor_Interactive::select_tool
 (Editor_Tool & primary, Editor_Tool::Tool_Index const which) {
 	if (which == Editor_Tool::First and & primary != tools.current_pointer) {
+		if (primary.has_size_one())
+			set_sel_radius_and_update_menu(0);
 		Widelands::Map & map = egbase().map();
 		//  A new tool has been selected. Remove all registered overlay callback
 		//  functions.

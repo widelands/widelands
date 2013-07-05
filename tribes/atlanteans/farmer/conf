@@ -1,4 +1,3 @@
-soundfx=../../../sound/farm/scythe
 help=_Plants fields.
 program=plant
 program=harvest

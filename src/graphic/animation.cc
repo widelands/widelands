@@ -551,6 +551,7 @@ NonPackedAnimation::NonPackedAnimation(const string& directory, Section& s)
 	// Read mapping from frame numbers to sound effect names and load effects
 	while (Section::Value * const v = s.get_next_val("sfx")) {
 		char * parameters = v->get_string(), * endp;
+		std::string fx_name;
 		unsigned long long int const value = strtoull(parameters, &endp, 0);
 		const uint32_t frame_number = value;
 		try {
@@ -558,8 +559,10 @@ NonPackedAnimation::NonPackedAnimation(const string& directory, Section& s)
 				throw wexception("expected %s but found \"%s\"", "frame number", parameters);
 			parameters = endp;
 			force_skip(parameters);
-			g_sound_handler.load_fx(directory, parameters);
-			map<uint32_t, string>::const_iterator const it =
+
+			fx_name = std::string(directory) + "/" + std::string(parameters);
+			g_sound_handler.load_fx_if_needed(directory, parameters, fx_name);
+			std::map<uint32_t, std::string>::const_iterator const it =
 				sfx_cues.find(frame_number);
 			if (it != sfx_cues.end())
 				throw wexception
@@ -569,7 +572,7 @@ NonPackedAnimation::NonPackedAnimation(const string& directory, Section& s)
 		} catch (const _wexception & e) {
 			throw wexception("sfx: %s", e.what());
 		}
-		sfx_cues[frame_number] = parameters;
+		sfx_cues[frame_number] = fx_name;
 	}
 
 	int32_t const fps = s.get_int("fps");

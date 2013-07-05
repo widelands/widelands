@@ -28,7 +28,7 @@
 
 namespace Widelands {
 class Worker;
-struct Economy;
+class Economy;
 
 struct IdleWorkerSupply : public Supply {
 	IdleWorkerSupply(Worker &);

@@ -2,6 +2,7 @@ size=big
 buildable=no
 enhanced_building=yes
 soldier_capacity=8
+trainer_patience=9
 
 [buildcost]
 wood=2

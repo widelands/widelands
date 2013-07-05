@@ -39,6 +39,8 @@ struct Editor_Set_Origin_Tool : public Editor_Tool {
 	Editor_Action_Args format_args_impl(Editor_Interactive & parent);
 
 	char const * get_sel_impl() const {return "pics/fsel.png";}
+
+	bool has_size_one() const {return true;}
 };
 
 #endif

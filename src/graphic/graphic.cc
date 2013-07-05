@@ -67,6 +67,7 @@ Graphic::Graphic
 	 bool    fullscreen,
 	 bool    opengl)
 	:
+	m_fallback_settings_in_effect (false),
 	m_rendertarget     (0),
 	m_nr_update_rects  (0),
 	m_update_fullscreen(true),
@@ -133,6 +134,7 @@ Graphic::Graphic
 		flags &= ~SDL_FULLSCREEN;
 		sdlsurface = SDL_SetVideoMode
 			(FALLBACK_GRAPHICS_WIDTH, FALLBACK_GRAPHICS_HEIGHT, FALLBACK_GRAPHICS_DEPTH, flags);
+		m_fallback_settings_in_effect = true;
 		if (!sdlsurface)
 			throw wexception
 				("Graphics: could not set video mode: %s", SDL_GetError());
@@ -303,6 +305,11 @@ GCC_DIAG_ON ("-Wold-style-cast")
 	m_rendertarget = new RenderTarget(screen_.get());
 }
 
+bool Graphic::check_fallback_settings_in_effect()
+{
+	return m_fallback_settings_in_effect;
+}
+
 /**
  * Free the surface
 */
@@ -311,6 +318,8 @@ Graphic::~Graphic()
 	BOOST_FOREACH(Texture* texture, m_maptextures)
 		delete texture;
 	delete m_rendertarget;
+
+	flush_animations();
 
 #if USE_OPENGL
 	if (g_opengl)
@@ -504,6 +513,12 @@ void Graphic::save_png_(Surface & surf, StreamWrite * sw) const
 	png_destroy_write_struct(&png_ptr, &info_ptr);
 }
 
+void Graphic::flush_maptextures()
+{
+	BOOST_FOREACH(Texture* texture, m_maptextures)
+		delete texture;
+	m_maptextures.clear();
+}
 
 /**
  * Creates a terrain texture.

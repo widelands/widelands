@@ -30,7 +30,6 @@
 #include <string>
 
 struct ChatProvider;
-struct GameChatPanel;
 struct GameController;
 struct GameSettingsProvider;
 struct PlayerDescriptionGroup;

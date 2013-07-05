@@ -33,6 +33,7 @@
 #include "path.h"
 #include "player.h"
 #include "profile/profile.h"
+#include "ship.h"
 #include "soldier.h"
 #include "tribe.h"
 #include "upcast.h"
@@ -56,8 +57,11 @@ namespace Widelands {
  */
 uint32_t Bob::Descr::vision_range() const
 {
-	if (m_owner_tribe)
+	if (m_owner_tribe) {
+		if (upcast(const Ship_Descr, ship, this))
+			return ship->vision_range();
 		return m_owner_tribe->get_bob_vision_range();
+	}
 
 	return 0;
 }
@@ -614,7 +618,7 @@ bool Bob::start_task_movepath
 	state.ivar1    = 0; // step #
 	state.ivar2    = forceonlast ? 1 : 0;
 	state.ivar3    = only_step;
-	state.diranims = &anims;
+	state.diranims = anims;
 	return true;
 }
 
@@ -623,11 +627,11 @@ bool Bob::start_task_movepath
  * Start moving along the given, precalculated path.
  */
 void Bob::start_task_movepath
-	(Game                &       game,
-	 const Path          &       path,
-	 const DirAnimations &       anims,
-	 bool                  const forceonlast,
-	 int32_t               const only_step)
+	(Game                & game,
+	 const Path          & path,
+	 const DirAnimations & anims,
+	 bool            const forceonlast,
+	 int32_t         const only_step)
 {
 	assert(path.get_start() == get_position());
 
@@ -637,7 +641,7 @@ void Bob::start_task_movepath
 	state.ivar1    = 0;
 	state.ivar2    = forceonlast ? 1 : 0;
 	state.ivar3    = only_step;
-	state.diranims = &anims;
+	state.diranims = anims;
 }
 
 
@@ -649,12 +653,12 @@ void Bob::start_task_movepath
  * the given path index.
  */
 bool Bob::start_task_movepath
-	(Game                &       game,
-	 const Path          &       origpath,
-	 int32_t               const index,
-	 const DirAnimations &       anims,
-	 bool                  const forceonlast,
-	 int32_t               const only_step)
+	(Game                & game,
+	 const Path          & origpath,
+	 int32_t         const index,
+	 const DirAnimations & anims,
+	 bool            const forceonlast,
+	 int32_t         const only_step)
 {
 	CoordPath path(game.map(), origpath);
 	int32_t const curidx = path.get_index(get_position());
@@ -752,16 +756,16 @@ Bob::Task const Bob::taskMove = {
  * Move into the given direction, without passability checks.
  */
 void Bob::start_task_move
-	(Game                &       game,
-	 int32_t               const dir,
-	 DirAnimations const * const anims,
-	 bool                  const forcemove)
+	(Game                & game,
+	 int32_t         const dir,
+	 const DirAnimations & anims,
+	 bool            const forcemove)
 {
 	int32_t const tdelta =
 		start_walk
 			(game,
 			 static_cast<WalkingDir>(dir),
-			 anims->get_animation(dir),
+			 anims.get_animation(dir),
 			 forcemove);
 	if (tdelta < 0)
 		return send_signal(game, tdelta == -2 ? "blocked" : "fail");
@@ -1040,8 +1044,11 @@ void Bob::log_general_info(const Editor_Game_Base & egbase)
 		molog("* svar1: %s\n", m_stack[i].svar1.c_str());
 
 		molog("* coords: (%i, %i)\n", m_stack[i].coords.x, m_stack[i].coords.y);
-		molog("* diranims: %p\n",  m_stack[i].diranims);
-		molog("* path: %p\n",  m_stack[i].path);
+		molog("* diranims:");
+		for (Direction dir = FIRST_DIRECTION; dir <= LAST_DIRECTION; ++dir) {
+			molog(" %d", m_stack[i].diranims.get_animation(dir));
+		}
+		molog("\n* path: %p\n",  m_stack[i].path);
 		if (m_stack[i].path) {
 			const Path & path = *m_stack[i].path;
 			Path::Step_Vector::size_type nr_steps = path.get_nsteps();
@@ -1133,8 +1140,7 @@ void Bob::Loader::load(FileRead & fr)
 			uint32_t anims[6];
 			for (int j = 0; j < 6; ++j)
 				anims[j] = bob.descr().get_animation(fr.CString());
-			state.diranims = new DirAnimations
-				(anims[0], anims[1], anims[2], anims[3], anims[4], anims[5]);
+			state.diranims = DirAnimations(anims[0], anims[1], anims[2], anims[3], anims[4], anims[5]);
 		}
 
 		if (fr.Unsigned8()) {
@@ -1245,7 +1251,7 @@ void Bob::save
 			for (int dir = 1; dir <= 6; ++dir)
 				fw.CString
 					(descr().get_animation_name
-					 	(state.diranims->get_animation(dir)).c_str());
+						(state.diranims.get_animation(dir)).c_str());
 		} else {
 			fw.Unsigned8(0);
 		}

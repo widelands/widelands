@@ -69,7 +69,7 @@ struct Button : public NamedPanel {
 	bool is_snap_target() const {return true;}
 
 	// Drawing and event handlers
-	void draw(RenderTarget &)__attribute__((hot));
+	void draw(RenderTarget &);
 	void think();
 
 	void handle_mousein(bool inside);

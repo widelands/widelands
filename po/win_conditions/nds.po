@@ -1,0 +1,200 @@
+# Low German translation for widelands
+# Copyright (c) 2013 Rosetta Contributors and Canonical Ltd 2013
+# This file is distributed under the same license as the widelands package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2013.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: widelands\n"
+"Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
+"POT-Creation-Date: 2013-06-16 09:11+0000\n"
+"PO-Revision-Date: 2013-06-16 17:34+0000\n"
+"Last-Translator: Nasenbaer <Unknown>\n"
+"Language-Team: Low German <nds@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Launchpad-Export-Date: 2013-06-17 05:16+0000\n"
+"X-Generator: Launchpad (build 16667)\n"
+
+#: ../../scripting/win_condition_texts.lua:31
+msgid "%i trees."
+msgstr "% Boome."
+
+#: ../../scripting/win_condition_texts.lua:54
+msgid "%s %s %i%% of the land (%i of %i)."
+msgstr "%s %s %i%% vun de Land (%i vun %i)."
+
+#: ../../scripting/win_condition_texts.lua:30
+msgid "%s had "
+msgstr "%s hat "
+
+#: ../../scripting/win_condition_texts.lua:28
+msgid "%s has %i trees at the moment."
+msgstr "%s hat juest %i Boome."
+
+#: ../../scripting/win_condition_texts.lua:46
+msgid "%s owns more than half of the maps area."
+msgstr "%s besitt miehr as de half Land."
+
+#: ../../scripting/win_conditions/04_wood_gnome.lua:16
+msgid ""
+"As wood gnome you like big forests, so your task is, to have more trees on\n"
+"your territory than any other player. The game will end after 4 hours of\n"
+"playing. The one with the most trees at that point will win the game."
+msgstr ""
+
+#: ../../scripting/win_conditions/01_defeat_all.lua:12
+msgid "Autocrat"
+msgstr "Eenzigster König"
+
+#: ../../scripting/win_conditions/02_collectors.lua:13
+msgid "Collectors"
+msgstr "Sammler"
+
+#: ../../scripting/win_condition_texts.lua:2
+msgid "Congratulations!"
+msgstr "Proost!"
+
+#: ../../scripting/win_conditions/03_territorial_time.lua:15
+msgid ""
+"Each player or team tries to obtain more than half of the maps' area. The "
+"winner will be the player or the team that is able to keep that area for at "
+"least 20 minutes or the one with the most territory after 4 hours, whichever "
+"comes first."
+msgstr ""
+
+#: ../../scripting/win_conditions/03_territorial_lord.lua:15
+msgid ""
+"Each player or team tries to obtain more than half of the maps' area. The "
+"winner will be the player or the team that is able to keep that area for at "
+"least 20 minutes."
+msgstr ""
+
+#: ../../scripting/win_conditions/00_endless_game.lua:12
+msgid "Endless Game"
+msgstr "Ewich Speel"
+
+#: ../../scripting/win_conditions/05_endless_game_fogless.lua:12
+msgid "Endless Game (no fog)"
+msgstr "Ewich Speel (ihle Daak)"
+
+#: ../../scripting/win_condition_texts.lua:49
+msgid "Keep it for %i more minutes to win the game."
+msgstr ""
+
+#: ../../scripting/win_condition_texts.lua:23
+#: ../../scripting/win_condition_texts.lua:29
+msgid "Player overview:"
+msgstr ""
+
+#: ../../scripting/win_condition_texts.lua:41
+msgid "Points"
+msgstr "Pünkt"
+
+#: ../../scripting/win_condition_texts.lua:22
+msgid "Status"
+msgstr "Tostand"
+
+#: ../../scripting/win_condition_texts.lua:38
+msgid "Status for %s<br>"
+msgstr "Tostand för %s<br>"
+
+#: ../../scripting/win_condition_texts.lua:45
+msgid "Team %i"
+msgstr "Mannschop %i"
+
+#: ../../scripting/win_conditions/03_territorial_lord.lua:13
+msgid "Territorial Lord"
+msgstr "Landkönig"
+
+#: ../../scripting/win_conditions/03_territorial_time.lua:13
+msgid "Territorial Time"
+msgstr "Land König (op Tied)"
+
+#: ../../scripting/win_condition_texts.lua:27
+msgid "The game will end in %i minutes."
+msgstr ""
+
+#: ../../scripting/win_condition_texts.lua:40
+msgid "The game will end in %s."
+msgstr ""
+
+#: ../../scripting/win_conditions/01_defeat_all.lua:14
+msgid "The tribe or team that can defeat all others wins the game!"
+msgstr ""
+
+#: ../../scripting/win_condition_texts.lua:32
+msgid "The winner is %s "
+msgstr ""
+
+#: ../../scripting/win_conditions/00_endless_game.lua:14
+msgid "This is an endless game without rules."
+msgstr ""
+
+#: ../../scripting/win_conditions/05_endless_game_fogless.lua:13
+msgid "This is an endless game without rules. Fog of war is disabled."
+msgstr ""
+
+#: ../../scripting/win_condition_texts.lua:39
+msgid "Total: %i points"
+msgstr "Alltosamen: %i Pünkt"
+
+#: ../../scripting/win_condition_texts.lua:34
+msgid "Trees owned"
+msgstr "Boome in Besitt"
+
+#: ../../scripting/win_conditions/04_wood_gnome.lua:13
+msgid "Wood Gnome"
+msgstr "Holtmännche"
+
+#: ../../scripting/win_condition_texts.lua:7
+msgid "You are defeated!"
+msgstr ""
+
+#: ../../scripting/win_condition_texts.lua:13
+msgid "You are the winner!"
+msgstr ""
+
+#: ../../scripting/win_conditions/02_collectors.lua:15
+msgid ""
+"You get points for precious wares in your warehouses, the player with the "
+"highest number of wares at the end of 4 hours wins the game."
+msgstr ""
+
+#: ../../scripting/win_condition_texts.lua:8
+msgid ""
+"You have nothing to command left. If you want, you may continue as spectator."
+msgstr ""
+
+#: ../../scripting/win_condition_texts.lua:3
+msgid "You have won this game!"
+msgstr ""
+
+#: ../../scripting/win_condition_texts.lua:17
+msgid "You lost"
+msgstr ""
+
+#: ../../scripting/win_condition_texts.lua:48
+msgid "You own more than half of the maps area."
+msgstr ""
+
+#: ../../scripting/win_condition_texts.lua:47
+msgid "You still got %i minutes to prevent a victory."
+msgstr ""
+
+#: ../../scripting/win_condition_texts.lua:12
+msgid "You won"
+msgstr ""
+
+#: ../../scripting/win_condition_texts.lua:18
+msgid "You've lost this game!"
+msgstr ""
+
+#: ../../scripting/win_condition_texts.lua:53
+msgid "game will end in %i minutes."
+msgstr ""
+
+#: ../../scripting/win_condition_texts.lua:33
+msgid "with %i trees."
+msgstr "med %i Boome."

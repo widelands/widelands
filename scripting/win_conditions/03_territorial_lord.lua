@@ -140,6 +140,8 @@ return {
 				end
 			end
 			if not foundcandidate then
+				currentcandidate = ""
+				candidateisteam = false
 				remaining_time = 10
 			end
 		end

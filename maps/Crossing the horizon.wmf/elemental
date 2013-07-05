@@ -1,0 +1,13 @@
+# Automatically created by Widelands bzr6567[trunk] (RelWithDebInfo)
+
+[global]
+packet_version="1"
+map_w="144"
+map_h="144"
+nr_players="4"
+world="greenland"
+name="Crossing the horizon"
+author="Unknown"
+descr="no description defined"
+hint=
+tags=

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2012 by the Widelands Development Team
+ * Copyright (C) 2006-2013 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -21,14 +21,33 @@
 
 #include "build_info.h"
 #include "computer_player.h"
-#include "io/filesystem/disk_filesystem.h"
 #include "editor/editorinteractive.h"
+#include "gamesettings.h"
 #include "graphic/font_handler.h"
 #include "graphic/font_handler1.h"
+#include "i18n.h"
+#include "io/dedicated_log.h"
+#include "io/filesystem/disk_filesystem.h"
+#include "io/filesystem/layered_filesystem.h"
+#include "journal.h"
+#include "logic/game.h"
+#include "logic/game_data_error.h"
+#include "logic/map.h"
+#include "logic/replay.h"
+#include "logic/tribe.h"
+#include "map_io/map_loader.h"
+#include "network/internet_gaming.h"
+#include "network/netclient.h"
+#include "network/nethost.h"
+#include "profile/profile.h"
+#include "sound/sound_handler.h"
+#include "ui_basic/messagebox.h"
+#include "ui_basic/progresswindow.h"
 #include "ui_fsmenu/campaign_select.h"
 #include "ui_fsmenu/editor.h"
 #include "ui_fsmenu/editor_mapselect.h"
 #include "ui_fsmenu/fileview.h"
+#include "ui_fsmenu/internet_lobby.h"
 #include "ui_fsmenu/intro.h"
 #include "ui_fsmenu/launchSPG.h"
 #include "ui_fsmenu/loadgame.h"
@@ -36,32 +55,14 @@
 #include "ui_fsmenu/main.h"
 #include "ui_fsmenu/mapselect.h"
 #include "ui_fsmenu/multiplayer.h"
-#include "ui_fsmenu/internet_lobby.h"
 #include "ui_fsmenu/netsetup_lan.h"
 #include "ui_fsmenu/options.h"
 #include "ui_fsmenu/singleplayer.h"
-#include "logic/game.h"
-#include "logic/game_data_error.h"
-#include "wui/game_tips.h"
-#include "gamesettings.h"
-#include "i18n.h"
-#include "wui/interactive_player.h"
-#include "wui/interactive_spectator.h"
-#include "journal.h"
-#include "io/filesystem/layered_filesystem.h"
-#include "logic/map.h"
-#include "map_io/map_loader.h"
-#include "network/internet_gaming.h"
-#include "network/netclient.h"
-#include "network/nethost.h"
-#include "profile/profile.h"
-#include "logic/replay.h"
-#include "sound/sound_handler.h"
-#include "logic/tribe.h"
-#include "ui_basic/messagebox.h"
-#include "ui_basic/progresswindow.h"
 #include "warning.h"
 #include "wexception.h"
+#include "wui/game_tips.h"
+#include "wui/interactive_player.h"
+#include "wui/interactive_spectator.h"
 
 #include "log.h"
 
@@ -100,8 +101,6 @@ volatile int32_t WLApplication::may_run = 0;
 #define SCREENSHOT_DIR "screenshots"
 
 //Always specifying namespaces is good, but let's not go too far ;-)
-//using std::cout;
-std::ostream & wout = std::cout;
 using std::endl;
 
 /**
@@ -259,6 +258,7 @@ m_commandline          (std::map<std::string, std::string>()),
 m_game_type            (NONE),
 journal                (0),
 m_mouse_swapped        (false),
+m_faking_middle_mouse_button(false),
 m_mouse_position       (0, 0),
 m_mouse_locked         (0),
 m_mouse_compensate_warp(0, 0),
@@ -296,20 +296,21 @@ m_redirected_stdio(false)
 	init_language(); // search paths must already be set up
 	cleanup_replays();
 
-	if (!dedicated)
+	if (!dedicated) {
+		// handling of graphics
 		init_hardware();
-	else
-		g_gr = 0;
 
-	if (TTF_Init() == -1)
-		throw wexception
-			("True Type library did not initialize: %s\n", TTF_GetError());
+		if (TTF_Init() == -1)
+			throw wexception
+				("True Type library did not initialize: %s\n", TTF_GetError());
+
+		UI::g_fh = new UI::Font_Handler();
+		UI::g_fh1 = UI::create_fonthandler(g_gr, g_fs);
+	} else
+		g_gr = 0;
 
 	if (SDLNet_Init() == -1)
 		throw wexception("SDLNet_Init failed: %s\n", SDLNet_GetError());
-
-	UI::g_fh = new UI::Font_Handler();
-	UI::g_fh1 = UI::create_fonthandler(g_gr, g_fs);
 
 	//make sure we didn't forget to read any global option
 	g_options.check_used();
@@ -432,6 +433,12 @@ void WLApplication::run()
 				i18n::Textdomain td("maps");
 				map.set_filename(m_filename.c_str());
 				Widelands::Map_Loader * const ml = map.get_correct_loader(m_filename.c_str());
+				if (!ml) {
+					throw warning
+						(_("Unsupported format"),
+						 _("Widelands could not load the file \"%s\". The file format seems to be incompatible."),
+						 m_filename.c_str());
+				}
 				ml->preload_map(true);
 
 				// fill in the mapdata structure
@@ -545,6 +552,7 @@ restart:
 				//log ("SDL Video Window expose event: %i\n", ev.expose.type);
 				g_gr->update_fullscreen();
 				break;
+			default:;
 			}
 		}
 	}
@@ -620,6 +628,7 @@ void WLApplication::handle_input(InputCallback const * cb)
 			case SDL_QUIT:
 				m_should_die = true;
 				break;
+			default:;
 			}
 		}
 	}
@@ -672,37 +681,10 @@ void WLApplication::handle_input(InputCallback const * cb)
 				cb->key(ev.type == SDL_KEYDOWN, ev.key.keysym);
 			}
 			break;
+
 		case SDL_MOUSEBUTTONDOWN:
-			if (cb and cb->mouse_press) {
-				if (m_mouse_swapped) {
-					switch (ev.button.button) {
-					case SDL_BUTTON_LEFT:
-						ev.button.button = SDL_BUTTON_RIGHT;
-						break;
-					case SDL_BUTTON_RIGHT:
-						ev.button.button = SDL_BUTTON_LEFT;
-						break;
-					}
-				}
-				assert(ev.button.state == SDL_PRESSED);
-				cb->mouse_press(ev.button.button, ev.button.x, ev.button.y);
-			}
-			break;
 		case SDL_MOUSEBUTTONUP:
-			if (cb and cb->mouse_release) {
-				if (m_mouse_swapped) {
-					switch (ev.button.button) {
-					case SDL_BUTTON_LEFT:
-						ev.button.button = SDL_BUTTON_RIGHT;
-						break;
-					case SDL_BUTTON_RIGHT:
-						ev.button.button = SDL_BUTTON_LEFT;
-						break;
-					}
-				}
-				assert(ev.button.state == SDL_RELEASED);
-				cb->mouse_release(ev.button.button, ev.button.x, ev.button.y);
-			}
+			_handle_mousebutton(ev, cb);
 			break;
 
 		case SDL_MOUSEMOTION:
@@ -718,8 +700,54 @@ void WLApplication::handle_input(InputCallback const * cb)
 		case SDL_QUIT:
 			m_should_die = true;
 			break;
+		default:;
 		}
 	}
+}
+
+/*
+ * Capsule repetitive code for mouse buttons
+ */
+void WLApplication::_handle_mousebutton
+	(SDL_Event & ev, InputCallback const * cb)
+{
+		if (m_mouse_swapped) {
+			switch (ev.button.button) {
+				case SDL_BUTTON_LEFT:
+					ev.button.button = SDL_BUTTON_RIGHT;
+					break;
+				case SDL_BUTTON_RIGHT:
+					ev.button.button = SDL_BUTTON_LEFT;
+					break;
+			}
+		}
+
+#ifdef __APPLE__
+		//  On Mac, SDL does middle mouse button emulation (alt+left). This
+		//  interferes with the editor, which is using alt+left click for
+		//  third tool. So if we ever see a middle mouse button on Mac,
+		//  check if any ALT Key is pressed and if, treat it like a left
+		//  mouse button.
+		if
+			(ev.button.button == SDL_BUTTON_MIDDLE and
+			 (get_key_state(SDLK_LALT) || get_key_state(SDLK_RALT)))
+		{
+			ev.button.button = SDL_BUTTON_LEFT;
+			m_faking_middle_mouse_button = true;
+		}
+#endif
+
+		if (ev.type == SDL_MOUSEBUTTONDOWN && cb and cb->mouse_press)
+			cb->mouse_press(ev.button.button, ev.button.x, ev.button.y);
+		else if (ev.type == SDL_MOUSEBUTTONUP) {
+			if (cb and cb->mouse_release) {
+				if (ev.button.button == SDL_BUTTON_MIDDLE and m_faking_middle_mouse_button) {
+					cb->mouse_release(SDL_BUTTON_LEFT, ev.button.x, ev.button.y);
+					m_faking_middle_mouse_button = false;
+				}
+				cb->mouse_release(ev.button.button, ev.button.x, ev.button.y);
+			}
+		}
 }
 
 /**
@@ -1176,8 +1204,6 @@ void WLApplication::handle_commandline_parameters() throw (Parameter_error)
 			std::ofstream * widelands_out = new std::ofstream(m_logfile.c_str());
 			std::streambuf * logbuf = widelands_out->rdbuf();
 			wout.rdbuf(logbuf);
-		} else {
-			//wout = std::cout;
 		}
 		m_commandline.erase("logfile");
 	}
@@ -1534,6 +1560,14 @@ void WLApplication::mainmenu()
 	std::string messagetitle;
 	std::string message;
 
+	if (g_gr->check_fallback_settings_in_effect())
+	{
+		messagetitle = _("Fallback settings in effect");
+		message = _
+			("Your video settings could not be enabled, and fallback settings are in effect. "
+				"Please check the graphics options!");
+	}
+
 	for (;;) {
 		// Refresh graphics system in case we just changed resolution.
 		refresh_graphics();
@@ -1547,8 +1581,8 @@ void WLApplication::mainmenu()
 				(&mm,
 				 messagetitle,
 				 message,
-				 UI::WLMessageBox::OK);
-			mmb.set_align(UI::Align_Left);
+				 UI::WLMessageBox::OK,
+				 UI::Align_Left);
 			mmb.run();
 
 			message.clear();

@@ -73,8 +73,7 @@ ConstructionSite::ConstructionSite(const ConstructionSite_Descr & cs_descr) :
 Partially_Finished_Building (cs_descr),
 m_prev_building  (0),
 m_fetchfromflag  (0),
-m_builder_idle   (false),
-m_info           (new Player::Constructionsite_Information)
+m_builder_idle   (false)
 {}
 
 
@@ -119,7 +118,7 @@ Set the type of building we're going to build
 void ConstructionSite::set_building(const Building_Descr & building_descr) {
 	Partially_Finished_Building::set_building(building_descr);
 
-	m_info->becomes = &building_descr;
+	m_info.becomes = &building_descr;
 }
 
 /*
@@ -133,7 +132,7 @@ void ConstructionSite::set_previous_building
 	assert(!m_prev_building);
 
 	m_prev_building = previous_building_descr;
-	m_info->was = previous_building_descr;
+	m_info.was = previous_building_descr;
 }
 
 /*
@@ -349,15 +348,15 @@ void ConstructionSite::draw
 	// Draw the partially finished building
 
 	compile_assert(0 <= CONSTRUCTIONSITE_STEP_TIME);
-	m_info->totaltime = CONSTRUCTIONSITE_STEP_TIME * m_work_steps;
-	m_info->completedtime = CONSTRUCTIONSITE_STEP_TIME * m_work_completed;
+	m_info.totaltime = CONSTRUCTIONSITE_STEP_TIME * m_work_steps;
+	m_info.completedtime = CONSTRUCTIONSITE_STEP_TIME * m_work_completed;
 
 	if (m_working) {
 		assert
 			(m_work_steptime
 			 <=
-			 m_info->completedtime + CONSTRUCTIONSITE_STEP_TIME + gametime);
-		m_info->completedtime += CONSTRUCTIONSITE_STEP_TIME + gametime - m_work_steptime;
+			 m_info.completedtime + CONSTRUCTIONSITE_STEP_TIME + gametime);
+		m_info.completedtime += CONSTRUCTIONSITE_STEP_TIME + gametime - m_work_steptime;
 	}
 
 	uint32_t anim_idx;
@@ -373,16 +372,16 @@ void ConstructionSite::draw
 	}
 	const Animation& anim = g_gr->animations().get_animation(anim_idx);
 	const size_t nr_frames = anim.nr_frames();
-	cur_frame = m_info->totaltime ? m_info->completedtime * nr_frames / m_info->totaltime : 0;
+	cur_frame = m_info.totaltime ? m_info.completedtime * nr_frames / m_info.totaltime : 0;
 	// Redefine tanim
 	tanim = cur_frame * FRAME_LENGTH;
 
 	const uint16_t w = anim.width();
 	const uint16_t h = anim.height();
 
-	uint32_t lines = h * m_info->completedtime * nr_frames;
-	if (m_info->totaltime)
-		lines /= m_info->totaltime;
+	uint32_t lines = h * m_info.completedtime * nr_frames;
+	if (m_info.totaltime)
+		lines /= m_info.totaltime;
 	assert(h * cur_frame <= lines);
 	lines -= h * cur_frame; //  This won't work if pictures have various sizes.
 

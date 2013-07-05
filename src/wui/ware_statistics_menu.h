@@ -20,13 +20,15 @@
 #ifndef WARE_STATISTICS_MENU_H
 #define WARE_STATISTICS_MENU_H
 
-#include "logic/widelands.h"
-#include "ui_basic/unique_window.h"
-#include "plot_area.h"
-#include "differential_plot_area.h"
-
 #include <vector>
 
+#include "logic/widelands.h"
+#include "ui_basic/slider.h"
+#include "ui_basic/unique_window.h"
+
+#include "plot_area.h"
+
+struct DifferentialPlot_Area;
 struct Interactive_Player;
 struct WUIPlot_Area;
 

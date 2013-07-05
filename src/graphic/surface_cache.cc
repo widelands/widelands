@@ -64,6 +64,9 @@ private:
 };
 
 SurfaceCacheImpl::~SurfaceCacheImpl() {
+	for (Container::iterator it = map_.begin(); it != map_.end(); ++it) {
+		delete it->second;
+	}
 }
 
 Surface* SurfaceCacheImpl::get(const std::string& hash) {
@@ -90,7 +93,7 @@ Surface* SurfaceCacheImpl::insert(const std::string& hash, Surface* surf) {
 	used_memory_ += surface_size;
 	map_.insert(make_pair(hash, new Entry(surf, it)));
 
-	log("SurfaceCache: inserted %s, now using %.2f mb.\n", hash.c_str(), used_memory_ / 1048576.0);
+	//log("SurfaceCache: inserted %s, now using %.2f mb.\n", hash.c_str(), used_memory_ / 1048576.0);
 	return surf;
 }
 
@@ -104,9 +107,10 @@ void SurfaceCacheImpl::drop() {
 	uint32_t surface_size = it->second->surface->width() * it->second->surface->height() * 4;
 	used_memory_ -= surface_size;
 
-	log
+	/* log
 		("SurfaceCache: dropping %s, which was unused for %.2f sec. Now using %.2f mb.\n",
 			hist_.front().c_str(), (SDL_GetTicks() - it->second->last_access) / 1000., used_memory_ / 1048576.0);
+	*/
 
 	// Erase both elements to completely purge record
 	delete it->second;

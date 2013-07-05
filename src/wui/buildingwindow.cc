@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2011 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2013 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -30,6 +30,7 @@
 #include "logic/player.h"
 #include "logic/productionsite.h"
 #include "logic/tribe.h"
+#include "logic/warehouse.h"
 #include "ui_basic/helpwindow.h"
 #include "ui_basic/tabpanel.h"
 #include "upcast.h"
@@ -53,7 +54,8 @@ Building_Window::Building_Window
 		 b.descname()),
 	m_registry(registry),
 	m_building       (b),
-	m_workarea_job_id(Overlay_Manager::Job_Id::Null())
+	m_workarea_job_id(Overlay_Manager::Job_Id::Null()),
+	m_avoid_fastclick(false)
 {
 	delete m_registry;
 	m_registry = this;
@@ -139,7 +141,8 @@ void Building_Window::think()
 		m_capsbuttons->free_children();
 		create_capsbuttons(m_capsbuttons);
 		move_out_of_the_way();
-		warp_mouse_to_fastclick_panel();
+		if (!m_avoid_fastclick)
+			warp_mouse_to_fastclick_panel();
 		m_caps_setup = true;
 	}
 
@@ -166,6 +169,33 @@ void Building_Window::create_capsbuttons(UI::Box * capsbuttons)
 
 	bool requires_destruction_separator = false;
 	if (can_act) {
+		// Check if this is a port building and if yes show expedition button
+		if (upcast(Widelands::Warehouse const, warehouse, &m_building)) {
+			if (Widelands::PortDock * pd = warehouse->get_portdock()) {
+				if (pd->expedition_started()) {
+					UI::Button * expeditionbtn =
+						new UI::Button
+							(capsbuttons, "cancel_expedition", 0, 0, 34, 34,
+							g_gr->images().get("pics/but4.png"),
+							g_gr->images().get("pics/cancel_expedition.png"),
+							_("Cancel the expedition"));
+					expeditionbtn->sigclicked.connect
+						(boost::bind(&Building_Window::act_start_or_cancel_expedition, boost::ref(*this)));
+					capsbuttons->add(expeditionbtn, UI::Box::AlignCenter);
+				} else {
+					UI::Button * expeditionbtn =
+						new UI::Button
+							(capsbuttons, "start_expedition", 0, 0, 34, 34,
+							g_gr->images().get("pics/but4.png"),
+							g_gr->images().get("pics/start_expedition.png"),
+							_("Start an expedition"));
+					expeditionbtn->sigclicked.connect
+						(boost::bind(&Building_Window::act_start_or_cancel_expedition, boost::ref(*this)));
+					capsbuttons->add(expeditionbtn, UI::Box::AlignCenter);
+				}
+			}
+		}
+
 		if (upcast(const Widelands::ProductionSite, productionsite, &m_building))
 			if (not dynamic_cast<const Widelands::MilitarySite *>(productionsite)) {
 				const bool is_stopped = productionsite->is_stopped();
@@ -324,7 +354,7 @@ void Building_Window::create_capsbuttons(UI::Box * capsbuttons)
 	}
 }
 
-/*
+/**
 ===============
 The help button has been pressed
 ===============
@@ -340,7 +370,7 @@ void Building_Window::help_clicked()
 			 m_building.descr().helptext_script());
 }
 
-/*
+/**
 ===============
 Callback for bulldozing request
 ===============
@@ -356,7 +386,7 @@ void Building_Window::act_bulldoze()
 	}
 }
 
-/*
+/**
 ===============
 Callback for dismantling request
 ===============
@@ -372,6 +402,11 @@ void Building_Window::act_dismantle()
 	}
 }
 
+/**
+===============
+Callback for starting / stoping the production site request
+===============
+*/
 void Building_Window::act_start_stop() {
 	if (dynamic_cast<const Widelands::ProductionSite *>(&m_building))
 		igbase().game().send_player_start_stop_building (m_building);
@@ -379,7 +414,21 @@ void Building_Window::act_start_stop() {
 	die();
 }
 
-/*
+/**
+===============
+Callback for starting an expedition request
+===============
+*/
+void Building_Window::act_start_or_cancel_expedition() {
+	if (upcast(Widelands::Warehouse const, warehouse, &m_building))
+		if (warehouse->get_portdock())
+			igbase().game().send_player_start_or_cancel_expedition(m_building);
+
+	// No need to die here - as soon as the request is handled, the UI will get updated by the portdock
+	//die();
+}
+
+/**
 ===============
 Callback for enhancement request
 ===============
@@ -514,3 +563,4 @@ void Building_Window::clicked_goto()
 {
 	igbase().move_view_to(building().get_position());
 }
+

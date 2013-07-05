@@ -198,57 +198,54 @@ IF (Compiler_old-style-cast_supported)
   ENDIF (WLBUILD_COMPILERVERSION_REP STREQUAL "4.3.2" OR WLBUILD_COMPILERVERSION_REP STREQUAL "4.3.1")
 ENDIF (Compiler_old-style-cast_supported)
 
-IF (CMAKE_BUILD_TYPE STREQUAL "Debug")
+CHECK_CXX_COMPILER_FLAG(${PARAMETER_COMPILERFLAG_GENERICWARNINGS} Compiler_generic_warnings_supported)
+IF (Compiler_generic_warnings_supported)
+  set (WL_COMPILERFLAG_GENERICWARNINGS " ${PARAMETER_COMPILERFLAG_GENERICWARNINGS}") #the space is on purpose!
+ENDIF (Compiler_generic_warnings_supported)
 
-  CHECK_CXX_COMPILER_FLAG(${PARAMETER_COMPILERFLAG_GENERICWARNINGS} Compiler_generic_warnings_supported)
-  IF (Compiler_generic_warnings_supported)
-    set (WL_COMPILERFLAG_GENERICWARNINGS " ${PARAMETER_COMPILERFLAG_GENERICWARNINGS}") #the space is on purpose!
-  ENDIF (Compiler_generic_warnings_supported)
+CHECK_CXX_COMPILER_FLAG(${PARAMETER_COMPILERFLAG_EXTRAWARNINGS} Compiler_extra_warnings_supported)
+IF (Compiler_extra_warnings_supported)
+  set (WL_COMPILERFLAG_EXTRAWARNINGS " ${PARAMETER_COMPILERFLAG_EXTRAWARNINGS}") #the space is on purpose!
+ELSE (Compiler_extra_warnings_supported)
+  message("Warning: couldn't set the following compiler options: ${PARAMETER_COMPILERFLAG_EXTRAWARNINGS}. Most likely these options are available in a newer release of your compiler.")
+ENDIF (Compiler_extra_warnings_supported)
 
-  CHECK_CXX_COMPILER_FLAG(${PARAMETER_COMPILERFLAG_EXTRAWARNINGS} Compiler_extra_warnings_supported)
-  IF (Compiler_extra_warnings_supported)
-    set (WL_COMPILERFLAG_EXTRAWARNINGS " ${PARAMETER_COMPILERFLAG_EXTRAWARNINGS}") #the space is on purpose!
-  ELSE (Compiler_extra_warnings_supported)
-    message("Warning: couldn't set the following compiler options: ${PARAMETER_COMPILERFLAG_EXTRAWARNINGS}. Most likely these options are available in a newer release of your compiler.")
-  ENDIF (Compiler_extra_warnings_supported)
+CHECK_CXX_COMPILER_FLAG(${PARAMETER_COMPILERFLAG_GCCWARNINGS} Compiler_gcc_warnings_supported)
+IF (Compiler_gcc_warnings_supported)
+  set (WL_COMPILERFLAG_GCCWARNINGS " ${PARAMETER_COMPILERFLAG_GCCWARNINGS}") #the space is on purpose!
+ELSE (Compiler_gcc_warnings_supported)
+  message("Warning: could not add additional GCC-specific warning options: ${PARAMETER_COMPILERFLAG_GCCWARNINGS}. Most likely you are using a different compiler, like Clang/LLVM.")
+ENDIF (Compiler_gcc_warnings_supported)
 
-  CHECK_CXX_COMPILER_FLAG(${PARAMETER_COMPILERFLAG_GCCWARNINGS} Compiler_gcc_warnings_supported)
-  IF (Compiler_gcc_warnings_supported)
-    set (WL_COMPILERFLAG_GCCWARNINGS " ${PARAMETER_COMPILERFLAG_GCCWARNINGS}") #the space is on purpose!
-  ELSE (Compiler_gcc_warnings_supported)
-    message("Warning: could not add additional GCC-specific warning options: ${PARAMETER_COMPILERFLAG_GCCWARNINGS}. Most likely you are using a different compiler, like Clang/LLVM.")
-  ENDIF (Compiler_gcc_warnings_supported)
-
-
-  IF (WL_STRICT)
-    CHECK_CXX_COMPILER_FLAG(${PARAMETER_COMPILERFLAG_STRICT} Compiler_strict_mode_supported)
-    IF (Compiler_strict_mode_supported)
-      set (WL_COMPILERFLAG_STRICT " ${PARAMETER_COMPILERFLAG_STRICT}") #the space is on purpose!
-      message(STATUS "Strict mode enabled, expect compilation errors instead of compilation warnings!")
-    ENDIF (Compiler_strict_mode_supported)
-  ENDIF (WL_STRICT)
-ENDIF (CMAKE_BUILD_TYPE STREQUAL "Debug")
+IF (WL_STRICT)
+  CHECK_CXX_COMPILER_FLAG(${PARAMETER_COMPILERFLAG_STRICT} Compiler_strict_mode_supported)
+  IF (Compiler_strict_mode_supported)
+    set (WL_COMPILERFLAG_STRICT " ${PARAMETER_COMPILERFLAG_STRICT}") #the space is on purpose!
+    message(STATUS "Strict mode enabled, expect compilation errors instead of compilation warnings!")
+  ENDIF (Compiler_strict_mode_supported)
+ENDIF (WL_STRICT)
 
 # CMAKE only defines "-g", but we need -DDEBUG also, and we need -DNOPARACHUTE (for SDL) in Debug
 set (CMAKE_CXX_FLAGS_DEBUG "-g -DDEBUG -DNOPARACHUTE${WL_COMPILERFLAG_OLDSTYLECAST}${WL_COMPILERFLAG_GENERICWARNINGS}${WL_COMPILERFLAG_EXTRAWARNINGS}${WL_COMPILERFLAG_GCCWARNINGS}${WL_COMPILERFLAG_STRICT}" CACHE STRING "Set by widelands CMakeLists.txt" FORCE)
 
+set (WL_COMPILERFLAG_OPTIMIZATIONS "-O3")
+
 #This can be removed if no one uses gcc 4.5.1 or 4.5.2 any more
 IF (CMAKE_COMPILER_IS_GNUCXX)
-EXEC_PROGRAM (
+  EXEC_PROGRAM (
     ${CMAKE_CXX_COMPILER}
     ARGS --version
     OUTPUT_VARIABLE WLBUILD_COMPILERVERSION
-    )
-    STRING(REGEX REPLACE ".*(4)\\.(5)\\.([0-9]).*" "\\1.\\2.\\3" WLBUILD_COMPILERVERSION_REP ${WLBUILD_COMPILERVERSION})
-    IF (WLBUILD_COMPILERVERSION_REP STREQUAL "4.5.1" OR WLBUILD_COMPILERVERSION_REP STREQUAL "4.5.2")
-        message("Detected gcc ${WLBUILD_COMPILERVERSION_REP}")
-        message("Suffering from gcc bug, disabling -O3")
-        set (CMAKE_CXX_FLAGS_RELEASE "-O2 -DNDEBUG" CACHE STRING "Set by widelands CMakeLists.txt" FORCE)
-    ELSE (WLBUILD_COMPILERVERSION_REP STREQUAL "4.5.1" OR WLBUILD_COMPILERVERSION_REP STREQUAL "4.5.2")
-        #This line is the default and should be preserved.
-        set (CMAKE_CXX_FLAGS_RELEASE "-O3 -DNDEBUG" CACHE STRING "Set by widelands CMakeLists.txt" FORCE)
-    ENDIF (WLBUILD_COMPILERVERSION_REP STREQUAL "4.5.1" OR WLBUILD_COMPILERVERSION_REP STREQUAL "4.5.2")
+  )
+  STRING(REGEX REPLACE ".*(4)\\.(5)\\.([0-9]).*" "\\1.\\2.\\3" WLBUILD_COMPILERVERSION_REP ${WLBUILD_COMPILERVERSION})
+  IF (WLBUILD_COMPILERVERSION_REP STREQUAL "4.5.1" OR WLBUILD_COMPILERVERSION_REP STREQUAL "4.5.2")
+    message("Detected gcc ${WLBUILD_COMPILERVERSION_REP}")
+    message("Suffering from gcc bug, disabling -O3")
+    set (WL_COMPILERFLAG_OPTIMIZATIONS "-O2")
+  ENDIF (WLBUILD_COMPILERVERSION_REP STREQUAL "4.5.1" OR WLBUILD_COMPILERVERSION_REP STREQUAL "4.5.2")
 ENDIF (CMAKE_COMPILER_IS_GNUCXX)
+
+set (CMAKE_CXX_FLAGS_RELEASE "${WL_COMPILERFLAG_OPTIMIZATIONS} -DNDEBUG${WL_COMPILERFLAG_OLDSTYLECAST}${WL_COMPILERFLAG_GENERICWARNINGS}${WL_COMPILERFLAG_EXTRAWARNINGS}${WL_COMPILERFLAG_GCCWARNINGS}${WL_COMPILERFLAG_STRICT}" CACHE STRING "Set by widelands CMakeLists.txt" FORCE)
 
 #If building with MSVC, then check for 3rdparty libs
 if (DEFINED MSVC)
@@ -375,7 +372,7 @@ if (NOT DEFINED WL_VERSION)
     BzrRevision ALL
     COMMAND ${CMAKE_COMMAND} -DWL_INSTALL_PREFIX=${WL_INSTALL_PREFIX} -DWL_INSTALL_BINDIR=${WL_INSTALL_BINDIR} -DWL_INSTALL_DATADIR=${WL_INSTALL_DATADIR} -DWL_INSTALL_LOCALEDIR=${WL_INSTALL_LOCALEDIR} -DPYTHON_EXECUTABLE=${PYTHON_EXECUTABLE} -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE} -DSOURCE_DIR=${CMAKE_CURRENT_SOURCE_DIR} -DBINARY_DIR=${CMAKE_CURRENT_BINARY_DIR} -P ${CMAKE_CURRENT_SOURCE_DIR}/BzrRevision.cmake
   )
-  
+
   # Detect version now
   execute_process (
     COMMAND ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/utils/detect_revision.py
@@ -592,7 +589,7 @@ if (WIN32)
   set(CPACK_NSIS_PACKAGE_NAME "Widelands")
   set(CPACK_NSIS_DISPLAY_NAME "Widelands ${WL_VERSION}")
   set(CPACK_NSIS_DISPLAY_NAME_SET "TRUE")
-  
+
   # Optional dialogs
   if (NOT DEFINED CPACK_NSIS_LANGUAGE_DIALOG)
     set(CPACK_NSIS_LANGUAGE_DIALOG "ON")
@@ -650,7 +647,7 @@ if (WIN32)
     DeleteRegValue HKCR \\\".wmf\\\" \\\"WidelandsMapFile\\\"
     DeleteRegKey /ifempty HKCR \\\".wmf\\\"
     DeleteRegKey HKCR \\\"WidelandsMapFile\\\"
-    
+
     Delete \\\"$INSTDIR\\\\stdout.txt\\\"
     Delete \\\"$INSTDIR\\\\stderr.txt\\\"
     Delete \\\"$INSTDIR\\\"

@@ -22,6 +22,7 @@
 
 #include "economy/route.h"
 #include "graphic/animation.h"
+#include "graphic/diranimations.h"
 #include "point.h"
 #include "writeHTML.h"
 #include "instances.h"
@@ -170,7 +171,6 @@ struct Bob : public Map_Object {
 			ivar2   (0),
 			ivar3   (0),
 			coords  (Coords::Null()),
-			diranims(0),
 			path    (0),
 			route   (0),
 			program (0)
@@ -184,7 +184,7 @@ struct Bob : public Map_Object {
 		std::string            svar1;
 
 		Coords                 coords;
-		const DirAnimations  * diranims;
+		DirAnimations          diranims;
 		Path                 * path;
 		Route                * route;
 		const BobProgramBase * program; ///< pointer to current program
@@ -290,7 +290,7 @@ struct Bob : public Map_Object {
 		 const int32_t         only_step = -1)
 		__attribute__((warn_unused_result));
 
-	void start_task_move(Game & game, int32_t dir, DirAnimations const *, bool);
+	void start_task_move(Game & game, int32_t dir, const DirAnimations &, bool);
 
 	// higher level handling (task-based)
 	State & top_state() {assert(m_stack.size()); return *m_stack.rbegin();}

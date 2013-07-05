@@ -28,12 +28,13 @@
 #include "notification.h"
 #include "rgbcolor.h"
 #include "tribe.h"
+#include "warehouse.h"
 
 #include "widelands.h"
 
 namespace Widelands {
 
-struct Economy;
+class Economy;
 struct Path;
 struct PlayerImmovable;
 class Soldier;
@@ -99,7 +100,7 @@ struct Player :
 	Message_Id add_message_with_timeout
 		(Game &, Message &, uint32_t timeout, uint32_t radius);
 
-	void set_message_status(Message_Id const id, Message::Status const status) {
+	void set_message_status(const Message_Id& id, Message::Status const status) {
 		messages().set_message_status(id, status);
 	}
 
@@ -129,7 +130,7 @@ struct Player :
 	/// Per-player and per-field constructionsite information
 	struct Constructionsite_Information {
 		Constructionsite_Information() : becomes(0), was(0), totaltime(0), completedtime(0) {}
-		const Building_Descr * becomes;
+		const Building_Descr * becomes; // Also works as a marker telling whether there is a construction site.
 		const Building_Descr * was; // only valid if "becomes" is an enhanced building.
 		uint32_t               totaltime;
 		uint32_t               completedtime;
@@ -319,7 +320,7 @@ struct Player :
 
 		/// Information for constructionsite's animation.
 		/// only valid, if there is a constructionsite on this node
-		const Constructionsite_Information * constructionsite[3];
+		Constructionsite_Information constructionsite;
 
 		/// Save whether the player saw a border the last time (s)he saw the node.
 		bool border;
@@ -346,9 +347,7 @@ struct Player :
 		//  map_object_descr[0]             0x0a0  0x20   0x0a0  0x40
 		//  map_object_descr[1]             0x0c0  0x20   0x0e0  0x40
 		//  map_object_descr[2]             0x0e0  0x20   0x120  0x40
-		//  Constructionsite_Information[0]
-		//  Constructionsite_Information[1]
-		//  Constructionsite_Information[2]
+		//  Constructionsite_Information
 		//  border
 		//  border_r
 		//  border_br
@@ -396,7 +395,7 @@ struct Player :
 		throw ();
 
 	/// Call see_node for each node in the area.
-	void see_area(const Area<FCoords> area)
+	void see_area(const Area<FCoords>& area)
 		throw ()
 	{
 		const Time gametime = egbase().get_gametime();
@@ -409,7 +408,7 @@ struct Player :
 	}
 
 	/// Decrement this player's vision for each node in an area.
-	void unsee_area(const Area<FCoords> area) throw () {
+	void unsee_area(const Area<FCoords>& area) throw () {
 		const Time gametime = egbase().get_gametime();
 		const Map &                  map      = egbase().map         ();
 		const Widelands::Field & first_map_field = map[0];
@@ -427,13 +426,13 @@ struct Player :
 		return m_fields[i].military_influence;
 	}
 
-	bool is_worker_type_allowed(Ware_Index const i) const throw () {
+	bool is_worker_type_allowed(const Ware_Index& i) const throw () {
 		return m_allowed_worker_types.at(i);
 	}
 	void allow_worker_type(Ware_Index, bool allow);
 
 	// Allowed buildings
-	bool is_building_type_allowed(Building_Index const i) const throw () {
+	bool is_building_type_allowed(const Building_Index& i) const throw () {
 		return m_allowed_building_types[i];
 	}
 	void allow_building_type(Building_Index, bool allow);
@@ -462,6 +461,7 @@ struct Player :
 	void bulldoze(PlayerImmovable &, bool recurse = false);
 	void flagaction(Flag &);
 	void start_stop_building(PlayerImmovable &);
+	void start_or_cancel_expedition(Warehouse &);
 	void enhance_building
 		(Building *, Building_Index index_of_new_building);
 	void dismantle_building (Building *);
@@ -530,7 +530,7 @@ struct Player :
 
 	// Statistics
 	const Building_Stats_vector & get_building_statistics
-		(Building_Index const i) const
+		(const Building_Index& i) const
 	{
 		return m_building_stats[i];
 	}

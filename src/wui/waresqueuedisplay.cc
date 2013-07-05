@@ -79,6 +79,7 @@ m_show_only(show_only)
 
 WaresQueueDisplay::~WaresQueueDisplay()
 {
+	delete m_priority_radiogroup;
 }
 
 /**
@@ -161,24 +162,33 @@ void WaresQueueDisplay::draw(RenderTarget & dst)
  */
 void WaresQueueDisplay::update_priority_buttons()
 {
-	delete m_priority_radiogroup;
-	if (m_cache_size <= 0 or m_show_only)
-		return;
-
-	m_priority_radiogroup = new UI::Radiogroup();
+	if (m_cache_size <= 0 or m_show_only) {
+		delete m_priority_radiogroup;
+		m_priority_radiogroup = 0;
+	}
 
 	Point pos = Point(m_cache_size * CellWidth + Border, 0);
 	pos.x = (m_cache_size + 2) * (CellWidth + CellSpacing) + Border;
 	pos.y = Border + (m_total_height - 2 * Border - 3 * PriorityButtonSize) / 2;
 
-	m_priority_radiogroup->add_button
-		(this, pos, g_gr->images().get(pic_priority_high), _("Highest priority"));
-	pos.y += PriorityButtonSize;
-	m_priority_radiogroup->add_button
-			(this, pos, g_gr->images().get(pic_priority_normal), _("Normal priority"));
-	pos.y += PriorityButtonSize;
-	m_priority_radiogroup->add_button
-			(this, pos, g_gr->images().get(pic_priority_low), _("Lowest priority"));
+	if (m_priority_radiogroup) {
+		pos.y += 2 * PriorityButtonSize;
+		for (UI::Radiobutton * btn = m_priority_radiogroup->get_first_button(); btn; btn = btn->next_button()) {
+			btn->set_pos(pos);
+			pos.y -= PriorityButtonSize;
+		}
+	} else {
+		m_priority_radiogroup = new UI::Radiogroup();
+
+		m_priority_radiogroup->add_button
+			(this, pos, g_gr->images().get(pic_priority_high), _("Highest priority"));
+		pos.y += PriorityButtonSize;
+		m_priority_radiogroup->add_button
+				(this, pos, g_gr->images().get(pic_priority_normal), _("Normal priority"));
+		pos.y += PriorityButtonSize;
+		m_priority_radiogroup->add_button
+				(this, pos, g_gr->images().get(pic_priority_low), _("Lowest priority"));
+	}
 
 	int32_t priority = m_building.get_priority(m_ware_type, m_ware_index, false);
 	switch (priority) {

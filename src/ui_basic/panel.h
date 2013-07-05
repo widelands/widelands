@@ -247,7 +247,7 @@ protected:
 private:
 	void check_child_death();
 
-	void do_draw(RenderTarget &) __attribute__((hot));
+	void do_draw(RenderTarget &);
 	void do_draw_inner(RenderTarget &);
 	void do_think();
 

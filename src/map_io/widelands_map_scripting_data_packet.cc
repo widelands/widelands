@@ -30,8 +30,6 @@
 
 namespace Widelands {
 
-#define CURRENT_PACKET_VERSION 1
-
 /*
  * ========================================================================
  *            PUBLIC IMPLEMENTATION

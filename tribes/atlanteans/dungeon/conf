@@ -1,5 +1,6 @@
 size=medium
 soldier_capacity=8
+trainer_patience=16
 
 [buildcost]
 planks=2

@@ -102,39 +102,37 @@ namespace Widelands {
 //              bl------br
 
 struct Map_Object_Data {
-	Map_Object_Data() : map_object_descr(0), csi(0) {}
+	Map_Object_Data() : map_object_descr(0) {}
 	const Map_Object_Descr                     * map_object_descr;
-	const Player::Constructionsite_Information * csi;
+	Player::Constructionsite_Information         csi;
 };
 
-inline static Map_Object_Data * read_unseen_immovable
+inline static Map_Object_Data read_unseen_immovable
 	(const Editor_Game_Base & egbase,
 	 BitInBuffer<2>         & immovable_kinds_file,
 	 FileRead               & immovables_file,
 	 uint8_t                & version
 	)
 {
-	Map_Object_Data * m = new Map_Object_Data;
+	Map_Object_Data m;
 	try {
 		switch (immovable_kinds_file.get()) {
 		case 0:  //  The player sees no immovable.
-			m->map_object_descr = 0;                                       break;
+			m.map_object_descr = 0;                                       break;
 		case 1: //  The player sees a tribe or world immovable.
-			m->map_object_descr = &immovables_file.Immovable_Type(egbase); break;
+			m.map_object_descr = &immovables_file.Immovable_Type(egbase); break;
 		case 2:  //  The player sees a flag.
-			m->map_object_descr = &g_flag_descr;                           break;
+			m.map_object_descr = &g_flag_descr;                           break;
 		case 3: //  The player sees a building.
-			m->map_object_descr = &immovables_file.Building_Type (egbase);
+			m.map_object_descr = &immovables_file.Building_Type (egbase);
 			if (version > 1) {
 				// Read data from immovables file
 				if (immovables_file.Unsigned8() == 1) { // the building is a constructionsite
-					Player::Constructionsite_Information * csi = new Player::Constructionsite_Information;
-					csi->becomes       = &immovables_file.Building_Type(egbase);
+					m.csi.becomes       = &immovables_file.Building_Type(egbase);
 					if (immovables_file.Unsigned8() == 1)
-						csi->was        = &immovables_file.Building_Type(egbase);
-					csi->totaltime     =  immovables_file.Unsigned32();
-					csi->completedtime =  immovables_file.Unsigned32();
-					m->csi = csi;
+						m.csi.was        = &immovables_file.Building_Type(egbase);
+					m.csi.totaltime     =  immovables_file.Unsigned32();
+					m.csi.completedtime =  immovables_file.Unsigned32();
 				}
 			}
 			break;
@@ -485,11 +483,11 @@ void Map_Players_View_Data_Packet::Read
 							 static_cast<long unsigned int>(owners_file.GetPos() - 1),
 							 f.x, f.y, owner, nr_players);
 
-					Map_Object_Data * mod =
+					Map_Object_Data mod =
 						read_unseen_immovable
 							(egbase, node_immovable_kinds_file, node_immovables_file, node_immovables_file_version);
-					f_player_field.map_object_descr[TCoords<>::None] = mod->map_object_descr;
-					f_player_field.constructionsite[TCoords<>::None] = mod->csi;
+					f_player_field.map_object_descr[TCoords<>::None] = mod.map_object_descr;
+					f_player_field.constructionsite = mod.csi;
 
 					// if there is a border file, read in whether this field had a border the last time it was seen
 					if (borders) {
@@ -546,12 +544,11 @@ void Map_Players_View_Data_Packet::Read
 							 "while reading terrain",
 							 plnum, terrains_filename, f.x, f.y);
 					}
-					Map_Object_Data * mod =
+					Map_Object_Data mod =
 						read_unseen_immovable
 							(egbase, triangle_immovable_kinds_file, triangle_immovables_file,
 							 triangle_immovables_file_version);
-					f_player_field.map_object_descr[TCoords<>::D] = mod->map_object_descr;
-					f_player_field.constructionsite[TCoords<>::D] = mod->csi;
+					f_player_field.map_object_descr[TCoords<>::D] = mod.map_object_descr;
 
 				}
 				if  (f_seen | br_seen | r_seen) {
@@ -571,12 +568,11 @@ void Map_Players_View_Data_Packet::Read
 							 "while reading terrain",
 							 plnum, terrains_filename, f.x, f.y);
 					}
-					Map_Object_Data * mod =
+					Map_Object_Data mod =
 						read_unseen_immovable
 							(egbase, triangle_immovable_kinds_file, triangle_immovables_file,
 							 triangle_immovables_file_version);
-					f_player_field.map_object_descr[TCoords<>::R] = mod->map_object_descr;
-					f_player_field.constructionsite[TCoords<>::R] = mod->csi;
+					f_player_field.map_object_descr[TCoords<>::R] = mod.map_object_descr;
 				}
 
 				{ //  edges
@@ -727,7 +723,7 @@ inline static void write_unseen_immovable
 	 BitOutBuffer<2> & immovable_kinds_file, FileWrite & immovables_file)
 {
 	Map_Object_Descr const * const map_object_descr = map_object_data->map_object_descr;
-	Player::Constructionsite_Information const * const csi = map_object_data->csi;
+	const Player::Constructionsite_Information & csi = map_object_data->csi;
 	assert(not Road::IsRoadDescr(map_object_descr));
 	uint8_t immovable_kind;
 
@@ -741,21 +737,21 @@ inline static void write_unseen_immovable
 	else if (upcast(Building_Descr const, building_descr, map_object_descr)) {
 		immovable_kind = 3;
 		immovables_file.Building_Type(*building_descr);
-		if (!csi)
+		if (!csi.becomes)
 			immovables_file.Unsigned8(0);
 		else {
 			// the building is a constructionsite
 			immovables_file.Unsigned8(1);
-			immovables_file.Building_Type(*csi->becomes);
-			if (!csi->was)
+			immovables_file.Building_Type(*csi.becomes);
+			if (!csi.was)
 				immovables_file.Unsigned8(0);
 			else {
 				// constructionsite is an enhancement, therefor we write down the enhancement
 				immovables_file.Unsigned8(1);
-				immovables_file.Building_Type(*csi->was);
+				immovables_file.Building_Type(*csi.was);
 			}
-			immovables_file.Unsigned32(csi->totaltime);
-			immovables_file.Unsigned32(csi->completedtime);
+			immovables_file.Unsigned32(csi.totaltime);
+			immovables_file.Unsigned32(csi.completedtime);
 		}
 	} else assert(false);
 	immovable_kinds_file.put(immovable_kind);
@@ -827,10 +823,10 @@ throw (_wexception)
 								(f_player_field.time_node_last_unseen);
 							assert(f_player_field.owner < 0x20);
 							owners_file.Unsigned8(f_player_field.owner);
-							Map_Object_Data * mod = new Map_Object_Data;
-							mod->map_object_descr = f_player_field.map_object_descr[TCoords<>::None];
-							mod->csi              = f_player_field.constructionsite[TCoords<>::None];
-							write_unseen_immovable(mod, node_immovable_kinds_file, node_immovables_file);
+							Map_Object_Data mod;
+							mod.map_object_descr = f_player_field.map_object_descr[TCoords<>::None];
+							mod.csi              = f_player_field.constructionsite;
+							write_unseen_immovable(&mod, node_immovable_kinds_file, node_immovables_file);
 
 							// write whether this field had a border the last time it was seen
 							border_file.put(f_player_field.border    ? 1 : 0);
@@ -847,10 +843,9 @@ throw (_wexception)
 							 (f_everseen | bl_everseen | br_everseen))
 						{
 							terrains_file.put(f_player_field.terrains.d);
-							Map_Object_Data * mod = new Map_Object_Data;
-							mod->map_object_descr = f_player_field.map_object_descr[TCoords<>::D];
-							mod->csi              = f_player_field.constructionsite[TCoords<>::D];
-							write_unseen_immovable(mod, triangle_immovable_kinds_file, triangle_immovables_file);
+							Map_Object_Data mod;
+							mod.map_object_descr = f_player_field.map_object_descr[TCoords<>::D];
+							write_unseen_immovable(&mod, triangle_immovable_kinds_file, triangle_immovables_file);
 						}
 						if
 							//  the player does not see the R triangle now but has
@@ -859,10 +854,9 @@ throw (_wexception)
 							 (f_everseen | br_everseen |  r_everseen))
 						{
 							terrains_file.put(f_player_field.terrains.r);
-							Map_Object_Data * mod = new Map_Object_Data;
-							mod->map_object_descr = f_player_field.map_object_descr[TCoords<>::R];
-							mod->csi              = f_player_field.constructionsite[TCoords<>::R];
-							write_unseen_immovable(mod, triangle_immovable_kinds_file, triangle_immovables_file);
+							Map_Object_Data mod;
+							mod.map_object_descr = f_player_field.map_object_descr[TCoords<>::R];
+							write_unseen_immovable(&mod, triangle_immovable_kinds_file, triangle_immovables_file);
 						}
 
 						//  edges

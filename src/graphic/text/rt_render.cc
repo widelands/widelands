@@ -401,7 +401,8 @@ public:
 	virtual uint16_t width() {return INFINITE_WIDTH; }
 	virtual uint16_t hotspot_y() {return 0;}
 	virtual Surface* render(SurfaceCache* /* surface_cache */) {
-		assert(false); // This should never be called
+		assert(false);
+		throw RenderError("This should never be called. This is a bug, please submit a report.");
 	}
 	virtual bool is_non_mandatory_space() {return true;}
 };
@@ -629,7 +630,6 @@ protected:
 void TagHandler::m_make_text_nodes(const string& txt, vector<RenderNode*>& nodes, NodeStyle& ns) {
 	TextStream ts(txt);
 
-	vector<string> words;
 	while (ts.pos() < txt.size()) {
 		size_t cpos = ts.pos();
 		ts.skip_ws();
@@ -710,7 +710,7 @@ private:
 class ImgTagHandler : public TagHandler {
 public:
 	ImgTagHandler(ITag& tag, FontCache& fc, NodeStyle ns, ImageCache* image_cache) :
-		TagHandler(tag, fc, ns, image_cache) {
+		TagHandler(tag, fc, ns, image_cache), m_rn(NULL) {
 	}
 
 	void enter() {

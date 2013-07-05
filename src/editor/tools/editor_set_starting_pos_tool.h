@@ -43,6 +43,7 @@ struct Editor_Set_Starting_Pos_Tool : public Editor_Tool {
 
 	Widelands::Player_Number get_current_player() const throw ();
 	void set_current_player(int32_t);
+	bool has_size_one() const {return true;}
 
 private:
 	char fsel_picsname[sizeof(FSEL_PIC_FILENAME)];

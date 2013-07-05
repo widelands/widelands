@@ -39,6 +39,8 @@ struct Radiobutton : public Statebox {
 		(Panel * parent, Point, const Image* pic, Radiogroup &, int32_t id);
 	~Radiobutton();
 
+	Radiobutton * next_button() {return m_nextbtn;}
+
 private:
 	void clicked();
 
@@ -67,7 +69,7 @@ struct Radiogroup {
 	int32_t get_state() const throw () {return m_state;}
 	void set_state(int32_t state);
 	void set_enabled(bool);
-	Radiobutton * get_button(int32_t id);
+	Radiobutton * get_first_button() {return m_buttons;}
 private:
 	Radiobutton * m_buttons; //  linked list of buttons (not sorted)
 	int32_t           m_highestid;

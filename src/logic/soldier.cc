@@ -291,7 +291,6 @@ uint32_t Soldier_Descr::get_rand_anim
 		run = m_die_e_name[i];
 	}
 
-	log(" get %s\n", run.c_str());
 	return get_animation(run.c_str());
 }
 
@@ -404,7 +403,7 @@ uint32_t Soldier::get_level(tAttribute const at) const {
 	case atrTotal:
 		return m_hp_level + m_attack_level + m_defense_level + m_evade_level;
 	default:
-		throw wexception ("Soldier::get_level attribute not identified.");
+		throw wexception ("Soldier::get_level attribute %d not identified.", at);
 	}
 }
 
@@ -823,11 +822,10 @@ void Soldier::attack_update(Game & game, State & state)
 		return start_task_idle(game, get_animation("idle"), -1);
 	}
 
-	PlayerImmovable * const location = get_location(game);
-	BaseImmovable * const imm = game.map()[get_position()].get_immovable();
+	upcast(Building, location, get_location(game));
 	upcast(Building, enemy, state.objvar1.get(game));
 
-	if (imm == location) {
+	if (location && get_position() == location->get_position()) {
 		if (!enemy) {
 			molog("[attack] returned home\n");
 			return pop_task(game);
@@ -838,12 +836,13 @@ void Soldier::attack_update(Game & game, State & state)
 	if (m_battle)
 		return start_task_battle(game);
 
-	if (signal == "blocked")
+	if (signal == "blocked") {
 		// Wait before we try again. Note that this must come *after*
 		// we check for a battle
 		// Note that we *should* be woken via sendSpaceSignals,
 		// so the timeout is just an additional safety net.
 		return start_task_idle(game, get_animation("idle"), 5000);
+	}
 
 	if (!location) {
 		molog("[attack] our location disappeared during a battle\n");
@@ -906,12 +905,12 @@ void Soldier::attack_update(Game & game, State & state)
 			}
 		}
 		Flag & baseflag = location->base_flag();
-		if (imm == &baseflag)
+		if (get_position() == baseflag.get_position())
 			return
 				start_task_move
 					(game,
 					 WALK_NW,
-					 &descr().get_right_walk_anims(does_carry_ware()),
+					 descr().get_right_walk_anims(does_carry_ware()),
 					 true);
 
 		if
@@ -929,7 +928,7 @@ void Soldier::attack_update(Game & game, State & state)
 
 	// At this point, we know that the enemy building still stands,
 	// and that we're outside in the plains.
-	if (imm != &enemy->base_flag()) {
+	if (get_position() != enemy->base_flag().get_position()) {
 		if
 			(start_task_movepath
 			 	(game,
@@ -1161,7 +1160,7 @@ void Soldier::defense_update(Game & game, State & state)
 				start_task_move
 					(game,
 					 WALK_NW,
-					 &descr().get_right_walk_anims(does_carry_ware()),
+					 descr().get_right_walk_anims(does_carry_ware()),
 					 true);
 		}
 
@@ -1393,7 +1392,7 @@ void Soldier::battle_update(Game & game, State &)
 				start_task_move
 					(game,
 					 WALK_SE,
-					 &descr().get_right_walk_anims(does_carry_ware()),
+					 descr().get_right_walk_anims(does_carry_ware()),
 					 true);
 		}
 	}
@@ -1405,6 +1404,7 @@ void Soldier::battle_update(Game & game, State &)
 			return skip_act(); //  we will get a signal via setBattle()
 		} else {
 			if (m_combat_walking != CD_COMBAT_E) {
+				opponent.send_signal(game, "wakeup");
 				return start_task_move_in_battle(game, CD_WALK_E);
 			}
 		}
@@ -1486,7 +1486,6 @@ void Soldier::battle_update(Game & game, State &)
 				}
 			}
 		} else {
-
 			assert(opponent.get_position() == get_position());
 			assert(m_battle == opponent.getBattle());
 
@@ -1494,22 +1493,21 @@ void Soldier::battle_update(Game & game, State &)
 				molog
 					("[battle]: Opponent '%d' is walking, sleeping\n",
 					 opponent.serial());
-				return start_task_idle(game, descr().get_animation("idle"), 100);
+				// We should be woken up by our opponent, but add a timeout anyway for robustness
+				return start_task_idle(game, descr().get_animation("idle"), 5000);
 			}
 
 			if (m_battle->first()->serial() == serial()) {
-				molog("[battle]: I am first: '%d'\n", m_combat_walking);
 				if (m_combat_walking != CD_COMBAT_W) {
-					start_task_move_in_battle(game, CD_WALK_W);
-					return;
+					molog("[battle]: Moving west\n");
+					opponent.send_signal(game, "wakeup");
+					return start_task_move_in_battle(game, CD_WALK_W);
 				}
-			}
-
-			if (m_battle->second()->serial() == serial()) {
-				molog("[battle]: I am second: '%d'\n", m_combat_walking);
+			} else {
 				if (m_combat_walking != CD_COMBAT_E) {
-					start_task_move_in_battle(game, CD_WALK_E);
-					return;
+					molog("[battle]: Moving east\n");
+					opponent.send_signal(game, "wakeup");
+					return start_task_move_in_battle(game, CD_WALK_E);
 				}
 			}
 		}

@@ -50,7 +50,6 @@ struct Map_Map_Object_Loader;
  * link them together
  */
 struct Map_Object_Descr : boost::noncopyable {
-	friend struct ::DirAnimations;
 	typedef uint8_t Index;
 	Map_Object_Descr(char const * const _name, char const * const _descname)
 		: m_name(_name), m_descname(_descname)
@@ -349,7 +348,7 @@ struct Object_Manager : boost::noncopyable {
 		return it != m_objects.end() ? it->second : 0;
 	}
 
-	void insert(Map_Object &);
+	void insert(Map_Object *);
 	void remove(Map_Object &);
 
 	bool object_still_available(const Map_Object * const t) const {
@@ -377,7 +376,9 @@ private:
  * Provides a safe pointer to a Map_Object
  */
 struct Object_Ptr {
-	Object_Ptr(Map_Object * const obj = 0) {m_serial = obj ? obj->m_serial : 0;}
+	// Provide default constructor to shut up cppcheck.
+	Object_Ptr() {m_serial = 0;}
+	Object_Ptr(Map_Object * const obj) {m_serial = obj ? obj->m_serial : 0;}
 	// can use standard copy constructor and assignment operator
 
 	Object_Ptr & operator= (Map_Object * const obj) {

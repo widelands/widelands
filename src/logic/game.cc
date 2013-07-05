@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2011 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2012 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -40,6 +40,7 @@
 #include "profile/profile.h"
 #include "replay.h"
 #include "scripting/scripting.h"
+#include "ship.h"
 #include "soldier.h"
 #include "sound/sound_handler.h"
 #include "timestring.h"
@@ -768,6 +769,13 @@ void Game::send_player_start_stop_building (Building & building)
 		 	(get_gametime(), building.owner().player_number(), building));
 }
 
+void Game::send_player_start_or_cancel_expedition (Building & building)
+{
+	send_player_command
+		(*new Cmd_StartOrCancelExpedition
+		 	(get_gametime(), building.owner().player_number(), building));
+}
+
 void Game::send_player_enhance_building
 	(Building & building, Building_Index const id)
 {
@@ -859,12 +867,33 @@ void Game::send_player_enemyflagaction
 }
 
 
-void Game::send_player_changemilitaryconfig
-	(Player_Number const pid, uint8_t const retreat)
+void Game::send_player_changemilitaryconfig(Player_Number const pid, uint8_t const retreat)
 {
 	send_player_command
 		(*new Cmd_ChangeMilitaryConfig(get_gametime(), pid, retreat));
 }
+
+void Game::send_player_ship_scout_direction(Ship & ship, uint8_t direction)
+{
+	send_player_command
+		(*new Cmd_ShipScoutDirection
+			(get_gametime(), ship.get_economy()->owner().player_number(), ship.serial(), direction));
+}
+
+void Game::send_player_ship_construct_port(Ship & ship, Coords coords)
+{
+	send_player_command
+		(*new Cmd_ShipConstructPort
+			(get_gametime(), ship.get_economy()->owner().player_number(), ship.serial(), coords));
+}
+
+void Game::send_player_ship_explore_island(Ship & ship, bool cw)
+{
+	send_player_command
+		(*new Cmd_ShipExploreIsland
+			(get_gametime(), ship.get_economy()->owner().player_number(), ship.serial(), cw));
+}
+
 
 /**
  * Sample global statistics for the game.

@@ -18,6 +18,7 @@
  */
 
 #include <boost/algorithm/string.hpp>
+#include <boost/foreach.hpp>
 
 #include "container_iterate.h"
 
@@ -70,28 +71,22 @@ void Map_Port_Spaces_Data_Packet::Write(FileSystem & fs, Editor_Game_Base & egba
 	throw (_wexception)
 {
 	Profile prof;
-	prof.create_section("global").set_int("packet_version", CURRENT_PACKET_VERSION);
+	Section & s1 = prof.create_section("global");
+	s1.set_int("packet_version", CURRENT_PACKET_VERSION);
 
 	Map & map = egbase.map();
-	std::vector<Coords> port_spaces = map.get_port_spaces();
-	uint32_t count = 0;
+	const Map::PortSpacesSet& port_spaces = map.get_port_spaces();
+	const uint16_t num = port_spaces.size();
+	char buf[8]; // there won't be that many port spaces... Definitely!
+	s1.set_int("number_of_port_spaces", num);
+
 	Section & s2 = prof.create_section("port_spaces");
-	for (uint32_t i = 0; i < port_spaces.size(); ++i) {
-		const FCoords f = map.get_fcoords(port_spaces[i]);
-		// Perform some implicit cleanup while saving
-		if (f.field->get_caps() & BUILDCAPS_PORT) {
-			char buf[8];
-			snprintf(buf, sizeof(buf), "%u", count);
-			s2.set_Coords(buf, f);
-			++count;
-		}
+	int i = 0;
+	BOOST_FOREACH(const Coords& c, port_spaces) {
+		snprintf(buf, sizeof(buf), "%u", i++);
+		s2.set_Coords(buf, c);
 	}
-
-	// Note that we do not keep a pointer to the global section around
-	// because it may have become invalid by creating the "port_spaces" section
-	prof.get_section("global")->set_int("number_of_port_spaces", count);
-
 	prof.write("port_spaces", false, fs);
 }
 
-} // namespace Widelands
+}

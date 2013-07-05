@@ -1,6 +1,5 @@
 help=_Fells trees.
 program=harvest
-soundfx=../../../sound/sawmill/sawmill
 
 [buildcost]
 carrier=1

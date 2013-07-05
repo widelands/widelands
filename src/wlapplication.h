@@ -269,6 +269,10 @@ protected:
 	///True if left and right mouse button should be swapped
 	bool  m_mouse_swapped;
 
+	/// When apple is involved, the middle mouse button is sometimes send, even
+	/// if it wasn't pressed. We try to revert this and this helps.
+	bool  m_faking_middle_mouse_button;
+
 	///The current position of the mouse pointer
 	Point m_mouse_position;
 
@@ -309,6 +313,9 @@ private:
 	///created already. NULL otherwise.
 	///\note This is private on purpose. Read the class documentation.
 	static WLApplication * the_singleton;
+
+	void _handle_mousebutton(SDL_Event &, InputCallback const *);
+
 };
 
 #endif

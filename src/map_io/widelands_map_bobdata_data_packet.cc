@@ -267,9 +267,7 @@ void Map_Bobdata_Data_Packet::Read
 									bob_descr.get_animation(fr.CString()),
 									bob_descr.get_animation(fr.CString())
 								};
-								state.diranims =
-									new DirAnimations
-										(ans[0], ans[1], ans[2], ans[3], ans[4], ans[5]);
+								state.diranims = DirAnimations(ans[0], ans[1], ans[2], ans[3], ans[4], ans[5]);
 
 								if
 									(state.task == &Bob::taskMove and
@@ -282,7 +280,7 @@ void Map_Bobdata_Data_Packet::Read
 										 "time if available; the erroneous state that "
 										 "this bob is in only lasts 10ms");
 							} else
-								state.diranims = 0;
+								state.diranims = DirAnimations::Null();
 
 							uint32_t const pathsteps = fr.Unsigned16();
 							if (i < old_stacksize) {

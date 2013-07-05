@@ -6,15 +6,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4374\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2012-10-04 15:25+0000\n"
+"POT-Creation-Date: 2013-06-16 09:11+0000\n"
 "PO-Revision-Date: 2011-03-20 15:05+0000\n"
-"Last-Translator: Daniel Ejsing-Duun <Unknown>\n"
+"Last-Translator: Daniel Ejsing-Duun <daniel@zilvador.dk>\n"
 "Language-Team: Danish <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-10-05 04:35+0000\n"
-"X-Generator: Launchpad (build 16061)\n"
+"X-Launchpad-Export-Date: 2013-06-17 05:11+0000\n"
+"X-Generator: Launchpad (build 16667)\n"
 
 #: ../../tribes/barbarians/axefactory/help.lua:12
 #: ../../tribes/barbarians/warmill/help.lua:12
@@ -818,7 +818,7 @@ msgstr ""
 msgid "Crew required:"
 msgstr ""
 
-#: ../../tribes/barbarians/stonemason/conf:2
+#: ../../tribes/barbarians/stonemason/conf:1
 msgid "Cuts raw pieces of granite out of laying stones."
 msgstr ""
 
@@ -1257,7 +1257,7 @@ msgstr "Hammer"
 msgid "Harvest reed"
 msgstr "Høst rør"
 
-#: ../../tribes/barbarians/farm/conf:19
+#: ../../tribes/barbarians/farm/conf:18
 msgid "Harvest wheat"
 msgstr "Høst hvede"
 
@@ -1774,11 +1774,11 @@ msgstr "Plant rør"
 msgid "Plant trees in the surrounding area."
 msgstr ""
 
-#: ../../tribes/barbarians/farm/conf:17
+#: ../../tribes/barbarians/farm/conf:16
 msgid "Plant wheat"
 msgstr "Plant hvede"
 
-#: ../../tribes/barbarians/farmer/conf:2
+#: ../../tribes/barbarians/farmer/conf:1
 msgid "Plants fields."
 msgstr "Planter marker."
 
@@ -1790,41 +1790,41 @@ msgstr "Planter træer."
 msgid "Port"
 msgstr ""
 
-#: ../../tribes/barbarians/axefactory/conf:29
-#: ../../tribes/barbarians/warmill/conf:33
+#: ../../tribes/barbarians/axefactory/conf:27
+#: ../../tribes/barbarians/warmill/conf:31
 msgid "Produce axe"
 msgstr "Producer økse"
 
-#: ../../tribes/barbarians/metalworks/conf:34
+#: ../../tribes/barbarians/metalworks/conf:33
 msgid "Produce bakingtray"
 msgstr "Producer bagebakke"
 
-#: ../../tribes/barbarians/warmill/conf:37
+#: ../../tribes/barbarians/warmill/conf:35
 msgid "Produce battleaxe"
 msgstr "Producer kampøkse"
 
-#: ../../tribes/barbarians/axefactory/conf:31
-#: ../../tribes/barbarians/warmill/conf:35
+#: ../../tribes/barbarians/axefactory/conf:29
+#: ../../tribes/barbarians/warmill/conf:33
 msgid "Produce broadaxe"
 msgstr "Producer bredøkse"
 
-#: ../../tribes/barbarians/warmill/conf:36
+#: ../../tribes/barbarians/warmill/conf:34
 msgid "Produce bronzeaxe"
 msgstr "Producer bronzeøkse"
 
-#: ../../tribes/barbarians/metalworks/conf:33
+#: ../../tribes/barbarians/metalworks/conf:32
 msgid "Produce felling axe"
 msgstr "Producerer huggeøkse"
 
-#: ../../tribes/barbarians/metalworks/conf:35
+#: ../../tribes/barbarians/metalworks/conf:34
 msgid "Produce fire tongs"
 msgstr "Producer ildtang"
 
-#: ../../tribes/barbarians/metalworks/conf:36
+#: ../../tribes/barbarians/metalworks/conf:35
 msgid "Produce fishing rod"
 msgstr "Producer fiskestang"
 
-#: ../../tribes/barbarians/metalworks/conf:37
+#: ../../tribes/barbarians/metalworks/conf:36
 msgid "Produce hammer"
 msgstr "Producer hammer"
 
@@ -1832,11 +1832,11 @@ msgstr "Producer hammer"
 msgid "Produce helm"
 msgstr "Producer hjelm"
 
-#: ../../tribes/barbarians/metalworks/conf:42
+#: ../../tribes/barbarians/metalworks/conf:41
 msgid "Produce hunting spear"
 msgstr "Producer jagtspyd"
 
-#: ../../tribes/barbarians/metalworks/conf:38
+#: ../../tribes/barbarians/metalworks/conf:37
 msgid "Produce kitchen tools"
 msgstr "Producer køkkenredskaber"
 
@@ -1848,7 +1848,7 @@ msgstr "Producer maske"
 msgid "Produce meal"
 msgstr "Producer måltid"
 
-#: ../../tribes/barbarians/metalworks/conf:39
+#: ../../tribes/barbarians/metalworks/conf:38
 msgid "Produce pick"
 msgstr "Producer hakke"
 
@@ -1858,16 +1858,16 @@ msgstr "Producer hakke"
 msgid "Produce ration"
 msgstr "Producer ration"
 
-#: ../../tribes/barbarians/metalworks/conf:40
+#: ../../tribes/barbarians/metalworks/conf:39
 msgid "Produce scythe"
 msgstr "Producer le"
 
-#: ../../tribes/barbarians/axefactory/conf:30
-#: ../../tribes/barbarians/warmill/conf:34
+#: ../../tribes/barbarians/axefactory/conf:28
+#: ../../tribes/barbarians/warmill/conf:32
 msgid "Produce sharpaxe"
 msgstr "Producer skarpøkse"
 
-#: ../../tribes/barbarians/metalworks/conf:41
+#: ../../tribes/barbarians/metalworks/conf:40
 msgid "Produce shovel"
 msgstr "Producer skovl"
 
@@ -1880,7 +1880,7 @@ msgstr "Producer snack"
 msgid "Produce warhelmet"
 msgstr "Producer krigshjelm"
 
-#: ../../tribes/barbarians/warmill/conf:38
+#: ../../tribes/barbarians/warmill/conf:36
 msgid "Produce warriorsaxe"
 msgstr "Producer krigerøkse"
 
@@ -2213,8 +2213,8 @@ msgstr ""
 msgid "Shovel"
 msgstr "Skovl"
 
-#: ../../tribes/barbarians/battlearena/conf:28
-#: ../../tribes/barbarians/trainingscamp/conf:36
+#: ../../tribes/barbarians/battlearena/conf:29
+#: ../../tribes/barbarians/trainingscamp/conf:37
 msgid "Sleep"
 msgstr "Sov"
 
@@ -2904,11 +2904,11 @@ msgstr ""
 msgid "Upgrade cost:"
 msgstr ""
 
-#: ../../tribes/barbarians/trainingscamp/conf:37
+#: ../../tribes/barbarians/trainingscamp/conf:38
 msgid "Upgrade soldier attack 0"
 msgstr "Opgrader soldat angreb 0"
 
-#: ../../tribes/barbarians/trainingscamp/conf:38
+#: ../../tribes/barbarians/trainingscamp/conf:39
 msgid ""
 "Upgrade soldier attack 0 (only for compatibility with old savegames "
 "(build13))"
@@ -2916,11 +2916,11 @@ msgstr ""
 "Opgrader soldat angreb 0 (kun for kompatibilitet med gamle gemte spil "
 "(build13))"
 
-#: ../../tribes/barbarians/trainingscamp/conf:39
+#: ../../tribes/barbarians/trainingscamp/conf:40
 msgid "Upgrade soldier attack 1"
 msgstr "Opgrader soldat angreb 1"
 
-#: ../../tribes/barbarians/trainingscamp/conf:40
+#: ../../tribes/barbarians/trainingscamp/conf:41
 msgid ""
 "Upgrade soldier attack 1 (only for compatibility with old savegames "
 "(build13))"
@@ -2928,11 +2928,11 @@ msgstr ""
 "Opgrader soldat angreb 1 (kun for kompatibilitet med gamle gemte spil "
 "(build13))"
 
-#: ../../tribes/barbarians/trainingscamp/conf:41
+#: ../../tribes/barbarians/trainingscamp/conf:42
 msgid "Upgrade soldier attack 2"
 msgstr "Opgrader soldat angreb 2"
 
-#: ../../tribes/barbarians/trainingscamp/conf:42
+#: ../../tribes/barbarians/trainingscamp/conf:43
 msgid ""
 "Upgrade soldier attack 2 (only for compatibility with old savegames "
 "(build13))"
@@ -2940,11 +2940,11 @@ msgstr ""
 "Opgrader soldat angreb 2 (kun for kompatibilitet med gamle gemte spil "
 "(build13))"
 
-#: ../../tribes/barbarians/trainingscamp/conf:43
+#: ../../tribes/barbarians/trainingscamp/conf:44
 msgid "Upgrade soldier attack 3"
 msgstr "Opgrader soldat angreb 3"
 
-#: ../../tribes/barbarians/trainingscamp/conf:44
+#: ../../tribes/barbarians/trainingscamp/conf:45
 msgid ""
 "Upgrade soldier attack 3 (only for compatibility with old savegames "
 "(build13))"
@@ -2952,11 +2952,11 @@ msgstr ""
 "Opgrader soldat angreb 3 (kun for kompatibilitet med gamle gemte spil "
 "(build13))"
 
-#: ../../tribes/barbarians/trainingscamp/conf:45
+#: ../../tribes/barbarians/trainingscamp/conf:46
 msgid "Upgrade soldier attack 4"
 msgstr "Opgrader soldat angreb 4"
 
-#: ../../tribes/barbarians/trainingscamp/conf:46
+#: ../../tribes/barbarians/trainingscamp/conf:47
 msgid ""
 "Upgrade soldier attack 4 (only for compatibility with old savegames "
 "(build13))"
@@ -2964,55 +2964,55 @@ msgstr ""
 "Opgrader soldat angreb 4 (kun for kompatibilitet med gamle gemte spil "
 "(build13))"
 
-#: ../../tribes/barbarians/battlearena/conf:29
+#: ../../tribes/barbarians/battlearena/conf:30
 msgid "Upgrade soldier evade 0"
 msgstr "Opgrader soldat undvig 0"
 
-#: ../../tribes/barbarians/battlearena/conf:30
+#: ../../tribes/barbarians/battlearena/conf:31
 msgid ""
 "Upgrade soldier evade 0 (only for compatibility with old savegames (build13))"
 msgstr ""
 "Opgrader soldat undvig 0 (kun for kompatibiliet med gamle gemte spil "
 "(build13))"
 
-#: ../../tribes/barbarians/battlearena/conf:31
+#: ../../tribes/barbarians/battlearena/conf:32
 msgid "Upgrade soldier evade 1"
 msgstr "Opgrader soldat undvig 1"
 
-#: ../../tribes/barbarians/battlearena/conf:32
+#: ../../tribes/barbarians/battlearena/conf:33
 msgid ""
 "Upgrade soldier evade 1 (only for compatibility with old savegames (build13))"
 msgstr ""
 "Opgrader soldat undvig 1 (kun for kompatibiliet med gamle gemte spil "
 "(build13))"
 
-#: ../../tribes/barbarians/trainingscamp/conf:47
+#: ../../tribes/barbarians/trainingscamp/conf:48
 msgid "Upgrade soldier hitpoints 0"
 msgstr "Opgrader soldat liv 0"
 
-#: ../../tribes/barbarians/trainingscamp/conf:48
+#: ../../tribes/barbarians/trainingscamp/conf:49
 msgid ""
 "Upgrade soldier hitpoints 0 (only for compatibility with old savegames "
 "(build13))"
 msgstr ""
 "Opgrader soldat liv 0 (kun for kompatibiliet med gamle gemte spil (build13))"
 
-#: ../../tribes/barbarians/trainingscamp/conf:49
+#: ../../tribes/barbarians/trainingscamp/conf:50
 msgid "Upgrade soldier hitpoints 1"
 msgstr "Opgrader soldat liv 1"
 
-#: ../../tribes/barbarians/trainingscamp/conf:50
+#: ../../tribes/barbarians/trainingscamp/conf:51
 msgid ""
 "Upgrade soldier hitpoints 1 (only for compatibility with old savegames "
 "(build13))"
 msgstr ""
 "Opgrader soldat liv 1 (kun for kompatibiliet med gamle gemte spil (build13))"
 
-#: ../../tribes/barbarians/trainingscamp/conf:51
+#: ../../tribes/barbarians/trainingscamp/conf:52
 msgid "Upgrade soldier hitpoints 2"
 msgstr "Opgrader soldat liv 2"
 
-#: ../../tribes/barbarians/trainingscamp/conf:52
+#: ../../tribes/barbarians/trainingscamp/conf:53
 msgid ""
 "Upgrade soldier hitpoints 2 (only for compatibility with old savegames "
 "(build13))"
@@ -3199,12 +3199,12 @@ msgstr "Vildsvin"
 msgid "Wood Hardener"
 msgstr "Træhærder"
 
-#: ../../tribes/barbarians/axefactory/conf:32
+#: ../../tribes/barbarians/axefactory/conf:30
 #: ../../tribes/barbarians/bakery/conf:21
 #: ../../tribes/barbarians/big_inn/conf:27
 #: ../../tribes/barbarians/brewery/conf:20
 #: ../../tribes/barbarians/burners_house/conf:19
-#: ../../tribes/barbarians/cattlefarm/conf:22
+#: ../../tribes/barbarians/cattlefarm/conf:21
 #: ../../tribes/barbarians/coalmine/conf:20
 #: ../../tribes/barbarians/deep_coalmine/conf:23
 #: ../../tribes/barbarians/deep_goldmine/conf:23
@@ -3212,7 +3212,7 @@ msgstr "Træhærder"
 #: ../../tribes/barbarians/deeper_coalmine/conf:22
 #: ../../tribes/barbarians/deeper_goldmine/conf:22
 #: ../../tribes/barbarians/deeper_oremine/conf:22
-#: ../../tribes/barbarians/farm/conf:21
+#: ../../tribes/barbarians/farm/conf:20
 #: ../../tribes/barbarians/fernery/conf:19
 #: ../../tribes/barbarians/fishers_hut/conf:15
 #: ../../tribes/barbarians/gamekeepers_hut/conf:15
@@ -3224,7 +3224,7 @@ msgstr "Træhærder"
 #: ../../tribes/barbarians/inn/conf:25
 #: ../../tribes/barbarians/lime_kiln/conf:18
 #: ../../tribes/barbarians/lumberjacks_hut/conf:15
-#: ../../tribes/barbarians/metalworks/conf:43
+#: ../../tribes/barbarians/metalworks/conf:42
 #: ../../tribes/barbarians/micro-brewery/conf:22
 #: ../../tribes/barbarians/oremine/conf:21
 #: ../../tribes/barbarians/quarry/conf:15
@@ -3233,7 +3233,7 @@ msgstr "Træhærder"
 #: ../../tribes/barbarians/shipyard/conf:22
 #: ../../tribes/barbarians/smelting_works/conf:26
 #: ../../tribes/barbarians/tavern/conf:24
-#: ../../tribes/barbarians/warmill/conf:39
+#: ../../tribes/barbarians/warmill/conf:37
 #: ../../tribes/barbarians/weaving-mill/conf:19
 #: ../../tribes/barbarians/well/conf:14
 msgid "Work"

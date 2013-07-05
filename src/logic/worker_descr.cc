@@ -92,9 +92,6 @@ Worker_Descr::Worker_Descr
 	m_walk_anims.parse(*this, directory, prof, "walk");
 	m_walkload_anims.parse(*this, directory, prof, "walkload", true);
 
-	while (Section::Value const * const v = global_s.get_next_val("soundfx"))
-		g_sound_handler.load_fx(directory, v->get_string());
-
 	// Read the becomes and experience
 	if (char const * const becomes_name = global_s.get_string("becomes")) {
 		m_becomes = tribe().safe_worker_index(becomes_name);

@@ -77,6 +77,7 @@ public:
 	}
 
 	bool is_unduable() {return undoable;}
+	virtual bool has_size_one() const {return false;}
 	virtual Editor_Action_Args format_args_impl(Editor_Interactive & parent) {
 		return Editor_Action_Args(parent);
 	}

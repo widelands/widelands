@@ -22,6 +22,8 @@
 
 #include "logic/world.h"
 
+#include <boost/scoped_array.hpp>
+
 // This is the first step of separating map generation from
 // map.
 // TODO: Put other generation stuff here too...
@@ -88,7 +90,7 @@ struct MapGenerator {
 private:
 
 	void generate_bobs
-		(uint32_t const * const *  random_bobs,
+		(boost::scoped_array<uint32_t> const * random_bobs,
 		 Coords,
 		 RNG                             &,
 		 MapGenAreaInfo::MapGenTerrainType terrType);

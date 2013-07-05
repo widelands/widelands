@@ -47,7 +47,7 @@ Save this file inside the maps directory as ``scripting/init.lua``.
 
    When we talk about text files, we mean the very basic representation of
    characters that a computer can understand. That means that any fancy word
-   processor (Word, OpenOffice and there like) will likely produce the wrong
+   processor (Word, OpenOffice and their like) will likely produce the wrong
    file format when saving. Make sure to use a plain text editor (like Notepad
    under Windows, nedit under Linux and TextEdit under Mac OS X). If you have
    programmed before, you likely already have found your favorite editor....

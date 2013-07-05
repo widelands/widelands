@@ -413,7 +413,7 @@ void Map::set_origin(Coords const new_origin) {
 		} else if (k <  nk) { //  ascending run
 			for (X_Coordinate x = 0; x < w; ++x)
 				for (uint16_t first = 0, count = 0; count < k; ++first) {
-					Field const t = operator[](Coords(x, first));
+					const Field& t = operator[](Coords(x, first));
 					uint16_t const last = first + nk;
 					for (uint16_t index = first;;) {
 						++count;
@@ -431,7 +431,7 @@ void Map::set_origin(Coords const new_origin) {
 		} else if (k >  nk) { //  descending run
 			for (X_Coordinate x = 0; x < w; ++x)
 				for (uint16_t first = h - 1, count = 0; count < nk; --first) {
-					Field const t = operator[](Coords(x, first));
+					const Field& t = operator[](Coords(x, first));
 					uint16_t const last = first - k;
 					for (uint16_t index = first;;) {
 						++count;
@@ -463,7 +463,7 @@ void Map::set_origin(Coords const new_origin) {
 		else if (k <  nk)
 			for (Y_Coordinate y = i; y < h; y += 2)
 				for (uint16_t first = 0, count = 0; count < k; ++first) {
-					Field const t = operator[] (Coords(first, y));
+					const Field& t = operator[] (Coords(first, y));
 					uint16_t const last = first + nk;
 					for (uint16_t index = first;;) {
 						++count;
@@ -481,7 +481,7 @@ void Map::set_origin(Coords const new_origin) {
 		else if (k >  nk)
 			for (Y_Coordinate y = i; y < h; y += 2)
 				for (uint16_t first = w - 1, count = 0; count < nk; --first) {
-					Field const t = operator[] (Coords(first, y));
+					const Field& t = operator[] (Coords(first, y));
 					uint16_t const last = first - k;
 					for (uint16_t index = first;;) {
 						++count;
@@ -621,8 +621,12 @@ void Map::set_nrplayers(Player_Number const nrplayers) {
 		return;
 	}
 
-	m_starting_pos = static_cast<Coords *>
+	Coords* new_starting_pos = static_cast<Coords *>
 		(realloc(m_starting_pos, sizeof(Coords) * nrplayers));
+	if (!new_starting_pos)
+		throw wexception("Out of memory.");
+	m_starting_pos = new_starting_pos;
+
 	while (m_nrplayers < nrplayers)
 		m_starting_pos[m_nrplayers++] = Coords(-1, -1);
 
@@ -1486,32 +1490,16 @@ std::vector<Coords> Map::find_portdock(const Coords & c) const
 }
 
 /// \returns true, if Coordinates are in port space list
-bool Map::is_port_space(Coords c) {
-	for (std::vector<Coords>::iterator i = m_port_spaces.begin(); i != m_port_spaces.end(); ++i) {
-		if (*i == c) {
-			return true;
-		}
-	}
-	return false;
+bool Map::is_port_space(const Coords& c) {
+	return m_port_spaces.count(c);
 }
 
 /// Set or unset a space as port space
 void Map::set_port_space(Coords c, bool allowed) {
 	if (allowed) {
-		// First check, if the coordinates are already in the list
-		for (std::vector<Coords>::iterator i = m_port_spaces.begin(); i != m_port_spaces.end(); ++i) {
-			if (*i == c)
-				return;
-		}
-		m_port_spaces.push_back(c);
+		m_port_spaces.insert(c);
 	} else {
-		// Try to find the coordinates, if they are found, remove them
-		for (std::vector<Coords>::iterator i = m_port_spaces.begin(); i != m_port_spaces.end(); ++i) {
-			if (*i == c) {
-				m_port_spaces.erase(i);
-				return;
-			}
-		}
+		m_port_spaces.erase(c);
 	}
 }
 

@@ -23,11 +23,11 @@
 #include "constants.h"
 #include "economy/flag.h"
 #include "economy/road.h"
-#include "graphic/font.h"
-#include "graphic/font_handler.h"
 #include "game_chat_menu.h"
 #include "game_debug_ui.h"
 #include "gamecontroller.h"
+#include "graphic/font_handler1.h"
+#include "graphic/rendertarget.h"
 #include "interactive_player.h"
 #include "logic/checkstep.h"
 #include "logic/cmd_queue.h"
@@ -43,6 +43,7 @@
 #include "profile/profile.h"
 #include "quicknavigation.h"
 #include "scripting/scripting.h"
+#include "text_layout.h"
 #include "upcast.h"
 #include "wlapplication.h"
 
@@ -332,45 +333,25 @@ void Interactive_Base::think()
 Draw debug overlay when appropriate.
 ===============
 */
-void Interactive_Base::draw_overlay(RenderTarget & dst) {
-	if
-		(get_display_flag(dfDebug)
-		 or
-		 not dynamic_cast<const Game *>(&egbase()))
-	{
-		//  show sel coordinates
-		char buf[100];
-
-		snprintf(buf, sizeof(buf), "%3i %3i", m_sel.pos.node.x, m_sel.pos.node.y);
-		UI::g_fh->draw_text_shadow
-			(dst, UI::TextStyle::ui_big(), Point(5, 5), buf, UI::Align_Left);
-		assert(m_sel.pos.triangle.t < 2);
-		const char * const triangle_string[] = {"down", "right"};
-		snprintf
-			(buf, sizeof(buf),
-			 "%3i %3i %s",
-			 m_sel.pos.triangle.x, m_sel.pos.triangle.y,
-			 triangle_string[m_sel.pos.triangle.t]);
-		UI::g_fh->draw_text_shadow
-			(dst, UI::TextStyle::ui_big(),
-			 Point(5, 25),
-			 buf, UI::Align_Left);
+void Interactive_Base::draw_overlay(RenderTarget& dst) {
+	// Blit node information when in debug mode.
+	if (get_display_flag(dfDebug) or not dynamic_cast<const Game*>(&egbase())) {
+		static format node_format("%3i %3i");
+		const std::string node_text = as_uifont
+			((node_format % m_sel.pos.node.x % m_sel.pos.node.y).str(), UI_FONT_SIZE_BIG);
+		dst.blit(Point(5, 5), UI::g_fh1->render(node_text), CM_Normal, UI::Align_Left);
 	}
 
+	// Blit FPS when in debug mode.
 	if (get_display_flag(dfDebug)) {
-		//  show FPS
-		char buffer[100];
-		snprintf
-			(buffer, sizeof(buffer),
-			 "%5.1f fps (avg: %5.1f fps)",
-			 1000.0 / m_frametime, 1000.0 / (m_avg_usframetime / 1000));
-		UI::g_fh->draw_text_shadow
-			(dst, UI::TextStyle::ui_big(),
-			 Point(85, 5),
-			 buffer, UI::Align_Left);
+		static format fps_format("%5.1f fps (avg: %5.1f fps)");
+		const std::string fps_text = as_uifont
+			((fps_format %
+			  (1000.0 / m_frametime) % (1000.0 / (m_avg_usframetime / 1000)))
+			 .str(), UI_FONT_SIZE_BIG);
+		dst.blit(Point(90, 5), UI::g_fh1->render(fps_text), CM_Normal, UI::Align_Left);
 	}
 }
-
 
 /** Interactive_Base::mainview_move(int32_t x, int32_t y)
  *

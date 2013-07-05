@@ -35,6 +35,30 @@
 
 namespace UI {
 
+namespace  {
+/**
+ * Draw the caret for the given text rendered exactly at the given point
+ * (including \ref LINE_MARGIN).
+ */
+void draw_caret
+	(RenderTarget & dst,
+	 const TextStyle & style,
+	 const Point& dstpoint,
+	 const std::string & text,
+	 uint32_t caret_offset)
+{
+	int caret_x = style.calc_bare_width(text.substr(0, caret_offset));
+
+	const Image* caret_image = g_gr->images().get("pics/caret.png");
+	Point caretpt;
+	caretpt.x = dstpoint.x + caret_x + LINE_MARGIN - caret_image->width();
+	caretpt.y = dstpoint.y + (style.font->height() - caret_image->height()) / 2;
+
+	dst.blit(caretpt, caret_image);
+}
+
+}  // namespace
+
 /// The global unique \ref Font_Handler object
 Font_Handler * g_fh = 0;
 
@@ -65,6 +89,13 @@ struct Font_Handler::Data {
 	LineCache linecache;
 
 	const LineCacheEntry & get_line(const TextStyle & style, const std::string & text);
+
+	~Data() {
+		while (!linecache.empty()) {
+			delete linecache.back().image;
+			linecache.pop_back();
+		}
+	}
 
 private:
 	void render_line(LineCacheEntry & lce);
@@ -189,25 +220,6 @@ void Font_Handler::draw_text
 }
 
 /**
- * Draw unwrapped, single-line text (i.e. no line breaks) with a gray shadow.
- */
-void Font_Handler::draw_text_shadow
-	(RenderTarget & dst,
-	 const TextStyle & style,
-	 Point dstpoint,
-	 const std::string & text,
-	 Align align,
-	 uint32_t caret)
-{
-
-	TextStyle gray_style = style;
-	gray_style.fg = RGBColor (0, 0, 0);
-
-	draw_text (dst, gray_style, dstpoint - Point(1, 1), text, align, caret);
-	draw_text (dst, style, dstpoint, text, align, caret);
-}
-
-/**
  * Draw unwrapped, un-aligned single-line text at the given point, and return the width of the text.
  */
 uint32_t Font_Handler::draw_text_raw
@@ -224,28 +236,6 @@ uint32_t Font_Handler::draw_text_raw
 	return lce.width;
 }
 
-/**
- * Draw the caret for the given text rendered exactly at the given point
- * (including \ref LINE_MARGIN).
- */
-void Font_Handler::draw_caret
-	(RenderTarget & dst,
-	 const TextStyle & style,
-	 Point dstpoint,
-	 const std::string & text,
-	 uint32_t caret)
-{
-	std::string sub = text.substr(0, caret);
-
-	int caret_x = style.calc_bare_width(sub);
-
-	const Image* caret_image = g_gr->images().get("pics/caret.png");
-	Point caretpt;
-	caretpt.x = dstpoint.x + caret_x + LINE_MARGIN - caret_image->width();
-	caretpt.y = dstpoint.y + (style.font->height() - caret_image->height()) / 2;
-
-	dst.blit(caretpt, caret_image);
-}
 
 /**
  * Compute the total size of the given text, when wrapped to the given

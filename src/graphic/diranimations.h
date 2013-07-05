@@ -20,6 +20,8 @@
 #ifndef DIRANIMATIONS_H
 #define DIRANIMATIONS_H
 
+#include "logic/widelands.h"
+
 #include <string>
 
 #include <stdint.h>
@@ -43,9 +45,15 @@ struct DirAnimations {
 		 bool optional = false,
 		 const std::string & default_dirpics = std::string());
 
-	uint32_t get_animation(int32_t const dir) const {
+	uint32_t get_animation(Widelands::Direction const dir) const {
 		return m_animations[dir - 1];
 	}
+
+	static DirAnimations Null() {
+		return DirAnimations(0); // Since real animation IDs are positive, this is safe
+	}
+
+	operator bool() const throw () {return m_animations[0];}
 
 private:
 	uint32_t m_animations[6];

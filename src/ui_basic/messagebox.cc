@@ -41,7 +41,8 @@ WLMessageBox::WLMessageBox
 	(Panel * const parent,
 	 const std::string & caption,
 	 const std::string & text,
-	 const MB_Type type)
+	 const MB_Type type,
+	 Align align)
 	:
 	Window(parent, "message_box", 0, 0, 20, 20, caption.c_str()),
 	d(new WLMessageBoxImpl)
@@ -50,7 +51,7 @@ WLMessageBox::WLMessageBox
 	d->textarea = new Multiline_Textarea
 		(this,
 		 5, 5, 30, 30,
-		 text.c_str(), Align_Center);
+		 text.c_str(), align);
 
 	const int32_t outerwidth = parent ?
 		parent->get_inner_w() : g_gr->get_xres();
@@ -110,13 +111,6 @@ WLMessageBox::WLMessageBox
 WLMessageBox::~WLMessageBox()
 {
 }
-
-
-void WLMessageBox::set_align(Align align)
-{
-	d->textarea->set_align(align);
-}
-
 
 /**
  * Handle mouseclick.

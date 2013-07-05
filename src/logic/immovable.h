@@ -29,7 +29,7 @@ struct Profile;
 
 namespace Widelands {
 
-struct Economy;
+class Economy;
 struct Flag;
 struct Map;
 struct Tribe_Descr;
@@ -87,8 +87,6 @@ struct ImmovableActionData;
  * Immovable represents a standard immovable such as trees or stones.
  */
 struct Immovable_Descr : public Map_Object_Descr {
-	friend struct Map_Immovabledata_Data_Packet; // For writing (get_program)
-
 	typedef std::map<std::string, ImmovableProgram *> Programs;
 
 	Immovable_Descr
@@ -129,9 +127,6 @@ class Immovable : public BaseImmovable {
 	friend struct Immovable_Descr;
 	friend struct ImmovableProgram;
 	friend struct Map;
-
-	// for writing (obsolete since build-11)
-	friend struct Map_Immovabledata_Data_Packet;
 
 	MO_DESCR(Immovable_Descr);
 

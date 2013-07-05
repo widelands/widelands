@@ -89,7 +89,7 @@ Player::Player
 	m_allow_retreat_change(false),
 	m_retreat_percentage  (50),
 	m_fields            (0),
-	m_allowed_worker_types  (tribe_descr.get_nrworkers  (), false),
+	m_allowed_worker_types  (tribe_descr.get_nrworkers  (), true),
 	m_allowed_building_types(tribe_descr.get_nrbuildings(), true),
 	m_ai(""),
 	m_current_produced_statistics(tribe_descr.get_nrwares    ()),
@@ -215,16 +215,16 @@ void Player::update_team_players() {
  * enabled.
  */
 void Player::play_message_sound(const std::string & sender) {
-#define MAYBE_PLAY(a) if (sender == a) { \
-	g_sound_handler.play_fx(a, 200, PRIO_ALWAYS_PLAY); \
+#define MAYBE_PLAY(a, b) if (sender == a) { \
+	g_sound_handler.play_fx(b, 200, PRIO_ALWAYS_PLAY); \
 	return; \
 	}
 
 	if (g_options.pull_section("global").get_bool("sound_at_message", true)) {
-		MAYBE_PLAY("site_occupied");
-		MAYBE_PLAY("under_attack");
+		MAYBE_PLAY("site_occupied", "sound/military/site_occupied");
+		MAYBE_PLAY("under_attack", "sound/military/under_attack");
 
-		g_sound_handler.play_fx("message", 200, PRIO_ALWAYS_PLAY);
+		g_sound_handler.play_fx("sound/message", 200, PRIO_ALWAYS_PLAY);
 	}
 }
 
@@ -594,6 +594,17 @@ void Player::start_stop_building(PlayerImmovable & imm) {
 			productionsite->set_stopped(!productionsite->is_stopped());
 }
 
+void Player::start_or_cancel_expedition(Warehouse & wh) {
+	if (&wh.owner() == this)
+		if (PortDock * pd = wh.get_portdock()) {
+			if (pd->expedition_started()) {
+				upcast(Game, game, &egbase());
+				pd->cancel_expedition(*game);
+			} else
+				pd->start_expedition();
+		}
+}
+
 /*
  * enhance this building, remove it, but give the constructionsite
  * an idea of enhancing
@@ -937,7 +948,7 @@ throw ()
 		{ //  map_object_descr[TCoords::None]
 
 			const Map_Object_Descr * map_object_descr;
-			const Constructionsite_Information * csi(0);
+			field.constructionsite.becomes = 0;
 			if (const BaseImmovable * base_immovable = f.field->get_immovable()) {
 				map_object_descr = &base_immovable->descr();
 
@@ -949,15 +960,13 @@ throw ()
 						map_object_descr = 0;
 					else {
 						if (upcast(ConstructionSite const, cs, building)) {
-							csi = const_cast<ConstructionSite *>(cs)->get_info();
-
+							field.constructionsite = const_cast<ConstructionSite *>(cs)->get_info();
 						}
 					}
 				}
 			} else
 				map_object_descr = 0;
 			field.map_object_descr[TCoords<>::None] = map_object_descr;
-			field.constructionsite[TCoords<>::None] = csi;
 		}
 	}
 	{ //  discover the D triangle and the SW edge of the top right neighbour

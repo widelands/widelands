@@ -25,7 +25,8 @@
 #include <cstdio>
 #include <iostream>
 
-extern std::ostream & wout;
+// Default to stdout for logging.
+std::ostream & wout = std::cout;
 
 bool g_verbose = false;
 
@@ -42,17 +43,3 @@ void log(const char * const fmt, ...) {
 }
 
 
-void dedicatedlog(const char * const fmt, ...) {
-	char buffer[2048];
-	va_list va;
-
-	va_start(va, fmt);
-	vsnprintf(buffer, sizeof(buffer), fmt, va);
-	va_end(va);
-
-	// Here comes the difference to widelands standard log() ;)
-	DedicatedLog::get()->dlog(buffer);
-
-	wout << buffer;
-	wout.flush();
-}
