@@ -5,17 +5,19 @@ the various formats understood by Widelands
 
 from glob import glob
 import collections
-import Image
-import numpy as np
 import os
 import re
 
-import config
+from PIL import Image
+import numpy as np
+
+import pywi.config
 
 FullFrame = collections.namedtuple('FullFrame', ('pic', 'pc_pic'))
 
 _re_point = re.compile('(\\d+)\\s+(\\d+)$')
 _re_blit = re.compile(r'(\d+),(\d+),(\d+),(\d+)@(-?\d+),(-?\d+)$')
+
 
 class Context(object):
     def __init__(self):
@@ -421,6 +423,6 @@ def load_legacy_diranims(directory, name, section, context=None):
 
 def load_conf(directory, anim, context=None):
     with open(directory + '/conf', 'r') as filp:
-        conf = config.read(filp)
+        conf = pywi.config.read(filp)
     section = conf.get_section(anim)
     return load_section(directory, section, context)
