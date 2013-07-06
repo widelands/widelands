@@ -2,6 +2,8 @@
 Read and write Widelands-style conf files
 """
 
+# TODO(sirver): This should be used for the Website as well.
+
 import collections
 import re
 

@@ -1,208 +1,24 @@
 #!/usr/bin/env python
 # encoding: utf-8
 
-from glob import glob
-from itertools import chain, combinations, permutations
-import collections
-import md5
-import re
 import argparse
 import math
+import md5
 import os
+import re
 import subprocess
 import sys
 
-import Image
-import numpy as np
 from scipy import ndimage
+import numpy as np
 
 import pywi.animation
 import pywi.config
 import pywi.packing
 
-OriginalFrame = collections.namedtuple('OriginalFrame', ('pic', 'pc_pic', 'anim', 'idx'))
-
-# Set partition: http://code.activestate.com/recipes/576795/
-def set_partition(iterable, chain=chain, map=map):
-    """Returns all set partitions of iteratable"""
-    s = iterable if hasattr(iterable, '__getslice__') else tuple(iterable)
-    n = len(s)
-    first, middle, last = [0], range(1, n), [n]
-    getslice = s.__getslice__
-    return list(map(getslice, chain(first, div), chain(div, last)) for i in
-            range(n) for div in combinations(middle, i))
-
-def set_partitions_all_permutation(iterable):
-    """Returns all unique set partitions in all permutations of iteratable"""
-    def _sub():
-        for partition in set_partition(iterable):
-            for idx in range(len(partition)):
-                for c in permutations(partition[idx], len(partition[idx])):
-                    yield tuple(map(tuple, partition[:idx] + [list(c)] + partition[idx+1:]))
-    return sorted(set(_sub()))
-
-
-class Point(object):
-    def __init__(self, y, x):
-        self.y = y
-        self.x = x
-
-class Rect(object):
-    def __init__(self, y1, y2, x1, x2):
-        self.top = y1
-        self.left = x1
-        self.bottom = y2
-        self.right = x2
-
-    @property
-    def w(self):
-        return self.right - self.left
-    @property
-    def h(self):
-        return self.bottom - self.top
-
-    @property
-    def tl(self):
-        "top-left point"
-        return Point(self.top, self.left)
-    @property
-    def tr(self):
-        return Point(self.top, self.right)
-    @property
-    def bl(self):
-        return Point(self.bottom, self.left)
-    @property
-    def br(self):
-        return Point(self.bottom, self.right)
-
-    def overlapping(self, r):
-        return any(r.contains(p) for p in (self.tr, self.br, self.bl, self.tl)) or \
-                any(self.contains(p) for p in (r.tr, r.br, r.bl, r.tl))
-
-    def merge(self, r):
-        """This yields a new rect that just contains both regions."""
-        return Rect(
-            min(self.top,r.top),
-            max(self.bottom,r.bottom),
-            min(self.left,r.left),
-            max(self.right,r.right)
-        )
-
-    def contains(self, p):
-        # Note: borders are inclusive for this check
-        if self.top <= p.y <= self.bottom:
-            if self.left <= p.x <= self.right:
-                return True
-        return False
-
-class ImageWrapper(object):
-    def __init__(self, img, pc_img, r, id):
-        self.img = img
-        self.pc_img = pc_img
-        self.id = tuple(id)
-        self.node = None
-
-    @property
-    def w(self):
-        return self.img.shape[1]
-
-    @property
-    def h(self):
-        return self.img.shape[0]
-
-    def __lt__(self, o):
-        if max(self.w,self.h) < max(o.w,o.h): return True
-        if max(self.w,self.h) > max(o.w,o.h): return False
-        if self.w < o.w: return True
-        if self.w > o.w: return False
-        if self.h < o.h: return True
-        if self.h > o.h: return False
-        return self.id < o.id
-
-
-
-def merge_overlapping(regions):
-    for i in range(len(regions)):
-        for j in range(len(regions)):
-            if i == j: continue
-            if regions[i].overlapping(regions[j]):
-                r1, r2 = regions[i], regions[j]
-                regions.remove(r1)
-                regions.remove(r2)
-                regions.append(r1.merge(r2))
-                return True
-    return False
-
-def cut_out_main(img, regions):
-    img = img.copy()
-    for r in regions:
-        img[r.top:r.bottom+1, r.left:r.right+1] = (0,0,0,0)
-    return img
-
-def eliminate_duplicates(imgs):
-    for i in range(len(imgs)):
-        for j in range(i+1, len(imgs)):
-            if (imgs[i][0] == imgs[j][0]).all():
-                imgs[i] = (imgs[i][0], imgs[i][1], imgs[i][2] + imgs[j][2])
-                del imgs[j]
-                return True
-    return False
-
-
-def prepare_animations(anims):
-    imgs, pc_imgs = load_animations(anims)
-
-    base_pic = imgs[0][0]
-    pc_base_pic = pc_imgs[0] if pc_imgs else None
-    pics_to_fit = []
-
-    # Find the regions that differ over all frames
-    diff = np.zeros(base_pic.shape, np.uint32)
-    for i in range(len(imgs)):
-        for j in range(i+1, len(imgs)):
-            diff += abs(imgs[i][0] - imgs[j][0])
-
-    label_img, nlabels = ndimage.label(diff.max(axis=-1) > 0)
-    regions = []
-    for i in range(1, nlabels + 1):
-        ys, xs = np.where(label_img==i)
-        # Note, this rectangular regions are including the end points.
-        regions.append(Rect(ys.min(),ys.max(),xs.min(),xs.max()))
-
-    while merge_overlapping(regions):
-        pass
-
-    pics_to_fit.append(ImageWrapper(
-        cut_out_main(base_pic, regions),
-        cut_out_main(pc_base_pic, regions) if pc_base_pic is not None else None,
-        Rect(0, base_pic.shape[0], 0, base_pic.shape[1]),
-        [(anim, -1, -1) for anim in anims])
-    )
-    for ridx,r in enumerate(regions):
-        reg_imgs = []
-        for idx in range(len(imgs)):
-            img,anim,framenr = imgs[idx]
-            subimg = img[r.top:r.bottom+1, r.left:r.right+1]
-            reg_imgs.append((subimg, pc_imgs[idx] if pc_imgs else None, [(anim, ridx, framenr)]))
-
-        # Drop the exact same images in this region.
-        while eliminate_duplicates(reg_imgs):
-            pass
-
-        for subimg, pc_img, id in reg_imgs:
-            pc_subimg = None
-            if pc_img is not None:
-                pc_subimg = pc_img[r.top:r.bottom+1, r.left:r.right+1]
-            pics_to_fit.append(ImageWrapper(subimg, pc_subimg, r, id))
-    return pics_to_fit, regions, base_pic.shape[1], base_pic.shape[0]
-
-##############################################
-##############################################
-##############################################
 
 # Consider an additional fragment/rectangle to be beneficial if it saves this many pixels in image data
 FRAGMENT_COST = 32
-
 
 def macr_exact_bruteforce(bitmask, lower_range=None, upper_range=None, FRAGMENT_COST=FRAGMENT_COST):
     """

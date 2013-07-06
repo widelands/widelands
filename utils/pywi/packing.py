@@ -2,9 +2,7 @@
 Algorithms for rectangle packing
 """
 
-import collections
-
-# NOCOM(#sirver): give credit heer
+# NOCOM(#sirver): give credit here
 class Packer(object):
     def fit(self, blocks):
         self.root = { "x": 0, "y": 0, "w": blocks[0].w, "h": blocks[0].h, "used": False }
@@ -92,3 +90,4 @@ def pack(rectangles):
     p = Packer()
     p.fit([Block(r[0], r[1]) for r in rectangles])
     return (p.root['w'], p.root['h'], p.get_result())
+
