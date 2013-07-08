@@ -17,6 +17,9 @@
  *
  */
 
+#include <iostream>
+#include <typeinfo>
+
 #include "widelands_map_players_view_data_packet.h"
 
 #include "io/bitinbuffer.h"
@@ -756,7 +759,14 @@ inline static void write_unseen_immovable
 			immovables_file.Unsigned32(csi.totaltime);
 			immovables_file.Unsigned32(csi.completedtime);
 		}
-	} else assert(false);
+	}
+	else
+	{
+		log ("widelands_map_players_view_data_packet.cc::write_unseen_immovable():");
+		log ("%s -> ", typeid(*map_object_data).name());
+		log ("%s was not expected.\n", typeid(*map_object_descr).name());
+		assert(false);
+	}
 	immovable_kinds_file.put(immovable_kind);
 }
 
