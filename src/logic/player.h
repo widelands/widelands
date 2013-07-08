@@ -28,6 +28,7 @@
 #include "notification.h"
 #include "rgbcolor.h"
 #include "tribe.h"
+#include "warehouse.h"
 
 #include "widelands.h"
 
@@ -461,6 +462,7 @@ struct Player :
 	void flagaction(Flag &);
 	void start_stop_building(PlayerImmovable &);
 	void military_site_set_soldier_preference(PlayerImmovable &, uint8_t m_soldier_preference);
+	void start_or_cancel_expedition(Warehouse &);
 	void enhance_building
 		(Building *, Building_Index index_of_new_building);
 	void dismantle_building (Building *);

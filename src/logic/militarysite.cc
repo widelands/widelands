@@ -480,8 +480,8 @@ void MilitarySite::update_soldier_request(bool incd)
 // NOCOM(#kxq): incd is not very descriptive and I do not understand the last paragraph
 // in the comment.
 {
-	const int32_t capacity = soldierCapacity();
-	const int32_t stationed = stationedSoldiers().size();
+	const uint32_t capacity = soldierCapacity();
+	const uint32_t stationed = stationedSoldiers().size();
 
 	if (m_doing_upgrade_request)
 	{

@@ -6,15 +6,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4888\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2012-10-04 15:25+0000\n"
+"POT-Creation-Date: 2013-06-16 09:11+0000\n"
 "PO-Revision-Date: 2012-06-25 20:27+0000\n"
 "Last-Translator: Jiří Locker <jiri.locker@gmail.com>\n"
 "Language-Team: Czech <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-10-05 04:35+0000\n"
-"X-Generator: Launchpad (build 16061)\n"
+"X-Launchpad-Export-Date: 2013-06-17 05:11+0000\n"
+"X-Generator: Launchpad (build 16667)\n"
 "X-Poedit-Country: CZECH REPUBLIC\n"
 "X-Poedit-Language: Czech\n"
 
@@ -861,7 +861,7 @@ msgstr ""
 msgid "Crew required:"
 msgstr "Potřeba posádky."
 
-#: ../../tribes/barbarians/stonemason/conf:2
+#: ../../tribes/barbarians/stonemason/conf:1
 msgid "Cuts raw pieces of granite out of laying stones."
 msgstr "Vyrábí surové kusy žuly z kamení."
 
@@ -1313,7 +1313,7 @@ msgstr "Kladivo"
 msgid "Harvest reed"
 msgstr "Sklidit rákos"
 
-#: ../../tribes/barbarians/farm/conf:19
+#: ../../tribes/barbarians/farm/conf:18
 msgid "Harvest wheat"
 msgstr "Sklízí pšenici"
 
@@ -1848,11 +1848,11 @@ msgstr "Vysadit rákos"
 msgid "Plant trees in the surrounding area."
 msgstr ""
 
-#: ../../tribes/barbarians/farm/conf:17
+#: ../../tribes/barbarians/farm/conf:16
 msgid "Plant wheat"
 msgstr "Vysévá pšenici."
 
-#: ../../tribes/barbarians/farmer/conf:2
+#: ../../tribes/barbarians/farmer/conf:1
 msgid "Plants fields."
 msgstr "Osévá pole."
 
@@ -1864,41 +1864,41 @@ msgstr "Sází stromy."
 msgid "Port"
 msgstr "Přístav"
 
-#: ../../tribes/barbarians/axefactory/conf:29
-#: ../../tribes/barbarians/warmill/conf:33
+#: ../../tribes/barbarians/axefactory/conf:27
+#: ../../tribes/barbarians/warmill/conf:31
 msgid "Produce axe"
 msgstr "Vyrobit sekeru"
 
-#: ../../tribes/barbarians/metalworks/conf:34
+#: ../../tribes/barbarians/metalworks/conf:33
 msgid "Produce bakingtray"
 msgstr "Vyrobit pekáč"
 
-#: ../../tribes/barbarians/warmill/conf:37
+#: ../../tribes/barbarians/warmill/conf:35
 msgid "Produce battleaxe"
 msgstr "Vyrobit válečnou sekeru"
 
-#: ../../tribes/barbarians/axefactory/conf:31
-#: ../../tribes/barbarians/warmill/conf:35
+#: ../../tribes/barbarians/axefactory/conf:29
+#: ../../tribes/barbarians/warmill/conf:33
 msgid "Produce broadaxe"
 msgstr "Vyrobit širočinu"
 
-#: ../../tribes/barbarians/warmill/conf:36
+#: ../../tribes/barbarians/warmill/conf:34
 msgid "Produce bronzeaxe"
 msgstr "Vyrobit bronzovou sekeru"
 
-#: ../../tribes/barbarians/metalworks/conf:33
+#: ../../tribes/barbarians/metalworks/conf:32
 msgid "Produce felling axe"
 msgstr "Vyrobit dřevorubeckou sekeru"
 
-#: ../../tribes/barbarians/metalworks/conf:35
+#: ../../tribes/barbarians/metalworks/conf:34
 msgid "Produce fire tongs"
 msgstr "Vyrobit žárové kleště"
 
-#: ../../tribes/barbarians/metalworks/conf:36
+#: ../../tribes/barbarians/metalworks/conf:35
 msgid "Produce fishing rod"
 msgstr "Vyrobit rybářský prut"
 
-#: ../../tribes/barbarians/metalworks/conf:37
+#: ../../tribes/barbarians/metalworks/conf:36
 msgid "Produce hammer"
 msgstr "Vyrobit kladivo"
 
@@ -1906,11 +1906,11 @@ msgstr "Vyrobit kladivo"
 msgid "Produce helm"
 msgstr "Vyrobit helmu"
 
-#: ../../tribes/barbarians/metalworks/conf:42
+#: ../../tribes/barbarians/metalworks/conf:41
 msgid "Produce hunting spear"
 msgstr "Vyrobit lovecký oštěp"
 
-#: ../../tribes/barbarians/metalworks/conf:38
+#: ../../tribes/barbarians/metalworks/conf:37
 msgid "Produce kitchen tools"
 msgstr "Vyrobit kuchyňské náčiní"
 
@@ -1922,7 +1922,7 @@ msgstr "Vyrobit masku"
 msgid "Produce meal"
 msgstr "Připravit jídlo"
 
-#: ../../tribes/barbarians/metalworks/conf:39
+#: ../../tribes/barbarians/metalworks/conf:38
 msgid "Produce pick"
 msgstr "Vyrobit krumpáč"
 
@@ -1932,16 +1932,16 @@ msgstr "Vyrobit krumpáč"
 msgid "Produce ration"
 msgstr "Připravit porci"
 
-#: ../../tribes/barbarians/metalworks/conf:40
+#: ../../tribes/barbarians/metalworks/conf:39
 msgid "Produce scythe"
 msgstr "Vyrobit kosu"
 
-#: ../../tribes/barbarians/axefactory/conf:30
-#: ../../tribes/barbarians/warmill/conf:34
+#: ../../tribes/barbarians/axefactory/conf:28
+#: ../../tribes/barbarians/warmill/conf:32
 msgid "Produce sharpaxe"
 msgstr "Vyrobit kalenou sekeru"
 
-#: ../../tribes/barbarians/metalworks/conf:41
+#: ../../tribes/barbarians/metalworks/conf:40
 msgid "Produce shovel"
 msgstr "Vyrobit lopatu"
 
@@ -1954,7 +1954,7 @@ msgstr "Připravit svačinu"
 msgid "Produce warhelmet"
 msgstr "Vyrobit válečnou helmu"
 
-#: ../../tribes/barbarians/warmill/conf:38
+#: ../../tribes/barbarians/warmill/conf:36
 msgid "Produce warriorsaxe"
 msgstr "Vyrobit bojovou sekeru"
 
@@ -2290,8 +2290,8 @@ msgstr "Loděnice"
 msgid "Shovel"
 msgstr "Lopata"
 
-#: ../../tribes/barbarians/battlearena/conf:28
-#: ../../tribes/barbarians/trainingscamp/conf:36
+#: ../../tribes/barbarians/battlearena/conf:29
+#: ../../tribes/barbarians/trainingscamp/conf:37
 msgid "Sleep"
 msgstr "Vyčkat"
 
@@ -3023,11 +3023,11 @@ msgstr ""
 msgid "Upgrade cost:"
 msgstr ""
 
-#: ../../tribes/barbarians/trainingscamp/conf:37
+#: ../../tribes/barbarians/trainingscamp/conf:38
 msgid "Upgrade soldier attack 0"
 msgstr "Vylepšit vojákův útok 0"
 
-#: ../../tribes/barbarians/trainingscamp/conf:38
+#: ../../tribes/barbarians/trainingscamp/conf:39
 msgid ""
 "Upgrade soldier attack 0 (only for compatibility with old savegames "
 "(build13))"
@@ -3035,11 +3035,11 @@ msgstr ""
 "Vylepšit vojákův útok 0 (pouze pro kompatibilitu se starými uloženými hrami "
 "(build 13))"
 
-#: ../../tribes/barbarians/trainingscamp/conf:39
+#: ../../tribes/barbarians/trainingscamp/conf:40
 msgid "Upgrade soldier attack 1"
 msgstr "Vylepšit vojákův útok 1"
 
-#: ../../tribes/barbarians/trainingscamp/conf:40
+#: ../../tribes/barbarians/trainingscamp/conf:41
 msgid ""
 "Upgrade soldier attack 1 (only for compatibility with old savegames "
 "(build13))"
@@ -3047,11 +3047,11 @@ msgstr ""
 "Vylepšit vojákův útok 1 (pouze pro kompatibilitu se starými uloženými hrami "
 "(build 13))"
 
-#: ../../tribes/barbarians/trainingscamp/conf:41
+#: ../../tribes/barbarians/trainingscamp/conf:42
 msgid "Upgrade soldier attack 2"
 msgstr "Vylepšit vojákův útok 2"
 
-#: ../../tribes/barbarians/trainingscamp/conf:42
+#: ../../tribes/barbarians/trainingscamp/conf:43
 msgid ""
 "Upgrade soldier attack 2 (only for compatibility with old savegames "
 "(build13))"
@@ -3059,11 +3059,11 @@ msgstr ""
 "Vylepšit vojákův útok 2 (pouze pro kompatibilitu se starými uloženými hrami "
 "(build 13))"
 
-#: ../../tribes/barbarians/trainingscamp/conf:43
+#: ../../tribes/barbarians/trainingscamp/conf:44
 msgid "Upgrade soldier attack 3"
 msgstr "Vylepšit vojákův útok 3"
 
-#: ../../tribes/barbarians/trainingscamp/conf:44
+#: ../../tribes/barbarians/trainingscamp/conf:45
 msgid ""
 "Upgrade soldier attack 3 (only for compatibility with old savegames "
 "(build13))"
@@ -3071,11 +3071,11 @@ msgstr ""
 "Vylepšit vojákův útok 3 (pouze pro kompatibilitu se starými uloženými hrami "
 "(build 13))"
 
-#: ../../tribes/barbarians/trainingscamp/conf:45
+#: ../../tribes/barbarians/trainingscamp/conf:46
 msgid "Upgrade soldier attack 4"
 msgstr "Vylepšit vojákův útok 4"
 
-#: ../../tribes/barbarians/trainingscamp/conf:46
+#: ../../tribes/barbarians/trainingscamp/conf:47
 msgid ""
 "Upgrade soldier attack 4 (only for compatibility with old savegames "
 "(build13))"
@@ -3083,33 +3083,33 @@ msgstr ""
 "Vylepšit vojákův útok 4 (pouze pro kompatibilitu se starými uloženými hrami "
 "(build 13))"
 
-#: ../../tribes/barbarians/battlearena/conf:29
+#: ../../tribes/barbarians/battlearena/conf:30
 msgid "Upgrade soldier evade 0"
 msgstr "Vylepšit vojákovu obratnost 0"
 
-#: ../../tribes/barbarians/battlearena/conf:30
+#: ../../tribes/barbarians/battlearena/conf:31
 msgid ""
 "Upgrade soldier evade 0 (only for compatibility with old savegames (build13))"
 msgstr ""
 "Vylepšit vojákovu obratnost 0 (pouze pro kompatibilitu se starými uloženými "
 "hrami (build 13))"
 
-#: ../../tribes/barbarians/battlearena/conf:31
+#: ../../tribes/barbarians/battlearena/conf:32
 msgid "Upgrade soldier evade 1"
 msgstr "Vylepšit vojákovu obratnost 0"
 
-#: ../../tribes/barbarians/battlearena/conf:32
+#: ../../tribes/barbarians/battlearena/conf:33
 msgid ""
 "Upgrade soldier evade 1 (only for compatibility with old savegames (build13))"
 msgstr ""
 "Vylepšit vojákovu obratnost 1 (pouze pro kompatibilitu se starými uloženými "
 "hrami (build 13))"
 
-#: ../../tribes/barbarians/trainingscamp/conf:47
+#: ../../tribes/barbarians/trainingscamp/conf:48
 msgid "Upgrade soldier hitpoints 0"
 msgstr "Vylepšit vojákovo zdraví 0"
 
-#: ../../tribes/barbarians/trainingscamp/conf:48
+#: ../../tribes/barbarians/trainingscamp/conf:49
 msgid ""
 "Upgrade soldier hitpoints 0 (only for compatibility with old savegames "
 "(build13))"
@@ -3117,11 +3117,11 @@ msgstr ""
 "Vylepšit vojákovo zdraví 0 (pouze pro kompatibilitu se starými uloženými "
 "hrami (build 13))"
 
-#: ../../tribes/barbarians/trainingscamp/conf:49
+#: ../../tribes/barbarians/trainingscamp/conf:50
 msgid "Upgrade soldier hitpoints 1"
 msgstr "Vylepšit vojákovo zdraví 1"
 
-#: ../../tribes/barbarians/trainingscamp/conf:50
+#: ../../tribes/barbarians/trainingscamp/conf:51
 msgid ""
 "Upgrade soldier hitpoints 1 (only for compatibility with old savegames "
 "(build13))"
@@ -3129,11 +3129,11 @@ msgstr ""
 "Vylepšit vojákovo zdraví 1 (pouze pro kompatibilitu se starými uloženými "
 "hrami (build 13))"
 
-#: ../../tribes/barbarians/trainingscamp/conf:51
+#: ../../tribes/barbarians/trainingscamp/conf:52
 msgid "Upgrade soldier hitpoints 2"
 msgstr "Vylepšit vojákovo zdraví 2"
 
-#: ../../tribes/barbarians/trainingscamp/conf:52
+#: ../../tribes/barbarians/trainingscamp/conf:53
 msgid ""
 "Upgrade soldier hitpoints 2 (only for compatibility with old savegames "
 "(build13))"
@@ -3326,12 +3326,12 @@ msgstr "Divočák"
 msgid "Wood Hardener"
 msgstr "Tesařství"
 
-#: ../../tribes/barbarians/axefactory/conf:32
+#: ../../tribes/barbarians/axefactory/conf:30
 #: ../../tribes/barbarians/bakery/conf:21
 #: ../../tribes/barbarians/big_inn/conf:27
 #: ../../tribes/barbarians/brewery/conf:20
 #: ../../tribes/barbarians/burners_house/conf:19
-#: ../../tribes/barbarians/cattlefarm/conf:22
+#: ../../tribes/barbarians/cattlefarm/conf:21
 #: ../../tribes/barbarians/coalmine/conf:20
 #: ../../tribes/barbarians/deep_coalmine/conf:23
 #: ../../tribes/barbarians/deep_goldmine/conf:23
@@ -3339,7 +3339,7 @@ msgstr "Tesařství"
 #: ../../tribes/barbarians/deeper_coalmine/conf:22
 #: ../../tribes/barbarians/deeper_goldmine/conf:22
 #: ../../tribes/barbarians/deeper_oremine/conf:22
-#: ../../tribes/barbarians/farm/conf:21
+#: ../../tribes/barbarians/farm/conf:20
 #: ../../tribes/barbarians/fernery/conf:19
 #: ../../tribes/barbarians/fishers_hut/conf:15
 #: ../../tribes/barbarians/gamekeepers_hut/conf:15
@@ -3351,7 +3351,7 @@ msgstr "Tesařství"
 #: ../../tribes/barbarians/inn/conf:25
 #: ../../tribes/barbarians/lime_kiln/conf:18
 #: ../../tribes/barbarians/lumberjacks_hut/conf:15
-#: ../../tribes/barbarians/metalworks/conf:43
+#: ../../tribes/barbarians/metalworks/conf:42
 #: ../../tribes/barbarians/micro-brewery/conf:22
 #: ../../tribes/barbarians/oremine/conf:21
 #: ../../tribes/barbarians/quarry/conf:15
@@ -3360,7 +3360,7 @@ msgstr "Tesařství"
 #: ../../tribes/barbarians/shipyard/conf:22
 #: ../../tribes/barbarians/smelting_works/conf:26
 #: ../../tribes/barbarians/tavern/conf:24
-#: ../../tribes/barbarians/warmill/conf:39
+#: ../../tribes/barbarians/warmill/conf:37
 #: ../../tribes/barbarians/weaving-mill/conf:19
 #: ../../tribes/barbarians/well/conf:14
 msgid "Work"

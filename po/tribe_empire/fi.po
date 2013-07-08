@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4208\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2012-10-04 15:25+0000\n"
+"POT-Creation-Date: 2013-06-16 09:11+0000\n"
 "PO-Revision-Date: 2011-08-31 11:54+0000\n"
 "Last-Translator: Vazde <Unknown>\n"
 "Language-Team: Finnish <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-10-05 04:36+0000\n"
-"X-Generator: Launchpad (build 16061)\n"
+"X-Launchpad-Export-Date: 2013-06-17 05:12+0000\n"
+"X-Generator: Launchpad (build 16667)\n"
 "X-Poedit-Country: FINLAND\n"
 "X-Poedit-Language: Finnish\n"
 "X-Poedit-SourceCharset: utf-8\n"
@@ -422,7 +422,7 @@ msgstr "Vasara"
 msgid "Harvest vine"
 msgstr "Korjaa viinirypäleitä"
 
-#: ../../tribes/empire/farm/conf:20
+#: ../../tribes/empire/farm/conf:19
 msgid "Harvest wheat"
 msgstr "Korjaa vehnää"
 
@@ -634,11 +634,11 @@ msgstr "Sikala"
 msgid "Plant vine"
 msgstr "Istuta viiniköynnös"
 
-#: ../../tribes/empire/farm/conf:18
+#: ../../tribes/empire/farm/conf:17
 msgid "Plant wheat"
 msgstr "Istuta vehnää"
 
-#: ../../tribes/empire/farmer/conf:2
+#: ../../tribes/empire/farmer/conf:1
 msgid "Plants fields."
 msgstr "Istuttaa peltoja."
 
@@ -655,7 +655,7 @@ msgstr "Levyhaarniska"
 msgid "Port"
 msgstr ""
 
-#: ../../tribes/empire/weaponsmithy/conf:31
+#: ../../tribes/empire/weaponsmithy/conf:29
 msgid "Produce advanced lance"
 msgstr "Valmista vahvistettu keihäs"
 
@@ -663,15 +663,15 @@ msgstr "Valmista vahvistettu keihäs"
 msgid "Produce armour"
 msgstr "Valmista haarniska"
 
-#: ../../tribes/empire/toolsmithy/conf:44
+#: ../../tribes/empire/toolsmithy/conf:43
 msgid "Produce axe"
 msgstr "Valmista kirves"
 
-#: ../../tribes/empire/toolsmithy/conf:33
+#: ../../tribes/empire/toolsmithy/conf:32
 msgid "Produce bakingtray"
 msgstr "Valmista leipälapio"
 
-#: ../../tribes/empire/toolsmithy/conf:42
+#: ../../tribes/empire/toolsmithy/conf:41
 msgid "Produce basket"
 msgstr "Valmista kori"
 
@@ -679,19 +679,19 @@ msgstr "Valmista kori"
 msgid "Produce chain armour"
 msgstr "Valmista ketjupanssari"
 
-#: ../../tribes/empire/toolsmithy/conf:34
+#: ../../tribes/empire/toolsmithy/conf:33
 msgid "Produce fire tongs"
 msgstr "Valmista pihdit"
 
-#: ../../tribes/empire/toolsmithy/conf:35
+#: ../../tribes/empire/toolsmithy/conf:34
 msgid "Produce fishing rod"
 msgstr "Valmista onki"
 
-#: ../../tribes/empire/toolsmithy/conf:36
+#: ../../tribes/empire/toolsmithy/conf:35
 msgid "Produce hammer"
 msgstr "Valmista vasara"
 
-#: ../../tribes/empire/weaponsmithy/conf:32
+#: ../../tribes/empire/weaponsmithy/conf:30
 msgid "Produce heavy lance"
 msgstr "Valmista raskas keihäs"
 
@@ -699,15 +699,15 @@ msgstr "Valmista raskas keihäs"
 msgid "Produce helm"
 msgstr "Valmista kypärä"
 
-#: ../../tribes/empire/toolsmithy/conf:41
+#: ../../tribes/empire/toolsmithy/conf:40
 msgid "Produce hunting spear"
 msgstr "Valmista metsästyskeihäs"
 
-#: ../../tribes/empire/toolsmithy/conf:37
+#: ../../tribes/empire/toolsmithy/conf:36
 msgid "Produce kitchen tools"
 msgstr "Valmista keittiövälineet"
 
-#: ../../tribes/empire/weaponsmithy/conf:30
+#: ../../tribes/empire/weaponsmithy/conf:28
 msgid "Produce lance"
 msgstr "Valmista keihäs"
 
@@ -715,7 +715,7 @@ msgstr "Valmista keihäs"
 msgid "Produce meal"
 msgstr ""
 
-#: ../../tribes/empire/toolsmithy/conf:38
+#: ../../tribes/empire/toolsmithy/conf:37
 msgid "Produce pick"
 msgstr "Valmista hakku"
 
@@ -727,23 +727,23 @@ msgstr "Valmista levyhaarniska"
 msgid "Produce ration"
 msgstr ""
 
-#: ../../tribes/empire/toolsmithy/conf:43
+#: ../../tribes/empire/toolsmithy/conf:42
 msgid "Produce saw"
 msgstr "Valmista saha"
 
-#: ../../tribes/empire/toolsmithy/conf:39
+#: ../../tribes/empire/toolsmithy/conf:38
 msgid "Produce scythe"
 msgstr "Valmista viikate"
 
-#: ../../tribes/empire/toolsmithy/conf:40
+#: ../../tribes/empire/toolsmithy/conf:39
 msgid "Produce shovel"
 msgstr "Valmista lapio"
 
-#: ../../tribes/empire/weaponsmithy/conf:33
+#: ../../tribes/empire/weaponsmithy/conf:31
 msgid "Produce war lance"
 msgstr "Tuota sotakeihäs"
 
-#: ../../tribes/empire/weaponsmithy/conf:29
+#: ../../tribes/empire/weaponsmithy/conf:27
 msgid "Produce wood lance"
 msgstr "Valmista puukeihäs"
 
@@ -879,9 +879,9 @@ msgstr ""
 msgid "Shovel"
 msgstr "Lapio"
 
-#: ../../tribes/empire/arena/conf:13
-#: ../../tribes/empire/colosseum/conf:27
-#: ../../tribes/empire/trainingscamp/conf:38
+#: ../../tribes/empire/arena/conf:14
+#: ../../tribes/empire/colosseum/conf:28
+#: ../../tribes/empire/trainingscamp/conf:39
 msgid "Sleep"
 msgstr "Lepää"
 
@@ -1146,11 +1146,11 @@ msgid ""
 "by the charcoal burner, the toolsmithy and the sawmill."
 msgstr ""
 
-#: ../../tribes/empire/trainingscamp/conf:39
+#: ../../tribes/empire/trainingscamp/conf:40
 msgid "Upgrade soldier attack 0"
 msgstr "Paranna sotilaan hyökkäystä (0)"
 
-#: ../../tribes/empire/trainingscamp/conf:40
+#: ../../tribes/empire/trainingscamp/conf:41
 msgid ""
 "Upgrade soldier attack 0 (only for compatibility with old savegames "
 "(build13))"
@@ -1158,11 +1158,11 @@ msgstr ""
 "Paranna sotilaan hyökkäystä (0) (vain tallennustiedostojen taaksepäin "
 "yhteensopivuuden varalta (build13))"
 
-#: ../../tribes/empire/trainingscamp/conf:41
+#: ../../tribes/empire/trainingscamp/conf:42
 msgid "Upgrade soldier attack 1"
 msgstr "Paranna sotilaan hyökkäystä (1)"
 
-#: ../../tribes/empire/trainingscamp/conf:42
+#: ../../tribes/empire/trainingscamp/conf:43
 msgid ""
 "Upgrade soldier attack 1 (only for compatibility with old savegames "
 "(build13))"
@@ -1170,11 +1170,11 @@ msgstr ""
 "Paranna sotilaan hyökkäystä (1) (vain tallennustiedostojen taaksepäin "
 "yhteensopivuuden varalta (build13))"
 
-#: ../../tribes/empire/trainingscamp/conf:43
+#: ../../tribes/empire/trainingscamp/conf:44
 msgid "Upgrade soldier attack 2"
 msgstr "Paranna sotilaan hyökkäystä (2)"
 
-#: ../../tribes/empire/trainingscamp/conf:44
+#: ../../tribes/empire/trainingscamp/conf:45
 msgid ""
 "Upgrade soldier attack 2 (only for compatibility with old savegames "
 "(build13))"
@@ -1182,11 +1182,11 @@ msgstr ""
 "Paranna sotilaan hyökkäystä (2) (vain tallennustiedostojen taaksepäin "
 "yhteensopivuuden varalta (build13))"
 
-#: ../../tribes/empire/trainingscamp/conf:45
+#: ../../tribes/empire/trainingscamp/conf:46
 msgid "Upgrade soldier attack 3"
 msgstr "Paranna sotilaan hyökkäystä (3)"
 
-#: ../../tribes/empire/trainingscamp/conf:46
+#: ../../tribes/empire/trainingscamp/conf:47
 msgid ""
 "Upgrade soldier attack 3 (only for compatibility with old savegames "
 "(build13))"
@@ -1194,35 +1194,35 @@ msgstr ""
 "Paranna sotilaan hyökkäystä (3) (vain tallennustiedostojen taaksepäin "
 "yhteensopivuuden varalta (build13))"
 
-#: ../../tribes/empire/arena/conf:14
-#: ../../tribes/empire/colosseum/conf:28
+#: ../../tribes/empire/arena/conf:15
+#: ../../tribes/empire/colosseum/conf:29
 msgid "Upgrade soldier evade 0"
 msgstr "Paranna sotilaan välttökykyä (0)"
 
-#: ../../tribes/empire/arena/conf:15
-#: ../../tribes/empire/colosseum/conf:29
+#: ../../tribes/empire/arena/conf:16
+#: ../../tribes/empire/colosseum/conf:30
 msgid ""
 "Upgrade soldier evade 0 (only for compatibility with old savegames (build13))"
 msgstr ""
 "Paranna sotilaan välttökykyä (0) (vain tallennustiedostojen taaksepäin "
 "yhteensopivuuden varalta (build13))"
 
-#: ../../tribes/empire/colosseum/conf:30
+#: ../../tribes/empire/colosseum/conf:31
 msgid "Upgrade soldier evade 1"
 msgstr "Paranna sotilaan välttökykyä (1)"
 
-#: ../../tribes/empire/colosseum/conf:31
+#: ../../tribes/empire/colosseum/conf:32
 msgid ""
 "Upgrade soldier evade 1 (only for compatibility with old savegames (build13))"
 msgstr ""
 "Paranna sotilaan välttökykyä (1) (vain tallennustiedostojen taaksepäin "
 "yhteensopivuuden varalta (build13))"
 
-#: ../../tribes/empire/trainingscamp/conf:47
+#: ../../tribes/empire/trainingscamp/conf:48
 msgid "Upgrade soldier hitpoints 0"
 msgstr "Paranna sotilaan voimapisteitä (0)"
 
-#: ../../tribes/empire/trainingscamp/conf:48
+#: ../../tribes/empire/trainingscamp/conf:49
 msgid ""
 "Upgrade soldier hitpoints 0 (only for compatibility with old savegames "
 "(build13))"
@@ -1230,11 +1230,11 @@ msgstr ""
 "Paranna sotilaan voimapisteitä (0) (vain tallennustiedostojen taaksepäin "
 "yhteensopivuuden varalta (build13))"
 
-#: ../../tribes/empire/trainingscamp/conf:49
+#: ../../tribes/empire/trainingscamp/conf:50
 msgid "Upgrade soldier hitpoints 1"
 msgstr "Paranna sotilaan voimapisteitä (1)"
 
-#: ../../tribes/empire/trainingscamp/conf:50
+#: ../../tribes/empire/trainingscamp/conf:51
 msgid ""
 "Upgrade soldier hitpoints 1 (only for compatibility with old savegames "
 "(build13))"
@@ -1242,11 +1242,11 @@ msgstr ""
 "Paranna sotilaan voimapisteitä (1) (vain tallennustiedostojen taaksepäin "
 "yhteensopivuuden varalta (build13))"
 
-#: ../../tribes/empire/trainingscamp/conf:51
+#: ../../tribes/empire/trainingscamp/conf:52
 msgid "Upgrade soldier hitpoints 2"
 msgstr "Paranna sotilaan voimapisteitä (2)"
 
-#: ../../tribes/empire/trainingscamp/conf:52
+#: ../../tribes/empire/trainingscamp/conf:53
 msgid ""
 "Upgrade soldier hitpoints 2 (only for compatibility with old savegames "
 "(build13))"
@@ -1254,11 +1254,11 @@ msgstr ""
 "Paranna sotilaan voimapisteitä (2) (vain tallennustiedostojen taaksepäin "
 "yhteensopivuuden varalta (build13))"
 
-#: ../../tribes/empire/trainingscamp/conf:53
+#: ../../tribes/empire/trainingscamp/conf:54
 msgid "Upgrade soldier hitpoints 3"
 msgstr "Paranna sotilaan voimapisteitä (3)"
 
-#: ../../tribes/empire/trainingscamp/conf:54
+#: ../../tribes/empire/trainingscamp/conf:55
 msgid ""
 "Upgrade soldier hitpoints 3 (only for compatibility with old savegames "
 "(build13))"
@@ -1386,8 +1386,8 @@ msgstr ""
 #: ../../tribes/empire/deep_goldmine/conf:22
 #: ../../tribes/empire/deep_marblemine/conf:23
 #: ../../tribes/empire/deep_oremine/conf:22
-#: ../../tribes/empire/donkeyfarm/conf:22
-#: ../../tribes/empire/farm/conf:22
+#: ../../tribes/empire/donkeyfarm/conf:21
+#: ../../tribes/empire/farm/conf:21
 #: ../../tribes/empire/fishers_house/conf:17
 #: ../../tribes/empire/foresters_house/conf:16
 #: ../../tribes/empire/goldmine/conf:22
@@ -1395,20 +1395,20 @@ msgstr ""
 #: ../../tribes/empire/inn/conf:23
 #: ../../tribes/empire/lumberjacks_house/conf:16
 #: ../../tribes/empire/marblemine/conf:26
-#: ../../tribes/empire/mill/conf:20
+#: ../../tribes/empire/mill/conf:19
 #: ../../tribes/empire/oremine/conf:22
-#: ../../tribes/empire/piggery/conf:21
+#: ../../tribes/empire/piggery/conf:20
 #: ../../tribes/empire/quarry/conf:21
-#: ../../tribes/empire/sawmill/conf:23
+#: ../../tribes/empire/sawmill/conf:22
 #: ../../tribes/empire/scouts_house/conf:17
-#: ../../tribes/empire/sheepfarm/conf:21
+#: ../../tribes/empire/sheepfarm/conf:20
 #: ../../tribes/empire/shipyard/conf:22
 #: ../../tribes/empire/smelting_works/conf:24
-#: ../../tribes/empire/stonemasons_house/conf:21
+#: ../../tribes/empire/stonemasons_house/conf:20
 #: ../../tribes/empire/tavern/conf:22
-#: ../../tribes/empire/toolsmithy/conf:45
+#: ../../tribes/empire/toolsmithy/conf:44
 #: ../../tribes/empire/vineyard/conf:23
-#: ../../tribes/empire/weaponsmithy/conf:34
+#: ../../tribes/empire/weaponsmithy/conf:32
 #: ../../tribes/empire/weaving-mill/conf:16
 #: ../../tribes/empire/well/conf:16
 #: ../../tribes/empire/winery/conf:20

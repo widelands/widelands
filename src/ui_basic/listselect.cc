@@ -61,7 +61,8 @@ BaseListselect::BaseListselect
 {
 	set_think(false);
 
-	set_align(align);
+	//  do not allow vertical alignment as it does not make sense
+	m_align = static_cast<Align>(align & Align_Horizontal);
 
 	m_scrollbar.moved.connect(boost::bind(&BaseListselect::set_scrollpos, this, _1));
 	m_scrollbar.set_singlestepsize(g_fh->get_fontheight(m_fontname, m_fontsize));
@@ -239,15 +240,6 @@ void BaseListselect::sort(const uint32_t Begin, uint32_t End)
 			}
 		}
 }
-
-/**
- * Set the list alignment (only horizontal alignment works)
-*/
-void BaseListselect::set_align(const Align align)
-{
-	m_align = static_cast<Align>(align & Align_Horizontal);
-}
-
 
 /**
  * Scroll to the given position, in pixels.

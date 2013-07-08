@@ -25,7 +25,6 @@
 using namespace Widelands;
 
 #define BUTTON_HEIGHT 20
-#define BUTTON_WIDTH 100
 #define OBJECTIVE_LIST 120
 #define FULL_OBJECTIVE_TEXT 240
 

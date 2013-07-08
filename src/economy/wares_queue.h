@@ -49,10 +49,10 @@ struct WaresQueue {
 	~WaresQueue() {assert(not m_ware);}
 #endif
 
-	Ware_Index get_ware() const {return m_ware;}
-	uint32_t get_max_fill    () const throw () {return m_max_fill;}
-	uint32_t get_max_size        () const throw () {return m_max_size;}
-	uint32_t get_filled          () const throw () {return m_filled;}
+	Ware_Index get_ware()   const          {return m_ware;}
+	uint32_t get_max_fill() const throw () {return m_max_fill;}
+	uint32_t get_max_size() const throw () {return m_max_size;}
+	uint32_t get_filled()   const throw () {return m_filled;}
 
 	void cleanup();
 

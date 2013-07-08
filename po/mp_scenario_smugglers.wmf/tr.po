@@ -1,0 +1,93 @@
+# Turkish translation for widelands
+# Copyright (c) 2013 Rosetta Contributors and Canonical Ltd 2013
+# This file is distributed under the same license as the widelands package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2013.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: widelands\n"
+"Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
+"POT-Creation-Date: 2013-06-16 09:11+0000\n"
+"PO-Revision-Date: 2013-03-02 17:06+0000\n"
+"Last-Translator: Volkan Gezer <Unknown>\n"
+"Language-Team: Turkish <tr@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Launchpad-Export-Date: 2013-06-17 05:16+0000\n"
+"X-Generator: Launchpad (build 16667)\n"
+
+#: ../../maps/MP Scenarios/Smugglers.wmf/scripting/texts.lua:29
+msgid ""
+"A new smuggling route from %s to %s has been established!. Every ware "
+"smuggled here\n"
+"is worth %i points."
+msgstr ""
+
+#: ../../maps/MP Scenarios/Smugglers.wmf/scripting/texts.lua:17
+msgid "A receiving spot"
+msgstr "Alan bir nokta"
+
+#: ../../maps/MP Scenarios/Smugglers.wmf/scripting/texts.lua:16
+msgid "A sending spot"
+msgstr "Gönderilen bir nokta"
+
+#: ../../maps/MP Scenarios/Smugglers.wmf/scripting/multiplayer_init.lua:48
+msgid "Game Status"
+msgstr "Oyun Durumu"
+
+#: ../../maps/MP Scenarios/Smugglers.wmf/scripting/texts.lua:39
+msgid ""
+"Game over! %s and %s have won the game! %s and %s only managed to\n"
+"acquire %i points."
+msgstr ""
+"Oyun bitti! %s ve %s oyunu kazandı! %s ve %s sadece %i puan kazanabildi."
+
+#: ../../maps/MP Scenarios/Smugglers.wmf/scripting/texts.lua:20
+msgid ""
+"Remember that the map has rotational symmetry: When you have found a spot to "
+"the top-left\n"
+"of your headquarters, the corresponding spot will be to the bottom-right of "
+"the headquarters\n"
+"of your team mate."
+msgstr ""
+"Haritanın dönüşsel bir simetrisi olduğunu unutma: Merkez binanın sol altında "
+"bir nokta bulduğunda, ilgili nokta takım arkadaşının sağ altında olacak."
+
+#: ../../maps/MP Scenarios/Smugglers.wmf/scripting/texts.lua:6
+msgid "Rules"
+msgstr "Kurallar"
+
+#: ../../maps/MP Scenarios/Smugglers.wmf/scripting/texts.lua:5
+msgid "Smugglers"
+msgstr "Kaçakçılar"
+
+#: ../../maps/MP Scenarios/Smugglers.wmf/scripting/texts.lua:8
+msgid ""
+"Smugglers is a fun map for 4 players. You and your partner start diagonally\n"
+"to each other on a point symmetric island. There are plenty of smuggling "
+"tunnels\n"
+"on this island each consisting of a receiving and a sending end. To "
+"establish a smuggling\n"
+"route you need to build a warehouse on a sending/receiving spot while your "
+"team\n"
+"mate has to build one on the corresponding receiving/sending spot. A ware is "
+"then transported\n"
+"each 10 seconds. For harder to defend smuggling routes you get points for "
+"smuggling:\n"
+"2 or 3 per ware. The first team to have %i points wins."
+msgstr ""
+
+#: ../../maps/MP Scenarios/Smugglers.wmf/scripting/texts.lua:33
+msgid "The smuggling route worth %i from %s to %s has been broken!"
+msgstr ""
+
+#: ../../maps/MP Scenarios/Smugglers.wmf/scripting/multiplayer_init.lua:124
+msgid "Wares smuggled"
+msgstr ""
+
+#: ../../maps/MP Scenarios/Smugglers.wmf/scripting/texts.lua:24
+msgid ""
+"You can see the number of wares traded at any time in the general\n"
+"statistics menu. Good luck!"
+msgstr ""

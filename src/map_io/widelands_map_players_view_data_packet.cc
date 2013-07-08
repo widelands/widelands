@@ -136,6 +136,9 @@ inline static Map_Object_Data read_unseen_immovable
 				}
 			}
 			break;
+		default:
+			throw game_data_error("Unknown immovable-kind type %d", immovable_kinds_file.get());
+			break;
 		}
 	} catch (const _wexception & e) {
 		throw game_data_error(_("unseen immovable: %s"), e.what());

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2010 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2010, 2012 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -52,6 +52,7 @@ struct Building_Window : public UI::Window {
 
 	virtual void draw(RenderTarget &);
 	virtual void think();
+	void set_avoid_fastclick(bool afc) {m_avoid_fastclick = afc;}
 
 protected:
 	UI::Tab_Panel * get_tabs() {return m_tabs;}
@@ -67,6 +68,7 @@ protected:
 	void act_start_stop();
 	void act_prefer_rookies();
 	void act_prefer_heroes();
+	void act_start_or_cancel_expedition();
 	void act_enhance(Widelands::Building_Index);
 	void clicked_goto();
 
@@ -93,6 +95,7 @@ private:
 
 	Overlay_Manager::Job_Id m_workarea_job_id;
 	const Image* workarea_cumulative_pic[NUMBER_OF_WORKAREA_PICS];
+	bool m_avoid_fastclick;
 };
 
 #endif // _BUILDINGWINDOW_H_

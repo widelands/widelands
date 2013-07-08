@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2011, 2013 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2013 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -39,6 +39,7 @@ namespace Widelands {
 struct Flag;
 struct Path;
 struct PlayerImmovable;
+struct Ship;
 class TrainingSite;
 class MilitarySite;
 
@@ -155,6 +156,8 @@ struct Game : Editor_Game_Base {
 	void send_player_flagaction (Flag &);
 	void send_player_start_stop_building (Building &);
 	void send_player_militarysite_set_soldier_preference (Building &, uint8_t preference);
+	void send_player_start_or_cancel_expedition    (Building &);
+
 	void send_player_enhance_building (Building &, Building_Index);
 	void send_player_evict_worker (Worker &);
 	void send_player_set_ware_priority
@@ -167,6 +170,10 @@ struct Game : Editor_Game_Base {
 	void send_player_enemyflagaction
 		(const Flag &, Player_Number, uint32_t count, uint8_t retreat);
 	void send_player_changemilitaryconfig(Player_Number, uint8_t);
+
+	void send_player_ship_scout_direction(Ship &, uint8_t);
+	void send_player_ship_construct_port(Ship &, Coords);
+	void send_player_ship_explore_island(Ship &, bool);
 
 	Interactive_Player * get_ipl();
 
