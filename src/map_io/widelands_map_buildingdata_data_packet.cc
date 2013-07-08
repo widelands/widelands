@@ -779,7 +779,6 @@ void Map_Buildingdata_Data_Packet::read_militarysite
 				uint16_t reqmax = fr.Unsigned16();
 				militarysite.m_soldier_upgrade_requirements = RequireAttribute(atrTotal, reqmin, reqmax);
 				militarysite.m_soldier_preference = static_cast<MilitarySite::SoldierPreference>(fr.Unsigned8());
-				// NOCOM(#kxq): Uint32?
 				militarysite.m_next_swap_soldiers_time = fr.Signed32();
 				militarysite.m_soldier_upgrade_try = 0 != fr.Unsigned8() ? true : false;
 				militarysite.m_doing_upgrade_request = 0 != fr.Unsigned8() ? true : false;
@@ -1537,7 +1536,6 @@ void Map_Buildingdata_Data_Packet::write_militarysite
 	fw.Unsigned16(militarysite.m_soldier_upgrade_requirements.getMin());
 	fw.Unsigned16(militarysite.m_soldier_upgrade_requirements.getMax());
 	fw.Unsigned8(militarysite.m_soldier_preference);
-	// NOCOM(#kxq): Uint32?
 	fw.Signed32(militarysite.m_next_swap_soldiers_time);
 	fw.Unsigned8(militarysite.m_soldier_upgrade_try ? 1 : 0);
 	fw.Unsigned8(militarysite.m_doing_upgrade_request ? 1 : 0);

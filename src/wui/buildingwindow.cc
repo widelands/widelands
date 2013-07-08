@@ -204,7 +204,6 @@ void Building_Window::create_capsbuttons(UI::Box * capsbuttons)
 					new UI::Button
 					(capsbuttons, "rookies", 0, 0, 34, 34,
 						g_gr->images().get("pics/but4.png"),
-						// NOCOM(#kxq): Rename the images to rookies and heroes as well.
 						g_gr->images().get("pics/msite_prefer_rookies.png"),
 						_("Prefer rookies"));
 					cs_btn->sigclicked.connect

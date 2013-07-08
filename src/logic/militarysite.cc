@@ -219,14 +219,14 @@ int MilitarySite::incorporateSoldier(Editor_Game_Base & egbase, Soldier & s)
 		s.set_location(this);
 	}
 
-	// NOCOM(#kxq): I do not quite understand this comment. Is the following
-	// code meant to avoid that a soldier leaves until the next one is there? I
-	// changed this comment to make this a little clearer (to me at least) :)
-
 	// Soldier upgrade is done once the site is full. In soldier upgrade, we
-	// request one new soldier who is better suited than the existing ones. Once
-	// a new guy starts walking towards here, we have to make sure that none of
-	// the soldiers leave the building until he is here.
+	// request one new soldier who is better suited than the existing ones.
+	// Normally, I kick out one existing soldier as soon as a new guy starts walking
+	// towards here. However, since that is done via infrequent polling, a new soldier
+	// can sometimes reach the site before such kick-out happens. In those cases, we
+	// should either drop one of the existing soldiers or reject the new guy, to
+	// avoid overstocking this site.
+
 	if (stationedSoldiers().size()  > descr().get_max_number_of_soldiers())
 	{
 		return incorporateUpgradedSoldier(egbase, s) ? 0 : -1;
@@ -360,7 +360,6 @@ MilitarySite::incorporateUpgradedSoldier(Editor_Game_Base & egbase, Soldier & s)
 	}
 	return false;
 }
-// NOCOM(#kxq): You have to merge trunk before this can be merged. I saw there are some conflicts.
 
 /*
 ===============
@@ -461,24 +460,20 @@ void MilitarySite::update_upgrade_soldier_request()
 }
 
 /*
- * // NOCOM(#kxq): comment is outdated.
  * I have update_soldier_request
- *        update_soldier_request_impl
  *        update_upgrade_soldier_request
  *        update_normal_soldier_request
  *
- * The first one is just for convenience reasons (keep interface unchanged).
- * The next one handles state switching between site fill (normal more)
+ * The first one handles state switching between site fill (normal more)
  * and grabbing soldiers with proper training (upgrade mode). The last
  * two actually make the requests.
  *
- * The input parameter should be true, if we just incorporated a new soldier
- * as a result of an upgrade request: Those must be rearmed.
+ * The input parameter incd is true, if we just incorporated a new soldier
+ * as a result of an upgrade request. In such cases, we will re-arm the
+ * upgrade request.
  */
 
 void MilitarySite::update_soldier_request(bool incd)
-// NOCOM(#kxq): incd is not very descriptive and I do not understand the last paragraph
-// in the comment.
 {
 	const uint32_t capacity = soldierCapacity();
 	const uint32_t stationed = stationedSoldiers().size();
@@ -564,7 +559,6 @@ void MilitarySite::act(Game & game, uint32_t const data)
 
 	ProductionSite::act(game, data);
 
-	// NOCOM(#kxq): Is this intentional? get_gametime() returns an uint32.
 	const int32_t timeofgame = game.get_gametime();
 	if (m_normal_soldier_request && m_upgrade_soldier_request)
 	{

@@ -156,8 +156,6 @@ private:
 	/**
 	 * Next gametime where we should heal something.
 	 */
-	// NOCOM(#kxq): I guess this is where your choice of int32_t came from. This is also wrong
-	// here :). Mind fixing it?
 	int32_t m_nexthealtime;
 
 	struct SoldierJob {
@@ -168,7 +166,6 @@ private:
 	};
 	std::vector<SoldierJob> m_soldierjobs;
 	SoldierPreference m_soldier_preference;
-	// NOCOM(#kxq): I think this should be uint32_t
 	int32_t m_next_swap_soldiers_time;
 	bool m_soldier_upgrade_try; // optimization -- if everybody is zero-level, do not downgrade
 	bool m_doing_upgrade_request;
