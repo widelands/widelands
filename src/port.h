@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2009 by the Widelands Development Team
+ * Copyright (C) 2006-2013 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -13,34 +13,20 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ * Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
  *
  */
 
-#include "backtrace.h"
+#ifndef PORT_H
+#define PORT_H
 
-#ifndef WIN32
-#ifndef __APPLE__
-#include <execinfo.h>
-#include <cstdlib>
+// Make sure that Visual C++ does not bark at __attribute__.
+#ifdef _MSC_VER
+#ifndef __attribute__
+#define __attribute__(x)
 #endif
 #endif
 
-std::string get_backtrace() {
-	std::string result("Backtrace:\n");
-#ifndef WIN32
-#ifndef __APPLE__
-#define BACKTRACE_STACKSIZE 24
 
-	void * stack[BACKTRACE_STACKSIZE];
-	size_t size = backtrace(stack, BACKTRACE_STACKSIZE);
-	char * * const list = backtrace_symbols(stack, size);
-	for (char * const * it = list; size; --size, ++it) {
-		result += *it;
-		result += '\n';
-	}
-	free(list);
-#endif
-#endif
-	return result;
-}
+#endif /* end of include guard: PORT_H */
+

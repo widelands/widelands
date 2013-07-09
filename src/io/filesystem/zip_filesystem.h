@@ -20,18 +20,14 @@
 #ifndef ZIP_FILESYSTEM_H
 #define ZIP_FILESYSTEM_H
 
-#include "filesystem.h"
-#include <minizip/unzip.h>
-#include <minizip/zip.h>
-
 #include <string>
 #include <cstring>
 
-#ifdef _MSC_VER
-#ifndef __attribute__
-#define __attribute__(x)
-#endif
-#endif
+#include <minizip/unzip.h>
+#include <minizip/zip.h>
+
+#include "port.h"
+#include "filesystem.h"
 
 class ZipFilesystem : public FileSystem {
 public:
