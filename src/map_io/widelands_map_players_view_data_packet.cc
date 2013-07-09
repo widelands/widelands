@@ -765,7 +765,8 @@ inline static void write_unseen_immovable
 		// We should never get here.. debugging code until assert(false)
 		log ("\nwidelands_map_players_view_data_packet.cc::write_unseen_immovable():");
 		log
-		("(%s %s) was not expected.\n",
+		("%s %s (%s) was not expected.\n",
+			typeid(*map_object_descr).name(),
 			map_object_descr->name().c_str(),
 			map_object_descr->descname().c_str());
 		assert(false);
