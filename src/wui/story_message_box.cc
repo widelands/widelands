@@ -68,7 +68,6 @@ Story_Message_Box::Story_Message_Box
 		 g_gr->images().get("pics/but0.png"),
 		 button_text);
 	okbtn->sigclicked.connect(boost::bind(&Story_Message_Box::clicked_ok, boost::ref(*this)));
-		posx += but_width;
 
 	center_to_parent();
 

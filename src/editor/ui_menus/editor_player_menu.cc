@@ -181,7 +181,6 @@ void Editor_Player_Menu::update() {
 					 "");
 			m_plr_set_pos_buts[p - 1]->sigclicked.connect
 				(boost::bind(&Editor_Player_Menu::set_starting_pos_clicked, boost::ref(*this), p));
-			posx += size + spacing;
 		}
 		char text[] = "pics/fsel_editor_set_player_00_pos.png";
 		text[28] += p / 10;
