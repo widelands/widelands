@@ -157,7 +157,7 @@ TrainingSite::TrainingSite(const TrainingSite_Descr & d) :
 ProductionSite   (d),
 m_soldier_request(0),
 m_capacity       (descr().get_max_number_of_soldiers()),
-m_build_heros    (false),
+m_build_heroes    (false),
 m_result         (Failed)
 {
 	// Initialize this in the constructor so that loading code may
@@ -644,7 +644,7 @@ void TrainingSite::start_upgrade(Game & game, Upgrade & upgrade)
 	if (upgrade.lastsuccess || upgrade.lastattempt < 0) {
 		// Start greedily on the first ever attempt, and restart greedily
 		// after a sucessful upgrade
-		if (m_build_heros)
+		if (m_build_heroes)
 			level = maxlevel;
 		else
 			level = minlevel;
@@ -652,7 +652,7 @@ void TrainingSite::start_upgrade(Game & game, Upgrade & upgrade)
 		// The last attempt wasn't successful;
 		// This happens e.g. when lots of low-level soldiers are present,
 		// but the prerequisites for improving them aren't.
-		if (m_build_heros) {
+		if (m_build_heroes) {
 			level = upgrade.lastattempt - 1;
 			if (level < minlevel)
 				level = maxlevel;

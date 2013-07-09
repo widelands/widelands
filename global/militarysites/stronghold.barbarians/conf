@@ -3,6 +3,7 @@ max_soldiers=3
 heal_per_second=110
 conquers=7
 buildable=no
+prefer_heroes=false
 
 [idle]
 pics=../../../tribes/barbarians/stronghold/stronghold_i_??.png

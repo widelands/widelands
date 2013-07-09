@@ -3,6 +3,7 @@ max_soldiers=8
 heal_per_second=170
 conquers=11
 buildable=no
+prefer_heroes=true
 
 [idle]
 pics=../../../tribes/empire/fortress/fortress_i_??.png

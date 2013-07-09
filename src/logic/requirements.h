@@ -22,6 +22,7 @@
 
 #include <map>
 #include <vector>
+#include <climits>
 
 #include <boost/shared_ptr.hpp>
 
@@ -174,11 +175,15 @@ struct RequireAttribute {
 		(tAttribute const _at, int32_t const _min, int32_t const _max)
 		: at(_at), min(_min), max(_max) {}
 
+	RequireAttribute() : at(atrTotal), min(SHRT_MIN), max(SHRT_MAX) {}
 	bool check(const Map_Object &) const;
 	void write
 		(FileWrite &, Editor_Game_Base & egbase, Map_Map_Object_Saver &) const;
 
 	static const RequirementsStorage storage;
+
+	int32_t getMin() const {return min; }
+	int32_t getMax() const {return max; }
 
 private:
 	tAttribute at;
