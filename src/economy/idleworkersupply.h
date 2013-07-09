@@ -22,10 +22,6 @@
 
 #include "supply.h"
 
-#ifdef _MSC_VER
-#define __attribute__(x)
-#endif
-
 namespace Widelands {
 class Worker;
 class Economy;

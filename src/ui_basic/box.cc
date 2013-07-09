@@ -130,8 +130,6 @@ void Box::update_desired_size()
  */
 void Box::layout()
 {
-	uint32_t totalbreadth = m_orientation == Horizontal ? get_inner_w() : get_inner_h();
-
 	// First pass: compute the depth and adjust whether we have a scrollbar
 	uint32_t totaldepth = 0;
 
@@ -148,12 +146,10 @@ void Box::layout()
 	bool needscrollbar = false;
 	if (m_orientation == Horizontal) {
 		if (totaldepth > m_max_x && m_scrolling) {
-			totalbreadth -= Scrollbar::Size;
 			needscrollbar = true;
 		}
 	} else {
 		if (totaldepth > m_max_y && m_scrolling) {
-			totalbreadth -= Scrollbar::Size;
 			needscrollbar = true;
 		}
 	}

@@ -123,8 +123,6 @@ Main_Menu_New_Map::Main_Menu_New_Map(Editor_Interactive & parent)
 		 g_gr->images().get("pics/but0.png"),
 		 _("Create Map"));
 	createbtn->sigclicked.connect(boost::bind(&Main_Menu_New_Map::clicked_create_map, this));
-
-	posy += height + spacing;
 }
 
 

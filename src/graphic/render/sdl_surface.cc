@@ -259,12 +259,6 @@ void SDLSurface::brighten_rect(const Rect& rc, const int32_t factor) {
 	unlock(Surface::Unlock_Update);
 }
 
-#define draw_pixel(p, r, clr)                                                 \
-   if                                                                         \
-      ((p).x >= (r).x and (p).x < static_cast<int32_t>((r).x + (r).w) and     \
-       (p).y >= (r).y and (p).y < static_cast<int32_t>((r).y + (r).h))        \
-      set_pixel((p).x, (p).y, (clr).map(format()))                            \
-
 /**
 * This functions draws a (not horizontal or vertical)
 * line in the target, using Bresenham's algorithm
@@ -272,8 +266,8 @@ void SDLSurface::brighten_rect(const Rect& rc, const int32_t factor) {
 * This function could be faster by using direct pixel
 * access instead of the set_pixel() function
 */
-void SDLSurface::draw_line(int32_t x1, int32_t y1, int32_t x2, int32_t y2,
-		const RGBColor& color, uint8_t gwidth)
+void SDLSurface::draw_line
+	(int32_t x1, int32_t y1, int32_t x2, int32_t y2, const RGBColor& color, uint8_t gwidth)
 {
 	int32_t dx = x2 - x1;      /* the horizontal distance of the line */
 	int32_t dy = y2 - y1;      /* the vertical distance of the line */

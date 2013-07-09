@@ -23,10 +23,11 @@
 #include "economy/route.h"
 #include "graphic/animation.h"
 #include "graphic/diranimations.h"
-#include "point.h"
-#include "writeHTML.h"
 #include "instances.h"
+#include "point.h"
+#include "port.h"
 #include "walkingdir.h"
+#include "writeHTML.h"
 
 namespace Widelands {
 struct Map;

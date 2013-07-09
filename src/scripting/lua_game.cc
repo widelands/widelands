@@ -1105,6 +1105,7 @@ Objective & L_Objective::get(lua_State * L, Widelands::Game & g) {
 	if (!o)
 		report_error
 			(L, "Objective with name '%s' doesn't exist!", m_name.c_str());
+	assert(o != NULL);  // report_error never returns.
 	return *o;
 }
 

@@ -456,7 +456,7 @@ struct ComplexRouterFixture {
 		new_node_w_neighbour(dnew_2);
 		new_node_w_neighbour(dnew_2);
 		dnew_2 = new_node_w_neighbour(dnew_2);
-		dnew_2 = new_node_w_neighbour(dnew_2);
+		new_node_w_neighbour(dnew_2);
 
 		new_node_w_neighbour(d);
 		new_node_w_neighbour(d_new);
