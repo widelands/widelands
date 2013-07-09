@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2013-06-23 17:28+0000\n"
-"PO-Revision-Date: 2013-04-30 20:15+0000\n"
+"PO-Revision-Date: 2013-07-08 14:45+0000\n"
 "Last-Translator: István Kiss <kiemc@citromail.hu>\n"
 "Language-Team: Language <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-06-24 04:32+0000\n"
-"X-Generator: Launchpad (build 16677)\n"
+"X-Launchpad-Export-Date: 2013-07-09 05:11+0000\n"
+"X-Generator: Launchpad (build 16696)\n"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:333
 msgid ""
@@ -85,6 +85,11 @@ msgid ""
 "anything but ashes and wasted ruins left of our once beautiful capital when "
 "we get there?\" "
 msgstr ""
+" „Egy holdfényes éjszakán felmásztam a Kal'mavrath csúcsára.<br> Amint a "
+"távolba tekintettem, még mindig karmazsin színben táncoló lángokat láttam. "
+"Hihetetlen, hogy fivéreim mily nagy hévvel vívják ezt a harcot. Félek a "
+"pillanattól, mikor viszontlátom Al'thunrant – egykor gyönyörű fővárosunkból "
+"nem marad más, csak romok és hamvak, mire odaérünk?” "
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:319
 msgid ""
@@ -176,6 +181,9 @@ msgid ""
 " \"Wonderful! Our roofs are not dripping anymore, and we have all the "
 "material we need for, well, whichever monumental building we see fit!\" "
 msgstr ""
+" „Csodás! Most már nem csepegnek a tetőink, és minden anyagunk megvan ahhoz, "
+"hogy akkora épületeket emeljünk, amekkorákat... amekkorákat csak jónak "
+"látunk!” "
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:361
 msgid ""
@@ -213,6 +221,11 @@ msgid ""
 "my\n"
 "face!<br> Now this is a problem we should do something about!\""
 msgstr ""
+"„Szégyen, törzsfőnök! Az rendben van, hogy már tudunk cementet csinálni\n"
+"kitartó erődítményekhez és nagy épületekhez – de ettől a tetőink\n"
+"még beáznak! Lehet, hogy az ifjak szívesen töltik az éjszakát\n"
+"az esőben, de én nem tudok aludni, ha víz csepeg az\n"
+"arcomra!<br> Ez ellen tennünk kell valamit!”"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:301
 msgid ""
@@ -234,6 +247,11 @@ msgid ""
 "once in a while! Let us send out some of those who understand the stone's\n"
 "tongue to unravel the mountain's secrets!\""
 msgstr ""
+"„Nézz csak oda! Ott van keletre Kal'mavrath nagy hegye!\n"
+"Micsoda természeti kincsek rejtőzhetnek fenséges gyomrában!<br>\n"
+"Terjeszkedjünk keletre! Így néha az öregeknek is\n"
+"hasznát vehetjük. Küldjünk oda néhányat azok közül, akik értik a kövek\n"
+"szavát, hogy felderítsék a hegy titkait!”"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:350
 msgid ""
@@ -449,11 +467,22 @@ msgid ""
 "ore<br> Yellow - gold<br> Grey - granite<br> Mines may only be built on\n"
 "mountain terrain. Suitable places for mines are displayed as hammer and pick."
 msgstr ""
+"Építs egy szénbányát és egy vasércbányát. Ehhez először is tűzz ki egy "
+"zászlót\n"
+"keleten, a hegy oldalán (hegyi felületen, ne a hegy alján lévő réten).\n"
+"Ha az új zászlóra kattintasz, geológusokat küldhetsz oda. Mivel a zászló\n"
+"hegyen van, a geológusok érceket fognak keresni, egyébként\n"
+"vizet keresnének. Ezután építs egy-egy bányát mindegyik fajta nyersanyaghoz, "
+"amit találnak,\n"
+"mindenhol a megfelelő bányát:<br> Fekete: szén<br> Vörös:\n"
+"vasérc<br> Sárga: arany<br> Szürke: gránit<br> Bányákat csak hegyi "
+"felületen\n"
+"lehet építeni. A megfelelő helyeket keresztbetett ék-kalapács jel mutatja."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:185
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:186
 msgid "Build a fernery"
-msgstr ""
+msgstr "Építs egy nádtermelő kertet"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:108
 msgid "Build a hunter, a gamekeeper and a tavern"
@@ -483,7 +512,7 @@ msgstr "Építs egy faedző műhelyt"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:93
 msgid "Build coal and iron ore mines"
-msgstr ""
+msgstr "Építs szén- és vasércbányákat"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:85
 msgid ""
@@ -553,7 +582,7 @@ msgstr ""
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:390
 msgid "Khantrukh seems relieved..."
-msgstr ""
+msgstr "Khantrukh megkönnyebbült..."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:413
 msgid "Khantrukh speaks"
@@ -577,7 +606,7 @@ msgstr "Új célkitűzések"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:424
 msgid "One fullmoon night"
-msgstr ""
+msgstr "Egy teleholdas éjszakán"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:121
 msgid ""
@@ -633,6 +662,8 @@ msgid ""
 "cover roofs. Thatch reed is planted by a ferner around his building, the\n"
 "fernery."
 msgstr ""
+"A fejlettebb épületekhez szükséges harmadik anyag a nád, mellyel\n"
+"a tetőt fedik. A nádat a nádtermesztő ülteti a nádtermelő kertben."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:432
 msgid "Thron looks worried..."
