@@ -50,6 +50,7 @@ void Building::show_options(Interactive_GameBase & igbase, bool avoid_fastclick)
 void Building::hide_options()
 {
 	delete m_optionswindow;
+	m_optionswindow = NULL;
 }
 
 /**
