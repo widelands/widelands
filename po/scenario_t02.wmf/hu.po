@@ -7,13 +7,13 @@ msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2013-06-23 17:28+0000\n"
-"PO-Revision-Date: 2013-07-08 14:45+0000\n"
+"PO-Revision-Date: 2013-07-09 18:23+0000\n"
 "Last-Translator: István Kiss <kiemc@citromail.hu>\n"
 "Language-Team: Language <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-07-09 05:11+0000\n"
+"X-Launchpad-Export-Date: 2013-07-10 05:17+0000\n"
 "X-Generator: Launchpad (build 16696)\n"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:333
@@ -24,6 +24,11 @@ msgid ""
 "higher spirit still the day after.<br> Maybe we actually are slowly creating "
 "a place here which we can... call home.\" "
 msgstr ""
+" „Tegnap megnyitott egy kocsma az embereinknek. Noha aligha van kedvem "
+"ünnepelni, felfigyeltem rá, mily sokat jelent nekik ez a talpalatnyi kis "
+"otthon. Dalaik késő éjszakáig betöltötték a levegőt, és még másnap is emelt "
+"lélekkel jártak.<br> Lassan talán felépítünk itt egy olyan helyet, amit... "
+"otthonnak nevezhetünk.” "
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:269
 msgid " \"At last! These rocks should last for a while.\" "
@@ -54,6 +59,8 @@ msgid ""
 " \"By Chat'Karuth's beard, this is awesome! Just imagine what we can use "
 "this coal and iron ore for!<br> It might even be enough to...\" "
 msgstr ""
+" „Chat'Karuth szakállára, ez remek! Képzeld csak el, mi mindenre lesz jó ez "
+"a szén és vasérc!<br> Még akár arra is elég, hogy...” "
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:243
 msgid ""
@@ -71,6 +78,9 @@ msgid ""
 "to the wind? And I believe the baker is just on his way here, with his most "
 "delicious bread reserved for our chieftain alone!\" "
 msgstr ""
+" „Hát nem gyönyörű a látvány, amint az aranyló kalászok békésen nőnek és "
+"táncolnak a szélben? És szerintem már a pék is úton van errefelé, aki "
+"legfinomabb kenyerét a törzsfőnöknek tartogatja!” "
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:262
 msgid " \"Old man? Disrespectful youth!\" "
@@ -97,6 +107,8 @@ msgid ""
 "sun sets today you will have a magnificent meal fit for the chieftain of all "
 "clans!\" "
 msgstr ""
+" „Vadászaink az erdőt járják, Thron.<br> Ígérem, mire lemegy a nap, minden "
+"klán törzsfőnökéhez méltó pompás vacsorád lesz!” "
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:235
 msgid ""
@@ -175,6 +187,10 @@ msgid ""
 "high up on the mountain in this bitter cold, and providing these supplies "
 "may not be easy.\" "
 msgstr ""
+" „Noha ez igaz, ezen később gondolkodjunk, most más gondunk is van. A "
+"bányászok bizonnyal nagyobb ételfejadagot követelnek majd azért, hogy fenn "
+"dolgoznak a hegyen ebben a kutya hidegben – és az ellátmány előteremtése "
+"talán nem is lesz olyan egyszerű.” "
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:391
 msgid ""
@@ -209,6 +225,13 @@ msgid ""
 "breed\n"
 "them and they will do their work on the roads loyally and reliably.\""
 msgstr ""
+"„Ahogy birodalmunk egyre nő, útjainkon a forgalom rettenetessé\n"
+"válik. Szegény anyaghordóink már nem győzik kellően gyorsan\n"
+"szállítani az árukat. Azt javaslom, segítsünk rajtuk ökrök\n"
+"tenyésztésével.<br> Ezek csodálatos állatok: éppoly fürgék, mint az emberek, "
+"ugyanakkor\n"
+"sokkal erősebbek, és meglehetősen igénytelenek: mindössze búza és víz kell\n"
+"tenyésztésükhöz, cserébe ők hűséges és megbízható szolgák lesznek az utakon.”"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:380
 msgid ""
@@ -237,6 +260,10 @@ msgid ""
 "it\n"
 "'Thron's Pride' or so if you want!\""
 msgstr ""
+"„Ezt rád kell hagynom, ebben igazad van, öreg.<br> Úgy látom, elég\n"
+"sok állat van itt az erdőben, vadásszunk le belőlük többet!\n"
+"És persze az emberek örülnének egy új kocsmának is – te, lehetne a neve\n"
+"\"Thron Büszkesége\" vagy ilyesmi, ha gondolod!”"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:276
 msgid ""
@@ -327,6 +354,11 @@ msgid ""
 "I\n"
 "sure would enjoy a freshly baked pitta bread for a change...\""
 msgstr ""
+"„A bölcs ember mindig változatosságot keres.<br> A nagy hegytől északra egy "
+"nagy\n"
+"síkság van – miért nem használjuk ki az anyatermészet adta helyet, és "
+"építünk egy farmot?\n"
+"Nekem biztos jólesne egy frissen sült cipó a változatosság kedvéért...”"
 
 #: ../../campaigns/t02.wmf/elemental:7
 msgid "02 - A Place to call Home"
@@ -334,7 +366,7 @@ msgstr "02 - Egy hely, amit otthonnak hívunk"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:331
 msgid "A beautiful morning"
-msgstr ""
+msgstr "Egy gyönyörű reggel"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:438
 msgid "A friendly village joined us!"
@@ -413,7 +445,7 @@ msgstr ""
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:318
 msgid "Boldreth cheers up..."
-msgstr "Boldreth felkiált örömében..."
+msgstr "Boldreth felderül..."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:275
 msgid "Boldreth exclaims..."
@@ -450,7 +482,7 @@ msgstr "A bátor Boldreth melléd lép..."
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:195
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:196
 msgid "Build a cattlefarm"
-msgstr ""
+msgstr "Építs egy marhafarmot"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:94
 msgid ""
@@ -477,7 +509,8 @@ msgstr ""
 "mindenhol a megfelelő bányát:<br> Fekete: szén<br> Vörös:\n"
 "vasérc<br> Sárga: arany<br> Szürke: gránit<br> Bányákat csak hegyi "
 "felületen\n"
-"lehet építeni. A megfelelő helyeket keresztbetett ék-kalapács jel mutatja."
+"lehet építeni. Az alkalmas helyeket keresztbe tett csákány-kalapács jel "
+"mutatja."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:185
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:186
@@ -486,7 +519,7 @@ msgstr "Építs egy nádtermelő kertet"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:108
 msgid "Build a hunter, a gamekeeper and a tavern"
-msgstr ""
+msgstr "Építs egy vadászkunyhót, egy vadőrházat és egy kocsmát"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:173
 msgid "Build a lime kiln and coal economy"
@@ -503,7 +536,7 @@ msgstr ""
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:120
 msgid "Build a well, a farm and a bakery"
-msgstr ""
+msgstr "Építs egy kutat, egy farmot és egy pékséget"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:162
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:163
@@ -551,6 +584,13 @@ msgid ""
 "first example of a ware which has to be refined before being used in a\n"
 "secondary building - others will follow."
 msgstr ""
+"Hogy dolgozzanak, bányászaidnak élelemre van szüksége.<br> Egy vadász lelövi "
+"az állatokat,\n"
+"míg a vadőr megelőzi, hogy elfogyjanak. A húst aztán\n"
+"egy kocsmában dolgozzák fel, bányászaidnak szánt étellé.<br> Ez az első, \n"
+"de nem az utolsó példa olyan árura, amit felhasználás előtt egy másik "
+"épületben\n"
+"fel kell dolgozni."
 
 #: ../../campaigns/t02.wmf/elemental:9
 msgid ""
@@ -562,7 +602,7 @@ msgstr ""
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:325
 msgid "Khantrukh gazes over the plains..."
-msgstr "Khantrukh végig néz a síkságokon..."
+msgstr "Khantrukh végignéz a síkságokon..."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:261
 msgid "Khantrukh grumbles..."
@@ -586,7 +626,7 @@ msgstr "Khantrukh megkönnyebbült..."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:413
 msgid "Khantrukh speaks"
-msgstr ""
+msgstr "Khantrukh így szól:"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:349
 msgid "Khantrukh speaks..."
@@ -615,6 +655,12 @@ msgid ""
 "before it becomes edible. You can obtain water by building a well at a spot\n"
 "where your geologists find a water source."
 msgstr ""
+"Az élelem – különféle élelem – termelésének további módjai a halászat\n"
+"és a vadászat. A farmon termett búzát először egy pékségben víz "
+"segítségével\n"
+"fel kell dolgozni, hogy ehető legyen. Vizet úgy szerezhetsz, ha kutat "
+"építesz egy olyan helyen,\n"
+"ahol geológusaid vízforrást találnak."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:107
 msgid "Provide your miners with food"
@@ -642,7 +688,7 @@ msgstr "A tanácsadó"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:309
 msgid "The elder jumps into the air..."
-msgstr ""
+msgstr "Az idős felugrik..."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:132
 msgid ""
@@ -671,7 +717,7 @@ msgstr "Thron gondterheltnek tűnik..."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:332
 msgid "Thron recognizes..."
-msgstr ""
+msgstr "Thron ráeszmél..."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:211
 msgid "Thron shakes his head..."
@@ -688,7 +734,7 @@ msgstr ""
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:412
 msgid "We need oxen!"
-msgstr ""
+msgstr "Ökrök kellenek!"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:197
 msgid ""
@@ -700,6 +746,15 @@ msgid ""
 "doubles the transport capacity.<br>Oxen are bred in cattle farms\n"
 "out of wheat and water."
 msgstr ""
+"Ha az utak tartósan jelentős terhelés alatt vannak, egy anyaghordó általában "
+"nem\n"
+"tudja kellően gyorsan szállítani az árukat. Az eredmény: torlódás. Ezért az "
+"ilyen utakon\n"
+"egy második anyaghordót is alkalmaznak: egy ökröt, mely segít az "
+"anyagmozgatásban. Ezáltal\n"
+"megkétszereződik az út áteresztőképessége.<br>Az ökröket marhafarmokon "
+"tenyésztik\n"
+"búza és víz felhasználásával."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:405
 msgid ""
