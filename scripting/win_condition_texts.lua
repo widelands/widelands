@@ -5,7 +5,7 @@ won_game = {
 
 lost_game = {
   title = _ "You are defeated!",
-  body = _ "You have nothing to command left. If you want, you may continue as spectator."
+  body = _ "You lost your last warehouse and are therefore defeated. You may continue as spectator if you want."
 }
 
 won_game_over = {

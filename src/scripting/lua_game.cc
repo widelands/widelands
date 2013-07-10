@@ -179,13 +179,17 @@ int L_Player::get_objectives(lua_State * L) {
 		(RO) :const:`true` if this player was defeated, :const:`false` otherwise
 */
 int L_Player::get_defeated(lua_State * L) {
-	const std::vector<uint32_t> & nr_workers =
-		get_game(L).get_general_statistics()[player_number() - 1].nr_workers;
+	Player & p = get(L, get_egbase(L));
+	bool have_warehouses = false;
 
-	if (not nr_workers.empty() and *nr_workers.rbegin() == 0)
-		lua_pushboolean(L, true);
-	else
-		lua_pushboolean(L, false);
+	for (uint32_t economy_nr = 0; economy_nr < p.get_nr_economies(); economy_nr++) {
+		if (!p.get_economy_by_number(economy_nr)->warehouses().empty()) {
+		  have_warehouses = true;
+		  break;
+		}
+	}
+
+	lua_pushboolean(L, !have_warehouses);
 	return 1;
 }
 
