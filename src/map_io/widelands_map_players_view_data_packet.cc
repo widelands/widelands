@@ -48,7 +48,7 @@ namespace Widelands {
 #define UNSEEN_TIMES_CURRENT_PACKET_VERSION             1
 #define UNSEEN_TIMES_FILENAME_TEMPLATE DIRNAME_TEMPLATE             "/unseen_times_%u"
 
-#define NODE_IMMOVABLE_KINDS_CURRENT_PACKET_VERSION     1
+#define NODE_IMMOVABLE_KINDS_CURRENT_PACKET_VERSION     2
 #define NODE_IMMOVABLE_KINDS_FILENAME_TEMPLATE DIRNAME_TEMPLATE     "/node_immovable_kinds_%u"
 
 #define NODE_IMMOVABLES_CURRENT_PACKET_VERSION          2
@@ -60,7 +60,7 @@ namespace Widelands {
 #define TERRAINS_CURRENT_PACKET_VERSION                 1
 #define TERRAINS_FILENAME_TEMPLATE DIRNAME_TEMPLATE                 "/terrains_%u"
 
-#define TRIANGLE_IMMOVABLE_KINDS_CURRENT_PACKET_VERSION 1
+#define TRIANGLE_IMMOVABLE_KINDS_CURRENT_PACKET_VERSION 2
 #define TRIANGLE_IMMOVABLE_KINDS_FILENAME_TEMPLATE DIRNAME_TEMPLATE "/triangle_immovable_kinds_%u"
 
 #define TRIANGLE_IMMOVABLES_CURRENT_PACKET_VERSION      2
@@ -112,7 +112,7 @@ struct Map_Object_Data {
 
 inline static Map_Object_Data read_unseen_immovable
 	(const Editor_Game_Base & egbase,
-	 BitInBuffer<2>         & immovable_kinds_file,
+	 BitInBuffer<4>         & immovable_kinds_file,
 	 FileRead               & immovables_file,
 	 uint8_t                & version
 	)
@@ -139,6 +139,8 @@ inline static Map_Object_Data read_unseen_immovable
 				}
 			}
 			break;
+		case 4: // The player sees a port dock
+			m.map_object_descr = &g_portdock_descr;                       break;
 		default:
 			throw game_data_error("Unknown immovable-kind type %d", immovable_kinds_file.get());
 			break;
@@ -348,7 +350,7 @@ void Map_Players_View_Data_Packet::Read
 
 		// Read the player's knowledge about all fields
 		OPEN_INPUT_FILE
-			(BitInBuffer<2>, node_immovable_kinds_file,
+			(BitInBuffer<4>, node_immovable_kinds_file,
 			 node_immovable_kinds_filename,
 			 NODE_IMMOVABLE_KINDS_FILENAME_TEMPLATE,
 			 NODE_IMMOVABLE_KINDS_CURRENT_PACKET_VERSION);
@@ -368,7 +370,7 @@ void Map_Players_View_Data_Packet::Read
 			 TERRAINS_FILENAME_TEMPLATE,     TERRAINS_CURRENT_PACKET_VERSION);
 
 		OPEN_INPUT_FILE
-			(BitInBuffer<2>, triangle_immovable_kinds_file,
+			(BitInBuffer<4>, triangle_immovable_kinds_file,
 			 triangle_immovable_kinds_filename,
 			 TRIANGLE_IMMOVABLE_KINDS_FILENAME_TEMPLATE,
 			 TRIANGLE_IMMOVABLE_KINDS_CURRENT_PACKET_VERSION);
@@ -726,7 +728,7 @@ void Map_Players_View_Data_Packet::Read
 
 inline static void write_unseen_immovable
 	(Map_Object_Data const * map_object_data,
-	 BitOutBuffer<2> & immovable_kinds_file, FileWrite & immovables_file)
+	 BitOutBuffer<4> & immovable_kinds_file, FileWrite & immovables_file)
 {
 	Map_Object_Descr const * const map_object_descr = map_object_data->map_object_descr;
 	const Player::Constructionsite_Information & csi = map_object_data->csi;
@@ -759,7 +761,8 @@ inline static void write_unseen_immovable
 			immovables_file.Unsigned32(csi.totaltime);
 			immovables_file.Unsigned32(csi.completedtime);
 		}
-	}
+	} else if (map_object_descr == &g_portdock_descr)
+		immovable_kind = 4;
 	else
 	{
 		// We should never get here.. debugging code until assert(false)
@@ -793,11 +796,11 @@ throw (_wexception)
 	iterate_players_existing_const(plnum, nr_players, egbase, player)
 		if (const Player::Field * const player_fields = player->m_fields) {
 			FileWrite                   unseen_times_file;
-			BitOutBuffer<2>     node_immovable_kinds_file;
+			BitOutBuffer<4>     node_immovable_kinds_file;
 			FileWrite                node_immovables_file;
 			BitOutBuffer<2>                    roads_file;
 			BitOutBuffer<4>                 terrains_file;
-			BitOutBuffer<2> triangle_immovable_kinds_file;
+			BitOutBuffer<4> triangle_immovable_kinds_file;
 			FileWrite            triangle_immovables_file;
 			FileWrite                         owners_file;
 			BitOutBuffer<1>                  surveys_file;
