@@ -7,13 +7,13 @@ msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2013-06-23 17:28+0000\n"
-"PO-Revision-Date: 2013-07-09 18:23+0000\n"
+"PO-Revision-Date: 2013-07-10 19:23+0000\n"
 "Last-Translator: István Kiss <kiemc@citromail.hu>\n"
 "Language-Team: Language <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-07-10 05:17+0000\n"
+"X-Launchpad-Export-Date: 2013-07-11 05:09+0000\n"
 "X-Generator: Launchpad (build 16696)\n"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:333
@@ -32,7 +32,7 @@ msgstr ""
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:269
 msgid " \"At last! These rocks should last for a while.\" "
-msgstr ""
+msgstr " „Végre! Ezek a sziklák ki kell, hogy tartsanak egy darabig.” "
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:227
 msgid ""
@@ -291,6 +291,14 @@ msgid ""
 "pint\n"
 "of beer or two will keep their spirits high.\""
 msgstr ""
+"„Bányászaink napról napra egyre kevesebbet hoznak fel! Mélyebbre kell "
+"mennünk,\n"
+"közelebb a hegy magjához, ha több kincsét akarjuk magunkénak!<br> Persze "
+"olyan mélységben\n"
+"már sötét és hideg van, és csak kevesen merészkednek le oda önként.\n"
+"Bátorságukat nagyobb fejadagokkal kellene jutalmaznunk. És egy-két korsó "
+"sör\n"
+"tartaná bennük a lelket.”"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:340
 msgid ""
@@ -302,6 +310,12 @@ msgid ""
 "we\n"
 "want. And we need the coal to keep the smelter's ovens burning.\""
 msgstr ""
+"„Most, hogy bányáink is vannak, meg élelmünk is, amivel fenntarthatjuk "
+"működésüket, ideje\n"
+"használható formába önteni azt, amit bátor bányászaink felszínre hoznak. A "
+"vasércből\n"
+"vasat kell koholni, hogy abból a nekünk tetsző dolgokat kovácsolhassunk.\n"
+"A szénnel pedig forrón tarthatjuk az olvasztókemencét.”"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:398
 msgid ""
@@ -316,6 +330,17 @@ msgid ""
 "he\n"
 "was.<br> The news he brought changed everything...\""
 msgstr ""
+"„A minap Boldreth meghívott, hogy menjek el vele az új fogadóba. Jobb "
+"kedvem\n"
+"lesz tőle, azt mondta.<br> Mikor körülnéztem, hűséges arcokat láttam, melyek "
+"hitet\n"
+"sugároztak, hogy át tudom őket vezetni eme sötét napokon. De mielőtt "
+"hálálkodó\n"
+"vagy bátorító szavakat szólhattam volna, egyik harcosom rontott be a "
+"fogadóba. Messze\n"
+"kint járt az erdőben az elmúlt napokban, és látszott rajta, milyen "
+"meggyötört.<br> A hírek,\n"
+"melyekkel érkezett, mindent megváltoztattak...”"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:370
 msgid ""
@@ -395,6 +420,25 @@ msgid ""
 "you\n"
 "prefer."
 msgstr ""
+"Egy egyszerű bányával az alatta rejlő forrásoknak csupán mintegy harmada\n"
+"nyerhető ki, ezután mély bányává kell fejleszteni, hogy megfelelően "
+"működjön\n"
+"tovább. Egy épület fejlesztéséhez kattints rá, majd a megjelenő ablakban "
+"kattints\n"
+"a megfelelő gombra.<br> A sikeres munka nyomán a bányászok tapasztalattal\n"
+"gazdagodnak. Kellő tapasztalattal szakértőbb munkásokká válnak, akik\n"
+"nélkülözhetetlenek a fejlettebb épületekben. Ne fejlessz egy épületet, míg "
+"nincsen\n"
+"elég szakértő munkásod a fejlett épület működtetéséhez! Az ilyen épületek\n"
+"általában jobb ellátást igényelnek, mint egyszerű társaik – például a mély "
+"bányákba\n"
+"uzsonna kell élelmiszer helyett. A kocsmádat fogadóvá kell fejlesztened, "
+"ahol\n"
+"készülhet az uzsonna kenyérből ÉS egy másik fajta élelemből (hús vagy hal) "
+"ÉS\n"
+"sörből. Természetesen az összes bányádat mély bányává fejlesztheted, amint\n"
+"adottak a munkások – a nagyobb bányák kicsit gyorsabban termelnek, a kisebb\n"
+"bányákba olcsóbb élelem kell. Te döntöd el, melyik stratégiát választod."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:431
 msgid "Another cold day"
@@ -532,7 +576,7 @@ msgstr ""
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:131
 msgid "Build a smelting works"
-msgstr ""
+msgstr "Építs egy vasolvasztót"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:120
 msgid "Build a well, a farm and a bakery"
@@ -566,6 +610,8 @@ msgid ""
 "Enhance the coal mine and the tavern to the better versions of their\n"
 "buildings respectively. Also build a micro brewery."
 msgstr ""
+"Fejleszd a szénbányát és a kocsmát magasabb szintűre. Továbbá, építs egy\n"
+"sörfőzdét is."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:83
 msgid "Expand north-east and build a quarry"
@@ -618,7 +664,7 @@ msgstr "Khantrukh csatlakozik..."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:268
 msgid "Khantrukh nods satisfied..."
-msgstr ""
+msgstr "Khantrukh elégedetten biccent..."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:390
 msgid "Khantrukh seems relieved..."
@@ -630,7 +676,7 @@ msgstr "Khantrukh így szól:"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:349
 msgid "Khantrukh speaks..."
-msgstr "Khantrukh beszél..."
+msgstr "Khantrukh szól..."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:379
 msgid "Khantrukh steps in..."
@@ -638,7 +684,7 @@ msgstr "Khantrukh belép..."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:396
 msgid "Mission Complete"
-msgstr ""
+msgstr "Küldetés teljesítve"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:69
 msgid "New Objectives"
@@ -668,7 +714,7 @@ msgstr ""
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:130
 msgid "Refine your mined resources"
-msgstr ""
+msgstr "Dolgozd fel a kibányászott kincseket"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:92
 msgid "Start building mines on the mountain"
@@ -695,6 +741,9 @@ msgid ""
 "The iron ore your miners bring up is not usable yet - it has to be melted\n"
 "into iron first."
 msgstr ""
+"A vasércet, amit bányászaid felszínre hoznak, nem lehet azonnal felhasználni "
+"–\n"
+"először ki kell nyerni belőle a vasat."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:210
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:217
@@ -730,7 +779,7 @@ msgstr "Thron:"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:404
 msgid "Victory"
-msgstr ""
+msgstr "Győzelem"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:412
 msgid "We need oxen!"
@@ -761,6 +810,8 @@ msgid ""
 "You have completed this mission. You may continue playing if you wish,\n"
 "otherwise move on to the next mission."
 msgstr ""
+"Befejezted ezt a küldetést. Ha szeretnél, játszhatsz tovább itt is,\n"
+"máskülönben folytasd a következő küldetéssel."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:233
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:248
