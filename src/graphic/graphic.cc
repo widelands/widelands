@@ -149,6 +149,9 @@ Graphic::Graphic
 		log("Graphics: FULLSCREEN ENABLED\n");
 
 #ifdef USE_OPENGL
+	bool use_arb = true;
+	const char * extensions;
+
 	if (0 != (sdlsurface->flags & SDL_OPENGL)) {
 		//  We have successful opened an opengl screen. Print some information
 		//  about opengl and set the rendering capabilities.
@@ -160,8 +163,34 @@ Graphic::Graphic
 			throw wexception("glewInit returns %i: Broken OpenGL installation.", err);
 		}
 
-		g_opengl = true;
+		extensions = reinterpret_cast<const char *>(glGetString (GL_EXTENSIONS));
 
+		if (strstr(extensions, "GL_ARB_framebuffer_object") != 0) {
+			use_arb = true;
+		} else if (strstr(extensions, "GL_EXT_framebuffer_object") != 0) {
+			use_arb = false;
+		}
+		else {
+			log
+			("Graphics: Neither GL_ARB_framebuffer_object or GL_EXT_framebuffer_object supported! "
+			"Switching off OpenGL!\n"
+			);
+			flags &= ~SDL_OPENGL;
+			m_fallback_settings_in_effect = true;
+
+			//TODO Do we have a leak of the old sdlsurface instance here?!
+			sdlsurface = SDL_SetVideoMode
+			(FALLBACK_GRAPHICS_WIDTH, FALLBACK_GRAPHICS_HEIGHT, FALLBACK_GRAPHICS_DEPTH, flags);
+			m_fallback_settings_in_effect = true;
+			if (!sdlsurface)
+				throw wexception
+				("Graphics: could not set video mode: %s", SDL_GetError());
+		}
+	}
+
+	if (0 != (sdlsurface->flags & SDL_OPENGL)) {
+		//  We now really have a working opengl screen...
+		g_opengl = true;
 
 		GLboolean glBool;
 		glGetBooleanv(GL_DOUBLEBUFFER, &glBool);
@@ -192,8 +221,6 @@ Graphic::Graphic
 		log
 			("Graphics: OpenGL: Version %d.%d \"%s\"\n",
 			 m_caps.gl.major_version, m_caps.gl.minor_version, str);
-
-		const char * extensions = reinterpret_cast<const char *>(glGetString (GL_EXTENSIONS));
 
 		m_caps.gl.tex_power_of_two =
 			(m_caps.gl.major_version < 2) and
@@ -287,7 +314,7 @@ GCC_DIAG_ON ("-Wold-style-cast")
 		SDL_GL_SwapBuffers();
 		glEnable(GL_TEXTURE_2D);
 
-		GLSurfaceTexture::Initialize();
+		GLSurfaceTexture::Initialize(use_arb);
 
 	}
 
