@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2013-06-23 17:28+0000\n"
+"POT-Creation-Date: 2013-07-12 04:46+0000\n"
 "PO-Revision-Date: 2012-10-06 11:37+0000\n"
 "Last-Translator: Nasenbaer <Unknown>\n"
 "Language-Team: German <de@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-06-24 04:39+0000\n"
-"X-Generator: Launchpad (build 16677)\n"
+"X-Launchpad-Export-Date: 2013-07-12 05:28+0000\n"
+"X-Generator: Launchpad (build 16696)\n"
 
 #: ../../scripting/win_condition_texts.lua:31
 msgid "%i trees."
@@ -178,13 +178,6 @@ msgstr ""
 "eingelagert sind. Der Spieler, der nach vier Stunden die höchste Punktzahl "
 "durch Waren besitzt, gewinnt das Spiel."
 
-#: ../../scripting/win_condition_texts.lua:8
-msgid ""
-"You have nothing to command left. If you want, you may continue as spectator."
-msgstr ""
-"Du hast nichts mehr zu kommandieren. Wenn du möchtest, kannst noch als "
-"Zuschauer fortfahren."
-
 #: ../../scripting/win_condition_texts.lua:3
 msgid "You have won this game!"
 msgstr "Du hast dieses Spiel gewonnen!"
@@ -192,6 +185,12 @@ msgstr "Du hast dieses Spiel gewonnen!"
 #: ../../scripting/win_condition_texts.lua:17
 msgid "You lost"
 msgstr "Du hast verloren"
+
+#: ../../scripting/win_condition_texts.lua:8
+msgid ""
+"You lost your last warehouse and are therefore defeated. You may continue as "
+"spectator if you want."
+msgstr ""
 
 #: ../../scripting/win_condition_texts.lua:48
 msgid "You own more than half of the maps area."
@@ -216,3 +215,9 @@ msgstr "Das Spiel wird in %i Minuten enden."
 #: ../../scripting/win_condition_texts.lua:33
 msgid "with %i trees."
 msgstr "mit %i Bäumen."
+
+#~ msgid ""
+#~ "You have nothing to command left. If you want, you may continue as spectator."
+#~ msgstr ""
+#~ "Du hast nichts mehr zu kommandieren. Wenn du möchtest, kannst noch als "
+#~ "Zuschauer fortfahren."
