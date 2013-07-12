@@ -328,6 +328,7 @@ void Ship::show_window(Interactive_GameBase & igb, bool avoid_fastclick)
 void Ship::close_window()
 {
 	delete m_window;
+	m_window = NULL;
 }
 
 /**
