@@ -304,19 +304,10 @@ endif (CMAKE_SYSTEM_NAME MATCHES "FreeBSD" OR CMAKE_SYSTEM_NAME MATCHES "OpenBSD
 
 # Check for opengl
 # TODO Check for SDL_opengl.h and add to include path
-find_package(OpenGL)
-if (OPENGL_FOUND)
-  # OpenGL Headers are not needed directly. Instead SDL_opengl.h should be searched
-  add_definitions("-DUSE_OPENGL")
-  find_package(GLEW)
-  if (GLEW_FOUND)
-    add_definitions(${GLEW_EXTRA_DEFINITIONS})
-  else (GLEW FOUND)
-    message (STATUS "GLEW library not found, check your libraries path and installed packages!")
-  endif (GLEW_FOUND)
-else (OPENGL_FOUND)
-  message (STATUS "OpenGL support disabled, check your libraries path and installed packages!")
-endif (OPENGL_FOUND)
+find_package(OpenGL REQUIRED)
+# OpenGL Headers are not needed directly. Instead SDL_opengl.h should be searched
+find_package(GLEW REQUIRED)
+add_definitions(${GLEW_EXTRA_DEFINITIONS})
 
 # ...but using MAJOR, MINOR and PATCH
 if (DEFINED WL_VERSION_MAJOR)
@@ -420,6 +411,10 @@ if (APPLE OR WIN32 OR CMAKE_SYSTEM_NAME MATCHES "FreeBSD")
   find_package(intl REQUIRED)
   include_directories(${INTL_INCLUDE_DIR})
 endif (APPLE OR WIN32 OR CMAKE_SYSTEM_NAME MATCHES "FreeBSD")
+
+# Gettext is required, but it does not provide GETTEXT_INCLUDE_DIR or
+# GETTEXT_LIBRARY as "usual" libraries do
+find_package(Gettext REQUIRED)
 
 find_package(SDL REQUIRED)
 include_directories(${SDL_INCLUDE_DIR})

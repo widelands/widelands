@@ -89,23 +89,17 @@ Graphic::Graphic
 	SDL_WM_SetIcon(s, 0);
 	SDL_FreeSurface(s);
 
-#ifndef USE_OPENGL
-	assert(not opengl);
-#endif
-
 	// Set video mode using SDL. First collect the flags
 
 	int32_t flags = 0;
 	g_opengl = false;
 	SDL_Surface * sdlsurface = 0;
 
-#ifdef USE_OPENGL
 	if (opengl) {
 		log("Graphics: Trying opengl\n");
 		SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
 		flags |= SDL_OPENGL;
 	}
-#endif
 
 	if (fullscreen) {
 		flags |= SDL_FULLSCREEN;
@@ -116,7 +110,6 @@ Graphic::Graphic
 	// Here we actually set the video mode
 	sdlsurface = SDL_SetVideoMode(w, h, bpp, flags);
 
-#ifdef USE_OPENGL
 	// If we tried opengl and it was not successful try without opengl
 	if (!sdlsurface and opengl)
 	{
@@ -124,7 +117,6 @@ Graphic::Graphic
 		flags &= ~SDL_OPENGL;
 		sdlsurface = SDL_SetVideoMode(w, h, bpp, flags);
 	}
-#endif
 
 	if (!sdlsurface)
 	{
@@ -148,7 +140,6 @@ Graphic::Graphic
 	if (0 != (sdlsurface->flags & SDL_FULLSCREEN))
 		log("Graphics: FULLSCREEN ENABLED\n");
 
-#ifdef USE_OPENGL
 	if (0 != (sdlsurface->flags & SDL_OPENGL)) {
 		//  We have successful opened an opengl screen. Print some information
 		//  about opengl and set the rendering capabilities.
@@ -213,7 +204,6 @@ GCC_DIAG_OFF("-Wold-style-cast")
 		m_caps.gl.blendequation = GLEW_VERSION_1_4 || GLEW_ARB_imaging;
 GCC_DIAG_ON ("-Wold-style-cast")
 	}
-#endif
 
 	/* Information about the video capabilities. */
 	const SDL_VideoInfo* info = SDL_GetVideoInfo();
@@ -259,7 +249,6 @@ GCC_DIAG_ON ("-Wold-style-cast")
 		(("Widelands " + build_id() + '(' + build_type() + ')').c_str(),
 		 "Widelands");
 
-#if USE_OPENGL
 	if (g_opengl) {
 		glViewport(0, 0, w, h);
 
@@ -296,7 +285,6 @@ GCC_DIAG_ON ("-Wold-style-cast")
 		screen_.reset(new GLSurfaceScreen(w, h));
 	}
 	else
-#endif
 	{
 		screen_.reset(new SDLSurface(sdlsurface));
 	}
@@ -321,10 +309,8 @@ Graphic::~Graphic()
 
 	flush_animations();
 
-#if USE_OPENGL
 	if (g_opengl)
 		GLSurfaceTexture::Cleanup();
-#endif
 }
 
 /**
@@ -409,14 +395,12 @@ bool Graphic::need_update() const
 */
 void Graphic::refresh(bool force)
 {
-#ifdef USE_OPENGL
 	if (g_opengl) {
 		SDL_GL_SwapBuffers();
 		m_update_fullscreen = false;
 		m_nr_update_rects = 0;
 		return;
 	}
-#endif
 
 	if (force or m_update_fullscreen) {
 		//flip defaults to SDL_UpdateRect(m_surface, 0, 0, 0, 0);

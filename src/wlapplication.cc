@@ -858,11 +858,7 @@ void WLApplication::refresh_graphics()
 		 s.get_int("yres", YRES),
 		 s.get_int("depth", 16),
 		 s.get_bool("fullscreen", false),
-#if USE_OPENGL
 		 s.get_bool("opengl", true));
-#else
-		 false);
-#endif
 }
 
 /**
@@ -887,9 +883,7 @@ bool WLApplication::init_settings() {
 
 	m_gfx_fullscreen = s.get_bool("fullscreen", false);
 
-#if USE_OPENGL
 	m_gfx_opengl = s.get_bool("opengl", true);
-#endif
 
 	// KLUDGE!
 	// Without this the following config options get dropped by check_used().
@@ -1219,7 +1213,6 @@ void WLApplication::handle_commandline_parameters() throw (Parameter_error)
 	}
 
 	if (m_commandline.count("opengl")) {
-#ifdef USE_OPENGL
 		if (m_commandline["opengl"].compare("0") == 0) {
 			g_options.pull_section("global").create_val("opengl", "false");
 		} else if (m_commandline["opengl"].compare("1") == 0) {
@@ -1227,9 +1220,6 @@ void WLApplication::handle_commandline_parameters() throw (Parameter_error)
 		} else {
 			log ("Invalid option opengl=[0|1]\n");
 		}
-#else
-		log("WARNIG: This version was compiled without support for OpenGL\n");
-#endif
 		m_commandline.erase("opengl");
 	}
 
@@ -1435,12 +1425,10 @@ void WLApplication::show_usage()
 			 " --depth=[16|32]      Color depth in number of bits per pixel.\n"
 			 " --xres=[...]         Width of the window in pixel.\n"
 			 " --yres=[...]         Height of the window in pixel.\n")
-#if USE_OPENGL
 		<<
 		_
 			 (" --opengl=[0|1]\n"
 			 "                      Enables OpenGL rendering\n")
-#endif
 		<<
 		_
 			("\n"

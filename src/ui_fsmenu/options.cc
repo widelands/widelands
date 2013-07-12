@@ -531,9 +531,6 @@ Fullscreen_Menu_Advanced_Options::Fullscreen_Menu_Advanced_Options
 	m_remove_syncstreams   .set_state(opt.remove_syncstreams);
 	m_label_opengl         .set_textstyle(ts_small());
 	m_opengl               .set_state(opt.opengl);
-#ifndef USE_OPENGL
-	m_opengl               .set_enabled(false);
-#endif
 	m_label_transparent_chat.set_textstyle(ts_small());
 	m_transparent_chat     .set_state(opt.transparent_chat);
 	m_sb_speed             .set_textstyle(ts_small());
@@ -618,11 +615,7 @@ Options_Ctrl::Options_Struct Fullscreen_Menu_Advanced_Options::get_values() {
 	os.panel_snap_distance  = m_sb_dis_panel.getValue();
 	os.border_snap_distance = m_sb_dis_border.getValue();
 	os.remove_syncstreams   = m_remove_syncstreams.get_state();
-#ifdef USE_OPENGL
 	os.opengl               = m_opengl.get_state();
-#else
-	os.opengl               = false;
-#endif
 	os.transparent_chat     = m_transparent_chat.get_state();
 	return os;
 }
