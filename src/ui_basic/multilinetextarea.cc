@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2009, 2011 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2009, 2011, 2013 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -182,6 +182,8 @@ void Multiline_Textarea::draw(RenderTarget & dst)
 			break;
 		case Align_Right:
 			anchor = get_eff_w();
+			break;
+		default:
 			break;
 		}
 		m->ww.draw(dst, Point(anchor, -m_scrollbar.get_scrollpos()), m_align);

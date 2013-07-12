@@ -719,6 +719,8 @@ void WLApplication::_handle_mousebutton
 				case SDL_BUTTON_RIGHT:
 					ev.button.button = SDL_BUTTON_LEFT;
 					break;
+				default:
+					break;
 			}
 		}
 

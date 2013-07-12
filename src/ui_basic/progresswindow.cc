@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007-2008, 2010 by the Widelands Development Team
+ * Copyright (C) 2007-2008, 2010, 2013 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -36,7 +36,7 @@
 
 #define PROGRESS_FONT_COLOR_FG        RGBColor(128, 128, 255)
 #define PROGRESS_FONT_COLOR_BG        RGBColor(64, 64, 0)
-#define PROGRESS_FONT_COLOR PROGRESS_FONT_COLOR_FG, PROGRESS_FONT_COLOR_BG
+//#define PROGRESS_FONT_COLOR PROGRESS_FONT_COLOR_FG, PROGRESS_FONT_COLOR_BG // not used
 #define PROGRESS_STATUS_RECT_PADDING  2
 #define PROGRESS_STATUS_BORDER_X      2
 #define PROGRESS_STATUS_BORDER_Y      2

@@ -330,6 +330,8 @@ void GameMessageMenu::archive_or_restore()
 					(gametime, plnum, Message_Id(list->get_selected())));
 		}
 		break;
+	default:
+		assert(false); // there is nothing but Archive and Inbox
 	}
 }
 
@@ -380,5 +382,7 @@ void GameMessageMenu::toggle_mode()
 		m_archivebtn->set_tooltip(_("Archive selected messages"));
 		m_togglemodebtn->set_title(_("Show Archive"));
 		break;
+	default:
+		assert(false); // there is nothing but Archive and Inbox
 	}
 }

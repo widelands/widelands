@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2010 by the Widelands Development Team
+ * Copyright (C) 2006-2010, 2013 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -108,6 +108,8 @@ int upcasted_immovable_to_lua(lua_State * L, BaseImmovable * mo) {
 			return CAST_TO_LUA(Flag);
 		case Map_Object::ROAD:
 			return CAST_TO_LUA(Road);
+		default:
+			break;
 	}
 	return to_lua<L_BaseImmovable>(L, new L_BaseImmovable(*mo));
 }

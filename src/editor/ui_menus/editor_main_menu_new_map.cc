@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2009 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2009, 2013 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -143,6 +143,8 @@ void Main_Menu_New_Map::button_clicked(int32_t n) {
 			(Widelands::World(m_worlds[m_currentworld].c_str()).get_name
 			 	());
 		break;
+	default:
+		assert(false);
 	}
 
 	char buffer[200];
