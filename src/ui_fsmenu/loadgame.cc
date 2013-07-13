@@ -29,6 +29,7 @@
 #include "log.h"
 #include "logic/game.h"
 #include "ui_basic/messagebox.h"
+#include <scripting/scripting.h>
 
 #include <cstdio>
 
@@ -82,6 +83,14 @@ Fullscreen_Menu_LoadGame::Fullscreen_Menu_LoadGame
 		 get_w() * 7 / 10,  get_h() * 3 / 8,
 		 _("Gametime:"), UI::Align_Right),
 	m_tagametime(this, get_w() * 71 / 100, get_h() * 3 / 8),
+	m_label_players
+		(this,
+		 get_w() * 7 / 10,  get_h() * 41 / 100,
+		 _("Players:"), UI::Align_Right),
+	m_ta_players
+		(this, get_w() * 71 / 100, get_h() * 41 / 100),
+	m_ta_win_condition
+		(this, get_w() * 71 / 100, get_h() * 9 / 20),
 
 	m_settings(gsp),
 	m_ctrl(gc)
@@ -101,10 +110,15 @@ Fullscreen_Menu_LoadGame::Fullscreen_Menu_LoadGame
 	m_tamapname     .set_font(m_fn, m_fs, UI_FONT_CLR_FG);
 	m_label_gametime.set_font(m_fn, m_fs, UI_FONT_CLR_FG);
 	m_tagametime    .set_font(m_fn, m_fs, UI_FONT_CLR_FG);
+	m_label_players .set_font(m_fn, m_fs, UI_FONT_CLR_FG);
+	m_ta_players    .set_font(m_fn, m_fs, UI_FONT_CLR_FG);
+	m_ta_win_condition.set_font(m_fn, m_fs, UI_FONT_CLR_FG);
 	m_list          .set_font(m_fn, m_fs);
 	m_list.selected.connect(boost::bind(&Fullscreen_Menu_LoadGame::map_selected, this, _1));
 	m_list.double_clicked.connect(boost::bind(&Fullscreen_Menu_LoadGame::double_clicked, this, _1));
 	fill_list();
+
+	g.lua().register_scripts(*g_fs, "win_conditions", "scripting/win_conditions");
 }
 
 void Fullscreen_Menu_LoadGame::think()
@@ -201,6 +215,22 @@ void Fullscreen_Menu_LoadGame::map_selected(uint32_t selected)
 
 		sprintf(buf, "%02i:%02i", hours, minutes);
 		m_tagametime.set_text(buf);
+
+		sprintf(buf, "%i", gpdp.get_player_nr());
+		m_ta_players.set_text(buf);
+
+		// Retrieve win condition title
+		std::string win_name;
+		try {
+			boost::shared_ptr<LuaTable> t = m_game.lua().run_script
+				("win_conditions", gpdp.get_win_condition());
+			win_name = t->get_string("name");
+		} catch (LuaScriptNotExistingError &) {
+			win_name = _("Scenario");
+		} catch (LuaTableKeyError &) {
+			win_name = gpdp.get_win_condition();
+		}
+		m_ta_win_condition.set_text(win_name);
 	} else {
 		no_selection();
 	}
