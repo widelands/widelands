@@ -73,7 +73,7 @@ Graphic::Graphic
 	m_nr_update_rects  (0),
 	m_update_fullscreen(true),
 	image_loader_(new ImageLoaderImpl()),
-	surface_cache_(create_surface_cache(SURFACE_CACHE_SIZE)),
+	surface_cache_(create_surface_cache(TRANSIENT_SURFACE_CACHE_SIZE)),
 	image_cache_(create_image_cache(image_loader_.get(), surface_cache_.get()))
 {
 	ImageTransformations::initialize();

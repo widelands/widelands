@@ -63,7 +63,7 @@ public:
 
 private:
 	Surface* reload_image_() const {
-		Surface* surf = surface_cache_->insert(filename_, image_loader_->load(filename_));
+		Surface* surf = surface_cache_->insert(filename_, image_loader_->load(filename_), false);
 		return surf;
 	}
 	uint16_t w_, h_;
