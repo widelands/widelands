@@ -43,7 +43,7 @@ namespace Widelands {
 Ship_Descr::Ship_Descr
 	(const char * given_name, const char * gdescname,
 	 const std::string & directory, Profile & prof, Section & global_s,
-	 const Widelands::Tribe_Descr & gtribe)
+	 const Tribe_Descr & gtribe)
 : Descr(given_name, gdescname, directory, prof, global_s, &gtribe)
 {
 	m_sail_anims.parse
@@ -270,11 +270,13 @@ void Ship::ship_update(Game & game, Bob::State & state)
 			return;
 		}
 
-	} else { // m_ship_state != TRANSPORT
+	} else {
+		// m_ship_state != TRANSPORT equals we are on an expedition
+		assert(m_expedition);
+
 		// Update the knowledge of the surrounding fields
 		FCoords position = get_position();
-		for (Direction dir = 1; dir <= LAST_DIRECTION; ++dir) {
-			assert(m_expedition);
+		for (Direction dir = FIRST_DIRECTION; dir <= LAST_DIRECTION; ++dir) {
 			m_expedition->swimable[dir - 1] =
 				map.get_neighbour(position, dir).field->nodecaps() & MOVECAPS_SWIM;
 		}
@@ -282,15 +284,20 @@ void Ship::ship_update(Game & game, Bob::State & state)
 		if (m_ship_state == EXP_SCOUTING) {
 			// Check surrounding fields for port buildspaces
 			boost::scoped_ptr<std::list<Coords> > temp_port_buildspaces(new std::list<Coords>());
-			Widelands::MapRegion<Widelands::Area<Widelands::Coords> > mr
-				(map, Widelands::Area<Widelands::Coords>(position, vision_range()));
+			MapRegion<Area<Coords> > mr
+				(map, Area<Coords>(position, vision_range()));
 			bool new_port_space = false;
 			do {
 				if (map.is_port_space(mr.location())) {
+					FCoords fc = map.get_fcoords(mr.location());
+
+					// Check whether the maximum theoretical possible NodeCap of the field is of the size big
+					if ((map.get_max_nodecaps(fc) & BUILDCAPS_SIZEMASK) != BUILDCAPS_BIG)
+						continue;
 
 					// Check if there is a PlayerImmovable on the port build space
-					// FIXME handle this more gracefully - opposing player? etc.
-					BaseImmovable * baim = map.get_fcoords(mr.location()).field->get_immovable();
+					// FIXME handle this more gracefully concering opposing players
+					BaseImmovable * baim = fc.field->get_immovable();
 					if (baim)
 						if (is_a(PlayerImmovable, baim))
 							continue;
