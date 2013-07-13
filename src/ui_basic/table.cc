@@ -153,8 +153,10 @@ void Table<void *>::set_column_title(uint8_t const col, const std::string & titl
 			(boost::bind(&Table::header_button_clicked, boost::ref(*this), col));
 		column.btn->set_font(Font::get(m_fontname, m_fontsize));
 	} else if (title.empty()) { //  had title before, not now
-		delete column.btn;
-		column.btn = 0;
+		if (column.btn) {
+			delete column.btn;
+			column.btn = 0;
+		}
 	} else
 		column.btn->set_title(title);
 }
