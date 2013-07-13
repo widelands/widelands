@@ -298,7 +298,7 @@ public:
 			return surf;
 
 		surf = recalculate_surface();
-		surface_cache_->insert(hash_, surf);
+		surface_cache_->insert(hash_, surf, true);
 		return surf;
 	}
 

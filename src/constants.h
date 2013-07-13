@@ -133,9 +133,8 @@ enum {
  */
 #define NUMBER_OF_WORKAREA_PICS static_cast<Workarea_Info::size_type>(3)
 
-/// The size of the surface cache in bytes. This is the amount of graphics
-/// memory widelands uses  approximately. Note that not every Surface is also in
-/// the cache, so the actual value will be different - but not by much.
-const uint32_t SURFACE_CACHE_SIZE = 150 << 20;   // shifting converts to MB
+/// The size of the transient (i.e. temporary) surfaces in the cache in bytes.
+/// These are all surfaces that are not loaded from disk.
+const uint32_t TRANSIENT_SURFACE_CACHE_SIZE = 80 << 20;   // shifting converts to MB
 
 #endif
