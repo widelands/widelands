@@ -23,6 +23,7 @@
 #include "graphic/image.h"
 #include "graphic/rendertarget.h"
 #include "interactive_player.h"
+#include "logic/constructionsite.h"
 #include "logic/dismantlesite.h"
 #include "logic/maphollowregion.h"
 #include "logic/militarysite.h"
@@ -515,7 +516,13 @@ void Building_Window::show_workarea()
 	if (m_workarea_job_id)
 		return; // already shown, nothing to be done
 
-	const Workarea_Info & workarea_info = m_building.descr().m_workarea_info;
+	Workarea_Info workarea_info;
+	if (is_a(Widelands::ConstructionSite, &m_building)) {
+		upcast(Widelands::ConstructionSite, csite, &m_building);
+		workarea_info = csite->building().m_workarea_info;
+	} else {
+		workarea_info = m_building.descr().m_workarea_info;
+	}
 	if (workarea_info.size() == 0)
 		return; // building has no workarea
 
