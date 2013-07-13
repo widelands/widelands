@@ -1062,7 +1062,8 @@ int L_Objective::set_visible(lua_State * L) {
 	.. attribute:: done
 
 		(RW) defines if this objective is already fulfilled. If done is
-		:const`true`, the objective will not be shown to the user, no matter what
+		:const`true`, the objective will not be shown to the user, no matter what.
+		A savegame will be created when this attribute is set to :const`true`.
 		:attr:`visible` is set to.
 */
 int L_Objective::get_done(lua_State * L) {
@@ -1073,6 +1074,20 @@ int L_Objective::get_done(lua_State * L) {
 int L_Objective::set_done(lua_State * L) {
 	Objective & o = get(L, get_game(L));
 	o.set_done(luaL_checkboolean(L, -1));
+
+	int32_t autosave = g_options.pull_section("global")
+		.get_int("autosave", 0);
+	if (autosave <= 0) {
+		return 0;
+	}
+
+	if (o.done()) {
+		std::string filename = get_egbase(L).get_map()->get_name();
+		char buffer[128];
+		snprintf(buffer, sizeof(buffer), _(" (achieved %s)"), o.descname().c_str());
+		filename.append(buffer);
+		get_game(L).save_handler().request_save(filename);
+	}
 	return 0;
 }
 
@@ -1317,6 +1332,23 @@ static int L_report_result(lua_State * L) {
 	return 0;
 }
 
+/* RST
+.. function:: save_game([filename = ""])
+
+	Save the game.
+
+	:arg filename: A filename may be passed in, otherwhise the autosave
+		file name will be used (wl_autosave).
+	:type filename: :class: string
+*/
+static int L_save_game(lua_State * L) {
+	std::string filename = "";
+	if (lua_gettop(L) >= 1)
+		filename = luaL_checkstring(L, 1);
+
+	get_game(L).save_handler().request_save(filename);
+	return 0;
+}
 /*
  * ========================================================================
  *                            MODULE FUNCTIONS
@@ -1324,6 +1356,7 @@ static int L_report_result(lua_State * L) {
  */
 const static struct luaL_reg wlgame [] = {
 	{"report_result", &L_report_result},
+	{"save_game", &L_save_game},
 	{0, 0}
 };
 

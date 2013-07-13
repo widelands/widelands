@@ -92,7 +92,7 @@ struct Game : Editor_Game_Base {
 
 	// This friend is for legacy reasons and should probably be removed
 	// at least after summer 2008, maybe even earlier.
-	friend struct Game_Interactive_Player_Data_Packet;
+	//friend struct Game_Interactive_Player_Data_Packet;
 
 	Game();
 	~Game();

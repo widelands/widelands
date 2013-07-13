@@ -37,30 +37,42 @@ using Widelands::Game_Saver;
  */
 void SaveHandler::think(Widelands::Game & game, int32_t realtime) {
 	initialize(realtime);
+	std::string filename = "wl_autosave";
 
-	if (not m_allow_autosaving) // Is autosaving allowed atm?
-		return;
+	if (m_save_requested) {
+		if (m_save_filename.length() > 0)
+			filename = m_save_filename;
 
-	int32_t const autosaveInterval =
-		g_options.pull_section("global").get_int
-			("autosave", DEFAULT_AUTOSAVE_INTERVAL * 60);
-	if (autosaveInterval <= 0)
-		return; // no autosave requested
+		log("Autosave: save requested : %s\n", filename.c_str());
+		m_save_requested = false;
+		m_save_filename = "";
+	} else {
+		if (not m_allow_autosaving) // Is autosaving allowed atm?
+			return;
 
-	int32_t const elapsed = (realtime - m_lastSaveTime) / 1000;
-	if (elapsed < autosaveInterval)
-		return;
+		int32_t const autosaveInterval =
+			g_options.pull_section("global").get_int
+				("autosave", DEFAULT_AUTOSAVE_INTERVAL * 60);
+		if (autosaveInterval <= 0)
+			return; // no autosave requested
 
-	log("Autosave: interval elapsed (%d s), saving\n", elapsed);
+		int32_t const elapsed = (realtime - m_lastSaveTime) / 1000;
+		if (elapsed < autosaveInterval)
+			return;
+
+		log("Autosave: interval elapsed (%d s), saving\n", elapsed);
+	}
+
 
 	// save the game
 	std::string complete_filename =
-		create_file_name (get_base_dir(), "wl_autosave");
+		create_file_name (get_base_dir(), filename);
 	std::string backup_filename;
 
 	// always overwrite a file
 	if (g_fs->FileExists(complete_filename)) {
-		backup_filename = create_file_name (get_base_dir(), "wl_autosave2");
+		filename += "2";
+		backup_filename = create_file_name (get_base_dir(), filename);
 		if (g_fs->FileExists(backup_filename)) {
 			g_fs->Unlink(backup_filename);
 		}

@@ -177,6 +177,7 @@ Fullscreen_Menu_Options::Fullscreen_Menu_Options
 		(this,
 		 get_w() * 1313 / 10000, get_h() * 8333 / 10000,
 		 _("Save game automatically every"), UI::Align_VCenter),
+
 	m_label_remove_replays
 		(this,
 		 get_w() * 1313 / 10000, get_h() * 8799 / 10000,
