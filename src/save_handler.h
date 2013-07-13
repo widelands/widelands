@@ -34,12 +34,14 @@ class SaveHandler {
 	int32_t m_lastSaveTime;
 	bool m_initialized;
 	bool m_allow_autosaving;
+	std::string m_cur_filename;
 
 	void initialize(int32_t currenttime);
 
 
 public:
-	SaveHandler() : m_lastSaveTime(0), m_initialized(false), m_allow_autosaving(true) {}
+	SaveHandler() : m_lastSaveTime(0), m_initialized(false), m_allow_autosaving(true), m_cur_filename("")
+	{}
 	void think(Widelands::Game &, int32_t currenttime);
 	std::string create_file_name(std::string dir, std::string filename);
 	bool save_game
@@ -48,6 +50,8 @@ public:
 		 std::string       * error = 0);
 
 	static std::string get_base_dir() {return "save";}
+	const std::string get_cur_filename() {return m_cur_filename;}
+	void set_cur_filename(std::string filename) {m_cur_filename = filename;}
 	void set_allow_autosaving(bool t) {m_allow_autosaving = t;}
 	bool get_allow_autosaving() {return m_allow_autosaving;}
 };

@@ -36,6 +36,7 @@
 
 namespace Widelands {
 
+// Allocate a new string for m_filename
 Game_Loader::Game_Loader(const std::string & path, Game & game) :
 	m_fs(*g_fs->MakeSubFileSystem(path)), m_game(game)
 {}

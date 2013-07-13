@@ -412,6 +412,9 @@ bool Game::run_load_game(std::string filename) {
 		gl.load_game();
 	}
 
+	// Store the filename for further saves
+	save_handler().set_cur_filename(filename);
+
 	set_game_controller(GameController::createSinglePlayer(*this, true, player_nr));
 	try {
 		bool const result = run(&loaderUI, Loaded);

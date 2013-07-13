@@ -110,6 +110,11 @@ Game_Main_Menu_Save_Game::Game_Main_Menu_Save_Game
 	center_to_parent();
 	move_to_top();
 
+	std::string cur_filename = parent.game().save_handler().get_cur_filename();
+	if (cur_filename.size() > 0) {
+		select_by_name(cur_filename);
+	}
+
 	m_editbox->focus();
 }
 
@@ -177,9 +182,17 @@ void Game_Main_Menu_Save_Game::fill_list() {
 			m_ls.add(FileSystem::FS_FilenameWoExt(name).c_str(), name);
 		} catch (const _wexception &) {} //  we simply skip illegal entries
 	}
+}
 
-	if (m_ls.size())
-		m_ls.select(0);
+void Game_Main_Menu_Save_Game::select_by_name(std::string name)
+{
+	for (uint idx = 0; idx < m_ls.size(); idx++) {
+		const std::string val = m_ls[idx];
+		if (name.compare(val) == 0) {
+			m_ls.select(idx);
+			return;
+		}
+	}
 }
 
 /*
