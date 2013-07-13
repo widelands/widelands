@@ -46,8 +46,8 @@ template<uint8_t const Size> struct BitInBuffer {
 		assert(result < (1 << Size));
 		return result;
 	}
-private:
 	FileRead fr;
+private:
 	uint8_t buffer, mask;
 };
 

@@ -112,14 +112,21 @@ struct Map_Object_Data {
 
 inline static Map_Object_Data read_unseen_immovable
 	(const Editor_Game_Base & egbase,
-	 BitInBuffer<4>         & immovable_kinds_file,
+	 BitInBuffer<2>         & immovable_kinds_file,
+	 uint8_t                & immovable_kinds_file_version,
 	 FileRead               & immovables_file,
 	 uint8_t                & version
 	)
 {
 	Map_Object_Data m;
+	uint8_t immovable_kind = 0;
+	if (immovable_kinds_file_version < 2) {
+		immovable_kind = immovable_kinds_file.get();
+	} else {
+		immovable_kind = immovable_kinds_file.fr.Unsigned8();
+	}
 	try {
-		switch (immovable_kinds_file.get()) {
+		switch (immovable_kind) {
 		case 0:  //  The player sees no immovable.
 			m.map_object_descr = 0;                                       break;
 		case 1: //  The player sees a tribe or world immovable.
@@ -142,7 +149,7 @@ inline static Map_Object_Data read_unseen_immovable
 		case 4: // The player sees a port dock
 			m.map_object_descr = &g_portdock_descr;                       break;
 		default:
-			throw game_data_error("Unknown immovable-kind type %d", immovable_kinds_file.get());
+			throw game_data_error("Unknown immovable-kind type %d", immovable_kind);
 			break;
 		}
 	} catch (const _wexception & e) {
@@ -349,9 +356,9 @@ void Map_Players_View_Data_Packet::Read
 		}
 
 		// Read the player's knowledge about all fields
-		OPEN_INPUT_FILE
-			(BitInBuffer<4>, node_immovable_kinds_file,
-			 node_immovable_kinds_filename,
+		OPEN_INPUT_FILE_NEW_VERSION
+			(BitInBuffer<2>, node_immovable_kinds_file,
+			 node_immovable_kinds_filename, node_immovable_kinds_file_version,
 			 NODE_IMMOVABLE_KINDS_FILENAME_TEMPLATE,
 			 NODE_IMMOVABLE_KINDS_CURRENT_PACKET_VERSION);
 
@@ -369,9 +376,9 @@ void Map_Players_View_Data_Packet::Read
 			(BitInBuffer<4>, terrains_file,       terrains_filename,
 			 TERRAINS_FILENAME_TEMPLATE,     TERRAINS_CURRENT_PACKET_VERSION);
 
-		OPEN_INPUT_FILE
-			(BitInBuffer<4>, triangle_immovable_kinds_file,
-			 triangle_immovable_kinds_filename,
+		OPEN_INPUT_FILE_NEW_VERSION
+			(BitInBuffer<2>, triangle_immovable_kinds_file,
+			 triangle_immovable_kinds_filename, triangle_immovable_kinds_file_version,
 			 TRIANGLE_IMMOVABLE_KINDS_FILENAME_TEMPLATE,
 			 TRIANGLE_IMMOVABLE_KINDS_CURRENT_PACKET_VERSION);
 
@@ -493,7 +500,8 @@ void Map_Players_View_Data_Packet::Read
 
 					Map_Object_Data mod =
 						read_unseen_immovable
-							(egbase, node_immovable_kinds_file, node_immovables_file, node_immovables_file_version);
+							(egbase, node_immovable_kinds_file, node_immovable_kinds_file_version,
+							 node_immovables_file, node_immovables_file_version);
 					f_player_field.map_object_descr[TCoords<>::None] = mod.map_object_descr;
 					f_player_field.constructionsite = mod.csi;
 
@@ -554,8 +562,8 @@ void Map_Players_View_Data_Packet::Read
 					}
 					Map_Object_Data mod =
 						read_unseen_immovable
-							(egbase, triangle_immovable_kinds_file, triangle_immovables_file,
-							 triangle_immovables_file_version);
+							(egbase, triangle_immovable_kinds_file, triangle_immovable_kinds_file_version,
+							 triangle_immovables_file, triangle_immovables_file_version);
 					f_player_field.map_object_descr[TCoords<>::D] = mod.map_object_descr;
 
 				}
@@ -578,8 +586,8 @@ void Map_Players_View_Data_Packet::Read
 					}
 					Map_Object_Data mod =
 						read_unseen_immovable
-							(egbase, triangle_immovable_kinds_file, triangle_immovables_file,
-							 triangle_immovables_file_version);
+							(egbase, triangle_immovable_kinds_file, triangle_immovable_kinds_file_version,
+							 triangle_immovables_file, triangle_immovables_file_version);
 					f_player_field.map_object_descr[TCoords<>::R] = mod.map_object_descr;
 				}
 
@@ -728,7 +736,7 @@ void Map_Players_View_Data_Packet::Read
 
 inline static void write_unseen_immovable
 	(Map_Object_Data const * map_object_data,
-	 BitOutBuffer<4> & immovable_kinds_file, FileWrite & immovables_file)
+	 FileWrite & immovable_kinds_file, FileWrite & immovables_file)
 {
 	Map_Object_Descr const * const map_object_descr = map_object_data->map_object_descr;
 	const Player::Constructionsite_Information & csi = map_object_data->csi;
@@ -774,7 +782,7 @@ inline static void write_unseen_immovable
 			map_object_descr->descname().c_str());
 		assert(false);
 	}
-	immovable_kinds_file.put(immovable_kind);
+	immovable_kinds_file.Unsigned8(immovable_kind);
 }
 
 #define WRITE(file, filename_template, version)                               \
@@ -796,11 +804,11 @@ throw (_wexception)
 	iterate_players_existing_const(plnum, nr_players, egbase, player)
 		if (const Player::Field * const player_fields = player->m_fields) {
 			FileWrite                   unseen_times_file;
-			BitOutBuffer<4>     node_immovable_kinds_file;
+			FileWrite           node_immovable_kinds_file;
 			FileWrite                node_immovables_file;
 			BitOutBuffer<2>                    roads_file;
 			BitOutBuffer<4>                 terrains_file;
-			BitOutBuffer<4> triangle_immovable_kinds_file;
+			FileWrite       triangle_immovable_kinds_file;
 			FileWrite            triangle_immovables_file;
 			FileWrite                         owners_file;
 			BitOutBuffer<1>                  surveys_file;

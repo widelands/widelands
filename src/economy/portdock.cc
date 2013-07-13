@@ -67,10 +67,10 @@ void expedition_wares
 
 }  // namespace
 
-Map_Object_Descr portdock_descr("portdock", "Port Dock");
+Map_Object_Descr g_portdock_descr("portdock", "Port Dock");
 
 PortDock::PortDock() :
-	PlayerImmovable(portdock_descr),
+	PlayerImmovable(g_portdock_descr),
 	m_fleet(0),
 	m_warehouse(0),
 	m_need_ship(false),
