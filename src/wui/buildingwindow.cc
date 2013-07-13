@@ -89,6 +89,14 @@ Building_Window::Building_Window
 
 	show_workarea();
 
+	if (is_a(Widelands::ConstructionSite, &m_building)) {
+		upcast(Widelands::ConstructionSite, csite, &m_building);
+		char cs_title[256];
+		// Show name in parenthesis as it may take all width already
+		sprintf(cs_title, _("(%s)"), csite->building().descname().c_str());
+		set_title(cs_title);
+	}
+
 	set_fastclick_panel(this);
 }
 
