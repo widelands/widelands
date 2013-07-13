@@ -135,12 +135,11 @@ void Table<void *>::add_column
 	}
 }
 
-void Table<void *>::set_column_title
-	(uint8_t const col, const std::string & title)
+void Table<void *>::set_column_title(uint8_t const col, const std::string & title)
 {
 	assert(col < m_columns.size());
 	Column & column = m_columns.at(col);
-	if (not column.btn and title.size()) { //  no title before, but now
+	if (!column.btn && !title.empty()) { //  no title before, but now
 		uint32_t complete_width = 0;
 		for (uint8_t i = 0; i < col; ++i)
 			complete_width += m_columns.at(i).width;
@@ -153,7 +152,7 @@ void Table<void *>::set_column_title
 		column.btn->sigclicked.connect
 			(boost::bind(&Table::header_button_clicked, boost::ref(*this), col));
 		column.btn->set_font(Font::get(m_fontname, m_fontsize));
-	} else if (column.btn and title.empty()) { //  had title before, not now
+	} else if (title.empty()) { //  had title before, not now
 		delete column.btn;
 		column.btn = 0;
 	} else
