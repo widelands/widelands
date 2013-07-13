@@ -67,6 +67,12 @@ Game_Main_Menu_Save_Game::Game_Main_Menu_Save_Game
 		(this, DESCRIPTION_X, 45, 0, 20, _("Game Time: "), UI::Align_CenterLeft),
 	m_gametime
 		(this, DESCRIPTION_X, 60, 0, 20, " ",              UI::Align_CenterLeft),
+	m_players_label
+		(this, DESCRIPTION_X, 85, 0, 20, " ",              UI::Align_CenterLeft),
+	m_win_condition_label
+		(this, DESCRIPTION_X, 110, 0, 20, _("Win condition: "), UI::Align_CenterLeft),
+	m_win_condition
+		(this, DESCRIPTION_X, 125, 0, 20, " ",             UI::Align_CenterLeft),
 	m_curdir(SaveHandler::get_base_dir())
 {
 	m_editbox =
@@ -148,6 +154,13 @@ void Game_Main_Menu_Save_Game::selected(uint32_t) {
 		 _("%02ud%02uh%02u'%02u\"%03u"),
 		 days, hours, minutes, seconds, gametime);
 	m_gametime.set_text(buf);
+
+	if (gpdp.get_player_nr() > 1)
+		sprintf(buf, _("%i players"), gpdp.get_player_nr());
+	else
+		sprintf(buf, _("%i player"), gpdp.get_player_nr());
+	m_players_label.set_text(buf);
+	m_win_condition.set_text(gpdp.get_win_condition());
 }
 
 /**
