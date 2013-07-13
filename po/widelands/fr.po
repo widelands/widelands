@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: Widelands svn4866\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2013-07-12 06:46+0200\n"
-"PO-Revision-Date: 2013-07-02 09:53+0000\n"
-"Last-Translator: bouchard renaud <Unknown>\n"
+"PO-Revision-Date: 2013-07-12 16:48+0000\n"
+"Last-Translator: Tubuntu <Unknown>\n"
 "Language-Team: French <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Launchpad-Export-Date: 2013-07-12 05:25+0000\n"
+"X-Launchpad-Export-Date: 2013-07-13 05:18+0000\n"
 "X-Generator: Launchpad (build 16696)\n"
 
 #: ../../src/computer_player.cc:38
@@ -3898,11 +3898,11 @@ msgstr "Lancer une expédition"
 
 #: ../../src/wui/buildingwindow.cc:208
 msgid "Prefer rookies"
-msgstr ""
+msgstr "Préférer les recrues"
 
 #: ../../src/wui/buildingwindow.cc:220
 msgid "Prefer heroes"
-msgstr ""
+msgstr "Préférer les héros"
 
 #: ../../src/wui/buildingwindow.cc:234
 msgid "Continue"

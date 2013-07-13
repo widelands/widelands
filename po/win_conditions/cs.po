@@ -14,7 +14,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-07-12 05:28+0000\n"
+"X-Launchpad-Export-Date: 2013-07-13 05:21+0000\n"
 "X-Generator: Launchpad (build 16696)\n"
 
 #: ../../scripting/win_condition_texts.lua:31
@@ -207,9 +207,3 @@ msgstr ""
 #: ../../scripting/win_condition_texts.lua:33
 msgid "with %i trees."
 msgstr "s %i stromy."
-
-#~ msgid ""
-#~ "You have nothing to command left. If you want, you may continue as spectator."
-#~ msgstr ""
-#~ "Nezbylo ti už nic, co bys mohl ovládat. Pokud chceš, zůstaň ve hře jako "
-#~ "pozorovatel."
