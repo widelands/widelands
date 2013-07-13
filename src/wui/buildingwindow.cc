@@ -445,7 +445,7 @@ void Building_Window::act_start_stop() {
 
 void Building_Window::act_prefer_rookies()
 {
-	if (is_a(const Widelands::MilitarySite, &m_building))
+	if (is_a(Widelands::MilitarySite, &m_building))
 		igbase().game().send_player_militarysite_set_soldier_preference
 			(m_building, Widelands::MilitarySite::kPrefersRookies);
 
@@ -455,7 +455,7 @@ void Building_Window::act_prefer_rookies()
 void
 Building_Window::act_prefer_heroes()
 {
-	if (is_a(const Widelands::MilitarySite, &m_building))
+	if (is_a(Widelands::MilitarySite, &m_building))
 		igbase().game().send_player_militarysite_set_soldier_preference
 			(m_building, Widelands::MilitarySite::kPrefersHeroes);
 
