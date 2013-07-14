@@ -35,6 +35,8 @@
 #include "worker.h"
 
 #include "constructionsite.h"
+#include <wui/interactive_base.h>
+#include <wui/interactive_gamebase.h>
 
 namespace Widelands {
 
@@ -182,6 +184,13 @@ void ConstructionSite::cleanup(Editor_Game_Base & egbase)
 		if (Worker * const builder = m_builder.get(egbase)) {
 			builder->reset_tasks(ref_cast<Game, Editor_Game_Base>(egbase));
 			builder->set_location(&b);
+		}
+		if (m_optionswindow) {
+			Point window_position = m_optionswindow->get_pos();
+			hide_options();
+			Interactive_GameBase & igbase =
+				ref_cast<Interactive_GameBase, Interactive_Base>(*egbase.get_ibase());
+			b.show_options(igbase, false, window_position);
 		}
 	}
 }
