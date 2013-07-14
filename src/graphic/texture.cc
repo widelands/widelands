@@ -101,7 +101,6 @@ Texture::Texture(const string& fnametmpl, uint32_t frametime, const SDL_PixelFor
 			break;
 		}
 
-#ifdef USE_OPENGL
 		if (g_opengl) {
 			// Note: we except the constructor to free the SDL surface
 			GLSurfaceTexture* surface = new GLSurfaceTexture(surf);
@@ -137,7 +136,6 @@ Texture::Texture(const string& fnametmpl, uint32_t frametime, const SDL_PixelFor
 			++m_nrframes;
 			continue;
 		}
-#endif
 
 		// Determine color map if it's the first frame
 		if (!m_nrframes) {
@@ -175,10 +173,15 @@ Texture::Texture(const string& fnametmpl, uint32_t frametime, const SDL_PixelFor
 		SDL_Surface * const cv = SDL_ConvertSurface(surf, &fmt, 0);
 
 		// Add the frame
-		m_pixels =
+		uint8_t* new_ptr =
 			static_cast<uint8_t *>
 				(realloc
 				 	(m_pixels, TEXTURE_WIDTH * TEXTURE_HEIGHT * (m_nrframes + 1)));
+		if (!new_ptr)
+			throw wexception("Out of memory.");
+		m_pixels = new_ptr;
+
+
 		m_curframe = &m_pixels[TEXTURE_WIDTH * TEXTURE_HEIGHT * m_nrframes];
 		++m_nrframes;
 
@@ -234,10 +237,8 @@ void Texture::animate(uint32_t time)
 {
 	m_frame_num = (time / m_frametime) % m_nrframes;
 
-#ifdef USE_OPENGL
 	if (g_opengl)
 		return;
-#endif
 
 	uint8_t * const lastframe = m_curframe;
 

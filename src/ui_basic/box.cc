@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2003, 2006-2011 by the Widelands Development Team
+ * Copyright (C) 2003, 2006-2011, 2013 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -130,8 +130,6 @@ void Box::update_desired_size()
  */
 void Box::layout()
 {
-	uint32_t totalbreadth = m_orientation == Horizontal ? get_inner_w() : get_inner_h();
-
 	// First pass: compute the depth and adjust whether we have a scrollbar
 	uint32_t totaldepth = 0;
 
@@ -148,12 +146,10 @@ void Box::layout()
 	bool needscrollbar = false;
 	if (m_orientation == Horizontal) {
 		if (totaldepth > m_max_x && m_scrolling) {
-			totalbreadth -= Scrollbar::Size;
 			needscrollbar = true;
 		}
 	} else {
 		if (totaldepth > m_max_y && m_scrolling) {
-			totalbreadth -= Scrollbar::Size;
 			needscrollbar = true;
 		}
 	}
@@ -422,6 +418,8 @@ void Box::set_item_pos(uint32_t idx, int32_t pos)
 
 	case Item::ItemSpace:
 		break; //  no need to do anything
+	default:
+		assert(false);
 	};
 }
 

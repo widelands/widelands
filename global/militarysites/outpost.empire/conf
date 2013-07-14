@@ -3,6 +3,7 @@ max_soldiers=3
 heal_per_second=100
 conquers=7
 buildable=no
+prefer_heroes=false
 
 [idle]
 pics=../../../tribes/empire/outpost/outpost_i_??.png

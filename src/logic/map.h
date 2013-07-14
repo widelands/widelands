@@ -132,6 +132,8 @@ struct Map :
 	friend struct MapGenerator;
 	friend struct MapAStarBase;
 
+	typedef std::set<Coords, Coords::ordering_functor> PortSpacesSet;
+
 	enum { // flags for findpath()
 
 		//  use bidirection cost instead of normal cost calculations
@@ -220,6 +222,9 @@ struct Map :
 	void set_scenario_player_name     (Player_Number, const std::string &);
 	void set_scenario_player_ai       (Player_Number, const std::string &);
 	void set_scenario_player_closeable(Player_Number, bool);
+
+	/// \returns the maximum theoretical possible nodecaps (no blocking bobs, etc.)
+	NodeCaps get_max_nodecaps(FCoords &);
 
 	BaseImmovable * get_immovable(Coords) const;
 	uint32_t find_bobs
@@ -361,7 +366,7 @@ struct Map :
 	/// Port space specific functions
 	bool is_port_space(const Coords& c);
 	void set_port_space(Coords c, bool allowed);
-	const std::set<Coords>& get_port_spaces() {return m_port_spaces;}
+	const PortSpacesSet& get_port_spaces() {return m_port_spaces;}
 	std::vector<Coords> find_portdock(const Widelands::Coords& c) const;
 
 protected: /// These functions are needed in Testclasses
@@ -398,7 +403,7 @@ private:
 	std::vector<std::string> m_scenario_ais;
 	std::vector<bool>        m_scenario_closeables;
 
-	std::set<Coords>        m_port_spaces;
+	PortSpacesSet m_port_spaces;
 
 	Manager<Objective>  m_mom;
 
@@ -418,8 +423,12 @@ private:
 	void recalc_brightness(FCoords);
 	void recalc_nodecaps_pass1(FCoords);
 	void recalc_nodecaps_pass2(const FCoords & f);
+	NodeCaps _calc_nodecaps_pass1(FCoords, bool consider_mobs = true);
+	NodeCaps _calc_nodecaps_pass2(FCoords, bool consider_mobs = true, NodeCaps initcaps = CAPS_NONE);
 	void check_neighbour_heights(FCoords, uint32_t & radius);
-	int calc_buildsize(const Widelands::FCoords& f, bool avoidnature, bool* ismine = 0);
+	int calc_buildsize
+		(const Widelands::FCoords& f, bool avoidnature, bool * ismine = 0,
+		 bool consider_mobs = true, NodeCaps initcaps = CAPS_NONE);
 	bool is_cycle_connected
 		(const FCoords & start, uint32_t length, const WalkingDir * dirs);
 

@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2012-10-04 15:25+0000\n"
-"PO-Revision-Date: 2012-09-12 01:40+0000\n"
-"Last-Translator: Luiz N <luiz.z@msn.com>\n"
+"POT-Creation-Date: 2013-06-16 09:11+0000\n"
+"PO-Revision-Date: 2013-01-24 02:47+0000\n"
+"Last-Translator: Rubens Bueno <rubensvsbueno@gmail.com>\n"
 "Language-Team: Brazilian Portuguese <pt_BR@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-10-05 04:40+0000\n"
-"X-Generator: Launchpad (build 16061)\n"
+"X-Launchpad-Export-Date: 2013-06-17 05:16+0000\n"
+"X-Generator: Launchpad (build 16667)\n"
 
 #: ../../scripting/win_condition_texts.lua:31
 msgid "%i trees."
@@ -23,7 +23,7 @@ msgstr "%i árvores."
 
 #: ../../scripting/win_condition_texts.lua:54
 msgid "%s %s %i%% of the land (%i of %i)."
-msgstr ""
+msgstr "%s %s %i%% da terra (%i de %i)."
 
 #: ../../scripting/win_condition_texts.lua:30
 msgid "%s had "
@@ -67,6 +67,10 @@ msgid ""
 "least 20 minutes or the one with the most territory after 4 hours, whichever "
 "comes first."
 msgstr ""
+"Cada jogador ou time tenta obter mais da metade da área do mapa. O vencedor "
+"será o jogador ou time que conseguir manter essa área por pelo menos 20 "
+"minutos ou aquele que tiver mais território após 4 horas, o que vier "
+"primeiro."
 
 #: ../../scripting/win_conditions/03_territorial_lord.lua:15
 msgid ""
@@ -93,7 +97,7 @@ msgstr "Mantenha por %i mais minutos para vencer o jogo."
 #: ../../scripting/win_condition_texts.lua:23
 #: ../../scripting/win_condition_texts.lua:29
 msgid "Player overview:"
-msgstr ""
+msgstr "Visão do jogador:"
 
 #: ../../scripting/win_condition_texts.lua:41
 msgid "Points"
@@ -105,7 +109,7 @@ msgstr "Situação"
 
 #: ../../scripting/win_condition_texts.lua:38
 msgid "Status for %s<br>"
-msgstr ""
+msgstr "Status para %s<br>"
 
 #: ../../scripting/win_condition_texts.lua:45
 msgid "Team %i"
@@ -117,7 +121,7 @@ msgstr "Senhor do Território"
 
 #: ../../scripting/win_conditions/03_territorial_time.lua:13
 msgid "Territorial Time"
-msgstr ""
+msgstr "Tempo Territorial"
 
 #: ../../scripting/win_condition_texts.lua:27
 msgid "The game will end in %i minutes."
@@ -178,6 +182,8 @@ msgstr ""
 msgid ""
 "You have nothing to command left. If you want, you may continue as spectator."
 msgstr ""
+"Você não tem mais nada para comandar. Se você quiser, pode continuar como um "
+"espectador."
 
 #: ../../scripting/win_condition_texts.lua:3
 msgid "You have won this game!"
@@ -205,7 +211,7 @@ msgstr "Você perdeu o jogo!"
 
 #: ../../scripting/win_condition_texts.lua:53
 msgid "game will end in %i minutes."
-msgstr ""
+msgstr "jogo terminará em %i minutos."
 
 #: ../../scripting/win_condition_texts.lua:33
 msgid "with %i trees."

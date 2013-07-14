@@ -1,6 +1,7 @@
 size=big
 enhancement=colosseum
 soldier_capacity=8
+trainer_patience=8
 
 [working positions]
 carrier=1

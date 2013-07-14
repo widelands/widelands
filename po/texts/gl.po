@@ -7,32 +7,32 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2012-10-04 15:25+0000\n"
+"POT-Creation-Date: 2013-06-16 09:11+0000\n"
 "PO-Revision-Date: 2010-08-30 23:36+0000\n"
 "Last-Translator: Adrián Chaves Fernández <adriyetichaves@gmail.com>\n"
 "Language-Team: Galician <kde-i18n-doc@kde.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-10-05 04:34+0000\n"
-"X-Generator: Launchpad (build 16061)\n"
+"X-Launchpad-Export-Date: 2013-06-17 05:10+0000\n"
+"X-Generator: Launchpad (build 16667)\n"
 "X-Poedit-Country: SPAIN\n"
 "X-Poedit-Language: Galician\n"
 "X-Poedit-SourceCharset: utf-8\n"
 
-#: ../../txts/README:69
+#: ../../txts/README:71
 msgid "(CTRL+) 0-9  Remember and go to previously remembered locations"
 msgstr "(Ctrl+) 0-9  Lembra e vai a lugares lembrados previamente"
 
-#: ../../txts/README:67
+#: ../../txts/README:69
 msgid ", / .       Go to previous / next location"
 msgstr ", / .       Vai ao anterior ou o seguinte lugar"
 
-#: ../../txts/README:126
+#: ../../txts/README:128
 msgid "- how to reproduce the bug"
 msgstr "- como reproduci-lo erro"
 
-#: ../../txts/README:130
+#: ../../txts/README:132
 msgid ""
 "- send us a compressed (zip, gzip, bzip2) replay if the bug appeared in-"
 "game. For more explanation, see the section on Replays below."
@@ -41,7 +41,7 @@ msgstr ""
 "lugar durante unha partida. Para máis detalles, véxase máis adiante a "
 "sección dentro de “Repeticións”."
 
-#: ../../txts/README:132
+#: ../../txts/README:134
 msgid ""
 "- send us a compressed (zip, gzip, bzip2) session record if possible, unless "
 "the<br>bug is trivial to reproduce. In fact, it may be a good idea to always "
@@ -53,7 +53,7 @@ msgstr ""
 "idea rexistrar sempre<br>as sesións, por se aparece algun erro. Para máis "
 "explicacións, le a continuación."
 
-#: ../../txts/README:124
+#: ../../txts/README:126
 msgid ""
 "- what version of Widelands did you use (i.e. the build number, or whether "
 "it's<br>a custom compile from SVN)"
@@ -61,7 +61,7 @@ msgstr ""
 "- que versión de Widelands usas (p.e. o número de compilación, ou se é<br> "
 "unha compilación propia a partir do SVN)"
 
-#: ../../txts/README:128
+#: ../../txts/README:130
 msgid "- which map you were playing"
 msgstr "- que mapa estabas xogando"
 
@@ -415,7 +415,7 @@ msgstr ""
 "USA<br><br>Engada información sobre como contactar con vostede por correo "
 "electrónico e ordinario."
 
-#: ../../txts/README:160
+#: ../../txts/README:162
 msgid ""
 "A binary file called filename.rec will be created. To play it back, perform "
 "the same steps as outlined above, but replace --record with --playback."
@@ -448,6 +448,12 @@ msgstr ""
 "Constrúe sempre unha cabana para un forestal e un zoólogo, para non quedar "
 "sen troncos ou comida."
 
+#: ../../txts/tips/general_game.tip:70
+msgid ""
+"An economy consists of all buildings and flags connected by roads. The "
+"supplies and demands of buildings are handled in its economy."
+msgstr ""
+
 #: ../../txts/tips/general_game.tip:22
 msgid ""
 "Any further questions? Our FAQs, the wiki and of course our community forums "
@@ -456,11 +462,11 @@ msgstr ""
 "Máis preguntas? Podes acceder ás nosas preguntas máis frecuentes, o wiki e "
 "por suposto os foros da comunidade desde www.widelands.org."
 
-#: ../../txts/developers:161
+#: ../../txts/developers:164
 msgid "Atlantean"
 msgstr ""
 
-#: ../../txts/developers:151
+#: ../../txts/developers:154
 msgid "Barbarian"
 msgstr "Bárbaros"
 
@@ -487,7 +493,7 @@ msgstr "CTRL+L       Carga un mapa"
 msgid "CTRL+S   Save Map"
 msgstr "CTRL+S       Salva o mapa"
 
-#: ../../txts/developers:148
+#: ../../txts/developers:151
 msgid "Campaign Story"
 msgstr "Historia da campaña"
 
@@ -515,23 +521,23 @@ msgstr ""
 "copias idénticas desta licencia, pero non está permitida a sua "
 "modificación.<br>"
 
-#: ../../txts/README:148
+#: ../../txts/README:150
 msgid "Creating a Session Record</p>"
 msgstr "Creando un rexistro de sesión</p>"
 
-#: ../../txts/README:81
+#: ../../txts/README:83
 msgid "Ctrl+F10    Quit the game immediately"
 msgstr "Ctrl+F10    Saír inmediatamente do xogo"
 
-#: ../../txts/developers:176
+#: ../../txts/developers:179
 msgid "Czech"
 msgstr "Checo"
 
-#: ../../txts/README:95
+#: ../../txts/README:97
 msgid "DELETE      Archive the current message"
 msgstr "Supr        Arquivar a mensaxe actual"
 
-#: ../../txts/developers:183
+#: ../../txts/developers:186
 msgid "Dansk"
 msgstr "Dinamarqués"
 
@@ -539,11 +545,11 @@ msgstr "Dinamarqués"
 msgid "Development"
 msgstr "Desenrolo"
 
-#: ../../txts/developers:318
+#: ../../txts/developers:321
 msgid "Documentation, Help and Wiki"
 msgstr "Documentación, axuda e wiki"
 
-#: ../../txts/developers:189
+#: ../../txts/developers:192
 msgid "Dutch"
 msgstr "Holandés"
 
@@ -555,7 +561,7 @@ msgstr "E            (Des)activa o menú de eventos"
 msgid "Elders"
 msgstr "Anciáns"
 
-#: ../../txts/developers:157
+#: ../../txts/developers:160
 msgid "Empire"
 msgstr "Imperio"
 
@@ -563,7 +569,7 @@ msgstr "Imperio"
 msgid "End of Terms and Conditions"
 msgstr "Fin dos Termos e Condiciñons"
 
-#: ../../txts/README:63
+#: ../../txts/README:65
 msgid "F               Toggle Fullscreen"
 msgstr "F          (Des)activa o modo a pantalla completa"
 
@@ -571,29 +577,29 @@ msgstr "F          (Des)activa o modo a pantalla completa"
 msgid "F        Toggles fullscreen"
 msgstr "F        Cambia a pantalla completa"
 
-#: ../../txts/README:83
+#: ../../txts/README:85
 msgid "F11         Take a screenshot"
 msgstr "F11        Capturar pantalla"
 
-#: ../../txts/README:79
+#: ../../txts/README:81
 msgid "F6           Shows the debug console (only in debug-builds)"
 msgstr ""
 "F6           Amosa a consola de depuración (só en compilacións para "
 "depuración)"
 
-#: ../../txts/developers:196
+#: ../../txts/developers:199
 msgid "Finnish"
 msgstr "Finés"
 
-#: ../../txts/developers:333
+#: ../../txts/developers:336
 msgid "Former elders"
 msgstr "Autores orixinais"
 
-#: ../../txts/developers:202
+#: ../../txts/developers:205
 msgid "French"
 msgstr "Francés"
 
-#: ../../txts/README:93
+#: ../../txts/README:95
 msgid "G           Go to location corresponding to current message"
 msgstr "G           Ir ao lugar correspondente á mensaxe actual"
 
@@ -607,7 +613,7 @@ msgid ""
 "and modification"
 msgstr "TERMOS E CONDICIÓNS PARA A COPIA, DISTRIBUCIÓN E MODIFICACIÓN"
 
-#: ../../txts/developers:209
+#: ../../txts/developers:212
 msgid "Galician"
 msgstr "Galego"
 
@@ -615,16 +621,16 @@ msgstr "Galego"
 msgid "General game control"
 msgstr "Control xeral do xogo"
 
-#: ../../txts/developers:214
+#: ../../txts/developers:217
 msgid "German"
 msgstr "Alemán"
 
-#: ../../txts/developers:82
+#: ../../txts/developers:85
 msgid "Graphicians"
 msgstr "Grafistas"
 
 #: ../../txts/developers:18
-#: ../../txts/developers:344
+#: ../../txts/developers:347
 msgid "Graphics"
 msgstr "Gráficos"
 
@@ -632,7 +638,7 @@ msgstr "Gráficos"
 msgid "H        Toggles main menu"
 msgstr "H            (Des)activa o menú principal"
 
-#: ../../txts/developers:226
+#: ../../txts/developers:229
 msgid "Hebrew"
 msgstr "Hebreo"
 
@@ -651,16 +657,16 @@ msgstr ""
 "meirande parte dos casos esta é a ferramenta completamente oposta á normal "
 "(pro exemplo borrar on obxecto en vez de colocar un)."
 
-#: ../../txts/README:65
+#: ../../txts/README:67
 msgid "Home        Center main mapview on starting location"
 msgstr "Inicio     Centra o mapa na posición de partida"
 
 #: ../../txts/developers:23
-#: ../../txts/developers:337
+#: ../../txts/developers:340
 msgid "Homepage"
 msgstr "Páxina principal"
 
-#: ../../txts/developers:309
+#: ../../txts/developers:312
 msgid "Homepage Coders"
 msgstr "Programadores do sitio web"
 
@@ -668,9 +674,13 @@ msgstr "Programadores do sitio web"
 msgid "How to Apply These Terms to Your New Programs"
 msgstr "Como aplicar estes termos a un novo programa"
 
-#: ../../txts/developers:231
+#: ../../txts/developers:234
 msgid "Hungarian"
 msgstr "Húngaro"
+
+#: ../../txts/README:61
+msgid "I               Toggle stock inventory display"
+msgstr ""
 
 #: ../../txts/editor_readme:37
 msgid "I        Activates information tool"
@@ -726,7 +736,13 @@ msgstr ""
 "público posíbel, o mellor xeito de acadar isto é face-lo programa Software "
 "Ceive, para que cada un poida redistribui-lo e cambia-lo baixo estes termos."
 
-#: ../../txts/README:104
+#: ../../txts/tips/general_game.tip:58
+msgid ""
+"If you like to live dangerously, pressing Ctrl while clicking the enhance, "
+"dismantle or destroy building buttons will skip the confirmation."
+msgstr ""
+
+#: ../../txts/README:106
 msgid ""
 "If you need documentation or help for Widelands or the Widelands Editor, be "
 "sure to visit our homepage. You can find an up to date online help at:"
@@ -735,7 +751,7 @@ msgstr ""
 "Widelands, visita a nosa páxina de proxecto. Podes atopa-la axuda en liña "
 "actualizada en:"
 
-#: ../../txts/README:116
+#: ../../txts/README:118
 msgid ""
 "If you want to report bugs, please send your report to the mailing list, "
 "<widelands-public@list.sourceforge.net><br>To subscribe, visit the following "
@@ -745,7 +761,7 @@ msgstr ""
 "correo, <widelands-public@sourceforge.net><br>. Para subscribirte, visita a "
 "seguinte páxina:"
 
-#: ../../txts/README:91
+#: ../../txts/README:93
 msgid ""
 "In the message window, the following additional shortcuts are available:"
 msgstr ""
@@ -778,7 +794,7 @@ msgstr ""
 "distribuir software mediante calquera outro sistema e unha licencia non pode "
 "impor esa elección."
 
-#: ../../txts/developers:236
+#: ../../txts/developers:239
 msgid "Italian"
 msgstr "Italiano"
 
@@ -811,7 +827,7 @@ msgstr ""
 "Coma cos obxectos naturais (bobs), tamén podes seleccionar varios animais ou "
 "texturas superficiais premendo co rato mentres mantés premida a tecla Ctrl."
 
-#: ../../txts/developers:275
+#: ../../txts/developers:278
 msgid "Linux Distributions"
 msgstr "Distribucións de GNU/Linux"
 
@@ -830,7 +846,7 @@ msgid ""
 "messages."
 msgstr ""
 
-#: ../../txts/developers:134
+#: ../../txts/developers:137
 msgid "Maps and Missions"
 msgstr "Mapas e misións"
 
@@ -838,7 +854,7 @@ msgstr "Mapas e misións"
 msgid "Miners will only work if supplied with food."
 msgstr "Os mineiros só han traballar se teñen comida."
 
-#: ../../txts/developers:112
+#: ../../txts/developers:115
 msgid "Musicians"
 msgstr "Músicos"
 
@@ -846,7 +862,7 @@ msgstr "Músicos"
 msgid "N               Toggle messages ('news')"
 msgstr "N               Cambiar as mensaxes (“novas”)"
 
-#: ../../txts/developers:171
+#: ../../txts/developers:174
 msgid ""
 "NOTE: this list holds people that translated Widelands before we moved to "
 "launchpad.net. "
@@ -856,19 +872,19 @@ msgstr ""
 
 #: ../../txts/tips/general_game.tip:54
 msgid ""
-"New soldiers are recruted in the headquarters or a warehouse if all needed "
-"tools are available. Trainingsites are for improving their abilities."
+"New soldiers are recruited in the headquarters or a warehouse if all needed "
+"tools are available. Training sites are for improving their abilities."
 msgstr ""
 
 #: ../../txts/COPYING:70
 msgid "No warranty"
 msgstr "Sen garantía"
 
-#: ../../txts/developers:297
+#: ../../txts/developers:300
 msgid "Non Unix Distributions"
 msgstr "Distribucións non baseadas en UNIX"
 
-#: ../../txts/README:163
+#: ../../txts/README:165
 msgid ""
 "Note that while recorded files are platform independent, they generally "
 "won't work across different versions of Widelands, because the user "
@@ -883,11 +899,11 @@ msgstr ""
 "pensados para o seu uso coma arquivos de demostración; principalmente son "
 "unha ferramenta de depurado que nos axuda a atopar erros."
 
-#: ../../txts/README:61
+#: ../../txts/README:63
 msgid "O               Toggle objectives display"
 msgstr "O               Cambiar á vista de obxectivos"
 
-#: ../../txts/README:157
+#: ../../txts/README:159
 msgid ""
 "On Windows, create a shortcut to the file widelands.exe (right-click on "
 "widelands.exe and choose Create Shortcut). Then edit the shortcut (right-"
@@ -901,15 +917,15 @@ msgstr ""
 "debe conter algo semellante a c:\\games\\widelands\\widelands.exe. Cámbiao "
 "por c:\\games\\widelands\\widelands.exe --record=filename.rec."
 
-#: ../../txts/README:100
+#: ../../txts/README:102
 msgid "Online Help"
 msgstr "Axuda en liña"
 
-#: ../../txts/developers:362
+#: ../../txts/developers:366
 msgid "Other"
 msgstr "Outros"
 
-#: ../../txts/developers:286
+#: ../../txts/developers:289
 msgid "Other Unix Distributions"
 msgstr "Outras distribucións baseadas en UNIX"
 
@@ -925,19 +941,19 @@ msgstr ""
 msgid "P        Toggles player menu"
 msgstr "H            (Des)activa o menú de xogadores"
 
-#: ../../txts/README:74
+#: ../../txts/README:76
 msgid "PAGEDOWN    Decrease gamespeed"
 msgstr "AVPAG      Reducir velocidade de xogo"
 
-#: ../../txts/README:72
+#: ../../txts/README:74
 msgid "PAGEUP         Increase gamespeed"
 msgstr "REPAG      Aumentar velocidade de xogo"
 
-#: ../../txts/README:76
+#: ../../txts/README:78
 msgid "PAUSE         Pauses the game (only for local games)"
 msgstr ""
 
-#: ../../txts/developers:271
+#: ../../txts/developers:274
 msgid "Packagers"
 msgstr "Empaquetadores"
 
@@ -945,11 +961,11 @@ msgstr "Empaquetadores"
 msgid "Please look into our enduser manuals in our wiki-pages at:"
 msgstr "Consulta o noso manual de usuario no wiki:"
 
-#: ../../txts/README:121
+#: ../../txts/README:123
 msgid "Please provide enough background information. Tell us:"
 msgstr "Por favor, danos suficiente información auxiliar. Dinos:"
 
-#: ../../txts/developers:241
+#: ../../txts/developers:244
 msgid "Polish"
 msgstr "Polaco"
 
@@ -960,6 +976,10 @@ msgstr "Limiar"
 #: ../../txts/tips/general_game.tip:42
 msgid ""
 "Press Ctrl+(0-9) to store important locations, then press 0-9 to recall them."
+msgstr ""
+
+#: ../../txts/tips/general_game.tip:62
+msgid "Press I to quickly toggle the display of your stock inventory."
 msgstr ""
 
 #: ../../txts/tips/general_game.tip:46
@@ -986,7 +1006,7 @@ msgid ""
 "junction."
 msgstr ""
 
-#: ../../txts/README:144
+#: ../../txts/README:146
 msgid ""
 "Replays are a very useful tool to find bugs in the game logic code, so we "
 "ask you to attach replay files to all bug reports that you submit. The "
@@ -1000,15 +1020,15 @@ msgstr ""
 "directorio “~/.widelands/replays” dentro do seu cartafol persoal en "
 "GNU/Linux e no directorio “replays” na instalación do Widelands en Windows."
 
-#: ../../txts/README:137
+#: ../../txts/README:139
 msgid "Replays</p>"
 msgstr "Repeticións</p>"
 
-#: ../../txts/README:112
+#: ../../txts/README:114
 msgid "Reporting Bugs"
 msgstr "Informando Erros"
 
-#: ../../txts/developers:249
+#: ../../txts/developers:252
 msgid "Russian"
 msgstr "Ruso"
 
@@ -1035,7 +1055,7 @@ msgstr ""
 "A tecla ESPAZO actúa coma nunha partida normal. Activa ou desactiva o "
 "asistente de construción."
 
-#: ../../txts/developers:172
+#: ../../txts/developers:175
 msgid ""
 "See https://translations.launchpad.net/widelands for a list of people that "
 "helped to translate Widelands via launchpad.net."
@@ -1043,7 +1063,7 @@ msgstr ""
 "Véxase https://translations.launchpad.net/widelands para unha lista de xente "
 "que axudou a traducir o Widelands a través de launchpad.net."
 
-#: ../../txts/developers:254
+#: ../../txts/developers:257
 msgid "Slovak"
 msgstr "Eslovaco"
 
@@ -1058,15 +1078,15 @@ msgstr ""
 "Se o edificio está rodeado de árbores ou camiños, a produción deterase."
 
 #: ../../txts/developers:28
-#: ../../txts/developers:350
+#: ../../txts/developers:354
 msgid "Sound"
 msgstr "Sonido"
 
-#: ../../txts/developers:124
+#: ../../txts/developers:127
 msgid "Sound Effects"
 msgstr "Efectos de son"
 
-#: ../../txts/developers:259
+#: ../../txts/developers:262
 msgid "Spanish"
 msgstr "Castelán"
 
@@ -1082,13 +1102,19 @@ msgstr ""
 msgid "Status"
 msgstr "Estado"
 
-#: ../../txts/developers:264
+#: ../../txts/developers:267
 msgid "Swedish"
 msgstr "Sueco"
 
 #: ../../txts/editor_readme:35
 msgid "T        Toggles tools menu"
 msgstr "H            (Des)activa o menú de ferramentas"
+
+#: ../../txts/tips/general_game.tip:66
+msgid ""
+"The 'configure economy' menu for setting up target quantities can be "
+"accessed via the flag menu."
+msgstr ""
 
 #: ../../txts/tips/general_game.tip:2
 msgid ""
@@ -1310,7 +1336,7 @@ msgid "To close an open window, right click it."
 msgstr ""
 "Para pechar unha fiestra aberta, preme nela co botón dereito do rato."
 
-#: ../../txts/README:154
+#: ../../txts/README:156
 msgid ""
 "To create a session record, start the game with the --record parameter. On "
 "Linux, simply start Widelands like so: $ ./widelands --record=filename.rec"
@@ -1339,11 +1365,11 @@ msgstr ""
 "Para maximizar ou minimizar unha fiestra, preme na súa barra de título co "
 "botón central ou esquerdo do rato mentres mantés premida a tecla CTRL."
 
-#: ../../txts/developers:355
+#: ../../txts/developers:359
 msgid "Translation"
 msgstr "Tradución"
 
-#: ../../txts/developers:168
+#: ../../txts/developers:171
 msgid "Translators"
 msgstr "Tradutores"
 
@@ -1376,7 +1402,7 @@ msgstr ""
 "Utiliza o menú “configurar a economía” para axustar a cantidade do obxectivo "
 "para un material específico."
 
-#: ../../txts/README:142
+#: ../../txts/README:144
 msgid ""
 "Using the Watch Replay option in the main menu, a previously played game "
 "will be precisely reconstructed for you to watch. Note, however, that even "
@@ -1397,7 +1423,7 @@ msgstr ""
 msgid "Version 2, June 1991<br></p></rt>"
 msgstr "Versión 2, Xuño 1991<br></p></rt>"
 
-#: ../../txts/README:86
+#: ../../txts/README:88
 msgid ""
 "When finishing a road, if Ctrl is down, place flags along the road. Default "
 "is to place flags from end to start. If Shift is also down, place flags from "
@@ -1407,7 +1433,7 @@ msgstr ""
 "camiño. Por defecto as bandeiras colócanse do final al principio. Se tamén "
 "se preme Maiús colocaranse do principio ao final."
 
-#: ../../txts/README:88
+#: ../../txts/README:90
 msgid ""
 "When removing a road, if Ctrl is pressed all flags up to the first junction "
 "are removed."
@@ -1417,7 +1443,7 @@ msgstr ""
 msgid "Widelands Development Team"
 msgstr "O Equipo de Desenrolo de Widelands"
 
-#: ../../txts/README:151
+#: ../../txts/README:153
 msgid ""
 "Widelands can record all your keypresses and mouse movements to a file. It "
 "can then replay an entire session from starting the game to exiting it. This "
@@ -1465,7 +1491,7 @@ msgstr ""
 "voluntarios. A tua contribución (si, estou a falarte a ti) é necesaria, "
 "especialmente no referido a gráficos, para facer de Widelands un xogo mellor."
 
-#: ../../txts/README:140
+#: ../../txts/README:142
 msgid ""
 "Widelands records every game you play in two files. One of these files has a "
 ".wrpl.wgf extension and contains an initial savegame. The other file has "

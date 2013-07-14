@@ -392,7 +392,7 @@ void RichText::parse(const std::string & rtext)
 			while (word_cnt < words.size() || br_it != line_breaks.end()) {
 				if (br_it != line_breaks.end() && *br_it <= word_cnt) {
 					text.advance_line();
-					br_it++;
+					++br_it;
 					continue;
 				}
 
@@ -472,7 +472,7 @@ void RichText::parse(const std::string & rtext)
  * @note this function may draw content outside the box given offset
  * and @ref width and @ref height, if there were wrapping problems.
  */
-void RichText::draw(RenderTarget & dst, Point offset, bool background)
+void RichText::draw(RenderTarget & dst, const Point& offset, bool background)
 {
 	for
 		(std::vector<Element *>::const_iterator elt = m->elements.begin();

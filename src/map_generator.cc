@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2010 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2010, 2013 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -30,7 +30,6 @@
 #define MAX_ELEVATION   (0xffffffff)
 #define MAP_ID_DIGITS   24
 #define ISLAND_BORDER   10
-#define MAX_ELEVATION_3_4  (0xc0000000)
 #define MAX_ELEVATION_HALF (0x80000000)
 
 using boost::scoped_array;
@@ -183,6 +182,8 @@ void MapGenerator::generate_resources
 			set_resource_helper(rnd4, 3);
 		break;
 	}
+	default:
+		break; // currently mountains have the maximum of allowed resources, which is 4
 	}
 }
 

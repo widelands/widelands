@@ -61,8 +61,8 @@ public:
 
 	void draw_line
 		(int32_t x1, int32_t y1, int32_t x2, int32_t y2, const RGBColor& color, uint8_t width = 1);
-	void draw_rect(Rect, RGBColor);
-	void fill_rect(Rect, RGBAColor);
+	void draw_rect(Rect, const RGBColor&);
+	void fill_rect(Rect, const RGBAColor&);
 	void brighten_rect(Rect, int32_t factor);
 
 	void blit(const Point& dst, const Image* image, Composite cm = CM_Normal, UI::Align = UI::Align_TopLeft);

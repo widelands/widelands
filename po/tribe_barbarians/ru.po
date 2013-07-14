@@ -6,15 +6,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2012-10-04 15:25+0000\n"
-"PO-Revision-Date: 2012-08-14 02:04+0000\n"
+"POT-Creation-Date: 2013-06-16 09:11+0000\n"
+"PO-Revision-Date: 2013-05-12 05:22+0000\n"
 "Last-Translator: Konstantin Shchukin <k.s@sign-support.ru>\n"
 "Language-Team: русский <ru@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-10-05 04:35+0000\n"
-"X-Generator: Launchpad (build 16061)\n"
+"X-Launchpad-Export-Date: 2013-06-17 05:11+0000\n"
+"X-Generator: Launchpad (build 16667)\n"
 "X-Poedit-Country: RUSSIAN FEDERATION\n"
 "X-Poedit-Language: Russian\n"
 
@@ -30,6 +30,8 @@ msgid ""
 "\"As silent as a panther,<br> as deft as a weasel,<br> as swift as an "
 "arrow,<br> as deadly as a viper.\""
 msgstr ""
+"\"Тихий, как пантера, <br> ловкий, как ласка, <br> быстрый, как стрела, <br> "
+"смертельный, как гадюка\""
 
 #: ../../tribes/barbarians/battlearena/help.lua:17
 msgid ""
@@ -62,6 +64,8 @@ msgid ""
 "\"He who is strong shall not forgive nor forget, but revenge injustice "
 "suffered - in the past and for all future.\""
 msgstr ""
+"\"Он, который силен, не простит и не забудет, но отомстит за "
+"несправедливость - в прошлом или в будущем.\""
 
 #: ../../tribes/barbarians/granitemine/help.lua:12
 msgid ""
@@ -76,6 +80,8 @@ msgid ""
 "\"I look at my own pick wearing away day by day and I realize why my work is "
 "important.\""
 msgstr ""
+"\"Я смотрю на свою кирку, которая стачивается день за днем и понимаю, почему "
+"моя работа так важна.\""
 
 #: ../../tribes/barbarians/micro-brewery/help.lua:12
 msgid ""
@@ -104,6 +110,8 @@ msgid ""
 "\"Soft and supple.<br> And yet untouched by time and weather.<br> Rays of "
 "sun, wrought into eternity ...\""
 msgstr ""
+"\"Мягкие и податливые.<br> И совсем нетронутые временем и стихией.<br> Лучи "
+"солнца, несущиеся в вечность...\""
 
 #: ../../tribes/barbarians/lumberjacks_hut/help.lua:12
 msgid ""
@@ -160,7 +168,7 @@ msgstr "%s и"
 #: ../../tribes/barbarians/granitemine/help.lua:27
 #: ../../tribes/barbarians/oremine/help.lua:27
 msgid "%s from a Big Inn"
-msgstr ""
+msgstr "%s из большого трактира"
 
 #: ../../tribes/barbarians/coalmine/help.lua:26
 #: ../../tribes/barbarians/goldmine/help.lua:25
@@ -177,7 +185,7 @@ msgstr "%s из таверны"
 #: ../../tribes/barbarians/granitemine/help.lua:26
 #: ../../tribes/barbarians/oremine/help.lua:26
 msgid "%s from an Inn"
-msgstr ""
+msgstr "%s из трактира"
 
 #: ../../tribes/barbarians/axefactory/help.lua:26
 #: ../../tribes/barbarians/lime_kiln/help.lua:26
@@ -197,7 +205,7 @@ msgstr "%s из плавильни"
 
 #: ../../tribes/barbarians/rangers_hut/help.lua:14
 msgid "%s in a conversation with a %s"
-msgstr ""
+msgstr "%s общается с %s"
 
 #: ../../tribes/barbarians/battlearena/help.lua:29
 #: ../../tribes/barbarians/trainingscamp/help.lua:35
@@ -227,7 +235,7 @@ msgstr "%s или лучше"
 #: ../../tribes/barbarians/deeper_goldmine/help.lua:49
 #: ../../tribes/barbarians/deeper_oremine/help.lua:49
 msgid "%s or better and"
-msgstr ""
+msgstr "%s или лучший и"
 
 #: ../../tribes/barbarians/axefactory/help.lua:60
 #: ../../tribes/barbarians/coalmine/help.lua:53
@@ -363,6 +371,8 @@ msgid ""
 "All weapons require the same time for making, but the consumption of the "
 "same raw materials increases from step to step. The last two need gold."
 msgstr ""
+"Все оружие требует одинаковое время для изготовления, но использование того "
+"же сырья растет от шага к шагу. Последние два требуют золота."
 
 #: ../../tribes/barbarians/oremine/help.lua:16
 msgid ""
@@ -426,7 +436,7 @@ msgstr "Печёт хлеб для рабочих."
 
 #: ../../tribes/barbarians/bakery/help.lua:51
 msgid "Baking Tray"
-msgstr ""
+msgstr "Противень"
 
 #: ../../tribes/barbarians/gamekeepers_hut/help.lua:13
 msgid "Barbarian nursery rhyme"
@@ -539,11 +549,11 @@ msgstr "Лопата для выпечки"
 
 #: ../../tribes/barbarians/cattlefarm/help.lua:16
 msgid "Breed Oxen for adding them to the transportation system."
-msgstr ""
+msgstr "Разводите волов, чтобы добавить их в транспортную систему."
 
 #: ../../tribes/barbarians/cattlebreeder/conf:1
 msgid "Breeds the strong oxen that help in the transportation of wares."
-msgstr "Разводит сильных быков, которые помогают в перевозке товаров."
+msgstr "Разводит сильных волов, которые помогают в перевозке товаров."
 
 #: ../../tribes/barbarians/conf:126
 #: ../../tribes/barbarians/micro-brewery/help.lua:47
@@ -639,7 +649,7 @@ msgstr "Отжигает известь в печах для обжига."
 
 #: ../../tribes/barbarians/farm/help.lua:50
 msgid "Calculation needed"
-msgstr ""
+msgstr "Нужно посчитать."
 
 #: ../../tribes/barbarians/conf:115
 #: ../../tribes/barbarians/well/help.lua:42
@@ -656,7 +666,7 @@ msgstr "Каменоломня %s без камней осталась возл�
 
 #: ../../tribes/barbarians/granitemine/help.lua:18
 msgid "Carve %s out of the rock in mountain terrain."
-msgstr ""
+msgstr "Каменоломня %s без булыжника в горной местности."
 
 #: ../../tribes/barbarians/conf:161
 #: ../../tribes/barbarians/conf:170
@@ -681,7 +691,7 @@ msgstr "Домик углежога"
 
 #: ../../tribes/barbarians/trainingscamp/help.lua:13
 msgid "Chief Chat'Karuth in a speech to his army."
-msgstr ""
+msgstr "Вождь Чат'Каруч обращается к своей армии."
 
 #: ../../tribes/barbarians/coalmine/help.lua:53
 #: ../../tribes/barbarians/coalmine/help.lua:53
@@ -751,7 +761,7 @@ msgstr "Уголь"
 
 #: ../../tribes/barbarians/warmill/help.lua:27
 msgid "Coal from the Coal mine or the Charcoal Burner's House"
-msgstr ""
+msgstr "Уголь из угольной шахты или из домика углежога."
 
 #: ../../tribes/barbarians/coalmine/help.lua:17
 #: ../../tribes/barbarians/conf:212
@@ -801,7 +811,7 @@ msgstr "Строительство корабля"
 #: ../../tribes/barbarians/lumberjacks_hut/help.lua:27
 #: ../../tribes/barbarians/quarry/help.lua:27
 msgid "Construction Site"
-msgstr "Стройка"
+msgstr "Строительная площадка"
 
 #: ../../tribes/barbarians/axefactory/help.lua:40
 #: ../../tribes/barbarians/deep_coalmine/help.lua:42
@@ -845,7 +855,7 @@ msgstr "Общая стоимость:"
 msgid "Crew required:"
 msgstr "Требуемые работники:"
 
-#: ../../tribes/barbarians/stonemason/conf:2
+#: ../../tribes/barbarians/stonemason/conf:1
 msgid "Cuts raw pieces of granite out of laying stones."
 msgstr "Обтёсывает куски гранита, добытые из залежей камней."
 
@@ -1296,7 +1306,7 @@ msgstr "Молоток"
 msgid "Harvest reed"
 msgstr "собрать урожай тростника"
 
-#: ../../tribes/barbarians/farm/conf:19
+#: ../../tribes/barbarians/farm/conf:18
 msgid "Harvest wheat"
 msgstr "собрать урожай пшеницы"
 
@@ -1840,11 +1850,11 @@ msgstr "посадить тростник"
 msgid "Plant trees in the surrounding area."
 msgstr "Сажает деревья в округе."
 
-#: ../../tribes/barbarians/farm/conf:17
+#: ../../tribes/barbarians/farm/conf:16
 msgid "Plant wheat"
 msgstr "посадить пшеницу"
 
-#: ../../tribes/barbarians/farmer/conf:2
+#: ../../tribes/barbarians/farmer/conf:1
 msgid "Plants fields."
 msgstr "Засевает поля."
 
@@ -1856,41 +1866,41 @@ msgstr "Сажает деревья."
 msgid "Port"
 msgstr "Порт"
 
-#: ../../tribes/barbarians/axefactory/conf:29
-#: ../../tribes/barbarians/warmill/conf:33
+#: ../../tribes/barbarians/axefactory/conf:27
+#: ../../tribes/barbarians/warmill/conf:31
 msgid "Produce axe"
 msgstr "сделать топор"
 
-#: ../../tribes/barbarians/metalworks/conf:34
+#: ../../tribes/barbarians/metalworks/conf:33
 msgid "Produce bakingtray"
 msgstr "сделать лопатку пекаря"
 
-#: ../../tribes/barbarians/warmill/conf:37
+#: ../../tribes/barbarians/warmill/conf:35
 msgid "Produce battleaxe"
 msgstr "сделать боевой топор"
 
-#: ../../tribes/barbarians/axefactory/conf:31
-#: ../../tribes/barbarians/warmill/conf:35
+#: ../../tribes/barbarians/axefactory/conf:29
+#: ../../tribes/barbarians/warmill/conf:33
 msgid "Produce broadaxe"
 msgstr "сделать секиру"
 
-#: ../../tribes/barbarians/warmill/conf:36
+#: ../../tribes/barbarians/warmill/conf:34
 msgid "Produce bronzeaxe"
 msgstr "сделать бронзовый топор"
 
-#: ../../tribes/barbarians/metalworks/conf:33
+#: ../../tribes/barbarians/metalworks/conf:32
 msgid "Produce felling axe"
 msgstr "сделать топор лесоруба"
 
-#: ../../tribes/barbarians/metalworks/conf:35
+#: ../../tribes/barbarians/metalworks/conf:34
 msgid "Produce fire tongs"
 msgstr "сделать щипцы"
 
-#: ../../tribes/barbarians/metalworks/conf:36
+#: ../../tribes/barbarians/metalworks/conf:35
 msgid "Produce fishing rod"
 msgstr "сделать удочку"
 
-#: ../../tribes/barbarians/metalworks/conf:37
+#: ../../tribes/barbarians/metalworks/conf:36
 msgid "Produce hammer"
 msgstr "сделать молоток"
 
@@ -1898,11 +1908,11 @@ msgstr "сделать молоток"
 msgid "Produce helm"
 msgstr "сделать шлем"
 
-#: ../../tribes/barbarians/metalworks/conf:42
+#: ../../tribes/barbarians/metalworks/conf:41
 msgid "Produce hunting spear"
 msgstr "сделать копьё охотника"
 
-#: ../../tribes/barbarians/metalworks/conf:38
+#: ../../tribes/barbarians/metalworks/conf:37
 msgid "Produce kitchen tools"
 msgstr "сделать кухонную утварь"
 
@@ -1914,7 +1924,7 @@ msgstr "сделать защитную маску"
 msgid "Produce meal"
 msgstr "приготовить сытный обед"
 
-#: ../../tribes/barbarians/metalworks/conf:39
+#: ../../tribes/barbarians/metalworks/conf:38
 msgid "Produce pick"
 msgstr "сделать кирку"
 
@@ -1924,16 +1934,16 @@ msgstr "сделать кирку"
 msgid "Produce ration"
 msgstr "приготовить паёк"
 
-#: ../../tribes/barbarians/metalworks/conf:40
+#: ../../tribes/barbarians/metalworks/conf:39
 msgid "Produce scythe"
 msgstr "сделать косу"
 
-#: ../../tribes/barbarians/axefactory/conf:30
-#: ../../tribes/barbarians/warmill/conf:34
+#: ../../tribes/barbarians/axefactory/conf:28
+#: ../../tribes/barbarians/warmill/conf:32
 msgid "Produce sharpaxe"
 msgstr "сделать острый топор"
 
-#: ../../tribes/barbarians/metalworks/conf:41
+#: ../../tribes/barbarians/metalworks/conf:40
 msgid "Produce shovel"
 msgstr "сделать лопату"
 
@@ -1946,7 +1956,7 @@ msgstr "приготовить обед"
 msgid "Produce warhelmet"
 msgstr "сделать боевой шлем"
 
-#: ../../tribes/barbarians/warmill/conf:38
+#: ../../tribes/barbarians/warmill/conf:36
 msgid "Produce warriorsaxe"
 msgstr "сделать топор воина"
 
@@ -2285,8 +2295,8 @@ msgstr "Верфь"
 msgid "Shovel"
 msgstr "Лопата"
 
-#: ../../tribes/barbarians/battlearena/conf:28
-#: ../../tribes/barbarians/trainingscamp/conf:36
+#: ../../tribes/barbarians/battlearena/conf:29
+#: ../../tribes/barbarians/trainingscamp/conf:37
 msgid "Sleep"
 msgstr "Сон"
 
@@ -3049,11 +3059,11 @@ msgstr "Затраты на улучшение:"
 msgid "Upgrade cost:"
 msgstr "Затраты на улучшение:"
 
-#: ../../tribes/barbarians/trainingscamp/conf:37
+#: ../../tribes/barbarians/trainingscamp/conf:38
 msgid "Upgrade soldier attack 0"
 msgstr "улучшить навык атаки 0"
 
-#: ../../tribes/barbarians/trainingscamp/conf:38
+#: ../../tribes/barbarians/trainingscamp/conf:39
 msgid ""
 "Upgrade soldier attack 0 (only for compatibility with old savegames "
 "(build13))"
@@ -3061,11 +3071,11 @@ msgstr ""
 "улучшить навык атаки 0 (только для совместимости со старыми сохранениями "
 "(build13))"
 
-#: ../../tribes/barbarians/trainingscamp/conf:39
+#: ../../tribes/barbarians/trainingscamp/conf:40
 msgid "Upgrade soldier attack 1"
 msgstr "улучшить навык атаки 1"
 
-#: ../../tribes/barbarians/trainingscamp/conf:40
+#: ../../tribes/barbarians/trainingscamp/conf:41
 msgid ""
 "Upgrade soldier attack 1 (only for compatibility with old savegames "
 "(build13))"
@@ -3073,11 +3083,11 @@ msgstr ""
 "улучшить навык атаки 1 (только для совместимости со старыми сохранениями "
 "(build13))"
 
-#: ../../tribes/barbarians/trainingscamp/conf:41
+#: ../../tribes/barbarians/trainingscamp/conf:42
 msgid "Upgrade soldier attack 2"
 msgstr "улучшить навык атаки 2"
 
-#: ../../tribes/barbarians/trainingscamp/conf:42
+#: ../../tribes/barbarians/trainingscamp/conf:43
 msgid ""
 "Upgrade soldier attack 2 (only for compatibility with old savegames "
 "(build13))"
@@ -3085,11 +3095,11 @@ msgstr ""
 "улучшить навык атаки 2 (только для совместимости со старыми сохранениями "
 "(build13))"
 
-#: ../../tribes/barbarians/trainingscamp/conf:43
+#: ../../tribes/barbarians/trainingscamp/conf:44
 msgid "Upgrade soldier attack 3"
 msgstr "улучшить навык атаки 3"
 
-#: ../../tribes/barbarians/trainingscamp/conf:44
+#: ../../tribes/barbarians/trainingscamp/conf:45
 msgid ""
 "Upgrade soldier attack 3 (only for compatibility with old savegames "
 "(build13))"
@@ -3097,11 +3107,11 @@ msgstr ""
 "улучшить навык атаки 3 (только для совместимости со старыми сохранениями "
 "(build13))"
 
-#: ../../tribes/barbarians/trainingscamp/conf:45
+#: ../../tribes/barbarians/trainingscamp/conf:46
 msgid "Upgrade soldier attack 4"
 msgstr "улучшить навык атаки 4"
 
-#: ../../tribes/barbarians/trainingscamp/conf:46
+#: ../../tribes/barbarians/trainingscamp/conf:47
 msgid ""
 "Upgrade soldier attack 4 (only for compatibility with old savegames "
 "(build13))"
@@ -3109,33 +3119,33 @@ msgstr ""
 "улучшить навык атаки 4 (только для совместимости со старыми сохранениями "
 "(build13))"
 
-#: ../../tribes/barbarians/battlearena/conf:29
+#: ../../tribes/barbarians/battlearena/conf:30
 msgid "Upgrade soldier evade 0"
 msgstr "улучшить навык уклонения 0"
 
-#: ../../tribes/barbarians/battlearena/conf:30
+#: ../../tribes/barbarians/battlearena/conf:31
 msgid ""
 "Upgrade soldier evade 0 (only for compatibility with old savegames (build13))"
 msgstr ""
 "улучшить навык уклонения 0 (только для совместимости со старыми сохранениями "
 "(build13))"
 
-#: ../../tribes/barbarians/battlearena/conf:31
+#: ../../tribes/barbarians/battlearena/conf:32
 msgid "Upgrade soldier evade 1"
 msgstr "улучшить навык уклонения 1"
 
-#: ../../tribes/barbarians/battlearena/conf:32
+#: ../../tribes/barbarians/battlearena/conf:33
 msgid ""
 "Upgrade soldier evade 1 (only for compatibility with old savegames (build13))"
 msgstr ""
 "улучшить навык уклонения 1 (только для совместимости со старыми сохранениями "
 "(build13))"
 
-#: ../../tribes/barbarians/trainingscamp/conf:47
+#: ../../tribes/barbarians/trainingscamp/conf:48
 msgid "Upgrade soldier hitpoints 0"
 msgstr "улучшить уровень здоровья 0"
 
-#: ../../tribes/barbarians/trainingscamp/conf:48
+#: ../../tribes/barbarians/trainingscamp/conf:49
 msgid ""
 "Upgrade soldier hitpoints 0 (only for compatibility with old savegames "
 "(build13))"
@@ -3143,11 +3153,11 @@ msgstr ""
 "улучшить уровень здоровья 0 (только для совместимости со старыми "
 "сохранениями (build13))"
 
-#: ../../tribes/barbarians/trainingscamp/conf:49
+#: ../../tribes/barbarians/trainingscamp/conf:50
 msgid "Upgrade soldier hitpoints 1"
 msgstr "улучшить уровень здоровья 1"
 
-#: ../../tribes/barbarians/trainingscamp/conf:50
+#: ../../tribes/barbarians/trainingscamp/conf:51
 msgid ""
 "Upgrade soldier hitpoints 1 (only for compatibility with old savegames "
 "(build13))"
@@ -3155,11 +3165,11 @@ msgstr ""
 "улучшить уровень здоровья 1 (только для совместимости со старыми "
 "сохранениями (build13))"
 
-#: ../../tribes/barbarians/trainingscamp/conf:51
+#: ../../tribes/barbarians/trainingscamp/conf:52
 msgid "Upgrade soldier hitpoints 2"
 msgstr "улучшить уровень здоровья 2"
 
-#: ../../tribes/barbarians/trainingscamp/conf:52
+#: ../../tribes/barbarians/trainingscamp/conf:53
 msgid ""
 "Upgrade soldier hitpoints 2 (only for compatibility with old savegames "
 "(build13))"
@@ -3351,12 +3361,12 @@ msgstr "Кабан"
 msgid "Wood Hardener"
 msgstr "Лесопилка"
 
-#: ../../tribes/barbarians/axefactory/conf:32
+#: ../../tribes/barbarians/axefactory/conf:30
 #: ../../tribes/barbarians/bakery/conf:21
 #: ../../tribes/barbarians/big_inn/conf:27
 #: ../../tribes/barbarians/brewery/conf:20
 #: ../../tribes/barbarians/burners_house/conf:19
-#: ../../tribes/barbarians/cattlefarm/conf:22
+#: ../../tribes/barbarians/cattlefarm/conf:21
 #: ../../tribes/barbarians/coalmine/conf:20
 #: ../../tribes/barbarians/deep_coalmine/conf:23
 #: ../../tribes/barbarians/deep_goldmine/conf:23
@@ -3364,7 +3374,7 @@ msgstr "Лесопилка"
 #: ../../tribes/barbarians/deeper_coalmine/conf:22
 #: ../../tribes/barbarians/deeper_goldmine/conf:22
 #: ../../tribes/barbarians/deeper_oremine/conf:22
-#: ../../tribes/barbarians/farm/conf:21
+#: ../../tribes/barbarians/farm/conf:20
 #: ../../tribes/barbarians/fernery/conf:19
 #: ../../tribes/barbarians/fishers_hut/conf:15
 #: ../../tribes/barbarians/gamekeepers_hut/conf:15
@@ -3376,7 +3386,7 @@ msgstr "Лесопилка"
 #: ../../tribes/barbarians/inn/conf:25
 #: ../../tribes/barbarians/lime_kiln/conf:18
 #: ../../tribes/barbarians/lumberjacks_hut/conf:15
-#: ../../tribes/barbarians/metalworks/conf:43
+#: ../../tribes/barbarians/metalworks/conf:42
 #: ../../tribes/barbarians/micro-brewery/conf:22
 #: ../../tribes/barbarians/oremine/conf:21
 #: ../../tribes/barbarians/quarry/conf:15
@@ -3385,7 +3395,7 @@ msgstr "Лесопилка"
 #: ../../tribes/barbarians/shipyard/conf:22
 #: ../../tribes/barbarians/smelting_works/conf:26
 #: ../../tribes/barbarians/tavern/conf:24
-#: ../../tribes/barbarians/warmill/conf:39
+#: ../../tribes/barbarians/warmill/conf:37
 #: ../../tribes/barbarians/weaving-mill/conf:19
 #: ../../tribes/barbarians/well/conf:14
 msgid "Work"

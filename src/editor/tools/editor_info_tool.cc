@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2012 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2013 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -62,6 +62,7 @@ int32_t Editor_Info_Tool::handle_click_impl
 		case Widelands::BUILDCAPS_SMALL:  buf += _("small");  break;
 		case Widelands::BUILDCAPS_MEDIUM: buf += _("medium"); break;
 		case Widelands::BUILDCAPS_BIG:    buf += _("big");    break;
+		default: break;
 		};
 		if (caps & Widelands::BUILDCAPS_FLAG) buf += _(" flag");
 		if (caps & Widelands::BUILDCAPS_MINE) buf += _(" mine");

@@ -54,7 +54,7 @@ public:
 		if (rv)
 			return rv;
 
-		rv = g_gr->surfaces().insert(hash_, Surface::create(width_, height_));
+		rv = g_gr->surfaces().insert(hash_, Surface::create(width_, height_), true);
 		return rv;
 	}
 

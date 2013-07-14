@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2008, 2010 - 2011 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2008, 2010-2011, 2013 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -41,7 +41,7 @@ m_current_job_id(Job_Id::Null())
 
 
 /**
- * Returns the currently registered overlays and the buildhelp for a node.
+ * \returns the currently registered overlays and the buildhelp for a node.
  */
 uint8_t Overlay_Manager::get_overlays
 	(Widelands::FCoords const c, Overlay_Info * const overlays) const
@@ -81,7 +81,7 @@ end:
 }
 
 /**
- * Returns the currently registered overlays for a triangle.
+ * \returns the currently registered overlays for a triangle.
  */
 uint8_t Overlay_Manager::get_overlays
 	(Widelands::TCoords<> const c, Overlay_Info * const overlays) const
@@ -109,7 +109,7 @@ uint8_t Overlay_Manager::get_overlays
 }
 
 
-/*
+/**
  * remove all registered overlays. The Overlay_Manager
  * can than be reused without needing to be delete()ed
  */
@@ -124,7 +124,7 @@ void Overlay_Manager::reset() {
 }
 
 
-/*
+/**
  * Recalculates all calculatable overlays for fields
  */
 void Overlay_Manager::recalc_field_overlays(const Widelands::FCoords fc) {
@@ -136,12 +136,13 @@ void Overlay_Manager::recalc_field_overlays(const Widelands::FCoords fc) {
 		fc.field->nodecaps();
 
 	fc.field->set_buildhelp_overlay_index
-		(caps & Widelands::BUILDCAPS_PORT                                      ?
-		 Widelands::Field::Buildhelp_Port                                      :
-		 caps & Widelands::BUILDCAPS_MINE                                      ?
+		(caps & Widelands::BUILDCAPS_MINE                                      ?
 		 Widelands::Field::Buildhelp_Mine                                      :
 		 (caps & Widelands::BUILDCAPS_SIZEMASK) == Widelands::BUILDCAPS_BIG    ?
-		 Widelands::Field::Buildhelp_Big                                       :
+			(caps & Widelands::BUILDCAPS_PORT ?
+			 Widelands::Field::Buildhelp_Port :
+			 Widelands::Field::Buildhelp_Big)
+		 :
 		 (caps & Widelands::BUILDCAPS_SIZEMASK) == Widelands::BUILDCAPS_MEDIUM ?
 		 Widelands::Field::Buildhelp_Medium                                    :
 		 (caps & Widelands::BUILDCAPS_SIZEMASK) == Widelands::BUILDCAPS_SMALL  ?
@@ -150,7 +151,7 @@ void Overlay_Manager::recalc_field_overlays(const Widelands::FCoords fc) {
 		 Widelands::Field::Buildhelp_Flag : Widelands::Field::Buildhelp_None);
 }
 
-/*
+/**
  * finally, register a new overlay
  */
 void Overlay_Manager::register_overlay
@@ -209,7 +210,7 @@ void Overlay_Manager::register_overlay
 	} while (it->first == c);
 }
 
-/*
+/**
  * remove one (or many) overlays from a node or triangle
  */
 void Overlay_Manager::remove_overlay
@@ -232,7 +233,7 @@ void Overlay_Manager::remove_overlay
 	}
 }
 
-/*
+/**
  * remove all overlays with this jobid
  */
 void Overlay_Manager::remove_overlay(const Job_Id jobid) {
@@ -247,7 +248,7 @@ void Overlay_Manager::remove_overlay(const Job_Id jobid) {
 		}
 }
 
-/*
+/**
  * Register road overlays
  */
 void Overlay_Manager::register_road_overlay
@@ -263,7 +264,7 @@ void Overlay_Manager::register_road_overlay
 		it->second = overlay;
 }
 
-/*
+/**
  * Remove road overlay
  */
 void Overlay_Manager::remove_road_overlay(const Widelands::Coords c) {
@@ -272,7 +273,7 @@ void Overlay_Manager::remove_road_overlay(const Widelands::Coords c) {
 		m_road_overlays.erase(it);
 }
 
-/*
+/**
  * remove all overlays with this jobid
  */
 void Overlay_Manager::remove_road_overlay(Job_Id const jobid) {
@@ -286,7 +287,7 @@ void Overlay_Manager::remove_road_overlay(Job_Id const jobid) {
 			++it;
 }
 
-/*
+/**
  * call cleanup and then, when graphic is reloaded
  * overlay_manager calls this for himself and everything should be fine
  *

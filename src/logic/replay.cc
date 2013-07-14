@@ -179,7 +179,6 @@ Command * ReplayReader::GetNextCommand(const uint32_t time)
 			delete m_cmdlog;
 			m_cmdlog = 0;
 			return 0;
-			break;
 		}
 
 		default:

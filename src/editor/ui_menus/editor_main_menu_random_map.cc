@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2011 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2011, 2013 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -419,6 +419,8 @@ void Main_Menu_New_Random_Map::button_clicked(Main_Menu_New_Random_Map::ButtonID
 			m_res_amount = 0;
 		m_res->set_title(m_res_amounts[m_res_amount].c_str());
 		break;
+	default:
+		assert(false);
 	}
 
 	char buffer[200];

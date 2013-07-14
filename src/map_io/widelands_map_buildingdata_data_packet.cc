@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2011 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2011, 2013 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -57,9 +57,9 @@ namespace Widelands {
 #define CURRENT_CONSTRUCTIONSITE_PACKET_VERSION 2
 #define CURRENT_PARTIALLYFB_PACKET_VERSION      1
 #define CURRENT_WAREHOUSE_PACKET_VERSION        6
-#define CURRENT_MILITARYSITE_PACKET_VERSION     3
+#define CURRENT_MILITARYSITE_PACKET_VERSION     4
 #define CURRENT_PRODUCTIONSITE_PACKET_VERSION   5
-#define CURRENT_TRAININGSITE_PACKET_VERSION     3
+#define CURRENT_TRAININGSITE_PACKET_VERSION     4
 
 
 void Map_Buildingdata_Data_Packet::Read
@@ -635,6 +635,42 @@ void Map_Buildingdata_Data_Packet::read_warehouse
 					if (Serial portdock = fr.Unsigned32()) {
 						warehouse.m_portdock = &mol.get<PortDock>(portdock);
 						warehouse.m_portdock->set_economy(warehouse.get_economy());
+
+						// Expedition specific stuff
+						if (warehouse.m_portdock->expedition_started()) {
+							// Expedition workers
+							uint8_t num_of_workers = fr.Unsigned8();
+							for (uint8_t i = 0; i < num_of_workers; ++i) {
+								warehouse.get_expedition_workers().push_back(new Warehouse::Expedition_Worker);
+								if (fr.Unsigned8() == 1) {
+									warehouse.get_expedition_workers().back()->worker_request =
+										new Request
+											(warehouse,
+											Ware_Index::First(),
+											Warehouse::request_expedition_worker_callback,
+											wwWORKER);
+									warehouse.get_expedition_workers().back()->worker_request->Read(fr, game, mol);
+								} else {
+									warehouse.get_expedition_workers().back()->worker =
+										&mol.get<Worker>(fr.Unsigned32());
+								}
+							}
+
+							// Expedition WaresQueues
+							uint8_t nr_queues = fr.Unsigned8();
+							assert(warehouse.get_wares_queue_vector().empty());
+							for (uint8_t i = 0; i < nr_queues; ++i) {
+								WaresQueue * wq = new WaresQueue(warehouse, Ware_Index::Null(), 0);
+								wq->Read(fr, game, mol);
+								wq->set_callback(PortDock::expedition_wares_queue_callback, warehouse.m_portdock);
+
+								if (!wq->get_ware()) {
+									delete wq;
+								} else {
+									warehouse.get_wares_queue_vector().push_back(wq);
+								}
+							}
+						}
 					}
 				}
 			}
@@ -677,22 +713,44 @@ void Map_Buildingdata_Data_Packet::read_militarysite
 {
 	try {
 		uint16_t const packet_version = fr.Unsigned16();
-		if (packet_version == CURRENT_MILITARYSITE_PACKET_VERSION)
+		bool rel17comp = false;
+		if (3 == packet_version and 4 == CURRENT_MILITARYSITE_PACKET_VERSION)
+			rel17comp = true;
+		if (packet_version == CURRENT_MILITARYSITE_PACKET_VERSION or rel17comp)
 		{
 			read_productionsite(militarysite, fr, game, mol);
 
-			delete militarysite.m_soldier_request;
-			militarysite.m_soldier_request = 0;
+			militarysite.m_normal_soldier_request.reset();
 
 			if (fr.Unsigned8()) {
-				militarysite.m_soldier_request =
-					new Request
+				militarysite.m_normal_soldier_request.reset
+					(new Request
 						(militarysite,
 						 Ware_Index::First(),
 						 MilitarySite::request_soldier_callback,
-						 wwWORKER);
-				militarysite.m_soldier_request->Read(fr, game, mol);
+						 wwWORKER));
+				militarysite.m_normal_soldier_request->Read(fr, game, mol);
 			}
+			else
+				militarysite.m_normal_soldier_request.reset();
+
+			if (rel17comp) // compatibility with release 17 savegames
+				militarysite.m_upgrade_soldier_request.reset();
+			else
+			if (fr.Unsigned8())
+			{
+				militarysite.m_upgrade_soldier_request.reset
+					(new Request
+						(militarysite,
+						 (!militarysite.m_normal_soldier_request) ? Ware_Index::First()
+						: militarysite.descr().tribe().safe_worker_index("soldier"),
+						MilitarySite::request_soldier_callback,
+						wwWORKER));
+				militarysite.m_upgrade_soldier_request->Read(fr, game, mol);
+			}
+			else
+				militarysite.m_upgrade_soldier_request.reset();
+
 
 			if ((militarysite.m_didconquer = fr.Unsigned8())) {
 				//  Add to map of military influence.
@@ -714,6 +772,27 @@ void Map_Buildingdata_Data_Packet::read_militarysite
 			//  capacity (modified by user)
 			militarysite.m_capacity = fr.Unsigned8();
 			militarysite.m_nexthealtime = fr.Signed32();
+			if (not (rel17comp)) // compatibility with release 17 savegames
+			{
+
+				uint16_t reqmin = fr.Unsigned16();
+				uint16_t reqmax = fr.Unsigned16();
+				militarysite.m_soldier_upgrade_requirements = RequireAttribute(atrTotal, reqmin, reqmax);
+				militarysite.m_soldier_preference = static_cast<MilitarySite::SoldierPreference>(fr.Unsigned8());
+				militarysite.m_next_swap_soldiers_time = fr.Signed32();
+				militarysite.m_soldier_upgrade_try = 0 != fr.Unsigned8() ? true : false;
+				militarysite.m_doing_upgrade_request = 0 != fr.Unsigned8() ? true : false;
+			}
+			else // Release 17 compatibility branch. Some safe values.
+			{
+				militarysite.m_soldier_preference = MilitarySite::kPrefersRookies;
+				if (2 < militarysite.m_capacity)
+					militarysite.m_soldier_preference = MilitarySite::kPrefersHeroes;
+				militarysite.m_next_swap_soldiers_time = militarysite.m_nexthealtime;
+				militarysite.m_soldier_upgrade_try = false;
+				militarysite.m_doing_upgrade_request = false;
+			}
+
 		} else
 			throw game_data_error
 				(_("unknown/unhandled version %u"), packet_version);
@@ -1032,7 +1111,12 @@ void Map_Buildingdata_Data_Packet::read_trainingsite
 {
 	try {
 		uint16_t const trainingsite_packet_version = fr.Unsigned16();
-		if (trainingsite_packet_version == CURRENT_TRAININGSITE_PACKET_VERSION)
+
+		bool rel17comp = false; // compatibility with release 17
+		if (4 == CURRENT_TRAININGSITE_PACKET_VERSION && 3 == trainingsite_packet_version)
+			rel17comp = true;
+
+		if (trainingsite_packet_version == CURRENT_TRAININGSITE_PACKET_VERSION or rel17comp)
 		{
 			read_productionsite(trainingsite, fr, game, mol);
 
@@ -1049,7 +1133,7 @@ void Map_Buildingdata_Data_Packet::read_trainingsite
 			}
 
 			trainingsite.m_capacity = fr.Unsigned8();
-			trainingsite.m_build_heros = fr.Unsigned8();
+			trainingsite.m_build_heroes = fr.Unsigned8();
 
 			uint8_t const nr_upgrades = fr.Unsigned8();
 			for (uint8_t i = 0; i < nr_upgrades; ++i) {
@@ -1067,6 +1151,21 @@ void Map_Buildingdata_Data_Packet::read_trainingsite
 					fr.Unsigned8();
 					fr.Signed32();
 					fr.Signed32();
+				}
+			}
+			// load premature kick-out state, was not in release 17..
+			if (not rel17comp)
+			{
+				uint16_t mapsize = fr.Unsigned16();
+				while (mapsize)
+				{
+					uint16_t traintype  = fr.Unsigned16();
+					uint16_t trainlevel = fr.Unsigned16();
+					uint16_t trainstall = fr.Unsigned16();
+					uint16_t spresence  = fr.Unsigned8();
+					mapsize--;
+					std::pair<uint16_t, uint8_t> t = std::make_pair(trainstall, spresence);
+					trainingsite.training_failure_count[std::make_pair(traintype, trainlevel)] = t;
 				}
 			}
 		} else
@@ -1367,6 +1466,32 @@ void Map_Buildingdata_Data_Packet::write_warehouse
 
 	if (warehouse.descr().get_isport()) {
 		fw.Unsigned32(mos.get_object_file_index_or_zero(warehouse.m_portdock));
+
+		// Expedition specific stuff
+		if (warehouse.m_portdock->expedition_started()) {
+			Warehouse & n_warehouse(const_cast<Warehouse &>(warehouse));
+			// Expedition workers
+			std::vector<Warehouse::Expedition_Worker *> & ew = n_warehouse.get_expedition_workers();
+			fw.Unsigned8(ew.size());
+			for (uint8_t i = 0; i < ew.size(); ++i) {
+				Request const * const r = ew.at(i)->worker_request;
+				fw.Unsigned8(r ? 1 : 0);
+				if (r)
+					r->Write(fw, game, mos);
+				else {
+					assert(!ew.at(i)->worker_request);
+					Worker const * const w = ew.at(i)->worker;
+					assert(mos.is_object_known(*w));
+					fw.Unsigned32(mos.get_object_file_index(*w));
+				}
+			}
+
+			// Expedition WaresQueues
+			std::vector<WaresQueue *> & l_expedition_wares = n_warehouse.get_wares_queue_vector();
+			fw.Unsigned8(l_expedition_wares.size());
+			for (uint8_t i = 0; i < l_expedition_wares.size(); ++i)
+				l_expedition_wares.at(i)->Write(fw, game, mos);
+		}
 	}
 }
 
@@ -1380,16 +1505,41 @@ void Map_Buildingdata_Data_Packet::write_militarysite
 	fw.Unsigned16(CURRENT_MILITARYSITE_PACKET_VERSION);
 	write_productionsite(militarysite, fw, game, mos);
 
-	if (militarysite.m_soldier_request) {
+	if (militarysite.m_normal_soldier_request) {
 		fw.Unsigned8(1);
-		militarysite.m_soldier_request->Write(fw, game, mos);
+		militarysite.m_normal_soldier_request->Write(fw, game, mos);
 	} else {
 		fw.Unsigned8(0);
 	}
 
+	if (militarysite.m_upgrade_soldier_request)
+	{
+		fw.Unsigned8(1);
+		militarysite.m_upgrade_soldier_request->Write(fw, game, mos);
+	}
+	else
+		fw.Unsigned8(0);
+
+
 	fw.Unsigned8(militarysite.m_didconquer);
 	fw.Unsigned8(militarysite.m_capacity);
 	fw.Signed32(militarysite.m_nexthealtime);
+
+	if (militarysite.m_normal_soldier_request)
+	{
+		if (militarysite.m_upgrade_soldier_request)
+			{
+				throw game_data_error
+				("Internal error in a MilitarySite -- cannot continue. Use previous autosave.");
+			}
+	}
+	fw.Unsigned16(militarysite.m_soldier_upgrade_requirements.getMin());
+	fw.Unsigned16(militarysite.m_soldier_upgrade_requirements.getMax());
+	fw.Unsigned8(militarysite.m_soldier_preference);
+	fw.Signed32(militarysite.m_next_swap_soldiers_time);
+	fw.Unsigned8(militarysite.m_soldier_upgrade_try ? 1 : 0);
+	fw.Unsigned8(militarysite.m_doing_upgrade_request ? 1 : 0);
+
 }
 
 
@@ -1492,7 +1642,7 @@ void Map_Buildingdata_Data_Packet::write_trainingsite
 	}
 
 	fw.Unsigned8(trainingsite.m_capacity);
-	fw.Unsigned8(trainingsite.m_build_heros);
+	fw.Unsigned8(trainingsite.m_build_heroes);
 
 	// upgrades
 	fw.Unsigned8(trainingsite.m_upgrades.size());
@@ -1503,6 +1653,20 @@ void Map_Buildingdata_Data_Packet::write_trainingsite
 		fw.Unsigned8(upgrade.credit);
 		fw.Signed32(upgrade.lastattempt);
 		fw.Signed8(upgrade.lastsuccess);
+	}
+	if (255 < trainingsite.training_failure_count.size())
+		log
+			("Save TrainingSite: Failure counter has ridiculously many entries! (%u)\n",
+			 static_cast<uint16_t>(trainingsite.training_failure_count.size()));
+	fw.Unsigned16(static_cast<uint16_t> (trainingsite.training_failure_count.size()));
+	for
+		(TrainingSite::TrainFailCount_t::const_iterator i = trainingsite.training_failure_count.begin();
+		 i != trainingsite.training_failure_count.end(); i++)
+	{
+		fw.Unsigned16(i->first.first);
+		fw.Unsigned16(i->first.second);
+		fw.Unsigned16(i->second.first);
+		fw.Unsigned8(i->second.second);
 	}
 
 	// DONE

@@ -45,13 +45,6 @@ struct Font_Handler {
 		 const std::string & text,
 		 Align align = Align_CenterLeft,
 		 uint32_t caret = std::numeric_limits<uint32_t>::max());
-	void draw_text_shadow
-		(RenderTarget &,
-		 const TextStyle &,
-		 Point dstpoint,
-		 const std::string & text,
-		 Align align = Align_CenterLeft,
-		 uint32_t caret = std::numeric_limits<uint32_t>::max());
 	uint32_t draw_text_raw(RenderTarget &, const TextStyle &, Point dstpoint, const std::string & text);
 
 	void get_size
@@ -65,8 +58,6 @@ struct Font_Handler {
 		 uint32_t & w, uint32_t & h,
 		 uint32_t wrap = std::numeric_limits<uint32_t>::max());
 	uint32_t get_fontheight(const std::string & name, int32_t size);
-	void do_align
-		(Align, int32_t & dstx, int32_t & dsty, int32_t w, int32_t h);
 
 	// Delete the whole cache.
 	void flush();
@@ -74,14 +65,6 @@ struct Font_Handler {
 private:
 	struct Data;
 	boost::scoped_ptr<Data> d;
-
-private:
-	void draw_caret
-		(RenderTarget &,
-		 const TextStyle &,
-		 Point dstpoint,
-		 const std::string & text,
-		 uint32_t caret);
 };
 
 extern Font_Handler * g_fh;

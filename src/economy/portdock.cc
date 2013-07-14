@@ -20,6 +20,7 @@
 #include "portdock.h"
 
 #include "container_iterate.h"
+#include "wares_queue.h"
 #include "fleet.h"
 #include "log.h"
 #include "logic/game.h"
@@ -30,8 +31,41 @@
 #include "map_io/widelands_map_map_object_loader.h"
 #include "map_io/widelands_map_map_object_saver.h"
 #include "ware_instance.h"
+#include "wui/interactive_gamebase.h"
 
 namespace Widelands {
+
+namespace {
+
+/// Converts the expeditions WaresQueues as well as workers to ShippingItems
+/// \note Should only be called if all wares and workers arrived.
+void expedition_wares
+	(Game & game, const Tribe_Descr& tribe, Warehouse* warehouse, std::vector<ShippingItem>* wares) {
+	std::vector<Warehouse::Expedition_Worker *> & ew = warehouse->get_expedition_workers();
+	for (uint8_t i = 0; i < ew.size(); ++i) {
+		assert(!ew.at(i)->worker_request);
+		wares->push_back(ShippingItem(*ew.at(i)->worker));
+	}
+	// Reset expedition workers list
+	ew.resize(0);
+
+	std::vector<WaresQueue *> & l_expedition_wares = warehouse->get_wares_queue_vector();
+	for (uint8_t i = 0; i < l_expedition_wares.size(); ++i) {
+		Ware_Index wi = l_expedition_wares.at(i)->get_ware();
+		uint32_t numb = l_expedition_wares.at(i)->get_filled();
+		for (uint32_t j = 0; j < numb; ++j) {
+			WareInstance * temp = new WareInstance(wi, tribe.get_ware_descr(wi));
+			temp->init(game);
+			wares->push_back(ShippingItem(*temp));
+		}
+		// Reset wares queue
+		l_expedition_wares.at(i)->set_filled(0);
+		l_expedition_wares.at(i)->set_max_fill(0);
+	}
+}
+
+
+}  // namespace
 
 Map_Object_Descr portdock_descr("portdock", "Port Dock");
 
@@ -39,7 +73,9 @@ PortDock::PortDock() :
 	PlayerImmovable(portdock_descr),
 	m_fleet(0),
 	m_warehouse(0),
-	m_need_ship(false)
+	m_need_ship(false),
+	m_start_expedition(false),
+	m_expedition_ready(false)
 {
 }
 
@@ -144,7 +180,7 @@ void PortDock::set_economy(Economy * e)
 
 
 void PortDock::draw
-		(const Editor_Game_Base &, RenderTarget &, const FCoords, const Point)
+		(const Editor_Game_Base &, RenderTarget &, const FCoords&, const Point&)
 {
 	// do nothing
 }
@@ -290,11 +326,37 @@ void PortDock::ship_arrived(Game & game, Ship & ship)
 		it->end_shipping(game);
 	}
 
+	if (m_expedition_ready)
+		if (ship.get_nritems() < 1) {
+			// Load the ship
+			std::vector<ShippingItem> wares;
+			expedition_wares(game, owner().tribe(), m_warehouse, &wares);
+			while (!wares.empty()) {
+				ship.add_item(game, wares.back());
+				wares.pop_back();
+			}
+			ship.start_task_expedition(game);
+			// The expedition goods are now on the ship, so from now on it is independent from the port
+			// and thus we switch the port to normal, so we could even start a new expedition,
+			cancel_expedition(game);
+			if (upcast(Interactive_GameBase, igb, game.get_ibase()))
+				ship.refresh_window(*igb);
+			return m_fleet->update(game);
+		}
+
 	if (ship.get_nritems() < ship.get_capacity() && !m_waiting.empty()) {
 		uint32_t nrload = std::min<uint32_t>(m_waiting.size(), ship.get_capacity() - ship.get_nritems());
 
 		while (nrload--) {
-			ship.add_item(game, m_waiting.back());
+			// Check if the item has still a valid destination
+			if (m_waiting.back().get_destination(game)) {
+				// Destination is valid, so we load the item onto the ship
+				ship.add_item(game, m_waiting.back());
+			} else {
+				// Obviously the item has no valid destination anymore, so we just carry it back in the warehouse
+				m_waiting.back().set_location(game, m_warehouse);
+				m_waiting.back().end_shipping(game);
+			}
 			m_waiting.pop_back();
 		}
 
@@ -344,6 +406,113 @@ uint32_t PortDock::count_waiting(WareWorker waretype, Ware_Index wareindex)
 	return count;
 }
 
+
+/// \returns whether an expedition was started or is even ready
+bool PortDock::expedition_started() {
+	return m_start_expedition || m_expedition_ready;
+}
+
+/// Start an expedition
+void PortDock::start_expedition() {
+	assert(!m_start_expedition);
+	m_start_expedition = true;
+
+	// Load the buildcosts for the port building + builder
+	const std::map<Ware_Index, uint8_t> & buildcost = m_warehouse->descr().buildcost();
+	size_t const buildcost_size = buildcost.size();
+	// Now try to catch all the wares directly from the portdocks warehouse, if they exist.
+	std::vector<WaresQueue *> & l_expedition_wares = m_warehouse->get_wares_queue_vector();
+	if (m_warehouse->size_of_expedition_wares_queue() != buildcost_size) {
+		// Initialize the wares queue
+		l_expedition_wares.resize(buildcost_size);
+		std::map<Ware_Index, uint8_t>::const_iterator it = buildcost.begin();
+		for (size_t i = 0; i < buildcost_size; ++i, ++it) {
+			// WaresQueues created here get destroyed in the Warehouse destructer
+			WaresQueue & wq = *(l_expedition_wares[i] = new WaresQueue(*m_warehouse, it->first, it->second));
+			wq.set_callback(PortDock::expedition_wares_queue_callback, this);
+		}
+	} else {
+		// reresize the WaresQueues
+		for (size_t i = 0; i < l_expedition_wares.size(); ++i) {
+			l_expedition_wares[i]->set_max_fill(l_expedition_wares[i]->get_max_size());
+		}
+	}
+
+	// The builder is requested in every way, even if it is already inside the portdocks warehouse
+	// This is to ensure that the callback function is at least called once and thus the expedition
+	// is started as soon as all needed materials + builder are ready
+	m_warehouse->get_expedition_workers().push_back(new Warehouse::Expedition_Worker);
+	m_warehouse->get_expedition_workers().back()->worker_request =
+		new Request
+			(*m_warehouse,
+			 owner().tribe().safe_worker_index("builder"),
+			 Warehouse::request_expedition_worker_callback,
+			 wwWORKER);
+
+	// Update the user interface
+	if (upcast(Interactive_GameBase, igb, owner().egbase().get_ibase()))
+		m_warehouse->refresh_options(*igb);
+}
+
+
+/// Called everytime a ware is added to the expedition's wares queue
+void PortDock::expedition_wares_queue_callback(Game & game, WaresQueue *, Ware_Index, void * const data)
+{
+	PortDock & pd = *static_cast<PortDock *>(data);
+	pd.check_expedition_wares_and_workers(game);
+}
+
+/// Gets called if a ware or a worker arrives to check if everything is available
+void PortDock::check_expedition_wares_and_workers(Game & game) {
+	set_expedition_ready(false);
+	for (size_t n = 0; n < m_warehouse->size_of_expedition_wares_queue(); ++n) {
+		WaresQueue * wq = m_warehouse->get_wares_queue(n);
+		if (wq->get_max_fill() != wq->get_filled())
+			return;
+	}
+	const std::vector<Warehouse::Expedition_Worker *> & ew = m_warehouse->get_expedition_workers();
+	for (size_t i = 0; i < ew.size(); ++i) {
+		if (ew.at(i)->worker_request)
+			return;
+	}
+	// If this point is reached, all needed wares and workers are stored and waiting for a ship
+	set_expedition_ready(true);
+	get_fleet()->update(game);
+}
+
+void PortDock::cancel_expedition(Game & game) {
+	// Reset
+	m_start_expedition = false;
+	m_expedition_ready = false;
+
+	// Put all wares from the WaresQueues back into the warehouse
+	const std::vector<WaresQueue *> & l_expedition_wares = m_warehouse->get_wares_queue_vector();
+	for (uint8_t i = 0; i < l_expedition_wares.size(); ++i) {
+		m_warehouse->insert_wares(l_expedition_wares.at(i)->get_ware(), l_expedition_wares.at(i)->get_filled());
+		l_expedition_wares.at(i)->set_filled(0);
+		l_expedition_wares.at(i)->set_max_fill(0);
+	}
+
+	// Send all workers from the expedition list back inside the warehouse
+	std::vector<Warehouse::Expedition_Worker *> & ew = m_warehouse->get_expedition_workers();
+	for (uint8_t i = 0; i < ew.size(); ++i) {
+		if (ew.at(i)->worker_request) {
+			delete &ew.at(i)->worker_request;
+		} else {
+			Worker * temp = ew.at(i)->worker;
+			ew.at(i)->worker = 0;
+			m_warehouse->incorporate_worker(game, *temp);
+		}
+	}
+	// Reset expedition workers list
+	ew.resize(0);
+
+	// Update the user interface
+	if (upcast(Interactive_GameBase, igb, owner().egbase().get_ibase()))
+		m_warehouse->refresh_options(*igb);
+}
+
+
 void PortDock::log_general_info(const Editor_Game_Base & egbase)
 {
 	PlayerImmovable::log_general_info(egbase);
@@ -364,7 +533,7 @@ void PortDock::log_general_info(const Editor_Game_Base & egbase)
 	}
 }
 
-#define PORTDOCK_SAVEGAME_VERSION 2
+#define PORTDOCK_SAVEGAME_VERSION 3
 
 PortDock::Loader::Loader() : m_warehouse(0)
 {
@@ -391,6 +560,15 @@ void PortDock::Loader::load(FileRead & fr, uint8_t version)
 		m_waiting.resize(fr.Unsigned32());
 		container_iterate(std::vector<ShippingItem::Loader>, m_waiting, it) {
 			it->load(fr);
+		}
+
+		if (version >= 3) {
+			// All the other expedition specific stuff is saved in the warehouse
+			pd.m_start_expedition = (fr.Unsigned8() == 1) ? true : false;
+			pd.m_expedition_ready = (fr.Unsigned8() == 1) ? true : false;
+		} else {
+			pd.m_start_expedition = false;
+			pd.m_expedition_ready = false;
 		}
 	}
 }
@@ -465,6 +643,10 @@ void PortDock::save(Editor_Game_Base & egbase, Map_Map_Object_Saver & mos, FileW
 	container_iterate(std::vector<ShippingItem>, m_waiting, it) {
 		it->save(egbase, mos, fw);
 	}
+
+	// Expedition specific stuff
+	fw.Unsigned8(m_start_expedition ? 1 : 0);
+	fw.Unsigned8(m_expedition_ready ? 1 : 0);
 }
 
 } // namespace Widelands

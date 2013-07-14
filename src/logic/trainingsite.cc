@@ -48,6 +48,7 @@ TrainingSite_Descr::TrainingSite_Descr
 	//  FIXME This is currently hardcoded for "soldier" but should allow any
 	//  FIXME soldier type name.
 	m_num_soldiers      (global_s.get_safe_int("soldier_capacity")),
+	m_max_stall (global_s.get_safe_int("trainer_patience")),
 
 m_train_hp          (false),
 m_train_attack      (false),
@@ -138,6 +139,12 @@ int32_t TrainingSite_Descr::get_max_level(const tAttribute at) const {
 	}
 }
 
+int32_t
+TrainingSite_Descr::get_max_stall() const
+{
+	return m_max_stall;
+}
+
 /*
 =============================
 
@@ -150,7 +157,7 @@ TrainingSite::TrainingSite(const TrainingSite_Descr & d) :
 ProductionSite   (d),
 m_soldier_request(0),
 m_capacity       (descr().get_max_number_of_soldiers()),
-m_build_heros    (false),
+m_build_heroes    (false),
 m_result         (Failed)
 {
 	// Initialize this in the constructor so that loading code may
@@ -158,6 +165,24 @@ m_result         (Failed)
 	calc_upgrades();
 	m_current_upgrade = 0;
 	set_post_timer(6000);
+	training_failure_count.clear();
+	max_stall_val = training_state_multiplier * d.get_max_stall();
+
+	if (d.get_train_hp())
+		init_kick_state(atrHP, d);
+	if (d.get_train_attack())
+		init_kick_state(atrAttack, d);
+	if (d.get_train_defense())
+		init_kick_state(atrDefense, d);
+	if (d.get_train_evade())
+		init_kick_state(atrEvade, d);
+}
+void
+TrainingSite::init_kick_state(const tAttribute & art, const TrainingSite_Descr & d)
+{
+		// Now with kick-out state saving implemented, initializing is an overkill
+		for (int t = d.get_min_level(art); t <= d.get_max_level(art); t++)
+			trainingAttempted(art, t);
 }
 
 
@@ -448,6 +473,82 @@ void TrainingSite::drop_unupgradable_soldiers(Game &)
 }
 
 /**
+ * Drop all the soldiers that can not be upgraded further at this level of resourcing.
+ *
+ */
+void TrainingSite::drop_stalled_soldiers(Game &)
+{
+	Soldier * soldier_to_drop = NULL;
+	uint32_t highest_soldier_level_seen = 0;
+
+	for (uint32_t i = 0; i < m_soldiers.size(); ++i)
+	{
+		uint32_t this_soldier_level = m_soldiers[i]->get_level(atrTotal);
+
+		bool this_soldier_is_safe = false;
+		if (this_soldier_level <= highest_soldier_level_seen)
+		{
+			// Skip the innermost loop for soldiers that would not be kicked out anyway.
+			// level-zero soldiers are excepted from kick-out implicitly. This is intentional.
+			this_soldier_is_safe = true;
+		}
+		else
+		{
+			std::vector<Upgrade>::iterator it = m_upgrades.begin();
+			for (; it != m_upgrades.end(); ++it)
+			if  (! this_soldier_is_safe)
+			{
+				// Soldier is safe, if he:
+				//  - is below maximum, and
+				//  - is not in a stalled state
+				// Check done separately for each art.
+				int32_t level = m_soldiers[i]->get_level(it->attribute);
+
+				 // Below maximum -check
+				if (level > it->max)
+				{
+					break;
+				}
+
+				TypeAndLevel_t train_tl(it->attribute, level);
+				TrainFailCount_t::iterator tstep = training_failure_count.find(train_tl);
+				if (tstep ==  training_failure_count.end())
+					{
+						log("\nTrainingSite::drop_stalled_soldiers: ");
+						log("training step %d,%d not found in this school!\n", it->attribute, level);
+						break;
+					}
+
+				tstep->second.second = 1; // a soldier is present at this level
+
+				// Stalled state -check
+				if (max_stall_val > tstep->second.first)
+				{
+					this_soldier_is_safe = true;
+					break;
+				}
+			}
+		}
+		if (!this_soldier_is_safe)
+		{
+			// Make this soldier a kick-out candidate
+			soldier_to_drop = m_soldiers[i];
+			highest_soldier_level_seen = this_soldier_level;
+		}
+	}
+
+	// Finally drop the soldier.
+	if (NULL != soldier_to_drop)
+		{
+			log("TrainingSite::drop_stalled_soldiers: Kicking somebody out.\n");
+			dropSoldier (*soldier_to_drop);
+		}
+}
+
+
+
+
+/**
  * In addition to advancing the program, update soldier status.
  */
 void TrainingSite::act(Game & game, uint32_t const data)
@@ -467,9 +568,15 @@ void TrainingSite::program_end(Game & game, Program_Result const result)
 		if (m_result == Completed) {
 			drop_unupgradable_soldiers(game);
 			m_current_upgrade->lastsuccess = true;
+			m_current_upgrade->failures = 0;
+		}
+		else {
+			m_current_upgrade->failures++;
+			drop_stalled_soldiers(game);
 		}
 		m_current_upgrade = 0;
 	}
+	trainingDone();
 }
 
 
@@ -537,7 +644,7 @@ void TrainingSite::start_upgrade(Game & game, Upgrade & upgrade)
 	if (upgrade.lastsuccess || upgrade.lastattempt < 0) {
 		// Start greedily on the first ever attempt, and restart greedily
 		// after a sucessful upgrade
-		if (m_build_heros)
+		if (m_build_heroes)
 			level = maxlevel;
 		else
 			level = minlevel;
@@ -545,7 +652,7 @@ void TrainingSite::start_upgrade(Game & game, Upgrade & upgrade)
 		// The last attempt wasn't successful;
 		// This happens e.g. when lots of low-level soldiers are present,
 		// but the prerequisites for improving them aren't.
-		if (m_build_heros) {
+		if (m_build_heroes) {
 			level = upgrade.lastattempt - 1;
 			if (level < minlevel)
 				level = maxlevel;
@@ -617,6 +724,7 @@ void TrainingSite::add_upgrade
 	u.credit = 0;
 	u.lastattempt = -1;
 	u.lastsuccess = false;
+	u.failures = 0;
 	m_upgrades.push_back(u);
 }
 
@@ -636,6 +744,50 @@ void TrainingSite::calc_upgrades() {
 		add_upgrade(atrDefense, "upgrade_soldier_defense_");
 	if (descr().get_train_evade())
 		add_upgrade(atrEvade, "upgrade_soldier_evade_");
+}
+
+
+void
+TrainingSite::trainingAttempted(uint32_t type, uint32_t level)
+	{
+	        TypeAndLevel_t key(type, level);
+		if (training_failure_count.find(key) == training_failure_count.end())
+			training_failure_count[key]  = std::make_pair(training_state_multiplier, 0);
+		else
+			training_failure_count[key].first +=  training_state_multiplier;
+	}
+
+/**
+ * Called whenever it was possible to promote another guy
+ */
+
+void
+TrainingSite::trainingSuccessful(uint32_t type, uint32_t level)
+{
+	TypeAndLevel_t key(type, level);
+	// Here I assume that key exists: training has been attempted before it can succeed.
+	training_failure_count[key].first = 0;
+}
+
+void
+TrainingSite::trainingDone()
+{
+	TrainFailCount_t::iterator it;
+	log("TrainingSite::trainingDone() ");
+	for (it = training_failure_count.begin(); it != training_failure_count.end(); it++)
+	{
+		// If a soldier is present at this training level, deteoriate
+		if (it->second.second)
+		{
+			it->second.first++;
+			it->second.second = 0;
+		}
+		else // If no soldier, let's become optimistic
+		if (0 < it->second.first)
+			it->second.first--;
+		log("%d.%d %3d || ", it->first.first, it->first.second, it->second.first);
+	}
+	log(" / %3d\n", max_stall_val);
 }
 
 }

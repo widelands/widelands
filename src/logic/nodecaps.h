@@ -38,8 +38,8 @@ enum NodeCaps {
 	 * size!)*/
 	BUILDCAPS_MINE = 8,
 
-	/** (only if BUILDCAPS_BIG): can we build a port on this field? This
-	 * gets automatically set for BUILDCAPS_BIG fields that have a
+	/** (only if BUILDCAPS_BIG): can we build a port on this field? This gets set
+	 * for BUILDCAPS_BIG fields that have a Map::is_port_space() as well as a
 	 * swimmable second-order neighbour
 	 */
 	BUILDCAPS_PORT = 16,

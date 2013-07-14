@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002, 2008 by the Widelands Development Team
+ * Copyright (C) 2002, 2008, 2013 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -154,6 +154,7 @@ private:
 	uint8_t * load_s2mf_section(FileRead &, int32_t width, int32_t height);
 	void load_s2mf_header();
 	void load_s2mf(Widelands::Editor_Game_Base &);
+	void postload_fix_conversion(Widelands::Editor_Game_Base &);
 };
 
 

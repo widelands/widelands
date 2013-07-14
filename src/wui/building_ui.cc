@@ -17,8 +17,10 @@
  *
  */
 
+#include "buildingwindow.h"
 #include "logic/building.h"
 #include "ui_basic/window.h"
+#include "upcast.h"
 
 using Widelands::Building;
 
@@ -26,7 +28,7 @@ using Widelands::Building;
  * Create the building's options window if necessary and bring it to
  * the top to be seen by the player.
  */
-void Building::show_options(Interactive_GameBase & igbase)
+void Building::show_options(Interactive_GameBase & igbase, bool avoid_fastclick)
 {
 	if (m_optionswindow) {
 		if (m_optionswindow->is_minimal())
@@ -34,7 +36,8 @@ void Building::show_options(Interactive_GameBase & igbase)
 		m_optionswindow->move_to_top();
 	} else {
 		create_options_window(igbase, m_optionswindow);
-
+		if (upcast(Building_Window, bw, m_optionswindow))
+			bw->set_avoid_fastclick(avoid_fastclick);
 		// Run a first think here so that certain things like caps buttons
 		// get properly initialized
 		m_optionswindow->think();
@@ -47,4 +50,18 @@ void Building::show_options(Interactive_GameBase & igbase)
 void Building::hide_options()
 {
 	delete m_optionswindow;
+	m_optionswindow = NULL;
+}
+
+/**
+ * refreshs the option window of a building - useful if some ui elements have to be removed or added
+ */
+void Building::refresh_options(Interactive_GameBase & igb) {
+	// Only do something if there is actually a window
+	if (m_optionswindow) {
+		Point window_position = m_optionswindow->get_pos();
+		hide_options();
+		show_options(igb, true);
+		m_optionswindow->set_pos(window_position);
+	}
 }

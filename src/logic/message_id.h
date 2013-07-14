@@ -21,11 +21,8 @@
 #define MESSAGE_ID_H
 
 #include <stdint.h>
-#ifdef _MSC_VER
-#ifndef __attribute__
-#define __attribute__(x)
-#endif
-#endif
+
+#include "port.h"
 
 namespace Widelands {
 
@@ -46,9 +43,9 @@ struct Message_Id {
 	/// Constant value for no message.
 	static Message_Id Null() {Message_Id result; result.id = 0; return result;}
 
-	bool operator== (Message_Id const other) const {return id == other.id;}
-	bool operator!= (Message_Id const other) const {return id != other.id;}
-	bool operator<  (Message_Id const other) const {return id <  other.id;}
+	bool operator== (const Message_Id& other) const {return id == other.id;}
+	bool operator!= (const Message_Id& other) const {return id != other.id;}
+	bool operator<  (const Message_Id& other) const {return id <  other.id;}
 	operator bool     () const {return *this != Null();}
 	uint32_t value() const {return id;}
 

@@ -559,7 +559,8 @@ std::string Building::info_string(const std::string & format) {
 			}
 		} else
 			result << *i.current;
-	return as_uifont(result.str());
+	const std::string result_str = result.str();
+	return result_str.empty() ? result_str : as_uifont(result_str);
 }
 
 
@@ -721,10 +722,7 @@ Draw the building.
 ===============
 */
 void Building::draw
-	(const Editor_Game_Base &       game,
-	 RenderTarget           &       dst,
-	 FCoords                  const coords,
-	 Point                    const pos)
+	(const Editor_Game_Base& game, RenderTarget& dst, const FCoords& coords, const Point& pos)
 {
 	if (coords == m_position) { // draw big buildings only once
 		dst.drawanim
@@ -744,10 +742,7 @@ Draw overlay help strings when enabled.
 ===============
 */
 void Building::draw_help
-	(const Editor_Game_Base &       game,
-	 RenderTarget           &       dst,
-	 FCoords,
-	 Point                    const pos)
+	(const Editor_Game_Base& game, RenderTarget& dst, const FCoords&, const Point& pos)
 {
 	const Interactive_GameBase & igbase =
 		ref_cast<Interactive_GameBase const, Interactive_Base const>
@@ -755,9 +750,10 @@ void Building::draw_help
 	uint32_t const dpyflags = igbase.get_display_flags();
 
 	if (dpyflags & Interactive_Base::dfShowCensus) {
-		dst.blit
-			(pos - Point(0, 48), UI::g_fh1->render(info_string(igbase.building_census_format())),
-			 CM_Normal, UI::Align_Center);
+		const std::string info = info_string(igbase.building_census_format());
+		if (!info.empty()) {
+			dst.blit(pos - Point(0, 48), UI::g_fh1->render(info), CM_Normal, UI::Align_Center);
+		}
 	}
 
 	if (dpyflags & Interactive_Base::dfShowStatistics) {
@@ -766,9 +762,10 @@ void Building::draw_help
 				(!iplayer->player().see_all() &&
 				 iplayer->player().is_hostile(*get_owner()))
 				return;
-		dst.blit
-			(pos - Point(0, 35), UI::g_fh1->render(info_string(igbase.building_statistics_format())),
-			 CM_Normal, UI::Align_Center);
+		const std::string info = info_string(igbase.building_statistics_format());
+		if (!info.empty()) {
+			dst.blit(pos - Point(0, 35), UI::g_fh1->render(info), CM_Normal, UI::Align_Center);
+		}
 	}
 }
 

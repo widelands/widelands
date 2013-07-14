@@ -404,7 +404,7 @@ uint32_t Soldier::get_level(tAttribute const at) const {
 	case atrTotal:
 		return m_hp_level + m_attack_level + m_defense_level + m_evade_level;
 	default:
-		throw wexception ("Soldier::get_level attribute not identified.");
+		throw wexception ("Soldier::get_level attribute %d not identified.", at);
 	}
 }
 
@@ -551,7 +551,7 @@ Point Soldier::calc_drawpos
  * Draw this soldier. This basically draws him as a worker, but add hitpoints
  */
 void Soldier::draw
-	(const Editor_Game_Base & game, RenderTarget & dst, Point const pos) const
+	(const Editor_Game_Base & game, RenderTarget & dst, const Point& pos) const
 {
 	if (const uint32_t anim = get_current_anim()) {
 

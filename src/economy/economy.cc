@@ -590,6 +590,7 @@ void Economy::_split(const std::set<OPtr<Flag> > & flags)
 
 	container_iterate_const(std::set<OPtr<Flag> >, flags, it) {
 		Flag & flag = *it.current->get(owner().egbase());
+		assert(m_flags.size() > 1);  // We will not be deleted in remove_flag, right?
 		remove_flag(flag);
 		e.add_flag(flag);
 	}
@@ -768,7 +769,7 @@ void Economy::_balance_requestsupply(Game & game)
 	_process_requests(game, rsps);
 
 	//  Now execute request/supply pairs.
-	while (rsps.queue.size()) {
+	while (!rsps.queue.empty()) {
 		RequestSupplyPair rsp = rsps.queue.top();
 
 		rsps.queue.pop();

@@ -57,7 +57,7 @@ struct Bob;
 struct BaseImmovable;
 
 // Field is used so often, make sure it is as small as possible.
-#pragma pack(1)
+#pragma pack(push, 1)
 /// a field like it is represented in the game
 /// \todo This is all one evil hack :(
 struct Field {
@@ -142,7 +142,7 @@ public:
 	Terrain_Index terrain_r   () const throw () {return terrains.r;}
 	void          set_terrains(const Terrains & i) throw () {terrains = i;}
 	void set_terrain
-		(const TCoords<FCoords>::TriangleIndex t, Terrain_Index const i)
+		(const TCoords<FCoords>::TriangleIndex& t, Terrain_Index const i)
 		throw ()
 	{
 		if (t == TCoords<FCoords>::D) set_terrain_d(i);
@@ -233,10 +233,10 @@ public:
 			MAX_FIELD_HEIGHT       < h ? MAX_FIELD_HEIGHT : h;
 	}
 };
-#pragma pack(0)
+#pragma pack(pop)
 
 // Check that Field is tightly packed.
-compile_assert(sizeof(Field) <= sizeof(void*)*2 + 10);
+compile_assert(sizeof(Field) <= sizeof(void *) * 2 + 10);
 }
 
 #endif

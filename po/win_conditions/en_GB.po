@@ -7,35 +7,35 @@ msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2012-10-04 15:25+0000\n"
-"PO-Revision-Date: 2010-11-29 11:08+0000\n"
-"Last-Translator: LiSrt <Unknown>\n"
+"POT-Creation-Date: 2013-06-16 09:11+0000\n"
+"PO-Revision-Date: 2013-06-02 11:46+0000\n"
+"Last-Translator: Andi Chandler <Unknown>\n"
 "Language-Team: English (United Kingdom) <en_GB@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-10-05 04:40+0000\n"
-"X-Generator: Launchpad (build 16061)\n"
+"X-Launchpad-Export-Date: 2013-06-17 05:16+0000\n"
+"X-Generator: Launchpad (build 16667)\n"
 
 #: ../../scripting/win_condition_texts.lua:31
 msgid "%i trees."
-msgstr ""
+msgstr "%i trees."
 
 #: ../../scripting/win_condition_texts.lua:54
 msgid "%s %s %i%% of the land (%i of %i)."
-msgstr ""
+msgstr "%s %s %i%% of the land (%i of %i)."
 
 #: ../../scripting/win_condition_texts.lua:30
 msgid "%s had "
-msgstr ""
+msgstr "%s had "
 
 #: ../../scripting/win_condition_texts.lua:28
 msgid "%s has %i trees at the moment."
-msgstr ""
+msgstr "%s has %i trees at the moment."
 
 #: ../../scripting/win_condition_texts.lua:46
 msgid "%s owns more than half of the maps area."
-msgstr ""
+msgstr "%s owns more than half of the maps area."
 
 #: ../../scripting/win_conditions/04_wood_gnome.lua:16
 msgid ""
@@ -57,7 +57,7 @@ msgstr "Collectors"
 
 #: ../../scripting/win_condition_texts.lua:2
 msgid "Congratulations!"
-msgstr ""
+msgstr "Congratulations!"
 
 #: ../../scripting/win_conditions/03_territorial_time.lua:15
 msgid ""
@@ -66,6 +66,10 @@ msgid ""
 "least 20 minutes or the one with the most territory after 4 hours, whichever "
 "comes first."
 msgstr ""
+"Each player or team tries to obtain more than half of the maps' area. The "
+"winner will be the player or the team that is able to keep that area for at "
+"least 20 minutes or the one with the most territory after 4 hours, whichever "
+"comes first."
 
 #: ../../scripting/win_conditions/03_territorial_lord.lua:15
 msgid ""
@@ -83,32 +87,32 @@ msgstr "Endless Game"
 
 #: ../../scripting/win_conditions/05_endless_game_fogless.lua:12
 msgid "Endless Game (no fog)"
-msgstr ""
+msgstr "Endless Game (no fog)"
 
 #: ../../scripting/win_condition_texts.lua:49
 msgid "Keep it for %i more minutes to win the game."
-msgstr ""
+msgstr "Keep it for %i more minutes to win the game."
 
 #: ../../scripting/win_condition_texts.lua:23
 #: ../../scripting/win_condition_texts.lua:29
 msgid "Player overview:"
-msgstr ""
+msgstr "Player overview:"
 
 #: ../../scripting/win_condition_texts.lua:41
 msgid "Points"
-msgstr ""
+msgstr "Points"
 
 #: ../../scripting/win_condition_texts.lua:22
 msgid "Status"
-msgstr ""
+msgstr "Status"
 
 #: ../../scripting/win_condition_texts.lua:38
 msgid "Status for %s<br>"
-msgstr ""
+msgstr "Status for %s<br>"
 
 #: ../../scripting/win_condition_texts.lua:45
 msgid "Team %i"
-msgstr ""
+msgstr "Team %i"
 
 #: ../../scripting/win_conditions/03_territorial_lord.lua:13
 msgid "Territorial Lord"
@@ -116,15 +120,15 @@ msgstr "Territorial Lord"
 
 #: ../../scripting/win_conditions/03_territorial_time.lua:13
 msgid "Territorial Time"
-msgstr ""
+msgstr "Territorial Time"
 
 #: ../../scripting/win_condition_texts.lua:27
 msgid "The game will end in %i minutes."
-msgstr ""
+msgstr "The game will end in %i minutes."
 
 #: ../../scripting/win_condition_texts.lua:40
 msgid "The game will end in %s."
-msgstr ""
+msgstr "The game will end in %s."
 
 #: ../../scripting/win_conditions/01_defeat_all.lua:14
 msgid "The tribe or team that can defeat all others wins the game!"
@@ -132,7 +136,7 @@ msgstr "The tribe or team that can defeat all others wins the game!"
 
 #: ../../scripting/win_condition_texts.lua:32
 msgid "The winner is %s "
-msgstr ""
+msgstr "The winner is %s "
 
 #: ../../scripting/win_conditions/00_endless_game.lua:14
 msgid "This is an endless game without rules."
@@ -140,15 +144,15 @@ msgstr "This is an endless game without rules."
 
 #: ../../scripting/win_conditions/05_endless_game_fogless.lua:13
 msgid "This is an endless game without rules. Fog of war is disabled."
-msgstr ""
+msgstr "This is an endless game without rules. Fog of war is disabled."
 
 #: ../../scripting/win_condition_texts.lua:39
 msgid "Total: %i points"
-msgstr ""
+msgstr "Total: %i points"
 
 #: ../../scripting/win_condition_texts.lua:34
 msgid "Trees owned"
-msgstr ""
+msgstr "Trees owned"
 
 #: ../../scripting/win_conditions/04_wood_gnome.lua:13
 msgid "Wood Gnome"
@@ -156,11 +160,11 @@ msgstr "Wood Gnome"
 
 #: ../../scripting/win_condition_texts.lua:7
 msgid "You are defeated!"
-msgstr ""
+msgstr "You are defeated!"
 
 #: ../../scripting/win_condition_texts.lua:13
 msgid "You are the winner!"
-msgstr ""
+msgstr "You are the winner!"
 
 #: ../../scripting/win_conditions/02_collectors.lua:15
 msgid ""
@@ -174,35 +178,36 @@ msgstr ""
 msgid ""
 "You have nothing to command left. If you want, you may continue as spectator."
 msgstr ""
+"You have nothing to command left. If you want, you may continue as spectator."
 
 #: ../../scripting/win_condition_texts.lua:3
 msgid "You have won this game!"
-msgstr ""
+msgstr "You have won this game!"
 
 #: ../../scripting/win_condition_texts.lua:17
 msgid "You lost"
-msgstr ""
+msgstr "You lost"
 
 #: ../../scripting/win_condition_texts.lua:48
 msgid "You own more than half of the maps area."
-msgstr ""
+msgstr "You own more than half of the maps area."
 
 #: ../../scripting/win_condition_texts.lua:47
 msgid "You still got %i minutes to prevent a victory."
-msgstr ""
+msgstr "You still got %i minutes to prevent a victory."
 
 #: ../../scripting/win_condition_texts.lua:12
 msgid "You won"
-msgstr ""
+msgstr "You won"
 
 #: ../../scripting/win_condition_texts.lua:18
 msgid "You've lost this game!"
-msgstr ""
+msgstr "You've lost this game!"
 
 #: ../../scripting/win_condition_texts.lua:53
 msgid "game will end in %i minutes."
-msgstr ""
+msgstr "game will end in %i minutes."
 
 #: ../../scripting/win_condition_texts.lua:33
 msgid "with %i trees."
-msgstr ""
+msgstr "with %i trees."

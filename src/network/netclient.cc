@@ -17,6 +17,13 @@
  *
  */
 
+#include <boost/lexical_cast.hpp>
+#include <boost/scoped_ptr.hpp>
+#include <config.h>
+#ifndef HAVE_VARARRAY
+#include <climits>
+#endif
+
 #include "netclient.h"
 
 #include "build_info.h"
@@ -44,12 +51,6 @@
 #include "ui_basic/messagebox.h"
 #include "ui_basic/progresswindow.h"
 
-#include <boost/lexical_cast.hpp>
-#include <boost/scoped_ptr.hpp>
-#include <config.h>
-#ifndef HAVE_VARARRAY
-#include <climits>
-#endif
 
 struct NetClientImpl {
 	GameSettings settings;
@@ -749,7 +750,7 @@ void NetClient::handle_packet(RecvPacket & packet)
 #ifdef HAVE_VARARRAY
 					char complete[bytes];
 #else
-					std::auto_ptr<char> complete_buf(new char[bytes]);
+					boost::scoped_array<char> complete_buf(new char[bytes]);
 					if (!complete_buf.get()) throw wexception("Out of memory");
 					char * complete = complete_buf.get();
 #endif
@@ -840,7 +841,7 @@ void NetClient::handle_packet(RecvPacket & packet)
 #ifdef HAVE_VARARRAY
 			char complete[file->bytes];
 #else
-			std::auto_ptr<char> complete_buf(new char[file->bytes]);
+			boost::scoped_array<char> complete_buf(new char[file->bytes]);
 			if (!complete_buf.get()) throw wexception("Out of memory");
 			char * complete = complete_buf.get();
 #endif

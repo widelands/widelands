@@ -271,7 +271,6 @@ Section::Value * Section::get_val(char const * const name)
 			i.current->mark_used();
 			return &*i.current;
 		}
-
 	return 0;
 }
 

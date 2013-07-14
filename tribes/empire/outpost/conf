@@ -3,6 +3,7 @@ max_soldiers=3
 heal_per_second=100
 conquers=7
 enhancement=barrier
+prefer_heroes=false
 
 [buildcost]
 trunk=1

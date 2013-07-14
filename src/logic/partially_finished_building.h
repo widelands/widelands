@@ -56,15 +56,14 @@ public:
 	WaresQueue * get_waresqueue(uint32_t const idx) {return m_wares[idx];}
 
 	uint32_t get_built_per64k() const;
+	Request * get_builder_request() {return m_builder_request;}
+	static void request_builder_callback(Game &, Request &, Ware_Index, Worker *, PlayerImmovable &);
 
 private:
 	void request_builder(Game &);
-	static void request_builder_callback
-		(Game &, Request &, Ware_Index, Worker *, PlayerImmovable &);
+
 
 	virtual uint32_t build_step_time() const = 0;
-
-	//virtual void draw(const Editor_Game_Base &, RenderTarget &, FCoords, Point);
 
 protected:
 	const Building_Descr * m_building; // type of building that was or will become

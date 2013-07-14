@@ -141,13 +141,13 @@ void RenderTarget::draw_line
 /**
  * Clip against window and pass those primitives along to the bitmap.
  */
-void RenderTarget::draw_rect(Rect r, const RGBColor clr)
+void RenderTarget::draw_rect(Rect r, const RGBColor& clr)
 {
 	if (clip(r))
 		m_surface->draw_rect(r, clr);
 }
 
-void RenderTarget::fill_rect(Rect r, const RGBAColor clr)
+void RenderTarget::fill_rect(Rect r, const RGBAColor& clr)
 {
 	if (clip(r))
 		m_surface->fill_rect(r, clr);

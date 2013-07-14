@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2013-03-09 16:57+0000\n"
+"POT-Creation-Date: 2013-07-13 15:38+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -17,11 +17,6 @@ msgstr ""
 #: ../../tribes/atlanteans/golden_tabard/conf:1
 msgid ""
 "A golden tabard is produced in an Atlatean weaving-mill out of gold yarn. It is used in the trainingscamp - together with food - to train soldiers from healthpoints level 0 to level 1."
-msgstr ""
-
-#: ../../tribes/atlanteans/saw/conf:1
-msgid ""
-"A saw is needed by the woodcutter and the carpenter. It is produced by the toolsmith."
 msgstr ""
 
 #: ../../tribes/atlanteans/ship/conf:1
@@ -983,8 +978,8 @@ msgid ""
 "Shovels are needed for proper handling of plants. Therefore the forester and the blackroot farmer are using them. They are produced by the toolsmith."
 msgstr ""
 
-#: ../../tribes/atlanteans/dungeon/conf:30
-#: ../../tribes/atlanteans/labyrinth/conf:36
+#: ../../tribes/atlanteans/dungeon/conf:31
+#: ../../tribes/atlanteans/labyrinth/conf:37
 msgid ""
 "Sleep"
 msgstr ""
@@ -1173,12 +1168,17 @@ msgstr ""
 
 #: ../../tribes/atlanteans/hammer/conf:1
 msgid ""
-"The hammer is an essential tool. It is needed by the geologist, the builder and all smiths. Make sure you always got some in reserve! It is produced by the toolsmith."
+"The hammer is an essential tool. It is needed by geologists, builders, weaponsmiths and armoursmiths. Make sure you always got some in reserve! It is produced by the toolsmith."
 msgstr ""
 
 #: ../../tribes/atlanteans/long_trident/conf:1
 msgid ""
 "The long trident is the first trident in the training of soldiers. It is produced in the weapon smithy and used in the dungeon - together with food - to train soldiers from attack level 0 to level 1."
+msgstr ""
+
+#: ../../tribes/atlanteans/saw/conf:1
+msgid ""
+"The saw is needed by the woodcutter and the toolsmith. It is produced by the toolsmith."
 msgstr ""
 
 #: ../../tribes/atlanteans/advanced_shield/conf:1
@@ -1287,92 +1287,92 @@ msgid ""
 "Trunks are the base for planks, which are used in nearly every building of the Atlanteans. Besides the sawmill, the charcoal burner, the toolsmithy and the smokery also need trunks for their work."
 msgstr ""
 
-#: ../../tribes/atlanteans/dungeon/conf:31
+#: ../../tribes/atlanteans/dungeon/conf:32
 msgid ""
 "Upgrade soldier attack 0"
 msgstr ""
 
-#: ../../tribes/atlanteans/dungeon/conf:32
+#: ../../tribes/atlanteans/dungeon/conf:33
 msgid ""
 "Upgrade soldier attack 0 (only for compatibility with old savegames (build13))"
 msgstr ""
 
-#: ../../tribes/atlanteans/dungeon/conf:33
+#: ../../tribes/atlanteans/dungeon/conf:34
 msgid ""
 "Upgrade soldier attack 1"
 msgstr ""
 
-#: ../../tribes/atlanteans/dungeon/conf:34
+#: ../../tribes/atlanteans/dungeon/conf:35
 msgid ""
 "Upgrade soldier attack 1 (only for compatibility with old savegames (build13))"
 msgstr ""
 
-#: ../../tribes/atlanteans/dungeon/conf:35
+#: ../../tribes/atlanteans/dungeon/conf:36
 msgid ""
 "Upgrade soldier attack 2"
 msgstr ""
 
-#: ../../tribes/atlanteans/dungeon/conf:36
+#: ../../tribes/atlanteans/dungeon/conf:37
 msgid ""
 "Upgrade soldier attack 2 (only for compatibility with old savegames (build13))"
 msgstr ""
 
-#: ../../tribes/atlanteans/dungeon/conf:37
+#: ../../tribes/atlanteans/dungeon/conf:38
 msgid ""
 "Upgrade soldier attack 3"
 msgstr ""
 
-#: ../../tribes/atlanteans/dungeon/conf:38
+#: ../../tribes/atlanteans/dungeon/conf:39
 msgid ""
 "Upgrade soldier attack 3 (only for compatibility with old savegames (build13))"
 msgstr ""
 
-#: ../../tribes/atlanteans/labyrinth/conf:37
+#: ../../tribes/atlanteans/labyrinth/conf:38
 msgid ""
 "Upgrade soldier defense 0"
 msgstr ""
 
-#: ../../tribes/atlanteans/labyrinth/conf:38
+#: ../../tribes/atlanteans/labyrinth/conf:39
 msgid ""
 "Upgrade soldier defense 0 (only for compatibility with old savegames (build13))"
 msgstr ""
 
-#: ../../tribes/atlanteans/labyrinth/conf:39
+#: ../../tribes/atlanteans/labyrinth/conf:40
 msgid ""
 "Upgrade soldier defense 1"
 msgstr ""
 
-#: ../../tribes/atlanteans/labyrinth/conf:40
+#: ../../tribes/atlanteans/labyrinth/conf:41
 msgid ""
 "Upgrade soldier defense 1 (only for compatibility with old savegames (build13))"
 msgstr ""
 
-#: ../../tribes/atlanteans/labyrinth/conf:43
+#: ../../tribes/atlanteans/labyrinth/conf:44
 msgid ""
 "Upgrade soldier evade 0"
 msgstr ""
 
-#: ../../tribes/atlanteans/labyrinth/conf:44
+#: ../../tribes/atlanteans/labyrinth/conf:45
 msgid ""
 "Upgrade soldier evade 0 (only for compatibility with old savegames (build13))"
 msgstr ""
 
-#: ../../tribes/atlanteans/labyrinth/conf:45
+#: ../../tribes/atlanteans/labyrinth/conf:46
 msgid ""
 "Upgrade soldier evade 1"
 msgstr ""
 
-#: ../../tribes/atlanteans/labyrinth/conf:46
+#: ../../tribes/atlanteans/labyrinth/conf:47
 msgid ""
 "Upgrade soldier evade 1 (only for compatibility with old savegames (build13))"
 msgstr ""
 
-#: ../../tribes/atlanteans/labyrinth/conf:41
+#: ../../tribes/atlanteans/labyrinth/conf:42
 msgid ""
 "Upgrade soldier hitpoints 0"
 msgstr ""
 
-#: ../../tribes/atlanteans/labyrinth/conf:42
+#: ../../tribes/atlanteans/labyrinth/conf:43
 msgid ""
 "Upgrade soldier hitpoints 0 (only for compatibility with old savegames (build13))"
 msgstr ""

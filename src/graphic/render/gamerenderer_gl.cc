@@ -17,7 +17,6 @@
  *
  */
 
-#ifdef USE_OPENGL
 #include "gamerenderer_gl.h"
 
 #include "gl_surface.h"
@@ -70,7 +69,7 @@ const GLSurfaceTexture * GameRendererGL::get_dither_edge_texture(const Widelands
 		throw wexception("%s", IMG_GetError());
 
 	GLSurfaceTexture * edgetexture = new GLSurfaceTexture(sdlsurf, true);
-	g_gr->surfaces().insert(cachename, edgetexture);
+	g_gr->surfaces().insert(cachename, edgetexture, false);
 	return edgetexture;
 }
 
@@ -670,4 +669,3 @@ void GameRendererGL::draw_roads()
 	glDisableClientState(GL_COLOR_ARRAY);
 }
 
-#endif // USE_OPENGL

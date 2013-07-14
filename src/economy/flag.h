@@ -52,7 +52,7 @@ class WareInstance;
 struct Flag : public PlayerImmovable, public RoutingNode {
 	typedef std::vector<const WareInstance *> Wares;
 
-	friend struct Economy;
+	friend class Economy;
 	friend struct Router;
 	friend class FlagQueue;
 	friend struct Map_Ware_Data_Packet;     // has to look at pending items
@@ -124,7 +124,7 @@ protected:
 	virtual void init(Editor_Game_Base &);
 	virtual void cleanup(Editor_Game_Base &);
 
-	virtual void draw(const Editor_Game_Base &, RenderTarget &, FCoords, Point);
+	virtual void draw(const Editor_Game_Base &, RenderTarget &, const FCoords&, const Point&);
 
 	void wake_up_capacity_queue(Game &);
 

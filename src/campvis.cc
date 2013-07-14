@@ -83,8 +83,6 @@ void Campaign_visibility_save::update_campvis(const std::string & savepath)
 	int32_t i = 0;
 	int32_t imap = 0;
 	char csection[12];
-	char cvisible[12];
-	char cnewvisi[12];
 	char number[4];
 	std::string mapsection;
 	std::string cms;
@@ -104,6 +102,8 @@ void Campaign_visibility_save::update_campvis(const std::string & savepath)
 	{
 		Section & vis = campvisw.pull_section("campaigns");
 		sprintf(csection, "campsect%i", i);
+		char cvisible[12];
+		char cnewvisi[12];
 		while (cconf_s.get_string(csection)) {
 			sprintf(cvisible, "campvisi%i", i);
 			sprintf(cnewvisi, "cnewvisi%i", i);

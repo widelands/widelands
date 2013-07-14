@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2009, 2011 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2009, 2011, 2013 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -192,6 +192,8 @@ void Editor_Tool_Menu::changed_to() {
 					parent.tools.increase_resources,
 					*current_registry_pointer);
 				break;
+			default:
+				assert(false);
 			}
 	}
 }

@@ -99,11 +99,9 @@ void Map_View::draw(RenderTarget & dst)
 	egbase.map().overlay_manager().load_graphics();
 
 	if (!m_renderer) {
-#ifdef USE_OPENGL
 		if (g_opengl) {
 			m_renderer.reset(new GameRendererGL());
 		} else
-#endif
 		{
 			m_renderer.reset(new GameRendererSDL());
 		}
@@ -159,17 +157,7 @@ void Map_View::stop_dragging() {
 bool Map_View::handle_mousepress
 	(Uint8 const btn, int32_t const x, int32_t const y)
 {
-#ifdef __APPLE__
-	//  SDL does on Mac hardcoded middle mouse button emulation (alt+left).
-	//  This interferes with the editor, which is using alt+left click for third
-	//  tool.  So just handle middle mouse button like left one.
-	//  TODO This should be handled in a more general way someplace else. What
-	//  TODO kind of stupid idea is it to hardcode something like that in SDL?
-	//  TODO Sometimes, people are funny....
-	if (btn == SDL_BUTTON_MIDDLE || btn == SDL_BUTTON_LEFT)
-#else
 	if (btn == SDL_BUTTON_LEFT)
-#endif
 	{
 		stop_dragging();
 		track_sel(Point(x, y));

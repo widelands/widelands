@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2011 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2013 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -29,12 +29,14 @@
 #include "logic/player.h"
 #include "logic/productionsite.h"
 #include "logic/tribe.h"
+#include "logic/warehouse.h"
 #include "ui_basic/helpwindow.h"
 #include "ui_basic/tabpanel.h"
 #include "upcast.h"
 #include "waresqueuedisplay.h"
 
 #include "buildingwindow.h"
+#include "logic/militarysite.h"
 
 static const char * pic_bulldoze           = "pics/menu_bld_bulldoze.png";
 static const char * pic_dismantle          = "pics/menu_bld_dismantle.png";
@@ -52,7 +54,8 @@ Building_Window::Building_Window
 		 b.descname()),
 	m_registry(registry),
 	m_building       (b),
-	m_workarea_job_id(Overlay_Manager::Job_Id::Null())
+	m_workarea_job_id(Overlay_Manager::Job_Id::Null()),
+	m_avoid_fastclick(false)
 {
 	delete m_registry;
 	m_registry = this;
@@ -137,7 +140,8 @@ void Building_Window::think()
 		m_capsbuttons->free_children();
 		create_capsbuttons(m_capsbuttons);
 		move_out_of_the_way();
-		warp_mouse_to_fastclick_panel();
+		if (!m_avoid_fastclick)
+			warp_mouse_to_fastclick_panel();
 		m_caps_setup = true;
 	}
 
@@ -164,8 +168,63 @@ void Building_Window::create_capsbuttons(UI::Box * capsbuttons)
 
 	bool requires_destruction_separator = false;
 	if (can_act) {
-		if (upcast(const Widelands::ProductionSite, productionsite, &m_building))
-			if (not dynamic_cast<const Widelands::MilitarySite *>(productionsite)) {
+		// Check if this is a port building and if yes show expedition button
+		if (upcast(Widelands::Warehouse const, warehouse, &m_building)) {
+			if (Widelands::PortDock * pd = warehouse->get_portdock()) {
+				if (pd->expedition_started()) {
+					UI::Button * expeditionbtn =
+						new UI::Button
+							(capsbuttons, "cancel_expedition", 0, 0, 34, 34,
+							g_gr->images().get("pics/but4.png"),
+							g_gr->images().get("pics/cancel_expedition.png"),
+							_("Cancel the expedition"));
+					expeditionbtn->sigclicked.connect
+						(boost::bind(&Building_Window::act_start_or_cancel_expedition, boost::ref(*this)));
+					capsbuttons->add(expeditionbtn, UI::Box::AlignCenter);
+				} else {
+					UI::Button * expeditionbtn =
+						new UI::Button
+							(capsbuttons, "start_expedition", 0, 0, 34, 34,
+							g_gr->images().get("pics/but4.png"),
+							g_gr->images().get("pics/start_expedition.png"),
+							_("Start an expedition"));
+					expeditionbtn->sigclicked.connect
+						(boost::bind(&Building_Window::act_start_or_cancel_expedition, boost::ref(*this)));
+					capsbuttons->add(expeditionbtn, UI::Box::AlignCenter);
+				}
+			}
+		}
+		else
+		if (upcast(const Widelands::ProductionSite, productionsite, &m_building)) {
+			if (upcast(const Widelands::MilitarySite, ms, productionsite))
+			{
+				if (Widelands::MilitarySite::kPrefersHeroes == ms->get_soldier_preference())
+				{
+					UI::Button * cs_btn =
+					new UI::Button
+					(capsbuttons, "rookies", 0, 0, 34, 34,
+						g_gr->images().get("pics/but4.png"),
+						g_gr->images().get("pics/msite_prefer_rookies.png"),
+						_("Prefer rookies"));
+					cs_btn->sigclicked.connect
+					(boost::bind(&Building_Window::act_prefer_rookies, boost::ref(*this)));
+					capsbuttons->add (cs_btn, UI::Box::AlignCenter);
+				}
+				else
+				{
+					UI::Button * cs_btn =
+					new UI::Button
+					(capsbuttons, "heroes", 0, 0, 34, 34,
+						g_gr->images().get("pics/but4.png"),
+						g_gr->images().get("pics/msite_prefer_heroes.png"),
+						_("Prefer heroes"));
+					cs_btn->sigclicked.connect
+					(boost::bind(&Building_Window::act_prefer_heroes, boost::ref(*this)));
+					capsbuttons->add (cs_btn, UI::Box::AlignCenter);
+				}
+			}
+			else // is not a MilitarySite (but is still a productionsite)
+			{
 				const bool is_stopped = productionsite->is_stopped();
 				UI::Button * stopbtn =
 					new UI::Button
@@ -178,6 +237,7 @@ void Building_Window::create_capsbuttons(UI::Box * capsbuttons)
 					(stopbtn,
 					 UI::Box::AlignCenter);
 
+
 				// Add a fixed width separator rather than infinite space so the
 				// enhance/destroy/dismantle buttons are fixed in their position
 				// and not subject to the number of buttons on the right of the
@@ -185,6 +245,7 @@ void Building_Window::create_capsbuttons(UI::Box * capsbuttons)
 				UI::Panel * spacer = new UI::Panel(capsbuttons, 0, 0, 17, 34);
 				capsbuttons->add(spacer, UI::Box::AlignCenter);
 			}
+		} // upcast to productionsite
 
 		if (m_capscache & Widelands::Building::PCap_Enhancable) {
 			const std::set<Widelands::Building_Index> & enhancements =
@@ -322,7 +383,7 @@ void Building_Window::create_capsbuttons(UI::Box * capsbuttons)
 	}
 }
 
-/*
+/**
 ===============
 The help button has been pressed
 ===============
@@ -338,7 +399,7 @@ void Building_Window::help_clicked()
 			 m_building.descr().helptext_script());
 }
 
-/*
+/**
 ===============
 Callback for bulldozing request
 ===============
@@ -354,7 +415,7 @@ void Building_Window::act_bulldoze()
 	}
 }
 
-/*
+/**
 ===============
 Callback for dismantling request
 ===============
@@ -370,6 +431,11 @@ void Building_Window::act_dismantle()
 	}
 }
 
+/**
+===============
+Callback for starting / stoping the production site request
+===============
+*/
 void Building_Window::act_start_stop() {
 	if (dynamic_cast<const Widelands::ProductionSite *>(&m_building))
 		igbase().game().send_player_start_stop_building (m_building);
@@ -377,7 +443,40 @@ void Building_Window::act_start_stop() {
 	die();
 }
 
-/*
+void Building_Window::act_prefer_rookies()
+{
+	if (is_a(Widelands::MilitarySite, &m_building))
+		igbase().game().send_player_militarysite_set_soldier_preference
+			(m_building, Widelands::MilitarySite::kPrefersRookies);
+
+	die();
+}
+
+void
+Building_Window::act_prefer_heroes()
+{
+	if (is_a(Widelands::MilitarySite, &m_building))
+		igbase().game().send_player_militarysite_set_soldier_preference
+			(m_building, Widelands::MilitarySite::kPrefersHeroes);
+
+	die();
+}
+
+/**
+===============
+Callback for starting an expedition request
+===============
+*/
+void Building_Window::act_start_or_cancel_expedition() {
+	if (upcast(Widelands::Warehouse const, warehouse, &m_building))
+		if (warehouse->get_portdock())
+			igbase().game().send_player_start_or_cancel_expedition(m_building);
+
+	// No need to die here - as soon as the request is handled, the UI will get updated by the portdock
+	//die();
+}
+
+/**
 ===============
 Callback for enhancement request
 ===============
@@ -512,3 +611,4 @@ void Building_Window::clicked_goto()
 {
 	igbase().move_view_to(building().get_position());
 }
+
