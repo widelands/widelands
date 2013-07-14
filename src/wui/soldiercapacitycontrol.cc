@@ -93,7 +93,6 @@ void SoldierCapacityControl::think()
 	char buffer[sizeof("4294967295")];
 
 	sprintf(buffer, "%2u", capacity);
-	// NOCOM(#cghislai): this resizes the textarea
 	m_value.set_text(buffer);
 
 	bool const can_act = m_igb.can_act(m_building.owner().player_number());

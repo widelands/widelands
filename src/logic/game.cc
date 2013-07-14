@@ -136,7 +136,7 @@ Game::Game() :
 	m_state               (gs_notrunning),
 	m_cmdqueue            (*this),
 	m_replaywriter        (0),
-	m_win_condition_string("not_set")
+	m_win_condition_displayname("not_set")
 {
 	// Preload win_conditions as they are displayed in UI
 	lua().register_scripts(*g_fs, "win_conditions", "scripting/win_conditions");
@@ -333,10 +333,11 @@ void Game::init_newgame
 
 	// Check for win_conditions
 	if (!settings.scenario) {
-		m_win_condition_string = settings.win_condition;
-		LuaCoroutine * cr = lua().run_script
-			(*g_fs, "scripting/win_conditions/" + settings.win_condition + ".lua", "win_conditions")
-			->get_coroutine("func");
+		boost::shared_ptr<LuaTable> table
+			(lua().run_script
+			 (*g_fs, "scripting/win_conditions/" + settings.win_condition + ".lua", "win_conditions"));
+		m_win_condition_displayname = table->get_string("name");
+		LuaCoroutine * cr = table->get_coroutine("func");
 		enqueue_command(new Cmd_LuaCoroutine(get_gametime() + 100, cr));
 	}
 }
@@ -366,7 +367,7 @@ void Game::init_savegame
 
 		Widelands::Game_Preload_Data_Packet gpdp;
 		gl.preload_game(gpdp);
-		m_win_condition_string = gpdp.get_win_condition();
+		m_win_condition_displayname = gpdp.get_win_condition();
 		if (loaderUI) {
 			std::string background(gpdp.get_background());
 			loaderUI->set_background(background);

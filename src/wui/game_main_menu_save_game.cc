@@ -19,17 +19,20 @@
 
 #include "game_main_menu_save_game.h"
 
-#include "io/filesystem/filesystem.h"
+#include <boost/format.hpp>
+#include <libintl.h>
+
 #include "constants.h"
-#include "logic/game.h"
 #include "game_io/game_loader.h"
 #include "game_io/game_preload_data_packet.h"
 #include "game_io/game_saver.h"
+#include "i18n.h"
 #include "interactive_gamebase.h"
+#include "io/filesystem/filesystem.h"
 #include "io/filesystem/layered_filesystem.h"
+#include "logic/game.h"
 #include "profile/profile.h"
 
-#include <boost/format.hpp>
 using boost::format;
 
 Interactive_GameBase & Game_Main_Menu_Save_Game::igbase() {
@@ -155,8 +158,9 @@ void Game_Main_Menu_Save_Game::selected(uint32_t) {
 		 days, hours, minutes, seconds, gametime);
 	m_gametime.set_text(buf);
 
-	sprintf(buf,  "%i %s", gpdp.get_player_nr(),
-		ngettext(_("player"), _("players"), gpdp.get_player_nr()));
+	sprintf
+		(buf, "%i %s", gpdp.get_player_nr(),
+		 ngettext(_("player"), _("players"), gpdp.get_player_nr()));
 	m_players_label.set_text(buf);
 	m_win_condition.set_text(gpdp.get_win_condition());
 }

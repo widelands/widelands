@@ -114,7 +114,7 @@ void Game_Preload_Data_Packet::Write
 		bg = map.get_world_name();
 	s.set_string("background", bg);
 
-	s.set_string("win_condition", game.get_win_condition_string());
+	s.set_string("win_condition", game.get_win_condition_displayname());
 
 	prof.write("preload", false, fs);
 }
