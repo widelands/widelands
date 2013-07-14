@@ -28,7 +28,6 @@
 #include "interactive_gamebase.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "profile/profile.h"
-#include <scripting/scripting.h>
 
 #include <boost/format.hpp>
 using boost::format;
@@ -117,8 +116,6 @@ Game_Main_Menu_Save_Game::Game_Main_Menu_Save_Game
 	center_to_parent();
 	move_to_top();
 
-	igbase().game().lua().register_scripts(*g_fs, "win_conditions", "scripting/win_conditions");
-
 	std::string cur_filename = parent.game().save_handler().get_cur_filename();
 	if (cur_filename.size() > 0) {
 		select_by_name(cur_filename);
@@ -163,20 +160,7 @@ void Game_Main_Menu_Save_Game::selected(uint32_t) {
 	else
 		sprintf(buf, _("%i player"), gpdp.get_player_nr());
 	m_players_label.set_text(buf);
-
-	// Retrieve win condition title
-	// NOCOM(#cghislai): duplicated here.
-	std::string win_name;
-	try {
-		boost::shared_ptr<LuaTable> t = igbase().game().lua().run_script
-			("win_conditions", gpdp.get_win_condition());
-		win_name = t->get_string("name");
-	} catch (LuaScriptNotExistingError &) {
-		win_name = _("Scenario");
-	} catch (LuaTableKeyError &) {
-		win_name = gpdp.get_win_condition();
-	}
-	m_win_condition.set_text(win_name);
+	m_win_condition.set_text(gpdp.get_win_condition());
 }
 
 /**

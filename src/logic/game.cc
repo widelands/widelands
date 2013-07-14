@@ -138,6 +138,8 @@ Game::Game() :
 	m_replaywriter        (0),
 	m_win_condition_string("not_set")
 {
+	// Preload win_conditions as they are displayed in UI
+	lua().register_scripts(*g_fs, "win_conditions", "scripting/win_conditions");
 }
 
 Game::~Game()

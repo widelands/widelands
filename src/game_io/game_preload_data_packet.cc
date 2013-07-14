@@ -24,6 +24,7 @@
 #include "wui/interactive_player.h"
 #include "logic/map.h"
 #include "profile/profile.h"
+#include "scripting/scripting.h"
 
 namespace Widelands {
 
@@ -33,13 +34,14 @@ namespace Widelands {
 
 
 void Game_Preload_Data_Packet::Read
-	(FileSystem & fs, Game &, Map_Map_Object_Loader * const)
+	(FileSystem & fs, Game & game, Map_Map_Object_Loader * const)
 {
 	try {
 		Profile prof;
 		prof.read("preload", 0, fs);
 		Section & s = prof.get_safe_section("global");
 		int32_t const packet_version = s.get_int("packet_version");
+		std::string win_condition = "";
 		if (1 <= packet_version && packet_version <= CURRENT_PACKET_VERSION) {
 			m_gametime   = s.get_safe_int   ("gametime");
 			m_mapname    = s.get_safe_string("mapname");
@@ -48,19 +50,30 @@ void Game_Preload_Data_Packet::Read
 				m_background = s.get_safe_string("background");
 				m_player_nr  = s.get_safe_int   ("player_nr");
 				if (packet_version >= 3)
-					m_win_condition = s.get_safe_string("win_condition");
+					win_condition = s.get_safe_string("win_condition");
 				else
-					m_win_condition = "00_endless_game";
+					win_condition = "00_endless_game";
 			} else {
 				m_background = "pics/progress.png";
 				// Of course this is wrong, but at least player 1 is always in game
 				// so widelands won't crash with this setting.
 				m_player_nr  = 1;
-				m_win_condition = "00_endless_game";
+				win_condition = "00_endless_game";
 			}
-		} else
+			// Get win condition string
+			try {
+				boost::shared_ptr<LuaTable> t = game.lua().run_script
+				("win_conditions", win_condition);
+				m_win_condition = t->get_string("name");
+			} catch (LuaScriptNotExistingError &) {
+				m_win_condition = _("Scenario");
+			} catch (LuaTableKeyError &) {
+				m_win_condition = win_condition;
+			}
+		} else {
 			throw game_data_error
 				(_("unknown/unhandled version %i"), packet_version);
+		}
 	} catch (const _wexception & e) {
 		throw game_data_error(_("preload: %s"), e.what());
 	}

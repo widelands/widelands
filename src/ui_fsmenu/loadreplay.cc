@@ -27,7 +27,6 @@
 #include "log.h"
 #include "logic/game.h"
 #include "logic/replay.h"
-#include "scripting/scripting.h"
 #include "ui_basic/messagebox.h"
 
 Fullscreen_Menu_LoadReplay::Fullscreen_Menu_LoadReplay() :
@@ -183,8 +182,6 @@ void Fullscreen_Menu_LoadReplay::replay_selected(uint32_t const selected)
 			return;
 		}
 
-		game.lua().register_scripts(*g_fs, "win_conditions", "scripting/win_conditions");
-
 		m_ok.set_enabled(true);
 		m_delete.set_enabled(true);
 		m_tamapname.set_text(gpdp.get_mapname());
@@ -202,19 +199,7 @@ void Fullscreen_Menu_LoadReplay::replay_selected(uint32_t const selected)
 		sprintf(buf, "%i", gpdp.get_player_nr());
 		m_ta_players.set_text(buf);
 
-		// Retrieve win condition title
-		// NOCOM(#cghislai): duplicated here.
-		std::string win_name;
-		try {
-			boost::shared_ptr<LuaTable> t = game.lua().run_script
-				("win_conditions", gpdp.get_win_condition());
-			win_name = t->get_string("name");
-		} catch (LuaScriptNotExistingError &) {
-			win_name = _("Scenario");
-		} catch (LuaTableKeyError &) {
-			win_name = gpdp.get_win_condition();
-		}
-		m_ta_win_condition.set_text(win_name);
+		m_ta_win_condition.set_text(gpdp.get_win_condition());
 	} else {
 		no_selection();
 	}

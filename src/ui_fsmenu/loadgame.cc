@@ -28,8 +28,6 @@
 #include "io/filesystem/layered_filesystem.h"
 #include "log.h"
 #include "logic/game.h"
-// NOCOM(#cghislai): do not use <> for widelands includes, those are for system includes
-#include "scripting/scripting.h"
 #include "ui_basic/messagebox.h"
 
 #include <cstdio>
@@ -118,8 +116,6 @@ Fullscreen_Menu_LoadGame::Fullscreen_Menu_LoadGame
 	m_list.selected.connect(boost::bind(&Fullscreen_Menu_LoadGame::map_selected, this, _1));
 	m_list.double_clicked.connect(boost::bind(&Fullscreen_Menu_LoadGame::double_clicked, this, _1));
 	fill_list();
-
-	g.lua().register_scripts(*g_fs, "win_conditions", "scripting/win_conditions");
 }
 
 void Fullscreen_Menu_LoadGame::think()
@@ -219,20 +215,7 @@ void Fullscreen_Menu_LoadGame::map_selected(uint32_t selected)
 
 		sprintf(buf, "%i", gpdp.get_player_nr());
 		m_ta_players.set_text(buf);
-
-		// Retrieve win condition title
-		// NOCOM(#cghislai): this code is duplicated three times now. Seems worth to pull out a method for this.
-		std::string win_name;
-		try {
-			boost::shared_ptr<LuaTable> t = m_game.lua().run_script
-				("win_conditions", gpdp.get_win_condition());
-			win_name = t->get_string("name");
-		} catch (LuaScriptNotExistingError &) {
-			win_name = _("Scenario");
-		} catch (LuaTableKeyError &) {
-			win_name = gpdp.get_win_condition();
-		}
-		m_ta_win_condition.set_text(win_name);
+		m_ta_win_condition.set_text(gpdp.get_win_condition());
 	} else {
 		no_selection();
 	}
