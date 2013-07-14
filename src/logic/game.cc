@@ -413,7 +413,7 @@ bool Game::run_load_game(std::string filename) {
 	}
 
 	// Store the filename for further saves
-	save_handler().set_cur_filename(filename);
+	save_handler().set_current_filename(filename);
 
 	set_game_controller(GameController::createSinglePlayer(*this, true, player_nr));
 	try {

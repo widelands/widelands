@@ -165,6 +165,7 @@ void Game_Main_Menu_Save_Game::selected(uint32_t) {
 	m_players_label.set_text(buf);
 
 	// Retrieve win condition title
+	// NOCOM(#cghislai): duplicated here.
 	std::string win_name;
 	try {
 		boost::shared_ptr<LuaTable> t = igbase().game().lua().run_script
@@ -216,6 +217,7 @@ void Game_Main_Menu_Save_Game::select_by_name(std::string name)
 {
 	for (uint idx = 0; idx < m_ls.size(); idx++) {
 		const std::string val = m_ls[idx];
+		// NOCOM(#cghislai): why not name == val? seems more complicated here.
 		if (name.compare(val) == 0) {
 			m_ls.select(idx);
 			return;

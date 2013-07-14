@@ -27,8 +27,8 @@
 #include "log.h"
 #include "logic/game.h"
 #include "logic/replay.h"
+#include "scripting/scripting.h"
 #include "ui_basic/messagebox.h"
-#include <scripting/scripting.h>
 
 Fullscreen_Menu_LoadReplay::Fullscreen_Menu_LoadReplay() :
 	Fullscreen_Menu_Base("choosemapmenu.jpg"),
@@ -203,6 +203,7 @@ void Fullscreen_Menu_LoadReplay::replay_selected(uint32_t const selected)
 		m_ta_players.set_text(buf);
 
 		// Retrieve win condition title
+		// NOCOM(#cghislai): duplicated here.
 		std::string win_name;
 		try {
 			boost::shared_ptr<LuaTable> t = game.lua().run_script
