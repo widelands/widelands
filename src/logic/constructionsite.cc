@@ -33,10 +33,8 @@
 #include "sound/sound_handler.h"
 #include "tribe.h"
 #include "worker.h"
-
 #include "constructionsite.h"
-#include <wui/interactive_base.h>
-#include <wui/interactive_gamebase.h>
+
 
 namespace Widelands {
 
@@ -88,11 +86,8 @@ Print completion percentage.
 std::string ConstructionSite::get_statistics_string()
 {
 	unsigned int percent = (get_built_per64k() * 100) >> 16;
-
-
 	std::string perc_s =
 		(boost::format("<font color=%1$s>%2$i%% built</font>") % UI_FONT_CLR_DARK_HEX % percent).str();
-
 	return perc_s;
 }
 
@@ -102,9 +97,11 @@ Access to the wares queues by id
 =======
 */
 WaresQueue & ConstructionSite::waresqueue(Ware_Index const wi) {
-	container_iterate_const(Wares, m_wares, i)
-		if ((*i.current)->get_ware() == wi)
+	container_iterate_const(Wares, m_wares, i) {
+		if ((*i.current)->get_ware() == wi) {
 			return **i.current;
+		}
+	}
 	throw wexception
 		("%s (%u) (building %s) has no WaresQueue for %u",
 		 name().c_str(), serial(), m_building->name().c_str(), wi.value());
@@ -183,6 +180,7 @@ void ConstructionSite::cleanup(Editor_Game_Base & egbase)
 			builder->reset_tasks(ref_cast<Game, Editor_Game_Base>(egbase));
 			builder->set_location(&b);
 		}
+		// Open the new building window if needed
 		if (m_optionswindow) {
 			Point window_position = m_optionswindow->get_pos();
 			hide_options();

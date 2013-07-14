@@ -124,8 +124,10 @@ bool AbstractWaresDisplay::handle_mousepress
 
 		if (m_selectable) {
 			toggle_ware(ware);
-			// mouserelase may be skipped sometimes here
+			// Mouserelase may be skipped sometimes here, so
+			// only anchor if needed.
 			if (!m_selection_anchor) {
+				// Anchor needs to be toggled for code consistency
 				m_selection_anchor = ware;
 			}
 		}
@@ -137,27 +139,27 @@ bool AbstractWaresDisplay::handle_mousepress
 
 bool AbstractWaresDisplay::handle_mouserelease(Uint8 btn, int32_t x, int32_t y)
 {
-	if (btn == SDL_BUTTON_LEFT) {
-		if (m_selection_anchor) {
-			Widelands::Ware_Index const number = m_type == Widelands::wwWORKER ? 
-				m_tribe.get_nrworkers() : m_tribe.get_nrwares();
-			for (Widelands::Ware_Index i = Widelands::Ware_Index::First();
-					i < number; ++i) {
-				if (!m_in_selection[i]) {
-					continue;
-				}
-				if (ware_selected(m_selection_anchor)) {
-					select_ware(i);
-				} else {
-					unselect_ware(i);
-				}
-			}
-			m_selection_anchor = Widelands::Ware_Index::Null();
-			std::fill(m_in_selection.begin(), m_in_selection.end(), false);
-			return true;
+	if (btn != SDL_BUTTON_LEFT || !m_selection_anchor) {
+		return UI::Panel::handle_mouserelease(btn, x, y);
+	}
+	Widelands::Ware_Index const number = 
+		m_type == Widelands::wwWORKER ? m_tribe.get_nrworkers() : m_tribe.get_nrwares();
+
+	for (Widelands::Ware_Index i = Widelands::Ware_Index::First();
+			i < number; ++i) {
+		if (!m_in_selection[i]) {
+			continue;
+		}
+		if (ware_selected(m_selection_anchor)) {
+			select_ware(i);
+		} else {
+			unselect_ware(i);
 		}
 	}
-	return UI::Panel::handle_mouserelease(btn, x, y);
+	// Release anchor, empty selection
+	m_selection_anchor = Widelands::Ware_Index::Null();
+	std::fill(m_in_selection.begin(), m_in_selection.end(), false);
+	return true;
 }
 
 
@@ -196,7 +198,9 @@ void AbstractWaresDisplay::update_anchor_selection(int32_t x, int32_t y)
 
 	std::fill(m_in_selection.begin(), m_in_selection.end(), false);
 	Point pos0 = ware_position(m_selection_anchor);
-	int32_t x0 = pos0.x + 3; // Make sure the anchor row/col is selected in reverse order
+	// Add an offset to make sure the anchor line and column will be
+	// selected when selecting in topleft direction
+	int32_t x0 = pos0.x + 3;
 	int32_t y0 = pos0.y + 3;
 
 	unsigned int i0 = x0 / (WARE_MENU_PIC_WIDTH + 4);
@@ -204,6 +208,7 @@ void AbstractWaresDisplay::update_anchor_selection(int32_t x, int32_t y)
 	unsigned int i = x / (WARE_MENU_PIC_WIDTH + 4);
 	unsigned int j = y / (WARE_MENU_PIC_HEIGHT + WARE_MENU_INFO_SIZE + 3);
 	unsigned int s;
+	// Reverse col/row and anchor/endpoint if needed
 	if (m_horizontal) {
 		s = i0;
 		i0 = j0;
@@ -212,8 +217,6 @@ void AbstractWaresDisplay::update_anchor_selection(int32_t x, int32_t y)
 		i = j;
 		j = s;
 	}
-
-	// Ensure topleft to bottomright
 	if (i0 > i) {
 		s = i0;
 		i0 = i;
@@ -480,4 +483,3 @@ std::string waremap_to_richtext
 			}
 	return ret;
 }
-

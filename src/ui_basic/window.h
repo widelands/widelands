@@ -87,6 +87,7 @@ public:
 	bool handle_mousemove
 		(Uint8 state, int32_t mx, int32_t my, int32_t xdiff, int32_t ydiff);
 	bool handle_alt_drag (int32_t mx, int32_t my);
+
 protected:
 	virtual void layout();
 	virtual void update_desired_size();

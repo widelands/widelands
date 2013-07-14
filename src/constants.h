@@ -80,11 +80,11 @@
 #define PROSA_FONT_CLR_FG    RGBColor(255, 255,   0)
 
 /// Colors for good/ok/bad
-#define UI_FONT_CLR_BRIGHT_HEX    "fff666"
+#define UI_FONT_CLR_BRIGHT_HEX    "fffaaa"
 #define UI_FONT_CLR_DARK_HEX      "a39013"
 #define UI_FONT_CLR_BAD_HEX       "bb0000"
 #define UI_FONT_CLR_OK_HEX        "ffe11e"
-#define UI_FONT_CLR_GOOD_HEX      "55ff46"
+#define UI_FONT_CLR_GOOD_HEX      "00bb00"
 //@}
 
 /** \name Text colors

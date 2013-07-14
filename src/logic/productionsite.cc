@@ -18,7 +18,6 @@
  */
 
 #include <libintl.h>
-#include <cstdio>
 #include <boost/format.hpp>
 
 #include "helper.h"
@@ -244,22 +243,21 @@ std::string ProductionSite::get_statistics_string()
 	uint32_t       nr_workers           = 0;
 	for (uint32_t i = nr_working_positions; i;)
 		nr_workers += m_working_positions[--i].worker ? 1 : 0;
-	if (!nr_workers)
+	if (!nr_workers) {
 		 return
 			(boost::format("<font color=%s>%s</font>") % UI_FONT_CLR_BAD_HEX % _("(not occupied)")).str();
-	else if (uint32_t const nr_requests = nr_working_positions - nr_workers) {
-		char buffer[1000];
-		snprintf
-			(buffer, sizeof(buffer), "%s",
-			 ngettext("Worker missing", "Workers missing", nr_requests));
-		return (boost::format("<font color=%s>%s</font>") % UI_FONT_CLR_BAD_HEX % buffer).str();
+	} else if (uint32_t const nr_requests = nr_working_positions - nr_workers) {
+		return (boost::format("<font color=%s>%s</font>") % UI_FONT_CLR_BAD_HEX
+			% ngettext(_("Worker missing"), _("Workers missing"), nr_requests)).str();
 	}
 
-	if (m_statistics_changed)
+	if (m_statistics_changed) {
 		calc_statistics();
+	}
 
-	if (m_is_stopped)
+	if (m_is_stopped) {
 		return (boost::format("<font color=%s>%s</font>") % UI_FONT_CLR_BRIGHT_HEX % _("(stopped)")).str();
+	}
 
 	return m_statistics_buffer;
 }
@@ -346,15 +344,15 @@ void ProductionSite::calc_statistics()
 	const std::string trend_str =
 		(boost::format("<font color=%s>%s</font>") % color % trend).str();
 
-	if (0 < percOk and percOk < 100)
+	if (0 < percOk and percOk < 100) {
 		snprintf
 			(m_statistics_buffer, sizeof(m_statistics_buffer),
 			 "%s %s", perc_str.c_str(), trend_str.c_str());
-	else
+	} else {
 		snprintf
 			(m_statistics_buffer, sizeof(m_statistics_buffer),
 			 "%s", perc_str.c_str());
-
+	}
 	m_last_stat_percent = percOk;
 
 	m_statistics_changed = false;

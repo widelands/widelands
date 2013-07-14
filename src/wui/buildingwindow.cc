@@ -37,7 +37,6 @@
 #include "waresqueuedisplay.h"
 
 #include "buildingwindow.h"
-#include "logic/militarysite.h"
 
 static const char * pic_bulldoze           = "pics/menu_bld_bulldoze.png";
 static const char * pic_dismantle          = "pics/menu_bld_dismantle.png";
@@ -79,25 +78,25 @@ Building_Window::Building_Window
 
 	set_center_panel(vbox);
 	set_think(true);
+	set_fastclick_panel(this);
 
+	// Work area
 	char filename[] = "pics/workarea0cumulative.png";
 	compile_assert(NUMBER_OF_WORKAREA_PICS <= 9);
 	for (Workarea_Info::size_type i = 0; i < NUMBER_OF_WORKAREA_PICS; ++i) {
 		++filename[13];
 		workarea_cumulative_pic[i] = g_gr->images().get(filename);
 	}
-
 	show_workarea();
 
-	if (is_a(Widelands::ConstructionSite, &m_building)) {
-		upcast(Widelands::ConstructionSite, csite, &m_building);
+	// Title for construction site
+	upcast(Widelands::ConstructionSite, csite, &m_building);
+	if (m_building != NULL) {
 		char cs_title[256];
 		// Show name in parenthesis as it may take all width already
 		sprintf(cs_title, _("(%s)"), csite->building().descname().c_str());
 		set_title(cs_title);
 	}
-
-	set_fastclick_panel(this);
 }
 
 
@@ -521,18 +520,20 @@ void Building_Window::act_debug()
  */
 void Building_Window::show_workarea()
 {
-	if (m_workarea_job_id)
+	if (m_workarea_job_id) {
 		return; // already shown, nothing to be done
+	}
 
 	Workarea_Info workarea_info;
-	if (is_a(Widelands::ConstructionSite, &m_building)) {
-		upcast(Widelands::ConstructionSite, csite, &m_building);
+	upcast(Widelands::ConstructionSite, csite, &m_building);
+	if (csite != NULL) {
 		workarea_info = csite->building().m_workarea_info;
 	} else {
 		workarea_info = m_building.descr().m_workarea_info;
 	}
-	if (workarea_info.size() == 0)
+	if (workarea_info.size() == 0) {
 		return; // building has no workarea
+	}
 
 	Widelands::Map & map =
 		ref_cast<const Interactive_GameBase, UI::Panel>(*get_parent()).egbase()
