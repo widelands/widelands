@@ -58,6 +58,9 @@ private:
 	UI::Textarea                                    m_tamapname;
 	UI::Textarea                                    m_label_gametime;
 	UI::Textarea                                    m_tagametime;
+	UI::Textarea                                    m_label_players;
+	UI::Textarea                                    m_ta_players;
+	UI::Textarea                                    m_ta_win_condition;
 	std::string                                     m_filename;
 };
 
