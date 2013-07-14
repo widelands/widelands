@@ -169,8 +169,7 @@ Graphic::Graphic
 			use_arb = true;
 		} else if (strstr(extensions, "GL_EXT_framebuffer_object") != 0) {
 			use_arb = false;
-		}
-		else {
+		} else {
 			log
 			("Graphics: Neither GL_ARB_framebuffer_object or GL_EXT_framebuffer_object supported! "
 			"Switching off OpenGL!\n"
@@ -178,16 +177,18 @@ Graphic::Graphic
 			flags &= ~SDL_OPENGL;
 			m_fallback_settings_in_effect = true;
 
-			//TODO Do we have a leak of the old sdlsurface instance here?!
+			// One must never free the screen surface of SDL (using
+			// SDL_FreeSurface) as it is owned by SDL itself, therefore the next
+			// call does not leak memory.
 			sdlsurface = SDL_SetVideoMode
-			(FALLBACK_GRAPHICS_WIDTH, FALLBACK_GRAPHICS_HEIGHT, FALLBACK_GRAPHICS_DEPTH, flags);
+				(FALLBACK_GRAPHICS_WIDTH, FALLBACK_GRAPHICS_HEIGHT, FALLBACK_GRAPHICS_DEPTH, flags);
 			m_fallback_settings_in_effect = true;
 			if (!sdlsurface)
-				throw wexception
-				("Graphics: could not set video mode: %s", SDL_GetError());
+				throw wexception("Graphics: could not set video mode: %s", SDL_GetError());
 		}
 	}
 
+	// Redoing the check, because fallback settings might mean we no longer use OpenGL.
 	if (0 != (sdlsurface->flags & SDL_OPENGL)) {
 		//  We now really have a working opengl screen...
 		g_opengl = true;
@@ -222,6 +223,7 @@ Graphic::Graphic
 			("Graphics: OpenGL: Version %d.%d \"%s\"\n",
 			 m_caps.gl.major_version, m_caps.gl.minor_version, str);
 
+		// extensions will be valid if we ever succeeded in runnning glewInit.
 		m_caps.gl.tex_power_of_two =
 			(m_caps.gl.major_version < 2) and
 			(strstr(extensions, "GL_ARB_texture_non_power_of_two") == 0);

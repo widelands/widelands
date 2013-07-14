@@ -34,21 +34,12 @@ void GLSurfaceTexture::Initialize(bool use_arb) {
 	use_arb_ = use_arb;
 
 	// Generate the framebuffer for Offscreen rendering.
-	bool fbs = false;
 	if (use_arb) {
-		fbs = true;
 		glGenFramebuffers(1, &gl_framebuffer_id_);
 		glBindFramebuffer(GL_FRAMEBUFFER, 0);
 	} else {
-		fbs = true;
 		glGenFramebuffersEXT(1, &gl_framebuffer_id_);
 		glBindFramebufferEXT(GL_FRAMEBUFFER, 0);
-	}
-	if (!fbs) {
-		throw wexception
-			("Could not initialize framebuffer for OpenGL. Your video card reported "
-			"sufficient capabilities, but it did not work. You can "
-			"try launching Widelands with --opengl=0.");
 	}
 }
 
