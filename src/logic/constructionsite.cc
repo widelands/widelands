@@ -25,14 +25,17 @@
 #include "upcast.h"
 #include "wexception.h"
 
-#include "graphic/animation.h"
 #include "economy/wares_queue.h"
 #include "game.h"
+#include "graphic/animation.h"
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
 #include "sound/sound_handler.h"
+#include "ui_basic/window.h"
+#include "wui/interactive_gamebase.h"
 #include "tribe.h"
 #include "worker.h"
+
 #include "constructionsite.h"
 
 

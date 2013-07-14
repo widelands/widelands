@@ -91,7 +91,7 @@ Building_Window::Building_Window
 
 	// Title for construction site
 	upcast(Widelands::ConstructionSite, csite, &m_building);
-	if (m_building != NULL) {
+	if (csite != NULL) {
 		char cs_title[256];
 		// Show name in parenthesis as it may take all width already
 		sprintf(cs_title, _("(%s)"), csite->building().descname().c_str());
