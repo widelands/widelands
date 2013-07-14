@@ -202,7 +202,7 @@ int L_Game::launch_coroutine(lua_State * L) {
 }
 
 /* RST
-	.. method:: save([name = `nil`])
+	.. method:: save(name)
 
 		Requests a savegame. Note that the actual save will be performed
 		later, and that you have no control over any error that may happen
@@ -210,16 +210,13 @@ int L_Game::launch_coroutine(lua_State * L) {
 
 		:arg name: name of save game, as if entered in the save dialog.
 			If this game already exists, it will be silently overwritten.
-			If omitted, the autosave name will be used.
+			If empty, the autosave name will be used.
 		:type name: :class:`string`
 		:returns: :const:`nil`
 */
-int L_Game::save(lua_State * const L) {
-	if (lua_gettop(L) >= 1) {
-		get_game(L).save_handler().request_save(luaL_checkstring(L, 1));
-	} else {
-		get_game(L).save_handler().request_save();
-	}
+int L_Game::save(lua_State * L) {
+	std::string filename = luaL_checkstring(L, -1);
+	get_game(L).save_handler().request_save(filename);
 
 	return 0;
 }
