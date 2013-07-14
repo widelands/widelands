@@ -117,7 +117,7 @@ Game_Main_Menu_Save_Game::Game_Main_Menu_Save_Game
 	move_to_top();
 
 	std::string cur_filename = parent.game().save_handler().get_cur_filename();
-	if (cur_filename.size() > 0) {
+	if (!cur_filename.empty()) {
 		select_by_name(cur_filename);
 	}
 
@@ -155,10 +155,8 @@ void Game_Main_Menu_Save_Game::selected(uint32_t) {
 		 days, hours, minutes, seconds, gametime);
 	m_gametime.set_text(buf);
 
-	if (gpdp.get_player_nr() > 1)
-		sprintf(buf, _("%i players"), gpdp.get_player_nr());
-	else
-		sprintf(buf, _("%i player"), gpdp.get_player_nr());
+	sprintf(buf,  "%i %s", gpdp.get_player_nr(),
+		ngettext(_("player"), _("players"), gpdp.get_player_nr()));
 	m_players_label.set_text(buf);
 	m_win_condition.set_text(gpdp.get_win_condition());
 }
@@ -201,8 +199,7 @@ void Game_Main_Menu_Save_Game::select_by_name(std::string name)
 {
 	for (uint idx = 0; idx < m_ls.size(); idx++) {
 		const std::string val = m_ls[idx];
-		// NOCOM(#cghislai): why not name == val? seems more complicated here.
-		if (name.compare(val) == 0) {
+		if (name == val) {
 			m_ls.select(idx);
 			return;
 		}
