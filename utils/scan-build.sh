@@ -27,8 +27,8 @@ else
   exit 1
 fi
 
-BUILD_DIR=build/scan-build
-SOURCE_DIR=../..
+SOURCE_DIR=`pwd`
+BUILD_DIR=$SOURCE_DIR/build/scan-build
 
 mkdir -p $BUILD_DIR
 cd $BUILD_DIR
