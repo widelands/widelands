@@ -202,6 +202,9 @@ int L_Game::launch_coroutine(lua_State * L) {
 		:type name: :class:`string`
 		:returns: :const:`nil`
 */
+// NOCOM(#cghislai): either kill this method or (which I think makes more sense), move your
+// new code into this method and kill your old one. Also fix the comment if you do, because saving inside
+// a coroutine should work with your code (the save will happen as soon as the coroutine goes to sleep the next timer'
 int L_Game::save(lua_State * const L) {
 	Widelands::Game & game = get_game(L);
 

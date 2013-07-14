@@ -40,33 +40,42 @@ void SaveHandler::think(Widelands::Game & game, int32_t realtime) {
 	std::string filename = "wl_autosave";
 
 	if (m_save_requested) {
-		if (m_save_filename.length() > 0)
+		// NOCOM(#cghislai): Nit: prefer !empty(), .length() is O(n). And prefer adding { } if you can stand it :).
+		if (!m_save_filename.empty()) {
 			filename = m_save_filename;
+		}
 
 		log("Autosave: save requested : %s\n", filename.c_str());
 		m_save_requested = false;
 		m_save_filename = "";
 	} else {
-		if (not m_allow_autosaving) // Is autosaving allowed atm?
+		// NOCOM(#cghislai): prefer ! && and || over not and or.
+		// NOCOM(#cghislai): I think this must be at the top level of this method, so you need
+		// to exit early. The reason is that we only disable it when UI elements are used in
+		// Lua - and they cannot be persisted. So when this is false, we must really never ever save.
+		if (!m_allow_autosaving) // Is autosaving allowed atm?
 			return;
 
-		int32_t const autosaveInterval =
+		// NOCOM(#cghislai): I have been changing lots of places to have the const come first. I known that WL is not
+		// very consistent code wise, but maybe we can reach consistency eventually :).
+		const int32_t autosave_interval_in_seconds =
 			g_options.pull_section("global").get_int
 				("autosave", DEFAULT_AUTOSAVE_INTERVAL * 60);
-		if (autosaveInterval <= 0)
+		if (autosave_interval_in_seconds <= 0) {
 			return; // no autosave requested
+		}
 
-		int32_t const elapsed = (realtime - m_lastSaveTime) / 1000;
-		if (elapsed < autosaveInterval)
+		const int32_t elapsed = (realtime - m_lastSaveTime) / 1000;
+		if (elapsed < autosave_interval_in_seconds) {
 			return;
+		}
 
 		log("Autosave: interval elapsed (%d s), saving\n", elapsed);
 	}
 
 
 	// save the game
-	std::string complete_filename =
-		create_file_name (get_base_dir(), filename);
+	const std::string complete_filename = create_file_name(get_base_dir(), filename);
 	std::string backup_filename;
 
 	// always overwrite a file
@@ -79,7 +88,9 @@ void SaveHandler::think(Widelands::Game & game, int32_t realtime) {
 		g_fs->Rename(complete_filename, backup_filename);
 	}
 
-	static std::string error;
+	// NOCOM(#cghislai): I have no idea why this was static (I know you didn't do it). I removed this, it seems odd.
+	// If you see a reason why it was there, feel free to add it back in.
+	std::string error;
 	if (!save_game(game, complete_filename, &error)) {
 		log("Autosave: ERROR! - %s\n", error.c_str());
 

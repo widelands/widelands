@@ -1,16 +1,19 @@
 -- =======================================================================
---                           LOADING/SAVING TESTS                           
+--                           LOADING/SAVING TESTS
 -- =======================================================================
--- This tests saving and loading of various Lua objects in the global 
+-- This tests saving and loading of various Lua objects in the global
 -- environment.
 --
 -- To run this test use:
--- ./widelands --nozip --scenario=src/scripting/test/persistence.wmf && 
+-- ./widelands --nozip --scenario=src/scripting/test/persistence.wmf &&
 --   ./widelands --loadgame=~/.widelands/save/lua_persistence.wgf
 
+-- NOCOM(#cghislai): this should use your new function to make sure that it is actually called. Also, you should
+-- save from inside a coroutine and make sure that this is really possible AND that the coroutine itself is persistet
+-- properly.
 
 -- ====================
--- Test Data to persist 
+-- Test Data to persist
 -- ====================
 use("aux", "set")
 
@@ -46,7 +49,7 @@ myset = Set:new{
 }
 
 -- ========================
--- Test after unpersisting 
+-- Test after unpersisting
 -- ========================
 function check_persistence()
 coroutine.yield(wl.Game().time + 2000)
@@ -116,10 +119,10 @@ end
 
 
 -- ==========
--- Main Code 
+-- Main Code
 -- ==========
 -- This starts the test routine, saves the game and exits.
--- Loading the saved game will check that all objects are 
+-- Loading the saved game will check that all objects are
 -- correctly unpersisted
 game = wl.Game()
 game:launch_coroutine(coroutine.create(check_persistence))

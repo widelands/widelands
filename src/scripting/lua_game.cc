@@ -1063,8 +1063,9 @@ int L_Objective::set_visible(lua_State * L) {
 
 		(RW) defines if this objective is already fulfilled. If done is
 		:const`true`, the objective will not be shown to the user, no matter what.
-		A savegame will be created when this attribute is set to :const`true`.
-		:attr:`visible` is set to.
+		:attr:`visible` is set to. A savegame will be created when this attribute
+		is changed to :const`true`.
+
 */
 int L_Objective::get_done(lua_State * L) {
 	Objective & o = get(L, get_game(L));
@@ -1075,13 +1076,16 @@ int L_Objective::set_done(lua_State * L) {
 	Objective & o = get(L, get_game(L));
 	o.set_done(luaL_checkboolean(L, -1));
 
-	int32_t autosave = g_options.pull_section("global")
-		.get_int("autosave", 0);
+	const int32_t autosave = g_options.pull_section("global").get_int("autosave", 0);
 	if (autosave <= 0) {
 		return 0;
 	}
 
 	if (o.done()) {
+		// NOCOM(#cghislai): I am a bit torn here - it feels like this is duplicating functionality and it would
+		// be better to call the lua function directly (i.e. pushstring("filname"), the pcall the method). But that reads
+		// more complex and it is really just one line of code that is
+		// duplicated. So it might be better to leave it as is? your call.
 		std::string filename = get_egbase(L).get_map()->get_name();
 		char buffer[128];
 		snprintf(buffer, sizeof(buffer), _(" (achieved %s)"), o.descname().c_str());
@@ -1341,6 +1345,7 @@ static int L_report_result(lua_State * L) {
 		file name will be used (wl_autosave).
 	:type filename: :class: string
 */
+// NOCOM(#cghislai): the argument should not be optional I think, "" as a game name makes no sense.
 static int L_save_game(lua_State * L) {
 	std::string filename = "";
 	if (lua_gettop(L) >= 1)
