@@ -183,7 +183,7 @@ public:
 	virtual bool burn_on_destroy();
 	virtual void destroy(Editor_Game_Base &);
 
-	void show_options(Interactive_GameBase &, bool avoid_fastclick = false, Point pos = Point(-1,-1));
+	void show_options(Interactive_GameBase &, bool avoid_fastclick = false, Point pos = Point(- 1, - 1));
 	void hide_options();
 	void refresh_options(Interactive_GameBase &);
 
