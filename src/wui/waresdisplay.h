@@ -58,6 +58,7 @@ public:
 		(uint8_t state, int32_t x, int32_t y, int32_t xdiff, int32_t ydiff);
 
 	bool handle_mousepress(uint8_t btn, int32_t x, int32_t y);
+	bool handle_mouserelease(Uint8 btn, int32_t x, int32_t y);
 
 
 	// Wares may be selected (highlighted)
@@ -100,13 +101,17 @@ private:
 	typedef std::vector<const Widelands::WareList *> vector_type;
 	typedef std::vector<bool> selection_type;
 
+	void update_anchor_selection(int32_t x, int32_t y);
+
 	const Widelands::Tribe_Descr & m_tribe;
 	Widelands::WareWorker m_type;
 	UI::Textarea        m_curware;
 	selection_type      m_selected;
 	selection_type      m_hidden;
+	selection_type		m_in_selection;
 	bool                m_selectable;
 	bool                m_horizontal;
+	Widelands::Ware_Index m_selection_anchor;
 	boost::function<void(Widelands::Ware_Index, bool)> m_callback_function;
 };
 

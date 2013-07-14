@@ -63,8 +63,12 @@ AbstractWaresDisplay::AbstractWaresDisplay
 	m_hidden
 		(m_type == Widelands::wwWORKER ? m_tribe.get_nrworkers()
 	                          : m_tribe.get_nrwares(), false),
+	m_in_selection
+		(m_type == Widelands::wwWORKER ? m_tribe.get_nrworkers()
+	                          : m_tribe.get_nrwares(), false),
 	m_selectable(selectable),
 	m_horizontal(horizontal),
+	m_selection_anchor(Widelands::Ware_Index::Null()),
 	m_callback_function(callback_function)
 {
 	//resize the configuration of our wares if they won't fit in the current window
@@ -104,6 +108,9 @@ bool AbstractWaresDisplay::handle_mousemove
 		 .c_str()
 		 :
 		 "");
+	if (m_selection_anchor) {
+		update_anchor_selection(x, y);
+	}
 	return true;
 }
 
@@ -117,12 +124,42 @@ bool AbstractWaresDisplay::handle_mousepress
 
 		if (m_selectable) {
 			toggle_ware(ware);
+			// mouserelase may be skipped sometimes here
+			if (!m_selection_anchor) {
+				m_selection_anchor = ware;
+			}
 		}
 		return true;
 	}
 
 	return UI::Panel::handle_mousepress(btn, x, y);
 }
+
+bool AbstractWaresDisplay::handle_mouserelease(Uint8 btn, int32_t x, int32_t y)
+{
+	if (btn == SDL_BUTTON_LEFT) {
+		if (m_selection_anchor) {
+			Widelands::Ware_Index const number = m_type == Widelands::wwWORKER ? 
+				m_tribe.get_nrworkers() : m_tribe.get_nrwares();
+			for (Widelands::Ware_Index i = Widelands::Ware_Index::First();
+					i < number; ++i) {
+				if (!m_in_selection[i]) {
+					continue;
+				}
+				if (ware_selected(m_selection_anchor)) {
+					select_ware(i);
+				} else {
+					unselect_ware(i);
+				}
+			}
+			m_selection_anchor = Widelands::Ware_Index::Null();
+			std::fill(m_in_selection.begin(), m_in_selection.end(), false);
+			return true;
+		}
+	}
+	return UI::Panel::handle_mouserelease(btn, x, y);
+}
+
 
 /**
  * Returns the index of the ware under the given coordinates, or
@@ -150,6 +187,62 @@ Widelands::Ware_Index AbstractWaresDisplay::ware_at_point(int32_t x, int32_t y) 
 
 	return Widelands::Ware_Index::Null();
 }
+
+void AbstractWaresDisplay::update_anchor_selection(int32_t x, int32_t y)
+{
+	if (!m_selection_anchor || x < 0 || y < 0) {
+		return;
+	}
+
+	std::fill(m_in_selection.begin(), m_in_selection.end(), false);
+	Point pos0 = ware_position(m_selection_anchor);
+	int32_t x0 = pos0.x + 3; // Make sure the anchor row/col is selected in reverse order
+	int32_t y0 = pos0.y + 3;
+
+	unsigned int i0 = x0 / (WARE_MENU_PIC_WIDTH + 4);
+	unsigned int j0 = y0 / (WARE_MENU_PIC_HEIGHT + WARE_MENU_INFO_SIZE + 3);
+	unsigned int i = x / (WARE_MENU_PIC_WIDTH + 4);
+	unsigned int j = y / (WARE_MENU_PIC_HEIGHT + WARE_MENU_INFO_SIZE + 3);
+	unsigned int s;
+	if (m_horizontal) {
+		s = i0;
+		i0 = j0;
+		j0 = s;
+		s = i;
+		i = j;
+		j = s;
+	}
+
+	// Ensure topleft to bottomright
+	if (i0 > i) {
+		s = i0;
+		i0 = i;
+		i = s;
+	}
+	if (j0 > j) {
+		s = j0;
+		j0 = j;
+		j = s;
+	}
+
+	for (unsigned int cur_i = i0; cur_i <= i; cur_i++) {
+		if (cur_i >= icons_order().size()) {
+			continue;
+		}
+		for (unsigned cur_j = j0; cur_j <= j; cur_j++) {
+			if (cur_j >= icons_order()[cur_i].size()) {
+				continue;
+			}
+			Widelands::Ware_Index ware = icons_order()[cur_i][cur_j];
+			if (m_hidden[ware]) {
+				continue;
+			}
+			m_in_selection[ware] = true;
+		}
+	}
+	update();
+}
+
 
 
 void AbstractWaresDisplay::layout()
@@ -241,9 +334,18 @@ void AbstractWaresDisplay::draw_ware
 {
 	Point p = ware_position(id);
 
+	bool draw_selected = m_selected[id];
+	if (m_selection_anchor) {
+		if (ware_selected(m_selection_anchor)) {
+			draw_selected |= m_in_selection[id];
+		} else {
+			draw_selected &= !m_in_selection[id];
+		}
+	}
+	
 	//  draw a background
 	const Image* bgpic =
-		g_gr->images().get(ware_selected(id) ?  "pics/ware_list_bg_selected.png" :  "pics/ware_list_bg.png");
+		g_gr->images().get(draw_selected ?  "pics/ware_list_bg_selected.png" :  "pics/ware_list_bg.png");
 	uint16_t w = bgpic->width();
 
 	dst.blit(p, bgpic);
@@ -378,3 +480,4 @@ std::string waremap_to_richtext
 			}
 	return ret;
 }
+
