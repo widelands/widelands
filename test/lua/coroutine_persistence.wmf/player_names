@@ -1,0 +1,9 @@
+# Automatically created by Widelands unofficial-git-7a44c32 (debug)
+
+[global]
+packet_version="1"
+
+[player_1]
+name="Player 1"
+tribe="barbarians"
+ai=

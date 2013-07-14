@@ -1,0 +1,11 @@
+# Automatically created by Widelands unofficial-git-7a44c32 (debug)
+
+[global]
+packet_version="1"
+map_w="64"
+map_h="64"
+nr_players="1"
+world="greenland"
+name="00Test"
+author="Unknown"
+descr="no description defined"
