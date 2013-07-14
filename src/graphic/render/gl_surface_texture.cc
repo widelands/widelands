@@ -30,27 +30,16 @@ bool use_arb_;
 /**
  * Initial global resources needed for fast offscreen rendering.
  */
-void GLSurfaceTexture::Initialize() {
-	const char * extensions = reinterpret_cast<const char *>(glGetString (GL_EXTENSIONS));
+void GLSurfaceTexture::Initialize(bool use_arb) {
+	use_arb_ = use_arb;
 
 	// Generate the framebuffer for Offscreen rendering.
-	bool fbs = false;
-	if (strstr(extensions, "GL_ARB_framebuffer_object") != 0) {
-		fbs = true;
-		use_arb_ = true;
+	if (use_arb) {
 		glGenFramebuffers(1, &gl_framebuffer_id_);
 		glBindFramebuffer(GL_FRAMEBUFFER, 0);
-	} else if (strstr(extensions, "GL_EXT_framebuffer_object") != 0) {
-		fbs = true;
-		use_arb_ = false;
+	} else {
 		glGenFramebuffersEXT(1, &gl_framebuffer_id_);
 		glBindFramebufferEXT(GL_FRAMEBUFFER, 0);
-	}
-	if (!fbs) {
-		throw wexception
-			("No support for GL_ARB_framebuffer_object or GL_ARB_framebuffer_object "
-			 "in OpenGL implementation. One of these is needed for Widelands in OpenGL mode. You can "
-			 "try launching Widelands with --opengl=0.");
 	}
 }
 
