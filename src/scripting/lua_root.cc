@@ -81,7 +81,7 @@ const MethodType<L_Game> L_Game::Methods[] = {
 const PropertyType<L_Game> L_Game::Properties[] = {
 	PROP_RO(L_Game, time),
 	PROP_RW(L_Game, desired_speed),
-	PROP_RW(L_Game, allow_autosaving),
+	PROP_RW(L_Game, allow_saving),
 	{0, 0, 0},
 };
 
@@ -131,22 +131,22 @@ int L_Game::get_desired_speed(lua_State * L) {
 }
 
 /* RST
-	.. attribute:: allow_autosaving
+	.. attribute:: allow_saving
 
-		(RW) Disable or enable auto-saving. When you show off UI features in a
-		tutorial or scenario, you have to disallow auto-saving because UI
+		(RW) Disable or enable saving. When you show off UI features in a
+		tutorial or scenario, you have to disallow saving because UI
 		elements can not be saved and therefore reloading a game saved in the
 		meantime would crash the game.
 */
 // UNTESTED
-int L_Game::set_allow_autosaving(lua_State * L) {
-	get_game(L).save_handler().set_allow_autosaving
+int L_Game::set_allow_saving(lua_State * L) {
+	get_game(L).save_handler().set_allow_saving
 		(luaL_checkboolean(L, -1));
 	return 0;
 }
 // UNTESTED
-int L_Game::get_allow_autosaving(lua_State * L) {
-	lua_pushboolean(L, get_game(L).save_handler().get_allow_autosaving());
+int L_Game::get_allow_saving(lua_State * L) {
+	lua_pushboolean(L, get_game(L).save_handler().get_allow_saving());
 	return 1;
 }
 
@@ -190,39 +190,27 @@ int L_Game::launch_coroutine(lua_State * L) {
 }
 
 /* RST
-	.. method:: save(name)
+	.. method:: save([name = `nil`])
 
-		Saves the game exactly as if the player had entered the save dialog and
-		entered name as an argument. If some error occurred while saving, this
-		will throw an Lua error. Note that this currently doesn't work when
-		called from inside a Coroutine.
+		Requests a savegame. Note that the actual save will be performed
+		later, and that you have no control over any error that may happen
+		by then currently.
 
-		:arg name: name of save game. If this game already exists, it will be
-			silently overwritten
+		:arg name: name of save game, as if entered in the save dialog.
+			If this game already exists, it will be silently overwritten.
+			If omitted, the autosave name will be used.
 		:type name: :class:`string`
 		:returns: :const:`nil`
 */
-// NOCOM(#cghislai): either kill this method or (which I think makes more sense), move your
-// new code into this method and kill your old one. Also fix the comment if you do, because saving inside
-// a coroutine should work with your code (the save will happen as soon as the coroutine goes to sleep the next timer'
 int L_Game::save(lua_State * const L) {
-	Widelands::Game & game = get_game(L);
-
-	std::string const complete_filename =
-		game.save_handler().create_file_name
-			(SaveHandler::get_base_dir(), luaL_checkstring(L, -1));
-
-	lua_pop(L, 2); // Make stack empty before persistence starts.
-
-	if (g_fs->FileExists(complete_filename))
-		g_fs->Unlink(complete_filename);
-	std::string error;
-	if (!game.save_handler().save_game(game, complete_filename, &error))
-		return report_error(L, "save error: %s", error.c_str());
+	if (lua_gettop(L) >= 1) {
+		get_game(L).save_handler().request_save(luaL_checkstring(L, 1));
+	} else {
+		get_game(L).save_handler().request_save();
+	}
 
 	return 0;
 }
-
 
 /*
  ==========================================================

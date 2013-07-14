@@ -51,8 +51,8 @@ public:
 	int get_time(lua_State *);
 	int get_desired_speed(lua_State *);
 	int set_desired_speed(lua_State *);
-	int get_allow_autosaving(lua_State *);
-	int set_allow_autosaving(lua_State *);
+	int get_allow_saving(lua_State *);
+	int set_allow_saving(lua_State *);
 
 	/*
 	 * Lua methods

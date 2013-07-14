@@ -470,7 +470,7 @@ int L_Player::message_box(lua_State * L) {
 	uint32_t cspeed = game.gameController()->desiredSpeed();
 	game.gameController()->setDesiredSpeed(0);
 
-	game.save_handler().set_allow_autosaving(false);
+	game.save_handler().set_allow_saving(false);
 
 	Story_Message_Box * mb =
 		new Story_Message_Box
@@ -486,7 +486,7 @@ int L_Player::message_box(lua_State * L) {
 
 	game.gameController()->setDesiredSpeed(cspeed);
 
-	game.save_handler().set_allow_autosaving(true);
+	game.save_handler().set_allow_saving(true);
 
 	return 1;
 }
@@ -1336,24 +1336,6 @@ static int L_report_result(lua_State * L) {
 	return 0;
 }
 
-/* RST
-.. function:: save_game([filename = ""])
-
-	Save the game.
-
-	:arg filename: A filename may be passed in, otherwhise the autosave
-		file name will be used (wl_autosave).
-	:type filename: :class: string
-*/
-// NOCOM(#cghislai): the argument should not be optional I think, "" as a game name makes no sense.
-static int L_save_game(lua_State * L) {
-	std::string filename = "";
-	if (lua_gettop(L) >= 1)
-		filename = luaL_checkstring(L, 1);
-
-	get_game(L).save_handler().request_save(filename);
-	return 0;
-}
 /*
  * ========================================================================
  *                            MODULE FUNCTIONS
@@ -1361,7 +1343,6 @@ static int L_save_game(lua_State * L) {
  */
 const static struct luaL_reg wlgame [] = {
 	{"report_result", &L_report_result},
-	{"save_game", &L_save_game},
 	{0, 0}
 };
 
