@@ -239,8 +239,8 @@ protected:
 	virtual void cleanup(Editor_Game_Base &);
 	virtual void act(Game &, uint32_t data);
 
-	virtual void draw(const Editor_Game_Base &, RenderTarget &, FCoords, Point);
-	void draw_help(const Editor_Game_Base &, RenderTarget &, FCoords, Point);
+	virtual void draw(const Editor_Game_Base &, RenderTarget &, const FCoords&, const Point&);
+	void draw_help(const Editor_Game_Base &, RenderTarget &, const FCoords&, const Point&);
 
 	virtual void create_options_window
 		(Interactive_GameBase &, UI::Window * & registry)

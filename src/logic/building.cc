@@ -722,10 +722,7 @@ Draw the building.
 ===============
 */
 void Building::draw
-	(const Editor_Game_Base &       game,
-	 RenderTarget           &       dst,
-	 FCoords                  const coords,
-	 Point                    const pos)
+	(const Editor_Game_Base& game, RenderTarget& dst, const FCoords& coords, const Point& pos)
 {
 	if (coords == m_position) { // draw big buildings only once
 		dst.drawanim
@@ -745,10 +742,7 @@ Draw overlay help strings when enabled.
 ===============
 */
 void Building::draw_help
-	(const Editor_Game_Base &       game,
-	 RenderTarget           &       dst,
-	 FCoords,
-	 Point                    const pos)
+	(const Editor_Game_Base& game, RenderTarget& dst, const FCoords&, const Point& pos)
 {
 	const Interactive_GameBase & igbase =
 		ref_cast<Interactive_GameBase const, Interactive_Base const>

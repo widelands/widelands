@@ -180,7 +180,7 @@ void PortDock::set_economy(Economy * e)
 
 
 void PortDock::draw
-		(const Editor_Game_Base &, RenderTarget &, const FCoords, const Point)
+		(const Editor_Game_Base &, RenderTarget &, const FCoords&, const Point&)
 {
 	// do nothing
 }
