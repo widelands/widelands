@@ -4,9 +4,11 @@
 -- This tests saving and loading of various Lua objects in the global
 -- environment.
 --
--- To run this test use:
--- ./widelands --nozip --scenario=src/scripting/test/persistence.wmf &&
---   ./widelands --loadgame=~/.widelands/save/lua_persistence.wgf
+-- To run this test, go to the top level directory, set the path to your
+-- widelands binary and run:
+--
+-- $PATH_TO_WIDELANDS_BINARY --datadir="." --nozip --scenario=test/lua/persistence.wmf && \
+--   $PATH_TO_WIDELANDS_BINARY --datadir="." --loadgame=~/.widelands/save/lua_persistence.wgf
 
 -- NOCOM(#cghislai): this should use your new function to make sure that it is actually called. Also, you should
 -- save from inside a coroutine and make sure that this is really possible AND that the coroutine itself is persistet

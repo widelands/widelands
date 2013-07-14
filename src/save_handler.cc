@@ -38,9 +38,7 @@ using Widelands::Game_Saver;
 void SaveHandler::think(Widelands::Game & game, int32_t realtime) {
 	initialize(realtime);
 	std::string filename = "wl_autosave";
-	// NOCOM(#cghislai): I think this must be at the top level of this method, so you need
-	// to exit early. The reason is that we only disable it when UI elements are used in
-	// Lua - and they cannot be persisted. So when this is false, we must really never ever save.
+
 	if (!m_allow_saving) {
 		return;
 	}

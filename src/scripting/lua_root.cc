@@ -81,6 +81,7 @@ const MethodType<L_Game> L_Game::Methods[] = {
 const PropertyType<L_Game> L_Game::Properties[] = {
 	PROP_RO(L_Game, time),
 	PROP_RW(L_Game, desired_speed),
+	PROP_RW(L_Game, allow_autosaving),
 	PROP_RW(L_Game, allow_saving),
 	{0, 0, 0},
 };
@@ -146,6 +147,17 @@ int L_Game::set_allow_saving(lua_State * L) {
 }
 // UNTESTED
 int L_Game::get_allow_saving(lua_State * L) {
+	lua_pushboolean(L, get_game(L).save_handler().get_allow_saving());
+	return 1;
+}
+int L_Game::set_allow_autosaving(lua_State * L) {
+	// WAS_DEPRECATED_BEFORE(build18), use allow_saving
+	get_game(L).save_handler().set_allow_saving
+		(luaL_checkboolean(L, -1));
+	return 0;
+}
+int L_Game::get_allow_autosaving(lua_State * L) {
+	// WAS_DEPRECATED_BEFORE(build18), use allow_saving
 	lua_pushboolean(L, get_game(L).save_handler().get_allow_saving());
 	return 1;
 }

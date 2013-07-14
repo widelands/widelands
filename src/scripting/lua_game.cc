@@ -1082,10 +1082,6 @@ int L_Objective::set_done(lua_State * L) {
 	}
 
 	if (o.done()) {
-		// NOCOM(#cghislai): I am a bit torn here - it feels like this is duplicating functionality and it would
-		// be better to call the lua function directly (i.e. pushstring("filname"), the pcall the method). But that reads
-		// more complex and it is really just one line of code that is
-		// duplicated. So it might be better to leave it as is? your call.
 		std::string filename = get_egbase(L).get_map()->get_name();
 		char buffer[128];
 		snprintf(buffer, sizeof(buffer), _(" (achieved %s)"), o.descname().c_str());
