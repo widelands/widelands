@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2013-07-12 04:46+0000\n"
+"POT-Creation-Date: 2013-07-13 15:38+0000\n"
 "PO-Revision-Date: 2013-07-02 09:43+0000\n"
 "Last-Translator: LiSrt <Unknown>\n"
 "Language-Team: English (United Kingdom) <en_GB@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-07-13 05:15+0000\n"
+"X-Launchpad-Export-Date: 2013-07-14 05:17+0000\n"
 "X-Generator: Launchpad (build 16696)\n"
 
 #: ../../tribes/atlanteans/golden_tabard/conf:1
@@ -26,14 +26,6 @@ msgstr ""
 "A golden tabard is produced in an Atlantean weaving-mill from gold yarn. It "
 "is used in the training camp — together with food — to train soldiers from "
 "health points level 0 to level 1."
-
-#: ../../tribes/atlanteans/saw/conf:1
-msgid ""
-"A saw is needed by the woodcutter and the carpenter. It is produced by the "
-"toolsmith."
-msgstr ""
-"A saw is needed by the woodcutter and the carpenter. It is produced by the "
-"toolsmith."
 
 #: ../../tribes/atlanteans/ship/conf:1
 msgid "A sea-worthy ship"
@@ -1078,13 +1070,10 @@ msgstr ""
 
 #: ../../tribes/atlanteans/hammer/conf:1
 msgid ""
-"The hammer is an essential tool. It is needed by the geologist, the builder "
-"and all smiths. Make sure you always got some in reserve! It is produced by "
-"the toolsmith."
+"The hammer is an essential tool. It is needed by geologists, builders, "
+"weaponsmiths and armoursmiths. Make sure you always got some in reserve! It "
+"is produced by the toolsmith."
 msgstr ""
-"The hammer is an essential tool needed by geologists, builders, and all "
-"smiths. Make sure you always have some spare! It is produced by the "
-"toolsmith."
 
 #: ../../tribes/atlanteans/long_trident/conf:1
 msgid ""
@@ -1095,6 +1084,12 @@ msgstr ""
 "The long trident is the first trident soldiers are trained with. It is "
 "produced in the weapon smithy and used in the dungeon — together with food — "
 "to train soldiers from attack level 0 to level 1."
+
+#: ../../tribes/atlanteans/saw/conf:1
+msgid ""
+"The saw is needed by the woodcutter and the toolsmith. It is produced by the "
+"toolsmith."
+msgstr ""
 
 #: ../../tribes/atlanteans/advanced_shield/conf:1
 msgid ""

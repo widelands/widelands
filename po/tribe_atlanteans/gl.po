@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2013-07-12 04:46+0000\n"
+"POT-Creation-Date: 2013-07-13 15:38+0000\n"
 "PO-Revision-Date: 2012-01-21 22:55+0000\n"
 "Last-Translator: Xosé <Unknown>\n"
 "Language-Team: Galician <proxecto@trasno.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-07-13 05:15+0000\n"
+"X-Launchpad-Export-Date: 2013-07-14 05:16+0000\n"
 "X-Generator: Launchpad (build 16696)\n"
 "Language: gl\n"
 
@@ -27,12 +27,6 @@ msgstr ""
 "Os tabardos dourados fabrícanse nos teares atlánticos a partir de fío de "
 "ouro. Emprégase nos campos de adestramento —xunto con comida— para adestrar "
 "soldados dos niveis 0 e 1 de vida."
-
-#: ../../tribes/atlanteans/saw/conf:1
-msgid ""
-"A saw is needed by the woodcutter and the carpenter. It is produced by the "
-"toolsmith."
-msgstr ""
 
 #: ../../tribes/atlanteans/ship/conf:1
 msgid "A sea-worthy ship"
@@ -1025,19 +1019,22 @@ msgstr "A rede de pesca utilízaa o pescador e fabrícaa o ferreiro."
 
 #: ../../tribes/atlanteans/hammer/conf:1
 msgid ""
-"The hammer is an essential tool. It is needed by the geologist, the builder "
-"and all smiths. Make sure you always got some in reserve! It is produced by "
-"the toolsmith."
+"The hammer is an essential tool. It is needed by geologists, builders, "
+"weaponsmiths and armoursmiths. Make sure you always got some in reserve! It "
+"is produced by the toolsmith."
 msgstr ""
-"O martelo é unha ferramenta esencial. Necesítana o xeólogo, o construtor e "
-"todos os ferreiros. Asegúrate de ter sempre algún nas reservas! Prodúceo o "
-"ferreiro."
 
 #: ../../tribes/atlanteans/long_trident/conf:1
 msgid ""
 "The long trident is the first trident in the training of soldiers. It is "
 "produced in the weapon smithy and used in the dungeon - together with food - "
 "to train soldiers from attack level 0 to level 1."
+msgstr ""
+
+#: ../../tribes/atlanteans/saw/conf:1
+msgid ""
+"The saw is needed by the woodcutter and the toolsmith. It is produced by the "
+"toolsmith."
 msgstr ""
 
 #: ../../tribes/atlanteans/advanced_shield/conf:1

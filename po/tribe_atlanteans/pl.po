@@ -6,14 +6,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4804\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2013-07-12 04:46+0000\n"
+"POT-Creation-Date: 2013-07-13 15:38+0000\n"
 "PO-Revision-Date: 2012-12-28 16:59+0000\n"
 "Last-Translator: Wesmania <ikk_pl@yahoo.co.uk>\n"
 "Language-Team: Language <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-07-13 05:15+0000\n"
+"X-Launchpad-Export-Date: 2013-07-14 05:17+0000\n"
 "X-Generator: Launchpad (build 16696)\n"
 
 #: ../../tribes/atlanteans/golden_tabard/conf:1
@@ -25,13 +25,6 @@ msgstr ""
 "Złota kamizelka jest produkowana w atlantyckim warsztacie tkackim ze złotej "
 "przędzy. Używana jest w obozach szkoleniowych razem z jedzeniem przy "
 "zwiększaniu punktów życia żołnierzy z poziomu 0 do 1."
-
-#: ../../tribes/atlanteans/saw/conf:1
-msgid ""
-"A saw is needed by the woodcutter and the carpenter. It is produced by the "
-"toolsmith."
-msgstr ""
-"Piła jest potrzebna drwalom i cieślom. Produkcją zajmuje się warsztat."
 
 #: ../../tribes/atlanteans/ship/conf:1
 msgid "A sea-worthy ship"
@@ -1081,13 +1074,10 @@ msgstr "Sieć rybacka używana przez rybaka produkowana jest przez warsztat."
 
 #: ../../tribes/atlanteans/hammer/conf:1
 msgid ""
-"The hammer is an essential tool. It is needed by the geologist, the builder "
-"and all smiths. Make sure you always got some in reserve! It is produced by "
-"the toolsmith."
+"The hammer is an essential tool. It is needed by geologists, builders, "
+"weaponsmiths and armoursmiths. Make sure you always got some in reserve! It "
+"is produced by the toolsmith."
 msgstr ""
-"Młotek to podstawowe narzędzie. Używany jest przez geologa, "
-"budowniczego,rzemieślnika w warsztacie, płatnerza i zbrojmistrza. Upewnij "
-"się, że zawsze masz jakiś w magazynie! Produkowany przez warsztat."
 
 #: ../../tribes/atlanteans/long_trident/conf:1
 msgid ""
@@ -1099,6 +1089,12 @@ msgstr ""
 "Produkowany jest u zbrojmistrza i wykorzystywany w podziemiach - razem z "
 "jedzeniem - do podnoszenia umiejętności ataku żołnierzy z poziomu 0 do "
 "poziomu 1."
+
+#: ../../tribes/atlanteans/saw/conf:1
+msgid ""
+"The saw is needed by the woodcutter and the toolsmith. It is produced by the "
+"toolsmith."
+msgstr ""
 
 #: ../../tribes/atlanteans/advanced_shield/conf:1
 msgid ""

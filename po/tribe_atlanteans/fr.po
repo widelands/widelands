@@ -6,14 +6,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4866\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2013-07-12 04:46+0000\n"
+"POT-Creation-Date: 2013-07-13 15:38+0000\n"
 "PO-Revision-Date: 2012-04-09 15:49+0000\n"
 "Last-Translator: Emmanuel Andry <Unknown>\n"
 "Language-Team: Language <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-07-13 05:15+0000\n"
+"X-Launchpad-Export-Date: 2013-07-14 05:16+0000\n"
 "X-Generator: Launchpad (build 16696)\n"
 
 #: ../../tribes/atlanteans/golden_tabard/conf:1
@@ -26,14 +26,6 @@ msgstr ""
 "fils dorés. Il est utilisé dans les camps d'entraînement - avec de la "
 "nourriture - pour entraîner les soldats en points de vie du niveau 0 au "
 "niveau 1."
-
-#: ../../tribes/atlanteans/saw/conf:1
-msgid ""
-"A saw is needed by the woodcutter and the carpenter. It is produced by the "
-"toolsmith."
-msgstr ""
-"Une scie est nécessaire au bûcheron et au charpentier. Elle est produite "
-"dans la forge à outil."
 
 #: ../../tribes/atlanteans/ship/conf:1
 msgid "A sea-worthy ship"
@@ -1091,13 +1083,10 @@ msgstr ""
 
 #: ../../tribes/atlanteans/hammer/conf:1
 msgid ""
-"The hammer is an essential tool. It is needed by the geologist, the builder "
-"and all smiths. Make sure you always got some in reserve! It is produced by "
-"the toolsmith."
+"The hammer is an essential tool. It is needed by geologists, builders, "
+"weaponsmiths and armoursmiths. Make sure you always got some in reserve! It "
+"is produced by the toolsmith."
 msgstr ""
-"Le marteau est un outil essentiel. Il est utilisé par le géologue, le "
-"bâtisseur et tous les forgerons. Assurez-vous d'en avoir toujours en réserve "
-"! Il est produit par le forgeron d'outils."
 
 #: ../../tribes/atlanteans/long_trident/conf:1
 msgid ""
@@ -1108,6 +1097,12 @@ msgstr ""
 "Le trident long est le premier trident dans l'entrainement des soldats. Il "
 "est produit dans la forge d'armes et utilisé dans le donjon - avec de la "
 "nourriture - pour entrainer les soldats en attaque du niveau 0 au niveau 1."
+
+#: ../../tribes/atlanteans/saw/conf:1
+msgid ""
+"The saw is needed by the woodcutter and the toolsmith. It is produced by the "
+"toolsmith."
+msgstr ""
 
 #: ../../tribes/atlanteans/advanced_shield/conf:1
 msgid ""

@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2013-07-12 04:46+0000\n"
+"POT-Creation-Date: 2013-07-13 15:38+0000\n"
 "PO-Revision-Date: 2012-08-22 02:54+0000\n"
 "Last-Translator: Dios <Unknown>\n"
 "Language-Team: Japanese <ja@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-07-13 05:15+0000\n"
+"X-Launchpad-Export-Date: 2013-07-14 05:17+0000\n"
 "X-Generator: Launchpad (build 16696)\n"
 
 #: ../../tribes/atlanteans/golden_tabard/conf:1
@@ -24,12 +24,6 @@ msgid ""
 "healthpoints level 0 to level 1."
 msgstr ""
 "金のタバードはアトラスの織物工場で金糸から作られます。兵士のHPをレベル0からレベル1に訓練するために、食料とともに訓練所で使用されます。"
-
-#: ../../tribes/atlanteans/saw/conf:1
-msgid ""
-"A saw is needed by the woodcutter and the carpenter. It is produced by the "
-"toolsmith."
-msgstr "のこぎりは木こりと大工が必要とします。これは工具鍛冶屋で作られます。"
 
 #: ../../tribes/atlanteans/ship/conf:1
 msgid "A sea-worthy ship"
@@ -1017,12 +1011,10 @@ msgstr "魚網は漁師が使用します。工具鍛冶屋で作られます。
 
 #: ../../tribes/atlanteans/hammer/conf:1
 msgid ""
-"The hammer is an essential tool. It is needed by the geologist, the builder "
-"and all smiths. Make sure you always got some in reserve! It is produced by "
-"the toolsmith."
+"The hammer is an essential tool. It is needed by geologists, builders, "
+"weaponsmiths and armoursmiths. Make sure you always got some in reserve! It "
+"is produced by the toolsmith."
 msgstr ""
-"ハンマーは重要な道具です。これは地質学者や大工および全ての鍛冶屋が必要とします。常に予備がいくつかあることを確認してください。\n"
-"これは工具鍛冶屋で作られます。"
 
 #: ../../tribes/atlanteans/long_trident/conf:1
 msgid ""
@@ -1032,6 +1024,12 @@ msgid ""
 msgstr ""
 "トライデント（長）は、兵士が最初に訓練するトライデントです。これは武器鍛冶屋で作られ、食料とともにダンジョンで使われます。\n"
 "兵士の攻撃力をレベル0からレベル1に鍛え上げます。"
+
+#: ../../tribes/atlanteans/saw/conf:1
+msgid ""
+"The saw is needed by the woodcutter and the toolsmith. It is produced by the "
+"toolsmith."
+msgstr ""
 
 #: ../../tribes/atlanteans/advanced_shield/conf:1
 msgid ""

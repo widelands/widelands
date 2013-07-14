@@ -6,14 +6,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4530\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2013-07-12 04:46+0000\n"
+"POT-Creation-Date: 2013-07-13 15:38+0000\n"
 "PO-Revision-Date: 2012-04-06 13:34+0000\n"
 "Last-Translator: Angelo Locritani <Unknown>\n"
 "Language-Team: Italiano <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-07-13 05:15+0000\n"
+"X-Launchpad-Export-Date: 2013-07-14 05:17+0000\n"
 "X-Generator: Launchpad (build 16696)\n"
 "X-Poedit-Country: ITALY\n"
 "X-Poedit-Language: Italian\n"
@@ -28,14 +28,6 @@ msgstr ""
 "Un tabardo dorato è prodotto in un mulino di tessitura atlantideo usando il "
 "filato dorato. È utilizzato nel campo di addestramento - insieme al cibo - "
 "per addestrare i soldati da livello 0 al livello 1 di punti salute"
-
-#: ../../tribes/atlanteans/saw/conf:1
-msgid ""
-"A saw is needed by the woodcutter and the carpenter. It is produced by the "
-"toolsmith."
-msgstr ""
-"Una sega è richiesta dal taglialegna e dal carpentiere. È prodotta dal "
-"fabbro."
 
 #: ../../tribes/atlanteans/ship/conf:1
 msgid "A sea-worthy ship"
@@ -1090,13 +1082,10 @@ msgstr "La rete da pesca è utilizzata dal pescatore e prodotta dal fabbro."
 
 #: ../../tribes/atlanteans/hammer/conf:1
 msgid ""
-"The hammer is an essential tool. It is needed by the geologist, the builder "
-"and all smiths. Make sure you always got some in reserve! It is produced by "
-"the toolsmith."
+"The hammer is an essential tool. It is needed by geologists, builders, "
+"weaponsmiths and armoursmiths. Make sure you always got some in reserve! It "
+"is produced by the toolsmith."
 msgstr ""
-"Il martello è uno strumento essenziale. È necessario per il geologo, il "
-"costruttore e tutti i fabbri. Assicurati di averne sempre qualche riserva! È "
-"prodotto dal fabbro."
 
 #: ../../tribes/atlanteans/long_trident/conf:1
 msgid ""
@@ -1108,6 +1097,12 @@ msgstr ""
 "soldati. È prodotto nella fucina d'armi ed utilizzato nella segreta - "
 "insieme al cibo - per addestrare i soldati dal livello 0 al livello 1 di "
 "attacco."
+
+#: ../../tribes/atlanteans/saw/conf:1
+msgid ""
+"The saw is needed by the woodcutter and the toolsmith. It is produced by the "
+"toolsmith."
+msgstr ""
 
 #: ../../tribes/atlanteans/advanced_shield/conf:1
 msgid ""

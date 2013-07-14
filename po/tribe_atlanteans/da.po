@@ -6,14 +6,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4374\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2013-07-12 04:46+0000\n"
+"POT-Creation-Date: 2013-07-13 15:38+0000\n"
 "PO-Revision-Date: 2012-07-06 08:36+0000\n"
 "Last-Translator: beer <Unknown>\n"
 "Language-Team: Danish <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-07-13 05:15+0000\n"
+"X-Launchpad-Export-Date: 2013-07-14 05:16+0000\n"
 "X-Generator: Launchpad (build 16696)\n"
 
 #: ../../tribes/atlanteans/golden_tabard/conf:1
@@ -25,14 +25,6 @@ msgstr ""
 "en guld Tabard er produceret i Atlatean vævnings-mølle ud af guld tråd. Det "
 "anvendes i trainingscamp - sammen med mad - for at træne soldater fra "
 "healthpoints niveau 0 til niveau 1."
-
-#: ../../tribes/atlanteans/saw/conf:1
-msgid ""
-"A saw is needed by the woodcutter and the carpenter. It is produced by the "
-"toolsmith."
-msgstr ""
-"En sav er nødvendigt for en skovhugger og og tømrer. Det produceres af "
-"værktøjsmeden."
 
 #: ../../tribes/atlanteans/ship/conf:1
 msgid "A sea-worthy ship"
@@ -1075,13 +1067,10 @@ msgstr "Fiskenettet bruges af fiskeren og produceres af værktøjsmageren."
 
 #: ../../tribes/atlanteans/hammer/conf:1
 msgid ""
-"The hammer is an essential tool. It is needed by the geologist, the builder "
-"and all smiths. Make sure you always got some in reserve! It is produced by "
-"the toolsmith."
+"The hammer is an essential tool. It is needed by geologists, builders, "
+"weaponsmiths and armoursmiths. Make sure you always got some in reserve! It "
+"is produced by the toolsmith."
 msgstr ""
-"Hammeren er et vigtigt værktøj. Den bruges af geologen, byggeren og alle "
-"smede. Vær sikker på at du altid har nogle i reserve! Den produceres af "
-"værktøjsmageren."
 
 #: ../../tribes/atlanteans/long_trident/conf:1
 msgid ""
@@ -1092,6 +1081,12 @@ msgstr ""
 "Den lange Trident er den første Trident i uddannelsen af ​​soldater. Det er "
 "produceret i våbenet smedje og anvendes i fangehullet - sammen med mad - at "
 "træne soldater mod angreb niveau 0 til niveau 1."
+
+#: ../../tribes/atlanteans/saw/conf:1
+msgid ""
+"The saw is needed by the woodcutter and the toolsmith. It is produced by the "
+"toolsmith."
+msgstr ""
 
 #: ../../tribes/atlanteans/advanced_shield/conf:1
 msgid ""
