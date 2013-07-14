@@ -109,6 +109,14 @@ void Graphic::initialize(int32_t w, int32_t h, int32_t bpp, bool fullscreen, boo
 	// Here we actually set the video mode
 	sdlsurface = SDL_SetVideoMode(w, h, bpp, flags);
 
+	// If we tried opengl and it was not successful try without opengl
+	if (!sdlsurface and opengl)
+	{
+		log("Graphics: Could not set videomode: %s, trying without opengl\n", SDL_GetError());
+		flags &= ~SDL_OPENGL;
+		sdlsurface = SDL_SetVideoMode(w, h, bpp, flags);
+	}
+
 	if (!sdlsurface)
 	{
 		log
