@@ -346,6 +346,17 @@ void Game::init_newgame
 	} else {
 		m_win_condition_displayname = _("Scenario");
 	}
+	m_players_amount = 0;
+	std::vector<PlayerSettings>::const_iterator it;
+	for (it = settings.players.begin(); it != settings.players.end(); ++it) {
+		PlayerSettings ps = *it;
+		if
+			(ps.state == PlayerSettings::stateHuman
+			|| ps.state == PlayerSettings::stateComputer)
+		{
+			m_players_amount++;
+		}
+	}
 }
 
 

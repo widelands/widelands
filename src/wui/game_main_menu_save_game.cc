@@ -144,7 +144,8 @@ Game_Main_Menu_Save_Game::Game_Main_Menu_Save_Game
 		char buf[200];
 		PARSE_GAMETIME(buf, gametime);
 		m_gametime.set_text(buf);
-		uint8_t player_nr = parent.game().get_ipl()->player_number();
+		// May be wrong if some slots are closed
+		uint8_t player_nr = parent.game().get_players_amount();
 		sprintf
 		(buf, "%i %s", player_nr,
 		 ngettext(_("player"), _("players"),  player_nr));
@@ -176,10 +177,13 @@ void Game_Main_Menu_Save_Game::selected(uint32_t) {
 	uint32_t gametime = gpdp.get_gametime();
 	PARSE_GAMETIME(buf, gametime);
 	m_gametime.set_text(buf);
-
-	sprintf
-		(buf, "%i %s", gpdp.get_player_nr(),
-		 ngettext(_("player"), _("players"), gpdp.get_player_nr()));
+	if (gpdp.get_player_amount() > 0) {
+		sprintf
+			(buf, "%i %s", gpdp.get_player_amount(),
+			ngettext(_("player"), _("players"), gpdp.get_player_amount()));
+	} else {
+		sprintf(buf, "%s", _("Unknown"));
+	}
 	m_players_label.set_text(buf);
 	m_win_condition.set_text(gpdp.get_win_condition());
 }

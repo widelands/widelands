@@ -32,10 +32,11 @@ namespace Widelands {
 // Note: releases up to build15 used version number 1 to indicate
 // a savegame without interactive player
 #define CURRENT_PACKET_VERSION 4
+#define PLAYERS_AMOUNT_KEY_V4 "player_amount"
 
 
 void Game_Preload_Data_Packet::Read
-	(FileSystem & fs, Game & game, Map_Map_Object_Loader * const)
+	(FileSystem & fs, Game &, Map_Map_Object_Loader * const)
 {
 	try {
 		Profile prof;
@@ -64,7 +65,7 @@ void Game_Preload_Data_Packet::Read
 			if (packet_version < 4) {
 				m_player_amount = 0;
 			} else {
-				m_player_amount = s.get_safe_int("player_amount");
+				m_player_amount = s.get_safe_int(PLAYERS_AMOUNT_KEY_V4);
 			}
 		} else {
 			throw game_data_error
@@ -92,19 +93,17 @@ void Game_Preload_Data_Packet::Write
 	const Map & map = game.map();
 	s.set_string("mapname",        map.get_name());  // Name of map
 
-	for (int i = 1; i <= MAX_PLAYERS; ++i) {
-		if (game.get_player(i)) {
-			m_player_amount++;
-			if (!ipl && !m_player_nr) {
+	if (ipl) {
+		// player that saved the game.
+		s.set_int("player_nr", ipl->player_number());
+	} else {
+		for (int i = 1; i <= game.get_players_amount(); ++i) {
+			if (game.get_player(i)) {
 				s.set_int("player_nr", i);
 			}
 		}
 	}
-	if (ipl) {
-		// player that saved the game.
-		s.set_int("player_nr", ipl->player_number());
-	}
-	s.set_int("player_amount", m_player_amount);
+	s.set_int(PLAYERS_AMOUNT_KEY_V4, game.get_players_amount());
 
 	std::string bg(map.get_background());
 	if (bg.empty())
