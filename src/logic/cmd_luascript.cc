@@ -30,7 +30,7 @@ void Cmd_LuaScript::execute (Game & game) {
 	log("Trying to run: %s, %s: ", m_ns.c_str(), m_script.c_str());
 	try {
 		game.lua().run_script(m_ns, m_script);
-	} catch (LuaScriptNotExistingError & e) {
+	} catch (LuaScriptNotExistingError &) {
 		// The script has not been found.
 		log("not found.\n");
 		return;

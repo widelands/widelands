@@ -112,7 +112,7 @@ void Game::SyncWrapper::Data(void const * const data, size_t const size) {
 	if (m_dump) {
 		try {
 			m_dump->Data(data, size);
-		} catch (const _wexception & e) {
+		} catch (const _wexception &) {
 			log
 				("Writing to syncstream file %s failed. Stop synctream dump.\n",
 				 m_dumpfname.c_str());

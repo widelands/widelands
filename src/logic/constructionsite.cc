@@ -361,7 +361,7 @@ void ConstructionSite::draw
 	uint32_t cur_frame;
 	try {
 		anim = building().get_animation("build");
-	} catch (Map_Object_Descr::Animation_Nonexistent & e) {
+	} catch (Map_Object_Descr::Animation_Nonexistent &) {
 		try {
 			anim = building().get_animation("unoccupied");
 		} catch (Map_Object_Descr::Animation_Nonexistent) {
@@ -391,7 +391,7 @@ void ConstructionSite::draw
 		uint32_t a;
 		try {
 			a = m_prev_building->get_animation("unoccupied");
-		} catch (Map_Object_Descr::Animation_Nonexistent & e) {
+		} catch (Map_Object_Descr::Animation_Nonexistent &) {
 			a = m_prev_building->get_animation("idle");
 		}
 		uint32_t wa, ha;
