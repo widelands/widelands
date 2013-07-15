@@ -136,7 +136,7 @@ Game::Game() :
 	m_state               (gs_notrunning),
 	m_cmdqueue            (*this),
 	m_replaywriter        (0),
-	m_win_condition_displayname("not_set")
+	m_win_condition_displayname(_("Not set"))
 {
 	// Preload win_conditions as they are displayed in UI
 	lua().register_scripts(*g_fs, "win_conditions", "scripting/win_conditions");
@@ -336,9 +336,15 @@ void Game::init_newgame
 		boost::shared_ptr<LuaTable> table
 			(lua().run_script
 			 (*g_fs, "scripting/win_conditions/" + settings.win_condition + ".lua", "win_conditions"));
-		m_win_condition_displayname = table->get_string("name");
+		try {
+			m_win_condition_displayname = table->get_string("name");
+		} catch (...) {
+			m_win_condition_displayname = _("Unknown");
+		}
 		LuaCoroutine * cr = table->get_coroutine("func");
 		enqueue_command(new Cmd_LuaCoroutine(get_gametime() + 100, cr));
+	} else {
+		m_win_condition_displayname = _("Scenario");
 	}
 }
 
