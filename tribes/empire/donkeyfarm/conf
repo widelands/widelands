@@ -21,8 +21,8 @@ water=8
 work=_Work
 
 [work]
-return=skipped when economy needs wheat and not economy needs donkey
-return=skipped when economy needs water and not economy needs donkey
+return=skipped unless economy needs donkey or not economy needs wheat
+return=skipped unless economy needs donkey or not economy needs water
 consume=wheat water
 playFX=../../../sound/farm/donkey 192
 animate=working 30000 # feeding cute little baby donkeys ;)
