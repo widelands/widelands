@@ -21,8 +21,8 @@ water=8
 work=_Work
 
 [work]
-return=skipped when economy needs wheat and not economy needs ox
-return=skipped when economy needs water and not economy needs ox
+return=skipped unless economy needs ox or not economy needs wheat
+return=skipped unless economy needs ox or not economy needs water
 consume=wheat water
 playFX=../../../sound/farm/ox 192
 animate=working 30000 # animation of feeding the cattles

@@ -47,7 +47,7 @@ void SaveHandler::think(Widelands::Game & game, int32_t realtime) {
 	if (autosaveInterval <= 0)
 		return; // no autosave requested
 
-	int32_t const elapsed = (realtime - m_lastSaveTime) / 1000;
+	int32_t const elapsed = (realtime - m_last_saved_time) / 1000;
 	if (elapsed < autosaveInterval)
 		return;
 
@@ -79,7 +79,7 @@ void SaveHandler::think(Widelands::Game & game, int32_t realtime) {
 			g_fs->Rename(backup_filename, complete_filename);
 		}
 		// Wait 30 seconds until next save try
-		m_lastSaveTime = m_lastSaveTime + 30000;
+		m_last_saved_time = m_last_saved_time + 30000;
 		return;
 	} else {
 		// if backup file was created, time to remove it
@@ -87,7 +87,7 @@ void SaveHandler::think(Widelands::Game & game, int32_t realtime) {
 			g_fs->Unlink(backup_filename);
 	}
 
-	log("Autosave: save took %d ms\n", m_lastSaveTime - realtime);
+	log("Autosave: save took %d ms\n", m_last_saved_time - realtime);
 }
 
 /**
@@ -97,7 +97,7 @@ void SaveHandler::initialize(int32_t currenttime) {
 	if (m_initialized)
 		return;
 
-	m_lastSaveTime = currenttime;
+	m_last_saved_time = currenttime;
 	log("Autosave: initialized\n");
 	m_initialized = true;
 }
@@ -162,7 +162,7 @@ bool SaveHandler::save_game
 	}
 
 	if (result)
-		m_lastSaveTime = WLApplication::get()->get_time();
+		m_last_saved_time = WLApplication::get()->get_time();
 
 	return result;
 }

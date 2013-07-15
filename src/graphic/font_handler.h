@@ -20,6 +20,7 @@
 #ifndef FONT_HANDLER_H
 #define FONT_HANDLER_H
 
+#include <string>
 #include <boost/scoped_ptr.hpp>
 
 #include "point.h"

@@ -19,10 +19,10 @@
 
 #include "loadgame.h"
 
-#include "gamecontroller.h"
-#include "gamesettings.h"
 #include "game_io/game_loader.h"
 #include "game_io/game_preload_data_packet.h"
+#include "gamecontroller.h"
+#include "gamesettings.h"
 #include "graphic/graphic.h"
 #include "i18n.h"
 #include "io/filesystem/layered_filesystem.h"
@@ -82,6 +82,14 @@ Fullscreen_Menu_LoadGame::Fullscreen_Menu_LoadGame
 		 get_w() * 7 / 10,  get_h() * 3 / 8,
 		 _("Gametime:"), UI::Align_Right),
 	m_tagametime(this, get_w() * 71 / 100, get_h() * 3 / 8),
+	m_label_players
+		(this,
+		 get_w() * 7 / 10,  get_h() * 41 / 100,
+		 _("Players:"), UI::Align_Right),
+	m_ta_players
+		(this, get_w() * 71 / 100, get_h() * 41 / 100),
+	m_ta_win_condition
+		(this, get_w() * 71 / 100, get_h() * 9 / 20),
 
 	m_settings(gsp),
 	m_ctrl(gc)
@@ -101,6 +109,9 @@ Fullscreen_Menu_LoadGame::Fullscreen_Menu_LoadGame
 	m_tamapname     .set_font(m_fn, m_fs, UI_FONT_CLR_FG);
 	m_label_gametime.set_font(m_fn, m_fs, UI_FONT_CLR_FG);
 	m_tagametime    .set_font(m_fn, m_fs, UI_FONT_CLR_FG);
+	m_label_players .set_font(m_fn, m_fs, UI_FONT_CLR_FG);
+	m_ta_players    .set_font(m_fn, m_fs, UI_FONT_CLR_FG);
+	m_ta_win_condition.set_font(m_fn, m_fs, UI_FONT_CLR_FG);
 	m_list          .set_font(m_fn, m_fs);
 	m_list.selected.connect(boost::bind(&Fullscreen_Menu_LoadGame::map_selected, this, _1));
 	m_list.double_clicked.connect(boost::bind(&Fullscreen_Menu_LoadGame::double_clicked, this, _1));
@@ -201,6 +212,10 @@ void Fullscreen_Menu_LoadGame::map_selected(uint32_t selected)
 
 		sprintf(buf, "%02i:%02i", hours, minutes);
 		m_tagametime.set_text(buf);
+
+		sprintf(buf, "%i", gpdp.get_player_nr());
+		m_ta_players.set_text(buf);
+		m_ta_win_condition.set_text(gpdp.get_win_condition());
 	} else {
 		no_selection();
 	}
@@ -237,7 +252,7 @@ void Fullscreen_Menu_LoadGame::fill_list() {
 				gl.preload_game(gpdp);
 
 				m_list.add(FileSystem::FS_FilenameWoExt(name).c_str(), name);
-			} catch (const _wexception & e) {
+			} catch (const _wexception &) {
 				//  we simply skip illegal entries
 			}
 		}

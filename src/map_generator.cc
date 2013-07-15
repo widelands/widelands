@@ -774,6 +774,28 @@ void MapGenerator::create_random_map()
 			--line[2];
 	}
 
+	// Random placement of starting positions
+	assert(m_mapInfo.numPlayers);
+	Player_Number pn[m_mapInfo.numPlayers];
+	for (Player_Number n = 1; n <= m_mapInfo.numPlayers; ++n) {
+		bool okay = false;
+		// This is a kinda dump algorithm -> we generate a random number and increase it until it fits.
+		// However it's working and simple ;) - if you've got a better idea, feel free to fix it.
+		Player_Number x = rng.rand() % m_mapInfo.numPlayers;
+		while (!okay) {
+			okay = true;
+			++x; // Player_Number begins at 1 not at 0
+			for (Player_Number p = 1; p < n; ++p) {
+				if (pn[p - 1] == x) {
+					okay = false;
+					x = x % m_mapInfo.numPlayers;
+					break;
+				}
+			}
+		}
+		pn[n - 1] = x;
+	}
+
 	for (Player_Number n = 1; n <= m_mapInfo.numPlayers; ++n) {
 		// Set scenario information - needed even if it's not a scenario
 		m_map.set_scenario_player_name(n, "Random Player");
@@ -782,18 +804,18 @@ void MapGenerator::create_random_map()
 		m_map.set_scenario_player_closeable(n, false);
 
 		// Calculate wished coords for player starting position
-		if (line[0] + 1 > n) {
+		if (line[0] + 1 > pn[n - 1]) {
 			// X-Coordinates
-			playerstart.x  = m_mapInfo.w * (line[0] * line[0] + 1 - n * n);
+			playerstart.x  = m_mapInfo.w * (line[0] * line[0] + 1 - pn[n - 1] * pn[n - 1]);
 			playerstart.x /= line[0] * line[0] + 1;
 			// Y-Coordinates
 			if (lines == 1)
 				playerstart.y = m_mapInfo.h / 2;
 			else
 				playerstart.y = m_mapInfo.h / 7 + ISLAND_BORDER;
-		} else if (line[0] + line[1] + 1 > n) {
+		} else if (line[0] + line[1] + 1 > pn[n - 1]) {
 			// X-Coordinates
-			uint8_t pos = n - line[0];
+			uint8_t pos = pn[n - 1] - line[0];
 			playerstart.x  = m_mapInfo.w;
 			playerstart.x *= line[1] * line[1] + 1 - pos * pos;
 			playerstart.x /= line[1] * line[1] + 1;
@@ -804,7 +826,7 @@ void MapGenerator::create_random_map()
 				playerstart.y = m_mapInfo.h - m_mapInfo.h / 7 - ISLAND_BORDER;
 		} else {
 			// X-Coordinates
-			uint8_t pos = n - line[0] - line[1];
+			uint8_t pos = pn[n - 1] - line[0] - line[1];
 			playerstart.x  = m_mapInfo.w;
 			playerstart.x *= line[2] * line[2] + 1 - pos * pos;
 			playerstart.x /= line[2] * line[2] + 1;

@@ -139,6 +139,9 @@ void Graphic::initialize(int32_t w, int32_t h, int32_t bpp, bool fullscreen, boo
 	if (0 != (sdlsurface->flags & SDL_FULLSCREEN))
 		log("Graphics: FULLSCREEN ENABLED\n");
 
+	bool use_arb = true;
+	const char * extensions;
+
 	if (0 != (sdlsurface->flags & SDL_OPENGL)) {
 		//  We have successful opened an opengl screen. Print some information
 		//  about opengl and set the rendering capabilities.
@@ -150,8 +153,35 @@ void Graphic::initialize(int32_t w, int32_t h, int32_t bpp, bool fullscreen, boo
 			throw wexception("glewInit returns %i: Broken OpenGL installation.", err);
 		}
 
-		g_opengl = true;
+		extensions = reinterpret_cast<const char *>(glGetString (GL_EXTENSIONS));
 
+		if (strstr(extensions, "GL_ARB_framebuffer_object") != 0) {
+			use_arb = true;
+		} else if (strstr(extensions, "GL_EXT_framebuffer_object") != 0) {
+			use_arb = false;
+		} else {
+			log
+			("Graphics: Neither GL_ARB_framebuffer_object or GL_EXT_framebuffer_object supported! "
+			"Switching off OpenGL!\n"
+			);
+			flags &= ~SDL_OPENGL;
+			m_fallback_settings_in_effect = true;
+
+			// One must never free the screen surface of SDL (using
+			// SDL_FreeSurface) as it is owned by SDL itself, therefore the next
+			// call does not leak memory.
+			sdlsurface = SDL_SetVideoMode
+				(FALLBACK_GRAPHICS_WIDTH, FALLBACK_GRAPHICS_HEIGHT, FALLBACK_GRAPHICS_DEPTH, flags);
+			m_fallback_settings_in_effect = true;
+			if (!sdlsurface)
+				throw wexception("Graphics: could not set video mode: %s", SDL_GetError());
+		}
+	}
+
+	// Redoing the check, because fallback settings might mean we no longer use OpenGL.
+	if (0 != (sdlsurface->flags & SDL_OPENGL)) {
+		//  We now really have a working opengl screen...
+		g_opengl = true;
 
 		GLboolean glBool;
 		glGetBooleanv(GL_DOUBLEBUFFER, &glBool);
@@ -183,8 +213,7 @@ void Graphic::initialize(int32_t w, int32_t h, int32_t bpp, bool fullscreen, boo
 			("Graphics: OpenGL: Version %d.%d \"%s\"\n",
 			 m_caps.gl.major_version, m_caps.gl.minor_version, str);
 
-		const char * extensions = reinterpret_cast<const char *>(glGetString (GL_EXTENSIONS));
-
+		// extensions will be valid if we ever succeeded in runnning glewInit.
 		m_caps.gl.tex_power_of_two =
 			(m_caps.gl.major_version < 2) and
 			(strstr(extensions, "GL_ARB_texture_non_power_of_two") == 0);
@@ -275,7 +304,7 @@ GCC_DIAG_ON ("-Wold-style-cast")
 		SDL_GL_SwapBuffers();
 		glEnable(GL_TEXTURE_2D);
 
-		GLSurfaceTexture::Initialize();
+		GLSurfaceTexture::Initialize(use_arb);
 	}
 
 	if (g_opengl)

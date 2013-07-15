@@ -123,11 +123,11 @@ void WLApplication::setup_searchpaths(std::string argv0)
 			 	(std::string(INSTALL_PREFIX) + '/' + INSTALL_DATADIR));
 #endif
 	}
-	catch (FileNotFound_error & e) {}
+	catch (FileNotFound_error &) {}
 	catch (FileAccessDenied_error & e) {
 		log("Access denied on %s. Continuing.\n", e.m_filename.c_str());
 	}
-	catch (FileType_error & e) {
+	catch (FileType_error &) {
 		//TODO: handle me
 	}
 
@@ -138,11 +138,11 @@ void WLApplication::setup_searchpaths(std::string argv0)
 		g_fs->AddFileSystem(FileSystem::Create("/usr/share/games/widelands"));
 #endif
 	}
-	catch (FileNotFound_error & e) {}
+	catch (FileNotFound_error &) {}
 	catch (FileAccessDenied_error & e) {
 		log("Access denied on %s. Continuing.\n", e.m_filename.c_str());
 	}
-	catch (FileType_error & e) {
+	catch (FileType_error &) {
 		//TODO: handle me
 	}
 
@@ -156,11 +156,11 @@ void WLApplication::setup_searchpaths(std::string argv0)
 		g_fs->AddFileSystem(FileSystem::Create("."));
 #endif
 	}
-	catch (FileNotFound_error & e) {}
+	catch (FileNotFound_error &) {}
 	catch (FileAccessDenied_error & e) {
 		log("Access denied on %s. Continuing.\n", e.m_filename.c_str());
 	}
-	catch (FileType_error & e) {
+	catch (FileType_error &) {
 		//TODO: handle me
 	}
 
@@ -186,11 +186,11 @@ void WLApplication::setup_searchpaths(std::string argv0)
 				g_fs->AddFileSystem(new Datafile(argv0.c_str()));
 #endif
 			}
-			catch (FileNotFound_error & e) {}
+			catch (FileNotFound_error &) {}
 			catch (FileAccessDenied_error & e) {
 				log ("Access denied on %s. Continuing.\n", e.m_filename.c_str());
 			}
-			catch (FileType_error & e) {
+			catch (FileType_error &) {
 				//TODO: handle me
 			}
 		}

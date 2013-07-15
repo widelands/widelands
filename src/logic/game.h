@@ -189,7 +189,7 @@ struct Game : Editor_Game_Base {
 
 	void sample_statistics();
 
-	const std::string & get_win_condition_string() {return m_win_condition_string;}
+	const std::string & get_win_condition_displayname() {return m_win_condition_displayname;}
 
 private:
 	void SyncReset();
@@ -254,7 +254,7 @@ private:
 	General_Stats_vector m_general_stats;
 
 	/// For save games and statistics generation
-	std::string          m_win_condition_string;
+	std::string          m_win_condition_displayname;
 };
 
 inline Coords Game::random_location(Coords location, uint8_t radius) {

@@ -27,7 +27,7 @@ class GLSurfaceTexture : public GLSurface {
 public:
 	// Call this once before using any instance of this class and Cleanup once
 	// before the program exits.
-	static void Initialize();
+	static void Initialize(bool use_arb);
 	static void Cleanup();
 
 	GLSurfaceTexture(SDL_Surface * surface, bool intensity = false);
