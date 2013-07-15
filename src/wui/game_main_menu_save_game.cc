@@ -201,7 +201,7 @@ void Game_Main_Menu_Save_Game::fill_list() {
 
 void Game_Main_Menu_Save_Game::select_by_name(std::string name)
 {
-	for (uint idx = 0; idx < m_ls.size(); idx++) {
+	for (uint32_t idx = 0; idx < m_ls.size(); idx++) {
 		const std::string val = m_ls[idx];
 		if (name == val) {
 			m_ls.select(idx);
