@@ -200,15 +200,15 @@ inline static Map_Object_Data read_unseen_immovable
 	}
 
 #define OPEN_INPUT_FILE_NEW_VERSION_SILENT(filetype, file, filename, fileversion, file_templ, v) \
-	int8_t v = version;                                                                      \
+	int8_t fileversion = v;                                                                      \
 	filetype file;                                                                                      \
 	char (filename)[FILENAME_SIZE];                                                                     \
-	for (; v >= 0; --v) {                                                            \
-		snprintf(filename, sizeof(filename), file_templ, plnum, v);                         \
+	for (; fileversion >= 0; --fileversion) {                                                            \
+		snprintf(filename, sizeof(filename), file_templ, plnum, fileversion);                         \
 		try {(file).Open(fs, filename); break;}                                                          \
 		catch (...) {                                                                     \
-			if (v == 0) {                                          \
-			v = -1;}                                             \
+			if (fileversion == 0) {                                          \
+			fileversion = -1;}                                             \
 		}                                                                                                \
 	}
 
