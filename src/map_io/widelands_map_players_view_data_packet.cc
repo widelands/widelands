@@ -84,92 +84,7 @@ namespace Widelands {
 #define BORDER_FILENAME_TEMPLATE DIRNAME_TEMPLATE                   "/border_%u"
 
 #define FILENAME_SIZE 48
-
-//  The map is traversed by row and column. In each step we process of one map
-//  field (which is 1 node, 2 triangles and 3 edges that are stored together).
-//  For this processing we need to keep track of 4 nodes:
-//  *  f: the node of the processed field
-//  * bl: the bottom left neighbour of f
-//  * br: the bottom right neighbour of f
-//  *  r: the right neighbour of f
-//
-//  The layout of the processing region is as follows:
-//
-//                     f------ r
-//                    / \     /
-//                   /  \    /
-//                  / D \ R /
-//                 /    \  /
-//                /     \ /
-//              bl------br
-
-struct Map_Object_Data {
-	Map_Object_Data() : map_object_descr(0) {}
-	const Map_Object_Descr                     * map_object_descr;
-	Player::Constructionsite_Information         csi;
-};
-
-namespace {
-	// FIXME: Legacy code deprecated since build18
-	template<uint8_t const Size> struct BitInBuffer {
-		compile_assert(Size == 1 or Size == 2 or Size == 4);
-		BitInBuffer(FileRead* fr) : buffer(0), mask(0x00) {m_fr = fr;}
-
-		uint8_t get() {
-			if (mask == 0x00) {buffer = m_fr->Unsigned8(); mask = 0xff;}
-			uint8_t const result = buffer >> (8 - Size);
-			buffer <<= Size;
-			mask   <<= Size;
-			assert(result < (1 << Size));
-			return result;
-		}
-	private:
-		FileRead* m_fr;
-		uint8_t buffer, mask;
-	};
-}
-
-inline static Map_Object_Data read_unseen_immovable
-	(const Editor_Game_Base & egbase,
-	 uint8_t                & immovable_kind,
-	 FileRead               & immovables_file,
-	 uint8_t                & version
-	)
-{
-	Map_Object_Data m;
-	try {
-		switch (immovable_kind) {
-		case 0:  //  The player sees no immovable.
-			m.map_object_descr = 0;                                       break;
-		case 1: //  The player sees a tribe or world immovable.
-			m.map_object_descr = &immovables_file.Immovable_Type(egbase); break;
-		case 2:  //  The player sees a flag.
-			m.map_object_descr = &g_flag_descr;                           break;
-		case 3: //  The player sees a building.
-			m.map_object_descr = &immovables_file.Building_Type (egbase);
-			if (version > 1) {
-				// Read data from immovables file
-				if (immovables_file.Unsigned8() == 1) { // the building is a constructionsite
-					m.csi.becomes       = &immovables_file.Building_Type(egbase);
-					if (immovables_file.Unsigned8() == 1)
-						m.csi.was        = &immovables_file.Building_Type(egbase);
-					m.csi.totaltime     =  immovables_file.Unsigned32();
-					m.csi.completedtime =  immovables_file.Unsigned32();
-				}
-			}
-			break;
-		case 4: // The player sees a port dock
-			m.map_object_descr = &g_portdock_descr;                       break;
-		default:
-			throw game_data_error("Unknown immovable-kind type %d", immovable_kind);
-			break;
-		}
-	} catch (const _wexception & e) {
-		throw game_data_error(_("unseen immovable: %s"), e.what());
-	}
-	return m;
-}
-
+	
 #define OPEN_INPUT_FILE(filetype, file, filename, filename_template, version) \
    char (filename)[FILENAME_SIZE];                                            \
    snprintf(filename, sizeof(filename), filename_template, plnum, version);   \
@@ -220,6 +135,93 @@ inline static Map_Object_Data read_unseen_immovable
           plnum,                                                              \
           static_cast<long unsigned int>((file).GetSize() - (file).GetPos()), \
           filename);                                                          \
+
+//  The map is traversed by row and column. In each step we process of one map
+//  field (which is 1 node, 2 triangles and 3 edges that are stored together).
+//  For this processing we need to keep track of 4 nodes:
+//  *  f: the node of the processed field
+//  * bl: the bottom left neighbour of f
+//  * br: the bottom right neighbour of f
+//  *  r: the right neighbour of f
+//
+//  The layout of the processing region is as follows:
+//
+//                     f------ r
+//                    / \     /
+//                   /  \    /
+//                  / D \ R /
+//                 /    \  /
+//                /     \ /
+//              bl------br
+
+struct Map_Object_Data {
+	Map_Object_Data() : map_object_descr(0) {}
+	const Map_Object_Descr                     * map_object_descr;
+	Player::Constructionsite_Information         csi;
+};
+
+namespace {
+// FIXME: Legacy code deprecated since build18
+template<uint8_t const Size> struct BitInBuffer {
+	compile_assert(Size == 1 or Size == 2 or Size == 4);
+	BitInBuffer(FileRead* fr) : buffer(0), mask(0x00) {m_fr = fr;}
+
+	uint8_t get() {
+		if (mask == 0x00) {buffer = m_fr->Unsigned8(); mask = 0xff;}
+		uint8_t const result = buffer >> (8 - Size);
+		buffer <<= Size;
+		mask   <<= Size;
+		assert(result < (1 << Size));
+		return result;
+	}
+private:
+	FileRead* m_fr;
+	uint8_t buffer, mask;
+};
+}
+
+inline static Map_Object_Data read_unseen_immovable
+	(const Editor_Game_Base & egbase,
+	 uint8_t                & immovable_kind,
+	 FileRead               & immovables_file,
+	 uint8_t                & version
+	)
+{
+	Map_Object_Data m;
+	try {
+		switch (immovable_kind) {
+		case 0:  //  The player sees no immovable.
+			m.map_object_descr = 0;                                       break;
+		case 1: //  The player sees a tribe or world immovable.
+			m.map_object_descr = &immovables_file.Immovable_Type(egbase); break;
+		case 2:  //  The player sees a flag.
+			m.map_object_descr = &g_flag_descr;                           break;
+		case 3: //  The player sees a building.
+			m.map_object_descr = &immovables_file.Building_Type (egbase);
+			if (version > 1) {
+				// Read data from immovables file
+				if (immovables_file.Unsigned8() == 1) { // the building is a constructionsite
+					m.csi.becomes       = &immovables_file.Building_Type(egbase);
+					if (immovables_file.Unsigned8() == 1)
+						m.csi.was        = &immovables_file.Building_Type(egbase);
+					m.csi.totaltime     =  immovables_file.Unsigned32();
+					m.csi.completedtime =  immovables_file.Unsigned32();
+				}
+			}
+			break;
+		case 4: // The player sees a port dock
+			m.map_object_descr = &g_portdock_descr;                       break;
+		default:
+			throw game_data_error("Unknown immovable-kind type %d", immovable_kind);
+			break;
+		}
+	} catch (const _wexception & e) {
+		throw game_data_error(_("unseen immovable: %s"), e.what());
+	}
+	return m;
+}
+
+
 
 void Map_Players_View_Data_Packet::Read
 	(FileSystem            &       fs,
