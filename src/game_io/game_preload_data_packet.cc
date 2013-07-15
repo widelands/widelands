@@ -25,12 +25,13 @@
 #include "logic/map.h"
 #include "profile/profile.h"
 #include "scripting/scripting.h"
+#include <boost/concept_check.hpp>
 
 namespace Widelands {
 
 // Note: releases up to build15 used version number 1 to indicate
 // a savegame without interactive player
-#define CURRENT_PACKET_VERSION 3
+#define CURRENT_PACKET_VERSION 4
 
 
 void Game_Preload_Data_Packet::Read
@@ -46,19 +47,24 @@ void Game_Preload_Data_Packet::Read
 			m_gametime   = s.get_safe_int   ("gametime");
 			m_mapname    = s.get_safe_string("mapname");
 
-			if (packet_version >= 2) {
-				m_background = s.get_safe_string("background");
-				m_player_nr  = s.get_safe_int   ("player_nr");
-				if (packet_version >= 3)
-					m_win_condition = s.get_safe_string("win_condition");
-				else
-					m_win_condition = "Endless game";
-			} else {
+			if (packet_version < 2) {
 				m_background = "pics/progress.png";
 				// Of course this is wrong, but at least player 1 is always in game
 				// so widelands won't crash with this setting.
 				m_player_nr  = 1;
+			} else {
+				m_background = s.get_safe_string("background");
+				m_player_nr  = s.get_safe_int   ("player_nr");
+			}
+			if (packet_version < 3) {
 				m_win_condition = "Endless game";
+			} else {
+				m_win_condition = s.get_safe_string("win_condition");
+			}
+			if (packet_version < 4) {
+				m_player_amount = 0;
+			} else {
+				m_player_amount = s.get_safe_int("player_amount");
 			}
 		} else {
 			throw game_data_error
@@ -85,19 +91,20 @@ void Game_Preload_Data_Packet::Write
 	s.set_int   ("gametime",       game.get_gametime());
 	const Map & map = game.map();
 	s.set_string("mapname",        map.get_name());  // Name of map
-	if (ipl) {
-		// player that saved the game.
-		s.set_int("player_nr", ipl->player_number());
-	} else {
-		// pretend that the first player that is actually
-		// there has saved the game
-		for (int i = 1; i <= MAX_PLAYERS; ++i) {
-			if (game.get_player(i)) {
+
+	for (int i = 1; i <= MAX_PLAYERS; ++i) {
+		if (game.get_player(i)) {
+			m_player_amount++;
+			if (!ipl && !m_player_nr) {
 				s.set_int("player_nr", i);
-				break;
 			}
 		}
 	}
+	if (ipl) {
+		// player that saved the game.
+		s.set_int("player_nr", ipl->player_number());
+	}
+	s.set_int("player_amount", m_player_amount);
 
 	std::string bg(map.get_background());
 	if (bg.empty())

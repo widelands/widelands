@@ -38,15 +38,17 @@ struct Game_Preload_Data_Packet : public Game_Data_Packet {
 	char const * get_mapname()      {return m_mapname.c_str();}
 	std::string get_background()    {return m_background;}
 	std::string get_win_condition() {return m_win_condition;}
-	uint32_t get_gametime() {return m_gametime;}
-	uint8_t get_player_nr() {return m_player_nr;}
+	const uint32_t get_gametime() {return m_gametime;}
+	const uint8_t get_player_nr() {return m_player_nr;}
+	const uint8_t get_player_amount() {return m_player_amount;}
 
 private:
 	std::string m_mapname;
 	std::string m_background;
 	std::string m_win_condition;
 	uint32_t m_gametime;
-	uint8_t  m_player_nr;
+	uint8_t  m_player_nr; // The local player idx
+	uint8_t  m_player_amount;
 };
 
 }
