@@ -524,14 +524,14 @@ void Building_Window::show_workarea()
 		return; // already shown, nothing to be done
 	}
 
-	Workarea_Info workarea_info;
+	const Workarea_Info* workarea_info;
 	upcast(Widelands::ConstructionSite, csite, &m_building);
 	if (csite != NULL) {
-		workarea_info = csite->building().m_workarea_info;
+		workarea_info = &csite->building().m_workarea_info;
 	} else {
-		workarea_info = m_building.descr().m_workarea_info;
+		workarea_info = &m_building.descr().m_workarea_info;
 	}
-	if (workarea_info.size() == 0) {
+	if (!workarea_info || workarea_info->size() == 0) {
 		return; // building has no workarea
 	}
 
@@ -543,10 +543,10 @@ void Building_Window::show_workarea()
 
 	Widelands::HollowArea<> hollow_area
 		(Widelands::Area<>(m_building.get_position(), 0), 0);
-	Workarea_Info::const_iterator it = workarea_info.begin();
+	Workarea_Info::const_iterator it = workarea_info->begin();
 	for
 		(Workarea_Info::size_type i =
-			std::min(workarea_info.size(), NUMBER_OF_WORKAREA_PICS);
+			std::min(workarea_info->size(), NUMBER_OF_WORKAREA_PICS);
 			i;
 			++it)
 	{

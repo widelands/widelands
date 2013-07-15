@@ -142,11 +142,11 @@ bool AbstractWaresDisplay::handle_mouserelease(Uint8 btn, int32_t x, int32_t y)
 	if (btn != SDL_BUTTON_LEFT || !m_selection_anchor) {
 		return UI::Panel::handle_mouserelease(btn, x, y);
 	}
-	Widelands::Ware_Index const number = 
+	Widelands::Ware_Index const number =
 		m_type == Widelands::wwWORKER ? m_tribe.get_nrworkers() : m_tribe.get_nrwares();
 
-	for (Widelands::Ware_Index i = Widelands::Ware_Index::First();
-			i < number; ++i) {
+	for (Widelands::Ware_Index i = Widelands::Ware_Index::First(); i < number; ++i)
+	{
 		if (!m_in_selection[i]) {
 			continue;
 		}
@@ -345,7 +345,7 @@ void AbstractWaresDisplay::draw_ware
 			draw_selected &= !m_in_selection[id];
 		}
 	}
-	
+
 	//  draw a background
 	const Image* bgpic =
 		g_gr->images().get(draw_selected ?  "pics/ware_list_bg_selected.png" :  "pics/ware_list_bg.png");

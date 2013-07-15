@@ -247,8 +247,10 @@ std::string ProductionSite::get_statistics_string()
 		 return
 			(boost::format("<font color=%s>%s</font>") % UI_FONT_CLR_BAD_HEX % _("(not occupied)")).str();
 	} else if (uint32_t const nr_requests = nr_working_positions - nr_workers) {
-		return (boost::format("<font color=%s>%s</font>") % UI_FONT_CLR_BAD_HEX
-			% ngettext(_("Worker missing"), _("Workers missing"), nr_requests)).str();
+		return
+			(boost::format("<font color=%s>%s</font>") % UI_FONT_CLR_BAD_HEX %
+				ngettext(_("Worker missing"), _("Workers missing"), nr_requests))
+			.str();
 	}
 
 	if (m_statistics_changed) {

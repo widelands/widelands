@@ -38,7 +38,6 @@
 
 #include "constructionsite.h"
 
-
 namespace Widelands {
 
 ConstructionSite_Descr::ConstructionSite_Descr

@@ -110,7 +110,7 @@ private:
 	selection_type      m_in_selection;  //Wares in temporary achored selection
 	bool                m_selectable;
 	bool                m_horizontal;
-	Widelands::Ware_Index m_selection_anchor; 
+	Widelands::Ware_Index m_selection_anchor;
 	boost::function<void(Widelands::Ware_Index, bool)> m_callback_function;
 };
 
