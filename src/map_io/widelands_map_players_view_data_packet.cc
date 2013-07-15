@@ -22,7 +22,6 @@
 
 #include "widelands_map_players_view_data_packet.h"
 
-#include "io/bitoutbuffer.h"
 #include "logic/editor_game_base.h"
 #include "logic/field.h"
 #include "logic/game_data_error.h"
@@ -54,10 +53,10 @@ namespace Widelands {
 #define NODE_IMMOVABLES_CURRENT_PACKET_VERSION          2
 #define NODE_IMMOVABLES_FILENAME_TEMPLATE DIRNAME_TEMPLATE          "/node_immovables_%u"
 
-#define ROADS_CURRENT_PACKET_VERSION                    1
+#define ROADS_CURRENT_PACKET_VERSION                    2
 #define ROADS_FILENAME_TEMPLATE DIRNAME_TEMPLATE                    "/roads_%u"
 
-#define TERRAINS_CURRENT_PACKET_VERSION                 1
+#define TERRAINS_CURRENT_PACKET_VERSION                 2
 #define TERRAINS_FILENAME_TEMPLATE DIRNAME_TEMPLATE                 "/terrains_%u"
 
 #define TRIANGLE_IMMOVABLE_KINDS_CURRENT_PACKET_VERSION 2
@@ -69,10 +68,10 @@ namespace Widelands {
 #define OWNERS_CURRENT_PACKET_VERSION                   0
 #define OWNERS_FILENAME_TEMPLATE DIRNAME_TEMPLATE                   "/owners_%u"
 
-#define SURVEYS_CURRENT_PACKET_VERSION                  1
+#define SURVEYS_CURRENT_PACKET_VERSION                  2
 #define SURVEYS_FILENAME_TEMPLATE DIRNAME_TEMPLATE                  "/surveys_%u"
 
-#define SURVEY_AMOUNTS_CURRENT_PACKET_VERSION           1
+#define SURVEY_AMOUNTS_CURRENT_PACKET_VERSION           2
 #define SURVEY_AMOUNTS_FILENAME_TEMPLATE DIRNAME_TEMPLATE           "/survey_amounts_%u"
 
 #define SURVEY_TIMES_CURRENT_PACKET_VERSION             1
@@ -81,7 +80,7 @@ namespace Widelands {
 #define VISION_CURRENT_PACKET_VERSION                   1
 #define VISION_FILENAME_TEMPLATE DIRNAME_TEMPLATE                   "/vision_%u"
 
-#define BORDER_CURRENT_PACKET_VERSION                   0
+#define BORDER_CURRENT_PACKET_VERSION                   1
 #define BORDER_FILENAME_TEMPLATE DIRNAME_TEMPLATE                   "/border_%u"
 
 #define FILENAME_SIZE 48
@@ -111,6 +110,7 @@ struct Map_Object_Data {
 };
 
 namespace {
+	// FIXME: Legacy code deprecated since build18
 	template<uint8_t const Size> struct BitInBuffer {
 		compile_assert(Size == 1 or Size == 2 or Size == 4);
 		BitInBuffer(FileRead* fr) : buffer(0), mask(0x00) {m_fr = fr;}
@@ -187,15 +187,28 @@ inline static Map_Object_Data read_unseen_immovable
 	uint8_t fileversion = version;                                                                      \
 	filetype file;                                                                                      \
 	char (filename)[FILENAME_SIZE];                                                                     \
-	for (; fileversion > 0; --fileversion) {                                                            \
+	for (;; --fileversion) {                                                            \
 		snprintf(filename, sizeof(filename), filename_template, plnum, fileversion);                         \
 		try {(file).Open(fs, filename); break;}                                                          \
 		catch (...) {                                                                     \
-			if (fileversion == 1)                                                                         \
+			if (fileversion == 0)                                                                         \
 				throw game_data_error                                                                      \
 					("Map_Players_View_Data_Packet::Read: player %u:Could not open "                        \
 					 "\"%s\" for reading. This file should exist when \"%s\" exists",                       \
 					 plnum, filename, unseen_times_filename);                                               \
+		}                                                                                                \
+	}
+
+#define OPEN_INPUT_FILE_NEW_VERSION_SILENT(filetype, file, filename, fileversion, file_templ, v) \
+	int8_t v = version;                                                                      \
+	filetype file;                                                                                      \
+	char (filename)[FILENAME_SIZE];                                                                     \
+	for (; v >= 0; --v) {                                                            \
+		snprintf(filename, sizeof(filename), file_templ, plnum, v);                         \
+		try {(file).Open(fs, filename); break;}                                                          \
+		catch (...) {                                                                     \
+			if (v == 0) {                                          \
+			v = -1;}                                             \
 		}                                                                                                \
 	}
 
@@ -421,23 +434,13 @@ void Map_Players_View_Data_Packet::Read
 			(FileRead,       survey_times_file,   survey_times_filename,
 			 SURVEY_TIMES_FILENAME_TEMPLATE, SURVEY_TIMES_CURRENT_PACKET_VERSION);
 
-		// Load border files
-		char border_filename[FILENAME_SIZE];
-		snprintf
-			(border_filename, sizeof(border_filename),
-			BORDER_FILENAME_TEMPLATE, plnum, BORDER_CURRENT_PACKET_VERSION);
+		OPEN_INPUT_FILE_NEW_VERSION_SILENT
+		(FileRead, border_file,
+			border_filename, border_file_version,
+			BORDER_FILENAME_TEMPLATE,
+			BORDER_CURRENT_PACKET_VERSION);
 
-		bool borders = false;
-		FileRead border_file;
-		try {
-			border_file.Open(fs, border_filename);
-			borders = true;
-		} catch (...) {
-			log
-				("Map_Players_View_Data_Packet::Read: No border file found, therefore no borders will be drawn "
-				 "in unseen areas until they get at least once seen again.\n");
-		}
-
+		// FIXME: Legacy code deprecated since build18
 		BitInBuffer<2> legacy_node_immovable_kinds_bitbuffer(&node_immovable_kinds_file);
 		BitInBuffer<2> legacy_road_bitbuffer(&roads_file);
 		BitInBuffer<4> legacy_terrains_bitbuffer(&terrains_file);
@@ -536,11 +539,19 @@ void Map_Players_View_Data_Packet::Read
 					f_player_field.constructionsite = mod.csi;
 
 					// if there is a border file, read in whether this field had a border the last time it was seen
-					if (borders) {
-						f_player_field.border    = (legacy_border_bitbuffer.get() == 1);
-						f_player_field.border_r  = (legacy_border_bitbuffer.get() == 1);
-						f_player_field.border_br = (legacy_border_bitbuffer.get() == 1);
-						f_player_field.border_bl = (legacy_border_bitbuffer.get() == 1);
+					if (border_file_version >= 0) {
+						if (border_file_version < 1) {
+							f_player_field.border    = (legacy_border_bitbuffer.get() == 1);
+							f_player_field.border_r  = (legacy_border_bitbuffer.get() == 1);
+							f_player_field.border_br = (legacy_border_bitbuffer.get() == 1);
+							f_player_field.border_bl = (legacy_border_bitbuffer.get() == 1);
+						} else {
+							uint8_t borders = border_file.Unsigned8();
+							f_player_field.border    = borders & 1;
+							f_player_field.border_r  = borders & 2;
+							f_player_field.border_br = borders & 4;
+							f_player_field.border_bl = borders & 8;
+						}
 					}
 
 
@@ -582,13 +593,17 @@ void Map_Players_View_Data_Packet::Read
 				} else if (f_everseen | bl_everseen | br_everseen) {
 					//  The player has seen the D triangle but does not see it now.
 					//  Load his information about the triangle from file.
-					try {f_player_field.terrains.d = legacy_terrains_bitbuffer.get();}
-					catch (const FileRead::File_Boundary_Exceeded & e) {
-						throw game_data_error
-							("Map_Players_View_Data_Packet::Read: player %u: in "
-							 "\"%s\": node (%i, %i) t = D: unexpected end of file "
-							 "while reading terrain",
-							 plnum, terrains_filename, f.x, f.y);
+					if (terrains_file_version < 2) {
+						try {f_player_field.terrains.d = legacy_terrains_bitbuffer.get();}
+						catch (const FileRead::File_Boundary_Exceeded & e) {
+							throw game_data_error
+								("Map_Players_View_Data_Packet::Read: player %u: in "
+								"\"%s\": node (%i, %i) t = D: unexpected end of file "
+								"while reading terrain",
+								plnum, terrains_filename, f.x, f.y);
+						}
+					} else {
+						f_player_field.terrains.d = terrains_file.Unsigned8();
 					}
 					uint8_t im_kind = 0;
 					if (triangle_immovable_kinds_file_version < 2) {
@@ -611,13 +626,17 @@ void Map_Players_View_Data_Packet::Read
 				} else if (f_everseen | br_everseen | r_everseen) {
 					//  The player has seen the R triangle but does not see it now.
 					//  Load his information about the triangle from file.
-					try {f_player_field.terrains.r = legacy_terrains_bitbuffer.get();}
-					catch (const FileRead::File_Boundary_Exceeded & e) {
-						throw game_data_error
-							("Map_Players_View_Data_Packet::Read: player %u: in "
-							 "\"%s\": node (%i, %i) t = R: unexpected end of file "
-							 "while reading terrain",
-							 plnum, terrains_filename, f.x, f.y);
+					if (terrains_file_version < 2) {
+						try {f_player_field.terrains.r = legacy_terrains_bitbuffer.get();}
+						catch (const FileRead::File_Boundary_Exceeded & e) {
+							throw game_data_error
+								("Map_Players_View_Data_Packet::Read: player %u: in "
+								"\"%s\": node (%i, %i) t = R: unexpected end of file "
+								"while reading terrain",
+								plnum, terrains_filename, f.x, f.y);
+						}
+					} else {
+						f_player_field.terrains.r = terrains_file.Unsigned8();
 					}
 					uint8_t im_kind = 0;
 					if (triangle_immovable_kinds_file_version < 2) {
@@ -633,45 +652,60 @@ void Map_Players_View_Data_Packet::Read
 
 				{ //  edges
 					uint8_t mask = 0;
-					if (f_seen | bl_seen)
+					if (f_seen | bl_seen) {
 						mask  = Road_Mask << Road_SouthWest;
-					else if (f_everseen | bl_everseen)
+					} else if (f_everseen | bl_everseen) {
 						//  The player has seen the SouthWest edge but does not see
 						//  it now. Load his information about this edge from file.
-						try {roads  = legacy_road_bitbuffer.get() << Road_SouthWest;}
-						catch (const FileRead::File_Boundary_Exceeded & e) {
-							throw game_data_error
-								("Map_Players_View_Data_Packet::Read: player %u: in "
-								 "\"%s\": node (%i, %i): unexpected end of file while "
-								 "reading Road_SouthWest",
-								 plnum, roads_filename, f.x, f.y);
+						if (road_file_version < 2) {
+							try {roads  = legacy_road_bitbuffer.get() << Road_SouthWest;}
+							catch (const FileRead::File_Boundary_Exceeded & e) {
+								throw game_data_error
+									("Map_Players_View_Data_Packet::Read: player %u: in "
+									"\"%s\": node (%i, %i): unexpected end of file while "
+									"reading Road_SouthWest",
+									plnum, roads_filename, f.x, f.y);
+							}
+						} else {
+							roads = roads_file.Unsigned8();
 						}
-					if (f_seen | br_seen)
+					}
+					if (f_seen | br_seen) {
 						mask |= Road_Mask << Road_SouthEast;
-					else if (f_everseen | br_everseen)
+					} else if (f_everseen | br_everseen) {
 						//  The player has seen the SouthEast edge but does not see
 						//  it now. Load his information about this edge from file.
-						try {roads |= legacy_road_bitbuffer.get() << Road_SouthEast;}
-						catch (const FileRead::File_Boundary_Exceeded & e) {
-							throw game_data_error
-								("Map_Players_View_Data_Packet::Read: player %u: in "
-								 "\"%s\": node (%i, %i): unexpected end of file while "
-								 "reading Road_SouthEast",
-								 plnum, roads_filename, f.x, f.y);
+						if (road_file_version < 2) {
+							try {roads |= legacy_road_bitbuffer.get() << Road_SouthEast;}
+							catch (const FileRead::File_Boundary_Exceeded & e) {
+								throw game_data_error
+									("Map_Players_View_Data_Packet::Read: player %u: in "
+										"\"%s\": node (%i, %i): unexpected end of file while "
+										"reading Road_SouthEast",
+										plnum, roads_filename, f.x, f.y);
+							}
+						} else {
+							roads |= roads_file.Unsigned8();
 						}
-					if (f_seen |  r_seen)
+					}
+					if (f_seen |  r_seen) {
 						mask |= Road_Mask << Road_East;
-					else if (f_everseen |  r_everseen)
+					} else if (f_everseen |  r_everseen) {
 						//  The player has seen the      East edge but does not see
 						//  it now. Load his information about this edge from file.
-						try {roads |= legacy_road_bitbuffer.get() << Road_East;}
-						catch (const FileRead::File_Boundary_Exceeded & e) {
-							throw game_data_error
-								("Map_Players_View_Data_Packet::Read: player %u: in "
-								 "\"%s\": node (%i, %i): unexpected end of file while "
-								 "reading Road_East",
-								 plnum, roads_filename, f.x, f.y);
+						if (road_file_version < 2) {
+							try {roads |= legacy_road_bitbuffer.get() << Road_East;}
+							catch (const FileRead::File_Boundary_Exceeded & e) {
+								throw game_data_error
+									("Map_Players_View_Data_Packet::Read: player %u: in "
+										"\"%s\": node (%i, %i): unexpected end of file while "
+										"reading Road_East",
+										plnum, roads_filename, f.x, f.y);
+							}
+						} else {
+							roads |= roads_file.Unsigned8();
 						}
+					}
 					roads |= f.field->get_roads() & mask;
 				}
 
@@ -681,20 +715,28 @@ void Map_Players_View_Data_Packet::Read
 
 				//  geologic survey
 				try {
-					if
-						((f_everseen & bl_everseen & br_everseen)
-						 and
-						 legacy_surveys_bitbuffer.get())
-					{
-						try {
-							f_player_field.resource_amounts.d =
-								legacy_surveys_amount_bitbuffer.get();
-						} catch (const FileRead::File_Boundary_Exceeded & e) {
-							throw game_data_error
-								("Map_Players_View_Data_Packet::Read: player %u: in "
-								 "\"%s\": node (%i, %i) t = D: unexpected end of file "
-								 "while reading resource amount of surveyed triangle",
-								 plnum, survey_amounts_filename, f.x, f.y);
+					bool survey = false;
+					if (surveys_file_version < 2) {
+						survey = (f_everseen & bl_everseen & br_everseen)
+							&& legacy_surveys_bitbuffer.get();
+					} else {
+						survey = (f_everseen & bl_everseen & br_everseen)
+						    && surveys_file.Unsigned8();
+					}
+					if (survey) {
+						if (survey_amounts_file_version < 2) {
+							try {
+								f_player_field.resource_amounts.d =
+									legacy_surveys_amount_bitbuffer.get();
+							} catch (const FileRead::File_Boundary_Exceeded & e) {
+								throw game_data_error
+									("Map_Players_View_Data_Packet::Read: player %u: in "
+										"\"%s\": node (%i, %i) t = D: unexpected end of file "
+										"while reading resource amount of surveyed triangle",
+										plnum, survey_amounts_filename, f.x, f.y);
+							}
+						} else {
+							f_player_field.resource_amounts.d = survey_amounts_file.Unsigned8();
 						}
 						try {
 							f_player_field.time_triangle_last_surveyed[TCoords<>::D] =
@@ -718,20 +760,28 @@ void Map_Players_View_Data_Packet::Read
 						 plnum, surveys_filename, f.x, f.y);
 				}
 				try {
-					if
-						((f_everseen & br_everseen &  r_everseen)
-						 and
-						 legacy_surveys_bitbuffer.get())
-					{
-						try {
-							f_player_field.resource_amounts.r =
-								legacy_surveys_amount_bitbuffer.get();
-						} catch (const FileRead::File_Boundary_Exceeded & e) {
-							throw game_data_error
-								("Map_Players_View_Data_Packet::Read: player %u: in "
-								 "\"%s\": node (%i, %i) t = R: unexpected end of file "
-								 "while reading resource amount of surveyed triangle",
-								 plnum, survey_amounts_filename, f.x, f.y);
+					bool survey = false;
+					if (surveys_file_version < 2) {
+						survey = (f_everseen & br_everseen &  r_everseen)
+							&& legacy_surveys_bitbuffer.get();
+					} else {
+						survey = (f_everseen & br_everseen &  r_everseen)
+							&& surveys_file.Unsigned8();
+					}
+					if (survey) {
+						if (survey_amounts_file_version < 2) {
+							try {
+								f_player_field.resource_amounts.r =
+									legacy_surveys_amount_bitbuffer.get();
+							} catch (const FileRead::File_Boundary_Exceeded & e) {
+								throw game_data_error
+									("Map_Players_View_Data_Packet::Read: player %u: in "
+									"\"%s\": node (%i, %i) t = R: unexpected end of file "
+									"while reading resource amount of surveyed triangle",
+									plnum, survey_amounts_filename, f.x, f.y);
+							}
+						} else {
+							f_player_field.resource_amounts.r = survey_amounts_file.Unsigned8();
 						}
 						try {
 							f_player_field.time_triangle_last_surveyed[TCoords<>::R] =
@@ -846,16 +896,16 @@ throw (_wexception)
 			FileWrite                   unseen_times_file;
 			FileWrite           node_immovable_kinds_file;
 			FileWrite                node_immovables_file;
-			BitOutBuffer<2>                    roads_file;
-			BitOutBuffer<4>                 terrains_file;
+			FileWrite                          roads_file;
+			FileWrite                       terrains_file;
 			FileWrite       triangle_immovable_kinds_file;
 			FileWrite            triangle_immovables_file;
 			FileWrite                         owners_file;
-			BitOutBuffer<1>                  surveys_file;
-			BitOutBuffer<4>           survey_amounts_file;
+			FileWrite                        surveys_file;
+			FileWrite                 survey_amounts_file;
 			FileWrite                   survey_times_file;
 			FileWrite                         vision_file;
-			BitOutBuffer<1>                   border_file;
+			FileWrite                         border_file;
 			for
 				(FCoords first_in_row(Coords(0, 0), &first_field);
 				 first_in_row.y < mapheight;
@@ -897,10 +947,12 @@ throw (_wexception)
 							write_unseen_immovable(&mod, node_immovable_kinds_file, node_immovables_file);
 
 							// write whether this field had a border the last time it was seen
-							border_file.put(f_player_field.border    ? 1 : 0);
-							border_file.put(f_player_field.border_r  ? 1 : 0);
-							border_file.put(f_player_field.border_br ? 1 : 0);
-							border_file.put(f_player_field.border_bl ? 1 : 0);
+							uint8_t borders = 0;
+							borders |= f_player_field.border;
+							borders |= f_player_field.border_r << 1;
+							borders |= f_player_field.border_br << 2;
+							borders |= f_player_field.border_bl << 3;
+							border_file.Unsigned8(borders);
 						}
 
 						//  triangles
@@ -910,7 +962,7 @@ throw (_wexception)
 							(not bl_seen & not br_seen &
 							 (f_everseen | bl_everseen | br_everseen))
 						{
-							terrains_file.put(f_player_field.terrains.d);
+							terrains_file.Unsigned8(f_player_field.terrains.d);
 							Map_Object_Data mod;
 							mod.map_object_descr = f_player_field.map_object_descr[TCoords<>::D];
 							write_unseen_immovable(&mod, triangle_immovable_kinds_file, triangle_immovables_file);
@@ -921,7 +973,7 @@ throw (_wexception)
 							(not br_seen & not  r_seen &
 							 (f_everseen | br_everseen |  r_everseen))
 						{
-							terrains_file.put(f_player_field.terrains.r);
+							terrains_file.Unsigned8(f_player_field.terrains.r);
 							Map_Object_Data mod;
 							mod.map_object_descr = f_player_field.map_object_descr[TCoords<>::R];
 							write_unseen_immovable(&mod, triangle_immovable_kinds_file, triangle_immovables_file);
@@ -929,11 +981,11 @@ throw (_wexception)
 
 						//  edges
 						if (not bl_seen & (f_everseen | bl_everseen))
-							roads_file.put(f_player_field.road_sw());
+							roads_file.Unsigned8(f_player_field.road_sw());
 						if (not br_seen & (f_everseen | br_everseen))
-							roads_file.put(f_player_field.road_se());
+							roads_file.Unsigned8(f_player_field.road_se());
 						if (not  r_seen & (f_everseen |  r_everseen))
-							roads_file.put(f_player_field.road_e ());
+							roads_file.Unsigned8(f_player_field.road_e ());
 					}
 
 					//  geologic survey
@@ -941,10 +993,10 @@ throw (_wexception)
 						const uint32_t time_last_surveyed =
 							f_player_field.time_triangle_last_surveyed[TCoords<>::D];
 						const uint8_t has_info = time_last_surveyed != 0xffffffff;
-						surveys_file.put(has_info);
+						surveys_file.Unsigned8(has_info);
 						if (has_info) {
 							survey_amounts_file
-								.put(f_player_field.resource_amounts.d);
+								.Unsigned8(f_player_field.resource_amounts.d);
 							survey_times_file.Unsigned32(time_last_surveyed);
 						}
 					}
@@ -952,10 +1004,10 @@ throw (_wexception)
 						const uint32_t time_last_surveyed =
 							f_player_field.time_triangle_last_surveyed[TCoords<>::R];
 						const uint8_t has_info = time_last_surveyed != 0xffffffff;
-						surveys_file.put(has_info);
+						surveys_file.Unsigned8(has_info);
 						if (has_info) {
 							survey_amounts_file
-								.put(f_player_field.resource_amounts.r);
+								.Unsigned8(f_player_field.resource_amounts.r);
 							survey_times_file.Unsigned32(time_last_surveyed);
 						}
 					}
@@ -1035,3 +1087,4 @@ throw (_wexception)
 
 
 }
+
