@@ -28,7 +28,6 @@
 #include "ui_basic/unique_window.h"
 
 #include "i18n.h"
-
 #include "ref_cast.h"
 
 class Interactive_GameBase;
@@ -54,7 +53,7 @@ private:
 
 	UI::Listselect<std::string> m_ls;
 	UI::EditBox * m_editbox;
-	UI::Textarea m_name_label, m_name, m_gametime_label, m_gametime, m_players_label,
+	UI::Textarea m_name_label, m_mapname, m_gametime_label, m_gametime, m_players_label,
 		m_win_condition_label, m_win_condition;
 	UI::Button * m_button_ok;
 	std::string m_curdir;

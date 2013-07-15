@@ -32,6 +32,7 @@
 #include "io/filesystem/layered_filesystem.h"
 #include "logic/game.h"
 #include "profile/profile.h"
+#include "interactive_player.h"
 
 using boost::format;
 
@@ -39,10 +40,6 @@ Interactive_GameBase & Game_Main_Menu_Save_Game::igbase() {
 	return ref_cast<Interactive_GameBase, UI::Panel>(*get_parent());
 }
 
-
-Game_Main_Menu_Save_Game::Game_Main_Menu_Save_Game
-	(Interactive_GameBase & parent, UI::UniqueWindow::Registry & registry)
-:
 #define WINDOW_WIDTH                                                        440
 #define WINDOW_HEIGHT                                                       440
 #define VMARGIN                                                               5
@@ -58,13 +55,31 @@ Game_Main_Menu_Save_Game::Game_Main_Menu_Save_Game
 #define CANCEL_Y                      (WINDOW_HEIGHT - BUTTON_HEIGHT - VMARGIN)
 #define DELETE_Y                          (CANCEL_Y - BUTTON_HEIGHT - VSPACING)
 #define OK_Y                              (DELETE_Y - BUTTON_HEIGHT - VSPACING)
+
+#define SPLIT_GAMETIME(unit, factor) \
+   uint32_t const unit = gametime / factor; gametime %= factor;
+
+#define PARSE_GAMETIME(buf, gametime)                     \
+	SPLIT_GAMETIME(days, 86400000);                      \
+	SPLIT_GAMETIME(hours, 3600000);                      \
+	SPLIT_GAMETIME(minutes, 60000);                      \
+	SPLIT_GAMETIME(seconds,  1000);                      \
+	sprintf                                              \
+		(buf,                                            \
+		 _("%02ud%02uh%02u'%02u\"%03u"),                 \
+		 days, hours, minutes, seconds, gametime);       \
+
+Game_Main_Menu_Save_Game::Game_Main_Menu_Save_Game
+	(Interactive_GameBase & parent, UI::UniqueWindow::Registry & registry)
+:
+
 	UI::UniqueWindow
 		(&parent, "save_game", &registry,
 		 WINDOW_WIDTH, WINDOW_HEIGHT, _("Save Game")),
 	m_ls     (this, HSPACING, VSPACING,  LIST_WIDTH, LIST_HEIGHT),
 	m_name_label
 		(this, DESCRIPTION_X,  5, 0, 20, _("Map Name: "),  UI::Align_CenterLeft),
-	m_name
+	m_mapname
 		(this, DESCRIPTION_X, 20, 0, 20, " ",              UI::Align_CenterLeft),
 	m_gametime_label
 		(this, DESCRIPTION_X, 45, 0, 20, _("Game Time: "), UI::Align_CenterLeft),
@@ -122,6 +137,19 @@ Game_Main_Menu_Save_Game::Game_Main_Menu_Save_Game
 	std::string cur_filename = parent.game().save_handler().get_cur_filename();
 	if (!cur_filename.empty()) {
 		select_by_name(cur_filename);
+	} else {
+		// Display current game infos
+		m_mapname.set_text(parent.game().get_map()->get_name());
+		uint32_t gametime = parent.game().get_gametime();
+		char buf[200];
+		PARSE_GAMETIME(buf, gametime);
+		m_gametime.set_text(buf);
+		uint8_t player_nr = parent.game().get_ipl()->player_number();
+		sprintf
+		(buf, "%i %s", player_nr,
+		 ngettext(_("player"), _("players"),  player_nr));
+		m_players_label.set_text(buf);
+		m_win_condition.set_text(parent.game().get_win_condition_displayname());
 	}
 
 	m_editbox->focus();
@@ -143,19 +171,10 @@ void Game_Main_Menu_Save_Game::selected(uint32_t) {
 	}
 	m_button_ok->set_enabled(true);
 
-	m_name.set_text(gpdp.get_mapname());
+	m_mapname.set_text(gpdp.get_mapname());
 	char buf[200];
 	uint32_t gametime = gpdp.get_gametime();
-#define SPLIT_GAMETIME(unit, factor) \
-   uint32_t const unit = gametime / factor; gametime %= factor;
-	SPLIT_GAMETIME(days, 86400000);
-	SPLIT_GAMETIME(hours, 3600000);
-	SPLIT_GAMETIME(minutes, 60000);
-	SPLIT_GAMETIME(seconds,  1000);
-	sprintf
-		(buf,
-		 _("%02ud%02uh%02u'%02u\"%03u"),
-		 days, hours, minutes, seconds, gametime);
+	PARSE_GAMETIME(buf, gametime);
 	m_gametime.set_text(buf);
 
 	sprintf
