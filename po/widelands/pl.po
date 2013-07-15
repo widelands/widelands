@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: Widelands svn4804\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2013-07-13 17:38+0200\n"
-"PO-Revision-Date: 2013-06-23 21:09+0000\n"
+"PO-Revision-Date: 2013-07-14 19:07+0000\n"
 "Last-Translator: Wesmania <ikk_pl@yahoo.co.uk>\n"
 "Language-Team: Language <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2013-07-14 05:21+0000\n"
+"X-Launchpad-Export-Date: 2013-07-15 04:32+0000\n"
 "X-Generator: Launchpad (build 16696)\n"
 
 #: ../../src/s2map.cc:230
@@ -30,10 +30,14 @@ msgid ""
 "map in the map editor.\n"
 "\n"
 msgstr ""
+"UWAGA: Nie udało się naprawić %i z błędnych miejsc na porty, więc je "
+"usunięto! Niektóre wyspy mogą być teraz nieosiągalne. Rozważ naprawienie "
+"mapy w edytorze map.\n"
+"\n"
 
 #: ../../src/s2map.cc:885
 msgid "WARNING"
-msgstr ""
+msgstr "UWAGA"
 
 #: ../../src/wlapplication.cc:410
 msgid "ERROR: Could not connect to metaserver (reason above)!\n"
@@ -3010,11 +3014,11 @@ msgstr "Rozpocznij ekspedycję"
 
 #: ../../src/wui/buildingwindow.cc:208
 msgid "Prefer rookies"
-msgstr ""
+msgstr "Preferuj nowicjuszy"
 
 #: ../../src/wui/buildingwindow.cc:220
 msgid "Prefer heroes"
-msgstr ""
+msgstr "Preferuj mistrzów"
 
 #: ../../src/wui/buildingwindow.cc:234
 msgid "Continue"
