@@ -84,7 +84,7 @@ namespace Widelands {
 #define BORDER_FILENAME_TEMPLATE DIRNAME_TEMPLATE                   "/border_%u"
 
 #define FILENAME_SIZE 48
-	
+
 #define OPEN_INPUT_FILE(filetype, file, filename, filename_template, version) \
    char (filename)[FILENAME_SIZE];                                            \
    snprintf(filename, sizeof(filename), filename_template, plnum, version);   \
