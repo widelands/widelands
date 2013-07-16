@@ -36,6 +36,7 @@
 #include "logic/maptriangleregion.h"
 #include "logic/player.h"
 #include "logic/productionsite.h"
+#include "logic/maphollowregion.h"
 #include "mapviewpixelconstants.h"
 #include "mapviewpixelfunctions.h"
 #include "minimap.h"
@@ -118,6 +119,15 @@ Interactive_Base::Interactive_Base
 	//  Having this in the initializer list (before Sys_InitGraphics) will give
 	//  funny results.
 	m_sel.pic = g_gr->images().get("pics/fsel.png");
+
+	// Load workarea images.
+	// Start at idx 0 for 2 enhancements, idx 3 for 1, idx 5 if none
+	workarea_pics[0] = g_gr->images().get("pics/workarea123.png");
+	workarea_pics[1] = g_gr->images().get("pics/workarea23.png");
+	workarea_pics[2] = g_gr->images().get("pics/workarea3.png");
+	workarea_pics[3] = g_gr->images().get("pics/workarea12.png");
+	workarea_pics[4] = g_gr->images().get("pics/workarea2.png");
+	workarea_pics[5] = g_gr->images().get("pics/workarea1.png");
 
 	m_label_speed.set_visible(false);
 	m_label_speed_shadow.set_visible(false);
@@ -227,6 +237,60 @@ bool Interactive_Base::buildhelp() {
 }
 void Interactive_Base::show_buildhelp(bool t) {
 	egbase().map().overlay_manager().show_buildhelp(t);
+}
+
+// Show the given workareas at the given coords and returns the overlay job id associated
+Overlay_Manager::Job_Id Interactive_Base::show_work_area
+	(const Workarea_Info & workarea_info, Widelands::Coords coords)
+{
+	uint8_t workareas_nrs = workarea_info.size();
+	Workarea_Info::size_type wa_index;
+	switch (workareas_nrs) {
+		case 0: return Overlay_Manager::Job_Id::Null(); break; // no workarea
+		case 1: wa_index = 5; break;
+		case 2: wa_index = 3; break;
+		case 3: wa_index = 0; break;
+		default: assert(false); break;
+	}
+	Widelands::Map & map = m_egbase.map();
+	Overlay_Manager & overlay_manager = map.overlay_manager();
+	Overlay_Manager::Job_Id job_id = overlay_manager.get_a_job_id();
+
+	Widelands::HollowArea<> hollow_area(Widelands::Area<>(coords, 0), 0);
+
+	// Iterate through the work areas, from building to its enhancement
+	Workarea_Info::const_iterator it = workarea_info.begin();
+	for (; it != workarea_info.end(); ++it) {
+		assert(wa_index < NUMBER_OF_WORKAREA_PICS);
+		hollow_area.radius = it->first;
+		Widelands::MapHollowRegion<> mr(map, hollow_area);
+		do
+			overlay_manager.register_overlay
+				(mr.location(),
+					workarea_pics[wa_index],
+					0,
+					Point::invalid(),
+					job_id);
+		while (mr.advance(map));
+		wa_index++;
+		hollow_area.hole_radius = hollow_area.radius;
+	}
+	return job_id;
+#if 0
+		//  This is debug output.
+		//  Improvement suggestion: add to sign explanation window instead.
+		container_iterate_const(Workarea_Info, workarea_info, i) {
+			log("Radius: %i\n", i.current->first);
+			container_iterate_const(std::set<std::string>, i.current->second, j)
+				log("        %s\n", j.current->c_str());
+		}
+#endif
+}
+
+void Interactive_Base::hide_work_area(Overlay_Manager::Job_Id job_id) {
+	Widelands::Map & map = m_egbase.map();
+	Overlay_Manager & overlay_manager = map.overlay_manager();
+	overlay_manager.remove_overlay(job_id);
 }
 
 
