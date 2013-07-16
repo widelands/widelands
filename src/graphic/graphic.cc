@@ -345,7 +345,7 @@ Graphic::~Graphic()
 /**
  * Return the screen x resolution
 */
-int32_t Graphic::get_xres() const
+int32_t Graphic::get_xres()
 {
 	return screen_->width();
 }
@@ -353,9 +353,19 @@ int32_t Graphic::get_xres() const
 /**
  * Return the screen x resolution
 */
-int32_t Graphic::get_yres() const
+int32_t Graphic::get_yres()
 {
 	return screen_->height();
+}
+
+int32_t Graphic::get_bpp()
+{
+	return m_sdl_screen->format->BitsPerPixel;
+}
+
+bool Graphic::is_fullscreen()
+{
+	return m_sdl_screen->flags & SDL_FULLSCREEN;
 }
 
 /**

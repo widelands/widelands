@@ -823,8 +823,15 @@ void WLApplication::init_graphics
 
 	if (!g_gr) {
 		g_gr = new Graphic();
+		g_gr->initialize(w, h, bpp, fullscreen, opengl);
+	} else {
+		if
+			(g_gr->get_xres() != w || g_gr->get_yres() != h || g_gr->get_bpp() != bpp
+				|| g_gr->is_fullscreen() != fullscreen || g_opengl != opengl)
+		{
+			g_gr->initialize(w, h, bpp, fullscreen, opengl);
+		}
 	}
-	g_gr->initialize(w, h, bpp, fullscreen, opengl);
 }
 
 void WLApplication::refresh_graphics()
