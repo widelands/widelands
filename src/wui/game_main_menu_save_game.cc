@@ -28,6 +28,7 @@
 #include "game_io/game_saver.h"
 #include "i18n.h"
 #include "interactive_gamebase.h"
+#include "gamecontroller.h"
 #include "io/filesystem/filesystem.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "logic/game.h"
@@ -125,6 +126,8 @@ Game_Main_Menu_Save_Game::Game_Main_Menu_Save_Game
 	}
 
 	m_editbox->focus();
+	// Pause the game
+	parent.game().gameController()->setPaused(true);
 }
 
 
@@ -292,6 +295,13 @@ void Game_Main_Menu_Save_Game::ok()
 		die();
 	}
 }
+
+void Game_Main_Menu_Save_Game::die()
+{
+	UI::UniqueWindow::die();
+	igbase().game().gameController()->setPaused(false);
+}
+
 
 
 struct DeletionMessageBox : public UI::WLMessageBox {
