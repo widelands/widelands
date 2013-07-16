@@ -2036,9 +2036,14 @@ bool WLApplication::new_game()
 		}
 	} else { // normal singleplayer
 		uint8_t const pn = sp.settings().playernum + 1;
-		boost::scoped_ptr<GameController> ctrl
-			(GameController::createSinglePlayer(game, true, pn));
 		try {
+			// Game controller needs the ibase pointer to init
+			// the chat
+			game.set_ibase
+				(new Interactive_Player
+					(game, g_options.pull_section("global"), pn, false, false));
+			boost::scoped_ptr<GameController> ctrl
+				(GameController::createSinglePlayer(game, true, pn));
 			UI::ProgressWindow loaderUI;
 			std::vector<std::string> tipstext;
 			tipstext.push_back("general_game");
@@ -2052,9 +2057,6 @@ bool WLApplication::new_game()
 			loaderUI.step(_("Preparing game"));
 
 			game.set_game_controller(ctrl.get());
-			game.set_ibase
-				(new Interactive_Player
-				 	(game, g_options.pull_section("global"), pn, false, false));
 			game.init_newgame(&loaderUI, sp.settings());
 			game.run(&loaderUI, Widelands::Game::NewNonScenario);
 		} catch (const std::exception & e) {
