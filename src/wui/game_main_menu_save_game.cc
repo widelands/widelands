@@ -144,9 +144,8 @@ Game_Main_Menu_Save_Game::Game_Main_Menu_Save_Game
 		char buf[200];
 		PARSE_GAMETIME(buf, gametime);
 		m_gametime.set_text(buf);
-		// May be wrong if some slots are closed
-		// NOCOM(#cghislai): I do not understand this comment.
-		uint8_t player_nr = parent.game().get_players_amount();
+		// NOCOM(#Sirver): the old comment didn't apply anymore with this function call
+		uint8_t player_nr = parent.game().get_number_of_players();
 		sprintf(buf, "%i %s", player_nr, ngettext(_("player"), _("players"),  player_nr));
 		m_players_label.set_text(buf);
 		m_win_condition.set_text(parent.game().get_win_condition_displayname());

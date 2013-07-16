@@ -98,13 +98,13 @@ void Game_Preload_Data_Packet::Write
 		// player that saved the game.
 		s.set_int("player_nr", ipl->player_number());
 	} else {
-		for (int i = 1; i <= game.get_players_amount(); ++i) {
+		for (int i = 1; i <= game.get_number_of_players(); ++i) {
 			if (game.get_player(i)) {
 				s.set_int("player_nr", i);
 			}
 		}
 	}
-	s.set_int(PLAYERS_AMOUNT_KEY_V4, game.get_players_amount());
+	s.set_int(PLAYERS_AMOUNT_KEY_V4, game.get_number_of_players());
 
 	std::string bg(map.get_background());
 	if (bg.empty())

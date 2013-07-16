@@ -38,7 +38,6 @@ struct Game_Preload_Data_Packet : public Game_Data_Packet {
 	char const * get_mapname()      {return m_mapname.c_str();}
 	std::string get_background()    {return m_background;}
 	std::string get_win_condition() {return m_win_condition;}
-	// NOCOM(#cghislai): returning const by value makes not much sense - the caller owns the data and can do whatever it wants with it. I know, this is used all over widelands, but let's not spread it farther.
 	uint32_t get_gametime() {return m_gametime;}
 	uint8_t get_player_nr() {return m_player_nr;}
 	uint8_t get_player_amount() {return m_player_amount;}

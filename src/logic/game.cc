@@ -336,18 +336,13 @@ void Game::init_newgame
 		boost::shared_ptr<LuaTable> table
 			(lua().run_script
 			 (*g_fs, "scripting/win_conditions/" + settings.win_condition + ".lua", "win_conditions"));
-		// NOCOM(#cghislai): I am not sure why this try/catch is needed. All win conditions that we ship must define name (or it is a bug). If the win condition does not exist, run_script will already throw. So, I'd vote for removing this try/catch.
-		try {
-			m_win_condition_displayname = table->get_string("name");
-		} catch (...) {
-			m_win_condition_displayname = _("Unknown");
-		}
+		m_win_condition_displayname = table->get_string("name");
 		LuaCoroutine * cr = table->get_coroutine("func");
 		enqueue_command(new Cmd_LuaCoroutine(get_gametime() + 100, cr));
 	} else {
 		m_win_condition_displayname = _("Scenario");
 	}
-	m_players_amount = 0;
+	m_number_of_players = 0;
 	std::vector<PlayerSettings>::const_iterator it;
 	for (it = settings.players.begin(); it != settings.players.end(); ++it) {
 		PlayerSettings ps = *it;
@@ -355,7 +350,7 @@ void Game::init_newgame
 			(ps.state == PlayerSettings::stateHuman
 			|| ps.state == PlayerSettings::stateComputer)
 		{
-			m_players_amount++;
+			m_number_of_players++;
 		}
 	}
 }

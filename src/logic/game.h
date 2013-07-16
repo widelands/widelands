@@ -190,8 +190,8 @@ struct Game : Editor_Game_Base {
 	void sample_statistics();
 
 	const std::string & get_win_condition_displayname() {return m_win_condition_displayname;}
-	// NOCOM(#cghislai): get_number_of_players? Could you add a short doc string here in the header?
-	uint8_t get_players_amount() {return m_players_amount;}
+	// Returns the number of players (human or ai) occupying a slot.
+	uint8_t get_number_of_players() {return m_number_of_players;}
 
 private:
 	void SyncReset();
@@ -257,7 +257,7 @@ private:
 
 	/// For save games and statistics generation
 	std::string          m_win_condition_displayname;
-	uint8_t              m_players_amount;
+	uint8_t              m_number_of_players;
 };
 
 inline Coords Game::random_location(Coords location, uint8_t radius) {
