@@ -326,9 +326,7 @@ bool Graphic::check_fallback_settings_in_effect()
 }
 
 void Graphic::cleanup() {
-	BOOST_FOREACH(Texture* texture, m_maptextures)
-		delete texture;
-
+	flush_maptextures();
 	flush_animations();
 	surface_cache_->flush();
 	// TODO: this should really not be needed, but currently is :(
