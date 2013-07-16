@@ -275,7 +275,7 @@ void Table<void *>::draw(RenderTarget & dst)
 			const std::string &       entry_string  = er.get_string (i);
 			uint32_t picw = 0;
 			uint32_t pich = 0;
-			
+
 			if (entry_picture) {
 				picw = entry_picture->width();
 				pich = entry_picture->height();
@@ -296,7 +296,7 @@ void Table<void *>::draw(RenderTarget & dst)
 			const Image* entry_text_im = UI::g_fh1->render(as_uifont(entry_string, m_fontsize));
 			// Crop to column width
 			UI::correct_for_align(alignment, entry_text_im->width(), entry_text_im->height(), &point);
-			dst.blitrect(point, entry_text_im, Rect(0, 0, curw-picw, lineheight));
+			dst.blitrect(point, entry_text_im, Rect(0, 0, curw - picw, lineheight));
 
 			curx += curw;
 		}

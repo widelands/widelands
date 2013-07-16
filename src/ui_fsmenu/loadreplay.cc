@@ -28,6 +28,7 @@
 #include "logic/game.h"
 #include "logic/replay.h"
 #include "ui_basic/messagebox.h"
+#include "timestring.h"
 
 Fullscreen_Menu_LoadReplay::Fullscreen_Menu_LoadReplay() :
 	Fullscreen_Menu_Base("choosemapmenu.jpg"),
@@ -186,15 +187,9 @@ void Fullscreen_Menu_LoadReplay::replay_selected(uint32_t const selected)
 		m_delete.set_enabled(true);
 		m_tamapname.set_text(gpdp.get_mapname());
 
-		char buf[200];
+		char buf[20];
 		uint32_t gametime = gpdp.get_gametime();
-
-		int32_t hours = gametime / 3600000;
-		gametime -= hours * 3600000;
-		int32_t minutes = gametime / 60000;
-
-		sprintf(buf, "%02i:%02i", hours, minutes);
-		m_tagametime.set_text(buf);
+		m_tagametime.set_text(gametimestring(gametime));
 
 		sprintf(buf, "%i", gpdp.get_player_nr());
 		m_ta_players.set_text(buf);

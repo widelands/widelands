@@ -34,6 +34,7 @@
 #include "logic/game.h"
 #include "profile/profile.h"
 #include "interactive_player.h"
+#include "timestring.h"
 
 using boost::format;
 
@@ -150,20 +151,11 @@ void Game_Main_Menu_Save_Game::selected(uint32_t) {
 	m_button_ok->set_enabled(true);
 
 	m_name.set_text(gpdp.get_mapname());
-	char buf[200];
-	uint32_t gametime = gpdp.get_gametime();
-#define SPLIT_GAMETIME(unit, factor) \
-   uint32_t const unit = gametime / factor; gametime %= factor;
-	SPLIT_GAMETIME(days, 86400000);
-	SPLIT_GAMETIME(hours, 3600000);
-	SPLIT_GAMETIME(minutes, 60000);
-	SPLIT_GAMETIME(seconds,  1000);
-	sprintf
-		(buf,
-		 _("%02ud%02uh%02u'%02u\"%03u"),
-		 days, hours, minutes, seconds, gametime);
-	m_gametime.set_text(buf);
 
+	uint32_t gametime = gpdp.get_gametime();
+	m_gametime.set_text(gametimestring(gametime));
+
+	char buf[200];
 	sprintf
 		(buf, "%i %s", gpdp.get_player_nr(),
 		 ngettext(_("player"), _("players"), gpdp.get_player_nr()));
