@@ -88,7 +88,7 @@ struct Interactive_Player : public Interactive_GameBase
 
 	void popup_message(Widelands::Message_Id, const Widelands::Message &);
 
-	const bool is_multiplayer() {return m_multiplayer;}
+	bool is_multiplayer() {return m_multiplayer;}
 
 private:
 	void cmdSwitchPlayer(const std::vector<std::string> & args);
