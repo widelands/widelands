@@ -17,6 +17,8 @@
  *
  */
 
+#include <boost/foreach.hpp>
+#include <boost/lexical_cast.hpp>
 #include "buildingwindow.h"
 #include "logic/building.h"
 #include "ui_basic/window.h"
@@ -38,8 +40,9 @@ void Building::show_options(Interactive_GameBase & igbase, bool avoid_fastclick)
 		m_optionswindow->move_to_top();
 	} else {
 		create_options_window(igbase, m_optionswindow);
-		if (upcast(Building_Window, bw, m_optionswindow))
+		if (upcast(Building_Window, bw, m_optionswindow)) {
 			bw->set_avoid_fastclick(avoid_fastclick);
+		}
 		// Run a first think here so that certain things like caps buttons
 		// get properly initialized
 		m_optionswindow->think();
@@ -51,6 +54,8 @@ void Building::show_options(Interactive_GameBase & igbase, bool avoid_fastclick)
  */
 void Building::hide_options()
 {
+	BOOST_FOREACH(boost::signals::connection& c, options_window_connections)
+		c.disconnect();
 	delete m_optionswindow;
 	m_optionswindow = NULL;
 }
