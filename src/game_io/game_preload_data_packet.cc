@@ -19,13 +19,14 @@
 
 #include "game_preload_data_packet.h"
 
+#include <boost/concept_check.hpp>
+
 #include "logic/game.h"
 #include "logic/game_data_error.h"
 #include "wui/interactive_player.h"
 #include "logic/map.h"
 #include "profile/profile.h"
 #include "scripting/scripting.h"
-#include <boost/concept_check.hpp>
 
 namespace Widelands {
 

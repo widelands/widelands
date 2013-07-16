@@ -190,7 +190,8 @@ struct Game : Editor_Game_Base {
 	void sample_statistics();
 
 	const std::string & get_win_condition_displayname() {return m_win_condition_displayname;}
-	const uint8_t get_players_amount() {return m_players_amount;}
+	// NOCOM(#cghislai): get_number_of_players? Could you add a short doc string here in the header?
+	uint8_t get_players_amount() {return m_players_amount;}
 
 private:
 	void SyncReset();

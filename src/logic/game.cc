@@ -336,6 +336,7 @@ void Game::init_newgame
 		boost::shared_ptr<LuaTable> table
 			(lua().run_script
 			 (*g_fs, "scripting/win_conditions/" + settings.win_condition + ".lua", "win_conditions"));
+		// NOCOM(#cghislai): I am not sure why this try/catch is needed. All win conditions that we ship must define name (or it is a bug). If the win condition does not exist, run_script will already throw. So, I'd vote for removing this try/catch.
 		try {
 			m_win_condition_displayname = table->get_string("name");
 		} catch (...) {
