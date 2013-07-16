@@ -23,11 +23,13 @@
 #include "graphic/font_handler.h"
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
+#include "graphic/font_handler1.h"
 
 #include "button.h"
 #include "mouse_constants.h"
 #include "scrollbar.h"
 #include "wlapplication.h"
+#include "text_layout.h"
 
 #include "container_iterate.h"
 #include <boost/bind.hpp>
@@ -273,21 +275,13 @@ void Table<void *>::draw(RenderTarget & dst)
 			const std::string &       entry_string  = er.get_string (i);
 			uint32_t picw = 0;
 			uint32_t pich = 0;
-			uint32_t stringw = 0;
-			uint32_t stringh = g_fh->get_fontheight(m_fontname, m_fontsize);
+			
 			if (entry_picture) {
 				picw = entry_picture->width();
 				pich = entry_picture->height();
 			}
-			Point point =
-				Point(curx, y)
-				+
-				Point
-					(alignment & Align_Right   ?  curw - (picw + stringw)  - 1 :
-					 alignment & Align_HCenter ? (curw - (picw + stringw)) / 2 :
-					 1,
-					 0);
-			if (entry_picture)
+			Point point(curx, y);
+			if (entry_picture) {
 				dst.blit
 					(point +
 					 Point
@@ -296,18 +290,13 @@ void Table<void *>::draw(RenderTarget & dst)
 					 	  static_cast<int32_t>(pich))
 					 	 / 2),
 					 entry_picture);
+				point.x += picw;
+			}
 
-			UI::g_fh->draw_text
-				(dst,
-				 TextStyle::makebold(Font::get(m_fontname, m_fontsize), er.use_clr ? er.clr : UI_FONT_CLR_FG),
-				 point +
-				 Point
-				 	(picw,
-				 	 (static_cast<int32_t>(lineheight) -
-				 	  static_cast<int32_t>(stringh))
-				 	 / 2),
-				 entry_string,
-				 alignment);
+			const Image* entry_text_im = UI::g_fh1->render(as_uifont(entry_string, m_fontsize));
+			// Crop to column width
+			UI::correct_for_align(alignment, entry_text_im->width(), entry_text_im->height(), &point);
+			dst.blitrect(point, entry_text_im, Rect(0, 0, curw-picw, lineheight));
 
 			curx += curw;
 		}
