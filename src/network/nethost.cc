@@ -498,6 +498,13 @@ struct HostChatProvider : public ChatProvider {
 		h->send(c);
 	}
 
+	void send_local(const std::string & msg) {
+		ChatMessage c;
+		c.time = time(0);
+		c.msg = msg;
+		ChatProvider::send(c);
+	}
+
 	const std::vector<ChatMessage> & getMessages() const {
 		return messages;
 	}

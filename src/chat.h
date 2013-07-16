@@ -106,6 +106,12 @@ struct ChatProvider : public Widelands::NoteSender<ChatMessage> {
 	virtual void send(const std::string &) = 0;
 
 	/**
+	 * Sends the given message to the local player only
+	 * This may be used to display useful log messages.
+	 */
+	virtual void send_local(const std::string &) = 0;
+
+	/**
 	 * \return a (chronological) list of received chat messages.
 	 * This list need not be stable or monotonic. In other words,
 	 * subsequent calls to this functions may return a smaller or

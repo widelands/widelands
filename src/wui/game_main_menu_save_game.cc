@@ -33,6 +33,7 @@
 #include "io/filesystem/layered_filesystem.h"
 #include "logic/game.h"
 #include "profile/profile.h"
+#include "interactive_player.h"
 
 using boost::format;
 
@@ -126,8 +127,10 @@ Game_Main_Menu_Save_Game::Game_Main_Menu_Save_Game
 	}
 
 	m_editbox->focus();
-	// Pause the game
-	parent.game().gameController()->setPaused(true);
+	if (!parent.game().get_ipl()->is_multiplayer()) {
+		// Pause the game
+		parent.game().gameController()->setPaused(true);
+	}
 }
 
 
@@ -299,7 +302,9 @@ void Game_Main_Menu_Save_Game::ok()
 void Game_Main_Menu_Save_Game::die()
 {
 	UI::UniqueWindow::die();
-	igbase().game().gameController()->setPaused(false);
+	if (!igbase().game().get_ipl()->is_multiplayer()) {
+		igbase().game().gameController()->setPaused(false);
+	}
 }
 
 
