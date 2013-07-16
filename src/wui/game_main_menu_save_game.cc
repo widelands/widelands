@@ -175,10 +175,10 @@ void Game_Main_Menu_Save_Game::selected(uint32_t) {
 	uint32_t gametime = gpdp.get_gametime();
 	PARSE_GAMETIME(buf, gametime);
 	m_gametime.set_text(buf);
-	if (gpdp.get_player_amount() > 0) {
+	if (gpdp.get_number_of_players() > 0) {
 		sprintf
-			(buf, "%i %s", gpdp.get_player_amount(),
-			ngettext(_("player"), _("players"), gpdp.get_player_amount()));
+			(buf, "%i %s", gpdp.get_number_of_players(),
+			ngettext(_("player"), _("players"), gpdp.get_number_of_players()));
 	} else {
 		sprintf(buf, "%s", _("Unknown"));
 	}

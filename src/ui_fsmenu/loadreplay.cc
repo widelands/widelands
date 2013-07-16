@@ -196,8 +196,8 @@ void Fullscreen_Menu_LoadReplay::replay_selected(uint32_t const selected)
 		sprintf(buf, "%02i:%02i", hours, minutes);
 		m_tagametime.set_text(buf);
 
-		if (gpdp.get_player_amount() > 0) {
-			sprintf(buf, "%i", gpdp.get_player_amount());
+		if (gpdp.get_number_of_players() > 0) {
+			sprintf(buf, "%i", gpdp.get_number_of_players());
 		} else {
 			sprintf(buf, "%s", _("Unknown"));
 		}

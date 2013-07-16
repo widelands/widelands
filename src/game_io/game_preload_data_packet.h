@@ -40,7 +40,8 @@ struct Game_Preload_Data_Packet : public Game_Data_Packet {
 	std::string get_win_condition() {return m_win_condition;}
 	uint32_t get_gametime() {return m_gametime;}
 	uint8_t get_player_nr() {return m_player_nr;}
-	uint8_t get_player_amount() {return m_player_amount;}
+
+	uint8_t get_number_of_players() {return m_number_of_players;}
 
 private:
 	std::string m_mapname;
@@ -48,7 +49,7 @@ private:
 	std::string m_win_condition;
 	uint32_t m_gametime;
 	uint8_t  m_player_nr; // The local player idx
-	uint8_t  m_player_amount;
+	uint8_t  m_number_of_players;
 };
 
 }

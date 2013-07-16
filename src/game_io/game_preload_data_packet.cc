@@ -64,9 +64,9 @@ void Game_Preload_Data_Packet::Read
 				m_win_condition = s.get_safe_string("win_condition");
 			}
 			if (packet_version < 4) {
-				m_player_amount = 0;
+				m_number_of_players = 0;
 			} else {
-				m_player_amount = s.get_safe_int(PLAYERS_AMOUNT_KEY_V4);
+				m_number_of_players = s.get_safe_int(PLAYERS_AMOUNT_KEY_V4);
 			}
 		} else {
 			throw game_data_error
