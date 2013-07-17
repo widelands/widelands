@@ -99,7 +99,15 @@ private:
 	typedef std::vector<const Widelands::WareList *> vector_type;
 	typedef std::vector<bool> selection_type;
 
-	// Temporary anchored selection
+	/**
+	 * Update the anchored selection. When first mouse button is
+	 * pressed on a ware, it is stored in @ref m_selection_anchor.
+	 * Mouse moves trigger this function to select all wares items
+	 * in the rectangle between the anchor and the mouse position.
+	 * They are temporary stored in @ref m_in_selection.
+	 * Releasing the mouse button will performs the selection.
+	 * This allows selection of multiple wares by dragging.
+	 */
 	void update_anchor_selection(int32_t x, int32_t y);
 
 	const Widelands::Tribe_Descr & m_tribe;
@@ -110,6 +118,11 @@ private:
 	selection_type      m_in_selection;  //Wares in temporary anchored selection
 	bool                m_selectable;
 	bool                m_horizontal;
+
+	/**
+	 * The ware on which the mouse press has been performed.
+	 * It is not selected directly, but will be on mouse release.
+	 */
 	Widelands::Ware_Index m_selection_anchor;
 	boost::function<void(Widelands::Ware_Index, bool)> m_callback_function;
 };

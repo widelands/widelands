@@ -36,6 +36,8 @@
 #include "upcast.h"
 #include "waresqueuedisplay.h"
 
+#include <boost/format.hpp>
+
 #include "buildingwindow.h"
 
 static const char * pic_bulldoze           = "pics/menu_bld_bulldoze.png";
@@ -92,11 +94,9 @@ Building_Window::Building_Window
 	// Title for construction site
 	upcast(Widelands::ConstructionSite, csite, &m_building);
 	if (csite != NULL) {
-		// NOCOM(#cghislai): Why not boost::format?
-		char cs_title[256];
 		// Show name in parenthesis as it may take all width already
-		sprintf(cs_title, _("(%s)"), csite->building().descname().c_str());
-		set_title(cs_title);
+		const std::string title = (boost::format("(%s)") % csite->building().descname()).str();
+		set_title(title);
 	}
 }
 

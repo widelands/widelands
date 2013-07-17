@@ -72,7 +72,7 @@ AbstractWaresDisplay::AbstractWaresDisplay
 	m_callback_function(callback_function)
 {
 	//resize the configuration of our wares if they won't fit in the current window
-	int number = (g_gr->get_yres() - 160) / (WARE_MENU_PIC_HEIGHT + WARE_MENU_INFO_SIZE + 3);
+	int number = (g_gr->get_yres() - 160) / (WARE_MENU_PIC_HEIGHT + WARE_MENU_INFO_SIZE + WARE_MENU_PIC_PAD_Y);
 	const_cast<Widelands::Tribe_Descr &>(m_tribe).resize_ware_orders(number);
 
 	// Find out geometry from icons_order
@@ -89,13 +89,13 @@ AbstractWaresDisplay::AbstractWaresDisplay
 
 	// 25 is height of m_curware text
 	set_desired_size
-		(columns * (WARE_MENU_PIC_WIDTH  + 3) + 1,
-		 rows * (WARE_MENU_PIC_HEIGHT + WARE_MENU_INFO_SIZE + 3) + 1 + 25);
+		(columns * (WARE_MENU_PIC_WIDTH  + WARE_MENU_PIC_PAD_X) + 1,
+		 rows * (WARE_MENU_PIC_HEIGHT + WARE_MENU_INFO_SIZE + WARE_MENU_PIC_PAD_Y) + 1 + 25);
 }
 
 
 bool AbstractWaresDisplay::handle_mousemove
-	(uint8_t, int32_t x, int32_t y, int32_t, int32_t)
+	(uint8_t state, int32_t x, int32_t y, int32_t, int32_t)
 {
 	const Widelands::Ware_Index index = ware_at_point(x, y);
 
@@ -109,6 +109,14 @@ bool AbstractWaresDisplay::handle_mousemove
 		 :
 		 "");
 	if (m_selection_anchor) {
+		// Ensure mouse button is still pressed as some
+		// mouse release events do not reach us
+		if (state ^ SDL_BUTTON_LMASK) {
+			// FIXME: We should call another function that will not pass that events
+			// to our Panel superclass
+			handle_mouserelease(SDL_BUTTON_LEFT, x, y);
+			return true;
+		}
 		update_anchor_selection(x, y);
 	}
 	return true;
@@ -119,17 +127,19 @@ bool AbstractWaresDisplay::handle_mousepress
 {
 	if (btn == SDL_BUTTON_LEFT) {
 		Widelands::Ware_Index ware = ware_at_point(x, y);
-		if (!ware)
+		if (!ware) {
 			return false;
-
-		if (m_selectable) {
-			toggle_ware(ware);
-			// Mouserelase may be skipped sometimes here, so
-			// only anchor if needed.
-			if (!m_selection_anchor) {
-				// Anchor needs to be toggled for code consistency
-				m_selection_anchor = ware;
-			}
+		}
+		if (!m_selectable) {
+			return true;
+		}
+		if (!m_selection_anchor) {
+			// Create the selection anchor to be able to select
+			// multiple ware by dragging.
+			m_selection_anchor = ware;
+			m_in_selection[ware] = true;
+		} else {
+			// A mouse release has been missed
 		}
 		return true;
 	}
@@ -142,20 +152,23 @@ bool AbstractWaresDisplay::handle_mouserelease(Uint8 btn, int32_t x, int32_t y)
 	if (btn != SDL_BUTTON_LEFT || !m_selection_anchor) {
 		return UI::Panel::handle_mouserelease(btn, x, y);
 	}
+
 	Widelands::Ware_Index const number =
 		m_type == Widelands::wwWORKER ? m_tribe.get_nrworkers() : m_tribe.get_nrwares();
 
+	bool to_be_selected = !ware_selected(m_selection_anchor);
 	for (Widelands::Ware_Index i = Widelands::Ware_Index::First(); i < number; ++i)
 	{
 		if (!m_in_selection[i]) {
 			continue;
 		}
-		if (ware_selected(m_selection_anchor)) {
+		if (to_be_selected) {
 			select_ware(i);
 		} else {
 			unselect_ware(i);
 		}
 	}
+
 	// Release anchor, empty selection
 	m_selection_anchor = Widelands::Ware_Index::Null();
 	std::fill(m_in_selection.begin(), m_in_selection.end(), false);
@@ -173,8 +186,8 @@ Widelands::Ware_Index AbstractWaresDisplay::ware_at_point(int32_t x, int32_t y) 
 		return Widelands::Ware_Index::Null();
 
 
-	unsigned int i = x / (WARE_MENU_PIC_WIDTH + 4);
-	unsigned int j = y / (WARE_MENU_PIC_HEIGHT + WARE_MENU_INFO_SIZE + 3);
+	unsigned int i = x / (WARE_MENU_PIC_WIDTH + WARE_MENU_PIC_PAD_X);
+	unsigned int j = y / (WARE_MENU_PIC_HEIGHT + WARE_MENU_INFO_SIZE + WARE_MENU_PIC_PAD_Y);
 	if (m_horizontal) {
 		unsigned int s = i;
 		i = j;
@@ -190,7 +203,10 @@ Widelands::Ware_Index AbstractWaresDisplay::ware_at_point(int32_t x, int32_t y) 
 	return Widelands::Ware_Index::Null();
 }
 
-// NOCOM(#cghislai): This could use a comment - I do not understand what the method or the feature does without running Widelands.
+// Update the anchored selection. An anchor has been created by mouse
+// press. Mouse move call this function with the current mouse position.
+// This function will temporary store all wares in the rectangle between anchor
+// and current pos to allow their selection on mouse release
 void AbstractWaresDisplay::update_anchor_selection(int32_t x, int32_t y)
 {
 	if (!m_selection_anchor || x < 0 || y < 0) {
@@ -198,47 +214,47 @@ void AbstractWaresDisplay::update_anchor_selection(int32_t x, int32_t y)
 	}
 
 	std::fill(m_in_selection.begin(), m_in_selection.end(), false);
-	Point pos0 = ware_position(m_selection_anchor);
+	Point anchor_pos = ware_position(m_selection_anchor);
 	// Add an offset to make sure the anchor line and column will be
 	// selected when selecting in topleft direction
-	int32_t x0 = pos0.x + 3;
-	int32_t y0 = pos0.y + 3;
+	int32_t anchor_x = anchor_pos.x + WARE_MENU_PIC_WIDTH / 2;
+	int32_t anchor_y = anchor_pos.y + WARE_MENU_PIC_HEIGHT / 2;
 
-	// NOCOM(#cghislai): these variable names should be a bit more descriptive.
-	unsigned int i0 = x0 / (WARE_MENU_PIC_WIDTH + 4);
-	unsigned int j0 = y0 / (WARE_MENU_PIC_HEIGHT + WARE_MENU_INFO_SIZE + 3);
-	unsigned int i = x / (WARE_MENU_PIC_WIDTH + 4);
-	unsigned int j = y / (WARE_MENU_PIC_HEIGHT + WARE_MENU_INFO_SIZE + 3);
-	unsigned int s;
+	unsigned int left_ware_idx = anchor_x / (WARE_MENU_PIC_WIDTH + WARE_MENU_PIC_PAD_X);
+	unsigned int top_ware_idx = anchor_y / (WARE_MENU_PIC_HEIGHT + WARE_MENU_INFO_SIZE + WARE_MENU_PIC_PAD_Y);
+	unsigned int right_ware_idx = x / (WARE_MENU_PIC_WIDTH + WARE_MENU_PIC_PAD_X);
+	unsigned int bottom_ware_idx = y / (WARE_MENU_PIC_HEIGHT + WARE_MENU_INFO_SIZE + WARE_MENU_PIC_PAD_Y);
+	unsigned int tmp;
+
 	// Reverse col/row and anchor/endpoint if needed
 	if (m_horizontal) {
-		s = i0;
-		i0 = j0;
-		j0 = s;
-		s = i;
-		i = j;
-		j = s;
+		tmp = left_ware_idx;
+		left_ware_idx = top_ware_idx;
+		top_ware_idx = tmp;
+		tmp = right_ware_idx;
+		right_ware_idx = bottom_ware_idx;
+		bottom_ware_idx = tmp;
 	}
-	if (i0 > i) {
-		s = i0;
-		i0 = i;
-		i = s;
+	if (left_ware_idx > right_ware_idx) {
+		tmp = left_ware_idx;
+		left_ware_idx = right_ware_idx;
+		right_ware_idx = tmp;
 	}
-	if (j0 > j) {
-		s = j0;
-		j0 = j;
-		j = s;
+	if (top_ware_idx > bottom_ware_idx) {
+		tmp = top_ware_idx;
+		top_ware_idx = bottom_ware_idx;
+		bottom_ware_idx = tmp;
 	}
 
-	for (unsigned int cur_i = i0; cur_i <= i; cur_i++) {
-		if (cur_i >= icons_order().size()) {
+	for (unsigned int cur_ware_x = left_ware_idx; cur_ware_x <= right_ware_idx; cur_ware_x++) {
+		if (cur_ware_x >= icons_order().size()) {
 			continue;
 		}
-		for (unsigned cur_j = j0; cur_j <= j; cur_j++) {
-			if (cur_j >= icons_order()[cur_i].size()) {
+		for (unsigned cur_ware_y = top_ware_idx; cur_ware_y <= bottom_ware_idx; cur_ware_y++) {
+			if (cur_ware_y >= icons_order()[cur_ware_x].size()) {
 				continue;
 			}
-			Widelands::Ware_Index ware = icons_order()[cur_i][cur_j];
+			Widelands::Ware_Index ware = icons_order()[cur_ware_x][cur_ware_y];
 			if (m_hidden[ware]) {
 				continue;
 			}
@@ -317,11 +333,15 @@ Point AbstractWaresDisplay::ware_position(Widelands::Ware_Index id) const
 {
 	Point p(2, 2);
 	if (m_horizontal) {
-		p.x += icons_order_coords()[id].second  * (WARE_MENU_PIC_WIDTH + 3);
-		p.y += icons_order_coords()[id].first * (WARE_MENU_PIC_HEIGHT + 3 + WARE_MENU_INFO_SIZE);
+		p.x += icons_order_coords()[id].second  *
+			(WARE_MENU_PIC_WIDTH + WARE_MENU_PIC_PAD_X);
+		p.y += icons_order_coords()[id].first *
+			(WARE_MENU_PIC_HEIGHT + WARE_MENU_PIC_PAD_Y + WARE_MENU_INFO_SIZE);
 	} else {
-		p.x += icons_order_coords()[id].first  * (WARE_MENU_PIC_WIDTH + 3);
-		p.y += icons_order_coords()[id].second * (WARE_MENU_PIC_HEIGHT + 3 + WARE_MENU_INFO_SIZE);
+		p.x += icons_order_coords()[id].first  *
+			(WARE_MENU_PIC_WIDTH + WARE_MENU_PIC_PAD_X);
+		p.y += icons_order_coords()[id].second *
+			(WARE_MENU_PIC_HEIGHT + WARE_MENU_PIC_PAD_Y + WARE_MENU_INFO_SIZE);
 	}
 	return p;
 }
@@ -341,7 +361,10 @@ void AbstractWaresDisplay::draw_ware
 
 	bool draw_selected = m_selected[id];
 	if (m_selection_anchor) {
-		if (ware_selected(m_selection_anchor)) {
+		// Draw the temporary selected wares as if they were
+		// selected.
+		// TODO: Use another pic for the temporary selection
+		if (!ware_selected(m_selection_anchor)) {
 			draw_selected |= m_in_selection[id];
 		} else {
 			draw_selected &= !m_in_selection[id];
@@ -485,3 +508,4 @@ std::string waremap_to_richtext
 			}
 	return ret;
 }
+
