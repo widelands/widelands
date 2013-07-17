@@ -105,13 +105,41 @@ ProductionSite_Window::ProductionSite_Window
 			 worker_box,
 			 productionsite().descr().nr_working_positions() > 1 ?
 			 _("Workers") : _("Worker"));
+		update_worker_table();
 	}
 }
 
 void ProductionSite_Window::think()
 {
 	Building_Window::think();
+	// If we have pending requests, update table as the worker might be coming
+	for
+		(unsigned int i = 0;
+			i < productionsite().descr().nr_working_positions(); ++i)
+	{
+		if (productionsite().working_positions()[i].worker_request) {
+			update_worker_table();
+			break;
+		}
+	}
+}
 
+/*
+===============
+Create the production site information window.
+===============
+*/
+void ProductionSite::create_options_window
+	(Interactive_GameBase & parent, UI::Window * & registry)
+{
+	ProductionSite_Window* win = new ProductionSite_Window(parent, *this, registry);
+	options_window_connections.push_back
+		(workers_changed.connect(boost::bind
+			(&ProductionSite_Window::update_worker_table, boost::ref(*win))));
+}
+
+void ProductionSite_Window::update_worker_table()
+{
 	if (m_worker_table) {
 		assert
 			(productionsite().descr().nr_working_positions() ==
@@ -155,7 +183,7 @@ void ProductionSite_Window::think()
 					er.set_string(1, "---");
 					er.set_string(2, "---");
 				}
-			} else {
+			} else if (request) {
 				const Widelands::Worker_Descr * desc =
 					productionsite().tribe().get_worker_descr(request->get_index());
 				er.set_picture
@@ -164,20 +192,13 @@ void ProductionSite_Window::think()
 
 				er.set_string(1, "");
 				er.set_string(2, "");
+			} else {
+				// Occurs during cleanup
+				return;
 			}
 		}
 	}
-}
-
-/*
-===============
-Create the production site information window.
-===============
-*/
-void ProductionSite::create_options_window
-	(Interactive_GameBase & parent, UI::Window * & registry)
-{
-	new ProductionSite_Window(parent, *this, registry);
+	m_worker_table->update();
 }
 
 void ProductionSite_Window::evict_worker() {

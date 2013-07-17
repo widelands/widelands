@@ -21,10 +21,12 @@
 
 #include "constants.h"
 #include "graphic/font.h"
-#include "graphic/font_handler.h"
+#include "graphic/font_handler1.h"
+#include "text_layout.h"
 #include "graphic/rendertarget.h"
 
 #include <cstdio>
+#include <boost/format.hpp>
 
 
 namespace UI {
@@ -103,16 +105,11 @@ void Progress_Bar::draw(RenderTarget & dst)
 	}
 
 	// Print the state in percent
-	char buffer[30];
-
-	snprintf
-		(buffer, sizeof(buffer), "%u%%", static_cast<uint32_t>(fraction * 100));
-
-	UI::g_fh->draw_text
-		(dst, UI::TextStyle::ui_small(),
-		 Point(get_w() / 2, get_h() / 2),
-		 buffer,
-		 Align_Center);
+	// TODO use UI_FNT_COLOR_BRIGHT when merged
+	uint32_t percent = static_cast<uint32_t>(fraction * 100);
+	const std::string progress_text =
+		(boost::format("<font color=%1$s>%2$i%%</font>") % "ffffff" % percent).str();
+	const Point pos(get_w() / 2, get_h() / 2);
+	dst.blit(pos, UI::g_fh1->render(as_uifont(progress_text)), CM_Normal, Align_Center);
 }
-
 }

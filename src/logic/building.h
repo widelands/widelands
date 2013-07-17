@@ -34,6 +34,7 @@
 #include <string>
 #include <cstring>
 #include <vector>
+#include <boost/signal.hpp>
 
 namespace UI {class Window;}
 struct BuildingHints;
@@ -223,6 +224,7 @@ public:
 
 	void    add_worker(Worker &);
 	void remove_worker(Worker &);
+	mutable boost::signal<void ()> workers_changed;
 
 	void send_message
 		(Game & game,
@@ -268,6 +270,9 @@ protected:
 
 	/// Whether we see our vision_range area based on workers in the building
 	bool m_seeing;
+
+	// Signals connected for the option window
+	std::vector<boost::signals::connection> options_window_connections;
 };
 
 }

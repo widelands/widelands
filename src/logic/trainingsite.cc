@@ -192,12 +192,7 @@ TrainingSite::init_kick_state(const tAttribute & art, const TrainingSite_Descr &
  */
 std::string TrainingSite::get_statistics_string()
 {
-	if (State * const state = get_state())
-		return state->program->descname();
-	else if (m_result == Completed)
-		return _("Resting");
-	else
-		return _("Not Working");
+	return ProductionSite::get_statistics_string();
 }
 
 /**
