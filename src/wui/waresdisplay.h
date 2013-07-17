@@ -99,7 +99,7 @@ private:
 	typedef std::vector<const Widelands::WareList *> vector_type;
 	typedef std::vector<bool> selection_type;
 
-	// Temporary achored selection
+	// Temporary anchored selection
 	void update_anchor_selection(int32_t x, int32_t y);
 
 	const Widelands::Tribe_Descr & m_tribe;
@@ -107,7 +107,7 @@ private:
 	UI::Textarea        m_curware;
 	selection_type      m_selected;
 	selection_type      m_hidden;
-	selection_type      m_in_selection;  //Wares in temporary achored selection
+	selection_type      m_in_selection;  //Wares in temporary anchored selection
 	bool                m_selectable;
 	bool                m_horizontal;
 	Widelands::Ware_Index m_selection_anchor;

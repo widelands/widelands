@@ -92,6 +92,7 @@ Building_Window::Building_Window
 	// Title for construction site
 	upcast(Widelands::ConstructionSite, csite, &m_building);
 	if (csite != NULL) {
+		// NOCOM(#cghislai): Why not boost::format?
 		char cs_title[256];
 		// Show name in parenthesis as it may take all width already
 		sprintf(cs_title, _("(%s)"), csite->building().descname().c_str());
@@ -525,8 +526,7 @@ void Building_Window::show_workarea()
 	}
 
 	const Workarea_Info* workarea_info;
-	upcast(Widelands::ConstructionSite, csite, &m_building);
-	if (csite != NULL) {
+	if (upcast(Widelands::ConstructionSite, csite, &m_building)) {
 		workarea_info = &csite->building().m_workarea_info;
 	} else {
 		workarea_info = &m_building.descr().m_workarea_info;

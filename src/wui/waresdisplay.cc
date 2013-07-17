@@ -190,6 +190,7 @@ Widelands::Ware_Index AbstractWaresDisplay::ware_at_point(int32_t x, int32_t y) 
 	return Widelands::Ware_Index::Null();
 }
 
+// NOCOM(#cghislai): This could use a comment - I do not understand what the method or the feature does without running Widelands.
 void AbstractWaresDisplay::update_anchor_selection(int32_t x, int32_t y)
 {
 	if (!m_selection_anchor || x < 0 || y < 0) {
@@ -203,6 +204,7 @@ void AbstractWaresDisplay::update_anchor_selection(int32_t x, int32_t y)
 	int32_t x0 = pos0.x + 3;
 	int32_t y0 = pos0.y + 3;
 
+	// NOCOM(#cghislai): these variable names should be a bit more descriptive.
 	unsigned int i0 = x0 / (WARE_MENU_PIC_WIDTH + 4);
 	unsigned int j0 = y0 / (WARE_MENU_PIC_HEIGHT + WARE_MENU_INFO_SIZE + 3);
 	unsigned int i = x / (WARE_MENU_PIC_WIDTH + 4);
