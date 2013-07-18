@@ -112,12 +112,14 @@ ProductionSite_Window::ProductionSite_Window
 void ProductionSite_Window::think()
 {
 	Building_Window::think();
-	// If we have pending requests, update table as the worker might be coming
+	// If we have pending requests, update table each tick.
+	// This is required to update from 'vacant' to 'coming'
 	for
 		(unsigned int i = 0;
 			i < productionsite().descr().nr_working_positions(); ++i)
 	{
-		if (productionsite().working_positions()[i].worker_request) {
+		Widelands::Request* r = productionsite().working_positions()[i].worker_request;
+		if (r) {
 			update_worker_table();
 			break;
 		}
@@ -133,10 +135,11 @@ void ProductionSite::create_options_window
 	(Interactive_GameBase & parent, UI::Window * & registry)
 {
 	ProductionSite_Window* win = new ProductionSite_Window(parent, *this, registry);
-	options_window_connections.push_back
-		(workers_changed.connect(boost::bind
+	Building::options_window_connections.push_back
+		(Building::workers_changed.connect(boost::bind
 			(&ProductionSite_Window::update_worker_table, boost::ref(*win))));
 }
+
 
 void ProductionSite_Window::update_worker_table()
 {
@@ -193,12 +196,12 @@ void ProductionSite_Window::update_worker_table()
 				er.set_string(1, "");
 				er.set_string(2, "");
 			} else {
-				// Occurs during cleanup
-				return;
+				// Should only occur during cleanup
+				continue;
 			}
 		}
+		m_worker_table->update();
 	}
-	m_worker_table->update();
 }
 
 void ProductionSite_Window::evict_worker() {
