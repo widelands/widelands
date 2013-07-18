@@ -200,11 +200,10 @@ return {
 					else
 						msg = msg .. msg1 .. "\n\n"
 					end
-					msg = msg .. "Otherwise the "
+					msg = msg .. game_status_territoral_lord_time.end_in_or:format(remaining_max_time/60)
 				else
-					msg = msg .. "The "
+					msg = msg .. game_status_territoral_lord_time.end_in:format(remaining_max_time/60)
 				end
-				msg = msg .. game_status_territoral_lord_time.end_in:format(remaining_max_time/60)
 				msg = msg .. "\n\n"
 				msg = msg .. game_status.body
 				msg = msg .. _status(points, "has")
