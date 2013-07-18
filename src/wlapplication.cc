@@ -1639,7 +1639,8 @@ void WLApplication::mainmenu_singleplayer()
 {
 	//  This is the code returned by UI::Panel::run() when the panel is dying.
 	//  Make sure that the program exits when the window manager says so.
-	compile_assert(Fullscreen_Menu_SinglePlayer::Back == UI::Panel::dying_code);
+	static_assert
+		(Fullscreen_Menu_SinglePlayer::Back == UI::Panel::dying_code, "Panel should be dying.");
 
 	for (;;) {
 		int32_t code;
@@ -1754,7 +1755,8 @@ void WLApplication::mainmenu_editor()
 {
 	//  This is the code returned by UI::Panel::run() when the panel is dying.
 	//  Make sure that the program exits when the window manager says so.
-	compile_assert(Fullscreen_Menu_Editor::Back == UI::Panel::dying_code);
+	static_assert
+		(Fullscreen_Menu_Editor::Back == UI::Panel::dying_code, "Editor should be dying.");
 
 	for (;;) {
 		int32_t code;

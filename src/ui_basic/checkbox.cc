@@ -22,8 +22,6 @@
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
 
-#include "compile_assert.h"
-
 namespace UI {
 /**
  * Stateboxes start out enabled and unchecked.
@@ -117,8 +115,8 @@ void Statebox::draw(RenderTarget & dst)
 			dst.draw_rect
 				(Rect(Point(0, 0), get_w(), get_h()), RGBColor(100, 100,  80));
 	} else {
-		compile_assert(0 <= STATEBOX_WIDTH);
-		compile_assert(0 <= STATEBOX_HEIGHT);
+		static_assert(0 <= STATEBOX_WIDTH, "assert(0 <= STATEBOX_WIDTH) failed.");
+		static_assert(0 <= STATEBOX_HEIGHT, "assert(0 <= STATEBOX_HEIGHT) failed.");
 		dst.blitrect
 			(Point(0, 0),
 			 m_pic_graphics,
