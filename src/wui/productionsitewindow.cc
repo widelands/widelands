@@ -143,65 +143,66 @@ void ProductionSite::create_options_window
 
 void ProductionSite_Window::update_worker_table()
 {
-	if (m_worker_table) {
-		assert
-			(productionsite().descr().nr_working_positions() ==
-			 m_worker_table->size());
-
-		for
-			(unsigned int i = 0;
-			 i < productionsite().descr().nr_working_positions(); ++i)
-		{
-			const Widelands::Worker * worker =
-				productionsite().working_positions()[i].worker;
-			const Widelands::Request * request =
-				productionsite().working_positions()[i].worker_request;
-			UI::Table<uintptr_t>::Entry_Record & er =
-				m_worker_table->get_record(i);
-
-			if (worker) {
-				er.set_picture(0, worker->icon(), worker->descname());
-
-				if
-					(worker->get_current_experience() != -1
-					 and
-					 worker->get_needed_experience () != -1)
-				{
-					assert(worker->becomes());
-
-					// Fill upgrade status
-					char buffer[7];
-					snprintf
-						(buffer, sizeof(buffer),
-						 "%i/%i",
-						 worker->get_current_experience(),
-						 worker->get_needed_experience());
-
-					er.set_string(1, buffer);
-					er.set_string
-						(2, worker->tribe().get_worker_descr
-						 (worker->becomes())->descname());
-				} else {
-					// Worker is not upgradeable
-					er.set_string(1, "---");
-					er.set_string(2, "---");
-				}
-			} else if (request) {
-				const Widelands::Worker_Descr * desc =
-					productionsite().tribe().get_worker_descr(request->get_index());
-				er.set_picture
-					(0, desc->icon(),
-					 request->is_open() ? _("(vacant)") : _("(coming)"));
-
-				er.set_string(1, "");
-				er.set_string(2, "");
-			} else {
-				// Should only occur during cleanup
-				continue;
-			}
-		}
-		m_worker_table->update();
+	if (m_worker_table == NULL) {
+		return;
 	}
+	assert
+		(productionsite().descr().nr_working_positions() ==
+			m_worker_table->size());
+
+	for
+		(unsigned int i = 0;
+			i < productionsite().descr().nr_working_positions(); ++i)
+	{
+		const Widelands::Worker * worker =
+			productionsite().working_positions()[i].worker;
+		const Widelands::Request * request =
+			productionsite().working_positions()[i].worker_request;
+		UI::Table<uintptr_t>::Entry_Record & er =
+			m_worker_table->get_record(i);
+
+		if (worker) {
+			er.set_picture(0, worker->icon(), worker->descname());
+
+			if
+				(worker->get_current_experience() != -1
+					and
+					worker->get_needed_experience () != -1)
+			{
+				assert(worker->becomes());
+
+				// Fill upgrade status
+				char buffer[7];
+				snprintf
+					(buffer, sizeof(buffer),
+						"%i/%i",
+						worker->get_current_experience(),
+						worker->get_needed_experience());
+
+				er.set_string(1, buffer);
+				er.set_string
+					(2, worker->tribe().get_worker_descr
+						(worker->becomes())->descname());
+			} else {
+				// Worker is not upgradeable
+				er.set_string(1, "---");
+				er.set_string(2, "---");
+			}
+		} else if (request) {
+			const Widelands::Worker_Descr * desc =
+				productionsite().tribe().get_worker_descr(request->get_index());
+			er.set_picture
+				(0, desc->icon(),
+					request->is_open() ? _("(vacant)") : _("(coming)"));
+
+			er.set_string(1, "");
+			er.set_string(2, "");
+		} else {
+			// Should only occur during cleanup
+			continue;
+		}
+	}
+	m_worker_table->update();
 }
 
 void ProductionSite_Window::evict_worker() {
