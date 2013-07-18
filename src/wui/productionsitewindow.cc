@@ -112,12 +112,14 @@ ProductionSite_Window::ProductionSite_Window
 void ProductionSite_Window::think()
 {
 	Building_Window::think();
-	// If we have pending requests, update table as the worker might be coming
+	// If we have pending requests, update table each tick.
+	// This is required to update from 'vacant' to 'coming'
 	for
 		(unsigned int i = 0;
 			i < productionsite().descr().nr_working_positions(); ++i)
 	{
-		if (productionsite().working_positions()[i].worker_request) {
+		Widelands::Request* r = productionsite().working_positions()[i].worker_request;
+		if (r) {
 			update_worker_table();
 			break;
 		}
@@ -133,69 +135,71 @@ void ProductionSite::create_options_window
 	(Interactive_GameBase & parent, UI::Window * & registry)
 {
 	ProductionSite_Window* win = new ProductionSite_Window(parent, *this, registry);
-	options_window_connections.push_back
-		(workers_changed.connect(boost::bind
+	Building::options_window_connections.push_back
+		(Building::workers_changed.connect(boost::bind
 			(&ProductionSite_Window::update_worker_table, boost::ref(*win))));
 }
 
+
 void ProductionSite_Window::update_worker_table()
 {
-	if (m_worker_table) {
-		assert
-			(productionsite().descr().nr_working_positions() ==
-			 m_worker_table->size());
+	if (m_worker_table == NULL) {
+		return;
+	}
+	assert
+		(productionsite().descr().nr_working_positions() ==
+			m_worker_table->size());
 
-		for
-			(unsigned int i = 0;
-			 i < productionsite().descr().nr_working_positions(); ++i)
-		{
-			const Widelands::Worker * worker =
-				productionsite().working_positions()[i].worker;
-			const Widelands::Request * request =
-				productionsite().working_positions()[i].worker_request;
-			UI::Table<uintptr_t>::Entry_Record & er =
-				m_worker_table->get_record(i);
+	for
+		(unsigned int i = 0;
+			i < productionsite().descr().nr_working_positions(); ++i)
+	{
+		const Widelands::Worker * worker =
+			productionsite().working_positions()[i].worker;
+		const Widelands::Request * request =
+			productionsite().working_positions()[i].worker_request;
+		UI::Table<uintptr_t>::Entry_Record & er =
+			m_worker_table->get_record(i);
 
-			if (worker) {
-				er.set_picture(0, worker->icon(), worker->descname());
+		if (worker) {
+			er.set_picture(0, worker->icon(), worker->descname());
 
-				if
-					(worker->get_current_experience() != -1
-					 and
-					 worker->get_needed_experience () != -1)
-				{
-					assert(worker->becomes());
+			if
+				(worker->get_current_experience() != -1
+					and
+					worker->get_needed_experience () != -1)
+			{
+				assert(worker->becomes());
 
-					// Fill upgrade status
-					char buffer[7];
-					snprintf
-						(buffer, sizeof(buffer),
-						 "%i/%i",
-						 worker->get_current_experience(),
-						 worker->get_needed_experience());
+				// Fill upgrade status
+				char buffer[7];
+				snprintf
+					(buffer, sizeof(buffer),
+						"%i/%i",
+						worker->get_current_experience(),
+						worker->get_needed_experience());
 
-					er.set_string(1, buffer);
-					er.set_string
-						(2, worker->tribe().get_worker_descr
-						 (worker->becomes())->descname());
-				} else {
-					// Worker is not upgradeable
-					er.set_string(1, "---");
-					er.set_string(2, "---");
-				}
-			} else if (request) {
-				const Widelands::Worker_Descr * desc =
-					productionsite().tribe().get_worker_descr(request->get_index());
-				er.set_picture
-					(0, desc->icon(),
-					 request->is_open() ? _("(vacant)") : _("(coming)"));
-
-				er.set_string(1, "");
-				er.set_string(2, "");
+				er.set_string(1, buffer);
+				er.set_string
+					(2, worker->tribe().get_worker_descr
+						(worker->becomes())->descname());
 			} else {
-				// Occurs during cleanup
-				return;
+				// Worker is not upgradeable
+				er.set_string(1, "---");
+				er.set_string(2, "---");
 			}
+		} else if (request) {
+			const Widelands::Worker_Descr * desc =
+				productionsite().tribe().get_worker_descr(request->get_index());
+			er.set_picture
+				(0, desc->icon(),
+					request->is_open() ? _("(vacant)") : _("(coming)"));
+
+			er.set_string(1, "");
+			er.set_string(2, "");
+		} else {
+			// Should only occur during cleanup
+			continue;
 		}
 	}
 	m_worker_table->update();
