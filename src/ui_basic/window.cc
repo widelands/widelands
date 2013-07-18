@@ -24,9 +24,11 @@
 #include "graphic/font_handler1.h"
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
+#include "wui/mapview.h"
 #include "log.h"
 #include "text_layout.h"
 #include "wlapplication.h"
+#include "upcast.h"
 
 #include "compile_assert.h"
 
@@ -473,6 +475,21 @@ bool Window::handle_mouserelease(const Uint8 btn, int32_t, int32_t) {
 		_dragging = false;
 	}
 	return true;
+}
+
+void Window::handle_mousein(bool mousein)
+{
+	Panel* parent = get_parent();
+	// Reset the mapview tooltip if it is our parent
+	if (!mousein || parent == NULL) {
+		NamedPanel::handle_mousein(mousein);
+		return;
+	}
+	upcast(Map_View, mapview, parent);
+	if (mapview) {
+		mapview->set_tooltip("");
+	}
+	NamedPanel::handle_mousein(mousein);
 }
 
 bool Window::handle_alt_drag(int32_t mx, int32_t my)
