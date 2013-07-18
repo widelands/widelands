@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2013-07-13 17:38+0200\n"
-"PO-Revision-Date: 2012-12-16 22:19+0000\n"
-"Last-Translator: SirVer <Unknown>\n"
+"PO-Revision-Date: 2013-07-17 20:59+0000\n"
+"Last-Translator: Hans Joachim Desserud <Unknown>\n"
 "Language-Team: Norwegian Bokmal <nb@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2013-07-14 05:20+0000\n"
+"X-Launchpad-Export-Date: 2013-07-18 05:51+0000\n"
 "X-Generator: Launchpad (build 16696)\n"
 
 #: ../../src/s2map.cc:230
@@ -33,7 +33,7 @@ msgstr ""
 
 #: ../../src/s2map.cc:885
 msgid "WARNING"
-msgstr ""
+msgstr "ADVARSEL"
 
 #: ../../src/wlapplication.cc:410
 msgid "ERROR: Could not connect to metaserver (reason above)!\n"
@@ -49,18 +49,20 @@ msgid ""
 "Widelands could not load the file \"%s\". The file format seems to be "
 "incompatible."
 msgstr ""
-"Widelands kunne ikke laste filen \"%s\". Filformetet ser ikke ut til å være "
+"Widelands kunne ikke laste filen «%s». Filformatet ser ikke ut til å være "
 "kompatibelt."
 
 #: ../../src/wlapplication.cc:974 ../../src/wlapplication.cc:983
 msgid "could not find the path of the main executable"
-msgstr "kunne ikke finne stien til hovedkjørefila"
+msgstr "kunne ikke finne stien til programfilen"
 
 #: ../../src/wlapplication.cc:1108
 msgid ""
 "Waited 5 seconds to close audio. Problems here so killing Widelands. Update "
 "your sound driver and/or SDL to fix this problem\n"
 msgstr ""
+"Ventet 5 sekunder på å lukke lyden. På grunn av problem blir Widelands "
+"drept. Oppdater lyddriveren din og/eller SDL for å løse problemet\n"
 
 #: ../../src/wlapplication.cc:1238
 msgid ""
@@ -74,7 +76,7 @@ msgstr ""
 
 #: ../../src/wlapplication.cc:1241
 msgid "--double is disabled. This is not a debug build!"
-msgstr "-- double er deaktivert. Dette er ikke en avlusingsversjon!"
+msgstr "--double er deaktivert. Dette er ikke en feilsøkingsversjon!"
 
 #: ../../src/wlapplication.cc:1362
 msgid "This is Widelands-"
@@ -876,7 +878,7 @@ msgstr "varedata: %s"
 #: ../../src/map_io/widelands_map_bob_data_packet.cc:48
 #, c-format
 msgid "unknown bob type %u"
-msgstr ""
+msgstr "ukjent objekt-type %u"
 
 #: ../../src/map_io/widelands_map_bob_data_packet.cc:102
 #, c-format
@@ -886,7 +888,7 @@ msgstr "stammen \"%s\" finnes ikke"
 #: ../../src/map_io/widelands_map_bob_data_packet.cc:139
 #, c-format
 msgid "bobs: %s"
-msgstr ""
+msgstr "objekter: %s"
 
 #: ../../src/map_io/widelands_map_object_packet.cc:109
 #, c-format
@@ -905,7 +907,7 @@ msgstr "Ugyldig verden"
 #: ../../src/map_io/widelands_map_loader.cc:87
 #, c-format
 msgid "The world \"%s\" set by the map, does not exist on your filesystem."
-msgstr ""
+msgstr "Verdenen «%s» er satt av kartet, men finnes ikke i filsystemet ditt."
 
 #: ../../src/map_io/widelands_map_player_position_data_packet.cc:55
 #: ../../src/game_io/game_player_economies_data_packet.cc:68
@@ -1005,17 +1007,17 @@ msgstr "leser sti: %s"
 #: ../../src/map_io/widelands_map_bobdata_data_packet.cc:367
 #, c-format
 msgid "bob %u: %s"
-msgstr ""
+msgstr "objekt %u: %s"
 
 #: ../../src/map_io/widelands_map_bobdata_data_packet.cc:374
 #, c-format
 msgid "bobdata: %s"
-msgstr ""
+msgstr "objektdata: %s"
 
 #: ../../src/map_io/widelands_map_bobdata_data_packet.cc:389
 #, c-format
 msgid "critter bob: %s"
-msgstr ""
+msgstr "dyreobjekt: %s"
 
 #: ../../src/map_io/widelands_map_bobdata_data_packet.cc:484
 #, c-format
@@ -1329,7 +1331,7 @@ msgstr ""
 #: ../../src/network/nethost.cc:1225
 #, c-format
 msgid "%s told me to run the command: \"%s\""
-msgstr ""
+msgstr "%s ba meg kjøre kommandoen: «%s»"
 
 #: ../../src/network/nethost.cc:1234
 msgid "Sorry! Saving was deactivated on this dedicated server!"
@@ -4732,7 +4734,7 @@ msgstr ""
 
 #: ../../src/editor/ui_menus/editor_tool_menu.cc:69
 msgid "Immovable"
-msgstr ""
+msgstr "Uflyttbar"
 
 #: ../../src/editor/ui_menus/editor_tool_menu.cc:70
 msgid "Bob"
@@ -4785,7 +4787,7 @@ msgstr "Fjell: %u %%"
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:246
 msgid "Island mode:"
-msgstr ""
+msgstr "Øymodus:"
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:253
 msgid "Resources:"

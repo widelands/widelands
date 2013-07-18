@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2013-07-13 15:38+0000\n"
-"PO-Revision-Date: 2012-04-08 17:24+0000\n"
+"PO-Revision-Date: 2013-07-17 20:52+0000\n"
 "Last-Translator: Hans Joachim Desserud <Unknown>\n"
 "Language-Team: Norwegian Bokmal <nb@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-07-14 05:16+0000\n"
+"X-Launchpad-Export-Date: 2013-07-18 05:51+0000\n"
 "X-Generator: Launchpad (build 16696)\n"
 
 #: ../../txts/README:71
@@ -27,13 +27,15 @@ msgstr ", / .       Gå til forrige / neste sted"
 
 #: ../../txts/README:128
 msgid "- how to reproduce the bug"
-msgstr "- hvordan reprodusere feilen"
+msgstr "- hvordan gjenskape feilen"
 
 #: ../../txts/README:132
 msgid ""
 "- send us a compressed (zip, gzip, bzip2) replay if the bug appeared in-"
 "game. For more explanation, see the section on Replays below."
 msgstr ""
+"- send oss en komprimert (zip, gzip, bzip2) reprise hvis feilen oppstod i "
+"spillet. For mer forklaring, se delen som omhandler repriser under."
 
 #: ../../txts/README:134
 msgid ""
@@ -75,7 +77,7 @@ msgstr ""
 
 #: ../../txts/editor_readme:43
 msgid "1-0      Changes tools size"
-msgstr "1-0 Ender verktøystørrelse"
+msgstr "1-0 Endrer verktøystørrelse"
 
 #: ../../txts/COPYING:22
 msgid ""
@@ -396,6 +398,7 @@ msgstr ""
 #: ../../txts/editor_readme:47
 msgid "ALT      (Hold) Selects second alternative tool while pressed"
 msgstr ""
+"ALT      (hold nede) Velger andre alternative form av verktøy når holdt nede"
 
 #: ../../txts/tips/atlanteans.tip:6
 msgid ""
@@ -546,7 +549,7 @@ msgstr "F11 Tar et skjermbilde"
 
 #: ../../txts/README:81
 msgid "F6           Shows the debug console (only in debug-builds)"
-msgstr ""
+msgstr "F6           Viser feilsøkingskonsollen (kun i feilsøkingsbygg)"
 
 #: ../../txts/developers:200
 msgid "Finnish"
@@ -578,7 +581,7 @@ msgstr ""
 
 #: ../../txts/developers:213
 msgid "Galician"
-msgstr "Gælisk"
+msgstr "Galisisk"
 
 #: ../../txts/README:36
 msgid "General game control"
@@ -590,7 +593,7 @@ msgstr "Tysk"
 
 #: ../../txts/developers:86
 msgid "Graphicians"
-msgstr ""
+msgstr "Grafikere"
 
 #: ../../txts/developers:18
 #: ../../txts/developers:348
@@ -608,6 +611,8 @@ msgstr "Hebraisk"
 #: ../../txts/tips/editor.tip:18
 msgid "Holding down ALT switches second alternative tool on (if it exists)."
 msgstr ""
+"Ved å holde ned ALT bytter du til en alternativ form av verktøyet (hvis det "
+"finnes)."
 
 #: ../../txts/tips/editor.tip:14
 msgid ""
@@ -615,6 +620,9 @@ msgid ""
 "cases the complete opposite of the normal tool (for example deletion of an "
 "object instead of placing one)."
 msgstr ""
+"Ved å holde nede SHIFT bytter du til en alternativ form av verktøyet. Den "
+"alternative formen er vanligvis for motsatt bruk av verktøyet (for eksempel "
+"slette et objekt istedenfor å legge til et)."
 
 #: ../../txts/README:67
 msgid "Home        Center main mapview on starting location"
@@ -778,6 +786,8 @@ msgid ""
 "Like with natural objects (bobs), you can also select multiple animals or "
 "groundtextures with CTRL + Mouseclick."
 msgstr ""
+"Som med naturlige objekter, kan du også velge flere dyr eller bakketeksturer "
+"med CTRL + klikk."
 
 #: ../../txts/developers:279
 msgid "Linux Distributions"
@@ -827,6 +837,9 @@ msgid ""
 "New soldiers are recruited in the headquarters or a warehouse if all needed "
 "tools are available. Training sites are for improving their abilities."
 msgstr ""
+"Nye soldater blir rekruttert i hovedkvarteret eller et varehus hvis de "
+"nødvendige varene er til stede. De kan trene ferdighetene sine i "
+"treningsleire."
 
 #: ../../txts/COPYING:70
 msgid "No warranty"
@@ -978,6 +991,7 @@ msgstr "S Viser/skjuler statistikker"
 #: ../../txts/editor_readme:45
 msgid "SHIFT    (Hold) Selects first alternative tool while pressed"
 msgstr ""
+"SHIFT    (hold nede) velger alternativ form av verktøy når holdt nede"
 
 #: ../../txts/README:51
 msgid "SPACE       Toggle build-help"
@@ -1117,6 +1131,8 @@ msgid ""
 "The number keys (1 - 0) allow you to directly set the size of the selected "
 "area around your mouse."
 msgstr ""
+"Talltastene (1 - 0) lar deg sette størrelsen på det valgte området rundt "
+"musepekeren din."
 
 #: ../../txts/COPYING:33
 msgid ""
