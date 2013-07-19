@@ -247,7 +247,7 @@ void GLSurfaceTexture::draw_rect(const Rect& rc, const RGBColor clr)
 /**
  * Draws a filled rectangle
  */
-void GLSurfaceTexture::fill_rect(const Rect& rc, const RGBAColor clr) 
+void GLSurfaceTexture::fill_rect(const Rect& rc, const RGBAColor clr)
 {
 	if (m_w <= 0 || m_h <= 0) {
 		return;
@@ -271,7 +271,7 @@ void GLSurfaceTexture::brighten_rect(const Rect& rc, const int32_t factor)
 }
 
 void GLSurfaceTexture::draw_line
-		(int32_t x1, int32_t y1, int32_t x2, int32_t y2, const RGBColor& color, uint8_t gwidth)
+	(int32_t x1, int32_t y1, int32_t x2, int32_t y2, const RGBColor& color, uint8_t gwidth)
 {
 	if (m_w <= 0 || m_h <= 0) {
 		return;
@@ -282,7 +282,7 @@ void GLSurfaceTexture::draw_line
 }
 
 void GLSurfaceTexture::blit
-	(const Point& dst, const Surface* src, const Rect& srcrc, Composite cm) 
+	(const Point& dst, const Surface* src, const Rect& srcrc, Composite cm)
 {
 	if (m_w <= 0 || m_h <= 0) {
 		return;

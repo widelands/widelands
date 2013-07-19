@@ -442,6 +442,15 @@ void RenderTarget::doblit
 		srcrc.h = m_rect.h - dst.y;
 	}
 
+	// Also ensure srcrc is not bigger than src
+	// so opengl blits correctly
+	if (src->width() < srcrc.w) {
+		srcrc.w = src->width();
+	}
+	if (src->height() < srcrc.h) {
+		srcrc.h = src->height();
+	}
+
 	dst += m_rect;
 
 	m_surface->blit(dst, src->surface(), srcrc, cm);
