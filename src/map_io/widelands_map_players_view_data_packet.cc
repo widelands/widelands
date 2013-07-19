@@ -140,16 +140,15 @@ namespace {
 		}                                                                                                \
 	}
 
+// Using this macro, if no file exists, fileversion will be set to -1
 #define OPEN_INPUT_FILE_NEW_VERSION_SILENT(filetype, file, filename, fileversion, file_templ, v) \
 	int8_t fileversion = v;                                                                      \
 	filetype file;                                                                                      \
 	char (filename)[FILENAME_SIZE];                                                                     \
-	for (; fileversion >= 0; --fileversion) {                                                            \
+	for (; fileversion >= -1; --fileversion) {                                                            \
 		snprintf(filename, sizeof(filename), file_templ, plnum, fileversion);                         \
 		try {(file).Open(fs, filename); break;}                                                          \
 		catch (...) {                                                                     \
-			if (fileversion == 0) {                                          \
-			fileversion = -1;}                                             \
 		}                                                                                                \
 	}
 
