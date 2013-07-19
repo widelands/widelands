@@ -155,7 +155,6 @@ endif (WL_UNIT_TESTS)
 
 option (WL_STRICT "If strict compilation mode is requested (almost every warning is an error)" OFF)
 
-set (PARAMETER_COMPILERFLAG_CXXSTD "-std=c++11")
 set (PARAMETER_COMPILERFLAG_OLDSTYLECAST_EXTENDED "-Wold-style-cast -isystem ${Boost_INCLUDE_DIR}")
 set (PARAMETER_COMPILERFLAG_OLDSTYLECAST "-Wold-style-cast")
 set (PARAMETER_COMPILERFLAG_GENERICWARNINGS "-Wall -Wextra")
@@ -163,6 +162,15 @@ set (PARAMETER_COMPILERFLAG_EXTRAWARNINGS "-Wformat -Wformat-nonliteral -Wformat
 set (PARAMETER_COMPILERFLAG_GCCWARNINGS "-Wlogical-op -Wsync-nand -Wtrampolines")
 set (PARAMETER_COMPILERFLAG_STRICT "-Werror -Wno-error=old-style-cast -Wno-error=deprecated-declarations -fdiagnostics-show-option")
 include(CheckCXXCompilerFlag) #this include should be safe
+
+# Enable c++11 features.
+set (PARAMETER_COMPILERFLAG_CXXSTD "-std=c++11")
+if(CMAKE_COMPILER_IS_GNUCXX)
+   EXECUTE_PROCESS(COMMAND "${CMAKE_CXX_COMPILER} -dumpversion" OUTPUT_VARIABLE GCC_VERSION)
+   if (GCC_VERSION VERSION_LESS 4.7)
+      set (PARAMETER_COMPILERFLAG_CXXSTD "-std=c++0x")
+   endif()
+endif()
 
 CHECK_CXX_COMPILER_FLAG(${PARAMETER_COMPILERFLAG_CXXSTD} Compiler_std_supported)
 IF (Compiler_std_supported)
