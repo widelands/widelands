@@ -35,6 +35,8 @@
 #include "ui_basic/scrollbar.h"
 #include "ui_basic/textarea.h"
 
+#include <boost/format.hpp>
+
 struct MultiPlayerClientGroup : public UI::Box {
 	MultiPlayerClientGroup
 		(UI::Panel            * const parent, uint8_t id,
@@ -99,7 +101,10 @@ struct MultiPlayerClientGroup : public UI::Box {
 	void refresh() {
 		UserSettings us = s->settings().users.at(m_id);
 		if (us.position == UserSettings::notConnected()) {
-			name->set_text(_("<free>"));
+			std::string free_i18n = _("free");
+			std::string free_text =
+				(boost::format("\\<%s\\>") % free_i18n).str();
+			name->set_text(free_text);
 			if (type)
 				type->set_visible(false);
 			else

@@ -42,6 +42,7 @@
 #include "upcast.h"
 
 #include <boost/scoped_ptr.hpp>
+#include <boost/format.hpp>
 
 #include <cstdio>
 #include <cstring>
@@ -254,9 +255,13 @@ void Main_Menu_Save_Map::clicked_item(uint32_t) {
 		m_nrplayers->set_text("");
 		m_size     ->set_text("");
 		if (g_fs->IsDirectory(name)) {
-			m_descr    ->set_text(_("<Directory>"));
+			std::string dir_string =
+				(boost::format("\\<%s\\>") % _("directory")).str();
+			m_descr    ->set_text(dir_string);
 		} else {
-			m_descr    ->set_text(_("<Not a map file>"));
+			std::string not_map_string =
+				(boost::format("\\<%s\\>") % _("Not a map file")).str();
+			m_descr    ->set_text(not_map_string);
 		}
 
 	}
@@ -292,8 +297,10 @@ void Main_Menu_Save_Map::fill_list() {
 #else
 		m_parentdir = m_curdir.substr(0, m_curdir.rfind('\\'));
 #endif
+		std::string parent_string =
+				(boost::format("\\<%s\\>") % _("parent")).str();
 		m_ls->add
-			(_("<parent>"),
+			(parent_string.c_str(),
 			 m_parentdir.c_str(),
 			 g_gr->images().get("pics/ls_dir.png"));
 	}

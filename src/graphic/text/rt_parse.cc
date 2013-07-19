@@ -27,7 +27,6 @@
 #include "rt_parse.h"
 #include "textstream.h"
 #include "rt_errors_impl.h"
-#include "log.h"
 
 using namespace std;
 using namespace boost;
@@ -185,19 +184,11 @@ void Tag::m_parse_content(TextStream & ts, TagConstraints & tcs, const TagSet & 
 		Tag * child = new Tag();
 		line = ts.line(); col = ts.col(); size_t cpos = ts.pos();
 		child->parse(ts, tcs, allowed_tags);
-		// Only log unallowed tags and consider them as normal text, if allowed
-		if (!tc.allowed_childs.count(child->name())
-			|| (!allowed_tags.empty() and !allowed_tags.count(child->name())))
-		{
-			if (!tc.text_allowed) {
-				throw SyntaxError_Impl(line, col, "an allowed tag", child->name(), ts.peek(100, cpos));
-			} else {
-				std::string tag_string = (boost::format("<%1%>") % child->name()).str();
-				log("Warning: Tag not allowed: %s. Will be considered as normal text\n", tag_string.c_str());
-				m_childs.push_back(new Child(tag_string));
-				return;
-			}
-		}
+		if (!tc.allowed_childs.count(child->name()))
+			throw SyntaxError_Impl(line, col, "an allowed tag", child->name(), ts.peek(100, cpos));
+		if (!allowed_tags.empty() and !allowed_tags.count(child->name()))
+			throw SyntaxError_Impl(line, col, "an allowed tag", child->name(), ts.peek(100, cpos));
+
 		m_childs.push_back(new Child(child));
 	}
 }

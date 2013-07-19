@@ -32,6 +32,7 @@
 #include "log.h"
 
 #include <cstdio>
+#include <boost/format.hpp>
 
 using Widelands::WL_Map_Loader;
 
@@ -225,8 +226,10 @@ void Fullscreen_Menu_Editor_MapSelect::fill_list()
 #else
 		m_parentdir = m_curdir.substr(0, m_curdir.rfind('\\'));
 #endif
+		std::string parent_string =
+				(boost::format("\\<%s\\>") % _("parent")).str();
 		m_list.add
-			(_("<parent>"),
+			(parent_string.c_str(),
 			 m_parentdir.c_str(),
 			 g_gr->images().get("pics/ls_dir.png"));
 	}
