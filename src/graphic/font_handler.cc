@@ -209,11 +209,10 @@ void Font_Handler::draw_text
 	 Align align,
 	 uint32_t caret)
 {
-	// Erase evry backslash in front of brackets
+	// Erase every backslash in front of brackets
 	std::string copytext = boost::replace_all_copy(text, "\\<", "<");
 	boost::replace_all(copytext, "\\>", ">");
 	const LineCacheEntry & lce = d->get_line(style, copytext);
-	
 
 	UI::correct_for_align(align, lce.width + 2 * LINE_MARGIN, lce.height, &dstpoint);
 
