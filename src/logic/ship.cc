@@ -292,8 +292,14 @@ void Ship::ship_update(Game & game, Bob::State & state)
 					FCoords fc = map.get_fcoords(mr.location());
 
 					// Check whether the maximum theoretical possible NodeCap of the field is of the size big
-					if ((map.get_max_nodecaps(fc) & BUILDCAPS_SIZEMASK) != BUILDCAPS_BIG)
+					// and whether it can theoretically be a port space
+					if
+						((map.get_max_nodecaps(fc) & BUILDCAPS_SIZEMASK) != BUILDCAPS_BIG
+						 ||
+						 map.find_portdock(fc).empty())
+					{
 						continue;
+					}
 
 					// Check if there is a PlayerImmovable on the port build space
 					// FIXME handle this more gracefully concering opposing players
@@ -706,7 +712,7 @@ void Ship::send_message
 		rt_description += picture;
 		rt_description += "><p font-size=14 font-face=DejaVuSerif>";
 	} else
-		rt_description  = "<rt><p font-size=14 font-face=DejaVuSerif>";;
+		rt_description  = "<rt><p font-size=14 font-face=DejaVuSerif>";
 	rt_description += description;
 	rt_description += "</p></rt>";
 

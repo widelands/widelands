@@ -172,11 +172,11 @@ Fullscreen_Menu_MapSelect::Fullscreen_Menu_MapSelect
 	vbox->set_size(get_w(), 25);
 	vbox = new UI::Box(this, m_table.get_x(), m_table.get_y() - 60, UI::Box::Horizontal, m_table.get_w());
 	_add_tag_checkbox(vbox, "1v1", _("1v1"));
-	_add_tag_checkbox(vbox, "2teams", _("2 Player Teams"));
-	_add_tag_checkbox(vbox, "3teams", _("3 Player Teams"));
+	_add_tag_checkbox(vbox, "2teams", _("Teams of 2"));
+	_add_tag_checkbox(vbox, "3teams", _("Teams of 3"));
 	vbox->set_size(get_w(), 25);
 	vbox = new UI::Box(this, m_table.get_x(), m_table.get_y() - 30, UI::Box::Horizontal, m_table.get_w());
-	_add_tag_checkbox(vbox, "4teams", _("4 Player Teams"));
+	_add_tag_checkbox(vbox, "4teams", _("Teams of 4"));
 	_add_tag_checkbox(vbox, "ffa", _("Free for all"));
 	_add_tag_checkbox(vbox, "unbalanced", _("Unbalanced"));
 	vbox->set_size(get_w(), 25);

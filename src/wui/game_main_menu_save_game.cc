@@ -19,17 +19,23 @@
 
 #include "game_main_menu_save_game.h"
 
-#include "io/filesystem/filesystem.h"
+#include <boost/format.hpp>
+#include <libintl.h>
+
 #include "constants.h"
-#include "logic/game.h"
 #include "game_io/game_loader.h"
 #include "game_io/game_preload_data_packet.h"
 #include "game_io/game_saver.h"
+#include "i18n.h"
 #include "interactive_gamebase.h"
+#include "gamecontroller.h"
+#include "io/filesystem/filesystem.h"
 #include "io/filesystem/layered_filesystem.h"
+#include "logic/game.h"
 #include "profile/profile.h"
+#include "interactive_player.h"
+#include "timestring.h"
 
-#include <boost/format.hpp>
 using boost::format;
 
 Interactive_GameBase & Game_Main_Menu_Save_Game::igbase() {
@@ -67,6 +73,12 @@ Game_Main_Menu_Save_Game::Game_Main_Menu_Save_Game
 		(this, DESCRIPTION_X, 45, 0, 20, _("Game Time: "), UI::Align_CenterLeft),
 	m_gametime
 		(this, DESCRIPTION_X, 60, 0, 20, " ",              UI::Align_CenterLeft),
+	m_players_label
+		(this, DESCRIPTION_X, 85, 0, 20, " ",              UI::Align_CenterLeft),
+	m_win_condition_label
+		(this, DESCRIPTION_X, 110, 0, 20, _("Win condition: "), UI::Align_CenterLeft),
+	m_win_condition
+		(this, DESCRIPTION_X, 125, 0, 20, " ",             UI::Align_CenterLeft),
 	m_curdir(SaveHandler::get_base_dir())
 {
 	m_editbox =
@@ -110,7 +122,16 @@ Game_Main_Menu_Save_Game::Game_Main_Menu_Save_Game
 	center_to_parent();
 	move_to_top();
 
+	std::string cur_filename = parent.game().save_handler().get_cur_filename();
+	if (!cur_filename.empty()) {
+		select_by_name(cur_filename);
+	}
+
 	m_editbox->focus();
+	if (!parent.game().get_ipl()->is_multiplayer()) {
+		// Pause the game
+		parent.game().gameController()->setPaused(true);
+	}
 }
 
 
@@ -130,19 +151,16 @@ void Game_Main_Menu_Save_Game::selected(uint32_t) {
 	m_button_ok->set_enabled(true);
 
 	m_name.set_text(gpdp.get_mapname());
-	char buf[200];
+
 	uint32_t gametime = gpdp.get_gametime();
-#define SPLIT_GAMETIME(unit, factor) \
-   uint32_t const unit = gametime / factor; gametime %= factor;
-	SPLIT_GAMETIME(days, 86400000);
-	SPLIT_GAMETIME(hours, 3600000);
-	SPLIT_GAMETIME(minutes, 60000);
-	SPLIT_GAMETIME(seconds,  1000);
+	m_gametime.set_text(gametimestring(gametime));
+
+	char buf[200];
 	sprintf
-		(buf,
-		 _("%02ud%02uh%02u'%02u\"%03u"),
-		 days, hours, minutes, seconds, gametime);
-	m_gametime.set_text(buf);
+		(buf, "%i %s", gpdp.get_player_nr(),
+		 ngettext(_("player"), _("players"), gpdp.get_player_nr()));
+	m_players_label.set_text(buf);
+	m_win_condition.set_text(gpdp.get_win_condition());
 }
 
 /**
@@ -177,9 +195,17 @@ void Game_Main_Menu_Save_Game::fill_list() {
 			m_ls.add(FileSystem::FS_FilenameWoExt(name).c_str(), name);
 		} catch (const _wexception &) {} //  we simply skip illegal entries
 	}
+}
 
-	if (m_ls.size())
-		m_ls.select(0);
+void Game_Main_Menu_Save_Game::select_by_name(std::string name)
+{
+	for (uint32_t idx = 0; idx < m_ls.size(); idx++) {
+		const std::string val = m_ls[idx];
+		if (name == val) {
+			m_ls.select(idx);
+			return;
+		}
+	}
 }
 
 /*
@@ -264,6 +290,15 @@ void Game_Main_Menu_Save_Game::ok()
 		die();
 	}
 }
+
+void Game_Main_Menu_Save_Game::die()
+{
+	UI::UniqueWindow::die();
+	if (!igbase().game().get_ipl()->is_multiplayer()) {
+		igbase().game().gameController()->setPaused(false);
+	}
+}
+
 
 
 struct DeletionMessageBox : public UI::WLMessageBox {

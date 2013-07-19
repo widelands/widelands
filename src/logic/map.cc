@@ -330,6 +330,7 @@ void Map::cleanup() {
 	}
 #endif
 	m_extradatainfos.clear();
+	m_port_spaces.clear();
 }
 
 /*

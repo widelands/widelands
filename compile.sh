@@ -183,7 +183,7 @@ var_updater=0 # 0 = false
             echo "bzr pull"
             echo "touch CMakeLists.txt"
             echo "cd build"
-            echo "make"
+            echo "make ${MAKEOPTS}"
             if [ $var_build_lang -eq 1 ] ; then
               echo "make lang"
             fi

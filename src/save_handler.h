@@ -31,17 +31,8 @@ namespace Widelands {struct Game;}
 #define DEFAULT_AUTOSAVE_INTERVAL 15
 
 class SaveHandler {
-	int32_t m_lastSaveTime;
-	bool m_initialized;
-	bool m_allow_saving;
-	bool m_save_requested;
-	std::string m_save_filename;
-
-	void initialize(int32_t currenttime);
-
-
 public:
-	SaveHandler() : m_lastSaveTime(0), m_initialized(false), m_allow_saving(true),
+	SaveHandler() : m_last_saved_time(0), m_initialized(false), m_allow_saving(true),
 		m_save_requested(false), m_save_filename("") {}
 	void think(Widelands::Game &, int32_t currenttime);
 	std::string create_file_name(std::string dir, std::string filename);
@@ -51,6 +42,8 @@ public:
 		 std::string       * error = 0);
 
 	static std::string get_base_dir() {return "save";}
+	const std::string get_cur_filename() {return m_current_filename;}
+	void set_current_filename(std::string filename) {m_current_filename = filename;}
 	void set_allow_saving(bool t) {m_allow_saving = t;}
 	bool get_allow_saving() {return m_allow_saving;}
 	void request_save(std::string filename = "")
@@ -58,6 +51,16 @@ public:
 		m_save_requested = true;
 		m_save_filename = filename;
 	}
+
+private:
+	int32_t m_last_saved_time;
+	bool m_initialized;
+	bool m_allow_saving;
+	bool m_save_requested;
+	std::string m_save_filename;
+	std::string m_current_filename;
+
+	void initialize(int32_t currenttime);
 };
 
 #endif

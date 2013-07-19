@@ -861,7 +861,7 @@ Point Bob::calc_drawpos(const Editor_Game_Base & game, const Point pos) const
 /// Note that the current node is actually the node that we are walking to, not
 /// the the one that we start from.
 void Bob::draw
-	(const Editor_Game_Base & egbase, RenderTarget & dst, Point const pos) const
+	(const Editor_Game_Base & egbase, RenderTarget & dst, const Point& pos) const
 {
 	if (m_anim)
 		dst.drawanim
