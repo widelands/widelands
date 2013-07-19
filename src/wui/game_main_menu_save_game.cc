@@ -171,10 +171,11 @@ void Game_Main_Menu_Save_Game::selected(uint32_t) {
 		sprintf
 			(buf, "%i %s", gpdp.get_number_of_players(),
 			ngettext(_("player"), _("players"), gpdp.get_number_of_players()));
+			m_players_label.set_text(buf);
 	} else {
 		// Keep label empty
+		m_players_label.set_text("");
 	}
-	m_players_label.set_text(buf);
 	m_win_condition.set_text(gpdp.get_win_condition());
 }
 

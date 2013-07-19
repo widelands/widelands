@@ -98,10 +98,10 @@ void Game_Preload_Data_Packet::Write
 		// player that saved the game.
 		s.set_int("player_nr", ipl->player_number());
 	} else {
-		for (int i = 1; i <= game.get_number_of_players(); ++i) {
-			if (game.get_player(i)) {
-				s.set_int("player_nr", i);
-			}
+		// Pretend that the first player saved the game
+		iterate_players_existing_const(p, map.get_nrplayers(), game, player_tmp) {
+			s.set_int("player_nr", p);
+			break;
 		}
 	}
 	s.set_int(PLAYERS_AMOUNT_KEY_V4, game.get_number_of_players());

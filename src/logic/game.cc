@@ -299,6 +299,7 @@ void Game::init_newgame
 	}
 	std::vector<PlayerSettings> shared;
 	std::vector<uint8_t>        shared_num;
+	m_number_of_players = 0;
 	for (uint32_t i = 0; i < settings.players.size(); ++i) {
 		const PlayerSettings & playersettings = settings.players[i];
 
@@ -319,7 +320,9 @@ void Game::init_newgame
 			 playersettings.name,
 			 playersettings.team);
 		get_player(i + 1)->setAI(playersettings.ai);
+		m_number_of_players++;
 	}
+
 	// Add shared in starting positions
 	for (uint8_t n = 0; n < shared.size(); ++n) {
 		// This player's starting position is used in another (shared) kingdom
@@ -341,17 +344,6 @@ void Game::init_newgame
 		enqueue_command(new Cmd_LuaCoroutine(get_gametime() + 100, cr));
 	} else {
 		m_win_condition_displayname = _("Scenario");
-	}
-	m_number_of_players = 0;
-	std::vector<PlayerSettings>::const_iterator it;
-	for (it = settings.players.begin(); it != settings.players.end(); ++it) {
-		PlayerSettings ps = *it;
-		if
-			(ps.state == PlayerSettings::stateHuman
-			|| ps.state == PlayerSettings::stateComputer)
-		{
-			m_number_of_players++;
-		}
 	}
 }
 
@@ -419,13 +411,19 @@ bool Game::run_load_game(std::string filename) {
 		std::string background(gpdp.get_background());
 		loaderUI.set_background(background);
 		player_nr = gpdp.get_player_nr();
-
+		m_number_of_players = gpdp.get_number_of_players();
 		set_ibase
 			(new Interactive_Player
 			 	(*this, g_options.pull_section("global"), player_nr, true, false));
 
 		loaderUI.step(_("Loading..."));
 		gl.load_game();
+	}
+	if (m_number_of_players == 0) {
+		// Old savegame loaded, parse players to figure out their amount
+		iterate_players_existing_const(p, map().get_nrplayers(), *this, player_tmp) {
+			m_number_of_players++;
+		}
 	}
 
 	// Store the filename for further saves
