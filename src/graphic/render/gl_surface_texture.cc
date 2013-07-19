@@ -62,6 +62,9 @@ GLSurfaceTexture::GLSurfaceTexture(int w, int h)
 {
 	init(w, h);
 
+	if (m_w <= 0 || m_h <= 0) {
+		return;
+	}
 	glTexImage2D
 		(GL_TEXTURE_2D, 0, GL_RGBA, m_tex_w, m_tex_h, 0, GL_RGBA,
 		 GL_UNSIGNED_BYTE, 0);
@@ -168,6 +171,9 @@ void GLSurfaceTexture::init(uint16_t w, uint16_t h)
 	handle_glerror();
 	m_w = w;
 	m_h = h;
+	if (m_w <= 0 || m_h <= 0) {
+		return;
+	}
 
 	if (g_gr->caps().gl.tex_power_of_two) {
 		m_tex_w = next_power_of_two(w);
@@ -194,6 +200,9 @@ const SDL_PixelFormat & GLSurfaceTexture::format() const {
 }
 
 void GLSurfaceTexture::lock(LockMode mode) {
+	if (m_w <= 0 || m_h <= 0) {
+		return;
+	}
 	assert(!m_pixels);
 
 	m_pixels.reset(new uint8_t[m_tex_w * m_tex_h * 4]);
@@ -205,6 +214,9 @@ void GLSurfaceTexture::lock(LockMode mode) {
 }
 
 void GLSurfaceTexture::unlock(UnlockMode mode) {
+	if (m_w <= 0 || m_h <= 0) {
+		return;
+	}
 	assert(m_pixels);
 
 	if (mode == Unlock_Update) {
@@ -223,6 +235,9 @@ uint16_t GLSurfaceTexture::get_pitch() const {
 
 void GLSurfaceTexture::draw_rect(const Rect& rc, const RGBColor clr)
 {
+	if (m_w <= 0 || m_h <= 0) {
+		return;
+	}
 	setup_gl();
 	GLSurface::draw_rect(rc, clr);
 	reset_gl();
@@ -232,7 +247,11 @@ void GLSurfaceTexture::draw_rect(const Rect& rc, const RGBColor clr)
 /**
  * Draws a filled rectangle
  */
-void GLSurfaceTexture::fill_rect(const Rect& rc, const RGBAColor clr) {
+void GLSurfaceTexture::fill_rect(const Rect& rc, const RGBAColor clr) 
+{
+	if (m_w <= 0 || m_h <= 0) {
+		return;
+	}
 	setup_gl();
 	GLSurface::fill_rect(rc, clr);
 	reset_gl();
@@ -243,6 +262,9 @@ void GLSurfaceTexture::fill_rect(const Rect& rc, const RGBAColor clr) {
  */
 void GLSurfaceTexture::brighten_rect(const Rect& rc, const int32_t factor)
 {
+	if (m_w <= 0 || m_h <= 0) {
+		return;
+	}
 	setup_gl();
 	GLSurface::brighten_rect(rc, factor);
 	reset_gl();
@@ -251,13 +273,20 @@ void GLSurfaceTexture::brighten_rect(const Rect& rc, const int32_t factor)
 void GLSurfaceTexture::draw_line
 		(int32_t x1, int32_t y1, int32_t x2, int32_t y2, const RGBColor& color, uint8_t gwidth)
 {
+	if (m_w <= 0 || m_h <= 0) {
+		return;
+	}
 	setup_gl();
 	GLSurface::draw_line(x1, y1, x2, y2, color, gwidth);
 	reset_gl();
 }
 
 void GLSurfaceTexture::blit
-	(const Point& dst, const Surface* src, const Rect& srcrc, Composite cm) {
+	(const Point& dst, const Surface* src, const Rect& srcrc, Composite cm) 
+{
+	if (m_w <= 0 || m_h <= 0) {
+		return;
+	}
 	setup_gl();
 	GLSurface::blit(dst, src, srcrc, cm);
 	reset_gl();
