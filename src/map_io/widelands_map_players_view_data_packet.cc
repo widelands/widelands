@@ -85,6 +85,32 @@ namespace Widelands {
 
 #define FILENAME_SIZE 48
 
+
+//  The map is traversed by row and column. In each step we process of one map
+//  field (which is 1 node, 2 triangles and 3 edges that are stored together).
+//  For this processing we need to keep track of 4 nodes:
+//  *  f: the node of the processed field
+//  * bl: the bottom left neighbour of f
+//  * br: the bottom right neighbour of f
+//  *  r: the right neighbour of f
+//
+//  The layout of the processing region is as follows:
+//
+//                     f------ r
+//                    / \     /
+//                   /  \    /
+//                  / D \ R /
+//                 /    \  /
+//                /     \ /
+//              bl------br
+
+struct Map_Object_Data {
+	Map_Object_Data() : map_object_descr(0) {}
+	const Map_Object_Descr                     * map_object_descr;
+	Player::Constructionsite_Information         csi;
+};
+
+namespace {
 #define OPEN_INPUT_FILE(filetype, file, filename, filename_template, version) \
    char (filename)[FILENAME_SIZE];                                            \
    snprintf(filename, sizeof(filename), filename_template, plnum, version);   \
@@ -134,33 +160,8 @@ namespace Widelands {
           "Found %lu trailing bytes in \"%s\"",                               \
           plnum,                                                              \
           static_cast<long unsigned int>((file).GetSize() - (file).GetPos()), \
-          filename);                                                          \
+          filename);
 
-//  The map is traversed by row and column. In each step we process of one map
-//  field (which is 1 node, 2 triangles and 3 edges that are stored together).
-//  For this processing we need to keep track of 4 nodes:
-//  *  f: the node of the processed field
-//  * bl: the bottom left neighbour of f
-//  * br: the bottom right neighbour of f
-//  *  r: the right neighbour of f
-//
-//  The layout of the processing region is as follows:
-//
-//                     f------ r
-//                    / \     /
-//                   /  \    /
-//                  / D \ R /
-//                 /    \  /
-//                /     \ /
-//              bl------br
-
-struct Map_Object_Data {
-	Map_Object_Data() : map_object_descr(0) {}
-	const Map_Object_Descr                     * map_object_descr;
-	Player::Constructionsite_Information         csi;
-};
-
-namespace {
 // FIXME: Legacy code deprecated since build18
 template<uint8_t const Size> struct BitInBuffer {
 	compile_assert(Size == 1 or Size == 2 or Size == 4);

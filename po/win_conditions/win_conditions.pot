@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2013-06-23 17:28+0000\n"
+"POT-Creation-Date: 2013-07-13 15:38+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -182,11 +182,6 @@ msgid ""
 "You get points for precious wares in your warehouses, the player with the highest number of wares at the end of 4 hours wins the game."
 msgstr ""
 
-#: ../../scripting/win_condition_texts.lua:8
-msgid ""
-"You have nothing to command left. If you want, you may continue as spectator."
-msgstr ""
-
 #: ../../scripting/win_condition_texts.lua:3
 msgid ""
 "You have won this game!"
@@ -195,6 +190,11 @@ msgstr ""
 #: ../../scripting/win_condition_texts.lua:17
 msgid ""
 "You lost"
+msgstr ""
+
+#: ../../scripting/win_condition_texts.lua:8
+msgid ""
+"You lost your last warehouse and are therefore defeated. You may continue as spectator if you want."
 msgstr ""
 
 #: ../../scripting/win_condition_texts.lua:48

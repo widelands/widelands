@@ -25,6 +25,8 @@
 #include "io/filesystem/filesystem.h"
 #include "game_io/game_saver.h"
 #include "profile/profile.h"
+#include "wui/interactive_player.h"
+#include "chat.h"
 
 #include "log.h"
 
@@ -47,11 +49,14 @@ void SaveHandler::think(Widelands::Game & game, int32_t realtime) {
 	if (autosaveInterval <= 0)
 		return; // no autosave requested
 
-	int32_t const elapsed = (realtime - m_lastSaveTime) / 1000;
+	int32_t const elapsed = (realtime - m_last_saved_time) / 1000;
 	if (elapsed < autosaveInterval)
 		return;
 
-	log("Autosave: interval elapsed (%d s), saving\n", elapsed);
+	// TODO: defer saving to next tick so that this message is shown
+	// before the actual save, or put the saving logic in another thread
+	game.get_ipl()->get_chat_provider()->send_local
+		(_("Saving game..."));
 
 	// save the game
 	std::string complete_filename =
@@ -70,6 +75,8 @@ void SaveHandler::think(Widelands::Game & game, int32_t realtime) {
 	static std::string error;
 	if (!save_game(game, complete_filename, &error)) {
 		log("Autosave: ERROR! - %s\n", error.c_str());
+		game.get_ipl()->get_chat_provider()->send_local
+			(_("Saving failed!"));
 
 		// if backup file was created, move it back
 		if (backup_filename.length() > 0) {
@@ -79,7 +86,7 @@ void SaveHandler::think(Widelands::Game & game, int32_t realtime) {
 			g_fs->Rename(backup_filename, complete_filename);
 		}
 		// Wait 30 seconds until next save try
-		m_lastSaveTime = m_lastSaveTime + 30000;
+		m_last_saved_time = m_last_saved_time + 30000;
 		return;
 	} else {
 		// if backup file was created, time to remove it
@@ -87,7 +94,9 @@ void SaveHandler::think(Widelands::Game & game, int32_t realtime) {
 			g_fs->Unlink(backup_filename);
 	}
 
-	log("Autosave: save took %d ms\n", m_lastSaveTime - realtime);
+	log("Autosave: save took %d ms\n", m_last_saved_time - realtime);
+	game.get_ipl()->get_chat_provider()->send_local
+		(_("Game saved"));
 }
 
 /**
@@ -97,8 +106,7 @@ void SaveHandler::initialize(int32_t currenttime) {
 	if (m_initialized)
 		return;
 
-	m_lastSaveTime = currenttime;
-	log("Autosave: initialized\n");
+	m_last_saved_time = currenttime;
 	m_initialized = true;
 }
 
@@ -162,7 +170,7 @@ bool SaveHandler::save_game
 	}
 
 	if (result)
-		m_lastSaveTime = WLApplication::get()->get_time();
+		m_last_saved_time = WLApplication::get()->get_time();
 
 	return result;
 }

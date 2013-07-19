@@ -231,7 +231,6 @@ private:
 	bool m_fastclick; // if true, put the mouse over first button in first tab
 	uint32_t m_best_tab;
 	Overlay_Manager::Job_Id m_workarea_preview_job_id;
-	const Image* workarea_cumulative_pic[NUMBER_OF_WORKAREA_PICS];
 
 	/// Variables to use with attack dialog.
 	AttackBox * m_attack_box;
@@ -297,13 +296,6 @@ FieldActionWindow::FieldActionWindow
 
 
 	set_center_panel(&m_tabpanel);
-
-	char filename[] = "pics/workarea0cumulative.png";
-	compile_assert(NUMBER_OF_WORKAREA_PICS <= 9);
-	for (Workarea_Info::size_type i = 0; i < NUMBER_OF_WORKAREA_PICS; ++i) {
-		++filename[13];
-		workarea_cumulative_pic[i] = g_gr->images().get(filename);
-	}
 }
 
 
@@ -856,44 +848,10 @@ void FieldActionWindow::building_icon_mouse_in
 	(const Widelands::Building_Index::value_t idx)
 {
 	if (ibase().m_show_workarea_preview and not m_workarea_preview_job_id) {
-		m_workarea_preview_job_id = m_overlay_manager.get_a_job_id();
-		Widelands::HollowArea<> hollow_area(Widelands::Area<>(m_node, 0), 0);
 		const Workarea_Info & workarea_info =
 			m_plr->tribe().get_building_descr(Widelands::Building_Index(idx))
 			->m_workarea_info;
-		Workarea_Info::const_iterator it = workarea_info.begin();
-		for
-			(Workarea_Info::size_type i =
-			 	std::min(workarea_info.size(), NUMBER_OF_WORKAREA_PICS);
-			 i;
-			 ++it)
-		{
-			--i;
-			hollow_area.radius = it->first;
-			assert(hollow_area.radius);
-			assert(hollow_area.hole_radius < hollow_area.radius);
-			Widelands::MapHollowRegion<> mr(*m_map, hollow_area);
-			do
-				m_overlay_manager.register_overlay
-					(mr.location(),
-					 workarea_cumulative_pic[i],
-					 0,
-					 Point::invalid(),
-					 m_workarea_preview_job_id);
-			while (mr.advance(*m_map));
-			hollow_area.hole_radius = hollow_area.radius;
-		}
-
-#if 0
-		//  This is debug output.
-		//  Improvement suggestion: add to sign explanation window instead.
-		container_iterate_const(Workarea_Info, workarea_info, i) {
-			log("Radius: %i\n", i.current->first);
-			container_iterate_const(std::set<std::string>, i.current->second, j)
-				log("        %s\n", j.current->c_str());
-		}
-#endif
-
+		m_workarea_preview_job_id = ibase().show_work_area(workarea_info, m_node);
 	}
 }
 

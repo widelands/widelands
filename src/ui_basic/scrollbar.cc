@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002, 2006-2011 by the Widelands Development Team
+ * Copyright (C) 2002, 2006-2011, 2013 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -420,6 +420,8 @@ bool Scrollbar::handle_mousepress(const Uint8 btn, int32_t x, int32_t y) {
 		action(Plus);
 		result = true;
 		break;
+	default:
+		break;
 	}
 	update();
 	return result;
@@ -443,6 +445,8 @@ bool Scrollbar::handle_mouserelease(const Uint8 btn, int32_t, int32_t) {
 	case SDL_BUTTON_WHEELDOWN:
 		result = true;
 		break;
+	default:
+		break;
 	}
 	update();
 	return result;
@@ -451,7 +455,7 @@ bool Scrollbar::handle_mouserelease(const Uint8 btn, int32_t, int32_t) {
 
 /**
  * Move the knob while pressed.
-*/
+ */
 bool Scrollbar::handle_mousemove
 	(Uint8, int32_t const mx, int32_t const my, int32_t, int32_t)
 {

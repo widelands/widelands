@@ -63,7 +63,7 @@ public:
 
 		try {
 			surf = rt_renderer_->render(text_, width_);
-			surface_cache_->insert(hash_, surf);
+			surface_cache_->insert(hash_, surf, true);
 		} catch (RT::Exception& e) {
 			throw wexception("Richtext rendering error: %s", e.what());
 		}

@@ -1050,6 +1050,10 @@ MilitarySite::update_upgrade_requirements()
 
 	// Find the level of the soldier that is currently least-suited.
 	Soldier * worst_guy = find_least_suited_soldier();
+	if (worst_guy == NULL) {
+		// There could be no soldier in the militarysite right now. No reason to freak out.
+		return false;
+	}
 	int32_t wg_level = worst_guy->get_level(atrTotal);
 
 	// Micro-optimization: I assume that the majority of military sites have only level-zero

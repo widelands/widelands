@@ -28,6 +28,7 @@
 #include "logic/game.h"
 #include "logic/replay.h"
 #include "ui_basic/messagebox.h"
+#include "timestring.h"
 
 Fullscreen_Menu_LoadReplay::Fullscreen_Menu_LoadReplay() :
 	Fullscreen_Menu_Base("choosemapmenu.jpg"),
@@ -73,7 +74,15 @@ Fullscreen_Menu_LoadReplay::Fullscreen_Menu_LoadReplay() :
 		(this,
 		 get_w() * 7 / 10,  get_h() * 3 / 8,
 		 _("Gametime:"), UI::Align_Right),
-	m_tagametime(this, get_w() * 71 / 100, get_h() * 3 / 8)
+	m_tagametime(this, get_w() * 71 / 100, get_h() * 3 / 8),
+	m_label_players
+		(this,
+		 get_w() * 7 / 10,  get_h() * 41 / 100,
+		 _("Players:"), UI::Align_Right),
+	m_ta_players
+		(this, get_w() * 71 / 100, get_h() * 41 / 100),
+	m_ta_win_condition
+		(this, get_w() * 71 / 100, get_h() * 9 / 20)
 {
 	m_back.sigclicked.connect(boost::bind(&Fullscreen_Menu_LoadReplay::end_modal, boost::ref(*this), 0));
 	m_ok.sigclicked.connect(boost::bind(&Fullscreen_Menu_LoadReplay::clicked_ok, boost::ref(*this)));
@@ -81,13 +90,24 @@ Fullscreen_Menu_LoadReplay::Fullscreen_Menu_LoadReplay() :
 		(boost::bind
 		 	 (&Fullscreen_Menu_LoadReplay::clicked_delete, boost::ref(*this)));
 
-	m_title.set_textstyle(ts_big());
 	m_list.set_font(ui_fn(), fs_small());
 	m_list.selected.connect(boost::bind(&Fullscreen_Menu_LoadReplay::replay_selected, this, _1));
 	m_list.double_clicked.connect
 		(boost::bind(&Fullscreen_Menu_LoadReplay::double_clicked, this, _1));
+
+	m_title         .set_font(ui_fn(), fs_big(), UI_FONT_CLR_FG);
+	m_label_mapname .set_font(ui_fn(), fs_small(), UI_FONT_CLR_FG);
+	m_tamapname     .set_font(ui_fn(), fs_small(), UI_FONT_CLR_FG);
+	m_label_gametime.set_font(ui_fn(), fs_small(), UI_FONT_CLR_FG);
+	m_tagametime    .set_font(ui_fn(), fs_small(), UI_FONT_CLR_FG);
+	m_label_players .set_font(ui_fn(), fs_small(), UI_FONT_CLR_FG);
+	m_ta_players    .set_font(ui_fn(), fs_small(), UI_FONT_CLR_FG);
+	m_ta_win_condition.set_font(ui_fn(), fs_small(), UI_FONT_CLR_FG);
+	m_list          .set_font(ui_fn(), fs_small());
 	m_back.set_font(font_small());
 	m_ok.set_font(font_small());
+	m_delete.set_font(font_small());
+
 	fill_list();
 }
 
@@ -167,15 +187,14 @@ void Fullscreen_Menu_LoadReplay::replay_selected(uint32_t const selected)
 		m_delete.set_enabled(true);
 		m_tamapname.set_text(gpdp.get_mapname());
 
-		char buf[200];
+		char buf[20];
 		uint32_t gametime = gpdp.get_gametime();
+		m_tagametime.set_text(gametimestring(gametime));
 
-		int32_t hours = gametime / 3600000;
-		gametime -= hours * 3600000;
-		int32_t minutes = gametime / 60000;
+		sprintf(buf, "%i", gpdp.get_player_nr());
+		m_ta_players.set_text(buf);
 
-		sprintf(buf, "%02i:%02i", hours, minutes);
-		m_tagametime.set_text(buf);
+		m_ta_win_condition.set_text(gpdp.get_win_condition());
 	} else {
 		no_selection();
 	}

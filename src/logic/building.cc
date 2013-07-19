@@ -19,6 +19,7 @@
 
 #include <cstdio>
 #include <sstream>
+#include <boost/foreach.hpp>
 
 #include "upcast.h"
 #include "wexception.h"
@@ -436,6 +437,9 @@ void Building::cleanup(Editor_Game_Base & egbase)
 	}
 
 	PlayerImmovable::cleanup(egbase);
+
+	BOOST_FOREACH(boost::signals::connection& c, options_window_connections)
+		c.disconnect();
 }
 
 
@@ -722,10 +726,7 @@ Draw the building.
 ===============
 */
 void Building::draw
-	(const Editor_Game_Base &       game,
-	 RenderTarget           &       dst,
-	 FCoords                  const coords,
-	 Point                    const pos)
+	(const Editor_Game_Base& game, RenderTarget& dst, const FCoords& coords, const Point& pos)
 {
 	if (coords == m_position) { // draw big buildings only once
 		dst.drawanim
@@ -745,10 +746,7 @@ Draw overlay help strings when enabled.
 ===============
 */
 void Building::draw_help
-	(const Editor_Game_Base &       game,
-	 RenderTarget           &       dst,
-	 FCoords,
-	 Point                    const pos)
+	(const Editor_Game_Base& game, RenderTarget& dst, const FCoords&, const Point& pos)
 {
 	const Interactive_GameBase & igbase =
 		ref_cast<Interactive_GameBase const, Interactive_Base const>
@@ -861,6 +859,7 @@ void Building::add_worker(Worker & worker) {
 			set_seeing(true);
 	}
 	PlayerImmovable::add_worker(worker);
+	workers_changed();
 }
 
 
@@ -868,6 +867,7 @@ void Building::remove_worker(Worker & worker) {
 	PlayerImmovable::remove_worker(worker);
 	if (not get_workers().size())
 		set_seeing(false);
+	workers_changed();
 }
 
 /**

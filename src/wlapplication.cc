@@ -123,11 +123,11 @@ void WLApplication::setup_searchpaths(std::string argv0)
 			 	(std::string(INSTALL_PREFIX) + '/' + INSTALL_DATADIR));
 #endif
 	}
-	catch (FileNotFound_error & e) {}
+	catch (FileNotFound_error &) {}
 	catch (FileAccessDenied_error & e) {
 		log("Access denied on %s. Continuing.\n", e.m_filename.c_str());
 	}
-	catch (FileType_error & e) {
+	catch (FileType_error &) {
 		//TODO: handle me
 	}
 
@@ -138,11 +138,11 @@ void WLApplication::setup_searchpaths(std::string argv0)
 		g_fs->AddFileSystem(FileSystem::Create("/usr/share/games/widelands"));
 #endif
 	}
-	catch (FileNotFound_error & e) {}
+	catch (FileNotFound_error &) {}
 	catch (FileAccessDenied_error & e) {
 		log("Access denied on %s. Continuing.\n", e.m_filename.c_str());
 	}
-	catch (FileType_error & e) {
+	catch (FileType_error &) {
 		//TODO: handle me
 	}
 
@@ -156,11 +156,11 @@ void WLApplication::setup_searchpaths(std::string argv0)
 		g_fs->AddFileSystem(FileSystem::Create("."));
 #endif
 	}
-	catch (FileNotFound_error & e) {}
+	catch (FileNotFound_error &) {}
 	catch (FileAccessDenied_error & e) {
 		log("Access denied on %s. Continuing.\n", e.m_filename.c_str());
 	}
-	catch (FileType_error & e) {
+	catch (FileType_error &) {
 		//TODO: handle me
 	}
 
@@ -186,11 +186,11 @@ void WLApplication::setup_searchpaths(std::string argv0)
 				g_fs->AddFileSystem(new Datafile(argv0.c_str()));
 #endif
 			}
-			catch (FileNotFound_error & e) {}
+			catch (FileNotFound_error &) {}
 			catch (FileAccessDenied_error & e) {
 				log ("Access denied on %s. Continuing.\n", e.m_filename.c_str());
 			}
-			catch (FileType_error & e) {
+			catch (FileType_error &) {
 				//TODO: handle me
 			}
 		}
@@ -719,6 +719,8 @@ void WLApplication::_handle_mousebutton
 				case SDL_BUTTON_RIGHT:
 					ev.button.button = SDL_BUTTON_LEFT;
 					break;
+				default:
+					break;
 			}
 		}
 
@@ -856,11 +858,7 @@ void WLApplication::refresh_graphics()
 		 s.get_int("yres", YRES),
 		 s.get_int("depth", 16),
 		 s.get_bool("fullscreen", false),
-#if USE_OPENGL
 		 s.get_bool("opengl", true));
-#else
-		 false);
-#endif
 }
 
 /**
@@ -885,9 +883,7 @@ bool WLApplication::init_settings() {
 
 	m_gfx_fullscreen = s.get_bool("fullscreen", false);
 
-#if USE_OPENGL
 	m_gfx_opengl = s.get_bool("opengl", true);
-#endif
 
 	// KLUDGE!
 	// Without this the following config options get dropped by check_used().
@@ -1217,7 +1213,6 @@ void WLApplication::handle_commandline_parameters() throw (Parameter_error)
 	}
 
 	if (m_commandline.count("opengl")) {
-#ifdef USE_OPENGL
 		if (m_commandline["opengl"].compare("0") == 0) {
 			g_options.pull_section("global").create_val("opengl", "false");
 		} else if (m_commandline["opengl"].compare("1") == 0) {
@@ -1225,9 +1220,6 @@ void WLApplication::handle_commandline_parameters() throw (Parameter_error)
 		} else {
 			log ("Invalid option opengl=[0|1]\n");
 		}
-#else
-		log("WARNIG: This version was compiled without support for OpenGL\n");
-#endif
 		m_commandline.erase("opengl");
 	}
 
@@ -1433,12 +1425,10 @@ void WLApplication::show_usage()
 			 " --depth=[16|32]      Color depth in number of bits per pixel.\n"
 			 " --xres=[...]         Width of the window in pixel.\n"
 			 " --yres=[...]         Height of the window in pixel.\n")
-#if USE_OPENGL
 		<<
 		_
 			 (" --opengl=[0|1]\n"
 			 "                      Enables OpenGL rendering\n")
-#endif
 		<<
 		_
 			("\n"
@@ -2046,9 +2036,14 @@ bool WLApplication::new_game()
 		}
 	} else { // normal singleplayer
 		uint8_t const pn = sp.settings().playernum + 1;
-		boost::scoped_ptr<GameController> ctrl
-			(GameController::createSinglePlayer(game, true, pn));
 		try {
+			// Game controller needs the ibase pointer to init
+			// the chat
+			game.set_ibase
+				(new Interactive_Player
+					(game, g_options.pull_section("global"), pn, false, false));
+			boost::scoped_ptr<GameController> ctrl
+				(GameController::createSinglePlayer(game, true, pn));
 			UI::ProgressWindow loaderUI;
 			std::vector<std::string> tipstext;
 			tipstext.push_back("general_game");
@@ -2062,9 +2057,6 @@ bool WLApplication::new_game()
 			loaderUI.step(_("Preparing game"));
 
 			game.set_game_controller(ctrl.get());
-			game.set_ibase
-				(new Interactive_Player
-				 	(game, g_options.pull_section("global"), pn, false, false));
 			game.init_newgame(&loaderUI, sp.settings());
 			game.run(&loaderUI, Widelands::Game::NewNonScenario);
 		} catch (const std::exception & e) {
