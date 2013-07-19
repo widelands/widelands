@@ -7,21 +7,21 @@ msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2013-07-13 15:38+0000\n"
-"PO-Revision-Date: 2013-07-17 17:07+0000\n"
+"POT-Creation-Date: 2013-07-18 19:39+0000\n"
+"PO-Revision-Date: 2013-07-18 20:31+0000\n"
 "Last-Translator: Hans Joachim Desserud <Unknown>\n"
 "Language-Team: Norwegian Bokmal <nb@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-07-18 05:51+0000\n"
+"X-Launchpad-Export-Date: 2013-07-19 05:19+0000\n"
 "X-Generator: Launchpad (build 16696)\n"
 
 #: ../../scripting/win_condition_texts.lua:31
 msgid "%i trees."
 msgstr "%i trær."
 
-#: ../../scripting/win_condition_texts.lua:54
+#: ../../scripting/win_condition_texts.lua:55
 msgid "%s %s %i%% of the land (%i of %i)."
 msgstr "%s %s %i%% av landområdene (%i av %i)."
 
@@ -93,6 +93,10 @@ msgstr "Endeløst spill (uten stridsdis)"
 msgid "Keep it for %i more minutes to win the game."
 msgstr "Behold overtaket i %i minutter til for å vinne."
 
+#: ../../scripting/win_condition_texts.lua:54
+msgid "Otherwise the game will end in %i minutes."
+msgstr "Ellers er spillet over om %i minutter."
+
 #: ../../scripting/win_condition_texts.lua:23
 #: ../../scripting/win_condition_texts.lua:29
 msgid "Player overview:"
@@ -123,6 +127,7 @@ msgid "Territorial Time"
 msgstr "Arealkonge (på tid)"
 
 #: ../../scripting/win_condition_texts.lua:27
+#: ../../scripting/win_condition_texts.lua:53
 msgid "The game will end in %i minutes."
 msgstr "Spillet er over om %i minutter."
 
@@ -206,10 +211,6 @@ msgstr "Du vant"
 #: ../../scripting/win_condition_texts.lua:18
 msgid "You've lost this game!"
 msgstr "Du har tapt dette spillet!"
-
-#: ../../scripting/win_condition_texts.lua:53
-msgid "game will end in %i minutes."
-msgstr "spillet er over om %i minutter."
 
 #: ../../scripting/win_condition_texts.lua:33
 msgid "with %i trees."

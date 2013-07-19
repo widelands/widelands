@@ -2,14 +2,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4688\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2013-07-13 15:38+0000\n"
+"POT-Creation-Date: 2013-07-18 19:39+0000\n"
 "PO-Revision-Date: 2012-03-01 17:20+0000\n"
 "Last-Translator: Marcus E <Unknown>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-07-14 05:16+0000\n"
+"X-Launchpad-Export-Date: 2013-07-19 05:13+0000\n"
 "X-Generator: Launchpad (build 16696)\n"
 
 #: ../../txts/README:71
@@ -293,7 +293,7 @@ msgstr ""
 "Bygg alltid en skogsvaktare och en jägmästares hus, så att Du inte får slut "
 "på trädstammar och mat."
 
-#: ../../txts/tips/general_game.tip:70
+#: ../../txts/tips/general_game.tip:66
 msgid ""
 "An economy consists of all buildings and flags connected by roads. The "
 "supplies and demands of buildings are handled in its economy."
@@ -934,12 +934,6 @@ msgstr "Svenska"
 msgid "T        Toggles tools menu"
 msgstr "T        Visa/dölj verktygsmeny"
 
-#: ../../txts/tips/general_game.tip:66
-msgid ""
-"The 'configure economy' menu for setting up target quantities can be "
-"accessed via the flag menu."
-msgstr ""
-
 #: ../../txts/tips/general_game.tip:2
 msgid ""
 "The building process will only start after a road is built to the "
@@ -1001,10 +995,8 @@ msgstr ""
 #: ../../txts/tips/editor.tip:22
 msgid ""
 "The number keys (1 - 0) allow you to directly set the size of the selected "
-"area around your mouse."
+"area around your mouse cursor."
 msgstr ""
-"Nummertangenterna (1-0) låter dig direkt välja storleken på det område som "
-"muspekaren markerar."
 
 #: ../../txts/COPYING:33
 msgid ""
@@ -1135,11 +1127,9 @@ msgstr ""
 
 #: ../../txts/tips/general_game.tip:30
 msgid ""
-"Use the 'configure economy' menu to adjust the target quantity of a specific "
-"ware."
+"Use the 'configure economy' menu to adjust the target quantity of wares. It "
+"can be accessed via the flag menu."
 msgstr ""
-"Använd \"konfigurera ekonomi\"-menyn för att justera målkvantiteten av ett "
-"specifikt gods."
 
 #: ../../txts/README:144
 msgid ""

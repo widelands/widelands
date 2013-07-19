@@ -6,14 +6,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2013-07-13 15:38+0000\n"
+"POT-Creation-Date: 2013-07-18 19:39+0000\n"
 "PO-Revision-Date: 2011-03-21 20:18+0000\n"
 "Last-Translator: Jari Hautio <Unknown>\n"
 "Language-Team: Finnish <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-07-14 05:16+0000\n"
+"X-Launchpad-Export-Date: 2013-07-19 05:13+0000\n"
 "X-Generator: Launchpad (build 16696)\n"
 "X-Poedit-Country: FINLAND\n"
 "X-Poedit-Language: Finnish\n"
@@ -300,7 +300,7 @@ msgstr ""
 "Rakenna aina metsänvartijan ja riistanvartijan majat, jotta puu- ja "
 "ruokavarantosi eivät pääse loppumaan."
 
-#: ../../txts/tips/general_game.tip:70
+#: ../../txts/tips/general_game.tip:66
 msgid ""
 "An economy consists of all buildings and flags connected by roads. The "
 "supplies and demands of buildings are handled in its economy."
@@ -938,12 +938,6 @@ msgstr "Ruotsi"
 msgid "T        Toggles tools menu"
 msgstr "T        Näytä/piilota työkaluvalikko"
 
-#: ../../txts/tips/general_game.tip:66
-msgid ""
-"The 'configure economy' menu for setting up target quantities can be "
-"accessed via the flag menu."
-msgstr ""
-
 #: ../../txts/tips/general_game.tip:2
 msgid ""
 "The building process will only start after a road is built to the "
@@ -1005,10 +999,8 @@ msgstr ""
 #: ../../txts/tips/editor.tip:22
 msgid ""
 "The number keys (1 - 0) allow you to directly set the size of the selected "
-"area around your mouse."
+"area around your mouse cursor."
 msgstr ""
-"Numeronäppäimet (1-0) asettavat suoraan hiiren osoittimen ympärillä olevan "
-"valittavan alueen koon."
 
 #: ../../txts/COPYING:33
 msgid ""
@@ -1135,14 +1127,11 @@ msgid ""
 "recently visited places in the world."
 msgstr ""
 
-# TODO: the menu is opened at an unobvious place, note here how
 #: ../../txts/tips/general_game.tip:30
 msgid ""
-"Use the 'configure economy' menu to adjust the target quantity of a specific "
-"ware."
+"Use the 'configure economy' menu to adjust the target quantity of wares. It "
+"can be accessed via the flag menu."
 msgstr ""
-"Käytä 'Muuta talouden asetuksia' -valikkoa (napsauta lippua löytääksesi sen) "
-"asettaaksesi tietyn tuotteen tuotannolle tavoitemäärät."
 
 #: ../../txts/README:144
 msgid ""

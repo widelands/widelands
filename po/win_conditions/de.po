@@ -7,21 +7,21 @@ msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2013-07-13 15:38+0000\n"
+"POT-Creation-Date: 2013-07-18 19:39+0000\n"
 "PO-Revision-Date: 2013-07-12 12:49+0000\n"
 "Last-Translator: Tino <Unknown>\n"
 "Language-Team: German <de@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-07-14 05:23+0000\n"
+"X-Launchpad-Export-Date: 2013-07-19 05:19+0000\n"
 "X-Generator: Launchpad (build 16696)\n"
 
 #: ../../scripting/win_condition_texts.lua:31
 msgid "%i trees."
 msgstr "%i Bäume."
 
-#: ../../scripting/win_condition_texts.lua:54
+#: ../../scripting/win_condition_texts.lua:55
 msgid "%s %s %i%% of the land (%i of %i)."
 msgstr "%s %s %i%% des Landes (%i von %i)."
 
@@ -94,6 +94,10 @@ msgstr "Endlosspiel (kein Nebel)"
 msgid "Keep it for %i more minutes to win the game."
 msgstr "Halte den Zustand für %i weitere Minuten, um das Spiel zu gewinnen."
 
+#: ../../scripting/win_condition_texts.lua:54
+msgid "Otherwise the game will end in %i minutes."
+msgstr ""
+
 #: ../../scripting/win_condition_texts.lua:23
 #: ../../scripting/win_condition_texts.lua:29
 msgid "Player overview:"
@@ -124,6 +128,7 @@ msgid "Territorial Time"
 msgstr "Landherr (Zeit)"
 
 #: ../../scripting/win_condition_texts.lua:27
+#: ../../scripting/win_condition_texts.lua:53
 msgid "The game will end in %i minutes."
 msgstr "Das Spiel wird in %i Minuten enden."
 
@@ -209,10 +214,6 @@ msgstr "Du hast gewonnen"
 #: ../../scripting/win_condition_texts.lua:18
 msgid "You've lost this game!"
 msgstr "Du hast dieses Spiel verloren!"
-
-#: ../../scripting/win_condition_texts.lua:53
-msgid "game will end in %i minutes."
-msgstr "Das Spiel wird in %i Minuten enden."
 
 #: ../../scripting/win_condition_texts.lua:33
 msgid "with %i trees."

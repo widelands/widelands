@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2013-07-13 15:38+0000\n"
-"PO-Revision-Date: 2012-04-08 17:08+0000\n"
+"POT-Creation-Date: 2013-07-18 19:39+0000\n"
+"PO-Revision-Date: 2013-07-18 16:21+0000\n"
 "Last-Translator: Hans Joachim Desserud <Unknown>\n"
 "Language-Team: Norwegian Bokmal <nb@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-07-14 05:17+0000\n"
+"X-Launchpad-Export-Date: 2013-07-19 05:13+0000\n"
 "X-Generator: Launchpad (build 16696)\n"
 
 #: ../../tribes/atlanteans/golden_tabard/conf:1
@@ -113,23 +113,23 @@ msgstr "Svartrotbonde"
 
 #: ../../tribes/atlanteans/conf:34
 msgid "Blackrootfield"
-msgstr ""
+msgstr "Svartrotåker"
 
 #: ../../tribes/atlanteans/conf:35
 msgid "Blackrootfield harvested"
-msgstr ""
+msgstr "Høstet svartrotåker"
 
 #: ../../tribes/atlanteans/conf:36
 msgid "Blackrootfield medium"
-msgstr ""
+msgstr "Mellomstor svartrotåker"
 
 #: ../../tribes/atlanteans/conf:37
 msgid "Blackrootfield small"
-msgstr ""
+msgstr "Liten svartrotåker"
 
 #: ../../tribes/atlanteans/conf:38
 msgid "Blackrootfield tiny"
-msgstr ""
+msgstr "Veldig liten svartrotåker"
 
 #: ../../tribes/atlanteans/blackroot/conf:1
 msgid ""
@@ -137,6 +137,9 @@ msgid ""
 "processed in mills. The Atlanteans like their strong taste and use its flour "
 "for making bread."
 msgstr ""
+"Svartrøtter er en spesiell type røtter som blir dyrket på svartrotgårdene og "
+"malt til mel i møllene. Atlanterne liker den sterke smaken og bruker melet "
+"til å bake brød."
 
 #: ../../tribes/atlanteans/conf:62
 msgid "Bread"
@@ -221,23 +224,23 @@ msgstr "Mais"
 
 #: ../../tribes/atlanteans/conf:39
 msgid "Cornfield"
-msgstr ""
+msgstr "Maisåker"
 
 #: ../../tribes/atlanteans/conf:40
 msgid "Cornfield harvested"
-msgstr ""
+msgstr "Høstet maisåker"
 
 #: ../../tribes/atlanteans/conf:41
 msgid "Cornfield medium"
-msgstr ""
+msgstr "Mellomstor maisåker"
 
 #: ../../tribes/atlanteans/conf:42
 msgid "Cornfield small"
-msgstr ""
+msgstr "Liten maisåkar"
 
 #: ../../tribes/atlanteans/conf:43
 msgid "Cornfield tiny"
-msgstr ""
+msgstr "Veldig liten maisåker"
 
 #: ../../tribes/atlanteans/conf:65
 msgid "Cornflour"
@@ -248,6 +251,8 @@ msgid ""
 "Cornflour is produced in a mill out of corn and is one of three parts of the "
 "Atlantean bread produced in bakeries."
 msgstr ""
+"Maismel blir malt i en mølle av mais og er en av de tre delene som inngår i "
+"det atlantiske brødet som bakes i bakeriene."
 
 #: ../../tribes/atlanteans/conf:192
 msgid "Crystal Mine"

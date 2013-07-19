@@ -7,14 +7,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2013-07-13 15:38+0000\n"
+"POT-Creation-Date: 2013-07-18 19:39+0000\n"
 "PO-Revision-Date: 2010-08-30 23:36+0000\n"
 "Last-Translator: Adrián Chaves Fernández <adriyetichaves@gmail.com>\n"
 "Language-Team: Galician <kde-i18n-doc@kde.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-07-14 05:16+0000\n"
+"X-Launchpad-Export-Date: 2013-07-19 05:13+0000\n"
 "X-Generator: Launchpad (build 16696)\n"
 "X-Poedit-Country: SPAIN\n"
 "X-Poedit-Language: Galician\n"
@@ -448,7 +448,7 @@ msgstr ""
 "Constrúe sempre unha cabana para un forestal e un zoólogo, para non quedar "
 "sen troncos ou comida."
 
-#: ../../txts/tips/general_game.tip:70
+#: ../../txts/tips/general_game.tip:66
 msgid ""
 "An economy consists of all buildings and flags connected by roads. The "
 "supplies and demands of buildings are handled in its economy."
@@ -1110,12 +1110,6 @@ msgstr "Sueco"
 msgid "T        Toggles tools menu"
 msgstr "H            (Des)activa o menú de ferramentas"
 
-#: ../../txts/tips/general_game.tip:66
-msgid ""
-"The 'configure economy' menu for setting up target quantities can be "
-"accessed via the flag menu."
-msgstr ""
-
 #: ../../txts/tips/general_game.tip:2
 msgid ""
 "The building process will only start after a road is built to the "
@@ -1225,10 +1219,8 @@ msgstr ""
 #: ../../txts/tips/editor.tip:22
 msgid ""
 "The number keys (1 - 0) allow you to directly set the size of the selected "
-"area around your mouse."
+"area around your mouse cursor."
 msgstr ""
-"As teclas numéricas (1 - 0) permítenche establecer directamente o tamaño da "
-"zona seleccionada ao redor do cursor."
 
 #: ../../txts/COPYING:33
 msgid ""
@@ -1396,11 +1388,9 @@ msgstr ""
 
 #: ../../txts/tips/general_game.tip:30
 msgid ""
-"Use the 'configure economy' menu to adjust the target quantity of a specific "
-"ware."
+"Use the 'configure economy' menu to adjust the target quantity of wares. It "
+"can be accessed via the flag menu."
 msgstr ""
-"Utiliza o menú “configurar a economía” para axustar a cantidade do obxectivo "
-"para un material específico."
 
 #: ../../txts/README:144
 msgid ""
