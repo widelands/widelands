@@ -37,7 +37,7 @@ namespace Widelands {
 
 
 void Game_Preload_Data_Packet::Read
-	(FileSystem & fs, Game &, Map_Map_Object_Loader * const)
+	(FileSystem & fs, Game & game, Map_Map_Object_Loader * const)
 {
 	try {
 		Profile prof;
@@ -59,8 +59,22 @@ void Game_Preload_Data_Packet::Read
 				m_player_nr  = s.get_safe_int   ("player_nr");
 			}
 			if (packet_version < 3) {
-				m_win_condition = "Endless game";
+				m_win_condition = _("Endless game");
+			} else if (packet_version < 4) {
+				// win condition were (sometimes?) stored as filename
+				m_win_condition = s.get_safe_string("win_condition");
+				try {
+					boost::shared_ptr<LuaTable> table
+						(game.lua().run_script
+							(*g_fs,
+							"scripting/win_conditions/" + m_win_condition
+							+ ".lua", "win_conditions"));
+					m_win_condition = table->get_string("name");
+				} catch (...) {
+					// Catch silently, the win_condition value will be used
+				}
 			} else {
+				// win condition stored as localized string
 				m_win_condition = s.get_safe_string("win_condition");
 			}
 			if (packet_version < 4) {
