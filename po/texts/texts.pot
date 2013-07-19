@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2013-07-13 15:38+0000\n"
+"POT-Creation-Date: 2013-07-18 19:39+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -149,7 +149,7 @@ msgid ""
 "Always build a ranger's and a gamekeeper's hut, so you will not run out of trunks and food."
 msgstr ""
 
-#: ../../txts/tips/general_game.tip:70
+#: ../../txts/tips/general_game.tip:66
 msgid ""
 "An economy consists of all buildings and flags connected by roads. The supplies and demands of buildings are handled in its economy."
 msgstr ""
@@ -766,11 +766,6 @@ msgid ""
 "T        Toggles tools menu"
 msgstr ""
 
-#: ../../txts/tips/general_game.tip:66
-msgid ""
-"The 'configure economy' menu for setting up target quantities can be accessed via the flag menu."
-msgstr ""
-
 #: ../../txts/tips/general_game.tip:2
 msgid ""
 "The building process will only start after a road is built to the construction site."
@@ -788,7 +783,7 @@ msgstr ""
 
 #: ../../txts/tips/editor.tip:22
 msgid ""
-"The number keys (1 - 0) allow you to directly set the size of the selected area around your mouse."
+"The number keys (1 - 0) allow you to directly set the size of the selected area around your mouse cursor."
 msgstr ""
 
 #: ../../txts/COPYING:33
@@ -868,7 +863,7 @@ msgstr ""
 
 #: ../../txts/tips/general_game.tip:30
 msgid ""
-"Use the 'configure economy' menu to adjust the target quantity of a specific ware."
+"Use the 'configure economy' menu to adjust the target quantity of wares. It can be accessed via the flag menu."
 msgstr ""
 
 #: ../../txts/README:144

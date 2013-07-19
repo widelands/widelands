@@ -38,6 +38,9 @@ public:
 	SurfaceCache() {};
 	virtual ~SurfaceCache() {};
 
+	/// Deletes all surfaces in the cache leaving it as if it were just created.
+	virtual void flush() = 0;
+
 	/// Returns an entry if it is cached, NULL otherwise.
 	virtual Surface* get(const std::string& hash) = 0;
 

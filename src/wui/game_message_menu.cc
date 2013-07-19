@@ -28,6 +28,7 @@
 #include "logic/playercommand.h"
 
 #include "container_iterate.h"
+#include "timestring.h"
 
 using Widelands::Message;
 using Widelands::Message_Id;
@@ -109,6 +110,8 @@ GameMessageMenu::GameMessageMenu
 
 	list->set_column_compare
 		(ColStatus, boost::bind(&GameMessageMenu::status_compare, this, _1, _2));
+	list->set_sort_column(ColTimeSent);
+	list->set_sort_descending(true);
 
 	set_can_focus(true);
 	focus();
@@ -200,19 +203,8 @@ void GameMessageMenu::update_record
 		 g_gr->images().get(status_picture_filename[message.status()]));
 	er.set_string(ColTitle, message.title());
 
-	uint32_t time = message.sent();
-	char timestring[] = "000:00:00.000";
-	timestring[12] +=  time        % 10;
-	timestring[11] += (time /= 10) % 10;
-	timestring[10] += (time /= 10) % 10;
-	timestring [8] += (time /= 10) % 10;
-	timestring [7] += (time /= 10) %  6;
-	timestring [5] += (time /=  6) % 10;
-	timestring [4] += (time /= 10) %  6;
-	timestring [2] += (time /=  6) % 10;
-	timestring [1] += (time /= 10) % 10;
-	timestring [0] +=  time /= 10;
-	er.set_string(ColTimeSent, time < 10 ? timestring : "-------------");
+	const uint32_t time = message.sent();
+	er.set_string(ColTimeSent, gametimestring(time));
 }
 
 /*

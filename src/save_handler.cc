@@ -25,6 +25,8 @@
 #include "io/filesystem/filesystem.h"
 #include "game_io/game_saver.h"
 #include "profile/profile.h"
+#include "wui/interactive_player.h"
+#include "chat.h"
 
 #include "log.h"
 
@@ -51,7 +53,10 @@ void SaveHandler::think(Widelands::Game & game, int32_t realtime) {
 	if (elapsed < autosaveInterval)
 		return;
 
-	log("Autosave: interval elapsed (%d s), saving\n", elapsed);
+	// TODO: defer saving to next tick so that this message is shown
+	// before the actual save, or put the saving logic in another thread
+	game.get_ipl()->get_chat_provider()->send_local
+		(_("Saving game..."));
 
 	// save the game
 	std::string complete_filename =
@@ -70,6 +75,8 @@ void SaveHandler::think(Widelands::Game & game, int32_t realtime) {
 	static std::string error;
 	if (!save_game(game, complete_filename, &error)) {
 		log("Autosave: ERROR! - %s\n", error.c_str());
+		game.get_ipl()->get_chat_provider()->send_local
+			(_("Saving failed!"));
 
 		// if backup file was created, move it back
 		if (backup_filename.length() > 0) {
@@ -88,6 +95,8 @@ void SaveHandler::think(Widelands::Game & game, int32_t realtime) {
 	}
 
 	log("Autosave: save took %d ms\n", m_last_saved_time - realtime);
+	game.get_ipl()->get_chat_provider()->send_local
+		(_("Game saved"));
 }
 
 /**
@@ -98,7 +107,6 @@ void SaveHandler::initialize(int32_t currenttime) {
 		return;
 
 	m_last_saved_time = currenttime;
-	log("Autosave: initialized\n");
 	m_initialized = true;
 }
 

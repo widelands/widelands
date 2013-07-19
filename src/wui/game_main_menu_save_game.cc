@@ -28,11 +28,13 @@
 #include "game_io/game_saver.h"
 #include "i18n.h"
 #include "interactive_gamebase.h"
+#include "gamecontroller.h"
 #include "io/filesystem/filesystem.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "logic/game.h"
 #include "profile/profile.h"
 #include "interactive_player.h"
+#include "timestring.h"
 
 using boost::format;
 
@@ -56,23 +58,9 @@ Interactive_GameBase & Game_Main_Menu_Save_Game::igbase() {
 #define DELETE_Y                          (CANCEL_Y - BUTTON_HEIGHT - VSPACING)
 #define OK_Y                              (DELETE_Y - BUTTON_HEIGHT - VSPACING)
 
-#define SPLIT_GAMETIME(unit, factor) \
-   uint32_t const unit = gametime / factor; gametime %= factor;
-
-#define PARSE_GAMETIME(buf, gametime)                     \
-	SPLIT_GAMETIME(days, 86400000);                      \
-	SPLIT_GAMETIME(hours, 3600000);                      \
-	SPLIT_GAMETIME(minutes, 60000);                      \
-	SPLIT_GAMETIME(seconds,  1000);                      \
-	sprintf                                              \
-		(buf,                                            \
-		 _("%02ud%02uh%02u'%02u\"%03u"),                 \
-		 days, hours, minutes, seconds, gametime);       \
-
 Game_Main_Menu_Save_Game::Game_Main_Menu_Save_Game
 	(Interactive_GameBase & parent, UI::UniqueWindow::Registry & registry)
 :
-
 	UI::UniqueWindow
 		(&parent, "save_game", &registry,
 		 WINDOW_WIDTH, WINDOW_HEIGHT, _("Save Game")),
@@ -141,10 +129,9 @@ Game_Main_Menu_Save_Game::Game_Main_Menu_Save_Game
 		// Display current game infos
 		m_mapname.set_text(parent.game().get_map()->get_name());
 		uint32_t gametime = parent.game().get_gametime();
+		m_gametime.set_text(gametimestring(gametime));
+
 		char buf[200];
-		PARSE_GAMETIME(buf, gametime);
-		m_gametime.set_text(buf);
-		// NOCOM(#Sirver): the old comment didn't apply anymore with this function call
 		uint8_t player_nr = parent.game().get_number_of_players();
 		sprintf(buf, "%i %s", player_nr, ngettext(_("player"), _("players"),  player_nr));
 		m_players_label.set_text(buf);
@@ -152,6 +139,10 @@ Game_Main_Menu_Save_Game::Game_Main_Menu_Save_Game
 	}
 
 	m_editbox->focus();
+	if (!parent.game().get_ipl()->is_multiplayer()) {
+		// Pause the game
+		parent.game().gameController()->setPaused(true);
+	}
 }
 
 
@@ -171,16 +162,17 @@ void Game_Main_Menu_Save_Game::selected(uint32_t) {
 	m_button_ok->set_enabled(true);
 
 	m_mapname.set_text(gpdp.get_mapname());
-	char buf[200];
+
 	uint32_t gametime = gpdp.get_gametime();
-	PARSE_GAMETIME(buf, gametime);
-	m_gametime.set_text(buf);
+	m_gametime.set_text(gametimestring(gametime));
+
+	char buf[200];
 	if (gpdp.get_number_of_players() > 0) {
 		sprintf
 			(buf, "%i %s", gpdp.get_number_of_players(),
 			ngettext(_("player"), _("players"), gpdp.get_number_of_players()));
 	} else {
-		sprintf(buf, "%s", _("Unknown"));
+		// Keep label empty
 	}
 	m_players_label.set_text(buf);
 	m_win_condition.set_text(gpdp.get_win_condition());
@@ -314,6 +306,15 @@ void Game_Main_Menu_Save_Game::ok()
 		die();
 	}
 }
+
+void Game_Main_Menu_Save_Game::die()
+{
+	UI::UniqueWindow::die();
+	if (!igbase().game().get_ipl()->is_multiplayer()) {
+		igbase().game().gameController()->setPaused(false);
+	}
+}
+
 
 
 struct DeletionMessageBox : public UI::WLMessageBox {

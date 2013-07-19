@@ -42,7 +42,7 @@ struct Game_Main_Menu_Save_Game : public UI::UniqueWindow {
 	void select_by_name(std::string name);
 private:
 	Interactive_GameBase & igbase();
-	void die() {UI::UniqueWindow::die();}
+	void die();
 	void selected      (uint32_t);
 	void double_clicked(uint32_t);
 	void edit_box_changed();

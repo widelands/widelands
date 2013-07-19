@@ -1288,7 +1288,7 @@ void ProductionProgram::ActCheck_Soldier::execute
 			snprintf
 				(ps.m_result_buffer, sizeof(ps.m_result_buffer),
 				 _("No soldier for this training level found!"));
-			return ps.program_end(game, Failed);
+			return ps.program_end(game, Skipped);
 		}
 		if        (attribute == atrHP)      {
 			if ((*it)->get_hp_level()      == level)
@@ -1378,7 +1378,7 @@ void ProductionProgram::ActTrain::execute
 			snprintf
 				(ps.m_result_buffer, sizeof(ps.m_result_buffer),
 				 _("No soldier for this training level found!"));
-			return ps.program_end(game, Failed);
+			return ps.program_end(game, Skipped);
 		}
 		if        (attribute == atrHP)      {
 			if ((*it)->get_hp_level     () == level)

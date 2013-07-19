@@ -75,3 +75,18 @@ char * timestring() {
 	}
 	return timestring_buffer;
 }
+
+char gamestringbuffer[] = "000:00:00";
+char * gametimestring(uint32_t gametime)
+{
+	uint32_t time = gametime / 1000;
+	gamestringbuffer[8] = '0' +  time        % 10;
+	gamestringbuffer[7] = '0' + (time /= 10) %  6;
+	gamestringbuffer[5] = '0' + (time /=  6) % 10;
+	gamestringbuffer[4] = '0' + (time /= 10) %  6;
+	gamestringbuffer[2] = '0' + (time /=  6) % 10;
+	gamestringbuffer[1] = '0' + (time /= 10) % 10;
+	gamestringbuffer[0] = '0' + (time /= 10);
+	return gamestringbuffer;
+}
+

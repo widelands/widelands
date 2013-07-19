@@ -22,8 +22,8 @@ smoked_meat=6
 work=_Work
 
 [work]
-return=skipped when economy needs bread and not economy needs ironore
-return=skipped when economy needs smoked_fish and not economy needs ironore
+return=skipped unless economy needs ironore or not economy needs bread
+return=skipped unless economy needs ironore or not economy needs smoked_fish
 consume=smoked_fish,smoked_meat:2 bread:2
 sleep=45000
 animate=working 20000
