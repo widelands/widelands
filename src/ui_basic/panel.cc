@@ -17,15 +17,14 @@
  *
  */
 
-#include <boost/concept_check.hpp>
-
 #include "constants.h"
 #include "graphic/font_handler.h"
 #include "graphic/font_handler1.h"
 #include "graphic/graphic.h"
-#include "graphic/in_memory_image.h"
 #include "graphic/rendertarget.h"
 #include "graphic/surface.h"
+#include "graphic/surface_cache.h"
+#include "helper.h"
 #include "log.h"
 #include "profile/profile.h"
 #include "sound/sound_handler.h"
@@ -34,8 +33,37 @@
 
 #include "panel.h"
 
+using namespace std;
+
 namespace UI {
 
+namespace  {
+class CacheImage : public Image {
+public:
+	CacheImage(uint16_t w, uint16_t h) :
+		width_(w), height_(h),
+		hash_("cache_image_" + random_string("0123456789ABCDEFGH", 32)) {}
+	virtual ~CacheImage() {}
+
+	// Implements Image.
+	virtual uint16_t width() const {return width_;}
+	virtual uint16_t height() const {return height_;}
+	virtual const string& hash() const {return hash_;}
+	virtual Surface* surface() const {
+		Surface* rv = g_gr->surfaces().get(hash_);
+		if (rv)
+			return rv;
+
+		rv = g_gr->surfaces().insert(hash_, Surface::create(width_, height_), true);
+		return rv;
+	}
+
+private:
+	const int16_t width_, height_;
+	const string hash_;
+};
+
+}  // namespace
 Panel * Panel::_modal       = 0;
 Panel * Panel::_g_mousegrab = 0;
 Panel * Panel::_g_mousein   = 0;
@@ -843,12 +871,8 @@ void Panel::do_draw(RenderTarget & dst)
 		uint32_t innerw = _w - (_lborder + _rborder);
 		uint32_t innerh = _h - (_tborder + _bborder);
 
-		if
-			(!_cache ||
-			 _cache.get()->width() != innerw ||
-			 _cache.get()->height() != innerh)
-		{
-			_cache.reset(new_in_memory_image("dummy_hash", Surface::create(innerw, innerh)));
+	if (!_cache || _cache->width() != innerw || _cache->height() != innerh) {
+			_cache.reset(new CacheImage(innerw, innerh));
 			_needdraw = true;
 		}
 

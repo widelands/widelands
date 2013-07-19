@@ -582,6 +582,7 @@ void ProductionSite::request_worker_callback
 	// the last one we need to start working.
 	w->start_task_idle(game, 0, -1);
 	psite.try_start_working(game);
+	psite.workers_changed();
 }
 
 
