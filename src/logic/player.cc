@@ -139,7 +139,7 @@ void Player::create_default_infrastructure() {
 				ncr->push_arg(further_pos);
 				game.enqueue_command(new Cmd_LuaCoroutine(game.get_gametime(), ncr));
 			}
-		} catch (Tribe_Descr::Nonexistent & e) {
+		} catch (Tribe_Descr::Nonexistent &) {
 			throw game_data_error
 				("the selected initialization index (%u) is outside the range "
 				 "(tribe edited between preload and game start?)",

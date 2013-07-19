@@ -216,7 +216,7 @@ void Journal::start_recording(const std::string & filename)
 		m_record = true;
 		log("Recording into %s\n", m_recordname.c_str());
 	}
-	catch (std::ofstream::failure & e) {
+	catch (std::ofstream::failure &) {
 		//TODO: use exception mask to find out what happened
 		//TODO: there should be a messagebox to tell the user.
 		log
@@ -266,7 +266,7 @@ void Journal::start_playback(const std::string & filename)
 		m_playback = true;
 		log("Playing back from %s\n", m_playbackname.c_str());
 	}
-	catch (std::ifstream::failure & e) {
+	catch (std::ifstream::failure &) {
 		//TODO: use exception mask to find out what happened
 		//TODO: there should be a messagebox to tell the user.
 		log

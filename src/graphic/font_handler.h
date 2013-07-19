@@ -20,6 +20,7 @@
 #ifndef FONT_HANDLER_H
 #define FONT_HANDLER_H
 
+#include <string>
 #include <boost/scoped_ptr.hpp>
 
 #include "point.h"
@@ -58,6 +59,9 @@ struct Font_Handler {
 		 uint32_t & w, uint32_t & h,
 		 uint32_t wrap = std::numeric_limits<uint32_t>::max());
 	uint32_t get_fontheight(const std::string & name, int32_t size);
+
+	// Delete the whole cache.
+	void flush();
 
 private:
 	struct Data;

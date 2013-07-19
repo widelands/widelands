@@ -81,7 +81,7 @@ protected:
 	virtual void create_options_window
 		(Interactive_GameBase &, UI::Window * & registry);
 
-	virtual void draw(const Editor_Game_Base &, RenderTarget &, FCoords, Point);
+	virtual void draw(const Editor_Game_Base &, RenderTarget &, const FCoords&, const Point&);
 };
 
 }

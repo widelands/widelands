@@ -52,7 +52,7 @@ struct RichText {
 	uint32_t height();
 
 	void parse(const std::string & text);
-	void draw(RenderTarget & dst, Point offset, bool background = false);
+	void draw(RenderTarget & dst, const Point& offset, bool background = false);
 
 private:
 	boost::scoped_ptr<RichTextImpl> m;

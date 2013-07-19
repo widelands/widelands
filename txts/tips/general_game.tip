@@ -27,8 +27,8 @@ text=_Use priority buttons in building window to adjust delivery of a specific w
 sec=5
 
 [Tip 8]
-text=_Use the 'configure economy' menu to adjust the target quantity of a specific ware.
-sec=5
+text=_Use the 'configure economy' menu to adjust the target quantity of wares. It can be accessed via the flag menu.
+sec=7
 
 [Tip 9]
 text=_Manage your messages more efficiently: press 'N' for News to access the messages window, then use 'G' for Go To and the Delete key to archive messages.
@@ -63,9 +63,5 @@ text=_Press I to quickly toggle the display of your stock inventory.
 sec=4
 
 [Tip 17]
-text=_The 'configure economy' menu for setting up target quantities can be accessed via the flag menu.
-sec=5
-
-[Tip 18]
 text=_An economy consists of all buildings and flags connected by roads. The supplies and demands of buildings are handled in its economy.
 sec=8

@@ -25,6 +25,7 @@
 #include <boost/utility.hpp>
 
 #include "image.h"
+
 class IImageLoader;
 class SurfaceCache;
 

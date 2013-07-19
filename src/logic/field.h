@@ -57,7 +57,7 @@ struct Bob;
 struct BaseImmovable;
 
 // Field is used so often, make sure it is as small as possible.
-#pragma pack(1)
+#pragma pack(push, 1)
 /// a field like it is represented in the game
 /// \todo This is all one evil hack :(
 struct Field {
@@ -233,7 +233,7 @@ public:
 			MAX_FIELD_HEIGHT       < h ? MAX_FIELD_HEIGHT : h;
 	}
 };
-#pragma pack(0)
+#pragma pack(pop)
 
 // Check that Field is tightly packed.
 compile_assert(sizeof(Field) <= sizeof(void *) * 2 + 10);

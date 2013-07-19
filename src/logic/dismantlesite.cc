@@ -234,10 +234,7 @@ Draw it.
 ===============
 */
 void DismantleSite::draw
-	(const Editor_Game_Base & game,
-	 RenderTarget           & dst,
-	 FCoords          const   coords,
-	 Point            const   pos)
+	(const Editor_Game_Base& game, RenderTarget& dst, const FCoords& coords, const Point& pos)
 {
 	assert(0 <= game.get_gametime());
 	const uint32_t gametime = game.get_gametime();
@@ -260,7 +257,7 @@ void DismantleSite::draw
 	uint32_t anim;
 	try {
 		anim = m_building->get_animation("unoccupied");
-	} catch (Map_Object_Descr::Animation_Nonexistent & e) {
+	} catch (Map_Object_Descr::Animation_Nonexistent &) {
 		anim = m_building->get_animation("idle");
 	}
 	uint32_t w, h;

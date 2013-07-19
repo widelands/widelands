@@ -21,3 +21,8 @@
 /// seconds since the Epoch). The return value points to a statically allocated
 /// string which might be overwritten by subsequent calls.
 char * timestring();
+
+/// Get a string representation of the game time
+/// as hhh:mm:ss. If Time represents more than
+/// 999 hours, it wraps around
+char * gametimestring(uint32_t gametime);

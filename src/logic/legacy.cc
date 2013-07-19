@@ -363,7 +363,7 @@ struct FakeAttackController : public BaseImmovable {
 	virtual int32_t get_type() const throw () {return BATTLE;}
 	virtual int32_t get_size() const throw () {return SMALL;}
 	virtual bool get_passable() const throw () {return true;}
-	virtual void draw (const Editor_Game_Base &, RenderTarget &, FCoords, Point)
+	virtual void draw (const Editor_Game_Base &, RenderTarget &, const FCoords&, const Point&)
 	{}
 	virtual PositionList get_positions (const Editor_Game_Base &) const throw ()
 	{
@@ -445,7 +445,7 @@ struct FakeBattle : public BaseImmovable {
 	virtual int32_t get_type() const throw () {return BATTLE;}
 	virtual int32_t get_size() const throw () {return SMALL;}
 	virtual bool get_passable() const throw () {return true;}
-	virtual void draw (const Editor_Game_Base &, RenderTarget &, FCoords, Point)
+	virtual void draw (const Editor_Game_Base &, RenderTarget &, const FCoords&, const Point&)
 	{}
 	virtual PositionList get_positions (const Editor_Game_Base &) const throw ()
 	{

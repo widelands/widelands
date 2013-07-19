@@ -498,6 +498,13 @@ struct HostChatProvider : public ChatProvider {
 		h->send(c);
 	}
 
+	void send_local(const std::string & msg) {
+		ChatMessage c;
+		c.time = time(0);
+		c.msg = msg;
+		ChatProvider::send(c);
+	}
+
 	const std::vector<ChatMessage> & getMessages() const {
 		return messages;
 	}
@@ -730,7 +737,7 @@ void NetHost::run(bool const autorun)
 			s.get_string
 				("dedicated_motd",
 				 (format
-					(_("This is a dedicated server send \"@%s help\" to get a full list of available commands."))
+					(_("This is a dedicated server. Send \"@%s help\" to get a full list of available commands."))
 					% d->localplayername)
 				.str().c_str());
 
@@ -1344,7 +1351,7 @@ void NetHost::dserver_send_maps_and_saves(Client & client) {
 				info.path     = name;
 				info.players  = static_cast<uint8_t>(s.get_safe_int("nr_players"));
 				d->settings.saved_games.push_back(info);
-			} catch (const _wexception & e) {}
+			} catch (const _wexception &) {}
 		}
 	}
 
@@ -2632,7 +2639,7 @@ void NetHost::handle_packet(uint32_t const i, RecvPacket & r)
 
 						d->settings.scenario = false;
 						d->hp.setMap(gpdp.get_mapname(), path, nr_players, true);
-					} catch (const _wexception & e) {}
+					} catch (const _wexception &) {}
 				}
 			} else {
 				if (g_fs->FileExists(path)) {
