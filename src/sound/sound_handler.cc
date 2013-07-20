@@ -100,7 +100,7 @@ void Sound_Handler::init()
 	//Windows Music has crickling inside if the buffer has another size
 	//than 4k, but other systems work fine with less, some crash
 	//with big buffers.
-#ifdef WIN32
+#ifdef _WIN32
 	const uint16_t bufsize = 4096;
 #else
 	const uint16_t bufsize = 1024;

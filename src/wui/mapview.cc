@@ -113,7 +113,6 @@ void Map_View::draw(RenderTarget & dst)
 	}
 
 	m_complete_redraw_needed = false;
-	draw_tooltip(dst, tooltip());
 }
 
 void Map_View::set_changeview(const Map_View::ChangeViewFn & fn)
