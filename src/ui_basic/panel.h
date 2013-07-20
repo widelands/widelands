@@ -189,6 +189,7 @@ struct Panel : boost::signals::trackable, boost::noncopyable {
 		(Uint8 state, int32_t x, int32_t y, int32_t xdiff, int32_t ydiff);
 	virtual bool handle_key(bool down, SDL_keysym code);
 	virtual bool handle_alt_drag(int32_t x, int32_t y);
+	virtual bool handle_tooltip();
 
 	/// \returns whether a certain given is currently down.
 	///
@@ -242,7 +243,7 @@ protected:
 
 	static void play_click();
 
-	static void draw_tooltip(RenderTarget &, const std::string & text);
+	static bool draw_tooltip(RenderTarget &, const std::string & text);
 
 private:
 	void check_child_death();
@@ -259,6 +260,7 @@ private:
 	bool do_mousemove
 		(const Uint8 state, int32_t x, int32_t y, int32_t xdiff, int32_t ydiff);
 	bool do_key(bool down, SDL_keysym code);
+	bool do_tooltip();
 
 	static Panel * ui_trackmouse(int32_t & x, int32_t & y);
 	static void ui_mousepress  (const Uint8 button, int32_t x, int32_t y);

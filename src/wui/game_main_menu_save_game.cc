@@ -42,10 +42,6 @@ Interactive_GameBase & Game_Main_Menu_Save_Game::igbase() {
 	return ref_cast<Interactive_GameBase, UI::Panel>(*get_parent());
 }
 
-
-Game_Main_Menu_Save_Game::Game_Main_Menu_Save_Game
-	(Interactive_GameBase & parent, UI::UniqueWindow::Registry & registry)
-:
 #define WINDOW_WIDTH                                                        440
 #define WINDOW_HEIGHT                                                       440
 #define VMARGIN                                                               5
@@ -61,13 +57,17 @@ Game_Main_Menu_Save_Game::Game_Main_Menu_Save_Game
 #define CANCEL_Y                      (WINDOW_HEIGHT - BUTTON_HEIGHT - VMARGIN)
 #define DELETE_Y                          (CANCEL_Y - BUTTON_HEIGHT - VSPACING)
 #define OK_Y                              (DELETE_Y - BUTTON_HEIGHT - VSPACING)
+
+Game_Main_Menu_Save_Game::Game_Main_Menu_Save_Game
+	(Interactive_GameBase & parent, UI::UniqueWindow::Registry & registry)
+:
 	UI::UniqueWindow
 		(&parent, "save_game", &registry,
 		 WINDOW_WIDTH, WINDOW_HEIGHT, _("Save Game")),
 	m_ls     (this, HSPACING, VSPACING,  LIST_WIDTH, LIST_HEIGHT),
 	m_name_label
 		(this, DESCRIPTION_X,  5, 0, 20, _("Map Name: "),  UI::Align_CenterLeft),
-	m_name
+	m_mapname
 		(this, DESCRIPTION_X, 20, 0, 20, " ",              UI::Align_CenterLeft),
 	m_gametime_label
 		(this, DESCRIPTION_X, 45, 0, 20, _("Game Time: "), UI::Align_CenterLeft),
@@ -125,6 +125,17 @@ Game_Main_Menu_Save_Game::Game_Main_Menu_Save_Game
 	std::string cur_filename = parent.game().save_handler().get_cur_filename();
 	if (!cur_filename.empty()) {
 		select_by_name(cur_filename);
+	} else {
+		// Display current game infos
+		m_mapname.set_text(parent.game().get_map()->get_name());
+		uint32_t gametime = parent.game().get_gametime();
+		m_gametime.set_text(gametimestring(gametime));
+
+		char buf[200];
+		uint8_t player_nr = parent.game().get_number_of_players();
+		sprintf(buf, "%i %s", player_nr, ngettext(_("player"), _("players"),  player_nr));
+		m_players_label.set_text(buf);
+		m_win_condition.set_text(parent.game().get_win_condition_displayname());
 	}
 
 	m_editbox->focus();
@@ -150,16 +161,21 @@ void Game_Main_Menu_Save_Game::selected(uint32_t) {
 	}
 	m_button_ok->set_enabled(true);
 
-	m_name.set_text(gpdp.get_mapname());
+	m_mapname.set_text(gpdp.get_mapname());
 
 	uint32_t gametime = gpdp.get_gametime();
 	m_gametime.set_text(gametimestring(gametime));
 
 	char buf[200];
-	sprintf
-		(buf, "%i %s", gpdp.get_player_nr(),
-		 ngettext(_("player"), _("players"), gpdp.get_player_nr()));
-	m_players_label.set_text(buf);
+	if (gpdp.get_number_of_players() > 0) {
+		sprintf
+			(buf, "%i %s", gpdp.get_number_of_players(),
+			ngettext(_("player"), _("players"), gpdp.get_number_of_players()));
+			m_players_label.set_text(buf);
+	} else {
+		// Keep label empty
+		m_players_label.set_text("");
+	}
 	m_win_condition.set_text(gpdp.get_win_condition());
 }
 
@@ -231,6 +247,7 @@ static void dosave
 			(&igbase, _("Save Game Error!!"), s, UI::WLMessageBox::OK);
 		mbox.run();
 	}
+	game.save_handler().set_current_filename(complete_filename);
 }
 
 struct SaveWarnMessageBox : public UI::WLMessageBox {

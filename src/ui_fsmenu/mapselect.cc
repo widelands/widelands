@@ -17,6 +17,7 @@
  */
 
 #include <cstdio>
+#include <boost/format.hpp>
 
 #include "i18n.h"
 #include "wexception.h"
@@ -340,9 +341,11 @@ void Fullscreen_Menu_MapSelect::fill_list()
 				m_table.add(m_maps_data.size() - 1);
 
 			te.set_string(0, "");
+			std::string parent_string =
+				(boost::format("\\<%s\\>") % _("parent")).str();
 			te.set_picture
 				(1,  g_gr->images().get("pics/ls_dir.png"),
-				_("<parent>"));
+				parent_string);
 
 			++ndirs;
 		}
