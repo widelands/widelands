@@ -190,7 +190,7 @@ struct Game : Editor_Game_Base {
 	const std::string & get_win_condition_displayname() {return m_win_condition_displayname;}
 
 	const std::vector<PlayerEndStatus> & get_players_end_status() {return m_players_end_status;}
-	void add_player_end_status(const PlayerEndStatus status);
+	void add_player_end_status(PlayerEndStatus status);
 
 private:
 	void SyncReset();
@@ -256,7 +256,7 @@ private:
 
 	/// For save games and statistics generation
 	std::string          m_win_condition_displayname;
-	
+
 	std::vector<PlayerEndStatus> m_players_end_status;
 };
 

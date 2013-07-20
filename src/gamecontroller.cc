@@ -166,7 +166,7 @@ void SinglePlayerGameController::setPaused(bool paused)
 
 void SinglePlayerGameController::report_result(uint8_t p_nr, int32_t score, bool win, std::string extra)
 {
-    Widelands::PlayerEndStatus pes;
+	Widelands::PlayerEndStatus pes;
 	Widelands::Player* player = m_game.get_player(p_nr);
 	assert(player);
 	pes.player = player->player_number();

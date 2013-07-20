@@ -17,29 +17,29 @@
  *
  */
 
-#include "wui/game_summary.h"
+#include "game_summary.h"
 
+#include "interactive_gamebase.h"
+#include "interactive_player.h"
 #include "ui_basic/unique_window.h"
 #include "ui_basic/box.h"
 #include "ui_basic/textarea.h"
 #include "ui_basic/table.h"
 #include "ui_basic/button.h"
-
+#include "ui_fsmenu/game_end_summary.h"
 #include "graphic/graphic.h"
 #include "logic/game.h"
 #include "logic/player.h"
-#include "wui/interactive_gamebase.h"
-#include "wui/interactive_player.h"
 #include "wlapplication.h"
+#include "timestring.h"
 
-#include <boost/concept_check.hpp>
 #include <boost/foreach.hpp>
 #include <boost/format.hpp>
 
 #define PADDING 4
 
-GameSummaryScreen::GameSummaryScreen(Interactive_GameBase * parent,
-									 UI::UniqueWindow::Registry * r)
+GameSummaryScreen::GameSummaryScreen
+	(Interactive_GameBase * parent, UI::UniqueWindow::Registry * r)
 : UI::UniqueWindow(parent, "game_summary", r, 500, 400, _("Game over")),
 m_game(parent->game())
 {
@@ -55,22 +55,24 @@ m_game(parent->game())
 	hbox1->add_space(PADDING);
 
 	UI::Box * infoBox = new UI::Box(hbox1, 0, 0, UI::Box::Vertical);
-	m_gametime_label = new UI::Textarea(infoBox, _("Gametime:"));
-	infoBox->add(m_gametime_label, UI::Box::AlignLeft);
+	m_gametime_label = new UI::Textarea(infoBox, _("Gametime :"));
+	infoBox->add(m_gametime_label, UI::Box::AlignCenter);
 	m_gametime_value = new UI::Textarea(infoBox);
-	infoBox->add(m_gametime_value, UI::Box::AlignRight);
+	infoBox->add(m_gametime_value, UI::Box::AlignCenter);
 	infoBox->add_space(PADDING);
 	hbox1->add(infoBox, UI::Box::AlignTop);
 	vbox->add(hbox1, UI::Box::AlignLeft);
 	vbox->add_space(PADDING);
 
 	UI::Box * buttonBox = new UI::Box(this, 0, 0, UI::Box::Horizontal);
-	m_continue_button = new UI::Button(buttonBox, "continue_button",
+	m_continue_button = new UI::Button
+		(buttonBox, "continue_button",
 		0, 0, 100, 32, g_gr->images().get("pics/but0.png"),
 		_("Continue"), _("Continue playing"));
 	buttonBox->add(m_continue_button, UI::Box::AlignRight);
 	buttonBox->add_space(PADDING);
-	m_stop_button = new UI::Button(buttonBox, "stop_button",
+	m_stop_button = new UI::Button
+		(buttonBox, "stop_button",
 		0, 0, 100, 32, g_gr->images().get("pics/but0.png"),
 		_("Quit"), _("Return to main menu"));
 	buttonBox->add(m_stop_button, UI::Box::AlignRight);
@@ -105,22 +107,10 @@ m_game(parent->game())
 bool GameSummaryScreen::handle_mousepress(Uint8 btn, int32_t mx, int32_t my)
 {
 	// Prevent closing with right click
-    if (btn == SDL_BUTTON_RIGHT)
+	if (btn == SDL_BUTTON_RIGHT)
 		return true;
 
 	return UI::Window::handle_mousepress(btn, mx, my);
-}
-
-inline std::string gametime_string(uint32_t time) {
-	char timestring[] = "000:00:00";
-	timestring [8] += (time /= 1000) % 10;
-	timestring [7] += (time /= 10) %  6;
-	timestring [5] += (time /=  6) % 10;
-	timestring [4] += (time /= 10) %  6;
-	timestring [2] += (time /=  6) % 10;
-	timestring [1] += (time /= 10) % 10;
-	timestring [0] +=  time /= 10;
-	return std::string(timestring);
 }
 
 void GameSummaryScreen::fill_data()
@@ -141,10 +131,15 @@ void GameSummaryScreen::fill_data()
 		Widelands::Player* p = m_game.get_player(pes.player);
 		UI::Table<uintptr_t>::Entry_Record & te
 			= m_players_table->add(pes.player);
-		te.set_picture(0, NULL, p->get_name());
-		char buf[64];
+		// Player name & pic
+		char buf[256];
+		sprintf(buf, "pics/genstats_enable_plr_0%u.png", pes.player);
+		const Image* pic = g_gr->images().get(buf);
+		te.set_picture(0, pic, p->get_name());
+		// Team
 		sprintf(buf, "%i", p->team_number());
 		te.set_string(1, buf);
+		// Status
 		std::string stat_str = _("Resigned");
 		if (pes.lost) {
 			stat_str = _("Lost");
@@ -156,8 +151,10 @@ void GameSummaryScreen::fill_data()
 				team_won = p->team_number();
 			}
 		}
-		te.set_string(2,stat_str);
-		te.set_string(3, gametime_string(pes.time));
+		te.set_string(2, stat_str);
+		// Time
+		te.set_string(3, gametimestring(pes.time));
+		// Points
 		sprintf(buf, "%i", pes.points);
 		te.set_string(4, buf);
 	}
@@ -178,7 +175,7 @@ void GameSummaryScreen::fill_data()
 		}
 	}
 	m_players_table->update();
-	m_gametime_value->set_text(gametime_string(m_game.get_gametime()));
+	m_gametime_value->set_text(gametimestring(m_game.get_gametime()));
 }
 
 void GameSummaryScreen::player_selection(uint8_t idx)
@@ -193,6 +190,12 @@ void GameSummaryScreen::continue_clicked()
 
 void GameSummaryScreen::stop_clicked()
 {
-	m_game.get_ibase()->end_modal(0);
+	Fullscreen_Menu_GameSummary fsm(&m_game);
+	uint32_t code = fsm.run();
+	if (code) {
+		continue_clicked();
+	} else {
+		m_game.get_ipl()->end_modal(0);
+	}
 }
 

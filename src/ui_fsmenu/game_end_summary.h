@@ -26,7 +26,9 @@
 #include "ui_basic/multilinetextarea.h"
 #include "ui_basic/textarea.h"
 #include "ui_basic/table.h"
-namespace Widelands{
+
+namespace Widelands
+{
 	class Game;
 }
 /**
@@ -34,20 +36,24 @@ namespace Widelands{
  */
 struct Fullscreen_Menu_GameSummary : public Fullscreen_Menu_Base {
 	Fullscreen_Menu_GameSummary(Widelands::Game* game);
-	
-	bool compare_player_status(uint32_t rowa, uint32_t rowb);
+
 private:
+	void fill_data();
+	void player_selection(uint8_t idx);
+	void continue_clicked();
+	void stop_clicked();
+
+	Widelands::Game* m_game;
 	uint32_t    m_fs;
 	std::string m_fn;
 	uint8_t m_butwidth;
 	uint8_t m_butheight;
-	UI::Textarea m_title;
-	UI::Textarea m_gametime_label;
-	UI::Textarea m_gametime_value;
-	UI::Table<uintptr_t const> m_players_table;
-	UI::Button m_back_button;
-
-	Widelands::Game* m_game;
+	UI::Textarea *  m_title_area;
+	UI::Textarea *  m_gametime_label;
+	UI::Textarea *  m_gametime_value;
+	UI::Button *    m_stop_button;
+	UI::Button *    m_continue_button;
+	UI::Table<uintptr_t const> *     m_players_table;
 };
 
 #endif

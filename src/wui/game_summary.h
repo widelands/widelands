@@ -29,14 +29,15 @@
 #include <boost/signal.hpp>
 
 class Interactive_GameBase;
-namespace Widelands{
+namespace Widelands
+{
 struct Game;
 }
 
 /// Shows an ingame summary window on game end
 struct GameSummaryScreen : UI::UniqueWindow {
-    GameSummaryScreen(Interactive_GameBase * parent,
-					  UI::UniqueWindow::Registry * r);
+    GameSummaryScreen
+		(Interactive_GameBase * parent, UI::UniqueWindow::Registry * r);
 
 	bool handle_mousepress(Uint8 btn, int32_t mx, int32_t my);
 private:
