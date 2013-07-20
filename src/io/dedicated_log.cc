@@ -20,6 +20,7 @@
 #include "dedicated_log.h"
 #include "filesystem/layered_filesystem.h"
 #include "log.h"
+#include "i18n.h"
 
 #include <boost/format.hpp>
 
@@ -50,7 +51,6 @@ m_chat_file_path(""),
 m_info_file_path(""),
 m_log_file_path(""),
 d_name(""),
-d_ip("<unkown>"),
 d_motd(""),
 d_start(""),
 d_logins(0),
@@ -62,6 +62,7 @@ root(new RealFSImpl("/"))
 	time_t currenttime = time(0);
 	strftime(ts, sizeof(ts), "%a %Y/%m/%d, %H:%M:%S", localtime(&currenttime));
 	d_start = ts;
+	d_ip = (boost::format("\\<%s\\>") % _("unknown")).str();
 }
 
 

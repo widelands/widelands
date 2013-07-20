@@ -30,7 +30,7 @@
 #include <cassert>
 #include <cerrno>
 
-#ifdef WIN32
+#ifdef _WIN32
 #include <windows.h>
 #include <dos.h>
 #ifdef _MSC_VER
@@ -254,7 +254,7 @@ void RealFSImpl::m_unlink_file(const std::string & file) {
 	assert(fspath.m_exists);  //TODO: throw an exception instead
 	assert(!fspath.m_isDirectory); //TODO: throw an exception instead
 
-#ifndef WIN32
+#ifndef _WIN32
 	unlink(fspath.c_str());
 #else
 	DeleteFile(fspath.c_str());
@@ -292,7 +292,7 @@ void RealFSImpl::m_unlink_directory(const std::string & file) {
 
 	// NOTE: this might fail if this directory contains CVS dir,
 	// so no error checking here
-#ifndef WIN32
+#ifndef _WIN32
 	rmdir(fspath.c_str());
 #else
 	RemoveDirectory(fspath.c_str());
@@ -345,7 +345,7 @@ void RealFSImpl::MakeDirectory(const std::string & dirname) {
 
 	if
 		(mkdir
-#ifdef WIN32
+#ifdef _WIN32
 		 	(fspath.c_str())
 #else
 		 	(fspath.c_str(), 0x1FF)
@@ -424,7 +424,7 @@ void * RealFSImpl::Load(const std::string & fname, size_t & length) {
 void * RealFSImpl::fastLoad
 	(const std::string & fname, size_t & length, bool & fast)
 {
-#ifdef WIN32
+#ifdef _WIN32
 	fast = false;
 	return Load(fname, length);
 #else
@@ -588,7 +588,7 @@ StreamWrite * RealFSImpl::OpenStreamWrite(const std::string & fname) {
 }
 
 unsigned long long RealFSImpl::DiskSpace() {
-#ifdef WIN32
+#ifdef _WIN32
 	ULARGE_INTEGER freeavailable;
 	return
 		GetDiskFreeSpaceEx

@@ -55,7 +55,7 @@
 #include <boost/scoped_ptr.hpp>
 #include <sstream>
 
-#ifndef WIN32
+#ifndef _WIN32
 #include <unistd.h> // for usleep
 #endif
 
@@ -765,7 +765,7 @@ void NetHost::run(bool const autorun)
 		while (not d->dedicated_start) {
 			handle_network();
 			// TODO this should be improved.
-#ifndef WIN32
+#ifndef _WIN32
 			if (d->clients.empty()) {
 				if (usleep(100000)) // Sleep for 0.1 seconds - there is not anybody connected anyways.
 					return;

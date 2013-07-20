@@ -185,7 +185,7 @@ void GameSummaryScreen::player_selection(uint8_t idx)
 
 void GameSummaryScreen::continue_clicked()
 {
-	delete this;
+	die();
 }
 
 void GameSummaryScreen::stop_clicked()

@@ -60,7 +60,7 @@
 #include <cstring>
 #include <string>
 
-#ifndef WIN32
+#ifndef _WIN32
 #include <unistd.h> // for usleep
 #else
 #include <windows.h>
@@ -137,7 +137,7 @@ Game::Game() :
 	m_state               (gs_notrunning),
 	m_cmdqueue            (*this),
 	m_replaywriter        (0),
-	m_win_condition_displayname("not_set")
+	m_win_condition_displayname(_("Not set"))
 {
 	// Preload win_conditions as they are displayed in UI
 	lua().register_scripts(*g_fs, "win_conditions", "scripting/win_conditions");
@@ -300,6 +300,7 @@ void Game::init_newgame
 	}
 	std::vector<PlayerSettings> shared;
 	std::vector<uint8_t>        shared_num;
+	m_number_of_players = 0;
 	for (uint32_t i = 0; i < settings.players.size(); ++i) {
 		const PlayerSettings & playersettings = settings.players[i];
 
@@ -320,7 +321,9 @@ void Game::init_newgame
 			 playersettings.name,
 			 playersettings.team);
 		get_player(i + 1)->setAI(playersettings.ai);
+		m_number_of_players++;
 	}
+
 	// Add shared in starting positions
 	for (uint8_t n = 0; n < shared.size(); ++n) {
 		// This player's starting position is used in another (shared) kingdom
@@ -340,6 +343,8 @@ void Game::init_newgame
 		m_win_condition_displayname = table->get_string("name");
 		LuaCoroutine * cr = table->get_coroutine("func");
 		enqueue_command(new Cmd_LuaCoroutine(get_gametime() + 100, cr));
+	} else {
+		m_win_condition_displayname = _("Scenario");
 	}
 }
 
@@ -407,13 +412,19 @@ bool Game::run_load_game(std::string filename) {
 		std::string background(gpdp.get_background());
 		loaderUI.set_background(background);
 		player_nr = gpdp.get_player_nr();
-
+		m_number_of_players = gpdp.get_number_of_players();
 		set_ibase
 			(new Interactive_Player
 			 	(*this, g_options.pull_section("global"), player_nr, true, false));
 
 		loaderUI.step(_("Loading..."));
 		gl.load_game();
+	}
+	if (m_number_of_players == 0) {
+		// Old savegame loaded, parse players to figure out their amount
+		iterate_players_existing_const(p, map().get_nrplayers(), *this, player_tmp) {
+			m_number_of_players++;
+		}
 	}
 
 	// Store the filename for further saves
@@ -563,7 +574,7 @@ bool Game::run
 	if (loader_ui) {
 		load_graphics(*loader_ui);
 
-#ifdef WIN32
+#ifdef _WIN32
 		//  Clear the event queue before starting game because we don't want
 		//  to handle events at game start that happened during loading procedure.
 		SDL_Event event;
@@ -594,7 +605,7 @@ bool Game::run
 		//handle network
 		while (m_state == gs_running) {
 			// TODO this should be improved.
-#ifndef WIN32
+#ifndef _WIN32
 			if (usleep(100) == -1)
 				break;
 #else
@@ -1177,7 +1188,6 @@ void Game::add_player_end_status(const PlayerEndStatus status)
 		return;
 	}
 
-	gameController()->setPaused(true);
 	get_ipl()->show_game_summary();
 }
 

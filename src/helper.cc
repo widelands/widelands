@@ -79,9 +79,9 @@ bool is_printable(SDL_keysym k)
 		((k.sym >= SDLK_KP0)     && (k.sym <= SDLK_KP_EQUALS));
 }
 
-static boost::random::mt19937 random_generator;
+static boost::mt19937 random_generator;
 string random_string(const string& chars, int nlen) {
-	boost::random::uniform_int_distribution<> index_dist(0, chars.size() - 1);
+	boost::uniform_int<> index_dist(0, chars.size() - 1);
 	boost::scoped_array<char> buffer(new char[nlen - 1]);
 	for (int i = 0; i < nlen; ++i) {
 		buffer[i] = chars[index_dist(random_generator)];
