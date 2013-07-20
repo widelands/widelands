@@ -214,11 +214,7 @@ int32_t Panel::run()
 				 	s_default_cursor_click :
 					s_default_cursor);
 
-			if (Panel * lowest = _mousein) {
-				while (Panel * const mousein = lowest->_mousein)
-					lowest = mousein;
-				draw_tooltip(rt, lowest->tooltip());
-			}
+			forefather->do_tooltip();
 
 			g_gr->refresh();
 		}
@@ -681,6 +677,18 @@ bool Panel::handle_key(bool, SDL_keysym)
 }
 
 /**
+ * Called whenever a tooltip could be drawn.
+ * Return true if the tooltip has been drawn,
+ * false otherwise.
+ */
+bool Panel::handle_tooltip()
+{
+	RenderTarget & rt = *g_gr->get_render_target();
+	return draw_tooltip(rt, tooltip());
+}
+
+
+/**
  * Called whenever the user presses a mouse button in the panel while pressing the alt-key.
  * This function is called first on the parent panels.
  * It should be only overwritten by the UI::Window class.
@@ -982,6 +990,7 @@ bool Panel::do_mouserelease(const Uint8 btn, int32_t x, int32_t y) {
 				return true;
 	return handle_mouserelease(btn, x, y);
 }
+
 bool Panel::do_mousemove
 	(Uint8 const state,
 	 int32_t x, int32_t y, int32_t const xdiff, int32_t const ydiff)
@@ -991,15 +1000,20 @@ bool Panel::do_mousemove
 
 	x -= _lborder;
 	y -= _tborder;
-	if (_g_mousegrab != this)
+	if (_g_mousegrab != this) {
 		for
 			(Panel * child = _fchild;
 			 (child = child_at_mouse_cursor(x, y, child));
 			 child = child->_next)
+		{
 			if
 				(child->do_mousemove
 				 	(state, x - child->_x, y - child->_y, xdiff, ydiff))
+			{
 				return true;
+			}
+		}
+	}
 	return handle_mousemove(state, x, y, xdiff, ydiff);
 }
 
@@ -1020,6 +1034,13 @@ bool Panel::do_key(bool const down, SDL_keysym const code)
 	return handle_key(down, code);
 }
 
+bool Panel::do_tooltip()
+{
+	if (_mousein && _mousein->do_tooltip()) {
+		return true;
+	}
+	return handle_tooltip();
+}
 
 /**
  * \return \c true if the given key is currently pressed, or \c false otherwise
@@ -1130,12 +1151,12 @@ void Panel::ui_key(bool const down, SDL_keysym const code)
 }
 
 /**
- * Draw the tooltip.
+ * Draw the tooltip. Return true on success
  */
-void Panel::draw_tooltip(RenderTarget & dst, const std::string & text)
+bool Panel::draw_tooltip(RenderTarget & dst, const std::string & text)
 {
 	if (text.empty())
-		return;
+		return false;
 
 	std::string text_to_render = text;
 	if (!is_richtext(text_to_render)) {
@@ -1145,7 +1166,7 @@ void Panel::draw_tooltip(RenderTarget & dst, const std::string & text)
 	static const uint32_t TIP_WIDTH_MAX = 360;
 	const Image* rendered_text = g_fh1->render(text_to_render, TIP_WIDTH_MAX);
 	if (!rendered_text)
-		return;
+		return false;
 
 	uint16_t tip_width = rendered_text->width() + 4;
 	uint16_t tip_height = rendered_text->height() + 4;
@@ -1163,6 +1184,7 @@ void Panel::draw_tooltip(RenderTarget & dst, const std::string & text)
 	dst.fill_rect(r, RGBColor(63, 52, 34));
 	dst.draw_rect(r, RGBColor(0, 0, 0));
 	dst.blit(r + Point(2, 2), rendered_text);
+	return true;
 }
 
 std::string Panel::ui_fn() {

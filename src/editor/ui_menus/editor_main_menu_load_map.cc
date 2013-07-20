@@ -41,6 +41,7 @@
 #include "ui_basic/textarea.h"
 
 #include <cstdio>
+#include <boost/format.hpp>
 
 using Widelands::WL_Map_Loader;
 
@@ -219,8 +220,10 @@ void Main_Menu_Load_Map::fill_list() {
 #else
 		m_parentdir = m_curdir.substr(0, m_curdir.rfind('\\'));
 #endif
+		std::string parent_string =
+				(boost::format("\\<%s\\>") % _("parent")).str();
 		m_ls->add
-			(_("<parent>"),
+			(parent_string.c_str(),
 			 m_parentdir.c_str(),
 			 g_gr->images().get("pics/ls_dir.png"));
 	}

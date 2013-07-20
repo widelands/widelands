@@ -564,8 +564,10 @@ void Fullscreen_Menu_LaunchMPG::load_previous_playerdata()
 		snprintf(buf, sizeof(buf), _("Player %u"), i);
 		infotext += buf;
 		if (player_save_tribe[i - 1].empty()) {
+			std::string closed_string =
+				(boost::format("\\<%s\\>") % _("closed")).str();
 			infotext += ":\n    ";
-			infotext += _("<closed>");
+			infotext += closed_string;
 			// Close the player
 			m_settings->setPlayerState(i - 1, PlayerSettings::stateClosed);
 			continue; // if tribe is empty, the player does not exist
