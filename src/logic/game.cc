@@ -1184,7 +1184,7 @@ void Game::add_player_end_status(const PlayerEndStatus status)
 	m_players_end_status.push_back(status);
 
 	// If all results have been gathered, save game ans show summary screen
-	if (m_players_end_status.size() < get_map()->get_nrplayers()) {
+	if (m_players_end_status.size() < get_number_of_players()) {
 		return;
 	}
 

@@ -2979,13 +2979,25 @@ void NetHost::reaper()
 }
 
 
-void NetHost::report_result(uint8_t player, int32_t points, bool win, std::string extra)
+void NetHost::report_result(uint8_t p_nr, int32_t points, bool win, std::string extra)
 {
+	// Send to game
+	Widelands::PlayerEndStatus pes;
+	Widelands::Player* player = d->game->get_player(p_nr);
+	assert(player);
+	pes.player = player->player_number();
+	pes.time = d->game->get_gametime();
+	pes.points = points;
+	pes.win = win;
+	pes.lost = !win;
+	pes.extra = extra;
+	d->game->add_player_end_status(pes);
+
 	// there might be more than one client that control this Widelands player
 	// and maybe even none -> computer player
 	for (uint16_t i = 0; i < d->settings.users.size(); ++i) {
 		UserSettings & user = d->settings.users.at(i);
-		if (user.position == player - 1) {
+		if (user.position == p_nr - 1) {
 			user.winner               = win;
 			user.points               = points;
 			user.win_condition_string = extra;

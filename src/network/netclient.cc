@@ -33,6 +33,7 @@
 #include "io/fileread.h"
 #include "io/filewrite.h"
 #include "logic/game.h"
+#include "logic/player.h"
 #include "logic/playercommand.h"
 #include "map_io/widelands_map_loader.h"
 #include "network_gaming_messages.h"
@@ -302,6 +303,22 @@ std::string NetClient::getGameDescription()
 	snprintf(buf, sizeof(buf), "network player %i", d->settings.playernum);
 	return buf;
 }
+
+void NetClient::report_result(uint8_t player_nr, int32_t points, bool win, std::string extra)
+{
+    // Send to game
+	Widelands::PlayerEndStatus pes;
+	Widelands::Player* player = d->game->get_player(player_nr);
+	assert(player);
+	pes.player = player->player_number();
+	pes.time = d->game->get_gametime();
+	pes.points = points;
+	pes.win = win;
+	pes.lost = !win;
+	pes.extra = extra;
+	d->game->add_player_end_status(pes);
+}
+
 
 const GameSettings & NetClient::settings()
 {
