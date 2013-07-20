@@ -7,13 +7,13 @@ msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2013-07-18 19:39+0000\n"
-"PO-Revision-Date: 2010-02-10 20:32+0000\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"PO-Revision-Date: 2013-07-19 14:25+0000\n"
+"Last-Translator: István Kiss <kiemc@citromail.hu>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-07-19 05:13+0000\n"
+"X-Launchpad-Export-Date: 2013-07-20 05:11+0000\n"
 "X-Generator: Launchpad (build 16696)\n"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:306
@@ -34,6 +34,11 @@ msgid ""
 "of our farmers seems to be very clever he already got some crops to grow in "
 "this cold soil.\" "
 msgstr ""
+" „Boldrethnek igaza van! Nincs elég élelmünk, hogy túléljünk egy hosszú, "
+"hideg telet. Építenünk kell egy kutat, egy halász- és egy vadászkunyhót. "
+"Sőt, ha találunk elég helyet, egy farmot és egy pékséget is érdemes "
+"építenünk! Egyik farmerünk nagyon okosnak tűnik: már sikerült neki ebben a "
+"hideg földben is gabonát termesztenie.” "
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:372
 msgid ""
@@ -43,6 +48,11 @@ msgid ""
 "to\n"
 " make their work lighter and our transportation more efficient.\" "
 msgstr ""
+" „Törzsfőnök, ne feledkezz meg szegény anyaghordókról: útjaink egyre "
+"hosszabbak,\n"
+" vállukon a teher viszont sosem könnyebb. Még több ökröt kell tartanunk, "
+"hogy\n"
+" munkájuk könnyebb, szállításunk pedig hatékonyabb legyen.” "
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:318
 msgid ""
@@ -90,6 +100,8 @@ msgid ""
 " \"Khantrukh just informed me, that our basic food economy was built up "
 "successfully. Finally none of us has to fear starvation anymore."
 msgstr ""
+" „Khantrukh most tájékoztatott, hogy alapszintű élelemtermelő gazdaságunk "
+"sikeresen kiépült. Végre egyikünknek sem kell többé félnie az éhezéstől.”"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:348
 msgid ""
@@ -136,6 +148,17 @@ msgid ""
 "an eye on the raging wars on our doorsteps. THEN we will be prepared once "
 "trouble seeks to capture our woods.\" "
 msgstr ""
+" „Épp most készült el az első erősség, amit Thron rendelt. Ő jelenleg "
+"bizalmat és hitet próbál önteni mindazokba, akik új szálláshelyünk falai "
+"között élnek, melyet \"Ondun\"-nak neveztünk el, ami az ősi nyelven azt "
+"jelenti: \"akik várnak\". De Thron még nem elégedett – és én teljesen "
+"megértem a félelmeit: az erdő mély, Al'thunran határa pedig közel. Biztos "
+"vagyok abban, hogy odakint ezerszer nagyobb veszélyek is vannak, mint az "
+"ismeretlen nyomok.<br>Hogy főhadiszállásunk körül még több területet szemmel "
+"tarthassunk, tovább kell terjeszkednünk, még több őrt és  felderítőt kell "
+"küldenünk, hogy figyeljék a határt és rajta tartsák a szemüket a küszöbünkön "
+"tomboló háborún. Majd AKKOR készen állunk az erdőinkbe betörő vész "
+"fogadására.” "
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:189
 msgid ""
@@ -180,6 +203,10 @@ msgid ""
 "are not strong enough to take up the battle with my brothers.<br>For now we "
 "rest at the borders of the old forest and prepare for the coming days.\" "
 msgstr ""
+" „Az elmúlt napokban közelebb jöttünk fővárosunkhoz. Menetközben már sokan "
+"csatlakoztak hozzánk és fektették le hitüket bennem. De félek, nem vagyunk "
+"elég erősek, hogy harcba bocsátkozzunk fivéreimmel.<br>Most az öregerdő "
+"peremén pihenünk, és felkészülünk az elkövetkező napokra.” "
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:206
 msgid ""
@@ -197,6 +224,10 @@ msgid ""
 "firmly in its grip. We should put food in our storage to survive the long, "
 "cold winter!\" "
 msgstr ""
+" „Ma reggel Thront gondterheltnek  láttam. Késő éjjel hazatért őrjáratáról "
+"és leült egy fa tövébe, táborunkat vizslatva. A viták és veszekedések száma "
+"egyre nő, a tél pedig itt van már a nyakunkon. Fel kell töltenünk az "
+"éléskamrát, hogy túléljük a hosszú, hideg telet!” "
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:171
 msgid ""
@@ -215,6 +246,10 @@ msgid ""
 "range on the area around our hall to protect our people from sudden "
 "attacks.\" "
 msgstr ""
+" „Thron mondta, hogy településünktől északkeletre nyomokat fedezett fel a "
+"hóban. Utasított, hogy építsünk egy helyőrséget, hogy jobban rálássunk a "
+"főhadiszállásunk körüli területre, ezáltal megvédve népünket a váratlan "
+"támadásoktól.” "
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:101
 #: ../../campaigns/t03.wmf/scripting/texts.lua:334
@@ -227,10 +262,12 @@ msgid ""
 "* Build a donjon at the northeast of your territory to get a farther visual "
 "range and to protect your people from sudden attacks of enemies."
 msgstr ""
+"* Építs egy helyőrséget területed északkeleti részére, hogy megnöveld a "
+"rálátásodat és megvédd népedet az ellenség váratlan támadásaitól."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:266
 msgid "* Build a donjon at the northeast of your territory."
-msgstr ""
+msgstr "* Építs egy helyőrséget területed északkeleti részére."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:83
 #: ../../campaigns/t03.wmf/scripting/texts.lua:310
@@ -255,6 +292,8 @@ msgid ""
 "* Build more military buildings to explore the area around the headquarters "
 "and to ensure the safety of your people."
 msgstr ""
+"* Építs további katonai épületeket, hogy felfedezd a főhadiszállásod körüli "
+"területet, és hogy garantáld néped biztonságát."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:42
 #: ../../campaigns/t03.wmf/scripting/texts.lua:246
@@ -262,6 +301,9 @@ msgid ""
 "* Build up a basic food economy - a fisher's hut, a hunter's hut, a well, a "
 "farm and a bakery, to provide your people with food."
 msgstr ""
+"* Építs ki egy alapszintű élelemtermelő gazdaságot – egy halászkunyhót, egy "
+"vadászkunyhót, egy kutat, egy farmot és egy pékséget kell emelned, hogy "
+"ellásd népedet élelemmel."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:210
 msgid "* Destroy Kalitath's army and expand your territory to the east."
@@ -311,11 +353,11 @@ msgstr ""
 #: ../../campaigns/t03.wmf/scripting/texts.lua:362
 #: ../../campaigns/t03.wmf/scripting/texts.lua:376
 msgid "-- NEW OBJECTIVE --"
-msgstr ""
+msgstr "-- ÚJ CÉLKITŰZÉS --"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:330
 msgid "-- NEW OBJECTIVES --"
-msgstr ""
+msgstr "-- ÚJ CÉLKITŰZÉSEK --"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:350
 msgid "--------------------- VICTORY! ----------------------"
@@ -348,7 +390,7 @@ msgstr ""
 
 #: ../../campaigns/t03.wmf/elemental:7
 msgid "03 - This Land is our Land"
-msgstr ""
+msgstr "03 - Ez a föld a miénk"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:157
 #: ../../campaigns/t03.wmf/scripting/texts.lua:185
@@ -362,6 +404,10 @@ msgid ""
 " of your oxen to help transport wares quicker. Remember to build a cattle\n"
 " farm!"
 msgstr ""
+"Ahogy útjaid egyre hosszabbra, gazdaságod pedig egyre nagyobbra nő, munkára\n"
+" kell fognod ökreidet, hogy termékeid gyorsabban célba érjenek. Úgyhogy ne "
+"felejts\n"
+" el építeni egy marhafarmot!"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:169
 msgid "Boldreth shakes his head."
@@ -373,11 +419,11 @@ msgstr ""
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:230
 msgid "Boldreth speaks:"
-msgstr ""
+msgstr "Boldreth így szól:"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:57
 msgid "Build a donjon"
-msgstr ""
+msgstr "Építs egy helyőrséget"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:81
 msgid "Build a fortress"
@@ -401,7 +447,7 @@ msgstr ""
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:40
 msgid "Build up a small food economy"
-msgstr ""
+msgstr "Építs ki egy kis élelemtermelő gazdaságot"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:109
 msgid "Build weapon productions"
@@ -409,7 +455,7 @@ msgstr ""
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:146
 msgid "Close to home"
-msgstr ""
+msgstr "Már közel az otthon"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:125
 msgid "Destroy Kalitaths army"
@@ -425,11 +471,11 @@ msgstr ""
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:65
 msgid "Explore further"
-msgstr ""
+msgstr "Terjeszkedj tovább"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:252
 msgid "Food economy completed"
-msgstr ""
+msgstr "Az élelemtermelő gazdaság elkészült"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:316
 msgid "Fortress completed"
@@ -441,19 +487,19 @@ msgstr ""
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:272
 msgid "Further explorations"
-msgstr ""
+msgstr "További felfedezés"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:371
 msgid "Khantrukh approaches"
-msgstr ""
+msgstr "Khantrukh jön"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:240
 msgid "Khantrukh nods"
-msgstr ""
+msgstr "Khantrukh bólint"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:369
 msgid "Khantrukh speaks"
-msgstr ""
+msgstr "Khantrukh szól"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:358
 msgid "Military assault"
@@ -484,7 +530,7 @@ msgstr ""
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:48
 msgid "Remember to build a cattle farm"
-msgstr ""
+msgstr "Ne felejts el építeni egy marhafarmot"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:218
 msgid "Renegade fortification"
@@ -492,7 +538,7 @@ msgstr ""
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:238
 msgid "The advisor"
-msgstr ""
+msgstr "A tanácsadó"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:177
 #: ../../campaigns/t03.wmf/scripting/texts.lua:195
@@ -504,6 +550,8 @@ msgid ""
 "This tutorial explains the handling of military and training site buildings "
 "and will introduce fighting."
 msgstr ""
+"Ez az oktatójáték elmagyarázza a katonai- és kiképzőépületek kezelését, és "
+"bemutatja a harcot."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:159
 #: ../../campaigns/t03.wmf/scripting/texts.lua:346
@@ -512,7 +560,7 @@ msgstr ""
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:148
 msgid "Thron looks worried..."
-msgstr ""
+msgstr "Thron aggódik..."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:187
 msgid "Thron speaks confidently."
@@ -524,11 +572,11 @@ msgstr ""
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:260
 msgid "Tracks"
-msgstr ""
+msgstr "Nyomok"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:228
 msgid "Winter ahead"
-msgstr ""
+msgstr "Közeleg a tél"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:352
 msgid ""

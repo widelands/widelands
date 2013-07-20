@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2013-07-18 21:39+0200\n"
-"PO-Revision-Date: 2013-07-18 21:04+0000\n"
+"PO-Revision-Date: 2013-07-19 21:41+0000\n"
 "Last-Translator: Hans Joachim Desserud <Unknown>\n"
 "Language-Team: Norwegian Bokmal <nb@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2013-07-19 05:17+0000\n"
+"X-Launchpad-Export-Date: 2013-07-20 05:11+0000\n"
 "X-Generator: Launchpad (build 16696)\n"
 
 #: ../../src/computer_player.cc:38
@@ -1067,17 +1067,17 @@ msgstr "dobbelt opp"
 #: ../../src/logic/immovable.cc:278
 #, c-format
 msgid "[terrain affinity] \"%s\" (not in current world): %s"
-msgstr "[terreng tilhørighet] \"%s\" (ikke i gjeldende verden): %s"
+msgstr "[terrengtilhørighet] «%s» (ikke i gjeldende verden): %s"
 
 #: ../../src/logic/immovable.cc:314
 #, c-format
 msgid "immovable %s has no program \"%s\""
-msgstr "immovable %s har ikke ett program \"%s\""
+msgstr "uflyttbar %s har ikke ett program «%s»"
 
 #: ../../src/logic/immovable.cc:769
 #, c-format
 msgid "tribe %s does not define immovable type \"%s\""
-msgstr ""
+msgstr "stamme %s har ikke definert uflyttbar type «%s»"
 
 #: ../../src/logic/immovable.cc:772
 #, c-format
@@ -1087,12 +1087,12 @@ msgstr "ukjent stamme %s"
 #: ../../src/logic/immovable.cc:778
 #, c-format
 msgid "world does not define immovable type \"%s\""
-msgstr ""
+msgstr "verden har ikke definert uflyttbar type «%s»"
 
 #: ../../src/logic/immovable.cc:788
 #, c-format
 msgid "immovable type %s"
-msgstr ""
+msgstr "uflyttbar type %s"
 
 #: ../../src/logic/immovable.cc:822 ../../src/logic/production_program.cc:663
 #: ../../src/logic/production_program.cc:737
@@ -1121,7 +1121,7 @@ msgstr "ulovlig omgjøring til samme type"
 #: ../../src/logic/immovable.cc:973 ../../src/logic/immovable.cc:1060
 #, c-format
 msgid "immovable type not in tribe but target type has scope (\"%s\")"
-msgstr ""
+msgstr "uflyttbar type er ikke i stammen, men måltypen har virkefelt («%s»)"
 
 #: ../../src/logic/immovable.cc:979 ../../src/logic/immovable.cc:1066
 #, c-format
@@ -1167,12 +1167,12 @@ msgstr "positivt heltall <= 100"
 #: ../../src/logic/military_data.cc:63
 #, c-format
 msgid "expected positive integer >= %u <= 100 but found \"%s\""
-msgstr "forventet positivt heltall >= %u <= 100 men fant \"%s\""
+msgstr "forventet et positivt heltall >= %u <= 100 men fant «%s»"
 
 #: ../../src/logic/military_data.cc:75
 #, c-format
 msgid "expected positive integer >= %u <= %u but found \"%u\""
-msgstr "forventet positivt heltall >= %u <= %u men fant \"%u\""
+msgstr "forventet et positivt heltall >= %u <= %u men fant «%u»"
 
 #: ../../src/logic/militarysite.cc:64 ../../src/logic/warehouse.cc:251
 msgid " conquer"
