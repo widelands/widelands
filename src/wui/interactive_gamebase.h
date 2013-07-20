@@ -79,6 +79,8 @@ public:
 
 	bool try_show_ship_window();
 
+	void show_game_summary();
+
 protected:
 	Game_Main_Menu_Windows m_mainm_windows;
 	ChatProvider           * m_chatProvider;
@@ -90,6 +92,7 @@ protected:
 
 	PlayerType m_playertype;
 	UI::UniqueWindow::Registry m_fieldaction;
+	UI::UniqueWindow::Registry m_game_summary;
 };
 
 #endif

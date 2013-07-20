@@ -41,6 +41,7 @@ struct SinglePlayerGameController : public GameController {
 	void setDesiredSpeed(uint32_t speed);
 	bool isPaused();
 	void setPaused(bool paused);
+	void report_result(uint8_t player, int32_t score, bool win, std::string extra);
 
 private:
 	Widelands::Game & m_game;
@@ -155,6 +156,21 @@ void SinglePlayerGameController::setPaused(bool paused)
 {
 	m_paused = paused;
 }
+
+void SinglePlayerGameController::report_result(uint8_t p_nr, int32_t score, bool win, std::string extra)
+{
+    Widelands::PlayerEndStatus pes;
+	Widelands::Player* player = m_game.get_player(p_nr);
+	assert(player);
+	pes.player = player->player_number();
+	pes.time = m_game.get_gametime();
+	pes.points = score;
+	pes.win = win;
+	pes.lost = !win;
+	pes.extra = extra;
+	m_game.add_player_end_status(pes);
+}
+
 
 GameController * GameController::createSinglePlayer
 	(Widelands::Game        &       game,

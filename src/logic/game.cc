@@ -54,6 +54,7 @@
 #include "wlapplication.h"
 #include "wui/game_tips.h"
 #include "wui/interactive_player.h"
+#include "wui/game_summary.h"
 #include "militarysite.h"
 
 #include <cstring>
@@ -1153,6 +1154,31 @@ void Game::WriteStatistics(FileWrite & fw)
 			fw.Unsigned32(m_general_stats[p - 1].miltary_strength[j]);
 			fw.Unsigned32(m_general_stats[p - 1].custom_statistic[j]);
 		}
+}
+
+/**
+ * Adds a new 'deceased' player status
+ */
+void Game::add_player_end_status(const PlayerEndStatus status)
+{
+	// Ensure we don't have a status for it yet
+	std::vector<PlayerEndStatus>::iterator it;
+	for (it = m_players_end_status.begin(); it != m_players_end_status.end(); ++it) {
+		PlayerEndStatus pes = *it;
+		if (pes.player == status.player) {
+			log("End status for player %i already registered\n", pes.player);
+			assert(false);
+		}
+	}
+	m_players_end_status.push_back(status);
+	
+	// If all results have been gathered, save game ans show summary screen
+	if (m_players_end_status.size() < get_map()->get_nrplayers()) {
+		return;
+	}
+	
+	gameController()->setPaused(true);
+	get_ipl()->show_game_summary();
 }
 
 }
