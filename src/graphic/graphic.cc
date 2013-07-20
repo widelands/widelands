@@ -44,6 +44,7 @@
 
 #include "animation.h"
 #include "animation_gfx.h"
+#include "font_handler.h"
 #include "image.h"
 #include "image_loader_impl.h"
 #include "image_transformations.h"
@@ -62,14 +63,9 @@ bool g_opengl;
 /**
  * Initialize the SDL video mode.
 */
-Graphic::Graphic
-	(int32_t w, int32_t h,
-	 int32_t bpp,
-	 bool    fullscreen,
-	 bool    opengl)
+Graphic::Graphic()
 	:
 	m_fallback_settings_in_effect (false),
-	m_rendertarget     (0),
 	m_nr_update_rects  (0),
 	m_update_fullscreen(true),
 	image_loader_(new ImageLoaderImpl()),
@@ -80,7 +76,7 @@ Graphic::Graphic
 
 	//fastOpen tries to use mmap
 	FileRead fr;
-#ifndef WIN32
+#ifndef _WIN32
 	fr.fastOpen(*g_fs, "pics/wl-ico-128.png");
 #else
 	fr.fastOpen(*g_fs, "pics/wl-ico-32.png");
@@ -88,9 +84,12 @@ Graphic::Graphic
 	SDL_Surface * s = IMG_Load_RW(SDL_RWFromMem(fr.Data(0), fr.GetSize()), 1);
 	SDL_WM_SetIcon(s, 0);
 	SDL_FreeSurface(s);
+}
+
+void Graphic::initialize(int32_t w, int32_t h, int32_t bpp, bool fullscreen, bool opengl) {
+	cleanup();
 
 	// Set video mode using SDL. First collect the flags
-
 	int32_t flags = 0;
 	g_opengl = false;
 	SDL_Surface * sdlsurface = 0;
@@ -306,7 +305,6 @@ GCC_DIAG_ON ("-Wold-style-cast")
 		glEnable(GL_TEXTURE_2D);
 
 		GLSurfaceTexture::Initialize(use_arb);
-
 	}
 
 	if (g_opengl)
@@ -315,11 +313,11 @@ GCC_DIAG_ON ("-Wold-style-cast")
 	}
 	else
 	{
-		screen_.reset(new SDLSurface(sdlsurface));
+		screen_.reset(new SDLSurface(sdlsurface, false));
 	}
 
 	m_sdl_screen = sdlsurface;
-	m_rendertarget = new RenderTarget(screen_.get());
+	m_rendertarget.reset(new RenderTarget(screen_.get()));
 }
 
 bool Graphic::check_fallback_settings_in_effect()
@@ -327,25 +325,27 @@ bool Graphic::check_fallback_settings_in_effect()
 	return m_fallback_settings_in_effect;
 }
 
-/**
- * Free the surface
-*/
-Graphic::~Graphic()
-{
-	BOOST_FOREACH(Texture* texture, m_maptextures)
-		delete texture;
-	delete m_rendertarget;
-
+void Graphic::cleanup() {
+	flush_maptextures();
 	flush_animations();
+	surface_cache_->flush();
+	// TODO: this should really not be needed, but currently is :(
+	if (UI::g_fh)
+		UI::g_fh->flush();
 
 	if (g_opengl)
 		GLSurfaceTexture::Cleanup();
 }
 
+Graphic::~Graphic()
+{
+	cleanup();
+}
+
 /**
  * Return the screen x resolution
 */
-int32_t Graphic::get_xres() const
+int32_t Graphic::get_xres()
 {
 	return screen_->width();
 }
@@ -353,9 +353,19 @@ int32_t Graphic::get_xres() const
 /**
  * Return the screen x resolution
 */
-int32_t Graphic::get_yres() const
+int32_t Graphic::get_yres()
 {
 	return screen_->height();
+}
+
+int32_t Graphic::get_bpp()
+{
+	return m_sdl_screen->format->BitsPerPixel;
+}
+
+bool Graphic::is_fullscreen()
+{
+	return m_sdl_screen->flags & SDL_FULLSCREEN;
 }
 
 /**
@@ -365,7 +375,7 @@ RenderTarget * Graphic::get_render_target()
 {
 	m_rendertarget->reset();
 
-	return m_rendertarget;
+	return m_rendertarget.get();
 }
 
 /**

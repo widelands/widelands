@@ -1017,7 +1017,7 @@ void Bob::log_general_info(const Editor_Game_Base & egbase)
 	molog("ActScheduled: %s\n", m_actscheduled ? "true" : "false");
 	molog
 		("Animation: %s\n",
-		 m_anim ? descr().get_animation_name(m_anim).c_str() : "<none>");
+		 m_anim ? descr().get_animation_name(m_anim).c_str() : "\\<none\\>");
 
 	molog("AnimStart: %i\n", m_animstart);
 	molog("WalkingDir: %i\n", m_walking);

@@ -55,7 +55,7 @@
 #include <boost/scoped_ptr.hpp>
 #include <sstream>
 
-#ifndef WIN32
+#ifndef _WIN32
 #include <unistd.h> // for usleep
 #endif
 
@@ -737,7 +737,7 @@ void NetHost::run(bool const autorun)
 			s.get_string
 				("dedicated_motd",
 				 (format
-					(_("This is a dedicated server send \"@%s help\" to get a full list of available commands."))
+					(_("This is a dedicated server. Send \"@%s help\" to get a full list of available commands."))
 					% d->localplayername)
 				.str().c_str());
 
@@ -765,7 +765,7 @@ void NetHost::run(bool const autorun)
 		while (not d->dedicated_start) {
 			handle_network();
 			// TODO this should be improved.
-#ifndef WIN32
+#ifndef _WIN32
 			if (d->clients.empty()) {
 				if (usleep(100000)) // Sleep for 0.1 seconds - there is not anybody connected anyways.
 					return;

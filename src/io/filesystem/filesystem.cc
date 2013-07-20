@@ -42,7 +42,7 @@
 #include <list>
 #include <iterator>
 
-#ifdef WIN32
+#ifdef _WIN32
 #include "log.h"
 #include <windows.h>
 #include <io.h>
@@ -54,7 +54,7 @@
 #include <sys/stat.h>
 #include <unistd.h>
 
-#ifdef WIN32
+#ifdef _WIN32
 #define stat _stat
 #endif
 
@@ -67,7 +67,7 @@
 FileSystem::FileSystem()
 {
 	m_root = "";
-#ifdef WIN32
+#ifdef _WIN32
 	m_filesep = '\\';
 #else
 	m_filesep = '/';
@@ -92,7 +92,7 @@ bool FileSystem::pathIsAbsolute(const std::string & path) const {
 	if (path.compare(0, m_root.size(), m_root))
 		return false;
 
-#ifdef WIN32
+#ifdef _WIN32
 	if (path.size() >= 3 && path[1] == ':' && path[2] == '\\') //"C:\"
 	{
 		return true;
@@ -117,7 +117,7 @@ std::string FileSystem::fixCrossFile(const std::string & path) const {
 	std::string temp;
 	for (uint32_t i = 0; i < path_size; ++i) {
 		temp = path.at(i);
-#ifdef WIN32
+#ifdef _WIN32
 		if (temp == ":")
 			fixedPath.at(i) = '-';
 		else if (temp == "/")
@@ -159,7 +159,7 @@ std::string FileSystem::getWorkingDirectory() const {
 std::string FileSystem::GetHomedir()
 {
 	std::string homedir;
-#ifdef WIN32
+#ifdef _WIN32
 	// trying to get it compatible to ALL windows versions...
 	// Could anybody please hit the Megasoft devs for not keeping
 	// their own "standards"?
@@ -243,7 +243,7 @@ std::string FileSystem::FS_CanonicalizeName(std::string path) const {
 	std::list<std::string> components;
 	std::list<std::string>::iterator i;
 
-#ifdef WIN32
+#ifdef _WIN32
 	// remove all slashes with backslashes so following can work.
 	for (uint32_t j = 0; j < path.size(); ++j) {
 		if (path[j] == '/')
@@ -280,7 +280,7 @@ std::string FileSystem::FS_CanonicalizeName(std::string path) const {
 			//remove double dot and the preceding component (if any)
 			else if (*str == '.' && *(str + 1) == '\0') {
 				if (i != components.begin()) {
-#ifdef WIN32
+#ifdef _WIN32
 					// On windows don't remove driveletter in this error condition
 					if (--i != components.begin())
 						i = components.erase(i);
@@ -299,7 +299,7 @@ std::string FileSystem::FS_CanonicalizeName(std::string path) const {
 
 	std::string canonpath;
 	canonpath.reserve(path.length());
-#ifndef WIN32
+#ifndef _WIN32
 	for (i = components.begin(); i != components.end(); ++i) {
 		canonpath.push_back('/');
 		canonpath += *i;
@@ -394,7 +394,7 @@ throw (FileType_error, FileNotFound_error, FileAccessDenied_error)
 		 "cannot create virtual filesystem from file or directory");
 }
 
-#ifdef WIN32
+#ifdef _WIN32
 /// hack that is unfortunately needed for windows to check whether Widelands
 /// can write in the directory
 bool FileSystem::check_writeable_for_data(char const * const path)

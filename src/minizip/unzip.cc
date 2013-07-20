@@ -81,14 +81,8 @@ ftp://ftp.info-zip.org/pub/infozip/license.html
 #define UNZ_BUFSIZE (16384)
 #endif
 
-#ifndef UNZ_MAXFILENAMEINZIP
-#define UNZ_MAXFILENAMEINZIP (256)
-#endif
-
 #define SIZECENTRALDIRITEM (0x2e)
 #define SIZEZIPLOCALHEADER (0x1e)
-
-
 
 
 const char unz_copyright[] =
@@ -246,16 +240,6 @@ local int32_t unzlocal_getLong
 	return err;
 }
 
-
-#ifdef  CASESENSITIVITYDEFAULT_NO
-#define CASESENSITIVITYDEFAULTVALUE 2
-#else
-#define CASESENSITIVITYDEFAULTVALUE 1
-#endif
-
-#ifndef STRCMPCASENOSENTIVEFUNCTION
-#define STRCMPCASENOSENTIVEFUNCTION strcmpcasenosensitive_internal
-#endif
 
 #ifndef BUFREADCOMMENT
 #define BUFREADCOMMENT (0x400)
@@ -1303,15 +1287,6 @@ extern int32_t ZEXPORT unzCloseCurrentFile (unzFile file)
 #define Z_BUFSIZE (16384)
 #endif
 
-#ifndef Z_MAXFILENAMEINZIP
-#define Z_MAXFILENAMEINZIP (256)
-#endif
-
-/*
-#define SIZECENTRALDIRITEM (0x2e)
-#define SIZEZIPLOCALHEADER (0x1e)
-*/
-
 /* I've found an old Unix (a SunOS 4.1.3_U1) without all SEEK_* defined.... */
 
 #ifndef SEEK_CUR
@@ -1343,9 +1318,6 @@ const char zip_copyright[] =
 #define LOCALHEADERMAGIC    (0x04034b50)
 #define CENTRALHEADERMAGIC  (0x02014b50)
 #define ENDHEADERMAGIC      (0x06054b50)
-
-#define FLAG_LOCALHEADER_OFFSET (0x06)
-#define CRC_LOCALHEADER_OFFSET  (0x0e)
 
 #define SIZECENTRALHEADER (0x2e) /* 46 */
 

@@ -72,7 +72,7 @@
 #include <boost/scoped_ptr.hpp>
 #include <sys/types.h>
 #include <sys/stat.h>
-#ifndef WIN32
+#ifndef _WIN32
 #include <csignal>
 #endif
 
@@ -89,7 +89,7 @@
 #endif
 
 #ifndef NDEBUG
-#ifndef WIN32
+#ifndef _WIN32
 int32_t WLApplication::pid_me   = 0;
 int32_t WLApplication::pid_peer = 0;
 volatile int32_t WLApplication::may_run = 0;
@@ -111,7 +111,7 @@ using std::endl;
 void WLApplication::setup_searchpaths(std::string argv0)
 {
 	try {
-#if defined (__APPLE__) || defined(WIN32)
+#if defined (__APPLE__) || defined(_WIN32)
 		// on mac and windows, the default data dir is relative to the executable directory
 		std::string s = get_executable_path();
 		log("Adding executable directory to search path\n");
@@ -263,11 +263,8 @@ m_mouse_position       (0, 0),
 m_mouse_locked         (0),
 m_mouse_compensate_warp(0, 0),
 m_should_die           (false),
-m_gfx_w(0), m_gfx_h(0), m_gfx_bpp(0),
-m_gfx_fullscreen       (false),
-m_gfx_opengl           (true),
 m_default_datadirs     (true),
-#ifdef WIN32
+#ifdef _WIN32
 m_homedir(FileSystem::GetHomedir() + "\\.widelands"),
 #else
 m_homedir(FileSystem::GetHomedir() + "/.widelands"),
@@ -470,7 +467,6 @@ void WLApplication::run()
 			throw;
 		}
 	} else {
-
 		g_sound_handler.start_music("intro");
 
 		{
@@ -810,41 +806,31 @@ void WLApplication::set_input_grab(bool grab)
 }
 
 /**
- * Initialize the graphics subsystem (or shutdown, if system == GFXSYS_NONE)
+ * Initialize the graphics subsystem (or shutdown, if w and h are 0)
  * with the given resolution.
  * Throws an exception on failure.
- *
- * \note Because of the way pictures are handled now, this function must not be
- * called while UI elements are active.
- *
- * \todo Ensure that calling this with active UI elements does barf
- * \todo Document parameters
  */
-
 void WLApplication::init_graphics
 	(const int32_t w, const int32_t h, const int32_t bpp,
 	 const bool fullscreen, const bool opengl)
 {
-	if
-		(w == m_gfx_w && h == m_gfx_h && bpp == m_gfx_bpp &&
-		 fullscreen == m_gfx_fullscreen &&
-		 opengl == m_gfx_opengl)
+	if (!w && !h) { // shutdown.
+		delete g_gr;
+		g_gr = 0;
 		return;
+	}
+	assert(w > 0 && h > 0);
 
-	delete g_gr;
-	g_gr = 0;
-
-	m_gfx_w = w;
-	m_gfx_h = h;
-	m_gfx_bpp = bpp;
-	m_gfx_fullscreen = fullscreen;
-	m_gfx_opengl = opengl;
-
-
-	// If we are not to be shut down
-	if (w && h) {
-		g_gr = new Graphic
-			(w, h, bpp, fullscreen, opengl);
+	if (!g_gr) {
+		g_gr = new Graphic();
+		g_gr->initialize(w, h, bpp, fullscreen, opengl);
+	} else {
+		if
+			(g_gr->get_xres() != w || g_gr->get_yres() != h || g_gr->get_bpp() != bpp
+				|| g_gr->is_fullscreen() != fullscreen || g_opengl != opengl)
+		{
+			g_gr->initialize(w, h, bpp, fullscreen, opengl);
+		}
 	}
 }
 
@@ -856,7 +842,7 @@ void WLApplication::refresh_graphics()
 	init_graphics
 		(s.get_int("xres", XRES),
 		 s.get_int("yres", YRES),
-		 s.get_int("depth", 16),
+		 s.get_int("depth", 32),
 		 s.get_bool("fullscreen", false),
 		 s.get_bool("opengl", true));
 }
@@ -881,14 +867,12 @@ bool WLApplication::init_settings() {
 	set_input_grab(s.get_bool("inputgrab", false));
 	set_mouse_swap(s.get_bool("swapmouse", false));
 
-	m_gfx_fullscreen = s.get_bool("fullscreen", false);
-
-	m_gfx_opengl = s.get_bool("opengl", true);
-
 	// KLUDGE!
 	// Without this the following config options get dropped by check_used().
 	// Profile needs support for a Syntax definition to solve this in a
 	// sensible way
+	s.get_bool("fullscreen");
+	s.get_bool("opengl");
 	s.get_int("xres");
 	s.get_int("yres");
 	s.get_int("border_snap_distance");
@@ -985,7 +969,7 @@ std::string WLApplication::get_executable_path()
 	executabledir = std::string(buffer, size);
 	executabledir.resize(executabledir.rfind('/') + 1);
 #endif
-#ifdef WIN32
+#ifdef _WIN32
 	char filename[_MAX_PATH + 1] = {0};
 	GetModuleFileName(0, filename, _MAX_PATH);
 	executabledir = filename;
@@ -1003,7 +987,7 @@ std::string WLApplication::get_executable_path()
  */
 std::string WLApplication::find_relative_locale_path(std::string localedir)
 {
-#ifndef WIN32
+#ifndef _WIN32
 	if (localedir[0] != '/') {
 		std::string executabledir = get_executable_path();
 		executabledir+= localedir;
@@ -1036,7 +1020,7 @@ bool WLApplication::init_hardware() {
 	//  NOTE privacy/powermanagement settings on the sly. The workaround was
 	//  NOTE introduced in SDL 1.2.13, so it will not work for older versions.
 	//  NOTE -> there is no such stdlib-function on win32
-	#ifndef WIN32
+	#ifndef _WIN32
 	setenv("SDL_VIDEO_ALLOW_SCREENSAVER", "1", 0);
 	#endif
 
@@ -1048,7 +1032,7 @@ bool WLApplication::init_hardware() {
 #if defined(__linux__) || defined(__FreeBSD__) || defined(__OpenBSD__)
 	videomode.push_back("x11");
 #endif
-#ifdef WIN32
+#ifdef _WIN32
 	videomode.push_back("windib");
 #endif
 #ifdef __APPLE__
@@ -1085,12 +1069,7 @@ bool WLApplication::init_hardware() {
 	SDL_EnableUNICODE(1); //needed by helper.h:is_printable()
 	SDL_EnableKeyRepeat(SDL_DEFAULT_REPEAT_DELAY, SDL_DEFAULT_REPEAT_INTERVAL);
 
-	uint32_t xres = s.get_int("xres", XRES);
-	uint32_t yres = s.get_int("yres", YRES);
-
-	init_graphics
-		(xres, yres, s.get_int("depth", 16),
-		 m_gfx_fullscreen, m_gfx_opengl);
+	refresh_graphics();
 
 	// Start the audio subsystem
 	// must know the locale before calling this!
@@ -1107,7 +1086,7 @@ void terminate (int) {
 	 log
 		  (_("Waited 5 seconds to close audio. Problems here so killing Widelands."
 			  " Update your sound driver and/or SDL to fix this problem\n"));
-#ifndef WIN32
+#ifndef _WIN32
 	raise(SIGKILL);
 #endif
 }
@@ -1125,7 +1104,7 @@ void WLApplication::shutdown_hardware()
 	SDL_QuitSubSystem
 		(SDL_INIT_TIMER|SDL_INIT_VIDEO|SDL_INIT_CDROM|SDL_INIT_JOYSTICK);
 
-#ifndef WIN32
+#ifndef _WIN32
 	// SOUND can lock up with buggy SDL/drivers. we try to do the right thing
 	// but if it doesn't happen we will kill widelands anyway in 5 seconds.
 	signal(SIGALRM, terminate);
@@ -1232,10 +1211,10 @@ void WLApplication::handle_commandline_parameters() throw (Parameter_error)
 
 	if (m_commandline.count("double")) {
 #ifndef NDEBUG
-#ifndef WIN32
+#ifndef _WIN32
 		init_double_game();
 #else
-		wout << _("\nSorry, no double-instance debugging on WIN32.\n\n");
+		wout << _("\nSorry, no double-instance debugging on _WIN32.\n\n");
 #endif
 #else
 		wout << _("--double is disabled. This is not a debug build!") << endl;
@@ -1451,7 +1430,7 @@ void WLApplication::show_usage()
 			 "                      panel.\n"
 			 "\n");
 #ifndef NDEBUG
-#ifndef WIN32
+#ifndef _WIN32
 	wout
 		<<
 		_
@@ -1470,7 +1449,7 @@ void WLApplication::show_usage()
 }
 
 #ifndef NDEBUG
-#ifndef WIN32
+#ifndef _WIN32
 /**
  * Fork off a second game to test network gaming
  *
@@ -2351,7 +2330,7 @@ void WLApplication::cleanup_replays()
 bool WLApplication::redirect_output(std::string path)
 {
 	if (path.empty()) {
-#ifdef WIN32
+#ifdef _WIN32
 		char module_name[MAX_PATH];
 		unsigned int name_length = GetModuleFileName(NULL, module_name, MAX_PATH);
 		path = module_name;

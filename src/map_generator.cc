@@ -776,7 +776,7 @@ void MapGenerator::create_random_map()
 
 	// Random placement of starting positions
 	assert(m_mapInfo.numPlayers);
-	Player_Number pn[m_mapInfo.numPlayers];
+	std::vector<Player_Number> pn(m_mapInfo.numPlayers);
 	for (Player_Number n = 1; n <= m_mapInfo.numPlayers; ++n) {
 		bool okay = false;
 		// This is a kinda dump algorithm -> we generate a random number and increase it until it fits.

@@ -19,7 +19,7 @@
 
 #include "backtrace.h"
 
-#ifndef WIN32
+#ifndef _WIN32
 #ifndef __APPLE__
 #include <execinfo.h>
 #include <cstdlib>
@@ -28,7 +28,7 @@
 
 std::string get_backtrace() {
 	std::string result("Backtrace:\n");
-#ifndef WIN32
+#ifndef _WIN32
 #ifndef __APPLE__
 #define BACKTRACE_STACKSIZE 24
 

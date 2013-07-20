@@ -202,7 +202,7 @@ struct WLApplication {
 	void replay();
 
 #ifndef NDEBUG
-#ifndef WIN32
+#ifndef _WIN32
 	//not all of these need to be public, but I consider signal handling
 	//a public interface
 	//@{
@@ -286,21 +286,6 @@ protected:
 
 	///true if an external entity wants us to quit
 	bool   m_should_die;
-
-	///The Widelands window's width in pixels
-	int32_t    m_gfx_w;
-
-	///The Widelands window's height in pixels
-	int32_t    m_gfx_h;
-
-	///The Widelands window's bits per pixel
-	int32_t    m_gfx_bpp;
-
-	///If true Widelands is (should be, we never know ;-) running
-	///in a fullscreen window
-	bool   m_gfx_fullscreen;
-
-	bool   m_gfx_opengl;
 
 	//do we want to search the default places for widelands installs
 	bool   m_default_datadirs;

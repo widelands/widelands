@@ -22,6 +22,7 @@
 #include <list>
 
 #include <SDL_ttf.h>
+#include <boost/algorithm/string.hpp>
 
 #include "graphic.h"
 #include "log.h"
@@ -111,9 +112,13 @@ Font_Handler::Font_Handler() :
 
 
 Font_Handler::~Font_Handler() {
+	flush();
 	Font::shutdown();
 }
 
+void Font_Handler::flush() {
+	d.reset(new Data);
+}
 
 /*
  * Returns the height of the font, in pixels.
@@ -208,15 +213,18 @@ void Font_Handler::draw_text
 	 Align align,
 	 uint32_t caret)
 {
-	const LineCacheEntry & lce = d->get_line(style, text);
+	// Erase every backslash in front of brackets
+	std::string copytext = boost::replace_all_copy(text, "\\<", "<");
+	boost::replace_all(copytext, "\\>", ">");
+	const LineCacheEntry & lce = d->get_line(style, copytext);
 
 	UI::correct_for_align(align, lce.width + 2 * LINE_MARGIN, lce.height, &dstpoint);
 
 	if (lce.image)
 		dst.blit(Point(dstpoint.x + LINE_MARGIN, dstpoint.y), lce.image);
 
-	if (caret <= text.size())
-		draw_caret(dst, style, dstpoint, text, caret);
+	if (caret <= copytext.size())
+		draw_caret(dst, style, dstpoint, copytext, caret);
 }
 
 /**

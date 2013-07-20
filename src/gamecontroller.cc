@@ -172,7 +172,7 @@ void SinglePlayerGameController::send_local(const std::string& msg)
 	ChatProvider::send(c);
 }
 
-void SinglePlayerGameController::send(const std::string& msg)
+void SinglePlayerGameController::send(const std::string& /* msg */)
 {
 	log("SinglePlayerGameController:: Cannot send chat messages in single player game!");
 }

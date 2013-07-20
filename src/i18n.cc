@@ -34,7 +34,7 @@
 #  define SETLOCALE libintl_setlocale
 # endif // LIBINTL_VERSION
 #else // __APPLE__
-# if defined WIN32
+# if defined _WIN32
 #  define SETLOCALE setlocale
 # else
 #  define SETLOCALE std::setlocale
