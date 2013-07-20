@@ -111,9 +111,13 @@ Font_Handler::Font_Handler() :
 
 
 Font_Handler::~Font_Handler() {
+	flush();
 	Font::shutdown();
 }
 
+void Font_Handler::flush() {
+	d.reset(new Data);
+}
 
 /*
  * Returns the height of the font, in pixels.

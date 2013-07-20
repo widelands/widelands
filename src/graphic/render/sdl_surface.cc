@@ -26,7 +26,8 @@
 SDLSurface::~SDLSurface() {
 	assert(m_surface);
 
-	SDL_FreeSurface(m_surface);
+	if (m_free_surface_on_delete)
+		SDL_FreeSurface(m_surface);
 }
 
 const SDL_PixelFormat & SDLSurface::format() const {

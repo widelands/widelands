@@ -498,6 +498,13 @@ struct HostChatProvider : public ChatProvider {
 		h->send(c);
 	}
 
+	void send_local(const std::string & msg) {
+		ChatMessage c;
+		c.time = time(0);
+		c.msg = msg;
+		ChatProvider::send(c);
+	}
+
 	const std::vector<ChatMessage> & getMessages() const {
 		return messages;
 	}
@@ -730,7 +737,7 @@ void NetHost::run(bool const autorun)
 			s.get_string
 				("dedicated_motd",
 				 (format
-					(_("This is a dedicated server send \"@%s help\" to get a full list of available commands."))
+					(_("This is a dedicated server. Send \"@%s help\" to get a full list of available commands."))
 					% d->localplayername)
 				.str().c_str());
 

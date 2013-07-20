@@ -92,10 +92,6 @@ struct Game : Editor_Game_Base {
 	friend struct ::Game_Main_Menu_Load_Game;
 	friend struct ::WLApplication;
 
-	// This friend is for legacy reasons and should probably be removed
-	// at least after summer 2008, maybe even earlier.
-	friend struct Game_Interactive_Player_Data_Packet;
-
 	Game();
 	~Game();
 

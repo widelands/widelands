@@ -457,7 +457,6 @@ int ProductionSite::warp_worker
 
 	if (upcast(Game, game, &egbase))
 		try_start_working(*game);
-
 	return 0;
 }
 
@@ -583,6 +582,7 @@ void ProductionSite::request_worker_callback
 	// the last one we need to start working.
 	w->start_task_idle(game, 0, -1);
 	psite.try_start_working(game);
+	psite.workers_changed();
 }
 
 
@@ -874,6 +874,7 @@ void ProductionSite::program_end(Game & game, Program_Result const result)
 			for (uint32_t i = descr().nr_working_positions(); i;)
 				m_working_positions[--i].worker->gain_experience(game);
 			m_result_buffer[0] = '\0';
+			Building::workers_changed();
 		}
 		calc_statistics();
 		break;

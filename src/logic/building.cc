@@ -19,6 +19,7 @@
 
 #include <cstdio>
 #include <sstream>
+#include <boost/foreach.hpp>
 
 #include "upcast.h"
 #include "wexception.h"
@@ -436,6 +437,9 @@ void Building::cleanup(Editor_Game_Base & egbase)
 	}
 
 	PlayerImmovable::cleanup(egbase);
+
+	BOOST_FOREACH(boost::signals::connection& c, options_window_connections)
+		c.disconnect();
 }
 
 
@@ -855,6 +859,7 @@ void Building::add_worker(Worker & worker) {
 			set_seeing(true);
 	}
 	PlayerImmovable::add_worker(worker);
+	workers_changed();
 }
 
 
@@ -862,6 +867,7 @@ void Building::remove_worker(Worker & worker) {
 	PlayerImmovable::remove_worker(worker);
 	if (not get_workers().size())
 		set_seeing(false);
+	workers_changed();
 }
 
 /**

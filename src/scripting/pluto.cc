@@ -40,8 +40,6 @@ int luna_restore_object(lua_State * L);
 
 #define PLUTO_TPERMANENT 101
 
-#define verify(x) { int v = (int)((x)); v=v; lua_assert(v); }
-
 typedef struct PersistInfo_t {
 	lua_State * L;
 	int counter;

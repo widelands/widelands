@@ -60,6 +60,8 @@ struct Interactive_Base : public Map_View, public DebugConsole::Handler {
 	virtual void reference_player_tribe(Widelands::Player_Number, const void * const) {}
 
 	bool m_show_workarea_preview;
+	Overlay_Manager::Job_Id show_work_area(const Workarea_Info & workarea_info, Widelands::Coords coords);
+	void hide_work_area(Overlay_Manager::Job_Id job_id);
 
 	//  point of view for drawing
 	virtual Widelands::Player * get_player() const throw () = 0;
@@ -151,6 +153,7 @@ private:
 	Overlay_Manager::Job_Id m_road_buildhelp_overlay_jobid;
 	Widelands::CoordPath  * m_buildroad;         //  path for the new road
 	Widelands::Player_Number m_road_build_player;
+	const Image* workarea_pics[NUMBER_OF_WORKAREA_PICS];
 
 protected:
 	void toggle_minimap();
