@@ -164,12 +164,21 @@ set (PARAMETER_COMPILERFLAG_STRICT "-Werror -Wno-error=old-style-cast -Wno-error
 include(CheckCXXCompilerFlag) #this include should be safe
 
 # Enable c++11 features.
-set (PARAMETER_COMPILERFLAG_CXXSTD "-std=c++11")
+if (NOT WIN32)
+  set (PARAMETER_COMPILERFLAG_CXXSTD "-std=c++11")
+else()
+  set (PARAMETER_COMPILERFLAG_CXXSTD "-std=gnu++11")
+endif()
+
 if(CMAKE_COMPILER_IS_GNUCXX)
-   EXECUTE_PROCESS(COMMAND ${CMAKE_CXX_COMPILER} -dumpversion OUTPUT_VARIABLE GCC_VERSION)
-   if (GCC_VERSION VERSION_LESS 4.7)
+  EXECUTE_PROCESS(COMMAND ${CMAKE_CXX_COMPILER} -dumpversion OUTPUT_VARIABLE GCC_VERSION)
+  if (GCC_VERSION VERSION_LESS 4.7)
+    if (NOT WIN32)
       set (PARAMETER_COMPILERFLAG_CXXSTD "-std=c++0x")
-   endif()
+    else()
+      set (PARAMETER_COMPILERFLAG_CXXSTD "-std=gnu++0x")
+    endif()
+  endif()
 endif()
 
 CHECK_CXX_COMPILER_FLAG(${PARAMETER_COMPILERFLAG_CXXSTD} Compiler_std_supported)
