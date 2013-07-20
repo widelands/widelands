@@ -470,7 +470,7 @@ int L_Player::message_box(lua_State * L) {
 	uint32_t cspeed = game.gameController()->desiredSpeed();
 	game.gameController()->setDesiredSpeed(0);
 
-	game.save_handler().set_allow_autosaving(false);
+	game.save_handler().set_allow_saving(false);
 
 	Story_Message_Box * mb =
 		new Story_Message_Box
@@ -486,7 +486,7 @@ int L_Player::message_box(lua_State * L) {
 
 	game.gameController()->setDesiredSpeed(cspeed);
 
-	game.save_handler().set_allow_autosaving(true);
+	game.save_handler().set_allow_saving(true);
 
 	return 1;
 }
@@ -1062,8 +1062,10 @@ int L_Objective::set_visible(lua_State * L) {
 	.. attribute:: done
 
 		(RW) defines if this objective is already fulfilled. If done is
-		:const`true`, the objective will not be shown to the user, no matter what
-		:attr:`visible` is set to.
+		:const`true`, the objective will not be shown to the user, no matter what.
+		:attr:`visible` is set to. A savegame will be created when this attribute
+		is changed to :const`true`.
+
 */
 int L_Objective::get_done(lua_State * L) {
 	Objective & o = get(L, get_game(L));
@@ -1073,6 +1075,19 @@ int L_Objective::get_done(lua_State * L) {
 int L_Objective::set_done(lua_State * L) {
 	Objective & o = get(L, get_game(L));
 	o.set_done(luaL_checkboolean(L, -1));
+
+	const int32_t autosave = g_options.pull_section("global").get_int("autosave", 0);
+	if (autosave <= 0) {
+		return 0;
+	}
+
+	if (o.done()) {
+		std::string filename = get_egbase(L).get_map()->get_name();
+		char buffer[128];
+		snprintf(buffer, sizeof(buffer), _(" (achieved %s)"), o.descname().c_str());
+		filename.append(buffer);
+		get_game(L).save_handler().request_save(filename);
+	}
 	return 0;
 }
 

@@ -138,7 +138,7 @@ void ProgressWindow::step(const std::string & description) {
 	UI::g_fh->draw_text(rt, ts, m_label_center, description, Align_Center);
 	g_gr->update_rectangle(m_label_rectangle);
 
-#ifdef WIN32
+#ifdef _WIN32
 		// Pump events to prevent "not responding" on windows
 		SDL_PumpEvents();
 #endif

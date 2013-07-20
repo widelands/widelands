@@ -59,7 +59,7 @@
 #include <cstring>
 #include <string>
 
-#ifndef WIN32
+#ifndef _WIN32
 #include <unistd.h> // for usleep
 #else
 #include <windows.h>
@@ -562,7 +562,7 @@ bool Game::run
 	if (loader_ui) {
 		load_graphics(*loader_ui);
 
-#ifdef WIN32
+#ifdef _WIN32
 		//  Clear the event queue before starting game because we don't want
 		//  to handle events at game start that happened during loading procedure.
 		SDL_Event event;
@@ -593,7 +593,7 @@ bool Game::run
 		//handle network
 		while (m_state == gs_running) {
 			// TODO this should be improved.
-#ifndef WIN32
+#ifndef _WIN32
 			if (usleep(100) == -1)
 				break;
 #else

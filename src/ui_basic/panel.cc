@@ -227,7 +227,7 @@ int32_t Panel::run()
 			check_child_death();
 
 #ifndef NDEBUG
-#ifndef WIN32
+#ifndef _WIN32
 		WLApplication::yield_double_game ();
 #endif
 #endif

@@ -86,6 +86,6 @@ string random_string(const string& chars, int nlen) {
 	for (int i = 0; i < nlen; ++i) {
 		buffer[i] = chars[index_dist(random_generator)];
 	}
-	return string(buffer.get(),nlen);
+	return string(buffer.get(), nlen);
 }
 
