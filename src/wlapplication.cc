@@ -72,7 +72,7 @@
 #include <boost/scoped_ptr.hpp>
 #include <sys/types.h>
 #include <sys/stat.h>
-#ifndef WIN32
+#ifndef _WIN32
 #include <csignal>
 #endif
 
@@ -89,7 +89,7 @@
 #endif
 
 #ifndef NDEBUG
-#ifndef WIN32
+#ifndef _WIN32
 int32_t WLApplication::pid_me   = 0;
 int32_t WLApplication::pid_peer = 0;
 volatile int32_t WLApplication::may_run = 0;
@@ -111,7 +111,7 @@ using std::endl;
 void WLApplication::setup_searchpaths(std::string argv0)
 {
 	try {
-#if defined (__APPLE__) || defined(WIN32)
+#if defined (__APPLE__) || defined(_WIN32)
 		// on mac and windows, the default data dir is relative to the executable directory
 		std::string s = get_executable_path();
 		log("Adding executable directory to search path\n");
@@ -264,7 +264,7 @@ m_mouse_locked         (0),
 m_mouse_compensate_warp(0, 0),
 m_should_die           (false),
 m_default_datadirs     (true),
-#ifdef WIN32
+#ifdef _WIN32
 m_homedir(FileSystem::GetHomedir() + "\\.widelands"),
 #else
 m_homedir(FileSystem::GetHomedir() + "/.widelands"),
@@ -969,7 +969,7 @@ std::string WLApplication::get_executable_path()
 	executabledir = std::string(buffer, size);
 	executabledir.resize(executabledir.rfind('/') + 1);
 #endif
-#ifdef WIN32
+#ifdef _WIN32
 	char filename[_MAX_PATH + 1] = {0};
 	GetModuleFileName(0, filename, _MAX_PATH);
 	executabledir = filename;
@@ -987,7 +987,7 @@ std::string WLApplication::get_executable_path()
  */
 std::string WLApplication::find_relative_locale_path(std::string localedir)
 {
-#ifndef WIN32
+#ifndef _WIN32
 	if (localedir[0] != '/') {
 		std::string executabledir = get_executable_path();
 		executabledir+= localedir;
@@ -1020,7 +1020,7 @@ bool WLApplication::init_hardware() {
 	//  NOTE privacy/powermanagement settings on the sly. The workaround was
 	//  NOTE introduced in SDL 1.2.13, so it will not work for older versions.
 	//  NOTE -> there is no such stdlib-function on win32
-	#ifndef WIN32
+	#ifndef _WIN32
 	setenv("SDL_VIDEO_ALLOW_SCREENSAVER", "1", 0);
 	#endif
 
@@ -1032,7 +1032,7 @@ bool WLApplication::init_hardware() {
 #if defined(__linux__) || defined(__FreeBSD__) || defined(__OpenBSD__)
 	videomode.push_back("x11");
 #endif
-#ifdef WIN32
+#ifdef _WIN32
 	videomode.push_back("windib");
 #endif
 #ifdef __APPLE__
@@ -1086,7 +1086,7 @@ void terminate (int) {
 	 log
 		  (_("Waited 5 seconds to close audio. Problems here so killing Widelands."
 			  " Update your sound driver and/or SDL to fix this problem\n"));
-#ifndef WIN32
+#ifndef _WIN32
 	raise(SIGKILL);
 #endif
 }
@@ -1104,7 +1104,7 @@ void WLApplication::shutdown_hardware()
 	SDL_QuitSubSystem
 		(SDL_INIT_TIMER|SDL_INIT_VIDEO|SDL_INIT_CDROM|SDL_INIT_JOYSTICK);
 
-#ifndef WIN32
+#ifndef _WIN32
 	// SOUND can lock up with buggy SDL/drivers. we try to do the right thing
 	// but if it doesn't happen we will kill widelands anyway in 5 seconds.
 	signal(SIGALRM, terminate);
@@ -1211,10 +1211,10 @@ void WLApplication::handle_commandline_parameters() throw (Parameter_error)
 
 	if (m_commandline.count("double")) {
 #ifndef NDEBUG
-#ifndef WIN32
+#ifndef _WIN32
 		init_double_game();
 #else
-		wout << _("\nSorry, no double-instance debugging on WIN32.\n\n");
+		wout << _("\nSorry, no double-instance debugging on _WIN32.\n\n");
 #endif
 #else
 		wout << _("--double is disabled. This is not a debug build!") << endl;
@@ -1430,7 +1430,7 @@ void WLApplication::show_usage()
 			 "                      panel.\n"
 			 "\n");
 #ifndef NDEBUG
-#ifndef WIN32
+#ifndef _WIN32
 	wout
 		<<
 		_
@@ -1449,7 +1449,7 @@ void WLApplication::show_usage()
 }
 
 #ifndef NDEBUG
-#ifndef WIN32
+#ifndef _WIN32
 /**
  * Fork off a second game to test network gaming
  *
@@ -2330,7 +2330,7 @@ void WLApplication::cleanup_replays()
 bool WLApplication::redirect_output(std::string path)
 {
 	if (path.empty()) {
-#ifdef WIN32
+#ifdef _WIN32
 		char module_name[MAX_PATH];
 		unsigned int name_length = GetModuleFileName(NULL, module_name, MAX_PATH);
 		path = module_name;

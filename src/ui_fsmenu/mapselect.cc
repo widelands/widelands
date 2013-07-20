@@ -330,7 +330,7 @@ void Fullscreen_Menu_MapSelect::fill_list()
 		//about the absolute filesystem top!) we manually add ".."
 		if (m_curdir != m_basedir) {
 			MapData map;
-	#ifndef WIN32
+	#ifndef _WIN32
 			map.filename = m_curdir.substr(0, m_curdir.rfind('/'));
 	#else
 			map.filename = m_curdir.substr(0, m_curdir.rfind('\\'));

@@ -22,7 +22,7 @@
 
 #include "io/filesystem/disk_filesystem.h"
 
-#ifdef WIN32
+#ifdef _WIN32
 #include <sstream>
 static std::string Win32Path(std::string s)
 {
@@ -48,7 +48,7 @@ static int setenv(const char* envname, const char* envval, int overwrite)
 #endif
 
 BOOST_AUTO_TEST_SUITE(FileSystemTests)
-#ifndef WIN32
+#ifndef _WIN32
 #define TEST_CANONICALIZE_NAME(root, path, expected)                          \
    BOOST_CHECK_EQUAL(RealFSImpl(root).FS_CanonicalizeName(path), expected);
 #else
@@ -123,7 +123,7 @@ BOOST_AUTO_TEST_CASE(test_canonicalize_name) {
 
 	TEST_CANONICALIZE_NAME("/home/test/.", "./path", "/home/test/path");
 
-#ifdef WIN32
+#ifdef _WIN32
 	// Check drive letter handling.
 	BOOST_CHECK_EQUAL(RealFSImpl("C:\\").FS_CanonicalizeName("C:\\"), "C:");
 	BOOST_CHECK_EQUAL(RealFSImpl("C:\\").FS_CanonicalizeName("D:\\"), "C:\\D:");
@@ -131,7 +131,7 @@ BOOST_AUTO_TEST_CASE(test_canonicalize_name) {
 }
 
 // Skip testing tilde expansion on windows.
-#ifndef WIN32
+#ifndef _WIN32
 // ~ gets expanded to $HOME
 BOOST_AUTO_TEST_CASE(test_canonicalize_name_home_expansion) {
 	setenv("HOME", "/my/home", 1);

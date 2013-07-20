@@ -202,7 +202,7 @@ struct WLApplication {
 	void replay();
 
 #ifndef NDEBUG
-#ifndef WIN32
+#ifndef _WIN32
 	//not all of these need to be public, but I consider signal handling
 	//a public interface
 	//@{
