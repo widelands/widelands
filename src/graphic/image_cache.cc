@@ -17,11 +17,11 @@
  *
  */
 
-#include <string>
+#include <cassert>
 #include <map>
+#include <string>
 
 #include <boost/foreach.hpp>
-#include <boost/scoped_ptr.hpp>
 
 #include "image.h"
 #include "image_loader.h"

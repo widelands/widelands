@@ -20,8 +20,6 @@
 #ifndef INTERACTIVE_BASE_H
 #define INTERACTIVE_BASE_H
 
-#include <boost/scoped_ptr.hpp>
-
 #include "debugconsole.h"
 #include "logic/editor_game_base.h"
 #include "logic/map.h"
@@ -118,7 +116,7 @@ private:
 	void roadb_add_overlay   ();
 	void roadb_remove_overlay();
 
-	boost::scoped_ptr<InteractiveBaseInternals> m;
+	std::unique_ptr<InteractiveBaseInternals> m;
 	Widelands::Editor_Game_Base & m_egbase;
 	struct Sel_Data {
 		Sel_Data

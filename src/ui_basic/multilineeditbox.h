@@ -22,7 +22,6 @@
 
 #include "panel.h"
 
-#include <boost/scoped_ptr.hpp>
 #include <boost/signal.hpp>
 
 namespace UI {
@@ -58,7 +57,7 @@ private:
 	void insert(SDL_keysym code);
 
 	struct Data;
-	boost::scoped_ptr<Data> d;
+	std::unique_ptr<Data> d;
 };
 
 }

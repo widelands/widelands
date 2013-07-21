@@ -17,11 +17,12 @@
  *
  */
 
-#include <map>
+#include <cassert>
 #include <list>
+#include <map>
+#include <memory>
 
 #include <SDL.h>
-#include <boost/scoped_ptr.hpp>
 
 #include "surface.h"
 
@@ -51,7 +52,7 @@ private:
 		Entry(Surface* gs, const AccessHistory::iterator& it, bool transient) :
 			surface(gs), is_transient(transient), last_access(SDL_GetTicks()), list_iterator(it) {}
 
-		boost::scoped_ptr<Surface> surface;
+		std::unique_ptr<Surface> surface;
 		bool is_transient;
 		uint32_t last_access;  // Mainly for debugging and analysis.
 		const AccessHistory::iterator list_iterator;  // Only valid if is_transient is true.

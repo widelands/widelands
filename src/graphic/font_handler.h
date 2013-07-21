@@ -20,8 +20,8 @@
 #ifndef FONT_HANDLER_H
 #define FONT_HANDLER_H
 
+#include <memory>
 #include <string>
-#include <boost/scoped_ptr.hpp>
 
 #include "point.h"
 #include "align.h"
@@ -65,7 +65,7 @@ struct Font_Handler {
 
 private:
 	struct Data;
-	boost::scoped_ptr<Data> d;
+	std::unique_ptr<Data> d;
 };
 
 extern Font_Handler * g_fh;

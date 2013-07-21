@@ -470,7 +470,7 @@ void Map_Buildingdata_Data_Packet::read_warehouse
 				// eat the obsolete idle request structures
 				uint32_t nrrequests = fr.Unsigned16();
 				while (nrrequests--) {
-					boost::scoped_ptr<Request> req
+					std::unique_ptr<Request> req
 						(new Request
 						 	(warehouse,
 						 	 Ware_Index::First(),

@@ -69,7 +69,6 @@
 #include "timestring.h"
 
 #include <config.h>
-#include <boost/scoped_ptr.hpp>
 #include <sys/types.h>
 #include <sys/stat.h>
 #ifndef _WIN32
@@ -2023,7 +2022,7 @@ bool WLApplication::new_game()
 			game.set_ibase
 				(new Interactive_Player
 					(game, g_options.pull_section("global"), pn, false, false));
-			boost::scoped_ptr<GameController> ctrl
+			std::unique_ptr<GameController> ctrl
 				(GameController::createSinglePlayer(game, true, pn));
 			UI::ProgressWindow loaderUI;
 			std::vector<std::string> tipstext;
@@ -2201,7 +2200,7 @@ struct ReplayGameController : public GameController {
 
 private:
 	Widelands::Game & m_game;
-	boost::scoped_ptr<Widelands::ReplayReader> m_replayreader;
+	std::unique_ptr<Widelands::ReplayReader> m_replayreader;
 	int32_t m_lastframe;
 	int32_t m_time;
 	uint32_t m_speed;

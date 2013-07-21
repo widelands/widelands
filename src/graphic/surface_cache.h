@@ -20,7 +20,6 @@
 #ifndef SURFACE_CACHE_H
 #define SURFACE_CACHE_H
 
-#include <boost/scoped_ptr.hpp>
 #include <boost/utility.hpp>
 #include <string>
 

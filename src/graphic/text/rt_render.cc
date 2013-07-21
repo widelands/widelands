@@ -25,7 +25,6 @@
 #include <boost/foreach.hpp>
 #include <boost/format.hpp>
 #include <boost/lexical_cast.hpp>
-#include <boost/scoped_ptr.hpp>
 
 #include "graphic/image_cache.h"
 #include "graphic/surface.h"
@@ -583,7 +582,7 @@ private:
 	typedef pair<const FontDescr, IFont*> FontMapPair;
 
 	FontMap m_fontmap;
-	scoped_ptr<IFontLoader> m_fl;
+	std::unique_ptr<IFontLoader> m_fl;
 };
 IFont& FontCache::get_font(NodeStyle& ns) {
 	if (ns.font_style & IFont::BOLD) {
@@ -644,7 +643,7 @@ void TagHandler::m_make_text_nodes(const string& txt, vector<RenderNode*>& nodes
 void TagHandler::emit(vector<RenderNode*>& nodes) {
 	foreach(Child* c, m_tag.childs()) {
 		if (c->tag) {
-			boost::scoped_ptr<TagHandler> th(create_taghandler(*c->tag, m_fc, m_ns, image_cache_));
+			std::unique_ptr<TagHandler> th(create_taghandler(*c->tag, m_fc, m_ns, image_cache_));
 			th->enter();
 			th->emit(nodes);
 		} else
@@ -954,7 +953,7 @@ private:
 	RenderNode* layout_(const string& text, uint16_t width, const TagSet& allowed_tags);
 
 	FontCache m_fc;
-	scoped_ptr<IParser> m_p;
+	std::unique_ptr<IParser> m_p;
 	ImageCache* const image_cache_;  // Not owned.
 	SurfaceCache* const surface_cache_;  // Not owned.
 };
@@ -967,7 +966,7 @@ Renderer::~Renderer() {
 }
 
 RenderNode* Renderer::layout_(const string& text, uint16_t width, const TagSet& allowed_tags) {
-	boost::scoped_ptr<ITag> rt(m_p->parse(text, allowed_tags));
+	std::unique_ptr<ITag> rt(m_p->parse(text, allowed_tags));
 
 	NodeStyle default_style = {
 		"DejaVuSerif", 16,
@@ -989,14 +988,14 @@ RenderNode* Renderer::layout_(const string& text, uint16_t width, const TagSet& 
 }
 
 Surface* Renderer::render(const string& text, uint16_t width, const TagSet& allowed_tags) {
-	boost::scoped_ptr<RenderNode> node(layout_(text, width, allowed_tags));
+	std::unique_ptr<RenderNode> node(layout_(text, width, allowed_tags));
 
 	return node->render(surface_cache_);
 }
 
 IRefMap* Renderer::make_reference_map(const string& text, uint16_t width, const TagSet& allowed_tags) {
 
-	boost::scoped_ptr<RenderNode> node(layout_(text, width, allowed_tags));
+	std::unique_ptr<RenderNode> node(layout_(text, width, allowed_tags));
 	return new RefMap(node->get_references());
 }
 

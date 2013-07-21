@@ -26,8 +26,6 @@
 #include "panel.h"
 #include "scrollbar.h"
 
-#include <boost/scoped_ptr.hpp>
-
 namespace UI {
 struct Scrollbar;
 
@@ -74,7 +72,7 @@ struct Multiline_Textarea : public Panel {
 private:
 	struct Impl;
 
-	boost::scoped_ptr<Impl> m;
+	std::unique_ptr<Impl> m;
 
 	void recompute();
 	void scrollpos_changed(int32_t pixels);

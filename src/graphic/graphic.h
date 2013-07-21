@@ -20,11 +20,11 @@
 #ifndef GRAPHIC_H
 #define GRAPHIC_H
 
-#include <vector>
 #include <map>
+#include <memory>
+#include <vector>
 
 #include <SDL.h>
-#include <boost/scoped_ptr.hpp>
 #include <png.h>
 
 #include "image_cache.h"
@@ -153,13 +153,13 @@ protected:
 
 	/// This is the main screen Surface.
 	/// A RenderTarget for this can be retrieved with get_render_target()
-	boost::scoped_ptr<Surface> screen_;
+	std::unique_ptr<Surface> screen_;
 	/// This saves a copy of the screen SDL_Surface. This is needed for
 	/// opengl rendering as the SurfaceOpenGL does not use it. It allows
 	/// manipulation the screen context.
 	SDL_Surface * m_sdl_screen;
 	/// A RenderTarget for screen_. This is initialized during init()
-	boost::scoped_ptr<RenderTarget> m_rendertarget;
+	std::unique_ptr<RenderTarget> m_rendertarget;
 	/// keeps track which screen regions needs to be redrawn during the next
 	/// update(). Only used for SDL rendering.
 	SDL_Rect m_update_rects[MAX_RECTS];
@@ -171,16 +171,16 @@ protected:
 	GraphicCaps m_caps;
 
 	/// The class that gets images from disk.
-	boost::scoped_ptr<ImageLoaderImpl> image_loader_;
+	std::unique_ptr<ImageLoaderImpl> image_loader_;
 	/// Volatile cache of Hardware dependant surfaces.
-	boost::scoped_ptr<SurfaceCache> surface_cache_;
+	std::unique_ptr<SurfaceCache> surface_cache_;
 	/// Non-volatile cache of hardware independent images. The use the
 	/// surface_cache_ to cache their pixel data.
-	boost::scoped_ptr<ImageCache> image_cache_;
+	std::unique_ptr<ImageCache> image_cache_;
 
 	// The texture needed to draw roads.
-	boost::scoped_ptr<Surface> pic_road_normal_;
-	boost::scoped_ptr<Surface> pic_road_busy_;
+	std::unique_ptr<Surface> pic_road_normal_;
+	std::unique_ptr<Surface> pic_road_busy_;
 
 	std::vector<Texture *> m_maptextures;
 	std::vector<AnimationGfx *> m_animations;
