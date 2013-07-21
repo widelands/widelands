@@ -25,12 +25,14 @@
 #include "upcast.h"
 #include "wexception.h"
 
-#include "graphic/animation.h"
 #include "economy/wares_queue.h"
 #include "game.h"
+#include "graphic/animation.h"
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
 #include "sound/sound_handler.h"
+#include "ui_basic/window.h"
+#include "wui/interactive_gamebase.h"
 #include "tribe.h"
 #include "worker.h"
 
@@ -86,14 +88,9 @@ Print completion percentage.
 std::string ConstructionSite::get_statistics_string()
 {
 	unsigned int percent = (get_built_per64k() * 100) >> 16;
-
-	std::string clr = UI_FONT_CLR_OK_HEX;
-	if (percent <= 25) clr = UI_FONT_CLR_BAD_HEX;
-	else if (percent >= 75) clr = UI_FONT_CLR_GOOD_HEX;
-
-	std::string perc_s = (boost::format("<font color=%s>%i</font>") % clr % percent).str();
-
-	return (boost::format(_("%s%% built")) % perc_s.c_str()).str();
+	std::string perc_s =
+		(boost::format("<font color=%1$s>%2$i%% built</font>") % UI_FONT_CLR_DARK_HEX % percent).str();
+	return perc_s;
 }
 
 /*
@@ -102,9 +99,11 @@ Access to the wares queues by id
 =======
 */
 WaresQueue & ConstructionSite::waresqueue(Ware_Index const wi) {
-	container_iterate_const(Wares, m_wares, i)
-		if ((*i.current)->get_ware() == wi)
+	container_iterate_const(Wares, m_wares, i) {
+		if ((*i.current)->get_ware() == wi) {
 			return **i.current;
+		}
+	}
 	throw wexception
 		("%s (%u) (building %s) has no WaresQueue for %u",
 		 name().c_str(), serial(), m_building->name().c_str(), wi.value());
@@ -182,6 +181,14 @@ void ConstructionSite::cleanup(Editor_Game_Base & egbase)
 		if (Worker * const builder = m_builder.get(egbase)) {
 			builder->reset_tasks(ref_cast<Game, Editor_Game_Base>(egbase));
 			builder->set_location(&b);
+		}
+		// Open the new building window if needed
+		if (m_optionswindow) {
+			Point window_position = m_optionswindow->get_pos();
+			hide_options();
+			Interactive_GameBase & igbase =
+				ref_cast<Interactive_GameBase, Interactive_Base>(*egbase.get_ibase());
+			b.show_options(igbase, false, window_position);
 		}
 	}
 }

@@ -256,7 +256,7 @@ protected:  // TrainingSite must have access to this stuff
 	Input_Queues m_input_queues; ///< input queues for all inputs
 	std::vector<bool>        m_statistics;
 	bool                     m_statistics_changed;
-	char                     m_statistics_buffer[40];
+	char                     m_statistics_buffer[128];
 	char                     m_result_buffer   [213];
 	uint8_t                  m_last_stat_percent;
 	bool                     m_is_stopped;

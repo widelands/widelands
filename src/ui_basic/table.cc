@@ -293,6 +293,10 @@ void Table<void *>::draw(RenderTarget & dst)
 				point.x += picw;
 			}
 
+			if (entry_string.empty()) {
+				curx += curw;
+				continue;
+			}
 			const Image* entry_text_im = UI::g_fh1->render(as_uifont(entry_string, m_fontsize));
 			uint16_t text_width = entry_text_im->width();
 			if (alignment & Align_Right) {
