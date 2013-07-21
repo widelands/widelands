@@ -57,7 +57,7 @@ struct MultiPlayerSetupGroup : public UI::Panel {
 
 private:
 	GameSettingsProvider   * const s;
-	boost::scoped_ptr<NetworkPlayerSettingsBackend> npsb;
+	std::unique_ptr<NetworkPlayerSettingsBackend> npsb;
 	std::vector<MultiPlayerClientGroup *> c;
 	std::vector<MultiPlayerPlayerGroup *> p;
 	UI::Box                  clientbox, playerbox;

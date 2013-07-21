@@ -139,8 +139,9 @@ Game_Main_Menu_Save_Game::Game_Main_Menu_Save_Game
 	}
 
 	m_editbox->focus();
-	if (!parent.game().get_ipl()->is_multiplayer()) {
-		// Pause the game
+	if (parent.game().get_ipl() && !parent.game().get_ipl()->is_multiplayer()) {
+		// Pause the game only if we are part of the game
+		// and not in multiplayer
 		parent.game().gameController()->setPaused(true);
 	}
 }
@@ -161,7 +162,11 @@ void Game_Main_Menu_Save_Game::selected(uint32_t) {
 	}
 	m_button_ok->set_enabled(true);
 
-	m_mapname.set_text(gpdp.get_mapname());
+	//Try to translate the map name.
+	{
+		i18n::Textdomain td("maps");
+		m_mapname.set_text(_(gpdp.get_mapname()));
+	}
 
 	uint32_t gametime = gpdp.get_gametime();
 	m_gametime.set_text(gametimestring(gametime));
@@ -311,7 +316,7 @@ void Game_Main_Menu_Save_Game::ok()
 void Game_Main_Menu_Save_Game::die()
 {
 	UI::UniqueWindow::die();
-	if (!igbase().game().get_ipl()->is_multiplayer()) {
+	if (igbase().game().get_ipl() && !igbase().game().get_ipl()->is_multiplayer()) {
 		igbase().game().gameController()->setPaused(false);
 	}
 }

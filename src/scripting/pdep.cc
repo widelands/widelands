@@ -13,9 +13,9 @@ void pdep_pushobject(lua_State * L, const TValue * o) {
 
 void * pdep_realloc_(lua_State * L, void * block, size_t osize, size_t nsize) {
 	global_State * g = G(L);
-	lua_assert((osize == 0) == (block == NULL));
+	lua_assert((osize == 0) == (block == nullptr));
 	block = (*g->frealloc)(g->ud, block, osize, nsize);
-	lua_assert((nsize == 0) == (block == NULL));
+	lua_assert((nsize == 0) == (block == nullptr));
 	g->totalbytes = (g->totalbytes - osize) + nsize;
 	return block;
 }
@@ -31,25 +31,25 @@ void pdep_link(lua_State * L, GCObject * o, lu_byte tt) {
 Proto * pdep_newproto(lua_State * L) {
 	Proto * f = pdep_new(L, Proto);
 	pdep_link(L, obj2gco(f), LUA_TPROTO);
-	f->k = NULL;
+	f->k = nullptr;
 	f->sizek = 0;
-	f->p = NULL;
+	f->p = nullptr;
 	f->sizep = 0;
-	f->code = NULL;
+	f->code = nullptr;
 	f->sizecode = 0;
 	f->sizelineinfo = 0;
 	f->sizeupvalues = 0;
 	f->nups = 0;
-	f->upvalues = NULL;
+	f->upvalues = nullptr;
 	f->numparams = 0;
 	f->is_vararg = 0;
 	f->maxstacksize = 0;
-	f->lineinfo = NULL;
+	f->lineinfo = nullptr;
 	f->sizelocvars = 0;
-	f->locvars = NULL;
+	f->locvars = nullptr;
 	f->linedefined = 0;
 	f->lastlinedefined = 0;
-	f->source = NULL;
+	f->source = nullptr;
 	return f;
 }
 
@@ -59,7 +59,7 @@ Closure * pdep_newLclosure(lua_State * L, int nelems, Table * e) {
 	c->l.isC = 0;
 	c->l.env = e;
 	c->l.nupvalues = cast_byte(nelems);
-	while (nelems--) c->l.upvals[nelems] = NULL;
+	while (nelems--) c->l.upvals[nelems] = nullptr;
 	return c;
 }
 
@@ -67,7 +67,7 @@ static void correctstack(lua_State * L, TValue * oldstack) {
 	CallInfo * ci;
 	GCObject * up;
 	L->top = (L->top - oldstack) + L->stack;
-	for (up = L->openupval; up != NULL; up = up->gch.next)
+	for (up = L->openupval; up != nullptr; up = up->gch.next)
 		gco2uv(up)->v = (gco2uv(up)->v - oldstack) + L->stack;
 	for (ci = L->base_ci; ci <= L->ci; ci++) {
 		ci->top = (ci->top - oldstack) + L->stack;

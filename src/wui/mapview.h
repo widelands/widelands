@@ -85,7 +85,7 @@ protected:
 private:
 	void stop_dragging();
 
-	boost::scoped_ptr<GameRenderer> m_renderer;
+	std::unique_ptr<GameRenderer> m_renderer;
 	Interactive_Base & m_intbase;
 	ChangeViewFn m_changeview;
 	Point              m_viewpoint;

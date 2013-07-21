@@ -69,7 +69,6 @@
 #include "timestring.h"
 
 #include <config.h>
-#include <boost/scoped_ptr.hpp>
 #include <sys/types.h>
 #include <sys/stat.h>
 #ifndef _WIN32
@@ -205,7 +204,7 @@ void WLApplication::setup_homedir() {
 		try {
 			log ("Set home directory: %s\n", m_homedir.c_str());
 
-			std::auto_ptr<FileSystem> home(new RealFSImpl(m_homedir));
+			std::unique_ptr<FileSystem> home(new RealFSImpl(m_homedir));
 			home->EnsureDirectoryExists(".");
 			g_fs->SetHomeFileSystem(*home.release());
 		} catch (const std::exception & e) {
@@ -951,7 +950,7 @@ std::string WLApplication::get_executable_path()
 	std::string executabledir;
 #ifdef __APPLE__
 	uint32_t buffersize = 0;
-	_NSGetExecutablePath(NULL, &buffersize);
+	_NSGetExecutablePath(nullptr, &buffersize);
 	char buffer[buffersize];
 	int32_t check = _NSGetExecutablePath(buffer, &buffersize);
 	if (check != 0) {
@@ -1639,7 +1638,8 @@ void WLApplication::mainmenu_singleplayer()
 {
 	//  This is the code returned by UI::Panel::run() when the panel is dying.
 	//  Make sure that the program exits when the window manager says so.
-	compile_assert(Fullscreen_Menu_SinglePlayer::Back == UI::Panel::dying_code);
+	static_assert
+		(Fullscreen_Menu_SinglePlayer::Back == UI::Panel::dying_code, "Panel should be dying.");
 
 	for (;;) {
 		int32_t code;
@@ -1754,7 +1754,8 @@ void WLApplication::mainmenu_editor()
 {
 	//  This is the code returned by UI::Panel::run() when the panel is dying.
 	//  Make sure that the program exits when the window manager says so.
-	compile_assert(Fullscreen_Menu_Editor::Back == UI::Panel::dying_code);
+	static_assert
+		(Fullscreen_Menu_Editor::Back == UI::Panel::dying_code, "Editor should be dying.");
 
 	for (;;) {
 		int32_t code;
@@ -2021,7 +2022,7 @@ bool WLApplication::new_game()
 			game.set_ibase
 				(new Interactive_Player
 					(game, g_options.pull_section("global"), pn, false, false));
-			boost::scoped_ptr<GameController> ctrl
+			std::unique_ptr<GameController> ctrl
 				(GameController::createSinglePlayer(game, true, pn));
 			UI::ProgressWindow loaderUI;
 			std::vector<std::string> tipstext;
@@ -2199,7 +2200,7 @@ struct ReplayGameController : public GameController {
 
 private:
 	Widelands::Game & m_game;
-	boost::scoped_ptr<Widelands::ReplayReader> m_replayreader;
+	std::unique_ptr<Widelands::ReplayReader> m_replayreader;
 	int32_t m_lastframe;
 	int32_t m_time;
 	uint32_t m_speed;
@@ -2332,7 +2333,7 @@ bool WLApplication::redirect_output(std::string path)
 	if (path.empty()) {
 #ifdef _WIN32
 		char module_name[MAX_PATH];
-		unsigned int name_length = GetModuleFileName(NULL, module_name, MAX_PATH);
+		unsigned int name_length = GetModuleFileName(nullptr, module_name, MAX_PATH);
 		path = module_name;
 		size_t pos = path.find_last_of("/\\");
 		if (pos == std::string::npos) return false;
@@ -2351,10 +2352,10 @@ bool WLApplication::redirect_output(std::string path)
 	if (!newfp) return false;
 
 	/* Line buffered */
-	setvbuf(stdout, NULL, _IOLBF, BUFSIZ);
+	setvbuf(stdout, nullptr, _IOLBF, BUFSIZ);
 
 	/* No buffering */
-	setbuf(stderr, NULL);
+	setbuf(stderr, nullptr);
 
 	m_redirected_stdio = true;
 	return true;

@@ -5,6 +5,8 @@ use("map", "common_init")
 -- ==========
 if not wl.editor then
    game = wl.Game()
+   -- make sure we do not crash because of saving.
+   game.allow_saving = false
    egbase = game
 else
    editor = wl.Editor()
@@ -17,7 +19,7 @@ player2 = egbase.players[2]
 player3 = egbase.players[3]
 
 -- =================================
--- Tests for the core functionality 
+-- Tests for the core functionality
 -- =================================
 include "test_egbase"
 
@@ -50,13 +52,13 @@ else
 end
 
 -- ===========================
--- Test for auxiliary scripts 
+-- Test for auxiliary scripts
 -- ===========================
 include "test_table"
 include "test_set"
 
 -- ============
--- Test Runner 
+-- Test Runner
 -- ============
 rv = lunit:run()
 if rv == 0 then -- No errors in the testsuite. Exit.

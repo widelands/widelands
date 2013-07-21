@@ -26,8 +26,6 @@
 #include <stdint.h>
 #include <string>
 
-#include <boost/shared_ptr.hpp>
-
 #include <lua.hpp>
 
 #include "logic/widelands_filewrite.h"
@@ -102,11 +100,11 @@ struct LuaInterface {
 		(FileSystem &, std::string, std::string = "scripting") = 0;
 	virtual ScriptContainer & get_scripts_for(std::string) = 0;
 
-	virtual boost::shared_ptr<LuaTable> run_script(std::string, std::string) = 0;
-	virtual boost::shared_ptr<LuaTable> run_script
+	virtual std::unique_ptr<LuaTable> run_script(std::string, std::string) = 0;
+	virtual std::unique_ptr<LuaTable> run_script
 			(FileSystem &, std::string, std::string) = 0;
 
-	virtual boost::shared_ptr<LuaTable> get_hook(std::string name) = 0;
+	virtual std::unique_ptr<LuaTable> get_hook(std::string name) = 0;
 };
 
 struct LuaGameInterface : public virtual LuaInterface {

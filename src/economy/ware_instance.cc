@@ -640,7 +640,7 @@ Map_Object::Loader * WareInstance::load
 		}
 		const Item_Ware_Descr * descr = tribe->get_ware_descr(wareindex);
 
-		std::auto_ptr<Loader> loader(new Loader);
+		std::unique_ptr<Loader> loader(new Loader);
 		loader->init(egbase, mol, *new WareInstance(wareindex, descr));
 		loader->load(fr);
 

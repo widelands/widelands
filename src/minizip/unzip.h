@@ -126,7 +126,7 @@ extern unzFile ZEXPORT unzOpen OF((char const * path));
      on a Windows XP computer "c:\\zlib\\zlib113.zip" or on an Unix computer
      "zlib/zlib113.zip".
      If the zipfile cannot be opened (file don't exist or in not valid), the
-       return value is NULL.
+       return value is nullptr.
      Else, the return value is a unzFile Handle, usable with other function
        of this unzip package.
 */
@@ -206,8 +206,8 @@ extern int32_t ZEXPORT unzOpenCurrentFile3 OF
     if raw==1
   *method will receive method of compression, *level will receive level of
      compression
-  note : you can set level parameter as NULL (if you did not want known level,
-         but you CANNOT set method parameter as NULL
+  note : you can set level parameter as nullptr (if you did not want known level,
+         but you CANNOT set method parameter as nullptr
 */
 
 

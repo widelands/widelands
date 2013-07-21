@@ -61,7 +61,7 @@ using Widelands::TCoords;
 struct InteractiveBaseInternals {
 	MiniMap * mm;
 	MiniMap::Registry minimap;
-	boost::scoped_ptr<QuickNavigation> quicknavigation;
+	std::unique_ptr<QuickNavigation> quicknavigation;
 
 	InteractiveBaseInternals(QuickNavigation * qnav)
 	:

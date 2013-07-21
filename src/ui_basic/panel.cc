@@ -72,8 +72,8 @@ Panel * Panel::_g_mousein   = 0;
 // events are ignored and not passed on to any widget. This is only useful
 // for scripts that want to show off functionality without the user interfering.
 bool Panel::_g_allow_user_input = true;
-const Image* Panel::s_default_cursor = NULL;
-const Image* Panel::s_default_cursor_click = NULL;
+const Image* Panel::s_default_cursor = nullptr;
+const Image* Panel::s_default_cursor_click = nullptr;
 
 /**
  * Initialize a panel, link it into the parent's queue.
@@ -561,7 +561,7 @@ void Panel::set_cache(bool cache)
 		_flags |= pf_cache;
 	} else {
 		_flags &= ~pf_cache;
-		_cache.reset(NULL);
+		_cache.reset(nullptr);
 	}
 }
 
@@ -936,7 +936,7 @@ void Panel::do_mousein(bool const inside)
 
 	if (!inside && _mousein) {
 		_mousein->do_mousein(false);
-		_mousein = NULL;
+		_mousein = nullptr;
 	}
 	handle_mousein(inside);
 }

@@ -3064,7 +3064,7 @@ Map_Object::Loader * Worker::load
 			tribe->get_worker_descr(tribe->safe_worker_index(name));
 
 		Worker * worker = static_cast<Worker *>(&descr->create_object());
-		std::auto_ptr<Loader> loader(worker->create_loader());
+		std::unique_ptr<Loader> loader(worker->create_loader());
 		loader->init(egbase, mol, *worker);
 		loader->load(fr);
 		return loader.release();

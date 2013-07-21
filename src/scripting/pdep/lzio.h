@@ -25,7 +25,7 @@ typedef struct Mbuffer {
   size_t buffsize;
 } Mbuffer;
 
-#define pdep_initbuffer(L, buff) ((buff)->buffer = NULL, (buff)->buffsize = 0)
+#define pdep_initbuffer(L, buff) ((buff)->buffer = nullptr, (buff)->buffsize = 0)
 
 #define pdep_buffer(buff)	((buff)->buffer)
 #define pdep_sizebuffer(buff)	((buff)->buffsize)
