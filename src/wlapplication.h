@@ -169,7 +169,7 @@ struct WLApplication {
 	Point get_mouse_position() const throw () {return m_mouse_position;}
 	//
 	/// Find out whether the mouse is currently pressed
-	bool is_mouse_pressed() const {return SDL_GetMouseState(NULL, NULL); }
+	bool is_mouse_pressed() const {return SDL_GetMouseState(nullptr, nullptr); }
 
 	/// Swap left and right mouse key?
 	void set_mouse_swap(const bool swap) {m_mouse_swapped = swap;}
@@ -295,7 +295,7 @@ protected:
 	bool m_redirected_stdio;
 private:
 	///Holds this process' one and only instance of WLApplication, if it was
-	///created already. NULL otherwise.
+	///created already. nullptr otherwise.
 	///\note This is private on purpose. Read the class documentation.
 	static WLApplication * the_singleton;
 

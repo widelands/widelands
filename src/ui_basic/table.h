@@ -28,7 +28,6 @@
 #include <boost/signal.hpp>
 
 #include "align.h"
-#include "compile_assert.h"
 #include "rgbcolor.h"
 
 #include "panel.h"
@@ -402,7 +401,7 @@ public:
 	}
 };
 
-compile_assert(sizeof(void *) == sizeof(uintptr_t));
+static_assert(sizeof(void *) == sizeof(uintptr_t), "assert(sizeof(void *) == sizeof(uintptr_t)) failed.");
 template <> class Table<uintptr_t> : public Table<void *> {
 public:
 	typedef Table<void *> Base;

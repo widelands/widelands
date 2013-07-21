@@ -1452,7 +1452,7 @@ bool DefaultAI::connect_flag_to_another_economy (const Flag & flag)
 			if (!found || path->get_nsteps() > path2->get_nsteps()) {
 				delete path;
 				path = path2;
-				path2 = NULL;
+				path2 = nullptr;
 				closest = *i.current;
 				found = true;
 			}

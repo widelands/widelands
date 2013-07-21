@@ -69,14 +69,6 @@ ftp://ftp.info-zip.org/pub/infozip/license.html
 #endif
 /* compile with -Dlocal if your debugger can't find static symbols */
 
-
-#ifndef CASESENSITIVITYDEFAULT_NO
-#  if !defined(unix) && !defined(CASESENSITIVITYDEFAULT_YES)
-#    define CASESENSITIVITYDEFAULT_NO
-#  endif
-#endif
-
-
 #ifndef UNZ_BUFSIZE
 #define UNZ_BUFSIZE (16384)
 #endif
@@ -321,7 +313,7 @@ local uLong unzlocal_SearchCentralDir
      on a Windows NT computer "c:\\test\\zlib114.zip" or on an Unix computer
      "zlib/zlib114.zip".
      If the zipfile cannot be opened (file doesn't exist or in not valid), the
-       return value is NULL.
+       return value is nullptr.
      Else, the return value is a unzFile Handle, usable with other function
        of this unzip package.
 */

@@ -590,7 +590,7 @@ void Table<void *>::Entry_Record::set_string
 {
 	assert(col < m_data.size());
 
-	m_data.at(col).d_picture = NULL;
+	m_data.at(col).d_picture = nullptr;
 	m_data.at(col).d_string  = str;
 }
 const Image* Table<void *>::Entry_Record::get_picture(uint8_t const col) const

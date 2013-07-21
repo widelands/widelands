@@ -72,7 +72,7 @@ m_selected_information(0)
 
 	// Is there a hook dataset?
 	m_ndatasets = NR_BASE_DATASETS;
-	boost::shared_ptr<LuaTable> hook = game.lua().get_hook("custom_statistic");
+	std::unique_ptr<LuaTable> hook = game.lua().get_hook("custom_statistic");
 	std::string cs_name, cs_pic;
 	if (hook) {
 		cs_name = hook->get_string("name");

@@ -24,7 +24,6 @@
 
 #include "window.h"
 
-#include <boost/scoped_ptr.hpp>
 #include <boost/signal.hpp>
 
 namespace UI {
@@ -77,7 +76,7 @@ protected:
 	virtual void pressedNo();
 
 private:
-	boost::scoped_ptr<WLMessageBoxImpl> d;
+	std::unique_ptr<WLMessageBoxImpl> d;
 };
 
 }

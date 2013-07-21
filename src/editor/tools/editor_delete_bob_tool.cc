@@ -42,7 +42,7 @@ int32_t Editor_Delete_Bob_Tool::handle_click_impl
 			args.obob_type.push_back(&bob->descr());
 			bob->remove(egbase);
 		} else {
-			args.obob_type.push_back(NULL);
+			args.obob_type.push_back(nullptr);
 		}
 	while (mr.advance(map));
 	return radius + 2;

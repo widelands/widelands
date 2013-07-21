@@ -46,7 +46,7 @@ namespace UI {
 
 ProgressWindow::ProgressWindow(const std::string & background)
 	: m_xres(0), m_yres(0),
-	m_background_pic(NULL)
+	m_background_pic(nullptr)
 {
 	set_background(background);
 	step(_("Preparing..."));
@@ -117,7 +117,7 @@ void ProgressWindow::set_background(const std::string & file_name) {
 		}
 	} else
 		m_background = "pics/progress.png";
-	m_background_pic = NULL;
+	m_background_pic = nullptr;
 	draw_background(rt, g_gr->get_xres(), g_gr->get_yres());
 	update(true);
 }

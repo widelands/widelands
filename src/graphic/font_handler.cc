@@ -157,7 +157,7 @@ const LineCacheEntry & Font_Handler::Data::get_line(const UI::TextStyle & style,
 	LineCache::iterator it = linecache.insert(linecache.begin(), LineCacheEntry());
 	it->style = style;
 	it->text = text;
-	it->image = NULL;
+	it->image = nullptr;
 	render_line(*it);
 
 	while (linecache.size() > MaxLineCacheSize) {

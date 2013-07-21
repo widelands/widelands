@@ -41,7 +41,6 @@
 
 #include "upcast.h"
 
-#include <boost/scoped_ptr.hpp>
 #include <boost/format.hpp>
 
 #include <cstdio>
@@ -230,7 +229,7 @@ void Main_Menu_Save_Map::clicked_item(uint32_t) {
 	if (Widelands::WL_Map_Loader::is_widelands_map(name)) {
 		Widelands::Map map;
 		{
-			std::auto_ptr<Widelands::Map_Loader> const ml
+			std::unique_ptr<Widelands::Map_Loader> const ml
 				(map.get_correct_loader(name));
 			ml->preload_map(true); // This has worked before, no problem
 		}
@@ -334,7 +333,7 @@ void Main_Menu_Save_Map::fill_list() {
 		char const * const name = pname->c_str();
 
 		// we do not list S2 files since we only write wmf
-		boost::scoped_ptr<Widelands::Map_Loader> ml(map.get_correct_loader(name));
+		std::unique_ptr<Widelands::Map_Loader> ml(map.get_correct_loader(name));
 		if (upcast(Widelands::WL_Map_Loader, wml, ml.get())) {
 			try {
 				wml->preload_map(true);
@@ -397,7 +396,7 @@ bool Main_Menu_Save_Map::save_map(std::string filename, bool binary) {
 		g_fs->Unlink(complete_filename);
 	}
 
-	boost::scoped_ptr<FileSystem> fs
+	std::unique_ptr<FileSystem> fs
 			(g_fs->CreateSubFileSystem(complete_filename, binary ? FileSystem::ZIP : FileSystem::DIR));
 	Widelands::Map_Saver wms(*fs, eia().egbase());
 	try {

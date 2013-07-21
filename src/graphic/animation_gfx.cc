@@ -146,7 +146,7 @@ end:
 
 	if (m_pcmasks.size() and m_pcmasks.size() < m_frames.size())
 		throw wexception
-			("animation has %"PRIuS" frames but playercolor mask has only %"PRIuS" frames",
+			("animation has %" PRIuS " frames but playercolor mask has only %" PRIuS " frames",
 			 m_frames.size(), m_pcmasks.size());
 }
 

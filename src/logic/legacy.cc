@@ -419,7 +419,7 @@ struct FakeAttackController : public BaseImmovable {
 Map_Object::Loader * loadAttackController
 	(Editor_Game_Base & egbase, Map_Map_Object_Loader & mol, FileRead & fr)
 {
-	std::auto_ptr<FakeAttackController::Loader> loader
+	std::unique_ptr<FakeAttackController::Loader> loader
 		(new FakeAttackController::Loader);
 
 	try {
@@ -474,7 +474,7 @@ struct FakeBattle : public BaseImmovable {
 Map_Object::Loader * loadBattle
 	(Editor_Game_Base & egbase, Map_Map_Object_Loader & mol, FileRead & fr)
 {
-	std::auto_ptr<FakeBattle::Loader> loader(new FakeBattle::Loader);
+	std::unique_ptr<FakeBattle::Loader> loader(new FakeBattle::Loader);
 
 	try {
 		// Header has been peeled away by caller

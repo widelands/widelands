@@ -345,7 +345,7 @@ void ConstructionSite::draw
 
 	// Draw the partially finished building
 
-	compile_assert(0 <= CONSTRUCTIONSITE_STEP_TIME);
+	static_assert(0 <= CONSTRUCTIONSITE_STEP_TIME, "assert(0 <= CONSTRUCTIONSITE_STEP_TIME) failed.");
 	m_info.totaltime = CONSTRUCTIONSITE_STEP_TIME * m_work_steps;
 	m_info.completedtime = CONSTRUCTIONSITE_STEP_TIME * m_work_completed;
 

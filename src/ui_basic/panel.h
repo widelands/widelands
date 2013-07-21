@@ -21,17 +21,17 @@
 #ifndef UI_PANEL_H
 #define UI_PANEL_H
 
+#include <cassert>
+#include <cstring>
+#include <memory>
+#include <string>
+
 #include <boost/noncopyable.hpp>
-#include <boost/scoped_ptr.hpp>
 #include <boost/signals/trackable.hpp>
 
 #include "point.h"
 
 #include <SDL_keyboard.h>
-
-#include <cassert>
-#include <string>
-#include <cstring>
 
 class RenderTarget;
 class Image;
@@ -277,7 +277,7 @@ private:
 	Panel * _focus; //  keyboard focus
 
 	uint32_t _flags;
-	boost::scoped_ptr<const Image> _cache;
+	std::unique_ptr<const Image> _cache;
 	bool _needdraw;
 
 	/**

@@ -20,10 +20,12 @@
 #ifndef SHIP_H
 #define SHIP_H
 
+#include <list>
+#include <memory>
+
 #include "bob.h"
 #include "economy/shippingitem.h"
 #include "graphic/diranimations.h"
-#include <list>
 
 namespace UI {class Window;}
 class Interactive_GameBase;
@@ -182,14 +184,14 @@ private:
 	uint8_t m_ship_state;
 
 	struct Expedition {
-		boost::scoped_ptr<std::list<Coords> > seen_port_buildspaces;
+		std::unique_ptr<std::list<Coords> > seen_port_buildspaces;
 		bool swimable[LAST_DIRECTION];
 		bool island_exploration;
 		uint8_t direction;
 		Coords exploration_start;
 		bool clockwise;
 	};
-	boost::scoped_ptr<Expedition> m_expedition;
+	std::unique_ptr<Expedition> m_expedition;
 
 	// saving and loading
 protected:
@@ -206,7 +208,7 @@ protected:
 		uint32_t m_lastdock;
 		uint32_t m_destination;
 		uint8_t  m_ship_state;
-		boost::scoped_ptr<Expedition> m_expedition;
+		std::unique_ptr<Expedition> m_expedition;
 		std::vector<ShippingItem::Loader> m_items;
 	};
 

@@ -62,7 +62,7 @@ void Game_Preload_Data_Packet::Read
 				// win condition were (sometimes?) stored as filename
 				m_win_condition = s.get_safe_string("win_condition");
 				try {
-					boost::shared_ptr<LuaTable> table
+					std::unique_ptr<LuaTable> table
 						(game.lua().run_script
 							(*g_fs,
 							"scripting/win_conditions/" + m_win_condition

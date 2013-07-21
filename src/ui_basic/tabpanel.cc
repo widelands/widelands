@@ -23,8 +23,6 @@
 
 #include "graphic/rendertarget.h"
 
-#include "compile_assert.h"
-
 namespace UI {
 #define TP_BUTTON_WIDTH     34
 #define TP_BUTTON_HEIGHT    34
@@ -205,8 +203,8 @@ void Tab_Panel::draw(RenderTarget & dst)
 	uint32_t x;
 
 	// draw the background
-	compile_assert(2 < TP_BUTTON_WIDTH);
-	compile_assert(4 < TP_BUTTON_HEIGHT);
+	static_assert(2 < TP_BUTTON_WIDTH, "assert(2 < TP_BUTTON_WIDTH) failed.");
+	static_assert(4 < TP_BUTTON_HEIGHT, "assert(4 < TP_BUTTON_HEIGHT) failed.");
 
 	if (m_pic_background) {
 		dst.tile

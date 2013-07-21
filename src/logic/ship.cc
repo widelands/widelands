@@ -283,7 +283,7 @@ void Ship::ship_update(Game & game, Bob::State & state)
 
 		if (m_ship_state == EXP_SCOUTING) {
 			// Check surrounding fields for port buildspaces
-			boost::scoped_ptr<std::list<Coords> > temp_port_buildspaces(new std::list<Coords>());
+			std::unique_ptr<std::list<Coords> > temp_port_buildspaces(new std::list<Coords>());
 			MapRegion<Area<Coords> > mr
 				(map, Area<Coords>(position, vision_range()));
 			bool new_port_space = false;
@@ -528,7 +528,7 @@ void Ship::ship_update_idle(Game & game, Bob::State & state)
 					break;
 				} else {
 					assert(worker);
-					worker->set_economy(NULL);
+					worker->set_economy(nullptr);
 					worker->set_location(cs);
 					worker->set_position(game, cs->get_position());
 					worker->reset_tasks(game);
@@ -570,7 +570,7 @@ void Ship::set_economy(Game & game, Economy * e)
  */
 void Ship::set_destination(Game & game, PortDock & pd)
 {
-	molog("set_destination to %u (currently %"PRIuS" items)\n", pd.serial(), m_items.size());
+	molog("set_destination to %u (currently %" PRIuS " items)\n", pd.serial(), m_items.size());
 	m_destination = &pd;
 	send_signal(game, "wakeup");
 }
@@ -677,7 +677,7 @@ void Ship::log_general_info(const Editor_Game_Base & egbase)
 	Bob::log_general_info(egbase);
 
 	molog
-		("Fleet: %u, destination: %u, lastdock: %u, carrying: %"PRIuS"\n",
+		("Fleet: %u, destination: %u, lastdock: %u, carrying: %" PRIuS "\n",
 		 m_fleet? m_fleet->serial() : 0,
 		 m_destination.serial(), m_lastdock.serial(),
 		 m_items.size());
@@ -830,7 +830,7 @@ void Ship::Loader::load_finish()
 Map_Object::Loader * Ship::load
 	(Editor_Game_Base & egbase, Map_Map_Object_Loader & mol, FileRead & fr)
 {
-	std::auto_ptr<Loader> loader(new Loader);
+	std::unique_ptr<Loader> loader(new Loader);
 
 	try {
 		// The header has been peeled away by the caller
