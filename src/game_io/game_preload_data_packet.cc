@@ -65,7 +65,7 @@ void Game_Preload_Data_Packet::Read
 					m_win_condition = _("Scenario");
 				} else {
 					try {
-						boost::shared_ptr<LuaTable> table
+						std::unique_ptr_ptr<LuaTable> table
 							(game.lua().run_script
 								(*g_fs,
 								"scripting/win_conditions/" + m_win_condition

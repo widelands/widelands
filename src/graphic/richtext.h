@@ -21,9 +21,8 @@
 #define RICHTEXT_H
 
 #include <limits>
+#include <memory>
 #include <string>
-
-#include <boost/scoped_ptr.hpp>
 
 #include "point.h"
 #include "rgbcolor.h"
@@ -55,7 +54,7 @@ struct RichText {
 	void draw(RenderTarget & dst, const Point& offset, bool background = false);
 
 private:
-	boost::scoped_ptr<RichTextImpl> m;
+	std::unique_ptr<RichTextImpl> m;
 };
 
 } // namespace UI

@@ -20,7 +20,6 @@
 #ifndef SURFACE_CACHE_H
 #define SURFACE_CACHE_H
 
-#include <boost/scoped_ptr.hpp>
 #include <boost/utility.hpp>
 #include <string>
 
@@ -41,7 +40,7 @@ public:
 	/// Deletes all surfaces in the cache leaving it as if it were just created.
 	virtual void flush() = 0;
 
-	/// Returns an entry if it is cached, NULL otherwise.
+	/// Returns an entry if it is cached, nullptr otherwise.
 	virtual Surface* get(const std::string& hash) = 0;
 
 	// Inserts this entry into the SurfaceCache. asserts() that there is no

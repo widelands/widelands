@@ -866,7 +866,7 @@ void Profile::read
 
 		bool reading_multiline = 0;
 		std::string data;
-		char * key = NULL;
+		char * key = nullptr;
 		bool translate_line = false;
 		while (char * line = fr.ReadLine()) {
 			++linenr;

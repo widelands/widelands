@@ -63,12 +63,12 @@ struct BaseListselect : public Panel {
 	void add
 		(const char * const name,
 		 uint32_t value,
-		 const Image* pic = NULL,
+		 const Image* pic = nullptr,
 		 const bool select_this = false,
 		 const std::string & tooltip_text = std::string());
 	void add_front
 		(const char * const name,
-		 const Image* pic = NULL,
+		 const Image* pic = nullptr,
 		 const bool select_this = false,
 		 const std::string & tooltip_text = std::string());
 	void remove(uint32_t);
@@ -169,7 +169,7 @@ struct Listselect : public BaseListselect {
 	void add
 		(const char * const name,
 		 Entry value,
-		 const Image* pic = NULL,
+		 const Image* pic = nullptr,
 		 const bool select_this = false,
 		 const std::string & tooltip_text = std::string())
 	{
@@ -179,7 +179,7 @@ struct Listselect : public BaseListselect {
 	void add_front
 		(const char * const name,
 		 Entry value,
-		 const Image* pic = NULL,
+		 const Image* pic = nullptr,
 		 const bool select_this = false,
 		 const std::string & tooltip_text = std::string())
 	{
@@ -224,7 +224,7 @@ struct Listselect<Entry &> : public Listselect<Entry *> {
 	void add
 		(const char * const name,
 		 Entry      &       value,
-		 const Image* pic = NULL,
+		 const Image* pic = nullptr,
 		 const bool select_this = false,
 		 const std::string & tooltip_text = std::string())
 	{
@@ -233,7 +233,7 @@ struct Listselect<Entry &> : public Listselect<Entry *> {
 	void add_front
 		(const char * const name,
 		 Entry      &       value,
-		 const Image* pic = NULL,
+		 const Image* pic = nullptr,
 		 const bool select_this = false,
 		 const std::string & tooltip_text = std::string())
 	{

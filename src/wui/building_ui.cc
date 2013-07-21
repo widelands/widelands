@@ -55,7 +55,7 @@ void Building::hide_options()
 	BOOST_FOREACH(boost::signals::connection& c, options_window_connections)
 		c.disconnect();
 	delete m_optionswindow;
-	m_optionswindow = NULL;
+	m_optionswindow = nullptr;
 }
 
 /**

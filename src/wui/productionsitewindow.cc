@@ -143,7 +143,7 @@ void ProductionSite::create_options_window
 
 void ProductionSite_Window::update_worker_table()
 {
-	if (m_worker_table == NULL) {
+	if (m_worker_table == nullptr) {
 		return;
 	}
 	assert

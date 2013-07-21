@@ -20,8 +20,6 @@
 #ifndef FULLSCREEN_MENU_BASE_H
 #define FULLSCREEN_MENU_BASE_H
 
-#include <boost/scoped_ptr.hpp>
-
 #include "ui_basic/panel.h"
 #include <string>
 
@@ -60,7 +58,7 @@ private:
 	uint32_t gr_y();
 
 	struct Data;
-	boost::scoped_ptr<Data> d;
+	std::unique_ptr<Data> d;
 };
 
 

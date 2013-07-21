@@ -283,7 +283,7 @@ void Ship::ship_update(Game & game, Bob::State & state)
 
 		if (m_ship_state == EXP_SCOUTING) {
 			// Check surrounding fields for port buildspaces
-			boost::scoped_ptr<std::list<Coords> > temp_port_buildspaces(new std::list<Coords>());
+			std::unique_ptr<std::list<Coords> > temp_port_buildspaces(new std::list<Coords>());
 			MapRegion<Area<Coords> > mr
 				(map, Area<Coords>(position, vision_range()));
 			bool new_port_space = false;
@@ -528,7 +528,7 @@ void Ship::ship_update_idle(Game & game, Bob::State & state)
 					break;
 				} else {
 					assert(worker);
-					worker->set_economy(NULL);
+					worker->set_economy(nullptr);
 					worker->set_location(cs);
 					worker->set_position(game, cs->get_position());
 					worker->reset_tasks(game);
@@ -830,7 +830,7 @@ void Ship::Loader::load_finish()
 Map_Object::Loader * Ship::load
 	(Editor_Game_Base & egbase, Map_Map_Object_Loader & mol, FileRead & fr)
 {
-	std::auto_ptr<Loader> loader(new Loader);
+	std::unique_ptr<Loader> loader(new Loader);
 
 	try {
 		// The header has been peeled away by the caller

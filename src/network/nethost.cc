@@ -52,7 +52,6 @@
 
 #include <boost/format.hpp>
 #include <boost/lexical_cast.hpp>
-#include <boost/scoped_ptr.hpp>
 #include <sstream>
 
 #ifndef _WIN32
@@ -818,7 +817,7 @@ void NetHost::run(bool const autorun)
 	try {
 		// NOTE  loaderUI will stay uninitialized, if this is run as dedicated, so all called functions need
 		// NOTE  to check whether the pointer is valid.
-		boost::scoped_ptr<UI::ProgressWindow> loaderUI(0);
+		std::unique_ptr<UI::ProgressWindow> loaderUI;
 		GameTips * tips = 0;
 		if (m_is_dedicated) {
 			log ("[Dedicated] Starting the game...\n");
@@ -1342,7 +1341,7 @@ void NetHost::dserver_send_maps_and_saves(Client & client) {
 				gl.preload_game(gpdp);
 
 				// If we are here, the saved game is valid
-				boost::scoped_ptr<FileSystem> sg_fs(g_fs->MakeSubFileSystem(name));
+				std::unique_ptr<FileSystem> sg_fs(g_fs->MakeSubFileSystem(name));
 				Profile prof;
 				prof.read("map/elemental", 0, *sg_fs);
 				Section & s = prof.get_safe_section("global");
@@ -2631,7 +2630,7 @@ void NetHost::handle_packet(uint32_t const i, RecvPacket & r)
 
 						// If we are here, it is a saved game file :)
 						// Read the needed data from file "elemental" of the used map.
-						boost::scoped_ptr<FileSystem> sg_fs(g_fs->MakeSubFileSystem(path.c_str()));
+						std::unique_ptr<FileSystem> sg_fs(g_fs->MakeSubFileSystem(path.c_str()));
 						Profile prof;
 						prof.read("map/elemental", 0, *sg_fs);
 						Section & s = prof.get_safe_section("global");

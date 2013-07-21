@@ -277,7 +277,7 @@ bool Game::run_splayer_scenario_direct(char const * const mapname) {
 /**
  * Initialize the game based on the given settings.
  *
- * \note loaderUI can be NULL, if this is run as dedicated server.
+ * \note loaderUI can be nullptr, if this is run as dedicated server.
  */
 void Game::init_newgame
 	(UI::ProgressWindow * loaderUI, const GameSettings & settings)
@@ -339,7 +339,7 @@ void Game::init_newgame
 
 	// Check for win_conditions
 	if (!settings.scenario) {
-		boost::shared_ptr<LuaTable> table
+		std::unique_ptr<LuaTable> table
 			(lua().run_script
 			 (*g_fs, "scripting/win_conditions/" + settings.win_condition + ".lua", "win_conditions"));
 		m_win_condition_displayname = table->get_string("name");
@@ -358,7 +358,7 @@ void Game::init_newgame
  * Only difference is, that players are already initialized.
  * run(loaderUI, true) takes care about this difference.
  *
- * \note loaderUI can be NULL, if this is run as dedicated server.
+ * \note loaderUI can be nullptr, if this is run as dedicated server.
  */
 void Game::init_savegame
 	(UI::ProgressWindow * loaderUI, const GameSettings & settings)
@@ -481,7 +481,7 @@ void Game::postload()
  *
  * \return true if a game actually took place, false otherwise
  *
- * \note loader_ui can be NULL, if this is run as dedicated server.
+ * \note loader_ui can be nullptr, if this is run as dedicated server.
  */
 bool Game::run
 	(UI::ProgressWindow * loader_ui, Start_Game_Type const start_game_type)
@@ -1032,7 +1032,7 @@ void Game::sample_statistics()
 
 	// If there is a hook function defined to sample special statistics in this
 	// game, call the corresponding Lua function
-	boost::shared_ptr<LuaTable> hook = lua().get_hook("custom_statistic");
+	std::unique_ptr<LuaTable> hook = lua().get_hook("custom_statistic");
 	if (hook) {
 		iterate_players_existing(p, nr_plrs, *this, plr) {
 			LuaCoroutine * cr = hook->get_coroutine("calculator");
