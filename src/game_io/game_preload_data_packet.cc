@@ -61,15 +61,19 @@ void Game_Preload_Data_Packet::Read
 			} else if (packet_version < 4) {
 				// win condition were (sometimes?) stored as filename
 				m_win_condition = s.get_safe_string("win_condition");
-				try {
-					std::unique_ptr<LuaTable> table
-						(game.lua().run_script
-							(*g_fs,
-							"scripting/win_conditions/" + m_win_condition
-							+ ".lua", "win_conditions"));
-					m_win_condition = table->get_string("name");
-				} catch (...) {
-					// Catch silently, the win_condition value will be used
+				if (m_win_condition == "not_set") {
+					m_win_condition = _("Scenario");
+				} else {
+					try {
+						std::unique_ptr<LuaTable> table
+							(game.lua().run_script
+								(*g_fs,
+								"scripting/win_conditions/" + m_win_condition
+								+ ".lua", "win_conditions"));
+						m_win_condition = table->get_string("name");
+					} catch (...) {
+						// Catch silently, the win_condition value will be used
+					}
 				}
 			} else {
 				// win condition stored as localized string
