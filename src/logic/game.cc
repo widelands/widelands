@@ -220,7 +220,7 @@ bool Game::run_splayer_scenario_direct(char const * const mapname) {
 
 	set_map(new Map);
 
-	std::auto_ptr<Map_Loader> maploader(map().get_correct_loader(mapname));
+	std::unique_ptr<Map_Loader> maploader(map().get_correct_loader(mapname));
 	if (not maploader.get())
 		throw wexception("could not load \"%s\"", mapname);
 	UI::ProgressWindow loaderUI;
@@ -286,7 +286,7 @@ void Game::init_newgame
 	assert(!get_map());
 	set_map(new Map);
 
-	std::auto_ptr<Map_Loader> maploader
+	std::unique_ptr<Map_Loader> maploader
 		(map().get_correct_loader(settings.mapfilename.c_str()));
 	maploader->preload_map(settings.scenario);
 	std::string const background = map().get_background();

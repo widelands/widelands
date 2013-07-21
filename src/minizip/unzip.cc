@@ -69,14 +69,6 @@ ftp://ftp.info-zip.org/pub/infozip/license.html
 #endif
 /* compile with -Dlocal if your debugger can't find static symbols */
 
-
-#ifndef CASESENSITIVITYDEFAULT_NO
-#  if !defined(unix) && !defined(CASESENSITIVITYDEFAULT_YES)
-#    define CASESENSITIVITYDEFAULT_NO
-#  endif
-#endif
-
-
 #ifndef UNZ_BUFSIZE
 #define UNZ_BUFSIZE (16384)
 #endif

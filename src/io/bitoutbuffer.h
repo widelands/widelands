@@ -22,13 +22,11 @@
 
 #include "filewrite.h"
 
-#include "compile_assert.h"
-
 /// Wrapper around FileWrite for writing bits to a file. Call put to write a
 /// bit to the buffer. Call Write to write the buffer to file. Unassigned bits
 /// in the last byte will be 0.
 template<uint8_t const Size> struct BitOutBuffer {
-	compile_assert(Size == 1 or Size == 2 or Size == 4);
+	static_assert(Size == 1 or Size == 2 or Size == 4, "assert(Size == 1 or Size == 2 or Size == 4) failed.");
 	BitOutBuffer() : buffer(0x00), mask(0xff) {}
 	void put(uint8_t const item) {
 		assert(item < (1 << Size));

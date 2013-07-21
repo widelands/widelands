@@ -669,7 +669,7 @@ void Fleet::log_general_info(const Editor_Game_Base & egbase)
 	Map_Object::log_general_info(egbase);
 
 	molog
-		("%"PRIuS" ships and %"PRIuS" ports\n",  m_ships.size(), m_ports.size());
+		("%" PRIuS " ships and %" PRIuS " ports\n",  m_ships.size(), m_ports.size());
 }
 
 #define FLEET_SAVEGAME_VERSION 4

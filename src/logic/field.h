@@ -21,7 +21,6 @@
 #define FIELD_H
 
 #include "widelands_geometry.h"
-#include "compile_assert.h"
 #include "constants.h"
 #include "nodecaps.h"
 #include "world.h"
@@ -79,11 +78,11 @@ struct Field {
 	typedef uint8_t Resource_Amount;
 
 	struct Terrains         {Terrain_Index   d : 4, r : 4;};
-	compile_assert(sizeof(Terrains) == 1);
+	static_assert(sizeof(Terrains) == 1, "assert(sizeof(Terrains) == 1) failed.");
 	struct Resources        {Resource_Index  d : 4, r : 4;};
-	compile_assert(sizeof(Resources) == 1);
+	static_assert(sizeof(Resources) == 1, "assert(sizeof(Resources) == 1) failed.");
 	struct Resource_Amounts {Resource_Amount d : 4, r : 4;};
-	compile_assert(sizeof(Resource_Amounts) == 1);
+	static_assert(sizeof(Resource_Amounts) == 1, "assert(sizeof(Resource_Amounts) == 1) failed.");
 
 private:
 	/**
@@ -110,7 +109,7 @@ private:
 		Border_Bitmask - 1;
 	static const Owner_Info_and_Selections_Type Owner_Info_Bitmask =
 		Player_Number_Bitmask + Border_Bitmask;
-	compile_assert(MAX_PLAYERS <= Player_Number_Bitmask);
+	static_assert(MAX_PLAYERS <= Player_Number_Bitmask, "Bitmask is too big.");
 
 	// Data Members
 	/** linked list, \sa Bob::m_linknext*/
@@ -236,7 +235,7 @@ public:
 #pragma pack(pop)
 
 // Check that Field is tightly packed.
-compile_assert(sizeof(Field) <= sizeof(void *) * 2 + 10);
+static_assert(sizeof(Field) <= sizeof(void *) * 2 + 10, "Field is not tightly packed.");
 }
 
 #endif
