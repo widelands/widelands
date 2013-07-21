@@ -204,7 +204,7 @@ void WLApplication::setup_homedir() {
 		try {
 			log ("Set home directory: %s\n", m_homedir.c_str());
 
-			std::auto_ptr<FileSystem> home(new RealFSImpl(m_homedir));
+			std::unique_ptr<FileSystem> home(new RealFSImpl(m_homedir));
 			home->EnsureDirectoryExists(".");
 			g_fs->SetHomeFileSystem(*home.release());
 		} catch (const std::exception & e) {

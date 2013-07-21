@@ -229,7 +229,7 @@ void Main_Menu_Save_Map::clicked_item(uint32_t) {
 	if (Widelands::WL_Map_Loader::is_widelands_map(name)) {
 		Widelands::Map map;
 		{
-			std::auto_ptr<Widelands::Map_Loader> const ml
+			std::unique_ptr<Widelands::Map_Loader> const ml
 				(map.get_correct_loader(name));
 			ml->preload_map(true); // This has worked before, no problem
 		}
