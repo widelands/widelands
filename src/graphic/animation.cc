@@ -128,6 +128,7 @@ void SfxCues::read(const string & directory, Section & s)
 {
 	while (Section::Value * const v = s.get_next_val("sfx")) {
 		char * parameters = v->get_string(), * endp;
+		string fx_name;
 		unsigned long long int const value = strtoull(parameters, &endp, 0);
 		const uint32_t frame_number = value;
 		try {
@@ -135,7 +136,8 @@ void SfxCues::read(const string & directory, Section & s)
 				throw wexception("expected %s but found \"%s\"", "frame number", parameters);
 			parameters = endp;
 			force_skip(parameters);
-			g_sound_handler.load_fx(directory, parameters);
+			fx_name = string(directory) + "/" + string(parameters);
+			g_sound_handler.load_fx_if_needed(directory, parameters, fx_name);
 			map<uint32_t, string>::const_iterator const it =
 				cues_.find(frame_number);
 			if (it != cues_.end())
@@ -359,7 +361,7 @@ private:
 	struct Region {
 		Point target_offset;
 		uint16_t w, h;
-		std::vector<Point> source_offsets;  // indexed by frame nr.
+		vector<Point> source_offsets;  // indexed by frame nr.
 	};
 
 	uint16_t width_, height_;
@@ -370,7 +372,7 @@ private:
 
 	const Image* image_;  // Not owned
 	const Image* pcmask_;  // Not owned
-	std::vector<Region> regions_;
+	vector<Region> regions_;
 	string hash_;
 
 	SfxCues sfx_cues;
@@ -551,7 +553,7 @@ NonPackedAnimation::NonPackedAnimation(const string& directory, Section& s)
 	// Read mapping from frame numbers to sound effect names and load effects
 	while (Section::Value * const v = s.get_next_val("sfx")) {
 		char * parameters = v->get_string(), * endp;
-		std::string fx_name;
+		string fx_name;
 		unsigned long long int const value = strtoull(parameters, &endp, 0);
 		const uint32_t frame_number = value;
 		try {
@@ -560,9 +562,9 @@ NonPackedAnimation::NonPackedAnimation(const string& directory, Section& s)
 			parameters = endp;
 			force_skip(parameters);
 
-			fx_name = std::string(directory) + "/" + std::string(parameters);
+			fx_name = string(directory) + "/" + string(parameters);
 			g_sound_handler.load_fx_if_needed(directory, parameters, fx_name);
-			std::map<uint32_t, std::string>::const_iterator const it =
+			map<uint32_t, string>::const_iterator const it =
 				sfx_cues.find(frame_number);
 			if (it != sfx_cues.end())
 				throw wexception
@@ -773,7 +775,7 @@ AnimationManager IMPLEMENTATION
 */
 
 uint32_t AnimationManager::load(const string& directory, Section & s) {
-	std::string format = s.get_string("format", "");
+	string format = s.get_string("format", "");
 	if (format == "blits") {
 		m_animations.push_back(new BlitsAnimation(directory, s));
 	} else if (s.get_bool("packed", false)) {
