@@ -300,7 +300,7 @@ if (DEFINED MSVC)
 
   find_library(INTL_LIBRARY NAMES intl libintl)
 
-  set (MSVC_DISABLE_WARNINGS "/wd4290 /wd4800 /wo4373 /wd4355")
+  set (MSVC_DISABLE_WARNINGS "/wd4146 /wd4290 /wd4355 /wd4373 /wd4800")
   # CMAKE only defines "-g", but we need -DDEBUG also, and we need -DNOPARACHUTE (for SDL) in Debug
   set (CMAKE_CXX_FLAGS_DEBUG " -DDEBUG -DNOPARACHUTE /MTd /Zi /D_DEBUG ${MSVC_DISABLE_WARNINGS}" CACHE STRING "Set by widelands CMakeLists.txt" FORCE)
 
