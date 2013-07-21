@@ -528,7 +528,7 @@ void Ship::ship_update_idle(Game & game, Bob::State & state)
 					break;
 				} else {
 					assert(worker);
-					worker->set_economy(NULL);
+					worker->set_economy(nullptr);
 					worker->set_location(cs);
 					worker->set_position(game, cs->get_position());
 					worker->reset_tasks(game);

@@ -412,7 +412,7 @@ public:
 class SpaceNode : public RenderNode {
 public:
 	SpaceNode(NodeStyle& ns, uint16_t w, uint16_t h = 0, bool expanding = false) :
-		RenderNode(ns), m_w(w), m_h(h), m_bg(NULL), m_expanding(expanding) {}
+		RenderNode(ns), m_w(w), m_h(h), m_bg(nullptr), m_expanding(expanding) {}
 
 	virtual uint16_t height() {return m_h;}
 	virtual uint16_t width() {return m_w;}
@@ -709,7 +709,7 @@ private:
 class ImgTagHandler : public TagHandler {
 public:
 	ImgTagHandler(ITag& tag, FontCache& fc, NodeStyle ns, ImageCache* image_cache) :
-		TagHandler(tag, fc, ns, image_cache), m_rn(NULL) {
+		TagHandler(tag, fc, ns, image_cache), m_rn(nullptr) {
 	}
 
 	void enter() {
@@ -746,7 +746,7 @@ private:
 class HspaceTagHandler : public TagHandler {
 public:
 	HspaceTagHandler(ITag& tag, FontCache& fc, NodeStyle ns, ImageCache* image_cache) :
-		TagHandler(tag, fc, ns, image_cache), m_bg(NULL), m_space(0) {}
+		TagHandler(tag, fc, ns, image_cache), m_bg(nullptr), m_space(0) {}
 
 	void enter() {
 		const IAttrMap& a = m_tag.attrs();

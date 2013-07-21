@@ -274,7 +274,7 @@ bool Game::run_splayer_scenario_direct(char const * const mapname) {
 /**
  * Initialize the game based on the given settings.
  *
- * \note loaderUI can be NULL, if this is run as dedicated server.
+ * \note loaderUI can be nullptr, if this is run as dedicated server.
  */
 void Game::init_newgame
 	(UI::ProgressWindow * loaderUI, const GameSettings & settings)
@@ -355,7 +355,7 @@ void Game::init_newgame
  * Only difference is, that players are already initialized.
  * run(loaderUI, true) takes care about this difference.
  *
- * \note loaderUI can be NULL, if this is run as dedicated server.
+ * \note loaderUI can be nullptr, if this is run as dedicated server.
  */
 void Game::init_savegame
 	(UI::ProgressWindow * loaderUI, const GameSettings & settings)
@@ -480,7 +480,7 @@ void Game::postload()
  *
  * \return true if a game actually took place, false otherwise
  *
- * \note loader_ui can be NULL, if this is run as dedicated server.
+ * \note loader_ui can be nullptr, if this is run as dedicated server.
  */
 bool Game::run
 	(UI::ProgressWindow * loader_ui, Start_Game_Type const start_game_type)

@@ -950,7 +950,7 @@ std::string WLApplication::get_executable_path()
 	std::string executabledir;
 #ifdef __APPLE__
 	uint32_t buffersize = 0;
-	_NSGetExecutablePath(NULL, &buffersize);
+	_NSGetExecutablePath(nullptr, &buffersize);
 	char buffer[buffersize];
 	int32_t check = _NSGetExecutablePath(buffer, &buffersize);
 	if (check != 0) {
@@ -2333,7 +2333,7 @@ bool WLApplication::redirect_output(std::string path)
 	if (path.empty()) {
 #ifdef _WIN32
 		char module_name[MAX_PATH];
-		unsigned int name_length = GetModuleFileName(NULL, module_name, MAX_PATH);
+		unsigned int name_length = GetModuleFileName(nullptr, module_name, MAX_PATH);
 		path = module_name;
 		size_t pos = path.find_last_of("/\\");
 		if (pos == std::string::npos) return false;
@@ -2352,10 +2352,10 @@ bool WLApplication::redirect_output(std::string path)
 	if (!newfp) return false;
 
 	/* Line buffered */
-	setvbuf(stdout, NULL, _IOLBF, BUFSIZ);
+	setvbuf(stdout, nullptr, _IOLBF, BUFSIZ);
 
 	/* No buffering */
-	setbuf(stderr, NULL);
+	setbuf(stderr, nullptr);
 
 	m_redirected_stdio = true;
 	return true;

@@ -272,7 +272,7 @@ MilitarySite::find_least_suited_soldier()
 	const std::vector<Soldier *> present = presentSoldiers();
 	const int32_t multiplier = kPrefersHeroes == m_soldier_preference ? -1:1;
 	int worst_soldier_level = INT_MIN;
-	Soldier * worst_soldier = NULL;
+	Soldier * worst_soldier = nullptr;
 	BOOST_FOREACH (Soldier * sld, present)
 	{
 		int this_soldier_level = multiplier * static_cast<int> (sld->get_level(atrTotal));
@@ -311,7 +311,7 @@ MilitarySite::drop_least_suited_soldier(bool new_soldier_has_arrived, Soldier * 
 		Soldier * kickoutCandidate = find_least_suited_soldier();
 
 		// If the arriving guy is worse than worst present, I wont't release.
-		if (NULL != newguy && NULL != kickoutCandidate)
+		if (nullptr != newguy && nullptr != kickoutCandidate)
 		{
 			int32_t old_level = kickoutCandidate->get_level(atrTotal);
 			int32_t new_level = newguy->get_level(atrTotal);
@@ -327,7 +327,7 @@ MilitarySite::drop_least_suited_soldier(bool new_soldier_has_arrived, Soldier * 
 		}
 
 		// Now I know that the new guy is worthy.
-		if (NULL != kickoutCandidate)
+		if (nullptr != kickoutCandidate)
 		{
 			Game & game = ref_cast<Game, Editor_Game_Base>(owner().egbase());
 			kickoutCandidate->reset_tasks(game);
@@ -504,7 +504,7 @@ void MilitarySite::update_soldier_request(bool incd)
 		else // military site is full or overfull
 		if (capacity < stationed) // player is reducing capacity
 		{
-			drop_least_suited_soldier(false, NULL);
+			drop_least_suited_soldier(false, nullptr);
 		}
 		else // capacity == stationed size
 		{
@@ -514,7 +514,7 @@ void MilitarySite::update_soldier_request(bool incd)
 				&& 1 == m_upgrade_soldier_request->get_count()
 				&& (!incd))
 			{
-				drop_least_suited_soldier(false, NULL);
+				drop_least_suited_soldier(false, nullptr);
 			}
 			else
 			{
@@ -1047,7 +1047,7 @@ MilitarySite::update_upgrade_requirements()
 
 	// Find the level of the soldier that is currently least-suited.
 	Soldier * worst_guy = find_least_suited_soldier();
-	if (worst_guy == NULL) {
+	if (worst_guy == nullptr) {
 		// There could be no soldier in the militarysite right now. No reason to freak out.
 		return false;
 	}

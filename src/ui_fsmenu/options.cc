@@ -289,12 +289,12 @@ Fullscreen_Menu_Options::Fullscreen_Menu_Options
 			m_resolutions[i].yres  == opt.yres and
 			m_resolutions[i].depth == opt.depth;
 		did_select_a_res |= selected;
-		m_reslist.add(buf, 0, NULL, selected);
+		m_reslist.add(buf, 0, nullptr, selected);
 	}
 	if (not did_select_a_res) {
 		char buf[32];
 		sprintf(buf, "%ix%i %i bit", opt.xres, opt.yres, opt.depth);
-		m_reslist.add(buf, 0, NULL, true);
+		m_reslist.add(buf, 0, nullptr, true);
 		uint32_t entry = m_resolutions.size();
 		m_resolutions.resize(entry + 1);
 		m_resolutions[entry].xres  = opt.xres;
@@ -305,11 +305,11 @@ Fullscreen_Menu_Options::Fullscreen_Menu_Options
 	// Fill language list
 	m_language_list.add
 		(_("Try system language"), "", // "try", as many translations are missing.
-		 NULL, "" == opt.language);
+		 nullptr, "" == opt.language);
 
 	m_language_list.add
 		("English", "en",
-		 NULL, "en" == opt.language);
+		 nullptr, "en" == opt.language);
 
 	filenameset_t files;
 	Section * s = &g_options.pull_section("global");
@@ -335,14 +335,14 @@ Fullscreen_Menu_Options::Fullscreen_Menu_Options
 		char const * const abbrev = FileSystem::FS_Filename(path);
 		m_language_list.add
 			(s->get_string(abbrev, abbrev), abbrev,
-			 NULL, abbrev == opt.language);
+			 nullptr, abbrev == opt.language);
 		own_selected |= abbrev == opt.language;
 	}
 	// Add currently used language manually
 	if (!own_selected)
 		m_language_list.add
 			(s->get_string(opt.language.c_str(), opt.language.c_str()),
-			 opt.language, NULL, true);
+			 opt.language, nullptr, true);
 }
 
 void Fullscreen_Menu_Options::advanced_options() {
@@ -548,15 +548,15 @@ Fullscreen_Menu_Advanced_Options::Fullscreen_Menu_Advanced_Options
 		bool cmpbool = !strcmp("serif", opt.ui_font.c_str());
 		did_select_a_font = cmpbool;
 		m_ui_font_list.add
-			(_("DejaVuSerif (Default)"), "serif", NULL, cmpbool);
+			(_("DejaVuSerif (Default)"), "serif", nullptr, cmpbool);
 		cmpbool = !strcmp("sans", opt.ui_font.c_str());
 		did_select_a_font |= cmpbool;
 		m_ui_font_list.add
-			("DejaVuSans", "sans", NULL, cmpbool);
+			("DejaVuSans", "sans", nullptr, cmpbool);
 		cmpbool = !strcmp(UI_FONT_NAME_WIDELANDS, opt.ui_font.c_str());
 		did_select_a_font |= cmpbool;
 		m_ui_font_list.add
-			("Widelands", UI_FONT_NAME_WIDELANDS, NULL, cmpbool);
+			("Widelands", UI_FONT_NAME_WIDELANDS, nullptr, cmpbool);
 
 		// Fill with all left *.ttf files we find in fonts
 		filenameset_t files;
@@ -578,7 +578,7 @@ Fullscreen_Menu_Advanced_Options::Fullscreen_Menu_Advanced_Options
 			cmpbool = !strcmp(name, opt.ui_font.c_str());
 			did_select_a_font |= cmpbool;
 			m_ui_font_list.add
-				(name, name, NULL, cmpbool);
+				(name, name, nullptr, cmpbool);
 		}
 
 		if (!did_select_a_font)

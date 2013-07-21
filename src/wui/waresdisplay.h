@@ -51,7 +51,7 @@ public:
 		 const Widelands::Tribe_Descr &,
 		 Widelands::WareWorker type,
 		 bool selectable,
-		 boost::function<void(Widelands::Ware_Index, bool)> callback_function = NULL,
+		 boost::function<void(Widelands::Ware_Index, bool)> callback_function = 0,
 		 bool horizontal = true);
 
 	bool handle_mousemove

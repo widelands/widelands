@@ -81,7 +81,7 @@ void SurfaceCacheImpl::flush() {
 Surface* SurfaceCacheImpl::get(const string& hash) {
 	const Container::iterator it = entries_.find(hash);
 	if (it == entries_.end())
-		return NULL;
+		return nullptr;
 
 	// Move this to the back of the access list to signal that we have used this
 	// recently and update last access time.
