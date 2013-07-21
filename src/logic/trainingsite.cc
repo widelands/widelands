@@ -37,7 +37,7 @@
 
 namespace Widelands {
 
-const uint32_t TrainingSite::training_state_multiplier;
+const uint32_t TrainingSite::training_state_multiplier = 12;
 
 TrainingSite_Descr::TrainingSite_Descr
 	(char const * const _name, char const * const _descname,
