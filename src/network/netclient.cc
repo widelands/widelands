@@ -920,7 +920,7 @@ void NetClient::handle_packet(RecvPacket & packet)
 
 			for (uint8_t j = packet.Unsigned8(); j; --j) {
 				std::string const name = packet.String();
-				boost::shared_ptr<LuaTable> t = lua->run_script
+				std::unique_ptr<LuaTable> t = lua->run_script
 					("tribe_" + info.name, name);
 				info.initializations.push_back
 					(TribeBasicInfo::Initialization(name, t->get_string("name")));

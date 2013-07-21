@@ -292,7 +292,7 @@ void Fullscreen_Menu_LaunchMPG::win_condition_update() {
 		m_wincondition.set_tooltip
 			(_("The game is a saved game - the win condition was set before."));
 	} else {
-		boost::shared_ptr<LuaTable> t = m_lua->run_script
+		std::unique_ptr<LuaTable> t = m_lua->run_script
 			("win_conditions", m_settings->getWinCondition());
 
 		try {

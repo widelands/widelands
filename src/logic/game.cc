@@ -336,7 +336,7 @@ void Game::init_newgame
 
 	// Check for win_conditions
 	if (!settings.scenario) {
-		boost::shared_ptr<LuaTable> table
+		std::unique_ptr<LuaTable> table
 			(lua().run_script
 			 (*g_fs, "scripting/win_conditions/" + settings.win_condition + ".lua", "win_conditions"));
 		m_win_condition_displayname = table->get_string("name");
@@ -1031,7 +1031,7 @@ void Game::sample_statistics()
 
 	// If there is a hook function defined to sample special statistics in this
 	// game, call the corresponding Lua function
-	boost::shared_ptr<LuaTable> hook = lua().get_hook("custom_statistic");
+	std::unique_ptr<LuaTable> hook = lua().get_hook("custom_statistic");
 	if (hook) {
 		iterate_players_existing(p, nr_plrs, *this, plr) {
 			LuaCoroutine * cr = hook->get_coroutine("calculator");

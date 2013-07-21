@@ -133,10 +133,10 @@ protected:
 			return m_scripts[ns];
 		}
 
-		virtual boost::shared_ptr<LuaTable> run_script(std::string, std::string);
-		virtual boost::shared_ptr<LuaTable> run_script
+		virtual std::unique_ptr<LuaTable> run_script(std::string, std::string);
+		virtual std::unique_ptr<LuaTable> run_script
 			(FileSystem &, std::string, std::string);
-		virtual boost::shared_ptr<LuaTable> get_hook(std::string name);
+		virtual std::unique_ptr<LuaTable> get_hook(std::string name);
 };
 
 
@@ -268,7 +268,7 @@ void LuaInterface_Impl::interpret_string(std::string cmd) {
 	m_check_for_errors(rv);
 }
 
-boost::shared_ptr<LuaTable> LuaInterface_Impl::run_script
+	std::unique_ptr<LuaTable> LuaInterface_Impl::run_script
 	(FileSystem & fs, std::string path, std::string ns)
 {
 	bool delete_ns = false;
@@ -277,7 +277,7 @@ boost::shared_ptr<LuaTable> LuaInterface_Impl::run_script
 
 	std::string name = m_register_script(fs, path, ns);
 
-	boost::shared_ptr<LuaTable> rv = run_script(ns, name);
+	std::unique_ptr<LuaTable> rv = run_script(ns, name);
 
 	if (delete_ns)
 		m_scripts.erase(ns);
@@ -287,7 +287,7 @@ boost::shared_ptr<LuaTable> LuaInterface_Impl::run_script
 	return rv;
 }
 
-boost::shared_ptr<LuaTable> LuaInterface_Impl::run_script
+	std::unique_ptr<LuaTable> LuaInterface_Impl::run_script
 	(std::string ns, std::string name)
 {
 	if
@@ -308,27 +308,27 @@ boost::shared_ptr<LuaTable> LuaInterface_Impl::run_script
 	}
 	if (not lua_istable(m_L, -1))
 		throw LuaError("Script did not return a table!");
-	return boost::shared_ptr<LuaTable>(new LuaTable_Impl(m_L));
+	return std::unique_ptr<LuaTable>(new LuaTable_Impl(m_L));
 }
 
 /*
  * Returns a given hook if one is defined, otherwise returns 0
  */
-boost::shared_ptr<LuaTable> LuaInterface_Impl::get_hook(std::string name) {
+std::unique_ptr<LuaTable> LuaInterface_Impl::get_hook(std::string name) {
 	lua_getglobal(m_L, "hooks");
 	if (lua_isnil(m_L, -1)) {
 		lua_pop(m_L, 1);
-		return boost::shared_ptr<LuaTable>();
+		return std::unique_ptr<LuaTable>();
 	}
 
 	lua_getfield(m_L, -1, name.c_str());
 	if (lua_isnil(m_L, -1)) {
 		lua_pop(m_L, 2);
-		return boost::shared_ptr<LuaTable>();
+		return std::unique_ptr<LuaTable>();
 	}
 	lua_remove(m_L, -2);
 
-	return boost::shared_ptr<LuaTable>(new LuaTable_Impl(m_L));
+	return std::unique_ptr<LuaTable>(new LuaTable_Impl(m_L));
 }
 
 /*
