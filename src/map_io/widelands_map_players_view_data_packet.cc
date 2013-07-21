@@ -163,7 +163,7 @@ namespace {
 
 // FIXME: Legacy code deprecated since build18
 template<uint8_t const Size> struct BitInBuffer {
-	compile_assert(Size == 1 or Size == 2 or Size == 4);
+	static_assert(Size == 1 or Size == 2 or Size == 4, "Unexpected Size.");
 	BitInBuffer(FileRead* fr) : buffer(0), mask(0x00) {m_fr = fr;}
 
 	uint8_t get() {
