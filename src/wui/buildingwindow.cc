@@ -85,8 +85,7 @@ Building_Window::Building_Window
 	show_workarea();
 
 	// Title for construction site
-	upcast(Widelands::ConstructionSite, csite, &m_building);
-	if (csite != NULL) {
+	if (upcast(Widelands::ConstructionSite, csite, &m_building)) {
 		// Show name in parenthesis as it may take all width already
 		const std::string title = (boost::format("(%s)") % csite->building().descname()).str();
 		set_title(title);
