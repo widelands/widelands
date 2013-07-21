@@ -162,7 +162,11 @@ void Game_Main_Menu_Save_Game::selected(uint32_t) {
 	}
 	m_button_ok->set_enabled(true);
 
-	m_mapname.set_text(gpdp.get_mapname());
+	//Try to translate the map name.
+	{
+		i18n::Textdomain td("maps");
+		m_mapname.set_text(_(gpdp.get_mapname()));
+	}
 
 	uint32_t gametime = gpdp.get_gametime();
 	m_gametime.set_text(gametimestring(gametime));
