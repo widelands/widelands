@@ -139,8 +139,9 @@ Game_Main_Menu_Save_Game::Game_Main_Menu_Save_Game
 	}
 
 	m_editbox->focus();
-	if (!parent.game().get_ipl()->is_multiplayer()) {
-		// Pause the game
+	if (parent.game().get_ipl() && !parent.game().get_ipl()->is_multiplayer()) {
+		// Pause the game only if we are part of the game
+		// and not in multiplayer
 		parent.game().gameController()->setPaused(true);
 	}
 }
@@ -311,7 +312,7 @@ void Game_Main_Menu_Save_Game::ok()
 void Game_Main_Menu_Save_Game::die()
 {
 	UI::UniqueWindow::die();
-	if (!igbase().game().get_ipl()->is_multiplayer()) {
+	if (igbase().game().get_ipl() && !igbase().game().get_ipl()->is_multiplayer()) {
 		igbase().game().gameController()->setPaused(false);
 	}
 }
