@@ -101,7 +101,7 @@ public:
 		surf = Surface::create(width(), height());
 		surf->fill_rect(Rect(0, 0, surf->width(), surf->height()), RGBAColor(255, 255, 255, 0));
 		anim_->blit(0, Point(0, 0), Rect(0, 0, width(), height()), &clr_, surf);
-		surface_cache.insert(hash_, surf);
+		surface_cache.insert(hash_, surf, true);
 
 		return surf;
 	}
@@ -425,7 +425,7 @@ PackedAnimation::PackedAnimation(const string& directory, Section& s)
 		boost::split(offset_strings, split_vector[1], boost::is_any_of(";"));
 		if (nr_frames_ && nr_frames_ != offset_strings.size())
 			throw wexception
-				("%s: region has different number of frames than previous (%i != %"PRIuS").",
+				("%s: region has different number of frames than previous (%i != %" PRIuS ").",
 				 region_name.c_str(), nr_frames_, offset_strings.size());
 		nr_frames_ = offset_strings.size();
 
@@ -633,7 +633,7 @@ NonPackedAnimation::NonPackedAnimation(const string& directory, Section& s)
 
 	if (pcmasks_.size() and pcmasks_.size() != frames_.size())
 		throw wexception
-			("animation has %"PRIuS" frames but playercolor mask has %"PRIuS" frames",
+			("animation has %" PRIuS " frames but playercolor mask has %" PRIuS " frames",
 			 frames_.size(), pcmasks_.size());
 }
 

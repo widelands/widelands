@@ -234,10 +234,7 @@ Draw it.
 ===============
 */
 void DismantleSite::draw
-	(const Editor_Game_Base & game,
-	 RenderTarget           & dst,
-	 FCoords          const   coords,
-	 Point            const   pos)
+	(const Editor_Game_Base& game, RenderTarget& dst, const FCoords& coords, const Point& pos)
 {
 	assert(0 <= game.get_gametime());
 	const uint32_t gametime = game.get_gametime();
@@ -250,7 +247,7 @@ void DismantleSite::draw
 	dst.drawanim(pos, m_anim, tanim, get_owner());
 
 	// Draw the partially dismantled building
-	compile_assert(0 <= DISMANTLESITE_STEP_TIME);
+	static_assert(0 <= DISMANTLESITE_STEP_TIME, "assert(0 <= DISMANTLESITE_STEP_TIME) failed.");
 	uint32_t total_time = DISMANTLESITE_STEP_TIME * m_work_steps;
 	uint32_t completed_time = DISMANTLESITE_STEP_TIME * m_work_completed;
 
@@ -260,7 +257,7 @@ void DismantleSite::draw
 	uint32_t anim_idx;
 	try {
 		anim_idx = m_building->get_animation("unoccupied");
-	} catch (Map_Object_Descr::Animation_Nonexistent & e) {
+	} catch (Map_Object_Descr::Animation_Nonexistent &) {
 		anim_idx = m_building->get_animation("idle");
 	}
 	const Animation& anim = g_gr->animations().get_animation(anim_idx);

@@ -23,10 +23,11 @@
 #include "economy/route.h"
 #include "graphic/animation.h"
 #include "graphic/diranimations.h"
-#include "point.h"
-#include "writeHTML.h"
 #include "instances.h"
+#include "point.h"
+#include "port.h"
 #include "walkingdir.h"
+#include "writeHTML.h"
 
 struct Profile;
 
@@ -249,7 +250,7 @@ struct Bob : public Map_Object {
 	virtual bool checkNodeBlocked(Game &, const FCoords &, bool commit);
 
 	virtual void draw
-		(const Editor_Game_Base &, RenderTarget &, Point) const;
+		(const Editor_Game_Base &, RenderTarget &, const Point&) const;
 
 	// For debug
 	virtual void log_general_info(const Editor_Game_Base &);

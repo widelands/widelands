@@ -2,6 +2,7 @@ size=medium
 max_soldiers=7
 heal_per_second=140
 conquers=7
+prefer_heroes=true
 
 [buildcost]
 trunk=2

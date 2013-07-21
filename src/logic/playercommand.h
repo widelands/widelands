@@ -194,6 +194,26 @@ private:
 	Serial serial;
 };
 
+struct Cmd_MilitarySiteSetSoldierPreference : public PlayerCommand {
+	Cmd_MilitarySiteSetSoldierPreference() : PlayerCommand(), serial(0) {} // For savegame loading
+	Cmd_MilitarySiteSetSoldierPreference (const int32_t t, const Player_Number p, Building & b, uint8_t prefs)
+		: PlayerCommand(t, p), serial(b.serial()), preference(prefs)
+	{}
+
+	void Write(FileWrite &, Editor_Game_Base &, Map_Map_Object_Saver  &);
+	void Read (FileRead  &, Editor_Game_Base &, Map_Map_Object_Loader &);
+
+	virtual uint8_t id() const {return QUEUE_CMD_MILITARYSITESETSOLDIERPREFERENCE;}
+
+	Cmd_MilitarySiteSetSoldierPreference (StreamRead &);
+
+	virtual void execute (Game &);
+	virtual void serialize (StreamWrite &);
+
+private:
+	Serial serial;
+	uint8_t preference;
+};
 struct Cmd_StartOrCancelExpedition : public PlayerCommand {
 	Cmd_StartOrCancelExpedition() : PlayerCommand() {} // For savegame loading
 	Cmd_StartOrCancelExpedition (int32_t const t, Player_Number const p, Building & b)

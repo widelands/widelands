@@ -58,7 +58,7 @@ extern "C" {
 #endif
 
 #if defined(STRICTZIP) || defined(STRICTZIPUNZIP)
-/* like the STRICT of WIN32, we define a pointer that cannot be converted
+/* like the STRICT of _WIN32, we define a pointer that cannot be converted
     from (void*) without cast */
 typedef struct TagzipFile__ {int32_t unused;} zipFile__;
 typedef zipFile__ * zipFile;
@@ -120,7 +120,7 @@ extern zipFile ZEXPORT zipOpen OF((char const * pathname, int32_t append));
   created at the end of the file.  (useful if the file contain a self extractor
   code) if the file pathname exist and append==APPEND_STATUS_ADDINZIP, we will
   add files in existing zip (be sure you don't add file that doesn't exist) If
-  the zipfile cannot be opened, the return value is NULL.  Else, the return
+  the zipfile cannot be opened, the return value is nullptr.  Else, the return
   value is a zipFile Handle, usable with other function of this zip package.
 */
 
@@ -149,13 +149,13 @@ extern int32_t ZEXPORT zipOpenNewFileInZip OF
 	  int32_t              level));
 /*
   Open a file in the ZIP for writing.
-  filename : the filename in zip (if NULL, '-' without quote will be used
+  filename : the filename in zip (if nullptr, '-' without quote will be used
   *zipfi contain supplemental information
-  if extrafield_local!=NULL and size_extrafield_local>0, extrafield_local
+  if extrafield_local!=nullptr and size_extrafield_local>0, extrafield_local
     contains the extrafield data the the local header
-  if extrafield_global!=NULL and size_extrafield_global>0, extrafield_global
+  if extrafield_global!=nullptr and size_extrafield_global>0, extrafield_global
     contains the extrafield data the the local header
-  if comment != NULL, comment contain the comment string
+  if comment != nullptr, comment contain the comment string
   method contain the compression method (0 for store, Z_DEFLATED for deflate)
   level contain the level of compression (can be Z_DEFAULT_COMPRESSION)
 */
@@ -186,7 +186,7 @@ extern int32_t ZEXPORT zipOpenNewFileInZip3 OF
 /*
   Same than zipOpenNewFileInZip2, except
     windowBits, memLevel, strategy : see parameter strategy in deflateInit2
-    password : crypting password (NULL for no crypting)
+    password : crypting password (nullptr for no crypting)
     crcForCtypting : crc of file to compress (needed for crypting)
  */
 

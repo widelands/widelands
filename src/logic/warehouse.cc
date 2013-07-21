@@ -496,7 +496,7 @@ void Warehouse::init_portdock(Editor_Game_Base & egbase)
 		return;
 	}
 
-	molog("Found %"PRIuS" fields for the dock\n", dock.size());
+	molog("Found %" PRIuS " fields for the dock\n", dock.size());
 
 	m_portdock = new PortDock;
 	m_portdock->set_owner(get_owner());

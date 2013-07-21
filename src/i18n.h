@@ -26,9 +26,7 @@
 
 #include <config.h>
 
-#ifdef _MSC_VER
-#define __attribute__(x)
-#endif
+#include "port.h"
 
 ///A macro to make i18n more readable and aid in tagging strings for translation
 #define _(str) i18n::translate(str)

@@ -66,6 +66,8 @@ protected:
 	void toggle_workarea();
 	void configure_workarea_button();
 	void act_start_stop();
+	void act_prefer_rookies();
+	void act_prefer_heroes();
 	void act_start_or_cancel_expedition();
 	void act_enhance(Widelands::Building_Index);
 	void clicked_goto();
@@ -92,7 +94,6 @@ private:
 	bool m_caps_setup;
 
 	Overlay_Manager::Job_Id m_workarea_job_id;
-	const Image* workarea_cumulative_pic[NUMBER_OF_WORKAREA_PICS];
 	bool m_avoid_fastclick;
 };
 

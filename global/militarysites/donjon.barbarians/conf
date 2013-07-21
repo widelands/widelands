@@ -4,6 +4,7 @@ heal_per_second=150
 conquers=8
 vision_range=17
 buildable=no
+prefer_heroes=true
 
 [idle]
 pics=../../../tribes/barbarians/donjon/donjon_i_??.png

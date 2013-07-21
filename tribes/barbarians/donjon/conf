@@ -3,6 +3,7 @@ max_soldiers=5
 heal_per_second=150
 conquers=8
 vision_range=17
+prefer_heroes=true
 
 [buildcost]
 blackwood=7

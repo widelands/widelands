@@ -75,7 +75,25 @@ void Map_Port_Spaces_Data_Packet::Write(FileSystem & fs, Editor_Game_Base & egba
 	s1.set_int("packet_version", CURRENT_PACKET_VERSION);
 
 	Map & map = egbase.map();
-	const Map::PortSpacesSet& port_spaces = map.get_port_spaces();
+	Map::PortSpacesSet port_spaces(map.get_port_spaces());
+
+	// Clean up before saving: Delete port build spaces that are defined for a FCoord, that
+	// can in no way be a building of size big.
+	//
+	// NOTE  This clean up might interfer with scenarios that alter the terrain or the height of the map.
+	// NOTE  However those types of  scenarios can be seen to be a rare case in which the port spaces can be
+	// NOTE  handled by rewriting port spaces via a LUA script once the terrain is changed.
+	BOOST_FOREACH(const Coords & c, port_spaces) {
+		FCoords fc = map.get_fcoords(c);
+		if
+			((map.get_max_nodecaps(fc) & BUILDCAPS_SIZEMASK) != BUILDCAPS_BIG
+			 ||
+			 map.find_portdock(fc).empty())
+		{
+			port_spaces.erase(c);
+		}
+	}
+
 	const uint16_t num = port_spaces.size();
 	char buf[8]; // there won't be that many port spaces... Definitely!
 	s1.set_int("number_of_port_spaces", num);

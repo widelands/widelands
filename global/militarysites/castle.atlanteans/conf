@@ -3,6 +3,7 @@ max_soldiers=12
 heal_per_second=200
 conquers=12
 buildable=no
+prefer_heroes=true
 
 [idle]
 pics=../../../tribes/atlanteans/castle/castle.png

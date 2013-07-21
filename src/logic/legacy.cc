@@ -363,7 +363,7 @@ struct FakeAttackController : public BaseImmovable {
 	virtual int32_t get_type() const throw () {return BATTLE;}
 	virtual int32_t get_size() const throw () {return SMALL;}
 	virtual bool get_passable() const throw () {return true;}
-	virtual void draw (const Editor_Game_Base &, RenderTarget &, FCoords, Point)
+	virtual void draw (const Editor_Game_Base &, RenderTarget &, const FCoords&, const Point&)
 	{}
 	virtual PositionList get_positions (const Editor_Game_Base &) const throw ()
 	{
@@ -419,7 +419,7 @@ struct FakeAttackController : public BaseImmovable {
 Map_Object::Loader * loadAttackController
 	(Editor_Game_Base & egbase, Map_Map_Object_Loader & mol, FileRead & fr)
 {
-	std::auto_ptr<FakeAttackController::Loader> loader
+	std::unique_ptr<FakeAttackController::Loader> loader
 		(new FakeAttackController::Loader);
 
 	try {
@@ -445,7 +445,7 @@ struct FakeBattle : public BaseImmovable {
 	virtual int32_t get_type() const throw () {return BATTLE;}
 	virtual int32_t get_size() const throw () {return SMALL;}
 	virtual bool get_passable() const throw () {return true;}
-	virtual void draw (const Editor_Game_Base &, RenderTarget &, FCoords, Point)
+	virtual void draw (const Editor_Game_Base &, RenderTarget &, const FCoords&, const Point&)
 	{}
 	virtual PositionList get_positions (const Editor_Game_Base &) const throw ()
 	{
@@ -474,7 +474,7 @@ struct FakeBattle : public BaseImmovable {
 Map_Object::Loader * loadBattle
 	(Editor_Game_Base & egbase, Map_Map_Object_Loader & mol, FileRead & fr)
 {
-	std::auto_ptr<FakeBattle::Loader> loader(new FakeBattle::Loader);
+	std::unique_ptr<FakeBattle::Loader> loader(new FakeBattle::Loader);
 
 	try {
 		// Header has been peeled away by caller

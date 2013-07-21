@@ -21,8 +21,8 @@ water=8
 work=_Work
 
 [work]
-return=skipped when economy needs water and not economy needs horse
-return=skipped when economy needs corn and not economy needs horse
+return=skipped unless economy needs horse or not economy needs water
+return=skipped unless economy needs horse or not economy needs corn
 consume=corn water
 playFX=../../../sound/farm/horse 192
 animate=working 30000 # feeding cute little foals ;)

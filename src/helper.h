@@ -176,5 +176,7 @@ private:
 	uint32_t max_;
 };
 
+/// Generate a random string of given size out of the given alphabet.
+std::string random_string(const std::string& chars, int nlen);
 
 #endif

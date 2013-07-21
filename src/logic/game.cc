@@ -54,11 +54,12 @@
 #include "wlapplication.h"
 #include "wui/game_tips.h"
 #include "wui/interactive_player.h"
+#include "militarysite.h"
 
 #include <cstring>
 #include <string>
 
-#ifndef WIN32
+#ifndef _WIN32
 #include <unistd.h> // for usleep
 #else
 #include <windows.h>
@@ -111,7 +112,7 @@ void Game::SyncWrapper::Data(void const * const data, size_t const size) {
 	if (m_dump) {
 		try {
 			m_dump->Data(data, size);
-		} catch (const _wexception & e) {
+		} catch (const _wexception &) {
 			log
 				("Writing to syncstream file %s failed. Stop synctream dump.\n",
 				 m_dumpfname.c_str());
@@ -135,8 +136,10 @@ Game::Game() :
 	m_state               (gs_notrunning),
 	m_cmdqueue            (*this),
 	m_replaywriter        (0),
-	m_win_condition_string("not_set")
+	m_win_condition_displayname(_("Not set"))
 {
+	// Preload win_conditions as they are displayed in UI
+	lua().register_scripts(*g_fs, "win_conditions", "scripting/win_conditions");
 }
 
 Game::~Game()
@@ -217,7 +220,7 @@ bool Game::run_splayer_scenario_direct(char const * const mapname) {
 
 	set_map(new Map);
 
-	std::auto_ptr<Map_Loader> maploader(map().get_correct_loader(mapname));
+	std::unique_ptr<Map_Loader> maploader(map().get_correct_loader(mapname));
 	if (not maploader.get())
 		throw wexception("could not load \"%s\"", mapname);
 	UI::ProgressWindow loaderUI;
@@ -234,6 +237,7 @@ bool Game::run_splayer_scenario_direct(char const * const mapname) {
 
 	// We have to create the players here.
 	Player_Number const nr_players = map().get_nrplayers();
+	m_number_of_players = 0;
 	iterate_player_numbers(p, nr_players) {
 		loaderUI.stepf (_("Adding player %u"), p);
 		add_player
@@ -242,7 +246,9 @@ bool Game::run_splayer_scenario_direct(char const * const mapname) {
 			 map().get_scenario_player_tribe(p),
 			 map().get_scenario_player_name (p));
 		get_player(p)->setAI(map().get_scenario_player_ai(p));
+		m_number_of_players++;
 	}
+	m_win_condition_displayname = _("Scenario");
 
 	set_ibase
 		(new Interactive_Player
@@ -271,7 +277,7 @@ bool Game::run_splayer_scenario_direct(char const * const mapname) {
 /**
  * Initialize the game based on the given settings.
  *
- * \note loaderUI can be NULL, if this is run as dedicated server.
+ * \note loaderUI can be nullptr, if this is run as dedicated server.
  */
 void Game::init_newgame
 	(UI::ProgressWindow * loaderUI, const GameSettings & settings)
@@ -283,7 +289,7 @@ void Game::init_newgame
 	assert(!get_map());
 	set_map(new Map);
 
-	std::auto_ptr<Map_Loader> maploader
+	std::unique_ptr<Map_Loader> maploader
 		(map().get_correct_loader(settings.mapfilename.c_str()));
 	maploader->preload_map(settings.scenario);
 	std::string const background = map().get_background();
@@ -296,6 +302,7 @@ void Game::init_newgame
 	}
 	std::vector<PlayerSettings> shared;
 	std::vector<uint8_t>        shared_num;
+	m_number_of_players = 0;
 	for (uint32_t i = 0; i < settings.players.size(); ++i) {
 		const PlayerSettings & playersettings = settings.players[i];
 
@@ -316,7 +323,9 @@ void Game::init_newgame
 			 playersettings.name,
 			 playersettings.team);
 		get_player(i + 1)->setAI(playersettings.ai);
+		m_number_of_players++;
 	}
+
 	// Add shared in starting positions
 	for (uint8_t n = 0; n < shared.size(); ++n) {
 		// This player's starting position is used in another (shared) kingdom
@@ -330,11 +339,14 @@ void Game::init_newgame
 
 	// Check for win_conditions
 	if (!settings.scenario) {
-		m_win_condition_string = settings.win_condition;
-		LuaCoroutine * cr = lua().run_script
-			(*g_fs, "scripting/win_conditions/" + settings.win_condition + ".lua", "win_conditions")
-			->get_coroutine("func");
+		std::unique_ptr<LuaTable> table
+			(lua().run_script
+			 (*g_fs, "scripting/win_conditions/" + settings.win_condition + ".lua", "win_conditions"));
+		m_win_condition_displayname = table->get_string("name");
+		LuaCoroutine * cr = table->get_coroutine("func");
 		enqueue_command(new Cmd_LuaCoroutine(get_gametime() + 100, cr));
+	} else {
+		m_win_condition_displayname = _("Scenario");
 	}
 }
 
@@ -346,7 +358,7 @@ void Game::init_newgame
  * Only difference is, that players are already initialized.
  * run(loaderUI, true) takes care about this difference.
  *
- * \note loaderUI can be NULL, if this is run as dedicated server.
+ * \note loaderUI can be nullptr, if this is run as dedicated server.
  */
 void Game::init_savegame
 	(UI::ProgressWindow * loaderUI, const GameSettings & settings)
@@ -359,11 +371,9 @@ void Game::init_savegame
 	set_map(new Map);
 	try {
 		Game_Loader gl(settings.mapfilename, *this);
-
-
 		Widelands::Game_Preload_Data_Packet gpdp;
 		gl.preload_game(gpdp);
-		m_win_condition_string = gpdp.get_win_condition();
+		m_win_condition_displayname = gpdp.get_win_condition();
 		if (loaderUI) {
 			std::string background(gpdp.get_background());
 			loaderUI->set_background(background);
@@ -402,7 +412,7 @@ bool Game::run_load_game(std::string filename) {
 		std::string background(gpdp.get_background());
 		loaderUI.set_background(background);
 		player_nr = gpdp.get_player_nr();
-
+		m_number_of_players = gpdp.get_number_of_players();
 		set_ibase
 			(new Interactive_Player
 			 	(*this, g_options.pull_section("global"), player_nr, true, false));
@@ -410,6 +420,15 @@ bool Game::run_load_game(std::string filename) {
 		loaderUI.step(_("Loading..."));
 		gl.load_game();
 	}
+	if (m_number_of_players == 0) {
+		// Old savegame loaded, parse players to figure out their amount
+		iterate_players_existing_const(p, map().get_nrplayers(), *this, player_tmp) {
+			m_number_of_players++;
+		}
+	}
+
+	// Store the filename for further saves
+	save_handler().set_current_filename(filename);
 
 	set_game_controller(GameController::createSinglePlayer(*this, true, player_nr));
 	try {
@@ -462,7 +481,7 @@ void Game::postload()
  *
  * \return true if a game actually took place, false otherwise
  *
- * \note loader_ui can be NULL, if this is run as dedicated server.
+ * \note loader_ui can be nullptr, if this is run as dedicated server.
  */
 bool Game::run
 	(UI::ProgressWindow * loader_ui, Start_Game_Type const start_game_type)
@@ -555,7 +574,7 @@ bool Game::run
 	if (loader_ui) {
 		load_graphics(*loader_ui);
 
-#ifdef WIN32
+#ifdef _WIN32
 		//  Clear the event queue before starting game because we don't want
 		//  to handle events at game start that happened during loading procedure.
 		SDL_Event event;
@@ -583,7 +602,7 @@ bool Game::run
 		//handle network
 		while (m_state == gs_running) {
 			// TODO this should be improved.
-#ifndef WIN32
+#ifndef _WIN32
 			if (usleep(100) == -1)
 				break;
 #else
@@ -767,6 +786,13 @@ void Game::send_player_start_stop_building (Building & building)
 	send_player_command
 		(*new Cmd_StartStopBuilding
 		 	(get_gametime(), building.owner().player_number(), building));
+}
+
+void Game::send_player_militarysite_set_soldier_preference (Building & building, uint8_t my_preference)
+{
+	send_player_command
+		(*new Cmd_MilitarySiteSetSoldierPreference
+		 (get_gametime(), building.owner().player_number(), building, my_preference));
 }
 
 void Game::send_player_start_or_cancel_expedition (Building & building)
@@ -1002,7 +1028,7 @@ void Game::sample_statistics()
 
 	// If there is a hook function defined to sample special statistics in this
 	// game, call the corresponding Lua function
-	boost::shared_ptr<LuaTable> hook = lua().get_hook("custom_statistic");
+	std::unique_ptr<LuaTable> hook = lua().get_hook("custom_statistic");
 	if (hook) {
 		iterate_players_existing(p, nr_plrs, *this, plr) {
 			LuaCoroutine * cr = hook->get_coroutine("calculator");

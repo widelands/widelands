@@ -41,7 +41,7 @@
 
 #include "upcast.h"
 
-#include <boost/scoped_ptr.hpp>
+#include <boost/format.hpp>
 
 #include <cstdio>
 #include <cstring>
@@ -229,7 +229,7 @@ void Main_Menu_Save_Map::clicked_item(uint32_t) {
 	if (Widelands::WL_Map_Loader::is_widelands_map(name)) {
 		Widelands::Map map;
 		{
-			std::auto_ptr<Widelands::Map_Loader> const ml
+			std::unique_ptr<Widelands::Map_Loader> const ml
 				(map.get_correct_loader(name));
 			ml->preload_map(true); // This has worked before, no problem
 		}
@@ -254,9 +254,13 @@ void Main_Menu_Save_Map::clicked_item(uint32_t) {
 		m_nrplayers->set_text("");
 		m_size     ->set_text("");
 		if (g_fs->IsDirectory(name)) {
-			m_descr    ->set_text(_("<Directory>"));
+			std::string dir_string =
+				(boost::format("\\<%s\\>") % _("directory")).str();
+			m_descr    ->set_text(dir_string);
 		} else {
-			m_descr    ->set_text(_("<Not a map file>"));
+			std::string not_map_string =
+				(boost::format("\\<%s\\>") % _("Not a map file")).str();
+			m_descr    ->set_text(not_map_string);
 		}
 
 	}
@@ -287,13 +291,15 @@ void Main_Menu_Save_Map::fill_list() {
 
 	// First, we add all directories. We manually add the parent directory
 	if (m_curdir != m_basedir) {
-#ifndef WIN32
+#ifndef _WIN32
 		m_parentdir = m_curdir.substr(0, m_curdir.rfind('/'));
 #else
 		m_parentdir = m_curdir.substr(0, m_curdir.rfind('\\'));
 #endif
+		std::string parent_string =
+				(boost::format("\\<%s\\>") % _("parent")).str();
 		m_ls->add
-			(_("<parent>"),
+			(parent_string.c_str(),
 			 m_parentdir.c_str(),
 			 g_gr->images().get("pics/ls_dir.png"));
 	}
@@ -327,7 +333,7 @@ void Main_Menu_Save_Map::fill_list() {
 		char const * const name = pname->c_str();
 
 		// we do not list S2 files since we only write wmf
-		boost::scoped_ptr<Widelands::Map_Loader> ml(map.get_correct_loader(name));
+		std::unique_ptr<Widelands::Map_Loader> ml(map.get_correct_loader(name));
 		if (upcast(Widelands::WL_Map_Loader, wml, ml.get())) {
 			try {
 				wml->preload_map(true);
@@ -390,7 +396,7 @@ bool Main_Menu_Save_Map::save_map(std::string filename, bool binary) {
 		g_fs->Unlink(complete_filename);
 	}
 
-	boost::scoped_ptr<FileSystem> fs
+	std::unique_ptr<FileSystem> fs
 			(g_fs->CreateSubFileSystem(complete_filename, binary ? FileSystem::ZIP : FileSystem::DIR));
 	Widelands::Map_Saver wms(*fs, eia().egbase());
 	try {

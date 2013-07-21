@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2013-06-16 09:11+0000\n"
+"POT-Creation-Date: 2013-07-18 19:39+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -19,7 +19,7 @@ msgid ""
 "%i trees."
 msgstr ""
 
-#: ../../scripting/win_condition_texts.lua:54
+#: ../../scripting/win_condition_texts.lua:55
 msgid ""
 "%s %s %i%% of the land (%i of %i)."
 msgstr ""
@@ -86,6 +86,11 @@ msgid ""
 "Keep it for %i more minutes to win the game."
 msgstr ""
 
+#: ../../scripting/win_condition_texts.lua:54
+msgid ""
+"Otherwise the game will end in %i minutes."
+msgstr ""
+
 #: ../../scripting/win_condition_texts.lua:23
 #: ../../scripting/win_condition_texts.lua:29
 msgid ""
@@ -123,6 +128,7 @@ msgid ""
 msgstr ""
 
 #: ../../scripting/win_condition_texts.lua:27
+#: ../../scripting/win_condition_texts.lua:53
 msgid ""
 "The game will end in %i minutes."
 msgstr ""
@@ -182,11 +188,6 @@ msgid ""
 "You get points for precious wares in your warehouses, the player with the highest number of wares at the end of 4 hours wins the game."
 msgstr ""
 
-#: ../../scripting/win_condition_texts.lua:8
-msgid ""
-"You have nothing to command left. If you want, you may continue as spectator."
-msgstr ""
-
 #: ../../scripting/win_condition_texts.lua:3
 msgid ""
 "You have won this game!"
@@ -195,6 +196,11 @@ msgstr ""
 #: ../../scripting/win_condition_texts.lua:17
 msgid ""
 "You lost"
+msgstr ""
+
+#: ../../scripting/win_condition_texts.lua:8
+msgid ""
+"You lost your last warehouse and are therefore defeated. You may continue as spectator if you want."
 msgstr ""
 
 #: ../../scripting/win_condition_texts.lua:48
@@ -215,11 +221,6 @@ msgstr ""
 #: ../../scripting/win_condition_texts.lua:18
 msgid ""
 "You've lost this game!"
-msgstr ""
-
-#: ../../scripting/win_condition_texts.lua:53
-msgid ""
-"game will end in %i minutes."
 msgstr ""
 
 #: ../../scripting/win_condition_texts.lua:33

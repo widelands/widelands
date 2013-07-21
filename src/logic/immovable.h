@@ -68,7 +68,7 @@ struct BaseImmovable : public Map_Object {
 	virtual PositionList get_positions
 		(const Editor_Game_Base &) const throw () = 0;
 	virtual void draw
-		(const Editor_Game_Base &, RenderTarget &, const FCoords, const Point)
+		(const Editor_Game_Base &, RenderTarget &, const FCoords&, const Point&)
 		= 0;
 	virtual const std::string & name() const throw ();
 
@@ -157,7 +157,7 @@ public:
 	void cleanup(Editor_Game_Base &);
 	void act(Game &, uint32_t data);
 
-	virtual void draw(const Editor_Game_Base &, RenderTarget &, FCoords, Point);
+	virtual void draw(const Editor_Game_Base &, RenderTarget &, const FCoords&, const Point&);
 
 	void switch_program(Game & game, const std::string & programname);
 	bool construct_ware_item(Game & game, Ware_Index index);

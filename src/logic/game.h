@@ -41,6 +41,7 @@ struct Path;
 struct PlayerImmovable;
 struct Ship;
 class TrainingSite;
+class MilitarySite;
 
 #define WLGF_SUFFIX ".wgf"
 #define WLGF_MAGIC      "WLgf"
@@ -88,10 +89,6 @@ struct Game : Editor_Game_Base {
 	friend struct Game_Loader;
 	friend struct ::Game_Main_Menu_Load_Game;
 	friend struct ::WLApplication;
-
-	// This friend is for legacy reasons and should probably be removed
-	// at least after summer 2008, maybe even earlier.
-	friend struct Game_Interactive_Player_Data_Packet;
 
 	Game();
 	~Game();
@@ -153,7 +150,9 @@ struct Game : Editor_Game_Base {
 	void send_player_build_road (int32_t, Path &);
 	void send_player_flagaction (Flag &);
 	void send_player_start_stop_building (Building &);
+	void send_player_militarysite_set_soldier_preference (Building &, uint8_t preference);
 	void send_player_start_or_cancel_expedition    (Building &);
+
 	void send_player_enhance_building (Building &, Building_Index);
 	void send_player_evict_worker (Worker &);
 	void send_player_set_ware_priority
@@ -185,7 +184,9 @@ struct Game : Editor_Game_Base {
 
 	void sample_statistics();
 
-	const std::string & get_win_condition_string() {return m_win_condition_string;}
+	const std::string & get_win_condition_displayname() {return m_win_condition_displayname;}
+	// Returns the number of players (human or ai) occupying a slot.
+	uint8_t get_number_of_players() {return m_number_of_players;}
 
 private:
 	void SyncReset();
@@ -250,7 +251,8 @@ private:
 	General_Stats_vector m_general_stats;
 
 	/// For save games and statistics generation
-	std::string          m_win_condition_string;
+	std::string          m_win_condition_displayname;
+	uint8_t              m_number_of_players;
 };
 
 inline Coords Game::random_location(Coords location, uint8_t radius) {

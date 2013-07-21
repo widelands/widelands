@@ -28,10 +28,6 @@
 #include <string>
 #include <cstring>
 
-#ifdef _MSC_VER
-#define __attribute__(x)
-#endif
-
 /**
  * Abstract base class for stream-like data sources.
  * It is intended for deserializing network packets and for reading log-type

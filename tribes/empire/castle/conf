@@ -4,6 +4,7 @@ max_soldiers=12
 heal_per_second=220
 conquers=12
 enhanced_building=yes
+prefer_heroes=true
 
 [buildcost]
 wood=5

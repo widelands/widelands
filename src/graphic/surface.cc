@@ -28,22 +28,18 @@
 extern bool g_opengl;
 
 Surface* Surface::create(SDL_Surface* surf) {
-#ifdef USE_OPENGL
 	if (g_opengl) {
 		return new GLSurfaceTexture(surf);
 	}
-#endif
 	SDL_Surface * surface = SDL_DisplayFormatAlpha(surf);
 	SDL_FreeSurface(surf);
 	return new SDLSurface(surface);
 }
 
 Surface* Surface::create(uint16_t w, uint16_t h) {
-#ifdef USE_OPENGL
 	if (g_opengl) {
 		return new GLSurfaceTexture(w, h);
 	} else
-#endif
 	{
 		SDL_Surface* tsurf = empty_sdl_surface(w, h);
 		SDL_Surface* surf = SDL_DisplayFormatAlpha(tsurf);

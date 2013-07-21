@@ -171,7 +171,7 @@ void GameRenderer::draw_objects()
 						uint32_t anim_idx;
 						try {
 							anim_idx = csinf.becomes->get_animation("build");
-						} catch (Map_Object_Descr::Animation_Nonexistent & e) {
+						} catch (Map_Object_Descr::Animation_Nonexistent &) {
 							try {
 								anim_idx = csinf.becomes->get_animation("unoccupied");
 							} catch (Map_Object_Descr::Animation_Nonexistent) {
@@ -202,7 +202,7 @@ void GameRenderer::draw_objects()
 							uint32_t a;
 							try {
 								a = csinf.was->get_animation("unoccupied");
-							} catch (Map_Object_Descr::Animation_Nonexistent & e) {
+							} catch (Map_Object_Descr::Animation_Nonexistent &) {
 								a = csinf.was->get_animation("idle");
 							}
 							m_dst->drawanimrect
@@ -215,7 +215,7 @@ void GameRenderer::draw_objects()
 						uint32_t pic;
 						try {
 							pic = building->get_animation("unoccupied");
-						} catch (Map_Object_Descr::Animation_Nonexistent & e) {
+						} catch (Map_Object_Descr::Animation_Nonexistent &) {
 							pic = building->get_animation("idle");
 						}
 						m_dst->drawanim(pos[F], pic, 0, owner);

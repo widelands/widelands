@@ -4,6 +4,7 @@ conquers=5
 vision_range=13
 max_soldiers=3
 buildable=no
+prefer_heroes=false
 
 [idle]
 pics=../../../tribes/atlanteans/small_tower/small_tower.png

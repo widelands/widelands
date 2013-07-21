@@ -69,10 +69,9 @@
 #include "timestring.h"
 
 #include <config.h>
-#include <boost/scoped_ptr.hpp>
 #include <sys/types.h>
 #include <sys/stat.h>
-#ifndef WIN32
+#ifndef _WIN32
 #include <csignal>
 #endif
 
@@ -89,7 +88,7 @@
 #endif
 
 #ifndef NDEBUG
-#ifndef WIN32
+#ifndef _WIN32
 int32_t WLApplication::pid_me   = 0;
 int32_t WLApplication::pid_peer = 0;
 volatile int32_t WLApplication::may_run = 0;
@@ -111,7 +110,7 @@ using std::endl;
 void WLApplication::setup_searchpaths(std::string argv0)
 {
 	try {
-#if defined (__APPLE__) || defined(WIN32)
+#if defined (__APPLE__) || defined(_WIN32)
 		// on mac and windows, the default data dir is relative to the executable directory
 		std::string s = get_executable_path();
 		log("Adding executable directory to search path\n");
@@ -123,11 +122,11 @@ void WLApplication::setup_searchpaths(std::string argv0)
 			 	(std::string(INSTALL_PREFIX) + '/' + INSTALL_DATADIR));
 #endif
 	}
-	catch (FileNotFound_error & e) {}
+	catch (FileNotFound_error &) {}
 	catch (FileAccessDenied_error & e) {
 		log("Access denied on %s. Continuing.\n", e.m_filename.c_str());
 	}
-	catch (FileType_error & e) {
+	catch (FileType_error &) {
 		//TODO: handle me
 	}
 
@@ -138,11 +137,11 @@ void WLApplication::setup_searchpaths(std::string argv0)
 		g_fs->AddFileSystem(FileSystem::Create("/usr/share/games/widelands"));
 #endif
 	}
-	catch (FileNotFound_error & e) {}
+	catch (FileNotFound_error &) {}
 	catch (FileAccessDenied_error & e) {
 		log("Access denied on %s. Continuing.\n", e.m_filename.c_str());
 	}
-	catch (FileType_error & e) {
+	catch (FileType_error &) {
 		//TODO: handle me
 	}
 
@@ -156,11 +155,11 @@ void WLApplication::setup_searchpaths(std::string argv0)
 		g_fs->AddFileSystem(FileSystem::Create("."));
 #endif
 	}
-	catch (FileNotFound_error & e) {}
+	catch (FileNotFound_error &) {}
 	catch (FileAccessDenied_error & e) {
 		log("Access denied on %s. Continuing.\n", e.m_filename.c_str());
 	}
-	catch (FileType_error & e) {
+	catch (FileType_error &) {
 		//TODO: handle me
 	}
 
@@ -186,11 +185,11 @@ void WLApplication::setup_searchpaths(std::string argv0)
 				g_fs->AddFileSystem(new Datafile(argv0.c_str()));
 #endif
 			}
-			catch (FileNotFound_error & e) {}
+			catch (FileNotFound_error &) {}
 			catch (FileAccessDenied_error & e) {
 				log ("Access denied on %s. Continuing.\n", e.m_filename.c_str());
 			}
-			catch (FileType_error & e) {
+			catch (FileType_error &) {
 				//TODO: handle me
 			}
 		}
@@ -205,7 +204,7 @@ void WLApplication::setup_homedir() {
 		try {
 			log ("Set home directory: %s\n", m_homedir.c_str());
 
-			std::auto_ptr<FileSystem> home(new RealFSImpl(m_homedir));
+			std::unique_ptr<FileSystem> home(new RealFSImpl(m_homedir));
 			home->EnsureDirectoryExists(".");
 			g_fs->SetHomeFileSystem(*home.release());
 		} catch (const std::exception & e) {
@@ -263,11 +262,8 @@ m_mouse_position       (0, 0),
 m_mouse_locked         (0),
 m_mouse_compensate_warp(0, 0),
 m_should_die           (false),
-m_gfx_w(0), m_gfx_h(0), m_gfx_bpp(0),
-m_gfx_fullscreen       (false),
-m_gfx_opengl           (true),
 m_default_datadirs     (true),
-#ifdef WIN32
+#ifdef _WIN32
 m_homedir(FileSystem::GetHomedir() + "\\.widelands"),
 #else
 m_homedir(FileSystem::GetHomedir() + "/.widelands"),
@@ -470,7 +466,6 @@ void WLApplication::run()
 			throw;
 		}
 	} else {
-
 		g_sound_handler.start_music("intro");
 
 		{
@@ -719,6 +714,8 @@ void WLApplication::_handle_mousebutton
 				case SDL_BUTTON_RIGHT:
 					ev.button.button = SDL_BUTTON_LEFT;
 					break;
+				default:
+					break;
 			}
 		}
 
@@ -808,41 +805,31 @@ void WLApplication::set_input_grab(bool grab)
 }
 
 /**
- * Initialize the graphics subsystem (or shutdown, if system == GFXSYS_NONE)
+ * Initialize the graphics subsystem (or shutdown, if w and h are 0)
  * with the given resolution.
  * Throws an exception on failure.
- *
- * \note Because of the way pictures are handled now, this function must not be
- * called while UI elements are active.
- *
- * \todo Ensure that calling this with active UI elements does barf
- * \todo Document parameters
  */
-
 void WLApplication::init_graphics
 	(const int32_t w, const int32_t h, const int32_t bpp,
 	 const bool fullscreen, const bool opengl)
 {
-	if
-		(w == m_gfx_w && h == m_gfx_h && bpp == m_gfx_bpp &&
-		 fullscreen == m_gfx_fullscreen &&
-		 opengl == m_gfx_opengl)
+	if (!w && !h) { // shutdown.
+		delete g_gr;
+		g_gr = 0;
 		return;
+	}
+	assert(w > 0 && h > 0);
 
-	delete g_gr;
-	g_gr = 0;
-
-	m_gfx_w = w;
-	m_gfx_h = h;
-	m_gfx_bpp = bpp;
-	m_gfx_fullscreen = fullscreen;
-	m_gfx_opengl = opengl;
-
-
-	// If we are not to be shut down
-	if (w && h) {
-		g_gr = new Graphic
-			(w, h, bpp, fullscreen, opengl);
+	if (!g_gr) {
+		g_gr = new Graphic();
+		g_gr->initialize(w, h, bpp, fullscreen, opengl);
+	} else {
+		if
+			(g_gr->get_xres() != w || g_gr->get_yres() != h || g_gr->get_bpp() != bpp
+				|| g_gr->is_fullscreen() != fullscreen || g_opengl != opengl)
+		{
+			g_gr->initialize(w, h, bpp, fullscreen, opengl);
+		}
 	}
 }
 
@@ -854,13 +841,9 @@ void WLApplication::refresh_graphics()
 	init_graphics
 		(s.get_int("xres", XRES),
 		 s.get_int("yres", YRES),
-		 s.get_int("depth", 16),
+		 s.get_int("depth", 32),
 		 s.get_bool("fullscreen", false),
-#if USE_OPENGL
 		 s.get_bool("opengl", true));
-#else
-		 false);
-#endif
 }
 
 /**
@@ -883,16 +866,12 @@ bool WLApplication::init_settings() {
 	set_input_grab(s.get_bool("inputgrab", false));
 	set_mouse_swap(s.get_bool("swapmouse", false));
 
-	m_gfx_fullscreen = s.get_bool("fullscreen", false);
-
-#if USE_OPENGL
-	m_gfx_opengl = s.get_bool("opengl", true);
-#endif
-
 	// KLUDGE!
 	// Without this the following config options get dropped by check_used().
 	// Profile needs support for a Syntax definition to solve this in a
 	// sensible way
+	s.get_bool("fullscreen");
+	s.get_bool("opengl");
 	s.get_int("xres");
 	s.get_int("yres");
 	s.get_int("border_snap_distance");
@@ -971,7 +950,7 @@ std::string WLApplication::get_executable_path()
 	std::string executabledir;
 #ifdef __APPLE__
 	uint32_t buffersize = 0;
-	_NSGetExecutablePath(NULL, &buffersize);
+	_NSGetExecutablePath(nullptr, &buffersize);
 	char buffer[buffersize];
 	int32_t check = _NSGetExecutablePath(buffer, &buffersize);
 	if (check != 0) {
@@ -989,7 +968,7 @@ std::string WLApplication::get_executable_path()
 	executabledir = std::string(buffer, size);
 	executabledir.resize(executabledir.rfind('/') + 1);
 #endif
-#ifdef WIN32
+#ifdef _WIN32
 	char filename[_MAX_PATH + 1] = {0};
 	GetModuleFileName(0, filename, _MAX_PATH);
 	executabledir = filename;
@@ -1007,7 +986,7 @@ std::string WLApplication::get_executable_path()
  */
 std::string WLApplication::find_relative_locale_path(std::string localedir)
 {
-#ifndef WIN32
+#ifndef _WIN32
 	if (localedir[0] != '/') {
 		std::string executabledir = get_executable_path();
 		executabledir+= localedir;
@@ -1040,7 +1019,7 @@ bool WLApplication::init_hardware() {
 	//  NOTE privacy/powermanagement settings on the sly. The workaround was
 	//  NOTE introduced in SDL 1.2.13, so it will not work for older versions.
 	//  NOTE -> there is no such stdlib-function on win32
-	#ifndef WIN32
+	#ifndef _WIN32
 	setenv("SDL_VIDEO_ALLOW_SCREENSAVER", "1", 0);
 	#endif
 
@@ -1052,7 +1031,7 @@ bool WLApplication::init_hardware() {
 #if defined(__linux__) || defined(__FreeBSD__) || defined(__OpenBSD__)
 	videomode.push_back("x11");
 #endif
-#ifdef WIN32
+#ifdef _WIN32
 	videomode.push_back("windib");
 #endif
 #ifdef __APPLE__
@@ -1089,12 +1068,7 @@ bool WLApplication::init_hardware() {
 	SDL_EnableUNICODE(1); //needed by helper.h:is_printable()
 	SDL_EnableKeyRepeat(SDL_DEFAULT_REPEAT_DELAY, SDL_DEFAULT_REPEAT_INTERVAL);
 
-	uint32_t xres = s.get_int("xres", XRES);
-	uint32_t yres = s.get_int("yres", YRES);
-
-	init_graphics
-		(xres, yres, s.get_int("depth", 16),
-		 m_gfx_fullscreen, m_gfx_opengl);
+	refresh_graphics();
 
 	// Start the audio subsystem
 	// must know the locale before calling this!
@@ -1111,7 +1085,7 @@ void terminate (int) {
 	 log
 		  (_("Waited 5 seconds to close audio. Problems here so killing Widelands."
 			  " Update your sound driver and/or SDL to fix this problem\n"));
-#ifndef WIN32
+#ifndef _WIN32
 	raise(SIGKILL);
 #endif
 }
@@ -1129,7 +1103,7 @@ void WLApplication::shutdown_hardware()
 	SDL_QuitSubSystem
 		(SDL_INIT_TIMER|SDL_INIT_VIDEO|SDL_INIT_CDROM|SDL_INIT_JOYSTICK);
 
-#ifndef WIN32
+#ifndef _WIN32
 	// SOUND can lock up with buggy SDL/drivers. we try to do the right thing
 	// but if it doesn't happen we will kill widelands anyway in 5 seconds.
 	signal(SIGALRM, terminate);
@@ -1217,7 +1191,6 @@ void WLApplication::handle_commandline_parameters() throw (Parameter_error)
 	}
 
 	if (m_commandline.count("opengl")) {
-#ifdef USE_OPENGL
 		if (m_commandline["opengl"].compare("0") == 0) {
 			g_options.pull_section("global").create_val("opengl", "false");
 		} else if (m_commandline["opengl"].compare("1") == 0) {
@@ -1225,9 +1198,6 @@ void WLApplication::handle_commandline_parameters() throw (Parameter_error)
 		} else {
 			log ("Invalid option opengl=[0|1]\n");
 		}
-#else
-		log("WARNIG: This version was compiled without support for OpenGL\n");
-#endif
 		m_commandline.erase("opengl");
 	}
 
@@ -1240,10 +1210,10 @@ void WLApplication::handle_commandline_parameters() throw (Parameter_error)
 
 	if (m_commandline.count("double")) {
 #ifndef NDEBUG
-#ifndef WIN32
+#ifndef _WIN32
 		init_double_game();
 #else
-		wout << _("\nSorry, no double-instance debugging on WIN32.\n\n");
+		wout << _("\nSorry, no double-instance debugging on _WIN32.\n\n");
 #endif
 #else
 		wout << _("--double is disabled. This is not a debug build!") << endl;
@@ -1433,12 +1403,10 @@ void WLApplication::show_usage()
 			 " --depth=[16|32]      Color depth in number of bits per pixel.\n"
 			 " --xres=[...]         Width of the window in pixel.\n"
 			 " --yres=[...]         Height of the window in pixel.\n")
-#if USE_OPENGL
 		<<
 		_
 			 (" --opengl=[0|1]\n"
 			 "                      Enables OpenGL rendering\n")
-#endif
 		<<
 		_
 			("\n"
@@ -1461,7 +1429,7 @@ void WLApplication::show_usage()
 			 "                      panel.\n"
 			 "\n");
 #ifndef NDEBUG
-#ifndef WIN32
+#ifndef _WIN32
 	wout
 		<<
 		_
@@ -1480,7 +1448,7 @@ void WLApplication::show_usage()
 }
 
 #ifndef NDEBUG
-#ifndef WIN32
+#ifndef _WIN32
 /**
  * Fork off a second game to test network gaming
  *
@@ -1670,7 +1638,8 @@ void WLApplication::mainmenu_singleplayer()
 {
 	//  This is the code returned by UI::Panel::run() when the panel is dying.
 	//  Make sure that the program exits when the window manager says so.
-	compile_assert(Fullscreen_Menu_SinglePlayer::Back == UI::Panel::dying_code);
+	static_assert
+		(Fullscreen_Menu_SinglePlayer::Back == UI::Panel::dying_code, "Panel should be dying.");
 
 	for (;;) {
 		int32_t code;
@@ -1785,7 +1754,8 @@ void WLApplication::mainmenu_editor()
 {
 	//  This is the code returned by UI::Panel::run() when the panel is dying.
 	//  Make sure that the program exits when the window manager says so.
-	compile_assert(Fullscreen_Menu_Editor::Back == UI::Panel::dying_code);
+	static_assert
+		(Fullscreen_Menu_Editor::Back == UI::Panel::dying_code, "Editor should be dying.");
 
 	for (;;) {
 		int32_t code;
@@ -2046,9 +2016,14 @@ bool WLApplication::new_game()
 		}
 	} else { // normal singleplayer
 		uint8_t const pn = sp.settings().playernum + 1;
-		boost::scoped_ptr<GameController> ctrl
-			(GameController::createSinglePlayer(game, true, pn));
 		try {
+			// Game controller needs the ibase pointer to init
+			// the chat
+			game.set_ibase
+				(new Interactive_Player
+					(game, g_options.pull_section("global"), pn, false, false));
+			std::unique_ptr<GameController> ctrl
+				(GameController::createSinglePlayer(game, true, pn));
 			UI::ProgressWindow loaderUI;
 			std::vector<std::string> tipstext;
 			tipstext.push_back("general_game");
@@ -2062,9 +2037,6 @@ bool WLApplication::new_game()
 			loaderUI.step(_("Preparing game"));
 
 			game.set_game_controller(ctrl.get());
-			game.set_ibase
-				(new Interactive_Player
-				 	(game, g_options.pull_section("global"), pn, false, false));
 			game.init_newgame(&loaderUI, sp.settings());
 			game.run(&loaderUI, Widelands::Game::NewNonScenario);
 		} catch (const std::exception & e) {
@@ -2228,7 +2200,7 @@ struct ReplayGameController : public GameController {
 
 private:
 	Widelands::Game & m_game;
-	boost::scoped_ptr<Widelands::ReplayReader> m_replayreader;
+	std::unique_ptr<Widelands::ReplayReader> m_replayreader;
 	int32_t m_lastframe;
 	int32_t m_time;
 	uint32_t m_speed;
@@ -2359,9 +2331,9 @@ void WLApplication::cleanup_replays()
 bool WLApplication::redirect_output(std::string path)
 {
 	if (path.empty()) {
-#ifdef WIN32
+#ifdef _WIN32
 		char module_name[MAX_PATH];
-		unsigned int name_length = GetModuleFileName(NULL, module_name, MAX_PATH);
+		unsigned int name_length = GetModuleFileName(nullptr, module_name, MAX_PATH);
 		path = module_name;
 		size_t pos = path.find_last_of("/\\");
 		if (pos == std::string::npos) return false;
@@ -2380,10 +2352,10 @@ bool WLApplication::redirect_output(std::string path)
 	if (!newfp) return false;
 
 	/* Line buffered */
-	setvbuf(stdout, NULL, _IOLBF, BUFSIZ);
+	setvbuf(stdout, nullptr, _IOLBF, BUFSIZ);
 
 	/* No buffering */
-	setbuf(stderr, NULL);
+	setbuf(stderr, nullptr);
 
 	m_redirected_stdio = true;
 	return true;

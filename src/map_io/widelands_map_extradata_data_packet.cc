@@ -68,7 +68,7 @@ throw (_wexception)
 						continue;
 
 					const std::string hash = std::string("map:") + FileSystem::FS_Filename(pname->c_str());
-					const Image* image = NULL;
+					const Image* image = nullptr;
 					if (!g_gr->images().has(hash)) {
 						FileRead fr;
 

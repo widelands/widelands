@@ -20,7 +20,6 @@
 #include <iostream>
 
 #include <boost/algorithm/string.hpp>
-#include <boost/scoped_ptr.hpp>
 
 #include "carrier.h"
 #include "constructionsite.h"
@@ -294,7 +293,7 @@ Tribe_Descr::Tribe_Descr
 
 			// Register Lua scripts
 			if (g_fs->IsDirectory(path + "scripting")) {
-				boost::scoped_ptr<FileSystem> sub_fs(g_fs->MakeSubFileSystem(path));
+				std::unique_ptr<FileSystem> sub_fs(g_fs->MakeSubFileSystem(path));
 				egbase.lua().register_scripts(*sub_fs, "tribe_" + tribename);
 			}
 
@@ -302,7 +301,7 @@ Tribe_Descr::Tribe_Descr
 			ScriptContainer & scripts =
 				egbase.lua().get_scripts_for("tribe_" + tribename);
 			container_iterate_const(ScriptContainer, scripts, s) {
-				boost::shared_ptr<LuaTable> t =
+				std::unique_ptr<LuaTable> t =
 					egbase.lua().run_script("tribe_" + tribename, s->first);
 
 				m_initializations.resize(m_initializations.size() + 1);
@@ -402,13 +401,13 @@ bool Tribe_Descr::exists_tribe
 
 				std::string path = "tribes/" + name + "/scripting";
 				if (g_fs->IsDirectory(path)) {
-					boost::scoped_ptr<FileSystem> sub_fs(g_fs->MakeSubFileSystem(path));
+					std::unique_ptr<FileSystem> sub_fs(g_fs->MakeSubFileSystem(path));
 					lua->register_scripts(*sub_fs, "tribe_" + name, "");
 				}
 
 				ScriptContainer & scripts = lua->get_scripts_for("tribe_" + name);
 				container_iterate_const(ScriptContainer, scripts, s) {
-					boost::shared_ptr<LuaTable> t =
+					std::unique_ptr<LuaTable> t =
 						lua->run_script("tribe_" + name, s->first);
 
 					info->initializations.push_back

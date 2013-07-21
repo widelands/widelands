@@ -20,6 +20,9 @@
 #ifndef SHIP_H
 #define SHIP_H
 
+#include <list>
+#include <memory>
+
 #include "bob.h"
 #include "economy/shippingitem.h"
 #include "graphic/diranimations.h"
@@ -129,6 +132,17 @@ struct Ship : Bob {
 		return m_expedition->swimable[dir - 1];
 	}
 
+	/// \returns whether the expedition ship is close to the coast
+	bool exp_close_to_coast() {
+		if (m_ship_state == TRANSPORT)
+			return false;
+		assert(m_expedition);
+		for (uint8_t dir = FIRST_DIRECTION; dir <= LAST_DIRECTION; ++dir)
+			if (!m_expedition->swimable[dir - 1])
+				return true;
+		return false;
+	}
+
 	/// \returns (in expedition mode only!) the list of currently seen port build spaces
 	const std::list<Coords>* exp_port_spaces() {
 		if (m_ship_state == TRANSPORT)
@@ -170,14 +184,14 @@ private:
 	uint8_t m_ship_state;
 
 	struct Expedition {
-		boost::scoped_ptr<std::list<Coords> > seen_port_buildspaces;
+		std::unique_ptr<std::list<Coords> > seen_port_buildspaces;
 		bool swimable[LAST_DIRECTION];
 		bool island_exploration;
 		uint8_t direction;
 		Coords exploration_start;
 		bool clockwise;
 	};
-	boost::scoped_ptr<Expedition> m_expedition;
+	std::unique_ptr<Expedition> m_expedition;
 
 	// saving and loading
 protected:
@@ -194,7 +208,7 @@ protected:
 		uint32_t m_lastdock;
 		uint32_t m_destination;
 		uint8_t  m_ship_state;
-		boost::scoped_ptr<Expedition> m_expedition;
+		std::unique_ptr<Expedition> m_expedition;
 		std::vector<ShippingItem::Loader> m_items;
 	};
 

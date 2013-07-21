@@ -20,18 +20,15 @@
 #ifndef STREAMWRITE_H
 #define STREAMWRITE_H
 
-#include "machdep.h"
+#include <cassert>
+#include <cstring>
+#include <limits>
+#include <string>
 
 #include <boost/noncopyable.hpp>
 
-#include <cassert>
-#include <limits>
-#include <string>
-#include <cstring>
-
-#ifdef _MSC_VER
-#define __attribute__(x)
-#endif
+#include "machdep.h"
+#include "port.h"
 
 /**
  * Abstract base class for stream-like data sinks.

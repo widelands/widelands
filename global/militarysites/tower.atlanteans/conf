@@ -4,6 +4,7 @@ heal_per_second=120
 conquers=9
 vision_range=17
 buildable=no
+prefer_heroes=true
 
 [idle]
 pics=../../../tribes/atlanteans/tower/tower.png

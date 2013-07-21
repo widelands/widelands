@@ -17,6 +17,7 @@
  */
 
 #include <cstdio>
+#include <boost/format.hpp>
 
 #include "i18n.h"
 #include "wexception.h"
@@ -172,11 +173,11 @@ Fullscreen_Menu_MapSelect::Fullscreen_Menu_MapSelect
 	vbox->set_size(get_w(), 25);
 	vbox = new UI::Box(this, m_table.get_x(), m_table.get_y() - 60, UI::Box::Horizontal, m_table.get_w());
 	_add_tag_checkbox(vbox, "1v1", _("1v1"));
-	_add_tag_checkbox(vbox, "2teams", _("2 Player Teams"));
-	_add_tag_checkbox(vbox, "3teams", _("3 Player Teams"));
+	_add_tag_checkbox(vbox, "2teams", _("Teams of 2"));
+	_add_tag_checkbox(vbox, "3teams", _("Teams of 3"));
 	vbox->set_size(get_w(), 25);
 	vbox = new UI::Box(this, m_table.get_x(), m_table.get_y() - 30, UI::Box::Horizontal, m_table.get_w());
-	_add_tag_checkbox(vbox, "4teams", _("4 Player Teams"));
+	_add_tag_checkbox(vbox, "4teams", _("Teams of 4"));
 	_add_tag_checkbox(vbox, "ffa", _("Free for all"));
 	_add_tag_checkbox(vbox, "unbalanced", _("Unbalanced"));
 	vbox->set_size(get_w(), 25);
@@ -330,7 +331,7 @@ void Fullscreen_Menu_MapSelect::fill_list()
 		//about the absolute filesystem top!) we manually add ".."
 		if (m_curdir != m_basedir) {
 			MapData map;
-	#ifndef WIN32
+	#ifndef _WIN32
 			map.filename = m_curdir.substr(0, m_curdir.rfind('/'));
 	#else
 			map.filename = m_curdir.substr(0, m_curdir.rfind('\\'));
@@ -340,9 +341,11 @@ void Fullscreen_Menu_MapSelect::fill_list()
 				m_table.add(m_maps_data.size() - 1);
 
 			te.set_string(0, "");
+			std::string parent_string =
+				(boost::format("\\<%s\\>") % _("parent")).str();
 			te.set_picture
 				(1,  g_gr->images().get("pics/ls_dir.png"),
-				_("<parent>"));
+				parent_string);
 
 			++ndirs;
 		}

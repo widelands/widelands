@@ -54,7 +54,7 @@ throw (_wexception)
 		}
 	}
 
-	compile_assert(MAX_PLAYERS < 32);
+	static_assert(MAX_PLAYERS < 32, "assert(MAX_PLAYERS < 32) failed.");
 	Map & map = egbase.map();
 	Player_Number const nr_players = map.get_nrplayers();
 	Map_Index const max_index = map.max_index();
@@ -105,7 +105,7 @@ throw (_wexception)
 
 	fw.Unsigned16(CURRENT_PACKET_VERSION);
 
-	compile_assert(MAX_PLAYERS < 32);
+	static_assert(MAX_PLAYERS < 32, "assert(MAX_PLAYERS < 32) failed.");
 	Map & map = egbase.map();
 	Player_Number const nr_players = map.get_nrplayers();
 	Map_Index const max_index = map.max_index();

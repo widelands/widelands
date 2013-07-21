@@ -3,6 +3,7 @@ max_soldiers=8
 heal_per_second=170
 conquers=11
 enhancement=citadel
+prefer_heroes=true
 
 [buildcost]
 blackwood=9

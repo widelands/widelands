@@ -164,7 +164,7 @@ void Editor_Interactive::load(const std::string & filename) {
 	egbase().cleanup_for_load();
 	m_history.reset();
 
-	std::auto_ptr<Widelands::Map_Loader> const ml(map.get_correct_loader(filename.c_str()));
+	std::unique_ptr<Widelands::Map_Loader> const ml(map.get_correct_loader(filename.c_str()));
 	if (not ml.get())
 		throw warning
 			(_("Unsupported format"),
@@ -216,7 +216,7 @@ void Editor_Interactive::start() {
 	// Run the editor initialization script, if any
 	try {
 		egbase().lua().run_script("map", "editor_init");
-	} catch (LuaScriptNotExistingError & e) {
+	} catch (LuaScriptNotExistingError &) {
 		// do nothing.
 	}
 	egbase().map().overlay_manager().show_buildhelp(true);

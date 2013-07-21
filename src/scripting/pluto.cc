@@ -40,8 +40,6 @@ int luna_restore_object(lua_State * L);
 
 #define PLUTO_TPERMANENT 101
 
-#define verify(x) { int v = (int)((x)); v=v; lua_assert(v); }
-
 typedef struct PersistInfo_t {
 	lua_State * L;
 	int counter;
@@ -416,8 +414,8 @@ static UpVal * makeupval(lua_State * L, int stackpos)
 	pdep_link(L, obj2gco(uv), LUA_TUPVAL);
 	uv->tt = LUA_TUPVAL;
 	uv->v = &uv->u.value;
-	uv->u.l.prev = NULL;
-	uv->u.l.next = NULL;
+	uv->u.l.prev = nullptr;
+	uv->u.l.next = nullptr;
 	setobj(L, uv->v, getobject(L, stackpos));
 	return uv;
 }
@@ -600,7 +598,7 @@ static void persistproto(PersistInfo * pi)
 
 	/* Serialize code */
 	{
-		compile_assert(sizeof(Instruction) == 4);
+		static_assert(sizeof(Instruction) == 4, "assert(sizeof(Instruction) == 4) failed.");
 		pi->fw->Signed32(p->sizecode);
 		for (int32_t i = 0; i < p->sizecode; i++)
 			pi->fw->Unsigned32(p->code[i]);
@@ -732,7 +730,7 @@ static void persistthread(PersistInfo * pi)
 		GCObject * gco;
 		UpVal * uv;
 					/* perms reftbl ... thr */
-		for (gco = L2->openupval; gco != NULL; gco = uv->next) {
+		for (gco = L2->openupval; gco != nullptr; gco = uv->next) {
 			uv = gco2uv(gco);
 
 			/* Make sure upvalue is really open */
@@ -1152,7 +1150,7 @@ static void gcunlink(lua_State * L, GCObject * gco)
 
 	prevslot = G(L)->rootgc;
 	while (prevslot->gch.next != gco) {
-		lua_assert(prevslot->gch.next != NULL);
+		lua_assert(prevslot->gch.next != nullptr);
 		prevslot = prevslot->gch.next;
 	}
 
@@ -1262,7 +1260,7 @@ static void unpersistthread(int ref, UnpersistInfo * upi)
 			lua_assert
 				(uv->u.l.next->u.l.prev == uv && uv->u.l.prev->u.l.next == uv);
 		}
-		*nextslot = NULL;
+		*nextslot = nullptr;
 	}
 
 	/* The stack must be valid at least to the highest value among the CallInfos

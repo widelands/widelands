@@ -99,11 +99,9 @@ void Map_View::draw(RenderTarget & dst)
 	egbase.map().overlay_manager().load_graphics();
 
 	if (!m_renderer) {
-#ifdef USE_OPENGL
 		if (g_opengl) {
 			m_renderer.reset(new GameRendererGL());
 		} else
-#endif
 		{
 			m_renderer.reset(new GameRendererSDL());
 		}
@@ -115,7 +113,6 @@ void Map_View::draw(RenderTarget & dst)
 	}
 
 	m_complete_redraw_needed = false;
-	draw_tooltip(dst, tooltip());
 }
 
 void Map_View::set_changeview(const Map_View::ChangeViewFn & fn)

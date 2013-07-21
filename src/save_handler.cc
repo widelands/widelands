@@ -25,10 +25,10 @@
 #include "io/filesystem/filesystem.h"
 #include "game_io/game_saver.h"
 #include "profile/profile.h"
+#include "wui/interactive_player.h"
+#include "chat.h"
 
 #include "log.h"
-
-#include <boost/scoped_ptr.hpp>
 
 using Widelands::Game_Saver;
 
@@ -37,39 +37,60 @@ using Widelands::Game_Saver;
  */
 void SaveHandler::think(Widelands::Game & game, int32_t realtime) {
 	initialize(realtime);
+	std::string filename = "wl_autosave";
 
-	if (not m_allow_autosaving) // Is autosaving allowed atm?
+	if (!m_allow_saving) {
 		return;
+	}
 
-	int32_t const autosaveInterval =
-		g_options.pull_section("global").get_int
-			("autosave", DEFAULT_AUTOSAVE_INTERVAL * 60);
-	if (autosaveInterval <= 0)
-		return; // no autosave requested
+	if (m_save_requested) {
+		if (!m_save_filename.empty()) {
+			filename = m_save_filename;
+		}
 
-	int32_t const elapsed = (realtime - m_lastSaveTime) / 1000;
-	if (elapsed < autosaveInterval)
-		return;
+		log("Autosave: save requested : %s\n", filename.c_str());
+		m_save_requested = false;
+		m_save_filename = "";
+	} else {
+		const int32_t autosave_interval_in_seconds =
+			g_options.pull_section("global").get_int
+				("autosave", DEFAULT_AUTOSAVE_INTERVAL * 60);
+		if (autosave_interval_in_seconds <= 0) {
+			return; // no autosave requested
+		}
 
-	log("Autosave: interval elapsed (%d s), saving\n", elapsed);
+		const int32_t elapsed = (realtime - m_last_saved_time) / 1000;
+		if (elapsed < autosave_interval_in_seconds) {
+			return;
+		}
+
+		log("Autosave: interval elapsed (%d s), saving\n", elapsed);
+	}
+
+	// TODO: defer saving to next tick so that this message is shown
+	// before the actual save, or put the saving logic in another thread
+	game.get_ipl()->get_chat_provider()->send_local
+		(_("Saving game..."));
 
 	// save the game
-	std::string complete_filename =
-		create_file_name (get_base_dir(), "wl_autosave");
+	const std::string complete_filename = create_file_name(get_base_dir(), filename);
 	std::string backup_filename;
 
 	// always overwrite a file
 	if (g_fs->FileExists(complete_filename)) {
-		backup_filename = create_file_name (get_base_dir(), "wl_autosave2");
+		filename += "2";
+		backup_filename = create_file_name (get_base_dir(), filename);
 		if (g_fs->FileExists(backup_filename)) {
 			g_fs->Unlink(backup_filename);
 		}
 		g_fs->Rename(complete_filename, backup_filename);
 	}
 
-	static std::string error;
+	std::string error;
 	if (!save_game(game, complete_filename, &error)) {
 		log("Autosave: ERROR! - %s\n", error.c_str());
+		game.get_ipl()->get_chat_provider()->send_local
+			(_("Saving failed!"));
 
 		// if backup file was created, move it back
 		if (backup_filename.length() > 0) {
@@ -79,7 +100,7 @@ void SaveHandler::think(Widelands::Game & game, int32_t realtime) {
 			g_fs->Rename(backup_filename, complete_filename);
 		}
 		// Wait 30 seconds until next save try
-		m_lastSaveTime = m_lastSaveTime + 30000;
+		m_last_saved_time = m_last_saved_time + 30000;
 		return;
 	} else {
 		// if backup file was created, time to remove it
@@ -87,7 +108,9 @@ void SaveHandler::think(Widelands::Game & game, int32_t realtime) {
 			g_fs->Unlink(backup_filename);
 	}
 
-	log("Autosave: save took %d ms\n", m_lastSaveTime - realtime);
+	log("Autosave: save took %d ms\n", m_last_saved_time - realtime);
+	game.get_ipl()->get_chat_provider()->send_local
+		(_("Game saved"));
 }
 
 /**
@@ -97,8 +120,7 @@ void SaveHandler::initialize(int32_t currenttime) {
 	if (m_initialized)
 		return;
 
-	m_lastSaveTime = currenttime;
-	log("Autosave: initialized\n");
+	m_last_saved_time = currenttime;
 	m_initialized = true;
 }
 
@@ -144,7 +166,7 @@ bool SaveHandler::save_game
 	g_fs->EnsureDirectoryExists(get_base_dir());
 
 	// Make a filesystem out of this
-	boost::scoped_ptr<FileSystem> fs;
+	std::unique_ptr<FileSystem> fs;
 	if (!binary) {
 		fs.reset(g_fs->CreateSubFileSystem(complete_filename, FileSystem::DIR));
 	} else {
@@ -162,7 +184,7 @@ bool SaveHandler::save_game
 	}
 
 	if (result)
-		m_lastSaveTime = WLApplication::get()->get_time();
+		m_last_saved_time = WLApplication::get()->get_time();
 
 	return result;
 }

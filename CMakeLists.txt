@@ -162,6 +162,31 @@ set (PARAMETER_COMPILERFLAG_EXTRAWARNINGS "-Wformat -Wformat-nonliteral -Wformat
 set (PARAMETER_COMPILERFLAG_GCCWARNINGS "-Wlogical-op -Wsync-nand -Wtrampolines")
 set (PARAMETER_COMPILERFLAG_STRICT "-Werror -Wno-error=old-style-cast -Wno-error=deprecated-declarations -fdiagnostics-show-option")
 include(CheckCXXCompilerFlag) #this include should be safe
+
+# Enable c++11 features.
+if (NOT WIN32)
+  set (PARAMETER_COMPILERFLAG_CXXSTD "-std=c++11")
+else()
+  set (PARAMETER_COMPILERFLAG_CXXSTD "-std=gnu++11")
+endif()
+
+if(CMAKE_COMPILER_IS_GNUCXX)
+  EXECUTE_PROCESS(COMMAND ${CMAKE_CXX_COMPILER} -dumpversion OUTPUT_VARIABLE GCC_VERSION)
+  if (GCC_VERSION VERSION_LESS 4.7)
+    if (NOT WIN32)
+      set (PARAMETER_COMPILERFLAG_CXXSTD "-std=c++0x")
+    else()
+      set (PARAMETER_COMPILERFLAG_CXXSTD "-std=gnu++0x")
+    endif()
+  endif()
+endif()
+
+CHECK_CXX_COMPILER_FLAG(${PARAMETER_COMPILERFLAG_CXXSTD} Compiler_std_supported)
+IF (Compiler_std_supported)
+  set (WL_COMPILERFLAG_CXXSTD " ${PARAMETER_COMPILERFLAG_CXXSTD}") #the space is on purpose!
+ENDIF (Compiler_std_supported)
+
+
 CHECK_CXX_COMPILER_FLAG(${PARAMETER_COMPILERFLAG_OLDSTYLECAST_EXTENDED} Compiler_old-style-cast_supported)
 IF (Compiler_old-style-cast_supported)
   EXEC_PROGRAM(${CMAKE_CXX_COMPILER}
@@ -217,6 +242,8 @@ ELSE (Compiler_gcc_warnings_supported)
   message("Warning: could not add additional GCC-specific warning options: ${PARAMETER_COMPILERFLAG_GCCWARNINGS}. Most likely you are using a different compiler, like Clang/LLVM.")
 ENDIF (Compiler_gcc_warnings_supported)
 
+CHECK_CXX_COMPILER_FLAG(${PARAMETER_COMPILERFLAG_GCCWARNINGS} Compiler_gcc_warnings_supported)
+
 IF (WL_STRICT)
   CHECK_CXX_COMPILER_FLAG(${PARAMETER_COMPILERFLAG_STRICT} Compiler_strict_mode_supported)
   IF (Compiler_strict_mode_supported)
@@ -226,7 +253,7 @@ IF (WL_STRICT)
 ENDIF (WL_STRICT)
 
 # CMAKE only defines "-g", but we need -DDEBUG also, and we need -DNOPARACHUTE (for SDL) in Debug
-set (CMAKE_CXX_FLAGS_DEBUG "-g -DDEBUG -DNOPARACHUTE${WL_COMPILERFLAG_OLDSTYLECAST}${WL_COMPILERFLAG_GENERICWARNINGS}${WL_COMPILERFLAG_EXTRAWARNINGS}${WL_COMPILERFLAG_GCCWARNINGS}${WL_COMPILERFLAG_STRICT}" CACHE STRING "Set by widelands CMakeLists.txt" FORCE)
+set (CMAKE_CXX_FLAGS_DEBUG "${WL_COMPILERFLAG_CXXSTD} -g -DDEBUG -DNOPARACHUTE${WL_COMPILERFLAG_OLDSTYLECAST}${WL_COMPILERFLAG_GENERICWARNINGS}${WL_COMPILERFLAG_EXTRAWARNINGS}${WL_COMPILERFLAG_GCCWARNINGS}${WL_COMPILERFLAG_STRICT}" CACHE STRING "Set by widelands CMakeLists.txt" FORCE)
 
 set (WL_COMPILERFLAG_OPTIMIZATIONS "-O3")
 
@@ -245,7 +272,7 @@ IF (CMAKE_COMPILER_IS_GNUCXX)
   ENDIF (WLBUILD_COMPILERVERSION_REP STREQUAL "4.5.1" OR WLBUILD_COMPILERVERSION_REP STREQUAL "4.5.2")
 ENDIF (CMAKE_COMPILER_IS_GNUCXX)
 
-set (CMAKE_CXX_FLAGS_RELEASE "${WL_COMPILERFLAG_OPTIMIZATIONS} -DNDEBUG${WL_COMPILERFLAG_OLDSTYLECAST}${WL_COMPILERFLAG_GENERICWARNINGS}${WL_COMPILERFLAG_EXTRAWARNINGS}${WL_COMPILERFLAG_GCCWARNINGS}${WL_COMPILERFLAG_STRICT}" CACHE STRING "Set by widelands CMakeLists.txt" FORCE)
+set (CMAKE_CXX_FLAGS_RELEASE "${WL_COMPILERFLAG_CXXSTD} ${WL_COMPILERFLAG_OPTIMIZATIONS} -DNDEBUG${WL_COMPILERFLAG_OLDSTYLECAST}${WL_COMPILERFLAG_GENERICWARNINGS}${WL_COMPILERFLAG_EXTRAWARNINGS}${WL_COMPILERFLAG_GCCWARNINGS}${WL_COMPILERFLAG_STRICT}" CACHE STRING "Set by widelands CMakeLists.txt" FORCE)
 
 #If building with MSVC, then check for 3rdparty libs
 if (DEFINED MSVC)
@@ -273,7 +300,7 @@ if (DEFINED MSVC)
 
   find_library(INTL_LIBRARY NAMES intl libintl)
 
-  set (MSVC_DISABLE_WARNINGS "/wd4290 /wd4800 /wo4373 /wd4355")
+  set (MSVC_DISABLE_WARNINGS "/wd4146 /wd4290 /wd4355 /wd4373 /wd4800")
   # CMAKE only defines "-g", but we need -DDEBUG also, and we need -DNOPARACHUTE (for SDL) in Debug
   set (CMAKE_CXX_FLAGS_DEBUG " -DDEBUG -DNOPARACHUTE /MTd /Zi /D_DEBUG ${MSVC_DISABLE_WARNINGS}" CACHE STRING "Set by widelands CMakeLists.txt" FORCE)
 
@@ -304,19 +331,10 @@ endif (CMAKE_SYSTEM_NAME MATCHES "FreeBSD" OR CMAKE_SYSTEM_NAME MATCHES "OpenBSD
 
 # Check for opengl
 # TODO Check for SDL_opengl.h and add to include path
-find_package(OpenGL)
-if (OPENGL_FOUND)
-  # OpenGL Headers are not needed directly. Instead SDL_opengl.h should be searched
-  add_definitions("-DUSE_OPENGL")
-  find_package(GLEW)
-  if (GLEW_FOUND)
-    add_definitions(${GLEW_EXTRA_DEFINITIONS})
-  else (GLEW FOUND)
-    message (STATUS "GLEW library not found, check your libraries path and installed packages!")
-  endif (GLEW_FOUND)
-else (OPENGL_FOUND)
-  message (STATUS "OpenGL support disabled, check your libraries path and installed packages!")
-endif (OPENGL_FOUND)
+find_package(OpenGL REQUIRED)
+# OpenGL Headers are not needed directly. Instead SDL_opengl.h should be searched
+find_package(GLEW REQUIRED)
+add_definitions(${GLEW_EXTRA_DEFINITIONS})
 
 # ...but using MAJOR, MINOR and PATCH
 if (DEFINED WL_VERSION_MAJOR)
@@ -420,6 +438,10 @@ if (APPLE OR WIN32 OR CMAKE_SYSTEM_NAME MATCHES "FreeBSD")
   find_package(intl REQUIRED)
   include_directories(${INTL_INCLUDE_DIR})
 endif (APPLE OR WIN32 OR CMAKE_SYSTEM_NAME MATCHES "FreeBSD")
+
+# Gettext is required, but it does not provide GETTEXT_INCLUDE_DIR or
+# GETTEXT_LIBRARY as "usual" libraries do
+find_package(Gettext REQUIRED)
 
 find_package(SDL REQUIRED)
 include_directories(${SDL_INCLUDE_DIR})

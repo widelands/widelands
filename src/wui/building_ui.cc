@@ -17,6 +17,8 @@
  *
  */
 
+#include <boost/foreach.hpp>
+#include <boost/lexical_cast.hpp>
 #include "buildingwindow.h"
 #include "logic/building.h"
 #include "ui_basic/window.h"
@@ -28,7 +30,7 @@ using Widelands::Building;
  * Create the building's options window if necessary and bring it to
  * the top to be seen by the player.
  */
-void Building::show_options(Interactive_GameBase & igbase, bool avoid_fastclick)
+void Building::show_options(Interactive_GameBase & igbase, bool avoid_fastclick, Point pos)
 {
 	if (m_optionswindow) {
 		if (m_optionswindow->is_minimal())
@@ -36,11 +38,15 @@ void Building::show_options(Interactive_GameBase & igbase, bool avoid_fastclick)
 		m_optionswindow->move_to_top();
 	} else {
 		create_options_window(igbase, m_optionswindow);
-		if (upcast(Building_Window, bw, m_optionswindow))
+		if (upcast(Building_Window, bw, m_optionswindow)) {
 			bw->set_avoid_fastclick(avoid_fastclick);
+		}
 		// Run a first think here so that certain things like caps buttons
 		// get properly initialized
 		m_optionswindow->think();
+	}
+	if (pos.x >= 0 && pos.y >= 0) {
+		m_optionswindow->set_pos(pos);
 	}
 }
 
@@ -49,7 +55,10 @@ void Building::show_options(Interactive_GameBase & igbase, bool avoid_fastclick)
  */
 void Building::hide_options()
 {
+	BOOST_FOREACH(boost::signals::connection& c, options_window_connections)
+		c.disconnect();
 	delete m_optionswindow;
+	m_optionswindow = nullptr;
 }
 
 /**

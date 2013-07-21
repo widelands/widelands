@@ -18,7 +18,6 @@
  */
 
 #include <boost/lexical_cast.hpp>
-#include <boost/scoped_ptr.hpp>
 #include <config.h>
 #ifndef HAVE_VARARRAY
 #include <climits>
@@ -628,6 +627,15 @@ void NetClient::send(const std::string & msg)
 	s.send(d->sock);
 }
 
+void NetClient::send_local(const std::string& msg)
+{
+	ChatMessage c;
+	c.msg = msg;
+	c.time = time(0);
+	d->chatmessages.push_back(c);
+	ChatProvider::send(c);
+}
+
 const std::vector<ChatMessage> & NetClient::getMessages() const
 {
 	return d->chatmessages;
@@ -906,13 +914,13 @@ void NetClient::handle_packet(RecvPacket & packet)
 			LuaInterface * lua = create_LuaInterface();
 			std::string path = "tribes/" + info.name;
 			if (g_fs->IsDirectory(path)) {
-				boost::scoped_ptr<FileSystem> sub_fs(g_fs->MakeSubFileSystem(path));
+				std::unique_ptr<FileSystem> sub_fs(g_fs->MakeSubFileSystem(path));
 				lua->register_scripts(*sub_fs, "tribe_" + info.name);
 			}
 
 			for (uint8_t j = packet.Unsigned8(); j; --j) {
 				std::string const name = packet.String();
-				boost::shared_ptr<LuaTable> t = lua->run_script
+				std::unique_ptr<LuaTable> t = lua->run_script
 					("tribe_" + info.name, name);
 				info.initializations.push_back
 					(TribeBasicInfo::Initialization(name, t->get_string("name")));
