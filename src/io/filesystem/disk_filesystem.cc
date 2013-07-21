@@ -44,9 +44,6 @@
 #include <sys/statvfs.h>
 #include <sys/types.h>
 #include <fcntl.h>
-#ifndef _GNU_SOURCE
-#define _GNU_SOURCE // for O_NOATIME
-#endif
 #endif
 
 #include "io/streamread.h"
@@ -402,7 +399,7 @@ void * RealFSImpl::Load(const std::string & fname, size_t & length) {
 		if (size and (result != 1)) {
 			assert(false);
 			throw wexception
-				("RealFSImpl::Load: read failed for %s (%s) with size %"PRIuS"",
+				("RealFSImpl::Load: read failed for %s (%s) with size %" PRIuS "",
 				 fname.c_str(), fullname.c_str(), size);
 		}
 		static_cast<int8_t *>(data)[size] = 0;

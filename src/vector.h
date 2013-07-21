@@ -20,8 +20,6 @@
 #ifndef VECTOR_H
 #define VECTOR_H
 
-#include "compile_assert.h"
-
 #include <cmath>
 
 // hm, floats...

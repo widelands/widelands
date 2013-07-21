@@ -22,15 +22,13 @@
 
 #include "fileread.h"
 
-#include "compile_assert.h"
-
 /// Wrapper around FileRead for reading groups of Size bits from a file, where
 /// Size can be a factor of 8. Call get to read Size bits from the buffer.
 /// Attempts to read more bits than have been written to the BitOutBuffer when
 /// the file was created will not fail unless it causes another byte to be read
 /// from the file.
 template<uint8_t const Size> struct BitInBuffer {
-	compile_assert(Size == 1 or Size == 2 or Size == 4);
+	static_assert(Size == 1 or Size == 2 or Size == 4, "assert(Size == 1 or Size == 2 or Size == 4) failed.");
 	BitInBuffer() : buffer(0), mask(0x00) {}
 	void Open(FileSystem & fs, char const * const filename) {
 		fr.Open(fs, filename);

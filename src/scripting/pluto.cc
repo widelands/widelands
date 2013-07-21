@@ -598,7 +598,7 @@ static void persistproto(PersistInfo * pi)
 
 	/* Serialize code */
 	{
-		compile_assert(sizeof(Instruction) == 4);
+		static_assert(sizeof(Instruction) == 4, "assert(sizeof(Instruction) == 4) failed.");
 		pi->fw->Signed32(p->sizecode);
 		for (int32_t i = 0; i < p->sizecode; i++)
 			pi->fw->Unsigned32(p->code[i]);

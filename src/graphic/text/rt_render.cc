@@ -158,7 +158,7 @@ private:
 	// Image is inserted, the width will become wider after it. This is a
 	// constraint change.
 	struct ConstraintChange {
-		uint16_t at_y;
+		int at_y;
 		int32_t delta_w;
 		int32_t delta_offset_x;
 

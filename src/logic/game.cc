@@ -220,7 +220,7 @@ bool Game::run_splayer_scenario_direct(char const * const mapname) {
 
 	set_map(new Map);
 
-	std::auto_ptr<Map_Loader> maploader(map().get_correct_loader(mapname));
+	std::unique_ptr<Map_Loader> maploader(map().get_correct_loader(mapname));
 	if (not maploader.get())
 		throw wexception("could not load \"%s\"", mapname);
 	UI::ProgressWindow loaderUI;
@@ -237,6 +237,7 @@ bool Game::run_splayer_scenario_direct(char const * const mapname) {
 
 	// We have to create the players here.
 	Player_Number const nr_players = map().get_nrplayers();
+	m_number_of_players = 0;
 	iterate_player_numbers(p, nr_players) {
 		loaderUI.stepf (_("Adding player %u"), p);
 		add_player
@@ -245,7 +246,9 @@ bool Game::run_splayer_scenario_direct(char const * const mapname) {
 			 map().get_scenario_player_tribe(p),
 			 map().get_scenario_player_name (p));
 		get_player(p)->setAI(map().get_scenario_player_ai(p));
+		m_number_of_players++;
 	}
+	m_win_condition_displayname = _("Scenario");
 
 	set_ibase
 		(new Interactive_Player
@@ -286,7 +289,7 @@ void Game::init_newgame
 	assert(!get_map());
 	set_map(new Map);
 
-	std::auto_ptr<Map_Loader> maploader
+	std::unique_ptr<Map_Loader> maploader
 		(map().get_correct_loader(settings.mapfilename.c_str()));
 	maploader->preload_map(settings.scenario);
 	std::string const background = map().get_background();
@@ -368,8 +371,6 @@ void Game::init_savegame
 	set_map(new Map);
 	try {
 		Game_Loader gl(settings.mapfilename, *this);
-
-
 		Widelands::Game_Preload_Data_Packet gpdp;
 		gl.preload_game(gpdp);
 		m_win_condition_displayname = gpdp.get_win_condition();
