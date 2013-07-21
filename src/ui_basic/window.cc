@@ -486,6 +486,15 @@ bool Window::handle_alt_drag(int32_t mx, int32_t my)
 	return true;
 }
 
+// Always consume the tooltip event to prevent tooltips from
+// our parent to be rendered
+bool Window::handle_tooltip()
+{
+	UI::Panel::handle_tooltip();
+	return true;
+}
+
+
 void Window::restore() {
 	assert(_is_minimal);
 	_is_minimal = false;

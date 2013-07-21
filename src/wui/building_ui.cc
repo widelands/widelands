@@ -32,8 +32,6 @@ using Widelands::Building;
  */
 void Building::show_options(Interactive_GameBase & igbase, bool avoid_fastclick, Point pos)
 {
-	// Reset tooltip before opening the window
-	igbase.set_tooltip("");
 	if (m_optionswindow) {
 		if (m_optionswindow->is_minimal())
 			m_optionswindow->restore();

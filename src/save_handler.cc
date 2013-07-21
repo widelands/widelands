@@ -39,19 +39,35 @@ using Widelands::Game_Saver;
  */
 void SaveHandler::think(Widelands::Game & game, int32_t realtime) {
 	initialize(realtime);
+	std::string filename = "wl_autosave";
 
-	if (not m_allow_autosaving) // Is autosaving allowed atm?
+	if (!m_allow_saving) {
 		return;
+	}
 
-	int32_t const autosaveInterval =
-		g_options.pull_section("global").get_int
-			("autosave", DEFAULT_AUTOSAVE_INTERVAL * 60);
-	if (autosaveInterval <= 0)
-		return; // no autosave requested
+	if (m_save_requested) {
+		if (!m_save_filename.empty()) {
+			filename = m_save_filename;
+		}
 
-	int32_t const elapsed = (realtime - m_last_saved_time) / 1000;
-	if (elapsed < autosaveInterval)
-		return;
+		log("Autosave: save requested : %s\n", filename.c_str());
+		m_save_requested = false;
+		m_save_filename = "";
+	} else {
+		const int32_t autosave_interval_in_seconds =
+			g_options.pull_section("global").get_int
+				("autosave", DEFAULT_AUTOSAVE_INTERVAL * 60);
+		if (autosave_interval_in_seconds <= 0) {
+			return; // no autosave requested
+		}
+
+		const int32_t elapsed = (realtime - m_last_saved_time) / 1000;
+		if (elapsed < autosave_interval_in_seconds) {
+			return;
+		}
+
+		log("Autosave: interval elapsed (%d s), saving\n", elapsed);
+	}
 
 	// TODO: defer saving to next tick so that this message is shown
 	// before the actual save, or put the saving logic in another thread
@@ -59,20 +75,20 @@ void SaveHandler::think(Widelands::Game & game, int32_t realtime) {
 		(_("Saving game..."));
 
 	// save the game
-	std::string complete_filename =
-		create_file_name (get_base_dir(), "wl_autosave");
+	const std::string complete_filename = create_file_name(get_base_dir(), filename);
 	std::string backup_filename;
 
 	// always overwrite a file
 	if (g_fs->FileExists(complete_filename)) {
-		backup_filename = create_file_name (get_base_dir(), "wl_autosave2");
+		filename += "2";
+		backup_filename = create_file_name (get_base_dir(), filename);
 		if (g_fs->FileExists(backup_filename)) {
 			g_fs->Unlink(backup_filename);
 		}
 		g_fs->Rename(complete_filename, backup_filename);
 	}
 
-	static std::string error;
+	std::string error;
 	if (!save_game(game, complete_filename, &error)) {
 		log("Autosave: ERROR! - %s\n", error.c_str());
 		game.get_ipl()->get_chat_provider()->send_local

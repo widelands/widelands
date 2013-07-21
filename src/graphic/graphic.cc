@@ -76,7 +76,7 @@ Graphic::Graphic()
 
 	//fastOpen tries to use mmap
 	FileRead fr;
-#ifndef WIN32
+#ifndef _WIN32
 	fr.fastOpen(*g_fs, "pics/wl-ico-128.png");
 #else
 	fr.fastOpen(*g_fs, "pics/wl-ico-32.png");

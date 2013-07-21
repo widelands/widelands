@@ -298,10 +298,15 @@ void Table<void *>::draw(RenderTarget & dst)
 				continue;
 			}
 			const Image* entry_text_im = UI::g_fh1->render(as_uifont(entry_string, m_fontsize));
+			uint16_t text_width = entry_text_im->width();
+			if (alignment & Align_Right) {
+				point.x += curw - picw;
+			} else if (alignment & Align_HCenter) {
+				point.x += (curw - picw) / 2;
+			}
+			UI::correct_for_align(alignment, text_width, entry_text_im->height(), &point);
 			// Crop to column width
-			UI::correct_for_align(alignment, entry_text_im->width(), entry_text_im->height(), &point);
 			dst.blitrect(point, entry_text_im, Rect(0, 0, curw - picw, lineheight));
-
 			curx += curw;
 		}
 

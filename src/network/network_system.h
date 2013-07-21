@@ -22,7 +22,7 @@
 
 #include <stdint.h>
 
-#ifndef WIN32
+#ifndef _WIN32
 
 // These includes work on Linux and should be fine on any other Unix-alike.
 // If not, this is the right place to conditionally include what is needed.

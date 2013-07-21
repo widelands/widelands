@@ -22,7 +22,7 @@
 
 #include "io/filesystem/filesystem.h"
 #include "machdep.h"
-#ifdef WIN32
+#ifdef _WIN32
 #else
 #include <sys/mman.h>
 #endif
@@ -79,7 +79,7 @@ template<typename Base> struct basic_FileRead : public Base {
 	void Close() {
 		assert(data);
 		if (m_fast) {
-#ifdef WIN32
+#ifdef _WIN32
 			assert(false);
 #else
 			munmap(data, length);
