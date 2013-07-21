@@ -52,7 +52,7 @@ public:
 		 Widelands::WareWorker type,
 		 bool selectable,
 		 boost::function<void(Widelands::Ware_Index, bool)> callback_function = 0,
-		 bool horizontal = true);
+		 bool horizontal = false);
 
 	bool handle_mousemove
 		(uint8_t state, int32_t x, int32_t y, int32_t xdiff, int32_t ydiff);
