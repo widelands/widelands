@@ -147,7 +147,8 @@ throw (_wexception)
 					else {
 						building.m_leave_allow = 0;
 					}
-					if (packet_version == 3) {
+					if (packet_version >= 3) {
+						// For former versions, the current building descr
 						while (fr.Unsigned8()) {
 							const Building_Descr* former_descr =
 								building.descr().tribe().get_building_descr
@@ -157,7 +158,7 @@ throw (_wexception)
 					}
 					if (fr.Unsigned8()) {
 						if (upcast(ProductionSite, productionsite, &building))
-							if (dynamic_cast<MilitarySite const *>(productionsite))
+							if (dynamic_cast<MilitarySite const *>(productionsite)) {
 								log
 									("WARNING: Found a stopped %s at (%i, %i) in the "
 									 "savegame. Militarysites are not stoppable. "
@@ -165,8 +166,9 @@ throw (_wexception)
 									 building.descname().c_str(),
 									 building.get_position().x,
 									 building.get_position().y);
-							else
+							} else {
 								productionsite->set_stopped(true);
+							}
 						else
 							log
 								("WARNING: Found a stopped %s at (%i, %i) in the "
@@ -180,48 +182,53 @@ throw (_wexception)
 					//  Set economy now, some stuff below will count on this.
 					building.set_economy(building.m_flag->get_economy());
 
-					if (upcast(ConstructionSite, constructionsite, &building))
+					if (upcast(ConstructionSite, constructionsite, &building)) {
 						read_constructionsite
 							(*constructionsite,
 							 fr,
 							 ref_cast<Game, Editor_Game_Base>(egbase),
 							 mol);
-					else if (upcast(DismantleSite, dms, &building))
+					} else if (upcast(DismantleSite, dms, &building)) {
 						read_dismantlesite
 							(*dms,
 							 fr,
 							 ref_cast<Game, Editor_Game_Base>(egbase),
 							 mol);
-					else if (upcast(Warehouse, warehouse, &building))
+					} else if (upcast(Warehouse, warehouse, &building)) {
 						read_warehouse
 							(*warehouse,
 							 fr,
 							 ref_cast<Game, Editor_Game_Base>(egbase),
 							 mol);
-					else if (upcast(ProductionSite, productionsite, &building)) {
-						if (upcast(MilitarySite, militarysite, productionsite))
+					} else if (upcast(ProductionSite, productionsite, &building)) {
+						if (upcast(MilitarySite, militarysite, productionsite)) {
 							read_militarysite
 								(*militarysite,
 								 fr,
 								 ref_cast<Game, Editor_Game_Base>(egbase),
 								 mol);
-						else if (upcast(TrainingSite, trainingsite, productionsite))
+						} else if (upcast(TrainingSite, trainingsite, productionsite)) {
 							read_trainingsite
 								(*trainingsite,
 								 fr,
 								 ref_cast<Game, Editor_Game_Base>(egbase),
 								 mol);
-						else
+						} else {
 							read_productionsite
 								(*productionsite,
 								 fr,
 								 ref_cast<Game, Editor_Game_Base>(egbase),
 								 mol);
-					} else
+						}
+					} else {
 						//  type of building is not one of (or derived from)
 						//  {ConstructionSite, Warehouse, ProductionSite}
 						assert(false);
-
+					}
+					if (packet_version < 3) {
+						read_formerbuildings_v2(building,
+							fr, ref_cast<Game, Editor_Game_Base>(egbase), mol);
+					}
 
 					mol.mark_object_as_loaded(building);
 				} catch (const _wexception & e) {
@@ -235,6 +242,44 @@ throw (_wexception)
 		throw game_data_error(_("buildingdata: %s"), e.what());
 	}
 }
+
+void Map_Buildingdata_Data_Packet::read_formerbuildings_v2(Building& b, FileRead& , Game& , Map_Map_Object_Loader& )
+{
+	// add the current building - not for csite or dismantle
+	if (is_a(ProductionSite, &b)) {
+		assert(b.m_old_buildings.empty());
+		b.m_old_buildings.push_back(&b.descr());
+	} else if (is_a(Warehouse, &b)) {
+		assert(b.m_old_buildings.empty());
+		b.m_old_buildings.push_back(&b.descr());
+	} else if (upcast(Partially_Finished_Building, pfb, &b)){
+		b.m_old_buildings.push_back(pfb->m_building);
+	}
+	
+	// iterate through all buildings to find first predecessor
+	bool done = false;
+	const Tribe_Descr & t = b.descr().tribe();
+	while (not done) {
+		const Building_Descr * oldest = b.m_old_buildings.front();
+		if (!oldest->is_enhanced()) {
+			done = true;
+			break;
+		}
+		const Building_Index & oldest_idx = t.building_index(oldest->name());
+		for (Building_Index i = Building_Index::First(); i < t.get_nrbuildings(); ++i) {
+			Building_Descr const * ob = t.get_building_descr(i);
+			if (ob->enhancements().count(oldest_idx)) {
+				b.m_old_buildings.insert(b.m_old_buildings.begin(), ob);
+				break;
+			}
+		}
+	}
+	log("Former Buildings for %s \n", b.descname().c_str());
+	for (const Building_Descr* desc : b.m_old_buildings) {
+		log(" %s\n", desc->name().c_str());
+	}
+}
+
 
 void Map_Buildingdata_Data_Packet::read_partially_finished_building
 	(Partially_Finished_Building  & pfb,
@@ -318,11 +363,13 @@ void Map_Buildingdata_Data_Packet::read_constructionsite
 					(*cur)->set_callback
 						(ConstructionSite::wares_queue_callback, &constructionsite);
 
-			if (packet_version == 2 && fr.Unsigned8()) {
-				const Building_Descr* former_descr =
-					tribe.get_building_descr
-					(tribe.safe_building_index(fr.CString()));
-				constructionsite.m_old_buildings.push_back(former_descr);
+			if (packet_version <= 2) {
+				if (fr.Unsigned8()) {
+					const Building_Descr* former_descr =
+						tribe.get_building_descr
+						(tribe.safe_building_index(fr.CString()));
+					constructionsite.m_old_buildings.push_back(former_descr);
+				}
 			}
 
 			constructionsite.m_fetchfromflag  = fr.  Signed32();

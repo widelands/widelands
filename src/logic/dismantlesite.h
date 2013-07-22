@@ -63,7 +63,7 @@ public:
 	DismantleSite(const DismantleSite_Descr & descr);
 	DismantleSite
 		(const DismantleSite_Descr & descr, Editor_Game_Base &,
-		 Coords const, Player &, bool, Building::FormerBuildings former_buildings);
+		 Coords const, Player &, bool, Building::FormerBuildings & former_buildings);
 
 	char const * type_name() const throw () {return "dismantlesite";}
 	virtual std::string get_statistics_string();
@@ -73,7 +73,7 @@ public:
 
 	virtual bool get_building_work(Game &, Worker &, bool success);
 
-	static void count_returned_wares(const Building_Descr & building, std::map<Ware_Index, uint8_t> & res);
+	static void count_returned_wares(Building* building, std::map<Ware_Index, uint8_t> & res);
 
 protected:
 	virtual uint32_t build_step_time() const {return DISMANTLESITE_STEP_TIME;}

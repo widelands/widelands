@@ -145,8 +145,19 @@ Building_Descr::Building_Descr
 		}
 
 		// Get costs
-		Section & buildcost_s = prof.get_safe_section("buildcost");
-		m_buildcost.parse(m_tribe, buildcost_s);
+		if (m_buildable) {
+			Section & buildcost_s = prof.get_safe_section("buildcost");
+			m_buildcost.parse(m_tribe, buildcost_s);
+			Section & returnsect_s = prof.get_safe_section("return_on_dismantle");
+			m_return_dismantle.parse(m_tribe, returnsect_s);
+		}
+		
+		if (m_enhanced_building) {
+			Section & en_buildcost_s = prof.get_safe_section("enhancement_cost");
+			m_enhance_cost.parse(m_tribe, en_buildcost_s);
+			Section & en_returnsect_s = prof.get_safe_section("return_on_dismantle_on_enhanced");
+			m_return_enhanced.parse(m_tribe, en_returnsect_s);
+		}
 	} else if (m_global) {
 		//  get build icon for global buildings (for statistics window)
 		m_buildicon_fname  = directory;
@@ -184,11 +195,12 @@ Building & Building_Descr::create
 	for (const Building_Descr * descr : former_buildings) {
 		b.m_old_buildings.push_back(descr);
 	}
-	b.m_old_buildings.push_back(this);
 	if (loading) {
 		b.Building::init(egbase);
 		return b;
 	}
+	// Only if not loading
+	//b.m_old_buildings.push_back(this);
 	b.init(egbase);
 	return b;
 }

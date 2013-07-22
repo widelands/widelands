@@ -18,6 +18,7 @@
  */
 
 #include <cstdio>
+#include <boost/foreach.hpp>
 
 #include "upcast.h"
 #include "wexception.h"
@@ -65,12 +66,15 @@ Partially_Finished_Building(gdescr)
 
 DismantleSite::DismantleSite
 	(const DismantleSite_Descr & gdescr, Editor_Game_Base & egbase, Coords const c,
-	 Player & plr, bool loading, Building::FormerBuildings former_buildings)
+	 Player & plr, bool loading, Building::FormerBuildings & former_buildings)
 :
 Partially_Finished_Building(gdescr)
 {
 	assert(!former_buildings.empty());
-	set_building(*former_buildings.back());
+	for (const Building_Descr* old_descr : former_buildings) {
+		m_old_buildings.push_back(old_descr);
+	}
+	set_building(*m_old_buildings.back());
 
 	m_position = c;
 	set_owner(&plr);
@@ -106,7 +110,7 @@ void DismantleSite::init(Editor_Game_Base & egbase)
 	Partially_Finished_Building::init(egbase);
 
 	std::map<Ware_Index, uint8_t> wares;
-	count_returned_wares(*m_building, wares);
+	count_returned_wares(this, wares);
 
 	std::map<Ware_Index, uint8_t>::const_iterator it = wares.begin();
 	m_wares.resize(wares.size());
@@ -126,34 +130,24 @@ Count wich wares you get back if you dismantle the given building
 ===============
 */
 void DismantleSite::count_returned_wares
-	(const Widelands::Building_Descr & building,
+	(Building* building,
 	 std::map<Ware_Index, uint8_t>   & res)
 {
-	const Tribe_Descr & t = building.tribe();
-	Building_Descr const * bd = &building;
-	Building_Index bd_idx = t.building_index(bd->name());
-
-	bool done = false;
-	while (not done) {
-		const std::map<Ware_Index, uint8_t> & buildcost = bd->buildcost();
-		for (std::map<Ware_Index, uint8_t>::const_iterator i = buildcost.begin(); i != buildcost.end(); ++i)
-			res[i->first] += i->second;
-
-		// Find the (first) predecessor of this building
-		for (Building_Index i = Building_Index::First(); i < t.get_nrbuildings(); ++i) {
-			Building_Descr const * ob = t.get_building_descr(i);
-			if (ob->enhancements().count(bd_idx)) {
-				done = false;
-				bd = ob;
-				bd_idx = i;
-				break;
-			} else
-				done = true;
+	log("Returned wares for %s \n",building->descname().c_str());
+	BOOST_FOREACH(const Building_Descr* former_descr, building->get_former_buildings()) {
+		log("FORMER: %s : ", former_descr->name().c_str());
+		const std::map<Ware_Index, uint8_t> * return_wares;
+		if (former_descr != building->get_former_buildings().front()) {
+			return_wares = & former_descr->returned_wares_enhanced();
+		} else {
+			return_wares = & former_descr->returned_wares();
 		}
-	}
+		assert(return_wares != nullptr);
+		log("%i returned ware types\n", return_wares->size());
 
-	for (std::map<Ware_Index, uint8_t>::iterator it = res.begin(); it != res.end(); ++it) {
-		it->second = (it->second + RATIO_RETURNED_WARES - 1) / RATIO_RETURNED_WARES;
+		for (std::map<Ware_Index, uint8_t>::const_iterator i = return_wares->begin(); i != return_wares->end(); ++i) {
+			res[i->first] += i->second;
+		}
 	}
 }
 

@@ -9,6 +9,13 @@ grout=6
 gold=4
 thatchreed=3
 
+[return_on_dismantle]
+trunk=3
+raw_stone=3
+grout=3
+gold=2
+thatchreed=1
+
 [working positions]
 trainer=1
 

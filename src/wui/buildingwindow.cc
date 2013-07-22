@@ -266,7 +266,7 @@ void Building_Window::create_capsbuttons(UI::Box * capsbuttons)
 							 g_gr->images().get("pics/but4.png"),
 							 building_descr.get_buildicon(),
 							 std::string(buffer) + "<br><font size=11>" + _("Construction costs:") + "</font><br>" +
-								 waremap_to_richtext(tribe, building_descr.buildcost())); //  button id = building id
+								 waremap_to_richtext(tribe, building_descr.enhancement_cost())); //  button id = building id
 					enhancebtn->sigclicked.connect
 						(boost::bind
 							(&Building_Window::act_enhance,
@@ -297,7 +297,7 @@ void Building_Window::create_capsbuttons(UI::Box * capsbuttons)
 
 		if (m_capscache & Widelands::Building::PCap_Dismantle) {
 			std::map<Widelands::Ware_Index, uint8_t> wares;
-			Widelands::DismantleSite::count_returned_wares(m_building.descr(), wares);
+			Widelands::DismantleSite::count_returned_wares(&m_building, wares);
 			UI::Button * dismantlebtn =
 				new UI::Button
 					(capsbuttons, "dismantle", 0, 0, 34, 34,

@@ -9,6 +9,10 @@ trunk=3
 grout=2
 thatchreed=2
 
+[return_on_dismantle]
+trunk=2
+grout=1
+
 [working positions]
 burner=1
 

@@ -128,20 +128,24 @@ Initialize the construction site by starting orders
 void ConstructionSite::init(Editor_Game_Base & egbase)
 {
 	Partially_Finished_Building::init(egbase);
+	
+	const std::map<Ware_Index, uint8_t> * buildcost;
 	if (!m_old_buildings.empty()) {
+		// Enhancement
 		m_info.was = m_old_buildings.back();
+		buildcost = &m_building->enhancement_cost();
+	} else {
+		buildcost = &m_building->buildcost();
 	}
 	
 	//  TODO figure out whether planing is necessary
 
 	//  initialize the wares queues
-	const std::map<Ware_Index, uint8_t> & buildcost = m_building->buildcost();
-	size_t const buildcost_size = buildcost.size();
+	size_t const buildcost_size = buildcost->size();
 	m_wares.resize(buildcost_size);
-	std::map<Ware_Index, uint8_t>::const_iterator it = buildcost.begin();
+	std::map<Ware_Index, uint8_t>::const_iterator it = buildcost->begin();
 
 	for (size_t i = 0; i < buildcost_size; ++i, ++it) {
-		uint8_t ware_amount = it->second;
 		WaresQueue & wq =
 			*(m_wares[i] = new WaresQueue(*this, it->first, it->second));
 
@@ -165,8 +169,9 @@ void ConstructionSite::cleanup(Editor_Game_Base & egbase)
 
 	if (m_work_steps <= m_work_completed) {
 		// Put the real building in place
+		m_old_buildings.push_back(m_building);
 		Building & b =
-			m_building->create(egbase, owner(), m_position, false);
+			m_building->create(egbase, owner(), m_position, false, false, m_old_buildings);
 		if (Worker * const builder = m_builder.get(egbase)) {
 			builder->reset_tasks(ref_cast<Game, Editor_Game_Base>(egbase));
 			builder->set_location(&b);

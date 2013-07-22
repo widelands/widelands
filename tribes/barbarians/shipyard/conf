@@ -9,6 +9,11 @@ blackwood=2
 raw_stone=3
 cloth=2
 
+[return_on_dismantle]
+trunk=1
+blackwood=1
+raw_stone=2
+
 [working positions]
 shipwright=1
 

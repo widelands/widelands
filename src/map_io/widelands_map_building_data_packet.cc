@@ -84,13 +84,17 @@ throw (_wexception)
 							//  Now, create this Building, take extra special care for
 							//  constructionsites. All data is read later.
 							Building * building;
-							if (special_type == 1) // Constructionsite
+							if (special_type == 1) { // Constructionsite
 								  building = &egbase.warp_constructionsite
 									  	(c, p, index, true);
-							else if (special_type == 2) // DismantleSite
-								  building = &egbase.warp_dismantlesite (c, p, true);
-							else
+							} else if (special_type == 2) {// DismantleSite
+								Building::FormerBuildings formers;
+								const Building_Descr* former_desc = tribe.get_building_descr(index);
+								formers.push_back(former_desc);
+								  building = &egbase.warp_dismantlesite (c, p, true, formers);
+							} else {
 								  building = &egbase.warp_building(c, p, index);
+							}
 
 							mol.register_object<Building> (serial, *building);
 
