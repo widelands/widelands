@@ -63,7 +63,7 @@ public:
 	DismantleSite(const DismantleSite_Descr & descr);
 	DismantleSite
 		(const DismantleSite_Descr & descr, Editor_Game_Base &,
-		 Coords const, Player &, const Building_Descr &, bool);
+		 Coords const, Player &, bool, Building::FormerBuildings former_buildings);
 
 	char const * type_name() const throw () {return "dismantlesite";}
 	virtual std::string get_statistics_string();

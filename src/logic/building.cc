@@ -174,13 +174,17 @@ Building & Building_Descr::create
 	 Player               &       owner,
 	 Coords                 const pos,
 	 bool                   const construct,
-	 Building_Descr const * const old,
-	 bool                         loading)
+	 bool                         loading,
+	 Building::FormerBuildings const former_buildings)
 	const
 {
-	Building & b = construct ? create_constructionsite(old) : create_object();
+	Building & b = construct ? create_constructionsite() : create_object();
 	b.m_position = pos;
 	b.set_owner(&owner);
+	for (const Building_Descr * descr : former_buildings) {
+		b.m_old_buildings.push_back(descr);
+	}
+	b.m_old_buildings.push_back(this);
 	if (loading) {
 		b.Building::init(egbase);
 		return b;
@@ -230,11 +234,10 @@ void Building_Descr::load_graphics()
 ===============
 Create a construction site for this type of building
 
-if old != 0 this is an enhancement from an older building
+if old is not empty this is an enhancement from an older building
 ===============
 */
-Building & Building_Descr::create_constructionsite
-	(Building_Descr const * const old) const
+Building & Building_Descr::create_constructionsite() const
 {
 	Building_Descr const * const descr =
 		m_tribe.get_building_descr
@@ -242,8 +245,6 @@ Building & Building_Descr::create_constructionsite
 	ConstructionSite & csite =
 		ref_cast<ConstructionSite, Map_Object>(descr->create_object());
 	csite.set_building(*this);
-	if (old)
-		csite.set_previous_building(old);
 
 	return csite;
 }

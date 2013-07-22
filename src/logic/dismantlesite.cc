@@ -65,11 +65,12 @@ Partially_Finished_Building(gdescr)
 
 DismantleSite::DismantleSite
 	(const DismantleSite_Descr & gdescr, Editor_Game_Base & egbase, Coords const c,
-	 Player & plr, const Building_Descr & bdscr, bool loading)
+	 Player & plr, bool loading, Building::FormerBuildings former_buildings)
 :
 Partially_Finished_Building(gdescr)
 {
-	set_building(bdscr);
+	assert(!former_buildings.empty());
+	set_building(*former_buildings.back());
 
 	m_position = c;
 	set_owner(&plr);

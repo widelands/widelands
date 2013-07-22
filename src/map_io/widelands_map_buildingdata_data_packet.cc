@@ -50,11 +50,13 @@
 namespace Widelands {
 
 // Versions
-#define CURRENT_PACKET_VERSION 2
+// Since V3: m_old_buildings vector
+#define CURRENT_PACKET_VERSION 3
 
 // Subversions
 #define CURRENT_DISMANTLESITE_PACKET_VERSION    1
-#define CURRENT_CONSTRUCTIONSITE_PACKET_VERSION 2
+// Since V3: m_prev_building not written
+#define CURRENT_CONSTRUCTIONSITE_PACKET_VERSION 3
 #define CURRENT_PARTIALLYFB_PACKET_VERSION      1
 #define CURRENT_WAREHOUSE_PACKET_VERSION        6
 #define CURRENT_MILITARYSITE_PACKET_VERSION     4
@@ -142,9 +144,17 @@ throw (_wexception)
 							throw game_data_error
 								("leave allow item (%u): %s", leaver_serial, e.what());
 						}
-					else
+					else {
 						building.m_leave_allow = 0;
-
+					}
+					if (packet_version == 3) {
+						while (fr.Unsigned8()) {
+							const Building_Descr* former_descr =
+								building.descr().tribe().get_building_descr
+								(building.descr().tribe().safe_building_index(fr.CString()));
+							building.m_old_buildings.push_back(former_descr);
+						}
+					}
 					if (fr.Unsigned8()) {
 						if (upcast(ProductionSite, productionsite, &building))
 							if (dynamic_cast<MilitarySite const *>(productionsite))
@@ -298,7 +308,7 @@ void Map_Buildingdata_Data_Packet::read_constructionsite
 		if (packet_version == 1)
 			return read_constructionsite_v1(constructionsite, fr, game, mol);
 
-		if (packet_version == CURRENT_CONSTRUCTIONSITE_PACKET_VERSION) {
+		if (packet_version >= 2) {
 			read_partially_finished_building(constructionsite, fr, game, mol);
 
 			const Tribe_Descr & tribe = constructionsite.tribe();
@@ -308,12 +318,12 @@ void Map_Buildingdata_Data_Packet::read_constructionsite
 					(*cur)->set_callback
 						(ConstructionSite::wares_queue_callback, &constructionsite);
 
-			if (fr.Unsigned8()) {
-				constructionsite.m_prev_building =
+			if (packet_version == 2 && fr.Unsigned8()) {
+				const Building_Descr* former_descr =
 					tribe.get_building_descr
 					(tribe.safe_building_index(fr.CString()));
-			} else
-				constructionsite.m_prev_building = 0;
+				constructionsite.m_old_buildings.push_back(former_descr);
+			}
 
 			constructionsite.m_fetchfromflag  = fr.  Signed32();
 		} else
@@ -334,11 +344,11 @@ void Map_Buildingdata_Data_Packet::read_constructionsite_v1
 	constructionsite.m_building =
 		tribe.get_building_descr(tribe.safe_building_index(fr.CString()));
 	if (fr.Unsigned8()) {
-		constructionsite.m_prev_building =
+		const Building_Descr * former_descr =
 			tribe.get_building_descr
 			(tribe.safe_building_index(fr.CString()));
-	} else
-		constructionsite.m_prev_building = 0;
+		constructionsite.m_old_buildings.push_back(former_descr);
+	}
 
 	delete constructionsite.m_builder_request;
 	if (fr.Unsigned8()) {
@@ -1251,8 +1261,16 @@ throw (_wexception)
 			{
 				assert(mos.is_object_known(*o));
 				fw.Unsigned32(mos.get_object_file_index(*o));
-			} else
+			} else {
 				fw.Unsigned32(0);
+			}
+			{
+				for (const Building_Descr* former_descr : building->m_old_buildings) {
+					fw.Unsigned8(1);
+					fw.String(former_descr->name());
+				}
+				fw.Unsigned8(0);
+			}
 			{
 				bool is_stopped = false;
 				if (upcast(ProductionSite const, productionsite, building))
@@ -1355,12 +1373,6 @@ void Map_Buildingdata_Data_Packet::write_constructionsite
 	fw.Unsigned16(CURRENT_CONSTRUCTIONSITE_PACKET_VERSION);
 
 	write_partially_finished_building(constructionsite, fw, game, mos);
-
-	if (constructionsite.m_prev_building) {
-		fw.Unsigned8(1);
-		fw.String(constructionsite.m_prev_building->name());
-	} else
-		fw.Unsigned8(0);
 
 	fw.Signed32(constructionsite.m_fetchfromflag);
 }

@@ -82,20 +82,21 @@ struct Building_Descr : public Map_Object_Descr {
 		m_enhancements.insert(i);
 	}
 
+	typedef std::vector<const Building_Descr*> FormerBuildings;
 	/// Create a building of this type in the game. Calls init, which does
 	/// different things for different types of buildings (such as conquering
 	/// land and requesting things). Therefore this must not be used to allocate
 	/// a building during savegame loading. (It would cause many bugs.)
 	///
 	/// Does not perform any sanity checks.
-	/// If old != 0 this is an enhancing.
+	/// If former_buildings is not empty this is an enhancing.
 	Building & create
 		(Editor_Game_Base &,
 		 Player &,
 		 Coords,
 		 bool                   construct,
-		 Building_Descr const * old = 0,
-		 bool                   loading = false)
+		 bool                   loading = false,
+		 FormerBuildings former_buildings = FormerBuildings())
 		const;
 #ifdef WRITE_GAME_DATA_AS_HTML
 	void writeHTML(::FileWrite &) const;
@@ -115,13 +116,16 @@ struct Building_Descr : public Map_Object_Descr {
 
 protected:
 	virtual Building & create_object() const = 0;
-	Building & create_constructionsite(Building_Descr const * old) const;
+	Building & create_constructionsite() const;
 
 private:
 	const Tribe_Descr & m_tribe;
 	bool          m_buildable;       // the player can build this himself
 	bool          m_destructible;    // the player can destruct this himself
 	Buildcost     m_buildcost;
+	Buildcost     m_return_dismantle; // Returned wares on dismantle
+	Buildcost     m_enhance_cost;     // cost for enhancing
+	Buildcost     m_return_enhance;   // Returned ware for dismantling an enhanced building
 	const Image*     m_buildicon;       // if buildable: picture in the build dialog
 	std::string   m_buildicon_fname; // filename for this icon
 	int32_t       m_size;            // size of the building
@@ -211,6 +215,11 @@ public:
 		return descr().enhancements();
 	}
 
+	typedef std::vector<const Building_Descr*> FormerBuildings;
+	const FormerBuildings get_former_buildings() {
+		return m_old_buildings;
+	}
+
 	virtual void log_general_info(const Editor_Game_Base &);
 
 	//  Use on training sites only.
@@ -233,7 +242,6 @@ public:
 		 const std::string & description,
 		 uint32_t throttle_time = 0,
 		 uint32_t throttle_radius = 0);
-
 protected:
 	void start_animation(Editor_Game_Base &, uint32_t anim);
 
@@ -273,6 +281,9 @@ protected:
 
 	// Signals connected for the option window
 	std::vector<boost::signals::connection> options_window_connections;
+
+	// The former buildings descr if this is an enhanced building
+	FormerBuildings m_old_buildings;
 };
 
 }

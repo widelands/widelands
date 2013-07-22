@@ -75,7 +75,7 @@ throw (_wexception)
 						//  Get the tribe and the building index.
 						if (Player * const player = egbase.get_safe_player(p)) {
 							const Tribe_Descr & tribe = player->tribe();
-							Building_Index const index = tribe.building_index(name);
+							const Building_Index index = tribe.building_index(name);
 							if (not index)
 								throw game_data_error
 									("tribe %s does not define building type \"%s\"",
@@ -86,9 +86,9 @@ throw (_wexception)
 							Building * building;
 							if (special_type == 1) // Constructionsite
 								  building = &egbase.warp_constructionsite
-									  	(c, p, index, Building_Index::Null(), true);
+									  	(c, p, index, true);
 							else if (special_type == 2) // DismantleSite
-								  building = &egbase.warp_dismantlesite (c, p, index, true);
+								  building = &egbase.warp_dismantlesite (c, p, true);
 							else
 								  building = &egbase.warp_building(c, p, index);
 

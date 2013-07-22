@@ -74,7 +74,6 @@ IMPLEMENTATION
 
 ConstructionSite::ConstructionSite(const ConstructionSite_Descr & cs_descr) :
 Partially_Finished_Building (cs_descr),
-m_prev_building  (0),
 m_fetchfromflag  (0),
 m_builder_idle   (false)
 {}
@@ -122,20 +121,6 @@ void ConstructionSite::set_building(const Building_Descr & building_descr) {
 }
 
 /*
- * Set previous building
- * That is the building that was here before, we're
- * an enhancement
- */
-void ConstructionSite::set_previous_building
-	(Building_Descr const * const previous_building_descr)
-{
-	assert(!m_prev_building);
-
-	m_prev_building = previous_building_descr;
-	m_info.was = previous_building_descr;
-}
-
-/*
 ===============
 Initialize the construction site by starting orders
 ===============
@@ -143,7 +128,10 @@ Initialize the construction site by starting orders
 void ConstructionSite::init(Editor_Game_Base & egbase)
 {
 	Partially_Finished_Building::init(egbase);
-
+	if (!m_old_buildings.empty()) {
+		m_info.was = m_old_buildings.back();
+	}
+	
 	//  TODO figure out whether planing is necessary
 
 	//  initialize the wares queues
@@ -153,6 +141,7 @@ void ConstructionSite::init(Editor_Game_Base & egbase)
 	std::map<Ware_Index, uint8_t>::const_iterator it = buildcost.begin();
 
 	for (size_t i = 0; i < buildcost_size; ++i, ++it) {
+		uint8_t ware_amount = it->second;
 		WaresQueue & wq =
 			*(m_wares[i] = new WaresQueue(*this, it->first, it->second));
 
@@ -204,7 +193,7 @@ bool ConstructionSite::burn_on_destroy()
 	if (m_work_completed >= m_work_steps)
 		return false; // completed, so don't burn
 
-	return m_work_completed or m_prev_building;
+	return m_work_completed or !m_old_buildings.empty();
 }
 
 /*
@@ -392,14 +381,15 @@ void ConstructionSite::draw
 	if (cur_frame) //  not the first pic
 		//  draw the prev pic from top to where next image will be drawing
 		dst.drawanimrect(pos, anim, tanim - FRAME_LENGTH, get_owner(), Rect(Point(0, 0), w, h - lines));
-	else if (m_prev_building) {
+	else if (!m_old_buildings.empty()) {
+		const Building_Descr* prev_building = m_old_buildings.back();
 		//  Is the first picture but there was another building here before,
 		//  get its most fitting picture and draw it instead.
 		uint32_t a;
 		try {
-			a = m_prev_building->get_animation("unoccupied");
+			a = prev_building->get_animation("unoccupied");
 		} catch (Map_Object_Descr::Animation_Nonexistent &) {
-			a = m_prev_building->get_animation("idle");
+			a = prev_building->get_animation("idle");
 		}
 		uint32_t wa, ha;
 		g_gr->get_animation_size(a, tanim, wa, ha);
