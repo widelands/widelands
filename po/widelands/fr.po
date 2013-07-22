@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: Widelands svn4866\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2013-07-18 21:39+0200\n"
-"PO-Revision-Date: 2013-07-12 16:48+0000\n"
+"PO-Revision-Date: 2013-07-21 12:19+0000\n"
 "Last-Translator: Tubuntu <Unknown>\n"
 "Language-Team: French <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Launchpad-Export-Date: 2013-07-19 05:16+0000\n"
+"X-Launchpad-Export-Date: 2013-07-22 05:11+0000\n"
 "X-Generator: Launchpad (build 16696)\n"
 
 #: ../../src/computer_player.cc:38
@@ -33,22 +33,26 @@ msgid ""
 "map in the map editor.\n"
 "\n"
 msgstr ""
+"AVERTISSEMENT: %i espaces de construction de port incorrects ne pouvant être "
+"fixés et ayant été enlevés! Certaines îles peuvent être rendues "
+"inatteignable. Veuillez vérifier les erreurs dans l'éditeur de cartes.\n"
+"\n"
 
 #: ../../src/s2map.cc:885
 msgid "WARNING"
-msgstr ""
+msgstr "AVERTISSEMENT"
 
 #: ../../src/save_handler.cc:59
 msgid "Saving game..."
-msgstr ""
+msgstr "Sauvegarde du jeu..."
 
 #: ../../src/save_handler.cc:79
 msgid "Saving failed!"
-msgstr ""
+msgstr "La sauvegarde à échoué!"
 
 #: ../../src/save_handler.cc:99
 msgid "Game saved"
-msgstr ""
+msgstr "Jeu sauvegardé"
 
 #: ../../src/wlapplication.cc:407
 msgid "ERROR: Could not connect to metaserver (reason above)!\n"
@@ -2571,6 +2575,8 @@ msgid ""
 "This is a dedicated server. Send \"@%s help\" to get a full list of "
 "available commands."
 msgstr ""
+"Ceci est un serveur dédié. Envoyer \"@%s help\" pour obtenir le liste "
+"complète des commandes."
 
 #: ../../src/network/nethost.cc:1208
 msgid ""
@@ -3536,15 +3542,15 @@ msgstr "1contre1"
 
 #: ../../src/ui_fsmenu/mapselect.cc:175
 msgid "Teams of 2"
-msgstr ""
+msgstr "Équipes de 2"
 
 #: ../../src/ui_fsmenu/mapselect.cc:176
 msgid "Teams of 3"
-msgstr ""
+msgstr "Équipes de 3"
 
 #: ../../src/ui_fsmenu/mapselect.cc:179
 msgid "Teams of 4"
-msgstr ""
+msgstr "Équipes de 4"
 
 #: ../../src/ui_fsmenu/mapselect.cc:180
 msgid "Free for all"
@@ -4133,15 +4139,15 @@ msgstr "Temps de jeu : "
 
 #: ../../src/wui/game_main_menu_save_game.cc:79
 msgid "Win condition: "
-msgstr ""
+msgstr "Condition de victoire: "
 
 #: ../../src/wui/game_main_menu_save_game.cc:161
 msgid "player"
-msgstr ""
+msgstr "joueur"
 
 #: ../../src/wui/game_main_menu_save_game.cc:161
 msgid "players"
-msgstr ""
+msgstr "joueurs"
 
 #: ../../src/wui/game_main_menu_save_game.cc:227
 msgid ""

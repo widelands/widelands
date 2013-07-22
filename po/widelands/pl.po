@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: Widelands svn4804\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2013-07-18 21:39+0200\n"
-"PO-Revision-Date: 2013-07-14 19:07+0000\n"
+"PO-Revision-Date: 2013-07-21 10:36+0000\n"
 "Last-Translator: Wesmania <ikk_pl@yahoo.co.uk>\n"
 "Language-Team: Language <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2013-07-19 05:17+0000\n"
+"X-Launchpad-Export-Date: 2013-07-22 05:11+0000\n"
 "X-Generator: Launchpad (build 16696)\n"
 
 #: ../../src/computer_player.cc:38
@@ -45,15 +45,15 @@ msgstr "UWAGA"
 
 #: ../../src/save_handler.cc:59
 msgid "Saving game..."
-msgstr ""
+msgstr "Zapisywanie gry..."
 
 #: ../../src/save_handler.cc:79
 msgid "Saving failed!"
-msgstr ""
+msgstr "Zapis nieudany!"
 
 #: ../../src/save_handler.cc:99
 msgid "Game saved"
-msgstr ""
+msgstr "Gra zapisana"
 
 #: ../../src/wlapplication.cc:407
 msgid "ERROR: Could not connect to metaserver (reason above)!\n"
@@ -2548,6 +2548,7 @@ msgid ""
 "This is a dedicated server. Send \"@%s help\" to get a full list of "
 "available commands."
 msgstr ""
+"Serwer dedykowany. Wyślij \"@%s help\", by uzyskać listę dostępnych poleceń."
 
 #: ../../src/network/nethost.cc:1208
 msgid ""
@@ -3502,15 +3503,15 @@ msgstr "1v1"
 
 #: ../../src/ui_fsmenu/mapselect.cc:175
 msgid "Teams of 2"
-msgstr ""
+msgstr "Zespoły dwuosobowe"
 
 #: ../../src/ui_fsmenu/mapselect.cc:176
 msgid "Teams of 3"
-msgstr ""
+msgstr "Zespoły trzyosobowe"
 
 #: ../../src/ui_fsmenu/mapselect.cc:179
 msgid "Teams of 4"
-msgstr ""
+msgstr "Zespoły czteroosobowe"
 
 #: ../../src/ui_fsmenu/mapselect.cc:180
 msgid "Free for all"
@@ -4097,15 +4098,15 @@ msgstr "Długość gry: "
 
 #: ../../src/wui/game_main_menu_save_game.cc:79
 msgid "Win condition: "
-msgstr ""
+msgstr "Warunek zwycięstwa: "
 
 #: ../../src/wui/game_main_menu_save_game.cc:161
 msgid "player"
-msgstr ""
+msgstr "gracz"
 
 #: ../../src/wui/game_main_menu_save_game.cc:161
 msgid "players"
-msgstr ""
+msgstr "graczy"
 
 #: ../../src/wui/game_main_menu_save_game.cc:227
 msgid ""

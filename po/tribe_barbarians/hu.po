@@ -7,13 +7,13 @@ msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2013-07-18 19:39+0000\n"
-"PO-Revision-Date: 2013-07-10 18:49+0000\n"
+"PO-Revision-Date: 2013-07-21 09:59+0000\n"
 "Last-Translator: István Kiss <kiemc@citromail.hu>\n"
 "Language-Team: Language <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-07-19 05:14+0000\n"
+"X-Launchpad-Export-Date: 2013-07-22 05:11+0000\n"
 "X-Generator: Launchpad (build 16696)\n"
 
 #: ../../tribes/barbarians/axefactory/help.lua:12
@@ -403,7 +403,7 @@ msgstr "Fejsze"
 #: ../../tribes/barbarians/trainingscamp/help.lua:27
 #: ../../tribes/barbarians/warmill/help.lua:35
 msgid "Axefactory"
-msgstr "Fejszekészítő"
+msgstr "Fejszekovácsműhely"
 
 #: ../../tribes/barbarians/bakery/help.lua:16
 msgid "Bake Pitta Bread for Soldiers and Miners alike."
@@ -444,7 +444,7 @@ msgstr "Laktanya"
 #: ../../tribes/barbarians/conf:169
 #: ../../tribes/barbarians/conf:221
 msgid "Barrier"
-msgstr "Erődítmény"
+msgstr "Határbástya"
 
 #: ../../tribes/barbarians/bakery/help.lua:30
 #: ../../tribes/barbarians/battlearena/help.lua:55
@@ -678,7 +678,7 @@ msgstr "Marhafarm"
 #: ../../tribes/barbarians/conf:199
 #: ../../tribes/barbarians/lumberjacks_hut/help.lua:28
 msgid "Charcoal Burner's House"
-msgstr "Faszénégető kunyhója"
+msgstr "Faszénégetőház"
 
 #: ../../tribes/barbarians/trainingscamp/help.lua:13
 msgid "Chief Chat'Karuth in a speech to his army."
@@ -716,7 +716,7 @@ msgstr "Fő bányász"
 
 #: ../../tribes/barbarians/conf:224
 msgid "Citadel"
-msgstr "Citadella"
+msgstr "Fellegvár"
 
 #: ../../tribes/barbarians/conf:234
 #: ../../tribes/barbarians/scripting/sc01_citadel_village.lua:10
@@ -986,7 +986,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/conf:226
 msgid "Donjon"
-msgstr "Helyőrség"
+msgstr "Torony"
 
 #: ../../tribes/barbarians/well/help.lua:16
 msgid "Draw Water out of the deep."
@@ -1094,7 +1094,7 @@ msgstr "Apró szántóföld"
 
 #: ../../tribes/barbarians/conf:83
 msgid "Fire Tongs"
-msgstr "Parázsfogó"
+msgstr "Tűzifogó"
 
 #: ../../tribes/barbarians/fire_tongs/conf:1
 msgid ""
@@ -1325,7 +1325,7 @@ msgstr "Sisakkészítő"
 #: ../../tribes/barbarians/deeper_coalmine/help.lua:31
 #: ../../tribes/barbarians/trainingscamp/help.lua:32
 msgid "Helmsmithy"
-msgstr "Sisakkészítő"
+msgstr "Páncélkovácsműhely"
 
 #: ../../tribes/barbarians/ox/conf:1
 msgid "Helps to carry items at heavily used roads."
@@ -1371,7 +1371,7 @@ msgstr "Vadászkunyhó"
 #: ../../tribes/barbarians/conf:91
 #: ../../tribes/barbarians/hunters_hut/help.lua:47
 msgid "Hunting Spear"
-msgstr "Vadász lándzsa"
+msgstr "Vadászlándzsa"
 
 #: ../../tribes/barbarians/battlearena/help.lua:55
 msgid ""
@@ -1590,7 +1590,7 @@ msgstr "Favágó"
 
 #: ../../tribes/barbarians/conf:183
 msgid "Lumberjack's Hut"
-msgstr "Favágó kunyhója"
+msgstr "Favágókunyhó"
 
 #: ../../tribes/barbarians/conf:95
 msgid "Mask"
@@ -1666,13 +1666,13 @@ msgstr ""
 #: ../../tribes/barbarians/conf:204
 #: ../../tribes/barbarians/lumberjacks_hut/help.lua:29
 msgid "Metalwork Shop"
-msgstr "Eszközkészítő"
+msgstr "Szerszámkovácsműhely"
 
 #: ../../tribes/barbarians/conf:195
 #: ../../tribes/barbarians/farm/help.lua:26
 #: ../../tribes/barbarians/well/help.lua:26
 msgid "Micro Brewery"
-msgstr "Sörfőzde"
+msgstr "Kis sörfőzde"
 
 #: ../../tribes/barbarians/coalmine/help.lua:38
 #: ../../tribes/barbarians/deep_coalmine/help.lua:37
@@ -1819,7 +1819,7 @@ msgstr "Csákány"
 #: ../../tribes/barbarians/conf:99
 #: ../../tribes/barbarians/trainingscamp/help.lua:34
 msgid "Pitta Bread"
-msgstr "Kenyér"
+msgstr "Pita"
 
 #: ../../tribes/barbarians/fernery/conf:15
 msgid "Plant reed"
@@ -2053,7 +2053,7 @@ msgstr "Erdőőr"
 
 #: ../../tribes/barbarians/conf:184
 msgid "Ranger's Hut"
-msgstr "Erdőőr kunyhója"
+msgstr "Erdőőrkunyhó"
 
 #: ../../tribes/barbarians/coalmine/help.lua:26
 #: ../../tribes/barbarians/coalmine/help.lua:27
@@ -2069,7 +2069,7 @@ msgstr "Erdőőr kunyhója"
 #: ../../tribes/barbarians/oremine/help.lua:26
 #: ../../tribes/barbarians/oremine/help.lua:27
 msgid "Ration"
-msgstr "Élelmiszer"
+msgstr "Harapnivaló"
 
 #: ../../tribes/barbarians/axefactory/help.lua:37
 #: ../../tribes/barbarians/axefactory/help.lua:43
@@ -2244,7 +2244,7 @@ msgstr ""
 #: ../../tribes/barbarians/conf:167
 #: ../../tribes/barbarians/conf:222
 msgid "Sentry"
-msgstr "Őrbódé"
+msgstr "Őrkunyhó"
 
 #: ../../tribes/barbarians/conf:103
 msgid "Sharp Axe"
@@ -2325,7 +2325,7 @@ msgstr "Olvasztómunkás"
 #: ../../tribes/barbarians/oremine/help.lua:30
 #: ../../tribes/barbarians/oremine/help.lua:31
 msgid "Smelting Works"
-msgstr "Vasolvasztó"
+msgstr "Kohó"
 
 #: ../../tribes/barbarians/helmsmith/conf:1
 msgid "Smelts helmets for soldiers."
@@ -2456,7 +2456,7 @@ msgstr ""
 #: ../../tribes/barbarians/warmill/help.lua:44
 #: ../../tribes/barbarians/warmill/help.lua:50
 msgid "Thatch Reed"
-msgstr "Nádtető"
+msgstr "Nád"
 
 #: ../../tribes/barbarians/thatchreed/conf:1
 msgid ""
@@ -3191,7 +3191,7 @@ msgstr "Harci sisak"
 #: ../../tribes/barbarians/deeper_coalmine/help.lua:30
 #: ../../tribes/barbarians/trainingscamp/help.lua:29
 msgid "War Mill"
-msgstr "Fegyverkovács"
+msgstr "Fegyverkovácsműhely"
 
 #: ../../tribes/barbarians/conf:178
 msgid "Warehouse"
