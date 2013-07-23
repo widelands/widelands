@@ -71,7 +71,7 @@ DismantleSite::DismantleSite
 Partially_Finished_Building(gdescr)
 {
 	assert(!former_buildings.empty());
-	for (const Building_Descr* old_descr : former_buildings) {
+	BOOST_FOREACH(const Building_Descr* old_descr, former_buildings) {
 		m_old_buildings.push_back(old_descr);
 	}
 	set_building(*m_old_buildings.back());
@@ -133,9 +133,7 @@ void DismantleSite::count_returned_wares
 	(Building* building,
 	 std::map<Ware_Index, uint8_t>   & res)
 {
-	log("Returned wares for %s \n",building->descname().c_str());
 	BOOST_FOREACH(const Building_Descr* former_descr, building->get_former_buildings()) {
-		log("FORMER: %s : ", former_descr->name().c_str());
 		const std::map<Ware_Index, uint8_t> * return_wares;
 		if (former_descr != building->get_former_buildings().front()) {
 			return_wares = & former_descr->returned_wares_enhanced();
@@ -143,9 +141,9 @@ void DismantleSite::count_returned_wares
 			return_wares = & former_descr->returned_wares();
 		}
 		assert(return_wares != nullptr);
-		log("%i returned ware types\n", return_wares->size());
 
-		for (std::map<Ware_Index, uint8_t>::const_iterator i = return_wares->begin(); i != return_wares->end(); ++i) {
+		std::map<Ware_Index, uint8_t>::const_iterator i;
+		for (i = return_wares->begin(); i != return_wares->end(); ++i) {
 			res[i->first] += i->second;
 		}
 	}

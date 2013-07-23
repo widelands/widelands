@@ -68,9 +68,25 @@ struct Building_Descr : public Map_Object_Descr {
 	bool is_destructible() const {return m_destructible;}
 	bool is_enhanced    () const {return m_enhanced_building;}
 	bool global() const {return m_global;}
+
+	/**
+	 * The build cost for direct construction
+	 */
 	const Buildcost & buildcost() const throw () {return m_buildcost;}
+
+	/**
+	 * Returned wares for dismantling
+	 */
 	const Buildcost & returned_wares() const throw () {return m_return_dismantle;}
+
+	/**
+	 * The build cost for enhancing a previous building
+	 */
 	const Buildcost & enhancement_cost() const throw () {return m_enhance_cost;}
+
+	/**
+	 * The returned wares for a enhaced building
+	 */
 	const Buildcost & returned_wares_enhanced() const throw () {return m_return_enhanced;}
 	const Image* get_buildicon() const {return m_buildicon;}
 	int32_t get_size() const throw () {return m_size;}
@@ -86,6 +102,7 @@ struct Building_Descr : public Map_Object_Descr {
 	}
 
 	typedef std::vector<const Building_Descr*> FormerBuildings;
+
 	/// Create a building of this type in the game. Calls init, which does
 	/// different things for different types of buildings (such as conquering
 	/// land and requesting things). Therefore this must not be used to allocate
@@ -219,6 +236,14 @@ public:
 	}
 
 	typedef std::vector<const Building_Descr*> FormerBuildings;
+
+	/**
+	 * The former buildings vector keeps track of all former buildings
+	 * that have been enhanced up to the current one. The current building
+	 * descr will be in the last position. For construction sites, it is
+	 * empty except if a former building is being enhanced. For a dismantle
+	 * site, the last item will be the one being dismantled.
+	 */
 	const FormerBuildings get_former_buildings() {
 		return m_old_buildings;
 	}
@@ -285,7 +310,7 @@ protected:
 	// Signals connected for the option window
 	std::vector<boost::signals::connection> options_window_connections;
 
-	// The former buildings descr if this is an enhanced building
+	// The former buildings descrs, with the current one in last position.
 	FormerBuildings m_old_buildings;
 };
 

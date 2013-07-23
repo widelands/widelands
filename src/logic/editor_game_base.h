@@ -106,7 +106,8 @@ struct Editor_Game_Base :
 	void set_road(FCoords, uint8_t direction, uint8_t roadtype);
 
 	// warping stuff. instantly creating map_objects
-	Building & warp_building(Coords, Player_Number, Building_Index,
+	Building & warp_building
+		(Coords, Player_Number, Building_Index,
 		Building::FormerBuildings former_buildings = Building::FormerBuildings());
 	Building & warp_constructionsite
 		(Coords, Player_Number, Building_Index, bool loading = false,

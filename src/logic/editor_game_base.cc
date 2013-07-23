@@ -302,8 +302,9 @@ Building & Editor_Game_Base::warp_building
 {
 	Player & plr = player(owner);
 	const Tribe_Descr & tribe = plr.tribe();
-	return tribe.get_building_descr(idx)->create
-		(*this, plr, c, false, true, former_buildings);
+	return 
+		tribe.get_building_descr(idx)->create
+			(*this, plr, c, false, true, former_buildings);
 }
 
 
@@ -319,8 +320,9 @@ Building & Editor_Game_Base::warp_constructionsite
 {
 	Player            & plr   = player(owner);
 	const Tribe_Descr & tribe = plr.tribe();
-	return tribe.get_building_descr(idx)->create
-		(*this, plr, c, true, loading, former_buildings);
+	return
+		tribe.get_building_descr(idx)->create
+			(*this, plr, c, true, loading, former_buildings);
 }
 
 /**

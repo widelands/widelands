@@ -55,7 +55,6 @@ class DismantleSite : public Partially_Finished_Building {
 	friend struct Map_Buildingdata_Data_Packet;
 
 	static const uint32_t DISMANTLESITE_STEP_TIME = 45000;
-	static const uint8_t RATIO_RETURNED_WARES = 2;  // you get half the wares back
 
 	MO_DESCR(DismantleSite_Descr);
 

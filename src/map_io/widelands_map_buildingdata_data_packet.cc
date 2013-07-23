@@ -46,6 +46,7 @@
 #include "upcast.h"
 
 #include <map>
+#include <boost/foreach.hpp>
 
 namespace Widelands {
 
@@ -148,7 +149,9 @@ throw (_wexception)
 						building.m_leave_allow = 0;
 					}
 					if (packet_version >= 3) {
-						// For former versions, the current building descr
+						// For former versions, the former buildings vector
+						// will be built after other data are loaded, see below.
+						// read_formerbuildings_v2()
 						while (fr.Unsigned8()) {
 							const Building_Descr* former_descr =
 								building.descr().tribe().get_building_descr
@@ -226,8 +229,8 @@ throw (_wexception)
 						assert(false);
 					}
 					if (packet_version < 3) {
-						read_formerbuildings_v2(building,
-							fr, ref_cast<Game, Editor_Game_Base>(egbase), mol);
+						read_formerbuildings_v2
+							(building, fr, ref_cast<Game, Editor_Game_Base>(egbase), mol);
 					}
 
 					mol.mark_object_as_loaded(building);
@@ -243,7 +246,8 @@ throw (_wexception)
 	}
 }
 
-void Map_Buildingdata_Data_Packet::read_formerbuildings_v2(Building& b, FileRead& , Game& , Map_Map_Object_Loader& )
+void Map_Buildingdata_Data_Packet::read_formerbuildings_v2
+	(Building& b, FileRead&, Game&, Map_Map_Object_Loader&)
 {
 	// add the current building - not for csite or dismantle
 	if (is_a(ProductionSite, &b)) {
@@ -252,12 +256,12 @@ void Map_Buildingdata_Data_Packet::read_formerbuildings_v2(Building& b, FileRead
 	} else if (is_a(Warehouse, &b)) {
 		assert(b.m_old_buildings.empty());
 		b.m_old_buildings.push_back(&b.descr());
-	} else if (upcast(DismantleSite, dsite, &b)){
+	} else if (upcast(DismantleSite, dsite, &b)) {
 		b.m_old_buildings.push_back(dsite->m_building);
 	} else if (is_a(ConstructionSite, &b)) {
 		return;
 	}
-	
+
 	// iterate through all buildings to find first predecessor
 	bool done = false;
 	const Tribe_Descr & t = b.descr().tribe();
@@ -275,10 +279,6 @@ void Map_Buildingdata_Data_Packet::read_formerbuildings_v2(Building& b, FileRead
 				break;
 			}
 		}
-	}
-	log("Former Buildings for %s \n", b.descname().c_str());
-	for (const Building_Descr* desc : b.m_old_buildings) {
-		log(" %s\n", desc->name().c_str());
 	}
 }
 
@@ -1314,7 +1314,7 @@ throw (_wexception)
 				fw.Unsigned32(0);
 			}
 			{
-				for (const Building_Descr* former_descr : building->m_old_buildings) {
+				BOOST_FOREACH(const Building_Descr* former_descr, building->m_old_buildings) {
 					fw.Unsigned8(1);
 					fw.String(former_descr->name());
 				}
