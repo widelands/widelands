@@ -9,6 +9,10 @@ trunk=2
 planks=2
 stone=3
 
+[return_on_dismantle]
+planks=1
+stone=2
+
 [working positions]
 baker=1
 

@@ -11,6 +11,13 @@ quartz=1
 spidercloth=3
 gold=2
 
+[return_on_dismantle]
+trunk=1
+planks=1
+stone=2
+spidercloth=1
+gold=1
+
 [build]
 pics=port_b_??.png  # 4 frames
 hotspot=74 70

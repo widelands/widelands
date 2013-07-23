@@ -10,6 +10,14 @@ spidercloth=5
 diamond=2
 quartz=2
 
+[return_on_dismantle]
+trunk=1
+stone=3
+planks=2
+spidercloth=2
+diamond=1
+quartz=1
+
 [working positions]
 carrier=1
 

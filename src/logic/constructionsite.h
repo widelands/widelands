@@ -77,7 +77,6 @@ public:
 	virtual WaresQueue & waresqueue(Ware_Index);
 
 	virtual void set_building(const Building_Descr &);
-	void set_previous_building(const Building_Descr * const);
 	const Building_Descr & building() const throw () {return *m_building;}
 
 	virtual void init   (Editor_Game_Base &);
@@ -99,8 +98,6 @@ protected:
 	virtual void draw(const Editor_Game_Base &, RenderTarget &, const FCoords&, const Point&);
 
 private:
-	const Building_Descr * m_prev_building; // Building standing here earlier
-
 	int32_t  m_fetchfromflag;  // # of items to fetch from flag
 
 	bool     m_builder_idle;   // used to determine whether the builder is idle

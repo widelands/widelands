@@ -5,10 +5,14 @@ enhancement=big_inn
 output=ration
 output=snack
 
-[buildcost]
+[enhancement_cost]
 trunk=2
 grout=2
 thatchreed=1
+
+[return_on_dismantle_on_enhanced]
+trunk=1
+grout=1
 
 [working positions]
 innkeeper=1

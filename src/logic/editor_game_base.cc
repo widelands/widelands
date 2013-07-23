@@ -297,11 +297,14 @@ void Editor_Game_Base::load_graphics(UI::ProgressWindow & loader_ui)
  * \li idx is the building type index.
  */
 Building & Editor_Game_Base::warp_building
-	(Coords const c, Player_Number const owner, Building_Index const idx)
+	(Coords const c, Player_Number const owner, Building_Index const idx,
+		Building::FormerBuildings former_buildings)
 {
 	Player & plr = player(owner);
 	const Tribe_Descr & tribe = plr.tribe();
-	return tribe.get_building_descr(idx)->create(*this, plr, c, false, 0, true);
+	return 
+		tribe.get_building_descr(idx)->create
+			(*this, plr, c, false, true, former_buildings);
 }
 
 
@@ -312,13 +315,14 @@ Building & Editor_Game_Base::warp_building
  */
 Building & Editor_Game_Base::warp_constructionsite
 	(Coords const c, Player_Number const owner,
-	 Building_Index idx, Building_Index old_id, bool loading)
+	 Building_Index idx, bool loading,
+	 Building::FormerBuildings former_buildings)
 {
 	Player            & plr   = player(owner);
 	const Tribe_Descr & tribe = plr.tribe();
 	return
 		tribe.get_building_descr(idx)->create
-			(*this, plr, c, true, old_id ? tribe.get_building_descr(old_id) : 0, loading);
+			(*this, plr, c, true, loading, former_buildings);
 }
 
 /**
@@ -326,7 +330,7 @@ Building & Editor_Game_Base::warp_constructionsite
  */
 Building & Editor_Game_Base::warp_dismantlesite
 	(Coords const c, Player_Number const owner,
-	 Building_Index idx, bool loading)
+	 bool loading, Building::FormerBuildings former_buildings)
 {
 	Player            & plr   = player(owner);
 	const Tribe_Descr & tribe = plr.tribe();
@@ -339,7 +343,7 @@ Building & Editor_Game_Base::warp_dismantlesite
 
 	return
 		*new DismantleSite
-			(*ds_descr, *this, c, *get_player(owner), *tribe.get_building_descr(idx), loading);
+			(*ds_descr, *this, c, *get_player(owner), loading, former_buildings);
 }
 
 

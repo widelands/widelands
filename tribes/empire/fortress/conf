@@ -12,6 +12,13 @@ stone=8
 marble=2
 marblecolumn=2
 
+[return_on_dismantle]
+wood=2
+trunk=1
+stone=5
+marble=1
+marblecolumn=1
+
 [idle]
 pics=fortress_i_??.png
 hotspot=90 105

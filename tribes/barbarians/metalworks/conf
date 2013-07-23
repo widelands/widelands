@@ -18,6 +18,11 @@ raw_stone=2
 grout=1
 thatchreed=1
 
+[return_on_dismantle]
+blackwood=1
+raw_stone=1
+grout=1
+
 [working positions]
 blacksmith=1
 

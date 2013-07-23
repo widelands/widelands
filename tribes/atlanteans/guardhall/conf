@@ -10,6 +10,11 @@ planks=3
 stone=4
 diamond=1
 
+[return_on_dismantle]
+trunk=1
+planks=1
+stone=3
+
 [idle]
 pics=guardhall_i_??.png
 hotspot=58 72

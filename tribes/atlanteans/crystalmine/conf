@@ -8,6 +8,10 @@ trunk=7
 planks=4
 spidercloth=1
 
+[return_on_dismantle]
+trunk=3
+planks=2
+
 [working positions]
 miner=3
 

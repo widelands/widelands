@@ -6,6 +6,10 @@ enhancement=deep_coalmine
 trunk=4
 wood=2
 
+[return_on_dismantle]
+trunk=2
+wood=1
+
 [working positions]
 miner=1
 

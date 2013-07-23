@@ -10,6 +10,11 @@ blackwood=2
 raw_stone=2
 thatchreed=2
 
+[return_on_dismantle]
+trunk=1
+blackwood=1
+raw_stone=2
+
 [working positions]
 baker=1
 

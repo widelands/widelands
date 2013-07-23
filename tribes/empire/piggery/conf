@@ -6,6 +6,11 @@ trunk=2
 stone=2
 marblecolumn=2
 
+[return_on_dismantle]
+trunk=1
+stone=1
+marble=1
+
 [aihints]
 build_material=false
 

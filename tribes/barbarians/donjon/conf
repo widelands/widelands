@@ -10,6 +10,10 @@ blackwood=7
 trunk=1
 raw_stone=4
 
+[return_on_dismantle]
+blackwood=3
+raw_stone=3
+
 [build]
 pics=donjon_b_??.png
 hotspot=48 84

@@ -10,6 +10,10 @@ trunk=1
 planks=2
 stone=2
 
+[return_on_dismantle]
+planks=1
+stone=1
+
 [idle]
 pics=small_tower_i_??.png
 hotspot=42 65

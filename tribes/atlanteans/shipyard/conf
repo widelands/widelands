@@ -9,6 +9,12 @@ planks=2
 stone=3
 spidercloth=2
 
+[return_on_dismantle]
+trunk=1
+planks=1
+stone=2
+spidercloth=1
+
 [working positions]
 shipwright=1
 
