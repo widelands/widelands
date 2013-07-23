@@ -59,6 +59,9 @@ class Building;
  * Common to all buildings!
  */
 struct Building_Descr : public Map_Object_Descr {
+	typedef std::set<Building_Index> Enhancements;
+	typedef std::vector<const Building_Descr*> FormerBuildings;
+
 	Building_Descr
 		(char const * _name, char const * _descname,
 		 const std::string & directory, Profile &, Section & global_s,
@@ -94,14 +97,11 @@ struct Building_Descr : public Map_Object_Descr {
 	bool get_isport() const {return m_port;}
 	virtual uint32_t get_ui_anim() const {return get_animation("idle");}
 
-	typedef std::set<Building_Index> Enhancements;
 	const Enhancements & enhancements() const throw () {return m_enhancements;}
 	void add_enhancement(const Building_Index & i) {
 		assert(not m_enhancements.count(i));
 		m_enhancements.insert(i);
 	}
-
-	typedef std::vector<const Building_Descr*> FormerBuildings;
 
 	/// Create a building of this type in the game. Calls init, which does
 	/// different things for different types of buildings (such as conquering
@@ -176,6 +176,8 @@ public:
 		PCap_Enhancable = 1 << 2, // can be enhanced to something
 	};
 
+	typedef std::vector<const Building_Descr*> FormerBuildings;
+
 public:
 	Building(const Building_Descr &);
 	virtual ~Building();
@@ -234,8 +236,6 @@ public:
 	const std::set<Building_Index> & enhancements() const throw () {
 		return descr().enhancements();
 	}
-
-	typedef std::vector<const Building_Descr*> FormerBuildings;
 
 	/**
 	 * The former buildings vector keeps track of all former buildings
