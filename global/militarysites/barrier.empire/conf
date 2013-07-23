@@ -6,8 +6,5 @@ buildable=no
 prefer_heroes=true
 
 [idle]
-packed=true
-pics=../../../tribes/empire/barrier/barrier.png
-dimensions=91 97
-base_offset=0 0
-hotspot=49 77
+pics=../../../tribes/empire/barrier/barrier_i_??.png
+hotspot=55 80

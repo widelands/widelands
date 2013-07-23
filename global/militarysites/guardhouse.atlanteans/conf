@@ -6,5 +6,6 @@ buildable=no
 prefer_heroes=false
 
 [idle]
-pics=../../../tribes/atlanteans/guardhouse/guardhouse.png
+pics=../../../tribes/atlanteans/guardhouse/guardhouse_i_??.png
 hotspot=35 42
+playercolor=true

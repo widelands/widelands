@@ -6,8 +6,5 @@ buildable=no
 prefer_heroes=false
 
 [idle]
-packed=true
-pics=../../../tribes/empire/barracks/barracks.png
-dimensions=75 68
-base_offset=0 0
-hotspot=37 58
+pics=../../../tribes/empire/barracks/barracks_i_??.png
+hotspot=38 60

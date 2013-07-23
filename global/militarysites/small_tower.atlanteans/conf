@@ -7,5 +7,6 @@ buildable=no
 prefer_heroes=false
 
 [idle]
-pics=../../../tribes/atlanteans/small_tower/small_tower.png
+pics=../../../tribes/atlanteans/small_tower/small_tower_i_??.png
 hotspot=41 63
+playercolor=true

@@ -8,4 +8,5 @@ prefer_heroes=true
 [idle]
 pics=../../../tribes/barbarians/fortress/fortress_i_??.png
 hotspot=103 80
+playercolor=true
 fps=10

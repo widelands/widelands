@@ -6,9 +6,5 @@ buildable=no
 prefer_heroes=false
 
 [idle]
-packed=true
-pics=../../../tribes/empire/sentry/sentry.png
-dimensions=74 74
-base_offset=0 0
-hotspot=37 60
-
+pics=../../../tribes/empire/sentry/sentry_i_??.png
+hotspot=40 63

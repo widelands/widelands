@@ -1,4 +1,5 @@
 size=small
+picture=idle.png
 
 [idle]
 hotspot=35 35

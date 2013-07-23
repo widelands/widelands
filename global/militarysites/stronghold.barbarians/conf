@@ -8,4 +8,5 @@ prefer_heroes=false
 [idle]
 pics=../../../tribes/barbarians/stronghold/stronghold_i_??.png
 hotspot=47 44
+playercolor=true
 fps=10

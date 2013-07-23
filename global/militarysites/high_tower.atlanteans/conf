@@ -7,5 +7,6 @@ buildable=no
 prefer_heroes=true
 
 [idle]
-pics=../../../tribes/atlanteans/high_tower/high_tower.png
+pics=../../../tribes/atlanteans/high_tower/high_tower_i_??.png
 hotspot=55 90
+playercolor=true
