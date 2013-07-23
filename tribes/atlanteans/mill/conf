@@ -7,6 +7,11 @@ trunk=3
 stone=3
 planks=2
 
+[return_on_dismantle]
+trunk=1
+stone=2
+planks=1
+
 [aihints]
 build_material=false
 

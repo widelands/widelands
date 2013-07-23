@@ -4,9 +4,13 @@ enhanced_building=yes
 output=marble
 output=stone
 
-[buildcost]
+[enhancement_cost]
 trunk=4
 wood=2
+
+[return_on_dismantle_on_enhanced]
+trunk=2
+wood=1
 
 [working positions]
 master-miner=1

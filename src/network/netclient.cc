@@ -19,9 +19,6 @@
 
 #include <boost/lexical_cast.hpp>
 #include <config.h>
-#ifndef HAVE_VARARRAY
-#include <climits>
-#endif
 
 #include "netclient.h"
 
@@ -755,16 +752,12 @@ void NetClient::handle_packet(RecvPacket & packet)
 				FileRead fr;
 				fr.Open(*g_fs, path.c_str());
 				if (bytes == fr.GetSize()) {
-#ifdef HAVE_VARARRAY
-					char complete[bytes];
-#else
-					boost::scoped_array<char> complete_buf(new char[bytes]);
-					if (!complete_buf.get()) throw wexception("Out of memory");
-					char * complete = complete_buf.get();
-#endif
-					fr.DataComplete(complete, bytes);
+					std::unique_ptr<char[]> complete(new char[bytes]);
+					if (!complete) throw wexception("Out of memory");
+
+					fr.DataComplete(complete.get(), bytes);
 					SimpleMD5Checksum md5sum;
-					md5sum.Data(complete, bytes);
+					md5sum.Data(complete.get(), bytes);
 					md5sum.FinishChecksum();
 					std::string localmd5 = md5sum.GetChecksum().str();
 					if (localmd5 == md5)
@@ -815,12 +808,9 @@ void NetClient::handle_packet(RecvPacket & packet)
 
 		FilePart fp;
 
-#ifdef HAVE_VARARRAY
-		char buf[size];
-#else
 		char buf[NETFILEPARTSIZE];
 		assert(size <= NETFILEPARTSIZE);
-#endif
+
 		if (packet.Data(buf, size) != size)
 			log("Readproblem. Will try to go on anyways\n");
 		memcpy(fp.part, &buf[0], size);
@@ -846,16 +836,13 @@ void NetClient::handle_packet(RecvPacket & packet)
 			// Check for consistence
 			FileRead fr;
 			fr.Open(*g_fs, file->filename.c_str());
-#ifdef HAVE_VARARRAY
-			char complete[file->bytes];
-#else
-			boost::scoped_array<char> complete_buf(new char[file->bytes]);
-			if (!complete_buf.get()) throw wexception("Out of memory");
-			char * complete = complete_buf.get();
-#endif
-			fr.DataComplete(complete, file->bytes);
+
+			std::unique_ptr<char[]> complete(new char[file->bytes]);
+			if (!complete) throw wexception("Out of memory");
+
+			fr.DataComplete(complete.get(), file->bytes);
 			SimpleMD5Checksum md5sum;
-			md5sum.Data(complete, file->bytes);
+			md5sum.Data(complete.get(), file->bytes);
 			md5sum.FinishChecksum();
 			std::string localmd5 = md5sum.GetChecksum().str();
 			if (localmd5 != file->md5sum) {

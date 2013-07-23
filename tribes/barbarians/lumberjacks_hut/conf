@@ -4,6 +4,9 @@ output=trunk
 [buildcost]
 trunk=3
 
+[return_on_dismantle]
+trunk=2
+
 [working positions]
 lumberjack=1
 

@@ -20,6 +20,8 @@
 #ifndef TERRAIN_SDL_H
 #define TERRAIN_SDL_H
 
+#include <cassert>
+
 #include "constants.h"
 #include "log.h"
 #include "random.h"

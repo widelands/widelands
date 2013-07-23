@@ -11,6 +11,11 @@ stone=2
 planks=2
 quartz=1
 
+[return_on_dismantle]
+stone=1
+planks=1
+quartz=1
+
 [working positions]
 armoursmith=1
 

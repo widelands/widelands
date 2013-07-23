@@ -2,12 +2,18 @@ size=medium
 
 [aihints]
 build_material=false
+needs_water=true
 
 [buildcost]
 trunk=3
 wood=2
 stone=3
 cloth=2
+
+[return_on_dismantle]
+trunk=1
+stone=2
+cloth=1
 
 [working positions]
 shipwright=1

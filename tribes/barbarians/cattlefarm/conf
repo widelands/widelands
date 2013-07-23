@@ -10,6 +10,10 @@ trunk=2
 raw_stone=2
 blackwood=1
 
+[return_on_dismantle]
+raw_stone=1
+blackwood=1
+
 [working positions]
 cattlebreeder=1
 

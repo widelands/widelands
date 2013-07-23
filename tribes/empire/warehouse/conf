@@ -8,10 +8,12 @@ stone=2
 marble=3
 marblecolumn=2
 
-[idle]
-packed=true
-pics=warehouse.png
-dimensions=98 80
-base_offset=0 0
-hotspot=58 55
+[return_on_dismantle]
+wood=1
+stone=2
+marble=2
+marblecolumn=1
 
+[idle]
+pics=warehouse_i_??.png  # ???
+hotspot=58 55

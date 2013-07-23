@@ -4,6 +4,9 @@ output=raw_stone
 [buildcost]
 trunk=4
 
+[return_on_dismantle]
+trunk=2
+
 [working positions]
 stonemason=1
 

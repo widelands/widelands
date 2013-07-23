@@ -5,6 +5,9 @@ output=stone
 trunk=2
 planks=1
 
+[return_on_dismantle]
+trunk=1
+
 [working positions]
 stonecutter=1
 

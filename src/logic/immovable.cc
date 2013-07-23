@@ -46,9 +46,6 @@
 
 #include <config.h>
 
-#ifndef HAVE_VARARRAY
-#include <climits>
-#endif
 namespace Widelands {
 
 BaseImmovable::BaseImmovable(const Map_Object_Descr & mo_descr) :

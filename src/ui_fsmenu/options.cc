@@ -238,26 +238,6 @@ Fullscreen_Menu_Options::Fullscreen_Menu_Options
 	// take a copy to not change real video info structure
 	SDL_PixelFormat fmt = *SDL_GetVideoInfo()->vfmt;
 
-	fmt.BitsPerPixel = 16;
-	for
-		(const SDL_Rect * const * modes = SDL_ListModes(&fmt, SDL_SWSURFACE | SDL_FULLSCREEN);
-		 modes && *modes;
-		 ++modes)
-	{
-		const SDL_Rect & mode = **modes;
-		if (640 <= mode.w and 480 <= mode.h)
-		{
-			const Resolution this_res = {mode.w, mode.h, fmt.BitsPerPixel};
-			if
-				(m_resolutions.empty()
-				 || this_res.xres != m_resolutions.rbegin()->xres
-				 || this_res.yres != m_resolutions.rbegin()->yres)
-			{
-				m_resolutions.push_back(this_res);
-			}
-		}
-	}
-
 	fmt.BitsPerPixel = 32;
 	for
 		(const SDL_Rect * const * modes = SDL_ListModes(&fmt, SDL_SWSURFACE | SDL_FULLSCREEN);
@@ -265,7 +245,7 @@ Fullscreen_Menu_Options::Fullscreen_Menu_Options
 		 ++modes)
 	{
 		const SDL_Rect & mode = **modes;
-		if (640 <= mode.w and 480 <= mode.h)
+		if (800 <= mode.w and 600 <= mode.h)
 		{
 			const Resolution this_res = {mode.w, mode.h, fmt.BitsPerPixel};
 			if
@@ -653,7 +633,7 @@ Options_Ctrl::Options_Struct Options_Ctrl::options_struct() {
 	opt.yres                = m_opt_section.get_int
 		("yres",                YRES);
 	opt.depth               = m_opt_section.get_int
-		("depth",                 16);
+		("depth",                 32);
 	opt.inputgrab           = m_opt_section.get_bool
 		("inputgrab",          false);
 	opt.fullscreen          = m_opt_section.get_bool

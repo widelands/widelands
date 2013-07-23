@@ -7,6 +7,9 @@ prefer_heroes=false
 [buildcost]
 blackwood=2
 
+[return_on_dismantle]
+blackwood=1
+
 [idle]
 fps = 10
 format = blits

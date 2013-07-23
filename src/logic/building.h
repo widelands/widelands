@@ -59,6 +59,9 @@ class Building;
  * Common to all buildings!
  */
 struct Building_Descr : public Map_Object_Descr {
+	typedef std::set<Building_Index> Enhancements;
+	typedef std::vector<const Building_Descr*> FormerBuildings;
+
 	Building_Descr
 		(char const * _name, char const * _descname,
 		 const std::string & directory, Profile &, Section & global_s,
@@ -68,14 +71,32 @@ struct Building_Descr : public Map_Object_Descr {
 	bool is_destructible() const {return m_destructible;}
 	bool is_enhanced    () const {return m_enhanced_building;}
 	bool global() const {return m_global;}
+
+	/**
+	 * The build cost for direct construction
+	 */
 	const Buildcost & buildcost() const throw () {return m_buildcost;}
+
+	/**
+	 * Returned wares for dismantling
+	 */
+	const Buildcost & returned_wares() const throw () {return m_return_dismantle;}
+
+	/**
+	 * The build cost for enhancing a previous building
+	 */
+	const Buildcost & enhancement_cost() const throw () {return m_enhance_cost;}
+
+	/**
+	 * The returned wares for a enhaced building
+	 */
+	const Buildcost & returned_wares_enhanced() const throw () {return m_return_enhanced;}
 	const Image* get_buildicon() const {return m_buildicon;}
 	int32_t get_size() const throw () {return m_size;}
 	bool get_ismine() const {return m_mine;}
 	bool get_isport() const {return m_port;}
 	virtual uint32_t get_ui_anim() const {return get_animation("idle");}
 
-	typedef std::set<Building_Index> Enhancements;
 	const Enhancements & enhancements() const throw () {return m_enhancements;}
 	void add_enhancement(const Building_Index & i) {
 		assert(not m_enhancements.count(i));
@@ -88,14 +109,14 @@ struct Building_Descr : public Map_Object_Descr {
 	/// a building during savegame loading. (It would cause many bugs.)
 	///
 	/// Does not perform any sanity checks.
-	/// If old != 0 this is an enhancing.
+	/// If former_buildings is not empty this is an enhancing.
 	Building & create
 		(Editor_Game_Base &,
 		 Player &,
 		 Coords,
 		 bool                   construct,
-		 Building_Descr const * old = 0,
-		 bool                   loading = false)
+		 bool                   loading = false,
+		 FormerBuildings former_buildings = FormerBuildings())
 		const;
 #ifdef WRITE_GAME_DATA_AS_HTML
 	void writeHTML(::FileWrite &) const;
@@ -115,13 +136,16 @@ struct Building_Descr : public Map_Object_Descr {
 
 protected:
 	virtual Building & create_object() const = 0;
-	Building & create_constructionsite(Building_Descr const * old) const;
+	Building & create_constructionsite() const;
 
 private:
 	const Tribe_Descr & m_tribe;
 	bool          m_buildable;       // the player can build this himself
 	bool          m_destructible;    // the player can destruct this himself
 	Buildcost     m_buildcost;
+	Buildcost     m_return_dismantle; // Returned wares on dismantle
+	Buildcost     m_enhance_cost;     // cost for enhancing
+	Buildcost     m_return_enhanced;   // Returned ware for dismantling an enhanced building
 	const Image*     m_buildicon;       // if buildable: picture in the build dialog
 	std::string   m_buildicon_fname; // filename for this icon
 	int32_t       m_size;            // size of the building
@@ -151,6 +175,8 @@ public:
 		PCap_Dismantle = 1 << 1, // can dismantle this buildings
 		PCap_Enhancable = 1 << 2, // can be enhanced to something
 	};
+
+	typedef std::vector<const Building_Descr*> FormerBuildings;
 
 public:
 	Building(const Building_Descr &);
@@ -211,6 +237,17 @@ public:
 		return descr().enhancements();
 	}
 
+	/**
+	 * The former buildings vector keeps track of all former buildings
+	 * that have been enhanced up to the current one. The current building
+	 * descr will be in the last position. For construction sites, it is
+	 * empty except if a former building is being enhanced. For a dismantle
+	 * site, the last item will be the one being dismantled.
+	 */
+	const FormerBuildings get_former_buildings() {
+		return m_old_buildings;
+	}
+
 	virtual void log_general_info(const Editor_Game_Base &);
 
 	//  Use on training sites only.
@@ -233,7 +270,6 @@ public:
 		 const std::string & description,
 		 uint32_t throttle_time = 0,
 		 uint32_t throttle_radius = 0);
-
 protected:
 	void start_animation(Editor_Game_Base &, uint32_t anim);
 
@@ -273,6 +309,9 @@ protected:
 
 	// Signals connected for the option window
 	std::vector<boost::signals::connection> options_window_connections;
+
+	// The former buildings descrs, with the current one in last position.
+	FormerBuildings m_old_buildings;
 };
 
 }

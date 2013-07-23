@@ -10,6 +10,10 @@ trunk=2
 stone=2
 wood=1
 
+[return_on_dismantle]
+trunk=1
+stone=2
+
 [working positions]
 donkeybreeder=1
 

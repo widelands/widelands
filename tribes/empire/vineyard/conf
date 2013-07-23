@@ -12,6 +12,10 @@ stone=1
 marble=2
 marblecolumn=2
 
+[return_on_dismantle]
+wood=1
+marble=2
+
 [working positions]
 vinefarmer=1
 

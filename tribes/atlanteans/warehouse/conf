@@ -8,6 +8,12 @@ stone=2
 quartz=1
 spidercloth=1
 
+[return_on_dismantle]
+trunk=1
+planks=1
+stone=1
+quartz=1
+
 [idle]
 packed=true
 pics=warehouse.png

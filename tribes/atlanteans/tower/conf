@@ -12,6 +12,11 @@ planks=3
 stone=4
 spidercloth=1
 
+[return_on_dismantle]
+trunk=1
+planks=1
+stone=3
+
 [idle]
 packed=true
 pics=tower.png

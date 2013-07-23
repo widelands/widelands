@@ -6,11 +6,17 @@ conquers=12
 enhanced_building=yes
 prefer_heroes=true
 
-[buildcost]
+[enhancement_cost]
 blackwood=9
 trunk=5
 raw_stone=4
 grout=2
+
+[return_on_dismantle_on_enhanced]
+blackwood=4
+trunk=2
+raw_stone=3
+grout=1
 
 [build]
 pics=citadel_b_??.png

@@ -4,13 +4,20 @@ enhanced_building=yes
 soldier_capacity=8
 trainer_patience=9
 
-[buildcost]
+[enhancement_cost]
 wood=2
 stone=4
 marble=4
 cloth=2
 gold=4
 marblecolumn=4
+
+[return_on_dismantle_on_enhanced]
+wood=1
+stone=2
+marble=2
+gold=2
+marblecolumn=2
 
 [working positions]
 carrier=1

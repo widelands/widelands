@@ -8,19 +8,16 @@ raw_stone=2
 grout=3
 thatchreed=1
 
-[build]
-packed=true
-pics=warehouse.png
-dimensions=103 101
-base_offset=0 0
-region_00=0 0 97 92:0 101;103 0
-hotspot=58 75
+[return_on_dismantle]
+trunk=1
+blackwood=1
+raw_stone=1
+grout=1
 
 [idle]
-packed=true
-pics=warehouse.png
-dimensions=103 101
-base_offset=0 0
-region_00=0 0 97 92:103 0
+pics=warehouse_i_??.png  # ???
 hotspot=58 75
 
+[build]
+pics=warehouse_b_??.png  # ???
+hotspot=58 75

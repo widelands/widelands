@@ -52,7 +52,7 @@ public:
 		 Widelands::WareWorker type,
 		 bool selectable,
 		 boost::function<void(Widelands::Ware_Index, bool)> callback_function = 0,
-		 bool horizontal = true);
+		 bool horizontal = false);
 
 	bool handle_mousemove
 		(uint8_t state, int32_t x, int32_t y, int32_t xdiff, int32_t ydiff);
@@ -63,14 +63,6 @@ public:
 	void select_ware(Widelands::Ware_Index);
 	void unselect_ware(Widelands::Ware_Index);
 	bool ware_selected(Widelands::Ware_Index);
-	void toggle_ware(Widelands::Ware_Index ware) {
-		if (ware_selected(ware))
-			unselect_ware(ware);
-		else
-			select_ware(ware);
-		if (m_callback_function)
-			m_callback_function(ware, ware_selected(ware));
-	}
 
 	// Wares may be hidden
 	void hide_ware(Widelands::Ware_Index);

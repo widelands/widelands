@@ -5,6 +5,9 @@ output=fish
 trunk=1
 planks=2
 
+[return_on_dismantle]
+planks=1
+
 [working positions]
 fisher=1
 

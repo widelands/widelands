@@ -5,6 +5,10 @@ trunk=1
 wood=1
 stone=1
 
+[return_on_dismantle]
+wood=1
+stone=1
+
 [working positions]
 forester=1
 

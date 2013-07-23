@@ -6,16 +6,18 @@ conquers=12
 enhanced_building=yes
 prefer_heroes=true
 
-[buildcost]
+[enhancement_cost]
 wood=5
 marblecolumn=4
 marble=4
 stone=2
 
-[idle]
-packed=true
-pics=castle.png
-dimensions=120 118
-base_offset=0 0
-hotspot=94 106
+[return_on_dismantle_on_enhanced]
+wood=2
+marblecolumn=2
+marble=3
+stone=1
 
+[idle]
+pics=castle_i_??.png
+hotspot=94 106

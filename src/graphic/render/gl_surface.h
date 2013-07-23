@@ -20,7 +20,7 @@
 #ifndef GL_SURFACE_H
 #define GL_SURFACE_H
 
-#include <boost/scoped_array.hpp>
+#include <memory>
 
 #define NO_SDL_GLEXT
 #include <GL/glew.h>
@@ -53,7 +53,7 @@ protected:
 	uint16_t m_w, m_h;
 
 	/// Pixel data, while the texture is locked
-	boost::scoped_array<uint8_t> m_pixels;
+	std::unique_ptr<uint8_t[]> m_pixels;
 };
 
 #endif /* end of include guard: GL_SURFACE_H */

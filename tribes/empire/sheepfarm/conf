@@ -9,6 +9,10 @@ trunk=2
 stone=2
 wood=2
 
+[return_on_dismantle]
+trunk=1
+stone=2
+
 [working positions]
 shepherd=1
 

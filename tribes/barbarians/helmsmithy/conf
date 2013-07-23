@@ -13,6 +13,12 @@ raw_stone=2
 grout=2
 thatchreed=3
 
+[return_on_dismantle]
+trunk=1
+raw_stone=2
+grout=1
+thatchreed=1
+
 [working positions]
 helmsmith=1
 

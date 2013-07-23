@@ -4,10 +4,14 @@ enhanced_building=yes
 output=ration
 output=meal
 
-[buildcost]
+[enhancement_cost]
 wood=2
 marble=2
 marblecolumn=1
+
+[return_on_dismantle_on_enhanced]
+wood=1
+marble=2
 
 [working positions]
 innkeeper=1

@@ -3,6 +3,9 @@ size=small
 [buildcost]
 trunk=4
 
+[return_on_dismantle]
+trunk=3
+
 [working positions]
 ranger=1
 

@@ -17,6 +17,7 @@
  *
  */
 
+#include <cassert>
 #include <cmath>
 
 #include "gl_surface_texture.h"

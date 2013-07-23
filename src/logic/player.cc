@@ -638,8 +638,7 @@ void Player::_enhance_or_dismantle
 		 and
 		 (!index_of_new_building or building->descr().enhancements().count(index_of_new_building)))
 	{
-		Building_Index const index_of_old_building =
-			tribe().building_index(building->name().c_str());
+		Building::FormerBuildings former_buildings = building->get_former_buildings();
 		const Coords position = building->get_position();
 
 		//  Get workers and soldiers
@@ -653,11 +652,11 @@ void Player::_enhance_or_dismantle
 		if (index_of_new_building)
 			building =
 				&egbase().warp_constructionsite
-					(position, m_plnum, index_of_new_building, index_of_old_building);
+					(position, m_plnum, index_of_new_building, false, former_buildings);
 		else
 			building =
 				&egbase().warp_dismantlesite
-					(position, m_plnum, index_of_old_building);
+					(position, m_plnum, false, former_buildings);
 		//  Hereafter building points to the new building.
 
 		// Reassign the workers and soldiers.

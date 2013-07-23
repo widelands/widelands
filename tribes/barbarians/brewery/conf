@@ -3,10 +3,14 @@ buildable=no
 enhanced_building=yes
 output=strongbeer
 
-[buildcost]
+[enhancement_cost]
 trunk=3
 raw_stone=1
 thatchreed=1
+
+[return_on_dismantle_on_enhanced]
+trunk=1
+raw_stone=1
 
 [working positions]
 master-brewer=1

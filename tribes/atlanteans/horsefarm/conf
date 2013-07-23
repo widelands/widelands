@@ -10,6 +10,10 @@ trunk=2
 stone=2
 planks=1
 
+[return_on_dismantle]
+trunk=1
+stone=2
+
 [working positions]
 horsebreeder=1
 

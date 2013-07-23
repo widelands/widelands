@@ -3,9 +3,13 @@ buildable=no
 enhanced_building=yes
 output=ironore
 
-[buildcost]
+[enhancement_cost]
 trunk=4
 raw_stone=2
+
+[return_on_dismantle_on_enhanced]
+trunk=2
+raw_stone=1
 
 [working positions]
 master-miner=1

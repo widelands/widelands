@@ -10,6 +10,10 @@ wood=1
 stone=1
 marble=3 # someone who works on marble should like marble
 
+[return_on_dismantle]
+stone=1
+marble=2
+
 [working positions] #  like quarry
 stonemason=1
 

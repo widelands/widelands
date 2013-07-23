@@ -8,6 +8,10 @@ prefer_heroes=true
 blackwood=5
 grout=2
 
+[return_on_dismantle]
+blackwood=2
+grout=1
+
 [idle]
 pics=barrier_i_??.png
 hotspot=44 62

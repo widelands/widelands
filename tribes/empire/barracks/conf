@@ -9,10 +9,9 @@ prefer_heroes=false
 trunk=1
 wood=2
 
-[idle]
-packed=true
-pics=barracks.png
-dimensions=75 68
-base_offset=0 0
-hotspot=37 58
+[return_on_dismantle]
+wood=1
 
+[idle]
+pics=barracks_i_??.png
+hotspot=37 58
