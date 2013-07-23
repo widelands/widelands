@@ -18,6 +18,10 @@ stone=2
 marble=2
 marblecolumn=1
 
+[return_on_dismantle]
+stone=1
+marble=2
+
 [aihints]
 build_material=false
 

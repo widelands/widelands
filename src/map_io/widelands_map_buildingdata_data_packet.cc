@@ -253,7 +253,7 @@ void Map_Buildingdata_Data_Packet::read_formerbuildings_v2(Building& b, FileRead
 		assert(b.m_old_buildings.empty());
 		b.m_old_buildings.push_back(&b.descr());
 	} else if (upcast(Partially_Finished_Building, pfb, &b)){
-		b.m_old_buildings.push_back(pfb->m_building);
+		//b.m_old_buildings.push_back(pfb->m_building);
 	}
 	
 	// iterate through all buildings to find first predecessor
