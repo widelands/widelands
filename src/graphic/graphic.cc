@@ -515,7 +515,7 @@ void Graphic::save_png_(Surface & surf, StreamWrite * sw) const
 		uint16_t surf_h = surf.height();
 		uint32_t row_size = 4 * surf_w;
 
-		boost::scoped_array<png_byte> row(new png_byte[row_size]);
+		std::unique_ptr<png_byte[]> row(new png_byte[row_size]);
 
 		//Write each row
 		const SDL_PixelFormat & fmt = surf.format();

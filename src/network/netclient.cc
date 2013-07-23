@@ -756,9 +756,10 @@ void NetClient::handle_packet(RecvPacket & packet)
 				fr.Open(*g_fs, path.c_str());
 				if (bytes == fr.GetSize()) {
 #ifdef HAVE_VARARRAY
+					// NOCOM(#sirver): kill
 					char complete[bytes];
 #else
-					boost::scoped_array<char> complete_buf(new char[bytes]);
+					std::unique_ptr<char[]> complete_buf(new char[bytes]);
 					if (!complete_buf.get()) throw wexception("Out of memory");
 					char * complete = complete_buf.get();
 #endif
@@ -849,7 +850,7 @@ void NetClient::handle_packet(RecvPacket & packet)
 #ifdef HAVE_VARARRAY
 			char complete[file->bytes];
 #else
-			boost::scoped_array<char> complete_buf(new char[file->bytes]);
+			ststd::unique_ptr<char[][]> complete_buf(new char[file->bytes]);
 			if (!complete_buf.get()) throw wexception("Out of memory");
 			char * complete = complete_buf.get();
 #endif
