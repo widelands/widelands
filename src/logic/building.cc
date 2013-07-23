@@ -151,7 +151,7 @@ Building_Descr::Building_Descr
 			Section & returnsect_s = prof.get_safe_section("return_on_dismantle");
 			m_return_dismantle.parse(m_tribe, returnsect_s);
 		}
-		
+
 		if (m_enhanced_building) {
 			Section & en_buildcost_s = prof.get_safe_section("enhancement_cost");
 			m_enhance_cost.parse(m_tribe, en_buildcost_s);

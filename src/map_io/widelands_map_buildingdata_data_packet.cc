@@ -252,8 +252,10 @@ void Map_Buildingdata_Data_Packet::read_formerbuildings_v2(Building& b, FileRead
 	} else if (is_a(Warehouse, &b)) {
 		assert(b.m_old_buildings.empty());
 		b.m_old_buildings.push_back(&b.descr());
-	} else if (upcast(Partially_Finished_Building, pfb, &b)){
-		//b.m_old_buildings.push_back(pfb->m_building);
+	} else if (upcast(DismantleSite, dsite, &b)){
+		b.m_old_buildings.push_back(dsite->m_building);
+	} else if (is_a(ConstructionSite, &b)) {
+		return;
 	}
 	
 	// iterate through all buildings to find first predecessor
