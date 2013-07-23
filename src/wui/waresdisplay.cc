@@ -402,6 +402,8 @@ void AbstractWaresDisplay::select_ware(Widelands::Ware_Index ware)
 
 	m_selected[ware] = true;
 	update();
+	if (m_callback_function)
+			m_callback_function(ware, true);
 }
 
 void AbstractWaresDisplay::unselect_ware(Widelands::Ware_Index ware)
@@ -411,6 +413,8 @@ void AbstractWaresDisplay::unselect_ware(Widelands::Ware_Index ware)
 
 	m_selected[ware] = false;
 	update();
+	if (m_callback_function)
+			m_callback_function(ware, false);
 }
 
 bool AbstractWaresDisplay::ware_selected(Widelands::Ware_Index ware) {
