@@ -290,20 +290,24 @@ def build_frame_group_regions(frames):
     base_pic_mask = frames[0].pic[:,:,3] != 0 & ~diff
     for region in regions:
         base_pic_mask[region[0]:region[2], region[1]:region[3]] = False
+
     ys, xs = np.where(base_pic_mask)
-    base_pic_rect = (ys.min(), xs.min(), ys.max() + 1, xs.max() + 1)
-    base_pic_base = frames[0].pic.copy()
-    base_pic_base[:,:,3] = np.choose(base_pic_mask, [0, base_pic_base[:,:,3]])
-    base_pic = base_pic_base[base_pic_rect[0]:base_pic_rect[2], base_pic_rect[1]:base_pic_rect[3]]
-    if pc:
-        base_pic_pc = frames[0].pc_pic[base_pic_rect[0]:base_pic_rect[2], base_pic_rect[1]:base_pic_rect[3]]
-    else:
-        base_pic_pc = None
-    cost = rectangle_cost(base_pic_rect)
+    cost = 0
+    base_pic_rect = None
+    if len(ys) and len(xs):
+        base_pic_rect = (ys.min(), xs.min(), ys.max() + 1, xs.max() + 1)
+        base_pic_base = frames[0].pic.copy()
+        base_pic_base[:,:,3] = np.choose(base_pic_mask, [0, base_pic_base[:,:,3]])
+        base_pic = base_pic_base[base_pic_rect[0]:base_pic_rect[2], base_pic_rect[1]:base_pic_rect[3]]
+        if pc:
+            base_pic_pc = frames[0].pc_pic[base_pic_rect[0]:base_pic_rect[2], base_pic_rect[1]:base_pic_rect[3]]
+        else:
+            base_pic_pc = None
+        cost = rectangle_cost(base_pic_rect)
 
     newframes = []
     for frame in frames:
-        newframe = [((base_pic_rect[0], base_pic_rect[1]), base_pic, base_pic_pc)]
+        newframe = [((base_pic_rect[0], base_pic_rect[1]), base_pic, base_pic_pc)] if base_pic_rect else []
         for region in regions:
             pic = frame.pic[region[0]:region[2], region[1]:region[3]]
             if pc:
@@ -706,6 +710,7 @@ def main():
         if chunkset is None:
             continue
         rects = [(chunk.pic.shape[0], chunk.pic.shape[1]) for chunk in chunkset.chunks]
+        print "#sirver rects: %r\n" % (rects)
         chunk_area = sum([r[0] * r[1] for r in rects])
         print 'Packing chunks of area %d pixels' % (chunk_area)
         ext0, ext1, offsets = pywi.packing.pack(rects)

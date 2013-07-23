@@ -79,12 +79,19 @@ class Chunk(object):
         self.pc_pic = pc_pic
         self.spritemap_ofs = None
 
+    def __lt__(self, other):
+        """Orders by area."""
+        return (
+            (self.pic.shape[0] * self.pic.shape[1], self.pic.shape[0], self.pic.shape[1]) <
+            (other.pic.shape[0] * other.pic.shape[1], other.pic.shape[0], other.pic.shape[1]))
+
+
 Blit = collections.namedtuple('Blit', ('chunk', 'offset'))
 
 class ChunkSet(object):
     def __init__(self, has_player_color):
         self.has_player_color = has_player_color
-        self.chunks = []
+        self._chunks = []
         self.packing_shape = None
         self.spritemap_name = None
 
@@ -96,7 +103,7 @@ class ChunkSet(object):
             pc_pic = base_pc_pic[rect[0]:rect[2], rect[1]:rect[3]]
         else:
             pc_pic = None
-        for chunk in self.chunks:
+        for chunk in self._chunks:
             if chunk.pic.shape != pic.shape:
                 continue
             if not np.all(chunk.pic == pic):
@@ -105,10 +112,15 @@ class ChunkSet(object):
                 continue
             return chunk
         chunk = Chunk(pic, pc_pic)
-        self.chunks.append(chunk)
+        self._chunks.append(chunk)
+        self._chunks.sort(reverse=True)
         self.packing_shape = None
         self.spritemap_name = None
         return chunk
+
+    @property
+    def chunks(self):
+        return self._chunks
 
     def assign_packing(self, h, w, offsets):
         self.packing_shape = (h, w)
@@ -294,14 +306,9 @@ def load_glob(filename_glob, context=None):
     def _load(fn, seen_shape):
         if context is not None:
             context.filenames.add(fn)
-        img = np.asarray(Image.open(fn))
-        if len(img.shape) == 2:
-            rgba = np.zeros(img.shape + (4,))
-            rgba[:,:,0] = img
-            rgba[:,:,1] = img
-            rgba[:,:,2] = img
-            rgba[:,:,3] = 255
-            img = rgba
+        img = np.asarray(Image.open(fn).convert("RGBA"))
+        assert len(img.shape) == 3
+
         if seen_shape and seen_shape != img.shape:
             raise Exception('Frame %s has different dimensions from previous frames' % (fn))
         return img
@@ -403,6 +410,7 @@ def load_section(directory, section, context=None):
     elif typ == 2:
         anim = AnimationBlits.load(directory, d, context)
     elif typ == 1:
+        # NOCOM(#sirver): kill this?
         anim = load_packed(directory, d, context)
     else:
         raise Exception('cannot load this type of animation yet')

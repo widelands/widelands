@@ -2,8 +2,15 @@
 Algorithms for rectangle packing
 """
 
-# NOCOM(#sirver): give credit here
+
 class Packer(object):
+    """
+    The basic algorithm implemented here is 2D bin packing in a tree with some
+    cleverness (for example not knowing the prior size of the final image. The
+    best description of the algorithm I found is here
+    http://codeincomplete.com/posts/2011/5/7/bin_packing/.
+    """
+
     def fit(self, blocks):
         self.root = { "x": 0, "y": 0, "w": blocks[0].w, "h": blocks[0].h, "used": False }
         self.blocks = blocks
@@ -31,6 +38,9 @@ class Packer(object):
     def grow_node(self, w, h):
         can_grow_down = w <= self.root["w"]
         can_grow_right = h <= self.root["h"]
+
+        print "#sirver w: %r, h: %r, self.root['w']: %r, self.root['h']: %r\n" % (w, h, self.root['w'], self.root['h'])
+        assert can_grow_down or can_grow_right
 
         # Grow to stay 'squarish'
         should_grow_right = can_grow_right and (self.root["h"] >= (self.root["w"] + w))
