@@ -315,9 +315,6 @@ if (DEFINED MSVC)
   set (CMAKE_CXX_FLAGS_RELEASE "-O3 -DNDEBUG /MT /GL ${MSVC_DISABLE_WARNINGS}" CACHE STRING "Set by widelands CMakeLists.txt" FORCE)
 
   set (CMAKE_EXE_LINKER_FLAGS_DEBUG "/debug /LTCG /NODEFAULTLIB:libcmt.lib" CACHE STRING "Set by widelands CMakeLists.txt" FORCE)
-
-else (DEFINED MSVC)
-  set (HAVE_VARARRAY TRUE CACHE BOOL "Use variable length arrays to improve performance. Requires gcc." )
 endif (DEFINED MSVC)
 
 IF (CMAKE_BUILD_TYPE STREQUAL "Debug")
