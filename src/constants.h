@@ -41,9 +41,9 @@
 #define XRES 800 ///< Fullscreen Menu Width
 #define YRES 600 ///< Fullscreen Menu Height
 
-#define FALLBACK_GRAPHICS_WIDTH 640
-#define FALLBACK_GRAPHICS_HEIGHT 480
-#define FALLBACK_GRAPHICS_DEPTH 16
+#define FALLBACK_GRAPHICS_WIDTH 800
+#define FALLBACK_GRAPHICS_HEIGHT 600
+#define FALLBACK_GRAPHICS_DEPTH 32
 
 /// \name Fonts
 /// Font constants, defined including size
