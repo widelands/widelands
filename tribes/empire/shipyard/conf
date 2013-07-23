@@ -2,6 +2,7 @@ size=medium
 
 [aihints]
 build_material=false
+needs_water=true
 
 [buildcost]
 trunk=3

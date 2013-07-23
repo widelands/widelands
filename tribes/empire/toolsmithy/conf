@@ -24,6 +24,7 @@ marble=2
 
 [aihints]
 build_material=false
+is_basic=true
 
 [working positions]
 toolsmith=1

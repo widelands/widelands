@@ -32,6 +32,7 @@ trunk=8
 
 [aihints]
 build_material=false
+is_basic=true
 
 [programs]
 produce_felling_axe=_Produce felling axe
