@@ -127,7 +127,11 @@ Game_Main_Menu_Save_Game::Game_Main_Menu_Save_Game
 		select_by_name(cur_filename);
 	} else {
 		// Display current game infos
-		m_mapname.set_text(parent.game().get_map()->get_name());
+		{
+			//Try to translate the map name.
+			i18n::Textdomain td("maps");
+			m_mapname.set_text(_(parent.game().get_map()->get_name()));
+		}
 		uint32_t gametime = parent.game().get_gametime();
 		m_gametime.set_text(gametimestring(gametime));
 
