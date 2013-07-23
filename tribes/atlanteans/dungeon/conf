@@ -108,4 +108,3 @@ train=soldier attack 3 4
 [idle]
 pics=dungeon_i_??.png  # ???
 hotspot=47 48
-playercolor=true

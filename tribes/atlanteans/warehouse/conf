@@ -17,4 +17,3 @@ quartz=1
 [idle]
 pics=warehouse_i_??.png  # ???
 hotspot=58 62
-playercolor=true

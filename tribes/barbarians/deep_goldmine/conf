@@ -39,19 +39,15 @@ produce=goldstone:2
 [idle]
 pics=deep_goldmine_i_??.png
 hotspot=21 37
-playercolor=true
 
 [build]
 pics=deep_goldmine_b_??.png
 hotspot=21 37
-playercolor=true
 
 [working]
 pics=deep_goldmine_w_??.png
 hotspot=21 37
-playercolor=true
 
 [empty]
 pics=deep_goldmine_e_??.png
 hotspot=21 37
-playercolor=true

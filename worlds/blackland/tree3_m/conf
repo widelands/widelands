@@ -1,6 +1,5 @@
 size=small
 program=program
-picture=tree3_m_00.png
 
 [terrain affinity]
 strand=       16

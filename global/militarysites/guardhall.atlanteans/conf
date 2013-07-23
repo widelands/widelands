@@ -8,4 +8,3 @@ prefer_heroes=true
 [idle]
 pics=../../../tribes/atlanteans/guardhall/guardhall_i_??.png
 hotspot=58 65
-playercolor=true

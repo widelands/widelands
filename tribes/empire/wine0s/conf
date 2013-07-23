@@ -1,6 +1,5 @@
 size=medium
 program=program
-picture=wine0s_00.png
 
 [program]
 animate=small 28000

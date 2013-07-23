@@ -1,6 +1,5 @@
 size=small
 program=program
-picture=idle_00.png
 
 [buildcost]
 wood=10
@@ -14,4 +13,3 @@ transform=bob tribe:ship
 [idle]
 pics=ship-build_??.png
 hotspot=115 78
-playercolor=true

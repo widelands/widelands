@@ -1,6 +1,5 @@
 size=small
 program=program
-picture=s3tree1_00.png
 
 [terrain affinity]
 ice_flows=     10

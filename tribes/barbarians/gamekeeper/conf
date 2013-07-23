@@ -17,24 +17,20 @@ carrier=1
 pics=releasein_??.png
 hotspot=15 22
 fps=5
-playercolor=true
 
 [releaseout]
 pics=releaseout_??.png
 hotspot=15 22
 fps=5
-playercolor=true
 
 [idle]
 pics=idle_??.png
 hotspot=14 22
-playercolor=true
 
 [walk]
 dirpics=walk_!!_??.png
 hotspot=15 22
 fps=10
-playercolor=true
 
 [walkload]
 dirpics=walkload_!!_??.png

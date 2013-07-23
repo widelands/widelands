@@ -34,10 +34,8 @@ produce=flour
 [idle]
 pics=windmill_i_??.png  # ???
 hotspot=41 87
-playercolor=true
 
 [working]
 pics=windmill_w_??.png  # lets see the mill turn!
 hotspot=41 87
-playercolor=true
 fps=25

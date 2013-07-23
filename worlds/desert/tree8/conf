@@ -10,7 +10,6 @@ size=small
 attrib=tree
 program=program
 program=fall
-picture=idle_0.png
 
 [terrain affinity]
 desert1=              2

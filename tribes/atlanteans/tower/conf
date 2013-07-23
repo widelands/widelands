@@ -20,4 +20,3 @@ stone=3
 [idle]
 pics=tower_i_??.png
 hotspot=55 60
-playercolor=true

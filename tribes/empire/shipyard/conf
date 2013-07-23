@@ -40,19 +40,15 @@ return=completed
 [idle]
 pics=work_??.png
 hotspot=50 63
-playercolor=true
 
 [build]
 pics=build_??.png
 hotspot=50 63
-playercolor=true
 
 [working]
 pics=work_??.png
 hotspot=50 63
-playercolor=true
 
 [unoccupied]
 pics=vacant_??.png
 hotspot=50 63
-playercolor=true

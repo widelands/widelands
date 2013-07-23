@@ -86,14 +86,11 @@ return=skipped
 [idle]
 pics=crystalmine_i_??.png
 hotspot=50 56
-playercolor=true
 
 [working]
 pics=crystalmine_i_??.png
 hotspot=50 56
-playercolor=true
 
 [empty]
 pics=crystalmine_e_??.png
 hotspot=50 56
-playercolor=true

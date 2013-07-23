@@ -15,7 +15,6 @@ grout=1
 [idle]
 pics=barrier_i_??.png
 hotspot=44 62
-playercolor=true
 fps=10
 
 [build]

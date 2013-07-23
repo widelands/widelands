@@ -21,10 +21,8 @@ gold=1
 [build]
 pics=port_b_??.png  # 4 frames
 hotspot=74 70
-playercolor=true
 
 [idle]
 pics=port_i_??.png  # 20 frames
 hotspot=74 70
-playercolor=true
 fps=10

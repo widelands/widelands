@@ -25,4 +25,3 @@ worker=hunt
 [idle]
 pics=hunter_i_??.png
 hotspot=36 44
-playercolor=true
