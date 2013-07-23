@@ -91,15 +91,11 @@ call=produce_heavy_double_trident
 return=skipped
 
 [idle]
-packed=true
-pics=weaponsmithy.png
-dimensions=100 89
-base_offset=0 0
+pics=weaponsmith_i_??.png  # ???
 hotspot=50 58
+playercolor=true
 
 [working]
-packed=true
-pics=weaponsmithy.png
-dimensions=100 89
-base_offset=0 0
+pics=weaponsmith_i_??.png  # ???
 hotspot=50 58
+playercolor=true

@@ -31,16 +31,9 @@ animate=working 90000 # charcoal fires are burning some days in real life
 produce=coal
 
 [idle]
-packed=true
-pics=burners_house.png
-dimensions=97 81
-base_offset=0 0
+pics=burner_i_??.png  # ???
 hotspot=51 48
 
 [working]
-packed=true
-pics=burners_house.png
-dimensions=97 81
-base_offset=0 0
+pics=burner_i_??.png  # ???
 hotspot=51 48
-

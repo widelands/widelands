@@ -106,8 +106,6 @@ consume=bread smoked_fish,smoked_meat heavy_double_trident
 train=soldier attack 3 4
 
 [idle]
-packed=true
-pics=dungeon_i.png
-dimensions=90 81
-base_offset=0 0
+pics=dungeon_i_??.png  # ???
 hotspot=47 48
+playercolor=true

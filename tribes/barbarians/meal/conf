@@ -4,8 +4,5 @@ help=_A meal is made out of pitta bread, strongbeer and fish/meat in a big inn. 
 preciousness=5
 
 [idle]
-packed=true
-pics=meal.png
-dimensions=15 12
-base_offset=0 0
+pics=idle.png
 hotspot=6 11

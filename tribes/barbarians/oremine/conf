@@ -34,15 +34,19 @@ produce=ironore
 [idle]
 pics=oremine_i_??.png
 hotspot=21 36
+playercolor=true
 
 [build]
 pics=oremine_b_??.png
 hotspot=21 36
+playercolor=true
 
 [working]
 pics=oremine_w_??.png
 hotspot=21 36
+playercolor=true
 
 [empty]
 pics=oremine_e_??.png
 hotspot=21 36
+playercolor=true

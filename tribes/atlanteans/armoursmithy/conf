@@ -65,15 +65,11 @@ call=produce_advanced_shield
 return=skipped
 
 [idle]
-packed=true
-pics=armoursmithy.png
-dimensions=100 84
-base_offset=0 0
+pics=armoursmith_i_??.png
 hotspot=53 60
+playercolor=true
 
 [working]
-packed=true
-pics=armoursmithy.png
-dimensions=100 84
-base_offset=0 0
+pics=armoursmith_i_??.png
 hotspot=53 60
+playercolor=true

@@ -3,8 +3,5 @@ help=_The saw is needed by the woodcutter and the toolsmith. It is produced by t
 default_target_quantity=2
 
 [idle]
-packed=true
-pics=saw.png
-dimensions=21 18
-base_offset=0 0
+pics=idle.png
 hotspot=7 5

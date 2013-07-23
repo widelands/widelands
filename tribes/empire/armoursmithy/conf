@@ -77,6 +77,7 @@ hotspot=50 62
 [idle]
 pics=armory_i_??.png  # ???
 hotspot=50 62
+playercolor=true
 
 [build]
 pics=armory_b_??.png  # ???
@@ -85,4 +86,5 @@ hotspot=50 62
 [working]
 pics=armory_w_??.png  # ???
 hotspot=50 62
+playercolor=true
 fps=5

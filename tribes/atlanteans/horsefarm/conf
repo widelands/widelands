@@ -33,16 +33,9 @@ animate=working 30000 # feeding cute little foals ;)
 recruit=horse
 
 [idle]
-packed=true
-pics=horsefarm.png
-dimensions=135 96
-base_offset=0 0
+pics=horsefarm_i_??.png  # ???
 hotspot=81 62
 
 [working]
-packed=true
-pics=horsefarm.png
-dimensions=135 96
-base_offset=0 0
+pics=horsefarm_i_??.png  # ???
 hotspot=81 62
-

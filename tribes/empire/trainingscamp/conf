@@ -177,9 +177,5 @@ consume=plate_armour bread:2 fish,meat:2
 train=soldier hp 3 4
 
 [idle]
-packed=true
-pics=trainingscamp.png
-dimensions=120 120
-base_offset=0 0
+pics=trainingscamp_i_??.png  # ???
 hotspot=82 105
-

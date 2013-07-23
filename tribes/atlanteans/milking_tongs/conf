@@ -1,8 +1,5 @@
 help=_Milking tongs are used by the spider breeder, to milk the spiders. They are produced by the toolsmith.
 
 [idle]
-packed=true
-pics=milking_tongs.png
-dimensions=12 12
-base_offset=0 0
+pics=idle.png
 hotspot=6 9

@@ -52,8 +52,5 @@ call=harvest_reed
 return=skipped
 
 [idle]
-packed=true
-pics=fernery.png
-dimensions=89 69
-base_offset=0 0
+pics=fernery_i_??.png  # ???
 hotspot=46 44

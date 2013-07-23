@@ -37,34 +37,22 @@ construct=shipconstruction buildship 6
 animate=working 35000
 return=completed
 
-[build]
-packed=true
-pics=shipyard.png
-dimensions=117 69
-base_offset=117 138
-region_00=0 0 117 69:0 138;117 69;0 69;117 0
-hotspot=62 48
-
 [idle]
-packed=true
-pics=shipyard.png
-dimensions=117 69
-base_offset=0 0
-region_00=2 25 106 44:234 88
+pics=work_??.png
 hotspot=62 48
+playercolor=true
 
-[unoccupied]
-packed=true
-pics=shipyard.png
-dimensions=117 69
-base_offset=0 0
-region_00=2 25 106 44:234 44
+[build]
+pics=build_??.png
 hotspot=62 48
+playercolor=true
 
 [working]
-packed=true
-pics=shipyard.png
-dimensions=117 69
-base_offset=0 0
-region_00=2 25 106 44:234 0
+pics=work_??.png
 hotspot=62 48
+playercolor=true
+
+[unoccupied]
+pics=vacant_??.png
+hotspot=62 48
+playercolor=true

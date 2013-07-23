@@ -50,9 +50,5 @@ call=mine_marble # 2 of 7 times it finds marble
 return=skipped
 
 [idle]
-packed=true
-pics=quarry.png
-dimensions=77 76
-base_offset=0 0
+pics=quarry_i_??.png  # ???
 hotspot=42 57
-

@@ -6,9 +6,6 @@ conquers=9
 
 [idle]
 # sfx=0 ../../../sound/spoken/warehouse-bringitin
-packed=true
-pics=headquarters_shipwreck.png
-dimensions=120 62
-base_offset=0 0
+pics=headquarters_shipwreck_i_??.png
 hotspot=93 40
-
+playercolor=true

@@ -49,8 +49,6 @@ call=harvest_corn
 playFX=../../../sound/farm/farm_animal 192
 
 [idle]
-packed=true
-pics=farm.png
-dimensions=128 101
-base_offset=0 0
+pics=farm_i_??.png  # ???
 hotspot=74 60
+playercolor=true

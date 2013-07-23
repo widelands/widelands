@@ -3,8 +3,5 @@ help=_The chain-armour is a medium armour for Empire soldiers. It is produced in
 preciousness=0
 
 [idle]
-pics=chain_armour.png
-packed=true
-dimensions=14 19
-base_offset=0 0
+pics=idle.png
 hotspot=3 11

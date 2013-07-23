@@ -1,14 +1,12 @@
 size=small
 program=program
+picture=field0m_00.png
 
 [program]
 animate=midd 40000
 transform=reed1
 
 [midd]
-packed=true
-pics=reed0.png
-dimensions=27 21
-base_offset=0 0
+pics=field0m_??.png
 fps=5
 hotspot=13 14

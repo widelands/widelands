@@ -27,4 +27,5 @@ hotspot=67 80
 [idle]
 pics=port_i_??.png  # 20 frames
 hotspot=67 80
+playercolor=true
 fps=10

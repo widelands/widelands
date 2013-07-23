@@ -34,16 +34,9 @@ animate=working 19000
 produce=ration
 
 [idle]
-packed=true
-pics=tavern.png
-dimensions=99 78
-base_offset=0 0
+pics=tavern_i_??.png  # ???
 hotspot=52 58
 
 [working]
-packed=true
-pics=tavern.png
-dimensions=99 78
-base_offset=0 0
+pics=tavern_i_??.png  # ???
 hotspot=52 58
-

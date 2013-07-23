@@ -54,8 +54,5 @@ call=produce_meal
 return=skipped
 
 [idle]
-packed=true
-pics=big_inn.png
-dimensions=112 94
-base_offset=0 0
+pics=big_inn_i_??.png  # ???
 hotspot=53 62

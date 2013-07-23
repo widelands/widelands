@@ -34,15 +34,9 @@ animate=working 30000
 produce=beer
 
 [idle]
-packed=true
-pics=micro-brewery.png
-dimensions=87 75
-base_offset=0 0
+pics=micro-brewery_i_??.png  # ???
 hotspot=42 50
 
 [working]
-packed=true
-pics=micro-brewery.png
-dimensions=87 75
-base_offset=0 0
+pics=micro-brewery_i_??.png  # ???
 hotspot=42 50

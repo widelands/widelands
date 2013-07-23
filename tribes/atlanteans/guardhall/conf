@@ -16,8 +16,6 @@ planks=1
 stone=3
 
 [idle]
-packed=true
-pics=guardhall.png
-dimensions=100 85
-base_offset=0 0
+pics=guardhall_i_??.png
 hotspot=58 72
+playercolor=true

@@ -18,8 +18,6 @@ stone=5
 trunk=2
 
 [idle]
-packed=true
-pics=castle.png
-dimensions=121 103
-base_offset=0 0
+pics=castle_i_??.png
 hotspot=91 91
+playercolor=true

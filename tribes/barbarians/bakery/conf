@@ -36,20 +36,13 @@ animate=working 20000
 produce=pittabread
 
 [idle]
-format = blits
-nrframes = 1
-spritemap = bakery
-0 = 0,0,100,78@-41,-58
+pics=bakery_i_??.png  # ???
+hotspot=41 58
 
 [unoccupied]
-format = blits
-nrframes = 1
-spritemap = bakery
-0 = 0,78,100,74@-41,-58
+pics=bakery_u_??.png  # ???
+hotspot=41 58
 
 [working]
-format = blits
-nrframes = 1
-spritemap = bakery
-0 = 0,0,100,78@-41,-58
-
+pics=bakery_i_??.png  # ???
+hotspot=41 58

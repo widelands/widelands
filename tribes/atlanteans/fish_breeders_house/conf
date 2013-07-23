@@ -24,8 +24,6 @@ sleep=24000
 worker=breed
 
 [idle]
-packed=true
-pics=fish_breeders_house.png
-dimensions=68 61
-base_offset=0 0
+pics=fish_breeder_i_??.png  # ???
 hotspot=34 42
+playercolor=true

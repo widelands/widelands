@@ -4,8 +4,5 @@ help=_The plate armour is the strongest armour existing for the Empire soldiers.
 preciousness=1
 
 [idle]
-packed=true
-pics=plate_armour.png
-dimensions=15 19
-base_offset=0 0
+pics=idle.png
 hotspot=4 11

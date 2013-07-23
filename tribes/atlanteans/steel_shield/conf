@@ -3,8 +3,5 @@ preciousness=1
 
 # A shield with the sign of the Atlanteans on it.
 [idle]
-packed=true
-pics=steel_shield.png
-dimensions=16 16
-base_offset=0 0
+pics=idle.png
 hotspot=10 17

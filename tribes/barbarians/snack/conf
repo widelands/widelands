@@ -7,8 +7,5 @@ preciousness=5
 default_target_quantity=10
 
 [idle]
-packed=true
-pics=snack.png
-dimensions=15 8
-base_offset=0 0
+pics=idle.png
 hotspot=7 8

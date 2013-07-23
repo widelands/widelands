@@ -1,4 +1,5 @@
 program=program
+picture=resi_00.png
 attrib=resi
 
 [program]
@@ -6,8 +7,5 @@ animate=idle 600000
 remove=
 
 [idle]
-packed=true
-pics=resi_granit1.png
-dimensions=12 13
-base_offset=0 0
+pics=resi_??.png
 hotspot=7 10

@@ -5,8 +5,5 @@ preciousness=1
 
 # A simple double trident
 [idle]
-packed=true
-pics=double_trident.png
-dimensions=15 15
-base_offset=0 0
+pics=idle.png
 hotspot=10 17

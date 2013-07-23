@@ -2,8 +2,5 @@ help=_Basic armour for Empire soldiers. It is produced in the armour smithy and 
 preciousness=0
 
 [idle]
-pics=armour.png
-packed=true
-dimensions=14 19
-base_offset=0 0
+pics=idle.png
 hotspot=3 11

@@ -29,4 +29,5 @@ hotspot=102 102
 [idle]
 pics=citadel_i_??.png
 hotspot=102 102
+playercolor=true
 fps=10

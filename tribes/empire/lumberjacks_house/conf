@@ -24,9 +24,5 @@ sleep=30000 # Barbarian lumberjack sleeps 25000
 worker=chop
 
 [idle]
-packed=true
-pics=lumberjacks_house.png
-dimensions=78 78
-base_offset=0 0
+pics=lumberjack_i_??.png
 hotspot=40 59
-

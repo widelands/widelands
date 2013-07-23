@@ -34,16 +34,9 @@ animate=working 30000
 produce=meat
 
 [idle]
-packed=true
-pics=piggery.png
-dimensions=120 91
-base_offset=0 0
+pics=piggery_i_??.png  # ???
 hotspot=82 74
 
 [working]
-packed=true
-pics=piggery.png
-dimensions=120 91
-base_offset=0 0
+pics=piggery_i_??.png  # ???
 hotspot=82 74
-

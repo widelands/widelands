@@ -3,8 +3,6 @@ help=_This is the most enhanced Barbarian armour. It is produced in the helmsmit
 preciousness=1
 
 [idle]
-packed=true
-pics=mask.png
-dimensions=15 15
-base_offset=0 0
+pics=idle.png
 hotspot=7 10
+playercolor=true

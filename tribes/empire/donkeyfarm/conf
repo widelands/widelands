@@ -33,15 +33,9 @@ animate=working 30000 # feeding cute little baby donkeys ;)
 recruit=donkey
 
 [idle]
-packed=true
-pics=donkeyfarm.png
-dimensions=135 103
-base_offset=0 0
+pics=donkeyfarm_i_??.png  # ???
 hotspot=85 78
 
 [working]
-packed=true
-pics=donkeyfarm.png
-dimensions=135 103
-base_offset=0 0
+pics=donkeyfarm_i_??.png  # ???
 hotspot=85 78

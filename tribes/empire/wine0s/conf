@@ -1,14 +1,12 @@
 size=medium
 program=program
+picture=wine0s_00.png
 
 [program]
 animate=small 28000
 transform=wine0
 
 [small]
-packed=true
-pics=wine0s.png
-dimensions=21 26
-base_offset=0 0
+pics=wine0s_??.png
 fps=5
 hotspot=15 18

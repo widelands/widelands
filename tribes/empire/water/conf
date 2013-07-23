@@ -4,8 +4,5 @@ preciousness=7
 default_target_quantity=25
 
 [idle]
-packed=true
-pics=water.png
-dimensions=8 11
-base_offset=0 0
+pics=water_idle.png
 hotspot=4 8

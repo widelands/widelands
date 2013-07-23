@@ -29,16 +29,9 @@ animate=working 24000
 produce=blackwood
 
 [idle]
-packed=true
-pics=hardener.png
-dimensions=93 74
-base_offset=0 0
+pics=hardener_i_??.png  # ???
 hotspot=38 50
 
 [working]
-packed=true
-pics=hardener.png
-dimensions=93 74
-base_offset=0 0
+pics=hardener_i_??.png  # ???
 hotspot=38 50
-

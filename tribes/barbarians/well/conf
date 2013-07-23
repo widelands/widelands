@@ -25,11 +25,14 @@ produce=water
 [idle]
 pics=well_i_??.png
 hotspot=19 33
+playercolor=true
 
 [working]
 pics=well_w_??.png
 hotspot=19 33
+playercolor=true
 
 [build]
 pics=well_b_??.png
 hotspot=19 33
+playercolor=true

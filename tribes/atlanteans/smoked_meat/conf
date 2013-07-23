@@ -5,8 +5,5 @@ preciousness=2
 default_target_quantity=10
 
 [idle]
-packed=true
-pics=smoked_meat.png
-dimensions=12 14
-base_offset=0 0
+pics=idle.png
 hotspot=9 16

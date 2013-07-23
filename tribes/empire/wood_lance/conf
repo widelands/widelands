@@ -5,8 +5,5 @@ default_target_quantity=15
 preciousness=1
 
 [idle]
-packed=true
-pics=wood_lance.png
-dimensions=16 20
-base_offset=0 0
+pics=idle.png
 hotspot=4 11

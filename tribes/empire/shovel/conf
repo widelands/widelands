@@ -1,8 +1,5 @@
 help=_The shovel is needed for proper handling of plants. Therefore the forester uses it. It is produced by the toolsmith.
 
 [idle]
-packed=true
-pics=shovel.png
-dimensions=13 13
-base_offset=0 0
+pics=idle.png
 hotspot=4 5

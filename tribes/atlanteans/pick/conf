@@ -3,8 +3,5 @@ default_target_quantity=3
 preciousness=1
 
 [idle]
-packed=true
-pics=pick.png
-dimensions=13 10
-base_offset=0 0
+pics=idle.png
 hotspot=5 4

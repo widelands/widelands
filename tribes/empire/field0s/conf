@@ -1,14 +1,12 @@
 size=small
 program=program
+picture=field0s_00.png
 
 [program]
 animate=small 45000
 transform=field0
 
 [small]
-packed=true
-pics=field0s.png
-dimensions=40 23
-base_offset=0 0
+pics=field0s_??.png
 fps=5
 hotspot=15 9

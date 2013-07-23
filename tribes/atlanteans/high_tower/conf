@@ -16,8 +16,6 @@ stone=2
 stone=1
 
 [idle]
-packed=true
-pics=high_tower.png
-dimensions=78 100
-base_offset=0 0
+pics=high_tower_i_??.png
 hotspot=50 73
+playercolor=true

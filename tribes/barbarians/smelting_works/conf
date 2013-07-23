@@ -51,15 +51,9 @@ call=smelt_iron
 return=skipped
 
 [idle]
-packed=true
-pics=smelting_works.png
-dimensions=100 82
-base_offset=0 0
+pics=smelting_works_i_??.png  # ???
 hotspot=44 58
 
 [working]
-packed=true
-pics=smelting_works.png
-dimensions=100 82
-base_offset=0 0
+pics=smelting_works_i_??.png  # ???
 hotspot=44 58

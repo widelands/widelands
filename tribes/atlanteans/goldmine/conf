@@ -43,11 +43,14 @@ produce=goldore
 [idle]
 pics=goldmine_i_??.png
 hotspot=50 56
+playercolor=true
 
 [working]
 pics=goldmine_i_??.png
 hotspot=50 56
+playercolor=true
 
 [empty]
 pics=goldmine_e_??.png
 hotspot=50 56
+playercolor=true

@@ -33,15 +33,9 @@ animate=working 30000 # animation of feeding the cattles
 recruit=ox
 
 [idle]
-packed=true
-pics=cattlefarm.png
-dimensions=116 89
-base_offset=0 0
+pics=cattlefarm_i_??.png  # ???
 hotspot=57 80
 
 [working]
-packed=true
-pics=cattlefarm.png
-dimensions=116 89
-base_offset=0 0
+pics=cattlefarm_i_??.png  # ???
 hotspot=57 80

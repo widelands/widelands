@@ -5,8 +5,5 @@ help=_This is the medium trident. It is produced in the weapon smithy and used b
 preciousness=1
 
 [idle]
-packed=true
-pics=steel_trident.png
-dimensions=16 16
-base_offset=0 0
+pics=idle.png
 hotspot=10 17

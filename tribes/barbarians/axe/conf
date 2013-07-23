@@ -3,8 +3,5 @@ default_target_quantity=15
 preciousness=3
 
 [idle]
-format = blits
-nrframes = 1
-spritemap = idle
-0 = 0,0,19,20@-7,-7
-
+pics=idle.png
+hotspot=7 7

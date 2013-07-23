@@ -5,8 +5,5 @@ default_target_quantity=5
 preciousness=1
 
 [idle]
-packed=true
-pics=cloth.png
-dimensions=10 10
-base_offset=0 0
+pics=idle.png
 hotspot=6 9

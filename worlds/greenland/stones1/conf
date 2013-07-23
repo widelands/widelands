@@ -1,6 +1,7 @@
 size=big
 attrib=stone
 program=shrink
+picture=idle.png
 
 [idle]
 hotspot=39 82

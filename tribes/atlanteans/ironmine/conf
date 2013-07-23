@@ -43,11 +43,14 @@ produce=ironore:2
 [idle]
 pics=ironmine_i_??.png
 hotspot=50 56
+playercolor=true
 
 [working]
 pics=ironmine_i_??.png
 hotspot=50 56
+playercolor=true
 
 [empty]
 pics=ironmine_e_??.png
 hotspot=50 56
+playercolor=true

@@ -3,8 +3,5 @@ default_target_quantity=2
 preciousness=1
 
 [idle]
-packed=true
-pics=hammer.png
-dimensions=9 10
-base_offset=0 0
+pics=idle.png
 hotspot=3 4

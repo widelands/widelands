@@ -7,8 +7,5 @@ default_target_quantity=25
 
 # Simply corn
 [idle]
-packed=true
-pics=corn.png
-dimensions=11 12
-base_offset=0 0
+pics=idle.png
 hotspot=6 11

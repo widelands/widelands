@@ -4,8 +4,5 @@ preciousness=1
 
 # A golden shield with the sign of the Atlanteans
 [idle]
-packed=true
-pics=advanced_shield.png
-dimensions=16 16
-base_offset=0 0
-hotspot=10 16
+pics=idle.png
+hotspot=10 17

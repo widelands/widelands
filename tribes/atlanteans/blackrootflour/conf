@@ -4,8 +4,5 @@ help=_Blackroot Flour is produced in mills out of blackroots. It is used in bake
 preciousness=2
 
 [idle]
-packed=true
-pics=blackrootflour.png
-dimensions=12 16
-base_offset=0 0
+pics=idle.png
 hotspot=4 15

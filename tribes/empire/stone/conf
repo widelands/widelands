@@ -6,8 +6,5 @@ preciousness=10
 # These stones will last for long time.
 
 [idle]
-packed=true
-pics=stone.png
-dimensions=15 15
-base_offset=0 0
+pics=idle.png
 hotspot=7 8

@@ -32,16 +32,9 @@ animate=working 30000
 produce=beer
 
 [idle]
-packed=true
-pics=brewery.png
-dimensions=97 86
-base_offset=0 0
+pics=brewery_i_??.png  # ???
 hotspot=39 62
 
 [working]
-packed=true
-pics=brewery.png
-dimensions=97 86
-base_offset=0 0
+pics=brewery_i_??.png  # ???
 hotspot=39 62
-

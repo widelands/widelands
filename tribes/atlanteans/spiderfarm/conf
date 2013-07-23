@@ -29,15 +29,11 @@ animate=working 30000
 produce=spideryarn
 
 [idle]
-packed=true
-pics=spiderfarm.png
-dimensions=128 101
-base_offset=0 0
+pics=spiderfarm_i_??.png  # ???
 hotspot=87 75
+playercolor=true
 
 [working]
-packed=true
-pics=spiderfarm.png
-dimensions=128 101
-base_offset=0 0
+pics=spiderfarm_i_??.png  # ???
 hotspot=87 75
+playercolor=true

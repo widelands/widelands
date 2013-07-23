@@ -18,8 +18,6 @@ planks=1
 stone=3
 
 [idle]
-packed=true
-pics=tower.png
-dimensions=78 82
-base_offset=0 0
+pics=tower_i_??.png
 hotspot=55 60
+playercolor=true

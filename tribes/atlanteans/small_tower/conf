@@ -15,8 +15,6 @@ planks=1
 stone=1
 
 [idle]
-packed=true
-pics=small_tower.png
-dimensions=66 80
-base_offset=0 0
+pics=small_tower_i_??.png
 hotspot=42 65
+playercolor=true

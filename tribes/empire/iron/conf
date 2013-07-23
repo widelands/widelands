@@ -4,8 +4,5 @@ default_target_quantity=20
 preciousness=4
 
 [idle]
-packed=true
-pics=iron.png
-dimensions=14 8
-base_offset=0 0
+pics=idle.png
 hotspot=5 8

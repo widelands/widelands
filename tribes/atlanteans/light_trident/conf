@@ -7,8 +7,5 @@ default_target_quantity=20
 
 # A simple trident
 [idle]
-packed=true
-pics=light_trident.png
-dimensions=16 16
-base_offset=0 0
+pics=idle.png
 hotspot=10 17

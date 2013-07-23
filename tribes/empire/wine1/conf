@@ -11,8 +11,5 @@ remove=
 remove=
 
 [idle]
-packed=true
-pics=wine1.png
-dimensions=21 26
-base_offset=0 0
+pics=wine1_??.png
 hotspot=15 18

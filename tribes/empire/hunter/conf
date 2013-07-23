@@ -16,14 +16,17 @@ hunting_spear=1
 [idle]
 pics=idle_??.png
 hotspot=10 21
+playercolor=true
 fps=10
 
 [walk]
 dirpics=walk_!!_??.png
 hotspot=9 32
+playercolor=true
 fps=10
 
 [walkload]
 dirpics=walkload_!!_??.png
 hotspot=9 32
+playercolor=true
 fps=10

@@ -22,17 +22,10 @@ work=_Work
 sleep=52500
 worker=release
 
-[build]
-packed=true
-pics=gamekeepers_hut.png
-dimensions=69 65
-base_offset=0 0
-hotspot=44 41
-
 [idle]
-packed=true
-pics=gamekeepers_hut.png
-dimensions=69 65
-base_offset=0 0
+pics=gamekeeper_i_??.png
 hotspot=44 41
 
+[build]
+pics=gamekeeper_i_??.png
+hotspot=44 41

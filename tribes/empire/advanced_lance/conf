@@ -4,8 +4,5 @@ help=_This is an advanced lance, with steel tip. It is produced in a weapon smit
 preciousness=1
 
 [idle]
-packed=true
-pics=advanced_lance.png
-dimensions=23 23
-base_offset=0 0
+pics=idle.png
 hotspot=7 10

@@ -11,8 +11,5 @@ remove=
 remove=
 
 [idle]
-packed=true
-pics=reed1.png
-dimensions=27 25
-base_offset=0 0
+pics=field1_??.png
 hotspot=13 18

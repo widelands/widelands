@@ -5,9 +5,5 @@ animate=idle 50000
 remove=
 
 [idle]
-packed=true
-pics=blackrootfield_harvested.png
-dimensions=56 34
-base_offset=0 0
+pics=blackrootfield_harvested_??.png
 hotspot=26 27
-

@@ -19,6 +19,7 @@ workers_order=carrier, ox, cattlebreeder; stonemason, lumberjack, ranger, builde
 name=frontier
 pics=pics/frontier_??.png
 hotspot=1 19
+playercolor=true
 
 
 [flag]
@@ -26,6 +27,7 @@ name=flag
 pics=pics/flag_??.png
 hotspot=10 38
 fps=5
+playercolor=true
 
 [compatibility_immovable]
 # For compatibility with build15 and earlier

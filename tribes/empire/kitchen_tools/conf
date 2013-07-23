@@ -1,8 +1,5 @@
 help=_How can one create a ration or meal if there are no kitchen tools? They are produced in a toolsmithy and used in taverns and inns.
 
 [idle]
-packed=true
-pics=kitchen_tools.png
-dimensions=16 18
-base_offset=0 0
+pics=idle.png
 hotspot=8 8

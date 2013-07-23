@@ -13,8 +13,6 @@ stone=1
 stone=1
 
 [idle]
-packed=true
-pics=guardhouse.png
-dimensions=60 44
-base_offset=0 0
+pics=guardhouse_i_??.png
 hotspot=33 41
+playercolor=true

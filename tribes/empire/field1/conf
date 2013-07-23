@@ -11,8 +11,5 @@ remove=
 transform=field2
 
 [idle]
-packed=true
-pics=field1.png
-dimensions=40 26
-base_offset=0 0
+pics=field1_??.png
 hotspot=15 12

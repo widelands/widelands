@@ -1,8 +1,5 @@
 help=_The scythe is the tool of the farmers. It is produced in the metalwork shop (but ceases to be produced by the building if it is enhanced to an axefactory and war mill).
 
 [idle]
-packed=true
-pics=scythe.png
-dimensions=15 11
-base_offset=0 0
+pics=idle.png
 hotspot=6 2

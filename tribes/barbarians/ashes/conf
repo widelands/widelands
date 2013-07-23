@@ -1,12 +1,10 @@
 program=program
+picture=ashes_00.png
 
 [program]
 animate=idle 45000
 remove=
 
 [idle]
-format = blits
-nrframes = 1
-spritemap = ashes
-0 = 0,0,84,51@-40,-39
-
+pics=ashes_??.png
+hotspot=40 39

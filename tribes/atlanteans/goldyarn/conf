@@ -5,8 +5,5 @@ default_target_quantity=5
 
 # Goldyarn
 [idle]
-packed=true
-pics=goldyarn.png
-dimensions=14 15
-base_offset=0 0
+pics=idle.png
 hotspot=9 16

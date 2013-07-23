@@ -3,8 +3,5 @@ help=_Meat contains a lot of energy. It is produced by the hunters and used in t
 preciousness=3
 
 [idle]
-packed=true
-pics=meat.png
-dimensions=11 10
-base_offset=0 0
+pics=meat_idle.png
 hotspot=5 6

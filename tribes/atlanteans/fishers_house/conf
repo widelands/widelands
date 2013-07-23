@@ -23,9 +23,6 @@ sleep=16000
 worker=fish
 
 [idle]
-packed=true
-pics=fishers_house.png
-dimensions=59 50
-base_offset=0 0
+pics=fisher_i_??.png  # ???
 hotspot=34 42
-
+playercolor=true

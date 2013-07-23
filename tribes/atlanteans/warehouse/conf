@@ -15,8 +15,6 @@ stone=1
 quartz=1
 
 [idle]
-packed=true
-pics=warehouse.png
-dimensions=100 88
-base_offset=0 0
+pics=warehouse_i_??.png  # ???
 hotspot=58 62
+playercolor=true

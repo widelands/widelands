@@ -5,8 +5,5 @@ preciousness=10
 # No description yet
 
 [idle]
-packed=true
-pics=blackroot.png
-dimensions=14 14
-base_offset=0 0
+pics=idle.png
 hotspot=9 15

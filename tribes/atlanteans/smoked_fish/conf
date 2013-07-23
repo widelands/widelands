@@ -4,8 +4,5 @@ preciousness=3
 default_target_quantity=30
 
 [idle]
-packed=true
-pics=smoked_fish.png
-dimensions=15 14
-base_offset=0 0
+pics=idle.png
 hotspot=9 16

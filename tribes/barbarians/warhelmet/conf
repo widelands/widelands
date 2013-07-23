@@ -2,8 +2,6 @@ help=_A warhelmet is an enhanced armour for barbarian warriors. It is produced i
 preciousness=2
 
 [idle]
-packed=true
-pics=warhelmet.png
-dimensions=15 14
-base_offset=0 0
+pics=idle.png
 hotspot=7 12
+playercolor=true

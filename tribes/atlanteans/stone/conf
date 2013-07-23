@@ -4,8 +4,5 @@ preciousness=5
 default_target_quantity=20
 
 [idle]
-packed=true
-pics=stone.png
-dimensions=15 15
-base_offset=0 0
+pics=idle.png
 hotspot=7 8

@@ -23,15 +23,11 @@ mine=water 1 100 65
 produce=water
 
 [idle]
-packed=true
-pics=well.png
-dimensions=56 49
-base_offset=0 0
+pics=well_i_??.png  # ???
 hotspot=31 32
+playercolor=true
 
 [working]
-packed=true
-pics=well.png
-dimensions=56 49
-base_offset=0 0
+pics=well_i_??.png  # ???
 hotspot=31 32
+playercolor=true

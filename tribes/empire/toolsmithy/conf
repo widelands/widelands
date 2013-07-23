@@ -160,16 +160,9 @@ call=produce_axe
 return=skipped
 
 [idle]
-packed=true
-pics=toolsmithy.png
-dimensions=100 91
-base_offset=0 0
+pics=toolsmith_i_??.png
 hotspot=58 61
 
 [working]
-packed=true
-pics=toolsmithy.png
-dimensions=100 91
-base_offset=0 0
+pics=toolsmith_i_??.png
 hotspot=58 61
-

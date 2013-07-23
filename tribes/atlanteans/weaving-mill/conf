@@ -51,8 +51,6 @@ call=produce_golden_tabard
 return=skipped
 
 [idle]
-packed=true
-pics=weaving-mill.png
-dimensions=128 85
-base_offset=0 0
+pics=weaving_mill_i_??.png  # ???
 hotspot=65 69
+playercolor=true

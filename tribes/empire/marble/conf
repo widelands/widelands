@@ -3,8 +3,5 @@ help=_Marble is the beautiful stone, which is cut out of the mountains or produc
 preciousness=3
 
 [idle]
-packed=true
-pics=marble.png
-dimensions=15 15
-base_offset=0 0
+pics=idle.png
 hotspot=10 18

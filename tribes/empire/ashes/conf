@@ -1,13 +1,10 @@
 program=program
+picture=ashes_00.png
 
 [program]
 animate=idle 45000
 remove=
 
 [idle]
-packed=true
-pics=ashes.png
-dimensions=84 51
-base_offset=0 0
+pics=ashes_??.png
 hotspot=40 39
-

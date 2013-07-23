@@ -4,8 +4,5 @@ default_target_quantity=15
 preciousness=2
 
 [idle]
-packed=true
-pics=beer.png
-dimensions=9 9
-base_offset=0 0
+pics=idle.png
 hotspot=5 9

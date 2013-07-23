@@ -1,8 +1,5 @@
 help=_Fishing rods are needed by fishers, to catch fish. Produced by the toolsmith.
 
 [idle]
-packed=true
-pics=fishing_rod.png
-dimensions=16 16
-base_offset=0 0
+pics=idle.png
 hotspot=4 5

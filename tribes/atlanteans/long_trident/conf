@@ -4,8 +4,5 @@ preciousness=1
 
 # A simple, but long trident.
 [idle]
-packed=true
-pics=long_trident.png
-dimensions=16 16
-base_offset=0 0
+pics=idle.png
 hotspot=10 17

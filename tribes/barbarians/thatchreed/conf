@@ -6,8 +6,5 @@ default_target_quantity=10
 # Reed is growing near by watersides.
 
 [idle]
-packed=true
-pics=thatchreed.png
-dimensions=7 12
-base_offset=0 0
+pics=idle.png
 hotspot=3 12

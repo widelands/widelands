@@ -1,15 +1,12 @@
 size=small
 program=program
+picture=blackrootfield_m_00.png
 
 [program]
 animate=midd 50000
 transform=blackrootfield_b
 
 [midd]
-packed=true
-pics=blackrootfield_m.png
-dimensions=56 34
-base_offset=0 0
+pics=blackrootfield_m_??.png
 fps=5
 hotspot=26 27
-

@@ -11,9 +11,5 @@ remove=
 transform=blackrootfield_harvested
 
 [idle]
-packed=true
-pics=blackrootfield_b.png
-dimensions=56 42
-base_offset=0 0
+pics=blackrootfield_b_??.png
 hotspot=26 35
-

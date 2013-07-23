@@ -16,6 +16,7 @@ buildable=no
 [idle]
 pics=stronghold_i_??.png
 hotspot=45 41
+playercolor=true
 fps=10
 
 #[build]

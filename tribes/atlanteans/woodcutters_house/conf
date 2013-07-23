@@ -24,8 +24,6 @@ sleep=30000 # Barbarian lumberjack sleeps 25000
 worker=harvest
 
 [idle]
-packed=true
-pics=woodcutter.png
-dimensions=58 60
-base_offset=0 0
+pics=woodcutter_i_??.png
 hotspot=37 44
+playercolor=true
