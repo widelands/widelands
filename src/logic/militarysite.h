@@ -60,7 +60,7 @@ class MilitarySite :
 
 public:
 	// I assume elsewhere, that enum SoldierPreference fits to uint8_t.
-	enum SoldierPreference {
+	enum SoldierPreference  : uint8_t {
 		kNoPreference,
 		kPrefersRookies,
 		kPrefersHeroes,
