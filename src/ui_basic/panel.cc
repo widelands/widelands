@@ -758,8 +758,9 @@ void Panel::focus()
 	// can't. but focus is called recursivly
 	// assert(get_can_focus());
 
-	if (!_parent || this == _modal)
+	if (!_parent || this == _modal) {
 		return;
+	}
 	if (_parent->_focus == this)
 		return;
 
@@ -947,9 +948,12 @@ void Panel::do_mousein(bool const inside)
  * Returns whether the event was processed.
  */
 bool Panel::do_mousepress(const Uint8 btn, int32_t x, int32_t y) {
-	if (not _g_allow_user_input)
+	if (not _g_allow_user_input) {
 		return true;
-
+	}
+	if (get_can_focus()) {
+		focus();
+	}
 	x -= _lborder;
 	y -= _tborder;
 	if (_flags & pf_top_on_click)
@@ -971,8 +975,10 @@ bool Panel::do_mousepress(const Uint8 btn, int32_t x, int32_t y) {
 			(Panel * child = _fchild;
 			 (child = child_at_mouse_cursor(x, y, child));
 			 child = child->_next)
-			if (child->do_mousepress(btn, x - child->_x, y - child->_y))
-				return true;
+			{
+				if (child->do_mousepress(btn, x - child->_x, y - child->_y))
+					return true;
+			}
 	return handle_mousepress(btn, x, y);
 }
 bool Panel::do_mouserelease(const Uint8 btn, int32_t x, int32_t y) {
