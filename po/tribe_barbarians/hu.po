@@ -7,13 +7,13 @@ msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2013-07-18 19:39+0000\n"
-"PO-Revision-Date: 2013-07-22 20:01+0000\n"
+"PO-Revision-Date: 2013-07-23 13:34+0000\n"
 "Last-Translator: István Kiss <kiemc@citromail.hu>\n"
 "Language-Team: Language <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-07-23 04:40+0000\n"
+"X-Launchpad-Export-Date: 2013-07-24 05:09+0000\n"
 "X-Generator: Launchpad (build 16700)\n"
 
 #: ../../tribes/barbarians/axefactory/help.lua:12
@@ -22,8 +22,8 @@ msgid ""
 "\"A new Warriors Axe brings forth the best in its wielder – or the worst in "
 "its maker.\""
 msgstr ""
-"\"Az új Harci Fejsze legjobbat hozza ki a forgatójából - vagy a "
-"legrosszabbat az ellenségből.\""
+"„Egy nagy harci fejsze a legjobbat hozza ki forgatójából – vagy a "
+"legrosszabbat készítőjéből.”"
 
 #: ../../tribes/barbarians/hunters_hut/help.lua:12
 msgid ""
@@ -43,7 +43,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/lime_kiln/help.lua:12
 msgid "\"Forming new stone from old with fire and water.\""
-msgstr "\"Alakíts új követ a régiből tűzzel és vízzel.\""
+msgstr "„Tűzzel és vízzel új követ csinálok a régiből.”"
 
 #: ../../tribes/barbarians/gamekeepers_hut/help.lua:12
 msgid ""
@@ -90,8 +90,8 @@ msgid ""
 "\"Let the first one drive away the hunger, the second one put you at ease; "
 "when you have swallowed up your third one, it's time for the next shift!\""
 msgstr ""
-"Először is üsd el éhséged, másodszorra nyugodtságot kapsz, hogy lenyelhesd "
-"harmadik lehetőséged, itt az idő a következő váltásra!\""
+"„Az első űzze el az éhséget, a második lazítson el, s ha legurult a harmadik "
+"is, mehet tovább a munka!”"
 
 #: ../../tribes/barbarians/battlearena/help.lua:12
 msgid ""
@@ -131,11 +131,11 @@ msgstr "\"A vadászat művészete\""
 
 #: ../../tribes/barbarians/fernery/help.lua:12
 msgid "\"We grow roofs\""
-msgstr "\"Tetőket emelünk\""
+msgstr "„Nálunk terem a tető”"
 
 #: ../../tribes/barbarians/metalworks/help.lua:12
 msgid "\"We make it work!\""
-msgstr "\"Megcsináljuk, működik!\""
+msgstr "„Megcsináljuk!”"
 
 #: ../../tribes/barbarians/fishers_hut/help.lua:12
 msgid "\"What do you mean, my fish ain't fresh?!\""
@@ -171,14 +171,14 @@ msgstr "%s és"
 #: ../../tribes/barbarians/granitemine/help.lua:27
 #: ../../tribes/barbarians/oremine/help.lua:27
 msgid "%s from a Big Inn"
-msgstr "%s a Nagy Fogadóból"
+msgstr "%s egy nagy fogadóból"
 
 #: ../../tribes/barbarians/coalmine/help.lua:26
 #: ../../tribes/barbarians/goldmine/help.lua:25
 #: ../../tribes/barbarians/granitemine/help.lua:25
 #: ../../tribes/barbarians/oremine/help.lua:25
 msgid "%s from a Tavern"
-msgstr "%s a Nagy Kocsmából"
+msgstr "%s egy kocsmából"
 
 #: ../../tribes/barbarians/coalmine/help.lua:27
 #: ../../tribes/barbarians/deep_coalmine/help.lua:26
@@ -188,23 +188,23 @@ msgstr "%s a Nagy Kocsmából"
 #: ../../tribes/barbarians/granitemine/help.lua:26
 #: ../../tribes/barbarians/oremine/help.lua:26
 msgid "%s from an Inn"
-msgstr "%s a Kocsmából"
+msgstr "%s egy fogadóból"
 
 #: ../../tribes/barbarians/axefactory/help.lua:26
 #: ../../tribes/barbarians/lime_kiln/help.lua:26
 msgid "%s from the Coal mine or the Charcoal Burner's House"
-msgstr "%s a Szénbányából vagy a Szénégetőtől"
+msgstr "%s a szénbányából vagy a faszénégetőből"
 
 #: ../../tribes/barbarians/metalworks/help.lua:26
 msgid "%s from the Lumberjack's hut"
-msgstr "%s a Favágó kunyhójából"
+msgstr "%s a favágókunyhóból"
 
 #: ../../tribes/barbarians/axefactory/help.lua:24
 #: ../../tribes/barbarians/metalworks/help.lua:25
 #: ../../tribes/barbarians/warmill/help.lua:24
 #: ../../tribes/barbarians/warmill/help.lua:25
 msgid "%s from the Smelting Works"
-msgstr "%s az Olvaasztóműhelyből"
+msgstr "%s a kohóból"
 
 #: ../../tribes/barbarians/rangers_hut/help.lua:14
 msgid "%s in a conversation with a %s"
@@ -265,7 +265,7 @@ msgstr "%s vagy jobb és"
 #: ../../tribes/barbarians/oremine/help.lua:49
 #: ../../tribes/barbarians/warmill/help.lua:62
 msgid "%s to %s (%s EP)"
-msgstr ""
+msgstr "%s --> %s (%s TP)"
 
 #: ../../tribes/barbarians/deeper_coalmine/help.lua:17
 #: ../../tribes/barbarians/deeper_goldmine/help.lua:16
@@ -282,6 +282,8 @@ msgid ""
 "A %s exploits only %s of the resource. <br> From there on, it will only have "
 "a 5%% chance of finding %s."
 msgstr ""
+"Egy %s az alatta lévő forrásnak csak %s részét hozza fel. <br> Azután már "
+"csak 5%% esélye van %s találására."
 
 #: ../../tribes/barbarians/deep_coalmine/help.lua:17
 #: ../../tribes/barbarians/deep_goldmine/help.lua:16
@@ -290,10 +292,12 @@ msgid ""
 "A %s exploits only %s of the resource.<br>From there on, it will only have a "
 "5%% chance of finding %s."
 msgstr ""
+"Egy %s az alatta lévő forrásnak csak %s részét hozza fel.<br>Azután már csak "
+"5%% esélye van %s találására."
 
 #: ../../tribes/barbarians/fernery/help.lua:47
 msgid "A Fernery can produce a sheaf of Thatch Reed in about %s on average."
-msgstr "A Nádarató egy köteg Szalmát %s daradot termel átlagosan."
+msgstr "A nádtermelőkertből átlagosan %s időközönként kerül ki egy kéve nád."
 
 #: ../../tribes/barbarians/snack/conf:1
 msgid ""
@@ -355,6 +359,10 @@ msgid ""
 "\t\t\tWood may serve for a household fire and to keep you warm, but when it "
 "comes to working with iron or gold, there is no way around coal."
 msgstr ""
+"A barbárok már réges-régen megtanultak behatolni a hegy oldalába azért a "
+"fekete anyagért, ami fűti kemencéiket. <br>\n"
+"\t\t\tA fa jó a házi tűzhelyre és meleget csinál, de ha vassal vagy arannyal "
+"kell dolgozni, semmi sem ér fel a szénhez."
 
 #: ../../tribes/barbarians/axefactory/help.lua:64
 msgid ""
@@ -367,12 +375,16 @@ msgid ""
 "All weapons require the same time for making, but the consumption of the "
 "same raw materials increases from step to step. The last two need gold."
 msgstr ""
+"Minden fegyver ugyanannyi idő alatt készül el, de egy adott nyersanyag "
+"felhasználása lépésről lépésre nő. Az utolsó két fegyverhez arany is kell."
 
 #: ../../tribes/barbarians/oremine/help.lua:16
 msgid ""
 "An %s exploits only %s of the resource. <br> From there on, it will only "
 "have a 5%% chance of finding %s."
 msgstr ""
+"Egy %s az alatta lévő forrásnak csak %s részét hozza fel. <br> Azután már "
+"csak 5%% esélye van %s találására."
 
 #: ../../tribes/barbarians/axefactory/help.lua:13
 #: ../../tribes/barbarians/warmill/help.lua:13
@@ -380,6 +392,8 @@ msgid ""
 "An old Barbarian proverb<br> meaning that you need to take some risks "
 "sometimes."
 msgstr ""
+"Régi barbár mondás,<br> mely azt jelenti, hogy néha vállalnunk kell egy kis "
+"kockázatot."
 
 #: ../../tribes/barbarians/conf:41
 msgid "Ashes"
@@ -409,7 +423,7 @@ msgstr "Fejszekovácsműhely"
 
 #: ../../tribes/barbarians/bakery/help.lua:16
 msgid "Bake Pitta Bread for Soldiers and Miners alike."
-msgstr ""
+msgstr "Pitát süt a katonáknak és a bányászoknak."
 
 #: ../../tribes/barbarians/bakery/help.lua:50
 #: ../../tribes/barbarians/conf:122
@@ -755,7 +769,7 @@ msgstr "Szén"
 
 #: ../../tribes/barbarians/warmill/help.lua:27
 msgid "Coal from the Coal mine or the Charcoal Burner's House"
-msgstr ""
+msgstr "Szén a szénbányából vagy a faszénégetőből"
 
 #: ../../tribes/barbarians/coalmine/help.lua:17
 #: ../../tribes/barbarians/conf:212
@@ -816,7 +830,7 @@ msgstr "Építési terület"
 #: ../../tribes/barbarians/deeper_oremine/help.lua:37
 #: ../../tribes/barbarians/warmill/help.lua:42
 msgid "Cost cumulative:"
-msgstr ""
+msgstr "Az összes felhasznált anyag:"
 
 #: ../../tribes/barbarians/axefactory/help.lua:55
 #: ../../tribes/barbarians/bakery/help.lua:49
@@ -945,7 +959,7 @@ msgstr "Lerombolt épület"
 #: ../../tribes/barbarians/goldmine/help.lua:18
 #: ../../tribes/barbarians/oremine/help.lua:18
 msgid "Dig %s out of the ground in mountain terrain."
-msgstr ""
+msgstr "%s bányászása a kőzetből, hegyi területen."
 
 #: ../../tribes/barbarians/geologist/conf:1
 msgid "Discovers resources for mining."
@@ -1403,6 +1417,8 @@ msgid ""
 "If all needed wares are delivered in time, this building can produce %s in "
 "about %s on average."
 msgstr ""
+"Ha minden szükséges áru időben szállítva van, %s átlagosan %s alatt készül "
+"ebben az épületben."
 
 #: ../../tribes/barbarians/coalmine/help.lua:56
 #: ../../tribes/barbarians/deep_coalmine/help.lua:59
@@ -1417,6 +1433,8 @@ msgstr ""
 msgid ""
 "If the food supply is steady, this mine can produce %s in %s on average."
 msgstr ""
+"Ha egyenletes az élelemellátás, akkor %s átlagosan %s időközönként kerül ki "
+"ebből a bányából."
 
 #: ../../tribes/barbarians/axefactory/help.lua:23
 #: ../../tribes/barbarians/bakery/help.lua:22
@@ -1465,6 +1483,8 @@ msgid ""
 "Inscription on the threshold of the now ruined Olde Forge at Harradsheim, "
 "the eldest known smithy."
 msgstr ""
+"Bevésett felirat az immár elpusztult Vén Tűzhely, a legrégibb ismert "
+"kovácsműhely küszöbén, Harradsheimben."
 
 #: ../../tribes/barbarians/axefactory/help.lua:24
 #: ../../tribes/barbarians/conf:92
@@ -1518,13 +1538,15 @@ msgstr ""
 
 #: ../../tribes/barbarians/axefactory/help.lua:17
 msgid "It can make Axes, Sharp Axes and Broad Axes."
-msgstr ""
+msgstr "Itt készül a fejsze, az éles fejsze és a nagy fejsze."
 
 #: ../../tribes/barbarians/metalworks/help.lua:18
 msgid ""
 "It can make Bread Paddles, Felling Axes, Fire Tongs, Fishing Rods, Hammers, "
 "Hunting Spears, Kitchen Tools, Picks, Scythes and Shovels."
 msgstr ""
+"Itt készülnek a péklapátok, favágóbalták, tűzifogók, horgászbotok, "
+"kalapácsok, vadászlándzsák, konyhai eszközök, csákányok, kaszák és lapátok."
 
 #: ../../tribes/barbarians/granitemine/help.lua:16
 msgid "It can not be upgraded."
@@ -2045,6 +2067,8 @@ msgid ""
 "Ragnald the Child's answer to the question, what he's doing in the dirt. His "
 "\"new stone\" now is an important building material."
 msgstr ""
+"– válaszolta a kis Ragnald, mikor megkérdezték, mit csinál a homokban. Az ő "
+"„új köve” immár egy fontos építőanyag."
 
 #: ../../tribes/barbarians/conf:142
 #: ../../tribes/barbarians/metalworks/help.lua:41
@@ -2139,7 +2163,7 @@ msgstr "Kő"
 
 #: ../../tribes/barbarians/lime_kiln/help.lua:24
 msgid "Raw Stone from the Granite Mine or Quarry"
-msgstr ""
+msgstr "Nyerskő a gránitbányából vagy a kőfejtőből"
 
 #: ../../tribes/barbarians/raw_stone/conf:1
 msgid ""
@@ -2281,7 +2305,7 @@ msgstr "Felfüggesztve"
 
 #: ../../tribes/barbarians/fernery/help.lua:13
 msgid "Slogan of the Guild of Ferners"
-msgstr ""
+msgstr "A nádtermelők céhének jelmondata"
 
 #: ../../tribes/barbarians/conf:165
 msgid "Small Tower"
@@ -2493,6 +2517,9 @@ msgid ""
 "three buildings. It is an upgrade from the Metalwork Shop but doesn't "
 "require additional qualification for the worker."
 msgstr ""
+"A barbár fejszekovácsműhely három épület sorozatának középső tagja. "
+"Továbbfejlesztése a szerszámkovácsműhelynek, de nem igényel jobb minősítésű "
+"munkást."
 
 #: ../../tribes/barbarians/bakery/help.lua:8
 msgid "The Barbarian Bakery"
@@ -2584,6 +2611,9 @@ msgid ""
 "three buildings and creates all the tools that Barbarians need. The others "
 "are for weapons."
 msgstr ""
+"A barbár szerszámkovácsműhely három épület sorozatának legalsó eleme, itt "
+"készül minden szerszám, amire a barbároknak szüksége lehet. A további "
+"épületekben fegyverek készülnek."
 
 #: ../../tribes/barbarians/micro-brewery/help.lua:8
 msgid "The Barbarian Micro Brewery"
@@ -2610,6 +2640,8 @@ msgid ""
 "The Barbarian War Mill is their most advanced production site for weapons. "
 "As such it needs to be upgraded from an Axefactory."
 msgstr ""
+"A fegyverkovácsműhely a barbárok legfejlettebb fegyvergyártó helye. Mint "
+"ilyen, a fejszekovácsműhelyből fejlesztendő tovább."
 
 #: ../../tribes/barbarians/well/help.lua:8
 msgid "The Barbarian Well"
@@ -2625,10 +2657,15 @@ msgid ""
 "Barbarian tribe.<br>It is the traditional material for roofing, and it is "
 "woven into the extremely durable cloth that they use for their ship's sails."
 msgstr ""
+"A nádtermelőkertben aratják a nádat, amit két dologra használnak a barbár "
+"törzsek.<br>Ez a hagyományos tetőfedőanyag, illetve ebből készítenek "
+"rendkívül erős szövetet, mely hajóik vitorláiul szólgál."
 
 #: ../../tribes/barbarians/fernery/help.lua:26
 msgid "The Fernery's output will only go to construction sites that need it."
 msgstr ""
+"A nádtermelőkert termékéből csak olyan építési területekre kerül, ahol "
+"szükség van rá."
 
 #: ../../tribes/barbarians/fishers_hut/help.lua:23
 msgid "The Fisher's Hut needs water full of fish in the vicinity."
@@ -2654,12 +2691,17 @@ msgid ""
 "The Limekiln processes Raw Stones to make \"Grout\", a substance that "
 "solidifies and so reinforces masonry."
 msgstr ""
+"A mészégetőben a nyerskőből cement készül, mely anyag szilárdítja, "
+"megerősíti a falazást."
 
 #: ../../tribes/barbarians/lime_kiln/help.lua:32
 msgid ""
 "The Limekiln's output will only go to construction sites that need it. Those "
 "are predominantly houses that work with fire, and some military sites."
 msgstr ""
+"A szénégető termékéből csak olyan építési területekre kerül, ahol szükség "
+"van rá. Ezek elsősorban az olyan házak, ahol tűzzel dolgoznak, illetve egyes "
+"katonai épületek."
 
 #: ../../tribes/barbarians/lumberjacks_hut/help.lua:48
 msgid ""
@@ -2680,6 +2722,8 @@ msgid ""
 "component of the Snacks that Inns and Big Inns prepare for Miners in Deep "
 "Mines."
 msgstr ""
+"A kis sörfőzdében gyengébb sör készül. Ez alapeleme az uzsonnának, amit a "
+"fogadóban vagy a nagy fogadóban készítenek a mély bányák munkásai számára."
 
 #: ../../tribes/barbarians/quarry/help.lua:23
 msgid "The Quarry needs stones in the vicinity."
@@ -2969,7 +3013,7 @@ msgstr ""
 #: ../../tribes/barbarians/axefactory/help.lua:34
 #: ../../tribes/barbarians/warmill/help.lua:36
 msgid "Upgrade Cost:"
-msgstr ""
+msgstr "A továbbfejlesztés költsége:"
 
 #: ../../tribes/barbarians/deep_coalmine/help.lua:39
 #: ../../tribes/barbarians/deep_goldmine/help.lua:35
@@ -2978,7 +3022,7 @@ msgstr ""
 #: ../../tribes/barbarians/deeper_goldmine/help.lua:34
 #: ../../tribes/barbarians/deeper_oremine/help.lua:34
 msgid "Upgrade cost:"
-msgstr ""
+msgstr "A továbbfejlesztés költsége:"
 
 #: ../../tribes/barbarians/trainingscamp/conf:38
 msgid "Upgrade soldier attack 0"
@@ -3225,7 +3269,7 @@ msgstr ""
 #: ../../tribes/barbarians/cattlefarm/help.lua:24
 #: ../../tribes/barbarians/micro-brewery/help.lua:23
 msgid "Water from the Well"
-msgstr ""
+msgstr "Víz a kútból"
 
 #: ../../tribes/barbarians/water/conf:1
 msgid ""
@@ -3256,7 +3300,7 @@ msgstr "Búza"
 #: ../../tribes/barbarians/cattlefarm/help.lua:23
 #: ../../tribes/barbarians/micro-brewery/help.lua:24
 msgid "Wheat from the Farm"
-msgstr ""
+msgstr "Búza a farmról"
 
 #: ../../tribes/barbarians/wheat/conf:1
 msgid ""
@@ -3267,7 +3311,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/micro-brewery/help.lua:13
 msgid "Widespread toast among Miners"
-msgstr ""
+msgstr "A bányászok egy közkeletű pohárköszöntője"
 
 #: ../../tribes/barbarians/conf:66
 msgid "Wildboar"
@@ -3440,7 +3484,7 @@ msgstr ""
 #: ../../tribes/barbarians/metalworks/help.lua:70
 #: ../../tribes/barbarians/warmill/help.lua:65
 msgid "each item"
-msgstr ""
+msgstr "egy termék"
 
 #: ../../tribes/barbarians/metalworks/help.lua:46
 msgid "n/a"

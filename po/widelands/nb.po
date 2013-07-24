@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2013-07-18 21:39+0200\n"
-"PO-Revision-Date: 2013-07-20 17:56+0000\n"
+"PO-Revision-Date: 2013-07-23 20:01+0000\n"
 "Last-Translator: Hans Joachim Desserud <Unknown>\n"
 "Language-Team: Norwegian Bokmal <nb@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2013-07-22 05:11+0000\n"
-"X-Generator: Launchpad (build 16696)\n"
+"X-Launchpad-Export-Date: 2013-07-24 05:09+0000\n"
+"X-Generator: Launchpad (build 16700)\n"
 
 #: ../../src/computer_player.cc:38
 msgid "None"
@@ -1753,6 +1753,7 @@ msgid ""
 "should mine resource %s, which does not exist in world; tribe is not "
 "compatible with world"
 msgstr ""
+"burde grave etter %s, som ikke finnes i verden; stamme passer ikke med verden"
 
 #: ../../src/logic/worker.cc:210
 #, c-format
@@ -1760,6 +1761,7 @@ msgid ""
 "should breed resource type %s, which does not exist in world; tribe is not "
 "compatible with world"
 msgstr ""
+"burde ale opp %s, som ikke finnes i verden; stamme passer ikke med verden"
 
 #: ../../src/logic/worker.cc:599
 msgid "Out of "
@@ -1906,7 +1908,7 @@ msgstr "varhus: %s"
 #: ../../src/map_io/widelands_map_buildingdata_data_packet.cc:827
 #, c-format
 msgid "militarysite: %s"
-msgstr "militært sted: %s"
+msgstr "militærområde: %s"
 
 #: ../../src/map_io/widelands_map_buildingdata_data_packet.cc:984
 #, c-format
@@ -1916,7 +1918,7 @@ msgstr "program %s ble hoppet over ved tid %u, men tid er bare %u"
 #: ../../src/map_io/widelands_map_buildingdata_data_packet.cc:1202
 #, c-format
 msgid "trainingsite: %s"
-msgstr "treningsted: %s"
+msgstr "treningsområde: %s"
 
 #: ../../src/map_io/widelands_map_elemental_data_packet.cc:71
 #, c-format
@@ -1936,7 +1938,7 @@ msgstr "ekstradata: %s"
 #: ../../src/map_io/widelands_map_flag_data_packet.cc:66
 #, c-format
 msgid "the node is owned by player %u"
-msgstr "noden er eid av spiler %u"
+msgstr "noden er eid av spiller %u"
 
 #: ../../src/map_io/widelands_map_flag_data_packet.cc:80
 #, c-format
@@ -2149,7 +2151,7 @@ msgstr "Problem ved tilkobling"
 
 #: ../../src/network/internet_gaming.cc:116
 msgid "Widelands has not been able to connect to the metaserver."
-msgstr ""
+msgstr "Widelands kunne ikke koble til metatjeneren."
 
 #: ../../src/network/internet_gaming.cc:122 ../../src/network/netclient.cc:105
 msgid "Could not establish connection to host"
@@ -2161,10 +2163,13 @@ msgid ""
 "Either there was no metaserver running at the supposed port or\n"
 "your network setup is broken."
 msgstr ""
+"Widelands kunne ikke koble til den oppgitte adressen.\n"
+"Enten er det ingen metatjener som kjører på den forventede porten eller så\n"
+"er det et problem i nettverksoppsettet."
 
 #: ../../src/network/internet_gaming.cc:171
 msgid "For hosting a game, please take a look at the notes at:"
-msgstr ""
+msgstr "For å være spillvert, ta en titt på notatene på:"
 
 #: ../../src/network/internet_gaming.cc:302
 msgid "Something went wrong: "
@@ -2172,11 +2177,11 @@ msgstr "Noe gikk galt: "
 
 #: ../../src/network/internet_gaming.cc:392
 msgid "Successfully reconnected to the metaserver!"
-msgstr ""
+msgstr "Klarte å koble til metatjeneren igjen!"
 
 #: ../../src/network/internet_gaming.cc:399
 msgid "Mixed up"
-msgstr ""
+msgstr "Forvirret"
 
 #: ../../src/network/internet_gaming.cc:399
 msgid "The metaserver sent a strange ERROR during connection"
@@ -2184,7 +2189,7 @@ msgstr ""
 
 #: ../../src/network/internet_gaming.cc:410
 msgid "Unexpected packet"
-msgstr ""
+msgstr "Uventet pakke"
 
 #: ../../src/network/internet_gaming.cc:412
 #, c-format
@@ -2206,7 +2211,7 @@ msgstr ""
 
 #: ../../src/network/internet_gaming.cc:454
 msgid "Invalid message type"
-msgstr ""
+msgstr "Ugyldig meldingstype"
 
 #: ../../src/network/internet_gaming.cc:454
 #, c-format
@@ -2223,11 +2228,11 @@ msgstr ""
 
 #: ../../src/network/internet_gaming.cc:560
 msgid "Received an unknown command from the metaserver: "
-msgstr ""
+msgstr "Mottok en ukjent kommando fra metatjeneren: "
 
 #: ../../src/network/internet_gaming.cc:692
 msgid "Message could not be sent: You are not connected to the metaserver!"
-msgstr ""
+msgstr "Melding kunne ikke sendes: du er ikke koblet til metatjeneren!"
 
 #: ../../src/network/internet_gaming.cc:704
 msgid "Message could not be sent: Was this supposed to be a private message?"
@@ -2235,12 +2240,12 @@ msgstr ""
 
 #: ../../src/network/internet_gaming.cc:787
 msgid "Conversion error"
-msgstr ""
+msgstr "Konverteringsfeil"
 
 #: ../../src/network/internet_gaming.cc:788
 #, c-format
 msgid "Conversion from std::string to bool failed. String was \"%s\""
-msgstr ""
+msgstr "Konvertering fra std::string til bool feilet. Strengen var «%s»"
 
 #: ../../src/network/internet_gaming.cc:803
 msgid "<unknown>"
@@ -2272,11 +2277,11 @@ msgstr ""
 
 #: ../../src/network/internet_gaming_messages.cc:50
 msgid "You got disconnected, as the metaserver is currently restarting."
-msgstr ""
+msgstr "Du ble frakoblet siden metatjeneren starter på nytt."
 
 #: ../../src/network/internet_gaming_messages.cc:52
 msgid "Connection was closed by the client normally."
-msgstr ""
+msgstr "Tilkobling ble lukket av klienten på vanlig vis."
 
 #: ../../src/network/internet_gaming_messages.cc:53
 msgid "The connection to the metaserver was lost."
@@ -2284,7 +2289,7 @@ msgstr ""
 
 #: ../../src/network/internet_gaming_messages.cc:54
 msgid "Metaserver did not answer"
-msgstr ""
+msgstr "Metatjeneren svarte ikke"
 
 #: ../../src/network/internet_gaming_messages.cc:55
 msgid "Your game is not connectable from the internet"
