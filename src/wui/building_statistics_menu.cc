@@ -58,7 +58,7 @@
 #define UNPRODUCTIVE_Y       (IN_BUILD_Y           + 24)
 #define FLAG_POINT           Point(125, WINDOW_HEIGHT - 8)
 
-#define LOW_PROD 25
+#define LOW_PROD 33
 
 #define UPDATE_TIME 1000  //  1 second, gametime
 
