@@ -26,8 +26,7 @@ return {
 		broadcast_lost(plrs,
 				wc_name,
 				"Bravo!",
-				{popup = true},
-				wc_name, wc_version
+				{}, wc_name, wc_version
 		)
 
 	end,

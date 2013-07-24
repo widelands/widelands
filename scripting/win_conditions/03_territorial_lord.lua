@@ -162,9 +162,9 @@ return {
 			for idx, p in ipairs(plrs) do
 				if candidateisteam and currentcandidate == p.team
 					or not candidateisteam and currentcandidate == p.name then
-					p:send_message(game_status.title, msg2, {popup = true})
+					p:send_message(game_status.title, msg2)
 				else
-					p:send_message(game_status.title, msg1, {popup = true})
+					p:send_message(game_status.title, msg1)
 				end
 			end
 		end
@@ -189,10 +189,10 @@ return {
 					p.see_all = 1
 					if candidateisteam and currentcandidate == p.team
 						or not candidateisteam and currentcandidate == p.name then
-						p:send_message(won_game_over.title, won_game_over.body, {popup = true})
+						p:send_message(won_game_over.title, won_game_over.body)
 						wl.game.report_result(p, true, _landsizes[p.number], make_extra_data(p, wc_name, wc_version))
 					else
-						p:send_message(lost_game_over.title, lost_game_over.body, {popup = true})
+						p:send_message(lost_game_over.title, lost_game_over.body)
 						wl.game.report_result(p, false, _landsizes[p.number], make_extra_data(p, wc_name, wc_version))
 					end
 				end

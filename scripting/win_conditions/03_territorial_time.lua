@@ -258,10 +258,10 @@ return {
 			for i=1,#points do
 				if points[i][1] == game_status_territoral_lord.team:format(p.team) or points[i][1] == p.name then
 					if points[i][2] >= maxpoints then
-						p:send_message(won_game_over.title, wonmsg .. _status(points, "had"), {popup = true})
+						p:send_message(won_game_over.title, wonmsg .. _status(points, "had"))
 						wl.game.report_result(p, true, _landsizes[p.number], make_extra_data(p, wc_name, wc_version))
 					else
-						p:send_message(lost_game_over.title, lostmsg .. _status(points, "had"), {popup = true})
+						p:send_message(lost_game_over.title, lostmsg .. _status(points, "had"))
 						wl.game.report_result(p, false, _landsizes[p.number], make_extra_data(p, wc_name, wc_version))
 					end
 				end
