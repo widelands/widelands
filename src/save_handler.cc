@@ -71,8 +71,10 @@ void SaveHandler::think(Widelands::Game & game, int32_t realtime) {
 
 	// TODO: defer saving to next tick so that this message is shown
 	// before the actual save, or put the saving logic in another thread
-	game.get_ipl()->get_chat_provider()->send_local
-		(_("Saving game..."));
+	if (game.get_igbase()) {
+		game.get_igbase()->get_chat_provider()->send_local
+			(_("Saving game..."));
+	}
 
 	// save the game
 	const std::string complete_filename = create_file_name(get_base_dir(), filename);
@@ -111,8 +113,10 @@ void SaveHandler::think(Widelands::Game & game, int32_t realtime) {
 	}
 
 	log("Autosave: save took %d ms\n", m_last_saved_time - realtime);
-	game.get_ipl()->get_chat_provider()->send_local
-		(_("Game saved"));
+	if (game.get_igbase()) {
+		game.get_igbase()->get_chat_provider()->send_local
+			(_("Game saved"));
+	}
 }
 
 /**

@@ -169,13 +169,22 @@ bool Game::get_allow_cheats()
 /**
  * \return a pointer to the \ref Interactive_Player if any.
  * \note This function may return 0 (in particular, it will return 0 during
- * playback)
+ * playback or if player is spectator)
  */
 Interactive_Player * Game::get_ipl()
 {
 	return dynamic_cast<Interactive_Player *>(get_ibase());
 }
 
+/**
+ * \return a pointer to the \ref Interactive_GameBase if any.
+ * \note This function may return 0 (in particular, it will return 0 during
+ * playback)
+ */
+Interactive_GameBase * Game::get_igbase()
+{
+	return dynamic_cast<Interactive_GameBase *>(get_ibase());
+}
 
 void Game::set_game_controller(GameController * const ctrl)
 {
@@ -1195,8 +1204,8 @@ void Game::add_player_end_status(const PlayerEndStatus status)
 		return;
 	}
 
-	if (upcast(Interactive_GameBase, igbase, get_ibase())) {
-		igbase->show_game_summary();
+	if (get_igbase()) {
+		get_igbase()->show_game_summary();
 	}
 }
 

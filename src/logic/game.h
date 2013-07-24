@@ -174,6 +174,7 @@ struct Game : Editor_Game_Base {
 	void send_player_ship_explore_island(Ship &, bool);
 
 	Interactive_Player * get_ipl();
+	Interactive_GameBase * get_igbase();
 
 	SaveHandler & save_handler() {return m_savehandler;}
 
