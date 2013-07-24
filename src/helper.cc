@@ -19,6 +19,7 @@
 
 #include <cstdarg>
 #include <string>
+#include <memory>
 
 #include <boost/random.hpp>
 
