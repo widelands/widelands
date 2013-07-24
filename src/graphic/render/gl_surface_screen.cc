@@ -72,7 +72,7 @@ void GLSurfaceScreen::unlock(Surface::UnlockMode mode)
 		glDrawPixels(m_w, m_h, GL_RGBA, GL_UNSIGNED_BYTE, m_pixels.get());
 	}
 
-	m_pixels.reset(0);
+	m_pixels.reset(nullptr);
 }
 
 uint16_t GLSurfaceScreen::get_pitch() const {
