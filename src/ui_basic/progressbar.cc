@@ -81,10 +81,10 @@ void Progress_Bar::draw(RenderTarget & dst)
 	assert(0 <= fraction);
 	assert     (fraction <= 1);
 
-	const RGBColor color = fraction <= 0.15 ?
+	const RGBColor color = fraction <= 0.33 ?
 		RGBColor(255, 0, 0)
 		:
-		fraction <= 0.5 ? RGBColor(255, 255, 0) : RGBColor(0, 255, 0);
+		fraction <= 0.67 ? RGBColor(255, 255, 0) : RGBColor(0, 255, 0);
 
 	// Draw the actual bar
 	if (m_orientation == Horizontal)
