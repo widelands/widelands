@@ -501,7 +501,7 @@ struct HostChatProvider : public ChatProvider {
 		ChatMessage c;
 		c.time = time(0);
 		c.msg = msg;
-		ChatProvider::send(c);
+		receive(c);
 	}
 
 	const std::vector<ChatMessage> & getMessages() const {
