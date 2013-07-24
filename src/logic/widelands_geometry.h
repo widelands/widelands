@@ -20,8 +20,6 @@
 #ifndef WIDELANDS_GEOMETRY_H
 #define WIDELANDS_GEOMETRY_H
 
-#include "compile_assert.h"
-
 #include <cmath>
 #include <stdint.h>
 
@@ -82,7 +80,7 @@ struct Coords {
 
 	union {struct {X_Coordinate x; Y_Coordinate y;}; uint32_t all;};
 };
-compile_assert(sizeof(Coords) == 4);
+static_assert(sizeof(Coords) == 4, "assert(sizeof(Coords) == 4) failed.");
 
 template <typename _Coords_type = Coords, typename _Radius_type = uint16_t>
 struct Area : public _Coords_type

@@ -44,7 +44,7 @@ int32_t Editor_Place_Bob_Tool::handle_click_impl
 		 (map.get_fcoords(center.node), args.sel_radius));
 		do {
 			Bob * const mbob = mr.location().field->get_first_bob();
-			args.obob_type.push_back((mbob ? &mbob->descr() : NULL));
+			args.obob_type.push_back((mbob ? &mbob->descr() : nullptr));
 			args.nbob_type.push_back(map.world().get_bob_descr(get_random_enabled()));
 		} while (mr.advance(map));
 	}

@@ -61,7 +61,7 @@ throw (_wexception)
 				snprintf(buffer, sizeof(buffer), "player_%u", p);
 				try {
 					Section* s = prof.get_section(buffer);
-					if (s == NULL)
+					if (s == nullptr)
 						continue;
 
 					for (Ware_Index w = Ware_Index::First(); w < tribe.get_nrworkers(); ++w) {

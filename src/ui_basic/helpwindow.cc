@@ -195,7 +195,7 @@ LuaTextHelpWindow::LuaTextHelpWindow
 	LuaInterface * li = create_LuaInterface();
 
 	try {
-		boost::shared_ptr<LuaTable> t = li->run_script(*g_fs, path_to_script, "help");
+		std::unique_ptr<LuaTable> t = li->run_script(*g_fs, path_to_script, "help");
 		textarea->set_text(t->get_string("text"));
 	} catch (LuaError & err) {
 		textarea->set_text(err.what());

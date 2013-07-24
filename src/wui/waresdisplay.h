@@ -51,27 +51,18 @@ public:
 		 const Widelands::Tribe_Descr &,
 		 Widelands::WareWorker type,
 		 bool selectable,
-		 boost::function<void(Widelands::Ware_Index, bool)> callback_function = NULL,
-		 bool horizontal = true);
+		 boost::function<void(Widelands::Ware_Index, bool)> callback_function = 0,
+		 bool horizontal = false);
 
 	bool handle_mousemove
 		(uint8_t state, int32_t x, int32_t y, int32_t xdiff, int32_t ydiff);
-
 	bool handle_mousepress(uint8_t btn, int32_t x, int32_t y);
-
+	bool handle_mouserelease(Uint8 btn, int32_t x, int32_t y);
 
 	// Wares may be selected (highlighted)
 	void select_ware(Widelands::Ware_Index);
 	void unselect_ware(Widelands::Ware_Index);
 	bool ware_selected(Widelands::Ware_Index);
-	void toggle_ware(Widelands::Ware_Index ware) {
-		if (ware_selected(ware))
-			unselect_ware(ware);
-		else
-			select_ware(ware);
-		if (m_callback_function)
-			m_callback_function(ware, ware_selected(ware));
-	}
 
 	// Wares may be hidden
 	void hide_ware(Widelands::Ware_Index);
@@ -100,13 +91,31 @@ private:
 	typedef std::vector<const Widelands::WareList *> vector_type;
 	typedef std::vector<bool> selection_type;
 
+	/**
+	 * Update the anchored selection. When first mouse button is
+	 * pressed on a ware, it is stored in @ref m_selection_anchor.
+	 * Mouse moves trigger this function to select all wares items
+	 * in the rectangle between the anchor and the mouse position.
+	 * They are temporary stored in @ref m_in_selection.
+	 * Releasing the mouse button will performs the selection.
+	 * This allows selection of multiple wares by dragging.
+	 */
+	void update_anchor_selection(int32_t x, int32_t y);
+
 	const Widelands::Tribe_Descr & m_tribe;
 	Widelands::WareWorker m_type;
 	UI::Textarea        m_curware;
 	selection_type      m_selected;
 	selection_type      m_hidden;
+	selection_type      m_in_selection;  //Wares in temporary anchored selection
 	bool                m_selectable;
 	bool                m_horizontal;
+
+	/**
+	 * The ware on which the mouse press has been performed.
+	 * It is not selected directly, but will be on mouse release.
+	 */
+	Widelands::Ware_Index m_selection_anchor;
 	boost::function<void(Widelands::Ware_Index, bool)> m_callback_function;
 };
 

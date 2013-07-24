@@ -8,6 +8,11 @@ trunk=3
 stone=4
 planks=2
 
+[return_on_dismantle]
+trunk=1
+stone=3
+planks=1
+
 [working positions]
 weaver=1
 

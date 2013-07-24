@@ -19,8 +19,6 @@
 #ifndef GL_SURFACE_SCREEN_H
 #define GL_SURFACE_SCREEN_H
 
-#include <boost/scoped_array.hpp>
-
 #include "gl_surface.h"
 
 /**

@@ -21,6 +21,7 @@
 #define MAP_H
 
 #include <cstring>
+#include <memory>
 #include <set>
 #include <string>
 #include <vector>
@@ -34,8 +35,6 @@
 #include "interval.h"
 #include "manager.h"
 #include "notification.h"
-
-#include <boost/scoped_ptr.hpp>
 
 #include "random.h"
 
@@ -223,6 +222,9 @@ struct Map :
 	void set_scenario_player_ai       (Player_Number, const std::string &);
 	void set_scenario_player_closeable(Player_Number, bool);
 
+	/// \returns the maximum theoretical possible nodecaps (no blocking bobs, etc.)
+	NodeCaps get_max_nodecaps(FCoords &);
+
 	BaseImmovable * get_immovable(Coords) const;
 	uint32_t find_bobs
 		(const Area<FCoords>,
@@ -394,7 +396,7 @@ private:
 
 	Overlay_Manager * m_overlay_manager;
 
-	boost::scoped_ptr<PathfieldManager> m_pathfieldmgr;
+	std::unique_ptr<PathfieldManager> m_pathfieldmgr;
 	std::vector<std::string> m_scenario_tribes;
 	std::vector<std::string> m_scenario_names;
 	std::vector<std::string> m_scenario_ais;
@@ -420,8 +422,12 @@ private:
 	void recalc_brightness(FCoords);
 	void recalc_nodecaps_pass1(FCoords);
 	void recalc_nodecaps_pass2(const FCoords & f);
+	NodeCaps _calc_nodecaps_pass1(FCoords, bool consider_mobs = true);
+	NodeCaps _calc_nodecaps_pass2(FCoords, bool consider_mobs = true, NodeCaps initcaps = CAPS_NONE);
 	void check_neighbour_heights(FCoords, uint32_t & radius);
-	int calc_buildsize(const Widelands::FCoords& f, bool avoidnature, bool* ismine = 0);
+	int calc_buildsize
+		(const Widelands::FCoords& f, bool avoidnature, bool * ismine = 0,
+		 bool consider_mobs = true, NodeCaps initcaps = CAPS_NONE);
 	bool is_cycle_connected
 		(const FCoords & start, uint32_t length, const WalkingDir * dirs);
 

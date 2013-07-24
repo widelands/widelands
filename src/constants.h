@@ -41,9 +41,9 @@
 #define XRES 800 ///< Fullscreen Menu Width
 #define YRES 600 ///< Fullscreen Menu Height
 
-#define FALLBACK_GRAPHICS_WIDTH 640
-#define FALLBACK_GRAPHICS_HEIGHT 480
-#define FALLBACK_GRAPHICS_DEPTH 16
+#define FALLBACK_GRAPHICS_WIDTH 800
+#define FALLBACK_GRAPHICS_HEIGHT 600
+#define FALLBACK_GRAPHICS_DEPTH 32
 
 /// \name Fonts
 /// Font constants, defined including size
@@ -80,9 +80,11 @@
 #define PROSA_FONT_CLR_FG    RGBColor(255, 255,   0)
 
 /// Colors for good/ok/bad
-#define UI_FONT_CLR_BAD_HEX   "ff0000"
-#define UI_FONT_CLR_OK_HEX   "ffff00"
-#define UI_FONT_CLR_GOOD_HEX   "325b1f"
+#define UI_FONT_CLR_BRIGHT_HEX    "fffaaa"
+#define UI_FONT_CLR_DARK_HEX      "a39013"
+#define UI_FONT_CLR_BAD_HEX       "bb0000"
+#define UI_FONT_CLR_OK_HEX        "ffe11e"
+#define UI_FONT_CLR_GOOD_HEX      "00bb00"
 //@}
 
 /** \name Text colors
@@ -131,11 +133,10 @@ enum {
  * C++ is really bad at integer types. For example this constant is not
  * recognized as a valid value of type Workarea_Info::size_type without a cast.
  */
-#define NUMBER_OF_WORKAREA_PICS static_cast<Workarea_Info::size_type>(3)
+#define NUMBER_OF_WORKAREA_PICS static_cast<Workarea_Info::size_type>(6)
 
-/// The size of the surface cache in bytes. This is the amount of graphics
-/// memory widelands uses  approximately. Note that not every Surface is also in
-/// the cache, so the actual value will be different - but not by much.
-const uint32_t SURFACE_CACHE_SIZE = 150 << 20;   // shifting converts to MB
+/// The size of the transient (i.e. temporary) surfaces in the cache in bytes.
+/// These are all surfaces that are not loaded from disk.
+const uint32_t TRANSIENT_SURFACE_CACHE_SIZE = 80 << 20;   // shifting converts to MB
 
 #endif

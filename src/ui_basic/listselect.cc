@@ -281,7 +281,7 @@ void BaseListselect::select(const uint32_t i)
 
 	if (m_show_check) {
 		if (m_selection != no_selection_index())
-			m_entry_records[m_selection]->pic = NULL;
+			m_entry_records[m_selection]->pic = nullptr;
 		m_entry_records[i]->pic = m_check_pic;
 	}
 	m_selection = i;

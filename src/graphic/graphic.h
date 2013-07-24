@@ -20,11 +20,11 @@
 #ifndef GRAPHIC_H
 #define GRAPHIC_H
 
-#include <vector>
 #include <map>
+#include <memory>
+#include <vector>
 
 #include <SDL.h>
-#include <boost/scoped_ptr.hpp>
 #include <png.h>
 
 #include "image_cache.h"
@@ -86,13 +86,18 @@ struct GraphicCaps
  */
 class Graphic {
 public:
-	Graphic
-		(int32_t w, int32_t h, int32_t bpp,
-		 bool fullscreen, bool opengl);
+	Graphic();
 	~Graphic();
 
-	int32_t get_xres() const;
-	int32_t get_yres() const;
+	// Initialize or reinitialize the graphics system. Throws on error.
+	void initialize
+		(int32_t w, int32_t h, int32_t bpp, bool fullscreen, bool opengl);
+
+	int32_t get_xres();
+	int32_t get_yres();
+	int32_t get_bpp();
+	bool is_fullscreen();
+
 	RenderTarget * get_render_target();
 	void toggle_fullscreen();
 	void update_fullscreen();
@@ -133,6 +138,7 @@ public:
 	bool check_fallback_settings_in_effect();
 
 private:
+	void cleanup();
 	void save_png_(Surface & surf, StreamWrite*) const;
 
 	bool m_fallback_settings_in_effect;
@@ -147,13 +153,13 @@ protected:
 
 	/// This is the main screen Surface.
 	/// A RenderTarget for this can be retrieved with get_render_target()
-	boost::scoped_ptr<Surface> screen_;
+	std::unique_ptr<Surface> screen_;
 	/// This saves a copy of the screen SDL_Surface. This is needed for
 	/// opengl rendering as the SurfaceOpenGL does not use it. It allows
 	/// manipulation the screen context.
 	SDL_Surface * m_sdl_screen;
 	/// A RenderTarget for screen_. This is initialized during init()
-	RenderTarget * m_rendertarget;
+	std::unique_ptr<RenderTarget> m_rendertarget;
 	/// keeps track which screen regions needs to be redrawn during the next
 	/// update(). Only used for SDL rendering.
 	SDL_Rect m_update_rects[MAX_RECTS];
@@ -165,16 +171,16 @@ protected:
 	GraphicCaps m_caps;
 
 	/// The class that gets images from disk.
-	boost::scoped_ptr<ImageLoaderImpl> image_loader_;
+	std::unique_ptr<ImageLoaderImpl> image_loader_;
 	/// Volatile cache of Hardware dependant surfaces.
-	boost::scoped_ptr<SurfaceCache> surface_cache_;
+	std::unique_ptr<SurfaceCache> surface_cache_;
 	/// Non-volatile cache of hardware independent images. The use the
 	/// surface_cache_ to cache their pixel data.
-	boost::scoped_ptr<ImageCache> image_cache_;
+	std::unique_ptr<ImageCache> image_cache_;
 
 	// The texture needed to draw roads.
-	boost::scoped_ptr<Surface> pic_road_normal_;
-	boost::scoped_ptr<Surface> pic_road_busy_;
+	std::unique_ptr<Surface> pic_road_normal_;
+	std::unique_ptr<Surface> pic_road_busy_;
 
 	std::vector<Texture *> m_maptextures;
 	std::vector<AnimationGfx *> m_animations;

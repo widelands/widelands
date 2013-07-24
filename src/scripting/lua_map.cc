@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2010 by the Widelands Development Team
+ * Copyright (C) 2006-2010, 2013 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -108,6 +108,8 @@ int upcasted_immovable_to_lua(lua_State * L, BaseImmovable * mo) {
 			return CAST_TO_LUA(Flag);
 		case Map_Object::ROAD:
 			return CAST_TO_LUA(Road);
+		default:
+			break;
 	}
 	return to_lua<L_BaseImmovable>(L, new L_BaseImmovable(*mo));
 }
@@ -903,7 +905,7 @@ int L_Map::place_immovable(lua_State * const L) {
 					 objname, from_where.c_str());
 
 			m = &egbase.create_immovable(c->coords(), imm_idx, &tribe);
-		} catch (game_data_error & gd) {
+		} catch (game_data_error &) {
 			return
 				report_error
 					(L, "Problem loading tribe <%s>. Maybe not existent?",

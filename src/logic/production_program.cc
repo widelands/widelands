@@ -777,11 +777,8 @@ void ProductionProgram::ActConsume::execute
 {
 	std::vector<WaresQueue *> const warequeues = ps.warequeues();
 	size_t const nr_warequeues = warequeues.size();
-#ifdef HAVE_VARARRAY
-	uint8_t consumption_quantities[nr_warequeues];
-#else
 	std::vector<uint8_t> consumption_quantities(nr_warequeues, 0);
-#endif
+
 	Groups l_groups = m_groups; //  make a copy for local modification
 	//log("ActConsume::execute(%s):\n", ps.descname().c_str());
 
@@ -1288,7 +1285,7 @@ void ProductionProgram::ActCheck_Soldier::execute
 			snprintf
 				(ps.m_result_buffer, sizeof(ps.m_result_buffer),
 				 _("No soldier for this training level found!"));
-			return ps.program_end(game, Failed);
+			return ps.program_end(game, Skipped);
 		}
 		if        (attribute == atrHP)      {
 			if ((*it)->get_hp_level()      == level)
@@ -1378,7 +1375,7 @@ void ProductionProgram::ActTrain::execute
 			snprintf
 				(ps.m_result_buffer, sizeof(ps.m_result_buffer),
 				 _("No soldier for this training level found!"));
-			return ps.program_end(game, Failed);
+			return ps.program_end(game, Skipped);
 		}
 		if        (attribute == atrHP)      {
 			if ((*it)->get_hp_level     () == level)

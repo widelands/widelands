@@ -4,6 +4,9 @@ output=fish
 [buildcost]
 trunk=4
 
+[return_on_dismantle]
+trunk=2
+
 [working positions]
 fisher=1
 

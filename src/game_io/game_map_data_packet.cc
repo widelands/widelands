@@ -25,8 +25,6 @@
 #include "map_io/widelands_map_loader.h"
 #include "map_io/widelands_map_saver.h"
 
-#include <boost/scoped_ptr.hpp>
-
 namespace Widelands {
 
 Game_Map_Data_Packet::~Game_Map_Data_Packet() {
@@ -64,7 +62,7 @@ void Game_Map_Data_Packet::Write
 	(FileSystem & fs, Game & game, Map_Map_Object_Saver * const)
 {
 
-	boost::scoped_ptr<FileSystem> mapfs
+	std::unique_ptr<FileSystem> mapfs
 		(fs.CreateSubFileSystem("map", FileSystem::DIR));
 
 	//  Now Write the map as it would be a normal map saving.

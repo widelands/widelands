@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2010 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2010, 2013 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -24,15 +24,11 @@
 #include "logic/editor_game_base.h"
 #include "editor/tools/editor_increase_resources_tool.h"
 
-#include <boost/scoped_array.hpp>
-
 #define AVG_ELEVATION   (0x80000000)
 #define MAX_ELEVATION   (0xffffffff)
 #define MAP_ID_DIGITS   24
 #define ISLAND_BORDER   10
 #define MAX_ELEVATION_HALF (0x80000000)
-
-using boost::scoped_array;
 
 namespace Widelands
 {
@@ -46,7 +42,7 @@ MapGenerator::MapGenerator
 }
 
 void MapGenerator::generate_bobs
-	(scoped_array<uint32_t> const * random_bobs,
+	(std::unique_ptr<uint32_t[]> const * random_bobs,
 	 Coords const fc,
 	 RNG  &       rng,
 	 MapGenAreaInfo::MapGenTerrainType const terrType)
@@ -182,6 +178,8 @@ void MapGenerator::generate_resources
 			set_resource_helper(rnd4, 3);
 		break;
 	}
+	default:
+		break; // currently mountains have the maximum of allowed resources, which is 4
 	}
 }
 
@@ -642,32 +640,32 @@ void MapGenerator::create_random_map()
 	//  Create a "raw" random elevation matrix.
 	//  We will transform this into reasonable elevations and terrains later on.
 
-	scoped_array<uint32_t> elevations
+	std::unique_ptr<uint32_t[]> elevations
 		(generate_random_value_map(m_mapInfo.w, m_mapInfo.h, rng));
 
 	//  for land stuff
-	scoped_array<uint32_t> random2
+	std::unique_ptr<uint32_t[]> random2
 		(generate_random_value_map(m_mapInfo.w, m_mapInfo.h, rng));
-	scoped_array<uint32_t> random3
+	std::unique_ptr<uint32_t[]> random3
 		(generate_random_value_map(m_mapInfo.w, m_mapInfo.h, rng));
 
 	//  for desert/land
-	scoped_array<uint32_t> random4
+	std::unique_ptr<uint32_t[]> random4
 		(generate_random_value_map(m_mapInfo.w, m_mapInfo.h, rng));
 
 	// for resources
-	scoped_array<uint32_t> random_rsrc_1
+	std::unique_ptr<uint32_t[]> random_rsrc_1
 		(generate_random_value_map(m_mapInfo.w, m_mapInfo.h, rng));
-	scoped_array<uint32_t> random_rsrc_2
+	std::unique_ptr<uint32_t[]> random_rsrc_2
 		(generate_random_value_map(m_mapInfo.w, m_mapInfo.h, rng));
-	scoped_array<uint32_t> random_rsrc_3
+	std::unique_ptr<uint32_t[]> random_rsrc_3
 		(generate_random_value_map(m_mapInfo.w, m_mapInfo.h, rng));
-	scoped_array<uint32_t> random_rsrc_4
+	std::unique_ptr<uint32_t[]> random_rsrc_4
 		(generate_random_value_map(m_mapInfo.w, m_mapInfo.h, rng));
 
 	// for bobs
-	scoped_array<scoped_array<uint32_t> > random_bobs
-		(new scoped_array<uint32_t> [mapGenInfo.getNumBobAreas()]);
+	std::unique_ptr<std::unique_ptr<uint32_t[]> []> random_bobs
+		(new std::unique_ptr<uint32_t[]> [mapGenInfo.getNumBobAreas()]);
 
 	for (size_t ix = 0; ix < mapGenInfo.getNumBobAreas(); ++ix)
 		random_bobs[ix].reset
@@ -772,6 +770,28 @@ void MapGenerator::create_random_map()
 			--line[2];
 	}
 
+	// Random placement of starting positions
+	assert(m_mapInfo.numPlayers);
+	std::vector<Player_Number> pn(m_mapInfo.numPlayers);
+	for (Player_Number n = 1; n <= m_mapInfo.numPlayers; ++n) {
+		bool okay = false;
+		// This is a kinda dump algorithm -> we generate a random number and increase it until it fits.
+		// However it's working and simple ;) - if you've got a better idea, feel free to fix it.
+		Player_Number x = rng.rand() % m_mapInfo.numPlayers;
+		while (!okay) {
+			okay = true;
+			++x; // Player_Number begins at 1 not at 0
+			for (Player_Number p = 1; p < n; ++p) {
+				if (pn[p - 1] == x) {
+					okay = false;
+					x = x % m_mapInfo.numPlayers;
+					break;
+				}
+			}
+		}
+		pn[n - 1] = x;
+	}
+
 	for (Player_Number n = 1; n <= m_mapInfo.numPlayers; ++n) {
 		// Set scenario information - needed even if it's not a scenario
 		m_map.set_scenario_player_name(n, "Random Player");
@@ -780,18 +800,18 @@ void MapGenerator::create_random_map()
 		m_map.set_scenario_player_closeable(n, false);
 
 		// Calculate wished coords for player starting position
-		if (line[0] + 1 > n) {
+		if (line[0] + 1 > pn[n - 1]) {
 			// X-Coordinates
-			playerstart.x  = m_mapInfo.w * (line[0] * line[0] + 1 - n * n);
+			playerstart.x  = m_mapInfo.w * (line[0] * line[0] + 1 - pn[n - 1] * pn[n - 1]);
 			playerstart.x /= line[0] * line[0] + 1;
 			// Y-Coordinates
 			if (lines == 1)
 				playerstart.y = m_mapInfo.h / 2;
 			else
 				playerstart.y = m_mapInfo.h / 7 + ISLAND_BORDER;
-		} else if (line[0] + line[1] + 1 > n) {
+		} else if (line[0] + line[1] + 1 > pn[n - 1]) {
 			// X-Coordinates
-			uint8_t pos = n - line[0];
+			uint8_t pos = pn[n - 1] - line[0];
 			playerstart.x  = m_mapInfo.w;
 			playerstart.x *= line[1] * line[1] + 1 - pos * pos;
 			playerstart.x /= line[1] * line[1] + 1;
@@ -802,7 +822,7 @@ void MapGenerator::create_random_map()
 				playerstart.y = m_mapInfo.h - m_mapInfo.h / 7 - ISLAND_BORDER;
 		} else {
 			// X-Coordinates
-			uint8_t pos = n - line[0] - line[1];
+			uint8_t pos = pn[n - 1] - line[0] - line[1];
 			playerstart.x  = m_mapInfo.w;
 			playerstart.x *= line[2] * line[2] + 1 - pos * pos;
 			playerstart.x /= line[2] * line[2] + 1;

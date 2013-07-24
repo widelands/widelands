@@ -63,7 +63,7 @@ public:
 
 		try {
 			surf = rt_renderer_->render(text_, width_);
-			surface_cache_->insert(hash_, surf);
+			surface_cache_->insert(hash_, surf, true);
 		} catch (RT::Exception& e) {
 			throw wexception("Richtext rendering error: %s", e.what());
 		}
@@ -105,7 +105,7 @@ public:
 private:
 	SurfaceCache* const surface_cache_;  // not owned
 	ImageCache* const image_cache_;  // not owned
-	boost::scoped_ptr<RT::IRenderer> renderer_;
+	std::unique_ptr<RT::IRenderer> renderer_;
 };
 
 IFont_Handler1 * create_fonthandler(Graphic* gr, FileSystem* fs) {

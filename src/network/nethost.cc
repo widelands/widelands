@@ -52,10 +52,9 @@
 
 #include <boost/format.hpp>
 #include <boost/lexical_cast.hpp>
-#include <boost/scoped_ptr.hpp>
 #include <sstream>
 
-#ifndef WIN32
+#ifndef _WIN32
 #include <unistd.h> // for usleep
 #endif
 
@@ -498,6 +497,13 @@ struct HostChatProvider : public ChatProvider {
 		h->send(c);
 	}
 
+	void send_local(const std::string & msg) {
+		ChatMessage c;
+		c.time = time(0);
+		c.msg = msg;
+		ChatProvider::send(c);
+	}
+
 	const std::vector<ChatMessage> & getMessages() const {
 		return messages;
 	}
@@ -730,7 +736,7 @@ void NetHost::run(bool const autorun)
 			s.get_string
 				("dedicated_motd",
 				 (format
-					(_("This is a dedicated server send \"@%s help\" to get a full list of available commands."))
+					(_("This is a dedicated server. Send \"@%s help\" to get a full list of available commands."))
 					% d->localplayername)
 				.str().c_str());
 
@@ -758,7 +764,7 @@ void NetHost::run(bool const autorun)
 		while (not d->dedicated_start) {
 			handle_network();
 			// TODO this should be improved.
-#ifndef WIN32
+#ifndef _WIN32
 			if (d->clients.empty()) {
 				if (usleep(100000)) // Sleep for 0.1 seconds - there is not anybody connected anyways.
 					return;
@@ -811,7 +817,7 @@ void NetHost::run(bool const autorun)
 	try {
 		// NOTE  loaderUI will stay uninitialized, if this is run as dedicated, so all called functions need
 		// NOTE  to check whether the pointer is valid.
-		boost::scoped_ptr<UI::ProgressWindow> loaderUI(0);
+		std::unique_ptr<UI::ProgressWindow> loaderUI;
 		GameTips * tips = 0;
 		if (m_is_dedicated) {
 			log ("[Dedicated] Starting the game...\n");
@@ -1335,7 +1341,7 @@ void NetHost::dserver_send_maps_and_saves(Client & client) {
 				gl.preload_game(gpdp);
 
 				// If we are here, the saved game is valid
-				boost::scoped_ptr<FileSystem> sg_fs(g_fs->MakeSubFileSystem(name));
+				std::unique_ptr<FileSystem> sg_fs(g_fs->MakeSubFileSystem(name));
 				Profile prof;
 				prof.read("map/elemental", 0, *sg_fs);
 				Section & s = prof.get_safe_section("global");
@@ -1344,7 +1350,7 @@ void NetHost::dserver_send_maps_and_saves(Client & client) {
 				info.path     = name;
 				info.players  = static_cast<uint8_t>(s.get_safe_int("nr_players"));
 				d->settings.saved_games.push_back(info);
-			} catch (const _wexception & e) {}
+			} catch (const _wexception &) {}
 		}
 	}
 
@@ -2624,7 +2630,7 @@ void NetHost::handle_packet(uint32_t const i, RecvPacket & r)
 
 						// If we are here, it is a saved game file :)
 						// Read the needed data from file "elemental" of the used map.
-						boost::scoped_ptr<FileSystem> sg_fs(g_fs->MakeSubFileSystem(path.c_str()));
+						std::unique_ptr<FileSystem> sg_fs(g_fs->MakeSubFileSystem(path.c_str()));
 						Profile prof;
 						prof.read("map/elemental", 0, *sg_fs);
 						Section & s = prof.get_safe_section("global");
@@ -2632,7 +2638,7 @@ void NetHost::handle_packet(uint32_t const i, RecvPacket & r)
 
 						d->settings.scenario = false;
 						d->hp.setMap(gpdp.get_mapname(), path, nr_players, true);
-					} catch (const _wexception & e) {}
+					} catch (const _wexception &) {}
 				}
 			} else {
 				if (g_fs->FileExists(path)) {

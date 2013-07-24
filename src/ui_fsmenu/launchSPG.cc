@@ -232,7 +232,7 @@ void Fullscreen_Menu_LaunchSPG::win_condition_update() {
 		m_wincondition.set_tooltip
 			(_("Win condition is set through the scenario"));
 	} else {
-		boost::shared_ptr<LuaTable> t = m_lua->run_script
+		std::unique_ptr<LuaTable> t = m_lua->run_script
 			("win_conditions", m_settings->getWinCondition());
 
 		try {

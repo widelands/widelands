@@ -85,6 +85,10 @@ struct Console : public ChatProvider, public Handler {
 		it->second(arg);
 	}
 
+	void send_local(const std::string& msg) {
+		send(msg);
+	}
+
 	const std::vector<ChatMessage> & getMessages() const
 	{
 		return messages;

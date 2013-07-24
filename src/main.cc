@@ -32,7 +32,7 @@
 
 #include <SDL_main.h>
 
-#ifndef WIN32
+#ifndef _WIN32
 #include <syslog.h>
 #include <fcntl.h>
 #endif
@@ -48,7 +48,7 @@ using std::flush;
 int main(int argc, char * argv[])
 {
 
-#ifndef WIN32
+#ifndef _WIN32
 	// if Widelands is called as dedicated server, Widelands should be forked and started as daemon
 	bool dedicated = false;
 	bool daemon    = false;

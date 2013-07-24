@@ -17,6 +17,7 @@
  */
 
 #include <algorithm>
+#include <cassert>
 
 #include "gl_utils.h"
 #include "gl_surface_screen.h"

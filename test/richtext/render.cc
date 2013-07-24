@@ -21,7 +21,6 @@
 #include <iostream>
 #include <string>
 
-#include <boost/scoped_ptr.hpp>
 #include <SDL.h>
 #undef main // No, we do not want SDL_main
 #include "lodepng.h"
@@ -57,15 +56,16 @@ class OwningRenderer : public RT::IRenderer {
 		virtual Surface* render(const std::string& text, uint16_t w, const RT::TagSet & tagset = RT::TagSet()) {
 			return renderer_->render(text, w, tagset);
 		}
-		virtual RT::IRefMap* make_reference_map(const std::string& text, uint16_t w, const RT::TagSet & tagset = RT::TagSet()) {
+		virtual RT::IRefMap* make_reference_map
+			(const std::string& text, uint16_t w, const RT::TagSet & tagset = RT::TagSet()) {
 			return renderer_->make_reference_map(text, w, tagset);
 		}
 
 	private:
-		boost::scoped_ptr<IImageLoader> image_loader_;
-		boost::scoped_ptr<SurfaceCache> surface_cache_;
-		boost::scoped_ptr<ImageCache> image_cache_;
-		boost::scoped_ptr<RT::IRenderer> renderer_;
+		std::unique_ptr<IImageLoader> image_loader_;
+		std::unique_ptr<SurfaceCache> surface_cache_;
+		std::unique_ptr<ImageCache> image_cache_;
+		std::unique_ptr<RT::IRenderer> renderer_;
 };
 
 }  // namespace
@@ -163,7 +163,7 @@ int main(int argc, char** argv)
 	else
 		txt = read_file(inname);
 
-	boost::scoped_ptr<RT::IRenderer> renderer(setup_standalone_renderer());
+	std::unique_ptr<RT::IRenderer> renderer(setup_standalone_renderer());
 
 	try {
 		SDLSurface& surf = *static_cast<SDLSurface*>

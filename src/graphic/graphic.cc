@@ -44,6 +44,7 @@
 
 #include "animation.h"
 #include "animation_gfx.h"
+#include "font_handler.h"
 #include "image.h"
 #include "image_loader_impl.h"
 #include "image_transformations.h"
@@ -62,25 +63,20 @@ bool g_opengl;
 /**
  * Initialize the SDL video mode.
 */
-Graphic::Graphic
-	(int32_t w, int32_t h,
-	 int32_t bpp,
-	 bool    fullscreen,
-	 bool    opengl)
+Graphic::Graphic()
 	:
 	m_fallback_settings_in_effect (false),
-	m_rendertarget     (0),
 	m_nr_update_rects  (0),
 	m_update_fullscreen(true),
 	image_loader_(new ImageLoaderImpl()),
-	surface_cache_(create_surface_cache(SURFACE_CACHE_SIZE)),
+	surface_cache_(create_surface_cache(TRANSIENT_SURFACE_CACHE_SIZE)),
 	image_cache_(create_image_cache(image_loader_.get(), surface_cache_.get()))
 {
 	ImageTransformations::initialize();
 
 	//fastOpen tries to use mmap
 	FileRead fr;
-#ifndef WIN32
+#ifndef _WIN32
 	fr.fastOpen(*g_fs, "pics/wl-ico-128.png");
 #else
 	fr.fastOpen(*g_fs, "pics/wl-ico-32.png");
@@ -88,24 +84,21 @@ Graphic::Graphic
 	SDL_Surface * s = IMG_Load_RW(SDL_RWFromMem(fr.Data(0), fr.GetSize()), 1);
 	SDL_WM_SetIcon(s, 0);
 	SDL_FreeSurface(s);
+}
 
-#ifndef USE_OPENGL
-	assert(not opengl);
-#endif
+void Graphic::initialize(int32_t w, int32_t h, int32_t bpp, bool fullscreen, bool opengl) {
+	cleanup();
 
 	// Set video mode using SDL. First collect the flags
-
 	int32_t flags = 0;
 	g_opengl = false;
 	SDL_Surface * sdlsurface = 0;
 
-#ifdef USE_OPENGL
 	if (opengl) {
 		log("Graphics: Trying opengl\n");
 		SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
 		flags |= SDL_OPENGL;
 	}
-#endif
 
 	if (fullscreen) {
 		flags |= SDL_FULLSCREEN;
@@ -116,7 +109,6 @@ Graphic::Graphic
 	// Here we actually set the video mode
 	sdlsurface = SDL_SetVideoMode(w, h, bpp, flags);
 
-#ifdef USE_OPENGL
 	// If we tried opengl and it was not successful try without opengl
 	if (!sdlsurface and opengl)
 	{
@@ -124,7 +116,6 @@ Graphic::Graphic
 		flags &= ~SDL_OPENGL;
 		sdlsurface = SDL_SetVideoMode(w, h, bpp, flags);
 	}
-#endif
 
 	if (!sdlsurface)
 	{
@@ -148,7 +139,9 @@ Graphic::Graphic
 	if (0 != (sdlsurface->flags & SDL_FULLSCREEN))
 		log("Graphics: FULLSCREEN ENABLED\n");
 
-#ifdef USE_OPENGL
+	bool use_arb = true;
+	const char * extensions;
+
 	if (0 != (sdlsurface->flags & SDL_OPENGL)) {
 		//  We have successful opened an opengl screen. Print some information
 		//  about opengl and set the rendering capabilities.
@@ -160,8 +153,35 @@ Graphic::Graphic
 			throw wexception("glewInit returns %i: Broken OpenGL installation.", err);
 		}
 
-		g_opengl = true;
+		extensions = reinterpret_cast<const char *>(glGetString (GL_EXTENSIONS));
 
+		if (strstr(extensions, "GL_ARB_framebuffer_object") != 0) {
+			use_arb = true;
+		} else if (strstr(extensions, "GL_EXT_framebuffer_object") != 0) {
+			use_arb = false;
+		} else {
+			log
+			("Graphics: Neither GL_ARB_framebuffer_object or GL_EXT_framebuffer_object supported! "
+			"Switching off OpenGL!\n"
+			);
+			flags &= ~SDL_OPENGL;
+			m_fallback_settings_in_effect = true;
+
+			// One must never free the screen surface of SDL (using
+			// SDL_FreeSurface) as it is owned by SDL itself, therefore the next
+			// call does not leak memory.
+			sdlsurface = SDL_SetVideoMode
+				(FALLBACK_GRAPHICS_WIDTH, FALLBACK_GRAPHICS_HEIGHT, FALLBACK_GRAPHICS_DEPTH, flags);
+			m_fallback_settings_in_effect = true;
+			if (!sdlsurface)
+				throw wexception("Graphics: could not set video mode: %s", SDL_GetError());
+		}
+	}
+
+	// Redoing the check, because fallback settings might mean we no longer use OpenGL.
+	if (0 != (sdlsurface->flags & SDL_OPENGL)) {
+		//  We now really have a working opengl screen...
+		g_opengl = true;
 
 		GLboolean glBool;
 		glGetBooleanv(GL_DOUBLEBUFFER, &glBool);
@@ -193,8 +213,7 @@ Graphic::Graphic
 			("Graphics: OpenGL: Version %d.%d \"%s\"\n",
 			 m_caps.gl.major_version, m_caps.gl.minor_version, str);
 
-		const char * extensions = reinterpret_cast<const char *>(glGetString (GL_EXTENSIONS));
-
+		// extensions will be valid if we ever succeeded in runnning glewInit.
 		m_caps.gl.tex_power_of_two =
 			(m_caps.gl.major_version < 2) and
 			(strstr(extensions, "GL_ARB_texture_non_power_of_two") == 0);
@@ -213,7 +232,6 @@ GCC_DIAG_OFF("-Wold-style-cast")
 		m_caps.gl.blendequation = GLEW_VERSION_1_4 || GLEW_ARB_imaging;
 GCC_DIAG_ON ("-Wold-style-cast")
 	}
-#endif
 
 	/* Information about the video capabilities. */
 	const SDL_VideoInfo* info = SDL_GetVideoInfo();
@@ -259,7 +277,6 @@ GCC_DIAG_ON ("-Wold-style-cast")
 		(("Widelands " + build_id() + '(' + build_type() + ')').c_str(),
 		 "Widelands");
 
-#if USE_OPENGL
 	if (g_opengl) {
 		glViewport(0, 0, w, h);
 
@@ -287,8 +304,7 @@ GCC_DIAG_ON ("-Wold-style-cast")
 		SDL_GL_SwapBuffers();
 		glEnable(GL_TEXTURE_2D);
 
-		GLSurfaceTexture::Initialize();
-
+		GLSurfaceTexture::Initialize(use_arb);
 	}
 
 	if (g_opengl)
@@ -296,13 +312,12 @@ GCC_DIAG_ON ("-Wold-style-cast")
 		screen_.reset(new GLSurfaceScreen(w, h));
 	}
 	else
-#endif
 	{
-		screen_.reset(new SDLSurface(sdlsurface));
+		screen_.reset(new SDLSurface(sdlsurface, false));
 	}
 
 	m_sdl_screen = sdlsurface;
-	m_rendertarget = new RenderTarget(screen_.get());
+	m_rendertarget.reset(new RenderTarget(screen_.get()));
 }
 
 bool Graphic::check_fallback_settings_in_effect()
@@ -310,27 +325,27 @@ bool Graphic::check_fallback_settings_in_effect()
 	return m_fallback_settings_in_effect;
 }
 
-/**
- * Free the surface
-*/
-Graphic::~Graphic()
-{
-	BOOST_FOREACH(Texture* texture, m_maptextures)
-		delete texture;
-	delete m_rendertarget;
-
+void Graphic::cleanup() {
+	flush_maptextures();
 	flush_animations();
+	surface_cache_->flush();
+	// TODO: this should really not be needed, but currently is :(
+	if (UI::g_fh)
+		UI::g_fh->flush();
 
-#if USE_OPENGL
 	if (g_opengl)
 		GLSurfaceTexture::Cleanup();
-#endif
+}
+
+Graphic::~Graphic()
+{
+	cleanup();
 }
 
 /**
  * Return the screen x resolution
 */
-int32_t Graphic::get_xres() const
+int32_t Graphic::get_xres()
 {
 	return screen_->width();
 }
@@ -338,9 +353,19 @@ int32_t Graphic::get_xres() const
 /**
  * Return the screen x resolution
 */
-int32_t Graphic::get_yres() const
+int32_t Graphic::get_yres()
 {
 	return screen_->height();
+}
+
+int32_t Graphic::get_bpp()
+{
+	return m_sdl_screen->format->BitsPerPixel;
+}
+
+bool Graphic::is_fullscreen()
+{
+	return m_sdl_screen->flags & SDL_FULLSCREEN;
 }
 
 /**
@@ -350,7 +375,7 @@ RenderTarget * Graphic::get_render_target()
 {
 	m_rendertarget->reset();
 
-	return m_rendertarget;
+	return m_rendertarget.get();
 }
 
 /**
@@ -409,14 +434,12 @@ bool Graphic::need_update() const
 */
 void Graphic::refresh(bool force)
 {
-#ifdef USE_OPENGL
 	if (g_opengl) {
 		SDL_GL_SwapBuffers();
 		m_update_fullscreen = false;
 		m_nr_update_rects = 0;
 		return;
 	}
-#endif
 
 	if (force or m_update_fullscreen) {
 		//flip defaults to SDL_UpdateRect(m_surface, 0, 0, 0, 0);
@@ -492,7 +515,7 @@ void Graphic::save_png_(Surface & surf, StreamWrite * sw) const
 		uint16_t surf_h = surf.height();
 		uint32_t row_size = 4 * surf_w;
 
-		boost::scoped_array<png_byte> row(new png_byte[row_size]);
+		std::unique_ptr<png_byte[]> row(new png_byte[row_size]);
 
 		//Write each row
 		const SDL_PixelFormat & fmt = surf.format();

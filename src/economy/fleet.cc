@@ -669,7 +669,7 @@ void Fleet::log_general_info(const Editor_Game_Base & egbase)
 	Map_Object::log_general_info(egbase);
 
 	molog
-		("%"PRIuS" ships and %"PRIuS" ports\n",  m_ships.size(), m_ports.size());
+		("%" PRIuS " ships and %" PRIuS " ports\n",  m_ships.size(), m_ports.size());
 }
 
 #define FLEET_SAVEGAME_VERSION 4
@@ -744,7 +744,7 @@ void Fleet::Loader::load_finish()
 Map_Object::Loader * Fleet::load
 		(Editor_Game_Base & egbase, Map_Map_Object_Loader & mol, FileRead & fr)
 {
-	std::auto_ptr<Loader> loader(new Loader);
+	std::unique_ptr<Loader> loader(new Loader);
 
 	try {
 		// The header has been peeled away by the caller

@@ -34,6 +34,7 @@
 
 #include "editor_player_menu.h"
 
+#define UNDEFINED_TRIBE_NAME "<undefined>"
 
 Editor_Player_Menu::Editor_Player_Menu
 	(Editor_Interactive & parent, UI::UniqueWindow::Registry & registry)
@@ -158,7 +159,7 @@ void Editor_Player_Menu::update() {
 				(boost::bind(&Editor_Player_Menu::player_tribe_clicked, boost::ref(*this), p - 1));
 			posx += 140 + spacing;
 		}
-		if (map.get_scenario_player_tribe(p) != "<undefined>")
+		if (map.get_scenario_player_tribe(p) != UNDEFINED_TRIBE_NAME)
 			m_plr_set_tribes_buts[p - 1]->set_title
 				(map.get_scenario_player_tribe(p).c_str());
 		else {
@@ -177,7 +178,7 @@ void Editor_Player_Menu::update() {
 					(this, "starting_pos",
 					 posx, posy, size, size,
 					 g_gr->images().get("pics/but0.png"),
-					 NULL,
+					 nullptr,
 					 "");
 			m_plr_set_pos_buts[p - 1]->sigclicked.connect
 				(boost::bind(&Editor_Player_Menu::set_starting_pos_clicked, boost::ref(*this), p));

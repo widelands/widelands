@@ -10,6 +10,11 @@ stone=1
 marble=2
 marblecolumn=1
 
+[return_on_dismantle]
+stone=1
+marble=1
+marblecolumn=1
+
 [working positions] #  like brewery
 brewer=1
 

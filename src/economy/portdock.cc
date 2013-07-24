@@ -67,10 +67,10 @@ void expedition_wares
 
 }  // namespace
 
-Map_Object_Descr portdock_descr("portdock", "Port Dock");
+Map_Object_Descr g_portdock_descr("portdock", "Port Dock");
 
 PortDock::PortDock() :
-	PlayerImmovable(portdock_descr),
+	PlayerImmovable(g_portdock_descr),
 	m_fleet(0),
 	m_warehouse(0),
 	m_need_ship(false),
@@ -180,7 +180,7 @@ void PortDock::set_economy(Economy * e)
 
 
 void PortDock::draw
-		(const Editor_Game_Base &, RenderTarget &, const FCoords, const Point)
+		(const Editor_Game_Base &, RenderTarget &, const FCoords&, const Point&)
 {
 	// do nothing
 }
@@ -519,7 +519,7 @@ void PortDock::log_general_info(const Editor_Game_Base & egbase)
 
 	Coords pos(m_warehouse->get_position());
 	molog
-		("PortDock for warehouse %u (at %i,%i) in fleet %u, need_ship: %s, waiting: %"PRIuS"\n",
+		("PortDock for warehouse %u (at %i,%i) in fleet %u, need_ship: %s, waiting: %" PRIuS "\n",
 		 m_warehouse ? m_warehouse->serial() : 0, pos.x, pos.y,
 		 m_fleet ? m_fleet->serial() : 0,
 		 m_need_ship ? "true" : "false",
@@ -606,7 +606,7 @@ void PortDock::Loader::load_finish()
 Map_Object::Loader * PortDock::load
 	(Editor_Game_Base & egbase, Map_Map_Object_Loader & mol, FileRead & fr)
 {
-	std::auto_ptr<Loader> loader(new Loader);
+	std::unique_ptr<Loader> loader(new Loader);
 
 	try {
 		// The header has been peeled away by the caller

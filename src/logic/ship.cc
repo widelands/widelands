@@ -43,7 +43,7 @@ namespace Widelands {
 Ship_Descr::Ship_Descr
 	(const char * given_name, const char * gdescname,
 	 const std::string & directory, Profile & prof, Section & global_s,
-	 const Widelands::Tribe_Descr & gtribe)
+	 const Tribe_Descr & gtribe)
 : Descr(given_name, gdescname, directory, prof, global_s, &gtribe)
 {
 	m_sail_anims.parse
@@ -270,27 +270,40 @@ void Ship::ship_update(Game & game, Bob::State & state)
 			return;
 		}
 
-	} else { // m_ship_state != TRANSPORT
+	} else {
+		// m_ship_state != TRANSPORT equals we are on an expedition
+		assert(m_expedition);
+
 		// Update the knowledge of the surrounding fields
 		FCoords position = get_position();
-		for (Direction dir = 1; dir <= LAST_DIRECTION; ++dir) {
-			assert(m_expedition);
+		for (Direction dir = FIRST_DIRECTION; dir <= LAST_DIRECTION; ++dir) {
 			m_expedition->swimable[dir - 1] =
 				map.get_neighbour(position, dir).field->nodecaps() & MOVECAPS_SWIM;
 		}
 
 		if (m_ship_state == EXP_SCOUTING) {
 			// Check surrounding fields for port buildspaces
-			boost::scoped_ptr<std::list<Coords> > temp_port_buildspaces(new std::list<Coords>());
-			Widelands::MapRegion<Widelands::Area<Widelands::Coords> > mr
-				(map, Widelands::Area<Widelands::Coords>(position, vision_range()));
+			std::unique_ptr<std::list<Coords> > temp_port_buildspaces(new std::list<Coords>());
+			MapRegion<Area<Coords> > mr
+				(map, Area<Coords>(position, vision_range()));
 			bool new_port_space = false;
 			do {
 				if (map.is_port_space(mr.location())) {
+					FCoords fc = map.get_fcoords(mr.location());
+
+					// Check whether the maximum theoretical possible NodeCap of the field is of the size big
+					// and whether it can theoretically be a port space
+					if
+						((map.get_max_nodecaps(fc) & BUILDCAPS_SIZEMASK) != BUILDCAPS_BIG
+						 ||
+						 map.find_portdock(fc).empty())
+					{
+						continue;
+					}
 
 					// Check if there is a PlayerImmovable on the port build space
-					// FIXME handle this more gracefully - opposing player? etc.
-					BaseImmovable * baim = map.get_fcoords(mr.location()).field->get_immovable();
+					// FIXME handle this more gracefully concering opposing players
+					BaseImmovable * baim = fc.field->get_immovable();
 					if (baim)
 						if (is_a(PlayerImmovable, baim))
 							continue;
@@ -515,7 +528,7 @@ void Ship::ship_update_idle(Game & game, Bob::State & state)
 					break;
 				} else {
 					assert(worker);
-					worker->set_economy(NULL);
+					worker->set_economy(nullptr);
 					worker->set_location(cs);
 					worker->set_position(game, cs->get_position());
 					worker->reset_tasks(game);
@@ -557,7 +570,7 @@ void Ship::set_economy(Game & game, Economy * e)
  */
 void Ship::set_destination(Game & game, PortDock & pd)
 {
-	molog("set_destination to %u (currently %"PRIuS" items)\n", pd.serial(), m_items.size());
+	molog("set_destination to %u (currently %" PRIuS " items)\n", pd.serial(), m_items.size());
 	m_destination = &pd;
 	send_signal(game, "wakeup");
 }
@@ -664,7 +677,7 @@ void Ship::log_general_info(const Editor_Game_Base & egbase)
 	Bob::log_general_info(egbase);
 
 	molog
-		("Fleet: %u, destination: %u, lastdock: %u, carrying: %"PRIuS"\n",
+		("Fleet: %u, destination: %u, lastdock: %u, carrying: %" PRIuS "\n",
 		 m_fleet? m_fleet->serial() : 0,
 		 m_destination.serial(), m_lastdock.serial(),
 		 m_items.size());
@@ -699,7 +712,7 @@ void Ship::send_message
 		rt_description += picture;
 		rt_description += "><p font-size=14 font-face=DejaVuSerif>";
 	} else
-		rt_description  = "<rt><p font-size=14 font-face=DejaVuSerif>";;
+		rt_description  = "<rt><p font-size=14 font-face=DejaVuSerif>";
 	rt_description += description;
 	rt_description += "</p></rt>";
 
@@ -817,7 +830,7 @@ void Ship::Loader::load_finish()
 Map_Object::Loader * Ship::load
 	(Editor_Game_Base & egbase, Map_Map_Object_Loader & mol, FileRead & fr)
 {
-	std::auto_ptr<Loader> loader(new Loader);
+	std::unique_ptr<Loader> loader(new Loader);
 
 	try {
 		// The header has been peeled away by the caller

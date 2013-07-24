@@ -251,7 +251,7 @@ struct Bob : public Map_Object {
 	virtual bool checkNodeBlocked(Game &, const FCoords &, bool commit);
 
 	virtual void draw
-		(const Editor_Game_Base &, RenderTarget &, Point) const;
+		(const Editor_Game_Base &, RenderTarget &, const Point&) const;
 
 	// For debug
 	virtual void log_general_info(const Editor_Game_Base &);

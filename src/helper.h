@@ -158,4 +158,7 @@ void log(char * const fmt, ...);
 
 bool is_printable(SDL_keysym k);
 
+/// Generate a random string of given size out of the given alphabet.
+std::string random_string(const std::string& chars, int nlen);
+
 #endif

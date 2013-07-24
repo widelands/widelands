@@ -6,6 +6,10 @@ enhancement=deep_goldmine
 trunk=4
 wood=2
 
+[return_on_dismantle]
+trunk=2
+wood=1
+
 [working positions]
 miner=1
 
@@ -22,8 +26,8 @@ wine=6
 work=_Work
 
 [work]
-return=skipped when economy needs ration and not economy needs goldstone
-return=skipped when economy needs wine and not economy needs goldstone
+return=skipped unless economy needs goldstone or not economy needs ration
+return=skipped unless economy needs goldstone or not economy needs wine
 sleep=45000
 consume=ration wine
 animate=working 20000

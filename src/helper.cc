@@ -17,9 +17,15 @@
  *
  */
 
+#include <cstdarg>
+#include <string>
+
+#include <boost/random.hpp>
+
 #include "helper.h"
 
-#include <cstdarg>
+using namespace std;
+
 
 /// Split a string by separators.
 /// \note This ignores empty elements, so do not use this for example to split
@@ -71,3 +77,14 @@ bool is_printable(SDL_keysym k)
 		((k.sym >= SDLK_WORLD_0) && (k.sym <= SDLK_WORLD_95)) ||
 		((k.sym >= SDLK_KP0)     && (k.sym <= SDLK_KP_EQUALS));
 }
+
+static boost::mt19937 random_generator;
+string random_string(const string& chars, int nlen) {
+	boost::uniform_int<> index_dist(0, chars.size() - 1);
+	std::unique_ptr<char[]> buffer(new char[nlen - 1]);
+	for (int i = 0; i < nlen; ++i) {
+		buffer[i] = chars[index_dist(random_generator)];
+	}
+	return string(buffer.get(), nlen);
+}
+

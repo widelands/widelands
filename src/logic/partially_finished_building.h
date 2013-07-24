@@ -65,8 +65,6 @@ private:
 
 	virtual uint32_t build_step_time() const = 0;
 
-	//virtual void draw(const Editor_Game_Base &, RenderTarget &, FCoords, Point);
-
 protected:
 	const Building_Descr * m_building; // type of building that was or will become
 

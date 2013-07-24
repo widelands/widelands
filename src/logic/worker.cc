@@ -2906,9 +2906,7 @@ void Worker::scout_update(Game & game, State & state)
 }
 
 void Worker::draw_inner
-	(const Editor_Game_Base &       game,
-	 RenderTarget           &       dst,
-	 Point                    const drawpos)
+	(const Editor_Game_Base& game, RenderTarget& dst, const Point& drawpos)
 	const
 {
 	dst.drawanim
@@ -2930,7 +2928,7 @@ void Worker::draw_inner
  * Draw the worker, taking the carried item into account.
  */
 void Worker::draw
-	(const Editor_Game_Base & game, RenderTarget & dst, Point const pos) const
+	(const Editor_Game_Base & game, RenderTarget & dst, const Point& pos) const
 {
 	if (get_current_anim())
 		draw_inner(game, dst, calc_drawpos(game, pos));
@@ -3066,7 +3064,7 @@ Map_Object::Loader * Worker::load
 			tribe->get_worker_descr(tribe->safe_worker_index(name));
 
 		Worker * worker = static_cast<Worker *>(&descr->create_object());
-		std::auto_ptr<Loader> loader(worker->create_loader());
+		std::unique_ptr<Loader> loader(worker->create_loader());
 		loader->init(egbase, mol, *worker);
 		loader->load(fr);
 		return loader.release();

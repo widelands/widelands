@@ -94,7 +94,6 @@ private:
 	bool m_caps_setup;
 
 	Overlay_Manager::Job_Id m_workarea_job_id;
-	const Image* workarea_cumulative_pic[NUMBER_OF_WORKAREA_PICS];
 	bool m_avoid_fastclick;
 };
 

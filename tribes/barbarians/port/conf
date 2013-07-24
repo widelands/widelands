@@ -11,6 +11,15 @@ iron=2
 thatchreed=4
 gold=2
 
+[return_on_dismantle]
+trunk=1
+blackwood=2
+raw_stone=3
+grout=1
+iron=1
+thatchreed=1
+gold=1
+
 [build]
 pics=port_b_??.png  # 4 frames
 hotspot=67 80

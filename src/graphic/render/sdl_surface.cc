@@ -26,7 +26,8 @@
 SDLSurface::~SDLSurface() {
 	assert(m_surface);
 
-	SDL_FreeSurface(m_surface);
+	if (m_free_surface_on_delete)
+		SDL_FreeSurface(m_surface);
 }
 
 const SDL_PixelFormat & SDLSurface::format() const {
@@ -91,8 +92,9 @@ uint32_t SDLSurface::get_pixel(uint16_t x, uint16_t y) {
 		return pix[0] << 0x00 | pix[1] << 0x08 | pix[2] << 0x10;
 	case 4:
 		return *reinterpret_cast<const Uint32 *>(pix);
+	default:
+		assert(false);
 	}
-	assert(false);
 
 	return 0; // Should never be here
 }
@@ -115,6 +117,7 @@ void SDLSurface::set_pixel(uint16_t x, uint16_t y, const Uint32 clr) {
 	switch (bytes_per_pixel) {
 	case 2: *reinterpret_cast<Uint16 *>(pix) = static_cast<Uint16>(clr); break;
 	case 4: *reinterpret_cast<Uint32 *>(pix) = clr;                      break;
+	default: break;
 	};
 
 	if (SDL_MUSTLOCK(m_surface))

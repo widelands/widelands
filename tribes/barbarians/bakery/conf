@@ -10,6 +10,11 @@ blackwood=2
 raw_stone=2
 thatchreed=2
 
+[return_on_dismantle]
+trunk=1
+blackwood=1
+raw_stone=2
+
 [working positions]
 baker=1
 
@@ -22,8 +27,8 @@ work=_Work
 
 [work]
 sleep=20000
-return=skipped when economy needs water and not economy needs pittabread
-return=skipped when economy needs wheat and not economy needs pittabread
+return=skipped unless economy needs pittabread or not economy needs water
+return=skipped unless economy needs pittabread or not economy needs wheat
 consume=water:3 wheat:3
 animate=working 20000
 produce=pittabread

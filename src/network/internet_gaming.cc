@@ -768,7 +768,14 @@ void InternetGaming::send(const std::string & msg) {
 	s.send(m_sock);
 }
 
-
+void InternetGaming::send_local(const std::string& msg)
+{
+	ChatMessage c;
+	c.msg = msg;
+	c.time = time(0);
+	messages.push_back(c);
+	ChatProvider::send(c);
+}
 
 /**
  * \returns the boolean value of a string received from the metaserver.
@@ -792,8 +799,14 @@ std::string InternetGaming::bool2str(bool b) {
 /// formates a chat message and adds it to the list of chat messages
 void InternetGaming::formatAndAddChat(std::string from, std::string to, bool system, std::string msg) {
 	ChatMessage c;
+	if (!system && from.empty()) {
+		std::string unkown_string =
+			(boost::format("\\<%s\\>") % _("unknown")).str();
+		c.sender = unkown_string;
+	} else {
+		c.sender = from;
+	}
 	c.time      = time(0);
-	c.sender    = !system && from.empty() ? _("<unknown>") : from;
 	c.playern   = system ? -1 : to.size() ? 3 : 7;
 	c.msg       = msg;
 	c.recipient = to;

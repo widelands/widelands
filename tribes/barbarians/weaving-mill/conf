@@ -9,6 +9,10 @@ trunk=5
 raw_stone=2
 thatchreed=2
 
+[return_on_dismantle]
+trunk=2
+raw_stone=2
+
 [working positions]
 weaver=1
 
@@ -19,7 +23,7 @@ thatchreed=8
 work=_Work
 
 [work]
-return=skipped when economy needs thatchreed and not economy needs cloth
+return=skipped unless economy needs cloth or not economy needs thatchreed
 animate=working 45000
 consume=thatchreed
 produce=cloth

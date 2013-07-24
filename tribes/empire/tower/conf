@@ -11,6 +11,11 @@ wood=3
 stone=4
 marblecolumn=2
 
+[return_on_dismantle]
+wood=1
+stone=2
+marblecolumn=1
+
 [idle]
 pics=tower_i_??.png
 hotspot=53 81

@@ -19,6 +19,7 @@
 
 #include <cstdio>
 #include <sstream>
+#include <boost/foreach.hpp>
 
 #include "upcast.h"
 #include "wexception.h"
@@ -59,7 +60,7 @@ Building_Descr::Building_Descr
 	Map_Object_Descr(_name, _descname),
 	m_tribe         (_descr),
 	m_buildable     (true),
-	m_buildicon     (NULL),
+	m_buildicon     (nullptr),
 	m_size          (BaseImmovable::SMALL),
 	m_mine          (false),
 	m_port          (false),
@@ -144,8 +145,19 @@ Building_Descr::Building_Descr
 		}
 
 		// Get costs
-		Section & buildcost_s = prof.get_safe_section("buildcost");
-		m_buildcost.parse(m_tribe, buildcost_s);
+		if (m_buildable) {
+			Section & buildcost_s = prof.get_safe_section("buildcost");
+			m_buildcost.parse(m_tribe, buildcost_s);
+			Section & returnsect_s = prof.get_safe_section("return_on_dismantle");
+			m_return_dismantle.parse(m_tribe, returnsect_s);
+		}
+
+		if (m_enhanced_building) {
+			Section & en_buildcost_s = prof.get_safe_section("enhancement_cost");
+			m_enhance_cost.parse(m_tribe, en_buildcost_s);
+			Section & en_returnsect_s = prof.get_safe_section("return_on_dismantle_on_enhanced");
+			m_return_enhanced.parse(m_tribe, en_returnsect_s);
+		}
 	} else if (m_global) {
 		//  get build icon for global buildings (for statistics window)
 		m_buildicon_fname  = directory;
@@ -173,13 +185,16 @@ Building & Building_Descr::create
 	 Player               &       owner,
 	 Coords                 const pos,
 	 bool                   const construct,
-	 Building_Descr const * const old,
-	 bool                         loading)
+	 bool                         loading,
+	 Building::FormerBuildings const former_buildings)
 	const
 {
-	Building & b = construct ? create_constructionsite(old) : create_object();
+	Building & b = construct ? create_constructionsite() : create_object();
 	b.m_position = pos;
 	b.set_owner(&owner);
+	BOOST_FOREACH(const Building_Descr * descr, former_buildings) {
+		b.m_old_buildings.push_back(descr);
+	}
 	if (loading) {
 		b.Building::init(egbase);
 		return b;
@@ -228,12 +243,9 @@ void Building_Descr::load_graphics()
 /*
 ===============
 Create a construction site for this type of building
-
-if old != 0 this is an enhancement from an older building
 ===============
 */
-Building & Building_Descr::create_constructionsite
-	(Building_Descr const * const old) const
+Building & Building_Descr::create_constructionsite() const
 {
 	Building_Descr const * const descr =
 		m_tribe.get_building_descr
@@ -241,8 +253,6 @@ Building & Building_Descr::create_constructionsite
 	ConstructionSite & csite =
 		ref_cast<ConstructionSite, Map_Object>(descr->create_object());
 	csite.set_building(*this);
-	if (old)
-		csite.set_previous_building(old);
 
 	return csite;
 }
@@ -436,6 +446,9 @@ void Building::cleanup(Editor_Game_Base & egbase)
 	}
 
 	PlayerImmovable::cleanup(egbase);
+
+	BOOST_FOREACH(boost::signals::connection& c, options_window_connections)
+		c.disconnect();
 }
 
 
@@ -722,10 +735,7 @@ Draw the building.
 ===============
 */
 void Building::draw
-	(const Editor_Game_Base &       game,
-	 RenderTarget           &       dst,
-	 FCoords                  const coords,
-	 Point                    const pos)
+	(const Editor_Game_Base& game, RenderTarget& dst, const FCoords& coords, const Point& pos)
 {
 	if (coords == m_position) { // draw big buildings only once
 		dst.drawanim
@@ -745,10 +755,7 @@ Draw overlay help strings when enabled.
 ===============
 */
 void Building::draw_help
-	(const Editor_Game_Base &       game,
-	 RenderTarget           &       dst,
-	 FCoords,
-	 Point                    const pos)
+	(const Editor_Game_Base& game, RenderTarget& dst, const FCoords&, const Point& pos)
 {
 	const Interactive_GameBase & igbase =
 		ref_cast<Interactive_GameBase const, Interactive_Base const>
@@ -861,6 +868,7 @@ void Building::add_worker(Worker & worker) {
 			set_seeing(true);
 	}
 	PlayerImmovable::add_worker(worker);
+	workers_changed();
 }
 
 
@@ -868,6 +876,7 @@ void Building::remove_worker(Worker & worker) {
 	PlayerImmovable::remove_worker(worker);
 	if (not get_workers().size())
 		set_seeing(false);
+	workers_changed();
 }
 
 /**

@@ -37,6 +37,8 @@
 
 namespace Widelands {
 
+const uint32_t TrainingSite::training_state_multiplier = 12;
+
 TrainingSite_Descr::TrainingSite_Descr
 	(char const * const _name, char const * const _descname,
 	 const std::string & directory, Profile & prof, Section & global_s,
@@ -192,12 +194,7 @@ TrainingSite::init_kick_state(const tAttribute & art, const TrainingSite_Descr &
  */
 std::string TrainingSite::get_statistics_string()
 {
-	if (State * const state = get_state())
-		return state->program->descname();
-	else if (m_result == Completed)
-		return _("Resting");
-	else
-		return _("Not Working");
+	return ProductionSite::get_statistics_string();
 }
 
 /**
@@ -478,7 +475,7 @@ void TrainingSite::drop_unupgradable_soldiers(Game &)
  */
 void TrainingSite::drop_stalled_soldiers(Game &)
 {
-	Soldier * soldier_to_drop = NULL;
+	Soldier * soldier_to_drop = nullptr;
 	uint32_t highest_soldier_level_seen = 0;
 
 	for (uint32_t i = 0; i < m_soldiers.size(); ++i)
@@ -538,7 +535,7 @@ void TrainingSite::drop_stalled_soldiers(Game &)
 	}
 
 	// Finally drop the soldier.
-	if (NULL != soldier_to_drop)
+	if (nullptr != soldier_to_drop)
 		{
 			log("TrainingSite::drop_stalled_soldiers: Kicking somebody out.\n");
 			dropSoldier (*soldier_to_drop);

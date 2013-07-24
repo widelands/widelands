@@ -47,9 +47,6 @@
 
 #include <config.h>
 
-#ifndef HAVE_VARARRAY
-#include <climits>
-#endif
 namespace Widelands {
 
 BaseImmovable::BaseImmovable(const Map_Object_Descr & mo_descr) :
@@ -492,10 +489,7 @@ void Immovable::act(Game & game, uint32_t const data)
 
 
 void Immovable::draw
-	(const Editor_Game_Base &       game,
-	 RenderTarget           &       dst,
-	 FCoords,
-	 Point                    const pos)
+	(const Editor_Game_Base& game, RenderTarget& dst, const FCoords&, const Point& pos)
 {
 	if (m_anim) {
 		if (!m_anim_construction_total)
@@ -730,7 +724,7 @@ void Immovable::save
 Map_Object::Loader * Immovable::load
 	(Editor_Game_Base & egbase, Map_Map_Object_Loader & mol, FileRead & fr)
 {
-	std::auto_ptr<Loader> loader(new Loader);
+	std::unique_ptr<Loader> loader(new Loader);
 
 	try {
 		// The header has been peeled away by the caller

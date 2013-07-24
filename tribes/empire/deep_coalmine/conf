@@ -3,9 +3,13 @@ buildable=no
 enhanced_building=yes
 output=coal
 
-[buildcost]
+[enhancement_cost]
 trunk=4
 wood=2
+
+[return_on_dismantle_on_enhanced]
+trunk=2
+wood=1
 
 [working positions]
 master-miner=1
@@ -22,8 +26,8 @@ beer=6
 work=_Work
 
 [work]
-return=skipped when economy needs meal and not economy needs coal
-return=skipped when economy needs beer and not economy needs coal
+return=skipped unless economy needs coal or not economy needs meal
+return=skipped unless economy needs coal or not economy needs beer
 sleep=42000
 consume=beer meal
 animate=working 18000

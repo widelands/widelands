@@ -19,27 +19,29 @@
 
 #include "game_main_menu_save_game.h"
 
-#include "io/filesystem/filesystem.h"
+#include <boost/format.hpp>
+#include <libintl.h>
+
 #include "constants.h"
-#include "logic/game.h"
 #include "game_io/game_loader.h"
 #include "game_io/game_preload_data_packet.h"
 #include "game_io/game_saver.h"
+#include "i18n.h"
 #include "interactive_gamebase.h"
+#include "gamecontroller.h"
+#include "io/filesystem/filesystem.h"
 #include "io/filesystem/layered_filesystem.h"
+#include "logic/game.h"
 #include "profile/profile.h"
+#include "interactive_player.h"
+#include "timestring.h"
 
-#include <boost/format.hpp>
 using boost::format;
 
 Interactive_GameBase & Game_Main_Menu_Save_Game::igbase() {
 	return ref_cast<Interactive_GameBase, UI::Panel>(*get_parent());
 }
 
-
-Game_Main_Menu_Save_Game::Game_Main_Menu_Save_Game
-	(Interactive_GameBase & parent, UI::UniqueWindow::Registry & registry)
-:
 #define WINDOW_WIDTH                                                        440
 #define WINDOW_HEIGHT                                                       440
 #define VMARGIN                                                               5
@@ -55,18 +57,28 @@ Game_Main_Menu_Save_Game::Game_Main_Menu_Save_Game
 #define CANCEL_Y                      (WINDOW_HEIGHT - BUTTON_HEIGHT - VMARGIN)
 #define DELETE_Y                          (CANCEL_Y - BUTTON_HEIGHT - VSPACING)
 #define OK_Y                              (DELETE_Y - BUTTON_HEIGHT - VSPACING)
+
+Game_Main_Menu_Save_Game::Game_Main_Menu_Save_Game
+	(Interactive_GameBase & parent, UI::UniqueWindow::Registry & registry)
+:
 	UI::UniqueWindow
 		(&parent, "save_game", &registry,
 		 WINDOW_WIDTH, WINDOW_HEIGHT, _("Save Game")),
 	m_ls     (this, HSPACING, VSPACING,  LIST_WIDTH, LIST_HEIGHT),
 	m_name_label
 		(this, DESCRIPTION_X,  5, 0, 20, _("Map Name: "),  UI::Align_CenterLeft),
-	m_name
+	m_mapname
 		(this, DESCRIPTION_X, 20, 0, 20, " ",              UI::Align_CenterLeft),
 	m_gametime_label
 		(this, DESCRIPTION_X, 45, 0, 20, _("Game Time: "), UI::Align_CenterLeft),
 	m_gametime
 		(this, DESCRIPTION_X, 60, 0, 20, " ",              UI::Align_CenterLeft),
+	m_players_label
+		(this, DESCRIPTION_X, 85, 0, 20, " ",              UI::Align_CenterLeft),
+	m_win_condition_label
+		(this, DESCRIPTION_X, 110, 0, 20, _("Win condition: "), UI::Align_CenterLeft),
+	m_win_condition
+		(this, DESCRIPTION_X, 125, 0, 20, " ",             UI::Align_CenterLeft),
 	m_curdir(SaveHandler::get_base_dir())
 {
 	m_editbox =
@@ -110,7 +122,32 @@ Game_Main_Menu_Save_Game::Game_Main_Menu_Save_Game
 	center_to_parent();
 	move_to_top();
 
+	std::string cur_filename = parent.game().save_handler().get_cur_filename();
+	if (!cur_filename.empty()) {
+		select_by_name(cur_filename);
+	} else {
+		// Display current game infos
+		{
+			//Try to translate the map name.
+			i18n::Textdomain td("maps");
+			m_mapname.set_text(_(parent.game().get_map()->get_name()));
+		}
+		uint32_t gametime = parent.game().get_gametime();
+		m_gametime.set_text(gametimestring(gametime));
+
+		char buf[200];
+		uint8_t player_nr = parent.game().get_number_of_players();
+		sprintf(buf, "%i %s", player_nr, ngettext(_("player"), _("players"),  player_nr));
+		m_players_label.set_text(buf);
+		m_win_condition.set_text(parent.game().get_win_condition_displayname());
+	}
+
 	m_editbox->focus();
+	if (parent.game().get_ipl() && !parent.game().get_ipl()->is_multiplayer()) {
+		// Pause the game only if we are part of the game
+		// and not in multiplayer
+		parent.game().gameController()->setPaused(true);
+	}
 }
 
 
@@ -129,20 +166,26 @@ void Game_Main_Menu_Save_Game::selected(uint32_t) {
 	}
 	m_button_ok->set_enabled(true);
 
-	m_name.set_text(gpdp.get_mapname());
-	char buf[200];
+	//Try to translate the map name.
+	{
+		i18n::Textdomain td("maps");
+		m_mapname.set_text(_(gpdp.get_mapname()));
+	}
+
 	uint32_t gametime = gpdp.get_gametime();
-#define SPLIT_GAMETIME(unit, factor) \
-   uint32_t const unit = gametime / factor; gametime %= factor;
-	SPLIT_GAMETIME(days, 86400000);
-	SPLIT_GAMETIME(hours, 3600000);
-	SPLIT_GAMETIME(minutes, 60000);
-	SPLIT_GAMETIME(seconds,  1000);
-	sprintf
-		(buf,
-		 _("%02ud%02uh%02u'%02u\"%03u"),
-		 days, hours, minutes, seconds, gametime);
-	m_gametime.set_text(buf);
+	m_gametime.set_text(gametimestring(gametime));
+
+	char buf[200];
+	if (gpdp.get_number_of_players() > 0) {
+		sprintf
+			(buf, "%i %s", gpdp.get_number_of_players(),
+			ngettext(_("player"), _("players"), gpdp.get_number_of_players()));
+			m_players_label.set_text(buf);
+	} else {
+		// Keep label empty
+		m_players_label.set_text("");
+	}
+	m_win_condition.set_text(gpdp.get_win_condition());
 }
 
 /**
@@ -177,9 +220,17 @@ void Game_Main_Menu_Save_Game::fill_list() {
 			m_ls.add(FileSystem::FS_FilenameWoExt(name).c_str(), name);
 		} catch (const _wexception &) {} //  we simply skip illegal entries
 	}
+}
 
-	if (m_ls.size())
-		m_ls.select(0);
+void Game_Main_Menu_Save_Game::select_by_name(std::string name)
+{
+	for (uint32_t idx = 0; idx < m_ls.size(); idx++) {
+		const std::string val = m_ls[idx];
+		if (name == val) {
+			m_ls.select(idx);
+			return;
+		}
+	}
 }
 
 /*
@@ -205,6 +256,7 @@ static void dosave
 			(&igbase, _("Save Game Error!!"), s, UI::WLMessageBox::OK);
 		mbox.run();
 	}
+	game.save_handler().set_current_filename(complete_filename);
 }
 
 struct SaveWarnMessageBox : public UI::WLMessageBox {
@@ -264,6 +316,15 @@ void Game_Main_Menu_Save_Game::ok()
 		die();
 	}
 }
+
+void Game_Main_Menu_Save_Game::die()
+{
+	UI::UniqueWindow::die();
+	if (igbase().game().get_ipl() && !igbase().game().get_ipl()->is_multiplayer()) {
+		igbase().game().gameController()->setPaused(false);
+	}
+}
+
 
 
 struct DeletionMessageBox : public UI::WLMessageBox {

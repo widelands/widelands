@@ -330,6 +330,7 @@ void Map::cleanup() {
 	}
 #endif
 	m_extradatainfos.clear();
+	m_port_spaces.clear();
 }
 
 /*
@@ -707,22 +708,21 @@ void Map::load_world()
 		m_world = new World(m_worldname);
 }
 
-/*
-===============
-Load data for the graphics subsystem.
-===============
-*/
+/// Load data for the graphics subsystem.
 void Map::load_graphics()
 {
 	m_world->load_graphics();
 }
 
 
-/*
-===============
-Returns the immovable at the given coordinate
-===============
-*/
+NodeCaps Map::get_max_nodecaps(FCoords & fc) {
+	NodeCaps caps = _calc_nodecaps_pass1(fc, false);
+	caps = _calc_nodecaps_pass2(fc, false, caps);
+	return caps;
+}
+
+
+/// \returns the immovable at the given coordinate
 BaseImmovable * Map::get_immovable(const Coords coord) const
 {
 	return operator[](coord).get_immovable();
@@ -1142,8 +1142,11 @@ into two passes. You should always perform both passes. See the comment
 above recalc_brightness.
 ===============
 */
-void Map::recalc_nodecaps_pass1(FCoords const f)
-{
+void Map::recalc_nodecaps_pass1(FCoords const f) {
+	f.field->caps = _calc_nodecaps_pass1(f, true);
+}
+
+NodeCaps Map::_calc_nodecaps_pass1(FCoords const f, bool consider_mobs) {
 	uint8_t caps = CAPS_NONE;
 
 	// 1a) Get all the neighbours to make life easier
@@ -1212,33 +1215,33 @@ void Map::recalc_nodecaps_pass1(FCoords const f)
 
 	//  === everything below is used to check buildability ===
 
-	//  3) General buildability check: if a "robust" Map_Object is on this node
-	//  we cannot build anything on it. Exception: we can build flags on roads.
-	if (BaseImmovable * const imm = get_immovable(f))
-		if
-			(not dynamic_cast<Road const *>(imm)
-			 &&
-			 imm->get_size() >= BaseImmovable::SMALL)
-		{
-			// 3b) [OVERRIDE] check for "unpassable" Map_Objects
-			if (!imm->get_passable())
-				caps &= ~(MOVECAPS_WALK | MOVECAPS_SWIM);
-			goto end;
-		}
+	// if we are interested in the maximum theoretically available NodeCaps, this is not run
+	if (consider_mobs) {
+		//  3) General buildability check: if a "robust" Map_Object is on this node
+		//  we cannot build anything on it. Exception: we can build flags on roads.
+		if (BaseImmovable * const imm = get_immovable(f))
+			if
+				(not dynamic_cast<Road const *>(imm)
+				&&
+				imm->get_size() >= BaseImmovable::SMALL)
+			{
+				// 3b) [OVERRIDE] check for "unpassable" Map_Objects
+				if (!imm->get_passable())
+					caps &= ~(MOVECAPS_WALK | MOVECAPS_SWIM);
+				return static_cast<NodeCaps>(caps);
+			}
+	}
 
 	//  4) Flags
 	//  We can build flags on anything that's walkable and buildable, with some
 	//  restrictions
 	if (caps & MOVECAPS_WALK) {
 		//  4b) Flags must be at least 2 edges apart
-		if
-			(find_immovables
-			 	(Area<FCoords>(f, 1), 0, FindImmovableType(Map_Object::FLAG)))
-			goto end;
+		if (consider_mobs && find_immovables(Area<FCoords>(f, 1), 0, FindImmovableType(Map_Object::FLAG)))
+			return static_cast<NodeCaps>(caps);
 		caps |= BUILDCAPS_FLAG;
 	}
-end:
-	f.field->caps = static_cast<NodeCaps>(caps);
+	return static_cast<NodeCaps>(caps);
 }
 
 
@@ -1250,29 +1253,40 @@ on this Field.
 Important: flag buildability has already been checked in the first pass.
 ===============
 */
-void Map::recalc_nodecaps_pass2(const FCoords & f)
-{
-	// NOTE: This dependency on the bottom-right neighbour is the reason
-	// why the caps calculation is split into two passes
+void Map::recalc_nodecaps_pass2(const FCoords & f) {
+	f.field->caps = _calc_nodecaps_pass2(f, true);
+}
+
+NodeCaps Map::_calc_nodecaps_pass2(FCoords const f, bool consider_mobs, NodeCaps initcaps) {
+	uint8_t caps = consider_mobs ? f.field->caps : static_cast<uint8_t>(initcaps);
+
+	// NOTE  This dependency on the bottom-right neighbour is the reason
+	// NOTE  why the caps calculation is split into two passes
+	// NOTE  However this dependency has to be recalculated in case we are interested in the
+	// NOTE  maximum possible NodeCaps for this FCoord
 	const FCoords br = br_n(f);
-	if
-		(!(br.field->caps & BUILDCAPS_FLAG)
-		 &&
-		 (!br.field->get_immovable() ||
-		  br.field->get_immovable()->get_type() != Map_Object::FLAG))
-		return;
+	if (consider_mobs) {
+		if
+			(!(br.field->caps & BUILDCAPS_FLAG)
+			&&
+			(!br.field->get_immovable() || br.field->get_immovable()->get_type() != Map_Object::FLAG))
+			return static_cast<NodeCaps>(caps);
+	} else {
+		if (!(_calc_nodecaps_pass1(br, false) & BUILDCAPS_FLAG))
+			return static_cast<NodeCaps>(caps);
+	}
 
 	bool mine;
-	uint8_t buildsize = calc_buildsize(f, true, &mine);
+	uint8_t buildsize = calc_buildsize(f, true, &mine, consider_mobs, initcaps);
 	if (buildsize < BaseImmovable::SMALL)
-		return;
+		return static_cast<NodeCaps>(caps);
 	assert(buildsize >= BaseImmovable::SMALL && buildsize <= BaseImmovable::BIG);
 
 	if (buildsize == BaseImmovable::BIG) {
 		if
-			(calc_buildsize(l_n(f), false) < BaseImmovable::BIG ||
-			 calc_buildsize(tl_n(f), false) < BaseImmovable::BIG ||
-			 calc_buildsize(tr_n(f), false) < BaseImmovable::BIG)
+			(calc_buildsize(l_n(f),  false, 0, consider_mobs, initcaps) < BaseImmovable::BIG ||
+			 calc_buildsize(tl_n(f), false, 0, consider_mobs, initcaps) < BaseImmovable::BIG ||
+			 calc_buildsize(tr_n(f), false, 0, consider_mobs, initcaps) < BaseImmovable::BIG)
 			buildsize = BaseImmovable::MEDIUM;
 	}
 
@@ -1291,18 +1305,12 @@ void Map::recalc_nodecaps_pass2(const FCoords & f)
 			WALK_NE, WALK_NW, WALK_W, WALK_SW, WALK_SE, WALK_E
 		};
 		if (!is_cycle_connected(br, 6, cycledirs))
-			return;
+			return static_cast<NodeCaps>(caps);
 	}
 
 	if (mine) {
-		if
-			(static_cast<int32_t>(br.field->get_height())
-			 -
-			 f.field->get_height()
-			 <
-			 4)
-			f.field->caps |= BUILDCAPS_MINE;
-		return;
+		if (static_cast<int32_t>(br.field->get_height()) - f.field->get_height() < 4)
+			caps |= BUILDCAPS_MINE;
 	} else {
 		Field::Height const f_height = f.field->get_height();
 
@@ -1315,13 +1323,13 @@ void Map::recalc_nodecaps_pass2(const FCoords & f)
 				uint16_t const slope =
 					abs(mr.location().field->get_height() - f_height);
 				if (slope >= 4)
-					return;
+					return static_cast<NodeCaps>(caps);
 				if (slope >= 3)
 					buildsize = BaseImmovable::SMALL;
 			} while (mr.advance(*this));
 		}
 		if (abs(br.field->get_height() - f_height) >= 2)
-			return;
+			return static_cast<NodeCaps>(caps);
 
 		// Reduce building size based on height diff. of second order
 		// neighbours  If height difference between this field and second
@@ -1340,10 +1348,11 @@ void Map::recalc_nodecaps_pass2(const FCoords & f)
 		}
 
 		if ((buildsize == BaseImmovable::BIG) && is_port_space(f) && !find_portdock(f).empty())
-			f.field->caps |= BUILDCAPS_PORT;
+			caps |= BUILDCAPS_PORT;
 
-		f.field->caps |= buildsize;
+		caps |= buildsize;
 	}
+	return static_cast<NodeCaps>(caps);
 }
 
 /**
@@ -1351,15 +1360,21 @@ void Map::recalc_nodecaps_pass2(const FCoords & f)
  * based on immovables on \p f and its neighbours.
  * Sets \p ismine depending on whether the field is on mountaineous terrain
  * or not.
+ * \p consider_mobs defines, whether mapobjects currently on \p f or neighbour fields should be considered
+ * for the calculation. If not (calculation of maximum theoretical possible buildsize) initcaps must be set.
  */
-int Map::calc_buildsize(const FCoords & f, bool avoidnature, bool * ismine)
+int Map::calc_buildsize
+	(const FCoords & f, bool avoidnature, bool * ismine, bool consider_mobs, NodeCaps initcaps)
 {
-	if (!(f.field->get_caps() & MOVECAPS_WALK))
-		return BaseImmovable::NONE;
-	if (BaseImmovable const * const immovable = get_immovable(f)) {
-		if (immovable->get_size() >= BaseImmovable::SMALL)
+	if (consider_mobs) {
+		if (!(f.field->get_caps() & MOVECAPS_WALK))
 			return BaseImmovable::NONE;
-	}
+		if (BaseImmovable const * const immovable = get_immovable(f))
+			if (immovable->get_size() >= BaseImmovable::SMALL)
+				return BaseImmovable::NONE;
+	} else
+		if (!(initcaps & MOVECAPS_WALK))
+			return BaseImmovable::NONE;
 
 	// Get all relevant neighbours and count terrain triangle types.
 	const FCoords tr = tr_n(f);
@@ -1396,20 +1411,22 @@ int Map::calc_buildsize(const FCoords & f, bool avoidnature, bool * ismine)
 
 	// Adjust size based on neighbouring immovables
 	int buildsize = BaseImmovable::BIG;
-	std::vector<ImmovableFound> objectlist;
-	find_immovables
-		(Area<FCoords>(f, 1),
-		 &objectlist,
-		 FindImmovableSize(BaseImmovable::SMALL, BaseImmovable::BIG));
-	for (uint32_t i = 0; i < objectlist.size(); ++i) {
-		const BaseImmovable * obj = objectlist[i].object;
-		int objsize = obj->get_size();
-		if (objsize == BaseImmovable::NONE)
-			continue;
-		if (avoidnature && obj->get_type() == Map_Object::IMMOVABLE)
-			objsize += 1;
-		if (objsize + buildsize > BaseImmovable::BIG)
-			buildsize = BaseImmovable::BIG - objsize + 1;
+	if (consider_mobs) {
+		std::vector<ImmovableFound> objectlist;
+		find_immovables
+			(Area<FCoords>(f, 1),
+			&objectlist,
+			FindImmovableSize(BaseImmovable::SMALL, BaseImmovable::BIG));
+		for (uint32_t i = 0; i < objectlist.size(); ++i) {
+			const BaseImmovable * obj = objectlist[i].object;
+			int objsize = obj->get_size();
+			if (objsize == BaseImmovable::NONE)
+				continue;
+			if (avoidnature && obj->get_type() == Map_Object::IMMOVABLE)
+				objsize += 1;
+			if (objsize + buildsize > BaseImmovable::BIG)
+				buildsize = BaseImmovable::BIG - objsize + 1;
+		}
 	}
 
 	if (ismine)

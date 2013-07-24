@@ -222,6 +222,8 @@ throw (_wexception)
 				break;
 			case Message::Archived: //  The default status. Do not write.
 				break;
+			default:
+				assert(false);
 			}
 		}
 		char filename[FILENAME_SIZE];

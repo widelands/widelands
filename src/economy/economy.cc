@@ -590,6 +590,7 @@ void Economy::_split(const std::set<OPtr<Flag> > & flags)
 
 	container_iterate_const(std::set<OPtr<Flag> >, flags, it) {
 		Flag & flag = *it.current->get(owner().egbase());
+		assert(m_flags.size() > 1);  // We will not be deleted in remove_flag, right?
 		remove_flag(flag);
 		e.add_flag(flag);
 	}

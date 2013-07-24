@@ -472,7 +472,7 @@ void RichText::parse(const std::string & rtext)
  * @note this function may draw content outside the box given offset
  * and @ref width and @ref height, if there were wrapping problems.
  */
-void RichText::draw(RenderTarget & dst, Point offset, bool background)
+void RichText::draw(RenderTarget & dst, const Point& offset, bool background)
 {
 	for
 		(std::vector<Element *>::const_iterator elt = m->elements.begin();

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007-2008, 2010 by the Widelands Development Team
+ * Copyright (C) 2007-2008, 2010, 2013 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -36,7 +36,7 @@
 
 #define PROGRESS_FONT_COLOR_FG        RGBColor(128, 128, 255)
 #define PROGRESS_FONT_COLOR_BG        RGBColor(64, 64, 0)
-#define PROGRESS_FONT_COLOR PROGRESS_FONT_COLOR_FG, PROGRESS_FONT_COLOR_BG
+//#define PROGRESS_FONT_COLOR PROGRESS_FONT_COLOR_FG, PROGRESS_FONT_COLOR_BG // not used
 #define PROGRESS_STATUS_RECT_PADDING  2
 #define PROGRESS_STATUS_BORDER_X      2
 #define PROGRESS_STATUS_BORDER_Y      2
@@ -46,7 +46,7 @@ namespace UI {
 
 ProgressWindow::ProgressWindow(const std::string & background)
 	: m_xres(0), m_yres(0),
-	m_background_pic(NULL)
+	m_background_pic(nullptr)
 {
 	set_background(background);
 	step(_("Preparing..."));
@@ -117,7 +117,7 @@ void ProgressWindow::set_background(const std::string & file_name) {
 		}
 	} else
 		m_background = "pics/progress.png";
-	m_background_pic = NULL;
+	m_background_pic = nullptr;
 	draw_background(rt, g_gr->get_xres(), g_gr->get_yres());
 	update(true);
 }
@@ -138,7 +138,7 @@ void ProgressWindow::step(const std::string & description) {
 	UI::g_fh->draw_text(rt, ts, m_label_center, description, Align_Center);
 	g_gr->update_rectangle(m_label_rectangle);
 
-#ifdef WIN32
+#ifdef _WIN32
 		// Pump events to prevent "not responding" on windows
 		SDL_PumpEvents();
 #endif
