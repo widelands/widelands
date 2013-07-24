@@ -2175,7 +2175,7 @@ struct ReplayGameController : public GameController {
 				m_game.enqueue_command(cmd);
 
 			if (m_replayreader->EndOfReplay()) {
-				m_replayreader.reset(0);
+				m_replayreader.reset(nullptr);
 				m_game.enqueue_command
 					(new Cmd_ReplayEnd(m_time = m_game.get_gametime()));
 			}
