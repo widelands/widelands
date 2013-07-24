@@ -3,6 +3,21 @@ enhancement=colosseum
 soldier_capacity=8
 trainer_patience=8
 
+[buildcost]
+trunk=2
+stone=4
+marble=5
+wood=5
+marblecolumn=2
+
+[return_on_dismantle]
+trunk=1
+stone=3
+marble=3
+wood=2
+marblecolumn=1
+
+
 [working positions]
 carrier=1
 
@@ -36,13 +51,6 @@ train=soldier evade 0 1
 bread=10
 fish=6
 meat=6
-
-[buildcost]
-trunk=2
-stone=4
-marble=5
-wood=5
-marblecolumn=2
 
 [idle]
 pics=arena_i_??.png  # ???

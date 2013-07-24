@@ -20,7 +20,6 @@
 #ifndef PATHFIELD_H
 #define PATHFIELD_H
 
-#include <boost/scoped_array.hpp>
 #include <boost/shared_ptr.hpp>
 
 #include <stdint.h>
@@ -59,7 +58,7 @@ struct Pathfield {
 };
 
 struct Pathfields {
-	boost::scoped_array<Pathfield> fields;
+	std::unique_ptr<Pathfield[]> fields;
 	uint16_t cycle;
 
 	Pathfields(uint32_t nrfields);

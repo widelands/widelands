@@ -18,6 +18,7 @@
  */
 
 #include <libintl.h>
+#include <boost/format.hpp>
 
 #include "helper.h"
 #include "i18n.h"
@@ -242,21 +243,23 @@ std::string ProductionSite::get_statistics_string()
 	uint32_t       nr_workers           = 0;
 	for (uint32_t i = nr_working_positions; i;)
 		nr_workers += m_working_positions[--i].worker ? 1 : 0;
-	if (!nr_workers)
-		return _("(not occupied)");
-	else if (uint32_t const nr_requests = nr_working_positions - nr_workers) {
-		char buffer[1000];
-		snprintf
-			(buffer, sizeof(buffer), "%s",
-			 ngettext("Worker missing", "Workers missing", nr_requests));
-		return buffer;
+	if (!nr_workers) {
+		 return
+			(boost::format("<font color=%s>%s</font>") % UI_FONT_CLR_BAD_HEX % _("(not occupied)")).str();
+	} else if (uint32_t const nr_requests = nr_working_positions - nr_workers) {
+		return
+			(boost::format("<font color=%s>%s</font>") % UI_FONT_CLR_BAD_HEX %
+				ngettext(_("Worker missing"), _("Workers missing"), nr_requests))
+			.str();
 	}
 
-	if (m_statistics_changed)
+	if (m_statistics_changed) {
 		calc_statistics();
+	}
 
-	if (m_is_stopped)
-		return _("(stopped)");
+	if (m_is_stopped) {
+		return (boost::format("<font color=%s>%s</font>") % UI_FONT_CLR_BRIGHT_HEX % _("(stopped)")).str();
+	}
 
 	return m_statistics_buffer;
 }
@@ -315,21 +318,43 @@ void ProductionSite::calc_statistics()
 				++lastOk;
 		}
 	}
-	uint8_t const percOk = (ok * 100) / STATISTICS_VECTOR_LENGTH;
-	uint8_t const lastPercOk = (lastOk * 100) / (STATISTICS_VECTOR_LENGTH / 2);
+	// Somehow boost::format doesn't handle correctly uint8_t in this case
+	unsigned int percOk = (ok * 100) / STATISTICS_VECTOR_LENGTH;
+	unsigned int lastPercOk = (lastOk * 100) / (STATISTICS_VECTOR_LENGTH / 2);
 
-	const std::string trend =
-		lastPercOk > percOk ? "+" : lastPercOk < percOk ? "-" : "=";
-
-	if (0 < percOk and percOk < 100)
-		snprintf
-			(m_statistics_buffer, sizeof(m_statistics_buffer),
-			 "%d%% %s", percOk, trend.c_str());
+	std::string color;
+	if (percOk < 33)
+		color = UI_FONT_CLR_BAD_HEX;
+	else if (percOk < 66)
+		color = UI_FONT_CLR_OK_HEX;
 	else
+		color = UI_FONT_CLR_GOOD_HEX;
+	const std::string perc_str =
+		(boost::format("<font color=%1$s>%2$i%%</font>") % color % percOk).str();
+
+	std::string trend;
+	if (lastPercOk > percOk) {
+		color = UI_FONT_CLR_GOOD_HEX;
+		trend = "+";
+	} else if (lastPercOk < percOk) {
+		color = UI_FONT_CLR_BAD_HEX;
+		trend = "-";
+	} else {
+		color = UI_FONT_CLR_BRIGHT_HEX;
+		trend = "=";
+	}
+	const std::string trend_str =
+		(boost::format("<font color=%s>%s</font>") % color % trend).str();
+
+	if (0 < percOk and percOk < 100) {
 		snprintf
 			(m_statistics_buffer, sizeof(m_statistics_buffer),
-			 "%d%%",    percOk);
-
+			 "%s %s", perc_str.c_str(), trend_str.c_str());
+	} else {
+		snprintf
+			(m_statistics_buffer, sizeof(m_statistics_buffer),
+			 "%s", perc_str.c_str());
+	}
 	m_last_stat_percent = percOk;
 
 	m_statistics_changed = false;

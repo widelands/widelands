@@ -20,9 +20,9 @@
 	((v)=cast(t *, pdep_reallocv(L, v, oldn, n, sizeof(t))))
 #define pdep_freearray(L, b, n, t)   pdep_reallocv(L, (b), n, 0, sizeof(t))
 #define pdep_newvector(L,n,t) \
-	cast(t *, pdep_reallocv(L, NULL, 0, n, sizeof(t)))
+	cast(t *, pdep_reallocv(L, nullptr, 0, n, sizeof(t)))
 #define pdep_new(L,t)		cast(t *, pdep_malloc(L, sizeof(t)))
-#define pdep_malloc(L,t)	pdep_realloc_(L, NULL, 0, (t))
+#define pdep_malloc(L,t)	pdep_realloc_(L, nullptr, 0, (t))
 #define pdep_checkstack(L,n)	\
   if (reinterpret_cast<char *>(L->stack_last) - \
 		  reinterpret_cast<char *>(L->top) <= \

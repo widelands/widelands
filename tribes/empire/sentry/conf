@@ -10,6 +10,17 @@ wood=1
 trunk=1
 stone=1
 
+[return_on_dismantle]
+stone=1
+wood=1
+
+[enhancement_cost]
+wood=1
+stone=1
+
+[return_on_dismantle_on_enhanced]
+stone=1
+
 [idle]
 pics=sentry_i_??.png
 hotspot=37 60

@@ -24,15 +24,11 @@
 #include "logic/editor_game_base.h"
 #include "editor/tools/editor_increase_resources_tool.h"
 
-#include <boost/scoped_array.hpp>
-
 #define AVG_ELEVATION   (0x80000000)
 #define MAX_ELEVATION   (0xffffffff)
 #define MAP_ID_DIGITS   24
 #define ISLAND_BORDER   10
 #define MAX_ELEVATION_HALF (0x80000000)
-
-using boost::scoped_array;
 
 namespace Widelands
 {
@@ -46,7 +42,7 @@ MapGenerator::MapGenerator
 }
 
 void MapGenerator::generate_bobs
-	(scoped_array<uint32_t> const * random_bobs,
+	(std::unique_ptr<uint32_t[]> const * random_bobs,
 	 Coords const fc,
 	 RNG  &       rng,
 	 MapGenAreaInfo::MapGenTerrainType const terrType)
@@ -644,32 +640,32 @@ void MapGenerator::create_random_map()
 	//  Create a "raw" random elevation matrix.
 	//  We will transform this into reasonable elevations and terrains later on.
 
-	scoped_array<uint32_t> elevations
+	std::unique_ptr<uint32_t[]> elevations
 		(generate_random_value_map(m_mapInfo.w, m_mapInfo.h, rng));
 
 	//  for land stuff
-	scoped_array<uint32_t> random2
+	std::unique_ptr<uint32_t[]> random2
 		(generate_random_value_map(m_mapInfo.w, m_mapInfo.h, rng));
-	scoped_array<uint32_t> random3
+	std::unique_ptr<uint32_t[]> random3
 		(generate_random_value_map(m_mapInfo.w, m_mapInfo.h, rng));
 
 	//  for desert/land
-	scoped_array<uint32_t> random4
+	std::unique_ptr<uint32_t[]> random4
 		(generate_random_value_map(m_mapInfo.w, m_mapInfo.h, rng));
 
 	// for resources
-	scoped_array<uint32_t> random_rsrc_1
+	std::unique_ptr<uint32_t[]> random_rsrc_1
 		(generate_random_value_map(m_mapInfo.w, m_mapInfo.h, rng));
-	scoped_array<uint32_t> random_rsrc_2
+	std::unique_ptr<uint32_t[]> random_rsrc_2
 		(generate_random_value_map(m_mapInfo.w, m_mapInfo.h, rng));
-	scoped_array<uint32_t> random_rsrc_3
+	std::unique_ptr<uint32_t[]> random_rsrc_3
 		(generate_random_value_map(m_mapInfo.w, m_mapInfo.h, rng));
-	scoped_array<uint32_t> random_rsrc_4
+	std::unique_ptr<uint32_t[]> random_rsrc_4
 		(generate_random_value_map(m_mapInfo.w, m_mapInfo.h, rng));
 
 	// for bobs
-	scoped_array<scoped_array<uint32_t> > random_bobs
-		(new scoped_array<uint32_t> [mapGenInfo.getNumBobAreas()]);
+	std::unique_ptr<std::unique_ptr<uint32_t[]> []> random_bobs
+		(new std::unique_ptr<uint32_t[]> [mapGenInfo.getNumBobAreas()]);
 
 	for (size_t ix = 0; ix < mapGenInfo.getNumBobAreas(); ++ix)
 		random_bobs[ix].reset

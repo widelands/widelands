@@ -202,7 +202,7 @@ private:
 	Program_Result m_result; /// The result of the last training program.
 
 	// These are used for kicking out soldiers prematurely
-	static const uint32_t training_state_multiplier = 12;
+	static const uint32_t training_state_multiplier;
 	// Unuque key to address each training level of each war art
 	typedef std::pair<uint16_t, uint16_t> TypeAndLevel_t;
 	// First entry is the "stallness", second is a bool

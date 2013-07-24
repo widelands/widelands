@@ -30,8 +30,6 @@
 
 #include "log.h"
 
-#include <boost/scoped_ptr.hpp>
-
 using Widelands::Game_Saver;
 
 /**
@@ -172,7 +170,7 @@ bool SaveHandler::save_game
 	g_fs->EnsureDirectoryExists(get_base_dir());
 
 	// Make a filesystem out of this
-	boost::scoped_ptr<FileSystem> fs;
+	std::unique_ptr<FileSystem> fs;
 	if (!binary) {
 		fs.reset(g_fs->CreateSubFileSystem(complete_filename, FileSystem::DIR));
 	} else {

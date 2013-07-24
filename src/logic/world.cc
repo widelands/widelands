@@ -36,8 +36,6 @@
 
 #include "container_iterate.h"
 
-#include <boost/scoped_ptr.hpp>
-
 #include <iostream>
 #include <sstream>
 
@@ -527,7 +525,7 @@ World::World(const std::string & name) : m_basedir("worlds/" + name + '/') {
 	try {
 		i18n::Textdomain textdomain("world_" + name);
 
-		boost::scoped_ptr<FileSystem> fs(g_fs->MakeSubFileSystem(m_basedir));
+		std::unique_ptr<FileSystem> fs(g_fs->MakeSubFileSystem(m_basedir));
 		FileSystemLayer filesystemlayer(*fs);
 
 		{
@@ -774,7 +772,7 @@ bool World::exists_world(std::string worldname)
 	return
 		f.TryOpen
 			(*
-			 boost::scoped_ptr<FileSystem>
+			 std::unique_ptr<FileSystem>
 				(g_fs->MakeSubFileSystem("worlds/" + worldname)),
 			 "conf");
 }

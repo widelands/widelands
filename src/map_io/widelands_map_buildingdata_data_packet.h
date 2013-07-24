@@ -34,6 +34,7 @@ class MilitarySite;
 class TrainingSite;
 class ProductionSite;
 class Warehouse;
+class Building;
 
 /*
  * This cares for the data of buildings
@@ -62,6 +63,8 @@ private:
 		(TrainingSite           &, FileRead  &, Game &, Map_Map_Object_Loader &);
 	virtual void read_productionsite
 		(ProductionSite         &, FileRead  &, Game &, Map_Map_Object_Loader &);
+	virtual void read_formerbuildings_v2
+		(Building               &, FileRead  &, Game &, Map_Map_Object_Loader &);
 
 	virtual void write_constructionsite
 		(const ConstructionSite &, FileWrite &, Game &, Map_Map_Object_Saver  &);

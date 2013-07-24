@@ -23,6 +23,7 @@
 #include "graphic/image.h"
 #include "graphic/rendertarget.h"
 #include "interactive_player.h"
+#include "logic/constructionsite.h"
 #include "logic/dismantlesite.h"
 #include "logic/maphollowregion.h"
 #include "logic/militarysite.h"
@@ -35,8 +36,9 @@
 #include "upcast.h"
 #include "waresqueuedisplay.h"
 
+#include <boost/format.hpp>
+
 #include "buildingwindow.h"
-#include "logic/militarysite.h"
 
 static const char * pic_bulldoze           = "pics/menu_bld_bulldoze.png";
 static const char * pic_dismantle          = "pics/menu_bld_dismantle.png";
@@ -68,7 +70,7 @@ Building_Window::Building_Window
 
 	UI::Box * vbox = new UI::Box(this, 0, 0, UI::Box::Vertical);
 
-	m_tabs = new UI::Tab_Panel(vbox, 0, 0, NULL);
+	m_tabs = new UI::Tab_Panel(vbox, 0, 0, nullptr);
 	vbox->add(m_tabs, UI::Box::AlignLeft, true);
 
 	m_capsbuttons = new UI::Box(vbox, 0, 0, UI::Box::Horizontal);
@@ -78,10 +80,16 @@ Building_Window::Building_Window
 
 	set_center_panel(vbox);
 	set_think(true);
+	set_fastclick_panel(this);
 
 	show_workarea();
 
-	set_fastclick_panel(this);
+	// Title for construction site
+	if (upcast(Widelands::ConstructionSite, csite, &m_building)) {
+		// Show name in parenthesis as it may take all width already
+		const std::string title = (boost::format("(%s)") % csite->building().descname()).str();
+		set_title(title);
+	}
 }
 
 
@@ -258,7 +266,8 @@ void Building_Window::create_capsbuttons(UI::Box * capsbuttons)
 							 g_gr->images().get("pics/but4.png"),
 							 building_descr.get_buildicon(),
 							 std::string(buffer) + "<br><font size=11>" + _("Construction costs:") + "</font><br>" +
-								 waremap_to_richtext(tribe, building_descr.buildcost())); //  button id = building id
+								 waremap_to_richtext(tribe, building_descr.enhancement_cost()));
+					//  button id = building id
 					enhancebtn->sigclicked.connect
 						(boost::bind
 							(&Building_Window::act_enhance,
@@ -289,7 +298,7 @@ void Building_Window::create_capsbuttons(UI::Box * capsbuttons)
 
 		if (m_capscache & Widelands::Building::PCap_Dismantle) {
 			std::map<Widelands::Ware_Index, uint8_t> wares;
-			Widelands::DismantleSite::count_returned_wares(m_building.descr(), wares);
+			Widelands::DismantleSite::count_returned_wares(&m_building, wares);
 			UI::Button * dismantlebtn =
 				new UI::Button
 					(capsbuttons, "dismantle", 0, 0, 34, 34,

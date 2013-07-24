@@ -21,6 +21,7 @@
 #define MAP_H
 
 #include <cstring>
+#include <memory>
 #include <set>
 #include <string>
 #include <vector>
@@ -34,8 +35,6 @@
 #include "interval.h"
 #include "manager.h"
 #include "notification.h"
-
-#include <boost/scoped_ptr.hpp>
 
 #include "random.h"
 
@@ -397,7 +396,7 @@ private:
 
 	Overlay_Manager * m_overlay_manager;
 
-	boost::scoped_ptr<PathfieldManager> m_pathfieldmgr;
+	std::unique_ptr<PathfieldManager> m_pathfieldmgr;
 	std::vector<std::string> m_scenario_tribes;
 	std::vector<std::string> m_scenario_names;
 	std::vector<std::string> m_scenario_ais;

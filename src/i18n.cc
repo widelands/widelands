@@ -128,12 +128,12 @@ void init_locale() {
 	// first, save environment variable
 	char * lang;
 	lang = getenv("LANG");
-	if (lang != NULL) {
+	if (lang != nullptr) {
 		env_locale = lang;
 	}
 	if (env_locale.empty()) {
 		lang = getenv("LANGUAGE");
-		if (lang != NULL) {
+		if (lang != nullptr) {
 			env_locale = lang;
 		}
 	}
@@ -192,7 +192,7 @@ void set_locale(std::string name) {
 #endif
 
 #ifdef __linux__
-	char * res = NULL;
+	char * res = nullptr;
 	char const * encoding[] = {"", ".utf-8", "@euro", ".UTF-8"};
 	std::size_t found = alt_str.find(',', 0);
 	bool leave_while = false;

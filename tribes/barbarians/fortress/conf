@@ -11,6 +11,12 @@ trunk=5
 raw_stone=4
 grout=2
 
+[return_on_dismantle]
+blackwood=4
+trunk=2
+raw_stone=2
+grout=1
+
 [build]
 pics=fortress_b_??.png
 hotspot=103 80

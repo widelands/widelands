@@ -26,8 +26,8 @@
 
 #include "rect.h"
 
+#include <memory>
 #include <vector>
-#include <boost/scoped_array.hpp>
 
 namespace Widelands {
 struct Coords;
@@ -108,21 +108,21 @@ private:
 	Point m_surface_offset;
 
 	Rect m_patch_size;
-	boost::scoped_array<basevertex> m_patch_vertices;
+	std::unique_ptr<basevertex[]> m_patch_vertices;
 	uint32_t m_patch_vertices_size;
-	boost::scoped_array<uint16_t> m_patch_indices;
+	std::unique_ptr<uint16_t[]> m_patch_indices;
 	uint32_t m_patch_indices_size;
 	std::vector<uint32_t> m_patch_indices_indexs;
 	std::vector<uint32_t> m_terrain_freq;
 	std::vector<uint32_t> m_terrain_freq_cum;
-	boost::scoped_array<dithervertex> m_edge_vertices;
+	std::unique_ptr<dithervertex[]> m_edge_vertices;
 	uint32_t m_edge_vertices_size;
 	std::vector<uint32_t> m_terrain_edge_freq;
 	std::vector<uint32_t> m_terrain_edge_freq_cum;
 	std::vector<uint32_t> m_terrain_edge_indexs;
 
 	uint32_t m_road_freq[2];
-	boost::scoped_array<basevertex> m_road_vertices;
+	std::unique_ptr<basevertex[]> m_road_vertices;
 	uint32_t m_road_vertices_size;
 	/*@}*/
 };

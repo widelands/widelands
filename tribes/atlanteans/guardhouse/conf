@@ -9,6 +9,9 @@ trunk=1
 planks=1
 stone=1
 
+[return_on_dismantle]
+stone=1
+
 [idle]
 pics=guardhouse_i_??.png
 hotspot=33 41

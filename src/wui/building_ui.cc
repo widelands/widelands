@@ -30,7 +30,7 @@ using Widelands::Building;
  * Create the building's options window if necessary and bring it to
  * the top to be seen by the player.
  */
-void Building::show_options(Interactive_GameBase & igbase, bool avoid_fastclick)
+void Building::show_options(Interactive_GameBase & igbase, bool avoid_fastclick, Point pos)
 {
 	if (m_optionswindow) {
 		if (m_optionswindow->is_minimal())
@@ -45,6 +45,9 @@ void Building::show_options(Interactive_GameBase & igbase, bool avoid_fastclick)
 		// get properly initialized
 		m_optionswindow->think();
 	}
+	if (pos.x >= 0 && pos.y >= 0) {
+		m_optionswindow->set_pos(pos);
+	}
 }
 
 /**
@@ -55,7 +58,7 @@ void Building::hide_options()
 	BOOST_FOREACH(boost::signals::connection& c, options_window_connections)
 		c.disconnect();
 	delete m_optionswindow;
-	m_optionswindow = NULL;
+	m_optionswindow = nullptr;
 }
 
 /**

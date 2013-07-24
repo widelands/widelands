@@ -52,8 +52,8 @@ Button::Button //  for textual buttons
 	m_time_nextact  (0),
 	m_title         (title_text),
 	m_pic_background(bg_pic),
-	m_pic_custom    (NULL),
-	m_pic_custom_disabled(NULL),
+	m_pic_custom    (nullptr),
+	m_pic_custom_disabled(nullptr),
 	m_font(UI::Font::ui_small()),
 	m_clr_down      (229, 161, 2),
 	m_draw_caret    (false)
@@ -85,7 +85,7 @@ Button::Button //  for pictorial buttons
 	m_time_nextact  (0),
 	m_pic_background(bg_pic),
 	m_pic_custom    (fg_pic),
-	m_pic_custom_disabled(fg_pic ? ImageTransformations::gray_out(fg_pic) : NULL),
+	m_pic_custom_disabled(fg_pic ? ImageTransformations::gray_out(fg_pic) : nullptr),
 	m_font(UI::Font::ui_small()),
 	m_clr_down      (229, 161, 2),
 	m_draw_caret    (false)
@@ -126,7 +126,7 @@ void Button::set_title(const std::string & title) {
 	if (m_title == title)
 		return;
 
-	m_pic_custom = NULL;
+	m_pic_custom = nullptr;
 	m_title      = title;
 
 	update();

@@ -5,6 +5,10 @@ output=raw_stone
 trunk=4
 raw_stone=2
 
+[return_on_dismantle]
+trunk=2
+raw_stone=1
+
 [working positions]
 miner=1
 

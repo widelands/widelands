@@ -17,7 +17,7 @@
  *
  */
 
-#include <boost/scoped_ptr.hpp>
+#include <memory>
 
 #include "image.h"
 #include "surface.h"
@@ -52,7 +52,7 @@ public:
 
 private:
 	const string hash_;
-	boost::scoped_ptr<Surface> surf_;
+	std::unique_ptr<Surface> surf_;
 };
 
 const Image* new_in_memory_image(const string& hash, Surface* surf) {

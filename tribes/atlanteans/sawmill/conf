@@ -8,6 +8,10 @@ is_basic=true
 trunk=2
 stone=3
 
+[return_on_dismantle]
+trunk=1
+stone=2
+
 [working positions]
 sawyer=1
 

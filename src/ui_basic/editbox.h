@@ -21,7 +21,6 @@
 #define UI_EDITBOX_H
 
 #include <SDL_keyboard.h>
-#include <boost/scoped_ptr.hpp>
 #include <boost/signal.hpp>
 
 #include "button.h"
@@ -66,7 +65,7 @@ struct EditBox : public Panel {
 	void draw(RenderTarget &);
 
 private:
-	boost::scoped_ptr<EditBoxImpl> m;
+	std::unique_ptr<EditBoxImpl> m;
 
 	void check_caret();
 	void insert(SDL_keysym code);

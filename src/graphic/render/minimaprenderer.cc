@@ -379,6 +379,6 @@ void MiniMapRenderer::draw_minimap
 
 	SDL_UnlockSurface(surface);
 
-	boost::scoped_ptr<Surface> minimap_surface(Surface::create(surface));
+	std::unique_ptr<Surface> minimap_surface(Surface::create(surface));
 	m_surface->blit(Point(rc.x, rc.y), minimap_surface.get(), rc2);
 }
