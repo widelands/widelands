@@ -228,7 +228,7 @@ void GLSurfaceTexture::unlock(UnlockMode mode) {
 			 GL_UNSIGNED_BYTE,  m_pixels.get());
 	}
 
-	m_pixels.reset(0);
+	m_pixels.reset(nullptr);
 }
 
 uint16_t GLSurfaceTexture::get_pitch() const {
