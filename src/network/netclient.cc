@@ -302,7 +302,7 @@ std::string NetClient::getGameDescription()
 
 void NetClient::report_result(uint8_t player_nr, int32_t points, bool win, std::string extra)
 {
-    // Send to game
+	// Send to game
 	Widelands::PlayerEndStatus pes;
 	Widelands::Player* player = d->game->get_player(player_nr);
 	assert(player);

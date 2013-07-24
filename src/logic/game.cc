@@ -178,8 +178,7 @@ Interactive_Player * Game::get_ipl()
 
 /**
  * \return a pointer to the \ref Interactive_GameBase if any.
- * \note This function may return 0 (in particular, it will return 0 during
- * playback)
+ * \note This function may return 0.
  */
 Interactive_GameBase * Game::get_igbase()
 {
@@ -511,7 +510,6 @@ bool Game::run
 				}
 				plr->create_default_infrastructure();
 				m_number_of_players++;
-				log("FIXMECGH Adding player %i\n", plr->player_number());
 			}
 		} else {
 			// Is a scenario!
@@ -526,7 +524,6 @@ bool Game::run
 					 	 "Editor, to fix this problem."),
 					 p);
 				m_number_of_players++;
-				log("FIXMECGH Adding player %i\n", m_number_of_players);
 			}
 		}
 
@@ -1185,7 +1182,7 @@ void Game::WriteStatistics(FileWrite & fw)
 }
 
 /**
- * Adds a new 'deceased' player status
+ * Adds a new player status for a player that left the game.
  */
 void Game::add_player_end_status(const PlayerEndStatus status)
 {

@@ -25,7 +25,6 @@
 #include "md5.h"
 #include "random.h"
 #include "save_handler.h"
-#include <boost/signal.hpp>
 
 namespace UI {struct ProgressWindow;}
 struct Computer_Player;
