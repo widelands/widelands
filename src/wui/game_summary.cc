@@ -26,7 +26,6 @@
 #include "ui_basic/textarea.h"
 #include "ui_basic/table.h"
 #include "ui_basic/button.h"
-#include "ui_fsmenu/game_end_summary.h"
 #include "graphic/graphic.h"
 #include "logic/game.h"
 #include "logic/player.h"
@@ -124,7 +123,7 @@ void GameSummaryScreen::fill_data()
 	Interactive_Player* ipl = m_game.get_ipl();
 
 	BOOST_FOREACH(Widelands::PlayerEndStatus pes, players_status) {
-		if (pes.player == ipl->player_number()) {
+		if (ipl && pes.player == ipl->player_number()) {
 			local_in_game = true;
 			local_won = pes.win;
 		}
@@ -190,12 +189,6 @@ void GameSummaryScreen::continue_clicked()
 
 void GameSummaryScreen::stop_clicked()
 {
-	Fullscreen_Menu_GameSummary fsm(&m_game);
-	uint32_t code = fsm.run();
-	if (code) {
-		continue_clicked();
-	} else {
-		m_game.get_ipl()->end_modal(0);
-	}
+	m_game.get_ibase()->end_modal(0);
 }
 

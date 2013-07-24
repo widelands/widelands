@@ -102,6 +102,7 @@ bool Interactive_GameBase::try_show_ship_window()
 void Interactive_GameBase::show_game_summary()
 {
 	if (m_game_summary.window) {
+		m_game_summary.window->set_visible(true);
 		m_game_summary.window->think();
 		return;
 	}

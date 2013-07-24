@@ -321,7 +321,6 @@ void Game::init_newgame
 			 playersettings.name,
 			 playersettings.team);
 		get_player(i + 1)->setAI(playersettings.ai);
-		m_number_of_players++;
 	}
 
 	// Add shared in starting positions
@@ -422,7 +421,10 @@ bool Game::run_load_game(std::string filename) {
 	}
 	if (m_number_of_players == 0) {
 		// Old savegame loaded, parse players to figure out their amount
-		iterate_players_existing_const(p, map().get_nrplayers(), *this, player_tmp) {
+		iterate_players_existing(p, map().get_nrplayers(), *this, pl) {
+			if (pl->player_number() > UserSettings::highestPlayernum()) {
+				continue;
+			}
 			m_number_of_players++;
 		}
 	}
@@ -498,11 +500,12 @@ bool Game::run
 					loader_ui->step(step_description);
 				}
 				plr->create_default_infrastructure();
-
+				m_number_of_players++;
+				log("FIXMECGH Adding player %i\n", plr->player_number());
 			}
-		} else
+		} else {
 			// Is a scenario!
-			iterate_players_existing_novar(p, nr_players, *this)
+			iterate_players_existing_novar(p, nr_players, *this) {
 				if (not map().get_starting_pos(p))
 				throw warning
 					(_("Missing starting position"),
@@ -512,6 +515,10 @@ bool Game::run
 					 	 "You can manually add a starting position with Widelands "
 					 	 "Editor, to fix this problem."),
 					 p);
+				m_number_of_players++;
+				log("FIXMECGH Adding player %i\n", m_number_of_players);
+			}
+		}
 
 		if (get_ipl())
 			get_ipl()->move_view_to
@@ -1184,11 +1191,13 @@ void Game::add_player_end_status(const PlayerEndStatus status)
 	m_players_end_status.push_back(status);
 
 	// If all results have been gathered, save game ans show summary screen
-	if (m_players_end_status.size() < get_number_of_players()) {
+	if (m_players_end_status.size() < m_number_of_players) {
 		return;
 	}
 
-	get_ipl()->show_game_summary();
+	if (upcast(Interactive_GameBase, igbase, get_ibase())) {
+		igbase->show_game_summary();
+	}
 }
 
 }
