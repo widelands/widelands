@@ -93,7 +93,7 @@ Fullscreen_Menu_Main::Fullscreen_Menu_Main() :
 	gpl
 		(this,
 		 0, get_h(),
-		 _("Licensed under GNU General Public License V2.0"),
+		 _("Licensed under the GNU General Public License V2.0"),
 		 UI::Align_BottomLeft)
 {
 	playtutorial.sigclicked.connect
