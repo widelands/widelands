@@ -197,55 +197,25 @@ void Building_Window::create_capsbuttons(UI::Box * capsbuttons)
 		}
 		else
 		if (upcast(const Widelands::ProductionSite, productionsite, &m_building)) {
-			if (upcast(const Widelands::MilitarySite, ms, productionsite))
-			{
-				if (Widelands::MilitarySite::kPrefersHeroes == ms->get_soldier_preference())
-				{
-					UI::Button * cs_btn =
-					new UI::Button
-					(capsbuttons, "rookies", 0, 0, 34, 34,
-						g_gr->images().get("pics/but4.png"),
-						g_gr->images().get("pics/msite_prefer_rookies.png"),
-						_("Prefer rookies"));
-					cs_btn->sigclicked.connect
-					(boost::bind(&Building_Window::act_prefer_rookies, boost::ref(*this)));
-					capsbuttons->add (cs_btn, UI::Box::AlignCenter);
-				}
-				else
-				{
-					UI::Button * cs_btn =
-					new UI::Button
-					(capsbuttons, "heroes", 0, 0, 34, 34,
-						g_gr->images().get("pics/but4.png"),
-						g_gr->images().get("pics/msite_prefer_heroes.png"),
-						_("Prefer heroes"));
-					cs_btn->sigclicked.connect
-					(boost::bind(&Building_Window::act_prefer_heroes, boost::ref(*this)));
-					capsbuttons->add (cs_btn, UI::Box::AlignCenter);
-				}
-			}
-			else // is not a MilitarySite (but is still a productionsite)
-			{
-				const bool is_stopped = productionsite->is_stopped();
-				UI::Button * stopbtn =
-					new UI::Button
-						(capsbuttons, is_stopped ? "continue" : "stop", 0, 0, 34, 34,
-						 g_gr->images().get("pics/but4.png"),
-						 g_gr->images().get((is_stopped ? "pics/continue.png" : "pics/stop.png")),
-						 is_stopped ? _("Continue") : _("Stop"));
-				stopbtn->sigclicked.connect(boost::bind(&Building_Window::act_start_stop, boost::ref(*this)));
-				capsbuttons->add
-					(stopbtn,
-					 UI::Box::AlignCenter);
+			const bool is_stopped = productionsite->is_stopped();
+			UI::Button * stopbtn =
+				new UI::Button
+					(capsbuttons, is_stopped ? "continue" : "stop", 0, 0, 34, 34,
+					 g_gr->images().get("pics/but4.png"),
+					 g_gr->images().get((is_stopped ? "pics/continue.png" : "pics/stop.png")),
+					 is_stopped ? _("Continue") : _("Stop"));
+			stopbtn->sigclicked.connect(boost::bind(&Building_Window::act_start_stop, boost::ref(*this)));
+			capsbuttons->add
+				(stopbtn,
+				 UI::Box::AlignCenter);
 
 
-				// Add a fixed width separator rather than infinite space so the
-				// enhance/destroy/dismantle buttons are fixed in their position
-				// and not subject to the number of buttons on the right of the
-				// panel.
-				UI::Panel * spacer = new UI::Panel(capsbuttons, 0, 0, 17, 34);
-				capsbuttons->add(spacer, UI::Box::AlignCenter);
-			}
+			// Add a fixed width separator rather than infinite space so the
+			// enhance/destroy/dismantle buttons are fixed in their position
+			// and not subject to the number of buttons on the right of the
+			// panel.
+			UI::Panel * spacer = new UI::Panel(capsbuttons, 0, 0, 17, 34);
+			capsbuttons->add(spacer, UI::Box::AlignCenter);
 		} // upcast to productionsite
 
 		if (m_capscache & Widelands::Building::PCap_Enhancable) {
