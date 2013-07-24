@@ -1184,6 +1184,7 @@ void Game::WriteStatistics(FileWrite & fw)
 /**
  * Adds a new player status for a player that left the game.
  */
+// NOCOM(#cghislai): instead of adding more stuff into game, make a new class and let game own it (for now). Add a getter so that others can use it.
 void Game::add_player_end_status(const PlayerEndStatus status)
 {
 	// Ensure we don't have a status for it yet
@@ -1191,13 +1192,14 @@ void Game::add_player_end_status(const PlayerEndStatus status)
 	for (it = m_players_end_status.begin(); it != m_players_end_status.end(); ++it) {
 		PlayerEndStatus pes = *it;
 		if (pes.player == status.player) {
+			// NOCOM(#cghislai): throw wexception instead. assert false will just terminate, wexception might do some bookkeeping.
 			log("End status for player %i already registered\n", pes.player);
 			assert(false);
 		}
 	}
 	m_players_end_status.push_back(status);
 
-	// If all results have been gathered, save game ans show summary screen
+	// If all results have been gathered, save game and show summary screen
 	if (m_players_end_status.size() < m_number_of_players) {
 		return;
 	}

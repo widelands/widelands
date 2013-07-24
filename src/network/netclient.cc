@@ -309,6 +309,7 @@ void NetClient::report_result(uint8_t player_nr, int32_t points, bool win, std::
 	pes.player = player->player_number();
 	pes.time = d->game->get_gametime();
 	pes.points = points;
+	// NOCOM(#cghislai): why win and lost? it seems one is enough.
 	pes.win = win;
 	pes.lost = !win;
 	pes.extra = extra;

@@ -20,11 +20,11 @@
 #ifndef GAME_SUMMARY_H
 #define GAME_SUMMARY_H
 
-#include "ui_basic/unique_window.h"
 #include "ui_basic/box.h"
-#include "ui_basic/textarea.h"
-#include "ui_basic/table.h"
 #include "ui_basic/button.h"
+#include "ui_basic/table.h"
+#include "ui_basic/textarea.h"
+#include "ui_basic/unique_window.h"
 
 #include <boost/signal.hpp>
 
@@ -35,6 +35,7 @@ struct Game;
 }
 
 /// Shows an ingame summary window on game end
+// NOCOM(#cghislai): please make this a class. nicolai has this habit of making everything a struct, we try to get rid of this though :).
 struct GameSummaryScreen : UI::UniqueWindow {
 	GameSummaryScreen
 		(Interactive_GameBase * parent, UI::UniqueWindow::Registry * r);

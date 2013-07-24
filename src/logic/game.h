@@ -192,6 +192,7 @@ struct Game : Editor_Game_Base {
 	uint8_t get_number_of_players() {return m_number_of_players;}
 
 	const std::vector<PlayerEndStatus> & get_players_end_status() {return m_players_end_status;}
+	// NOCOM(#cghislai): should take const reference.
 	void add_player_end_status(PlayerEndStatus status);
 
 private:

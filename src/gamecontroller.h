@@ -91,6 +91,7 @@ struct GameController {
 		(Widelands::Game &, bool cpls, Widelands::Player_Number local);
 
 	// until now only implemented for nethost and only used for dedicated servers
+	// NOCOM(#cghislai): could you change this to take a reference to std::string instead?
 	virtual void report_result
 	    (uint8_t /* player */,
 	     int32_t /* points */,
