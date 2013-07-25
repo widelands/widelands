@@ -34,6 +34,7 @@
 #include "logic/player.h"
 #include "logic/playercommand.h"
 #include "logic/tribe.h"
+#include "logic/playersmanager.h"
 #include "map_io/widelands_map_loader.h"
 #include "md5.h"
 #include "network_gaming_messages.h"
@@ -2978,7 +2979,7 @@ void NetHost::reaper()
 }
 
 
-void NetHost::report_result(uint8_t p_nr, int32_t points, bool win, std::string extra)
+void NetHost::report_result(uint8_t p_nr, int32_t points, bool win, std::string & extra)
 {
 	// Send to game
 	Widelands::PlayerEndStatus pes;
@@ -2990,7 +2991,7 @@ void NetHost::report_result(uint8_t p_nr, int32_t points, bool win, std::string 
 	pes.win = win;
 	pes.lost = !win;
 	pes.extra = extra;
-	d->game->add_player_end_status(pes);
+	d->game->get_playermgr()->add_player_end_status(pes);
 
 	// there might be more than one client that control this Widelands player
 	// and maybe even none -> computer player
@@ -3006,6 +3007,8 @@ void NetHost::report_result(uint8_t p_nr, int32_t points, bool win, std::string 
 		}
 	}
 
-	dedicatedlog("NetHost::report_result(%d, %d, %s, %s)\n", player, points, win?"won":"lost", extra.c_str());
+	dedicatedlog
+		("NetHost::report_result(%d, %d, %s, %s)\n",
+		 player->player_number(), points, win?"won":"lost", extra.c_str());
 }
 

@@ -45,18 +45,6 @@ struct Road;
 struct AttackController;
 
 /**
- * Hold data once a player left the game, or on game ends.
- */
-struct PlayerEndStatus {
-	Player_Number player;
-	bool win;
-	bool lost;
-	uint32_t time;
-	uint32_t points;
-	std::string extra;
-};
-
-/**
  * Manage in-game aspects of players, such as tribe, team, fog-of-war, statistics,
  * messages (notification when a resource has been found etc.) and so on.
  *

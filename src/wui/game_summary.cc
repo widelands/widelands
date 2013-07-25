@@ -21,12 +21,14 @@
 
 #include <boost/foreach.hpp>
 #include <boost/format.hpp>
+#include <boost/algorithm/string.hpp>
 
 #include "graphic/graphic.h"
 #include "interactive_gamebase.h"
 #include "interactive_player.h"
 #include "logic/game.h"
 #include "logic/player.h"
+#include "logic/playersmanager.h"
 #include "timestring.h"
 #include "ui_basic/box.h"
 #include "ui_basic/button.h"
@@ -55,8 +57,7 @@ m_game(parent->game())
 	hbox1->add_space(PADDING);
 
 	UI::Box * infoBox = new UI::Box(hbox1, 0, 0, UI::Box::Vertical, 0, 0);
-	// NOCOM(#cghislai): Gametime sounds weird. Just Time? or Elapsed time?
-	m_gametime_label = new UI::Textarea(infoBox, _("Gametime :"));
+	m_gametime_label = new UI::Textarea(infoBox, _("Elapsed time :"));
 	infoBox->add(m_gametime_label, UI::Box::AlignLeft);
 	m_gametime_value = new UI::Textarea(infoBox);
 	infoBox->add(m_gametime_value, UI::Box::AlignRight);
@@ -97,8 +98,6 @@ m_game(parent->game())
 		(boost::bind(&GameSummaryScreen::continue_clicked, this));
 	m_stop_button->sigclicked.connect
 		(boost::bind(&GameSummaryScreen::stop_clicked, this));
-	m_players_table->selected.connect
-		(boost::bind(&GameSummaryScreen::player_selection, this, _1));
 
 	// Window
 	center_to_parent();
@@ -119,7 +118,7 @@ bool GameSummaryScreen::handle_mousepress(Uint8 btn, int32_t mx, int32_t my)
 void GameSummaryScreen::fill_data()
 {
 	std::vector<Widelands::PlayerEndStatus> players_status
-		= m_game.get_players_end_status();
+		= m_game.get_playermgr()->get_players_end_status();
 	bool local_in_game = false;
 	bool local_won = false;
 	Widelands::Player* single_won = NULL;
@@ -135,14 +134,17 @@ void GameSummaryScreen::fill_data()
 		UI::Table<uintptr_t>::Entry_Record & te
 			= m_players_table->add(pes.player);
 		// Player name & pic
-		char buf[256];
-		// NOCOM(#cghislai): prefer boost format over snprintf. more typesafe and more performant. It also supports positional arguments which makes localization easier.
-		sprintf(buf, "pics/genstats_enable_plr_0%u.png", pes.player);
-		const Image* pic = g_gr->images().get(buf);
+		// Boost doesn't handle uint8_t as integers
+		uint16_t player_number = pes.player;
+		std::string pic_path =
+			(boost::format("pics/genstats_enable_plr_0%|1$u|.png") % player_number).str();
+		const Image* pic = g_gr->images().get(pic_path);
 		te.set_picture(0, pic, p->get_name());
 		// Team
-		sprintf(buf, "%i", p->team_number());
-		te.set_string(1, buf);
+		uint16_t team_number = p->team_number();
+		std::string team_str =
+			(boost::format("%|1$u|") % team_number).str();
+		te.set_string(1, team_str);
 		// Status
 		std::string stat_str = _("Resigned");
 		if (pes.lost) {
@@ -159,35 +161,29 @@ void GameSummaryScreen::fill_data()
 		// Time
 		te.set_string(3, gametimestring(pes.time));
 		// Points
-		sprintf(buf, "%i", pes.points);
-		te.set_string(4, buf);
+		std::string points_str =
+			(boost::format("%|1$u|") % pes.points).str();
+		te.set_string(4, points_str);
 	}
 
 	if (local_in_game) {
 		if (local_won) {
 			m_title_area->set_text(_("You won!"));
 		} else {
-			// NOCOM(#cghislai): Why two points?
-			m_title_area->set_text(_("You lost.."));
+			m_title_area->set_text(_("You lost."));
 		}
 	} else {
 		if (team_won <= 0) {
-			// NOCOM(#cghislai): why are the strings not tagged for translation?
 			m_title_area->set_text
-				((boost::format("%s won!") % single_won->get_name()).str());
+				((boost::format(_("%s won!")) % single_won->get_name()).str());
 		} else {
+			uint16_t team_number = team_won;
 			m_title_area->set_text
-				((boost::format("Team %i won!") % team_won).str());
+				((boost::format(_("Team %|1$u| won!")) % team_number).str());
 		}
 	}
 	m_players_table->update();
 	m_gametime_value->set_text(gametimestring(m_game.get_gametime()));
-}
-
-// NOCOM(#cghislai): is this even needed then?
-void GameSummaryScreen::player_selection(uint8_t idx)
-{
-
 }
 
 void GameSummaryScreen::continue_clicked()

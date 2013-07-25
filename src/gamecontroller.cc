@@ -23,6 +23,7 @@
 #include "logic/game.h"
 #include "logic/player.h"
 #include "logic/playercommand.h"
+#include "logic/playersmanager.h"
 #include "profile/profile.h"
 #include "wlapplication.h"
 #include "chat.h"
@@ -43,7 +44,7 @@ struct SinglePlayerGameController : public GameController, public ChatProvider {
 	void setDesiredSpeed(uint32_t speed);
 	bool isPaused();
 	void setPaused(bool paused);
-	void report_result(uint8_t player, int32_t score, bool win, std::string extra);
+	void report_result(uint8_t player, int32_t score, bool win, std::string & extra);
 
 	// Chat provider implementation
 	void send(const std::string & msg);
@@ -164,7 +165,7 @@ void SinglePlayerGameController::setPaused(bool paused)
 	m_paused = paused;
 }
 
-void SinglePlayerGameController::report_result(uint8_t p_nr, int32_t score, bool win, std::string extra)
+void SinglePlayerGameController::report_result(uint8_t p_nr, int32_t score, bool win, std::string & extra)
 {
 	Widelands::PlayerEndStatus pes;
 	Widelands::Player* player = m_game.get_player(p_nr);
@@ -175,7 +176,7 @@ void SinglePlayerGameController::report_result(uint8_t p_nr, int32_t score, bool
 	pes.win = win;
 	pes.lost = !win;
 	pes.extra = extra;
-	m_game.add_player_end_status(pes);
+	m_game.get_playermgr()->add_player_end_status(pes);
 }
 
 void SinglePlayerGameController::send_local(const std::string& msg)

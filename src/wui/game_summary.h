@@ -35,15 +35,16 @@ struct Game;
 }
 
 /// Shows an ingame summary window on game end
-// NOCOM(#cghislai): please make this a class. nicolai has this habit of making everything a struct, we try to get rid of this though :).
+//NOCOM(#Sirver) I got error: ‘boost::signals::trackable’ is an inaccessible base of ‘GameSummaryScreen’
+// when using a class
 struct GameSummaryScreen : UI::UniqueWindow {
+public:
 	GameSummaryScreen
 		(Interactive_GameBase * parent, UI::UniqueWindow::Registry * r);
 
 	bool handle_mousepress(Uint8 btn, int32_t mx, int32_t my);
 private:
 	void fill_data();
-	void player_selection(uint8_t idx);
 	void stop_clicked();
 	void continue_clicked();
 

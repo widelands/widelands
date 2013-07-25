@@ -90,13 +90,18 @@ struct GameController {
 	static GameController * createSinglePlayer
 		(Widelands::Game &, bool cpls, Widelands::Player_Number local);
 
-	// until now only implemented for nethost and only used for dedicated servers
-	// NOCOM(#cghislai): could you change this to take a reference to std::string instead?
+	/**
+	 * Report a player result once he has left the game. This may be done through lua
+	 * by the win_condition scripts.
+	 * \param player : the player idx; \param poionts : the player score;
+	 * \param win : \c true if he won; \param extra : extra info can be passed
+	 * through this string.
+	 */
 	virtual void report_result
 	    (uint8_t /* player */,
 	     int32_t /* points */,
 	     bool /* win */,
-	     std::string /* extra */)
+	     std::string & /* extra */)
 	{}
 };
 

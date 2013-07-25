@@ -176,15 +176,6 @@ Interactive_Player * Game::get_ipl()
 	return dynamic_cast<Interactive_Player *>(get_ibase());
 }
 
-/**
- * \return a pointer to the \ref Interactive_GameBase if any.
- * \note This function may return 0.
- */
-Interactive_GameBase * Game::get_igbase()
-{
-	return dynamic_cast<Interactive_GameBase *>(get_ibase());
-}
-
 void Game::set_game_controller(GameController * const ctrl)
 {
 	m_ctrl = ctrl;
@@ -246,7 +237,6 @@ bool Game::run_splayer_scenario_direct(char const * const mapname) {
 
 	// We have to create the players here.
 	Player_Number const nr_players = map().get_nrplayers();
-	m_number_of_players = 0;
 	iterate_player_numbers(p, nr_players) {
 		loaderUI.stepf (_("Adding player %u"), p);
 		add_player
@@ -255,7 +245,6 @@ bool Game::run_splayer_scenario_direct(char const * const mapname) {
 			 map().get_scenario_player_tribe(p),
 			 map().get_scenario_player_name (p));
 		get_player(p)->setAI(map().get_scenario_player_ai(p));
-		m_number_of_players++;
 	}
 	m_win_condition_displayname = _("Scenario");
 
@@ -311,7 +300,6 @@ void Game::init_newgame
 	}
 	std::vector<PlayerSettings> shared;
 	std::vector<uint8_t>        shared_num;
-	m_number_of_players = 0;
 	for (uint32_t i = 0; i < settings.players.size(); ++i) {
 		const PlayerSettings & playersettings = settings.players[i];
 
@@ -420,22 +408,12 @@ bool Game::run_load_game(std::string filename) {
 		std::string background(gpdp.get_background());
 		loaderUI.set_background(background);
 		player_nr = gpdp.get_player_nr();
-		m_number_of_players = gpdp.get_number_of_players();
 		set_ibase
 			(new Interactive_Player
 			 	(*this, g_options.pull_section("global"), player_nr, true, false));
 
 		loaderUI.step(_("Loading..."));
 		gl.load_game();
-	}
-	if (m_number_of_players == 0) {
-		// Old savegame loaded, parse players to figure out their amount
-		iterate_players_existing(p, map().get_nrplayers(), *this, pl) {
-			if (pl->player_number() > UserSettings::highestPlayernum()) {
-				continue;
-			}
-			m_number_of_players++;
-		}
 	}
 
 	// Store the filename for further saves
@@ -509,7 +487,6 @@ bool Game::run
 					loader_ui->step(step_description);
 				}
 				plr->create_default_infrastructure();
-				m_number_of_players++;
 			}
 		} else {
 			// Is a scenario!
@@ -523,7 +500,6 @@ bool Game::run
 					 	 "You can manually add a starting position with Widelands "
 					 	 "Editor, to fix this problem."),
 					 p);
-				m_number_of_players++;
 			}
 		}
 
@@ -1179,34 +1155,6 @@ void Game::WriteStatistics(FileWrite & fw)
 			fw.Unsigned32(m_general_stats[p - 1].miltary_strength[j]);
 			fw.Unsigned32(m_general_stats[p - 1].custom_statistic[j]);
 		}
-}
-
-/**
- * Adds a new player status for a player that left the game.
- */
-// NOCOM(#cghislai): instead of adding more stuff into game, make a new class and let game own it (for now). Add a getter so that others can use it.
-void Game::add_player_end_status(const PlayerEndStatus status)
-{
-	// Ensure we don't have a status for it yet
-	std::vector<PlayerEndStatus>::iterator it;
-	for (it = m_players_end_status.begin(); it != m_players_end_status.end(); ++it) {
-		PlayerEndStatus pes = *it;
-		if (pes.player == status.player) {
-			// NOCOM(#cghislai): throw wexception instead. assert false will just terminate, wexception might do some bookkeeping.
-			log("End status for player %i already registered\n", pes.player);
-			assert(false);
-		}
-	}
-	m_players_end_status.push_back(status);
-
-	// If all results have been gathered, save game and show summary screen
-	if (m_players_end_status.size() < m_number_of_players) {
-		return;
-	}
-
-	if (get_igbase()) {
-		get_igbase()->show_game_summary();
-	}
 }
 
 }

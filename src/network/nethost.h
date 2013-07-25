@@ -93,7 +93,7 @@ struct NetHost : public GameController, private SyncCallback {
 	void handle_dserver_command(std::string, std::string);
 	void dserver_send_maps_and_saves(Client &);
 
-	void report_result(uint8_t player, int32_t points, bool win, std::string extra);
+	void report_result(uint8_t player, int32_t points, bool win, std::string & extra);
 
 	void forcePause() {
 		m_forced_pause = true;

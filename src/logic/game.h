@@ -173,7 +173,6 @@ struct Game : Editor_Game_Base {
 	void send_player_ship_explore_island(Ship &, bool);
 
 	Interactive_Player * get_ipl();
-	Interactive_GameBase * get_igbase();
 
 	SaveHandler & save_handler() {return m_savehandler;}
 
@@ -188,12 +187,6 @@ struct Game : Editor_Game_Base {
 	void sample_statistics();
 
 	const std::string & get_win_condition_displayname() {return m_win_condition_displayname;}
-	// Returns the number of players (human or ai) occupying a slot.
-	uint8_t get_number_of_players() {return m_number_of_players;}
-
-	const std::vector<PlayerEndStatus> & get_players_end_status() {return m_players_end_status;}
-	// NOCOM(#cghislai): should take const reference.
-	void add_player_end_status(PlayerEndStatus status);
 
 private:
 	void SyncReset();
@@ -259,9 +252,6 @@ private:
 
 	/// For save games and statistics generation
 	std::string          m_win_condition_displayname;
-	uint8_t              m_number_of_players;
-
-	std::vector<PlayerEndStatus> m_players_end_status;
 };
 
 inline Coords Game::random_location(Coords location, uint8_t radius) {

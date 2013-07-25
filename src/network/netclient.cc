@@ -31,6 +31,7 @@
 #include "logic/game.h"
 #include "logic/player.h"
 #include "logic/playercommand.h"
+#include "logic/playersmanager.h"
 #include "map_io/widelands_map_loader.h"
 #include "network_gaming_messages.h"
 #include "network_protocol.h"
@@ -300,7 +301,7 @@ std::string NetClient::getGameDescription()
 	return buf;
 }
 
-void NetClient::report_result(uint8_t player_nr, int32_t points, bool win, std::string extra)
+void NetClient::report_result(uint8_t player_nr, int32_t points, bool win, std::string & extra)
 {
 	// Send to game
 	Widelands::PlayerEndStatus pes;
@@ -309,11 +310,13 @@ void NetClient::report_result(uint8_t player_nr, int32_t points, bool win, std::
 	pes.player = player->player_number();
 	pes.time = d->game->get_gametime();
 	pes.points = points;
-	// NOCOM(#cghislai): why win and lost? it seems one is enough.
+	// NOCOM:Sirver: I thought at some point results could be reported for player
+	// that left game before end. Also there might be win_condition that handle draw
+	// cases in the future.
 	pes.win = win;
 	pes.lost = !win;
 	pes.extra = extra;
-	d->game->add_player_end_status(pes);
+	d->game->get_playermgr()->add_player_end_status(pes);
 }
 
 

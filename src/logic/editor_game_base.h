@@ -40,6 +40,8 @@ struct LuaInterface;
 
 namespace Widelands {
 
+class Players_Manager;
+
 struct AreaWatcher;
 struct Battle;
 struct Bob;
@@ -84,16 +86,8 @@ struct Editor_Game_Base :
 		 const std::string & tribe,
 		 const std::string & name,
 		 TeamNumber team = 0);
-	Player * get_player(const int32_t n) const {
-		assert(1 <= n);
-		assert     (n <= MAX_PLAYERS);
-		return m_players[n - 1];
-	}
-	Player & player(const int32_t n) const {
-		assert(1 <= n);
-		assert     (n <= MAX_PLAYERS);
-		return *m_players[n - 1];
-	}
+	Player * get_player(int32_t n) const;
+	Player & player(int32_t n) const;
 	virtual Player * get_safe_player(Player_Number);
 
 	// loading stuff
@@ -170,13 +164,17 @@ struct Editor_Game_Base :
 	/// Lua frontend, used to run Lua scripts
 	LuaInterface & lua() {return *m_lua;}
 
+	Players_Manager * get_playermgr() {return m_playermgr;}
+
+	Interactive_GameBase * get_igbase();
+
 private:
 	// FIXME -- SDL returns time as uint32. Why do I have int32 ? Please comment or change this to uint32.
 	int32_t m_gametime;
-	Player                   * m_players[MAX_PLAYERS];
 	Object_Manager             m_objects;
 
 	LuaInterface             * m_lua;
+	Players_Manager          * m_playermgr;
 protected:
 	typedef std::vector<Tribe_Descr *> Tribe_Vector;
 	Tribe_Vector           m_tribes;
