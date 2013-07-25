@@ -20,9 +20,10 @@
 #ifndef TEXTURE_H
 #define TEXTURE_H
 
-#include <stdint.h>
 #include <string>
 #include <vector>
+
+#include <stdint.h>
 
 #include "colormap.h"
 #include "graphic/render/gl_surface_texture.h"

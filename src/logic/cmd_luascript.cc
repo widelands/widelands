@@ -19,9 +19,9 @@
 
 #include "cmd_luascript.h"
 
-#include "log.h"
 #include "game.h"
 #include "game_data_error.h"
+#include "log.h"
 #include "scripting/scripting.h"
 
 namespace Widelands {

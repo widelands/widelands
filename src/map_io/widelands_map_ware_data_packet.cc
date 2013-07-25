@@ -19,6 +19,8 @@
 
 #include "widelands_map_ware_data_packet.h"
 
+#include <map>
+
 #include "economy/flag.h"
 #include "economy/ware_instance.h"
 #include "logic/editor_game_base.h"
@@ -27,13 +29,10 @@
 #include "logic/tribe.h"
 #include "logic/widelands_fileread.h"
 #include "logic/widelands_filewrite.h"
+#include "logic/worker.h"
+#include "upcast.h"
 #include "widelands_map_map_object_loader.h"
 #include "widelands_map_map_object_saver.h"
-#include "logic/worker.h"
-
-#include "upcast.h"
-
-#include <map>
 
 namespace Widelands {
 

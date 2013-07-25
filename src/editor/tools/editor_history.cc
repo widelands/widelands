@@ -17,11 +17,12 @@
  *
  */
 
+#include <string>
+
+#include "editor/editorinteractive.h"
+#include "editor_action_args.h"
 #include "editor_history.h"
 #include "editor_tool_action.h"
-#include "editor_action_args.h"
-#include "editor/editorinteractive.h"
-#include <string>
 
 // === Editor_Action_Args === //
 

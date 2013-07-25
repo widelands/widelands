@@ -21,13 +21,13 @@
 #define RT_PARSER_H
 
 #include <map>
-#include <stdint.h>
 #include <set>
 #include <string>
 #include <vector>
 
-#include "rgbcolor.h"
+#include <stdint.h>
 
+#include "rgbcolor.h"
 #include "rt_errors.h"
 
 namespace RT {

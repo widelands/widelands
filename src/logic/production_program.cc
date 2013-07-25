@@ -19,6 +19,10 @@
 
 #include "production_program.h"
 
+#include <boost/format.hpp>
+#include <config.h>
+#include <libintl.h>
+
 #include "checkstep.h"
 #include "economy/economy.h"
 #include "economy/flag.h"
@@ -36,15 +40,10 @@
 #include "soldier.h"
 #include "soldiercontrol.h"
 #include "sound/sound_handler.h"
+#include "trainingsite.h"
 #include "tribe.h"
 #include "upcast.h"
 #include "worker_program.h"
-#include "trainingsite.h"
-
-#include <libintl.h>
-#include <boost/format.hpp>
-
-#include <config.h>
 
 namespace Widelands {
 

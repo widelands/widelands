@@ -34,8 +34,8 @@
 #include "logic/trainingsite.h"
 #include "logic/warehouse.h"
 #include "logic/worker.h"
-
 #include "luna.h"
+
 
 namespace Widelands {
 	struct Soldier_Descr;

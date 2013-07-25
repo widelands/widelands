@@ -19,18 +19,17 @@
 
 #include "cmd_queue.h"
 
-#include "io/filewrite.h"
 #include "game.h"
 #include "game_data_error.h"
 #include "instances.h"
+#include "io/filewrite.h"
 #include "machdep.h"
 #include "player.h"
 #include "playercommand.h"
+#include "upcast.h"
 #include "wexception.h"
 #include "widelands_fileread.h"
 #include "worker.h"
-
-#include "upcast.h"
 
 namespace Widelands {
 

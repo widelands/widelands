@@ -19,8 +19,8 @@
 
 #include "routeastar.h"
 
-#include "router.h"
 #include "iroute.h"
+#include "router.h"
 
 namespace Widelands {
 

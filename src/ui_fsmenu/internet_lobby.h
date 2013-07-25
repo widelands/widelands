@@ -20,10 +20,13 @@
 #ifndef FULLSCREEN_MENU_INTERNET_LOBBY_H
 #define FULLSCREEN_MENU_INTERNET_LOBBY_H
 
-#include "network/internet_gaming.h"
-#include "network/network_lan_promotion.h"
+#include <cstring>
+#include <string>
+#include <vector>
 
 #include "base.h"
+#include "network/internet_gaming.h"
+#include "network/network_lan_promotion.h"
 #include "ui_basic/button.h"
 #include "ui_basic/editbox.h"
 #include "ui_basic/listselect.h"
@@ -31,10 +34,6 @@
 #include "ui_basic/table.h"
 #include "ui_basic/textarea.h"
 #include "wui/gamechatpanel.h"
-
-#include <string>
-#include <cstring>
-#include <vector>
 
 struct Fullscreen_Menu_Internet_Lobby : public Fullscreen_Menu_Base {
 

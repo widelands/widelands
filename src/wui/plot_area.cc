@@ -17,6 +17,9 @@
  *
  */
 
+
+#include "plot_area.h"
+
 #include <cstdio>
 
 #include <boost/format.hpp>
@@ -30,8 +33,6 @@
 #include "i18n.h"
 #include "text_layout.h"
 #include "ui_basic/panel.h"
-
-#include "plot_area.h"
 
 using namespace std;
 using boost::format;

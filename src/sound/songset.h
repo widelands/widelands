@@ -20,14 +20,15 @@
 #ifndef SONGSET_H
 #define SONGSET_H
 
-#include "io/fileread.h"
+#include <string>
+#include <cstring>
+#include <vector>
 
 #include <config.h> //  must be included before SDL_mixer.h!
 #include <SDL_mixer.h>
 
-#include <string>
-#include <cstring>
-#include <vector>
+#include "io/fileread.h"
+
 
 /** A collection of several pieces of music meant for the same situation.
  *

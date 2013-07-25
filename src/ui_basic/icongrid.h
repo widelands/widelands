@@ -20,12 +20,12 @@
 #ifndef UI_ICONGRID_H
 #define UI_ICONGRID_H
 
-#include "panel.h"
-#include "textarea.h"
-
 #include <vector>
 
 #include <boost/signal.hpp>
+
+#include "panel.h"
+#include "textarea.h"
 
 namespace UI {
 

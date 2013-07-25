@@ -19,12 +19,12 @@
 
 #include "luna_impl.h"
 
-#include "log.h"
+#include <string>
 
 #include "c_utils.h"
+#include "log.h"
 #include "luna.h"
 
-#include <string>
 
 /*
  * =======================================

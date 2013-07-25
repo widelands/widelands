@@ -19,6 +19,9 @@
 
 #include "trainingsite.h"
 
+#include <cstdio>
+
+#include "economy/request.h"
 #include "editor_game_base.h"
 #include "game.h"
 #include "helper.h"
@@ -26,14 +29,11 @@
 #include "player.h"
 #include "production_program.h"
 #include "profile/profile.h"
-#include "economy/request.h"
 #include "soldier.h"
 #include "tribe.h"
+#include "upcast.h"
 #include "worker.h"
 
-#include "upcast.h"
-
-#include <cstdio>
 
 namespace Widelands {
 

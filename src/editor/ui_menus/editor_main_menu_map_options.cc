@@ -19,18 +19,18 @@
 
 #include "editor_main_menu_map_options.h"
 
+#include <cstdio>
+
 #include "editor/editorinteractive.h"
 #include "graphic/graphic.h"
 #include "i18n.h"
 #include "logic/map.h"
 #include "profile/profile.h"
-
-#include "ui_basic/textarea.h"
-#include "ui_basic/multilinetextarea.h"
-#include "ui_basic/multilineeditbox.h"
 #include "ui_basic/editbox.h"
+#include "ui_basic/multilineeditbox.h"
+#include "ui_basic/multilinetextarea.h"
+#include "ui_basic/textarea.h"
 
-#include <cstdio>
 
 inline Editor_Interactive & Main_Menu_Map_Options::eia() {
 	return ref_cast<Editor_Interactive, UI::Panel>(*get_parent());

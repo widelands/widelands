@@ -20,8 +20,8 @@
 #ifndef EDITOR_PLACE_IMMOVABLE_TOOL_H
 #define EDITOR_PLACE_IMMOVABLE_TOOL_H
 
-#include "multi_select.h"
 #include "editor_delete_immovable_tool.h"
+#include "multi_select.h"
 
 /**
  * This places immovables on the map

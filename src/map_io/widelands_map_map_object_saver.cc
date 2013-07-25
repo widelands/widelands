@@ -19,16 +19,16 @@
 
 #include "widelands_map_map_object_saver.h"
 
-#include "logic/areawatcher.h"
-#include "logic/battle.h"
-#include "logic/bob.h"
-#include "logic/building.h"
 #include "container_iterate.h"
 #include "economy/flag.h"
 #include "economy/fleet.h"
 #include "economy/portdock.h"
 #include "economy/road.h"
 #include "economy/ware_instance.h"
+#include "logic/areawatcher.h"
+#include "logic/battle.h"
+#include "logic/bob.h"
+#include "logic/building.h"
 #include "logic/item_ware_descr.h"
 #include "wexception.h"
 

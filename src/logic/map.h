@@ -28,15 +28,13 @@
 
 #include "economy/itransport_cost_calculator.h"
 #include "field.h"
-#include "objective.h"
-#include "widelands_geometry.h"
-#include "world.h"
-
 #include "interval.h"
 #include "manager.h"
 #include "notification.h"
-
+#include "objective.h"
 #include "random.h"
+#include "widelands_geometry.h"
+#include "world.h"
 
 struct Overlay_Manager;
 struct S2_Map_Loader;

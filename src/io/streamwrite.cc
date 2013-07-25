@@ -17,10 +17,11 @@
  *
  */
 
+#include <cstdarg>
+
 #include "streamwrite.h"
 #include "wexception.h"
 
-#include <cstdarg>
 
 StreamWrite::~StreamWrite() {}
 

@@ -20,9 +20,9 @@
 #ifndef WARE_TYPES_H
 #define WARE_TYPES_H
 
-#include "widelands.h"
-
 #include <vector>
+
+#include "widelands.h"
 
 namespace Widelands {
 typedef std::vector<std::pair<Ware_Index, uint32_t> > Ware_Types;

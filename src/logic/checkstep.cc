@@ -19,10 +19,10 @@
 
 #include "checkstep.h"
 
-#include "map.h"
-#include "player.h"
 #include "economy/flag.h"
 #include "economy/road.h"
+#include "map.h"
+#include "player.h"
 
 namespace Widelands {
 

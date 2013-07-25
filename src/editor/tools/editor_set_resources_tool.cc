@@ -19,12 +19,12 @@
 
 #include "editor_set_resources_tool.h"
 
-#include "editor_increase_resources_tool.h"
-#include "editor_decrease_resources_tool.h"
-#include "graphic/graphic.h"
-#include "logic/mapregion.h"
-#include "logic/field.h"
 #include "editor/editorinteractive.h"
+#include "editor_decrease_resources_tool.h"
+#include "editor_increase_resources_tool.h"
+#include "graphic/graphic.h"
+#include "logic/field.h"
+#include "logic/mapregion.h"
 #include "logic/world.h"
 #include "wui/overlay_manager.h"
 

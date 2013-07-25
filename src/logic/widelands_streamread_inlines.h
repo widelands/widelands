@@ -20,9 +20,8 @@
 #ifndef WIDELANDS_STREAMREAD_INLINES_H
 #define WIDELANDS_STREAMREAD_INLINES_H
 
-#include "widelands_streamread.h"
-
 #include "immovable.h"
+#include "widelands_streamread.h"
 
 namespace Widelands {
 

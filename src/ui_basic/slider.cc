@@ -18,11 +18,10 @@
 
 #include <cmath>
 
-#include "mouse_constants.h"
-#include "graphic/rendertarget.h"
 #include "graphic/font.h"
 #include "graphic/font_handler.h"
-
+#include "graphic/rendertarget.h"
+#include "mouse_constants.h"
 #include "slider.h"
 
 namespace UI {

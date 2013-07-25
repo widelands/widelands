@@ -21,7 +21,6 @@
 #define EDITOR_DECREASE_RESOURCES_TOOL_H
 
 #include "editor_tool.h"
-
 #include "logic/world.h"
 
 ///  Decreases the resources of a node by a value.

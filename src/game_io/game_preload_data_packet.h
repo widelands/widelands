@@ -20,10 +20,10 @@
 #ifndef GAME_PRELOAD_DATA_PACKET_H
 #define GAME_PRELOAD_DATA_PACKET_H
 
-#include "game_data_packet.h"
-
-#include <string>
 #include <cstring>
+#include <string>
+
+#include "game_data_packet.h"
 
 namespace Widelands {
 

@@ -23,11 +23,10 @@
 #include <vector>
 
 #include "align.h"
-#include "rect.h"
-#include "rgbcolor.h"
-
 #include "compositemode.h"
 #include "image.h"
+#include "rect.h"
+#include "rgbcolor.h"
 
 class Surface;
 

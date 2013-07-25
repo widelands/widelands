@@ -17,6 +17,9 @@
  *
  */
 
+#include "launchMPG.h"
+
+#include <boost/format.hpp>
 
 #include "gamecontroller.h"
 #include "gamesettings.h"
@@ -37,11 +40,7 @@
 #include "wui/gamechatpanel.h"
 #include "wui/multiplayersetupgroup.h"
 
-#include "launchMPG.h"
-
-#include <boost/format.hpp>
 using boost::format;
-
 
 /// Simple user interaction window for selecting either map, save or cancel
 struct MapOrSaveSelectionWindow : public UI::Window {

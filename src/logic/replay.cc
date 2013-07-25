@@ -24,14 +24,13 @@
 #include "game_io/game_loader.h"
 #include "gamecontroller.h"
 #include "io/filesystem/layered_filesystem.h"
+#include "io/streamwrite.h"
+#include "log.h"
 #include "md5.h"
 #include "playercommand.h"
 #include "random.h"
 #include "save_handler.h"
-#include "io/streamwrite.h"
 #include "wexception.h"
-
-#include "log.h"
 
 namespace Widelands {
 

@@ -17,9 +17,10 @@
  *
  */
 
+#include "icon.h"
+
 #include "graphic/image.h"
 #include "graphic/rendertarget.h"
-#include "icon.h"
 
 namespace UI {
 

@@ -20,11 +20,11 @@
 #ifndef CMD_QUEUE_H
 #define CMD_QUEUE_H
 
+#include <queue>
+
 #include "queue_cmd_ids.h"
 #include "widelands_fileread.h"
 #include "widelands_filewrite.h"
-
-#include <queue>
 
 namespace Widelands {
 

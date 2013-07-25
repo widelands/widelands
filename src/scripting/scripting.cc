@@ -17,14 +17,20 @@
  *
  */
 
-#include <string>
-#include <stdexcept>
+#include "scripting.h"
 
-#include "log.h"
-#include "io/filesystem/layered_filesystem.h"
+#include <stdexcept>
+#include <string>
+
+#ifdef _MSC_VER
+#include <ctype.h> // for tolower
+#endif
 
 #include "c_utils.h"
 #include "coroutine_impl.h"
+#include "factory.h"
+#include "io/filesystem/layered_filesystem.h"
+#include "log.h"
 #include "lua_bases.h"
 #include "lua_editor.h"
 #include "lua_game.h"
@@ -33,13 +39,7 @@
 #include "lua_root.h"
 #include "lua_ui.h"
 #include "persistence.h"
-#include "factory.h"
 
-#include "scripting.h"
-
-#ifdef _MSC_VER
-#include <ctype.h> // for tolower
-#endif
 
 /*
 ============================================

@@ -17,43 +17,42 @@
  *
  */
 
+#include "graphic.h"
+
 #include <cstring>
 #include <iostream>
 
-#include <boost/foreach.hpp>
-
 #include <SDL_image.h>
+#include <boost/foreach.hpp>
 #include <config.h>
 
+#include "animation.h"
+#include "animation_gfx.h"
 #include "build_info.h"
 #include "compile_diagnostics.h"
 #include "constants.h"
 #include "container_iterate.h"
 #include "diranimations.h"
+#include "font_handler.h"
 #include "i18n.h"
+#include "image.h"
+#include "image_loader_impl.h"
+#include "image_transformations.h"
 #include "io/fileread.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "io/streamwrite.h"
 #include "log.h"
 #include "logic/roadtype.h"
 #include "logic/widelands_fileread.h"
+#include "render/gl_surface_screen.h"
+#include "render/sdl_surface.h"
+#include "rendertarget.h"
 #include "surface_cache.h"
+#include "texture.h"
 #include "ui_basic/progresswindow.h"
 #include "upcast.h"
 #include "wexception.h"
 
-#include "animation.h"
-#include "animation_gfx.h"
-#include "font_handler.h"
-#include "image.h"
-#include "image_loader_impl.h"
-#include "image_transformations.h"
-#include "render/gl_surface_screen.h"
-#include "render/sdl_surface.h"
-#include "rendertarget.h"
-#include "texture.h"
-
-#include "graphic.h"
 
 using namespace std;
 

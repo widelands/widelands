@@ -20,10 +20,7 @@
 #ifndef EDITORINTERACTIVE_H
 #define EDITORINTERACTIVE_H
 
-#include "ui_basic/button.h"
-#include "ui_basic/unique_window.h"
-#include "wui/interactive_base.h"
-
+#include "tools/editor_history.h"
 #include "tools/editor_increase_height_tool.h"
 #include "tools/editor_increase_resources_tool.h"
 #include "tools/editor_info_tool.h"
@@ -35,8 +32,9 @@
 #include "tools/editor_set_port_space_tool.h"
 #include "tools/editor_set_starting_pos_tool.h"
 #include "tools/editor_set_terrain_tool.h"
-#include "tools/editor_history.h"
-
+#include "ui_basic/button.h"
+#include "ui_basic/unique_window.h"
+#include "wui/interactive_base.h"
 
 class Editor;
 class Editor_Tool;

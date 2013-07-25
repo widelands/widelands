@@ -19,6 +19,8 @@
 
 #include "loadgame.h"
 
+#include <cstdio>
+
 #include "game_io/game_loader.h"
 #include "game_io/game_preload_data_packet.h"
 #include "gamecontroller.h"
@@ -28,10 +30,9 @@
 #include "io/filesystem/layered_filesystem.h"
 #include "log.h"
 #include "logic/game.h"
-#include "ui_basic/messagebox.h"
 #include "timestring.h"
+#include "ui_basic/messagebox.h"
 
-#include <cstdio>
 
 Fullscreen_Menu_LoadGame::Fullscreen_Menu_LoadGame
 	(Widelands::Game & g, GameSettingsProvider * gsp, GameController * gc) :

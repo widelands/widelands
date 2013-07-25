@@ -18,13 +18,13 @@
  */
 
 #include "cmd_incorporate.h"
-#include "widelands_fileread.h"
-#include "widelands_filewrite.h"
+
+#include "i18n.h"
 #include "map_io/widelands_map_map_object_loader.h"
 #include "map_io/widelands_map_map_object_saver.h"
 #include "wexception.h"
-
-#include "i18n.h"
+#include "widelands_fileread.h"
+#include "widelands_filewrite.h"
 
 namespace Widelands {
 

@@ -19,13 +19,13 @@
 
 #include "spinbox.h"
 
-#include "i18n.h"
+#include <vector>
+
 #include "button.h"
+#include "container_iterate.h"
+#include "i18n.h"
 #include "textarea.h"
 #include "wexception.h"
-#include "container_iterate.h"
-
-#include <vector>
 
 namespace UI {
 

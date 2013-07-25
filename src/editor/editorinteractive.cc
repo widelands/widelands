@@ -19,6 +19,8 @@
 
 #include "editorinteractive.h"
 
+#include <SDL_keysym.h>
+
 #include "graphic/graphic.h"
 #include "i18n.h"
 #include "logic/map.h"
@@ -42,7 +44,6 @@
 #include "wui/interactive_base.h"
 #include "wui/overlay_manager.h"
 
-#include <SDL_keysym.h>
 
 using Widelands::Building;
 

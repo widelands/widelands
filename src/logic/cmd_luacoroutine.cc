@@ -21,11 +21,11 @@
 
 #include "game.h"
 #include "game_data_error.h"
+#include "gamecontroller.h"
+#include "log.h"
+#include "player.h"
 #include "scripting/scripting.h"
 #include "upcast.h"
-#include "log.h"
-#include <gamecontroller.h>
-#include "player.h"
 
 namespace Widelands {
 

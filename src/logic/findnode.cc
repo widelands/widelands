@@ -19,12 +19,12 @@
 
 #include "findnode.h"
 
+#include "container_iterate.h"
 #include "field.h"
 #include "immovable.h"
 #include "map.h"
 #include "wexception.h"
 
-#include "container_iterate.h"
 
 namespace Widelands {
 

@@ -17,11 +17,11 @@
  *
  */
 
-#include <cstdio>
-#include <boost/foreach.hpp>
+#include "dismantlesite.h"
 
-#include "upcast.h"
-#include "wexception.h"
+#include <cstdio>
+
+#include <boost/foreach.hpp>
 
 #include "economy/wares_queue.h"
 #include "editor_game_base.h"
@@ -32,9 +32,9 @@
 #include "i18n.h"
 #include "sound/sound_handler.h"
 #include "tribe.h"
+#include "upcast.h"
+#include "wexception.h"
 #include "worker.h"
-
-#include "dismantlesite.h"
 
 namespace Widelands {
 

@@ -19,23 +19,21 @@
 
 #include "request.h"
 
-// Package includes
 #include "economy.h"
-#include "transfer.h"
-#include "ware_instance.h"
-
 #include "logic/constructionsite.h"
 #include "logic/game.h"
+#include "logic/legacy.h"
 #include "logic/player.h"
 #include "logic/productionsite.h"
 #include "logic/soldier.h"
 #include "logic/tribe.h"
-#include "upcast.h"
-#include "map_io/widelands_map_map_object_loader.h"
-#include "map_io/widelands_map_map_object_saver.h"
-#include "logic/legacy.h"
 #include "logic/warehouse.h"
 #include "logic/worker.h"
+#include "map_io/widelands_map_map_object_loader.h"
+#include "map_io/widelands_map_map_object_saver.h"
+#include "transfer.h"
+#include "upcast.h"
+#include "ware_instance.h"
 
 
 namespace Widelands {

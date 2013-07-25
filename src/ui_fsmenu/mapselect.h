@@ -20,17 +20,16 @@
 #ifndef FULLSCREEN_MENU_MAPSELECT_H
 #define FULLSCREEN_MENU_MAPSELECT_H
 
-#include <string>
 #include <set>
+#include <string>
 
 #include "base.h"
+#include "logic/map.h"
 #include "ui_basic/button.h"
 #include "ui_basic/checkbox.h"
-#include "ui_basic/table.h"
 #include "ui_basic/multilinetextarea.h"
+#include "ui_basic/table.h"
 #include "ui_basic/textarea.h"
-
-#include "logic/map.h"
 
 
 using Widelands::Map;

@@ -19,6 +19,8 @@
 
 #include "widelands_map_building_data_packet.h"
 
+#include <map>
+
 #include "economy/request.h"
 #include "graphic/graphic.h"
 #include "logic/constructionsite.h"
@@ -28,13 +30,10 @@
 #include "logic/tribe.h"
 #include "logic/widelands_fileread.h"
 #include "logic/widelands_filewrite.h"
+#include "upcast.h"
 #include "widelands_map_map_object_loader.h"
 #include "widelands_map_map_object_saver.h"
 #include "wui/interactive_base.h"
-
-#include "upcast.h"
-
-#include <map>
 
 namespace Widelands {
 

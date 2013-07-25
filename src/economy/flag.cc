@@ -19,24 +19,22 @@
 
 #include "flag.h"
 
-// Package includes
-#include "portdock.h"
-#include "road.h"
+#include "container_iterate.h"
 #include "economy.h"
-#include "ware_instance.h"
-
 #include "logic/building.h"
 #include "logic/editor_game_base.h"
 #include "logic/game.h"
 #include "logic/instances.h"
 #include "logic/player.h"
-#include "request.h"
 #include "logic/tribe.h"
-#include "upcast.h"
-#include "wexception.h"
 #include "logic/warehouse.h"
 #include "logic/worker.h"
-#include "container_iterate.h"
+#include "portdock.h"
+#include "request.h"
+#include "road.h"
+#include "upcast.h"
+#include "ware_instance.h"
+#include "wexception.h"
 
 namespace Widelands {
 

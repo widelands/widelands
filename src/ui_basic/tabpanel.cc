@@ -19,9 +19,8 @@
 
 #include "tabpanel.h"
 
-#include "mouse_constants.h"
-
 #include "graphic/rendertarget.h"
+#include "mouse_constants.h"
 
 namespace UI {
 #define TP_BUTTON_WIDTH     34

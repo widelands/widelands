@@ -17,19 +17,18 @@
  *
  */
 
+#include "coroutine_impl.h"
+
 #include <csetjmp>
+
 #include <boost/lexical_cast.hpp>
 
-#include "logic/player.h"
-
 #include "c_utils.h"
+#include "log.h"
+#include "logic/player.h"
 #include "lua_game.h"
 #include "lua_map.h"
 #include "persistence.h"
-
-#include "coroutine_impl.h"
-
-#include "log.h"
 
 LuaCoroutine_Impl::LuaCoroutine_Impl(lua_State * ms)
 	: m_L(ms), m_idx(LUA_REFNIL), m_nargs(0)

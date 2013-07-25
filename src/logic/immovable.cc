@@ -19,33 +19,31 @@
 
 #include "immovable.h"
 
+#include <cstdio>
+
+#include <config.h>
+
+#include "container_iterate.h"
 #include "editor_game_base.h"
-#include "game_data_error.h"
 #include "field.h"
 #include "game.h"
-#include "helper.h"
-#include "immovable_program.h"
-#include "player.h"
-#include "map.h"
-#include "mapfringeregion.h"
-#include "profile/profile.h"
+#include "game_data_error.h"
 #include "graphic/animation_gfx.h"
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
+#include "helper.h"
+#include "immovable_program.h"
+#include "map.h"
+#include "mapfringeregion.h"
+#include "player.h"
+#include "profile/profile.h"
 #include "sound/sound_handler.h"
 #include "tribe.h"
+#include "upcast.h"
 #include "wexception.h"
 #include "widelands_fileread.h"
 #include "widelands_filewrite.h"
 #include "worker.h"
-
-#include "upcast.h"
-
-#include "container_iterate.h"
-
-#include <cstdio>
-
-#include <config.h>
 
 namespace Widelands {
 

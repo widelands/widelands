@@ -17,6 +17,8 @@
  *
  */
 
+#include "image_cache.h"
+
 #include <cassert>
 #include <map>
 #include <string>
@@ -29,7 +31,6 @@
 #include "surface.h"
 #include "surface_cache.h"
 
-#include "image_cache.h"
 
 using namespace std;
 

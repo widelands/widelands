@@ -17,14 +17,16 @@
  *
  */
 
+#include "graphic/text/render.h"
+
 #include <fstream>
 #include <iostream>
 #include <string>
 
-#include <SDL.h>
 #undef main // No, we do not want SDL_main
-#include "lodepng.h"
+#include <SDL.h>
 
+#include "from_file_image_loader.h"
 #include "graphic/image_cache.h"
 #include "graphic/render/sdl_helper.h"
 #include "graphic/render/sdl_surface.h"
@@ -32,8 +34,7 @@
 #include "graphic/text/rt_parse.h"
 #include "graphic/text/rt_render.h"
 #include "graphic/text/sdl_ttf_font.h"
-
-#include "from_file_image_loader.h"
+#include "lodepng.h"
 
 using namespace std;
 

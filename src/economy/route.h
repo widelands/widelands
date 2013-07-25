@@ -22,10 +22,8 @@
 
 #include <vector>
 
-// Needed for OPtr
-#include "logic/instances.h"
-
 #include "iroute.h"
+#include "logic/instances.h"
 
 
 namespace Widelands {
