@@ -78,10 +78,8 @@ BaseListselect::BaseListselect
 		if (pic_h > m_lineheight)
 			m_lineheight = pic_h;
 	}
-	else {
+	else
 		m_max_pic_width = 0;
-	}
-	set_can_focus(true);
 }
 
 

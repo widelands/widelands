@@ -63,7 +63,6 @@ Table<void *>::Table
 	m_sort_descending (descending)
 {
 	set_think(false);
-	set_can_focus(true);
 }
 
 
