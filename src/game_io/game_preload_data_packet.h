@@ -42,8 +42,10 @@ struct Game_Preload_Data_Packet : public Game_Data_Packet {
 	uint8_t get_player_nr() {return m_player_nr;}
 
 	uint8_t get_number_of_players() {return m_number_of_players;}
+	std::string get_minimap_path() {return m_minimap_path;}
 
 private:
+	std::string m_minimap_path;
 	std::string m_mapname;
 	std::string m_background;
 	std::string m_win_condition;

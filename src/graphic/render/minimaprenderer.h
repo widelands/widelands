@@ -21,6 +21,7 @@
 #define WIDELANDS_MINIMAPRENDERER_H
 
 #include "graphic/rendertarget.h"
+#include <memory>
 
 namespace Widelands {
 	struct Player;
@@ -30,32 +31,30 @@ namespace Widelands {
 /**
  * This class renders the minimap.
  */
-class MiniMapRenderer : public RenderTarget
+class MiniMapRenderer
 {
 public:
-	MiniMapRenderer(RenderTarget & rt) :
-		RenderTarget(rt) {}
+	MiniMapRenderer() {}
 	virtual ~MiniMapRenderer() {}
 
 	/**
 	 * Render the minimap. If player is not 0, it renders from that player's
 	 * point of view.
 	 */
-	void renderminimap
+	std::unique_ptr<Surface> get_minimap_image
 		(const Widelands::Editor_Game_Base & egbase,
 		 Widelands::Player           const * player,
+		 Rect                                rect,
 		 Point                               viewpoint,
 		 uint32_t                            flags);
-
 protected:
 	/// A helper function to draw the minimap. This is called from
 	/// renderminimap().
-	void draw_minimap
+	std::unique_ptr<Surface> draw_minimap
 		(const Widelands::Editor_Game_Base &,
 		 Widelands::Player           const *,
-		 Rect                                rc,
+		 Rect                                rect,
 		 Point                               viewpt,
-		 Point                               framept,
 		 uint32_t                            flags);
 };
 

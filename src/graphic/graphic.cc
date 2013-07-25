@@ -529,9 +529,7 @@ void Graphic::save_png_(Surface & surf, StreamWrite * sw) const
 				row[4 * x] = color.r;
 				row[4 * x + 1] = color.g;
 				row[4 * x + 2] = color.b;
-				row[4 * x + 3] = png_byte(0xFF);
-				//FIXME: alpha channel not written because the opengl
-				// getPixels returns zero values for dither edges
+				row[4 * x + 3] = color.a;
 			}
 
 			png_write_row(png_ptr, row.get());

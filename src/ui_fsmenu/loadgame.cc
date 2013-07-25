@@ -24,11 +24,15 @@
 #include "gamecontroller.h"
 #include "gamesettings.h"
 #include "graphic/graphic.h"
+#include "graphic/image_loader_impl.h"
+#include "graphic/image_transformations.h"
+#include "graphic/in_memory_image.h"
 #include "i18n.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "log.h"
 #include "logic/game.h"
 #include "ui_basic/messagebox.h"
+#include "ui_basic/icon.h"
 #include "timestring.h"
 
 #include <cstdio>
@@ -91,7 +95,9 @@ Fullscreen_Menu_LoadGame::Fullscreen_Menu_LoadGame
 		(this, get_w() * 71 / 100, get_h() * 41 / 100),
 	m_ta_win_condition
 		(this, get_w() * 71 / 100, get_h() * 9 / 20),
-
+	m_minimap_icon
+		(this, get_w() * 7 / 10, get_h() * 10 / 20,
+		 get_w() * 15 / 100, get_w() * 15 / 100, nullptr),
 	m_settings(gsp),
 	m_ctrl(gc)
 {
@@ -161,6 +167,9 @@ void Fullscreen_Menu_LoadGame::no_selection()
 
 	m_tamapname .set_text(std::string());
 	m_tagametime.set_text(std::string());
+	m_ta_players.set_text(std::string());
+	m_ta_win_condition.set_text(std::string());
+	m_minimap_icon.setIcon(nullptr);
 }
 
 
@@ -215,6 +224,33 @@ void Fullscreen_Menu_LoadGame::map_selected(uint32_t selected)
 		}
 		m_ta_players.set_text(buf);
 		m_ta_win_condition.set_text(gpdp.get_win_condition());
+
+		std::string minimap_path = gpdp.get_minimap_path();
+		// Delete former image
+		m_minimap_icon.setIcon(nullptr);
+		if (m_minimap_image) {
+			m_minimap_image.release();
+		}
+		// Load the new one
+		if (!minimap_path.empty()) {
+			try {
+				ImageLoaderImpl* ill = new ImageLoaderImpl();
+				Surface * surf = ill->load(minimap_path);
+				const Image* im = new_in_memory_image("minimap", surf);
+				double scale = double(m_minimap_icon.get_w()) / im->width();
+				double scaleY = double(m_minimap_icon.get_h()) / im->height();
+				if (scaleY < scale) {
+					scale = scaleY;
+				}
+				uint16_t w = scale * im->width();
+				uint16_t h = scale * im->height();
+				const Image* resized = ImageTransformations::resize
+					(im, w, h);
+				m_minimap_image.reset(resized);
+				m_minimap_icon.setIcon(m_minimap_image.get());
+			} catch (...) {
+			}
+		}
 	} else {
 		no_selection();
 	}

@@ -58,6 +58,12 @@ void GLSurfaceScreen::lock(Surface::LockMode mode)
 	m_pixels.reset(new uint8_t[m_w * m_h * 4]);
 
 	if (mode == Lock_Normal) {
+		// FIXME: terrain dither picture somehow leave the alpha
+		// channel with non-1 values, so it is cleared before
+		// accessing pixels.
+		glColorMask(false, false, false, true);
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+		glColorMask(true, true, true, true);
 		glReadPixels(0, 0, m_w, m_h, GL_RGBA, GL_UNSIGNED_BYTE, m_pixels.get());
 		swap_rows();
 	}

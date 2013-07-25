@@ -26,6 +26,7 @@
 
 #include "ui_basic/button.h"
 #include "ui_basic/checkbox.h"
+#include "ui_basic/icon.h"
 #include "ui_basic/listselect.h"
 #include "ui_basic/multilinetextarea.h"
 #include "ui_basic/textarea.h"
@@ -36,6 +37,7 @@ struct Game;
 struct Map;
 struct Map_Loader;
 };
+class Image;
 class RenderTarget;
 struct GameController;
 struct GameSettingsProvider;
@@ -76,12 +78,14 @@ private:
 	UI::Textarea                                    m_label_players;
 	UI::Textarea                                    m_ta_players;
 	UI::Textarea                                    m_ta_win_condition;
+	UI::Icon                                        m_minimap_icon;
 	std::string                                     m_filename;
 
 	filenameset_t                                   m_gamefiles;
 
 	GameSettingsProvider                          * m_settings;
 	GameController                                * m_ctrl;
+	std::unique_ptr<const Image>                    m_minimap_image;
 };
 
 

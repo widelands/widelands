@@ -19,12 +19,21 @@
 
 #include "game_preload_data_packet.h"
 
+#include "graphic/graphic.h"
+#include "graphic/surface.h"
+#include "graphic/in_memory_image.h"
+#include "graphic/render/minimaprenderer.h"
 #include "logic/game.h"
 #include "logic/game_data_error.h"
 #include "logic/map.h"
 #include "profile/profile.h"
 #include "scripting/scripting.h"
 #include "wui/interactive_player.h"
+#include "wui/minimap.h"
+#include "wui/mapviewpixelconstants.h"
+#include "wui/mapviewpixelfunctions.h"
+
+#include <memory>
 
 namespace Widelands {
 
@@ -32,6 +41,7 @@ namespace Widelands {
 // a savegame without interactive player
 #define CURRENT_PACKET_VERSION 4
 #define PLAYERS_AMOUNT_KEY_V4 "player_amount"
+#define MINIMAP_FILENAME "minimap.png"
 
 
 void Game_Preload_Data_Packet::Read
@@ -84,6 +94,9 @@ void Game_Preload_Data_Packet::Read
 			} else {
 				m_number_of_players = s.get_safe_int(PLAYERS_AMOUNT_KEY_V4);
 			}
+			if (fs.FileExists(MINIMAP_FILENAME)) {
+				m_minimap_path = fs.FS_CanonicalizeName(MINIMAP_FILENAME);
+			}
 		} else {
 			throw game_data_error
 				(_("unknown/unhandled version %i"), packet_version);
@@ -130,6 +143,42 @@ void Game_Preload_Data_Packet::Write
 	s.set_string("win_condition", game.get_win_condition_displayname());
 
 	prof.write("preload", false, fs);
+
+	// Write minimap image
+	if (!game.is_loaded()) {
+		return;
+	}
+	MiniMapRenderer mmr;
+	uint32_t flags = MiniMap::Owner;
+	flags |= MiniMap::Bldns;
+	flags |= MiniMap::Terrn;
+	// map dimension
+	int16_t map_w = game.get_map()->get_width();
+	int16_t map_h = game.get_map()->get_height();
+	const int32_t maxx = MapviewPixelFunctions::get_map_end_screen_x(map);
+	const int32_t maxy = MapviewPixelFunctions::get_map_end_screen_y(map);
+	// viewpt topleft in pixels
+	Point vp = ipl->get_viewpoint();
+	Point viewpt(vp.x, vp.y);
+	viewpt.x += ipl->get_w() >> 1;
+	if (viewpt.x >= maxx)
+		viewpt.x -= maxx;
+	viewpt.y += ipl->get_h() >> 1;
+	if (viewpt.y >= maxy)
+		viewpt.y -= maxy;
+	viewpt.x /= TRIANGLE_WIDTH;
+	viewpt.y /= TRIANGLE_HEIGHT;
+	viewpt.x -= map_w / 2;
+	viewpt.y -= map_h / 2;
+	// render minimap
+	std::unique_ptr<Surface> surface = mmr.get_minimap_image
+		(ipl->egbase(), &ipl->player(), Rect(0, 0, map_w, map_h), viewpt, flags);
+	const Image* im = new_in_memory_image("minimap", surface.get());
+	::StreamWrite* sw = fs.OpenStreamWrite(MINIMAP_FILENAME);
+	g_gr->save_png(im, sw);
+	delete sw;
+	delete im;
+	surface.release();
 }
 
 }
