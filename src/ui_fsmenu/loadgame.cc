@@ -116,6 +116,7 @@ Fullscreen_Menu_LoadGame::Fullscreen_Menu_LoadGame
 	m_list          .set_font(m_fn, m_fs);
 	m_list.selected.connect(boost::bind(&Fullscreen_Menu_LoadGame::map_selected, this, _1));
 	m_list.double_clicked.connect(boost::bind(&Fullscreen_Menu_LoadGame::double_clicked, this, _1));
+	m_list.focus();
 	fill_list();
 }
 
