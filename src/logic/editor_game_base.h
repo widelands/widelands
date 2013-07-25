@@ -164,7 +164,13 @@ struct Editor_Game_Base :
 	/// Lua frontend, used to run Lua scripts
 	LuaInterface & lua() {return *m_lua;}
 
-	Players_Manager * get_playermgr() {return m_playermgr;}
+	// NOCOM(#sirver): do not use abbreviations if possible. You will never
+	// remember them and constantly look them up :). since this is a simple
+	// getter I do not think the get_ is really needed. I removed it when I
+	// killed the abbreviation, but feel free to add it back in if you feel
+	// strongly about it. As you can see in this class, we are not very
+	// consistent about this either way.
+	Players_Manager* player_manager() {return m_player_manager.get();}
 
 	Interactive_GameBase * get_igbase();
 
@@ -174,7 +180,8 @@ private:
 	Object_Manager             m_objects;
 
 	LuaInterface             * m_lua;
-	Players_Manager          * m_playermgr;
+	std::unique_ptr<Players_Manager> m_player_manager;
+
 protected:
 	typedef std::vector<Tribe_Descr *> Tribe_Vector;
 	Tribe_Vector           m_tribes;

@@ -118,7 +118,7 @@ bool GameSummaryScreen::handle_mousepress(Uint8 btn, int32_t mx, int32_t my)
 void GameSummaryScreen::fill_data()
 {
 	std::vector<Widelands::PlayerEndStatus> players_status
-		= m_game.get_playermgr()->get_players_end_status();
+		= m_game.player_manager()->get_players_end_status();
 	bool local_in_game = false;
 	bool local_won = false;
 	Widelands::Player* single_won = NULL;

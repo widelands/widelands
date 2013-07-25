@@ -2979,7 +2979,7 @@ void NetHost::reaper()
 }
 
 
-void NetHost::report_result(uint8_t p_nr, int32_t points, bool win, std::string & extra)
+void NetHost::report_result(uint8_t p_nr, int32_t points, bool win, const std::string & extra)
 {
 	// Send to game
 	Widelands::PlayerEndStatus pes;
@@ -2991,7 +2991,7 @@ void NetHost::report_result(uint8_t p_nr, int32_t points, bool win, std::string 
 	pes.win = win;
 	pes.lost = !win;
 	pes.extra = extra;
-	d->game->get_playermgr()->add_player_end_status(pes);
+	d->game->player_manager()->add_player_end_status(pes);
 
 	// there might be more than one client that control this Widelands player
 	// and maybe even none -> computer player

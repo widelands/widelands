@@ -66,20 +66,18 @@ m_gametime          (0),
 m_lua               (lua_interface),
 m_ibase             (0),
 m_map               (0),
-m_lasttrackserial   (0)
+m_lasttrackserial   (0),
+m_player_manager(new Players_Manager(*this));
 {
 	if (not m_lua) // TODO SirVer: this is sooo ugly, I can't say
 		m_lua = create_LuaEditorInterface(this);
 
 	g_sound_handler.m_egbase = this;
 
-	m_playermgr = new Players_Manager(*this);
 }
 
 
 Editor_Game_Base::~Editor_Game_Base() {
-	delete m_playermgr;
-
 	delete m_map;
 
 	container_iterate_const(Tribe_Vector, m_tribes, i)
@@ -125,7 +123,7 @@ Interactive_GameBase* Editor_Game_Base::get_igbase()
 
 
 void Editor_Game_Base::remove_player(Player_Number plnum) {
-	m_playermgr->remove_player(plnum);
+	m_player_manager->remove_player(plnum);
 }
 
 Player * Editor_Game_Base::add_player
@@ -136,7 +134,7 @@ Player * Editor_Game_Base::add_player
 	 TeamNumber                team)
 {
 	return
-		m_playermgr->add_player
+		m_player_manager->add_player
 			(player_number, initialization_index, tribe,
 			name, team);
 }
@@ -159,12 +157,12 @@ const Tribe_Descr & Editor_Game_Base::manually_load_tribe
 
 Player* Editor_Game_Base::get_player(const int32_t n) const
 {
-	return m_playermgr->get_player(n);
+	return m_player_manager->get_player(n);
 }
 
 Player& Editor_Game_Base::player(const int32_t n) const
 {
-	return m_playermgr->player(n);
+	return m_player_manager->player(n);
 }
 
 
@@ -505,7 +503,7 @@ void Editor_Game_Base::cleanup_for_load
 			g_gr->flush_animations(); // flush all world animations
 	}
 
-	m_playermgr->cleanup();
+	m_player_manager->cleanup();
 
 	if (m_map)
 		m_map->cleanup();
@@ -571,7 +569,6 @@ void Editor_Game_Base::set_road
 	}
 }
 
-// TODO SirVer: clean the functions till END CLEAN up
 /// This unconquers an area. This is only possible, when there is a building
 /// placed on this node.
 void Editor_Game_Base::unconquer_area
@@ -793,7 +790,6 @@ void Editor_Game_Base::cleanup_playerimmovables_area
 	}
 
 	//  fix all immovables
-	//  TODO SirVer: this upcast is so ugly, it makes my head explode
 	upcast(Game, game, this);
 	container_iterate_const(std::vector<PlayerImmovable *>, burnlist, i) {
 		if (upcast(Building, building, *i.current))
@@ -807,8 +803,6 @@ void Editor_Game_Base::cleanup_playerimmovables_area
 			(*i.current)->remove(*this);
 	}
 }
-
-// TODO SirVer: END CLEAN
 
 
 }

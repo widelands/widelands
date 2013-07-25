@@ -301,7 +301,7 @@ std::string NetClient::getGameDescription()
 	return buf;
 }
 
-void NetClient::report_result(uint8_t player_nr, int32_t points, bool win, std::string & extra)
+void NetClient::report_result(uint8_t player_nr, int32_t points, bool win, const std::string & extra)
 {
 	// Send to game
 	Widelands::PlayerEndStatus pes;
@@ -313,10 +313,15 @@ void NetClient::report_result(uint8_t player_nr, int32_t points, bool win, std::
 	// NOCOM:Sirver: I thought at some point results could be reported for player
 	// that left game before end. Also there might be win_condition that handle draw
 	// cases in the future.
+	// NOCOM(#cghislai):  Having two booleans seems to be cumbersome, inflexible
+	// and not future proof to me. I'd prefer to either use a string here (which
+	// is very free form and can contain any information we want to use in the
+	// future in either form) or an enum (which is easy to extend in the future
+	// with more meaning). Your call.
 	pes.win = win;
 	pes.lost = !win;
 	pes.extra = extra;
-	d->game->get_playermgr()->add_player_end_status(pes);
+	d->game->player_manager()->add_player_end_status(pes);
 }
 
 

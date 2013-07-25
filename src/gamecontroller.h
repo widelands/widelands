@@ -101,7 +101,7 @@ struct GameController {
 	    (uint8_t /* player */,
 	     int32_t /* points */,
 	     bool /* win */,
-	     std::string & /* extra */)
+	     const std::string & /* extra */)
 	{}
 };
 

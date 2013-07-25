@@ -35,9 +35,10 @@ struct Game;
 }
 
 /// Shows an ingame summary window on game end
-//NOCOM(#Sirver) I got error: ‘boost::signals::trackable’ is an inaccessible base of ‘GameSummaryScreen’
-// when using a class
-struct GameSummaryScreen : UI::UniqueWindow {
+//NOCOM(#Sirver) I got error: ‘boost::signals::trackable’ is an inaccessible
+//base of ‘GameSummaryScreen’ when using a class.
+// NOCOM(#cghislai): Likely didn't change the inheritance to be public. This works for me.
+class GameSummaryScreen : public UI::UniqueWindow {
 public:
 	GameSummaryScreen
 		(Interactive_GameBase * parent, UI::UniqueWindow::Registry * r);
