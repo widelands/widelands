@@ -19,15 +19,14 @@
 
 #include "animation.h"
 
-#include "diranimations.h"
-#include "logic/bob.h"
 #include "constants.h"
+#include "diranimations.h"
+#include "helper.h"
 #include "i18n.h"
+#include "logic/bob.h"
 #include "profile/profile.h"
 #include "sound/sound_handler.h"
 #include "wexception.h"
-
-#include "helper.h"
 
 #include <cstdio>
 

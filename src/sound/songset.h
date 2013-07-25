@@ -20,8 +20,8 @@
 #ifndef SONGSET_H
 #define SONGSET_H
 
-#include <string>
 #include <cstring>
+#include <string>
 #include <vector>
 
 #include <config.h> //  must be included before SDL_mixer.h!
