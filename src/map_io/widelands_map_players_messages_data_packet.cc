@@ -232,10 +232,10 @@ throw (_wexception)
 				break;
 			case Message::Archived: //  The default status. Do not write.
 				break;
-			s.set_int       ("serial",    message.serial());
 			default:
 				assert(false);
 			}
+			s.set_int       ("serial",    message.serial());
 		}
 		char filename[FILENAME_SIZE];
 		snprintf(filename, sizeof(filename), PLAYERDIRNAME_TEMPLATE, p);
