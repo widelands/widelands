@@ -20,13 +20,14 @@
 #ifndef GAME_SUMMARY_H
 #define GAME_SUMMARY_H
 
+#include <boost/signal.hpp>
+
 #include "ui_basic/box.h"
 #include "ui_basic/button.h"
+#include "ui_basic/multilinetextarea.h"
 #include "ui_basic/table.h"
 #include "ui_basic/textarea.h"
 #include "ui_basic/unique_window.h"
-
-#include <boost/signal.hpp>
 
 class Interactive_GameBase;
 namespace Widelands
@@ -35,9 +36,6 @@ struct Game;
 }
 
 /// Shows an ingame summary window on game end
-//NOCOM(#Sirver) I got error: ‘boost::signals::trackable’ is an inaccessible
-//base of ‘GameSummaryScreen’ when using a class.
-// NOCOM(#cghislai): Likely didn't change the inheritance to be public. This works for me.
 class GameSummaryScreen : public UI::UniqueWindow {
 public:
 	GameSummaryScreen
@@ -48,11 +46,14 @@ private:
 	void fill_data();
 	void stop_clicked();
 	void continue_clicked();
+	void player_selected(uint32_t idx);
+	std::string parse_player_info(std::string & info);
 
 	Widelands::Game & m_game;
 	UI::Textarea *  m_title_area;
 	UI::Textarea *  m_gametime_label;
 	UI::Textarea *  m_gametime_value;
+	UI::Multiline_Textarea *  m_info_area;
 	UI::Button *    m_continue_button;
 	UI::Button *    m_stop_button;
 	UI::Table<uintptr_t const> *     m_players_table;

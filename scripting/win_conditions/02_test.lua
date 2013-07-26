@@ -20,13 +20,13 @@ return {
 
 		broadcast(plrs, wc_name, wc_desc)
 		sleep(15000)
-		wl.game.report_result(plrs[1], true, 0, make_extra_data(plrs[1], wc_name, wc_version))
+		wl.game.report_result(plrs[1], 1, make_extra_data(plrs[1], wc_name, wc_version, {score=200}))
 		table.remove(plrs, 1)
 
 		broadcast_lost(plrs,
 				wc_name,
 				"Bravo!",
-				{}, wc_name, wc_version
+				{}, wc_name, wc_version, {score=10}
 		)
 
 	end,

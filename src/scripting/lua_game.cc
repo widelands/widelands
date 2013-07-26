@@ -27,6 +27,7 @@
 #include "logic/objective.h"
 #include "logic/path.h"
 #include "logic/player.h"
+#include "logic/playersmanager.h"
 #include "logic/tribe.h"
 #include "wui/interactive_player.h"
 #include "wui/story_message_box.h"
@@ -1300,35 +1301,32 @@ const Message & L_Message::get(lua_State * L, Widelands::Game & game) {
 
 
 /* RST
-.. function:: report_result(plr, has_won[, points = 0, extra = ""])
+.. function:: report_result(plr, result[, info = ""])
 
 	Reports the game ending to the metaserver if this is an Internet
 	network game. Otherwise, does nothing.
 
 	:arg plr: The Player to report results for.
 	:type plr: :class:`~wl.game.Player`
-	:arg has_won: :const:`true` if this player has won
-	:type has_won: :class:`boolean`
-	:type points: number of points the player should be rewarded for this game
-	:arg points: :class:`integer`
-	:arg extra: a string containing extra data for this particular win
-		condition. This will vary from game type to game type.
-	:type extra: :class:`string`
+	:arg result: The player result (0: lost, 1: won, 2: resigned)
+	:type result: :class:`number`
+	:arg info: a string containing extra data for this particular win
+		condition. This will vary from game type to game type. See
+		:class:`PlayerEndStatus` for allowed values
+	:type info: :class:`string`
 
 */
 static int L_report_result(lua_State * L) {
-	int32_t points = 0;
+	std::string info = "";
 	if (lua_gettop(L) >= 3)
-		points = luaL_checkint32(L, 3);
+		info = luaL_checkstring(L, 3);
 
-	std::string extra = "";
-	if (lua_gettop(L) >= 4)
-		extra = luaL_checkstring(L, 4);
+	Widelands::PlayerEndResult result = static_cast<Widelands::PlayerEndResult>
+		(luaL_checknumber(L, 2));
 
 	get_game(L).gameController()->report_result
 		((*get_user_class<L_Player>(L, 1))->get(L, get_game(L)).player_number(),
-		 points, luaL_checkboolean(L, 2), extra
-	);
+		 result, info);
 	return 0;
 }
 

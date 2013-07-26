@@ -917,7 +917,7 @@ void NetHost::run(bool const autorun)
 				// We do *not* only check connected users but all, as normally the players are already
 				// disconnected once the server reaches this line of code.
 				if (d->settings.users.at(i).name != d->localplayername) // all names, but the dedicated server
-					if (d->settings.users.at(i).winner)
+					if (d->settings.users.at(i).result == Widelands::PlayerEndResult::PLAYER_WON)
 						winners.push_back(d->settings.users.at(i).name);
 			DedicatedLog::get()->game_end(winners);
 		}
@@ -2040,16 +2040,14 @@ void NetHost::welcomeClient (uint32_t const number, std::string & playername)
 		for (uint32_t i = 0; i < d->settings.users.size(); ++i)
 			if (d->settings.users[i].position == UserSettings::notConnected()) {
 				client.usernum = i;
-				d->settings.users[i].winner = false;
-				d->settings.users[i].points = 0;
+				d->settings.users[i].result = Widelands::PlayerEndResult::UNDEFINED;
 				d->settings.users[i].ready  = true;
 				break;
 			}
 	if (client.usernum == -1) {
 		client.usernum = d->settings.users.size();
 		UserSettings newuser;
-		newuser.winner = false;
-		newuser.points = 0;
+		newuser.result = Widelands::PlayerEndResult::UNDEFINED;
 		newuser.ready  = true;
 		d->settings.users.push_back(newuser);
 	}
@@ -2890,7 +2888,7 @@ void NetHost::disconnectPlayerController(uint8_t const number, const std::string
 		}
 	}
 
-	setPlayerState(number, PlayerSettings::stateOpen);
+	setPlayerState(number, PlayerSettings::stateClosed);
 	if (d->game)
 		initComputerPlayer(number + 1);
 }
@@ -2979,7 +2977,8 @@ void NetHost::reaper()
 }
 
 
-void NetHost::report_result(uint8_t p_nr, int32_t points, bool win, const std::string & extra)
+void NetHost::report_result
+	(uint8_t p_nr, Widelands::PlayerEndResult result, const std::string & info)
 {
 	// Send to game
 	Widelands::PlayerEndStatus pes;
@@ -2987,10 +2986,8 @@ void NetHost::report_result(uint8_t p_nr, int32_t points, bool win, const std::s
 	assert(player);
 	pes.player = player->player_number();
 	pes.time = d->game->get_gametime();
-	pes.points = points;
-	pes.win = win;
-	pes.lost = !win;
-	pes.extra = extra;
+	pes.result = result;
+	pes.info = info;
 	d->game->player_manager()->add_player_end_status(pes);
 
 	// there might be more than one client that control this Widelands player
@@ -2998,17 +2995,17 @@ void NetHost::report_result(uint8_t p_nr, int32_t points, bool win, const std::s
 	for (uint16_t i = 0; i < d->settings.users.size(); ++i) {
 		UserSettings & user = d->settings.users.at(i);
 		if (user.position == p_nr - 1) {
-			user.winner               = win;
-			user.points               = points;
-			user.win_condition_string = extra;
+			user.result               = result;
+			user.win_condition_string = info;
+		}
 
-		if (!win)
+		if (result == Widelands::PlayerEndResult::PLAYER_LOST) {
 			sendSystemMessageCode("PLAYER_DEFEATED", user.name);
 		}
 	}
 
 	dedicatedlog
-		("NetHost::report_result(%d, %d, %s, %s)\n",
-		 player->player_number(), points, win?"won":"lost", extra.c_str());
+		("NetHost::report_result(%d, %d, %s)\n",
+		 player->player_number(), result, info.c_str());
 }
 

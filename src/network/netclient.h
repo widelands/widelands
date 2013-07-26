@@ -56,7 +56,8 @@ struct NetClient :
 	void setDesiredSpeed(uint32_t speed);
 	bool isPaused();
 	void setPaused(bool paused);
-	void report_result(uint8_t player, int32_t points, bool win, const std::string & extra);
+	void report_result
+		(uint8_t player, Widelands::PlayerEndResult result, const std::string & info);
 	// End GameController interface
 
 	// GameSettingsProvider interface

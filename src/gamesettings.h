@@ -27,6 +27,10 @@
 
 #include "logic/widelands.h"
 
+namespace Widelands {
+enum class PlayerEndResult : uint8_t;
+}
+
 struct PlayerSettings {
 	enum State {
 		stateOpen,
@@ -55,8 +59,7 @@ struct UserSettings {
 
 	uint8_t     position;
 	std::string name;
-	bool        winner;
-	uint32_t    points;
+	Widelands::PlayerEndResult     result;
 	std::string win_condition_string;
 	bool        ready; // until now only used as a check for whether user is currently receiving a file or not
 };

@@ -27,6 +27,7 @@
 namespace Widelands {
 struct Game;
 class PlayerCommand;
+enum class PlayerEndResult: uint8_t;
 }
 
 
@@ -93,15 +94,14 @@ struct GameController {
 	/**
 	 * Report a player result once he has left the game. This may be done through lua
 	 * by the win_condition scripts.
-	 * \param player : the player idx; \param poionts : the player score;
-	 * \param win : \c true if he won; \param extra : extra info can be passed
-	 * through this string.
+	 * \param player : the player idx;
+	 * \param result : the player result
+	 * \param info : The info string (\see \struct PlayerEndStatus for allowed values)
 	 */
 	virtual void report_result
 	    (uint8_t /* player */,
-	     int32_t /* points */,
-	     bool /* win */,
-	     const std::string & /* extra */)
+	     Widelands::PlayerEndResult /*result*/,
+	     const std::string & /* info */)
 	{}
 };
 

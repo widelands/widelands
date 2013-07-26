@@ -106,6 +106,6 @@ void Interactive_GameBase::show_game_summary()
 		m_game_summary.window->think();
 		return;
 	}
-	GameSummaryScreen* gsc = new GameSummaryScreen(this, &m_game_summary);
+	new GameSummaryScreen(this, &m_game_summary);
 }
 

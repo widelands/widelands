@@ -51,7 +51,7 @@ m_game(parent->game())
 	vbox->add_space(PADDING);
 
 	UI::Box * hbox1 = new UI::Box(this, 0, 0, UI::Box::Horizontal);
-	m_players_table = new UI::Table<const uintptr_t>(hbox1, 0, 0, 300, 200);
+	m_players_table = new UI::Table<uintptr_t const>(hbox1, 0, 0, 260, 200);
 	hbox1->add_space(PADDING);
 	hbox1->add(m_players_table, UI::Box::AlignTop);
 	hbox1->add_space(PADDING);
@@ -61,6 +61,9 @@ m_game(parent->game())
 	infoBox->add(m_gametime_label, UI::Box::AlignLeft);
 	m_gametime_value = new UI::Textarea(infoBox);
 	infoBox->add(m_gametime_value, UI::Box::AlignRight);
+	infoBox->add_space(PADDING);
+	m_info_area = new UI::Multiline_Textarea(infoBox, 0, 0, 130, 130, "");
+	infoBox->add(m_info_area, UI::Box::AlignLeft, true);
 	infoBox->add_space(PADDING);
 	hbox1->add(infoBox, UI::Box::AlignTop);
 	hbox1->add_space(PADDING);
@@ -88,7 +91,6 @@ m_game(parent->game())
 	m_players_table->add_column(50, _("Team"), UI::Align_HCenter);
 	m_players_table->add_column(100, _("Status"), UI::Align_HCenter);
 	m_players_table->add_column(100, _("Time"));
-	m_players_table->add_column(100, _("Score"), UI::Align_Right);
 
 	// Prepare Elements
 	m_title_area->set_textstyle(UI::TextStyle::ui_big());
@@ -98,6 +100,8 @@ m_game(parent->game())
 		(boost::bind(&GameSummaryScreen::continue_clicked, this));
 	m_stop_button->sigclicked.connect
 		(boost::bind(&GameSummaryScreen::stop_clicked, this));
+	m_players_table->selected.connect
+		(boost::bind(&GameSummaryScreen::player_selected, this, _1));
 
 	// Window
 	center_to_parent();
@@ -125,14 +129,15 @@ void GameSummaryScreen::fill_data()
 	uint8_t team_won = 0;
 	Interactive_Player* ipl = m_game.get_ipl();
 
-	BOOST_FOREACH(Widelands::PlayerEndStatus pes, players_status) {
+	for (uintptr_t i = 0; i < players_status.size(); i++) {
+		Widelands::PlayerEndStatus pes = players_status.at(i);
 		if (ipl && pes.player == ipl->player_number()) {
 			local_in_game = true;
-			local_won = pes.win;
+			local_won = pes.result == Widelands::PlayerEndResult::PLAYER_WON;
 		}
 		Widelands::Player* p = m_game.get_player(pes.player);
-		UI::Table<uintptr_t>::Entry_Record & te
-			= m_players_table->add(pes.player);
+		UI::Table<uintptr_t const>::Entry_Record & te
+			= m_players_table->add(i);
 		// Player name & pic
 		// Boost doesn't handle uint8_t as integers
 		uint16_t player_number = pes.player;
@@ -146,24 +151,28 @@ void GameSummaryScreen::fill_data()
 			(boost::format("%|1$u|") % team_number).str();
 		te.set_string(1, team_str);
 		// Status
-		std::string stat_str = _("Resigned");
-		if (pes.lost) {
-			stat_str = _("Lost");
-		} else if (pes.win) {
-			stat_str = _("Won");
-			if (!single_won) {
-				single_won = p;
-			} else {
-				team_won = p->team_number();
-			}
+		std::string stat_str;
+		switch (pes.result) {
+			case Widelands::PlayerEndResult::PLAYER_LOST:
+				stat_str = _("Lost");
+				break;
+			case Widelands::PlayerEndResult::PLAYER_WON:
+				stat_str = _("Won");
+				if (!single_won) {
+					single_won = p;
+				} else {
+					team_won = p->team_number();
+				}
+				break;
+			case Widelands::PlayerEndResult::PLAYER_RESIGNED:
+				 stat_str = _("Resigned");
+				 break;
+			default:
+				stat_str = _("Unkown");
 		}
 		te.set_string(2, stat_str);
 		// Time
 		te.set_string(3, gametimestring(pes.time));
-		// Points
-		std::string points_str =
-			(boost::format("%|1$u|") % pes.points).str();
-		te.set_string(4, points_str);
 	}
 
 	if (local_in_game) {
@@ -183,6 +192,9 @@ void GameSummaryScreen::fill_data()
 		}
 	}
 	m_players_table->update();
+	if (players_status.size() > 0) {
+		m_players_table->select(players_status.at(0).player);
+	}
 	m_gametime_value->set_text(gametimestring(m_game.get_gametime()));
 }
 
@@ -194,5 +206,46 @@ void GameSummaryScreen::continue_clicked()
 void GameSummaryScreen::stop_clicked()
 {
 	m_game.get_ibase()->end_modal(0);
+}
+
+void GameSummaryScreen::player_selected(uint32_t idx)
+{
+	Widelands::PlayerEndStatus pes = m_game.player_manager()->get_players_end_status().at(idx);
+	std::string info_str = parse_player_info(pes.info);
+	m_info_area->set_text(info_str);
+	layout();
+}
+
+std::string GameSummaryScreen::parse_player_info(std::string& info)
+{
+	typedef boost::split_iterator<std::string::iterator> string_split_iterator;
+	std::string info_str;
+	if (info.empty()) {
+		return info_str;
+	}
+	// Iterate through all key=value pairs
+	string_split_iterator substring_it = boost::make_split_iterator
+		(info, boost::first_finder(";", boost::is_equal()));
+	while (substring_it != string_split_iterator()) {
+		std::string substring = boost::copy_range<std::string>(*substring_it);
+		std::vector<std::string> pair;
+		boost::split(pair, substring, boost::is_any_of("="));
+		assert(pair.size() == 2);
+
+		std::string key = pair.at(0);
+		if (key == "score") {
+			info_str +=
+				(boost::format("%1% : %2%\n") % _("Score") % pair.at(1)).str();
+		} else if (key == "resign_reason") {
+			info_str +=
+				(boost::format("%1%\n") % pair.at(1)).str();
+		}
+		++substring_it;
+	}
+	if (!info_str.empty()) {
+		info_str =
+			(boost::format("%1% :\n%2%") % _("Player info") % info_str).str();
+	}
+	return info_str;
 }
 

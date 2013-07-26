@@ -44,7 +44,7 @@ struct SinglePlayerGameController : public GameController, public ChatProvider {
 	void setDesiredSpeed(uint32_t speed);
 	bool isPaused();
 	void setPaused(bool paused);
-	void report_result(uint8_t player, int32_t score, bool win, const std::string & extra);
+	void report_result(uint8_t player, Widelands::PlayerEndResult result, const std::string & info);
 
 	// Chat provider implementation
 	void send(const std::string & msg);
@@ -166,17 +166,15 @@ void SinglePlayerGameController::setPaused(bool paused)
 }
 
 void SinglePlayerGameController::report_result
-	(uint8_t p_nr, int32_t score, bool win, const std::string & extra)
+	(uint8_t p_nr, Widelands::PlayerEndResult result, const std::string & info)
 {
 	Widelands::PlayerEndStatus pes;
 	Widelands::Player* player = m_game.get_player(p_nr);
 	assert(player);
 	pes.player = player->player_number();
 	pes.time = m_game.get_gametime();
-	pes.points = score;
-	pes.win = win;
-	pes.lost = !win;
-	pes.extra = extra;
+	pes.result = result;
+	pes.info = info;
 	m_game.player_manager()->add_player_end_status(pes);
 }
 

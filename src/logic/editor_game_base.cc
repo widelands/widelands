@@ -67,7 +67,7 @@ m_lua               (lua_interface),
 m_ibase             (0),
 m_map               (0),
 m_lasttrackserial   (0),
-m_player_manager(new Players_Manager(*this));
+m_player_manager(new Players_Manager(*this))
 {
 	if (not m_lua) // TODO SirVer: this is sooo ugly, I can't say
 		m_lua = create_LuaEditorInterface(this);
