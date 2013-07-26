@@ -557,7 +557,6 @@ void TrainingSite::drop_stalled_soldiers(Game &)
 	if (nullptr != soldier_to_drop)
 		{
 			log("TrainingSite::drop_stalled_soldiers: Kicking somebody out ");
-			//log("(%3d,%3d): ", get_positions(g)[0].x, get_positions(g)[0].y);
 
 			// Kicking out a soldier diminishes "stallness" of his levels a bit.
 			std::vector<Upgrade>::iterator it = m_upgrades.begin();
@@ -622,8 +621,6 @@ void TrainingSite::program_end(Game & game, Program_Result const result)
  */
 void TrainingSite::find_and_start_next_program(Game & game)
 {
-	//log ("tsited %4x time=%12.3f find_and_start_next_program\n", ((float)game.get_gametime())/1000.,
-	//(uint16_t)(((unsigned long) ((void*)this))&0xffff)); // teppo9
 	drop_stalled_soldiers(game);
 	for (;;) {
 		uint32_t maxprio = 0;
@@ -791,9 +788,7 @@ TrainingSite::trainingAttempted(uint32_t type, uint32_t level)
 			training_failure_count[key]  = std::make_pair(training_state_multiplier, 0);
 		else
 			{
-				//log ("ts: trainingAttempt %d.%d : %3d ->", type, level, training_failure_count[key].first);
 				training_failure_count[key].first +=  training_state_multiplier;
-				//log(" %3d\n", training_failure_count[key].first);
 			}
 	}
 
@@ -814,7 +809,6 @@ TrainingSite::trainingDone(Game &)
 {
 	TrainFailCount_t::iterator it;
 	log("TrainingSite::trainingDone() ");
-	//log("(%3d,%3d): ", get_positions(g)[0].x, get_positions(g)[0].y);
 	for (it = training_failure_count.begin(); it != training_failure_count.end(); it++)
 	{
 		// If a soldier is present at this training level, deteoriate
