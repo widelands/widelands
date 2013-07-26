@@ -21,19 +21,17 @@
 
 #include <boost/bind.hpp>
 
-// Package includes
-#include "flag.h"
-#include "route.h"
 #include "cmd_call_economy_balance.h"
-#include "routeastar.h"
-#include "router.h"
-
+#include "flag.h"
 #include "logic/game.h"
 #include "logic/player.h"
-#include "request.h"
 #include "logic/tribe.h"
-#include "upcast.h"
 #include "logic/warehouse.h"
+#include "request.h"
+#include "route.h"
+#include "routeastar.h"
+#include "router.h"
+#include "upcast.h"
 #include "warehousesupply.h"
 #include "wexception.h"
 

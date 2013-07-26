@@ -17,10 +17,10 @@
  *
  */
 
+#include "map.h"
+
 #include <algorithm>
 #include <cstdio>
-
-#include "log.h"
 
 #include "checkstep.h"
 #include "economy/flag.h"
@@ -29,6 +29,7 @@
 #include "findimmovable.h"
 #include "findnode.h"
 #include "io/filesystem/layered_filesystem.h"
+#include "log.h"
 #include "map_generator.h"
 #include "map_io/widelands_map_loader.h"
 #include "mapfringeregion.h"
@@ -41,8 +42,6 @@
 #include "wexception.h"
 #include "worlddata.h"
 #include "wui/overlay_manager.h"
-
-#include "map.h"
 
 
 

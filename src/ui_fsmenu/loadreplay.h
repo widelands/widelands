@@ -21,7 +21,6 @@
 #define FULLSCREEN_MENU_LOADREPLAY_H
 
 #include "base.h"
-
 #include "ui_basic/button.h"
 #include "ui_basic/listselect.h"
 #include "ui_basic/textarea.h"

@@ -19,34 +19,31 @@
 
 #include "editor_main_menu_save_map.h"
 
+#include <cstdio>
+#include <cstring>
+#include <string>
+
+#include <boost/format.hpp>
+
 #include "constants.h"
 #include "editor/editorinteractive.h"
 #include "editor_main_menu_save_map_make_directory.h"
-#include "io/filesystem/filesystem.h"
 #include "graphic/graphic.h"
 #include "i18n.h"
+#include "io/filesystem/filesystem.h"
 #include "io/filesystem/layered_filesystem.h"
-#include "profile/profile.h"
-#include "wexception.h"
+#include "io/filesystem/zip_filesystem.h"
 #include "map_io/widelands_map_loader.h"
 #include "map_io/widelands_map_saver.h"
-#include "io/filesystem/zip_filesystem.h"
-
+#include "profile/profile.h"
 #include "ui_basic/button.h"
 #include "ui_basic/editbox.h"
 #include "ui_basic/listselect.h"
 #include "ui_basic/messagebox.h"
 #include "ui_basic/multilinetextarea.h"
 #include "ui_basic/textarea.h"
-
 #include "upcast.h"
-
-#include <boost/format.hpp>
-
-#include <cstdio>
-#include <cstring>
-#include <string>
-
+#include "wexception.h"
 
 inline Editor_Interactive & Main_Menu_Save_Map::eia() {
 	return ref_cast<Editor_Interactive, UI::Panel>(*get_parent());

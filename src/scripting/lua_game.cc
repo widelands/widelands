@@ -17,8 +17,11 @@
  *
  */
 
+#include "lua_game.h"
+
 #include <lua.hpp>
 
+#include "c_utils.h"
 #include "campvis.h"
 #include "economy/economy.h"
 #include "economy/flag.h"
@@ -28,14 +31,10 @@
 #include "logic/path.h"
 #include "logic/player.h"
 #include "logic/tribe.h"
-#include "wui/interactive_player.h"
-#include "wui/story_message_box.h"
-
-#include "c_utils.h"
 #include "lua_map.h"
 #include "scripting.h"
-
-#include "lua_game.h"
+#include "wui/interactive_player.h"
+#include "wui/story_message_box.h"
 
 using namespace Widelands;
 using namespace LuaMap;

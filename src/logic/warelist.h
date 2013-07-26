@@ -20,15 +20,14 @@
 #ifndef WARELIST_H
 #define WARELIST_H
 
-#include "widelands.h"
-
-#include <boost/signal.hpp>
-#include <boost/bind.hpp>
-
-#include <SDL.h>
-
 #include <cassert>
 #include <vector>
+
+#include <SDL.h>
+#include <boost/bind.hpp>
+#include <boost/signal.hpp>
+
+#include "widelands.h"
 
 namespace Widelands {
 

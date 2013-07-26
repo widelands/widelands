@@ -19,18 +19,18 @@
 
 #include "editor_tool_change_resources_options_menu.h"
 
+#include <cstdio>
+
 #include "editor/editorinteractive.h"
-#include "i18n.h"
-#include "ui_basic/button.h"
 #include "editor/tools/editor_increase_resources_tool.h"
 #include "editor/tools/editor_set_resources_tool.h"
+#include "graphic/graphic.h"
+#include "i18n.h"
 #include "logic/map.h"
 #include "logic/widelands.h"
 #include "logic/world.h"
-#include "graphic/graphic.h"
+#include "ui_basic/button.h"
 #include "wui/overlay_manager.h"
-
-#include <cstdio>
 
 const static int BUTTON_WIDTH = 20;
 const static int BUTTON_HEIGHT = 20;

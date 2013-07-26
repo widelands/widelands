@@ -26,14 +26,14 @@
 #include "game_io/game_loader.h"
 #include "game_io/game_preload_data_packet.h"
 #include "game_io/game_saver.h"
+#include "gamecontroller.h"
 #include "i18n.h"
 #include "interactive_gamebase.h"
-#include "gamecontroller.h"
+#include "interactive_player.h"
 #include "io/filesystem/filesystem.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "logic/game.h"
 #include "profile/profile.h"
-#include "interactive_player.h"
 #include "timestring.h"
 
 using boost::format;

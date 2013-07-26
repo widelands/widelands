@@ -17,19 +17,19 @@
  *
  */
 
+#include "animation_gfx.h"
+
 #include <cassert>
 
 #include <SDL.h>
 
-#include "io/filesystem/layered_filesystem.h"
-#include "log.h"
-#include "wexception.h"
-
 #include "animation.h"
-#include "animation_gfx.h"
 #include "image.h"
 #include "image_cache.h"
 #include "image_transformations.h"
+#include "io/filesystem/layered_filesystem.h"
+#include "log.h"
+#include "wexception.h"
 
 static const uint32_t nextensions = 2;
 static const char extensions[nextensions][5] = {".png", ".jpg"};

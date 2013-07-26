@@ -17,19 +17,17 @@
  *
  */
 
+#include "widelands_map_port_spaces_data_packet.h"
+
 #include <boost/algorithm/string.hpp>
 #include <boost/foreach.hpp>
 
 #include "container_iterate.h"
-
+#include "log.h"
 #include "logic/editor_game_base.h"
 #include "logic/game_data_error.h"
 #include "logic/map.h"
 #include "profile/profile.h"
-
-#include "log.h"
-
-#include "widelands_map_port_spaces_data_packet.h"
 
 namespace Widelands {
 

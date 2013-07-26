@@ -20,7 +20,10 @@
 #ifndef MAPVIEWPIXELFUNCTIONS_H
 #define MAPVIEWPIXELFUNCTIONS_H
 
+#include "logic/field.h"
+#include "logic/map.h"
 #include "logic/widelands_geometry.h"
+#include "mapviewpixelconstants.h"
 #include "point.h"
 
 namespace Widelands {struct Map;}
@@ -80,10 +83,6 @@ void get_save_pix
 //  The rest of the content of this file is only here to be inlined. It should
 //  have been in the cc file otherwise. Now objectcode modularity is not
 //  achieved, but only sourcecode modularity is required.
-
-#include "logic/field.h"
-#include "logic/map.h"
-#include "mapviewpixelconstants.h"
 
 inline uint32_t MapviewPixelFunctions::get_map_end_screen_x
 	(const Widelands::Map & map)

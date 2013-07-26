@@ -20,9 +20,8 @@
 #ifndef S2MAP_H
 #define S2MAP_H
 
-#include "map_io/map_loader.h"
-
 #include "io/fileread.h"
+#include "map_io/map_loader.h"
 
 struct S2MapDescrHeader {
 	char    magic[10]; // "WORLD_V1.0"

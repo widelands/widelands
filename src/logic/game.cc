@@ -19,6 +19,15 @@
 
 #include "game.h"
 
+#include <cstring>
+#include <string>
+
+#ifndef _WIN32
+#include <unistd.h> // for usleep
+#else
+#include <windows.h>
+#endif
+
 #include "carrier.h"
 #include "cmd_calculate_statistics.h"
 #include "cmd_luacoroutine.h"
@@ -34,6 +43,7 @@
 #include "io/filesystem/layered_filesystem.h"
 #include "log.h"
 #include "map_io/widelands_map_loader.h"
+#include "militarysite.h"
 #include "network/network.h"
 #include "player.h"
 #include "playercommand.h"
@@ -54,16 +64,6 @@
 #include "wlapplication.h"
 #include "wui/game_tips.h"
 #include "wui/interactive_player.h"
-#include "militarysite.h"
-
-#include <cstring>
-#include <string>
-
-#ifndef _WIN32
-#include <unistd.h> // for usleep
-#else
-#include <windows.h>
-#endif
 
 namespace Widelands {
 

@@ -23,9 +23,9 @@
 #include <list>
 #include <string>
 
+#include "interval.h"
 #include "logic/bob.h"
 #include "logic/field.h"
-#include "interval.h"
 
 
 struct Editor_Interactive;

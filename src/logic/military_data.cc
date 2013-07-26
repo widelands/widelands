@@ -19,13 +19,13 @@
 
 #include "military_data.h"
 
-#include "container_iterate.h"
-#include "helper.h"
-#include "i18n.h"
-#include "game_data_error.h"
-
 #include <string>
 #include <vector>
+
+#include "container_iterate.h"
+#include "game_data_error.h"
+#include "helper.h"
+#include "i18n.h"
 
 namespace Widelands {
 

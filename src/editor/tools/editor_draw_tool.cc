@@ -20,8 +20,8 @@
 
 #include "editor_draw_tool.h"
 
-#include "editor_history.h"
 #include "editor_action_args.h"
+#include "editor_history.h"
 
 
 /**

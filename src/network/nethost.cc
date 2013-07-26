@@ -19,12 +19,19 @@
 
 #include "nethost.h"
 
+#include <sstream>
+
+#include <boost/format.hpp>
+#include <boost/lexical_cast.hpp>
+#ifndef _WIN32
+#include <unistd.h> // for usleep
+#endif
+
 #include "build_info.h"
 #include "chat.h"
 #include "computer_player.h"
 #include "game_io/game_loader.h"
 #include "game_io/game_preload_data_packet.h"
-#include "ui_fsmenu/launchMPG.h"
 #include "i18n.h"
 #include "internet_gaming.h"
 #include "io/dedicated_log.h"
@@ -44,19 +51,12 @@
 #include "profile/profile.h"
 #include "scripting/scripting.h"
 #include "ui_basic/progresswindow.h"
+#include "ui_fsmenu/launchMPG.h"
 #include "wexception.h"
 #include "wlapplication.h"
 #include "wui/game_tips.h"
 #include "wui/interactive_player.h"
 #include "wui/interactive_spectator.h"
-
-#include <boost/format.hpp>
-#include <boost/lexical_cast.hpp>
-#include <sstream>
-
-#ifndef _WIN32
-#include <unistd.h> // for usleep
-#endif
 
 using boost::format;
 

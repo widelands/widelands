@@ -20,9 +20,9 @@
 #ifndef WAREHOUSESUPPLY_H
 #define WAREHOUSESUPPLY_H
 
-#include "supply.h"
 #include "logic/warelist.h"
 #include "logic/wareworker.h"
+#include "supply.h"
 
 namespace Widelands {
 

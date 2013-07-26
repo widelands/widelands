@@ -17,9 +17,9 @@
  *
  */
 
-#include <algorithm>
-
 #include "waresqueuedisplay.h"
+
+#include <algorithm>
 
 #include "economy/request.h"
 #include "economy/wares_queue.h"

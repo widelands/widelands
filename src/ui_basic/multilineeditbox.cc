@@ -21,12 +21,12 @@
 
 #include <boost/bind.hpp>
 
-#include "scrollbar.h"
 #include "constants.h"
 #include "graphic/font_handler.h"
 #include "graphic/rendertarget.h"
 #include "graphic/wordwrap.h"
 #include "helper.h"
+#include "scrollbar.h"
 #include "utf8.h"
 #include "wlapplication.h"
 

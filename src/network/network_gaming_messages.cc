@@ -19,12 +19,13 @@
 
 #include "network_gaming_messages.h"
 
-#include "i18n.h"
-#include "log.h"
-
 #include <map>
+
 #include <boost/format.hpp>
 #include <stdint.h>
+
+#include "i18n.h"
+#include "log.h"
 
 static std::map <std::string, std::string> ngmessages;
 

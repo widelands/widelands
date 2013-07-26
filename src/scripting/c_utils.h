@@ -22,11 +22,10 @@
 
 #include <lua.hpp>
 
+#include "factory.h"
 #include "logic/game.h"
 #include "map_io/widelands_map_map_object_loader.h"
 #include "map_io/widelands_map_map_object_saver.h"
-
-#include "factory.h"
 
 Factory & get_factory(lua_State *);
 Widelands::Game & get_game(lua_State *);

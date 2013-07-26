@@ -20,9 +20,9 @@
 #ifndef NETHOST_H
 #define NETHOST_H
 
-#include "logic/widelands.h"
 #include "gamecontroller.h"
 #include "gamesettings.h"
+#include "logic/widelands.h"
 #include "network.h"
 
 struct ChatMessage;

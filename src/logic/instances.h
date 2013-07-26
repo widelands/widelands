@@ -20,9 +20,9 @@
 #ifndef INSTANCES_H
 #define INSTANCES_H
 
+#include <cstring>
 #include <map>
 #include <string>
-#include <cstring>
 #include <vector>
 
 #include <boost/function.hpp>

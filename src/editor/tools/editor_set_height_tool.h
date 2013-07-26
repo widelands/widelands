@@ -21,8 +21,8 @@
 #define EDITOR_SET_HEIGHT_TOOL_H
 
 #include "editor_tool.h"
-#include "logic/field.h"
 #include "interval.h"
+#include "logic/field.h"
 
 ///  Ensures that the height of a node is within an interval.
 struct Editor_Set_Height_Tool : public Editor_Tool {

@@ -19,18 +19,15 @@
 
 #include "road.h"
 
-// Package includes
 #include "economy.h"
 #include "flag.h"
-
 #include "logic/carrier.h"
-#include "logic/instances.h"
-#include "logic/player.h"
-#include "request.h"
 #include "logic/editor_game_base.h"
 #include "logic/game.h"
+#include "logic/instances.h"
+#include "logic/player.h"
 #include "logic/tribe.h"
-
+#include "request.h"
 #include "upcast.h"
 
 namespace Widelands {

@@ -26,11 +26,11 @@
 #include <boost/function.hpp>
 #include <boost/utility.hpp>
 
-#include "supply_list.h"
-#include "ui_basic/unique_window.h"
 #include "logic/instances.h"
 #include "logic/warelist.h"
 #include "logic/wareworker.h"
+#include "supply_list.h"
+#include "ui_basic/unique_window.h"
 
 
 namespace Widelands {

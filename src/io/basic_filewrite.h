@@ -20,13 +20,13 @@
 #ifndef BASIC_FILEWRITE_H
 #define BASIC_FILEWRITE_H
 
-#include "filesystem/disk_filesystem.h"
-#include "filesystem/filesystem.h"
-#include "machdep.h"
-
 #include <cassert>
 #include <cstdarg>
 #include <limits>
+
+#include "filesystem/disk_filesystem.h"
+#include "filesystem/filesystem.h"
+#include "machdep.h"
 
 /// Mirror of \ref FileRead : all writes are first stored in a block of memory
 /// and finally written out when Write() is called.

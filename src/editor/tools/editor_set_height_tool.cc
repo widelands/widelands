@@ -19,12 +19,12 @@
 
 #include "editor_set_height_tool.h"
 
-#include "editor_increase_height_tool.h"
+#include "editor/editorinteractive.h"
 #include "editor_decrease_height_tool.h"
+#include "editor_increase_height_tool.h"
+#include "logic/field.h"
 #include "logic/map.h"
 #include "logic/mapregion.h"
-#include "logic/field.h"
-#include "editor/editorinteractive.h"
 
 
 int32_t Editor_Set_Height_Tool::handle_click_impl

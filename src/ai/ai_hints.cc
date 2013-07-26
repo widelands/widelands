@@ -19,9 +19,9 @@
 
 #include "ai_hints.h"
 
-#include "profile/profile.h"
-
 #include <cstring>
+
+#include "profile/profile.h"
 
 
 BuildingHints::~BuildingHints ()

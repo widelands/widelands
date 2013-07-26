@@ -19,6 +19,8 @@
 
 #include "critter_bob.h"
 
+#include <cstdio>
+
 #include "critter_bob_program.h"
 #include "field.h"
 #include "game.h"
@@ -28,7 +30,6 @@
 #include "tribe.h"
 #include "wexception.h"
 
-#include <cstdio>
 
 namespace Widelands {
 

@@ -20,17 +20,16 @@
 #ifndef FULLSCREEN_MENU_OPTIONS_H
 #define FULLSCREEN_MENU_OPTIONS_H
 
-#include "base.h"
+#include <cstring>
+#include <string>
+#include <vector>
 
+#include "base.h"
 #include "ui_basic/button.h"
 #include "ui_basic/checkbox.h"
 #include "ui_basic/listselect.h"
 #include "ui_basic/spinbox.h"
 #include "ui_basic/textarea.h"
-
-#include <string>
-#include <cstring>
-#include <vector>
 
 class Fullscreen_Menu_Options;
 struct Section;

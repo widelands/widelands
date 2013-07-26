@@ -20,16 +20,15 @@
 #include "idleworkersupply.h"
 
 #include "economy.h"
-#include "request.h"
-
 #include "logic/game.h"
 #include "logic/player.h"
 #include "logic/requirements.h"
 #include "logic/soldier.h"
 #include "logic/tribe.h"
-#include "wexception.h"
 #include "logic/warehouse.h"
 #include "logic/worker.h"
+#include "request.h"
+#include "wexception.h"
 
 namespace Widelands {
 

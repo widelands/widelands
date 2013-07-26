@@ -21,9 +21,7 @@
 #define FULLSCREEN_MENU_LOADGAME_H
 
 #include "base.h"
-
 #include "io/filesystem/filesystem.h"
-
 #include "ui_basic/button.h"
 #include "ui_basic/checkbox.h"
 #include "ui_basic/listselect.h"

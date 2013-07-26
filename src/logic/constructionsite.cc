@@ -17,26 +17,26 @@
  *
  */
 
+#include "constructionsite.h"
+
 #include <cstdio>
+
 #include <boost/format.hpp>
 
-#include "editor_game_base.h"
-#include "i18n.h"
-#include "upcast.h"
-#include "wexception.h"
-
 #include "economy/wares_queue.h"
+#include "editor_game_base.h"
 #include "game.h"
 #include "graphic/animation.h"
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
+#include "i18n.h"
 #include "sound/sound_handler.h"
-#include "ui_basic/window.h"
-#include "wui/interactive_gamebase.h"
 #include "tribe.h"
+#include "ui_basic/window.h"
+#include "upcast.h"
+#include "wexception.h"
 #include "worker.h"
-
-#include "constructionsite.h"
+#include "wui/interactive_gamebase.h"
 
 namespace Widelands {
 

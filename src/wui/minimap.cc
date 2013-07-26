@@ -19,14 +19,13 @@
 
 #include "minimap.h"
 
+#include "graphic/graphic.h"
+#include "graphic/render/minimaprenderer.h"
+#include "graphic/rendertarget.h"
 #include "i18n.h"
 #include "interactive_player.h"
 #include "logic/map.h"
 #include "mapviewpixelconstants.h"
-
-#include "graphic/graphic.h"
-#include "graphic/rendertarget.h"
-#include "graphic/render/minimaprenderer.h"
 
 
 MiniMap::View::View

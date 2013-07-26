@@ -22,6 +22,7 @@
 
 #include <lua.hpp>
 
+#include "lua_bases.h"
 #include "luna.h"
 
 namespace LuaRoot {

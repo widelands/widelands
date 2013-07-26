@@ -20,8 +20,9 @@
 #ifndef TRIBEBASICINFO_H
 #define TRIBEBASICINFO_H
 
-#include <vector>
 #include <string>
+#include <vector>
+
 #include <stdint.h>
 
 /// Basic information about the tribe that is determined only from the conf

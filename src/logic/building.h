@@ -20,21 +20,21 @@
 #ifndef BUILDING_H
 #define BUILDING_H
 
+#include <cstring>
+#include <string>
+#include <vector>
+
+#include <boost/signal.hpp>
+
 #include "ai/ai_hints.h"
 #include "buildcost.h"
 #include "immovable.h"
+#include "io/filewrite.h"
 #include "soldier_counts.h"
-#include "workarea_info.h"
-#include "writeHTML.h"
 #include "ware_types.h"
 #include "widelands.h"
-
-#include "io/filewrite.h"
-
-#include <string>
-#include <cstring>
-#include <vector>
-#include <boost/signal.hpp>
+#include "workarea_info.h"
+#include "writeHTML.h"
 
 namespace UI {class Window;}
 struct BuildingHints;

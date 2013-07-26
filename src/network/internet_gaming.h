@@ -20,20 +20,19 @@
 #ifndef INTERNET_GAMING_H
 #define INTERNET_GAMING_H
 
+#include <string>
+#include <vector>
+
+#ifdef _WIN32
+#include <io.h>
+#include <winsock2.h>
+#endif
+
 #include "build_info.h"
 #include "chat.h"
 #include "internet_gaming_protocol.h"
 #include "network.h"
 #include "network_lan_promotion.h"
-
-#include <stdint.h>
-#include <string>
-#include <vector>
-
-#ifdef _WIN32
-#include <winsock2.h>
-#include <io.h>
-#endif
 
 
 /// A simple network client struct

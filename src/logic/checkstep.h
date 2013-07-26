@@ -20,9 +20,10 @@
 #ifndef CHECKSTEP_H
 #define CHECKSTEP_H
 
-#include <boost/shared_ptr.hpp>
 #include <set>
 #include <vector>
+
+#include <boost/shared_ptr.hpp>
 
 #include "widelands_geometry.h"
 

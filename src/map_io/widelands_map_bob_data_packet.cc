@@ -21,7 +21,6 @@
 
 #include "logic/player.h"
 #include "logic/tribe.h"
-
 #include "widelands_map_map_object_loader.h"
 #include "widelands_map_map_object_saver.h"
 

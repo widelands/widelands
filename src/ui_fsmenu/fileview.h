@@ -20,15 +20,14 @@
 #ifndef FULLSCREEN_MENU_FILEVIEW_H
 #define FULLSCREEN_MENU_FILEVIEW_H
 
-#include "base.h"
+#include <cstring>
+#include <string>
 
+#include "base.h"
 #include "ui_basic/button.h"
 #include "ui_basic/multilinetextarea.h"
 #include "ui_basic/textarea.h"
 #include "ui_basic/unique_window.h"
-
-#include <string>
-#include <cstring>
 
 void fileview_window
 	(UI::Panel                  & parent,

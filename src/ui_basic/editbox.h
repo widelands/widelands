@@ -23,9 +23,8 @@
 #include <SDL_keyboard.h>
 #include <boost/signal.hpp>
 
-#include "button.h"
-
 #include "align.h"
+#include "button.h"
 #include "graphic/graphic.h"
 
 #define CHAT_HISTORY_SIZE 5

@@ -23,20 +23,15 @@
 #include <cassert>
 
 #include "constants.h"
-#include "log.h"
-#include "random.h"
-#include "upcast.h"
-#include "vertex.h"
-
-#include "wui/mapviewpixelconstants.h"
-
-
-#include "logic/roadtype.h"
-
 #include "graphic/graphic.h"
 #include "graphic/texture.h"
+#include "log.h"
+#include "logic/roadtype.h"
+#include "random.h"
 #include "sdl_surface.h"
-
+#include "upcast.h"
+#include "vertex.h"
+#include "wui/mapviewpixelconstants.h"
 
 ///Must be a power of two
 #define DITHER_WIDTH 4

@@ -19,15 +19,14 @@
 
 #include "editor_tool_change_height_options_menu.h"
 
+#include <cstdio>
+
+#include "editor/editorinteractive.h"
 #include "editor/tools/editor_increase_height_tool.h"
 #include "editor/tools/editor_set_height_tool.h"
-#include "editor/editorinteractive.h"
 #include "graphic/graphic.h"
 #include "i18n.h"
-
 #include "ui_basic/button.h"
-
-#include <cstdio>
 
 #define width  20
 #define height 20

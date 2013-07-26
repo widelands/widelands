@@ -26,7 +26,6 @@
 #include "logic/player.h"
 #include "logic/widelands_fileread.h"
 #include "logic/widelands_filewrite.h"
-
 #include "upcast.h"
 
 namespace Widelands {

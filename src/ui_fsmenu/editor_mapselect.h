@@ -21,9 +21,7 @@
 #define FULLSCREEN_MENU_EDITOR_MAPSELECT_H
 
 #include "base.h"
-
 #include "io/filesystem/filesystem.h"
-
 #include "ui_basic/button.h"
 #include "ui_basic/listselect.h"
 #include "ui_basic/multilinetextarea.h"

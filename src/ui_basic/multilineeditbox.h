@@ -20,9 +20,9 @@
 #ifndef UI_MULTILINEEDITBOX_H
 #define UI_MULTILINEEDITBOX_H
 
-#include "panel.h"
-
 #include <boost/signal.hpp>
+
+#include "panel.h"
 
 namespace UI {
 

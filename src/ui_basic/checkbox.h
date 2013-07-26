@@ -23,7 +23,6 @@
 #include <boost/signals.hpp>
 
 #include "panel.h"
-
 #include "rgbcolor.h"
 
 #define STATEBOX_WIDTH 20

@@ -27,8 +27,8 @@
 #include "log.h"
 #include "logic/game.h"
 #include "logic/replay.h"
-#include "ui_basic/messagebox.h"
 #include "timestring.h"
+#include "ui_basic/messagebox.h"
 
 Fullscreen_Menu_LoadReplay::Fullscreen_Menu_LoadReplay() :
 	Fullscreen_Menu_Base("choosemapmenu.jpg"),

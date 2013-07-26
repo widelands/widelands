@@ -19,12 +19,10 @@
 
 #include "requirements.h"
 
-#include "game_data_error.h"
-#include "instances.h"
-
-#include "i18n.h"
-
 #include "container_iterate.h"
+#include "game_data_error.h"
+#include "i18n.h"
+#include "instances.h"
 
 namespace Widelands {
 

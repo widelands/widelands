@@ -19,20 +19,19 @@
 
 #include "table.h"
 
-#include "graphic/font.h"
-#include "graphic/font_handler.h"
-#include "graphic/graphic.h"
-#include "graphic/rendertarget.h"
-#include "graphic/font_handler1.h"
+#include <boost/bind.hpp>
 
 #include "button.h"
+#include "container_iterate.h"
+#include "graphic/font.h"
+#include "graphic/font_handler.h"
+#include "graphic/font_handler1.h"
+#include "graphic/graphic.h"
+#include "graphic/rendertarget.h"
 #include "mouse_constants.h"
 #include "scrollbar.h"
-#include "wlapplication.h"
 #include "text_layout.h"
-
-#include "container_iterate.h"
-#include <boost/bind.hpp>
+#include "wlapplication.h"
 
 namespace UI {
 

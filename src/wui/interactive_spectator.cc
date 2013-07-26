@@ -29,12 +29,10 @@
 #include "general_statistics_menu.h"
 #include "graphic/graphic.h"
 #include "i18n.h"
-
 #include "ui_basic/editbox.h"
 #include "ui_basic/multilinetextarea.h"
 #include "ui_basic/textarea.h"
 #include "ui_basic/unique_window.h"
-
 #include "upcast.h"
 
 /**

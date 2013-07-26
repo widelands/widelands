@@ -22,12 +22,11 @@
 
 #include <lua.hpp>
 
+#include "luna.h"
 #include "ui_basic/button.h"
 #include "ui_basic/tabpanel.h"
 #include "ui_basic/window.h"
 #include "wui/interactive_base.h"
-
-#include "luna.h"
 
 namespace LuaUi {
 

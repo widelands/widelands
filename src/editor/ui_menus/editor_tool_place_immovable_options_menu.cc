@@ -19,20 +19,20 @@
 
 #include "editor_tool_place_immovable_options_menu.h"
 
+#include <SDL_keysym.h>
+
 #include "editor/editorinteractive.h"
 #include "editor/tools/editor_place_immovable_tool.h"
 #include "graphic/graphic.h"
 #include "i18n.h"
 #include "logic/map.h"
-#include "wlapplication.h"
 #include "logic/world.h"
-
 #include "ui_basic/box.h"
 #include "ui_basic/button.h"
 #include "ui_basic/checkbox.h"
 #include "ui_basic/textarea.h"
+#include "wlapplication.h"
 
-#include <SDL_keysym.h>
 
 using Widelands::Immovable_Descr;
 

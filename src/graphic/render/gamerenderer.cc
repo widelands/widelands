@@ -17,16 +17,15 @@
  *
  */
 
+#include "gamerenderer.h"
+
+#include "graphic/graphic.h"
+#include "graphic/rendertarget.h"
 #include "logic/editor_game_base.h"
 #include "logic/player.h"
 #include "upcast.h"
 #include "wui/mapviewpixelfunctions.h"
 #include "wui/overlay_manager.h"
-
-#include "graphic/graphic.h"
-#include "graphic/rendertarget.h"
-
-#include "gamerenderer.h"
 
 using namespace Widelands;
 

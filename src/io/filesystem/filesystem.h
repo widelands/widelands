@@ -20,16 +20,16 @@
 #ifndef FILESYSTEM_H
 #define FILESYSTEM_H
 
-#include "filesystem_exceptions.h"
-
-#include <stdint.h>
 #include <cstring>
+#include <memory>
 #include <set>
 #include <stdexcept>
 #include <string>
 #include <vector>
-#include <memory>
 
+#include <stdint.h>
+
+#include "filesystem_exceptions.h"
 
 typedef std::set<std::string> filenameset_t;
 

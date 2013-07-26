@@ -21,15 +21,7 @@
 
 #include "graphic/graphic.h"
 #include "logic/soldier.h"
-
 #include "upcast.h"
-
-#if 0
-static char const * const pic_more_soldiers    = "pics/attack_add_soldier.png";
-static char const * const pic_less_soldiers    = "pics/attack_sub_soldier.png";
-static char const * const pic_more_brave       = "pics/attack_add_soldier.png";
-static char const * const pic_less_brave       = "pics/attack_sub_soldier.png";
-#endif
 
 AttackBox::AttackBox
 	(UI::Panel              * parent,

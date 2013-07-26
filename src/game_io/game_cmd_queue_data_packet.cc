@@ -25,7 +25,6 @@
 #include "logic/queue_cmd_factory.h"
 #include "logic/widelands_fileread.h"
 #include "logic/widelands_filewrite.h"
-
 #include "upcast.h"
 
 namespace Widelands {

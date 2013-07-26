@@ -19,6 +19,8 @@
 
 #include "buildingconfirm.h"
 
+#include <boost/format.hpp>
+
 #include "graphic/graphic.h"
 #include "interactive_player.h"
 #include "logic/building.h"
@@ -26,8 +28,6 @@
 #include "ui_basic/multilinetextarea.h"
 #include "ui_basic/window.h"
 #include "upcast.h"
-
-#include <boost/format.hpp>
 
 using boost::format;
 

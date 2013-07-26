@@ -17,18 +17,16 @@
  *
  */
 
-#include "upcast.h"
+#include "partially_finished_building.h"
 
 #include "economy/request.h"
 #include "economy/wares_queue.h"
-#include "sound/sound_handler.h"
-
 #include "game.h"
 #include "player.h"
+#include "sound/sound_handler.h"
 #include "tribe.h"
+#include "upcast.h"
 #include "worker.h"
-
-#include "partially_finished_building.h"
 
 namespace Widelands {
 

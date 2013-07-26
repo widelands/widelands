@@ -6,15 +6,30 @@ import sys
 
 class EvalMatches( object ):
     _include_regexp = re.compile(r'^#include *([<"])([^">]+)[>"]')
+    _ifdef_regexp = re.compile(r'^#ifn?def.*')
+    _endif_regexp = re.compile(r'^#endif.*')
 
     def __call__(self, lines, fn):
         blocks = []
 
         cur_block = []
+        errors = []
+        seen_includes = set()
+        inside_ifdefs = 0
         for lineno, line in enumerate(lines, 1):
+            if self._ifdef_regexp.match(line):
+                inside_ifdefs += 1
+            elif self._endif_regexp.match(line):
+                inside_ifdefs -= 1
+            if inside_ifdefs:
+                continue
             m = self._include_regexp.match(line)
             if m:
                 cur_block.append((lineno, m.group(1), m.group(2)))
+                if m.group(2) in seen_includes:
+                    errors.append((fn,lineno,"This header has been included more than once."))
+                    return errors
+                seen_includes.add(m.group(2))
             elif line.startswith('#'):
                 continue
             elif cur_block:
@@ -23,7 +38,8 @@ class EvalMatches( object ):
         if cur_block:
             blocks.append(cur_block)
 
-        errors = []
+        if not blocks:
+            return errors
 
         for block in blocks:
             includes = [entry[2] for entry in block]
@@ -70,8 +86,6 @@ class EvalMatches( object ):
         return errors
 
 
-strip_comments_and_strings = False
-
 evaluate_matches = EvalMatches()
 
 
@@ -82,7 +96,22 @@ allowed = [
 """#include <memory>
 
 #include <SDL.h>
+""",
+
 """
+#include <config.h>
+#ifdef _WIN32
+#include <direct.h>
+#include <io.h>
+#include <windows.h>
+#else
+#include <glob.h>
+#include <sys/types.h>
+#endif
+#include <sys/stat.h>
+#include <unistd.h>
+"""
+
 ]
 
 
@@ -97,8 +126,15 @@ forbidden = [
 """,
 
 """
+#include <hallo>
+#include <memory>
+#include <memory>
+""",
+
+"""
 #include <memory>
 #include <SDL.h>
 """
+
 ]
 

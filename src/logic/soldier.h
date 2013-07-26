@@ -20,8 +20,8 @@
 #ifndef SOLDIER_H
 #define SOLDIER_H
 
-#include "worker.h"
 #include "tattribute.h"
+#include "worker.h"
 
 #define SOLDIER_HP_BAR_WIDTH 13
 

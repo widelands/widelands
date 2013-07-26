@@ -20,7 +20,6 @@
 #include "portdock.h"
 
 #include "container_iterate.h"
-#include "wares_queue.h"
 #include "fleet.h"
 #include "log.h"
 #include "logic/game.h"
@@ -31,6 +30,7 @@
 #include "map_io/widelands_map_map_object_loader.h"
 #include "map_io/widelands_map_map_object_saver.h"
 #include "ware_instance.h"
+#include "wares_queue.h"
 #include "wui/interactive_gamebase.h"
 
 namespace Widelands {

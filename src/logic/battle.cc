@@ -20,17 +20,15 @@
 #include "battle.h"
 
 #include "game.h"
+#include "log.h"
+#include "map_io/widelands_map_map_object_loader.h"
+#include "map_io/widelands_map_map_object_saver.h"
 #include "player.h"
 #include "soldier.h"
+#include "upcast.h"
 #include "wexception.h"
 #include "widelands_fileread.h"
 #include "widelands_filewrite.h"
-#include "map_io/widelands_map_map_object_loader.h"
-#include "map_io/widelands_map_map_object_saver.h"
-
-#include "log.h"
-
-#include "upcast.h"
 
 namespace Widelands {
 

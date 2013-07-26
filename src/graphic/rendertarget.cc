@@ -17,21 +17,20 @@
  *
  */
 
-#include "log.h"
-#include "logic/player.h"
-#include "logic/tribe.h"
-#include "upcast.h"
-#include "vertex.h"
-#include "wui/mapviewpixelconstants.h"
-#include "wui/overlay_manager.h"
+#include "rendertarget.h"
 
 #include "animation.h"
 #include "animation_gfx.h"
 #include "graphic.h"
 #include "image_transformations.h"
+#include "log.h"
+#include "logic/player.h"
+#include "logic/tribe.h"
 #include "surface.h"
-
-#include "rendertarget.h"
+#include "upcast.h"
+#include "vertex.h"
+#include "wui/mapviewpixelconstants.h"
+#include "wui/overlay_manager.h"
 
 using Widelands::BaseImmovable;
 using Widelands::Coords;

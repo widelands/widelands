@@ -18,6 +18,7 @@
  */
 
 #include "ai_help_structs.h"
+
 #include "logic/player.h"
 #include "upcast.h"
 

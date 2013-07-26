@@ -21,20 +21,19 @@
 //  FIXME accepted by distributions)
 #pragma GCC diagnostic ignored "-Wold-style-cast"
 
-#include "logic/wareworker.h"
-#include "logic/widelands_geometry.h"
+#include <exception>
 
+#include <boost/bind.hpp>
+#include <boost/test/unit_test.hpp>
+
+#include "../../container_iterate.h"
+#include "../flag.h"
 #include "../iroute.h"
 #include "../itransport_cost_calculator.h"
 #include "../router.h"
 #include "../routing_node.h"
-#include "../flag.h"
-#include "../../container_iterate.h"
-
-#include <exception>
-
-#include <boost/test/unit_test.hpp>
-#include <boost/bind.hpp>
+#include "logic/wareworker.h"
+#include "logic/widelands_geometry.h"
 
 using namespace Widelands;
 

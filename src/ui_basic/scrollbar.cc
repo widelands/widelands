@@ -19,13 +19,12 @@
 
 #include "scrollbar.h"
 
-#include "mouse_constants.h"
+#include <algorithm>
 
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
+#include "mouse_constants.h"
 #include "wlapplication.h"
-
-#include <algorithm>
 
 namespace UI {
 

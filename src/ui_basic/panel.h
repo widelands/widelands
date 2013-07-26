@@ -26,12 +26,11 @@
 #include <memory>
 #include <string>
 
+#include <SDL_keyboard.h>
 #include <boost/noncopyable.hpp>
 #include <boost/signals/trackable.hpp>
 
 #include "point.h"
-
-#include <SDL_keyboard.h>
 
 class RenderTarget;
 class Image;

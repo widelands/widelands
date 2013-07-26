@@ -19,6 +19,10 @@
 
 #include "tribe.h"
 
+#include <iostream>
+
+#include <boost/algorithm/string.hpp>
+
 #include "carrier.h"
 #include "constructionsite.h"
 #include "critter_bob.h"
@@ -29,6 +33,7 @@
 #include "helper.h"
 #include "i18n.h"
 #include "immovable.h"
+#include "io/filesystem/disk_filesystem.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "militarysite.h"
 #include "parse_map_object_types.h"
@@ -37,17 +42,11 @@
 #include "ship.h"
 #include "soldier.h"
 #include "trainingsite.h"
+#include "upcast.h"
 #include "warehouse.h"
 #include "widelands_fileread.h"
 #include "worker.h"
 #include "world.h"
-
-#include "io/filesystem/disk_filesystem.h"
-
-#include "upcast.h"
-
-#include <iostream>
-#include <boost/algorithm/string.hpp>
 
 using namespace std;
 

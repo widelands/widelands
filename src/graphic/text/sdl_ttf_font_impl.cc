@@ -17,6 +17,8 @@
  *
  */
 
+#include "sdl_ttf_font_impl.h"
+
 #include <SDL_ttf.h>
 #include <boost/format.hpp>
 
@@ -24,8 +26,6 @@
 #include "graphic/surface.h"
 #include "graphic/surface_cache.h"
 #include "rt_errors.h"
-
-#include "sdl_ttf_font_impl.h"
 
 using namespace std;
 using namespace boost;

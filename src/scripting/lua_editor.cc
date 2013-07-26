@@ -17,6 +17,8 @@
  *
  */
 
+#include "lua_editor.h"
+
 #include <lua.hpp>
 
 #include "c_utils.h"
@@ -24,8 +26,6 @@
 #include "logic/game.h"
 #include "logic/player.h"
 #include "wui/interactive_player.h"
-
-#include "lua_editor.h"
 
 namespace LuaEditor {
 

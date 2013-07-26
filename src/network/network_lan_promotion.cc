@@ -19,14 +19,13 @@
 
 #include "network_lan_promotion.h"
 
+#include <cstdio>
+#include <cstring>
+
 #include "build_info.h"
 #include "compile_diagnostics.h"
 #include "constants.h"
-
 #include "container_iterate.h"
-
-#include <cstdio>
-#include <cstring>
 
 /*** class LAN_Base ***/
 

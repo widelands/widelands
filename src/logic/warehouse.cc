@@ -19,23 +19,24 @@
 
 #include "warehouse.h"
 
+#include <algorithm>
+
 #include "battle.h"
 #include "carrier.h"
-#include "worker.h"
-#include "message_queue.h"
-
+#include "container_iterate.h"
 #include "economy/economy.h"
 #include "economy/flag.h"
 #include "economy/portdock.h"
 #include "economy/request.h"
 #include "economy/ware_instance.h"
-#include "economy/wares_queue.h"
 #include "economy/warehousesupply.h"
+#include "economy/wares_queue.h"
 #include "editor_game_base.h"
 #include "findbob.h"
 #include "findnode.h"
 #include "game.h"
 #include "log.h"
+#include "message_queue.h"
 #include "player.h"
 #include "profile/profile.h"
 #include "requirements.h"
@@ -43,8 +44,7 @@
 #include "tribe.h"
 #include "upcast.h"
 #include "wexception.h"
-#include "container_iterate.h"
-#include <algorithm>
+#include "worker.h"
 
 namespace Widelands {
 

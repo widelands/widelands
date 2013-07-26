@@ -22,8 +22,8 @@
 #include <algorithm>
 
 #include "game_data_error.h"
-#include "map.h"
 #include "instances.h"
+#include "map.h"
 
 namespace Widelands {
 

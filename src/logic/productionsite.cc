@@ -17,33 +17,30 @@
  *
  */
 
-#include <libintl.h>
-#include <boost/format.hpp>
-
-#include "helper.h"
-#include "i18n.h"
-#include "upcast.h"
-#include "wexception.h"
-
-#include "economy/economy.h"
-#include "economy/request.h"
-#include "economy/wares_queue.h"
-#include "economy/ware_instance.h"
-#include "economy/wares_queue.h"
-#include "profile/profile.h"
-
-#include "carrier.h"
-#include "editor_game_base.h"
-#include "game.h"
-#include "map.h"
-#include "player.h"
-#include "soldier.h"
-#include "tribe.h"
-#include "warelist.h"
-#include "world.h"
 
 #include "productionsite.h"
 
+#include <boost/format.hpp>
+#include <libintl.h>
+
+#include "carrier.h"
+#include "economy/economy.h"
+#include "economy/request.h"
+#include "economy/ware_instance.h"
+#include "economy/wares_queue.h"
+#include "editor_game_base.h"
+#include "game.h"
+#include "helper.h"
+#include "i18n.h"
+#include "map.h"
+#include "player.h"
+#include "profile/profile.h"
+#include "soldier.h"
+#include "tribe.h"
+#include "upcast.h"
+#include "warelist.h"
+#include "wexception.h"
+#include "world.h"
 
 namespace Widelands {
 

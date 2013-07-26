@@ -20,15 +20,12 @@
 #ifndef WIDELANDS_MAP_MAP_OBJECT_SAVER_H
 #define WIDELANDS_MAP_MAP_OBJECT_SAVER_H
 
+#include <map>
+#include <string>
+
 #include "constants.h"
 #include "logic/widelands.h"
 #include "widelands_map_message_saver.h"
-
-#include <map>
-
-#ifndef NDEBUG
-#include <string>
-#endif
 
 namespace Widelands {
 

@@ -20,11 +20,10 @@
 #ifndef UI_RADIOBUTTON_H
 #define UI_RADIOBUTTON_H
 
-#include "point.h"
+#include <stdint.h>
 
 #include "checkbox.h"
-
-#include <stdint.h>
+#include "point.h"
 
 namespace UI {
 

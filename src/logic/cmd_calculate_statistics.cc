@@ -17,11 +17,10 @@
  *
  */
 
-#include "game.h"
-#include "game_data_error.h"
-
 #include "cmd_calculate_statistics.h"
 
+#include "game.h"
+#include "game_data_error.h"
 
 namespace Widelands {
 

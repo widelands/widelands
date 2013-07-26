@@ -21,7 +21,6 @@
 #define EDITOR_SET_STARTING_POS_TOOL_H
 
 #include "editor_tool.h"
-
 #include "logic/widelands.h"
 
 // How much place should be left around a player position

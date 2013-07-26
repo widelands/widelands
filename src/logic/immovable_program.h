@@ -20,6 +20,9 @@
 #ifndef IMMOVABLE_PROGRAM_H
 #define IMMOVABLE_PROGRAM_H
 
+#include <cstring>
+#include <string>
+
 #include <boost/noncopyable.hpp>
 
 /*
@@ -28,9 +31,6 @@
 
 #include "buildcost.h"
 #include "immovable.h"
-
-#include <string>
-#include <cstring>
 
 struct Profile;
 

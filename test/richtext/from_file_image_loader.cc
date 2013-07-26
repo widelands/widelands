@@ -17,15 +17,14 @@
  *
  */
 
-#include <SDL.h>
+#include "from_file_image_loader.h"
 
+#include <SDL.h>
 #include <boost/format.hpp>
 
 #include "graphic/render/sdl_surface.h"
 #include "graphic/text/rt_errors.h"
-
 #include "lodepng.h"
-#include "from_file_image_loader.h"
 
 using namespace boost;
 using namespace std;

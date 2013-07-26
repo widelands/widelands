@@ -19,13 +19,13 @@
 
 #include "editor_set_port_space_tool.h"
 
-#include "logic/building.h"
+#include "editor/editorinteractive.h"
 #include "editor_tool.h"
+#include "logic/building.h"
 #include "logic/map.h"
 #include "logic/mapfringeregion.h"
 #include "logic/mapregion.h"
 #include "wui/overlay_manager.h"
-#include <editor/editorinteractive.h>
 
 using namespace Widelands;
 

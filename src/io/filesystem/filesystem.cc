@@ -21,38 +21,34 @@
 
 #include "filesystem.h"
 
-#ifdef USE_DATAFILE
-#include "datafile.h"
-#endif
-#include "disk_filesystem.h"
-#include "layered_filesystem.h"
-#include "zip_exceptions.h"
-#include "zip_filesystem.h"
-
-#include <config.h>
-
 #include <cassert>
 #include <cerrno>
 #include <climits>
 #include <cstdio>
 #include <cstdlib>
 #include <cstring>
+#include <iterator>
+#include <list>
 #include <string>
 #include <vector>
-#include <list>
-#include <iterator>
 
+#include <config.h>
 #ifdef _WIN32
-#include "log.h"
-#include <windows.h>
-#include <io.h>
 #include <direct.h>
+#include <io.h>
+#include <windows.h>
 #else
 #include <glob.h>
 #include <sys/types.h>
 #endif
 #include <sys/stat.h>
 #include <unistd.h>
+
+#include "disk_filesystem.h"
+#include "layered_filesystem.h"
+#include "log.h"
+#include "zip_exceptions.h"
+#include "zip_filesystem.h"
 
 #ifdef _WIN32
 #define stat _stat

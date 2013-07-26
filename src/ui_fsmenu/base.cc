@@ -19,6 +19,8 @@
 
 #include "base.h"
 
+#include <cstdio>
+
 #include "constants.h"
 #include "graphic/font.h"
 #include "graphic/graphic.h"
@@ -29,8 +31,6 @@
 #include "profile/profile.h"
 #include "wexception.h"
 #include "wlapplication.h"
-
-#include <cstdio>
 
 /*
 ==============================================================================

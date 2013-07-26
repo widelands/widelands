@@ -19,14 +19,12 @@
 
 #include "icongrid.h"
 
-#include "log.h"
-
 #include "button.h"
-#include "mouse_constants.h"
-
+#include "constants.h"
 #include "graphic/font_handler.h"
 #include "graphic/rendertarget.h"
-#include "constants.h"
+#include "log.h"
+#include "mouse_constants.h"
 
 namespace UI {
 

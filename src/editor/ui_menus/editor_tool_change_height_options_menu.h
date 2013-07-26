@@ -21,7 +21,6 @@
 #define EDITOR_TOOL_CHANGE_HEIGHT_OPTIONS_MENU_H
 
 #include "editor_tool_options_menu.h"
-
 #include "ui_basic/button.h"
 #include "ui_basic/textarea.h"
 

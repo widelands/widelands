@@ -21,13 +21,11 @@
 #define GENERAL_STATISTICS_MENU_H
 
 #include "constants.h"
-
 #include "plot_area.h"
-
-#include "ui_basic/radiobutton.h"
-#include "ui_basic/button.h"
-#include "ui_basic/unique_window.h"
 #include "ui_basic/box.h"
+#include "ui_basic/button.h"
+#include "ui_basic/radiobutton.h"
+#include "ui_basic/unique_window.h"
 
 class Interactive_GameBase;
 namespace UI {

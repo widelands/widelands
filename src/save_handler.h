@@ -20,10 +20,10 @@
 #ifndef SAVE_HANDLER_H
 #define SAVE_HANDLER_H
 
-#include <stdint.h>
 #include <cstring>
 #include <string>
 
+#include <stdint.h>
 
 namespace Widelands {struct Game;}
 

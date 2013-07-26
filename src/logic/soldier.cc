@@ -19,6 +19,9 @@
 
 #include "soldier.h"
 
+#include <cstdio>
+#include <list>
+
 #include "attackable.h"
 #include "battle.h"
 #include "building.h"
@@ -31,6 +34,7 @@
 #include "game_data_error.h"
 #include "gamecontroller.h"
 #include "graphic/graphic.h"
+#include "graphic/rendertarget.h"
 #include "helper.h"
 #include "map_io/widelands_map_map_object_loader.h"
 #include "map_io/widelands_map_map_object_saver.h"
@@ -38,15 +42,11 @@
 #include "militarysite.h"
 #include "player.h"
 #include "profile/profile.h"
-#include "graphic/rendertarget.h"
 #include "tribe.h"
 #include "upcast.h"
 #include "warehouse.h"
 #include "wexception.h"
 #include "wui/mapviewpixelconstants.h"
-
-#include <cstdio>
-#include <list>
 
 namespace Widelands {
 

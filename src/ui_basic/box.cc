@@ -19,13 +19,13 @@
 
 #include "box.h"
 
-#include "graphic/graphic.h"
-#include "wexception.h"
-
-#include "scrollbar.h"
-
 #include <algorithm>
+
 #include <boost/bind.hpp>
+
+#include "graphic/graphic.h"
+#include "scrollbar.h"
+#include "wexception.h"
 
 namespace UI {
 /**

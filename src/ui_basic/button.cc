@@ -19,14 +19,13 @@
 
 #include "button.h"
 
-#include "mouse_constants.h"
-
 #include "graphic/font.h"
 #include "graphic/font_handler.h"
 #include "graphic/image.h"
 #include "graphic/image_transformations.h"
 #include "graphic/rendertarget.h"
 #include "log.h"
+#include "mouse_constants.h"
 #include "wlapplication.h"
 
 

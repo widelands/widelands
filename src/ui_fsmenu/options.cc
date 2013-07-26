@@ -19,19 +19,19 @@
 
 #include "options.h"
 
+#include <cstdio>
+#include <iostream>
+
+#include <libintl.h>
+
 #include "constants.h"
-#include "io/filesystem/layered_filesystem.h"
 #include "graphic/graphic.h"
 #include "i18n.h"
+#include "io/filesystem/layered_filesystem.h"
 #include "profile/profile.h"
 #include "save_handler.h"
 #include "sound/sound_handler.h"
 #include "wlapplication.h"
-
-#include <libintl.h>
-
-#include <cstdio>
-#include <iostream>
 
 Fullscreen_Menu_Options::Fullscreen_Menu_Options
 		(Options_Ctrl::Options_Struct opt)

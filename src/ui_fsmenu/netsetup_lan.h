@@ -20,18 +20,16 @@
 #ifndef FULLSCREEN_MENU_NETSETUP_LAN_H
 #define FULLSCREEN_MENU_NETSETUP_LAN_H
 
-#include "network/network_lan_promotion.h"
-
-#include "ui_basic/button.h"
-#include "ui_basic/textarea.h"
-#include "ui_basic/editbox.h"
-#include "ui_basic/table.h"
-
+#include <cstring>
 #include <list>
 #include <string>
-#include <cstring>
 
 #include "base.h"
+#include "network/network_lan_promotion.h"
+#include "ui_basic/button.h"
+#include "ui_basic/editbox.h"
+#include "ui_basic/table.h"
+#include "ui_basic/textarea.h"
 
 struct Net_Open_Game;
 struct Net_Game_Info;

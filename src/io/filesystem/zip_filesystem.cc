@@ -19,16 +19,16 @@
 
 #include "zip_filesystem.h"
 
-#include "filesystem_exceptions.h"
-#include "zip_exceptions.h"
-#include "wexception.h"
-
 #include <cassert>
 #include <cerrno>
-#include <cstring>
 #include <cstdio>
 #include <cstdlib>
+#include <cstring>
 #include <string>
+
+#include "filesystem_exceptions.h"
+#include "wexception.h"
+#include "zip_exceptions.h"
 
 /**
  * Initialize the real file-system

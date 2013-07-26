@@ -19,9 +19,10 @@
 
 #include "itemwaresdisplay.h"
 
-#include "graphic/rendertarget.h"
-#include <logic/tribe.h>
 #include <logic/player.h>
+#include <logic/tribe.h>
+
+#include "graphic/rendertarget.h"
 
 namespace {
 

@@ -17,6 +17,8 @@
  *
  */
 
+#include "interactive_base.h"
+
 #include <boost/bind.hpp>
 #include <boost/format.hpp>
 
@@ -33,10 +35,10 @@
 #include "logic/cmd_queue.h"
 #include "logic/game.h"
 #include "logic/immovable.h"
+#include "logic/maphollowregion.h"
 #include "logic/maptriangleregion.h"
 #include "logic/player.h"
 #include "logic/productionsite.h"
-#include "logic/maphollowregion.h"
 #include "mapviewpixelconstants.h"
 #include "mapviewpixelfunctions.h"
 #include "minimap.h"

@@ -20,10 +20,10 @@
 #ifndef MESSAGE_H
 #define MESSAGE_H
 
+#include <string>
+
 #include "widelands.h"
 #include "widelands_geometry.h"
-
-#include <string>
 
 namespace Widelands {
 

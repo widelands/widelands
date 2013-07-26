@@ -21,10 +21,8 @@
 #define GAMECHATPANEL_H
 
 #include "chat.h"
-
 #include "ui_basic/editbox.h"
 #include "ui_basic/multilinetextarea.h"
-
 
 struct ChatProvider;
 

@@ -20,12 +20,11 @@
 #ifndef WIDELANDS_STREAMREAD_H
 #define WIDELANDS_STREAMREAD_H
 
-#include "io/streamread.h"
+#include <cassert>
 
+#include "io/streamread.h"
 #include "widelands.h"
 #include "widelands_geometry.h"
-
-#include <cassert>
 
 namespace Widelands {
 

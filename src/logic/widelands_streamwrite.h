@@ -20,12 +20,11 @@
 #ifndef WIDELANDS_STREAMWRITE_H
 #define WIDELANDS_STREAMWRITE_H
 
-#include "io/streamwrite.h"
+#include <cassert>
 
+#include "io/streamwrite.h"
 #include "widelands.h"
 #include "widelands_geometry.h"
-
-#include <cassert>
 
 namespace Widelands {
 

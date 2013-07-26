@@ -32,21 +32,19 @@
 #include "i18n.h"
 #include "log.h"
 #include "militarysite.h"
+#include "scripting/scripting.h"
 #include "soldier.h"
 #include "soldiercontrol.h"
 #include "sound/sound_handler.h"
-#include "scripting/scripting.h"
 #include "trainingsite.h"
 #include "tribe.h"
+#include "upcast.h"
 #include "warehouse.h"
 #include "warning.h"
 #include "wexception.h"
 #include "widelands_fileread.h"
 #include "widelands_filewrite.h"
-
 #include "wui/interactive_player.h"
-
-#include "upcast.h"
 
 namespace Widelands {
 

@@ -19,10 +19,12 @@
 
 #include "widelands_map_loader.h"
 
+#include "log.h"
 #include "logic/editor_game_base.h"
 #include "logic/map.h"
 #include "logic/player.h"
 #include "logic/tribe.h"
+#include "logic/world.h"
 #include "warning.h"
 #include "widelands_map_allowed_building_types_data_packet.h"
 #include "widelands_map_allowed_worker_types_data_packet.h"
@@ -49,13 +51,10 @@
 #include "widelands_map_resources_data_packet.h"
 #include "widelands_map_road_data_packet.h"
 #include "widelands_map_roaddata_data_packet.h"
-#include "widelands_map_terrain_data_packet.h"
 #include "widelands_map_scripting_data_packet.h"
+#include "widelands_map_terrain_data_packet.h"
 #include "widelands_map_ware_data_packet.h"
 #include "widelands_map_waredata_data_packet.h"
-#include "logic/world.h"
-
-#include "log.h"
 
 namespace Widelands {
 

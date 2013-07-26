@@ -23,9 +23,8 @@
 #include "bob.h"
 #include "descr_maintainer.h"
 #include "immovable.h"
-#include "worlddata.h"
-
 #include "widelands.h"
+#include "worlddata.h"
 
 struct Section;
 

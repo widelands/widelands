@@ -17,22 +17,21 @@
  *
  */
 
+#include "editor_player_menu.h"
 
+#include "editor/editorinteractive.h"
+#include "editor/tools/editor_set_starting_pos_tool.h"
 #include "graphic/graphic.h"
 #include "i18n.h"
 #include "logic/map.h"
 #include "logic/player.h"
 #include "logic/tribe.h"
 #include "logic/warehouse.h"
-#include "wexception.h"
-#include "wui/overlay_manager.h"
-#include "editor/editorinteractive.h"
-#include "editor/tools/editor_set_starting_pos_tool.h"
 #include "ui_basic/editbox.h"
 #include "ui_basic/messagebox.h"
 #include "ui_basic/textarea.h"
-
-#include "editor_player_menu.h"
+#include "wexception.h"
+#include "wui/overlay_manager.h"
 
 #define UNDEFINED_TRIBE_NAME "<undefined>"
 

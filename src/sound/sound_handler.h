@@ -20,19 +20,19 @@
 #ifndef SOUND_HANDLER_H
 #define SOUND_HANDLER_H
 
-#include "io/fileread.h"
-#include "fxset.h"
-#include "logic/widelands_geometry.h"
-#include "random.h"
-
+#include <cstring>
 #include <map>
 #include <string>
-#include <cstring>
 #include <vector>
 
 #ifndef _MSC_VER
 #include <unistd.h>
 #endif
+
+#include "fxset.h"
+#include "io/fileread.h"
+#include "logic/widelands_geometry.h"
+#include "random.h"
 
 namespace Widelands {struct Editor_Game_Base;}
 struct Songset;

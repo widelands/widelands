@@ -21,7 +21,6 @@
 #define EDITOR_SET_ORIGIN_TOOL_H
 
 #include "editor_tool.h"
-
 #include "logic/widelands.h"
 
 /// Sets the starting position of players.

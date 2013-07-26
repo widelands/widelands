@@ -20,11 +20,11 @@
 #include "interactive_player.h"
 
 #include <boost/bind.hpp>
-#include <boost/type_traits.hpp>
-#include <boost/lambda/construct.hpp>
-#include <boost/lambda/bind.hpp>
-#include <boost/lexical_cast.hpp>
 #include <boost/format.hpp>
+#include <boost/lambda/bind.hpp>
+#include <boost/lambda/construct.hpp>
+#include <boost/lexical_cast.hpp>
+#include <boost/type_traits.hpp>
 #include <libintl.h>
 
 #include "building_statistics_menu.h"
@@ -33,7 +33,6 @@
 #include "economy/flag.h"
 #include "encyclopedia_window.h"
 #include "fieldaction.h"
-#include "graphic/font_handler.h"
 #include "game_chat_menu.h"
 #include "game_io/game_loader.h"
 #include "game_main_menu.h"
@@ -42,6 +41,7 @@
 #include "game_objectives_menu.h"
 #include "game_options_menu.h"
 #include "general_statistics_menu.h"
+#include "graphic/font_handler.h"
 #include "helper.h"
 #include "i18n.h"
 #include "logic/building.h"
@@ -49,11 +49,11 @@
 #include "logic/constructionsite.h"
 #include "logic/immovable.h"
 #include "logic/message_queue.h"
-#include "overlay_manager.h"
 #include "logic/player.h"
 #include "logic/productionsite.h"
 #include "logic/soldier.h"
 #include "logic/tribe.h"
+#include "overlay_manager.h"
 #include "profile/profile.h"
 #include "stock_menu.h"
 #include "ui_basic/unique_window.h"

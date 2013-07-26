@@ -17,6 +17,7 @@
  *
  */
 
+#include "editor_tool_set_terrain_options_menu.h"
 
 #include <SDL_keysym.h>
 #include <boost/foreach.hpp>
@@ -36,9 +37,6 @@
 #include "ui_basic/checkbox.h"
 #include "ui_basic/panel.h"
 #include "wlapplication.h"
-
-#include "editor_tool_set_terrain_options_menu.h"
-
 
 Editor_Tool_Set_Terrain_Options_Menu:: Editor_Tool_Set_Terrain_Options_Menu
 	(Editor_Interactive         & parent,

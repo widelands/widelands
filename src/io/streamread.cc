@@ -19,11 +19,11 @@
 
 #include "streamread.h"
 
-#include "wexception.h"
-
 #include <cassert>
 #include <cstdarg>
 #include <cstdio>
+
+#include "wexception.h"
 
 StreamRead::~StreamRead() {}
 

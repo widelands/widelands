@@ -28,9 +28,8 @@
 #include <boost/signal.hpp>
 
 #include "align.h"
-#include "rgbcolor.h"
-
 #include "panel.h"
+#include "rgbcolor.h"
 
 
 namespace UI {

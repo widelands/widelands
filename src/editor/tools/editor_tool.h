@@ -24,8 +24,8 @@
 
 #include <boost/noncopyable.hpp>
 
-#include "logic/widelands_geometry.h"
 #include "editor_action_args.h"
+#include "logic/widelands_geometry.h"
 
 struct Editor_Interactive;
 namespace Widelands {struct Map;}

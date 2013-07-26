@@ -19,14 +19,14 @@
 
 #include "widelands_map_bobdata_data_packet.h"
 
+#include "economy/route.h"
+#include "economy/transfer.h"
+#include "economy/ware_instance.h"
 #include "logic/battle.h"
 #include "logic/bob.h"
 #include "logic/carrier.h"
 #include "logic/critter_bob.h"
 #include "logic/critter_bob_program.h"
-#include "economy/route.h"
-#include "economy/transfer.h"
-#include "economy/ware_instance.h"
 #include "logic/game.h"
 #include "logic/game_data_error.h"
 #include "logic/map.h"
@@ -35,12 +35,12 @@
 #include "logic/player.h"
 #include "logic/soldier.h"
 #include "logic/tribe.h"
-#include "upcast.h"
 #include "logic/widelands_fileread.h"
 #include "logic/widelands_filewrite.h"
+#include "logic/worker_program.h"
+#include "upcast.h"
 #include "widelands_map_map_object_loader.h"
 #include "widelands_map_map_object_saver.h"
-#include "logic/worker_program.h"
 
 namespace Widelands {
 

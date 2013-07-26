@@ -26,7 +26,6 @@
 
 #include "constants.h"
 #include "panel.h"
-
 #include "rgbcolor.h"
 
 namespace UI {

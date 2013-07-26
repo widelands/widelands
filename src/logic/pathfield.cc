@@ -19,9 +19,8 @@
 
 #include "pathfield.h"
 
-#include "wexception.h"
-
 #include "container_iterate.h"
+#include "wexception.h"
 
 namespace Widelands {
 

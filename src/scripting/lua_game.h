@@ -24,7 +24,6 @@
 
 #include "logic/building.h"
 #include "logic/message_id.h"
-
 #include "lua_bases.h"
 #include "luna.h"
 

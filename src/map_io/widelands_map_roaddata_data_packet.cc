@@ -19,6 +19,8 @@
 
 #include "widelands_map_roaddata_data_packet.h"
 
+#include <map>
+
 #include "economy/flag.h"
 #include "economy/request.h"
 #include "economy/road.h"
@@ -28,13 +30,11 @@
 #include "logic/map.h"
 #include "logic/player.h"
 #include "logic/tribe.h"
-#include "upcast.h"
 #include "logic/widelands_fileread.h"
 #include "logic/widelands_filewrite.h"
+#include "upcast.h"
 #include "widelands_map_map_object_loader.h"
 #include "widelands_map_map_object_saver.h"
-
-#include <map>
 
 namespace Widelands {
 

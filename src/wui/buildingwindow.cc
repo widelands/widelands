@@ -17,6 +17,10 @@
  *
  */
 
+#include "buildingwindow.h"
+
+#include <boost/format.hpp>
+
 #include "buildingconfirm.h"
 #include "game_debug_ui.h"
 #include "graphic/graphic.h"
@@ -35,10 +39,6 @@
 #include "ui_basic/tabpanel.h"
 #include "upcast.h"
 #include "waresqueuedisplay.h"
-
-#include <boost/format.hpp>
-
-#include "buildingwindow.h"
 
 static const char * pic_bulldoze           = "pics/menu_bld_bulldoze.png";
 static const char * pic_dismantle          = "pics/menu_bld_dismantle.png";

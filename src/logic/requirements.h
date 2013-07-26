@@ -20,9 +20,9 @@
 #ifndef REQUIREMENTS_H
 #define REQUIREMENTS_H
 
+#include <climits>
 #include <map>
 #include <vector>
-#include <climits>
 
 #include <boost/shared_ptr.hpp>
 

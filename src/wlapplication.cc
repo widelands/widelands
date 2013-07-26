@@ -174,10 +174,6 @@ void WLApplication::setup_searchpaths(std::string argv0)
 			try {
 				log ("Adding directory: %s\n", argv0.c_str());
 				g_fs->AddFileSystem(FileSystem::Create(argv0));
-#ifdef USE_DATAFILE
-				argv0.append ("/widelands.dat");
-				g_fs->AddFileSystem(new Datafile(argv0.c_str()));
-#endif
 			}
 			catch (FileNotFound_error &) {}
 			catch (FileAccessDenied_error & e) {

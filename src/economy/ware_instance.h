@@ -20,10 +20,9 @@
 #ifndef S__WARE_INSTANCE_H
 #define S__WARE_INSTANCE_H
 
-#include "logic/widelands.h"
 #include "logic/instances.h"
 #include "logic/item_ware_descr.h"
-
+#include "logic/widelands.h"
 #include "transfer.h"
 
 namespace Widelands {

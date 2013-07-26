@@ -16,20 +16,20 @@
  * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#include <lua.hpp>
+#include "pluto.h"
+
 #include <cstring>
+
+#include <lua.hpp>
 #include <stdint.h>
 
-#include "logic/widelands_filewrite.h"
+#include "compile_diagnostics.h"
 #include "logic/widelands_fileread.h"
-
+#include "logic/widelands_filewrite.h"
 #include "pdep/pdep.h"
-
-#include "pluto.h"
 
 // Widelands: silence warnings about unused variables, usually because they
 //are only used in conditional asserts
-#include "compile_diagnostics.h"
 GCC_DIAG_OFF("-Wunused-macros")
 GCC_DIAG_OFF("-Wunused-variable")
 CLANG_DIAG_OFF("-Wunused-macros")

@@ -20,11 +20,10 @@
 #ifndef UI_UNIQUE_WINDOW_H
 #define UI_UNIQUE_WINDOW_H
 
-#include "window.h"
-#include "button.h"
-
 #include <boost/function.hpp>
 
+#include "button.h"
+#include "window.h"
 
 namespace UI {
 struct Panel;

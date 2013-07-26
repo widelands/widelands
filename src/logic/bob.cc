@@ -19,29 +19,28 @@
 
 #include "bob.h"
 
-#include "critter_bob.h"
+#include <cstdlib>
 
+#include "backtrace.h"
 #include "checkstep.h"
+#include "critter_bob.h"
 #include "economy/route.h"
 #include "economy/transfer.h"
 #include "findbob.h"
 #include "game.h"
 #include "game_data_error.h"
+#include "graphic/rendertarget.h"
 #include "map_io/widelands_map_map_object_loader.h"
 #include "map_io/widelands_map_map_object_saver.h"
-#include "wui/mapviewpixelconstants.h"
 #include "path.h"
 #include "player.h"
 #include "profile/profile.h"
-#include "graphic/rendertarget.h"
 #include "ship.h"
 #include "soldier.h"
 #include "tribe.h"
 #include "upcast.h"
 #include "wexception.h"
-#include <cstdlib>
-
-#include "backtrace.h"
+#include "wui/mapviewpixelconstants.h"
 
 namespace Widelands {
 

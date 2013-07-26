@@ -20,11 +20,10 @@
 #include "findimmovable.h"
 
 #include "attackable.h"
+#include "economy/flag.h"
 #include "immovable.h"
 #include "militarysite.h"
 #include "upcast.h"
-
-#include "economy/flag.h"
 
 namespace Widelands {
 

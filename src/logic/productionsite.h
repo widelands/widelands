@@ -20,16 +20,16 @@
 #ifndef PRODUCTIONSITE_H
 #define PRODUCTIONSITE_H
 
+#include <cstring>
+#include <map>
+#include <set>
+#include <string>
+#include <vector>
+
 #include "building.h"
 #include "production_program.h"
 #include "program_result.h"
 #include "ware_types.h"
-
-#include <map>
-#include <set>
-#include <string>
-#include <cstring>
-#include <vector>
 
 namespace Widelands {
 

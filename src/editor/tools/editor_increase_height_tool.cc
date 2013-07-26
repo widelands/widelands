@@ -19,10 +19,10 @@
 
 #include "editor_increase_height_tool.h"
 
-#include "logic/map.h"
-#include "logic/field.h"
-#include "logic/mapregion.h"
 #include "editor/editorinteractive.h"
+#include "logic/field.h"
+#include "logic/map.h"
+#include "logic/mapregion.h"
 
 /// Increases the heights by a value. Chages surrounding nodes if necessary.
 int32_t Editor_Increase_Height_Tool::handle_click_impl

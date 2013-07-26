@@ -29,7 +29,6 @@
 #include "rgbcolor.h"
 #include "tribe.h"
 #include "warehouse.h"
-
 #include "widelands.h"
 
 namespace Widelands {

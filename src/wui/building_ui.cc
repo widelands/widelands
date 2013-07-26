@@ -17,9 +17,11 @@
  *
  */
 
+#include "buildingwindow.h"
+
 #include <boost/foreach.hpp>
 #include <boost/lexical_cast.hpp>
-#include "buildingwindow.h"
+
 #include "logic/building.h"
 #include "ui_basic/window.h"
 #include "upcast.h"

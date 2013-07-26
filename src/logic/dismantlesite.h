@@ -21,9 +21,8 @@
 #define DISMANTLESITE_H
 
 #include "building.h"
-#include "player.h"
-
 #include "partially_finished_building.h"
+#include "player.h"
 
 namespace Widelands {
 

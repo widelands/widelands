@@ -20,8 +20,9 @@
 #ifndef WIDELANDS_MAP_LOADER_H
 #define WIDELANDS_MAP_LOADER_H
 
-#include <string>
 #include <cstring>
+#include <string>
+
 #include "map_loader.h"
 
 class FileSystem;

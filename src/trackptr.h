@@ -21,6 +21,7 @@
 #define TRACKPTR_H
 
 #include <cassert>
+
 #include <stdint.h>
 
 class BaseTrackPtr;

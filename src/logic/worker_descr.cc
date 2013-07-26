@@ -20,12 +20,12 @@
 #include "worker_descr.h"
 
 #include "carrier.h"
-
 #include "graphic/graphic.h"
 #include "helper.h"
 #include "i18n.h"
 #include "nodecaps.h"
 #include "profile/profile.h"
+#include "ref_cast.h"
 #include "soldier.h"
 #include "sound/sound_handler.h"
 #include "tribe.h"
@@ -33,8 +33,8 @@
 #include "worker.h"
 #include "worker_program.h"
 
-#include "ref_cast.h"
-#include <scripting/pdep/llimits.h>
+// NOCOM(#sirver): is this really needed?
+// #include <scripting/pdep/llimits.h>
 
 namespace Widelands {
 

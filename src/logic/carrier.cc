@@ -18,15 +18,14 @@
  */
 
 #include "carrier.h"
-#include "game.h"
-#include "game_data_error.h"
-#include "wexception.h"
 
+#include "economy/flag.h"
 #include "economy/road.h"
 #include "economy/ware_instance.h"
-#include "economy/flag.h"
-
+#include "game.h"
+#include "game_data_error.h"
 #include "upcast.h"
+#include "wexception.h"
 
 namespace Widelands {
 

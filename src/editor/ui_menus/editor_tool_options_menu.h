@@ -21,7 +21,6 @@
 #define EDITOR_TOOL_OPTIONS_MENU_H
 
 #include "editor/editorinteractive.h"
-
 #include "ui_basic/unique_window.h"
 
 struct Editor_Tool_Options_Menu : public UI::UniqueWindow {

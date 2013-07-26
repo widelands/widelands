@@ -17,6 +17,8 @@
  *
  */
 
+#include "widelands_map_extradata_data_packet.h"
+
 #include <SDL_image.h>
 
 #include "graphic/graphic.h"
@@ -29,8 +31,6 @@
 #include "logic/widelands_fileread.h"
 #include "logic/widelands_filewrite.h"
 #include "profile/profile.h"
-
-#include "widelands_map_extradata_data_packet.h"
 
 namespace Widelands {
 

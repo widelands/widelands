@@ -21,7 +21,6 @@
 #define GAME_OPTIONS_MENU_H
 
 #include "interactive_gamebase.h"
-
 #include "ui_basic/button.h"
 #include "ui_basic/textarea.h"
 #include "ui_basic/unique_window.h"

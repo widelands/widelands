@@ -20,8 +20,8 @@
 #ifndef EDITOR_PLACE_BOB_TOOL_H
 #define EDITOR_PLACE_BOB_TOOL_H
 
-#include "multi_select.h"
 #include "editor_delete_bob_tool.h"
+#include "multi_select.h"
 
 /// Places bobs on the map.
 struct Editor_Place_Bob_Tool : public Editor_Tool, public MultiSelect {

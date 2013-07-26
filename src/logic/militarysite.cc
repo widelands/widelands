@@ -19,6 +19,12 @@
 
 #include "militarysite.h"
 
+#include <clocale>
+#include <cstdio>
+
+#include <boost/foreach.hpp>
+#include <libintl.h>
+
 #include "battle.h"
 #include "economy/flag.h"
 #include "economy/request.h"
@@ -26,22 +32,14 @@
 #include "findbob.h"
 #include "game.h"
 #include "i18n.h"
+#include "log.h"
 #include "message_queue.h"
 #include "player.h"
 #include "profile/profile.h"
 #include "soldier.h"
 #include "tribe.h"
-#include "worker.h"
-
-#include "log.h"
-
 #include "upcast.h"
-
-#include <libintl.h>
-
-#include <clocale>
-#include <cstdio>
-#include "boost/foreach.hpp"
+#include "worker.h"
 
 namespace Widelands {
 

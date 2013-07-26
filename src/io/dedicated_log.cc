@@ -18,11 +18,12 @@
  */
 
 #include "dedicated_log.h"
-#include "filesystem/layered_filesystem.h"
-#include "log.h"
-#include "i18n.h"
 
 #include <boost/format.hpp>
+
+#include "filesystem/layered_filesystem.h"
+#include "i18n.h"
+#include "log.h"
 
 /// The dedicated server logger
 static DedicatedLog * logger;

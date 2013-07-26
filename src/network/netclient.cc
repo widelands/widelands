@@ -17,10 +17,10 @@
  *
  */
 
+#include "netclient.h"
+
 #include <boost/lexical_cast.hpp>
 #include <config.h>
-
-#include "netclient.h"
 
 #include "build_info.h"
 #include "game_io/game_loader.h"
@@ -36,6 +36,8 @@
 #include "network_system.h"
 #include "profile/profile.h"
 #include "scripting/scripting.h"
+#include "ui_basic/messagebox.h"
+#include "ui_basic/progresswindow.h"
 #include "ui_fsmenu/launchMPG.h"
 #include "warning.h"
 #include "wexception.h"
@@ -43,9 +45,6 @@
 #include "wui/game_tips.h"
 #include "wui/interactive_player.h"
 #include "wui/interactive_spectator.h"
-
-#include "ui_basic/messagebox.h"
-#include "ui_basic/progresswindow.h"
 
 
 struct NetClientImpl {

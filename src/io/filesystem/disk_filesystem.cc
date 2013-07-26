@@ -17,38 +17,35 @@
  *
  */
 
-#include "compile_diagnostics.h"
-
 #include "disk_filesystem.h"
-
-#include "filesystem_exceptions.h"
-#include "log.h"
-#include "wexception.h"
-#include "zip_filesystem.h"
 
 #include <cassert>
 #include <cerrno>
 
 #ifdef _WIN32
 #include <dos.h>
-#include <sys/stat.h>
 #include <windows.h>
 #ifdef _MSC_VER
 #include <direct.h>
 #include <io.h>
 #define S_ISDIR(x) ((x&_S_IFDIR)?1:0)
 #endif // _MSC_VER
-#else  // _WIN32
+#else  // not _WIN32
 #include <fcntl.h>
-#include <sys/stat.h>
 #include <glob.h>
 #include <sys/mman.h>
+#include <sys/stat.h>
 #include <sys/statvfs.h>
 #include <sys/types.h>
 #endif
 
+#include "compile_diagnostics.h"
+#include "filesystem_exceptions.h"
 #include "io/streamread.h"
 #include "io/streamwrite.h"
+#include "log.h"
+#include "wexception.h"
+#include "zip_filesystem.h"
 
 struct FileSystemPath: public std::string
 {

@@ -17,27 +17,25 @@
  *
  */
 
-#include "log.h"
-#include "upcast.h"
-#include "wexception.h"
+#include "playercommand.h"
 
 #include "economy/economy.h"
 #include "economy/wares_queue.h"
+#include "game.h"
+#include "instances.h"
 #include "io/streamwrite.h"
+#include "log.h"
 #include "map_io/widelands_map_map_object_loader.h"
 #include "map_io/widelands_map_map_object_saver.h"
 #include "militarysite.h"
-
-#include "game.h"
-#include "instances.h"
 #include "player.h"
 #include "ship.h"
 #include "soldier.h"
 #include "tribe.h"
+#include "upcast.h"
+#include "wexception.h"
 #include "widelands_fileread.h"
 #include "widelands_filewrite.h"
-
-#include "playercommand.h"
 
 namespace Widelands {
 

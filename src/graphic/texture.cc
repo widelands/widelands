@@ -17,19 +17,17 @@
  *
  */
 
-#include <boost/foreach.hpp>
+#include "texture.h"
 
 #include <SDL_image.h>
+#include <boost/foreach.hpp>
 
-#include "io/filesystem/layered_filesystem.h"
-#include "io/fileread.h"
-
-#include "log.h"
 #include "constants.h"
-#include "wexception.h"
 #include "container_iterate.h"
-
-#include "texture.h"
+#include "io/fileread.h"
+#include "io/filesystem/layered_filesystem.h"
+#include "log.h"
+#include "wexception.h"
 
 extern bool g_opengl;
 

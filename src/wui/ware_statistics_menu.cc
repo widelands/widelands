@@ -27,14 +27,12 @@
 #include "logic/tribe.h"
 #include "logic/warelist.h"
 #include "plot_area.h"
-#include "waresdisplay.h"
-
 #include "ui_basic/button.h"
 #include "ui_basic/checkbox.h"
-#include "ui_basic/textarea.h"
-#include "ui_basic/tabpanel.h"
 #include "ui_basic/slider.h"
-
+#include "ui_basic/tabpanel.h"
+#include "ui_basic/textarea.h"
+#include "waresdisplay.h"
 
 #define PLOT_HEIGHT 100
 

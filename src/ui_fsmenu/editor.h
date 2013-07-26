@@ -21,7 +21,6 @@
 #define FULLSCREEN_MENU_EDITOR_H
 
 #include "base.h"
-
 #include "ui_basic/button.h"
 #include "ui_basic/textarea.h"
 

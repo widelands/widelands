@@ -23,7 +23,6 @@
 #include "logic/editor_game_base.h"
 #include "logic/game.h"
 #include "logic/playercommand.h"
-
 #include "upcast.h"
 
 using Widelands::Editor_Game_Base;

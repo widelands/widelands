@@ -17,6 +17,7 @@
  *
  */
 
+#include "launchSPG.h"
 
 #include "gamecontroller.h"
 #include "gamesettings.h"
@@ -34,8 +35,6 @@
 #include "scripting/scripting.h"
 #include "warning.h"
 #include "wui/playerdescrgroup.h"
-
-#include "launchSPG.h"
 
 Fullscreen_Menu_LaunchSPG::Fullscreen_Menu_LaunchSPG
 	(GameSettingsProvider * const settings, GameController * const ctrl,

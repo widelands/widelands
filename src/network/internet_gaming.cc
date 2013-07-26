@@ -19,6 +19,9 @@
 
 #include "internet_gaming.h"
 
+#include <boost/format.hpp>
+#include <boost/lexical_cast.hpp>
+
 #include "compile_diagnostics.h"
 #include "i18n.h"
 #include "internet_gaming_messages.h"
@@ -26,9 +29,6 @@
 #include "io/filesystem/layered_filesystem.h"
 #include "log.h"
 #include "warning.h"
-
-#include <boost/format.hpp>
-#include <boost/lexical_cast.hpp>
 
 
 

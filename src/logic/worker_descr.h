@@ -22,7 +22,6 @@
 
 #include "bob.h"
 #include "graphic/diranimations.h"
-
 #include "immovable.h"
 #include "io/filewrite.h"
 

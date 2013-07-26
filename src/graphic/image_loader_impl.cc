@@ -17,17 +17,16 @@
  *
  */
 
+#include "image_loader_impl.h"
+
 #include <SDL.h>
 #include <SDL_image.h>
 
 #include "io/fileread.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "log.h"
-#include "wexception.h"
-
 #include "surface.h"
-
-#include "image_loader_impl.h"
+#include "wexception.h"
 
 using namespace std;
 

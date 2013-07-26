@@ -17,14 +17,14 @@
  *
  */
 
+#include "lua_bases.h"
+
 #include <lua.hpp>
 
 #include "logic/checkstep.h"
 #include "logic/player.h"
-
 #include "lua_map.h"
 
-#include "lua_bases.h"
 
 using namespace Widelands;
 
