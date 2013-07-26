@@ -20,13 +20,13 @@
 #ifndef JOURNAL_H
 #define JOURNAL_H
 
-#include "journal_exceptions.h"
+#include <cstring>
+#include <fstream>
+#include <string>
 
 #include <SDL_events.h>
 
-#include <fstream>
-#include <string>
-#include <cstring>
+#include "journal_exceptions.h"
 
 /**
  * Journal encapsulates all operations that are necessary for recording and

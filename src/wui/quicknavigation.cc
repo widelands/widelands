@@ -17,11 +17,11 @@
  *
  */
 
-#include "quicknavigation.h"
+#include "wui/quicknavigation.h"
 
 #include "logic/editor_game_base.h"
-#include "mapviewpixelfunctions.h"
 #include "wlapplication.h"
+#include "wui/mapviewpixelfunctions.h"
 
 static const uint32_t MaxHistorySize = 32;
 

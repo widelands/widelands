@@ -21,7 +21,6 @@
 #define EDITOR_TOOL_MENU_H
 
 #include "editor/editorinteractive.h"
-
 #include "ui_basic/radiobutton.h"
 #include "ui_basic/unique_window.h"
 

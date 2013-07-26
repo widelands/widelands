@@ -20,16 +20,16 @@
 #ifndef INSTANCES_H
 #define INSTANCES_H
 
+#include <cstring>
 #include <map>
 #include <string>
-#include <cstring>
 #include <vector>
 
 #include <boost/function.hpp>
 #include <boost/noncopyable.hpp>
 #include <boost/unordered_map.hpp>
 
-#include "cmd_queue.h"
+#include "logic/cmd_queue.h"
 #include "log.h"
 #include "port.h"
 #include "ref_cast.h"

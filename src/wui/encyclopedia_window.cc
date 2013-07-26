@@ -17,33 +17,31 @@
  *
  */
 
-#include "encyclopedia_window.h"
-
-#include "logic/building.h"
-#include "graphic/graphic.h"
-#include "i18n.h"
-#include "interactive_player.h"
-#include "helper.h"
-#include "logic/player.h"
-#include "logic/productionsite.h"
-#include "logic/production_program.h"
-#include "logic/tribe.h"
-#include "logic/warelist.h"
-#include "economy/economy.h"
-
-#include "ui_basic/window.h"
-#include "ui_basic/unique_window.h"
-#include "ui_basic/table.h"
-
-#include "upcast.h"
+#include "wui/encyclopedia_window.h"
 
 #include <algorithm>
-#include <set>
-#include <map>
-#include <vector>
-#include <string>
 #include <cstring>
+#include <map>
+#include <set>
+#include <string>
 #include <typeinfo>
+#include <vector>
+
+#include "economy/economy.h"
+#include "graphic/graphic.h"
+#include "helper.h"
+#include "i18n.h"
+#include "logic/building.h"
+#include "logic/player.h"
+#include "logic/production_program.h"
+#include "logic/productionsite.h"
+#include "logic/tribe.h"
+#include "logic/warelist.h"
+#include "ui_basic/table.h"
+#include "ui_basic/unique_window.h"
+#include "ui_basic/window.h"
+#include "upcast.h"
+#include "wui/interactive_player.h"
 
 #define WINDOW_WIDTH  std::min(600, g_gr->get_xres() - 40)
 #define WINDOW_HEIGHT std::min(550, g_gr->get_yres() - 40)

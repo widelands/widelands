@@ -17,7 +17,7 @@
  *
  */
 
-#include "playerdescrgroup.h"
+#include "wui/playerdescrgroup.h"
 
 #include "constants.h"
 #include "gamesettings.h"
@@ -26,11 +26,10 @@
 #include "logic/player.h"
 #include "logic/tribe.h"
 #include "profile/profile.h"
-#include "wexception.h"
-
 #include "ui_basic/button.h"
 #include "ui_basic/checkbox.h"
 #include "ui_basic/textarea.h"
+#include "wexception.h"
 
 
 struct PlayerDescriptionGroupImpl {

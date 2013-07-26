@@ -17,31 +17,29 @@
  *
  */
 
-#include "militarysite.h"
-
-#include "battle.h"
-#include "economy/flag.h"
-#include "economy/request.h"
-#include "editor_game_base.h"
-#include "findbob.h"
-#include "game.h"
-#include "i18n.h"
-#include "message_queue.h"
-#include "player.h"
-#include "profile/profile.h"
-#include "soldier.h"
-#include "tribe.h"
-#include "worker.h"
-
-#include "log.h"
-
-#include "upcast.h"
-
-#include <libintl.h>
+#include "logic/militarysite.h"
 
 #include <clocale>
 #include <cstdio>
-#include "boost/foreach.hpp"
+
+#include <boost/foreach.hpp>
+#include <libintl.h>
+
+#include "economy/flag.h"
+#include "economy/request.h"
+#include "i18n.h"
+#include "log.h"
+#include "logic/battle.h"
+#include "logic/editor_game_base.h"
+#include "logic/findbob.h"
+#include "logic/game.h"
+#include "logic/message_queue.h"
+#include "logic/player.h"
+#include "logic/soldier.h"
+#include "logic/tribe.h"
+#include "logic/worker.h"
+#include "profile/profile.h"
+#include "upcast.h"
 
 namespace Widelands {
 

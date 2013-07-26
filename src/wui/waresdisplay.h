@@ -20,15 +20,14 @@
 #ifndef WARESDISPLAY_H
 #define WARESDISPLAY_H
 
+#include <vector>
+
 #include <boost/signal.hpp>
 
+#include "logic/tribe.h"
 #include "logic/warelist.h"
 #include "logic/wareworker.h"
-#include "logic/tribe.h"
-
 #include "ui_basic/textarea.h"
-
-#include <vector>
 
 namespace UI {struct Textarea;}
 

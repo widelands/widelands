@@ -17,7 +17,7 @@
  *
  */
 
-#include "multiplayer.h"
+#include "ui_fsmenu/multiplayer.h"
 
 #include "constants.h"
 #include "i18n.h"

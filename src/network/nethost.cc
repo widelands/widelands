@@ -17,16 +17,22 @@
  *
  */
 
-#include "nethost.h"
+#include "network/nethost.h"
+
+#include <sstream>
+
+#include <boost/format.hpp>
+#include <boost/lexical_cast.hpp>
+#ifndef _WIN32
+#include <unistd.h> // for usleep
+#endif
 
 #include "build_info.h"
 #include "chat.h"
 #include "computer_player.h"
 #include "game_io/game_loader.h"
 #include "game_io/game_preload_data_packet.h"
-#include "ui_fsmenu/launchMPG.h"
 #include "i18n.h"
-#include "internet_gaming.h"
 #include "io/dedicated_log.h"
 #include "io/fileread.h"
 #include "io/filesystem/layered_filesystem.h"
@@ -36,27 +42,21 @@
 #include "logic/tribe.h"
 #include "map_io/widelands_map_loader.h"
 #include "md5.h"
-#include "network_gaming_messages.h"
-#include "network_lan_promotion.h"
-#include "network_player_settings_backend.h"
-#include "network_protocol.h"
-#include "network_system.h"
+#include "network/internet_gaming.h"
+#include "network/network_gaming_messages.h"
+#include "network/network_lan_promotion.h"
+#include "network/network_player_settings_backend.h"
+#include "network/network_protocol.h"
+#include "network/network_system.h"
 #include "profile/profile.h"
 #include "scripting/scripting.h"
 #include "ui_basic/progresswindow.h"
+#include "ui_fsmenu/launchMPG.h"
 #include "wexception.h"
 #include "wlapplication.h"
 #include "wui/game_tips.h"
 #include "wui/interactive_player.h"
 #include "wui/interactive_spectator.h"
-
-#include <boost/format.hpp>
-#include <boost/lexical_cast.hpp>
-#include <sstream>
-
-#ifndef _WIN32
-#include <unistd.h> // for usleep
-#endif
 
 using boost::format;
 

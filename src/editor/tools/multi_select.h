@@ -22,10 +22,10 @@
 
 #include <cassert>
 #include <climits>
-#include <stdint.h>
 #include <cstdlib>
 #include <vector>
 
+#include <stdint.h>
 
 /**
  * This class allows for selection of more than just one

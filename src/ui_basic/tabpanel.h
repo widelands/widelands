@@ -20,9 +20,9 @@
 #ifndef UI_TABPANEL_H
 #define UI_TABPANEL_H
 
-#include "panel.h"
-
 #include <vector>
+
+#include "ui_basic/panel.h"
 
 namespace UI {
 /**

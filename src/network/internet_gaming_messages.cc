@@ -17,11 +17,11 @@
  *
  */
 
-#include "internet_gaming_messages.h"
-
-#include "i18n.h"
+#include "network/internet_gaming_messages.h"
 
 #include <map>
+
+#include "i18n.h"
 
 static std::map <std::string, std::string> igmessages;
 

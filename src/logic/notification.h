@@ -20,13 +20,11 @@
 #ifndef NOTIFICATION_H
 #define NOTIFICATION_H
 
-
-#include "widelands_geometry.h"
-
-#include "container_iterate.h"
-
 #include <algorithm>
 #include <vector>
+
+#include "container_iterate.h"
+#include "logic/widelands_geometry.h"
 
 namespace Widelands {
 

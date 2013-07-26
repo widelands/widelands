@@ -17,11 +17,13 @@
  *
  */
 
-#include "fleet.h"
+#include "economy/fleet.h"
 
 #include "container_iterate.h"
-#include "economy.h"
-#include "flag.h"
+#include "economy/economy.h"
+#include "economy/flag.h"
+#include "economy/portdock.h"
+#include "economy/routing_node.h"
 #include "logic/game.h"
 #include "logic/mapastar.h"
 #include "logic/path.h"
@@ -30,8 +32,6 @@
 #include "logic/warehouse.h"
 #include "map_io/widelands_map_map_object_loader.h"
 #include "map_io/widelands_map_map_object_saver.h"
-#include "portdock.h"
-#include "routing_node.h"
 #include "upcast.h"
 
 namespace Widelands {

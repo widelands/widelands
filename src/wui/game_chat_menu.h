@@ -20,7 +20,7 @@
 #ifndef GAME_CHAT_MENU_H
 #define GAME_CHAT_MENU_H
 
-#include "gamechatpanel.h"
+#include "wui/gamechatpanel.h"
 #include "ui_basic/unique_window.h"
 
 

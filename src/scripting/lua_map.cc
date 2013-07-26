@@ -17,6 +17,8 @@
  *
  */
 
+#include "scripting/lua_map.h"
+
 #include <lua.hpp>
 
 #include "container_iterate.h"
@@ -32,12 +34,9 @@
 #include "logic/soldier.h"
 #include "logic/warelist.h"
 #include "logic/widelands_geometry.h"
+#include "scripting/c_utils.h"
+#include "scripting/lua_game.h"
 #include "wui/mapviewpixelfunctions.h"
-
-#include "c_utils.h"
-#include "lua_game.h"
-
-#include "lua_map.h"
 
 using namespace Widelands;
 

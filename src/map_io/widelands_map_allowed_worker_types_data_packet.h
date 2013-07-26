@@ -20,7 +20,7 @@
 #ifndef WIDELANDS_MAP_ALLOWED_WORKER_TYPES_DATA_PACKET_H
 #define WIDELANDS_MAP_ALLOWED_WORKER_TYPES_DATA_PACKET_H
 
-#include "widelands_map_data_packet.h"
+#include "map_io/widelands_map_data_packet.h"
 
 /// If present, this contains all worker types that are allowed to be build
 /// by players. If absent, all worker types are allowed per default.

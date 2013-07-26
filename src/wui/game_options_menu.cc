@@ -17,19 +17,19 @@
  *
  */
 
+#include "wui/game_options_menu.h"
+
 #include <boost/bind.hpp>
-#include <boost/type_traits.hpp>
 #include <boost/lambda/bind.hpp>
 #include <boost/lambda/construct.hpp>
+#include <boost/type_traits.hpp>
 
-#include "game_options_menu.h"
-
-#include "ui_fsmenu/fileview.h"
-#include "game_options_sound_menu.h"
-#include "game_main_menu_save_game.h"
 #include "graphic/graphic.h"
 #include "i18n.h"
 #include "sound/sound_handler.h"
+#include "ui_fsmenu/fileview.h"
+#include "wui/game_main_menu_save_game.h"
+#include "wui/game_options_sound_menu.h"
 
 
 GameOptionsMenu::GameOptionsMenu

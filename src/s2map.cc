@@ -19,6 +19,11 @@
 
 #include "s2map.h"
 
+#include <iomanip>
+#include <iostream>
+
+#include <boost/foreach.hpp>
+
 #include "constants.h"
 #include "i18n.h"
 #include "io/filesystem/layered_filesystem.h"
@@ -34,10 +39,6 @@
 #include "map_io/map_loader.h"
 #include "upcast.h"
 #include "wexception.h"
-
-#include <boost/foreach.hpp>
-#include <iostream>
-#include <iomanip>
 
 using std::cerr;
 using std::endl;

@@ -17,23 +17,20 @@
  *
  */
 
-#include "gamerenderer_gl.h"
+#include "graphic/render/gamerenderer_gl.h"
 
-#include "gl_surface.h"
-
-#include "logic/editor_game_base.h"
-#include "logic/player.h"
+#include <SDL_image.h>
 
 #include "graphic/graphic.h"
+#include "graphic/render/gl_surface.h"
 #include "graphic/rendertarget.h"
 #include "graphic/surface_cache.h"
 #include "graphic/texture.h"
-
+#include "logic/editor_game_base.h"
+#include "logic/player.h"
 #include "wui/mapviewpixelconstants.h"
 #include "wui/mapviewpixelfunctions.h"
 #include "wui/overlay_manager.h"
-
-#include <SDL_image.h>
 
 using namespace Widelands;
 

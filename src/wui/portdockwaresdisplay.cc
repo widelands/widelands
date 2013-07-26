@@ -17,14 +17,14 @@
  *
  */
 
-#include "portdockwaresdisplay.h"
+#include "wui/portdockwaresdisplay.h"
 
 #include <boost/lexical_cast.hpp>
 
 #include "economy/portdock.h"
 #include "logic/player.h"
-#include "waresdisplay.h"
-#include "waresqueuedisplay.h"
+#include "wui/waresdisplay.h"
+#include "wui/waresqueuedisplay.h"
 
 using Widelands::PortDock;
 using Widelands::Warehouse;

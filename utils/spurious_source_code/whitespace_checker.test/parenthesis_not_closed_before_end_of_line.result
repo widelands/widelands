@@ -1,2 +1,0 @@
-parenthesis_not_closed_before_end_of_line.cc:2: parenthesis not closed before end of line must be at line begin
-parenthesis_not_closed_before_end_of_line.cc:3: closing parenthesis without matching leading alignment

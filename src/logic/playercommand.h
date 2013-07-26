@@ -20,13 +20,13 @@
 #ifndef PLAYERCOMMAND_H
 #define PLAYERCOMMAND_H
 
-#include "cmd_queue.h"
+#include "logic/cmd_queue.h"
 #include "economy/flag.h"
-#include "message_id.h"
-#include "path.h"
-#include "trainingsite.h"
-#include "warehouse.h"
-#include "worker.h"
+#include "logic/message_id.h"
+#include "logic/path.h"
+#include "logic/trainingsite.h"
+#include "logic/warehouse.h"
+#include "logic/worker.h"
 
 namespace Widelands {
 

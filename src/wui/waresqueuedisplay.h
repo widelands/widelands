@@ -21,12 +21,13 @@
 #define _WARESQUEUEDISPLAY_H_
 
 #include <cstdlib>
+
 #include <stdint.h>
 
 #include "logic/item_ware_descr.h"
+#include "ui_basic/button.h"
 #include "ui_basic/panel.h"
 #include "ui_basic/radiobutton.h"
-#include "ui_basic/button.h"
 
 class Interactive_GameBase;
 

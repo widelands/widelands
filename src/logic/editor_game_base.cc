@@ -17,38 +17,35 @@
  *
  */
 
+#include "logic/editor_game_base.h"
 
 #include <algorithm>
 #include <set>
-
-#include "i18n.h"
-#include "rgbcolor.h"
-#include "upcast.h"
-#include "wexception.h"
 
 #include "economy/flag.h"
 #include "economy/road.h"
 #include "graphic/font_handler.h"
 #include "graphic/graphic.h"
+#include "i18n.h"
+#include "logic/areawatcher.h"
+#include "logic/battle.h"
+#include "logic/building.h"
+#include "logic/dismantlesite.h"
+#include "logic/findimmovable.h"
+#include "logic/game.h"
+#include "logic/instances.h"
+#include "logic/mapregion.h"
+#include "logic/player.h"
+#include "logic/roadtype.h"
+#include "logic/tribe.h"
+#include "logic/worker.h"
+#include "logic/world.h"
+#include "rgbcolor.h"
 #include "scripting/scripting.h"
 #include "sound/sound_handler.h"
 #include "ui_basic/progresswindow.h"
-
-#include "areawatcher.h"
-#include "battle.h"
-#include "building.h"
-#include "findimmovable.h"
-#include "game.h"
-#include "instances.h"
-#include "mapregion.h"
-#include "player.h"
-#include "roadtype.h"
-#include "tribe.h"
-#include "worker.h"
-#include "world.h"
-#include "dismantlesite.h"
-
-#include "editor_game_base.h"
+#include "upcast.h"
+#include "wexception.h"
 
 namespace Widelands {
 

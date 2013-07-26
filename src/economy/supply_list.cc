@@ -17,11 +17,11 @@
  *
  */
 
-#include "supply_list.h"
+#include "economy/supply_list.h"
 
 #include "container_iterate.h"
-#include "request.h"
-#include "supply.h"
+#include "economy/request.h"
+#include "economy/supply.h"
 #include "wexception.h"
 
 namespace Widelands {

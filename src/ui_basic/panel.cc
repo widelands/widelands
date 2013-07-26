@@ -17,6 +17,8 @@
  *
  */
 
+#include "ui_basic/panel.h"
+
 #include "constants.h"
 #include "graphic/font_handler.h"
 #include "graphic/font_handler1.h"
@@ -31,7 +33,6 @@
 #include "text_layout.h"
 #include "wlapplication.h"
 
-#include "panel.h"
 
 using namespace std;
 

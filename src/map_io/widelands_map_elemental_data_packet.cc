@@ -17,17 +17,16 @@
  *
  */
 
+#include "map_io/widelands_map_elemental_data_packet.h"
+
 #include <boost/algorithm/string.hpp>
 
 #include "container_iterate.h"
-
 #include "logic/editor_game_base.h"
 #include "logic/game_data_error.h"
 #include "logic/map.h"
 #include "logic/world.h"
 #include "profile/profile.h"
-
-#include "widelands_map_elemental_data_packet.h"
 
 namespace Widelands {
 

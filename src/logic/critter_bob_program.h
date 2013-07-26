@@ -20,7 +20,7 @@
 #ifndef CRITTER_BOB_PROGRAM_H
 #define CRITTER_BOB_PROGRAM_H
 
-#include "bob.h"
+#include "logic/bob.h"
 
 namespace Widelands {
 

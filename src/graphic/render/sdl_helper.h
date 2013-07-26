@@ -20,6 +20,8 @@
 #ifndef SDL_HELPER_H
 #define SDL_HELPER_H
 
+#include <stdint.h>
+
 struct SDL_Surface;
 
 SDL_Surface * empty_sdl_surface(int16_t w, int16_t h);

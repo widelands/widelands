@@ -17,23 +17,23 @@
  *
  */
 
-#include "trainingsite.h"
-
-#include "editor_game_base.h"
-#include "game.h"
-#include "helper.h"
-#include "i18n.h"
-#include "player.h"
-#include "production_program.h"
-#include "profile/profile.h"
-#include "economy/request.h"
-#include "soldier.h"
-#include "tribe.h"
-#include "worker.h"
-
-#include "upcast.h"
+#include "logic/trainingsite.h"
 
 #include <cstdio>
+
+#include "economy/request.h"
+#include "helper.h"
+#include "i18n.h"
+#include "logic/editor_game_base.h"
+#include "logic/game.h"
+#include "logic/player.h"
+#include "logic/production_program.h"
+#include "logic/soldier.h"
+#include "logic/tribe.h"
+#include "logic/worker.h"
+#include "profile/profile.h"
+#include "upcast.h"
+
 
 namespace Widelands {
 

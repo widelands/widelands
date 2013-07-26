@@ -17,12 +17,12 @@
  *
  */
 
-#include "overlay_manager.h"
-
-#include "logic/field.h"
-#include "graphic/graphic.h"
+#include "wui/overlay_manager.h"
 
 #include <algorithm>
+
+#include "graphic/graphic.h"
+#include "logic/field.h"
 
 
 Overlay_Manager::Overlay_Manager() :

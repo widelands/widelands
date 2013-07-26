@@ -17,7 +17,7 @@
  *
  */
 
-#include "maptriangleregion.h"
+#include "logic/maptriangleregion.h"
 
 namespace Widelands {
 

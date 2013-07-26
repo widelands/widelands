@@ -17,32 +17,31 @@
  *
  */
 
+#include "logic/map.h"
+
 #include <algorithm>
 #include <cstdio>
 
-#include "log.h"
-
-#include "checkstep.h"
 #include "economy/flag.h"
 #include "economy/road.h"
 #include "editor/tools/editor_increase_resources_tool.h"
-#include "findimmovable.h"
-#include "findnode.h"
 #include "io/filesystem/layered_filesystem.h"
+#include "log.h"
+#include "logic/checkstep.h"
+#include "logic/findimmovable.h"
+#include "logic/findnode.h"
+#include "logic/mapfringeregion.h"
+#include "logic/pathfield.h"
+#include "logic/player.h"
+#include "logic/soldier.h"
+#include "logic/tribe.h"
+#include "logic/worlddata.h"
 #include "map_generator.h"
 #include "map_io/widelands_map_loader.h"
-#include "mapfringeregion.h"
-#include "pathfield.h"
-#include "player.h"
 #include "s2map.h"
-#include "soldier.h"
-#include "tribe.h"
 #include "upcast.h"
 #include "wexception.h"
-#include "worlddata.h"
 #include "wui/overlay_manager.h"
-
-#include "map.h"
 
 
 

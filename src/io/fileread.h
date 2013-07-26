@@ -20,8 +20,8 @@
 #ifndef FILEREAD_H
 #define FILEREAD_H
 
-#include "basic_fileread.h"
-#include "streamread.h"
+#include "io/basic_fileread.h"
+#include "io/streamread.h"
 
 typedef basic_FileRead<StreamRead> FileRead;
 

@@ -17,7 +17,7 @@
  *
  */
 
-#include "network.h"
+#include "network/network.h"
 
 #include "log.h"
 #include "wlapplication.h"

@@ -17,27 +17,22 @@
  *
  */
 
-#include "minimaprenderer.h"
-#include "upcast.h"
+#include "graphic/render/minimaprenderer.h"
 
-#include "economy/road.h"
 #include "economy/flag.h"
-
-#include "wui/minimap.h"
-#include "wui/mapviewpixelconstants.h"
-
-#include "logic/field.h"
-#include "logic/map.h"
-#include "logic/player.h"
-
+#include "economy/road.h"
 #include "graphic/graphic.h"
+#include "graphic/render/terrain_sdl.h"
 #include "graphic/rendertarget.h"
 #include "graphic/surface.h"
 #include "graphic/texture.h"
-
+#include "logic/field.h"
+#include "logic/map.h"
+#include "logic/player.h"
+#include "upcast.h"
+#include "wui/mapviewpixelconstants.h"
+#include "wui/minimap.h"
 #include "wui/overlay_manager.h"
-
-#include "terrain_sdl.h"
 
 using namespace Widelands;
 

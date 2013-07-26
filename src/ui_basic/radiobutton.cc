@@ -17,9 +17,9 @@
  *
  */
 
-#include "radiobutton.h"
+#include "ui_basic/radiobutton.h"
 
-#include "checkbox.h"
+#include "ui_basic/checkbox.h"
 
 namespace UI {
 
