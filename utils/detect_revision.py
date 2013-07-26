@@ -34,7 +34,7 @@ def detect_debian_version():
     f = open(fname)
     version = f.readline()
     #bzr5905-210307251546
-    pattern = re.compile("bzr[0-9]-[0-9]+")
+    pattern = re.compile("bzr[0-9]+-[0-9]+")
     m = pattern.search(version)
     if m == None:
         return None
