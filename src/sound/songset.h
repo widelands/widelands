@@ -24,7 +24,6 @@
 #include <string>
 #include <vector>
 
-#include <config.h> //  must be included before SDL_mixer.h!
 #include <SDL_mixer.h>
 
 #include "io/fileread.h"

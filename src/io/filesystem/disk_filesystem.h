@@ -20,10 +20,10 @@
 #ifndef DISK_FILESYSTEM_H
 #define DISK_FILESYSTEM_H
 
-#include "filesystem.h"
-
-#include <string>
 #include <cstring>
+#include <string>
+
+#include "filesystem.h"
 
 /// \todo const correctness
 class RealFSImpl : public FileSystem {

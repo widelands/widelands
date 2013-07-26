@@ -23,9 +23,8 @@
 #include <cstring>
 
 #include "align.h"
-#include "graphic/graphic.h"
-
 #include "button.h"
+#include "graphic/graphic.h"
 
 namespace UI {
 

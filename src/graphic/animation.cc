@@ -19,6 +19,8 @@
 
 #include "animation.h"
 
+#include <cstdio>
+
 #include "constants.h"
 #include "diranimations.h"
 #include "helper.h"
@@ -27,9 +29,6 @@
 #include "profile/profile.h"
 #include "sound/sound_handler.h"
 #include "wexception.h"
-
-#include <cstdio>
-
 
 /// Find out if there is a sound effect registered for the animation's frame
 /// and try to play it. This is used to have sound effects that are tightly
