@@ -1,1 +1,0 @@
-This catches a space before a closing grouping token (bracket, brace or parenthesis), semicolon or comma. Characters inside "" and after // are ignored.
