@@ -394,13 +394,21 @@ int L_PlayerBase::place_building(lua_State * L) {
 		return report_error(L, "Unknown Building: '%s'", name);
 
 	Building * b = 0;
-	if (force)
-		b = &get(L, get_egbase(L)).force_building
-			(c->coords(), i, constructionsite);
-	else
+	if (force) {
+		if (constructionsite) {
+			b = &get(L, get_egbase(L)).force_csite
+				(c->coords(), i);
+		} else {
+			Building_Descr::FormerBuildings former_buildings;
+			const Building_Descr * descr = get(L, get_egbase(L)).tribe().get_building_descr(i);
+			former_buildings.push_back(descr);
+			b = &get(L, get_egbase(L)).force_building
+				(c->coords(), former_buildings);
+		}
+	} else {
 		b = get(L, get_egbase(L)).build
 			(c->coords(), i, constructionsite);
-
+	}
 	if (not b)
 		return report_error(L, "Couldn't place building!");
 

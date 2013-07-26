@@ -455,8 +455,11 @@ struct Player :
 	Road * build_road(const Path &); /// Build a road if it is allowed.
 	Building & force_building
 		(Coords,
+		 Building_Descr::FormerBuildings);
+	Building & force_csite
+		(Coords,
 		 Building_Index,
-		 bool = false);
+		 Building_Descr::FormerBuildings = Building_Descr::FormerBuildings());
 	Building * build(Coords, Building_Index, bool = true);
 	void bulldoze(PlayerImmovable &, bool recurse = false);
 	void flagaction(Flag &);
@@ -572,6 +575,8 @@ private:
 	void play_message_sound(const std::string & sender);
 	void _enhance_or_dismantle
 		(Building *, Building_Index const index_of_new_building = Building_Index::Null());
+	// Used in force_building / force_csite
+	void prepare_terrain_for_building(Coords location, const Building_Descr * descr);
 
 private:
 	MessageQueue           m_messages;

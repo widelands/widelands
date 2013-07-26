@@ -404,11 +404,8 @@ Road & Player::force_road(const Path & path) {
 	return Road::create(egbase(), start, end, path);
 }
 
-
-Building & Player::force_building
-	(Coords                const location,
-	 Building_Index        const idx,
-	 bool                  constructionsite)
+void Player::prepare_terrain_for_building
+	(Coords const location, const Building_Descr * descr)
 {
 	Map & map = egbase().map();
 	FCoords c[4]; //  Big buildings occupy 4 locations.
@@ -417,10 +414,9 @@ Building & Player::force_building
 	force_flag(c[1]);
 	if (BaseImmovable * const immovable = c[0].field->get_immovable())
 		immovable->remove(egbase());
-	const Building_Descr & descr = *tribe().get_building_descr(idx);
 	{
 		size_t nr_locations = 1;
-		if ((descr.get_size() & BUILDCAPS_SIZEMASK) == BUILDCAPS_BIG) {
+		if ((descr->get_size() & BUILDCAPS_SIZEMASK) == BUILDCAPS_BIG) {
 			nr_locations = 4;
 			map.get_trn(c[0], &c[1]);
 			map.get_tln(c[0], &c[2]);
@@ -437,12 +433,32 @@ Building & Player::force_building
 				immovable->remove(egbase());
 		}
 	}
-
-	if (constructionsite)
-		return egbase().warp_constructionsite(c[0], m_plnum, idx);
-	else
-		return descr.create (egbase(), *this, c[0], false);
 }
+
+Building & Player::force_building
+	(Coords                const location,
+	 Building_Descr::FormerBuildings former_buildings)
+{
+	Map & map = egbase().map();
+	const Building_Descr* descr = former_buildings.back();
+	prepare_terrain_for_building(location, descr);
+	return
+		descr->create
+			(egbase(), *this, map.get_fcoords(location), false, false, former_buildings);
+}
+
+Building& Player::force_csite
+	(Coords const location, Building_Index b_idx,
+	 Building_Descr::FormerBuildings former_buildings)
+{
+	Map & map = egbase().map();
+	const Building_Descr * descr = tribe().get_building_descr(b_idx);
+	prepare_terrain_for_building(location, descr);
+	return
+		egbase().warp_constructionsite
+			(map.get_fcoords(location), m_plnum, b_idx, false, former_buildings);
+}
+
 
 
 /*
