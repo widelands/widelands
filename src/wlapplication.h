@@ -169,7 +169,7 @@ struct WLApplication {
 	Point get_mouse_position() const throw () {return m_mouse_position;}
 	//
 	/// Find out whether the mouse is currently pressed
-	bool is_mouse_pressed() const {return SDL_GetMouseState(NULL, NULL); }
+	bool is_mouse_pressed() const {return SDL_GetMouseState(nullptr, nullptr); }
 
 	/// Swap left and right mouse key?
 	void set_mouse_swap(const bool swap) {m_mouse_swapped = swap;}
@@ -202,7 +202,7 @@ struct WLApplication {
 	void replay();
 
 #ifndef NDEBUG
-#ifndef WIN32
+#ifndef _WIN32
 	//not all of these need to be public, but I consider signal handling
 	//a public interface
 	//@{
@@ -287,21 +287,6 @@ protected:
 	///true if an external entity wants us to quit
 	bool   m_should_die;
 
-	///The Widelands window's width in pixels
-	int32_t    m_gfx_w;
-
-	///The Widelands window's height in pixels
-	int32_t    m_gfx_h;
-
-	///The Widelands window's bits per pixel
-	int32_t    m_gfx_bpp;
-
-	///If true Widelands is (should be, we never know ;-) running
-	///in a fullscreen window
-	bool   m_gfx_fullscreen;
-
-	bool   m_gfx_opengl;
-
 	//do we want to search the default places for widelands installs
 	bool   m_default_datadirs;
 	std::string m_homedir;
@@ -310,7 +295,7 @@ protected:
 	bool m_redirected_stdio;
 private:
 	///Holds this process' one and only instance of WLApplication, if it was
-	///created already. NULL otherwise.
+	///created already. nullptr otherwise.
 	///\note This is private on purpose. Read the class documentation.
 	static WLApplication * the_singleton;
 

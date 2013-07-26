@@ -26,8 +26,6 @@
 #include "wexception.h"
 #include "map_io/widelands_map_loader.h"
 
-#include <boost/scoped_ptr.hpp>
-
 
 /*
  * UI 1 - Selection of Campaign
@@ -354,7 +352,7 @@ void Fullscreen_Menu_CampaignMapSelect::map_selected(uint32_t) {
 
 	Widelands::Map map;
 
-	boost::scoped_ptr<Widelands::Map_Loader> ml(map.get_correct_loader(campmapfile.c_str()));
+	std::unique_ptr<Widelands::Map_Loader> ml(map.get_correct_loader(campmapfile.c_str()));
 	if (!ml) {
 		throw wexception
 			(_("Invalid path to file in cconfig: %s"), campmapfile.c_str());

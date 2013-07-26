@@ -22,6 +22,7 @@
 #include <list>
 
 #include <SDL_ttf.h>
+#include <boost/algorithm/string.hpp>
 
 #include "graphic.h"
 #include "log.h"
@@ -34,6 +35,30 @@
 #include "font_handler.h"
 
 namespace UI {
+
+namespace  {
+/**
+ * Draw the caret for the given text rendered exactly at the given point
+ * (including \ref LINE_MARGIN).
+ */
+void draw_caret
+	(RenderTarget & dst,
+	 const TextStyle & style,
+	 const Point& dstpoint,
+	 const std::string & text,
+	 uint32_t caret_offset)
+{
+	int caret_x = style.calc_bare_width(text.substr(0, caret_offset));
+
+	const Image* caret_image = g_gr->images().get("pics/caret.png");
+	Point caretpt;
+	caretpt.x = dstpoint.x + caret_x + LINE_MARGIN - caret_image->width();
+	caretpt.y = dstpoint.y + (style.font->height() - caret_image->height()) / 2;
+
+	dst.blit(caretpt, caret_image);
+}
+
+}  // namespace
 
 /// The global unique \ref Font_Handler object
 Font_Handler * g_fh = 0;
@@ -87,9 +112,13 @@ Font_Handler::Font_Handler() :
 
 
 Font_Handler::~Font_Handler() {
+	flush();
 	Font::shutdown();
 }
 
+void Font_Handler::flush() {
+	d.reset(new Data);
+}
 
 /*
  * Returns the height of the font, in pixels.
@@ -128,7 +157,7 @@ const LineCacheEntry & Font_Handler::Data::get_line(const UI::TextStyle & style,
 	LineCache::iterator it = linecache.insert(linecache.begin(), LineCacheEntry());
 	it->style = style;
 	it->text = text;
-	it->image = NULL;
+	it->image = nullptr;
 	render_line(*it);
 
 	while (linecache.size() > MaxLineCacheSize) {
@@ -184,34 +213,18 @@ void Font_Handler::draw_text
 	 Align align,
 	 uint32_t caret)
 {
-	const LineCacheEntry & lce = d->get_line(style, text);
+	// Erase every backslash in front of brackets
+	std::string copytext = boost::replace_all_copy(text, "\\<", "<");
+	boost::replace_all(copytext, "\\>", ">");
+	const LineCacheEntry & lce = d->get_line(style, copytext);
 
 	UI::correct_for_align(align, lce.width + 2 * LINE_MARGIN, lce.height, &dstpoint);
 
 	if (lce.image)
 		dst.blit(Point(dstpoint.x + LINE_MARGIN, dstpoint.y), lce.image);
 
-	if (caret <= text.size())
-		draw_caret(dst, style, dstpoint, text, caret);
-}
-
-/**
- * Draw unwrapped, single-line text (i.e. no line breaks) with a gray shadow.
- */
-void Font_Handler::draw_text_shadow
-	(RenderTarget & dst,
-	 const TextStyle & style,
-	 Point dstpoint,
-	 const std::string & text,
-	 Align align,
-	 uint32_t caret)
-{
-
-	TextStyle gray_style = style;
-	gray_style.fg = RGBColor (0, 0, 0);
-
-	draw_text (dst, gray_style, dstpoint - Point(1, 1), text, align, caret);
-	draw_text (dst, style, dstpoint, text, align, caret);
+	if (caret <= copytext.size())
+		draw_caret(dst, style, dstpoint, copytext, caret);
 }
 
 /**
@@ -231,28 +244,6 @@ uint32_t Font_Handler::draw_text_raw
 	return lce.width;
 }
 
-/**
- * Draw the caret for the given text rendered exactly at the given point
- * (including \ref LINE_MARGIN).
- */
-void Font_Handler::draw_caret
-	(RenderTarget & dst,
-	 const TextStyle & style,
-	 Point dstpoint,
-	 const std::string & text,
-	 uint32_t caret)
-{
-	std::string sub = text.substr(0, caret);
-
-	int caret_x = style.calc_bare_width(sub);
-
-	const Image* caret_image = g_gr->images().get("pics/caret.png");
-	Point caretpt;
-	caretpt.x = dstpoint.x + caret_x + LINE_MARGIN - caret_image->width();
-	caretpt.y = dstpoint.y + (style.font->height() - caret_image->height()) / 2;
-
-	dst.blit(caretpt, caret_image);
-}
 
 /**
  * Compute the total size of the given text, when wrapped to the given

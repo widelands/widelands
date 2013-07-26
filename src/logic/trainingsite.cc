@@ -37,6 +37,8 @@
 
 namespace Widelands {
 
+const uint32_t TrainingSite::training_state_multiplier = 12;
+
 TrainingSite_Descr::TrainingSite_Descr
 	(char const * const _name, char const * const _descname,
 	 const std::string & directory, Profile & prof, Section & global_s,
@@ -165,7 +167,7 @@ TrainingSite::TrainingSite(const TrainingSite_Descr & d) :
 ProductionSite   (d),
 m_soldier_request(0),
 m_capacity       (descr().get_max_number_of_soldiers()),
-m_build_heros    (false),
+m_build_heroes    (false),
 m_result         (Failed)
 {
 	// Initialize this in the constructor so that loading code may
@@ -200,12 +202,7 @@ TrainingSite::init_kick_state(const tAttribute & art, const TrainingSite_Descr &
  */
 std::string TrainingSite::get_statistics_string()
 {
-	if (State * const state = get_state())
-		return state->program->descname();
-	else if (m_result == Completed)
-		return _("Resting");
-	else
-		return _("Not Working");
+	return ProductionSite::get_statistics_string();
 }
 
 /**
@@ -488,7 +485,7 @@ bool TrainingSite::drop_unupgradable_soldiers(Game &)
  */
 void TrainingSite::drop_stalled_soldiers(Game &)
 {
-	Soldier * soldier_to_drop = NULL;
+	Soldier * soldier_to_drop = nullptr;
 	uint32_t highest_soldier_level_seen = 0;
 	uint32_t soldier_max_presence_time = descr().get_max_soldier_presence();
 
@@ -557,7 +554,7 @@ void TrainingSite::drop_stalled_soldiers(Game &)
 	}
 
 	// Finally drop the soldier.
-	if (NULL != soldier_to_drop)
+	if (nullptr != soldier_to_drop)
 		{
 			log("TrainingSite::drop_stalled_soldiers: Kicking somebody out ");
 			//log("(%3d,%3d): ", get_positions(g)[0].x, get_positions(g)[0].y);
@@ -683,7 +680,7 @@ void TrainingSite::start_upgrade(Game & game, Upgrade & upgrade)
 	if (upgrade.lastsuccess || upgrade.lastattempt < 0) {
 		// Start greedily on the first ever attempt, and restart greedily
 		// after a sucessful upgrade
-		if (m_build_heros)
+		if (m_build_heroes)
 			level = maxlevel;
 		else
 			level = minlevel;
@@ -691,7 +688,7 @@ void TrainingSite::start_upgrade(Game & game, Upgrade & upgrade)
 		// The last attempt wasn't successful;
 		// This happens e.g. when lots of low-level soldiers are present,
 		// but the prerequisites for improving them aren't.
-		if (m_build_heros) {
+		if (m_build_heroes) {
 			level = upgrade.lastattempt - 1;
 			if (level < minlevel)
 				level = maxlevel;

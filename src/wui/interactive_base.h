@@ -20,8 +20,6 @@
 #ifndef INTERACTIVE_BASE_H
 #define INTERACTIVE_BASE_H
 
-#include <boost/scoped_ptr.hpp>
-
 #include "debugconsole.h"
 #include "logic/editor_game_base.h"
 #include "logic/map.h"
@@ -60,6 +58,8 @@ struct Interactive_Base : public Map_View, public DebugConsole::Handler {
 	virtual void reference_player_tribe(Widelands::Player_Number, const void * const) {}
 
 	bool m_show_workarea_preview;
+	Overlay_Manager::Job_Id show_work_area(const Workarea_Info & workarea_info, Widelands::Coords coords);
+	void hide_work_area(Overlay_Manager::Job_Id job_id);
 
 	//  point of view for drawing
 	virtual Widelands::Player * get_player() const throw () = 0;
@@ -116,7 +116,7 @@ private:
 	void roadb_add_overlay   ();
 	void roadb_remove_overlay();
 
-	boost::scoped_ptr<InteractiveBaseInternals> m;
+	std::unique_ptr<InteractiveBaseInternals> m;
 	Widelands::Editor_Game_Base & m_egbase;
 	struct Sel_Data {
 		Sel_Data
@@ -127,7 +127,7 @@ private:
 			 		 Widelands::TCoords<>
 			 		 	(Widelands::Coords(0, 0), Widelands::TCoords<>::D)),
 			 const uint32_t Radius                   = 0,
-			 const Image* Pic                     = NULL,
+			 const Image* Pic                     = nullptr,
 			 const Overlay_Manager::Job_Id Jobid = Overlay_Manager::Job_Id::Null())
 			:
 			freeze(Freeze), triangles(Triangles), pos(Pos), radius(Radius),
@@ -151,6 +151,7 @@ private:
 	Overlay_Manager::Job_Id m_road_buildhelp_overlay_jobid;
 	Widelands::CoordPath  * m_buildroad;         //  path for the new road
 	Widelands::Player_Number m_road_build_player;
+	const Image* workarea_pics[NUMBER_OF_WORKAREA_PICS];
 
 protected:
 	void toggle_minimap();

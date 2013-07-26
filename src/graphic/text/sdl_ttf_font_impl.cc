@@ -114,7 +114,7 @@ const Surface& SDLTTF_Font::render
 	if (not text_surface)
 		throw RenderError((format("Rendering '%s' gave the error: %s") % txt % TTF_GetError()).str());
 
-	return *surface_cache->insert(hash, Surface::create(text_surface));
+	return *surface_cache->insert(hash, Surface::create(text_surface), true);
 }
 
 uint16_t SDLTTF_Font::ascent(int style) const {

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002, 2003, 2006-2010 by the Widelands Development Team
+ * Copyright (C) 2002, 2003, 2006-2010, 2011-2013 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -19,17 +19,23 @@
 
 #include "s2map.h"
 
+#include "constants.h"
 #include "i18n.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "log.h"
 #include "logic/editor_game_base.h"
 #include "logic/field.h"
+#include "logic/game.h"
 #include "logic/map.h"
-#include "logic/mapfringeregion.h"
+#include "logic/mapregion.h"
+#include "logic/message.h"
+#include "logic/player.h"
 #include "logic/world.h"
 #include "map_io/map_loader.h"
+#include "upcast.h"
 #include "wexception.h"
 
+#include <boost/foreach.hpp>
 #include <iostream>
 #include <iomanip>
 
@@ -119,6 +125,8 @@ int32_t S2_Map_Loader::load_map_complete
 	load_s2mf(egbase);
 
 	m_map.recalc_whole_map();
+
+	postload_fix_conversion(egbase);
 
 	set_state(STATE_LOADED);
 
@@ -769,15 +777,18 @@ void S2_Map_Loader::load_s2mf(Widelands::Editor_Game_Base & egbase)
 			}
 			Widelands::FCoords fpos = m_map.get_fcoords(starting_pos);
 
-			if (!(fpos.field->nodecaps() & Widelands::BUILDCAPS_BIG)) {
-				log("wrong size - trying to fix it:\n");
+			if (!(m_map.get_max_nodecaps(fpos) & Widelands::BUILDCAPS_BIG)) {
+				log("wrong size - trying to fix it: ");
 				bool fixed = false;
 
-
-				Widelands::MapFringeRegion<Widelands::Area<Widelands::FCoords> >
+				Widelands::MapRegion<Widelands::Area<Widelands::FCoords> >
 					mr(m_map, Widelands::Area<Widelands::FCoords>(fpos, 3));
 				do {
-					if (mr.location().field->get_caps() & Widelands::BUILDCAPS_BIG) {
+					if
+						(m_map.get_max_nodecaps(const_cast<Widelands::FCoords &>(mr.location()))
+						 &
+						 Widelands::BUILDCAPS_BIG)
+					{
 						m_map.set_starting_pos(p, mr.location());
 						fixed = true;
 						break;
@@ -787,11 +798,12 @@ void S2_Map_Loader::load_s2mf(Widelands::Editor_Game_Base & egbase)
 
 				// check whether starting position was fixed.
 				if (fixed)
-					log("   Fixed!\n");
+					log("Fixed!\n");
 				else {
 					//  Do not throw exception, else map will not be loadable in
 					//  the editor. Player initialization will keep track of
 					//  wrong starting positions.
+					log("FAILED!\n");
 					log("   Invalid starting position, that could not be fixed.\n");
 					log("   Please try to fix it manually in the editor.\n");
 				}
@@ -807,4 +819,75 @@ void S2_Map_Loader::load_s2mf(Widelands::Editor_Game_Base & egbase)
 
 	free(bobs);
 	free(buildings);
+}
+
+
+/// Try to fix data, which is incompatible between S2 and Widelands
+void S2_Map_Loader::postload_fix_conversion(Widelands::Editor_Game_Base & egbase) {
+
+/*
+ * 1: Try to fix port spaces
+ */
+	const Widelands::Map::PortSpacesSet ports(m_map.get_port_spaces());
+	uint16_t num_failed = 0;
+	char buf[256];
+
+	// Check if port spaces are valid
+	BOOST_FOREACH(const Widelands::Coords & c, ports) {
+		Widelands::FCoords fc = m_map.get_fcoords(c);
+		Widelands::NodeCaps nc = m_map.get_max_nodecaps(fc);
+		if
+			((nc & Widelands::BUILDCAPS_SIZEMASK) != Widelands::BUILDCAPS_BIG
+			 ||
+			 m_map.find_portdock(fc).empty())
+		{
+			log("Invalid port build space: ");
+			m_map.set_port_space(c, false);
+
+			bool fixed = false;
+			Widelands::MapRegion<Widelands::Area<Widelands::FCoords> >
+				mr(m_map, Widelands::Area<Widelands::FCoords>(fc, 3));
+			do {
+				// Check whether the maximum theoretical possible NodeCap of the field is big + port
+				Widelands::NodeCaps nc2 = m_map.get_max_nodecaps(const_cast<Widelands::FCoords &>(mr.location()));
+				if
+					((nc2 & Widelands::BUILDCAPS_SIZEMASK) == Widelands::BUILDCAPS_BIG
+					 &&
+					 (!m_map.find_portdock(mr.location()).empty()))
+				{
+					m_map.set_port_space(Widelands::Coords(mr.location().x, mr.location().y), true);
+					fixed = true;
+				}
+			} while (mr.advance(m_map) && !fixed);
+			if (!fixed) {
+				++num_failed;
+				log("FAILED! No alternative port buildspace for (%i, %i) found!\n", fc.x, fc.y);
+			}
+			else
+				log("Fixed!\n");
+		}
+	}
+	snprintf
+		(buf, sizeof(buf),
+		 _
+		  ("WARNING: %i invalid port buildspaces could not be fixed and have been removed! "
+		   "Some islands might be unreachable now. Please consider to fix the map in the map editor.\n\n"),
+		 num_failed);
+	fputs(buf, stdout);
+
+	// If fixing failed and this is a game, inform the players about the problem
+	if (num_failed > 0)
+		if (upcast(Widelands::Game, game, &egbase)) {
+			std::string rt_description = "<rt image=pics/port.png><p font-size=14 font-face=DejaVuSerif>";
+			rt_description += buf;
+			rt_description += "</p></rt>";
+
+			Widelands::Message m = Widelands::Message("S2_Map_Loader", 0, 3600000, _("WARNING"), rt_description);
+
+			for (uint8_t i = 0; i < MAX_PLAYERS; ++i) {
+				Widelands::Player * p = game->get_player(i + 1);
+				if (p)
+					p->add_message(*game, *(new Widelands::Message(m)));
+			}
+		}
 }

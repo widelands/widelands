@@ -1452,7 +1452,7 @@ bool DefaultAI::connect_flag_to_another_economy (const Flag & flag)
 			if (!found || path->get_nsteps() > path2->get_nsteps()) {
 				delete path;
 				path = path2;
-				path2 = NULL;
+				path2 = nullptr;
 				closest = *i.current;
 				found = true;
 			}
@@ -1887,6 +1887,11 @@ bool DefaultAI::check_militarysites(int32_t gametime)
 		// same economy where the thrown out soldiers can go to.
 		if (ms->economy().warehouses().size()) {
 			uint32_t const j = ms->soldierCapacity();
+			if (MilitarySite::kPrefersRookies != ms->get_soldier_preference())
+			{
+					game().send_player_militarysite_set_soldier_preference(*ms, MilitarySite::kPrefersRookies);
+			}
+			else
 			if (j > 1)
 				game().send_player_change_soldier_capacity(*ms, -1);
 
@@ -1966,6 +1971,8 @@ bool DefaultAI::check_militarysites(int32_t gametime)
 		uint32_t const k = ms->soldierCapacity();
 		if (j > k)
 			game().send_player_change_soldier_capacity(*ms, j - k);
+		if (MilitarySite::kPrefersHeroes != ms->get_soldier_preference())
+			game().send_player_militarysite_set_soldier_preference(*ms, MilitarySite::kPrefersHeroes);
 		changed = true;
 	}
 	reorder:;

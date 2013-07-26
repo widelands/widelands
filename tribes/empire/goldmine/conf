@@ -22,8 +22,8 @@ wine=6
 work=_Work
 
 [work]
-return=skipped when economy needs ration and not economy needs goldstone
-return=skipped when economy needs wine and not economy needs goldstone
+return=skipped unless economy needs goldstone or not economy needs ration
+return=skipped unless economy needs goldstone or not economy needs wine
 sleep=45000
 consume=ration wine
 animate=working 20000

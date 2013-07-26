@@ -145,7 +145,7 @@ protected:
 	///Character used to separate filename components
 	char m_filesep;
 
-#ifdef WIN32
+#ifdef _WIN32
 private:
 	static bool check_writeable_for_data(char const * path);
 #endif

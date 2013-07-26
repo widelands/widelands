@@ -168,6 +168,7 @@ struct Editor_Game_Base :
 	LuaInterface & lua() {return *m_lua;}
 
 private:
+	// FIXME -- SDL returns time as uint32. Why do I have int32 ? Please comment or change this to uint32.
 	int32_t m_gametime;
 	Player                   * m_players[MAX_PLAYERS];
 	Object_Manager             m_objects;

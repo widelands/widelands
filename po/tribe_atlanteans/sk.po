@@ -6,15 +6,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2013-03-09 16:57+0000\n"
+"POT-Creation-Date: 2013-06-16 09:11+0000\n"
 "PO-Revision-Date: 2012-05-18 14:57+0000\n"
 "Last-Translator: Miroslav Remák <Unknown>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-03-10 04:34+0000\n"
-"X-Generator: Launchpad (build 16523)\n"
+"X-Launchpad-Export-Date: 2013-06-17 05:11+0000\n"
+"X-Generator: Launchpad (build 16667)\n"
 
 #: ../../tribes/atlanteans/golden_tabard/conf:1
 msgid ""
@@ -886,8 +886,8 @@ msgstr ""
 "používajú horári aj pestovatelia čiernych koreňov. Vyrába ich kováč "
 "nástrojov."
 
-#: ../../tribes/atlanteans/dungeon/conf:30
-#: ../../tribes/atlanteans/labyrinth/conf:36
+#: ../../tribes/atlanteans/dungeon/conf:31
+#: ../../tribes/atlanteans/labyrinth/conf:37
 msgid "Sleep"
 msgstr "Spať"
 
@@ -1249,11 +1249,11 @@ msgstr ""
 "budove Atlantíďanov. Okrem píly, uhliareň, vyhňa na nástroje a udiareň ich "
 "taktiež potrebujú na vykonávanie svojej činnosti."
 
-#: ../../tribes/atlanteans/dungeon/conf:31
+#: ../../tribes/atlanteans/dungeon/conf:32
 msgid "Upgrade soldier attack 0"
 msgstr "Vylepšiť útok vojakov 0"
 
-#: ../../tribes/atlanteans/dungeon/conf:32
+#: ../../tribes/atlanteans/dungeon/conf:33
 msgid ""
 "Upgrade soldier attack 0 (only for compatibility with old savegames "
 "(build13))"
@@ -1261,11 +1261,11 @@ msgstr ""
 "Vylepšiť útok vojakov 0 (len pre kompatibilitu so starými verziami hry "
 "(build13))"
 
-#: ../../tribes/atlanteans/dungeon/conf:33
+#: ../../tribes/atlanteans/dungeon/conf:34
 msgid "Upgrade soldier attack 1"
 msgstr "Vylepšiť útok vojakov 1"
 
-#: ../../tribes/atlanteans/dungeon/conf:34
+#: ../../tribes/atlanteans/dungeon/conf:35
 msgid ""
 "Upgrade soldier attack 1 (only for compatibility with old savegames "
 "(build13))"
@@ -1273,11 +1273,11 @@ msgstr ""
 "Vylepšiť útok vojakov 1 (len pre kompatibilitu so starými verziami hry "
 "(build13))"
 
-#: ../../tribes/atlanteans/dungeon/conf:35
+#: ../../tribes/atlanteans/dungeon/conf:36
 msgid "Upgrade soldier attack 2"
 msgstr "Vylepšiť útok vojakov 2"
 
-#: ../../tribes/atlanteans/dungeon/conf:36
+#: ../../tribes/atlanteans/dungeon/conf:37
 msgid ""
 "Upgrade soldier attack 2 (only for compatibility with old savegames "
 "(build13))"
@@ -1285,11 +1285,11 @@ msgstr ""
 "Vylepšiť útok vojakov 2 (len pre kompatibilitu so starými verziami hry "
 "(build13))"
 
-#: ../../tribes/atlanteans/dungeon/conf:37
+#: ../../tribes/atlanteans/dungeon/conf:38
 msgid "Upgrade soldier attack 3"
 msgstr "Vylepšiť útok vojakov 3"
 
-#: ../../tribes/atlanteans/dungeon/conf:38
+#: ../../tribes/atlanteans/dungeon/conf:39
 msgid ""
 "Upgrade soldier attack 3 (only for compatibility with old savegames "
 "(build13))"
@@ -1297,11 +1297,11 @@ msgstr ""
 "Vylepšiť útok vojakov 3 (len pre kompatibilitu so starými verziami hry "
 "(build13))"
 
-#: ../../tribes/atlanteans/labyrinth/conf:37
+#: ../../tribes/atlanteans/labyrinth/conf:38
 msgid "Upgrade soldier defense 0"
 msgstr "Vylepšiť obranu vojakov 0"
 
-#: ../../tribes/atlanteans/labyrinth/conf:38
+#: ../../tribes/atlanteans/labyrinth/conf:39
 msgid ""
 "Upgrade soldier defense 0 (only for compatibility with old savegames "
 "(build13))"
@@ -1309,11 +1309,11 @@ msgstr ""
 "Vylepšiť obranu vojakov 0 (len pre kompatibilitu so starými verziami hry "
 "(build13))"
 
-#: ../../tribes/atlanteans/labyrinth/conf:39
+#: ../../tribes/atlanteans/labyrinth/conf:40
 msgid "Upgrade soldier defense 1"
 msgstr "Vylepšiť obranu vojakov 1"
 
-#: ../../tribes/atlanteans/labyrinth/conf:40
+#: ../../tribes/atlanteans/labyrinth/conf:41
 msgid ""
 "Upgrade soldier defense 1 (only for compatibility with old savegames "
 "(build13))"
@@ -1321,33 +1321,33 @@ msgstr ""
 "Vylepšiť obranu vojakov 1 (len pre kompatibilitu so starými verziami hry "
 "(build13))"
 
-#: ../../tribes/atlanteans/labyrinth/conf:43
+#: ../../tribes/atlanteans/labyrinth/conf:44
 msgid "Upgrade soldier evade 0"
 msgstr "Vylepšiť uhýbanie vojakov 0"
 
-#: ../../tribes/atlanteans/labyrinth/conf:44
+#: ../../tribes/atlanteans/labyrinth/conf:45
 msgid ""
 "Upgrade soldier evade 0 (only for compatibility with old savegames (build13))"
 msgstr ""
 "Vylepšiť uhýbanie vojakov 0 (len pre kompatibilitu so starými verziami hry "
 "(build13))"
 
-#: ../../tribes/atlanteans/labyrinth/conf:45
+#: ../../tribes/atlanteans/labyrinth/conf:46
 msgid "Upgrade soldier evade 1"
 msgstr "Vylepšiť uhýbanie vojakov 1"
 
-#: ../../tribes/atlanteans/labyrinth/conf:46
+#: ../../tribes/atlanteans/labyrinth/conf:47
 msgid ""
 "Upgrade soldier evade 1 (only for compatibility with old savegames (build13))"
 msgstr ""
 "Vylepšiť uhýbanie vojakov 1 (len pre kompatibilitu so starými verziami hry "
 "(build13))"
 
-#: ../../tribes/atlanteans/labyrinth/conf:41
+#: ../../tribes/atlanteans/labyrinth/conf:42
 msgid "Upgrade soldier hitpoints 0"
 msgstr "Vylepšiť body zdravia vojakov 0"
 
-#: ../../tribes/atlanteans/labyrinth/conf:42
+#: ../../tribes/atlanteans/labyrinth/conf:43
 msgid ""
 "Upgrade soldier hitpoints 0 (only for compatibility with old savegames "
 "(build13))"

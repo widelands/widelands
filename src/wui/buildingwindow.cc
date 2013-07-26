@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2011 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2013 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -23,16 +23,20 @@
 #include "graphic/image.h"
 #include "graphic/rendertarget.h"
 #include "interactive_player.h"
+#include "logic/constructionsite.h"
 #include "logic/dismantlesite.h"
 #include "logic/maphollowregion.h"
 #include "logic/militarysite.h"
 #include "logic/player.h"
 #include "logic/productionsite.h"
 #include "logic/tribe.h"
+#include "logic/warehouse.h"
 #include "ui_basic/helpwindow.h"
 #include "ui_basic/tabpanel.h"
 #include "upcast.h"
 #include "waresqueuedisplay.h"
+
+#include <boost/format.hpp>
 
 #include "buildingwindow.h"
 
@@ -52,7 +56,8 @@ Building_Window::Building_Window
 		 b.descname()),
 	m_registry(registry),
 	m_building       (b),
-	m_workarea_job_id(Overlay_Manager::Job_Id::Null())
+	m_workarea_job_id(Overlay_Manager::Job_Id::Null()),
+	m_avoid_fastclick(false)
 {
 	delete m_registry;
 	m_registry = this;
@@ -65,7 +70,7 @@ Building_Window::Building_Window
 
 	UI::Box * vbox = new UI::Box(this, 0, 0, UI::Box::Vertical);
 
-	m_tabs = new UI::Tab_Panel(vbox, 0, 0, NULL);
+	m_tabs = new UI::Tab_Panel(vbox, 0, 0, nullptr);
 	vbox->add(m_tabs, UI::Box::AlignLeft, true);
 
 	m_capsbuttons = new UI::Box(vbox, 0, 0, UI::Box::Horizontal);
@@ -75,17 +80,16 @@ Building_Window::Building_Window
 
 	set_center_panel(vbox);
 	set_think(true);
-
-	char filename[] = "pics/workarea0cumulative.png";
-	compile_assert(NUMBER_OF_WORKAREA_PICS <= 9);
-	for (Workarea_Info::size_type i = 0; i < NUMBER_OF_WORKAREA_PICS; ++i) {
-		++filename[13];
-		workarea_cumulative_pic[i] = g_gr->images().get(filename);
-	}
+	set_fastclick_panel(this);
 
 	show_workarea();
 
-	set_fastclick_panel(this);
+	// Title for construction site
+	if (upcast(Widelands::ConstructionSite, csite, &m_building)) {
+		// Show name in parenthesis as it may take all width already
+		const std::string title = (boost::format("(%s)") % csite->building().descname()).str();
+		set_title(title);
+	}
 }
 
 
@@ -137,7 +141,8 @@ void Building_Window::think()
 		m_capsbuttons->free_children();
 		create_capsbuttons(m_capsbuttons);
 		move_out_of_the_way();
-		warp_mouse_to_fastclick_panel();
+		if (!m_avoid_fastclick)
+			warp_mouse_to_fastclick_panel();
 		m_caps_setup = true;
 	}
 
@@ -164,8 +169,63 @@ void Building_Window::create_capsbuttons(UI::Box * capsbuttons)
 
 	bool requires_destruction_separator = false;
 	if (can_act) {
-		if (upcast(const Widelands::ProductionSite, productionsite, &m_building))
-			if (not dynamic_cast<const Widelands::MilitarySite *>(productionsite)) {
+		// Check if this is a port building and if yes show expedition button
+		if (upcast(Widelands::Warehouse const, warehouse, &m_building)) {
+			if (Widelands::PortDock * pd = warehouse->get_portdock()) {
+				if (pd->expedition_started()) {
+					UI::Button * expeditionbtn =
+						new UI::Button
+							(capsbuttons, "cancel_expedition", 0, 0, 34, 34,
+							g_gr->images().get("pics/but4.png"),
+							g_gr->images().get("pics/cancel_expedition.png"),
+							_("Cancel the expedition"));
+					expeditionbtn->sigclicked.connect
+						(boost::bind(&Building_Window::act_start_or_cancel_expedition, boost::ref(*this)));
+					capsbuttons->add(expeditionbtn, UI::Box::AlignCenter);
+				} else {
+					UI::Button * expeditionbtn =
+						new UI::Button
+							(capsbuttons, "start_expedition", 0, 0, 34, 34,
+							g_gr->images().get("pics/but4.png"),
+							g_gr->images().get("pics/start_expedition.png"),
+							_("Start an expedition"));
+					expeditionbtn->sigclicked.connect
+						(boost::bind(&Building_Window::act_start_or_cancel_expedition, boost::ref(*this)));
+					capsbuttons->add(expeditionbtn, UI::Box::AlignCenter);
+				}
+			}
+		}
+		else
+		if (upcast(const Widelands::ProductionSite, productionsite, &m_building)) {
+			if (upcast(const Widelands::MilitarySite, ms, productionsite))
+			{
+				if (Widelands::MilitarySite::kPrefersHeroes == ms->get_soldier_preference())
+				{
+					UI::Button * cs_btn =
+					new UI::Button
+					(capsbuttons, "rookies", 0, 0, 34, 34,
+						g_gr->images().get("pics/but4.png"),
+						g_gr->images().get("pics/msite_prefer_rookies.png"),
+						_("Prefer rookies"));
+					cs_btn->sigclicked.connect
+					(boost::bind(&Building_Window::act_prefer_rookies, boost::ref(*this)));
+					capsbuttons->add (cs_btn, UI::Box::AlignCenter);
+				}
+				else
+				{
+					UI::Button * cs_btn =
+					new UI::Button
+					(capsbuttons, "heroes", 0, 0, 34, 34,
+						g_gr->images().get("pics/but4.png"),
+						g_gr->images().get("pics/msite_prefer_heroes.png"),
+						_("Prefer heroes"));
+					cs_btn->sigclicked.connect
+					(boost::bind(&Building_Window::act_prefer_heroes, boost::ref(*this)));
+					capsbuttons->add (cs_btn, UI::Box::AlignCenter);
+				}
+			}
+			else // is not a MilitarySite (but is still a productionsite)
+			{
 				const bool is_stopped = productionsite->is_stopped();
 				UI::Button * stopbtn =
 					new UI::Button
@@ -178,6 +238,7 @@ void Building_Window::create_capsbuttons(UI::Box * capsbuttons)
 					(stopbtn,
 					 UI::Box::AlignCenter);
 
+
 				// Add a fixed width separator rather than infinite space so the
 				// enhance/destroy/dismantle buttons are fixed in their position
 				// and not subject to the number of buttons on the right of the
@@ -185,6 +246,7 @@ void Building_Window::create_capsbuttons(UI::Box * capsbuttons)
 				UI::Panel * spacer = new UI::Panel(capsbuttons, 0, 0, 17, 34);
 				capsbuttons->add(spacer, UI::Box::AlignCenter);
 			}
+		} // upcast to productionsite
 
 		if (m_capscache & Widelands::Building::PCap_Enhancable) {
 			const std::set<Widelands::Building_Index> & enhancements =
@@ -266,7 +328,7 @@ void Building_Window::create_capsbuttons(UI::Box * capsbuttons)
 				(capsbuttons, "workarea",
 				 0, 0, 34, 34,
 				 g_gr->images().get("pics/but4.png"),
-				 g_gr->images().get("pics/workarea3cumulative.png"),
+				 g_gr->images().get("pics/workarea123.png"),
 				 _("Hide workarea"));
 			m_toggle_workarea->sigclicked.connect
 				(boost::bind(&Building_Window::toggle_workarea, boost::ref(*this)));
@@ -322,7 +384,7 @@ void Building_Window::create_capsbuttons(UI::Box * capsbuttons)
 	}
 }
 
-/*
+/**
 ===============
 The help button has been pressed
 ===============
@@ -338,7 +400,7 @@ void Building_Window::help_clicked()
 			 m_building.descr().helptext_script());
 }
 
-/*
+/**
 ===============
 Callback for bulldozing request
 ===============
@@ -354,7 +416,7 @@ void Building_Window::act_bulldoze()
 	}
 }
 
-/*
+/**
 ===============
 Callback for dismantling request
 ===============
@@ -370,6 +432,11 @@ void Building_Window::act_dismantle()
 	}
 }
 
+/**
+===============
+Callback for starting / stoping the production site request
+===============
+*/
 void Building_Window::act_start_stop() {
 	if (dynamic_cast<const Widelands::ProductionSite *>(&m_building))
 		igbase().game().send_player_start_stop_building (m_building);
@@ -377,7 +444,40 @@ void Building_Window::act_start_stop() {
 	die();
 }
 
-/*
+void Building_Window::act_prefer_rookies()
+{
+	if (is_a(Widelands::MilitarySite, &m_building))
+		igbase().game().send_player_militarysite_set_soldier_preference
+			(m_building, Widelands::MilitarySite::kPrefersRookies);
+
+	die();
+}
+
+void
+Building_Window::act_prefer_heroes()
+{
+	if (is_a(Widelands::MilitarySite, &m_building))
+		igbase().game().send_player_militarysite_set_soldier_preference
+			(m_building, Widelands::MilitarySite::kPrefersHeroes);
+
+	die();
+}
+
+/**
+===============
+Callback for starting an expedition request
+===============
+*/
+void Building_Window::act_start_or_cancel_expedition() {
+	if (upcast(Widelands::Warehouse const, warehouse, &m_building))
+		if (warehouse->get_portdock())
+			igbase().game().send_player_start_or_cancel_expedition(m_building);
+
+	// No need to die here - as soon as the request is handled, the UI will get updated by the portdock
+	//die();
+}
+
+/**
 ===============
 Callback for enhancement request
 ===============
@@ -413,41 +513,11 @@ void Building_Window::act_debug()
  */
 void Building_Window::show_workarea()
 {
-	if (m_workarea_job_id)
+	if (m_workarea_job_id) {
 		return; // already shown, nothing to be done
-
-	const Workarea_Info & workarea_info = m_building.descr().m_workarea_info;
-	if (workarea_info.size() == 0)
-		return; // building has no workarea
-
-	Widelands::Map & map =
-		ref_cast<const Interactive_GameBase, UI::Panel>(*get_parent()).egbase()
-		.map();
-	Overlay_Manager & overlay_manager = map.overlay_manager();
-	m_workarea_job_id = overlay_manager.get_a_job_id();
-
-	Widelands::HollowArea<> hollow_area
-		(Widelands::Area<>(m_building.get_position(), 0), 0);
-	Workarea_Info::const_iterator it = workarea_info.begin();
-	for
-		(Workarea_Info::size_type i =
-			std::min(workarea_info.size(), NUMBER_OF_WORKAREA_PICS);
-			i;
-			++it)
-	{
-		--i;
-		hollow_area.radius = it->first;
-		Widelands::MapHollowRegion<> mr(map, hollow_area);
-		do
-			overlay_manager.register_overlay
-				(mr.location(),
-					workarea_cumulative_pic[i],
-					0,
-					Point::invalid(),
-					m_workarea_job_id);
-		while (mr.advance(map));
-		hollow_area.hole_radius = hollow_area.radius;
 	}
+	const Workarea_Info & workarea_info = m_building.descr().m_workarea_info;
+	m_workarea_job_id = igbase().show_work_area(workarea_info, m_building.get_position());
 
 	configure_workarea_button();
 }
@@ -458,11 +528,7 @@ void Building_Window::show_workarea()
 void Building_Window::hide_workarea()
 {
 	if (m_workarea_job_id) {
-		Widelands::Map & map =
-			ref_cast<const Interactive_GameBase, UI::Panel>(*get_parent()).egbase()
-			.map();
-		Overlay_Manager & overlay_manager = map.overlay_manager();
-		overlay_manager.remove_overlay(m_workarea_job_id);
+		igbase().hide_work_area(m_workarea_job_id);
 		m_workarea_job_id = Overlay_Manager::Job_Id::Null();
 
 		configure_workarea_button();
@@ -512,3 +578,4 @@ void Building_Window::clicked_goto()
 {
 	igbase().move_view_to(building().get_position());
 }
+

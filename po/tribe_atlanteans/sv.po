@@ -6,15 +6,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2013-03-09 16:57+0000\n"
+"POT-Creation-Date: 2013-06-16 09:11+0000\n"
 "PO-Revision-Date: 2012-04-22 06:46+0000\n"
 "Last-Translator: Patrick H. <dajgtre@gmail.com>\n"
 "Language-Team: Language <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-03-10 04:34+0000\n"
-"X-Generator: Launchpad (build 16523)\n"
+"X-Launchpad-Export-Date: 2013-06-17 05:11+0000\n"
+"X-Generator: Launchpad (build 16667)\n"
 
 #: ../../tribes/atlanteans/golden_tabard/conf:1
 msgid ""
@@ -885,8 +885,8 @@ msgstr ""
 "Spadar behövs för handhavandet av väkter. Därför används dom av skogvaktaren "
 "och svartrotsbonden. Dom tillverkas av verktygssmeden."
 
-#: ../../tribes/atlanteans/dungeon/conf:30
-#: ../../tribes/atlanteans/labyrinth/conf:36
+#: ../../tribes/atlanteans/dungeon/conf:31
+#: ../../tribes/atlanteans/labyrinth/conf:37
 msgid "Sleep"
 msgstr "Vila"
 
@@ -1243,11 +1243,11 @@ msgstr ""
 "atlanteanernas byggnades. Förutom sågverket, behöver också kolbrännaren, "
 "verktygssmedjan och rökeriet stammar för att kunna arbeta."
 
-#: ../../tribes/atlanteans/dungeon/conf:31
+#: ../../tribes/atlanteans/dungeon/conf:32
 msgid "Upgrade soldier attack 0"
 msgstr "Uppgradera soldatattack 0"
 
-#: ../../tribes/atlanteans/dungeon/conf:32
+#: ../../tribes/atlanteans/dungeon/conf:33
 msgid ""
 "Upgrade soldier attack 0 (only for compatibility with old savegames "
 "(build13))"
@@ -1255,11 +1255,11 @@ msgstr ""
 "Uppgradera soldatattack 0 (endast för kompatibilitet med gamla sparade spel "
 "(build13))"
 
-#: ../../tribes/atlanteans/dungeon/conf:33
+#: ../../tribes/atlanteans/dungeon/conf:34
 msgid "Upgrade soldier attack 1"
 msgstr "Uppgradera soldatattack 1"
 
-#: ../../tribes/atlanteans/dungeon/conf:34
+#: ../../tribes/atlanteans/dungeon/conf:35
 msgid ""
 "Upgrade soldier attack 1 (only for compatibility with old savegames "
 "(build13))"
@@ -1267,11 +1267,11 @@ msgstr ""
 "Uppgradera soldatattack 1 (endast för kompatibilitet med gamla sparade spel "
 "(build13))"
 
-#: ../../tribes/atlanteans/dungeon/conf:35
+#: ../../tribes/atlanteans/dungeon/conf:36
 msgid "Upgrade soldier attack 2"
 msgstr "Uppgradera soldatattack 2"
 
-#: ../../tribes/atlanteans/dungeon/conf:36
+#: ../../tribes/atlanteans/dungeon/conf:37
 msgid ""
 "Upgrade soldier attack 2 (only for compatibility with old savegames "
 "(build13))"
@@ -1279,11 +1279,11 @@ msgstr ""
 "Uppgradera soldatattack 2 (endast för kompatibilitet med gamla sparade spel "
 "(build13))"
 
-#: ../../tribes/atlanteans/dungeon/conf:37
+#: ../../tribes/atlanteans/dungeon/conf:38
 msgid "Upgrade soldier attack 3"
 msgstr "Uppgradera soldatattack 3"
 
-#: ../../tribes/atlanteans/dungeon/conf:38
+#: ../../tribes/atlanteans/dungeon/conf:39
 msgid ""
 "Upgrade soldier attack 3 (only for compatibility with old savegames "
 "(build13))"
@@ -1291,11 +1291,11 @@ msgstr ""
 "Uppgradera soldatattack 3 (endast för kompatibilitet med gamla sparade spel "
 "(build13))"
 
-#: ../../tribes/atlanteans/labyrinth/conf:37
+#: ../../tribes/atlanteans/labyrinth/conf:38
 msgid "Upgrade soldier defense 0"
 msgstr "Uppgradera soldatförsvar 0"
 
-#: ../../tribes/atlanteans/labyrinth/conf:38
+#: ../../tribes/atlanteans/labyrinth/conf:39
 msgid ""
 "Upgrade soldier defense 0 (only for compatibility with old savegames "
 "(build13))"
@@ -1303,11 +1303,11 @@ msgstr ""
 "Uppgradera soldatförsvar 0 (endast för kompatibilitet med gamla sparade spel "
 "(build13))"
 
-#: ../../tribes/atlanteans/labyrinth/conf:39
+#: ../../tribes/atlanteans/labyrinth/conf:40
 msgid "Upgrade soldier defense 1"
 msgstr "Uppgradera soldatförsvar 1"
 
-#: ../../tribes/atlanteans/labyrinth/conf:40
+#: ../../tribes/atlanteans/labyrinth/conf:41
 msgid ""
 "Upgrade soldier defense 1 (only for compatibility with old savegames "
 "(build13))"
@@ -1315,33 +1315,33 @@ msgstr ""
 "Uppgradera soldatförsvar 1 (endast för kompatibilitet med gamla sparade spel "
 "(build13))"
 
-#: ../../tribes/atlanteans/labyrinth/conf:43
+#: ../../tribes/atlanteans/labyrinth/conf:44
 msgid "Upgrade soldier evade 0"
 msgstr "Uppgradera undvik 0 för soldat"
 
-#: ../../tribes/atlanteans/labyrinth/conf:44
+#: ../../tribes/atlanteans/labyrinth/conf:45
 msgid ""
 "Upgrade soldier evade 0 (only for compatibility with old savegames (build13))"
 msgstr ""
 "Uppgradera undvik 0 för soldat  (endast för kompatibilitet med gamla sparade "
 "spel (build13))"
 
-#: ../../tribes/atlanteans/labyrinth/conf:45
+#: ../../tribes/atlanteans/labyrinth/conf:46
 msgid "Upgrade soldier evade 1"
 msgstr "Uppgradera undvik 1 för soldat"
 
-#: ../../tribes/atlanteans/labyrinth/conf:46
+#: ../../tribes/atlanteans/labyrinth/conf:47
 msgid ""
 "Upgrade soldier evade 1 (only for compatibility with old savegames (build13))"
 msgstr ""
 "Uppgradera undvik 1 för soldat  (endast för kompatibilitet med gamla sparade "
 "spel (build13))"
 
-#: ../../tribes/atlanteans/labyrinth/conf:41
+#: ../../tribes/atlanteans/labyrinth/conf:42
 msgid "Upgrade soldier hitpoints 0"
 msgstr "Uppgradera träffpoäng 0 för soldater"
 
-#: ../../tribes/atlanteans/labyrinth/conf:42
+#: ../../tribes/atlanteans/labyrinth/conf:43
 msgid ""
 "Upgrade soldier hitpoints 0 (only for compatibility with old savegames "
 "(build13))"

@@ -17,7 +17,6 @@
  *
  */
 
-#ifdef USE_OPENGL
 #include "gamerenderer_gl.h"
 
 #include "gl_surface.h"
@@ -70,7 +69,7 @@ const GLSurfaceTexture * GameRendererGL::get_dither_edge_texture(const Widelands
 		throw wexception("%s", IMG_GetError());
 
 	GLSurfaceTexture * edgetexture = new GLSurfaceTexture(sdlsurf, true);
-	g_gr->surfaces().insert(cachename, edgetexture);
+	g_gr->surfaces().insert(cachename, edgetexture, false);
 	return edgetexture;
 }
 
@@ -234,7 +233,7 @@ void GameRendererGL::collect_terrain_base(bool onlyscan)
 
 void GameRendererGL::prepare_terrain_base()
 {
-	compile_assert(sizeof(basevertex) == 32);
+	static_assert(sizeof(basevertex) == 32, "assert(sizeof(basevertex) == 32) failed.");
 
 	uint32_t reqsize = m_patch_size.w * m_patch_size.h;
 	if (reqsize > 0x10000)
@@ -409,7 +408,7 @@ void GameRendererGL::collect_terrain_dither(bool onlyscan)
  */
 void GameRendererGL::prepare_terrain_dither()
 {
-	compile_assert(sizeof(dithervertex) == 32);
+	static_assert(sizeof(dithervertex) == 32, "assert(sizeof(dithervertex) == 32) failed.");
 
 	if (m_terrain_edge_freq.size() < 16)
 		m_terrain_edge_freq.resize(16);
@@ -670,4 +669,3 @@ void GameRendererGL::draw_roads()
 	glDisableClientState(GL_COLOR_ARRAY);
 }
 
-#endif // USE_OPENGL

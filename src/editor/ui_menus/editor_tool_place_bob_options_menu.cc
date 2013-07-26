@@ -77,7 +77,7 @@ m_click_recursion_protect(false)
 	Point pos;
 	uint32_t cur_x = bobs_in_row;
 	int32_t i = 0;
-	UI::Box * box = NULL;
+	UI::Box * box = nullptr;
 	while (i < nr_bobs) {
 		if (cur_x == bobs_in_row) {
 			cur_x = 0;

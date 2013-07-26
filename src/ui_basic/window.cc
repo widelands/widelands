@@ -28,8 +28,6 @@
 #include "text_layout.h"
 #include "wlapplication.h"
 
-#include "compile_assert.h"
-
 #include <SDL_keysym.h>
 
 using namespace std;
@@ -299,7 +297,7 @@ void Window::draw_border(RenderTarget & dst)
 			 Rect(Point(0, 0), pos, TP_B_PIXMAP_THICKNESS));
 
 		//  top bar
-		compile_assert(0 <= HZ_B_CORNER_PIXMAP_LEN);
+		static_assert(0 <= HZ_B_CORNER_PIXMAP_LEN, "assert(0 <= HZ_B_CORNER_PIXMAP_LEN) failed.");
 		for (; pos < hz_bar_end_minus_middle; pos += HZ_B_MIDDLE_PIXMAP_LEN)
 			dst.blitrect
 				(Point(pos, 0),
@@ -336,7 +334,7 @@ void Window::draw_border(RenderTarget & dst)
 
 		{ // Left border
 
-			compile_assert(0 <= VT_B_PIXMAP_THICKNESS);
+			static_assert(0 <= VT_B_PIXMAP_THICKNESS, "assert(0 <= VT_B_PIXMAP_THICKNESS) failed.");
 			dst.blitrect // left top thingy
 				(Point(0, TP_B_PIXMAP_THICKNESS),
 				 m_pic_lborder,
@@ -345,7 +343,7 @@ void Window::draw_border(RenderTarget & dst)
 			int32_t pos = TP_B_PIXMAP_THICKNESS + VT_B_THINGY_PIXMAP_LEN;
 
 			//  left bar
-			compile_assert(0 <= VT_B_THINGY_PIXMAP_LEN);
+			static_assert(0 <= VT_B_THINGY_PIXMAP_LEN, "assert(0 <= VT_B_THINGY_PIXMAP_LEN) failed.");
 			for (; pos < vt_bar_end_minus_middle; pos += VT_B_MIDDLE_PIXMAP_LEN)
 				dst.blitrect
 					(Point(0, pos),
@@ -377,7 +375,7 @@ void Window::draw_border(RenderTarget & dst)
 			int32_t pos = TP_B_PIXMAP_THICKNESS + VT_B_THINGY_PIXMAP_LEN;
 
 			//  right bar
-			compile_assert(0 <= VT_B_THINGY_PIXMAP_LEN);
+			static_assert(0 <= VT_B_THINGY_PIXMAP_LEN, "assert(0 <= VT_B_THINGY_PIXMAP_LEN) failed.");
 			for (; pos < vt_bar_end_minus_middle; pos += VT_B_MIDDLE_PIXMAP_LEN)
 				dst.blitrect
 					(Point(right_border_x, pos),
@@ -485,6 +483,15 @@ bool Window::handle_alt_drag(int32_t mx, int32_t my)
 	grab_mouse(true);
 	return true;
 }
+
+// Always consume the tooltip event to prevent tooltips from
+// our parent to be rendered
+bool Window::handle_tooltip()
+{
+	UI::Panel::handle_tooltip();
+	return true;
+}
+
 
 void Window::restore() {
 	assert(_is_minimal);

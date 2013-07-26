@@ -20,34 +20,42 @@
 #ifndef SURFACE_CACHE_H
 #define SURFACE_CACHE_H
 
-#include <boost/scoped_ptr.hpp>
 #include <boost/utility.hpp>
 #include <string>
 
 class Surface;
 
-// Caches Surfaces that are expensive to create. Is free to delete them at any
-// time when it feels like it uses too much memory. It will then delete the
-// surfaces that have been used the longest time ago. Users of this class
-// should therefore not hold onto the Surface they get back, instead, they
-// should use it only temporarily and request it whenever they need it.
+// Caches Surfaces. It contains surfaces which must not be deleted and
+// transient surfaces that are always free to be deleted - somebody else must
+// then recreate them when they are needed again.
+//
+// Nobody in Widelands should hold onto a Surface they get from this class,
+// instead, they should use it only temporarily and rerequest it whenever they
+// need it.
 class SurfaceCache : boost::noncopyable {
 public:
 	SurfaceCache() {};
 	virtual ~SurfaceCache() {};
 
-	/// Returns an entry if it is cached, NULL otherwise.
+	/// Deletes all surfaces in the cache leaving it as if it were just created.
+	virtual void flush() = 0;
+
+	/// Returns an entry if it is cached, nullptr otherwise.
 	virtual Surface* get(const std::string& hash) = 0;
 
-	// Inserts this entry into the SurfaceCache. asserts() that there is no entry
-	// with this hash already cached. Returns the given Surface for convenience.
-	virtual Surface* insert(const std::string& hash, Surface*) = 0;
+	// Inserts this entry into the SurfaceCache. asserts() that there is no
+	// entry with this hash already cached. Returns the given Surface for
+	// convenience. If 'transient' is false, this surface will not be deleted
+	// automatically - use this if surfaces are around for a long time and
+	// recreation is expensive (i.e. images loaded from disk).
+	virtual Surface* insert(const std::string& hash, Surface*, bool transient) = 0;
 };
 
-// Create a new Cache whichs combined pixels in all Surfaces are always below
-// the given limit (Note: there is overhead for class members which is not
-// counted as the pixels make up the bulk of the size of a surface).
-SurfaceCache* create_surface_cache(uint32_t memory_in_bytes);
+// Create a new Cache whichs combined pixels in all transient surfaces are
+// always below the given limit (Note: there is overhead for class members
+// which is not counted as the pixels make up the bulk of the size of a
+// surface).
+SurfaceCache* create_surface_cache(uint32_t transient_memory_in_bytes);
 
 #endif /* end of include guard: SURFACE_CACHE_H */
 

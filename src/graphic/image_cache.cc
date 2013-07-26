@@ -17,11 +17,11 @@
  *
  */
 
-#include <string>
+#include <cassert>
 #include <map>
+#include <string>
 
 #include <boost/foreach.hpp>
-#include <boost/scoped_ptr.hpp>
 
 #include "image.h"
 #include "image_loader.h"
@@ -63,7 +63,7 @@ public:
 
 private:
 	Surface* reload_image_() const {
-		Surface* surf = surface_cache_->insert(filename_, image_loader_->load(filename_));
+		Surface* surf = surface_cache_->insert(filename_, image_loader_->load(filename_), false);
 		return surf;
 	}
 	uint16_t w_, h_;

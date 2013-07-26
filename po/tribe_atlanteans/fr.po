@@ -6,15 +6,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4866\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2013-03-09 16:57+0000\n"
+"POT-Creation-Date: 2013-06-16 09:11+0000\n"
 "PO-Revision-Date: 2012-04-09 15:49+0000\n"
 "Last-Translator: Emmanuel Andry <Unknown>\n"
 "Language-Team: Language <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-03-10 04:34+0000\n"
-"X-Generator: Launchpad (build 16523)\n"
+"X-Launchpad-Export-Date: 2013-06-17 05:10+0000\n"
+"X-Generator: Launchpad (build 16667)\n"
 
 #: ../../tribes/atlanteans/golden_tabard/conf:1
 msgid ""
@@ -897,8 +897,8 @@ msgstr ""
 "sylviculteurs et les planteurs de racine noire les utilisent donc. Elles "
 "sont fabriquées par l'outilleur."
 
-#: ../../tribes/atlanteans/dungeon/conf:30
-#: ../../tribes/atlanteans/labyrinth/conf:36
+#: ../../tribes/atlanteans/dungeon/conf:31
+#: ../../tribes/atlanteans/labyrinth/conf:37
 msgid "Sleep"
 msgstr "Dormir"
 
@@ -1273,11 +1273,11 @@ msgstr ""
 "charbon de vois, la forge à outils et le fumoir ont aussi besoin de troncs "
 "pour leur besognes."
 
-#: ../../tribes/atlanteans/dungeon/conf:31
+#: ../../tribes/atlanteans/dungeon/conf:32
 msgid "Upgrade soldier attack 0"
 msgstr "Améliore l'attaque des soldats 0"
 
-#: ../../tribes/atlanteans/dungeon/conf:32
+#: ../../tribes/atlanteans/dungeon/conf:33
 msgid ""
 "Upgrade soldier attack 0 (only for compatibility with old savegames "
 "(build13))"
@@ -1285,11 +1285,11 @@ msgstr ""
 "Améliore l'attaque des soldats 0 (Seulement pour compatibilité avec de "
 "vieilles sauvegardes Build 13))"
 
-#: ../../tribes/atlanteans/dungeon/conf:33
+#: ../../tribes/atlanteans/dungeon/conf:34
 msgid "Upgrade soldier attack 1"
 msgstr "Améliore l'attaque des soldats 1"
 
-#: ../../tribes/atlanteans/dungeon/conf:34
+#: ../../tribes/atlanteans/dungeon/conf:35
 msgid ""
 "Upgrade soldier attack 1 (only for compatibility with old savegames "
 "(build13))"
@@ -1297,11 +1297,11 @@ msgstr ""
 "Améliore l'attaque des soldats 1 (Seulement pour compatibilité avec de "
 "vieilles sauvegardes Build 13))"
 
-#: ../../tribes/atlanteans/dungeon/conf:35
+#: ../../tribes/atlanteans/dungeon/conf:36
 msgid "Upgrade soldier attack 2"
 msgstr "Améliore l'attaque des soldats 2"
 
-#: ../../tribes/atlanteans/dungeon/conf:36
+#: ../../tribes/atlanteans/dungeon/conf:37
 msgid ""
 "Upgrade soldier attack 2 (only for compatibility with old savegames "
 "(build13))"
@@ -1309,11 +1309,11 @@ msgstr ""
 "Améliore l'attaque des soldats 2 (Seulement pour compatibilité avec de "
 "vieilles sauvegardes Build 13))"
 
-#: ../../tribes/atlanteans/dungeon/conf:37
+#: ../../tribes/atlanteans/dungeon/conf:38
 msgid "Upgrade soldier attack 3"
 msgstr "Améliore l'attaque des soldats 3"
 
-#: ../../tribes/atlanteans/dungeon/conf:38
+#: ../../tribes/atlanteans/dungeon/conf:39
 msgid ""
 "Upgrade soldier attack 3 (only for compatibility with old savegames "
 "(build13))"
@@ -1321,11 +1321,11 @@ msgstr ""
 "Améliore l'attaque des soldats 3 (Seulement pour compatibilité avec de "
 "vieilles sauvegardes Build 13))"
 
-#: ../../tribes/atlanteans/labyrinth/conf:37
+#: ../../tribes/atlanteans/labyrinth/conf:38
 msgid "Upgrade soldier defense 0"
 msgstr "Améliore la défense des soldats 0"
 
-#: ../../tribes/atlanteans/labyrinth/conf:38
+#: ../../tribes/atlanteans/labyrinth/conf:39
 msgid ""
 "Upgrade soldier defense 0 (only for compatibility with old savegames "
 "(build13))"
@@ -1333,11 +1333,11 @@ msgstr ""
 "Améliore la défense des soldats 0 (Seulement pour compatibilité avec de "
 "vieilles sauvegardes (build 13))"
 
-#: ../../tribes/atlanteans/labyrinth/conf:39
+#: ../../tribes/atlanteans/labyrinth/conf:40
 msgid "Upgrade soldier defense 1"
 msgstr "Améliore la défense des soldats 1"
 
-#: ../../tribes/atlanteans/labyrinth/conf:40
+#: ../../tribes/atlanteans/labyrinth/conf:41
 msgid ""
 "Upgrade soldier defense 1 (only for compatibility with old savegames "
 "(build13))"
@@ -1345,33 +1345,33 @@ msgstr ""
 "Améliore la défense des soldats 1 (Seulement pour compatibilité avec de "
 "vieilles sauvegardes (build 13))"
 
-#: ../../tribes/atlanteans/labyrinth/conf:43
+#: ../../tribes/atlanteans/labyrinth/conf:44
 msgid "Upgrade soldier evade 0"
 msgstr "Améliore l'esquive des soldats 0"
 
-#: ../../tribes/atlanteans/labyrinth/conf:44
+#: ../../tribes/atlanteans/labyrinth/conf:45
 msgid ""
 "Upgrade soldier evade 0 (only for compatibility with old savegames (build13))"
 msgstr ""
 "Améliore l'esquive des soldats 0 (Seulement pour compatibilité avec les "
 "vieilles sauvegardes (Build 13))"
 
-#: ../../tribes/atlanteans/labyrinth/conf:45
+#: ../../tribes/atlanteans/labyrinth/conf:46
 msgid "Upgrade soldier evade 1"
 msgstr "Améliore l'esquive du soldat 1"
 
-#: ../../tribes/atlanteans/labyrinth/conf:46
+#: ../../tribes/atlanteans/labyrinth/conf:47
 msgid ""
 "Upgrade soldier evade 1 (only for compatibility with old savegames (build13))"
 msgstr ""
 "Améliore l'esquive du soldat 1 (Seulement pour compatibilité avec de "
 "vieilles sauvegardes (Build 13))"
 
-#: ../../tribes/atlanteans/labyrinth/conf:41
+#: ../../tribes/atlanteans/labyrinth/conf:42
 msgid "Upgrade soldier hitpoints 0"
 msgstr "Augmente les points de vie des soldats 0"
 
-#: ../../tribes/atlanteans/labyrinth/conf:42
+#: ../../tribes/atlanteans/labyrinth/conf:43
 msgid ""
 "Upgrade soldier hitpoints 0 (only for compatibility with old savegames "
 "(build13))"

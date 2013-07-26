@@ -41,7 +41,7 @@ LAN_Base::LAN_Base ()
 		(sock, SOL_SOCKET, SO_BROADCAST,
 		 reinterpret_cast<char *>(&opt), sizeof(opt));
 
-#ifndef WIN32
+#ifndef _WIN32
 
 	//  get a list of all local broadcast addresses
 	struct if_nameindex * ifnames = if_nameindex();

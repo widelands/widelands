@@ -139,7 +139,7 @@ void Player::create_default_infrastructure() {
 				ncr->push_arg(further_pos);
 				game.enqueue_command(new Cmd_LuaCoroutine(game.get_gametime(), ncr));
 			}
-		} catch (Tribe_Descr::Nonexistent & e) {
+		} catch (Tribe_Descr::Nonexistent &) {
 			throw game_data_error
 				("the selected initialization index (%u) is outside the range "
 				 "(tribe edited between preload and game start?)",
@@ -593,6 +593,25 @@ void Player::start_stop_building(PlayerImmovable & imm) {
 		if (upcast(ProductionSite, productionsite, &imm))
 			productionsite->set_stopped(!productionsite->is_stopped());
 }
+
+void Player::start_or_cancel_expedition(Warehouse & wh) {
+	if (&wh.owner() == this)
+		if (PortDock * pd = wh.get_portdock()) {
+			if (pd->expedition_started()) {
+				upcast(Game, game, &egbase());
+				pd->cancel_expedition(*game);
+			} else
+				pd->start_expedition();
+		}
+}
+
+void Player::military_site_set_soldier_preference(PlayerImmovable & imm, uint8_t m_soldier_preference)
+{
+	if (&imm.owner() == this)
+		if (upcast(MilitarySite, milsite, &imm))
+			milsite->set_soldier_preference(static_cast<MilitarySite::SoldierPreference>(m_soldier_preference));
+}
+
 
 /*
  * enhance this building, remove it, but give the constructionsite

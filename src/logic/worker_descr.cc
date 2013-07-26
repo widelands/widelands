@@ -47,7 +47,7 @@ Worker_Descr::Worker_Descr
 	m_helptext(global_s.get_string("help", "")),
 	m_ware_hotspot(global_s.get_Point("ware_hotspot", Point(0, 15))),
 	m_icon_fname(directory + "/menu.png"),
-	m_icon(NULL),
+	m_icon(nullptr),
 	m_buildable     (false),
 	m_level_experience(-1),
 	m_becomes (Ware_Index::Null())

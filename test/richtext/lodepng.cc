@@ -78,7 +78,7 @@ By default, this is not needed. If LODEPNG_COMPILE_ZLIB isn't defined, then only
 the two zlib related ones are needed.
 
 If needed, the functions must act as follows:
-*out must be NULL and *outsize must be 0 initially, and after the function is done,
+*out must be nullptr and *outsize must be 0 initially, and after the function is done,
 *out must point to the decompressed data, *outsize must be the size of it, and must
 be the size of the useful data in bytes, not the alloc size.
 */
@@ -153,7 +153,7 @@ static void uivector_cleanup(void* p)
 {
   ((uivector*)p)->size = ((uivector*)p)->allocsize = 0;
   myfree(((uivector*)p)->data);
-  ((uivector*)p)->data = NULL;
+  ((uivector*)p)->data = nullptr;
 }
 
 /*returns 1 if success, 0 if failure ==> nothing done*/
@@ -186,7 +186,7 @@ static unsigned uivector_resizev(uivector* p, size_t size, unsigned value)
 
 static void uivector_init(uivector* p)
 {
-  p->data = NULL;
+  p->data = nullptr;
   p->size = p->allocsize = 0;
 }
 
@@ -233,7 +233,7 @@ static void ucvector_cleanup(void* p)
 {
   ((ucvector*)p)->size = ((ucvector*)p)->allocsize = 0;
   myfree(((ucvector*)p)->data);
-  ((ucvector*)p)->data = NULL;
+  ((ucvector*)p)->data = nullptr;
 }
 
 /*returns 1 if success, 0 if failure ==> nothing done*/
@@ -270,7 +270,7 @@ static unsigned ucvector_resizev(ucvector* p, size_t size, unsigned char value)
 
 static void ucvector_init(ucvector* p)
 {
-  p->data = NULL;
+  p->data = nullptr;
   p->size = p->allocsize = 0;
 }
 
@@ -314,7 +314,7 @@ static unsigned string_resize(char** out, size_t size)
 /*init a {char*, size_t} pair for use as string*/
 static void string_init(char** out)
 {
-  *out = NULL;
+  *out = nullptr;
   string_resize(out, 0);
 }
 
@@ -322,7 +322,7 @@ static void string_init(char** out)
 static void string_cleanup(char** out)
 {
   myfree(*out);
-  *out = NULL;
+  *out = nullptr;
 }
 
 static void string_set(char** out, const char* in)
@@ -1010,7 +1010,7 @@ static unsigned getTreeInflateDynamic(HuffmanTree* tree_ll, HuffmanTree* tree_d,
     if(!bitlen_ll || !bitlen_d) ERROR_BREAK(83 /*alloc fail*/);
     for(i = 0; i < NUM_DEFLATE_CODE_SYMBOLS; i++) bitlen_ll[i] = 0;
     for(i = 0; i < NUM_DISTANCE_SYMBOLS; i++) bitlen_d[i] = 0;
-    
+
     /*i is the current symbol we're reading in the part that contains the code lengths of lit/len and dist codes*/
     i = 0;
     while(i < HLIT + HDIST)
@@ -1253,7 +1253,7 @@ static unsigned lodepng_inflatev(ucvector* out,
   size_t pos = 0; /*byte position in the out buffer*/
 
   unsigned error = 0;
-  
+
   (void)settings;
 
   while(!BFINAL)
@@ -1985,7 +1985,7 @@ static unsigned lodepng_deflatev(ucvector* out, const unsigned char* in, size_t 
   {
     unsigned char** out2 = &out->data;
     size_t* outsize = &out->size;
-    
+
     unsigned error = lodepng_custom_deflate(out2, outsize, in, insize, settings);
 
     if(!error) ucvector_init_buffer(out, *out2, *outsize);
@@ -2160,7 +2160,7 @@ unsigned lodepng_zlib_compress(unsigned char** out, size_t* outsize, const unsig
   else
   {
 #endif /*LODEPNG_CUSTOM_ZLIB_ENCODER == 1*/
-    /*initially, *out must be NULL and outsize 0, if you just give some random *out
+    /*initially, *out must be nullptr and outsize 0, if you just give some random *out
     that's pointing to a non allocated buffer, this'll crash*/
     ucvector deflatedata, outv;
     size_t i;
@@ -2705,8 +2705,8 @@ static unsigned LodePNGUnknownChunks_copy(LodePNGInfo* dest, const LodePNGInfo* 
 static void LodePNGText_init(LodePNGInfo* info)
 {
   info->text_num = 0;
-  info->text_keys = NULL;
-  info->text_strings = NULL;
+  info->text_keys = nullptr;
+  info->text_strings = nullptr;
 }
 
 static void LodePNGText_cleanup(LodePNGInfo* info)
@@ -2768,10 +2768,10 @@ unsigned lodepng_add_text(LodePNGInfo* info, const char* key, const char* str)
 static void LodePNGIText_init(LodePNGInfo* info)
 {
   info->itext_num = 0;
-  info->itext_keys = NULL;
-  info->itext_langtags = NULL;
-  info->itext_transkeys = NULL;
-  info->itext_strings = NULL;
+  info->itext_keys = nullptr;
+  info->itext_langtags = nullptr;
+  info->itext_transkeys = nullptr;
+  info->itext_strings = nullptr;
 }
 
 static void LodePNGIText_cleanup(LodePNGInfo* info)
@@ -3686,7 +3686,7 @@ static unsigned doAutoChooseColor(LodePNGColorMode* mode_out,
   }
 
   color_profile_cleanup(&profile);
-  
+
   if(mode_in->colortype == LCT_PALETTE && mode_out->colortype == LCT_PALETTE
      && mode_in->palettesize == mode_out->palettesize) {
     /*In this case keep the palette order of the input, so that the user can choose an optimal one*/
@@ -3702,7 +3702,7 @@ static unsigned doAutoChooseColor(LodePNGColorMode* mode_out,
     /*palette can keep its small amount of colors, as long as no indices use it*/
     mode_out->bitdepth = 8;
   }
-  
+
   return error;
 }
 

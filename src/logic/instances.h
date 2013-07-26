@@ -29,10 +29,10 @@
 #include <boost/noncopyable.hpp>
 #include <boost/unordered_map.hpp>
 
-#include "ref_cast.h"
-
-#include "log.h"
 #include "cmd_queue.h"
+#include "log.h"
+#include "port.h"
+#include "ref_cast.h"
 
 
 struct DirAnimations;
@@ -104,6 +104,7 @@ private:
  * \todo move this to another header??
  */
 extern Map_Object_Descr g_flag_descr;
+extern Map_Object_Descr g_portdock_descr;
 
 /**
  * \par Notes on Map_Object

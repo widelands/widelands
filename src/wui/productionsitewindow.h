@@ -33,7 +33,7 @@ struct ProductionSite_Window : public Building_Window {
 	Widelands::ProductionSite & productionsite() {
 		return ref_cast<Widelands::ProductionSite, Widelands::Building>(building());
 	}
-
+	void update_worker_table();
 protected:
 	virtual void think();
 	void evict_worker();

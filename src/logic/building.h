@@ -34,6 +34,7 @@
 #include <string>
 #include <cstring>
 #include <vector>
+#include <boost/signal.hpp>
 
 namespace UI {class Window;}
 struct BuildingHints;
@@ -183,8 +184,9 @@ public:
 	virtual bool burn_on_destroy();
 	virtual void destroy(Editor_Game_Base &);
 
-	void show_options(Interactive_GameBase &);
+	void show_options(Interactive_GameBase &, bool avoid_fastclick = false, Point pos = Point(- 1, - 1));
 	void hide_options();
+	void refresh_options(Interactive_GameBase &);
 
 	virtual bool fetch_from_flag(Game &);
 	virtual bool get_building_work(Game &, Worker &, bool success);
@@ -222,6 +224,7 @@ public:
 
 	void    add_worker(Worker &);
 	void remove_worker(Worker &);
+	mutable boost::signal<void ()> workers_changed;
 
 	void send_message
 		(Game & game,
@@ -238,8 +241,8 @@ protected:
 	virtual void cleanup(Editor_Game_Base &);
 	virtual void act(Game &, uint32_t data);
 
-	virtual void draw(const Editor_Game_Base &, RenderTarget &, FCoords, Point);
-	void draw_help(const Editor_Game_Base &, RenderTarget &, FCoords, Point);
+	virtual void draw(const Editor_Game_Base &, RenderTarget &, const FCoords&, const Point&);
+	void draw_help(const Editor_Game_Base &, RenderTarget &, const FCoords&, const Point&);
 
 	virtual void create_options_window
 		(Interactive_GameBase &, UI::Window * & registry)
@@ -267,6 +270,9 @@ protected:
 
 	/// Whether we see our vision_range area based on workers in the building
 	bool m_seeing;
+
+	// Signals connected for the option window
+	std::vector<boost::signals::connection> options_window_connections;
 };
 
 }

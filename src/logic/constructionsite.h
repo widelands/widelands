@@ -96,7 +96,7 @@ protected:
 	static void wares_queue_callback
 		(Game &, WaresQueue *, Ware_Index, void * data);
 
-	virtual void draw(const Editor_Game_Base &, RenderTarget &, FCoords, Point);
+	virtual void draw(const Editor_Game_Base &, RenderTarget &, const FCoords&, const Point&);
 
 private:
 	const Building_Descr * m_prev_building; // Building standing here earlier

@@ -21,17 +21,17 @@
 #ifndef UI_PANEL_H
 #define UI_PANEL_H
 
+#include <cassert>
+#include <cstring>
+#include <memory>
+#include <string>
+
 #include <boost/noncopyable.hpp>
-#include <boost/scoped_ptr.hpp>
 #include <boost/signals/trackable.hpp>
 
 #include "point.h"
 
 #include <SDL_keyboard.h>
-
-#include <cassert>
-#include <string>
-#include <cstring>
 
 class RenderTarget;
 class Image;
@@ -189,6 +189,7 @@ struct Panel : boost::signals::trackable, boost::noncopyable {
 		(Uint8 state, int32_t x, int32_t y, int32_t xdiff, int32_t ydiff);
 	virtual bool handle_key(bool down, SDL_keysym code);
 	virtual bool handle_alt_drag(int32_t x, int32_t y);
+	virtual bool handle_tooltip();
 
 	/// \returns whether a certain given is currently down.
 	///
@@ -242,7 +243,7 @@ protected:
 
 	static void play_click();
 
-	static void draw_tooltip(RenderTarget &, const std::string & text);
+	static bool draw_tooltip(RenderTarget &, const std::string & text);
 
 private:
 	void check_child_death();
@@ -259,6 +260,7 @@ private:
 	bool do_mousemove
 		(const Uint8 state, int32_t x, int32_t y, int32_t xdiff, int32_t ydiff);
 	bool do_key(bool down, SDL_keysym code);
+	bool do_tooltip();
 
 	static Panel * ui_trackmouse(int32_t & x, int32_t & y);
 	static void ui_mousepress  (const Uint8 button, int32_t x, int32_t y);
@@ -275,7 +277,7 @@ private:
 	Panel * _focus; //  keyboard focus
 
 	uint32_t _flags;
-	boost::scoped_ptr<const Image> _cache;
+	std::unique_ptr<const Image> _cache;
 	bool _needdraw;
 
 	/**

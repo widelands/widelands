@@ -22,6 +22,7 @@
 
 #include "attackable.h"
 #include "building.h"
+#include "economy/request.h"
 #include "soldiercontrol.h"
 #include "wareworker.h"
 
@@ -198,7 +199,26 @@ public:
 	void set_ware_policy(Ware_Index ware, StockPolicy policy);
 	void set_worker_policy(Ware_Index ware, StockPolicy policy);
 
+	// PortDock stuff
+	struct Expedition_Worker {
+		Expedition_Worker(Request * const wr = 0, Worker * const w = 0) : worker_request(wr), worker(w) {}
+		Request * worker_request;
+		Worker  * worker;
+	};
 	PortDock * get_portdock() const {return m_portdock;}
+	size_t size_of_expedition_wares_queue() {return m_expedition_wares.size();}
+	WaresQueue * get_wares_queue(uint8_t num) {return m_expedition_wares.at(num);}
+	virtual WaresQueue & waresqueue(Ware_Index);
+	std::vector<WaresQueue *> & get_wares_queue_vector() {return m_expedition_wares;}
+	std::vector<Expedition_Worker *> & get_expedition_workers() {return m_expedition_workers;}
+	/// gets called, if an expedition worker arrives
+	static void request_expedition_worker_callback
+		(Game & g, Request & r, Ware_Index, Worker * w, PlayerImmovable & pi)
+	{
+		Warehouse & wh = ref_cast<Warehouse, PlayerImmovable>(pi);
+		wh.handle_expedition_worker_callback(g, r, w);
+	}
+	void handle_expedition_worker_callback(Game &, Request &, Worker *);
 
 	virtual void log_general_info(const Editor_Game_Base &);
 
@@ -251,7 +271,12 @@ private:
 	uint32_t m_next_stock_remove_act;
 
 	std::vector<PlannedWorkers> m_planned_workers;
+
+	// PortDock stuff
 	PortDock * m_portdock;
+	std::vector<WaresQueue *> m_expedition_wares;
+	std::vector<Expedition_Worker *> m_expedition_workers;
+
 };
 
 }

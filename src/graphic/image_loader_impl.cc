@@ -33,7 +33,7 @@ using namespace std;
 
 Surface* ImageLoaderImpl::load(const string& fname) const {
 	FileRead fr;
-	log("Loading image %s.\n", fname.c_str());
+	//log("Loading image %s.\n", fname.c_str());
 
 	fr.fastOpen(*g_fs, fname.c_str());
 	SDL_Surface* sdlsurf = IMG_Load_RW(SDL_RWFromMem(fr.Data(0), fr.GetSize()), 1);

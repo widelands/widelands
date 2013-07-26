@@ -607,6 +607,7 @@ void DiscreteSlider::set_labels(const std::vector<std::string> labels_in) {
 void DiscreteSlider::layout() {
 	uint32_t w = get_w();
 	uint32_t h = get_h();
+	assert(labels.size());
 	slider.set_pos(Point(w / (2 * labels.size()) - slider.m_cursor_size / 2, 0));
 	slider.set_size
 		(w - (w / labels.size()) + slider.m_cursor_size,

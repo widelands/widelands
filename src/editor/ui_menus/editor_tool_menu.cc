@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2009, 2011 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2009, 2011, 2013 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -102,8 +102,8 @@ void Editor_Tool_Menu::changed_to() {
 	Editor_Interactive & parent =
 		ref_cast<Editor_Interactive, UI::Panel>(*get_parent());
 
-	Editor_Tool                * current_tool_pointer = NULL;
-	UI::UniqueWindow::Registry * current_registry_pointer = NULL;
+	Editor_Tool                * current_tool_pointer = nullptr;
+	UI::UniqueWindow::Registry * current_registry_pointer = nullptr;
 	switch (n) {
 	case 0:
 		current_tool_pointer     = &parent.tools.increase_height;
@@ -192,6 +192,8 @@ void Editor_Tool_Menu::changed_to() {
 					parent.tools.increase_resources,
 					*current_registry_pointer);
 				break;
+			default:
+				assert(false);
 			}
 	}
 }

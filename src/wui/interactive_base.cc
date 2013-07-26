@@ -23,11 +23,11 @@
 #include "constants.h"
 #include "economy/flag.h"
 #include "economy/road.h"
-#include "graphic/font.h"
-#include "graphic/font_handler.h"
 #include "game_chat_menu.h"
 #include "game_debug_ui.h"
 #include "gamecontroller.h"
+#include "graphic/font_handler1.h"
+#include "graphic/rendertarget.h"
 #include "interactive_player.h"
 #include "logic/checkstep.h"
 #include "logic/cmd_queue.h"
@@ -36,6 +36,7 @@
 #include "logic/maptriangleregion.h"
 #include "logic/player.h"
 #include "logic/productionsite.h"
+#include "logic/maphollowregion.h"
 #include "mapviewpixelconstants.h"
 #include "mapviewpixelfunctions.h"
 #include "minimap.h"
@@ -43,6 +44,7 @@
 #include "profile/profile.h"
 #include "quicknavigation.h"
 #include "scripting/scripting.h"
+#include "text_layout.h"
 #include "upcast.h"
 #include "wlapplication.h"
 
@@ -59,7 +61,7 @@ using Widelands::TCoords;
 struct InteractiveBaseInternals {
 	MiniMap * mm;
 	MiniMap::Registry minimap;
-	boost::scoped_ptr<QuickNavigation> quicknavigation;
+	std::unique_ptr<QuickNavigation> quicknavigation;
 
 	InteractiveBaseInternals(QuickNavigation * qnav)
 	:
@@ -117,6 +119,15 @@ Interactive_Base::Interactive_Base
 	//  Having this in the initializer list (before Sys_InitGraphics) will give
 	//  funny results.
 	m_sel.pic = g_gr->images().get("pics/fsel.png");
+
+	// Load workarea images.
+	// Start at idx 0 for 2 enhancements, idx 3 for 1, idx 5 if none
+	workarea_pics[0] = g_gr->images().get("pics/workarea123.png");
+	workarea_pics[1] = g_gr->images().get("pics/workarea23.png");
+	workarea_pics[2] = g_gr->images().get("pics/workarea3.png");
+	workarea_pics[3] = g_gr->images().get("pics/workarea12.png");
+	workarea_pics[4] = g_gr->images().get("pics/workarea2.png");
+	workarea_pics[5] = g_gr->images().get("pics/workarea1.png");
 
 	m_label_speed.set_visible(false);
 	m_label_speed_shadow.set_visible(false);
@@ -228,6 +239,60 @@ void Interactive_Base::show_buildhelp(bool t) {
 	egbase().map().overlay_manager().show_buildhelp(t);
 }
 
+// Show the given workareas at the given coords and returns the overlay job id associated
+Overlay_Manager::Job_Id Interactive_Base::show_work_area
+	(const Workarea_Info & workarea_info, Widelands::Coords coords)
+{
+	uint8_t workareas_nrs = workarea_info.size();
+	Workarea_Info::size_type wa_index;
+	switch (workareas_nrs) {
+		case 0: return Overlay_Manager::Job_Id::Null(); break; // no workarea
+		case 1: wa_index = 5; break;
+		case 2: wa_index = 3; break;
+		case 3: wa_index = 0; break;
+		default: assert(false); break;
+	}
+	Widelands::Map & map = m_egbase.map();
+	Overlay_Manager & overlay_manager = map.overlay_manager();
+	Overlay_Manager::Job_Id job_id = overlay_manager.get_a_job_id();
+
+	Widelands::HollowArea<> hollow_area(Widelands::Area<>(coords, 0), 0);
+
+	// Iterate through the work areas, from building to its enhancement
+	Workarea_Info::const_iterator it = workarea_info.begin();
+	for (; it != workarea_info.end(); ++it) {
+		assert(wa_index < NUMBER_OF_WORKAREA_PICS);
+		hollow_area.radius = it->first;
+		Widelands::MapHollowRegion<> mr(map, hollow_area);
+		do
+			overlay_manager.register_overlay
+				(mr.location(),
+					workarea_pics[wa_index],
+					0,
+					Point::invalid(),
+					job_id);
+		while (mr.advance(map));
+		wa_index++;
+		hollow_area.hole_radius = hollow_area.radius;
+	}
+	return job_id;
+#if 0
+		//  This is debug output.
+		//  Improvement suggestion: add to sign explanation window instead.
+		container_iterate_const(Workarea_Info, workarea_info, i) {
+			log("Radius: %i\n", i.current->first);
+			container_iterate_const(std::set<std::string>, i.current->second, j)
+				log("        %s\n", j.current->c_str());
+		}
+#endif
+}
+
+void Interactive_Base::hide_work_area(Overlay_Manager::Job_Id job_id) {
+	Widelands::Map & map = m_egbase.map();
+	Overlay_Manager & overlay_manager = map.overlay_manager();
+	overlay_manager.remove_overlay(job_id);
+}
+
 
 /**
  * Called by \ref Game::postload at the end of the game loading
@@ -332,45 +397,25 @@ void Interactive_Base::think()
 Draw debug overlay when appropriate.
 ===============
 */
-void Interactive_Base::draw_overlay(RenderTarget & dst) {
-	if
-		(get_display_flag(dfDebug)
-		 or
-		 not dynamic_cast<const Game *>(&egbase()))
-	{
-		//  show sel coordinates
-		char buf[100];
-
-		snprintf(buf, sizeof(buf), "%3i %3i", m_sel.pos.node.x, m_sel.pos.node.y);
-		UI::g_fh->draw_text_shadow
-			(dst, UI::TextStyle::ui_big(), Point(5, 5), buf, UI::Align_Left);
-		assert(m_sel.pos.triangle.t < 2);
-		const char * const triangle_string[] = {"down", "right"};
-		snprintf
-			(buf, sizeof(buf),
-			 "%3i %3i %s",
-			 m_sel.pos.triangle.x, m_sel.pos.triangle.y,
-			 triangle_string[m_sel.pos.triangle.t]);
-		UI::g_fh->draw_text_shadow
-			(dst, UI::TextStyle::ui_big(),
-			 Point(5, 25),
-			 buf, UI::Align_Left);
+void Interactive_Base::draw_overlay(RenderTarget& dst) {
+	// Blit node information when in debug mode.
+	if (get_display_flag(dfDebug) or not dynamic_cast<const Game*>(&egbase())) {
+		static format node_format("%3i %3i");
+		const std::string node_text = as_uifont
+			((node_format % m_sel.pos.node.x % m_sel.pos.node.y).str(), UI_FONT_SIZE_BIG);
+		dst.blit(Point(5, 5), UI::g_fh1->render(node_text), CM_Normal, UI::Align_Left);
 	}
 
+	// Blit FPS when in debug mode.
 	if (get_display_flag(dfDebug)) {
-		//  show FPS
-		char buffer[100];
-		snprintf
-			(buffer, sizeof(buffer),
-			 "%5.1f fps (avg: %5.1f fps)",
-			 1000.0 / m_frametime, 1000.0 / (m_avg_usframetime / 1000));
-		UI::g_fh->draw_text_shadow
-			(dst, UI::TextStyle::ui_big(),
-			 Point(85, 5),
-			 buffer, UI::Align_Left);
+		static format fps_format("%5.1f fps (avg: %5.1f fps)");
+		const std::string fps_text = as_uifont
+			((fps_format %
+			  (1000.0 / m_frametime) % (1000.0 / (m_avg_usframetime / 1000)))
+			 .str(), UI_FONT_SIZE_BIG);
+		dst.blit(Point(90, 5), UI::g_fh1->render(fps_text), CM_Normal, UI::Align_Left);
 	}
 }
-
 
 /** Interactive_Base::mainview_move(int32_t x, int32_t y)
  *

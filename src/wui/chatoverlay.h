@@ -22,8 +22,6 @@
 
 #include "ui_basic/panel.h"
 
-#include <boost/scoped_ptr.hpp>
-
 struct ChatProvider;
 
 /**
@@ -41,7 +39,7 @@ struct ChatOverlay : public UI::Panel {
 
 private:
 	struct Impl;
-	boost::scoped_ptr<Impl> m;
+	std::unique_ptr<Impl> m;
 };
 
 #endif // CHATOVERLAY_H

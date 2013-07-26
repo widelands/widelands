@@ -34,6 +34,7 @@
 #include "player.h"
 #include "profile/profile.h"
 #include "graphic/rendertarget.h"
+#include "ship.h"
 #include "soldier.h"
 #include "tribe.h"
 #include "upcast.h"
@@ -54,8 +55,11 @@ namespace Widelands {
  */
 uint32_t Bob::Descr::vision_range() const
 {
-	if (m_owner_tribe)
+	if (m_owner_tribe) {
+		if (upcast(const Ship_Descr, ship, this))
+			return ship->vision_range();
 		return m_owner_tribe->get_bob_vision_range();
+	}
 
 	return 0;
 }
@@ -857,7 +861,7 @@ Point Bob::calc_drawpos(const Editor_Game_Base & game, const Point pos) const
 /// Note that the current node is actually the node that we are walking to, not
 /// the the one that we start from.
 void Bob::draw
-	(const Editor_Game_Base & egbase, RenderTarget & dst, Point const pos) const
+	(const Editor_Game_Base & egbase, RenderTarget & dst, const Point& pos) const
 {
 	if (m_anim)
 		dst.drawanim
@@ -1013,7 +1017,7 @@ void Bob::log_general_info(const Editor_Game_Base & egbase)
 	molog("ActScheduled: %s\n", m_actscheduled ? "true" : "false");
 	molog
 		("Animation: %s\n",
-		 m_anim ? descr().get_animation_name(m_anim).c_str() : "<none>");
+		 m_anim ? descr().get_animation_name(m_anim).c_str() : "\\<none\\>");
 
 	molog("AnimStart: %i\n", m_animstart);
 	molog("WalkingDir: %i\n", m_walking);

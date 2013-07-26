@@ -5,7 +5,7 @@ won_game = {
 
 lost_game = {
   title = _ "You are defeated!",
-  body = _ "You have nothing to command left. If you want, you may continue as spectator."
+  body = _ "You lost your last warehouse and are therefore defeated. You may continue as spectator if you want."
 }
 
 won_game_over = {
@@ -50,6 +50,7 @@ game_status_territoral_lord = {
 }
 
 game_status_territoral_lord_time = {
-  end_in = _ "game will end in %i minutes.",
+  end_in = _ "The game will end in %i minutes.",
+  end_in_or = _ "Otherwise the game will end in %i minutes.",
   land = _ "%s %s %i%% of the land (%i of %i)."
 }

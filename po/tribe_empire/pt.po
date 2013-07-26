@@ -7,19 +7,19 @@ msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2013-03-09 16:57+0000\n"
+"POT-Creation-Date: 2013-06-16 09:11+0000\n"
 "PO-Revision-Date: 2011-08-14 10:40+0000\n"
 "Last-Translator: trewe <Unknown>\n"
 "Language-Team: Portuguese <pt@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-03-10 04:35+0000\n"
-"X-Generator: Launchpad (build 16523)\n"
+"X-Launchpad-Export-Date: 2013-06-17 05:12+0000\n"
+"X-Generator: Launchpad (build 16667)\n"
 
-#: ../../tribes/empire/arena/conf:13
-#: ../../tribes/empire/colosseum/conf:27
-#: ../../tribes/empire/trainingscamp/conf:38
+#: ../../tribes/empire/arena/conf:14
+#: ../../tribes/empire/colosseum/conf:28
+#: ../../tribes/empire/trainingscamp/conf:39
 msgid "Sleep"
 msgstr "Hibernar"
 
@@ -1119,11 +1119,11 @@ msgid ""
 "by the charcoal burner, the toolsmithy and the sawmill."
 msgstr ""
 
-#: ../../tribes/empire/trainingscamp/conf:39
+#: ../../tribes/empire/trainingscamp/conf:40
 msgid "Upgrade soldier attack 0"
 msgstr "Treinar soldado ataque 0"
 
-#: ../../tribes/empire/trainingscamp/conf:40
+#: ../../tribes/empire/trainingscamp/conf:41
 msgid ""
 "Upgrade soldier attack 0 (only for compatibility with old savegames "
 "(build13))"
@@ -1131,11 +1131,11 @@ msgstr ""
 "Treinar soldado ataque 0 (só usado para compatibilidade com jogos guardados "
 "em versões antigas (build13))"
 
-#: ../../tribes/empire/trainingscamp/conf:41
+#: ../../tribes/empire/trainingscamp/conf:42
 msgid "Upgrade soldier attack 1"
 msgstr "Treinar soldado ataque 1"
 
-#: ../../tribes/empire/trainingscamp/conf:42
+#: ../../tribes/empire/trainingscamp/conf:43
 msgid ""
 "Upgrade soldier attack 1 (only for compatibility with old savegames "
 "(build13))"
@@ -1143,11 +1143,11 @@ msgstr ""
 "Treinar soldado ataque 1 (só usado para compatibilidade com jogos guardados "
 "em versões antigas (build13))"
 
-#: ../../tribes/empire/trainingscamp/conf:43
+#: ../../tribes/empire/trainingscamp/conf:44
 msgid "Upgrade soldier attack 2"
 msgstr "Treinar soldado ataque 2"
 
-#: ../../tribes/empire/trainingscamp/conf:44
+#: ../../tribes/empire/trainingscamp/conf:45
 msgid ""
 "Upgrade soldier attack 2 (only for compatibility with old savegames "
 "(build13))"
@@ -1155,11 +1155,11 @@ msgstr ""
 "Treinar soldado ataque 2 (só usado para compatibilidade com jogos guardados "
 "em versões antigas (build13))"
 
-#: ../../tribes/empire/trainingscamp/conf:45
+#: ../../tribes/empire/trainingscamp/conf:46
 msgid "Upgrade soldier attack 3"
 msgstr "Treinar soldado ataque 3"
 
-#: ../../tribes/empire/trainingscamp/conf:46
+#: ../../tribes/empire/trainingscamp/conf:47
 msgid ""
 "Upgrade soldier attack 3 (only for compatibility with old savegames "
 "(build13))"
@@ -1167,35 +1167,35 @@ msgstr ""
 "Treinar soldado ataque 3 (só usado para compatibilidade com jogos guardados "
 "em versões antigas (build13))"
 
-#: ../../tribes/empire/arena/conf:14
-#: ../../tribes/empire/colosseum/conf:28
+#: ../../tribes/empire/arena/conf:15
+#: ../../tribes/empire/colosseum/conf:29
 msgid "Upgrade soldier evade 0"
 msgstr "Treinar soldado evasão 0"
 
-#: ../../tribes/empire/arena/conf:15
-#: ../../tribes/empire/colosseum/conf:29
+#: ../../tribes/empire/arena/conf:16
+#: ../../tribes/empire/colosseum/conf:30
 msgid ""
 "Upgrade soldier evade 0 (only for compatibility with old savegames (build13))"
 msgstr ""
 "Treinar soldado evasão 0 (só usado para compatibilidade com jogos guardados "
 "em versões antigas (build13))"
 
-#: ../../tribes/empire/colosseum/conf:30
+#: ../../tribes/empire/colosseum/conf:31
 msgid "Upgrade soldier evade 1"
 msgstr "Treinar soldado evasão 1"
 
-#: ../../tribes/empire/colosseum/conf:31
+#: ../../tribes/empire/colosseum/conf:32
 msgid ""
 "Upgrade soldier evade 1 (only for compatibility with old savegames (build13))"
 msgstr ""
 "Treinar soldado evasão 1 (só usado para compatibilidade com jogos guardados "
 "em versões antigas (build13))"
 
-#: ../../tribes/empire/trainingscamp/conf:47
+#: ../../tribes/empire/trainingscamp/conf:48
 msgid "Upgrade soldier hitpoints 0"
 msgstr "Treinar soldado resistência 0"
 
-#: ../../tribes/empire/trainingscamp/conf:48
+#: ../../tribes/empire/trainingscamp/conf:49
 msgid ""
 "Upgrade soldier hitpoints 0 (only for compatibility with old savegames "
 "(build13))"
@@ -1203,11 +1203,11 @@ msgstr ""
 "Treinar soldado resistência 0 (só usado para compatibilidade com jogos "
 "guardados em versões antigas (build13))"
 
-#: ../../tribes/empire/trainingscamp/conf:49
+#: ../../tribes/empire/trainingscamp/conf:50
 msgid "Upgrade soldier hitpoints 1"
 msgstr "Treinar soldado resistência 1"
 
-#: ../../tribes/empire/trainingscamp/conf:50
+#: ../../tribes/empire/trainingscamp/conf:51
 msgid ""
 "Upgrade soldier hitpoints 1 (only for compatibility with old savegames "
 "(build13))"
@@ -1215,11 +1215,11 @@ msgstr ""
 "Treinar soldado resistência 1 (só usado para compatibilidade com jogos "
 "guardados em versões antigas (build13))"
 
-#: ../../tribes/empire/trainingscamp/conf:51
+#: ../../tribes/empire/trainingscamp/conf:52
 msgid "Upgrade soldier hitpoints 2"
 msgstr "Treinar soldado resistência 2"
 
-#: ../../tribes/empire/trainingscamp/conf:52
+#: ../../tribes/empire/trainingscamp/conf:53
 msgid ""
 "Upgrade soldier hitpoints 2 (only for compatibility with old savegames "
 "(build13))"
@@ -1227,11 +1227,11 @@ msgstr ""
 "Treinar soldado resistência 2 (só usado para compatibilidade com jogos "
 "guardados em versões antigas (build13))"
 
-#: ../../tribes/empire/trainingscamp/conf:53
+#: ../../tribes/empire/trainingscamp/conf:54
 msgid "Upgrade soldier hitpoints 3"
 msgstr "Treinar soldado resistência 3"
 
-#: ../../tribes/empire/trainingscamp/conf:54
+#: ../../tribes/empire/trainingscamp/conf:55
 msgid ""
 "Upgrade soldier hitpoints 3 (only for compatibility with old savegames "
 "(build13))"

@@ -23,6 +23,7 @@
 #include "editor_tool.h"
 #include "logic/map.h"
 #include "logic/mapfringeregion.h"
+#include "logic/mapregion.h"
 #include "wui/overlay_manager.h"
 #include <editor/editorinteractive.h>
 
@@ -60,21 +61,28 @@ Editor_Unset_Port_Space_Tool::Editor_Unset_Port_Space_Tool()
 int32_t Editor_Set_Port_Space_Tool::handle_click_impl
 	(Map & map,
 	Widelands::Node_and_Triangle<> const center,
-	Editor_Interactive &,  Editor_Action_Args &)
+	Editor_Interactive &,  Editor_Action_Args & args)
 {
 	assert(0 <= center.node.x);
 	assert(center.node.x < map.get_width());
 	assert(0 <= center.node.y);
 	assert(center.node.y < map.get_height());
 
-	//  check if field is valid
-	if (Editor_Tool_Set_Port_Space_Callback(map.get_fcoords(center.node), &map, 0)) {
-		map.set_port_space(map.get_fcoords(center.node), true);
-		Area<FCoords> a(map.get_fcoords(center.node), 0);
-		map.recalc_for_field_area(a);
-		return 1;
-	}
-	return 0;
+	uint32_t nr = 0;
+
+	Widelands::MapRegion<Widelands::Area<Widelands::FCoords> > mr
+		(map, Widelands::Area<Widelands::FCoords>(map.get_fcoords(center.node), args.sel_radius));
+	do {
+		//  check if field is valid
+		if (Editor_Tool_Set_Port_Space_Callback(mr.location(), &map, 0)) {
+			map.set_port_space(mr.location(), true);
+			Area<FCoords> a(mr.location(), 0);
+			map.recalc_for_field_area(a);
+			++nr;
+		}
+	} while (mr.advance(map));
+
+	return nr;
 }
 
 int32_t Editor_Set_Port_Space_Tool::handle_undo_impl
@@ -88,24 +96,30 @@ int32_t Editor_Set_Port_Space_Tool::handle_undo_impl
 int32_t Editor_Unset_Port_Space_Tool::handle_click_impl
 	(Map & map,
 	Node_and_Triangle<> const center,
-	Editor_Interactive &, Editor_Action_Args &)
+	Editor_Interactive &, Editor_Action_Args & args)
 {
 	assert(0 <= center.node.x);
 	assert(center.node.x < map.get_width());
 	assert(0 <= center.node.y);
 	assert(center.node.y < map.get_height());
 
-	//  check if field is valid
-	//  check if field is valid
-	if (Editor_Tool_Set_Port_Space_Callback(map.get_fcoords(center.node), &map, 0))
-	{
-		map.set_port_space(map.get_fcoords(center.node), false);
-		Area<FCoords> a(map.get_fcoords(center.node), 0);
-		map.recalc_for_field_area(a);
-		return 1;
-	}
-	return 0;
+	uint32_t nr = 0;
+
+	Widelands::MapRegion<Widelands::Area<Widelands::FCoords> > mr
+		(map, Widelands::Area<Widelands::FCoords>(map.get_fcoords(center.node), args.sel_radius));
+	do {
+		//  check if field is valid
+		if (Editor_Tool_Set_Port_Space_Callback(mr.location(), &map, 0)) {
+			map.set_port_space(mr.location(), false);
+			Area<FCoords> a(mr.location(), 0);
+			map.recalc_for_field_area(a);
+			++nr;
+		}
+	} while (mr.advance(map));
+
+	return nr;
 }
+
 
 int32_t Editor_Unset_Port_Space_Tool::handle_undo_impl
 	(Map & map, Node_and_Triangle< Coords > center,

@@ -17,7 +17,6 @@
  *
  */
 
-#ifdef USE_OPENGL
 #ifndef WIDELANDS_GAMERENDERER_GL_H
 #define WIDELANDS_GAMERENDERER_GL_H
 
@@ -129,4 +128,3 @@ private:
 };
 
 #endif // WIDELANDS_GAMERENDERER_GL_H
-#endif // USE_OPENGL
