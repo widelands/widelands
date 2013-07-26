@@ -26,6 +26,7 @@
 #include "logic/message_queue.h"
 #include "logic/player.h"
 #include "logic/playercommand.h"
+#include "logic/instances.h"
 
 #include "container_iterate.h"
 #include "timestring.h"
@@ -157,7 +158,23 @@ void GameMessageMenu::think()
 	// Update messages in the list and remove messages
 	// that should no longer be shown
 	for (uint32_t j = list->size(); j; --j) {
-		if (Message const * const message = mq[Message_Id((*list)[j - 1])]) {
+		Message_Id m_id((*list)[j - 1]);
+		if (Message const * const message = mq[m_id]) {
+			// Check if the serialed object is still present,
+			// otherwise archive
+			if
+				(message->status() != Message::Archived &&
+				 message->serial() != 0)
+			{
+				Widelands::Map_Object* mo =
+					iplayer().get_game()->objects().get_object(message->serial());
+				if (mo == nullptr) {
+					Widelands::Game* game = iplayer().get_game();
+					game->send_player_command
+						(*new Widelands::Cmd_MessageSetStatusArchived
+					 	(game->get_gametime(), iplayer().player_number(), m_id));
+				}
+			}
 			if ((mode == Archive) != (message->status() == Message::Archived)) {
 				list->remove(j - 1);
 			} else {

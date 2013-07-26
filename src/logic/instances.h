@@ -346,7 +346,7 @@ struct Object_Manager : boost::noncopyable {
 
 	Map_Object * get_object(Serial const serial) const {
 		const objmap_t::const_iterator it = m_objects.find(serial);
-		return it != m_objects.end() ? it->second : 0;
+		return it != m_objects.end() ? it->second : nullptr;
 	}
 
 	void insert(Map_Object *);

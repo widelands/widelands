@@ -26,7 +26,7 @@
 
 namespace Widelands {
 
-#define CURRENT_PACKET_VERSION 1
+#define CURRENT_PACKET_VERSION 2
 #define PLAYERDIRNAME_TEMPLATE "player/%u"
 #define FILENAME_TEMPLATE PLAYERDIRNAME_TEMPLATE "/messages"
 #define FILENAME_SIZE 19
@@ -45,8 +45,9 @@ void Map_Players_Messages_Data_Packet::Read
 			snprintf(filename, sizeof(filename), FILENAME_TEMPLATE, p);
 			Profile prof;
 			try {prof.read(filename, 0, fs);} catch (...) {continue;}
-			prof.get_safe_section("global").get_positive
-				("packet_version", CURRENT_PACKET_VERSION);
+			uint32_t paquet_version =
+				prof.get_safe_section("global").get_positive
+					("packet_version", CURRENT_PACKET_VERSION);
 			MessageQueue & messages = player->messages();
 
 			{
@@ -119,7 +120,7 @@ void Map_Players_Messages_Data_Packet::Read
 								 sent + duration, sent, duration, gametime);
 					}
 					Message::Status status = Message::Archived; //  default status
-					if (char const * const status_string = s->get_string("status"))
+					if (char const * const status_string = s->get_string("status")) {
 						try {
 							if      (not strcmp(status_string, "new"))
 								status = Message::New;
@@ -132,6 +133,12 @@ void Map_Players_Messages_Data_Packet::Read
 						} catch (const _wexception & e) {
 							throw game_data_error("status: %s", e.what());
 						}
+					}
+					uint32_t serial = 0;
+					if (paquet_version >= 2) {
+						serial = s->get_int("serial");
+					}
+					
 					messages.add_message
 						(*new Message
 						 	(s->get_string     ("sender", ""),
@@ -140,6 +147,7 @@ void Map_Players_Messages_Data_Packet::Read
 						 	 s->get_name       (),
 						 	 s->get_safe_string("body"),
 						 	 s->get_Coords     ("position", extent, Coords::Null()),
+							 serial,
 						 	 status));
 					//  Expiration is scheduled for all messages (with finite
 					//  duration) after the command queue has been loaded (in
@@ -188,6 +196,7 @@ throw (_wexception)
 					 "\tbody: %s\n"
 					 "\tposition: (%i, %i)\n"
 					 "\tstatus: %s\n",
+					 "\tserial: %d\n",
 					 message.sent(), message.duration(),
 					 message.sent() + message.duration(), egbase.get_gametime(),
 					 message.sender().c_str(), message.title().c_str(),
@@ -195,7 +204,8 @@ throw (_wexception)
 					 message.position().x, message.position().y,
 					 message.status() == Message::New      ? "new"      :
 					 message.status() == Message::Read     ? "read"     :
-					 message.status() == Message::Archived ? "archived" : "ERROR");
+					 message.status() == Message::Archived ? "archived" : "ERROR",
+					 message.serial());
 			assert
 				(message.duration() == Forever() or
 				 static_cast<uint32_t>(egbase.get_gametime())
@@ -222,6 +232,7 @@ throw (_wexception)
 				break;
 			case Message::Archived: //  The default status. Do not write.
 				break;
+			s.set_int       ("serial",    message.serial());
 			default:
 				assert(false);
 			}
