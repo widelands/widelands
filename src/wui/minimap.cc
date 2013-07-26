@@ -17,15 +17,15 @@
  *
  */
 
-#include "minimap.h"
+#include "wui/minimap.h"
 
 #include "graphic/graphic.h"
 #include "graphic/render/minimaprenderer.h"
 #include "graphic/rendertarget.h"
 #include "i18n.h"
-#include "interactive_player.h"
 #include "logic/map.h"
-#include "mapviewpixelconstants.h"
+#include "wui/interactive_player.h"
+#include "wui/mapviewpixelconstants.h"
 
 
 MiniMap::View::View

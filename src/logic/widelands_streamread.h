@@ -23,8 +23,8 @@
 #include <cassert>
 
 #include "io/streamread.h"
-#include "widelands.h"
-#include "widelands_geometry.h"
+#include "logic/widelands.h"
+#include "logic/widelands_geometry.h"
 
 namespace Widelands {
 

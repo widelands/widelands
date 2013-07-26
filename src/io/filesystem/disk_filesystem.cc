@@ -17,7 +17,7 @@
  *
  */
 
-#include "disk_filesystem.h"
+#include "io/filesystem/disk_filesystem.h"
 
 #include <cassert>
 #include <cerrno>
@@ -40,12 +40,12 @@
 #endif
 
 #include "compile_diagnostics.h"
-#include "filesystem_exceptions.h"
+#include "io/filesystem/filesystem_exceptions.h"
+#include "io/filesystem/zip_filesystem.h"
 #include "io/streamread.h"
 #include "io/streamwrite.h"
 #include "log.h"
 #include "wexception.h"
-#include "zip_filesystem.h"
 
 struct FileSystemPath: public std::string
 {

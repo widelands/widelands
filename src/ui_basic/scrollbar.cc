@@ -17,13 +17,13 @@
  *
  */
 
-#include "scrollbar.h"
+#include "ui_basic/scrollbar.h"
 
 #include <algorithm>
 
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
-#include "mouse_constants.h"
+#include "ui_basic/mouse_constants.h"
 #include "wlapplication.h"
 
 namespace UI {

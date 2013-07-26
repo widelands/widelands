@@ -17,7 +17,7 @@
  *
  */
 
-#include "editor_place_immovable_tool.h"
+#include "editor/tools/editor_place_immovable_tool.h"
 
 #include <string>
 

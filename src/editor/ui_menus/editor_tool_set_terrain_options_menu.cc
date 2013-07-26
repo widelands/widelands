@@ -17,7 +17,7 @@
  *
  */
 
-#include "editor_tool_set_terrain_options_menu.h"
+#include "editor/ui_menus/editor_tool_set_terrain_options_menu.h"
 
 #include <SDL_keysym.h>
 #include <boost/foreach.hpp>

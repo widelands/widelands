@@ -24,15 +24,15 @@
 #include <vector>
 
 #include "HTMLReferences.h"
-#include "bob.h"
-#include "building.h"
+#include "logic/bob.h"
+#include "logic/building.h"
 #include "descr_maintainer.h"
 #include "graphic/animation.h"
-#include "immovable.h"
+#include "logic/immovable.h"
 #include "io/filewrite.h"
-#include "item_ware_descr.h"
+#include "logic/item_ware_descr.h"
 #include "profile/profile.h"
-#include "worker.h"
+#include "logic/worker.h"
 
 namespace Widelands {
 

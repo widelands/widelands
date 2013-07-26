@@ -24,8 +24,8 @@
 #include "economy/portdock.h"
 #include "economy/transfer.h"
 #include "economy/ware_instance.h"
-#include "productionsite.h"
-#include "worker_descr.h"
+#include "logic/productionsite.h"
+#include "logic/worker_descr.h"
 
 namespace Widelands {
 class Building;

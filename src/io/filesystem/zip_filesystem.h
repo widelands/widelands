@@ -26,7 +26,7 @@
 #include <minizip/unzip.h>
 #include <minizip/zip.h>
 
-#include "filesystem.h"
+#include "io/filesystem/filesystem.h"
 #include "port.h"
 
 class ZipFilesystem : public FileSystem {

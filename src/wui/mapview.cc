@@ -17,20 +17,20 @@
  *
  */
 
-#include "mapview.h"
+#include "wui/mapview.h"
 
 #include "graphic/graphic.h"
 #include "graphic/render/gamerenderer_gl.h"
 #include "graphic/render/gamerenderer_sdl.h"
 #include "graphic/rendertarget.h"
-#include "interactive_base.h"
-#include "interactive_player.h"
 #include "logic/map.h"
 #include "logic/player.h"
-#include "mapviewpixelfunctions.h"
-#include "overlay_manager.h"
 #include "upcast.h"
 #include "wlapplication.h"
+#include "wui/interactive_base.h"
+#include "wui/interactive_player.h"
+#include "wui/mapviewpixelfunctions.h"
+#include "wui/overlay_manager.h"
 
 Map_View::Map_View
 	(UI::Panel * parent,

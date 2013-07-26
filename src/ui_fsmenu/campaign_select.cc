@@ -17,7 +17,7 @@
  *
  */
 
-#include "campaign_select.h"
+#include "ui_fsmenu/campaign_select.h"
 
 #include "campvis.h"
 #include "constants.h"

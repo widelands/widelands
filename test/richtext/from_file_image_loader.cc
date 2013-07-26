@@ -17,14 +17,14 @@
  *
  */
 
-#include "from_file_image_loader.h"
+#include "/Users/sirver/Desktop/Programming/cpp/widelands/bzr_repo/test/richtext/from_file_image_loader.h"
 
 #include <SDL.h>
 #include <boost/format.hpp>
 
 #include "graphic/render/sdl_surface.h"
 #include "graphic/text/rt_errors.h"
-#include "lodepng.h"
+#include "/Users/sirver/Desktop/Programming/cpp/widelands/bzr_repo/test/richtext/lodepng.h"
 
 using namespace boost;
 using namespace std;

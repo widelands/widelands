@@ -25,7 +25,7 @@
 
 #include <boost/shared_ptr.hpp>
 
-#include "widelands_geometry.h"
+#include "logic/widelands_geometry.h"
 
 namespace Widelands {
 

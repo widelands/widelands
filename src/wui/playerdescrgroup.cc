@@ -17,7 +17,7 @@
  *
  */
 
-#include "playerdescrgroup.h"
+#include "wui/playerdescrgroup.h"
 
 #include "constants.h"
 #include "gamesettings.h"

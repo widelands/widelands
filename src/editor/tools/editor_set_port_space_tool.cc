@@ -17,10 +17,10 @@
  *
  */
 
-#include "editor_set_port_space_tool.h"
+#include "editor/tools/editor_set_port_space_tool.h"
 
 #include "editor/editorinteractive.h"
-#include "editor_tool.h"
+#include "editor/tools/editor_tool.h"
 #include "logic/building.h"
 #include "logic/map.h"
 #include "logic/mapfringeregion.h"

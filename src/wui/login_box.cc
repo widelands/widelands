@@ -17,7 +17,7 @@
  *
  */
 
-#include "login_box.h"
+#include "wui/login_box.h"
 
 #include "i18n.h"
 #include "profile/profile.h"

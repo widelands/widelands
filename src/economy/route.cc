@@ -17,9 +17,9 @@
  *
  */
 
-#include "route.h"
+#include "economy/route.h"
 
-#include "flag.h"
+#include "economy/flag.h"
 #include "logic/editor_game_base.h"
 #include "logic/widelands_fileread.h"
 #include "logic/widelands_filewrite.h"

@@ -23,7 +23,7 @@
 #include "gamecontroller.h"
 #include "gamesettings.h"
 #include "logic/widelands.h"
-#include "network.h"
+#include "network/network.h"
 
 struct ChatMessage;
 struct NetHostImpl;

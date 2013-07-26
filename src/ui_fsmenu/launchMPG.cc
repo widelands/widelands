@@ -17,7 +17,7 @@
  *
  */
 
-#include "launchMPG.h"
+#include "ui_fsmenu/launchMPG.h"
 
 #include <boost/format.hpp>
 
@@ -26,16 +26,16 @@
 #include "graphic/graphic.h"
 #include "i18n.h"
 #include "io/filesystem/layered_filesystem.h"
-#include "loadgame.h"
 #include "logic/game.h"
 #include "logic/instances.h"
 #include "logic/map.h"
 #include "logic/player.h"
 #include "map_io/map_loader.h"
-#include "mapselect.h"
 #include "profile/profile.h"
 #include "scripting/scripting.h"
 #include "ui_basic/messagebox.h"
+#include "ui_fsmenu/loadgame.h"
+#include "ui_fsmenu/mapselect.h"
 #include "warning.h"
 #include "wui/gamechatpanel.h"
 #include "wui/multiplayersetupgroup.h"

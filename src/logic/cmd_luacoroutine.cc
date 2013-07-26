@@ -17,13 +17,13 @@
  *
  */
 
-#include "cmd_luacoroutine.h"
+#include "logic/cmd_luacoroutine.h"
 
-#include "game.h"
-#include "game_data_error.h"
 #include "gamecontroller.h"
 #include "log.h"
-#include "player.h"
+#include "logic/game.h"
+#include "logic/game_data_error.h"
+#include "logic/player.h"
 #include "scripting/scripting.h"
 #include "upcast.h"
 

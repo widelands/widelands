@@ -17,7 +17,7 @@
  *
  */
 
-#include "internet_gaming_messages.h"
+#include "network/internet_gaming_messages.h"
 
 #include <map>
 

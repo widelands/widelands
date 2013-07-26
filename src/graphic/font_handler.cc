@@ -19,20 +19,20 @@
  * http://www.wesnoth.org
  */
 
-#include "font_handler.h"
+#include "graphic/font_handler.h"
 
 #include <list>
 
 #include <SDL_ttf.h>
 #include <boost/algorithm/string.hpp>
 
-#include "graphic.h"
-#include "in_memory_image.h"
+#include "graphic/graphic.h"
+#include "graphic/in_memory_image.h"
+#include "graphic/rendertarget.h"
+#include "graphic/surface.h"
+#include "graphic/wordwrap.h"
 #include "log.h"
-#include "rendertarget.h"
-#include "surface.h"
 #include "wexception.h"
-#include "wordwrap.h"
 
 namespace UI {
 

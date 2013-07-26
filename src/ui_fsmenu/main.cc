@@ -17,7 +17,7 @@
  *
  */
 
-#include "main.h"
+#include "ui_fsmenu/main.h"
 
 #include "build_info.h"
 #include "graphic/graphic.h"

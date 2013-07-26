@@ -17,21 +17,21 @@
  *
  */
 
-#include "game_main_menu.h"
+#include "wui/game_main_menu.h"
 
 #include <boost/bind.hpp>
 #include <boost/lambda/bind.hpp>
 #include <boost/lambda/construct.hpp>
 #include <boost/type_traits.hpp>
 
-#include "building_statistics_menu.h"
-#include "general_statistics_menu.h"
 #include "graphic/graphic.h"
 #include "i18n.h"
-#include "interactive_player.h"
-#include "stock_menu.h"
 #include "ui_basic/unique_window.h"
-#include "ware_statistics_menu.h"
+#include "wui/building_statistics_menu.h"
+#include "wui/general_statistics_menu.h"
+#include "wui/interactive_player.h"
+#include "wui/stock_menu.h"
+#include "wui/ware_statistics_menu.h"
 
 
 GameMainMenu::GameMainMenu

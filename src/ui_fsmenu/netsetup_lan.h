@@ -24,7 +24,7 @@
 #include <list>
 #include <string>
 
-#include "base.h"
+#include "ui_fsmenu/base.h"
 #include "network/network_lan_promotion.h"
 #include "ui_basic/button.h"
 #include "ui_basic/editbox.h"

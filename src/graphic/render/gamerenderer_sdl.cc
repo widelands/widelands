@@ -17,13 +17,13 @@
  *
  */
 
-#include "gamerenderer_sdl.h"
+#include "graphic/render/gamerenderer_sdl.h"
 
+#include "graphic/render/terrain_sdl.h"
 #include "graphic/rendertarget.h"
 #include "logic/field.h"
 #include "logic/map.h"
 #include "logic/player.h"
-#include "terrain_sdl.h"
 #include "wui/overlay_manager.h"
 
 

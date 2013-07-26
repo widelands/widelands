@@ -17,12 +17,12 @@
  *
  */
 
-#include "buildingwindow.h"
 #include "graphic/graphic.h"
 #include "logic/militarysite.h"
-#include "soldiercapacitycontrol.h"
-#include "soldierlist.h"
 #include "ui_basic/tabpanel.h"
+#include "wui/buildingwindow.h"
+#include "wui/soldiercapacitycontrol.h"
+#include "wui/soldierlist.h"
 
 using Widelands::MilitarySite;
 

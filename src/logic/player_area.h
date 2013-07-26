@@ -20,8 +20,8 @@
 #ifndef PLAYER_AREA_H
 #define PLAYER_AREA_H
 
-#include "widelands.h"
-#include "widelands_geometry.h"
+#include "logic/widelands.h"
+#include "logic/widelands_geometry.h"
 
 namespace Widelands {
 

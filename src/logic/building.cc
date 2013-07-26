@@ -17,18 +17,15 @@
  *
  */
 
-#include "building.h"
+#include "logic/building.h"
 
 #include <cstdio>
 #include <sstream>
 
 #include <boost/foreach.hpp>
 
-#include "constructionsite.h"
 #include "economy/flag.h"
 #include "economy/request.h"
-#include "game.h"
-#include "game_data_error.h"
 #include "graphic/font.h"
 #include "graphic/font_handler.h"
 #include "graphic/font_handler1.h"
@@ -36,16 +33,19 @@
 #include "graphic/rendertarget.h"
 #include "io/filesystem/filesystem.h"
 #include "io/filesystem/layered_filesystem.h"
-#include "map.h"
-#include "player.h"
-#include "productionsite.h"
+#include "logic/constructionsite.h"
+#include "logic/game.h"
+#include "logic/game_data_error.h"
+#include "logic/map.h"
+#include "logic/player.h"
+#include "logic/productionsite.h"
+#include "logic/tribe.h"
+#include "logic/worker.h"
 #include "profile/profile.h"
 #include "sound/sound_handler.h"
 #include "text_layout.h"
-#include "tribe.h"
 #include "upcast.h"
 #include "wexception.h"
-#include "worker.h"
 #include "wui/interactive_player.h"
 
 namespace Widelands {

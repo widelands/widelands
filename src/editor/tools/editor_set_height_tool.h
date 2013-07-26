@@ -20,7 +20,7 @@
 #ifndef EDITOR_SET_HEIGHT_TOOL_H
 #define EDITOR_SET_HEIGHT_TOOL_H
 
-#include "editor_tool.h"
+#include "editor/tools/editor_tool.h"
 #include "interval.h"
 #include "logic/field.h"
 

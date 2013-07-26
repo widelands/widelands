@@ -20,8 +20,8 @@
 #ifndef FILEWRITE_H
 #define FILEWRITE_H
 
-#include "basic_filewrite.h"
-#include "streamwrite.h"
+#include "io/basic_filewrite.h"
+#include "io/streamwrite.h"
 
 typedef basic_FileWrite<StreamWrite> FileWrite;
 

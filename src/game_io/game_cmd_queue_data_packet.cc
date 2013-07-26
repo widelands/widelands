@@ -17,7 +17,7 @@
  *
  */
 
-#include "game_cmd_queue_data_packet.h"
+#include "game_io/game_cmd_queue_data_packet.h"
 
 #include "logic/cmd_queue.h"
 #include "logic/game.h"

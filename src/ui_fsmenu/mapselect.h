@@ -23,7 +23,7 @@
 #include <set>
 #include <string>
 
-#include "base.h"
+#include "ui_fsmenu/base.h"
 #include "logic/map.h"
 #include "ui_basic/button.h"
 #include "ui_basic/checkbox.h"

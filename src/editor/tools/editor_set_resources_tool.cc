@@ -17,11 +17,11 @@
  *
  */
 
-#include "editor_set_resources_tool.h"
+#include "editor/tools/editor_set_resources_tool.h"
 
 #include "editor/editorinteractive.h"
-#include "editor_decrease_resources_tool.h"
-#include "editor_increase_resources_tool.h"
+#include "editor/tools/editor_decrease_resources_tool.h"
+#include "editor/tools/editor_increase_resources_tool.h"
 #include "graphic/graphic.h"
 #include "logic/field.h"
 #include "logic/mapregion.h"

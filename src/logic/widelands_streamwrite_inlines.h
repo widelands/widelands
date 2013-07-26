@@ -20,8 +20,8 @@
 #ifndef WIDELANDS_STREAMWRITE_INLINES_H
 #define WIDELANDS_STREAMWRITE_INLINES_H
 
-#include "building.h"
-#include "widelands_streamwrite.h"
+#include "logic/building.h"
+#include "logic/widelands_streamwrite.h"
 
 namespace Widelands {
 

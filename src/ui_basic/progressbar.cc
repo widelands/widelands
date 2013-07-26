@@ -17,7 +17,7 @@
  *
  */
 
-#include "progressbar.h"
+#include "ui_basic/progressbar.h"
 
 #include <cstdio>
 

@@ -25,7 +25,7 @@
 
 #include <stdint.h>
 
-#include "instances.h"
+#include "logic/instances.h"
 #include "io/filewrite.h"
 #include "writeHTML.h"
 

@@ -22,7 +22,7 @@
 
 #include <vector>
 
-#include "widelands.h"
+#include "logic/widelands.h"
 
 namespace Widelands {
 typedef std::vector<std::pair<Ware_Index, uint32_t> > Ware_Types;

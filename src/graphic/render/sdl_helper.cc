@@ -17,7 +17,7 @@
  *
  */
 
-#include "sdl_helper.h"
+#include "graphic/render/sdl_helper.h"
 
 #include <cassert>
 

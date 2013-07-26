@@ -17,11 +17,11 @@
  *
  */
 
-#include "cmd_luascript.h"
+#include "logic/cmd_luascript.h"
 
-#include "game.h"
-#include "game_data_error.h"
 #include "log.h"
+#include "logic/game.h"
+#include "logic/game_data_error.h"
 #include "scripting/scripting.h"
 
 namespace Widelands {

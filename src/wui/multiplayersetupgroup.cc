@@ -17,7 +17,7 @@
  *
  */
 
-#include "multiplayersetupgroup.h"
+#include "wui/multiplayersetupgroup.h"
 
 #include <boost/format.hpp>
 

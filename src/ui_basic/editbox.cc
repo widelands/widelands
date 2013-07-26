@@ -17,7 +17,7 @@
  *
  */
 
-#include "editbox.h"
+#include "ui_basic/editbox.h"
 
 #include <limits>
 
@@ -27,7 +27,7 @@
 #include "graphic/font_handler.h"
 #include "graphic/rendertarget.h"
 #include "helper.h"
-#include "mouse_constants.h"
+#include "ui_basic/mouse_constants.h"
 
 namespace UI {
 

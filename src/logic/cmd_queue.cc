@@ -17,19 +17,19 @@
  *
  */
 
-#include "cmd_queue.h"
+#include "logic/cmd_queue.h"
 
-#include "game.h"
-#include "game_data_error.h"
-#include "instances.h"
 #include "io/filewrite.h"
+#include "logic/game.h"
+#include "logic/game_data_error.h"
+#include "logic/instances.h"
+#include "logic/player.h"
+#include "logic/playercommand.h"
+#include "logic/widelands_fileread.h"
+#include "logic/worker.h"
 #include "machdep.h"
-#include "player.h"
-#include "playercommand.h"
 #include "upcast.h"
 #include "wexception.h"
-#include "widelands_fileread.h"
-#include "worker.h"
 
 namespace Widelands {
 

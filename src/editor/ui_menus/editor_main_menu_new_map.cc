@@ -17,7 +17,7 @@
  *
  */
 
-#include "editor_main_menu_new_map.h"
+#include "editor/ui_menus/editor_main_menu_new_map.h"
 
 #include <cstdio>
 #include <cstring>

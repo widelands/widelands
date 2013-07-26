@@ -26,12 +26,12 @@
 
 #include <boost/noncopyable.hpp>
 
-#include "bob.h"
-#include "building.h"
+#include "logic/bob.h"
+#include "logic/building.h"
 #include "constants.h"
-#include "map.h"
-#include "notification.h"
-#include "player_area.h"
+#include "logic/map.h"
+#include "logic/notification.h"
+#include "logic/player_area.h"
 
 namespace UI {struct ProgressWindow;}
 struct Fullscreen_Menu_LaunchGame;

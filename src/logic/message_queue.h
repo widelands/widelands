@@ -25,8 +25,8 @@
 
 #include <boost/noncopyable.hpp>
 
-#include "message.h"
-#include "message_id.h"
+#include "logic/message.h"
+#include "logic/message_id.h"
 
 namespace Widelands {
 

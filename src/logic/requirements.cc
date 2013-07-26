@@ -17,12 +17,12 @@
  *
  */
 
-#include "requirements.h"
+#include "logic/requirements.h"
 
 #include "container_iterate.h"
-#include "game_data_error.h"
 #include "i18n.h"
-#include "instances.h"
+#include "logic/game_data_error.h"
+#include "logic/instances.h"
 
 namespace Widelands {
 

@@ -17,22 +17,22 @@
  *
  */
 
-#include "launchSPG.h"
+#include "ui_fsmenu/launchSPG.h"
 
 #include "gamecontroller.h"
 #include "gamesettings.h"
 #include "graphic/graphic.h"
 #include "i18n.h"
 #include "io/filesystem/layered_filesystem.h"
-#include "loadgame.h"
 #include "logic/game.h"
 #include "logic/instances.h"
 #include "logic/map.h"
 #include "logic/player.h"
 #include "map_io/map_loader.h"
-#include "mapselect.h"
 #include "profile/profile.h"
 #include "scripting/scripting.h"
+#include "ui_fsmenu/loadgame.h"
+#include "ui_fsmenu/mapselect.h"
 #include "warning.h"
 #include "wui/playerdescrgroup.h"
 

@@ -20,14 +20,14 @@
  * Default AI
  */
 
-#include "defaultai.h"
+#include "ai/defaultai.h"
 
 #include <algorithm>
 #include <ctime>
 #include <queue>
 #include <typeinfo>
 
-#include "ai_hints.h"
+#include "ai/ai_hints.h"
 #include "economy/economy.h"
 #include "economy/flag.h"
 #include "economy/road.h"

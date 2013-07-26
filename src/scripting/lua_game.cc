@@ -17,11 +17,10 @@
  *
  */
 
-#include "lua_game.h"
+#include "scripting/lua_game.h"
 
 #include <lua.hpp>
 
-#include "c_utils.h"
 #include "campvis.h"
 #include "economy/economy.h"
 #include "economy/flag.h"
@@ -31,8 +30,9 @@
 #include "logic/path.h"
 #include "logic/player.h"
 #include "logic/tribe.h"
-#include "lua_map.h"
-#include "scripting.h"
+#include "scripting/c_utils.h"
+#include "scripting/lua_map.h"
+#include "scripting/scripting.h"
 #include "wui/interactive_player.h"
 #include "wui/story_message_box.h"
 

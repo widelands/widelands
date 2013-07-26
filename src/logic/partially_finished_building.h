@@ -20,7 +20,7 @@
 #ifndef PARTIALLY_FINISHED_BUILDING_H
 #define PARTIALLY_FINISHED_BUILDING_H
 
-#include "building.h"
+#include "logic/building.h"
 
 namespace Widelands {
 

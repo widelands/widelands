@@ -20,10 +20,10 @@
 #ifndef IMMOVABLE_H
 #define IMMOVABLE_H
 
-#include "buildcost.h"
 #include "graphic/animation.h"
-#include "instances.h"
-#include "widelands_geometry.h"
+#include "logic/buildcost.h"
+#include "logic/instances.h"
+#include "logic/widelands_geometry.h"
 
 struct Profile;
 

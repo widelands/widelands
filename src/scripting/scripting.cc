@@ -17,7 +17,7 @@
  *
  */
 
-#include "scripting.h"
+#include "scripting/scripting.h"
 
 #include <stdexcept>
 #include <string>
@@ -26,19 +26,19 @@
 #include <ctype.h> // for tolower
 #endif
 
-#include "c_utils.h"
-#include "coroutine_impl.h"
-#include "factory.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "log.h"
-#include "lua_bases.h"
-#include "lua_editor.h"
-#include "lua_game.h"
-#include "lua_globals.h"
-#include "lua_map.h"
-#include "lua_root.h"
-#include "lua_ui.h"
-#include "persistence.h"
+#include "scripting/c_utils.h"
+#include "scripting/coroutine_impl.h"
+#include "scripting/factory.h"
+#include "scripting/lua_bases.h"
+#include "scripting/lua_editor.h"
+#include "scripting/lua_game.h"
+#include "scripting/lua_globals.h"
+#include "scripting/lua_map.h"
+#include "scripting/lua_root.h"
+#include "scripting/lua_ui.h"
+#include "scripting/persistence.h"
 
 
 /*

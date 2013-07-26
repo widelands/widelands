@@ -17,7 +17,7 @@
  *
  */
 
-#include "multilineeditbox.h"
+#include "ui_basic/multilineeditbox.h"
 
 #include <boost/bind.hpp>
 
@@ -26,7 +26,7 @@
 #include "graphic/rendertarget.h"
 #include "graphic/wordwrap.h"
 #include "helper.h"
-#include "scrollbar.h"
+#include "ui_basic/scrollbar.h"
 #include "utf8.h"
 #include "wlapplication.h"
 

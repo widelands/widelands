@@ -22,9 +22,9 @@
 
 #include <queue>
 
-#include "queue_cmd_ids.h"
-#include "widelands_fileread.h"
-#include "widelands_filewrite.h"
+#include "logic/queue_cmd_ids.h"
+#include "logic/widelands_fileread.h"
+#include "logic/widelands_filewrite.h"
 
 namespace Widelands {
 

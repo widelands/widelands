@@ -20,8 +20,8 @@
 #ifndef EDITOR_INCREASE_HEIGHT_TOOL_H
 #define EDITOR_INCREASE_HEIGHT_TOOL_H
 
-#include "editor_decrease_height_tool.h"
-#include "editor_set_height_tool.h"
+#include "editor/tools/editor_decrease_height_tool.h"
+#include "editor/tools/editor_set_height_tool.h"
 
 ///  Increases the height of a field by a value.
 struct Editor_Increase_Height_Tool : public Editor_Tool {

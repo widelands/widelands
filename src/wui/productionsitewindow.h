@@ -20,7 +20,7 @@
 #ifndef _PRODUCTIONSITEWINDOW_H_
 #define _PRODUCTIONSITEWINDOW_H_
 
-#include "buildingwindow.h"
+#include "wui/buildingwindow.h"
 #include "logic/productionsite.h"
 #include "ui_basic/table.h"
 

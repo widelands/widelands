@@ -28,7 +28,7 @@
 #include <stdint.h>
 
 #include "rgbcolor.h"
-#include "rt_errors.h"
+#include "graphic/text/rt_errors.h"
 
 namespace RT {
 

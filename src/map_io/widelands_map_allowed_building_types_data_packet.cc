@@ -17,7 +17,7 @@
  *
  */
 
-#include "widelands_map_allowed_building_types_data_packet.h"
+#include "map_io/widelands_map_allowed_building_types_data_packet.h"
 
 #include "logic/game.h"
 #include "logic/game_data_error.h"

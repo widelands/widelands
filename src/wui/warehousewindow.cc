@@ -17,15 +17,15 @@
  *
  */
 
-#include "buildingwindow.h"
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
 #include "logic/player.h"
 #include "logic/playercommand.h"
 #include "logic/warehouse.h"
-#include "portdockwaresdisplay.h"
 #include "ui_basic/tabpanel.h"
-#include "waresdisplay.h"
+#include "wui/buildingwindow.h"
+#include "wui/portdockwaresdisplay.h"
+#include "wui/waresdisplay.h"
 
 using Widelands::Warehouse;
 

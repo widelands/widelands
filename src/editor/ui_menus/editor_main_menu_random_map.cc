@@ -17,7 +17,7 @@
  *
  */
 
-#include "editor_main_menu_random_map.h"
+#include "editor/ui_menus/editor_main_menu_random_map.h"
 
 #include <cstring>
 #include <sstream>

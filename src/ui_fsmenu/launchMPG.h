@@ -22,7 +22,7 @@
 
 #include <string>
 
-#include "base.h"
+#include "ui_fsmenu/base.h"
 #include "ui_basic/button.h"
 #include "ui_basic/helpwindow.h"
 #include "ui_basic/listselect.h"

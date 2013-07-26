@@ -17,21 +17,21 @@
  *
  */
 
-#include "font_handler1.h"
+#include "graphic/font_handler1.h"
 
 #include <boost/lexical_cast.hpp>
 #include <boost/utility.hpp>
 
-#include "graphic.h"
-#include "image.h"
-#include "image_cache.h"
+#include "graphic/graphic.h"
+#include "graphic/image.h"
+#include "graphic/image_cache.h"
+#include "graphic/rendertarget.h"
+#include "graphic/surface.h"
+#include "graphic/surface_cache.h"
+#include "graphic/text/rt_errors.h"
+#include "graphic/text/rt_render.h"
+#include "graphic/text/sdl_ttf_font.h"
 #include "io/filesystem/filesystem.h"
-#include "rendertarget.h"
-#include "surface.h"
-#include "surface_cache.h"
-#include "text/rt_errors.h"
-#include "text/rt_render.h"
-#include "text/sdl_ttf_font.h"
 #include "wexception.h"
 
 

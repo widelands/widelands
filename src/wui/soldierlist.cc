@@ -17,23 +17,23 @@
  *
  */
 
-#include "soldierlist.h"
+#include "wui/soldierlist.h"
 
 #include <boost/bind.hpp>
 
 #include "container_iterate.h"
 #include "graphic/font.h"
 #include "graphic/rendertarget.h"
-#include "interactive_gamebase.h"
 #include "logic/building.h"
 #include "logic/player.h"
 #include "logic/soldier.h"
 #include "logic/soldiercontrol.h"
-#include "soldiercapacitycontrol.h"
 #include "ui_basic/box.h"
 #include "ui_basic/button.h"
 #include "ui_basic/table.h"
 #include "wlapplication.h"
+#include "wui/interactive_gamebase.h"
+#include "wui/soldiercapacitycontrol.h"
 
 using Widelands::Soldier;
 using Widelands::SoldierControl;

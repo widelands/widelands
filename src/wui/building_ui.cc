@@ -17,7 +17,7 @@
  *
  */
 
-#include "buildingwindow.h"
+#include "wui/buildingwindow.h"
 
 #include <boost/foreach.hpp>
 #include <boost/lexical_cast.hpp>

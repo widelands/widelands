@@ -17,7 +17,7 @@
  *
  */
 
-#include "streamread.h"
+#include "io/streamread.h"
 
 #include <cassert>
 #include <cstdarg>

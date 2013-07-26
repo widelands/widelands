@@ -17,20 +17,20 @@
  *
  */
 
-#include "table.h"
+#include "ui_basic/table.h"
 
 #include <boost/bind.hpp>
 
-#include "button.h"
 #include "container_iterate.h"
 #include "graphic/font.h"
 #include "graphic/font_handler.h"
 #include "graphic/font_handler1.h"
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
-#include "mouse_constants.h"
-#include "scrollbar.h"
 #include "text_layout.h"
+#include "ui_basic/button.h"
+#include "ui_basic/mouse_constants.h"
+#include "ui_basic/scrollbar.h"
 #include "wlapplication.h"
 
 namespace UI {

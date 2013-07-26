@@ -23,7 +23,7 @@
 #include <boost/signal.hpp>
 
 #include "align.h"
-#include "window.h"
+#include "ui_basic/window.h"
 
 namespace UI {
 

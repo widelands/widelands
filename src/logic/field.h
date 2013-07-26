@@ -24,11 +24,11 @@
 #include <limits>
 
 #include "constants.h"
-#include "nodecaps.h"
-#include "roadtype.h"
-#include "widelands.h"
-#include "widelands_geometry.h"
-#include "world.h"
+#include "logic/nodecaps.h"
+#include "logic/roadtype.h"
+#include "logic/widelands.h"
+#include "logic/widelands_geometry.h"
+#include "logic/world.h"
 
 namespace Widelands {
 

@@ -17,11 +17,10 @@
  *
  */
 
-#include "helpwindow.h"
+#include "ui_basic/helpwindow.h"
 
 #include <boost/format.hpp>
 
-#include "button.h"
 #include "constants.h"
 #include "graphic/font.h"
 #include "graphic/font_handler.h"
@@ -30,7 +29,8 @@
 #include "io/filesystem/layered_filesystem.h"
 #include "log.h"
 #include "scripting/scripting.h"
-#include "window.h"
+#include "ui_basic/button.h"
+#include "ui_basic/window.h"
 #include "wlapplication.h"
 
 

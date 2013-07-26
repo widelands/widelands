@@ -17,9 +17,9 @@
  *
  */
 
-#include "cmd_call_economy_balance.h"
+#include "economy/cmd_call_economy_balance.h"
 
-#include "economy.h"
+#include "economy/economy.h"
 #include "logic/game.h"
 #include "logic/player.h"
 #include "map_io/widelands_map_map_object_loader.h"

@@ -19,7 +19,7 @@
 // this originally comes from Return to the Shadows (http://www.rtts.org/)
 // files.cc: provides all the OS abstraction to access files
 
-#include "filesystem.h"
+#include "io/filesystem/filesystem.h"
 
 #include <cassert>
 #include <cerrno>
@@ -44,11 +44,11 @@
 #include <sys/stat.h>
 #include <unistd.h>
 
-#include "disk_filesystem.h"
-#include "layered_filesystem.h"
+#include "io/filesystem/disk_filesystem.h"
+#include "io/filesystem/layered_filesystem.h"
+#include "io/filesystem/zip_exceptions.h"
+#include "io/filesystem/zip_filesystem.h"
 #include "log.h"
-#include "zip_exceptions.h"
-#include "zip_filesystem.h"
 
 #ifdef _WIN32
 #define stat _stat

@@ -23,7 +23,7 @@
 #include "logic/instances.h"
 #include "logic/item_ware_descr.h"
 #include "logic/widelands.h"
-#include "transfer.h"
+#include "economy/transfer.h"
 
 namespace Widelands {
 

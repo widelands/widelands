@@ -24,7 +24,7 @@
 #include <vector>
 
 #include "logic/immovable.h"
-#include "routing_node.h"
+#include "economy/routing_node.h"
 
 namespace Widelands {
 class Building;

@@ -17,7 +17,7 @@
  *
  */
 
-#include "intro.h"
+#include "ui_fsmenu/intro.h"
 
 #include "i18n.h"
 

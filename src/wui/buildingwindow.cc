@@ -17,16 +17,13 @@
  *
  */
 
-#include "buildingwindow.h"
+#include "wui/buildingwindow.h"
 
 #include <boost/format.hpp>
 
-#include "buildingconfirm.h"
-#include "game_debug_ui.h"
 #include "graphic/graphic.h"
 #include "graphic/image.h"
 #include "graphic/rendertarget.h"
-#include "interactive_player.h"
 #include "logic/constructionsite.h"
 #include "logic/dismantlesite.h"
 #include "logic/maphollowregion.h"
@@ -38,7 +35,10 @@
 #include "ui_basic/helpwindow.h"
 #include "ui_basic/tabpanel.h"
 #include "upcast.h"
-#include "waresqueuedisplay.h"
+#include "wui/buildingconfirm.h"
+#include "wui/game_debug_ui.h"
+#include "wui/interactive_player.h"
+#include "wui/waresqueuedisplay.h"
 
 static const char * pic_bulldoze           = "pics/menu_bld_bulldoze.png";
 static const char * pic_dismantle          = "pics/menu_bld_dismantle.png";

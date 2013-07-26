@@ -26,12 +26,12 @@
 #include <boost/bind.hpp>
 #include <boost/test/unit_test.hpp>
 
-#include "../../container_iterate.h"
-#include "../flag.h"
-#include "../iroute.h"
-#include "../itransport_cost_calculator.h"
-#include "../router.h"
-#include "../routing_node.h"
+#include "container_iterate.h"
+#include "economy/flag.h"
+#include "economy/iroute.h"
+#include "economy/itransport_cost_calculator.h"
+#include "economy/router.h"
+#include "economy/routing_node.h"
 #include "logic/wareworker.h"
 #include "logic/widelands_geometry.h"
 

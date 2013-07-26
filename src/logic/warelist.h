@@ -27,7 +27,7 @@
 #include <boost/bind.hpp>
 #include <boost/signal.hpp>
 
-#include "widelands.h"
+#include "logic/widelands.h"
 
 namespace Widelands {
 

@@ -22,8 +22,8 @@
 
 #include <boost/function.hpp>
 
-#include "button.h"
-#include "window.h"
+#include "ui_basic/button.h"
+#include "ui_basic/window.h"
 
 namespace UI {
 struct Panel;

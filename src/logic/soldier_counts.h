@@ -22,7 +22,7 @@
 
 #include <map>
 
-#include "widelands.h"
+#include "logic/widelands.h"
 
 namespace Widelands {
 typedef std::map<Soldier_Strength, uint32_t> Soldier_Counts;

@@ -16,7 +16,7 @@
  * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#include "pluto.h"
+#include "scripting/pluto.h"
 
 #include <cstring>
 
@@ -26,7 +26,7 @@
 #include "compile_diagnostics.h"
 #include "logic/widelands_fileread.h"
 #include "logic/widelands_filewrite.h"
-#include "pdep/pdep.h"
+#include "scripting/pdep/pdep.h"
 
 // Widelands: silence warnings about unused variables, usually because they
 //are only used in conditional asserts

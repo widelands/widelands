@@ -17,9 +17,8 @@
  *
  */
 
-#include "lua_root.h"
+#include "scripting/lua_root.h"
 
-#include "coroutine_impl.h"
 #include "gamecontroller.h"
 #include "log.h"
 #include "logic/cmd_luacoroutine.h"
@@ -27,9 +26,10 @@
 #include "logic/game.h"
 #include "logic/immovable.h"
 #include "logic/tribe.h"
-#include "lua_editor.h"
-#include "lua_game.h"
-#include "lua_map.h"
+#include "scripting/coroutine_impl.h"
+#include "scripting/lua_editor.h"
+#include "scripting/lua_game.h"
+#include "scripting/lua_map.h"
 
 using namespace Widelands;
 

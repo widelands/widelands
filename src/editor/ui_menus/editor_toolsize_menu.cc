@@ -17,7 +17,7 @@
  *
  */
 
-#include "editor_toolsize_menu.h"
+#include "editor/ui_menus/editor_toolsize_menu.h"
 
 #include <cstdio>
 

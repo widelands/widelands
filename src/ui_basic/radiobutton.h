@@ -22,7 +22,7 @@
 
 #include <stdint.h>
 
-#include "checkbox.h"
+#include "ui_basic/checkbox.h"
 #include "point.h"
 
 namespace UI {

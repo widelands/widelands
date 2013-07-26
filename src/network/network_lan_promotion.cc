@@ -17,7 +17,7 @@
  *
  */
 
-#include "network_lan_promotion.h"
+#include "network/network_lan_promotion.h"
 
 #include <cstdio>
 #include <cstring>

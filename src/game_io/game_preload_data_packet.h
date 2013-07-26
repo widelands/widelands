@@ -23,7 +23,7 @@
 #include <cstring>
 #include <string>
 
-#include "game_data_packet.h"
+#include "game_io/game_data_packet.h"
 
 namespace Widelands {
 

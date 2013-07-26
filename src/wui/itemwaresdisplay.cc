@@ -17,7 +17,7 @@
  *
  */
 
-#include "itemwaresdisplay.h"
+#include "wui/itemwaresdisplay.h"
 
 #include <logic/player.h>
 #include <logic/tribe.h>

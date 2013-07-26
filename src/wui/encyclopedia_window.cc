@@ -17,7 +17,7 @@
  *
  */
 
-#include "encyclopedia_window.h"
+#include "wui/encyclopedia_window.h"
 
 #include <algorithm>
 #include <cstring>
@@ -31,7 +31,6 @@
 #include "graphic/graphic.h"
 #include "helper.h"
 #include "i18n.h"
-#include "interactive_player.h"
 #include "logic/building.h"
 #include "logic/player.h"
 #include "logic/production_program.h"
@@ -42,6 +41,7 @@
 #include "ui_basic/unique_window.h"
 #include "ui_basic/window.h"
 #include "upcast.h"
+#include "wui/interactive_player.h"
 
 #define WINDOW_WIDTH  std::min(600, g_gr->get_xres() - 40)
 #define WINDOW_HEIGHT std::min(550, g_gr->get_yres() - 40)

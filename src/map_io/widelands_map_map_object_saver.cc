@@ -17,7 +17,7 @@
  *
  */
 
-#include "widelands_map_map_object_saver.h"
+#include "map_io/widelands_map_map_object_saver.h"
 
 #include "container_iterate.h"
 #include "economy/flag.h"

@@ -17,7 +17,7 @@
  *
  */
 
-#include "netsetup_lan.h"
+#include "ui_fsmenu/netsetup_lan.h"
 
 #include "compile_diagnostics.h"
 #include "constants.h"

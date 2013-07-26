@@ -26,10 +26,10 @@
 #include <string>
 #include <vector>
 
-#include "building.h"
-#include "production_program.h"
-#include "program_result.h"
-#include "ware_types.h"
+#include "logic/building.h"
+#include "logic/production_program.h"
+#include "logic/program_result.h"
+#include "logic/ware_types.h"
 
 namespace Widelands {
 

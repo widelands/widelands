@@ -17,16 +17,16 @@
  *
  */
 
-#include "animation_gfx.h"
+#include "graphic/animation_gfx.h"
 
 #include <cassert>
 
 #include <SDL.h>
 
-#include "animation.h"
-#include "image.h"
-#include "image_cache.h"
-#include "image_transformations.h"
+#include "graphic/animation.h"
+#include "graphic/image.h"
+#include "graphic/image_cache.h"
+#include "graphic/image_transformations.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "log.h"
 #include "wexception.h"

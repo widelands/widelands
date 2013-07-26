@@ -17,7 +17,7 @@
  *
  */
 
-#include "editor_place_bob_tool.h"
+#include "editor/tools/editor_place_bob_tool.h"
 
 #include "editor/editorinteractive.h"
 #include "logic/bob.h"

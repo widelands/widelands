@@ -17,9 +17,11 @@
  *
  */
 
-#include "request.h"
+#include "economy/request.h"
 
-#include "economy.h"
+#include "economy/economy.h"
+#include "economy/transfer.h"
+#include "economy/ware_instance.h"
 #include "logic/constructionsite.h"
 #include "logic/game.h"
 #include "logic/legacy.h"
@@ -31,9 +33,7 @@
 #include "logic/worker.h"
 #include "map_io/widelands_map_map_object_loader.h"
 #include "map_io/widelands_map_map_object_saver.h"
-#include "transfer.h"
 #include "upcast.h"
-#include "ware_instance.h"
 
 
 namespace Widelands {

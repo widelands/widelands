@@ -17,17 +17,17 @@
  *
  */
 
-#include "buildingconfirm.h"
+#include "wui/buildingconfirm.h"
 
 #include <boost/format.hpp>
 
 #include "graphic/graphic.h"
-#include "interactive_player.h"
 #include "logic/building.h"
 #include "logic/player.h"
 #include "ui_basic/multilinetextarea.h"
 #include "ui_basic/window.h"
 #include "upcast.h"
+#include "wui/interactive_player.h"
 
 using boost::format;
 

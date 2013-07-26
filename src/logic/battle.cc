@@ -17,18 +17,18 @@
  *
  */
 
-#include "battle.h"
+#include "logic/battle.h"
 
-#include "game.h"
 #include "log.h"
+#include "logic/game.h"
+#include "logic/player.h"
+#include "logic/soldier.h"
+#include "logic/widelands_fileread.h"
+#include "logic/widelands_filewrite.h"
 #include "map_io/widelands_map_map_object_loader.h"
 #include "map_io/widelands_map_map_object_saver.h"
-#include "player.h"
-#include "soldier.h"
 #include "upcast.h"
 #include "wexception.h"
-#include "widelands_fileread.h"
-#include "widelands_filewrite.h"
 
 namespace Widelands {
 

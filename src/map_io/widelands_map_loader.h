@@ -23,7 +23,7 @@
 #include <cstring>
 #include <string>
 
-#include "map_loader.h"
+#include "map_io/map_loader.h"
 
 class FileSystem;
 

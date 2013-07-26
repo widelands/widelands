@@ -23,7 +23,7 @@
 #include "logic/field.h"
 #include "logic/map.h"
 #include "logic/widelands_geometry.h"
-#include "mapviewpixelconstants.h"
+#include "wui/mapviewpixelconstants.h"
 #include "point.h"
 
 namespace Widelands {struct Map;}

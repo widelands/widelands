@@ -17,7 +17,7 @@
  *
  */
 
-#include "editor_player_menu.h"
+#include "editor/ui_menus/editor_player_menu.h"
 
 #include "editor/editorinteractive.h"
 #include "editor/tools/editor_set_starting_pos_tool.h"

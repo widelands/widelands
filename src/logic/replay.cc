@@ -17,17 +17,17 @@
  *
  */
 
-#include "replay.h"
+#include "logic/replay.h"
 
-#include "game.h"
-#include "game_data_error.h"
 #include "game_io/game_loader.h"
 #include "gamecontroller.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "io/streamwrite.h"
 #include "log.h"
+#include "logic/game.h"
+#include "logic/game_data_error.h"
+#include "logic/playercommand.h"
 #include "md5.h"
-#include "playercommand.h"
 #include "random.h"
 #include "save_handler.h"
 #include "wexception.h"

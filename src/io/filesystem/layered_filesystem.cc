@@ -17,7 +17,7 @@
  *
  */
 
-#include "layered_filesystem.h"
+#include "io/filesystem/layered_filesystem.h"
 
 #include <cstdio>
 #include <memory>

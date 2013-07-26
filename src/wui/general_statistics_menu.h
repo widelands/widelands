@@ -21,7 +21,7 @@
 #define GENERAL_STATISTICS_MENU_H
 
 #include "constants.h"
-#include "plot_area.h"
+#include "wui/plot_area.h"
 #include "ui_basic/box.h"
 #include "ui_basic/button.h"
 #include "ui_basic/radiobutton.h"

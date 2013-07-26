@@ -25,7 +25,7 @@
 
 #include "constants.h"
 #include "logic/widelands.h"
-#include "widelands_map_message_saver.h"
+#include "map_io/widelands_map_message_saver.h"
 
 namespace Widelands {
 

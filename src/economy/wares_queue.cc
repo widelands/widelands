@@ -17,9 +17,10 @@
  *
  */
 
-#include "wares_queue.h"
+#include "economy/wares_queue.h"
 
-#include "economy.h"
+#include "economy/economy.h"
+#include "economy/request.h"
 #include "logic/editor_game_base.h"
 #include "logic/game.h"
 #include "logic/player.h"
@@ -28,7 +29,6 @@
 #include "logic/widelands_filewrite.h"
 #include "map_io/widelands_map_map_object_loader.h"
 #include "map_io/widelands_map_map_object_saver.h"
-#include "request.h"
 #include "wexception.h"
 
 namespace Widelands {

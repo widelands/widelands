@@ -17,7 +17,7 @@
  *
  */
 
-#include "options.h"
+#include "ui_fsmenu/options.h"
 
 #include <cstdio>
 #include <iostream>

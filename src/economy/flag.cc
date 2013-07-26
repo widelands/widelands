@@ -17,10 +17,14 @@
  *
  */
 
-#include "flag.h"
+#include "economy/flag.h"
 
 #include "container_iterate.h"
-#include "economy.h"
+#include "economy/economy.h"
+#include "economy/portdock.h"
+#include "economy/request.h"
+#include "economy/road.h"
+#include "economy/ware_instance.h"
 #include "logic/building.h"
 #include "logic/editor_game_base.h"
 #include "logic/game.h"
@@ -29,11 +33,7 @@
 #include "logic/tribe.h"
 #include "logic/warehouse.h"
 #include "logic/worker.h"
-#include "portdock.h"
-#include "request.h"
-#include "road.h"
 #include "upcast.h"
-#include "ware_instance.h"
 #include "wexception.h"
 
 namespace Widelands {

@@ -17,7 +17,7 @@
  *
  */
 
-#include "game_main_menu_save_game.h"
+#include "wui/game_main_menu_save_game.h"
 
 #include <boost/format.hpp>
 #include <libintl.h>
@@ -28,13 +28,13 @@
 #include "game_io/game_saver.h"
 #include "gamecontroller.h"
 #include "i18n.h"
-#include "interactive_gamebase.h"
-#include "interactive_player.h"
 #include "io/filesystem/filesystem.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "logic/game.h"
 #include "profile/profile.h"
 #include "timestring.h"
+#include "wui/interactive_gamebase.h"
+#include "wui/interactive_player.h"
 
 using boost::format;
 

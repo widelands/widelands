@@ -17,22 +17,22 @@
  *
  */
 
-#include "economy.h"
+#include "economy/economy.h"
 
 #include <boost/bind.hpp>
 
-#include "cmd_call_economy_balance.h"
-#include "flag.h"
+#include "economy/cmd_call_economy_balance.h"
+#include "economy/flag.h"
+#include "economy/request.h"
+#include "economy/route.h"
+#include "economy/routeastar.h"
+#include "economy/router.h"
+#include "economy/warehousesupply.h"
 #include "logic/game.h"
 #include "logic/player.h"
 #include "logic/tribe.h"
 #include "logic/warehouse.h"
-#include "request.h"
-#include "route.h"
-#include "routeastar.h"
-#include "router.h"
 #include "upcast.h"
-#include "warehousesupply.h"
 #include "wexception.h"
 
 namespace Widelands {

@@ -17,7 +17,7 @@
  *
  */
 
-#include "game_player_economies_data_packet.h"
+#include "game_io/game_player_economies_data_packet.h"
 
 #include "economy/economy_data_packet.h"
 #include "economy/flag.h"

@@ -17,7 +17,7 @@
  *
  */
 
-#include "widelands_map_object_packet.h"
+#include "map_io/widelands_map_object_packet.h"
 
 #include "economy/fleet.h"
 #include "economy/portdock.h"
@@ -31,9 +31,9 @@
 #include "logic/widelands_fileread.h"
 #include "logic/widelands_filewrite.h"
 #include "logic/worker.h"
+#include "map_io/widelands_map_map_object_loader.h"
+#include "map_io/widelands_map_map_object_saver.h"
 #include "wexception.h"
-#include "widelands_map_map_object_loader.h"
-#include "widelands_map_map_object_saver.h"
 
 namespace Widelands {
 

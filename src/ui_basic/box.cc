@@ -17,14 +17,14 @@
  *
  */
 
-#include "box.h"
+#include "ui_basic/box.h"
 
 #include <algorithm>
 
 #include <boost/bind.hpp>
 
 #include "graphic/graphic.h"
-#include "scrollbar.h"
+#include "ui_basic/scrollbar.h"
 #include "wexception.h"
 
 namespace UI {

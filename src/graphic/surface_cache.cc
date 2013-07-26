@@ -17,7 +17,7 @@
  *
  */
 
-#include "surface_cache.h"
+#include "graphic/surface_cache.h"
 
 #include <cassert>
 #include <list>
@@ -26,7 +26,7 @@
 
 #include <SDL.h>
 
-#include "surface.h"
+#include "graphic/surface.h"
 
 using namespace std;
 

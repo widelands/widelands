@@ -17,10 +17,14 @@
  *
  */
 
-#include "transfer.h"
+#include "economy/transfer.h"
 
-#include "economy.h"
-#include "flag.h"
+#include "economy/economy.h"
+#include "economy/flag.h"
+#include "economy/portdock.h"
+#include "economy/request.h"
+#include "economy/road.h"
+#include "economy/ware_instance.h"
 #include "logic/game.h"
 #include "logic/immovable.h"
 #include "logic/player.h"
@@ -28,11 +32,7 @@
 #include "logic/worker.h"
 #include "map_io/widelands_map_map_object_loader.h"
 #include "map_io/widelands_map_map_object_saver.h"
-#include "portdock.h"
-#include "request.h"
-#include "road.h"
 #include "upcast.h"
-#include "ware_instance.h"
 
 namespace Widelands {
 

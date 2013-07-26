@@ -23,8 +23,8 @@
 #include <vector>
 
 #include "align.h"
-#include "compositemode.h"
-#include "image.h"
+#include "graphic/compositemode.h"
+#include "graphic/image.h"
 #include "rect.h"
 #include "rgbcolor.h"
 

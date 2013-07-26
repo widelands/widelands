@@ -18,7 +18,7 @@
  */
 
 
-#include "editor_make_infrastructure_tool.h"
+#include "editor/tools/editor_make_infrastructure_tool.h"
 
 #include "editor/editorinteractive.h"
 #include "logic/editor_game_base.h"

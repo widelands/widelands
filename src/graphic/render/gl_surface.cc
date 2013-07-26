@@ -17,13 +17,13 @@
  *
  */
 
-#include "gl_surface.h"
+#include "graphic/render/gl_surface.h"
 
 #include <cassert>
 #include <cmath>
 
-#include "gl_surface_texture.h"
 #include "graphic/graphic.h"
+#include "graphic/render/gl_surface_texture.h"
 #include "upcast.h"
 
 uint16_t GLSurface::width() const {

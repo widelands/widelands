@@ -17,7 +17,7 @@
  *
  */
 
-#include "widelands_map_heights_data_packet.h"
+#include "map_io/widelands_map_heights_data_packet.h"
 
 #include "io/filewrite.h"
 #include "logic/editor_game_base.h"

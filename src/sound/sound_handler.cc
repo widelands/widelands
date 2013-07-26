@@ -17,7 +17,7 @@
  *
  */
 
-#include "sound_handler.h"
+#include "sound/sound_handler.h"
 
 #include <cerrno>
 
@@ -34,7 +34,7 @@
 #include "logic/game.h"
 #include "logic/map.h"
 #include "profile/profile.h"
-#include "songset.h"
+#include "sound/songset.h"
 #include "wui/interactive_base.h"
 #include "wui/mapview.h"
 #include "wui/mapviewpixelfunctions.h"

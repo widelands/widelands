@@ -17,7 +17,7 @@
  *
  */
 
-#include "textarea.h"
+#include "ui_basic/textarea.h"
 
 #include "graphic/font_handler.h"
 

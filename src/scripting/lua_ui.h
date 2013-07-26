@@ -22,7 +22,7 @@
 
 #include <lua.hpp>
 
-#include "luna.h"
+#include "scripting/luna.h"
 #include "ui_basic/button.h"
 #include "ui_basic/tabpanel.h"
 #include "ui_basic/window.h"

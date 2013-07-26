@@ -22,7 +22,7 @@
 
 #include "logic/warelist.h"
 #include "logic/wareworker.h"
-#include "supply.h"
+#include "economy/supply.h"
 
 namespace Widelands {
 

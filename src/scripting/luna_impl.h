@@ -28,7 +28,7 @@
 
 #include <lua.hpp>
 
-#include "c_utils.h"
+#include "scripting/c_utils.h"
 
 // This is only needed in pluto.cc
 int luna_restore_object(lua_State * L);

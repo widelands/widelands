@@ -29,7 +29,7 @@
 
 #include <stdint.h>
 
-#include "filesystem_exceptions.h"
+#include "io/filesystem/filesystem_exceptions.h"
 
 typedef std::set<std::string> filenameset_t;
 

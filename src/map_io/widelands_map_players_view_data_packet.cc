@@ -17,7 +17,7 @@
  *
  */
 
-#include "widelands_map_players_view_data_packet.h"
+#include "map_io/widelands_map_players_view_data_packet.h"
 
 #include <iostream>
 #include <typeinfo>

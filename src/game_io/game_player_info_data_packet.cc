@@ -17,7 +17,7 @@
  *
  */
 
-#include "game_player_info_data_packet.h"
+#include "game_io/game_player_info_data_packet.h"
 
 #include "computer_player.h"
 #include "logic/game.h"

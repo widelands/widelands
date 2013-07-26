@@ -22,7 +22,7 @@
 
 #include <SDL_keyboard.h>
 
-#include "interactive_gamebase.h"
+#include "wui/interactive_gamebase.h"
 #include "ui_basic/button.h"
 
 namespace Widelands {struct Game;}

@@ -29,8 +29,8 @@
  * Implementation is in immovable.cc
  */
 
-#include "buildcost.h"
-#include "immovable.h"
+#include "logic/buildcost.h"
+#include "logic/immovable.h"
 
 struct Profile;
 

@@ -17,12 +17,12 @@
  *
  */
 
-#include "checkstep.h"
+#include "logic/checkstep.h"
 
 #include "economy/flag.h"
 #include "economy/road.h"
-#include "map.h"
-#include "player.h"
+#include "logic/map.h"
+#include "logic/player.h"
 
 namespace Widelands {
 

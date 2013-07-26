@@ -17,7 +17,7 @@
  *
  */
 
-#include "attack_box.h"
+#include "wui/attack_box.h"
 
 #include "graphic/graphic.h"
 #include "logic/soldier.h"

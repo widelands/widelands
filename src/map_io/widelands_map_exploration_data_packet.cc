@@ -17,7 +17,7 @@
  *
  */
 
-#include "widelands_map_exploration_data_packet.h"
+#include "map_io/widelands_map_exploration_data_packet.h"
 
 #include "log.h"
 #include "logic/editor_game_base.h"

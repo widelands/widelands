@@ -17,7 +17,7 @@
  *
  */
 
-#include "interactive_base.h"
+#include "wui/interactive_base.h"
 
 #include <boost/bind.hpp>
 #include <boost/format.hpp>
@@ -25,12 +25,9 @@
 #include "constants.h"
 #include "economy/flag.h"
 #include "economy/road.h"
-#include "game_chat_menu.h"
-#include "game_debug_ui.h"
 #include "gamecontroller.h"
 #include "graphic/font_handler1.h"
 #include "graphic/rendertarget.h"
-#include "interactive_player.h"
 #include "logic/checkstep.h"
 #include "logic/cmd_queue.h"
 #include "logic/game.h"
@@ -39,16 +36,19 @@
 #include "logic/maptriangleregion.h"
 #include "logic/player.h"
 #include "logic/productionsite.h"
-#include "mapviewpixelconstants.h"
-#include "mapviewpixelfunctions.h"
-#include "minimap.h"
-#include "overlay_manager.h"
 #include "profile/profile.h"
-#include "quicknavigation.h"
 #include "scripting/scripting.h"
 #include "text_layout.h"
 #include "upcast.h"
 #include "wlapplication.h"
+#include "wui/game_chat_menu.h"
+#include "wui/game_debug_ui.h"
+#include "wui/interactive_player.h"
+#include "wui/mapviewpixelconstants.h"
+#include "wui/mapviewpixelfunctions.h"
+#include "wui/minimap.h"
+#include "wui/overlay_manager.h"
+#include "wui/quicknavigation.h"
 
 using boost::format;
 using Widelands::Area;

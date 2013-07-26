@@ -17,12 +17,12 @@
  *
  */
 
-#include "in_memory_image.h"
+#include "graphic/in_memory_image.h"
 
 #include <memory>
 
-#include "image.h"
-#include "surface.h"
+#include "graphic/image.h"
+#include "graphic/surface.h"
 
 using namespace std;
 

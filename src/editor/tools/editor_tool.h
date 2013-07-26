@@ -24,7 +24,7 @@
 
 #include <boost/noncopyable.hpp>
 
-#include "editor_action_args.h"
+#include "editor/tools/editor_action_args.h"
 #include "logic/widelands_geometry.h"
 
 struct Editor_Interactive;

@@ -17,7 +17,7 @@
  *
  */
 
-#include "rt_parse.h"
+#include "graphic/text/rt_parse.h"
 
 #include <vector>
 
@@ -26,8 +26,8 @@
 #include <boost/unordered_map.hpp>
 #include <boost/unordered_set.hpp>
 
-#include "rt_errors_impl.h"
-#include "textstream.h"
+#include "graphic/text/rt_errors_impl.h"
+#include "graphic/text/textstream.h"
 
 using namespace std;
 using namespace boost;

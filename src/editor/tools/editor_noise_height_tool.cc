@@ -17,12 +17,12 @@
  *
  */
 
-#include "editor_noise_height_tool.h"
+#include "editor/tools/editor_noise_height_tool.h"
 
 #include "editor/editorinteractive.h"
-#include "editor_decrease_height_tool.h"
-#include "editor_increase_height_tool.h"
-#include "editor_set_height_tool.h"
+#include "editor/tools/editor_decrease_height_tool.h"
+#include "editor/tools/editor_increase_height_tool.h"
+#include "editor/tools/editor_set_height_tool.h"
 #include "logic/field.h"
 #include "logic/mapregion.h"
 

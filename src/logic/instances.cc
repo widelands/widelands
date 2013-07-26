@@ -17,23 +17,23 @@
  *
  */
 
-#include "instances.h"
+#include "logic/instances.h"
 
 #include <cstdarg>
 #include <cstdio>
 #include <cstring>
 #include <string>
 
-#include "cmd_queue.h"
 #include "container_iterate.h"
-#include "game.h"
 #include "log.h"
+#include "logic/cmd_queue.h"
+#include "logic/game.h"
+#include "logic/queue_cmd_ids.h"
+#include "logic/widelands_fileread.h"
+#include "logic/widelands_filewrite.h"
 #include "map_io/widelands_map_map_object_loader.h"
 #include "map_io/widelands_map_map_object_saver.h"
-#include "queue_cmd_ids.h"
 #include "wexception.h"
-#include "widelands_fileread.h"
-#include "widelands_filewrite.h"
 
 namespace Widelands {
 

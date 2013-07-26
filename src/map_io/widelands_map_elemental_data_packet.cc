@@ -17,7 +17,7 @@
  *
  */
 
-#include "widelands_map_elemental_data_packet.h"
+#include "map_io/widelands_map_elemental_data_packet.h"
 
 #include <boost/algorithm/string.hpp>
 

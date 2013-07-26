@@ -17,7 +17,7 @@
  *
  */
 
-#include "walkingdir.h"
+#include "logic/walkingdir.h"
 
 namespace Widelands {
 

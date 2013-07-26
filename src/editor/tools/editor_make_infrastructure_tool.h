@@ -20,7 +20,7 @@
 #ifndef EDITOR_MAKE_INFRASTRUCTURE_TOOL_H
 #define EDITOR_MAKE_INFRASTRUCTURE_TOOL_H
 
-#include "editor_tool.h"
+#include "editor/tools/editor_tool.h"
 #include "ui_basic/unique_window.h"
 
 /**

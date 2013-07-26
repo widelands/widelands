@@ -17,13 +17,13 @@
  *
  */
 
-#include "surface.h"
+#include "graphic/surface.h"
 
 #include <SDL.h>
 
-#include "render/gl_surface_texture.h"
-#include "render/sdl_helper.h"
-#include "render/sdl_surface.h"
+#include "graphic/render/gl_surface_texture.h"
+#include "graphic/render/sdl_helper.h"
+#include "graphic/render/sdl_surface.h"
 
 extern bool g_opengl;
 

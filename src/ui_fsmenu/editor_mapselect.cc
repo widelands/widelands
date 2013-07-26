@@ -17,7 +17,7 @@
  *
  */
 
-#include "editor_mapselect.h"
+#include "ui_fsmenu/editor_mapselect.h"
 
 #include <cstdio>
 

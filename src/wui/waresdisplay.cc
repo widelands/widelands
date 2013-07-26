@@ -17,7 +17,7 @@
  *
  */
 
-#include "waresdisplay.h"
+#include "wui/waresdisplay.h"
 
 #include <cstdio>
 

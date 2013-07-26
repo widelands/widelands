@@ -17,12 +17,12 @@
  *
  */
 
-#include "animation.h"
+#include "graphic/animation.h"
 
 #include <cstdio>
 
 #include "constants.h"
-#include "diranimations.h"
+#include "graphic/diranimations.h"
 #include "helper.h"
 #include "i18n.h"
 #include "logic/bob.h"

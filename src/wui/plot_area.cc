@@ -18,7 +18,7 @@
  */
 
 
-#include "plot_area.h"
+#include "wui/plot_area.h"
 
 #include <cstdio>
 

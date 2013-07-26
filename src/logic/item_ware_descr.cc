@@ -17,7 +17,7 @@
  *
  */
 
-#include "item_ware_descr.h"
+#include "logic/item_ware_descr.h"
 
 #include "graphic/animation.h"
 #include "graphic/graphic.h"

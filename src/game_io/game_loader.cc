@@ -17,15 +17,15 @@
  *
  */
 
-#include "game_loader.h"
+#include "game_io/game_loader.h"
 
-#include "game_cmd_queue_data_packet.h"
-#include "game_game_class_data_packet.h"
-#include "game_interactive_player_data_packet.h"
-#include "game_map_data_packet.h"
-#include "game_player_economies_data_packet.h"
-#include "game_player_info_data_packet.h"
-#include "game_preload_data_packet.h"
+#include "game_io/game_cmd_queue_data_packet.h"
+#include "game_io/game_game_class_data_packet.h"
+#include "game_io/game_interactive_player_data_packet.h"
+#include "game_io/game_map_data_packet.h"
+#include "game_io/game_player_economies_data_packet.h"
+#include "game_io/game_player_info_data_packet.h"
+#include "game_io/game_preload_data_packet.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "log.h"
 #include "logic/cmd_expire_message.h"

@@ -21,7 +21,7 @@
 #define WIDELANDS_FILEWRITE_H
 
 #include "io/basic_filewrite.h"
-#include "widelands_streamwrite.h"
+#include "logic/widelands_streamwrite.h"
 
 namespace Widelands {typedef basic_FileWrite<StreamWrite> FileWrite;}
 

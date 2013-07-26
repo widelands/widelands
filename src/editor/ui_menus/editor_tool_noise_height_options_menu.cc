@@ -17,7 +17,7 @@
  *
  */
 
-#include "editor_tool_noise_height_options_menu.h"
+#include "editor/ui_menus/editor_tool_noise_height_options_menu.h"
 
 #include <cstdio>
 

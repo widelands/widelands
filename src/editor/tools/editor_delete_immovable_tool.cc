@@ -17,7 +17,7 @@
  *
  */
 
-#include "editor_delete_immovable_tool.h"
+#include "editor/tools/editor_delete_immovable_tool.h"
 
 #include "editor/editorinteractive.h"
 #include "logic/field.h"

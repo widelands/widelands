@@ -30,9 +30,9 @@
 
 #include "build_info.h"
 #include "chat.h"
-#include "internet_gaming_protocol.h"
-#include "network.h"
-#include "network_lan_promotion.h"
+#include "network/internet_gaming_protocol.h"
+#include "network/network.h"
+#include "network/network_lan_promotion.h"
 
 
 /// A simple network client struct

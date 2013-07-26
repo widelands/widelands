@@ -17,9 +17,10 @@
  *
  */
 
-#include "idleworkersupply.h"
+#include "economy/idleworkersupply.h"
 
-#include "economy.h"
+#include "economy/economy.h"
+#include "economy/request.h"
 #include "logic/game.h"
 #include "logic/player.h"
 #include "logic/requirements.h"
@@ -27,7 +28,6 @@
 #include "logic/tribe.h"
 #include "logic/warehouse.h"
 #include "logic/worker.h"
-#include "request.h"
 #include "wexception.h"
 
 namespace Widelands {

@@ -17,7 +17,7 @@
  *
  */
 
-#include "panel.h"
+#include "ui_basic/panel.h"
 
 #include "constants.h"
 #include "graphic/font_handler.h"

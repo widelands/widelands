@@ -17,7 +17,7 @@
  *
  */
 
-#include "texture.h"
+#include "graphic/texture.h"
 
 #include <SDL_image.h>
 #include <boost/foreach.hpp>

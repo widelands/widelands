@@ -17,7 +17,7 @@
  *
  */
 
-#include "editor_main_menu_save_map_make_directory.h"
+#include "editor/ui_menus/editor_main_menu_save_map_make_directory.h"
 
 #include "constants.h"
 #include "graphic/graphic.h"

@@ -22,7 +22,7 @@
 
 #include <map>
 
-#include "ai_help_structs.h"
+#include "ai/ai_help_structs.h"
 #include "computer_player.h"
 #include "i18n.h"
 

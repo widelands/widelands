@@ -17,7 +17,7 @@
  *
  */
 
-#include "game_tips.h"
+#include "wui/game_tips.h"
 
 #include "constants.h"
 #include "graphic/font.h"

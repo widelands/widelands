@@ -17,7 +17,7 @@
  *
  */
 
-#include "window.h"
+#include "ui_basic/window.h"
 
 #include <SDL_keysym.h>
 

@@ -22,7 +22,7 @@
 
 #include <vector>
 
-#include "panel.h"
+#include "ui_basic/panel.h"
 
 namespace UI {
 struct Scrollbar;

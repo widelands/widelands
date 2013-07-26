@@ -17,7 +17,7 @@
  *
  */
 
-#include "overlay_manager.h"
+#include "wui/overlay_manager.h"
 
 #include <algorithm>
 

@@ -23,7 +23,7 @@
 #include <memory>
 #include <vector>
 
-#include "gamerenderer.h"
+#include "graphic/render/gamerenderer.h"
 #include "logic/widelands.h"
 #include "rect.h"
 

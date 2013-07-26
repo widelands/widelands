@@ -23,7 +23,7 @@
 #include <list>
 #include <memory>
 
-#include "bob.h"
+#include "logic/bob.h"
 #include "economy/shippingitem.h"
 #include "graphic/diranimations.h"
 

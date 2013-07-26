@@ -20,9 +20,9 @@
 #ifndef WORKER_DESCR_H
 #define WORKER_DESCR_H
 
-#include "bob.h"
+#include "logic/bob.h"
 #include "graphic/diranimations.h"
-#include "immovable.h"
+#include "logic/immovable.h"
 #include "io/filewrite.h"
 
 class Image;

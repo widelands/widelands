@@ -29,7 +29,7 @@
 #include <boost/noncopyable.hpp>
 #include <boost/unordered_map.hpp>
 
-#include "cmd_queue.h"
+#include "logic/cmd_queue.h"
 #include "log.h"
 #include "port.h"
 #include "ref_cast.h"

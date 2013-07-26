@@ -27,12 +27,12 @@
 #include <boost/signal.hpp>
 
 #include "ai/ai_hints.h"
-#include "buildcost.h"
-#include "immovable.h"
+#include "logic/buildcost.h"
+#include "logic/immovable.h"
 #include "io/filewrite.h"
-#include "soldier_counts.h"
-#include "ware_types.h"
-#include "widelands.h"
+#include "logic/soldier_counts.h"
+#include "logic/ware_types.h"
+#include "logic/widelands.h"
 #include "workarea_info.h"
 #include "writeHTML.h"
 

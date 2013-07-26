@@ -24,8 +24,8 @@
 #include <cstdarg>
 #include <limits>
 
-#include "filesystem/disk_filesystem.h"
-#include "filesystem/filesystem.h"
+#include "io/filesystem/disk_filesystem.h"
+#include "io/filesystem/filesystem.h"
 #include "machdep.h"
 
 /// Mirror of \ref FileRead : all writes are first stored in a block of memory

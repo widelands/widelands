@@ -17,7 +17,7 @@
  *
  */
 
-#include "editor_info_tool.h"
+#include "editor/tools/editor_info_tool.h"
 
 #include <cstdio>
 

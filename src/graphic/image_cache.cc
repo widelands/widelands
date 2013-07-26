@@ -17,7 +17,7 @@
  *
  */
 
-#include "image_cache.h"
+#include "graphic/image_cache.h"
 
 #include <cassert>
 #include <map>
@@ -25,11 +25,11 @@
 
 #include <boost/foreach.hpp>
 
-#include "image.h"
-#include "image_loader.h"
+#include "graphic/image.h"
+#include "graphic/image_loader.h"
+#include "graphic/surface.h"
+#include "graphic/surface_cache.h"
 #include "log.h"
-#include "surface.h"
-#include "surface_cache.h"
 
 
 using namespace std;

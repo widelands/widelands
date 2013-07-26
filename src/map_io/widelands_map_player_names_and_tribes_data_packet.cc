@@ -17,7 +17,7 @@
  *
  */
 
-#include "widelands_map_player_names_and_tribes_data_packet.h"
+#include "map_io/widelands_map_player_names_and_tribes_data_packet.h"
 
 #include "logic/editor_game_base.h"
 #include "logic/game_data_error.h"

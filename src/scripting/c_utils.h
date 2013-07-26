@@ -22,7 +22,7 @@
 
 #include <lua.hpp>
 
-#include "factory.h"
+#include "scripting/factory.h"
 #include "logic/game.h"
 #include "map_io/widelands_map_map_object_loader.h"
 #include "map_io/widelands_map_map_object_saver.h"

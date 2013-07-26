@@ -17,12 +17,12 @@
  *
  */
 
-#include "gamerenderer_gl.h"
+#include "graphic/render/gamerenderer_gl.h"
 
 #include <SDL_image.h>
 
-#include "gl_surface.h"
 #include "graphic/graphic.h"
+#include "graphic/render/gl_surface.h"
 #include "graphic/rendertarget.h"
 #include "graphic/surface_cache.h"
 #include "graphic/texture.h"

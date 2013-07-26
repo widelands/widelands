@@ -25,7 +25,7 @@
 
 #include <stdint.h>
 
-#include "colormap.h"
+#include "graphic/colormap.h"
 #include "graphic/render/gl_surface_texture.h"
 
 /** struct Texture

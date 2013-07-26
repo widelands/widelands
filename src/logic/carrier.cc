@@ -17,13 +17,13 @@
  *
  */
 
-#include "carrier.h"
+#include "logic/carrier.h"
 
 #include "economy/flag.h"
 #include "economy/road.h"
 #include "economy/ware_instance.h"
-#include "game.h"
-#include "game_data_error.h"
+#include "logic/game.h"
+#include "logic/game_data_error.h"
 #include "upcast.h"
 #include "wexception.h"
 

@@ -17,11 +17,14 @@
  *
  */
 
-#include "ware_instance.h"
+#include "economy/ware_instance.h"
 
-#include "economy.h"
-#include "flag.h"
-#include "fleet.h"
+#include "economy/economy.h"
+#include "economy/flag.h"
+#include "economy/fleet.h"
+#include "economy/portdock.h"
+#include "economy/request.h"
+#include "economy/transfer.h"
 #include "logic/game.h"
 #include "logic/ship.h"
 #include "logic/tribe.h"
@@ -29,9 +32,6 @@
 #include "logic/worker.h"
 #include "map_io/widelands_map_map_object_loader.h"
 #include "map_io/widelands_map_map_object_saver.h"
-#include "portdock.h"
-#include "request.h"
-#include "transfer.h"
 #include "upcast.h"
 #include "wexception.h"
 

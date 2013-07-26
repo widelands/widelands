@@ -17,12 +17,12 @@
  *
  */
 
-#include "widelands_map_players_messages_data_packet.h"
+#include "map_io/widelands_map_players_messages_data_packet.h"
 
 #include "logic/game_data_error.h"
 #include "logic/player.h"
+#include "map_io/widelands_map_map_object_saver.h"
 #include "profile/profile.h"
-#include "widelands_map_map_object_saver.h"
 
 namespace Widelands {
 

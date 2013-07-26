@@ -17,7 +17,7 @@
  *
  */
 
-#include "productionsitewindow.h"
+#include "wui/productionsitewindow.h"
 
 #include "economy/request.h"
 #include "graphic/graphic.h"
@@ -29,7 +29,7 @@
 #include "ui_basic/listselect.h"
 #include "ui_basic/tabpanel.h"
 #include "ui_basic/textarea.h"
-#include "waresqueuedisplay.h"
+#include "wui/waresqueuedisplay.h"
 
 using Widelands::ProductionSite;
 

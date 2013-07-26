@@ -17,14 +17,14 @@
  *
  */
 
-#include "spinbox.h"
+#include "ui_basic/spinbox.h"
 
 #include <vector>
 
-#include "button.h"
 #include "container_iterate.h"
 #include "i18n.h"
-#include "textarea.h"
+#include "ui_basic/button.h"
+#include "ui_basic/textarea.h"
 #include "wexception.h"
 
 namespace UI {

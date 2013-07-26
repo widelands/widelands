@@ -17,12 +17,12 @@
  *
  */
 
-#include "findimmovable.h"
+#include "logic/findimmovable.h"
 
-#include "attackable.h"
 #include "economy/flag.h"
-#include "immovable.h"
-#include "militarysite.h"
+#include "logic/attackable.h"
+#include "logic/immovable.h"
+#include "logic/militarysite.h"
 #include "upcast.h"
 
 namespace Widelands {

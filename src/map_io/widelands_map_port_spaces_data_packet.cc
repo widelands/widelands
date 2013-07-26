@@ -17,7 +17,7 @@
  *
  */
 
-#include "widelands_map_port_spaces_data_packet.h"
+#include "map_io/widelands_map_port_spaces_data_packet.h"
 
 #include <boost/algorithm/string.hpp>
 #include <boost/foreach.hpp>

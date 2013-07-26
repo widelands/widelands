@@ -17,7 +17,7 @@
  *
  */
 
-#include "loadgame.h"
+#include "ui_fsmenu/loadgame.h"
 
 #include <cstdio>
 

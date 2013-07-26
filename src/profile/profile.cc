@@ -17,7 +17,7 @@
  *
  */
 
-#include "profile.h"
+#include "profile/profile.h"
 
 #include <cctype>
 #include <cstdarg>

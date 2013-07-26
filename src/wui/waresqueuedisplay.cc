@@ -17,7 +17,7 @@
  *
  */
 
-#include "waresqueuedisplay.h"
+#include "wui/waresqueuedisplay.h"
 
 #include <algorithm>
 
@@ -26,8 +26,8 @@
 #include "graphic/graphic.h"
 #include "graphic/image_transformations.h"
 #include "graphic/rendertarget.h"
-#include "interactive_gamebase.h"
 #include "logic/player.h"
+#include "wui/interactive_gamebase.h"
 
 static char const * pic_priority_low     = "pics/low_priority_button.png";
 static char const * pic_priority_normal  = "pics/normal_priority_button.png";

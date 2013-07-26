@@ -17,15 +17,15 @@
  *
  */
 
-#include "lua_globals.h"
+#include "scripting/lua_globals.h"
 
 #include <lua.hpp>
 
 #include "build_info.h"
-#include "c_utils.h"
 #include "i18n.h"
 #include "logic/game.h"
-#include "scripting.h"
+#include "scripting/c_utils.h"
+#include "scripting/scripting.h"
 
 
 namespace LuaGlobals {

@@ -17,7 +17,7 @@
  *
  */
 
-#include "editor_increase_height_tool.h"
+#include "editor/tools/editor_increase_height_tool.h"
 
 #include "editor/editorinteractive.h"
 #include "logic/field.h"

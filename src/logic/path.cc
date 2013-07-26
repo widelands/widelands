@@ -17,13 +17,13 @@
  *
  */
 
-#include "path.h"
+#include "logic/path.h"
 
 #include <algorithm>
 
-#include "game_data_error.h"
-#include "instances.h"
-#include "map.h"
+#include "logic/game_data_error.h"
+#include "logic/instances.h"
+#include "logic/map.h"
 
 namespace Widelands {
 

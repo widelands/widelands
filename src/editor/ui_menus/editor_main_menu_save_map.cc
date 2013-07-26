@@ -17,7 +17,7 @@
  *
  */
 
-#include "editor_main_menu_save_map.h"
+#include "editor/ui_menus/editor_main_menu_save_map.h"
 
 #include <cstdio>
 #include <cstring>
@@ -27,7 +27,7 @@
 
 #include "constants.h"
 #include "editor/editorinteractive.h"
-#include "editor_main_menu_save_map_make_directory.h"
+#include "editor/ui_menus/editor_main_menu_save_map_make_directory.h"
 #include "graphic/graphic.h"
 #include "i18n.h"
 #include "io/filesystem/filesystem.h"

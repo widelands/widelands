@@ -17,7 +17,7 @@
  *
  */
 
-#include "progresswindow.h"
+#include "ui_basic/progresswindow.h"
 
 #ifndef _MSC_VER
 #include <sys/time.h>

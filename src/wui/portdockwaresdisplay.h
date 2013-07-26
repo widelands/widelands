@@ -20,9 +20,9 @@
 #ifndef WUI_PORTDOCKWARES_DISPLAY_H
 #define WUI_PORTDOCKWARES_DISPLAY_H
 
-#include "interactive_gamebase.h"
+#include "wui/interactive_gamebase.h"
 #include "ui_basic/box.h"
-#include "waresdisplay.h"
+#include "wui/waresdisplay.h"
 
 namespace Widelands {
 struct PortDock;

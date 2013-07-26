@@ -17,7 +17,7 @@
  *
  */
 
-#include "editor_main_menu_map_options.h"
+#include "editor/ui_menus/editor_main_menu_map_options.h"
 
 #include <cstdio>
 

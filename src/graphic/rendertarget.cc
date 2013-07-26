@@ -17,16 +17,16 @@
  *
  */
 
-#include "rendertarget.h"
+#include "graphic/rendertarget.h"
 
-#include "animation.h"
-#include "animation_gfx.h"
-#include "graphic.h"
-#include "image_transformations.h"
+#include "graphic/animation.h"
+#include "graphic/animation_gfx.h"
+#include "graphic/graphic.h"
+#include "graphic/image_transformations.h"
+#include "graphic/surface.h"
 #include "log.h"
 #include "logic/player.h"
 #include "logic/tribe.h"
-#include "surface.h"
 #include "upcast.h"
 #include "vertex.h"
 #include "wui/mapviewpixelconstants.h"

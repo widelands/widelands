@@ -17,11 +17,11 @@
  *
  */
 
-#include "textstream.h"
+#include "graphic/text/textstream.h"
 
 #include <boost/format.hpp>
 
-#include "rt_errors_impl.h"
+#include "graphic/text/rt_errors_impl.h"
 
 using namespace std;
 using namespace boost;

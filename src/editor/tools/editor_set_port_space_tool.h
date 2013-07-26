@@ -20,7 +20,7 @@
 #ifndef EDITOR_SET_PORT_SPACE_TOOL_H
 #define EDITOR_SET_PORT_SPACE_TOOL_H
 
-#include "editor_tool.h"
+#include "editor/tools/editor_tool.h"
 #include "logic/widelands.h"
 
 #define FSEL_ESPS_FILENAME "pics/fsel_editor_set_port_space.png"

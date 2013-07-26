@@ -29,7 +29,7 @@
 #include <unistd.h>
 #endif
 
-#include "fxset.h"
+#include "sound/fxset.h"
 #include "io/fileread.h"
 #include "logic/widelands_geometry.h"
 #include "random.h"

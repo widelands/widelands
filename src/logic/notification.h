@@ -24,7 +24,7 @@
 #include <vector>
 
 #include "container_iterate.h"
-#include "widelands_geometry.h"
+#include "logic/widelands_geometry.h"
 
 namespace Widelands {
 

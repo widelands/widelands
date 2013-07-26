@@ -17,26 +17,26 @@
  *
  */
 
-#include "world.h"
+#include "logic/world.h"
 
 #include <iostream>
 #include <sstream>
 
 #include "constants.h"
 #include "container_iterate.h"
-#include "critter_bob.h"
-#include "game_data_error.h"
 #include "graphic/graphic.h"
 #include "helper.h"
 #include "i18n.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "log.h"
+#include "logic/critter_bob.h"
+#include "logic/game_data_error.h"
+#include "logic/widelands_fileread.h"
+#include "logic/widelands_filewrite.h"
+#include "logic/worlddata.h"
 #include "parse_map_object_types.h"
 #include "profile/profile.h"
 #include "wexception.h"
-#include "widelands_fileread.h"
-#include "widelands_filewrite.h"
-#include "worlddata.h"
 
 using std::cerr;
 using std::endl;

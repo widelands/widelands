@@ -17,7 +17,7 @@
  *
  */
 
-#include "widelands_map_extradata_data_packet.h"
+#include "map_io/widelands_map_extradata_data_packet.h"
 
 #include <SDL_image.h>
 

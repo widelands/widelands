@@ -18,29 +18,29 @@
  */
 
 
-#include "productionsite.h"
+#include "logic/productionsite.h"
 
 #include <boost/format.hpp>
 #include <libintl.h>
 
-#include "carrier.h"
 #include "economy/economy.h"
 #include "economy/request.h"
 #include "economy/ware_instance.h"
 #include "economy/wares_queue.h"
-#include "editor_game_base.h"
-#include "game.h"
 #include "helper.h"
 #include "i18n.h"
-#include "map.h"
-#include "player.h"
+#include "logic/carrier.h"
+#include "logic/editor_game_base.h"
+#include "logic/game.h"
+#include "logic/map.h"
+#include "logic/player.h"
+#include "logic/soldier.h"
+#include "logic/tribe.h"
+#include "logic/warelist.h"
+#include "logic/world.h"
 #include "profile/profile.h"
-#include "soldier.h"
-#include "tribe.h"
 #include "upcast.h"
-#include "warelist.h"
 #include "wexception.h"
-#include "world.h"
 
 namespace Widelands {
 

@@ -18,13 +18,12 @@
  */
 // UI classes for real-time game debugging
 
-#include "game_debug_ui.h"
+#include "wui/game_debug_ui.h"
 
 #include <cstdio>
 
 #include "graphic/graphic.h"
 #include "i18n.h"
-#include "interactive_base.h"
 #include "logic/bob.h"
 #include "logic/building.h"
 #include "logic/field.h"
@@ -37,6 +36,7 @@
 #include "ui_basic/panel.h"
 #include "ui_basic/tabpanel.h"
 #include "ui_basic/window.h"
+#include "wui/interactive_base.h"
 
 struct MapObjectDebugPanel
 : public UI::Panel, public Widelands::Map_Object::LogSink
