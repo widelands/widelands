@@ -197,25 +197,27 @@ void Building_Window::create_capsbuttons(UI::Box * capsbuttons)
 		}
 		else
 		if (upcast(const Widelands::ProductionSite, productionsite, &m_building)) {
-			const bool is_stopped = productionsite->is_stopped();
-			UI::Button * stopbtn =
-				new UI::Button
-					(capsbuttons, is_stopped ? "continue" : "stop", 0, 0, 34, 34,
-					 g_gr->images().get("pics/but4.png"),
-					 g_gr->images().get((is_stopped ? "pics/continue.png" : "pics/stop.png")),
-					 is_stopped ? _("Continue") : _("Stop"));
-			stopbtn->sigclicked.connect(boost::bind(&Building_Window::act_start_stop, boost::ref(*this)));
-			capsbuttons->add
-				(stopbtn,
-				 UI::Box::AlignCenter);
+			if (!is_a(Widelands::MilitarySite, productionsite)) {
+				const bool is_stopped = productionsite->is_stopped();
+				UI::Button * stopbtn =
+					new UI::Button
+						(capsbuttons, is_stopped ? "continue" : "stop", 0, 0, 34, 34,
+						 g_gr->images().get("pics/but4.png"),
+						 g_gr->images().get((is_stopped ? "pics/continue.png" : "pics/stop.png")),
+						 is_stopped ? _("Continue") : _("Stop"));
+				stopbtn->sigclicked.connect(boost::bind(&Building_Window::act_start_stop, boost::ref(*this)));
+				capsbuttons->add
+					(stopbtn,
+					 UI::Box::AlignCenter);
 
 
-			// Add a fixed width separator rather than infinite space so the
-			// enhance/destroy/dismantle buttons are fixed in their position
-			// and not subject to the number of buttons on the right of the
-			// panel.
-			UI::Panel * spacer = new UI::Panel(capsbuttons, 0, 0, 17, 34);
-			capsbuttons->add(spacer, UI::Box::AlignCenter);
+				// Add a fixed width separator rather than infinite space so the
+				// enhance/destroy/dismantle buttons are fixed in their position
+				// and not subject to the number of buttons on the right of the
+				// panel.
+				UI::Panel * spacer = new UI::Panel(capsbuttons, 0, 0, 17, 34);
+				capsbuttons->add(spacer, UI::Box::AlignCenter);
+			}
 		} // upcast to productionsite
 
 		if (m_capscache & Widelands::Building::PCap_Enhancable) {
