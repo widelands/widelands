@@ -197,35 +197,7 @@ void Building_Window::create_capsbuttons(UI::Box * capsbuttons)
 		}
 		else
 		if (upcast(const Widelands::ProductionSite, productionsite, &m_building)) {
-			if (upcast(const Widelands::MilitarySite, ms, productionsite))
-			{
-				if (Widelands::MilitarySite::kPrefersHeroes == ms->get_soldier_preference())
-				{
-					UI::Button * cs_btn =
-					new UI::Button
-					(capsbuttons, "rookies", 0, 0, 34, 34,
-						g_gr->images().get("pics/but4.png"),
-						g_gr->images().get("pics/msite_prefer_rookies.png"),
-						_("Prefer rookies"));
-					cs_btn->sigclicked.connect
-					(boost::bind(&Building_Window::act_prefer_rookies, boost::ref(*this)));
-					capsbuttons->add (cs_btn, UI::Box::AlignCenter);
-				}
-				else
-				{
-					UI::Button * cs_btn =
-					new UI::Button
-					(capsbuttons, "heroes", 0, 0, 34, 34,
-						g_gr->images().get("pics/but4.png"),
-						g_gr->images().get("pics/msite_prefer_heroes.png"),
-						_("Prefer heroes"));
-					cs_btn->sigclicked.connect
-					(boost::bind(&Building_Window::act_prefer_heroes, boost::ref(*this)));
-					capsbuttons->add (cs_btn, UI::Box::AlignCenter);
-				}
-			}
-			else // is not a MilitarySite (but is still a productionsite)
-			{
+			if (!is_a(Widelands::MilitarySite, productionsite)) {
 				const bool is_stopped = productionsite->is_stopped();
 				UI::Button * stopbtn =
 					new UI::Button
