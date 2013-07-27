@@ -1581,7 +1581,7 @@ void WLApplication::mainmenu()
 				break;
 			}
 			case Fullscreen_Menu_Main::mm_license: {
-				Fullscreen_Menu_FileView ff("txts/COPYING");
+				Fullscreen_Menu_FileView ff("txts/license");
 				ff.run();
 				break;
 			}
