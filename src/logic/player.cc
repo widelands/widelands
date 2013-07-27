@@ -48,6 +48,39 @@
 
 #include "upcast.h"
 
+namespace {
+static void terraform_for_building
+	(Editor_Game_Base& egbase, const Player_Number player_number,
+	 const Coords location, const Building_Descr* descr)
+{
+	Map & map = egbase.map();
+	FCoords c[4]; //  Big buildings occupy 4 locations.
+	c[0] = map.get_fcoords(location);
+	map.get_brn(c[0], &c[1]);
+	if (BaseImmovable * const immovable = c[0].field->get_immovable())
+		immovable->remove(egbase);
+	{
+		size_t nr_locations = 1;
+		if ((descr->get_size() & Widelands::BUILDCAPS_SIZEMASK)
+			== Widelands::BUILDCAPS_BIG) {
+			nr_locations = 4;
+			map.get_trn(c[0], &c[1]);
+			map.get_tln(c[0], &c[2]);
+			map.get_ln (c[0], &c[3]);
+		}
+		for (size_t i = 0; i < nr_locations; ++i) {
+			//  Make sure that the player owns the area around.
+			egbase.conquer_area_no_building
+				(Player_Area<Area<FCoords> >
+				 	(player_number, Area<FCoords>(c[i], 1)));
+
+			if (BaseImmovable * const immovable = c[i].field->get_immovable())
+				immovable->remove(egbase);
+		}
+	}
+}
+}
+
 namespace Widelands {
 
 extern const Map_Object_Descr g_road_descr;
@@ -404,50 +437,17 @@ Road & Player::force_road(const Path & path) {
 	return Road::create(egbase(), start, end, path);
 }
 
-// NOCOM(#cghislai): The name sounds like the player would prepare the terrain:
-// sending a worker to flatten it out and so on. How about making this a stand
-// alone method that takes an egbase and a player number - you can move it into
-// an anon namespace int this file. A possible name could be
-// terraform_for_building or so.
-void Player::prepare_terrain_for_building
-	(Coords const location, const Building_Descr * descr)
-	// NOCOM(#cghislai): I think taking a const reference for both parameters is better.
-{
-	Map & map = egbase().map();
-	FCoords c[4]; //  Big buildings occupy 4 locations.
-	c[0] = map.get_fcoords(location);
-	map.get_brn(c[0], &c[1]);
-	force_flag(c[1]);
-	if (BaseImmovable * const immovable = c[0].field->get_immovable())
-		immovable->remove(egbase());
-	{
-		size_t nr_locations = 1;
-		if ((descr->get_size() & BUILDCAPS_SIZEMASK) == BUILDCAPS_BIG) {
-			nr_locations = 4;
-			map.get_trn(c[0], &c[1]);
-			map.get_tln(c[0], &c[2]);
-			map.get_ln (c[0], &c[3]);
-		}
-		for (size_t i = 0; i < nr_locations; ++i) {
-			//  Make sure that the player owns the area around.
-			egbase().conquer_area_no_building
-				(Player_Area<Area<FCoords> >
-				 	(player_number(), Area<FCoords>(c[i], 1)));
-
-			if (BaseImmovable * const immovable = c[i].field->get_immovable())
-				immovable->remove(egbase());
-		}
-	}
-}
-
 Building & Player::force_building
 	(Coords                const location,
-	 Building_Descr::FormerBuildings former_buildings)
-	// NOCOM(#cghislai): should really take const references. The vector copy is a lot.
+	 const Building_Descr::FormerBuildings & former_buildings)
 {
 	Map & map = egbase().map();
 	const Building_Descr* descr = former_buildings.back();
-	prepare_terrain_for_building(location, descr);
+	terraform_for_building(egbase(), player_number(), location, descr);
+	FCoords flag_loc;
+	map.get_brn(map.get_fcoords(location), &flag_loc);
+	force_flag(flag_loc);
+
 	return
 		descr->create
 			(egbase(), *this, map.get_fcoords(location), false, false, former_buildings);
@@ -455,12 +455,15 @@ Building & Player::force_building
 
 Building& Player::force_csite
 	(Coords const location, Building_Index b_idx,
-	 Building_Descr::FormerBuildings former_buildings)
-	// NOCOM(#cghislai): same here.
+	 const Building_Descr::FormerBuildings & former_buildings)
 {
 	Map & map = egbase().map();
 	const Building_Descr * descr = tribe().get_building_descr(b_idx);
-	prepare_terrain_for_building(location, descr);
+	terraform_for_building(egbase(), player_number(), location, descr);
+	FCoords flag_loc;
+	map.get_brn(map.get_fcoords(location), &flag_loc);
+	force_flag(flag_loc);
+
 	return
 		egbase().warp_constructionsite
 			(map.get_fcoords(location), m_plnum, b_idx, false, former_buildings);
