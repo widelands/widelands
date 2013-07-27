@@ -404,8 +404,14 @@ Road & Player::force_road(const Path & path) {
 	return Road::create(egbase(), start, end, path);
 }
 
+// NOCOM(#cghislai): The name sounds like the player would prepare the terrain:
+// sending a worker to flatten it out and so on. How about making this a stand
+// alone method that takes an egbase and a player number - you can move it into
+// an anon namespace int this file. A possible name could be
+// terraform_for_building or so.
 void Player::prepare_terrain_for_building
 	(Coords const location, const Building_Descr * descr)
+	// NOCOM(#cghislai): I think taking a const reference for both parameters is better.
 {
 	Map & map = egbase().map();
 	FCoords c[4]; //  Big buildings occupy 4 locations.
@@ -423,7 +429,6 @@ void Player::prepare_terrain_for_building
 			map.get_ln (c[0], &c[3]);
 		}
 		for (size_t i = 0; i < nr_locations; ++i) {
-
 			//  Make sure that the player owns the area around.
 			egbase().conquer_area_no_building
 				(Player_Area<Area<FCoords> >
@@ -438,6 +443,7 @@ void Player::prepare_terrain_for_building
 Building & Player::force_building
 	(Coords                const location,
 	 Building_Descr::FormerBuildings former_buildings)
+	// NOCOM(#cghislai): should really take const references. The vector copy is a lot.
 {
 	Map & map = egbase().map();
 	const Building_Descr* descr = former_buildings.back();
@@ -450,6 +456,7 @@ Building & Player::force_building
 Building& Player::force_csite
 	(Coords const location, Building_Index b_idx,
 	 Building_Descr::FormerBuildings former_buildings)
+	// NOCOM(#cghislai): same here.
 {
 	Map & map = egbase().map();
 	const Building_Descr * descr = tribe().get_building_descr(b_idx);
