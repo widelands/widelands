@@ -460,7 +460,7 @@ struct Player :
 		(const Coords,
 		 Building_Index,
 		 const Building_Descr::FormerBuildings & = Building_Descr::FormerBuildings());
-	Building * build(Coords, Building_Index, bool = true);
+	Building * build(Coords, Building_Index, bool, Building_Descr::FormerBuildings &);
 	void bulldoze(PlayerImmovable &, bool recurse = false);
 	void flagaction(Flag &);
 	void start_stop_building(PlayerImmovable &);
@@ -643,6 +643,10 @@ private:
 
 	BuildingStats m_building_stats;
 };
+
+void find_former_buildings
+	(Building_Descr::FormerBuildings & former_buidlings,
+	 const Tribe_Descr & tribe_descr, const Building_Index bi);
 
 }
 

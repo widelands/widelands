@@ -389,25 +389,29 @@ int L_PlayerBase::place_building(lua_State * L) {
 	if (lua_gettop(L) >= 5)
 		force = luaL_checkboolean(L, 5);
 
-	Building_Index i = get(L, get_egbase(L)).tribe().building_index(name);
+	const Tribe_Descr& td = get(L, get_egbase(L)).tribe();
+	Building_Index i = td.building_index(name);
 	if (i == Building_Index::Null())
 		return report_error(L, "Unknown Building: '%s'", name);
+
+	Building_Descr::FormerBuildings former_buildings;
+	find_former_buildings(former_buildings, td, i);
+	if (constructionsite) {
+		former_buildings.pop_back();
+	}
 
 	Building * b = 0;
 	if (force) {
 		if (constructionsite) {
 			b = &get(L, get_egbase(L)).force_csite
-				(c->coords(), i);
+				(c->coords(), i, former_buildings);
 		} else {
-			Building_Descr::FormerBuildings former_buildings;
-			const Building_Descr * descr = get(L, get_egbase(L)).tribe().get_building_descr(i);
-			former_buildings.push_back(descr);
 			b = &get(L, get_egbase(L)).force_building
 				(c->coords(), former_buildings);
 		}
 	} else {
 		b = get(L, get_egbase(L)).build
-			(c->coords(), i, constructionsite);
+			(c->coords(), i, constructionsite, former_buildings);
 	}
 	if (not b)
 		return report_error(L, "Couldn't place building!");
@@ -482,4 +486,5 @@ void luaopen_wlbases(lua_State * const L) {
 }
 
 };
+
 

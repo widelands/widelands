@@ -50,19 +50,19 @@
 
 namespace {
 static void terraform_for_building
-	(Editor_Game_Base& egbase, const Player_Number player_number,
-	 const Coords location, const Building_Descr* descr)
+	(Widelands::Editor_Game_Base& egbase, const Widelands::Player_Number player_number,
+	 const Widelands::Coords location, const Widelands::Building_Descr* descr)
 {
-	Map & map = egbase.map();
-	FCoords c[4]; //  Big buildings occupy 4 locations.
+	Widelands::Map & map = egbase.map();
+	Widelands::FCoords c[4]; //  Big buildings occupy 4 locations.
 	c[0] = map.get_fcoords(location);
 	map.get_brn(c[0], &c[1]);
-	if (BaseImmovable * const immovable = c[0].field->get_immovable())
+	if (Widelands::BaseImmovable * const immovable = c[0].field->get_immovable())
 		immovable->remove(egbase);
 	{
 		size_t nr_locations = 1;
-		if ((descr->get_size() & Widelands::BUILDCAPS_SIZEMASK)
-			== Widelands::BUILDCAPS_BIG) {
+		if ((descr->get_size() & Widelands::BUILDCAPS_SIZEMASK) == Widelands::BUILDCAPS_BIG)
+		{
 			nr_locations = 4;
 			map.get_trn(c[0], &c[1]);
 			map.get_tln(c[0], &c[2]);
@@ -71,10 +71,10 @@ static void terraform_for_building
 		for (size_t i = 0; i < nr_locations; ++i) {
 			//  Make sure that the player owns the area around.
 			egbase.conquer_area_no_building
-				(Player_Area<Area<FCoords> >
-				 	(player_number, Area<FCoords>(c[i], 1)));
+				(Widelands::Player_Area<Widelands::Area<Widelands::FCoords> >
+				 	(player_number, Widelands::Area<Widelands::FCoords>(c[i], 1)));
 
-			if (BaseImmovable * const immovable = c[i].field->get_immovable())
+			if (Widelands::BaseImmovable * const immovable = c[i].field->get_immovable())
 				immovable->remove(egbase);
 		}
 	}
@@ -477,7 +477,8 @@ Place a construction site or building, checking that it's legal to do so.
 ===============
 */
 Building * Player::build
-	(Coords c, Building_Index const idx, bool constructionsite)
+	(Coords c, Building_Index const idx, bool constructionsite,
+	 Building_Descr::FormerBuildings & former_buidlings)
 {
 	int32_t buildcaps;
 
@@ -506,12 +507,41 @@ Building * Player::build
 	}
 
 	if (constructionsite)
-		return &egbase().warp_constructionsite(c, m_plnum, idx);
+		return &egbase().warp_constructionsite(c, m_plnum, idx, false, former_buidlings);
 	else {
-		return &descr.create(egbase(), *this, c, false);
+		return &descr.create(egbase(), *this, c, false, false, former_buidlings);
 	}
 }
 
+/**
+ * Find the longest possible enhancement chain leading to the given
+ * building descr. The given FormerBuildings must be empty and will be
+ * filled with the Building_Descr.
+ */
+void find_former_buildings
+	(Building_Descr::FormerBuildings & former_buidlings,
+	 const Tribe_Descr & tribe_descr, const Building_Index bi)
+{
+	assert(former_buidlings.empty());
+	const Building_Descr * first_descr = tribe_descr.get_building_descr(bi);
+	former_buidlings.push_back(first_descr);
+	bool done = false;
+	while (not done) {
+		const Building_Descr * oldest = former_buidlings.front();
+		if (!oldest->is_enhanced()) {
+			done = true;
+			break;
+		}
+		const Building_Index & oldest_idx = tribe_descr.building_index(oldest->name());
+		for (Building_Index i = Building_Index::First(); i < tribe_descr.get_nrbuildings(); ++i) {
+			Building_Descr const * ob = tribe_descr.get_building_descr(i);
+			if (ob->enhancements().count(oldest_idx)) {
+				former_buidlings.insert(former_buidlings.begin(), ob);
+				break;
+			}
+		}
+	}
+}
 
 /*
 ===============
