@@ -642,7 +642,13 @@ void Player::_enhance_or_dismantle
 		//  Get workers and soldiers
 		//  Make copies of the vectors, because the originals are destroyed with
 		//  the building.
-		const std::vector<Worker  *> workers  = building->get_workers();
+		std::vector<Worker  *> workers;
+		upcast(Warehouse, wh, building);
+		if (wh) {
+			workers = wh->get_incorporated_workers();
+		} else {
+			workers = building->get_workers();
+		}
 
 		building->remove(egbase()); //  no fire or stuff
 		//  Hereafter the old building does not exist and building is a dangling
