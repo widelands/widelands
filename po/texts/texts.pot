@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2013-07-27 15:16+0000\n"
+"POT-Creation-Date: 2013-07-27 16:51+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -142,6 +142,11 @@ msgstr ""
 #: ../../txts/developers:34
 msgid ""
 "Coders"
+msgstr ""
+
+#: ../../txts/license:7
+msgid ""
+"Copyright 2002 - 2013 by the Widelands Development Team."
 msgstr ""
 
 #: ../../txts/README:150
@@ -363,6 +368,16 @@ msgid ""
 "Keyboard shortcuts (in-game)"
 msgstr ""
 
+#: ../../txts/license:1
+msgid ""
+"License"
+msgstr ""
+
+#: ../../txts/license:4
+msgid ""
+"Licensing information for Widelands"
+msgstr ""
+
 #: ../../txts/tips/editor.tip:10
 msgid ""
 "Like with natural objects (bobs), you can also select multiple animals or groundtextures with CTRL + Mouseclick."
@@ -433,9 +448,24 @@ msgid ""
 "O               Toggle objectives display"
 msgstr ""
 
+#: ../../txts/license:18
+msgid ""
+"On Linux, you can find the file called COPYING in the root of the source or standalone binary package, or in the installation directory (like /usr/share/games/widelands)."
+msgstr ""
+
+#: ../../txts/license:20
+msgid ""
+"On MacOS, you can find the file called COPYING in the archive you downloaded from the website."
+msgstr ""
+
 #: ../../txts/README:159
 msgid ""
 "On Windows, create a shortcut to the file widelands.exe (right-click on widelands.exe and choose Create Shortcut). Then edit the shortcut (right-click on the newly created shortcut and choose Properties). The Target field should read something like c:\\games\\widelands\\widelands.exe. Change this to c:\\games\\widelands\\widelands.exe --record=filename.rec."
+msgstr ""
+
+#: ../../txts/license:19
+msgid ""
+"On Windows, you can find the file called COPYING.txt in the installation folder and the Widelands Start menu entry provides a link to this file."
 msgstr ""
 
 #: ../../txts/README:102
@@ -646,6 +676,16 @@ msgid ""
 "This Editor is intended for players who would like to design their own maps to use with Widelands.<br>As you can see, this Editor is heavy work in progress and as the Editor becomes better and better this text will also get longer and more complete."
 msgstr ""
 
+#: ../../txts/license:22
+msgid ""
+"This game comes as-is and without any warranty. For more information and support you can find us at http://wl.widelands.org (Website, Wiki, Forum for quesions or general support) or https://launchpad.net/widelands (Bugtracker, Translations)."
+msgstr ""
+
+#: ../../txts/license:9
+msgid ""
+"This game is Free and Open Source (FOSS), licensed under the GNU Generic Public License (GPL) V2.0."
+msgstr ""
+
 #: ../../txts/editor_readme:14
 msgid ""
 "Those pages might be more complete and up to date than this file. And there you further can find a short tutorial about building a map."
@@ -701,6 +741,11 @@ msgid ""
 "Using the Watch Replay option in the main menu, a previously played game will be precisely reconstructed for you to watch. Note, however, that even small changes in the game data files or the Widelands executable can cause a replay to become incompatible and to 'go out of sync'. This is similar to how network games will suffer from desynchronization problems if one of the players has a different version of the game."
 msgstr ""
 
+#: ../../txts/license:16
+msgid ""
+"We are also shipping the GPL as text document with Widelands itself."
+msgstr ""
+
 #: ../../txts/README:88
 msgid ""
 "When finishing a road, if Ctrl is down, place flags along the road. Default is to place flags from end to start. If Shift is also down, place flags from start to end instead."
@@ -746,6 +791,16 @@ msgid ""
 "You can find general help for the editor as well as a short tutorial in our wiki at www.widelands.org"
 msgstr ""
 
+#: ../../txts/license:11
+msgid ""
+"You can find more information on FOSS and the GPL by visiting the following webpage: "
+msgstr ""
+
+#: ../../txts/license:14
+msgid ""
+"You can find the full text of the license there as well as further information about its philosophy and the legal implications."
+msgstr ""
+
 #: ../../txts/tips/editor.tip:6
 msgid ""
 "You can select multiple nature object (bob) types if you hold down CTRL during selection. If you then click on the map, an instance of one of the selected object types will be placed."
@@ -769,5 +824,10 @@ msgstr ""
 #: ../../txts/README:5
 msgid ""
 "an open source strategy game"
+msgstr ""
+
+#: ../../txts/license:12
+msgid ""
+"http://www.gnu.org/licenses/old-licenses/gpl-2.0"
 msgstr ""
 

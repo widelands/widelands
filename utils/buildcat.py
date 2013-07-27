@@ -28,7 +28,7 @@ MAINPOTS = [( "maps/maps", [
                 "../../maps/*/*/elemental",
                 "../../campaigns/cconfig"
             ] ),
-            ( "texts/texts", ["../../txts/COPYING",
+            ( "texts/texts", ["../../txts/license",
                           "../../txts/README",
                           "../../txts/developers",
                           "../../txts/editor_readme",
