@@ -17,17 +17,17 @@
  *
  */
 
-#include "progressbar.h"
+#include "ui_basic/progressbar.h"
+
+#include <cstdio>
+
+#include <boost/format.hpp>
 
 #include "constants.h"
 #include "graphic/font.h"
 #include "graphic/font_handler1.h"
-#include "text_layout.h"
 #include "graphic/rendertarget.h"
-
-#include <cstdio>
-#include <boost/format.hpp>
-
+#include "text_layout.h"
 
 namespace UI {
 /**

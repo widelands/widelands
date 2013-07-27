@@ -20,9 +20,8 @@
 #ifndef AI_HINTS_H
 #define AI_HINTS_H
 
-#include <boost/noncopyable.hpp>
-
 #include <SDL_types.h>
+#include <boost/noncopyable.hpp>
 
 struct Section;
 

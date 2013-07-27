@@ -47,7 +47,7 @@ void Map_Players_Messages_Data_Packet::Read
 			Profile prof;
 			try {prof.read(filename, 0, fs);} catch (...) {continue;}
 			prof.get_safe_section("global").get_positive
-					("packet_version", CURRENT_PACKET_VERSION);
+				("packet_version", CURRENT_PACKET_VERSION);
 			MessageQueue & messages = player->messages();
 
 			{

@@ -20,8 +20,8 @@
 #ifndef EDITOR_INCREASE_RESOURCES_TOOL_H
 #define EDITOR_INCREASE_RESOURCES_TOOL_H
 
-#include "editor_decrease_resources_tool.h"
-#include "editor_set_resources_tool.h"
+#include "editor/tools/editor_decrease_resources_tool.h"
+#include "editor/tools/editor_set_resources_tool.h"
 #include "logic/widelands_geometry.h"
 
 /// Increases the resources of a node by a value.

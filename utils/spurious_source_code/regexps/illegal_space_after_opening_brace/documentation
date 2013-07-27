@@ -1,2 +1,0 @@
-This catches an opening brace followed by a space, but it allows it if a
-comment begins there, such as "{ //  comment".

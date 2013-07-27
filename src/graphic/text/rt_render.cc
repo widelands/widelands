@@ -17,6 +17,8 @@
  *
  */
 
+#include "graphic/text/rt_render.h"
+
 #include <queue>
 #include <string>
 #include <vector>
@@ -28,12 +30,10 @@
 
 #include "graphic/image_cache.h"
 #include "graphic/surface.h"
-
+#include "graphic/text/rt_parse.h"
+#include "graphic/text/textstream.h"
 #include "rect.h"
-#include "rt_parse.h"
-#include "textstream.h"
 
-#include "rt_render.h"
 
 using namespace std;
 using namespace boost;

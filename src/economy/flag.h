@@ -20,11 +20,11 @@
 #ifndef FLAG_H
 #define FLAG_H
 
-#include <vector>
 #include <list>
+#include <vector>
 
 #include "logic/immovable.h"
-#include "routing_node.h"
+#include "economy/routing_node.h"
 
 namespace Widelands {
 class Building;

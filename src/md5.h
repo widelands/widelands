@@ -24,8 +24,9 @@
 
 #include <cassert>
 #include <cstring>
-#include <stdint.h>
 #include <string>
+
+#include <stdint.h>
 
 /* Structure to save state of computation between the single steps.  */
 struct md5_ctx {

@@ -20,9 +20,9 @@
 #ifndef STORY_MESSAGE_BOX_H
 #define STORY_MESSAGE_BOX_H
 
-#include "ui_basic/window.h"
-
 #include <vector>
+
+#include "ui_basic/window.h"
 
 struct Story_Message_Box : public UI::Window {
 	Story_Message_Box

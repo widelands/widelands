@@ -1,8 +1,0 @@
-	B_t * const hej = dynamic_cast<B_t *>(du);
-if (B_t const * const hej = dynamic_cast<B_t *>(du)) {
-B_t const*const hej=dynamic_cast  < B_t* >(du)) {
-const B_t *const hej=dynamic_cast<B_t*>
-MN:B_t *const hej=dynamic_cast<B_t*>
-MN::B_t *const hej=dynamic_cast<MN::B_t*>
- B_t const * const hej=dynamic_cast<B_t const*>
-B_t const * const hej=dynamic_cast<B_t const*>

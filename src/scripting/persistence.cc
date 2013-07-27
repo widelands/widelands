@@ -17,16 +17,15 @@
  *
  */
 
+#include "scripting/persistence.h"
+
 #include <lua.hpp>
 
 #include "log.h"
 #include "logic/widelands_fileread.h"
 #include "logic/widelands_filewrite.h"
-
-#include "pluto.h"
-#include "c_utils.h"
-
-#include "persistence.h"
+#include "scripting/c_utils.h"
+#include "scripting/pluto.h"
 
 /*
  * ========================================================================

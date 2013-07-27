@@ -17,9 +17,14 @@
  *
  */
 
-#include "progresswindow.h"
+#include "ui_basic/progresswindow.h"
+
+#ifndef _MSC_VER
+#include <sys/time.h>
+#endif
 
 #include "constants.h"
+#include "container_iterate.h"
 #include "graphic/font.h"
 #include "graphic/font_handler.h"
 #include "graphic/graphic.h"
@@ -27,12 +32,6 @@
 #include "graphic/rendertarget.h"
 #include "i18n.h"
 #include "io/filesystem/layered_filesystem.h"
-
-#include "container_iterate.h"
-
-#ifndef _MSC_VER
-#include <sys/time.h>
-#endif
 
 #define PROGRESS_FONT_COLOR_FG        RGBColor(128, 128, 255)
 #define PROGRESS_FONT_COLOR_BG        RGBColor(64, 64, 0)

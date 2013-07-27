@@ -20,11 +20,11 @@
 #ifndef MACHDEP_H
 #define MACHDEP_H
 
-#include <SDL_endian.h>
-
-#include <stdint.h>
 #include <cstring>
 #include <string>
+
+#include <SDL_endian.h>
+#include <stdint.h>
 
 #include "compile_diagnostics.h"
 

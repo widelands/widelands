@@ -20,11 +20,12 @@
 #ifndef CHECKSTEP_H
 #define CHECKSTEP_H
 
-#include <boost/shared_ptr.hpp>
 #include <set>
 #include <vector>
 
-#include "widelands_geometry.h"
+#include <boost/shared_ptr.hpp>
+
+#include "logic/widelands_geometry.h"
 
 namespace Widelands {
 

@@ -17,36 +17,36 @@
  *
  */
 
-#include "soldier.h"
-
-#include "attackable.h"
-#include "battle.h"
-#include "building.h"
-#include "checkstep.h"
-#include "economy/flag.h"
-#include "editor_game_base.h"
-#include "findbob.h"
-#include "findimmovable.h"
-#include "game.h"
-#include "game_data_error.h"
-#include "gamecontroller.h"
-#include "graphic/graphic.h"
-#include "helper.h"
-#include "map_io/widelands_map_map_object_loader.h"
-#include "map_io/widelands_map_map_object_saver.h"
-#include "message_queue.h"
-#include "militarysite.h"
-#include "player.h"
-#include "profile/profile.h"
-#include "graphic/rendertarget.h"
-#include "tribe.h"
-#include "upcast.h"
-#include "warehouse.h"
-#include "wexception.h"
-#include "wui/mapviewpixelconstants.h"
+#include "logic/soldier.h"
 
 #include <cstdio>
 #include <list>
+
+#include "economy/flag.h"
+#include "gamecontroller.h"
+#include "graphic/graphic.h"
+#include "graphic/rendertarget.h"
+#include "helper.h"
+#include "logic/attackable.h"
+#include "logic/battle.h"
+#include "logic/building.h"
+#include "logic/checkstep.h"
+#include "logic/editor_game_base.h"
+#include "logic/findbob.h"
+#include "logic/findimmovable.h"
+#include "logic/game.h"
+#include "logic/game_data_error.h"
+#include "logic/message_queue.h"
+#include "logic/militarysite.h"
+#include "logic/player.h"
+#include "logic/tribe.h"
+#include "logic/warehouse.h"
+#include "map_io/widelands_map_map_object_loader.h"
+#include "map_io/widelands_map_map_object_saver.h"
+#include "profile/profile.h"
+#include "upcast.h"
+#include "wexception.h"
+#include "wui/mapviewpixelconstants.h"
 
 namespace Widelands {
 

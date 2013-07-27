@@ -20,7 +20,7 @@
 #ifndef LOGIC_FINDBOB_H
 #define LOGIC_FINDBOB_H
 
-#include "map.h"
+#include "logic/map.h"
 
 namespace Widelands {
 

@@ -23,7 +23,7 @@
 #include "chat.h"
 #include "gamecontroller.h"
 #include "gamesettings.h"
-#include "network.h"
+#include "network/network.h"
 
 struct NetClientImpl;
 

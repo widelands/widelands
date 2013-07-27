@@ -1,1 +1,0 @@
-This detects redundant code like "if (a == true)" (shoud be "if (a)") and "while (b = false)" (should be "while (not b)").

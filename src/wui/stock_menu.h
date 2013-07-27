@@ -21,7 +21,7 @@
 #define STOCK_MENU_H
 
 #include "ui_basic/unique_window.h"
-#include "waresdisplay.h"
+#include "wui/waresdisplay.h"
 
 struct Interactive_Player;
 

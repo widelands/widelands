@@ -17,7 +17,9 @@
  *
  */
 
-#include "multiplayersetupgroup.h"
+#include "wui/multiplayersetupgroup.h"
+
+#include <boost/format.hpp>
 
 #include "gamesettings.h"
 #include "graphic/graphic.h"
@@ -27,15 +29,12 @@
 #include "logic/player.h"
 #include "logic/tribe.h"
 #include "profile/profile.h"
-#include "wexception.h"
-
 #include "ui_basic/button.h"
 #include "ui_basic/checkbox.h"
 #include "ui_basic/icon.h"
 #include "ui_basic/scrollbar.h"
 #include "ui_basic/textarea.h"
-
-#include <boost/format.hpp>
+#include "wexception.h"
 
 struct MultiPlayerClientGroup : public UI::Box {
 	MultiPlayerClientGroup

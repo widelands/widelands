@@ -25,12 +25,12 @@
 #include "economy/portdock.h"
 #include "economy/ware_instance.h"
 #include "graphic/graphic.h"
-#include "interactive_gamebase.h"
-#include "itemwaresdisplay.h"
 #include "logic/player.h"
 #include "logic/warehouse.h"
 #include "logic/worker.h"
 #include "upcast.h"
+#include "wui/interactive_gamebase.h"
+#include "wui/itemwaresdisplay.h"
 
 static const char pic_goto[] = "pics/menu_ship_goto.png";
 static const char pic_destination[] = "pics/menu_ship_destination.png";

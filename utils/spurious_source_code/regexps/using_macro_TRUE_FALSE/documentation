@@ -1,1 +1,0 @@
-This catches use of the infamous TRUE and FALSE macros that are sometimes sighted, while allowing identifiers like THE_TRUE_STORY.

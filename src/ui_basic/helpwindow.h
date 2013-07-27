@@ -21,10 +21,9 @@
 #define UI_HELPWINDOW_H
 
 #include "align.h"
-
-#include "multilinetextarea.h"
-#include "unique_window.h"
-#include "window.h"
+#include "ui_basic/multilinetextarea.h"
+#include "ui_basic/unique_window.h"
+#include "ui_basic/window.h"
 
 namespace UI {
 

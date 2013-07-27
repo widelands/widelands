@@ -17,7 +17,7 @@
  *
  */
 
-#include "game_player_economies_data_packet.h"
+#include "game_io/game_player_economies_data_packet.h"
 
 #include "economy/economy_data_packet.h"
 #include "economy/flag.h"
@@ -26,7 +26,6 @@
 #include "logic/player.h"
 #include "logic/widelands_fileread.h"
 #include "logic/widelands_filewrite.h"
-
 #include "upcast.h"
 
 namespace Widelands {

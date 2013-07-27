@@ -20,6 +20,7 @@
 #ifndef ANIMATION_GFX_H
 #define ANIMATION_GFX_H
 
+#include <cstddef>
 #include <vector>
 
 #include "point.h"

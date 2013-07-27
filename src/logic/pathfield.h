@@ -20,10 +20,10 @@
 #ifndef PATHFIELD_H
 #define PATHFIELD_H
 
-#include <boost/shared_ptr.hpp>
-
-#include <stdint.h>
 #include <vector>
+
+#include <boost/shared_ptr.hpp>
+#include <stdint.h>
 
 #include "cookie_priority_queue.h"
 

@@ -20,8 +20,9 @@
 #ifndef POINT_H
 #define POINT_H
 
-#include <stdint.h>
 #include <limits>
+
+#include <stdint.h>
 
 struct Point {
 	Point() throw () : x(0), y(0) {}

@@ -17,19 +17,18 @@
  *
  */
 
-#include "game_saver.h"
+#include "game_io/game_saver.h"
 
+#include "game_io/game_cmd_queue_data_packet.h"
+#include "game_io/game_game_class_data_packet.h"
+#include "game_io/game_interactive_player_data_packet.h"
+#include "game_io/game_map_data_packet.h"
+#include "game_io/game_player_economies_data_packet.h"
+#include "game_io/game_player_info_data_packet.h"
+#include "game_io/game_preload_data_packet.h"
 #include "io/filesystem/filesystem.h"
-#include "logic/game.h"
-#include "game_cmd_queue_data_packet.h"
-#include "game_game_class_data_packet.h"
-#include "game_map_data_packet.h"
-#include "game_preload_data_packet.h"
-#include "game_interactive_player_data_packet.h"
-#include "game_player_economies_data_packet.h"
-#include "game_player_info_data_packet.h"
-
 #include "log.h"
+#include "logic/game.h"
 
 namespace Widelands {
 

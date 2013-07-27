@@ -17,7 +17,7 @@
  *
  */
 
-#include "editor_tool_options_menu.h"
+#include "editor/ui_menus/editor_tool_options_menu.h"
 
 Editor_Tool_Options_Menu::Editor_Tool_Options_Menu
 	(Editor_Interactive         &       parent,

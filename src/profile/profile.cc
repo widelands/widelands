@@ -17,17 +17,7 @@
  *
  */
 
-#include "profile.h"
-
-#include "build_info.h"
-#include "io/fileread.h"
-#include "io/filewrite.h"
-#include "i18n.h"
-#include "logic/player.h"
-#include "logic/tribe.h"
-#include "wexception.h"
-
-#include "log.h"
+#include "profile/profile.h"
 
 #include <cctype>
 #include <cstdarg>
@@ -35,6 +25,15 @@
 #include <cstring>
 #include <limits>
 #include <string>
+
+#include "build_info.h"
+#include "i18n.h"
+#include "io/fileread.h"
+#include "io/filewrite.h"
+#include "log.h"
+#include "logic/player.h"
+#include "logic/tribe.h"
+#include "wexception.h"
 
 #define TRUE_WORDS 4
 char const * trueWords[TRUE_WORDS] =

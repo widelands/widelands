@@ -20,10 +20,10 @@
 #ifndef INTERACTIVE_SPECTATOR_H
 #define INTERACTIVE_SPECTATOR_H
 
-#include "ui_basic/button.h"
-
-#include "interactive_gamebase.h"
 #include <SDL_keyboard.h>
+
+#include "wui/interactive_gamebase.h"
+#include "ui_basic/button.h"
 
 namespace Widelands {struct Game;}
 

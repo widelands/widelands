@@ -19,7 +19,7 @@
 #ifndef BATTLE_H
 #define BATTLE_H
 
-#include "instances.h"
+#include "logic/instances.h"
 
 namespace Widelands {
 class Soldier;

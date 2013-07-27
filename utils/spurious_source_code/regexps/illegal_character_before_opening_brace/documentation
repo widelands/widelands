@@ -1,1 +1,0 @@
-This catches an opening brace that comes after a character that is not tab or space. It detects code like "if (condition){", which should be "if (condition) {". The @ is there because @{ seem to be used in doxygen comments. Characters after // are ignored.

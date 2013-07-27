@@ -20,10 +20,10 @@
 #ifndef MANAGER_H
 #define MANAGER_H
 
-#include "container_iterate.h"
-
 #include <cassert>
 #include <vector>
+
+#include "container_iterate.h"
 
 /// Manages items of type T. Takes ownership of them. Assumes that they can be
 /// deallocated with operator delete, so only register items that were

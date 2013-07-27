@@ -20,7 +20,7 @@
 #ifndef UI_WINDOW_H
 #define UI_WINDOW_H
 
-#include "panel.h"
+#include "ui_basic/panel.h"
 
 namespace UI {
 /**

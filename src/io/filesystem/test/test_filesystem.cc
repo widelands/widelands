@@ -18,12 +18,15 @@
  */
 
 #include <exception>
+#ifdef _WIN32
+#include <sstream>
+#endif
+
 #include <boost/test/unit_test.hpp>
 
 #include "io/filesystem/disk_filesystem.h"
 
 #ifdef _WIN32
-#include <sstream>
 static std::string Win32Path(std::string s)
 {
 	for (size_t i = 0; i < s.size(); i++)

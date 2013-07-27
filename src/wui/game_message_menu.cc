@@ -17,19 +17,18 @@
  *
  */
 
-#include "game_message_menu.h"
+#include "wui/game_message_menu.h"
 
 #include <boost/bind.hpp>
 
+#include "container_iterate.h"
 #include "graphic/graphic.h"
-#include "interactive_player.h"
+#include "logic/instances.h"
 #include "logic/message_queue.h"
 #include "logic/player.h"
 #include "logic/playercommand.h"
-#include "logic/instances.h"
-
-#include "container_iterate.h"
 #include "timestring.h"
+#include "wui/interactive_player.h"
 
 using Widelands::Message;
 using Widelands::Message_Id;

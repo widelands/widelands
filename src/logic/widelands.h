@@ -22,8 +22,9 @@
 
 #include <cassert>
 #include <cstddef>
-#include <stdint.h>
 #include <limits>
+
+#include <stdint.h>
 
 #include "port.h"
 

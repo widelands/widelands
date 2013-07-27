@@ -1,4 +1,0 @@
-This catches clumsy expressions like
-   some_container[some_container.size() - 1]
-which should be written as
-   *some_container.rbegin()

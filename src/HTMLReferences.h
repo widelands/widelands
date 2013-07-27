@@ -20,15 +20,14 @@
 #ifndef HTML_REFERENCERS_H
 #define HTML_REFERENCERS_H
 
-#include "writeHTML.h"
-
-#ifdef WRITE_GAME_DATA_AS_HTML
-
-#include "logic/widelands.h"
-
 #include <map>
 #include <set>
 #include <string>
+
+#include "logic/widelands.h"
+#include "writeHTML.h"
+
+#ifdef WRITE_GAME_DATA_AS_HTML
 
 struct HTMLReferences {
 	enum Role {Input, Output, Madeof, Become, Employ, End};

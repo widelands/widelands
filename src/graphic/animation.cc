@@ -17,20 +17,18 @@
  *
  */
 
-#include "animation.h"
-
-#include "diranimations.h"
-#include "logic/bob.h"
-#include "constants.h"
-#include "i18n.h"
-#include "profile/profile.h"
-#include "sound/sound_handler.h"
-#include "wexception.h"
-
-#include "helper.h"
+#include "graphic/animation.h"
 
 #include <cstdio>
 
+#include "constants.h"
+#include "graphic/diranimations.h"
+#include "helper.h"
+#include "i18n.h"
+#include "logic/bob.h"
+#include "profile/profile.h"
+#include "sound/sound_handler.h"
+#include "wexception.h"
 
 /// Find out if there is a sound effect registered for the animation's frame
 /// and try to play it. This is used to have sound effects that are tightly

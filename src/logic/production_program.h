@@ -20,23 +20,22 @@
 #ifndef PRODUCTION_PROGRAM_H
 #define PRODUCTION_PROGRAM_H
 
-#include "program_result.h"
-#include "tattribute.h"
-#include "ware_types.h"
-#include "widelands.h"
-#include "writeHTML.h"
-
-#include "io/filewrite.h"
-#include "log.h"
-
-#include "container_iterate.h"
-
 #include <cassert>
-#include <stdint.h>
 #include <cstring>
 #include <set>
 #include <string>
 #include <vector>
+
+#include <stdint.h>
+
+#include "container_iterate.h"
+#include "io/filewrite.h"
+#include "log.h"
+#include "logic/program_result.h"
+#include "logic/tattribute.h"
+#include "logic/ware_types.h"
+#include "logic/widelands.h"
+#include "writeHTML.h"
 
 struct Profile;
 

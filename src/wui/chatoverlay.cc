@@ -17,7 +17,7 @@
  *
  */
 
-#include "chatoverlay.h"
+#include "wui/chatoverlay.h"
 
 #include "chat.h"
 #include "graphic/rendertarget.h"

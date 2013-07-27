@@ -19,11 +19,11 @@
 
 #include "log.h"
 
-#include "io/dedicated_log.h"
-
 #include <cstdarg>
 #include <cstdio>
 #include <iostream>
+
+#include "io/dedicated_log.h"
 
 // Default to stdout for logging.
 std::ostream & wout = std::cout;

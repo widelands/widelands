@@ -20,7 +20,7 @@
 #ifndef IDLEWORKERSUPPLY_H
 #define IDLEWORKERSUPPLY_H
 
-#include "supply.h"
+#include "economy/supply.h"
 
 namespace Widelands {
 class Worker;

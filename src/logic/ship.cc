@@ -17,25 +17,25 @@
  *
  */
 
-#include "ship.h"
+#include "logic/ship.h"
 
-#include "constructionsite.h"
 #include "economy/economy.h"
 #include "economy/fleet.h"
 #include "economy/portdock.h"
 #include "economy/wares_queue.h"
-#include "findbob.h"
-#include "game.h"
-#include "game_data_error.h"
-#include "map.h"
-#include "mapastar.h"
+#include "logic/constructionsite.h"
+#include "logic/findbob.h"
+#include "logic/game.h"
+#include "logic/game_data_error.h"
+#include "logic/map.h"
+#include "logic/mapastar.h"
+#include "logic/mapregion.h"
+#include "logic/path.h"
+#include "logic/player.h"
+#include "logic/tribe.h"
+#include "logic/warehouse.h"
 #include "map_io/widelands_map_map_object_loader.h"
 #include "map_io/widelands_map_map_object_saver.h"
-#include "mapregion.h"
-#include "path.h"
-#include "player.h"
-#include "tribe.h"
-#include "warehouse.h"
 #include "wui/interactive_gamebase.h"
 
 namespace Widelands {

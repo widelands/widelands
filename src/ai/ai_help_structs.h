@@ -20,15 +20,15 @@
 #ifndef AI_HELP_STRUCTS_H
 #define AI_HELP_STRUCTS_H
 
-#include "logic/checkstep.h"
+#include <list>
+
 #include "economy/flag.h"
 #include "economy/road.h"
+#include "logic/checkstep.h"
 #include "logic/findnode.h"
 #include "logic/game.h"
 #include "logic/map.h"
 #include "logic/player.h"
-
-#include <list>
 
 namespace Widelands {
 

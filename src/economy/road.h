@@ -20,11 +20,11 @@
 #ifndef ROAD_H
 #define ROAD_H
 
+#include <vector>
+
 #include "logic/immovable.h"
 #include "logic/path.h"
 #include "logic/roadtype.h"
-
-#include <vector>
 
 namespace Widelands {
 struct Carrier;

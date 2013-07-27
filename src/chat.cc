@@ -17,9 +17,9 @@
  *
  */
 
-#include "logic/player.h"
-
 #include "chat.h"
+
+#include "logic/player.h"
 
 using namespace Widelands;
 

@@ -1,4 +1,0 @@
-Some_Type ha = dynamic_cast<Some_Type>
-Some_Type ha = dynamic_cast<Some_Typ>
-const B_t * hej = dymamic_cast<B_t *>
-MN::B_t *const hej=dynamic_cast<B_t*>
