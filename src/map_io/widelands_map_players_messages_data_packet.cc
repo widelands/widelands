@@ -17,22 +17,23 @@
  *
  */
 
-#include "widelands_map_players_messages_data_packet.h"
+#include "map_io/widelands_map_players_messages_data_packet.h"
 
 #include "logic/game_data_error.h"
 #include "logic/player.h"
-#include "widelands_map_map_object_saver.h"
+#include "map_io/widelands_map_map_object_saver.h"
+#include "map_io/widelands_map_map_object_loader.h"
 #include "profile/profile.h"
 
 namespace Widelands {
 
-#define CURRENT_PACKET_VERSION 2
+#define CURRENT_PACKET_VERSION 1
 #define PLAYERDIRNAME_TEMPLATE "player/%u"
 #define FILENAME_TEMPLATE PLAYERDIRNAME_TEMPLATE "/messages"
 #define FILENAME_SIZE 19
 
 void Map_Players_Messages_Data_Packet::Read
-	(FileSystem & fs, Editor_Game_Base & egbase, bool, Map_Map_Object_Loader &)
+	(FileSystem & fs, Editor_Game_Base & egbase, bool, Map_Map_Object_Loader & mol)
 	throw (_wexception)
 {
 	uint32_t      const gametime   = egbase.get_gametime ();
@@ -45,8 +46,7 @@ void Map_Players_Messages_Data_Packet::Read
 			snprintf(filename, sizeof(filename), FILENAME_TEMPLATE, p);
 			Profile prof;
 			try {prof.read(filename, 0, fs);} catch (...) {continue;}
-			uint32_t paquet_version =
-				prof.get_safe_section("global").get_positive
+			prof.get_safe_section("global").get_positive
 					("packet_version", CURRENT_PACKET_VERSION);
 			MessageQueue & messages = player->messages();
 
@@ -134,11 +134,14 @@ void Map_Players_Messages_Data_Packet::Read
 							throw game_data_error("status: %s", e.what());
 						}
 					}
-					uint32_t serial = 0;
-					if (paquet_version >= 2) {
-						serial = s->get_int("serial");
+					Serial serial = s->get_int("serial", 0);
+					if (serial > 0) {
+						assert(mol.is_object_known(serial));
+						Map_Object & mo = mol.get<Map_Object>(serial);
+						assert(mol.is_object_loaded(mo));
+						serial = mo.serial();
 					}
-					
+
 					messages.add_message
 						(*new Message
 						 	(s->get_string     ("sender", ""),
@@ -196,7 +199,6 @@ throw (_wexception)
 					 "\tbody: %s\n"
 					 "\tposition: (%i, %i)\n"
 					 "\tstatus: %s\n",
-					 "\tserial: %d\n",
 					 message.sent(), message.duration(),
 					 message.sent() + message.duration(), egbase.get_gametime(),
 					 message.sender().c_str(), message.title().c_str(),
@@ -204,8 +206,7 @@ throw (_wexception)
 					 message.position().x, message.position().y,
 					 message.status() == Message::New      ? "new"      :
 					 message.status() == Message::Read     ? "read"     :
-					 message.status() == Message::Archived ? "archived" : "ERROR",
-					 message.serial());
+					 message.status() == Message::Archived ? "archived" : "ERROR");
 			assert
 				(message.duration() == Forever() or
 				 static_cast<uint32_t>(egbase.get_gametime())
@@ -235,7 +236,11 @@ throw (_wexception)
 			default:
 				assert(false);
 			}
-			s.set_int       ("serial",    message.serial());
+			if (message.serial()) {
+				const Map_Object* mo = egbase.objects().get_object(message.serial());
+				uint32_t fileindex = mos.get_object_file_index_or_zero(mo);
+				s.set_int       ("serial",    fileindex);
+			}
 		}
 		char filename[FILENAME_SIZE];
 		snprintf(filename, sizeof(filename), PLAYERDIRNAME_TEMPLATE, p);
