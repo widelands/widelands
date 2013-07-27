@@ -28,6 +28,7 @@
 #include <boost/function.hpp>
 #include <boost/noncopyable.hpp>
 #include <boost/unordered_map.hpp>
+#include <boost/signal.hpp>
 
 #include "logic/cmd_queue.h"
 #include "log.h"
@@ -195,6 +196,13 @@ public:
 	virtual char const * type_name() const throw () {return "map object";}
 
 	Serial serial() const {return m_serial;}
+
+	/**
+	 * Is called right before the object will be removed from
+	 * the game. No conncetion is handled in this class.
+	 * \param serial : the object serial
+	 */
+	boost::signal<void(uint32_t)> removed;
 
 	/**
 	 * Attributes are fixed boolean properties of an object.

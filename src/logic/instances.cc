@@ -355,6 +355,7 @@ m_descr(the_descr), m_serial(0), m_logsink(0)
  */
 void Map_Object::remove(Editor_Game_Base & egbase)
 {
+	removed(m_serial); // Signal call
 	cleanup(egbase);
 	delete this;
 }
