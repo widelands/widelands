@@ -7,13 +7,13 @@ msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2013-07-18 19:39+0000\n"
-"PO-Revision-Date: 2013-07-25 13:43+0000\n"
+"PO-Revision-Date: 2013-07-26 19:03+0000\n"
 "Last-Translator: István Kiss <kiemc@citromail.hu>\n"
 "Language-Team: Language <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-07-26 05:10+0000\n"
+"X-Launchpad-Export-Date: 2013-07-27 04:33+0000\n"
 "X-Generator: Launchpad (build 16700)\n"
 
 #: ../../tribes/barbarians/axefactory/help.lua:12
@@ -306,8 +306,9 @@ msgid ""
 "A bigger morsel than the ration to provide miners in deep mines. It is "
 "produced in an inn or a big inn out of fish/meat, pitta bread and beer."
 msgstr ""
-"Nagyobb adag az élelmiszernél, amit a mélyebb bányákban használnak a "
-"bányászok. Kocsmában, Fogadóban készül hal vagy hú és sör felhasználásával."
+"Egy nagyobb adag a harapnivalónál, hogy ellássa a mély bányák munkásait. "
+"Fogadóban vagy nagy fogadóban készül hal vagy hús, illetve pita és sör "
+"felhasználásával."
 
 #: ../../tribes/barbarians/helm/conf:1
 msgid ""
@@ -315,9 +316,9 @@ msgid ""
 "and used in the trainingscamp - together with food -  to train soldiers from "
 "healthpoints level 0 to healphpoints level 1."
 msgstr ""
-"A sisak egy alapvető eszköz a harcosok megvédésére. A sisakkészítő gyártja "
-"és az kiképzőtáborban használatos - élelmiszerrel együtt - 0 és 1 közötti "
-"életerővel rendelkező katonák képzésére."
+"A sisak egy alapvető eszköz a harcosok megvédésére. A páncélkovácsműhelyben "
+"készül, és a kiképzőtáborban használatos – élelmiszerrel együtt – a katonák "
+"életerejének 0.-ról 1. szintűre fejlesztéséhez."
 
 #: ../../tribes/barbarians/meal/conf:1
 msgid ""
@@ -338,9 +339,9 @@ msgid ""
 "rations on his scouting trips. Rations are produced in a tavern, an inn or a "
 "big inn out of fish or meat or pitta bread."
 msgstr ""
-"Egy kis harapnivaló a bányászoknak, hogy tovább dolgozzanak. A felderítő is "
-"fogyaszt élelmiszert a felderítések alkalmával. Az élelmiszerek kocsmában, "
-"fogadóban vagy nagy fogadóban készülnek halból, húsból vagy kenyérből."
+"Pár falat, ami erőt ad a bányászoknak a további munkához. A felderítő is "
+"fogyaszt harapnivalót a felderítések alkalmával. A harapnivaló kocsmában, "
+"fogadóban vagy nagy fogadóban készül halból, húsból vagy pitából."
 
 #: ../../tribes/barbarians/warhelmet/conf:1
 msgid ""
@@ -348,9 +349,10 @@ msgid ""
 "a helmsmithy and used in a trainingscamp - together with food - to train "
 "soldiers from healthpoints level 1 to level 2."
 msgstr ""
-"A harci sisak egy erősített páncél a barbár harcosoknak.  A sisakkészítő "
-"gyártja és az kiképzőtáborban használatos - élelmiszerrel együtt - 1 és 2 "
-"közötti életerővel rendelkező katonák képzésére."
+"A harci sisak egy erősített páncél a barbár harcosoknak. A "
+"páncélkovácsműhelyben készül, és a kiképzőtáborban használatos – "
+"élelmiszerrel együtt – a katonák életerejének 1.-ről 2. szintűre "
+"fejlesztéséhez."
 
 #: ../../tribes/barbarians/coalmine/help.lua:12
 #: ../../tribes/barbarians/deep_coalmine/help.lua:12
@@ -371,6 +373,8 @@ msgid ""
 "All three weapons take the same time for making, but the required raw "
 "materials vary."
 msgstr ""
+"Mindhárom fegyver készítése ugyanannyi ideig tart, de "
+"nyersanyagszükségleteik eltérőek."
 
 #: ../../tribes/barbarians/warmill/help.lua:66
 msgid ""
@@ -487,8 +491,8 @@ msgid ""
 "Beer is produced in micro breweries used in inns and big inns to produce "
 "snacks."
 msgstr ""
-"A sört a sörfőzdében állítják elő, és a fogadóban illetve a nagy fogadóban "
-"használják."
+"A sört a kis sörfőzdében állítják elő, és a fogadóban, illetve a nagy "
+"fogadóban használják fel uzsonna készítéséhez."
 
 #: ../../tribes/barbarians/fish/conf:1
 msgid ""
@@ -748,8 +752,7 @@ msgstr "Szövet"
 #: ../../tribes/barbarians/cloth/conf:2
 msgid ""
 "Cloth is needed for barbarian ships. It is produced out of thatch reed."
-msgstr ""
-"A szövetre a barbár hajóknak van szüksége. Elkészítése nádból történik."
+msgstr "A szövetre a barbár hajóknak van szükségük. Nádból készül."
 
 #: ../../tribes/barbarians/axefactory/help.lua:26
 #: ../../tribes/barbarians/coalmine/help.lua:17
@@ -1120,8 +1123,9 @@ msgid ""
 "Produced in the metal works (but ceases to be produced by the building if it "
 "is enhanced to an axefactory and war mill)."
 msgstr ""
-"A parázsfogó az olvasztár eszköze, aki a kohászatban dolgozik. Az "
-"eszközkészítőnél készül."
+"A tűzifogó a kohász eszköze, aki a kohászatban dolgozik. A "
+"szerszámkovácsműhelyben készül (de továbbfejlesztéseiben, azaz a fejsze- és "
+"a fegyverkovácsműhelyben már nem)."
 
 #: ../../tribes/barbarians/battlearena/help.lua:29
 #: ../../tribes/barbarians/conf:84
@@ -1157,7 +1161,8 @@ msgid ""
 "building if it is enhanced to an axefactory and war mill)."
 msgstr ""
 "A horgászbotokra a barbár halászoknak van szükségük a halászathoz. Ez az "
-"egyik alapvető eszköz ami az eszközkészítőnél készül."
+"egyik alapvető eszköz, ami a szerszámkovácsműhelyben készül (de "
+"továbbfejlesztéseiben, azaz a fejsze- és a fegyverkovácsműhelyben már nem)."
 
 #: ../../tribes/barbarians/conf:171
 #: ../../tribes/barbarians/conf:225
@@ -1369,9 +1374,10 @@ msgid ""
 "Be sure to have a metalworks to produce this basic tool (but ceases to be "
 "produced by the building if it is enhanced to an axefactory and war mill)."
 msgstr ""
-"Hogy tudna valaki ételt vagy harapnivalót készíteni, ha nincsenek konyhai "
-"eszközök? Légy biztos benne, hogy az eszközkészítő készítsen konyhai "
-"eszközöket."
+"Hogy tudna valaki ebédet, uzsonnát vagy harapnivalót készíteni, ha nincsenek "
+"konyhai szerszámok? Mindenképpen készüljenek ilyen alapvető eszközök egy "
+"szerszámkovácsműhelyben (továbbfejlesztéseiben, azaz a fejsze- és a "
+"fegyverkovácsműhelyben már nem készülnek)."
 
 #: ../../tribes/barbarians/hunters_hut/help.lua:17
 msgid "Hunt animals to produce meat."
@@ -1534,17 +1540,15 @@ msgid ""
 "produce weapons and tools in the metalwork shop, axefactory, war mill and in "
 "the helmsmithy."
 msgstr ""
-"A vas a kohászatban készül vasércből, amit később fegyverek és eszközök "
-"készítésére lehet használni az eszközkészítőnél, a fegyverkészítőnél, "
-"illetve a páncélkészítőnél."
+"A vasat a kohóban nyerik ki vasércből. Fegyverek és eszközök készítésére "
+"használják fel a szerszám-, a fejsze-, a fegyver- és a páncélkovácsműhelyben."
 
 #: ../../tribes/barbarians/ironore/conf:1
 msgid ""
 "Iron ores are mined in iron mines. They deliver iron when smelted in a "
 "smelting works."
 msgstr ""
-"A vasércet a vasércbányában bányásszák, ezután a kohászatban vasat "
-"készítenek belőle."
+"A vasércet a vasércbányában termelik ki. A kohóban nyerhető ki belőle a vas."
 
 #: ../../tribes/barbarians/axefactory/help.lua:17
 msgid "It can make Axes, Sharp Axes and Broad Axes."
@@ -1681,10 +1685,10 @@ msgid ""
 "miners. It is also consumed in the training sites (trainingscamp and battle "
 "arena)."
 msgstr ""
-"A húsban nagyon sok energia van. A vadász állítja elő és a kocsmákban, "
-"fogadókban illetve nagy fogadókban használják a fejadagok, harapnivalók és "
-"ebédek elkészítéséhez a bányászok számára. Ezeken kívül még az "
-"kiképzőhelyeken ( kiképzőtábor, küzdőtér)) is használják."
+"A húsban nagyon sok energia van. A vadász állítja elő, és a kocsmákban, "
+"fogadókban, illetve nagy fogadókban használják fel a harapnivalók, uzsonnák "
+"és ebédek elkészítéséhez a bányászok számára. Ezeken kívül még a "
+"kiképzőhelyeken (kiképzőtábor, küzdőtér) is fogyasztják."
 
 #: ../../tribes/barbarians/axefactory/help.lua:32
 #: ../../tribes/barbarians/bakery/help.lua:34
@@ -2180,8 +2184,8 @@ msgid ""
 "Raw Stones are a basic building material of the barbarians. It is produced "
 "in quarries and granite mines."
 msgstr ""
-"A nyers kő az egyik alapvető építkezési alapanyag a barbároknál. A "
-"kőfejtőben és a gránitbányában állítják elő."
+"A nyerskő a barbárok egyik alapvető építőanyaga. A kőfejtőkben és a "
+"gránitbányákban állítják elő."
 
 #: ../../tribes/barbarians/grout/conf:1
 msgid ""
@@ -2501,6 +2505,8 @@ msgid ""
 "Thatch reed is produced in a fernery and used to make the roofs of buildings "
 "waterproof."
 msgstr ""
+"A nádat a nádtermelőkertben aratják, és az épületek tetőit teszik vele "
+"vízhatlanná."
 
 #: ../../tribes/barbarians/fishers_hut/help.lua:49
 #: ../../tribes/barbarians/gamekeepers_hut/help.lua:43
@@ -2766,6 +2772,10 @@ msgid ""
 "used in the taverns, inns and big inns to prepare rations, snacks and meals. "
 "It is also consumed in trainingssites (trainingscamp and battle arena)."
 msgstr ""
+"A barbár pékek mesterei ennek a lapos és ízletes pita kenyérnek. Búza és víz "
+"felhasználásával, titkos recept alapján készül. A pitát a kocsmákban, "
+"fogadókban és nagy fogadókban használják fel harapnivaló, uzsonna és ebéd "
+"készítéséhez. A kiképzőhelyeken (kiképzőtábor és küzdőtér) is fogyasztják."
 
 #: ../../tribes/barbarians/bakingtray/conf:1
 msgid ""
@@ -2774,6 +2784,9 @@ msgid ""
 "produced by the building if the metal works is enhanced to an axefactory and "
 "war mill)."
 msgstr ""
+"A sütőlapát a pék eszköze, és minden péknek sajátja van. Mint minden eszköz, "
+"ez is a szerszámkovácsműhelyben készül (de továbbfejlesztéseiben, azaz a "
+"fejsze- és a fegyverkovácsműhelyben már nem)."
 
 #: ../../tribes/barbarians/broadaxe/conf:1
 msgid ""
@@ -2781,6 +2794,9 @@ msgid ""
 "the trainingscamp - together with food- to train warriors with a fundamental "
 "fighting knowledge (from attack level 1 to attack level 2)."
 msgstr ""
+"A nagy fejsze a fejsze- és a fegyverkovácsműhelyben készül. A "
+"kiképzőtáborban – élelemmel együtt – a harcosok alapvető harci ismeretekkel "
+"való ellátására (a támadás 1.-ről 2. szintűre fejlesztéséhez) használják."
 
 #: ../../tribes/barbarians/bronzeaxe/conf:1
 msgid ""
@@ -2809,6 +2825,10 @@ msgid ""
 "several buildings: lime kiln, smelting works, axefactory, war mill, "
 "helmsmithy."
 msgstr ""
+"A barbárok tüzeit általában szén táplálja. Szénbányákban termelik ki, vagy "
+"fárönkökből készítik faszénégetőházban. Számos épületben felhasználják: a "
+"mészégetőben, a kohászatban, a fejsze-, a fegyver- és a "
+"páncélkovácsműhelyben."
 
 #: ../../tribes/barbarians/hammer/conf:1
 msgid ""
@@ -2817,6 +2837,10 @@ msgid ""
 "It is one of the basic tools produced at the metalwork shop, (but ceases to "
 "be produced by the building if it is enhanced to an axefactory and war mill)."
 msgstr ""
+"A kalapács igen fontos eszköz. Használja a geológus, az építész, a kovács és "
+"a páncélkovács is. Mindig legyen belőle néhány tartalék! Ez egyike azon "
+"alapvető eszközöknek, melyek a szerszámkovácsműhelyben készülnek (de "
+"továbbfejlesztéseiben, azaz a fejsze- és a fegyverkovácsműhelyben már nem)."
 
 #: ../../tribes/barbarians/barrier/help.lua:8
 #: ../../tribes/barbarians/big_inn/help.lua:8
@@ -2852,6 +2876,8 @@ msgid ""
 "(but ceases to be produced by the building if it is enhanced to an "
 "axefactory and war mill)."
 msgstr ""
+"A kasza a földművesek eszköze. A szerszámkovácsműhelyben készül (de "
+"továbbfejlesztéseiben, azaz a fejsze- és a fegyverkovácsműhelyben már nem)."
 
 #: ../../tribes/barbarians/shovel/conf:1
 msgid ""
@@ -2859,6 +2885,9 @@ msgid ""
 "the ranger use it. Produced at the metalwork shop (but ceases to be produced "
 "by the building if it is enhanced to an axefactory and war mill)."
 msgstr ""
+"A lapátra a növények megfelelő gondozásához van szükség. Így a nádtermelő és "
+"az erdőőr használja. A szerszámkovácsműhelyben készül (de "
+"továbbfejlesztéseiben, azaz a fejsze- és a fegyverkovácsműhelyben már nem)."
 
 #: ../../tribes/barbarians/warriorsaxe/conf:1
 msgid ""
@@ -2887,6 +2916,10 @@ msgid ""
 "weapon. It is used (together with food) in the trainingscamp to train "
 "soldiers from attack level 3 to 4."
 msgstr ""
+"Ez egy, a barbárok által készíthető, veszélyes fegyver. A "
+"fejszekovácsműhelyben készül. Csak képzett harcosok tudnak egy ilyen "
+"fegyverrel bánni. A kiképzőtáborban (élelmiszerrel együtt) a katonák "
+"támadásának 3.-ról 4. szintűre fejlesztéséhez használják."
 
 #: ../../tribes/barbarians/mask/conf:1
 msgid ""
@@ -2894,6 +2927,9 @@ msgid ""
 "and used in the trainingscamp - together with food - to train soldiers from "
 "healthpoints level 2 to healthpoints level 3."
 msgstr ""
+"Ez a legfejlettebb barbár páncélzat. A páncélkovácsműhelyben készül, és a "
+"kiképzőtáborban – élelemmel együtt – a katonák életerejének 2.-ról 3. "
+"szintűre fejlesztéséhez használják."
 
 #: ../../tribes/barbarians/granitemine/help.lua:13
 msgid ""
@@ -2924,6 +2960,10 @@ msgid ""
 "(but ceases to be produced by the building if it is enhanced to an "
 "axefactory and war mill)."
 msgstr ""
+"Ez a lándzsa elég könnyű ahhoz, hogy eldobják, de elég nehéz ahhoz, hogy egy "
+"döféssel megöljön bármilyen állatot. Csak a vadászok használják. A "
+"szerszámkovácsműhelyben készül (de továbbfejlesztéseiben, azaz a fejsze- és "
+"a fegyverkovácsműhelyben már nem)."
 
 #: ../../tribes/barbarians/conf:166
 #: ../../tribes/barbarians/conf:173
@@ -3313,6 +3353,8 @@ msgid ""
 "and the brewery. Also the lime kiln and the cattle farm need to be supplied "
 "with water."
 msgstr ""
+"A víz az élet alapja! Felhasználják a pékségben, a kis sörfőzdében és a "
+"sörfőzdében. A mészégetőt és a marhafarmot is el kell látni vízzel."
 
 #: ../../tribes/barbarians/conf:147
 msgid "Weaver"
@@ -3518,6 +3560,10 @@ msgid ""
 "and war mills. In trainingscamps, it is used - together with food- to train "
 "soldiers from attack level 0 to level 1."
 msgstr ""
+"Az újoncok büszkén tanulják a harcot ezzel az erős fegyverrel. Nehezebb és "
+"élesebb a rendes fejszénél. A fejsze- és a fegyverkovácsműhelyben készül. A "
+"kiképzőtáborban – élelmiszerrel együtt – a katonák támadását fejlesztik vele "
+"0.-ról 1. szintre."
 
 #: ../../tribes/barbarians/axefactory/help.lua:63
 #: ../../tribes/barbarians/metalworks/help.lua:70
