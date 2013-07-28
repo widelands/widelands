@@ -411,6 +411,8 @@ void FieldDebugWindow::think()
 		container_iterate(std::vector<Widelands::Bob *>, bobs, j) {
 			if ((*j.current) && mo
 				&& (*j.current)->serial() == mo->serial()) {
+				// Remove from the bob list if we already
+				// have it in our list
 				toremove = true;
 				removeIt = j.current;
 				break;
@@ -420,6 +422,8 @@ void FieldDebugWindow::think()
 			bobs.erase(removeIt);
 			continue;
 		}
+		// Remove from our list if its not in the bobs
+		// list, or if it doesn't seem to exist anymore
 		m_ui_bobs.remove(idx);
 		idx--; //reiter the same index
 	}
