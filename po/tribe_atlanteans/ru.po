@@ -6,15 +6,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2013-07-18 19:39+0000\n"
+"POT-Creation-Date: 2013-07-27 16:51+0000\n"
 "PO-Revision-Date: 2012-01-26 18:58+0000\n"
 "Last-Translator: Izon <Unknown>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-07-19 05:13+0000\n"
-"X-Generator: Launchpad (build 16696)\n"
+"X-Launchpad-Export-Date: 2013-07-28 05:20+0000\n"
+"X-Generator: Launchpad (build 16700)\n"
 
 #: ../../tribes/atlanteans/golden_tabard/conf:1
 msgid ""
@@ -213,7 +213,7 @@ msgstr "Уголь"
 msgid "Coal Mine"
 msgstr "Угольная шахта"
 
-#: ../../tribes/atlanteans/shipyard/conf:21
+#: ../../tribes/atlanteans/shipyard/conf:28
 msgid "Constructing ship"
 msgstr "Строительство корабля"
 
@@ -424,11 +424,11 @@ msgstr "Караульная"
 msgid "Hammer"
 msgstr "Молоток"
 
-#: ../../tribes/atlanteans/blackroot_farm/conf:19
+#: ../../tribes/atlanteans/blackroot_farm/conf:24
 msgid "Harvest blackroot"
 msgstr "собрать урожай чёрного корня"
 
-#: ../../tribes/atlanteans/farm/conf:21
+#: ../../tribes/atlanteans/farm/conf:26
 msgid "Harvest corn"
 msgstr "собрать урожай кукурузы"
 
@@ -566,15 +566,15 @@ msgstr ""
 "Перемалывайте черные корни и зерна, чтобы произвести муку черного корня и "
 "муку, соответственно."
 
-#: ../../tribes/atlanteans/crystalmine/conf:25
+#: ../../tribes/atlanteans/crystalmine/conf:29
 msgid "Mine diamond"
 msgstr "добыть алмаз"
 
-#: ../../tribes/atlanteans/crystalmine/conf:24
+#: ../../tribes/atlanteans/crystalmine/conf:28
 msgid "Mine quartz"
 msgstr "добыть кварц"
 
-#: ../../tribes/atlanteans/crystalmine/conf:23
+#: ../../tribes/atlanteans/crystalmine/conf:27
 msgid "Mine stone"
 msgstr "добыть камень"
 
@@ -615,11 +615,11 @@ msgstr ""
 "добытых лесопилкой. Кузница оружия и верфь используют доски для производства "
 "различных клинков и мощных кораблей."
 
-#: ../../tribes/atlanteans/blackroot_farm/conf:17
+#: ../../tribes/atlanteans/blackroot_farm/conf:22
 msgid "Plant blackroot"
 msgstr "посадить чёрный корень"
 
-#: ../../tribes/atlanteans/farm/conf:19
+#: ../../tribes/atlanteans/farm/conf:24
 msgid "Plant corn"
 msgstr "посадить кукурузу"
 
@@ -639,113 +639,113 @@ msgstr "Сажает деревья."
 msgid "Port"
 msgstr "Порт"
 
-#: ../../tribes/atlanteans/armoursmithy/conf:25
+#: ../../tribes/atlanteans/armoursmithy/conf:30
 msgid "Produce advanced shield"
 msgstr "сделать улучшенный щит"
 
-#: ../../tribes/atlanteans/armoursmithy/conf:26
+#: ../../tribes/atlanteans/armoursmithy/conf:31
 msgid ""
 "Produce advanced shield (only for compatibility with old savegames (build13))"
 msgstr ""
 "сделать улучшенный щит (только для совместимости со старыми сохранениями "
 "(build13))"
 
-#: ../../tribes/atlanteans/toolsmithy/conf:33
+#: ../../tribes/atlanteans/toolsmithy/conf:38
 msgid "Produce bakingtray"
 msgstr "сделать лопатку пекаря"
 
-#: ../../tribes/atlanteans/mill/conf:22
+#: ../../tribes/atlanteans/mill/conf:27
 msgid "Produce blackrootflour"
 msgstr "приготовить чёрную муку"
 
-#: ../../tribes/atlanteans/toolsmithy/conf:39
+#: ../../tribes/atlanteans/toolsmithy/conf:44
 msgid "Produce bow"
 msgstr "сделать охотничий лук"
 
-#: ../../tribes/atlanteans/toolsmithy/conf:34
+#: ../../tribes/atlanteans/toolsmithy/conf:39
 msgid "Produce bucket"
 msgstr "сделать ведро"
 
-#: ../../tribes/atlanteans/mill/conf:21
+#: ../../tribes/atlanteans/mill/conf:26
 msgid "Produce cornflour"
 msgstr "приготовить кукурузную муку"
 
-#: ../../tribes/atlanteans/weaponsmithy/conf:31
+#: ../../tribes/atlanteans/weaponsmithy/conf:36
 msgid "Produce double trident"
 msgstr "сделать двойной трезубец"
 
-#: ../../tribes/atlanteans/toolsmithy/conf:35
+#: ../../tribes/atlanteans/toolsmithy/conf:40
 msgid "Produce fire tongs"
 msgstr "Сделать щипцы"
 
-#: ../../tribes/atlanteans/toolsmithy/conf:36
+#: ../../tribes/atlanteans/toolsmithy/conf:41
 msgid "Produce fishing net"
 msgstr "сделать рыболовную сеть"
 
-#: ../../tribes/atlanteans/weaving-mill/conf:21
+#: ../../tribes/atlanteans/weaving-mill/conf:26
 msgid "Produce golden tabard"
 msgstr "сшить золотую накидку"
 
-#: ../../tribes/atlanteans/toolsmithy/conf:37
+#: ../../tribes/atlanteans/toolsmithy/conf:42
 msgid "Produce hammer"
 msgstr "сделать молоток"
 
-#: ../../tribes/atlanteans/weaponsmithy/conf:32
+#: ../../tribes/atlanteans/weaponsmithy/conf:37
 msgid "Produce heavy double trident"
 msgstr "сделать тяжёлый трезубец"
 
-#: ../../tribes/atlanteans/toolsmithy/conf:38
+#: ../../tribes/atlanteans/toolsmithy/conf:43
 msgid "Produce hook pole"
 msgstr "сделать багор"
 
-#: ../../tribes/atlanteans/weaponsmithy/conf:28
+#: ../../tribes/atlanteans/weaponsmithy/conf:33
 msgid "Produce light trident"
 msgstr "сделать лёгкий трезубец"
 
-#: ../../tribes/atlanteans/weaponsmithy/conf:29
+#: ../../tribes/atlanteans/weaponsmithy/conf:34
 msgid "Produce long trident"
 msgstr "сделать длинный трезубец"
 
-#: ../../tribes/atlanteans/toolsmithy/conf:40
+#: ../../tribes/atlanteans/toolsmithy/conf:45
 msgid "Produce milking tongs"
 msgstr "сделать доильные щипцы"
 
-#: ../../tribes/atlanteans/toolsmithy/conf:41
+#: ../../tribes/atlanteans/toolsmithy/conf:46
 msgid "Produce pick"
 msgstr "сделать кирку"
 
-#: ../../tribes/atlanteans/toolsmithy/conf:42
+#: ../../tribes/atlanteans/toolsmithy/conf:47
 msgid "Produce saw"
 msgstr "сделать пилу"
 
-#: ../../tribes/atlanteans/toolsmithy/conf:43
+#: ../../tribes/atlanteans/toolsmithy/conf:48
 msgid "Produce scythe"
 msgstr "сделать косу"
 
-#: ../../tribes/atlanteans/toolsmithy/conf:44
+#: ../../tribes/atlanteans/toolsmithy/conf:49
 msgid "Produce shovel"
 msgstr "сделать лопату"
 
-#: ../../tribes/atlanteans/weaving-mill/conf:19
+#: ../../tribes/atlanteans/weaving-mill/conf:24
 msgid "Produce spidercloth"
 msgstr "Сделать паучью ткань"
 
-#: ../../tribes/atlanteans/armoursmithy/conf:23
+#: ../../tribes/atlanteans/armoursmithy/conf:28
 msgid "Produce steel shield"
 msgstr "сделать стальной щит"
 
-#: ../../tribes/atlanteans/armoursmithy/conf:24
+#: ../../tribes/atlanteans/armoursmithy/conf:29
 msgid ""
 "Produce steel shield (only for compatibility with old savegames (build13))"
 msgstr ""
 "сделать стальной щит (только для совместимости со старыми сохранениями "
 "(build13))"
 
-#: ../../tribes/atlanteans/weaponsmithy/conf:30
+#: ../../tribes/atlanteans/weaponsmithy/conf:35
 msgid "Produce steel trident"
 msgstr "сделать стальной трезубец"
 
-#: ../../tribes/atlanteans/weaving-mill/conf:20
+#: ../../tribes/atlanteans/weaving-mill/conf:25
 msgid "Produce tabard"
 msgstr "сшить накидку"
 
@@ -879,8 +879,8 @@ msgstr ""
 "Лопаты нужны для ухода за растениями, поэтому их используют лесники и "
 "огородники. Изготавливаются кузнецом."
 
-#: ../../tribes/atlanteans/dungeon/conf:31
-#: ../../tribes/atlanteans/labyrinth/conf:37
+#: ../../tribes/atlanteans/dungeon/conf:39
+#: ../../tribes/atlanteans/labyrinth/conf:45
 msgid "Sleep"
 msgstr "Сон"
 
@@ -888,11 +888,11 @@ msgstr "Сон"
 msgid "Small Tower"
 msgstr "Малая башня"
 
-#: ../../tribes/atlanteans/smelting_works/conf:24
+#: ../../tribes/atlanteans/smelting_works/conf:27
 msgid "Smelt gold"
 msgstr "выплавить золото"
 
-#: ../../tribes/atlanteans/smelting_works/conf:23
+#: ../../tribes/atlanteans/smelting_works/conf:26
 msgid "Smelt iron"
 msgstr "выплавить железо"
 
@@ -908,11 +908,11 @@ msgstr "Плавильня"
 msgid "Smelts iron."
 msgstr "Выплавляет железо."
 
-#: ../../tribes/atlanteans/smokery/conf:26
+#: ../../tribes/atlanteans/smokery/conf:29
 msgid "Smoke fish"
 msgstr "закоптить рыбу"
 
-#: ../../tribes/atlanteans/smokery/conf:25
+#: ../../tribes/atlanteans/smokery/conf:28
 msgid "Smoke meat"
 msgstr "закоптить мясо"
 
@@ -1248,11 +1248,11 @@ msgstr ""
 "Атлантов. Кроме того, лесопилка, домик углежога, мастерская инструментов и "
 "коптильня также нуждаются в бревнах."
 
-#: ../../tribes/atlanteans/dungeon/conf:32
+#: ../../tribes/atlanteans/dungeon/conf:40
 msgid "Upgrade soldier attack 0"
 msgstr "улучшить навык атаки 0"
 
-#: ../../tribes/atlanteans/dungeon/conf:33
+#: ../../tribes/atlanteans/dungeon/conf:41
 msgid ""
 "Upgrade soldier attack 0 (only for compatibility with old savegames "
 "(build13))"
@@ -1260,11 +1260,11 @@ msgstr ""
 "улучшить навык атаки 0 (только для совместимости со старыми сохранениями "
 "(build13))"
 
-#: ../../tribes/atlanteans/dungeon/conf:34
+#: ../../tribes/atlanteans/dungeon/conf:42
 msgid "Upgrade soldier attack 1"
 msgstr "улучшить навык атаки 1"
 
-#: ../../tribes/atlanteans/dungeon/conf:35
+#: ../../tribes/atlanteans/dungeon/conf:43
 msgid ""
 "Upgrade soldier attack 1 (only for compatibility with old savegames "
 "(build13))"
@@ -1272,11 +1272,11 @@ msgstr ""
 "улучшить навык атаки 1 (только для совместимости со старыми сохранениями "
 "(build13))"
 
-#: ../../tribes/atlanteans/dungeon/conf:36
+#: ../../tribes/atlanteans/dungeon/conf:44
 msgid "Upgrade soldier attack 2"
 msgstr "улучшить навык атаки 2"
 
-#: ../../tribes/atlanteans/dungeon/conf:37
+#: ../../tribes/atlanteans/dungeon/conf:45
 msgid ""
 "Upgrade soldier attack 2 (only for compatibility with old savegames "
 "(build13))"
@@ -1284,11 +1284,11 @@ msgstr ""
 "улучшить навык атаки 2 (только для совместимости со старыми сохранениями "
 "(build13))"
 
-#: ../../tribes/atlanteans/dungeon/conf:38
+#: ../../tribes/atlanteans/dungeon/conf:46
 msgid "Upgrade soldier attack 3"
 msgstr "улучшить навык атаки 3"
 
-#: ../../tribes/atlanteans/dungeon/conf:39
+#: ../../tribes/atlanteans/dungeon/conf:47
 msgid ""
 "Upgrade soldier attack 3 (only for compatibility with old savegames "
 "(build13))"
@@ -1296,11 +1296,11 @@ msgstr ""
 "улучшить навык атаки 3 (только для совместимости со старыми сохранениями "
 "(build13))"
 
-#: ../../tribes/atlanteans/labyrinth/conf:38
+#: ../../tribes/atlanteans/labyrinth/conf:46
 msgid "Upgrade soldier defense 0"
 msgstr "улучшить навык обороны 0"
 
-#: ../../tribes/atlanteans/labyrinth/conf:39
+#: ../../tribes/atlanteans/labyrinth/conf:47
 msgid ""
 "Upgrade soldier defense 0 (only for compatibility with old savegames "
 "(build13))"
@@ -1308,11 +1308,11 @@ msgstr ""
 "улучшить навык обороны 0 (только для совместимости со старыми сохранениями "
 "(build13))"
 
-#: ../../tribes/atlanteans/labyrinth/conf:40
+#: ../../tribes/atlanteans/labyrinth/conf:48
 msgid "Upgrade soldier defense 1"
 msgstr "улучшить навык обороны 1"
 
-#: ../../tribes/atlanteans/labyrinth/conf:41
+#: ../../tribes/atlanteans/labyrinth/conf:49
 msgid ""
 "Upgrade soldier defense 1 (only for compatibility with old savegames "
 "(build13))"
@@ -1320,33 +1320,33 @@ msgstr ""
 "улучшить навык обороны 1 (только для совместимости со старыми сохранениями "
 "(build13))"
 
-#: ../../tribes/atlanteans/labyrinth/conf:44
+#: ../../tribes/atlanteans/labyrinth/conf:52
 msgid "Upgrade soldier evade 0"
 msgstr "улучшить навык уклонения 0"
 
-#: ../../tribes/atlanteans/labyrinth/conf:45
+#: ../../tribes/atlanteans/labyrinth/conf:53
 msgid ""
 "Upgrade soldier evade 0 (only for compatibility with old savegames (build13))"
 msgstr ""
 "улучшить навык уклонения 0 (только для совместимости со старыми сохранениями "
 "(build13))"
 
-#: ../../tribes/atlanteans/labyrinth/conf:46
+#: ../../tribes/atlanteans/labyrinth/conf:54
 msgid "Upgrade soldier evade 1"
 msgstr "улучшить навык уклонения 1"
 
-#: ../../tribes/atlanteans/labyrinth/conf:47
+#: ../../tribes/atlanteans/labyrinth/conf:55
 msgid ""
 "Upgrade soldier evade 1 (only for compatibility with old savegames (build13))"
 msgstr ""
 "улучшить навык уклонения 1 (только для совместимости со старыми сохранениями "
 "(build13))"
 
-#: ../../tribes/atlanteans/labyrinth/conf:42
+#: ../../tribes/atlanteans/labyrinth/conf:50
 msgid "Upgrade soldier hitpoints 0"
 msgstr "улучшить уровень здоровья 0"
 
-#: ../../tribes/atlanteans/labyrinth/conf:43
+#: ../../tribes/atlanteans/labyrinth/conf:51
 msgid ""
 "Upgrade soldier hitpoints 0 (only for compatibility with old savegames "
 "(build13))"
@@ -1397,34 +1397,34 @@ msgstr "Лесоруб"
 msgid "Woodcutter's House"
 msgstr "Домик лесоруба"
 
-#: ../../tribes/atlanteans/armoursmithy/conf:27
-#: ../../tribes/atlanteans/bakery/conf:21
-#: ../../tribes/atlanteans/blackroot_farm/conf:21
-#: ../../tribes/atlanteans/burners_house/conf:19
-#: ../../tribes/atlanteans/coalmine/conf:21
-#: ../../tribes/atlanteans/crystalmine/conf:26
-#: ../../tribes/atlanteans/farm/conf:23
-#: ../../tribes/atlanteans/fish_breeders_house/conf:17
-#: ../../tribes/atlanteans/fishers_house/conf:16
-#: ../../tribes/atlanteans/foresters_house/conf:16
-#: ../../tribes/atlanteans/goldmine/conf:22
-#: ../../tribes/atlanteans/goldweaver/conf:19
-#: ../../tribes/atlanteans/horsefarm/conf:21
-#: ../../tribes/atlanteans/hunters_house/conf:16
-#: ../../tribes/atlanteans/ironmine/conf:22
-#: ../../tribes/atlanteans/mill/conf:23
-#: ../../tribes/atlanteans/quarry/conf:16
-#: ../../tribes/atlanteans/sawmill/conf:18
-#: ../../tribes/atlanteans/scouts_house/conf:18
-#: ../../tribes/atlanteans/shipyard/conf:22
-#: ../../tribes/atlanteans/smelting_works/conf:25
-#: ../../tribes/atlanteans/smokery/conf:27
-#: ../../tribes/atlanteans/spiderfarm/conf:17
-#: ../../tribes/atlanteans/toolsmithy/conf:45
-#: ../../tribes/atlanteans/weaponsmithy/conf:33
-#: ../../tribes/atlanteans/weaving-mill/conf:22
-#: ../../tribes/atlanteans/well/conf:13
-#: ../../tribes/atlanteans/woodcutters_house/conf:16
+#: ../../tribes/atlanteans/armoursmithy/conf:32
+#: ../../tribes/atlanteans/bakery/conf:25
+#: ../../tribes/atlanteans/blackroot_farm/conf:26
+#: ../../tribes/atlanteans/burners_house/conf:23
+#: ../../tribes/atlanteans/coalmine/conf:25
+#: ../../tribes/atlanteans/crystalmine/conf:30
+#: ../../tribes/atlanteans/farm/conf:28
+#: ../../tribes/atlanteans/fish_breeders_house/conf:20
+#: ../../tribes/atlanteans/fishers_house/conf:19
+#: ../../tribes/atlanteans/foresters_house/conf:20
+#: ../../tribes/atlanteans/goldmine/conf:26
+#: ../../tribes/atlanteans/goldweaver/conf:23
+#: ../../tribes/atlanteans/horsefarm/conf:25
+#: ../../tribes/atlanteans/hunters_house/conf:19
+#: ../../tribes/atlanteans/ironmine/conf:26
+#: ../../tribes/atlanteans/mill/conf:28
+#: ../../tribes/atlanteans/quarry/conf:19
+#: ../../tribes/atlanteans/sawmill/conf:22
+#: ../../tribes/atlanteans/scouts_house/conf:21
+#: ../../tribes/atlanteans/shipyard/conf:29
+#: ../../tribes/atlanteans/smelting_works/conf:28
+#: ../../tribes/atlanteans/smokery/conf:30
+#: ../../tribes/atlanteans/spiderfarm/conf:21
+#: ../../tribes/atlanteans/toolsmithy/conf:50
+#: ../../tribes/atlanteans/weaponsmithy/conf:38
+#: ../../tribes/atlanteans/weaving-mill/conf:27
+#: ../../tribes/atlanteans/well/conf:17
+#: ../../tribes/atlanteans/woodcutters_house/conf:20
 msgid "Work"
 msgstr "работа"
 
