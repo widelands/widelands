@@ -762,7 +762,8 @@ void Soldier::init_auto_task(Game & game) {
 }
 
 struct FindNodeOwned {
-	FindNodeOwned(Player_Number owner) : m_owner(owner){};
+	FindNodeOwned(Player_Number owner) : m_owner(owner)
+	{};
 	bool accept(const Map & map, const FCoords & coords) const {
 		return (coords.field->get_owned_by() == m_owner);
 	}
@@ -851,7 +852,7 @@ void Soldier::attack_update(Game & game, State & state)
 	upcast(Building, location, get_location(game));
 	upcast(Building, enemy, state.objvar1.get(game));
 
-		// Handle returns
+	// Handle returns
 	if (state.ivar2 > 0) {
 		if (state.ivar2 == 1) {
 			// Return home
@@ -907,8 +908,7 @@ void Soldier::attack_update(Game & game, State & state)
 				molog("[attack] Going back to our flag\n");
 			} else {
 				// No location
-				if (get_position().field->get_owned_by() ==
-					get_owner()->player_number()) {
+				if (get_position().field->get_owned_by() == get_owner()->player_number()) {
 					// We are in our land, become fugitive
 					molog("[attack] Back to our land\n");
 					return pop_task(game);
@@ -918,10 +918,10 @@ void Soldier::attack_update(Game & game, State & state)
 				std::vector<Coords> coords;
 				uint32_t maxdist = vision_range() * 2;
 				Area<FCoords> area(map->get_fcoords(get_position()), maxdist);
-				if (map->find_reachable_fields
-					(area, &coords,
-					 CheckStepDefault(descr().movecaps()),
-					 FindNodeOwned(get_owner()->player_number())))
+				if
+					(map->find_reachable_fields
+						(area, &coords, CheckStepDefault(descr().movecaps()),
+						 FindNodeOwned(get_owner()->player_number())))
 				{
 					// Found home land
 					target = coords.front();
@@ -937,9 +937,9 @@ void Soldier::attack_update(Game & game, State & state)
 					(game,
 						target,
 						4, // use larger persist when returning home
-						descr().get_right_walk_anims(does_carry_ware()))) {
+						descr().get_right_walk_anims(does_carry_ware())))
 				return;
-			} else {
+			else {
 				molog("[attack] failed to return to own land\n");
 				return pop_task(game);
 			}

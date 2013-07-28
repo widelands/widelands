@@ -131,8 +131,10 @@ bool FindNodeResourceBreedable::accept
 	}
 	for (Direction dir = FIRST_DIRECTION; dir <= LAST_DIRECTION; ++dir) {
 		const FCoords neighb = map.get_neighbour(coord, dir);
-		if (m_resource == neighb.field->get_resources() &&
-			 neighb.field->get_resources_amount() < neighb.field->get_starting_res_amount()) {
+		if 
+			(m_resource == neighb.field->get_resources()
+			 && neighb.field->get_resources_amount() < neighb.field->get_starting_res_amount())
+		{
 			return true;
 		}
 	}

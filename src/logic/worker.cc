@@ -2411,8 +2411,9 @@ void Worker::leavebuilding_update(Game & game, State & state)
 		return pop_task(game);
 
 	upcast(Building, building, get_location(game));
-	if (!building)
+	if (!building) {
 		return pop_task(game);
+	}
 
 	Flag & baseflag = building->base_flag();
 
