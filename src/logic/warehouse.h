@@ -140,12 +140,6 @@ public:
 	const WareList & get_wares() const;
 	const WareList & get_workers() const;
 
-	/**
-	 * Returns a vector of all incorporated workers. These are the workers
-	 * that are still present in the game, not just a stock figure.
-	 */
-	Workers get_incorporated_workers();
-
 	void insert_wares  (Ware_Index, uint32_t count);
 	void remove_wares  (Ware_Index, uint32_t count);
 	void insert_workers(Ware_Index, uint32_t count);
