@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2013-07-27 16:51+0000\n"
+"POT-Creation-Date: 2013-07-28 18:22+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -683,7 +683,7 @@ msgstr ""
 
 #: ../../txts/license:9
 msgid ""
-"This game is Free and Open Source (FOSS), licensed under the GNU Generic Public License (GPL) V2.0."
+"This game is Free and Open Source (FOSS), licensed under the GNU General Public License (GPL) V2.0."
 msgstr ""
 
 #: ../../txts/editor_readme:14
