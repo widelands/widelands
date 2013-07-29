@@ -279,7 +279,7 @@ void Map_Buildingdata_Data_Packet::read_formerbuildings_v2
 		}
 	}
 }
-}  // namespace Widelands
+
 
 
 void Map_Buildingdata_Data_Packet::read_partially_finished_building
@@ -1731,5 +1731,4 @@ void Map_Buildingdata_Data_Packet::write_trainingsite
 
 	// DONE
 }
-
 }
