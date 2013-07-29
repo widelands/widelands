@@ -1455,15 +1455,14 @@ void Soldier::battle_update(Game & game, State &)
 					char buffer[2048];
 					snprintf
 						(buffer, sizeof(buffer),
-						 _
-						 	("The game engine has encountered a logic error. The %s "
-						 	 "#%u of player %u could not find a way from (%i, %i) "
-						 	 "(with %s immovable) to the opponent (%s #%u of player "
-						 	 "%u) at (%i, %i) (with %s immovable). The %s will now "
-						 	 "desert (but will not be executed). Strange things may "
-						 	 "happen. No solution for this problem has been "
-						 	 "implemented yet. (bug #1951113) (The game has been "
-						 	 "paused.)"),
+							"The game engine has encountered a logic error. The %s "
+							"#%u of player %u could not find a way from (%i, %i) "
+							"(with %s immovable) to the opponent (%s #%u of player "
+							"%u) at (%i, %i) (with %s immovable). The %s will now "
+							"desert (but will not be executed). Strange things may "
+							"happen. No solution for this problem has been "
+							"implemented yet. (bug #536066) (The game has been "
+							"paused.)",
 						 descname().c_str(), serial(), owner().player_number(),
 						 get_position().x, get_position().y,
 						 immovable_position ?
