@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4804\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2013-07-27 18:51+0200\n"
-"PO-Revision-Date: 2013-07-21 10:36+0000\n"
+"POT-Creation-Date: 2013-07-28 20:22+0200\n"
+"PO-Revision-Date: 2013-07-28 17:47+0000\n"
 "Last-Translator: Wesmania <ikk_pl@yahoo.co.uk>\n"
 "Language-Team: Language <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2013-07-28 05:24+0000\n"
+"X-Launchpad-Export-Date: 2013-07-29 05:14+0000\n"
 "X-Generator: Launchpad (build 16700)\n"
 
 #: ../../src/wlapplication.cc:396
@@ -53,6 +53,9 @@ msgid ""
 "Sorry, no double-instance debugging on _WIN32.\n"
 "\n"
 msgstr ""
+"\n"
+"Na _WIN32 nie ma debugowania podwójnych instancji, przykro nam.\n"
+"\n"
 
 #: ../../src/wlapplication.cc:1209
 msgid "--double is disabled. This is not a debug build!"
@@ -1774,7 +1777,7 @@ msgstr "Gracz %u"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:566
 msgid "closed"
-msgstr ""
+msgstr "zamknięte"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:630
 msgid "There was an error!"
@@ -1998,7 +2001,7 @@ msgstr "(katalog)"
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:297
 #: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:224
 msgid "parent"
-msgstr ""
+msgstr "nadrzędny"
 
 #: ../../src/ui_fsmenu/mapselect.cc:502
 msgid ""
@@ -2215,7 +2218,7 @@ msgstr "Zespół Rozwojowy Widelands"
 
 #: ../../src/ui_fsmenu/main.cc:96
 msgid "Licensed under the GNU General Public License V2.0"
-msgstr ""
+msgstr "Opublikowane na licencji GNU General Public License V2.0"
 
 #: ../../src/editor/editorinteractive.cc:64
 msgid "Menu"
@@ -2286,7 +2289,7 @@ msgstr "Bez nazwy"
 
 #: ../../src/wui/multiplayersetupgroup.cc:103
 msgid "free"
-msgstr ""
+msgstr "wolne"
 
 #: ../../src/wui/multiplayersetupgroup.cc:281
 msgid "Shared in"
@@ -2666,11 +2669,11 @@ msgstr "Kliknij żołnierza, by go odesłać"
 
 #: ../../src/wui/soldierlist.cc:411
 msgid "Prefer Rookies"
-msgstr ""
+msgstr "Preferuj rekrutów"
 
 #: ../../src/wui/soldierlist.cc:413
 msgid "Prefer Heroes"
-msgstr ""
+msgstr "Preferuj bohaterów"
 
 #: ../../src/wui/plot_area.cc:108
 msgid "d"
@@ -4157,11 +4160,11 @@ msgstr "(niezamieszkany)"
 
 #: ../../src/logic/productionsite.cc:249
 msgid "Worker missing"
-msgstr ""
+msgstr "Brakuje pracownika"
 
 #: ../../src/logic/productionsite.cc:249
 msgid "Workers missing"
-msgstr ""
+msgstr "Brakuje pracowników"
 
 #: ../../src/logic/productionsite.cc:258
 msgid "(stopped)"
@@ -4169,7 +4172,7 @@ msgstr "(wstrzymany)"
 
 #: ../../src/logic/game.cc:139
 msgid "Not set"
-msgstr ""
+msgstr "Nie ustawione"
 
 #: ../../src/logic/game.cc:228
 msgid "Preloading a map"
@@ -4279,7 +4282,7 @@ msgstr "gracz interaktywny: %s"
 
 #: ../../src/game_io/game_preload_data_packet.cc:60
 msgid "Endless game"
-msgstr ""
+msgstr "Niekończąca się gra"
 
 #: ../../src/game_io/game_preload_data_packet.cc:89
 #: ../../src/map_io/widelands_map_objective_data_packet.cc:71
@@ -4300,7 +4303,7 @@ msgstr "wstępne ładowanie: %s"
 #: ../../src/scripting/lua_game.cc:1086
 #, c-format
 msgid " (achieved %s)"
-msgstr ""
+msgstr " (osiągnął %s)"
 
 #: ../../src/economy/cmd_call_economy_balance.cc:88
 #, c-format
@@ -4741,11 +4744,11 @@ msgstr "nienazwany"
 
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:255
 msgid "directory"
-msgstr ""
+msgstr "katalog"
 
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:259
 msgid "Not a map file"
-msgstr ""
+msgstr "Nie jest plikiem mapy"
 
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:387
 msgid " exists already. Overwrite?"

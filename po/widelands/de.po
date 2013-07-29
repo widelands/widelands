@@ -6,15 +6,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands unofficial-bzr-launchpad-i18n-4955\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2013-07-27 18:51+0200\n"
-"PO-Revision-Date: 2013-07-19 06:51+0000\n"
-"Last-Translator: Tino <Unknown>\n"
+"POT-Creation-Date: 2013-07-28 20:22+0200\n"
+"PO-Revision-Date: 2013-07-28 13:14+0000\n"
+"Last-Translator: Nasenbaer <Unknown>\n"
 "Language-Team: German <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2013-07-28 05:22+0000\n"
+"X-Launchpad-Export-Date: 2013-07-29 05:13+0000\n"
 "X-Generator: Launchpad (build 16700)\n"
 
 #: ../../src/wlapplication.cc:396
@@ -54,6 +54,10 @@ msgid ""
 "Sorry, no double-instance debugging on _WIN32.\n"
 "\n"
 msgstr ""
+"\n"
+"Entschuldigung, Widelands unterstützt keine Doppelt-Instanz Fehlersuche auf "
+"WIN32 Systemen.\n"
+"\n"
 
 #: ../../src/wlapplication.cc:1209
 msgid "--double is disabled. This is not a debug build!"
@@ -832,6 +836,8 @@ msgid ""
 "This is a dedicated server. Send \"@%s help\" to get a full list of "
 "available commands."
 msgstr ""
+"Dies ist ein dedizierter Server. Sende \"@%s help\" um eine Liste von "
+"verfügbaren Kommandos angezeigt zu bekommen."
 
 #: ../../src/network/nethost.cc:1207
 msgid ""
@@ -1816,7 +1822,7 @@ msgstr "Spieler %u"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:566
 msgid "closed"
-msgstr ""
+msgstr "geschlossen"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:630
 msgid "There was an error!"
@@ -2046,7 +2052,7 @@ msgstr "(Ordner)"
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:297
 #: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:224
 msgid "parent"
-msgstr ""
+msgstr "übergeordneter Ordner"
 
 #: ../../src/ui_fsmenu/mapselect.cc:502
 msgid ""
@@ -2265,7 +2271,7 @@ msgstr "Widelands Entwicklungsteam"
 
 #: ../../src/ui_fsmenu/main.cc:96
 msgid "Licensed under the GNU General Public License V2.0"
-msgstr ""
+msgstr "Lizenziert unter der GNU General Public License V2.0"
 
 #: ../../src/editor/editorinteractive.cc:64
 msgid "Menu"
@@ -2337,7 +2343,7 @@ msgstr "Kein Name"
 
 #: ../../src/wui/multiplayersetupgroup.cc:103
 msgid "free"
-msgstr ""
+msgstr "frei"
 
 #: ../../src/wui/multiplayersetupgroup.cc:281
 msgid "Shared in"
@@ -2600,7 +2606,7 @@ msgstr "Spielzeit: "
 
 #: ../../src/wui/game_main_menu_save_game.cc:79
 msgid "Win condition: "
-msgstr ""
+msgstr "Gewinnbedingung: "
 
 #: ../../src/wui/game_main_menu_save_game.cc:140
 #: ../../src/wui/game_main_menu_save_game.cc:182
@@ -2716,11 +2722,11 @@ msgstr "Klicke auf Soldaten um wegzuschicken"
 
 #: ../../src/wui/soldierlist.cc:411
 msgid "Prefer Rookies"
-msgstr ""
+msgstr "Bevorzuge einfache Soldaten"
 
 #: ../../src/wui/soldierlist.cc:413
 msgid "Prefer Heroes"
-msgstr ""
+msgstr "Bevorzuge Helden"
 
 #: ../../src/wui/plot_area.cc:108
 msgid "d"
@@ -4216,11 +4222,11 @@ msgstr "(nicht besetzt)"
 
 #: ../../src/logic/productionsite.cc:249
 msgid "Worker missing"
-msgstr ""
+msgstr "Arbeiter fehlt"
 
 #: ../../src/logic/productionsite.cc:249
 msgid "Workers missing"
-msgstr ""
+msgstr "Arbeiter fehlen"
 
 #: ../../src/logic/productionsite.cc:258
 msgid "(stopped)"
@@ -4228,7 +4234,7 @@ msgstr "(gestoppt)"
 
 #: ../../src/logic/game.cc:139
 msgid "Not set"
-msgstr ""
+msgstr "Nicht festgelegt"
 
 #: ../../src/logic/game.cc:228
 msgid "Preloading a map"
@@ -4338,7 +4344,7 @@ msgstr "interaktiver Spieler: %s"
 
 #: ../../src/game_io/game_preload_data_packet.cc:60
 msgid "Endless game"
-msgstr ""
+msgstr "Endlosspiel"
 
 #: ../../src/game_io/game_preload_data_packet.cc:89
 #: ../../src/map_io/widelands_map_objective_data_packet.cc:71
@@ -4359,7 +4365,7 @@ msgstr "Vorladung: %s"
 #: ../../src/scripting/lua_game.cc:1086
 #, c-format
 msgid " (achieved %s)"
-msgstr ""
+msgstr " (hat %s erreicht)"
 
 #: ../../src/economy/cmd_call_economy_balance.cc:88
 #, c-format
@@ -4801,11 +4807,11 @@ msgstr "namenlos"
 
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:255
 msgid "directory"
-msgstr ""
+msgstr "Ordner"
 
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:259
 msgid "Not a map file"
-msgstr ""
+msgstr "Keine Kartendatei"
 
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:387
 msgid " exists already. Overwrite?"
