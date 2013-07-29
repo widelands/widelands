@@ -263,12 +263,10 @@ void Map_Buildingdata_Data_Packet::read_formerbuildings_v2
 	}
 
 	// iterate through all buildings to find first predecessor
-	bool done = false;
 	const Tribe_Descr & t = b.descr().tribe();
-	while (not done) {
+	while (true) {
 		const Building_Descr * oldest = b.m_old_buildings.front();
 		if (!oldest->is_enhanced()) {
-			done = true;
 			break;
 		}
 		const Building_Index & oldest_idx = t.building_index(oldest->name());
@@ -281,6 +279,7 @@ void Map_Buildingdata_Data_Packet::read_formerbuildings_v2
 		}
 	}
 }
+}  // namespace Widelands
 
 
 void Map_Buildingdata_Data_Packet::read_partially_finished_building
