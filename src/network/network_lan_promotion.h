@@ -22,7 +22,9 @@
 
 #include <list>
 
+#ifndef _WIN32
 #include <sys/socket.h>
+#endif
 #include <sys/types.h>
 
 #include "network/network_system.h"
