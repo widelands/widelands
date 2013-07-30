@@ -156,12 +156,11 @@ void ChatOverlay::Impl::recompute()
 	}
 
 	// Parse log messages to clear old ones
-	if (!log_messages.empty()) {
-		msg_time = log_messages.front().time;
-		while (now - msg_time > CHAT_DISPLAY_TIME) {
-			log_messages.erase(log_messages.begin());
-			msg_time = log_messages.front().time;
-		}
+	while
+		(!log_messages.empty()
+		&& msg_time = log_messages.front().time < now - CHAT_DISPLAY_TIME)
+	{
+		log_messages.erase(log_messages.begin());
 	}
 
 	if (havemessages) {
