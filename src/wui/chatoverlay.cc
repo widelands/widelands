@@ -156,10 +156,12 @@ void ChatOverlay::Impl::recompute()
 	}
 
 	// Parse log messages to clear old ones
-	msg_time = log_messages.front().time;
-	while (now - msg_time > CHAT_DISPLAY_TIME) {
-		log_messages.erase(log_messages.begin());
+	if (!log_messages.empty()) {
 		msg_time = log_messages.front().time;
+		while (now - msg_time > CHAT_DISPLAY_TIME) {
+			log_messages.erase(log_messages.begin());
+			msg_time = log_messages.front().time;
+		}
 	}
 
 	if (havemessages) {
@@ -182,7 +184,9 @@ void ChatOverlay::draw(RenderTarget & dst)
 		Rect rect(0, top, im->width(), height);
 		dst.fill_rect(rect, RGBAColor(50, 50, 50, 128));
 	}
+	int32_t topcrop = im->height()-height;
+	Rect cropRect(0, topcrop, im->width(), height);
 
 	Point pt(0, top);
-	dst.blit(pt, im);
+	dst.blitrect(pt, im, cropRect);
 }
