@@ -515,7 +515,7 @@ Building * Player::build
 
 /**
  * Find the longest possible enhancement chain leading to the given
- * building descr. The given FormerBuildings must be empty and will be
+ * building descr. The FormerBuildings given in reference must be empty and will be
  * filled with the Building_Descr.
  */
 void find_former_buildings

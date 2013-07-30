@@ -42,6 +42,7 @@
 #include "widelands_map_map_object_loader.h"
 #include "widelands_map_map_object_saver.h"
 #include "logic/worker.h"
+#include "log.h"
 
 #include "upcast.h"
 
@@ -158,6 +159,8 @@ throw (_wexception)
 								(building.descr().tribe().safe_building_index(fr.CString()));
 							building.m_old_buildings.push_back(former_descr);
 						}
+						// Only construction sites may have an empty list
+						assert(!building.m_old_buildings.empty() || is_a(ConstructionSite, &building));
 					}
 					if (fr.Unsigned8()) {
 						if (upcast(ProductionSite, productionsite, &building))
@@ -249,7 +252,6 @@ throw (_wexception)
 void Map_Buildingdata_Data_Packet::read_formerbuildings_v2
 	(Building& b, FileRead&, Game&, Map_Map_Object_Loader&)
 {
-	// add the current building - not for csite or dismantle
 	if (is_a(ProductionSite, &b)) {
 		assert(b.m_old_buildings.empty());
 		b.m_old_buildings.push_back(&b.descr());
@@ -257,9 +259,14 @@ void Map_Buildingdata_Data_Packet::read_formerbuildings_v2
 		assert(b.m_old_buildings.empty());
 		b.m_old_buildings.push_back(&b.descr());
 	} else if (upcast(DismantleSite, dsite, &b)) {
-		b.m_old_buildings.push_back(dsite->m_building);
+		// Former buildings filled with the current one
+		// upon building init.
+		assert(!b.m_old_buildings.empty());
 	} else if (is_a(ConstructionSite, &b)) {
+		// Not needed for csite.
 		return;
+	} else {
+		assert(false);
 	}
 
 	// iterate through all buildings to find first predecessor

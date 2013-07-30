@@ -295,6 +295,7 @@ void Editor_Game_Base::load_graphics(UI::ProgressWindow & loader_ui)
  * Instantly create a building at the given x/y location. There is no build time.
  * \li owner  is the player number of the building's owner.
  * \li idx is the building type index.
+ * \li former_buildings is the list of former buildings
  */
 Building & Editor_Game_Base::warp_building
 	(Coords const c, Player_Number const owner, Building_Index const idx,
@@ -311,7 +312,9 @@ Building & Editor_Game_Base::warp_building
 /**
  * Create a building site at the given x/y location for the given building type.
  *
- * if oldi != -1 this is a constructionsite coming from an enhancing action
+ * \li idx : the building index of the building in construction
+ * \li former_buildings : the former buildings. If it is not empty, this is
+ * an enhancement.
  */
 Building & Editor_Game_Base::warp_constructionsite
 	(Coords const c, Player_Number const owner,
@@ -327,6 +330,8 @@ Building & Editor_Game_Base::warp_constructionsite
 
 /**
  * Create a dismantle site
+ * \li former_buildings : the former buildings list. This should not be empty,
+ * except during loading.
  */
 Building & Editor_Game_Base::warp_dismantlesite
 	(Coords const c, Player_Number const owner,
