@@ -24,7 +24,6 @@
 #include "wui/interactive_base.h"
 #include "logic/game.h"
 
-struct ChatOverlay;
 struct ChatProvider;
 
 enum PlayerType {NONE, OBSERVER, PLAYING, VICTORIOUS, DEFEATED};
@@ -82,7 +81,6 @@ public:
 protected:
 	Game_Main_Menu_Windows m_mainm_windows;
 	ChatProvider           * m_chatProvider;
-	ChatOverlay            * m_chatOverlay;
 	std::string              m_building_census_format;
 	std::string              m_building_statistics_format;
 	std::string              m_building_tooltip_format;

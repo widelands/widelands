@@ -768,15 +768,6 @@ void InternetGaming::send(const std::string & msg) {
 	s.send(m_sock);
 }
 
-void InternetGaming::send_local(const std::string& msg)
-{
-	ChatMessage c;
-	c.msg = msg;
-	c.time = time(0);
-	messages.push_back(c);
-	ChatProvider::send(c);
-}
-
 /**
  * \returns the boolean value of a string received from the metaserver.
  * If conversion fails, it throws a \ref warning

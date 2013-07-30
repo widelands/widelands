@@ -25,6 +25,9 @@
 #include "debugconsole.h"
 #include "logic/editor_game_base.h"
 #include "logic/map.h"
+#include "logic/notification.h"
+#include "logmessage.h"
+#include "wui/chatoverlay.h"
 #include "wui/mapview.h"
 #include "wui/overlay_manager.h"
 #include "ui_basic/box.h"
@@ -39,7 +42,8 @@ struct InteractiveBaseInternals;
  * This is used to represent the code that Interactive_Player and
  * Editor_Interactive share.
  */
-struct Interactive_Base : public Map_View, public DebugConsole::Handler {
+struct Interactive_Base : public Map_View, public DebugConsole::Handler,
+	public Widelands::NoteSender<LogMessage> {
 
 	friend class Sound_Handler;
 
@@ -111,6 +115,13 @@ struct Interactive_Base : public Map_View, public DebugConsole::Handler {
 
 	virtual void cleanup_for_load() {};
 
+	/**
+	 * Log a message to be displayed on screen
+	 */
+	void log_message(const std::string& message) const;
+	void log_message(const char* message) const {
+		log_message(std::string(message));
+	}
 private:
 	void roadb_add_overlay   ();
 	void roadb_remove_overlay();
@@ -169,6 +180,7 @@ protected:
 		m_toolbar.set_pos
 			(Point((get_inner_w() - m_toolbar.get_w()) >> 1, get_inner_h() - 34));
 	}
+	ChatOverlay     * m_chatOverlay;
 	UI::Box           m_toolbar;
 
 

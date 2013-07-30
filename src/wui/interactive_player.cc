@@ -46,7 +46,6 @@
 #include "ui_basic/unique_window.h"
 #include "upcast.h"
 #include "wui/building_statistics_menu.h"
-#include "wui/chatoverlay.h"
 #include "wui/encyclopedia_window.h"
 #include "wui/fieldaction.h"
 #include "wui/game_chat_menu.h"
@@ -153,10 +152,6 @@ m_toggle_help
 	m_toolbar.add(&m_toggle_statistics_menu, UI::Box::AlignLeft);
 	m_toolbar.add(&m_toggle_minimap,         UI::Box::AlignLeft);
 	m_toolbar.add(&m_toggle_buildhelp,       UI::Box::AlignLeft);
-	// Limit chat width to half the screen, to limit the damage lamers can do
-	// by flooding chat messages
-	m_chatOverlay =
-		new ChatOverlay(this, 10, 25, get_w() / 2, get_h() - 25);
 	if (multiplayer) {
 		m_toolbar.add(&m_toggle_chat,            UI::Box::AlignLeft);
 		m_toggle_chat.set_visible(false);

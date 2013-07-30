@@ -55,7 +55,7 @@ public:
 	}
 
 protected:
-	void send(const T & note) {
+	void send(const T & note) const {
 		container_iterate_const(Links, m_links, i)
 			(*i.current)->receive(note);
 	}

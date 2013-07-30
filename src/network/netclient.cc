@@ -623,15 +623,6 @@ void NetClient::send(const std::string & msg)
 	s.send(d->sock);
 }
 
-void NetClient::send_local(const std::string& msg)
-{
-	ChatMessage c;
-	c.msg = msg;
-	c.time = time(0);
-	d->chatmessages.push_back(c);
-	ChatProvider::send(c);
-}
-
 const std::vector<ChatMessage> & NetClient::getMessages() const
 {
 	return d->chatmessages;

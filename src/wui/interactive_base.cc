@@ -76,6 +76,7 @@ Interactive_Base::Interactive_Base
 	(Editor_Game_Base & the_egbase, Section & global_s)
 	:
 	Map_View(0, 0, 0, global_s.get_int("xres", XRES), global_s.get_int("yres", YRES), *this),
+	NoteSender<LogMessage>(),
 	m_show_workarea_preview(global_s.get_bool("workareapreview", true)),
 	m
 		(new InteractiveBaseInternals
@@ -93,6 +94,8 @@ Interactive_Base::Interactive_Base
 	m_road_buildhelp_overlay_jobid(Overlay_Manager::Job_Id::Null()),
 	m_buildroad                   (0),
 	m_road_build_player           (0),
+	// Initialize chatoveraly before the toolbar so it is below
+	m_chatOverlay                 (new ChatOverlay(this, 10, 25, get_w() / 2, get_h() - 25)),
 	m_toolbar                     (this, 0, 0, UI::Box::Horizontal),
 	m_label_speed_shadow
 		(this, get_w() - 1, 0, std::string(), UI::Align_TopRight),
@@ -114,6 +117,8 @@ Interactive_Base::Interactive_Base
 		(global_s.get_bool("snap_windows_only_when_overlapping", false));
 	set_dock_windows_to_edges
 		(global_s.get_bool("dock_windows_to_edges", false));
+
+	m_chatOverlay->setLogProvider(*this);
 
 	//  Switch to the new graphics system now, if necessary.
 	WLApplication::get()->refresh_graphics();
@@ -760,6 +765,16 @@ Coords Interactive_Base::get_build_road_end() const throw () {
 
 	return m_buildroad->get_end();
 }
+
+void Interactive_Base::log_message(const std::string& message) const
+{
+	// Send to linked receivers
+	LogMessage lm;
+	lm.msg = message;
+	lm.time = time(nullptr);
+	send(lm);
+}
+
 
 
 /*

@@ -92,7 +92,6 @@ struct NetClient :
 
 	// ChatProvider interface
 	void send(const std::string & msg);
-	void send_local(const std::string & msg);
 	const std::vector<ChatMessage> & getMessages() const;
 
 private:

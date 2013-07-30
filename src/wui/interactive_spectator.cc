@@ -28,7 +28,6 @@
 #include "ui_basic/textarea.h"
 #include "ui_basic/unique_window.h"
 #include "upcast.h"
-#include "wui/chatoverlay.h"
 #include "wui/fieldaction.h"
 #include "wui/game_chat_menu.h"
 #include "wui/game_main_menu_save_game.h"
@@ -81,8 +80,6 @@ Interactive_Spectator::Interactive_Spectator
 	// TODO : instead of making unneeded buttons invisible after generation,
 	// they should not at all be generated. -> implement more dynamic toolbar UI
 	if (multiplayer) {
-		m_chatOverlay =
-			new ChatOverlay(this, 10, 25, get_w() - 10, get_h() - 25);
 		m_exit.set_visible(false);
 		m_exit.set_enabled(false);
 		m_save.set_visible(false);
