@@ -64,7 +64,7 @@ Fullscreen_Menu_LoadReplay::Fullscreen_Menu_LoadReplay() :
 	m_title
 		(this,
 		 get_w() / 2, get_h() * 3 / 20,
-		 _("Choose a replay!"), UI::Align_HCenter),
+		 _("Choose a replay"), UI::Align_HCenter),
 	m_label_mapname
 		(this,
 		 get_w() * 7 / 10,  get_h() * 17 / 50,
