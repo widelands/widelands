@@ -17,15 +17,16 @@
  *
  */
 
-#include "editor_main_menu.h"
-#include "editor_main_menu_load_map.h"
-#include "editor_main_menu_map_options.h"
-#include "editor_main_menu_new_map.h"
-#include "editor_main_menu_random_map.h"
-#include "editor_main_menu_save_map.h"
+#include "editor/ui_menus/editor_main_menu.h"
+
 #include "editor/editorinteractive.h"
-#include "ui_fsmenu/fileview.h"
+#include "editor/ui_menus/editor_main_menu_load_map.h"
+#include "editor/ui_menus/editor_main_menu_map_options.h"
+#include "editor/ui_menus/editor_main_menu_new_map.h"
+#include "editor/ui_menus/editor_main_menu_random_map.h"
+#include "editor/ui_menus/editor_main_menu_save_map.h"
 #include "i18n.h"
+#include "ui_fsmenu/fileview.h"
 
 //TODO: these should be defined globally for the whole UI
 #define width 150

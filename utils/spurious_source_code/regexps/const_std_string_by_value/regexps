@@ -1,1 +1,0 @@
-[\( ](const +std::string|std::string +const)( +[_a-zA-Z][_a-zA-Z0-9]*)?( *=.*)?(,( |$)|\))

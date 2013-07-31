@@ -17,7 +17,7 @@
  *
  */
 
-#include "mapfringeregion.h"
+#include "logic/mapfringeregion.h"
 
 namespace Widelands {
 

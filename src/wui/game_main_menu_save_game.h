@@ -20,15 +20,14 @@
 #ifndef GAME_MAIN_MENU_SAVE_GAME_H
 #define GAME_MAIN_MENU_SAVE_GAME_H
 
+#include "i18n.h"
+#include "ref_cast.h"
 #include "ui_basic/button.h"
 #include "ui_basic/editbox.h"
 #include "ui_basic/listselect.h"
 #include "ui_basic/messagebox.h"
 #include "ui_basic/textarea.h"
 #include "ui_basic/unique_window.h"
-
-#include "i18n.h"
-#include "ref_cast.h"
 
 class Interactive_GameBase;
 

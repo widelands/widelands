@@ -20,8 +20,8 @@
 #ifndef CMD_EXPIRE_MESSAGE_H
 #define CMD_EXPIRE_MESSAGE_H
 
-#include "cmd_queue.h"
-#include "message_queue.h"
+#include "logic/cmd_queue.h"
+#include "logic/message_queue.h"
 
 namespace Widelands {
 

@@ -1,1 +1,0 @@
-The purpouse of this is simply to encourage the use "assert(false)" everywhere when an unconditional assert is desired, for consistency, instead of intermixing it with assert(0) here and there.

@@ -20,14 +20,14 @@
 #ifndef _MILITARY_BOX_H_
 #define _MILITARY_BOX_H_
 
+#include <list>
+
 #include "logic/attackable.h"
 #include "logic/player.h"
-
 #include "ui_basic/box.h"
 #include "ui_basic/button.h"
 #include "ui_basic/slider.h"
 #include "ui_basic/textarea.h"
-#include <list>
 
 /**
  * Military settings tab that is part of the \ref FieldActionWindow

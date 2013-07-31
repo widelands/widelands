@@ -17,38 +17,36 @@
  *
  */
 
-#include "fieldaction.h"
+#include "wui/fieldaction.h"
 
-#include "attack_box.h"
-#include "buildingconfirm.h"
-#include "logic/attackable.h"
-#include "logic/cmd_queue.h"
 #include "economy/economy.h"
 #include "economy/flag.h"
 #include "economy/road.h"
-#include "game_debug_ui.h"
 #include "graphic/graphic.h"
 #include "i18n.h"
-#include "interactive_player.h"
+#include "logic/attackable.h"
+#include "logic/cmd_queue.h"
 #include "logic/maphollowregion.h"
 #include "logic/militarysite.h"
-#include "overlay_manager.h"
 #include "logic/player.h"
 #include "logic/soldier.h"
 #include "logic/tribe.h"
 #include "logic/warehouse.h"
-#include "military_box.h"
-#include "waresdisplay.h"
-#include "watchwindow.h"
-
 #include "ui_basic/box.h"
 #include "ui_basic/button.h"
 #include "ui_basic/icongrid.h"
 #include "ui_basic/tabpanel.h"
 #include "ui_basic/textarea.h"
 #include "ui_basic/unique_window.h"
-
 #include "upcast.h"
+#include "wui/attack_box.h"
+#include "wui/buildingconfirm.h"
+#include "wui/game_debug_ui.h"
+#include "wui/interactive_player.h"
+#include "wui/military_box.h"
+#include "wui/overlay_manager.h"
+#include "wui/waresdisplay.h"
+#include "wui/watchwindow.h"
 
 namespace Widelands {struct Building_Descr;}
 using Widelands::Building;

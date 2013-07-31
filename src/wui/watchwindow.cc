@@ -17,28 +17,25 @@
  *
  */
 
-#include "watchwindow.h"
-
-#include "logic/bob.h"
-#include "logic/game.h"
-#include "graphic/graphic.h"
-#include "i18n.h"
-#include "interactive_gamebase.h"
-#include "interactive_player.h"
-#include "logic/map.h"
-#include "logic/player.h"
-#include "mapview.h"
-#include "mapviewpixelconstants.h"
-#include "mapviewpixelfunctions.h"
-#include "profile/profile.h"
-
-#include "ui_basic/button.h"
-#include "ui_basic/window.h"
-
-#include "upcast.h"
+#include "wui/watchwindow.h"
 
 #include <vector>
 
+#include "graphic/graphic.h"
+#include "i18n.h"
+#include "logic/bob.h"
+#include "logic/game.h"
+#include "logic/map.h"
+#include "logic/player.h"
+#include "profile/profile.h"
+#include "ui_basic/button.h"
+#include "ui_basic/window.h"
+#include "upcast.h"
+#include "wui/interactive_gamebase.h"
+#include "wui/interactive_player.h"
+#include "wui/mapview.h"
+#include "wui/mapviewpixelconstants.h"
+#include "wui/mapviewpixelfunctions.h"
 
 #define NUM_VIEWS 5
 #define REFRESH_TIME 5000

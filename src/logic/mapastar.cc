@@ -17,9 +17,9 @@
  *
  */
 
-#include "mapastar.h"
+#include "logic/mapastar.h"
 
-#include "path.h"
+#include "logic/path.h"
 
 namespace Widelands {
 

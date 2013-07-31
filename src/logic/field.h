@@ -20,18 +20,15 @@
 #ifndef FIELD_H
 #define FIELD_H
 
-#include "widelands_geometry.h"
-#include "constants.h"
-#include "nodecaps.h"
-#include "world.h"
-
-#include "roadtype.h"
-
-#include "widelands.h"
-
 #include <cassert>
 #include <limits>
 
+#include "constants.h"
+#include "logic/nodecaps.h"
+#include "logic/roadtype.h"
+#include "logic/widelands.h"
+#include "logic/widelands_geometry.h"
+#include "logic/world.h"
 
 namespace Widelands {
 

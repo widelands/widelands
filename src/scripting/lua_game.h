@@ -24,9 +24,8 @@
 
 #include "logic/building.h"
 #include "logic/message_id.h"
-
-#include "lua_bases.h"
-#include "luna.h"
+#include "scripting/lua_bases.h"
+#include "scripting/luna.h"
 
 namespace Widelands {
 	struct Tribe_Descr;

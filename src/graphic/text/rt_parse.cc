@@ -17,16 +17,17 @@
  *
  */
 
+#include "graphic/text/rt_parse.h"
+
+#include <vector>
+
 #include <SDL.h>
 #include <boost/format.hpp>
 #include <boost/unordered_map.hpp>
 #include <boost/unordered_set.hpp>
 
-#include <vector>
-
-#include "rt_parse.h"
-#include "textstream.h"
-#include "rt_errors_impl.h"
+#include "graphic/text/rt_errors_impl.h"
+#include "graphic/text/textstream.h"
 
 using namespace std;
 using namespace boost;

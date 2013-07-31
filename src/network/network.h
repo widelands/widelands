@@ -21,15 +21,16 @@
 #define NETWORK_H
 
 #include <exception>
+#include <string>
+#include <vector>
+
+#include <SDL_net.h>
 
 #include "logic/cmd_queue.h"
 #include "logic/widelands_streamread.h"
 #include "logic/widelands_streamwrite.h"
-#include "network_protocol.h"
+#include "network/network_protocol.h"
 
-#include <SDL_net.h>
-#include <string>
-#include <vector>
 
 class Deserializer;
 

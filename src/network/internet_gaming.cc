@@ -17,18 +17,18 @@
  *
  */
 
-#include "internet_gaming.h"
-
-#include "compile_diagnostics.h"
-#include "i18n.h"
-#include "internet_gaming_messages.h"
-#include "io/dedicated_log.h"
-#include "io/filesystem/layered_filesystem.h"
-#include "log.h"
-#include "warning.h"
+#include "network/internet_gaming.h"
 
 #include <boost/format.hpp>
 #include <boost/lexical_cast.hpp>
+
+#include "compile_diagnostics.h"
+#include "i18n.h"
+#include "io/dedicated_log.h"
+#include "io/filesystem/layered_filesystem.h"
+#include "log.h"
+#include "network/internet_gaming_messages.h"
+#include "warning.h"
 
 
 

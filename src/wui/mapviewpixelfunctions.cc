@@ -17,7 +17,7 @@
  *
  */
 
-#include "mapviewpixelfunctions.h"
+#include "wui/mapviewpixelfunctions.h"
 
 #include "vector.h"
 

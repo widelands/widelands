@@ -1,6 +1,0 @@
-abc->def
-_cast<T>(*abc).def
-_cast<T> (*abc).def
-operator [] (*p).jkl
-QString("%1 %2").arg(*it).arg(8)
-some_string.arg(*it).arg(8)

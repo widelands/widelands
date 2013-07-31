@@ -20,8 +20,8 @@
 #ifndef CHAT_H
 #define CHAT_H
 
-#include <string>
 #include <ctime>
+#include <string>
 
 #include "logic/notification.h"
 

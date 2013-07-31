@@ -1,1 +1,0 @@
-some_container[some_container.size() - 1];

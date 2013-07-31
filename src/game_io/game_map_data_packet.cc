@@ -17,7 +17,7 @@
  *
  */
 
-#include "game_map_data_packet.h"
+#include "game_io/game_map_data_packet.h"
 
 #include "io/filesystem/filesystem.h"
 #include "logic/game.h"

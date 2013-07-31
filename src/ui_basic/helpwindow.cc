@@ -17,23 +17,22 @@
  *
  */
 
+#include "ui_basic/helpwindow.h"
 
 #include <boost/format.hpp>
 
-#include "scripting/scripting.h"
-#include "io/filesystem/layered_filesystem.h"
-
-#include "button.h"
 #include "constants.h"
 #include "graphic/font.h"
 #include "graphic/font_handler.h"
 #include "graphic/graphic.h"
 #include "i18n.h"
+#include "io/filesystem/layered_filesystem.h"
 #include "log.h"
-#include "window.h"
+#include "scripting/scripting.h"
+#include "ui_basic/button.h"
+#include "ui_basic/window.h"
 #include "wlapplication.h"
 
-#include "helpwindow.h"
 
 using boost::format;
 

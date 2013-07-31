@@ -20,10 +20,10 @@
 #ifndef MILITARYSITE_H
 #define MILITARYSITE_H
 
-#include "attackable.h"
-#include "productionsite.h"
-#include "requirements.h"
-#include "soldiercontrol.h"
+#include "logic/attackable.h"
+#include "logic/productionsite.h"
+#include "logic/requirements.h"
+#include "logic/soldiercontrol.h"
 
 namespace Widelands {
 

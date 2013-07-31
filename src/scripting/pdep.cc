@@ -2,7 +2,7 @@
 the copyright statement.
 */
 
-#include "pdep/pdep.h"
+#include "scripting/pdep/pdep.h"
 
 #define api_incr_top(L)   {api_check(L, L->top < L->ci->top); L->top++;}
 

@@ -20,34 +20,31 @@
  * Default AI
  */
 
-#include "defaultai.h"
+#include "ai/defaultai.h"
 
+#include <algorithm>
 #include <ctime>
+#include <queue>
+#include <typeinfo>
 
-#include "ai_hints.h"
-
-#include "logic/constructionsite.h"
+#include "ai/ai_hints.h"
 #include "economy/economy.h"
 #include "economy/flag.h"
 #include "economy/road.h"
+#include "log.h"
+#include "logic/constructionsite.h"
 #include "logic/findimmovable.h"
 #include "logic/findnode.h"
-#include "log.h"
 #include "logic/map.h"
 #include "logic/militarysite.h"
 #include "logic/player.h"
 #include "logic/productionsite.h"
-#include "profile/profile.h"
 #include "logic/trainingsite.h"
 #include "logic/tribe.h"
 #include "logic/warehouse.h"
 #include "logic/world.h"
-
+#include "profile/profile.h"
 #include "upcast.h"
-
-#include <algorithm>
-#include <queue>
-#include <typeinfo>
 
 #define FIELD_UPDATE_INTERVAL 1000
 

@@ -17,39 +17,39 @@
  *
  */
 
-#include "player.h"
+#include "logic/player.h"
 
-#include "checkstep.h"
-#include "cmd_expire_message.h"
-#include "cmd_luacoroutine.h"
-#include "constructionsite.h"
 #include "economy/economy.h"
 #include "economy/flag.h"
 #include "economy/road.h"
-#include "findimmovable.h"
-#include "game.h"
-#include "game_data_error.h"
 #include "i18n.h"
 #include "log.h"
-#include "militarysite.h"
-#include "soldier.h"
-#include "soldiercontrol.h"
-#include "sound/sound_handler.h"
+#include "logic/building.h"
+#include "logic/checkstep.h"
+#include "logic/cmd_expire_message.h"
+#include "logic/cmd_luacoroutine.h"
+#include "logic/constructionsite.h"
+#include "logic/findimmovable.h"
+#include "logic/game.h"
+#include "logic/game_data_error.h"
+#include "logic/militarysite.h"
+#include "logic/soldier.h"
+#include "logic/soldiercontrol.h"
+#include "logic/trainingsite.h"
+#include "logic/tribe.h"
+#include "logic/warehouse.h"
+#include "logic/widelands_fileread.h"
+#include "logic/widelands_filewrite.h"
 #include "scripting/scripting.h"
-#include "trainingsite.h"
-#include "tribe.h"
-#include "warehouse.h"
+#include "sound/sound_handler.h"
+#include "upcast.h"
 #include "warning.h"
 #include "wexception.h"
-#include "widelands_fileread.h"
-#include "widelands_filewrite.h"
-
 #include "wui/interactive_player.h"
 
-#include "upcast.h"
 
 namespace {
-static void terraform_for_building
+void terraform_for_building
 	(Widelands::Editor_Game_Base& egbase, const Widelands::Player_Number player_number,
 	 const Widelands::Coords location, const Widelands::Building_Descr* descr)
 {
@@ -79,6 +79,9 @@ static void terraform_for_building
 		}
 	}
 }
+
+
+
 }
 
 namespace Widelands {
@@ -96,6 +99,35 @@ const RGBColor Player::Colors[MAX_PLAYERS] = {
 	RGBColor(255, 255, 255),  // white
 };
 
+/**
+ * Find the longest possible enhancement chain leading to the given
+ * building descr. The FormerBuildings given in reference must be empty and will be
+ * filled with the Building_Descr.
+ */
+void find_former_buildings
+	(Widelands::Building_Descr::FormerBuildings & former_buidlings,
+	 const Widelands::Tribe_Descr & tribe_descr, const Widelands::Building_Index bi)
+{
+	assert(former_buidlings.empty());
+	const Widelands::Building_Descr * first_descr = tribe_descr.get_building_descr(bi);
+	former_buidlings.push_back(first_descr);
+	bool done = false;
+	while (not done) {
+		const Widelands::Building_Descr * oldest = former_buidlings.front();
+		if (!oldest->is_enhanced()) {
+			done = true;
+			break;
+		}
+		const Widelands::Building_Index & oldest_idx = tribe_descr.building_index(oldest->name());
+		for (Widelands::Building_Index i = Widelands::Building_Index::First(); i < tribe_descr.get_nrbuildings(); ++i) {
+			Widelands::Building_Descr const * ob = tribe_descr.get_building_descr(i);
+			if (ob->enhancements().count(oldest_idx)) {
+				former_buidlings.insert(former_buidlings.begin(), ob);
+				break;
+			}
+		}
+	}
+}
 
 Player::Player
 	(Editor_Game_Base  & the_egbase,
@@ -513,35 +545,7 @@ Building * Player::build
 	}
 }
 
-/**
- * Find the longest possible enhancement chain leading to the given
- * building descr. The FormerBuildings given in reference must be empty and will be
- * filled with the Building_Descr.
- */
-void find_former_buildings
-	(Building_Descr::FormerBuildings & former_buidlings,
-	 const Tribe_Descr & tribe_descr, const Building_Index bi)
-{
-	assert(former_buidlings.empty());
-	const Building_Descr * first_descr = tribe_descr.get_building_descr(bi);
-	former_buidlings.push_back(first_descr);
-	bool done = false;
-	while (not done) {
-		const Building_Descr * oldest = former_buidlings.front();
-		if (!oldest->is_enhanced()) {
-			done = true;
-			break;
-		}
-		const Building_Index & oldest_idx = tribe_descr.building_index(oldest->name());
-		for (Building_Index i = Building_Index::First(); i < tribe_descr.get_nrbuildings(); ++i) {
-			Building_Descr const * ob = tribe_descr.get_building_descr(i);
-			if (ob->enhancements().count(oldest_idx)) {
-				former_buidlings.insert(former_buidlings.begin(), ob);
-				break;
-			}
-		}
-	}
-}
+
 
 /*
 ===============

@@ -20,11 +20,11 @@
 #ifndef GAME_TIPS_H
 #define GAME_TIPS_H
 
-#include "ui_basic/progresswindow.h"
-
-#include <string>
 #include <cstring>
+#include <string>
 #include <vector>
+
+#include "ui_basic/progresswindow.h"
 
 /// Displays game tips in progress window
 struct GameTips : public UI::IProgressVisualization {

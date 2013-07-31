@@ -17,12 +17,12 @@
  *
  */
 
-#include "legacy.h"
+#include "logic/legacy.h"
 
-#include "editor_game_base.h"
-#include "game_data_error.h"
-#include "immovable.h"
-#include "tribe.h"
+#include "logic/editor_game_base.h"
+#include "logic/game_data_error.h"
+#include "logic/immovable.h"
+#include "logic/tribe.h"
 
 namespace Widelands {
 

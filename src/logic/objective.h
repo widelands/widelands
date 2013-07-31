@@ -20,12 +20,12 @@
 #ifndef OBJECTIVE_H
 #define OBJECTIVE_H
 
-#include "named.h"
-#include "i18n.h"
-
 #include <cassert>
-#include <string>
 #include <cstring>
+#include <string>
+
+#include "i18n.h"
+#include "named.h"
 
 namespace Widelands {
 

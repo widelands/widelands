@@ -17,11 +17,11 @@
  *
  */
 
+#include "graphic/render/sdl_surface.h"
+
 #include <cassert>
 
 #include <SDL.h>
-
-#include "sdl_surface.h"
 
 SDLSurface::~SDLSurface() {
 	assert(m_surface);

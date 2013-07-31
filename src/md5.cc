@@ -21,10 +21,11 @@
  *
  */
 
+#include "md5.h"
+
 #include <cstdio>
 
 #include "compile_diagnostics.h"
-#include "md5.h"
 
 using namespace std;
 

@@ -17,26 +17,24 @@
  *
  */
 
-#include "building_statistics_menu.h"
+#include "wui/building_statistics_menu.h"
+
+#include <vector>
 
 #include <boost/bind.hpp>
 
-#include "logic/building.h"
 #include "graphic/graphic.h"
+#include "graphic/rendertarget.h"
 #include "i18n.h"
-#include "interactive_player.h"
-#include "mapviewpixelconstants.h"
+#include "logic/building.h"
 #include "logic/player.h"
 #include "logic/productionsite.h"
-#include "graphic/rendertarget.h"
 #include "logic/tribe.h"
-#include "plot_area.h"
-
 #include "ui_basic/button.h"
-
 #include "upcast.h"
-
-#include <vector>
+#include "wui/interactive_player.h"
+#include "wui/mapviewpixelconstants.h"
+#include "wui/plot_area.h"
 
 #define WINDOW_WIDTH         440
 #define WINDOW_HEIGHT        440

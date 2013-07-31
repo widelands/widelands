@@ -17,14 +17,14 @@
  *
  */
 
-#include "worker_program.h"
+#include "logic/worker_program.h"
 
-#include "findnode.h"
-#include "game_data_error.h"
 #include "helper.h"
+#include "logic/findnode.h"
+#include "logic/game_data_error.h"
+#include "logic/tribe.h"
 #include "profile/profile.h"
 #include "sound/sound_handler.h"
-#include "tribe.h"
 
 namespace Widelands {
 

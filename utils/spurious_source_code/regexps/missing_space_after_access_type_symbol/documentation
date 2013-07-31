@@ -1,1 +1,0 @@
-This catches * or & that is used to declare an access type, without a space as padding afterwards. It does not catch dereferencing or taking the address of an expression, because there should not be padding in those cases.

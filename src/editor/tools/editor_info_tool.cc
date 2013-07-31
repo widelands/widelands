@@ -17,18 +17,16 @@
  *
  */
 
-#include "editor_info_tool.h"
+#include "editor/tools/editor_info_tool.h"
+
+#include <cstdio>
 
 #include "editor/editorinteractive.h"
 #include "i18n.h"
 #include "logic/map.h"
 #include "logic/world.h"
-
 #include "ui_basic/multilinetextarea.h"
 #include "ui_basic/window.h"
-
-#include <cstdio>
-
 
 /// Show a window with information about the pointed at node and triangle.
 int32_t Editor_Info_Tool::handle_click_impl

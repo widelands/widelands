@@ -22,10 +22,10 @@
 
 #include <cstdlib>
 
-#include "interactive_gamebase.h"
+#include "wui/interactive_gamebase.h"
 #include "ui_basic/button.h"
 #include "ui_basic/window.h"
-#include "waresdisplay.h"
+#include "wui/waresdisplay.h"
 
 /**
  * Base class for all building windows.

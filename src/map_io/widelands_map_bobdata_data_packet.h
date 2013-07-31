@@ -21,7 +21,7 @@
 #define WIDELANDS_MAP_BOBDATA_DATA_PACKET_H
 
 #include "logic/widelands_fileread.h"
-#include "widelands_map_data_packet.h"
+#include "map_io/widelands_map_data_packet.h"
 
 namespace Widelands {
 

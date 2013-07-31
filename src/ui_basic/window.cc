@@ -17,7 +17,9 @@
  *
  */
 
-#include "window.h"
+#include "ui_basic/window.h"
+
+#include <SDL_keysym.h>
 
 #include "constants.h"
 #include "graphic/font.h"
@@ -28,7 +30,6 @@
 #include "text_layout.h"
 #include "wlapplication.h"
 
-#include <SDL_keysym.h>
 
 using namespace std;
 

@@ -16,7 +16,7 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-#include "game_options_sound_menu.h"
+#include "wui/game_options_sound_menu.h"
 
 #include "graphic/graphic.h"
 #include "i18n.h"

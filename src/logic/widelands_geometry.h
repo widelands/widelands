@@ -21,6 +21,7 @@
 #define WIDELANDS_GEOMETRY_H
 
 #include <cmath>
+
 #include <stdint.h>
 
 namespace Widelands {

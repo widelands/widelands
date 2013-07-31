@@ -20,13 +20,12 @@
 #ifndef ENCYCLOPEDIA_WINDOW_H
 #define ENCYCLOPEDIA_WINDOW_H
 
-#include "ui_basic/listselect.h"
-#include "ui_basic/window.h"
-#include "ui_basic/unique_window.h"
-#include "ui_basic/table.h"
-#include "ui_basic/multilinetextarea.h"
-
 #include "logic/item_ware_descr.h"
+#include "ui_basic/listselect.h"
+#include "ui_basic/multilinetextarea.h"
+#include "ui_basic/table.h"
+#include "ui_basic/unique_window.h"
+#include "ui_basic/window.h"
 
 namespace Widelands {
 struct Item_Ware_Descr;

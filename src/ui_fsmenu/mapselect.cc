@@ -16,15 +16,16 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-#include <cstdio>
-#include <boost/format.hpp>
+#include "ui_fsmenu/mapselect.h"
 
-#include "i18n.h"
-#include "wexception.h"
+#include <cstdio>
+
+#include <boost/format.hpp>
 
 #include "gamecontroller.h"
 #include "gamesettings.h"
 #include "graphic/graphic.h"
+#include "i18n.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "log.h"
 #include "logic/editor_game_base.h"
@@ -33,9 +34,7 @@
 #include "s2map.h"
 #include "ui_basic/box.h"
 #include "ui_basic/checkbox.h"
-
-
-#include "mapselect.h"
+#include "wexception.h"
 
 
 using Widelands::WL_Map_Loader;

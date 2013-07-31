@@ -17,7 +17,7 @@
  *
  */
 
-#include "multilinetextarea.h"
+#include "ui_basic/multilinetextarea.h"
 
 #include <boost/bind.hpp>
 

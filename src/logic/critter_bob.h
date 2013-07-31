@@ -20,7 +20,7 @@
 #ifndef CRITTER_BOB_H
 #define CRITTER_BOB_H
 
-#include "bob.h"
+#include "logic/bob.h"
 #include "graphic/diranimations.h"
 
 namespace Widelands {

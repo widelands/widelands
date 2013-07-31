@@ -17,7 +17,9 @@
  *
  */
 
-#include "base.h"
+#include "ui_fsmenu/base.h"
+
+#include <cstdio>
 
 #include "constants.h"
 #include "graphic/font.h"
@@ -29,8 +31,6 @@
 #include "profile/profile.h"
 #include "wexception.h"
 #include "wlapplication.h"
-
-#include <cstdio>
 
 /*
 ==============================================================================

@@ -19,8 +19,12 @@
 
 #include "writeHTML.h"
 
+#include <boost/format.hpp>
+
 #ifdef WRITE_GAME_DATA_AS_HTML
 
+#include "i18n.h"
+#include "io/filesystem/disk_filesystem.h"
 #include "logic/item_ware_descr.h"
 #include "logic/productionsite.h"
 #include "logic/soldier.h"
@@ -28,13 +32,7 @@
 #include "logic/worker.h"
 #include "logic/worker_program.h"
 #include "logic/world.h"
-
-#include "io/filesystem/disk_filesystem.h"
-#include "i18n.h"
-
 #include "upcast.h"
-
-#include <boost/format.hpp>
 
 using boost::format;
 

@@ -20,7 +20,7 @@
 #ifndef COROUTINE_IMPL_H
 #define COROUTINE_IMPL_H
 
-#include "scripting.h"
+#include "scripting/scripting.h"
 
 namespace Widelands {
 	struct Player;

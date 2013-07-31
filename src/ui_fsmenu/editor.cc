@@ -17,7 +17,7 @@
  *
  */
 
-#include "editor.h"
+#include "ui_fsmenu/editor.h"
 
 #include "constants.h"
 #include "graphic/graphic.h"

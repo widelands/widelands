@@ -20,11 +20,9 @@
 #ifndef WORKER_PROGRAM_H
 #define WORKER_PROGRAM_H
 
-
-#include "bob.h"
-#include "worker.h"
-
+#include "logic/bob.h"
 #include "workarea_info.h"
+#include "logic/worker.h"
 #include "writeHTML.h"
 
 namespace Widelands {

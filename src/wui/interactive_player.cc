@@ -17,31 +17,20 @@
  *
  */
 
-#include "interactive_player.h"
+#include "wui/interactive_player.h"
 
 #include <boost/bind.hpp>
-#include <boost/type_traits.hpp>
-#include <boost/lambda/construct.hpp>
-#include <boost/lambda/bind.hpp>
-#include <boost/lexical_cast.hpp>
 #include <boost/format.hpp>
+#include <boost/lambda/bind.hpp>
+#include <boost/lambda/construct.hpp>
+#include <boost/lexical_cast.hpp>
+#include <boost/type_traits.hpp>
 #include <libintl.h>
 
-#include "building_statistics_menu.h"
-#include "chatoverlay.h"
 #include "debugconsole.h"
 #include "economy/flag.h"
-#include "encyclopedia_window.h"
-#include "fieldaction.h"
-#include "graphic/font_handler.h"
-#include "game_chat_menu.h"
 #include "game_io/game_loader.h"
-#include "game_main_menu.h"
-#include "game_main_menu_save_game.h"
-#include "game_message_menu.h"
-#include "game_objectives_menu.h"
-#include "game_options_menu.h"
-#include "general_statistics_menu.h"
+#include "graphic/font_handler.h"
 #include "helper.h"
 #include "i18n.h"
 #include "logic/building.h"
@@ -49,16 +38,27 @@
 #include "logic/constructionsite.h"
 #include "logic/immovable.h"
 #include "logic/message_queue.h"
-#include "overlay_manager.h"
 #include "logic/player.h"
 #include "logic/productionsite.h"
 #include "logic/soldier.h"
 #include "logic/tribe.h"
 #include "profile/profile.h"
-#include "stock_menu.h"
 #include "ui_basic/unique_window.h"
 #include "upcast.h"
-#include "ware_statistics_menu.h"
+#include "wui/building_statistics_menu.h"
+#include "wui/chatoverlay.h"
+#include "wui/encyclopedia_window.h"
+#include "wui/fieldaction.h"
+#include "wui/game_chat_menu.h"
+#include "wui/game_main_menu.h"
+#include "wui/game_main_menu_save_game.h"
+#include "wui/game_message_menu.h"
+#include "wui/game_objectives_menu.h"
+#include "wui/game_options_menu.h"
+#include "wui/general_statistics_menu.h"
+#include "wui/overlay_manager.h"
+#include "wui/stock_menu.h"
+#include "wui/ware_statistics_menu.h"
 
 using Widelands::Building;
 using Widelands::Map;

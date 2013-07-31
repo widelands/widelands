@@ -17,7 +17,7 @@
  *
  */
 
-#include "editor_set_origin_tool.h"
+#include "editor/tools/editor_set_origin_tool.h"
 
 #include "editor/editorinteractive.h"
 #include "logic/map.h"

@@ -20,8 +20,8 @@
 #ifndef I18N_H
 #define I18N_H
 
-#include <string>
 #include <cstring>
+#include <string>
 #include <vector>
 
 #include <config.h>

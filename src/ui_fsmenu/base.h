@@ -20,8 +20,9 @@
 #ifndef FULLSCREEN_MENU_BASE_H
 #define FULLSCREEN_MENU_BASE_H
 
-#include "ui_basic/panel.h"
 #include <string>
+
+#include "ui_basic/panel.h"
 
 namespace UI {
 struct Font;

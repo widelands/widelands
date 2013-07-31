@@ -19,6 +19,24 @@
 
 #include "wlapplication.h"
 
+#include <cerrno>
+#ifndef _WIN32
+#include <csignal>
+#endif
+#include <cstring>
+#include <ctime>
+#include <fstream>
+#include <iostream>
+#include <stdexcept>
+#include <string>
+
+#include <config.h>
+#ifdef __APPLE__
+#include <mach-o/dyld.h>
+#endif
+#include <sys/stat.h>
+#include <sys/types.h>
+
 #include "build_info.h"
 #include "computer_player.h"
 #include "editor/editorinteractive.h"
@@ -30,6 +48,7 @@
 #include "io/filesystem/disk_filesystem.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "journal.h"
+#include "log.h"
 #include "logic/game.h"
 #include "logic/game_data_error.h"
 #include "logic/map.h"
@@ -41,6 +60,7 @@
 #include "network/nethost.h"
 #include "profile/profile.h"
 #include "sound/sound_handler.h"
+#include "timestring.h"
 #include "ui_basic/messagebox.h"
 #include "ui_basic/progresswindow.h"
 #include "ui_fsmenu/campaign_select.h"
@@ -64,35 +84,11 @@
 #include "wui/interactive_player.h"
 #include "wui/interactive_spectator.h"
 
-#include "log.h"
-
-#include "timestring.h"
-
-#include <config.h>
-#include <sys/types.h>
-#include <sys/stat.h>
-#ifndef _WIN32
-#include <csignal>
-#endif
-
-#include <cerrno>
-#include <cstring>
-#include <iostream>
-#include <fstream>
-#include <stdexcept>
-#include <string>
-#include <ctime>
-
-#ifdef __APPLE__
-#include <mach-o/dyld.h>
-#endif
-
 #ifndef NDEBUG
 #ifndef _WIN32
 int32_t WLApplication::pid_me   = 0;
 int32_t WLApplication::pid_peer = 0;
 volatile int32_t WLApplication::may_run = 0;
-#include <csignal>
 #endif
 #endif
 
@@ -180,10 +176,6 @@ void WLApplication::setup_searchpaths(std::string argv0)
 			try {
 				log ("Adding directory: %s\n", argv0.c_str());
 				g_fs->AddFileSystem(FileSystem::Create(argv0));
-#ifdef USE_DATAFILE
-				argv0.append ("/widelands.dat");
-				g_fs->AddFileSystem(new Datafile(argv0.c_str()));
-#endif
 			}
 			catch (FileNotFound_error &) {}
 			catch (FileAccessDenied_error & e) {
@@ -1591,7 +1583,7 @@ void WLApplication::mainmenu()
 				break;
 			}
 			case Fullscreen_Menu_Main::mm_license: {
-				Fullscreen_Menu_FileView ff("txts/COPYING");
+				Fullscreen_Menu_FileView ff("txts/license");
 				ff.run();
 				break;
 			}

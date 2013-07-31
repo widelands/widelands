@@ -17,13 +17,13 @@
  *
  */
 
-#include "widelands_map_player_names_and_tribes_data_packet.h"
+#include "map_io/widelands_map_player_names_and_tribes_data_packet.h"
 
 #include "logic/editor_game_base.h"
 #include "logic/game_data_error.h"
 #include "logic/map.h"
-#include "profile/profile.h"
 #include "logic/world.h"
+#include "profile/profile.h"
 
 namespace Widelands {
 

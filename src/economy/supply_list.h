@@ -20,8 +20,8 @@
 #ifndef SUPPLY_LIST_H
 #define SUPPLY_LIST_H
 
-#include <vector>
 #include <cstddef>
+#include <vector>
 
 namespace Widelands {
 

@@ -17,7 +17,7 @@
  *
  */
 
-#include "warelist.h"
+#include "logic/warelist.h"
 
 #include "log.h"
 

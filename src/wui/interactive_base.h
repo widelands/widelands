@@ -20,17 +20,16 @@
 #ifndef INTERACTIVE_BASE_H
 #define INTERACTIVE_BASE_H
 
+#include <SDL_keysym.h>
+
 #include "debugconsole.h"
 #include "logic/editor_game_base.h"
 #include "logic/map.h"
-#include "mapview.h"
-#include "overlay_manager.h"
-
+#include "wui/mapview.h"
+#include "wui/overlay_manager.h"
 #include "ui_basic/box.h"
 #include "ui_basic/textarea.h"
 #include "ui_basic/unique_window.h"
-
-#include <SDL_keysym.h>
 
 namespace Widelands {struct CoordPath;}
 

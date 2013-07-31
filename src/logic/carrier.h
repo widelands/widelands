@@ -20,7 +20,7 @@
 #ifndef CARRIER_H
 #define CARRIER_H
 
-#include "worker.h"
+#include "logic/worker.h"
 
 namespace Widelands {
 

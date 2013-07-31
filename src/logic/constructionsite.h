@@ -20,11 +20,10 @@
 #ifndef CONSTRUCTIONSITE_H
 #define CONSTRUCTIONSITE_H
 
-#include "partially_finished_building.h"
-
-#include "player.h"
-
 #include <vector>
+
+#include "logic/partially_finished_building.h"
+#include "logic/player.h"
 
 namespace Widelands {
 

@@ -20,17 +20,16 @@
 #ifndef PLAYER_H
 #define PLAYER_H
 
-#include "areawatcher.h"
-#include "building.h"
-#include "editor_game_base.h"
-#include "mapregion.h"
-#include "message_queue.h"
-#include "notification.h"
+#include "logic/areawatcher.h"
+#include "logic/building.h"
+#include "logic/editor_game_base.h"
+#include "logic/mapregion.h"
+#include "logic/message_queue.h"
+#include "logic/notification.h"
 #include "rgbcolor.h"
-#include "tribe.h"
-#include "warehouse.h"
-
-#include "widelands.h"
+#include "logic/tribe.h"
+#include "logic/warehouse.h"
+#include "logic/widelands.h"
 
 namespace Widelands {
 

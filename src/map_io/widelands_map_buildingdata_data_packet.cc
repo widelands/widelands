@@ -17,14 +17,19 @@
  *
  */
 
-#include "widelands_map_buildingdata_data_packet.h"
+#include "map_io/widelands_map_buildingdata_data_packet.h"
 
-#include "logic/constructionsite.h"
-#include "logic/dismantlesite.h"
+#include <map>
+
+#include <boost/foreach.hpp>
+
 #include "economy/flag.h"
 #include "economy/portdock.h"
 #include "economy/request.h"
+#include "economy/warehousesupply.h"
 #include "economy/wares_queue.h"
+#include "logic/constructionsite.h"
+#include "logic/dismantlesite.h"
 #include "logic/editor_game_base.h"
 #include "logic/game.h"
 #include "logic/map.h"
@@ -36,18 +41,12 @@
 #include "logic/trainingsite.h"
 #include "logic/tribe.h"
 #include "logic/warehouse.h"
-#include "economy/warehousesupply.h"
 #include "logic/widelands_fileread.h"
 #include "logic/widelands_filewrite.h"
-#include "widelands_map_map_object_loader.h"
-#include "widelands_map_map_object_saver.h"
 #include "logic/worker.h"
-#include "log.h"
-
+#include "map_io/widelands_map_map_object_loader.h"
+#include "map_io/widelands_map_map_object_saver.h"
 #include "upcast.h"
-
-#include <map>
-#include <boost/foreach.hpp>
 
 namespace Widelands {
 
@@ -273,10 +272,9 @@ void Map_Buildingdata_Data_Packet::read_formerbuildings_v2
 	bool done = false;
 	const Tribe_Descr & t = b.descr().tribe();
 
-	while (not done) {
+	while (true) {
 		const Building_Descr * oldest = b.m_old_buildings.front();
 		if (!oldest->is_enhanced()) {
-			done = true;
 			break;
 		}
 		const Building_Index & oldest_idx = t.building_index(oldest->name());
@@ -1740,5 +1738,4 @@ void Map_Buildingdata_Data_Packet::write_trainingsite
 
 	// DONE
 }
-
 }

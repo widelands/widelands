@@ -17,12 +17,13 @@
  *
  */
 
-#include "editor_place_bob_tool.h"
+#include "editor/tools/editor_place_bob_tool.h"
+
+#include "editor/editorinteractive.h"
+#include "logic/bob.h"
+#include "logic/editor_game_base.h"
 #include "logic/field.h"
 #include "logic/mapregion.h"
-#include "editor/editorinteractive.h"
-#include "logic/editor_game_base.h"
-#include "logic/bob.h"
 
 using Widelands::Bob;
 

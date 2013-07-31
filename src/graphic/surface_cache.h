@@ -20,8 +20,9 @@
 #ifndef SURFACE_CACHE_H
 #define SURFACE_CACHE_H
 
-#include <boost/utility.hpp>
 #include <string>
+
+#include <boost/utility.hpp>
 
 class Surface;
 

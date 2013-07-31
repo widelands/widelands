@@ -1,1 +1,0 @@
-This catches some old-style casts, that should be caught with -Wold-style-cast, and when gcc-4.2 is common, -Werror=old-style-cast. It is complex because it should allow "operator==(h)" and "operator!=(h)". It should also ignore macros.

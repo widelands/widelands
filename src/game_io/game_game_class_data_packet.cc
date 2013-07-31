@@ -17,7 +17,7 @@
  *
  */
 
-#include "game_game_class_data_packet.h"
+#include "game_io/game_game_class_data_packet.h"
 
 #include "logic/game.h"
 #include "logic/game_data_error.h"
