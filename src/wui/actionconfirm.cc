@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2011 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2011, 2013 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -17,7 +17,7 @@
  *
  */
 
-#include "wui/buildingconfirm.h"
+#include "wui/actionconfirm.h"
 
 #include <boost/format.hpp>
 
@@ -31,8 +31,8 @@
 
 using boost::format;
 
-struct BuildingActionConfirm : public UI::Window {
-	BuildingActionConfirm
+struct ActionConfirm : public UI::Window {
+	ActionConfirm
 		(Interactive_Player & parent,
 		 const std::string & windowtitle,
 		 const std::string & message,
@@ -52,7 +52,7 @@ protected:
 /**
  * Confirmation dialog box for the bulldoze request for a building.
  */
-struct BulldozeConfirm : public BuildingActionConfirm {
+struct BulldozeConfirm : public ActionConfirm {
 	/**
 	 * Create a BulldozeConfirm window.
 	 * No further action is required by the caller: any action necessary to actually
@@ -79,7 +79,7 @@ private:
 /**
  * Confirmation dialog box for the dismantle request for a building.
  */
-struct DismantleConfirm : public BuildingActionConfirm {
+struct DismantleConfirm : public ActionConfirm {
 	DismantleConfirm
 		(Interactive_Player & parent,
 		 Widelands::Building & building);
@@ -91,7 +91,7 @@ struct DismantleConfirm : public BuildingActionConfirm {
 /**
  * Confirmation dialog box for the enhance request for a building.
  */
-struct EnhanceConfirm : public BuildingActionConfirm {
+struct EnhanceConfirm : public ActionConfirm {
 	EnhanceConfirm
 		(Interactive_Player & parent,
 		 Widelands::Building & building,
@@ -106,7 +106,7 @@ private:
 };
 
 
-BuildingActionConfirm::BuildingActionConfirm
+ActionConfirm::ActionConfirm
 	(Interactive_Player & parent,
 	 const std::string & windowtitle,
 	 const std::string & message,
@@ -128,7 +128,7 @@ BuildingActionConfirm::BuildingActionConfirm
 			 6, 80, 80, 34,
 			 g_gr->images().get("pics/but4.png"),
 			 g_gr->images().get("pics/menu_okay.png"));
-	okbtn->sigclicked.connect(boost::bind(&BuildingActionConfirm::ok, this));
+	okbtn->sigclicked.connect(boost::bind(&ActionConfirm::ok, this));
 
 	UI::Button * cancelbtn =
 		new UI::Button
@@ -136,7 +136,7 @@ BuildingActionConfirm::BuildingActionConfirm
 			 114, 80, 80, 34,
 			 g_gr->images().get("pics/but4.png"),
 			 g_gr->images().get("pics/menu_abort.png"));
-	cancelbtn->sigclicked.connect(boost::bind(&BuildingActionConfirm::die, this));
+	cancelbtn->sigclicked.connect(boost::bind(&ActionConfirm::die, this));
 
 	center_to_parent();
 	cancelbtn->center_mouse();
@@ -153,7 +153,7 @@ BulldozeConfirm::BulldozeConfirm
 	 Widelands::Building & building,
 	 Widelands::PlayerImmovable * todestroy)
 	:
-	BuildingActionConfirm
+	ActionConfirm
 		(parent,
 		 _("Destroy building?"),
 		 _("Do you really want to destroy this %s?"),
@@ -218,7 +218,7 @@ DismantleConfirm::DismantleConfirm
 	(Interactive_Player & parent,
 	 Widelands::Building & building)
 	:
-	BuildingActionConfirm
+	ActionConfirm
 		(parent,
 		 _("Dismantle building?"),
 		 _("Do you really want to dismantle this %s?"),
@@ -279,7 +279,7 @@ EnhanceConfirm::EnhanceConfirm
 	 Widelands::Building & building,
 	 const Widelands::Building_Index & id)
 	:
-	BuildingActionConfirm
+	ActionConfirm
 		(parent,
 		 _("Enhance building?"),
 		 _("Do you really want to enhance this %s?"),
@@ -376,4 +376,30 @@ void show_enhance_confirm
 	 const Widelands::Building_Index & id)
 {
 	new EnhanceConfirm(player, building, id);
+}
+
+
+/**
+ * Create a ShipSinkConfirm window.
+ * No further action is required by the caller: any action necessary to actually
+ * sink the ship if the user confirms is taken automatically.
+ *
+ * \param ship this is the ship that the confirmation dialog displays.
+ */
+void show_ship_sink_confirm(Interactive_Player & player, Widelands::Ship & ship)
+{
+	//new ShipSinkConfirm(player, ship);
+}
+
+
+/**
+ * Create a ShipCancelExpeditionConfirm window.
+ * No further action is required by the caller: any action necessary to actually
+ * cancel the expedition if the user confirms is taken automatically.
+ *
+ * \param ship this is the ship that the confirmation dialog displays.
+ */
+void show_ship_cancel_expedition_confirm(Interactive_Player & player, Widelands::Ship & ship)
+{
+	//new ShipCancelExpeditionConfirm(player, ship);
 }
