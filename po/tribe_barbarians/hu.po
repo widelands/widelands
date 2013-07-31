@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2013-07-28 18:22+0000\n"
-"PO-Revision-Date: 2013-07-29 11:21+0000\n"
+"PO-Revision-Date: 2013-07-30 13:44+0000\n"
 "Last-Translator: István Kiss <kiemc@citromail.hu>\n"
 "Language-Team: Language <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-07-30 04:34+0000\n"
-"X-Generator: Launchpad (build 16700)\n"
+"X-Launchpad-Export-Date: 2013-07-31 05:11+0000\n"
+"X-Generator: Launchpad (build 16718)\n"
 
 #: ../../tribes/barbarians/axefactory/help.lua:12
 #: ../../tribes/barbarians/warmill/help.lua:12
@@ -349,6 +349,9 @@ msgid ""
 "a helmsmithy and used in a trainingscamp - together with food - to train "
 "soldiers from healthpoints level 1 to level 2."
 msgstr ""
+"A harci sisak egy erősített páncélzat a barbár harcosoknak. A sisakkészítő "
+"műhelyben állítják elő, és a kiképzőtáborban – élelemmel együtt – a katonák "
+"életerejének 1.-ről 2. szintre fejlesztéséhez használják."
 
 #: ../../tribes/barbarians/coalmine/help.lua:12
 #: ../../tribes/barbarians/deep_coalmine/help.lua:12
@@ -663,7 +666,7 @@ msgstr "Kiszámítás kellene ide"
 #: ../../tribes/barbarians/conf:114
 #: ../../tribes/barbarians/well/help.lua:42
 msgid "Carrier"
-msgstr "Anyaghordó"
+msgstr "Hordár"
 
 #: ../../tribes/barbarians/carrier/conf:1
 msgid "Carries items along the roads."
@@ -2664,7 +2667,7 @@ msgstr "A barbár kút"
 
 #: ../../tribes/barbarians/well/help.lua:47
 msgid "The Carrier needs %s to get one bucket full of water."
-msgstr "Az anyaghordó %s alatt jut egy vödör vízhez."
+msgstr "A hordár %s alatt jut egy vödör vízhez."
 
 #: ../../tribes/barbarians/fernery/help.lua:16
 msgid ""
