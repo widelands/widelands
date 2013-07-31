@@ -264,7 +264,7 @@ void Map_Buildingdata_Data_Packet::read_formerbuildings_v2
 
 	// iterate through all buildings to find first predecessor
 	const Tribe_Descr & t = b.descr().tribe();
-	while (true) {
+	for (;;) {
 		const Building_Descr * oldest = b.m_old_buildings.front();
 		if (!oldest->is_enhanced()) {
 			break;
