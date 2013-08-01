@@ -33,7 +33,7 @@ Fullscreen_Menu_Editor::Fullscreen_Menu_Editor() :
 
 // Title
 	title
-		(this, get_w() / 2, get_h() * 3 / 40, _("Editor Menu"), UI::Align_HCenter),
+		(this, get_w() / 2, get_h() * 3 / 40, _("Editor"), UI::Align_HCenter),
 
 // Buttons
 	new_map

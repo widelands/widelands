@@ -42,7 +42,7 @@ Editor_Tool_Place_Bob_Options_Menu::Editor_Tool_Place_Bob_Options_Menu
 	 Editor_Place_Bob_Tool      & pit,
 	 UI::UniqueWindow::Registry & registry)
 :
-Editor_Tool_Options_Menu(parent, registry, 100, 100, _("Bobs Menu")),
+Editor_Tool_Options_Menu(parent, registry, 100, 100, _("Bobs")),
 
 m_tabpanel          (this, 0, 0, g_gr->images().get("pics/but1.png")),
 m_pit               (pit),

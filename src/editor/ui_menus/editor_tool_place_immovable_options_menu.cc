@@ -42,7 +42,7 @@ Editor_Tool_Place_Immovable_Options_Menu
 		 Editor_Place_Immovable_Tool & pit,
 		 UI::UniqueWindow::Registry  & registry)
 :
-Editor_Tool_Options_Menu(parent, registry, 100, 100, _("Immovable Bobs Menu")),
+Editor_Tool_Options_Menu(parent, registry, 100, 100, _("Immovable Bobs")),
 m_tabpanel(this, 0, 0, g_gr->images().get("pics/but1.png")),
 m_pit     (pit),
 m_click_recursion_protect(false)
