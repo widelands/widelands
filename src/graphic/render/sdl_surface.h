@@ -20,10 +20,9 @@
 #ifndef SDL_SURFACE_H
 #define SDL_SURFACE_H
 
-#include "rgbcolor.h"
-#include "rect.h"
-
 #include "graphic/surface.h"
+#include "rect.h"
+#include "rgbcolor.h"
 
 /**
 * This implements SDL rendering. Do not use this class directly. The right

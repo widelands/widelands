@@ -20,8 +20,8 @@
 #ifndef TEXT_PARSER_H
 #define TEXT_PARSER_H
 
-#include <vector>
 #include <string>
+#include <vector>
 
 #include "align.h"
 #include "rgbcolor.h"

@@ -17,22 +17,22 @@
  *
  */
 
-#include "editor_mapselect.h"
+#include "ui_fsmenu/editor_mapselect.h"
 
-#include "logic/editor_game_base.h"
+#include <cstdio>
+
+#include <boost/format.hpp>
+
 #include "graphic/graphic.h"
 #include "i18n.h"
 #include "io/filesystem/layered_filesystem.h"
+#include "log.h"
+#include "logic/editor_game_base.h"
 #include "logic/map.h"
+#include "map_io/widelands_map_loader.h"
 #include "profile/profile.h"
 #include "s2map.h"
 #include "wexception.h"
-#include "map_io/widelands_map_loader.h"
-
-#include "log.h"
-
-#include <cstdio>
-#include <boost/format.hpp>
 
 using Widelands::WL_Map_Loader;
 
@@ -49,7 +49,7 @@ Fullscreen_Menu_Editor_MapSelect::Fullscreen_Menu_Editor_MapSelect() :
 	m_title
 		(this,
 		 get_w() / 2, get_h() * 9 / 50,
-		 _("Choose your map!"), UI::Align_HCenter),
+		 _("Choose a map"), UI::Align_HCenter),
 	m_label_name
 		(this,
 		 get_w() * 7 / 10, get_h() * 17 / 50,

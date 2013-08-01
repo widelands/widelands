@@ -17,31 +17,29 @@
  *
  */
 
-#include "militarysite.h"
-
-#include "battle.h"
-#include "economy/flag.h"
-#include "economy/request.h"
-#include "editor_game_base.h"
-#include "findbob.h"
-#include "game.h"
-#include "i18n.h"
-#include "message_queue.h"
-#include "player.h"
-#include "profile/profile.h"
-#include "soldier.h"
-#include "tribe.h"
-#include "worker.h"
-
-#include "log.h"
-
-#include "upcast.h"
-
-#include <libintl.h>
+#include "logic/militarysite.h"
 
 #include <clocale>
 #include <cstdio>
-#include "boost/foreach.hpp"
+
+#include <boost/foreach.hpp>
+#include <libintl.h>
+
+#include "economy/flag.h"
+#include "economy/request.h"
+#include "i18n.h"
+#include "log.h"
+#include "logic/battle.h"
+#include "logic/editor_game_base.h"
+#include "logic/findbob.h"
+#include "logic/game.h"
+#include "logic/message_queue.h"
+#include "logic/player.h"
+#include "logic/soldier.h"
+#include "logic/tribe.h"
+#include "logic/worker.h"
+#include "profile/profile.h"
+#include "upcast.h"
 
 namespace Widelands {
 
@@ -89,7 +87,7 @@ ProductionSite(ms_descr),
 m_didconquer  (false),
 m_capacity    (ms_descr.get_max_number_of_soldiers()),
 m_nexthealtime(0),
-m_soldier_preference(ms_descr.m_prefers_heroes_at_start ? kPrefersHeroes : kNoPreference),
+m_soldier_preference(ms_descr.m_prefers_heroes_at_start ? kPrefersHeroes : kPrefersRookies),
 m_soldier_upgrade_try(false)
 {
 	m_next_swap_soldiers_time = 0;
@@ -864,23 +862,30 @@ bool MilitarySite::attack(Soldier & enemy)
 		// the old location.
 		Player            * enemyplayer = enemy.get_owner();
 		const Tribe_Descr & enemytribe  = enemyplayer->tribe();
-		std::string bldname = name();
 
-		// Has this building already a suffix? == conquered building?
-		std::string::size_type const dot = bldname.rfind('.');
-		if (dot >= bldname.size()) {
-			// Add suffix, if the new owner uses another tribe than we.
-			if (enemytribe.name() != owner().tribe().name())
-				bldname += "." + owner().tribe().name();
-		} else if (enemytribe.name() == bldname.substr(dot + 1, bldname.size()))
-			bldname = bldname.substr(0, dot);
-		Building_Index bldi = enemytribe.safe_building_index(bldname.c_str());
+		// Add suffix to all descr in former buildings in cases
+		// the new owner comes from another tribe
+		Building_Descr::FormerBuildings former_buildings;
+		BOOST_FOREACH(const Building_Descr * old_descr, m_old_buildings) {
+			std::string bldname = old_descr->name();
+			// Has this building already a suffix? == conquered building?
+			std::string::size_type const dot = bldname.rfind('.');
+			if (dot >= bldname.size()) {
+				// Add suffix, if the new owner uses another tribe than we.
+				if (enemytribe.name() != owner().tribe().name())
+					bldname += "." + owner().tribe().name();
+			} else if (enemytribe.name() == bldname.substr(dot + 1, bldname.size()))
+				bldname = bldname.substr(0, dot);
+			Building_Index bldi = enemytribe.safe_building_index(bldname.c_str());
+			const Building_Descr * former_descr = enemytribe.get_building_descr(bldi);
+			former_buildings.push_back(former_descr);
+		}
 
 		// Now we destroy the old building before we place the new one.
 		set_defeating_player(enemy.owner().player_number());
 		schedule_destroy(game);
 
-		enemyplayer->force_building(coords, bldi);
+		enemyplayer->force_building(coords, former_buildings);
 		BaseImmovable * const newimm = game.map()[coords].get_immovable();
 		upcast(MilitarySite, newsite, newimm);
 		newsite->reinit_after_conqueration(game);

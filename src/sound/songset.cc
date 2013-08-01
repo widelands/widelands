@@ -17,15 +17,14 @@
  *
  */
 
-#include "songset.h"
+#include "sound/songset.h"
 
 #include <utility>
 
 #include "io/fileread.h"
 #include "io/filesystem/layered_filesystem.h"
-#include "sound_handler.h"
-
 #include "log.h"
+#include "sound/sound_handler.h"
 
 namespace {
 	// The behaviour of whether SDL_Mixer frees the RW it uses was changed with SDL_Mixer version 1.2.12, this

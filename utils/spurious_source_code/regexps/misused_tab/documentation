@@ -1,1 +1,0 @@
-This catches a tab that comes after the first non-whitespace character on a line. Tabs should only be used for indentation.

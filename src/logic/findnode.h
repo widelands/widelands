@@ -20,8 +20,9 @@
 #ifndef FINDNODE_H
 #define FINDNODE_H
 
-#include <stdint.h>
 #include <vector>
+
+#include <stdint.h>
 
 namespace Widelands {
 

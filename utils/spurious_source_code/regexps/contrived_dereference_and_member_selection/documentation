@@ -1,5 +1,0 @@
-This catches use of the contrived syntax for dereference and member selection:
-(*pointer).member
-
-Use the more convenient syntax instead:
-pointer->member

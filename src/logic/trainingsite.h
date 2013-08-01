@@ -20,9 +20,9 @@
 #ifndef TRAININGSITE_H
 #define TRAININGSITE_H
 
-#include "productionsite.h"
-#include "soldiercontrol.h"
-#include "tattribute.h"
+#include "logic/productionsite.h"
+#include "logic/soldiercontrol.h"
+#include "logic/tattribute.h"
 
 struct TrainingSite_Window;
 

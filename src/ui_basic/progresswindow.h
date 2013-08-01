@@ -20,8 +20,8 @@
 #ifndef UI_PROGRESSWINDOW_H
 #define UI_PROGRESSWINDOW_H
 
-#include <string>
 #include <cstring>
+#include <string>
 #include <vector>
 
 #include "point.h"

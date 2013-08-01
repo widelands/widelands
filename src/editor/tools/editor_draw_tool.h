@@ -20,8 +20,8 @@
 #ifndef EDITOR_DRAW_TOOL_H
 #define EDITOR_DRAW_TOOL_H
 
-#include "editor_tool.h"
-#include "editor_tool_action.h"
+#include "editor/tools/editor_tool.h"
+#include "editor/tools/editor_tool_action.h"
 
 ///  This is not a real editor tool. It serves to combine 'hold down mouse and move'
 ///  tool actions in one class.

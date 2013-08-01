@@ -18,14 +18,15 @@
  */
 
 #include "campvis.h"
-#include "io/filesystem/filesystem.h"
-#include "profile/profile.h"
-#include "wexception.h"
+
+#include <cstdio>
+#include <cstdlib>
 
 #include <sys/stat.h>
 
-#include <cstdlib>
-#include <cstdio>
+#include "io/filesystem/filesystem.h"
+#include "profile/profile.h"
+#include "wexception.h"
 
 /**
  * Get the path of campaign visibility save-file

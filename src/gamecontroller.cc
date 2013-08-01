@@ -19,6 +19,7 @@
 
 #include "gamecontroller.h"
 
+#include "chat.h"
 #include "computer_player.h"
 #include "logic/game.h"
 #include "logic/player.h"
@@ -26,7 +27,6 @@
 #include "logic/playersmanager.h"
 #include "profile/profile.h"
 #include "wlapplication.h"
-#include "chat.h"
 #include "wui/interactive_player.h"
 
 struct SinglePlayerGameController : public GameController, public ChatProvider {

@@ -17,14 +17,13 @@
  *
  */
 
-#include "widelands_map_allowed_building_types_data_packet.h"
+#include "map_io/widelands_map_allowed_building_types_data_packet.h"
 
 #include "logic/game.h"
 #include "logic/game_data_error.h"
 #include "logic/player.h"
-#include "profile/profile.h"
 #include "logic/tribe.h"
-
+#include "profile/profile.h"
 #include "upcast.h"
 
 namespace Widelands {

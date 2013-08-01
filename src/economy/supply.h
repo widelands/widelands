@@ -20,9 +20,8 @@
 #ifndef S__SUPPLY_H
 #define S__SUPPLY_H
 
-#include "trackptr.h"
-
 #include "logic/wareworker.h"
+#include "trackptr.h"
 
 namespace Widelands {
 

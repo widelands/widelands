@@ -1,4 +1,0 @@
-This catches upcasts like this:
-   Some_Type * const an_identifier = dynamic_cast<Some_Type *>(source)
-This is unnecessarily verbose and should be abbreviated with the upcast macro:
-   upcast(Some_Type, an_identifier, source)

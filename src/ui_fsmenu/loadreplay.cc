@@ -17,7 +17,7 @@
  *
  */
 
-#include "loadreplay.h"
+#include "ui_fsmenu/loadreplay.h"
 
 #include "game_io/game_loader.h"
 #include "game_io/game_preload_data_packet.h"
@@ -27,8 +27,8 @@
 #include "log.h"
 #include "logic/game.h"
 #include "logic/replay.h"
-#include "ui_basic/messagebox.h"
 #include "timestring.h"
+#include "ui_basic/messagebox.h"
 
 Fullscreen_Menu_LoadReplay::Fullscreen_Menu_LoadReplay() :
 	Fullscreen_Menu_Base("choosemapmenu.jpg"),
@@ -64,7 +64,7 @@ Fullscreen_Menu_LoadReplay::Fullscreen_Menu_LoadReplay() :
 	m_title
 		(this,
 		 get_w() / 2, get_h() * 3 / 20,
-		 _("Choose a replay!"), UI::Align_HCenter),
+		 _("Choose a replay"), UI::Align_HCenter),
 	m_label_mapname
 		(this,
 		 get_w() * 7 / 10,  get_h() * 17 / 50,

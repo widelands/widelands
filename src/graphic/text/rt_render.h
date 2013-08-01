@@ -20,9 +20,10 @@
 #ifndef RT_RENDER_H
 #define RT_RENDER_H
 
-#include <stdint.h>
-#include <string>
 #include <set>
+#include <string>
+
+#include <stdint.h>
 
 #include "graphic/image.h"
 #include "rgbcolor.h"

@@ -17,11 +17,12 @@
  *
  */
 
-#include "login_box.h"
+#include "wui/login_box.h"
+
 #include "i18n.h"
+#include "profile/profile.h"
 #include "ui_basic/button.h"
 #include "ui_basic/messagebox.h"
-#include "profile/profile.h"
 
 LoginBox::LoginBox(Panel & parent)
 :

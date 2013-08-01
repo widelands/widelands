@@ -22,7 +22,7 @@
 
 #include <string>
 
-#include "image_loader.h"
+#include "graphic/image_loader.h"
 
 class ImageLoaderImpl : public IImageLoader {
 public:

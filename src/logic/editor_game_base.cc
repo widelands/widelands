@@ -17,40 +17,38 @@
  *
  */
 
+#include "logic/editor_game_base.h"
 
 #include <algorithm>
 #include <set>
-
-#include "i18n.h"
-#include "rgbcolor.h"
-#include "upcast.h"
-#include "wexception.h"
 
 #include "economy/flag.h"
 #include "economy/road.h"
 #include "graphic/font_handler.h"
 #include "graphic/graphic.h"
+#include "i18n.h"
+#include "logic/areawatcher.h"
+#include "logic/battle.h"
+#include "logic/building.h"
+#include "logic/dismantlesite.h"
+#include "logic/findimmovable.h"
+#include "logic/game.h"
+#include "logic/instances.h"
+#include "logic/mapregion.h"
+#include "logic/player.h"
+#include "logic/playersmanager.h"
+#include "logic/roadtype.h"
+#include "logic/tribe.h"
+#include "logic/worker.h"
+#include "logic/world.h"
+#include "rgbcolor.h"
 #include "scripting/scripting.h"
 #include "sound/sound_handler.h"
 #include "ui_basic/progresswindow.h"
+#include "upcast.h"
+#include "wexception.h"
+#include "wui/interactive_base.h"
 #include "wui/interactive_gamebase.h"
-
-#include "areawatcher.h"
-#include "battle.h"
-#include "building.h"
-#include "findimmovable.h"
-#include "game.h"
-#include "instances.h"
-#include "mapregion.h"
-#include "player.h"
-#include "playersmanager.h"
-#include "roadtype.h"
-#include "tribe.h"
-#include "worker.h"
-#include "world.h"
-#include "dismantlesite.h"
-
-#include "editor_game_base.h"
 
 namespace Widelands {
 
@@ -64,10 +62,10 @@ initialization
 Editor_Game_Base::Editor_Game_Base(LuaInterface * lua_interface) :
 m_gametime          (0),
 m_lua               (lua_interface),
+m_player_manager    (new Players_Manager(*this)),
 m_ibase             (0),
 m_map               (0),
-m_lasttrackserial   (0),
-m_player_manager(new Players_Manager(*this))
+m_lasttrackserial   (0)
 {
 	if (not m_lua) // TODO SirVer: this is sooo ugly, I can't say
 		m_lua = create_LuaEditorInterface(this);
@@ -79,6 +77,7 @@ m_player_manager(new Players_Manager(*this))
 
 Editor_Game_Base::~Editor_Game_Base() {
 	delete m_map;
+	delete m_player_manager.release();
 
 	container_iterate_const(Tribe_Vector, m_tribes, i)
 		delete *i.current;
@@ -121,11 +120,12 @@ Interactive_GameBase* Editor_Game_Base::get_igbase()
 	return dynamic_cast<Interactive_GameBase *>(get_ibase());
 }
 
-
+/// @see PlayerManager class
 void Editor_Game_Base::remove_player(Player_Number plnum) {
 	m_player_manager->remove_player(plnum);
 }
 
+/// @see PlayerManager class
 Player * Editor_Game_Base::add_player
 	(Player_Number       const player_number,
 	 uint8_t             const initialization_index,
@@ -289,6 +289,7 @@ void Editor_Game_Base::load_graphics(UI::ProgressWindow & loader_ui)
  * Instantly create a building at the given x/y location. There is no build time.
  * \li owner  is the player number of the building's owner.
  * \li idx is the building type index.
+ * \li former_buildings is the list of former buildings
  */
 Building & Editor_Game_Base::warp_building
 	(Coords const c, Player_Number const owner, Building_Index const idx,
@@ -305,7 +306,9 @@ Building & Editor_Game_Base::warp_building
 /**
  * Create a building site at the given x/y location for the given building type.
  *
- * if oldi != -1 this is a constructionsite coming from an enhancing action
+ * \li idx : the building index of the building in construction
+ * \li former_buildings : the former buildings. If it is not empty, this is
+ * an enhancement.
  */
 Building & Editor_Game_Base::warp_constructionsite
 	(Coords const c, Player_Number const owner,
@@ -321,6 +324,8 @@ Building & Editor_Game_Base::warp_constructionsite
 
 /**
  * Create a dismantle site
+ * \li former_buildings : the former buildings list. This should not be empty,
+ * except during loading.
  */
 Building & Editor_Game_Base::warp_dismantlesite
 	(Coords const c, Player_Number const owner,

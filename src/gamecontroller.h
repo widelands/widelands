@@ -20,9 +20,9 @@
 #ifndef GAMECONTROLLER_H
 #define GAMECONTROLLER_H
 
-#include "logic/widelands.h"
-
 #include <string>
+
+#include "logic/widelands.h"
 
 namespace Widelands {
 struct Game;

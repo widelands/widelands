@@ -19,7 +19,7 @@
 #ifndef GL_SURFACE_SCREEN_H
 #define GL_SURFACE_SCREEN_H
 
-#include "gl_surface.h"
+#include "graphic/render/gl_surface.h"
 
 /**
  * This surface represents the screen in OpenGL mode.

@@ -20,8 +20,8 @@
 #ifndef PLAYERDESCRGROUP_H
 #define PLAYERDESCRGROUP_H
 
-#include <string>
 #include <map>
+#include <string>
 
 #include "constants.h"
 #include "ui_basic/panel.h"

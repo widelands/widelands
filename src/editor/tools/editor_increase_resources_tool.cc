@@ -17,15 +17,15 @@
  *
  */
 
-#include "editor_increase_resources_tool.h"
+#include "editor/tools/editor_increase_resources_tool.h"
 
 #include "editor/editorinteractive.h"
-#include "logic/field.h"
 #include "graphic/graphic.h"
+#include "logic/field.h"
 #include "logic/mapregion.h"
 #include "logic/world.h"
-#include "wui/overlay_manager.h"
 #include "logic/worlddata.h"
+#include "wui/overlay_manager.h"
 
 using Widelands::TCoords;
 

@@ -64,9 +64,9 @@
 #define UNPERS_STRING(name, value) _UNPERS_TYPE(name, value, string)
 
 
-
 #include <lua.hpp>
-#include "luna_impl.h"
+
+#include "scripting/luna_impl.h"
 
 /**
  * Base Class. All Luna class must derive from this

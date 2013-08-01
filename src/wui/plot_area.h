@@ -20,13 +20,13 @@
 #ifndef WUI_PLOT_AREA_H
 #define WUI_PLOT_AREA_H
 
-#include "ui_basic/panel.h"
-#include "ui_basic/slider.h"
-
-#include "rgbcolor.h"
+#include <vector>
 
 #include <boost/bind.hpp>
-#include <vector>
+
+#include "rgbcolor.h"
+#include "ui_basic/panel.h"
+#include "ui_basic/slider.h"
 
 /*
  * A Plot Area is a simple 2D Plot, with the

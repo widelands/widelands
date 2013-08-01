@@ -1,1 +1,0 @@
-This catches some functions that are declared to have no parameters with the syntax "some_function(void)".

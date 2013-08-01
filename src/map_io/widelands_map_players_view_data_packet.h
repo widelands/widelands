@@ -20,7 +20,7 @@
 #ifndef WIDELANDS_MAP_PLAYERS_VIEW_DATA_PACKET_H
 #define WIDELANDS_MAP_PLAYERS_VIEW_DATA_PACKET_H
 
-#include "widelands_map_data_packet.h"
+#include "map_io/widelands_map_data_packet.h"
 
 /// For each player, its view of each node, edge and triangle that he has seen
 /// but does not see currently. Information that he currently sees is not

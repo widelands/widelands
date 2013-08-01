@@ -17,31 +17,31 @@
  *
  */
 
-#include "editor_main_menu_load_map.h"
+#include "editor/ui_menus/editor_main_menu_load_map.h"
 
-#include "logic/building.h"
+#include <cstdio>
+
+#include <boost/format.hpp>
+
+#include "editor/editorinteractive.h"
+#include "editor/tools/editor_set_starting_pos_tool.h"
 #include "graphic/graphic.h"
 #include "i18n.h"
 #include "io/filesystem/layered_filesystem.h"
-#include "editor/editorinteractive.h"
-#include "map_io/widelands_map_loader.h"
-#include "wexception.h"
+#include "logic/building.h"
 #include "logic/editor_game_base.h"
-#include "editor/tools/editor_set_starting_pos_tool.h"
-#include "wui/overlay_manager.h"
 #include "logic/world.h"
 #include "map_io/map_loader.h"
+#include "map_io/widelands_map_loader.h"
 #include "profile/profile.h"
-
 #include "ui_basic/button.h"
 #include "ui_basic/editbox.h"
 #include "ui_basic/listselect.h"
 #include "ui_basic/multilinetextarea.h"
 #include "ui_basic/progresswindow.h"
 #include "ui_basic/textarea.h"
-
-#include <cstdio>
-#include <boost/format.hpp>
+#include "wexception.h"
+#include "wui/overlay_manager.h"
 
 using Widelands::WL_Map_Loader;
 

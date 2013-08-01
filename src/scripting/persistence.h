@@ -22,8 +22,10 @@
 
 #include <string>
 
-#include "logic/widelands_filewrite.h"
+#include <lua.hpp>
+
 #include "logic/widelands_fileread.h"
+#include "logic/widelands_filewrite.h"
 
 namespace Widelands {
 	struct Map_Map_Object_Loader;
@@ -32,7 +34,6 @@ namespace Widelands {
 	struct Game;
 }
 
-#include <lua.hpp>
 
 /**
  * This persists the lua object at the stack position

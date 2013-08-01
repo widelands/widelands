@@ -17,6 +17,8 @@
  *
  */
 
+#include "scripting/lua_game.h"
+
 #include <lua.hpp>
 
 #include "campvis.h"
@@ -29,14 +31,11 @@
 #include "logic/player.h"
 #include "logic/playersmanager.h"
 #include "logic/tribe.h"
+#include "scripting/c_utils.h"
+#include "scripting/lua_map.h"
+#include "scripting/scripting.h"
 #include "wui/interactive_player.h"
 #include "wui/story_message_box.h"
-
-#include "c_utils.h"
-#include "lua_map.h"
-#include "scripting.h"
-
-#include "lua_game.h"
 
 using namespace Widelands;
 using namespace LuaMap;

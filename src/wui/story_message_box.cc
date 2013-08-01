@@ -17,7 +17,7 @@
  *
  */
 
-#include "story_message_box.h"
+#include "wui/story_message_box.h"
 
 #include "constants.h"
 #include "graphic/graphic.h"

@@ -17,7 +17,7 @@
  *
  */
 
-#include "field.h"
+#include "logic/field.h"
 
 #include "wui/mapviewpixelfunctions.h"
 

@@ -1,1 +1,0 @@
-snprintf(buffer, 25, "format string");

@@ -20,21 +20,20 @@
 #ifndef TRIBE_H
 #define TRIBE_H
 
-#include "graphic/animation.h"
-#include "bob.h"
-#include "building.h"
-#include "descr_maintainer.h"
-#include "immovable.h"
-#include "item_ware_descr.h"
-#include "military_data.h"
-#include "worker.h"
-#include "HTMLReferences.h"
-
-#include "io/filewrite.h"
-#include "TribeBasicInfo.h"
-
 #include <map>
 #include <vector>
+
+#include "HTMLReferences.h"
+#include "TribeBasicInfo.h"
+#include "logic/bob.h"
+#include "logic/building.h"
+#include "descr_maintainer.h"
+#include "graphic/animation.h"
+#include "logic/immovable.h"
+#include "io/filewrite.h"
+#include "logic/item_ware_descr.h"
+#include "logic/military_data.h"
+#include "logic/worker.h"
 
 namespace Widelands {
 

@@ -17,17 +17,16 @@
  *
  */
 
+#include "scripting/lua_ui.h"
+
 #include <lua.hpp>
 
 #include "gamecontroller.h"
 #include "logic/player.h"
+#include "scripting/c_utils.h"
+#include "scripting/lua_map.h"
 #include "upcast.h"
 #include "wui/interactive_player.h"
-
-#include "c_utils.h"
-#include "lua_map.h"
-
-#include "lua_ui.h"
 
 namespace LuaUi {
 

@@ -20,10 +20,10 @@
 #ifndef CAMPVIS_H
 #define CAMPVIS_H
 
-#include <stdint.h>
 #include <cstring>
 #include <string>
 
+#include <stdint.h>
 
 struct Campaign_visibility_save {
 	std::string get_path();

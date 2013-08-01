@@ -22,7 +22,7 @@
 
 #include <string>
 
-#include "cmd_queue.h"
+#include "logic/cmd_queue.h"
 
 namespace Widelands {
 

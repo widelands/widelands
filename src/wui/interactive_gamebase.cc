@@ -17,17 +17,16 @@
  *
  */
 
-#include "interactive_gamebase.h"
-
-#include "game_summary.h"
-#include "chatoverlay.h"
-#include "profile/profile.h"
-#include "upcast.h"
+#include "wui/interactive_gamebase.h"
 
 #include "logic/findbob.h"
 #include "logic/game.h"
 #include "logic/player.h"
 #include "logic/ship.h"
+#include "profile/profile.h"
+#include "upcast.h"
+#include "wui/chatoverlay.h"
+#include "wui/game_summary.h"
 
 Interactive_GameBase::Interactive_GameBase
 	(Widelands::Game & _game, Section & global_s,

@@ -20,8 +20,8 @@
 #ifndef DEBUGCONSOLE_H
 #define DEBUGCONSOLE_H
 
-#include <vector>
 #include <string>
+#include <vector>
 
 #include <boost/function.hpp>
 

@@ -1,2 +1,0 @@
-virtual My:integer f();
-virtual bool gh() {

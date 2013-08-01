@@ -17,29 +17,27 @@
  *
  */
 
-#include "sound_handler.h"
+#include "sound/sound_handler.h"
+
+#include <cerrno>
+
+#include <SDL.h>
+#ifdef _WIN32
+#include <windows.h>
+#endif
 
 #include "graphic/graphic.h"
 #include "i18n.h"
 #include "io/fileread.h"
 #include "io/filesystem/layered_filesystem.h"
+#include "log.h"
 #include "logic/game.h"
 #include "logic/map.h"
 #include "profile/profile.h"
-#include "songset.h"
+#include "sound/songset.h"
 #include "wui/interactive_base.h"
 #include "wui/mapview.h"
 #include "wui/mapviewpixelfunctions.h"
-
-#include "log.h"
-
-#include <SDL.h>
-
-#include <cerrno>
-
-#ifdef _WIN32
-#include <windows.h>
-#endif
 
 #define DEFAULT_MUSIC_VOLUME  64
 #define DEFAULT_FX_VOLUME    128

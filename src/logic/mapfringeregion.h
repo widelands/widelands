@@ -20,7 +20,7 @@
 #ifndef MAPFRINGEREGION_H
 #define MAPFRINGEREGION_H
 
-#include "map.h"
+#include "logic/map.h"
 
 namespace Widelands {
 

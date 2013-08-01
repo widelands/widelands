@@ -1,1 +1,0 @@
-Do not create a temporary std::string with std::string::substr just to compare it with another std::string or a char[] constant. Use std::string::compare instead.

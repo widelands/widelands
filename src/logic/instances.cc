@@ -17,25 +17,23 @@
  *
  */
 
-#include "instances.h"
-
-#include "cmd_queue.h"
-#include "game.h"
-#include "queue_cmd_ids.h"
-#include "wexception.h"
-#include "widelands_fileread.h"
-#include "widelands_filewrite.h"
-#include "map_io/widelands_map_map_object_loader.h"
-#include "map_io/widelands_map_map_object_saver.h"
-
-#include "log.h"
-
-#include "container_iterate.h"
+#include "logic/instances.h"
 
 #include <cstdarg>
 #include <cstdio>
-#include <string>
 #include <cstring>
+#include <string>
+
+#include "container_iterate.h"
+#include "log.h"
+#include "logic/cmd_queue.h"
+#include "logic/game.h"
+#include "logic/queue_cmd_ids.h"
+#include "logic/widelands_fileread.h"
+#include "logic/widelands_filewrite.h"
+#include "map_io/widelands_map_map_object_loader.h"
+#include "map_io/widelands_map_map_object_saver.h"
+#include "wexception.h"
 
 namespace Widelands {
 
@@ -357,6 +355,7 @@ m_descr(the_descr), m_serial(0), m_logsink(0)
  */
 void Map_Object::remove(Editor_Game_Base & egbase)
 {
+	removed(m_serial); // Signal call
 	cleanup(egbase);
 	delete this;
 }

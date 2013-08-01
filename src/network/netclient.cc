@@ -17,15 +17,14 @@
  *
  */
 
+#include "network/netclient.h"
+
 #include <boost/lexical_cast.hpp>
 #include <config.h>
-
-#include "netclient.h"
 
 #include "build_info.h"
 #include "game_io/game_loader.h"
 #include "i18n.h"
-#include "internet_gaming.h"
 #include "io/fileread.h"
 #include "io/filewrite.h"
 #include "logic/game.h"
@@ -33,11 +32,14 @@
 #include "logic/playercommand.h"
 #include "logic/playersmanager.h"
 #include "map_io/widelands_map_loader.h"
-#include "network_gaming_messages.h"
-#include "network_protocol.h"
-#include "network_system.h"
+#include "network/internet_gaming.h"
+#include "network/network_gaming_messages.h"
+#include "network/network_protocol.h"
+#include "network/network_system.h"
 #include "profile/profile.h"
 #include "scripting/scripting.h"
+#include "ui_basic/messagebox.h"
+#include "ui_basic/progresswindow.h"
 #include "ui_fsmenu/launchMPG.h"
 #include "warning.h"
 #include "wexception.h"
@@ -45,9 +47,6 @@
 #include "wui/game_tips.h"
 #include "wui/interactive_player.h"
 #include "wui/interactive_spectator.h"
-
-#include "ui_basic/messagebox.h"
-#include "ui_basic/progresswindow.h"
 
 
 struct NetClientImpl {

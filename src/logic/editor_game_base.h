@@ -20,18 +20,18 @@
 #ifndef EDITOR_GAME_BASE_H
 #define EDITOR_GAME_BASE_H
 
-#include "bob.h"
-#include "building.h"
-#include "constants.h"
-#include "map.h"
-#include "notification.h"
-#include "player_area.h"
+#include <cstring>
+#include <string>
+#include <vector>
 
 #include <boost/noncopyable.hpp>
 
-#include <string>
-#include <cstring>
-#include <vector>
+#include "logic/bob.h"
+#include "logic/building.h"
+#include "constants.h"
+#include "logic/map.h"
+#include "logic/notification.h"
+#include "logic/player_area.h"
 
 namespace UI {struct ProgressWindow;}
 struct Fullscreen_Menu_LaunchGame;

@@ -20,8 +20,9 @@
 #ifndef GAME_LOADER_H
 #define GAME_LOADER_H
 
-#include <stdint.h>
 #include <string>
+
+#include <stdint.h>
 
 class FileSystem;
 

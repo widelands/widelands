@@ -17,17 +17,17 @@
  *
  */
 
-#include "progressbar.h"
+#include "ui_basic/progressbar.h"
+
+#include <cstdio>
+
+#include <boost/format.hpp>
 
 #include "constants.h"
 #include "graphic/font.h"
 #include "graphic/font_handler1.h"
-#include "text_layout.h"
 #include "graphic/rendertarget.h"
-
-#include <cstdio>
-#include <boost/format.hpp>
-
+#include "text_layout.h"
 
 namespace UI {
 /**
@@ -81,10 +81,10 @@ void Progress_Bar::draw(RenderTarget & dst)
 	assert(0 <= fraction);
 	assert     (fraction <= 1);
 
-	const RGBColor color = fraction <= 0.15 ?
+	const RGBColor color = fraction <= 0.33 ?
 		RGBColor(255, 0, 0)
 		:
-		fraction <= 0.5 ? RGBColor(255, 255, 0) : RGBColor(0, 255, 0);
+		fraction <= 0.67 ? RGBColor(255, 255, 0) : RGBColor(0, 255, 0);
 
 	// Draw the actual bar
 	if (m_orientation == Horizontal)

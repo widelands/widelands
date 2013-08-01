@@ -17,14 +17,19 @@
  *
  */
 
-#include "widelands_map_buildingdata_data_packet.h"
+#include "map_io/widelands_map_buildingdata_data_packet.h"
 
-#include "logic/constructionsite.h"
-#include "logic/dismantlesite.h"
+#include <map>
+
+#include <boost/foreach.hpp>
+
 #include "economy/flag.h"
 #include "economy/portdock.h"
 #include "economy/request.h"
+#include "economy/warehousesupply.h"
 #include "economy/wares_queue.h"
+#include "logic/constructionsite.h"
+#include "logic/dismantlesite.h"
 #include "logic/editor_game_base.h"
 #include "logic/game.h"
 #include "logic/map.h"
@@ -36,17 +41,12 @@
 #include "logic/trainingsite.h"
 #include "logic/tribe.h"
 #include "logic/warehouse.h"
-#include "economy/warehousesupply.h"
 #include "logic/widelands_fileread.h"
 #include "logic/widelands_filewrite.h"
-#include "widelands_map_map_object_loader.h"
-#include "widelands_map_map_object_saver.h"
 #include "logic/worker.h"
-
+#include "map_io/widelands_map_map_object_loader.h"
+#include "map_io/widelands_map_map_object_saver.h"
 #include "upcast.h"
-
-#include <map>
-#include <boost/foreach.hpp>
 
 namespace Widelands {
 
@@ -158,6 +158,8 @@ throw (_wexception)
 								(building.descr().tribe().safe_building_index(fr.CString()));
 							building.m_old_buildings.push_back(former_descr);
 						}
+						// Only construction sites may have an empty list
+						assert(!building.m_old_buildings.empty() || is_a(ConstructionSite, &building));
 					}
 					if (fr.Unsigned8()) {
 						if (upcast(ProductionSite, productionsite, &building))
@@ -249,7 +251,6 @@ throw (_wexception)
 void Map_Buildingdata_Data_Packet::read_formerbuildings_v2
 	(Building& b, FileRead&, Game&, Map_Map_Object_Loader&)
 {
-	// add the current building - not for csite or dismantle
 	if (is_a(ProductionSite, &b)) {
 		assert(b.m_old_buildings.empty());
 		b.m_old_buildings.push_back(&b.descr());
@@ -257,18 +258,21 @@ void Map_Buildingdata_Data_Packet::read_formerbuildings_v2
 		assert(b.m_old_buildings.empty());
 		b.m_old_buildings.push_back(&b.descr());
 	} else if (upcast(DismantleSite, dsite, &b)) {
-		b.m_old_buildings.push_back(dsite->m_building);
+		// Former buildings filled with the current one
+		// upon building init.
+		assert(!b.m_old_buildings.empty());
 	} else if (is_a(ConstructionSite, &b)) {
+		// Not needed for csite.
 		return;
+	} else {
+		assert(false);
 	}
 
 	// iterate through all buildings to find first predecessor
-	bool done = false;
 	const Tribe_Descr & t = b.descr().tribe();
-	while (not done) {
+	for (;;) {
 		const Building_Descr * oldest = b.m_old_buildings.front();
 		if (!oldest->is_enhanced()) {
-			done = true;
 			break;
 		}
 		const Building_Index & oldest_idx = t.building_index(oldest->name());
@@ -1732,5 +1736,4 @@ void Map_Buildingdata_Data_Packet::write_trainingsite
 
 	// DONE
 }
-
 }

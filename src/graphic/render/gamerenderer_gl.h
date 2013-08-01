@@ -20,14 +20,12 @@
 #ifndef WIDELANDS_GAMERENDERER_GL_H
 #define WIDELANDS_GAMERENDERER_GL_H
 
-#include "gamerenderer.h"
-
-#include "logic/widelands.h"
-
-#include "rect.h"
-
 #include <memory>
 #include <vector>
+
+#include "graphic/render/gamerenderer.h"
+#include "logic/widelands.h"
+#include "rect.h"
 
 namespace Widelands {
 struct Coords;

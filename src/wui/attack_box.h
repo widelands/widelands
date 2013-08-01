@@ -20,16 +20,16 @@
 #ifndef _ATTACK_BOX_H_
 #define _ATTACK_BOX_H_
 
+#include <list>
+
 #include "logic/attackable.h"
 #include "logic/bob.h"
-#include "logic/soldier.h"
 #include "logic/player.h"
-
+#include "logic/soldier.h"
 #include "ui_basic/box.h"
 #include "ui_basic/button.h"
 #include "ui_basic/slider.h"
 #include "ui_basic/textarea.h"
-#include <list>
 
 using Widelands::Bob;
 using Widelands::Building;

@@ -1,3 +1,0 @@
-Lines with control structures affect how editors indent the controlled lines following them. So an eixsting line of that kind that is badly indented can cause newly added code to become badly indented. Therefore it is especially important that the control structures are correctly indented. This does not yet include for loops, because there are still too many of them that need fixing and they should eventually be replaced with iteration macros anyway.
-
-Macro definitions must be ignored, because macros should be indented with spaces, not tabs. We just assume that if the last character of the line is backslash, the line is part of a macro definition.

@@ -17,7 +17,7 @@
  *
  */
 
-#include "internet_lobby.h"
+#include "ui_fsmenu/internet_lobby.h"
 
 #include <boost/bind.hpp>
 

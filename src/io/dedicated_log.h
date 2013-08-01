@@ -21,8 +21,8 @@
 #define DEDICATED_LOG_H
 
 #include "chat.h"
-#include "filesystem/disk_filesystem.h"
-#include "filewrite.h"
+#include "io/filesystem/disk_filesystem.h"
+#include "io/filewrite.h"
 #include "log.h"
 
 void dedicatedlog(const char *, ...) PRINTF_FORMAT(1, 2);

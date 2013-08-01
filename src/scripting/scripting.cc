@@ -17,29 +17,29 @@
  *
  */
 
-#include <string>
+#include "scripting/scripting.h"
+
 #include <stdexcept>
-
-#include "log.h"
-#include "io/filesystem/layered_filesystem.h"
-
-#include "c_utils.h"
-#include "coroutine_impl.h"
-#include "lua_bases.h"
-#include "lua_editor.h"
-#include "lua_game.h"
-#include "lua_globals.h"
-#include "lua_map.h"
-#include "lua_root.h"
-#include "lua_ui.h"
-#include "persistence.h"
-#include "factory.h"
-
-#include "scripting.h"
+#include <string>
 
 #ifdef _MSC_VER
 #include <ctype.h> // for tolower
 #endif
+
+#include "io/filesystem/layered_filesystem.h"
+#include "log.h"
+#include "scripting/c_utils.h"
+#include "scripting/coroutine_impl.h"
+#include "scripting/factory.h"
+#include "scripting/lua_bases.h"
+#include "scripting/lua_editor.h"
+#include "scripting/lua_game.h"
+#include "scripting/lua_globals.h"
+#include "scripting/lua_map.h"
+#include "scripting/lua_root.h"
+#include "scripting/lua_ui.h"
+#include "scripting/persistence.h"
+
 
 /*
 ============================================

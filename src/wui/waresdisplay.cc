@@ -17,9 +17,12 @@
  *
  */
 
+#include "wui/waresdisplay.h"
+
+#include <cstdio>
+
 #include <boost/foreach.hpp>
 #include <boost/lexical_cast.hpp>
-#include <cstdio>
 
 #include "graphic/font.h"
 #include "graphic/font_handler.h"
@@ -33,8 +36,6 @@
 #include "logic/worker.h"
 #include "text_layout.h"
 #include "wexception.h"
-
-#include "waresdisplay.h"
 
 const int WARE_MENU_INFO_SIZE = 12;
 

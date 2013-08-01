@@ -17,25 +17,24 @@
  *
  */
 
-#include "editor_main_menu_new_map.h"
-
-#include "graphic/graphic.h"
-#include "i18n.h"
-#include "editor/editorinteractive.h"
-#include "logic/map.h"
-#include "profile/profile.h"
-#include "logic/world.h"
-#include "logic/editor_game_base.h"
-
-#include "ui_basic/button.h"
-#include "ui_basic/progresswindow.h"
-#include "ui_basic/textarea.h"
-#include "ui_basic/window.h"
+#include "editor/ui_menus/editor_main_menu_new_map.h"
 
 #include <cstdio>
 #include <cstring>
 #include <string>
 #include <vector>
+
+#include "editor/editorinteractive.h"
+#include "graphic/graphic.h"
+#include "i18n.h"
+#include "logic/editor_game_base.h"
+#include "logic/map.h"
+#include "logic/world.h"
+#include "profile/profile.h"
+#include "ui_basic/button.h"
+#include "ui_basic/progresswindow.h"
+#include "ui_basic/textarea.h"
+#include "ui_basic/window.h"
 
 using Widelands::NUMBER_OF_MAP_DIMENSIONS;
 
