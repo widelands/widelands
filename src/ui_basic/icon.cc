@@ -43,13 +43,24 @@ void Icon::setIcon(const Image* picture_id) {
 	update();
 }
 
+void Icon::setFrame(const RGBColor& color)
+{
+	m_draw_frame = true;
+	m_framecolor.r = color.r;
+	m_framecolor.g = color.g;
+	m_framecolor.b = color.b;
+}
+
+
 void Icon::draw(RenderTarget & dst) {
-	if (!m_pic) {
-		return;
+	if (m_pic) {
+		int32_t w = (m_w - m_pic->width()) / 2;
+		int32_t h = (m_h - m_pic->height()) / 2;
+		dst.blit(Point(w, h), m_pic);
 	}
-	int32_t w = (m_w - m_pic->width()) / 2;
-	int32_t h = (m_h - m_pic->height()) / 2;
-	dst.blit(Point(w, h), m_pic);
+	if (m_draw_frame) {
+		dst.draw_rect(Rect(0, 0, m_w, m_h), m_framecolor);
+	}
 }
 
 }

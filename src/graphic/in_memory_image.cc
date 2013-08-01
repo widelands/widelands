@@ -41,7 +41,6 @@ public:
 	InMemoryImage(const string& ghash, Surface* surf) :
 		hash_(ghash), surf_(surf) {}
 	virtual ~InMemoryImage() {
-		surf_.release();
 	}
 
 	// Implements Image.

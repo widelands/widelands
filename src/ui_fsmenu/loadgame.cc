@@ -34,8 +34,8 @@
 #include "log.h"
 #include "logic/game.h"
 #include "timestring.h"
-#include "ui_basic/messagebox.h"
 #include "ui_basic/icon.h"
+#include "ui_basic/messagebox.h"
 
 
 
@@ -97,8 +97,12 @@ Fullscreen_Menu_LoadGame::Fullscreen_Menu_LoadGame
 		(this, get_w() * 71 / 100, get_h() * 41 / 100),
 	m_ta_win_condition
 		(this, get_w() * 71 / 100, get_h() * 9 / 20),
+	m_label_minimap
+		(this,
+		 get_w() * 7 / 10,  get_h() * 10 / 20,
+		 _("Minimap:"), UI::Align_Right),
 	m_minimap_icon
-		(this, get_w() * 7 / 10, get_h() * 10 / 20,
+		(this, get_w() * 71 / 100, get_h() * 10 / 20,
 		 get_w() * 15 / 100, get_w() * 15 / 100, nullptr),
 	m_settings(gsp),
 	m_ctrl(gc)
@@ -121,6 +125,7 @@ Fullscreen_Menu_LoadGame::Fullscreen_Menu_LoadGame
 	m_label_players .set_font(m_fn, m_fs, UI_FONT_CLR_FG);
 	m_ta_players    .set_font(m_fn, m_fs, UI_FONT_CLR_FG);
 	m_ta_win_condition.set_font(m_fn, m_fs, UI_FONT_CLR_FG);
+	m_minimap_icon.setFrame(UI_FONT_CLR_FG);
 	m_list          .set_font(m_fn, m_fs);
 	m_list.selected.connect(boost::bind(&Fullscreen_Menu_LoadGame::map_selected, this, _1));
 	m_list.double_clicked.connect(boost::bind(&Fullscreen_Menu_LoadGame::double_clicked, this, _1));
@@ -231,9 +236,7 @@ void Fullscreen_Menu_LoadGame::map_selected(uint32_t selected)
 		std::string minimap_path = gpdp.get_minimap_path();
 		// Delete former image
 		m_minimap_icon.setIcon(nullptr);
-		if (m_minimap_image) {
-			m_minimap_image.release();
-		}
+		m_minimap_image.reset();
 		// Load the new one
 		if (!minimap_path.empty()) {
 			try {
@@ -247,10 +250,9 @@ void Fullscreen_Menu_LoadGame::map_selected(uint32_t selected)
 				}
 				uint16_t w = scale * im->width();
 				uint16_t h = scale * im->height();
-				const Image* resized = ImageTransformations::resize
-					(im, w, h);
-				m_minimap_image.reset(resized);
-				m_minimap_icon.setIcon(m_minimap_image.get());
+				const Image* resized = ImageTransformations::resize(im, w, h);
+				m_minimap_image.reset(im);
+				m_minimap_icon.setIcon(resized);
 			} catch (...) {
 			}
 		}

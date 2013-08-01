@@ -19,21 +19,22 @@
 
 #include "game_io/game_preload_data_packet.h"
 
+#include <memory>
+
 #include "graphic/graphic.h"
-#include "graphic/surface.h"
 #include "graphic/in_memory_image.h"
 #include "graphic/render/minimaprenderer.h"
+#include "graphic/surface.h"
 #include "logic/game.h"
 #include "logic/game_data_error.h"
 #include "logic/map.h"
 #include "profile/profile.h"
 #include "scripting/scripting.h"
 #include "wui/interactive_player.h"
-#include "wui/minimap.h"
 #include "wui/mapviewpixelconstants.h"
 #include "wui/mapviewpixelfunctions.h"
+#include "wui/minimap.h"
 
-#include <memory>
 
 namespace Widelands {
 

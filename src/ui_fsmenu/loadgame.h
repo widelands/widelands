@@ -76,6 +76,7 @@ private:
 	UI::Textarea                                    m_label_players;
 	UI::Textarea                                    m_ta_players;
 	UI::Textarea                                    m_ta_win_condition;
+	UI::Textarea                                    m_label_minimap;
 	UI::Icon                                        m_minimap_icon;
 	std::string                                     m_filename;
 
