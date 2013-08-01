@@ -40,7 +40,7 @@
 Interactive_Spectator::Interactive_Spectator
 	(Widelands::Game & _game, Section & global_s, bool const multiplayer)
 	:
-	Interactive_GameBase(_game, global_s, OBSERVER, multiplayer),
+	Interactive_GameBase(_game, global_s, OBSERVER, multiplayer, multiplayer),
 
 #define INIT_BTN(picture, name, tooltip)                            \
  TOOLBAR_BUTTON_COMMON_PARAMETERS(name),                                      \
@@ -68,7 +68,7 @@ Interactive_Spectator::Interactive_Spectator
 	m_toggle_minimap.sigclicked.connect(boost::bind(&Interactive_Spectator::toggle_minimap, this));
 
 	m_toolbar.set_layout_toplevel(true);
-	if (!multiplayer) {
+	if (!is_multiplayer()) {
 		m_toolbar.add(&m_exit,                UI::Box::AlignLeft);
 		m_toolbar.add(&m_save,                UI::Box::AlignLeft);
 	} else
@@ -79,7 +79,7 @@ Interactive_Spectator::Interactive_Spectator
 
 	// TODO : instead of making unneeded buttons invisible after generation,
 	// they should not at all be generated. -> implement more dynamic toolbar UI
-	if (multiplayer) {
+	if (is_multiplayer()) {
 		m_exit.set_visible(false);
 		m_exit.set_enabled(false);
 		m_save.set_visible(false);
@@ -169,16 +169,18 @@ void Interactive_Spectator::toggle_chat()
 
 void Interactive_Spectator::exit_btn()
 {
-	if (m_chatenabled) //  == multiplayer
+	if (is_multiplayer()) {
 		return;
+	}
 	end_modal(0);
 }
 
 
 void Interactive_Spectator::save_btn()
 {
-	if (m_chatenabled) //  == multiplayer
+	if (is_multiplayer()) {
 		return;
+	}
 	if (m_mainm_windows.savegame.window)
 		delete m_mainm_windows.savegame.window;
 	else {
@@ -189,8 +191,9 @@ void Interactive_Spectator::save_btn()
 
 
 void Interactive_Spectator::toggle_options_menu() {
-	if (!m_chatenabled) //  == !multiplayer
+	if (!is_multiplayer()) {
 		return;
+	}
 	if (m_options.window)
 		delete m_options.window;
 	else

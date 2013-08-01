@@ -484,8 +484,10 @@ void Game::postload()
  * \note loader_ui can be nullptr, if this is run as dedicated server.
  */
 bool Game::run
-	(UI::ProgressWindow * loader_ui, Start_Game_Type const start_game_type)
+	(UI::ProgressWindow * loader_ui, Start_Game_Type const start_game_type,
+	 bool replay)
 {
+	m_replay = replay;
 	postload();
 
 	if (start_game_type != Loaded) {

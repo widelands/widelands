@@ -82,10 +82,9 @@ Interactive_Player::Interactive_Player
 	 bool                     const scenario,
 	 bool                     const multiplayer)
 	:
-	Interactive_GameBase (_game, global_s),
+	Interactive_GameBase (_game, global_s, NONE, multiplayer, multiplayer),
 	m_auto_roadbuild_mode(global_s.get_bool("auto_roadbuild_mode", true)),
 	m_flag_to_connect(Widelands::Coords::Null()),
-	m_multiplayer(multiplayer),
 
 // Chat is different, as m_chatProvider needs to be checked when toggling
 // Buildhelp is different as it does not toggle a UniqueWindow
@@ -279,7 +278,7 @@ void Interactive_Player::think()
 			m_flag_to_connect = Widelands::Coords::Null();
 		}
 	}
-	if (m_multiplayer) {
+	if (is_multiplayer()) {
 		m_toggle_chat.set_visible(m_chatenabled);
 		m_toggle_chat.set_enabled(m_chatenabled);
 	}
@@ -450,7 +449,7 @@ bool Interactive_Player::handle_key(bool const down, SDL_keysym const code)
 
 		case SDLK_KP_ENTER:
 		case SDLK_RETURN:
-			if (!m_chatProvider | !m_chatenabled || !m_multiplayer)
+			if (!m_chatProvider | !m_chatenabled || !is_multiplayer())
 				break;
 
 			if (!m_chat.window)

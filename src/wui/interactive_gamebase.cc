@@ -28,7 +28,7 @@
 
 Interactive_GameBase::Interactive_GameBase
 	(Widelands::Game & _game, Section & global_s,
-	 PlayerType pt, bool const chatenabled)
+	 PlayerType pt, bool const chatenabled, bool const multiplayer)
 	:
 	Interactive_Base(_game, global_s),
 	m_chatProvider(0),
@@ -39,7 +39,8 @@ Interactive_GameBase::Interactive_GameBase
 	m_building_tooltip_format
 		(global_s.get_string("building_tooltip_format",      "%r")),
 	m_chatenabled(chatenabled),
-	m_playertype(pt)
+	m_playertype(pt),
+	m_multiplayer(multiplayer)
 {}
 
 /// \return a pointer to the running \ref Game instance.

@@ -104,7 +104,7 @@ struct Game : Editor_Game_Base {
 	bool run_splayer_scenario_direct(char const * mapname);
 	bool run_load_game (std::string filename);
 	enum Start_Game_Type {NewSPScenario, NewNonScenario, Loaded, NewMPScenario};
-	bool run(UI::ProgressWindow * loader_ui, Start_Game_Type);
+	bool run(UI::ProgressWindow * loader_ui, Start_Game_Type, bool replay = false);
 
 	virtual void postload();
 
@@ -189,6 +189,8 @@ struct Game : Editor_Game_Base {
 	// Returns the number of players (human or ai) occupying a slot.
 	uint8_t get_number_of_players() {return m_number_of_players;}
 
+	bool is_replay() const {return m_replay;};
+
 private:
 	void SyncReset();
 
@@ -254,6 +256,7 @@ private:
 	/// For save games and statistics generation
 	std::string          m_win_condition_displayname;
 	uint8_t              m_number_of_players;
+	bool                 m_replay;
 };
 
 inline Coords Game::random_location(Coords location, uint8_t radius) {
