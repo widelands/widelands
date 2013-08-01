@@ -201,8 +201,6 @@ bool RealFSImpl::IsDirectory(const std::string & path) {
 FileSystem * RealFSImpl::MakeSubFileSystem(const std::string & path) {
 	FileSystemPath fspath(FS_CanonicalizeName(path));
 	assert(fspath.m_exists); //TODO: throw an exception instead
-	//printf("RealFSImpl MakeSubFileSystem path %s fullname %s\n",
-	//path.c_str(), fspath.c_str());
 
 	if (fspath.m_isDirectory)
 		return new RealFSImpl   (fspath);

@@ -221,7 +221,7 @@ bool Game::run_splayer_scenario_direct(char const * const mapname) {
 	set_map(new Map);
 
 	std::unique_ptr<Map_Loader> maploader(map().get_correct_loader(mapname));
-	if (not maploader.get())
+	if (!maploader)
 		throw wexception("could not load \"%s\"", mapname);
 	UI::ProgressWindow loaderUI;
 

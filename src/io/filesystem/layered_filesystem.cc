@@ -406,7 +406,6 @@ FileSystem * LayeredFileSystem::MakeSubFileSystem(const std::string & dirname)
 		if ((*it)->IsWritable() and (*it)->FileExists(dirname))
 			return (*it)->MakeSubFileSystem(dirname);
 
-	printf("dirname %s\n", dirname.c_str());
 	throw wexception("LayeredFileSystem: unable to create sub filesystem");
 }
 
@@ -425,7 +424,6 @@ FileSystem * LayeredFileSystem::CreateSubFileSystem(const std::string & dirname,
 		if ((*it)->IsWritable() and not (*it)->FileExists(dirname))
 			return (*it)->CreateSubFileSystem(dirname, type);
 
-	printf("dirname %s\n", dirname.c_str());
 	throw wexception("LayeredFileSystem: unable to create sub filesystem");
 }
 

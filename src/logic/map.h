@@ -154,8 +154,9 @@ struct Map :
 	const Overlay_Manager & overlay_manager() const {return *m_overlay_manager;}
 	Overlay_Manager       & overlay_manager()       {return *m_overlay_manager;}
 
-	//  for loading
-	Map_Loader * get_correct_loader(char const *);
+	/// Returns the correct initialized loader for the given mapfile
+	Map_Loader* get_correct_loader(const std::string& filename);
+
 	void cleanup();
 
 	void create_empty_map // for editor
