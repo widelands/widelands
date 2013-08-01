@@ -185,7 +185,6 @@ void Interactive_Spectator::save_btn()
 	if (m_mainm_windows.savegame.window)
 		delete m_mainm_windows.savegame.window;
 	else {
-		game().gameController()->setDesiredSpeed(0);
 		new Game_Main_Menu_Save_Game(*this, m_mainm_windows.savegame);
 	}
 }
@@ -259,7 +258,6 @@ bool Interactive_Spectator::handle_key(bool const down, SDL_keysym const code)
 
 		case SDLK_s:
 			if (code.mod & (KMOD_LCTRL | KMOD_RCTRL)) {
-				game().gameController()->setDesiredSpeed(0);
 				new Game_Main_Menu_Save_Game(*this, m_mainm_windows.savegame);
 			} else
 				set_display_flag

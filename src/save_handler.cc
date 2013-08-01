@@ -25,9 +25,11 @@
 #include "log.h"
 #include "logic/game.h"
 #include "profile/profile.h"
+#include "upcast.h"
 #include "wexception.h"
 #include "wlapplication.h"
-#include "wui/interactive_player.h"
+#include "wui/interactive_base.h"
+#include "wui/interactive_gamebase.h"
 
 using Widelands::Game_Saver;
 
@@ -68,8 +70,10 @@ void SaveHandler::think(Widelands::Game & game, int32_t realtime) {
 
 	// TODO: defer saving to next tick so that this message is shown
 	// before the actual save, or put the saving logic in another thread
-	game.get_ipl()->get_chat_provider()->send_local
-		(_("Saving game..."));
+	upcast(Interactive_GameBase, igbase, game.get_ibase());
+	if (igbase) {
+		igbase->get_chat_provider()->send_local(_("Saving game..."));
+	}
 
 	// save the game
 	const std::string complete_filename = create_file_name(get_base_dir(), filename);
@@ -88,8 +92,7 @@ void SaveHandler::think(Widelands::Game & game, int32_t realtime) {
 	std::string error;
 	if (!save_game(game, complete_filename, &error)) {
 		log("Autosave: ERROR! - %s\n", error.c_str());
-		game.get_ipl()->get_chat_provider()->send_local
-			(_("Saving failed!"));
+		igbase->get_chat_provider()->send_local(_("Saving failed!"));
 
 		// if backup file was created, move it back
 		if (backup_filename.length() > 0) {
@@ -108,8 +111,9 @@ void SaveHandler::think(Widelands::Game & game, int32_t realtime) {
 	}
 
 	log("Autosave: save took %d ms\n", m_last_saved_time - realtime);
-	game.get_ipl()->get_chat_provider()->send_local
-		(_("Game saved"));
+	if (igbase) {
+		igbase->get_chat_provider()->send_local(_("Game saved"));
+	}
 }
 
 /**
