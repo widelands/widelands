@@ -20,16 +20,15 @@
 #ifndef EDITOR_PLAYER_MENU_H
 #define EDITOR_PLAYER_MENU_H
 
+#include <cstring>
+#include <string>
+#include <vector>
+
 #include "constants.h"
-
 #include "logic/widelands.h"
-
 #include "ui_basic/button.h"
 #include "ui_basic/unique_window.h"
 
-#include <string>
-#include <cstring>
-#include <vector>
 
 struct Editor_Interactive;
 namespace UI {

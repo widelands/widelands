@@ -1,1 +1,0 @@
-^[[:space:]]*virtual +(const +([_a-zA-Z][_a-zA-Z0-9]*::)*[_a-zA-Z][_a-zA-Z0-9]*|([_a-zA-Z][_a-zA-Z0-9]*::)*[_a-zA-Z][_a-zA-Z0-9]* +const) *[_a-zA-Z][_a-zA-Z0-9]* *\(

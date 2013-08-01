@@ -20,8 +20,8 @@
 #ifndef EDITOR_SET_TERRAIN_TOOL_H
 #define EDITOR_SET_TERRAIN_TOOL_H
 
-#include "editor_tool.h"
-#include "multi_select.h"
+#include "editor/tools/editor_tool.h"
+#include "editor/tools/multi_select.h"
 
 struct Editor_Set_Terrain_Tool : public Editor_Tool, public MultiSelect {
 	Editor_Set_Terrain_Tool() : Editor_Tool(*this, *this) {}

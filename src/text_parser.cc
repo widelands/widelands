@@ -19,16 +19,15 @@
 
 #include "text_parser.h"
 
+#include <algorithm>
+#include <cstring>
+#include <string>
+#include <vector>
+
 #include "constants.h"
+#include "container_iterate.h"
 #include "helper.h"
 #include "log.h"
-
-#include "container_iterate.h"
-
-#include <vector>
-#include <algorithm>
-#include <string>
-#include <cstring>
 
 namespace UI {
 

@@ -21,7 +21,6 @@
 #define EDITOR_MAIN_MENU_LOAD_MAP_H
 
 #include "io/filesystem/filesystem.h"
-
 #include "ui_basic/window.h"
 
 struct Editor_Interactive;

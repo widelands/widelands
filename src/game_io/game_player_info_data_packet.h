@@ -20,7 +20,7 @@
 #ifndef GAME_PLAYER_INFO_DATA_PACKET_H
 #define GAME_PLAYER_INFO_DATA_PACKET_H
 
-#include "game_data_packet.h"
+#include "game_io/game_data_packet.h"
 
 namespace Widelands {
 

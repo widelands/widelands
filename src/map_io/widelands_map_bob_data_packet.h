@@ -22,7 +22,7 @@
 
 #include "logic/widelands_fileread.h"
 #include "logic/widelands_geometry.h"
-#include "widelands_map_data_packet.h"
+#include "map_io/widelands_map_data_packet.h"
 
 namespace Widelands {
 

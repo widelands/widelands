@@ -17,7 +17,7 @@
  *
  */
 
-#include "game_data_error.h"
+#include "logic/game_data_error.h"
 
 #include <cstdarg>
 #include <cstdio>

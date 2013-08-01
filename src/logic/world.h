@@ -20,12 +20,11 @@
 #ifndef WORLD_H
 #define WORLD_H
 
-#include "bob.h"
+#include "logic/bob.h"
 #include "descr_maintainer.h"
-#include "immovable.h"
-#include "worlddata.h"
-
-#include "widelands.h"
+#include "logic/immovable.h"
+#include "logic/widelands.h"
+#include "logic/worlddata.h"
 
 struct Section;
 

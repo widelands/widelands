@@ -20,9 +20,9 @@
 #ifndef EDITOR_MAIN_MENU_NEW_MAP_H
 #define EDITOR_MAIN_MENU_NEW_MAP_H
 
-#include "ui_basic/window.h"
-
 #include <vector>
+
+#include "ui_basic/window.h"
 
 struct Editor_Interactive;
 namespace UI {

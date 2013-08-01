@@ -20,16 +20,14 @@
 #ifndef INTERACTIVE_PLAYER_H
 #define INTERACTIVE_PLAYER_H
 
-#include "interactive_gamebase.h"
-
-#include "ui_basic/button.h"
-#include "ui_basic/textarea.h"
-
-#include "logic/message_id.h"
+#include <vector>
 
 #include <SDL_keyboard.h>
 
-#include <vector>
+#include "wui/interactive_gamebase.h"
+#include "logic/message_id.h"
+#include "ui_basic/button.h"
+#include "ui_basic/textarea.h"
 
 namespace UI {
 struct Multiline_Textarea;

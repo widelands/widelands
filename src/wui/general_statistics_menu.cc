@@ -17,24 +17,22 @@
  *
  */
 
-#include "general_statistics_menu.h"
-
+#include "wui/general_statistics_menu.h"
 
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
 #include "i18n.h"
-#include "interactive_player.h"
 #include "logic/editor_game_base.h"
 #include "logic/game.h"
 #include "logic/player.h"
 #include "logic/tribe.h"
 #include "logic/warelist.h"
 #include "scripting/scripting.h"
-
 #include "ui_basic/button.h"
 #include "ui_basic/checkbox.h"
-#include "ui_basic/textarea.h"
 #include "ui_basic/slider.h"
+#include "ui_basic/textarea.h"
+#include "wui/interactive_player.h"
 
 using namespace Widelands;
 

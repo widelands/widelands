@@ -22,7 +22,7 @@
 
 #include "logic/immovable.h"
 #include "logic/wareworker.h"
-#include "shippingitem.h"
+#include "economy/shippingitem.h"
 
 namespace Widelands {
 

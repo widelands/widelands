@@ -17,18 +17,16 @@
  *
  */
 
-#include "soldiercapacitycontrol.h"
+#include "wui/soldiercapacitycontrol.h"
 
 #include "graphic/graphic.h"
-#include "interactive_gamebase.h"
 #include "logic/player.h"
 #include "logic/soldiercontrol.h"
 #include "ui_basic/button.h"
+#include "ui_basic/radiobutton.h"
+#include "wui/interactive_gamebase.h"
 
 using Widelands::SoldierControl;
-
-static char const * pic_up_train   = "pics/menu_up_train.png";
-static char const * pic_down_train = "pics/menu_down_train.png";
 
 /**
  * Widget to control the capacity of \ref MilitaryBuilding and \ref TrainingSite
@@ -63,13 +61,13 @@ Box(parent, 0, 0, Horizontal),
 m_igb(igb),
 m_building(building),
 m_decrease
-	(this, "decrease", 0, 0, 24, 24,
+	(this, "decrease", 0, 0, 32, 32,
 	 g_gr->images().get("pics/but4.png"),
-	 g_gr->images().get(pic_down_train), _("Decrease capacity")),
+	 g_gr->images().get("pics/menu_down_train.png"), _("Decrease capacity")),
 m_increase
-	(this, "increase", 0, 0, 24, 24,
+	(this, "increase", 0, 0, 32, 32,
 	 g_gr->images().get("pics/but4.png"),
-	 g_gr->images().get(pic_up_train), _("Increase capacity")),
+	 g_gr->images().get("pics/menu_up_train.png"), _("Increase capacity")),
 m_value(this, "199", UI::Align_Center)
 {
 	m_decrease.sigclicked.connect(boost::bind(&SoldierCapacityControl::click_decrease, boost::ref(*this)));

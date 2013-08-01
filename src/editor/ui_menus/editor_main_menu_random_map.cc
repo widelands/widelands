@@ -17,28 +17,26 @@
  *
  */
 
-#include "editor_main_menu_random_map.h"
+#include "editor/ui_menus/editor_main_menu_random_map.h"
 
+#include <cstring>
+#include <sstream>
+#include <string>
+#include <vector>
+
+#include "editor/editorinteractive.h"
 #include "graphic/graphic.h"
 #include "i18n.h"
-#include "editor/editorinteractive.h"
-#include "logic/map.h"
-#include "profile/profile.h"
-#include "logic/world.h"
 #include "logic/editor_game_base.h"
-
+#include "logic/map.h"
+#include "logic/world.h"
+#include "map_generator.h"
+#include "profile/profile.h"
+#include "random.h"
 #include "ui_basic/button.h"
 #include "ui_basic/progresswindow.h"
 #include "ui_basic/textarea.h"
 #include "ui_basic/window.h"
-
-#include <string>
-#include <cstring>
-#include <vector>
-#include <sstream>
-#include "map_generator.h"
-
-#include "random.h"
 
 using namespace Widelands;
 

@@ -24,7 +24,6 @@
 #include <boost/signal.hpp>
 
 #include "logic/widelands_geometry.h"
-
 #include "ui_basic/panel.h"
 
 class GameRenderer;

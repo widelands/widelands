@@ -17,32 +17,32 @@
  *
  */
 
-#include "minimaprenderer.h"
-#include "upcast.h"
+#include "graphic/render/minimaprenderer.h"
 
-#include "economy/road.h"
+#include <memory>
+
 #include "economy/flag.h"
-
-#include "wui/minimap.h"
-#include "wui/mapviewpixelconstants.h"
-
-#include "logic/field.h"
-#include "logic/map.h"
-#include "logic/player.h"
-
+#include "economy/road.h"
 #include "graphic/graphic.h"
+#include "graphic/image.h"
+#include "graphic/in_memory_image.h"
+#include "graphic/render/terrain_sdl.h"
 #include "graphic/rendertarget.h"
 #include "graphic/surface.h"
 #include "graphic/texture.h"
-#include "graphic/image.h"
-#include "graphic/in_memory_image.h"
+#include "logic/field.h"
+#include "logic/map.h"
+#include "logic/player.h"
+#include "upcast.h"
+#include "wui/mapviewpixelconstants.h"
+#include "wui/minimap.h"
 #include "wui/overlay_manager.h"
-
-#include "terrain_sdl.h"
-#include <memory>
 
 using namespace Widelands;
 
+/**
+ * Renders a minimap and return a poitner to the created surface.
+ */
 std::unique_ptr<Surface> MiniMapRenderer::get_minimap_image
 	(const Editor_Game_Base& egbase, const Player* player, Rect rect, Point viewpoint, uint32_t flags)
 {
@@ -50,7 +50,6 @@ std::unique_ptr<Surface> MiniMapRenderer::get_minimap_image
 		(egbase, player, rect, viewpoint, flags);
 	return minimap_surf;
 }
-
 
 /*
  * Blend to colors; only needed for calc_minimap_color below
@@ -231,7 +230,7 @@ static void draw_minimap_int
 	Point ptopleft; // top left point of the current display frame
 	ptopleft.x = frame_point.x + mapwidth / 2 - xsize;
 	if (ptopleft.x < 0) ptopleft.x += mapwidth;
-	ptopleft.y = frame_point.y + mapwidth / 2 - ysize;
+	ptopleft.y = frame_point.y + mapheight / 2 - ysize;
 	if (ptopleft.y < 0) ptopleft.y += mapheight;
 
 	Point pbottomright; // bottom right point of the current display frame

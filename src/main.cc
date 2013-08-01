@@ -17,25 +17,21 @@
  *
  */
 
-//config.h must be included first of all!
-#include "build_info.h"
-
-#include "wexception.h"
-#include "wlapplication.h"
-
-#include <config.h>
-
 #include <iostream>
 #include <stdexcept>
 #include <typeinfo>
-#include <unistd.h>
 
 #include <SDL_main.h>
-
+#include <config.h>
 #ifndef _WIN32
-#include <syslog.h>
 #include <fcntl.h>
+#include <syslog.h>
 #endif
+#include <unistd.h>
+
+#include "build_info.h"
+#include "wexception.h"
+#include "wlapplication.h"
 
 using std::cout;
 using std::cerr;

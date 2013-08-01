@@ -1,6 +1,0 @@
-//{
-// a{b|c}
-if (condition) {
- * @{
-foo("{}")
-buffer[i] = '{';

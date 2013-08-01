@@ -20,17 +20,14 @@
 #ifndef GAME_MESSAGE_MENU_H
 #define GAME_MESSAGE_MENU_H
 
+#include "container_iterate.h"
+#include "i18n.h"
 #include "logic/message_queue.h"
-
+#include "ref_cast.h"
 #include "ui_basic/button.h"
 #include "ui_basic/multilinetextarea.h"
 #include "ui_basic/table.h"
 #include "ui_basic/unique_window.h"
-
-#include "i18n.h"
-
-#include "container_iterate.h"
-#include "ref_cast.h"
 
 namespace Widelands {
 struct Game;

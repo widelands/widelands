@@ -19,16 +19,15 @@
 
 #include "save_handler.h"
 
+#include "chat.h"
+#include "game_io/game_saver.h"
+#include "io/filesystem/filesystem.h"
+#include "log.h"
 #include "logic/game.h"
+#include "profile/profile.h"
 #include "wexception.h"
 #include "wlapplication.h"
-#include "io/filesystem/filesystem.h"
-#include "game_io/game_saver.h"
-#include "profile/profile.h"
 #include "wui/interactive_player.h"
-#include "chat.h"
-
-#include "log.h"
 
 using Widelands::Game_Saver;
 

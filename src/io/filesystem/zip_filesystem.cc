@@ -17,18 +17,18 @@
  *
  */
 
-#include "zip_filesystem.h"
-
-#include "filesystem_exceptions.h"
-#include "zip_exceptions.h"
-#include "wexception.h"
+#include "io/filesystem/zip_filesystem.h"
 
 #include <cassert>
 #include <cerrno>
-#include <cstring>
 #include <cstdio>
 #include <cstdlib>
+#include <cstring>
 #include <string>
+
+#include "io/filesystem/filesystem_exceptions.h"
+#include "io/filesystem/zip_exceptions.h"
+#include "wexception.h"
 
 /**
  * Initialize the real file-system

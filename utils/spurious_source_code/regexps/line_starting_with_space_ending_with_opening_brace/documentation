@@ -1,1 +1,0 @@
-This catches lines starting with (possibly some tabs and) a space and ending with an opening brace. It implies wrong indentation (the indentation of lines ending with { is especially important since editors indent following lines the same way).

@@ -17,7 +17,7 @@
  *
  */
 
-#include "mapdifferenceregion.h"
+#include "logic/mapdifferenceregion.h"
 
 namespace Widelands {
 

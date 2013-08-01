@@ -20,10 +20,8 @@
 #ifndef FULLSCREEN_MENU_MULTIPLAYER_H
 #define FULLSCREEN_MENU_MULTIPLAYER_H
 
+#include "ui_fsmenu/base.h"
 #include "network/internet_gaming.h"
-
-#include "base.h"
-
 #include "ui_basic/button.h"
 #include "ui_basic/textarea.h"
 

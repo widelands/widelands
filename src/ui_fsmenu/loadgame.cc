@@ -17,7 +17,9 @@
  *
  */
 
-#include "loadgame.h"
+#include "ui_fsmenu/loadgame.h"
+
+#include <cstdio>
 
 #include "game_io/game_loader.h"
 #include "game_io/game_preload_data_packet.h"
@@ -31,11 +33,11 @@
 #include "io/filesystem/layered_filesystem.h"
 #include "log.h"
 #include "logic/game.h"
+#include "timestring.h"
 #include "ui_basic/messagebox.h"
 #include "ui_basic/icon.h"
-#include "timestring.h"
 
-#include <cstdio>
+
 
 Fullscreen_Menu_LoadGame::Fullscreen_Menu_LoadGame
 	(Widelands::Game & g, GameSettingsProvider * gsp, GameController * gc) :
@@ -76,7 +78,7 @@ Fullscreen_Menu_LoadGame::Fullscreen_Menu_LoadGame
 	m_title
 		(this,
 		 get_w() / 2, get_h() * 3 / 20,
-		 _("Choose saved game!"), UI::Align_HCenter),
+		 _("Choose saved game"), UI::Align_HCenter),
 	m_label_mapname
 		(this,
 		 get_w() * 7 / 10,  get_h() * 17 / 50,
@@ -122,6 +124,7 @@ Fullscreen_Menu_LoadGame::Fullscreen_Menu_LoadGame
 	m_list          .set_font(m_fn, m_fs);
 	m_list.selected.connect(boost::bind(&Fullscreen_Menu_LoadGame::map_selected, this, _1));
 	m_list.double_clicked.connect(boost::bind(&Fullscreen_Menu_LoadGame::double_clicked, this, _1));
+	m_list.focus();
 	fill_list();
 }
 

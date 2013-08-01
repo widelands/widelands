@@ -20,11 +20,10 @@
 #ifndef EDITOR_TOOL_PLACE_IMMOVABLE_OPTIONS_MENU_H
 #define EDITOR_TOOL_PLACE_IMMOVABLE_OPTIONS_MENU_H
 
-#include "editor_tool_options_menu.h"
-
-#include "ui_basic/tabpanel.h"
-
 #include <vector>
+
+#include "editor/ui_menus/editor_tool_options_menu.h"
+#include "ui_basic/tabpanel.h"
 
 struct Editor_Interactive;
 struct Editor_Place_Immovable_Tool;

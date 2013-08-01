@@ -18,9 +18,9 @@
  */
 
 
-#include "buildingwindow.h"
+#include "wui/buildingwindow.h"
 
-#include "waresqueuedisplay.h"
+#include "wui/waresqueuedisplay.h"
 
 #include "graphic/graphic.h"
 #include "logic/constructionsite.h"

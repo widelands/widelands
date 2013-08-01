@@ -17,11 +17,13 @@
  *
  */
 
+#include "map_io/widelands_map_players_view_data_packet.h"
+
 #include <iostream>
 #include <typeinfo>
 
-#include "widelands_map_players_view_data_packet.h"
-
+#include "economy/road.h"
+#include "log.h"
 #include "logic/editor_game_base.h"
 #include "logic/field.h"
 #include "logic/game_data_error.h"
@@ -30,11 +32,6 @@
 #include "logic/tribe.h"
 #include "logic/widelands_streamread_inlines.h"
 #include "logic/widelands_streamwrite_inlines.h"
-
-#include "economy/road.h"
-
-#include "log.h"
-
 #include "upcast.h"
 
 

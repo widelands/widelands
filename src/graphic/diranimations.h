@@ -20,11 +20,11 @@
 #ifndef DIRANIMATIONS_H
 #define DIRANIMATIONS_H
 
-#include "logic/widelands.h"
-
 #include <string>
 
 #include <stdint.h>
+
+#include "logic/widelands.h"
 
 namespace Widelands {struct Map_Object_Descr;}
 

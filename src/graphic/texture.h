@@ -20,11 +20,12 @@
 #ifndef TEXTURE_H
 #define TEXTURE_H
 
-#include <stdint.h>
 #include <string>
 #include <vector>
 
-#include "colormap.h"
+#include <stdint.h>
+
+#include "graphic/colormap.h"
 #include "graphic/render/gl_surface_texture.h"
 
 /** struct Texture

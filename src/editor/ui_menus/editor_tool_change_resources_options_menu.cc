@@ -17,20 +17,20 @@
  *
  */
 
-#include "editor_tool_change_resources_options_menu.h"
+#include "editor/ui_menus/editor_tool_change_resources_options_menu.h"
+
+#include <cstdio>
 
 #include "editor/editorinteractive.h"
-#include "i18n.h"
-#include "ui_basic/button.h"
 #include "editor/tools/editor_increase_resources_tool.h"
 #include "editor/tools/editor_set_resources_tool.h"
+#include "graphic/graphic.h"
+#include "i18n.h"
 #include "logic/map.h"
 #include "logic/widelands.h"
 #include "logic/world.h"
-#include "graphic/graphic.h"
+#include "ui_basic/button.h"
 #include "wui/overlay_manager.h"
-
-#include <cstdio>
 
 const static int BUTTON_WIDTH = 20;
 const static int BUTTON_HEIGHT = 20;
@@ -42,7 +42,7 @@ Editor_Tool_Change_Resources_Options_Menu
 		 UI::UniqueWindow::Registry     & registry)
 	:
 	Editor_Tool_Options_Menu
-		(parent, registry, 164, 120, _("Resources Tools Options")),
+		(parent, registry, 164, 120, _("Resources")),
 	m_change_by_label
 		(this,
 		 hmargin(), vmargin(), get_inner_w() - 2 * hmargin(), BUTTON_HEIGHT,

@@ -21,8 +21,8 @@
 #define LOGIC_MAPASTAR_H
 
 #include "log.h"
-#include "map.h"
-#include "pathfield.h"
+#include "logic/map.h"
+#include "logic/pathfield.h"
 
 namespace Widelands {
 

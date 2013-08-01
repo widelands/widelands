@@ -20,8 +20,8 @@
 #ifndef EDITOR_TOOL_ACTION_H
 #define EDITOR_TOOL_ACTION_H
 
+#include "editor/tools/editor_action_args.h"
 #include "logic/widelands_geometry.h"
-#include "editor_action_args.h"
 
 class Editor_Tool;
 namespace Widelands {class map;}

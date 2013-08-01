@@ -18,15 +18,15 @@
  */
 
 #include "i18n.h"
-#include "log.h"
-#include "profile/profile.h"
-
-#include <config.h>
-
-#include <libintl.h>
 
 #include <cstdlib>
 #include <utility>
+
+#include <config.h>
+#include <libintl.h>
+
+#include "log.h"
+#include "profile/profile.h"
 
 #ifdef __APPLE__
 # if LIBINTL_VERSION >= 0x001201

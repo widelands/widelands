@@ -18,7 +18,7 @@
  */
 
 
-#include "editor_set_terrain_tool.h"
+#include "editor/tools/editor_set_terrain_tool.h"
 
 #include "editor/editorinteractive.h"
 #include "logic/maptriangleregion.h"

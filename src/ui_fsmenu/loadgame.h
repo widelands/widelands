@@ -20,10 +20,8 @@
 #ifndef FULLSCREEN_MENU_LOADGAME_H
 #define FULLSCREEN_MENU_LOADGAME_H
 
-#include "base.h"
-
+#include "ui_fsmenu/base.h"
 #include "io/filesystem/filesystem.h"
-
 #include "ui_basic/button.h"
 #include "ui_basic/checkbox.h"
 #include "ui_basic/icon.h"

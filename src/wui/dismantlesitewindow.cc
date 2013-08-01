@@ -18,11 +18,11 @@
  */
 
 
-#include "buildingwindow.h"
 #include "graphic/graphic.h"
 #include "logic/dismantlesite.h"
 #include "ui_basic/progressbar.h"
 #include "ui_basic/tabpanel.h"
+#include "wui/buildingwindow.h"
 
 static const char pic_tab_wares[] = "pics/menu_tab_wares.png";
 

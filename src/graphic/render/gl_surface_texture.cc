@@ -16,15 +16,14 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+#include "graphic/render/gl_surface_texture.h"
+
 #include <cassert>
 
-#include "wexception.h"
-#include "graphic/graphic.h"
-
 #include "gl_surface.h"  // for glew.h
-#include "gl_utils.h"
-
-#include "gl_surface_texture.h"
+#include "graphic/graphic.h"
+#include "graphic/render/gl_utils.h"
+#include "wexception.h"
 
 GLuint GLSurfaceTexture::gl_framebuffer_id_;
 bool use_arb_;
@@ -228,7 +227,7 @@ void GLSurfaceTexture::unlock(UnlockMode mode) {
 			 GL_UNSIGNED_BYTE,  m_pixels.get());
 	}
 
-	m_pixels.reset(0);
+	m_pixels.reset(nullptr);
 }
 
 uint16_t GLSurfaceTexture::get_pitch() const {

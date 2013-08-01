@@ -17,7 +17,7 @@
  *
  */
 
-#include "network_player_settings_backend.h"
+#include "network/network_player_settings_backend.h"
 
 #include "gamesettings.h"
 #include "i18n.h"

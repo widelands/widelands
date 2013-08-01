@@ -20,10 +20,9 @@
 #ifndef DISMANTLESITE_H
 #define DISMANTLESITE_H
 
-#include "building.h"
-#include "player.h"
-
-#include "partially_finished_building.h"
+#include "logic/building.h"
+#include "logic/partially_finished_building.h"
+#include "logic/player.h"
 
 namespace Widelands {
 

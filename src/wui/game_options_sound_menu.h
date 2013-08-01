@@ -19,12 +19,11 @@
 #ifndef GAME_OPTIONS_SOUND_MENU_H
 #define GAME_OPTIONS_SOUND_MENU_H
 
-#include "interactive_gamebase.h"
-
-#include "ui_basic/unique_window.h"
-#include "ui_basic/textarea.h"
+#include "wui/interactive_gamebase.h"
 #include "ui_basic/checkbox.h"
 #include "ui_basic/slider.h"
+#include "ui_basic/textarea.h"
+#include "ui_basic/unique_window.h"
 
 /**
  * A window with all sound options.

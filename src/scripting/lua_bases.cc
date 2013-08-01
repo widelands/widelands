@@ -17,14 +17,14 @@
  *
  */
 
+#include "scripting/lua_bases.h"
+
 #include <lua.hpp>
 
 #include "logic/checkstep.h"
 #include "logic/player.h"
+#include "scripting/lua_map.h"
 
-#include "lua_map.h"
-
-#include "lua_bases.h"
 
 using namespace Widelands;
 
@@ -389,18 +389,30 @@ int L_PlayerBase::place_building(lua_State * L) {
 	if (lua_gettop(L) >= 5)
 		force = luaL_checkboolean(L, 5);
 
-	Building_Index i = get(L, get_egbase(L)).tribe().building_index(name);
+	const Tribe_Descr& td = get(L, get_egbase(L)).tribe();
+	Building_Index i = td.building_index(name);
 	if (i == Building_Index::Null())
 		return report_error(L, "Unknown Building: '%s'", name);
 
-	Building * b = 0;
-	if (force)
-		b = &get(L, get_egbase(L)).force_building
-			(c->coords(), i, constructionsite);
-	else
-		b = get(L, get_egbase(L)).build
-			(c->coords(), i, constructionsite);
+	Building_Descr::FormerBuildings former_buildings;
+	find_former_buildings(td, i, &former_buildings);
+	if (constructionsite) {
+		former_buildings.pop_back();
+	}
 
+	Building * b = 0;
+	if (force) {
+		if (constructionsite) {
+			b = &get(L, get_egbase(L)).force_csite
+				(c->coords(), i, former_buildings);
+		} else {
+			b = &get(L, get_egbase(L)).force_building
+				(c->coords(), former_buildings);
+		}
+	} else {
+		b = get(L, get_egbase(L)).build
+			(c->coords(), i, constructionsite, former_buildings);
+	}
 	if (not b)
 		return report_error(L, "Couldn't place building!");
 

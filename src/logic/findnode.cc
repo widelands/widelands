@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2010 by the Widelands Development Team
+ * Copyright (C) 2008-2010, 2013 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -17,14 +17,14 @@
  *
  */
 
-#include "findnode.h"
-
-#include "field.h"
-#include "immovable.h"
-#include "map.h"
-#include "wexception.h"
+#include "logic/findnode.h"
 
 #include "container_iterate.h"
+#include "logic/field.h"
+#include "logic/immovable.h"
+#include "logic/map.h"
+#include "wexception.h"
+
 
 namespace Widelands {
 
@@ -119,13 +119,27 @@ bool FindNodeResource::accept(const Map &, const FCoords & coord) const {
 
 
 bool FindNodeResourceBreedable::accept
-	(const Map &, const FCoords & coord) const
+	(const Map & map, const FCoords & coord) const
 {
-	return
-		m_resource == coord.field->get_resources() &&
-		coord.field->get_resources_amount   ()
-		<
-		coord.field->get_starting_res_amount();
+	// Accept a tile that is full only if a neighbor also matches resource and
+	// is not full.
+	if (m_resource != coord.field->get_resources()) {
+		return false;
+	}
+	if (coord.field->get_resources_amount() < coord.field->get_starting_res_amount()) {
+		return true;
+	}
+	for (Direction dir = FIRST_DIRECTION; dir <= LAST_DIRECTION; ++dir) {
+		const FCoords neighb = map.get_neighbour(coord, dir);
+		if
+			(m_resource == neighb.field->get_resources()
+			 &&
+			 neighb.field->get_resources_amount() < neighb.field->get_starting_res_amount())
+		{
+			return true;
+		}
+	}
+	return false;
 }
 
 bool FindNodeShore::accept(const Map & map, const FCoords & coord) const

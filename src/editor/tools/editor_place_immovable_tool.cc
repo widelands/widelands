@@ -17,17 +17,16 @@
  *
  */
 
-#include "editor_place_immovable_tool.h"
+#include "editor/tools/editor_place_immovable_tool.h"
 
-#include "logic/editor_game_base.h"
+#include <string>
+
 #include "editor/editorinteractive.h"
+#include "logic/editor_game_base.h"
 #include "logic/field.h"
 #include "logic/immovable.h"
 #include "logic/mapregion.h"
-
 #include "upcast.h"
-
-#include <string>
 
 /**
  * Choses an object to place randomly from all enabled

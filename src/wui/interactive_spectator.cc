@@ -17,25 +17,23 @@
  *
  */
 
-#include "interactive_spectator.h"
+#include "wui/interactive_spectator.h"
 
 #include "chat.h"
-#include "chatoverlay.h"
-#include "fieldaction.h"
-#include "game_chat_menu.h"
-#include "game_main_menu_save_game.h"
-#include "game_options_menu.h"
 #include "gamecontroller.h"
-#include "general_statistics_menu.h"
 #include "graphic/graphic.h"
 #include "i18n.h"
-
 #include "ui_basic/editbox.h"
 #include "ui_basic/multilinetextarea.h"
 #include "ui_basic/textarea.h"
 #include "ui_basic/unique_window.h"
-
 #include "upcast.h"
+#include "wui/chatoverlay.h"
+#include "wui/fieldaction.h"
+#include "wui/game_chat_menu.h"
+#include "wui/game_main_menu_save_game.h"
+#include "wui/game_options_menu.h"
+#include "wui/general_statistics_menu.h"
 
 /**
  * Setup the replay UI for the given game.

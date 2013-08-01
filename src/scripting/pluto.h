@@ -16,7 +16,11 @@
  * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-/* lua.h must be included before this file */
+#include <lua.hpp>
+
+#include "logic/widelands_fileread.h"
+#include "logic/widelands_filewrite.h"
+
 #ifndef PLUTO_H
 #define PLUTO_H
 

@@ -18,11 +18,12 @@
  */
 
 #include "map_generator.h"
+
+#include "editor/tools/editor_increase_resources_tool.h"
 #include "log.h"
+#include "logic/editor_game_base.h"
 #include "logic/findnode.h"
 #include "logic/map.h"
-#include "logic/editor_game_base.h"
-#include "editor/tools/editor_increase_resources_tool.h"
 
 #define AVG_ELEVATION   (0x80000000)
 #define MAX_ELEVATION   (0xffffffff)

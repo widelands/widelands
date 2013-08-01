@@ -20,13 +20,14 @@
 #ifndef STREAMREAD_H
 #define STREAMREAD_H
 
-#include "machdep.h"
-#include "wexception.h"
+#include <cstring>
+#include <string>
 
 #include <boost/noncopyable.hpp>
 
-#include <string>
-#include <cstring>
+#include "machdep.h"
+#include "wexception.h"
+
 
 /**
  * Abstract base class for stream-like data sources.

@@ -20,11 +20,14 @@
 #ifndef NETWORK_LAN_PROMOTION_H
 #define NETWORK_LAN_PROMOTION_H
 
-#include "network_system.h"
-
 #include <list>
 
+#ifndef _WIN32
+#include <sys/socket.h>
+#endif
 #include <sys/types.h>
+
+#include "network/network_system.h"
 
 #define LAN_PROMOTION_PROTOCOL_VERSION 1
 

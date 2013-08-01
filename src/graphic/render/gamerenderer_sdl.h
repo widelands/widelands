@@ -20,7 +20,7 @@
 #ifndef WIDELANDS_GAMERENDERER_SDL_H
 #define WIDELANDS_GAMERENDERER_SDL_H
 
-#include "gamerenderer.h"
+#include "graphic/render/gamerenderer.h"
 
 struct Texture;
 struct Vertex;

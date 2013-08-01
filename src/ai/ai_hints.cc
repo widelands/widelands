@@ -17,11 +17,11 @@
  *
  */
 
-#include "ai_hints.h"
-
-#include "profile/profile.h"
+#include "ai/ai_hints.h"
 
 #include <cstring>
+
+#include "profile/profile.h"
 
 
 BuildingHints::~BuildingHints ()

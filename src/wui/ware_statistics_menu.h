@@ -23,10 +23,9 @@
 #include <vector>
 
 #include "logic/widelands.h"
+#include "wui/plot_area.h"
 #include "ui_basic/slider.h"
 #include "ui_basic/unique_window.h"
-
-#include "plot_area.h"
 
 struct DifferentialPlot_Area;
 struct Interactive_Player;

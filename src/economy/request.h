@@ -21,11 +21,11 @@
 #define REQUEST_H
 
 #include "logic/requirements.h"
-#include "trackptr.h"
 #include "logic/wareworker.h"
 #include "logic/widelands.h"
 #include "logic/widelands_fileread.h"
 #include "logic/widelands_filewrite.h"
+#include "trackptr.h"
 
 namespace Widelands {
 

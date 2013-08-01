@@ -20,7 +20,7 @@
 #ifndef EDITOR_INFO_TOOL_H
 #define EDITOR_INFO_TOOL_H
 
-#include "editor_tool.h"
+#include "editor/tools/editor_tool.h"
 
 /// A simple tool to show information about the clicked node.
 struct Editor_Info_Tool : public Editor_Tool {

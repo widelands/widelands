@@ -20,15 +20,16 @@
 #ifndef WIDELANDS_MAP_MAP_OBJECT_LOADER_H
 #define WIDELANDS_MAP_MAP_OBJECT_LOADER_H
 
+#include <map>
+#include <typeinfo>
+
+#include <stdint.h>
+
 #include "logic/game_data_error.h"
 #include "logic/instances.h"
 #include "logic/widelands.h"
-
 #include "upcast.h"
 
-#include <stdint.h>
-#include <map>
-#include <typeinfo>
 
 namespace Widelands {
 struct Bob;

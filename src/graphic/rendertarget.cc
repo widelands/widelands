@@ -17,6 +17,13 @@
  *
  */
 
+#include "graphic/rendertarget.h"
+
+#include "graphic/animation.h"
+#include "graphic/animation_gfx.h"
+#include "graphic/graphic.h"
+#include "graphic/image_transformations.h"
+#include "graphic/surface.h"
 #include "log.h"
 #include "logic/player.h"
 #include "logic/tribe.h"
@@ -24,14 +31,6 @@
 #include "vertex.h"
 #include "wui/mapviewpixelconstants.h"
 #include "wui/overlay_manager.h"
-
-#include "animation.h"
-#include "animation_gfx.h"
-#include "graphic.h"
-#include "image_transformations.h"
-#include "surface.h"
-
-#include "rendertarget.h"
 
 using Widelands::BaseImmovable;
 using Widelands::Coords;

@@ -19,9 +19,10 @@
 #ifndef ROUTER_H
 #define ROUTER_H
 
-#include <stdint.h>
 #include <vector>
+
 #include <boost/function.hpp>
+#include <stdint.h>
 
 #include "logic/wareworker.h"
 

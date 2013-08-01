@@ -22,8 +22,8 @@
 #include <boost/foreach.hpp>
 #include <boost/format.hpp>
 
-#include "rt_errors.h"
-#include "sdl_ttf_font_impl.h"
+#include "graphic/text/rt_errors.h"
+#include "graphic/text/sdl_ttf_font_impl.h"
 
 #include "io/fileread.h"
 #include "io/filesystem/filesystem.h"

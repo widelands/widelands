@@ -21,8 +21,8 @@
 #define ECONOMY_ROUTEASTAR_H
 
 #include "container_iterate.h"
-#include "itransport_cost_calculator.h"
-#include "routing_node.h"
+#include "economy/itransport_cost_calculator.h"
+#include "economy/routing_node.h"
 
 namespace Widelands {
 

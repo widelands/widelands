@@ -17,11 +17,11 @@
  *
  */
 
+#include "ui_fsmenu/main.h"
+
 #include "build_info.h"
 #include "graphic/graphic.h"
 #include "i18n.h"
-
-#include "main.h"
 
 Fullscreen_Menu_Main::Fullscreen_Menu_Main() :
 	Fullscreen_Menu_Base("mainmenu.jpg"),
@@ -87,8 +87,13 @@ Fullscreen_Menu_Main::Fullscreen_Menu_Main() :
 		 UI::Align_BottomRight),
 	copyright
 		(this,
-		 0, get_h(),
+		 0, get_h() - 0.5 * m_buth,
 		 (wlcr + _("by the Widelands Development Team")).c_str(),
+		 UI::Align_BottomLeft),
+	gpl
+		(this,
+		 0, get_h(),
+		 _("Licensed under the GNU General Public License V2.0"),
 		 UI::Align_BottomLeft)
 {
 	playtutorial.sigclicked.connect
@@ -140,4 +145,5 @@ Fullscreen_Menu_Main::Fullscreen_Menu_Main() :
 
 	version.set_textstyle(ts_small());
 	copyright.set_textstyle(ts_small());
+	gpl.set_textstyle(ts_small());
 }

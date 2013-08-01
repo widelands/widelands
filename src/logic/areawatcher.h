@@ -20,8 +20,8 @@
 #ifndef AREAWATCHER_H
 #define AREAWATCHER_H
 
-#include "instances.h"
-#include "player_area.h"
+#include "logic/instances.h"
+#include "logic/player_area.h"
 
 namespace Widelands {
 
