@@ -34,7 +34,6 @@
 #include "profile/profile.h"
 #include "timestring.h"
 #include "wui/interactive_gamebase.h"
-#include "wui/interactive_player.h"
 
 using boost::format;
 
@@ -368,9 +367,7 @@ void Game_Main_Menu_Save_Game::delete_clicked()
 
 void Game_Main_Menu_Save_Game::pause_game(bool paused)
 {
-	Interactive_Player* ipl = igbase().get_game()->get_ipl();
-	if (ipl && ipl->is_multiplayer()) {
-		// Do not pause in multiplayer
+	if (igbase().is_multiplayer()) {
 		return;
 	}
 	igbase().game().gameController()->setPaused(paused);

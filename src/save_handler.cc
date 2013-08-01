@@ -29,9 +29,6 @@
 #include "wexception.h"
 #include "wlapplication.h"
 #include "wui/interactive_base.h"
-#include "wui/interactive_gamebase.h"
-#include "wui/interactive_player.h"
-#include "wui/interactive_spectator.h"
 
 using Widelands::Game_Saver;
 
@@ -43,11 +40,6 @@ void SaveHandler::think(Widelands::Game & game, int32_t realtime) {
 	std::string filename = "wl_autosave";
 
 	if (!m_allow_saving) {
-		return;
-	}
-	upcast(Interactive_GameBase, igbase, game.get_ibase());
-	if (!igbase || igbase->is_multiplayer()) {
-		// Don't autosave in multiplayer
 		return;
 	}
 	if (game.is_replay()) {
