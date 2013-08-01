@@ -27,6 +27,7 @@
 #include "economy/road.h"
 #include "i18n.h"
 #include "log.h"
+#include "logic/building.h"
 #include "logic/checkstep.h"
 #include "logic/cmd_expire_message.h"
 #include "logic/cmd_luacoroutine.h"
@@ -50,6 +51,43 @@
 #include "wexception.h"
 #include "wui/interactive_player.h"
 
+
+namespace {
+void terraform_for_building
+	(Widelands::Editor_Game_Base& egbase, const Widelands::Player_Number player_number,
+	 const Widelands::Coords location, const Widelands::Building_Descr* descr)
+{
+	Widelands::Map & map = egbase.map();
+	Widelands::FCoords c[4]; //  Big buildings occupy 4 locations.
+	c[0] = map.get_fcoords(location);
+	map.get_brn(c[0], &c[1]);
+	if (Widelands::BaseImmovable * const immovable = c[0].field->get_immovable())
+		immovable->remove(egbase);
+	{
+		size_t nr_locations = 1;
+		if ((descr->get_size() & Widelands::BUILDCAPS_SIZEMASK) == Widelands::BUILDCAPS_BIG)
+		{
+			nr_locations = 4;
+			map.get_trn(c[0], &c[1]);
+			map.get_tln(c[0], &c[2]);
+			map.get_ln (c[0], &c[3]);
+		}
+		for (size_t i = 0; i < nr_locations; ++i) {
+			//  Make sure that the player owns the area around.
+			egbase.conquer_area_no_building
+				(Widelands::Player_Area<Widelands::Area<Widelands::FCoords> >
+				 	(player_number, Widelands::Area<Widelands::FCoords>(c[i], 1)));
+
+			if (Widelands::BaseImmovable * const immovable = c[i].field->get_immovable())
+				immovable->remove(egbase);
+		}
+	}
+}
+
+
+
+}
+
 namespace Widelands {
 
 extern const Map_Object_Descr g_road_descr;
@@ -65,6 +103,39 @@ const RGBColor Player::Colors[MAX_PLAYERS] = {
 	RGBColor(255, 255, 255),  // white
 };
 
+/**
+ * Find the longest possible enhancement chain leading to the given
+ * building descr. The FormerBuildings given in reference must be empty and will be
+ * filled with the Building_Descr.
+ */
+void find_former_buildings
+	(const Widelands::Tribe_Descr & tribe_descr, const Widelands::Building_Index bi,
+	 Widelands::Building_Descr::FormerBuildings* former_buildings)
+{
+	assert(former_buildings && former_buildings->empty());
+	const Widelands::Building_Descr * first_descr = tribe_descr.get_building_descr(bi);
+	former_buildings->push_back(first_descr);
+	bool done = false;
+	while (not done) {
+		const Widelands::Building_Descr * oldest = former_buildings->front();
+		if (!oldest->is_enhanced()) {
+			done = true;
+			break;
+		}
+		const Widelands::Building_Index & oldest_idx = tribe_descr.building_index(oldest->name());
+		for
+			(Widelands::Building_Index i = Widelands::Building_Index::First();
+			 i < tribe_descr.get_nrbuildings();
+			 ++i)
+		{
+			const Widelands::Building_Descr* ob = tribe_descr.get_building_descr(i);
+			if (ob->enhancements().count(oldest_idx)) {
+				former_buildings->insert(former_buildings->begin(), ob);
+				break;
+			}
+		}
+	}
+}
 
 Player::Player
 	(Editor_Game_Base  & the_egbase,
@@ -430,45 +501,38 @@ Road & Player::force_road(const Path & path) {
 	return Road::create(egbase(), start, end, path);
 }
 
-
 Building & Player::force_building
 	(Coords                const location,
-	 Building_Index        const idx,
-	 bool                  constructionsite)
+	 const Building_Descr::FormerBuildings & former_buildings)
 {
 	Map & map = egbase().map();
-	FCoords c[4]; //  Big buildings occupy 4 locations.
-	c[0] = map.get_fcoords(location);
-	map.get_brn(c[0], &c[1]);
-	force_flag(c[1]);
-	if (BaseImmovable * const immovable = c[0].field->get_immovable())
-		immovable->remove(egbase());
-	const Building_Descr & descr = *tribe().get_building_descr(idx);
-	{
-		size_t nr_locations = 1;
-		if ((descr.get_size() & BUILDCAPS_SIZEMASK) == BUILDCAPS_BIG) {
-			nr_locations = 4;
-			map.get_trn(c[0], &c[1]);
-			map.get_tln(c[0], &c[2]);
-			map.get_ln (c[0], &c[3]);
-		}
-		for (size_t i = 0; i < nr_locations; ++i) {
+	const Building_Descr* descr = former_buildings.back();
+	terraform_for_building(egbase(), player_number(), location, descr);
+	FCoords flag_loc;
+	map.get_brn(map.get_fcoords(location), &flag_loc);
+	force_flag(flag_loc);
 
-			//  Make sure that the player owns the area around.
-			egbase().conquer_area_no_building
-				(Player_Area<Area<FCoords> >
-				 	(player_number(), Area<FCoords>(c[i], 1)));
-
-			if (BaseImmovable * const immovable = c[i].field->get_immovable())
-				immovable->remove(egbase());
-		}
-	}
-
-	if (constructionsite)
-		return egbase().warp_constructionsite(c[0], m_plnum, idx);
-	else
-		return descr.create (egbase(), *this, c[0], false);
+	return
+		descr->create
+			(egbase(), *this, map.get_fcoords(location), false, false, former_buildings);
 }
+
+Building& Player::force_csite
+	(Coords const location, Building_Index b_idx,
+	 const Building_Descr::FormerBuildings & former_buildings)
+{
+	Map & map = egbase().map();
+	const Building_Descr * descr = tribe().get_building_descr(b_idx);
+	terraform_for_building(egbase(), player_number(), location, descr);
+	FCoords flag_loc;
+	map.get_brn(map.get_fcoords(location), &flag_loc);
+	force_flag(flag_loc);
+
+	return
+		egbase().warp_constructionsite
+			(map.get_fcoords(location), m_plnum, b_idx, false, former_buildings);
+}
+
 
 
 /*
@@ -477,7 +541,8 @@ Place a construction site or building, checking that it's legal to do so.
 ===============
 */
 Building * Player::build
-	(Coords c, Building_Index const idx, bool constructionsite)
+	(Coords c, Building_Index const idx, bool constructionsite,
+	 Building_Descr::FormerBuildings & former_buidlings)
 {
 	int32_t buildcaps;
 
@@ -506,11 +571,12 @@ Building * Player::build
 	}
 
 	if (constructionsite)
-		return &egbase().warp_constructionsite(c, m_plnum, idx);
+		return &egbase().warp_constructionsite(c, m_plnum, idx, false, former_buidlings);
 	else {
-		return &descr.create(egbase(), *this, c, false);
+		return &descr.create(egbase(), *this, c, false, false, former_buidlings);
 	}
 }
+
 
 
 /*

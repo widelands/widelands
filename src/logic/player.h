@@ -457,10 +457,13 @@ struct Player :
 	Road & force_road(const Path &);
 	Road * build_road(const Path &); /// Build a road if it is allowed.
 	Building & force_building
-		(Coords,
+		(const Coords,
+		 const Building_Descr::FormerBuildings &);
+	Building & force_csite
+		(const Coords,
 		 Building_Index,
-		 bool = false);
-	Building * build(Coords, Building_Index, bool = true);
+		 const Building_Descr::FormerBuildings & = Building_Descr::FormerBuildings());
+	Building * build(Coords, Building_Index, bool, Building_Descr::FormerBuildings &);
 	void bulldoze(PlayerImmovable &, bool recurse = false);
 	void flagaction(Flag &);
 	void start_stop_building(PlayerImmovable &);
@@ -643,6 +646,10 @@ private:
 
 	BuildingStats m_building_stats;
 };
+
+void find_former_buildings
+	(const Tribe_Descr & tribe_descr, const Building_Index bi,
+	 Building_Descr::FormerBuildings* former_buildings);
 
 }
 
