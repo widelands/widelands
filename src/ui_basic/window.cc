@@ -434,9 +434,6 @@ void Window::think() {if (not is_minimal()) Panel::think();}
  */
 bool Window::handle_mousepress(const Uint8 btn, int32_t mx, int32_t my)
 {
-	if (get_can_focus())
-		focus();
-
 	//  FIXME This code is erroneous. It checks the current key state. What it
 	//  FIXME needs is the key state at the time the mouse was clicked. See the
 	//  FIXME usage comment for get_key_state.
@@ -456,12 +453,7 @@ bool Window::handle_mousepress(const Uint8 btn, int32_t mx, int32_t my)
 		grab_mouse(true);
 	} else if (btn == SDL_BUTTON_RIGHT) {
 		play_click();
-		if (is_modal())
-			end_modal(0);
-		else
-			delete this; //  is this 100% safe?
-		//  FIXME No, at least provide a flag for making a window unclosable and
-		//  FIXME provide a callback.
+		die();
 	}
 
 	return true;
@@ -491,6 +483,20 @@ bool Window::handle_tooltip()
 {
 	UI::Panel::handle_tooltip();
 	return true;
+}
+
+/**
+ * Close the window. Overwrite this virtual method if you want
+ * to take some action before the window is destroyed, or to
+ * prevent it
+ */
+void Window::die()
+{
+	if (is_modal()) {
+		end_modal(0);
+	} else {
+		Panel::die();
+	}
 }
 
 

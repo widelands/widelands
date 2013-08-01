@@ -62,6 +62,7 @@ Table<void *>::Table
 	m_sort_descending (descending)
 {
 	set_think(false);
+	set_can_focus(true);
 }
 
 
@@ -418,11 +419,19 @@ void Table<void *>::move_selection(const int32_t offset)
 	//scroll to newly selected entry
 	if (m_scrollbar)
 	{
-		int32_t scroll_offset = 0;
-		if (new_selection > 0) scroll_offset = -1;
+		// Keep an unselected item above or below
+		int32_t scroll_item = new_selection + offset;
+		if (scroll_item < 0) scroll_item = 0;
+		if (scroll_item > m_entry_records.size()) {
+			scroll_item = m_entry_records.size();
+		}
 
-		m_scrollbar->set_scrollpos
-			((new_selection + scroll_offset) * get_lineheight());
+		// Ensure scroll_item is visible
+		if (scroll_item * get_lineheight() < m_scrollpos) {
+			m_scrollbar->set_scrollpos(scroll_item * get_lineheight());
+		} else if ((scroll_item + 1) * get_lineheight() - get_inner_h() > m_scrollpos) {
+			m_scrollbar->set_scrollpos((scroll_item + 1) * get_lineheight() - get_inner_h());
+		}
 	}
 }
 

@@ -49,7 +49,7 @@ Fullscreen_Menu_Editor_MapSelect::Fullscreen_Menu_Editor_MapSelect() :
 	m_title
 		(this,
 		 get_w() / 2, get_h() * 9 / 50,
-		 _("Choose your map!"), UI::Align_HCenter),
+		 _("Choose a map"), UI::Align_HCenter),
 	m_label_name
 		(this,
 		 get_w() * 7 / 10, get_h() * 17 / 50,

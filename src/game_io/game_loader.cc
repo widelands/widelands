@@ -19,6 +19,9 @@
 
 #include "game_io/game_loader.h"
 
+#include <boost/bind.hpp>
+#include <boost/signal.hpp>
+
 #include "game_io/game_cmd_queue_data_packet.h"
 #include "game_io/game_game_class_data_packet.h"
 #include "game_io/game_interactive_player_data_packet.h"
@@ -90,17 +93,27 @@ int32_t Game_Loader::load_game(bool const multiplayer) {
 	log(" done\n");
 
 	//  This must be after the command queue has been read.
-	log("Game: Enqueuing comands to expire player's messages ... ");
+	log("Game: Parsing messages ... ");
 	Player_Number const nr_players = m_game.map().get_nrplayers();
 	iterate_players_existing_const(p, nr_players, m_game, player) {
 		const MessageQueue & messages = player->messages();
 		container_iterate_const(MessageQueue, messages, i) {
-			Duration const duration = i.current->second->duration();
-			if (duration != Forever())
+			Message* m = i.current->second;
+			Message_Id m_id = i.current->first;
+
+			// Renew expire commands
+			Duration const duration = m->duration();
+			if (duration != Forever()) {
 				m_game.cmdqueue().enqueue
 					(new Cmd_ExpireMessage
-					 	(i.current->second->sent() +
-					 	 duration, p, i.current->first));
+					 	(m->sent() + duration, p, m_id));
+			}
+			// Renew Map_Object connections
+			if (m->serial() > 0) {
+				Map_Object* mo = m_game.objects().get_object(m->serial());
+				mo->removed.connect
+					(boost::bind(&Player::message_object_removed, player, m_id));
+			}
 		}
 	}
 	log(" done\n");

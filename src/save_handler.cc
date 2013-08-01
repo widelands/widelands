@@ -28,6 +28,8 @@
 #include "upcast.h"
 #include "wexception.h"
 #include "wlapplication.h"
+#include "wui/interactive_base.h"
+#include "wui/interactive_gamebase.h"
 #include "wui/interactive_player.h"
 #include "wui/interactive_spectator.h"
 
@@ -51,7 +53,6 @@ void SaveHandler::think(Widelands::Game & game, int32_t realtime) {
 	if (game.is_replay()) {
 		return;
 	}
-
 
 	if (m_save_requested) {
 		if (!m_save_filename.empty()) {

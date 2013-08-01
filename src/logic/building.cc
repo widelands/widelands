@@ -949,7 +949,7 @@ void Building::send_message
 
 	Message * msg = new Message
 		(msgsender, game.get_gametime(), 60 * 60 * 1000,
-		 title, rt_description, get_position());
+		 title, rt_description, get_position(), m_serial);
 
 	if (throttle_time)
 		owner().add_message_with_timeout

@@ -90,6 +90,7 @@ public:
 	bool handle_tooltip();
 
 protected:
+	virtual void die();
 	virtual void layout();
 	virtual void update_desired_size();
 

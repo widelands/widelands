@@ -31,6 +31,7 @@
 #include "logic/checkstep.h"
 #include "logic/cmd_incorporate.h"
 #include "logic/critter_bob.h"
+#include "logic/dismantlesite.h"
 #include "logic/findbob.h"
 #include "logic/findimmovable.h"
 #include "logic/findnode.h"
@@ -962,7 +963,9 @@ bool Worker::run_geologist_find(Game & game, State & state, const Action &)
 				 	 game.get_gametime(), 60 * 60 * 1000,
 				 	 rdescr->descname(),
 				 	 message,
-				 	 position),
+				 	 position,
+					 m_serial
+					),
 				 300000, 8);
 		}
 
@@ -1824,19 +1827,28 @@ void Worker::return_update(Game & game, State & state)
 		if (upcast(Flag, flag, pos)) {
 			// Is this "our" flag?
 			if (flag->get_building() == location) {
-				if (state.ivar1 && flag->has_capacity())
+				if (state.ivar1 && flag->has_capacity()) {
 					if (WareInstance * const item = fetch_carried_item(game)) {
 						flag->add_item(game, *item);
 						set_animation(game, descr().get_animation("idle"));
 						return schedule_act(game, 20); //  rest a while
 					}
+				}
 
-				return
-					start_task_move
-						(game,
-						 WALK_NW,
-						 descr().get_right_walk_anims(does_carry_ware()),
-						 true);
+				// Don't try to enter building if it is a dismantle site
+				// It is no problem for builders since they won't return before
+				// dismantling is complete.
+				if (is_a(DismantleSite, location)) {
+					set_location(0);
+					return pop_task(game);
+				} else {
+					return
+						start_task_move
+							(game,
+							WALK_NW,
+							descr().get_right_walk_anims(does_carry_ware()),
+							true);
+				}
 			}
 		}
 	}
@@ -1864,7 +1876,8 @@ void Worker::return_update(Game & game, State & state)
 			 	 game.get_gametime(), Forever(),
 			 	 _("Worker got lost!"),
 			 	 buffer,
-			 	 get_position()));
+			 	 get_position()),
+				 m_serial);
 		set_location(0);
 		return pop_task(game);
 	}
@@ -2401,8 +2414,9 @@ void Worker::leavebuilding_update(Game & game, State & state)
 		return pop_task(game);
 
 	upcast(Building, building, get_location(game));
-	if (!building)
+	if (!building) {
 		return pop_task(game);
+	}
 
 	Flag & baseflag = building->base_flag();
 
