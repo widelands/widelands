@@ -19,9 +19,6 @@
 
 #include "logic/ship.h"
 
-#include "ui_basic/box.h"
-
-#include "actionconfirm.h"
 #include "economy/economy.h"
 #include "economy/portdock.h"
 #include "economy/ware_instance.h"
@@ -29,10 +26,12 @@
 #include "logic/player.h"
 #include "logic/warehouse.h"
 #include "logic/worker.h"
+#include "ui_basic/box.h"
 #include "upcast.h"
-#include "interactive_gamebase.h"
-#include "interactive_player.h"
-#include "itemwaresdisplay.h"
+#include "wui/actionconfirm.h"
+#include "wui/interactive_gamebase.h"
+#include "wui/interactive_player.h"
+#include "wui/itemwaresdisplay.h"
 
 static const char pic_goto[] = "pics/menu_ship_goto.png";
 static const char pic_destination[] = "pics/menu_ship_destination.png";
