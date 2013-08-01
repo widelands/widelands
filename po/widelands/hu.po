@@ -7,15 +7,15 @@ msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2013-07-28 20:22+0200\n"
-"PO-Revision-Date: 2013-07-27 20:02+0000\n"
-"Last-Translator: István Kiss <kiemc@citromail.hu>\n"
+"PO-Revision-Date: 2013-07-31 14:28+0000\n"
+"Last-Translator: Gyönki Bendegúz <gyonkibendeguz@gmail.com>\n"
 "Language-Team: Language <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2013-07-29 05:14+0000\n"
-"X-Generator: Launchpad (build 16700)\n"
+"X-Launchpad-Export-Date: 2013-08-01 05:13+0000\n"
+"X-Generator: Launchpad (build 16718)\n"
 
 #: ../../src/wlapplication.cc:396
 msgid "ERROR: Could not connect to metaserver (reason above)!\n"
@@ -370,15 +370,15 @@ msgstr "Betöltés…"
 
 #: ../../src/save_handler.cc:72
 msgid "Saving game..."
-msgstr ""
+msgstr "Játék mentése..."
 
 #: ../../src/save_handler.cc:92
 msgid "Saving failed!"
-msgstr ""
+msgstr "A mentés nem sikerült!"
 
 #: ../../src/save_handler.cc:112
 msgid "Game saved"
-msgstr ""
+msgstr "Játék elmentve"
 
 #: ../../src/computer_player.cc:38
 msgid "None"
@@ -399,7 +399,7 @@ msgstr ""
 
 #: ../../src/s2map.cc:886
 msgid "WARNING"
-msgstr ""
+msgstr "FIGYELMEZTETÉS"
 
 #: ../../src/writeHTML.cc:42
 msgid "Requesters"
@@ -715,7 +715,7 @@ msgstr ""
 
 #: ../../src/network/netclient.cc:1100
 msgid " An automatic savegame will be created."
-msgstr ""
+msgstr " Egy automatikus mentés lesz létrehozva."
 
 #: ../../src/network/netclient.cc:1104
 msgid "Disconnected from Host"
@@ -733,19 +733,19 @@ msgstr ""
 
 #: ../../src/network/nethost.cc:381
 msgid "Wrong use, should be: /announce <message>"
-msgstr ""
+msgstr "Helytelen használat; helyes: /announce <üzenet>"
 
 #: ../../src/network/nethost.cc:394
 msgid "Wrong use, should be: /warn <name> <reason>"
-msgstr ""
+msgstr "Helytelen használat; helyes: <név> <ok>"
 
 #: ../../src/network/nethost.cc:402
 msgid "Why would you warn yourself?"
-msgstr ""
+msgstr "Miért akarnád figyelmeztetni magadat?"
 
 #: ../../src/network/nethost.cc:404
 msgid "Why would you want to warn the dedicated server?"
-msgstr ""
+msgstr "Miért figyelmeztetnéd a dedikált kiszolgálót?"
 
 #: ../../src/network/nethost.cc:408 ../../src/network/nethost.cc:434
 #, c-format
@@ -754,25 +754,25 @@ msgstr ""
 
 #: ../../src/network/nethost.cc:419
 msgid "Wrong use, should be: /kick <name> <reason>"
-msgstr ""
+msgstr "Helytelen használat; helyes: /kick <név> <ok>"
 
 #: ../../src/network/nethost.cc:430
 msgid "You can not kick yourself!"
-msgstr ""
+msgstr "Nem rúghatod ki saját magad!"
 
 #: ../../src/network/nethost.cc:432
 msgid "You can not kick the dedicated server"
-msgstr ""
+msgstr "Nem rúghatod ki a dedikált kiszolgálót"
 
 #: ../../src/network/nethost.cc:437
 #, c-format
 msgid "Are you sure you want to kick %s?<br>"
-msgstr ""
+msgstr "Biztosan ki szeretnéd rúgni %s-t?<br>"
 
 #: ../../src/network/nethost.cc:438
 #, c-format
 msgid "The stated reason was: %s<br>"
-msgstr ""
+msgstr "A megadott indok a következő: %s<br>"
 
 #: ../../src/network/nethost.cc:439
 #, c-format
@@ -801,7 +801,7 @@ msgstr ""
 
 #: ../../src/network/nethost.cc:492
 msgid "Invalid command! Type /help for a list of commands."
-msgstr ""
+msgstr "Érvénytelen parancs! Gépeld a /help-et a parancsok listájáért."
 
 #: ../../src/network/nethost.cc:739
 #, c-format
@@ -848,7 +848,7 @@ msgstr ""
 
 #: ../../src/network/nethost.cc:1254
 msgid "Game successfully saved!"
-msgstr ""
+msgstr "Játék sikeresen elmentve!"
 
 #: ../../src/network/nethost.cc:1256
 #, c-format
@@ -857,16 +857,16 @@ msgstr ""
 
 #: ../../src/network/nethost.cc:1263
 msgid "This server is not password protected!"
-msgstr ""
+msgstr "Ez a kiszolgáló nincs védve jelszóval!"
 
 #: ../../src/network/nethost.cc:1266
 #: ../../src/network/internet_gaming_messages.cc:43
 msgid "The sent password was incorrect!"
-msgstr ""
+msgstr "Az elküldött jelszó helytelen!"
 
 #: ../../src/network/nethost.cc:1279
 msgid "The password was correct, access was granted!"
-msgstr ""
+msgstr "A jelszó helyes, hozzáférés engedélyezve!"
 
 #: ../../src/network/nethost.cc:1285
 #, c-format
@@ -895,7 +895,7 @@ msgstr "A kliens összeomlott és elmentette a játék állapotát."
 
 #: ../../src/network/network_gaming_messages.cc:124
 msgid "Connection was lost."
-msgstr ""
+msgstr "A kapcsolat megszakadt."
 
 #: ../../src/network/network_gaming_messages.cc:125
 msgid "Server has left the game."
@@ -1036,7 +1036,7 @@ msgstr ""
 #: ../../src/network/network_gaming_messages.cc:156
 #, c-format
 msgid "%s has joined the game"
-msgstr ""
+msgstr "%s csatlakozott a játékhoz"
 
 #: ../../src/network/network_gaming_messages.cc:157
 #, c-format
@@ -1082,7 +1082,7 @@ msgstr "Kapcsolathiba"
 
 #: ../../src/network/internet_gaming.cc:116
 msgid "Widelands has not been able to connect to the metaserver."
-msgstr ""
+msgstr "A Widelands nem tudott csatlakozni a metakiszolgálóhoz."
 
 #: ../../src/network/internet_gaming.cc:124
 msgid ""
@@ -1101,7 +1101,7 @@ msgstr "Valami hiba történt: "
 
 #: ../../src/network/internet_gaming.cc:392
 msgid "Successfully reconnected to the metaserver!"
-msgstr ""
+msgstr "Sikeres újracsatlakozás a metakiszolgálóhoz!"
 
 #: ../../src/network/internet_gaming.cc:399
 msgid "Mixed up"
@@ -1113,7 +1113,7 @@ msgstr ""
 
 #: ../../src/network/internet_gaming.cc:410
 msgid "Unexpected packet"
-msgstr ""
+msgstr "Váratlan csomag"
 
 #: ../../src/network/internet_gaming.cc:412
 #, c-format
@@ -1135,7 +1135,7 @@ msgstr ""
 
 #: ../../src/network/internet_gaming.cc:454
 msgid "Invalid message type"
-msgstr ""
+msgstr "Érvénytelen üzenettípus"
 
 #: ../../src/network/internet_gaming.cc:454
 #, c-format
@@ -1144,7 +1144,7 @@ msgstr ""
 
 #: ../../src/network/internet_gaming.cc:535
 msgid "ERROR: "
-msgstr ""
+msgstr "HIBA: "
 
 #: ../../src/network/internet_gaming.cc:539
 msgid "Chat message could not be sent. "
@@ -1164,7 +1164,7 @@ msgstr ""
 
 #: ../../src/network/internet_gaming.cc:787
 msgid "Conversion error"
-msgstr ""
+msgstr "Konverziós hiba"
 
 #: ../../src/network/internet_gaming.cc:788
 #, c-format
@@ -1184,11 +1184,11 @@ msgstr ""
 
 #: ../../src/network/internet_gaming_messages.cc:44
 msgid "The protocol version you are using is not supported!"
-msgstr ""
+msgstr "A protokoll verzió, amit te használsz, nem támogatott!"
 
 #: ../../src/network/internet_gaming_messages.cc:45
 msgid "You are already logged in!"
-msgstr ""
+msgstr "Már be vagy jelentkezve!"
 
 #: ../../src/network/internet_gaming_messages.cc:48
 msgid ""
@@ -1202,7 +1202,7 @@ msgstr ""
 
 #: ../../src/network/internet_gaming_messages.cc:52
 msgid "Connection was closed by the client normally."
-msgstr ""
+msgstr "A kapcsolatot a kliens normálisan lezárta."
 
 #: ../../src/network/internet_gaming_messages.cc:53
 msgid "The connection to the metaserver was lost."
@@ -1210,7 +1210,7 @@ msgstr ""
 
 #: ../../src/network/internet_gaming_messages.cc:54
 msgid "Metaserver did not answer"
-msgstr ""
+msgstr "A metakiszolgáló nem válaszolt"
 
 #: ../../src/network/internet_gaming_messages.cc:55
 msgid "Your game is not connectable from the internet"
@@ -1238,7 +1238,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/internet_lobby.cc:52
 msgid "Metaserver Lobby"
-msgstr ""
+msgstr "Metakiszolgáló lobbi"
 
 #: ../../src/ui_fsmenu/internet_lobby.cc:56
 msgid "Clients online:"
@@ -1589,7 +1589,7 @@ msgstr "Kijelölés megszüntetése"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:121
 msgid "Change map or saved game"
-msgstr ""
+msgstr "Térkép vagy mentett játék módosítása"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:126 ../../src/ui_fsmenu/launchSPG.cc:69
 msgid "Start game"
