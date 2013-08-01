@@ -962,7 +962,9 @@ bool Worker::run_geologist_find(Game & game, State & state, const Action &)
 				 	 game.get_gametime(), 60 * 60 * 1000,
 				 	 rdescr->descname(),
 				 	 message,
-				 	 position),
+				 	 position,
+					 m_serial
+					),
 				 300000, 8);
 		}
 
@@ -1864,7 +1866,8 @@ void Worker::return_update(Game & game, State & state)
 			 	 game.get_gametime(), Forever(),
 			 	 _("Worker got lost!"),
 			 	 buffer,
-			 	 get_position()));
+			 	 get_position()),
+				 m_serial);
 		set_location(0);
 		return pop_task(game);
 	}

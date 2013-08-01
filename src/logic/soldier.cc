@@ -1481,7 +1481,8 @@ void Soldier::battle_update(Game & game, State &)
 						 	 game.get_gametime(), Forever(),
 						 	 _("Logic error"),
 						 	 buffer,
-						 	 get_position()));
+						 	 get_position(),
+							 m_serial));
 					opponent.owner().add_message
 						(game,
 						 *new Message
@@ -1489,7 +1490,8 @@ void Soldier::battle_update(Game & game, State &)
 						 	 game.get_gametime(), Forever(),
 						 	 _("Logic error"),
 						 	 buffer,
-						 	 opponent.get_position()));
+						 	 opponent.get_position(),
+							 m_serial));
 					game.gameController()->setDesiredSpeed(0);
 					return pop_task(game);
 				}

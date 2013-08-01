@@ -19,6 +19,9 @@
 
 #include "logic/player.h"
 
+#include <boost/bind.hpp>
+#include <boost/signal.hpp>
+
 #include "economy/economy.h"
 #include "economy/flag.h"
 #include "economy/road.h"
@@ -32,6 +35,7 @@
 #include "logic/game.h"
 #include "logic/game_data_error.h"
 #include "logic/militarysite.h"
+#include "logic/playercommand.h"
 #include "logic/soldier.h"
 #include "logic/soldiercontrol.h"
 #include "logic/trainingsite.h"
@@ -229,20 +233,30 @@ void Player::play_message_sound(const std::string & sender) {
 Message_Id Player::add_message
 	(Game & game, Message & message, bool const popup)
 {
-	Message_Id const id = messages().add_message(message);
+	// Expire command
+	Message_Id id = messages().add_message(message);
 	Duration const duration = message.duration();
-	if (duration != Forever())
+	if (duration != Forever()) {
 		game.cmdqueue().enqueue
 			(new Cmd_ExpireMessage
 			 	(game.get_gametime() + duration, player_number(), id));
+	}
 
-	if (Interactive_Player * const iplayer = game.get_ipl())
+	// Map_Object connection
+	if (message.serial() > 0) {
+		Map_Object* mo = egbase().objects().get_object(message.serial());
+		mo->removed.connect
+		 (boost::bind(&Player::message_object_removed, this, id));
+	}
+
+	// Sound & popup
+	if (Interactive_Player * const iplayer = game.get_ipl()) {
 		if (&iplayer->player() == this) {
 			play_message_sound(message.sender());
-
 			if (popup)
 				iplayer->popup_message(id, message);
 		}
+	}
 
 	return id;
 }
@@ -265,6 +279,20 @@ Message_Id Player::add_message_with_timeout
 		}
 	return add_message(game, m);
 }
+
+void Player::message_object_removed(Message_Id m_id) const
+{
+	// Send expire command
+	upcast(Game, game, &m_egbase);
+	if (!game) {
+		return;
+	}
+
+	game->cmdqueue().enqueue
+		(new Cmd_ExpireMessage
+			(game->get_gametime(), m_plnum, m_id));
+}
+
 
 
 /*

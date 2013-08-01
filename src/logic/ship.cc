@@ -718,7 +718,7 @@ void Ship::send_message
 
 	Message * msg = new Message
 		(msgsender, game.get_gametime(), 60 * 60 * 1000,
-		 title, rt_description, get_position());
+		 title, rt_description, get_position(), m_serial);
 
 	m_economy->owner().add_message(game, *msg);
 }

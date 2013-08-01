@@ -99,6 +99,10 @@ struct Player :
 	Message_Id add_message_with_timeout
 		(Game &, Message &, uint32_t timeout, uint32_t radius);
 
+	/// Indicates that the object linked to the message has been removed
+	/// from the game. This implementation expires the message.
+	void message_object_removed(Message_Id mid) const;
+
 	void set_message_status(const Message_Id& id, Message::Status const status) {
 		messages().set_message_status(id, status);
 	}
