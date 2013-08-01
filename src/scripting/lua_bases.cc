@@ -395,7 +395,7 @@ int L_PlayerBase::place_building(lua_State * L) {
 		return report_error(L, "Unknown Building: '%s'", name);
 
 	Building_Descr::FormerBuildings former_buildings;
-	find_former_buildings(former_buildings, td, i);
+	find_former_buildings(td, i, &former_buildings);
 	if (constructionsite) {
 		former_buildings.pop_back();
 	}
@@ -486,5 +486,4 @@ void luaopen_wlbases(lua_State * const L) {
 }
 
 };
-
 

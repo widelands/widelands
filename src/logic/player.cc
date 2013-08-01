@@ -105,24 +105,28 @@ const RGBColor Player::Colors[MAX_PLAYERS] = {
  * filled with the Building_Descr.
  */
 void find_former_buildings
-	(Widelands::Building_Descr::FormerBuildings & former_buidlings,
-	 const Widelands::Tribe_Descr & tribe_descr, const Widelands::Building_Index bi)
+	(const Widelands::Tribe_Descr & tribe_descr, const Widelands::Building_Index bi,
+	 Widelands::Building_Descr::FormerBuildings* former_buildings)
 {
-	assert(former_buidlings.empty());
+	assert(former_buildings && former_buildings->empty());
 	const Widelands::Building_Descr * first_descr = tribe_descr.get_building_descr(bi);
-	former_buidlings.push_back(first_descr);
+	former_buildings->push_back(first_descr);
 	bool done = false;
 	while (not done) {
-		const Widelands::Building_Descr * oldest = former_buidlings.front();
+		const Widelands::Building_Descr * oldest = former_buildings->front();
 		if (!oldest->is_enhanced()) {
 			done = true;
 			break;
 		}
 		const Widelands::Building_Index & oldest_idx = tribe_descr.building_index(oldest->name());
-		for (Widelands::Building_Index i = Widelands::Building_Index::First(); i < tribe_descr.get_nrbuildings(); ++i) {
-			Widelands::Building_Descr const * ob = tribe_descr.get_building_descr(i);
+		for
+			(Widelands::Building_Index i = Widelands::Building_Index::First();
+			 i < tribe_descr.get_nrbuildings();
+			 ++i)
+		{
+			const Widelands::Building_Descr* ob = tribe_descr.get_building_descr(i);
 			if (ob->enhancements().count(oldest_idx)) {
-				former_buidlings.insert(former_buidlings.begin(), ob);
+				former_buildings->insert(former_buildings->begin(), ob);
 				break;
 			}
 		}

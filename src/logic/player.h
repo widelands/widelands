@@ -644,8 +644,8 @@ private:
 };
 
 void find_former_buildings
-	(Building_Descr::FormerBuildings & former_buidlings,
-	 const Tribe_Descr & tribe_descr, const Building_Index bi);
+	(const Tribe_Descr & tribe_descr, const Building_Index bi,
+	 Building_Descr::FormerBuildings* former_buildings);
 
 }
 
