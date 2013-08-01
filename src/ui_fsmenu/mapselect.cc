@@ -190,6 +190,7 @@ Fullscreen_Menu_MapSelect::Fullscreen_Menu_MapSelect
 		m_label_load_map_as_scenario.set_visible(false);
 	}
 
+	m_table.focus();
 	fill_list();
 }
 
@@ -198,6 +199,7 @@ void Fullscreen_Menu_MapSelect::think()
 	if (m_ctrl)
 		m_ctrl->think();
 }
+
 
 bool Fullscreen_Menu_MapSelect::compare_maprows
 	(uint32_t rowa, uint32_t rowb)
