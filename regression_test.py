@@ -1,15 +1,19 @@
 #!/usr/bin/env python
 # encoding: utf-8
 
-import os
+import unittest
+from glob import glob
 
-from test import WidelandsTestCase
+def main():
+    # NOCOM(#sirver): hardcoded - not good.
+    tests = [ filename for filename in glob("test/lua_pers*.py") if not "__" in filename ]
+    print "#sirver tests: %r\n" % (tests)
+    test_loader = unittest.TestLoader()
+    tests = test_loader.discover("test", "*.py")
+    print "#sirver tests: %r\n" % (tests)
 
-class LuaTestSuiteInGame(WidelandsTestCase):
-    def runTest(self):
-        self.run_widelands(scenario=os.path.join(self.maps_dir, "lua_testsuite.wmf"))
+    runner = unittest.TextTestRunner()
+    runner.run(tests)
 
-class LuaTestSuiteInEditor(WidelandsTestCase):
-    def runTest(self):
-        self.run_widelands(editor=os.path.join(self.maps_dir, "lua_testsuite.wmf"))
-
+if __name__ == '__main__':
+    main()
