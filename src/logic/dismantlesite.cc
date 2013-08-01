@@ -210,7 +210,13 @@ bool DismantleSite::get_building_work(Game & game, Worker & worker, bool) {
 		schedule_destroy(game);
 
 		worker.pop_task(game);
-		worker.start_task_leavebuilding(game, true);
+		// No more building, so move to the flag
+		worker.start_task_move
+				(game,
+				 WALK_SE,
+				 worker.descr().get_right_walk_anims(false),
+				 true);
+		worker.set_location(nullptr);
 	} else if (not m_working) {
 		m_work_steptime = game.get_gametime() + DISMANTLESITE_STEP_TIME;
 		worker.start_task_idle
