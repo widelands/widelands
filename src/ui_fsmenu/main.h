@@ -57,6 +57,7 @@ private:
 	UI::Button                     exit;
 	UI::Textarea                                version;
 	UI::Textarea                                copyright;
+	UI::Textarea                                gpl;
 };
 
 #endif

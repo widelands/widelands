@@ -61,8 +61,8 @@ throw (_wexception)
 			X_Coordinate const width  = map.get_width ();
 			Y_Coordinate const height = map.get_height();
 			FCoords c;
-			for (c.y = 0; c.y < height; ++c.y)
-				for (c.x = 0; c.x < width; ++c.x)
+			for (c.y = 0; c.y < height; ++c.y) {
+				for (c.x = 0; c.x < width; ++c.x) {
 					if (fr.Unsigned8()) {
 						Player_Number const p                   = fr.Unsigned8 ();
 						Serial        const serial              = fr.Unsigned32();
@@ -75,24 +75,23 @@ throw (_wexception)
 						if (Player * const player = egbase.get_safe_player(p)) {
 							const Tribe_Descr & tribe = player->tribe();
 							const Building_Index index = tribe.building_index(name);
-							if (not index)
+							if (not index) {
 								throw game_data_error
 									("tribe %s does not define building type \"%s\"",
 									 tribe.name().c_str(), name);
+							}
 
 							//  Now, create this Building, take extra special care for
 							//  constructionsites. All data is read later.
 							Building * building;
 							if (special_type == 1) { // Constructionsite
-								  building = &egbase.warp_constructionsite
-									  	(c, p, index, true);
+								building = &egbase.warp_constructionsite(c, p, index, true);
 							} else if (special_type == 2) {// DismantleSite
-								Building::FormerBuildings formers;
 								const Building_Descr* former_desc = tribe.get_building_descr(index);
-								formers.push_back(former_desc);
-								  building = &egbase.warp_dismantlesite (c, p, true, formers);
+								Building::FormerBuildings formers = {former_desc};
+								building = &egbase.warp_dismantlesite(c, p, true, formers);
 							} else {
-								  building = &egbase.warp_building(c, p, index);
+								building = &egbase.warp_building(c, p, index);
 							}
 
 							mol.register_object<Building> (serial, *building);
@@ -106,6 +105,8 @@ throw (_wexception)
 						} else
 							throw game_data_error(_("player %u does not exist"), p);
 					}
+				}
+			}
 		} else
 			throw game_data_error
 				(_("unknown/unhandled version %u"), packet_version);

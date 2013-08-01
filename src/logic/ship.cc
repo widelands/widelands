@@ -658,7 +658,8 @@ void Ship::exp_scout_direction(Game &, uint8_t direction) {
 /// @note only called via player command
 void Ship::exp_construct_port (Game &, const Coords& c) {
 	assert(m_expedition);
-	m_economy->owner().force_building(c, m_economy->owner().tribe().safe_building_index("port"), true);
+	Building_Index port_idx = m_economy->owner().tribe().safe_building_index("port");
+	m_economy->owner().force_csite(c, port_idx);
 	m_ship_state = EXP_COLONIZING;
 }
 
@@ -718,7 +719,7 @@ void Ship::send_message
 
 	Message * msg = new Message
 		(msgsender, game.get_gametime(), 60 * 60 * 1000,
-		 title, rt_description, get_position());
+		 title, rt_description, get_position(), m_serial);
 
 	m_economy->owner().add_message(game, *msg);
 }

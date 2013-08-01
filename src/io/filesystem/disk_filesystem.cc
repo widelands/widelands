@@ -22,6 +22,8 @@
 #include <cassert>
 #include <cerrno>
 
+#include <sys/stat.h>
+
 #ifdef _WIN32
 #include <dos.h>
 #include <windows.h>
@@ -34,7 +36,6 @@
 #include <fcntl.h>
 #include <glob.h>
 #include <sys/mman.h>
-#include <sys/stat.h>
 #include <sys/statvfs.h>
 #include <sys/types.h>
 #endif

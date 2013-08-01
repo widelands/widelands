@@ -85,9 +85,11 @@
 #include "wui/interactive_spectator.h"
 
 #ifndef NDEBUG
+#ifndef _WIN32
 int32_t WLApplication::pid_me   = 0;
 int32_t WLApplication::pid_peer = 0;
 volatile int32_t WLApplication::may_run = 0;
+#endif
 #endif
 
 #define MINIMUM_DISK_SPACE 250000000lu
@@ -1581,7 +1583,7 @@ void WLApplication::mainmenu()
 				break;
 			}
 			case Fullscreen_Menu_Main::mm_license: {
-				Fullscreen_Menu_FileView ff("txts/COPYING");
+				Fullscreen_Menu_FileView ff("txts/license");
 				ff.run();
 				break;
 			}

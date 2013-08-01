@@ -21,6 +21,7 @@
 
 #include "logic/game_data_error.h"
 #include "logic/player.h"
+#include "map_io/widelands_map_map_object_loader.h"
 #include "map_io/widelands_map_map_object_saver.h"
 #include "profile/profile.h"
 
@@ -32,7 +33,7 @@ namespace Widelands {
 #define FILENAME_SIZE 19
 
 void Map_Players_Messages_Data_Packet::Read
-	(FileSystem & fs, Editor_Game_Base & egbase, bool, Map_Map_Object_Loader &)
+	(FileSystem & fs, Editor_Game_Base & egbase, bool, Map_Map_Object_Loader & mol)
 	throw (_wexception)
 {
 	uint32_t      const gametime   = egbase.get_gametime ();
@@ -119,7 +120,7 @@ void Map_Players_Messages_Data_Packet::Read
 								 sent + duration, sent, duration, gametime);
 					}
 					Message::Status status = Message::Archived; //  default status
-					if (char const * const status_string = s->get_string("status"))
+					if (char const * const status_string = s->get_string("status")) {
 						try {
 							if      (not strcmp(status_string, "new"))
 								status = Message::New;
@@ -132,6 +133,15 @@ void Map_Players_Messages_Data_Packet::Read
 						} catch (const _wexception & e) {
 							throw game_data_error("status: %s", e.what());
 						}
+					}
+					Serial serial = s->get_int("serial", 0);
+					if (serial > 0) {
+						assert(mol.is_object_known(serial));
+						Map_Object & mo = mol.get<Map_Object>(serial);
+						assert(mol.is_object_loaded(mo));
+						serial = mo.serial();
+					}
+
 					messages.add_message
 						(*new Message
 						 	(s->get_string     ("sender", ""),
@@ -140,6 +150,7 @@ void Map_Players_Messages_Data_Packet::Read
 						 	 s->get_name       (),
 						 	 s->get_safe_string("body"),
 						 	 s->get_Coords     ("position", extent, Coords::Null()),
+							 serial,
 						 	 status));
 					//  Expiration is scheduled for all messages (with finite
 					//  duration) after the command queue has been loaded (in
@@ -224,6 +235,11 @@ throw (_wexception)
 				break;
 			default:
 				assert(false);
+			}
+			if (message.serial()) {
+				const Map_Object* mo = egbase.objects().get_object(message.serial());
+				uint32_t fileindex = mos.get_object_file_index_or_zero(mo);
+				s.set_int       ("serial",    fileindex);
 			}
 		}
 		char filename[FILENAME_SIZE];

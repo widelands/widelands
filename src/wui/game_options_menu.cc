@@ -111,7 +111,7 @@ GameOptionsMenu::GameOptionsMenu
 	m_windows.license.constr = boost::bind
 		(&fileview_window, boost::ref(m_gb),
 		 boost::ref(m_windows.license),
-		 "txts/COPYING");
+		 "txts/license");
 	m_windows.authors.constr = boost::bind
 		(&fileview_window, boost::ref(m_gb),
 		 boost::ref(m_windows.authors),

@@ -99,6 +99,8 @@ GameLogicCommand & Queue_Cmd_Factory::create_correct_queue_command
 		return *new Cmd_DismantleBuilding         ();
 	case QUEUE_CMD_EVICTWORKER:
 		return *new Cmd_EvictWorker();
+	case QUEUE_CMD_MILITARYSITESETSOLDIERPREFERENCE:
+		return *new Cmd_MilitarySiteSetSoldierPreference();
 	default:
 		throw wexception("Unknown Queue_Cmd_Id in file: %u", id);
 	}
