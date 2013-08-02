@@ -45,7 +45,7 @@ static const char pic_policy_remove[] = "pics/stock_policy_remove.png";
 class WarehouseWaresDisplay : public WaresDisplay {
 public:
 	WarehouseWaresDisplay
-		(UI::Panel * parent, uint32_t width,
+		(UI::Panel * parent, uint32_t width, uint16_t max_width,
 		 Warehouse & wh, Widelands::WareWorker type, bool selectable);
 
 protected:
@@ -56,10 +56,10 @@ private:
 };
 
 WarehouseWaresDisplay::WarehouseWaresDisplay
-	(UI::Panel * parent, uint32_t width,
+	(UI::Panel * parent, uint32_t width, uint16_t max_width,
 	 Warehouse & wh, Widelands::WareWorker type, bool selectable)
 :
-WaresDisplay(parent, 0, 0, wh.owner().tribe(), type, selectable),
+WaresDisplay(parent, 0, 0, wh.owner().tribe(), type, selectable, max_width),
 m_warehouse(wh)
 {
 	set_inner_size(width, 0);
@@ -90,7 +90,7 @@ void WarehouseWaresDisplay::draw_ware(RenderTarget & dst, Widelands::Ware_Index 
  */
 struct WarehouseWaresPanel : UI::Box {
 	WarehouseWaresPanel
-		(UI::Panel * parent, uint32_t width,
+		(UI::Panel * parent, uint32_t width, uint16_t max_height,
 		 Interactive_GameBase &, Warehouse &, Widelands::WareWorker type);
 
 	void set_policy(Warehouse::StockPolicy);
@@ -103,7 +103,7 @@ private:
 };
 
 WarehouseWaresPanel::WarehouseWaresPanel
-	(UI::Panel * parent, uint32_t width,
+	(UI::Panel * parent, uint32_t width, uint16_t max_height,
 	 Interactive_GameBase & gb, Warehouse & wh, Widelands::WareWorker type)
 :
 	UI::Box(parent, 0, 0, UI::Box::Vertical),
@@ -111,7 +111,7 @@ WarehouseWaresPanel::WarehouseWaresPanel
 	m_wh(wh),
 	m_can_act(m_gb.can_act(m_wh.owner().player_number())),
 	m_type(type),
-	m_display(this, width, m_wh, m_type, m_can_act)
+	m_display(this, width, max_height, m_wh, m_type, m_can_act)
 {
 	add(&m_display, UI::Box::AlignLeft, true);
 
@@ -184,12 +184,15 @@ Warehouse_Window::Warehouse_Window
 	 UI::Window *         & registry)
 	: Building_Window(parent, wh, registry)
 {
+	uint16_t wares_max_height = g_gr->get_yres() - 10 // safe margein
+		- 3 * 34; // tabs + 2 rows of buttons and a label
 	get_tabs()->add
 		("wares",
 		 g_gr->images().get(pic_tab_wares),
 		 new WarehouseWaresPanel
 			(get_tabs(),
-			 Width,
+			 BUILDING_WINDOW_DEFAULT_WIDTH,
+			 wares_max_height,
 			 igbase(),
 			 warehouse(),
 			 Widelands::wwWARE),
@@ -199,7 +202,8 @@ Warehouse_Window::Warehouse_Window
 		 g_gr->images().get(pic_tab_workers),
 		 new WarehouseWaresPanel
 			(get_tabs(),
-			 Width,
+			 BUILDING_WINDOW_DEFAULT_WIDTH,
+			 wares_max_height,
 			 igbase(),
 			 warehouse(),
 			 Widelands::wwWORKER),
@@ -209,12 +213,16 @@ Warehouse_Window::Warehouse_Window
 		get_tabs()->add
 			("dock_wares",
 			 g_gr->images().get(pic_tab_dock_wares),
-			 create_portdock_wares_display(get_tabs(), Width, *pd, Widelands::wwWARE),
+			 create_portdock_wares_display
+					(get_tabs(), BUILDING_WINDOW_DEFAULT_WIDTH, wares_max_height,
+					*pd, Widelands::wwWARE),
 			 _("Wares in dock"));
 		get_tabs()->add
 			("dock_workers",
 			 g_gr->images().get(pic_tab_dock_workers),
-			 create_portdock_wares_display(get_tabs(), Width, *pd, Widelands::wwWORKER),
+			 create_portdock_wares_display
+					(get_tabs(), BUILDING_WINDOW_DEFAULT_WIDTH, wares_max_height,
+					*pd, Widelands::wwWORKER),
 			 _("Workers in dock"));
 		if (pd->expedition_started()) {
 			get_tabs()->add

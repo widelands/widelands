@@ -81,9 +81,10 @@ private:
 			 const Widelands::Tribe_Descr & tribe,
 			 Widelands::WareWorker type,
 			 bool selectable,
-			 Economy & economy)
+			 Economy & economy,
+			 uint16_t  max_height = 0)
 		:
-			 AbstractWaresDisplay(parent, x, y, tribe, type, selectable),
+			 AbstractWaresDisplay(parent, x, y, tribe, type, selectable, max_height),
 			 m_economy(economy)
 		{
 			if (type == Widelands::wwWORKER) {

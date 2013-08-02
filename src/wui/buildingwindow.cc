@@ -52,7 +52,7 @@ Building_Window::Building_Window
 	:
 	UI::Window
 		(&parent, "building_window",
-		 0, 0, Width, 0,
+		 0, 0, BUILDING_WINDOW_DEFAULT_WIDTH, 0,
 		 b.descname()),
 	m_registry(registry),
 	m_building       (b),
