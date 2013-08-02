@@ -275,7 +275,7 @@ void AbstractWaresDisplay::layout()
 
 void WaresDisplay::remove_all_warelists() {
 	m_warelists.clear();
-	BOOST_FOREACH(boost::signals::connection& c, connections_)
+	BOOST_FOREACH(boost::signals2::connection& c, connections_)
 		c.disconnect();
 	connections_.clear();
 	update();
