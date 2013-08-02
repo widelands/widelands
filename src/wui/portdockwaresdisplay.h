@@ -29,7 +29,7 @@ struct PortDock;
 }
 
 AbstractWaresDisplay * create_portdock_wares_display
-	(UI::Panel * parent, uint32_t width, uint16_t  max_height, Widelands::PortDock & pd,
+	(UI::Panel * parent, uint32_t width, Widelands::PortDock & pd,
 	 Widelands::WareWorker type);
 
 UI::Box * create_portdock_expedition_display

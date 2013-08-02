@@ -108,11 +108,10 @@ public:
 		(UI::Panel * const parent,
 		 int32_t const x, int32_t const y,
 		 const Widelands::Tribe_Descr & tribe,
-		 uint16_t  max_height,
 		 boost::function<void(Widelands::Ware_Index, bool)> callback_function,
 		 std::vector<uint8_t> & color_map)
 	:
-		 AbstractWaresDisplay(parent, x, y, tribe, Widelands::wwWARE, true, max_height, callback_function),
+		 AbstractWaresDisplay(parent, x, y, tribe, Widelands::wwWARE, true, callback_function),
 		 m_color_map(color_map)
 	{
 		uint32_t w, h;
@@ -246,11 +245,9 @@ m_parent(&parent)
 				colors[cur_ware]);
 	}
 
-	// tot height - tab height - plot height - slider height - box spacings
-	uint16_t max_height = g_gr->get_yres() - 34 - plot_height - 45 - 2 * spacing;
 	box->add
 		(new StatisticWaresDisplay
-			(box, 0, 0, parent.get_player()->tribe(), max_height,
+			(box, 0, 0, parent.get_player()->tribe(),
 			 boost::bind(&Ware_Statistics_Menu::cb_changed_to, boost::ref(*this), _1, _2),
 			 m_color_map),
 		 UI::Box::AlignLeft, true);

@@ -20,7 +20,6 @@
 #include "wui/waresdisplay.h"
 
 #include <cstdio>
-#include <utility>
 
 #include <boost/foreach.hpp>
 #include <boost/lexical_cast.hpp>
@@ -46,7 +45,6 @@ AbstractWaresDisplay::AbstractWaresDisplay
 	 const Widelands::Tribe_Descr & tribe,
 	 Widelands::WareWorker type,
 	 bool selectable,
-	 uint16_t max_height,
 	 boost::function<void(Widelands::Ware_Index, bool)> callback_function,
 	 bool horizontal)
 	:
@@ -74,18 +72,6 @@ AbstractWaresDisplay::AbstractWaresDisplay
 	m_selection_anchor(Widelands::Ware_Index::Null()),
 	m_callback_function(callback_function)
 {
-	//resize the configuration of our wares if they won't fit in the current window
-	if (max_height == 0) {
-		max_height = g_gr->get_yres() - 100; //Keep a safe margin
-	} else {
-		max_height -= 20; // Keep place for the cur selection label
-	}
-	int number = max_height / (WARE_MENU_PIC_HEIGHT + WARE_MENU_INFO_SIZE + WARE_MENU_PIC_PAD_Y);
-	std::pair<Widelands::Tribe_Descr::WaresOrder, Widelands::Tribe_Descr::WaresOrderCoords> ware_order =
-		const_cast<Widelands::Tribe_Descr &>(m_tribe).get_resized_ware_orders(number);
-	m_wares_order = ware_order.first;
-	m_wares_order_coords = ware_order.second;
-
 	// Find out geometry from icons_order
 	unsigned int columns = icons_order().size();
 	unsigned int rows = 0;
@@ -315,7 +301,7 @@ const Widelands::Tribe_Descr::WaresOrder & AbstractWaresDisplay::icons_order() c
 {
 	switch (m_type) {
 	case Widelands::wwWARE:
-		return m_wares_order;
+		return m_tribe.wares_order();
 		break;
 	case Widelands::wwWORKER:
 		return m_tribe.workers_order();
@@ -329,7 +315,7 @@ const Widelands::Tribe_Descr::WaresOrderCoords & AbstractWaresDisplay::icons_ord
 {
 	switch (m_type) {
 	case Widelands::wwWARE:
-		return m_wares_order_coords;
+		return m_tribe.wares_order_coords();
 		break;
 	case Widelands::wwWORKER:
 		return m_tribe.workers_order_coords();
@@ -460,8 +446,8 @@ WaresDisplay::WaresDisplay
 	 int32_t x, int32_t y,
 	 const Widelands::Tribe_Descr & tribe,
 	 Widelands::WareWorker type,
-	 bool selectable, uint16_t max_height)
-: AbstractWaresDisplay(parent, x, y, tribe, type, selectable, max_height)
+	 bool selectable)
+: AbstractWaresDisplay(parent, x, y, tribe, type, selectable)
 {}
 
 RGBColor AbstractWaresDisplay::info_color_for_ware(Widelands::Ware_Index /* ware */) {

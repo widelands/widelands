@@ -27,7 +27,6 @@
 #include "ui_basic/window.h"
 #include "wui/waresdisplay.h"
 
-#define BUILDING_WINDOW_DEFAULT_WIDTH  (4 * 34) //  4 normally sized buttons
 /**
  * Base class for all building windows.
  *
@@ -36,6 +35,9 @@
 struct Building_Window : public UI::Window {
 	friend struct TrainingSite_Window;
 	friend struct MilitarySite_Window;
+	enum {
+		Width = 4 * 34 //  4 normally sized buttons
+	};
 
 	Building_Window
 		(Interactive_GameBase & parent, Widelands::Building &, UI::Window * & registry);

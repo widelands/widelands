@@ -50,7 +50,6 @@ public:
 		 const Widelands::Tribe_Descr &,
 		 Widelands::WareWorker type,
 		 bool selectable,
-		 uint16_t max_height = 0,
 		 boost::function<void(Widelands::Ware_Index, bool)> callback_function = 0,
 		 bool horizontal = false);
 
@@ -90,8 +89,6 @@ protected:
 private:
 	typedef std::vector<const Widelands::WareList *> vector_type;
 	typedef std::vector<bool> selection_type;
-	Widelands::Tribe_Descr::WaresOrder m_wares_order;
-	Widelands::Tribe_Descr::WaresOrderCoords m_wares_order_coords;
 
 	/**
 	 * Update the anchored selection. When first mouse button is
@@ -134,7 +131,7 @@ public:
 		 int32_t x, int32_t y,
 		 const Widelands::Tribe_Descr &,
 		 Widelands::WareWorker type,
-		 bool selectable, uint16_t max_height = 0);
+		 bool selectable);
 
 	virtual ~WaresDisplay();
 

@@ -233,7 +233,7 @@ struct Tribe_Descr : boost::noncopyable {
 		return m_workers_order_coords;
 	}
 
-	std::pair<WaresOrder, WaresOrderCoords> get_resized_ware_orders(size_t maxLength);
+	void resize_ware_orders(size_t maxLength);
 
 	const std::vector<std::string> & compatibility_immovable(const std::string & name) const;
 
