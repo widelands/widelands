@@ -81,7 +81,6 @@ AbstractWaresDisplay::AbstractWaresDisplay
 		max_height -= 20; // Keep place for the cur selection label
 	}
 	int number = max_height / (WARE_MENU_PIC_HEIGHT + WARE_MENU_INFO_SIZE + WARE_MENU_PIC_PAD_Y);
-	log("Cropping ware height to max %d\n", max_height);
 	std::pair<Widelands::Tribe_Descr::WaresOrder, Widelands::Tribe_Descr::WaresOrderCoords> ware_order =
 		const_cast<Widelands::Tribe_Descr &>(m_tribe).get_resized_ware_orders(number);
 	m_wares_order = ware_order.first;

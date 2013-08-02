@@ -45,7 +45,7 @@ static const char pic_policy_remove[] = "pics/stock_policy_remove.png";
 class WarehouseWaresDisplay : public WaresDisplay {
 public:
 	WarehouseWaresDisplay
-		(UI::Panel * parent, uint32_t width, uint16_t max_width,
+		(UI::Panel * parent, uint32_t width, uint16_t max_height,
 		 Warehouse & wh, Widelands::WareWorker type, bool selectable);
 
 protected:
@@ -56,10 +56,10 @@ private:
 };
 
 WarehouseWaresDisplay::WarehouseWaresDisplay
-	(UI::Panel * parent, uint32_t width, uint16_t max_width,
+	(UI::Panel * parent, uint32_t width, uint16_t max_height,
 	 Warehouse & wh, Widelands::WareWorker type, bool selectable)
 :
-WaresDisplay(parent, 0, 0, wh.owner().tribe(), type, selectable, max_width),
+WaresDisplay(parent, 0, 0, wh.owner().tribe(), type, selectable, max_height),
 m_warehouse(wh)
 {
 	set_inner_size(width, 0);
@@ -184,8 +184,8 @@ Warehouse_Window::Warehouse_Window
 	 UI::Window *         & registry)
 	: Building_Window(parent, wh, registry)
 {
-	uint16_t wares_max_height = g_gr->get_yres() - 10 // safe margein
-		- 3 * 34; // tabs + 2 rows of buttons and a label
+	uint16_t wares_max_height = g_gr->get_yres() - 10 // safe margin
+		- 3 * 34; // tabs + 2 rows of buttons
 	get_tabs()->add
 		("wares",
 		 g_gr->images().get(pic_tab_wares),
