@@ -240,6 +240,7 @@ void Fullscreen_Menu_LoadGame::map_selected(uint32_t selected)
 		// Load the new one
 		if (!minimap_path.empty()) {
 			try {
+				// NOCOM(#cghislai): you leak ill here
 				ImageLoaderImpl* ill = new ImageLoaderImpl();
 				Surface * surf = ill->load(minimap_path);
 				const Image* im = new_in_memory_image("minimap", surf);

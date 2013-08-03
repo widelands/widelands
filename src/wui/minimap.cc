@@ -74,6 +74,7 @@ void MiniMap::View::draw(RenderTarget & dst)
 				Point((m_viewx - get_w() / 2), (m_viewy - get_h() / 2)),
 			*m_flags);
 	// Give ownership of the surface to the new image
+	// NOCOM(#cghislai): why not unique_ptr? explicit deletes tend to get deleted by accident, smart pointers always do their job.
 	const Image* im = new_in_memory_image("minimap", surface.release());
 	dst.blit(Point(), im);
 	delete im;

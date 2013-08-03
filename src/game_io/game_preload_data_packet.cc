@@ -149,18 +149,19 @@ void Game_Preload_Data_Packet::Write
 	if (!game.is_loaded()) {
 		return;
 	}
+	// NOCOM(#cghislai): how about pulling this out into a function? Feels weird here and might be useful in the future again.
 	MiniMapRenderer mmr;
-	uint32_t flags = MiniMap::Owner;
-	flags |= MiniMap::Bldns;
-	flags |= MiniMap::Terrn;
+	const uint32_t flags = MiniMap::Owner | MiniMap::Bldns | MiniMap::Terrn;
 	// map dimension
-	int16_t map_w = game.get_map()->get_width();
-	int16_t map_h = game.get_map()->get_height();
+	const int16_t map_w = game.get_map()->get_width();
+	const int16_t map_h = game.get_map()->get_height();
 	const int32_t maxx = MapviewPixelFunctions::get_map_end_screen_x(map);
 	const int32_t maxy = MapviewPixelFunctions::get_map_end_screen_y(map);
 	// viewpt topleft in pixels
+	// NOCOM(#cghislai): what are you doing here? vp == viewpt or not? you never use vp again.
 	Point vp = ipl->get_viewpoint();
 	Point viewpt(vp.x, vp.y);
+	// NOCOM(#cghislai): diving by 2 is more readable and the compiler will optimize it too.
 	viewpt.x += ipl->get_w() >> 1;
 	if (viewpt.x >= maxx)
 		viewpt.x -= maxx;
@@ -174,7 +175,9 @@ void Game_Preload_Data_Packet::Write
 	// render minimap
 	std::unique_ptr<Surface> surface = mmr.get_minimap_image
 		(ipl->egbase(), &ipl->player(), Rect(0, 0, map_w, map_h), viewpt, flags);
+	// NOCOM(#cghislai): im can be a unique_ptr too. this usage of in memory image is perfectly safe too.
 	const Image* im = new_in_memory_image("minimap", surface.get());
+	// NOCOM(#cghislai): sw can be a unique_ptr too
 	::StreamWrite* sw = fs.OpenStreamWrite(MINIMAP_FILENAME);
 	g_gr->save_png(im, sw);
 	delete sw;

@@ -41,8 +41,9 @@
 using namespace Widelands;
 
 /**
- * Renders a minimap and return a poitner to the created surface.
+ * Renders a minimap and return a pointer to the created surface.
  */
+// NOCOM(#cghislai): same comment as below about smart pointer return.
 std::unique_ptr<Surface> MiniMapRenderer::get_minimap_image
 	(const Editor_Game_Base& egbase, const Player* player, Rect rect, Point viewpoint, uint32_t flags)
 {
@@ -317,6 +318,7 @@ Draw a minimap into the given rectangle of the bitmap.
 viewpt is the field at the top left of the rectangle.
 ===============
 */
+// NOCOM(#cghislai): imho you should not pass around smart pointers. ownership is more explicit if you pass pointers directly - then there is only ever one smart_pointer which defines ownership. Here, I would just return the created object - the caller will always be interested in the returned object as there are no side effects.
 std::unique_ptr<Surface> MiniMapRenderer::draw_minimap
 	(const Widelands::Editor_Game_Base &       egbase,
 	 Widelands::Player           const * const player,
