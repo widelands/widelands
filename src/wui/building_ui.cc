@@ -57,7 +57,7 @@ void Building::show_options(Interactive_GameBase & igbase, bool avoid_fastclick,
  */
 void Building::hide_options()
 {
-	BOOST_FOREACH(boost::signals::connection& c, options_window_connections)
+	BOOST_FOREACH(boost::signals2::connection& c, options_window_connections)
 		c.disconnect();
 	delete m_optionswindow;
 	m_optionswindow = nullptr;

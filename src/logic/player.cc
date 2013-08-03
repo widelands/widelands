@@ -20,7 +20,7 @@
 #include "logic/player.h"
 
 #include <boost/bind.hpp>
-#include <boost/signal.hpp>
+#include <boost/signals2.hpp>
 
 #include "economy/economy.h"
 #include "economy/flag.h"

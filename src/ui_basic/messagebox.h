@@ -20,7 +20,7 @@
 #ifndef UI_MESSAGEBOX_H
 #define UI_MESSAGEBOX_H
 
-#include <boost/signal.hpp>
+#include <boost/signals2.hpp>
 
 #include "align.h"
 #include "ui_basic/window.h"
@@ -61,9 +61,9 @@ struct WLMessageBox : public Window {
 		 Align = Align_Center);
 	~WLMessageBox();
 
-	boost::signal<void ()> ok;
-	boost::signal<void ()> yes;
-	boost::signal<void ()> no;
+	boost::signals2::signal<void ()> ok;
+	boost::signals2::signal<void ()> yes;
+	boost::signals2::signal<void ()> no;
 
 	bool handle_mousepress  (Uint8 btn, int32_t mx, int32_t my);
 	bool handle_mouserelease(Uint8 btn, int32_t mx, int32_t my);

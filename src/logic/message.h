@@ -21,7 +21,7 @@
 #define MESSAGE_H
 
 #include <string>
-#include <boost/signal.hpp>
+#include <boost/signals2.hpp>
 
 #include "logic/widelands.h"
 #include "logic/widelands_geometry.h"

@@ -20,7 +20,7 @@
 #ifndef MINIMAP_H
 #define MINIMAP_H
 
-#include <boost/signal.hpp>
+#include <boost/signals2.hpp>
 
 #include "ui_basic/button.h"
 #include "ui_basic/unique_window.h"
@@ -36,7 +36,7 @@ struct MiniMap : public UI::UniqueWindow {
 
 	MiniMap(Interactive_Base & parent, Registry *);
 
-	boost::signal<void (int32_t, int32_t)> warpview;
+	boost::signals2::signal<void (int32_t, int32_t)> warpview;
 
 	void set_view_pos(int32_t const x, int32_t const y) {
 		m_view.set_view_pos(x, y);

@@ -117,7 +117,7 @@ if (WL_UNIT_TESTS)
   set (Boost_FIND_COMPONENTS unit_test_framework signals)
   set (Boost_USE_MULTITHREADED ON)
   set (Boost_DETAILED_FAILURE_MSG ON)
-  find_package(Boost 1.35.0 COMPONENTS unit_test_framework signals REQUIRED)
+  find_package(Boost 1.46.1 COMPONENTS unit_test_framework signals REQUIRED)
 
   if (NOT DEFINED MSVC)
   # If boost unit test library is linked dynamically, BOOST_TEST_DYN_LINK must be defined
@@ -150,7 +150,7 @@ else (WL_UNIT_TESTS)
   endif(DEFINED MSVC)
   set (Boost_USE_MULTITHREADED ON)
   set (Boost_DETAILED_FAILURE_MSG ON)
-  find_package(Boost 1.35.0 COMPONENTS signals REQUIRED)
+  find_package(Boost 1.46.1 COMPONENTS signals REQUIRED)
 endif (WL_UNIT_TESTS)
 
 option (WL_STRICT "If strict compilation mode is requested (almost every warning is an error)" OFF)

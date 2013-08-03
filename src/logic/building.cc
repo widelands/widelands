@@ -448,7 +448,7 @@ void Building::cleanup(Editor_Game_Base & egbase)
 
 	PlayerImmovable::cleanup(egbase);
 
-	BOOST_FOREACH(boost::signals::connection& c, options_window_connections)
+	BOOST_FOREACH(boost::signals2::connection& c, options_window_connections)
 		c.disconnect();
 }
 
