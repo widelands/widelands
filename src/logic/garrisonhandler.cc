@@ -125,10 +125,9 @@ void GarrisonHandler::act(Game& game)
 	} else {
 		// If we may issue a new upgrade request
 		int32_t time_since_last_swap = (timeofgame - m_last_swap_soldiers_time);
-		if (time_since_last_swap > GARRISON_SWAP_TIMEOUT
-			|| (!full && !m_normal_soldier_request)
-		) {
+		if (time_since_last_swap > GARRISON_SWAP_TIMEOUT){
 			time_since_last_swap = timeofgame;
+			update_soldier_request();
 		}
 	}
 
