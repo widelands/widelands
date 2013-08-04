@@ -50,7 +50,8 @@ Request::Request
 	(PlayerImmovable & _target,
 	 Ware_Index const index,
 	 callback_t const cbfn,
-	 WareWorker const w)
+	 WareWorker const w,
+	 std::function<void(Worker*)> const transfer_cb)
 	:
 	m_type             (w),
 	m_target           (_target),
@@ -62,6 +63,7 @@ Request::Request
 	m_index            (index),
 	m_count            (1),
 	m_callbackfn       (cbfn),
+	m_transfer_cb      (transfer_cb),
 	m_required_time    (_target.owner().egbase().get_gametime()),
 	m_required_interval(0),
 	m_last_request_time(m_required_time)
@@ -486,6 +488,9 @@ void Request::start_transfer(Game & game, Supply & supp)
 		Worker & s = supp.launch_worker(game, *this);
 		ss.Unsigned32(s.serial());
 		t = new Transfer(game, *this, s);
+		if (m_transfer_cb) {
+			m_transfer_cb(&s);
+		}
 	} else {
 		//  Begin the transfer of an item. The item itself is passive.
 		//  launch_item() ensures the WareInstance is transported out of the
@@ -543,6 +548,9 @@ void Request::transfer_fail(Game &, Transfer & t) {
 
 	if (!wasopen)
 		m_economy->add_request(*this);
+	if (m_transfer_cb) {
+		m_transfer_cb(nullptr);
+	}
 }
 
 /// Cancel the transfer with the given index.

@@ -20,6 +20,8 @@
 #ifndef REQUEST_H
 #define REQUEST_H
 
+#include <functional>
+
 #include "logic/requirements.h"
 #include "logic/wareworker.h"
 #include "logic/widelands.h"
@@ -64,7 +66,8 @@ struct Request : public Trackable {
 	typedef void (*callback_t)
 		(Game &, Request &, Ware_Index, Worker *, PlayerImmovable &);
 
-	Request(PlayerImmovable & target, Ware_Index, callback_t, WareWorker);
+	Request(PlayerImmovable & target, Ware_Index, callback_t, WareWorker,
+			  std::function<void(Worker*)> transfer_cb = nullptr);
 	~Request();
 
 	PlayerImmovable & target() const throw () {return m_target;}
@@ -128,6 +131,7 @@ private:
 	uint32_t          m_count;             //  how many do we need in total
 
 	callback_t        m_callbackfn;        //  called on request success
+	std::function<void(Worker*)> m_transfer_cb; // called on worker transfer start/cancel
 
 	//  when do we need the first ware (can be in the past)
 	int32_t           m_required_time;
