@@ -520,7 +520,7 @@ Cmd_MilitarySiteSetSoldierPreference::Cmd_MilitarySiteSetSoldierPreference (Stre
 PlayerCommand (0, des.Unsigned8())
 {
 	serial = des.Unsigned32();
-	preference = des.Unsigned8();
+	preference = static_cast<Garrison::SoldierPref>(des.Unsigned8());
 }
 
 void Cmd_MilitarySiteSetSoldierPreference::serialize (StreamWrite & ser)
@@ -528,7 +528,7 @@ void Cmd_MilitarySiteSetSoldierPreference::serialize (StreamWrite & ser)
 	ser.Unsigned8 (PLCMD_MILITARYSITESETSOLDIERPREFERENCE);
 	ser.Unsigned8 (sender());
 	ser.Unsigned32(serial);
-	ser.Unsigned8 (preference);
+	ser.Unsigned8 (static_cast<uint8_t>(preference));
 }
 
 void Cmd_MilitarySiteSetSoldierPreference::execute (Game & game)
@@ -549,7 +549,7 @@ void Cmd_MilitarySiteSetSoldierPreference::Write
 
 	// Now serial
 	const Map_Object & obj = *egbase.objects().get_object(serial);
-	fw.Unsigned8(preference);
+	fw.Unsigned8(static_cast<uint8_t>(preference));
 	fw.Unsigned32(mos.get_object_file_index(obj));
 }
 
@@ -561,7 +561,7 @@ void Cmd_MilitarySiteSetSoldierPreference::Read
 		const uint16_t packet_version = fr.Unsigned16();
 		if (packet_version == PLAYER_CMD_SOLDIERPREFERENCE_VERSION) {
 			PlayerCommand::Read(fr, egbase, mol);
-			preference = fr.Unsigned8();
+			preference = static_cast<Garrison::SoldierPref>(fr.Unsigned8());
 			const uint32_t building_serial = fr.Unsigned32();
 			try {
 				serial = mol.get<Map_Object>(building_serial).serial();
@@ -1607,8 +1607,8 @@ void Cmd_ChangeSoldierCapacity::execute (Game & game)
 {
 	if (upcast(Building, building, game.objects().get_object(serial)))
 		if (&building->owner() == game.get_player(sender()))
-			if (upcast(SoldierControl, ctrl, building))
-				ctrl->changeSoldierCapacity(val);
+			if (upcast(GarrisonOwner, go, building))
+				go->get_garrison()->changeSoldierCapacity(val);
 }
 
 void Cmd_ChangeSoldierCapacity::serialize (StreamWrite & ser)

@@ -196,7 +196,7 @@ private:
 
 struct Cmd_MilitarySiteSetSoldierPreference : public PlayerCommand {
 	Cmd_MilitarySiteSetSoldierPreference() : PlayerCommand(), serial(0) {} // For savegame loading
-	Cmd_MilitarySiteSetSoldierPreference (const int32_t t, const Player_Number p, Building & b, uint8_t prefs)
+	Cmd_MilitarySiteSetSoldierPreference (const int32_t t, const Player_Number p, Building & b, Garrison::SoldierPref prefs)
 		: PlayerCommand(t, p), serial(b.serial()), preference(prefs)
 	{}
 
@@ -212,7 +212,7 @@ struct Cmd_MilitarySiteSetSoldierPreference : public PlayerCommand {
 
 private:
 	Serial serial;
-	uint8_t preference;
+	Garrison::SoldierPref preference;
 };
 struct Cmd_StartOrCancelExpedition : public PlayerCommand {
 	Cmd_StartOrCancelExpedition() : PlayerCommand() {} // For savegame loading

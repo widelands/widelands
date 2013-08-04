@@ -21,12 +21,11 @@
 
 #include "graphic/graphic.h"
 #include "logic/player.h"
-#include "logic/soldiercontrol.h"
 #include "ui_basic/button.h"
 #include "ui_basic/radiobutton.h"
 #include "wui/interactive_gamebase.h"
 
-using Widelands::SoldierControl;
+using Widelands::Garrison;
 
 /**
  * Widget to control the capacity of \ref MilitaryBuilding and \ref TrainingSite
@@ -86,16 +85,16 @@ m_value(this, "199", UI::Align_Center)
 
 void SoldierCapacityControl::think()
 {
-	SoldierControl * soldiers = dynamic_cast<SoldierControl *>(&m_building);
-	uint32_t const capacity = soldiers->soldierCapacity();
+	Garrison * garrison = dynamic_cast<Widelands::GarrisonOwner *>(&m_building)->get_garrison();
+	uint32_t const capacity = garrison->soldierCapacity();
 	char buffer[sizeof("4294967295")];
 
 	sprintf(buffer, "%2u", capacity);
 	m_value.set_text(buffer);
 
 	bool const can_act = m_igb.can_act(m_building.owner().player_number());
-	m_decrease.set_enabled(can_act && soldiers->minSoldierCapacity() < capacity);
-	m_increase.set_enabled(can_act && soldiers->maxSoldierCapacity() > capacity);
+	m_decrease.set_enabled(can_act && garrison->minSoldierCapacity() < capacity);
+	m_increase.set_enabled(can_act && garrison->maxSoldierCapacity() > capacity);
 }
 
 void SoldierCapacityControl::change_soldier_capacity(int delta)

@@ -22,7 +22,6 @@
 
 #include <list>
 
-#include "logic/attackable.h"
 #include "logic/player.h"
 #include "ui_basic/box.h"
 #include "ui_basic/button.h"

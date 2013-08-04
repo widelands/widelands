@@ -26,6 +26,10 @@
 
 namespace Widelands {
 
+class Garrison;
+
+class Garrison;
+
 class ConstructionSite;
 class Partially_Finished_Building;
 class DismantleSite;
@@ -65,6 +69,8 @@ private:
 		(ProductionSite         &, FileRead  &, Game &, Map_Map_Object_Loader &);
 	virtual void read_formerbuildings_v2
 		(Building               &, FileRead  &, Game &, Map_Map_Object_Loader &);
+	virtual void read_garrison
+		(Garrison        &, FileRead  &, Game &, Map_Map_Object_Loader &);
 
 	virtual void write_constructionsite
 		(const ConstructionSite &, FileWrite &, Game &, Map_Map_Object_Saver  &);
@@ -80,6 +86,8 @@ private:
 		(const TrainingSite     &, FileWrite &, Game &, Map_Map_Object_Saver  &);
 	virtual void write_productionsite
 		(const ProductionSite   &, FileWrite &, Game &, Map_Map_Object_Saver  &);
+	virtual void write_garrison
+	   (const Garrison   &, FileWrite &, Game &, Map_Map_Object_Saver  &);
 };
 
 }

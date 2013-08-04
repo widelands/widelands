@@ -577,7 +577,7 @@ void DefaultAI::update_buildable_field
 
 					if (v > 0)
 						field.military_influence +=
-							v * v * militarysite->soldierCapacity();
+							v * v * militarysite->get_garrison()->soldierCapacity();
 				}
 
 				if (dynamic_cast<const ProductionSite *>(building))
@@ -626,7 +626,7 @@ void DefaultAI::update_buildable_field
 
 					if (v > 0)
 						field.military_influence +=
-							v * v * militarysite->soldierCapacity();
+							v * v * militarysite->get_garrison()->soldierCapacity();
 				}
 			}
 		}
@@ -1883,10 +1883,10 @@ bool DefaultAI::check_militarysites(int32_t gametime)
 		// as long as it is > 1 - BUT take care that there is a warehouse in the
 		// same economy where the thrown out soldiers can go to.
 		if (ms->economy().warehouses().size()) {
-			uint32_t const j = ms->soldierCapacity();
-			if (MilitarySite::kPrefersRookies != ms->get_soldier_preference())
+			uint32_t const j = ms->get_garrison()->soldierCapacity();
+			if (Garrison::SoldierPref::Rookies != ms->get_garrison()->get_soldier_preference())
 			{
-					game().send_player_militarysite_set_soldier_preference(*ms, MilitarySite::kPrefersRookies);
+					game().send_player_militarysite_set_soldier_preference(*ms, Garrison::SoldierPref::Rookies);
 			}
 			else
 			if (j > 1)
@@ -1912,7 +1912,7 @@ bool DefaultAI::check_militarysites(int32_t gametime)
 						// the destruction of the flag avoids that defaultAI will have
 						// too many unused roads - if needed the road will be rebuild
 						// directly.
-						if (static_cast<int32_t>(ms->maxSoldierCapacity() * 4) < bf.military_influence) {
+						if (static_cast<int32_t>(ms->get_garrison()->maxSoldierCapacity() * 4) < bf.military_influence) {
 							if (ms->get_playercaps() & Widelands::Building::PCap_Dismantle) {
 								flags_to_be_removed.push_back(ms->base_flag().get_position());
 								game().send_player_dismantle(*ms);
@@ -1964,12 +1964,12 @@ bool DefaultAI::check_militarysites(int32_t gametime)
 	} else {
 		// If an enemy is in sight and the number of stationed soldier is not
 		// at maximum - set it to maximum.
-		uint32_t const j = ms->maxSoldierCapacity();
-		uint32_t const k = ms->soldierCapacity();
+		uint32_t const j = ms->get_garrison()->maxSoldierCapacity();
+		uint32_t const k = ms->get_garrison()->soldierCapacity();
 		if (j > k)
 			game().send_player_change_soldier_capacity(*ms, j - k);
-		if (MilitarySite::kPrefersHeroes != ms->get_soldier_preference())
-			game().send_player_militarysite_set_soldier_preference(*ms, MilitarySite::kPrefersHeroes);
+		if (Garrison::SoldierPref::Heroes != ms->get_garrison()->get_soldier_preference())
+			game().send_player_militarysite_set_soldier_preference(*ms, Garrison::SoldierPref::Heroes);
 		changed = true;
 	}
 	reorder:;
@@ -2314,14 +2314,14 @@ bool DefaultAI::consider_attack(int32_t const gametime) {
 		if (upcast(MilitarySite, bld, immovables.at(j).object)) {
 			if (!player->is_hostile(bld->owner()))
 				continue;
-			if (bld->canAttack()) {
+			if (bld->get_garrison()->canAttack()) {
 				int32_t ta = player->findAttackSoldiers(bld->base_flag());
 				if (type == NORMAL)
 					ta = ta * 2 / 3;
 				if (ta < 1)
 					continue;
 
-				int32_t const tc = ta - bld->presentSoldiers().size();
+				int32_t const tc = ta - bld->get_garrison()->presentSoldiers().size();
 				if (tc > chance) {
 					target = bld;
 					chance = tc;
@@ -2331,19 +2331,19 @@ bool DefaultAI::consider_attack(int32_t const gametime) {
 		} else if (upcast(Warehouse, wh, immovables.at(j).object)) {
 			if (!player->is_hostile(wh->owner()))
 				continue;
-			if (wh->canAttack()) {
-				int32_t ta = player->findAttackSoldiers(wh->base_flag());
-				if (ta < 1)
-					continue;
-
-				// extra priority push!
-				int32_t tc = ta * 2;
-				if (tc > chance) {
-					target = wh;
-					chance = tc;
-					attackers = ta;
-				}
-			}
+// 			if (wh->get_garrison()->canAttack()) {
+// 				int32_t ta = player->findAttackSoldiers(wh->base_flag());
+// 				if (ta < 1)
+// 					continue;
+//
+// 				// extra priority push!
+// 				int32_t tc = ta * 2;
+// 				if (tc > chance) {
+// 					target = wh;
+// 					chance = tc;
+// 					attackers = ta;
+// 				}
+// 			}
 		}
 
 	// Reenque militarysite at the end of list

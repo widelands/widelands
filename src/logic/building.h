@@ -258,6 +258,9 @@ public:
 	void set_defeating_player(Player_Number const player_number) {
 		m_defeating_player = player_number;
 	}
+	Player_Number get_defeating_player() {
+		return m_defeating_player;
+	}
 
 	void    add_worker(Worker &);
 	void remove_worker(Worker &);

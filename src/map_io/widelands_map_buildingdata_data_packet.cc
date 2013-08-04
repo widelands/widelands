@@ -56,13 +56,16 @@ namespace Widelands {
 
 // Subversions
 #define CURRENT_DISMANTLESITE_PACKET_VERSION    1
-// Since V3: m_prev_building not written
+// CSITE V3 (b18) m_prev_building not written
 #define CURRENT_CONSTRUCTIONSITE_PACKET_VERSION 3
 #define CURRENT_PARTIALLYFB_PACKET_VERSION      1
 #define CURRENT_WAREHOUSE_PACKET_VERSION        6
+// MILITARYSITE: V4 (b18) splitted garrison
 #define CURRENT_MILITARYSITE_PACKET_VERSION     4
 #define CURRENT_PRODUCTIONSITE_PACKET_VERSION   5
+// TRAININGSITE: V4 (b18) splitted garrison/upgrade request
 #define CURRENT_TRAININGSITE_PACKET_VERSION     4
+#define CURRENT_GARRISON_PACKET_VERSION         1
 
 
 void Map_Buildingdata_Data_Packet::Read
@@ -777,114 +780,61 @@ void Map_Buildingdata_Data_Packet::read_militarysite
 	try {
 		uint16_t const packet_version = fr.Unsigned16();
 		bool rel17comp = false;
-		if (3 == packet_version and 4 == CURRENT_MILITARYSITE_PACKET_VERSION)
+		if (3 == packet_version and 4 == CURRENT_MILITARYSITE_PACKET_VERSION) {
 			rel17comp = true;
-		if (packet_version == CURRENT_MILITARYSITE_PACKET_VERSION or rel17comp)
-		{
+		}
+		if (CURRENT_MILITARYSITE_PACKET_VERSION == 4 || rel17comp) {
 			read_productionsite(militarysite, fr, game, mol);
+			upcast(GarrisonHandler, gh, militarysite.get_garrison());
 
-			militarysite.m_normal_soldier_request.reset();
+			if (packet_version == CURRENT_MILITARYSITE_PACKET_VERSION) {
+				read_garrison(*gh, fr, game, mol);
+			} else if (rel17comp) {
+				gh->m_normal_soldier_request.reset();
+				if (fr.Unsigned8()) {
+					gh->m_normal_soldier_request.reset
+						(new Request
+							(militarysite,
+								Ware_Index::First(),
+								GarrisonHandler::request_soldier_callback,
+								wwWORKER));
+					gh->m_normal_soldier_request->Read(fr, game, mol);
+				}
 
-			if (fr.Unsigned8()) {
-				militarysite.m_normal_soldier_request.reset
-					(new Request
-						(militarysite,
-						 Ware_Index::First(),
-						 MilitarySite::request_soldier_callback,
-						 wwWORKER));
-				militarysite.m_normal_soldier_request->Read(fr, game, mol);
+				gh->m_upgrade_soldier_request.reset();
+
+				if ((gh->m_didconquer = fr.Unsigned8())) {
+					//  Add to map of military influence.
+					const Map & map = game.map();
+					Area<FCoords> a
+						(map.get_fcoords(militarysite.get_position()),
+							militarysite.get_conquers());
+					const Field & first_map_field = map[0];
+					Player::Field * const player_fields =
+						militarysite.owner().m_fields;
+					MapRegion<Area<FCoords> > mr(map, a);
+					do
+						player_fields[mr.location().field - &first_map_field]
+						.military_influence
+							+= map.calc_influence(mr.location(), Area<>(a, a.radius));
+					while (mr.advance(map));
+				}
+
+				//  capacity (modified by user)
+				gh->m_capacity = fr.Unsigned32();
+				gh->m_last_heal_time = fr.Signed32() - 1000;
+				// Release 17 compatibility branch. Some safe values.
+				gh->m_soldier_preference = Garrison::SoldierPref::Rookies;
+				if (2 < gh->m_capacity) {
+					gh->m_soldier_preference = Garrison::SoldierPref::Heroes;
+				}
+				gh->m_last_swap_soldiers_time = gh->m_last_heal_time;
+				gh->m_try_soldier_upgrade = false;
+				gh->m_doing_upgrade_request = false;
 			}
-			else
-				militarysite.m_normal_soldier_request.reset();
-
-			if (rel17comp) // compatibility with release 17 savegames
-				militarysite.m_upgrade_soldier_request.reset();
-			else
-			if (fr.Unsigned8())
-			{
-				militarysite.m_upgrade_soldier_request.reset
-					(new Request
-						(militarysite,
-						 (!militarysite.m_normal_soldier_request) ? Ware_Index::First()
-						: militarysite.descr().tribe().safe_worker_index("soldier"),
-						MilitarySite::request_soldier_callback,
-						wwWORKER));
-				militarysite.m_upgrade_soldier_request->Read(fr, game, mol);
-			}
-			else
-				militarysite.m_upgrade_soldier_request.reset();
-
-
-			if ((militarysite.m_didconquer = fr.Unsigned8())) {
-				//  Add to map of military influence.
-				const Map & map = game.map();
-				Area<FCoords> a
-					(map.get_fcoords(militarysite.get_position()),
-					 militarysite.get_conquers());
-				const Field & first_map_field = map[0];
-				Player::Field * const player_fields =
-					militarysite.owner().m_fields;
-				MapRegion<Area<FCoords> > mr(map, a);
-				do
-					player_fields[mr.location().field - &first_map_field]
-					.military_influence
-						+= map.calc_influence(mr.location(), Area<>(a, a.radius));
-				while (mr.advance(map));
-			}
-
-			//  capacity (modified by user)
-			militarysite.m_capacity = fr.Unsigned8();
-			militarysite.m_nexthealtime = fr.Signed32();
-			if (not (rel17comp)) // compatibility with release 17 savegames
-			{
-
-				uint16_t reqmin = fr.Unsigned16();
-				uint16_t reqmax = fr.Unsigned16();
-				militarysite.m_soldier_upgrade_requirements = RequireAttribute(atrTotal, reqmin, reqmax);
-				militarysite.m_soldier_preference = static_cast<MilitarySite::SoldierPreference>(fr.Unsigned8());
-				militarysite.m_next_swap_soldiers_time = fr.Signed32();
-				militarysite.m_soldier_upgrade_try = 0 != fr.Unsigned8() ? true : false;
-				militarysite.m_doing_upgrade_request = 0 != fr.Unsigned8() ? true : false;
-			}
-			else // Release 17 compatibility branch. Some safe values.
-			{
-				militarysite.m_soldier_preference = MilitarySite::kPrefersRookies;
-				if (2 < militarysite.m_capacity)
-					militarysite.m_soldier_preference = MilitarySite::kPrefersHeroes;
-				militarysite.m_next_swap_soldiers_time = militarysite.m_nexthealtime;
-				militarysite.m_soldier_upgrade_try = false;
-				militarysite.m_doing_upgrade_request = false;
-			}
-
-		} else
+		} else {
 			throw game_data_error
 				(_("unknown/unhandled version %u"), packet_version);
-
-		//  If the site's capacity is outside the allowed range (can happen if
-		//  the site's type's definition has changed), set the variable to the
-		//  nearest valid value.
-		//
-		//  This does not drop excessive soldiers, since they are not loaded into
-		//  the site yet. To do that we would have to do this change by adding a
-		//  Cmd_ChangeSoldierCapacity to the beginning of the game's command
-		//  queue. But that would not work because the command queue is not read
-		//  yet and will be cleared before it is read.
-		if        (militarysite.m_capacity < militarysite.minSoldierCapacity()) {
-			log
-				("WARNING: militarysite %u of player %u at (%i, %i) has capacity "
-				 "set to %u but it must be at least %u. Changing to that value.\n",
-				 militarysite.serial(), militarysite.owner().player_number(),
-				 militarysite.get_position().x, militarysite.get_position().y,
-				 militarysite.m_capacity, militarysite.minSoldierCapacity());
-			militarysite.m_capacity = militarysite.minSoldierCapacity();
-		} else if (militarysite.maxSoldierCapacity() < militarysite.m_capacity) {
-			log
-				("WARNING: militarysite %u of player %u at (%i, %i) has capacity "
-				 "set to %u but it can be at most %u. Changing to that value.\n",
-				 militarysite.serial(), militarysite.owner().player_number(),
-				 militarysite.get_position().x, militarysite.get_position().y,
-				 militarysite.m_capacity, militarysite.maxSoldierCapacity());
-			militarysite.m_capacity = militarysite.maxSoldierCapacity();
 		}
 	} catch (const _wexception & e) {
 		throw game_data_error(_("militarysite: %s"), e.what());
@@ -1176,28 +1126,30 @@ void Map_Buildingdata_Data_Packet::read_trainingsite
 		uint16_t const trainingsite_packet_version = fr.Unsigned16();
 
 		bool rel17comp = false; // compatibility with release 17
-		if (4 == CURRENT_TRAININGSITE_PACKET_VERSION && 3 == trainingsite_packet_version)
+		if (4 == CURRENT_TRAININGSITE_PACKET_VERSION && 3 == trainingsite_packet_version) {
 			rel17comp = true;
+		}
+		upcast(GarrisonHandler, gh, trainingsite.get_garrison());
 
-		if (trainingsite_packet_version == CURRENT_TRAININGSITE_PACKET_VERSION or rel17comp)
-		{
+		if (trainingsite_packet_version == CURRENT_TRAININGSITE_PACKET_VERSION || rel17comp) {
 			read_productionsite(trainingsite, fr, game, mol);
-
-			delete trainingsite.m_soldier_request;
-			trainingsite.m_soldier_request = 0;
-			if (fr.Unsigned8()) {
-				trainingsite.m_soldier_request =
-					new Request
-						(trainingsite,
-						 Ware_Index::First(),
-						 TrainingSite::request_soldier_callback,
-						 wwWORKER);
-				trainingsite.m_soldier_request->Read(fr, game, mol);
+			if (!rel17comp) {
+				read_garrison(*gh, fr, game, mol);
+			} else {
+				gh->m_normal_soldier_request.reset();
+				if (fr.Unsigned8()) {
+					Request* r = new Request
+							(trainingsite,
+							Ware_Index::First(),
+							GarrisonHandler::request_soldier_callback,
+							wwWORKER);
+					gh->m_normal_soldier_request.reset(r);
+					gh->m_normal_soldier_request->Read(fr, game, mol);
+				}
+				gh->m_capacity = fr.Unsigned8();
 			}
-
-			trainingsite.m_capacity = fr.Unsigned8();
 			trainingsite.m_build_heroes = fr.Unsigned8();
-
+			// UPgrades
 			uint8_t const nr_upgrades = fr.Unsigned8();
 			for (uint8_t i = 0; i < nr_upgrades; ++i) {
 				tAttribute attribute = static_cast<tAttribute>(fr.Unsigned8());
@@ -1216,9 +1168,8 @@ void Map_Buildingdata_Data_Packet::read_trainingsite
 					fr.Signed32();
 				}
 			}
-			// load premature kick-out state, was not in release 17..
-			if (not rel17comp)
-			{
+			if (!rel17comp) {
+				// load premature kick-out state, was not in release 17..
 				uint16_t mapsize = fr.Unsigned16();
 				while (mapsize)
 				{
@@ -1231,10 +1182,75 @@ void Map_Buildingdata_Data_Packet::read_trainingsite
 					trainingsite.training_failure_count[std::make_pair(traintype, trainlevel)] = t;
 				}
 			}
-		} else
+
+			if (rel17comp) {
+				// Check capacities
+				if        (gh->m_capacity < gh->minSoldierCapacity()) {
+					log
+						("WARNING: trainingsite %u of player %u at (%i, %i) has capacity "
+						"set to %u but it must be at least %u. Changing to that value.\n",
+						trainingsite.serial(), trainingsite.owner().player_number(),
+						trainingsite.get_position().x, trainingsite.get_position().y,
+						gh->m_capacity, gh->minSoldierCapacity());
+					gh->m_capacity = gh->minSoldierCapacity();
+				} else if (gh->maxSoldierCapacity() < gh->m_capacity) {
+					log
+						("WARNING: trainingsite %u of player %u at (%i, %i) has capacity "
+						"set to %u but it can be at most %u. Changing to that value.\n",
+						trainingsite.serial(), trainingsite.owner().player_number(),
+						trainingsite.get_position().x, trainingsite.get_position().y,
+						gh->m_capacity, gh->maxSoldierCapacity());
+					gh->m_capacity = gh->maxSoldierCapacity();
+				}
+			}
+		} else {
 			throw game_data_error
 				(_("unknown/unhandled version %u"), trainingsite_packet_version);
+		}
+	} catch (const _wexception & e) {
+		throw game_data_error(_("trainingsite: %s"), e.what());
+	}
+}
 
+void Map_Buildingdata_Data_Packet::read_garrison(Garrison& g, FileRead& fr, Game& game, Map_Map_Object_Loader& mor)
+{
+	try {
+		GarrisonHandler& gh = ref_cast<GarrisonHandler, Garrison>(g);
+		uint16_t paquet_version = fr.Unsigned16();
+		gh.m_min_capacity = fr.Unsigned32();
+		gh.m_max_capacity = fr.Unsigned32();
+		gh.m_capacity = fr.Unsigned32();
+		// FIXME CGH ensuire soldiers are added later
+		gh.m_passive = fr.Unsigned8() > 0;
+		gh.m_heal_per_second = fr.Unsigned32();
+		gh.m_last_heal_time = fr.Unsigned32();
+		gh.m_soldier_requirements.Read(fr, game, mor);
+		gh.m_soldier_upgrade_requirements = RequireAttribute
+			(atrTotal, fr.Unsigned32(), fr.Unsigned32());
+		if (fr.Unsigned8()) {
+			gh.m_normal_soldier_request.reset(new Request
+				(gh.m_building, Ware_Index::First(),
+					GarrisonHandler::request_soldier_callback,
+					wwWORKER));
+			gh.m_normal_soldier_request->Read(fr, game, mor);
+		}
+		if (fr.Unsigned8()) {
+			gh.m_upgrade_soldier_request.reset(new Request
+				(gh.m_building,
+					(!gh.m_normal_soldier_request) ? Ware_Index::First()
+						: gh.m_building.descr().tribe().safe_worker_index("soldier"),
+					GarrisonHandler::request_soldier_callback,
+					wwWORKER));
+			gh.m_upgrade_soldier_request->Read(fr, game, mor);
+		}
+		gh.m_conquer_radius = fr.Unsigned32();
+		gh.m_didconquer = fr.Unsigned8() > 0;
+		gh.m_soldier_preference = static_cast<Garrison::SoldierPref>(fr.Unsigned8());
+		gh.m_last_swap_soldiers_time = fr.Unsigned32();
+		gh.m_try_soldier_upgrade = fr.Unsigned8() > 0;
+		gh.m_doing_upgrade_request = fr.Unsigned8() > 0;
+
+		// Ensure capacity range
 		//  If the site's capacity is outside the allowed range (can happen if
 		//  the site's type's definition has changed), set the variable to the
 		//  nearest valid value.
@@ -1244,27 +1260,42 @@ void Map_Buildingdata_Data_Packet::read_trainingsite
 		//  Cmd_ChangeSoldierCapacity to the beginning of the game's command
 		//  queue. But that would not work because the command queue is not read
 		//  yet and will be cleared before it is read.
-		if        (trainingsite.m_capacity < trainingsite.minSoldierCapacity()) {
+		if (gh.m_capacity < gh.m_min_capacity) {
 			log
-				("WARNING: trainingsite %u of player %u at (%i, %i) has capacity "
-				 "set to %u but it must be at least %u. Changing to that value.\n",
-				 trainingsite.serial(), trainingsite.owner().player_number(),
-				 trainingsite.get_position().x, trainingsite.get_position().y,
-				 trainingsite.m_capacity, trainingsite.minSoldierCapacity());
-			trainingsite.m_capacity = trainingsite.minSoldierCapacity();
-		} else if (trainingsite.maxSoldierCapacity() < trainingsite.m_capacity) {
+				("WARNING: garrison %u of player %u at (%i, %i) has capacity "
+					"set to %u but it must be at least %u. Changing to that value.\n",
+					gh.m_building.serial(), gh.owner().player_number(),
+					gh.m_building.get_position().x, gh.m_building.get_position().y,
+					gh.m_capacity, gh.minSoldierCapacity());
+			gh.m_capacity = gh.minSoldierCapacity();
+		} else if (gh.maxSoldierCapacity() < gh.m_capacity) {
 			log
-				("WARNING: trainingsite %u of player %u at (%i, %i) has capacity "
-				 "set to %u but it can be at most %u. Changing to that value.\n",
-				 trainingsite.serial(), trainingsite.owner().player_number(),
-				 trainingsite.get_position().x, trainingsite.get_position().y,
-				 trainingsite.m_capacity, trainingsite.maxSoldierCapacity());
-			trainingsite.m_capacity = trainingsite.maxSoldierCapacity();
+				("WARNING: militarysite %u of player %u at (%i, %i) has capacity "
+					"set to %u but it can be at most %u. Changing to that value.\n",
+					gh.m_building.serial(), gh.owner().player_number(),
+					gh.m_building.get_position().x, gh.m_building.get_position().y,
+					gh.m_capacity, gh.maxSoldierCapacity());
+			gh.m_capacity = gh.maxSoldierCapacity();
 		}
-	} catch (const _wexception & e) {
-		throw game_data_error(_("trainingsite: %s"), e.what());
+		// Update map of military influence
+		if (gh.m_didconquer) {
+			const Map & map = game.map();
+			Area<FCoords> a
+				(map.get_fcoords(gh.m_building.get_position()), gh.m_conquer_radius);
+			const Field & first_map_field = map[0];
+			Player::Field * const player_fields = gh.owner().m_fields;
+			MapRegion<Area<FCoords> > mr(map, a);
+			do
+				player_fields[mr.location().field - &first_map_field]
+				.military_influence
+					+= map.calc_influence(mr.location(), Area<>(a, a.radius));
+			while (mr.advance(map));
+		}
+	} catch (const _wexception e) {
+		throw game_data_error(_("garrison: %s"), e.what());
 	}
 }
+
 
 
 void Map_Buildingdata_Data_Packet::Write
@@ -1569,42 +1600,7 @@ void Map_Buildingdata_Data_Packet::write_militarysite
 {
 	fw.Unsigned16(CURRENT_MILITARYSITE_PACKET_VERSION);
 	write_productionsite(militarysite, fw, game, mos);
-
-	if (militarysite.m_normal_soldier_request) {
-		fw.Unsigned8(1);
-		militarysite.m_normal_soldier_request->Write(fw, game, mos);
-	} else {
-		fw.Unsigned8(0);
-	}
-
-	if (militarysite.m_upgrade_soldier_request)
-	{
-		fw.Unsigned8(1);
-		militarysite.m_upgrade_soldier_request->Write(fw, game, mos);
-	}
-	else
-		fw.Unsigned8(0);
-
-
-	fw.Unsigned8(militarysite.m_didconquer);
-	fw.Unsigned8(militarysite.m_capacity);
-	fw.Signed32(militarysite.m_nexthealtime);
-
-	if (militarysite.m_normal_soldier_request)
-	{
-		if (militarysite.m_upgrade_soldier_request)
-			{
-				throw game_data_error
-				("Internal error in a MilitarySite -- cannot continue. Use previous autosave.");
-			}
-	}
-	fw.Unsigned16(militarysite.m_soldier_upgrade_requirements.getMin());
-	fw.Unsigned16(militarysite.m_soldier_upgrade_requirements.getMax());
-	fw.Unsigned8(militarysite.m_soldier_preference);
-	fw.Signed32(militarysite.m_next_swap_soldiers_time);
-	fw.Unsigned8(militarysite.m_soldier_upgrade_try ? 1 : 0);
-	fw.Unsigned8(militarysite.m_doing_upgrade_request ? 1 : 0);
-
+	write_garrison(*militarysite.get_garrison(), fw, game, mos);
 }
 
 
@@ -1696,17 +1692,8 @@ void Map_Buildingdata_Data_Packet::write_trainingsite
 	fw.Unsigned16(CURRENT_TRAININGSITE_PACKET_VERSION);
 
 	write_productionsite(trainingsite, fw, game, mos);
+	write_garrison(*trainingsite.get_garrison(), fw, game, mos);
 
-	//  requests
-
-	if (trainingsite.m_soldier_request) {
-		fw.Unsigned8(1);
-		trainingsite.m_soldier_request->Write(fw, game, mos);
-	} else {
-		fw.Unsigned8(0);
-	}
-
-	fw.Unsigned8(trainingsite.m_capacity);
 	fw.Unsigned8(trainingsite.m_build_heroes);
 
 	// upgrades
@@ -1736,4 +1723,49 @@ void Map_Buildingdata_Data_Packet::write_trainingsite
 
 	// DONE
 }
+
+void Map_Buildingdata_Data_Packet::write_garrison(const Garrison& gar, FileWrite& fw, Game& g, Map_Map_Object_Saver& mos)
+{
+	const GarrisonHandler& gh = ref_cast<const GarrisonHandler, const Garrison>(gar);
+	fw.Unsigned16(CURRENT_GARRISON_PACKET_VERSION);
+
+	fw.Unsigned32(gh.m_min_capacity);
+	fw.Unsigned32(gh.m_max_capacity);
+	fw.Unsigned32(gh.m_capacity);
+	// Soldiers
+	// FIXME CGH ensure it is not needed
+	fw.Unsigned8(gh.m_passive ? 1 : 0);
+	fw.Unsigned32(gh.m_heal_per_second);
+	fw.Unsigned32(gh.m_last_heal_time);
+	// requirements-requests
+	gh.m_soldier_requirements.Write(fw, g, mos);
+	fw.Unsigned32(gh.m_soldier_upgrade_requirements.getMin());
+	fw.Unsigned32(gh.m_soldier_upgrade_requirements.getMax());
+	if (gh.m_normal_soldier_request && gh.m_upgrade_soldier_request) {
+		throw game_data_error
+			("Internal error in a garrison -- cannot continue. Use previous autosave.");
+
+	}
+	if (gh.m_normal_soldier_request) {
+		fw.Unsigned8(1);
+		gh.m_normal_soldier_request->Write(fw, g, mos);
+	} else {
+		fw.Unsigned8(0);
+	}
+	if (gh.m_upgrade_soldier_request) {
+		fw.Unsigned8(1);
+		gh.m_upgrade_soldier_request->Write(fw, g, mos);
+	} else {
+		fw.Unsigned8(0);
+	}
+	//
+	fw.Unsigned32(gh.m_conquer_radius);
+	fw.Unsigned8(gh.m_didconquer ? 1 : 0);
+	// Jobs will be done by soldiers (i guess) //FIXME CGH
+	fw.Unsigned8(static_cast<uint8_t>(gh.m_soldier_preference));
+	fw.Unsigned32(gh.m_last_swap_soldiers_time);
+	fw.Unsigned8(gh.m_try_soldier_upgrade ? 1 : 0);
+	fw.Unsigned8(gh.m_doing_upgrade_request ? 1 : 0);
+}
+
 }

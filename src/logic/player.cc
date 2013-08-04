@@ -38,7 +38,6 @@
 #include "logic/militarysite.h"
 #include "logic/playercommand.h"
 #include "logic/soldier.h"
-#include "logic/soldiercontrol.h"
 #include "logic/trainingsite.h"
 #include "logic/tribe.h"
 #include "logic/warehouse.h"
@@ -699,11 +698,13 @@ void Player::start_or_cancel_expedition(Warehouse & wh) {
 
 void Player::military_site_set_soldier_preference(PlayerImmovable & imm, uint8_t m_soldier_preference)
 {
-	if (&imm.owner() == this)
-		if (upcast(MilitarySite, milsite, &imm))
-			milsite->set_soldier_preference(static_cast<MilitarySite::SoldierPreference>(m_soldier_preference));
+	if (&imm.owner() == this) {
+		if (upcast(GarrisonOwner, go, &imm)) {
+			Garrison* const garrison = go->get_garrison();
+			garrison->set_soldier_preference(static_cast<Garrison::SoldierPref>(m_soldier_preference));
+		}
+	}
 }
-
 
 /*
  * enhance this building, remove it, but give the constructionsite
@@ -861,8 +862,9 @@ void Player::drop_soldier(PlayerImmovable & imm, Soldier & soldier) {
 		return;
 	if (soldier.get_worker_type() != Worker_Descr::SOLDIER)
 		return;
-	if (upcast(SoldierControl, ctrl, &imm))
-		ctrl->dropSoldier(soldier);
+	if (upcast(GarrisonOwner, go, &imm)) {
+		go->get_garrison()->dropSoldier(soldier);
+	}
 }
 
 /*
@@ -920,9 +922,10 @@ uint32_t Player::findAttackSoldiers
 
 	container_iterate_const(std::vector<BaseImmovable *>, flags, i) {
 		const Flag * attackerflag = static_cast<Flag *>(*i.current);
-		const MilitarySite * ms = static_cast<MilitarySite *>(attackerflag->get_building());
-		std::vector<Soldier *> const present = ms->presentSoldiers();
-		uint32_t const nr_staying = ms->minSoldierCapacity();
+		GarrisonOwner * go = dynamic_cast<GarrisonOwner *>(attackerflag->get_building());
+		Garrison * garrison = go->get_garrison();
+		std::vector<Soldier *> const present = garrison->presentSoldiers();
+		uint32_t const nr_staying = garrison->minSoldierCapacity();
 		uint32_t const nr_present = present.size();
 		if (nr_staying < nr_present) {
 			uint32_t const nr_taken =
@@ -958,8 +961,8 @@ void Player::enemyflagaction
 		log("enemyflagaction: count is 0\n");
 	else if (is_hostile(flag.owner()))
 		if (Building * const building = flag.get_building())
-			if (upcast(Attackable, attackable, building))
-				if (attackable->canAttack()) {
+			if (upcast(GarrisonOwner, go, building))
+				if (go->get_garrison()->canAttack()) {
 					std::vector<Soldier *> attackers;
 					findAttackSoldiers(flag, &attackers, count);
 					assert(attackers.size() <= count);
@@ -969,10 +972,10 @@ void Player::enemyflagaction
 					retreat = std::min
 						(retreat, tribe().get_military_data().get_max_retreat());
 
-					container_iterate_const(std::vector<Soldier *>, attackers, i)
-						ref_cast<MilitarySite, PlayerImmovable>
-							(*(*i.current)->get_location(egbase()))
-						.sendAttacker(**i.current, *building, retreat);
+					container_iterate_const(std::vector<Soldier *>, attackers, i) {
+						upcast(GarrisonOwner, igo, (*i.current)->get_location(egbase()));
+						igo->get_garrison()->sendAttacker(**i.current, *building, retreat);
+					}
 				}
 }
 

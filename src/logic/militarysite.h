@@ -20,10 +20,10 @@
 #ifndef MILITARYSITE_H
 #define MILITARYSITE_H
 
-#include "logic/attackable.h"
+#include "logic/garrison.h"
+#include "logic/garrisonhandler.h"
 #include "logic/productionsite.h"
 #include "logic/requirements.h"
-#include "logic/soldiercontrol.h"
 
 namespace Widelands {
 
@@ -53,121 +53,39 @@ private:
 };
 
 class MilitarySite :
-	public ProductionSite, public SoldierControl, public Attackable
+	public ProductionSite, public GarrisonOwner
 {
 	friend struct Map_Buildingdata_Data_Packet;
 	MO_DESCR(MilitarySite_Descr);
 
 public:
-	// I assume elsewhere, that enum SoldierPreference fits to uint8_t.
-	enum SoldierPreference  : uint8_t {
-		kNoPreference,
-		kPrefersRookies,
-		kPrefersHeroes,
-	};
-
 	MilitarySite(const MilitarySite_Descr &);
 	virtual ~MilitarySite();
-
-	char const * type_name() const throw () {return "militarysite";}
-	virtual std::string get_statistics_string();
 
 	virtual void init(Editor_Game_Base &);
 	virtual void cleanup(Editor_Game_Base &);
 	virtual void act(Game &, uint32_t data);
 	virtual void remove_worker(Worker &);
 
+	char const * type_name() const throw () {return "militarysite";}
+	virtual std::string get_statistics_string();
+
 	virtual void set_economy(Economy *);
 	virtual bool get_building_work(Game &, Worker &, bool success);
 
-	// Begin implementation of SoldierControl
-	virtual std::vector<Soldier *> presentSoldiers() const;
-	virtual std::vector<Soldier *> stationedSoldiers() const;
-	virtual uint32_t minSoldierCapacity() const throw ();
-	virtual uint32_t maxSoldierCapacity() const throw ();
-	virtual uint32_t soldierCapacity() const;
-	virtual void setSoldierCapacity(uint32_t capacity);
-	virtual void dropSoldier(Soldier &);
-	virtual int incorporateSoldier(Editor_Game_Base & game, Soldier & s);
-	// End implementation of SoldierControl
-
-	// Begin implementation of Attackable
-	virtual Player & owner() const {return Building::owner();}
-	virtual bool canAttack();
-	virtual void aggressor(Soldier &);
-	virtual bool attack   (Soldier &);
-	// End implementation of Attackable
-
-	/**
-	 * Launch the given soldier on an attack towards the given
-	 * target building.
-	 */
-	void sendAttacker(Soldier &, Building &, uint8_t);
-
-	/// This methods are helper for use at configure this site.
-	void set_requirements  (const Requirements &);
-	void clear_requirements();
-	const Requirements & get_requirements () const {
-		return m_soldier_requirements;
-	}
-
-	void reinit_after_conqueration(Game &);
-
-	void update_soldier_request(bool i = false);
-
-	void set_soldier_preference(SoldierPreference);
-	SoldierPreference get_soldier_preference() const {
-			return m_soldier_preference;
-	}
+	// GarrisonOwner implementation
+	virtual Garrison* get_garrison() const;
+	virtual Building* get_building();
+	virtual void garrison_occupied();
+	virtual void garrison_lost(Game & game, Player_Number defeating, bool captured);
+   virtual void reinit_after_conqueral(Game& game);
 
 protected:
-	void conquer_area(Editor_Game_Base &);
-
 	virtual void create_options_window
 		(Interactive_GameBase &, UI::Window * & registry);
 
 private:
-	bool isPresent(Soldier &) const;
-	static void request_soldier_callback
-		(Game &, Request &, Ware_Index, Worker *, PlayerImmovable &);
-
-	Map_Object * popSoldierJob
-		(Soldier *, bool * stayhome = 0, uint8_t * retreat = 0);
-	bool haveSoldierJob(Soldier &);
-	bool military_presence_kept(Game &);
-	void informPlayer(Game &, bool discovered = false);
-	bool update_upgrade_requirements();
-	void update_normal_soldier_request();
-	void update_upgrade_soldier_request();
-	bool incorporateUpgradedSoldier(Editor_Game_Base & game, Soldier & s);
-	Soldier * find_least_suited_soldier();
-	bool drop_least_suited_soldier(bool new_has_arrived, Soldier * s);
-
-
-private:
-	Requirements m_soldier_requirements; // This is used to grab a bunch of soldiers: Anything goes
-	RequireAttribute m_soldier_upgrade_requirements; // This is used when exchanging soldiers.
-	std::unique_ptr<Request> m_normal_soldier_request;  // filling the site
-	std::unique_ptr<Request> m_upgrade_soldier_request; // seeking for better soldiers
-	bool m_didconquer;
-	uint32_t m_capacity;
-
-	/**
-	 * Next gametime where we should heal something.
-	 */
-	int32_t m_nexthealtime;
-
-	struct SoldierJob {
-		Soldier    * soldier;
-		Object_Ptr  enemy;
-		bool        stayhome;
-		uint8_t     retreat;
-	};
-	std::vector<SoldierJob> m_soldierjobs;
-	SoldierPreference m_soldier_preference;
-	int32_t m_next_swap_soldiers_time;
-	bool m_soldier_upgrade_try; // optimization -- if everybody is zero-level, do not downgrade
-	bool m_doing_upgrade_request;
+	std::unique_ptr<GarrisonHandler> m_garrison;
 };
 
 }

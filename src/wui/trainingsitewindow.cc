@@ -36,10 +36,6 @@ struct TrainingSite_Window : public ProductionSite_Window {
 	TrainingSite_Window
 		(Interactive_GameBase & parent, TrainingSite &, UI::Window * & registry);
 
-	TrainingSite & trainingsite() {
-		return ref_cast<TrainingSite, Widelands::Building>(building());
-	}
-
 protected:
 	virtual void create_capsbuttons(UI::Box * buttons);
 };
@@ -54,7 +50,7 @@ ProductionSite_Window  (parent, ts, registry)
 {
 	get_tabs()->add
 		("soldiers", g_gr->images().get(pic_tab_military),
-		 create_soldier_list(*get_tabs(), parent, trainingsite()),
+		 create_soldier_list(*get_tabs(), parent, ts),
 		 _("Soldiers in training"));
 }
 

@@ -20,10 +20,8 @@
 #ifndef WAREHOUSE_H
 #define WAREHOUSE_H
 
-#include "logic/attackable.h"
 #include "logic/building.h"
 #include "economy/request.h"
-#include "logic/soldiercontrol.h"
 #include "logic/wareworker.h"
 
 struct Interactive_Player;
@@ -65,7 +63,7 @@ private:
 };
 
 
-class Warehouse : public Building, public Attackable, public SoldierControl {
+class Warehouse : public Building{
 	friend struct PortDock;
 	friend struct Map_Buildingdata_Data_Packet;
 
@@ -145,23 +143,6 @@ public:
 	void insert_workers(Ware_Index, uint32_t count);
 	void remove_workers(Ware_Index, uint32_t count);
 
-	/* SoldierControl implementation */
-	std::vector<Soldier *> presentSoldiers() const;
-	std::vector<Soldier *> stationedSoldiers() const {
-		return presentSoldiers();
-	}
-	uint32_t minSoldierCapacity() const {return 0;}
-	uint32_t maxSoldierCapacity() const {return 4294967295U;}
-	uint32_t soldierCapacity() const {return maxSoldierCapacity();}
-	void setSoldierCapacity(uint32_t /* capacity */) {
-		throw wexception("Not implemented for a Warehouse!");
-	}
-	void dropSoldier(Soldier &) {
-		throw wexception("Not implemented for a Warehouse!");
-	}
-	int incorporateSoldier(Editor_Game_Base &, Soldier &);
-	int outcorporateSoldier(Editor_Game_Base &, Soldier &);
-
 	virtual bool fetch_from_flag(Game &);
 
 	uint32_t count_workers(const Game &, Ware_Index, const Requirements &);
@@ -182,13 +163,6 @@ public:
 
 	void enable_spawn(Game &, uint8_t worker_types_without_cost_index);
 	void disable_spawn(uint8_t worker_types_without_cost_index);
-
-	// Begin Attackable implementation
-	virtual Player & owner() const {return Building::owner();}
-	virtual bool canAttack();
-	virtual void aggressor(Soldier &);
-	virtual bool attack   (Soldier &);
-	// End Attackable implementation
 
 	virtual void receive_ware(Game &, Ware_Index ware);
 	virtual void receive_worker(Game &, Worker & worker);

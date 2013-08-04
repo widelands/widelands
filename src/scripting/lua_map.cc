@@ -245,12 +245,12 @@ int _WorkerEmployer::get_valid_workers(lua_State * L) {
  * _SoldierEmployer
  */
 int _SoldierEmployer::get_max_soldiers(lua_State * L) {
-	lua_pushuint32(L, get_sc(L, get_egbase(L))->maxSoldierCapacity());
+	lua_pushuint32(L, get_garrison(L, get_egbase(L))->maxSoldierCapacity());
 	return 1;
 }
 int _SoldierEmployer::get_soldiers(lua_State * L) {
 	Editor_Game_Base & egbase = get_egbase(L);
-	SoldierControl * sc = get_sc(L, egbase);
+	Garrison * sc = get_garrison(L, egbase);
 	const Tribe_Descr & tribe = get(L, egbase)->owner().tribe();
 
 	const Soldier_Descr & soldier_descr =  //  soldiers
@@ -266,7 +266,7 @@ int _SoldierEmployer::get_soldiers(lua_State * L) {
 }
 int _SoldierEmployer::set_soldiers(lua_State * L) {
 	Editor_Game_Base & egbase = get_egbase(L);
-	SoldierControl * sc = get_sc(L, egbase);
+	Garrison * garrison = get_garrison(L, egbase);
 	Building * building = get(L, egbase);
 	const Tribe_Descr & tribe = building->owner().tribe();
 
@@ -277,7 +277,7 @@ int _SoldierEmployer::set_soldiers(lua_State * L) {
 	SoldiersMap setpoints = m_parse_set_soldiers_arguments(L, soldier_descr);
 
 	// Get information about current soldiers
-	std::vector<Soldier *> curs = sc->stationedSoldiers();
+	std::vector<Soldier *> curs = garrison->stationedSoldiers();
 	SoldiersMap hist;
 	container_iterate (std::vector<Soldier * >, curs, s) {
 		SoldierDescr sd
@@ -305,7 +305,7 @@ int _SoldierEmployer::set_soldiers(lua_State * L) {
 		int d = sp->second - cur;
 		if (d < 0) {
 			while (d) {
-				std::vector<Soldier *> stationed_soldiers = sc->stationedSoldiers();
+				std::vector<Soldier *> stationed_soldiers = garrison->stationedSoldiers();
 				container_iterate_const(std::vector<Soldier *>, stationed_soldiers, s)
 				{
 					SoldierDescr is
@@ -315,7 +315,7 @@ int _SoldierEmployer::set_soldiers(lua_State * L) {
 						 (*s.current)->get_evade_level());
 
 					if (is == sp->first) {
-						sc->outcorporateSoldier(egbase, **s);
+						garrison->outcorporateSoldier(egbase, **s);
 						(*s.current)->remove(egbase);
 						++d;
 						break;
@@ -333,7 +333,7 @@ int _SoldierEmployer::set_soldiers(lua_State * L) {
 					(sp.current->first.hp, sp.current->first.at,
 					 sp.current->first.de, sp.current->first.ev);
 
-				if (sc->incorporateSoldier(egbase, soldier)) {
+				if (garrison->incorporateSoldier(egbase, soldier)) {
 					soldier.remove(egbase);
 					return report_error(L, "No space left for soldier!");
 				}
@@ -1693,7 +1693,7 @@ const MethodType<L_Warehouse> L_Warehouse::Methods[] = {
 	METHOD(L_Warehouse, get_wares),
 	METHOD(L_Warehouse, set_workers),
 	METHOD(L_Warehouse, get_workers),
-	METHOD(L_Warehouse, set_soldiers),
+	METHOD(L_Warehouse, set_soldiers), //FIXME CGH for headquarters
 	METHOD(L_Warehouse, get_soldiers),
 	{0, 0},
 };
@@ -1765,7 +1765,115 @@ WH_GET(worker, Worker);
  C METHODS
  ==========================================================
  */
+int L_Warehouse::get_soldiers(lua_State * L) {
+	Editor_Game_Base & egbase = get_egbase(L);
+	Game & game = get_game(L);
+	const Tribe_Descr & tribe = get(L, egbase)->owner().tribe();
+	Warehouse* wh = get(L, egbase);
+	const WareList& wl = wh->get_workers();
+	Ware_Index ware_idx = tribe.safe_worker_index("soldier");
+	uint16_t amount = wl.stock(ware_idx);
 
+	const Soldier_Descr & soldier_descr =  //  soldiers
+			 ref_cast<Soldier_Descr const, Worker_Descr const>
+						(*tribe.get_worker_descr(ware_idx));
+
+	std::vector<Soldier *> vec;
+	for (uint16_t i = 0 ;  i < amount ; i++) {
+		Worker& w = wh->launch_worker(game, ware_idx, Requirements());
+		upcast(Soldier, s, &w);
+		vec.push_back(s);
+	}
+	SoldiersList current_soldiers;
+	return m_handle_get_soldiers(L, soldier_descr, vec);
+}
+
+int L_Warehouse::set_soldiers(lua_State * L) {
+	Editor_Game_Base & egbase = get_egbase(L);
+	Game & game = get_game(L);
+	Warehouse * wh = get(L, egbase);
+	const Tribe_Descr & tribe = wh->owner().tribe();
+
+	const Soldier_Descr & soldier_descr =  //  soldiers
+		ref_cast<Soldier_Descr const, Worker_Descr const>
+			(*tribe.get_worker_descr(tribe.worker_index("soldier")));
+
+	const WareList& wl = wh->get_workers();
+	Ware_Index ware_idx = tribe.safe_worker_index("soldier");
+	uint16_t amount = wl.stock(ware_idx);
+	SoldiersMap setpoints = m_parse_set_soldiers_arguments(L, soldier_descr);
+
+	std::vector<Soldier *> vec;
+	for (uint16_t i = 0 ;  i < amount ; i++) {
+		Worker& w = wh->launch_worker(game, ware_idx, Requirements());
+		upcast(Soldier, s, &w);
+		vec.push_back(s);
+	}
+
+	// Get information about current soldiers
+	std::vector<Soldier *> curs = vec;
+	SoldiersMap hist;
+	container_iterate (std::vector<Soldier * >, curs, s) {
+		SoldierDescr sd
+			((*s.current)->get_hp_level(),
+			 (*s.current)->get_attack_level(),
+			 (*s.current)->get_defense_level(),
+			 (*s.current)->get_evade_level());
+
+		SoldiersMap::iterator i = hist.find(sd);
+		if (i == hist.end())
+			hist[sd] = 1;
+		else
+			i->second += 1;
+		if (not setpoints.count(sd))
+			setpoints[sd] = 0;
+	}
+
+	// Now adjust them
+	container_iterate_const(SoldiersMap, setpoints, sp) {
+		uint32_t cur = 0;
+		SoldiersMap::iterator i = hist.find(sp->first);
+		if (i != hist.end())
+			cur = i->second;
+
+		int d = sp->second - cur;
+		if (d < 0) {
+			while (d) {
+				std::vector<Soldier *> stationed_soldiers = vec;
+				container_iterate_const(std::vector<Soldier *>, stationed_soldiers, s)
+				{
+					SoldierDescr is
+						((*s.current)->get_hp_level(),
+						 (*s.current)->get_attack_level(),
+						 (*s.current)->get_defense_level(),
+						 (*s.current)->get_evade_level());
+
+					if (is == sp->first) {
+						Soldier* sol = *s.current;
+						sol->start_task_leavebuilding(game, true);
+						(*s.current)->remove(egbase);
+						++d;
+						break;
+					}
+				}
+			}
+		} else if (d > 0) {
+			for (; d; --d) {
+				Soldier & soldier =
+					ref_cast<Soldier, Worker>
+					(soldier_descr.create
+					 (egbase, wh->owner(), 0, wh->get_position()));
+
+				soldier.set_level
+					(sp.current->first.hp, sp.current->first.at,
+					 sp.current->first.de, sp.current->first.ev);
+
+				wh->incorporate_worker(egbase, soldier);
+			}
+		}
+	}
+	return 0;
+}
 
 /* RST
 ProductionSite

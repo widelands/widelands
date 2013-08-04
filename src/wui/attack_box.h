@@ -22,7 +22,6 @@
 
 #include <list>
 
-#include "logic/attackable.h"
 #include "logic/bob.h"
 #include "logic/player.h"
 #include "logic/soldier.h"

@@ -351,7 +351,7 @@ struct _SoldierEmployer : public L_HasSoldiers {
 
 	virtual Widelands::Building * get
 		(lua_State *, Widelands::Editor_Game_Base &) = 0;
-	virtual Widelands::SoldierControl * get_sc
+	virtual Widelands::Garrison * get_garrison
 		(lua_State *, Widelands::Editor_Game_Base &) = 0;
 };
 
@@ -417,7 +417,7 @@ public:
 
 
 class L_Warehouse : public L_Building,
-	public L_HasWares, public L_HasWorkers, public _SoldierEmployer
+	public L_HasWares, public L_HasWorkers, public L_HasSoldiers
 {
 public:
 	LUNA_CLASS_HEAD(L_Warehouse);
@@ -444,11 +444,14 @@ public:
 	 * C Methods
 	 */
 	CASTED_GET(Warehouse);
-	Widelands::SoldierControl * get_sc
-		(lua_State * L, Widelands::Editor_Game_Base & g)
-	{
-		return get(L, g);
-	}
+	// FIXME CGH to be put in headquarters
+// 	Widelands::Garrison * get_sc
+// 		(lua_State * L, Widelands::Editor_Game_Base & g)
+// 	{
+// 		return get(L, g);
+// 	}
+	virtual int set_soldiers(lua_State * L);
+	virtual int get_soldiers(lua_State * L);
 };
 
 
@@ -508,10 +511,10 @@ public:
 	 * C Methods
 	 */
 	CASTED_GET(MilitarySite);
-	Widelands::SoldierControl * get_sc
+	Widelands::Garrison * get_garrison
 		(lua_State * L, Widelands::Editor_Game_Base & g)
 	{
-		return get(L, g);
+		return get(L, g)->get_garrison();
 	}
 };
 
@@ -538,8 +541,10 @@ public:
 	 * C Methods
 	 */
 	CASTED_GET(TrainingSite);
-	Widelands::SoldierControl * get_sc
-		(lua_State * L, Widelands::Editor_Game_Base & g) {return get(L, g);}
+	Widelands::Garrison * get_garrison
+		(lua_State * L, Widelands::Editor_Game_Base & g) {
+			return get(L, g)->get_garrison();
+		}
 };
 
 class L_Bob : public L_MapObject {

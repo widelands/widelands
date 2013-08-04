@@ -20,7 +20,6 @@
 #include "logic/findimmovable.h"
 
 #include "economy/flag.h"
-#include "logic/attackable.h"
 #include "logic/immovable.h"
 #include "logic/militarysite.h"
 #include "upcast.h"
@@ -61,7 +60,8 @@ bool FindImmovablePlayerMilitarySite::accept(const BaseImmovable & imm) const {
 }
 
 bool FindImmovableAttackable        ::accept(const BaseImmovable & imm) const {
-	return dynamic_cast<Attackable const *>(&imm);
+	upcast(const GarrisonOwner, go, &imm);
+	return (go && go->get_garrison()->canAttack());
 }
 
 bool FindImmovableByDescr::accept(const BaseImmovable & baseimm) const {

@@ -21,12 +21,14 @@
 #define TRAININGSITE_H
 
 #include "logic/productionsite.h"
-#include "logic/soldiercontrol.h"
 #include "logic/tattribute.h"
+#include "garrison.h"
 
 struct TrainingSite_Window;
 
 namespace Widelands {
+
+class GarrisonHandler;
 
 struct TrainingSite_Descr : public ProductionSite_Descr {
 	TrainingSite_Descr
@@ -48,7 +50,7 @@ struct TrainingSite_Descr : public ProductionSite_Descr {
 	int32_t get_max_level(tAttribute) const;
 	int32_t get_max_stall() const;
 private:
-	//  FIXME These variables should be per soldier type. They should be in a
+	//  FIXME These variables should bper soldier type. They should be in a
 	//  FIXME struct and there should be a vector, indexed by Soldier_Index,
 	//  FIXME with that struct structs as element type.
 
@@ -95,7 +97,7 @@ private:
  *        surrounding strongholds, the training site will burn even if it
  *        contains soldiers!
  */
-class TrainingSite : public ProductionSite, public SoldierControl {
+class TrainingSite : public ProductionSite, public GarrisonOwner {
 	friend struct Map_Buildingdata_Data_Packet;
 	MO_DESCR(TrainingSite_Descr);
 	friend struct ::TrainingSite_Window;
@@ -138,17 +140,13 @@ public:
 	}
 
 	virtual void set_economy(Economy * e);
+	// Garrison implementation
+	virtual Garrison* get_garrison() const;
+	virtual Building* get_building();
+	virtual void garrison_occupied();
+	virtual void garrison_lost(Game& game, Player_Number defeating, bool captured);
+	virtual void reinit_after_conqueral(Game& game);
 
-	// Begin implementation of SoldierControl
-	virtual std::vector<Soldier *> presentSoldiers() const;
-	virtual std::vector<Soldier *> stationedSoldiers() const;
-	virtual uint32_t minSoldierCapacity() const throw ();
-	virtual uint32_t maxSoldierCapacity() const throw ();
-	virtual uint32_t soldierCapacity() const;
-	virtual void setSoldierCapacity(uint32_t capacity);
-	virtual void dropSoldier(Soldier &);
-	int incorporateSoldier(Editor_Game_Base &, Soldier &);
-	// End implementation of SoldierControl
 
 	int32_t get_pri(enum tAttribute atr);
 	void set_pri(enum tAttribute atr, int32_t prio);
@@ -165,10 +163,7 @@ protected:
 	virtual void program_end(Game &, Program_Result);
 
 private:
-	void update_soldier_request();
-	static void request_soldier_callback
-		(Game &, Request &, Ware_Index, Worker *, PlayerImmovable &);
-
+	void update_requirements();
 	void find_and_start_next_program(Game &);
 	void start_upgrade(Game &, Upgrade &);
 	void add_upgrade(tAttribute, const std::string & prefix);
@@ -179,27 +174,12 @@ private:
 	Upgrade * get_upgrade(tAttribute);
 
 private:
-	/// Open requests for soldiers. The soldiers can be under way or unavailable
-	Request * m_soldier_request;
-
-	/** The soldiers currently at the training site*/
-	std::vector<Soldier *> m_soldiers;
-
-	/** Number of soldiers that should be trained concurrently.
-	 * Equal or less to maximum number of soldiers supported by a training site.
-	 * There is no guarantee there really are m_capacity soldiers in the
-	 * building - some of them might still be under way or even not yet
-	 * available*/
-	uint32_t m_capacity;
-
-	/** True, \b always upgrade already experienced soldiers first, when possible
-	 * False, \b always upgrade inexperienced soldiers first, when possible */
-	bool m_build_heroes;
-
 	std::vector<Upgrade> m_upgrades;
 	Upgrade * m_current_upgrade;
+	bool m_build_heroes;
 
 	Program_Result m_result; /// The result of the last training program.
+	std::unique_ptr<GarrisonHandler> m_garrison;
 
 	// These are used for kicking out soldiers prematurely
 	static const uint32_t training_state_multiplier;
@@ -211,8 +191,6 @@ private:
 	TrainFailCount_t training_failure_count;
 	uint32_t max_stall_val;
 	void init_kick_state(const tAttribute&, const TrainingSite_Descr&);
-
-
 };
 
 }

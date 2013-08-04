@@ -26,10 +26,10 @@
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
 #include "logic/building.h"
+#include "logic/garrison.h"
 #include "logic/militarysite.h"
 #include "logic/player.h"
 #include "logic/soldier.h"
-#include "logic/soldiercontrol.h"
 #include "ui_basic/box.h"
 #include "ui_basic/button.h"
 #include "ui_basic/table.h"
@@ -39,7 +39,7 @@
 #include "wui/soldiercapacitycontrol.h"
 
 using Widelands::Soldier;
-using Widelands::SoldierControl;
+using Widelands::Garrison;
 
 /**
  * Iconic representation of soldiers, including their levels and current HP.
@@ -83,7 +83,7 @@ private:
 	};
 
 	Widelands::Editor_Game_Base & m_egbase;
-	SoldierControl & m_soldiers;
+	Widelands::Garrison & m_garrison;
 
 	SoldierFn m_mouseover_fn;
 	SoldierFn m_click_fn;
@@ -110,14 +110,14 @@ SoldierPanel::SoldierPanel
 :
 Panel(&parent, 0, 0, 0, 0),
 m_egbase(gegbase),
-m_soldiers(*dynamic_cast<SoldierControl *>(&building)),
+m_garrison(*dynamic_cast<Widelands::GarrisonOwner *>(&building)->get_garrison()),
 m_last_animate_time(0)
 {
 	Soldier::calc_info_icon_size(building.tribe(), m_icon_width, m_icon_height);
 	m_icon_width += 2 * IconBorder;
 	m_icon_height += 2 * IconBorder;
 
-	uint32_t maxcapacity = m_soldiers.maxSoldierCapacity();
+	uint32_t maxcapacity = m_garrison.maxSoldierCapacity();
 	if (maxcapacity <= MaxColumns) {
 		m_cols = maxcapacity;
 		m_rows = 1;
@@ -131,7 +131,7 @@ m_last_animate_time(0)
 	set_think(true);
 
 	// Initialize the icons
-	std::vector<Soldier *> soldierlist = m_soldiers.presentSoldiers();
+	std::vector<Soldier *> soldierlist = m_garrison.presentSoldiers();
 	uint32_t row = 0;
 	uint32_t col = 0;
 	container_iterate_const(std::vector<Soldier *>, soldierlist, sit) {
@@ -168,10 +168,10 @@ void SoldierPanel::set_click(const SoldierPanel::SoldierFn & fn)
 void SoldierPanel::think()
 {
 	bool changes = false;
-	uint32_t capacity = m_soldiers.soldierCapacity();
+	uint32_t capacity = m_garrison.soldierCapacity();
 
 	// Update soldier list and target row/col:
-	std::vector<Soldier *> soldierlist = m_soldiers.presentSoldiers();
+	std::vector<Soldier *> soldierlist = m_garrison.presentSoldiers();
 	std::vector<uint32_t> row_occupancy;
 	row_occupancy.resize(m_rows);
 
@@ -277,7 +277,7 @@ void SoldierPanel::think()
 void SoldierPanel::draw(RenderTarget & dst)
 {
 	// Fill a region matching the current site capacity with black
-	uint32_t capacity = m_soldiers.soldierCapacity();
+	uint32_t capacity = m_garrison.soldierCapacity();
 	uint32_t fullrows = capacity / MaxColumns;
 
 	if (fullrows)
@@ -362,7 +362,7 @@ struct SoldierList : UI::Box {
 		 Interactive_GameBase & igb,
 		 Widelands::Building & building);
 
-	SoldierControl & soldiers() const;
+	Garrison & garrison() const;
 
 private:
 	void mouseover(const Soldier * soldier);
@@ -418,7 +418,7 @@ m_infotext(this, _("Click soldier to send away"))
 		}
 
 		m_soldier_preference.set_state(0);
-		if (ms->get_soldier_preference() == Widelands::MilitarySite::kPrefersHeroes) {
+		if (garrison().get_soldier_preference() == Garrison::SoldierPref::Heroes) {
 			m_soldier_preference.set_state(1);
 		}
 		m_soldier_preference.changedto.connect
@@ -432,9 +432,9 @@ m_infotext(this, _("Click soldier to send away"))
 	add(buttons, UI::Box::AlignCenter, true);
 }
 
-SoldierControl & SoldierList::soldiers() const
+Garrison & SoldierList::garrison() const
 {
-	return *dynamic_cast<SoldierControl *>(&m_building);
+	return *dynamic_cast<Widelands::GarrisonOwner *>(&m_building)->get_garrison();
 }
 
 void SoldierList::mouseover(const Soldier * soldier)
@@ -463,9 +463,9 @@ void SoldierList::mouseover(const Soldier * soldier)
 
 void SoldierList::eject(const Soldier * soldier)
 {
-	uint32_t const capacity_min = soldiers().minSoldierCapacity();
+	uint32_t const capacity_min = garrison().minSoldierCapacity();
 	bool can_act = m_igb.can_act(m_building.owner().player_number());
-	bool over_min = capacity_min < soldiers().presentSoldiers().size();
+	bool over_min = capacity_min < garrison().presentSoldiers().size();
 
 	if (can_act && over_min)
 		m_igb.game().send_player_drop_soldier(m_building, soldier->serial());
@@ -474,8 +474,8 @@ void SoldierList::eject(const Soldier * soldier)
 void SoldierList::set_soldier_preference(int32_t changed_to) {
 	upcast(Widelands::MilitarySite, ms, &m_building);
 	assert(ms);
-	ms->set_soldier_preference
-		(changed_to == 0 ? Widelands::MilitarySite::kPrefersRookies : Widelands::MilitarySite::kPrefersHeroes);
+	garrison().set_soldier_preference
+		(changed_to == 0 ? Garrison::SoldierPref::Rookies : Garrison::SoldierPref::Heroes);
 }
 
 UI::Panel * create_soldier_list

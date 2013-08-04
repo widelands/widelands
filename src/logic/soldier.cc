@@ -28,7 +28,6 @@
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
 #include "helper.h"
-#include "logic/attackable.h"
 #include "logic/battle.h"
 #include "logic/building.h"
 #include "logic/checkstep.h"
@@ -789,8 +788,6 @@ Bob::Task const Soldier::taskAttack = {
 void Soldier::start_task_attack
 	(Game & game, Building & building, uint8_t retreat)
 {
-	//dynamic_cast<const Attackable &>(building);
-
 	push_task(game, taskAttack);
 	State & state  = top_state();
 	state.objvar1  = &building;
@@ -961,7 +958,7 @@ void Soldier::attack_update(Game & game, State & state)
 	// Count remaining defenders
 	if (enemy) {
 		if (upcast(MilitarySite, ms, enemy)) {
-			defenders = ms->presentSoldiers().size();
+			defenders = ms->get_garrison()->presentSoldiers().size();
 		}
 		if (upcast(Warehouse, wh, enemy)) {
 			Requirements noreq;
@@ -996,20 +993,18 @@ void Soldier::attack_update(Game & game, State & state)
 			BaseImmovable * const newimm = game.map()[state.coords].get_immovable();
 			upcast(MilitarySite, newsite, newimm);
 			if (newsite and (&newsite->owner() == &owner())) {
-				if (upcast(SoldierControl, ctrl, newsite)) {
-					state.objvar1 = 0;
-					if
-						(ctrl->stationedSoldiers().size() < ctrl->soldierCapacity() and
-						location->base_flag().get_position()
-						!=
-						newsite ->base_flag().get_position())
-					{
-						molog("[attack] enemy belongs to us now, move in\n");
-						pop_task(game);
-						set_location(newsite);
-						newsite->update_soldier_request();
-						return schedule_act(game, 10);
-					}
+				state.objvar1 = 0;
+				if
+					(newsite->get_garrison()->stationedSoldiers().size()
+						< newsite->get_garrison()->soldierCapacity() and
+					location->base_flag().get_position()
+					!=
+					newsite ->base_flag().get_position())
+				{
+					molog("[attack] enemy belongs to us now, move in\n");
+					pop_task(game);
+					set_location(newsite);
+					return schedule_act(game, 10);
 				}
 			}
 		}
@@ -1039,12 +1034,12 @@ void Soldier::attack_update(Game & game, State & state)
 		}
 	}
 
-	upcast(Attackable, attackable, enemy);
-	assert(attackable);
+	upcast(Garrison, garrison, enemy);
+	assert(garrison);
 
 	molog("[attack] attacking target building\n");
 	//  give the enemy soldier some time to act
-	schedule_act(game, attackable->attack(*this) ? 1000 : 10);
+	schedule_act(game, garrison->attack(*this) ? 1000 : 10);
 }
 
 void Soldier::attack_pop(Game & game, State &)
@@ -1795,7 +1790,7 @@ void Soldier::sendSpaceSignals(Game & game)
 				 .get_owner()->player_number()
 				 ==
 				 land_owner)
-				dynamic_cast<Attackable &>(**i.current).aggressor(*this);
+				dynamic_cast<Garrison &>(**i.current).aggressor(*this);
 	}
 }
 

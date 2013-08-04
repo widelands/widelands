@@ -37,10 +37,10 @@
 #include "logic/player.h"
 #include "logic/productionsite.h"
 #include "logic/soldier.h"
-#include "logic/soldiercontrol.h"
 #include "logic/trainingsite.h"
 #include "logic/tribe.h"
 #include "logic/worker_program.h"
+#include "garrison.h"
 #include "profile/profile.h"
 #include "sound/sound_handler.h"
 #include "upcast.h"
@@ -1273,8 +1273,9 @@ ProductionProgram::ActCheck_Soldier::ActCheck_Soldier
 void ProductionProgram::ActCheck_Soldier::execute
 	(Game & game, ProductionSite & ps) const
 {
-	SoldierControl & ctrl = dynamic_cast<SoldierControl &>(ps);
-	const std::vector<Soldier *> soldiers = ctrl.presentSoldiers();
+	GarrisonOwner & go = dynamic_cast<GarrisonOwner &>(ps);
+	Garrison* ga = go.get_garrison();
+	const std::vector<Soldier *> soldiers = ga->presentSoldiers();
 	const std::vector<Soldier *>::const_iterator soldiers_end = soldiers.end();
 
 	ps.molog("  Checking soldier (%u) level %d)\n", attribute, level);
@@ -1359,8 +1360,9 @@ ProductionProgram::ActTrain::ActTrain
 void ProductionProgram::ActTrain::execute
 	(Game & game, ProductionSite & ps) const
 {
-	SoldierControl & ctrl = dynamic_cast<SoldierControl &>(ps);
-	const std::vector<Soldier *> soldiers = ctrl.presentSoldiers();
+	GarrisonOwner & go= dynamic_cast<GarrisonOwner &>(ps);
+	const Garrison* ga = go.get_garrison();
+	const std::vector<Soldier *> soldiers = ga->presentSoldiers();
 	const std::vector<Soldier *>::const_iterator soldiers_end =
 		soldiers.end();
 	std::vector<Soldier *>::const_iterator it = soldiers.begin();

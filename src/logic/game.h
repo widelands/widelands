@@ -22,6 +22,7 @@
 
 #include "logic/cmd_queue.h"
 #include "logic/editor_game_base.h"
+#include "garrison.h"
 #include "md5.h"
 #include "random.h"
 #include "save_handler.h"
@@ -151,7 +152,7 @@ struct Game : Editor_Game_Base {
 	void send_player_build_road (int32_t, Path &);
 	void send_player_flagaction (Flag &);
 	void send_player_start_stop_building (Building &);
-	void send_player_militarysite_set_soldier_preference (Building &, uint8_t preference);
+	void send_player_militarysite_set_soldier_preference (Building &, Garrison::SoldierPref preference);
 	void send_player_start_or_cancel_expedition    (Building &);
 
 	void send_player_enhance_building (Building &, Building_Index);

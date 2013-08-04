@@ -24,7 +24,6 @@
 #include "economy/road.h"
 #include "graphic/graphic.h"
 #include "i18n.h"
-#include "logic/attackable.h"
 #include "logic/cmd_queue.h"
 #include "logic/maphollowregion.h"
 #include "logic/militarysite.h"
@@ -480,11 +479,10 @@ void FieldActionWindow::add_buttons_attack ()
 
 	if
 		(upcast
-		 	(Widelands::Attackable, attackable, m_map->get_immovable(m_node)))
+		 	(Widelands::Garrison, attackable, m_map->get_immovable(m_node)))
 	{
 		if
-			(m_plr && m_plr->is_hostile(attackable->owner()) &&
-			 attackable->canAttack())
+			(attackable->canAttack() && m_plr && m_plr->is_hostile(attackable->owner()))
 		{
 			m_attack_box = new AttackBox(&a_box, m_plr, &m_node, 0, 0);
 			a_box.add(m_attack_box, UI::Box::AlignTop);

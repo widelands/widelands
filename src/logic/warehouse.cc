@@ -42,6 +42,7 @@
 #include "logic/soldier.h"
 #include "logic/tribe.h"
 #include "logic/worker.h"
+#include "garrisonhandler.h"
 #include "profile/profile.h"
 #include "upcast.h"
 #include "wexception.h"
@@ -446,12 +447,6 @@ void Warehouse::init(Editor_Game_Base & egbase)
 						(worker_types_without_cost.at(i.current)))
 					m_next_worker_without_cost_spawn[i.current] = act_time;
 		}
-		// m_next_military_act is not touched in the loading code. Is only needed
-		// if there warehous is created in the game?  I assume it's for the
-		// conquer_radius thing
-		m_next_military_act =
-			schedule_act
-				(ref_cast<Game, Editor_Game_Base>(egbase), 1000);
 
 		m_next_stock_remove_act =
 			schedule_act
@@ -1242,64 +1237,6 @@ void Warehouse::disable_spawn(uint8_t const worker_types_without_cost_index)
 	m_next_worker_without_cost_spawn[worker_types_without_cost_index] = Never();
 }
 
-
-bool Warehouse::canAttack()
-{
-	return get_conquers() > 0;
-}
-
-void Warehouse::aggressor(Soldier & enemy)
-{
-	if (!get_conquers())
-		return;
-
-	Game & game = ref_cast<Game, Editor_Game_Base>(owner().egbase());
-	Map  & map  = game.map();
-	if
-		(enemy.get_owner() == &owner() ||
-		 enemy.getBattle() ||
-		 get_conquers()
-		 <=
-		 map.calc_distance(enemy.get_position(), get_position()))
-		return;
-
-	if
-		(game.map().find_bobs
-		 	(Area<FCoords>(map.get_fcoords(base_flag().get_position()), 2),
-		 	 0,
-		 	 FindBobEnemySoldier(&owner())))
-		return;
-
-	Ware_Index const soldier_index = tribe().worker_index("soldier");
-	Requirements noreq;
-
-	if (!count_workers(game, soldier_index, noreq))
-		return;
-
-	Soldier & defender =
-		ref_cast<Soldier, Worker>(launch_worker(game, soldier_index, noreq));
-	defender.start_task_defense(game, false, owner().get_retreat_percentage());
-}
-
-bool Warehouse::attack(Soldier & enemy)
-{
-	Game & game = ref_cast<Game, Editor_Game_Base>(owner().egbase());
-	Ware_Index const soldier_index = tribe().worker_index("soldier");
-	Requirements noreq;
-
-	if (count_workers(game, soldier_index, noreq)) {
-		Soldier & defender =
-			ref_cast<Soldier, Worker>(launch_worker(game, soldier_index, noreq));
-		defender.start_task_defense(game, true, 0);
-		enemy.send_signal(game, "sleep");
-		return true;
-	}
-
-	set_defeating_player(enemy.owner().player_number());
-	schedule_destroy(game);
-	return false;
-}
-
 void Warehouse::PlannedWorkers::cleanup()
 {
 	while (!requests.empty()) {
@@ -1367,50 +1304,6 @@ void Warehouse::check_remove_stock(Game & game)
 		worker.start_task_leavebuilding(game, true);
 		break;
 	}
-}
-
-/*
- * SoldierControl implementations
- */
-std::vector<Soldier *> Warehouse::presentSoldiers() const
-{
-	std::vector<Soldier *> rv;
-
-	Ware_Index const ware = tribe().safe_worker_index("soldier");
-	IncorporatedWorkers::const_iterator sidx = m_incorporated_workers.find(ware);
-
-	if (sidx != m_incorporated_workers.end()) {
-		const WorkerList & soldiers = sidx->second;
-
-		container_iterate_const(WorkerList, soldiers, i)
-			rv.push_back(static_cast<Soldier *>(*i));
-	}
-
-	return rv;
-}
-int Warehouse::incorporateSoldier(Editor_Game_Base & egbase, Soldier & soldier) {
-	incorporate_worker(egbase, soldier);
-	return 0;
-}
-
-int Warehouse::outcorporateSoldier(Editor_Game_Base & /* egbase */, Soldier & soldier) {
-
-	Ware_Index const ware = tribe().safe_worker_index("soldier");
-	if (m_incorporated_workers.count(ware)) {
-		WorkerList & soldiers = m_incorporated_workers[ware];
-
-		WorkerList::iterator i = std::find
-			(soldiers.begin(), soldiers.end(), &soldier);
-
-		soldiers.erase(i);
-		m_supply->remove_workers(ware, 1);
-	}
-#ifndef NDEBUG
-	else
-		throw wexception("outcorporateSoldier: soldier not in this warehouse!");
-#endif
-
-	return 0;
 }
 
 void Warehouse::log_general_info(const Editor_Game_Base & egbase)
