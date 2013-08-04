@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2013-07-28 18:22+0000\n"
-"PO-Revision-Date: 2013-07-20 18:14+0000\n"
+"PO-Revision-Date: 2013-08-03 19:16+0000\n"
 "Last-Translator: Hans Joachim Desserud <Unknown>\n"
 "Language-Team: Norwegian Bokmal <nb@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-07-29 05:11+0000\n"
-"X-Generator: Launchpad (build 16700)\n"
+"X-Launchpad-Export-Date: 2013-08-04 05:13+0000\n"
+"X-Generator: Launchpad (build 16718)\n"
 
 #: ../../tribes/atlanteans/golden_tabard/conf:1
 msgid ""
@@ -51,7 +51,7 @@ msgid ""
 "As no Atlantean likes raw fish, smoking it in a smokery is the most common "
 "way to make it edible."
 msgstr ""
-"Ingen Atlantere liker rå fisk, røking i røkeriet er den vanligste måten å "
+"Ingen Atlantere liker rå fisk, røyking i røkeriet er den vanligste måten å "
 "prosessere fisken på."
 
 #: ../../tribes/atlanteans/conf:33
@@ -336,7 +336,7 @@ msgid ""
 "smoked in a smokery before being delivered to mines, training sites and "
 "scouts."
 msgstr ""
-"Fisk er en av de viktigste matkildene til atlanterne. Den må bli røkt i et "
+"Fisk er en av de viktigste matkildene til atlanterne. Den må røykes i et "
 "røkeri før den kan leveres til gruvene, treningsleire og speidere."
 
 #: ../../tribes/atlanteans/conf:119
@@ -501,6 +501,8 @@ msgid ""
 "Iron ores are mined in iron mines. They get smelted in a smelting works to "
 "retrieve the iron."
 msgstr ""
+"Jernmalm utvinnes i jerngruvene. Det smeltes ned i smelteverket for å hente "
+"ut jernet."
 
 #: ../../tribes/atlanteans/conf:209
 msgid "Labyrinth"
@@ -598,6 +600,9 @@ msgid ""
 "produced out of trunks by the sawmill. The weapon smithy and the shipyard "
 "also use planks to produce the different tridents and mighty ships."
 msgstr ""
+"Planker er et viktig byggemateriale for atlanterne. De lages av trestammer i "
+"sagbruket. Våpensmia og skipsverftet bruker også planker til å lage ulike "
+"treforker og store skip."
 
 #: ../../tribes/atlanteans/blackroot_farm/conf:22
 msgid "Plant blackroot"
@@ -613,7 +618,7 @@ msgstr "Planter og høster inn svartrot."
 
 #: ../../tribes/atlanteans/farmer/conf:1
 msgid "Plants fields."
-msgstr ""
+msgstr "Planter åkre."
 
 #: ../../tribes/atlanteans/forester/conf:1
 msgid "Plants trees."
@@ -825,6 +830,7 @@ msgstr "Speiders hus"
 msgid ""
 "Scouts like Scotty the scout scout unscouted area in a scouty fashion."
 msgstr ""
+"Speidere som speideren Scotty speider uspeide områder som en speider."
 
 #: ../../tribes/atlanteans/conf:90
 msgid "Scythe"
@@ -841,11 +847,11 @@ msgstr "Skip"
 
 #: ../../tribes/atlanteans/conf:55
 msgid "Ship construction site"
-msgstr ""
+msgstr "Byggeområde for skip"
 
 #: ../../tribes/atlanteans/conf:116
 msgid "Shipwright"
-msgstr ""
+msgstr "Skipsbygger"
 
 #: ../../tribes/atlanteans/conf:180
 msgid "Shipyard"
@@ -860,6 +866,8 @@ msgid ""
 "Shovels are needed for proper handling of plants. Therefore the forester and "
 "the blackroot farmer are using them. They are produced by the toolsmith."
 msgstr ""
+"Spader er nødvendig for korrekt håndtering av planter. Derfor bruker "
+"skogvokteren og svartrotbonden dem. De blir laget av verktøysmeden."
 
 #: ../../tribes/atlanteans/dungeon/conf:39
 #: ../../tribes/atlanteans/labyrinth/conf:45
@@ -892,11 +900,11 @@ msgstr "Smelter jern."
 
 #: ../../tribes/atlanteans/smokery/conf:29
 msgid "Smoke fish"
-msgstr ""
+msgstr "Røyk fisk"
 
 #: ../../tribes/atlanteans/smokery/conf:28
 msgid "Smoke meat"
-msgstr ""
+msgstr "Røyk kjøtt"
 
 #: ../../tribes/atlanteans/conf:92
 msgid "Smoked fish"
@@ -915,7 +923,7 @@ msgstr ""
 
 #: ../../tribes/atlanteans/conf:127
 msgid "Smoker"
-msgstr ""
+msgstr "Røyker"
 
 #: ../../tribes/atlanteans/conf:178
 msgid "Smokery"
@@ -923,7 +931,7 @@ msgstr "Røkeri"
 
 #: ../../tribes/atlanteans/smoker/conf:1
 msgid "Smokes meat and fish."
-msgstr ""
+msgstr "Røyker kjøtt og fisk."
 
 #: ../../tribes/atlanteans/conf:108
 msgid "Soldier"
@@ -976,6 +984,8 @@ msgid ""
 "Stone is one basic building ware of the Atlanteans. It is produced in a "
 "quarry or a crystal mine."
 msgstr ""
+"Atlanterne bruker stein i mange bygninger. Det utvinnes i steinbrudd eller "
+"krystallgruver."
 
 #: ../../tribes/atlanteans/conf:129
 msgid "Stonecutter"
@@ -995,6 +1005,8 @@ msgid ""
 "fed with coal. This coal is mined in coal mines or produced out of trunks by "
 "a charcoal burner."
 msgstr ""
+"Den atlantiske ilden i smelteverk, rustningssmier og våpensmier mates med "
+"kull. Kullet utvinnes i kullgruver eller laget av ved i en kullbrenner."
 
 #: ../../tribes/atlanteans/hunter/conf:1
 msgid "The Hunter brings fresh, raw meat to the Atlanteans."
@@ -1036,6 +1048,9 @@ msgid ""
 "weaponsmiths and armoursmiths. Make sure you always got some in reserve! It "
 "is produced by the toolsmith."
 msgstr ""
+"Hammeren er et essensielt verktøy. Det brukes av geologer, byggere, "
+"våpensmeder og rustningssmeder. Sørg for å alltid ha noen i reserve! De blir "
+"laget av verktøysmeden."
 
 #: ../../tribes/atlanteans/long_trident/conf:1
 msgid ""
@@ -1056,26 +1071,31 @@ msgid ""
 "are produced in the armoursmithy and used in the labyrinth - together with "
 "food - to train soldiers from Defense level 1 to level 2."
 msgstr ""
+"Disse avanserte skjolda blir brukt av de beste atlantiske soldatene. De blir "
+"laget i rustningssmia og blir brukt i labyrinten, sammen med mat, til å "
+"trene soldater i forsvar fra nivå 1 til nivå 2."
 
 #: ../../tribes/atlanteans/quartz/conf:1
 msgid ""
 "These transparent quartz' are used to build some exclusive buildings. They "
 "are produced in a crystal mine."
 msgstr ""
+"Den transparente kvartsen blir brukt til noen eksklusive bygninger. De "
+"utvinnes i krystallgruver."
 
 #: ../../tribes/atlanteans/diamond/conf:1
 msgid ""
 "These wonderful diamonds are used to build some exclusive buildings. They "
 "are mined in a crystal mine."
 msgstr ""
-"De fantastiske diamantene blir brukt til eksklusive bygninger og verktøy. De "
-"blir gravd ut i krystallgruvene."
+"De fantastiske diamantene blir brukt til noen eksklusive bygninger. De "
+"utvinnes i krystallgruvene."
 
 #: ../../tribes/atlanteans/hunting_bow/conf:1
 msgid ""
 "This bow is used by the Atlantean hunter. It is produced by the toolsmith."
 msgstr ""
-"Denne buen blir brykt av den atlantiske jegeren. Den blir laget av "
+"Denne buen blir brukt av den atlantiske jegeren. Den blir laget av "
 "verktøysmeden."
 
 #: ../../tribes/atlanteans/corn/conf:1
@@ -1118,6 +1138,8 @@ msgid ""
 "This steel shield is produced in the armoursmithy and used in the labyrinth -"
 "together with food - to train soldiers from Defense level 0 to level 1."
 msgstr ""
+"Dette stålskjoldet blir laget i rustningssmia og brukt i labyrinten, sammen "
+"med mat, til å trene soldater i forsvar fra nivå 0 til nivå 1."
 
 #: ../../tribes/atlanteans/bread/conf:1
 msgid ""
@@ -1176,6 +1198,9 @@ msgid ""
 "the Atlanteans. Besides the sawmill, the charcoal burner, the toolsmithy and "
 "the smokery also need trunks for their work."
 msgstr ""
+"Trestammer er grunnlaget for planker, som blir brukt i nesten alle "
+"atlantiske bygninger. Utenom sagbruket, trenger kullbrenneren, verktøysmia "
+"og røykeriet planker til arbeidet."
 
 #: ../../tribes/atlanteans/dungeon/conf:40
 msgid "Upgrade soldier attack 0"
@@ -1227,27 +1252,27 @@ msgstr ""
 
 #: ../../tribes/atlanteans/labyrinth/conf:46
 msgid "Upgrade soldier defense 0"
-msgstr "Oppgrader soldat beskyttelse 0"
+msgstr "Oppgrader soldat forsvar 0"
 
 #: ../../tribes/atlanteans/labyrinth/conf:47
 msgid ""
 "Upgrade soldier defense 0 (only for compatibility with old savegames "
 "(build13))"
 msgstr ""
-"Oppgrader soldat beskyttelse 0 (kun for kompatibilitet med eldre lagrede "
-"spill (build13))"
+"Oppgrader soldat forsvar 0 (kun for kompatibilitet med eldre lagrede spill "
+"(build13))"
 
 #: ../../tribes/atlanteans/labyrinth/conf:48
 msgid "Upgrade soldier defense 1"
-msgstr "Oppgrader soldat beskyttelse 1"
+msgstr "Oppgrader soldat forsvar 1"
 
 #: ../../tribes/atlanteans/labyrinth/conf:49
 msgid ""
 "Upgrade soldier defense 1 (only for compatibility with old savegames "
 "(build13))"
 msgstr ""
-"Oppgrader soldat beskyttelse 1 (kun for kompatibilitet med eldre lagrede "
-"spill (build13))"
+"Oppgrader soldat forsvar 1 (kun for kompatibilitet med eldre lagrede spill "
+"(build13))"
 
 #: ../../tribes/atlanteans/labyrinth/conf:52
 msgid "Upgrade soldier evade 0"
@@ -1319,11 +1344,11 @@ msgstr "Brønn"
 
 #: ../../tribes/atlanteans/conf:134
 msgid "Woodcutter"
-msgstr "Tømmerhugger"
+msgstr "Trefeller"
 
 #: ../../tribes/atlanteans/conf:169
 msgid "Woodcutter's House"
-msgstr ""
+msgstr "Trefellers hus"
 
 #: ../../tribes/atlanteans/armoursmithy/conf:32
 #: ../../tribes/atlanteans/bakery/conf:25
@@ -1358,11 +1383,11 @@ msgstr "Arbeid"
 
 #: ../../tribes/atlanteans/builder/conf:1
 msgid "Works at construction sites to create a new building."
-msgstr ""
+msgstr "Jobber på byggeplasser for å lage nye bygninger."
 
 #: ../../tribes/atlanteans/shipwright/conf:1
 msgid "Works at the shipyard and constructs new ships."
-msgstr "Jobber på skipsverftet med å bygge nye skip."
+msgstr "Jobber på skipsverftet og lager nye skip."
 
 #: ../../tribes/atlanteans/miner/conf:1
 msgid "Works deep in the mines to produce coal, iron or gold."

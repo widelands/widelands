@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2013-07-28 18:22+0000\n"
-"PO-Revision-Date: 2010-02-10 23:19+0000\n"
-"Last-Translator: Varga Dániel <vargad88@gmail.com>\n"
+"PO-Revision-Date: 2013-08-03 12:51+0000\n"
+"Last-Translator: István Kiss <kiemc@citromail.hu>\n"
 "Language-Team: Language <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-07-29 05:09+0000\n"
-"X-Generator: Launchpad (build 16700)\n"
+"X-Launchpad-Export-Date: 2013-08-04 05:13+0000\n"
+"X-Generator: Launchpad (build 16718)\n"
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:36
 msgid ""
@@ -25,6 +25,12 @@ msgid ""
 "under the only palm trees existing in this far-away sandy desert. I fear we "
 "won't find the help we need to get our ship repaired in good time.\" "
 msgstr ""
+" „Végre – az istenek velünk voltak!<br> Partot értünk egy ismeretlen helyen, "
+"és nyugodtan megpihentünk a parti pálmafák alatt. De több jó hír nincs. Az "
+"igazság:<br> mikor felkeltem ma reggel, homokon kívül semmit sem láttam "
+"magunk körül.<br> Nagyon úgy néz ki, hogy ennek a végeláthatatlan sivatagnak "
+"az összes pálmafája ez a néhány, amelyek alatt kikötöttünk. Attól tartok, "
+"nem találunk időben kellő segítséget hajónk megjavításához.” "
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:84
 msgid ""
@@ -46,6 +52,12 @@ msgid ""
 "yesterday and found a nice place for a lumberjack's house, south of our "
 "provisional headquarters.\"<br><br>-- NEW OBJECTIVE --<br> "
 msgstr ""
+" „Üdv, Lutius, most futottam össze Saledusszal odakint.<br> Beszélt a "
+"laktanyáról. Nos, én nem afféle lány vagyok, aki szerint még több laktanya "
+"kell – ehelyett inkább más dolgokra kellene most összpontosítanunk.<br> "
+"Nyilvánvaló, hogy szükségünk lesz fára hajónk megjavításához. Ezért tegnap "
+"bejártam az erdőt, és találtam egy jó kis helyet egy favágóháznak, "
+"ideiglenes főhadiszállásunktól délre.”<br><br>--ÚJ CÉLKITŰZÉS --<br> "
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:117
 msgid ""
@@ -87,6 +99,11 @@ msgid ""
 "and is taking in more and more water. We can thank the Gods if we survive "
 "this black night with our lives.\" "
 msgstr ""
+" „Úgy tűnik, nagy hiba volt a Perl-öbölbe jönnünk. A természet ellenünkre "
+"lett, és egy sötét, vad viharba vezetett minket. Fogalmam sincs, hány órája "
+"kezdtek a hullámok magasabbra nőni a hajónknál, de még mindig öngyilkosság "
+"lenne kimenni.<br> Hajónk súlyosan megsérült, és egyre több vizet enged be. "
+"Hálát adhatunk az isteneknek, ha túléljük ezt a fekete éjszakát.” "
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:47
 msgid ""
@@ -99,6 +116,14 @@ msgid ""
 "the forest. Then one of us can keep watch in the darkness and keep us safe "
 "from these creatures.\"<br><br>-- NEW OBJECTIVE --<br> "
 msgstr ""
+" „Uram, attól félek, nem vagyunk biztonságban ezen az idegen földön. Ki "
+"tudja, miféle szörnyű teremtmények élnek az erdőn túl, abban a hatalmas "
+"sivatagban? Mi lesz, ha ezek belépnek az erdőbe, és becserkésznek "
+"minket?<br> Nos, lehet, hogy félelmem alaptalan, de nem ártana őrködni az "
+"erdőben – így biztosan hamarabb észrevennénk az esetleges ellenséget, mint "
+"az minket.<br> Mindenképpen építenünk kellene egy laktanyát az erdő keleti "
+"részén. Aztán egyikőnk őrt állhat a sötétben, hogy biztonságban legyünk "
+"ezektől a teremtményektől.”<br><br>-- ÚJ CÉLKITŰZÉS --<br> "
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:59
 msgid ""
@@ -107,6 +132,10 @@ msgid ""
 "is a good step forward. Now we can feel a bit safer and can look forward to "
 "repair our ship.\" "
 msgstr ""
+" „Uram, láttam, hogy elkészült a laktanya építése, így oda is rendeltem "
+"egyik legjobb katonámat, hogy szemmel tartsa a sivatagot.<br> Ez jó "
+"előrelépés. Most már kicsit nagyobb biztonságban érezhetjük magunkat, és "
+"foglalkozhatunk hajónk megjavításával.” "
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:125
 msgid ""
@@ -144,6 +173,27 @@ msgid ""
 "perl-gulf with my family, some of my friends and a few of my best "
 "warriors.\" "
 msgstr ""
+" „Mi lett a Birodalomból? Komolyan kérdezem – miért nem engedte királyom, "
+"hogy harcoljak azzal a szörnyeteg barbár törzzsel, mely először békés "
+"barátnak mutatta magát, majd megtámadta seregemet a legsötétebb éjben?<br> "
+"Egy százötven fős sereggel az északi határvidék őrzésére rendeltek, a Galdin-"
+"hegység közelébe, egy hatalmas, gyönyörű, ősi erdőbe. Hamarosan találkoztunk "
+"egy barbár törzzsel, mely kezdetben barátságos volt. Néhány emberem még "
+"kereskedett is velük, gyermekeik pedig odajöttek hozzánk, tiszta és "
+"rendezett egyenruháinkat, fegyvereinket dicsérték.<br> De ott-tartózkodásunk "
+"ötödik éjjelén megtámadtak bennünket minden ok nélkül. Jó katonák tucatjait "
+"veszítettem el, engem pedig bebörtönöztek, majd törzsfőnökük elé vittek. Ő "
+"leköpött, kigúnyolt, és utasított, hogy hagyjam el ezt a földet örökre. Nem "
+"akart új földet, nem akarta a miénket, de megmondta, hogy EZ az erdő az ő "
+"földjük – és addig az övék is marad, míg népe utolsó lelkét is el nem "
+"ragadják a szellemek!<br> Három hétre rá visszatértem Fremilbe, hogy "
+"beszéljek királyunkkal. Haragudott a barbárokra, mégsem engedte, hogy "
+"megtámadjuk ezeket a törzseket. Szerinte seregünk túl gyenge, hogy túléljen "
+"egy háborút a barbárok ellen.<br> De nem találok módot, hogy lemossam "
+"magamról a gyalázatot – anélkül, hogy megküzdenék a barbárokkal. Így hát "
+"elhagytam Fremilt vízen, hogy új földet, új életet találjak magamnak, "
+"valahol délen. Most a Perl-öbölben hajózom családommal, pár barátommal és "
+"néhány legjobb harcosommal.” "
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:135
 msgid ""
@@ -157,6 +207,8 @@ msgid ""
 "* Build a barracks at the red house symbol on the east side of the forests, "
 "to the right of your provisional headquarters."
 msgstr ""
+"* Építs egy laktanyát a piros ház szimbólumon az erdő keleti oldalán, "
+"ideiglenes főhadiszállásodtól jobbra."
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:96
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:171
@@ -196,7 +248,7 @@ msgstr ""
 
 #: ../../campaigns/emp01.wmf/elemental:7
 msgid "01 - The Strands of Malac' Mor"
-msgstr ""
+msgstr "01 – Malac' Mor partjai"
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:10
 msgid "A dark night"
@@ -204,7 +256,7 @@ msgstr "Egy sötét éjszaka"
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:43
 msgid "A foreboding"
-msgstr ""
+msgstr "Rossz előérzet"
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:113
 msgid "A step forward"
@@ -218,6 +270,11 @@ msgid ""
 "destroys it. Only with a lot of luck he manages to beach his damaged ship on "
 "an unknown desert strand and save his people. For now."
 msgstr ""
+"Lutius, miután elveszített egy fontos csatát a barbárok ellen, miáltal a "
+"Birodalom egy jelentős része elveszett, elhagyja Fremilt, hogy új életet "
+"kezdjen. De sorsa hajóját egy nagy viharba sodorja úgy, hogy az majdnem "
+"megsemmisül. Csak nagy szerencsével sikerül a sérült hajót egy ismeretlen, "
+"homokos parton kikötnie, és megmentenie embereit. Egyelőre."
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:93
 msgid "Amalea comes in..."
@@ -233,7 +290,7 @@ msgstr "Amalea mosolyog..."
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:144
 msgid "Build a barracks"
-msgstr ""
+msgstr "Építs egy laktanyát"
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:169
 msgid "Build a forester's house"
@@ -267,11 +324,11 @@ msgstr "Biztonságos félsziget"
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:55
 msgid "Safe for now"
-msgstr ""
+msgstr "Egyelőre biztonságban"
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:45
 msgid "Saledus looks around nervously..."
-msgstr ""
+msgstr "Saledus nyugtalanul tekint körbe..."
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:115
 msgid "Saledus looks promising..."
@@ -283,7 +340,7 @@ msgstr ""
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:57
 msgid "Saledus speaks with a sigh of relief..."
-msgstr ""
+msgstr "Saledus megkönnyebbülten így szól:"
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:133
 msgid "Saledus speaks:"
@@ -305,4 +362,4 @@ msgstr ""
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:80
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:91
 msgid "Young Amalea"
-msgstr "Fiatal Amalea"
+msgstr "Az ifjú Amalea"

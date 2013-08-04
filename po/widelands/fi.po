@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: Widelands svn4208\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2013-07-28 20:22+0200\n"
-"PO-Revision-Date: 2013-01-03 00:13+0000\n"
-"Last-Translator: Nasenbaer <Unknown>\n"
+"PO-Revision-Date: 2013-08-03 10:34+0000\n"
+"Last-Translator: Markus Hallfors <destroyerko@gmail.com>\n"
 "Language-Team: Finnish <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2013-07-29 05:13+0000\n"
-"X-Generator: Launchpad (build 16700)\n"
+"X-Launchpad-Export-Date: 2013-08-04 05:13+0000\n"
+"X-Generator: Launchpad (build 16718)\n"
 "X-Poedit-Country: FINLAND\n"
 "X-Poedit-Language: Finnish\n"
 "X-Poedit-SourceCharset: utf-8\n"
@@ -366,15 +366,15 @@ msgstr "Lataan..."
 
 #: ../../src/save_handler.cc:72
 msgid "Saving game..."
-msgstr ""
+msgstr "Tallenetaan peliä..."
 
 #: ../../src/save_handler.cc:92
 msgid "Saving failed!"
-msgstr ""
+msgstr "Tallentaminen epäonnistui!"
 
 #: ../../src/save_handler.cc:112
 msgid "Game saved"
-msgstr ""
+msgstr "Peli tallennettu."
 
 # TODO: Needs translator comment in code
 #: ../../src/computer_player.cc:38
@@ -397,7 +397,7 @@ msgstr ""
 
 #: ../../src/s2map.cc:886
 msgid "WARNING"
-msgstr ""
+msgstr "VAROITUS"
 
 #: ../../src/writeHTML.cc:42
 msgid "Requesters"
@@ -750,7 +750,7 @@ msgstr "Käyttövirhe, pitäisi olla: /warn <nimi> <aihe>"
 
 #: ../../src/network/nethost.cc:402
 msgid "Why would you warn yourself?"
-msgstr ""
+msgstr "Miksi varoittaisit itseäsi?"
 
 #: ../../src/network/nethost.cc:404
 msgid "Why would you want to warn the dedicated server?"
@@ -857,7 +857,7 @@ msgstr ""
 
 #: ../../src/network/nethost.cc:1254
 msgid "Game successfully saved!"
-msgstr ""
+msgstr "Peli tallennettu onnistuneesti!"
 
 #: ../../src/network/nethost.cc:1256
 #, c-format
@@ -866,12 +866,12 @@ msgstr ""
 
 #: ../../src/network/nethost.cc:1263
 msgid "This server is not password protected!"
-msgstr ""
+msgstr "Tämä serveri ei ole suojattu salasanalla!"
 
 #: ../../src/network/nethost.cc:1266
 #: ../../src/network/internet_gaming_messages.cc:43
 msgid "The sent password was incorrect!"
-msgstr ""
+msgstr "Salasana oli väärä!"
 
 #: ../../src/network/nethost.cc:1279
 msgid "The password was correct, access was granted!"
@@ -904,7 +904,7 @@ msgstr "Asiakasohjelma kaatui ja teki hätätallennuksen."
 
 #: ../../src/network/network_gaming_messages.cc:124
 msgid "Connection was lost."
-msgstr ""
+msgstr "Yhteys katkesi."
 
 #: ../../src/network/network_gaming_messages.cc:125
 msgid "Server has left the game."
@@ -949,7 +949,7 @@ msgstr "%s on poistunut pelistä (%s)"
 #: ../../src/network/network_gaming_messages.cc:134
 #, c-format
 msgid "Unknown user has left the game (%s)"
-msgstr ""
+msgstr "Tuntematon pelaaja on lähtenyt pelistä (%s)"
 
 #: ../../src/network/network_gaming_messages.cc:135
 msgid "Server sent a SYNCREQUEST even though no game is running."
@@ -1151,7 +1151,7 @@ msgstr ""
 
 #: ../../src/network/internet_gaming.cc:535
 msgid "ERROR: "
-msgstr ""
+msgstr "VIRHE: "
 
 #: ../../src/network/internet_gaming.cc:539
 msgid "Chat message could not be sent. "
@@ -1182,7 +1182,7 @@ msgstr ""
 #: ../../src/ui_fsmenu/mapselect.cc:500 ../../src/ui_fsmenu/mapselect.cc:504
 #: ../../src/io/dedicated_log.cc:66
 msgid "unknown"
-msgstr ""
+msgstr "tuntematon"
 
 #: ../../src/network/internet_gaming_messages.cc:42
 #, c-format
@@ -1195,7 +1195,7 @@ msgstr ""
 
 #: ../../src/network/internet_gaming_messages.cc:45
 msgid "You are already logged in!"
-msgstr ""
+msgstr "Olet jo kirjautuneena!"
 
 #: ../../src/network/internet_gaming_messages.cc:48
 msgid ""
@@ -1289,11 +1289,11 @@ msgstr "Pisteet"
 
 #: ../../src/ui_fsmenu/internet_lobby.cc:157
 msgid "Game"
-msgstr ""
+msgstr "Peli"
 
 #: ../../src/ui_fsmenu/internet_lobby.cc:379
 msgid "Connection timed out"
-msgstr ""
+msgstr "Yhteys aikakatkaistu"
 
 #: ../../src/ui_fsmenu/internet_lobby.cc:382
 msgid ""
@@ -1478,11 +1478,11 @@ msgstr "Pois päältä"
 
 #: ../../src/ui_fsmenu/options.cc:199
 msgid "Never"
-msgstr ""
+msgstr "Ei koskaan"
 
 #: ../../src/ui_fsmenu/options.cc:200
 msgid "1 day"
-msgstr ""
+msgstr "yksi päivä"
 
 #: ../../src/ui_fsmenu/options.cc:265
 #, c-format
@@ -1620,7 +1620,7 @@ msgstr "Pelaajat"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:168 ../../src/ui_fsmenu/launchSPG.cc:103
 msgid "Type of game"
-msgstr ""
+msgstr "Pelityyppi"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:214 ../../src/ui_fsmenu/launchSPG.cc:284
 msgid "(no map)"
@@ -1722,11 +1722,11 @@ msgstr "Tallennetut pelaajat ovat:"
 #: ../../src/ui_fsmenu/launchMPG.cc:562
 #, c-format
 msgid "Player %u"
-msgstr ""
+msgstr "Pelaaja %u"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:566
 msgid "closed"
-msgstr ""
+msgstr "suljettu"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:630
 msgid "There was an error!"
@@ -1910,15 +1910,15 @@ msgstr "Kartan nimi"
 
 #: ../../src/ui_fsmenu/mapselect.cc:166
 msgid "Show all maps"
-msgstr ""
+msgstr "Näytä kaikki kartat"
 
 #: ../../src/ui_fsmenu/mapselect.cc:171
 msgid "Official Map"
-msgstr ""
+msgstr "Virallinen kartta"
 
 #: ../../src/ui_fsmenu/mapselect.cc:174
 msgid "1v1"
-msgstr ""
+msgstr "1v1"
 
 #: ../../src/ui_fsmenu/mapselect.cc:175
 msgid "Teams of 2"
@@ -1934,11 +1934,11 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/mapselect.cc:180
 msgid "Free for all"
-msgstr ""
+msgstr "Kaikki vastaan kaikki"
 
 #: ../../src/ui_fsmenu/mapselect.cc:181
 msgid "Unbalanced"
-msgstr ""
+msgstr "Epätasapainossa"
 
 #: ../../src/ui_fsmenu/mapselect.cc:277
 msgid "(directory)"
@@ -2187,11 +2187,11 @@ msgstr "Rakennusapu"
 
 #: ../../src/editor/editorinteractive.cc:83
 msgid "Undo"
-msgstr ""
+msgstr "Kumoa"
 
 #: ../../src/editor/editorinteractive.cc:86
 msgid "Redo"
-msgstr ""
+msgstr "Tee uudelleen"
 
 #: ../../src/editor/editorinteractive.cc:190
 #: ../../src/editor/editorinteractive.cc:610
@@ -2231,7 +2231,7 @@ msgstr "Ei nimeä"
 
 #: ../../src/wui/multiplayersetupgroup.cc:103
 msgid "free"
-msgstr ""
+msgstr "vapaa"
 
 #: ../../src/wui/multiplayersetupgroup.cc:281
 msgid "Shared in"
@@ -2251,7 +2251,7 @@ msgstr "AI: "
 #: ../../src/wui/multiplayersetupgroup.cc:320
 #: ../../src/wui/playerdescrgroup.cc:174 ../../src/wui/playerdescrgroup.cc:192
 msgid "Random"
-msgstr ""
+msgstr "Satunnainen"
 
 #: ../../src/wui/multiplayersetupgroup.cc:314
 #: ../../src/wui/playerdescrgroup.cc:180
@@ -2499,12 +2499,12 @@ msgstr ""
 #: ../../src/wui/game_main_menu_save_game.cc:140
 #: ../../src/wui/game_main_menu_save_game.cc:182
 msgid "player"
-msgstr ""
+msgstr "pelaaja"
 
 #: ../../src/wui/game_main_menu_save_game.cc:140
 #: ../../src/wui/game_main_menu_save_game.cc:182
 msgid "players"
-msgstr ""
+msgstr "pelaajat"
 
 #: ../../src/wui/game_main_menu_save_game.cc:252
 msgid ""
@@ -2619,11 +2619,11 @@ msgstr ""
 
 #: ../../src/wui/plot_area.cc:108
 msgid "d"
-msgstr ""
+msgstr "d"
 
 #: ../../src/wui/plot_area.cc:109
 msgid "h"
-msgstr ""
+msgstr "h"
 
 #: ../../src/wui/plot_area.cc:110
 msgid "min"
@@ -2631,12 +2631,12 @@ msgstr ""
 
 #: ../../src/wui/plot_area.cc:279
 msgid "game"
-msgstr ""
+msgstr "peli"
 
 #: ../../src/wui/constructionsitewindow.cc:75
 #: ../../src/wui/dismantlesitewindow.cc:69
 msgid "Building materials"
-msgstr ""
+msgstr "Rakennusmateriaalit"
 
 #: ../../src/wui/buildingconfirm.cc:158
 msgid "Destroy building?"
@@ -2744,7 +2744,7 @@ msgstr ""
 
 #: ../../src/wui/warehousewindow.cc:224
 msgid "Expedition"
-msgstr ""
+msgstr "Tutkimusmatka"
 
 #: ../../src/wui/game_options_menu.cc:56
 msgid "README"
@@ -2812,7 +2812,7 @@ msgstr "Tuotetilastot"
 
 #: ../../src/wui/ware_statistics_menu.cc:188
 msgid "Consumption"
-msgstr ""
+msgstr "Kulutus"
 
 #: ../../src/wui/ware_statistics_menu.cc:199
 msgid "Economy Health"
@@ -2942,7 +2942,7 @@ msgstr "Tuhoa"
 
 #: ../../src/wui/buildingwindow.cc:279
 msgid "Dismantle"
-msgstr ""
+msgstr "Pura"
 
 #: ../../src/wui/buildingwindow.cc:279
 msgid "Returns:"
@@ -3053,7 +3053,7 @@ msgstr ""
 
 #: ../../src/wui/shipwindow.cc:85
 msgid "Ship"
-msgstr ""
+msgstr "Alus"
 
 #: ../../src/wui/shipwindow.cc:112
 msgid "Scout towards the north west"
@@ -4110,7 +4110,7 @@ msgstr "(pysäytetty)"
 
 #: ../../src/logic/game.cc:139
 msgid "Not set"
-msgstr ""
+msgstr "Ei asetettu"
 
 #: ../../src/logic/game.cc:228
 msgid "Preloading a map"
@@ -4222,7 +4222,7 @@ msgstr "Interaktiivinen pelaaja: %s"
 
 #: ../../src/game_io/game_preload_data_packet.cc:60
 msgid "Endless game"
-msgstr ""
+msgstr "Loputon peli"
 
 #: ../../src/game_io/game_preload_data_packet.cc:89
 #: ../../src/map_io/widelands_map_objective_data_packet.cc:71
@@ -4679,11 +4679,11 @@ msgstr "nimetön"
 
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:255
 msgid "directory"
-msgstr ""
+msgstr "hakemisto"
 
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:259
 msgid "Not a map file"
-msgstr ""
+msgstr "Ei karttatiedosto"
 
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:387
 msgid " exists already. Overwrite?"
@@ -5056,7 +5056,7 @@ msgstr ""
 
 #: ../../src/editor/tools/editor_info_tool.cc:108
 msgid "none"
-msgstr ""
+msgstr "ei mitään"
 
 #: ../../src/editor/tools/editor_info_tool.cc:114
 msgid ""
