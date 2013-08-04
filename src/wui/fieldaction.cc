@@ -479,10 +479,11 @@ void FieldActionWindow::add_buttons_attack ()
 
 	if
 		(upcast
-		 	(Widelands::Garrison, attackable, m_map->get_immovable(m_node)))
+		 	(Widelands::GarrisonOwner, go, m_map->get_immovable(m_node)))
 	{
 		if
-			(attackable->canAttack() && m_plr && m_plr->is_hostile(attackable->owner()))
+			(go->get_garrison()->canAttack() && m_plr
+			 && m_plr->is_hostile(go->get_garrison()->owner()))
 		{
 			m_attack_box = new AttackBox(&a_box, m_plr, &m_node, 0, 0);
 			a_box.add(m_attack_box, UI::Box::AlignTop);
