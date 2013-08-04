@@ -65,7 +65,8 @@ public:
 	virtual void init(Editor_Game_Base &);
 	virtual void cleanup(Editor_Game_Base &);
 	virtual void act(Game &, uint32_t data);
-	virtual void remove_worker(Worker &);
+// 	virtual void remove_worker(Worker &);
+// 	virtual void add_worker(Worker &);
 
 	char const * type_name() const throw () {return "militarysite";}
 	virtual std::string get_statistics_string();

@@ -821,7 +821,7 @@ void Map_Buildingdata_Data_Packet::read_militarysite
 				}
 
 				//  capacity (modified by user)
-				gh->m_capacity = fr.Unsigned32();
+				gh->m_capacity = fr.Unsigned8();
 				gh->m_last_heal_time = fr.Signed32() - 1000;
 				// Release 17 compatibility branch. Some safe values.
 				gh->m_soldier_preference = Garrison::SoldierPref::Rookies;

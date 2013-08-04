@@ -1273,8 +1273,12 @@ ProductionProgram::ActCheck_Soldier::ActCheck_Soldier
 void ProductionProgram::ActCheck_Soldier::execute
 	(Game & game, ProductionSite & ps) const
 {
-	GarrisonOwner & go = dynamic_cast<GarrisonOwner &>(ps);
-	Garrison* ga = go.get_garrison();
+	GarrisonOwner * go = dynamic_cast<GarrisonOwner *>(&ps);
+	if (!go) {
+		log("CGH no garrison owner for %s %u\n", ps.descr().descname().c_str(), ps.serial());
+		return;
+	}
+	Garrison* ga = go->get_garrison();
 	const std::vector<Soldier *> soldiers = ga->presentSoldiers();
 	const std::vector<Soldier *>::const_iterator soldiers_end = soldiers.end();
 
@@ -1360,8 +1364,12 @@ ProductionProgram::ActTrain::ActTrain
 void ProductionProgram::ActTrain::execute
 	(Game & game, ProductionSite & ps) const
 {
-	GarrisonOwner & go= dynamic_cast<GarrisonOwner &>(ps);
-	const Garrison* ga = go.get_garrison();
+	GarrisonOwner * go= dynamic_cast<GarrisonOwner *>(&ps);
+	if (!go) {
+		log("CGH no garrison owner for %s %u\n", ps.descr().descname().c_str(), ps.serial());
+		return;
+	}
+	const Garrison* ga = go->get_garrison();
 	const std::vector<Soldier *> soldiers = ga->presentSoldiers();
 	const std::vector<Soldier *>::const_iterator soldiers_end =
 		soldiers.end();

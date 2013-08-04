@@ -236,36 +236,26 @@ void TrainingSite::set_economy(Economy * e)
  */
 void TrainingSite::cleanup(Editor_Game_Base & egbase)
 {
-	ProductionSite::cleanup(egbase);
 	m_garrison->cleanup(egbase);
+	ProductionSite::cleanup(egbase);
+	m_garrison->cleanup_requests(egbase);
 }
 
 
 void TrainingSite::add_worker(Worker & w)
 {
-	if (upcast(Soldier, soldier, &w)) {
-		log("CGH Adding worker to training site\n");
-		// Add it to our garrison
-		//m_garrison->incorporateSoldier(owner().egbase(), *soldier);
-		if (upcast(Game, game, &owner().egbase()))
-			schedule_act(*game, 100);
-	} else {
-		ProductionSite::add_worker(w);
+	ProductionSite::add_worker(w);
+	if (upcast(Game, game, &owner().egbase())) {
+		schedule_act(*game, 100);
 	}
 }
 
 void TrainingSite::remove_worker(Worker & w)
 {
-	upcast(Game, game, &owner().egbase());
 
-	if (upcast(Soldier, soldier, &w)) {
-		log("CGH Removing worker from trainingsite\n");
-		m_garrison->soldier_removed(soldier);
-		if (game) {
-			schedule_act(*game, 100);
-		}
-	} else {
-		ProductionSite::remove_worker(w);
+	ProductionSite::remove_worker(w);
+	if (upcast(Game, game, &owner().egbase())) {
+		schedule_act(*game, 100);
 	}
 }
 
@@ -485,7 +475,9 @@ void TrainingSite::start_upgrade(Game & game, Upgrade & upgrade)
 	int32_t minlevel = upgrade.max;
 	int32_t maxlevel = upgrade.min;
 
-	container_iterate_const(std::vector<Soldier *>, m_garrison->stationedSoldiers(), i) {
+	const std::vector<Soldier*> soldiers = m_garrison->stationedSoldiers();
+	container_iterate_const(std::vector<Soldier *>, soldiers, i) {
+		assert((*i.current));
 		int32_t const level = (*i.current)->get_level(upgrade.attribute);
 
 		if (level > upgrade.max || level < upgrade.min)

@@ -129,9 +129,9 @@ void MilitarySite::cleanup(Editor_Game_Base & egbase)
 	// Order matters. Building needed to unconquer, building
 	// cleanup will trigger new requests in garrison, garrison
 	// cleanup will destroy them
-	m_garrison->unconquer_area(egbase);
-	ProductionSite::cleanup(egbase);
 	m_garrison->cleanup(egbase);
+	ProductionSite::cleanup(egbase);
+	m_garrison->cleanup_requests(egbase);
 }
 
 /*
@@ -151,24 +151,6 @@ void MilitarySite::act(Game & game, uint32_t const data)
 	m_garrison->act(game);
 	schedule_act(game, 1000);
 }
-
-
-/**
- * The worker is about to be removed.
- *
- * After the removal of the worker, check whether we need to request
- * new soldiers.
- */
-void MilitarySite::remove_worker(Worker & w)
-{
-	ProductionSite::remove_worker(w);
-
-	if (upcast(Soldier, soldier, &w)) {
-		log("CGH: Soldier removed\n");
-		m_garrison->soldier_removed(soldier);
-	}
-}
-
 
 /**
 ===============
@@ -209,8 +191,6 @@ void MilitarySite::set_economy(Economy * const e)
 {
 	ProductionSite::set_economy(e);
 	m_garrison->set_economy(e);
-	log("CGH: set_economy called with %d soldiers in playerimmovable and %d in garrison\n",
-		get_workers().size(), m_garrison->stationedSoldiers().size());
 }
 
 /**

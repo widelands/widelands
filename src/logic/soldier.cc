@@ -1034,12 +1034,12 @@ void Soldier::attack_update(Game & game, State & state)
 		}
 	}
 
-	upcast(Garrison, garrison, enemy);
-	assert(garrison);
+	upcast(GarrisonOwner, garrison_o, enemy);
+	assert(garrison_o);
 
 	molog("[attack] attacking target building\n");
 	//  give the enemy soldier some time to act
-	schedule_act(game, garrison->attack(*this) ? 1000 : 10);
+	schedule_act(game, garrison_o->get_garrison()->attack(*this) ? 1000 : 10);
 }
 
 void Soldier::attack_pop(Game & game, State &)
@@ -1784,13 +1784,18 @@ void Soldier::sendSpaceSignals(Game & game)
 			 CheckStepWalkOn(descr().movecaps(), false),
 			 FindImmovableAttackable());
 
-		container_iterate_const(std::vector<BaseImmovable *>, attackables, i)
+		container_iterate_const(std::vector<BaseImmovable *>, attackables, i) {
+			const BaseImmovable* base_imm = *i.current;
 			if
 				(ref_cast<PlayerImmovable const, BaseImmovable const>(**i.current)
-				 .get_owner()->player_number()
-				 ==
-				 land_owner)
-				dynamic_cast<Garrison &>(**i.current).aggressor(*this);
+				 .get_owner()->player_number() == land_owner) {
+				if (upcast(const GarrisonOwner, go, base_imm)) {
+					go->get_garrison()->aggressor(*this);
+				} else {
+					log("CGH Soldier signal bad cast\n");
+				}
+			}
+		}
 	}
 }
 
