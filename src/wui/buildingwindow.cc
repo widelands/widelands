@@ -296,7 +296,13 @@ void Building_Window::create_capsbuttons(UI::Box * capsbuttons)
 	}
 
 	if (can_see) {
-		if (m_building.descr().m_workarea_info.size()) {
+		Workarea_Info wa_info;
+		if (upcast(Widelands::ConstructionSite, csite, &m_building)) {
+			wa_info = csite->building().m_workarea_info;
+		} else {
+			wa_info = m_building.descr().m_workarea_info;
+		}
+		if (wa_info.size()) {
 			m_toggle_workarea = new UI::Button
 				(capsbuttons, "workarea",
 				 0, 0, 34, 34,
@@ -489,7 +495,15 @@ void Building_Window::show_workarea()
 	if (m_workarea_job_id) {
 		return; // already shown, nothing to be done
 	}
-	const Workarea_Info & workarea_info = m_building.descr().m_workarea_info;
+	Workarea_Info workarea_info;
+	if (upcast(Widelands::ConstructionSite, csite, &m_building)) {
+		workarea_info = csite->building().m_workarea_info;
+	} else {
+		workarea_info = m_building.descr().m_workarea_info;
+	}
+	if (!workarea_info.size()) {
+		return;
+	}
 	m_workarea_job_id = igbase().show_work_area(workarea_info, m_building.get_position());
 
 	configure_workarea_button();
