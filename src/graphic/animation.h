@@ -20,6 +20,8 @@
 #ifndef ANIMATION_H
 #define ANIMATION_H
 
+#include <cstring>
+#include <map>
 #include <string>
 #include <vector>
 

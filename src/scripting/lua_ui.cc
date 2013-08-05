@@ -17,17 +17,17 @@
  *
  */
 
+#include "scripting/lua_ui.h"
+
 #include <lua.hpp>
 
 #include "gamecontroller.h"
 #include "logic/player.h"
+#include "scripting/c_utils.h"
+#include "scripting/lua_map.h"
+#include "scripting/luna.h"
 #include "upcast.h"
 #include "wui/interactive_player.h"
-
-#include "c_utils.h"
-#include "lua_map.h"
-
-#include "lua_ui.h"
 
 namespace LuaUi {
 
@@ -524,6 +524,12 @@ const PropertyType<L_MapView> L_MapView::Properties[] = {
 
 L_MapView::L_MapView(lua_State * L) :
 	L_Panel(get_egbase(L).get_ibase()) {
+}
+
+void L_MapView::__unpersist(lua_State* L)
+{
+	Widelands::Game & game = get_game(L);
+	m_panel = game.get_ibase();
 }
 
 

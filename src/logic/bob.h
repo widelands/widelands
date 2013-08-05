@@ -23,10 +23,10 @@
 #include "economy/route.h"
 #include "graphic/animation.h"
 #include "graphic/diranimations.h"
-#include "instances.h"
+#include "logic/instances.h"
 #include "point.h"
 #include "port.h"
-#include "walkingdir.h"
+#include "logic/walkingdir.h"
 #include "writeHTML.h"
 
 struct Profile;

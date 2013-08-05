@@ -17,34 +17,37 @@
  *
  */
 
-#include "immovable.h"
-
-#include "editor_game_base.h"
-#include "game_data_error.h"
-#include "field.h"
-#include "game.h"
-#include "helper.h"
-#include "immovable_program.h"
-#include "player.h"
-#include "map.h"
-#include "mapfringeregion.h"
-#include "profile/profile.h"
-#include "graphic/graphic.h"
-#include "graphic/rendertarget.h"
-#include "sound/sound_handler.h"
-#include "tribe.h"
-#include "wexception.h"
-#include "widelands_fileread.h"
-#include "widelands_filewrite.h"
-#include "worker.h"
-
-#include "upcast.h"
-
-#include "container_iterate.h"
+#include "logic/immovable.h"
 
 #include <cstdio>
 
+#include <boost/format.hpp>
 #include <config.h>
+
+#include "container_iterate.h"
+#include "graphic/font_handler1.h"
+#include "graphic/graphic.h"
+#include "graphic/rendertarget.h"
+#include "helper.h"
+#include "logic/editor_game_base.h"
+#include "logic/field.h"
+#include "logic/game.h"
+#include "logic/game_data_error.h"
+#include "logic/immovable_program.h"
+#include "logic/map.h"
+#include "logic/mapfringeregion.h"
+#include "logic/player.h"
+#include "logic/tribe.h"
+#include "logic/widelands_fileread.h"
+#include "logic/widelands_filewrite.h"
+#include "logic/worker.h"
+#include "profile/profile.h"
+#include "sound/sound_handler.h"
+#include "text_layout.h"
+#include "upcast.h"
+#include "wexception.h"
+#include "wui/interactive_base.h"
+
 
 namespace Widelands {
 
@@ -535,6 +538,15 @@ void Immovable::draw_construction
 	assert(lines <= curh);
 	dst.drawanimrect
 		(pos, m_anim, current_frame * frametime, get_owner(), Rect(Point(0, curh - lines), curw, lines));
+
+	// Additionnaly, if statistics are enabled, draw a progression string
+	if (game.get_ibase()->get_display_flags() & Interactive_Base::dfShowStatistics) {
+		unsigned int percent = (100 * done / total);
+		m_construct_string =
+			(boost::format("<font color=%1$s>%2$i%% built</font>") % UI_FONT_CLR_DARK_HEX % percent).str();
+		m_construct_string = as_uifont(m_construct_string);
+		dst.blit(pos - Point(0, 48), UI::g_fh1->render(m_construct_string), CM_Normal, UI::Align_Center);
+	}
 }
 
 

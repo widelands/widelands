@@ -20,10 +20,9 @@
 #ifndef UI_CHECKBOX_H
 #define UI_CHECKBOX_H
 
-#include <boost/signals.hpp>
+#include <boost/signals2.hpp>
 
-#include "panel.h"
-
+#include "ui_basic/panel.h"
 #include "rgbcolor.h"
 
 #define STATEBOX_WIDTH 20
@@ -43,9 +42,9 @@ struct Statebox : public Panel {
 		 const std::string & tooltip_text = std::string());
 	~Statebox();
 
-	boost::signal<void ()> changed;
-	boost::signal<void (bool)> changedto;
-	boost::signal<void (bool)> clickedto; // same as changedto but only called when clicked
+	boost::signals2::signal<void ()> changed;
+	boost::signals2::signal<void (bool)> changedto;
+	boost::signals2::signal<void (bool)> clickedto; // same as changedto but only called when clicked
 
 	void set_enabled(bool enabled);
 

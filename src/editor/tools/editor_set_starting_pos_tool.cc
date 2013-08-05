@@ -17,12 +17,12 @@
  *
  */
 
-#include "editor_set_starting_pos_tool.h"
+#include "editor/tools/editor_set_starting_pos_tool.h"
 
-#include "logic/building.h"
 #include "editor/editorinteractive.h"
-#include "editor_tool.h"
+#include "editor/tools/editor_tool.h"
 #include "graphic/graphic.h"
+#include "logic/building.h"
 #include "logic/map.h"
 #include "wui/overlay_manager.h"
 

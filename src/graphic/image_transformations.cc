@@ -17,21 +17,20 @@
  *
  */
 
+#include "graphic/image_transformations.h"
+
 #include <string>
 
 #include <SDL.h>
 #include <SDL_rotozoom.h>
 #include <boost/format.hpp>
 
+#include "graphic/graphic.h"
+#include "graphic/render/sdl_surface.h"
+#include "graphic/surface.h"
+#include "graphic/surface_cache.h"
 #include "rgbcolor.h"
 #include "upcast.h"
-
-#include "graphic.h"
-#include "render/sdl_surface.h"
-#include "surface.h"
-#include "surface_cache.h"
-
-#include "image_transformations.h"
 
 using namespace std;
 

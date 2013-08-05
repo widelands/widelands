@@ -17,22 +17,22 @@
  *
  */
 
-#include "editor_tool_place_immovable_options_menu.h"
+#include "editor/ui_menus/editor_tool_place_immovable_options_menu.h"
+
+#include <SDL_keysym.h>
 
 #include "editor/editorinteractive.h"
 #include "editor/tools/editor_place_immovable_tool.h"
 #include "graphic/graphic.h"
 #include "i18n.h"
 #include "logic/map.h"
-#include "wlapplication.h"
 #include "logic/world.h"
-
 #include "ui_basic/box.h"
 #include "ui_basic/button.h"
 #include "ui_basic/checkbox.h"
 #include "ui_basic/textarea.h"
+#include "wlapplication.h"
 
-#include <SDL_keysym.h>
 
 using Widelands::Immovable_Descr;
 
@@ -42,7 +42,7 @@ Editor_Tool_Place_Immovable_Options_Menu
 		 Editor_Place_Immovable_Tool & pit,
 		 UI::UniqueWindow::Registry  & registry)
 :
-Editor_Tool_Options_Menu(parent, registry, 100, 100, _("Immovable Bobs Menu")),
+Editor_Tool_Options_Menu(parent, registry, 100, 100, _("Immovable Bobs")),
 m_tabpanel(this, 0, 0, g_gr->images().get("pics/but1.png")),
 m_pit     (pit),
 m_click_recursion_protect(false)

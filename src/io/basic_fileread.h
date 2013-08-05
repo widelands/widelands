@@ -20,15 +20,15 @@
 #ifndef BASIC_FILEREAD_H
 #define BASIC_FILEREAD_H
 
-#include "io/filesystem/filesystem.h"
-#include "machdep.h"
-#ifdef _WIN32
-#else
+#include <cassert>
+#include <limits>
+
+#ifndef _WIN32
 #include <sys/mman.h>
 #endif
 
-#include <cassert>
-#include <limits>
+#include "io/filesystem/filesystem.h"
+#include "machdep.h"
 
 /// Can be used to read a file. It works quite naively by reading the entire
 /// file into memory. Convenience functions are available for endian-safe

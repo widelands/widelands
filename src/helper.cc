@@ -17,7 +17,10 @@
  *
  */
 
+#include "helper.h"
+
 #include <cstdarg>
+#include <memory>
 #include <string>
 
 #include <boost/algorithm/string/replace.hpp>
@@ -25,10 +28,7 @@
 #include <boost/lexical_cast.hpp>
 #include <boost/random.hpp>
 
-#include "helper.h"
-
 using namespace std;
-
 
 /// Split a string by separators.
 /// \note This ignores empty elements, so do not use this for example to split

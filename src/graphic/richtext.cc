@@ -17,14 +17,14 @@
  *
  */
 
-#include "richtext.h"
+#include "graphic/richtext.h"
 
-#include "font.h"
-#include "font_handler.h"
-#include "graphic.h"
-#include "image.h"
+#include "graphic/font.h"
+#include "graphic/font_handler.h"
+#include "graphic/graphic.h"
+#include "graphic/image.h"
+#include "graphic/rendertarget.h"
 #include "rect.h"
-#include "rendertarget.h"
 #include "text_parser.h"
 
 namespace UI {

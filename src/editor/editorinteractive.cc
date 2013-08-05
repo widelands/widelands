@@ -17,8 +17,17 @@
  *
  */
 
-#include "editorinteractive.h"
+#include "editor/editorinteractive.h"
 
+#include <SDL_keysym.h>
+
+#include "editor/tools/editor_delete_immovable_tool.h"
+#include "editor/ui_menus/editor_main_menu.h"
+#include "editor/ui_menus/editor_main_menu_load_map.h"
+#include "editor/ui_menus/editor_main_menu_save_map.h"
+#include "editor/ui_menus/editor_player_menu.h"
+#include "editor/ui_menus/editor_tool_menu.h"
+#include "editor/ui_menus/editor_toolsize_menu.h"
 #include "graphic/graphic.h"
 #include "i18n.h"
 #include "logic/map.h"
@@ -27,22 +36,14 @@
 #include "map_io/widelands_map_loader.h"
 #include "profile/profile.h"
 #include "scripting/scripting.h"
-#include "tools/editor_delete_immovable_tool.h"
 #include "ui_basic/messagebox.h"
 #include "ui_basic/progresswindow.h"
-#include "ui_menus/editor_main_menu.h"
-#include "ui_menus/editor_main_menu_load_map.h"
-#include "ui_menus/editor_main_menu_save_map.h"
-#include "ui_menus/editor_player_menu.h"
-#include "ui_menus/editor_tool_menu.h"
-#include "ui_menus/editor_toolsize_menu.h"
 #include "warning.h"
 #include "wlapplication.h"
 #include "wui/game_tips.h"
 #include "wui/interactive_base.h"
 #include "wui/overlay_manager.h"
 
-#include <SDL_keysym.h>
 
 using Widelands::Building;
 

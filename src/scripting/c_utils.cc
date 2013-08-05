@@ -18,14 +18,14 @@
  */
 
 
+#include "scripting/c_utils.h"
+
 #include <cstdarg>
 #include <cstdio>
 #include <iostream>
 
-#include "factory.h"
-#include "scripting.h"
-
-#include "c_utils.h"
+#include "scripting/factory.h"
+#include "scripting/scripting.h"
 
 Factory & get_factory(lua_State * const L) {
 	lua_getfield(L, LUA_REGISTRYINDEX, "factory");

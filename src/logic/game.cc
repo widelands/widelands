@@ -17,12 +17,17 @@
  *
  */
 
-#include "game.h"
+#include "logic/game.h"
 
-#include "carrier.h"
-#include "cmd_calculate_statistics.h"
-#include "cmd_luacoroutine.h"
-#include "cmd_luascript.h"
+#include <cstring>
+#include <string>
+
+#ifndef _WIN32
+#include <unistd.h> // for usleep
+#else
+#include <windows.h>
+#endif
+
 #include "computer_player.h"
 #include "economy/economy.h"
 #include "game_io/game_loader.h"
@@ -33,37 +38,32 @@
 #include "i18n.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "log.h"
+#include "logic/carrier.h"
+#include "logic/cmd_calculate_statistics.h"
+#include "logic/cmd_luacoroutine.h"
+#include "logic/cmd_luascript.h"
+#include "logic/militarysite.h"
+#include "logic/player.h"
+#include "logic/playercommand.h"
+#include "logic/replay.h"
+#include "logic/ship.h"
+#include "logic/soldier.h"
+#include "logic/trainingsite.h"
+#include "logic/tribe.h"
+#include "logic/widelands_fileread.h"
+#include "logic/widelands_filewrite.h"
 #include "map_io/widelands_map_loader.h"
 #include "network/network.h"
-#include "player.h"
-#include "playercommand.h"
 #include "profile/profile.h"
-#include "replay.h"
 #include "scripting/scripting.h"
-#include "ship.h"
-#include "soldier.h"
 #include "sound/sound_handler.h"
 #include "timestring.h"
-#include "trainingsite.h"
-#include "tribe.h"
 #include "ui_basic/progresswindow.h"
 #include "upcast.h"
 #include "warning.h"
-#include "widelands_fileread.h"
-#include "widelands_filewrite.h"
 #include "wlapplication.h"
 #include "wui/game_tips.h"
 #include "wui/interactive_player.h"
-#include "militarysite.h"
-
-#include <cstring>
-#include <string>
-
-#ifndef _WIN32
-#include <unistd.h> // for usleep
-#else
-#include <windows.h>
-#endif
 
 namespace Widelands {
 

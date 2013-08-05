@@ -17,10 +17,10 @@
  *
  */
 
-#include "buildcost.h"
+#include "logic/buildcost.h"
 
+#include "logic/tribe.h"
 #include "profile/profile.h"
-#include "tribe.h"
 #include "wexception.h"
 
 namespace Widelands {

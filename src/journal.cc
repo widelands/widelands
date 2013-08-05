@@ -19,11 +19,11 @@
 
 #include "journal.h"
 
-#include "log.h"
-#include "io/filesystem/filesystem.h"
-#include "machdep.h"
-
 #include <cassert>
+
+#include "io/filesystem/filesystem.h"
+#include "log.h"
+#include "machdep.h"
 
 /**
  * Write a signed 8bit value to the recording file.

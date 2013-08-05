@@ -17,38 +17,39 @@
  *
  */
 
-#include "worker.h"
+#include "logic/worker.h"
 
-#include "carrier.h"
-#include "checkstep.h"
-#include "cmd_incorporate.h"
-#include "critter_bob.h"
 #include "economy/economy.h"
 #include "economy/flag.h"
+#include "economy/portdock.h"
 #include "economy/road.h"
 #include "economy/transfer.h"
-#include "economy/portdock.h"
-#include "findbob.h"
-#include "findimmovable.h"
-#include "findnode.h"
-#include "game.h"
-#include "game_data_error.h"
 #include "gamecontroller.h"
 #include "graphic/rendertarget.h"
 #include "helper.h"
+#include "logic/carrier.h"
+#include "logic/checkstep.h"
+#include "logic/cmd_incorporate.h"
+#include "logic/critter_bob.h"
+#include "logic/dismantlesite.h"
+#include "logic/findbob.h"
+#include "logic/findimmovable.h"
+#include "logic/findnode.h"
+#include "logic/game.h"
+#include "logic/game_data_error.h"
+#include "logic/mapfringeregion.h"
+#include "logic/message_queue.h"
+#include "logic/player.h"
+#include "logic/soldier.h"
+#include "logic/tribe.h"
+#include "logic/warehouse.h"
+#include "logic/worker_program.h"
 #include "map_io/widelands_map_map_object_loader.h"
 #include "map_io/widelands_map_map_object_saver.h"
-#include "mapfringeregion.h"
-#include "message_queue.h"
-#include "player.h"
 #include "profile/profile.h"
-#include "soldier.h"
 #include "sound/sound_handler.h"
-#include "tribe.h"
 #include "upcast.h"
-#include "warehouse.h"
 #include "wexception.h"
-#include "worker_program.h"
 
 namespace Widelands {
 
@@ -147,22 +148,23 @@ bool Worker::run_mine(Game & game, State & state, const Action & action)
 		return true;
 	}
 
-	// Second pass through fields
+	// Second pass through fields - reset mr
 	pick = game.logic_rand() % totalchance;
-
+	mr = MapRegion<Area<FCoords> >
+		(map, Area<FCoords>(map.get_fcoords(get_position()), action.iparam1));
 	do {
 		uint8_t fres  = mr.location().field->get_resources();
-		uint32_t amount = mr.location().field->get_resources_amount();
+		if (fres != res) {
+			continue;
+		}
 
-		if (fres != res)
-			amount = 0;
+		uint32_t amount = mr.location().field->get_resources_amount();
 
 		pick -= 8 * amount;
 		if (pick < 0) {
 			assert(amount > 0);
 
 			--amount;
-
 			mr.location().field->set_resources(res, amount);
 			break;
 		}
@@ -192,6 +194,8 @@ bool Worker::run_mine(Game & game, State & state, const Action & action)
  * \param action Which resource to breed (action.sparam1) and where to put
  * it (in a radius of action.iparam1 around current location)
  *
+ * FIXME: in FindNodeResourceBreedable, the node (or neighbors) is accepted if it is breedable.
+ * In here, breeding may happen on a node emptied of resource.
  * \todo Lots of magic numbers in here
  * \todo Document parameters g and state
  */
@@ -251,18 +255,20 @@ bool Worker::run_breed(Game & game, State & state, const Action & action)
 		return true;
 	}
 
-	// Second pass through fields
+	// Second pass through fields - reset mr!
 	assert(totalchance);
 	pick = game.logic_rand() % totalchance;
+	mr = MapRegion<Area<FCoords> >
+		(map, Area<FCoords>(map.get_fcoords(get_position()), action.iparam1));
 
 	do {
 		uint8_t fres  = mr.location().field->get_resources();
+		if (fres != res)
+			continue;
+
 		uint32_t amount =
 			mr.location().field->get_starting_res_amount() -
 			mr.location().field->get_resources_amount   ();
-
-		if (fres != res)
-			amount = 0;
 
 		pick -= 8 * amount;
 		if (pick < 0) {
@@ -957,7 +963,9 @@ bool Worker::run_geologist_find(Game & game, State & state, const Action &)
 				 	 game.get_gametime(), 60 * 60 * 1000,
 				 	 rdescr->descname(),
 				 	 message,
-				 	 position),
+				 	 position,
+					 m_serial
+					),
 				 300000, 8);
 		}
 
@@ -1819,19 +1827,28 @@ void Worker::return_update(Game & game, State & state)
 		if (upcast(Flag, flag, pos)) {
 			// Is this "our" flag?
 			if (flag->get_building() == location) {
-				if (state.ivar1 && flag->has_capacity())
+				if (state.ivar1 && flag->has_capacity()) {
 					if (WareInstance * const item = fetch_carried_item(game)) {
 						flag->add_item(game, *item);
 						set_animation(game, descr().get_animation("idle"));
 						return schedule_act(game, 20); //  rest a while
 					}
+				}
 
-				return
-					start_task_move
-						(game,
-						 WALK_NW,
-						 descr().get_right_walk_anims(does_carry_ware()),
-						 true);
+				// Don't try to enter building if it is a dismantle site
+				// It is no problem for builders since they won't return before
+				// dismantling is complete.
+				if (is_a(DismantleSite, location)) {
+					set_location(0);
+					return pop_task(game);
+				} else {
+					return
+						start_task_move
+							(game,
+							WALK_NW,
+							descr().get_right_walk_anims(does_carry_ware()),
+							true);
+				}
 			}
 		}
 	}
@@ -1859,7 +1876,8 @@ void Worker::return_update(Game & game, State & state)
 			 	 game.get_gametime(), Forever(),
 			 	 _("Worker got lost!"),
 			 	 buffer,
-			 	 get_position()));
+			 	 get_position()),
+				 m_serial);
 		set_location(0);
 		return pop_task(game);
 	}
@@ -2396,8 +2414,9 @@ void Worker::leavebuilding_update(Game & game, State & state)
 		return pop_task(game);
 
 	upcast(Building, building, get_location(game));
-	if (!building)
+	if (!building) {
 		return pop_task(game);
+	}
 
 	Flag & baseflag = building->base_flag();
 

@@ -20,10 +20,10 @@
 #ifndef IMAGE_H
 #define IMAGE_H
 
-#include <stdint.h>
 #include <string>
 
 #include <boost/noncopyable.hpp>
+#include <stdint.h>
 
 /**
  * Interface to a bitmap that can act as the source of a rendering

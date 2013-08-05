@@ -17,7 +17,7 @@
  *
  */
 
-#include "colormap.h"
+#include "graphic/colormap.h"
 
 #include <cassert>
 #include <cstdlib>

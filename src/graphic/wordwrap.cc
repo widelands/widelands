@@ -21,11 +21,11 @@
  * from Wesnoth -- http://www.wesnoth.org
  */
 
-#include "wordwrap.h"
+#include "graphic/wordwrap.h"
 
-#include "font_handler.h"
+#include "graphic/font_handler.h"
+#include "graphic/rendertarget.h"
 #include "log.h"
-#include "rendertarget.h"
 
 namespace UI {
 

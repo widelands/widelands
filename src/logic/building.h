@@ -20,21 +20,21 @@
 #ifndef BUILDING_H
 #define BUILDING_H
 
+#include <cstring>
+#include <string>
+#include <vector>
+
+#include <boost/signals2.hpp>
+
 #include "ai/ai_hints.h"
-#include "buildcost.h"
-#include "immovable.h"
-#include "soldier_counts.h"
+#include "logic/buildcost.h"
+#include "logic/immovable.h"
+#include "io/filewrite.h"
+#include "logic/soldier_counts.h"
+#include "logic/ware_types.h"
+#include "logic/widelands.h"
 #include "workarea_info.h"
 #include "writeHTML.h"
-#include "ware_types.h"
-#include "widelands.h"
-
-#include "io/filewrite.h"
-
-#include <string>
-#include <cstring>
-#include <vector>
-#include <boost/signal.hpp>
 
 namespace UI {class Window;}
 struct BuildingHints;
@@ -261,7 +261,7 @@ public:
 
 	void    add_worker(Worker &);
 	void remove_worker(Worker &);
-	mutable boost::signal<void ()> workers_changed;
+	mutable boost::signals2::signal<void ()> workers_changed;
 
 	void send_message
 		(Game & game,
@@ -308,7 +308,7 @@ protected:
 	bool m_seeing;
 
 	// Signals connected for the option window
-	std::vector<boost::signals::connection> options_window_connections;
+	std::vector<boost::signals2::connection> options_window_connections;
 
 	// The former buildings descrs, with the current one in last position.
 	FormerBuildings m_old_buildings;

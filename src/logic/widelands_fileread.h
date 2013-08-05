@@ -21,7 +21,7 @@
 #define WIDELANDS_FILEREAD_H
 
 #include "io/basic_fileread.h"
-#include "widelands_streamread.h"
+#include "logic/widelands_streamread.h"
 
 namespace Widelands {typedef basic_FileRead<StreamRead> FileRead;}
 

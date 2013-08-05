@@ -26,12 +26,11 @@
 #include <memory>
 #include <string>
 
+#include <SDL_keyboard.h>
 #include <boost/noncopyable.hpp>
-#include <boost/signals/trackable.hpp>
+#include <boost/signals2/trackable.hpp>
 
 #include "point.h"
-
-#include <SDL_keyboard.h>
 
 class RenderTarget;
 class Image;
@@ -58,7 +57,7 @@ namespace UI {
  * its desired size changes, this automatically changes the actual size (which then invokes
  * \ref layout and \ref move_inside_parent).
  */
-struct Panel : boost::signals::trackable, boost::noncopyable {
+struct Panel : boost::signals2::trackable, boost::noncopyable {
 	enum {
 		pf_handle_mouse = 1, ///< receive mouse events
 		pf_think = 2, ///< call think() function during run

@@ -17,17 +17,17 @@
  *
  */
 
-#include "editbox.h"
+#include "ui_basic/editbox.h"
 
-#include "mouse_constants.h"
+#include <limits>
+
+#include <SDL_keysym.h>
 
 #include "graphic/font.h"
 #include "graphic/font_handler.h"
 #include "graphic/rendertarget.h"
 #include "helper.h"
-
-#include <limits>
-#include <SDL_keysym.h>
+#include "ui_basic/mouse_constants.h"
 
 namespace UI {
 

@@ -1,4 +1,0 @@
-substr(0, 3) == str
-substr(0, 3) != str
-substr(pos, 3) == "abc"
-substr(pos, 3) != "abc"

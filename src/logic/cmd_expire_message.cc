@@ -17,10 +17,10 @@
  *
  */
 
-#include "cmd_expire_message.h"
+#include "logic/cmd_expire_message.h"
 
-#include "game.h"
-#include "player.h"
+#include "logic/game.h"
+#include "logic/player.h"
 
 namespace Widelands {
 

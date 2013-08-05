@@ -20,9 +20,8 @@
 #ifndef WARES_QUEUE_H
 #define WARES_QUEUE_H
 
-// Needed for Ware_Index
-#include "logic/widelands.h"
 #include "logic/immovable.h"
+#include "logic/widelands.h"
 
 namespace Widelands {
 

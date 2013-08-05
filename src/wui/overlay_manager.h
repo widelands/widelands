@@ -20,13 +20,14 @@
 #ifndef OVERLAY_MANAGER_H
 #define OVERLAY_MANAGER_H
 
-#include "boost/bind.hpp"
-#include "boost/function.hpp"
-#include "logic/field.h"
-#include "logic/widelands_geometry.h"
-
 #include <map>
 #include <set>
+
+#include <boost/bind.hpp>
+#include <boost/function.hpp>
+
+#include "logic/field.h"
+#include "logic/widelands_geometry.h"
 
 class Image;
 

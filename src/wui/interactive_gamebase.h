@@ -20,9 +20,9 @@
 #ifndef INTERACTIVE_GAMEBASE_H
 #define INTERACTIVE_GAMEBASE_H
 
-#include "interactive_base.h"
+#include "wui/general_statistics_menu.h"
+#include "wui/interactive_base.h"
 #include "logic/game.h"
-#include "general_statistics_menu.h"
 
 struct ChatOverlay;
 struct ChatProvider;

@@ -17,14 +17,14 @@
  *
  */
 
-#include "luna_impl.h"
-
-#include "log.h"
-
-#include "c_utils.h"
-#include "luna.h"
+#include "scripting/luna_impl.h"
 
 #include <string>
+
+#include "log.h"
+#include "scripting/c_utils.h"
+#include "scripting/luna.h"
+
 
 /*
  * =======================================

@@ -17,24 +17,24 @@
  *
  */
 
+#include "logic/dismantlesite.h"
+
 #include <cstdio>
+
 #include <boost/foreach.hpp>
 
-#include "upcast.h"
-#include "wexception.h"
-
 #include "economy/wares_queue.h"
-#include "editor_game_base.h"
-#include "game.h"
 #include "graphic/animation.h"
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
 #include "i18n.h"
+#include "logic/editor_game_base.h"
+#include "logic/game.h"
+#include "logic/tribe.h"
+#include "logic/worker.h"
 #include "sound/sound_handler.h"
-#include "tribe.h"
-#include "worker.h"
-
-#include "dismantlesite.h"
+#include "upcast.h"
+#include "wexception.h"
 
 namespace Widelands {
 
@@ -210,7 +210,13 @@ bool DismantleSite::get_building_work(Game & game, Worker & worker, bool) {
 		schedule_destroy(game);
 
 		worker.pop_task(game);
-		worker.start_task_leavebuilding(game, true);
+		// No more building, so move to the flag
+		worker.start_task_move
+				(game,
+				 WALK_SE,
+				 worker.descr().get_right_walk_anims(false),
+				 true);
+		worker.set_location(nullptr);
 	} else if (not m_working) {
 		m_work_steptime = game.get_gametime() + DISMANTLESITE_STEP_TIME;
 		worker.start_task_idle

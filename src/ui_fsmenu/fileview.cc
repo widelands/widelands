@@ -17,7 +17,7 @@
  *
  */
 
-#include "fileview.h"
+#include "ui_fsmenu/fileview.h"
 
 #include "constants.h"
 #include "graphic/graphic.h"

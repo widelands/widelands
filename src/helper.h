@@ -20,16 +20,16 @@
 #ifndef HELPER_H
 #define HELPER_H
 
-#include "wexception.h"
-
-#include <SDL_keyboard.h>
-#include <boost/utility.hpp>
-
 #include <cassert>
 #include <cstring>
 #include <sstream>
 #include <string>
 #include <vector>
+
+#include <SDL_keyboard.h>
+#include <boost/utility.hpp>
+
+#include "wexception.h"
 
 /// Matches the string that candidate points to against the string that
 /// template points to. Stops at when reaching a null character or the

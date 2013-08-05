@@ -18,24 +18,25 @@
  */
 // UI classes for real-time game debugging
 
+#include "wui/game_debug_ui.h"
+
+#include <cstdio>
+
+#include "graphic/graphic.h"
+#include "i18n.h"
 #include "logic/bob.h"
 #include "logic/building.h"
 #include "logic/field.h"
-#include "logic/player.h"
-#include "graphic/graphic.h"
-#include "i18n.h"
 #include "logic/instances.h"
-#include "interactive_base.h"
 #include "logic/map.h"
-
+#include "logic/player.h"
 #include "ui_basic/button.h"
 #include "ui_basic/listselect.h"
 #include "ui_basic/multilinetextarea.h"
 #include "ui_basic/panel.h"
 #include "ui_basic/tabpanel.h"
 #include "ui_basic/window.h"
-
-#include <cstdio>
+#include "wui/interactive_base.h"
 
 struct MapObjectDebugPanel
 : public UI::Panel, public Widelands::Map_Object::LogSink
@@ -397,10 +398,34 @@ void FieldDebugWindow::think()
 
 	// Bobs information
 	std::vector<Widelands::Bob *> bobs;
-
-	m_ui_bobs.clear();
-
 	m_map.find_bobs(Widelands::Area<Widelands::FCoords>(m_coords, 0), &bobs);
+
+	// Do not clear the list. Instead parse all bobs and sync lists
+	for (uint32_t idx = 0; idx < m_ui_bobs.size(); idx++) {
+		Widelands::Map_Object* mo =
+			ibase().egbase().objects().get_object(m_ui_bobs[idx]);
+		bool toremove = false;
+		std::vector<Widelands::Bob *>::iterator removeIt;
+		// Nested loop :(
+		container_iterate(std::vector<Widelands::Bob *>, bobs, j) {
+			if ((*j.current) && mo && (*j.current)->serial() == mo->serial()) {
+				// Remove from the bob list if we already
+				// have it in our list
+				toremove = true;
+				removeIt = j.current;
+				break;
+			}
+		}
+		if (toremove) {
+			bobs.erase(removeIt);
+			continue;
+		}
+		// Remove from our list if its not in the bobs
+		// list, or if it doesn't seem to exist anymore
+		m_ui_bobs.remove(idx);
+		idx--; //reiter the same index
+	}
+	// Add remaining
 	container_iterate_const(std::vector<Widelands::Bob *>, bobs, j) {
 		snprintf
 			(buffer, sizeof(buffer),

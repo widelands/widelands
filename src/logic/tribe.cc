@@ -17,37 +17,38 @@
  *
  */
 
+#include "logic/tribe.h"
+
 #include <iostream>
 
 #include <boost/algorithm/string.hpp>
 
-#include "carrier.h"
-#include "constructionsite.h"
-#include "critter_bob.h"
-#include "dismantlesite.h"
-#include "editor_game_base.h"
-#include "game.h"
-#include "game_data_error.h"
 #include "graphic/graphic.h"
 #include "helper.h"
 #include "i18n.h"
-#include "immovable.h"
 #include "io/filesystem/disk_filesystem.h"
 #include "io/filesystem/layered_filesystem.h"
-#include "militarysite.h"
+#include "logic/carrier.h"
+#include "logic/constructionsite.h"
+#include "logic/critter_bob.h"
+#include "logic/dismantlesite.h"
+#include "logic/editor_game_base.h"
+#include "logic/game.h"
+#include "logic/game_data_error.h"
+#include "logic/immovable.h"
+#include "logic/militarysite.h"
+#include "logic/ship.h"
+#include "logic/soldier.h"
+#include "logic/trainingsite.h"
+#include "logic/warehouse.h"
+#include "logic/widelands_fileread.h"
+#include "logic/worker.h"
+#include "logic/world.h"
 #include "parse_map_object_types.h"
 #include "profile/profile.h"
 #include "scripting/scripting.h"
-#include "ship.h"
-#include "soldier.h"
-#include "trainingsite.h"
 #include "upcast.h"
-#include "warehouse.h"
-#include "widelands_fileread.h"
-#include "worker.h"
-#include "world.h"
 
-#include "tribe.h"
 
 using namespace std;
 

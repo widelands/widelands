@@ -17,35 +17,34 @@
  *
  */
 
-#include <config.h>
+#include "logic/production_program.h"
 
 #include <boost/format.hpp>
+#include <config.h>
 #include <libintl.h>
 
-#include "checkstep.h"
 #include "economy/economy.h"
 #include "economy/flag.h"
 #include "economy/wares_queue.h"
-#include "findimmovable.h"
-#include "findnode.h"
-#include "game.h"
-#include "game_data_error.h"
 #include "graphic/graphic.h"
 #include "helper.h"
-#include "mapregion.h"
-#include "message_queue.h"
-#include "player.h"
-#include "productionsite.h"
+#include "logic/checkstep.h"
+#include "logic/findimmovable.h"
+#include "logic/findnode.h"
+#include "logic/game.h"
+#include "logic/game_data_error.h"
+#include "logic/mapregion.h"
+#include "logic/message_queue.h"
+#include "logic/player.h"
+#include "logic/productionsite.h"
+#include "logic/soldier.h"
+#include "logic/soldiercontrol.h"
+#include "logic/trainingsite.h"
+#include "logic/tribe.h"
+#include "logic/worker_program.h"
 #include "profile/profile.h"
-#include "soldier.h"
-#include "soldiercontrol.h"
 #include "sound/sound_handler.h"
-#include "tribe.h"
 #include "upcast.h"
-#include "worker_program.h"
-#include "trainingsite.h"
-
-#include "production_program.h"
 
 namespace Widelands {
 

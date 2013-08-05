@@ -20,7 +20,7 @@
 #ifndef EDITOR_DELETE_BOB_TOOL_H
 #define EDITOR_DELETE_BOB_TOOL_H
 
-#include "editor_tool.h"
+#include "editor/tools/editor_tool.h"
 
 /// Deletes bob from the map.
 struct Editor_Delete_Bob_Tool : public Editor_Tool {

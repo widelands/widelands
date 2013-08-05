@@ -20,16 +20,17 @@
 #ifndef INSTANCES_H
 #define INSTANCES_H
 
+#include <cstring>
 #include <map>
 #include <string>
-#include <cstring>
 #include <vector>
 
 #include <boost/function.hpp>
 #include <boost/noncopyable.hpp>
 #include <boost/unordered_map.hpp>
+#include <boost/signals2.hpp>
 
-#include "cmd_queue.h"
+#include "logic/cmd_queue.h"
 #include "log.h"
 #include "port.h"
 #include "ref_cast.h"
@@ -197,6 +198,13 @@ public:
 	Serial serial() const {return m_serial;}
 
 	/**
+	 * Is called right before the object will be removed from
+	 * the game. No conncetion is handled in this class.
+	 * \param serial : the object serial
+	 */
+	boost::signals2::signal<void(uint32_t)> removed;
+
+	/**
 	 * Attributes are fixed boolean properties of an object.
 	 * An object either has a certain attribute or it doesn't.
 	 * See the \ref Attribute enume.
@@ -346,7 +354,7 @@ struct Object_Manager : boost::noncopyable {
 
 	Map_Object * get_object(Serial const serial) const {
 		const objmap_t::const_iterator it = m_objects.find(serial);
-		return it != m_objects.end() ? it->second : 0;
+		return it != m_objects.end() ? it->second : nullptr;
 	}
 
 	void insert(Map_Object *);

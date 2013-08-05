@@ -17,10 +17,10 @@
  *
  */
 
-#include "game_objectives_menu.h"
+#include "wui/game_objectives_menu.h"
 
-#include "interactive_player.h"
 #include "logic/player.h"
+#include "wui/interactive_player.h"
 
 using namespace Widelands;
 

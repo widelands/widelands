@@ -20,11 +20,11 @@
 #ifndef WAREHOUSE_H
 #define WAREHOUSE_H
 
-#include "attackable.h"
-#include "building.h"
+#include "logic/attackable.h"
+#include "logic/building.h"
 #include "economy/request.h"
-#include "soldiercontrol.h"
-#include "wareworker.h"
+#include "logic/soldiercontrol.h"
+#include "logic/wareworker.h"
 
 struct Interactive_Player;
 struct Profile;

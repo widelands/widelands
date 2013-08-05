@@ -20,15 +20,14 @@
 #ifndef WARELIST_H
 #define WARELIST_H
 
-#include "widelands.h"
-
-#include <boost/signal.hpp>
-#include <boost/bind.hpp>
-
-#include <SDL.h>
-
 #include <cassert>
 #include <vector>
+
+#include <SDL.h>
+#include <boost/bind.hpp>
+#include <boost/signals2.hpp>
+
+#include "logic/widelands.h"
 
 namespace Widelands {
 
@@ -63,7 +62,7 @@ struct WareList {
 	bool operator== (const WareList &)    const;
 	bool operator!= (const WareList & wl) const {return not (*this == wl);}
 
-	mutable boost::signal<void ()> changed;
+	mutable boost::signals2::signal<void ()> changed;
 
 private:
 	vector_type m_wares;

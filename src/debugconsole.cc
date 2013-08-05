@@ -20,6 +20,7 @@
 #include "debugconsole.h"
 
 #include <map>
+
 #include <boost/bind.hpp>
 
 #include "chat.h"

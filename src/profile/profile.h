@@ -21,6 +21,7 @@
 #define PROFILE_H
 
 #include <cstring>
+#include <vector>
 
 #include <boost/noncopyable.hpp>
 
@@ -32,7 +33,6 @@
 #include "point.h"
 #include "port.h"
 
-#include <vector>
 
 namespace Widelands {
 struct Building_Descr;

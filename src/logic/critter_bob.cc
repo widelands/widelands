@@ -17,18 +17,19 @@
  *
  */
 
-#include "critter_bob.h"
-
-#include "critter_bob_program.h"
-#include "field.h"
-#include "game.h"
-#include "game_data_error.h"
-#include "helper.h"
-#include "profile/profile.h"
-#include "tribe.h"
-#include "wexception.h"
+#include "logic/critter_bob.h"
 
 #include <cstdio>
+
+#include "helper.h"
+#include "logic/critter_bob_program.h"
+#include "logic/field.h"
+#include "logic/game.h"
+#include "logic/game_data_error.h"
+#include "logic/tribe.h"
+#include "profile/profile.h"
+#include "wexception.h"
+
 
 namespace Widelands {
 

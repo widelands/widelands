@@ -17,7 +17,7 @@
  *
  */
 
-#include "game_preload_data_packet.h"
+#include "game_io/game_preload_data_packet.h"
 
 #include "logic/game.h"
 #include "logic/game_data_error.h"

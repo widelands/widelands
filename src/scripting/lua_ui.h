@@ -22,12 +22,11 @@
 
 #include <lua.hpp>
 
+#include "scripting/luna.h"
 #include "ui_basic/button.h"
 #include "ui_basic/tabpanel.h"
 #include "ui_basic/window.h"
 #include "wui/interactive_base.h"
-
-#include "luna.h"
 
 namespace LuaUi {
 
@@ -179,6 +178,9 @@ public:
 	L_MapView(Map_View * p) : L_Panel(p) {};
 	L_MapView(lua_State * L);
 	virtual ~L_MapView() {}
+
+	virtual void __persist(lua_State * L) {}
+	virtual void __unpersist(lua_State * L);
 
 	/*
 	 * Properties

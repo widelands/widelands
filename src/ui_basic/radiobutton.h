@@ -20,11 +20,10 @@
 #ifndef UI_RADIOBUTTON_H
 #define UI_RADIOBUTTON_H
 
-#include "point.h"
-
-#include "checkbox.h"
-
 #include <stdint.h>
+
+#include "ui_basic/checkbox.h"
+#include "point.h"
 
 namespace UI {
 
@@ -59,9 +58,9 @@ struct Radiogroup {
 	Radiogroup();
 	~Radiogroup();
 
-	boost::signal<void ()> changed;
-	boost::signal<void (int32_t)> changedto;
-	boost::signal<void ()> clicked; //  clicked without things changed
+	boost::signals2::signal<void ()> changed;
+	boost::signals2::signal<void (int32_t)> changedto;
+	boost::signals2::signal<void ()> clicked; //  clicked without things changed
 
 	int32_t add_button
 		(Panel * parent, Point, const Image* pic, const std::string& tooltip = "", Radiobutton ** = nullptr);

@@ -20,15 +20,14 @@
 #ifndef WARESDISPLAY_H
 #define WARESDISPLAY_H
 
-#include <boost/signal.hpp>
+#include <vector>
 
+#include <boost/signals2.hpp>
+
+#include "logic/tribe.h"
 #include "logic/warelist.h"
 #include "logic/wareworker.h"
-#include "logic/tribe.h"
-
 #include "ui_basic/textarea.h"
-
-#include <vector>
 
 namespace UI {struct Textarea;}
 
@@ -145,7 +144,7 @@ protected:
 private:
 	typedef std::vector<const Widelands::WareList *> vector_type;
 	vector_type         m_warelists;
-	std::vector<boost::signals::connection> connections_;
+	std::vector<boost::signals2::connection> connections_;
 };
 
 std::string waremap_to_richtext

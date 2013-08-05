@@ -16,38 +16,37 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  */
-#include "compile_diagnostics.h"
 
-#include "disk_filesystem.h"
-
-#include "filesystem_exceptions.h"
-#include "wexception.h"
-#include "zip_filesystem.h"
-#include "log.h"
-
-#include <sys/stat.h>
+#include "io/filesystem/disk_filesystem.h"
 
 #include <cassert>
 #include <cerrno>
 
+#include <sys/stat.h>
+
 #ifdef _WIN32
-#include <windows.h>
 #include <dos.h>
+#include <windows.h>
 #ifdef _MSC_VER
-#include <io.h>
 #include <direct.h>
+#include <io.h>
 #define S_ISDIR(x) ((x&_S_IFDIR)?1:0)
-#endif
-#else
-#include <sys/mman.h>
+#endif // _MSC_VER
+#else  // not _WIN32
+#include <fcntl.h>
 #include <glob.h>
+#include <sys/mman.h>
 #include <sys/statvfs.h>
 #include <sys/types.h>
-#include <fcntl.h>
 #endif
 
+#include "compile_diagnostics.h"
+#include "io/filesystem/filesystem_exceptions.h"
+#include "io/filesystem/zip_filesystem.h"
 #include "io/streamread.h"
 #include "io/streamwrite.h"
+#include "log.h"
+#include "wexception.h"
 
 struct FileSystemPath: public std::string
 {

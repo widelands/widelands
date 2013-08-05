@@ -17,9 +17,9 @@
  *
  */
 
-#include <boost/format.hpp>
-
 #include "text_layout.h"
+
+#include <boost/format.hpp>
 
 using namespace std;
 using namespace boost;

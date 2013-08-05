@@ -20,23 +20,21 @@
 #ifndef EDITORINTERACTIVE_H
 #define EDITORINTERACTIVE_H
 
+#include "editor/tools/editor_history.h"
+#include "editor/tools/editor_increase_height_tool.h"
+#include "editor/tools/editor_increase_resources_tool.h"
+#include "editor/tools/editor_info_tool.h"
+#include "editor/tools/editor_make_infrastructure_tool.h"
+#include "editor/tools/editor_noise_height_tool.h"
+#include "editor/tools/editor_place_bob_tool.h"
+#include "editor/tools/editor_place_immovable_tool.h"
+#include "editor/tools/editor_set_origin_tool.h"
+#include "editor/tools/editor_set_port_space_tool.h"
+#include "editor/tools/editor_set_starting_pos_tool.h"
+#include "editor/tools/editor_set_terrain_tool.h"
 #include "ui_basic/button.h"
 #include "ui_basic/unique_window.h"
 #include "wui/interactive_base.h"
-
-#include "tools/editor_increase_height_tool.h"
-#include "tools/editor_increase_resources_tool.h"
-#include "tools/editor_info_tool.h"
-#include "tools/editor_make_infrastructure_tool.h"
-#include "tools/editor_noise_height_tool.h"
-#include "tools/editor_place_bob_tool.h"
-#include "tools/editor_place_immovable_tool.h"
-#include "tools/editor_set_origin_tool.h"
-#include "tools/editor_set_port_space_tool.h"
-#include "tools/editor_set_starting_pos_tool.h"
-#include "tools/editor_set_terrain_tool.h"
-#include "tools/editor_history.h"
-
 
 class Editor;
 class Editor_Tool;

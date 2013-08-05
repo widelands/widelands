@@ -20,7 +20,7 @@
 #ifndef WIDELANDS_MAP_RESOURCES_DATA_PACKET_H
 #define WIDELANDS_MAP_RESOURCES_DATA_PACKET_H
 
-#include "widelands_map_data_packet.h"
+#include "map_io/widelands_map_data_packet.h"
 
 MAP_DATA_PACKET(Map_Resources_Data_Packet);
 

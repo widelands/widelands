@@ -21,16 +21,15 @@
 #ifndef UI_LISTSELECT_H
 #define UI_LISTSELECT_H
 
-#include <limits>
 #include <deque>
+#include <limits>
 
-#include <boost/signal.hpp>
+#include <boost/signals2.hpp>
 
 #include "align.h"
-
-#include "panel.h"
+#include "ui_basic/panel.h"
 #include "rgbcolor.h"
-#include "scrollbar.h"
+#include "ui_basic/scrollbar.h"
 
 namespace UI {
 struct Scrollbar;
@@ -52,9 +51,9 @@ struct BaseListselect : public Panel {
 		 bool show_check = false);
 	~BaseListselect();
 
-	boost::signal<void (uint32_t)> selected;
-	boost::signal<void (uint32_t)> clicked;
-	boost::signal<void (uint32_t)> double_clicked;
+	boost::signals2::signal<void (uint32_t)> selected;
+	boost::signals2::signal<void (uint32_t)> clicked;
+	boost::signals2::signal<void (uint32_t)> double_clicked;
 
 	void clear();
 	void sort

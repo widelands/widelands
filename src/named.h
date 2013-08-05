@@ -20,8 +20,8 @@
 #ifndef NAMED_H
 #define NAMED_H
 
-#include <string>
 #include <cstring>
+#include <string>
 
 struct Named {
 	Named(char        const * const Name = "") : m_name(Name) {}

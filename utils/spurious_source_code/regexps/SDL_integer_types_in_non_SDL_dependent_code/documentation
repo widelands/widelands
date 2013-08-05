@@ -1,1 +1,0 @@
-This catches use of SDL integer names ([SU]int(8|16|32|64))in places that should not use them. They should only be used to interact with SDL code. C99 integer names (u?int(8|16|32|64)_t) should be used elsewhere.

@@ -17,14 +17,15 @@
  *
  */
 
-#include "campaign_select.h"
+#include "ui_fsmenu/campaign_select.h"
+
 #include "campvis.h"
 #include "constants.h"
 #include "graphic/graphic.h"
 #include "i18n.h"
+#include "map_io/widelands_map_loader.h"
 #include "profile/profile.h"
 #include "wexception.h"
-#include "map_io/widelands_map_loader.h"
 
 
 /*
@@ -261,7 +262,7 @@ Fullscreen_Menu_CampaignMapSelect::Fullscreen_Menu_CampaignMapSelect() :
 // Text labels
 	title
 		(this,
-		 get_w() / 2, get_h() * 9 / 50, _("Choose your map!"),
+		 get_w() / 2, get_h() * 9 / 50, _("Choose a map"),
 		 UI::Align_HCenter),
 	label_mapname (this, get_w() * 3 / 5,  get_h() * 17 / 50, _("Name:")),
 	tamapname     (this, get_w() * 61 / 100, get_h() * 3 / 8, ""),

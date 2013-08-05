@@ -20,16 +20,17 @@
 #ifndef WLAPPLICATION_H
 #define WLAPPLICATION_H
 
-#include "point.h"
+#include <cstring>
+#include <map>
+#include <stdexcept>
+#include <string>
 
 #include <SDL_events.h>
 #include <SDL_keyboard.h>
 #include <SDL_types.h>
 
-#include <map>
-#include <stdexcept>
-#include <string>
-#include <cstring>
+#include "point.h"
+
 
 namespace Widelands {struct Game;}
 struct Journal;

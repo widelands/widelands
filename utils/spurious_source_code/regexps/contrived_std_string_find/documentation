@@ -1,1 +1,0 @@
-Do not call std::string::find_first_of or std::string::find with a string of characters to locate that has the size 1. Do not call std::string::find_first_of with a single character to find. Use the version of std::string::find that takes a single character to locate instead. Same for find_last_of/rfind.

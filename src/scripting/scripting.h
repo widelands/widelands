@@ -20,16 +20,15 @@
 #ifndef SCRIPTING_H
 #define SCRIPTING_H
 
-#include "wexception.h"
-
 #include <map>
-#include <stdint.h>
 #include <string>
 
 #include <lua.hpp>
+#include <stdint.h>
 
-#include "logic/widelands_filewrite.h"
 #include "logic/widelands_fileread.h"
+#include "logic/widelands_filewrite.h"
+#include "wexception.h"
 
 namespace Widelands {
 	struct Editor_Game_Base;

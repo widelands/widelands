@@ -17,20 +17,20 @@
  *
  */
 
-#include "listselect.h"
+#include "ui_basic/listselect.h"
+
+#include <iostream>
+
+#include <boost/bind.hpp>
 
 #include "constants.h"
+#include "container_iterate.h"
 #include "graphic/font.h"
 #include "graphic/font_handler.h"
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
 #include "log.h"
 #include "wlapplication.h"
-
-#include "container_iterate.h"
-
-#include <boost/bind.hpp>
-#include <iostream>
 
 namespace UI {
 /**
@@ -78,8 +78,10 @@ BaseListselect::BaseListselect
 		if (pic_h > m_lineheight)
 			m_lineheight = pic_h;
 	}
-	else
+	else {
 		m_max_pic_width = 0;
+	}
+	set_can_focus(true);
 }
 
 

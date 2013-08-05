@@ -21,10 +21,9 @@
 #define MAPVIEW_H
 
 #include <boost/function.hpp>
-#include <boost/signal.hpp>
+#include <boost/signals2.hpp>
 
 #include "logic/widelands_geometry.h"
-
 #include "ui_basic/panel.h"
 
 class GameRenderer;
@@ -55,9 +54,9 @@ struct Map_View : public UI::Panel {
 	 *
 	 * Parameters are x/y position in screen coordinates.
 	 */
-	boost::signal<void (int32_t, int32_t)> changeview;
+	boost::signals2::signal<void (int32_t, int32_t)> changeview;
 
-	boost::signal<void ()> fieldclicked;
+	boost::signals2::signal<void ()> fieldclicked;
 
 	void warp_mouse_to_node(Widelands::Coords);
 

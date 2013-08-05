@@ -20,17 +20,16 @@
 #ifndef PLAYER_H
 #define PLAYER_H
 
-#include "areawatcher.h"
-#include "building.h"
-#include "editor_game_base.h"
-#include "mapregion.h"
-#include "message_queue.h"
-#include "notification.h"
+#include "logic/areawatcher.h"
+#include "logic/building.h"
+#include "logic/editor_game_base.h"
+#include "logic/mapregion.h"
+#include "logic/message_queue.h"
+#include "logic/notification.h"
 #include "rgbcolor.h"
-#include "tribe.h"
-#include "warehouse.h"
-
-#include "widelands.h"
+#include "logic/tribe.h"
+#include "logic/warehouse.h"
+#include "logic/widelands.h"
 
 namespace Widelands {
 
@@ -99,6 +98,10 @@ struct Player :
 	/// of m, the message deallocated instead.
 	Message_Id add_message_with_timeout
 		(Game &, Message &, uint32_t timeout, uint32_t radius);
+
+	/// Indicates that the object linked to the message has been removed
+	/// from the game. This implementation expires the message.
+	void message_object_removed(Message_Id mid) const;
 
 	void set_message_status(const Message_Id& id, Message::Status const status) {
 		messages().set_message_status(id, status);
@@ -454,10 +457,13 @@ struct Player :
 	Road & force_road(const Path &);
 	Road * build_road(const Path &); /// Build a road if it is allowed.
 	Building & force_building
-		(Coords,
+		(const Coords,
+		 const Building_Descr::FormerBuildings &);
+	Building & force_csite
+		(const Coords,
 		 Building_Index,
-		 bool = false);
-	Building * build(Coords, Building_Index, bool = true);
+		 const Building_Descr::FormerBuildings & = Building_Descr::FormerBuildings());
+	Building * build(Coords, Building_Index, bool, Building_Descr::FormerBuildings &);
 	void bulldoze(PlayerImmovable &, bool recurse = false);
 	void flagaction(Flag &);
 	void start_stop_building(PlayerImmovable &);
@@ -640,6 +646,10 @@ private:
 
 	BuildingStats m_building_stats;
 };
+
+void find_former_buildings
+	(const Tribe_Descr & tribe_descr, const Building_Index bi,
+	 Building_Descr::FormerBuildings* former_buildings);
 
 }
 

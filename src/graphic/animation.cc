@@ -18,7 +18,10 @@
  */
 
 // NOCOM(#sirver): check for ME also in conf files and therelike.
+#include "graphic/animation.h"
+
 #include <cassert>
+#include <cstdio>
 #include <limits>
 
 #include <boost/algorithm/string/replace.hpp>
@@ -29,24 +32,24 @@
 #include <boost/lexical_cast.hpp>
 
 #include "constants.h"
+#include "container_iterate.h"
+#include "graphic/diranimations.h"
+#include "graphic/graphic.h"
+#include "graphic/image.h"
+#include "graphic/image_cache.h"
+#include "graphic/image_transformations.h"
+#include "graphic/surface.h"
+#include "graphic/surface_cache.h"
 #include "helper.h"
+#include "i18n.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "log.h"
+#include "logic/bob.h"
+#include "logic/instances.h"  // For Map_Object_Descr.
 #include "profile/profile.h"
 #include "sound/sound_handler.h"
 #include "wexception.h"
 
-#include "container_iterate.h"
-#include "diranimations.h"
-#include "graphic.h"
-#include "image.h"
-#include "image_cache.h"
-#include "image_transformations.h"
-#include "logic/instances.h"  // For Map_Object_Descr.
-#include "surface.h"
-#include "surface_cache.h"
-
-#include "animation.h"
 
 using namespace std;
 

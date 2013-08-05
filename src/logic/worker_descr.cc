@@ -17,24 +17,24 @@
  *
  */
 
-#include "worker_descr.h"
-
-#include "carrier.h"
+#include "logic/worker_descr.h"
 
 #include "graphic/graphic.h"
 #include "helper.h"
 #include "i18n.h"
-#include "nodecaps.h"
+#include "logic/carrier.h"
+#include "logic/nodecaps.h"
+#include "logic/soldier.h"
+#include "logic/tribe.h"
+#include "logic/worker.h"
+#include "logic/worker_program.h"
 #include "profile/profile.h"
-#include "soldier.h"
-#include "sound/sound_handler.h"
-#include "tribe.h"
-#include "wexception.h"
-#include "worker.h"
-#include "worker_program.h"
-
 #include "ref_cast.h"
-#include <scripting/pdep/llimits.h>
+#include "sound/sound_handler.h"
+#include "wexception.h"
+
+// NOCOM(#sirver): is this really needed?
+// #include <scripting/pdep/llimits.h>
 
 namespace Widelands {
 

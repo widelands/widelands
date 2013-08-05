@@ -20,7 +20,7 @@
 #ifndef WIDELANDS_MAP_EXTRADATA_DATA_PACKET_H
 #define WIDELANDS_MAP_EXTRADATA_DATA_PACKET_H
 
-#include "widelands_map_data_packet.h"
+#include "map_io/widelands_map_data_packet.h"
 
 /*
  * This packet contains all extra data in the map. This can currently be one of

@@ -20,10 +20,10 @@
 #ifndef IMMOVABLE_H
 #define IMMOVABLE_H
 
-#include "buildcost.h"
 #include "graphic/animation.h"
-#include "instances.h"
-#include "widelands_geometry.h"
+#include "logic/buildcost.h"
+#include "logic/instances.h"
+#include "logic/widelands_geometry.h"
 
 struct Profile;
 
@@ -209,6 +209,7 @@ protected:
 	uint32_t m_anim_construction_done;
 	int32_t m_program_step; ///< time of next step
 #endif
+	std::string m_construct_string;
 
 	/**
 	 * Private persistent data for the currently active program action.

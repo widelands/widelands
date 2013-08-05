@@ -20,17 +20,17 @@
 #ifndef IMMOVABLE_PROGRAM_H
 #define IMMOVABLE_PROGRAM_H
 
+#include <cstring>
+#include <string>
+
 #include <boost/noncopyable.hpp>
 
 /*
  * Implementation is in immovable.cc
  */
 
-#include "buildcost.h"
-#include "immovable.h"
-
-#include <string>
-#include <cstring>
+#include "logic/buildcost.h"
+#include "logic/immovable.h"
 
 struct Profile;
 

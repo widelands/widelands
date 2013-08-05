@@ -25,12 +25,11 @@
 #include <vector>
 
 #include <boost/function.hpp>
-#include <boost/signal.hpp>
+#include <boost/signals2.hpp>
 
 #include "align.h"
+#include "ui_basic/panel.h"
 #include "rgbcolor.h"
-
-#include "panel.h"
 
 
 namespace UI {
@@ -55,8 +54,8 @@ public:
 		 bool descending = false);
 	~Table();
 
-	boost::signal<void (uint32_t)> selected;
-	boost::signal<void (uint32_t)> double_clicked;
+	boost::signals2::signal<void (uint32_t)> selected;
+	boost::signals2::signal<void (uint32_t)> double_clicked;
 
 	/// A column that has a title is sortable (by clicking on the title).
 	void add_column
@@ -161,8 +160,8 @@ public:
 		 bool descending = false);
 	~Table();
 
-	boost::signal<void (uint32_t)> selected;
-	boost::signal<void (uint32_t)> double_clicked;
+	boost::signals2::signal<void (uint32_t)> selected;
+	boost::signals2::signal<void (uint32_t)> double_clicked;
 
 	void add_column
 		(uint32_t width,

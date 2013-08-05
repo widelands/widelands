@@ -18,14 +18,14 @@
  */
 
 
+#include "editor/tools/editor_make_infrastructure_tool.h"
+
 #include "editor/editorinteractive.h"
 #include "logic/editor_game_base.h"
 #include "logic/field.h"
 #include "logic/map.h"
 #include "logic/player.h"
 #include "wui/fieldaction.h"
-
-#include "editor_make_infrastructure_tool.h"
 
 /**
  * Callback function to calculate correct overlays

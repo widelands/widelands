@@ -17,16 +17,16 @@
  *
  */
 
-#include "router.h"
-
-#include "routeastar.h"
-#include "routing_node.h"
-#include "iroute.h"
-#include "itransport_cost_calculator.h"
+#include "economy/router.h"
 
 #include <cassert>
 #include <cstdio>
 #include <cstdlib>
+
+#include "economy/iroute.h"
+#include "economy/itransport_cost_calculator.h"
+#include "economy/routeastar.h"
+#include "economy/routing_node.h"
 
 namespace Widelands {
 

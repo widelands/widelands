@@ -17,36 +17,76 @@
  *
  */
 
-#include "player.h"
+#include "logic/player.h"
 
-#include "checkstep.h"
-#include "cmd_expire_message.h"
-#include "cmd_luacoroutine.h"
-#include "constructionsite.h"
+#include <boost/bind.hpp>
+#include <boost/signals2.hpp>
+
 #include "economy/economy.h"
 #include "economy/flag.h"
 #include "economy/road.h"
-#include "findimmovable.h"
-#include "game.h"
-#include "game_data_error.h"
 #include "i18n.h"
 #include "log.h"
-#include "militarysite.h"
-#include "soldier.h"
-#include "soldiercontrol.h"
-#include "sound/sound_handler.h"
+#include "logic/building.h"
+#include "logic/checkstep.h"
+#include "logic/cmd_expire_message.h"
+#include "logic/cmd_luacoroutine.h"
+#include "logic/constructionsite.h"
+#include "logic/findimmovable.h"
+#include "logic/game.h"
+#include "logic/game_data_error.h"
+#include "logic/militarysite.h"
+#include "logic/playercommand.h"
+#include "logic/soldier.h"
+#include "logic/soldiercontrol.h"
+#include "logic/trainingsite.h"
+#include "logic/tribe.h"
+#include "logic/warehouse.h"
+#include "logic/widelands_fileread.h"
+#include "logic/widelands_filewrite.h"
 #include "scripting/scripting.h"
-#include "trainingsite.h"
-#include "tribe.h"
-#include "warehouse.h"
+#include "sound/sound_handler.h"
+#include "upcast.h"
 #include "warning.h"
 #include "wexception.h"
-#include "widelands_fileread.h"
-#include "widelands_filewrite.h"
-
 #include "wui/interactive_player.h"
 
-#include "upcast.h"
+
+namespace {
+void terraform_for_building
+	(Widelands::Editor_Game_Base& egbase, const Widelands::Player_Number player_number,
+	 const Widelands::Coords location, const Widelands::Building_Descr* descr)
+{
+	Widelands::Map & map = egbase.map();
+	Widelands::FCoords c[4]; //  Big buildings occupy 4 locations.
+	c[0] = map.get_fcoords(location);
+	map.get_brn(c[0], &c[1]);
+	if (Widelands::BaseImmovable * const immovable = c[0].field->get_immovable())
+		immovable->remove(egbase);
+	{
+		size_t nr_locations = 1;
+		if ((descr->get_size() & Widelands::BUILDCAPS_SIZEMASK) == Widelands::BUILDCAPS_BIG)
+		{
+			nr_locations = 4;
+			map.get_trn(c[0], &c[1]);
+			map.get_tln(c[0], &c[2]);
+			map.get_ln (c[0], &c[3]);
+		}
+		for (size_t i = 0; i < nr_locations; ++i) {
+			//  Make sure that the player owns the area around.
+			egbase.conquer_area_no_building
+				(Widelands::Player_Area<Widelands::Area<Widelands::FCoords> >
+				 	(player_number, Widelands::Area<Widelands::FCoords>(c[i], 1)));
+
+			if (Widelands::BaseImmovable * const immovable = c[i].field->get_immovable())
+				immovable->remove(egbase);
+		}
+	}
+}
+
+
+
+}
 
 namespace Widelands {
 
@@ -63,6 +103,39 @@ const RGBColor Player::Colors[MAX_PLAYERS] = {
 	RGBColor(255, 255, 255),  // white
 };
 
+/**
+ * Find the longest possible enhancement chain leading to the given
+ * building descr. The FormerBuildings given in reference must be empty and will be
+ * filled with the Building_Descr.
+ */
+void find_former_buildings
+	(const Widelands::Tribe_Descr & tribe_descr, const Widelands::Building_Index bi,
+	 Widelands::Building_Descr::FormerBuildings* former_buildings)
+{
+	assert(former_buildings && former_buildings->empty());
+	const Widelands::Building_Descr * first_descr = tribe_descr.get_building_descr(bi);
+	former_buildings->push_back(first_descr);
+	bool done = false;
+	while (not done) {
+		const Widelands::Building_Descr * oldest = former_buildings->front();
+		if (!oldest->is_enhanced()) {
+			done = true;
+			break;
+		}
+		const Widelands::Building_Index & oldest_idx = tribe_descr.building_index(oldest->name());
+		for
+			(Widelands::Building_Index i = Widelands::Building_Index::First();
+			 i < tribe_descr.get_nrbuildings();
+			 ++i)
+		{
+			const Widelands::Building_Descr* ob = tribe_descr.get_building_descr(i);
+			if (ob->enhancements().count(oldest_idx)) {
+				former_buildings->insert(former_buildings->begin(), ob);
+				break;
+			}
+		}
+	}
+}
 
 Player::Player
 	(Editor_Game_Base  & the_egbase,
@@ -231,20 +304,30 @@ void Player::play_message_sound(const std::string & sender) {
 Message_Id Player::add_message
 	(Game & game, Message & message, bool const popup)
 {
-	Message_Id const id = messages().add_message(message);
+	// Expire command
+	Message_Id id = messages().add_message(message);
 	Duration const duration = message.duration();
-	if (duration != Forever())
+	if (duration != Forever()) {
 		game.cmdqueue().enqueue
 			(new Cmd_ExpireMessage
 			 	(game.get_gametime() + duration, player_number(), id));
+	}
 
-	if (Interactive_Player * const iplayer = game.get_ipl())
+	// Map_Object connection
+	if (message.serial() > 0) {
+		Map_Object* mo = egbase().objects().get_object(message.serial());
+		mo->removed.connect
+		 (boost::bind(&Player::message_object_removed, this, id));
+	}
+
+	// Sound & popup
+	if (Interactive_Player * const iplayer = game.get_ipl()) {
 		if (&iplayer->player() == this) {
 			play_message_sound(message.sender());
-
 			if (popup)
 				iplayer->popup_message(id, message);
 		}
+	}
 
 	return id;
 }
@@ -267,6 +350,20 @@ Message_Id Player::add_message_with_timeout
 		}
 	return add_message(game, m);
 }
+
+void Player::message_object_removed(Message_Id m_id) const
+{
+	// Send expire command
+	upcast(Game, game, &m_egbase);
+	if (!game) {
+		return;
+	}
+
+	game->cmdqueue().enqueue
+		(new Cmd_ExpireMessage
+			(game->get_gametime(), m_plnum, m_id));
+}
+
 
 
 /*
@@ -404,45 +501,38 @@ Road & Player::force_road(const Path & path) {
 	return Road::create(egbase(), start, end, path);
 }
 
-
 Building & Player::force_building
 	(Coords                const location,
-	 Building_Index        const idx,
-	 bool                  constructionsite)
+	 const Building_Descr::FormerBuildings & former_buildings)
 {
 	Map & map = egbase().map();
-	FCoords c[4]; //  Big buildings occupy 4 locations.
-	c[0] = map.get_fcoords(location);
-	map.get_brn(c[0], &c[1]);
-	force_flag(c[1]);
-	if (BaseImmovable * const immovable = c[0].field->get_immovable())
-		immovable->remove(egbase());
-	const Building_Descr & descr = *tribe().get_building_descr(idx);
-	{
-		size_t nr_locations = 1;
-		if ((descr.get_size() & BUILDCAPS_SIZEMASK) == BUILDCAPS_BIG) {
-			nr_locations = 4;
-			map.get_trn(c[0], &c[1]);
-			map.get_tln(c[0], &c[2]);
-			map.get_ln (c[0], &c[3]);
-		}
-		for (size_t i = 0; i < nr_locations; ++i) {
+	const Building_Descr* descr = former_buildings.back();
+	terraform_for_building(egbase(), player_number(), location, descr);
+	FCoords flag_loc;
+	map.get_brn(map.get_fcoords(location), &flag_loc);
+	force_flag(flag_loc);
 
-			//  Make sure that the player owns the area around.
-			egbase().conquer_area_no_building
-				(Player_Area<Area<FCoords> >
-				 	(player_number(), Area<FCoords>(c[i], 1)));
-
-			if (BaseImmovable * const immovable = c[i].field->get_immovable())
-				immovable->remove(egbase());
-		}
-	}
-
-	if (constructionsite)
-		return egbase().warp_constructionsite(c[0], m_plnum, idx);
-	else
-		return descr.create (egbase(), *this, c[0], false);
+	return
+		descr->create
+			(egbase(), *this, map.get_fcoords(location), false, false, former_buildings);
 }
+
+Building& Player::force_csite
+	(Coords const location, Building_Index b_idx,
+	 const Building_Descr::FormerBuildings & former_buildings)
+{
+	Map & map = egbase().map();
+	const Building_Descr * descr = tribe().get_building_descr(b_idx);
+	terraform_for_building(egbase(), player_number(), location, descr);
+	FCoords flag_loc;
+	map.get_brn(map.get_fcoords(location), &flag_loc);
+	force_flag(flag_loc);
+
+	return
+		egbase().warp_constructionsite
+			(map.get_fcoords(location), m_plnum, b_idx, false, former_buildings);
+}
+
 
 
 /*
@@ -451,7 +541,8 @@ Place a construction site or building, checking that it's legal to do so.
 ===============
 */
 Building * Player::build
-	(Coords c, Building_Index const idx, bool constructionsite)
+	(Coords c, Building_Index const idx, bool constructionsite,
+	 Building_Descr::FormerBuildings & former_buidlings)
 {
 	int32_t buildcaps;
 
@@ -480,11 +571,12 @@ Building * Player::build
 	}
 
 	if (constructionsite)
-		return &egbase().warp_constructionsite(c, m_plnum, idx);
+		return &egbase().warp_constructionsite(c, m_plnum, idx, false, former_buidlings);
 	else {
-		return &descr.create(egbase(), *this, c, false);
+		return &descr.create(egbase(), *this, c, false, false, former_buidlings);
 	}
 }
+
 
 
 /*
