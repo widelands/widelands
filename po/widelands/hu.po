@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2013-07-28 20:22+0200\n"
-"PO-Revision-Date: 2013-08-03 11:00+0000\n"
+"PO-Revision-Date: 2013-08-04 07:01+0000\n"
 "Last-Translator: István Kiss <kiemc@citromail.hu>\n"
 "Language-Team: Language <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2013-08-04 05:13+0000\n"
+"X-Launchpad-Export-Date: 2013-08-05 05:10+0000\n"
 "X-Generator: Launchpad (build 16718)\n"
 
 #: ../../src/wlapplication.cc:396
@@ -4184,7 +4184,7 @@ msgstr ""
 #: ../../src/scripting/lua_game.cc:1086
 #, c-format
 msgid " (achieved %s)"
-msgstr ""
+msgstr " (teljesítve: „%s”)"
 
 #: ../../src/economy/cmd_call_economy_balance.cc:88
 #, c-format
