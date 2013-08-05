@@ -427,7 +427,7 @@ void ShipSinkConfirm::ok()
 	upcast(Widelands::Ship, ship, m_object.get(game));
 
 	if (ship && iaplayer().can_act(ship->get_economy()->owner().player_number())) {
-		//game.send_player_sink_ship(*ship);
+		game.send_player_sink_ship(*ship);
 		iaplayer().need_complete_redraw();
 	}
 
@@ -485,7 +485,7 @@ void ShipCancelExpeditionConfirm::ok()
 		 &&
 		 ship->get_ship_state() != Widelands::Ship::EXP_COLONIZING)
 	{
-		//game.send_player_sink_ship(*ship);
+		game.send_player_cancel_expedition_ship(*ship);
 		iaplayer().need_complete_redraw();
 	}
 

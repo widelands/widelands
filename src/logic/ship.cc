@@ -672,6 +672,18 @@ void Ship::exp_explore_island (Game &, bool clockwise) {
 	m_expedition->island_exploration = true;
 }
 
+/// Cancels a currently running expedition
+/// @note only called via player command
+void Ship::exp_cancel (Game & game) {
+	;
+}
+
+/// Sinks the ship
+/// @note only called via player command
+void Ship::sink_ship (Game & game) {
+	;
+}
+
 void Ship::log_general_info(const Editor_Game_Base & egbase)
 {
 	Bob::log_general_info(egbase);

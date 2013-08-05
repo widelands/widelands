@@ -297,7 +297,7 @@ void ShipWindow::act_destination()
 void ShipWindow::act_sink()
 {
 	if (get_key_state(SDLK_LCTRL) or get_key_state(SDLK_RCTRL)) {
-		// m_igbase.game().send_player_sink_ship(m_ship);
+		m_igbase.game().send_player_sink_ship(m_ship);
 	}
 	else {
 		show_ship_sink_confirm(ref_cast<Interactive_Player, Interactive_GameBase>(m_igbase), m_ship);
@@ -308,7 +308,7 @@ void ShipWindow::act_sink()
 void ShipWindow::act_cancel_expedition()
 {
 	if (get_key_state(SDLK_LCTRL) or get_key_state(SDLK_RCTRL)) {
-		// m_igbase.game().send_player_cancel_expedition(m_ship);
+		m_igbase.game().send_player_cancel_expedition_ship(m_ship);
 	}
 	else {
 		show_ship_cancel_expedition_confirm
