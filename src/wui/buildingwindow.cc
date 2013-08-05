@@ -423,24 +423,6 @@ void Building_Window::act_start_stop() {
 	die();
 }
 
-void Building_Window::act_prefer_rookies()
-{
-	if (is_a(Widelands::MilitarySite, &m_building))
-		igbase().game().send_player_militarysite_set_soldier_preference
-			(m_building, Widelands::MilitarySite::kPrefersRookies);
-
-	die();
-}
-
-void
-Building_Window::act_prefer_heroes()
-{
-	if (is_a(Widelands::MilitarySite, &m_building))
-		igbase().game().send_player_militarysite_set_soldier_preference
-			(m_building, Widelands::MilitarySite::kPrefersHeroes);
-
-	die();
-}
 
 /**
 ===============
@@ -501,7 +483,7 @@ void Building_Window::show_workarea()
 	} else {
 		workarea_info = m_building.descr().m_workarea_info;
 	}
-	if (!workarea_info.size()) {
+	if (workarea_info.empty()) {
 		return;
 	}
 	m_workarea_job_id = igbase().show_work_area(workarea_info, m_building.get_position());
