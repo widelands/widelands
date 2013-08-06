@@ -570,7 +570,9 @@ void Map_Buildingdata_Data_Packet::read_warehouse
 						}
 					}
 					StorageHandler::StockedWorkerAtr* atr = sh->store_worker_atr(worker);
-					sh->m_stocked_workers_atr.push_back(*atr);
+					if (atr != nullptr) {
+						sh->m_stocked_workers_atr.push_back(*atr);
+					}
 					mol.schedule_destroy(worker);
 				} catch (const _wexception & e) {
 					throw game_data_error
@@ -629,7 +631,7 @@ void Map_Buildingdata_Data_Packet::read_warehouse
 						continue;
 					}
 					sh->add_worker_spawn(worker_index);
-					uint32_t* next_act = &sh->m_spawn_wares.at(worker_index).at(0);
+					uint32_t* next_act = &sh->m_spawn_workers.at(worker_index).at(0);
 					*next_act = next_spawn;
 				}
 			}
@@ -1297,7 +1299,7 @@ void Map_Buildingdata_Data_Packet::read_storage
 		// worker supplies
 		Ware_Index const nr_workers = tribe.get_nrworkers();
 		ss->set_nrworkers(nr_workers);
-		sh.m_ware_policy.resize(nr_workers.value(), Storage::StockPolicy::Normal);
+		sh.m_worker_policy.resize(nr_workers.value(), Storage::StockPolicy::Normal);
 		while (fr.Unsigned8()) {
 			const char* worker_name = fr.CString();
 			Ware_Index const id = tribe.ware_index(worker_name);
@@ -1762,6 +1764,7 @@ void Map_Buildingdata_Data_Packet::write_storage
 	StorageSupply* ss = sh.m_supply.get();
 	const Tribe_Descr& tribe = sh.owner().tribe();
 	const WareList & wares = ss->get_wares();
+	log("WriteStorage : %d wares, %d ware policies\n", wares.get_nrwareids().value(), sh.m_ware_policy.size());
 	for (Ware_Index i = Ware_Index::First(); i < wares.get_nrwareids  (); ++i) {
 		fw.Unsigned8(1);
 		fw.String(tribe.get_ware_descr(i)->name());

@@ -28,6 +28,7 @@
 #include "logic/player.h"
 #include "logic/soldier.h"
 #include "upcast.h"
+#include <helper.h>
 
 namespace Widelands {
 
@@ -46,7 +47,7 @@ StorageHandler::~StorageHandler()
 }
 
 
-void StorageHandler::init(Editor_Game_Base& egbase)
+void StorageHandler::init(Editor_Game_Base& )
 {
 	Ware_Index const nr_wares   = owner().tribe().get_nrwares  ();
 	Ware_Index const nr_workers = owner().tribe().get_nrworkers();
@@ -169,34 +170,38 @@ uint32_t StorageHandler::count_workers(Game& game, Ware_Index idx, const Require
 	if (stock <= 0) {
 		return stock;
 	}
-	// First check if one without atr is enough
-	const Worker_Descr & workerdescr = *owner().tribe().get_worker_descr(idx);
-	Worker* w = &workerdescr.create(game, owner(), &m_building, m_building.get_position());
-	bool checkpass = req.check(*w);
-	if (checkpass) {
-		w->remove(game);
-		// If so, all stock is ok
-		return stock;
-	}
+	uint32_t matching = 0;
 	// Get list of those for which we stored the attributes
+	// This is similar logic than in launch_worker
 	std::vector<const StockedWorkerAtr*> workers_with_atr;
 	BOOST_FOREACH(StockedWorkerAtr& atr, m_stocked_workers_atr) {
 		if (atr.index == idx) {
 			workers_with_atr.push_back(&atr);
 		}
 	}
-	// We only deal with experienced workers now
-	stock = m_stocked_workers_atr.size();
-	// Check with our atr
-	BOOST_FOREACH(const StockedWorkerAtr* atr, workers_with_atr) {
-		w = create_with_atr(game, *atr, w);
+	// First check those without atr
+	Worker* w;
+	bool checkpass = false;
+	const Worker_Descr & workerdescr = *owner().tribe().get_worker_descr(idx);
+	if (stock > workers_with_atr.size()) {
+		w = &workerdescr.create(game, owner(), &m_building, m_building.get_position());
 		checkpass = req.check(*w);
-		if (!checkpass) {
-			--stock;
+		if (checkpass) {
+			matching += stock - workers_with_atr.size();
 		}
+		w->remove(game);
 	}
-	w->remove(game);
-	return stock;
+	// Check with our atr
+	// TODO CGH use smarter way of storing atr, maybe with map
+	BOOST_FOREACH(const StockedWorkerAtr* atr, workers_with_atr) {
+		w = create_with_atr(game, *atr);
+		checkpass = req.check(*w);
+		if (checkpass) {
+			matching++;
+		}
+		w->remove(game);
+	}
+	return matching;
 }
 
 
@@ -359,11 +364,15 @@ Worker& StorageHandler::launch_worker(Game& game, Ware_Index idx, const Requirem
 	do {
 		uint32_t stock = m_supply->stock_workers(idx);
 		if (stock > 0) {
-			// Get list of those for which we stored the attributes
+			// Get list of those for which we stored the attributes, as pointers to actual objects
+			// TODO smarter storage for atrs
 			std::vector<const StockedWorkerAtr*> workers_with_atr;
-			BOOST_FOREACH(StockedWorkerAtr atr, m_stocked_workers_atr) {
-				if (atr.index == idx) {
-					workers_with_atr.push_back(&atr);
+			for
+				(std::vector<StockedWorkerAtr>::iterator it = m_stocked_workers_atr.begin();
+					it != m_stocked_workers_atr.end(); ++it)
+			{
+				if ((*it).index == idx) {
+					workers_with_atr.push_back(&(*it));
 				}
 			}
 			// First check if one without atr is enough
@@ -378,12 +387,12 @@ Worker& StorageHandler::launch_worker(Game& game, Ware_Index idx, const Requirem
 			}
 			// Check with our atr
 			BOOST_FOREACH(const StockedWorkerAtr* atr, workers_with_atr) {
-				w = create_with_atr(game, *atr, w);
+				w = create_with_atr(game, *atr);
 				if (req.check(*w)) {
 					// We need to find back our atr in original vector to erase it
 					bool removed = false;
 					for
-						(std::vector<StockedWorkerAtr>::iterator it;
+						(std::vector<StockedWorkerAtr>::iterator it = m_stocked_workers_atr.begin();
 						 it != m_stocked_workers_atr.end(); ++it)
 					{
 						if (&(*it) == atr) {
@@ -397,7 +406,6 @@ Worker& StorageHandler::launch_worker(Game& game, Ware_Index idx, const Requirem
 					return *w;
 				}
 			}
-			w->remove(game);
 		}
 		// Check if we got the tools to create a new one
 		if (can_create_worker(game, idx)) {
@@ -461,8 +469,8 @@ void StorageHandler::set_ware_policy(Ware_Index ware, Storage::StockPolicy polic
 
 void StorageHandler::set_worker_policy(Ware_Index ware, Storage::StockPolicy policy)
 {
-	assert(ware.value() < m_ware_policy.size());
-	m_ware_policy[ware.value()] = policy;
+	assert(ware.value() < m_worker_policy.size());
+	m_worker_policy[ware.value()] = policy;
 }
 
 bool StorageHandler::can_create_worker(Game&, Ware_Index worker_idx)
@@ -831,11 +839,9 @@ StorageHandler::StockedWorkerAtr* StorageHandler::store_worker_atr(Worker& w)
 	return atr;
 }
 
-Worker* StorageHandler::create_with_atr(Game& game, StockedWorkerAtr atr, Worker* w)
+Worker* StorageHandler::create_with_atr(Game& game, StockedWorkerAtr atr)
 {
-	if (w == nullptr) {
-		w = &atr.descr->create(game, owner(), &m_building, m_building.get_position());
-	}
+	Worker* w = &atr.descr->create(game, owner(), &m_building, m_building.get_position());
 	if (upcast(Soldier, s, w)) {
 		s->set_attack_level(atr.atck_lvl);
 		s->set_defense_level(atr.defense_lvl);
@@ -1113,7 +1119,7 @@ WareInstance& StorageSupply::launch_item(Game& game, const Request& req)
 
 Worker& StorageSupply::launch_worker(Game& game, const Request& req)
 {
-return m_handler.launch_worker(game, req.get_index(), req.get_requirements());
+	return m_handler.launch_worker(game, req.get_index(), req.get_requirements());
 }
 
 }

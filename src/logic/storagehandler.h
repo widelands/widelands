@@ -173,7 +173,7 @@ private:
 	void update_all_planned_workers(Game& game);
 	void update_planned_workers(Game& game, PlannedWorkers& planned_workers);
 	StockedWorkerAtr* store_worker_atr(Worker& w);
-	Worker* create_with_atr(Game& game, StockedWorkerAtr atr, Worker* w = nullptr);
+	Worker* create_with_atr(Game& game, StockedWorkerAtr atr);
 	static void planned_worker_callback
 		(Game            &       game,
 		Request         &,
