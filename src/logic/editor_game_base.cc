@@ -34,6 +34,7 @@
 #include "logic/findimmovable.h"
 #include "logic/game.h"
 #include "logic/instances.h"
+#include "logic/item_ware_descr.h"
 #include "logic/mapregion.h"
 #include "logic/player.h"
 #include "logic/roadtype.h"
@@ -166,6 +167,9 @@ const Tribe_Descr & Editor_Game_Base::manually_load_tribe
 		map().load_world();
 	assert(map().get_world());
 	Tribe_Descr & result = *new Tribe_Descr(tribe, *this);
+	//resize the configuration of our wares if they won't fit in the current window (12 = info label size)
+	int number = (g_gr->get_yres() - 270) / (WARE_MENU_PIC_HEIGHT + WARE_MENU_PIC_PAD_Y + 12);
+	result.resize_ware_orders(number);
 	m_tribes.push_back(&result);
 	return result;
 }

@@ -113,7 +113,7 @@ GCC_DIAG_OFF("-Wold-style-cast")
 GCC_DIAG_ON("-Wold-style-cast")
 	} else
 		throw warning
-			(_("Connection problem"), "%s", _("Widelands has not been able to connect to the metaserver."));
+			(_("Connection problem"), "%s", _("Widelands could not connect to the metaserver."));
 
 	SDLNet_ResolveHost (&peer, m_meta.c_str(), m_port);
 	m_sock = SDLNet_TCP_Open(&peer);

@@ -58,7 +58,7 @@ struct WatchWindow : public UI::Window {
 		return ref_cast<Interactive_GameBase, UI::Panel>(*get_parent()).game();
 	}
 
-	boost::signal<void (Point)> warp_mainview;
+	boost::signals2::signal<void (Point)> warp_mainview;
 
 	void add_view(Widelands::Coords);
 	void next_view(bool first = false);

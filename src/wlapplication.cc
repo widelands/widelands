@@ -2204,15 +2204,15 @@ private:
  */
 void WLApplication::replay()
 {
+	Widelands::Game game;
 	if (m_filename.empty()) {
-		Fullscreen_Menu_LoadReplay rm;
+		Fullscreen_Menu_LoadReplay rm(game);
 		if (rm.run() <= 0)
 			return;
 
 		m_filename = rm.filename();
 	}
 
-	Widelands::Game game;
 	try {
 		UI::ProgressWindow loaderUI;
 		std::vector<std::string> tipstext;
