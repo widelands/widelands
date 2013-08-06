@@ -372,13 +372,13 @@ void FieldDebugWindow::think()
 		int ramount = m_coords.field->get_resources_amount();
 		int startingAmount = m_coords.field->get_starting_res_amount();
 		snprintf
-		(buffer, sizeof(buffer), _("Resource name: %s\n"),
+		(buffer, sizeof(buffer), _("Resource: %s\n"),
 			m_map.get_world()->get_resource(ridx)->name().c_str());
 
 		str += buffer;
 
 		snprintf
-		(buffer, sizeof(buffer), _("Resource amount: %i/%i\n"), ramount, startingAmount);
+		(buffer, sizeof(buffer), _("  Amount: %i/%i\n"), ramount, startingAmount);
 		str += buffer;
 	}
 
