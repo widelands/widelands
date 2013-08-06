@@ -256,7 +256,7 @@ void WatchWindow::think()
 		pos = bob->calc_drawpos(game(), pos);
 
 		Widelands::Map & map = game().map();
-		// Drop the tracking of it leaves our vision range
+		// Drop the tracking if it leaves our vision range
 		Interactive_Player* ipl = game().get_ipl();
 		if (ipl && 1 >= ipl->player().vision(map.get_index(bob->get_position(), map.get_width()))) {
 			// Not in sight
