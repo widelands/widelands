@@ -407,6 +407,7 @@ m_infotext(this, _("Click soldier to send away"))
 	UI::Box * buttons = new UI::Box(this, 0, 0, UI::Box::Horizontal);
 
 	bool can_act = m_igb.can_act(m_building.owner().player_number());
+	if (can_act)
 	if (upcast(Widelands::MilitarySite, ms, &building)) {
 		m_soldier_preference.add_button
 			(buttons, Point(0, 0), g_gr->images().get("pics/prefer_rookies.png"), _("Prefer Rookies"));
@@ -422,12 +423,8 @@ m_infotext(this, _("Click soldier to send away"))
 		if (ms->get_soldier_preference() == Widelands::MilitarySite::kPrefersHeroes) {
 			m_soldier_preference.set_state(1);
 		}
-		if (can_act) {
-			m_soldier_preference.changedto.connect
-				(boost::bind(&SoldierList::set_soldier_preference, this, _1));
-		} else {
-			m_soldier_preference.set_enabled(false);
-		}
+		m_soldier_preference.changedto.connect
+			(boost::bind(&SoldierList::set_soldier_preference, this, _1));
 	}
 	buttons->add_inf_space();
 	buttons->add
