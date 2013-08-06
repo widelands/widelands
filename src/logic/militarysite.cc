@@ -842,7 +842,7 @@ bool MilitarySite::attack(Soldier & enemy)
 				(game,
 				 "site_lost",
 				 _("Militarysite lost!"),
-				 message);
+				 message, true);
 		}
 
 		// Now let's see whether the enemy conquers our militarysite, or whether
@@ -953,7 +953,7 @@ void MilitarySite::informPlayer(Game & game, bool const discovered)
 		(game,
 		 "under_attack",
 		 _("You are under attack"),
-		 message,
+		 message, true,
 		 60 * 1000, 5);
 }
 
