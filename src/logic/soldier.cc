@@ -998,11 +998,12 @@ void Soldier::attack_update(Game & game, State & state)
 			if (newsite and (&newsite->owner() == &owner())) {
 				if (upcast(SoldierControl, ctrl, newsite)) {
 					state.objvar1 = 0;
+					// We may also have our location destroyed in between
 					if
 						(ctrl->stationedSoldiers().size() < ctrl->soldierCapacity() and
-						location->base_flag().get_position()
-						!=
-						newsite ->base_flag().get_position())
+						(!location || location->base_flag().get_position()
+						              !=
+						              newsite ->base_flag().get_position()))
 					{
 						molog("[attack] enemy belongs to us now, move in\n");
 						pop_task(game);
