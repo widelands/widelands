@@ -165,13 +165,16 @@ std::string MilitarySite::get_statistics_string()
 	uint32_t capacity = m_garrison->soldierCapacity();
 
 	if (present == total) {
-		str = (boost::format
-			(ngettext(_("%u soldier"), _("%u soldiers"), total)) % total).str();
+		str =
+			(boost::format
+				(ngettext(_("%u soldier"), _("%u soldiers"), total)) % total)
+				.str();
 	} else {
-		str = (boost::format
-			(ngettext(_("%u(+%u) soldier"), _("%u(+%u) soldiers"), present))
-			% present % (total - present))
-			.str();
+		str =
+			(boost::format
+				(ngettext(_("%u(+%u) soldier"), _("%u(+%u) soldiers"), present))
+				% present % (total - present))
+				.str();
 	}
 
 	if (capacity > total) {
@@ -262,8 +265,9 @@ void MilitarySite::garrison_lost(Game& game, Widelands::Player_Number defeating,
 
 	// Of course we should inform the victorious player as well
 	upcast(Building, new_building, newimm);
-	std::string message = (boost::format
-		(_("Your soldiers defeated the enemy at the %s."))
+	std::string message =
+		(boost::format
+			(_("Your soldiers defeated the enemy at the %s."))
 			% new_building->descname())
 			.str();
 	new_building->send_message

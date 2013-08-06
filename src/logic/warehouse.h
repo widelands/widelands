@@ -22,6 +22,7 @@
 
 #include "logic/building.h"
 #include "economy/request.h"
+#include "logic/storage.h"
 #include "logic/wareworker.h"
 
 struct Interactive_Player;
@@ -29,6 +30,7 @@ struct Profile;
 
 namespace Widelands {
 
+class StorageHandler;
 struct Editor_Game_Base;
 struct PortDock;
 struct Request;
@@ -42,7 +44,6 @@ struct WareList;
 /*
 Warehouse
 */
-struct WarehouseSupply;
 
 struct Warehouse_Descr : public Building_Descr {
 	Warehouse_Descr
@@ -63,47 +64,12 @@ private:
 };
 
 
-class Warehouse : public Building{
+class Warehouse : public Building, public StorageOwner {
 	friend struct PortDock;
 	friend struct Map_Buildingdata_Data_Packet;
 
 	MO_DESCR(Warehouse_Descr);
-
 public:
-	/**
-	 * Each ware and worker type has an associated per-warehouse
-	 * stock policy that defines whether it will be stocked by this
-	 * warehouse.
-	 *
-	 * \note The values of this enum are written directly into savegames,
-	 * so be careful when changing them.
-	 */
-	enum StockPolicy {
-		/**
-		 * The default policy allows stocking wares without any special priority.
-		 */
-		SP_Normal = 0,
-
-		/**
-		 * As long as there are warehouses with this policy for a ware, all
-		 * available unstocked supplies will be transferred to warehouses
-		 * with this policy.
-		 */
-		SP_Prefer = 1,
-
-		/**
-		 * If a ware has this stock policy, no new items of this ware will enter
-		 * the warehouse.
-		 */
-		SP_DontStock = 2,
-
-		/**
-		 * Like \ref SP_DontStock, but in addition, existing stock of this ware
-		 * will be transported out of the warehouse over time.
-		 */
-		SP_Remove = 3,
-	};
-
 	Warehouse(const Warehouse_Descr &);
 	virtual ~Warehouse();
 
@@ -135,43 +101,14 @@ public:
 
 	virtual void set_economy(Economy *);
 
-	const WareList & get_wares() const;
-	const WareList & get_workers() const;
-
-	void insert_wares  (Ware_Index, uint32_t count);
-	void remove_wares  (Ware_Index, uint32_t count);
-	void insert_workers(Ware_Index, uint32_t count);
-	void remove_workers(Ware_Index, uint32_t count);
-
 	virtual bool fetch_from_flag(Game &);
-
-	uint32_t count_workers(const Game &, Ware_Index, const Requirements &);
-	Worker & launch_worker(Game &, Ware_Index, const Requirements &);
-	void incorporate_worker(Editor_Game_Base &, Worker &);
-
-	WareInstance & launch_item(Game &, Ware_Index);
-	void do_launch_item(Game &, WareInstance &);
-	void incorporate_item(Editor_Game_Base &, WareInstance &);
-
-	bool can_create_worker(Game &, Ware_Index) const;
-	void     create_worker(Game &, Ware_Index);
-
-	uint32_t get_planned_workers(Game &, Ware_Index index) const;
-	void plan_workers(Game &, Ware_Index index, uint32_t amount);
-	std::vector<uint32_t> calc_available_for_worker
-		(Game &, Ware_Index index) const;
-
-	void enable_spawn(Game &, uint8_t worker_types_without_cost_index);
-	void disable_spawn(uint8_t worker_types_without_cost_index);
 
 	virtual void receive_ware(Game &, Ware_Index ware);
 	virtual void receive_worker(Game &, Worker & worker);
 
-	StockPolicy get_ware_policy(Ware_Index ware) const;
-	StockPolicy get_worker_policy(Ware_Index ware) const;
-	StockPolicy get_stock_policy(WareWorker waretype, Ware_Index wareindex) const;
-	void set_ware_policy(Ware_Index ware, StockPolicy policy);
-	void set_worker_policy(Ware_Index ware, StockPolicy policy);
+	// StorageOwner
+	virtual Building* get_building();
+	virtual Storage* get_storage() const;
 
 	// PortDock stuff
 	struct Expedition_Worker {
@@ -205,47 +142,7 @@ protected:
 private:
 	void init_portdock(Editor_Game_Base & egbase);
 
-	/**
-	 * Plan to produce a certain worker type in this warehouse. This means
-	 * requesting all the necessary wares, if multiple different wares types are
-	 * needed.
-	 */
-	struct PlannedWorkers {
-		/// Index of the worker type we plan to create
-		Ware_Index index;
-
-		/// How many workers of this type are we supposed to create?
-		uint32_t amount;
-
-		/// Requests to obtain the required build costs
-		std::vector<Request *> requests;
-
-		void cleanup();
-	};
-
-	static void request_cb
-		(Game &, Request &, Ware_Index, Worker *, PlayerImmovable &);
-	void check_remove_stock(Game &);
-
-	bool _load_finish_planned_worker(PlannedWorkers & pw);
-	void _update_planned_workers(Game &, PlannedWorkers & pw);
-	void _update_all_planned_workers(Game &);
-
-	WarehouseSupply       * m_supply;
-
-	std::vector<StockPolicy> m_ware_policy;
-	std::vector<StockPolicy> m_worker_policy;
-
-	// Workers who live here at the moment
-	typedef std::vector<Worker *> WorkerList;
-	typedef std::map<Ware_Index, WorkerList> IncorporatedWorkers;
-	IncorporatedWorkers        m_incorporated_workers;
-	uint32_t                 * m_next_worker_without_cost_spawn;
-	uint32_t                   m_next_military_act;
-	uint32_t m_next_stock_remove_act;
-
-	std::vector<PlannedWorkers> m_planned_workers;
-
+	std::unique_ptr<StorageHandler> m_storage;
 	// PortDock stuff
 	PortDock * m_portdock;
 	std::vector<WaresQueue *> m_expedition_wares;

@@ -25,10 +25,12 @@
 
 namespace Widelands {
 
+class StorageOwner;
+
 struct PlayerImmovable;
 struct Game;
 struct Request;
-class Warehouse;
+class StorageOwner;
 struct Ware_Index;
 class WareInstance;
 class Worker;
@@ -77,7 +79,7 @@ struct Supply : public Trackable {
 	 * Sets up all the required transfers; assumes that \ref has_storage
 	 * returns \c false.
 	 */
-	virtual void send_to_storage(Game &, Warehouse * wh) = 0;
+	virtual void send_to_storage(Game &, StorageOwner * storage_owner) = 0;
 
 	/**
 	 * \return the number of items or workers that can be launched right

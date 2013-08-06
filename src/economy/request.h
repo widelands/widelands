@@ -41,11 +41,11 @@ struct PlayerImmovable;
 class RequestList;
 struct Requirements;
 struct Supply;
+class Storage;
 struct Transfer;
 class Worker;
 class Building;
 class ProductionSite;
-class Warehouse;
 class ConstructionSite;
 
 /**
@@ -65,9 +65,12 @@ struct Request : public Trackable {
 
 	typedef void (*callback_t)
 		(Game &, Request &, Ware_Index, Worker *, PlayerImmovable &);
+	typedef void (*callback_tranfert_t)
+		(Game &, Request &, Ware_Index, Worker *, PlayerImmovable &);
 
-	Request(PlayerImmovable & target, Ware_Index, callback_t, WareWorker,
-			  std::function<void(Worker*)> transfer_cb = nullptr);
+	Request
+		(PlayerImmovable & target, Ware_Index, callback_t, WareWorker,
+		 callback_tranfert_t transfer_cb = nullptr);
 	~Request();
 
 	PlayerImmovable & target() const throw () {return m_target;}
@@ -123,7 +126,7 @@ private:
 	//  are filled with nulls.
 	Building        * m_target_building;
 	ProductionSite  * m_target_productionsite;
-	Warehouse       * m_target_warehouse;
+	Storage         * m_target_storage;
 	ConstructionSite * m_target_constructionsite;
 
 	Economy         * m_economy;
@@ -131,7 +134,7 @@ private:
 	uint32_t          m_count;             //  how many do we need in total
 
 	callback_t        m_callbackfn;        //  called on request success
-	std::function<void(Worker*)> m_transfer_cb; // called on worker transfer start/cancel
+	callback_tranfert_t m_transfer_cb; // called on worker transfer start/cancel
 
 	//  when do we need the first ware (can be in the past)
 	int32_t           m_required_time;

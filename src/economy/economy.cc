@@ -27,11 +27,10 @@
 #include "economy/route.h"
 #include "economy/routeastar.h"
 #include "economy/router.h"
-#include "economy/warehousesupply.h"
 #include "logic/game.h"
 #include "logic/player.h"
+#include "logic/storage.h"
 #include "logic/tribe.h"
-#include "logic/warehouse.h"
 #include "upcast.h"
 #include "wexception.h"
 
@@ -78,8 +77,8 @@ Economy::~Economy()
 		log("Warning: Economy still has requests left on destruction\n");
 	if (m_flags.size())
 		log("Warning: Economy still has flags left on destruction\n");
-	if (m_warehouses.size())
-		log("Warning: Economy still has warehouses left on destruction\n");
+	if (m_storages.size())
+		log("Warning: Economy still has storages left on destruction\n");
 
 	delete[] m_ware_target_quantities;
 	delete[] m_worker_target_quantities;
@@ -214,22 +213,22 @@ struct ZeroEstimator {
 };
 
 /**
- * Find the warehouse closest to the given starting flag.
+ * Find the storage owner closest to the given starting flag.
  *
  * If the search was successful and \p route is non-null,
  * a route is also computed.
  *
  * \param start starting flag
  * \param type whether to path-find as if the path were for a ware
- * \param route if non-null, fill in a route to the warehouse
+ * \param route if non-null, fill in a route to the storage
  * \param cost_cutoff if positive, find paths of at most
  * that length (in milliseconds)
  */
-Warehouse * Economy::find_closest_warehouse
+StorageOwner* Economy::find_closest_storage
 	(Flag & start, WareWorker type, Route * route, uint32_t cost_cutoff,
-	 const Economy::WarehouseAcceptFn & acceptfn)
+	 const Economy::StorageAcceptFn & acceptfn)
 {
-	if (!warehouses().size())
+	if (!storages().size())
 		return 0;
 
 	// A-star with zero estimator = Dijkstra
@@ -243,11 +242,11 @@ Warehouse * Economy::find_closest_warehouse
 			return 0;
 
 		Flag & flag = current->base_flag();
-		if (upcast(Warehouse, warehouse, flag.get_building())) {
-			if (!acceptfn || acceptfn(*warehouse)) {
+		if (upcast(StorageOwner, storage_owner, flag.get_building())) {
+			if (!acceptfn || acceptfn(storage_owner)) {
 				if (route)
 					astar.routeto(flag, *route);
-				return warehouse;
+				return storage_owner;
 			}
 		}
 	}
@@ -368,7 +367,7 @@ void Economy::add_workers(Ware_Index const id, uint32_t const count)
 
 /**
  * Call this whenever a ware is destroyed or consumed, e.g. food has been
- * eaten or a warehouse has been destroyed.
+ * eaten or a storage has been destroyed.
  * This is also called when a ware is removed from the economy through trade or
  * a split of the Economy.
 */
@@ -397,32 +396,32 @@ void Economy::remove_workers(Ware_Index const id, uint32_t const count)
 }
 
 /**
- * Add the warehouse to our list of warehouses.
- * This also adds the wares in the warehouse to the economy. However, if wares
- * are added to the warehouse in the future, add_wares() must be called.
+ * Add the storage to our list of storages.
+ * This also adds the wares in the storage to the economy. However, if wares
+ * are added to the storage in the future, add_wares() must be called.
 */
-void Economy::add_warehouse(Warehouse & wh)
+void Economy::add_storage(Storage & storage)
 {
-	m_warehouses.push_back(&wh);
+	m_storages.push_back(&storage);
 }
 
 /**
- * Remove the warehouse and its wares from the economy.
+ * Remove the storage and its wares from the economy.
 */
-void Economy::remove_warehouse(Warehouse & wh)
+void Economy::remove_storage(Storage & storage)
 {
-	for (size_t i = 0; i < m_warehouses.size(); ++i)
-		if (m_warehouses[i] == &wh) {
-			m_warehouses[i] = *m_warehouses.rbegin();
-			m_warehouses.pop_back();
+	for (size_t i = 0; i < m_storages.size(); ++i)
+		if (m_storages[i] == &storage) {
+			m_storages[i] = *m_storages.rbegin();
+			m_storages.pop_back();
 			return;
 		}
 
 
-	//  This assert was modified, since on loading, warehouses might try to
+	//  This assert was modified, since on loading, storages might try to
 	//  remove themselves from their own economy, though they weren't added
 	//  (since they weren't initialized)
-	assert(m_warehouses.empty());
+	assert(m_storages.empty());
 }
 
 /**
@@ -495,8 +494,8 @@ void Economy::remove_supply(Supply & supply)
 bool Economy::needs_ware(Ware_Index const ware_type) const {
 	uint32_t const t = ware_target_quantity(ware_type).permanent;
 	uint32_t quantity = 0;
-	container_iterate_const(std::vector<Warehouse *>, m_warehouses, wh) {
-		quantity += (*wh)->get_wares().stock(ware_type);
+	container_iterate_const(std::vector<Storage *>, m_storages, storage) {
+		quantity += (*storage)->get_wares().stock(ware_type);
 		if (t <= quantity)
 			return false;
 	}
@@ -507,8 +506,8 @@ bool Economy::needs_ware(Ware_Index const ware_type) const {
 bool Economy::needs_worker(Ware_Index const worker_type) const {
 	uint32_t const t = worker_target_quantity(worker_type).permanent;
 	uint32_t quantity = 0;
-	container_iterate_const(std::vector<Warehouse *>, m_warehouses, wh) {
-		quantity += (*wh)->get_workers().stock(worker_type);
+	container_iterate_const(std::vector<Storage *>, m_storages, storage) {
+		quantity += (*storage)->get_workers().stock(worker_type);
 		if (t <= quantity)
 			return false;
 	}
@@ -796,7 +795,7 @@ void Economy::_balance_requestsupply(Game & game)
 
 /**
  * Check whether there is a supply for the given request. If the request is a
- * worker request without supply, attempt to create a new worker in a warehouse.
+ * worker request without supply, attempt to create a new worker in a storage.
  */
 void Economy::_create_requested_worker(Game & game, Ware_Index index)
 {
@@ -820,7 +819,7 @@ void Economy::_create_requested_worker(Game & game, Ware_Index index)
 		return;
 
 	// We have worker demand that is not fulfilled by supplies
-	// Find warehouses where we can create the required workers,
+	// Find storages where we can create the required workers,
 	// and collect stats about existing build prerequisites
 	const Tribe_Descr & tribe = owner().tribe();
 	const Worker_Descr & w_desc = *tribe.get_worker_descr(index);
@@ -830,20 +829,20 @@ void Economy::_create_requested_worker(Game & game, Ware_Index index)
 
 	total_available.insert(total_available.begin(), cost.size(), 0);
 
-	for (uint32_t n_wh = 0; n_wh < warehouses().size(); ++n_wh) {
-		Warehouse * wh = m_warehouses[n_wh];
+	for (uint32_t storage_idx = 0; storage_idx < m_storages.size(); ++storage_idx) {
+		Storage * storage = m_storages[storage_idx];
 
-		uint32_t planned = wh->get_planned_workers(game, index);
+		uint32_t planned = storage->get_planned_workers(game, index);
 		total_planned += planned;
 
-		while (wh->can_create_worker(game, index)) {
-			wh->create_worker(game, index);
+		while (storage->can_create_worker(game, index)) {
+			storage->create_worker(game, index);
 			if (!--demand)
 				return;
 		}
 
 		std::vector<uint32_t> wh_available =
-			wh->calc_available_for_worker(game, index);
+			storage->calc_available_for_worker(game, index);
 		assert(wh_available.size() == total_available.size());
 
 		for (uint32_t idx = 0; idx < total_available.size(); ++idx)
@@ -870,25 +869,25 @@ void Economy::_create_requested_worker(Game & game, Ware_Index index)
 		// there are supplies for (otherwise, cyclic transportation might happen)
 		// Note that supplies might suddenly disappear outside our control because
 		// of loss of land or silly player actions.
-		for (uint32_t n_wh = 0; n_wh < warehouses().size(); ++n_wh) {
-			Warehouse * wh = m_warehouses[n_wh];
+		for (uint32_t storage_idx = 0; storage_idx < m_storages.size(); ++storage_idx) {
+			Storage * storage = m_storages[storage_idx];
 
-			uint32_t planned = wh->get_planned_workers(game, index);
+			uint32_t planned = storage->get_planned_workers(game, index);
 			uint32_t reduce = std::min(planned, total_planned - can_create);
-			wh->plan_workers(game, index, planned - reduce);
+			storage->plan_workers(game, index, planned - reduce);
 			total_planned -= reduce;
 		}
 	} else if (total_planned < demand) {
 		uint32_t plan_goal = std::min(can_create, demand);
 
-		for (uint32_t n_wh = 0; n_wh < warehouses().size(); ++n_wh) {
-			Warehouse * wh = m_warehouses[n_wh];
+		for (uint32_t storage_idx = 0; storage_idx < m_storages.size(); ++storage_idx) {
+			Storage * storage = m_storages[storage_idx];
 			uint32_t supply =
-				wh->calc_available_for_worker(game, index)[scarcest_idx];
+				storage->calc_available_for_worker(game, index)[scarcest_idx];
 
-			total_planned -= wh->get_planned_workers(game, index);
+			total_planned -= storage->get_planned_workers(game, index);
 			uint32_t plan = std::min(supply, plan_goal - total_planned);
-			wh->plan_workers(game, index, plan);
+			storage->plan_workers(game, index, plan);
 			total_planned += plan;
 		}
 	}
@@ -896,11 +895,11 @@ void Economy::_create_requested_worker(Game & game, Ware_Index index)
 
 /**
  * Walk all Requests and find requests of workers than aren't supplied. Then
- * try to create the worker at warehouses.
+ * try to create the worker at storages.
  */
 void Economy::_create_requested_workers(Game & game)
 {
-	if (!warehouses().size())
+	if (!storages().size())
 		return;
 
 	const Tribe_Descr & tribe = owner().tribe();
@@ -920,23 +919,23 @@ void Economy::_create_requested_workers(Game & game)
 /**
  * Helper function for \ref _handle_active_supplies
  */
-static bool accept_warehouse_if_policy
-	(Warehouse & wh, WareWorker type,
-	 Ware_Index ware, Warehouse::StockPolicy policy)
+static bool accept_storage_if_policy
+	(StorageOwner* storage, WareWorker type,
+	 Ware_Index ware, Storage::StockPolicy policy)
 {
-	return wh.get_stock_policy(type, ware) == policy;
+	return storage->get_storage()->get_stock_policy(type, ware) == policy;
 }
 
 /**
  * Send all active supplies (wares that are outside on the road network without
- * being sent to a specific request) to a warehouse.
+ * being sent to a specific request) to a storage.
  */
 void Economy::_handle_active_supplies(Game & game)
 {
-	if (!warehouses().size())
+	if (!storages().size())
 		return;
 
-	typedef std::vector<std::pair<Supply *, Warehouse *> > Assignments;
+	typedef std::vector<std::pair<Supply *, StorageOwner *> > Assignments;
 	Assignments assignments;
 
 	for (uint32_t idx = 0; idx < m_supplies.get_nrsupplies(); ++idx) {
@@ -950,38 +949,38 @@ void Economy::_handle_active_supplies(Game & game)
 
 		bool haveprefer = false;
 		bool havenormal = false;
-		for (uint32_t nwh = 0; nwh < m_warehouses.size(); ++nwh) {
-			Warehouse * wh = m_warehouses[nwh];
-			Warehouse::StockPolicy policy = wh->get_stock_policy(type, ware);
-			if (policy == Warehouse::SP_Prefer) {
+		for (uint32_t storage_idx = 0; storage_idx < m_storages.size(); ++storage_idx) {
+			Storage * storage = m_storages[storage_idx];
+			Storage::StockPolicy policy = storage->get_stock_policy(type, ware);
+			if (policy == Storage::StockPolicy::Prefer) {
 				haveprefer = true;
 				break;
 			}
-			if (policy == Warehouse::SP_Normal)
+			if (policy == Storage::StockPolicy::Normal)
 				havenormal = true;
 		}
 		if (!havenormal && !haveprefer && type == wwWARE)
 			continue;
 
-		Warehouse * wh = find_closest_warehouse
+		StorageOwner * storage_owner = find_closest_storage
 			(supply.get_position(game)->base_flag(), type, 0, 0,
 			 (!haveprefer && !havenormal)
 			 ?
-			 WarehouseAcceptFn()
+			 StorageAcceptFn()
 			 :
 			 boost::bind
-				(&accept_warehouse_if_policy,
+				(&accept_storage_if_policy,
 				 _1, type, ware,
-				 haveprefer ? Warehouse::SP_Prefer : Warehouse::SP_Normal));
+				 haveprefer ? Storage::StockPolicy::Prefer : Storage::StockPolicy::Normal));
 
-		if (!wh) {
+		if (!storage_owner) {
 			log
 				("Warning: Economy::_handle_active_supplies "
-				 "didn't find warehouse\n");
+				 "didn't find storage\n");
 			return;
 		}
 
-		assignments.push_back(std::make_pair(&supply, wh));
+		assignments.push_back(std::make_pair(&supply, storage_owner));
 	}
 
 	// Actually start with the transfers in a separate second phase,
@@ -991,10 +990,10 @@ void Economy::_handle_active_supplies(Game & game)
 	ss.Unsigned32(0x02decafa); // appears as facade02 in sync stream
 	ss.Unsigned32(assignments.size());
 
+	// FIXME CGH check thats working
 	container_iterate_const(Assignments, assignments, it) {
 		ss.Unsigned32(it.current->first->get_position(game)->serial());
-		ss.Unsigned32(it.current->second->serial());
-
+		ss.Unsigned32(it.current->second->get_building()->serial());
 		it.current->first->send_to_storage(game, it.current->second);
 	}
 }

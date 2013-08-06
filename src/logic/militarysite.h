@@ -65,8 +65,6 @@ public:
 	virtual void init(Editor_Game_Base &);
 	virtual void cleanup(Editor_Game_Base &);
 	virtual void act(Game &, uint32_t data);
-// 	virtual void remove_worker(Worker &);
-// 	virtual void add_worker(Worker &);
 
 	char const * type_name() const throw () {return "militarysite";}
 	virtual std::string get_statistics_string();
@@ -79,7 +77,7 @@ public:
 	virtual Building* get_building();
 	virtual void garrison_occupied();
 	virtual void garrison_lost(Game & game, Player_Number defeating, bool captured);
-   virtual void reinit_after_conqueral(Game& game);
+	virtual void reinit_after_conqueral(Game& game);
 
 protected:
 	virtual void create_options_window

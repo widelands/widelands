@@ -20,9 +20,9 @@
 #ifndef TRAININGSITE_H
 #define TRAININGSITE_H
 
+#include "logic/garrison.h"
 #include "logic/productionsite.h"
 #include "logic/tattribute.h"
-#include "garrison.h"
 
 struct TrainingSite_Window;
 

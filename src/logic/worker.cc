@@ -1089,7 +1089,7 @@ void Worker::log_general_info(const Editor_Game_Base & egbase)
 
 /**
  * Change the location. This should be called in the following situations:
- * \li worker creation (usually, location is a warehouse)
+ * \li worker creation (usually, location is a storage)
  * \li worker moves along a route (location is a road and finally building)
  * \li current location is destroyed (building burnt down etc...)
  */
@@ -1200,7 +1200,7 @@ void Worker::cleanup(Editor_Game_Base & egbase)
 
 	// We are destroyed, but we were maybe idling
 	// or doing something else. Get Location might
-	// init a gowarehouse task or something and this results
+	// init a gostorage task or something and this results
 	// in a dirty stack. Nono, we do not want to end like this
 	if (upcast(Game, game, &egbase))
 		reset_tasks(*game);
@@ -1251,7 +1251,7 @@ WareInstance * Worker::fetch_carried_item(Editor_Game_Base & game)
 
 /**
  * Schedule an immediate CMD_INCORPORATE, which will integrate this worker into
- * the warehouse he is standing on.
+ * the storage he is standing on.
  */
 void Worker::schedule_incorporate(Game & game)
 {
@@ -1261,13 +1261,13 @@ void Worker::schedule_incorporate(Game & game)
 
 
 /**
- * Incorporate the worker into the warehouse it's standing on immediately.
+ * Incorporate the worker into the storage it's standing on immediately.
  * This will delete the worker.
  */
 void Worker::incorporate(Game & game)
 {
-	if (upcast(Warehouse, wh, get_location(game))) {
-		wh->incorporate_worker(game, *this);
+	if (upcast(StorageOwner, storage_owner, get_location(game))) {
+		storage_owner->get_storage()->incorporate_worker(game, *this);
 		return;
 	}
 
@@ -1353,7 +1353,7 @@ void Worker::flash(const std::string & newname)
 void Worker::init_auto_task(Game & game) {
 	if (PlayerImmovable * location = get_location(game)) {
 		if
-			(get_economy()->warehouses().size() ||
+			(get_economy()->storages().size() ||
 			 location->get_type() == BUILDING)
 			return start_task_gowarehouse(game);
 
@@ -2008,7 +2008,7 @@ void Worker::gowarehouse_update(Game & game, State & /* state */)
 		}
 	}
 
-	if (dynamic_cast<Warehouse const *>(location)) {
+	if (dynamic_cast<StorageOwner const *>(location)) {
 		delete m_supply;
 		m_supply = 0;
 
@@ -2032,7 +2032,7 @@ void Worker::gowarehouse_update(Game & game, State & /* state */)
 	if (location->get_type() == BUILDING)
 		return start_task_leavebuilding(game, true);
 
-	if (!get_economy()->warehouses().size()) {
+	if (!get_economy()->storages().size()) {
 		molog("[gowarehouse]: No warehouse left in Economy\n");
 		return pop_task(game);
 	}
@@ -2158,7 +2158,7 @@ void Worker::dropoff_update(Game & game, State &)
 		throw wexception
 			("MO(%u): [dropoff]: not on building on return", serial());
 
-	if (dynamic_cast<Warehouse const *>(location)) {
+	if (dynamic_cast<StorageOwner const *>(location)) {
 		schedule_incorporate(game);
 		return;
 	}
@@ -2285,7 +2285,7 @@ void Worker::fetchfromflag_update(Game & game, State & state)
 	}
 
 	// We're back!
-	if (dynamic_cast<Warehouse const *>(location)) {
+	if (dynamic_cast<StorageOwner const *>(location)) {
 		schedule_incorporate(game);
 		return;
 	}
@@ -2511,12 +2511,12 @@ void Worker::start_task_fugitive(Game & game)
 		game.get_gametime() + 120000 + 200 * (game.logic_rand() % 600);
 }
 
-struct FindFlagWithPlayersWarehouse {
-	FindFlagWithPlayersWarehouse(const Player & owner) : m_owner(owner) {}
+struct FindFlagWithPlayersStorage {
+	FindFlagWithPlayersStorage(const Player & owner) : m_owner(owner) {}
 	bool accept(const BaseImmovable & imm) const {
 		if (upcast(Flag const, flag, &imm))
 			if (&flag->owner() == &m_owner)
-				if (flag->economy().warehouses().size())
+				if (flag->economy().storages().size())
 					return true;
 		return false;
 	}
@@ -2537,7 +2537,7 @@ void Worker::fugitive_update(Game & game, State & state)
 	if (location && &location->owner() == &owner()) {
 		molog("[fugitive]: we are on location\n");
 
-		if (dynamic_cast<Warehouse const *>(location))
+		if (dynamic_cast<StorageOwner const *>(location))
 			return schedule_incorporate(game);
 
 		set_location(0);
@@ -2546,7 +2546,7 @@ void Worker::fugitive_update(Game & game, State & state)
 
 	// check whether we're on a flag and it's time to return home
 	if (upcast(Flag, flag, map[get_position()].get_immovable())) {
-		if (&flag->owner() == &owner() and flag->economy().warehouses().size()) {
+		if (&flag->owner() == &owner() and flag->economy().storages().size()) {
 			set_location(flag);
 			return pop_task(game);
 		}
@@ -2562,12 +2562,12 @@ void Worker::fugitive_update(Game & game, State & state)
 	if
 		(map.find_immovables
 		 	(Area<FCoords>(map.get_fcoords(get_position()), maxdist),
-		 	 &flags, FindFlagWithPlayersWarehouse(*get_owner())))
+		 	 &flags, FindFlagWithPlayersStorage(*get_owner())))
 	{
 		int32_t bestdist = -1;
 		Flag *  best     =  0;
 
-		molog("[fugitive]: found a flag connected to warehouse(s)\n");
+		molog("[fugitive]: found a flag connected to storage(s)\n");
 
 		container_iterate_const(std::vector<ImmovableFound>, flags, i) {
 			Flag & flag = ref_cast<Flag, BaseImmovable>(*i.current->object);
@@ -2593,7 +2593,7 @@ void Worker::fugitive_update(Game & game, State & state)
 		if (best) {
 			molog("[fugitive]: try to move to flag\n");
 
-			// Warehouse could be on a different island, so check for failure
+			// Storage could be on a different island, so check for failure
 			// Also, move only a few number of steps in the right direction,
 			// so that we could theoretically lose the flag again, but also
 			// perhaps find a closer flag.

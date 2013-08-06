@@ -28,8 +28,8 @@
 #include "logic/player.h"
 #include "logic/productionsite.h"
 #include "logic/soldier.h"
+#include "logic/storage.h"
 #include "logic/tribe.h"
-#include "logic/warehouse.h"
 #include "logic/worker.h"
 #include "map_io/widelands_map_map_object_loader.h"
 #include "map_io/widelands_map_map_object_saver.h"
@@ -51,13 +51,13 @@ Request::Request
 	 Ware_Index const index,
 	 callback_t const cbfn,
 	 WareWorker const w,
-	 std::function<void(Worker*)> const transfer_cb)
+	 callback_tranfert_t const transfer_cb)
 	:
 	m_type             (w),
 	m_target           (_target),
 	m_target_building  (dynamic_cast<Building *>(&_target)),
 	m_target_productionsite  (dynamic_cast<ProductionSite *>(&_target)),
-	m_target_warehouse (dynamic_cast<Warehouse *>(&_target)),
+	m_target_storage   (nullptr),
 	m_target_constructionsite (dynamic_cast<ConstructionSite *>(&_target)),
 	m_economy          (_target.get_economy()),
 	m_index            (index),
@@ -68,6 +68,9 @@ Request::Request
 	m_required_interval(0),
 	m_last_request_time(m_required_time)
 {
+	if (upcast(StorageOwner, storage_owner, &_target)) {
+		m_target_storage = storage_owner->get_storage();
+	}
 	assert(m_type == wwWARE or m_type == wwWORKER);
 	if (w == wwWARE and _target.owner().tribe().get_nrwares() <= index)
 		throw wexception
@@ -356,8 +359,8 @@ int32_t Request::get_priority (int32_t cost) const
 		modifier = m_target_building->get_priority(get_type(), get_index());
 		if (m_target_constructionsite)
 			is_construction_site = true;
-		else if (m_target_warehouse)
-			// if warehouse calculated a priority use it
+		else if (m_target_storage)
+			// if storage calculated a priority use it
 			// else lower priority based on cost
 			return
 				modifier != 100 ? modifier :
@@ -406,7 +409,7 @@ uint32_t Request::get_transfer_priority() const
 		pri = m_target_building->get_priority(get_type(), get_index());
 		if (m_target_constructionsite)
 			return pri + 3;
-		else if (m_target_warehouse)
+		else if (m_target_storage)
 			return pri - 2;
 	}
 	return pri;
@@ -489,12 +492,12 @@ void Request::start_transfer(Game & game, Supply & supp)
 		ss.Unsigned32(s.serial());
 		t = new Transfer(game, *this, s);
 		if (m_transfer_cb) {
-			m_transfer_cb(&s);
+			(*m_transfer_cb)(game, *this, m_index, &s, m_target);
 		}
 	} else {
 		//  Begin the transfer of an item. The item itself is passive.
 		//  launch_item() ensures the WareInstance is transported out of the
-		//  warehouse. Once it's on the flag, the flag code will decide what to
+		//  storage. Once it's on the flag, the flag code will decide what to
 		//  do with it.
 		WareInstance & item = supp.launch_item(game, *this);
 		ss.Unsigned32(item.serial());
@@ -538,7 +541,7 @@ void Request::transfer_finish(Game & game, Transfer & t)
  *
  * Re-open the request.
 */
-void Request::transfer_fail(Game &, Transfer & t) {
+void Request::transfer_fail(Game & game, Transfer & t) {
 	bool const wasopen = is_open();
 
 	t.m_worker = 0;
@@ -546,10 +549,11 @@ void Request::transfer_fail(Game &, Transfer & t) {
 
 	remove_transfer(find_transfer(t));
 
-	if (!wasopen)
+	if (!wasopen) {
 		m_economy->add_request(*this);
+	}
 	if (m_transfer_cb) {
-		m_transfer_cb(nullptr);
+		m_transfer_cb(game, *this, m_index, nullptr, m_target);
 	}
 }
 

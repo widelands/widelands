@@ -1177,13 +1177,13 @@ void Player::sample_statistics()
 
 	const uint32_t nrecos = get_nr_economies();
 	for (uint32_t i = 0; i < nrecos; ++i) {
-		const std::vector<Widelands::Warehouse *> & warehouses =
-			get_economy_by_number(i)->warehouses();
+		const std::vector<Widelands::Storage *> & storages =
+			get_economy_by_number(i)->storages();
 
 		for
-			(std::vector<Widelands::Warehouse *>::const_iterator it =
-			 warehouses.begin();
-			 it != warehouses.end();
+			(std::vector<Widelands::Storage *>::const_iterator it =
+			 storages.begin();
+			 it != storages.end();
 			 ++it)
 		{
 			const Widelands::WareList & wares = (*it)->get_wares();

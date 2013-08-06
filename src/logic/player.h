@@ -638,7 +638,7 @@ private:
 	std::vector< std::vector<uint32_t> > m_ware_consumptions;
 
 	/**
-	 * Statistics of wares stored inside of warehouses over the
+	 * Statistics of wares stored inside of storages over the
 	 * life of the game, indexed as
 	 * m_ware_stocks[ware_id][time_index]
 	 */

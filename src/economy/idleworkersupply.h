@@ -23,6 +23,8 @@
 #include "economy/supply.h"
 
 namespace Widelands {
+
+class StorageOwner;
 class Worker;
 class Economy;
 
@@ -36,7 +38,7 @@ struct IdleWorkerSupply : public Supply {
 	virtual bool is_active() const throw ();
 	virtual bool has_storage() const throw ();
 	virtual void get_ware_type(WareWorker & type, Ware_Index & ware) const;
-	virtual void send_to_storage(Game &, Warehouse * wh);
+	virtual void send_to_storage(Game &, StorageOwner * storage_owner);
 
 	virtual uint32_t nr_supplies(const Game &, const Request &) const;
 	virtual WareInstance & launch_item(Game &, const Request &);

@@ -37,11 +37,11 @@
 #include "logic/findnode.h"
 #include "logic/game.h"
 #include "logic/game_data_error.h"
+#include "logic/garrison.h"
 #include "logic/message_queue.h"
 #include "logic/militarysite.h"
 #include "logic/player.h"
 #include "logic/tribe.h"
-#include "logic/warehouse.h"
 #include "map_io/widelands_map_map_object_loader.h"
 #include "map_io/widelands_map_map_object_saver.h"
 #include "profile/profile.h"
@@ -763,7 +763,7 @@ void Soldier::init_auto_task(Game & game) {
 struct FindNodeOwned {
 	FindNodeOwned(Player_Number owner) : m_owner(owner)
 	{};
-	bool accept(const Map & map, const FCoords & coords) const {
+	bool accept(const Map &, const FCoords & coords) const {
 		return (coords.field->get_owned_by() == m_owner);
 	}
 private:
@@ -957,13 +957,8 @@ void Soldier::attack_update(Game & game, State & state)
 
 	// Count remaining defenders
 	if (enemy) {
-		if (upcast(MilitarySite, ms, enemy)) {
-			defenders = ms->get_garrison()->presentSoldiers().size();
-		}
-		if (upcast(Warehouse, wh, enemy)) {
-			Requirements noreq;
-			defenders = wh->count_workers
-				(game, wh->tribe().worker_index("soldier"), noreq);
+		if (upcast(GarrisonOwner, garrison_owner, enemy)) {
+			defenders = garrison_owner->get_garrison()->presentSoldiers().size();
 		}
 		//  Any enemy soldier at baseflag count as defender.
 		std::vector<Bob *> soldiers;
@@ -1787,12 +1782,11 @@ void Soldier::sendSpaceSignals(Game & game)
 		container_iterate_const(std::vector<BaseImmovable *>, attackables, i) {
 			const BaseImmovable* base_imm = *i.current;
 			if
-				(ref_cast<PlayerImmovable const, BaseImmovable const>(**i.current)
-				 .get_owner()->player_number() == land_owner) {
+				(ref_cast<PlayerImmovable const, BaseImmovable const>(*base_imm)
+				 .get_owner()->player_number() == land_owner)
+			{
 				if (upcast(const GarrisonOwner, go, base_imm)) {
 					go->get_garrison()->aggressor(*this);
-				} else {
-					log("CGH Soldier signal bad cast\n");
 				}
 			}
 		}

@@ -191,6 +191,7 @@ PlayerImmovable * Transfer::get_next_step
 		Flag & curflag(m_route.get_flag(m_game, 0));
 		Flag & nextflag(m_route.get_flag(m_game, 1));
 		if (!curflag.get_road(nextflag)) {
+			//FIXME CGH
 			upcast(Warehouse, wh, curflag.get_building());
 			assert(wh);
 

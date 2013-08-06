@@ -34,15 +34,11 @@ static const char pic_tab_wares_warehouse[] =
 static const char pic_tab_workers_warehouse[] =
 	 "pics/menu_tab_workers_warehouse.png";
 
-Stock_Menu::Stock_Menu
-	(Interactive_Player & plr, UI::UniqueWindow::Registry & registry)
-:
-UI::UniqueWindow(&plr, "stock_menu", &registry, 480, 640, _("Stock")),
-m_player(plr)
+Stock_Menu::Stock_Menu (Interactive_Player & plr, UI::UniqueWindow::Registry & registry)
+:  UI::UniqueWindow(&plr, "stock_menu", &registry, 480, 640, _("Stock")),
+	m_player(plr)
 {
-	UI::Tab_Panel * tabs =
-		 new UI::Tab_Panel
-			 (this, 0, 0, g_gr->images().get("pics/but1.png"));
+	UI::Tab_Panel * tabs = new UI::Tab_Panel(this, 0, 0, g_gr->images().get("pics/but1.png"));
 	set_center_panel(tabs);
 
 	m_all_wares = new WaresDisplay(tabs, 0, 0, plr.player().tribe(), Widelands::wwWARE, false);
@@ -95,11 +91,12 @@ void Stock_Menu::fill_total_waresdisplay
 	waresdisplay->remove_all_warelists();
 	const Widelands::Player & player = *m_player.get_player();
 	const uint32_t nrecos = player.get_nr_economies();
-	for (uint32_t i = 0; i < nrecos; ++i)
+	for (uint32_t i = 0; i < nrecos; ++i) {
 		waresdisplay->add_warelist
 			(type == Widelands::wwWARE ?
 			 player.get_economy_by_number(i)->get_wares() :
 			 player.get_economy_by_number(i)->get_workers());
+	}
 }
 
 /**
@@ -113,13 +110,13 @@ void Stock_Menu::fill_warehouse_waresdisplay
 	const Widelands::Player & player = *m_player.get_player();
 	const uint32_t nrecos = player.get_nr_economies();
 	for (uint32_t i = 0; i < nrecos; ++i) {
-		const std::vector<Widelands::Warehouse *> & warehouses =
-			player.get_economy_by_number(i)->warehouses();
+		const std::vector<Widelands::Storage *> & storages =
+			player.get_economy_by_number(i)->storages();
 
 		for
-			(std::vector<Widelands::Warehouse *>::const_iterator it =
-			 warehouses.begin();
-			 it != warehouses.end();
+			(std::vector<Widelands::Storage *>::const_iterator it =
+			 storages.begin();
+			 it != storages.end();
 			 ++it)
 		{
 			waresdisplay->add_warelist

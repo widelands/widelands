@@ -145,6 +145,9 @@ public:
 	/// request a new worker of his old type. Otherwise Ware_Index::Null is
 	/// returned.
 	Ware_Index gain_experience   (Game &);
+	void set_experience(int32_t exp) {
+		m_current_exp = exp;
+	}
 
 	void create_needed_experience(Game &);
 	Ware_Index level             (Game &);

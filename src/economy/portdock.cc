@@ -488,7 +488,7 @@ void PortDock::cancel_expedition(Game & game) {
 	// Put all wares from the WaresQueues back into the warehouse
 	const std::vector<WaresQueue *> & l_expedition_wares = m_warehouse->get_wares_queue_vector();
 	for (uint8_t i = 0; i < l_expedition_wares.size(); ++i) {
-		m_warehouse->insert_wares(l_expedition_wares.at(i)->get_ware(), l_expedition_wares.at(i)->get_filled());
+		m_warehouse->get_storage()->insert_wares(l_expedition_wares.at(i)->get_ware(), l_expedition_wares.at(i)->get_filled());
 		l_expedition_wares.at(i)->set_filled(0);
 		l_expedition_wares.at(i)->set_max_fill(0);
 	}
@@ -501,7 +501,7 @@ void PortDock::cancel_expedition(Game & game) {
 		} else {
 			Worker * temp = ew.at(i)->worker;
 			ew.at(i)->worker = 0;
-			m_warehouse->incorporate_worker(game, *temp);
+			m_warehouse->get_storage()->incorporate_worker(game, *temp);
 		}
 	}
 	// Reset expedition workers list

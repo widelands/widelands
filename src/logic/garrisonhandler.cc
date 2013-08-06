@@ -19,11 +19,12 @@
 
 #include "logic/garrisonhandler.h"
 
-#include <boost/foreach.hpp>
-#include <boost/format.hpp>
+#include <functional>
 #include <memory>
 #include <vector>
-#include <functional>
+
+#include <boost/foreach.hpp>
+#include <boost/format.hpp>
 
 #include "container_iterate.h"
 #include "economy/flag.h"
@@ -102,7 +103,7 @@ void GarrisonHandler::cleanup(Editor_Game_Base& egbase)
 	}
 }
 
-void GarrisonHandler::cleanup_requests(Editor_Game_Base& egbase)
+void GarrisonHandler::cleanup_requests(Editor_Game_Base&)
 {
 	m_normal_soldier_request.reset();
 	m_upgrade_soldier_request.reset();
@@ -125,14 +126,15 @@ void GarrisonHandler::act(Game& game)
 	} else {
 		// If we may issue a new upgrade request
 		int32_t time_since_last_swap = (timeofgame - m_last_swap_soldiers_time);
-		if (time_since_last_swap > GARRISON_SWAP_TIMEOUT){
+		if (time_since_last_swap > GARRISON_SWAP_TIMEOUT) {
 			time_since_last_swap = timeofgame;
 			update_soldier_request();
 		}
 	}
 
 	// Calculate the amount of heal point to distribute
-	int32_t to_heal_amount = (timeofgame - m_last_heal_time) * m_heal_per_second / 1000;
+	uint32_t to_heal_amount = static_cast<uint32_t>
+		((timeofgame - m_last_heal_time) * m_heal_per_second / 1000);
 	const std::vector<Soldier*> soldiers = presentSoldiers();
 	BOOST_FOREACH(Soldier* soldier, soldiers) {
 		uint32_t to_heal = soldier->get_max_hitpoints() - soldier->get_current_hitpoints();
@@ -390,21 +392,6 @@ int GarrisonHandler::incorporateSoldier(Editor_Game_Base& egbase, Soldier& s)
 		s.set_location(&m_building);
 	}
 
-	// Soldier upgrade is done once the site is full. In soldier upgrade, we
-	// request one new soldier who is better suited than the existing ones.
-	// Normally, I kick out one existing soldier as soon as a new guy starts walking
-	// towards here. However, since that is done via infrequent polling, a new soldier
-	// can sometimes reach the site before such kick-out happens. In those cases, we
-	// should either drop one of the existing soldiers or reject the new guy, to
-	// avoid overstocking this site.
-	//FIXME CGH handle this elsewhere w/ callbacks or so
-
-	if (stationedSoldiers().size()  > m_max_capacity)
-	{
-		log("FIXME CGH incorporated called for upgraded\n");
-		return incorporateUpgradedSoldier(egbase, s) ? 0 : -1;
-	}
-
 	upcast(Game, game, &egbase);
 	// If it's the first soldier, conquer the area
 	if (!m_passive && !m_didconquer) {
@@ -482,32 +469,42 @@ void GarrisonHandler::inform_owner(Game& game, GarrisonHandler::InfoType info)
 	std::string building_name = m_building.descname();
 	switch (info) {
 		case InfoType::AGGRESSSED:
-			message = (boost::format
-				(_("Your %s discovered an aggressor")) % building_name).str();
+			message =
+				(boost::format
+					(_("Your %s discovered an aggressor")) % building_name)
+				.str();
 			message_id = "under_attack";
 			message_title = _("You are under attack");
 			break;
 		case InfoType::UNDER_ATTACK:
-			message = (boost::format
-				(_("Your %s is under attack")) % building_name).str();
+			message =
+				(boost::format
+					(_("Your %s is under attack")) % building_name)
+				.str();
 			message_id = "under_attack";
 			message_title = _("You are under attack");
 			break;
 		case InfoType::GARRISON_LOST:
-			message = (boost::format
-				(_("The enemy defeated your soldiers and destroyed your %s")) % building_name).str();
+			message =
+				(boost::format
+					(_("The enemy defeated your soldiers and destroyed your %s")) % building_name)
+				.str();
 			message_id = "garrison_lost";
 			message_title = _("Garrison lost");
 			break;
 		case InfoType::GARRISON_CAPTURED:
-			message = (boost::format
-				(_("The enemy defeated your soldiers and captured your %s")) % building_name).str();
+			message =
+				(boost::format
+					(_("The enemy defeated your soldiers and captured your %s")) % building_name)
+				.str();
 			message_id = "garrison_lost";
 			message_title = _("Garrison captured");
 			break;
 		case InfoType::GARRISON_OCCUPIED:
-			message = (boost::format
-				(_("Your soldier occupied your %s")) % building_name).str();
+			message =
+				(boost::format
+					(_("Your soldier occupied your %s")) % building_name)
+				.str();
 			message_id = "garrison_occupied";
 			message_title = _("Garrison occupied");
 			break;
@@ -519,8 +516,10 @@ void GarrisonHandler::inform_owner(Game& game, GarrisonHandler::InfoType info)
 
 bool GarrisonHandler::isPresent(Soldier& soldier) const
 {
-	if (soldier.get_location(owner().egbase()) != &m_building
-		|| soldier.get_position() != m_building.get_position()) {
+	if
+		(soldier.get_location(owner().egbase()) != &m_building
+		|| soldier.get_position() != m_building.get_position())
+	{
 		return false;
 	}
 	// Present soldiers are working for the garrison only if it is not passive
@@ -597,12 +596,15 @@ void GarrisonHandler::update_soldier_request(bool upgraded_in)
 
 	if (m_doing_upgrade_request) {
 		if (upgraded_in && m_upgrade_soldier_request) {// update requests always ask for one soldier at time!
+			m_upgrade_soldier_request.reset();
 		}
 		if (capacity > stationed) {
 			// Somebody is killing my soldiers in the middle of upgrade
 			// or I have kicked out his predecessor already.
-			if ((m_upgrade_soldier_request)
-				&& (m_upgrade_soldier_request->is_open() || 0 == m_upgrade_soldier_request->get_count())) {
+			if
+				((m_upgrade_soldier_request)
+				&& (m_upgrade_soldier_request->is_open() || 0 == m_upgrade_soldier_request->get_count()))
+			{
 				// Economy was not able to find the soldiers I need.
 				// I can safely drop the upgrade request and go to fill mode.
 				m_upgrade_soldier_request.reset();
@@ -621,18 +623,6 @@ void GarrisonHandler::update_soldier_request(bool upgraded_in)
 			drop_least_suited_soldier();
 		} else {// capacity == stationed size
 			update_upgrade_soldier_request();
-			if
-				(m_upgrade_soldier_request
-				&& (!(m_upgrade_soldier_request->is_open()))
-				&& 1 == m_upgrade_soldier_request->get_count())
-			{
-				// We have an upgraded soldier on his way. We can therefore
-				// already make room for his arrival.
-// 				drop_least_suited_soldier();
-			} else {
-				// Make sure we have a valid upgrade request
-// 				update_upgrade_soldier_request();
-			}
 		}
 	} else {// not doing upgrade request
 		if ((capacity != stationed) or (m_normal_soldier_request)) {
@@ -699,21 +689,10 @@ void GarrisonHandler::update_upgrade_soldier_request()
 		}
 	}
 	// Issue a new request
-	std::function<void(Worker*)> callback = [this] (Worker* w) {
-		if (w == nullptr || this == nullptr) {
-			return;
-		}
-		if (m_capacity > stationedSoldiers().size()) {
-			return;
-		}
-		if (upcast(Soldier, s, w)) {
-			drop_least_suited_soldier(s);
-		}
-	};
 	Request* r = new Request
 		(m_building, m_building.tribe().safe_worker_index("soldier"),
 		GarrisonHandler::request_soldier_callback, wwWORKER,
-		callback);
+		GarrisonHandler::request_soldier_transfer_callback);
 	// Honor soldier requirements if set by the garrison owner
 	RequireAnd upgrade_requirement;
 	upgrade_requirement.add(m_soldier_requirements);
@@ -724,7 +703,7 @@ void GarrisonHandler::update_upgrade_soldier_request()
 }
 
 void GarrisonHandler::request_soldier_callback
-	(Game& game, Request& r, Ware_Index, Worker* w, PlayerImmovable& pi)
+	(Game& game, Request&, Ware_Index, Worker* w, PlayerImmovable& pi)
 {
 	Soldier& s = ref_cast<Soldier, Worker>(*w);
 	upcast(GarrisonOwner, go, &pi);
@@ -734,6 +713,18 @@ void GarrisonHandler::request_soldier_callback
 		gh->incorporateSoldier(game, s);
 	} else {
 		gh->incorporateUpgradedSoldier(game, s);
+	}
+}
+
+void GarrisonHandler::request_soldier_transfer_callback
+	(Game&, Request&, Ware_Index, Worker* w, PlayerImmovable& pi)
+{
+	Soldier& s = ref_cast<Soldier, Worker>(*w);
+	upcast(GarrisonOwner, go, &pi);
+	upcast(GarrisonHandler, gh, go->get_garrison());
+
+	if (!gh->m_doing_upgrade_request) {
+		gh->drop_least_suited_soldier(&s);
 	}
 }
 

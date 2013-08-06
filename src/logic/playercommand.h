@@ -24,8 +24,8 @@
 #include "economy/flag.h"
 #include "logic/message_id.h"
 #include "logic/path.h"
+#include "logic/storage.h"
 #include "logic/trainingsite.h"
-#include "logic/warehouse.h"
 #include "logic/worker.h"
 
 namespace Widelands {
@@ -196,7 +196,8 @@ private:
 
 struct Cmd_MilitarySiteSetSoldierPreference : public PlayerCommand {
 	Cmd_MilitarySiteSetSoldierPreference() : PlayerCommand(), serial(0) {} // For savegame loading
-	Cmd_MilitarySiteSetSoldierPreference (const int32_t t, const Player_Number p, Building & b, Garrison::SoldierPref prefs)
+	Cmd_MilitarySiteSetSoldierPreference
+		(const int32_t t, const Player_Number p, Building & b, Garrison::SoldierPref prefs)
 		: PlayerCommand(t, p), serial(b.serial()), preference(prefs)
 	{}
 
@@ -722,13 +723,13 @@ struct Cmd_MessageSetStatusArchived : public PlayerMessageCommand {
 };
 
 /**
- * Command to change the stock policy for a ware or worker in a warehouse.
+ * Command to change the stock policy for a ware or worker in a storage.
  */
 struct Cmd_SetStockPolicy : PlayerCommand {
 	Cmd_SetStockPolicy
 		(int32_t time, Player_Number p,
-		 Warehouse & wh, bool isworker, Ware_Index ware,
-		 Warehouse::StockPolicy policy);
+		 StorageOwner & storage_owner, bool isworker, Ware_Index ware,
+		 Storage::StockPolicy policy);
 
 	virtual uint8_t id() const;
 
@@ -744,10 +745,10 @@ struct Cmd_SetStockPolicy : PlayerCommand {
 	void Read (FileRead  &, Editor_Game_Base &, Map_Map_Object_Loader &);
 
 private:
-	Serial m_warehouse;
+	Serial m_storage_owner;
 	bool m_isworker;
 	Ware_Index m_ware;
-	Warehouse::StockPolicy m_policy;
+	Storage::StockPolicy m_policy;
 };
 
 }

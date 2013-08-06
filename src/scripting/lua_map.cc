@@ -34,6 +34,7 @@
 #include "logic/soldier.h"
 #include "logic/warelist.h"
 #include "logic/widelands_geometry.h"
+#include "logic/storagehandler.h"
 #include "scripting/c_utils.h"
 #include "scripting/lua_game.h"
 #include "wui/mapviewpixelfunctions.h"
@@ -342,6 +343,174 @@ int _SoldierEmployer::set_soldiers(lua_State * L) {
 	}
 	return 0;
 }
+
+//TODO CGH implement
+int _StorageOwner::get_ware_policy(lua_State* L)
+{
+	return 0;
+}
+int _StorageOwner::get_worker_policy(lua_State* L)
+{
+	return 0;
+}
+int _StorageOwner::set_ware_policy(lua_State* L)
+{
+	return 0;
+}
+int _StorageOwner::set_worker_policy(lua_State* L)
+{
+	return 0;
+}
+
+int _StorageOwner::get_wares(lua_State* L)
+{
+	Storage * storage = get_storage(L, get_egbase(L));
+	const Tribe_Descr & tribe = storage->owner().tribe();
+
+	bool return_number = false;
+	WaresSet wares_set = m_parse_get_wares_arguments(L, tribe, &return_number);
+
+	if (not return_number)
+		lua_newtable(L);
+
+	container_iterate_const(WaresSet, wares_set, w) {
+		uint32_t count = storage->get_wares().stock(*w);
+		if (return_number) {
+			lua_pushuint32(L, count);
+			break;
+		} else {
+		   lua_pushstring(L, tribe.get_ware_descr(*w)->name());
+			lua_pushuint32(L, count);
+			lua_rawset(L, -3);
+		}
+	}
+	return 1;
+}
+
+int _StorageOwner::set_wares(lua_State* L)
+{
+	Storage * storage = get_storage(L, get_egbase(L));
+	const Tribe_Descr & tribe = storage->owner().tribe();
+
+	WaresMap setpoints = m_parse_set_wares_arguments(L, tribe);
+
+	container_iterate_const(WaresMap, setpoints, i) {
+		storage->insert_wares(i->first, i->second);
+	}
+	return 0;
+}
+
+int _StorageOwner::get_workers(lua_State* L)
+{
+	Storage * storage = get_storage(L, get_egbase(L));
+	const Tribe_Descr & tribe = storage->owner().tribe();
+
+	bool return_number = false;
+	WorkersSet workers_set = m_parse_get_workers_arguments(L, tribe, &return_number);
+
+	if (not return_number)
+		lua_newtable(L);
+
+	container_iterate_const(WorkersSet, workers_set, w) {
+		uint32_t count = storage->get_workers().stock(*w);
+		if (return_number) {
+			lua_pushuint32(L, count);
+			break;
+		} else {
+		   lua_pushstring(L, tribe.get_ware_descr(*w)->name());
+			lua_pushuint32(L, count);
+			lua_rawset(L, -3);
+		}
+	}
+	return 1;
+}
+int _StorageOwner::set_workers(lua_State* L)
+{
+	Storage * storage = get_storage(L, get_egbase(L));
+	const Tribe_Descr & tribe = storage->owner().tribe();
+
+	WorkersMap setpoints = m_parse_set_workers_arguments(L, tribe);
+
+	container_iterate_const(WorkersMap, setpoints, i) {
+		if (!storage->owner().is_worker_type_allowed(i->first)) {
+			continue;
+		}
+		storage->insert_workers(i->first, i->second);
+	}
+	return 0;
+}
+
+int _StorageOwner::get_soldiers(lua_State* L)
+{
+	Editor_Game_Base & egbase = get_egbase(L);
+	Storage * storage = get_storage(L, egbase);
+	const Tribe_Descr & tribe = storage->owner().tribe();
+
+	const Soldier_Descr & soldier_descr =  //  soldiers
+			 ref_cast<Soldier_Descr const, Worker_Descr const>
+						(*tribe.get_worker_descr(tribe.worker_index("soldier")));
+
+	Game& game = ref_cast<Game, Editor_Game_Base>(egbase);
+	SoldiersList current_soldiers;
+	while (storage->can_create_worker(game, soldier_descr.worker_index())) {
+		Worker& w = storage->launch_worker(game, soldier_descr.worker_index());
+		upcast(Soldier, s, &w);
+		current_soldiers.push_back(s);
+	}
+	return m_handle_get_soldiers(L, soldier_descr, current_soldiers);
+}
+
+int _StorageOwner::set_soldiers(lua_State* L)
+{
+	Editor_Game_Base & egbase = get_egbase(L);
+	Storage * storage = get_storage(L, egbase);
+	const Tribe_Descr & tribe = storage->owner().tribe();
+
+	const Soldier_Descr & soldier_descr =  //  soldiers
+		ref_cast<Soldier_Descr const, Worker_Descr const>
+			(*tribe.get_worker_descr(tribe.worker_index("soldier")));
+
+	SoldiersMap setpoints = m_parse_set_soldiers_arguments(L, soldier_descr);
+
+	// Now add them
+	Game& game = ref_cast<Game, Editor_Game_Base>(egbase);
+	container_iterate_const(SoldiersMap, setpoints, sp) {
+		int d = sp->second;
+		if (d < 0) {
+			while (d) {
+				RequireAttribute hp_req(tAttribute::atrHP, sp->first.hp, sp->first.hp);
+				RequireAttribute at_req(tAttribute::atrAttack, sp->first.at, sp->first.at);
+				RequireAttribute de_req(tAttribute::atrDefense, sp->first.de, sp->first.de);
+				RequireAttribute ev_req(tAttribute::atrEvade, sp->first.ev, sp->first.ev);
+				RequireAnd req;
+				req.add(hp_req);
+				req.add(at_req);
+				req.add(de_req);
+				req.add(ev_req);
+				Worker& w = storage->launch_worker(game, soldier_descr.worker_index(), req);
+				w.remove(game);
+				++d;
+			}
+		} else if (d > 0) {
+			upcast(StorageHandler, sh, storage);
+			for (; d; --d) {
+				Soldier & soldier =
+					ref_cast<Soldier, Worker>
+					(soldier_descr.create
+					 (egbase, storage->owner(), 0,sh->get_building().get_position()));
+
+				soldier.set_level
+					(sp.current->first.hp, sp.current->first.at,
+					 sp.current->first.de, sp.current->first.ev);
+				storage->incorporate_worker(game, soldier);
+			}
+		}
+	}
+	return 0;
+}
+
+
+
 
 
 
@@ -774,6 +943,17 @@ int L_HasSoldiers::m_handle_get_soldiers
 	}
 	return 1;
 }
+/* RST
+HasStorage
+------------
+
+.. class:: HasStorage
+
+	Simple wrapper aroung :class: `HasWares` and `HasWorkers`. This interface also
+	contains methods to get and set the various ware policies.
+
+	Supported by :class: Warehouse
+*/
 
 /* RST
 Module Classes
@@ -1693,8 +1873,12 @@ const MethodType<L_Warehouse> L_Warehouse::Methods[] = {
 	METHOD(L_Warehouse, get_wares),
 	METHOD(L_Warehouse, set_workers),
 	METHOD(L_Warehouse, get_workers),
-	METHOD(L_Warehouse, set_soldiers), //FIXME CGH for headquarters
 	METHOD(L_Warehouse, get_soldiers),
+	METHOD(L_Warehouse, set_soldiers),
+	METHOD(L_Warehouse, set_ware_policy),
+	METHOD(L_Warehouse, get_ware_policy),
+	METHOD(L_Warehouse, get_worker_policy),
+	METHOD(L_Warehouse, get_worker_policy),
 	{0, 0},
 };
 const PropertyType<L_Warehouse> L_Warehouse::Properties[] = {
@@ -1729,9 +1913,10 @@ int L_Warehouse::set_##type##s(lua_State * L) { \
 	return 0; \
 }
 // documented in parent class
-WH_SET(ware, Ware);
+// WH_SET(ware, Ware);
 // documented in parent class
-WH_SET(worker, Worker);
+// WH_SET(worker, Worker);
+// WH_SET(soldier, Soldier);
 #undef WH_SET
 
 #define WH_GET(type, btype) \
@@ -1755,9 +1940,10 @@ int L_Warehouse::get_##type##s(lua_State * L) { \
 	return 1; \
 }
 // documented in parent class
-WH_GET(ware, Ware);
+// WH_GET(ware, Ware);
 // documented in parent class
-WH_GET(worker, Worker);
+// WH_GET(worker, Worker);
+// WH_GET(soldier, Soldier);
 #undef GET
 
 /*
@@ -1765,6 +1951,7 @@ WH_GET(worker, Worker);
  C METHODS
  ==========================================================
  */
+/* FIXME CGH to move to headquarterrs
 int L_Warehouse::get_soldiers(lua_State * L) {
 	Editor_Game_Base & egbase = get_egbase(L);
 	Game & game = get_game(L);
@@ -1874,7 +2061,7 @@ int L_Warehouse::set_soldiers(lua_State * L) {
 	}
 	return 0;
 }
-
+*/
 /* RST
 ProductionSite
 --------------

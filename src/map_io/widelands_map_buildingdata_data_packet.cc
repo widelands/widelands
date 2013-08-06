@@ -26,7 +26,6 @@
 #include "economy/flag.h"
 #include "economy/portdock.h"
 #include "economy/request.h"
-#include "economy/warehousesupply.h"
 #include "economy/wares_queue.h"
 #include "logic/constructionsite.h"
 #include "logic/dismantlesite.h"
@@ -44,28 +43,32 @@
 #include "logic/widelands_fileread.h"
 #include "logic/widelands_filewrite.h"
 #include "logic/worker.h"
+#include <logic/storagehandler.h>
 #include "map_io/widelands_map_map_object_loader.h"
 #include "map_io/widelands_map_map_object_saver.h"
 #include "upcast.h"
+#include <scripting/pdep/llimits.h>
 
 namespace Widelands {
 
 // Versions
-// Since V3: m_old_buildings vector
+// V3 (b18): m_old_buildings vector
 #define CURRENT_PACKET_VERSION 3
 
 // Subversions
 #define CURRENT_DISMANTLESITE_PACKET_VERSION    1
-// CSITE V3 (b18) m_prev_building not written
+// CSITE: V3 (b18) m_prev_building not written
 #define CURRENT_CONSTRUCTIONSITE_PACKET_VERSION 3
 #define CURRENT_PARTIALLYFB_PACKET_VERSION      1
-#define CURRENT_WAREHOUSE_PACKET_VERSION        6
+// WAREHOUSE: V7 (b18) splitted storage
+#define CURRENT_WAREHOUSE_PACKET_VERSION        7
 // MILITARYSITE: V4 (b18) splitted garrison
 #define CURRENT_MILITARYSITE_PACKET_VERSION     4
 #define CURRENT_PRODUCTIONSITE_PACKET_VERSION   5
 // TRAININGSITE: V4 (b18) splitted garrison/upgrade request
 #define CURRENT_TRAININGSITE_PACKET_VERSION     4
 #define CURRENT_GARRISON_PACKET_VERSION         1
+#define CURRENT_STORAGE_PACKET_VERSION          1
 
 
 void Map_Buildingdata_Data_Packet::Read
@@ -481,54 +484,60 @@ void Map_Buildingdata_Data_Packet::read_warehouse
 {
 	try {
 		uint16_t const packet_version = fr.Unsigned16();
-		if
-			(1 <= packet_version and
-			 packet_version <= CURRENT_WAREHOUSE_PACKET_VERSION)
-		{
+		if (packet_version < 1 || packet_version > CURRENT_WAREHOUSE_PACKET_VERSION) {
+			throw game_data_error
+				(_("unknown/unhandled version %u"), packet_version);
+		}
+		if (packet_version >= 7) {
+			read_storage(*warehouse.get_storage(), fr, game, mol);
+		} else {
+			// init supply
+			upcast(StorageHandler, sh, warehouse.get_storage());
+			StorageSupply* ss = sh->m_supply.get();
 			Ware_Index const nr_wares   = warehouse.tribe().get_nrwares  ();
 			Ware_Index const nr_tribe_workers = warehouse.tribe().get_nrworkers();
-			warehouse.m_supply->set_nrwares  (nr_wares);
-			warehouse.m_supply->set_nrworkers(nr_tribe_workers);
-			warehouse.m_ware_policy.resize(nr_wares.value(), Warehouse::SP_Normal);
-			warehouse.m_worker_policy.resize
-				(nr_tribe_workers.value(), Warehouse::SP_Normal);
-			//log("Reading warehouse stuff for %p\n", &warehouse);
-			//  supply
+			ss->set_nrwares  (nr_wares);
+			ss->set_nrworkers(nr_tribe_workers);
+			sh->m_ware_policy.resize(nr_wares.value(), Storage::StockPolicy::Normal);
+			sh->m_worker_policy.resize
+				(nr_tribe_workers.value(),Storage::StockPolicy::Normal);
+			// ware supplies
 			const Tribe_Descr & tribe = warehouse.tribe();
 			while (fr.Unsigned8()) {
-				Ware_Index const id = tribe.ware_index(fr.CString());
+				const char* ware_name = fr.CString();
+				Ware_Index const id = tribe.ware_index(ware_name);
+				Storage::StockPolicy policy = Storage::StockPolicy::Normal;
+				uint32_t amount = 0;
 				if (packet_version >= 5) {
-					uint32_t amount = fr.Unsigned32();
-					Warehouse::StockPolicy policy =
-						static_cast<Warehouse::StockPolicy>(fr.Unsigned8());
-
-					if (id) {
-						warehouse.insert_wares(id, amount);
-						warehouse.set_ware_policy(id, policy);
-					}
+					amount = fr.Unsigned32();
+					policy = static_cast<Storage::StockPolicy>(fr.Unsigned8());
 				} else {
-					uint16_t amount = fr.Unsigned16();
-
-					if (id)
-						warehouse.insert_wares(id, amount);
+					amount = static_cast<uint32_t>(fr.Unsigned16());
+				}
+				if (id) {
+					ss->add_wares(id, amount);
+					sh->set_ware_policy(id, policy);
+				} else {
+					throw  game_data_error(_("warehouse: Unknown ware %s (id %d)\n"), ware_name, id.value());
 				}
 			}
+			// worker supplies
 			while (fr.Unsigned8()) {
-				Ware_Index const id = tribe.worker_index(fr.CString());
+				const char* name = fr.CString();
+				Ware_Index const id = tribe.worker_index(name);
+				Storage::StockPolicy policy = Storage::StockPolicy::Normal;
+				uint32_t amount = 0;
 				if (packet_version >= 5) {
-					uint32_t amount = fr.Unsigned32();
-					Warehouse::StockPolicy policy =
-						static_cast<Warehouse::StockPolicy>(fr.Unsigned8());
-
-					if (id) {
-						warehouse.insert_workers(id, amount);
-						warehouse.set_worker_policy(id, policy);
-					}
+					amount = fr.Unsigned32();
+					policy = static_cast<Storage::StockPolicy>(fr.Unsigned8());
 				} else {
-					uint16_t amount = fr.Unsigned16();
-
-					if (id)
-						warehouse.insert_workers(id, amount);
+					amount = static_cast<uint32_t>(fr.Unsigned16());
+				}
+				if (id) {
+					ss->add_workers(id, amount);
+					sh->set_worker_policy(id, policy);
+				} else {
+					throw  game_data_error(_("storage: Unknown worker %s (id %d)\n"), name, id.value());
 				}
 			}
 
@@ -538,145 +547,102 @@ void Map_Buildingdata_Data_Packet::read_warehouse
 				while (nrrequests--) {
 					std::unique_ptr<Request> req
 						(new Request
-						 	(warehouse,
-						 	 Ware_Index::First(),
-						 	 &Warehouse::request_cb,
-						 	 wwWORKER));
+							(warehouse,
+								Ware_Index::First(),
+								&StorageHandler::planned_worker_callback,
+								wwWORKER));
 					req->Read(fr, game, mol);
 				}
 			}
 
-			assert(warehouse.m_incorporated_workers.empty());
-			{
-				uint16_t const nr_workers = fr.Unsigned16();
-				for (uint16_t i = 0; i < nr_workers; ++i) {
-					uint32_t const worker_serial = fr.Unsigned32();
-
-					try {
-						Worker & worker = mol.get<Worker>(worker_serial);
-						if (1 == packet_version) {
-							char const * const name = fr.CString();
-							if (name != worker.name())
-								throw game_data_error
-									(_("expected %s but found \"%s\""),
-									 worker.name().c_str(), name);
+			// Incorporated workers
+			uint16_t const nr_workers = fr.Unsigned16();
+			for (uint16_t i = 0; i < nr_workers; ++i) {
+				uint32_t const worker_serial = fr.Unsigned32();
+				try {
+					Worker & worker = mol.get<Worker>(worker_serial);
+					if (1 == packet_version) {
+						char const * const name = fr.CString();
+						if (name != worker.name()) {
+							throw game_data_error
+								(_("incorporated worker name : expected %s but found \"%s\""),
+									worker.name().c_str(), name);
 						}
-						Ware_Index worker_index = tribe.worker_index(worker.name().c_str());
-						if (!warehouse.m_incorporated_workers.count(worker_index))
-							warehouse.m_incorporated_workers[worker_index] = std::vector<Worker *>();
-						warehouse.m_incorporated_workers[worker_index].push_back(&worker);
-					} catch (const _wexception & e) {
-						throw game_data_error
-							("incorporated worker #%u (%u): %s",
-							 i, worker_serial, e.what());
 					}
+					StorageHandler::StockedWorkerAtr* atr = sh->store_worker_atr(worker);
+					sh->m_stocked_workers_atr.push_back(*atr);
+					mol.schedule_destroy(worker);
+				} catch (const _wexception & e) {
+					throw game_data_error
+						("incorporated worker #%u (%u): %s",
+							i, worker_serial, e.what());
 				}
 			}
-
+			// Auto spawning
 			const std::vector<Ware_Index> & worker_types_without_cost =
 				tribe.worker_types_without_cost();
 
 			if (1 == packet_version) { //  a single next_spawn time for "carrier"
 				uint32_t const next_spawn = fr.Unsigned32();
-				Ware_Index const worker_index =
-					tribe.safe_worker_index("carrier");
+				Ware_Index const worker_index = tribe.safe_worker_index("carrier");
 				if (not worker_index) {
 					log
 						("WARNING: %s %u has a next_spawn time for nonexistent "
-						 "worker type \"%s\" set to %u, ignoring\n",
-						 warehouse.descname().c_str(), warehouse.serial(),
-						 "carrier", next_spawn);
-				} else if
-					(tribe.get_worker_descr(worker_index)->buildcost().size())
-				{
+							"worker type \"%s\" set to %u, ignoring\n",
+							warehouse.descname().c_str(), warehouse.serial(),
+							"carrier", next_spawn);
+				} else if (tribe.get_worker_descr(worker_index)->buildcost().size()) {
 					log
 						("WARNING: %s %u has a next_spawn time for worker type "
-						 "\"%s\", that costs something to build, set to %u, "
-						 "ignoring\n",
-						 warehouse.descname().c_str(), warehouse.serial(),
-						 "carrier", next_spawn);
-				} else
-					for (uint8_t i = 0;; ++i) {
-						assert(i < worker_types_without_cost.size());
-						if (worker_types_without_cost.at(i) == worker_index) {
-							if
-								(warehouse.m_next_worker_without_cost_spawn[i]
-								 !=
-								 static_cast<uint32_t>(Never()))
-							{
-								warehouse.molog
-									("read_warehouse: "
-									 "m_next_worker_without_cost_spawn[%u] = %u\n",
-									 i, warehouse.m_next_worker_without_cost_spawn[i]);
-							}
-							assert
-								(warehouse.m_next_worker_without_cost_spawn[i]
-								 ==
-								 static_cast<uint32_t>(Never()));
-							warehouse.m_next_worker_without_cost_spawn[i] =
-								next_spawn;
-							break;
-						}
-					}
-			} else
+							"\"%s\", that costs something to build, set to %u, "
+							"ignoring\n",
+							warehouse.descname().c_str(), warehouse.serial(),
+							"carrier", next_spawn);
+				} else {
+					sh->add_worker_spawn(worker_index);
+					uint32_t* next_act = &sh->m_spawn_wares.at(worker_index).at(0);
+					*next_act = next_spawn;
+				}
+			} else {
 				for (;;) {
 					char const * const worker_typename = fr.CString   ();
-					if (not *worker_typename) //  encountered the terminator ("")
+					if (not *worker_typename) { //  encountered the terminator ("")
 						break;
-					uint32_t     const next_spawn      = fr.Unsigned32();
-					Ware_Index   const worker_index    =
-						tribe.safe_worker_index(worker_typename);
+					}
+					uint32_t const next_spawn = fr.Unsigned32();
+					Ware_Index const worker_index = tribe.safe_worker_index(worker_typename);
 					if (not worker_index) {
 						log
 							("WARNING: %s %u has a next_spawn time for nonexistent "
-							 "worker type \"%s\" set to %u, ignoring\n",
-							 warehouse.descname().c_str(), warehouse.serial(),
-							 worker_typename, next_spawn);
+								"worker type \"%s\" set to %u, ignoring\n",
+								warehouse.descname().c_str(), warehouse.serial(),
+								worker_typename, next_spawn);
 						continue;
 					}
 					if (tribe.get_worker_descr(worker_index)->buildcost().size()) {
 						log
 							("WARNING: %s %u has a next_spawn time for worker type "
-							 "\"%s\", that costs something to build, set to %u, "
-							 "ignoring\n",
-							 warehouse.descname().c_str(), warehouse.serial(),
-							 worker_typename, next_spawn);
+								"\"%s\", that costs something to build, set to %u, "
+								"ignoring\n",
+								warehouse.descname().c_str(), warehouse.serial(),
+								worker_typename, next_spawn);
 						continue;
 					}
-					for (uint8_t i = 0;; ++i) {
-						assert(i < worker_types_without_cost.size());
-						if (worker_types_without_cost.at(i) == worker_index) {
-							if
-								(warehouse.m_next_worker_without_cost_spawn[i]
-								 !=
-								 static_cast<uint32_t>(Never()))
-								throw game_data_error
-									(_
-									 	("%s %u has a next_spawn time for worker type "
-									 	 "\"%s\" set to %u, but it was previously set "
-									 	 "to %u\n"),
-									 warehouse.descname().c_str(), warehouse.serial(),
-									 worker_typename, next_spawn,
-									 warehouse.m_next_worker_without_cost_spawn[i]);
-							warehouse.m_next_worker_without_cost_spawn[i] =
-								next_spawn;
-							break;
-						}
-					}
+					sh->add_worker_spawn(worker_index);
+					uint32_t* next_act = &sh->m_spawn_wares.at(worker_index).at(0);
+					*next_act = next_spawn;
 				}
-				//  The checks that the warehouse has a next_spawn time for each
-				//  worker type that the player is allowed to spawn, is in
-				//  Warehouse::load_finish.
+			}
+			//  The checks that the warehouse has a next_spawn time for each
+			//  worker type that the player is allowed to spawn, is in
+			//  Warehouse::load_finish.
 
 			if (packet_version >= 3) {
 				// Read planned worker data
 				// Consistency checks are in Warehouse::load_finish
 				uint32_t nr_planned_workers = fr.Unsigned32();
 				while (nr_planned_workers--) {
-					warehouse.m_planned_workers.push_back
-						(Warehouse::PlannedWorkers());
-					Warehouse::PlannedWorkers & pw =
-						warehouse.m_planned_workers.back();
+					StorageHandler::PlannedWorkers pw;
 					pw.index = tribe.worker_index(fr.CString());
 					pw.amount = fr.Unsigned32();
 
@@ -684,87 +650,82 @@ void Map_Buildingdata_Data_Packet::read_warehouse
 					while (nr_requests--) {
 						pw.requests.push_back
 							(new Request
-							 	(warehouse,
-							 	 Ware_Index::First(),
-							 	 &Warehouse::request_cb,
-							 	 wwWORKER));
+								(warehouse,
+									Ware_Index::First(),
+									&StorageHandler::planned_worker_callback,
+									wwWORKER));
 						pw.requests.back()->Read(fr, game, mol);
 					}
+					sh->m_planned_workers.push_back(pw);
 				}
 			}
 
-			if (packet_version >= 5)
-				warehouse.m_next_stock_remove_act = fr.Unsigned32();
+			if (packet_version >= 5) {
+				sh->m_removal_next_act = fr.Unsigned32();
+			}
+		}
+		// Port stuff
+		if (packet_version >= 6) {
+			if (warehouse.descr().get_isport()) {
+				if (Serial portdock = fr.Unsigned32()) {
+					warehouse.m_portdock = &mol.get<PortDock>(portdock);
+					warehouse.m_portdock->set_economy(warehouse.get_economy());
 
-			if (packet_version >= 6) {
-				if (warehouse.descr().get_isport()) {
-					if (Serial portdock = fr.Unsigned32()) {
-						warehouse.m_portdock = &mol.get<PortDock>(portdock);
-						warehouse.m_portdock->set_economy(warehouse.get_economy());
-
-						// Expedition specific stuff
-						if (warehouse.m_portdock->expedition_started()) {
-							// Expedition workers
-							uint8_t num_of_workers = fr.Unsigned8();
-							for (uint8_t i = 0; i < num_of_workers; ++i) {
-								warehouse.get_expedition_workers().push_back(new Warehouse::Expedition_Worker);
-								if (fr.Unsigned8() == 1) {
-									warehouse.get_expedition_workers().back()->worker_request =
-										new Request
-											(warehouse,
-											Ware_Index::First(),
-											Warehouse::request_expedition_worker_callback,
-											wwWORKER);
-									warehouse.get_expedition_workers().back()->worker_request->Read(fr, game, mol);
-								} else {
-									warehouse.get_expedition_workers().back()->worker =
-										&mol.get<Worker>(fr.Unsigned32());
-								}
+					// Expedition specific stuff
+					if (warehouse.m_portdock->expedition_started()) {
+						// Expedition workers
+						uint8_t num_of_workers = fr.Unsigned8();
+						for (uint8_t i = 0; i < num_of_workers; ++i) {
+							warehouse.get_expedition_workers().push_back(new Warehouse::Expedition_Worker);
+							if (fr.Unsigned8() == 1) {
+								warehouse.get_expedition_workers().back()->worker_request =
+									new Request
+										(warehouse,
+										Ware_Index::First(),
+										Warehouse::request_expedition_worker_callback,
+										wwWORKER);
+								warehouse.get_expedition_workers().back()->worker_request->Read(fr, game, mol);
+							} else {
+								warehouse.get_expedition_workers().back()->worker =
+									&mol.get<Worker>(fr.Unsigned32());
 							}
+						}
 
-							// Expedition WaresQueues
-							uint8_t nr_queues = fr.Unsigned8();
-							assert(warehouse.get_wares_queue_vector().empty());
-							for (uint8_t i = 0; i < nr_queues; ++i) {
-								WaresQueue * wq = new WaresQueue(warehouse, Ware_Index::Null(), 0);
-								wq->Read(fr, game, mol);
-								wq->set_callback(PortDock::expedition_wares_queue_callback, warehouse.m_portdock);
+						// Expedition WaresQueues
+						uint8_t nr_queues = fr.Unsigned8();
+						assert(warehouse.get_wares_queue_vector().empty());
+						for (uint8_t i = 0; i < nr_queues; ++i) {
+							WaresQueue * wq = new WaresQueue(warehouse, Ware_Index::Null(), 0);
+							wq->Read(fr, game, mol);
+							wq->set_callback(PortDock::expedition_wares_queue_callback, warehouse.m_portdock);
 
-								if (!wq->get_ware()) {
-									delete wq;
-								} else {
-									warehouse.get_wares_queue_vector().push_back(wq);
-								}
+							if (!wq->get_ware()) {
+								delete wq;
+							} else {
+								warehouse.get_wares_queue_vector().push_back(wq);
 							}
 						}
 					}
 				}
 			}
-
-			if (uint32_t const conquer_radius = warehouse.get_conquers()) {
-				//  Add to map of military influence.
-				const Map & map = game.map();
-				Area<FCoords> a
-					(map.get_fcoords(warehouse.get_position()), conquer_radius);
-				const Field & first_map_field = map[0];
-				Player::Field * const player_fields =
-					warehouse.owner().m_fields;
-				MapRegion<Area<FCoords> > mr(map, a);
-				do
-					player_fields[mr.location().field - &first_map_field]
-					.military_influence
-						+= map.calc_influence(mr.location(), Area<>(a, a.radius));
-				while (mr.advance(map));
-			}
-			warehouse.owner().see_area
-				(Area<FCoords>
-				 (game.map().get_fcoords(warehouse.get_position()),
-				  warehouse.vision_range()));
-			warehouse.m_next_military_act = game.get_gametime();
-			//log("Read warehouse stuff for %p\n", &warehouse);
-		} else
-			throw game_data_error
-				(_("unknown/unhandled version %u"), packet_version);
+		}
+		// TODO move in warehouse loadfinished?
+		if (uint32_t const conquer_radius = warehouse.get_conquers()) {
+			//  Add to map of military influence.
+			const Map & map = game.map();
+			Area<FCoords> a (map.get_fcoords(warehouse.get_position()), conquer_radius);
+			const Field & first_map_field = map[0];
+			Player::Field * const player_fields = warehouse.owner().m_fields;
+			MapRegion<Area<FCoords> > mr(map, a);
+			do {
+				player_fields[mr.location().field - &first_map_field].military_influence
+					+= map.calc_influence(mr.location(), Area<>(a, a.radius));
+			} while (mr.advance(map));
+		}
+		warehouse.owner().see_area
+			(Area<FCoords>
+				(game.map().get_fcoords(warehouse.get_position()),
+				warehouse.vision_range()));
 	} catch (const _wexception & e) {
 		throw game_data_error(_("warehouse: %s"), e.what());
 	}
@@ -1240,7 +1201,7 @@ void Map_Buildingdata_Data_Packet::read_garrison(Garrison& g, FileRead& fr, Game
 					(!gh.m_normal_soldier_request) ? Ware_Index::First()
 						: gh.m_building.descr().tribe().safe_worker_index("soldier"),
 					GarrisonHandler::request_soldier_callback,
-					wwWORKER));
+					wwWORKER, GarrisonHandler::request_soldier_transfer_callback));
 			gh.m_upgrade_soldier_request->Read(fr, game, mor);
 		}
 		gh.m_conquer_radius = fr.Unsigned32();
@@ -1296,6 +1257,101 @@ void Map_Buildingdata_Data_Packet::read_garrison(Garrison& g, FileRead& fr, Game
 	}
 }
 
+void Map_Buildingdata_Data_Packet::read_storage
+	(Storage& storage, FileRead& fr, Game& game, Map_Map_Object_Loader& mol)
+{
+	try {
+		StorageHandler & sh = ref_cast<StorageHandler, Storage>(storage);
+		uint16_t packet_version = fr.Unsigned16();
+		if (packet_version != CURRENT_STORAGE_PACKET_VERSION) {
+			throw game_data_error(_("storage: Unkhandled packet version %d"), packet_version);
+		}
+		// basics
+		sh.m_removal_next_act = fr.Unsigned32();
+		// ware supplies
+		StorageSupply* ss = sh.m_supply.get();
+		const Tribe_Descr& tribe = sh.owner().tribe();
+		Ware_Index const nr_wares = tribe.get_nrwares();
+		ss->set_nrwares(nr_wares);
+		sh.m_ware_policy.resize(nr_wares.value(), Storage::StockPolicy::Normal);
+		while (fr.Unsigned8()) {
+			const char* ware_name = fr.CString();
+			Ware_Index const id = tribe.ware_index(ware_name);
+			uint32_t amount = fr.Unsigned32();
+			Storage::StockPolicy policy = static_cast<Storage::StockPolicy>(fr.Unsigned8());
+			if (id) {
+				ss->add_wares(id, amount);
+				sh.set_ware_policy(id, policy);
+			} else {
+				throw  game_data_error(_("storage: Unknown ware %s (id %d)\n"), ware_name, id.value());
+			}
+			if (fr.Unsigned8()) {
+				std::vector<uint32_t> spawn_values =
+					{fr.Unsigned32(), fr.Unsigned32(), fr.Unsigned32()};
+					if (fr.Unsigned8()) {
+						spawn_values.push_back(fr.Unsigned32());
+					}
+				sh.m_spawn_wares.insert(std::make_pair(id, spawn_values));
+			}
+		}
+		// worker supplies
+		Ware_Index const nr_workers = tribe.get_nrworkers();
+		ss->set_nrworkers(nr_workers);
+		sh.m_ware_policy.resize(nr_workers.value(), Storage::StockPolicy::Normal);
+		while (fr.Unsigned8()) {
+			const char* worker_name = fr.CString();
+			Ware_Index const id = tribe.ware_index(worker_name);
+			uint32_t amount = fr.Unsigned32();
+			Storage::StockPolicy policy = static_cast<Storage::StockPolicy>(fr.Unsigned8());
+			if (id) {
+				ss->add_workers(id, amount);
+				sh.set_worker_policy(id, policy);
+			} else {
+				throw  game_data_error(_("storage: Unknown worker %s (id %d)\n"), worker_name, id.value());
+			}
+			if (fr.Unsigned8()) {
+				std::vector<uint32_t> spawn_values =
+					{fr.Unsigned32(), fr.Unsigned32(), fr.Unsigned32()};
+				if (fr.Unsigned8()) {
+					spawn_values.push_back(fr.Unsigned32());
+				}
+				sh.m_spawn_workers.insert(std::make_pair(id, spawn_values));
+			}
+		}
+		// planned workers
+		uint32_t planned_amount = fr.Unsigned32();
+		while (planned_amount--) {
+			StorageHandler::PlannedWorkers pw;
+			pw.index = tribe.worker_index(fr.CString());
+			pw.amount = fr.Unsigned32();
+			uint32_t nr_requests = fr.Unsigned32();
+			while (nr_requests--) {
+				Request* r = new Request
+					(sh.get_building(),
+						Ware_Index::First(),
+						&StorageHandler::planned_worker_callback,
+						wwWORKER);
+				r->Read(fr, game, mol);
+				pw.requests.push_back(r);
+			}
+			sh.m_planned_workers.push_back(pw);
+		}
+		// stocked attributes
+		uint32_t stocked_amount = fr.Unsigned32();
+		while (stocked_amount--) {
+			StorageHandler::StockedWorkerAtr stocked_atr;
+			stocked_atr.index = tribe.worker_index(fr.CString());;
+			stocked_atr.descr = tribe.get_worker_descr(stocked_atr.index);
+			stocked_atr.atck_lvl = fr.Unsigned32();
+			stocked_atr.evade_lvl = fr.Unsigned32();
+			stocked_atr.defense_lvl = fr.Unsigned32();
+			stocked_atr.exp_or_hp_lvl = fr.Unsigned32();
+			sh.m_stocked_workers_atr.push_back(stocked_atr);
+		}
+	} catch (const _wexception e) {
+		throw game_data_error(_("storage: %s"), e.what());
+	}
+}
 
 
 void Map_Buildingdata_Data_Packet::Write
@@ -1484,82 +1540,9 @@ void Map_Buildingdata_Data_Packet::write_warehouse
 {
 	fw.Unsigned16(CURRENT_WAREHOUSE_PACKET_VERSION);
 
-	//  supply
-	const Tribe_Descr & tribe = warehouse.tribe();
-	const WareList & wares = warehouse.m_supply->get_wares();
-	for (Ware_Index i = Ware_Index::First(); i < wares.get_nrwareids  (); ++i) {
-		fw.Unsigned8(1);
-		fw.String(tribe.get_ware_descr(i)->name());
-		fw.Unsigned32(wares.stock(i));
-		fw.Unsigned8(warehouse.get_ware_policy(i));
-	}
-	fw.Unsigned8(0);
-	const WareList & workers = warehouse.m_supply->get_workers();
-	for (Ware_Index i = Ware_Index::First(); i < workers.get_nrwareids(); ++i) {
-		fw.Unsigned8(1);
-		fw.String(tribe.get_worker_descr(i)->name());
-		fw.Unsigned32(workers.stock(i));
-		fw.Unsigned8(warehouse.get_worker_policy(i));
-	}
-	fw.Unsigned8(0);
-
-	//  Incorporated workers, write sorted after file-serial.
-	uint32_t nworkers = 0;
-	container_iterate_const(Warehouse::IncorporatedWorkers, warehouse.m_incorporated_workers, cwt)
-		nworkers += cwt->second.size();
-
-	fw.Unsigned16(nworkers);
-	typedef std::map<uint32_t, const Worker *> TWorkerMap;
-	TWorkerMap workermap;
-	container_iterate_const(Warehouse::IncorporatedWorkers, warehouse.m_incorporated_workers, cwt) {
-		container_iterate_const(Warehouse::WorkerList, cwt->second, i) {
-			const Worker & w = *(*i);
-			assert(mos.is_object_known(w));
-			workermap.insert
-				(std::pair<uint32_t, const Worker *>
-				 (mos.get_object_file_index(w), &w));
-		}
-	}
-
-	container_iterate_const(TWorkerMap, workermap, i)
-	{
-		const Worker & obj = *i.current->second;
-		assert(mos.is_object_known(obj));
-		fw.Unsigned32(mos.get_object_file_index(obj));
-	}
-
-	{
-		const std::vector<Ware_Index> & worker_types_without_cost =
-			tribe.worker_types_without_cost();
-		for (uint8_t i = worker_types_without_cost.size(); i;) {
-			uint32_t const next_spawn =
-				warehouse.m_next_worker_without_cost_spawn[--i];
-			if (next_spawn != static_cast<uint32_t>(Never())) {
-				fw.String
-					(tribe.get_worker_descr(tribe.worker_types_without_cost().at(i))
-					 ->name());
-				fw.Unsigned32(next_spawn);
-			}
-		}
-	}
-	fw.Unsigned8(0); //  terminator for spawn times
-
-	fw.Unsigned32(warehouse.m_planned_workers.size());
-	container_iterate_const
-		(std::vector<Warehouse::PlannedWorkers>,
-		 warehouse.m_planned_workers, pw_it)
-	{
-		fw.CString(tribe.get_worker_descr(pw_it.current->index)->name());
-		fw.Unsigned32(pw_it.current->amount);
-
-		fw.Unsigned32(pw_it.current->requests.size());
-		container_iterate_const
-			(std::vector<Request *>, pw_it.current->requests, req_it)
-			(*req_it.current)->Write(fw, game, mos);
-	}
-
-	fw.Unsigned32(warehouse.m_next_stock_remove_act);
-
+	// Storage
+	write_storage(*warehouse.get_storage(), fw, game, mos);
+	// port stuff
 	if (warehouse.descr().get_isport()) {
 		fw.Unsigned32(mos.get_object_file_index_or_zero(warehouse.m_portdock));
 
@@ -1766,6 +1749,94 @@ void Map_Buildingdata_Data_Packet::write_garrison(const Garrison& gar, FileWrite
 	fw.Unsigned32(gh.m_last_swap_soldiers_time);
 	fw.Unsigned8(gh.m_try_soldier_upgrade ? 1 : 0);
 	fw.Unsigned8(gh.m_doing_upgrade_request ? 1 : 0);
+}
+
+void Map_Buildingdata_Data_Packet::write_storage
+	(const Storage& storage, FileWrite& fw, Game& game, Map_Map_Object_Saver& mos)
+{
+	const StorageHandler& sh = ref_cast<const StorageHandler, const Storage>(storage);
+	fw.Unsigned16(CURRENT_STORAGE_PACKET_VERSION);
+	// basics
+	fw.Unsigned32(sh.m_removal_next_act);
+	// Ware supplies
+	StorageSupply* ss = sh.m_supply.get();
+	const Tribe_Descr& tribe = sh.owner().tribe();
+	const WareList & wares = ss->get_wares();
+	for (Ware_Index i = Ware_Index::First(); i < wares.get_nrwareids  (); ++i) {
+		fw.Unsigned8(1);
+		fw.String(tribe.get_ware_descr(i)->name());
+		fw.Unsigned32(wares.stock(i));
+		fw.Unsigned8(static_cast<uint8_t>(sh.get_ware_policy(i)));
+		if (sh.m_spawn_wares.count(i)) {
+			std::vector<uint32_t> values = sh.m_spawn_wares.at(i);
+			// Spawning
+			fw.Unsigned8(1);
+			fw.Unsigned32(values[0]);
+			fw.Unsigned32(values[1]);
+			fw.Unsigned32(values[2]);
+			if (values.size() > 3) {
+				fw.Unsigned8(1);
+				fw.Signed32(values[3]);
+			} else {
+				fw.Unsigned8(0);
+			}
+		} else {
+			fw.Unsigned8(0);
+		}
+	}
+	fw.Unsigned8(0);
+	// Worker supplies
+	const WareList & workers = ss->get_workers();
+	for (Ware_Index i = Ware_Index::First(); i < workers.get_nrwareids  (); ++i) {
+		fw.Unsigned8(1);
+		fw.String(tribe.get_ware_descr(i)->name());
+		fw.Unsigned32(workers.stock(i));
+		fw.Unsigned8(static_cast<uint8_t>(sh.get_worker_policy(i)));
+		if (sh.m_spawn_workers.count(i)) {
+			std::vector<uint32_t> values = sh.m_spawn_workers.at(i);
+			// Spawning
+			fw.Unsigned8(1);
+			fw.Unsigned32(values[0]);
+			fw.Unsigned32(values[1]);
+			fw.Unsigned32(values[2]);
+			if (values.size() > 3) {
+				fw.Unsigned8(1);
+				fw.Signed32(values[3]);
+			} else {
+				fw.Unsigned8(0);
+			}
+		} else {
+			fw.Unsigned8(0);
+		}
+	}
+	fw.Unsigned8(0);
+	// Planned workers
+	fw.Unsigned32(sh.m_planned_workers.size());
+	container_iterate_const
+		(std::vector<StorageHandler::PlannedWorkers>,
+		 sh.m_planned_workers, pw_it)
+	{
+		fw.CString(tribe.get_worker_descr(pw_it.current->index)->name());
+		fw.Unsigned32(pw_it.current->amount);
+
+		fw.Unsigned32(pw_it.current->requests.size());
+		container_iterate_const
+			(std::vector<Request *>, pw_it.current->requests, req_it)
+			(*req_it.current)->Write(fw, game, mos);
+	}
+	// Stocked atributes
+	fw.Unsigned32(sh.m_stocked_workers_atr.size());
+	container_iterate_const
+		(std::vector<StorageHandler::StockedWorkerAtr>,
+		 sh.m_stocked_workers_atr, workers_atr_it)
+	{
+		StorageHandler::StockedWorkerAtr entry = *workers_atr_it.current;
+		fw.CString(tribe.get_worker_descr(entry.index)->name());
+		fw.Unsigned32(entry.atck_lvl);
+		fw.Unsigned32(entry.evade_lvl);
+		fw.Unsigned32(entry.defense_lvl);
+		fw.Unsigned32(entry.exp_or_hp_lvl);
+	}
 }
 
 }

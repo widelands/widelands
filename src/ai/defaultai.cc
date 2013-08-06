@@ -72,7 +72,7 @@ DefaultAI::DefaultAI(Game & ggame, Player_Number const pid, uint8_t const t) :
 	next_attack_consideration_due(300000),
 	inhibit_road_building        (0),
 	time_of_last_construction    (0),
-	numof_warehouses             (0)
+	numof_storages               (0)
 {}
 
 DefaultAI::~DefaultAI()
@@ -881,8 +881,8 @@ bool DefaultAI::construct_building (int32_t) // (int32_t gametime)
 					// Check if the produced wares are needed
 					Ware_Index wt(static_cast<size_t>(bo.outputs.at(0)));
 					container_iterate(std::list<EconomyObserver *>, economies, l) {
-						// Don't check if the economy has no warehouse.
-						if ((*l.current)->economy.warehouses().empty())
+						// Don't check if the economy has no storage.
+						if ((*l.current)->economy.storages().empty())
 							continue;
 						if ((*l.current)->economy.needs_ware(wt))
 							prio += 1 + wares.at(bo.outputs.at(0)).preciousness;
@@ -918,8 +918,8 @@ bool DefaultAI::construct_building (int32_t) // (int32_t gametime)
 					// the ware they're refreshing
 					Ware_Index wt(static_cast<size_t>(bo.production_hint));
 					container_iterate(std::list<EconomyObserver *>, economies, l) {
-						// Don't check if the economy has no warehouse.
-						if ((*l.current)->economy.warehouses().empty())
+						// Don't check if the economy has no storages.
+						if ((*l.current)->economy.storages().empty())
 							continue;
 						if ((*l.current)->economy.needs_ware(wt)) {
 							prio += wares.at(bo.production_hint).preciousness * inout * 2;
@@ -964,8 +964,8 @@ bool DefaultAI::construct_building (int32_t) // (int32_t gametime)
 
 					// Check if the produced wares are needed
 					container_iterate(std::list<EconomyObserver *>, economies, l) {
-						// Don't check if the economy has no warehouse.
-						if ((*l.current)->economy.warehouses().empty())
+						// Don't check if the economy has no storages.
+						if ((*l.current)->economy.storages().empty())
 							continue;
 						for (uint32_t m = 0; m < bo.outputs.size(); ++m) {
 							Ware_Index wt(static_cast<size_t>(bo.outputs.at(m)));
@@ -1056,7 +1056,7 @@ bool DefaultAI::construct_building (int32_t) // (int32_t gametime)
 				//  needed for soldier training) near the frontier.
 				prio += productionsites.size() + mines.size();
 				prio += militarysites.size() / 3;
-				prio -= (bo.cnt_under_construction + numof_warehouses) * 35;
+				prio -= (bo.cnt_under_construction + numof_storages) * 35;
 				prio *= 2;
 
 				// take care about borders and enemies
@@ -1880,9 +1880,9 @@ bool DefaultAI::check_militarysites(int32_t gametime)
 
 	if (map.find_fields(Area<FCoords>(f, vision), 0, find_unowned) == 0) {
 		// If no enemy in sight - decrease the number of stationed soldiers
-		// as long as it is > 1 - BUT take care that there is a warehouse in the
+		// as long as it is > 1 - BUT take care that there is a storage in the
 		// same economy where the thrown out soldiers can go to.
-		if (ms->economy().warehouses().size()) {
+		if (ms->economy().storages().size()) {
 			uint32_t const j = ms->get_garrison()->soldierCapacity();
 			if (Garrison::SoldierPref::Rookies != ms->get_garrison()->get_soldier_preference())
 			{
@@ -2182,7 +2182,7 @@ void DefaultAI::gain_building(Building & b)
 			militarysites.back().bo = &bo;
 			militarysites.back().checks = bo.desc->get_size();
 		} else if (bo.type == BuildingObserver::WAREHOUSE)
-			++numof_warehouses;
+			++numof_storages;
 	}
 }
 
@@ -2244,8 +2244,8 @@ void DefaultAI::lose_building(const Building & b)
 					break;
 				}
 		} else if (bo.type == BuildingObserver::WAREHOUSE) {
-			assert(numof_warehouses > 0);
-			--numof_warehouses;
+			assert(numof_storages > 0);
+			--numof_storages;
 		}
 	}
 	m_buildable_changed = true;
@@ -2310,41 +2310,28 @@ bool DefaultAI::consider_attack(int32_t const gametime) {
 	map.find_immovables
 		(Area<FCoords>(f, vision), &immovables, FindImmovableAttackable());
 
-	for (uint32_t j = 0; j < immovables.size(); ++j)
-		if (upcast(MilitarySite, bld, immovables.at(j).object)) {
-			if (!player->is_hostile(bld->owner()))
+	for (uint32_t j = 0; j < immovables.size(); ++j) {
+		if (upcast(GarrisonOwner, go, immovables.at(j).object)) {
+			if (!player->is_hostile(go->get_garrison()->owner())) {
 				continue;
-			if (bld->get_garrison()->canAttack()) {
-				int32_t ta = player->findAttackSoldiers(bld->base_flag());
-				if (type == NORMAL)
-					ta = ta * 2 / 3;
-				if (ta < 1)
-					continue;
-
-				int32_t const tc = ta - bld->get_garrison()->presentSoldiers().size();
-				if (tc > chance) {
-					target = bld;
-					chance = tc;
-					attackers = ta;
-				}
 			}
-		} else if (upcast(Warehouse, wh, immovables.at(j).object)) {
-			if (!player->is_hostile(wh->owner()))
+			if (!go->get_garrison()->canAttack()) {
 				continue;
-// 			if (wh->get_garrison()->canAttack()) {
-// 				int32_t ta = player->findAttackSoldiers(wh->base_flag());
-// 				if (ta < 1)
-// 					continue;
-//
-// 				// extra priority push!
-// 				int32_t tc = ta * 2;
-// 				if (tc > chance) {
-// 					target = wh;
-// 					chance = tc;
-// 					attackers = ta;
-// 				}
-// 			}
+			}
+			int32_t ta = player->findAttackSoldiers(go->get_building()->base_flag());
+			if (type == NORMAL)
+				ta = ta * 2 / 3;
+			if (ta < 1)
+				continue;
+
+			int32_t const tc = ta - go->get_garrison()->presentSoldiers().size();
+			if (tc > chance) {
+				target = go->get_building();
+				chance = tc;
+				attackers = ta;
+			}
 		}
+	}
 
 	// Reenque militarysite at the end of list
 	militarysites.push_back(militarysites.front());

@@ -1906,18 +1906,18 @@ void Cmd_MessageSetStatusArchived::serialize (StreamWrite & ser)
 /*** struct Cmd_SetStockPolicy ***/
 Cmd_SetStockPolicy::Cmd_SetStockPolicy
 	(int32_t time, Player_Number p,
-	 Warehouse & wh, bool isworker, Ware_Index ware,
-	 Warehouse::StockPolicy policy)
+	 StorageOwner & storage_owner, bool isworker, Ware_Index ware,
+	 Storage::StockPolicy policy)
 : PlayerCommand(time, p)
 {
-	m_warehouse = wh.serial();
+	m_storage_owner = storage_owner.get_building()->serial();
 	m_isworker = isworker;
 	m_ware = ware;
 	m_policy = policy;
 }
 
 Cmd_SetStockPolicy::Cmd_SetStockPolicy()
-: PlayerCommand(), m_warehouse(0), m_isworker(false), m_policy()
+: PlayerCommand(), m_storage_owner(0), m_isworker(false), m_policy()
 {
 }
 
@@ -1930,20 +1930,20 @@ void Cmd_SetStockPolicy::execute(Game & game)
 {
 	// Sanitize data that could have come from the network
 	if (Player * plr = game.get_player(sender())) {
-		if (upcast(Warehouse, warehouse, game.objects().get_object(m_warehouse)))
+		if (upcast(StorageOwner, storage_owner, game.objects().get_object(m_storage_owner)))
 		{
-			if (&warehouse->owner() != plr) {
+			if (&storage_owner->get_building()->owner() != plr) {
 				log
-					("Cmd_SetStockPolicy: sender %u, but warehouse owner %u\n",
-					 sender(), warehouse->owner().player_number());
+					("Cmd_SetStockPolicy: sender %u, but storage owner %u\n",
+					 sender(), storage_owner->get_building()->owner().player_number());
 				return;
 			}
 
 			switch (m_policy) {
-			case Warehouse::SP_Normal:
-			case Warehouse::SP_Prefer:
-			case Warehouse::SP_DontStock:
-			case Warehouse::SP_Remove:
+			case Storage::StockPolicy::Normal:
+			case Storage::StockPolicy::Prefer:
+			case Storage::StockPolicy::DontStock:
+			case Storage::StockPolicy::Remove:
 				break;
 			default:
 				log
@@ -1952,7 +1952,7 @@ void Cmd_SetStockPolicy::execute(Game & game)
 				return;
 			}
 
-			const Tribe_Descr & tribe = warehouse->tribe();
+			const Tribe_Descr & tribe = storage_owner->get_building()->tribe();
 			if (m_isworker) {
 				if (!(m_ware < tribe.get_nrworkers())) {
 					log
@@ -1960,7 +1960,7 @@ void Cmd_SetStockPolicy::execute(Game & game)
 						 sender(), m_ware.value());
 					return;
 				}
-				warehouse->set_worker_policy(m_ware, m_policy);
+				storage_owner->get_storage()->set_worker_policy(m_ware, m_policy);
 			} else {
 				if (!(m_ware < tribe.get_nrwares())) {
 					log
@@ -1968,7 +1968,7 @@ void Cmd_SetStockPolicy::execute(Game & game)
 						 sender(), m_ware.value());
 					return;
 				}
-				warehouse->set_ware_policy(m_ware, m_policy);
+				storage_owner->get_storage()->set_ware_policy(m_ware, m_policy);
 			}
 		}
 	}
@@ -1977,20 +1977,20 @@ void Cmd_SetStockPolicy::execute(Game & game)
 Cmd_SetStockPolicy::Cmd_SetStockPolicy(StreamRead & des)
 	: PlayerCommand(0, des.Unsigned8())
 {
-	m_warehouse = des.Unsigned32();
+	m_storage_owner = des.Unsigned32();
 	m_isworker = des.Unsigned8();
 	m_ware = Ware_Index(des.Unsigned8());
-	m_policy = static_cast<Warehouse::StockPolicy>(des.Unsigned8());
+	m_policy = static_cast<Storage::StockPolicy>(des.Unsigned8());
 }
 
 void Cmd_SetStockPolicy::serialize(StreamWrite & ser)
 {
 	ser.Unsigned8(PLCMD_SETSTOCKPOLICY);
 	ser.Unsigned8(sender());
-	ser.Unsigned32(m_warehouse);
+	ser.Unsigned32(m_storage_owner);
 	ser.Unsigned8(m_isworker);
 	ser.Unsigned8(m_ware.value());
-	ser.Unsigned8(m_policy);
+	ser.Unsigned8(static_cast<uint8_t>(m_policy));
 }
 
 #define PLAYER_CMD_SETSTOCKPOLICY_VERSION 1
@@ -2002,10 +2002,10 @@ void Cmd_SetStockPolicy::Read
 		if (version != PLAYER_CMD_SETSTOCKPOLICY_VERSION)
 			throw game_data_error("unknown/unhandled version %u", version);
 		PlayerCommand::Read(fr, egbase, mol);
-		m_warehouse = fr.Unsigned32();
+		m_storage_owner = fr.Unsigned32();
 		m_isworker = fr.Unsigned8();
 		m_ware = Ware_Index(fr.Unsigned8());
-		m_policy = static_cast<Warehouse::StockPolicy>(fr.Unsigned8());
+		m_policy = static_cast<Storage::StockPolicy>(fr.Unsigned8());
 	} catch (const std::exception & e) {
 		throw game_data_error("Cmd_SetStockPolicy: %s", e.what());
 	}
@@ -2016,10 +2016,10 @@ void Cmd_SetStockPolicy::Write
 {
 	fw.Unsigned8(PLAYER_CMD_SETSTOCKPOLICY_VERSION);
 	PlayerCommand::Write(fw, egbase, mos);
-	fw.Unsigned32(m_warehouse);
+	fw.Unsigned32(m_storage_owner);
 	fw.Unsigned8(m_isworker);
 	fw.Unsigned8(m_ware.value());
-	fw.Unsigned8(m_policy);
+	fw.Unsigned8(static_cast<uint8_t>(m_policy));
 }
 
 }

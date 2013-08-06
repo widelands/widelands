@@ -31,6 +31,7 @@
 #include "logic/militarysite.h"
 #include "logic/productionsite.h"
 #include "logic/soldier.h"
+#include "logic/storage.h"
 #include "logic/trainingsite.h"
 #include "logic/warehouse.h"
 #include "logic/worker.h"
@@ -251,6 +252,15 @@ protected:
 		(lua_State *, const Widelands::Tribe_Descr &);
 };
 
+struct L_HasStorage: public L_HasWares, L_HasWorkers {
+	virtual ~L_HasStorage() {}
+
+	virtual int get_ware_policy(lua_State * L) = 0;
+	virtual int get_worker_policy(lua_State * L) = 0;
+	virtual int set_ware_policy(lua_State * L) = 0;
+	virtual int set_worker_policy(lua_State * L) = 0;
+};
+
 struct L_HasSoldiers {
 	struct SoldierDescr {
 		SoldierDescr(uint8_t ghp, uint8_t gat, uint8_t gde, uint8_t gev) :
@@ -355,6 +365,22 @@ struct _SoldierEmployer : public L_HasSoldiers {
 		(lua_State *, Widelands::Editor_Game_Base &) = 0;
 };
 
+struct _StorageOwner : public L_HasStorage, L_HasSoldiers {
+	virtual int set_wares(lua_State * L);
+	virtual int get_wares(lua_State * L);
+	virtual int set_workers(lua_State * L);
+	virtual int get_workers(lua_State * L);
+	virtual int get_ware_policy(lua_State * L);
+	virtual int get_worker_policy(lua_State * L);
+	virtual int set_ware_policy(lua_State * L);
+	virtual int set_worker_policy(lua_State * L);
+	virtual int get_soldiers(lua_State * L);
+	virtual int set_soldiers(lua_State * L);
+
+	virtual Widelands::Storage * get_storage
+		(lua_State *, Widelands::Editor_Game_Base &) = 0;
+};
+
 class L_Road : public L_PlayerImmovable, public _WorkerEmployer {
 public:
 	LUNA_CLASS_HEAD(L_Road);
@@ -416,8 +442,7 @@ public:
 };
 
 
-class L_Warehouse : public L_Building,
-	public L_HasWares, public L_HasWorkers, public L_HasSoldiers
+class L_Warehouse : public L_Building, public _StorageOwner
 {
 public:
 	LUNA_CLASS_HEAD(L_Warehouse);
@@ -435,10 +460,6 @@ public:
 	/*
 	 * Lua Methods
 	 */
-	int set_wares(lua_State *);
-	int get_wares(lua_State *);
-	int set_workers(lua_State *);
-	int get_workers(lua_State *);
 
 	/*
 	 * C Methods
@@ -450,8 +471,11 @@ public:
 // 	{
 // 		return get(L, g);
 // 	}
-	virtual int set_soldiers(lua_State * L);
-	virtual int get_soldiers(lua_State * L);
+	virtual Widelands::Storage * get_storage
+		(lua_State * L, Widelands::Editor_Game_Base & g)
+	{
+		return get(L, g)->get_storage();
+	}
 };
 
 

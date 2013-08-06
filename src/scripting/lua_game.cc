@@ -30,6 +30,7 @@
 #include "logic/path.h"
 #include "logic/player.h"
 #include "logic/tribe.h"
+#include <logic/storagehandler.h>
 #include "scripting/c_utils.h"
 #include "scripting/lua_map.h"
 #include "scripting/scripting.h"
@@ -179,16 +180,16 @@ int L_Player::get_objectives(lua_State * L) {
 */
 int L_Player::get_defeated(lua_State * L) {
 	Player & p = get(L, get_egbase(L));
-	bool have_warehouses = false;
+	bool have_storages = false;
 
 	for (uint32_t economy_nr = 0; economy_nr < p.get_nr_economies(); economy_nr++) {
-		if (!p.get_economy_by_number(economy_nr)->warehouses().empty()) {
-		  have_warehouses = true;
+		if (!p.get_economy_by_number(economy_nr)->storages().empty()) {
+		  have_storages = true;
 		  break;
 		}
 	}
 
-	lua_pushboolean(L, !have_warehouses);
+	lua_pushboolean(L, !have_storages);
 	return 1;
 }
 
@@ -869,23 +870,14 @@ int L_Player::allow_workers(lua_State * L) {
 
 		if (worker_descr.buildcost().empty()) {
 			//  Workers of this type can be spawned in warehouses. Start it.
-			uint8_t worker_types_without_cost_index = 0;
-			for (;; ++worker_types_without_cost_index) {
-				assert
-					(worker_types_without_cost_index
-					 <
-					 worker_types_without_cost.size());
-				if
-					(worker_types_without_cost.at
-						(worker_types_without_cost_index) == i)
-					break;
-			}
 			for (uint32_t j = player.get_nr_economies(); j;) {
 				Economy & economy = *player.get_economy_by_number(--j);
 				container_iterate_const
-					(std::vector<Warehouse *>, economy.warehouses(), k)
-					(*k.current)->enable_spawn
-						(game, worker_types_without_cost_index);
+					(std::vector<Storage *>, economy.storages(), k) {
+						if (upcast(StorageHandler, sh, *k.current)) {
+							sh->add_worker_spawn(worker_descr.worker_index());
+						}
+					}
 			}
 		}
 	}

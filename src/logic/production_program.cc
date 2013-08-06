@@ -32,6 +32,7 @@
 #include "logic/findnode.h"
 #include "logic/game.h"
 #include "logic/game_data_error.h"
+#include "logic/garrison.h"
 #include "logic/mapregion.h"
 #include "logic/message_queue.h"
 #include "logic/player.h"
@@ -40,7 +41,6 @@
 #include "logic/trainingsite.h"
 #include "logic/tribe.h"
 #include "logic/worker_program.h"
-#include "garrison.h"
 #include "profile/profile.h"
 #include "sound/sound_handler.h"
 #include "upcast.h"
@@ -1364,11 +1364,8 @@ ProductionProgram::ActTrain::ActTrain
 void ProductionProgram::ActTrain::execute
 	(Game & game, ProductionSite & ps) const
 {
-	GarrisonOwner * go= dynamic_cast<GarrisonOwner *>(&ps);
-	if (!go) {
-		log("CGH no garrison owner for %s %u\n", ps.descr().descname().c_str(), ps.serial());
-		return;
-	}
+	GarrisonOwner * go = dynamic_cast<GarrisonOwner *>(&ps);
+	assert(go);
 	const Garrison* ga = go->get_garrison();
 	const std::vector<Soldier *> soldiers = ga->presentSoldiers();
 	const std::vector<Soldier *>::const_iterator soldiers_end =

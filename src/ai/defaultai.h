@@ -191,7 +191,7 @@ private:
 	int32_t inhibit_road_building;
 	int32_t time_of_last_construction;
 
-	uint16_t numof_warehouses;
+	uint16_t numof_storages;
 };
 
 #endif

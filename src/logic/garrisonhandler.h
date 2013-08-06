@@ -31,12 +31,12 @@ struct Building;
 struct Request;
 class Soldier;
 
+#define GARRISON_SWAP_TIMEOUT 20000
 /**
  * Implementation of the Garrison interface to used by GarrisonOwner.
  */
 class GarrisonHandler : public Garrison {
 friend struct Map_Buildingdata_Data_Packet;
-#define GARRISON_SWAP_TIMEOUT 20000
 public:
 	/**
 	 * Create a new garrison handler
@@ -163,13 +163,20 @@ private:
 	*
 	* There would be more efficient ways to get well trained soldiers. Now, new buildings appearing in battle
 	* field are more vulnerable at the beginning. This is intentional. The purpose of this upgrade thing is
-	* to reduce the benefits of site micromanagement. The intention is not to make gameplay easier in other ways.
+	* to reduce the benefits of site micromanagement. The intention is not to make gameplay easier
+	* in other ways.
 	*/
 	void update_upgrade_soldier_request();
 	/**
-	 * The callback function, called whenever one of our soldier request gets filled
+	 * The callback function, called whenever one of our soldier requested arrived
 	 */
 	static void request_soldier_callback
+		(Game &, Request &, Ware_Index, Worker *, PlayerImmovable &);
+	/**
+	 * The transfer callback function, called whenever one of our requested
+	 * soldier started to move towards the garrison
+	 */
+	static void request_soldier_transfer_callback
 		(Game &, Request &, Ware_Index, Worker *, PlayerImmovable &);
 	/*
 	* When upgrading soldiers, we do not ask for just any soldiers, but soldiers
@@ -211,7 +218,6 @@ private:
 	uint32_t m_min_capacity;
 	uint32_t m_max_capacity;
 	uint32_t m_capacity;
-// 	std::vector<Soldier *> m_soldiers;
 	bool m_passive;
 
 	// Healing

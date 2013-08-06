@@ -21,7 +21,8 @@
 #define GARRISON_H
 
 #include <vector>
-#include "widelands.h"
+
+#include "logic/widelands.h"
 
 namespace Widelands {
 

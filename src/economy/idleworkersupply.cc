@@ -25,8 +25,8 @@
 #include "logic/player.h"
 #include "logic/requirements.h"
 #include "logic/soldier.h"
+#include "logic/storage.h"
 #include "logic/tribe.h"
-#include "logic/warehouse.h"
 #include "logic/worker.h"
 #include "wexception.h"
 
@@ -126,12 +126,12 @@ Worker & IdleWorkerSupply::launch_worker(Game &, const Request & req)
 	return m_worker;
 }
 
-void IdleWorkerSupply::send_to_storage(Game & game, Warehouse * wh)
+void IdleWorkerSupply::send_to_storage(Game & game, StorageOwner * storage_owner)
 {
 	assert(!has_storage());
 
 	Transfer * t = new Transfer(game, m_worker);
-	t->set_destination(*wh);
+	t->set_destination(*storage_owner->get_building());
 	m_worker.start_task_transfer(game, t);
 }
 

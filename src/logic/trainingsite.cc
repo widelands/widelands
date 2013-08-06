@@ -27,12 +27,12 @@
 #include "i18n.h"
 #include "logic/editor_game_base.h"
 #include "logic/game.h"
+#include "logic/garrisonhandler.h"
 #include "logic/player.h"
 #include "logic/production_program.h"
 #include "logic/soldier.h"
 #include "logic/tribe.h"
 #include "logic/worker.h"
-#include "garrisonhandler.h"
 #include "profile/profile.h"
 #include "upcast.h"
 
@@ -177,9 +177,10 @@ m_result         (Failed)
 		init_kick_state(atrDefense, d);
 	if (d.get_train_evade())
 		init_kick_state(atrEvade, d);
-	GarrisonHandler * ga = new GarrisonHandler(*this,
-		0, descr().get_max_number_of_soldiers(), descr().get_conquers(), 0,
-		Garrison::SoldierPref::Rookies, true); //FIXME CGH put that in descr
+	GarrisonHandler * ga = new GarrisonHandler
+		(*this, 0, descr().get_max_number_of_soldiers(),
+		 descr().get_conquers(), 0, Garrison::SoldierPref::Rookies, true);
+		// FIXME put soldierpref in desc
 	m_garrison.reset(ga);
 }
 
@@ -646,13 +647,11 @@ TrainingSite::trainingDone()
 void TrainingSite::garrison_occupied()
 {
 }
-void TrainingSite::garrison_lost(Game& game, Player_Number defeating, bool captured)
+void TrainingSite::garrison_lost(Game&, Player_Number, bool)
 {
-
 }
-void TrainingSite::reinit_after_conqueral(Game& game)
+void TrainingSite::reinit_after_conqueral(Game&)
 {
-
 }
 Garrison* TrainingSite::get_garrison() const
 {

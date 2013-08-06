@@ -27,8 +27,8 @@
 #include "economy/transfer.h"
 #include "logic/game.h"
 #include "logic/ship.h"
+#include "logic/storage.h"
 #include "logic/tribe.h"
-#include "logic/warehouse.h"
 #include "logic/worker.h"
 #include "map_io/widelands_map_map_object_loader.h"
 #include "map_io/widelands_map_map_object_saver.h"
@@ -54,7 +54,7 @@ struct IdleWareSupply : public Supply {
 	virtual bool is_active() const throw ();
 	virtual bool has_storage() const throw ();
 	virtual void get_ware_type(WareWorker & type, Ware_Index & ware) const;
-	virtual void send_to_storage(Game &, Warehouse * wh);
+	virtual void send_to_storage(Game &, StorageOwner * wh);
 
 	virtual uint32_t nr_supplies(const Game &, const Request &) const;
 	virtual WareInstance & launch_item(Game &, const Request &);
@@ -166,12 +166,12 @@ Worker & IdleWareSupply::launch_worker(Game &, const Request &)
 	throw wexception("IdleWareSupply::launch_worker makes no sense");
 }
 
-void IdleWareSupply::send_to_storage(Game & game, Warehouse * wh)
+void IdleWareSupply::send_to_storage(Game & game, StorageOwner * storage_owner)
 {
 	assert(!has_storage());
 
 	Transfer * t = new Transfer(game, m_ware);
-	t->set_destination(*wh);
+	t->set_destination(*storage_owner->get_building());
 	m_ware.set_transfer(game, *t);
 }
 
@@ -290,8 +290,8 @@ void WareInstance::act(Game & game, uint32_t)
 
 /**
  * Performs the state updates necessary for the current location:
- * - if it's a building, acknowledge the Request or incorporate into warehouse
- * - if it's a flag and we have no request, start the return to warehouse timer
+ * - if it's a building, acknowledge the Request or incorporate into strage
+ * - if it's a flag and we have no request, start the return to storage timer
  * and issue a Supply
  *
  * \note \ref update() may result in the deletion of this object.
@@ -405,22 +405,22 @@ void WareInstance::enter_building(Game & game, Building & building)
 				return;
 			}
 
-			// There are some situations where we might end up in a warehouse
+			// There are some situations where we might end up in a storage
 			// as part of a requested route, and we need to move out of it
 			// again, e.g.:
 			//  - we were requested just when we were being carried into the
-			//    warehouse
+			//    storage
 			//  - we were carried into a harbour/warehouse to be
 			//    shipped across the sea, but a better, land-based route has been
 			//    found
-			if (upcast(Warehouse, warehouse, &building)) {
-				warehouse->do_launch_item(game, *this);
+			if (upcast(StorageOwner, storage_owner, &building)) {
+				storage_owner->get_storage()->do_launch_ware(game, *this);
 				return;
 			}
 
 			throw wexception
 				("MO(%u): ware(%s): do not know how to move from building %u (%s at (%u,%u)) "
-				 "to %u (%s) -> not a warehouse!",
+				 "to %u (%s) -> not a storage owner!",
 				 serial(), m_descr->name().c_str(), building.serial(),
 				 building.name().c_str(), building.get_position().x,
 				 building.get_position().y, nextstep->serial(),

@@ -41,7 +41,7 @@ class Image;
 namespace Widelands {
 
 /**
- * Wares can be stored in warehouses. They can be transferred across an
+ * Wares can be stored in storages. They can be transferred across an
  * Economy. They can be traded.
  * Both items (lumber, stone, ...) and workers are considered wares.
  * Every ware has a unique name. Note that an item must not have the same
@@ -75,7 +75,7 @@ struct Item_Ware_Descr : public Map_Object_Descr {
 	/// \return ware's localized descriptive text
 	const std::string & helptext() const throw () {return m_helptext;}
 
-	/// How much of the ware type that an economy should store in warehouses.
+	/// How much of the ware type that an economy should store in storages.
 	/// The special value std::numeric_limits<uint32_t>::max() means that the
 	/// the target quantity of this ware type will never be checked and should
 	/// not be configurable.

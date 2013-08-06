@@ -34,12 +34,15 @@
 
 
 namespace Widelands {
+
+class StorageOwner;
+
+class Storage;
 struct Player;
 struct Game;
 struct Flag;
 struct Route;
 struct RSPairStruct;
-class Warehouse;
 struct Request;
 struct Supply;
 struct Router;
@@ -102,11 +105,11 @@ public:
 		 WareWorker type,
 		 int32_t cost_cutoff = -1);
 
-	typedef boost::function<bool (Warehouse &)> WarehouseAcceptFn;
-	Warehouse * find_closest_warehouse
+	typedef boost::function<bool (StorageOwner *)> StorageAcceptFn;
+	StorageOwner * find_closest_storage
 		(Flag & start, WareWorker type = wwWORKER, Route * route = 0,
 		 uint32_t cost_cutoff = 0,
-		 const WarehouseAcceptFn & acceptfn = WarehouseAcceptFn());
+		 const StorageAcceptFn & acceptfn = StorageAcceptFn());
 
 	std::vector<Flag *>::size_type get_nrflags() const {return m_flags.size();}
 	void    add_flag(Flag &);
@@ -122,9 +125,9 @@ public:
 	void    add_workers(Ware_Index, uint32_t count = 1);
 	void remove_workers(Ware_Index, uint32_t count = 1);
 
-	void    add_warehouse(Warehouse &);
-	void remove_warehouse(Warehouse &);
-	const std::vector<Warehouse *>& warehouses() const {return m_warehouses;}
+	void    add_storage(Storage &);
+	void remove_storage(Storage &);
+	const std::vector<Storage *>& storages() const {return m_storages;}
 
 	void    add_request(Request &);
 	void remove_request(Request &);
@@ -208,7 +211,7 @@ private:
 	Flags m_flags;
 	WareList m_wares;     ///< virtual storage with all wares in this Economy
 	WareList m_workers;   ///< virtual storage with all workers in this Economy
-	std::vector<Warehouse *> m_warehouses;
+	std::vector<Storage *> m_storages;
 
 	RequestList m_requests; ///< requests
 	SupplyList m_supplies;
