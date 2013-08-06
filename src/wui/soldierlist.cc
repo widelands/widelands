@@ -368,6 +368,7 @@ private:
 	void mouseover(const Soldier * soldier);
 	void eject(const Soldier * soldier);
 	void set_soldier_preference(int32_t changed_to);
+	void think();
 
 	Interactive_GameBase & m_igb;
 	Widelands::Building & m_building;
@@ -407,7 +408,6 @@ m_infotext(this, _("Click soldier to send away"))
 	UI::Box * buttons = new UI::Box(this, 0, 0, UI::Box::Horizontal);
 
 	bool can_act = m_igb.can_act(m_building.owner().player_number());
-	if (can_act)
 	if (upcast(Widelands::MilitarySite, ms, &building)) {
 		m_soldier_preference.add_button
 			(buttons, Point(0, 0), g_gr->images().get("pics/prefer_rookies.png"), _("Prefer Rookies"));
@@ -423,8 +423,12 @@ m_infotext(this, _("Click soldier to send away"))
 		if (ms->get_soldier_preference() == Widelands::MilitarySite::kPrefersHeroes) {
 			m_soldier_preference.set_state(1);
 		}
-		m_soldier_preference.changedto.connect
-			(boost::bind(&SoldierList::set_soldier_preference, this, _1));
+		if (can_act) {
+			m_soldier_preference.changedto.connect
+				(boost::bind(&SoldierList::set_soldier_preference, this, _1));
+		} else {
+			m_soldier_preference.set_enabled(false);
+		}
 	}
 	buttons->add_inf_space();
 	buttons->add
@@ -438,6 +442,28 @@ SoldierControl & SoldierList::soldiers() const
 {
 	return *dynamic_cast<SoldierControl *>(&m_building);
 }
+
+void SoldierList::think()
+{
+	// Only update the soldiers pref radio if player is spectator
+	if (m_igb.can_act(m_building.owner().player_number())) {
+		return;
+	}
+	if (upcast(Widelands::MilitarySite, ms, &m_building)) {
+		switch (ms->get_soldier_preference()) {
+			case Widelands::MilitarySite::kPrefersRookies:
+				m_soldier_preference.set_state(0);
+				break;
+			case Widelands::MilitarySite::kPrefersHeroes:
+				m_soldier_preference.set_state(1);
+				break;
+			default:
+				m_soldier_preference.set_state(-1);
+				break;
+		}
+	}
+}
+
 
 void SoldierList::mouseover(const Soldier * soldier)
 {
