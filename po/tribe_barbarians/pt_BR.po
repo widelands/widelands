@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2013-07-28 18:22+0000\n"
-"PO-Revision-Date: 2013-01-24 02:35+0000\n"
-"Last-Translator: Rubens Bueno <rubensvsbueno@gmail.com>\n"
+"POT-Creation-Date: 2013-08-06 03:27+0000\n"
+"PO-Revision-Date: 2013-08-05 14:02+0000\n"
+"Last-Translator: JoãoPedro BrasãoToledo <soldgames@gmail.com>\n"
 "Language-Team: Brazilian Portuguese <pt_BR@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-07-29 05:12+0000\n"
-"X-Generator: Launchpad (build 16700)\n"
+"X-Launchpad-Export-Date: 2013-08-06 04:38+0000\n"
+"X-Generator: Launchpad (build 16718)\n"
 
 #: ../../tribes/barbarians/axefactory/help.lua:12
 #: ../../tribes/barbarians/warmill/help.lua:12
@@ -23,22 +23,28 @@ msgid ""
 "\"A new Warriors Axe brings forth the best in its wielder – or the worst in "
 "its maker.\""
 msgstr ""
+"\"Um novo machado de guerreiro traz o melhor em seu portador - ou o pior de "
+"seu criador.\""
 
 #: ../../tribes/barbarians/hunters_hut/help.lua:12
 msgid ""
 "\"As silent as a panther,<br> as deft as a weasel,<br> as swift as an "
 "arrow,<br> as deadly as a viper.\""
 msgstr ""
+"\"Silencioso como um jaguar,<br> tão hábil como uma doninha,<br> tão veloz "
+"como uma flecha,<br> tão mortal como um víbora"
 
 #: ../../tribes/barbarians/battlearena/help.lua:17
 msgid ""
 "\"Evade\" increases the soldier's chance not to be hit by the enemy and so "
 "to remain totally unaffected."
 msgstr ""
+"\"Evasão\" aumenta a chance de um soldado de se esquivar do golpe inimigo e "
+"não levar nenhum dano"
 
 #: ../../tribes/barbarians/lime_kiln/help.lua:12
 msgid "\"Forming new stone from old with fire and water.\""
-msgstr ""
+msgstr "\"Formando novas pedras de antigas com fogo e água.\""
 
 #: ../../tribes/barbarians/gamekeepers_hut/help.lua:12
 msgid ""
@@ -84,6 +90,8 @@ msgid ""
 "\"Let the first one drive away the hunger, the second one put you at ease; "
 "when you have swallowed up your third one, it's time for the next shift!\""
 msgstr ""
+"\"Deixe que o primeiro espantar a fome, o segundo colocá-lo à vontade, "
+"quando você ter engolido o seu terceiro, é hora para o próximo turno!\""
 
 #: ../../tribes/barbarians/battlearena/help.lua:12
 msgid ""
@@ -126,7 +134,7 @@ msgstr "\"Cultivamos telhados\""
 
 #: ../../tribes/barbarians/metalworks/help.lua:12
 msgid "\"We make it work!\""
-msgstr ""
+msgstr "\"Nós faremos funcionar\""
 
 #: ../../tribes/barbarians/fishers_hut/help.lua:12
 msgid "\"What do you mean, my fish ain't fresh?!\""
@@ -162,7 +170,7 @@ msgstr "%s e"
 #: ../../tribes/barbarians/granitemine/help.lua:27
 #: ../../tribes/barbarians/oremine/help.lua:27
 msgid "%s from a Big Inn"
-msgstr ""
+msgstr "%s de uma Grande Hospedaria"
 
 #: ../../tribes/barbarians/coalmine/help.lua:26
 #: ../../tribes/barbarians/goldmine/help.lua:25
@@ -179,12 +187,12 @@ msgstr "%s de uma Taverna"
 #: ../../tribes/barbarians/granitemine/help.lua:26
 #: ../../tribes/barbarians/oremine/help.lua:26
 msgid "%s from an Inn"
-msgstr ""
+msgstr "%s de uma Hospedaria"
 
 #: ../../tribes/barbarians/axefactory/help.lua:26
 #: ../../tribes/barbarians/lime_kiln/help.lua:26
 msgid "%s from the Coal mine or the Charcoal Burner's House"
-msgstr ""
+msgstr "%s da mina de carvão ou do Carvoeiro"
 
 #: ../../tribes/barbarians/metalworks/help.lua:26
 msgid "%s from the Lumberjack's hut"

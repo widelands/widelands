@@ -6,15 +6,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4866\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2013-07-28 18:22+0000\n"
-"PO-Revision-Date: 2013-07-21 12:26+0000\n"
-"Last-Translator: Tubuntu <Unknown>\n"
+"POT-Creation-Date: 2013-08-06 03:27+0000\n"
+"PO-Revision-Date: 2013-08-05 06:50+0000\n"
+"Last-Translator: Hélion du Mas des Bourboux <helion331990@gmail.com>\n"
 "Language-Team: French <eandry@mandriva.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-07-29 05:10+0000\n"
-"X-Generator: Launchpad (build 16700)\n"
+"X-Launchpad-Export-Date: 2013-08-06 04:36+0000\n"
+"X-Generator: Launchpad (build 16718)\n"
 
 #: ../../txts/README:71
 msgid "(CTRL+) 0-9  Remember and go to previously remembered locations"
@@ -168,7 +168,7 @@ msgstr "Développeurs"
 
 #: ../../txts/license:7
 msgid "Copyright 2002 - 2013 by the Widelands Development Team."
-msgstr ""
+msgstr "Copyright 2002 - 2013 par l'équipe de développement de Widelands"
 
 #: ../../txts/README:150
 msgid "Creating a Session Record</p>"
@@ -383,7 +383,7 @@ msgstr "Licence"
 
 #: ../../txts/license:4
 msgid "Licensing information for Widelands"
-msgstr ""
+msgstr "Information de licence pour Widelands"
 
 #: ../../txts/tips/editor.tip:10
 msgid ""

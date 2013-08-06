@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2013-07-28 18:22+0000\n"
-"PO-Revision-Date: 2013-02-02 01:57+0000\n"
-"Last-Translator: Rubens Bueno <rubensvsbueno@gmail.com>\n"
+"POT-Creation-Date: 2013-08-06 03:27+0000\n"
+"PO-Revision-Date: 2013-08-05 14:08+0000\n"
+"Last-Translator: JoãoPedro BrasãoToledo <soldgames@gmail.com>\n"
 "Language-Team: Brazilian Portuguese <pt_BR@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-07-29 05:10+0000\n"
-"X-Generator: Launchpad (build 16700)\n"
+"X-Launchpad-Export-Date: 2013-08-06 04:36+0000\n"
+"X-Generator: Launchpad (build 16718)\n"
 
 #: ../../txts/README:71
 msgid "(CTRL+) 0-9  Remember and go to previously remembered locations"
@@ -103,6 +103,9 @@ msgid ""
 "An economy consists of all buildings and flags connected by roads. The "
 "supplies and demands of buildings are handled in its economy."
 msgstr ""
+"Uma economia consiste de todos os edifícios e bandeiras ligadas por "
+"estradas. Os suprimentos e demandas dos edifícios são tratadas em sua "
+"economia."
 
 #: ../../txts/tips/general_game.tip:22
 msgid ""
@@ -161,7 +164,7 @@ msgstr "Programadores"
 
 #: ../../txts/license:7
 msgid "Copyright 2002 - 2013 by the Widelands Development Team."
-msgstr ""
+msgstr "Copyright 2002 - 2013 pela Equipe de Desenvolvimento Widelands."
 
 #: ../../txts/README:150
 msgid "Creating a Session Record</p>"
@@ -302,7 +305,7 @@ msgstr "Húngaro"
 
 #: ../../txts/README:61
 msgid "I               Toggle stock inventory display"
-msgstr ""
+msgstr "\"I\" Exibe o inventário de estoque"
 
 #: ../../txts/editor_readme:37
 msgid "I        Activates information tool"
@@ -313,6 +316,8 @@ msgid ""
 "If you like to live dangerously, pressing Ctrl while clicking the enhance, "
 "dismantle or destroy building buttons will skip the confirmation."
 msgstr ""
+"Se você gosta de viver perigosamente, pressionar Ctrl enquanto clica nos "
+"botões melhorar, desmantelar ou destruir, vai pular a confirmação"
 
 #: ../../txts/README:106
 msgid ""
@@ -371,7 +376,7 @@ msgstr "Licença"
 
 #: ../../txts/license:4
 msgid "Licensing information for Widelands"
-msgstr ""
+msgstr "Informação de licenciamento para Widelands"
 
 #: ../../txts/tips/editor.tip:10
 msgid ""
@@ -465,12 +470,17 @@ msgid ""
 "standalone binary package, or in the installation directory (like "
 "/usr/share/games/widelands)."
 msgstr ""
+"No Linux, você pode achar o arquivo \"COPYING\" na raiz da origem ou do "
+"pacote binário autônomo, ou no diretório de instalação (como / usr / share / "
+"games / widelands)."
 
 #: ../../txts/license:20
 msgid ""
 "On MacOS, you can find the file called COPYING in the archive you downloaded "
 "from the website."
 msgstr ""
+"No MacOS, você pode achar o arquivo \"COPYING\" no arquivo que você baixou "
+"do site"
 
 #: ../../txts/README:159
 msgid ""
@@ -493,6 +503,9 @@ msgid ""
 "On Windows, you can find the file called COPYING.txt in the installation "
 "folder and the Widelands Start menu entry provides a link to this file."
 msgstr ""
+"No Windows, você pode achar o arquivo \"COPYING.txt\" na pasta onde foi "
+"instalado o jogo e na pasta do Widelands no menu iniciar  tem um link para o "
+"arquivo"
 
 #: ../../txts/README:102
 msgid "Online Help"
@@ -557,6 +570,8 @@ msgstr ""
 #: ../../txts/tips/general_game.tip:62
 msgid "Press I to quickly toggle the display of your stock inventory."
 msgstr ""
+"Pressione \"I\" para, rapidamente, exibir a janela do seu inventário de "
+"estoque"
 
 #: ../../txts/tips/general_game.tip:46
 msgid ""
@@ -705,6 +720,8 @@ msgid ""
 "The number keys (1 - 0) allow you to directly set the size of the selected "
 "area around your mouse cursor."
 msgstr ""
+"As teclas numéricas (1-0) permitem definir diretamente o tamanho da área "
+"selecionada em torno do seu cursor do mouse."
 
 #: ../../txts/editor_readme:10
 msgid ""
@@ -725,12 +742,18 @@ msgid ""
 "quesions or general support) or https://launchpad.net/widelands (Bugtracker, "
 "Translations)."
 msgstr ""
+"Este jogo vem como está e sem garantia. Para mais informações e apoio que "
+"você pode encontrar-nos no http://wl.widelands.org (Site, Wiki, Forum para "
+"questões ou de apoio geral) ou https://launchpad.net/widelands "
+"(\"Bugtracker\", Traduções)."
 
 #: ../../txts/license:9
 msgid ""
 "This game is Free and Open Source (FOSS), licensed under the GNU General "
 "Public License (GPL) V2.0."
 msgstr ""
+"Este jogo é gratuito e de Fonte Aberta(Open Source) (FOSS), licenciado sob a "
+"GNU General Public License (GPL) V2.0."
 
 #: ../../txts/editor_readme:14
 msgid ""
@@ -799,6 +822,8 @@ msgid ""
 "Use the 'configure economy' menu to adjust the target quantity of wares. It "
 "can be accessed via the flag menu."
 msgstr ""
+"Use o menu 'configure a economia' para ajustar a quantidade alvo de "
+"mercadorias. Ele pode ser acessado através do menu de bandeira."
 
 #: ../../txts/README:144
 msgid ""
@@ -819,6 +844,8 @@ msgstr ""
 #: ../../txts/license:16
 msgid "We are also shipping the GPL as text document with Widelands itself."
 msgstr ""
+"Nós também estamos enviando o GPL como documento de texto com o próprio "
+"Widelands"
 
 #: ../../txts/README:88
 msgid ""
@@ -836,6 +863,8 @@ msgid ""
 "When removing a road, if Ctrl is pressed all flags up to the first junction "
 "are removed."
 msgstr ""
+"Enquanto removendo uma estrada, se pressionar o Ctrl, todas as bandeiras até "
+"a primeira junção serão removidas"
 
 #: ../../txts/developers:3
 msgid "Widelands Development Team"
@@ -920,12 +949,16 @@ msgid ""
 "You can find more information on FOSS and the GPL by visiting the following "
 "webpage: "
 msgstr ""
+"Você pode encontrar mais informações sobre FOSS e o GPL, visitando a "
+"seguinte página: "
 
 #: ../../txts/license:14
 msgid ""
 "You can find the full text of the license there as well as further "
 "information about its philosophy and the legal implications."
 msgstr ""
+"Você pode encontrar o texto completo da licença lá, bem como mais "
+"informações sobre sua filosofia e as implicações legais."
 
 #: ../../txts/tips/editor.tip:6
 msgid ""
@@ -967,4 +1000,4 @@ msgstr "Um jogo de estratégia com código livre"
 
 #: ../../txts/license:12
 msgid "http://www.gnu.org/licenses/old-licenses/gpl-2.0"
-msgstr ""
+msgstr "http://www.gnu.org/licenses/old-licenses/gpl-2.0"

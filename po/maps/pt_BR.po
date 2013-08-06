@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2013-07-28 18:22+0000\n"
-"PO-Revision-Date: 2013-01-23 20:06+0000\n"
+"POT-Creation-Date: 2013-08-06 03:27+0000\n"
+"PO-Revision-Date: 2013-08-05 14:07+0000\n"
 "Last-Translator: Rubens Bueno <rubensvsbueno@gmail.com>\n"
 "Language-Team: Brazilian Portuguese <pt_BR@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-07-29 05:09+0000\n"
-"X-Generator: Launchpad (build 16700)\n"
+"X-Launchpad-Export-Date: 2013-08-06 04:35+0000\n"
+"X-Generator: Launchpad (build 16718)\n"
 
 #: ../../campaigns/cconfig:64
 msgid "01 - Eyes in the Dark"
@@ -436,19 +436,21 @@ msgstr ""
 
 #: ../../maps/Sun of fire.wmf/elemental:12
 msgid "Start positions are clockwise"
-msgstr ""
+msgstr "As posições iniciais são distribuidas em sentido horário"
 
 #: ../../maps/Desert Tournament.wmf/elemental:10
 #: ../../maps/Four Castles.wmf/elemental:10
 #: ../../maps/Swamp Monks.wmf/elemental:10
 msgid "Suggested Teams: (blue, red) vs (yellow, green)"
-msgstr ""
+msgstr "Equipes sugeridas: (azul, vermelho) vs (amarelo, verde)"
 
 #: ../../maps/Four Mountains.wmf/elemental:10
 msgid ""
 "Suggested Teams: (blue, red) vs (yellow, green) or (blue, green) vs (red, "
 "yellow)"
 msgstr ""
+"Equipes sugeridas: (azul, vermelho) vs (amarelo, verde) ou (azul, verde) vs "
+"(vermelho, amarelo)"
 
 #: ../../maps/Elven Forests.wmf/elemental:10
 msgid ""
@@ -516,6 +518,15 @@ msgid ""
 "of time, until the first fights between the harbours will shake the peaceful "
 "life that lasted so long..."
 msgstr ""
+"Os quatro portos poderosos das ilhas Craw estavam negociando seus bens entre "
+"uns aos outros há séculos. Todos eles necessitavam recursos, eles não "
+"poderiam produzir em seu próprio território e forneceram recursos que o "
+"outro não poderia produzir em troca. Com base nesses trocas, um comércio "
+"muito amigável era comum entre os quatro portos e as pessoas que viviam nas "
+"Ilhas Craw - apenas até recentemente dois dos portos se uniram para uma "
+"aliança comercial exclusiva, forçando os outros dois para fazer o mesmo. De "
+"repente, parece que é só uma questão de tempo, até que as primeiras lutas "
+"entre os portos vai abalar a vida pacífica que durou tanto tempo ..."
 
 #: ../../maps/The long way.wmf/elemental:7
 msgid "The long way"
@@ -715,3 +726,7 @@ msgid ""
 "be the first to smuggle a certain number of wares? Teams are: Blue + Red vs "
 "Yellow + Green."
 msgstr ""
+"Suas bem estabelecidas rotas de contrabando repentinamente ficaram cheias: "
+"duas outras tribos apareceram, começando uma rivalidade entre "
+"contrabandistas. Quem será o primeiro a contrabandear um certo número de "
+"mercadorias? Os times são Azul + Vermelho vs. Amarelo + Verde."
