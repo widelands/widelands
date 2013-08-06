@@ -57,7 +57,7 @@ m_game(parent->game())
 	hbox1->add_space(PADDING);
 
 	UI::Box * infoBox = new UI::Box(hbox1, 0, 0, UI::Box::Vertical, 0, 0);
-	m_gametime_label = new UI::Textarea(infoBox, _("Elapsed time :"));
+	m_gametime_label = new UI::Textarea(infoBox, _("Elapsed time:"));
 	infoBox->add(m_gametime_label, UI::Box::AlignLeft);
 	m_gametime_value = new UI::Textarea(infoBox);
 	infoBox->add(m_gametime_value, UI::Box::AlignRight);
@@ -168,7 +168,7 @@ void GameSummaryScreen::fill_data()
 				 stat_str = _("Resigned");
 				 break;
 			default:
-				stat_str = _("Unkown");
+				stat_str = _("Unknown");
 		}
 		te.set_string(2, stat_str);
 		// Time
