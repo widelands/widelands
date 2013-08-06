@@ -22,7 +22,7 @@
 
 #include <boost/bind.hpp>
 #include <boost/function.hpp>
-#include <boost/signal.hpp>
+#include <boost/signals2.hpp>
 
 #include "constants.h"
 #include "ui_basic/panel.h"
@@ -85,9 +85,9 @@ struct Button : public NamedPanel {
 	// If no background is drawn, the button is drawn over the current background
 	void set_draw_flat_background(bool set);
 
-	boost::signal<void ()> sigclicked;
-	boost::signal<void ()> sigmousein;
-	boost::signal<void ()> sigmouseout;
+	boost::signals2::signal<void ()> sigclicked;
+	boost::signals2::signal<void ()> sigmousein;
+	boost::signals2::signal<void ()> sigmouseout;
 
 protected:
 	virtual void clicked() {} /// Override this to react on the click.

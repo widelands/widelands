@@ -29,6 +29,7 @@
 #include "graphic/image_loader_impl.h"
 #include "graphic/image_transformations.h"
 #include "graphic/in_memory_image.h"
+#include "graphic/surface.h"
 #include "i18n.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "log.h"
@@ -105,7 +106,8 @@ Fullscreen_Menu_LoadGame::Fullscreen_Menu_LoadGame
 		(this, get_w() * 71 / 100, get_h() * 10 / 20,
 		 get_w() * 15 / 100, get_w() * 15 / 100, nullptr),
 	m_settings(gsp),
-	m_ctrl(gc)
+	m_ctrl(gc),
+	m_image_loader(new ImageLoaderImpl())
 {
 	m_back.sigclicked.connect(boost::bind(&Fullscreen_Menu_LoadGame::end_modal, boost::ref(*this), 0));
 	m_ok.sigclicked.connect(boost::bind(&Fullscreen_Menu_LoadGame::clicked_ok, boost::ref(*this)));
@@ -240,19 +242,19 @@ void Fullscreen_Menu_LoadGame::map_selected(uint32_t selected)
 		// Load the new one
 		if (!minimap_path.empty()) {
 			try {
-				// NOCOM(#cghislai): you leak ill here
-				ImageLoaderImpl* ill = new ImageLoaderImpl();
-				Surface * surf = ill->load(minimap_path);
-				const Image* im = new_in_memory_image("minimap", surf);
-				double scale = double(m_minimap_icon.get_w()) / im->width();
-				double scaleY = double(m_minimap_icon.get_h()) / im->height();
+				std::unique_ptr<Surface> surface(m_image_loader->load(minimap_path));
+				m_minimap_image.reset(new_in_memory_image("minimap", surface.release()));
+				double scale = double(m_minimap_icon.get_w()) / m_minimap_image->width();
+				double scaleY = double(m_minimap_icon.get_h()) / m_minimap_image->height();
 				if (scaleY < scale) {
 					scale = scaleY;
 				}
-				uint16_t w = scale * im->width();
-				uint16_t h = scale * im->height();
-				const Image* resized = ImageTransformations::resize(im, w, h);
-				m_minimap_image.reset(im);
+				uint16_t w = scale * m_minimap_image->width();
+				uint16_t h = scale * m_minimap_image->height();
+				const Image* resized = ImageTransformations::resize(m_minimap_image.get(), w, h);
+				// keeps our in_memory_image around and give to icon the one
+				// from resize that is handled by the cache. It is still linked to our
+				// surface
 				m_minimap_icon.setIcon(resized);
 			} catch (...) {
 			}

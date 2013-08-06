@@ -65,9 +65,9 @@ struct BuildGrid : public UI::Icon_Grid {
 		 int32_t x, int32_t y,
 		 int32_t cols);
 
-	boost::signal<void (Widelands::Building_Index::value_t)> buildclicked;
-	boost::signal<void (Widelands::Building_Index::value_t)> buildmouseout;
-	boost::signal<void (Widelands::Building_Index::value_t)> buildmousein;
+	boost::signals2::signal<void (Widelands::Building_Index::value_t)> buildclicked;
+	boost::signals2::signal<void (Widelands::Building_Index::value_t)> buildmouseout;
+	boost::signals2::signal<void (Widelands::Building_Index::value_t)> buildmousein;
 
 	void add(Widelands::Building_Index::value_t);
 

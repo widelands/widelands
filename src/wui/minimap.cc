@@ -65,19 +65,19 @@ void MiniMap::View::draw(RenderTarget & dst)
 {
 	MiniMapRenderer mmr;
 
-	std::unique_ptr<Surface> surface = mmr.get_minimap_image
+	std::unique_ptr<Surface> surface
+		(mmr.get_minimap_image
 			(m_ibase.egbase(),
 			m_ibase.get_player(),
 			Rect(0, 0, dst.get_rect().w, dst.get_rect().h),
 			(*m_flags) & (MiniMap::Zoom2) ?
 				Point((m_viewx - get_w() / 4), (m_viewy - get_h() / 4)):
 				Point((m_viewx - get_w() / 2), (m_viewy - get_h() / 2)),
-			*m_flags);
+			*m_flags));
 	// Give ownership of the surface to the new image
-	// NOCOM(#cghislai): why not unique_ptr? explicit deletes tend to get deleted by accident, smart pointers always do their job.
-	const Image* im = new_in_memory_image("minimap", surface.release());
-	dst.blit(Point(), im);
-	delete im;
+	std::unique_ptr<const Image> im(new_in_memory_image("minimap", surface.release()));
+	dst.blit(Point(), im.get());
+	im.reset();
 }
 
 

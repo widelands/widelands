@@ -35,6 +35,7 @@
 #include "logic/player.h"
 #include "upcast.h"
 #include "wui/mapviewpixelconstants.h"
+#include "wui/mapviewpixelfunctions.h"
 #include "wui/minimap.h"
 #include "wui/overlay_manager.h"
 
@@ -43,13 +44,40 @@ using namespace Widelands;
 /**
  * Renders a minimap and return a pointer to the created surface.
  */
-// NOCOM(#cghislai): same comment as below about smart pointer return.
-std::unique_ptr<Surface> MiniMapRenderer::get_minimap_image
+Surface* MiniMapRenderer::get_minimap_image
 	(const Editor_Game_Base& egbase, const Player* player, Rect rect, Point viewpoint, uint32_t flags)
 {
-	std::unique_ptr<Surface> minimap_surf = draw_minimap
-		(egbase, player, rect, viewpoint, flags);
+	Surface* minimap_surf = draw_minimap(egbase, player, rect, viewpoint, flags);
 	return minimap_surf;
+}
+
+void MiniMapRenderer::write_minimap_image
+	(const Editor_Game_Base& egbase, const Player* player, Point viewpoint, uint32_t flags,
+	 ::StreamWrite* const streamwrite)
+{
+	assert(streamwrite != nullptr);
+	// map dimension
+	const int16_t map_w = egbase.get_map().get_width();
+	const int16_t map_h = egbase.get_map().get_height();
+	const int32_t maxx = MapviewPixelFunctions::get_map_end_screen_x(egbase.get_map());
+	const int32_t maxy = MapviewPixelFunctions::get_map_end_screen_y(egbase.get_map());
+	// adjust the viewpoint top topleft in map coords
+	viewpoint.x += g_gr->get_xres() / 2;
+	if (viewpoint.x >= maxx)
+		viewpoint.x -= maxx;
+	viewpoint.y += g_gr->get_yres() / 2;
+	if (viewpoint.y >= maxy)
+		viewpoint.y -= maxy;
+	viewpoint.x /= TRIANGLE_WIDTH;
+	viewpoint.y /= TRIANGLE_HEIGHT;
+	viewpoint.x -= map_w / 2;
+	viewpoint.y -= map_h / 2;
+	// Render minimap
+	std::unique_ptr<Surface> surface
+		(get_minimap_image(egbase, player, Rect(0, 0, map_w, map_h), viewpoint, flags));
+	std::unique_ptr<const Image> image(new_in_memory_image("minimap", surface.release()));
+	g_gr->save_png(image.get(), streamwrite);
+	image.reset();
 }
 
 /*
@@ -318,8 +346,7 @@ Draw a minimap into the given rectangle of the bitmap.
 viewpt is the field at the top left of the rectangle.
 ===============
 */
-// NOCOM(#cghislai): imho you should not pass around smart pointers. ownership is more explicit if you pass pointers directly - then there is only ever one smart_pointer which defines ownership. Here, I would just return the created object - the caller will always be interested in the returned object as there are no side effects.
-std::unique_ptr<Surface> MiniMapRenderer::draw_minimap
+Surface* MiniMapRenderer::draw_minimap
 	(const Widelands::Editor_Game_Base &       egbase,
 	 Widelands::Player           const * const player,
 	 Rect                                const rc,
@@ -357,6 +384,5 @@ std::unique_ptr<Surface> MiniMapRenderer::draw_minimap
 
 	surface->unlock(Surface::Unlock_Update);
 
-	std::unique_ptr<Surface> minimap_surface(surface);
-	return minimap_surface;
+	return surface;
 }
