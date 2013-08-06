@@ -19,7 +19,7 @@
 #ifndef UI_SLIDER_H
 #define UI_SLIDER_H
 
-#include <boost/signal.hpp>
+#include <boost/signals2.hpp>
 
 #include "graphic/font.h"
 #include "ui_basic/panel.h"
@@ -85,8 +85,8 @@ private :
 	void set_highlighted(bool highlighted);
 
 public:
-	boost::signal<void ()> changed;
-	boost::signal<void (int32_t)> changedto;
+	boost::signals2::signal<void ()> changed;
+	boost::signals2::signal<void (int32_t)> changedto;
 
 private:
 	int32_t m_min_value;          //  cursor values
@@ -195,8 +195,8 @@ struct DiscreteSlider : public Panel {
 
 	void set_labels(std::vector<std::string>);
 
-	boost::signal<void ()> changed;
-	boost::signal<void (int32_t)> changedto;
+	boost::signals2::signal<void ()> changed;
+	boost::signals2::signal<void (int32_t)> changedto;
 
 protected:
 	virtual void draw(RenderTarget & dst);

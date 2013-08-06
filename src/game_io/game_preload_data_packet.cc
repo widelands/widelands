@@ -58,7 +58,7 @@ void Game_Preload_Data_Packet::Read
 				m_player_nr  = s.get_safe_int   ("player_nr");
 			}
 			if (packet_version < 3) {
-				m_win_condition = _("Endless game");
+				m_win_condition = _("Endless Game");
 			} else if (packet_version < 4) {
 				// win condition were (sometimes?) stored as filename
 				m_win_condition = s.get_safe_string("win_condition");

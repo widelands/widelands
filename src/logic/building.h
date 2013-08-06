@@ -24,7 +24,7 @@
 #include <string>
 #include <vector>
 
-#include <boost/signal.hpp>
+#include <boost/signals2.hpp>
 
 #include "ai/ai_hints.h"
 #include "logic/buildcost.h"
@@ -261,7 +261,7 @@ public:
 
 	void    add_worker(Worker &);
 	void remove_worker(Worker &);
-	mutable boost::signal<void ()> workers_changed;
+	mutable boost::signals2::signal<void ()> workers_changed;
 
 	void send_message
 		(Game & game,
@@ -308,7 +308,7 @@ protected:
 	bool m_seeing;
 
 	// Signals connected for the option window
-	std::vector<boost::signals::connection> options_window_connections;
+	std::vector<boost::signals2::connection> options_window_connections;
 
 	// The former buildings descrs, with the current one in last position.
 	FormerBuildings m_old_buildings;

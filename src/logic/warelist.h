@@ -25,7 +25,7 @@
 
 #include <SDL.h>
 #include <boost/bind.hpp>
-#include <boost/signal.hpp>
+#include <boost/signals2.hpp>
 
 #include "logic/widelands.h"
 
@@ -62,7 +62,7 @@ struct WareList {
 	bool operator== (const WareList &)    const;
 	bool operator!= (const WareList & wl) const {return not (*this == wl);}
 
-	mutable boost::signal<void ()> changed;
+	mutable boost::signals2::signal<void ()> changed;
 
 private:
 	vector_type m_wares;

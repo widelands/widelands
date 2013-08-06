@@ -72,10 +72,6 @@ AbstractWaresDisplay::AbstractWaresDisplay
 	m_selection_anchor(Widelands::Ware_Index::Null()),
 	m_callback_function(callback_function)
 {
-	//resize the configuration of our wares if they won't fit in the current window
-	int number = (g_gr->get_yres() - 160) / (WARE_MENU_PIC_HEIGHT + WARE_MENU_INFO_SIZE + WARE_MENU_PIC_PAD_Y);
-	const_cast<Widelands::Tribe_Descr &>(m_tribe).resize_ware_orders(number);
-
 	// Find out geometry from icons_order
 	unsigned int columns = icons_order().size();
 	unsigned int rows = 0;
@@ -275,7 +271,7 @@ void AbstractWaresDisplay::layout()
 
 void WaresDisplay::remove_all_warelists() {
 	m_warelists.clear();
-	BOOST_FOREACH(boost::signals::connection& c, connections_)
+	BOOST_FOREACH(boost::signals2::connection& c, connections_)
 		c.disconnect();
 	connections_.clear();
 	update();

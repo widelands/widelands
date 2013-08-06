@@ -20,7 +20,7 @@
 #include "game_io/game_loader.h"
 
 #include <boost/bind.hpp>
-#include <boost/signal.hpp>
+#include <boost/signals2.hpp>
 
 #include "game_io/game_cmd_queue_data_packet.h"
 #include "game_io/game_game_class_data_packet.h"
