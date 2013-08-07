@@ -21,6 +21,7 @@
 #define UI_ICON_H
 
 #include "ui_basic/panel.h"
+#include "rgbcolor.h"
 
 namespace UI {
 
@@ -34,11 +35,15 @@ struct Icon : public Panel {
 		 const Image* picture_id);
 
 	void setIcon(const Image* picture_id);
+	void setFrame(const RGBColor& color);
+
 	virtual void draw(RenderTarget &);
 
 private:
 	const Image* m_pic;
-	int32_t   m_w, m_h;
+	int32_t      m_w, m_h;
+	bool         m_draw_frame;
+	RGBColor    m_framecolor;
 };
 
 }
