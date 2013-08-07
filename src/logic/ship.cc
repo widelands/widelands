@@ -675,13 +675,38 @@ void Ship::exp_explore_island (Game &, bool clockwise) {
 /// Cancels a currently running expedition
 /// @note only called via player command
 void Ship::exp_cancel (Game & game) {
-	;
+	// Running colonization has the highest priority before cancelation
+	// + cancelation only works if an expedition is actually running
+	if ((m_ship_state == EXP_COLONIZING) || m_ship_state == TRANSPORT)
+		return;
+	// We declare the ship to be in TRANSPORT mode and give control to the fleet
+	m_ship_state = TRANSPORT;
+	set_destination(game, *m_fleet->get_arbitrary_dock());
+	// Some cleanups need to be done, as the workers do not have a destination
+	for (int i = m_items.size() - 1; i >= 0; --i) {
+		WareInstance * ware;
+		Worker * worker;
+		m_items.at(i).get(game, ware, worker);
+		if (worker) {
+			worker->set_economy(nullptr);
+			worker->reset_tasks(game);
+		} else {
+			assert(ware);
+		}
+	}
+	// And finally update our ship window
+	if (upcast(Interactive_GameBase, igb, game.get_ibase()))
+		refresh_window(*igb);
 }
 
 /// Sinks the ship
 /// @note only called via player command
 void Ship::sink_ship (Game & game) {
-	;
+	// Running colonization has the highest priority
+	if (m_ship_state == EXP_COLONIZING)
+		return;
+	// Finally remove the ship from the map
+	remove(game);
 }
 
 void Ship::log_general_info(const Editor_Game_Base & egbase)
