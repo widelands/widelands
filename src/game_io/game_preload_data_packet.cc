@@ -153,7 +153,7 @@ void Game_Preload_Data_Packet::Write
 	MiniMapRenderer mmr;
 	const uint32_t flags = MiniMap::Owner | MiniMap::Bldns | MiniMap::Terrn;
 	const Point& vp = ipl->get_viewpoint();
-	std::unique_ptr<::StreamWrite> sw(fs.OpenStreamWrite(MINIMAP_FILENAME));
+	std::unique_ptr< ::StreamWrite> sw(fs.OpenStreamWrite(MINIMAP_FILENAME));
 	if (sw.get() != nullptr) {
 		mmr.write_minimap_image(game, &ipl->player(), vp, flags, sw.get());
 	}
