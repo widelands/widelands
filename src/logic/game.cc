@@ -913,6 +913,18 @@ void Game::send_player_ship_explore_island(Ship & ship, bool cw)
 			(get_gametime(), ship.get_economy()->owner().player_number(), ship.serial(), cw));
 }
 
+void Game::send_player_sink_ship(Ship & ship) {
+	send_player_command
+		(*new Cmd_ShipSink
+			(get_gametime(), ship.get_economy()->owner().player_number(), ship.serial()));
+}
+
+void Game::send_player_cancel_expedition_ship(Ship & ship) {
+	send_player_command
+		(*new Cmd_ShipCancelExpedition
+			(get_gametime(), ship.get_economy()->owner().player_number(), ship.serial()));
+}
+
 
 /**
  * Sample global statistics for the game.

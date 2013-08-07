@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2010 by the Widelands Development Team
+ * Copyright (C) 2010, 2013 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef _BUILDINGCONFIRM_H_
-#define _BUILDINGCONFIRM_H_
+#ifndef _ACTIONCONFIRM_H_
+#define _ACTIONCONFIRM_H_
 
 struct Interactive_Player;
 
@@ -26,8 +26,10 @@ namespace Widelands {
 class Building;
 struct Building_Index;
 struct PlayerImmovable;
+struct Ship;
 }
 
+// Building confirm windows
 void show_bulldoze_confirm
 	(Interactive_Player & player,
 	 Widelands::Building & building,
@@ -42,4 +44,13 @@ void show_enhance_confirm
 	 Widelands::Building & building,
 	 const Widelands::Building_Index & id);
 
-#endif // _BUILDINGCONFIRM_H_
+// Ship confirm windows
+void show_ship_sink_confirm
+	(Interactive_Player & player,
+	 Widelands::Ship & ship);
+
+void show_ship_cancel_expedition_confirm
+	(Interactive_Player & player,
+	 Widelands::Ship & ship);
+
+#endif // _ACTIONCONFIRM_H_

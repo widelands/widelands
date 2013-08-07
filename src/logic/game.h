@@ -171,6 +171,8 @@ struct Game : Editor_Game_Base {
 	void send_player_ship_scout_direction(Ship &, uint8_t);
 	void send_player_ship_construct_port(Ship &, Coords);
 	void send_player_ship_explore_island(Ship &, bool);
+	void send_player_sink_ship(Ship &);
+	void send_player_cancel_expedition_ship(Ship &);
 
 	Interactive_Player * get_ipl();
 

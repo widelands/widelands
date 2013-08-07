@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2011 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2011, 2013 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -39,8 +39,8 @@
 #include "ui_basic/textarea.h"
 #include "ui_basic/unique_window.h"
 #include "upcast.h"
+#include "wui/actionconfirm.h"
 #include "wui/attack_box.h"
-#include "wui/buildingconfirm.h"
 #include "wui/game_debug_ui.h"
 #include "wui/interactive_player.h"
 #include "wui/military_box.h"

@@ -155,6 +155,9 @@ struct Ship : Bob {
 	void exp_construct_port (Game &, const Coords&);
 	void exp_explore_island (Game &, bool);
 
+	void exp_cancel (Game &);
+	void sink_ship  (Game &);
+
 private:
 	friend struct Fleet;
 	friend struct ShipWindow;

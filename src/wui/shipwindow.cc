@@ -19,8 +19,6 @@
 
 #include "logic/ship.h"
 
-#include "ui_basic/box.h"
-
 #include "economy/economy.h"
 #include "economy/portdock.h"
 #include "economy/ware_instance.h"
@@ -28,12 +26,17 @@
 #include "logic/player.h"
 #include "logic/warehouse.h"
 #include "logic/worker.h"
+#include "ui_basic/box.h"
 #include "upcast.h"
+#include "wui/actionconfirm.h"
 #include "wui/interactive_gamebase.h"
+#include "wui/interactive_player.h"
 #include "wui/itemwaresdisplay.h"
 
 static const char pic_goto[] = "pics/menu_ship_goto.png";
 static const char pic_destination[] = "pics/menu_ship_destination.png";
+static const char pic_sink[]     = "pics/menu_ship_sink.png";
+static const char pic_cancel_expedition[] = "pics/menu_ship_cancel_expedition.png";
 static const char pic_explore_cw[]  = "pics/ship_explore_island_cw.png";
 static const char pic_explore_ccw[] = "pics/ship_explore_island_ccw.png";
 static const char pic_scout_nw[] = "pics/ship_scout_nw.png";
@@ -64,6 +67,8 @@ struct ShipWindow : UI::Window {
 
 	void act_goto();
 	void act_destination();
+	void act_sink();
+	void act_cancel_expedition();
 	void act_scout_towards(uint8_t);
 	void act_construct_port();
 	void act_explore_island(bool);
@@ -74,6 +79,8 @@ private:
 
 	UI::Button * m_btn_goto;
 	UI::Button * m_btn_destination;
+	UI::Button * m_btn_sink;
+	UI::Button * m_btn_cancel_expedition;
 	UI::Button * m_btn_explore_island_cw;
 	UI::Button * m_btn_explore_island_ccw;
 	UI::Button * m_btn_scout[LAST_DIRECTION]; // format: DIRECTION - 1, as 0 is normally the current location.
@@ -179,6 +186,17 @@ ShipWindow::ShipWindow(Interactive_GameBase & igb, Ship & ship) :
 	m_btn_destination->set_enabled(false);
 	buttons->add(m_btn_destination, 0, false);
 
+	m_btn_sink =
+		make_button
+			(buttons, "sink", _("Sink the ship"), pic_sink, boost::bind(&ShipWindow::act_sink, this));
+	buttons->add(m_btn_sink, 0, false);
+	if (m_ship.get_ship_state() != Ship::TRANSPORT) {
+		m_btn_cancel_expedition =
+			make_button
+				(buttons, "cancel_expedition", _("Cancel the Expedition"), pic_cancel_expedition,
+				boost::bind(&ShipWindow::act_cancel_expedition, this));
+		buttons->add(m_btn_cancel_expedition, 0, false);
+	}
 	set_center_panel(vbox);
 	set_think(true);
 
@@ -196,8 +214,13 @@ ShipWindow::~ShipWindow()
 void ShipWindow::think()
 {
 	UI::Window::think();
+	Interactive_Base * ib = m_ship.get_economy()->owner().egbase().get_ibase();
+	bool can_act = false;
+	if (upcast(Interactive_GameBase, igb, ib))
+		can_act = igb->can_act(m_ship.get_economy()->owner().player_number());
 
 	m_btn_destination->set_enabled(m_ship.get_destination(m_igbase.egbase()));
+	m_btn_sink->set_enabled(can_act);
 
 	m_display->clear();
 	for (uint32_t idx = 0; idx < m_ship.get_nritems(); ++idx) {
@@ -225,12 +248,6 @@ void ShipWindow::think()
 		 * - The "explore island's coast" buttons are only active, if a coast is in vision range (no matter if
 		 *   in waiting or already expedition/scouting mode)
 		 */
-
-		Interactive_Base * ib = m_ship.get_economy()->owner().egbase().get_ibase();
-		bool can_act = false;
-		if (upcast(Interactive_GameBase, igb, ib))
-			can_act = igb->can_act(m_ship.get_economy()->owner().player_number());
-
 		m_btn_construct_port->set_enabled(can_act && (state == Ship::EXP_FOUNDPORTSPACE));
 		bool coast_nearby = false;
 		bool moveable = false;
@@ -243,6 +260,8 @@ void ShipWindow::think()
 		}
 		m_btn_explore_island_cw ->set_enabled(can_act && coast_nearby && (state != Ship::EXP_COLONIZING));
 		m_btn_explore_island_ccw->set_enabled(can_act && coast_nearby && (state != Ship::EXP_COLONIZING));
+		m_btn_sink              ->set_enabled(can_act && (state != Ship::EXP_COLONIZING));
+		m_btn_cancel_expedition ->set_enabled(can_act && (state != Ship::EXP_COLONIZING));
 	}
 }
 
@@ -271,6 +290,29 @@ void ShipWindow::act_destination()
 {
 	if (PortDock * destination = m_ship.get_destination(m_igbase.egbase())) {
 		m_igbase.move_view_to(destination->get_warehouse()->get_position());
+	}
+}
+
+/// Sink the ship if confirmed
+void ShipWindow::act_sink()
+{
+	if (get_key_state(SDLK_LCTRL) or get_key_state(SDLK_RCTRL)) {
+		m_igbase.game().send_player_sink_ship(m_ship);
+	}
+	else {
+		show_ship_sink_confirm(ref_cast<Interactive_Player, Interactive_GameBase>(m_igbase), m_ship);
+	}
+}
+
+/// Cancel expedition if confirmed
+void ShipWindow::act_cancel_expedition()
+{
+	if (get_key_state(SDLK_LCTRL) or get_key_state(SDLK_RCTRL)) {
+		m_igbase.game().send_player_cancel_expedition_ship(m_ship);
+	}
+	else {
+		show_ship_cancel_expedition_confirm
+			(ref_cast<Interactive_Player, Interactive_GameBase>(m_igbase), m_ship);
 	}
 }
 
