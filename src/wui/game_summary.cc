@@ -17,15 +17,13 @@
  *
  */
 
-#include "game_summary.h"
+#include "wui/game_summary.h"
 
+#include <boost/algorithm/string.hpp>
 #include <boost/foreach.hpp>
 #include <boost/format.hpp>
-#include <boost/algorithm/string.hpp>
 
 #include "graphic/graphic.h"
-#include "interactive_gamebase.h"
-#include "interactive_player.h"
 #include "logic/game.h"
 #include "logic/player.h"
 #include "logic/playersmanager.h"
@@ -36,6 +34,8 @@
 #include "ui_basic/textarea.h"
 #include "ui_basic/unique_window.h"
 #include "wlapplication.h"
+#include "wui/interactive_gamebase.h"
+#include "wui/interactive_player.h"
 
 #define PADDING 4
 

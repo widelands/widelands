@@ -24,7 +24,7 @@
 #include <vector>
 
 #include "constants.h"
-#include "widelands.h"
+#include "logic/widelands.h"
 
 namespace Widelands {
 
