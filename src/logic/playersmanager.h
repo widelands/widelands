@@ -20,16 +20,16 @@
 #ifndef PLAYERSMANAGER_H
 #define PLAYERSMANAGER_H
 
-#include "constants.h"
-#include "widelands.h"
 #include <string>
 #include <vector>
 
+#include "constants.h"
+#include "widelands.h"
+
 namespace Widelands {
 
-class Player;
-
 class Editor_Game_Base;
+class Player;
 struct Player;
 
 enum class PlayerEndResult : uint8_t

@@ -16,18 +16,18 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  *
  */
-#include "playersmanager.h"
 
-#include "editor_game_base.h"
-#include "player.h"
-#include "gamesettings.h"
-#include "wexception.h"
-#include "wui/interactive_gamebase.h"
+#include "logic/playersmanager.h"
 
 #include <cstring>
 
-namespace Widelands
-{
+#include "gamesettings.h"
+#include "logic/editor_game_base.h"
+#include "logic/player.h"
+#include "wexception.h"
+#include "wui/interactive_gamebase.h"
+
+namespace Widelands {
 
 Players_Manager::Players_Manager(Editor_Game_Base& egbase) :
 m_egbase(egbase),
@@ -55,7 +55,7 @@ void Players_Manager::cleanup()
 void Players_Manager::remove_player(Player_Number plnum)
 {
 	assert(1 <= plnum);
-	assert     (plnum <= MAX_PLAYERS);
+	assert(plnum <= MAX_PLAYERS);
 
 	Player * & p = m_players[plnum - 1];
 	if (p) {
@@ -120,4 +120,4 @@ void Players_Manager::add_player_end_status(const PlayerEndStatus& status) throw
 }
 
 
-}
+}  // namespace Widelands
