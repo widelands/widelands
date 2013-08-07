@@ -37,6 +37,7 @@
 #include "logic/item_ware_descr.h"
 #include "logic/mapregion.h"
 #include "logic/player.h"
+#include "logic/playersmanager.h"
 #include "logic/roadtype.h"
 #include "logic/tribe.h"
 #include "logic/worker.h"
@@ -47,6 +48,8 @@
 #include "ui_basic/progresswindow.h"
 #include "upcast.h"
 #include "wexception.h"
+#include "wui/interactive_base.h"
+#include "wui/interactive_gamebase.h"
 
 namespace Widelands {
 
@@ -60,6 +63,7 @@ initialization
 Editor_Game_Base::Editor_Game_Base(LuaInterface * lua_interface) :
 m_gametime          (0),
 m_lua               (lua_interface),
+m_player_manager    (new Players_Manager(*this)),
 m_ibase             (0),
 m_map               (0),
 m_lasttrackserial   (0)
@@ -69,16 +73,12 @@ m_lasttrackserial   (0)
 
 	g_sound_handler.m_egbase = this;
 
-	memset(m_players, 0, sizeof(m_players));
 }
 
 
 Editor_Game_Base::~Editor_Game_Base() {
-	const Player * const * const players_end = m_players + MAX_PLAYERS;
-	for (Player * * p = m_players; p < players_end; ++p)
-		delete *p;
-
 	delete m_map;
+	delete m_player_manager.release();
 
 	container_iterate_const(Tribe_Vector, m_tribes, i)
 		delete *i.current;
@@ -116,23 +116,17 @@ void Editor_Game_Base::receive(const NoteFieldTransformed & note)
 			plr->rediscover_node(*m_map, (*m_map)[0], note.fc);
 }
 
-void Editor_Game_Base::remove_player(const Player_Number plnum) {
-	assert(1 <= plnum);
-	assert     (plnum <= MAX_PLAYERS);
-
-	Player * & p = m_players[plnum - 1];
-	delete p;
-	p = 0;
+Interactive_GameBase* Editor_Game_Base::get_igbase()
+{
+	return dynamic_cast<Interactive_GameBase *>(get_ibase());
 }
 
+/// @see PlayerManager class
+void Editor_Game_Base::remove_player(Player_Number plnum) {
+	m_player_manager->remove_player(plnum);
+}
 
-/*
-===============
-Create the player structure for the given plnum.
-Note that AI player structures and the Interactive_Player are created when
-the game starts. Similar for remote players.
-===============
-*/
+/// @see PlayerManager class
 Player * Editor_Game_Base::add_player
 	(Player_Number       const player_number,
 	 uint8_t             const initialization_index,
@@ -140,19 +134,10 @@ Player * Editor_Game_Base::add_player
 	 const std::string &       name,
 	 TeamNumber                team)
 {
-	assert(1 <= player_number);
-	assert(player_number <= MAX_PLAYERS);
-
-	Player * & p = m_players[player_number - 1];
-	delete p;
-	p = new Player
-		(*this,
-		 player_number,
-		 initialization_index,
-		 manually_load_tribe(tribe),
-		 name);
-	p->set_team_number(team);
-	return p;
+	return
+		m_player_manager->add_player
+			(player_number, initialization_index, tribe,
+			name, team);
 }
 
 /// Load the given tribe into structure
@@ -174,6 +159,18 @@ const Tribe_Descr & Editor_Game_Base::manually_load_tribe
 	return result;
 }
 
+Player* Editor_Game_Base::get_player(const int32_t n) const
+{
+	return m_player_manager->get_player(n);
+}
+
+Player& Editor_Game_Base::player(const int32_t n) const
+{
+	return m_player_manager->player(n);
+}
+
+
+
 /// Returns a tribe description from the internally loaded list
 const Tribe_Descr * Editor_Game_Base::get_tribe(const char * const tribe) const
 {
@@ -186,23 +183,23 @@ const Tribe_Descr * Editor_Game_Base::get_tribe(const char * const tribe) const
 void Editor_Game_Base::inform_players_about_ownership
 	(Map_Index const i, Player_Number const new_owner)
 {
-	for (Player_Number plnum = 0; plnum < MAX_PLAYERS; ++plnum)
-		if (Player * const p = m_players[plnum]) {
-			Player::Field & player_field = p->m_fields[i];
-			if (1 < player_field.vision)
-				player_field.owner = new_owner;
+	iterate_players_existing_const(plnum, MAX_PLAYERS, *this, p) {
+		Player::Field & player_field = p->m_fields[i];
+		if (1 < player_field.vision) {
+			player_field.owner = new_owner;
 		}
+	}
 }
 void Editor_Game_Base::inform_players_about_immovable
 	(Map_Index const i, Map_Object_Descr const * const descr)
 {
 	if (not Road::IsRoadDescr(descr))
-		for (Player_Number plnum = 0; plnum < MAX_PLAYERS; ++plnum)
-			if (Player * const p = m_players[plnum]) {
-				Player::Field & player_field = p->m_fields[i];
-				if (1 < player_field.vision)
-					player_field.map_object_descr[TCoords<>::None] = descr;
+		iterate_players_existing_const(plnum, MAX_PLAYERS, *this, p) {
+			Player::Field & player_field = p->m_fields[i];
+			if (1 < player_field.vision) {
+				player_field.map_object_descr[TCoords<>::None] = descr;
 			}
+		}
 }
 
 /**
@@ -227,9 +224,9 @@ void Editor_Game_Base::set_map(Map * const new_map) {
 
 
 void Editor_Game_Base::allocate_player_maps() {
-	for (Player_Number i = 0; i < MAX_PLAYERS; ++i)
-		if (m_players[i])
-			m_players[i]->allocate_map();
+	iterate_players_existing(plnum, MAX_PLAYERS, *this, p) {
+		p->allocate_map();
+	}
 }
 
 
@@ -515,11 +512,7 @@ void Editor_Game_Base::cleanup_for_load
 			g_gr->flush_animations(); // flush all world animations
 	}
 
-	const Player * const * const players_end = m_players + MAX_PLAYERS;
-	for (Player * * p = m_players; p < players_end; ++p) {
-		delete *p;
-		*p = 0;
-	}
+	m_player_manager->cleanup();
 
 	if (m_map)
 		m_map->cleanup();
@@ -571,23 +564,20 @@ void Editor_Game_Base::set_road
 	uint8_t const road = f.field->get_roads() & mask;
 	Map_Index const           i = f        .field - &first_field;
 	Map_Index const neighbour_i = neighbour.field - &first_field;
-	for (Player_Number plnum = 0; plnum < MAX_PLAYERS; ++plnum) {
-		if (Player * const p = m_players[plnum]) {
-			Player::Field & first_player_field = *p->m_fields;
-			Player::Field & player_field = (&first_player_field)[i];
-			if
-				(1 < player_field                      .vision
-				 or
-				 1 < (&first_player_field)[neighbour_i].vision)
-			{
-				player_field.roads &= ~mask;
-				player_field.roads |= road;
-			}
+	iterate_players_existing_const(plnum, MAX_PLAYERS, *this, p) {
+		Player::Field & first_player_field = *p->m_fields;
+		Player::Field & player_field = (&first_player_field)[i];
+		if
+			(1 < player_field                      .vision
+				or
+				1 < (&first_player_field)[neighbour_i].vision)
+		{
+			player_field.roads &= ~mask;
+			player_field.roads |= road;
 		}
 	}
 }
 
-// TODO SirVer: clean the functions till END CLEAN up
 /// This unconquers an area. This is only possible, when there is a building
 /// placed on this node.
 void Editor_Game_Base::unconquer_area
@@ -809,7 +799,6 @@ void Editor_Game_Base::cleanup_playerimmovables_area
 	}
 
 	//  fix all immovables
-	//  TODO SirVer: this upcast is so ugly, it makes my head explode
 	upcast(Game, game, this);
 	container_iterate_const(std::vector<PlayerImmovable *>, burnlist, i) {
 		if (upcast(Building, building, *i.current))
@@ -823,8 +812,6 @@ void Editor_Game_Base::cleanup_playerimmovables_area
 			(*i.current)->remove(*this);
 	}
 }
-
-// TODO SirVer: END CLEAN
 
 
 }

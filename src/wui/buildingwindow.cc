@@ -501,7 +501,7 @@ void Building_Window::show_workarea()
 	} else {
 		workarea_info = m_building.descr().m_workarea_info;
 	}
-	if (!workarea_info.size()) {
+	if (!workarea_info.empty()) {
 		return;
 	}
 	m_workarea_job_id = igbase().show_work_area(workarea_info, m_building.get_position());

@@ -30,8 +30,7 @@ return {
 		-- Send congratulations to all remaining players
 		broadcast_win(plrs,
 				won_game.title,
-				won_game.body,
-				{popup = true},
+				won_game.body,{},
 				wc_name, wc_version
 		)
 

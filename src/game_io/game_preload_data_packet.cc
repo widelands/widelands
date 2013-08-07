@@ -22,6 +22,7 @@
 #include "logic/game.h"
 #include "logic/game_data_error.h"
 #include "logic/map.h"
+#include "logic/playersmanager.h"
 #include "profile/profile.h"
 #include "scripting/scripting.h"
 #include "wui/interactive_player.h"
@@ -120,7 +121,7 @@ void Game_Preload_Data_Packet::Write
 			break;
 		}
 	}
-	s.set_int(PLAYERS_AMOUNT_KEY_V4, game.get_number_of_players());
+	s.set_int(PLAYERS_AMOUNT_KEY_V4, game.player_manager()->get_number_of_players());
 
 	std::string bg(map.get_background());
 	if (bg.empty())
