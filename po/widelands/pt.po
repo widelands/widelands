@@ -10,8 +10,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2013-08-06 04:40+0000\n"
-"X-Generator: Launchpad (build 16718)\n"
+"X-Launchpad-Export-Date: 2013-08-07 04:39+0000\n"
+"X-Generator: Launchpad (build 16721)\n"
 "Language: pt\n"
 
 #: ../../src/wui/building_statistics_menu.cc:114
@@ -5842,87 +5842,3 @@ msgstr "nenhuma descrição definida"
 #: ../../src/logic/objective.h:42
 msgid "no descr"
 msgstr "sem descr."
-
-#~ msgid "Resource"
-#~ msgstr "Recurso"
-
-#~ msgid "Bob"
-#~ msgstr "Bob"
-
-#~ msgid "Choose your map!"
-#~ msgstr "Escolhe o teu mapa!"
-
-#~ msgid "Choose saved game!"
-#~ msgstr "Escolhe jogo gravado!"
-
-#, c-format
-#~ msgid "[battle] soldier %u loose battle\n"
-#~ msgstr "[battle] o soldado %u perdeu a batalha\n"
-
-#~ msgid "Immovable"
-#~ msgstr "Amovível"
-
-#~ msgid "Tool Menu"
-#~ msgstr "Menu Ferramentas"
-
-#~ msgid "Resources Tools Options"
-#~ msgstr "Opções das Ferramentas dos Recursos"
-
-#~ msgid "Toolsize Menu"
-#~ msgstr "Menu Tamanho da ferramenta"
-
-#, c-format
-#~ msgid ""
-#~ "The game engine has encountered a logic error. The %s #%u of player %u could "
-#~ "not find a way from (%i, %i) (with %s immovable) to the opponent (%s #%u of "
-#~ "player %u) at (%i, %i) (with %s immovable). The %s will now desert (but will "
-#~ "not be executed). Strange things may happen. No solution for this problem "
-#~ "has been implemented yet. (bug #1951113) (The game has been paused.)"
-#~ msgstr ""
-#~ "O Motor do jogo encontrou um problema lógico. O %s #%u do jogador %u não "
-#~ "conseguiu encontrar uma caminho a partir de (%i, %i) (comh %s amovivel) para "
-#~ "o opositor (%s #%u do jogador %u) em (%i, %i) (com %s amovivel). O %s irá "
-#~ "agora desertar (mas não será executado). Podem acontecer coisas estranhas. "
-#~ "Não foi ainda implementada nenhuma solução para este problema. (bug "
-#~ "#1951113) (O jogo entrou em pausa.)"
-
-#~ msgid "Choose a replay!"
-#~ msgstr "Escolhe uma Repetição!"
-
-#~ msgid "Editor Menu"
-#~ msgstr "Menu do Editor"
-
-#~ msgid "Bobs Menu"
-#~ msgstr "Menu Natureza (bobs)"
-
-#~ msgid "Immovable Bobs Menu"
-#~ msgstr "Menu Natureza (bobs) amovível"
-
-#
-# File: ../../src/network/internet_gaming_messages.cc, line: 48
-# File: ../../src/network/internet_gaming_messages.cc, line: 48
-#~ msgid ""
-#~ "You got disconnected, as you send a superuser command without superuser "
-#~ "permission.This incident will be logged and reported to the administrator."
-#~ msgstr ""
-#~ "Perdeste a ligação, já que mandaste um comando administrativo sem teres os "
-#~ "devidos direitos. Este incidente será guardado e relatado ao administrador."
-
-#
-# File: ../../src/network/internet_gaming.cc, line: 99
-# File: ../../src/network/internet_gaming.cc, line: 116
-#~ msgid "Widelands has not been able to connect to the metaserver."
-#~ msgstr "Widelands não conseguiu ligar-se ao servidor principal."
-
-# File: ../../src/editor/tools/editor_info_tool.cc, line: 99
-# File: ../../src/editor/tools/editor_info_tool.cc, line: 109
-# File: ../../src/wui/game_debug_ui.cc, line: 374
-#, c-format
-#~ msgid "Resource name: %s\n"
-#~ msgstr "Nome do recursos: %s\n"
-
-# File: ../../src/editor/tools/editor_info_tool.cc, line: 103
-# File: ../../src/wui/game_debug_ui.cc, line: 380
-#, c-format
-#~ msgid "Resource amount: %i/%i\n"
-#~ msgstr "Quantidade de recursos: %i/%i\n"

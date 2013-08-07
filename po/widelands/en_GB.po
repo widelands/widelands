@@ -15,8 +15,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2013-08-06 04:41+0000\n"
-"X-Generator: Launchpad (build 16718)\n"
+"X-Launchpad-Export-Date: 2013-08-07 04:40+0000\n"
+"X-Generator: Launchpad (build 16721)\n"
 
 #: ../../src/computer_player.cc:38
 msgid "None"
@@ -5193,75 +5193,3 @@ msgstr "no description defined"
 #: ../../src/logic/objective.h:42
 msgid "no descr"
 msgstr "no descr"
-
-#~ msgid "Editor Menu"
-#~ msgstr "Editor Menu"
-
-#~ msgid "Choose your map!"
-#~ msgstr "Choose your map!"
-
-#~ msgid "Choose saved game!"
-#~ msgstr "Choose saved game!"
-
-#~ msgid "Choose a replay!"
-#~ msgstr "Choose a replay!"
-
-#~ msgid "Tool Menu"
-#~ msgstr "Tool Menu"
-
-#~ msgid "Resources Tools Options"
-#~ msgstr "Resources Tools Options"
-
-#~ msgid "Immovable Bobs Menu"
-#~ msgstr "Immovable Bobs Menu"
-
-#~ msgid "Bobs Menu"
-#~ msgstr "Bobs Menu"
-
-#~ msgid "Immovable"
-#~ msgstr "Immovable"
-
-#~ msgid "Bob"
-#~ msgstr "Bob"
-
-#~ msgid "Resource"
-#~ msgstr "Resource"
-
-#~ msgid "Toolsize Menu"
-#~ msgstr "Toolsize Menu"
-
-#, c-format
-#~ msgid "Resource amount: %i/%i\n"
-#~ msgstr "Resource amount: %i/%i\n"
-
-#, c-format
-#~ msgid "Resource name: %s\n"
-#~ msgstr "Resource name: %s\n"
-
-#~ msgid "Widelands has not been able to connect to the metaserver."
-#~ msgstr "Widelands has not been able to connect to the metaserver."
-
-#, c-format
-#~ msgid "[battle] soldier %u loose battle\n"
-#~ msgstr "[battle] soldier %u lose battle\n"
-
-#~ msgid ""
-#~ "You got disconnected, as you send a superuser command without superuser "
-#~ "permission.This incident will be logged and reported to the administrator."
-#~ msgstr ""
-#~ "You were disconnected because you sent a superuser command without "
-#~ "permission. This will be logged and reported to the administrator."
-
-#, c-format
-#~ msgid ""
-#~ "The game engine has encountered a logic error. The %s #%u of player %u could "
-#~ "not find a way from (%i, %i) (with %s immovable) to the opponent (%s #%u of "
-#~ "player %u) at (%i, %i) (with %s immovable). The %s will now desert (but will "
-#~ "not be executed). Strange things may happen. No solution for this problem "
-#~ "has been implemented yet. (bug #1951113) (The game has been paused.)"
-#~ msgstr ""
-#~ "The game engine has encountered a logic error. The %s #%u of player %u could "
-#~ "not find a way from (%i, %i) (with %s immovable) to the opponent (%s #%u of "
-#~ "player %u) at (%i, %i) (with %s immovable). The %s will now desert (but will "
-#~ "not be executed). Strange things may happen. No solution for this problem "
-#~ "has been implemented yet. (bug #1951113) (The game has been paused.)"

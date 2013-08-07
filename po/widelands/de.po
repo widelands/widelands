@@ -14,8 +14,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2013-08-06 04:39+0000\n"
-"X-Generator: Launchpad (build 16718)\n"
+"X-Launchpad-Export-Date: 2013-08-07 04:38+0000\n"
+"X-Generator: Launchpad (build 16721)\n"
 
 #: ../../src/computer_player.cc:38
 msgid "None"
@@ -5285,81 +5285,3 @@ msgstr "Keine Beschreibung vorhanden."
 #: ../../src/logic/objective.h:42
 msgid "no descr"
 msgstr "(Keine Beschreibung vorhanden.)"
-
-#, c-format
-#~ msgid "[battle] soldier %u loose battle\n"
-#~ msgstr "[Schlacht] Krieger %u verliert Schlacht\n"
-
-#~ msgid "Choose your map!"
-#~ msgstr "Wähle deine Karte!"
-
-#~ msgid "Choose saved game!"
-#~ msgstr "Wähle ein gespeichertes Spiel!"
-
-#~ msgid "Choose a replay!"
-#~ msgstr "Wähle eine Aufnahme!"
-
-#~ msgid "Resources Tools Options"
-#~ msgstr "Optionen: Rohstoffwerkzeug"
-
-#~ msgid "Tool Menu"
-#~ msgstr "Werkzeuge"
-
-#~ msgid "Immovable"
-#~ msgstr "Unbewegte Natur"
-
-#~ msgid "Bob"
-#~ msgstr "Objekt"
-
-#~ msgid "Bobs Menu"
-#~ msgstr "Bewegte Natur"
-
-#~ msgid "Immovable Bobs Menu"
-#~ msgstr "Unbewegte Natur"
-
-#~ msgid "Toolsize Menu"
-#~ msgstr "Werkzeuggröße"
-
-#, c-format
-#~ msgid ""
-#~ "The game engine has encountered a logic error. The %s #%u of player %u could "
-#~ "not find a way from (%i, %i) (with %s immovable) to the opponent (%s #%u of "
-#~ "player %u) at (%i, %i) (with %s immovable). The %s will now desert (but will "
-#~ "not be executed). Strange things may happen. No solution for this problem "
-#~ "has been implemented yet. (bug #1951113) (The game has been paused.)"
-#~ msgstr ""
-#~ "Die Spieleengine hat einen Logikfehler entdeckt. Der/die/das %s #%u vom "
-#~ "Spieler %u konnte keinen Weg von (%i, %i) (mit einem %s Objekt) zum "
-#~ "gegnerischen Objekt bei (%s #%u von Spieler %u) bei (%i, %i) (mit einem %s "
-#~ "Objekt) finden. Der %s wird nun desertieren (aber wird dafür nicht "
-#~ "ausgeführt). Seltsame Sachen können passieren. Bisher wurde keine "
-#~ "Möglichkeit eingebaut, um den Fehler (#1951113) zu beheben. (Das Spiel wurde "
-#~ "pausiert.)"
-
-#~ msgid "Editor Menu"
-#~ msgstr "Editor-Menü"
-
-#~ msgid "Resource"
-#~ msgstr "Ressource"
-
-#~ msgid "Widelands has not been able to connect to the metaserver."
-#~ msgstr "Widelands konnte sich nicht zum Metaserver verbinden."
-
-#, c-format
-#~ msgid "Resource amount: %i/%i\n"
-#~ msgstr "Ressourcen-Menge: %i/%i\n"
-
-#, c-format
-#~ msgid "Resource name: %s\n"
-#~ msgstr "Ressourcen-Name: %s\n"
-
-#~ msgid ""
-#~ "You got disconnected, as you send a superuser command without superuser "
-#~ "permission.This incident will be logged and reported to the administrator."
-#~ msgstr ""
-#~ "Deine Verbindung wurde geschlossen, da du versucht hast, ein Superuser-"
-#~ "Kommando zu senden, ohne die Berechtigung dafür zu haben. Dieser Vorfall "
-#~ "wird gespeichert und dem Administrator gemeldet."
-
-#~ msgid "Endless game"
-#~ msgstr "Endlosspiel"

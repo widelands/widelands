@@ -14,8 +14,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2013-08-06 04:39+0000\n"
-"X-Generator: Launchpad (build 16718)\n"
+"X-Launchpad-Export-Date: 2013-08-07 04:38+0000\n"
+"X-Generator: Launchpad (build 16721)\n"
 
 #: ../../src/computer_player.cc:38
 msgid "None"
@@ -5090,36 +5090,3 @@ msgstr "nincs leírás"
 #: ../../src/logic/objective.h:42
 msgid "no descr"
 msgstr "nincs leírás"
-
-#~ msgid "Choose your map!"
-#~ msgstr "Válaszd ki a térképet!"
-
-#~ msgid "Choose saved game!"
-#~ msgstr "Válaszd ki a mentett játékot!"
-
-#~ msgid "Choose a replay!"
-#~ msgstr "Válaszd ki a felvételt!"
-
-#~ msgid "Bobs Menu"
-#~ msgstr "Állatok"
-
-#~ msgid "Resources Tools Options"
-#~ msgstr "Erőforrás eszközök beállításai"
-
-#~ msgid "Tool Menu"
-#~ msgstr "Eszközök menü"
-
-#~ msgid "Immovable Bobs Menu"
-#~ msgstr "Nem mozgatható tárgyak"
-
-#~ msgid "Toolsize Menu"
-#~ msgstr "Eszközméret"
-
-#~ msgid "Resource"
-#~ msgstr "Forrás"
-
-#~ msgid "Editor Menu"
-#~ msgstr "Szerkesztő menü"
-
-#~ msgid "Widelands has not been able to connect to the metaserver."
-#~ msgstr "A Widelands nem tudott csatlakozni a metakiszolgálóhoz."

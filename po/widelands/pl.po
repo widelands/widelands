@@ -15,8 +15,8 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2013-08-06 04:40+0000\n"
-"X-Generator: Launchpad (build 16718)\n"
+"X-Launchpad-Export-Date: 2013-08-07 04:39+0000\n"
+"X-Generator: Launchpad (build 16721)\n"
 
 #: ../../src/computer_player.cc:38
 msgid "None"
@@ -5225,78 +5225,3 @@ msgstr "nie ustawiono opisu"
 #: ../../src/logic/objective.h:42
 msgid "no descr"
 msgstr "brak opisu"
-
-#~ msgid "Choose saved game!"
-#~ msgstr "Wybierz zapisany stan gry!"
-
-#~ msgid "Editor Menu"
-#~ msgstr "Menu edytora"
-
-#~ msgid "Bobs Menu"
-#~ msgstr "Menu zwierząt"
-
-#~ msgid "Resources Tools Options"
-#~ msgstr "Narzędzie surowców"
-
-#~ msgid "Tool Menu"
-#~ msgstr "Menu narzędzi"
-
-#~ msgid "Immovable"
-#~ msgstr "Obiekty nieruchome"
-
-#~ msgid "Bob"
-#~ msgstr "Bob"
-
-#~ msgid "Resource"
-#~ msgstr "Surowiec"
-
-#~ msgid "Immovable Bobs Menu"
-#~ msgstr "Menu obiektów terenu"
-
-#~ msgid "Toolsize Menu"
-#~ msgstr "Rozmiar pędzla"
-
-#, c-format
-#~ msgid ""
-#~ "The game engine has encountered a logic error. The %s #%u of player %u could "
-#~ "not find a way from (%i, %i) (with %s immovable) to the opponent (%s #%u of "
-#~ "player %u) at (%i, %i) (with %s immovable). The %s will now desert (but will "
-#~ "not be executed). Strange things may happen. No solution for this problem "
-#~ "has been implemented yet. (bug #1951113) (The game has been paused.)"
-#~ msgstr ""
-#~ "Silnik gry napotkał błąd logiczny. %s #%u gracza %u nie mógł znaleźć drogi z "
-#~ "(%i, %i) (z nieruchomym %s) do przeciwnika (%s #%u gracza %u) w (%i, %i) (z "
-#~ "nieruchomym %s). %s ucieknie (lecz nie zostanie zabity). Mogą się dziać "
-#~ "dziwne rzeczy. Nie rozwiązano dotychczas tego problemu. (błąd #1951113) (Gra "
-#~ "została wstrzymana.)"
-
-#, c-format
-#~ msgid "[battle] soldier %u loose battle\n"
-#~ msgstr "[bitwa] żołnierz %u przegrał bitwę\n"
-
-#~ msgid ""
-#~ "You got disconnected, as you send a superuser command without superuser "
-#~ "permission.This incident will be logged and reported to the administrator."
-#~ msgstr ""
-#~ "Zostałeś rozłączony, gdyż wysłałeś komendę administratora bez praw "
-#~ "administratora. Ta próba zostanie zgłoszona administratorowi."
-
-#~ msgid "Widelands has not been able to connect to the metaserver."
-#~ msgstr "Widelands nie był w stanie połączyć się z metaserwerem."
-
-#, c-format
-#~ msgid "Resource amount: %i/%i\n"
-#~ msgstr "Ilość zasobu: %i/%i\n"
-
-#, c-format
-#~ msgid "Resource name: %s\n"
-#~ msgstr "Nazwa zasobu: %s\n"
-
-#~ msgid "Choose your map!"
-#~ msgstr "Wybierz mapę!"
-
-#~ msgid "Choose a replay!"
-#~ msgstr "Wybierz powtórkę!"
-
-#~ msgid "Endless game"
-#~ msgstr "Niekończąca się gra"

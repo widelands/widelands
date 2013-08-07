@@ -14,8 +14,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 1 : (n>=2 && n<=4) ? 2 : 0;\n"
-"X-Launchpad-Export-Date: 2013-08-06 04:41+0000\n"
-"X-Generator: Launchpad (build 16718)\n"
+"X-Launchpad-Export-Date: 2013-08-07 04:40+0000\n"
+"X-Generator: Launchpad (build 16721)\n"
 "X-Poedit-Country: czech republic\n"
 "X-Poedit-Language: czech\n"
 
@@ -5206,76 +5206,3 @@ msgstr "bez popisu"
 #: ../../src/logic/objective.h:42
 msgid "no descr"
 msgstr "bez popisu"
-
-#~ msgid "Choose your map!"
-#~ msgstr "Vyber si mapu!"
-
-#~ msgid "Bobs Menu"
-#~ msgstr "Menu bobov"
-
-#~ msgid "Resources Tools Options"
-#~ msgstr "Voľby nástrojov zdrojov"
-
-#~ msgid "Tool Menu"
-#~ msgstr "Menu nástroja"
-
-#~ msgid "Toolsize Menu"
-#~ msgstr "Menu veľkosti nástroja"
-
-#~ msgid "Editor Menu"
-#~ msgstr "Menu editora"
-
-#~ msgid "Choose a replay!"
-#~ msgstr "Vyberte nahrávku!"
-
-#~ msgid "Immovable"
-#~ msgstr "Nehybné"
-
-#~ msgid "Resource"
-#~ msgstr "Zdroj"
-
-#~ msgid "Choose saved game!"
-#~ msgstr "Vyberte uloženú hru!"
-
-#, c-format
-#~ msgid "[battle] soldier %u loose battle\n"
-#~ msgstr "[bitka] vojak %u prehral boj\n"
-
-#~ msgid "Widelands has not been able to connect to the metaserver."
-#~ msgstr "Widelands sa nedokázal pripojiť na metaserver."
-
-#~ msgid "Bob"
-#~ msgstr "Bob"
-
-#, c-format
-#~ msgid ""
-#~ "The game engine has encountered a logic error. The %s #%u of player %u could "
-#~ "not find a way from (%i, %i) (with %s immovable) to the opponent (%s #%u of "
-#~ "player %u) at (%i, %i) (with %s immovable). The %s will now desert (but will "
-#~ "not be executed). Strange things may happen. No solution for this problem "
-#~ "has been implemented yet. (bug #1951113) (The game has been paused.)"
-#~ msgstr ""
-#~ "Herný engine narazil na logickú chybu. %s #%u hráča %u nemohol nájsť cestu "
-#~ "od (%i, %i) (s nehnuteľnosťou %s) k protivníkovi (%s #%u hráča %u) at (%i, "
-#~ "%i) (s nehnuteľnosťou %s). %s teraz bude dezertovať (ale nebude vykonaný). "
-#~ "Môžu nastať čudné veci. Pre tento problém sa ešte neuplatnilo žiadne "
-#~ "riešenie. (chyba #1951113) (Hra bola pozastavená.)"
-
-#~ msgid ""
-#~ "You got disconnected, as you send a superuser command without superuser "
-#~ "permission.This incident will be logged and reported to the administrator."
-#~ msgstr ""
-#~ "Boli ste odpojený(á), keďže ste poslali superpoužívateľský príkaz bez "
-#~ "oprávnení superpoužívateľa. Táto udalosť bude zaznamenaná a nahlásená "
-#~ "administrátorovi."
-
-#~ msgid "Immovable Bobs Menu"
-#~ msgstr "Menu nehnuteľných bobov"
-
-#, c-format
-#~ msgid "Resource amount: %i/%i\n"
-#~ msgstr "Množstvo zdroja: %i/%i\n"
-
-#, c-format
-#~ msgid "Resource name: %s\n"
-#~ msgstr "Názov zdroja: %s\n"

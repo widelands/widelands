@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2013-08-05 20:27-0700\n"
-"PO-Revision-Date: 2013-08-03 20:17+0000\n"
+"PO-Revision-Date: 2013-08-06 17:52+0000\n"
 "Last-Translator: Hans Joachim Desserud <Unknown>\n"
 "Language-Team: Norwegian Bokmal <nb@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2013-08-06 04:40+0000\n"
-"X-Generator: Launchpad (build 16718)\n"
+"X-Launchpad-Export-Date: 2013-08-07 04:39+0000\n"
+"X-Generator: Launchpad (build 16721)\n"
 
 #: ../../src/computer_player.cc:38
 msgid "None"
@@ -853,7 +853,7 @@ msgstr "spiller info: %s"
 
 #: ../../src/game_io/game_preload_data_packet.cc:60
 msgid "Endless Game"
-msgstr ""
+msgstr "Endeløst spill"
 
 #: ../../src/game_io/game_preload_data_packet.cc:65
 #: ../../src/logic/game.cc:251 ../../src/logic/game.cc:349
@@ -2153,7 +2153,7 @@ msgstr "Problem ved tilkobling"
 
 #: ../../src/network/internet_gaming.cc:116
 msgid "Widelands could not connect to the metaserver."
-msgstr ""
+msgstr "Widelands kunne ikke koble til metatjeneren."
 
 #: ../../src/network/internet_gaming.cc:122 ../../src/network/netclient.cc:100
 msgid "Could not establish connection to host"
@@ -2788,7 +2788,7 @@ msgstr "[Ugyldig element]"
 #: ../../src/ui_fsmenu/editor_mapselect.cc:52
 #: ../../src/ui_fsmenu/mapselect.cc:54
 msgid "Choose a map"
-msgstr ""
+msgstr "Velg et kart"
 
 #: ../../src/ui_fsmenu/campaign_select.cc:267
 #: ../../src/ui_fsmenu/editor_mapselect.cc:56
@@ -2970,7 +2970,7 @@ msgstr "Klienter"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:168 ../../src/ui_fsmenu/launchSPG.cc:103
 msgid "Type of game"
-msgstr ""
+msgstr "Spilltype"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:214 ../../src/ui_fsmenu/launchSPG.cc:284
 msgid "(no map)"
@@ -3235,7 +3235,7 @@ msgstr "Slett"
 
 #: ../../src/ui_fsmenu/loadgame.cc:76
 msgid "Choose saved game"
-msgstr ""
+msgstr "Velg et lagret spill"
 
 #: ../../src/ui_fsmenu/loadgame.cc:80 ../../src/ui_fsmenu/loadreplay.cc:71
 #: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:57
@@ -3264,7 +3264,7 @@ msgstr "Ukjent spilltid"
 
 #: ../../src/ui_fsmenu/loadreplay.cc:67
 msgid "Choose a replay"
-msgstr ""
+msgstr "Velg en reprise"
 
 #: ../../src/ui_fsmenu/main.cc:40
 msgid "Play Tutorial"
@@ -3723,7 +3723,7 @@ msgstr ""
 
 #: ../../src/wui/buildingwindow.cc:240 ../../src/wui/fieldaction.cc:112
 msgid "Construction costs:"
-msgstr ""
+msgstr "Byggekostnader:"
 
 #: ../../src/wui/buildingwindow.cc:261
 msgid "Destroy"
@@ -3788,11 +3788,11 @@ msgstr "Bygg store bygninger"
 
 #: ../../src/wui/fieldaction.cc:250
 msgid "Build port buildings"
-msgstr ""
+msgstr "Bygg havnebygg"
 
 #: ../../src/wui/fieldaction.cc:282
 msgid "Action"
-msgstr ""
+msgstr "Handling"
 
 #: ../../src/wui/fieldaction.cc:367
 msgid "Build road"
@@ -3800,7 +3800,7 @@ msgstr "Bygg vei"
 
 #: ../../src/wui/fieldaction.cc:379
 msgid "Destroy this flag"
-msgstr ""
+msgstr "Ødelegg dette flagget"
 
 #: ../../src/wui/fieldaction.cc:387
 msgid "Configure economy"
@@ -3816,7 +3816,7 @@ msgstr "Plant et flagg"
 
 #: ../../src/wui/fieldaction.cc:418
 msgid "Destroy a road"
-msgstr ""
+msgstr "Ødelegg en vei"
 
 #: ../../src/wui/fieldaction.cc:436
 msgid "Watch field in a separate window"
@@ -3877,12 +3877,12 @@ msgstr "Feilsøkingsfelt"
 #: ../../src/wui/game_debug_ui.cc:375
 #, c-format
 msgid "Resource: %s\n"
-msgstr ""
+msgstr "Resssurs: %s\n"
 
 #: ../../src/wui/game_debug_ui.cc:381
 #, c-format
 msgid "  Amount: %i/%i\n"
-msgstr ""
+msgstr "  Mengde: %i/%i\n"
 
 #: ../../src/wui/game_main_menu.cc:42
 #: ../../src/editor/ui_menus/editor_main_menu.cc:51
@@ -4081,11 +4081,11 @@ msgstr ""
 
 #: ../../src/wui/game_summary.cc:77
 msgid "Continue playing"
-msgstr ""
+msgstr "Fortsett å spille"
 
 #: ../../src/wui/game_summary.cc:83
 msgid "Quit"
-msgstr ""
+msgstr "Avslutt"
 
 #: ../../src/wui/game_summary.cc:83
 msgid "Return to main menu"
@@ -4093,15 +4093,15 @@ msgstr ""
 
 #: ../../src/wui/game_summary.cc:93
 msgid "Time"
-msgstr ""
+msgstr "Tid"
 
 #: ../../src/wui/game_summary.cc:157
 msgid "Lost"
-msgstr ""
+msgstr "Tapt"
 
 #: ../../src/wui/game_summary.cc:160
 msgid "Won"
-msgstr ""
+msgstr "Vunnet"
 
 #: ../../src/wui/game_summary.cc:168
 msgid "Resigned"
@@ -4113,16 +4113,16 @@ msgstr ""
 
 #: ../../src/wui/game_summary.cc:180
 msgid "You won!"
-msgstr ""
+msgstr "Du vant!"
 
 #: ../../src/wui/game_summary.cc:182
 msgid "You lost."
-msgstr ""
+msgstr "Du tapte."
 
 #: ../../src/wui/game_summary.cc:187
 #, c-format
 msgid "%s won!"
-msgstr ""
+msgstr "%s vant!"
 
 #: ../../src/wui/game_summary.cc:191
 msgid "Team %|1$u| won!"
@@ -4780,7 +4780,7 @@ msgstr "Høyde: %u"
 
 #: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:123
 msgid "Create Map"
-msgstr ""
+msgstr "Lag kart"
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:67
 msgid "Random Number:"
@@ -4959,7 +4959,7 @@ msgstr "Sett verdi"
 #: ../../src/editor/ui_menus/editor_tool_change_resources_options_menu.cc:45
 #: ../../src/editor/ui_menus/editor_tool_menu.cc:70
 msgid "Resources"
-msgstr ""
+msgstr "Ressurser"
 
 #: ../../src/editor/ui_menus/editor_tool_change_resources_options_menu.cc:99
 msgid "Current Selection"
@@ -4975,12 +4975,12 @@ msgstr ""
 
 #: ../../src/editor/ui_menus/editor_tool_menu.cc:68
 msgid "Immovables"
-msgstr ""
+msgstr "Uflyttbare"
 
 #: ../../src/editor/ui_menus/editor_tool_menu.cc:69
 #: ../../src/editor/ui_menus/editor_tool_place_bob_options_menu.cc:45
 msgid "Bobs"
-msgstr ""
+msgstr "Objekter"
 
 #: ../../src/editor/ui_menus/editor_tool_menu.cc:71
 msgid "Set port space"
@@ -5007,7 +5007,7 @@ msgstr "Sett verdi: %u"
 
 #: ../../src/editor/ui_menus/editor_tool_place_immovable_options_menu.cc:45
 msgid "Immovable Bobs"
-msgstr ""
+msgstr "Uflyttbare objekter"
 
 #: ../../src/editor/ui_menus/editor_tool_set_terrain_options_menu.cc:46
 msgid "Terrain Select"
@@ -5042,37 +5042,3 @@ msgstr "ingen beskrivelse definert"
 #: ../../src/logic/objective.h:42
 msgid "no descr"
 msgstr "ingen beskr"
-
-#~ msgid "Choose a replay!"
-#~ msgstr "Velg en reprise!"
-
-#~ msgid "Resource"
-#~ msgstr "Ressurs"
-
-#~ msgid "Choose saved game!"
-#~ msgstr "Velg et lagret spill!"
-
-#~ msgid "Choose your map!"
-#~ msgstr "Velg et kart!"
-
-#~ msgid "Tool Menu"
-#~ msgstr "Verktøymeny"
-
-#, c-format
-#~ msgid "[battle] soldier %u loose battle\n"
-#~ msgstr "[kamp] soldat %u taper kamp\n"
-
-#~ msgid "Bobs Menu"
-#~ msgstr "Bobs Meny"
-
-#~ msgid "Resources Tools Options"
-#~ msgstr "Ressurs Verktøy valg"
-
-#~ msgid "Bob"
-#~ msgstr "Objekt"
-
-#~ msgid "Immovable"
-#~ msgstr "Uflyttbar"
-
-#~ msgid "Widelands has not been able to connect to the metaserver."
-#~ msgstr "Widelands kunne ikke koble til metatjeneren."

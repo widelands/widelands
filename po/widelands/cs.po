@@ -14,8 +14,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2013-08-06 04:39+0000\n"
-"X-Generator: Launchpad (build 16718)\n"
+"X-Launchpad-Export-Date: 2013-08-07 04:38+0000\n"
+"X-Generator: Launchpad (build 16721)\n"
 "X-Poedit-Country: CZECH REPUBLIC\n"
 "X-Poedit-Language: Czech\n"
 
@@ -5198,75 +5198,3 @@ msgstr "popis není definovaný"
 #: ../../src/logic/objective.h:42
 msgid "no descr"
 msgstr "bez popisu"
-
-#~ msgid "Editor Menu"
-#~ msgstr "Nabídka editoru"
-
-#~ msgid "Choose saved game!"
-#~ msgstr "Vyber uloženou hru!"
-
-#~ msgid "Choose your map!"
-#~ msgstr "Vyber si mapu!"
-
-#~ msgid "Choose a replay!"
-#~ msgstr "Vyber záznam hry!"
-
-#, c-format
-#~ msgid ""
-#~ "The game engine has encountered a logic error. The %s #%u of player %u could "
-#~ "not find a way from (%i, %i) (with %s immovable) to the opponent (%s #%u of "
-#~ "player %u) at (%i, %i) (with %s immovable). The %s will now desert (but will "
-#~ "not be executed). Strange things may happen. No solution for this problem "
-#~ "has been implemented yet. (bug #1951113) (The game has been paused.)"
-#~ msgstr ""
-#~ "Herní engine narazil na logickou chybu. %s #%u hráče %u nemůže nalézt cestu "
-#~ "z (%i, %i) (s pevným bodem %s) k protivníkovi (%s #%u hráče %u) na (%i, %i) "
-#~ "(s pevným bodem %s). %s nyní dezertuje (ale nebude odstraněn). Dějí se divné "
-#~ "věci. Řešení tohoto problému nebylo bohužel prozatím nalezeno (bug "
-#~ "#1951113). (Hra byla pozastavena.)"
-
-#, c-format
-#~ msgid "[battle] soldier %u loose battle\n"
-#~ msgstr "[souboj] voják %u prohrál souboj\n"
-
-#~ msgid "Immovable Bobs Menu"
-#~ msgstr "Nabídka pevných bobů"
-
-#~ msgid "Resources Tools Options"
-#~ msgstr "Volby nástrojů zdrojů"
-
-#~ msgid "Toolsize Menu"
-#~ msgstr "Nabídka velikosti nástroje"
-
-#~ msgid "Bobs Menu"
-#~ msgstr "Menu bobů"
-
-#~ msgid "Tool Menu"
-#~ msgstr "Menu nástroje"
-
-#~ msgid "Immovable"
-#~ msgstr "Pevné boby"
-
-#~ msgid "Bob"
-#~ msgstr "Bob"
-
-#~ msgid "Resource"
-#~ msgstr "Zdroj"
-
-#~ msgid "Widelands has not been able to connect to the metaserver."
-#~ msgstr "Widelands se nepodařilo připojit k metaserveru."
-
-#~ msgid ""
-#~ "You got disconnected, as you send a superuser command without superuser "
-#~ "permission.This incident will be logged and reported to the administrator."
-#~ msgstr ""
-#~ "Byl jsi odhlášen, protože jsi odeslal příkaz superuživatele bez oprávnění "
-#~ "superuživatele. Tento incident bude zaznamenán a nahlášen administrátorovi."
-
-#, c-format
-#~ msgid "Resource amount: %i/%i\n"
-#~ msgstr "Množství suroviny : %i%i\n"
-
-#, c-format
-#~ msgid "Resource name: %s\n"
-#~ msgstr "Název suroviny: %s\n"

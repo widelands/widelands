@@ -15,8 +15,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2013-08-06 04:39+0000\n"
-"X-Generator: Launchpad (build 16718)\n"
+"X-Launchpad-Export-Date: 2013-08-07 04:38+0000\n"
+"X-Generator: Launchpad (build 16721)\n"
 "X-Poedit-Country: FINLAND\n"
 "X-Poedit-Language: Finnish\n"
 "X-Poedit-SourceCharset: utf-8\n"
@@ -5165,61 +5165,3 @@ msgstr "Kuvausta ei ole määritelty."
 #: ../../src/logic/objective.h:42
 msgid "no descr"
 msgstr "ei kuvausta"
-
-#~ msgid "Choose saved game!"
-#~ msgstr "Valitse tallennettu peli."
-
-#~ msgid "Editor Menu"
-#~ msgstr "Muokkaimen valikko"
-
-#~ msgid "Choose your map!"
-#~ msgstr "Valitse karttasi!"
-
-#~ msgid "Choose a replay!"
-#~ msgstr "Valitse toistettava peli."
-
-#~ msgid "Bobs Menu"
-#~ msgstr "Liikkuvat karttaobjektit"
-
-# TODO: resource names untranslateable, ditto on upper left corner up/down/right.. and animal bobs.
-#~ msgid "Resources Tools Options"
-#~ msgstr "Resurssityökalun asetukset"
-
-#~ msgid "Immovable Bobs Menu"
-#~ msgstr "Liikkumattomat karttaobjektit"
-
-#~ msgid "Tool Menu"
-#~ msgstr "Työkaluvalikko"
-
-#~ msgid "Immovable"
-#~ msgstr "Liikkumaton karttaobjekti"
-
-#~ msgid "Bob"
-#~ msgstr "Liikkuva karttaobjekti"
-
-#~ msgid "Resource"
-#~ msgstr "Resurssi"
-
-#~ msgid "Toolsize Menu"
-#~ msgstr "Työkalun koko -valikko"
-
-#, c-format
-#~ msgid "[battle] soldier %u loose battle\n"
-#~ msgstr "[taistelu] sotilas %u hävisi taistelun\n"
-
-#, c-format
-#~ msgid ""
-#~ "The game engine has encountered a logic error. The %s #%u of player %u could "
-#~ "not find a way from (%i, %i) (with %s immovable) to the opponent (%s #%u of "
-#~ "player %u) at (%i, %i) (with %s immovable). The %s will now desert (but will "
-#~ "not be executed). Strange things may happen. No solution for this problem "
-#~ "has been implemented yet. (bug #1951113) (The game has been paused.)"
-#~ msgstr ""
-#~ "Pelimoottori on kohdannut loogisen virheen. %s #%u pelaajan %u ei löytänyt "
-#~ "reittiä (%i, %i) (jossa %s liikkumaton) vihollisen (%s #%u pelaajan %u) "
-#~ "kohdassa (%i, %i) (jossa %s liikkumaton). %s tulee karkaaman (mutta ei tule "
-#~ "suorittamaan). Odottamattomia asioita saattaa tapahtua. Tälle ongelmalle ei "
-#~ "ole toteutettu ratkaisua vielä. (bug #1951113) (Peli on pysäytetty.)"
-
-#~ msgid "Endless game"
-#~ msgstr "Loputon peli"

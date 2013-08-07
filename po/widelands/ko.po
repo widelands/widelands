@@ -15,8 +15,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Launchpad-Export-Date: 2013-08-06 04:40+0000\n"
-"X-Generator: Launchpad (build 16718)\n"
+"X-Launchpad-Export-Date: 2013-08-07 04:39+0000\n"
+"X-Generator: Launchpad (build 16721)\n"
 
 #: ../../src/computer_player.cc:38
 msgid "None"
@@ -4948,15 +4948,3 @@ msgstr "정의된 설명이 없음"
 #: ../../src/logic/objective.h:42
 msgid "no descr"
 msgstr "설명 없음"
-
-#~ msgid "Choose saved game!"
-#~ msgstr "저장된 게임을 선택하세요!"
-
-#~ msgid "Editor Menu"
-#~ msgstr "에디터 메뉴"
-
-#~ msgid "Choose a replay!"
-#~ msgstr "리플레이를 선택하세요!"
-
-#~ msgid "Choose your map!"
-#~ msgstr "지도를 선택하세요!"

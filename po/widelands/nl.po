@@ -14,8 +14,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2013-08-06 04:39+0000\n"
-"X-Generator: Launchpad (build 16718)\n"
+"X-Launchpad-Export-Date: 2013-08-07 04:38+0000\n"
+"X-Generator: Launchpad (build 16721)\n"
 "X-Poedit-Country: NETHERLANDS\n"
 "X-Poedit-Language: Dutch\n"
 
@@ -5207,77 +5207,3 @@ msgstr "geen omschijving gedefinieerd"
 #: ../../src/logic/objective.h:42
 msgid "no descr"
 msgstr "geen omschr"
-
-#~ msgid "Choose saved game!"
-#~ msgstr "Kies opgeslagen spel!"
-
-#~ msgid "Choose your map!"
-#~ msgstr "Kies je kaart!"
-
-#~ msgid "Choose a replay!"
-#~ msgstr "Kies herhaling!"
-
-#~ msgid "Editor Menu"
-#~ msgstr "Editor menu"
-
-#~ msgid "Bobs Menu"
-#~ msgstr "Bobs Menu"
-
-#~ msgid "Immovable Bobs Menu"
-#~ msgstr "Menu onbeweegbare Bobs"
-
-#~ msgid "Tool Menu"
-#~ msgstr "Gereedschapsmenu"
-
-#~ msgid "Immovable"
-#~ msgstr "Onbeweegbaar"
-
-#~ msgid "Bob"
-#~ msgstr "Bob"
-
-#~ msgid "Resource"
-#~ msgstr "Grondstof"
-
-#~ msgid "Resources Tools Options"
-#~ msgstr "Hulpmiddelenopties"
-
-#~ msgid "Toolsize Menu"
-#~ msgstr "Gereedschapsgroottemenu"
-
-#, c-format
-#~ msgid "[battle] soldier %u loose battle\n"
-#~ msgstr "[battle] soldaat %u verliest gevecht\n"
-
-#, c-format
-#~ msgid ""
-#~ "The game engine has encountered a logic error. The %s #%u of player %u could "
-#~ "not find a way from (%i, %i) (with %s immovable) to the opponent (%s #%u of "
-#~ "player %u) at (%i, %i) (with %s immovable). The %s will now desert (but will "
-#~ "not be executed). Strange things may happen. No solution for this problem "
-#~ "has been implemented yet. (bug #1951113) (The game has been paused.)"
-#~ msgstr ""
-#~ "De engine is een logische fout tegengekomen. De %s #%u van speler %u kon "
-#~ "geen weg vinden van (%i, %i) (met %s onverplaatsbaar) naar de vijand (%s #%u "
-#~ "van speler %u) op (%i, %i) (met %s onverplaatsbaar). De %s zal nu deserteren "
-#~ "(maar zal niet geëxecuteerd worden). Vreemde dingen kunnen gebeuren. Er is "
-#~ "nog geen oplossing voor dit probleem geïmplementeerd. (bug #1951113) (Het "
-#~ "spel is gepauzeerd.)"
-
-#~ msgid "Widelands has not been able to connect to the metaserver."
-#~ msgstr "Widelands kon geen verbinding tot stand brengen met de metaserver."
-
-#~ msgid ""
-#~ "You got disconnected, as you send a superuser command without superuser "
-#~ "permission.This incident will be logged and reported to the administrator."
-#~ msgstr ""
-#~ "De verbinding verbroken, omdat u een superuser commando verzonden heeft "
-#~ "zonder superuser rechten. Dit incident word geregistreerd en gemeld aan de "
-#~ "beheerder"
-
-#, c-format
-#~ msgid "Resource amount: %i/%i\n"
-#~ msgstr "Hoeveelheid grondstof: %i/%i\n"
-
-#, c-format
-#~ msgid "Resource name: %s\n"
-#~ msgstr "Grondstof naam: %s\n"

@@ -10,8 +10,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2013-08-06 04:41+0000\n"
-"X-Generator: Launchpad (build 16718)\n"
+"X-Launchpad-Export-Date: 2013-08-07 04:40+0000\n"
+"X-Generator: Launchpad (build 16721)\n"
 
 #: ../../src/computer_player.cc:38
 msgid "None"
@@ -5142,61 +5142,3 @@ msgstr "ingen beskrivning angiven"
 #: ../../src/logic/objective.h:42
 msgid "no descr"
 msgstr "ingen beskr"
-
-#, c-format
-#~ msgid ""
-#~ "The game engine has encountered a logic error. The %s #%u of player %u could "
-#~ "not find a way from (%i, %i) (with %s immovable) to the opponent (%s #%u of "
-#~ "player %u) at (%i, %i) (with %s immovable). The %s will now desert (but will "
-#~ "not be executed). Strange things may happen. No solution for this problem "
-#~ "has been implemented yet. (bug #1951113) (The game has been paused.)"
-#~ msgstr ""
-#~ "Spelsimuleraren har stött på ett logikfel. %sen #%u tillhörande spelare %u "
-#~ "kunde ej finna en väg från (%i, %i) (fast föremål: %s) till motståndaren (%s "
-#~ "#%u of player %u) vid (%i, %i) (fast föremål: %s). %sen kommer nu att "
-#~ "desertera (men blir ej avrättad). Märkligheter kan inträffa. Ännu har ingen "
-#~ "lösning på detta problem implementerats. (felraport #1951113) (Spelet har "
-#~ "pausats.)"
-
-#~ msgid "Editor Menu"
-#~ msgstr "Redigerarmeny"
-
-#~ msgid "Choose your map!"
-#~ msgstr "Välj din karta!"
-
-#~ msgid "Choose saved game!"
-#~ msgstr "Välj sparat spel!"
-
-#~ msgid "Choose a replay!"
-#~ msgstr "Välj en repris!"
-
-#~ msgid "Toolsize Menu"
-#~ msgstr "Verktygsstorlek"
-
-#~ msgid "Tool Menu"
-#~ msgstr "Verktygsmeny"
-
-#~ msgid "Immovable"
-#~ msgstr "Fast föremål"
-
-#~ msgid "Resource"
-#~ msgstr "Resurs"
-
-#~ msgid "Resources Tools Options"
-#~ msgstr "Resursverktygsalternativ"
-
-#~ msgid "Immovable Bobs Menu"
-#~ msgstr "Fasta föremål"
-
-#, c-format
-#~ msgid "[battle] soldier %u loose battle\n"
-#~ msgstr "[strid] soldat %u förlorar strid\n"
-
-#~ msgid "Bobs Menu"
-#~ msgstr "Bobsmeny"
-
-#~ msgid "Bob"
-#~ msgstr "Bob"
-
-#~ msgid "Widelands has not been able to connect to the metaserver."
-#~ msgstr "Widelands har inte kunnat ansluta till metaservern."

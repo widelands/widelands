@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2013-08-06 03:27+0000\n"
-"PO-Revision-Date: 2013-08-05 12:38+0000\n"
+"PO-Revision-Date: 2013-08-06 14:34+0000\n"
 "Last-Translator: István Kiss <kiemc@citromail.hu>\n"
 "Language-Team: Language <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-08-06 04:35+0000\n"
-"X-Generator: Launchpad (build 16718)\n"
+"X-Launchpad-Export-Date: 2013-08-07 04:34+0000\n"
+"X-Generator: Launchpad (build 16721)\n"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:93
 msgid ""
@@ -62,6 +62,14 @@ msgid ""
 "stonemason, who cuts columns from marble.<br> After all, now we can begin "
 "living as we did in Fremil.\"<br><br>-- NEW OBJECTIVE --<br> "
 msgstr ""
+" „Hála az isteneknek, hihetetlen szerencsénk van! Van még két másik hegy is, "
+"és úgy tűnik, egyikük nagy mennyiségű szenet, másikuk vasércet rejt. Azonnal "
+"el kell kezdenünk vasérc- és szénbányákat (vagy legalább faszénégetőket), "
+"kohókat, szerszám-, páncél- és fegyverkovácsműhelyeket építeni.<br> "
+"Ugyanakkor ezekhez a nagyobb épületekhez jobb és mutatósabb építőanyagokra "
+"lesz szükségünk. Úgyhogy építsünk is<br> egy kőfaragóházat, ahol oszlopokat "
+"faragnak a márványból.<br> Mindezek után most már kezdhetünk úgy élni, mint "
+"Fremilben.”<br><br>-- ÚJ CÉLKITŰZÉS --<br> "
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:83
 msgid ""
@@ -124,6 +132,10 @@ msgid ""
 "too.<br> It is good to see that we have now got a warmer and more familiar "
 "environment on our island.<br> Thank you, Lutius.\" "
 msgstr ""
+" „Üdvözöllek, barátom, épp most látogattam meg az új<br> »Pálmákalja« "
+"kocsmát. Nagyon finom sört kapni ott. Igazán elmehetnél te is inni "
+"egyet.<br>Jó látni, hogy immár melegebb és családiasabb a légkör "
+"szigetünkön.<br>Hála neked, Lutius.” "
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:165
 msgid ""
@@ -135,6 +147,13 @@ msgid ""
 "about helping them out?<br> I can't tell you what exactly we need... but "
 "here are my recommendations:\"<br><br>-- NEW OBJECTIVE --<br> "
 msgstr ""
+" „Üdv, Lutius, remélem, megbocsátod bírálatomat, de úgy látom, "
+"megfeledkeztél valamiről.<br> Szép és persze jó ötlet bányákat építeni, "
+"melyek kényelmesebbé teszik életünket,<br> de a bányákban dolgozó emberek "
+"elégedetlenek a jelenlegi helyzettel. Keményen kell dolgozniuk, és nincs "
+"idejük maguknak ennivalót készíteni.<br> Mit szólnál hozzá, ha segítenénk "
+"rajtuk?<br> Nem tudom megmondani, pontosan mire van szükség, de ezek a "
+"javaslataim:”<br><br>-- ÚJ CÉLKITŰZÉS --<br> "
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:104
 msgid ""
@@ -163,6 +182,13 @@ msgid ""
 "expand to that mountain and start mining marble.\"<br><br>-- NEW OBJECTIVE --"
 "<br> "
 msgstr ""
+" „Lutius, jó hírem van számodra. Mikor kelet felé jártam, egy nagyobb hegyre "
+"leltem.<br> Nem vagyok benne biztos – egy geológus tudná megmondani –, de "
+"szerintem a hegy némely részén bányászhatnánk márványt.<br> Ez megerősítené "
+"ellátásunkat minőségi márványból, túl a kőfejtő adta szűkös mennyiségen. "
+"Valószínűleg igazad volt, mikor ezt a szigetet paradicsominak nevezted.<br> "
+"Terjeszkedjünk hát ki addig a hegyig, és kezdjünk márványt "
+"bányászni.”<br><br>-- ÚJ CÉLKITŰZÉS --<br> "
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:187
 msgid ""
@@ -210,6 +236,9 @@ msgid ""
 "infrastructure (coal mine and / or charcoal burner, iron ore mine, "
 "toolsmith's shop, weapon smithy, armour smithy and smelting works)."
 msgstr ""
+"* Építs egy kőfaragóházat, aztán pedig egy teljes bányász- és "
+"termelőgazdaságot (szénbánya és/vagy faszénégetőház, vasércbánya, szerszám-, "
+"fegyver- és páncélkovácsműhely, illetve kohó.)"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:28
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:136
@@ -232,7 +261,7 @@ msgstr ""
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:36
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:146
 msgid "* Expand to the east, to start mining marble from the mountain."
-msgstr ""
+msgstr "* Terjeszkedj keletre, hogy elkezdhess márványt bányászni a hegyből."
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:69
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:189
@@ -256,6 +285,16 @@ msgid ""
 "wine and all mines need at least rations, which are produced out of bread OR "
 "meat OR fish."
 msgstr ""
+"* Hogy bányászainknak tápláló ennivalót készítsünk, építhetnénk egy kocsmát. "
+"Hogy ellássuk őket némi jó és erős itallal, építhetnénk egy sörfőzdét és egy "
+"borászatot.<br> Persze ez azt jelenti, hogy az ennivalók elkészítéséhez "
+"további alapanyagokra is szükségünk lesz – úgymint halra, húsra vagy "
+"kenyérre.<br> Ezen élelmiszerek biztosításához építened kellene egy "
+"halászházat, farmot, malmot és pékséget.<br> Szükség lehet még egy "
+"vadászházra,<br> sertéstelepre, szőlőskertre és néhány kútra is.<br> Rajtad "
+"áll, mit építesz.<br>De ne feledd: a szén- és vasércbányákba sör kell, a "
+"márvány- és aranybányákba bor, és minden bányába legalább harapnivaló, ami "
+"kenyérből VAGY húsból VAGY halból készül."
 
 #: ../../campaigns/emp02.wmf/elemental:9
 msgid "02 - An Outpost for Exile"
@@ -291,7 +330,7 @@ msgstr "Építs egy kőfejtőt"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:42
 msgid "Build a stonemason and mining infrastructure"
-msgstr ""
+msgstr "Építs egy kőfaragóházat és egy bányászgazdaságot"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:10
 msgid "Build up a wood economy"
@@ -346,7 +385,7 @@ msgstr "Márvány a hegyen"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:221
 msgid "Our new tavern"
-msgstr ""
+msgstr "Az új kocsmánk"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:26
 msgid "Protect your colony"
@@ -358,11 +397,11 @@ msgstr ""
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:50
 msgid "Provide your miners with food"
-msgstr ""
+msgstr "Lásd el bányászaidat élelemmel"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:153
 msgid "Saledus is amazed"
-msgstr ""
+msgstr "Saledus le van nyűgözve"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:133
 msgid "Saledus looks unhappy"
@@ -374,7 +413,7 @@ msgstr "Saledus mosolyog"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:34
 msgid "Start mining marble"
-msgstr ""
+msgstr "Kezdj márványt bányászni"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:120
 msgid "Stone for the colony"

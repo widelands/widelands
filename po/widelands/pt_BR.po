@@ -15,8 +15,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Launchpad-Export-Date: 2013-08-06 04:41+0000\n"
-"X-Generator: Launchpad (build 16718)\n"
+"X-Launchpad-Export-Date: 2013-08-07 04:40+0000\n"
+"X-Generator: Launchpad (build 16721)\n"
 
 #: ../../src/computer_player.cc:38
 msgid "None"
@@ -5188,61 +5188,3 @@ msgstr "<sem descrição definida>"
 #: ../../src/logic/objective.h:42
 msgid "no descr"
 msgstr "<sem descrição>"
-
-#, c-format
-#~ msgid "[battle] soldier %u loose battle\n"
-#~ msgstr "[battle] o soldado %u perdeu a batalha\n"
-
-#, c-format
-#~ msgid ""
-#~ "The game engine has encountered a logic error. The %s #%u of player %u could "
-#~ "not find a way from (%i, %i) (with %s immovable) to the opponent (%s #%u of "
-#~ "player %u) at (%i, %i) (with %s immovable). The %s will now desert (but will "
-#~ "not be executed). Strange things may happen. No solution for this problem "
-#~ "has been implemented yet. (bug #1951113) (The game has been paused.)"
-#~ msgstr ""
-#~ "O Motor do jogo encontrou um problema lógico. O %s #%u do jogador %u não "
-#~ "conseguiu encontrar uma caminho a partir de (%i, %i) (comh %s amovivel) para "
-#~ "o opositor (%s #%u do jogador %u) em (%i, %i) (com %s amovivel). O %s irá "
-#~ "agora desertar (mas não será executado). Podem acontecer coisas estranhas. "
-#~ "Não foi ainda implementada nenhuma solução para este problema. (bug "
-#~ "#1951113) (O jogo entrou em pausa.)"
-
-#~ msgid "Choose your map!"
-#~ msgstr "Escolha seu mapa!"
-
-#~ msgid "Choose saved game!"
-#~ msgstr "Escolha o jogo salvo!"
-
-#~ msgid "Editor Menu"
-#~ msgstr "Menu do Editor"
-
-#~ msgid "Choose a replay!"
-#~ msgstr "Escolha uma Replay!"
-
-#~ msgid "Bobs Menu"
-#~ msgstr "Menu Natureza (bobs)"
-
-#~ msgid "Immovable"
-#~ msgstr "Amovível"
-
-#~ msgid "Bob"
-#~ msgstr "Bob"
-
-#~ msgid "Tool Menu"
-#~ msgstr "Menu Ferramentas"
-
-#~ msgid "Resource"
-#~ msgstr "Recurso"
-
-#~ msgid "Toolsize Menu"
-#~ msgstr "Menu Tamanho da ferramenta"
-
-#~ msgid "Resources Tools Options"
-#~ msgstr "Opções das Ferramentas dos Recursos"
-
-#~ msgid "Immovable Bobs Menu"
-#~ msgstr "Menu Natureza (bobs) imovível"
-
-#~ msgid "Widelands has not been able to connect to the metaserver."
-#~ msgstr "Widelands não conseguiu conectar com o metaservidor."

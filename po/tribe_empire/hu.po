@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2013-08-06 03:27+0000\n"
-"PO-Revision-Date: 2013-08-04 10:36+0000\n"
+"PO-Revision-Date: 2013-08-06 13:46+0000\n"
 "Last-Translator: István Kiss <kiemc@citromail.hu>\n"
 "Language-Team: Language <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-08-06 04:38+0000\n"
-"X-Generator: Launchpad (build 16718)\n"
+"X-Launchpad-Export-Date: 2013-08-07 04:37+0000\n"
+"X-Generator: Launchpad (build 16721)\n"
 
 #: ../../tribes/empire/meal/conf:1
 msgid ""
@@ -263,7 +263,7 @@ msgstr "Birodalom"
 
 #: ../../tribes/empire/conf:194
 msgid "Farm"
-msgstr "Tanya"
+msgstr "Farm"
 
 #: ../../tribes/empire/conf:116
 msgid "Farmer"
@@ -313,7 +313,7 @@ msgstr "Halász"
 
 #: ../../tribes/empire/conf:172
 msgid "Fisher's House"
-msgstr "Halászkunyhó"
+msgstr "Halászház"
 
 #: ../../tribes/empire/conf:69
 msgid "Fishing Rod"
@@ -447,7 +447,7 @@ msgstr "Vadász"
 
 #: ../../tribes/empire/conf:173
 msgid "Hunter's House"
-msgstr "Vadászkunyhó"
+msgstr "Vadászház"
 
 #: ../../tribes/empire/conf:77
 msgid "Hunting Spear"
@@ -595,11 +595,11 @@ msgstr "Csákány"
 
 #: ../../tribes/empire/conf:126
 msgid "Pig Breeder"
-msgstr "Disznótenyésztő"
+msgstr "Sertéstenyésztő"
 
 #: ../../tribes/empire/conf:193
 msgid "Piggery"
-msgstr "Disznóól"
+msgstr "Sertéstelep"
 
 #: ../../tribes/empire/vineyard/conf:23
 msgid "Plant vine"
@@ -747,7 +747,7 @@ msgstr "Kőfejtő"
 
 #: ../../tribes/empire/conf:88
 msgid "Ration"
-msgstr "Élelmiszer"
+msgstr "Harapnivaló"
 
 #: ../../tribes/empire/conf:40
 msgid "Resource indicator coal little"
@@ -817,7 +817,7 @@ msgstr "Kasza"
 #: ../../tribes/empire/conf:159
 #: ../../tribes/empire/conf:207
 msgid "Sentry"
-msgstr "Őrbódé"
+msgstr "Őrház"
 
 #: ../../tribes/empire/conf:191
 msgid "Sheepfarm"

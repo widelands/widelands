@@ -17,8 +17,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2013-08-06 04:39+0000\n"
-"X-Generator: Launchpad (build 16718)\n"
+"X-Launchpad-Export-Date: 2013-08-07 04:38+0000\n"
+"X-Generator: Launchpad (build 16721)\n"
 
 #: ../../src/computer_player.cc:38
 msgid "None"
@@ -5103,56 +5103,3 @@ msgstr "ingen beskrivelse defineret"
 #: ../../src/logic/objective.h:42
 msgid "no descr"
 msgstr "ingen beskr."
-
-#~ msgid "Choose your map!"
-#~ msgstr "Vælg kort!"
-
-#~ msgid "Choose saved game!"
-#~ msgstr "Vælg gemt spil!"
-
-#~ msgid "Editor Menu"
-#~ msgstr "Redigeringsmenu"
-
-#~ msgid "Choose a replay!"
-#~ msgstr "Vælg et gammelt spil!"
-
-#~ msgid "Resources Tools Options"
-#~ msgstr "Ressourceværktøjsindstillinger"
-
-#~ msgid "Tool Menu"
-#~ msgstr "Værktøjsmenu"
-
-#~ msgid "Immovable"
-#~ msgstr "Kan ikke flyttes"
-
-# uafklaret
-#~ msgid "Bob"
-#~ msgstr "Bob"
-
-#~ msgid "Resource"
-#~ msgstr "Ressource"
-
-#~ msgid "Immovable Bobs Menu"
-#~ msgstr "Urokkelige bobsmenu"
-
-#~ msgid "Toolsize Menu"
-#~ msgstr "Værktøjstørrelsesmenu"
-
-#, c-format
-#~ msgid "[battle] soldier %u loose battle\n"
-#~ msgstr "[kamp] soldat %u taber kamp\n"
-
-#, c-format
-#~ msgid ""
-#~ "The game engine has encountered a logic error. The %s #%u of player %u could "
-#~ "not find a way from (%i, %i) (with %s immovable) to the opponent (%s #%u of "
-#~ "player %u) at (%i, %i) (with %s immovable). The %s will now desert (but will "
-#~ "not be executed). Strange things may happen. No solution for this problem "
-#~ "has been implemented yet. (bug #1951113) (The game has been paused.)"
-#~ msgstr ""
-#~ "Spilmotoren er stødt på en logisk fejl. %s #%u tilhørende spiller %u kunne "
-#~ "ikke finde en vej fra (%i, %i) (hvor %s er ubevægelig) til fjenden (%s #%u "
-#~ "tilhørende spiller %u) på (%i, %i) (hvor %s er ubevægelig). %s vil nu flygte "
-#~ "(men ikke henrettes). Der kan ske underlige ting. Ingen løsning til "
-#~ "problemet er blevet implementeret endnu. (fejl #1951113) (Spillet er sat på "
-#~ "pause.)"

@@ -15,8 +15,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2013-08-06 04:40+0000\n"
-"X-Generator: Launchpad (build 16718)\n"
+"X-Launchpad-Export-Date: 2013-08-07 04:39+0000\n"
+"X-Generator: Launchpad (build 16721)\n"
 
 #: ../../src/computer_player.cc:38
 msgid "None"
@@ -4974,34 +4974,3 @@ msgstr "descriptio definita non est"
 #: ../../src/logic/objective.h:42
 msgid "no descr"
 msgstr "(Nulla descriptio)"
-
-#~ msgid "Bob"
-#~ msgstr "Res"
-
-#~ msgid "Immovable"
-#~ msgstr "Natura immobilis"
-
-#~ msgid "Bobs Menu"
-#~ msgstr "Natura mobilis"
-
-#~ msgid "Resource"
-#~ msgstr "Materies"
-
-#~ msgid "Choose your map!"
-#~ msgstr "Tabulam elige!"
-
-#~ msgid "Choose saved game!"
-#~ msgstr "Elige ludum servatum!"
-
-#, c-format
-#~ msgid "[battle] soldier %u loose battle\n"
-#~ msgstr "[proelium] Miles %u vincitur\n"
-
-#~ msgid "Editor Menu"
-#~ msgstr "Index editoris"
-
-#~ msgid "Immovable Bobs Menu"
-#~ msgstr "Naturae immobilis index"
-
-#~ msgid "Tool Menu"
-#~ msgstr "Index instrumentorum"

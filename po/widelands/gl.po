@@ -15,8 +15,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2013-08-06 04:39+0000\n"
-"X-Generator: Launchpad (build 16718)\n"
+"X-Launchpad-Export-Date: 2013-08-07 04:38+0000\n"
+"X-Generator: Launchpad (build 16721)\n"
 "X-Poedit-Country: SPAIN\n"
 "X-Poedit-Language: Galician\n"
 "X-Poedit-SourceCharset: utf-8\n"
@@ -5144,58 +5144,3 @@ msgstr "sen descrición definida"
 #: ../../src/logic/objective.h:42
 msgid "no descr"
 msgstr "sen descr"
-
-#~ msgid "Choose your map!"
-#~ msgstr "¡Elixe un mapa!"
-
-#~ msgid "Choose saved game!"
-#~ msgstr "¡Elixe xogo salvado!"
-
-#~ msgid "Bobs Menu"
-#~ msgstr "Menú de obxectos"
-
-#~ msgid "Resources Tools Options"
-#~ msgstr "Recursos"
-
-#~ msgid "Tool Menu"
-#~ msgstr "Menú de Ferramentas"
-
-#~ msgid "Immovable Bobs Menu"
-#~ msgstr "Menú de obxectos inmobeis"
-
-#~ msgid "Toolsize Menu"
-#~ msgstr "Tamaño"
-
-#, c-format
-#~ msgid "[battle] soldier %u loose battle\n"
-#~ msgstr "[batalla] o soldado %u perdeu a batalla\n"
-
-#, c-format
-#~ msgid ""
-#~ "The game engine has encountered a logic error. The %s #%u of player %u could "
-#~ "not find a way from (%i, %i) (with %s immovable) to the opponent (%s #%u of "
-#~ "player %u) at (%i, %i) (with %s immovable). The %s will now desert (but will "
-#~ "not be executed). Strange things may happen. No solution for this problem "
-#~ "has been implemented yet. (bug #1951113) (The game has been paused.)"
-#~ msgstr ""
-#~ "O motor do xoto atopou un erro lóxico. O %s número %u do xogador %u non "
-#~ "puido atopar un camiño dende (%i, %i) (co inmóbil %s) ao opoñente (%s número "
-#~ "%u do xogador %u) en (%i, %i) (co inmóbil %s). Agora o %s desertará (pero "
-#~ "non se executará). Poderían ocorrer cousas raras. Aínda non se atopou unha "
-#~ "solución para este problem (erro número 1951113). A partida está en pausa."
-
-#~ msgid "Editor Menu"
-#~ msgstr "Menú do editor"
-
-#~ msgid "Immovable"
-#~ msgstr "Inmóbil"
-
-#~ msgid "Bob"
-#~ msgstr "Bob"
-
-#~ msgid "Resource"
-#~ msgstr "Recurso"
-
-# É a cabeceira do menú para cargar unha repetición e visualizala. Non ten sentido usar unha exclamación.
-#~ msgid "Choose a replay!"
-#~ msgstr "Escolle unha repetición"

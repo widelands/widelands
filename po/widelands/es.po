@@ -15,8 +15,8 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2013-08-06 04:41+0000\n"
-"X-Generator: Launchpad (build 16718)\n"
+"X-Launchpad-Export-Date: 2013-08-07 04:40+0000\n"
+"X-Generator: Launchpad (build 16721)\n"
 "X-Poedit-Country: SPAIN\n"
 "X-Poedit-Language: Spanish\n"
 "X-Poedit-SourceCharset: utf-8\n"
@@ -5246,77 +5246,3 @@ msgstr "<sin descripción>"
 #: ../../src/logic/objective.h:42
 msgid "no descr"
 msgstr "<sin definir>"
-
-#~ msgid "Choose your map!"
-#~ msgstr "¡Elige un mapa!"
-
-#~ msgid "Choose saved game!"
-#~ msgstr "¡Elige una partida guardada!"
-
-#~ msgid "Resources Tools Options"
-#~ msgstr "Recursos"
-
-#~ msgid "Tool Menu"
-#~ msgstr "Menú de herramientas"
-
-#~ msgid "Immovable"
-#~ msgstr "Inmóvil"
-
-#~ msgid "Resource"
-#~ msgstr "Recurso"
-
-#~ msgid "Toolsize Menu"
-#~ msgstr "Tamaño"
-
-#, c-format
-#~ msgid "[battle] soldier %u loose battle\n"
-#~ msgstr "[batalla] el soldado%u perdió la batalla\n"
-
-#, c-format
-#~ msgid ""
-#~ "The game engine has encountered a logic error. The %s #%u of player %u could "
-#~ "not find a way from (%i, %i) (with %s immovable) to the opponent (%s #%u of "
-#~ "player %u) at (%i, %i) (with %s immovable). The %s will now desert (but will "
-#~ "not be executed). Strange things may happen. No solution for this problem "
-#~ "has been implemented yet. (bug #1951113) (The game has been paused.)"
-#~ msgstr ""
-#~ "El motor del juego ha encontrado un error de lógica. El %s #%u del jugador "
-#~ "%u no puede encontrar una ruta desde (%i, %i) (con %s inmovible) hacia el "
-#~ "enemigo (%s #%u del jugador %u) en (%i, %i) (con %s inmovible). El %s "
-#~ "desertará ahora (pero no será ejecutado). Pueden ocurrir cosas extrañas. No "
-#~ "se ha implementado  solución para este problema todavía. (bug #1951113) (El "
-#~ "juego ha sido pausado.)"
-
-#~ msgid "Choose a replay!"
-#~ msgstr "Elige un replay."
-
-#~ msgid "Editor Menu"
-#~ msgstr "Menú del Editor"
-
-#~ msgid "Bobs Menu"
-#~ msgstr "Menú de Objetos Móviles"
-
-#~ msgid "Immovable Bobs Menu"
-#~ msgstr "Menú de Objetos Inmóviles"
-
-#~ msgid "Bob"
-#~ msgstr "Objeto móvil"
-
-#~ msgid "Widelands has not been able to connect to the metaserver."
-#~ msgstr "Widelands no ha sido capaz de conectarse con el metaservidor."
-
-#~ msgid ""
-#~ "You got disconnected, as you send a superuser command without superuser "
-#~ "permission.This incident will be logged and reported to the administrator."
-#~ msgstr ""
-#~ "Usted fue desconectado por enviar un comando de superusuario sin tener "
-#~ "permisos de superusuario. Este incidente será registrado y enviado al "
-#~ "administrador."
-
-#, c-format
-#~ msgid "Resource amount: %i/%i\n"
-#~ msgstr "Cantidad recurso: %i/%i\n"
-
-#, c-format
-#~ msgid "Resource name: %s\n"
-#~ msgstr "Nombre recurso: %s\n"

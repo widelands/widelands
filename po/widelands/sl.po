@@ -16,8 +16,8 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n%100==1 ? 1 : n%100==2 ? 2 : n%100==3 || "
 "n%100==4 ? 3 : 0);\n"
-"X-Launchpad-Export-Date: 2013-08-06 04:41+0000\n"
-"X-Generator: Launchpad (build 16718)\n"
+"X-Launchpad-Export-Date: 2013-08-07 04:40+0000\n"
+"X-Generator: Launchpad (build 16721)\n"
 
 #: ../../src/computer_player.cc:38
 msgid "None"
@@ -5100,43 +5100,3 @@ msgstr "brez opisa"
 #: ../../src/logic/objective.h:42
 msgid "no descr"
 msgstr "brez opisa"
-
-#~ msgid "Toolsize Menu"
-#~ msgstr "Meni velikosti orodij"
-
-#~ msgid "Immovable Bobs Menu"
-#~ msgstr "Meni nepremakljivih uteži"
-
-#~ msgid "Bobs Menu"
-#~ msgstr "Meni uteži"
-
-#~ msgid "Immovable"
-#~ msgstr "Nepremakljivo"
-
-#~ msgid "Bob"
-#~ msgstr "Utež"
-
-#~ msgid "Resource"
-#~ msgstr "Surovina"
-
-#~ msgid "Tool Menu"
-#~ msgstr "Meni orodij"
-
-#~ msgid "Resources Tools Options"
-#~ msgstr "Možnosti orodij za surovine"
-
-#, c-format
-#~ msgid "[battle] soldier %u loose battle\n"
-#~ msgstr "[bitka] bojevnik %u izgubi bitko\n"
-
-#~ msgid "Editor Menu"
-#~ msgstr "Urejevalnikov meni"
-
-#~ msgid "Choose your map!"
-#~ msgstr "Izberite zemljevid!"
-
-#~ msgid "Choose saved game!"
-#~ msgstr "Izberite shranjeno igro!"
-
-#~ msgid "Choose a replay!"
-#~ msgstr "Izberi posnetek!"
