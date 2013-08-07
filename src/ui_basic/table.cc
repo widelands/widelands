@@ -422,12 +422,12 @@ void Table<void *>::move_selection(const int32_t offset)
 		// Keep an unselected item above or below
 		int32_t scroll_item = new_selection + offset;
 		if (scroll_item < 0) scroll_item = 0;
-		if (scroll_item > m_entry_records.size()) {
+		if (scroll_item > static_cast<int32_t>(m_entry_records.size())) {
 			scroll_item = m_entry_records.size();
 		}
 
 		// Ensure scroll_item is visible
-		if (scroll_item * get_lineheight() < m_scrollpos) {
+		if (scroll_item * get_lineheight() < static_cast<int32_t>(m_scrollpos)) {
 			m_scrollbar->set_scrollpos(scroll_item * get_lineheight());
 		} else if ((scroll_item + 1) * get_lineheight() - get_inner_h() > m_scrollpos) {
 			m_scrollbar->set_scrollpos((scroll_item + 1) * get_lineheight() - get_inner_h());
