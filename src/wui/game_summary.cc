@@ -210,10 +210,17 @@ void GameSummaryScreen::stop_clicked()
 
 void GameSummaryScreen::player_selected(uint32_t idx)
 {
-	Widelands::PlayerEndStatus pes = m_game.player_manager()->get_players_end_status().at(idx);
-	std::string info_str = parse_player_info(pes.info);
-	m_info_area->set_text(info_str);
-	layout();
+	const std::vector <Widelands::PlayerEndStatus >& players_status
+		= m_game.player_manager()->get_players_end_status();
+	for (uintptr_t i = 0; i < players_status.size(); i++) {
+		Widelands::PlayerEndStatus pes = players_status.at(i);
+		if (pes.player == idx) {
+			std::string info_str = parse_player_info(pes.info);
+			m_info_area->set_text(info_str);
+			layout();
+			break;
+		}
+	}
 }
 
 std::string GameSummaryScreen::parse_player_info(std::string& info)

@@ -57,7 +57,7 @@ end
 function check_player_defeated(plrs, heading, msg, wc_name, wc_ver)
    for idx,p in ipairs(plrs) do
       if p.defeated then
-         p:send_message(heading, msg, { popup = true })
+         p:send_message(heading, msg)
          p.see_all = 1
          if (wc_name and wc_ver) then
             wl.game.report_result(p, 0, make_extra_data(p, wc_name, wc_ver))
