@@ -1138,11 +1138,8 @@ void Player::unsee_node
 throw ()
 {
 	Field & field = m_fields[i];
-	if (field.vision <= 1) { //  Already does not see this
-		//  FIXME This must never happen!
-		log("ERROR: Decreasing vision for node that is not seen. Report bug!\n");
+	if (field.vision <= 1) //  Already does not see this
 		return;
-	}
 
 	//  If this is not already a forwarded call, we should inform allied players
 	//  as well of this change.
