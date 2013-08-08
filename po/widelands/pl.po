@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: Widelands svn4804\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2013-08-05 20:27-0700\n"
-"PO-Revision-Date: 2013-07-28 17:47+0000\n"
+"PO-Revision-Date: 2013-08-07 09:29+0000\n"
 "Last-Translator: Wesmania <ikk_pl@yahoo.co.uk>\n"
 "Language-Team: Language <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -15,8 +15,8 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2013-08-07 04:39+0000\n"
-"X-Generator: Launchpad (build 16721)\n"
+"X-Launchpad-Export-Date: 2013-08-08 04:33+0000\n"
+"X-Generator: Launchpad (build 16723)\n"
 
 #: ../../src/computer_player.cc:38
 msgid "None"
@@ -918,7 +918,7 @@ msgstr "informacje gracza: %s"
 
 #: ../../src/game_io/game_preload_data_packet.cc:60
 msgid "Endless Game"
-msgstr ""
+msgstr "Niekończąca się gra"
 
 #: ../../src/game_io/game_preload_data_packet.cc:65
 #: ../../src/logic/game.cc:251 ../../src/logic/game.cc:349
@@ -988,7 +988,7 @@ msgstr "nieznany"
 #: ../../src/logic/battle.cc:178
 #, c-format
 msgid "[battle] soldier %u lose battle\n"
-msgstr ""
+msgstr "[battle] soldier %u lose battle\n"
 
 #: ../../src/logic/battle.cc:182
 #, c-format
@@ -2245,7 +2245,7 @@ msgstr "Problem z połączeniem"
 
 #: ../../src/network/internet_gaming.cc:116
 msgid "Widelands could not connect to the metaserver."
-msgstr ""
+msgstr "Widelands nie było w stanie połączyć się z metaserwerem."
 
 #: ../../src/network/internet_gaming.cc:122 ../../src/network/netclient.cc:100
 msgid "Could not establish connection to host"
@@ -2369,6 +2369,8 @@ msgid ""
 "You got disconnected, as you sent a superuser command without superuser "
 "permission. This incident will be logged and reported to the administrator."
 msgstr ""
+"Zostałeś odłączony, ponieważ wysłałeś polecenie superużytkownika bez "
+"odpowiednich uprawnień. Zostanie to zapisane i zgłoszone administratorowi."
 
 #: ../../src/network/internet_gaming_messages.cc:50
 msgid "You got disconnected, as the metaserver is currently restarting."
@@ -2913,7 +2915,7 @@ msgstr "[Niewłaściwy wpis]"
 #: ../../src/ui_fsmenu/editor_mapselect.cc:52
 #: ../../src/ui_fsmenu/mapselect.cc:54
 msgid "Choose a map"
-msgstr ""
+msgstr "Wybierz mapę"
 
 #: ../../src/ui_fsmenu/campaign_select.cc:267
 #: ../../src/ui_fsmenu/editor_mapselect.cc:56
@@ -3397,7 +3399,7 @@ msgstr "Usuń"
 
 #: ../../src/ui_fsmenu/loadgame.cc:76
 msgid "Choose saved game"
-msgstr ""
+msgstr "Wybierz zapis gry"
 
 #: ../../src/ui_fsmenu/loadgame.cc:80 ../../src/ui_fsmenu/loadreplay.cc:71
 #: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:57
@@ -3426,7 +3428,7 @@ msgstr "Nieznany czas gry"
 
 #: ../../src/ui_fsmenu/loadreplay.cc:67
 msgid "Choose a replay"
-msgstr ""
+msgstr "Wybierz powtórkę"
 
 #: ../../src/ui_fsmenu/main.cc:40
 msgid "Play Tutorial"
@@ -4041,12 +4043,12 @@ msgstr "Pole debugu"
 #: ../../src/wui/game_debug_ui.cc:375
 #, c-format
 msgid "Resource: %s\n"
-msgstr ""
+msgstr "Surowiec: %s\n"
 
 #: ../../src/wui/game_debug_ui.cc:381
 #, c-format
 msgid "  Amount: %i/%i\n"
-msgstr ""
+msgstr "  Ilość: %i%i\n"
 
 #: ../../src/wui/game_main_menu.cc:42
 #: ../../src/editor/ui_menus/editor_main_menu.cc:51
@@ -4237,68 +4239,68 @@ msgstr "Głośność efektów"
 
 #: ../../src/wui/game_summary.cc:44
 msgid "Game over"
-msgstr ""
+msgstr "Koniec gry"
 
 #: ../../src/wui/game_summary.cc:60
 msgid "Elapsed time :"
-msgstr ""
+msgstr "Czas gry :"
 
 #: ../../src/wui/game_summary.cc:77
 msgid "Continue playing"
-msgstr ""
+msgstr "Kontynuuj grę"
 
 #: ../../src/wui/game_summary.cc:83
 msgid "Quit"
-msgstr ""
+msgstr "Zakończ"
 
 #: ../../src/wui/game_summary.cc:83
 msgid "Return to main menu"
-msgstr ""
+msgstr "Wróć do menu głównego"
 
 #: ../../src/wui/game_summary.cc:93
 msgid "Time"
-msgstr ""
+msgstr "Czas"
 
 #: ../../src/wui/game_summary.cc:157
 msgid "Lost"
-msgstr ""
+msgstr "Przegrał"
 
 #: ../../src/wui/game_summary.cc:160
 msgid "Won"
-msgstr ""
+msgstr "Zwyciężył"
 
 #: ../../src/wui/game_summary.cc:168
 msgid "Resigned"
-msgstr ""
+msgstr "Zrezygnował"
 
 #: ../../src/wui/game_summary.cc:171
 msgid "Unkown"
-msgstr ""
+msgstr "Nieznany"
 
 #: ../../src/wui/game_summary.cc:180
 msgid "You won!"
-msgstr ""
+msgstr "Zwyciężyłeś!"
 
 #: ../../src/wui/game_summary.cc:182
 msgid "You lost."
-msgstr ""
+msgstr "Przegrałeś."
 
 #: ../../src/wui/game_summary.cc:187
 #, c-format
 msgid "%s won!"
-msgstr ""
+msgstr "%s zwyciężył!"
 
 #: ../../src/wui/game_summary.cc:191
 msgid "Team %|1$u| won!"
-msgstr ""
+msgstr "Drużyna %|1$u| odniosła zwycięstwo!"
 
 #: ../../src/wui/game_summary.cc:238
 msgid "Score"
-msgstr ""
+msgstr "Wynik"
 
 #: ../../src/wui/game_summary.cc:247
 msgid "Player info"
-msgstr ""
+msgstr "Informacje o graczu"
 
 #: ../../src/wui/general_statistics_menu.cc:172
 msgid "Land"
@@ -5142,7 +5144,7 @@ msgstr "Ustaw wartość"
 #: ../../src/editor/ui_menus/editor_tool_change_resources_options_menu.cc:45
 #: ../../src/editor/ui_menus/editor_tool_menu.cc:70
 msgid "Resources"
-msgstr ""
+msgstr "Surowce"
 
 #: ../../src/editor/ui_menus/editor_tool_change_resources_options_menu.cc:99
 msgid "Current Selection"
@@ -5158,12 +5160,12 @@ msgstr "Nierówności"
 
 #: ../../src/editor/ui_menus/editor_tool_menu.cc:68
 msgid "Immovables"
-msgstr ""
+msgstr "Obiekty statyczne"
 
 #: ../../src/editor/ui_menus/editor_tool_menu.cc:69
 #: ../../src/editor/ui_menus/editor_tool_place_bob_options_menu.cc:45
 msgid "Bobs"
-msgstr ""
+msgstr "Boby"
 
 #: ../../src/editor/ui_menus/editor_tool_menu.cc:71
 msgid "Set port space"
@@ -5190,7 +5192,7 @@ msgstr "Ustaw wartość: %u"
 
 #: ../../src/editor/ui_menus/editor_tool_place_immovable_options_menu.cc:45
 msgid "Immovable Bobs"
-msgstr ""
+msgstr "Statyczne boby"
 
 #: ../../src/editor/ui_menus/editor_tool_set_terrain_options_menu.cc:46
 msgid "Terrain Select"
