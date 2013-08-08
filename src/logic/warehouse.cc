@@ -467,7 +467,8 @@ void Warehouse::init(Editor_Game_Base & egbase)
 		(ref_cast<Game, Editor_Game_Base>(egbase),
 		 "warehouse",
 		 descname(),
-		 message);
+		 message,
+		 true);
 	}
 
 	if (uint32_t const conquer_radius = get_conquers())

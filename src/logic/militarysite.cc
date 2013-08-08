@@ -242,7 +242,8 @@ int MilitarySite::incorporateSoldier(Editor_Game_Base & egbase, Soldier & s)
 				(*game,
 				 "site_occupied",
 				 descname(),
-				 message);
+				 message,
+				 true);
 		}
 	}
 
@@ -842,7 +843,8 @@ bool MilitarySite::attack(Soldier & enemy)
 				(game,
 				 "site_lost",
 				 _("Militarysite lost!"),
-				 message);
+				 message,
+				 false);
 		}
 
 		// Now let's see whether the enemy conquers our militarysite, or whether
@@ -900,7 +902,8 @@ bool MilitarySite::attack(Soldier & enemy)
 			(game,
 			 "site_defeated",
 			 _("Enemy at site defeated!"),
-			 message);
+			 message,
+			 true);
 
 		return false;
 	}
@@ -953,7 +956,7 @@ void MilitarySite::informPlayer(Game & game, bool const discovered)
 		(game,
 		 "under_attack",
 		 _("You are under attack"),
-		 message,
+		 message, false,
 		 60 * 1000, 5);
 }
 

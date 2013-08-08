@@ -387,6 +387,7 @@ int L_Player::send_message(lua_State * L) {
 			 	 title,
 			 	 body,
 				 c,
+				 0,
 				 st),
 			popup);
 

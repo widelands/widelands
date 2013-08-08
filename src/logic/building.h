@@ -268,6 +268,7 @@ public:
 		 const std::string & msgsender,
 		 const std::string & title,
 		 const std::string & description,
+		 bool link_to_building_lifetime = true,
 		 uint32_t throttle_time = 0,
 		 uint32_t throttle_radius = 0);
 protected:
