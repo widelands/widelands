@@ -1,24 +1,28 @@
-# Automatically created by Widelands svn4751 (release)
+# Automatically created by Widelands bzr6709[widelands] (Debug)
 
 [global]
-packet_version="1"
+packet_version="2"
 
 [player_1]
 name="Spieler 1"
 tribe="barbarians"
 ai=
+closeable="false"
 
 [player_2]
 name="Spieler 2"
 tribe="barbarians"
 ai=
+closeable="false"
 
 [player_3]
 name="Spieler 3"
 tribe="barbarians"
 ai=
+closeable="false"
 
 [player_4]
 name="Spieler 4"
 tribe="barbarians"
 ai=
+closeable="false"
