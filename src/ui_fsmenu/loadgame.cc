@@ -26,12 +26,18 @@
 #include "gamecontroller.h"
 #include "gamesettings.h"
 #include "graphic/graphic.h"
+#include "graphic/image_loader_impl.h"
+#include "graphic/image_transformations.h"
+#include "graphic/in_memory_image.h"
+#include "graphic/surface.h"
 #include "i18n.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "log.h"
 #include "logic/game.h"
 #include "timestring.h"
+#include "ui_basic/icon.h"
 #include "ui_basic/messagebox.h"
+
 
 
 Fullscreen_Menu_LoadGame::Fullscreen_Menu_LoadGame
@@ -92,9 +98,16 @@ Fullscreen_Menu_LoadGame::Fullscreen_Menu_LoadGame
 		(this, get_w() * 71 / 100, get_h() * 41 / 100),
 	m_ta_win_condition
 		(this, get_w() * 71 / 100, get_h() * 9 / 20),
-
+	m_label_minimap
+		(this,
+		 get_w() * 7 / 10,  get_h() * 10 / 20,
+		 _("Minimap:"), UI::Align_Right),
+	m_minimap_icon
+		(this, get_w() * 71 / 100, get_h() * 10 / 20,
+		 get_w() * 15 / 100, get_w() * 15 / 100, nullptr),
 	m_settings(gsp),
-	m_ctrl(gc)
+	m_ctrl(gc),
+	m_image_loader(new ImageLoaderImpl())
 {
 	m_back.sigclicked.connect(boost::bind(&Fullscreen_Menu_LoadGame::end_modal, boost::ref(*this), 0));
 	m_ok.sigclicked.connect(boost::bind(&Fullscreen_Menu_LoadGame::clicked_ok, boost::ref(*this)));
@@ -114,6 +127,7 @@ Fullscreen_Menu_LoadGame::Fullscreen_Menu_LoadGame
 	m_label_players .set_font(m_fn, m_fs, UI_FONT_CLR_FG);
 	m_ta_players    .set_font(m_fn, m_fs, UI_FONT_CLR_FG);
 	m_ta_win_condition.set_font(m_fn, m_fs, UI_FONT_CLR_FG);
+	m_minimap_icon.setFrame(UI_FONT_CLR_FG);
 	m_list          .set_font(m_fn, m_fs);
 	m_list.selected.connect(boost::bind(&Fullscreen_Menu_LoadGame::map_selected, this, _1));
 	m_list.double_clicked.connect(boost::bind(&Fullscreen_Menu_LoadGame::double_clicked, this, _1));
@@ -163,6 +177,9 @@ void Fullscreen_Menu_LoadGame::no_selection()
 
 	m_tamapname .set_text(std::string());
 	m_tagametime.set_text(std::string());
+	m_ta_players.set_text(std::string());
+	m_ta_win_condition.set_text(std::string());
+	m_minimap_icon.setIcon(nullptr);
 }
 
 
@@ -217,6 +234,31 @@ void Fullscreen_Menu_LoadGame::map_selected(uint32_t selected)
 		}
 		m_ta_players.set_text(buf);
 		m_ta_win_condition.set_text(gpdp.get_win_condition());
+
+		std::string minimap_path = gpdp.get_minimap_path();
+		// Delete former image
+		m_minimap_icon.setIcon(nullptr);
+		m_minimap_image.reset();
+		// Load the new one
+		if (!minimap_path.empty()) {
+			try {
+				std::unique_ptr<Surface> surface(m_image_loader->load(minimap_path));
+				m_minimap_image.reset(new_in_memory_image("minimap", surface.release()));
+				double scale = double(m_minimap_icon.get_w()) / m_minimap_image->width();
+				double scaleY = double(m_minimap_icon.get_h()) / m_minimap_image->height();
+				if (scaleY < scale) {
+					scale = scaleY;
+				}
+				uint16_t w = scale * m_minimap_image->width();
+				uint16_t h = scale * m_minimap_image->height();
+				const Image* resized = ImageTransformations::resize(m_minimap_image.get(), w, h);
+				// keeps our in_memory_image around and give to icon the one
+				// from resize that is handled by the cache. It is still linked to our
+				// surface
+				m_minimap_icon.setIcon(resized);
+			} catch (...) {
+			}
+		}
 	} else {
 		no_selection();
 	}

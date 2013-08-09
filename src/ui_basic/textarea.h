@@ -97,6 +97,7 @@ private:
 
 	LayoutMode m_layoutmode;
 	std::string m_text;
+	const Image* m_text_image;
 	Align m_align;
 	TextStyle m_textstyle;
 };

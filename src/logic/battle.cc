@@ -175,7 +175,7 @@ void Battle::getBattleWork(Game & game, Soldier & soldier)
 	}
 
 	if (soldier.get_current_hitpoints() < 1) {
-		molog(_("[battle] soldier %u loose battle\n"), soldier.serial());
+		molog(_("[battle] soldier %u lose battle\n"), soldier.serial());
 		soldier          . owner().count_casualty();
 		opponent(soldier)->owner().count_kill    ();
 		soldier.start_task_die(game);

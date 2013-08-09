@@ -40,7 +40,8 @@ class InMemoryImage : public Image {
 public:
 	InMemoryImage(const string& ghash, Surface* surf) :
 		hash_(ghash), surf_(surf) {}
-	virtual ~InMemoryImage() {}
+	virtual ~InMemoryImage() {
+	}
 
 	// Implements Image.
 	virtual uint16_t width() const {return surf_->width();}

@@ -736,7 +736,13 @@ void Player::_enhance_or_dismantle
 		//  Get workers and soldiers
 		//  Make copies of the vectors, because the originals are destroyed with
 		//  the building.
-		const std::vector<Worker  *> workers  = building->get_workers();
+		std::vector<Worker  *> workers;
+		upcast(Warehouse, wh, building);
+		if (wh) {
+			workers = wh->get_incorporated_workers();
+		} else {
+			workers = building->get_workers();
+		}
 
 		building->remove(egbase()); //  no fire or stuff
 		//  Hereafter the old building does not exist and building is a dangling
@@ -1138,11 +1144,8 @@ void Player::unsee_node
 throw ()
 {
 	Field & field = m_fields[i];
-	if (field.vision <= 1) { //  Already does not see this
-		//  FIXME This must never happen!
-		log("ERROR: Decreasing vision for node that is not seen. Report bug!\n");
+	if (field.vision <= 1) //  Already does not see this
 		return;
-	}
 
 	//  If this is not already a forwarded call, we should inform allied players
 	//  as well of this change.

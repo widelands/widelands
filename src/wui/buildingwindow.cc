@@ -35,7 +35,7 @@
 #include "ui_basic/helpwindow.h"
 #include "ui_basic/tabpanel.h"
 #include "upcast.h"
-#include "wui/buildingconfirm.h"
+#include "wui/actionconfirm.h"
 #include "wui/game_debug_ui.h"
 #include "wui/interactive_player.h"
 #include "wui/waresqueuedisplay.h"

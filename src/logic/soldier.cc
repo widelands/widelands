@@ -764,7 +764,7 @@ void Soldier::init_auto_task(Game & game) {
 struct FindNodeOwned {
 	FindNodeOwned(Player_Number owner) : m_owner(owner)
 	{};
-	bool accept(const Map & map, const FCoords & coords) const {
+	bool accept(const Map&, const FCoords& coords) const {
 		return (coords.field->get_owned_by() == m_owner);
 	}
 private:
@@ -998,11 +998,12 @@ void Soldier::attack_update(Game & game, State & state)
 			if (newsite and (&newsite->owner() == &owner())) {
 				if (upcast(SoldierControl, ctrl, newsite)) {
 					state.objvar1 = 0;
+					// We may also have our location destroyed in between
 					if
 						(ctrl->stationedSoldiers().size() < ctrl->soldierCapacity() and
-						location->base_flag().get_position()
-						!=
-						newsite ->base_flag().get_position())
+						(!location || location->base_flag().get_position()
+						              !=
+						              newsite ->base_flag().get_position()))
 					{
 						molog("[attack] enemy belongs to us now, move in\n");
 						pop_task(game);
@@ -1539,15 +1540,14 @@ void Soldier::battle_update(Game & game, State &)
 					char buffer[2048];
 					snprintf
 						(buffer, sizeof(buffer),
-						 _
-						 	("The game engine has encountered a logic error. The %s "
-						 	 "#%u of player %u could not find a way from (%i, %i) "
-						 	 "(with %s immovable) to the opponent (%s #%u of player "
-						 	 "%u) at (%i, %i) (with %s immovable). The %s will now "
-						 	 "desert (but will not be executed). Strange things may "
-						 	 "happen. No solution for this problem has been "
-						 	 "implemented yet. (bug #1951113) (The game has been "
-						 	 "paused.)"),
+							"The game engine has encountered a logic error. The %s "
+							"#%u of player %u could not find a way from (%i, %i) "
+							"(with %s immovable) to the opponent (%s #%u of player "
+							"%u) at (%i, %i) (with %s immovable). The %s will now "
+							"desert (but will not be executed). Strange things may "
+							"happen. No solution for this problem has been "
+							"implemented yet. (bug #536066) (The game has been "
+							"paused.)",
 						 descname().c_str(), serial(), owner().player_number(),
 						 get_position().x, get_position().y,
 						 immovable_position ?

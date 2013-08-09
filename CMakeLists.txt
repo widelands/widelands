@@ -247,7 +247,7 @@ CHECK_CXX_COMPILER_FLAG(${PARAMETER_COMPILERFLAG_GCCWARNINGS} Compiler_gcc_warni
 IF (Compiler_gcc_warnings_supported)
   set (WL_COMPILERFLAG_GCCWARNINGS " ${PARAMETER_COMPILERFLAG_GCCWARNINGS}") #the space is on purpose!
 ELSE (Compiler_gcc_warnings_supported)
-  message("Warning: could not add additional GCC-specific warning options: ${PARAMETER_COMPILERFLAG_GCCWARNINGS}. Most likely you are using a different compiler, like Clang/LLVM.")
+  message("Warning: could not add additional GCC-specific warning options: ${PARAMETER_COMPILERFLAG_GCCWARNINGS}. Most likely you are using a different compiler, like Clang/LLVM or Visual Studio.")
 ENDIF (Compiler_gcc_warnings_supported)
 
 CHECK_CXX_COMPILER_FLAG(${PARAMETER_COMPILERFLAG_GCCWARNINGS} Compiler_gcc_warnings_supported)

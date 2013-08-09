@@ -21,19 +21,25 @@
 #define FULLSCREEN_MENU_LOADGAME_H
 
 #include "ui_fsmenu/base.h"
+
+#include "graphic/image.h"
+#include "graphic/image_loader.h"
 #include "io/filesystem/filesystem.h"
 #include "ui_basic/button.h"
 #include "ui_basic/checkbox.h"
+#include "ui_basic/icon.h"
 #include "ui_basic/listselect.h"
 #include "ui_basic/multilinetextarea.h"
 #include "ui_basic/textarea.h"
 
+class IImageLoader;
 namespace Widelands {
 struct Editor_Game_Base;
 struct Game;
 struct Map;
 struct Map_Loader;
 };
+class Image;
 class RenderTarget;
 struct GameController;
 struct GameSettingsProvider;
@@ -74,12 +80,16 @@ private:
 	UI::Textarea                                    m_label_players;
 	UI::Textarea                                    m_ta_players;
 	UI::Textarea                                    m_ta_win_condition;
+	UI::Textarea                                    m_label_minimap;
+	UI::Icon                                        m_minimap_icon;
 	std::string                                     m_filename;
 
 	filenameset_t                                   m_gamefiles;
 
 	GameSettingsProvider                          * m_settings;
 	GameController                                * m_ctrl;
+	std::unique_ptr<const Image>                    m_minimap_image;
+	std::unique_ptr<const IImageLoader>             m_image_loader;
 };
 
 

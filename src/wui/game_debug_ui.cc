@@ -372,13 +372,13 @@ void FieldDebugWindow::think()
 		int ramount = m_coords.field->get_resources_amount();
 		int startingAmount = m_coords.field->get_starting_res_amount();
 		snprintf
-		(buffer, sizeof(buffer), _("Resource name: %s\n"),
+		(buffer, sizeof(buffer), _("Resource: %s\n"),
 			m_map.get_world()->get_resource(ridx)->name().c_str());
 
 		str += buffer;
 
 		snprintf
-		(buffer, sizeof(buffer), _("Resource amount: %i/%i\n"), ramount, startingAmount);
+		(buffer, sizeof(buffer), _("  Amount: %i/%i\n"), ramount, startingAmount);
 		str += buffer;
 	}
 
@@ -403,14 +403,13 @@ void FieldDebugWindow::think()
 
 	// Do not clear the list. Instead parse all bobs and sync lists
 	for (uint32_t idx = 0; idx < m_ui_bobs.size(); idx++) {
-		Widelands::Map_Object* mo = 
+		Widelands::Map_Object* mo =
 			ibase().egbase().objects().get_object(m_ui_bobs[idx]);
 		bool toremove = false;
 		std::vector<Widelands::Bob *>::iterator removeIt;
 		// Nested loop :(
 		container_iterate(std::vector<Widelands::Bob *>, bobs, j) {
-			if ((*j.current) && mo
-				&& (*j.current)->serial() == mo->serial()) {
+			if ((*j.current) && mo && (*j.current)->serial() == mo->serial()) {
 				// Remove from the bob list if we already
 				// have it in our list
 				toremove = true;

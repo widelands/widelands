@@ -609,6 +609,7 @@ void Worker::informPlayer
 		 	 "of the following type: "))
 		 +
 		 res_type,
+		 true,
 		 1800000, 0);
 }
 

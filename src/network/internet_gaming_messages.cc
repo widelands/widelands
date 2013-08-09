@@ -45,7 +45,7 @@ void InternetGamingMessages::fill_map() {
 	igmessages["ALREADY_LOGGED_IN"]    = _("You are already logged in!");
 	igmessages["DEFICIENT_PERMISSION"] =
 		_
-		 ("You got disconnected, as you send a superuser command without superuser permission."
+		 ("You got disconnected, as you sent a superuser command without superuser permission. "
 		  "This incident will be logged and reported to the administrator.");
 	igmessages["RESTARTING"]           = _("You got disconnected, as the metaserver is currently restarting.");
 	// messages from client to metaserver

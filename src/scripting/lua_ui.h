@@ -179,7 +179,7 @@ public:
 	L_MapView(lua_State * L);
 	virtual ~L_MapView() {}
 
-	virtual void __persist(lua_State * L) {}
+	virtual void __persist(lua_State *) {}
 	virtual void __unpersist(lua_State * L);
 
 	/*

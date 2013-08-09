@@ -39,36 +39,39 @@
 
 namespace Widelands {
 
+// NOTE keep numbers of existing entries as they are to ensure backward compatible savegame loading
 enum {
-	PLCMD_UNUSED = 0,
-	PLCMD_BULLDOZE,
-	PLCMD_BUILD,
-	PLCMD_BUILDFLAG,
-	PLCMD_BUILDROAD,
-	PLCMD_FLAGACTION,
-	PLCMD_STARTSTOPBUILDING,
-	PLCMD_ENHANCEBUILDING,
-	PLCMD_CHANGETRAININGOPTIONS,
-	PLCMD_DROPSOLDIER,
-	PLCMD_CHANGESOLDIERCAPACITY,
-	PLCMD_ENEMYFLAGACTION,
-	PLCMD_SETWAREPRIORITY,
-	PLCMD_SETWARETARGETQUANTITY,
-	PLCMD_RESETWARETARGETQUANTITY,
-	PLCMD_SETWORKERTARGETQUANTITY,
-	PLCMD_RESETWORKERTARGETQUANTITY,
-	PLCMD_CHANGEMILITARYCONFIG,
-	PLCMD_MESSAGESETSTATUSREAD,
-	PLCMD_MESSAGESETSTATUSARCHIVED,
-	PLCMD_SETSTOCKPOLICY,
-	PLCMD_SETWAREMAXFILL,
-	PLCMD_DISMANTLEBUILDING,
-	PLCMD_EVICTWORKER,
-	PLCMD_MILITARYSITESETSOLDIERPREFERENCE,
-	PLCMD_SHIP_EXPEDITION,
-	PLCMD_SHIP_SCOUT,
-	PLCMD_SHIP_EXPLORE,
-	PLCMD_SHIP_CONSTRUCT
+	PLCMD_UNUSED                           = 0,
+	PLCMD_BULLDOZE                         = 1,
+	PLCMD_BUILD                            = 2,
+	PLCMD_BUILDFLAG                        = 3,
+	PLCMD_BUILDROAD                        = 4,
+	PLCMD_FLAGACTION                       = 5,
+	PLCMD_STARTSTOPBUILDING                = 6,
+	PLCMD_ENHANCEBUILDING                  = 7,
+	PLCMD_CHANGETRAININGOPTIONS            = 8,
+	PLCMD_DROPSOLDIER                      = 9,
+	PLCMD_CHANGESOLDIERCAPACITY            = 10,
+	PLCMD_ENEMYFLAGACTION                  = 11,
+	PLCMD_SETWAREPRIORITY                  = 12,
+	PLCMD_SETWARETARGETQUANTITY            = 13,
+	PLCMD_RESETWARETARGETQUANTITY          = 14,
+	PLCMD_SETWORKERTARGETQUANTITY          = 15,
+	PLCMD_RESETWORKERTARGETQUANTITY        = 16,
+	PLCMD_CHANGEMILITARYCONFIG             = 17,
+	PLCMD_MESSAGESETSTATUSREAD             = 18,
+	PLCMD_MESSAGESETSTATUSARCHIVED         = 19,
+	PLCMD_SETSTOCKPOLICY                   = 20,
+	PLCMD_SETWAREMAXFILL                   = 21,
+	PLCMD_DISMANTLEBUILDING                = 22,
+	PLCMD_EVICTWORKER                      = 23,
+	PLCMD_MILITARYSITESETSOLDIERPREFERENCE = 24,
+	PLCMD_SHIP_EXPEDITION                  = 25,
+	PLCMD_SHIP_SCOUT                       = 26,
+	PLCMD_SHIP_EXPLORE                     = 27,
+	PLCMD_SHIP_CONSTRUCT                   = 28,
+	PLCMD_SHIP_SINK                        = 29,
+	PLCMD_SHIP_CANCELEXPEDITION            = 30
 };
 
 /*** class PlayerCommand ***/
@@ -90,6 +93,8 @@ PlayerCommand * PlayerCommand::deserialize (StreamRead & des)
 	case PLCMD_SHIP_SCOUT:                return new Cmd_ShipScoutDirection       (des);
 	case PLCMD_SHIP_EXPLORE:              return new Cmd_ShipExploreIsland        (des);
 	case PLCMD_SHIP_CONSTRUCT:            return new Cmd_ShipConstructPort        (des);
+	case PLCMD_SHIP_SINK:                 return new Cmd_ShipSink                 (des);
+	case PLCMD_SHIP_CANCELEXPEDITION:     return new Cmd_ShipCancelExpedition     (des);
 	case PLCMD_ENHANCEBUILDING:           return new Cmd_EnhanceBuilding          (des);
 	case PLCMD_CHANGETRAININGOPTIONS:     return new Cmd_ChangeTrainingOptions    (des);
 	case PLCMD_DROPSOLDIER:               return new Cmd_DropSoldier              (des);
@@ -994,6 +999,118 @@ void Cmd_ShipExploreIsland::Write
 
 	// Direction of exploration
 	fw.Unsigned8 (clockwise ? 1 : 0);
+}
+
+
+/*** Cmd_ShipSink ***/
+Cmd_ShipSink::Cmd_ShipSink (StreamRead& des) :
+	PlayerCommand (0, des.Unsigned8())
+{
+	serial = des.Unsigned32();
+}
+
+void Cmd_ShipSink::execute (Game & game)
+{
+	upcast(Ship, ship, game.objects().get_object(serial));
+	if (ship && ship->get_economy()->owner().player_number() == sender()) {
+		ship->sink_ship(game);
+	}
+}
+
+void Cmd_ShipSink::serialize (StreamWrite & ser)
+{
+	ser.Unsigned8 (PLCMD_SHIP_SINK);
+	ser.Unsigned8 (sender());
+	ser.Unsigned32(serial);
+}
+
+#define PLAYER_CMD_SHIP_SINK_VERSION 1
+void Cmd_ShipSink::Read
+	(FileRead & fr, Editor_Game_Base & egbase, Map_Map_Object_Loader & mol)
+{
+	try {
+		const uint16_t packet_version = fr.Unsigned16();
+		if (packet_version == PLAYER_CMD_SHIP_SINK_VERSION) {
+			PlayerCommand::Read(fr, egbase, mol);
+			const uint32_t ship_serial = fr.Unsigned32();
+			try {
+				serial = mol.get<Map_Object>(ship_serial).serial();
+			} catch (const _wexception & e) {
+				throw game_data_error("Ship %u: %s", ship_serial, e.what());
+			}
+		} else
+			throw game_data_error("unknown/unhandled version %u", packet_version);
+	} catch (const _wexception & e) {
+		throw game_data_error("Ship explore: %s", e.what());
+	}
+}
+void Cmd_ShipSink::Write
+	(FileWrite & fw, Editor_Game_Base & egbase, Map_Map_Object_Saver & mos)
+{
+	// First, write version
+	fw.Unsigned16(PLAYER_CMD_SHIP_SINK_VERSION);
+	// Write base classes
+	PlayerCommand::Write(fw, egbase, mos);
+
+	// Now serial
+	const Map_Object & obj = *egbase.objects().get_object(serial);
+	fw.Unsigned32(mos.get_object_file_index(obj));
+}
+
+
+/*** Cmd_ShipCancelExpedition ***/
+Cmd_ShipCancelExpedition::Cmd_ShipCancelExpedition (StreamRead& des) :
+	PlayerCommand (0, des.Unsigned8())
+{
+	serial = des.Unsigned32();
+}
+
+void Cmd_ShipCancelExpedition::execute (Game & game)
+{
+	upcast(Ship, ship, game.objects().get_object(serial));
+	if (ship && ship->get_economy()->owner().player_number() == sender()) {
+		ship->exp_cancel(game);
+	}
+}
+
+void Cmd_ShipCancelExpedition::serialize (StreamWrite & ser)
+{
+	ser.Unsigned8 (PLCMD_SHIP_SINK);
+	ser.Unsigned8 (sender());
+	ser.Unsigned32(serial);
+}
+
+#define PLAYER_CMD_SHIP_CANCELEXPEDITION_VERSION 1
+void Cmd_ShipCancelExpedition::Read
+	(FileRead & fr, Editor_Game_Base & egbase, Map_Map_Object_Loader & mol)
+{
+	try {
+		const uint16_t packet_version = fr.Unsigned16();
+		if (packet_version == PLAYER_CMD_SHIP_CANCELEXPEDITION_VERSION) {
+			PlayerCommand::Read(fr, egbase, mol);
+			const uint32_t ship_serial = fr.Unsigned32();
+			try {
+				serial = mol.get<Map_Object>(ship_serial).serial();
+			} catch (const _wexception & e) {
+				throw game_data_error("Ship %u: %s", ship_serial, e.what());
+			}
+		} else
+			throw game_data_error("unknown/unhandled version %u", packet_version);
+	} catch (const _wexception & e) {
+		throw game_data_error("Ship explore: %s", e.what());
+	}
+}
+void Cmd_ShipCancelExpedition::Write
+	(FileWrite & fw, Editor_Game_Base & egbase, Map_Map_Object_Saver & mos)
+{
+	// First, write version
+	fw.Unsigned16(PLAYER_CMD_SHIP_CANCELEXPEDITION_VERSION);
+	// Write base classes
+	PlayerCommand::Write(fw, egbase, mos);
+
+	// Now serial
+	const Map_Object & obj = *egbase.objects().get_object(serial);
+	fw.Unsigned32(mos.get_object_file_index(obj));
 }
 
 
