@@ -1,9 +1,11 @@
 size=medium
-max_soldiers=5
-heal_per_second=130
-conquers=8
 buildable=no
+
+[garrison]
+conquers=8
+max_soldiers=5
 prefer_heroes=true
+heal_per_second=130
 
 [idle]
 pics=../../../tribes/empire/barrier/barrier_i_??.png

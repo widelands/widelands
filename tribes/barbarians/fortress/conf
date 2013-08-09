@@ -1,9 +1,11 @@
 size=big
-max_soldiers=8
-heal_per_second=170
-conquers=11
 enhancement=citadel
+
+[garrison]
+conquers=11
+max_soldiers=8
 prefer_heroes=true
+heal_per_second=170
 
 [buildcost]
 blackwood=9

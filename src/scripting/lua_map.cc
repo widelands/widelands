@@ -98,6 +98,8 @@ int upcasted_immovable_to_lua(lua_State * L, BaseImmovable * mo) {
 				return CAST_TO_LUA(MilitarySite);
 			else if (!strcmp(type_name, "warehouse"))
 				return CAST_TO_LUA(Warehouse);
+			else if (!strcmp(type_name, "headquarters"))
+				return CAST_TO_LUA(Headquarters);
 			else if (!strcmp(type_name, "trainingsite"))
 				return CAST_TO_LUA(TrainingSite);
 			else
@@ -1885,183 +1887,26 @@ const PropertyType<L_Warehouse> L_Warehouse::Properties[] = {
 	{0, 0, 0},
 };
 
-/*
- ==========================================================
- PROPERTIES
- ==========================================================
- */
 
-/*
- ==========================================================
- LUA METHODS
- ==========================================================
- */
-#define WH_SET(type, btype) \
-int L_Warehouse::set_##type##s(lua_State * L) { \
-	Warehouse * wh = get(L, get_egbase(L)); \
-	const Tribe_Descr & tribe = wh->owner().tribe(); \
-	btype##sMap setpoints = m_parse_set_##type##s_arguments(L, tribe); \
- \
-	container_iterate_const(btype##sMap, setpoints, i) { \
-		int32_t d = i.current->second - \
-			wh->get_##type##s().stock(i.current->first); \
-		if (d < 0) \
-			wh->remove_##type##s(i.current->first, -d); \
-		else if (d > 0) \
-			wh->insert_##type##s(i.current->first, d); \
-	} \
-	return 0; \
-}
-// documented in parent class
-// WH_SET(ware, Ware);
-// documented in parent class
-// WH_SET(worker, Worker);
-// WH_SET(soldier, Soldier);
-#undef WH_SET
+const char L_Headquarters::className[] = "Headquarters";
+const MethodType<L_Headquarters> L_Headquarters::Methods[] = {
+	METHOD(L_Headquarters, set_wares),
+	METHOD(L_Headquarters, get_wares),
+	METHOD(L_Headquarters, set_workers),
+	METHOD(L_Headquarters, get_workers),
+	{"get_soldiers", &_StorageOwner::get_soldiers },
+	{"set_soldiers", &_StorageOwner::set_soldiers },
+	METHOD(L_Headquarters, set_ware_policy),
+	METHOD(L_Headquarters, get_ware_policy),
+	METHOD(L_Headquarters, get_worker_policy),
+	METHOD(L_Headquarters, get_worker_policy),
+	{0, 0},
+};
+const PropertyType<L_Headquarters> L_Headquarters::Properties[] = {
+	{0, 0, 0},
+};
 
-#define WH_GET(type, btype) \
-int L_Warehouse::get_##type##s(lua_State * L) { \
-	Warehouse * wh = get(L, get_egbase(L)); \
-	const Tribe_Descr & tribe = wh->owner().tribe(); \
-	bool return_number = false; \
-	btype##sSet set = m_parse_get_##type##s_arguments \
-		(L, tribe, &return_number); \
-	lua_newtable(L); \
-	if (return_number) \
-		lua_pushuint32(L, wh->get_##type##s().stock(*set.begin())); \
-	else { \
-		lua_newtable(L); \
-		container_iterate_const(btype##sSet, set, i) { \
-			lua_pushstring(L, tribe.get_##type##_descr(*i.current)->name()); \
-			lua_pushuint32(L, wh->get_##type##s().stock(*i.current)); \
-			lua_rawset(L, -3); \
-		} \
-	} \
-	return 1; \
-}
-// documented in parent class
-// WH_GET(ware, Ware);
-// documented in parent class
-// WH_GET(worker, Worker);
-// WH_GET(soldier, Soldier);
-#undef GET
 
-/*
- ==========================================================
- C METHODS
- ==========================================================
- */
-/* FIXME CGH to move to headquarterrs
-int L_Warehouse::get_soldiers(lua_State * L) {
-	Editor_Game_Base & egbase = get_egbase(L);
-	Game & game = get_game(L);
-	const Tribe_Descr & tribe = get(L, egbase)->owner().tribe();
-	Warehouse* wh = get(L, egbase);
-	const WareList& wl = wh->get_workers();
-	Ware_Index ware_idx = tribe.safe_worker_index("soldier");
-	uint16_t amount = wl.stock(ware_idx);
-
-	const Soldier_Descr & soldier_descr =  //  soldiers
-			 ref_cast<Soldier_Descr const, Worker_Descr const>
-						(*tribe.get_worker_descr(ware_idx));
-
-	std::vector<Soldier *> vec;
-	for (uint16_t i = 0 ;  i < amount ; i++) {
-		Worker& w = wh->launch_worker(game, ware_idx, Requirements());
-		upcast(Soldier, s, &w);
-		vec.push_back(s);
-	}
-	SoldiersList current_soldiers;
-	return m_handle_get_soldiers(L, soldier_descr, vec);
-}
-
-int L_Warehouse::set_soldiers(lua_State * L) {
-	Editor_Game_Base & egbase = get_egbase(L);
-	Game & game = get_game(L);
-	Warehouse * wh = get(L, egbase);
-	const Tribe_Descr & tribe = wh->owner().tribe();
-
-	const Soldier_Descr & soldier_descr =  //  soldiers
-		ref_cast<Soldier_Descr const, Worker_Descr const>
-			(*tribe.get_worker_descr(tribe.worker_index("soldier")));
-
-	const WareList& wl = wh->get_workers();
-	Ware_Index ware_idx = tribe.safe_worker_index("soldier");
-	uint16_t amount = wl.stock(ware_idx);
-	SoldiersMap setpoints = m_parse_set_soldiers_arguments(L, soldier_descr);
-
-	std::vector<Soldier *> vec;
-	for (uint16_t i = 0 ;  i < amount ; i++) {
-		Worker& w = wh->launch_worker(game, ware_idx, Requirements());
-		upcast(Soldier, s, &w);
-		vec.push_back(s);
-	}
-
-	// Get information about current soldiers
-	std::vector<Soldier *> curs = vec;
-	SoldiersMap hist;
-	container_iterate (std::vector<Soldier * >, curs, s) {
-		SoldierDescr sd
-			((*s.current)->get_hp_level(),
-			 (*s.current)->get_attack_level(),
-			 (*s.current)->get_defense_level(),
-			 (*s.current)->get_evade_level());
-
-		SoldiersMap::iterator i = hist.find(sd);
-		if (i == hist.end())
-			hist[sd] = 1;
-		else
-			i->second += 1;
-		if (not setpoints.count(sd))
-			setpoints[sd] = 0;
-	}
-
-	// Now adjust them
-	container_iterate_const(SoldiersMap, setpoints, sp) {
-		uint32_t cur = 0;
-		SoldiersMap::iterator i = hist.find(sp->first);
-		if (i != hist.end())
-			cur = i->second;
-
-		int d = sp->second - cur;
-		if (d < 0) {
-			while (d) {
-				std::vector<Soldier *> stationed_soldiers = vec;
-				container_iterate_const(std::vector<Soldier *>, stationed_soldiers, s)
-				{
-					SoldierDescr is
-						((*s.current)->get_hp_level(),
-						 (*s.current)->get_attack_level(),
-						 (*s.current)->get_defense_level(),
-						 (*s.current)->get_evade_level());
-
-					if (is == sp->first) {
-						Soldier* sol = *s.current;
-						sol->start_task_leavebuilding(game, true);
-						(*s.current)->remove(egbase);
-						++d;
-						break;
-					}
-				}
-			}
-		} else if (d > 0) {
-			for (; d; --d) {
-				Soldier & soldier =
-					ref_cast<Soldier, Worker>
-					(soldier_descr.create
-					 (egbase, wh->owner(), 0, wh->get_position()));
-
-				soldier.set_level
-					(sp.current->first.hp, sp.current->first.at,
-					 sp.current->first.de, sp.current->first.ev);
-
-				wh->incorporate_worker(egbase, soldier);
-			}
-		}
-	}
-	return 0;
-}
-*/
 /* RST
 ProductionSite
 --------------
@@ -3199,6 +3044,13 @@ void luaopen_wlmap(lua_State * L) {
 	add_parent<L_Warehouse, L_PlayerImmovable>(L);
 	add_parent<L_Warehouse, L_BaseImmovable>(L);
 	add_parent<L_Warehouse, L_MapObject>(L);
+	lua_pop(L, 1); // Pop the meta table
+
+	register_class<L_Headquarters>(L, "map", true);
+	add_parent<L_Headquarters, L_Building>(L);
+	add_parent<L_Headquarters, L_PlayerImmovable>(L);
+	add_parent<L_Headquarters, L_BaseImmovable>(L);
+	add_parent<L_Headquarters, L_MapObject>(L);
 	lua_pop(L, 1); // Pop the meta table
 
 	register_class<L_ProductionSite>(L, "map", true);

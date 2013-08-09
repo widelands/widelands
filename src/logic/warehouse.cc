@@ -38,6 +38,7 @@
 #include "logic/findbob.h"
 #include "logic/findnode.h"
 #include "logic/game.h"
+#include "logic/headquarters.h"
 #include "logic/message_queue.h"
 #include "logic/player.h"
 #include "logic/requirements.h"
@@ -56,21 +57,31 @@ Warehouse_Descr::Warehouse_Descr
 	(char const * const _name, char const * const _descname,
 	 const std::string & directory, Profile & prof, Section & global_s,
 	 const Tribe_Descr & _tribe)
-:
-	Building_Descr(_name, _descname, directory, prof, global_s, _tribe),
-m_conquers    (0),
-m_heal_per_second(0)
+:  Building_Descr(_name, _descname, directory, prof, global_s, _tribe)
 {
-	m_heal_per_second     = global_s.get_safe_int("heal_per_second");
-	if
-		((m_conquers =
-		  	prof.get_safe_section("global").get_positive("conquers", 0)))
-		m_workarea_info[m_conquers].insert(descname() + _(" conquer"));
+	Section* garrison_s = prof.get_section("garrison");
+	if (garrison_s) {
+		m_has_garrison = true;
+		m_conquers = garrison_s->get_safe_int("conquers");
+		m_maxsoldiers = garrison_s->get_safe_int("max_soldiers");
+		m_heal_per_second = garrison_s->get_safe_int("heal_per_second");
+		if (m_conquers > 0)
+			m_workarea_info[m_conquers].insert(descname() + _(" conquer"));
+		m_preferheroes = garrison_s->get_safe_bool("prefer_heroes");
+	} else {
+		m_heal_per_second = global_s.get_safe_int("heal_per_second");
+		m_has_garrison = false;
+		m_conquers = global_s.get_int("conquers");
+	}
 }
 
 Building& Warehouse_Descr::create_object() const
 {
-	return *new Warehouse(*this);
+	if (!m_has_garrison) {
+		return *new Warehouse(*this);
+	} else {
+		return *new Headquarters(*this);
+	}
 }
 
 

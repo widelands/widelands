@@ -26,6 +26,7 @@
 #include "ui_basic/tabpanel.h"
 #include "wui/buildingwindow.h"
 #include "wui/portdockwaresdisplay.h"
+#include "wui/soldierlist.h"
 #include "wui/waresdisplay.h"
 
 using Widelands::Warehouse;

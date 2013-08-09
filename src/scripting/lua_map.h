@@ -35,6 +35,7 @@
 #include "logic/trainingsite.h"
 #include "logic/warehouse.h"
 #include "logic/worker.h"
+#include <logic/headquarters.h>
 #include "scripting/luna.h"
 
 
@@ -465,16 +466,44 @@ public:
 	 * C Methods
 	 */
 	CASTED_GET(Warehouse);
-	// FIXME CGH to be put in headquarters
-// 	Widelands::Garrison * get_sc
-// 		(lua_State * L, Widelands::Editor_Game_Base & g)
-// 	{
-// 		return get(L, g);
-// 	}
-	virtual Widelands::Storage * get_storage
+	Widelands::Storage * get_storage
 		(lua_State * L, Widelands::Editor_Game_Base & g)
 	{
 		return get(L, g)->get_storage();
+	}
+};
+
+class L_Headquarters : public L_Building, public _StorageOwner, public _SoldierEmployer
+{
+public:
+	LUNA_CLASS_HEAD(L_Headquarters);
+
+	L_Headquarters() {}
+	L_Headquarters(Widelands::Headquarters & mo) : L_Building(mo) {
+	}
+	L_Headquarters(lua_State * L) : L_Building(L) {}
+	virtual ~L_Headquarters() {}
+
+	/*
+	 * Properties
+	 */
+
+	/*
+	 * Lua Methods
+	 */
+
+	/*
+	 * C Methods
+	 */
+	CASTED_GET(Headquarters);
+	Widelands::Storage * get_storage
+		(lua_State * L, Widelands::Editor_Game_Base & g)
+	{
+		return get(L, g)->get_storage();
+	}
+
+	Widelands::Garrison* get_garrison(lua_State* L, Widelands::Editor_Game_Base& g) {
+		return get(L, g)->get_garrison();
 	}
 };
 

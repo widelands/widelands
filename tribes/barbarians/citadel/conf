@@ -1,10 +1,12 @@
 size=big
 buildable=no
-max_soldiers=12
-heal_per_second=220
-conquers=12
 enhanced_building=yes
+
+[garrison]
+conquers=12
+max_soldiers=12
 prefer_heroes=true
+heal_per_second=220
 
 [enhancement_cost]
 blackwood=9

@@ -1,9 +1,11 @@
 size=medium
-max_soldiers=5
-heal_per_second=150
-conquers=9
 vision_range=19
+
+[garrison]
+conquers=9
+max_soldiers=5
 prefer_heroes=true
+heal_per_second=150
 
 [buildcost]
 trunk=2

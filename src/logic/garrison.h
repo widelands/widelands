@@ -41,7 +41,6 @@ enum {
 	 */
 	MaxProtectionRadius = 25
 };
-
 /**
  * A garrison represents a bunch of soldiers. Garrisons are owned by GarrisonOwner
  * buildings. This interface provides various methods to deal with soldier control

@@ -113,7 +113,7 @@ ProductionSite_Descr::ProductionSite_Descr
 			} catch (const _wexception & e) {
 				throw wexception("%s=\"%s\": %s", v->get_name(), v->get_string(), e.what());
 			}
-	if (working_positions().empty() and not global_s.has_val("max_soldiers"))
+	if (working_positions().empty() and prof.get_section("garrison") == nullptr)
 		throw wexception("no working/soldier positions");
 
 	// Get programs

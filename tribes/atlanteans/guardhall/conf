@@ -1,7 +1,9 @@
 size=medium
-max_soldiers=7
+
+[garrison]
 heal_per_second=140
 conquers=7
+max_soldiers=7
 prefer_heroes=true
 
 [buildcost]

@@ -53,14 +53,20 @@ struct Warehouse_Descr : public Building_Descr {
 
 	virtual Building & create_object() const;
 
-	virtual uint32_t get_conquers() const {return m_conquers;}
-
 	uint32_t get_heal_per_second        () const throw () {
 		return m_heal_per_second;
 	}
+	bool has_garrison() const {return m_has_garrison;}
+	uint32_t get_max_soldiers() const {return m_maxsoldiers;}
+	virtual uint32_t get_conquers() const {return m_conquers;}
+	bool get_prefer_heroes() const {return m_preferheroes;}
 private:
-	int32_t m_conquers;
 	uint32_t m_heal_per_second;
+	bool m_has_garrison;
+	uint32_t m_maxsoldiers;
+	uint32_t m_conquers;
+	bool m_preferheroes;
+
 };
 
 
@@ -147,7 +153,6 @@ private:
 	PortDock * m_portdock;
 	std::vector<WaresQueue *> m_expedition_wares;
 	std::vector<Expedition_Worker *> m_expedition_workers;
-
 };
 
 }

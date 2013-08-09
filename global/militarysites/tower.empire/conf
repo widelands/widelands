@@ -1,10 +1,11 @@
 size=medium
-max_soldiers=5
-heal_per_second=150
-conquers=9
-vision_range=19
 buildable=no
+
+[garrison]
+conquers=9
+max_soldiers=5
 prefer_heroes=true
+heal_per_second=150
 
 [idle]
 pics=../../../tribes/empire/tower/tower_i_??.png

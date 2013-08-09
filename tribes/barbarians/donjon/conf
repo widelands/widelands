@@ -1,9 +1,11 @@
 size=medium
-max_soldiers=5
-heal_per_second=150
-conquers=8
 vision_range=17
+
+[garrison]
+conquers=8
+max_soldiers=5
 prefer_heroes=true
+heal_per_second=150
 
 [buildcost]
 blackwood=7

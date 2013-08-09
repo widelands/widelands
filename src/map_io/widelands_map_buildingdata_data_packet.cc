@@ -44,6 +44,7 @@
 #include "logic/widelands_filewrite.h"
 #include "logic/worker.h"
 #include <logic/storagehandler.h>
+#include <logic/headquarters.h>
 #include "map_io/widelands_map_map_object_loader.h"
 #include "map_io/widelands_map_map_object_saver.h"
 #include "upcast.h"
@@ -62,6 +63,8 @@ namespace Widelands {
 #define CURRENT_PARTIALLYFB_PACKET_VERSION      1
 // WAREHOUSE: V7 (b18) splitted storage
 #define CURRENT_WAREHOUSE_PACKET_VERSION        7
+// HEADQUERTERS: V1 (b18)
+#define CURRENT_HEADQUARTERS_PACKET_VERSION     1
 // MILITARYSITE: V4 (b18) splitted garrison
 #define CURRENT_MILITARYSITE_PACKET_VERSION     4
 #define CURRENT_PRODUCTIONSITE_PACKET_VERSION   5
@@ -208,6 +211,12 @@ throw (_wexception)
 					} else if (upcast(Warehouse, warehouse, &building)) {
 						read_warehouse
 							(*warehouse,
+							 fr,
+							 ref_cast<Game, Editor_Game_Base>(egbase),
+							 mol);
+					} else if (upcast(Headquarters, headquarters, &building)) {
+						read_headquarters
+							(*headquarters,
 							 fr,
 							 ref_cast<Game, Editor_Game_Base>(egbase),
 							 mol);
@@ -730,6 +739,21 @@ void Map_Buildingdata_Data_Packet::read_warehouse
 				warehouse.vision_range()));
 	} catch (const _wexception & e) {
 		throw game_data_error(_("warehouse: %s"), e.what());
+	}
+}
+
+void Map_Buildingdata_Data_Packet::read_headquarters(Headquarters& hq, FileRead& fr, Game& g, Map_Map_Object_Loader& mol)
+{
+	try {
+		uint16_t const packet_version = fr.Unsigned16();
+		if (packet_version < 1 || packet_version > CURRENT_HEADQUARTERS_PACKET_VERSION) {
+			throw game_data_error
+				(_("unknown/unhandled version %u"), packet_version);
+		}
+		read_storage(*hq.get_storage(), fr, g, mol);
+		read_garrison(*hq.get_garrison(), fr, g, mol);
+	} catch (const _wexception & e) {
+		throw game_data_error(_("headquarters: %s"), e.what());
 	}
 }
 
@@ -1438,6 +1462,12 @@ throw (_wexception)
 					 fw,
 					 ref_cast<Game, Editor_Game_Base>(egbase),
 					 mos);
+			else if (upcast(Headquarters const, headquarters, building))
+				write_headquarters
+					(*headquarters,
+					 fw,
+					 ref_cast<Game, Editor_Game_Base>(egbase),
+					 mos);
 			else if (upcast(ProductionSite const, productionsite, building)) {
 				if (upcast(MilitarySite const, militarysite, productionsite))
 					write_militarysite
@@ -1575,6 +1605,14 @@ void Map_Buildingdata_Data_Packet::write_warehouse
 		}
 	}
 }
+
+void Map_Buildingdata_Data_Packet::write_headquarters(const Headquarters& hq, FileWrite& fw, Game& g, Map_Map_Object_Saver& mos)
+{
+	fw.Unsigned16(CURRENT_HEADQUARTERS_PACKET_VERSION);
+	write_storage(*hq.get_storage(), fw, g, mos);
+	write_garrison(*hq.get_garrison(), fw, g, mos);
+}
+
 
 
 void Map_Buildingdata_Data_Packet::write_militarysite

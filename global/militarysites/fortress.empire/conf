@@ -1,9 +1,11 @@
 size=big
-max_soldiers=8
-heal_per_second=170
-conquers=11
 buildable=no
+
+[garrison]
+conquers=11
+max_soldiers=8
 prefer_heroes=true
+heal_per_second=170
 
 [idle]
 pics=../../../tribes/empire/fortress/fortress_i_??.png

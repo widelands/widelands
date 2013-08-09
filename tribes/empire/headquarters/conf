@@ -1,8 +1,12 @@
 size=big
 buildable=no
 destructible=no
-heal_per_second=220
+
+[garrison]
 conquers=9
+max_soldiers=15
+prefer_heroes=true
+heal_per_second=220
 
 [idle]
 pics=headquarters_i_??.png

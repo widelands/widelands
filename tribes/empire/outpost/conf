@@ -1,9 +1,11 @@
 size=medium
-max_soldiers=3
-heal_per_second=100
-conquers=7
 enhancement=barrier
+
+[garrison]
+conquers=7
+max_soldiers=3
 prefer_heroes=false
+heal_per_second=100
 
 [buildcost]
 trunk=1

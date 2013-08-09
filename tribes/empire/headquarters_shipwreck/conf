@@ -1,8 +1,12 @@
 size=big
 buildable=no
 destructible=no
-heal_per_second=170
+
+[garrison]
 conquers=9
+max_soldiers=15
+prefer_heroes=true
+heal_per_second=170
 
 [idle]
 # sfx=0 ../../../sound/spoken/warehouse-bringitin

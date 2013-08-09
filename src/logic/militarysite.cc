@@ -58,12 +58,13 @@ m_conquer_radius     (0),
 m_num_soldiers       (0),
 m_heal_per_second    (0)
 {
-	m_conquer_radius      = global_s.get_safe_int("conquers");
-	m_num_soldiers        = global_s.get_safe_int("max_soldiers");
-	m_heal_per_second     = global_s.get_safe_int("heal_per_second");
+	Section& garrison_s = prof.get_safe_section("garrison");
+	m_conquer_radius      = garrison_s.get_safe_int("conquers");
+	m_num_soldiers        = garrison_s.get_safe_int("max_soldiers");
+	m_heal_per_second     = garrison_s.get_safe_int("heal_per_second");
 	if (m_conquer_radius > 0)
 		m_workarea_info[m_conquer_radius].insert(descname() + _(" conquer"));
-	m_prefers_heroes_at_start = global_s.get_safe_bool("prefer_heroes");
+	m_prefers_heroes_at_start = garrison_s.get_safe_bool("prefer_heroes");
 }
 
 /**

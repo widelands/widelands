@@ -1,11 +1,13 @@
 size=medium
 buildable=no
-max_soldiers=5
-heal_per_second=170
-conquers=9
-vision_range=21
 enhanced_building=yes
+vision_range=21
+
+[garrison]
+conquers=9
+max_soldiers=5
 prefer_heroes=true
+heal_per_second=170
 
 [enhancement_cost]
 trunk=1
