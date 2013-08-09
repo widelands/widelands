@@ -193,8 +193,8 @@ Building & Building_Descr::create
 	Building & b = construct ? create_constructionsite() : create_object();
 	b.m_position = pos;
 	b.set_owner(&owner);
-	BOOST_FOREACH(const Building_Descr * descr, former_buildings) {
-		b.m_old_buildings.push_back(descr);
+	BOOST_FOREACH(Building_Index idx, former_buildings) {
+		b.m_old_buildings.push_back(idx);
 	}
 	if (loading) {
 		b.Building::init(egbase);

@@ -153,13 +153,15 @@ throw (_wexception)
 						// will be built after other data are loaded, see below.
 						// read_formerbuildings_v2()
 						while (fr.Unsigned8()) {
-							const Building_Descr* former_descr =
-								building.descr().tribe().get_building_descr
-								(building.descr().tribe().safe_building_index(fr.CString()));
-							building.m_old_buildings.push_back(former_descr);
+							Building_Index oldidx = building.descr().tribe().safe_building_index(fr.CString());
+							building.m_old_buildings.push_back(oldidx);
 						}
 						// Only construction sites may have an empty list
-						assert(!building.m_old_buildings.empty() || is_a(ConstructionSite, &building));
+						if (building.m_old_buildings.empty() && !is_a(ConstructionSite, &building)) {
+							throw game_data_error
+								("Failed to read %s %u: No former buildings informations.\n"
+								"Your savegame is corrupted", building.descr().descname().c_str(), building.serial());
+						}
 					}
 					if (fr.Unsigned8()) {
 						if (upcast(ProductionSite, productionsite, &building))
@@ -251,12 +253,14 @@ throw (_wexception)
 void Map_Buildingdata_Data_Packet::read_formerbuildings_v2
 	(Building& b, FileRead&, Game&, Map_Map_Object_Loader&)
 {
+	const Tribe_Descr & t = b.descr().tribe();
+	Building_Index b_idx = t.building_index(b.descr().name());
 	if (is_a(ProductionSite, &b)) {
 		assert(b.m_old_buildings.empty());
-		b.m_old_buildings.push_back(&b.descr());
+		b.m_old_buildings.push_back(b_idx);
 	} else if (is_a(Warehouse, &b)) {
 		assert(b.m_old_buildings.empty());
-		b.m_old_buildings.push_back(&b.descr());
+		b.m_old_buildings.push_back(b_idx);
 	} else if (upcast(DismantleSite, dsite, &b)) {
 		// Former buildings filled with the current one
 		// upon building init.
@@ -269,17 +273,16 @@ void Map_Buildingdata_Data_Packet::read_formerbuildings_v2
 	}
 
 	// iterate through all buildings to find first predecessor
-	const Tribe_Descr & t = b.descr().tribe();
 	for (;;) {
-		const Building_Descr * oldest = b.m_old_buildings.front();
+		Building_Index former_idx = b.m_old_buildings.front();
+		const Building_Descr * oldest = t.get_building_descr(former_idx);
 		if (!oldest->is_enhanced()) {
 			break;
 		}
-		const Building_Index & oldest_idx = t.building_index(oldest->name());
 		for (Building_Index i = Building_Index::First(); i < t.get_nrbuildings(); ++i) {
 			Building_Descr const * ob = t.get_building_descr(i);
-			if (ob->enhancements().count(oldest_idx)) {
-				b.m_old_buildings.insert(b.m_old_buildings.begin(), ob);
+			if (ob->enhancements().count(former_idx)) {
+				b.m_old_buildings.insert(b.m_old_buildings.begin(), i);
 				break;
 			}
 		}
@@ -371,10 +374,8 @@ void Map_Buildingdata_Data_Packet::read_constructionsite
 
 			if (packet_version <= 2) {
 				if (fr.Unsigned8()) {
-					const Building_Descr* former_descr =
-						tribe.get_building_descr
-						(tribe.safe_building_index(fr.CString()));
-					constructionsite.m_old_buildings.push_back(former_descr);
+					Building_Index idx = tribe.safe_building_index(fr.CString());
+					constructionsite.m_old_buildings.push_back(idx);
 				}
 			}
 
@@ -397,10 +398,8 @@ void Map_Buildingdata_Data_Packet::read_constructionsite_v1
 	constructionsite.m_building =
 		tribe.get_building_descr(tribe.safe_building_index(fr.CString()));
 	if (fr.Unsigned8()) {
-		const Building_Descr * former_descr =
-			tribe.get_building_descr
-			(tribe.safe_building_index(fr.CString()));
-		constructionsite.m_old_buildings.push_back(former_descr);
+		Building_Index bidx = tribe.safe_building_index(fr.CString());
+		constructionsite.m_old_buildings.push_back(bidx);
 	}
 
 	delete constructionsite.m_builder_request;
@@ -1318,9 +1317,11 @@ throw (_wexception)
 				fw.Unsigned32(0);
 			}
 			{
-				BOOST_FOREACH(const Building_Descr* former_descr, building->m_old_buildings) {
+				const Tribe_Descr& td = building->descr().tribe();
+				BOOST_FOREACH(Building_Index b_idx, building->m_old_buildings) {
+					const Building_Descr* b_descr = td.get_building_descr(b_idx);
 					fw.Unsigned8(1);
-					fw.String(former_descr->name());
+					fw.String(b_descr->name());
 				}
 				fw.Unsigned8(0);
 			}

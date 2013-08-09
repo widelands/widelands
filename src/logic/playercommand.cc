@@ -226,7 +226,7 @@ PlayerCommand (0, des.Unsigned8())
 void Cmd_Build::execute (Game & game)
 {
 	// Empty former vector since its a new csite.
-	Building_Descr::FormerBuildings former_buildings;
+	Building::FormerBuildings former_buildings;
 	game.player(sender()).build(coords, bi, true, former_buildings);
 }
 
