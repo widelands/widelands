@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2013-08-06 03:27+0000\n"
-"PO-Revision-Date: 2013-07-23 20:16+0000\n"
+"PO-Revision-Date: 2013-08-08 19:03+0000\n"
 "Last-Translator: Hans Joachim Desserud <Unknown>\n"
 "Language-Team: Norwegian Bokmal <nb@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-08-07 04:37+0000\n"
-"X-Generator: Launchpad (build 16721)\n"
+"X-Launchpad-Export-Date: 2013-08-09 04:34+0000\n"
+"X-Generator: Launchpad (build 16723)\n"
 
 #: ../../tribes/empire/meal/conf:1
 msgid ""
@@ -428,7 +428,7 @@ msgstr "Mellomstort hovedkvarter"
 
 #: ../../tribes/empire/conf:164
 msgid "Headquarters shipwreck"
-msgstr ""
+msgstr "Skipsvrak hovedkvarter"
 
 #: ../../tribes/empire/conf:75
 msgid "Heavy Lance"
@@ -494,7 +494,7 @@ msgstr ""
 
 #: ../../tribes/empire/shepherd/conf:1
 msgid "Keeping sheep."
-msgstr ""
+msgstr "Holder sauer."
 
 #: ../../tribes/empire/conf:80
 msgid "Kitchen Tools"
@@ -624,7 +624,7 @@ msgstr ""
 
 #: ../../tribes/empire/farmer/conf:1
 msgid "Plants fields."
-msgstr ""
+msgstr "Planter åkre."
 
 #: ../../tribes/empire/forester/conf:1
 msgid "Plants trees."
@@ -632,7 +632,7 @@ msgstr "Planter trær."
 
 #: ../../tribes/empire/conf:87
 msgid "Plate-Armour"
-msgstr ""
+msgstr "Platerustning"
 
 #: ../../tribes/empire/conf:166
 msgid "Port"
@@ -696,7 +696,7 @@ msgstr "Produser lanse"
 
 #: ../../tribes/empire/inn/conf:26
 msgid "Produce meal"
-msgstr ""
+msgstr "Produser måltid"
 
 #: ../../tribes/empire/toolsmithy/conf:42
 msgid "Produce pick"
@@ -704,11 +704,11 @@ msgstr "Produser hakke"
 
 #: ../../tribes/empire/armoursmithy/conf:34
 msgid "Produce plate armour"
-msgstr ""
+msgstr "Produser platerustning"
 
 #: ../../tribes/empire/inn/conf:25
 msgid "Produce ration"
-msgstr ""
+msgstr "Produser rasjon"
 
 #: ../../tribes/empire/toolsmithy/conf:47
 msgid "Produce saw"
@@ -822,6 +822,7 @@ msgstr "Speiders hus"
 msgid ""
 "Scouts like Scotty the scout scout unscouted area in a scouty fashion."
 msgstr ""
+"Speidere som speideren Scotty speider uspeide områder som en speider."
 
 #: ../../tribes/empire/conf:90
 msgid "Scythe"
@@ -846,11 +847,11 @@ msgstr "Skip"
 
 #: ../../tribes/empire/conf:54
 msgid "Ship construction site"
-msgstr ""
+msgstr "Byggeområde for skip"
 
 #: ../../tribes/empire/conf:128
 msgid "Shipwright"
-msgstr ""
+msgstr "Skipsbygger"
 
 #: ../../tribes/empire/conf:187
 msgid "Shipyard"
@@ -1001,6 +1002,8 @@ msgid ""
 "The shovel is needed for proper handling of plants. Therefore the forester "
 "uses it. It is produced by the toolsmith."
 msgstr ""
+"Spader er nødvendig for korrekt håndtering av planter. Derfor bruker "
+"skogvokteren dem. De blir laget av verktøysmeden."
 
 #: ../../tribes/empire/grape/conf:1
 msgid ""
@@ -1013,6 +1016,8 @@ msgid ""
 "This basket is needed by the vinefarmer for harvesting the grapes. It is "
 "produced by the toolsmith."
 msgstr ""
+"Kurven brukes av vindyrkeren til innhøsting av druer. Den er laget av "
+"verktøysmeden."
 
 #: ../../tribes/empire/beer/conf:1
 msgid ""
@@ -1395,11 +1400,11 @@ msgstr "Arbeid"
 
 #: ../../tribes/empire/builder/conf:1
 msgid "Works at construction sites to create a new building."
-msgstr ""
+msgstr "Jobber på byggeplasser for å lage nye bygninger."
 
 #: ../../tribes/empire/shipwright/conf:1
 msgid "Works at the shipyard and constructs new ships."
-msgstr ""
+msgstr "Jobber på skipsverftet og lager nye skip."
 
 #: ../../tribes/empire/master-miner/conf:1
 #: ../../tribes/empire/miner/conf:1

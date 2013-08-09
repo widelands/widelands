@@ -7,15 +7,15 @@ msgstr ""
 "Project-Id-Version: Widelands svn4866\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2013-08-05 20:27-0700\n"
-"PO-Revision-Date: 2013-08-05 06:48+0000\n"
-"Last-Translator: Hélion du Mas des Bourboux <helion331990@gmail.com>\n"
+"PO-Revision-Date: 2013-08-08 23:44+0000\n"
+"Last-Translator: Sevy Ride <mathysdog@hotmail.com>\n"
 "Language-Team: French <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Launchpad-Export-Date: 2013-08-07 04:38+0000\n"
-"X-Generator: Launchpad (build 16721)\n"
+"X-Launchpad-Export-Date: 2013-08-09 04:34+0000\n"
+"X-Generator: Launchpad (build 16723)\n"
 
 #: ../../src/computer_player.cc:38
 msgid "None"
@@ -40,11 +40,11 @@ msgstr ""
 
 #: ../../src/s2map.cc:886
 msgid "WARNING"
-msgstr "AVERTISSEMENT"
+msgstr "ATTENTION"
 
 #: ../../src/save_handler.cc:72
 msgid "Saving game..."
-msgstr "Sauvegarde du jeu..."
+msgstr ""
 
 #: ../../src/save_handler.cc:92
 msgid "Saving failed!"
