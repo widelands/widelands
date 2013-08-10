@@ -302,7 +302,7 @@ void Building_Window::create_capsbuttons(UI::Box * capsbuttons)
 		} else {
 			wa_info = m_building.descr().m_workarea_info;
 		}
-		if (wa_info.size()) {
+		if (!wa_info.empty()) {
 			m_toggle_workarea = new UI::Button
 				(capsbuttons, "workarea",
 				 0, 0, 34, 34,
