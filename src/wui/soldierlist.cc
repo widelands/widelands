@@ -19,101 +19,34 @@
 
 #include "wui/soldierlist.h"
 
-#include <boost/bind.hpp>
+#include <boost/signal.hpp>
 
-#include "container_iterate.h"
 #include "graphic/font.h"
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
-#include "logic/building.h"
-#include "logic/garrison.h"
-#include "logic/militarysite.h"
 #include "logic/player.h"
 #include "logic/soldier.h"
-#include "ui_basic/box.h"
-#include "ui_basic/button.h"
-#include "ui_basic/table.h"
+#include "rect.h"
 #include "upcast.h"
-#include "wlapplication.h"
 #include "wui/interactive_gamebase.h"
-#include "wui/soldiercapacitycontrol.h"
+#include "wlapplication.h"
 
 using Widelands::Soldier;
 using Widelands::Garrison;
 
-/**
- * Iconic representation of soldiers, including their levels and current HP.
- */
-struct SoldierPanel : UI::Panel {
-	typedef boost::function<void (const Soldier *)> SoldierFn;
-
-	SoldierPanel(UI::Panel & parent, Widelands::Editor_Game_Base & egbase, Widelands::Building & building);
-
-	Widelands::Editor_Game_Base & egbase() const {return m_egbase;}
-
-	virtual void think();
-	virtual void draw(RenderTarget &);
-
-	void set_mouseover(const SoldierFn & fn);
-	void set_click(const SoldierFn & fn);
-
-protected:
-	virtual void handle_mousein(bool inside);
-	virtual bool handle_mousemove(Uint8 state, int32_t x, int32_t y, int32_t xdiff, int32_t ydiff);
-	virtual bool handle_mousepress(Uint8 btn, int32_t x, int32_t y);
-
-private:
-	Point calc_pos(uint32_t row, uint32_t col) const;
-	const Soldier * find_soldier(int32_t x, int32_t y) const;
-
-	struct Icon {
-		Widelands::OPtr<Soldier> soldier;
-		uint32_t row;
-		uint32_t col;
-		Point pos;
-
-		/**
-		 * Keep track of how we last rendered this soldier,
-		 * so that we can update when its status changes.
-		 */
-		/*@{*/
-		uint32_t cache_level;
-		uint32_t cache_health;
-		/*@}*/
-	};
-
-	Widelands::Editor_Game_Base & m_egbase;
-	Widelands::Garrison & m_garrison;
-
-	SoldierFn m_mouseover_fn;
-	SoldierFn m_click_fn;
-
-	std::vector<Icon> m_icons;
-
-	uint32_t m_rows;
-	uint32_t m_cols;
-
-	uint32_t m_icon_width;
-	uint32_t m_icon_height;
-
-	int32_t m_last_animate_time;
-
-	static const uint32_t MaxColumns = 6;
-	static const uint32_t AnimateSpeed = 300; ///< in pixels per second
-	static const uint32_t IconBorder = 2;
-};
+namespace UI {
 
 SoldierPanel::SoldierPanel
 	(UI::Panel & parent,
 	 Widelands::Editor_Game_Base & gegbase,
-	 Widelands::Building & building)
+	 Widelands::Garrison & garrison)
 :
 Panel(&parent, 0, 0, 0, 0),
 m_egbase(gegbase),
-m_garrison(*dynamic_cast<Widelands::GarrisonOwner *>(&building)->get_garrison()),
+m_garrison(garrison),
 m_last_animate_time(0)
 {
-	Soldier::calc_info_icon_size(building.tribe(), m_icon_width, m_icon_height);
+	Widelands::Soldier::calc_info_icon_size(garrison.owner().tribe(), m_icon_width, m_icon_height);
 	m_icon_width += 2 * IconBorder;
 	m_icon_height += 2 * IconBorder;
 
@@ -353,135 +286,4 @@ bool SoldierPanel::handle_mousepress(Uint8 btn, int32_t x, int32_t y)
 	return false;
 }
 
-/**
- * List of soldiers \ref MilitarySiteWindow and \ref TrainingSiteWindow
- */
-struct SoldierList : UI::Box {
-	SoldierList
-		(UI::Panel & parent,
-		 Interactive_GameBase & igb,
-		 Widelands::Building & building);
-
-	Garrison & garrison() const;
-
-private:
-	void mouseover(const Soldier * soldier);
-	void eject(const Soldier * soldier);
-	void set_soldier_preference(int32_t changed_to);
-
-	Interactive_GameBase & m_igb;
-	Widelands::Building & m_building;
-	SoldierPanel m_soldierpanel;
-	UI::Radiogroup m_soldier_preference;
-	UI::Textarea m_infotext;
-};
-
-SoldierList::SoldierList
-	(UI::Panel & parent,
-	 Interactive_GameBase & igb,
-	 Widelands::Building & building)
-:
-UI::Box(&parent, 0, 0, UI::Box::Vertical),
-
-m_igb(igb),
-m_building(building),
-m_soldierpanel(*this, igb.egbase(), building),
-m_infotext(this, _("Click soldier to send away"))
-{
-	add(&m_soldierpanel, UI::Box::AlignCenter);
-
-	add_space(2);
-
-	add(&m_infotext, UI::Box::AlignCenter);
-
-	m_soldierpanel.set_mouseover(boost::bind(&SoldierList::mouseover, this, _1));
-	m_soldierpanel.set_click(boost::bind(&SoldierList::eject, this, _1));
-
-	const UI::TextStyle & style = UI::TextStyle::ui_small();
-	// Note the extra character in the HP: string below to fix bug 724169
-	uint32_t maxtextwidth = std::max
-		(style.calc_bare_width(_("Click soldier to send away")),
-		 style.calc_bare_width("HP: 8/8  AT: 8/8  DE: 8/8  EV: 8/8_"));
-	set_min_desired_breadth(maxtextwidth + 4);
-
-	UI::Box * buttons = new UI::Box(this, 0, 0, UI::Box::Horizontal);
-
-	if (upcast(Widelands::MilitarySite, ms, &building)) {
-		m_soldier_preference.add_button
-			(buttons, Point(0, 0), g_gr->images().get("pics/prefer_rookies.png"), _("Prefer Rookies"));
-		m_soldier_preference.add_button
-			(buttons, Point(32, 0), g_gr->images().get("pics/prefer_heroes.png"), _("Prefer Heroes"));
-		UI::Radiobutton* button = m_soldier_preference.get_first_button();
-		while (button) {
-			buttons->add(button, AlignLeft);
-			button = button->next_button();
-		}
-
-		m_soldier_preference.set_state(0);
-		if (garrison().get_soldier_preference() == Garrison::SoldierPref::Heroes) {
-			m_soldier_preference.set_state(1);
-		}
-		m_soldier_preference.changedto.connect
-			(boost::bind(&SoldierList::set_soldier_preference, this, _1));
-	}
-	buttons->add_inf_space();
-	buttons->add
-		(create_soldier_capacity_control(*buttons, igb, building),
-		 UI::Box::AlignRight);
-
-	add(buttons, UI::Box::AlignCenter, true);
-}
-
-Garrison & SoldierList::garrison() const
-{
-	return *dynamic_cast<Widelands::GarrisonOwner *>(&m_building)->get_garrison();
-}
-
-void SoldierList::mouseover(const Soldier * soldier)
-{
-	if (!soldier) {
-		m_infotext.set_text(_("Click soldier to send away"));
-		return;
-	}
-
-	uint32_t const  hl = soldier->get_hp_level         ();
-	uint32_t const mhl = soldier->get_max_hp_level     ();
-	uint32_t const  al = soldier->get_attack_level     ();
-	uint32_t const mal = soldier->get_max_attack_level ();
-	uint32_t const  dl = soldier->get_defense_level    ();
-	uint32_t const mdl = soldier->get_max_defense_level();
-	uint32_t const  el = soldier->get_evade_level      ();
-	uint32_t const mel = soldier->get_max_evade_level  ();
-
-	char buffer[5 * 30];
-	snprintf
-		(buffer, sizeof(buffer),
-		 "HP: %u/%u  AT: %u/%u  DE: %u/%u  EV: %u/%u",
-		 hl, mhl, al, mal, dl, mdl, el, mel);
-	m_infotext.set_text(buffer);
-}
-
-void SoldierList::eject(const Soldier * soldier)
-{
-	uint32_t const capacity_min = garrison().minSoldierCapacity();
-	bool can_act = m_igb.can_act(m_building.owner().player_number());
-	bool over_min = capacity_min < garrison().presentSoldiers().size();
-
-	if (can_act && over_min)
-		m_igb.game().send_player_drop_soldier(m_building, soldier->serial());
-}
-
-void SoldierList::set_soldier_preference(int32_t changed_to) {
-	upcast(Widelands::MilitarySite, ms, &m_building);
-	assert(ms);
-	garrison().set_soldier_preference
-		(changed_to == 0 ? Garrison::SoldierPref::Rookies : Garrison::SoldierPref::Heroes);
-}
-
-UI::Panel * create_soldier_list
-	(UI::Panel & parent,
-	 Interactive_GameBase & igb,
-	 Widelands::Building & building)
-{
-	return new SoldierList(parent, igb, building);
 }

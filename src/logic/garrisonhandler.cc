@@ -67,15 +67,35 @@ GarrisonHandler::~GarrisonHandler()
 	assert(m_upgrade_soldier_request.get() == nullptr);
 }
 
+void GarrisonHandler::load_finish(Editor_Game_Base& egbase)
+{
+	// If our soldiers array is empty (old savegame), fill it with soldiers
+	// found in building
+	if (m_soldiers.empty()) {
+		container_iterate_const(std::vector<Worker *>, m_building.get_workers(), i) {
+			if (upcast(Soldier, soldier, *i.current)) {
+				if (m_soldiers.size() < m_capacity) {
+					m_soldiers.push_back(soldier);
+				} else {
+					break;
+				}
+			}
+		}
+	}
+}
+
 void GarrisonHandler::init(Editor_Game_Base & egbase)
 {
 	// Ensure all soldiers are fresh and give them a new task
 	upcast(Game, game, &egbase);
-	container_iterate_const(std::vector<Worker *>, m_building.get_workers(), i) {
-		if (upcast(Soldier, soldier, *i.current)) {
-			soldier->set_location_initially(m_building);
-			assert(!soldier->get_state()); //  Should be newly created.
-			if (game) {
+	container_iterate_const(std::vector<Soldier *>, m_soldiers, i) {
+		Soldier* soldier = *i.current;
+		assert(!soldier->get_state()); //  Should be newly created.
+		soldier->set_location_initially(m_building);
+		if (game) {
+			if (m_passive) {
+				soldier->start_task_idle(*game, 0, -1);
+			} else {
 				soldier->start_task_buildingwork(*game);
 			}
 		}
@@ -110,9 +130,10 @@ void GarrisonHandler::cleanup_requests(Editor_Game_Base&)
 }
 
 
-void GarrisonHandler::act(Game& game)
+int32_t GarrisonHandler::act(Game& game)
 {
 	const int32_t timeofgame = game.get_gametime();
+	int32_t next_act = -1;
 	// Ensure requests integrity
 	if (m_normal_soldier_request && m_upgrade_soldier_request)
 	{
@@ -129,6 +150,9 @@ void GarrisonHandler::act(Game& game)
 		if (time_since_last_swap > GARRISON_SWAP_TIMEOUT) {
 			time_since_last_swap = timeofgame;
 			update_soldier_request();
+			if (next_act < 0 || next_act > GARRISON_SWAP_TIMEOUT) {
+				next_act = GARRISON_SWAP_TIMEOUT;
+			}
 		}
 	}
 
@@ -142,10 +166,19 @@ void GarrisonHandler::act(Game& game)
 		if (to_heal > 0) {
 			soldier->heal(to_heal);
 			to_heal_amount -= to_heal;
+			// Act once/s while healing
+			if (next_act < 0 || next_act > 1000) {
+				next_act = 1000;
+			}
 		}
 		if (to_heal_amount <= 0) break;
 	}
 	m_last_heal_time = timeofgame;
+	// Act once/5s when idle
+	if (next_act < 0) {
+		next_act = 5000;
+	}
+	return next_act;
 }
 
 void GarrisonHandler::popSoldier(Soldier* soldier)
@@ -164,12 +197,13 @@ void GarrisonHandler::set_economy(Economy * const e)
 		m_upgrade_soldier_request->set_economy(e);
 }
 
+
+
 bool GarrisonHandler::get_garrison_work(Game& game, Soldier* soldier)
 {
 	// Evict soldiers that have returned home if the capacity is too low
 	if (m_capacity < stationedSoldiers().size()) {
-		soldier->reset_tasks(game);
-		soldier->start_task_leavebuilding(game, true);
+		evict_soldier(game, soldier);
 		return true;
 	}
 
@@ -317,14 +351,24 @@ bool GarrisonHandler::attack(Soldier& enemy)
 	return false;
 }
 
+bool GarrisonHandler::is_passive()
+{
+	return m_passive;
+}
+
+Building& GarrisonHandler::get_building()
+{
+	return m_building;
+}
+
+
+
 const std::vector< Soldier* > GarrisonHandler::presentSoldiers() const
 {
 	std::vector<Soldier *> present_soldiers;
-	container_iterate_const(std::vector<Worker*>, m_building.get_workers(), i) {
-		if (upcast(Soldier, s, *i.current)) {
-			if (isPresent(*s)) {
-				present_soldiers.push_back(s);
-			}
+	container_iterate_const(std::vector<Soldier*>, m_soldiers, i) {
+		if (isPresent(**i.current)) {
+			present_soldiers.push_back(*i.current);
 		}
 	}
 	return present_soldiers;
@@ -332,13 +376,7 @@ const std::vector< Soldier* > GarrisonHandler::presentSoldiers() const
 
 const std::vector< Soldier* > GarrisonHandler::stationedSoldiers() const
 {
-	std::vector<Soldier *> soldiers;
-	container_iterate_const(std::vector<Worker*>, m_building.get_workers(), i) {
-		if (upcast(Soldier, s, *i.current)) {
-			soldiers.push_back(s);
-		}
-	}
-	return soldiers;
+	return m_soldiers;
 }
 
 uint32_t GarrisonHandler::minSoldierCapacity() const
@@ -379,8 +417,7 @@ void GarrisonHandler::dropSoldier(Soldier& soldier)
 		return;
 	}
 	// Drop the soldier and update requests
-	soldier.reset_tasks(game);
-	soldier.start_task_leavebuilding(game, true);
+	evict_soldier(game, &soldier);
 	update_soldier_request();
 }
 
@@ -391,6 +428,7 @@ int GarrisonHandler::incorporateSoldier(Editor_Game_Base& egbase, Soldier& s)
 	{
 		s.set_location(&m_building);
 	}
+	m_soldiers.push_back(&s);
 
 	upcast(Game, game, &egbase);
 	// If it's the first soldier, conquer the area
@@ -662,9 +700,8 @@ void GarrisonHandler::update_normal_soldier_request()
 	if (present.size() > m_capacity) {
 		Game & game = ref_cast<Game, Editor_Game_Base>(owner().egbase());
 		for (uint32_t i = 0; i < present.size() - m_capacity; ++i) {
-			Soldier & soldier = *present[i];
-			soldier.reset_tasks(game);
-			soldier.start_task_leavebuilding(game, true);
+			Soldier * soldier = present[i];
+			evict_soldier(game, soldier);
 		}
 	}
 }
@@ -723,7 +760,7 @@ void GarrisonHandler::request_soldier_transfer_callback
 	upcast(GarrisonOwner, go, &pi);
 	upcast(GarrisonHandler, gh, go->get_garrison());
 
-	if (!gh->m_doing_upgrade_request) {
+	if (gh->m_doing_upgrade_request) {
 		gh->drop_least_suited_soldier(&s);
 	}
 }
@@ -776,9 +813,10 @@ bool GarrisonHandler::incorporateUpgradedSoldier(Editor_Game_Base& egbase, Soldi
 	// Call to drop_least routine has side effects: it tries to drop a soldier. Order is important!
 	assert(isPresent(s));
 	std::vector<Soldier*> stationned = stationedSoldiers();
-	if (stationned.size() <= m_capacity || drop_least_suited_soldier(&s)) {
+	if (stationned.size() < m_capacity || drop_least_suited_soldier(&s)) {
 		Game & game = ref_cast<Game, Editor_Game_Base>(egbase);
 		s.set_location(&m_building);
+		m_soldiers.push_back(&s);
 		s.reset_tasks(game);
 		if (!m_passive) {
 			s.start_task_buildingwork(game);
@@ -834,8 +872,7 @@ bool GarrisonHandler::drop_least_suited_soldier(Soldier* newguy)
 	// Now I know that the new guy is worthy.
 	if (kickoutCandidate != nullptr) {
 		Game & game = ref_cast<Game, Editor_Game_Base>(owner().egbase());
-		kickoutCandidate->reset_tasks(game);
-		kickoutCandidate->start_task_leavebuilding(game, true);
+		evict_soldier(game, kickoutCandidate);
 		return true;
 	}
 	return false;
@@ -864,6 +901,25 @@ Map_Object* GarrisonHandler::popSoldierJob(Soldier* soldier, bool* stayhome, uin
 			return enemy;
 		}
 	return 0;
+}
+
+void GarrisonHandler::evict_soldier(Game& game, Soldier* s)
+{
+	assert(s);
+	upcast(StorageOwner, storage_owner, &m_building);
+	std::vector<Soldier*>::iterator it;
+	for (it = m_soldiers.begin(); it != m_soldiers.end(); ++it) {
+		if ((*it)->serial() == s->serial()) {
+			m_soldiers.erase(it);
+			s->reset_tasks(game);
+			if (storage_owner) {
+				storage_owner->get_storage()->incorporate_worker(game, *s);
+			} else {
+				s->start_task_leavebuilding(game, true);
+			}
+			return;
+		}
+	}
 }
 
 }

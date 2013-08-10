@@ -32,9 +32,9 @@
 #include "logic/mapregion.h"
 #include "logic/player.h"
 #include "logic/soldier.h"
+#include "logic/storagehandler.h"
 #include "logic/warelist.h"
 #include "logic/widelands_geometry.h"
-#include "logic/storagehandler.h"
 #include "scripting/c_utils.h"
 #include "scripting/lua_game.h"
 #include "wui/mapviewpixelfunctions.h"
@@ -499,7 +499,7 @@ int _StorageOwner::set_soldiers(lua_State* L)
 				Soldier & soldier =
 					ref_cast<Soldier, Worker>
 					(soldier_descr.create
-					 (egbase, storage->owner(), 0,sh->get_building().get_position()));
+					 (egbase, storage->owner(), 0, sh->get_building().get_position()));
 
 				soldier.set_level
 					(sp.current->first.hp, sp.current->first.at,

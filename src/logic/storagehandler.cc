@@ -25,10 +25,10 @@
 
 #include "economy/economy.h"
 #include "economy/flag.h"
+#include "helper.h"
 #include "logic/player.h"
 #include "logic/soldier.h"
 #include "upcast.h"
-#include <helper.h>
 
 namespace Widelands {
 
@@ -47,7 +47,7 @@ StorageHandler::~StorageHandler()
 }
 
 
-void StorageHandler::init(Editor_Game_Base& )
+void StorageHandler::init(Editor_Game_Base&)
 {
 	Ware_Index const nr_wares   = owner().tribe().get_nrwares  ();
 	Ware_Index const nr_workers = owner().tribe().get_nrworkers();
@@ -74,7 +74,7 @@ void StorageHandler::init(Editor_Game_Base& )
 	}
 }
 
-void StorageHandler::load_finish(Editor_Game_Base& )
+void StorageHandler::load_finish(Editor_Game_Base&)
 {
 	// Ensure consistency of PlannedWorker requests
 	uint32_t pwidx = 0;
@@ -371,7 +371,7 @@ Worker& StorageHandler::launch_worker(Game& game, Ware_Index idx, const Requirem
 				(std::vector<StockedWorkerAtr>::iterator it = m_stocked_workers_atr.begin();
 					it != m_stocked_workers_atr.end(); ++it)
 			{
-				if ((*it).index == idx) {
+				if (it->index == idx) {
 					workers_with_atr.push_back(&(*it));
 				}
 			}
@@ -633,8 +633,8 @@ uint32_t StorageHandler::update_spawns(Game&, uint32_t gametime)
 	// Update spawnings
 	SpawnMapType::iterator it;
 	for (it = m_spawn_wares.begin(); it != m_spawn_wares.end();) {
-		Ware_Index idx = (*it).first;
-		std::vector<uint32_t> values = (*it).second;
+		Ware_Index idx = it->first;
+		std::vector<uint32_t> values = it->second;
 		bool dont_exceed = values.size() < 4;
 		bool infinite = dont_exceed || values[3] == 0;
 		uint32_t stock = m_supply->stock_wares(idx);
@@ -645,7 +645,7 @@ uint32_t StorageHandler::update_spawns(Game&, uint32_t gametime)
 			continue;
 		}
 		// update timer
-		uint32_t* next_act = &((*it).second[0]);
+		uint32_t* next_act = &(it->second[0]);
 		if (*next_act > gametime) {
 			++it;
 			continue;
@@ -656,7 +656,7 @@ uint32_t StorageHandler::update_spawns(Game&, uint32_t gametime)
 		}
 		if (!infinite) {
 			// decrease counter
-			uint32_t* counter_p = &((*it).second[3]);
+			uint32_t* counter_p = &(it->second[3]);
 			(*counter_p)--;
 			m_supply->add_wares(idx, 1);
 			if ((*counter_p) == 0) {
@@ -673,12 +673,13 @@ uint32_t StorageHandler::update_spawns(Game&, uint32_t gametime)
 		}
 		++it;
 		uint32_t time_till_next_act = *next_act - gametime;
-		min_act = (min_act == 0 ? time_till_next_act :
+		min_act =
+			(min_act == 0 ? time_till_next_act :
 			min_act > time_till_next_act ? time_till_next_act : min_act);
 	}
 	for (it = m_spawn_workers.begin(); it != m_spawn_workers.end();) {
-		Ware_Index idx = (*it).first;
-		std::vector<uint32_t> values = (*it).second;
+		Ware_Index idx = it->first;
+		std::vector<uint32_t> values = it->second;
 		bool dont_exceed = values.size() < 4;
 		bool infinite = dont_exceed || values[3] == 0;
 		uint32_t stock = m_supply->stock_workers(idx);
@@ -689,7 +690,7 @@ uint32_t StorageHandler::update_spawns(Game&, uint32_t gametime)
 			continue;
 		}
 		// update timer
-		uint32_t* next_act = &((*it).second[0]);
+		uint32_t* next_act = &(it->second[0]);
 		if (*next_act > gametime) {
 			++it;
 			continue;
@@ -700,7 +701,7 @@ uint32_t StorageHandler::update_spawns(Game&, uint32_t gametime)
 		}
 		if (!infinite) {
 			// decrease counter
-			uint32_t* counter_p = &((*it).second[3]);
+			uint32_t* counter_p = &(it->second[3]);
 			(*counter_p)--;
 			m_supply->add_workers(idx, 1);
 			if ((*counter_p) == 0) {
@@ -717,7 +718,8 @@ uint32_t StorageHandler::update_spawns(Game&, uint32_t gametime)
 		}
 		++it;
 		uint32_t time_till_next_act = *next_act - gametime;
-		min_act = (min_act == 0 ? time_till_next_act :
+		min_act =
+			(min_act == 0 ? time_till_next_act :
 			min_act > time_till_next_act ? time_till_next_act : min_act);
 	}
 

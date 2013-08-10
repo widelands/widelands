@@ -26,21 +26,17 @@
 
 namespace Widelands {
 
-class Headquarters;
-
-class Storage;
-
-class Garrison;
-
-class Garrison;
 
 class ConstructionSite;
 class Partially_Finished_Building;
 class DismantleSite;
 struct Game;
+class Garrison;
+class Headquarters;
 class MilitarySite;
 class TrainingSite;
 class ProductionSite;
+class Storage;
 class Warehouse;
 class Building;
 
@@ -79,6 +75,8 @@ private:
 		(Garrison        &, FileRead  &, Game &, Map_Map_Object_Loader &);
 	virtual void read_storage
 		(Storage         &, FileRead  &, Game &, Map_Map_Object_Loader &);
+	virtual void read_storage_legacy
+		(uint16_t, Storage *, FileRead  &, Game &, Map_Map_Object_Loader &);
 
 	virtual void write_constructionsite
 		(const ConstructionSite &, FileWrite &, Game &, Map_Map_Object_Saver  &);

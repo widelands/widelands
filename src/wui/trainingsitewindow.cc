@@ -17,9 +17,11 @@
  *
  */
 
-#include "graphic/graphic.h"
 #include "logic/trainingsite.h"
+
+#include "graphic/graphic.h"
 #include "ui_basic/tabpanel.h"
+#include "wui/garrisonpanel.h"
 #include "wui/productionsitewindow.h"
 #include "wui/soldiercapacitycontrol.h"
 #include "wui/soldierlist.h"
@@ -50,7 +52,7 @@ ProductionSite_Window  (parent, ts, registry)
 {
 	get_tabs()->add
 		("soldiers", g_gr->images().get(pic_tab_military),
-		 create_soldier_list(*get_tabs(), parent, ts),
+		 new UI::GarrisonPanel(*get_tabs(), parent, *ts.get_garrison()),
 		 _("Soldiers in training"));
 }
 

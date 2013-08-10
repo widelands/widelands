@@ -27,38 +27,15 @@
 
 using Widelands::Garrison;
 
-/**
- * Widget to control the capacity of \ref MilitaryBuilding and \ref TrainingSite
- * via \ref SoldierControl
- */
-struct SoldierCapacityControl : UI::Box {
-	SoldierCapacityControl
-		(UI::Panel * parent, Interactive_GameBase & igb,
-		 Widelands::Building & building);
-
-protected:
-	virtual void think();
-
-private:
-	void change_soldier_capacity(int delta);
-	void click_decrease();
-	void click_increase();
-
-	Interactive_GameBase & m_igb;
-	Widelands::Building & m_building;
-
-	UI::Button m_decrease;
-	UI::Button m_increase;
-	UI::Textarea m_value;
-};
+namespace UI {
 
 SoldierCapacityControl::SoldierCapacityControl
 	(UI::Panel * parent, Interactive_GameBase & igb,
-	 Widelands::Building & building)
+	 Widelands::Garrison & garrison)
 :
 Box(parent, 0, 0, Horizontal),
 m_igb(igb),
-m_building(building),
+m_garrison(garrison),
 m_decrease
 	(this, "decrease", 0, 0, 32, 32,
 	 g_gr->images().get("pics/but4.png"),
@@ -85,21 +62,20 @@ m_value(this, "199", UI::Align_Center)
 
 void SoldierCapacityControl::think()
 {
-	Garrison * garrison = dynamic_cast<Widelands::GarrisonOwner *>(&m_building)->get_garrison();
-	uint32_t const capacity = garrison->soldierCapacity();
+	uint32_t const capacity = m_garrison.soldierCapacity();
 	char buffer[sizeof("4294967295")];
 
 	sprintf(buffer, "%2u", capacity);
 	m_value.set_text(buffer);
 
-	bool const can_act = m_igb.can_act(m_building.owner().player_number());
-	m_decrease.set_enabled(can_act && garrison->minSoldierCapacity() < capacity);
-	m_increase.set_enabled(can_act && garrison->maxSoldierCapacity() > capacity);
+	bool const can_act = m_igb.can_act(m_garrison.owner().player_number());
+	m_decrease.set_enabled(can_act && m_garrison.minSoldierCapacity() < capacity);
+	m_increase.set_enabled(can_act && m_garrison.maxSoldierCapacity() > capacity);
 }
 
 void SoldierCapacityControl::change_soldier_capacity(int delta)
 {
-	m_igb.game().send_player_change_soldier_capacity(m_building, delta);
+	m_igb.game().send_player_change_soldier_capacity(m_garrison.get_building(), delta);
 }
 
 void SoldierCapacityControl::click_decrease()
@@ -112,9 +88,4 @@ void SoldierCapacityControl::click_increase()
 	change_soldier_capacity(1);
 }
 
-UI::Panel * create_soldier_capacity_control
-	(UI::Panel & parent, Interactive_GameBase & igb,
-	 Widelands::Building & building)
-{
-	return new SoldierCapacityControl(&parent, igb, building);
 }

@@ -26,6 +26,8 @@
 
 namespace Widelands {
 
+class Building;
+
 
 class Building;
 class Editor_Game_Base;
@@ -88,6 +90,10 @@ public:
 	 * or \c false if the building cannot defend itself any longer.
 	 */
 	virtual bool attack(Soldier &) = 0;
+
+	virtual bool is_passive() = 0;
+
+	virtual Building& get_building() = 0;
 
 	/**
 	 * \return a list of soldiers that are currently present in the building.

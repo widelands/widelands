@@ -101,6 +101,12 @@ MilitarySite::~MilitarySite()
 {
 }
 
+void MilitarySite::load_finish(Editor_Game_Base& egbase)
+{
+	Widelands::Building::load_finish(egbase);
+	m_garrison->load_finish(egbase);
+}
+
 void MilitarySite::init(Editor_Game_Base & egbase)
 {
 	ProductionSite::init(egbase);

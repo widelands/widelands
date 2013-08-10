@@ -55,6 +55,7 @@ public:
 		 bool passive = false);
 	virtual ~GarrisonHandler();
 
+	void load_finish(Editor_Game_Base &);
 	/**
 	 * Must be called once
 	 */
@@ -74,8 +75,9 @@ public:
 	void cleanup_requests(Editor_Game_Base &);
 	/**
 	 * Must be called regularly. It is not time dependant though.
+	 * \Return the time when the next act should occur
 	 */
-	void act(Game &);
+	int32_t act(Game &);
 	/**
 	 * Must be called when the owner building changes economy
 	 */
@@ -100,6 +102,8 @@ public:
 	virtual bool canAttack() const;
 	virtual void aggressor(Soldier &);
 	virtual bool attack(Soldier &);
+	virtual bool is_passive();
+	virtual Building& get_building();
 	virtual const std::vector<Soldier *> presentSoldiers() const;
 	virtual const std::vector<Soldier *> stationedSoldiers() const;
 	virtual uint32_t minSoldierCapacity() const;
@@ -213,12 +217,15 @@ private:
 	*/
 	Map_Object * popSoldierJob(Soldier *, bool * stayhome = 0, uint8_t * retreat = 0);
 
+	void evict_soldier(Game&, Soldier*);
+
 	// Basic fields
 	Building& m_building;
 	uint32_t m_min_capacity;
 	uint32_t m_max_capacity;
 	uint32_t m_capacity;
 	bool m_passive;
+	std::vector<Soldier*> m_soldiers;
 
 	// Healing
 	uint32_t m_heal_per_second;

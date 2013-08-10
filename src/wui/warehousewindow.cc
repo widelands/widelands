@@ -17,12 +17,13 @@
  *
  */
 
+#include "logic/warehouse.h"
+
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
 #include "logic/player.h"
 #include "logic/playercommand.h"
 #include "logic/storage.h"
-#include "logic/warehouse.h"
 #include "ui_basic/tabpanel.h"
 #include "wui/buildingwindow.h"
 #include "wui/portdockwaresdisplay.h"
@@ -65,9 +66,9 @@ WaresDisplay(parent, 0, 0, wh.owner().tribe(), type, selectable),
 m_warehouse(wh)
 {
 	set_inner_size(width, 0);
-	add_warelist(type == Widelands::wwWORKER ?
-		m_warehouse.get_storage()->get_workers()
-		: m_warehouse.get_storage()->get_wares());
+	add_warelist
+		(type == Widelands::wwWORKER ? m_warehouse.get_storage()->get_workers()
+			: m_warehouse.get_storage()->get_wares());
 }
 
 void WarehouseWaresDisplay::draw_ware(RenderTarget & dst, Widelands::Ware_Index ware)
@@ -137,7 +138,7 @@ WarehouseWaresPanel::WarehouseWaresPanel
 			 g_gr->images().get("pics/stock_policy_button_" #policy ".png"),      \
 			 tooltip),                                                                        \
 		b->sigclicked.connect \
-		  (boost::bind(&WarehouseWaresPanel::set_policy, this,Widelands::Storage::StockPolicy::policyname)), \
+	  (boost::bind(&WarehouseWaresPanel::set_policy, this, Widelands::Storage::StockPolicy::policyname)), \
 		buttons->add(b, UI::Box::AlignCenter);
 
 		ADD_POLICY_BUTTON(normal, Normal, _("Normal policy"))

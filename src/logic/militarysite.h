@@ -62,6 +62,7 @@ public:
 	MilitarySite(const MilitarySite_Descr &);
 	virtual ~MilitarySite();
 
+	void load_finish(Editor_Game_Base &);
 	virtual void init(Editor_Game_Base &);
 	virtual void cleanup(Editor_Game_Base &);
 	virtual void act(Game &, uint32_t data);

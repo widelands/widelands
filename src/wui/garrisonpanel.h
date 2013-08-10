@@ -17,46 +17,49 @@
  *
  */
 
-#ifndef _SOLDIERCAPACITYCONTROL_H_
-#define _SOLDIERCAPACITYCONTROL_H_
+#ifndef GARRISON_PANEL_H
+#define GARRISON_PANEL_H
 
 #include "ui_basic/box.h"
-#include "ui_basic/button.h"
+#include "ui_basic/radiobutton.h"
 #include "ui_basic/textarea.h"
+#include "logic/instances.h"
+#include "wui/soldierlist.h"
 
-class Interactive_GameBase;
+#include <boost/function.hpp>
 
 
 namespace Widelands {
+class Soldier;
 class Garrison;
 }
+
+class Interactive_GameBase;
+using Widelands::Soldier;
+
 namespace UI {
 
 /**
- * Widget to control the capacity of \ref MilitaryBuilding and \ref TrainingSite
- * via \ref SoldierControl
- */
-struct SoldierCapacityControl : Box {
-	SoldierCapacityControl
-		(UI::Panel * parent, Interactive_GameBase & igb,
+* List of soldiers \ref MilitarySiteWindow and \ref TrainingSiteWindow
+*/
+struct GarrisonPanel : Box {
+	GarrisonPanel
+		(Panel & parent,
+		 Interactive_GameBase & igb,
 		 Widelands::Garrison & garrison);
 
-protected:
-	virtual void think();
-
 private:
-	void change_soldier_capacity(int delta);
-	void click_decrease();
-	void click_increase();
+	void mouseover(const Soldier * soldier);
+	void eject(const Soldier * soldier);
+	void set_soldier_preference(int32_t changed_to);
 
 	Interactive_GameBase & m_igb;
 	Widelands::Garrison & m_garrison;
-
-	Button m_decrease;
-	Button m_increase;
-	Textarea m_value;
+	SoldierPanel m_soldierpanel;
+	Radiogroup m_soldier_preference;
+	Textarea m_infotext;
 };
 
 }
 
-#endif // _SOLDIERLIST_H_
+#endif

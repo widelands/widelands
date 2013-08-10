@@ -31,24 +31,23 @@
 #include "logic/dismantlesite.h"
 #include "logic/editor_game_base.h"
 #include "logic/game.h"
+#include "logic/headquarters.h"
 #include "logic/map.h"
 #include "logic/militarysite.h"
 #include "logic/player.h"
 #include "logic/production_program.h"
 #include "logic/productionsite.h"
 #include "logic/soldier.h"
+#include "logic/storagehandler.h"
 #include "logic/trainingsite.h"
 #include "logic/tribe.h"
 #include "logic/warehouse.h"
 #include "logic/widelands_fileread.h"
 #include "logic/widelands_filewrite.h"
 #include "logic/worker.h"
-#include <logic/storagehandler.h>
-#include <logic/headquarters.h>
 #include "map_io/widelands_map_map_object_loader.h"
 #include "map_io/widelands_map_map_object_saver.h"
 #include "upcast.h"
-#include <scripting/pdep/llimits.h>
 
 namespace Widelands {
 
@@ -63,8 +62,8 @@ namespace Widelands {
 #define CURRENT_PARTIALLYFB_PACKET_VERSION      1
 // WAREHOUSE: V7 (b18) splitted storage
 #define CURRENT_WAREHOUSE_PACKET_VERSION        7
-// HEADQUERTERS: V1 (b18)
-#define CURRENT_HEADQUARTERS_PACKET_VERSION     1
+// HEADQUERTERS: V7 (b18)
+#define CURRENT_HEADQUARTERS_PACKET_VERSION     7
 // MILITARYSITE: V4 (b18) splitted garrison
 #define CURRENT_MILITARYSITE_PACKET_VERSION     4
 #define CURRENT_PRODUCTIONSITE_PACKET_VERSION   5
@@ -272,7 +271,10 @@ void Map_Buildingdata_Data_Packet::read_formerbuildings_v2
 	} else if (is_a(Warehouse, &b)) {
 		assert(b.m_old_buildings.empty());
 		b.m_old_buildings.push_back(&b.descr());
-	} else if (upcast(DismantleSite, dsite, &b)) {
+	} else if (is_a(Headquarters, &b)) {
+		assert(b.m_old_buildings.empty());
+		b.m_old_buildings.push_back(&b.descr());
+	} else if (is_a(DismantleSite, &b)) {
 		// Former buildings filled with the current one
 		// upon building init.
 		assert(!b.m_old_buildings.empty());
@@ -500,180 +502,7 @@ void Map_Buildingdata_Data_Packet::read_warehouse
 		if (packet_version >= 7) {
 			read_storage(*warehouse.get_storage(), fr, game, mol);
 		} else {
-			// init supply
-			upcast(StorageHandler, sh, warehouse.get_storage());
-			StorageSupply* ss = sh->m_supply.get();
-			Ware_Index const nr_wares   = warehouse.tribe().get_nrwares  ();
-			Ware_Index const nr_tribe_workers = warehouse.tribe().get_nrworkers();
-			ss->set_nrwares  (nr_wares);
-			ss->set_nrworkers(nr_tribe_workers);
-			sh->m_ware_policy.resize(nr_wares.value(), Storage::StockPolicy::Normal);
-			sh->m_worker_policy.resize
-				(nr_tribe_workers.value(),Storage::StockPolicy::Normal);
-			// ware supplies
-			const Tribe_Descr & tribe = warehouse.tribe();
-			while (fr.Unsigned8()) {
-				const char* ware_name = fr.CString();
-				Ware_Index const id = tribe.ware_index(ware_name);
-				Storage::StockPolicy policy = Storage::StockPolicy::Normal;
-				uint32_t amount = 0;
-				if (packet_version >= 5) {
-					amount = fr.Unsigned32();
-					policy = static_cast<Storage::StockPolicy>(fr.Unsigned8());
-				} else {
-					amount = static_cast<uint32_t>(fr.Unsigned16());
-				}
-				if (id) {
-					ss->add_wares(id, amount);
-					sh->set_ware_policy(id, policy);
-				} else {
-					throw  game_data_error(_("warehouse: Unknown ware %s (id %d)\n"), ware_name, id.value());
-				}
-			}
-			// worker supplies
-			while (fr.Unsigned8()) {
-				const char* name = fr.CString();
-				Ware_Index const id = tribe.worker_index(name);
-				Storage::StockPolicy policy = Storage::StockPolicy::Normal;
-				uint32_t amount = 0;
-				if (packet_version >= 5) {
-					amount = fr.Unsigned32();
-					policy = static_cast<Storage::StockPolicy>(fr.Unsigned8());
-				} else {
-					amount = static_cast<uint32_t>(fr.Unsigned16());
-				}
-				if (id) {
-					ss->add_workers(id, amount);
-					sh->set_worker_policy(id, policy);
-				} else {
-					throw  game_data_error(_("storage: Unknown worker %s (id %d)\n"), name, id.value());
-				}
-			}
-
-			if (packet_version <= 3) {
-				// eat the obsolete idle request structures
-				uint32_t nrrequests = fr.Unsigned16();
-				while (nrrequests--) {
-					std::unique_ptr<Request> req
-						(new Request
-							(warehouse,
-								Ware_Index::First(),
-								&StorageHandler::planned_worker_callback,
-								wwWORKER));
-					req->Read(fr, game, mol);
-				}
-			}
-
-			// Incorporated workers
-			uint16_t const nr_workers = fr.Unsigned16();
-			for (uint16_t i = 0; i < nr_workers; ++i) {
-				uint32_t const worker_serial = fr.Unsigned32();
-				try {
-					Worker & worker = mol.get<Worker>(worker_serial);
-					if (1 == packet_version) {
-						char const * const name = fr.CString();
-						if (name != worker.name()) {
-							throw game_data_error
-								(_("incorporated worker name : expected %s but found \"%s\""),
-									worker.name().c_str(), name);
-						}
-					}
-					StorageHandler::StockedWorkerAtr* atr = sh->store_worker_atr(worker);
-					if (atr != nullptr) {
-						sh->m_stocked_workers_atr.push_back(*atr);
-					}
-					mol.schedule_destroy(worker);
-				} catch (const _wexception & e) {
-					throw game_data_error
-						("incorporated worker #%u (%u): %s",
-							i, worker_serial, e.what());
-				}
-			}
-			// Auto spawning
-			const std::vector<Ware_Index> & worker_types_without_cost =
-				tribe.worker_types_without_cost();
-
-			if (1 == packet_version) { //  a single next_spawn time for "carrier"
-				uint32_t const next_spawn = fr.Unsigned32();
-				Ware_Index const worker_index = tribe.safe_worker_index("carrier");
-				if (not worker_index) {
-					log
-						("WARNING: %s %u has a next_spawn time for nonexistent "
-							"worker type \"%s\" set to %u, ignoring\n",
-							warehouse.descname().c_str(), warehouse.serial(),
-							"carrier", next_spawn);
-				} else if (tribe.get_worker_descr(worker_index)->buildcost().size()) {
-					log
-						("WARNING: %s %u has a next_spawn time for worker type "
-							"\"%s\", that costs something to build, set to %u, "
-							"ignoring\n",
-							warehouse.descname().c_str(), warehouse.serial(),
-							"carrier", next_spawn);
-				} else {
-					sh->add_worker_spawn(worker_index);
-					uint32_t* next_act = &sh->m_spawn_wares.at(worker_index).at(0);
-					*next_act = next_spawn;
-				}
-			} else {
-				for (;;) {
-					char const * const worker_typename = fr.CString   ();
-					if (not *worker_typename) { //  encountered the terminator ("")
-						break;
-					}
-					uint32_t const next_spawn = fr.Unsigned32();
-					Ware_Index const worker_index = tribe.safe_worker_index(worker_typename);
-					if (not worker_index) {
-						log
-							("WARNING: %s %u has a next_spawn time for nonexistent "
-								"worker type \"%s\" set to %u, ignoring\n",
-								warehouse.descname().c_str(), warehouse.serial(),
-								worker_typename, next_spawn);
-						continue;
-					}
-					if (tribe.get_worker_descr(worker_index)->buildcost().size()) {
-						log
-							("WARNING: %s %u has a next_spawn time for worker type "
-								"\"%s\", that costs something to build, set to %u, "
-								"ignoring\n",
-								warehouse.descname().c_str(), warehouse.serial(),
-								worker_typename, next_spawn);
-						continue;
-					}
-					sh->add_worker_spawn(worker_index);
-					uint32_t* next_act = &sh->m_spawn_workers.at(worker_index).at(0);
-					*next_act = next_spawn;
-				}
-			}
-			//  The checks that the warehouse has a next_spawn time for each
-			//  worker type that the player is allowed to spawn, is in
-			//  Warehouse::load_finish.
-
-			if (packet_version >= 3) {
-				// Read planned worker data
-				// Consistency checks are in Warehouse::load_finish
-				uint32_t nr_planned_workers = fr.Unsigned32();
-				while (nr_planned_workers--) {
-					StorageHandler::PlannedWorkers pw;
-					pw.index = tribe.worker_index(fr.CString());
-					pw.amount = fr.Unsigned32();
-
-					uint32_t nr_requests = fr.Unsigned32();
-					while (nr_requests--) {
-						pw.requests.push_back
-							(new Request
-								(warehouse,
-									Ware_Index::First(),
-									&StorageHandler::planned_worker_callback,
-									wwWORKER));
-						pw.requests.back()->Read(fr, game, mol);
-					}
-					sh->m_planned_workers.push_back(pw);
-				}
-			}
-
-			if (packet_version >= 5) {
-				sh->m_removal_next_act = fr.Unsigned32();
-			}
+			read_storage_legacy(packet_version, warehouse.get_storage(), fr, game, mol);
 		}
 		// Port stuff
 		if (packet_version >= 6) {
@@ -742,7 +571,8 @@ void Map_Buildingdata_Data_Packet::read_warehouse
 	}
 }
 
-void Map_Buildingdata_Data_Packet::read_headquarters(Headquarters& hq, FileRead& fr, Game& g, Map_Map_Object_Loader& mol)
+void Map_Buildingdata_Data_Packet::read_headquarters
+	(Headquarters& hq, FileRead& fr, Game& g, Map_Map_Object_Loader& mol)
 {
 	try {
 		uint16_t const packet_version = fr.Unsigned16();
@@ -750,12 +580,214 @@ void Map_Buildingdata_Data_Packet::read_headquarters(Headquarters& hq, FileRead&
 			throw game_data_error
 				(_("unknown/unhandled version %u"), packet_version);
 		}
-		read_storage(*hq.get_storage(), fr, g, mol);
-		read_garrison(*hq.get_garrison(), fr, g, mol);
+		if (packet_version >= 7) {
+			read_storage(*hq.get_storage(), fr, g, mol);
+			read_garrison(*hq.get_garrison(), fr, g, mol);
+		} else {
+			read_storage_legacy(packet_version, hq.get_storage(), fr, g, mol);
+		}
+		// TODO move in warehouse loadfinished?
+		if (uint32_t const conquer_radius = hq.get_conquers()) {
+			//  Add to map of military influence.
+			const Map & map = g.map();
+			Area<FCoords> a (map.get_fcoords(hq.get_position()), conquer_radius);
+			const Field & first_map_field = map[0];
+			Player::Field * const player_fields = hq.owner().m_fields;
+			MapRegion<Area<FCoords> > mr(map, a);
+			do {
+				player_fields[mr.location().field - &first_map_field].military_influence
+					+= map.calc_influence(mr.location(), Area<>(a, a.radius));
+			} while (mr.advance(map));
+		}
+		hq.owner().see_area
+			(Area<FCoords>
+				(g.map().get_fcoords(hq.get_position()),
+				hq.vision_range()));
 	} catch (const _wexception & e) {
 		throw game_data_error(_("headquarters: %s"), e.what());
 	}
 }
+
+void Map_Buildingdata_Data_Packet::read_storage_legacy
+	(uint16_t packet_version, Storage* storage, FileRead& fr, Game& g, Map_Map_Object_Loader& mol)
+{
+	// init supply
+	upcast(StorageHandler, sh, storage);
+	Building& building = sh->get_building();
+	StorageSupply* ss = sh->m_supply.get();
+	Ware_Index const nr_wares   = building.tribe().get_nrwares  ();
+	Ware_Index const nr_tribe_workers = building.tribe().get_nrworkers();
+	ss->set_nrwares  (nr_wares);
+	ss->set_nrworkers(nr_tribe_workers);
+	sh->m_ware_policy.resize(nr_wares.value(), Storage::StockPolicy::Normal);
+	sh->m_worker_policy.resize
+		(nr_tribe_workers.value(), Storage::StockPolicy::Normal);
+	// ware supplies
+	const Tribe_Descr & tribe = building.tribe();
+	while (fr.Unsigned8()) {
+		const char* ware_name = fr.CString();
+		Ware_Index const id = tribe.ware_index(ware_name);
+		Storage::StockPolicy policy = Storage::StockPolicy::Normal;
+		uint32_t amount = 0;
+		if (packet_version >= 5) {
+			amount = fr.Unsigned32();
+			policy = static_cast<Storage::StockPolicy>(fr.Unsigned8());
+		} else {
+			amount = static_cast<uint32_t>(fr.Unsigned16());
+		}
+		if (id) {
+			ss->add_wares(id, amount);
+			sh->set_ware_policy(id, policy);
+		} else {
+			throw  game_data_error(_("warehouse: Unknown ware %s (id %d)\n"), ware_name, id.value());
+		}
+	}
+	// worker supplies
+	while (fr.Unsigned8()) {
+		const char* name = fr.CString();
+		Ware_Index const id = tribe.worker_index(name);
+		Storage::StockPolicy policy = Storage::StockPolicy::Normal;
+		uint32_t amount = 0;
+		if (packet_version >= 5) {
+			amount = fr.Unsigned32();
+			policy = static_cast<Storage::StockPolicy>(fr.Unsigned8());
+		} else {
+			amount = static_cast<uint32_t>(fr.Unsigned16());
+		}
+		if (id) {
+			ss->add_workers(id, amount);
+			sh->set_worker_policy(id, policy);
+		} else {
+			throw  game_data_error(_("storage: Unknown worker %s (id %d)\n"), name, id.value());
+		}
+	}
+
+	if (packet_version <= 3) {
+		// eat the obsolete idle request structures
+		uint32_t nrrequests = fr.Unsigned16();
+		while (nrrequests--) {
+			std::unique_ptr<Request> req
+				(new Request
+					(building,
+						Ware_Index::First(),
+						&StorageHandler::planned_worker_callback,
+						wwWORKER));
+			req->Read(fr, g, mol);
+		}
+	}
+
+	// Incorporated workers
+	uint16_t const nr_workers = fr.Unsigned16();
+	for (uint16_t i = 0; i < nr_workers; ++i) {
+		uint32_t const worker_serial = fr.Unsigned32();
+		try {
+			Worker & worker = mol.get<Worker>(worker_serial);
+			if (1 == packet_version) {
+				char const * const name = fr.CString();
+				if (name != worker.name()) {
+					throw game_data_error
+						(_("incorporated worker name : expected %s but found \"%s\""),
+							worker.name().c_str(), name);
+				}
+			}
+			StorageHandler::StockedWorkerAtr* atr = sh->store_worker_atr(worker);
+			if (atr != nullptr) {
+				sh->m_stocked_workers_atr.push_back(*atr);
+			}
+			mol.schedule_destroy(worker);
+		} catch (const _wexception & e) {
+			throw game_data_error
+				("incorporated worker #%u (%u): %s",
+					i, worker_serial, e.what());
+		}
+	}
+	// Auto spawning
+	const std::vector<Ware_Index> & worker_types_without_cost =
+		tribe.worker_types_without_cost();
+
+	if (1 == packet_version) { //  a single next_spawn time for "carrier"
+		uint32_t const next_spawn = fr.Unsigned32();
+		Ware_Index const worker_index = tribe.safe_worker_index("carrier");
+		if (not worker_index) {
+			log
+				("WARNING: %s %u has a next_spawn time for nonexistent "
+					"worker type \"%s\" set to %u, ignoring\n",
+					building.descname().c_str(), building.serial(),
+					"carrier", next_spawn);
+		} else if (tribe.get_worker_descr(worker_index)->buildcost().size()) {
+			log
+				("WARNING: %s %u has a next_spawn time for worker type "
+					"\"%s\", that costs something to build, set to %u, "
+					"ignoring\n",
+					building.descname().c_str(), building.serial(),
+					"carrier", next_spawn);
+		} else {
+			sh->add_worker_spawn(worker_index);
+			uint32_t* next_act = &sh->m_spawn_wares.at(worker_index).at(0);
+			*next_act = next_spawn;
+		}
+	} else {
+		for (;;) {
+			char const * const worker_typename = fr.CString   ();
+			if (not *worker_typename) { //  encountered the terminator ("")
+				break;
+			}
+			uint32_t const next_spawn = fr.Unsigned32();
+			Ware_Index const worker_index = tribe.safe_worker_index(worker_typename);
+			if (not worker_index) {
+				log
+					("WARNING: %s %u has a next_spawn time for nonexistent "
+						"worker type \"%s\" set to %u, ignoring\n",
+						building.descname().c_str(), building.serial(),
+						worker_typename, next_spawn);
+				continue;
+			}
+			if (tribe.get_worker_descr(worker_index)->buildcost().size()) {
+				log
+					("WARNING: %s %u has a next_spawn time for worker type "
+						"\"%s\", that costs something to build, set to %u, "
+						"ignoring\n",
+						building.descname().c_str(), building.serial(),
+						worker_typename, next_spawn);
+				continue;
+			}
+			sh->add_worker_spawn(worker_index);
+			uint32_t* next_act = &sh->m_spawn_workers.at(worker_index).at(0);
+			*next_act = next_spawn;
+		}
+	}
+	//  The checks that the warehouse has a next_spawn time for each
+	//  worker type that the player is allowed to spawn, is in
+	//  Warehouse::load_finish.
+
+	if (packet_version >= 3) {
+		// Read planned worker data
+		// Consistency checks are in Warehouse::load_finish
+		uint32_t nr_planned_workers = fr.Unsigned32();
+		while (nr_planned_workers--) {
+			StorageHandler::PlannedWorkers pw;
+			pw.index = tribe.worker_index(fr.CString());
+			pw.amount = fr.Unsigned32();
+
+			uint32_t nr_requests = fr.Unsigned32();
+			while (nr_requests--) {
+				pw.requests.push_back
+					(new Request
+						(building,
+							Ware_Index::First(),
+							&StorageHandler::planned_worker_callback,
+							wwWORKER));
+				pw.requests.back()->Read(fr, g, mol);
+			}
+			sh->m_planned_workers.push_back(pw);
+		}
+	}
+
+	if (packet_version >= 5) {
+		sh->m_removal_next_act = fr.Unsigned32();
+	}
+}
+
 
 
 void Map_Buildingdata_Data_Packet::read_militarysite
@@ -1199,7 +1231,8 @@ void Map_Buildingdata_Data_Packet::read_trainingsite
 	}
 }
 
-void Map_Buildingdata_Data_Packet::read_garrison(Garrison& g, FileRead& fr, Game& game, Map_Map_Object_Loader& mor)
+void Map_Buildingdata_Data_Packet::read_garrison
+	(Garrison& g, FileRead& fr, Game& game, Map_Map_Object_Loader& mor)
 {
 	try {
 		GarrisonHandler& gh = ref_cast<GarrisonHandler, Garrison>(g);
@@ -1207,7 +1240,11 @@ void Map_Buildingdata_Data_Packet::read_garrison(Garrison& g, FileRead& fr, Game
 		gh.m_min_capacity = fr.Unsigned32();
 		gh.m_max_capacity = fr.Unsigned32();
 		gh.m_capacity = fr.Unsigned32();
-		// FIXME CGH ensuire soldiers are added later
+		uint32_t num_soldiers = fr.Unsigned32();
+		for (int i = 0; i < num_soldiers; i++) {
+			Soldier& s = mor.get<Soldier>(fr.Unsigned32());
+			gh.m_soldiers.push_back(&s);
+		}
 		gh.m_passive = fr.Unsigned8() > 0;
 		gh.m_heal_per_second = fr.Unsigned32();
 		gh.m_last_heal_time = fr.Unsigned32();
@@ -1215,15 +1252,17 @@ void Map_Buildingdata_Data_Packet::read_garrison(Garrison& g, FileRead& fr, Game
 		gh.m_soldier_upgrade_requirements = RequireAttribute
 			(atrTotal, fr.Unsigned32(), fr.Unsigned32());
 		if (fr.Unsigned8()) {
-			gh.m_normal_soldier_request.reset(new Request
-				(gh.m_building, Ware_Index::First(),
+			gh.m_normal_soldier_request.reset
+				(new Request
+					(gh.m_building, Ware_Index::First(),
 					GarrisonHandler::request_soldier_callback,
 					wwWORKER));
 			gh.m_normal_soldier_request->Read(fr, game, mor);
 		}
 		if (fr.Unsigned8()) {
-			gh.m_upgrade_soldier_request.reset(new Request
-				(gh.m_building,
+			gh.m_upgrade_soldier_request.reset
+				(new Request
+					(gh.m_building,
 					(!gh.m_normal_soldier_request) ? Ware_Index::First()
 						: gh.m_building.descr().tribe().safe_worker_index("soldier"),
 					GarrisonHandler::request_soldier_callback,
@@ -1606,7 +1645,8 @@ void Map_Buildingdata_Data_Packet::write_warehouse
 	}
 }
 
-void Map_Buildingdata_Data_Packet::write_headquarters(const Headquarters& hq, FileWrite& fw, Game& g, Map_Map_Object_Saver& mos)
+void Map_Buildingdata_Data_Packet::write_headquarters
+	(const Headquarters& hq, FileWrite& fw, Game& g, Map_Map_Object_Saver& mos)
 {
 	fw.Unsigned16(CURRENT_HEADQUARTERS_PACKET_VERSION);
 	write_storage(*hq.get_storage(), fw, g, mos);
@@ -1747,7 +1787,8 @@ void Map_Buildingdata_Data_Packet::write_trainingsite
 	// DONE
 }
 
-void Map_Buildingdata_Data_Packet::write_garrison(const Garrison& gar, FileWrite& fw, Game& g, Map_Map_Object_Saver& mos)
+void Map_Buildingdata_Data_Packet::write_garrison
+	(const Garrison& gar, FileWrite& fw, Game& g, Map_Map_Object_Saver& mos)
 {
 	const GarrisonHandler& gh = ref_cast<const GarrisonHandler, const Garrison>(gar);
 	fw.Unsigned16(CURRENT_GARRISON_PACKET_VERSION);
@@ -1756,7 +1797,12 @@ void Map_Buildingdata_Data_Packet::write_garrison(const Garrison& gar, FileWrite
 	fw.Unsigned32(gh.m_max_capacity);
 	fw.Unsigned32(gh.m_capacity);
 	// Soldiers
-	// FIXME CGH ensure it is not needed
+	fw.Unsigned32(gh.m_soldiers.size());
+	for (int i = 0; i < gh.m_soldiers.size(); i++) {
+		Soldier* s = gh.m_soldiers.at(i);
+		assert(mos.is_object_known(*s));
+		fw.Unsigned32(mos.get_object_file_index(*s));
+	}
 	fw.Unsigned8(gh.m_passive ? 1 : 0);
 	fw.Unsigned32(gh.m_heal_per_second);
 	fw.Unsigned32(gh.m_last_heal_time);
@@ -1784,7 +1830,6 @@ void Map_Buildingdata_Data_Packet::write_garrison(const Garrison& gar, FileWrite
 	//
 	fw.Unsigned32(gh.m_conquer_radius);
 	fw.Unsigned8(gh.m_didconquer ? 1 : 0);
-	// Jobs will be done by soldiers (i guess) //FIXME CGH
 	fw.Unsigned8(static_cast<uint8_t>(gh.m_soldier_preference));
 	fw.Unsigned32(gh.m_last_swap_soldiers_time);
 	fw.Unsigned8(gh.m_try_soldier_upgrade ? 1 : 0);
