@@ -27,6 +27,8 @@
 #include <minizip/zip.h>
 
 #include "io/filesystem/filesystem.h"
+#include "io/streamread.h"
+#include "io/streamwrite.h"
 #include "port.h"
 
 class ZipFilesystem : public FileSystem {
@@ -70,7 +72,7 @@ public:
 
 	virtual std::string getBasename() {return m_zipfilename;};
 
-private:
+protected:
 	void m_OpenUnzip();
 	void m_OpenZip();
 	void m_Close();
@@ -92,6 +94,26 @@ private:
 	std::string m_basenamezip;
 	std::string m_basename;
 
+	struct ZipStreamRead : StreamRead {
+		explicit ZipStreamRead(zipFile file, ZipFilesystem* zipfs);
+		virtual ~ZipStreamRead();
+		virtual size_t Data(void* data, size_t bufsize);
+		virtual bool EndOfFile() const;
+	private:
+		zipFile m_unzipfile;
+		ZipFilesystem* m_zipfs;
+	};
+	struct ZipStreamWrite : StreamWrite {
+		explicit ZipStreamWrite(zipFile file, ZipFilesystem* zipfs);
+		virtual ~ZipStreamWrite();
+		virtual void Data(const void* const data, size_t size);
+	private:
+		zipFile m_zipfile;
+		ZipFilesystem* m_zipfs;
+	};
+
 };
+
+
 
 #endif

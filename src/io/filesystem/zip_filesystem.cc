@@ -28,6 +28,8 @@
 
 #include "io/filesystem/filesystem_exceptions.h"
 #include "io/filesystem/zip_exceptions.h"
+#include "io/streamread.h"
+#include "io/streamwrite.h"
 #include "wexception.h"
 
 /**
@@ -418,16 +420,105 @@ void ZipFilesystem::Write
 	zipCloseFileInZip(m_zipfile);
 }
 
+//
+// Stream Read
+//
+
+ZipFilesystem::ZipStreamRead::ZipStreamRead(zipFile file, ZipFilesystem* zipfs)
+: m_unzipfile(file), m_zipfs(zipfs) {}
+ZipFilesystem::ZipStreamRead::~ZipStreamRead() {
+	m_zipfs->m_Close();
+}
+
+size_t ZipFilesystem::ZipStreamRead::Data(void* data, size_t bufsize)
+{
+	int copied = unzReadCurrentFile(m_unzipfile, data, bufsize);
+	if (copied < 0) {
+		throw new _data_error("Failed to read from zip file");
+	}
+	if (copied == 0) {
+		throw new _data_error("End of file reaced while reading zip");
+	}
+	return copied;
+}
+bool ZipFilesystem::ZipStreamRead::EndOfFile() const
+{
+	return unzReadCurrentFile(m_unzipfile, nullptr, 1) == 0;
+}
+
+
 StreamRead  * ZipFilesystem::OpenStreamRead (const std::string & fname) {
-	throw wexception
-		("OpenStreamRead(%s) not yet supported in ZipFilesystem",
-		 fname.c_str());
+	if (!FileExists(fname.c_str()) || IsDirectory(fname.c_str()))
+		throw ZipOperation_error
+			("ZipFilesystem::Load",
+			 fname,
+			 m_zipfilename,
+			 "could not open file from zipfile");
+
+	int32_t method;
+	m_OpenUnzip();
+	int result = unzOpenCurrentFile3(m_unzipfile, &method, nullptr, 1, nullptr);
+	switch (result) {
+		case ZIP_OK:
+			break;
+		default:
+			throw ZipOperation_error
+				("ZipFilesystem: Failed to open streamwrite", fname, m_zipfilename);
+	}
+	return new ZipStreamRead(m_unzipfile, this);
+}
+
+//
+// Stream write
+//
+
+ZipFilesystem::ZipStreamWrite::ZipStreamWrite(zipFile file, ZipFilesystem* zipfs)
+: m_zipfile(file), m_zipfs(zipfs) {}
+ZipFilesystem::ZipStreamWrite::~ZipStreamWrite()
+{
+	m_zipfs->m_Close();
+}
+
+void ZipFilesystem::ZipStreamWrite::Data(const void* const data, const size_t size)
+{
+	int result = zipWriteInFileInZip(m_zipfile, data, size);
+	switch (result) {
+		case ZIP_OK:
+			break;
+		default:
+			throw wexception("Failed to write into zipfile");
+	}
 }
 
 StreamWrite * ZipFilesystem::OpenStreamWrite(const std::string & fname) {
-	throw wexception
-		("OpenStreamWrite(%s) not yet supported in ZipFilesystem",
-		 fname.c_str());
+	m_OpenZip();
+
+	zip_fileinfo zi;
+
+	zi.tmz_date.tm_sec = zi.tmz_date.tm_min = zi.tmz_date.tm_hour =
+		zi.tmz_date.tm_mday = zi.tmz_date.tm_mon = zi.tmz_date.tm_year = 0;
+	zi.dosDate     = 0;
+	zi.internal_fa = 0;
+	zi.external_fa = 0;
+
+	std::string complete_filename = m_basename + "/" + fname;
+	//  create file
+	switch
+		(zipOpenNewFileInZip3
+			(m_zipfile, complete_filename.c_str(), &zi,
+		 	 0, 0, 0, 0, 0 /* comment*/,
+		 	 Z_DEFLATED,
+		 	 Z_BEST_COMPRESSION, 0,
+		 	 -MAX_WBITS, DEF_MEM_LEVEL, Z_DEFAULT_STRATEGY,
+		 	 0, 0))
+	{
+	case ZIP_OK:
+		break;
+	default:
+		throw ZipOperation_error
+			("ZipFilesystem: Failed to open streamwrite", complete_filename, m_zipfilename);
+	}
+	return new ZipStreamWrite(m_zipfile, this);
 }
 
 

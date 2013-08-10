@@ -66,6 +66,7 @@ private:
 	uint32_t    m_buth;
 	uint32_t    m_fs;
 	std::string m_fn;
+	uint16_t    m_minimap_max_size;
 
 	Widelands::Game &                               m_game;
 	UI::Button                             m_back;
@@ -90,6 +91,7 @@ private:
 	GameController                                * m_ctrl;
 	std::unique_ptr<const Image>                    m_minimap_image;
 	std::unique_ptr<const IImageLoader>             m_image_loader;
+
 };
 
 

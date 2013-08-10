@@ -36,12 +36,12 @@ struct Icon : public Panel {
 
 	void setIcon(const Image* picture_id);
 	void setFrame(const RGBColor& color);
+	void setNoFrame();
 
 	virtual void draw(RenderTarget &);
 
 private:
 	const Image* m_pic;
-	int32_t      m_w, m_h;
 	bool         m_draw_frame;
 	RGBColor    m_framecolor;
 };

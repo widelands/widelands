@@ -22,6 +22,7 @@
 
 #include <string>
 
+class FileSystem;
 class Surface;
 
 /// A thin interface that can load an Image from anywhere and turn it into a
@@ -30,7 +31,13 @@ class IImageLoader {
 public:
 	virtual ~IImageLoader() {}
 
-	virtual Surface* load(const std::string& fn) const = 0;
+	/**
+	 * Loads an image into a surface and returns a pointer to it.
+	 * \param fn The image path
+	 * \param fs The filesystem to load the image from. If nullptr (default value),
+	 * loading will be attempted from the global layered filesystem (g_fs).
+	 */
+	virtual Surface* load(const std::string& fn, FileSystem* fs = nullptr) const = 0;
 };
 
 #endif /* end of include guard: IMAGE_LOADER_H */
