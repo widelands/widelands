@@ -542,7 +542,7 @@ Place a construction site or building, checking that it's legal to do so.
 */
 Building * Player::build
 	(Coords c, Building_Index const idx, bool constructionsite,
-	 Building_Descr::FormerBuildings & former_buidlings)
+	 Building_Descr::FormerBuildings & former_buildings)
 {
 	int32_t buildcaps;
 
@@ -571,9 +571,9 @@ Building * Player::build
 	}
 
 	if (constructionsite)
-		return &egbase().warp_constructionsite(c, m_plnum, idx, false, former_buidlings);
+		return &egbase().warp_constructionsite(c, m_plnum, idx, false, former_buildings);
 	else {
-		return &descr.create(egbase(), *this, c, false, false, former_buidlings);
+		return &descr.create(egbase(), *this, c, false, false, former_buildings);
 	}
 }
 
