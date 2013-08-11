@@ -7,15 +7,15 @@ msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2013-08-05 20:27-0700\n"
-"PO-Revision-Date: 2013-08-04 07:01+0000\n"
+"PO-Revision-Date: 2013-08-10 14:40+0000\n"
 "Last-Translator: István Kiss <kiemc@citromail.hu>\n"
 "Language-Team: Language <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2013-08-07 04:38+0000\n"
-"X-Generator: Launchpad (build 16721)\n"
+"X-Launchpad-Export-Date: 2013-08-11 04:34+0000\n"
+"X-Generator: Launchpad (build 16723)\n"
 
 #: ../../src/computer_player.cc:38
 msgid "None"
@@ -1254,8 +1254,8 @@ msgstr[1] "%u harcos"
 #, c-format
 msgid "%u(+%u) soldier"
 msgid_plural "%u(+%u) soldiers"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%u(+%u) harcos"
+msgstr[1] "%u(+%u) harcos"
 
 #: ../../src/logic/militarysite.cc:239
 #, c-format
@@ -1587,7 +1587,7 @@ msgstr ""
 msgid " is missing"
 msgid_plural " are missing"
 msgstr[0] " hiányzik"
-msgstr[1] " hiányzanak"
+msgstr[1] " hiányoznak"
 
 #: ../../src/logic/production_program.cc:907
 #: ../../src/logic/production_program.cc:1005
@@ -3967,7 +3967,7 @@ msgstr ""
 #: ../../src/wui/game_main_menu_save_game.cc:140
 #: ../../src/wui/game_main_menu_save_game.cc:182
 msgid "players"
-msgstr ""
+msgstr "játékos"
 
 #: ../../src/wui/game_main_menu_save_game.cc:252
 msgid ""

@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2013-08-06 03:27+0000\n"
-"PO-Revision-Date: 2013-08-06 14:34+0000\n"
+"PO-Revision-Date: 2013-08-10 14:09+0000\n"
 "Last-Translator: István Kiss <kiemc@citromail.hu>\n"
 "Language-Team: Language <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-08-07 04:34+0000\n"
-"X-Generator: Launchpad (build 16721)\n"
+"X-Launchpad-Export-Date: 2013-08-11 04:33+0000\n"
+"X-Generator: Launchpad (build 16723)\n"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:93
 msgid ""
@@ -50,6 +50,16 @@ msgid ""
 "Anyway, we must build up stronger military buildings as soon as "
 "possible.\"<br><br>-- NEW OBJECTIVE --<br> "
 msgstr ""
+" „Jóságos ég, ez borzasztó! Úgy látszik, próbatétel vár ránk – és úgy "
+"látszik, Saledusnak jogos volt az ijedelme az általa talált hajóronccsal "
+"kapcsolatban.<br> Ma, ahogy a keleti part felé tartottam,<br> megdöbbentem. "
+"Egy törzsre lettem figyelmes, a semmirekellő, aljas barbárok fajtájából, "
+"akikkel annyi bajunk volt azelőtt.<br> Kezdetben jóhiszeműen azt reméltem, "
+"békések, de amint megláttak, elkezdtek üldözni és támadni dobólándzsáikkal. "
+"Hála az isteneknek,<br> sikerült megmenekülnöm és elrejtőznöm, míg a sötét "
+"éjszaka oltalmában vissza nem térhettem gyarmatunkra.<br> Mindenesetre "
+"erősebb katonai épületeket kell emelnünk, amint csak lehet.”<br><br>-- ÚJ "
+"CÉLKITŰZÉS --<br> "
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:155
 msgid ""
@@ -196,6 +206,9 @@ msgid ""
 "infrastructure is getting better and better. Now we should think of "
 "preparing ourselves for battle.\"<br><br>-- NEW OBJECTIVES --<br> "
 msgstr ""
+" „Jól van. Az első nagy katonai épület elkészült, bányászgazdaságunk pedig "
+"egyre jobb. Most már arra összpontosítsunk, hogy felkészüljünk a "
+"harcra.\"<br><br>-- ÚJ CÉLKITŰZÉSEK --<br> "
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:216
 msgid ""
@@ -207,6 +220,13 @@ msgid ""
 "do...<br><br> You have completed this mission. You may continue playing if "
 "you wish, otherwise move on to the next mission.\" "
 msgstr ""
+" „Egy galamb érkezett ma szigetünkre.<br> Üzenetet hozott, mely borúval tölt "
+"el és visszaidézi félelmeimet.<br> Az üzenetet nekem címezték, kérve, hogy "
+"térjek vissza Fremilbe.<br> Azt írják, hogy a Birodalom hadban áll a "
+"barbárokkal. Északról támadta meg őket az a törzs, amelyiket én nem "
+"támadhattam meg.<br> Tisztában vagyok vele, mit kell tennem...\"<br><br> "
+"Befejezted ezt a küldetést. Ha szeretnél, játszhatsz tovább itt is, "
+"máskülönben folytasd a következő küldetéssel. "
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:197
 msgid ""
@@ -216,6 +236,11 @@ msgid ""
 "us will be put in a boat with the other peaceful ones, and sent back to "
 "their country.\"<br><br>--------------------- VICTORY! ----------------------"
 msgstr ""
+" „Dicső nap a mai. Harcoltunk új otthonunkért, és győztünk.<br> Néhány "
+"barbár még mindig bujkál szigetünkön, de biztos vagyok abban, hogy rövidesen "
+"megleljük őket.<br>Minden barbárt, aki nem támad ránk, beültetünk egy "
+"hajóba, és együtt visszaküldjük őket földjükre.”<br><br>---------------------"
+" GYŐZELEM! ----------------------"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:68
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:188
@@ -223,6 +248,8 @@ msgid ""
 "* As soon as you have enough soldiers, attack and completely destroy the "
 "barbarian buildings.<br>"
 msgstr ""
+"* Amint van elég katonád, támadd meg és semmisítsd meg a barbárok "
+"épületeit.<br>"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:20
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:105
@@ -257,6 +284,9 @@ msgid ""
 "tower, on the eastern frontier. To watch deep inside the enemy territory, "
 "build a tower."
 msgstr ""
+"* Építs keleti határodra erősebb katonai épületeket, ilyenek az előőrs, a "
+"határőrház vagy a torony. Hogy messze beláss az ellenség területére, építs "
+"tornyot."
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:36
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:146
@@ -270,6 +300,9 @@ msgid ""
 "barbarian headquarters stood before), to avoid new settlements of other "
 "tribes in that region."
 msgstr ""
+"* Végül építs egy erődöt a félszigetre<br> (nagyjából oda, ahol a barbár "
+"főhadiszállás állt), hogy ne tudjanak új törzsek letelepedni abban a "
+"térségben."
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:52
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:166
@@ -290,7 +323,7 @@ msgstr ""
 "borászatot.<br> Persze ez azt jelenti, hogy az ennivalók elkészítéséhez "
 "további alapanyagokra is szükségünk lesz – úgymint halra, húsra vagy "
 "kenyérre.<br> Ezen élelmiszerek biztosításához építened kellene egy "
-"halászházat, farmot, malmot és pékséget.<br> Szükség lehet még egy "
+"halászházat, tanyát, malmot és pékséget.<br> Szükség lehet még egy "
 "vadászházra,<br> sertéstelepre, szőlőskertre és néhány kútra is.<br> Rajtad "
 "áll, mit építesz.<br>De ne feledd: a szén- és vasércbányákba sör kell, a "
 "márvány- és aranybányákba bor, és minden bányába legalább harapnivaló, ami "
@@ -302,7 +335,7 @@ msgstr "02 – A számkivetés előőrse"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:206
 msgid "7 days later..."
-msgstr "7 nappal később"
+msgstr "7 nappal később..."
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:211
 msgid "A Message"
@@ -346,7 +379,7 @@ msgstr "Veszélyes hajódarabok"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:66
 msgid "Destroy the barbarian tribe"
-msgstr ""
+msgstr "Pusztítsd el a barbár törzset"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:81
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:91
@@ -393,7 +426,7 @@ msgstr "Védelmezd a gyarmatodat"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:58
 msgid "Protect your eastern frontier"
-msgstr ""
+msgstr "Védelmezd a keleti határodat"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:50
 msgid "Provide your miners with food"
