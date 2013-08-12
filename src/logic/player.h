@@ -31,6 +31,7 @@
 #include "logic/warehouse.h"
 #include "logic/widelands.h"
 
+class Node;
 namespace Widelands {
 
 class Economy;
@@ -398,15 +399,14 @@ struct Player :
 		throw ();
 
 	/// Call see_node for each node in the area.
-	void see_area(const Area<FCoords>& area)
-		throw ()
-	{
+	void see_area(const Area<FCoords>& area) throw () {
 		const Time gametime = egbase().get_gametime();
 		const Map & map = egbase().map();
 		const Widelands::Field & first_map_field = map[0];
 		MapRegion<Area<FCoords> > mr(map, area);
-		do see_node(map, first_map_field, mr.location(), gametime);
-		while (mr.advance(map));
+		do {
+			see_node(map, first_map_field, mr.location(), gametime);
+		} while (mr.advance(map));
 		m_view_changed = true;
 	}
 
@@ -458,12 +458,12 @@ struct Player :
 	Road * build_road(const Path &); /// Build a road if it is allowed.
 	Building & force_building
 		(const Coords,
-		 const Building_Descr::FormerBuildings &);
+		 const Building::FormerBuildings &);
 	Building & force_csite
 		(const Coords,
 		 Building_Index,
-		 const Building_Descr::FormerBuildings & = Building_Descr::FormerBuildings());
-	Building * build(Coords, Building_Index, bool, Building_Descr::FormerBuildings &);
+		 const Building::FormerBuildings & = Building::FormerBuildings());
+	Building * build(Coords, Building_Index, bool, Building::FormerBuildings &);
 	void bulldoze(PlayerImmovable &, bool recurse = false);
 	void flagaction(Flag &);
 	void start_stop_building(PlayerImmovable &);
@@ -649,7 +649,7 @@ private:
 
 void find_former_buildings
 	(const Tribe_Descr & tribe_descr, const Building_Index bi,
-	 Building_Descr::FormerBuildings* former_buildings);
+	 Building::FormerBuildings* former_buildings);
 
 }
 

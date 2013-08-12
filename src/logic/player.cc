@@ -110,19 +110,18 @@ const RGBColor Player::Colors[MAX_PLAYERS] = {
  */
 void find_former_buildings
 	(const Widelands::Tribe_Descr & tribe_descr, const Widelands::Building_Index bi,
-	 Widelands::Building_Descr::FormerBuildings* former_buildings)
+	 Widelands::Building::FormerBuildings* former_buildings)
 {
 	assert(former_buildings && former_buildings->empty());
-	const Widelands::Building_Descr * first_descr = tribe_descr.get_building_descr(bi);
-	former_buildings->push_back(first_descr);
+	former_buildings->push_back(bi);
 	bool done = false;
 	while (not done) {
-		const Widelands::Building_Descr * oldest = former_buildings->front();
+		Widelands::Building_Index oldest_idx = former_buildings->front();
+		const Widelands::Building_Descr * oldest = tribe_descr.get_building_descr(oldest_idx);
 		if (!oldest->is_enhanced()) {
 			done = true;
 			break;
 		}
-		const Widelands::Building_Index & oldest_idx = tribe_descr.building_index(oldest->name());
 		for
 			(Widelands::Building_Index i = Widelands::Building_Index::First();
 			 i < tribe_descr.get_nrbuildings();
@@ -130,7 +129,7 @@ void find_former_buildings
 		{
 			const Widelands::Building_Descr* ob = tribe_descr.get_building_descr(i);
 			if (ob->enhancements().count(oldest_idx)) {
-				former_buildings->insert(former_buildings->begin(), ob);
+				former_buildings->insert(former_buildings->begin(), i);
 				break;
 			}
 		}
@@ -506,7 +505,8 @@ Building & Player::force_building
 	 const Building_Descr::FormerBuildings & former_buildings)
 {
 	Map & map = egbase().map();
-	const Building_Descr* descr = former_buildings.back();
+	Building_Index idx = former_buildings.back();
+	const Building_Descr* descr = tribe().get_building_descr(idx);
 	terraform_for_building(egbase(), player_number(), location, descr);
 	FCoords flag_loc;
 	map.get_brn(map.get_fcoords(location), &flag_loc);
@@ -522,7 +522,8 @@ Building& Player::force_csite
 	 const Building_Descr::FormerBuildings & former_buildings)
 {
 	Map & map = egbase().map();
-	const Building_Descr * descr = tribe().get_building_descr(b_idx);
+	Building_Index idx = former_buildings.back();
+	const Building_Descr* descr = tribe().get_building_descr(idx);
 	terraform_for_building(egbase(), player_number(), location, descr);
 	FCoords flag_loc;
 	map.get_brn(map.get_fcoords(location), &flag_loc);

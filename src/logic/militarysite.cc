@@ -867,8 +867,9 @@ bool MilitarySite::attack(Soldier & enemy)
 
 		// Add suffix to all descr in former buildings in cases
 		// the new owner comes from another tribe
-		Building_Descr::FormerBuildings former_buildings;
-		BOOST_FOREACH(const Building_Descr * old_descr, m_old_buildings) {
+		Building::FormerBuildings former_buildings;
+		BOOST_FOREACH(Building_Index former_idx, m_old_buildings) {
+			const Building_Descr * old_descr = tribe().get_building_descr(former_idx);
 			std::string bldname = old_descr->name();
 			// Has this building already a suffix? == conquered building?
 			std::string::size_type const dot = bldname.rfind('.');
@@ -879,8 +880,7 @@ bool MilitarySite::attack(Soldier & enemy)
 			} else if (enemytribe.name() == bldname.substr(dot + 1, bldname.size()))
 				bldname = bldname.substr(0, dot);
 			Building_Index bldi = enemytribe.safe_building_index(bldname.c_str());
-			const Building_Descr * former_descr = enemytribe.get_building_descr(bldi);
-			former_buildings.push_back(former_descr);
+			former_buildings.push_back(bldi);
 		}
 
 		// Now we destroy the old building before we place the new one.
