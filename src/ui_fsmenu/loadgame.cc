@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002, 2006-2012 by the Widelands Development Team
+ * Copyright (C) 2002, 2006-2013 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -49,6 +49,7 @@ Fullscreen_Menu_LoadGame::Fullscreen_Menu_LoadGame
 	m_buth (get_h() * 9 / 200),
 	m_fs   (fs_small()),
 	m_fn   (ui_fn()),
+	m_minimap_max_size(get_w() * 15 / 100),
 
 // "Data holder" for the savegame information
 	m_game(g),
@@ -61,7 +62,7 @@ Fullscreen_Menu_LoadGame::Fullscreen_Menu_LoadGame
 		 _("Back"), std::string(), true, false),
 	m_ok
 		(this, "ok",
-		 get_w() * 71 / 100, get_h() * 15 / 20, m_butw, m_buth,
+		 get_w() * 71 / 100, get_h() * 31 / 40, m_butw, m_buth,
 		 g_gr->images().get("pics/but2.png"),
 		 _("OK"), std::string(), false, false),
 	m_delete
@@ -104,7 +105,7 @@ Fullscreen_Menu_LoadGame::Fullscreen_Menu_LoadGame
 		 _("Minimap:"), UI::Align_Right),
 	m_minimap_icon
 		(this, get_w() * 71 / 100, get_h() * 10 / 20,
-		 get_w() * 15 / 100, get_w() * 15 / 100, nullptr),
+		 m_minimap_max_size, m_minimap_max_size, nullptr),
 	m_settings(gsp),
 	m_ctrl(gc),
 	m_image_loader(new ImageLoaderImpl())
@@ -127,7 +128,7 @@ Fullscreen_Menu_LoadGame::Fullscreen_Menu_LoadGame
 	m_label_players .set_font(m_fn, m_fs, UI_FONT_CLR_FG);
 	m_ta_players    .set_font(m_fn, m_fs, UI_FONT_CLR_FG);
 	m_ta_win_condition.set_font(m_fn, m_fs, UI_FONT_CLR_FG);
-	m_minimap_icon.setFrame(UI_FONT_CLR_FG);
+	m_minimap_icon.set_visible(false);
 	m_list          .set_font(m_fn, m_fs);
 	m_list.selected.connect(boost::bind(&Fullscreen_Menu_LoadGame::map_selected, this, _1));
 	m_list.double_clicked.connect(boost::bind(&Fullscreen_Menu_LoadGame::double_clicked, this, _1));
@@ -180,6 +181,9 @@ void Fullscreen_Menu_LoadGame::no_selection()
 	m_ta_players.set_text(std::string());
 	m_ta_win_condition.set_text(std::string());
 	m_minimap_icon.setIcon(nullptr);
+	m_minimap_icon.set_visible(false);
+	m_minimap_icon.setNoFrame();
+	m_minimap_image.reset();
 }
 
 
@@ -189,78 +193,89 @@ void Fullscreen_Menu_LoadGame::map_selected(uint32_t selected)
 		no_selection();
 		return;
 	}
-
-	if (const char * const name = m_list.get_selected()) {
-		Widelands::Game_Preload_Data_Packet gpdp;
-
-		try {
-			Widelands::Game_Loader gl(name, m_game);
-			gl.preload_game(gpdp);
-		} catch (const _wexception & e) {
-			if (!m_settings || m_settings->settings().saved_games.empty()) {
-				log("Save game '%s' must have changed from under us\nException: %s\n", name, e.what());
-				m_list.remove(selected);
-				return;
-			} else {
-				m_ok.set_enabled(true);
-				m_delete.set_enabled(false);
-				m_tamapname .set_text(_("Savegame from dedicated server"));
-				m_tagametime.set_text(_("Unknown gametime"));
-				return;
-			}
-		}
-
-		m_ok.set_enabled(true);
-		m_delete.set_enabled(true);
-
-		//Try to translate the map name.
-		//This will work on every official map as expected
-		//and 'fail silently' (not find a translation) for already translated campaign map names.
-		//It will also translate 'false-positively' on any user-made map which shares a name with
-		//the official maps, but this should not be a problem to worry about.
-		{
-			i18n::Textdomain td("maps");
-			m_tamapname.set_text(_(gpdp.get_mapname()));
-		}
-
-		char buf[20];
-		uint32_t gametime = gpdp.get_gametime();
-		m_tagametime.set_text(gametimestring(gametime));
-
-		if (gpdp.get_number_of_players() > 0) {
-			sprintf(buf, "%i", gpdp.get_number_of_players());
-		} else {
-			sprintf(buf, "%s", _("Unknown"));
-		}
-		m_ta_players.set_text(buf);
-		m_ta_win_condition.set_text(gpdp.get_win_condition());
-
-		std::string minimap_path = gpdp.get_minimap_path();
-		// Delete former image
-		m_minimap_icon.setIcon(nullptr);
-		m_minimap_image.reset();
-		// Load the new one
-		if (!minimap_path.empty()) {
-			try {
-				std::unique_ptr<Surface> surface(m_image_loader->load(minimap_path));
-				m_minimap_image.reset(new_in_memory_image("minimap", surface.release()));
-				double scale = double(m_minimap_icon.get_w()) / m_minimap_image->width();
-				double scaleY = double(m_minimap_icon.get_h()) / m_minimap_image->height();
-				if (scaleY < scale) {
-					scale = scaleY;
-				}
-				uint16_t w = scale * m_minimap_image->width();
-				uint16_t h = scale * m_minimap_image->height();
-				const Image* resized = ImageTransformations::resize(m_minimap_image.get(), w, h);
-				// keeps our in_memory_image around and give to icon the one
-				// from resize that is handled by the cache. It is still linked to our
-				// surface
-				m_minimap_icon.setIcon(resized);
-			} catch (...) {
-			}
-		}
-	} else {
+	const char * const name = m_list.get_selected();
+	if (!name) {
 		no_selection();
+		return;
+	}
+
+	Widelands::Game_Preload_Data_Packet gpdp;
+	Widelands::Game_Loader gl(name, m_game);
+
+	try {
+		gl.preload_game(gpdp);
+	} catch (const _wexception & e) {
+		if (!m_settings || m_settings->settings().saved_games.empty()) {
+			log("Save game '%s' must have changed from under us\nException: %s\n", name, e.what());
+			m_list.remove(selected);
+			return;
+		} else {
+			m_ok.set_enabled(true);
+			m_delete.set_enabled(false);
+			m_tamapname .set_text(_("Savegame from dedicated server"));
+			m_tagametime.set_text(_("Unknown gametime"));
+			return;
+		}
+	}
+
+	m_ok.set_enabled(true);
+	m_delete.set_enabled(true);
+
+	//Try to translate the map name.
+	//This will work on every official map as expected
+	//and 'fail silently' (not find a translation) for already translated campaign map names.
+	//It will also translate 'false-positively' on any user-made map which shares a name with
+	//the official maps, but this should not be a problem to worry about.
+	{
+		i18n::Textdomain td("maps");
+		m_tamapname.set_text(_(gpdp.get_mapname()));
+	}
+
+	char buf[20];
+	uint32_t gametime = gpdp.get_gametime();
+	m_tagametime.set_text(gametimestring(gametime));
+
+	if (gpdp.get_number_of_players() > 0) {
+		sprintf(buf, "%i", gpdp.get_number_of_players());
+	} else {
+		sprintf(buf, "%s", _("Unknown"));
+	}
+	m_ta_players.set_text(buf);
+	m_ta_win_condition.set_text(gpdp.get_win_condition());
+
+	std::string minimap_path = gpdp.get_minimap_path();
+	// Delete former image
+	m_minimap_icon.setIcon(nullptr);
+	m_minimap_icon.set_visible(false);
+	m_minimap_icon.setNoFrame();
+	m_minimap_image.reset();
+	// Load the new one
+	if (!minimap_path.empty()) {
+		try {
+			// Load the image
+			FileSystem* save_fs = g_fs->MakeSubFileSystem(name);
+			std::unique_ptr<Surface> surface(m_image_loader->load(minimap_path, save_fs));
+			m_minimap_image.reset(new_in_memory_image(std::string(name + minimap_path), surface.release()));
+			delete save_fs;
+			// Scale it
+			double scale = double(m_minimap_max_size) / m_minimap_image->width();
+			double scaleY = double(m_minimap_max_size) / m_minimap_image->height();
+			if (scaleY < scale) {
+				scale = scaleY;
+			}
+			uint16_t w = scale * m_minimap_image->width();
+			uint16_t h = scale * m_minimap_image->height();
+			const Image* resized = ImageTransformations::resize(m_minimap_image.get(), w, h);
+			// keeps our in_memory_image around and give to icon the one
+			// from resize that is handled by the cache. It is still linked to our
+			// surface
+			m_minimap_icon.set_size(w, h);
+			m_minimap_icon.setFrame(UI_FONT_CLR_FG);
+			m_minimap_icon.set_visible(true);
+			m_minimap_icon.setIcon(resized);
+		} catch (const std::exception & e) {
+			log("Failed to load the minimap image : %s\n", e.what());
+		}
 	}
 }
 

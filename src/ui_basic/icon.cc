@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2010 by the Widelands Development Team
+ * Copyright (C) 2010, 2013 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -30,9 +30,7 @@ Icon::Icon
 	 const Image* picture_id)
 	:
 	Panel(parent, x, y, w, h),
-	m_pic(picture_id),
-	m_w(w),
-	m_h(h)
+	m_pic(picture_id)
 {
 	set_handle_mouse(false);
 	set_think(false);
@@ -51,15 +49,21 @@ void Icon::setFrame(const RGBColor& color)
 	m_framecolor.b = color.b;
 }
 
+void Icon::setNoFrame()
+{
+	m_draw_frame = false;
+}
+
+
 
 void Icon::draw(RenderTarget & dst) {
 	if (m_pic) {
-		int32_t w = (m_w - m_pic->width()) / 2;
-		int32_t h = (m_h - m_pic->height()) / 2;
+		int32_t w = (get_w() - m_pic->width()) / 2;
+		int32_t h = (get_h() - m_pic->height()) / 2;
 		dst.blit(Point(w, h), m_pic);
 	}
 	if (m_draw_frame) {
-		dst.draw_rect(Rect(0, 0, m_w, m_h), m_framecolor);
+		dst.draw_rect(Rect(0, 0, get_w(), get_h()), m_framecolor);
 	}
 }
 

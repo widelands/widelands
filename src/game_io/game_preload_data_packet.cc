@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2009 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2009, 2013 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -97,7 +97,7 @@ void Game_Preload_Data_Packet::Read
 				m_number_of_players = s.get_safe_int(PLAYERS_AMOUNT_KEY_V4);
 			}
 			if (fs.FileExists(MINIMAP_FILENAME)) {
-				m_minimap_path = fs.FS_CanonicalizeName(MINIMAP_FILENAME);
+				m_minimap_path = MINIMAP_FILENAME;
 			}
 		} else {
 			throw game_data_error
@@ -156,6 +156,7 @@ void Game_Preload_Data_Packet::Write
 	std::unique_ptr< ::StreamWrite> sw(fs.OpenStreamWrite(MINIMAP_FILENAME));
 	if (sw.get() != nullptr) {
 		mmr.write_minimap_image(game, &ipl->player(), vp, flags, sw.get());
+		sw->Flush();
 	}
 	sw.reset();
 }
