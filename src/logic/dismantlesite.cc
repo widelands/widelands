@@ -70,15 +70,15 @@ DismantleSite::DismantleSite
 :
 Partially_Finished_Building(gdescr)
 {
+	m_position = c;
+	set_owner(&plr);
+
 	assert(!former_buildings.empty());
 	BOOST_FOREACH(Building_Index former_idx, former_buildings) {
 		m_old_buildings.push_back(former_idx);
 	}
 	const Building_Descr* cur_descr = owner().tribe().get_building_descr(m_old_buildings.back());
 	set_building(*cur_descr);
-
-	m_position = c;
-	set_owner(&plr);
 
 	if (loading) {
 		Building::init(egbase);
