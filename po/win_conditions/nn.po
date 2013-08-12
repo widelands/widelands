@@ -7,21 +7,21 @@ msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2013-06-16 09:11+0000\n"
+"POT-Creation-Date: 2013-08-06 03:27+0000\n"
 "PO-Revision-Date: 2012-12-20 19:44+0000\n"
 "Last-Translator: Alexander Mackinnon Jansen <alexander.jansen@hesbynett.no>\n"
 "Language-Team: Norwegian Nynorsk <nn@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-06-17 05:16+0000\n"
-"X-Generator: Launchpad (build 16667)\n"
+"X-Launchpad-Export-Date: 2013-08-07 04:42+0000\n"
+"X-Generator: Launchpad (build 16721)\n"
 
 #: ../../scripting/win_condition_texts.lua:31
 msgid "%i trees."
 msgstr "%i tre"
 
-#: ../../scripting/win_condition_texts.lua:54
+#: ../../scripting/win_condition_texts.lua:55
 msgid "%s %s %i%% of the land (%i of %i)."
 msgstr "%s %s %i%% av landet (%i av %i)."
 
@@ -91,6 +91,10 @@ msgstr "Endelaust spel (utan tåka)"
 msgid "Keep it for %i more minutes to win the game."
 msgstr "Hald på slik i %i minutt til for å vinna spelet."
 
+#: ../../scripting/win_condition_texts.lua:54
+msgid "Otherwise the game will end in %i minutes."
+msgstr ""
+
 #: ../../scripting/win_condition_texts.lua:23
 #: ../../scripting/win_condition_texts.lua:29
 msgid "Player overview:"
@@ -121,6 +125,7 @@ msgid "Territorial Time"
 msgstr "Territorisk tid"
 
 #: ../../scripting/win_condition_texts.lua:27
+#: ../../scripting/win_condition_texts.lua:53
 msgid "The game will end in %i minutes."
 msgstr "Spelet sluttar om %i minutt"
 
@@ -172,12 +177,6 @@ msgstr ""
 "Du får poeng for verdifulle varar i varehusa dine.  Spelaren med flest varar "
 "etter fire timar vinn spelet."
 
-#: ../../scripting/win_condition_texts.lua:8
-msgid ""
-"You have nothing to command left. If you want, you may continue as spectator."
-msgstr ""
-"Du har ikkje noka att å styra.  Viss du vil, kan du halda fram som tilskodar."
-
 #: ../../scripting/win_condition_texts.lua:3
 msgid "You have won this game!"
 msgstr "Du har vunne dette spelet!"
@@ -185,6 +184,12 @@ msgstr "Du har vunne dette spelet!"
 #: ../../scripting/win_condition_texts.lua:17
 msgid "You lost"
 msgstr "Du tapa"
+
+#: ../../scripting/win_condition_texts.lua:8
+msgid ""
+"You lost your last warehouse and are therefore defeated. You may continue as "
+"spectator if you want."
+msgstr ""
 
 #: ../../scripting/win_condition_texts.lua:48
 msgid "You own more than half of the maps area."
@@ -201,10 +206,6 @@ msgstr "Du vann"
 #: ../../scripting/win_condition_texts.lua:18
 msgid "You've lost this game!"
 msgstr "Du har tapa dette spelet!"
-
-#: ../../scripting/win_condition_texts.lua:53
-msgid "game will end in %i minutes."
-msgstr "spelet sluttar om %i minutt."
 
 #: ../../scripting/win_condition_texts.lua:33
 msgid "with %i trees."

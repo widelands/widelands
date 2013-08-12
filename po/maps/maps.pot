@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2013-08-06 03:27+0000\n"
+"POT-Creation-Date: 2013-08-12 12:44+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -89,7 +89,7 @@ msgid ""
 "Atlanteans - The Run for the Fire"
 msgstr ""
 
-#: ../../maps/Atoll.wmf/elemental:7
+#: ../../maps/Atoll.wmf/elemental:9
 msgid ""
 "Atoll"
 msgstr ""
@@ -117,6 +117,11 @@ msgstr ""
 #: ../../maps/Crater.wmf/elemental:7
 msgid ""
 "Crater"
+msgstr ""
+
+#: ../../maps/Crossing the horizon.wmf/elemental:9
+msgid ""
+"Crossing the horizon"
 msgstr ""
 
 #: ../../maps/Desert Tournament.wmf/elemental:7
@@ -204,6 +209,11 @@ msgid ""
 "Impact"
 msgstr ""
 
+#: ../../maps/Volcanic Winter.wmf/elemental:11
+msgid ""
+"In the middle of the summer a bunch of volcanic eruptions drew the winter in. Suddenly the sun seems to be gone and the only light and heat sources left are those, who enforced this dramatic change. Continents, oceans and seas are freezing, only the volcanic islands seem to be left as habitable land."
+msgstr ""
+
 #: ../../maps/The pass through the mountains.wmf/elemental:11
 msgid ""
 "In this mountainous area two princes have settled. Now they are expanding their territories unaware of the fact that they are not alone!"
@@ -262,6 +272,11 @@ msgstr ""
 #: ../../maps/Crater.wmf/elemental:9
 msgid ""
 "Long after a meteor crashed into a couple of mountains, life blossoms in the crater. Two tribes are now fighting for the rich resources."
+msgstr ""
+
+#: ../../maps/Crossing the horizon.wmf/elemental:11
+msgid ""
+"Man your ship and sail to the horizon."
 msgstr ""
 
 #: ../../maps/Twinkling Waves.wmf/elemental:11
@@ -332,7 +347,7 @@ msgid ""
 "Suggested Teams: (blue, red) vs (yellow, green) or (blue, yellow) vs (red, green)"
 msgstr ""
 
-#: ../../maps/Atoll.wmf/elemental:10
+#: ../../maps/Atoll.wmf/elemental:12
 msgid ""
 "Suggested Teams: (blue, yellow) vs (red, green)"
 msgstr ""
@@ -452,6 +467,11 @@ msgid ""
 "Two empires race for the treasures of a legendary peninsula..."
 msgstr ""
 
+#: ../../maps/Volcanic Winter.wmf/elemental:9
+msgid ""
+"Volcanic Winter"
+msgstr ""
+
 #: ../../maps/War of the Valleys.wmf/elemental:7
 msgid ""
 "War of the Valleys"
@@ -482,7 +502,7 @@ msgid ""
 "Whimsical Gods didn't answer our prayers. Instead the thousand fold hotter Sun heated up the Earth and melted glaciers and people plunged into the deep. But now - high in the majestic mountains, on the last scrap of land - two surviving tribes are sheltering. Even though the Gods showed mercy and the climate thus turned cooler again the water is still rising and rising. Onto the last secure place - the highest mountain range where the amount of gold and the space to live merely suffice for one tribe - only two opposite paths lead. But remember, be careful... this last living space is also a hard and small place to live. Don't forget to take care about your timber supplies, you'll need them."
 msgstr ""
 
-#: ../../maps/Atoll.wmf/elemental:9
+#: ../../maps/Atoll.wmf/elemental:11
 msgid ""
 "Who will be the real King of the big atoll?"
 msgstr ""

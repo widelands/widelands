@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2013-06-16 09:11+0000\n"
-"PO-Revision-Date: 2011-08-21 14:19+0000\n"
-"Last-Translator: Nasenbaer <Unknown>\n"
+"POT-Creation-Date: 2013-08-06 03:27+0000\n"
+"PO-Revision-Date: 2013-08-03 10:39+0000\n"
+"Last-Translator: Markus Hallfors <destroyerko@gmail.com>\n"
 "Language-Team: Finnish <fi@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-06-17 05:09+0000\n"
-"X-Generator: Launchpad (build 16667)\n"
+"X-Launchpad-Export-Date: 2013-08-07 04:34+0000\n"
+"X-Generator: Launchpad (build 16721)\n"
 
 #: ../../campaigns/atl01.wmf/elemental:9
 msgid "01 - From Nemesis to Genesis"
@@ -23,7 +23,7 @@ msgstr ""
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:472
 msgid "A dangerous finding"
-msgstr ""
+msgstr "Vaarallinen löytö."
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:564
 msgid ""
@@ -42,7 +42,7 @@ msgstr ""
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:538
 msgid "A young man approaches"
-msgstr ""
+msgstr "Nuori mies lähestyy"
 
 #: ../../campaigns/atl01.wmf/elemental:11
 msgid ""
@@ -114,7 +114,7 @@ msgstr ""
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:140
 msgid "Build 3 ships to escape from the island"
-msgstr ""
+msgstr "Rakenna 3 laivaa paetaksesi saarelta."
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:45
 msgid ""
@@ -194,7 +194,7 @@ msgstr ""
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:141
 msgid "Escape from the island"
-msgstr ""
+msgstr "Pakene saarelta."
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:63
 msgid "Establish a food production"
@@ -324,11 +324,11 @@ msgstr ""
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:548
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:586
 msgid "Jundlina"
-msgstr ""
+msgstr "Jundlina"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:324
 msgid "Jundlina agrees"
-msgstr ""
+msgstr "Jundlina on samaa mieltä"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:453
 msgid "Jundlina considers the economy"
@@ -336,7 +336,7 @@ msgstr ""
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:409
 msgid "Jundlina is angry"
-msgstr ""
+msgstr "Jundlina on vihainen"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:473
 msgid "Jundlina is in thought"
@@ -344,7 +344,7 @@ msgstr ""
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:585
 msgid "Jundlina is relieved"
-msgstr ""
+msgstr "Jundlina on helpottunut"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:334
 msgid "Jundlina is reviewing the reports"
@@ -353,15 +353,15 @@ msgstr ""
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:280
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:333
 msgid "Jundlina is satisfied"
-msgstr ""
+msgstr "Jundlina on tyytyväinen"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:496
 msgid "Jundlina is worried"
-msgstr ""
+msgstr "Jundlina on huolestunut"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:399
 msgid "Jundlina nods"
-msgstr ""
+msgstr "Jundlina nyökkää"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:440
 msgid "Jundlina received a letter"
@@ -376,7 +376,7 @@ msgstr ""
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:547
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:571
 msgid "Jundlina replies"
-msgstr ""
+msgstr "Jundlina vastaa"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:408
 msgid "Jundlina summons Sidolus"
@@ -407,11 +407,11 @@ msgstr ""
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:246
 msgid "Loftomor and Sidolus arrive"
-msgstr ""
+msgstr "Loftomor ja Sidolus saapuu"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:255
 msgid "Loftomor speaks"
-msgstr ""
+msgstr "Loftomor puhuu"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:531
 msgid ""
@@ -621,7 +621,7 @@ msgstr ""
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:267
 msgid "Sidolus speaks"
-msgstr ""
+msgstr "Sidolus puhuu"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:184
 msgid ""
@@ -660,7 +660,7 @@ msgstr ""
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:529
 msgid "The water is rising!"
-msgstr ""
+msgstr "Vesi nousee!"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:89
 msgid ""
