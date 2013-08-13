@@ -522,9 +522,11 @@ Building& Player::force_csite
 	 const Building_Descr::FormerBuildings & former_buildings)
 {
 	Map & map = egbase().map();
-	Building_Index idx = former_buildings.back();
-	const Building_Descr* descr = tribe().get_building_descr(idx);
-	terraform_for_building(egbase(), player_number(), location, descr);
+	if (!former_buildings.empty()) {
+		Building_Index idx = former_buildings.back();
+		const Building_Descr * descr = tribe().get_building_descr(idx);
+		terraform_for_building(egbase(), player_number(), location, descr);
+	}
 	FCoords flag_loc;
 	map.get_brn(map.get_fcoords(location), &flag_loc);
 	force_flag(flag_loc);
