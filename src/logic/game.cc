@@ -896,33 +896,33 @@ void Game::send_player_ship_scout_direction(Ship & ship, uint8_t direction)
 {
 	send_player_command
 		(*new Cmd_ShipScoutDirection
-			(get_gametime(), ship.get_economy()->owner().player_number(), ship.serial(), direction));
+			(get_gametime(), ship.get_owner()->player_number(), ship.serial(), direction));
 }
 
 void Game::send_player_ship_construct_port(Ship & ship, Coords coords)
 {
 	send_player_command
 		(*new Cmd_ShipConstructPort
-			(get_gametime(), ship.get_economy()->owner().player_number(), ship.serial(), coords));
+			(get_gametime(), ship.get_owner()->player_number(), ship.serial(), coords));
 }
 
 void Game::send_player_ship_explore_island(Ship & ship, bool cw)
 {
 	send_player_command
 		(*new Cmd_ShipExploreIsland
-			(get_gametime(), ship.get_economy()->owner().player_number(), ship.serial(), cw));
+			(get_gametime(), ship.get_owner()->player_number(), ship.serial(), cw));
 }
 
 void Game::send_player_sink_ship(Ship & ship) {
 	send_player_command
 		(*new Cmd_ShipSink
-			(get_gametime(), ship.get_economy()->owner().player_number(), ship.serial()));
+			(get_gametime(), ship.get_owner()->player_number(), ship.serial()));
 }
 
 void Game::send_player_cancel_expedition_ship(Ship & ship) {
 	send_player_command
 		(*new Cmd_ShipCancelExpedition
-			(get_gametime(), ship.get_economy()->owner().player_number(), ship.serial()));
+			(get_gametime(), ship.get_owner()->player_number(), ship.serial()));
 }
 
 

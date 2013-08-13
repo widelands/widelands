@@ -413,7 +413,7 @@ void ShipSinkConfirm::think()
 	const Widelands::Editor_Game_Base & egbase = iaplayer().egbase();
 	upcast(Widelands::Ship, ship, m_object.get(egbase));
 
-	if (!ship || !iaplayer().can_act(ship->get_economy()->owner().player_number()))
+	if (!ship || !iaplayer().can_act(ship->get_owner()->player_number()))
 		die();
 }
 
@@ -426,7 +426,7 @@ void ShipSinkConfirm::ok()
 	Widelands::Game & game = iaplayer().game();
 	upcast(Widelands::Ship, ship, m_object.get(game));
 
-	if (ship && iaplayer().can_act(ship->get_economy()->owner().player_number())) {
+	if (ship && iaplayer().can_act(ship->get_owner()->player_number())) {
 		game.send_player_sink_ship(*ship);
 		iaplayer().need_complete_redraw();
 	}
@@ -457,7 +457,7 @@ void ShipCancelExpeditionConfirm::think()
 	if
 		(!ship
 		 &&
-		 !iaplayer().can_act(ship->get_economy()->owner().player_number())
+		 !iaplayer().can_act(ship->get_owner()->player_number())
 		 &&
 		 ship->get_ship_state() == Widelands::Ship::TRANSPORT
 		 &&
@@ -479,7 +479,7 @@ void ShipCancelExpeditionConfirm::ok()
 	if
 		(ship
 		 &&
-		 iaplayer().can_act(ship->get_economy()->owner().player_number())
+		 iaplayer().can_act(ship->get_owner()->player_number())
 		 &&
 		 ship->get_ship_state() != Widelands::Ship::TRANSPORT
 		 &&

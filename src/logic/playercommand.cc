@@ -825,7 +825,7 @@ Cmd_ShipScoutDirection::Cmd_ShipScoutDirection (StreamRead& des) :
 void Cmd_ShipScoutDirection::execute (Game & game)
 {
 	upcast(Ship, ship, game.objects().get_object(serial));
-	if (ship && ship->get_economy()->owner().player_number() == sender()) {
+	if (ship && ship->get_owner()->player_number() == sender()) {
 		ship->exp_scout_direction(game, dir);
 	}
 }
@@ -888,7 +888,7 @@ Cmd_ShipConstructPort::Cmd_ShipConstructPort (StreamRead& des) :
 void Cmd_ShipConstructPort::execute (Game & game)
 {
 	upcast(Ship, ship, game.objects().get_object(serial));
-	if (ship && ship->get_economy()->owner().player_number() == sender()) {
+	if (ship && ship->get_owner()->player_number() == sender()) {
 		ship->exp_construct_port(game, coords);
 	}
 }
@@ -951,7 +951,7 @@ Cmd_ShipExploreIsland::Cmd_ShipExploreIsland (StreamRead& des) :
 void Cmd_ShipExploreIsland::execute (Game & game)
 {
 	upcast(Ship, ship, game.objects().get_object(serial));
-	if (ship && ship->get_economy()->owner().player_number() == sender()) {
+	if (ship && ship->get_owner()->player_number() == sender()) {
 		ship->exp_explore_island(game, clockwise);
 	}
 }
@@ -1012,7 +1012,7 @@ Cmd_ShipSink::Cmd_ShipSink (StreamRead& des) :
 void Cmd_ShipSink::execute (Game & game)
 {
 	upcast(Ship, ship, game.objects().get_object(serial));
-	if (ship && ship->get_economy()->owner().player_number() == sender()) {
+	if (ship && ship->get_owner()->player_number() == sender()) {
 		ship->sink_ship(game);
 	}
 }
@@ -1068,7 +1068,7 @@ Cmd_ShipCancelExpedition::Cmd_ShipCancelExpedition (StreamRead& des) :
 void Cmd_ShipCancelExpedition::execute (Game & game)
 {
 	upcast(Ship, ship, game.objects().get_object(serial));
-	if (ship && ship->get_economy()->owner().player_number() == sender()) {
+	if (ship && ship->get_owner()->player_number() == sender()) {
 		ship->exp_cancel(game);
 	}
 }
