@@ -6,15 +6,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4866\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2013-08-06 03:27+0000\n"
+"POT-Creation-Date: 2013-08-12 12:44+0000\n"
 "PO-Revision-Date: 2013-07-21 11:59+0000\n"
 "Last-Translator: Tubuntu <Unknown>\n"
 "Language-Team: French <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-08-07 04:34+0000\n"
-"X-Generator: Launchpad (build 16721)\n"
+"X-Launchpad-Export-Date: 2013-08-13 04:33+0000\n"
+"X-Generator: Launchpad (build 16723)\n"
 
 #: ../../campaigns/cconfig:64
 msgid "01 - Eyes in the Dark"
@@ -127,7 +127,7 @@ msgstr ""
 msgid "Atlanteans - The Run for the Fire"
 msgstr "Atlantes - La Course pour le Feu"
 
-#: ../../maps/Atoll.wmf/elemental:7
+#: ../../maps/Atoll.wmf/elemental:9
 msgid "Atoll"
 msgstr "Atoll"
 
@@ -150,6 +150,10 @@ msgstr "L'île de la comète"
 #: ../../maps/Crater.wmf/elemental:7
 msgid "Crater"
 msgstr "Cratère"
+
+#: ../../maps/Crossing the horizon.wmf/elemental:9
+msgid "Crossing the horizon"
+msgstr ""
 
 #: ../../maps/Desert Tournament.wmf/elemental:7
 msgid "Desert Tournament"
@@ -247,6 +251,15 @@ msgstr "Péninsule Dorée"
 msgid "Impact"
 msgstr "Impact"
 
+#: ../../maps/Volcanic Winter.wmf/elemental:11
+msgid ""
+"In the middle of the summer a bunch of volcanic eruptions drew the winter "
+"in. Suddenly the sun seems to be gone and the only light and heat sources "
+"left are those, who enforced this dramatic change. Continents, oceans and "
+"seas are freezing, only the volcanic islands seem to be left as habitable "
+"land."
+msgstr ""
+
 #: ../../maps/The pass through the mountains.wmf/elemental:11
 msgid ""
 "In this mountainous area two princes have settled. Now they are expanding "
@@ -342,6 +355,10 @@ msgstr ""
 "Longtemps après la chute d'un météore sur ces montagnes, la vie bourgeonna "
 "dans le cratère. Deux tribus s'affrontent maintenant pour ses riches "
 "ressources."
+
+#: ../../maps/Crossing the horizon.wmf/elemental:11
+msgid "Man your ship and sail to the horizon."
+msgstr ""
 
 #: ../../maps/Twinkling Waves.wmf/elemental:11
 msgid ""
@@ -471,7 +488,7 @@ msgstr ""
 "Équipes suggérées: (bleu, rouge) contre (jaune, vert) ou (bleu, jaune) "
 "contre (rouge, vert)"
 
-#: ../../maps/Atoll.wmf/elemental:10
+#: ../../maps/Atoll.wmf/elemental:12
 msgid "Suggested Teams: (blue, yellow) vs (red, green)"
 msgstr "Équipes suggérées: (bleu, jaune) contre (rouge, vert)"
 
@@ -625,6 +642,10 @@ msgid "Two empires race for the treasures of a legendary peninsula..."
 msgstr ""
 "Deux empires s'affrontent pour les trésors d'une péninsule légendaire..."
 
+#: ../../maps/Volcanic Winter.wmf/elemental:9
+msgid "Volcanic Winter"
+msgstr ""
+
 #: ../../maps/War of the Valleys.wmf/elemental:7
 msgid "War of the Valleys"
 msgstr "La Guerre des Vallées"
@@ -717,7 +738,7 @@ msgstr ""
 "où vivre est aussi un endroit petit et dur à vivre. N'oubliez pas de prendre "
 "soin de votre approvisionnement en bois, vous en aurez besoin."
 
-#: ../../maps/Atoll.wmf/elemental:9
+#: ../../maps/Atoll.wmf/elemental:11
 msgid "Who will be the real King of the big atoll?"
 msgstr "Qui sera le vrai Roi du grand atoll ?"
 

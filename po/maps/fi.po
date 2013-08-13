@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4208\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2013-08-06 03:27+0000\n"
+"POT-Creation-Date: 2013-08-12 12:44+0000\n"
 "PO-Revision-Date: 2012-11-02 16:17+0000\n"
 "Last-Translator: Juhani Numminen <juhaninumminen0@gmail.com>\n"
 "Language-Team: Finnish <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-08-07 04:34+0000\n"
-"X-Generator: Launchpad (build 16721)\n"
+"X-Launchpad-Export-Date: 2013-08-13 04:33+0000\n"
+"X-Generator: Launchpad (build 16723)\n"
 "X-Poedit-Country: FINLAND\n"
 "X-Poedit-Language: Finnish\n"
 "X-Poedit-SourceCharset: utf-8\n"
@@ -119,7 +119,7 @@ msgstr ""
 msgid "Atlanteans - The Run for the Fire"
 msgstr "Atlanteanit - Tulijuoksu"
 
-#: ../../maps/Atoll.wmf/elemental:7
+#: ../../maps/Atoll.wmf/elemental:9
 msgid "Atoll"
 msgstr "Atolli"
 
@@ -142,6 +142,10 @@ msgstr "Komeettasaari"
 #: ../../maps/Crater.wmf/elemental:7
 msgid "Crater"
 msgstr "Kraateri"
+
+#: ../../maps/Crossing the horizon.wmf/elemental:9
+msgid "Crossing the horizon"
+msgstr ""
 
 #: ../../maps/Desert Tournament.wmf/elemental:7
 msgid "Desert Tournament"
@@ -227,6 +231,15 @@ msgstr "Kultainen niemimaa"
 msgid "Impact"
 msgstr "Törmäys"
 
+#: ../../maps/Volcanic Winter.wmf/elemental:11
+msgid ""
+"In the middle of the summer a bunch of volcanic eruptions drew the winter "
+"in. Suddenly the sun seems to be gone and the only light and heat sources "
+"left are those, who enforced this dramatic change. Continents, oceans and "
+"seas are freezing, only the volcanic islands seem to be left as habitable "
+"land."
+msgstr ""
+
 #: ../../maps/The pass through the mountains.wmf/elemental:11
 msgid ""
 "In this mountainous area two princes have settled. Now they are expanding "
@@ -307,6 +320,10 @@ msgstr "Viimeinen turvapaikka"
 msgid ""
 "Long after a meteor crashed into a couple of mountains, life blossoms in the "
 "crater. Two tribes are now fighting for the rich resources."
+msgstr ""
+
+#: ../../maps/Crossing the horizon.wmf/elemental:11
+msgid "Man your ship and sail to the horizon."
 msgstr ""
 
 #: ../../maps/Twinkling Waves.wmf/elemental:11
@@ -418,7 +435,7 @@ msgstr ""
 "Ehdotetut joukkueet: (sininen, punainen) vs (keltainen, vihreä) tai "
 "(sininen, keltainen) vs (punainen, vihreä)"
 
-#: ../../maps/Atoll.wmf/elemental:10
+#: ../../maps/Atoll.wmf/elemental:12
 msgid "Suggested Teams: (blue, yellow) vs (red, green)"
 msgstr "Ehdotetut joukkueet: (sininen, keltainen) vs (punainen, vihreä)"
 
@@ -553,6 +570,10 @@ msgstr "Kaksi rintamaa"
 msgid "Two empires race for the treasures of a legendary peninsula..."
 msgstr "Kaksi valtakuntaa kilpailee legendaarisen niemimaan aarteista..."
 
+#: ../../maps/Volcanic Winter.wmf/elemental:9
+msgid "Volcanic Winter"
+msgstr ""
+
 #: ../../maps/War of the Valleys.wmf/elemental:7
 msgid "War of the Valleys"
 msgstr "Laaksojen sota"
@@ -621,7 +642,7 @@ msgstr ""
 "varovainen - tämä viimeinen asuinala on myös kova ja pieni elinpaikka. Älä "
 "unohda pitää huolta puuvarannoistasi, sillä tulet tarvitsemaan niitä."
 
-#: ../../maps/Atoll.wmf/elemental:9
+#: ../../maps/Atoll.wmf/elemental:11
 msgid "Who will be the real King of the big atoll?"
 msgstr "Kuka on suuren atollin oikea kuningas?"
 

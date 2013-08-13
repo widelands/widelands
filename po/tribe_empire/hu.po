@@ -6,14 +6,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2013-08-06 03:27+0000\n"
-"PO-Revision-Date: 2013-08-11 08:12+0000\n"
+"POT-Creation-Date: 2013-08-12 12:44+0000\n"
+"PO-Revision-Date: 2013-08-12 17:58+0000\n"
 "Last-Translator: István Kiss <kiemc@citromail.hu>\n"
 "Language-Team: Language <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-08-12 04:32+0000\n"
+"X-Launchpad-Export-Date: 2013-08-13 04:37+0000\n"
 "X-Generator: Launchpad (build 16723)\n"
 
 #: ../../tribes/empire/meal/conf:1
@@ -93,7 +93,7 @@ msgstr ""
 
 #: ../../tribes/empire/conf:61
 msgid "Basket"
-msgstr "Kosár"
+msgstr "Puttony"
 
 #: ../../tribes/empire/conf:62
 msgid "Beer"
@@ -450,6 +450,9 @@ msgid ""
 "How can one create a ration or meal if there are no kitchen tools? They are "
 "produced in a toolsmithy and used in taverns and inns."
 msgstr ""
+"Hogy tudna valaki harapnivalót vagy ebédet készíteni, ha nincsenek konyhai "
+"eszközök? A szerszámkovácsműhelyben állítanak elő ilyeneket, és a "
+"kocsmákban, fogadókban használják őket."
 
 #: ../../tribes/empire/conf:120
 msgid "Hunter"
@@ -554,6 +557,10 @@ msgid ""
 "colosseum, trainingscamp). There are two sources of meat: pork out of "
 "piggeries and the meat of wild game hunted by the hunters."
 msgstr ""
+"A húsban nagyon sok energia van. A bányászoknak készítenek belőle ételt a "
+"kocsmákban és a fogadókban, valamint a kiképzőhelyeken (aréna, kolosszeum, "
+"kiképzőtábor) fogyasztják. Két forrása van: a disznók húsa a sertéstelepről, "
+"illetve a vadászok által elejtett vadak húsa."
 
 #: ../../tribes/empire/conf:178
 msgid "Mill"
@@ -653,7 +660,7 @@ msgstr "Sütőtálcát készít"
 
 #: ../../tribes/empire/toolsmithy/conf:46
 msgid "Produce basket"
-msgstr "Kosarat készít"
+msgstr "a puttonykészítés"
 
 #: ../../tribes/empire/armoursmithy/conf:33
 msgid "Produce chain armour"
@@ -918,6 +925,8 @@ msgid ""
 "Stones are a basic building material of the Empire. It is produced in "
 "quarries and marble mines."
 msgstr ""
+"A kő a Birodalom egyik alapvető építőanyaga. Kőfejtőkben és márványbányákban "
+"termelik ki."
 
 #: ../../tribes/empire/conf:160
 msgid "Stronghold"
@@ -934,7 +943,7 @@ msgstr "A vadász húst hoz az embereknek."
 #: ../../tribes/empire/scythe/conf:1
 msgid ""
 "The Scythe is the tool of the farmers. It is produced by the toolsmith."
-msgstr "A kasza a farmerek szerszáma. A szerszámkovács készít kaszát."
+msgstr "A kasza a földművesek eszköze. A szerszámkovács készíti."
 
 #: ../../tribes/empire/conf:4
 msgid "The Widelands Development Team"
@@ -951,6 +960,10 @@ msgid ""
 "is used in taverns and inns to prepare rations and meals. Bread is also "
 "consumed in the training sites (arena, colosseum, trainingscamp)."
 msgstr ""
+"A Birodalom pékjei igazán ízletes kenyeret sütnek lisztből és vízből. A "
+"kocsmákban és a fogadókban használják fel harapnivaló és ebéd készítéséhez. "
+"A kiképzőhelyeken (aréna, kolosszeum, kiképzőtábor) szintén fogyasztanak "
+"kenyeret."
 
 #: ../../tribes/empire/bakingtray/conf:1
 msgid ""
@@ -978,6 +991,9 @@ msgid ""
 "the armour- and weaponsmith. Make sure you always have some in reserve! It "
 "is produced by the toolsmith."
 msgstr ""
+"A kalapács igen fontos eszköz. Használja a geológus, az építész, a páncél- "
+"és a fegyverkovács. Mindig legyen belőle néhány tartalék! A szerszámkovács "
+"készíti."
 
 #: ../../tribes/empire/helm/conf:1
 msgid ""
@@ -999,6 +1015,8 @@ msgid ""
 "The shovel is needed for proper handling of plants. Therefore the forester "
 "uses it. It is produced by the toolsmith."
 msgstr ""
+"A lapátra a növények megfelelő gondozásához van szükség. Így az erdész "
+"használja. A szerszámkovács készíti."
 
 #: ../../tribes/empire/grape/conf:1
 msgid ""
@@ -1011,6 +1029,8 @@ msgid ""
 "This basket is needed by the vinefarmer for harvesting the grapes. It is "
 "produced by the toolsmith."
 msgstr ""
+"Ezt a puttonyt a szőlősgazda használja, ebbe szüreteli a szőlőt. A "
+"szerszámkovács készíti."
 
 #: ../../tribes/empire/beer/conf:1
 msgid ""
@@ -1250,7 +1270,7 @@ msgstr ""
 
 #: ../../tribes/empire/conf:135
 msgid "Vine Farmer"
-msgstr "Szőlőgazda"
+msgstr "Szőlősgazda"
 
 #: ../../tribes/empire/conf:50
 msgid "Vine medium"
