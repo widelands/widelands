@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2013-08-12 12:44+0000\n"
-"PO-Revision-Date: 2012-03-24 21:49+0000\n"
+"PO-Revision-Date: 2013-08-14 18:46+0000\n"
 "Last-Translator: Hans Joachim Desserud <Unknown>\n"
 "Language-Team: Norwegian Bokmal <nb@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-08-13 04:36+0000\n"
+"X-Launchpad-Export-Date: 2013-08-15 04:33+0000\n"
 "X-Generator: Launchpad (build 16723)\n"
 
 #: ../../tribes/barbarians/axefactory/help.lua:12
@@ -38,7 +38,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/lime_kiln/help.lua:12
 msgid "\"Forming new stone from old with fire and water.\""
-msgstr ""
+msgstr "«Former ny stein av gammel med ild og vann.»"
 
 #: ../../tribes/barbarians/gamekeepers_hut/help.lua:12
 msgid ""
@@ -117,7 +117,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/fishers_hut/help.lua:12
 msgid "\"What do you mean, my fish ain't fresh?!\""
-msgstr ""
+msgstr "«Hva mener du med at fisken min ikke er fersk?!»"
 
 #: ../../tribes/barbarians/deep_goldmine/help.lua:30
 #: ../../tribes/barbarians/deep_oremine/help.lua:30
@@ -156,7 +156,7 @@ msgstr ""
 #: ../../tribes/barbarians/granitemine/help.lua:25
 #: ../../tribes/barbarians/oremine/help.lua:25
 msgid "%s from a Tavern"
-msgstr ""
+msgstr "%s fra en kro"
 
 #: ../../tribes/barbarians/coalmine/help.lua:27
 #: ../../tribes/barbarians/deep_coalmine/help.lua:26
@@ -166,7 +166,7 @@ msgstr ""
 #: ../../tribes/barbarians/granitemine/help.lua:26
 #: ../../tribes/barbarians/oremine/help.lua:26
 msgid "%s from an Inn"
-msgstr ""
+msgstr "%s fra et vertshus"
 
 #: ../../tribes/barbarians/axefactory/help.lua:26
 #: ../../tribes/barbarians/lime_kiln/help.lua:26
@@ -182,7 +182,7 @@ msgstr ""
 #: ../../tribes/barbarians/warmill/help.lua:24
 #: ../../tribes/barbarians/warmill/help.lua:25
 msgid "%s from the Smelting Works"
-msgstr ""
+msgstr "%s fra smelteverket"
 
 #: ../../tribes/barbarians/rangers_hut/help.lua:14
 msgid "%s in a conversation with a %s"
@@ -210,13 +210,13 @@ msgstr "%s eller %s"
 #: ../../tribes/barbarians/oremine/help.lua:46
 #: ../../tribes/barbarians/warmill/help.lua:59
 msgid "%s or better"
-msgstr ""
+msgstr "%s eller bedre"
 
 #: ../../tribes/barbarians/deeper_coalmine/help.lua:53
 #: ../../tribes/barbarians/deeper_goldmine/help.lua:49
 #: ../../tribes/barbarians/deeper_oremine/help.lua:49
 msgid "%s or better and"
-msgstr ""
+msgstr "%s eller bedre og"
 
 #: ../../tribes/barbarians/axefactory/help.lua:60
 #: ../../tribes/barbarians/coalmine/help.lua:53
@@ -325,6 +325,8 @@ msgid ""
 "All three weapons take the same time for making, but the required raw "
 "materials vary."
 msgstr ""
+"Alle tre våpnene tar like lang tid å smi, men de nødvendige råmaterialene "
+"varierer."
 
 #: ../../tribes/barbarians/warmill/help.lua:66
 msgid ""

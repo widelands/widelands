@@ -7,13 +7,13 @@ msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2013-08-12 12:44+0000\n"
-"PO-Revision-Date: 2013-08-13 15:23+0000\n"
+"PO-Revision-Date: 2013-08-14 19:38+0000\n"
 "Last-Translator: István Kiss <kiemc@citromail.hu>\n"
 "Language-Team: Language <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-08-14 04:34+0000\n"
+"X-Launchpad-Export-Date: 2013-08-15 04:33+0000\n"
 "X-Generator: Launchpad (build 16723)\n"
 
 #: ../../tribes/empire/meal/conf:1
@@ -26,7 +26,7 @@ msgstr ""
 
 #: ../../tribes/empire/ship/conf:1
 msgid "A sea-worthy ship"
-msgstr ""
+msgstr "Hajózásra alkalmas hajó"
 
 #: ../../tribes/empire/ration/conf:1
 msgid ""
@@ -124,11 +124,11 @@ msgstr "Sütőlapát"
 
 #: ../../tribes/empire/donkeybreeder/conf:1
 msgid "Breeds cute and helpful donkeys"
-msgstr ""
+msgstr "Bájos és szolgálatkész szamarakat tenyészt."
 
 #: ../../tribes/empire/pig-breeder/conf:1
 msgid "Breeds pigs."
-msgstr ""
+msgstr "Sertéseket tenyészt."
 
 #: ../../tribes/empire/conf:112
 msgid "Brewer"
@@ -156,7 +156,7 @@ msgstr "Fűrészmunkás"
 
 #: ../../tribes/empire/conf:103
 msgid "Carrier"
-msgstr "Szállító"
+msgstr "Hordár"
 
 #: ../../tribes/empire/carrier/conf:1
 msgid "Carries items along your roads."
@@ -170,7 +170,7 @@ msgstr "Kastély"
 #: ../../tribes/empire/conf:223
 #: ../../tribes/empire/scripting/sc01_castle_village.lua:10
 msgid "Castle village"
-msgstr ""
+msgstr "Kastély körüli falu"
 
 #: ../../tribes/empire/conf:64
 msgid "Chain-Armour"
@@ -182,7 +182,7 @@ msgstr "Faszénégetőház"
 
 #: ../../tribes/empire/conf:156
 msgid "Citadel"
-msgstr "Citadella"
+msgstr "Fellegvár"
 
 #: ../../tribes/empire/conf:65
 msgid "Cloth"
@@ -218,7 +218,7 @@ msgstr "Építési terület"
 
 #: ../../tribes/empire/stonemason/conf:1
 msgid "Cuts raw pieces of granite and marble out of laying stones."
-msgstr ""
+msgstr "Nyers gránit- és márványdarabokat vág ki a kövekből."
 
 #: ../../tribes/empire/conf:198
 msgid "Deep Coal Mine"
@@ -250,11 +250,11 @@ msgstr "Ásványok után kutat."
 
 #: ../../tribes/empire/conf:146
 msgid "Dismantle Site"
-msgstr ""
+msgstr "Épület lebontása"
 
 #: ../../tribes/empire/conf:157
 msgid "Donjon"
-msgstr "Helyőrség"
+msgstr "Torony"
 
 #: ../../tribes/empire/conf:104
 msgid "Donkey"
@@ -420,7 +420,7 @@ msgstr "Kalapács"
 
 #: ../../tribes/empire/vineyard/conf:25
 msgid "Harvest vine"
-msgstr "Szőlőszüretelés"
+msgstr "a szőlőszüretelés"
 
 #: ../../tribes/empire/farm/conf:25
 msgid "Harvest wheat"
@@ -557,7 +557,7 @@ msgstr ""
 
 #: ../../tribes/empire/conf:123
 msgid "Master Miner"
-msgstr "Mester bányász"
+msgstr "Mesterbányász"
 
 #: ../../tribes/empire/conf:84
 msgid "Meal"
@@ -600,6 +600,8 @@ msgstr "Márványt bányásznak"
 #: ../../tribes/empire/quarry/conf:23
 msgid "Mine marble (only for compatibility with old savegames (build13))"
 msgstr ""
+"a márványbányászat (csak kompatibilitási okokból, a régi mentések miatt "
+"(build13))"
 
 #: ../../tribes/empire/marblemine/conf:28
 #: ../../tribes/empire/quarry/conf:20
@@ -610,6 +612,7 @@ msgstr "Követ bányásznak"
 #: ../../tribes/empire/quarry/conf:21
 msgid "Mine stone (only for compatibility with old savegames (build13))"
 msgstr ""
+"a kőbányászat (csak kompatibilitási okokból, a régi mentések miatt (build13))"
 
 #: ../../tribes/empire/conf:125
 msgid "Miner"
@@ -645,7 +648,7 @@ msgstr "Búzát vet"
 
 #: ../../tribes/empire/farmer/conf:1
 msgid "Plants fields."
-msgstr ""
+msgstr "Mezőn dolgozik."
 
 #: ../../tribes/empire/forester/conf:1
 msgid "Plants trees."
@@ -657,7 +660,7 @@ msgstr "Lemezpáncél"
 
 #: ../../tribes/empire/conf:166
 msgid "Port"
-msgstr ""
+msgstr "Kapu"
 
 #: ../../tribes/empire/weaponsmithy/conf:35
 msgid "Produce advanced lance"
@@ -753,7 +756,7 @@ msgstr "a falándzsakészítés"
 
 #: ../../tribes/empire/armoursmith/conf:1
 msgid "Produces armour for the soldiers."
-msgstr ""
+msgstr "Páncélt készít a katonák számára."
 
 #: ../../tribes/empire/brewer/conf:1
 msgid "Produces beer or wine."
@@ -785,43 +788,43 @@ msgstr "Harapnivaló"
 
 #: ../../tribes/empire/conf:40
 msgid "Resource indicator coal little"
-msgstr ""
+msgstr "Kevés szén forrásjelzője"
 
 #: ../../tribes/empire/conf:41
 msgid "Resource indicator coal much"
-msgstr ""
+msgstr "Sok szén forrásjelzője"
 
 #: ../../tribes/empire/conf:42
 msgid "Resource indicator gold little"
-msgstr ""
+msgstr "Kevés arany forrásjelzője"
 
 #: ../../tribes/empire/conf:43
 msgid "Resource indicator gold much"
-msgstr ""
+msgstr "Sok arany forrásjelzője"
 
 #: ../../tribes/empire/conf:44
 msgid "Resource indicator granite little"
-msgstr ""
+msgstr "Kevés gránit forrásjelzője"
 
 #: ../../tribes/empire/conf:45
 msgid "Resource indicator granite much"
-msgstr ""
+msgstr "Sok gránit forrásjelzője"
 
 #: ../../tribes/empire/conf:46
 msgid "Resource indicator iron little"
-msgstr ""
+msgstr "Kevés vas forrásjelzője"
 
 #: ../../tribes/empire/conf:47
 msgid "Resource indicator iron much"
-msgstr ""
+msgstr "Sok vas forrásjelzője"
 
 #: ../../tribes/empire/conf:48
 msgid "Resource indicator no resource"
-msgstr ""
+msgstr "Semmi nyersanyag forrásjelzője"
 
 #: ../../tribes/empire/conf:49
 msgid "Resource indicator water"
-msgstr ""
+msgstr "Víz forrásjelzője"
 
 #: ../../tribes/empire/conf:89
 msgid "Saw"
@@ -843,6 +846,8 @@ msgstr "Felderítő háza"
 msgid ""
 "Scouts like Scotty the scout scout unscouted area in a scouty fashion."
 msgstr ""
+"A felderítők, mint Feri, a felderítő, felderítenek felderítetlen területet "
+"felderítőruhában."
 
 #: ../../tribes/empire/conf:90
 msgid "Scythe"
@@ -859,7 +864,7 @@ msgstr "Juhtelep"
 
 #: ../../tribes/empire/conf:127
 msgid "Shepherd"
-msgstr "Pásztor"
+msgstr "Juhász"
 
 #: ../../tribes/empire/conf:140
 msgid "Ship"
@@ -901,7 +906,7 @@ msgstr "Vasat készít"
 
 #: ../../tribes/empire/conf:129
 msgid "Smelter"
-msgstr "Olvasztómester"
+msgstr "Kohász"
 
 #: ../../tribes/empire/conf:186
 msgid "Smelting Works"
@@ -1172,7 +1177,7 @@ msgstr "Torony"
 
 #: ../../tribes/empire/conf:132
 msgid "Trainer"
-msgstr "Edző"
+msgstr "Kiképző"
 
 #: ../../tribes/empire/conf:219
 msgid "Trainingscamp"
@@ -1305,13 +1310,15 @@ msgstr "Katona életerejének fejlesztése 2"
 
 #: ../../tribes/empire/trainingscamp/conf:61
 msgid "Upgrade soldier hitpoints 3"
-msgstr ""
+msgstr "Katona támadásának fejlesztése 3"
 
 #: ../../tribes/empire/trainingscamp/conf:62
 msgid ""
 "Upgrade soldier hitpoints 3 (only for compatibility with old savegames "
 "(build13))"
 msgstr ""
+"Katona támadásának fejlesztése 3 (csak kompatibilitási okokból, a régi "
+"mentések miatt (build13))"
 
 #: ../../tribes/empire/conf:135
 msgid "Vine Farmer"
@@ -1323,7 +1330,7 @@ msgstr "Közepes szőlő"
 
 #: ../../tribes/empire/conf:53
 msgid "Vine ripe"
-msgstr ""
+msgstr "Érett szőlő"
 
 #: ../../tribes/empire/conf:51
 msgid "Vine small"
@@ -1477,12 +1484,12 @@ msgstr "Az építési területen dolgozik, új épületeket épít."
 
 #: ../../tribes/empire/shipwright/conf:1
 msgid "Works at the shipyard and constructs new ships."
-msgstr ""
+msgstr "A hajógyárban dolgozik, új hajókat épít."
 
 #: ../../tribes/empire/master-miner/conf:1
 #: ../../tribes/empire/miner/conf:1
 msgid "Works deep in the mines to obtain coal, iron or gold."
-msgstr ""
+msgstr "A bányák mélyén dolgozik, hogy szenet, vasat és aranyat szerezzen."
 
 #: ../../tribes/empire/carpenter/conf:1
 msgid "Works in the sawmill."
