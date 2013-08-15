@@ -452,7 +452,14 @@ void Ship::ship_update_idle(Game & game, Bob::State & state) {
 			if (m_expedition->island_exploration) { // Exploration of the island
 				if (exp_close_to_coast()) {
 					if (m_expedition->direction == 0) {
-						m_expedition->direction = m_expedition->clockwise ? WALK_E : WALK_W;
+						// Make sure we know the location of the coast and use it as initial direction we come from
+						m_expedition->direction = WALK_SE;
+						for (uint8_t secure = 0; exp_dir_swimable(m_expedition->direction); ++secure) {
+							assert(secure < 6);
+							m_expedition->direction = get_cw_neighbour(m_expedition->direction);
+						}
+						m_expedition->direction = get_backward_dir(m_expedition->direction);
+						// Save the position - this is where we start
 						m_expedition->exploration_start = get_position();
 					} else {
 						// Check whether the island was completely surrounded
@@ -464,26 +471,17 @@ void Ship::ship_update_idle(Game & game, Bob::State & state) {
 							return start_task_idle(game, descr().main_animation(), 1500);
 						}
 					}
+					// The ship is supposed to follow the coast as close as possible, therefore the check for
+					// a swimable field begins at the neighbour field of the direction we came from.
+					m_expedition->direction = get_backward_dir(m_expedition->direction);
 					if (m_expedition->clockwise) {
-						if (exp_dir_swimable(m_expedition->direction)) {
-							while (exp_dir_swimable(get_cw_neighbour(m_expedition->direction))) {
-								m_expedition->direction = get_cw_neighbour(m_expedition->direction);
-							}
-						} else {
-							do {
-								m_expedition->direction = get_ccw_neighbour(m_expedition->direction);
-							} while (!exp_dir_swimable(m_expedition->direction));
-						}
+						do {
+							m_expedition->direction = get_ccw_neighbour(m_expedition->direction);
+						} while (!exp_dir_swimable(m_expedition->direction));
 					} else {
-						if (exp_dir_swimable(m_expedition->direction)) {
-							while (exp_dir_swimable(get_ccw_neighbour(m_expedition->direction))) {
-								m_expedition->direction = get_ccw_neighbour(m_expedition->direction);
-							}
-						} else {
-							do {
-								m_expedition->direction = get_cw_neighbour(m_expedition->direction);
-							} while (!exp_dir_swimable(m_expedition->direction));
-						}
+						do {
+							m_expedition->direction = get_cw_neighbour(m_expedition->direction);
+						} while (!exp_dir_swimable(m_expedition->direction));
 					}
 					state.ivar1 = 1;
 					return start_task_move(game, m_expedition->direction, descr().get_sail_anims(), false);
