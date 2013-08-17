@@ -114,12 +114,11 @@ void find_former_buildings
 {
 	assert(former_buildings && former_buildings->empty());
 	former_buildings->push_back(bi);
-	bool done = false;
-	while (not done) {
+
+	while (true) {
 		Widelands::Building_Index oldest_idx = former_buildings->front();
 		const Widelands::Building_Descr * oldest = tribe_descr.get_building_descr(oldest_idx);
 		if (!oldest->is_enhanced()) {
-			done = true;
 			break;
 		}
 		for
