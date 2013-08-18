@@ -34,6 +34,7 @@ struct NetClientImpl;
  * This includes running the game setup screen and the actual game after
  * launch, as well as dealing with the actual network protocol.
  */
+// NOCOM(#cghislai): could you use composition instead of derivation for ChatProvider? Inheriting from four classes is definite code Smell.
 struct NetClient :
 	public  GameController,
 	public  GameSettingsProvider,

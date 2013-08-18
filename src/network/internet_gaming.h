@@ -55,6 +55,7 @@ struct INet_Game {
 /**
  * The InternetGaming struct.
  */
+// NOCOM(#cghislai): could you use composition instead of derivation for ChatProvider?
 struct InternetGaming : public ChatProvider {
 	/// The only instance of InternetGaming -> the constructor is private by purpose!
 	static InternetGaming & ref();

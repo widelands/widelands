@@ -28,6 +28,7 @@
 
 namespace DebugConsole {
 
+// NOCOM(#cghislai): could you use composition instead of derivation for ChatProvider?
 struct Console : public ChatProvider, public Handler {
 	typedef std::map<std::string, Handler::HandlerFn> CommandMap;
 

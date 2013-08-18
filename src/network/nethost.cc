@@ -315,6 +315,7 @@ private:
 	std::vector<std::string> m_win_conditions;
 };
 
+// NOCOM(#cghislai): could you use composition instead of derivation for ChatProvider? Though I can see this to be correct here.
 struct HostChatProvider : public ChatProvider {
 	HostChatProvider(NetHost * const _h) : h(_h), kickClient(0) {}
 
