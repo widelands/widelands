@@ -7,13 +7,13 @@ msgstr ""
 "Project-Id-Version: Widelands svn4556\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2013-08-15 16:02+0000\n"
-"PO-Revision-Date: 2012-11-02 16:14+0000\n"
-"Last-Translator: SirVer <Unknown>\n"
+"PO-Revision-Date: 2013-08-17 22:23+0000\n"
+"Last-Translator: fk <fredkuijper@yahoo.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-08-16 04:34+0000\n"
+"X-Launchpad-Export-Date: 2013-08-18 04:32+0000\n"
 "X-Generator: Launchpad (build 16723)\n"
 
 #: ../../campaigns/cconfig:64
@@ -45,6 +45,8 @@ msgid ""
 ">Where dat? A thousand miles from here.< [Porgy and Bess] You have to go "
 "long, long way to conquere all the islands. Good luck!"
 msgstr ""
+">Where dat? A thousand miles from here.< [Porgy and Bess] Je moet een lange, "
+"lange weg gaan om alle eilanden te veroveren. Veel geluk!"
 
 #: ../../maps/Comet Island.wmf/elemental:9
 msgid ""
@@ -110,6 +112,7 @@ msgstr ""
 #: ../../maps/Map Contest/Ice wars.wmf/elemental:11
 msgid "After autumn is winter. Some things are frozen, but not the war."
 msgstr ""
+"Op herfst volgt winter. Sommige dingen zijn bevroren, maar niet de oorlog."
 
 #: ../../maps/Map Contest/Kings and Queens.wmf/elemental:11
 msgid ""
@@ -117,6 +120,10 @@ msgid ""
 "in prosperity, will someday collapse into a devastating war. Has your latest "
 "betrayal been one too many and will the prophecy come true?"
 msgstr ""
+"Een oude legende verteld dat deze zeven koninkrijken, die voor eeuwen hebben "
+"gebloeid in overvloed, op een dag in een vernietigende oorlog zullen "
+"ineenstorten. Was jouw laatste verraad er één te veel en zal de profetie "
+"uitkomen?"
 
 #: ../../maps/The long way.wmf/elemental:9
 msgid ""
@@ -154,7 +161,7 @@ msgstr "Barbaren - Het tweede koninkrijk"
 
 #: ../../maps/Map Contest/Calvisson.wmf/elemental:9
 msgid "Calvisson"
-msgstr ""
+msgstr "Calvisson"
 
 #: ../../campaigns/cconfig:44
 msgid "Challenging. Introduces the Atlanteans"
@@ -170,6 +177,9 @@ msgid ""
 "similar, map should be fair. There is plenty of gold near the starting point "
 "-- Do you see it?"
 msgstr ""
+"Kolen zijn moeilijk te vinden - leer het efficiënt te maken. Startposities "
+"zijn gelijk, kaart zou eerlijk moeten zijn. Er is goud zat nabij de "
+"startpositie -- Kun je het zien?"
 
 #: ../../maps/Comet Island.wmf/elemental:7
 msgid "Comet Island"
@@ -181,7 +191,7 @@ msgstr "Krater"
 
 #: ../../maps/Crossing the horizon.wmf/elemental:9
 msgid "Crossing the horizon"
-msgstr ""
+msgstr "Voorbij de horizon"
 
 #: ../../maps/Desert Tournament.wmf/elemental:7
 msgid "Desert Tournament"
@@ -199,6 +209,11 @@ msgid ""
 "priority - expeditions are universally useful and are often the fastest way "
 "to gold deposits."
 msgstr ""
+"Elke speler heeft een ander obstakel voor uitbreiding, en er is altijd meer "
+"dan één manier om het te overwinnen. Hoewel de KI kan worden verslagen "
+"zonder een enkel schip te bouwen, wordt spelers aangeraden om van havens en "
+"scheepswerven een prioriteit te maken - expedities zijn universeel nuttig en "
+"zijn vaak de snelste weg naar goudvoorraden."
 
 #: ../../maps/Four Mountains.wmf/elemental:9
 msgid ""
@@ -207,6 +222,10 @@ msgid ""
 "along the river. Hint II: Snowmen mark additional water sources. Hint III: "
 "Each mountain contains only one resource."
 msgstr ""
+"Elke stam wordt omgeven door vier machtige bergen. Wie zal ze als eerste "
+"veroveren en de hulpbronnen opeisen voor zijn eigen stam? Hint I: Water kan "
+"worden gevonden langs de rivier. Hint II: Sneeuwmannen markeren extra "
+"waterbronnen. Hint III: Iedere berg bevat slechts één soort hulpbronnen."
 
 #: ../../campaigns/cconfig:30
 msgid "Easy. Introduces the Barbarians"
@@ -271,6 +290,10 @@ msgid ""
 "the mountain of gold that promises riches beyond belief. But can the two "
 "remaining ones share the resources wisely?"
 msgstr ""
+"Vier stammen worstelen met de dichtstbijzijnde buur om de eerste te zijn die "
+"de berg met goud bereikt die rijkdommen belooft die ieders "
+"bevattingsvermogen te boven gaan. Maar kunnen de twee overblijvenden de "
+"hulpbronnen wijselijk delen?"
 
 #: ../../maps/Glacier Lake.wmf/elemental:7
 msgid "Glacier Lake"
@@ -282,7 +305,7 @@ msgstr "Gouden schiereiland"
 
 #: ../../maps/Map Contest/Ice wars.wmf/elemental:9
 msgid "Ice wars"
-msgstr ""
+msgstr "IJsoorlogen"
 
 #: ../../maps/Impact.wmf/elemental:7
 msgid "Impact"
@@ -296,6 +319,11 @@ msgid ""
 "seas are freezing, only the volcanic islands seem to be left as habitable "
 "land."
 msgstr ""
+"In het midden van de zomer luidden een stel vulkaanuitbarstingen de winter "
+"in. Plotseling lijkt de zon te zijn verdwenen en de enige licht- en "
+"warmtebronnen die er nog zijn zijn die, die deze dramatische verandering "
+"hebben afgedwongen. Continenten, oceanen en zeeën zijn aan het bevriezen, "
+"alleen de vulkanische eilanden schijnen nog over te zijn als bewoonbaar land."
 
 #: ../../maps/Map Contest/Trident of Fire.wmf/elemental:11
 msgid ""
@@ -304,6 +332,11 @@ msgid ""
 "be discovered. But only by becoming a naval power your tribe will be able to "
 "explore enough resources to compete with its opponents."
 msgstr ""
+"In de omgeving van drie grote vulkanen nodigen zes lieflijke eilanden "
+"kolonisten uit een nieuw leven te beginnen. Woestijnen en een snel groeiend "
+"bos wachten erop te worden ontdekt. Maar slechts door een zeemacht te worden "
+"zal jouw stam ertoe in staat zijn voldoende delfstoffen te ontdekken om met "
+"haar tegenstanders te kunnen wedijveren."
 
 #: ../../maps/The pass through the mountains.wmf/elemental:11
 msgid ""
@@ -390,10 +423,14 @@ msgid ""
 "the ways to encompass these large territories are long and meandering, so it "
 "is easy to err in the land of the foreign clans."
 msgstr ""
+"Het is een genoegen om in de schoonheid van dit doorkliefde landschap neer "
+"te strijken. Maar de wegen waarlangs deze uitgestrekte territoria kunnen "
+"worden omringd zijn lang en slingerend, dus het is gemakkelijk om per "
+"ongeluk in het land van de andere stammen te belanden."
 
 #: ../../maps/Map Contest/Kings and Queens.wmf/elemental:9
 msgid "Kings and Queens"
-msgstr ""
+msgstr "Koningen en Koninginnen"
 
 #: ../../maps/Lake of tranquility.wmf/elemental:7
 msgid "Lake of Tranquility"
@@ -413,11 +450,11 @@ msgstr ""
 
 #: ../../maps/Map Contest/Long, long way.wmf/elemental:9
 msgid "Long, long way"
-msgstr ""
+msgstr "Lange, lange weg"
 
 #: ../../maps/Crossing the horizon.wmf/elemental:11
 msgid "Man your ship and sail to the horizon."
-msgstr ""
+msgstr "Beman je schip en zeil naar de horizon"
 
 #: ../../maps/Twinkling Waves.wmf/elemental:11
 msgid ""
@@ -454,6 +491,11 @@ msgid ""
 "stronghold. Water can be found everywhere, so there is no need to send out "
 "geologists."
 msgstr ""
+"Slechts een kleine heuvel in het midden van de kaart verbindt deze vier "
+"wedijverende stammen. Leid je leger rechtstreeks naar deze heuvel en bouw "
+"een gigantisch bolwerk als een teken van jouw superioriteit! Hint: In het "
+"midden is slechts ruimte voor één bolwerk. Water kan overal worden gevonden, "
+"dus er is geen reden om geologen er op uit te sturen."
 
 #: ../../maps/Rendez-Vous.wmf/elemental:7
 msgid "Rendez-Vous"
@@ -461,7 +503,7 @@ msgstr "Rendez-Vous"
 
 #: ../../maps/Map Contest/River Explorers.wmf/elemental:9
 msgid "River Explorers"
-msgstr ""
+msgstr "Rivierverkenners"
 
 #: ../../maps/Riverlands.wmf/elemental:7
 msgid "Riverlands"
@@ -550,13 +592,15 @@ msgstr "Teamsuggestie: (blauw, geel) tegen (rood, groen)"
 
 #: ../../maps/Rendez-Vous.wmf/elemental:10
 msgid "Suggested Teams: all ok."
-msgstr ""
+msgstr "Voorgestelde Teams: alles ok."
 
 #: ../../maps/Map Contest/Calvisson.wmf/elemental:12
 msgid ""
 "Suggested Teams: blue vs red, yellow vs green, (blue, yellow) vs (red, "
 "green), (blue, green) vs (red, yellow)"
 msgstr ""
+"Voorgestelde teams: blauw vs rood, geel vs groen, (blauw, geel) vs (rood, "
+"groen), (blauw, groen) vs (rood, geel)"
 
 #: ../../maps/Swamp Island.wmf/elemental:9
 msgid "Swamp Island"
@@ -576,7 +620,7 @@ msgstr "De Groene Hoogvlakte"
 
 #: ../../maps/Map Contest/The Nile.wmf/elemental:9
 msgid "The Nile"
-msgstr ""
+msgstr "De Nijl"
 
 #: ../../maps/The Oasis Triangle.wmf/elemental:7
 msgid "The Oasis Triangle"
@@ -599,6 +643,8 @@ msgid ""
 "The breath-taking beauty of these emerald lands has lured many tribes into "
 "an attempt of taking them for themselves."
 msgstr ""
+"De adembenemende schoonheid van deze smaragden landen heeft vele stammen "
+"verleidt tot een poging deze toe te eigenen."
 
 #: ../../maps/MP Scenarios/Together we're strong.wmf/elemental:11
 msgid ""
@@ -626,14 +672,16 @@ msgid ""
 "The river always provides food and comunication. This time eight empires "
 "will fight for the control over this land."
 msgstr ""
+"De rivier verschaft altijd voedsel en communicatie. Deze keer zullen acht "
+"imperia strijden voor de controle over dit land."
 
 #: ../../maps/Mystical Maze.wmf/elemental:11
 msgid ""
 "There are two big questions around: Who created this unbelievably big maze "
 "and what can be found inside?"
 msgstr ""
-"Er rijzen twee grote vragen op: wie heeft dit ongelooflijk grote doolhof "
-"gemaakt en wat kan er in gevonden worden?"
+"Er rijzen twee grote vragen op: Wie heeft dit ongelooflijk grote doolhof "
+"gemaakt en wat kan er binnen gevonden worden?"
 
 #: ../../maps/The Oasis Triangle.wmf/elemental:9
 msgid ""
@@ -694,11 +742,11 @@ msgstr "Samen staan we sterk"
 
 #: ../../maps/Map Contest/Trident of Fire.wmf/elemental:9
 msgid "Trident of Fire"
-msgstr ""
+msgstr "Vuurdrietand"
 
 #: ../../maps/Map Contest/Twin Lagoons.wmf/elemental:9
 msgid "Twin Lagoons"
-msgstr ""
+msgstr "Tweelinglagunes"
 
 #: ../../maps/Twinkling Waves.wmf/elemental:9
 msgid "Twinkling Waves"
@@ -711,11 +759,12 @@ msgstr "Twee Grenzen"
 #: ../../maps/Golden Peninsula.wmf/elemental:9
 msgid "Two empires race for the treasures of a legendary peninsula..."
 msgstr ""
-"Twee koninkrijken racen voor de schatten van een legendarisch schiereiland..."
+"Twee koninkrijken maken jacht op de schatten van een legendarisch "
+"schiereiland..."
 
 #: ../../maps/Volcanic Winter.wmf/elemental:9
 msgid "Volcanic Winter"
-msgstr ""
+msgstr "Vulkanische Winter"
 
 #: ../../maps/War of the Valleys.wmf/elemental:7
 msgid "War of the Valleys"
@@ -726,6 +775,8 @@ msgid ""
 "Well protected in their mighty fortresses, four power-hungry warlords are "
 "completing their schemes to dominate these lands..."
 msgstr ""
+"Goed beschermd in hun machtige kastelen, zijn vier op macht beluste "
+"krijgsheren hun plannen aan het voltooien om deze landen te domineren..."
 
 #: ../../campaigns/cconfig:31
 msgid ""
@@ -777,6 +828,13 @@ msgid ""
 "well-known reason. Defend your transport lines or use ships to bypass the "
 "opponent. Then remove all enemy activity."
 msgstr ""
+"Toen de wind aanzwol en de eerste duinen werden gevormd op deze verlaten "
+"tweelinglagunes had niemand kunnen verwachten dat twee stammen, die wanhopig "
+"op zoek zijn naar delfstoffen om hun eindeloos doorgaande oorlogen te kunnen "
+"ondersteunen, terecht zouden komen op deze verlaten plek op dezelfde tijd en "
+"voor dezelfde overbekende reden. Verdedig je transportlijnen of gebruik "
+"schepen om de tegenstander te omzeilen. Verwijder daarna alle vijandige "
+"aanwezigheid."
 
 #: ../../maps/Checkmate.wmf/elemental:9
 msgid ""
@@ -814,7 +872,7 @@ msgstr ""
 
 #: ../../maps/Atoll.wmf/elemental:11
 msgid "Who will be the real King of the big atoll?"
-msgstr ""
+msgstr "Wie zal de echte Koning zijn van het grote atol?"
 
 #: ../../maps/Wisent Valley.wmf/elemental:9
 msgid "Wisent Valley"
