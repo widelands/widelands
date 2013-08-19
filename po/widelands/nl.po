@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: Widelands svn4575\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2013-08-15 18:02+0200\n"
-"PO-Revision-Date: 2013-08-16 12:04+0000\n"
+"PO-Revision-Date: 2013-08-18 19:12+0000\n"
 "Last-Translator: fk <fredkuijper@yahoo.com>\n"
 "Language-Team: Dutch <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2013-08-17 04:32+0000\n"
+"X-Launchpad-Export-Date: 2013-08-19 04:32+0000\n"
 "X-Generator: Launchpad (build 16723)\n"
 "X-Poedit-Country: NETHERLANDS\n"
 "X-Poedit-Language: Dutch\n"
@@ -963,7 +963,7 @@ msgstr "voorwerp %u: %s"
 #: ../../src/map_io/widelands_map_ware_data_packet.cc:76
 #, c-format
 msgid "ware data: %s"
-msgstr "waar data: %s"
+msgstr "goederengegevens: %s"
 
 #: ../../src/map_io/widelands_map_bob_data_packet.cc:47
 #, c-format
@@ -1269,7 +1269,7 @@ msgstr ""
 #: ../../src/map_io/widelands_map_buildingdata_data_packet.cc:765
 #, c-format
 msgid "warehouse: %s"
-msgstr "warenhuis: %s"
+msgstr "magazijn: %s"
 
 #: ../../src/map_io/widelands_map_buildingdata_data_packet.cc:889
 #, c-format
@@ -1363,7 +1363,7 @@ msgstr "Het is niet mogelijk jezelf te verwijderen!"
 
 #: ../../src/network/nethost.cc:433
 msgid "You can not kick the dedicated server"
-msgstr "je kunt de speciale server niet kicken"
+msgstr "je kunt de speciale server niet verwijderen"
 
 #: ../../src/network/nethost.cc:438
 #, c-format
@@ -1971,11 +1971,11 @@ msgstr "Multiplayer Spel Instellen"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:156
 msgid "Clients"
-msgstr "Clients"
+msgstr "Cliënten"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:168 ../../src/ui_fsmenu/launchSPG.cc:103
 msgid "Type of game"
-msgstr "speltype"
+msgstr "Speltype"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:214 ../../src/ui_fsmenu/launchSPG.cc:284
 msgid "(no map)"
@@ -2156,7 +2156,7 @@ msgid ""
 "And spectator mode, meaning you can see everything, but can not control any "
 "player"
 msgstr ""
-"En toeschouwer modus, wat inhoud dat alles te zien is maar geen controle "
+"En toeschouwer modus, wat inhoudt dat alles te zien is maar geen controle "
 "over een speler"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:681
@@ -2318,7 +2318,7 @@ msgstr "Uit"
 
 #: ../../src/ui_fsmenu/options.cc:199
 msgid "Never"
-msgstr "nooit"
+msgstr "Nooit"
 
 #: ../../src/ui_fsmenu/options.cc:200
 msgid "1 day"
@@ -2523,7 +2523,7 @@ msgstr "Omschrijving:"
 #: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:224
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:297
 msgid "parent"
-msgstr ""
+msgstr "bovenliggende map"
 
 #: ../../src/ui_fsmenu/intro.cc:32
 msgid "Press ESC or click to continue ..."
@@ -2626,7 +2626,7 @@ msgstr "Teams van 4"
 
 #: ../../src/ui_fsmenu/mapselect.cc:181
 msgid "Free for all"
-msgstr "ieder voor zich"
+msgstr "Ieder voor zich"
 
 #: ../../src/ui_fsmenu/mapselect.cc:182
 msgid "Unbalanced"
@@ -2867,7 +2867,7 @@ msgstr "speler info: %s"
 
 #: ../../src/game_io/game_preload_data_packet.cc:72
 msgid "Endless Game"
-msgstr "Oneindig spel"
+msgstr "Eindeloos Spel"
 
 #: ../../src/game_io/game_preload_data_packet.cc:107
 #, c-format
@@ -3359,7 +3359,7 @@ msgstr "(leeg)"
 
 #: ../../src/wui/productionsitewindow.cc:195
 msgid "(coming)"
-msgstr "(komend)"
+msgstr "(onderweg)"
 
 #: ../../src/wui/dismantlesitewindow.cc:69
 #: ../../src/wui/constructionsitewindow.cc:75
@@ -3401,7 +3401,7 @@ msgstr "Militaire gebouwen verslagen"
 
 #: ../../src/wui/general_statistics_menu.cc:244
 msgid "Civilian buildings lost"
-msgstr "Burgergebouwen verloren"
+msgstr "Civiele gebouwen verloren"
 
 #: ../../src/wui/general_statistics_menu.cc:252
 msgid "Military"
@@ -3414,7 +3414,7 @@ msgstr "Debugveld"
 #: ../../src/wui/game_debug_ui.cc:375
 #, c-format
 msgid "Resource: %s\n"
-msgstr "Grondstof: %s\n"
+msgstr "Delfstof: %s\n"
 
 #: ../../src/wui/game_debug_ui.cc:381
 #, c-format
@@ -3464,7 +3464,7 @@ msgstr "Tijd"
 
 #: ../../src/wui/game_summary.cc:157
 msgid "Lost"
-msgstr ""
+msgstr "Verloren"
 
 #: ../../src/wui/game_summary.cc:160
 msgid "Won"
@@ -3541,7 +3541,7 @@ msgstr "Werkers (totaal)"
 
 #: ../../src/wui/stock_menu.cc:62
 msgid "Wares in warehouses"
-msgstr "Werkers in magazijnen"
+msgstr "Goederen in magazijnen"
 
 #: ../../src/wui/stock_menu.cc:69
 msgid "Workers in warehouses"
@@ -3569,7 +3569,7 @@ msgstr "Goederen in de haven"
 
 #: ../../src/wui/warehousewindow.cc:223
 msgid "Workers in dock"
-msgstr "Goederen ik dok"
+msgstr "Werkers in haven"
 
 #: ../../src/wui/warehousewindow.cc:229
 msgid "Expedition"
@@ -3590,7 +3590,7 @@ msgstr "Bezet door: "
 
 #: ../../src/wui/building_statistics_menu.cc:97
 msgid "In Build: "
-msgstr "Wordt gebouwd: "
+msgstr "In Aanbouw: "
 
 #: ../../src/wui/building_statistics_menu.cc:103
 msgid "Jump to unproductive: "
@@ -3631,7 +3631,7 @@ msgstr "Muziek tijdens spel"
 
 #: ../../src/wui/game_options_sound_menu.cc:40
 msgid "Sound FX"
-msgstr "Geluid FX"
+msgstr "Geluidseffecten"
 
 #: ../../src/wui/game_options_sound_menu.cc:44
 msgid "Ingame Music Volume"
@@ -4902,7 +4902,7 @@ msgstr "Toestaan"
 #: ../../src/editor/ui_menus/editor_tool_place_bob_options_menu.cc:45
 #: ../../src/editor/ui_menus/editor_tool_menu.cc:69
 msgid "Bobs"
-msgstr ""
+msgstr "Bobs"
 
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:54
 #: ../../src/editor/ui_menus/editor_main_menu.cc:71
@@ -4916,7 +4916,7 @@ msgstr "Maak map"
 
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:206
 msgid "unnamed"
-msgstr "niet benaamd"
+msgstr "naamloos"
 
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:255
 msgid "directory"
@@ -4998,7 +4998,7 @@ msgstr ""
 #: ../../src/editor/ui_menus/editor_tool_change_resources_options_menu.cc:45
 #: ../../src/editor/ui_menus/editor_tool_menu.cc:70
 msgid "Resources"
-msgstr ""
+msgstr "Grondstoffen"
 
 #: ../../src/editor/ui_menus/editor_tool_change_resources_options_menu.cc:99
 msgid "Current Selection"
@@ -5035,7 +5035,7 @@ msgstr "Verander hoogte"
 
 #: ../../src/editor/ui_menus/editor_tool_menu.cc:66
 msgid "Noise height"
-msgstr "Lawaaivolume"
+msgstr "Maak terrein hobbelig"
 
 #: ../../src/editor/ui_menus/editor_tool_menu.cc:68
 msgid "Immovables"
@@ -5047,7 +5047,7 @@ msgstr "Maak havenlocatie"
 
 #: ../../src/editor/ui_menus/editor_tool_place_immovable_options_menu.cc:45
 msgid "Immovable Bobs"
-msgstr ""
+msgstr "Immobiele Bobs"
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:49
 #: ../../src/editor/ui_menus/editor_main_menu.cc:61
@@ -5088,7 +5088,7 @@ msgstr "Eilandmodus:"
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:251
 msgid "Resources:"
-msgstr "Middelen:"
+msgstr "Grondstoffen:"
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:254
 msgid "Low"
@@ -5118,7 +5118,7 @@ msgstr "willekeurige kaart aan het genereren..."
 
 #: ../../src/editor/ui_menus/editor_main_menu.cc:86
 msgid "Exit Editor"
-msgstr "Sluit editor"
+msgstr "Verlaat editor"
 
 #: ../../src/editor/tools/editor_info_tool.cc:42
 msgid "Field Information"
