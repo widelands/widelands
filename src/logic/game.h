@@ -40,6 +40,7 @@ struct Flag;
 struct Path;
 struct PlayerImmovable;
 struct Ship;
+struct PlayerEndStatus;
 class TrainingSite;
 class MilitarySite;
 
@@ -170,6 +171,8 @@ struct Game : Editor_Game_Base {
 	void send_player_ship_scout_direction(Ship &, uint8_t);
 	void send_player_ship_construct_port(Ship &, Coords);
 	void send_player_ship_explore_island(Ship &, bool);
+	void send_player_sink_ship(Ship &);
+	void send_player_cancel_expedition_ship(Ship &);
 
 	Interactive_Player * get_ipl();
 
@@ -186,8 +189,6 @@ struct Game : Editor_Game_Base {
 	void sample_statistics();
 
 	const std::string & get_win_condition_displayname() {return m_win_condition_displayname;}
-	// Returns the number of players (human or ai) occupying a slot.
-	uint8_t get_number_of_players() {return m_number_of_players;}
 
 	bool is_replay() const {return m_replay;};
 
@@ -255,7 +256,6 @@ private:
 
 	/// For save games and statistics generation
 	std::string          m_win_condition_displayname;
-	uint8_t              m_number_of_players;
 	bool                 m_replay;
 };
 

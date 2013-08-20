@@ -6,15 +6,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4556\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2013-06-16 09:11+0000\n"
+"POT-Creation-Date: 2013-08-12 12:44+0000\n"
 "PO-Revision-Date: 2012-11-02 16:14+0000\n"
 "Last-Translator: SirVer <Unknown>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-06-17 05:08+0000\n"
-"X-Generator: Launchpad (build 16667)\n"
+"X-Launchpad-Export-Date: 2013-08-13 04:33+0000\n"
+"X-Generator: Launchpad (build 16723)\n"
 
 #: ../../campaigns/cconfig:64
 msgid "01 - Eyes in the Dark"
@@ -127,7 +127,7 @@ msgstr ""
 msgid "Atlanteans - The Run for the Fire"
 msgstr "Atlantiërs - De tocht naar het vuur"
 
-#: ../../maps/Atoll.wmf/elemental:7
+#: ../../maps/Atoll.wmf/elemental:9
 msgid "Atoll"
 msgstr "Atol"
 
@@ -151,6 +151,10 @@ msgstr "Komeet Eiland"
 msgid "Crater"
 msgstr "Krater"
 
+#: ../../maps/Crossing the horizon.wmf/elemental:9
+msgid "Crossing the horizon"
+msgstr ""
+
 #: ../../maps/Desert Tournament.wmf/elemental:7
 msgid "Desert Tournament"
 msgstr "Woestijntoernooi"
@@ -163,13 +167,9 @@ msgstr "Droge rivierbedding"
 msgid ""
 "Each tribe is surrounded by four mighty mountains. Who will first conquer "
 "them and claim the resources for his own tribe? Hint I: Water can be found "
-"along the river. Hint II: Snowmen mark additional water sources. Hint 3: "
+"along the river. Hint II: Snowmen mark additional water sources. Hint III: "
 "Each mountain contains only one resource."
 msgstr ""
-"Elke stam is omringd door vier machtige bergen. Welke stam zal de bergen "
-"veroveren en de grondstoffen claimen? Tip I: water is aanwezig nabij de "
-"rivier. Tip II: Sneeuwpoppen staan ook nabij water bronnen. Tip III: Elke "
-"berg heeft maar 1 delftstof."
 
 #: ../../campaigns/cconfig:30
 msgid "Easy. Introduces the Barbarians"
@@ -242,6 +242,15 @@ msgstr "Gouden schiereiland"
 #: ../../maps/Impact.wmf/elemental:7
 msgid "Impact"
 msgstr "Inslag"
+
+#: ../../maps/Volcanic Winter.wmf/elemental:11
+msgid ""
+"In the middle of the summer a bunch of volcanic eruptions drew the winter "
+"in. Suddenly the sun seems to be gone and the only light and heat sources "
+"left are those, who enforced this dramatic change. Continents, oceans and "
+"seas are freezing, only the volcanic islands seem to be left as habitable "
+"land."
+msgstr ""
 
 #: ../../maps/The pass through the mountains.wmf/elemental:11
 msgid ""
@@ -337,6 +346,10 @@ msgid ""
 msgstr ""
 "Lang nadat een meteoor in een paar bergen is geslagen, bloeit er leven in de "
 "krater. Twee stammen vechten nu voor de kostbare rijkdommen."
+
+#: ../../maps/Crossing the horizon.wmf/elemental:11
+msgid "Man your ship and sail to the horizon."
+msgstr ""
 
 #: ../../maps/Twinkling Waves.wmf/elemental:11
 msgid ""
@@ -459,7 +472,7 @@ msgstr ""
 "Teamsuggestie: (blauw, rood) tegen (geel, groen) of (blauw, geel) tegen "
 "(rood, groen)"
 
-#: ../../maps/Atoll.wmf/elemental:10
+#: ../../maps/Atoll.wmf/elemental:12
 msgid "Suggested Teams: (blue, yellow) vs (red, green)"
 msgstr "Teamsuggestie: (blauw, geel) tegen (rood, groen)"
 
@@ -598,6 +611,10 @@ msgid "Two empires race for the treasures of a legendary peninsula..."
 msgstr ""
 "Twee koninkrijken racen voor de schatten van een legendarisch schiereiland..."
 
+#: ../../maps/Volcanic Winter.wmf/elemental:9
+msgid "Volcanic Winter"
+msgstr ""
+
 #: ../../maps/War of the Valleys.wmf/elemental:7
 msgid "War of the Valleys"
 msgstr "Oorlog der Valleien"
@@ -683,7 +700,7 @@ msgstr ""
 "leefruimte is ook een zware en kleinge plek om te leven. Vergeet niet op je "
 "houtvoorraad te letten; je zult hem nodig hebben."
 
-#: ../../maps/Atoll.wmf/elemental:9
+#: ../../maps/Atoll.wmf/elemental:11
 msgid "Who will be the real King of the big atoll?"
 msgstr ""
 

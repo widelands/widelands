@@ -403,14 +403,13 @@ void FieldDebugWindow::think()
 
 	// Do not clear the list. Instead parse all bobs and sync lists
 	for (uint32_t idx = 0; idx < m_ui_bobs.size(); idx++) {
-		Widelands::Map_Object* mo = 
+		Widelands::Map_Object* mo =
 			ibase().egbase().objects().get_object(m_ui_bobs[idx]);
 		bool toremove = false;
 		std::vector<Widelands::Bob *>::iterator removeIt;
 		// Nested loop :(
 		container_iterate(std::vector<Widelands::Bob *>, bobs, j) {
-			if ((*j.current) && mo
-				&& (*j.current)->serial() == mo->serial()) {
+			if ((*j.current) && mo && (*j.current)->serial() == mo->serial()) {
 				// Remove from the bob list if we already
 				// have it in our list
 				toremove = true;

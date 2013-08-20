@@ -25,9 +25,9 @@
 
 #include "container_iterate.h"
 #include "graphic/animation_gfx.h"
+#include "graphic/font_handler1.h"
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
-#include "graphic/font_handler1.h"
 #include "helper.h"
 #include "logic/editor_game_base.h"
 #include "logic/field.h"

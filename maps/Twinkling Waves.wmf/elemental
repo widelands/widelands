@@ -1,4 +1,4 @@
-# Automatically created by Widelands svn3680
+# Automatically created by Widelands bzr6709[widelands] (Debug)
 
 [global]
 packet_version="1"
@@ -9,4 +9,5 @@ world="greenland"
 name=_"Twinkling Waves"
 author="Nasenbaer"
 descr=_"Many beautiful, green islands await the ones brave enough to pass the thousand waves, twinkling in the sun."
-tags="official,unbalanced"
+hint=
+tags="official,unbalanced,seafaring"

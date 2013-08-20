@@ -6,15 +6,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4530\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2013-06-16 09:11+0000\n"
+"POT-Creation-Date: 2013-08-12 12:44+0000\n"
 "PO-Revision-Date: 2012-11-02 16:14+0000\n"
 "Last-Translator: SirVer <Unknown>\n"
 "Language-Team: Gabriel Rota <gabriel.rota@gmail.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-06-17 05:09+0000\n"
-"X-Generator: Launchpad (build 16667)\n"
+"X-Launchpad-Export-Date: 2013-08-13 04:34+0000\n"
+"X-Generator: Launchpad (build 16723)\n"
 "X-Poedit-Country: ITALY\n"
 "X-Poedit-Language: Italian\n"
 "X-Poedit-SourceCharset: utf-8\n"
@@ -131,7 +131,7 @@ msgstr ""
 msgid "Atlanteans - The Run for the Fire"
 msgstr "Atlantidi - La corsa per il fuoco"
 
-#: ../../maps/Atoll.wmf/elemental:7
+#: ../../maps/Atoll.wmf/elemental:9
 msgid "Atoll"
 msgstr "Atollo"
 
@@ -155,6 +155,10 @@ msgstr "Isola Cometa"
 msgid "Crater"
 msgstr "Cratere"
 
+#: ../../maps/Crossing the horizon.wmf/elemental:9
+msgid "Crossing the horizon"
+msgstr ""
+
 #: ../../maps/Desert Tournament.wmf/elemental:7
 msgid "Desert Tournament"
 msgstr "Torneo del deserto"
@@ -167,14 +171,9 @@ msgstr "Fiume secco"
 msgid ""
 "Each tribe is surrounded by four mighty mountains. Who will first conquer "
 "them and claim the resources for his own tribe? Hint I: Water can be found "
-"along the river. Hint II: Snowmen mark additional water sources. Hint 3: "
+"along the river. Hint II: Snowmen mark additional water sources. Hint III: "
 "Each mountain contains only one resource."
 msgstr ""
-"Ogni tribù è circondata da quattro possenti montagne. Chi sarà il primo a "
-"conquistarle e a reclamare le risorse per la propria tribù? Suggerimento I: "
-"l'acqua può essere trovata lungo il fiume. Suggerimento II: i pupazzi di "
-"neve indicano ulteriori risorse d'acqua. Suggerimento III: Ogni montagna "
-"contiene una sola risorsa."
 
 #: ../../campaigns/cconfig:30
 msgid "Easy. Introduces the Barbarians"
@@ -250,6 +249,15 @@ msgstr "Penisola dorata"
 #: ../../maps/Impact.wmf/elemental:7
 msgid "Impact"
 msgstr "Impatto"
+
+#: ../../maps/Volcanic Winter.wmf/elemental:11
+msgid ""
+"In the middle of the summer a bunch of volcanic eruptions drew the winter "
+"in. Suddenly the sun seems to be gone and the only light and heat sources "
+"left are those, who enforced this dramatic change. Continents, oceans and "
+"seas are freezing, only the volcanic islands seem to be left as habitable "
+"land."
+msgstr ""
 
 #: ../../maps/The pass through the mountains.wmf/elemental:11
 msgid ""
@@ -344,6 +352,10 @@ msgid ""
 msgstr ""
 "Molto tempo dopo che un meteorite cadde tra alcune montagne, la vita "
 "prospera nel cratere. Due tribù ora si contendono le ricche risorse."
+
+#: ../../maps/Crossing the horizon.wmf/elemental:11
+msgid "Man your ship and sail to the horizon."
+msgstr ""
 
 #: ../../maps/Twinkling Waves.wmf/elemental:11
 msgid ""
@@ -471,7 +483,7 @@ msgstr ""
 "Squadre consigliate: (blu, rosso) contro (giallo, verde) o (blu, giallo) "
 "contro (rosso, verde)"
 
-#: ../../maps/Atoll.wmf/elemental:10
+#: ../../maps/Atoll.wmf/elemental:12
 msgid "Suggested Teams: (blue, yellow) vs (red, green)"
 msgstr "Squadre consigliate: (blu, giallo) contro (rosso, verde)"
 
@@ -622,6 +634,10 @@ msgstr "Due frontiere"
 msgid "Two empires race for the treasures of a legendary peninsula..."
 msgstr "Due imperi in gara per i tesori di una penisola leggendaria..."
 
+#: ../../maps/Volcanic Winter.wmf/elemental:9
+msgid "Volcanic Winter"
+msgstr ""
+
 #: ../../maps/War of the Valleys.wmf/elemental:7
 msgid "War of the Valleys"
 msgstr "Guerra delle valli"
@@ -714,7 +730,7 @@ msgstr ""
 "difficile e piccolo per vivere. Non dimenticare di prenderti cura delle tue "
 "provviste di legname, ne avrai bisogno."
 
-#: ../../maps/Atoll.wmf/elemental:9
+#: ../../maps/Atoll.wmf/elemental:11
 msgid "Who will be the real King of the big atoll?"
 msgstr "Chi sarà il vero Re del grande atollo?"
 

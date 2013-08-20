@@ -372,6 +372,48 @@ private:
 	bool clockwise;
 };
 
+struct Cmd_ShipSink : public PlayerCommand {
+	Cmd_ShipSink() : PlayerCommand(), serial(0) {} // For savegame loading
+	Cmd_ShipSink
+		(int32_t const t, Player_Number const p, Serial s)
+		: PlayerCommand(t, p), serial(s)
+	{}
+
+	void Write(FileWrite &, Editor_Game_Base &, Map_Map_Object_Saver  &);
+	void Read (FileRead  &, Editor_Game_Base &, Map_Map_Object_Loader &);
+
+	virtual uint8_t id() const {return QUEUE_CMD_SHIP_SINK;}
+
+	Cmd_ShipSink(StreamRead &);
+
+	virtual void execute (Game &);
+	virtual void serialize (StreamWrite &);
+
+private:
+	Serial serial;
+};
+
+struct Cmd_ShipCancelExpedition : public PlayerCommand {
+	Cmd_ShipCancelExpedition() : PlayerCommand(), serial(0) {} // For savegame loading
+	Cmd_ShipCancelExpedition
+		(int32_t const t, Player_Number const p, Serial s)
+		: PlayerCommand(t, p), serial(s)
+	{}
+
+	void Write(FileWrite &, Editor_Game_Base &, Map_Map_Object_Saver  &);
+	void Read (FileRead  &, Editor_Game_Base &, Map_Map_Object_Loader &);
+
+	virtual uint8_t id() const {return QUEUE_CMD_SHIP_SINK;}
+
+	Cmd_ShipCancelExpedition(StreamRead &);
+
+	virtual void execute (Game &);
+	virtual void serialize (StreamWrite &);
+
+private:
+	Serial serial;
+};
+
 struct Cmd_SetWarePriority : public PlayerCommand {
 	// For savegame loading
 	Cmd_SetWarePriority() :

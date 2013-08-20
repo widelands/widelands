@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2013-06-16 09:11+0000\n"
-"PO-Revision-Date: 2012-12-09 13:15+0000\n"
-"Last-Translator: Alexander Mackinnon Jansen <alexander.jansen@hesbynett.no>\n"
+"POT-Creation-Date: 2013-08-12 12:44+0000\n"
+"PO-Revision-Date: 2013-07-18 15:21+0000\n"
+"Last-Translator: Hans Joachim Desserud <Unknown>\n"
 "Language-Team: Norwegian Nynorsk <nn@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-06-17 05:09+0000\n"
-"X-Generator: Launchpad (build 16667)\n"
+"X-Launchpad-Export-Date: 2013-08-13 04:34+0000\n"
+"X-Generator: Launchpad (build 16723)\n"
 
 #: ../../campaigns/cconfig:64
 msgid "01 - Eyes in the Dark"
@@ -125,7 +125,7 @@ msgstr ""
 msgid "Atlanteans - The Run for the Fire"
 msgstr "Atlantarne - flammesprinten"
 
-#: ../../maps/Atoll.wmf/elemental:7
+#: ../../maps/Atoll.wmf/elemental:9
 msgid "Atoll"
 msgstr "Atoll"
 
@@ -149,6 +149,10 @@ msgstr "Kometøya"
 msgid "Crater"
 msgstr "Krater"
 
+#: ../../maps/Crossing the horizon.wmf/elemental:9
+msgid "Crossing the horizon"
+msgstr ""
+
 #: ../../maps/Desert Tournament.wmf/elemental:7
 msgid "Desert Tournament"
 msgstr "Ørkenturnering"
@@ -161,12 +165,9 @@ msgstr "Inntørka elveleie"
 msgid ""
 "Each tribe is surrounded by four mighty mountains. Who will first conquer "
 "them and claim the resources for his own tribe? Hint I: Water can be found "
-"along the river. Hint II: Snowmen mark additional water sources. Hint 3: "
+"along the river. Hint II: Snowmen mark additional water sources. Hint III: "
 "Each mountain contains only one resource."
 msgstr ""
-"Kvar stamme er omgitt av fire store fjell.  Kven vil erobre dei og krave "
-"resursane til sin eigen stamme?  Tips 1: Vatn er å finne langs elva.  Tips "
-"2: Snømenn visar andre vasskjelder.  Tips 3: Kvart fjell har berre ein resurs"
 
 #: ../../campaigns/cconfig:30
 msgid "Easy. Introduces the Barbarians"
@@ -241,6 +242,15 @@ msgstr "Gylden halvøy"
 #: ../../maps/Impact.wmf/elemental:7
 msgid "Impact"
 msgstr "Nedslag"
+
+#: ../../maps/Volcanic Winter.wmf/elemental:11
+msgid ""
+"In the middle of the summer a bunch of volcanic eruptions drew the winter "
+"in. Suddenly the sun seems to be gone and the only light and heat sources "
+"left are those, who enforced this dramatic change. Continents, oceans and "
+"seas are freezing, only the volcanic islands seem to be left as habitable "
+"land."
+msgstr ""
 
 #: ../../maps/The pass through the mountains.wmf/elemental:11
 msgid ""
@@ -334,6 +344,10 @@ msgid ""
 msgstr ""
 "Lenge etter at ein meteor slo ned i eit par fjell yrer det av liv i "
 "krateret.  To stammar kjemar no om dei rike resursane."
+
+#: ../../maps/Crossing the horizon.wmf/elemental:11
+msgid "Man your ship and sail to the horizon."
+msgstr ""
 
 #: ../../maps/Twinkling Waves.wmf/elemental:11
 msgid ""
@@ -455,7 +469,7 @@ msgid ""
 msgstr ""
 "Føreslegne lag: (blå, raud) mot (gul, grøn) eller (blå, gul) mot (raud, grøn)"
 
-#: ../../maps/Atoll.wmf/elemental:10
+#: ../../maps/Atoll.wmf/elemental:12
 msgid "Suggested Teams: (blue, yellow) vs (red, green)"
 msgstr "Føreslegne lag: (blå, gul) mot (raud, grøn)"
 
@@ -566,8 +580,6 @@ msgid ""
 "only this ring is left from that mighty firemountain. Do you think, that it "
 "is big enough for more than one tribe?"
 msgstr ""
-"Øya kom ein gong ut frå dei djupaste områda i havet.  I dei dagane kom eld "
-"ut av det salte sjøvatnet og fekk oske, stein og jord opp i dagslyset."
 
 #: ../../maps/Lake of tranquility.wmf/elemental:9
 msgid ""
@@ -598,6 +610,10 @@ msgstr "To frontar"
 #: ../../maps/Golden Peninsula.wmf/elemental:9
 msgid "Two empires race for the treasures of a legendary peninsula..."
 msgstr "To riker kjemper om skattane på ei legendarisk halvøy..."
+
+#: ../../maps/Volcanic Winter.wmf/elemental:9
+msgid "Volcanic Winter"
+msgstr ""
 
 #: ../../maps/War of the Valleys.wmf/elemental:7
 msgid "War of the Valleys"
@@ -686,7 +702,7 @@ msgstr ""
 "motstridande stiar.  Men hugs å vere vaktsam… denne siste levestaden er ein "
 "hard og liten stad å bu.  Ikkje gløym å passe på tømmeret ditt, du treng det."
 
-#: ../../maps/Atoll.wmf/elemental:9
+#: ../../maps/Atoll.wmf/elemental:11
 msgid "Who will be the real King of the big atoll?"
 msgstr "Kven blir den ekte kongen av det store atollet?"
 

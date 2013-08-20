@@ -764,7 +764,7 @@ void Soldier::init_auto_task(Game & game) {
 struct FindNodeOwned {
 	FindNodeOwned(Player_Number owner) : m_owner(owner)
 	{};
-	bool accept(const Map & map, const FCoords & coords) const {
+	bool accept(const Map&, const FCoords& coords) const {
 		return (coords.field->get_owned_by() == m_owner);
 	}
 private:
@@ -998,11 +998,12 @@ void Soldier::attack_update(Game & game, State & state)
 			if (newsite and (&newsite->owner() == &owner())) {
 				if (upcast(SoldierControl, ctrl, newsite)) {
 					state.objvar1 = 0;
+					// We may also have our location destroyed in between
 					if
 						(ctrl->stationedSoldiers().size() < ctrl->soldierCapacity() and
-						location->base_flag().get_position()
-						!=
-						newsite ->base_flag().get_position())
+						(!location || location->base_flag().get_position()
+						              !=
+						              newsite ->base_flag().get_position()))
 					{
 						molog("[attack] enemy belongs to us now, move in\n");
 						pop_task(game);

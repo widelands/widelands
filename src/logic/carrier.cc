@@ -506,9 +506,7 @@ int32_t Carrier::find_closest_flag(Game & game)
 
 	CoordPath endpath;
 	int32_t startcost, endcost;
-	int32_t curidx = -1;
-
-	curidx = startpath.get_index(get_position());
+	int32_t curidx = startpath.get_index(get_position());
 
 	// Apparently, we're in a building
 	if (curidx < 0) {

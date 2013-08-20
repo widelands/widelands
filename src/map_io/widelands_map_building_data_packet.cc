@@ -87,8 +87,7 @@ throw (_wexception)
 							if (special_type == 1) { // Constructionsite
 								building = &egbase.warp_constructionsite(c, p, index, true);
 							} else if (special_type == 2) {// DismantleSite
-								const Building_Descr* former_desc = tribe.get_building_descr(index);
-								Building::FormerBuildings formers = {former_desc};
+								Building::FormerBuildings formers = {index};
 								building = &egbase.warp_dismantlesite(c, p, true, formers);
 							} else {
 								building = &egbase.warp_building(c, p, index);

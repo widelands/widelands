@@ -14,3 +14,9 @@ dirpics=sail_!!_??.png
 hotspot=89 86
 fps=10
 playercolor=true
+
+[sinking]
+pics=sinking_??.png
+hotspot=89 86
+playercolor=false
+fps=7

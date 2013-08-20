@@ -118,15 +118,40 @@ struct Ship : Bob {
 		EXP_WAITING        = 1,
 		EXP_SCOUTING       = 2,
 		EXP_FOUNDPORTSPACE = 3,
-		EXP_COLONIZING     = 4
+		EXP_COLONIZING     = 4,
+		SINK_REQUEST       = 8,
+		SINK_ANIMATION     = 9
 	};
 
 	/// \returns the current state the ship is in
 	uint8_t get_ship_state() {return m_ship_state;}
 
+	/// \returns whether the ship is currently on an expedition
+	bool state_is_expedition() {
+		return
+			(m_ship_state == EXP_SCOUTING
+			 ||
+			 m_ship_state == EXP_WAITING
+			 ||
+			 m_ship_state == EXP_FOUNDPORTSPACE
+			 ||
+			 m_ship_state == EXP_COLONIZING);
+	}
+	/// \returns whether the ship is in transport mode
+	bool state_is_transport() {return (m_ship_state == TRANSPORT);}
+	/// \returns whether a sink request for the ship is currently valid
+	bool state_is_sinkable() {
+		return
+			(m_ship_state != SINK_REQUEST
+			 &&
+			 m_ship_state != SINK_ANIMATION
+			 &&
+			 m_ship_state != EXP_COLONIZING);
+	}
+
 	/// \returns (in expedition mode only!) whether the next field in direction \arg dir is swimable
 	bool exp_dir_swimable(Direction dir) {
-		if (m_ship_state == TRANSPORT)
+		if (!state_is_expedition())
 			return false;
 		assert(m_expedition);
 		return m_expedition->swimable[dir - 1];
@@ -134,7 +159,7 @@ struct Ship : Bob {
 
 	/// \returns whether the expedition ship is close to the coast
 	bool exp_close_to_coast() {
-		if (m_ship_state == TRANSPORT)
+		if (!state_is_expedition())
 			return false;
 		assert(m_expedition);
 		for (uint8_t dir = FIRST_DIRECTION; dir <= LAST_DIRECTION; ++dir)
@@ -145,8 +170,8 @@ struct Ship : Bob {
 
 	/// \returns (in expedition mode only!) the list of currently seen port build spaces
 	const std::list<Coords>* exp_port_spaces() {
-		if (m_ship_state == TRANSPORT)
-			return 0;
+		if (!state_is_expedition())
+			return nullptr;
 		assert(m_expedition);
 		return m_expedition->seen_port_buildspaces.get();
 	}
@@ -154,6 +179,9 @@ struct Ship : Bob {
 	void exp_scout_direction(Game &, uint8_t);
 	void exp_construct_port (Game &, const Coords&);
 	void exp_explore_island (Game &, bool);
+
+	void exp_cancel (Game &);
+	void sink_ship  (Game &);
 
 private:
 	friend struct Fleet;
@@ -166,6 +194,8 @@ private:
 	void ship_update(Game &, State &);
 	void ship_wakeup(Game &);
 
+	bool ship_update_transport(Game &, State &);
+	void ship_update_expedition(Game &, State &);
 	void ship_update_idle(Game &, State &);
 
 	void init_fleet(Editor_Game_Base &);

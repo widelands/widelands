@@ -1,21 +1,17 @@
-# Portuguese translation for widelands
-# Copyright (c) 2010 Rosetta Contributors and Canonical Ltd 2010
-# This file is distributed under the same license as the widelands package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, 2010.
-#
 msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
-"Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2013-06-16 09:11+0000\n"
-"PO-Revision-Date: 2010-11-05 02:53+0000\n"
-"Last-Translator: Nasenbaer <Unknown>\n"
+"Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
+"POT-Creation-Date: 2013-08-12 12:44+0000\n"
+"PO-Revision-Date: 2013-06-27 16:58+0000\n"
+"Last-Translator: trewe <Unknown>\n"
 "Language-Team: Portuguese <pt@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-06-17 05:15+0000\n"
-"X-Generator: Launchpad (build 16667)\n"
+"X-Launchpad-Export-Date: 2013-08-13 04:40+0000\n"
+"X-Generator: Launchpad (build 16723)\n"
+"Language: pt\n"
 
 #: ../../worlds/blackland/conf:45
 msgid "Aspen"
@@ -258,9 +254,12 @@ msgstr "Obeliscos"
 msgid "Stones"
 msgstr "Pedras"
 
+#
+# File: ../../worlds/blackland/conf, line: 2
+# File: ../../worlds/blackland/conf, line: 2
 #: ../../worlds/blackland/conf:2
 msgid "The Widelands Development Team"
-msgstr "A equipa de desenvolvimento Widelands"
+msgstr "A equipa de desenvolvimento de Widelands"
 
 #: ../../worlds/blackland/conf:4
 msgid "These are the grey, horrible and dangerous blacklands"

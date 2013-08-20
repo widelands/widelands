@@ -6,15 +6,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4804\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2013-06-16 09:11+0000\n"
-"PO-Revision-Date: 2012-12-28 16:35+0000\n"
+"POT-Creation-Date: 2013-08-12 12:44+0000\n"
+"PO-Revision-Date: 2013-08-13 20:55+0000\n"
 "Last-Translator: Wesmania <ikk_pl@yahoo.co.uk>\n"
 "Language-Team: Language <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-06-17 05:09+0000\n"
-"X-Generator: Launchpad (build 16667)\n"
+"X-Launchpad-Export-Date: 2013-08-14 04:34+0000\n"
+"X-Generator: Launchpad (build 16723)\n"
 
 #: ../../campaigns/cconfig:64
 msgid "01 - Eyes in the Dark"
@@ -123,7 +123,7 @@ msgstr ""
 msgid "Atlanteans - The Run for the Fire"
 msgstr "Atlanci - Ucieczka do Ognia"
 
-#: ../../maps/Atoll.wmf/elemental:7
+#: ../../maps/Atoll.wmf/elemental:9
 msgid "Atoll"
 msgstr "Atol"
 
@@ -147,6 +147,10 @@ msgstr "Wyspa komet"
 msgid "Crater"
 msgstr "Krater"
 
+#: ../../maps/Crossing the horizon.wmf/elemental:9
+msgid "Crossing the horizon"
+msgstr "W stronę horyzontu"
+
 #: ../../maps/Desert Tournament.wmf/elemental:7
 msgid "Desert Tournament"
 msgstr "Pustynny turniej"
@@ -159,13 +163,13 @@ msgstr "Suche koryto rzeki"
 msgid ""
 "Each tribe is surrounded by four mighty mountains. Who will first conquer "
 "them and claim the resources for his own tribe? Hint I: Water can be found "
-"along the river. Hint II: Snowmen mark additional water sources. Hint 3: "
+"along the river. Hint II: Snowmen mark additional water sources. Hint III: "
 "Each mountain contains only one resource."
 msgstr ""
-"Każde plemię otoczone jest przez cztery majestatyczne góry. Kto podbije je "
-"jako pierwszy i zagarnie ich surowce dla swojego plemienia? Wskazówka I: "
-"Wodę znajdziesz przy rzece. Wskazówka II: Bałwany wskazują dodatkowe źródła "
-"wody. Wskazówka III: Każda góra zawiera tylko jeden typ surowca."
+"Każde z plemion otaczają cztery potężne góry, Kto pierwszy je podbije i "
+"zagarnie ich skarby dla swojego plemienia? Wskazówka I: Wodę znajdziesz "
+"wzdłuż rzeki. Wskazówka II: Bałwany wskazują dodatkowe źródła wody. "
+"Wskazówka III: W każdej górze znajdziesz tylko jeden typ surowca."
 
 #: ../../campaigns/cconfig:30
 msgid "Easy. Introduces the Barbarians"
@@ -241,6 +245,19 @@ msgstr "Złoty półwysep"
 #: ../../maps/Impact.wmf/elemental:7
 msgid "Impact"
 msgstr "Uderzenie"
+
+#: ../../maps/Volcanic Winter.wmf/elemental:11
+msgid ""
+"In the middle of the summer a bunch of volcanic eruptions drew the winter "
+"in. Suddenly the sun seems to be gone and the only light and heat sources "
+"left are those, who enforced this dramatic change. Continents, oceans and "
+"seas are freezing, only the volcanic islands seem to be left as habitable "
+"land."
+msgstr ""
+"Seria erupcji wulkanicznych sprowadziła zimę w środku lata. Z dnia na dzień "
+"Słońce zdało się zniknąć z nieba i jedynym źródłem światła i ciepła stali "
+"się sprawcy tej drastycznej zmiany. Zamarzają contynenty, morza i oceany; te "
+"wulkaniczne wyspy to zapewne ostatnie skrawki lądu zdatne do zamieszkania."
 
 #: ../../maps/The pass through the mountains.wmf/elemental:11
 msgid ""
@@ -334,6 +351,10 @@ msgid ""
 msgstr ""
 "Długo po tym, jak meteoryt spadł na skupisko gór, życie zaczyna się pojawiać "
 "w kraterze. Teraz dwa plemiona walczą o bogate źródła zasobów."
+
+#: ../../maps/Crossing the horizon.wmf/elemental:11
+msgid "Man your ship and sail to the horizon."
+msgstr "Wejdź na pokład swojego statku i odpłyń w stronę horyzontu."
 
 #: ../../maps/Twinkling Waves.wmf/elemental:11
 msgid ""
@@ -460,7 +481,7 @@ msgstr ""
 "Sugerowane zespoły: (niebieski, czerwony) kontra (żółty, zielony) lub "
 "(niebieski, żółty) kontra (czerwony, zielony)"
 
-#: ../../maps/Atoll.wmf/elemental:10
+#: ../../maps/Atoll.wmf/elemental:12
 msgid "Suggested Teams: (blue, yellow) vs (red, green)"
 msgstr "Sugerowane zespoły: (niebieski, żółty) kontra (czerwony, zielony)"
 
@@ -608,6 +629,10 @@ msgstr "Dwie granice"
 msgid "Two empires race for the treasures of a legendary peninsula..."
 msgstr "Dwa mocarstwa ścigają się o skarby legendarnego półwyspu..."
 
+#: ../../maps/Volcanic Winter.wmf/elemental:9
+msgid "Volcanic Winter"
+msgstr "Wulkaniczna zima"
+
 #: ../../maps/War of the Valleys.wmf/elemental:7
 msgid "War of the Valleys"
 msgstr "Wojna dolin"
@@ -696,7 +721,7 @@ msgstr ""
 "niełatwo tam przeżyć.Nie zapomnij zadbać o zasoby drewna, będziesz go "
 "potrzebował."
 
-#: ../../maps/Atoll.wmf/elemental:9
+#: ../../maps/Atoll.wmf/elemental:11
 msgid "Who will be the real King of the big atoll?"
 msgstr "Kto zostanie prawdziwym królem wielkiego atolu?"
 

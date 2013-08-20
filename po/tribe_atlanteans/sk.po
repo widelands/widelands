@@ -6,15 +6,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2013-06-16 09:11+0000\n"
+"POT-Creation-Date: 2013-08-12 12:44+0000\n"
 "PO-Revision-Date: 2012-05-18 14:57+0000\n"
 "Last-Translator: Miroslav Remák <Unknown>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-06-17 05:11+0000\n"
-"X-Generator: Launchpad (build 16667)\n"
+"X-Launchpad-Export-Date: 2013-08-13 04:36+0000\n"
+"X-Generator: Launchpad (build 16723)\n"
 
 #: ../../tribes/atlanteans/golden_tabard/conf:1
 msgid ""
@@ -25,12 +25,6 @@ msgstr ""
 "Zlatý kabátec sa vyrába v atlantídskej tkáčovni zo zlatej priadze. Používa "
 "sa vo výcvikovom tábore - spolu s jedlom - na trénovanie bodov zdravia "
 "vojakov z úrovne 0 na úroveň 1."
-
-#: ../../tribes/atlanteans/saw/conf:1
-msgid ""
-"A saw is needed by the woodcutter and the carpenter. It is produced by the "
-"toolsmith."
-msgstr "Pílku potrebuje drevorubač a tesár. Vyrába ju kováč nástrojov."
 
 #: ../../tribes/atlanteans/ship/conf:1
 msgid "A sea-worthy ship"
@@ -220,7 +214,7 @@ msgstr "Uhlie"
 msgid "Coal Mine"
 msgstr "Uhoľná baňa"
 
-#: ../../tribes/atlanteans/shipyard/conf:21
+#: ../../tribes/atlanteans/shipyard/conf:28
 msgid "Constructing ship"
 msgstr "Stavanie lode"
 
@@ -430,11 +424,11 @@ msgstr "Strážnica"
 msgid "Hammer"
 msgstr "Kladivo"
 
-#: ../../tribes/atlanteans/blackroot_farm/conf:19
+#: ../../tribes/atlanteans/blackroot_farm/conf:24
 msgid "Harvest blackroot"
 msgstr "Zberať čierny koreň"
 
-#: ../../tribes/atlanteans/farm/conf:21
+#: ../../tribes/atlanteans/farm/conf:26
 msgid "Harvest corn"
 msgstr "Zberať kukuricu"
 
@@ -571,15 +565,15 @@ msgstr ""
 "Melie čierne korene a kukuricu na výrobu múky z čierneho koreňa a kukuričnej "
 "múky jednotlivo."
 
-#: ../../tribes/atlanteans/crystalmine/conf:25
+#: ../../tribes/atlanteans/crystalmine/conf:29
 msgid "Mine diamond"
 msgstr "Ťažiť diamanty"
 
-#: ../../tribes/atlanteans/crystalmine/conf:24
+#: ../../tribes/atlanteans/crystalmine/conf:28
 msgid "Mine quartz"
 msgstr "Ťažiť kremeň"
 
-#: ../../tribes/atlanteans/crystalmine/conf:23
+#: ../../tribes/atlanteans/crystalmine/conf:27
 msgid "Mine stone"
 msgstr "Ťažiť kameň"
 
@@ -619,11 +613,11 @@ msgstr ""
 "stromov v píle. Vyhňa na zbrane a lodenica tiež požívajú dosky na výrobu "
 "rôznych trojzubcov a mohutných lodí."
 
-#: ../../tribes/atlanteans/blackroot_farm/conf:17
+#: ../../tribes/atlanteans/blackroot_farm/conf:22
 msgid "Plant blackroot"
 msgstr "Sadiť čierny koreň"
 
-#: ../../tribes/atlanteans/farm/conf:19
+#: ../../tribes/atlanteans/farm/conf:24
 msgid "Plant corn"
 msgstr "Sadiť kukuricu"
 
@@ -643,113 +637,113 @@ msgstr "Sadí stromy."
 msgid "Port"
 msgstr "Prístav"
 
-#: ../../tribes/atlanteans/armoursmithy/conf:25
+#: ../../tribes/atlanteans/armoursmithy/conf:30
 msgid "Produce advanced shield"
 msgstr "Vyrábať pokročilé štíty"
 
-#: ../../tribes/atlanteans/armoursmithy/conf:26
+#: ../../tribes/atlanteans/armoursmithy/conf:31
 msgid ""
 "Produce advanced shield (only for compatibility with old savegames (build13))"
 msgstr ""
 "Vyrábať pokročilé štíty (len pre kompatibilitu so starými verziami hry "
 "(build13))"
 
-#: ../../tribes/atlanteans/toolsmithy/conf:33
+#: ../../tribes/atlanteans/toolsmithy/conf:38
 msgid "Produce bakingtray"
 msgstr "Vyrobiť pekáč"
 
-#: ../../tribes/atlanteans/mill/conf:22
+#: ../../tribes/atlanteans/mill/conf:27
 msgid "Produce blackrootflour"
 msgstr "Vyrobiť prášok z čierneho koreňa"
 
-#: ../../tribes/atlanteans/toolsmithy/conf:39
+#: ../../tribes/atlanteans/toolsmithy/conf:44
 msgid "Produce bow"
 msgstr "Vyrobiť luk"
 
-#: ../../tribes/atlanteans/toolsmithy/conf:34
+#: ../../tribes/atlanteans/toolsmithy/conf:39
 msgid "Produce bucket"
 msgstr "Vyrobiť vedro"
 
-#: ../../tribes/atlanteans/mill/conf:21
+#: ../../tribes/atlanteans/mill/conf:26
 msgid "Produce cornflour"
 msgstr "Vyrobiť kukuričnú múku"
 
-#: ../../tribes/atlanteans/weaponsmithy/conf:31
+#: ../../tribes/atlanteans/weaponsmithy/conf:36
 msgid "Produce double trident"
 msgstr "Vyrobiť dvojitý trojzubec"
 
-#: ../../tribes/atlanteans/toolsmithy/conf:35
+#: ../../tribes/atlanteans/toolsmithy/conf:40
 msgid "Produce fire tongs"
 msgstr "Vyrobiť kliešte na uhlie"
 
-#: ../../tribes/atlanteans/toolsmithy/conf:36
+#: ../../tribes/atlanteans/toolsmithy/conf:41
 msgid "Produce fishing net"
 msgstr "Vyrobiť rybársku sieť"
 
-#: ../../tribes/atlanteans/weaving-mill/conf:21
+#: ../../tribes/atlanteans/weaving-mill/conf:26
 msgid "Produce golden tabard"
 msgstr "Vyrobiť zlatý kabátec"
 
-#: ../../tribes/atlanteans/toolsmithy/conf:37
+#: ../../tribes/atlanteans/toolsmithy/conf:42
 msgid "Produce hammer"
 msgstr "Vyrobiť kladivo"
 
-#: ../../tribes/atlanteans/weaponsmithy/conf:32
+#: ../../tribes/atlanteans/weaponsmithy/conf:37
 msgid "Produce heavy double trident"
 msgstr "Vyrobiť ťažký dvojitý trojzubec"
 
-#: ../../tribes/atlanteans/toolsmithy/conf:38
+#: ../../tribes/atlanteans/toolsmithy/conf:43
 msgid "Produce hook pole"
 msgstr "Vyrobiť tyč s hákom"
 
-#: ../../tribes/atlanteans/weaponsmithy/conf:28
+#: ../../tribes/atlanteans/weaponsmithy/conf:33
 msgid "Produce light trident"
 msgstr "Vyrobiť ľahký trojzubec"
 
-#: ../../tribes/atlanteans/weaponsmithy/conf:29
+#: ../../tribes/atlanteans/weaponsmithy/conf:34
 msgid "Produce long trident"
 msgstr "Vyrobiť dlhý trojzubec"
 
-#: ../../tribes/atlanteans/toolsmithy/conf:40
+#: ../../tribes/atlanteans/toolsmithy/conf:45
 msgid "Produce milking tongs"
 msgstr "Vyrobiť kliešte na dojenie"
 
-#: ../../tribes/atlanteans/toolsmithy/conf:41
+#: ../../tribes/atlanteans/toolsmithy/conf:46
 msgid "Produce pick"
 msgstr "Vyrobiť krompáč"
 
-#: ../../tribes/atlanteans/toolsmithy/conf:42
+#: ../../tribes/atlanteans/toolsmithy/conf:47
 msgid "Produce saw"
 msgstr "Vyrobiť pílku"
 
-#: ../../tribes/atlanteans/toolsmithy/conf:43
+#: ../../tribes/atlanteans/toolsmithy/conf:48
 msgid "Produce scythe"
 msgstr "Vyrobiť kosu"
 
-#: ../../tribes/atlanteans/toolsmithy/conf:44
+#: ../../tribes/atlanteans/toolsmithy/conf:49
 msgid "Produce shovel"
 msgstr "Vyrobiť lopatu"
 
-#: ../../tribes/atlanteans/weaving-mill/conf:19
+#: ../../tribes/atlanteans/weaving-mill/conf:24
 msgid "Produce spidercloth"
 msgstr "Vyrobiť pavúčiu látku"
 
-#: ../../tribes/atlanteans/armoursmithy/conf:23
+#: ../../tribes/atlanteans/armoursmithy/conf:28
 msgid "Produce steel shield"
 msgstr "Vyrábať oceľové štíty"
 
-#: ../../tribes/atlanteans/armoursmithy/conf:24
+#: ../../tribes/atlanteans/armoursmithy/conf:29
 msgid ""
 "Produce steel shield (only for compatibility with old savegames (build13))"
 msgstr ""
 "Vyrábať oceľové štíty (len pre kompatibilitu so starými verziami hry "
 "(build13))"
 
-#: ../../tribes/atlanteans/weaponsmithy/conf:30
+#: ../../tribes/atlanteans/weaponsmithy/conf:35
 msgid "Produce steel trident"
 msgstr "Vyrobiť oceľový trojzubec"
 
-#: ../../tribes/atlanteans/weaving-mill/conf:20
+#: ../../tribes/atlanteans/weaving-mill/conf:25
 msgid "Produce tabard"
 msgstr "Vyrobiť kabátec"
 
@@ -886,8 +880,8 @@ msgstr ""
 "používajú horári aj pestovatelia čiernych koreňov. Vyrába ich kováč "
 "nástrojov."
 
-#: ../../tribes/atlanteans/dungeon/conf:31
-#: ../../tribes/atlanteans/labyrinth/conf:37
+#: ../../tribes/atlanteans/dungeon/conf:39
+#: ../../tribes/atlanteans/labyrinth/conf:45
 msgid "Sleep"
 msgstr "Spať"
 
@@ -895,11 +889,11 @@ msgstr "Spať"
 msgid "Small Tower"
 msgstr "Malá veža"
 
-#: ../../tribes/atlanteans/smelting_works/conf:24
+#: ../../tribes/atlanteans/smelting_works/conf:27
 msgid "Smelt gold"
 msgstr "Taviť zlato"
 
-#: ../../tribes/atlanteans/smelting_works/conf:23
+#: ../../tribes/atlanteans/smelting_works/conf:26
 msgid "Smelt iron"
 msgstr "Taviť železo"
 
@@ -915,11 +909,11 @@ msgstr "Taviareň"
 msgid "Smelts iron."
 msgstr "Taví železo."
 
-#: ../../tribes/atlanteans/smokery/conf:26
+#: ../../tribes/atlanteans/smokery/conf:29
 msgid "Smoke fish"
 msgstr "Údiť rybu"
 
-#: ../../tribes/atlanteans/smokery/conf:25
+#: ../../tribes/atlanteans/smokery/conf:28
 msgid "Smoke meat"
 msgstr "Údiť mäso"
 
@@ -1076,12 +1070,10 @@ msgstr "Rybársku sieť používa rybár a vyrába ju kováč nástrojov."
 
 #: ../../tribes/atlanteans/hammer/conf:1
 msgid ""
-"The hammer is an essential tool. It is needed by the geologist, the builder "
-"and all smiths. Make sure you always got some in reserve! It is produced by "
-"the toolsmith."
+"The hammer is an essential tool. It is needed by geologists, builders, "
+"weaponsmiths and armoursmiths. Make sure you always got some in reserve! It "
+"is produced by the toolsmith."
 msgstr ""
-"Kladivo je dôležitý nástroj. Potrebuje ho geológ, stavbár a všetci kováči. "
-"Uistite sa, že vždy máte nejaké v rezerve! Vyrába ho kováč nástrojov."
 
 #: ../../tribes/atlanteans/long_trident/conf:1
 msgid ""
@@ -1092,6 +1084,12 @@ msgstr ""
 "Dlhý trojzubec je prvý trojzubec vo výcviku vojakov. Vyrába sa vo vyhni na "
 "zbrane a používa sa v kobke - spolu s jedlom - na trénovanie útoku vojakov z "
 "úrovne 0 na úroveň 1."
+
+#: ../../tribes/atlanteans/saw/conf:1
+msgid ""
+"The saw is needed by the woodcutter and the toolsmith. It is produced by the "
+"toolsmith."
+msgstr ""
 
 #: ../../tribes/atlanteans/advanced_shield/conf:1
 msgid ""
@@ -1249,11 +1247,11 @@ msgstr ""
 "budove Atlantíďanov. Okrem píly, uhliareň, vyhňa na nástroje a udiareň ich "
 "taktiež potrebujú na vykonávanie svojej činnosti."
 
-#: ../../tribes/atlanteans/dungeon/conf:32
+#: ../../tribes/atlanteans/dungeon/conf:40
 msgid "Upgrade soldier attack 0"
 msgstr "Vylepšiť útok vojakov 0"
 
-#: ../../tribes/atlanteans/dungeon/conf:33
+#: ../../tribes/atlanteans/dungeon/conf:41
 msgid ""
 "Upgrade soldier attack 0 (only for compatibility with old savegames "
 "(build13))"
@@ -1261,11 +1259,11 @@ msgstr ""
 "Vylepšiť útok vojakov 0 (len pre kompatibilitu so starými verziami hry "
 "(build13))"
 
-#: ../../tribes/atlanteans/dungeon/conf:34
+#: ../../tribes/atlanteans/dungeon/conf:42
 msgid "Upgrade soldier attack 1"
 msgstr "Vylepšiť útok vojakov 1"
 
-#: ../../tribes/atlanteans/dungeon/conf:35
+#: ../../tribes/atlanteans/dungeon/conf:43
 msgid ""
 "Upgrade soldier attack 1 (only for compatibility with old savegames "
 "(build13))"
@@ -1273,11 +1271,11 @@ msgstr ""
 "Vylepšiť útok vojakov 1 (len pre kompatibilitu so starými verziami hry "
 "(build13))"
 
-#: ../../tribes/atlanteans/dungeon/conf:36
+#: ../../tribes/atlanteans/dungeon/conf:44
 msgid "Upgrade soldier attack 2"
 msgstr "Vylepšiť útok vojakov 2"
 
-#: ../../tribes/atlanteans/dungeon/conf:37
+#: ../../tribes/atlanteans/dungeon/conf:45
 msgid ""
 "Upgrade soldier attack 2 (only for compatibility with old savegames "
 "(build13))"
@@ -1285,11 +1283,11 @@ msgstr ""
 "Vylepšiť útok vojakov 2 (len pre kompatibilitu so starými verziami hry "
 "(build13))"
 
-#: ../../tribes/atlanteans/dungeon/conf:38
+#: ../../tribes/atlanteans/dungeon/conf:46
 msgid "Upgrade soldier attack 3"
 msgstr "Vylepšiť útok vojakov 3"
 
-#: ../../tribes/atlanteans/dungeon/conf:39
+#: ../../tribes/atlanteans/dungeon/conf:47
 msgid ""
 "Upgrade soldier attack 3 (only for compatibility with old savegames "
 "(build13))"
@@ -1297,11 +1295,11 @@ msgstr ""
 "Vylepšiť útok vojakov 3 (len pre kompatibilitu so starými verziami hry "
 "(build13))"
 
-#: ../../tribes/atlanteans/labyrinth/conf:38
+#: ../../tribes/atlanteans/labyrinth/conf:46
 msgid "Upgrade soldier defense 0"
 msgstr "Vylepšiť obranu vojakov 0"
 
-#: ../../tribes/atlanteans/labyrinth/conf:39
+#: ../../tribes/atlanteans/labyrinth/conf:47
 msgid ""
 "Upgrade soldier defense 0 (only for compatibility with old savegames "
 "(build13))"
@@ -1309,11 +1307,11 @@ msgstr ""
 "Vylepšiť obranu vojakov 0 (len pre kompatibilitu so starými verziami hry "
 "(build13))"
 
-#: ../../tribes/atlanteans/labyrinth/conf:40
+#: ../../tribes/atlanteans/labyrinth/conf:48
 msgid "Upgrade soldier defense 1"
 msgstr "Vylepšiť obranu vojakov 1"
 
-#: ../../tribes/atlanteans/labyrinth/conf:41
+#: ../../tribes/atlanteans/labyrinth/conf:49
 msgid ""
 "Upgrade soldier defense 1 (only for compatibility with old savegames "
 "(build13))"
@@ -1321,33 +1319,33 @@ msgstr ""
 "Vylepšiť obranu vojakov 1 (len pre kompatibilitu so starými verziami hry "
 "(build13))"
 
-#: ../../tribes/atlanteans/labyrinth/conf:44
+#: ../../tribes/atlanteans/labyrinth/conf:52
 msgid "Upgrade soldier evade 0"
 msgstr "Vylepšiť uhýbanie vojakov 0"
 
-#: ../../tribes/atlanteans/labyrinth/conf:45
+#: ../../tribes/atlanteans/labyrinth/conf:53
 msgid ""
 "Upgrade soldier evade 0 (only for compatibility with old savegames (build13))"
 msgstr ""
 "Vylepšiť uhýbanie vojakov 0 (len pre kompatibilitu so starými verziami hry "
 "(build13))"
 
-#: ../../tribes/atlanteans/labyrinth/conf:46
+#: ../../tribes/atlanteans/labyrinth/conf:54
 msgid "Upgrade soldier evade 1"
 msgstr "Vylepšiť uhýbanie vojakov 1"
 
-#: ../../tribes/atlanteans/labyrinth/conf:47
+#: ../../tribes/atlanteans/labyrinth/conf:55
 msgid ""
 "Upgrade soldier evade 1 (only for compatibility with old savegames (build13))"
 msgstr ""
 "Vylepšiť uhýbanie vojakov 1 (len pre kompatibilitu so starými verziami hry "
 "(build13))"
 
-#: ../../tribes/atlanteans/labyrinth/conf:42
+#: ../../tribes/atlanteans/labyrinth/conf:50
 msgid "Upgrade soldier hitpoints 0"
 msgstr "Vylepšiť body zdravia vojakov 0"
 
-#: ../../tribes/atlanteans/labyrinth/conf:43
+#: ../../tribes/atlanteans/labyrinth/conf:51
 msgid ""
 "Upgrade soldier hitpoints 0 (only for compatibility with old savegames "
 "(build13))"
@@ -1398,34 +1396,34 @@ msgstr "Drevorubač"
 msgid "Woodcutter's House"
 msgstr "Drevorubačský dom"
 
-#: ../../tribes/atlanteans/armoursmithy/conf:27
-#: ../../tribes/atlanteans/bakery/conf:21
-#: ../../tribes/atlanteans/blackroot_farm/conf:21
-#: ../../tribes/atlanteans/burners_house/conf:19
-#: ../../tribes/atlanteans/coalmine/conf:21
-#: ../../tribes/atlanteans/crystalmine/conf:26
-#: ../../tribes/atlanteans/farm/conf:23
-#: ../../tribes/atlanteans/fish_breeders_house/conf:17
-#: ../../tribes/atlanteans/fishers_house/conf:16
-#: ../../tribes/atlanteans/foresters_house/conf:16
-#: ../../tribes/atlanteans/goldmine/conf:22
-#: ../../tribes/atlanteans/goldweaver/conf:19
-#: ../../tribes/atlanteans/horsefarm/conf:21
-#: ../../tribes/atlanteans/hunters_house/conf:16
-#: ../../tribes/atlanteans/ironmine/conf:22
-#: ../../tribes/atlanteans/mill/conf:23
-#: ../../tribes/atlanteans/quarry/conf:16
-#: ../../tribes/atlanteans/sawmill/conf:18
-#: ../../tribes/atlanteans/scouts_house/conf:18
-#: ../../tribes/atlanteans/shipyard/conf:22
-#: ../../tribes/atlanteans/smelting_works/conf:25
-#: ../../tribes/atlanteans/smokery/conf:27
-#: ../../tribes/atlanteans/spiderfarm/conf:17
-#: ../../tribes/atlanteans/toolsmithy/conf:45
-#: ../../tribes/atlanteans/weaponsmithy/conf:33
-#: ../../tribes/atlanteans/weaving-mill/conf:22
-#: ../../tribes/atlanteans/well/conf:13
-#: ../../tribes/atlanteans/woodcutters_house/conf:16
+#: ../../tribes/atlanteans/armoursmithy/conf:32
+#: ../../tribes/atlanteans/bakery/conf:25
+#: ../../tribes/atlanteans/blackroot_farm/conf:26
+#: ../../tribes/atlanteans/burners_house/conf:23
+#: ../../tribes/atlanteans/coalmine/conf:25
+#: ../../tribes/atlanteans/crystalmine/conf:30
+#: ../../tribes/atlanteans/farm/conf:28
+#: ../../tribes/atlanteans/fish_breeders_house/conf:20
+#: ../../tribes/atlanteans/fishers_house/conf:19
+#: ../../tribes/atlanteans/foresters_house/conf:20
+#: ../../tribes/atlanteans/goldmine/conf:26
+#: ../../tribes/atlanteans/goldweaver/conf:23
+#: ../../tribes/atlanteans/horsefarm/conf:25
+#: ../../tribes/atlanteans/hunters_house/conf:19
+#: ../../tribes/atlanteans/ironmine/conf:26
+#: ../../tribes/atlanteans/mill/conf:28
+#: ../../tribes/atlanteans/quarry/conf:19
+#: ../../tribes/atlanteans/sawmill/conf:22
+#: ../../tribes/atlanteans/scouts_house/conf:21
+#: ../../tribes/atlanteans/shipyard/conf:29
+#: ../../tribes/atlanteans/smelting_works/conf:28
+#: ../../tribes/atlanteans/smokery/conf:30
+#: ../../tribes/atlanteans/spiderfarm/conf:21
+#: ../../tribes/atlanteans/toolsmithy/conf:50
+#: ../../tribes/atlanteans/weaponsmithy/conf:38
+#: ../../tribes/atlanteans/weaving-mill/conf:27
+#: ../../tribes/atlanteans/well/conf:17
+#: ../../tribes/atlanteans/woodcutters_house/conf:20
 msgid "Work"
 msgstr "Práca"
 

@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2013-06-16 09:11+0000\n"
-"PO-Revision-Date: 2012-11-02 16:18+0000\n"
-"Last-Translator: SirVer <Unknown>\n"
+"POT-Creation-Date: 2013-08-12 12:44+0000\n"
+"PO-Revision-Date: 2013-08-14 18:34+0000\n"
+"Last-Translator: Hans Joachim Desserud <Unknown>\n"
 "Language-Team: Norwegian Bokmal <nb@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-06-17 05:09+0000\n"
-"X-Generator: Launchpad (build 16667)\n"
+"X-Launchpad-Export-Date: 2013-08-15 04:33+0000\n"
+"X-Generator: Launchpad (build 16723)\n"
 
 #: ../../campaigns/cconfig:64
 msgid "01 - Eyes in the Dark"
@@ -23,7 +23,7 @@ msgstr "01 - Øyne i mørket"
 
 #: ../../campaigns/cconfig:98
 msgid "01 - From Nemesis to Genesis"
-msgstr ""
+msgstr "01 - Fra fiende til en ny start"
 
 #: ../../campaigns/cconfig:81
 msgid "01 - The Strands of Malac' Mor"
@@ -31,7 +31,7 @@ msgstr ""
 
 #: ../../campaigns/cconfig:69
 msgid "02 - A Place to call Home"
-msgstr ""
+msgstr "02 - Et hjemsted"
 
 #: ../../campaigns/cconfig:86
 msgid "02 - An Outpost for Exile"
@@ -116,9 +116,9 @@ msgstr ""
 
 #: ../../campaigns/cconfig:41
 msgid "Atlanteans - The Run for the Fire"
-msgstr ""
+msgstr "Atlanterne - flammesprinten"
 
-#: ../../maps/Atoll.wmf/elemental:7
+#: ../../maps/Atoll.wmf/elemental:9
 msgid "Atoll"
 msgstr "Atoll"
 
@@ -142,6 +142,10 @@ msgstr "Kometøya"
 msgid "Crater"
 msgstr "Krater"
 
+#: ../../maps/Crossing the horizon.wmf/elemental:9
+msgid "Crossing the horizon"
+msgstr "Horisonten krysses"
+
 #: ../../maps/Desert Tournament.wmf/elemental:7
 msgid "Desert Tournament"
 msgstr "Ørkenturnering"
@@ -154,7 +158,7 @@ msgstr "Inntørket elveleie"
 msgid ""
 "Each tribe is surrounded by four mighty mountains. Who will first conquer "
 "them and claim the resources for his own tribe? Hint I: Water can be found "
-"along the river. Hint II: Snowmen mark additional water sources. Hint 3: "
+"along the river. Hint II: Snowmen mark additional water sources. Hint III: "
 "Each mountain contains only one resource."
 msgstr ""
 
@@ -214,6 +218,9 @@ msgid ""
 "the mountain of gold that promises riches beyond belief. But can the two "
 "remaining ones share the resources wisely?"
 msgstr ""
+"Fire stammer konkurrerer med sine nærmeste naboer om å bli den første til å "
+"nå fjellet med gull som lover rikdom som overgår de villeste drømmer. Men "
+"kan de to gjenværende dele ressursene sine på en god måte?"
 
 #: ../../maps/Glacier Lake.wmf/elemental:7
 msgid "Glacier Lake"
@@ -226,6 +233,20 @@ msgstr "Gyllen halvøy"
 #: ../../maps/Impact.wmf/elemental:7
 msgid "Impact"
 msgstr "Nedslag"
+
+#: ../../maps/Volcanic Winter.wmf/elemental:11
+msgid ""
+"In the middle of the summer a bunch of volcanic eruptions drew the winter "
+"in. Suddenly the sun seems to be gone and the only light and heat sources "
+"left are those, who enforced this dramatic change. Continents, oceans and "
+"seas are freezing, only the volcanic islands seem to be left as habitable "
+"land."
+msgstr ""
+"Midt på sommeren ledet en rekke vulkanske utbrudd til at vinteren satte inn. "
+"Plutselig ser solen ut til å være borte og de eneste kildene til lys og "
+"varme er de som forårsaket denne omveltningen. Kontinenter, hav og sjøer "
+"fryser til is, kun de vulkanske øyene ser ut til å være siste rest av "
+"beboelige landområder."
 
 #: ../../maps/The pass through the mountains.wmf/elemental:11
 msgid ""
@@ -244,7 +265,7 @@ msgid ""
 msgstr ""
 "Er det en test fra gudene, eller en ond plan lagt av noen andre, som har "
 "ført til at du og stammen din har våknet opp på denne øyen omgitt av lava og "
-"ild. Hittil virker det som du er alene, men hvem vet hva som kan skje om du "
+"ild? Hittil virker det som du er alene, men hvem vet hva som kan skje om du "
 "møter en annen stamme?"
 
 #: ../../maps/MP Scenarios/Island Hopping.wmf/elemental:7
@@ -302,8 +323,8 @@ msgid ""
 "knows: soon there will be a war. A war about the last of water."
 msgstr ""
 "Det har vært lenge siden regnet har falt. Ikke rart at det ikke er mye vann "
-"igjen i dette inntørkede elveleiet. Alle vet, at en krig vil bryte ut om "
-"kort tid. En krig om det lille vannet som er igjen."
+"igjen i dette inntørkede elveleiet. Alle vet at en krig vil bryte ut om kort "
+"tid. En krig om det lille vannet som er igjen."
 
 #: ../../maps/Lake of tranquility.wmf/elemental:7
 msgid "Lake of Tranquility"
@@ -311,7 +332,7 @@ msgstr "Stillhetens sjø"
 
 #: ../../maps/Last Bastion.wmf/elemental:9
 msgid "Last Bastion"
-msgstr ""
+msgstr "Siste bastion"
 
 #: ../../maps/Crater.wmf/elemental:9
 msgid ""
@@ -320,6 +341,10 @@ msgid ""
 msgstr ""
 "Lenge etter at en meteor slo ned i en fjellgruppe, yrer det nå av liv i "
 "krateret. To stammer kjemper nå om ressursene."
+
+#: ../../maps/Crossing the horizon.wmf/elemental:11
+msgid "Man your ship and sail to the horizon."
+msgstr "Bemann skipene dine og seil til horisonten."
 
 #: ../../maps/Twinkling Waves.wmf/elemental:11
 msgid ""
@@ -356,6 +381,11 @@ msgid ""
 "stronghold. Water can be found everywhere, so there is no need to send out "
 "geologists."
 msgstr ""
+"Kun en liten høyde i sentrum av kartet knytter disse fire motstridende "
+"stammene sammen. Før hæren din til denne høyden umiddelbart og bygg en "
+"mektig festning som tegn på din overlegenhet! Hint: i sentrum er det kun "
+"plass til en festning. Vann finnes overalt, så det er ingen grunn til å "
+"sende ut geologer."
 
 #: ../../maps/Rendez-Vous.wmf/elemental:7
 msgid "Rendez-Vous"
@@ -378,6 +408,15 @@ msgid ""
 "completely scattered. Only with his bare life he and a handful of his "
 "soldiers survived."
 msgstr ""
+"For seks måneder siden ble Lutius, en ung general i Imperiet, sendt med 150 "
+"soldater til grensa forbi de nordre skogene der barbarstammer krysset over "
+"til Imperiets territorie. Hans oppgave var å forsvare Imperiets land. I "
+"begynnelsen var alt stille. Han snakket til og med med noen av barbarenes "
+"barn og så for seg et fredelig liv, side om side med dette urfolket. Han "
+"begynte å føle seg tryggere og hæren hans var ikke like mistenksomme ovenfor "
+"den mulige fienden. Dette var den store tabben. En dag i mars ble hæren "
+"uforberedt angrepet av 100 barbarer til fots og ble fullstendig spredd. Kun "
+"han selv og en håndfull soldater overlevde."
 
 #: ../../maps/The Far North.wmf/elemental:11
 msgid ""
@@ -396,7 +435,7 @@ msgstr ""
 
 #: ../../maps/Sun of fire.wmf/elemental:12
 msgid "Start positions are clockwise"
-msgstr ""
+msgstr "Startposisjoner går med klokka"
 
 #: ../../maps/Desert Tournament.wmf/elemental:10
 #: ../../maps/Four Castles.wmf/elemental:10
@@ -418,7 +457,7 @@ msgid ""
 msgstr ""
 "Anbefalte lag: (blå, rød) mot (gul, grønn) eller (blå, gul) mot (rød, grønn)"
 
-#: ../../maps/Atoll.wmf/elemental:10
+#: ../../maps/Atoll.wmf/elemental:12
 msgid "Suggested Teams: (blue, yellow) vs (red, green)"
 msgstr "Anbefalte lag: (blå, gul) mot (rød, grønn)"
 
@@ -452,7 +491,7 @@ msgstr ""
 
 #: ../../maps/Sun of fire.wmf/elemental:9
 msgid "The ancient sun of fire"
-msgstr ""
+msgstr "En urgammel sol av ild"
 
 #: ../../maps/The big lake.wmf/elemental:7
 msgid "The big lake"
@@ -517,6 +556,12 @@ msgid ""
 "only this ring is left from that mighty firemountain. Do you think, that it "
 "is big enough for more than one tribe?"
 msgstr ""
+"Denne øya steg en gang opp fra et av de største dypene i havet. I de dager "
+"steg ild opp fra det salte sjøvannet og brakte aske, steiner og jord opp i "
+"dagslyset. Ilden kom nærmere og nærmere solen, mens fjellet vokste og "
+"vokste. Til en dag, da hele ildfjellet eksploderte. Nå er det kun en ring "
+"igjen av det mektige ildfjellet. Tror du at det kan være stort nok for mer "
+"enn en stamme?"
 
 #: ../../maps/Lake of tranquility.wmf/elemental:9
 msgid ""
@@ -531,7 +576,7 @@ msgstr "Tre krigere"
 
 #: ../../maps/MP Scenarios/Together we're strong.wmf/elemental:9
 msgid "Together we're strong"
-msgstr ""
+msgstr "Sammen er vi sterke"
 
 #: ../../maps/Twinkling Waves.wmf/elemental:9
 msgid "Twinkling Waves"
@@ -545,9 +590,13 @@ msgstr "To fronter"
 msgid "Two empires race for the treasures of a legendary peninsula..."
 msgstr "To riker kjemper om skattene på en lengendarisk halvøy..."
 
+#: ../../maps/Volcanic Winter.wmf/elemental:9
+msgid "Volcanic Winter"
+msgstr "Vulkansk vinter"
+
 #: ../../maps/War of the Valleys.wmf/elemental:7
 msgid "War of the Valleys"
-msgstr ""
+msgstr "Krigen om dalene"
 
 #: ../../maps/Four Castles.wmf/elemental:9
 msgid ""
@@ -602,9 +651,9 @@ msgid ""
 "supplies, you'll need them."
 msgstr ""
 
-#: ../../maps/Atoll.wmf/elemental:9
+#: ../../maps/Atoll.wmf/elemental:11
 msgid "Who will be the real King of the big atoll?"
-msgstr ""
+msgstr "Hvem vil bli den virkelige herskeren over det store atollet?"
 
 #: ../../maps/Wisent Valley.wmf/elemental:9
 msgid "Wisent Valley"

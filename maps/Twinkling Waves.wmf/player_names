@@ -1,28 +1,40 @@
-# Automatically created by Widelands svn3680
+# Automatically created by Widelands bzr6709[widelands] (Debug)
 
 [global]
-packet_version="1"
+packet_version="2"
 
 [player_1]
 name="Magnus"
 tribe="empire"
+ai=
+closeable="false"
 
 [player_2]
 name="Viadaro"
 tribe="atlanteans"
+ai=
+closeable="false"
 
 [player_3]
 name="Knut"
 tribe="barbarians"
+ai=
+closeable="false"
 
 [player_4]
 name="Saledus"
 tribe="empire"
+ai=
+closeable="false"
 
 [player_5]
 name="Xandros"
 tribe="atlanteans"
+ai=
+closeable="false"
 
 [player_6]
 name="Tuxorrior"
 tribe="barbarians"
+ai=
+closeable="false"

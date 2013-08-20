@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002, 2006-2012 by the Widelands Development Team
+ * Copyright (C) 2002, 2006-2013 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -169,6 +169,7 @@ Fullscreen_Menu_MapSelect::Fullscreen_Menu_MapSelect
 	vbox->set_size(get_w(), 25);
 	vbox = new UI::Box(this, m_table.get_x(), m_table.get_y() - 90, UI::Box::Horizontal, m_table.get_w());
 	_add_tag_checkbox(vbox, "official", _("Official Map"));
+	_add_tag_checkbox(vbox, "seafaring", _("Seafaring Map"));
 	vbox->set_size(get_w(), 25);
 	vbox = new UI::Box(this, m_table.get_x(), m_table.get_y() - 60, UI::Box::Horizontal, m_table.get_w());
 	_add_tag_checkbox(vbox, "1v1", _("1v1"));

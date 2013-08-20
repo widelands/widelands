@@ -48,6 +48,7 @@ upgrade_attack_3=_Upgrade soldier attack 3 (only for compatibility with old save
 
 [sleep]
 sleep=5000
+check_soldier=soldier attack 9    # dummy check to get sleep rated as skipped - else it will change statistics
 
 [upgrade_soldier_attack_0]
 check_soldier=soldier attack 0

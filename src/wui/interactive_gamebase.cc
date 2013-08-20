@@ -25,6 +25,7 @@
 #include "logic/ship.h"
 #include "profile/profile.h"
 #include "upcast.h"
+#include "wui/game_summary.h"
 
 Interactive_GameBase::Interactive_GameBase
 	(Widelands::Game & _game, Section & global_s,
@@ -95,3 +96,14 @@ bool Interactive_GameBase::try_show_ship_window()
 
 	return false;
 }
+
+void Interactive_GameBase::show_game_summary()
+{
+	if (m_game_summary.window) {
+		m_game_summary.window->set_visible(true);
+		m_game_summary.window->think();
+		return;
+	}
+	new GameSummaryScreen(this, &m_game_summary);
+}
+

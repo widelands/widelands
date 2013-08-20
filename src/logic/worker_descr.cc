@@ -33,9 +33,6 @@
 #include "sound/sound_handler.h"
 #include "wexception.h"
 
-// NOCOM(#sirver): is this really needed?
-// #include <scripting/pdep/llimits.h>
-
 namespace Widelands {
 
 Worker_Descr::Worker_Descr

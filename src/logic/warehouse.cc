@@ -467,7 +467,8 @@ void Warehouse::init(Editor_Game_Base & egbase)
 		(ref_cast<Game, Editor_Game_Base>(egbase),
 		 "warehouse",
 		 descname(),
-		 message);
+		 message,
+		 true);
 	}
 
 	if (uint32_t const conquer_radius = get_conquers())
@@ -542,14 +543,14 @@ void Warehouse::destroy(Editor_Game_Base & egbase)
 
 	const WareList & workers = get_workers();
 
+	// This will empty the stock and launch all workers
+	// including incorporated ones
 	for (Ware_Index id = Ware_Index::First(); id < workers.get_nrwareids(); ++id) {
 		const uint32_t stock = workers.stock(id);
 
-		if (stock > 0) {
-			for (uint32_t i = 0; i < stock; ++i) {
-				launch_worker(game, id, Requirements()).start_task_leavebuilding
-					(game, true);
-			}
+		for (uint32_t i = 0; i < stock; ++i) {
+			launch_worker(game, id, Requirements()).start_task_leavebuilding
+				(game, true);
 		}
 	}
 
@@ -747,6 +748,19 @@ const WareList & Warehouse::get_workers() const
 	return m_supply->get_workers();
 }
 
+PlayerImmovable::Workers Warehouse::get_incorporated_workers()
+{
+	PlayerImmovable::Workers all_workers;
+	container_iterate(IncorporatedWorkers, m_incorporated_workers, cpair) {
+		WorkerList & clist = cpair->second;
+		container_iterate(WorkerList, clist, w) {
+			all_workers.push_back(*w.current);
+		}
+	}
+	return all_workers;
+}
+
+
 /// Magically create wares in this warehouse. Updates the economy accordingly.
 void Warehouse::insert_wares(Ware_Index const id, uint32_t const count)
 {
@@ -902,6 +916,9 @@ void Warehouse::incorporate_worker(Editor_Game_Base & egbase, Worker & w)
 		//  FIXME And even such workers should be removed and only a small record
 		//  FIXME with the experience (and possibly other data that must survive)
 		//  FIXME may be kept.
+		//  FIXME When this is done, the get_incorporated_workers method above must
+		//  FIXME be reworked so that workers are recreated, and rescheduled for
+		//  FIXME incorporation.
 		if (dynamic_cast<Carrier const *>(&w)) {
 			w.remove(egbase);
 			return;

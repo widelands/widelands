@@ -50,7 +50,7 @@ class NoteSender {
 
 public:
 	~NoteSender() {
-		while (m_links.size())
+		while (!m_links.empty())
 			(*m_links.rbegin())->disconnect(*this);
 	}
 
@@ -72,7 +72,7 @@ class NoteReceiver {
 
 public:
 	virtual ~NoteReceiver() {
-		while (m_links.size())
+		while (!m_links.empty())
 			disconnect(**m_links.rbegin());
 	}
 

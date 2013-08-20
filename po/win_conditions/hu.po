@@ -7,21 +7,21 @@ msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2013-06-16 09:11+0000\n"
+"POT-Creation-Date: 2013-08-12 12:44+0000\n"
 "PO-Revision-Date: 2012-03-13 09:18+0000\n"
 "Last-Translator: Richard Somlói <ricsipontaz@gmail.com>\n"
 "Language-Team: Hungarian <hu@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-06-17 05:16+0000\n"
-"X-Generator: Launchpad (build 16667)\n"
+"X-Launchpad-Export-Date: 2013-08-13 04:41+0000\n"
+"X-Generator: Launchpad (build 16723)\n"
 
 #: ../../scripting/win_condition_texts.lua:31
 msgid "%i trees."
 msgstr "%i fa."
 
-#: ../../scripting/win_condition_texts.lua:54
+#: ../../scripting/win_condition_texts.lua:55
 msgid "%s %s %i%% of the land (%i of %i)."
 msgstr ""
 
@@ -83,6 +83,10 @@ msgstr "Végtelen játék (nincs köd)"
 msgid "Keep it for %i more minutes to win the game."
 msgstr "Tovább %i percig kell birtokolnod a játék megnyeréséhez."
 
+#: ../../scripting/win_condition_texts.lua:54
+msgid "Otherwise the game will end in %i minutes."
+msgstr ""
+
 #: ../../scripting/win_condition_texts.lua:23
 #: ../../scripting/win_condition_texts.lua:29
 msgid "Player overview:"
@@ -113,6 +117,7 @@ msgid "Territorial Time"
 msgstr ""
 
 #: ../../scripting/win_condition_texts.lua:27
+#: ../../scripting/win_condition_texts.lua:53
 msgid "The game will end in %i minutes."
 msgstr "A játék %i perc múlva véget ér."
 
@@ -163,12 +168,6 @@ msgid ""
 "highest number of wares at the end of 4 hours wins the game."
 msgstr ""
 
-#: ../../scripting/win_condition_texts.lua:8
-msgid ""
-"You have nothing to command left. If you want, you may continue as spectator."
-msgstr ""
-"Már minden feladatoddal végeztél, ha gondolod maradhatsz megfigyelőként."
-
 #: ../../scripting/win_condition_texts.lua:3
 msgid "You have won this game!"
 msgstr "Megnyerted ezt a játékot!"
@@ -176,6 +175,12 @@ msgstr "Megnyerted ezt a játékot!"
 #: ../../scripting/win_condition_texts.lua:17
 msgid "You lost"
 msgstr "Vesztettél"
+
+#: ../../scripting/win_condition_texts.lua:8
+msgid ""
+"You lost your last warehouse and are therefore defeated. You may continue as "
+"spectator if you want."
+msgstr ""
 
 #: ../../scripting/win_condition_texts.lua:48
 msgid "You own more than half of the maps area."
@@ -192,10 +197,6 @@ msgstr "Nyertél"
 #: ../../scripting/win_condition_texts.lua:18
 msgid "You've lost this game!"
 msgstr "Elvesztetted ezt a játékot!"
-
-#: ../../scripting/win_condition_texts.lua:53
-msgid "game will end in %i minutes."
-msgstr ""
 
 #: ../../scripting/win_condition_texts.lua:33
 msgid "with %i trees."
