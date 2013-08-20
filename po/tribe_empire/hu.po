@@ -7,13 +7,13 @@ msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2013-08-15 16:02+0000\n"
-"PO-Revision-Date: 2013-08-14 19:38+0000\n"
-"Last-Translator: István Kiss <kiemc@citromail.hu>\n"
+"PO-Revision-Date: 2013-08-19 14:17+0000\n"
+"Last-Translator: István Kiss <kissistvan@kibk.extra.hu>\n"
 "Language-Team: Language <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-08-16 04:37+0000\n"
+"X-Launchpad-Export-Date: 2013-08-20 04:34+0000\n"
 "X-Generator: Launchpad (build 16723)\n"
 
 #: ../../tribes/empire/meal/conf:1
@@ -589,12 +589,12 @@ msgstr "Molnár"
 
 #: ../../tribes/empire/miller/conf:1
 msgid "Mills the wheat to produce flour."
-msgstr "Őröli a búzát a liszthez."
+msgstr "Lisztté őrli a búzát."
 
 #: ../../tribes/empire/marblemine/conf:26
 #: ../../tribes/empire/quarry/conf:22
 msgid "Mine marble"
-msgstr "Márványt bányásznak"
+msgstr "a márványbányászat"
 
 #: ../../tribes/empire/marblemine/conf:27
 #: ../../tribes/empire/quarry/conf:23
@@ -606,7 +606,7 @@ msgstr ""
 #: ../../tribes/empire/marblemine/conf:28
 #: ../../tribes/empire/quarry/conf:20
 msgid "Mine stone"
-msgstr "Követ bányásznak"
+msgstr "a kőbányászat"
 
 #: ../../tribes/empire/marblemine/conf:29
 #: ../../tribes/empire/quarry/conf:21
@@ -640,11 +640,11 @@ msgstr "Sertéstelep"
 
 #: ../../tribes/empire/vineyard/conf:23
 msgid "Plant vine"
-msgstr "Szőlőt ültet"
+msgstr "a szőlőültetés"
 
 #: ../../tribes/empire/farm/conf:23
 msgid "Plant wheat"
-msgstr "Búzát vet"
+msgstr "a búzavetés"
 
 #: ../../tribes/empire/farmer/conf:1
 msgid "Plants fields."
@@ -652,7 +652,7 @@ msgstr "Mezőn dolgozik."
 
 #: ../../tribes/empire/forester/conf:1
 msgid "Plants trees."
-msgstr "Fákat ültet"
+msgstr "Fákat ültet."
 
 #: ../../tribes/empire/conf:87
 msgid "Plate-Armour"
@@ -760,15 +760,15 @@ msgstr "Páncélt készít a katonák számára."
 
 #: ../../tribes/empire/brewer/conf:1
 msgid "Produces beer or wine."
-msgstr "Sört vagy bort készít"
+msgstr "Sört vagy bort készít."
 
 #: ../../tribes/empire/weaver/conf:1
 msgid "Produces cloth for ships and soldiers."
-msgstr "Szövetet készít a hajó vitorlához és a katonáknak."
+msgstr "Szövetet készít a hajóvitorlákhoz és a katonáknak."
 
 #: ../../tribes/empire/innkeeper/conf:1
 msgid "Produces food for miners."
-msgstr "Ételt készít a bányászok számára"
+msgstr "Ételt készít a bányászok számára."
 
 #: ../../tribes/empire/toolsmith/conf:1
 msgid "Produces tools for the workers."
@@ -890,7 +890,7 @@ msgstr "Lapát"
 #: ../../tribes/empire/colosseum/conf:35
 #: ../../tribes/empire/trainingscamp/conf:46
 msgid "Sleep"
-msgstr "Alvás"
+msgstr "Felfüggesztve"
 
 #: ../../tribes/empire/conf:153
 msgid "Small Tower"
@@ -898,11 +898,11 @@ msgstr "Kis torony"
 
 #: ../../tribes/empire/smelting_works/conf:27
 msgid "Smelt gold"
-msgstr "Aranyat készít"
+msgstr "az aranykohászat"
 
 #: ../../tribes/empire/smelting_works/conf:26
 msgid "Smelt iron"
-msgstr "Vasat készít"
+msgstr "a vaskohászat"
 
 #: ../../tribes/empire/conf:129
 msgid "Smelter"
@@ -960,7 +960,7 @@ msgstr "Kocsma"
 
 #: ../../tribes/empire/hunter/conf:1
 msgid "The Hunter brings good meat to the colonists."
-msgstr "A vadász húst hoz az embereknek."
+msgstr "A vadász jó hússal látja el a hódítókat."
 
 #: ../../tribes/empire/scythe/conf:1
 msgid ""
@@ -1212,7 +1212,7 @@ msgid ""
 "(build13))"
 msgstr ""
 "Katona támadásának fejlesztése 0 (csak kompatibilitási okokból, a régi "
-"mentések miatt(build13))"
+"mentések miatt (build13))"
 
 #: ../../tribes/empire/trainingscamp/conf:49
 msgid "Upgrade soldier attack 1"
@@ -1224,7 +1224,7 @@ msgid ""
 "(build13))"
 msgstr ""
 "Katona támadásának fejlesztése 1 (csak kompatibilitási okokból, a régi "
-"mentések miatt(build13))"
+"mentések miatt (build13))"
 
 #: ../../tribes/empire/trainingscamp/conf:51
 msgid "Upgrade soldier attack 2"
@@ -1236,7 +1236,7 @@ msgid ""
 "(build13))"
 msgstr ""
 "Katona támadásának fejlesztése 2 (csak kompatibilitási okokból, a régi "
-"mentések miatt(build13))"
+"mentések miatt (build13))"
 
 #: ../../tribes/empire/trainingscamp/conf:53
 msgid "Upgrade soldier attack 3"
@@ -1248,7 +1248,7 @@ msgid ""
 "(build13))"
 msgstr ""
 "Katona támadásának fejlesztése 3 (csak kompatibilitási okokból, a régi "
-"mentések miatt(build13))"
+"mentések miatt (build13))"
 
 #: ../../tribes/empire/arena/conf:30
 #: ../../tribes/empire/colosseum/conf:36
@@ -1261,7 +1261,7 @@ msgid ""
 "Upgrade soldier evade 0 (only for compatibility with old savegames (build13))"
 msgstr ""
 "Katona kitérésének fejlesztése 0 (csak kompatibilitási okokból, a régi "
-"mentések miatt(build13))"
+"mentések miatt (build13))"
 
 #: ../../tribes/empire/colosseum/conf:38
 msgid "Upgrade soldier evade 1"
@@ -1272,7 +1272,7 @@ msgid ""
 "Upgrade soldier evade 1 (only for compatibility with old savegames (build13))"
 msgstr ""
 "Katona kitérésének fejlesztése 1 (csak kompatibilitási okokból, a régi "
-"mentések miatt(build13))"
+"mentések miatt (build13))"
 
 #: ../../tribes/empire/trainingscamp/conf:55
 msgid "Upgrade soldier hitpoints 0"
@@ -1284,7 +1284,7 @@ msgid ""
 "(build13))"
 msgstr ""
 "Katona életerejének fejlesztése 0 (csak kompatibilitási okokból, a régi "
-"mentések miatt(build13))"
+"mentések miatt (build13))"
 
 #: ../../tribes/empire/trainingscamp/conf:57
 msgid "Upgrade soldier hitpoints 1"
@@ -1296,7 +1296,7 @@ msgid ""
 "(build13))"
 msgstr ""
 "Katona életerejének fejlesztése 1 (csak kompatibilitási okokból, a régi "
-"mentések miatt(build13))"
+"mentések miatt (build13))"
 
 #: ../../tribes/empire/trainingscamp/conf:59
 msgid "Upgrade soldier hitpoints 2"
@@ -1306,7 +1306,9 @@ msgstr "Katona életerejének fejlesztése 2"
 msgid ""
 "Upgrade soldier hitpoints 2 (only for compatibility with old savegames "
 "(build13))"
-msgstr "Katona életerejének fejlesztése 2"
+msgstr ""
+"Katona életerejének fejlesztése 2 (csak kompatibilitási okokból, a régi "
+"mentések miatt (build13))"
 
 #: ../../tribes/empire/trainingscamp/conf:61
 msgid "Upgrade soldier hitpoints 3"
@@ -1476,11 +1478,11 @@ msgstr ""
 #: ../../tribes/empire/well/conf:20
 #: ../../tribes/empire/winery/conf:25
 msgid "Work"
-msgstr "Munka"
+msgstr "a munka"
 
 #: ../../tribes/empire/builder/conf:1
 msgid "Works at construction sites to create a new building."
-msgstr "Az építési területen dolgozik, új épületeket épít."
+msgstr "Építési területeken dolgozik, új épületeket emel."
 
 #: ../../tribes/empire/shipwright/conf:1
 msgid "Works at the shipyard and constructs new ships."

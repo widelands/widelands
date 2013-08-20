@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: Widelands svn4804\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2013-08-15 18:02+0200\n"
-"PO-Revision-Date: 2013-08-13 20:47+0000\n"
+"PO-Revision-Date: 2013-08-19 12:00+0000\n"
 "Last-Translator: Wesmania <ikk_pl@yahoo.co.uk>\n"
 "Language-Team: Language <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2013-08-16 04:40+0000\n"
+"X-Launchpad-Export-Date: 2013-08-20 04:34+0000\n"
 "X-Generator: Launchpad (build 16723)\n"
 
 #: ../../src/save_handler.cc:73
@@ -4275,7 +4275,7 @@ msgstr "poziom"
 #: ../../src/logic/production_program.cc:1282
 #, c-format
 msgid "No soldier to train!"
-msgstr ""
+msgstr "Brak żołnierzy do treningu!"
 
 #: ../../src/logic/production_program.cc:1292
 #: ../../src/logic/production_program.cc:1382
