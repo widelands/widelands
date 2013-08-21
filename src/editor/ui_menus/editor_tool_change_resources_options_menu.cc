@@ -233,8 +233,7 @@ void Editor_Tool_Change_Resources_Options_Menu::update() {
 
 	m_cur_selection.set_text
 		(ref_cast<Editor_Interactive, UI::Panel>(*get_parent()).egbase().map()
-		 .world().get_resource(m_increase_tool.set_tool().get_cur_res())->name()
-		);
+		 .world().get_resource(m_increase_tool.set_tool().get_cur_res())->descname());
 	m_cur_selection.set_pos
 		(Point
 		 	((get_inner_w() - m_cur_selection.get_w()) / 2, get_inner_h() - 20));
