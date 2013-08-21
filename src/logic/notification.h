@@ -54,7 +54,6 @@ public:
 			(*m_links.rbegin())->disconnect(*this);
 	}
 
-protected:
 	void send(const T & note) const {
 		container_iterate_const(Links, m_links, i)
 			(*i.current)->receive(note);

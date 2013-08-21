@@ -76,7 +76,6 @@ Interactive_Base::Interactive_Base
 	(Editor_Game_Base & the_egbase, Section & global_s)
 	:
 	Map_View(0, 0, 0, global_s.get_int("xres", XRES), global_s.get_int("yres", YRES), *this),
-	NoteSender<LogMessage>(),
 	m_show_workarea_preview(global_s.get_bool("workareapreview", true)),
 	m
 		(new InteractiveBaseInternals
@@ -118,7 +117,7 @@ Interactive_Base::Interactive_Base
 	set_dock_windows_to_edges
 		(global_s.get_bool("dock_windows_to_edges", false));
 
-	m_chatOverlay->setLogProvider(*this);
+	m_chatOverlay->setLogProvider(m_log_sender);
 
 	//  Switch to the new graphics system now, if necessary.
 	WLApplication::get()->refresh_graphics();
@@ -772,7 +771,7 @@ void Interactive_Base::log_message(const std::string& message) const
 	LogMessage lm;
 	lm.msg = message;
 	lm.time = time(nullptr);
-	send(lm);
+	m_log_sender.send(lm);
 }
 
 

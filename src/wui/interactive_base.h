@@ -42,8 +42,7 @@ struct InteractiveBaseInternals;
  * This is used to represent the code that Interactive_Player and
  * Editor_Interactive share.
  */
-struct Interactive_Base : public Map_View, public DebugConsole::Handler,
-	public Widelands::NoteSender<LogMessage> {
+struct Interactive_Base : public Map_View, public DebugConsole::Handler {
 
 	friend class Sound_Handler;
 
@@ -193,6 +192,7 @@ private:
 	UI::Textarea m_label_speed;
 
 	UI::UniqueWindow::Registry m_debugconsole;
+	Widelands::NoteSender<LogMessage> m_log_sender;
 };
 
 #define PIC2 g_gr->images().get("pics/but2.png")
