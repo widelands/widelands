@@ -27,6 +27,7 @@
 
 struct NetClientImpl;
 
+//FIXME Use composition instead of inheritance
 /**
  * NetClient manages the lifetime of a network game in which this computer
  * participates as a client.
@@ -34,7 +35,6 @@ struct NetClientImpl;
  * This includes running the game setup screen and the actual game after
  * launch, as well as dealing with the actual network protocol.
  */
-// NOCOM(#cghislai): could you use composition instead of derivation for ChatProvider? Inheriting from four classes is definite code Smell.
 struct NetClient :
 	public  GameController,
 	public  GameSettingsProvider,
