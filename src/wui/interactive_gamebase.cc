@@ -25,16 +25,14 @@
 #include "logic/ship.h"
 #include "profile/profile.h"
 #include "upcast.h"
-#include "wui/chatoverlay.h"
 #include "wui/game_summary.h"
 
 Interactive_GameBase::Interactive_GameBase
 	(Widelands::Game & _game, Section & global_s,
-	 PlayerType pt, bool const chatenabled)
+	 PlayerType pt, bool const chatenabled, bool const multiplayer)
 	:
 	Interactive_Base(_game, global_s),
 	m_chatProvider(0),
-	m_chatOverlay(0),
 	m_building_census_format
 		(global_s.get_string("building_census_format",       "%N")),
 	m_building_statistics_format
@@ -42,7 +40,8 @@ Interactive_GameBase::Interactive_GameBase
 	m_building_tooltip_format
 		(global_s.get_string("building_tooltip_format",      "%r")),
 	m_chatenabled(chatenabled),
-	m_playertype(pt)
+	m_playertype(pt),
+	m_multiplayer(multiplayer)
 {}
 
 /// \return a pointer to the running \ref Game instance.

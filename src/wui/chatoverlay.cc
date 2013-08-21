@@ -20,8 +20,9 @@
 #include "wui/chatoverlay.h"
 
 #include "chat.h"
+#include "graphic/font_handler1.h"
 #include "graphic/rendertarget.h"
-#include "graphic/richtext.h"
+#include "logmessage.h"
 #include "profile/profile.h"
 
 /**
@@ -30,7 +31,8 @@
 static const int32_t CHAT_DISPLAY_TIME = 10;
 static const uint32_t MARGIN = 2;
 
-struct ChatOverlay::Impl : Widelands::NoteReceiver<ChatMessage> {
+struct ChatOverlay::Impl : Widelands::NoteReceiver<ChatMessage>,
+	Widelands::NoteReceiver<LogMessage> {
 	bool transparent;
 	ChatProvider * chat;
 	bool havemessages;
@@ -39,12 +41,16 @@ struct ChatOverlay::Impl : Widelands::NoteReceiver<ChatMessage> {
 	time_t oldest;
 
 	/// Layouted message list
-	UI::RichText rt;
+	std::string all_text;
+
+	/// Log messages
+	std::vector<LogMessage> log_messages;
 
 	Impl() : transparent(false), chat(0), havemessages(false), oldest(0) {}
 
 	void recompute();
 	virtual void receive(const ChatMessage & note);
+	virtual void receive(const LogMessage & note);
 };
 
 ChatOverlay::ChatOverlay
@@ -56,8 +62,6 @@ ChatOverlay::ChatOverlay
 	m->transparent = s.get_bool("transparent_chat", true);
 
 	set_think(true);
-	m->rt.set_width(w - 2 * MARGIN);
-	m->rt.set_background_color(RGBColor(50, 50, 50));
 }
 
 ChatOverlay::~ChatOverlay()
@@ -67,9 +71,19 @@ ChatOverlay::~ChatOverlay()
 void ChatOverlay::setChatProvider(ChatProvider & chat)
 {
 	m->chat = &chat;
-	m->connect(chat);
+	Widelands::NoteReceiver<ChatMessage>* cmr
+		= dynamic_cast<Widelands::NoteReceiver<ChatMessage>*>(m.get());
+	cmr->connect(chat);
 	m->recompute();
 }
+
+void ChatOverlay::setLogProvider(Widelands::NoteSender<LogMessage>& log_sender)
+{
+	Widelands::NoteReceiver<LogMessage>* lmr
+		= dynamic_cast<Widelands::NoteReceiver<LogMessage>*>(m.get());
+	lmr->connect(log_sender);
+}
+
 
 /**
  * Check for message expiry.
@@ -90,6 +104,13 @@ void ChatOverlay::Impl::receive(const ChatMessage & /* note */)
 	recompute();
 }
 
+void ChatOverlay::Impl::receive(const LogMessage& note)
+{
+	log_messages.push_back(note);
+	recompute();
+}
+
+
 /**
  * Recompute the chat message display.
  */
@@ -99,18 +120,54 @@ void ChatOverlay::Impl::recompute()
 
 	havemessages = false;
 
-	const std::vector<ChatMessage> & msgs = chat->getMessages();
-	uint32_t idx = msgs.size();
+	// Parse the chat message list as well as the log message list
+	// and display them in chronological order
+	int32_t chat_idx = chat != nullptr ? chat->getMessages().size() - 1 : -1;
+	int32_t log_idx = log_messages.empty() ? -1 : log_messages.size() - 1;
+	int32_t msg_time = now;
 	std::string richtext;
-	while (idx && now - msgs[idx - 1].time <= CHAT_DISPLAY_TIME) {
-		richtext = msgs[idx - 1].toPrintable() + richtext;
+
+	while ((chat_idx >= 0 || log_idx >= 0) && now - msg_time < CHAT_DISPLAY_TIME) {
+		if
+			(chat_idx < 0  ||
+				(log_idx >= 0 && chat->getMessages()[chat_idx].time < log_messages[log_idx].time))
+		{
+			// Log message is more recent
+			msg_time = log_messages[log_idx].time;
+			// Do some richtext formatting here
+			richtext = "<p><font face=DejaVuSerif size=14 color=dddddd bold=1>"
+				+ log_messages[log_idx].msg + "<br></font></p>" + richtext;
+			log_idx--;
+		} else if
+			(log_idx < 0 ||
+				(chat_idx >= 0 && chat->getMessages()[chat_idx].time >= log_messages[log_idx].time))
+		{
+			// Chat message is more recent
+			msg_time = chat->getMessages()[chat_idx].time;
+			richtext = chat->getMessages()[chat_idx].toPrintable()
+				+ richtext;
+			chat_idx--;
+		} else {
+			// Shoudn't happen
+			assert(false);
+		}
 		havemessages = true;
-		oldest = msgs[idx - 1].time;
-		idx--;
+		oldest = msg_time;
 	}
 
-	if (havemessages)
-		rt.parse("<rt>" + richtext + "</rt>");
+	// Parse log messages to clear old ones
+	while (!log_messages.empty()) {
+		msg_time = log_messages.front().time;
+		if (msg_time < now - CHAT_DISPLAY_TIME) {
+			log_messages.erase(log_messages.begin());
+		} else {
+			break;
+		}
+	}
+
+	if (havemessages) {
+		all_text = "<rt>" + richtext + "</rt>";
+	}
 }
 
 void ChatOverlay::draw(RenderTarget & dst)
@@ -118,8 +175,19 @@ void ChatOverlay::draw(RenderTarget & dst)
 	if (!m->havemessages)
 		return;
 
-	int32_t height = m->rt.height();
+	const Image* im = UI::g_fh1->render(m->all_text, get_w());
+	// Background
+	int32_t height = im->height() > get_h() ? get_h() : im->height();
 	int32_t top = get_h() - height - 2 * MARGIN;
 
-	m->rt.draw(dst, Point(MARGIN, top + MARGIN), !m->transparent);
+	//FIXME: alpha channel not respected
+	if (!m->transparent) {
+		Rect rect(0, top, im->width(), height);
+		dst.fill_rect(rect, RGBAColor(50, 50, 50, 128));
+	}
+	int32_t topcrop = im->height() - height;
+	Rect cropRect(0, topcrop, im->width(), height);
+
+	Point pt(0, top);
+	dst.blitrect(pt, im, cropRect);
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2011 by the Widelands Development Team
+ * Copyright (C) 2008-2011 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -17,32 +17,25 @@
  *
  */
 
-#ifndef CHATOVERLAY_H
-#define CHATOVERLAY_H
+#ifndef LOGMESSAGE_H
+#define LOGMESSAGE_H
 
-#include "logic/notification.h"
-#include "ui_basic/panel.h"
+#include <string>
 
-struct ChatProvider;
-struct LogMessage;
 
 /**
- * The overlay that displays all new chat messages for some timeout on the main window.
- *
- * \see GameChatPanel, GameChatMenu
+ * Represents one log message.
  */
-struct ChatOverlay : public UI::Panel {
-	ChatOverlay(UI::Panel * parent, int32_t x, int32_t y, int32_t w, int32_t h);
-	~ChatOverlay();
+struct LogMessage {
+	/**
+	 * The (real-)time at which the message was received.
+	 */
+	time_t time;
 
-	void setChatProvider(ChatProvider &);
-	void setLogProvider(Widelands::NoteSender<LogMessage> &);
-	virtual void draw(RenderTarget &);
-	virtual void think();
-
-private:
-	struct Impl;
-	std::unique_ptr<Impl> m;
+	/**
+	 * The actual chat message
+	 */
+	std::string msg;
 };
 
-#endif // CHATOVERLAY_H
+#endif

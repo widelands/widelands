@@ -235,7 +235,7 @@ struct Panel : boost::signals2::trackable, boost::noncopyable {
 	std::string ui_fn();
 
 protected:
-	void die();
+	virtual void die();
 	bool keyboard_free() {return !(_focus);}
 
 	virtual void update_desired_size();

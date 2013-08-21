@@ -2226,7 +2226,9 @@ void WLApplication::replay()
 		game.set_write_replay(false);
 		ReplayGameController rgc(game, m_filename);
 
-		game.run(&loaderUI, Widelands::Game::Loaded);
+		game.save_handler().set_allow_saving(false);
+
+		game.run(&loaderUI, Widelands::Game::Loaded, true);
 	} catch (const std::exception & e) {
 		log("Fatal Exception: %s\n", e.what());
 		emergency_save(game);

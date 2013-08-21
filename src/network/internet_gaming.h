@@ -113,9 +113,6 @@ struct InternetGaming : public ChatProvider {
 	// ChatProvider: sends a message via the metaserver.
 	void send(const std::string &);
 
-	// ChatProvider: sends local messages
-	void send_local(const std::string &);
-
 	/// ChatProvider: adds the message to the message list and calls parent.
 	void receive(const ChatMessage & msg) {messages.push_back(msg); ChatProvider::send(msg);}
 

@@ -52,7 +52,8 @@ void GameChatPanel::recalculate()
 
 	std::string str = "<rt>";
 	for (uint32_t i = 0; i < msgs.size(); ++i) {
-		str += msgs[i].toPrintable();
+		// FIXME use toPrintable() when old renderer is kicked out
+		str += msgs[i].toOldRichText();
 		str += '\n';
 	}
 	str += "</rt>";

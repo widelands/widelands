@@ -19,7 +19,6 @@
 
 #include "gamecontroller.h"
 
-#include "chat.h"
 #include "computer_player.h"
 #include "logic/game.h"
 #include "logic/player.h"
@@ -27,9 +26,8 @@
 #include "logic/playersmanager.h"
 #include "profile/profile.h"
 #include "wlapplication.h"
-#include "wui/interactive_player.h"
 
-struct SinglePlayerGameController : public GameController, public ChatProvider {
+struct SinglePlayerGameController : public GameController {
 	SinglePlayerGameController
 		(Widelands::Game &, bool useai, Widelands::Player_Number local);
 	~SinglePlayerGameController();
@@ -46,10 +44,6 @@ struct SinglePlayerGameController : public GameController, public ChatProvider {
 	void setPaused(bool paused);
 	void report_result(uint8_t player, Widelands::PlayerEndResult result, const std::string & info);
 
-	// Chat provider implementation
-	void send(const std::string & msg);
-	void send_local(const std::string & msg);
-	const std::vector<ChatMessage> & getMessages() const;
 private:
 	Widelands::Game & m_game;
 	bool m_useai;
@@ -60,15 +54,13 @@ private:
 	uint32_t m_player_cmdserial;
 	Widelands::Player_Number m_local;
 	std::vector<Computer_Player *> m_computerplayers;
-	std::vector<ChatMessage> m_chatmessages;
 };
 
 SinglePlayerGameController::SinglePlayerGameController
 	(Widelands::Game        &       game,
 	 bool                     const useai,
 	 Widelands::Player_Number const local)
-	: ChatProvider(),
-	m_game            (game),
+	: m_game          (game),
 	m_useai           (useai),
 	m_lastframe       (WLApplication::get()->get_time()),
 	m_time            (m_game.get_gametime()),
@@ -178,31 +170,11 @@ void SinglePlayerGameController::report_result
 	m_game.player_manager()->add_player_end_status(pes);
 }
 
-void SinglePlayerGameController::send_local(const std::string& msg)
-{
-	ChatMessage c;
-	c.msg = msg;
-	c.time = time(0);
-	m_chatmessages.push_back(c);
-	ChatProvider::send(c);
-}
-
-void SinglePlayerGameController::send(const std::string& /* msg */)
-{
-	log("SinglePlayerGameController:: Cannot send chat messages in single player game!");
-}
-
-const std::vector< ChatMessage >& SinglePlayerGameController::getMessages() const
-{
-	return m_chatmessages;
-}
-
 GameController * GameController::createSinglePlayer
 	(Widelands::Game        &       game,
 	 bool                     const cpls,
 	 Widelands::Player_Number const local)
 {
 	SinglePlayerGameController* spgc =  new SinglePlayerGameController(game, cpls, local);
-	game.get_ipl()->set_chat_provider(*spgc);
 	return spgc;
 }

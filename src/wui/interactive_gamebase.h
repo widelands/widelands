@@ -24,7 +24,6 @@
 #include "wui/interactive_base.h"
 #include "logic/game.h"
 
-struct ChatOverlay;
 struct ChatProvider;
 
 enum PlayerType {NONE, OBSERVER, PLAYING, VICTORIOUS, DEFEATED};
@@ -51,7 +50,8 @@ public:
 		(Widelands::Game &,
 		 Section         & global_s,
 		 PlayerType        pt          = NONE,
-		 bool              chatenabled = false);
+		 bool              chatenabled = false,
+		 bool              multiplayer = false);
 	Widelands::Game * get_game() const;
 	Widelands::Game &     game() const;
 
@@ -78,17 +78,18 @@ public:
 	void set_playertype(const PlayerType & pt) {m_playertype = pt;}
 
 	bool try_show_ship_window();
+	bool is_multiplayer() {return m_multiplayer;}
 
 	void show_game_summary();
 
 protected:
 	Game_Main_Menu_Windows m_mainm_windows;
 	ChatProvider           * m_chatProvider;
-	ChatOverlay            * m_chatOverlay;
 	std::string              m_building_census_format;
 	std::string              m_building_statistics_format;
 	std::string              m_building_tooltip_format;
 	bool                     m_chatenabled;
+	bool                     m_multiplayer;
 
 	PlayerType m_playertype;
 	UI::UniqueWindow::Registry m_fieldaction;
