@@ -315,6 +315,8 @@ void Map::cleanup() {
 	m_scenario_closeables.clear();
 
 	m_tags.clear();
+	m_hint = std::string();
+	m_background = std::string();
 
 	if (m_overlay_manager)
 		m_overlay_manager->reset();
