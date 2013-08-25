@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: Widelands svn4575\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2013-08-15 18:02+0200\n"
-"PO-Revision-Date: 2013-08-23 16:29+0000\n"
+"PO-Revision-Date: 2013-08-24 15:32+0000\n"
 "Last-Translator: fk <Unknown>\n"
 "Language-Team: Dutch <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2013-08-24 04:33+0000\n"
+"X-Launchpad-Export-Date: 2013-08-25 04:32+0000\n"
 "X-Generator: Launchpad (build 16738)\n"
 "X-Poedit-Country: NETHERLANDS\n"
 "X-Poedit-Language: Dutch\n"
@@ -1010,7 +1010,7 @@ msgstr "speler %u: %s"
 #: ../../src/map_io/widelands_map_player_position_data_packet.cc:61
 #, c-format
 msgid "player positions: %s"
-msgstr "Speler Posities: %s"
+msgstr "speler posities: %s"
 
 #: ../../src/map_io/widelands_map_roaddata_data_packet.cc:129
 msgid "no carrier slot"
@@ -1056,15 +1056,16 @@ msgid ""
 "forever, which is the default; omit the duration key to make the message "
 "exist forever"
 msgstr ""
-"De waarde %u is niet toegestaan alstijdsduur; het is de standaardwaarde "
-"voorzonder tijdslimiet. Laat de waarde leeg om de boodschap te laten bestaan."
+"De waarde %u is niet toegestaan als tijdsduur; het is de standaardwaarde "
+"voor zonder tijdslimiet; laat de waarde leeg om de boodschap voorgoed te "
+"laten bestaan."
 
 #: ../../src/map_io/widelands_map_players_messages_data_packet.cc:112
 #, c-format
 msgid ""
 "duration %u is too large; causes numeric overflow when added to sent time %u"
 msgstr ""
-"duur %u is te groot; veroorzaakt numerieke overloop als ze aan verstuurde "
+"duur %u is te lang; veroorzaakt numerieke overloop als ze aan verstuurde "
 "tijd %u wordt toegevoegd"
 
 #: ../../src/map_io/widelands_map_players_messages_data_packet.cc:118

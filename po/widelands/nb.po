@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2013-08-15 18:02+0200\n"
-"PO-Revision-Date: 2013-08-06 17:52+0000\n"
+"PO-Revision-Date: 2013-08-24 12:36+0000\n"
 "Last-Translator: Hans Joachim Desserud <Unknown>\n"
 "Language-Team: Norwegian Bokmal <nb@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2013-08-16 04:39+0000\n"
-"X-Generator: Launchpad (build 16723)\n"
+"X-Launchpad-Export-Date: 2013-08-25 04:32+0000\n"
+"X-Generator: Launchpad (build 16738)\n"
 
 #: ../../src/save_handler.cc:73
 msgid "Saving game..."
@@ -1325,6 +1325,8 @@ msgid ""
 "This is a dedicated server. Send \"@%s help\" to get a full list of "
 "available commands."
 msgstr ""
+"Dette er en dedikert tjener. Send \"@%s help\" for å få en full liste over "
+"tilgjengelige kommandoer."
 
 #: ../../src/network/nethost.cc:1208
 msgid ""
@@ -1360,7 +1362,7 @@ msgstr "Beklager! Lagring har blitt slått av på denne dedikerte tjeneren!"
 
 #: ../../src/network/nethost.cc:1244
 msgid "Can not save, as long as no game is running!"
-msgstr ""
+msgstr "Kan ikke lagre, ingen spill som kjører!"
 
 #: ../../src/network/nethost.cc:1255
 msgid "Game successfully saved!"
@@ -1411,7 +1413,7 @@ msgstr "Klient krasjet og foretok en nødlagring."
 
 #: ../../src/network/network_gaming_messages.cc:124
 msgid "Connection was lost."
-msgstr ""
+msgstr "Tilkoblingen ble brutt."
 
 #: ../../src/network/network_gaming_messages.cc:125
 msgid "Server has left the game."
@@ -1581,7 +1583,7 @@ msgstr "Spilleren «%s» ble beseiret og ble en tilskuer."
 #: ../../src/network/network_gaming_messages.cc:162
 #, c-format
 msgid "Client %s did not answer for more than %s seconds."
-msgstr ""
+msgstr "Klient %s svarte ikke på mer enn %s sekunder."
 
 #: ../../src/network/network_gaming_messages.cc:164
 #, c-format
@@ -1619,7 +1621,7 @@ msgstr "Tilkobling ble lukket av klienten på vanlig vis."
 
 #: ../../src/network/internet_gaming_messages.cc:53
 msgid "The connection to the metaserver was lost."
-msgstr ""
+msgstr "Tilkoblingen til metatjeneren ble brutt."
 
 #: ../../src/network/internet_gaming_messages.cc:54
 msgid "Metaserver did not answer"
@@ -1785,7 +1787,7 @@ msgstr "Konvertering fra std::string til bool feilet. Strengen var «%s»"
 #: ../../src/scripting/lua_game.cc:1088
 #, c-format
 msgid " (achieved %s)"
-msgstr ""
+msgstr " (oppnådde %s)"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:51
 msgid "Please select"
@@ -2305,7 +2307,7 @@ msgstr "Spillere:"
 
 #: ../../src/ui_fsmenu/loadgame.cc:105
 msgid "Minimap:"
-msgstr ""
+msgstr "Minikart:"
 
 #: ../../src/ui_fsmenu/loadgame.cc:157 ../../src/ui_fsmenu/loadreplay.cc:138
 msgid "Delete file"
@@ -2364,7 +2366,7 @@ msgstr "Beskr.:"
 #: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:224
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:297
 msgid "parent"
-msgstr ""
+msgstr "forelder"
 
 #: ../../src/ui_fsmenu/intro.cc:32
 msgid "Press ESC or click to continue ..."
@@ -2447,7 +2449,7 @@ msgstr "Offisielt kart"
 
 #: ../../src/ui_fsmenu/mapselect.cc:172
 msgid "Seafaring Map"
-msgstr ""
+msgstr "Sjøfartskart"
 
 #: ../../src/ui_fsmenu/mapselect.cc:175
 msgid "1v1"
@@ -2482,6 +2484,8 @@ msgid ""
 "This map file is not present on your filesystem. Data shown here was sent by "
 "the server."
 msgstr ""
+"Denne kartfilen finnes ikke i filsystemet ditt. Informasjonen som er vist "
+"her ble sendt av tjeneren."
 
 #: ../../src/ui_fsmenu/internet_lobby.cc:52
 msgid "Metaserver Lobby"
@@ -2506,7 +2510,7 @@ msgstr "Maksimalt antall spillere:"
 #: ../../src/ui_fsmenu/internet_lobby.cc:81
 #: ../../src/ui_fsmenu/netsetup_lan.cc:61
 msgid "Join this game"
-msgstr ""
+msgstr "Delta i dette spillet"
 
 #: ../../src/ui_fsmenu/internet_lobby.cc:86
 msgid "Open a new game"
@@ -2827,15 +2831,15 @@ msgstr "Vil du virkelig oppgradere %s?"
 
 #: ../../src/wui/actionconfirm.cc:402 ../../src/wui/actionconfirm.cc:443
 msgid "Sink the ship?"
-msgstr ""
+msgstr "Senk skipet?"
 
 #: ../../src/wui/actionconfirm.cc:402
 msgid "Do you really want to sink this ship?"
-msgstr ""
+msgstr "Er du sikker på at du vil senke dette skipet?"
 
 #: ../../src/wui/actionconfirm.cc:443
 msgid "Do you really want to cancel the active expedition?"
-msgstr ""
+msgstr "Er du sikker på at du vil avbryte den gjeldende ekspedisjonen?"
 
 #: ../../src/wui/fieldaction.cc:112 ../../src/wui/buildingwindow.cc:240
 msgid "Construction costs:"
@@ -2960,7 +2964,7 @@ msgstr ""
 
 #: ../../src/wui/buildingwindow.cc:279
 msgid "Returns:"
-msgstr ""
+msgstr "Gjenvinner:"
 
 #: ../../src/wui/buildingwindow.cc:311 ../../src/wui/buildingwindow.cc:514
 msgid "Hide workarea"
@@ -3001,7 +3005,7 @@ msgstr "Foretrekk helter"
 
 #: ../../src/wui/trainingsitewindow.cc:58
 msgid "Soldiers in training"
-msgstr ""
+msgstr "Soldater som trener"
 
 #: ../../src/wui/game_message_menu.cc:46
 #: ../../src/wui/game_message_menu.cc:373
