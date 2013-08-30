@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2003, 2006-2011 by the Widelands Development Team
+ * Copyright (C) 2002-2003, 2006-2011, 2013 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -65,18 +65,17 @@ const std::string & BaseImmovable::name() const throw () {
  * Associate the given field with this immovable. Recalculate if necessary.
  *
  * Only call this during init.
-*/
+ *
+ * \note this function will remove the immovable (if existing) currently connected to this position.
+ */
 void BaseImmovable::set_position(Editor_Game_Base & egbase, Coords const c)
 {
 	assert(c);
 
 	Map & map = egbase.map();
 	FCoords f = map.get_fcoords(c);
-	if (f.field->immovable && f.field->immovable != this) {
-		assert(f.field->immovable->get_size() == NONE);
-
+	if (f.field->immovable && f.field->immovable != this)
 		f.field->immovable->remove(egbase);
-	}
 
 	f.field->immovable = this;
 
