@@ -385,7 +385,10 @@ void Ship::refresh_window(Interactive_GameBase & igb) {
 		Point window_position = m_window->get_pos();
 		close_window();
 		show_window(igb, true);
-		m_window->set_pos(window_position);
+		// show window could theoretically fail if refresh_window was called at the very same moment
+		// as the ship begins to sink
+		if (m_window)
+			m_window->set_pos(window_position);
 	}
 }
 
