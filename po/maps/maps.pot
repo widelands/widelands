@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2013-08-15 16:02+0000\n"
+"POT-Creation-Date: 2013-08-30 12:55+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -44,7 +44,7 @@ msgid ""
 "03 - This Land is our Land"
 msgstr ""
 
-#: ../../maps/Map Contest/Long, long way.wmf/elemental:11
+#: ../../maps/Long, long way.wmf/elemental:11
 msgid ""
 ">Where dat? A thousand miles from here.< [Porgy and Bess] You have to go long, long way to conquere all the islands. Good luck!"
 msgstr ""
@@ -79,12 +79,12 @@ msgid ""
 "After an impact of an asteroid and the following harsh winter, three isles are connected by ice and stone, setting an end to the peaceful coexistence of three tribes."
 msgstr ""
 
-#: ../../maps/Map Contest/Ice wars.wmf/elemental:11
+#: ../../maps/Ice wars.wmf/elemental:11
 msgid ""
 "After autumn is winter. Some things are frozen, but not the war."
 msgstr ""
 
-#: ../../maps/Map Contest/Kings and Queens.wmf/elemental:11
+#: ../../maps/Kings and Queens.wmf/elemental:11
 msgid ""
 "An old legend tells that these seven kingdoms, that have flourished for ages in prosperity, will someday collapse into a devastating war. Has your latest betrayal been one too many and will the prophecy come true?"
 msgstr ""
@@ -114,7 +114,7 @@ msgid ""
 "Barbarians - The second Empire"
 msgstr ""
 
-#: ../../maps/Map Contest/Calvisson.wmf/elemental:9
+#: ../../maps/Calvisson.wmf/elemental:9
 msgid ""
 "Calvisson"
 msgstr ""
@@ -129,9 +129,9 @@ msgid ""
 "Checkmate"
 msgstr ""
 
-#: ../../maps/Map Contest/Fellowships.wmf/elemental:11
+#: ../../maps/Fellowships.wmf/elemental:11
 msgid ""
-"Coal it tough to find - learn to make it efficiently. Starting positions are similar, map should be fair. There is plenty of gold near the starting point -- Do you see it?"
+"Coal is tough to find - learn to make it efficiently. Starting positions are similar, map should be fair. There is plenty of gold near the starting point - Do you see it?"
 msgstr ""
 
 #: ../../maps/Comet Island.wmf/elemental:7
@@ -159,7 +159,7 @@ msgid ""
 "Dry Riverbed"
 msgstr ""
 
-#: ../../maps/Map Contest/River Explorers.wmf/elemental:11
+#: ../../maps/River Explorers.wmf/elemental:11
 msgid ""
 "Each player has a different obstacle to expansion, and there's always more than one way to overcome it. While the AI can be defeated here without building a single ship, players are advised to make ports and shipyards a priority - expeditions are universally useful and are often the fastest way to gold deposits."
 msgstr ""
@@ -189,7 +189,7 @@ msgid ""
 "Empire - The Months of Exile"
 msgstr ""
 
-#: ../../maps/Map Contest/Fellowships.wmf/elemental:9
+#: ../../maps/Fellowships.wmf/elemental:9
 msgid ""
 "Fellowships"
 msgstr ""
@@ -239,7 +239,7 @@ msgid ""
 "Golden Peninsula"
 msgstr ""
 
-#: ../../maps/Map Contest/Ice wars.wmf/elemental:9
+#: ../../maps/Ice wars.wmf/elemental:9
 msgid ""
 "Ice wars"
 msgstr ""
@@ -254,7 +254,7 @@ msgid ""
 "In the middle of the summer a bunch of volcanic eruptions drew the winter in. Suddenly the sun seems to be gone and the only light and heat sources left are those, who enforced this dramatic change. Continents, oceans and seas are freezing, only the volcanic islands seem to be left as habitable land."
 msgstr ""
 
-#: ../../maps/Map Contest/Trident of Fire.wmf/elemental:11
+#: ../../maps/Trident of Fire.wmf/elemental:11
 msgid ""
 "In the whereabouts of three major volcanos six lovely islands are inviting settlers to start a new life. Deserts and a quickly growing forest wait to be discovered. But only by becoming a naval power your tribe will be able to explore enough resources to compete with its opponents."
 msgstr ""
@@ -304,12 +304,12 @@ msgid ""
 "It was a long time ago, since the last raindrop touched these grounds. No wonder, that there is not much water left in this dry riverbed. Everyone knows: soon there will be a war. A war about the last of water."
 msgstr ""
 
-#: ../../maps/Map Contest/Calvisson.wmf/elemental:11
+#: ../../maps/Calvisson.wmf/elemental:11
 msgid ""
 "It's a pleasure to settle in the beauty of this fissured countryside. But the ways to encompass these large territories are long and meandering, so it is easy to err in the land of the foreign clans."
 msgstr ""
 
-#: ../../maps/Map Contest/Kings and Queens.wmf/elemental:9
+#: ../../maps/Kings and Queens.wmf/elemental:9
 msgid ""
 "Kings and Queens"
 msgstr ""
@@ -329,7 +329,7 @@ msgid ""
 "Long after a meteor crashed into a couple of mountains, life blossoms in the crater. Two tribes are now fighting for the rich resources."
 msgstr ""
 
-#: ../../maps/Map Contest/Long, long way.wmf/elemental:9
+#: ../../maps/Long, long way.wmf/elemental:9
 msgid ""
 "Long, long way"
 msgstr ""
@@ -370,7 +370,7 @@ msgid ""
 "Rendez-Vous"
 msgstr ""
 
-#: ../../maps/Map Contest/River Explorers.wmf/elemental:9
+#: ../../maps/River Explorers.wmf/elemental:9
 msgid ""
 "River Explorers"
 msgstr ""
@@ -422,7 +422,7 @@ msgid ""
 "Suggested Teams: all ok."
 msgstr ""
 
-#: ../../maps/Map Contest/Calvisson.wmf/elemental:12
+#: ../../maps/Calvisson.wmf/elemental:12
 msgid ""
 "Suggested Teams: blue vs red, yellow vs green, (blue, yellow) vs (red, green), (blue, green) vs (red, yellow)"
 msgstr ""
@@ -447,7 +447,7 @@ msgid ""
 "The Green Plateau"
 msgstr ""
 
-#: ../../maps/Map Contest/The Nile.wmf/elemental:9
+#: ../../maps/The Nile.wmf/elemental:9
 msgid ""
 "The Nile"
 msgstr ""
@@ -492,9 +492,9 @@ msgid ""
 "The pass through the mountains"
 msgstr ""
 
-#: ../../maps/Map Contest/The Nile.wmf/elemental:11
+#: ../../maps/The Nile.wmf/elemental:11
 msgid ""
-"The river always provides food and comunication. This time eight empires will fight for the control over this land."
+"The river always provides food and communication. This time eight empires will fight for the control over this land."
 msgstr ""
 
 #: ../../maps/Mystical Maze.wmf/elemental:11
@@ -522,9 +522,9 @@ msgid ""
 "This lake, deep in the most ancient forests, has long been known for its beauty and idyllic peace. Yet, its sanctity has been disturbed now, as two hostile tribes arrive at its shores..."
 msgstr ""
 
-#: ../../maps/Map Contest/Fellowships.wmf/elemental:12
+#: ../../maps/Fellowships.wmf/elemental:12
 msgid ""
-"This map suits best 3 human players, with game speed somewhat above the normal value. AI performs badly at the time of writing (2013)"
+"This map is best suited for three human players, with game speed somewhat above the normal value. AI performs badly at the time of writing (2013)."
 msgstr ""
 
 #: ../../maps/Three Warriors.wmf/elemental:9
@@ -537,12 +537,12 @@ msgid ""
 "Together we're strong"
 msgstr ""
 
-#: ../../maps/Map Contest/Trident of Fire.wmf/elemental:9
+#: ../../maps/Trident of Fire.wmf/elemental:9
 msgid ""
 "Trident of Fire"
 msgstr ""
 
-#: ../../maps/Map Contest/Twin Lagoons.wmf/elemental:9
+#: ../../maps/Twin Lagoons.wmf/elemental:9
 msgid ""
 "Twin Lagoons"
 msgstr ""
@@ -587,9 +587,9 @@ msgid ""
 "When the God lost faith in the Atlanteans and drowned their island, one woman's struggle for justice and a second chance for her people would become the stuff of legends. Leading the remaining Atlanteans into a new future in a new part of the World, Jundlina became the most powerful human of her time, but at a high cost: her humanity and soul."
 msgstr ""
 
-#: ../../maps/Map Contest/Twin Lagoons.wmf/elemental:11
+#: ../../maps/Twin Lagoons.wmf/elemental:11
 msgid ""
-"When the wind swelled up and the first dunes were formed on these abandoned twin lagoons nobody could have expected that two tribes, that are desperately searching for more resources to support there endlessly ongoing wars, would end up in this forgotten place at the same time and for the same well-known reason. Defend your transport lines or use ships to bypass the opponent. Then remove all enemy activity."
+"When the wind swelled up and the first dunes were formed on these abandoned twin lagoons nobody could have expected that two tribes that are desperately searching for more resources to support their endlessly ongoing wars would end up in this forgotten place at the same time and for the same well-known reason. Defend your transport lines or use ships to bypass the opponent. Then remove all enemy activity."
 msgstr ""
 
 #: ../../maps/Checkmate.wmf/elemental:9
