@@ -8,6 +8,6 @@ nr_players="8"
 world="desert"
 name=_"The Nile"
 author="Einstein13"
-descr=_"The river always provides food and comunication. This time eight empires will fight for the control over this land."
+descr=_"The river always provides food and communication. This time eight empires will fight for the control over this land."
 hint=
 tags="official,seafaring"
