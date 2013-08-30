@@ -7,35 +7,35 @@ msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2013-08-12 12:44+0000\n"
-"PO-Revision-Date: 2011-12-07 10:37+0000\n"
-"Last-Translator: Foppe Benedictus <Unknown>\n"
+"POT-Creation-Date: 2013-08-15 16:02+0000\n"
+"PO-Revision-Date: 2013-08-19 13:04+0000\n"
+"Last-Translator: fk <fredkuijper@yahoo.com>\n"
 "Language-Team: Dutch <nl@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-08-13 04:41+0000\n"
+"X-Launchpad-Export-Date: 2013-08-20 04:34+0000\n"
 "X-Generator: Launchpad (build 16723)\n"
 
 #: ../../scripting/win_condition_texts.lua:31
 msgid "%i trees."
-msgstr ""
+msgstr "%i bomen."
 
 #: ../../scripting/win_condition_texts.lua:55
 msgid "%s %s %i%% of the land (%i of %i)."
-msgstr ""
+msgstr "%s %s %i%% van het land (%i of %i)."
 
 #: ../../scripting/win_condition_texts.lua:30
 msgid "%s had "
-msgstr ""
+msgstr "%s had "
 
 #: ../../scripting/win_condition_texts.lua:28
 msgid "%s has %i trees at the moment."
-msgstr ""
+msgstr "%s heeft op dit moment %i bomen."
 
 #: ../../scripting/win_condition_texts.lua:46
 msgid "%s owns more than half of the maps area."
-msgstr ""
+msgstr "%s bezit meer dan de helft van de kaart."
 
 #: ../../scripting/win_conditions/04_wood_gnome.lua:16
 msgid ""
@@ -58,7 +58,7 @@ msgstr "Verzamelaars"
 
 #: ../../scripting/win_condition_texts.lua:2
 msgid "Congratulations!"
-msgstr ""
+msgstr "Gefeliciteerd!"
 
 #: ../../scripting/win_conditions/03_territorial_time.lua:15
 msgid ""
@@ -67,6 +67,10 @@ msgid ""
 "least 20 minutes or the one with the most territory after 4 hours, whichever "
 "comes first."
 msgstr ""
+"Elke speler of elk team probeert meer dan de helft van de kaart te "
+"veroveren. De winnaar zal degene (speler of team) zijn die in staat is dat "
+"gebied minstens 20 minuten te behouden of degene met het grootste "
+"territorium na 4 uur, wat zich als eerste voordoet."
 
 #: ../../scripting/win_conditions/03_territorial_lord.lua:15
 msgid ""
@@ -88,32 +92,32 @@ msgstr "Eindeloos spel (geen mist)"
 
 #: ../../scripting/win_condition_texts.lua:49
 msgid "Keep it for %i more minutes to win the game."
-msgstr ""
+msgstr "Behoudt het nog %i minuten langer om het spel te winnen."
 
 #: ../../scripting/win_condition_texts.lua:54
 msgid "Otherwise the game will end in %i minutes."
-msgstr ""
+msgstr "Anders zal het spel eindigen in %i minuten."
 
 #: ../../scripting/win_condition_texts.lua:23
 #: ../../scripting/win_condition_texts.lua:29
 msgid "Player overview:"
-msgstr ""
+msgstr "Spelersoverzicht:"
 
 #: ../../scripting/win_condition_texts.lua:41
 msgid "Points"
-msgstr ""
+msgstr "Punten"
 
 #: ../../scripting/win_condition_texts.lua:22
 msgid "Status"
-msgstr ""
+msgstr "Status"
 
 #: ../../scripting/win_condition_texts.lua:38
 msgid "Status for %s<br>"
-msgstr ""
+msgstr "Status van %s<br>"
 
 #: ../../scripting/win_condition_texts.lua:45
 msgid "Team %i"
-msgstr ""
+msgstr "Team %i"
 
 #: ../../scripting/win_conditions/03_territorial_lord.lua:13
 msgid "Territorial Lord"
@@ -121,16 +125,16 @@ msgstr "Landheer"
 
 #: ../../scripting/win_conditions/03_territorial_time.lua:13
 msgid "Territorial Time"
-msgstr ""
+msgstr "Territoriale Tijd"
 
 #: ../../scripting/win_condition_texts.lua:27
 #: ../../scripting/win_condition_texts.lua:53
 msgid "The game will end in %i minutes."
-msgstr ""
+msgstr "Het spel zal eindigen over %i minuten."
 
 #: ../../scripting/win_condition_texts.lua:40
 msgid "The game will end in %s."
-msgstr ""
+msgstr "Het spel zal eindigen in %s."
 
 #: ../../scripting/win_conditions/01_defeat_all.lua:14
 msgid "The tribe or team that can defeat all others wins the game!"
@@ -138,7 +142,7 @@ msgstr "De stam of team die alle anderen verslaat wint het spel!"
 
 #: ../../scripting/win_condition_texts.lua:32
 msgid "The winner is %s "
-msgstr ""
+msgstr "De winnaar is %s "
 
 #: ../../scripting/win_conditions/00_endless_game.lua:14
 msgid "This is an endless game without rules."
@@ -150,11 +154,11 @@ msgstr "Dit is een spel zonder eind en regels. Oorlogsmist is uitgeschakeld."
 
 #: ../../scripting/win_condition_texts.lua:39
 msgid "Total: %i points"
-msgstr ""
+msgstr "Totaal: %i punten"
 
 #: ../../scripting/win_condition_texts.lua:34
 msgid "Trees owned"
-msgstr ""
+msgstr "Bomen in bezit"
 
 #: ../../scripting/win_conditions/04_wood_gnome.lua:13
 msgid "Wood Gnome"
@@ -162,11 +166,11 @@ msgstr "Boskabouter"
 
 #: ../../scripting/win_condition_texts.lua:7
 msgid "You are defeated!"
-msgstr ""
+msgstr "Je bent verslagen!"
 
 #: ../../scripting/win_condition_texts.lua:13
 msgid "You are the winner!"
-msgstr ""
+msgstr "Je bent de winnaar!"
 
 #: ../../scripting/win_conditions/02_collectors.lua:15
 msgid ""
@@ -178,34 +182,36 @@ msgstr ""
 
 #: ../../scripting/win_condition_texts.lua:3
 msgid "You have won this game!"
-msgstr ""
+msgstr "Je hebt het spel gewonnen!"
 
 #: ../../scripting/win_condition_texts.lua:17
 msgid "You lost"
-msgstr ""
+msgstr "Je hebt verloren"
 
 #: ../../scripting/win_condition_texts.lua:8
 msgid ""
 "You lost your last warehouse and are therefore defeated. You may continue as "
 "spectator if you want."
 msgstr ""
+"Je hebt je laatste magazijn verloren en bent daarom verslagen. Je mag "
+"doorgaan als toeschouwer als je wilt."
 
 #: ../../scripting/win_condition_texts.lua:48
 msgid "You own more than half of the maps area."
-msgstr ""
+msgstr "Je bezit meer dan de helft van de kaart."
 
 #: ../../scripting/win_condition_texts.lua:47
 msgid "You still got %i minutes to prevent a victory."
-msgstr ""
+msgstr "Je hebt nog %i minuten om een overwinning te voorkomen."
 
 #: ../../scripting/win_condition_texts.lua:12
 msgid "You won"
-msgstr ""
+msgstr "Je hebt gewonnen"
 
 #: ../../scripting/win_condition_texts.lua:18
 msgid "You've lost this game!"
-msgstr ""
+msgstr "Je hebt dit spel verloren!"
 
 #: ../../scripting/win_condition_texts.lua:33
 msgid "with %i trees."
-msgstr ""
+msgstr "met %i bomen."

@@ -6,14 +6,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4804\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2013-08-12 12:44+0000\n"
-"PO-Revision-Date: 2013-08-13 20:55+0000\n"
+"POT-Creation-Date: 2013-08-15 16:02+0000\n"
+"PO-Revision-Date: 2013-08-19 21:12+0000\n"
 "Last-Translator: Wesmania <ikk_pl@yahoo.co.uk>\n"
 "Language-Team: Language <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-08-14 04:34+0000\n"
+"X-Launchpad-Export-Date: 2013-08-20 04:34+0000\n"
 "X-Generator: Launchpad (build 16723)\n"
 
 #: ../../campaigns/cconfig:64
@@ -39,6 +39,14 @@ msgstr "02 - Obóz dla wygnańców"
 #: ../../campaigns/cconfig:74
 msgid "03 - This Land is our Land"
 msgstr "03 - Ten kraj jest nasz"
+
+#: ../../maps/Map Contest/Long, long way.wmf/elemental:11
+msgid ""
+">Where dat? A thousand miles from here.< [Porgy and Bess] You have to go "
+"long, long way to conquere all the islands. Good luck!"
+msgstr ""
+"\"Where dat? A thousand miles from here.\" (Porgy and Bess) Przyjdzie ci "
+"przebyć długą drogę, by podbić wszystkie wyspy. Powodzenia!"
 
 #: ../../maps/Comet Island.wmf/elemental:9
 msgid ""
@@ -97,6 +105,21 @@ msgstr ""
 "Po uderzeniu asteroidy i następującej mroźnej zimie, trzy wysepki połączyły "
 "lód i skała, kładąc kres pokojowu współistnieniu trzech plemion."
 
+#: ../../maps/Map Contest/Ice wars.wmf/elemental:11
+msgid "After autumn is winter. Some things are frozen, but not the war."
+msgstr ""
+"Po jesieni nastaje zima. Na wiele nastaje mróz, lecz nie na zapał do wojny."
+
+#: ../../maps/Map Contest/Kings and Queens.wmf/elemental:11
+msgid ""
+"An old legend tells that these seven kingdoms, that have flourished for ages "
+"in prosperity, will someday collapse into a devastating war. Has your latest "
+"betrayal been one too many and will the prophecy come true?"
+msgstr ""
+"Legenda głosi, że siedem królestw, od dawien dawna kwitnących w dostatku, "
+"pewnego dnia pogrąży się w wyniszczającej wojnie. Czy twoja ostatnia zdrada "
+"stała się iskrą, która spełni tę przepowiednię?"
+
 #: ../../maps/The long way.wmf/elemental:9
 msgid ""
 "Another strange test by the Gods. To reach the other side, there seems to be "
@@ -131,6 +154,10 @@ msgstr "Atol"
 msgid "Barbarians - The second Empire"
 msgstr "Barbarzyńcy - Drugie Imperium"
 
+#: ../../maps/Map Contest/Calvisson.wmf/elemental:9
+msgid "Calvisson"
+msgstr "Calvisson"
+
 #: ../../campaigns/cconfig:44
 msgid "Challenging. Introduces the Atlanteans"
 msgstr "Trudne. Przedstawienie Atlantów"
@@ -138,6 +165,16 @@ msgstr "Trudne. Przedstawienie Atlantów"
 #: ../../maps/Checkmate.wmf/elemental:7
 msgid "Checkmate"
 msgstr "Szach mat"
+
+#: ../../maps/Map Contest/Fellowships.wmf/elemental:11
+msgid ""
+"Coal it tough to find - learn to make it efficiently. Starting positions are "
+"similar, map should be fair. There is plenty of gold near the starting point "
+"-- Do you see it?"
+msgstr ""
+"Niełatwo tu o węgiel - naucz się sam dbać o jego zasoby. Pozycje startowe są "
+"podobne, mapa powinna być uczciwa. W pobliżu punktu startowego kryje się "
+"mnóstwo złota - czy jesteś w stanie je znaleźć?"
 
 #: ../../maps/Comet Island.wmf/elemental:7
 msgid "Comet Island"
@@ -158,6 +195,20 @@ msgstr "Pustynny turniej"
 #: ../../maps/Dry Riverbed.wmf/elemental:7
 msgid "Dry Riverbed"
 msgstr "Suche koryto rzeki"
+
+#: ../../maps/Map Contest/River Explorers.wmf/elemental:11
+msgid ""
+"Each player has a different obstacle to expansion, and there's always more "
+"than one way to overcome it. While the AI can be defeated here without "
+"building a single ship, players are advised to make ports and shipyards a "
+"priority - expeditions are universally useful and are often the fastest way "
+"to gold deposits."
+msgstr ""
+"Każdemu z graczy stoi na drodze do ekspancji inna przeszkoda, z którą zawsze "
+"można sobie poradzić na więcej niż jeden sposób. O ile możliwe jest "
+"pokonanie komputera bez wyruszania na morze, dobrze jest uczynić to "
+"priorytetem - ekspedycje są zawsze warte swojej ceny i często najszybciej "
+"zapewnią ci dostęp do złota."
 
 #: ../../maps/Four Mountains.wmf/elemental:9
 msgid ""
@@ -186,6 +237,10 @@ msgstr "Elfickie lasy"
 #: ../../campaigns/cconfig:34
 msgid "Empire - The Months of Exile"
 msgstr "Imperium - Miesiące wygnania"
+
+#: ../../maps/Map Contest/Fellowships.wmf/elemental:9
+msgid "Fellowships"
+msgstr "Drużyny"
 
 #: ../../maps/Finlakes.wmf/elemental:9
 msgid "Finnish Lakes"
@@ -242,6 +297,10 @@ msgstr "Lodowcowe jezioro"
 msgid "Golden Peninsula"
 msgstr "Złoty półwysep"
 
+#: ../../maps/Map Contest/Ice wars.wmf/elemental:9
+msgid "Ice wars"
+msgstr "Wojny lodu"
+
 #: ../../maps/Impact.wmf/elemental:7
 msgid "Impact"
 msgstr "Uderzenie"
@@ -258,6 +317,19 @@ msgstr ""
 "Słońce zdało się zniknąć z nieba i jedynym źródłem światła i ciepła stali "
 "się sprawcy tej drastycznej zmiany. Zamarzają contynenty, morza i oceany; te "
 "wulkaniczne wyspy to zapewne ostatnie skrawki lądu zdatne do zamieszkania."
+
+#: ../../maps/Map Contest/Trident of Fire.wmf/elemental:11
+msgid ""
+"In the whereabouts of three major volcanos six lovely islands are inviting "
+"settlers to start a new life. Deserts and a quickly growing forest wait to "
+"be discovered. But only by becoming a naval power your tribe will be able to "
+"explore enough resources to compete with its opponents."
+msgstr ""
+"Uroczy archipelag wysp w pobliżu trzech potężnych wulkanów kusi swym pięknem "
+"osadników szukających nowego początku. Pustynie, lecz i szybko "
+"rozprzestrzeniające się lasy czekają na odkrycie. Tylko stając się morską "
+"potęgą zdołasz wydrzeć wyspom dla swojego plemienia surowce potrzebne, by "
+"podbić swoich przeciwników."
 
 #: ../../maps/The pass through the mountains.wmf/elemental:11
 msgid ""
@@ -336,6 +408,20 @@ msgstr ""
 "dziwnego, że tak mało wody zostało w tych wyschniętych korytach. Wszyscy "
 "wiedzą, że wkrótce zacznie się wojna. Wojna o wodę."
 
+#: ../../maps/Map Contest/Calvisson.wmf/elemental:11
+msgid ""
+"It's a pleasure to settle in the beauty of this fissured countryside. But "
+"the ways to encompass these large territories are long and meandering, so it "
+"is easy to err in the land of the foreign clans."
+msgstr ""
+"Czystą przyjemnością jest osiedlanie się na tych poprzecinanych dolinami "
+"ziemiach - jednak tutejsze ścieżki są zdradliwe i nietrudno zapędzić się na "
+"terytoria obcych klanów."
+
+#: ../../maps/Map Contest/Kings and Queens.wmf/elemental:9
+msgid "Kings and Queens"
+msgstr "Królowie i królowe"
+
 #: ../../maps/Lake of tranquility.wmf/elemental:7
 msgid "Lake of Tranquility"
 msgstr "Jezioro spokoju"
@@ -351,6 +437,10 @@ msgid ""
 msgstr ""
 "Długo po tym, jak meteoryt spadł na skupisko gór, życie zaczyna się pojawiać "
 "w kraterze. Teraz dwa plemiona walczą o bogate źródła zasobów."
+
+#: ../../maps/Map Contest/Long, long way.wmf/elemental:9
+msgid "Long, long way"
+msgstr "Daleka droga"
 
 #: ../../maps/Crossing the horizon.wmf/elemental:11
 msgid "Man your ship and sail to the horizon."
@@ -400,6 +490,10 @@ msgstr ""
 #: ../../maps/Rendez-Vous.wmf/elemental:7
 msgid "Rendez-Vous"
 msgstr "Spotkanie"
+
+#: ../../maps/Map Contest/River Explorers.wmf/elemental:9
+msgid "River Explorers"
+msgstr "Eksploratorzy rzek"
 
 #: ../../maps/Riverlands.wmf/elemental:7
 msgid "Riverlands"
@@ -489,6 +583,15 @@ msgstr "Sugerowane zespoły: (niebieski, żółty) kontra (czerwony, zielony)"
 msgid "Suggested Teams: all ok."
 msgstr "Sugerowane zespoły: dowolne."
 
+#: ../../maps/Map Contest/Calvisson.wmf/elemental:12
+msgid ""
+"Suggested Teams: blue vs red, yellow vs green, (blue, yellow) vs (red, "
+"green), (blue, green) vs (red, yellow)"
+msgstr ""
+"Sugerowane zespoły: niebieski kontra czerwony, żółty kontra zielony, "
+"(niebieski, żółty) kontra (czerwony, zielony), (niebieski, zielony) kontra "
+"(czerwony, żółty)."
+
 #: ../../maps/Swamp Island.wmf/elemental:9
 msgid "Swamp Island"
 msgstr "Bagienna wyspa"
@@ -504,6 +607,10 @@ msgstr "Daleka północ"
 #: ../../maps/Plateau.wmf/elemental:7
 msgid "The Green Plateau"
 msgstr "Zielony płaskowyż"
+
+#: ../../maps/Map Contest/The Nile.wmf/elemental:9
+msgid "The Nile"
+msgstr "Nil"
 
 #: ../../maps/The Oasis Triangle.wmf/elemental:7
 msgid "The Oasis Triangle"
@@ -557,6 +664,14 @@ msgstr "Długa droga"
 msgid "The pass through the mountains"
 msgstr "Górski przesmyk"
 
+#: ../../maps/Map Contest/The Nile.wmf/elemental:11
+msgid ""
+"The river always provides food and comunication. This time eight empires "
+"will fight for the control over this land."
+msgstr ""
+"Kto ma władzę nad rzeką, ten ma żywność i transport. Tym razem osiem "
+"imperiów stoczy bój o jej brzegi."
+
 #: ../../maps/Mystical Maze.wmf/elemental:11
 msgid ""
 "There are two big questions around: Who created this unbelievably big maze "
@@ -609,6 +724,14 @@ msgstr ""
 "sielskiego spokoju. Jednakże, jego świętość została naruszona przez dwa "
 "wrogie plemiona, które się pojawiły na jego brzegu..."
 
+#: ../../maps/Map Contest/Fellowships.wmf/elemental:12
+msgid ""
+"This map suits best 3 human players, with game speed somewhat above the "
+"normal value. AI performs badly at the time of writing (2013)"
+msgstr ""
+"Na tej mapie najlepiej gra się w trzech graczy, z tempem gry nieco wyższym, "
+"niż normalne. Komputer nie radzi sobie na tej mapie (stan z 2013 r.)"
+
 #: ../../maps/Three Warriors.wmf/elemental:9
 msgid "Three Warriors"
 msgstr "Trzej wojownicy"
@@ -616,6 +739,14 @@ msgstr "Trzej wojownicy"
 #: ../../maps/MP Scenarios/Together we're strong.wmf/elemental:9
 msgid "Together we're strong"
 msgstr "W jedności siła"
+
+#: ../../maps/Map Contest/Trident of Fire.wmf/elemental:9
+msgid "Trident of Fire"
+msgstr "Ognisty trójząb"
+
+#: ../../maps/Map Contest/Twin Lagoons.wmf/elemental:9
+msgid "Twin Lagoons"
+msgstr "Bliźniacze laguny"
 
 #: ../../maps/Twinkling Waves.wmf/elemental:9
 msgid "Twinkling Waves"
@@ -687,6 +818,22 @@ msgstr ""
 "pozostałych Atlantów w nową przyszłość w innej części świata, Jundlina stała "
 "się najpotężniejszym człowiekiem swoich czasów, ale wysokim kosztem - "
 "swojego człowieczeństwa i duszy."
+
+#: ../../maps/Map Contest/Twin Lagoons.wmf/elemental:11
+msgid ""
+"When the wind swelled up and the first dunes were formed on these abandoned "
+"twin lagoons nobody could have expected that two tribes, that are "
+"desperately searching for more resources to support there endlessly ongoing "
+"wars, would end up in this forgotten place at the same time and for the same "
+"well-known reason. Defend your transport lines or use ships to bypass the "
+"opponent. Then remove all enemy activity."
+msgstr ""
+"Gdy wiatr urósł w siłę i uformował pierwsze wydmy na tych opuszczonych "
+"lagunach, nikt nie przypuszczał, że dwa wiecznie toczące ze sobą walki "
+"plemiona desperacko poszukujące środków, by przeważyć szalę spotkają się "
+"właśnie na tych zapomnianych skrawkach lądu, właśnie teraz, szukając tego "
+"samego. Broń swoich linii transportowych lub sam zapoluj na statki wroga. "
+"Dokonawszy tego, nie pozostaw po nim śladu."
 
 #: ../../maps/Checkmate.wmf/elemental:9
 msgid ""
