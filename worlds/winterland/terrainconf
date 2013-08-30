@@ -4,96 +4,96 @@
 ##### suggestions without having to worry about the localized name of terrain
 
 [tundra]
-name="Tundra"
+name=_"Tundra"
 def_resources=water 5
 is=green
 dither_layer=50
 
 [mountain1]
-name="Mountain1"
+name=_"Mountain1"
 resources=coal, iron, gold, granit
 is=mountain
 dither_layer=70
 
 [ice_flows]
-name="Ice flows"
+name=_"Ice flows"
 is=water
 fps=5
 dither_layer=10
 
 [ice_flows2]
-name="Ice flows2"
+name=_"Ice flows2"
 is=water
 fps=5
 dither_layer=20
 
 [ice]
-name="Ice"
+name=_"Ice"
 is=dry
 #### of course ice is not dry, but this disallows the users, to build on snow. only flags are allowed. ;-)
 dither_layer=30
 
 [water]
-name="Water"
+name=_"Water"
 def_resources=fish 4
 is=water
 fps=8
 dither_layer=0
 
 [tundra_taiga]
-name="Tundra taiga"
+name=_"Tundra taiga"
 def_resources=water 10
 is=green
 dither_layer=50
 
 [tundra2]
-name="Tundra2"
+name=_"Tundra2"
 def_resources=water 10
 is=green
 dither_layer=50
 
 [tundra3]
-name="Tundra3"
+name=_"Tundra3"
 def_resources=water 10
 is=green
 dither_layer=50
 
 [mountain2]
-name="Mountain2"
+name=_"Mountain2"
 resources=coal, iron, gold, granit
 is=mountain
 dither_layer=70
 
 [mountain3]
-name="Mountain3"
+name=_"Mountain3"
 resources=coal, iron, gold, granit
 is=mountain
 dither_layer=70
 
 [mountain4]
-name="Mountain4"
+name=_"Mountain4"
 resources=coal, iron, gold, granit
 is=mountain
 dither_layer=70
 
 [strand]
-name="Beach"
+name=_"Beach"
 is=dry
 dither_layer=40
 
 [taiga]
-name="Taiga"
+name=_"Taiga"
 def_resources=water 10
 is=green
 dither_layer=50
 
 [lava]
-name="Lava"
+name=_"Lava"
 is=acid
 dither_layer=80
 
 [snow]
-name="Snow"
+name=_"Snow"
 def_resources=water 30
 is=green
 dither_layer=60
