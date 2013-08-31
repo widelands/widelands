@@ -6,15 +6,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4556\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2013-08-15 16:02+0000\n"
+"POT-Creation-Date: 2013-08-30 12:55+0000\n"
 "PO-Revision-Date: 2013-08-19 12:06+0000\n"
-"Last-Translator: fk <fredkuijper@yahoo.com>\n"
+"Last-Translator: fk <Unknown>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-08-20 04:34+0000\n"
-"X-Generator: Launchpad (build 16723)\n"
+"X-Launchpad-Export-Date: 2013-08-31 04:34+0000\n"
+"X-Generator: Launchpad (build 16750)\n"
 
 #: ../../campaigns/cconfig:64
 msgid "01 - Eyes in the Dark"
@@ -40,7 +40,7 @@ msgstr "02 - Een voorpost van ballingschap"
 msgid "03 - This Land is our Land"
 msgstr "03 - Dit land is ons land"
 
-#: ../../maps/Map Contest/Long, long way.wmf/elemental:11
+#: ../../maps/Long, long way.wmf/elemental:11
 msgid ""
 ">Where dat? A thousand miles from here.< [Porgy and Bess] You have to go "
 "long, long way to conquere all the islands. Good luck!"
@@ -109,12 +109,12 @@ msgstr ""
 "drie eilanden verbonden door ijs en steen, daarbij een eind makend aan het "
 "vreedzaam samenleven van drie stammen."
 
-#: ../../maps/Map Contest/Ice wars.wmf/elemental:11
+#: ../../maps/Ice wars.wmf/elemental:11
 msgid "After autumn is winter. Some things are frozen, but not the war."
 msgstr ""
 "Op herfst volgt winter. Sommige dingen zijn bevroren, maar niet de oorlog."
 
-#: ../../maps/Map Contest/Kings and Queens.wmf/elemental:11
+#: ../../maps/Kings and Queens.wmf/elemental:11
 msgid ""
 "An old legend tells that these seven kingdoms, that have flourished for ages "
 "in prosperity, will someday collapse into a devastating war. Has your latest "
@@ -159,7 +159,7 @@ msgstr "Atol"
 msgid "Barbarians - The second Empire"
 msgstr "Barbaren - Het tweede koninkrijk"
 
-#: ../../maps/Map Contest/Calvisson.wmf/elemental:9
+#: ../../maps/Calvisson.wmf/elemental:9
 msgid "Calvisson"
 msgstr "Calvisson"
 
@@ -171,15 +171,12 @@ msgstr "Uitdagend. Introduceert de Atlantiërs"
 msgid "Checkmate"
 msgstr "Schaakmat"
 
-#: ../../maps/Map Contest/Fellowships.wmf/elemental:11
+#: ../../maps/Fellowships.wmf/elemental:11
 msgid ""
-"Coal it tough to find - learn to make it efficiently. Starting positions are "
+"Coal is tough to find - learn to make it efficiently. Starting positions are "
 "similar, map should be fair. There is plenty of gold near the starting point "
-"-- Do you see it?"
+"- Do you see it?"
 msgstr ""
-"Kolen zijn moeilijk te vinden - leer het efficiënt te maken. Startposities "
-"zijn gelijk, kaart zou eerlijk moeten zijn. Er is goud zat nabij de "
-"startpositie -- Kun je het zien?"
 
 #: ../../maps/Comet Island.wmf/elemental:7
 msgid "Comet Island"
@@ -201,7 +198,7 @@ msgstr "Woestijntoernooi"
 msgid "Dry Riverbed"
 msgstr "Droge rivierbedding"
 
-#: ../../maps/Map Contest/River Explorers.wmf/elemental:11
+#: ../../maps/River Explorers.wmf/elemental:11
 msgid ""
 "Each player has a different obstacle to expansion, and there's always more "
 "than one way to overcome it. While the AI can be defeated here without "
@@ -243,7 +240,7 @@ msgstr "Elvenbossen"
 msgid "Empire - The Months of Exile"
 msgstr "Empiren - De maanden van ballingschap"
 
-#: ../../maps/Map Contest/Fellowships.wmf/elemental:9
+#: ../../maps/Fellowships.wmf/elemental:9
 msgid "Fellowships"
 msgstr "Vriendschappen"
 
@@ -303,7 +300,7 @@ msgstr "Gletsjermeer"
 msgid "Golden Peninsula"
 msgstr "Gouden schiereiland"
 
-#: ../../maps/Map Contest/Ice wars.wmf/elemental:9
+#: ../../maps/Ice wars.wmf/elemental:9
 msgid "Ice wars"
 msgstr "IJsoorlogen"
 
@@ -325,7 +322,7 @@ msgstr ""
 "hebben afgedwongen. Continenten, oceanen en zeeën zijn aan het bevriezen, "
 "alleen de vulkanische eilanden schijnen nog over te zijn als bewoonbaar land."
 
-#: ../../maps/Map Contest/Trident of Fire.wmf/elemental:11
+#: ../../maps/Trident of Fire.wmf/elemental:11
 msgid ""
 "In the whereabouts of three major volcanos six lovely islands are inviting "
 "settlers to start a new life. Deserts and a quickly growing forest wait to "
@@ -417,7 +414,7 @@ msgstr ""
 "rivierbed over is. Iedereen weet het: er zal snel een oorlog zijn. Een "
 "oorlog om het laatste water."
 
-#: ../../maps/Map Contest/Calvisson.wmf/elemental:11
+#: ../../maps/Calvisson.wmf/elemental:11
 msgid ""
 "It's a pleasure to settle in the beauty of this fissured countryside. But "
 "the ways to encompass these large territories are long and meandering, so it "
@@ -428,7 +425,7 @@ msgstr ""
 "worden omringd zijn lang en slingerend, dus het is gemakkelijk om per "
 "ongeluk in het land van de andere stammen te belanden."
 
-#: ../../maps/Map Contest/Kings and Queens.wmf/elemental:9
+#: ../../maps/Kings and Queens.wmf/elemental:9
 msgid "Kings and Queens"
 msgstr "Koningen en Koninginnen"
 
@@ -448,7 +445,7 @@ msgstr ""
 "Lang nadat een meteoor in een paar bergen is geslagen, bloeit er leven in de "
 "krater. Twee stammen vechten nu voor de kostbare rijkdommen."
 
-#: ../../maps/Map Contest/Long, long way.wmf/elemental:9
+#: ../../maps/Long, long way.wmf/elemental:9
 msgid "Long, long way"
 msgstr "Lange, lange weg"
 
@@ -501,7 +498,7 @@ msgstr ""
 msgid "Rendez-Vous"
 msgstr "Rendez-Vous"
 
-#: ../../maps/Map Contest/River Explorers.wmf/elemental:9
+#: ../../maps/River Explorers.wmf/elemental:9
 msgid "River Explorers"
 msgstr "Rivierverkenners"
 
@@ -594,7 +591,7 @@ msgstr "Teamsuggestie: (blauw, geel) tegen (rood, groen)"
 msgid "Suggested Teams: all ok."
 msgstr "Voorgestelde Teams: alles ok."
 
-#: ../../maps/Map Contest/Calvisson.wmf/elemental:12
+#: ../../maps/Calvisson.wmf/elemental:12
 msgid ""
 "Suggested Teams: blue vs red, yellow vs green, (blue, yellow) vs (red, "
 "green), (blue, green) vs (red, yellow)"
@@ -618,7 +615,7 @@ msgstr "Het Verre Noorden"
 msgid "The Green Plateau"
 msgstr "De Groene Hoogvlakte"
 
-#: ../../maps/Map Contest/The Nile.wmf/elemental:9
+#: ../../maps/The Nile.wmf/elemental:9
 msgid "The Nile"
 msgstr "De Nijl"
 
@@ -677,13 +674,11 @@ msgstr "De lange weg"
 msgid "The pass through the mountains"
 msgstr "De pas door de bergen"
 
-#: ../../maps/Map Contest/The Nile.wmf/elemental:11
+#: ../../maps/The Nile.wmf/elemental:11
 msgid ""
-"The river always provides food and comunication. This time eight empires "
+"The river always provides food and communication. This time eight empires "
 "will fight for the control over this land."
 msgstr ""
-"De rivier verschaft altijd voedsel en communicatie. Deze keer zullen acht "
-"imperia strijden voor de controle over dit land."
 
 #: ../../maps/Mystical Maze.wmf/elemental:11
 msgid ""
@@ -736,14 +731,11 @@ msgstr ""
 "idyllische rust. Toch is zijn rust nu verstoord, als er twee stammen "
 "aankomen aan zijn oevers..."
 
-#: ../../maps/Map Contest/Fellowships.wmf/elemental:12
+#: ../../maps/Fellowships.wmf/elemental:12
 msgid ""
-"This map suits best 3 human players, with game speed somewhat above the "
-"normal value. AI performs badly at the time of writing (2013)"
+"This map is best suited for three human players, with game speed somewhat "
+"above the normal value. AI performs badly at the time of writing (2013)."
 msgstr ""
-"Deze map is het geschiktst voor 3 menselijke spelers, met speelsnelheid iets "
-"boven de gewone waarde. KI presteert slecht op het moment van schrijven "
-"(2013)"
 
 #: ../../maps/Three Warriors.wmf/elemental:9
 msgid "Three Warriors"
@@ -753,11 +745,11 @@ msgstr "Drie Strijders"
 msgid "Together we're strong"
 msgstr "Samen staan we sterk"
 
-#: ../../maps/Map Contest/Trident of Fire.wmf/elemental:9
+#: ../../maps/Trident of Fire.wmf/elemental:9
 msgid "Trident of Fire"
 msgstr "Vuurdrietand"
 
-#: ../../maps/Map Contest/Twin Lagoons.wmf/elemental:9
+#: ../../maps/Twin Lagoons.wmf/elemental:9
 msgid "Twin Lagoons"
 msgstr "Tweelinglagunes"
 
@@ -832,22 +824,15 @@ msgstr ""
 "toekomst in een nieuw deel van de wereld, werd Jundlina de meest machtige "
 "persoon van haar tijd, maar tegen een hoge prijs: haar menselijkheid en ziel."
 
-#: ../../maps/Map Contest/Twin Lagoons.wmf/elemental:11
+#: ../../maps/Twin Lagoons.wmf/elemental:11
 msgid ""
 "When the wind swelled up and the first dunes were formed on these abandoned "
-"twin lagoons nobody could have expected that two tribes, that are "
-"desperately searching for more resources to support there endlessly ongoing "
-"wars, would end up in this forgotten place at the same time and for the same "
-"well-known reason. Defend your transport lines or use ships to bypass the "
-"opponent. Then remove all enemy activity."
+"twin lagoons nobody could have expected that two tribes that are desperately "
+"searching for more resources to support their endlessly ongoing wars would "
+"end up in this forgotten place at the same time and for the same well-known "
+"reason. Defend your transport lines or use ships to bypass the opponent. "
+"Then remove all enemy activity."
 msgstr ""
-"Toen de wind aanzwol en de eerste duinen werden gevormd op deze verlaten "
-"tweelinglagunes had niemand kunnen verwachten dat twee stammen, die wanhopig "
-"op zoek zijn naar delfstoffen om hun eindeloos doorgaande oorlogen te kunnen "
-"ondersteunen, terecht zouden komen op deze verlaten plek op dezelfde tijd en "
-"voor dezelfde overbekende reden. Verdedig je transportlijnen of gebruik "
-"schepen om de tegenstander te omzeilen. Verwijder daarna alle vijandige "
-"aanwezigheid."
 
 #: ../../maps/Checkmate.wmf/elemental:9
 msgid ""

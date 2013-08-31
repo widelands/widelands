@@ -6,18 +6,22 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2013-08-15 16:02+0000\n"
+"POT-Creation-Date: 2013-08-30 12:55+0000\n"
 "PO-Revision-Date: 2010-06-06 22:34+0000\n"
 "Last-Translator: Markus Hallfors <destroyerko@gmail.com>\n"
 "Language-Team: Finnish <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-08-16 04:41+0000\n"
-"X-Generator: Launchpad (build 16723)\n"
+"X-Launchpad-Export-Date: 2013-08-31 04:41+0000\n"
+"X-Generator: Launchpad (build 16750)\n"
 "X-Poedit-Country: FINLAND\n"
 "X-Poedit-Language: Finnish\n"
 "X-Poedit-SourceCharset: utf-8\n"
+
+#: ../../worlds/desert/terrainconf:35
+msgid "Beach"
+msgstr ""
 
 #: ../../worlds/desert/conf:71
 msgid "Beech"
@@ -71,6 +75,26 @@ msgstr "Peura"
 msgid "Desert"
 msgstr "Aavikko"
 
+#: ../../worlds/desert/terrainconf:8
+msgid "Desert1"
+msgstr ""
+
+#: ../../worlds/desert/terrainconf:13
+msgid "Desert2"
+msgstr ""
+
+#: ../../worlds/desert/terrainconf:18
+msgid "Desert3"
+msgstr ""
+
+#: ../../worlds/desert/terrainconf:23
+msgid "Desert4"
+msgstr ""
+
+#: ../../worlds/desert/terrainconf:29
+msgid "Dry soil"
+msgstr ""
+
 #: ../../worlds/desert/conf:87
 msgid "Duck"
 msgstr "Ankka"
@@ -97,6 +121,10 @@ msgstr "Graniitti"
 msgid "Grass"
 msgstr "Ruohoa"
 
+#: ../../worlds/desert/terrainconf:57
+msgid "High mountain meadow"
+msgstr ""
+
 #: ../../worlds/desert/resconf:20
 msgid "Iron"
 msgstr "Rauta"
@@ -116,6 +144,34 @@ msgstr "Lehtikuusi pieni"
 #: ../../worlds/desert/conf:78
 msgid "Larch tiny"
 msgstr "Lehtikuusi hyvin pieni"
+
+#: ../../worlds/desert/terrainconf:96
+msgid "Lava"
+msgstr ""
+
+#: ../../worlds/desert/terrainconf:46
+msgid "Meadow"
+msgstr ""
+
+#: ../../worlds/desert/terrainconf:52
+msgid "Mountain meadow"
+msgstr ""
+
+#: ../../worlds/desert/terrainconf:62
+msgid "Mountain1"
+msgstr ""
+
+#: ../../worlds/desert/terrainconf:68
+msgid "Mountain2"
+msgstr ""
+
+#: ../../worlds/desert/terrainconf:74
+msgid "Mountain3"
+msgstr ""
+
+#: ../../worlds/desert/terrainconf:80
+msgid "Mountain4"
+msgstr ""
 
 #: ../../worlds/desert/conf:21
 #: ../../worlds/desert/conf:22
@@ -203,6 +259,10 @@ msgstr "Luuranko"
 msgid "Standing Stones"
 msgstr "Pystykiviä"
 
+#: ../../worlds/desert/terrainconf:40
+msgid "Steppe"
+msgstr ""
+
 #: ../../worlds/desert/conf:45
 #: ../../worlds/desert/conf:46
 #: ../../worlds/desert/conf:47
@@ -221,6 +281,7 @@ msgid "This is the wide and sandy country of the bedouins"
 msgstr "Tämä on beduiinien asuttama laaja ja hiekkainen maa"
 
 #: ../../worlds/desert/resconf:36
+#: ../../worlds/desert/terrainconf:89
 msgid "Water"
 msgstr "Vesi"
 

@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2013-08-15 16:02+0000\n"
+"POT-Creation-Date: 2013-08-30 12:55+0000\n"
 "PO-Revision-Date: 2010-08-30 23:25+0000\n"
 "Last-Translator: Sergiy Gavrylov <sergiovana@bigmir.net>\n"
 "Language-Team: Ukrainian <uk@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-08-16 04:41+0000\n"
-"X-Generator: Launchpad (build 16723)\n"
+"X-Launchpad-Export-Date: 2013-08-31 04:41+0000\n"
+"X-Generator: Launchpad (build 16750)\n"
 
 #: ../../worlds/greenland/conf:58
 msgid "Alder"
@@ -52,6 +52,14 @@ msgstr "Крихітна осика"
 #: ../../worlds/greenland/conf:80
 msgid "Badger"
 msgstr "Борсук"
+
+#: ../../worlds/greenland/terrainconf:79
+msgid "Barren steppe"
+msgstr ""
+
+#: ../../worlds/greenland/terrainconf:31
+msgid "Beach"
+msgstr ""
 
 #: ../../worlds/greenland/conf:66
 msgid "Beech"
@@ -183,6 +191,10 @@ msgstr "Мала листвениця"
 msgid "Larch tiny"
 msgstr "Крихітна листвениця"
 
+#: ../../worlds/greenland/terrainconf:91
+msgid "Lava"
+msgstr ""
+
 #: ../../worlds/greenland/conf:88
 msgid "Lynx"
 msgstr "Рись"
@@ -190,6 +202,42 @@ msgstr "Рись"
 #: ../../worlds/greenland/conf:89
 msgid "Marten"
 msgstr "Куниця"
+
+#: ../../worlds/greenland/terrainconf:43
+msgid "Meadow1"
+msgstr ""
+
+#: ../../worlds/greenland/terrainconf:49
+msgid "Meadow2"
+msgstr ""
+
+#: ../../worlds/greenland/terrainconf:55
+msgid "Meadow3"
+msgstr ""
+
+#: ../../worlds/greenland/terrainconf:85
+msgid "Meadow4"
+msgstr ""
+
+#: ../../worlds/greenland/terrainconf:96
+msgid "Mountain meadow"
+msgstr ""
+
+#: ../../worlds/greenland/terrainconf:13
+msgid "Mountain1"
+msgstr ""
+
+#: ../../worlds/greenland/terrainconf:61
+msgid "Mountain2"
+msgstr ""
+
+#: ../../worlds/greenland/terrainconf:67
+msgid "Mountain3"
+msgstr ""
+
+#: ../../worlds/greenland/terrainconf:73
+msgid "Mountain4"
+msgstr ""
 
 #: ../../worlds/greenland/conf:22
 #: ../../worlds/greenland/conf:23
@@ -251,6 +299,10 @@ msgstr "Вівця"
 msgid "Skeleton"
 msgstr "Кістяк"
 
+#: ../../worlds/greenland/terrainconf:19
+msgid "Snow"
+msgstr ""
+
 #: ../../worlds/greenland/conf:54
 msgid "Spruce"
 msgstr "Ялина"
@@ -277,6 +329,10 @@ msgstr "Крихітна ялина"
 msgid "Standing Stones"
 msgstr "Скелі"
 
+#: ../../worlds/greenland/terrainconf:7
+msgid "Steppe"
+msgstr ""
+
 #: ../../worlds/greenland/conf:40
 #: ../../worlds/greenland/conf:41
 #: ../../worlds/greenland/conf:42
@@ -285,6 +341,10 @@ msgstr "Скелі"
 #: ../../worlds/greenland/conf:45
 msgid "Stones"
 msgstr "Каміння"
+
+#: ../../worlds/greenland/terrainconf:24
+msgid "Swamp"
+msgstr ""
 
 #: ../../worlds/greenland/conf:2
 msgid "The Widelands Development Team"
@@ -295,6 +355,7 @@ msgid "These are the beauty and bountiful countries of the barbarians"
 msgstr ""
 
 #: ../../worlds/greenland/resconf:36
+#: ../../worlds/greenland/terrainconf:36
 msgid "Water"
 msgstr "Вода"
 
