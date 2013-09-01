@@ -20,6 +20,7 @@
 #include "logic/ship.h"
 
 #include "economy/economy.h"
+#include "economy/flag.h"
 #include "economy/fleet.h"
 #include "economy/portdock.h"
 #include "economy/wares_queue.h"
@@ -327,12 +328,75 @@ void Ship::ship_update_expedition(Game & game, Bob::State &) {
 					continue;
 				}
 
-				// Check if there is a PlayerImmovable on the port build space
+				// NOTE This is the place to handle enemy territory and "clearing a port space from the enemy".
+				// NOTE There is a simple check for the current land owner to avoid placement of ports into enemy
+				// NOTE territory, as "clearing" is not yet implemented.
+				// NOTE further it checks, whether there is a Player_immovable on one of the fields.
 				// FIXME handle this more gracefully concering opposing players
-				BaseImmovable * baim = fc.field->get_immovable();
-				if (baim)
-					if (is_a(PlayerImmovable, baim))
+				Player_Number pn = m_economy->owner().player_number();
+				FCoords coord = fc;
+				bool invalid = false;
+				for (uint8_t step = 0; !invalid && step < 5; ++step) {
+					if (coord.field->get_owned_by() != Neutral() && coord.field->get_owned_by() != pn) {
+						invalid = true;
 						continue;
+					}
+					BaseImmovable * baim = coord.field->get_immovable();
+					if (baim)
+						if (is_a(PlayerImmovable, baim)) {
+							invalid = true;
+							continue;
+						}
+
+					// Check all neighboured fields that will be used by the port
+					switch (step) {
+						case 0:
+							map.get_ln(fc, &coord);
+							break;
+						case 1:
+							map.get_tln(fc, &coord);
+							break;
+						case 2:
+							map.get_trn(fc, &coord);
+							break;
+						case 3:
+							// Flag coordinate
+							map.get_brn(fc, &coord);
+							break;
+						default:
+							break;
+					}
+				}
+				// Now check whether there is a flag in the surroundings of the flag position
+				FCoords neighb;
+				map.get_ln(coord, &neighb);
+				for (uint8_t step = 0; !invalid && step < 5; ++step) {
+					BaseImmovable * baim = neighb.field->get_immovable();
+					if (baim)
+						if (is_a(Flag, baim)) {
+							invalid = true;
+							continue;
+						}
+					// Check all neighboured fields but not the one already checked for a PlayerImmovable.
+					switch (step) {
+						case 0:
+							map.get_bln(coord, &neighb);
+							break;
+						case 1:
+							map.get_brn(coord, &neighb);
+							break;
+						case 2:
+							map.get_rn(coord, &neighb);
+							break;
+						case 3:
+							map.get_trn(coord, &neighb);
+							break;
+						default:
+							break;
+					}
+				}
+				if (invalid)
+					continue;
 
 				bool pbs_saved = false;
 				for

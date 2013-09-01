@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2013-09-01 08:48+0000\n"
+"POT-Creation-Date: 2013-09-01 09:23+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -1140,7 +1140,7 @@ msgstr ""
 
 #: ../../tribes/empire/shovel/conf:1
 msgid ""
-"The shovel is needed for proper handling of plants. Therefore the forester uses it. It is produced by the toolsmith."
+"The shovel is needed for proper handling of plants. Therefore the forester and the vinefarmer use it. It is produced by the toolsmith."
 msgstr ""
 
 #: ../../tribes/empire/grape/conf:1
