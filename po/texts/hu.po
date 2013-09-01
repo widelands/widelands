@@ -6,15 +6,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2013-08-15 16:02+0000\n"
+"POT-Creation-Date: 2013-08-30 12:55+0000\n"
 "PO-Revision-Date: 2013-08-03 09:50+0000\n"
-"Last-Translator: István Kiss <kiemc@citromail.hu>\n"
+"Last-Translator: István Kiss <kissistvan@kibk.extra.hu>\n"
 "Language-Team: Language <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-08-16 04:35+0000\n"
-"X-Generator: Launchpad (build 16723)\n"
+"X-Launchpad-Export-Date: 2013-08-31 04:35+0000\n"
+"X-Generator: Launchpad (build 16750)\n"
 
 #: ../../txts/README:71
 msgid "(CTRL+) 0-9  Remember and go to previously remembered locations"
@@ -110,11 +110,11 @@ msgstr ""
 "További kérdéseid vannak? A Gyakran Ismételt Kérdéseket, a wikit és persze a "
 "közösségi fórumokat a www.widelands.org oldalon találod."
 
-#: ../../txts/developers:165
+#: ../../txts/developers:171
 msgid "Atlantean"
 msgstr "Atlantisz"
 
-#: ../../txts/developers:155
+#: ../../txts/developers:161
 msgid "Barbarian"
 msgstr "Barbár"
 
@@ -141,7 +141,7 @@ msgstr "CTRL+L   Térkép betöltése"
 msgid "CTRL+S   Save Map"
 msgstr "CTRL+S   Térkép mentése"
 
-#: ../../txts/developers:152
+#: ../../txts/developers:158
 msgid "Campaign Story"
 msgstr "A hadjáratok történetei"
 
@@ -169,7 +169,7 @@ msgstr "Felvétel készítése</p>"
 msgid "Ctrl+F10    Quit the game immediately"
 msgstr "Ctrl+F10 Kilépés a játékból azonnal"
 
-#: ../../txts/developers:180
+#: ../../txts/developers:186
 msgid "Czech"
 msgstr "Cseh"
 
@@ -177,7 +177,7 @@ msgstr "Cseh"
 msgid "DELETE      Archive the current message"
 msgstr "TÖRLÉS      Jelenlegi üzenet archívumba helyezése"
 
-#: ../../txts/developers:187
+#: ../../txts/developers:193
 msgid "Dansk"
 msgstr "Dán"
 
@@ -185,11 +185,11 @@ msgstr "Dán"
 msgid "Development"
 msgstr "Fejlesztés"
 
-#: ../../txts/developers:322
+#: ../../txts/developers:328
 msgid "Documentation, Help and Wiki"
 msgstr "Fejlesztői, felhasználói kézikönyv és Wiki"
 
-#: ../../txts/developers:193
+#: ../../txts/developers:199
 msgid "Dutch"
 msgstr "Holland"
 
@@ -201,7 +201,7 @@ msgstr "E           Események beállításai"
 msgid "Elders"
 msgstr "Vének"
 
-#: ../../txts/developers:161
+#: ../../txts/developers:167
 msgid "Empire"
 msgstr "Birodalom"
 
@@ -221,15 +221,15 @@ msgstr "F11         Kép készítése"
 msgid "F6           Shows the debug console (only in debug-builds)"
 msgstr "F6 Hibakereső konzol megjelenítése (csak a hibakereső változatban)"
 
-#: ../../txts/developers:200
+#: ../../txts/developers:206
 msgid "Finnish"
 msgstr "Finn"
 
-#: ../../txts/developers:337
+#: ../../txts/developers:343
 msgid "Former elders"
 msgstr "Korábbi Vének"
 
-#: ../../txts/developers:206
+#: ../../txts/developers:212
 msgid "French"
 msgstr "Francia"
 
@@ -237,7 +237,7 @@ msgstr "Francia"
 msgid "G           Go to location corresponding to current message"
 msgstr "G Arra a helyre ugrik ahová az előző üzenet mutat"
 
-#: ../../txts/developers:213
+#: ../../txts/developers:219
 msgid "Galician"
 msgstr "Galíciai"
 
@@ -245,7 +245,7 @@ msgstr "Galíciai"
 msgid "General game control"
 msgstr "A játék irányítása"
 
-#: ../../txts/developers:218
+#: ../../txts/developers:224
 msgid "German"
 msgstr "Német"
 
@@ -254,7 +254,7 @@ msgid "Graphicians"
 msgstr "Grafikusok"
 
 #: ../../txts/developers:18
-#: ../../txts/developers:348
+#: ../../txts/developers:354
 msgid "Graphics"
 msgstr "Grafika"
 
@@ -262,7 +262,7 @@ msgstr "Grafika"
 msgid "H        Toggles main menu"
 msgstr "H           Főmenü megjelenítése"
 
-#: ../../txts/developers:230
+#: ../../txts/developers:236
 msgid "Hebrew"
 msgstr "Héber"
 
@@ -287,15 +287,15 @@ msgid "Home        Center main mapview on starting location"
 msgstr "Home         Ugrás a kezdőpozícióhoz"
 
 #: ../../txts/developers:23
-#: ../../txts/developers:341
+#: ../../txts/developers:347
 msgid "Homepage"
 msgstr "Weblap"
 
-#: ../../txts/developers:313
+#: ../../txts/developers:319
 msgid "Homepage Coders"
 msgstr "Honlap fejlesztői és karbantartói"
 
-#: ../../txts/developers:235
+#: ../../txts/developers:241
 msgid "Hungarian"
 msgstr "Magyar"
 
@@ -341,7 +341,7 @@ msgstr "Az üzenet ablakban a következő gyorsbillentyűk használhatóak:"
 msgid "Introduction"
 msgstr "Program leírása:"
 
-#: ../../txts/developers:240
+#: ../../txts/developers:246
 msgid "Italian"
 msgstr "Olasz"
 
@@ -378,7 +378,7 @@ msgstr ""
 "Ahogy a természeti objektumokat (bobs), az állatoból és a tereptípusból is "
 "kiválaszthatsz többet egyszerre a CTRL + kattintással."
 
-#: ../../txts/developers:279
+#: ../../txts/developers:285
 msgid "Linux Distributions"
 msgstr "Linux disztribúciók"
 
@@ -413,7 +413,7 @@ msgstr "Zenészek"
 msgid "N               Toggle messages ('news')"
 msgstr "N               Üzenetekre váltás ('news')"
 
-#: ../../txts/developers:175
+#: ../../txts/developers:181
 msgid ""
 "NOTE: this list holds people that translated Widelands before we moved to "
 "launchpad.net. "
@@ -427,7 +427,7 @@ msgid ""
 "tools are available. Training sites are for improving their abilities."
 msgstr ""
 
-#: ../../txts/developers:301
+#: ../../txts/developers:307
 msgid "Non Unix Distributions"
 msgstr "Nem Unix disztribúciók"
 
@@ -485,11 +485,11 @@ msgstr ""
 msgid "Online Help"
 msgstr "Online segítség"
 
-#: ../../txts/developers:367
+#: ../../txts/developers:373
 msgid "Other"
 msgstr "Mások"
 
-#: ../../txts/developers:290
+#: ../../txts/developers:296
 msgid "Other Unix Distributions"
 msgstr "Más Unix disztribúciók"
 
@@ -518,7 +518,7 @@ msgstr "PAGEUP            Játék sebességének növelése"
 msgid "PAUSE         Pauses the game (only for local games)"
 msgstr "PAUSE         Játék megállítása (csak helyi játékok esetén)"
 
-#: ../../txts/developers:275
+#: ../../txts/developers:281
 msgid "Packagers"
 msgstr "Csomagkészítők"
 
@@ -531,7 +531,7 @@ msgstr ""
 msgid "Please provide enough background information. Tell us:"
 msgstr "Kérlek adj meg elegendő háttérinformációt:"
 
-#: ../../txts/developers:245
+#: ../../txts/developers:251
 msgid "Polish"
 msgstr "Lengyel"
 
@@ -589,7 +589,7 @@ msgstr "Felvételek</p>"
 msgid "Reporting Bugs"
 msgstr "Értesítés a programhibákról:"
 
-#: ../../txts/developers:253
+#: ../../txts/developers:259
 msgid "Russian"
 msgstr "Orosz"
 
@@ -616,7 +616,7 @@ msgstr ""
 "SPACE gomb hasonlóan működik a normál játékhoz, ki/be kapcsolja az építési "
 "segítséget."
 
-#: ../../txts/developers:176
+#: ../../txts/developers:182
 msgid ""
 "See https://translations.launchpad.net/widelands for a list of people that "
 "helped to translate Widelands via launchpad.net."
@@ -625,7 +625,7 @@ msgstr ""
 "listája található, akik segítettek lefordítani a Widelands-et a "
 "launchpad.net-en."
 
-#: ../../txts/developers:258
+#: ../../txts/developers:264
 msgid "Slovak"
 msgstr "Szlovák"
 
@@ -640,7 +640,7 @@ msgstr ""
 "vagy utak veszik körbe nem tud termelni."
 
 #: ../../txts/developers:28
-#: ../../txts/developers:355
+#: ../../txts/developers:361
 msgid "Sound"
 msgstr "Hang"
 
@@ -648,7 +648,7 @@ msgstr "Hang"
 msgid "Sound Effects"
 msgstr "Hanghatások"
 
-#: ../../txts/developers:263
+#: ../../txts/developers:269
 msgid "Spanish"
 msgstr "Spanyol"
 
@@ -664,7 +664,7 @@ msgstr ""
 msgid "Status"
 msgstr "Állapot"
 
-#: ../../txts/developers:268
+#: ../../txts/developers:274
 msgid "Swedish"
 msgstr "Svéd"
 
@@ -739,11 +739,11 @@ msgstr ""
 "Hogy felgördítsd/visszaállítsd az ablakot, tartsd nyomva a CTRL billentyűt "
 "és kattints az adott ablak címsorára a középső vagy bal egér gombbal."
 
-#: ../../txts/developers:360
+#: ../../txts/developers:366
 msgid "Translation"
 msgstr "Fordítás"
 
-#: ../../txts/developers:172
+#: ../../txts/developers:178
 msgid "Translators"
 msgstr "Fordítók"
 

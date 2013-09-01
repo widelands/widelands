@@ -6,15 +6,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2013-08-15 16:02+0000\n"
+"POT-Creation-Date: 2013-08-30 12:55+0000\n"
 "PO-Revision-Date: 2012-11-20 00:49+0000\n"
 "Last-Translator: Gigabye <Unknown>\n"
 "Language-Team: Language <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-08-16 04:35+0000\n"
-"X-Generator: Launchpad (build 16723)\n"
+"X-Launchpad-Export-Date: 2013-08-31 04:35+0000\n"
+"X-Generator: Launchpad (build 16750)\n"
 "X-Poedit-Country: RUSSIAN FEDERATION\n"
 "X-Poedit-Language: Russian\n"
 
@@ -115,11 +115,11 @@ msgstr ""
 "Есть вопросы? Наши ЧаВо, Вики и, конечно, форум находятся на "
 "www.widelands.org."
 
-#: ../../txts/developers:165
+#: ../../txts/developers:171
 msgid "Atlantean"
 msgstr "Атланты"
 
-#: ../../txts/developers:155
+#: ../../txts/developers:161
 msgid "Barbarian"
 msgstr "Варвар"
 
@@ -146,7 +146,7 @@ msgstr "CTRL+L   Загрузить карту"
 msgid "CTRL+S   Save Map"
 msgstr "CTRL+S   Сохранить карту"
 
-#: ../../txts/developers:152
+#: ../../txts/developers:158
 msgid "Campaign Story"
 msgstr "Историческая кампания"
 
@@ -174,7 +174,7 @@ msgstr "Создание записи сессии</p>"
 msgid "Ctrl+F10    Quit the game immediately"
 msgstr "Ctrl+F10    Незамедлительный выход из игры"
 
-#: ../../txts/developers:180
+#: ../../txts/developers:186
 msgid "Czech"
 msgstr "Чешский"
 
@@ -182,7 +182,7 @@ msgstr "Чешский"
 msgid "DELETE      Archive the current message"
 msgstr "DELETE      Архивировать текущее сообщение"
 
-#: ../../txts/developers:187
+#: ../../txts/developers:193
 msgid "Dansk"
 msgstr "Датский"
 
@@ -190,11 +190,11 @@ msgstr "Датский"
 msgid "Development"
 msgstr "Разработка"
 
-#: ../../txts/developers:322
+#: ../../txts/developers:328
 msgid "Documentation, Help and Wiki"
 msgstr "Документация, помощь и вики"
 
-#: ../../txts/developers:193
+#: ../../txts/developers:199
 msgid "Dutch"
 msgstr "Голландский"
 
@@ -206,7 +206,7 @@ msgstr "E        Убрать/вывести меню событий"
 msgid "Elders"
 msgstr "Старейшины"
 
-#: ../../txts/developers:161
+#: ../../txts/developers:167
 msgid "Empire"
 msgstr "Империя"
 
@@ -226,15 +226,15 @@ msgstr "F11          Снять скриншот"
 msgid "F6           Shows the debug console (only in debug-builds)"
 msgstr "F6 Показывает отладочную консоль (только в отладочных сборках)"
 
-#: ../../txts/developers:200
+#: ../../txts/developers:206
 msgid "Finnish"
 msgstr "Финский"
 
-#: ../../txts/developers:337
+#: ../../txts/developers:343
 msgid "Former elders"
 msgstr "Бывшие старейшины"
 
-#: ../../txts/developers:206
+#: ../../txts/developers:212
 msgid "French"
 msgstr "Французский"
 
@@ -242,7 +242,7 @@ msgstr "Французский"
 msgid "G           Go to location corresponding to current message"
 msgstr "G           Перейти к локации указанной в текущем сообщении"
 
-#: ../../txts/developers:213
+#: ../../txts/developers:219
 msgid "Galician"
 msgstr "Галисийский"
 
@@ -250,7 +250,7 @@ msgstr "Галисийский"
 msgid "General game control"
 msgstr "Основы управления игрой"
 
-#: ../../txts/developers:218
+#: ../../txts/developers:224
 msgid "German"
 msgstr "Немецкий"
 
@@ -259,7 +259,7 @@ msgid "Graphicians"
 msgstr "Художники"
 
 #: ../../txts/developers:18
-#: ../../txts/developers:348
+#: ../../txts/developers:354
 msgid "Graphics"
 msgstr "Графика"
 
@@ -267,7 +267,7 @@ msgstr "Графика"
 msgid "H        Toggles main menu"
 msgstr "H        Перейти в главное меню"
 
-#: ../../txts/developers:230
+#: ../../txts/developers:236
 msgid "Hebrew"
 msgstr "Иврит"
 
@@ -292,15 +292,15 @@ msgid "Home        Center main mapview on starting location"
 msgstr "Home Центрирует карту в начальное положение"
 
 #: ../../txts/developers:23
-#: ../../txts/developers:341
+#: ../../txts/developers:347
 msgid "Homepage"
 msgstr "Домашняя страница"
 
-#: ../../txts/developers:313
+#: ../../txts/developers:319
 msgid "Homepage Coders"
 msgstr "Домашняя страница разработчиков"
 
-#: ../../txts/developers:235
+#: ../../txts/developers:241
 msgid "Hungarian"
 msgstr "Венгерский"
 
@@ -347,7 +347,7 @@ msgstr "В окне сообщений доступны следующие до�
 msgid "Introduction"
 msgstr "Введение"
 
-#: ../../txts/developers:240
+#: ../../txts/developers:246
 msgid "Italian"
 msgstr "Итальянский"
 
@@ -384,7 +384,7 @@ msgstr ""
 "Так-же как и природные объекты можно выбрать несколько животных или текстур "
 "при помощи CTRL + клик."
 
-#: ../../txts/developers:279
+#: ../../txts/developers:285
 msgid "Linux Distributions"
 msgstr "Дистрибутивы Linux"
 
@@ -422,7 +422,7 @@ msgstr "Музыканты"
 msgid "N               Toggle messages ('news')"
 msgstr "N - переход к сообщениям ('News')"
 
-#: ../../txts/developers:175
+#: ../../txts/developers:181
 msgid ""
 "NOTE: this list holds people that translated Widelands before we moved to "
 "launchpad.net. "
@@ -436,7 +436,7 @@ msgid ""
 "tools are available. Training sites are for improving their abilities."
 msgstr ""
 
-#: ../../txts/developers:301
+#: ../../txts/developers:307
 msgid "Non Unix Distributions"
 msgstr "Не Unix дистрибутив"
 
@@ -496,11 +496,11 @@ msgstr ""
 msgid "Online Help"
 msgstr "Помощь On-Line"
 
-#: ../../txts/developers:367
+#: ../../txts/developers:373
 msgid "Other"
 msgstr "Прочее"
 
-#: ../../txts/developers:290
+#: ../../txts/developers:296
 msgid "Other Unix Distributions"
 msgstr "Другие дистрибутивы Unix"
 
@@ -528,7 +528,7 @@ msgstr "PAGEUP         Увеличить скорость игры"
 msgid "PAUSE         Pauses the game (only for local games)"
 msgstr "PAUSE Приостанавливает игру (только в одиночных играх)"
 
-#: ../../txts/developers:275
+#: ../../txts/developers:281
 msgid "Packagers"
 msgstr "Упаковщики"
 
@@ -542,7 +542,7 @@ msgstr ""
 msgid "Please provide enough background information. Tell us:"
 msgstr "Пожалуйста сообщите дополнительную информацию. Перечислите:"
 
-#: ../../txts/developers:245
+#: ../../txts/developers:251
 msgid "Polish"
 msgstr "Польский"
 
@@ -605,7 +605,7 @@ msgstr "Повторы</p>"
 msgid "Reporting Bugs"
 msgstr "Сообщить об ошибке"
 
-#: ../../txts/developers:253
+#: ../../txts/developers:259
 msgid "Russian"
 msgstr "Русский"
 
@@ -633,7 +633,7 @@ msgstr ""
 "Клавиша \"Пробел\" ведет себя как в обычной игре. Она включает и выключает "
 "помощник строительства."
 
-#: ../../txts/developers:176
+#: ../../txts/developers:182
 msgid ""
 "See https://translations.launchpad.net/widelands for a list of people that "
 "helped to translate Widelands via launchpad.net."
@@ -641,7 +641,7 @@ msgstr ""
 "См. список переводивших Widelands на launchpad.net по адресу "
 "https://translations.launchpad.net/widelands."
 
-#: ../../txts/developers:258
+#: ../../txts/developers:264
 msgid "Slovak"
 msgstr "Словацкий"
 
@@ -656,7 +656,7 @@ msgstr ""
 "Если здание будет окружено деревьями и дорогами то производство остановится."
 
 #: ../../txts/developers:28
-#: ../../txts/developers:355
+#: ../../txts/developers:361
 msgid "Sound"
 msgstr "Звук"
 
@@ -664,7 +664,7 @@ msgstr "Звук"
 msgid "Sound Effects"
 msgstr "Звуковые эффекты"
 
-#: ../../txts/developers:263
+#: ../../txts/developers:269
 msgid "Spanish"
 msgstr "Испанский"
 
@@ -680,7 +680,7 @@ msgstr ""
 msgid "Status"
 msgstr "Статус"
 
-#: ../../txts/developers:268
+#: ../../txts/developers:274
 msgid "Swedish"
 msgstr "Шведский"
 
@@ -756,11 +756,11 @@ msgstr ""
 "Чтобы минимизировать / максимизировать окно, щелкните на строке заголовка "
 "этого окна или средней  / левой кнопкой мыши, удерживая CTRL."
 
-#: ../../txts/developers:360
+#: ../../txts/developers:366
 msgid "Translation"
 msgstr "Перевод"
 
-#: ../../txts/developers:172
+#: ../../txts/developers:178
 msgid "Translators"
 msgstr "Переводчики"
 

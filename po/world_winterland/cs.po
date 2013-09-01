@@ -8,15 +8,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4530\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2013-08-15 16:02+0000\n"
+"POT-Creation-Date: 2013-08-30 12:55+0000\n"
 "PO-Revision-Date: 2010-06-06 21:46+0000\n"
 "Last-Translator: Nasenbaer <Unknown>\n"
 "Language-Team: Czech <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-08-16 04:41+0000\n"
-"X-Generator: Launchpad (build 16723)\n"
+"X-Launchpad-Export-Date: 2013-08-31 04:41+0000\n"
+"X-Generator: Launchpad (build 16750)\n"
 "X-Poedit-Country: CZECH REPUBLIC\n"
 "X-Poedit-Language: Czech\n"
 
@@ -39,6 +39,10 @@ msgstr "Maličká osika"
 #: ../../worlds/winterland/conf:79
 msgid "Badger"
 msgstr "Jezevec"
+
+#: ../../worlds/winterland/terrainconf:80
+msgid "Beach"
+msgstr ""
 
 #: ../../worlds/winterland/conf:65
 msgid "Beech"
@@ -129,6 +133,18 @@ msgstr "Žula"
 msgid "Grass"
 msgstr "Tráva"
 
+#: ../../worlds/winterland/terrainconf:31
+msgid "Ice"
+msgstr ""
+
+#: ../../worlds/winterland/terrainconf:19
+msgid "Ice flows"
+msgstr ""
+
+#: ../../worlds/winterland/terrainconf:25
+msgid "Ice flows2"
+msgstr ""
+
 #: ../../worlds/winterland/resconf:20
 msgid "Iron"
 msgstr "Železo"
@@ -148,6 +164,10 @@ msgstr "Malý modřín"
 #: ../../worlds/winterland/conf:72
 msgid "Larch tiny"
 msgstr "Maličký modřín"
+
+#: ../../worlds/winterland/terrainconf:91
+msgid "Lava"
+msgstr ""
 
 #: ../../worlds/winterland/conf:85
 msgid "Lynx"
@@ -172,6 +192,22 @@ msgstr "Maličký javor"
 #: ../../worlds/winterland/conf:86
 msgid "Marten"
 msgstr "Kuna"
+
+#: ../../worlds/winterland/terrainconf:13
+msgid "Mountain1"
+msgstr ""
+
+#: ../../worlds/winterland/terrainconf:62
+msgid "Mountain2"
+msgstr ""
+
+#: ../../worlds/winterland/terrainconf:68
+msgid "Mountain3"
+msgstr ""
+
+#: ../../worlds/winterland/terrainconf:74
+msgid "Mountain4"
+msgstr ""
 
 #: ../../worlds/winterland/conf:19
 #: ../../worlds/winterland/conf:20
@@ -233,6 +269,10 @@ msgstr "Ovce"
 msgid "Skeleton"
 msgstr "Kostlivec"
 
+#: ../../worlds/winterland/terrainconf:96
+msgid "Snow"
+msgstr ""
+
 #: ../../worlds/winterland/conf:30
 msgid "Snowman"
 msgstr "Sněhulák"
@@ -272,6 +312,10 @@ msgstr "Menhiry"
 msgid "Stones"
 msgstr "Kameny"
 
+#: ../../worlds/winterland/terrainconf:85
+msgid "Taiga"
+msgstr ""
+
 #: ../../worlds/winterland/conf:2
 msgid "The Widelands Development Team"
 msgstr "Vývojový tým Widelands"
@@ -288,7 +332,24 @@ msgstr ""
 msgid "Track"
 msgstr "Stopy"
 
+#: ../../worlds/winterland/terrainconf:7
+msgid "Tundra"
+msgstr ""
+
+#: ../../worlds/winterland/terrainconf:44
+msgid "Tundra taiga"
+msgstr ""
+
+#: ../../worlds/winterland/terrainconf:50
+msgid "Tundra2"
+msgstr ""
+
+#: ../../worlds/winterland/terrainconf:56
+msgid "Tundra3"
+msgstr ""
+
 #: ../../worlds/winterland/resconf:36
+#: ../../worlds/winterland/terrainconf:37
 msgid "Water"
 msgstr "Voda"
 

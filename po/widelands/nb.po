@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2013-08-15 18:02+0200\n"
+"POT-Creation-Date: 2013-08-30 14:55+0200\n"
 "PO-Revision-Date: 2013-08-24 12:36+0000\n"
 "Last-Translator: Hans Joachim Desserud <Unknown>\n"
 "Language-Team: Norwegian Bokmal <nb@li.org>\n"
@@ -15,10 +15,10 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2013-08-25 04:32+0000\n"
-"X-Generator: Launchpad (build 16738)\n"
+"X-Launchpad-Export-Date: 2013-08-31 04:39+0000\n"
+"X-Generator: Launchpad (build 16750)\n"
 
-#: ../../src/save_handler.cc:73
+#: ../../src/save_handler.cc:75
 msgid "Saving game..."
 msgstr "Lagrer spill..."
 
@@ -26,7 +26,7 @@ msgstr "Lagrer spill..."
 msgid "Saving failed!"
 msgstr "Kunne ikke lagre!"
 
-#: ../../src/save_handler.cc:115
+#: ../../src/save_handler.cc:113
 msgid "Game saved"
 msgstr "Spill lagret"
 
@@ -321,12 +321,12 @@ msgstr ""
 msgid "The address of the game server is invalid"
 msgstr "Adressen til spilltjener er ikke gyldig"
 
-#: ../../src/wlapplication.cc:1834 ../../src/network/nethost.cc:2057
+#: ../../src/wlapplication.cc:1834 ../../src/network/nethost.cc:2050
 #: ../../src/wui/game_summary.cc:90
 msgid "Player"
 msgstr "Spiller"
 
-#: ../../src/wlapplication.cc:2029 ../../src/network/nethost.cc:846
+#: ../../src/wlapplication.cc:2029 ../../src/network/nethost.cc:839
 #: ../../src/network/netclient.cc:197
 msgid "Preparing game"
 msgstr "Klargjør spill"
@@ -643,13 +643,13 @@ msgid "Toolsize"
 msgstr "Verktøystørrelse"
 
 #: ../../src/editor/editorinteractive.cc:74
-#: ../../src/wui/interactive_player.cc:121
-#: ../../src/wui/interactive_spectator.cc:62
+#: ../../src/wui/interactive_player.cc:119
+#: ../../src/wui/interactive_spectator.cc:61
 msgid "Minimap"
 msgstr "Minikart"
 
 #: ../../src/editor/editorinteractive.cc:77
-#: ../../src/wui/interactive_player.cc:124
+#: ../../src/wui/interactive_player.cc:122
 msgid "Buildhelp"
 msgstr "Bygningshjelp"
 
@@ -738,8 +738,8 @@ msgstr "Ukjent"
 #: ../../src/logic/production_program.cc:1348
 #: ../../src/logic/production_program.cc:1438 ../../src/logic/soldier.cc:70
 #: ../../src/logic/soldier.cc:77 ../../src/logic/soldier.cc:185
-#: ../../src/logic/immovable.cc:192 ../../src/logic/immovable.cc:828
-#: ../../src/logic/immovable.cc:868 ../../src/logic/immovable.cc:1033
+#: ../../src/logic/immovable.cc:193 ../../src/logic/immovable.cc:829
+#: ../../src/logic/immovable.cc:869 ../../src/logic/immovable.cc:1034
 #: ../../src/logic/building.cc:88
 #, c-format
 msgid "expected %s but found \"%s\""
@@ -749,7 +749,7 @@ msgstr "forventet %s men fant «%s»"
 msgid "frame number"
 msgstr "ramme nummer"
 
-#: ../../src/io/dedicated_log.cc:66 ../../src/network/internet_gaming.cc:804
+#: ../../src/io/dedicated_log.cc:66 ../../src/network/internet_gaming.cc:795
 #: ../../src/ui_fsmenu/mapselect.cc:503 ../../src/ui_fsmenu/mapselect.cc:507
 msgid "unknown"
 msgstr "ukjent"
@@ -776,7 +776,7 @@ msgstr "Senk verdien med 10"
 #: ../../src/ui_fsmenu/campaign_select.cc:74
 #: ../../src/ui_fsmenu/campaign_select.cc:281
 #: ../../src/ui_fsmenu/mapselect.cc:110 ../../src/ui_fsmenu/loadreplay.cc:50
-#: ../../src/wui/game_main_menu_save_game.cc:97
+#: ../../src/wui/game_main_menu_save_game.cc:96
 #: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:121
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:132
 #: ../../src/editor/ui_menus/editor_main_menu_save_map_make_directory.cc:57
@@ -865,13 +865,13 @@ msgstr "spillernavn og stammer: %s"
 #: ../../src/logic/playercommand.cc:1757 ../../src/logic/playercommand.cc:1855
 #: ../../src/logic/playercommand.cc:1933 ../../src/logic/playercommand.cc:1977
 #: ../../src/logic/cmd_calculate_statistics.cc:44
-#: ../../src/logic/immovable.cc:793 ../../src/logic/immovable.cc:1489
+#: ../../src/logic/immovable.cc:794 ../../src/logic/immovable.cc:1490
 #: ../../src/logic/instances.cc:71 ../../src/logic/instances.cc:129
 #: ../../src/logic/instances.cc:495 ../../src/logic/cmd_luacoroutine.cc:75
 #: ../../src/logic/battle.cc:412 ../../src/logic/cmd_queue.cc:191
 #: ../../src/logic/critter_bob.cc:387 ../../src/logic/legacy.cc:428
 #: ../../src/logic/legacy.cc:486 ../../src/logic/requirements.cc:48
-#: ../../src/logic/ship.cc:922 ../../src/logic/cmd_luascript.cc:56
+#: ../../src/logic/ship.cc:920 ../../src/logic/cmd_luascript.cc:56
 #, c-format
 msgid "unknown/unhandled version %u"
 msgstr "ukjent/uhåndtert versjon %u"
@@ -1319,7 +1319,7 @@ msgstr ""
 msgid "Invalid command! Type /help for a list of commands."
 msgstr "Kommandoen finnes ikke! Skriv /help for en liste over kommandoer."
 
-#: ../../src/network/nethost.cc:740
+#: ../../src/network/nethost.cc:733
 #, c-format
 msgid ""
 "This is a dedicated server. Send \"@%s help\" to get a full list of "
@@ -1328,75 +1328,75 @@ msgstr ""
 "Dette er en dedikert tjener. Send \"@%s help\" for å få en full liste over "
 "tilgjengelige kommandoer."
 
-#: ../../src/network/nethost.cc:1208
+#: ../../src/network/nethost.cc:1201
 msgid ""
 "<br>Available host commands are:<br>help   - Shows this help<br>host $ - "
 "Tries to run the host command $<br>save $ - Saves the current game state as "
 "$.wgf"
 msgstr ""
 
-#: ../../src/network/nethost.cc:1215
+#: ../../src/network/nethost.cc:1208
 msgid ""
 "<br>Available host commands are:<br>help           - Shows this help<br>host "
 "        $ - Tries to run the host command $"
 msgstr ""
 
-#: ../../src/network/nethost.cc:1220
+#: ../../src/network/nethost.cc:1213
 msgid "pwd          $ - Sends the password $ to the host"
 msgstr ""
 
-#: ../../src/network/nethost.cc:1227
+#: ../../src/network/nethost.cc:1220
 msgid ""
 "Access to host commands denied. To gain access, send the password with pwd "
 "command."
 msgstr ""
 
-#: ../../src/network/nethost.cc:1232
+#: ../../src/network/nethost.cc:1225
 #, c-format
 msgid "%s told me to run the command: \"%s\""
 msgstr "%s ba meg kjøre kommandoen: «%s»"
 
-#: ../../src/network/nethost.cc:1241
+#: ../../src/network/nethost.cc:1234
 msgid "Sorry! Saving was deactivated on this dedicated server!"
 msgstr "Beklager! Lagring har blitt slått av på denne dedikerte tjeneren!"
 
-#: ../../src/network/nethost.cc:1244
+#: ../../src/network/nethost.cc:1237
 msgid "Can not save, as long as no game is running!"
 msgstr "Kan ikke lagre, ingen spill som kjører!"
 
-#: ../../src/network/nethost.cc:1255
+#: ../../src/network/nethost.cc:1248
 msgid "Game successfully saved!"
 msgstr "Spill lagret!"
 
-#: ../../src/network/nethost.cc:1257
+#: ../../src/network/nethost.cc:1250
 #, c-format
 msgid "Could not save the game to the file \"%s\"! (%s)"
 msgstr "Kunne ikke lagre spillet til filen «%s»! (%s)"
 
-#: ../../src/network/nethost.cc:1264
+#: ../../src/network/nethost.cc:1257
 msgid "This server is not password protected!"
 msgstr "Denne tjeneren er ikke passsordbeskyttet!"
 
-#: ../../src/network/nethost.cc:1267
+#: ../../src/network/nethost.cc:1260
 #: ../../src/network/internet_gaming_messages.cc:43
 msgid "The sent password was incorrect!"
 msgstr ""
 
-#: ../../src/network/nethost.cc:1280
+#: ../../src/network/nethost.cc:1273
 msgid "The password was correct, access was granted!"
 msgstr ""
 
-#: ../../src/network/nethost.cc:1286
+#: ../../src/network/nethost.cc:1279
 #, c-format
 msgid "Unknown dedicated server command \"%s\"!"
 msgstr "Ukjent dedikert tjener kommando «%s»!"
 
-#: ../../src/network/nethost.cc:1991
+#: ../../src/network/nethost.cc:1984
 #, c-format
 msgid "Computer%u"
 msgstr ""
 
-#: ../../src/network/nethost.cc:2154
+#: ../../src/network/nethost.cc:2147
 #, c-format
 msgid ""
 "This server is password protected. You can send the password with: \"@%s pwd "
@@ -1665,11 +1665,11 @@ msgstr ""
 "Enten er det ingen Widelands-tjener som kjører på den antatte porten eller\n"
 "så ble tjeneren slått av mens du forsøkte å koble deg til."
 
-#: ../../src/network/netclient.cc:872
+#: ../../src/network/netclient.cc:863
 msgid "/me 's file failed md5 checksumming."
 msgstr "/me sin fil feilet md5 sjekksum."
 
-#: ../../src/network/netclient.cc:902
+#: ../../src/network/netclient.cc:893
 msgid ""
 "/me checked the received file. Although md5 check summing succeeded, I can "
 "not handle the file."
@@ -1677,11 +1677,11 @@ msgstr ""
 "/me sjekket den mottatte filen. Selvom md5 sjekksummen var i orden, kan jeg "
 "ikke håndtere filen."
 
-#: ../../src/network/netclient.cc:1117
+#: ../../src/network/netclient.cc:1108
 msgid " An automatic savegame will be created."
 msgstr " Et automatisk lagret spill vil bli opprettet."
 
-#: ../../src/network/netclient.cc:1121
+#: ../../src/network/netclient.cc:1112
 msgid "Disconnected from Host"
 msgstr "Koblet fra vert"
 
@@ -1775,11 +1775,11 @@ msgstr "Melding kunne ikke sendes: du er ikke koblet til metatjeneren!"
 msgid "Message could not be sent: Was this supposed to be a private message?"
 msgstr ""
 
-#: ../../src/network/internet_gaming.cc:787
+#: ../../src/network/internet_gaming.cc:778
 msgid "Conversion error"
 msgstr "Konverteringsfeil"
 
-#: ../../src/network/internet_gaming.cc:788
+#: ../../src/network/internet_gaming.cc:779
 #, c-format
 msgid "Conversion from std::string to bool failed. String was \"%s\""
 msgstr "Konvertering fra std::string til bool feilet. Strengen var «%s»"
@@ -1812,7 +1812,7 @@ msgstr "Velg et lagret spill"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:84 ../../src/ui_fsmenu/options.cc:56
 #: ../../src/ui_fsmenu/options.cc:400 ../../src/wui/login_box.cc:70
-#: ../../src/wui/game_main_menu_save_game.cc:107
+#: ../../src/wui/game_main_menu_save_game.cc:106
 #: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:130
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:139
 #: ../../src/editor/ui_menus/editor_main_menu_save_map_make_directory.cc:67
@@ -2282,7 +2282,7 @@ msgid ""
 msgstr ""
 
 #: ../../src/ui_fsmenu/loadgame.cc:72 ../../src/ui_fsmenu/loadreplay.cc:55
-#: ../../src/wui/game_main_menu_save_game.cc:115
+#: ../../src/wui/game_main_menu_save_game.cc:114
 msgid "Delete"
 msgstr "Slett"
 
@@ -2634,8 +2634,8 @@ msgstr "Flerspiller"
 msgid "Watch Replay"
 msgstr "Se reprise"
 
-#: ../../src/ui_fsmenu/main.cc:65 ../../src/wui/interactive_player.cc:112
-#: ../../src/wui/interactive_spectator.cc:58
+#: ../../src/ui_fsmenu/main.cc:65 ../../src/wui/interactive_player.cc:110
+#: ../../src/wui/interactive_spectator.cc:57
 #: ../../src/wui/game_options_menu.cc:47
 msgid "Options"
 msgstr "Innstillinger"
@@ -2712,30 +2712,30 @@ msgstr "Endeløst spill"
 msgid "preload: %s"
 msgstr "forhåndslast: %s"
 
-#: ../../src/wui/interactive_player.cc:109
-#: ../../src/wui/interactive_spectator.cc:52
+#: ../../src/wui/interactive_player.cc:107
+#: ../../src/wui/interactive_spectator.cc:51
 msgid "Chat"
 msgstr ""
 
-#: ../../src/wui/interactive_player.cc:115
-#: ../../src/wui/interactive_spectator.cc:60
+#: ../../src/wui/interactive_player.cc:113
+#: ../../src/wui/interactive_spectator.cc:59
 msgid "Statistics"
 msgstr "Statistikk"
 
-#: ../../src/wui/interactive_player.cc:118
+#: ../../src/wui/interactive_player.cc:116
 msgid "Objectives"
 msgstr "Mål"
 
-#: ../../src/wui/interactive_player.cc:127
-#: ../../src/wui/interactive_player.cc:294
+#: ../../src/wui/interactive_player.cc:125
+#: ../../src/wui/interactive_player.cc:288
 msgid "Messages"
 msgstr "Meldinger"
 
-#: ../../src/wui/interactive_player.cc:130
+#: ../../src/wui/interactive_player.cc:128
 msgid "Ware help"
 msgstr "Varehjelp"
 
-#: ../../src/wui/interactive_player.cc:302
+#: ../../src/wui/interactive_player.cc:296
 #, c-format
 msgid "%u new message"
 msgid_plural "%u new messages"
@@ -2784,21 +2784,21 @@ msgstr ""
 msgid "Stock"
 msgstr "Lager"
 
-#: ../../src/wui/interactive_base.cc:312
+#: ../../src/wui/interactive_base.cc:316
 #, c-format
 msgid "%u.%ux"
 msgstr "%u.%ux"
 
-#: ../../src/wui/interactive_base.cc:315
+#: ../../src/wui/interactive_base.cc:319
 msgid "PAUSE"
 msgstr "PAUSE"
 
-#: ../../src/wui/interactive_base.cc:335
+#: ../../src/wui/interactive_base.cc:339
 #, c-format
 msgid "%s (%s)"
 msgstr "%s (%s)"
 
-#: ../../src/wui/interactive_base.cc:340
+#: ../../src/wui/interactive_base.cc:344
 msgid "NO GAME CONTROLLER"
 msgstr "INGEN SPILLKONTROLL"
 
@@ -3477,35 +3477,35 @@ msgstr "Lydstyrke for musikk i spillet"
 msgid "Sound FX Volume"
 msgstr "Lydstyrke for lydeffekter"
 
-#: ../../src/wui/game_main_menu_save_game.cc:67
-#: ../../src/wui/interactive_spectator.cc:56
+#: ../../src/wui/game_main_menu_save_game.cc:66
+#: ../../src/wui/interactive_spectator.cc:55
 #: ../../src/wui/game_options_menu.cc:85
 msgid "Save Game"
 msgstr "Lagre spill"
 
-#: ../../src/wui/game_main_menu_save_game.cc:70
+#: ../../src/wui/game_main_menu_save_game.cc:69
 msgid "Map Name: "
 msgstr "Kart: "
 
-#: ../../src/wui/game_main_menu_save_game.cc:74
+#: ../../src/wui/game_main_menu_save_game.cc:73
 msgid "Game Time: "
 msgstr "Spilltid: "
 
-#: ../../src/wui/game_main_menu_save_game.cc:80
+#: ../../src/wui/game_main_menu_save_game.cc:79
 msgid "Win condition: "
 msgstr ""
 
-#: ../../src/wui/game_main_menu_save_game.cc:141
-#: ../../src/wui/game_main_menu_save_game.cc:183
+#: ../../src/wui/game_main_menu_save_game.cc:140
+#: ../../src/wui/game_main_menu_save_game.cc:178
 msgid "player"
 msgstr "spiller"
 
-#: ../../src/wui/game_main_menu_save_game.cc:141
-#: ../../src/wui/game_main_menu_save_game.cc:183
+#: ../../src/wui/game_main_menu_save_game.cc:140
+#: ../../src/wui/game_main_menu_save_game.cc:178
 msgid "players"
 msgstr "spillere"
 
-#: ../../src/wui/game_main_menu_save_game.cc:253
+#: ../../src/wui/game_main_menu_save_game.cc:248
 msgid ""
 "Game Saving Error!\n"
 "Saved Game-File may be corrupt!\n"
@@ -3517,25 +3517,25 @@ msgstr ""
 "\n"
 "Grunn:\n"
 
-#: ../../src/wui/game_main_menu_save_game.cc:257
-#: ../../src/wui/game_main_menu_save_game.cc:269
+#: ../../src/wui/game_main_menu_save_game.cc:252
+#: ../../src/wui/game_main_menu_save_game.cc:264
 msgid "Save Game Error!!"
 msgstr "Feil ved lagring av spill!!"
 
-#: ../../src/wui/game_main_menu_save_game.cc:270
+#: ../../src/wui/game_main_menu_save_game.cc:265
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:385
 msgid "A File with the name "
 msgstr "En fil med navnet "
 
-#: ../../src/wui/game_main_menu_save_game.cc:274
+#: ../../src/wui/game_main_menu_save_game.cc:269
 msgid " already exists. Overwrite?"
 msgstr " finnes allerede. Overskrive?"
 
-#: ../../src/wui/game_main_menu_save_game.cc:337
+#: ../../src/wui/game_main_menu_save_game.cc:330
 msgid "File deletion"
 msgstr "Sletting av fil"
 
-#: ../../src/wui/game_main_menu_save_game.cc:339
+#: ../../src/wui/game_main_menu_save_game.cc:332
 #, c-format
 msgid "Do you really want to delete the file %s?"
 msgstr "Vil du virkelig slette filen %s?"
@@ -3545,7 +3545,7 @@ msgstr "Vil du virkelig slette filen %s?"
 msgid "Main Menu"
 msgstr "Hovedmeny"
 
-#: ../../src/wui/interactive_spectator.cc:54
+#: ../../src/wui/interactive_spectator.cc:53
 msgid "Exit Replay"
 msgstr "Avslutt reprise"
 
@@ -4015,7 +4015,7 @@ msgid "{\"fail\"|\"complete\"|\"skip\"|\"repeat\"}"
 msgstr "{«feil»|«ferdig»|«hopp over»|«gjenta»}"
 
 #: ../../src/logic/production_program.cc:662
-#: ../../src/logic/production_program.cc:736 ../../src/logic/immovable.cc:829
+#: ../../src/logic/production_program.cc:736 ../../src/logic/immovable.cc:830
 msgid "duration in ms"
 msgstr "varighet i ms"
 
@@ -4131,11 +4131,11 @@ msgstr "Fant ingen soldater til dette treningsnivået!"
 msgid "expected level > %u but found \"%s\""
 msgstr "forventent nivå > %u men fant «%s»"
 
-#: ../../src/logic/production_program.cc:1438 ../../src/logic/immovable.cc:868
+#: ../../src/logic/production_program.cc:1438 ../../src/logic/immovable.cc:869
 msgid "priority"
 msgstr "prioritet"
 
-#: ../../src/logic/production_program.cc:1647 ../../src/logic/immovable.cc:141
+#: ../../src/logic/production_program.cc:1647 ../../src/logic/immovable.cc:142
 #, c-format
 msgid "unknown command type \"%s\""
 msgstr "ukjent kommandotype «%s»"
@@ -4175,7 +4175,7 @@ msgstr " erobre"
 msgid "A new %s was added to your economy."
 msgstr "En ny %s ble lagt til i økonomien din."
 
-#: ../../src/logic/map.cc:361
+#: ../../src/logic/map.cc:363
 msgid "Player 1"
 msgstr "Spiller 1"
 
@@ -4184,102 +4184,102 @@ msgstr "Spiller 1"
 msgid "calculate statistics function: %s"
 msgstr ""
 
-#: ../../src/logic/immovable.cc:145
+#: ../../src/logic/immovable.cc:146
 msgid "no actions"
 msgstr "ingen handlinger"
 
-#: ../../src/logic/immovable.cc:204 ../../src/logic/bob.cc:88
+#: ../../src/logic/immovable.cc:205 ../../src/logic/bob.cc:88
 #, c-format
 msgid "bad attribute \"%s\""
 msgstr "dårlig egenskap «%s»"
 
-#: ../../src/logic/immovable.cc:218
+#: ../../src/logic/immovable.cc:219
 msgid "this program has already been declared"
 msgstr "dette programmet finnes allerede"
 
-#: ../../src/logic/immovable.cc:224
+#: ../../src/logic/immovable.cc:225
 #, c-format
 msgid "program %s: %s"
 msgstr "program %s: %s"
 
-#: ../../src/logic/immovable.cc:256 ../../src/logic/immovable.cc:271
+#: ../../src/logic/immovable.cc:257 ../../src/logic/immovable.cc:272
 #, c-format
 msgid "expected 0 .. 255 but found %u"
 msgstr "forventet 0 .. 255 men fant %u"
 
-#: ../../src/logic/immovable.cc:258 ../../src/logic/immovable.cc:273
+#: ../../src/logic/immovable.cc:259 ../../src/logic/immovable.cc:274
 msgid "duplicated"
 msgstr "dobbelt opp"
 
-#: ../../src/logic/immovable.cc:276
+#: ../../src/logic/immovable.cc:277
 #, c-format
 msgid "[terrain affinity] \"%s\" (not in current world): %s"
 msgstr "[terrengtilhørighet] «%s» (ikke i gjeldende verden): %s"
 
-#: ../../src/logic/immovable.cc:312
+#: ../../src/logic/immovable.cc:313
 #, c-format
 msgid "immovable %s has no program \"%s\""
 msgstr "uflyttbar %s har ikke ett program «%s»"
 
-#: ../../src/logic/immovable.cc:776
+#: ../../src/logic/immovable.cc:777
 #, c-format
 msgid "tribe %s does not define immovable type \"%s\""
 msgstr "stamme %s har ikke definert uflyttbar type «%s»"
 
-#: ../../src/logic/immovable.cc:779
+#: ../../src/logic/immovable.cc:780
 #, c-format
 msgid "unknown tribe %s"
 msgstr "ukjent stamme %s"
 
-#: ../../src/logic/immovable.cc:785
+#: ../../src/logic/immovable.cc:786
 #, c-format
 msgid "world does not define immovable type \"%s\""
 msgstr "verden har ikke definert uflyttbar type «%s»"
 
-#: ../../src/logic/immovable.cc:795
+#: ../../src/logic/immovable.cc:796
 #, c-format
 msgid "immovable type %s"
 msgstr "uflyttbar type %s"
 
-#: ../../src/logic/immovable.cc:908 ../../src/logic/immovable.cc:1088
+#: ../../src/logic/immovable.cc:909 ../../src/logic/immovable.cc:1089
 #, c-format
 msgid "expected probability in range [1, 254] but found \"%s\""
 msgstr "forventet sannsynlighet i utvalg [1, 254] men fant «%s»"
 
-#: ../../src/logic/immovable.cc:927
+#: ../../src/logic/immovable.cc:928
 #, c-format
 msgid ""
 "unknown scope \"%s\" given for target type (must be \"world\" or \"tribe\")"
 msgstr ""
 
-#: ../../src/logic/immovable.cc:938
+#: ../../src/logic/immovable.cc:939
 msgid "illegal transformation to the same type"
 msgstr "ulovlig omgjøring til samme type"
 
-#: ../../src/logic/immovable.cc:980 ../../src/logic/immovable.cc:1067
+#: ../../src/logic/immovable.cc:981 ../../src/logic/immovable.cc:1068
 #, c-format
 msgid "immovable type not in tribe but target type has scope (\"%s\")"
 msgstr "uflyttbar type er ikke i stammen, men måltypen har virkefelt («%s»)"
 
-#: ../../src/logic/immovable.cc:986 ../../src/logic/immovable.cc:1073
+#: ../../src/logic/immovable.cc:987 ../../src/logic/immovable.cc:1074
 #, c-format
 msgid "scope \"%s\" given for target type (must be \"world\")"
 msgstr ""
 
-#: ../../src/logic/immovable.cc:1034
+#: ../../src/logic/immovable.cc:1035
 msgid "probability in range [1, 254]"
 msgstr "sannsynlighet i utvalg [1, 254]"
 
-#: ../../src/logic/immovable.cc:1491
+#: ../../src/logic/immovable.cc:1492
 #, c-format
 msgid "loading player immovable: %s"
 msgstr ""
 
-#: ../../src/logic/player.cc:222 ../../src/logic/game.cc:495
+#: ../../src/logic/player.cc:221 ../../src/logic/game.cc:497
 msgid "Missing starting position"
 msgstr "Mangler startposisjon"
 
-#: ../../src/logic/player.cc:224 ../../src/logic/game.cc:497
+#: ../../src/logic/player.cc:223 ../../src/logic/game.cc:499
 #, c-format
 msgid ""
 "Widelands could not start the game, because player %u has no starting "
@@ -4412,7 +4412,7 @@ msgstr "Setter opp spillere"
 msgid "Loading map"
 msgstr "Laster kart"
 
-#: ../../src/logic/game.cc:482
+#: ../../src/logic/game.cc:484
 msgid "Creating player infrastructure"
 msgstr "Skaper spillerinfrastruktur"
 
@@ -4574,33 +4574,33 @@ msgstr "Havneområde funnet"
 msgid "An expedition ship found a new port build space."
 msgstr "Et ekspedisjonsskip har funnet et nytt havneområde."
 
-#: ../../src/logic/ship.cc:460
+#: ../../src/logic/ship.cc:467
 msgid "Island surrounded"
 msgstr "Øy sirklet"
 
-#: ../../src/logic/ship.cc:461
+#: ../../src/logic/ship.cc:468
 msgid "An expedition ship surrounded its island without any events."
 msgstr ""
 "Et ekspedisjonsskip har sirklet rundt en øy uten noen nevneverdige hendelser."
 
-#: ../../src/logic/ship.cc:522
+#: ../../src/logic/ship.cc:520
 msgid "Coast reached"
 msgstr "Skip har nådd kyst"
 
-#: ../../src/logic/ship.cc:524
+#: ../../src/logic/ship.cc:522
 msgid ""
 "An expedition ship reached a coast and is waiting for further commands."
 msgstr "Et ekspedisjonsskip har nådd en kyst og venter på nye ordre."
 
-#: ../../src/logic/ship.cc:660
+#: ../../src/logic/ship.cc:658
 msgid "Expedition ready"
 msgstr "Ekspedisjon klar"
 
-#: ../../src/logic/ship.cc:661
+#: ../../src/logic/ship.cc:659
 msgid "An expedition ship is waiting for your commands."
 msgstr "Et ekspedisjonsskip avventer dine ordre."
 
-#: ../../src/logic/ship.cc:924
+#: ../../src/logic/ship.cc:922
 #, c-format
 msgid "loading ship: %s"
 msgstr "laster skip: %s"
