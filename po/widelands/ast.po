@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2013-08-30 14:55+0200\n"
+"POT-Creation-Date: 2013-09-01 11:23+0200\n"
 "PO-Revision-Date: 2012-11-02 16:13+0000\n"
 "Last-Translator: Xuacu Saturio <xuacusk8@gmail.com>\n"
 "Language-Team: Asturian <ast@li.org>\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2013-08-31 04:38+0000\n"
+"X-Launchpad-Export-Date: 2013-09-02 04:36+0000\n"
 "X-Generator: Launchpad (build 16750)\n"
 
 #: ../../src/save_handler.cc:75
@@ -771,8 +771,8 @@ msgstr ""
 #: ../../src/logic/production_program.cc:1348
 #: ../../src/logic/production_program.cc:1438 ../../src/logic/soldier.cc:70
 #: ../../src/logic/soldier.cc:77 ../../src/logic/soldier.cc:185
-#: ../../src/logic/immovable.cc:193 ../../src/logic/immovable.cc:829
-#: ../../src/logic/immovable.cc:869 ../../src/logic/immovable.cc:1034
+#: ../../src/logic/immovable.cc:192 ../../src/logic/immovable.cc:828
+#: ../../src/logic/immovable.cc:868 ../../src/logic/immovable.cc:1033
 #: ../../src/logic/building.cc:88
 #, c-format
 msgid "expected %s but found \"%s\""
@@ -898,7 +898,7 @@ msgstr ""
 #: ../../src/logic/playercommand.cc:1757 ../../src/logic/playercommand.cc:1855
 #: ../../src/logic/playercommand.cc:1933 ../../src/logic/playercommand.cc:1977
 #: ../../src/logic/cmd_calculate_statistics.cc:44
-#: ../../src/logic/immovable.cc:794 ../../src/logic/immovable.cc:1490
+#: ../../src/logic/immovable.cc:793 ../../src/logic/immovable.cc:1489
 #: ../../src/logic/instances.cc:71 ../../src/logic/instances.cc:129
 #: ../../src/logic/instances.cc:495 ../../src/logic/cmd_luacoroutine.cc:75
 #: ../../src/logic/battle.cc:412 ../../src/logic/cmd_queue.cc:191
@@ -4008,7 +4008,7 @@ msgid "{\"fail\"|\"complete\"|\"skip\"|\"repeat\"}"
 msgstr ""
 
 #: ../../src/logic/production_program.cc:662
-#: ../../src/logic/production_program.cc:736 ../../src/logic/immovable.cc:830
+#: ../../src/logic/production_program.cc:736 ../../src/logic/immovable.cc:829
 msgid "duration in ms"
 msgstr ""
 
@@ -4124,11 +4124,11 @@ msgstr ""
 msgid "expected level > %u but found \"%s\""
 msgstr ""
 
-#: ../../src/logic/production_program.cc:1438 ../../src/logic/immovable.cc:869
+#: ../../src/logic/production_program.cc:1438 ../../src/logic/immovable.cc:868
 msgid "priority"
 msgstr ""
 
-#: ../../src/logic/production_program.cc:1647 ../../src/logic/immovable.cc:142
+#: ../../src/logic/production_program.cc:1647 ../../src/logic/immovable.cc:141
 #, c-format
 msgid "unknown command type \"%s\""
 msgstr ""
@@ -4177,93 +4177,93 @@ msgstr ""
 msgid "calculate statistics function: %s"
 msgstr ""
 
-#: ../../src/logic/immovable.cc:146
+#: ../../src/logic/immovable.cc:145
 msgid "no actions"
 msgstr ""
 
-#: ../../src/logic/immovable.cc:205 ../../src/logic/bob.cc:88
+#: ../../src/logic/immovable.cc:204 ../../src/logic/bob.cc:88
 #, c-format
 msgid "bad attribute \"%s\""
 msgstr ""
 
-#: ../../src/logic/immovable.cc:219
+#: ../../src/logic/immovable.cc:218
 msgid "this program has already been declared"
 msgstr ""
 
-#: ../../src/logic/immovable.cc:225
+#: ../../src/logic/immovable.cc:224
 #, c-format
 msgid "program %s: %s"
 msgstr ""
 
-#: ../../src/logic/immovable.cc:257 ../../src/logic/immovable.cc:272
+#: ../../src/logic/immovable.cc:256 ../../src/logic/immovable.cc:271
 #, c-format
 msgid "expected 0 .. 255 but found %u"
 msgstr ""
 
-#: ../../src/logic/immovable.cc:259 ../../src/logic/immovable.cc:274
+#: ../../src/logic/immovable.cc:258 ../../src/logic/immovable.cc:273
 msgid "duplicated"
 msgstr ""
 
-#: ../../src/logic/immovable.cc:277
+#: ../../src/logic/immovable.cc:276
 #, c-format
 msgid "[terrain affinity] \"%s\" (not in current world): %s"
 msgstr ""
 
-#: ../../src/logic/immovable.cc:313
+#: ../../src/logic/immovable.cc:312
 #, c-format
 msgid "immovable %s has no program \"%s\""
 msgstr ""
 
-#: ../../src/logic/immovable.cc:777
+#: ../../src/logic/immovable.cc:776
 #, c-format
 msgid "tribe %s does not define immovable type \"%s\""
 msgstr ""
 
-#: ../../src/logic/immovable.cc:780
+#: ../../src/logic/immovable.cc:779
 #, c-format
 msgid "unknown tribe %s"
 msgstr ""
 
-#: ../../src/logic/immovable.cc:786
+#: ../../src/logic/immovable.cc:785
 #, c-format
 msgid "world does not define immovable type \"%s\""
 msgstr ""
 
-#: ../../src/logic/immovable.cc:796
+#: ../../src/logic/immovable.cc:795
 #, c-format
 msgid "immovable type %s"
 msgstr ""
 
-#: ../../src/logic/immovable.cc:909 ../../src/logic/immovable.cc:1089
+#: ../../src/logic/immovable.cc:908 ../../src/logic/immovable.cc:1088
 #, c-format
 msgid "expected probability in range [1, 254] but found \"%s\""
 msgstr ""
 
-#: ../../src/logic/immovable.cc:928
+#: ../../src/logic/immovable.cc:927
 #, c-format
 msgid ""
 "unknown scope \"%s\" given for target type (must be \"world\" or \"tribe\")"
 msgstr ""
 
-#: ../../src/logic/immovable.cc:939
+#: ../../src/logic/immovable.cc:938
 msgid "illegal transformation to the same type"
 msgstr ""
 
-#: ../../src/logic/immovable.cc:981 ../../src/logic/immovable.cc:1068
+#: ../../src/logic/immovable.cc:980 ../../src/logic/immovable.cc:1067
 #, c-format
 msgid "immovable type not in tribe but target type has scope (\"%s\")"
 msgstr ""
 
-#: ../../src/logic/immovable.cc:987 ../../src/logic/immovable.cc:1074
+#: ../../src/logic/immovable.cc:986 ../../src/logic/immovable.cc:1073
 #, c-format
 msgid "scope \"%s\" given for target type (must be \"world\")"
 msgstr ""
 
-#: ../../src/logic/immovable.cc:1035
+#: ../../src/logic/immovable.cc:1034
 msgid "probability in range [1, 254]"
 msgstr ""
 
-#: ../../src/logic/immovable.cc:1492
+#: ../../src/logic/immovable.cc:1491
 #, c-format
 msgid "loading player immovable: %s"
 msgstr ""
