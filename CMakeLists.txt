@@ -150,7 +150,7 @@ else (WL_UNIT_TESTS)
   endif(DEFINED MSVC)
   set (Boost_USE_MULTITHREADED ON)
   set (Boost_DETAILED_FAILURE_MSG ON)
-  find_package(Boost 1.46.1 COMPONENTS signals REQUIRED)
+  find_package(Boost 1.48 COMPONENTS signals REQUIRED)
 endif (WL_UNIT_TESTS)
 
 option (WL_STRICT "If strict compilation mode is requested (almost every warning is an error)" OFF)
