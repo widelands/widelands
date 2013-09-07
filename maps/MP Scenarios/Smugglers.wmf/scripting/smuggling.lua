@@ -1,9 +1,9 @@
 -- =======================================================================
---                              Smuggling logic                             
+--                              Smuggling logic
 -- =======================================================================
 
 -- =================
--- Helper functions 
+-- Helper functions
 -- =================
 -- Find a warehouse for in the given area
 function find_warehouse(region)
@@ -14,17 +14,17 @@ function find_warehouse(region)
    end
 end
 
-function do_game_over() 
+function do_game_over()
    if game_over_done then return end
 
    local w1, w2, l1, l2, lc
    if points[1] >= points_to_win then
-      w1, w2 = game.players[1], game.players[3]
-      l1, l2 = game.players[2], game.players[4]
+      w1, w2 = game.players[1], game.players[2]
+      l1, l2 = game.players[3], game.players[4]
       lc = points[2]
    else
-      w1, w2 = game.players[2], game.players[4]
-      l1, l2 = game.players[1], game.players[3]
+      w1, w2 = game.players[3], game.players[4]
+      l1, l2 = game.players[1], game.players[2]
       lc = points[1]
    end
 
@@ -47,7 +47,7 @@ function do_smuggling(route_descr, recv_plr, send_plr, recv_whf, send_whf)
          send_whf.immovable.owner ~= send_plr or
          not recv_whf.immovable or recv_whf.immovable.name ~= "warehouse" or
          recv_whf.immovable.owner ~= recv_plr
-      then 
+      then
          send_to_all(smuggling_route_broken:format(
             route_descr.value, recv_plr.name, send_plr.name)
          )
@@ -84,7 +84,7 @@ function wait_for_established_route(route_descr)
    end
 
    send_to_all(smuggling_route_established:format(
-      w1.owner.name, w2.owner.name, route_descr.value 
+      w1.owner.name, w2.owner.name, route_descr.value
    ))
 
    run(do_smuggling, route_descr, w1.owner, w2.owner, w1.fields[1], w2.fields[1])
