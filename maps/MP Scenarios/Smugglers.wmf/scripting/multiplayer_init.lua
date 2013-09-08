@@ -15,7 +15,7 @@ set_textdomain("mp_scenario_smugglers.wmf")
 game = wl.Game()
 map = game.map
 
-points_to_win = 1000
+points_to_win = 2000
 
 route_descrs = {
    { value = 2, send = map:get_field(35, 52):region(2), recv = map:get_field(96, 77):region(2) },
