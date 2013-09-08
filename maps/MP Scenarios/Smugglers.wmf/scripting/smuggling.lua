@@ -75,17 +75,29 @@ function do_smuggling(route_descr, recv_plr, send_plr, recv_whf, send_whf)
 end
 
 function wait_for_established_route(route_descr)
-   local w1, w2
+   local receiving_wh, sending_wh
    while 1 do
-      w1 = find_warehouse(route_descr.recv)
-      w2 = find_warehouse(route_descr.send)
-      if w1 and w2 and w1.owner.team == w2.owner.team then break end
+      receiving_wh = find_warehouse(route_descr.recv)
+      sending_wh = find_warehouse(route_descr.send)
+      if receiving_wh and sending_wh and receiving_wh.owner.team == sending_wh.owner.team then break end
       sleep(7138)
    end
 
-   send_to_all(smuggling_route_established:format(
-      w1.owner.name, w2.owner.name, route_descr.value
-   ))
+   -- Send message to all players, send fields too for players with warehouse.
+   local non_team_message = smuggling_route_established_other_team:format(
+      receiving_wh.owner.name, sending_wh.owner.name, route_descr.value
+   )
+   for idx,plr in ipairs(game.players) do
+      if plr.number ~= receiving_wh.owner.number and plr.number ~= sending_wh.owner.number then
+         plr:send_message(_ "Game Status", non_team_message, {popup=true})
+      end
+   end
+   receiving_wh.owner:send_message(_ "Game Status",
+      smuggling_route_established_receiver:format(route_descr.value), {popup=true, field=receiving_wh.fields[1]}
+   )
+   sending_wh.owner:send_message(_ "Game Status",
+      smuggling_route_established_sender:format(route_descr.value), {popup=true, field=sending_wh.fields[1]}
+   )
 
-   run(do_smuggling, route_descr, w1.owner, w2.owner, w1.fields[1], w2.fields[1])
+   run(do_smuggling, route_descr, receiving_wh.owner, sending_wh.owner, receiving_wh.fields[1], sending_wh.fields[1])
 end
