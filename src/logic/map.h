@@ -124,6 +124,7 @@ struct Map :
 	friend struct WL_Map_Loader;
 	friend struct Map_Elemental_Data_Packet;
 	friend struct Map_Extradata_Data_Packet;
+	friend struct Map_Version_Data_Packet;
 	friend class Editor;
 	friend struct Main_Menu_New_Map;
 	friend struct MapGenerator;
@@ -433,6 +434,16 @@ private:
 		void find_reachable(Area<FCoords>, const CheckStep &, functorT &);
 
 	template<typename functorT> void find(const Area<FCoords>, functorT &) const;
+
+	// Map version information. Details in widelands_map_version_data_packet.cc
+	std::string m_map_source_url;
+	std::string m_map_source_release;
+	std::string m_map_creator_version_original;
+	std::string m_map_creator_version_latest;
+	int32_t     m_map_version_major;
+	int32_t     m_map_version_minor;
+	uint32_t    m_map_version_timestamp;
+
 };
 
 

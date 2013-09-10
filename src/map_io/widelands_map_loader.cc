@@ -52,6 +52,7 @@
 #include "map_io/widelands_map_roaddata_data_packet.h"
 #include "map_io/widelands_map_scripting_data_packet.h"
 #include "map_io/widelands_map_terrain_data_packet.h"
+#include "map_io/widelands_map_version_data_packet.h"
 #include "map_io/widelands_map_ware_data_packet.h"
 #include "map_io/widelands_map_waredata_data_packet.h"
 #include "warning.h"
@@ -197,6 +198,11 @@ int32_t WL_Map_Loader::load_map_complete
 	log("Reading Map Extra Data ... ");
 	{Map_Extradata_Data_Packet      p; p.Read(m_fs, egbase, !scenario, *m_mol);}
 	log("done!\n ");
+
+	log("Reading Map Version Data ... ");
+	{Map_Version_Data_Packet      p; p.Read(m_fs, egbase, !scenario, *m_mol);}
+	log("done!\n ");
+
 
 	log("Reading Allowed Worker Types Data ... ");
 	{

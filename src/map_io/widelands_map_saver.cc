@@ -49,6 +49,7 @@
 #include "map_io/widelands_map_roaddata_data_packet.h"
 #include "map_io/widelands_map_scripting_data_packet.h"
 #include "map_io/widelands_map_terrain_data_packet.h"
+#include "map_io/widelands_map_version_data_packet.h"
 #include "wexception.h"
 
 namespace Widelands {
@@ -113,6 +114,12 @@ void Map_Saver::save() throw (_wexception) {
 	log("Writing Map Extra Data ... ");
 	{Map_Extradata_Data_Packet               p; p.Write(m_fs, m_egbase, *m_mos);}
 	log("done!\n ");
+
+	log("Writing Map Version ... ");
+	{Map_Version_Data_Packet               p; p.Write(m_fs, m_egbase, *m_mos);}
+	log("done!\n ");
+
+
 
 	const Map & map = m_egbase.map();
 
