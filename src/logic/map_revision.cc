@@ -17,14 +17,20 @@
  *
  */
 
-#ifndef WIDELANDS_MAP_VERSION_DATA_PACKET_H
-#define WIDELANDS_MAP_VERSION_DATA_PACKET_H
+#include "build_info.h"
+#include "logic/map_revision.h"
 
-#include "map_io/widelands_map_data_packet.h"
+namespace Widelands {
 
-/*
- * This packet contains the version information of the map.
- */
-MAP_DATA_PACKET(Map_Version_Data_Packet);
 
-#endif
+map_version::map_version() :
+m_map_version_major(0),
+m_map_version_minor(0)
+{
+	m_map_source_url.clear();
+	m_map_source_release.clear();
+	m_map_creator_version = build_id();
+	m_map_version_timestamp = static_cast<uint32_t>(time(NULL));
+}
+
+}

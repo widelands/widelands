@@ -30,6 +30,7 @@
 #include "logic/field.h"
 #include "interval.h"
 #include "manager.h"
+#include "logic/map_revision.h"
 #include "logic/notification.h"
 #include "logic/objective.h"
 #include "random.h"
@@ -435,15 +436,7 @@ private:
 
 	template<typename functorT> void find(const Area<FCoords>, functorT &) const;
 
-	// Map version information. Details in widelands_map_version_data_packet.cc
-	std::string m_map_source_url;
-	std::string m_map_source_release;
-	std::string m_map_creator_version_original;
-	std::string m_map_creator_version_latest;
-	int32_t     m_map_version_major;
-	int32_t     m_map_version_minor;
-	uint32_t    m_map_version_timestamp;
-
+	map_version m_map_version;
 };
 
 

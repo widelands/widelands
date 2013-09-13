@@ -17,14 +17,36 @@
  *
  */
 
-#ifndef WIDELANDS_MAP_VERSION_DATA_PACKET_H
-#define WIDELANDS_MAP_VERSION_DATA_PACKET_H
+#ifndef MAP_REVISION_H
+#define MAP_REVISION_H
 
-#include "map_io/widelands_map_data_packet.h"
+#include <cstring>
+#include <memory>
+#include <set>
+#include <string>
+#include <vector>
 
-/*
- * This packet contains the version information of the map.
- */
-MAP_DATA_PACKET(Map_Version_Data_Packet);
+namespace Widelands {
+
+
+
+
+class map_version {
+	public:
+
+	std::string m_map_source_url;
+	std::string m_map_source_release;
+	std::string m_map_creator_version;
+	int32_t     m_map_version_major;
+	int32_t     m_map_version_minor;
+	uint32_t    m_map_version_timestamp;
+
+	map_version();
+
+};
+
+}
+
+
 
 #endif

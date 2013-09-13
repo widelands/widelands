@@ -71,16 +71,9 @@ m_world          (0),
 m_starting_pos   (0),
 m_fields         (0),
 m_overlay_manager(0),
-m_pathfieldmgr   (new PathfieldManager),
-m_map_version_major(0),
-m_map_version_minor(0)
+m_pathfieldmgr   (new PathfieldManager)
 {
 	m_worldname[0] = '\0';
-	m_map_source_url.clear();
-	m_map_source_release.clear();
-	m_map_creator_version_original = build_id();
-	m_map_creator_version_latest = build_id();
-	m_map_version_timestamp = static_cast<uint32_t>(time(NULL));
 }
 
 

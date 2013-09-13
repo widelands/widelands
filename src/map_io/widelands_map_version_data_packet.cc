@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2008, 2010 by the Widelands Development Team
+ * Copyright (C) 2013 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -19,13 +19,13 @@
 
 #include "map_io/widelands_map_version_data_packet.h"
 
-#include <SDL_image.h>
+//#include <SDL_image.h>
 
 #include "build_info.h"
-#include "graphic/graphic.h"
-#include "graphic/in_memory_image.h"
-#include "graphic/surface.h"
-#include "io/filewrite.h"
+//#include "graphic/graphic.h"
+// #include "graphic/in_memory_image.h"
+// #include "graphic/surface.h"
+// #include "io/filewrite.h"
 #include "logic/editor_game_base.h"
 #include "logic/game_data_error.h"
 #include "logic/map.h"
@@ -53,9 +53,8 @@ throw (_wexception)
 	try {prof.read("version", 0, fs);} catch (...)
 		{
 			Map & map = egbase.map();
-			map.m_map_version_timestamp = 0;
-			map.m_map_creator_version_original = "unknown";
-			map.m_map_creator_version_latest = "old";
+			map.m_map_version.m_map_version_timestamp = 0;
+			map.m_map_version.m_map_creator_version = "unknown";
 			return;
 		}
 
@@ -70,13 +69,12 @@ throw (_wexception)
 			|| (packet_version > CURRENT_PACKET_VERSION && forward_compatibility <= CURRENT_PACKET_VERSION))
 		{
 			Map & map = egbase.map();
-			map.m_map_source_url = globv.get_safe_string("map_source_url");
-			map.m_map_source_release = globv.get_safe_string("map_release");
-			map.m_map_creator_version_original = globv.get_safe_string("map_creator_version_original");
-			map.m_map_creator_version_latest = globv.get_safe_string("map_creator_version_latest");
-			map.m_map_version_major = globv.get_safe_int("map_version_major");
-			map.m_map_version_minor = globv.get_safe_int("map_version_minor");
-			map.m_map_version_timestamp = static_cast<uint32_t>(globv.get_safe_int("map_version_timestamp"));
+			map.m_map_version.m_map_source_url = globv.get_safe_string("map_source_url");
+			map.m_map_version.m_map_source_release = globv.get_safe_string("map_release");
+			map.m_map_version.m_map_creator_version = globv.get_safe_string("map_creator_version");
+			map.m_map_version.m_map_version_major = globv.get_safe_int("map_version_major");
+			map.m_map_version.m_map_version_minor = globv.get_safe_int("map_version_minor");
+			map.m_map_version.m_map_version_timestamp = static_cast<uint32_t>(globv.get_safe_int("map_version_timestamp"));
 		} else
 			throw game_data_error
 				(_("unknown/unhandled version %u"), packet_version);
@@ -124,12 +122,11 @@ throw (_wexception)
 	// For now, these are meaningless. Let's hope it will not stay that way!
 
 	Map & map = egbase.map();
-	globs.set_string("map_source_url", map.m_map_source_url);
-	globs.set_string("map_release", map.m_map_source_release);
-	globs.set_string("map_creator_version_original", map.m_map_creator_version_original);
-	globs.set_string("map_creator_version_latest", build_id() + "(" + build_type() + ")");
-	globs.set_int("map_version_major", map.m_map_version_major);
-	globs.set_int("map_version_minor", 1 + map.m_map_version_minor);
+	globs.set_string("map_source_url", map.m_map_version.m_map_source_url);
+	globs.set_string("map_release", map.m_map_version.m_map_source_release);
+	globs.set_string("map_creator_version", map.m_map_version.m_map_creator_version);
+	globs.set_int("map_version_major", map.m_map_version.m_map_version_major);
+	globs.set_int("map_version_minor", 1 + map.m_map_version.m_map_version_minor);
 	globs.set_int("map_version_timestamp", static_cast<uint32_t>(time(NULL)));
 	globs.set_int("packet_version", CURRENT_PACKET_VERSION);
 	globs.set_int("packet_compatibility", CURRENT_PACKET_VERSION);
