@@ -19,20 +19,13 @@
 
 #include "map_io/widelands_map_version_data_packet.h"
 
-//#include <SDL_image.h>
-
 #include "build_info.h"
-//#include "graphic/graphic.h"
-// #include "graphic/in_memory_image.h"
-// #include "graphic/surface.h"
-// #include "io/filewrite.h"
 #include "logic/editor_game_base.h"
 #include "logic/game_data_error.h"
 #include "logic/map.h"
 #include "logic/widelands_fileread.h"
 #include "logic/widelands_filewrite.h"
 #include "profile/profile.h"
-
 
 namespace Widelands {
 
@@ -74,7 +67,8 @@ throw (_wexception)
 			map.m_map_version.m_map_creator_version = globv.get_safe_string("map_creator_version");
 			map.m_map_version.m_map_version_major = globv.get_safe_int("map_version_major");
 			map.m_map_version.m_map_version_minor = globv.get_safe_int("map_version_minor");
-			map.m_map_version.m_map_version_timestamp = static_cast<uint32_t>(globv.get_safe_int("map_version_timestamp"));
+			uint32_t ts = static_cast<uint32_t>(globv.get_safe_int("map_version_timestamp"));
+			map.m_map_version.m_map_version_timestamp = ts;
 		} else
 			throw game_data_error
 				(_("unknown/unhandled version %u"), packet_version);

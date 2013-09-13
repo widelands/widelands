@@ -17,8 +17,9 @@
  *
  */
 
-#include "build_info.h"
 #include "logic/map_revision.h"
+
+#include "build_info.h"
 
 namespace Widelands {
 
