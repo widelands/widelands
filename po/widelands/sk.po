@@ -7,29 +7,29 @@ msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2013-09-01 11:23+0200\n"
-"PO-Revision-Date: 2013-01-03 00:43+0000\n"
-"Last-Translator: Nasenbaer <Unknown>\n"
+"PO-Revision-Date: 2013-09-12 18:28+0000\n"
+"Last-Translator: Miroslav Remák <Unknown>\n"
 "Language-Team: Prometheus <mmatej@yahoo.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 1 : (n>=2 && n<=4) ? 2 : 0;\n"
-"X-Launchpad-Export-Date: 2013-09-02 04:39+0000\n"
-"X-Generator: Launchpad (build 16750)\n"
+"X-Launchpad-Export-Date: 2013-09-13 04:42+0000\n"
+"X-Generator: Launchpad (build 16761)\n"
 "X-Poedit-Country: czech republic\n"
 "X-Poedit-Language: czech\n"
 
 #: ../../src/save_handler.cc:75
 msgid "Saving game..."
-msgstr ""
+msgstr "Ukladá sa hra..."
 
 #: ../../src/save_handler.cc:94
 msgid "Saving failed!"
-msgstr ""
+msgstr "Zlyhalo ukladanie!"
 
 #: ../../src/save_handler.cc:113
 msgid "Game saved"
-msgstr ""
+msgstr "Hra uložená"
 
 #: ../../src/s2map.cc:231
 msgid "Bluebyte Settlers II Map. No comment defined!"
@@ -43,10 +43,14 @@ msgid ""
 "map in the map editor.\n"
 "\n"
 msgstr ""
+"UPOZORNENIE: %i neplatných miest na postavenie prístavu nebolo možné opraviť "
+"a boli odstránené! Niektoré ostrovy teda môžu byť neprístupné. Zvážte, "
+"prosím, opravu mapy v editore máp.\n"
+"\n"
 
 #: ../../src/s2map.cc:886
 msgid "WARNING"
-msgstr ""
+msgstr "UPOZORNENIE"
 
 #: ../../src/wlapplication.cc:398
 msgid "ERROR: Could not connect to metaserver (reason above)!\n"
@@ -85,6 +89,10 @@ msgid ""
 "Sorry, no double-instance debugging on _WIN32.\n"
 "\n"
 msgstr ""
+"\n"
+"Ospravedľnujeme sa, ladenie v dvoch inštanciách nie je povolené na platforme "
+"_WIN32.\n"
+"\n"
 
 #: ../../src/wlapplication.cc:1211
 msgid "--double is disabled. This is not a debug build!"
@@ -1396,6 +1404,8 @@ msgid ""
 "This is a dedicated server. Send \"@%s help\" to get a full list of "
 "available commands."
 msgstr ""
+"Toto je dedikovaný server. Pre získanie úplného zoznamu dostupných príkazov "
+"pošlite \"@%s help\"."
 
 #: ../../src/network/nethost.cc:1201
 msgid ""
@@ -1687,6 +1697,8 @@ msgid ""
 "You got disconnected, as you sent a superuser command without superuser "
 "permission. This incident will be logged and reported to the administrator."
 msgstr ""
+"Boli ste odpojený/á kvôli zaslaniu superpoužívateľského príkazu bez práv "
+"superpoužívateľa. Táto udalosť bude zaznamenaná a nahlásená administrátorovi."
 
 #: ../../src/network/internet_gaming_messages.cc:50
 msgid "You got disconnected, as the metaserver is currently restarting."
@@ -1777,7 +1789,7 @@ msgstr "Problém s pripojením"
 
 #: ../../src/network/internet_gaming.cc:116
 msgid "Widelands could not connect to the metaserver."
-msgstr ""
+msgstr "Nebolo možné nadviazať spojenie s metaserverom."
 
 #: ../../src/network/internet_gaming.cc:124
 msgid ""
@@ -2055,7 +2067,7 @@ msgstr "Uložení hráči:"
 #: ../../src/ui_fsmenu/launchMPG.cc:562
 #, c-format
 msgid "Player %u"
-msgstr ""
+msgstr "Hráč %u"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:566
 msgid "closed"
@@ -2410,7 +2422,7 @@ msgstr "Vymazať"
 
 #: ../../src/ui_fsmenu/loadgame.cc:83
 msgid "Choose saved game"
-msgstr ""
+msgstr "Zvoľte uloženú hru"
 
 #: ../../src/ui_fsmenu/loadgame.cc:87 ../../src/ui_fsmenu/loadreplay.cc:71
 #: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:57
@@ -2429,7 +2441,7 @@ msgstr "Hráči:"
 
 #: ../../src/ui_fsmenu/loadgame.cc:105
 msgid "Minimap:"
-msgstr ""
+msgstr "Minimapa:"
 
 #: ../../src/ui_fsmenu/loadgame.cc:157 ../../src/ui_fsmenu/loadreplay.cc:138
 msgid "Delete file"
@@ -2571,7 +2583,7 @@ msgstr "Oficiálne mapy"
 
 #: ../../src/ui_fsmenu/mapselect.cc:172
 msgid "Seafaring Map"
-msgstr ""
+msgstr "Námornícka mapa"
 
 #: ../../src/ui_fsmenu/mapselect.cc:175
 msgid "1v1"
@@ -2829,7 +2841,7 @@ msgstr "info o hráčovi: %s"
 
 #: ../../src/game_io/game_preload_data_packet.cc:72
 msgid "Endless Game"
-msgstr ""
+msgstr "Nekonečná hra"
 
 #: ../../src/game_io/game_preload_data_packet.cc:107
 #, c-format
@@ -2938,37 +2950,37 @@ msgstr "Naozaj chcete zničiť budovu %s?"
 
 #: ../../src/wui/actionconfirm.cc:288
 msgid "Dismantle building?"
-msgstr ""
+msgstr "Rozobrať budovu?"
 
 #: ../../src/wui/actionconfirm.cc:289
 #, c-format
 msgid "Do you really want to dismantle this %s?"
-msgstr ""
+msgstr "Chcete naozaj rozobrať túto budovu - %s?"
 
 #: ../../src/wui/actionconfirm.cc:349
 msgid "Enhance building?"
-msgstr ""
+msgstr "Vylepšiť budovu?"
 
 #: ../../src/wui/actionconfirm.cc:350
 #, c-format
 msgid "Do you really want to enhance this %s?"
-msgstr ""
+msgstr "Chcete naozaj vylepšiť túto budovu - %s?"
 
 #: ../../src/wui/actionconfirm.cc:402 ../../src/wui/actionconfirm.cc:443
 msgid "Sink the ship?"
-msgstr ""
+msgstr "Potopiť loď?"
 
 #: ../../src/wui/actionconfirm.cc:402
 msgid "Do you really want to sink this ship?"
-msgstr ""
+msgstr "Chcete naozaj potopiť túto loď?"
 
 #: ../../src/wui/actionconfirm.cc:443
 msgid "Do you really want to cancel the active expedition?"
-msgstr ""
+msgstr "Chcete naozaj zrušiť aktívnu výpravu?"
 
 #: ../../src/wui/fieldaction.cc:112 ../../src/wui/buildingwindow.cc:240
 msgid "Construction costs:"
-msgstr ""
+msgstr "Náklady na stavbu:"
 
 #: ../../src/wui/fieldaction.cc:247
 msgid "Build small buildings"
@@ -3060,11 +3072,11 @@ msgstr "Zrušiť cestu"
 
 #: ../../src/wui/buildingwindow.cc:181
 msgid "Cancel the expedition"
-msgstr ""
+msgstr "Zrušiť výpravu"
 
 #: ../../src/wui/buildingwindow.cc:191
 msgid "Start an expedition"
-msgstr ""
+msgstr "Začať výpravu"
 
 #: ../../src/wui/buildingwindow.cc:207 ../../src/wui/game_summary.cc:77
 msgid "Continue"
@@ -3122,11 +3134,11 @@ msgstr "Kliknite na vojaka, ktorého chcete poslať preč"
 
 #: ../../src/wui/soldierlist.cc:413
 msgid "Prefer Rookies"
-msgstr ""
+msgstr "Uprednostniť začiatočníkov"
 
 #: ../../src/wui/soldierlist.cc:415
 msgid "Prefer Heroes"
-msgstr ""
+msgstr "Uprednostniť hrdinov"
 
 #: ../../src/wui/trainingsitewindow.cc:58
 msgid "Soldiers in training"
@@ -3401,27 +3413,27 @@ msgstr " alebo "
 
 #: ../../src/wui/game_summary.cc:44
 msgid "Game over"
-msgstr ""
+msgstr "Koniec hry"
 
 #: ../../src/wui/game_summary.cc:60
 msgid "Elapsed time:"
-msgstr ""
+msgstr "Uplynutý čas:"
 
 #: ../../src/wui/game_summary.cc:77
 msgid "Continue playing"
-msgstr ""
+msgstr "Pokračovať v hraní"
 
 #: ../../src/wui/game_summary.cc:83
 msgid "Quit"
-msgstr ""
+msgstr "Ukončiť"
 
 #: ../../src/wui/game_summary.cc:83
 msgid "Return to main menu"
-msgstr ""
+msgstr "Návrat do hlavného menu"
 
 #: ../../src/wui/game_summary.cc:93
 msgid "Time"
-msgstr ""
+msgstr "Čas"
 
 #: ../../src/wui/game_summary.cc:157
 msgid "Lost"
@@ -3437,11 +3449,11 @@ msgstr ""
 
 #: ../../src/wui/game_summary.cc:180
 msgid "You won!"
-msgstr ""
+msgstr "Vyhrali ste!"
 
 #: ../../src/wui/game_summary.cc:182
 msgid "You lost."
-msgstr ""
+msgstr "Prehrali ste."
 
 #: ../../src/wui/game_summary.cc:187
 #, c-format
@@ -3450,15 +3462,15 @@ msgstr ""
 
 #: ../../src/wui/game_summary.cc:191
 msgid "Team %|1$u| won!"
-msgstr ""
+msgstr "Tím %|1$u| zvíťazil!"
 
 #: ../../src/wui/game_summary.cc:245
 msgid "Score"
-msgstr ""
+msgstr "Skóre"
 
 #: ../../src/wui/game_summary.cc:254
 msgid "Player info"
-msgstr ""
+msgstr "Údaje o hráčovi"
 
 #: ../../src/wui/militarysitewindow.cc:59
 msgid "Soldiers"
@@ -3534,7 +3546,7 @@ msgstr "Pracovníci v doku"
 
 #: ../../src/wui/warehousewindow.cc:229
 msgid "Expedition"
-msgstr ""
+msgstr "Výprava"
 
 #: ../../src/wui/building_statistics_menu.cc:77
 #: ../../src/wui/game_main_menu.cc:62
@@ -3618,17 +3630,17 @@ msgstr "Herný čas: "
 
 #: ../../src/wui/game_main_menu_save_game.cc:79
 msgid "Win condition: "
-msgstr ""
+msgstr "Podmienka na výhru: "
 
 #: ../../src/wui/game_main_menu_save_game.cc:140
 #: ../../src/wui/game_main_menu_save_game.cc:178
 msgid "player"
-msgstr ""
+msgstr "hráč"
 
 #: ../../src/wui/game_main_menu_save_game.cc:140
 #: ../../src/wui/game_main_menu_save_game.cc:178
 msgid "players"
-msgstr ""
+msgstr "hráči"
 
 #: ../../src/wui/game_main_menu_save_game.cc:248
 msgid ""
@@ -3688,39 +3700,39 @@ msgstr "Loď"
 
 #: ../../src/wui/shipwindow.cc:116
 msgid "Scout towards the north west"
-msgstr ""
+msgstr "Preskúmať oblasť smerom na severozápad"
 
 #: ../../src/wui/shipwindow.cc:122
 msgid "Explore the island's coast clockwise"
-msgstr ""
+msgstr "Preskúmať pobrežie ostrova v smere pohybu hodinových ručičiek"
 
 #: ../../src/wui/shipwindow.cc:128
 msgid "Scout towards the north east"
-msgstr ""
+msgstr "Preskúmať oblasť smerom na severovýchod"
 
 #: ../../src/wui/shipwindow.cc:134
 msgid "Scout towards the west"
-msgstr ""
+msgstr "Preskúmať oblasť smerom na západ"
 
 #: ../../src/wui/shipwindow.cc:140
 msgid "Construct a port at the current location"
-msgstr ""
+msgstr "Postaviť prístav na aktuálnej pozícii"
 
 #: ../../src/wui/shipwindow.cc:146
 msgid "Scout towards the east"
-msgstr ""
+msgstr "Preskúmať oblasť smerom na východ"
 
 #: ../../src/wui/shipwindow.cc:152
 msgid "Scout towards the south west"
-msgstr ""
+msgstr "Preskúmať oblasť smerom na juhozápad"
 
 #: ../../src/wui/shipwindow.cc:158
 msgid "Explore the island's coast counter clockwise"
-msgstr ""
+msgstr "Preskúmať pobrežie ostrova proti smeru pohybu hodinových ručičiek"
 
 #: ../../src/wui/shipwindow.cc:164
 msgid "Scout towards the south east"
-msgstr ""
+msgstr "Preskúmať oblasť smerom na juhovýchod"
 
 #: ../../src/wui/shipwindow.cc:176
 msgid "Go to ship"
@@ -3732,11 +3744,11 @@ msgstr "Ísť k cieľu"
 
 #: ../../src/wui/shipwindow.cc:188
 msgid "Sink the ship"
-msgstr ""
+msgstr "Potopiť loď"
 
 #: ../../src/wui/shipwindow.cc:193
 msgid "Cancel the Expedition"
-msgstr ""
+msgstr "Zrušiť výpravu"
 
 #: ../../src/wui/waresqueuedisplay.cc:184
 msgid "Highest priority"
@@ -4518,7 +4530,7 @@ msgstr "veľká"
 
 #: ../../src/logic/game.cc:139
 msgid "Not set"
-msgstr ""
+msgstr "Nenastavené"
 
 #: ../../src/logic/game.cc:227
 msgid "Preloading a map"
@@ -4712,11 +4724,11 @@ msgstr "načítanie pracovníka: %s"
 
 #: ../../src/logic/ship.cc:359
 msgid "Port space found"
-msgstr ""
+msgstr "Nájdené miesto pre prístav"
 
 #: ../../src/logic/ship.cc:360
 msgid "An expedition ship found a new port build space."
-msgstr ""
+msgstr "Expedičná loď našla nové miesto na postavenie prístavu."
 
 #: ../../src/logic/ship.cc:467
 msgid "Island surrounded"
@@ -4724,24 +4736,24 @@ msgstr ""
 
 #: ../../src/logic/ship.cc:468
 msgid "An expedition ship surrounded its island without any events."
-msgstr ""
+msgstr "Expedičná loď obkľúčila svoj ostrov bez akýchkoľvek udalostí."
 
 #: ../../src/logic/ship.cc:520
 msgid "Coast reached"
-msgstr ""
+msgstr "Loď dosiahla pobrežie"
 
 #: ../../src/logic/ship.cc:522
 msgid ""
 "An expedition ship reached a coast and is waiting for further commands."
-msgstr ""
+msgstr "Expedičná loď dosiahla pobrežie a čaká na ďalšie rozkazy."
 
 #: ../../src/logic/ship.cc:658
 msgid "Expedition ready"
-msgstr ""
+msgstr "Výprava pripravená"
 
 #: ../../src/logic/ship.cc:659
 msgid "An expedition ship is waiting for your commands."
-msgstr ""
+msgstr "Expedičná loď čaká na vaše rozkazy."
 
 #: ../../src/logic/ship.cc:922
 #, c-format
@@ -4879,7 +4891,7 @@ msgstr "nepomenovaný"
 
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:255
 msgid "directory"
-msgstr ""
+msgstr "priečinok"
 
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:259
 msgid "Not a map file"
@@ -4998,7 +5010,7 @@ msgstr "Výška šumu"
 
 #: ../../src/editor/ui_menus/editor_tool_menu.cc:68
 msgid "Immovables"
-msgstr ""
+msgstr "Nehnuteľné objekty"
 
 #: ../../src/editor/ui_menus/editor_tool_menu.cc:71
 msgid "Set port space"

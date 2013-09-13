@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2013-09-01 09:23+0000\n"
-"PO-Revision-Date: 2012-05-11 23:58+0000\n"
+"PO-Revision-Date: 2013-09-12 17:07+0000\n"
 "Last-Translator: Miroslav Remák <Unknown>\n"
 "Language-Team: Prometheus <mmatej@yahoo.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-09-02 04:36+0000\n"
-"X-Generator: Launchpad (build 16750)\n"
+"X-Launchpad-Export-Date: 2013-09-13 04:42+0000\n"
+"X-Generator: Launchpad (build 16761)\n"
 "X-Poedit-Country: Czech Republic\n"
 "X-Poedit-Language: czech\n"
 
@@ -718,7 +718,7 @@ msgstr "Vyrobiť kopiju"
 
 #: ../../tribes/empire/inn/conf:26
 msgid "Produce meal"
-msgstr ""
+msgstr "Vyrobiť obed"
 
 #: ../../tribes/empire/toolsmithy/conf:42
 msgid "Produce pick"
@@ -730,7 +730,7 @@ msgstr "Vyrobiť plechovú zbroj"
 
 #: ../../tribes/empire/inn/conf:25
 msgid "Produce ration"
-msgstr ""
+msgstr "Vyrobiť prídel"
 
 #: ../../tribes/empire/toolsmithy/conf:47
 msgid "Produce saw"
@@ -1048,6 +1048,8 @@ msgid ""
 "The shovel is needed for proper handling of plants. Therefore the forester "
 "and the vinefarmer use it. It is produced by the toolsmith."
 msgstr ""
+"Lopata je potrebná na správne zaobchádzanie s rastlinami, a preto ju používa "
+"horár a vinohradník. Vyrába ju kováč nástrojov."
 
 #: ../../tribes/empire/grape/conf:1
 msgid ""

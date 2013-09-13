@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2013-09-01 09:23+0000\n"
-"PO-Revision-Date: 2012-12-22 17:57+0000\n"
+"PO-Revision-Date: 2013-09-12 19:16+0000\n"
 "Last-Translator: Miroslav Remák <Unknown>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-09-02 04:34+0000\n"
-"X-Generator: Launchpad (build 16750)\n"
+"X-Launchpad-Export-Date: 2013-09-13 04:42+0000\n"
+"X-Generator: Launchpad (build 16761)\n"
 
 #: ../../txts/README:71
 msgid "(CTRL+) 0-9  Remember and go to previously remembered locations"
@@ -159,7 +159,7 @@ msgstr "Programátori"
 
 #: ../../txts/license:7
 msgid "Copyright 2002 - 2013 by the Widelands Development Team."
-msgstr ""
+msgstr "Copyright 2002 - 2013 od vývojového tímu Widelands."
 
 #: ../../txts/README:150
 msgid "Creating a Session Record</p>"
@@ -368,7 +368,7 @@ msgstr "Licencia"
 
 #: ../../txts/license:4
 msgid "Licensing information for Widelands"
-msgstr ""
+msgstr "Licenčné informácie hry Widelands"
 
 #: ../../txts/tips/editor.tip:10
 msgid ""
@@ -429,6 +429,9 @@ msgid ""
 "New soldiers are recruited in the headquarters or a warehouse if all needed "
 "tools are available. Training sites are for improving their abilities."
 msgstr ""
+"Noví vojaci sa verbujú v základni alebo sklade, pokiaľ sú k dispozícii "
+"všetky potrebné nástroje. Výcvikové stavby slúžia na zlepšenie ich "
+"schopností."
 
 #: ../../txts/developers:307
 msgid "Non Unix Distributions"
@@ -458,12 +461,17 @@ msgid ""
 "standalone binary package, or in the installation directory (like "
 "/usr/share/games/widelands)."
 msgstr ""
+"V systéme Linux môžete nájsť súbor nazvaný COPYING v koreňovom priečinku "
+"zdrojového alebo samostatného binárneho balíčka, alebo v priečinku, kde bola "
+"hra inštalovaná (napríklad /usr/share/games/widelands)."
 
 #: ../../txts/license:20
 msgid ""
 "On MacOS, you can find the file called COPYING in the archive you downloaded "
 "from the website."
 msgstr ""
+"V systéme MacOS môžete nájsť súbor nazvaný COPYING v archíve, ktorý ste "
+"stiahli z webovej stránky."
 
 #: ../../txts/README:159
 msgid ""
@@ -485,6 +493,9 @@ msgid ""
 "On Windows, you can find the file called COPYING.txt in the installation "
 "folder and the Widelands Start menu entry provides a link to this file."
 msgstr ""
+"V systéme Windows môžete nájsť súbor nazvaný COPYING.txt, ktorý sa nachádza "
+"v inštalačnom priečinku, a položka Widelands v ponuke Štart poskytuje na "
+"tento súbor odkaz."
 
 #: ../../txts/README:102
 msgid "Online Help"
@@ -693,6 +704,8 @@ msgid ""
 "The number keys (1 - 0) allow you to directly set the size of the selected "
 "area around your mouse cursor."
 msgstr ""
+"Numerické klávesy (1 - 0) vám umožňujú priamo nastaviť veľkosť označenej "
+"oblasti okolo vášho ukazovateľa myši."
 
 #: ../../txts/editor_readme:10
 msgid ""
@@ -712,6 +725,11 @@ msgid ""
 "quesions or general support) or https://launchpad.net/widelands (Bugtracker, "
 "Translations)."
 msgstr ""
+"Táto hra je poskytovaná 'tak, ako je', bez akejkoľvek záruky. Pre viac "
+"informácií a na získanie podpory nás môžete nájsť na stránke "
+"http://wl.widelands.org (Webová stránka, Wiki, Fórum pre otázky alebo "
+"všeobecnú podporu) alebo https://launchpad.net/widelands (Sledovač chýb, "
+"Preklady)."
 
 #: ../../txts/license:9
 msgid ""
@@ -802,7 +820,7 @@ msgstr ""
 
 #: ../../txts/license:16
 msgid "We are also shipping the GPL as text document with Widelands itself."
-msgstr ""
+msgstr "GPL tiež dodávame ako textový dokument spolu so samotnou hrou."
 
 #: ../../txts/README:88
 msgid ""
@@ -947,4 +965,4 @@ msgstr "open source strategická hra"
 
 #: ../../txts/license:12
 msgid "http://www.gnu.org/licenses/old-licenses/gpl-2.0"
-msgstr ""
+msgstr "http://www.gnu.org/licenses/old-licenses/gpl-2.0"

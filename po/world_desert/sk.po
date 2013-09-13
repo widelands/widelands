@@ -7,20 +7,20 @@ msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2013-09-01 09:23+0000\n"
-"PO-Revision-Date: 2010-06-06 22:38+0000\n"
-"Last-Translator: Nasenbaer <Unknown>\n"
+"PO-Revision-Date: 2013-09-12 14:42+0000\n"
+"Last-Translator: Miroslav Remák <Unknown>\n"
 "Language-Team: Prometheus <mmatej@yahoo.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-09-02 04:40+0000\n"
-"X-Generator: Launchpad (build 16750)\n"
+"X-Launchpad-Export-Date: 2013-09-13 04:43+0000\n"
+"X-Generator: Launchpad (build 16761)\n"
 "X-Poedit-Country: CZECH REPUBLIC\n"
 "X-Poedit-Language: Czech\n"
 
 #: ../../worlds/desert/terrainconf:35
 msgid "Beach"
-msgstr ""
+msgstr "Pláž"
 
 #: ../../worlds/desert/conf:71
 msgid "Beech"
@@ -76,23 +76,23 @@ msgstr "Púšť"
 
 #: ../../worlds/desert/terrainconf:8
 msgid "Desert1"
-msgstr ""
+msgstr "Púšť1"
 
 #: ../../worlds/desert/terrainconf:13
 msgid "Desert2"
-msgstr ""
+msgstr "Púšť2"
 
 #: ../../worlds/desert/terrainconf:18
 msgid "Desert3"
-msgstr ""
+msgstr "Púšť3"
 
 #: ../../worlds/desert/terrainconf:23
 msgid "Desert4"
-msgstr ""
+msgstr "Púšť4"
 
 #: ../../worlds/desert/terrainconf:29
 msgid "Dry soil"
-msgstr ""
+msgstr "Suchá pôda"
 
 #: ../../worlds/desert/conf:87
 msgid "Duck"
@@ -122,7 +122,7 @@ msgstr "Tráva"
 
 #: ../../worlds/desert/terrainconf:57
 msgid "High mountain meadow"
-msgstr ""
+msgstr "Vysokohorská lúka"
 
 #: ../../worlds/desert/resconf:20
 msgid "Iron"
@@ -146,31 +146,31 @@ msgstr "Maličký červený smrek"
 
 #: ../../worlds/desert/terrainconf:96
 msgid "Lava"
-msgstr ""
+msgstr "Láva"
 
 #: ../../worlds/desert/terrainconf:46
 msgid "Meadow"
-msgstr ""
+msgstr "Lúka"
 
 #: ../../worlds/desert/terrainconf:52
 msgid "Mountain meadow"
-msgstr ""
+msgstr "Horská lúka"
 
 #: ../../worlds/desert/terrainconf:62
 msgid "Mountain1"
-msgstr ""
+msgstr "Hora1"
 
 #: ../../worlds/desert/terrainconf:68
 msgid "Mountain2"
-msgstr ""
+msgstr "Hora2"
 
 #: ../../worlds/desert/terrainconf:74
 msgid "Mountain3"
-msgstr ""
+msgstr "Hora3"
 
 #: ../../worlds/desert/terrainconf:80
 msgid "Mountain4"
-msgstr ""
+msgstr "Hora4"
 
 #: ../../worlds/desert/conf:21
 #: ../../worlds/desert/conf:22
@@ -260,7 +260,7 @@ msgstr "Stojace kamene"
 
 #: ../../worlds/desert/terrainconf:40
 msgid "Steppe"
-msgstr ""
+msgstr "Step"
 
 #: ../../worlds/desert/conf:45
 #: ../../worlds/desert/conf:46
