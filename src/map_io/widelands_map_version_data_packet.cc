@@ -100,7 +100,7 @@ throw (_wexception)
 	// map_source_url should be non-zero. I assume that
 	// it is always widelands.org, but chose to put an url there for completeness.
 	//
-	// FOr maps bundled with a release, map_source_release should be non-empty,
+	// For maps bundled with a release, map_source_release should be non-empty,
 	// preferably listing the release that the map came with.
 	// For a map made by user, map_creator_version should list the version
 	// that the map was done with.
@@ -116,7 +116,7 @@ throw (_wexception)
 	// For now, these are meaningless. Let's hope it will not stay that way!
 
 	// FIXME -- we could store the unix time in uint32, as a partial fix to 2038 problem.
-	// There seems to be a get_safe_natural method, but not correspondong setter.
+	// There seems to be a get_safe_natural method, but not corresponding setter.
 
 	Map & map = egbase.map();
 	globs.set_string("map_source_url", map.m_map_version.m_map_source_url);

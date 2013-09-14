@@ -436,7 +436,7 @@ private:
 
 	template<typename functorT> void find(const Area<FCoords>, functorT &) const;
 
-	map_version m_map_version;
+	MapVersion m_map_version;
 };
 
 

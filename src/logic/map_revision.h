@@ -31,8 +31,7 @@ namespace Widelands {
 
 
 
-class map_version {
-	public:
+struct MapVersion {
 
 	std::string m_map_source_url;
 	std::string m_map_source_release;
@@ -41,7 +40,7 @@ class map_version {
 	int32_t     m_map_version_minor;
 	uint32_t    m_map_version_timestamp;
 
-	map_version();
+	MapVersion();
 
 };
 

@@ -24,12 +24,10 @@
 namespace Widelands {
 
 
-map_version::map_version() :
+MapVersion::MapVersion() :
 m_map_version_major(0),
 m_map_version_minor(0)
 {
-	m_map_source_url.clear();
-	m_map_source_release.clear();
 	m_map_creator_version = build_id();
 	m_map_version_timestamp = static_cast<uint32_t>(time(NULL));
 }
