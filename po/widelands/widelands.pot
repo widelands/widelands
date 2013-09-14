@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2013-09-01 11:23+0200\n"
+"POT-Creation-Date: 2013-09-14 22:38+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -814,10 +814,10 @@ msgstr ""
 #: ../../src/logic/immovable.cc:793 ../../src/logic/immovable.cc:1489
 #: ../../src/logic/instances.cc:71 ../../src/logic/instances.cc:129
 #: ../../src/logic/instances.cc:495 ../../src/logic/cmd_luacoroutine.cc:75
-#: ../../src/logic/battle.cc:412 ../../src/logic/cmd_queue.cc:191
+#: ../../src/logic/battle.cc:408 ../../src/logic/cmd_queue.cc:191
 #: ../../src/logic/critter_bob.cc:387 ../../src/logic/legacy.cc:428
 #: ../../src/logic/legacy.cc:486 ../../src/logic/requirements.cc:48
-#: ../../src/logic/ship.cc:920 ../../src/logic/cmd_luascript.cc:56
+#: ../../src/logic/ship.cc:984 ../../src/logic/cmd_luascript.cc:56
 #, c-format
 msgid "unknown/unhandled version %u"
 msgstr ""
@@ -4058,16 +4058,16 @@ msgstr ""
 msgid "\"anim_name[,another_anim,...]\""
 msgstr ""
 
-#: ../../src/logic/soldier.cc:1363
+#: ../../src/logic/soldier.cc:1369
 #, c-format
 msgid "bad direction '%d'"
 msgstr ""
 
-#: ../../src/logic/soldier.cc:1554 ../../src/logic/soldier.cc:1559
+#: ../../src/logic/soldier.cc:1560 ../../src/logic/soldier.cc:1565
 msgid "no"
 msgstr ""
 
-#: ../../src/logic/soldier.cc:1566 ../../src/logic/soldier.cc:1575
+#: ../../src/logic/soldier.cc:1572 ../../src/logic/soldier.cc:1581
 msgid "Logic error"
 msgstr ""
 
@@ -4251,12 +4251,12 @@ msgstr ""
 msgid "lua function: %s"
 msgstr ""
 
-#: ../../src/logic/battle.cc:178
+#: ../../src/logic/battle.cc:174
 #, c-format
 msgid "[battle] soldier %u lose battle\n"
 msgstr ""
 
-#: ../../src/logic/battle.cc:182
+#: ../../src/logic/battle.cc:178
 #, c-format
 msgid "[battle] waking up winner %d\n"
 msgstr ""
@@ -4465,39 +4465,39 @@ msgstr ""
 msgid "loading worker: %s"
 msgstr ""
 
-#: ../../src/logic/ship.cc:359
+#: ../../src/logic/ship.cc:423
 msgid "Port space found"
 msgstr ""
 
-#: ../../src/logic/ship.cc:360
+#: ../../src/logic/ship.cc:424
 msgid "An expedition ship found a new port build space."
 msgstr ""
 
-#: ../../src/logic/ship.cc:467
+#: ../../src/logic/ship.cc:531
 msgid "Island surrounded"
 msgstr ""
 
-#: ../../src/logic/ship.cc:468
+#: ../../src/logic/ship.cc:532
 msgid "An expedition ship surrounded its island without any events."
 msgstr ""
 
-#: ../../src/logic/ship.cc:520
+#: ../../src/logic/ship.cc:584
 msgid "Coast reached"
 msgstr ""
 
-#: ../../src/logic/ship.cc:522
+#: ../../src/logic/ship.cc:586
 msgid "An expedition ship reached a coast and is waiting for further commands."
 msgstr ""
 
-#: ../../src/logic/ship.cc:658
+#: ../../src/logic/ship.cc:722
 msgid "Expedition ready"
 msgstr ""
 
-#: ../../src/logic/ship.cc:659
+#: ../../src/logic/ship.cc:723
 msgid "An expedition ship is waiting for your commands."
 msgstr ""
 
-#: ../../src/logic/ship.cc:922
+#: ../../src/logic/ship.cc:986
 #, c-format
 msgid "loading ship: %s"
 msgstr ""

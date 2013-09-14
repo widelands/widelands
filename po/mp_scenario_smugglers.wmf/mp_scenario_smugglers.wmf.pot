@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2013-09-01 09:23+0000\n"
+"POT-Creation-Date: 2013-09-14 20:38+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -30,12 +30,15 @@ msgid ""
 "A sending spot"
 msgstr ""
 
-#: ../../maps/MP Scenarios/Smugglers.wmf/scripting/multiplayer_init.lua:48
+#: ../../maps/MP Scenarios/Smugglers.wmf/scripting/multiplayer_init.lua:43
+#: ../../maps/MP Scenarios/Smugglers.wmf/scripting/smuggling.lua:92
+#: ../../maps/MP Scenarios/Smugglers.wmf/scripting/smuggling.lua:95
+#: ../../maps/MP Scenarios/Smugglers.wmf/scripting/smuggling.lua:98
 msgid ""
 "Game Status"
 msgstr ""
 
-#: ../../maps/MP Scenarios/Smugglers.wmf/scripting/texts.lua:39
+#: ../../maps/MP Scenarios/Smugglers.wmf/scripting/texts.lua:47
 msgid ""
 "Game over! %s and %s have won the game! %s and %s only managed to\n"
 "acquire %i points."
@@ -69,12 +72,12 @@ msgid ""
 "2 or 3 per ware. The first team to have %i points wins."
 msgstr ""
 
-#: ../../maps/MP Scenarios/Smugglers.wmf/scripting/texts.lua:33
+#: ../../maps/MP Scenarios/Smugglers.wmf/scripting/texts.lua:41
 msgid ""
 "The smuggling route worth %i from %s to %s has been broken!"
 msgstr ""
 
-#: ../../maps/MP Scenarios/Smugglers.wmf/scripting/multiplayer_init.lua:124
+#: ../../maps/MP Scenarios/Smugglers.wmf/scripting/multiplayer_init.lua:119
 msgid ""
 "Wares smuggled"
 msgstr ""
@@ -83,5 +86,17 @@ msgstr ""
 msgid ""
 "You can see the number of wares traded at any time in the general\n"
 "statistics menu. Good luck!"
+msgstr ""
+
+#: ../../maps/MP Scenarios/Smugglers.wmf/scripting/texts.lua:37
+msgid ""
+"Your team established a new smuggling route. You have the receiving warehouse. Every ware smuggled here\n"
+"is worth %i points."
+msgstr ""
+
+#: ../../maps/MP Scenarios/Smugglers.wmf/scripting/texts.lua:33
+msgid ""
+"Your team established a new smuggling route. You have the sending warehouse. Every ware smuggled here\n"
+"is worth %i points."
 msgstr ""
 
