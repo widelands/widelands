@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2013-09-01 11:23+0200\n"
-"PO-Revision-Date: 2013-09-12 18:28+0000\n"
+"PO-Revision-Date: 2013-09-13 16:46+0000\n"
 "Last-Translator: Miroslav Remák <Unknown>\n"
 "Language-Team: Prometheus <mmatej@yahoo.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 1 : (n>=2 && n<=4) ? 2 : 0;\n"
-"X-Launchpad-Export-Date: 2013-09-13 04:42+0000\n"
+"X-Launchpad-Export-Date: 2013-09-14 04:34+0000\n"
 "X-Generator: Launchpad (build 16761)\n"
 "X-Poedit-Country: czech republic\n"
 "X-Poedit-Language: czech\n"
@@ -1886,7 +1886,7 @@ msgstr "Zlyhala konverzia zo std::string na bool. Reťazec: \"%s\""
 #: ../../src/scripting/lua_game.cc:1088
 #, c-format
 msgid " (achieved %s)"
-msgstr ""
+msgstr " (dokončené %s)"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:51
 msgid "Please select"
@@ -2071,7 +2071,7 @@ msgstr "Hráč %u"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:566
 msgid "closed"
-msgstr ""
+msgstr "zatvorené"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:630
 msgid "There was an error!"
@@ -2463,7 +2463,7 @@ msgstr "Neznámy herný čas"
 #: ../../src/ui_fsmenu/campaign_select.cc:265
 #: ../../src/ui_fsmenu/mapselect.cc:54
 msgid "Choose a map"
-msgstr ""
+msgstr "Zvoľte mapu"
 
 #: ../../src/ui_fsmenu/editor_mapselect.cc:56
 #: ../../src/ui_fsmenu/campaign_select.cc:267
@@ -2500,7 +2500,7 @@ msgstr "Popis:"
 #: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:224
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:297
 msgid "parent"
-msgstr ""
+msgstr "rodičovský priečinok"
 
 #: ../../src/ui_fsmenu/intro.cc:32
 msgid "Press ESC or click to continue ..."
@@ -2591,15 +2591,15 @@ msgstr "1 proti 1"
 
 #: ../../src/ui_fsmenu/mapselect.cc:176
 msgid "Teams of 2"
-msgstr ""
+msgstr "Tímy dvoch"
 
 #: ../../src/ui_fsmenu/mapselect.cc:177
 msgid "Teams of 3"
-msgstr ""
+msgstr "Tímy troch"
 
 #: ../../src/ui_fsmenu/mapselect.cc:180
 msgid "Teams of 4"
-msgstr ""
+msgstr "Tímy štyroch"
 
 #: ../../src/ui_fsmenu/mapselect.cc:181
 msgid "Free for all"
@@ -2736,7 +2736,7 @@ msgstr "Zatvorené"
 
 #: ../../src/ui_fsmenu/loadreplay.cc:67
 msgid "Choose a replay"
-msgstr ""
+msgstr "Zvoľte nahrávku"
 
 #: ../../src/ui_fsmenu/editor.cc:36 ../../src/ui_fsmenu/main.cc:60
 msgid "Editor"
@@ -2799,7 +2799,7 @@ msgstr "od vývojového tímu Widelands"
 
 #: ../../src/ui_fsmenu/main.cc:96
 msgid "Licensed under the GNU General Public License V2.0"
-msgstr ""
+msgstr "Softvér licencovaný pod Všeobecnou verejnou licenciou GNU, 2. verzia"
 
 #: ../../src/game_io/game_player_economies_data_packet.cc:65
 msgid "there is no flag at the specified location"
@@ -3101,7 +3101,7 @@ msgstr "Rozobrať"
 
 #: ../../src/wui/buildingwindow.cc:279
 msgid "Returns:"
-msgstr ""
+msgstr "Vráti:"
 
 #: ../../src/wui/buildingwindow.cc:311 ../../src/wui/buildingwindow.cc:514
 msgid "Hide workarea"
@@ -3324,7 +3324,7 @@ msgstr "Ďalšia úroveň"
 
 #: ../../src/wui/productionsitewindow.cc:94
 msgid "Terminate the employment of the selected worker"
-msgstr ""
+msgstr "Ukončiť zamestnanie vybraného pracovníka"
 
 #: ../../src/wui/productionsitewindow.cc:195
 msgid "(vacant)"
@@ -3387,12 +3387,12 @@ msgstr "Ladenie políčka"
 #: ../../src/wui/game_debug_ui.cc:375
 #, c-format
 msgid "Resource: %s\n"
-msgstr ""
+msgstr "Zdroj: %s\n"
 
 #: ../../src/wui/game_debug_ui.cc:381
 #, c-format
 msgid "  Amount: %i/%i\n"
-msgstr ""
+msgstr "  Množstvo: %i/%i\n"
 
 #: ../../src/wui/encyclopedia_window.cc:67
 msgid "Tribe ware encyclopedia"
@@ -3437,15 +3437,15 @@ msgstr "Čas"
 
 #: ../../src/wui/game_summary.cc:157
 msgid "Lost"
-msgstr ""
+msgstr "Prehra"
 
 #: ../../src/wui/game_summary.cc:160
 msgid "Won"
-msgstr ""
+msgstr "Výhra"
 
 #: ../../src/wui/game_summary.cc:168
 msgid "Resigned"
-msgstr ""
+msgstr "Vzdal sa"
 
 #: ../../src/wui/game_summary.cc:180
 msgid "You won!"
@@ -3458,7 +3458,7 @@ msgstr "Prehrali ste."
 #: ../../src/wui/game_summary.cc:187
 #, c-format
 msgid "%s won!"
-msgstr ""
+msgstr "%s zvíťazil!"
 
 #: ../../src/wui/game_summary.cc:191
 msgid "Team %|1$u| won!"
@@ -3772,7 +3772,7 @@ msgstr "Zvýšiť počet výrobkov, ktoré tu chcete skladovať."
 
 #: ../../src/wui/multiplayersetupgroup.cc:103
 msgid "free"
-msgstr ""
+msgstr "voľné"
 
 #: ../../src/wui/multiplayersetupgroup.cc:281
 msgid "Shared in"
@@ -4266,7 +4266,7 @@ msgstr "úroveň"
 #: ../../src/logic/production_program.cc:1282
 #, c-format
 msgid "No soldier to train!"
-msgstr ""
+msgstr "Žiaden vojak na trénovanie!"
 
 #: ../../src/logic/production_program.cc:1292
 #: ../../src/logic/production_program.cc:1382
@@ -4455,11 +4455,11 @@ msgstr "(neobsadené)"
 
 #: ../../src/logic/productionsite.cc:249
 msgid "Worker missing"
-msgstr ""
+msgstr "Chýba pracovník"
 
 #: ../../src/logic/productionsite.cc:249
 msgid "Workers missing"
-msgstr ""
+msgstr "Chýbajú pracovníci"
 
 #: ../../src/logic/productionsite.cc:258
 msgid "(stopped)"
@@ -4502,7 +4502,7 @@ msgstr "lua funkcia: %s"
 #: ../../src/logic/battle.cc:178
 #, c-format
 msgid "[battle] soldier %u lose battle\n"
-msgstr ""
+msgstr "[bitka] vojak %u prehral bitku\n"
 
 #: ../../src/logic/battle.cc:182
 #, c-format
@@ -4732,7 +4732,7 @@ msgstr "Expedičná loď našla nové miesto na postavenie prístavu."
 
 #: ../../src/logic/ship.cc:467
 msgid "Island surrounded"
-msgstr ""
+msgstr "Ostrov obkľúčený"
 
 #: ../../src/logic/ship.cc:468
 msgid "An expedition ship surrounded its island without any events."
@@ -4895,7 +4895,7 @@ msgstr "priečinok"
 
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:259
 msgid "Not a map file"
-msgstr ""
+msgstr "Súbor nie je mapa"
 
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:387
 msgid " exists already. Overwrite?"
@@ -4969,7 +4969,7 @@ msgstr ""
 #: ../../src/editor/ui_menus/editor_tool_change_resources_options_menu.cc:45
 #: ../../src/editor/ui_menus/editor_tool_menu.cc:70
 msgid "Resources"
-msgstr ""
+msgstr "Zdroje"
 
 #: ../../src/editor/ui_menus/editor_tool_change_resources_options_menu.cc:99
 msgid "Current Selection"
@@ -5018,7 +5018,7 @@ msgstr "Nastaviť miesto na prístav"
 
 #: ../../src/editor/ui_menus/editor_tool_place_immovable_options_menu.cc:45
 msgid "Immovable Bobs"
-msgstr ""
+msgstr "Nehnuteľné objekty"
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:49
 #: ../../src/editor/ui_menus/editor_main_menu.cc:61

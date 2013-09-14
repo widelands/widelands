@@ -7,13 +7,13 @@ msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2013-09-01 09:23+0000\n"
-"PO-Revision-Date: 2013-09-12 14:37+0000\n"
+"PO-Revision-Date: 2013-09-13 16:51+0000\n"
 "Last-Translator: Miroslav Remák <Unknown>\n"
 "Language-Team: Prometheus <mmatej@yahoo.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-09-13 04:42+0000\n"
+"X-Launchpad-Export-Date: 2013-09-14 04:34+0000\n"
 "X-Generator: Launchpad (build 16761)\n"
 "X-Poedit-Country: CZECH REPUBLIC\n"
 "X-Poedit-Language: Czech\n"
@@ -146,19 +146,19 @@ msgstr "Tuhá láva"
 
 #: ../../worlds/blackland/terrainconf:41
 msgid "Hardground1"
-msgstr ""
+msgstr "Tvrdá zem1"
 
 #: ../../worlds/blackland/terrainconf:47
 msgid "Hardground2"
-msgstr ""
+msgstr "Tvrdá zem2"
 
 #: ../../worlds/blackland/terrainconf:53
 msgid "Hardground3"
-msgstr ""
+msgstr "Tvrdá zem3"
 
 #: ../../worlds/blackland/terrainconf:83
 msgid "Hardground4"
-msgstr ""
+msgstr "Tvrdá zem4"
 
 #: ../../worlds/blackland/resconf:20
 msgid "Iron"
@@ -186,11 +186,11 @@ msgstr "Láva"
 
 #: ../../worlds/blackland/terrainconf:19
 msgid "Lava stone1"
-msgstr ""
+msgstr "Lávový kameň1"
 
 #: ../../worlds/blackland/terrainconf:24
 msgid "Lava stone2"
-msgstr ""
+msgstr "Lávový kameň2"
 
 #: ../../worlds/blackland/conf:57
 msgid "Maple"

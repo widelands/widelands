@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2013-09-01 09:23+0000\n"
-"PO-Revision-Date: 2013-04-18 15:29+0000\n"
+"PO-Revision-Date: 2013-09-13 22:25+0000\n"
 "Last-Translator: Miroslav Remák <Unknown>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-09-02 04:33+0000\n"
-"X-Generator: Launchpad (build 16750)\n"
+"X-Launchpad-Export-Date: 2013-09-14 04:33+0000\n"
+"X-Generator: Launchpad (build 16761)\n"
 
 #: ../../campaigns/cconfig:64
 msgid "01 - Eyes in the Dark"
@@ -45,6 +45,8 @@ msgid ""
 ">Where dat? A thousand miles from here.< [Porgy and Bess] You have to go "
 "long, long way to conquere all the islands. Good luck!"
 msgstr ""
+">Kde to? Odtiaľ tisíc míľ.< [Porgy a Bess] K dobytiu všetkých ostrovov "
+"povedie ďaleká cesta. Veľa šťastia!"
 
 #: ../../maps/Comet Island.wmf/elemental:9
 msgid ""
@@ -105,7 +107,7 @@ msgstr ""
 
 #: ../../maps/Ice wars.wmf/elemental:11
 msgid "After autumn is winter. Some things are frozen, but not the war."
-msgstr ""
+msgstr "Po jeseni nasleduje zima. Niektoré veci mrznú, ale vojna nie."
 
 #: ../../maps/Kings and Queens.wmf/elemental:11
 msgid ""
@@ -202,6 +204,10 @@ msgid ""
 "along the river. Hint II: Snowmen mark additional water sources. Hint III: "
 "Each mountain contains only one resource."
 msgstr ""
+"Každý kmeň je obklopený štyrmi mohutnými horami. Kto si ich podmaní ako prvý "
+"a nárokuje si prírodné zdroje pre svoj vlastný kmeň? Rada I: Vodu možno "
+"nájsť popri rieke. Rada II: Snehuliaci značia ďalšie zdroje vody. Rada III: "
+"Každá hora obsahuje len jeden zdroj."
 
 #: ../../campaigns/cconfig:30
 msgid "Easy. Introduces the Barbarians"
@@ -279,7 +285,7 @@ msgstr "Zlatý polostrov"
 
 #: ../../maps/Ice wars.wmf/elemental:9
 msgid "Ice wars"
-msgstr ""
+msgstr "Ľadové vojny"
 
 #: ../../maps/Impact.wmf/elemental:7
 msgid "Impact"
@@ -388,7 +394,7 @@ msgstr ""
 
 #: ../../maps/Kings and Queens.wmf/elemental:9
 msgid "Kings and Queens"
-msgstr ""
+msgstr "Králi a kráľovné"
 
 #: ../../maps/Lake of tranquility.wmf/elemental:7
 msgid "Lake of Tranquility"
@@ -408,11 +414,11 @@ msgstr ""
 
 #: ../../maps/Long, long way.wmf/elemental:9
 msgid "Long, long way"
-msgstr ""
+msgstr "Dlhá, ďaleká cesta"
 
 #: ../../maps/Crossing the horizon.wmf/elemental:11
 msgid "Man your ship and sail to the horizon."
-msgstr ""
+msgstr "Naloďte sa a plavte za obzor."
 
 #: ../../maps/Twinkling Waves.wmf/elemental:11
 msgid ""
@@ -460,7 +466,7 @@ msgstr "Rendezvous"
 
 #: ../../maps/River Explorers.wmf/elemental:9
 msgid "River Explorers"
-msgstr ""
+msgstr "Prieskumníci riek"
 
 #: ../../maps/Riverlands.wmf/elemental:7
 msgid "Riverlands"
@@ -553,6 +559,8 @@ msgid ""
 "Suggested Teams: blue vs red, yellow vs green, (blue, yellow) vs (red, "
 "green), (blue, green) vs (red, yellow)"
 msgstr ""
+"Navrhované tímy: modrý vs červený, žltý vs zelený, (modrý, žltý) vs "
+"(červený, zelený), (modrý, zelený) vs (červený, žltý)"
 
 #: ../../maps/Swamp Island.wmf/elemental:9
 msgid "Swamp Island"
@@ -572,7 +580,7 @@ msgstr "Zelená planina"
 
 #: ../../maps/The Nile.wmf/elemental:9
 msgid "The Nile"
-msgstr ""
+msgstr "Níl"
 
 #: ../../maps/The Oasis Triangle.wmf/elemental:7
 msgid "The Oasis Triangle"
