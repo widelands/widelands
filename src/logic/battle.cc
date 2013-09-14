@@ -76,10 +76,10 @@ void Battle::init (Editor_Game_Base & egbase)
 
 	m_creationtime = egbase.get_gametime();
 
-	if (Battle * const battle = m_first ->getBattle())
+	if (Battle* battle = m_first ->getBattle())
 		battle->cancel(ref_cast<Game, Editor_Game_Base>(egbase), *m_first);
 	m_first->setBattle(ref_cast<Game, Editor_Game_Base>(egbase), this);
-	if (Battle * const battle = m_second->getBattle())
+	if (Battle* battle = m_second->getBattle())
 		battle->cancel(ref_cast<Game, Editor_Game_Base>(egbase), *m_second);
 	m_second->setBattle(ref_cast<Game, Editor_Game_Base>(egbase), this);
 }
@@ -105,12 +105,12 @@ void Battle::cleanup (Editor_Game_Base & egbase)
  */
 void Battle::cancel(Game & game, Soldier & soldier)
 {
-	if        (&soldier == m_first)  {
-		m_first = 0;
-		soldier.setBattle(game, 0);
+	if (&soldier == m_first)  {
+		m_first = nullptr;
+		soldier.setBattle(game, nullptr);
 	} else if (&soldier == m_second) {
-		m_second = 0;
-		soldier.setBattle(game, 0);
+		m_second = nullptr;
+		soldier.setBattle(game, nullptr);
 	} else
 		return;
 
@@ -127,16 +127,12 @@ bool Battle::locked(Game & game)
 	return m_first->get_position() == m_second->get_position();
 }
 
-Soldier * Battle::opponent(Soldier & soldier)
+Soldier * Battle::opponent(Soldier& soldier)
 {
 	assert(m_first == &soldier or m_second == &soldier);
-	return m_first == &soldier ? m_second : m_first;
-}
-
-bool Battle::has_opponent(Soldier & soldier)
-{
-	assert(m_first == &soldier or m_second == &soldier);
-	return m_first != 0 and m_second != 0;
+	Soldier* other_soldier = m_first == &soldier ? m_second : m_first;
+	assert(other_soldier);
+	return other_soldier;
 }
 
 //  FIXME Couldn't this code be simplified tremendously by doing all scheduling
