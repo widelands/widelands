@@ -115,6 +115,9 @@ throw (_wexception)
 	//
 	// For now, these are meaningless. Let's hope it will not stay that way!
 
+	// FIXME -- we could store the unix time in uint32, as a partial fix to 2038 problem.
+	// There seems to be a get_safe_natural method, but not correspondong setter.
+
 	Map & map = egbase.map();
 	globs.set_string("map_source_url", map.m_map_version.m_map_source_url);
 	globs.set_string("map_release", map.m_map_version.m_map_source_release);
