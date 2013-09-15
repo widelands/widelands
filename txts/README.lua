@@ -3,10 +3,6 @@ use("aux", "format_help")
 
 set_textdomain("texts")
 
--- NOCOM(#sirver):
--- nocom: should we still mention the mailing list at the end as a backup for people who don't wish to register at Launchpad?
--- Sending an email somewhere might be considered a smaller "investment" than registering at a site.
-
 return {
    title = _ "README",
    text =
