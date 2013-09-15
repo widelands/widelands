@@ -22,12 +22,31 @@ def parse_args():
         "if you want to run a test more often than once and not reopen stdout.txt "
         "in your editor."
     )
+    p.add_argument("-b", "--binary", type=str,
+        help = "Run this binary as Widelands. Otherwise some default paths are searched."
+    )
 
-    return p.parse_args()
+    args = p.parse_args()
+
+    if args.binary is None:
+        potential_binaries = (
+            glob("widelands") +
+            glob("src/widelands") +
+            glob("../*/src/widelands") +
+            glob("../*/src/widelands")
+        )
+        if not potential_binaries:
+            p.error("No widelands binary found. Please specify with -b.")
+        args.binary = potential_binaries[0]
+
+    return args
+
 
 def main():
     args = parse_args()
 
+    test.WidelandsTestCase.path_to_widelands_binary = args.binary
+    print "Using '%s' binary." % args.binary
     test.WidelandsTestCase.do_use_random_directory = not args.nonrandom
 
     all_files = [os.path.basename(filename) for filename in glob("test/test_*.py") ]

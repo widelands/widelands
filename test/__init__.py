@@ -14,6 +14,7 @@ import unittest
 
 class WidelandsTestCase(unittest.TestCase):
     do_use_random_directory = True
+    path_to_widelands_binary = None
 
     def setUp(self):
         if self.do_use_random_directory:
@@ -48,8 +49,7 @@ class WidelandsTestCase(unittest.TestCase):
         stderr_filename = os.path.join(self.run_dir, "stderr.txt")
 
         with open(stdout_filename, 'a') as stdout_file, open(stderr_filename, 'a') as stderr_file:
-            # NOCOM(#sirver): hard coded
-            args = ['../widelands.build/src/widelands', '--verbose=true',
+            args = [self.path_to_widelands_binary, '--verbose=true',
                     '--datadir=.', '--homedir=%s' % self.run_dir,
                     '--disable_fx=true', '--disable_music=true' ]
             args += [ "--%s=%s" % (key, value) for key, value in kwargs.iteritems() ]
