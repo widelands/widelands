@@ -125,7 +125,13 @@ struct MessageQueue : boost::noncopyable, private std::map<Message_Id, Message *
 	void expire_message(const Message_Id& id) {
 		assert_counts();
 		iterator const it = find(id);
-		assert(it != end());
+		if (it == end()) {
+			// Messages can be expired when the timeout runs out, or when the linked
+			// Map_Object is removed, or both. In this later case, two expire commands
+			// will be executed, and the message will not be present for the second one.
+			// So we assume here that the message was removed from an earlier expire cmd.
+			return;
+		}
 		Message & message = *it->second;
 		assert(message.status() < 3);
 		assert(m_counts[message.status()]);

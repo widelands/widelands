@@ -66,8 +66,6 @@ protected:
 	void toggle_workarea();
 	void configure_workarea_button();
 	void act_start_stop();
-	void act_prefer_rookies();
-	void act_prefer_heroes();
 	void act_start_or_cancel_expedition();
 	void act_enhance(Widelands::Building_Index);
 	void clicked_goto();

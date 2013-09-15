@@ -20,7 +20,7 @@
 #ifndef UI_SCROLLBAR_H
 #define UI_SCROLLBAR_H
 
-#include <boost/signal.hpp>
+#include <boost/signals2.hpp>
 
 #include "ui_basic/panel.h"
 #include "rect.h"
@@ -50,7 +50,7 @@ public:
 		(Panel * parent,
 		 int32_t x, int32_t y, uint32_t w, uint32_t h, bool horiz);
 
-	boost::signal<void (int32_t)> moved;
+	boost::signals2::signal<void (int32_t)> moved;
 
 	void set_steps(int32_t steps);
 	void set_singlestepsize(uint32_t singlestepsize);

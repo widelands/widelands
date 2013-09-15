@@ -39,9 +39,10 @@ struct Game_Main_Menu_Save_Game : public UI::UniqueWindow {
 
 	void fill_list();
 	void select_by_name(std::string name);
+protected:
+	virtual void die();
 private:
 	Interactive_GameBase & igbase();
-	void die();
 	void selected      (uint32_t);
 	void double_clicked(uint32_t);
 	void edit_box_changed();
@@ -49,6 +50,7 @@ private:
 	void delete_clicked();
 
 	bool save_game(std::string);
+	void pause_game(bool paused);
 
 	UI::Listselect<std::string> m_ls;
 	UI::EditBox * m_editbox;

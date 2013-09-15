@@ -6,15 +6,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2013-06-16 09:11+0000\n"
+"POT-Creation-Date: 2013-09-14 20:38+0000\n"
 "PO-Revision-Date: 2012-11-20 00:49+0000\n"
 "Last-Translator: Gigabye <Unknown>\n"
 "Language-Team: Language <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-06-17 05:10+0000\n"
-"X-Generator: Launchpad (build 16667)\n"
+"X-Launchpad-Export-Date: 2013-09-15 04:46+0000\n"
+"X-Generator: Launchpad (build 16761)\n"
 "X-Poedit-Country: RUSSIAN FEDERATION\n"
 "X-Poedit-Language: Russian\n"
 
@@ -62,364 +62,9 @@ msgstr ""
 msgid "- which map you were playing"
 msgstr "- на какой карте вы играли"
 
-#: ../../txts/COPYING:20
-msgid ""
-"0. This License applies to any program or other work which contains a notice "
-"placed by the copyright holder saying it may be distributed under the terms "
-"of this General Public License. The Program, below, refers to any such "
-"program or work, and a work based on the Program means either the Program or "
-"any derivative work under copyright law: that is to say, a work containing "
-"the Program or a portion of it, either verbatim or with modifications and/or "
-"translated into another language.  (Hereinafter, translation is included "
-"without limitation in the term modification.)  Each licensee is addressed as "
-"you.<br>Activities other than copying, distribution and modification are not "
-"covered by this License; they are outside its scope.  The act of running the "
-"Program is not restricted, and the output from the Program is covered only "
-"if its contents constitute a work based on the Program (independent of "
-"having been made by running the Program). Whether that is true depends on "
-"what the Program does.<br>"
-msgstr ""
-"0. Данная лицензия применяется к любой программе или другому продукту, "
-"который содержит замечание, внесенное владельцем авторских прав, где "
-"указано, что данный продукт может распространяться только при выполнении "
-"условий, оговоренных этой общей лицензией. Термин \"Программа\" относится к "
-"любой такой программе или продукту, а \"продукт, основанный на Программе\" "
-"означает либо программу, либо любой производный продукт, для которого "
-"соблюдается закон авторских прав, т.е. продукт, содержащий Программу или ее "
-"часть, оригинал либо с модификациями и/или в переводе на другие языки. "
-"(Здесь и далее перевод приводится без ограничений в термине \"модификация\". "
-"Ко всем владельцам лицензий используется обращение во втором лице: вы, вам, "
-"ваш и т.д.)<br> Данная лицензия не распространяется на действия, отличные от "
-"копирования, распространения и модификации. На запуск программы ограничения "
-"не накладываются, а результата ее работы это касается только в том случае, "
-"если его суть составляет продукт, основанный на Программе (независимо от "
-"результата ее работы). Справедливость этого положения зависит от того, что "
-"делает конкретная Программа.<br>"
-
 #: ../../txts/editor_readme:43
 msgid "1-0      Changes tools size"
 msgstr "1-0      Изменить размер инструментов"
-
-#: ../../txts/COPYING:22
-msgid ""
-"1. You may copy and distribute verbatim copies of the Program's source code "
-"as you receive it, in any medium, provided that you conspicuously and "
-"appropriately publish on each copy an appropriate copyright notice and "
-"disclaimer of warranty; keep intact all the notices that refer to this "
-"License and to the absence of any warranty; and give any other recipients of "
-"the Program a copy of this License along with the Program.<br>You may charge "
-"a fee for the physical act of transferring a copy, and you may at your "
-"option offer warranty protection in exchange for a fee.<br>"
-msgstr ""
-"1. Вы можете копировать или распространять точные копии исходного кода "
-"программы на любом носителе с нанесением на каждую копию соответствующего "
-"замечания об авторских правах и отрицанием гарантии, сохраняя в точности все "
-"замечания, в которых дается ссылка на эту лицензию и на отсутствие гарантии, "
-"а также передавая другим лицам копию этой лицензии вместе с Программой.<br> "
-"Вы можете назначить цену за физическую передачу копии, а также на ваше "
-"усмотрение предложить гарантийную защиту в обмен на определенную сумму."
-
-#: ../../txts/COPYING:66
-msgid ""
-"10. If you wish to incorporate parts of the Program into other free programs "
-"whose distribution conditions are different, write to the author to ask for "
-"permission.  For software which is copyrighted by the Free Software "
-"Foundation, write to the Free Software Foundation; we sometimes make "
-"exceptions for this.  Our decision will be guided by the two goals of "
-"preserving the free status of all derivatives of our free software and of "
-"promoting the sharing and reuse of software generally."
-msgstr ""
-"10. Если вы хотите объединить части Программы с другими свободно "
-"распространяемыми программами, условия распространения которых отличаются от "
-"описываемых, обратитесь к автору с просьбой о разрешении. Относительно "
-"программных продуктов, которые защищаются авторскими правами FSF, "
-"обращайтесь прямо в FSF. Иногда мы делаем исключения. На наше решение всегда "
-"влияет желание достичь двух целей: сохранения свободного статуса всех "
-"производных от наших свободно распространяемых программных продуктов и "
-"продвижения идеи совместного применения и многократного использования "
-"программ."
-
-#: ../../txts/COPYING:74
-msgid ""
-"11. BECAUSE THE PROGRAM IS LICENSED FREE OF CHARGE, THERE IS NO WARRANTY FOR "
-"THE PROGRAM, TO THE EXTENT PERMITTED BY APPLICABLE LAW.  EXCEPT WHEN "
-"OTHERWISE STATED IN WRITING THE COPYRIGHT HOLDERS AND/OR OTHER PARTIES "
-"PROVIDE THE PROGRAM AS IS WITHOUT WARRANTY OF ANY KIND, EITHER EXPRESSED OR "
-"IMPLIED, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF "
-"MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.  THE ENTIRE RISK AS TO "
-"THE QUALITY AND PERFORMANCE OF THE PROGRAM IS WITH YOU.  SHOULD THE PROGRAM "
-"PROVE DEFECTIVE, YOU ASSUME THE COST OF ALL NECESSARY SERVICING, REPAIR OR "
-"CORRECTION."
-msgstr ""
-"11. ПОСКОЛЬКУ ПРОГРАММА ЛИЦЕНЗИРУЕТСЯ БЕСПЛАТНО, ДЛЯ НЕЕ НЕ СУЩЕСТВУЕТ "
-"НИКАКИХ ГАРАНТИЙ (ДО СТЕПЕНИ, РАЗРЕШЕННОЙ ДЕЙСТВУЮЩИМ ЗАКОНОМ), ЗА "
-"ИСКЛЮЧЕНИЕМ СЛУЧАЕВ, СПЕЦИАЛЬНО ОГОВОРЕННЫХ В ПИСЬМЕННОМ ВИДЕ. ВЛАДЕЛЬЦЫ "
-"АВТОРСКИХ ПРАВ И/ИЛИ ДРУГИЕ ЛИЦА ПРЕДОСТАВЛЯЮТ ПРОГРАММУ \"КАК ЕСТЬ\", БЕЗ "
-"ГАРАНТИЙНЫХ ОБЯЗАТЕЛЬСТВ ЛЮБОГО ВИДА (КАК ЯВНО ВЫРАЖЕННЫХ, ТАК И "
-"ПОДРАЗУМЕВАЕМЫХ), ВКЛЮЧАЮЩИХ, НО НЕ ОГРАНИЧЕННЫХ ПОДРАЗУМЕВАЕМЫМИ ГАРАНТИЯМИ "
-"ГОДНОСТИ ДЛЯ ПРОДАЖИ И ПРИГОДНОСТИ ДЛЯ ОПРЕДЕЛЕННОЙ ЦЕЛИ. ВЕСЬ РИСК, "
-"СВЯЗАННЫЙ С КАЧЕСТВОМ И ВЫПОЛНЕНИЕМ ПРОГРАММЫ, ЛОЖИТСЯ НА ВАС. В СЛУЧАЕ "
-"ДЕФЕКТНОСТИ ПРОГРАММЫ ВАМ СЛЕДУЕТ ОЦЕНИТЬ СТОИМОСТЬ ВСЕХ НЕОБХОДИМЫХ "
-"ДОРАБОТОК, ПОИСКА НЕИСПРАВНОСТЕЙ И КОРРЕКТИРОВКИ."
-
-#: ../../txts/COPYING:77
-msgid ""
-"12. IN NO EVENT UNLESS REQUIRED BY APPLICABLE LAW OR AGREED TO IN WRITING "
-"WILL ANY COPYRIGHT HOLDER, OR ANY OTHER PARTY WHO MAY MODIFY AND/OR "
-"REDISTRIBUTE THE PROGRAM AS PERMITTED ABOVE, BE LIABLE TO YOU FOR DAMAGES, "
-"INCLUDING ANY GENERAL, SPECIAL, INCIDENTAL OR CONSEQUENTIAL DAMAGES ARISING "
-"OUT OF THE USE OR INABILITY TO USE THE PROGRAM (INCLUDING BUT NOT LIMITED TO "
-"LOSS OF DATA OR DATA BEING RENDERED INACCURATE OR LOSSES SUSTAINED BY YOU OR "
-"THIRD PARTIES OR A FAILURE OF THE PROGRAM TO OPERATE WITH ANY OTHER "
-"PROGRAMS), EVEN IF SUCH HOLDER OR OTHER PARTY HAS BEEN ADVISED OF THE "
-"POSSIBILITY OF SUCH DAMAGES."
-msgstr ""
-"12. НИ ПРИ КАКИХ ОБСТОЯТЕЛЬСТВАХ, ЕСЛИ ТОГО НЕ ТРЕБУЕТ ЗАКОН ИЛИ В "
-"ПИСЬМЕННОЙ ФОРМЕ НЕ УКАЗАНО ВЛАДЕЛЬЦЕМ АВТОРСКИХ ПРАВ ЛИБО КАКИМ-ТО  ДРУГИМ  "
-" ЛИЦОМ,   КОТОРОЕ   ИМЕЛО    ПРАВО МОДИФИЦИРОВАТЬ И/ИЛИ РАСПРОСТРАНЯТЬ "
-"ПРОГРАММУ В СООТВЕТСТВИИ С РАЗРЕШЕНИЕМ, ПРИВЕДЕННЫМ ВЫШЕ, ВЫ НЕ НЕСЕТЕ "
-"ОТВЕТСТВЕННОСТИ ЗА НАНЕСЕННЫЙ ПРОГРАММОЙ УЩЕРБ, ВКЛЮЧАЮЩИЙ ЛЮБЫЕ ПОВРЕЖДЕНИЯ "
-"ОБЩЕГО ИЛИ СПЕЦИАЛЬНОГО ХАРАКТЕРА, СЛУЧАЙНЫЕ ИЛИ ЯВЛЯЮЩИЕСЯ СЛЕДСТВИЕМ "
-"ИСПОЛЬЗОВАНИЯ ИЛИ НЕВОЗМОЖНОСТИ ПРИМЕНЯТЬ ПРОГРАММУ (ВКЛЮЧАЮЩИЕ, НО НЕ "
-"ОГРАНИЧЕННЫЕ ПОТЕРЕЙ ДАННЫХ, ИСКАЖЕНИЕМ ДАННЫХ В РЕЗУЛЬТАТЕ НЕАККУРАТНОГО ИХ "
-"ПЕРЕНОСА ВАМИ ИЛИ ДРУГИМИ ЛИЦАМИ ИЛИ НЕСПОСОБНОСТИ ПРОГРАММЫ РАБОТАТЬ "
-"СОВМЕСТНО С ДРУГИМИ ПРОГРАММАМИ), ДАЖЕ ЕСЛИ ВЛАДЕЛЕЦ ИЛИ ДРУГОЕ ЛИЦО БЫЛО "
-"УВЕДОМЛЕНО О ВОЗМОЖНОСТИ ПОДОБНОГО УЩЕРБА."
-
-#: ../../txts/COPYING:24
-msgid ""
-"2. You may modify your copy or copies of the Program or any portion of it, "
-"thus forming a work based on the Program, and copy and distribute such "
-"modifications or work under the terms of Section 1 above, provided that you "
-"also meet all of these conditions:<br><br>a) You must cause the modified "
-"files to carry prominent notices stating that you changed the files and the "
-"date of any change.<br>b) You must cause any work that you distribute or "
-"publish, that in whole or in part contains or is derived from the Program or "
-"any part thereof, to be licensed as a whole at no charge to all third "
-"parties under the terms of this License.<br>c) If the modified program "
-"normally reads commands interactively when run, you must cause it, when "
-"started running for such interactive use in the most ordinary way, to print "
-"or display an announcement including an appropriate copyright notice and a "
-"notice that there is no warranty (or else, saying that you provide a "
-"warranty) and that users may redistribute the program under these "
-"conditions, and telling the user how to view a copy of this License.  "
-"(Exception: if the Program itself is interactive but does not normally print "
-"such an announcement, your work based on the Program is not required to "
-"print an announcement.)"
-msgstr ""
-"2. Вы имеете право модифицировать свою копию или копии Программы, либо любую "
-"ее часть, создавая таким образом продукт, основанный на программе, а также "
-"копировать и распространять такие модификации или продукт при соблюдении "
-"условий п. 1, выполняя при этом следующие требования.<br><br>a) Вы должны "
-"внести в модифицированные файлы замечания, которые нельзя не заметить и в "
-"которых сообщается о том, что вы изменили файлы, с обязательным указанием "
-"даты каждого изменения.<br>b) Согласно условиям лицензии, вы должны "
-"бесплатно лицензировать любой продукт, который вы распространяете или "
-"публикуете и который содержит Программу в целом виде или частично либо "
-"является продуктом, производным от Программы, либо от одной из ее "
-"частей.<br>c) Если при работе модифицированной программы обычно выполняется "
-"чтение команд в интерактивном режиме, вы должны распечатать или отобразить "
-"на экране объявление, содержащее соответствующее замечание об авторских "
-"правах и сообщение об отсутствии гарантии (или другое сообщение, если вы "
-"предоставляете какую-то гарантию), извещение о том, что пользователи могут "
-"передавать данную программу при соблюдении этих условий, а также указание, "
-"разъясняющее, каким образом пользователь может получить копию этой Лицензии. "
-"(Исключение. Если Программа сама по себе работает в интерактивном режиме, но "
-"обычно не выводит подобные объявления, ваш продукт, основанный на Программе, "
-"не должен в обязательном порядке выводить указанное объявление.)"
-
-#: ../../txts/COPYING:30
-msgid ""
-"3. You may copy and distribute the Program (or a work based on it, under "
-"Section 2) in object code or executable form under the terms of Sections 1 "
-"and 2 above provided that you also do one of the following:<br><br>a) "
-"Accompany it with the complete corresponding machine-readable source code, "
-"which must be distributed under the terms of Sections 1 and 2 above on a "
-"medium customarily used for software interchange; or,<br>b) Accompany it "
-"with a written offer, valid for at least three years, to give any third "
-"party, for a charge no more than your cost of physically performing source "
-"distribution, a complete machine-readable copy of the corresponding source "
-"code, to be distributed under the terms of Sections 1 and 2 above on a "
-"medium customarily used for software interchange; or,<br>c) Accompany it "
-"with the information you received as to the offer to distribute "
-"corresponding source code.  (This alternative is allowed only for "
-"noncommercial distribution and only if you received the program in object "
-"code or executable form with such an offer, in accord with Subsection b "
-"above.)"
-msgstr ""
-"3. Вы можете копировать или распространять Программу (или продукт, "
-"основанный на ней, при соблюдении требований п. 2) в объектном коде или "
-"выполняемой форме при соблюдении условий пп. 1 и 2, выполняя одно из "
-"следующих требований.<br><br>a) Приложите к ней соответствующий исходный "
-"код, который должен распространяться при соблюдении условий пп. 1 и 2 на "
-"носителях, обычно используемых для обмена программными продуктами.<br><br>b) "
-"Приложите к ней записанное предложение (действующее, по крайней мере, в "
-"течение трех лет) передать любым независимым исполнителям за плату, не "
-"превышающую стоимость физического выполнения исходной поставки, полной "
-"машинной копии со ответствующего исходного кода, распространяемого при "
-"соблюдении условий пп. 1 и 2 на носителях, обычно используемых для обмена "
-"программными продуктами.<br>c) Приложите к ней информацию, полученную вами в "
-"качестве предложения распространять соответствующий исходный код. (Эта "
-"альтернатива разрешена только для некоммерческой поставки и только если вы "
-"получили программу в объектном коде или в исполняемой форме с таким "
-"предложением в соответствии со вторым подпунктом.)"
-
-#: ../../txts/COPYING:39
-msgid ""
-"4. You may not copy, modify, sublicense, or distribute the Program except as "
-"expressly provided under this License.  Any attempt otherwise to copy, "
-"modify, sublicense or distribute the Program is void, and will automatically "
-"terminate your rights under this License. However, parties who have received "
-"copies, or rights, from you under this License will not have their licenses "
-"terminated so long as such parties remain in full compliance."
-msgstr ""
-"4. Вы не можете копировать, модифицировать, лицензировать или распространять "
-"Программу в обход этой лицензии. Любые попытки поступить иначе с целью "
-"копирования, модификации, лицензирования или распространения Программы "
-"пресекаются с автоматическим аннулированием ваших прав, предусматриваемых "
-"лицензией. Но лица, получившие от вас копии или права в соответствии с "
-"лицензией, не лишаются своих лицензий до тех пор, пока они полностью "
-"соблюдают оговоренные лицензией условия."
-
-#: ../../txts/COPYING:42
-msgid ""
-"5. You are not required to accept this License, since you have not signed "
-"it.  However, nothing else grants you permission to modify or distribute the "
-"Program or its derivative works.  These actions are prohibited by law if you "
-"do not accept this License.  Therefore, by modifying or distributing the "
-"Program (or any work based on the Program), you indicate your acceptance of "
-"this License to do so, and all its terms and conditions for copying, "
-"distributing or modifying the Program or works based on it."
-msgstr ""
-"5. От вас никто не требует принимать лицензию, пока вы не подпишете ее. Но "
-"имейте в виду, что ничто иное не даст вам разрешение на модификацию или "
-"распространение Программы или ее производных продуктов. Эти действия "
-"запрещены законом, если вы не примете эту лицензию. Следовательно, "
-"модифицируя или распространяя Программу (или любой продукт, основанный на "
-"Программе), вы гарантируете свое принятие этой лицензии и всех ее условий и "
-"требований, которые необходимо выполнять при копировании, распространении "
-"или модификации Программы или продуктов, основанных на ней."
-
-#: ../../txts/COPYING:45
-msgid ""
-"6. Each time you redistribute the Program (or any work based on the "
-"Program), the recipient automatically receives a license from the original "
-"licensor to copy, distribute or modify the Program subject to these terms "
-"and conditions.  You may not impose any further restrictions on the "
-"recipients' exercise of the rights granted herein. You are not responsible "
-"for enforcing compliance by third parties to this License."
-msgstr ""
-"6. При каждой очередной передаче Программы (или любого продукта, основанного "
-"на Программе) получатель автоматически получает лицензию от оригинального "
-"лица, выдающего лицензии, на право копировать, распространять или "
-"модифицировать Программу на указанных условиях. Вы не можете налагать какие "
-"бы то ни было дальнейшие ограничения на реализацию прав, данных получателю. "
-"Вы не несете ответственность за соблюдение другими лицами правил, "
-"установленных этой Лицензией."
-
-#: ../../txts/COPYING:48
-msgid ""
-"7. If, as a consequence of a court judgment or allegation of patent "
-"infringement or for any other reason (not limited to patent issues), "
-"conditions are imposed on you (whether by court order, agreement or "
-"otherwise) that contradict the conditions of this License, they do not "
-"excuse you from the conditions of this License.  If you cannot distribute so "
-"as to satisfy simultaneously your obligations under this License and any "
-"other pertinent obligations, then as a consequence you may not distribute "
-"the Program at all.  For example, if a patent license would not permit "
-"royalty-free redistribution of the Program by all those who receive copies "
-"directly or indirectly through you, then the only way you could satisfy both "
-"it and this License would be to refrain entirely from distribution of the "
-"Program."
-msgstr ""
-"7. Если вследствие решения суда или заявления о нарушении правовых норм или "
-"по какой-то другой причине (не связанной с вопросами авторских прав) "
-"поставленные перед вами условия (по постановлению суда, соглашению и т.п.) "
-"противоречат условиям этой лицензии, это не освобождает вас от "
-"ответственности за несоблюдение правил, предусматриваемых лицензией. Если вы "
-"не можете распространить Программу так, чтобы одновременно удовлетворять "
-"условиям, предусмотренным этой лицензией, и выполнить другие обязательства, "
-"значит, вы вообще не можете заниматься распространением Программы. Например, "
-"если согласно некоторой лицензии не разрешается безгонорарная передача "
-"Программы всеми, кто косвенно или непосредственно получает от вас копии, то "
-"единственный способ удовлетворить условия как этой лицензии, так и "
-"рассматриваемой Лицензии, заключается в полном отказе от распространения "
-"Программы."
-
-#: ../../txts/COPYING:60
-msgid ""
-"8. If the distribution and/or use of the Program is restricted in certain "
-"countries either by patents or by copyrighted interfaces, the original "
-"copyright holder who places the Program under this License may add an "
-"explicit geographical distribution limitation excluding those countries, so "
-"that distribution is permitted only in or among countries not thus excluded. "
-" In such case, this License incorporates the limitation as if written in the "
-"body of this License."
-msgstr ""
-"8. Если распространение и/или использование Программы ограничивается в "
-"определенных странах либо патентами, либо интерфейсами, защищенными "
-"авторскими правами, оригинальный владелец авторских прав, который вводит "
-"свою Программу под защиту этой лицензии, может добавить в явном виде "
-"ограничение на географическое распространение, перечислив страны, "
-"исключающиеся из области распространения (это значит, что распространение "
-"разрешено только среди тех стран, которые не входят в этот список). В этом "
-"случае лицензия включает ограничение, как если бы оно было записано в теле "
-"самой лицензии."
-
-#: ../../txts/COPYING:63
-msgid ""
-"9. The Free Software Foundation may publish revised and/or new versions of "
-"the General Public License from time to time.  Such new versions will be "
-"similar in spirit to the present version, but may differ in detail to "
-"address new problems or concerns.<br>Each version is given a distinguishing "
-"version number.  If the Program specifies a version number of this License "
-"which applies to it and any later version, you have the option of following "
-"the terms and conditions either of that version or of any later version "
-"published by the Free Software Foundation.  If the Program does not specify "
-"a version number of this License, you may choose any version ever published "
-"by the Free Software Foundation."
-msgstr ""
-"9. Фонд свободно распространяемых программных продуктов (Free Software "
-"Foundation — FSF) время от времени может публиковать модифицированную и/или "
-"новую версию общей лицензии. Новые версии будут содержать ту же идею, что и "
-"настоящая версия, но могут отличаться в деталях, чтобы локализовать новые "
-"проблемы или концепции.<br>Каждой версии присваивается отличительный номер. "
-"Если в Программе указан номер версии лицензии, который применяется к этой и "
-"\"любым последующим версиям\", у вас есть возможность следовать требованиям "
-"либо данной версии, либо любой из последующих версий, опубликованных FSF. "
-"Если в Программе не указан номер версии лицензии, вы можете выбрать любую "
-"версию, когда-либо опубликованную FSF."
-
-#: ../../txts/COPYING:96
-msgid ""
-"<one line to give the program's name and a brief idea of what it "
-"does.><br>Copyright (C) <year>  <name of author><br><br>This program is free "
-"software; you can redistribute it and/or modify<br>it under the terms of the "
-"GNU General Public License as published by<br>the Free Software Foundation; "
-"either version 2 of the License, or<br>(at your option) any later "
-"version.<br><br>This program is distributed in the hope that it will be "
-"useful,<br>but WITHOUT ANY WARRANTY; without even the implied warranty "
-"of<br>MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the<br>GNU "
-"General Public License for more details.<br><br>You should have received a "
-"copy of the GNU General Public License<br>along with this program; if not, "
-"write to the Free Software<br>Foundation, Inc., 59 Temple Place, Suite 330, "
-"Boston, MA  02111-1307  USA<br><br><br>Also add information on how to "
-"contact you by electronic and paper mail."
-msgstr ""
-"<В первой строке необходимо указать автора программы и идею ее "
-"создания.><br>Copyright (C) <год создания>  <имя автора><br><br>This program "
-"is free software; you can redistribute it and/or modify<br>it under the "
-"terms of the GNU General Public License as published by<br>the Free Software "
-"Foundation; either version 2 of the License, or<br>(at your option) any "
-"later version.<br><br>This program is distributed in the hope that it will "
-"be useful,<br>but WITHOUT ANY WARRANTY; without even the implied warranty "
-"of<br>MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the<br>GNU "
-"General Public License for more details.<br><br>You should have received a "
-"copy of the GNU General Public License<br>along with this program; if not, "
-"write to the Free Software<br>Foundation, Inc., 59 Temple Place, Suite 330, "
-"Boston, MA  02111-1307  USA<br><br><br> Кроме того, обязательно поместите в "
-"дистрибутивный пакет свои координаты: почтовый адрес и/или адрес электронной "
-"почты."
 
 #: ../../txts/README:162
 msgid ""
@@ -456,7 +101,7 @@ msgstr ""
 "Всегда стройте хижины лесничего и егеря, чтобы иметь постоянный запас еды и "
 "материалов."
 
-#: ../../txts/tips/general_game.tip:70
+#: ../../txts/tips/general_game.tip:66
 msgid ""
 "An economy consists of all buildings and flags connected by roads. The "
 "supplies and demands of buildings are handled in its economy."
@@ -470,11 +115,11 @@ msgstr ""
 "Есть вопросы? Наши ЧаВо, Вики и, конечно, форум находятся на "
 "www.widelands.org."
 
-#: ../../txts/developers:164
+#: ../../txts/developers:171
 msgid "Atlantean"
 msgstr "Атланты"
 
-#: ../../txts/developers:154
+#: ../../txts/developers:161
 msgid "Barbarian"
 msgstr "Варвар"
 
@@ -501,7 +146,7 @@ msgstr "CTRL+L   Загрузить карту"
 msgid "CTRL+S   Save Map"
 msgstr "CTRL+S   Сохранить карту"
 
-#: ../../txts/developers:151
+#: ../../txts/developers:158
 msgid "Campaign Story"
 msgstr "Историческая кампания"
 
@@ -517,17 +162,9 @@ msgstr "Вождь"
 msgid "Coders"
 msgstr "Кодеры"
 
-#: ../../txts/COPYING:8
-msgid ""
-"Copyright (C) 1989, 1991 Free Software Foundation, Inc.<br>59 Temple Place, "
-"Suite 330, Boston, MA  02111-1307  USA<br>Everyone is permitted to copy and "
-"distribute verbatim copies of this license document, but changing it is not "
-"allowed.<br>"
+#: ../../txts/license:7
+msgid "Copyright 2002 - 2013 by the Widelands Development Team."
 msgstr ""
-"Copyright (C) 1989, 1991 Free Software Foundation, Inc.<br>59 Temple Place, "
-"Suite 330, Boston, MA  02111-1307  USA<br>Разрешается копирование и "
-"распространение копий этого документа, но запрещается внесение каких бы то "
-"ни было изменений в его текст.<br>"
 
 #: ../../txts/README:150
 msgid "Creating a Session Record</p>"
@@ -537,7 +174,7 @@ msgstr "Создание записи сессии</p>"
 msgid "Ctrl+F10    Quit the game immediately"
 msgstr "Ctrl+F10    Незамедлительный выход из игры"
 
-#: ../../txts/developers:179
+#: ../../txts/developers:186
 msgid "Czech"
 msgstr "Чешский"
 
@@ -545,7 +182,7 @@ msgstr "Чешский"
 msgid "DELETE      Archive the current message"
 msgstr "DELETE      Архивировать текущее сообщение"
 
-#: ../../txts/developers:186
+#: ../../txts/developers:193
 msgid "Dansk"
 msgstr "Датский"
 
@@ -553,11 +190,11 @@ msgstr "Датский"
 msgid "Development"
 msgstr "Разработка"
 
-#: ../../txts/developers:321
+#: ../../txts/developers:328
 msgid "Documentation, Help and Wiki"
 msgstr "Документация, помощь и вики"
 
-#: ../../txts/developers:192
+#: ../../txts/developers:199
 msgid "Dutch"
 msgstr "Голландский"
 
@@ -569,13 +206,9 @@ msgstr "E        Убрать/вывести меню событий"
 msgid "Elders"
 msgstr "Старейшины"
 
-#: ../../txts/developers:160
+#: ../../txts/developers:167
 msgid "Empire"
 msgstr "Империя"
-
-#: ../../txts/COPYING:82
-msgid "End of Terms and Conditions"
-msgstr "КОНЕЦ ТРЕБОВАНИЙ И УСЛОВИЙ"
 
 #: ../../txts/README:65
 msgid "F               Toggle Fullscreen"
@@ -593,15 +226,15 @@ msgstr "F11          Снять скриншот"
 msgid "F6           Shows the debug console (only in debug-builds)"
 msgstr "F6 Показывает отладочную консоль (только в отладочных сборках)"
 
-#: ../../txts/developers:199
+#: ../../txts/developers:206
 msgid "Finnish"
 msgstr "Финский"
 
-#: ../../txts/developers:336
+#: ../../txts/developers:343
 msgid "Former elders"
 msgstr "Бывшие старейшины"
 
-#: ../../txts/developers:205
+#: ../../txts/developers:212
 msgid "French"
 msgstr "Французский"
 
@@ -609,18 +242,7 @@ msgstr "Французский"
 msgid "G           Go to location corresponding to current message"
 msgstr "G           Перейти к локации указанной в текущем сообщении"
 
-#: ../../txts/COPYING:3
-msgid "GNU general public licence"
-msgstr "GNU General Public License"
-
-#: ../../txts/COPYING:17
-msgid ""
-"GNU general public license terms and conditions for copying, distribution "
-"and modification"
-msgstr ""
-"Условия копирования, распространения и модификации программных продуктов"
-
-#: ../../txts/developers:212
+#: ../../txts/developers:219
 msgid "Galician"
 msgstr "Галисийский"
 
@@ -628,16 +250,16 @@ msgstr "Галисийский"
 msgid "General game control"
 msgstr "Основы управления игрой"
 
-#: ../../txts/developers:217
+#: ../../txts/developers:224
 msgid "German"
 msgstr "Немецкий"
 
-#: ../../txts/developers:85
+#: ../../txts/developers:86
 msgid "Graphicians"
 msgstr "Художники"
 
 #: ../../txts/developers:18
-#: ../../txts/developers:347
+#: ../../txts/developers:354
 msgid "Graphics"
 msgstr "Графика"
 
@@ -645,7 +267,7 @@ msgstr "Графика"
 msgid "H        Toggles main menu"
 msgstr "H        Перейти в главное меню"
 
-#: ../../txts/developers:229
+#: ../../txts/developers:236
 msgid "Hebrew"
 msgstr "Иврит"
 
@@ -670,19 +292,15 @@ msgid "Home        Center main mapview on starting location"
 msgstr "Home Центрирует карту в начальное положение"
 
 #: ../../txts/developers:23
-#: ../../txts/developers:340
+#: ../../txts/developers:347
 msgid "Homepage"
 msgstr "Домашняя страница"
 
-#: ../../txts/developers:312
+#: ../../txts/developers:319
 msgid "Homepage Coders"
 msgstr "Домашняя страница разработчиков"
 
-#: ../../txts/COPYING:86
-msgid "How to Apply These Terms to Your New Programs"
-msgstr "Как применить эти соглашения к новым программным продуктам"
-
-#: ../../txts/developers:234
+#: ../../txts/developers:241
 msgid "Hungarian"
 msgstr "Венгерский"
 
@@ -693,58 +311,6 @@ msgstr ""
 #: ../../txts/editor_readme:37
 msgid "I        Activates information tool"
 msgstr "I Активизирует информационную панель"
-
-#: ../../txts/COPYING:51
-msgid ""
-"If any portion of this section is held invalid or unenforceable under any "
-"particular circumstance, the balance of the section is intended to apply and "
-"the section as a whole is intended to apply in other circumstances."
-msgstr ""
-"Если какая-нибудь часть этого раздела не согласуется или не соблюдается при "
-"определенных обстоятельствах, то предполагается, что весь раздел в целом "
-"применяется при других обстоятельствах."
-
-#: ../../txts/COPYING:36
-msgid ""
-"If distribution of executable or object code is made by offering access to "
-"copy from a designated place, then offering equivalent access to copy the "
-"source code from the same place counts as distribution of the source code, "
-"even though third parties are notcompelled to copy the source along with the "
-"object code."
-msgstr ""
-"Если поставка выполняемого или объектного кода выполнена в виде предложения "
-"обратиться к копии в обозначенном месте, то предложение эквивалентного "
-"доступа к копии исходного кода из того же самого источника расценивается как "
-"поставка исходного кода, даже если независимых производителей не убедили в "
-"необходимости копирования исходного кода вместе с исходным кодом."
-
-#: ../../txts/COPYING:98
-msgid ""
-"If the program is interactive, make it output a short notice like "
-"this<br>when it starts in an interactive mode:<br><br>Gnomovision version "
-"69, Copyright (C) year  name of author<br>Gnomovision comes with ABSOLUTELY "
-"NO WARRANTY; for details type `show w'.<br>This is free software, and you "
-"are welcome to redistribute it<br>under certain conditions; type `show c' "
-"for details."
-msgstr ""
-"Если программа работает в интерактивном режиме, сделайте так, чтобы при "
-"запуске<br>выводилось короткое сообщение наподобие того, что приведено "
-"ниже:<br><br>Gnomovision version 69, Copyright (C) year  name of "
-"author<br>Gnomovision comes with ABSOLUTELY NO WARRANTY; for details type "
-"`show w'.<br>This is free software, and you are welcome to redistribute "
-"it<br>under certain conditions; type `show c' for details."
-
-#: ../../txts/COPYING:90
-msgid ""
-"If you develop a new program, and you want it to be of the greatest possible "
-"use to the public, the best way to achieve this is to make it free software "
-"which everyone can redistribute and change under these terms."
-msgstr ""
-"Если вы создали новую программу и хотите, чтобы любой человек смог ею "
-"свободно воспользоваться, лучше всего присвоить ей статус бесплатно "
-"распространяемого программного продукта (free software). Тогда любой "
-"желающий в рамках приведенной выше лицензии сможет ее свободно "
-"распространять и модифицировать."
 
 #: ../../txts/tips/general_game.tip:58
 msgid ""
@@ -781,29 +347,7 @@ msgstr "В окне сообщений доступны следующие до�
 msgid "Introduction"
 msgstr "Введение"
 
-#: ../../txts/COPYING:54
-msgid ""
-"It is not the purpose of this section to induce you to infringe any patents "
-"or other property right claims or to contest validity of any such claims; "
-"this section has the sole purpose of protecting the integrity of the free "
-"software distribution system, which is implemented by public license "
-"practices.  Many people have made generous contributions to the wide range "
-"of software distributed through that system in reliance on consistent "
-"application of that system; it is up to the author/donor to decide if he or "
-"she is willing to distribute software through any other system and a "
-"licensee cannot impose that choice."
-msgstr ""
-"Целью этого раздела отнюдь не является склонять вас к нарушению других "
-"правовых обязательств или оспаривать их обоснованность. Единственная цель "
-"этого раздела состоит в защите целостности системы распространения "
-"бесплатных программных продуктов, которая реализуется с помощью "
-"общедоступной лицензии. Многие люди внесли огромный вклад в программное "
-"обеспечение, распространяемое через эту систему, будучи уверенными в ее "
-"постоянном применении. И только от решения самого автора зависит, будет ли "
-"он (или она) распространять программный продукт через какую-либо другую "
-"систему, и лицензия не может повлиять на этот выбор."
-
-#: ../../txts/developers:239
+#: ../../txts/developers:246
 msgid "Italian"
 msgstr "Итальянский"
 
@@ -824,9 +368,13 @@ msgstr "Горячие клавиши"
 msgid "Keyboard shortcuts (in-game)"
 msgstr "Горячие клавиши (в игре)"
 
-#: ../../txts/COPYING:1
+#: ../../txts/license:1
 msgid "License"
 msgstr "Лицензия"
+
+#: ../../txts/license:4
+msgid "Licensing information for Widelands"
+msgstr ""
 
 #: ../../txts/tips/editor.tip:10
 msgid ""
@@ -836,7 +384,7 @@ msgstr ""
 "Так-же как и природные объекты можно выбрать несколько животных или текстур "
 "при помощи CTRL + клик."
 
-#: ../../txts/developers:278
+#: ../../txts/developers:285
 msgid "Linux Distributions"
 msgstr "Дистрибутивы Linux"
 
@@ -858,7 +406,7 @@ msgstr ""
 "новостям в окне сообщений, затем используйте 'G' для перехода к новости или "
 "Delete для архивирования сообщения."
 
-#: ../../txts/developers:137
+#: ../../txts/developers:138
 msgid "Maps and Missions"
 msgstr "Карты и миссии"
 
@@ -866,7 +414,7 @@ msgstr "Карты и миссии"
 msgid "Miners will only work if supplied with food."
 msgstr "Шахтеры будут работать только если они снабжены пищей."
 
-#: ../../txts/developers:115
+#: ../../txts/developers:116
 msgid "Musicians"
 msgstr "Музыканты"
 
@@ -874,7 +422,7 @@ msgstr "Музыканты"
 msgid "N               Toggle messages ('news')"
 msgstr "N - переход к сообщениям ('News')"
 
-#: ../../txts/developers:174
+#: ../../txts/developers:181
 msgid ""
 "NOTE: this list holds people that translated Widelands before we moved to "
 "launchpad.net. "
@@ -888,11 +436,7 @@ msgid ""
 "tools are available. Training sites are for improving their abilities."
 msgstr ""
 
-#: ../../txts/COPYING:70
-msgid "No warranty"
-msgstr "ГАРАНТИЯ ОТСУТСТВУЕТ"
-
-#: ../../txts/developers:300
+#: ../../txts/developers:307
 msgid "Non Unix Distributions"
 msgstr "Не Unix дистрибутив"
 
@@ -914,6 +458,19 @@ msgstr ""
 msgid "O               Toggle objectives display"
 msgstr "O Показать задания"
 
+#: ../../txts/license:18
+msgid ""
+"On Linux, you can find the file called COPYING in the root of the source or "
+"standalone binary package, or in the installation directory (like "
+"/usr/share/games/widelands)."
+msgstr ""
+
+#: ../../txts/license:20
+msgid ""
+"On MacOS, you can find the file called COPYING in the archive you downloaded "
+"from the website."
+msgstr ""
+
 #: ../../txts/README:159
 msgid ""
 "On Windows, create a shortcut to the file widelands.exe (right-click on "
@@ -929,15 +486,21 @@ msgstr ""
 "widelands.exe. Измените его на c:\\games\\widelands\\widelands.exe --"
 "record=filename.rec."
 
+#: ../../txts/license:19
+msgid ""
+"On Windows, you can find the file called COPYING.txt in the installation "
+"folder and the Widelands Start menu entry provides a link to this file."
+msgstr ""
+
 #: ../../txts/README:102
 msgid "Online Help"
 msgstr "Помощь On-Line"
 
-#: ../../txts/developers:366
+#: ../../txts/developers:373
 msgid "Other"
 msgstr "Прочее"
 
-#: ../../txts/developers:289
+#: ../../txts/developers:296
 msgid "Other Unix Distributions"
 msgstr "Другие дистрибутивы Unix"
 
@@ -965,7 +528,7 @@ msgstr "PAGEUP         Увеличить скорость игры"
 msgid "PAUSE         Pauses the game (only for local games)"
 msgstr "PAUSE Приостанавливает игру (только в одиночных играх)"
 
-#: ../../txts/developers:274
+#: ../../txts/developers:281
 msgid "Packagers"
 msgstr "Упаковщики"
 
@@ -979,13 +542,9 @@ msgstr ""
 msgid "Please provide enough background information. Tell us:"
 msgstr "Пожалуйста сообщите дополнительную информацию. Перечислите:"
 
-#: ../../txts/developers:244
+#: ../../txts/developers:251
 msgid "Polish"
 msgstr "Польский"
-
-#: ../../txts/COPYING:11
-msgid "Preamble"
-msgstr "Преамбула"
 
 #: ../../txts/tips/general_game.tip:42
 msgid ""
@@ -1046,7 +605,7 @@ msgstr "Повторы</p>"
 msgid "Reporting Bugs"
 msgstr "Сообщить об ошибке"
 
-#: ../../txts/developers:252
+#: ../../txts/developers:259
 msgid "Russian"
 msgstr "Русский"
 
@@ -1074,7 +633,7 @@ msgstr ""
 "Клавиша \"Пробел\" ведет себя как в обычной игре. Она включает и выключает "
 "помощник строительства."
 
-#: ../../txts/developers:175
+#: ../../txts/developers:182
 msgid ""
 "See https://translations.launchpad.net/widelands for a list of people that "
 "helped to translate Widelands via launchpad.net."
@@ -1082,7 +641,7 @@ msgstr ""
 "См. список переводивших Widelands на launchpad.net по адресу "
 "https://translations.launchpad.net/widelands."
 
-#: ../../txts/developers:257
+#: ../../txts/developers:264
 msgid "Slovak"
 msgstr "Словацкий"
 
@@ -1097,15 +656,15 @@ msgstr ""
 "Если здание будет окружено деревьями и дорогами то производство остановится."
 
 #: ../../txts/developers:28
-#: ../../txts/developers:354
+#: ../../txts/developers:361
 msgid "Sound"
 msgstr "Звук"
 
-#: ../../txts/developers:127
+#: ../../txts/developers:128
 msgid "Sound Effects"
 msgstr "Звуковые эффекты"
 
-#: ../../txts/developers:262
+#: ../../txts/developers:269
 msgid "Spanish"
 msgstr "Испанский"
 
@@ -1121,19 +680,13 @@ msgstr ""
 msgid "Status"
 msgstr "Статус"
 
-#: ../../txts/developers:267
+#: ../../txts/developers:274
 msgid "Swedish"
 msgstr "Шведский"
 
 #: ../../txts/editor_readme:35
 msgid "T        Toggles tools menu"
 msgstr "T        Вывести меню инструментов"
-
-#: ../../txts/tips/general_game.tip:66
-msgid ""
-"The 'configure economy' menu for setting up target quantities can be "
-"accessed via the flag menu."
-msgstr ""
 
 #: ../../txts/tips/general_game.tip:2
 msgid ""
@@ -1143,174 +696,11 @@ msgstr ""
 "Процесс строительства начнется только после того, как будет проложена дорога "
 "на строительную площадку."
 
-#: ../../txts/COPYING:100
-msgid ""
-"The hypothetical commands `show w' and `show c' should show the appropriate "
-"parts of the General Public License.  Of course, the commands you use may be "
-"called something other than `show w' and `show c'; they could even be mouse-"
-"clicks or menu items--whatever suits your program.<br><br>You should also "
-"get your employer (if you work as a programmer) or your school, if any, to "
-"sign a copyright disclaimer for the program, if necessary.  Here is a "
-"sample; alter the names:"
-msgstr ""
-"Выше были указаны две гипотетические команды show w и show с, с помощью "
-"которых пользователь может просмотреть соответствующие разделы общей "
-"лицензии GNU. Конечно, имена команд могут быть другими. Более того, эти "
-"команды могут вызываться из меню или в результате щелчка кнопки мыши — в "
-"зависимости от типа вашей программы.<br><br>При необходимости, укажите также "
-"координаты работодателя (если вы работаете программистом), или учебного "
-"заведения (если вы студент), которые смогут подтвердить полный отказ от всех "
-"авторских прав на программу. Ниже приведен пример, где можно вставить в "
-"текст реальные имена:"
-
-#: ../../txts/COPYING:14
-msgid ""
-"The licenses for most software are designed to take away your freedom to "
-"share and change it. By contrast, the GNU General Public License is intended "
-"to guarantee your freedom to share and change free software--to make sure "
-"the software is free for all its users.  This General Public License applies "
-"to most of the Free Software Foundation's software and to any other program "
-"whose authors commit to using it.  (Some other Free Software Foundation "
-"software is covered by the GNU Library General Public License instead.)  You "
-"can apply it to your programs, too.<br>When we speak of free software, we "
-"are referring to freedom, not price.  Our General Public Licenses are "
-"designed to make sure that you have the freedom to distribute copies of free "
-"software (and charge for this service if you wish), that you receive source "
-"code or can get it if you want it, that you can change the software or use "
-"pieces of it in new free programs; and that you know you can do these "
-"things.<br>To protect your rights, we need to make restrictions that forbid "
-"anyone to deny you these rights or to ask you to surrender the rights. These "
-"restrictions translate to certain responsibilities for you if you distribute "
-"copies of the software, or if you modify it.<br>For example, if you "
-"distribute copies of such a program, whether gratis or for a fee, you must "
-"give the recipients all the rights that you have.  You must make sure that "
-"they, too, receive or can get the source code.  And you must show them these "
-"terms so they know their rights.<br>We protect your rights with two steps: "
-"(1) copyright the software, and (2) offer you this license which gives you "
-"legal permission to copy, distribute and/or modify the software.<br>Also, "
-"for each author's protection and ours, we want to make certain that everyone "
-"understands that there is no warranty for this free software.  If the "
-"software is modified by someone else and passed on, we want its recipients "
-"to know that what they have is not the original, so that any problems "
-"introduced by others will not reflect on the original authors' "
-"reputations.<br>Finally, any free program is threatened constantly by "
-"software patents.  We wish to avoid the danger that redistributors of a free "
-"program will individually obtain patent licenses, in effect making the "
-"program proprietary.  To prevent this, we have made it clear that any patent "
-"must be licensed for everyone's free use or not licensed at all.<br>The "
-"precise terms and conditions for copying, distribution and modification "
-"follow.<br>"
-msgstr ""
-"Для большинства программных продуктов лицензии разрабатываются с целью "
-"запрещения их свободного распространения и внесения в них изменений. Данная "
-"общая лицензия GNU (GNU General Public License), наоборот, призвана "
-"гарантировать свободное использование и изменение свободно распространяемых "
-"программных продуктов для всех пользователей. Эта лицензия применяется к "
-"большинству программных продуктов FSF и ко многим другим программам, авторы "
-"которых берут на себя обязательство ее использовать. (Существует ряд "
-"программных продуктов FSF, которые подчиняются правилам \"библиотечной\" "
-"лицензии GNU (GNU Library General Public License).) Вы также можете "
-"применять ее к своим программам.<br> Когда мы говорим о свободно "
-"распространяемом программном продукте, мы имеем в виду свободу, а не цену. "
-"Наши общие лицензии разрабатываются с целью предоставления вам свободы в "
-"распространении копий свободно распространяемых программных продуктов (или "
-"при желании вы можете назначить цену за этот сервис) и гарантии или "
-"возможности получения исходного кода; внесения изменений в продукт или "
-"использования его фрагментов для создания новых свободно распространяемых "
-"программ, а также для того, чтобы вы знали о возможности реализации всех "
-"перечисленных выше действий.<br> Для защиты ваших прав нам необходимо "
-"очертить круг ограничений, которые запрещают кому бы то ни было отказать вам "
-"в этих правах или просить вас отказаться от своих прав. Эти ограничения "
-"налагают на вас определенные обязательства, если вы распространяете копии "
-"некоторой программы или модифицируете ее.<br>  Например, при распространении "
-"копии такой программы (бесплатно или за некоторую плату) вы должны передать "
-"получателям все права, которыми располагаете сами. Вы должны убедиться в "
-"том, что они также получат или могут получить исходный код. Кроме того, вы "
-"должны показать им этот текст, чтобы они также знали свои права.<br>  Мы "
-"защищаем ваши права двумя способами: обеспечивая авторское право на "
-"программный продукт и предлагая вам эту лицензию, которая дает вам легальное "
-"разрешение на копирование, распространение и/или модификацию программы.<br>  "
-"Кроме того, в целях защиты всех авторов (и нас в том числе) мы хотим, чтобы "
-"все четко понимали, что свободно распространяемый программный продукт "
-"свободен от каких бы то ни было гарантий. Иными словами, если программа "
-"модифицируется другими людьми и передается для последующих модификаций, то "
-"те, кому она попадает в руки, должны знать, что они получили не оригинал. "
-"Поэтому любые изменения, внесенные другими пользователями, не должны "
-"отразиться на репутации авторов.<br>  И последнее. Любая свободно "
-"распространяемая программа постоянно находится под угрозой получения "
-"патента. Мы хотим избежать этой опасности, когда распространители могли бы "
-"приобрести лицензию на такую программу, став ее владельцем. Во избежание "
-"этого мы подчеркиваем, что любой патент должен быть лицензирован для "
-"беспрепятственного использования всеми желающими или не лицензирован "
-"вообще.<br>  Ниже приводится подробное описание условий для копирования, "
-"распространения и модификации программных продуктов.<br>"
-
 #: ../../txts/tips/editor.tip:22
 msgid ""
 "The number keys (1 - 0) allow you to directly set the size of the selected "
-"area around your mouse."
+"area around your mouse cursor."
 msgstr ""
-"Цифровые клавиши (1 - 0) позволят вам напрямую задать размер выбранной "
-"области вокруг мыши."
-
-#: ../../txts/COPYING:33
-msgid ""
-"The source code for a work means the preferred form of the work for making "
-"modifications to it.  For an executable work, complete source code means all "
-"the source code for all modules it contains, plus any associated interface "
-"definition files, plus the scripts used to control compilation and "
-"installation of the executable.  However, as a special exception, the source "
-"code distributed need not include anything that is normally distributed (in "
-"either source or binary form) with the major components (compiler, kernel, "
-"and so on) of the operating system on which the executable runs, unless that "
-"component itself accompanies the executable."
-msgstr ""
-"Исходный код программы является предпочтительной формой для внесения "
-"изменений. Для выполняемого продукта полный исходный код означает наличие "
-"всего исходного кода для всех модулей, содержащихся в продукте, плюс "
-"соответствующие интерфейсные файлы, плюс командные файлы, используемые для "
-"управления компиляцией и установкой исполняемого варианта. Но как особое "
-"исключение поставляемый исходный код не требует включения никаких "
-"компонентов, которые обычно входят в поставку (в исходном либо двоичном "
-"коде) с основными компонентами (компилятор, ядро и т.д.) операционной "
-"системы, в которой должен работать продукт, если какой-то компонент сам не "
-"является обязательным приложением к выполняемому продукту."
-
-#: ../../txts/COPYING:27
-msgid ""
-"These requirements apply to the modified work as a whole. If identifiable "
-"sections of that work are not derived from the Program, and can be "
-"reasonably considered independent and separate works in themselves, then "
-"this License, and its terms, do not apply to those sections when you "
-"distribute them as separate works. But when you distribute the same sections "
-"as part of a whole which is a work based on the Program, the distribution of "
-"the whole must be on the terms of this License, whose permissions for other "
-"licensees extend to the entire whole, and thus to each and every part "
-"regardless of who wrote it.<br>Thus, it is not the intent of this section to "
-"claim rights or contest your rights to work written entirely by you; rather, "
-"the intent is to exercise the right to control the distribution of "
-"derivative or collective works based on the Program.<br>In addition, mere "
-"aggregation of another work not based on the Program with the Program (or "
-"with a work based on the Program) on a volume of a storage or distribution "
-"medium does not bring the other work under the scope of this License."
-msgstr ""
-"Эти требования относятся в целом к модифицированному продукту. Если в этом "
-"продукте есть разделы, которые не являются производными от Программы и могут "
-"рассматриваться как независимые продукты, работающие отдельно от других "
-"частей, то эта лицензия и ее условия не относятся к таким разделам, если вы "
-"распространяете их как отдельные продукты. Но если вы распространяете те же "
-"самые разделы в качестве составных частей одного целого, которые образуют "
-"продукт, основанный на Программе, распространение такого \"целого\" должно "
-"происходить на условиях, записанных в данной лицензии, разрешения которой в "
-"этом случае расширяются на все составные части продукта, независимо от того, "
-"кто является их автором.<br> Цель этого раздела лицензии состоит не в том, "
-"чтобы оспаривать ваши права на продукт, полностью написанный вашими руками, "
-"а в осуществлении права контроля за распространением унаследованных или "
-"коллективных продуктов, основанных на Программе.<br> Необходимо также "
-"отметить, что простое объединение других продуктов, не основанных на "
-"Программе, с Программой (или с продуктами, основанными на Программе) на "
-"одном носителе информации или распространение такого носителя не вносит "
-"другие продукты в область действия этой лицензии."
 
 #: ../../txts/editor_readme:10
 msgid ""
@@ -1324,27 +714,19 @@ msgstr ""
 "над редактором продолжается и он становится все лучше и лучше и этот текст "
 "становится больше и полнее."
 
-#: ../../txts/COPYING:104
+#: ../../txts/license:22
 msgid ""
-"This General Public License does not permit incorporating your program into "
-"proprietary programs.  If your program is a subroutine library, you may "
-"consider it more useful to permit linking proprietary applications with the "
-"library.  If this is what you want to do, use the GNU Library General Public "
-"License instead of this License."
+"This game comes as-is and without any warranty. For more information and "
+"support you can find us at http://wl.widelands.org (Website, Wiki, Forum for "
+"quesions or general support) or https://launchpad.net/widelands (Bugtracker, "
+"Translations)."
 msgstr ""
-"Данное лицензионное соглашение не предусматривает использование программы "
-"или ее частей в коммерческих проектах. Если ваше программное обеспечение "
-"представляет собой библиотеку подпрограмм, вы можете разрешить использовать "
-"ее компоненты в коммерческих программах. При этом вместо общей лицензии GNU "
-"используйте библиотечную лицензию."
 
-#: ../../txts/COPYING:57
+#: ../../txts/license:9
 msgid ""
-"This section is intended to make thoroughly clear what is believed to be a "
-"consequence of the rest of this License."
+"This game is Free and Open Source (FOSS), licensed under the GNU General "
+"Public License (GPL) V2.0."
 msgstr ""
-"Предполагается, что в этом разделе внесена ясность в то, что считается "
-"следствием остальной части лицензии."
 
 #: ../../txts/editor_readme:14
 msgid ""
@@ -1366,19 +748,6 @@ msgstr ""
 "Для создания записи сессии, запустите игру с параметром -record. В Linux "
 "выполните команду: $ ./widelands --record=filename.rec"
 
-#: ../../txts/COPYING:93
-msgid ""
-"To do so, attach the following notices to the program.  It is safest to "
-"attach them to the start of each source file to most effectively convey the "
-"exclusion of warranty; and each file should have at least the copyright line "
-"and a pointer to where the full notice is found."
-msgstr ""
-"Для этого включите приведенные ниже строки в дистрибутивный пакет программы. "
-"Лучше всего поместить их в качестве комментария в начало каждого исходного "
-"файла, чтобы они были хорошо заметны. Кроме того, в каждый исходный файл "
-"должна быть включена строка \"copyright\", а также ссылка на то, где можно "
-"прочитать полный текст лицензионного соглашения."
-
 #: ../../txts/README:42
 msgid ""
 "To minimize/maximize a window, click on the titlebar of that window either "
@@ -1387,11 +756,11 @@ msgstr ""
 "Чтобы минимизировать / максимизировать окно, щелкните на строке заголовка "
 "этого окна или средней  / левой кнопкой мыши, удерживая CTRL."
 
-#: ../../txts/developers:359
+#: ../../txts/developers:366
 msgid "Translation"
 msgstr "Перевод"
 
-#: ../../txts/developers:171
+#: ../../txts/developers:178
 msgid "Translators"
 msgstr "Переводчики"
 
@@ -1420,11 +789,9 @@ msgstr ""
 
 #: ../../txts/tips/general_game.tip:30
 msgid ""
-"Use the 'configure economy' menu to adjust the target quantity of a specific "
-"ware."
+"Use the 'configure economy' menu to adjust the target quantity of wares. It "
+"can be accessed via the flag menu."
 msgstr ""
-"Используйте меню 'управление экономикой' для настройки целевого количества "
-"определенных товаров."
 
 #: ../../txts/README:144
 msgid ""
@@ -1442,9 +809,9 @@ msgstr ""
 "'рассинхронизации'. Это сходно с тем, как сетевые игры страдают от проблем "
 "синхронихации если один из игроков имеет отличающуюся версию игры."
 
-#: ../../txts/COPYING:6
-msgid "Version 2, June 1991<br></p></rt>"
-msgstr "Версия 2, Июнь 1991<br></p></rt>"
+#: ../../txts/license:16
+msgid "We are also shipping the GPL as text document with Widelands itself."
+msgstr ""
 
 #: ../../txts/README:88
 msgid ""
@@ -1537,6 +904,18 @@ msgstr ""
 "Вы можете найти общую помощь с редактором, а также краткое руководство в "
 "нашей вики на www.widelands.org"
 
+#: ../../txts/license:11
+msgid ""
+"You can find more information on FOSS and the GPL by visiting the following "
+"webpage: "
+msgstr ""
+
+#: ../../txts/license:14
+msgid ""
+"You can find the full text of the license there as well as further "
+"information about its philosophy and the legal implications."
+msgstr ""
+
 #: ../../txts/tips/editor.tip:6
 msgid ""
 "You can select multiple nature object (bob) types if you hold down CTRL "
@@ -1571,17 +950,10 @@ msgstr ""
 "Ваша территория может быть расширена путем постройки различных военных "
 "зданий - часовой, крепости, казармы и т.д."
 
-#: ../../txts/COPYING:102
-msgid ""
-"Yoyodyne, Inc., hereby disclaims all copyright interest in the "
-"program<br>`Gnomovision' (which makes passes at compilers) written by James "
-"Hacker.<br><br><signature of Ty Coon>, 1 April 1989<br>Ty Coon, President of "
-"Vice"
-msgstr ""
-"Yoyodyne, Inc., hereby disclaims all copyright interest in the "
-"program<br>`Gnomovision' (which makes passes at compilers) written by James "
-"Hacker.<br><br><Личная подпись>, <Дата><br><Должность>"
-
 #: ../../txts/README:5
 msgid "an open source strategy game"
 msgstr "стратегическая игра с открытым кодом"
+
+#: ../../txts/license:12
+msgid "http://www.gnu.org/licenses/old-licenses/gpl-2.0"
+msgstr ""

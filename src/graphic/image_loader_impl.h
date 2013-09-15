@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2012 by the Widelands Development Team
+ * Copyright (C) 2006-2013 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -28,7 +28,7 @@ class ImageLoaderImpl : public IImageLoader {
 public:
 	virtual ~ImageLoaderImpl() {}
 
-	Surface* load(const std::string& fname) const;
+	Surface* load(const std::string& fname, FileSystem* fs = nullptr) const;
 };
 
 

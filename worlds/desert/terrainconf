@@ -5,79 +5,79 @@
 ##### suggestions without having to worry about the localized name of terrain
 
 [desert1]
-name="Desert1"
+name=_"Desert1"
 is=dry
 dither_layer=20
 
 [desert2]
-name="Desert2"
+name=_"Desert2"
 is=dry
 dither_layer=20
 
 [desert3]
-name="Desert3"
+name=_"Desert3"
 is=dry
 dither_layer=20
 
 [desert4]
-name="Desert4"
+name=_"Desert4"
 def_resources=water 2
 is=green
 dither_layer=20
 
 [drysoil]
-name="Dry soil"
+name=_"Dry soil"
 def_resources=water 4
 is=green
 dither_layer=30
 
 [beach]
-name="Beach"
+name=_"Beach"
 is=dry
 dither_layer=10
 
 [steppe]
-name="Steppe"
+name=_"Steppe"
 def_resources=water 5
 is=green
 dither_layer=30
 
 [meadow]
-name="Meadow"
+name=_"Meadow"
 def_resources=water 10
 is=green
 dither_layer=40
 
 [mountainmeadow]
-name="Mountain meadow"
+name=_"Mountain meadow"
 is=green
 dither_layer=50
 
 [highmountainmeadow]
-name="High mountain meadow"
+name=_"High mountain meadow"
 is=green
 dither_layer=60
 
 [mountain1]
-name="Mountain1"
+name=_"Mountain1"
 resources=coal, iron, gold, granit
 is=mountain
 dither_layer=70
 
 [mountain2]
-name="Mountain2"
+name=_"Mountain2"
 resources=coal, iron, gold, granit
 is=mountain
 dither_layer=70
 
 [mountain3]
-name="Mountain3"
+name=_"Mountain3"
 resources=coal, iron, gold, granit
 is=mountain
 dither_layer=70
 
 [mountain4]
-name="Mountain4"
+name=_"Mountain4"
 resources=coal, iron, gold, granit
 is=mountain
 dither_layer=70
@@ -86,13 +86,13 @@ dither_layer=70
 ##### Here are few imported textures of greenland
 
 [wasser]
-name="Water"
+name=_"Water"
 def_resources=fish 4
 is=water
 fps=5
 dither_layer=0
 
 [lava]
-name="Lava"
+name=_"Lava"
 is=acid
 dither_layer=80

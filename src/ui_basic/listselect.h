@@ -24,7 +24,7 @@
 #include <deque>
 #include <limits>
 
-#include <boost/signal.hpp>
+#include <boost/signals2.hpp>
 
 #include "align.h"
 #include "ui_basic/panel.h"
@@ -51,9 +51,9 @@ struct BaseListselect : public Panel {
 		 bool show_check = false);
 	~BaseListselect();
 
-	boost::signal<void (uint32_t)> selected;
-	boost::signal<void (uint32_t)> clicked;
-	boost::signal<void (uint32_t)> double_clicked;
+	boost::signals2::signal<void (uint32_t)> selected;
+	boost::signals2::signal<void (uint32_t)> clicked;
+	boost::signals2::signal<void (uint32_t)> double_clicked;
 
 	void clear();
 	void sort

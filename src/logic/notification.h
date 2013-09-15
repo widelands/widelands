@@ -50,12 +50,11 @@ class NoteSender {
 
 public:
 	~NoteSender() {
-		while (m_links.size())
+		while (!m_links.empty())
 			(*m_links.rbegin())->disconnect(*this);
 	}
 
-protected:
-	void send(const T & note) {
+	void send(const T & note) const {
 		container_iterate_const(Links, m_links, i)
 			(*i.current)->receive(note);
 	}
@@ -72,7 +71,7 @@ class NoteReceiver {
 
 public:
 	virtual ~NoteReceiver() {
-		while (m_links.size())
+		while (!m_links.empty())
 			disconnect(**m_links.rbegin());
 	}
 

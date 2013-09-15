@@ -30,7 +30,7 @@
 #include "timestring.h"
 #include "ui_basic/messagebox.h"
 
-Fullscreen_Menu_LoadReplay::Fullscreen_Menu_LoadReplay() :
+Fullscreen_Menu_LoadReplay::Fullscreen_Menu_LoadReplay(Widelands::Game & g) :
 	Fullscreen_Menu_Base("choosemapmenu.jpg"),
 
 // Values for alignment and size
@@ -82,7 +82,8 @@ Fullscreen_Menu_LoadReplay::Fullscreen_Menu_LoadReplay() :
 	m_ta_players
 		(this, get_w() * 71 / 100, get_h() * 41 / 100),
 	m_ta_win_condition
-		(this, get_w() * 71 / 100, get_h() * 9 / 20)
+		(this, get_w() * 71 / 100, get_h() * 9 / 20),
+	m_game(g)
 {
 	m_back.sigclicked.connect(boost::bind(&Fullscreen_Menu_LoadReplay::end_modal, boost::ref(*this), 0));
 	m_ok.sigclicked.connect(boost::bind(&Fullscreen_Menu_LoadReplay::clicked_ok, boost::ref(*this)));
@@ -171,11 +172,10 @@ void Fullscreen_Menu_LoadReplay::replay_selected(uint32_t const selected)
 
 	if (m_list.has_selection()) {
 		std::string name = m_list.get_selected() + WLGF_SUFFIX;
-		Widelands::Game game;
 		Widelands::Game_Preload_Data_Packet gpdp;
 
 		try {
-			Widelands::Game_Loader gl(name, game);
+			Widelands::Game_Loader gl(name, m_game);
 			gl.preload_game(gpdp);
 		} catch (const _wexception & e) {
 			log("Replay '%s' must have changed from under us\nException: %s\n", name.c_str(), e.what());
@@ -215,6 +215,7 @@ void Fullscreen_Menu_LoadReplay::fill_list()
 
 	g_fs->FindFiles(REPLAY_DIR, "*" REPLAY_SUFFIX, &files, 1);
 
+	Widelands::Game_Preload_Data_Packet gpdp;
 	for
 		(filenameset_t::iterator pname = files.begin();
 		 pname != files.end();
@@ -226,9 +227,7 @@ void Fullscreen_Menu_LoadReplay::fill_list()
 			continue;
 
 		try {
-			Widelands::Game_Preload_Data_Packet gpdp;
-			Widelands::Game game;
-			Widelands::Game_Loader gl(savename, game);
+			Widelands::Game_Loader gl(savename, m_game);
 			gl.preload_game(gpdp);
 
 			m_list.add

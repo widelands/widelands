@@ -27,49 +27,56 @@ class Soldier;
 /**
  * Manages the battle between two opposing soldiers.
  *
- * A \ref Battle object is created using the \ref create() function
- * as soon as a soldier decides he wants to attack someone else.
+ * A \ref Battle object is created using the \ref create() function as soon as
+ * a soldier decides he wants to attack someone else. A battle always has both
+ * Soldiers defined, the battle object must be destroyed as soon as there is no
+ * other Soldier to battle anymore.
  */
-struct Battle : public Map_Object {
+class Battle : public Map_Object {
+public:
 	typedef Map_Object_Descr Descr;
 
 	Battle(); //  for loading an existing battle from a savegame
 	Battle(Game &, Soldier &, Soldier &); //  to create a new battle in the game
 
+	// Implements Map_Object.
 	virtual int32_t get_type() const throw () {return BATTLE;}
-	char const * type_name() const throw () {return "battle";}
+	virtual char const * type_name() const throw () {return "battle";}
+	virtual void init(Editor_Game_Base &);
+	virtual void cleanup(Editor_Game_Base &);
+	virtual bool has_new_save_support() {return true;}
+	virtual void save(Editor_Game_Base &, Map_Map_Object_Saver &, FileWrite &);
+	static Map_Object::Loader * load
+		(Editor_Game_Base &, Map_Map_Object_Loader &, FileRead &);
 
-	void init(Editor_Game_Base &);
-	void cleanup(Editor_Game_Base &);
+	// Cancel this battle immediately and schedule destruction.
 	void cancel(Game &, Soldier &);
 
+	// Returns true if the battle should not be interrupted.
+	bool locked(Game &);
+
+	// The two soldiers involved in this fight.
 	Soldier * first() {return m_first;}
 	Soldier * second() {return m_second;}
 
-	/**
-	 * \return \c true if the battle should not be interrupted.
-	 */
-	bool locked(Game &);
-
-	/**
-	 * \param soldier must be one of the soldier involved in this battle
-	 * \return the other soldier
-	 */
+	// Returns the other soldier involved in this battle. CHECKs that the given
+	// soldier is participating in this battle and that the opponent is not
+	// nullptr.
 	Soldier * opponent(Soldier &);
 
-	/**
-	 * \param soldier must be one of the soldier involved in this battle
-	 * \return if other soldier is set
-	 */
-	bool has_opponent(Soldier &);
-
-	/**
-	 * Called by the battling soldiers once they've met on a common node
-	 * and are idle.
-	 */
+	// Called by the battling soldiers once they've met on a common node and are
+	// idle.
 	void getBattleWork(Game &, Soldier &);
 
 private:
+	struct Loader : public Map_Object::Loader {
+		virtual void load(FileRead &, uint8_t version);
+		virtual void load_pointers();
+
+		Serial m_first;
+		Serial m_second;
+	};
+
 	void calculateRound(Game &);
 
 	Soldier * m_first;
@@ -101,24 +108,6 @@ private:
 	 * \c true if the last turn attacker damaged his opponent
 	 */
 	bool m_last_attack_hits;
-
-	// Load/save support
-protected:
-	struct Loader : public Map_Object::Loader {
-		virtual void load(FileRead &, uint8_t version);
-		virtual void load_pointers();
-
-		Serial m_first;
-		Serial m_second;
-	};
-
-public:
-	// Remove as soon as we fully support the new system
-	virtual bool has_new_save_support() {return true;}
-
-	virtual void save(Editor_Game_Base &, Map_Map_Object_Saver &, FileWrite &);
-	static Map_Object::Loader * load
-		(Editor_Game_Base &, Map_Map_Object_Loader &, FileRead &);
 };
 
 }

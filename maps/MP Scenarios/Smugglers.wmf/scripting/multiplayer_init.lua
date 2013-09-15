@@ -8,21 +8,16 @@ use("aux", "objective_utils")
 use("aux", "set")
 
 -- ==========
--- Constants 
+-- Constants
 -- ==========
 set_textdomain("mp_scenario_smugglers.wmf")
 
 game = wl.Game()
 map = game.map
 
-points_to_win = 1000
+points_to_win = 2000
 
 route_descrs = {
-   { value = 0, send = map:get_field(33, 13):region(2), recv = map:get_field(123, 91):region(2) },
-   { value = 0, send = map:get_field(120, 97):region(2), recv = map:get_field(25, 19):region(2) },
-   { value = 0, send = map:get_field(110, 17):region(2), recv = map:get_field(36, 118):region(2) },
-   { value = 0, send = map:get_field(41, 119):region(2), recv = map:get_field(114, 20):region(2) },
-
    { value = 2, send = map:get_field(35, 52):region(2), recv = map:get_field(96, 77):region(2) },
    { value = 2, send = map:get_field(98, 55):region(2), recv = map:get_field(34, 76):region(2) },
 
@@ -36,7 +31,7 @@ route_descrs = {
 }
 
 -- =================
--- Global Variables 
+-- Global Variables
 -- =================
 points = { 0, 0 }
 
@@ -53,7 +48,7 @@ use("map", "texts")
 use("map", "smuggling")
 
 -- ================
--- Initializations 
+-- Initializations
 -- ================
 function assign_teams()
    game.players[1].team = 1
@@ -123,7 +118,7 @@ function setup_statistics_hook()
 	hooks.custom_statistic = {
       name = _ "Wares smuggled",
       pic = "map:genstats_wares_smuggled.png",
-      calculator = function(p) 
+      calculator = function(p)
          return points[p.team]
       end,
    }

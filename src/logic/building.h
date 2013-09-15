@@ -24,7 +24,7 @@
 #include <string>
 #include <vector>
 
-#include <boost/signal.hpp>
+#include <boost/signals2.hpp>
 
 #include "ai/ai_hints.h"
 #include "logic/buildcost.h"
@@ -60,7 +60,7 @@ class Building;
  */
 struct Building_Descr : public Map_Object_Descr {
 	typedef std::set<Building_Index> Enhancements;
-	typedef std::vector<const Building_Descr*> FormerBuildings;
+	typedef std::vector<Building_Index> FormerBuildings;
 
 	Building_Descr
 		(char const * _name, char const * _descname,
@@ -176,7 +176,7 @@ public:
 		PCap_Enhancable = 1 << 2, // can be enhanced to something
 	};
 
-	typedef std::vector<const Building_Descr*> FormerBuildings;
+	typedef std::vector<Building_Index> FormerBuildings;
 
 public:
 	Building(const Building_Descr &);
@@ -240,9 +240,9 @@ public:
 	/**
 	 * The former buildings vector keeps track of all former buildings
 	 * that have been enhanced up to the current one. The current building
-	 * descr will be in the last position. For construction sites, it is
-	 * empty except if a former building is being enhanced. For a dismantle
-	 * site, the last item will be the one being dismantled.
+	 * index will be in the last position. For construction sites, it is
+	 * empty exceptenhancements. For a dismantle site, the last item will
+	 * be the one being dismantled.
 	 */
 	const FormerBuildings get_former_buildings() {
 		return m_old_buildings;
@@ -261,13 +261,14 @@ public:
 
 	void    add_worker(Worker &);
 	void remove_worker(Worker &);
-	mutable boost::signal<void ()> workers_changed;
+	mutable boost::signals2::signal<void ()> workers_changed;
 
 	void send_message
 		(Game & game,
 		 const std::string & msgsender,
 		 const std::string & title,
 		 const std::string & description,
+		 bool link_to_building_lifetime = true,
 		 uint32_t throttle_time = 0,
 		 uint32_t throttle_radius = 0);
 protected:
@@ -308,9 +309,9 @@ protected:
 	bool m_seeing;
 
 	// Signals connected for the option window
-	std::vector<boost::signals::connection> options_window_connections;
+	std::vector<boost::signals2::connection> options_window_connections;
 
-	// The former buildings descrs, with the current one in last position.
+	// The former buildings names, with the current one in last position.
 	FormerBuildings m_old_buildings;
 };
 

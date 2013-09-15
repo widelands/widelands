@@ -1,0 +1,16 @@
+# Automatically created by Widelands bzr6716[widelands] (Debug)
+
+[global]
+packet_version="1"
+number_of_port_spaces="9"
+
+[port_spaces]
+0="16 11"
+1="109 13"
+2="60 84"
+3="120 86"
+4="137 107"
+5="135 142"
+6="9 150"
+7="63 154"
+8="66 154"

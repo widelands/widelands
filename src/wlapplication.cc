@@ -1578,7 +1578,7 @@ void WLApplication::mainmenu()
 				break;
 			}
 			case Fullscreen_Menu_Main::mm_readme: {
-				Fullscreen_Menu_FileView ff("txts/README");
+				Fullscreen_Menu_FileView ff("txts/README.lua");
 				ff.run();
 				break;
 			}
@@ -2204,15 +2204,15 @@ private:
  */
 void WLApplication::replay()
 {
+	Widelands::Game game;
 	if (m_filename.empty()) {
-		Fullscreen_Menu_LoadReplay rm;
+		Fullscreen_Menu_LoadReplay rm(game);
 		if (rm.run() <= 0)
 			return;
 
 		m_filename = rm.filename();
 	}
 
-	Widelands::Game game;
 	try {
 		UI::ProgressWindow loaderUI;
 		std::vector<std::string> tipstext;
@@ -2226,7 +2226,9 @@ void WLApplication::replay()
 		game.set_write_replay(false);
 		ReplayGameController rgc(game, m_filename);
 
-		game.run(&loaderUI, Widelands::Game::Loaded);
+		game.save_handler().set_allow_saving(false);
+
+		game.run(&loaderUI, Widelands::Game::Loaded, true);
 	} catch (const std::exception & e) {
 		log("Fatal Exception: %s\n", e.what());
 		emergency_save(game);

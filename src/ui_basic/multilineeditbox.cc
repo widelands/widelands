@@ -450,20 +450,12 @@ bool Multiline_Editbox::handle_key(bool const down, SDL_keysym const code)
 }
 
 /**
- * Handle mousebutton events
+ * Grab the focus and redraw.
  */
-bool Multiline_Editbox::handle_mousepress
-		(const Uint8 btn, int32_t x, int32_t y)
-{
-	if (btn == SDL_BUTTON_LEFT and not has_focus()) {
-		focus();
-		return true;
-	}
-	return Panel::handle_mousepress(btn, x, y);
-}
-bool Multiline_Editbox::handle_mouserelease(const Uint8, int32_t, int32_t)
-{
-	return false;
+void Multiline_Editbox::focus() {
+	Panel::focus();
+
+	update();
 }
 
 /**

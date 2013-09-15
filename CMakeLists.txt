@@ -117,7 +117,7 @@ if (WL_UNIT_TESTS)
   set (Boost_FIND_COMPONENTS unit_test_framework signals)
   set (Boost_USE_MULTITHREADED ON)
   set (Boost_DETAILED_FAILURE_MSG ON)
-  find_package(Boost 1.35.0 COMPONENTS unit_test_framework signals REQUIRED)
+  find_package(Boost 1.48 COMPONENTS unit_test_framework signals REQUIRED)
 
   if (NOT DEFINED MSVC)
   # If boost unit test library is linked dynamically, BOOST_TEST_DYN_LINK must be defined
@@ -150,7 +150,7 @@ else (WL_UNIT_TESTS)
   endif(DEFINED MSVC)
   set (Boost_USE_MULTITHREADED ON)
   set (Boost_DETAILED_FAILURE_MSG ON)
-  find_package(Boost 1.35.0 COMPONENTS signals REQUIRED)
+  find_package(Boost 1.48 COMPONENTS signals REQUIRED)
 endif (WL_UNIT_TESTS)
 
 option (WL_STRICT "If strict compilation mode is requested (almost every warning is an error)" OFF)
@@ -247,7 +247,7 @@ CHECK_CXX_COMPILER_FLAG(${PARAMETER_COMPILERFLAG_GCCWARNINGS} Compiler_gcc_warni
 IF (Compiler_gcc_warnings_supported)
   set (WL_COMPILERFLAG_GCCWARNINGS " ${PARAMETER_COMPILERFLAG_GCCWARNINGS}") #the space is on purpose!
 ELSE (Compiler_gcc_warnings_supported)
-  message("Warning: could not add additional GCC-specific warning options: ${PARAMETER_COMPILERFLAG_GCCWARNINGS}. Most likely you are using a different compiler, like Clang/LLVM.")
+  message("Warning: could not add additional GCC-specific warning options: ${PARAMETER_COMPILERFLAG_GCCWARNINGS}. Most likely you are using a different compiler, like Clang/LLVM or Visual Studio.")
 ENDIF (Compiler_gcc_warnings_supported)
 
 CHECK_CXX_COMPILER_FLAG(${PARAMETER_COMPILERFLAG_GCCWARNINGS} Compiler_gcc_warnings_supported)

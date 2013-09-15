@@ -21,7 +21,7 @@
 #define MESSAGE_H
 
 #include <string>
-#include <boost/signal.hpp>
+#include <boost/signals2.hpp>
 
 #include "logic/widelands.h"
 #include "logic/widelands_geometry.h"
@@ -30,6 +30,19 @@ namespace Widelands {
 
 struct Message {
 	enum Status {New, Read, Archived};
+	/**
+	 * A new message to be displayed to the player
+	 * \param msgsender The message sender
+	 * \param sent_time The (game) time at which the message is sent
+	 * \param d The duration after which the message will expire
+	 * \param t The message title
+	 * \param b The message body
+	 * \param c The message coords. The player will be able to taken there.
+	 * Defaults to Coords::Null()
+	 * \param ser A Map_Object serial. If non null, the message will expire once
+	 * the object is removed from the game. Defaults to 0
+	 * \param s The message status. Defaults to Status::New
+	 */
 	Message
 		(const std::string &       msgsender,
 		 uint32_t                  sent_time,

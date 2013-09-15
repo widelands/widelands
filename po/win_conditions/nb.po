@@ -7,23 +7,23 @@ msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2013-06-16 09:11+0000\n"
-"PO-Revision-Date: 2012-04-08 14:38+0000\n"
-"Last-Translator: mr.x <Unknown>\n"
+"POT-Creation-Date: 2013-09-14 20:38+0000\n"
+"PO-Revision-Date: 2013-07-18 20:31+0000\n"
+"Last-Translator: Hans Joachim Desserud <Unknown>\n"
 "Language-Team: Norwegian Bokmal <nb@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-06-17 05:16+0000\n"
-"X-Generator: Launchpad (build 16667)\n"
+"X-Launchpad-Export-Date: 2013-09-15 04:58+0000\n"
+"X-Generator: Launchpad (build 16761)\n"
 
 #: ../../scripting/win_condition_texts.lua:31
 msgid "%i trees."
 msgstr "%i trær."
 
-#: ../../scripting/win_condition_texts.lua:54
+#: ../../scripting/win_condition_texts.lua:55
 msgid "%s %s %i%% of the land (%i of %i)."
-msgstr ""
+msgstr "%s %s %i%% av landområdene (%i av %i)."
 
 #: ../../scripting/win_condition_texts.lua:30
 msgid "%s had "
@@ -66,6 +66,10 @@ msgid ""
 "least 20 minutes or the one with the most territory after 4 hours, whichever "
 "comes first."
 msgstr ""
+"Hver spiller eller lag forsøker å erobre mer enn halvparten av landområdene "
+"på kartet. Vinneren er den spilleren eller laget som klarer å holde på det "
+"området i mer enn 20 minutter eller den med størst område etter fire timer, "
+"avhengig av hvem som kommer først."
 
 #: ../../scripting/win_conditions/03_territorial_lord.lua:15
 msgid ""
@@ -83,16 +87,20 @@ msgstr "Endeløst spill"
 
 #: ../../scripting/win_conditions/05_endless_game_fogless.lua:12
 msgid "Endless Game (no fog)"
-msgstr ""
+msgstr "Endeløst spill (uten stridsdis)"
 
 #: ../../scripting/win_condition_texts.lua:49
 msgid "Keep it for %i more minutes to win the game."
 msgstr "Behold overtaket i %i minutter til for å vinne."
 
+#: ../../scripting/win_condition_texts.lua:54
+msgid "Otherwise the game will end in %i minutes."
+msgstr "Ellers er spillet over om %i minutter."
+
 #: ../../scripting/win_condition_texts.lua:23
 #: ../../scripting/win_condition_texts.lua:29
 msgid "Player overview:"
-msgstr "Spiller oversikt:"
+msgstr "Oversikt over spillere:"
 
 #: ../../scripting/win_condition_texts.lua:41
 msgid "Points"
@@ -100,7 +108,7 @@ msgstr "Poeng"
 
 #: ../../scripting/win_condition_texts.lua:22
 msgid "Status"
-msgstr ""
+msgstr "Status"
 
 #: ../../scripting/win_condition_texts.lua:38
 msgid "Status for %s<br>"
@@ -112,19 +120,20 @@ msgstr "Lag %i"
 
 #: ../../scripting/win_conditions/03_territorial_lord.lua:13
 msgid "Territorial Lord"
-msgstr "Areal kongen"
+msgstr "Arealkonge"
 
 #: ../../scripting/win_conditions/03_territorial_time.lua:13
 msgid "Territorial Time"
-msgstr ""
+msgstr "Arealkonge (på tid)"
 
 #: ../../scripting/win_condition_texts.lua:27
+#: ../../scripting/win_condition_texts.lua:53
 msgid "The game will end in %i minutes."
-msgstr "Spillet er over om %i minutter"
+msgstr "Spillet er over om %i minutter."
 
 #: ../../scripting/win_condition_texts.lua:40
 msgid "The game will end in %s."
-msgstr "Dette spillet er ferdig om %s."
+msgstr "Spillet er over om %s."
 
 #: ../../scripting/win_conditions/01_defeat_all.lua:14
 msgid "The tribe or team that can defeat all others wins the game!"
@@ -140,7 +149,7 @@ msgstr "Dette er et endeløst spill uten regler."
 
 #: ../../scripting/win_conditions/05_endless_game_fogless.lua:13
 msgid "This is an endless game without rules. Fog of war is disabled."
-msgstr ""
+msgstr "Dette er et endeløst spill uten regler. Stridsdis er slått av."
 
 #: ../../scripting/win_condition_texts.lua:39
 msgid "Total: %i points"
@@ -170,12 +179,6 @@ msgstr ""
 "Du får poeng for verdifulle varer i varehusene dine. Spilleren med flest "
 "varer etter 4 timer vinner spillet."
 
-#: ../../scripting/win_condition_texts.lua:8
-msgid ""
-"You have nothing to command left. If you want, you may continue as spectator."
-msgstr ""
-"Du har ikke noe igjen å styre. Hvis du vil, kan du fortsette som tilskuer."
-
 #: ../../scripting/win_condition_texts.lua:3
 msgid "You have won this game!"
 msgstr "Du har vunnet spillet!"
@@ -183,6 +186,14 @@ msgstr "Du har vunnet spillet!"
 #: ../../scripting/win_condition_texts.lua:17
 msgid "You lost"
 msgstr "Du tapte"
+
+#: ../../scripting/win_condition_texts.lua:8
+msgid ""
+"You lost your last warehouse and are therefore defeated. You may continue as "
+"spectator if you want."
+msgstr ""
+"Du har mistet ditt siste varehus og er derfor beseiret. Om du ønsker, kan du "
+"fortsette som tilskuer."
 
 #: ../../scripting/win_condition_texts.lua:48
 msgid "You own more than half of the maps area."
@@ -200,10 +211,6 @@ msgstr "Du vant"
 #: ../../scripting/win_condition_texts.lua:18
 msgid "You've lost this game!"
 msgstr "Du har tapt dette spillet!"
-
-#: ../../scripting/win_condition_texts.lua:53
-msgid "game will end in %i minutes."
-msgstr ""
 
 #: ../../scripting/win_condition_texts.lua:33
 msgid "with %i trees."

@@ -4,94 +4,94 @@
 ##### suggestions without having to worry about the localized name of terrain
 
 [ashes]
-name="Ashes"
+name=_"Ashes"
 def_resources=water 5
 is=green
 dither_layer=20
 
 [mountain1]
-name="Mountain1"
+name=_"Mountain1"
 resources=coal, iron, gold, granit
 is=mountain
 dither_layer=50
 
 [lava-stone1]
-name="Lava stone1"
+name=_"Lava stone1"
 is=acid
 dither_layer=70
 
 [lava-stone2]
-name="Lava stone2"
+name=_"Lava stone2"
 is=acid
 dither_layer=70
 
 [strand]
-name="Beach"
+name=_"Beach"
 is=dry
 dither_layer=10
 
 [water]
-name="Water"
+name=_"Water"
 def_resources=fish 4
 is=water
 fps=14
 dither_layer=0
 
 [hardground1]
-name="Hardground1"
+name=_"Hardground1"
 def_resources=water 10
 is=green
 dither_layer=30
 
 [hardground2]
-name="Hardground2"
+name=_"Hardground2"
 def_resources=water 10
 is=green
 dither_layer=30
 
 [hardground3]
-name="Hardground3"
+name=_"Hardground3"
 def_resources=water 10
 is=green
 dither_layer=30
 
 [mountain2]
-name="Mountain2"
+name=_"Mountain2"
 resources=coal, iron, gold, granit
 is=mountain
 dither_layer=50
 
 [mountain3]
-name="Mountain3"
+name=_"Mountain3"
 resources=coal, iron, gold, granit
 is=mountain
 dither_layer=50
 
 [mountain4]
-name="Mountain4"
+name=_"Mountain4"
 resources=coal, iron, gold, granit
 is=mountain
 dither_layer=50
 
 [ashes2]
-name="Ashes2"
+name=_"Ashes2"
 def_resources=water 4
 is=green
 dither_layer=20
 
 [hardground4]
-name="Hardground4"
+name=_"Hardground4"
 def_resources=water 10
 is=green
 dither_layer=30
 
 [lava]
-name="Lava"
+name=_"Lava"
 is=acid
 dither_layer=60
 
 [hardlava]
-name="Hard lava"
+name=_"Hard lava"
 is=green
 dither_layer=40
 

@@ -39,6 +39,7 @@ enum WalkingDir {
 
 uint8_t get_cw_neighbour(uint8_t dir);
 uint8_t get_ccw_neighbour(uint8_t dir);
+uint8_t get_backward_dir(uint8_t dir);
 
 }
 

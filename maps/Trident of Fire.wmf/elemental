@@ -1,0 +1,13 @@
+# Automatically created by Widelands bzr6718[widelands] (Debug)
+
+[global]
+packet_version="1"
+map_w="160"
+map_h="160"
+nr_players="8"
+world="desert"
+name=_"Trident of Fire"
+author="Robnick"
+descr=_"In the whereabouts of three major volcanos six lovely islands are inviting settlers to start a new life. Deserts and a quickly growing forest wait to be discovered. But only by becoming a naval power your tribe will be able to explore enough resources to compete with its opponents."
+hint=
+tags="official,seafaring"

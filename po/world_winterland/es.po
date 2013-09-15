@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands unofficial-git-6aa148a(svn4769+changes)\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2013-06-16 09:11+0000\n"
+"POT-Creation-Date: 2013-09-14 20:38+0000\n"
 "PO-Revision-Date: 2010-06-06 20:55+0000\n"
 "Last-Translator: Nasenbaer <Unknown>\n"
 "Language-Team: Español <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-06-17 05:16+0000\n"
-"X-Generator: Launchpad (build 16667)\n"
+"X-Launchpad-Export-Date: 2013-09-15 04:58+0000\n"
+"X-Generator: Launchpad (build 16761)\n"
 "X-Poedit-Country: SPAIN\n"
 "X-Poedit-Language: Spanish\n"
 "X-Poedit-SourceCharset: utf-8\n"
@@ -39,6 +39,10 @@ msgstr "Álamo temblón diminuto"
 #: ../../worlds/winterland/conf:79
 msgid "Badger"
 msgstr "Tejón"
+
+#: ../../worlds/winterland/terrainconf:80
+msgid "Beach"
+msgstr ""
 
 #: ../../worlds/winterland/conf:65
 msgid "Beech"
@@ -129,6 +133,18 @@ msgstr "Granito"
 msgid "Grass"
 msgstr "Hierba"
 
+#: ../../worlds/winterland/terrainconf:31
+msgid "Ice"
+msgstr ""
+
+#: ../../worlds/winterland/terrainconf:19
+msgid "Ice flows"
+msgstr ""
+
+#: ../../worlds/winterland/terrainconf:25
+msgid "Ice flows2"
+msgstr ""
+
 #: ../../worlds/winterland/resconf:20
 msgid "Iron"
 msgstr "Hierro"
@@ -148,6 +164,10 @@ msgstr "Alerce pequeño"
 #: ../../worlds/winterland/conf:72
 msgid "Larch tiny"
 msgstr "Alerce diminuto"
+
+#: ../../worlds/winterland/terrainconf:91
+msgid "Lava"
+msgstr ""
 
 #: ../../worlds/winterland/conf:85
 msgid "Lynx"
@@ -172,6 +192,22 @@ msgstr "Arce diminuto"
 #: ../../worlds/winterland/conf:86
 msgid "Marten"
 msgstr "Marta"
+
+#: ../../worlds/winterland/terrainconf:13
+msgid "Mountain1"
+msgstr ""
+
+#: ../../worlds/winterland/terrainconf:62
+msgid "Mountain2"
+msgstr ""
+
+#: ../../worlds/winterland/terrainconf:68
+msgid "Mountain3"
+msgstr ""
+
+#: ../../worlds/winterland/terrainconf:74
+msgid "Mountain4"
+msgstr ""
 
 #: ../../worlds/winterland/conf:19
 #: ../../worlds/winterland/conf:20
@@ -233,6 +269,10 @@ msgstr "Oveja"
 msgid "Skeleton"
 msgstr "Esqueleto"
 
+#: ../../worlds/winterland/terrainconf:96
+msgid "Snow"
+msgstr ""
+
 #: ../../worlds/winterland/conf:30
 msgid "Snowman"
 msgstr "Muñeco de nieve"
@@ -272,6 +312,10 @@ msgstr "Monolito"
 msgid "Stones"
 msgstr "Piedras"
 
+#: ../../worlds/winterland/terrainconf:85
+msgid "Taiga"
+msgstr ""
+
 #: ../../worlds/winterland/conf:2
 msgid "The Widelands Development Team"
 msgstr "El Equipo de Desarrollo de Widelands"
@@ -287,7 +331,24 @@ msgstr ""
 msgid "Track"
 msgstr "Rastro"
 
+#: ../../worlds/winterland/terrainconf:7
+msgid "Tundra"
+msgstr ""
+
+#: ../../worlds/winterland/terrainconf:44
+msgid "Tundra taiga"
+msgstr ""
+
+#: ../../worlds/winterland/terrainconf:50
+msgid "Tundra2"
+msgstr ""
+
+#: ../../worlds/winterland/terrainconf:56
+msgid "Tundra3"
+msgstr ""
+
 #: ../../worlds/winterland/resconf:36
+#: ../../worlds/winterland/terrainconf:37
 msgid "Water"
 msgstr "Agua"
 

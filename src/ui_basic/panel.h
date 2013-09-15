@@ -28,7 +28,7 @@
 
 #include <SDL_keyboard.h>
 #include <boost/noncopyable.hpp>
-#include <boost/signals/trackable.hpp>
+#include <boost/signals2/trackable.hpp>
 
 #include "point.h"
 
@@ -57,7 +57,7 @@ namespace UI {
  * its desired size changes, this automatically changes the actual size (which then invokes
  * \ref layout and \ref move_inside_parent).
  */
-struct Panel : boost::signals::trackable, boost::noncopyable {
+struct Panel : boost::signals2::trackable, boost::noncopyable {
 	enum {
 		pf_handle_mouse = 1, ///< receive mouse events
 		pf_think = 2, ///< call think() function during run
@@ -212,7 +212,7 @@ struct Panel : boost::signals::trackable, boost::noncopyable {
 		assert(get_can_focus());
 		return (_parent->_focus == this);
 	}
-	void focus();
+	virtual void focus();
 
 	void set_think(bool yes);
 	bool get_think() const {return _flags & pf_think;}
@@ -235,7 +235,7 @@ struct Panel : boost::signals::trackable, boost::noncopyable {
 	std::string ui_fn();
 
 protected:
-	void die();
+	virtual void die();
 	bool keyboard_free() {return !(_focus);}
 
 	virtual void update_desired_size();

@@ -31,6 +31,7 @@
 struct Fullscreen_Menu_Main : public Fullscreen_Menu_Base {
 	Fullscreen_Menu_Main();
 	enum {
+		mm_summary,
 		mm_playtutorial,
 		mm_singleplayer,
 		mm_multiplayer,

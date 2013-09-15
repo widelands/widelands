@@ -28,7 +28,7 @@
 #include <boost/function.hpp>
 #include <boost/noncopyable.hpp>
 #include <boost/unordered_map.hpp>
-#include <boost/signal.hpp>
+#include <boost/signals2.hpp>
 
 #include "logic/cmd_queue.h"
 #include "log.h"
@@ -202,7 +202,7 @@ public:
 	 * the game. No conncetion is handled in this class.
 	 * \param serial : the object serial
 	 */
-	boost::signal<void(uint32_t)> removed;
+	boost::signals2::signal<void(uint32_t)> removed;
 
 	/**
 	 * Attributes are fixed boolean properties of an object.

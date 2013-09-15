@@ -31,6 +31,7 @@
 #include "logic/checkstep.h"
 #include "logic/cmd_incorporate.h"
 #include "logic/critter_bob.h"
+#include "logic/dismantlesite.h"
 #include "logic/findbob.h"
 #include "logic/findimmovable.h"
 #include "logic/findnode.h"
@@ -608,6 +609,7 @@ void Worker::informPlayer
 		 	 "of the following type: "))
 		 +
 		 res_type,
+		 true,
 		 1800000, 0);
 }
 
@@ -1697,7 +1699,6 @@ void Worker::start_task_buildingwork(Game & game)
 	push_task(game, taskBuildingwork);
 	State & state = top_state();
 	state.ivar1 = 0;
-	state.ivar2 = 0;
 }
 
 
@@ -1706,12 +1707,12 @@ void Worker::buildingwork_update(Game & game, State & state)
 	// Reset any signals that are not related to location
 	std::string signal = get_signal();
 	signal_handled();
+	if (signal == "evict") {
+		return pop_task(game);
+	}
 
 	if (state.ivar1 == 1)
 		state.ivar1 = (signal == "fail") * 2;
-
-	if (state.ivar2 == 1)
-		return pop_task(game); // evict worker
 
 	// Return to building, if necessary
 	upcast(Building, building, get_location(game));
@@ -1751,11 +1752,8 @@ void Worker::update_task_buildingwork(Game & game)
  */
 void Worker::evict(Game & game)
 {
-	if (State * state = get_state(taskBuildingwork)) {
-		if (is_evict_allowed()) {
-			state->ivar2 = 1;
-			send_signal(game, "evict");
-		}
+	if (is_evict_allowed()) {
+		send_signal(game, "evict");
 	}
 }
 
@@ -1826,19 +1824,28 @@ void Worker::return_update(Game & game, State & state)
 		if (upcast(Flag, flag, pos)) {
 			// Is this "our" flag?
 			if (flag->get_building() == location) {
-				if (state.ivar1 && flag->has_capacity())
+				if (state.ivar1 && flag->has_capacity()) {
 					if (WareInstance * const item = fetch_carried_item(game)) {
 						flag->add_item(game, *item);
 						set_animation(game, descr().get_animation("idle"));
 						return schedule_act(game, 20); //  rest a while
 					}
+				}
 
-				return
-					start_task_move
-						(game,
-						 WALK_NW,
-						 descr().get_right_walk_anims(does_carry_ware()),
-						 true);
+				// Don't try to enter building if it is a dismantle site
+				// It is no problem for builders since they won't return before
+				// dismantling is complete.
+				if (is_a(DismantleSite, location)) {
+					set_location(0);
+					return pop_task(game);
+				} else {
+					return
+						start_task_move
+							(game,
+							WALK_NW,
+							descr().get_right_walk_anims(does_carry_ware()),
+							true);
+				}
 			}
 		}
 	}
@@ -2404,8 +2411,9 @@ void Worker::leavebuilding_update(Game & game, State & state)
 		return pop_task(game);
 
 	upcast(Building, building, get_location(game));
-	if (!building)
+	if (!building) {
 		return pop_task(game);
+	}
 
 	Flag & baseflag = building->base_flag();
 

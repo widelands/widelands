@@ -70,14 +70,15 @@ DismantleSite::DismantleSite
 :
 Partially_Finished_Building(gdescr)
 {
-	assert(!former_buildings.empty());
-	BOOST_FOREACH(const Building_Descr* old_descr, former_buildings) {
-		m_old_buildings.push_back(old_descr);
-	}
-	set_building(*m_old_buildings.back());
-
 	m_position = c;
 	set_owner(&plr);
+
+	assert(!former_buildings.empty());
+	BOOST_FOREACH(Building_Index former_idx, former_buildings) {
+		m_old_buildings.push_back(former_idx);
+	}
+	const Building_Descr* cur_descr = owner().tribe().get_building_descr(m_old_buildings.back());
+	set_building(*cur_descr);
 
 	if (loading) {
 		Building::init(egbase);
@@ -133,9 +134,10 @@ void DismantleSite::count_returned_wares
 	(Building* building,
 	 std::map<Ware_Index, uint8_t>   & res)
 {
-	BOOST_FOREACH(const Building_Descr* former_descr, building->get_former_buildings()) {
+	BOOST_FOREACH(Building_Index former_idx, building->get_former_buildings()) {
 		const std::map<Ware_Index, uint8_t> * return_wares;
-		if (former_descr != building->get_former_buildings().front()) {
+		const Building_Descr* former_descr = building->tribe().get_building_descr(former_idx);
+		if (former_idx != building->get_former_buildings().front()) {
 			return_wares = & former_descr->returned_wares_enhanced();
 		} else {
 			return_wares = & former_descr->returned_wares();
@@ -210,7 +212,13 @@ bool DismantleSite::get_building_work(Game & game, Worker & worker, bool) {
 		schedule_destroy(game);
 
 		worker.pop_task(game);
-		worker.start_task_leavebuilding(game, true);
+		// No more building, so move to the flag
+		worker.start_task_move
+				(game,
+				 WALK_SE,
+				 worker.descr().get_right_walk_anims(false),
+				 true);
+		worker.set_location(nullptr);
 	} else if (not m_working) {
 		m_work_steptime = game.get_gametime() + DISMANTLESITE_STEP_TIME;
 		worker.start_task_idle
