@@ -279,6 +279,9 @@ private:
 	void sendSpaceSignals(Game &);
 	bool stayHome();
 
+	// Pop the current task or, if challenged, start the fighting task.
+	void pop_task_or_fight(Game &);
+
 protected:
 	static Task const taskAttack;
 	static Task const taskDefense;

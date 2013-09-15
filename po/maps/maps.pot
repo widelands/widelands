@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2013-09-01 09:23+0000\n"
+"POT-Creation-Date: 2013-09-14 20:38+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -477,7 +477,7 @@ msgid ""
 "The breath-taking beauty of these emerald lands has lured many tribes into an attempt of taking them for themselves."
 msgstr ""
 
-#: ../../maps/MP Scenarios/Together we're strong.wmf/elemental:11
+#: ../../maps/Together we're strong.wmf/elemental:11
 msgid ""
 "The four mighty harbours of the Craw Islands were trading their goods among each others for ages. All of them needed resources, they could not produce on their own territory and provided resources that the other could not produce in exchange. Based on these trades a very friendly commerce was common between the four harbours and the people living on the Craw Islands - just until lately two of the harbours united to an exclusive trade alliance, forcing the other two to do the same. Suddenly it seems it is only a matter of time, until the first fights between the harbours will shake the peaceful life that lasted so long..."
 msgstr ""
@@ -532,7 +532,7 @@ msgid ""
 "Three Warriors"
 msgstr ""
 
-#: ../../maps/MP Scenarios/Together we're strong.wmf/elemental:9
+#: ../../maps/Together we're strong.wmf/elemental:9
 msgid ""
 "Together we're strong"
 msgstr ""

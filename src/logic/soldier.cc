@@ -313,7 +313,7 @@ IMPLEMENTATION
 /// all done through init
 Soldier::Soldier(const Soldier_Descr & soldier_descr) : Worker(soldier_descr)
 {
-	m_battle = 0;
+	m_battle = nullptr;
 	m_hp_level      = 0;
 	m_attack_level  = 0;
 	m_defense_level = 0;
@@ -668,6 +668,13 @@ void Soldier::calc_info_icon_size
 }
 
 
+void Soldier::pop_task_or_fight(Game& game) {
+	if (m_battle)
+		start_task_battle(game);
+	else
+		pop_task(game);
+}
+
 /**
  *
  *
@@ -875,7 +882,7 @@ void Soldier::attack_update(Game & game, State & state)
 				// At building, check if attack is required
 				if (!enemy) {
 					molog("[attack] returned home\n");
-					return pop_task(game);
+					return pop_task_or_fight(game);
 				}
 				state.ivar2 = 0;
 				return start_task_leavebuilding(game, false);
@@ -945,7 +952,6 @@ void Soldier::attack_update(Game & game, State & state)
 			}
 		}
 	}
-
 
 	if (m_battle)
 		return start_task_battle(game);
@@ -1181,7 +1187,7 @@ void Soldier::defense_update(Game & game, State & state)
 	if (state.ivar1 & CF_DEFEND_STAYHOME) {
 		if (position == location and state.ivar2 == 1) {
 			molog("[defense] stayhome: returned home\n");
-			return pop_task(game);
+			return pop_task_or_fight(game);
 		}
 
 		if (position == &baseflag) {
@@ -1245,7 +1251,7 @@ void Soldier::defense_update(Game & game, State & state)
 		// Soldier is inside of building
 		if (position == location) {
 			molog("[defense] returned home\n");
-			return pop_task(game);
+			return pop_task_or_fight(game);
 		}
 
 		// Soldier is on base flag
@@ -1429,7 +1435,7 @@ Bob::Task const Soldier::taskBattle = {
 	true
 };
 
-void Soldier::start_task_battle(Game & game)
+void Soldier::start_task_battle(Game& game)
 {
 	assert(m_battle);
 	m_combat_walking = CD_NONE;
@@ -1817,7 +1823,7 @@ void Soldier::log_general_info(const Editor_Game_Base & egbase)
 	molog ("HasBattle:   %s\n", m_battle ? "yes" : "no");
 	if (m_battle) {
 		molog("BattleSerial: %u\n", m_battle->serial());
-		molog("Opponent: %u\n", m_battle->has_opponent(*this) ? m_battle->opponent(*this)->serial() : 0);
+		molog("Opponent: %u\n", m_battle->opponent(*this)->serial());
 	}
 }
 
