@@ -1,5 +1,5 @@
 -- ================================
--- Test functionality in wl.map.Map 
+-- Test functionality in wl.map.Map
 -- ================================
 
 test_map = lunit.TestCase("Map functions test")
