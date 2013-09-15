@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2013-09-01 09:23+0000\n"
+"POT-Creation-Date: 2013-09-14 20:38+0000\n"
 "PO-Revision-Date: 2013-03-15 10:18+0000\n"
 "Last-Translator: Guybrush88 <Unknown>\n"
 "Language-Team: Italian <it@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-09-02 04:41+0000\n"
-"X-Generator: Launchpad (build 16750)\n"
+"X-Launchpad-Export-Date: 2013-09-15 04:59+0000\n"
+"X-Generator: Launchpad (build 16761)\n"
 
 #: ../../maps/MP Scenarios/Smugglers.wmf/scripting/texts.lua:29
 msgid ""
@@ -35,11 +35,14 @@ msgstr "Un punto di ricezione"
 msgid "A sending spot"
 msgstr "Un punto di invio"
 
-#: ../../maps/MP Scenarios/Smugglers.wmf/scripting/multiplayer_init.lua:48
+#: ../../maps/MP Scenarios/Smugglers.wmf/scripting/multiplayer_init.lua:43
+#: ../../maps/MP Scenarios/Smugglers.wmf/scripting/smuggling.lua:92
+#: ../../maps/MP Scenarios/Smugglers.wmf/scripting/smuggling.lua:95
+#: ../../maps/MP Scenarios/Smugglers.wmf/scripting/smuggling.lua:98
 msgid "Game Status"
 msgstr "Stato della partita"
 
-#: ../../maps/MP Scenarios/Smugglers.wmf/scripting/texts.lua:39
+#: ../../maps/MP Scenarios/Smugglers.wmf/scripting/texts.lua:47
 msgid ""
 "Game over! %s and %s have won the game! %s and %s only managed to\n"
 "acquire %i points."
@@ -98,11 +101,11 @@ msgstr ""
 "ottengono punti per il contrabbando:\n"
 "2 o 3 per merce. La prima squadra ad avere %i punti vince."
 
-#: ../../maps/MP Scenarios/Smugglers.wmf/scripting/texts.lua:33
+#: ../../maps/MP Scenarios/Smugglers.wmf/scripting/texts.lua:41
 msgid "The smuggling route worth %i from %s to %s has been broken!"
 msgstr "la rotta di contrabbando che vale %i da %s a %s è stata interrrotta!"
 
-#: ../../maps/MP Scenarios/Smugglers.wmf/scripting/multiplayer_init.lua:124
+#: ../../maps/MP Scenarios/Smugglers.wmf/scripting/multiplayer_init.lua:119
 msgid "Wares smuggled"
 msgstr "Beni contrabbandati"
 
@@ -113,3 +116,17 @@ msgid ""
 msgstr ""
 "Puoi vedere il numero di beni commerciati in qualsiasi momento nel menù\n"
 "generale delle statistiche. Buona fortuna!"
+
+#: ../../maps/MP Scenarios/Smugglers.wmf/scripting/texts.lua:37
+msgid ""
+"Your team established a new smuggling route. You have the receiving "
+"warehouse. Every ware smuggled here\n"
+"is worth %i points."
+msgstr ""
+
+#: ../../maps/MP Scenarios/Smugglers.wmf/scripting/texts.lua:33
+msgid ""
+"Your team established a new smuggling route. You have the sending warehouse. "
+"Every ware smuggled here\n"
+"is worth %i points."
+msgstr ""

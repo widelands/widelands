@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2013-09-01 11:23+0200\n"
+"POT-Creation-Date: 2013-09-14 22:38+0200\n"
 "PO-Revision-Date: 2013-06-28 10:09+0000\n"
 "Last-Translator: trewe <Unknown>\n"
 "Language-Team: Portuguese <pt@li.org>\n"
@@ -10,8 +10,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2013-09-02 04:39+0000\n"
-"X-Generator: Launchpad (build 16750)\n"
+"X-Launchpad-Export-Date: 2013-09-15 04:54+0000\n"
+"X-Generator: Launchpad (build 16761)\n"
 "Language: pt\n"
 
 #: ../../src/wui/building_statistics_menu.cc:114
@@ -1044,10 +1044,10 @@ msgstr "nome dos jogadores e das tribos: %s"
 #: ../../src/logic/immovable.cc:793 ../../src/logic/immovable.cc:1489
 #: ../../src/logic/instances.cc:71 ../../src/logic/instances.cc:129
 #: ../../src/logic/instances.cc:495 ../../src/logic/cmd_luacoroutine.cc:75
-#: ../../src/logic/battle.cc:412 ../../src/logic/cmd_queue.cc:191
+#: ../../src/logic/battle.cc:408 ../../src/logic/cmd_queue.cc:191
 #: ../../src/logic/critter_bob.cc:387 ../../src/logic/legacy.cc:428
 #: ../../src/logic/legacy.cc:486 ../../src/logic/requirements.cc:48
-#: ../../src/logic/ship.cc:920 ../../src/logic/cmd_luascript.cc:56
+#: ../../src/logic/ship.cc:984 ../../src/logic/cmd_luascript.cc:56
 #, c-format
 msgid "unknown/unhandled version %u"
 msgstr "Versão %u desconhecida/não manuseada"
@@ -4832,16 +4832,16 @@ msgstr "esperava inteiro positivo >= %u mas encontrei “%s”"
 msgid "\"anim_name[,another_anim,...]\""
 msgstr "“anim_name[,another_anim,...]”"
 
-#: ../../src/logic/soldier.cc:1363
+#: ../../src/logic/soldier.cc:1369
 #, c-format
 msgid "bad direction '%d'"
 msgstr "má direção '%d'"
 
-#: ../../src/logic/soldier.cc:1554 ../../src/logic/soldier.cc:1559
+#: ../../src/logic/soldier.cc:1560 ../../src/logic/soldier.cc:1565
 msgid "no"
 msgstr "não"
 
-#: ../../src/logic/soldier.cc:1566 ../../src/logic/soldier.cc:1575
+#: ../../src/logic/soldier.cc:1572 ../../src/logic/soldier.cc:1581
 msgid "Logic error"
 msgstr "erro lógico"
 
@@ -5078,12 +5078,12 @@ msgstr "%s: demasiados tipos de terreno, não podem ser mais de 16"
 msgid "lua function: %s"
 msgstr "função lua: %s"
 
-#: ../../src/logic/battle.cc:178
+#: ../../src/logic/battle.cc:174
 #, c-format
 msgid "[battle] soldier %u lose battle\n"
 msgstr ""
 
-#: ../../src/logic/battle.cc:182
+#: ../../src/logic/battle.cc:178
 #, c-format
 msgid "[battle] waking up winner %d\n"
 msgstr "[battle] acordando o vencedor %d\n"
@@ -5316,35 +5316,35 @@ msgstr "carregando trabalhador: %s"
 # File: ../../src/ui_fsmenu/campaign_select.cc, line: 226
 # File: ../../src/ui_fsmenu/campaign_select.cc, line: 419
 # File: ../../src/logic/ship.cc, line: 320
-#: ../../src/logic/ship.cc:359
+#: ../../src/logic/ship.cc:423
 msgid "Port space found"
 msgstr "Encontrado um local para um porto"
 
 # File: ../../src/logic/ship.cc, line: 321
-#: ../../src/logic/ship.cc:360
+#: ../../src/logic/ship.cc:424
 msgid "An expedition ship found a new port build space."
 msgstr ""
 "Um barco de expedição encontrou um bom local para construir um novo porto."
 
 # File: ../../src/editor/ui_menus/editor_main_menu_random_map.cc, line: 246
 # File: ../../src/logic/ship.cc, line: 423
-#: ../../src/logic/ship.cc:467
+#: ../../src/logic/ship.cc:531
 msgid "Island surrounded"
 msgstr "Ilha cercada"
 
 # File: ../../src/logic/ship.cc, line: 424
-#: ../../src/logic/ship.cc:468
+#: ../../src/logic/ship.cc:532
 msgid "An expedition ship surrounded its island without any events."
 msgstr ""
 "Um barco de expedição circunscreveu a ilha sem descobrir algo de novo."
 
 # File: ../../src/logic/ship.cc, line: 468
-#: ../../src/logic/ship.cc:520
+#: ../../src/logic/ship.cc:584
 msgid "Coast reached"
 msgstr "Chegado à costa"
 
 # File: ../../src/logic/ship.cc, line: 470
-#: ../../src/logic/ship.cc:522
+#: ../../src/logic/ship.cc:586
 msgid ""
 "An expedition ship reached a coast and is waiting for further commands."
 msgstr ""
@@ -5352,16 +5352,16 @@ msgstr ""
 "seguintes."
 
 # File: ../../src/logic/ship.cc, line: 611
-#: ../../src/logic/ship.cc:658
+#: ../../src/logic/ship.cc:722
 msgid "Expedition ready"
 msgstr "A expedição está pronta"
 
 # File: ../../src/logic/ship.cc, line: 612
-#: ../../src/logic/ship.cc:659
+#: ../../src/logic/ship.cc:723
 msgid "An expedition ship is waiting for your commands."
 msgstr "Um novo barco de expedição está a espera das tuas ordens."
 
-#: ../../src/logic/ship.cc:922
+#: ../../src/logic/ship.cc:986
 #, c-format
 msgid "loading ship: %s"
 msgstr "carregando navio: %s"

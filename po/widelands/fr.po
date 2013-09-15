@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4866\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2013-09-01 11:23+0200\n"
+"POT-Creation-Date: 2013-09-14 22:38+0200\n"
 "PO-Revision-Date: 2013-09-13 16:41+0000\n"
 "Last-Translator: Sevy Ride <mathysdog@hotmail.com>\n"
 "Language-Team: French <widelands-public@lists.sourceforge.net>\n"
@@ -14,7 +14,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Launchpad-Export-Date: 2013-09-14 04:34+0000\n"
+"X-Launchpad-Export-Date: 2013-09-15 04:52+0000\n"
 "X-Generator: Launchpad (build 16761)\n"
 
 #: ../../src/save_handler.cc:75
@@ -948,10 +948,10 @@ msgstr "nom et des joueurs tribues  : %s"
 #: ../../src/logic/immovable.cc:793 ../../src/logic/immovable.cc:1489
 #: ../../src/logic/instances.cc:71 ../../src/logic/instances.cc:129
 #: ../../src/logic/instances.cc:495 ../../src/logic/cmd_luacoroutine.cc:75
-#: ../../src/logic/battle.cc:412 ../../src/logic/cmd_queue.cc:191
+#: ../../src/logic/battle.cc:408 ../../src/logic/cmd_queue.cc:191
 #: ../../src/logic/critter_bob.cc:387 ../../src/logic/legacy.cc:428
 #: ../../src/logic/legacy.cc:486 ../../src/logic/requirements.cc:48
-#: ../../src/logic/ship.cc:920 ../../src/logic/cmd_luascript.cc:56
+#: ../../src/logic/ship.cc:984 ../../src/logic/cmd_luascript.cc:56
 #, c-format
 msgid "unknown/unhandled version %u"
 msgstr "version inconnue ou non gérée (%u)"
@@ -4342,16 +4342,16 @@ msgstr "attendu entier positif >= %u mais \"%s\" trouvé"
 msgid "\"anim_name[,another_anim,...]\""
 msgstr "\"anim_name[,another_anim,...]\""
 
-#: ../../src/logic/soldier.cc:1363
+#: ../../src/logic/soldier.cc:1369
 #, c-format
 msgid "bad direction '%d'"
 msgstr "mauvaise direction '%d'"
 
-#: ../../src/logic/soldier.cc:1554 ../../src/logic/soldier.cc:1559
+#: ../../src/logic/soldier.cc:1560 ../../src/logic/soldier.cc:1565
 msgid "no"
 msgstr "non"
 
-#: ../../src/logic/soldier.cc:1566 ../../src/logic/soldier.cc:1575
+#: ../../src/logic/soldier.cc:1572 ../../src/logic/soldier.cc:1581
 msgid "Logic error"
 msgstr "Erreur logique"
 
@@ -4544,12 +4544,12 @@ msgstr ""
 msgid "lua function: %s"
 msgstr "lua function: %s"
 
-#: ../../src/logic/battle.cc:178
+#: ../../src/logic/battle.cc:174
 #, c-format
 msgid "[battle] soldier %u lose battle\n"
 msgstr ""
 
-#: ../../src/logic/battle.cc:182
+#: ../../src/logic/battle.cc:178
 #, c-format
 msgid "[battle] waking up winner %d\n"
 msgstr "[battle] réveille le vainqueur %d\n"
@@ -4766,44 +4766,44 @@ msgstr "Un travailleur à été perdu!"
 msgid "loading worker: %s"
 msgstr "Travailleurs en cours:%s"
 
-#: ../../src/logic/ship.cc:359
+#: ../../src/logic/ship.cc:423
 msgid "Port space found"
 msgstr "Espace portuaire trouvé"
 
-#: ../../src/logic/ship.cc:360
+#: ../../src/logic/ship.cc:424
 msgid "An expedition ship found a new port build space."
 msgstr ""
 "Un navire de l'expédition à trouvé un nouvel emplacement portuaire à "
 "construire."
 
-#: ../../src/logic/ship.cc:467
+#: ../../src/logic/ship.cc:531
 msgid "Island surrounded"
 msgstr "Île encerclée"
 
-#: ../../src/logic/ship.cc:468
+#: ../../src/logic/ship.cc:532
 msgid "An expedition ship surrounded its island without any events."
 msgstr ""
 "Un navire de l'expédition à fait le tour de l'île sans aucun évènement."
 
-#: ../../src/logic/ship.cc:520
+#: ../../src/logic/ship.cc:584
 msgid "Coast reached"
 msgstr "Côte atteint"
 
-#: ../../src/logic/ship.cc:522
+#: ../../src/logic/ship.cc:586
 msgid ""
 "An expedition ship reached a coast and is waiting for further commands."
 msgstr ""
 "Un navire de l'expédition atteint une côte et attend plus de commandes."
 
-#: ../../src/logic/ship.cc:658
+#: ../../src/logic/ship.cc:722
 msgid "Expedition ready"
 msgstr "Expédition prête"
 
-#: ../../src/logic/ship.cc:659
+#: ../../src/logic/ship.cc:723
 msgid "An expedition ship is waiting for your commands."
 msgstr "Un navire de l'expédition attend vos ordres."
 
-#: ../../src/logic/ship.cc:922
+#: ../../src/logic/ship.cc:986
 #, c-format
 msgid "loading ship: %s"
 msgstr "Navires en cours de chargement:%s"
