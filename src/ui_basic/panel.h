@@ -212,7 +212,7 @@ struct Panel : boost::signals2::trackable, boost::noncopyable {
 		assert(get_can_focus());
 		return (_parent->_focus == this);
 	}
-	void focus();
+	virtual void focus();
 
 	void set_think(bool yes);
 	bool get_think() const {return _flags & pf_think;}
