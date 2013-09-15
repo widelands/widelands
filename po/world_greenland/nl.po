@@ -6,15 +6,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4556\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2013-08-30 12:55+0000\n"
-"PO-Revision-Date: 2012-01-13 14:20+0000\n"
-"Last-Translator: Teun Spaans <Unknown>\n"
+"POT-Creation-Date: 2013-09-14 20:38+0000\n"
+"PO-Revision-Date: 2013-09-01 09:07+0000\n"
+"Last-Translator: fk <Unknown>\n"
 "Language-Team: Dutch <NL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-08-31 04:41+0000\n"
-"X-Generator: Launchpad (build 16750)\n"
+"X-Launchpad-Export-Date: 2013-09-15 04:57+0000\n"
+"X-Generator: Launchpad (build 16761)\n"
 
 #: ../../worlds/greenland/conf:58
 msgid "Alder"
@@ -54,11 +54,11 @@ msgstr "Das"
 
 #: ../../worlds/greenland/terrainconf:79
 msgid "Barren steppe"
-msgstr ""
+msgstr "Dorre steppe"
 
 #: ../../worlds/greenland/terrainconf:31
 msgid "Beach"
-msgstr ""
+msgstr "Strand"
 
 #: ../../worlds/greenland/conf:66
 msgid "Beech"
@@ -192,7 +192,7 @@ msgstr "Kleine larix"
 
 #: ../../worlds/greenland/terrainconf:91
 msgid "Lava"
-msgstr ""
+msgstr "Lava"
 
 #: ../../worlds/greenland/conf:88
 msgid "Lynx"
@@ -204,39 +204,39 @@ msgstr "Marter"
 
 #: ../../worlds/greenland/terrainconf:43
 msgid "Meadow1"
-msgstr ""
+msgstr "Weide1"
 
 #: ../../worlds/greenland/terrainconf:49
 msgid "Meadow2"
-msgstr ""
+msgstr "Weide2"
 
 #: ../../worlds/greenland/terrainconf:55
 msgid "Meadow3"
-msgstr ""
+msgstr "Weide3"
 
 #: ../../worlds/greenland/terrainconf:85
 msgid "Meadow4"
-msgstr ""
+msgstr "Weide4"
 
 #: ../../worlds/greenland/terrainconf:96
 msgid "Mountain meadow"
-msgstr ""
+msgstr "Bergweide"
 
 #: ../../worlds/greenland/terrainconf:13
 msgid "Mountain1"
-msgstr ""
+msgstr "Gebergte1"
 
 #: ../../worlds/greenland/terrainconf:61
 msgid "Mountain2"
-msgstr ""
+msgstr "Gebergte2"
 
 #: ../../worlds/greenland/terrainconf:67
 msgid "Mountain3"
-msgstr ""
+msgstr "Gebergte3"
 
 #: ../../worlds/greenland/terrainconf:73
 msgid "Mountain4"
-msgstr ""
+msgstr "Gebergte4"
 
 #: ../../worlds/greenland/conf:22
 #: ../../worlds/greenland/conf:23
@@ -300,7 +300,7 @@ msgstr "Skelet"
 
 #: ../../worlds/greenland/terrainconf:19
 msgid "Snow"
-msgstr ""
+msgstr "Sneeuw"
 
 #: ../../worlds/greenland/conf:54
 msgid "Spruce"
@@ -330,7 +330,7 @@ msgstr "Staande stenen"
 
 #: ../../worlds/greenland/terrainconf:7
 msgid "Steppe"
-msgstr ""
+msgstr "Steppe"
 
 #: ../../worlds/greenland/conf:40
 #: ../../worlds/greenland/conf:41
@@ -343,7 +343,7 @@ msgstr "Stenen"
 
 #: ../../worlds/greenland/terrainconf:24
 msgid "Swamp"
-msgstr ""
+msgstr "Moeras"
 
 #: ../../worlds/greenland/conf:2
 msgid "The Widelands Development Team"

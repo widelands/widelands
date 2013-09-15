@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2013-08-30 14:55+0200\n"
+"POT-Creation-Date: 2013-09-14 22:38+0200\n"
 "PO-Revision-Date: 2013-01-03 00:12+0000\n"
 "Last-Translator: Nasenbaer <Unknown>\n"
 "Language-Team: Ukrainian <uk@li.org>\n"
@@ -16,8 +16,8 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2013-08-31 04:40+0000\n"
-"X-Generator: Launchpad (build 16750)\n"
+"X-Launchpad-Export-Date: 2013-09-15 04:56+0000\n"
+"X-Generator: Launchpad (build 16761)\n"
 
 #: ../../src/save_handler.cc:75
 msgid "Saving game..."
@@ -791,8 +791,8 @@ msgstr "Невідомо"
 #: ../../src/logic/production_program.cc:1348
 #: ../../src/logic/production_program.cc:1438 ../../src/logic/soldier.cc:70
 #: ../../src/logic/soldier.cc:77 ../../src/logic/soldier.cc:185
-#: ../../src/logic/immovable.cc:193 ../../src/logic/immovable.cc:829
-#: ../../src/logic/immovable.cc:869 ../../src/logic/immovable.cc:1034
+#: ../../src/logic/immovable.cc:192 ../../src/logic/immovable.cc:828
+#: ../../src/logic/immovable.cc:868 ../../src/logic/immovable.cc:1033
 #: ../../src/logic/building.cc:88
 #, c-format
 msgid "expected %s but found \"%s\""
@@ -919,13 +919,13 @@ msgstr "імена гравців та поселенців: %s"
 #: ../../src/logic/playercommand.cc:1757 ../../src/logic/playercommand.cc:1855
 #: ../../src/logic/playercommand.cc:1933 ../../src/logic/playercommand.cc:1977
 #: ../../src/logic/cmd_calculate_statistics.cc:44
-#: ../../src/logic/immovable.cc:794 ../../src/logic/immovable.cc:1490
+#: ../../src/logic/immovable.cc:793 ../../src/logic/immovable.cc:1489
 #: ../../src/logic/instances.cc:71 ../../src/logic/instances.cc:129
 #: ../../src/logic/instances.cc:495 ../../src/logic/cmd_luacoroutine.cc:75
-#: ../../src/logic/battle.cc:412 ../../src/logic/cmd_queue.cc:191
+#: ../../src/logic/battle.cc:408 ../../src/logic/cmd_queue.cc:191
 #: ../../src/logic/critter_bob.cc:387 ../../src/logic/legacy.cc:428
 #: ../../src/logic/legacy.cc:486 ../../src/logic/requirements.cc:48
-#: ../../src/logic/ship.cc:920 ../../src/logic/cmd_luascript.cc:56
+#: ../../src/logic/ship.cc:984 ../../src/logic/cmd_luascript.cc:56
 #, c-format
 msgid "unknown/unhandled version %u"
 msgstr "невідома/необроблена версія  %u"
@@ -4043,7 +4043,7 @@ msgid "{\"fail\"|\"complete\"|\"skip\"|\"repeat\"}"
 msgstr "{\"fail\"|\"complete\"|\"skip\"|\"repeat\"}"
 
 #: ../../src/logic/production_program.cc:662
-#: ../../src/logic/production_program.cc:736 ../../src/logic/immovable.cc:830
+#: ../../src/logic/production_program.cc:736 ../../src/logic/immovable.cc:829
 msgid "duration in ms"
 msgstr "тривалість в мс."
 
@@ -4161,11 +4161,11 @@ msgstr ""
 msgid "expected level > %u but found \"%s\""
 msgstr "очікувався рівень > %u та отримано \"%s\""
 
-#: ../../src/logic/production_program.cc:1438 ../../src/logic/immovable.cc:869
+#: ../../src/logic/production_program.cc:1438 ../../src/logic/immovable.cc:868
 msgid "priority"
 msgstr "пріоритет"
 
-#: ../../src/logic/production_program.cc:1647 ../../src/logic/immovable.cc:142
+#: ../../src/logic/production_program.cc:1647 ../../src/logic/immovable.cc:141
 #, c-format
 msgid "unknown command type \"%s\""
 msgstr "невідома команда \"%s\""
@@ -4183,16 +4183,16 @@ msgstr "очікувалось додатне ціле >= %u а отримано
 msgid "\"anim_name[,another_anim,...]\""
 msgstr "\"anim_name[,another_anim,...]\""
 
-#: ../../src/logic/soldier.cc:1363
+#: ../../src/logic/soldier.cc:1369
 #, c-format
 msgid "bad direction '%d'"
 msgstr "невірний напрям  '%d'"
 
-#: ../../src/logic/soldier.cc:1554 ../../src/logic/soldier.cc:1559
+#: ../../src/logic/soldier.cc:1560 ../../src/logic/soldier.cc:1565
 msgid "no"
 msgstr "ні"
 
-#: ../../src/logic/soldier.cc:1566 ../../src/logic/soldier.cc:1575
+#: ../../src/logic/soldier.cc:1572 ../../src/logic/soldier.cc:1581
 msgid "Logic error"
 msgstr "Логічна помилка"
 
@@ -4214,93 +4214,93 @@ msgstr "Гравець 1"
 msgid "calculate statistics function: %s"
 msgstr ""
 
-#: ../../src/logic/immovable.cc:146
+#: ../../src/logic/immovable.cc:145
 msgid "no actions"
 msgstr "нема дій"
 
-#: ../../src/logic/immovable.cc:205 ../../src/logic/bob.cc:88
+#: ../../src/logic/immovable.cc:204 ../../src/logic/bob.cc:88
 #, c-format
 msgid "bad attribute \"%s\""
 msgstr "поганий атрибут \"%s\""
 
-#: ../../src/logic/immovable.cc:219
+#: ../../src/logic/immovable.cc:218
 msgid "this program has already been declared"
 msgstr ""
 
-#: ../../src/logic/immovable.cc:225
+#: ../../src/logic/immovable.cc:224
 #, c-format
 msgid "program %s: %s"
 msgstr "програма %s: %s"
 
-#: ../../src/logic/immovable.cc:257 ../../src/logic/immovable.cc:272
+#: ../../src/logic/immovable.cc:256 ../../src/logic/immovable.cc:271
 #, c-format
 msgid "expected 0 .. 255 but found %u"
 msgstr "очікували 0 .. 255 а отримали %u"
 
-#: ../../src/logic/immovable.cc:259 ../../src/logic/immovable.cc:274
+#: ../../src/logic/immovable.cc:258 ../../src/logic/immovable.cc:273
 msgid "duplicated"
 msgstr "дублікат"
 
-#: ../../src/logic/immovable.cc:277
+#: ../../src/logic/immovable.cc:276
 #, c-format
 msgid "[terrain affinity] \"%s\" (not in current world): %s"
 msgstr ""
 
-#: ../../src/logic/immovable.cc:313
+#: ../../src/logic/immovable.cc:312
 #, c-format
 msgid "immovable %s has no program \"%s\""
 msgstr ""
 
-#: ../../src/logic/immovable.cc:777
+#: ../../src/logic/immovable.cc:776
 #, c-format
 msgid "tribe %s does not define immovable type \"%s\""
 msgstr ""
 
-#: ../../src/logic/immovable.cc:780
+#: ../../src/logic/immovable.cc:779
 #, c-format
 msgid "unknown tribe %s"
 msgstr "невідоме плем'я %s"
 
-#: ../../src/logic/immovable.cc:786
+#: ../../src/logic/immovable.cc:785
 #, c-format
 msgid "world does not define immovable type \"%s\""
 msgstr ""
 
-#: ../../src/logic/immovable.cc:796
+#: ../../src/logic/immovable.cc:795
 #, c-format
 msgid "immovable type %s"
 msgstr ""
 
-#: ../../src/logic/immovable.cc:909 ../../src/logic/immovable.cc:1089
+#: ../../src/logic/immovable.cc:908 ../../src/logic/immovable.cc:1088
 #, c-format
 msgid "expected probability in range [1, 254] but found \"%s\""
 msgstr "очікувалась можливість в межах [1, 254], а виявлено \"%s\""
 
-#: ../../src/logic/immovable.cc:928
+#: ../../src/logic/immovable.cc:927
 #, c-format
 msgid ""
 "unknown scope \"%s\" given for target type (must be \"world\" or \"tribe\")"
 msgstr ""
 
-#: ../../src/logic/immovable.cc:939
+#: ../../src/logic/immovable.cc:938
 msgid "illegal transformation to the same type"
 msgstr "заборонено перетворення в той самий тип"
 
-#: ../../src/logic/immovable.cc:981 ../../src/logic/immovable.cc:1068
+#: ../../src/logic/immovable.cc:980 ../../src/logic/immovable.cc:1067
 #, c-format
 msgid "immovable type not in tribe but target type has scope (\"%s\")"
 msgstr ""
 
-#: ../../src/logic/immovable.cc:987 ../../src/logic/immovable.cc:1074
+#: ../../src/logic/immovable.cc:986 ../../src/logic/immovable.cc:1073
 #, c-format
 msgid "scope \"%s\" given for target type (must be \"world\")"
 msgstr ""
 
-#: ../../src/logic/immovable.cc:1035
+#: ../../src/logic/immovable.cc:1034
 msgid "probability in range [1, 254]"
 msgstr "можливість в межах[1, 254]"
 
-#: ../../src/logic/immovable.cc:1492
+#: ../../src/logic/immovable.cc:1491
 #, c-format
 msgid "loading player immovable: %s"
 msgstr ""
@@ -4378,12 +4378,12 @@ msgstr "%s: занадто багато типів місцевості, мак�
 msgid "lua function: %s"
 msgstr ""
 
-#: ../../src/logic/battle.cc:178
+#: ../../src/logic/battle.cc:174
 #, c-format
 msgid "[battle] soldier %u lose battle\n"
 msgstr ""
 
-#: ../../src/logic/battle.cc:182
+#: ../../src/logic/battle.cc:178
 #, c-format
 msgid "[battle] waking up winner %d\n"
 msgstr ""
@@ -4597,40 +4597,40 @@ msgstr ""
 msgid "loading worker: %s"
 msgstr "завантаження працівника: %s"
 
-#: ../../src/logic/ship.cc:359
+#: ../../src/logic/ship.cc:423
 msgid "Port space found"
 msgstr ""
 
-#: ../../src/logic/ship.cc:360
+#: ../../src/logic/ship.cc:424
 msgid "An expedition ship found a new port build space."
 msgstr ""
 
-#: ../../src/logic/ship.cc:467
+#: ../../src/logic/ship.cc:531
 msgid "Island surrounded"
 msgstr ""
 
-#: ../../src/logic/ship.cc:468
+#: ../../src/logic/ship.cc:532
 msgid "An expedition ship surrounded its island without any events."
 msgstr ""
 
-#: ../../src/logic/ship.cc:520
+#: ../../src/logic/ship.cc:584
 msgid "Coast reached"
 msgstr ""
 
-#: ../../src/logic/ship.cc:522
+#: ../../src/logic/ship.cc:586
 msgid ""
 "An expedition ship reached a coast and is waiting for further commands."
 msgstr ""
 
-#: ../../src/logic/ship.cc:658
+#: ../../src/logic/ship.cc:722
 msgid "Expedition ready"
 msgstr ""
 
-#: ../../src/logic/ship.cc:659
+#: ../../src/logic/ship.cc:723
 msgid "An expedition ship is waiting for your commands."
 msgstr ""
 
-#: ../../src/logic/ship.cc:922
+#: ../../src/logic/ship.cc:986
 #, c-format
 msgid "loading ship: %s"
 msgstr ""

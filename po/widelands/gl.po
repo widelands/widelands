@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2013-08-30 14:55+0200\n"
+"POT-Creation-Date: 2013-09-14 22:38+0200\n"
 "PO-Revision-Date: 2013-01-03 00:32+0000\n"
 "Last-Translator: Nasenbaer <Unknown>\n"
 "Language-Team: Galician <proxecto@trasno.net>\n"
@@ -15,8 +15,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2013-08-31 04:38+0000\n"
-"X-Generator: Launchpad (build 16750)\n"
+"X-Launchpad-Export-Date: 2013-09-15 04:52+0000\n"
+"X-Generator: Launchpad (build 16761)\n"
 "X-Poedit-Country: SPAIN\n"
 "X-Poedit-Language: Galician\n"
 "X-Poedit-SourceCharset: utf-8\n"
@@ -801,8 +801,8 @@ msgstr "Descoñecido"
 #: ../../src/logic/production_program.cc:1348
 #: ../../src/logic/production_program.cc:1438 ../../src/logic/soldier.cc:70
 #: ../../src/logic/soldier.cc:77 ../../src/logic/soldier.cc:185
-#: ../../src/logic/immovable.cc:193 ../../src/logic/immovable.cc:829
-#: ../../src/logic/immovable.cc:869 ../../src/logic/immovable.cc:1034
+#: ../../src/logic/immovable.cc:192 ../../src/logic/immovable.cc:828
+#: ../../src/logic/immovable.cc:868 ../../src/logic/immovable.cc:1033
 #: ../../src/logic/building.cc:88
 #, c-format
 msgid "expected %s but found \"%s\""
@@ -931,13 +931,13 @@ msgstr "nomos dos xogadores e tribos: %s"
 #: ../../src/logic/playercommand.cc:1757 ../../src/logic/playercommand.cc:1855
 #: ../../src/logic/playercommand.cc:1933 ../../src/logic/playercommand.cc:1977
 #: ../../src/logic/cmd_calculate_statistics.cc:44
-#: ../../src/logic/immovable.cc:794 ../../src/logic/immovable.cc:1490
+#: ../../src/logic/immovable.cc:793 ../../src/logic/immovable.cc:1489
 #: ../../src/logic/instances.cc:71 ../../src/logic/instances.cc:129
 #: ../../src/logic/instances.cc:495 ../../src/logic/cmd_luacoroutine.cc:75
-#: ../../src/logic/battle.cc:412 ../../src/logic/cmd_queue.cc:191
+#: ../../src/logic/battle.cc:408 ../../src/logic/cmd_queue.cc:191
 #: ../../src/logic/critter_bob.cc:387 ../../src/logic/legacy.cc:428
 #: ../../src/logic/legacy.cc:486 ../../src/logic/requirements.cc:48
-#: ../../src/logic/ship.cc:920 ../../src/logic/cmd_luascript.cc:56
+#: ../../src/logic/ship.cc:984 ../../src/logic/cmd_luascript.cc:56
 #, c-format
 msgid "unknown/unhandled version %u"
 msgstr "versión %u descoñecida/allea"
@@ -4087,7 +4087,7 @@ msgid "{\"fail\"|\"complete\"|\"skip\"|\"repeat\"}"
 msgstr "{\"fallo\"|\"completar\"|\"saltar\"|\"repetir\"}"
 
 #: ../../src/logic/production_program.cc:662
-#: ../../src/logic/production_program.cc:736 ../../src/logic/immovable.cc:830
+#: ../../src/logic/production_program.cc:736 ../../src/logic/immovable.cc:829
 msgid "duration in ms"
 msgstr "duración en ms"
 
@@ -4206,11 +4206,11 @@ msgstr ""
 msgid "expected level > %u but found \"%s\""
 msgstr "esperábase un nivel superior a %u pero atopouse «%s»"
 
-#: ../../src/logic/production_program.cc:1438 ../../src/logic/immovable.cc:869
+#: ../../src/logic/production_program.cc:1438 ../../src/logic/immovable.cc:868
 msgid "priority"
 msgstr "prioridade"
 
-#: ../../src/logic/production_program.cc:1647 ../../src/logic/immovable.cc:142
+#: ../../src/logic/production_program.cc:1647 ../../src/logic/immovable.cc:141
 #, c-format
 msgid "unknown command type \"%s\""
 msgstr "non se recoñece o tipo de orde «%s»"
@@ -4228,16 +4228,16 @@ msgstr "esperábase un enteiro >= %u pero atopouse «%s»"
 msgid "\"anim_name[,another_anim,...]\""
 msgstr "\"nome_da_animacion[,outra_animacion, etc.]\""
 
-#: ../../src/logic/soldier.cc:1363
+#: ../../src/logic/soldier.cc:1369
 #, c-format
 msgid "bad direction '%d'"
 msgstr "dirección «%d» incorrecta"
 
-#: ../../src/logic/soldier.cc:1554 ../../src/logic/soldier.cc:1559
+#: ../../src/logic/soldier.cc:1560 ../../src/logic/soldier.cc:1565
 msgid "no"
 msgstr "non"
 
-#: ../../src/logic/soldier.cc:1566 ../../src/logic/soldier.cc:1575
+#: ../../src/logic/soldier.cc:1572 ../../src/logic/soldier.cc:1581
 msgid "Logic error"
 msgstr "Erro lóxico"
 
@@ -4259,95 +4259,95 @@ msgstr "Xogador 1"
 msgid "calculate statistics function: %s"
 msgstr ""
 
-#: ../../src/logic/immovable.cc:146
+#: ../../src/logic/immovable.cc:145
 msgid "no actions"
 msgstr "sen accións"
 
-#: ../../src/logic/immovable.cc:205 ../../src/logic/bob.cc:88
+#: ../../src/logic/immovable.cc:204 ../../src/logic/bob.cc:88
 #, c-format
 msgid "bad attribute \"%s\""
 msgstr "atributo «%s» incorrecto"
 
-#: ../../src/logic/immovable.cc:219
+#: ../../src/logic/immovable.cc:218
 msgid "this program has already been declared"
 msgstr "xa se declarou este programa"
 
-#: ../../src/logic/immovable.cc:225
+#: ../../src/logic/immovable.cc:224
 #, c-format
 msgid "program %s: %s"
 msgstr "programa %s: %s"
 
-#: ../../src/logic/immovable.cc:257 ../../src/logic/immovable.cc:272
+#: ../../src/logic/immovable.cc:256 ../../src/logic/immovable.cc:271
 #, c-format
 msgid "expected 0 .. 255 but found %u"
 msgstr "esperábase un valor entre 0 e 255 pero atopouse %u"
 
-#: ../../src/logic/immovable.cc:259 ../../src/logic/immovable.cc:274
+#: ../../src/logic/immovable.cc:258 ../../src/logic/immovable.cc:273
 msgid "duplicated"
 msgstr "duplicado"
 
-#: ../../src/logic/immovable.cc:277
+#: ../../src/logic/immovable.cc:276
 #, c-format
 msgid "[terrain affinity] \"%s\" (not in current world): %s"
 msgstr "[afinidade do terreo] «%s» (non está no universo actual): %s"
 
-#: ../../src/logic/immovable.cc:313
+#: ../../src/logic/immovable.cc:312
 #, c-format
 msgid "immovable %s has no program \"%s\""
 msgstr "o inmóbil %s non ten un programa chamado «%s»"
 
-#: ../../src/logic/immovable.cc:777
+#: ../../src/logic/immovable.cc:776
 #, c-format
 msgid "tribe %s does not define immovable type \"%s\""
 msgstr "a tribo %s non define o tipo de inmóbil «%s»"
 
-#: ../../src/logic/immovable.cc:780
+#: ../../src/logic/immovable.cc:779
 #, c-format
 msgid "unknown tribe %s"
 msgstr "non se recoñece a tribo %s"
 
-#: ../../src/logic/immovable.cc:786
+#: ../../src/logic/immovable.cc:785
 #, c-format
 msgid "world does not define immovable type \"%s\""
 msgstr "non se definiu o tipo de inmóbil «%s» para o universo"
 
-#: ../../src/logic/immovable.cc:796
+#: ../../src/logic/immovable.cc:795
 #, c-format
 msgid "immovable type %s"
 msgstr "tipo de inmóbil %s"
 
-#: ../../src/logic/immovable.cc:909 ../../src/logic/immovable.cc:1089
+#: ../../src/logic/immovable.cc:908 ../../src/logic/immovable.cc:1088
 #, c-format
 msgid "expected probability in range [1, 254] but found \"%s\""
 msgstr "esperábase unha probabilidade entre 1 e 254, pero atopouse «%s»"
 
-#: ../../src/logic/immovable.cc:928
+#: ../../src/logic/immovable.cc:927
 #, c-format
 msgid ""
 "unknown scope \"%s\" given for target type (must be \"world\" or \"tribe\")"
 msgstr ""
 
-#: ../../src/logic/immovable.cc:939
+#: ../../src/logic/immovable.cc:938
 msgid "illegal transformation to the same type"
 msgstr "transformación incorrecta ao mesmo tipo"
 
-#: ../../src/logic/immovable.cc:981 ../../src/logic/immovable.cc:1068
+#: ../../src/logic/immovable.cc:980 ../../src/logic/immovable.cc:1067
 #, c-format
 msgid "immovable type not in tribe but target type has scope (\"%s\")"
 msgstr ""
 "o tipo de inmóbil non está na tribo pero o tipo do obxectivo ten ámbito "
 "(«%s»)"
 
-#: ../../src/logic/immovable.cc:987 ../../src/logic/immovable.cc:1074
+#: ../../src/logic/immovable.cc:986 ../../src/logic/immovable.cc:1073
 #, c-format
 msgid "scope \"%s\" given for target type (must be \"world\")"
 msgstr "deuse o ámbito «%s» para o tipo de obxectivo (ten que ser «world»)"
 
-#: ../../src/logic/immovable.cc:1035
+#: ../../src/logic/immovable.cc:1034
 msgid "probability in range [1, 254]"
 msgstr "probabilidade entre 1 e 254"
 
-#: ../../src/logic/immovable.cc:1492
+#: ../../src/logic/immovable.cc:1491
 #, c-format
 msgid "loading player immovable: %s"
 msgstr ""
@@ -4427,12 +4427,12 @@ msgstr "%s: demasiados tipos de terreo, non pode haber máis de 16"
 msgid "lua function: %s"
 msgstr "función en LUA: %s"
 
-#: ../../src/logic/battle.cc:178
+#: ../../src/logic/battle.cc:174
 #, c-format
 msgid "[battle] soldier %u lose battle\n"
 msgstr ""
 
-#: ../../src/logic/battle.cc:182
+#: ../../src/logic/battle.cc:178
 #, c-format
 msgid "[battle] waking up winner %d\n"
 msgstr "[batalla] %d álzase gañador\n"
@@ -4648,40 +4648,40 @@ msgstr ""
 msgid "loading worker: %s"
 msgstr "cargando un traballador: %s"
 
-#: ../../src/logic/ship.cc:359
+#: ../../src/logic/ship.cc:423
 msgid "Port space found"
 msgstr ""
 
-#: ../../src/logic/ship.cc:360
+#: ../../src/logic/ship.cc:424
 msgid "An expedition ship found a new port build space."
 msgstr ""
 
-#: ../../src/logic/ship.cc:467
+#: ../../src/logic/ship.cc:531
 msgid "Island surrounded"
 msgstr ""
 
-#: ../../src/logic/ship.cc:468
+#: ../../src/logic/ship.cc:532
 msgid "An expedition ship surrounded its island without any events."
 msgstr ""
 
-#: ../../src/logic/ship.cc:520
+#: ../../src/logic/ship.cc:584
 msgid "Coast reached"
 msgstr ""
 
-#: ../../src/logic/ship.cc:522
+#: ../../src/logic/ship.cc:586
 msgid ""
 "An expedition ship reached a coast and is waiting for further commands."
 msgstr ""
 
-#: ../../src/logic/ship.cc:658
+#: ../../src/logic/ship.cc:722
 msgid "Expedition ready"
 msgstr ""
 
-#: ../../src/logic/ship.cc:659
+#: ../../src/logic/ship.cc:723
 msgid "An expedition ship is waiting for your commands."
 msgstr ""
 
-#: ../../src/logic/ship.cc:922
+#: ../../src/logic/ship.cc:986
 #, c-format
 msgid "loading ship: %s"
 msgstr ""

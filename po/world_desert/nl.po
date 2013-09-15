@@ -6,19 +6,19 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4556\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2013-08-30 12:55+0000\n"
-"PO-Revision-Date: 2010-06-06 22:39+0000\n"
-"Last-Translator: Nasenbaer <Unknown>\n"
+"POT-Creation-Date: 2013-09-14 20:38+0000\n"
+"PO-Revision-Date: 2013-09-01 09:04+0000\n"
+"Last-Translator: fk <Unknown>\n"
 "Language-Team: Dutch <programming@ertai.nl>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-08-31 04:41+0000\n"
-"X-Generator: Launchpad (build 16750)\n"
+"X-Launchpad-Export-Date: 2013-09-15 04:57+0000\n"
+"X-Generator: Launchpad (build 16761)\n"
 
 #: ../../worlds/desert/terrainconf:35
 msgid "Beach"
-msgstr ""
+msgstr "Strand"
 
 #: ../../worlds/desert/conf:71
 msgid "Beech"
@@ -74,23 +74,23 @@ msgstr "Woestijn"
 
 #: ../../worlds/desert/terrainconf:8
 msgid "Desert1"
-msgstr ""
+msgstr "Woestijn1"
 
 #: ../../worlds/desert/terrainconf:13
 msgid "Desert2"
-msgstr ""
+msgstr "Woestijn2"
 
 #: ../../worlds/desert/terrainconf:18
 msgid "Desert3"
-msgstr ""
+msgstr "Woestijn3"
 
 #: ../../worlds/desert/terrainconf:23
 msgid "Desert4"
-msgstr ""
+msgstr "Woestijn4"
 
 #: ../../worlds/desert/terrainconf:29
 msgid "Dry soil"
-msgstr ""
+msgstr "Droge aarde"
 
 #: ../../worlds/desert/conf:87
 msgid "Duck"
@@ -120,7 +120,7 @@ msgstr "Gras"
 
 #: ../../worlds/desert/terrainconf:57
 msgid "High mountain meadow"
-msgstr ""
+msgstr "Hoge bergweide"
 
 #: ../../worlds/desert/resconf:20
 msgid "Iron"
@@ -144,31 +144,31 @@ msgstr "Kleine larix"
 
 #: ../../worlds/desert/terrainconf:96
 msgid "Lava"
-msgstr ""
+msgstr "Lava"
 
 #: ../../worlds/desert/terrainconf:46
 msgid "Meadow"
-msgstr ""
+msgstr "Weide"
 
 #: ../../worlds/desert/terrainconf:52
 msgid "Mountain meadow"
-msgstr ""
+msgstr "Bergweide"
 
 #: ../../worlds/desert/terrainconf:62
 msgid "Mountain1"
-msgstr ""
+msgstr "Gebergte1"
 
 #: ../../worlds/desert/terrainconf:68
 msgid "Mountain2"
-msgstr ""
+msgstr "Gebergte2"
 
 #: ../../worlds/desert/terrainconf:74
 msgid "Mountain3"
-msgstr ""
+msgstr "Gebergte3"
 
 #: ../../worlds/desert/terrainconf:80
 msgid "Mountain4"
-msgstr ""
+msgstr "Gebergte4"
 
 #: ../../worlds/desert/conf:21
 #: ../../worlds/desert/conf:22
@@ -258,7 +258,7 @@ msgstr "Staande stenen"
 
 #: ../../worlds/desert/terrainconf:40
 msgid "Steppe"
-msgstr ""
+msgstr "Steppe"
 
 #: ../../worlds/desert/conf:45
 #: ../../worlds/desert/conf:46
