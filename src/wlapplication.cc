@@ -1578,7 +1578,7 @@ void WLApplication::mainmenu()
 				break;
 			}
 			case Fullscreen_Menu_Main::mm_readme: {
-				Fullscreen_Menu_FileView ff("txts/README");
+				Fullscreen_Menu_FileView ff("txts/README.lua");
 				ff.run();
 				break;
 			}
