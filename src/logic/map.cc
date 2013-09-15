@@ -22,6 +22,7 @@
 #include <algorithm>
 #include <cstdio>
 
+#include "build_info.h"
 #include "economy/flag.h"
 #include "economy/road.h"
 #include "editor/tools/editor_increase_resources_tool.h"
@@ -42,7 +43,6 @@
 #include "upcast.h"
 #include "wexception.h"
 #include "wui/overlay_manager.h"
-
 
 
 namespace Widelands {
