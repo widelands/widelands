@@ -6,14 +6,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4804\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2013-09-14 20:38+0000\n"
+"POT-Creation-Date: 2013-09-15 17:41+0000\n"
 "PO-Revision-Date: 2013-09-08 13:01+0000\n"
 "Last-Translator: Wesmania <ikk_pl@yahoo.co.uk>\n"
 "Language-Team: Language <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-09-15 04:44+0000\n"
+"X-Launchpad-Export-Date: 2013-09-16 04:34+0000\n"
 "X-Generator: Launchpad (build 16761)\n"
 
 #: ../../campaigns/cconfig:64
@@ -43,10 +43,8 @@ msgstr "03 - Ten kraj jest nasz"
 #: ../../maps/Long, long way.wmf/elemental:11
 msgid ""
 ">Where dat? A thousand miles from here.< [Porgy and Bess] You have to go "
-"long, long way to conquere all the islands. Good luck!"
+"long, long way to conquer all the islands. Good luck!"
 msgstr ""
-"\"Where dat? A thousand miles from here.\" (Porgy and Bess) Przyjdzie ci "
-"przebyć długą drogę, by podbić wszystkie wyspy. Powodzenia!"
 
 #: ../../maps/Comet Island.wmf/elemental:9
 msgid ""
@@ -549,6 +547,7 @@ msgstr ""
 "blokuje drogi do ich bogactwa. Ale wielu zginie rozerwanych przez wilki, "
 "pochłoniętych przez bagna... otoczonych przez nieprzyjazne plemiona."
 
+#: ../../maps/Ice wars.wmf/elemental:12
 #: ../../maps/Sun of fire.wmf/elemental:12
 msgid "Start positions are clockwise"
 msgstr "Pozycje startowe podane zgodnie z ruchem wskazówek zegara"
@@ -579,6 +578,10 @@ msgstr ""
 msgid "Suggested Teams: (blue, yellow) vs (red, green)"
 msgstr "Sugerowane zespoły: (niebieski, żółty) kontra (czerwony, zielony)"
 
+#: ../../maps/Crossing the horizon.wmf/elemental:12
+msgid "Suggested Teams: all ok"
+msgstr ""
+
 #: ../../maps/Rendez-Vous.wmf/elemental:10
 msgid "Suggested Teams: all ok."
 msgstr "Sugerowane zespoły: dowolne."
@@ -591,6 +594,31 @@ msgstr ""
 "Sugerowane zespoły: niebieski kontra czerwony, żółty kontra zielony, "
 "(niebieski, żółty) kontra (czerwony, zielony), (niebieski, zielony) kontra "
 "(czerwony, żółty)."
+
+#: ../../maps/Long, long way.wmf/elemental:12
+msgid ""
+"Suggested Teams: blue vs red, yellow vs green, (blue, yellow) vs (red, "
+"green), (blue, yellow, black) vs (red, green, orange), (blue, yellow, black, "
+"purple) vs (red, green, orange, white)"
+msgstr ""
+
+#: ../../maps/Plateau.wmf/elemental:10
+msgid "Suggested positions: blue vs yellow"
+msgstr ""
+
+#: ../../maps/The Nile.wmf/elemental:12
+msgid ""
+"Suggested teams: blue vs red, yellow vs green, (blue, yellow) vs (red, "
+"green), (green, orange, white) vs (yellow, black, purple), (blue, orange, "
+"green) vs (red, yellow, black), (blue, green, orange, white) vs (red, "
+"yellow, black, purple)"
+msgstr ""
+
+#: ../../maps/Trident of Fire.wmf/elemental:12
+msgid ""
+"Suggested teams: red vs green, (blue, yellow) vs (green, orange), (blue, "
+"black) vs (green, red), (blue, black, yellow) vs (green, red, orange)"
+msgstr ""
 
 #: ../../maps/Swamp Island.wmf/elemental:9
 msgid "Swamp Island"
@@ -726,11 +754,10 @@ msgstr ""
 
 #: ../../maps/Fellowships.wmf/elemental:12
 msgid ""
-"This map is best suited for three human players, with game speed somewhat "
-"above the normal value. AI performs badly at the time of writing (2013)."
+"This map is best suited for two or three human players, with game speed "
+"somewhat above the normal value. AI performs badly at the time of writing "
+"(2013)."
 msgstr ""
-"Na tej mapie najlepiej gra się w trzech graczy, z tempem gry nieco wyższym, "
-"niż normalne. Komputer nie radzi sobie na tej mapie (stan z 2013 r.)"
 
 #: ../../maps/Three Warriors.wmf/elemental:9
 msgid "Three Warriors"

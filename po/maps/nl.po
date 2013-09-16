@@ -6,14 +6,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4556\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2013-09-14 20:38+0000\n"
+"POT-Creation-Date: 2013-09-15 17:41+0000\n"
 "PO-Revision-Date: 2013-09-01 08:38+0000\n"
 "Last-Translator: fk <Unknown>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-09-15 04:43+0000\n"
+"X-Launchpad-Export-Date: 2013-09-16 04:34+0000\n"
 "X-Generator: Launchpad (build 16761)\n"
 
 #: ../../campaigns/cconfig:64
@@ -43,10 +43,8 @@ msgstr "03 - Dit land is ons land"
 #: ../../maps/Long, long way.wmf/elemental:11
 msgid ""
 ">Where dat? A thousand miles from here.< [Porgy and Bess] You have to go "
-"long, long way to conquere all the islands. Good luck!"
+"long, long way to conquer all the islands. Good luck!"
 msgstr ""
-">Where dat? A thousand miles from here.< [Porgy and Bess] Je moet een lange, "
-"lange weg gaan om alle eilanden te veroveren. Veel geluk!"
 
 #: ../../maps/Comet Island.wmf/elemental:9
 msgid ""
@@ -560,6 +558,7 @@ msgstr ""
 "rijkdom in de weg staat. Maar velen zullen worden verscheurd door wolven of "
 "opgeslokt door het moeras... omgeven door vijandige stammen."
 
+#: ../../maps/Ice wars.wmf/elemental:12
 #: ../../maps/Sun of fire.wmf/elemental:12
 msgid "Start positions are clockwise"
 msgstr "Beginposities zijn met de klok mee"
@@ -590,6 +589,10 @@ msgstr ""
 msgid "Suggested Teams: (blue, yellow) vs (red, green)"
 msgstr "Teamsuggestie: (blauw, geel) tegen (rood, groen)"
 
+#: ../../maps/Crossing the horizon.wmf/elemental:12
+msgid "Suggested Teams: all ok"
+msgstr ""
+
 #: ../../maps/Rendez-Vous.wmf/elemental:10
 msgid "Suggested Teams: all ok."
 msgstr "Voorgestelde Teams: alles ok."
@@ -601,6 +604,31 @@ msgid ""
 msgstr ""
 "Voorgestelde teams: blauw vs rood, geel vs groen, (blauw, geel) vs (rood, "
 "groen), (blauw, groen) vs (rood, geel)"
+
+#: ../../maps/Long, long way.wmf/elemental:12
+msgid ""
+"Suggested Teams: blue vs red, yellow vs green, (blue, yellow) vs (red, "
+"green), (blue, yellow, black) vs (red, green, orange), (blue, yellow, black, "
+"purple) vs (red, green, orange, white)"
+msgstr ""
+
+#: ../../maps/Plateau.wmf/elemental:10
+msgid "Suggested positions: blue vs yellow"
+msgstr ""
+
+#: ../../maps/The Nile.wmf/elemental:12
+msgid ""
+"Suggested teams: blue vs red, yellow vs green, (blue, yellow) vs (red, "
+"green), (green, orange, white) vs (yellow, black, purple), (blue, orange, "
+"green) vs (red, yellow, black), (blue, green, orange, white) vs (red, "
+"yellow, black, purple)"
+msgstr ""
+
+#: ../../maps/Trident of Fire.wmf/elemental:12
+msgid ""
+"Suggested teams: red vs green, (blue, yellow) vs (green, orange), (blue, "
+"black) vs (green, red), (blue, black, yellow) vs (green, red, orange)"
+msgstr ""
 
 #: ../../maps/Swamp Island.wmf/elemental:9
 msgid "Swamp Island"
@@ -738,12 +766,10 @@ msgstr ""
 
 #: ../../maps/Fellowships.wmf/elemental:12
 msgid ""
-"This map is best suited for three human players, with game speed somewhat "
-"above the normal value. AI performs badly at the time of writing (2013)."
+"This map is best suited for two or three human players, with game speed "
+"somewhat above the normal value. AI performs badly at the time of writing "
+"(2013)."
 msgstr ""
-"Deze kaart is het best geschikt voor drie menselijke spelers, met "
-"spelsnelheid iets boven de normale waarde. KI presteert slecht op het moment "
-"van schrijven (2013)."
 
 #: ../../maps/Three Warriors.wmf/elemental:9
 msgid "Three Warriors"
