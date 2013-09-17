@@ -7,22 +7,22 @@ msgstr ""
 "Project-Id-Version: Widelands svn4804\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2013-09-15 17:41+0000\n"
-"PO-Revision-Date: 2013-09-10 09:00+0000\n"
+"PO-Revision-Date: 2013-09-16 10:57+0000\n"
 "Last-Translator: Albert Einstein <aaaaa@tlen.pl>\n"
 "Language-Team: Language <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-09-16 04:37+0000\n"
-"X-Generator: Launchpad (build 16761)\n"
+"X-Launchpad-Export-Date: 2013-09-17 04:34+0000\n"
+"X-Generator: Launchpad (build 16765)\n"
 
 #: ../../txts/README.lua:73
 msgid "(CTRL+) 0-9: Remember and go to previously remembered locations"
-msgstr ""
+msgstr "(CTRL+) 0-9: zapamiętuje i przechodzi do zapamiętanych pozycji"
 
 #: ../../txts/README.lua:74
 msgid ",: goes to previous location"
-msgstr ""
+msgstr ",: przechodzi do poprzedniej pozycji"
 
 #: ../../txts/README.lua:99
 msgid "- Detailed steps on how to trigger the bug, if possible."
@@ -57,7 +57,7 @@ msgstr ""
 
 #: ../../txts/README.lua:109
 msgid "- Which map you were playing when the bug occurred."
-msgstr ""
+msgstr "- Na jakiej mapie grano, gdy wystąpił błąd."
 
 #: ../../txts/README.lua:103
 msgid ""
@@ -69,7 +69,7 @@ msgstr ""
 
 #: ../../txts/README.lua:75
 msgid ".: goes to next location"
-msgstr ""
+msgstr ".: przechodzi do następnej pozycji"
 
 #: ../../txts/editor_readme:43
 msgid "1-0      Changes tools size"
@@ -141,7 +141,7 @@ msgstr ""
 
 #: ../../txts/README.lua:77
 msgid "CTRL+F10: quits the game immediately"
-msgstr ""
+msgstr "CTRL+F10: natychmiastowo kończy grę"
 
 #: ../../txts/editor_readme:39
 msgid "CTRL+L   Load Map"
@@ -177,7 +177,7 @@ msgstr "Czeski"
 
 #: ../../txts/README.lua:83
 msgid "DELETE: archives the current message"
-msgstr ""
+msgstr "DELETE: archiwizuje aktualną wiadomość"
 
 #: ../../txts/developers:193
 msgid "Dansk"
@@ -213,7 +213,7 @@ msgstr "F        Przełącza między pełnym ekranem"
 
 #: ../../txts/README.lua:78
 msgid "F11: takes a screenshot"
-msgstr ""
+msgstr "F11: wykonuje zrzut ekranu"
 
 #: ../../txts/README.lua:76
 msgid "F6: shows the debug console (only in debug-builds)"
@@ -237,7 +237,7 @@ msgstr "Francuski"
 
 #: ../../txts/README.lua:82
 msgid "G: jumps to location corresponding to current message"
-msgstr ""
+msgstr "G: przechodzi do pozycji związanej z aktualną wiadomością"
 
 #: ../../txts/developers:219
 msgid "Galician"
@@ -285,7 +285,7 @@ msgstr ""
 
 #: ../../txts/README.lua:72
 msgid "Home: centers main mapview on starting location"
-msgstr ""
+msgstr "Home: przechodzi do pozycji początkowej na mapie"
 
 #: ../../txts/developers:23
 #: ../../txts/developers:347
@@ -512,7 +512,7 @@ msgstr ""
 
 #: ../../txts/README.lua:63
 msgid "PAUSE: pauses the game"
-msgstr ""
+msgstr "PAUSE: wstrzymuje grę"
 
 #: ../../txts/developers:281
 msgid "Packagers"
@@ -573,7 +573,7 @@ msgstr ""
 
 #: ../../txts/README.lua:118
 msgid "Replays"
-msgstr ""
+msgstr "Powtórki"
 
 #: ../../txts/README.lua:133
 msgid ""
