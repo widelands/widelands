@@ -6,14 +6,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2013-09-14 20:38+0000\n"
+"POT-Creation-Date: 2013-09-15 17:41+0000\n"
 "PO-Revision-Date: 2013-09-13 22:25+0000\n"
 "Last-Translator: Miroslav Remák <Unknown>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-09-15 04:44+0000\n"
+"X-Launchpad-Export-Date: 2013-09-16 04:34+0000\n"
 "X-Generator: Launchpad (build 16761)\n"
 
 #: ../../campaigns/cconfig:64
@@ -43,10 +43,8 @@ msgstr "03 - Táto zem je našou zemou"
 #: ../../maps/Long, long way.wmf/elemental:11
 msgid ""
 ">Where dat? A thousand miles from here.< [Porgy and Bess] You have to go "
-"long, long way to conquere all the islands. Good luck!"
+"long, long way to conquer all the islands. Good luck!"
 msgstr ""
-">Kde to? Odtiaľ tisíc míľ.< [Porgy a Bess] K dobytiu všetkých ostrovov "
-"povedie ďaleká cesta. Veľa šťastia!"
 
 #: ../../maps/Comet Island.wmf/elemental:9
 msgid ""
@@ -520,6 +518,7 @@ msgstr ""
 "už nič nestojí v ceste k bohatstvu. Napriek tomu mnohí zomrú... Roztrhaní "
 "vlkmi, pohltení močiarom, obkľúčení nepriateľskými kmeňmi."
 
+#: ../../maps/Ice wars.wmf/elemental:12
 #: ../../maps/Sun of fire.wmf/elemental:12
 msgid "Start positions are clockwise"
 msgstr "Začiatočné pozície sú v smere pohybu hodinových ručičiek"
@@ -550,6 +549,10 @@ msgstr ""
 msgid "Suggested Teams: (blue, yellow) vs (red, green)"
 msgstr "Navrhované tímy: (modrý, žltý) vs (červený, zelený)"
 
+#: ../../maps/Crossing the horizon.wmf/elemental:12
+msgid "Suggested Teams: all ok"
+msgstr ""
+
 #: ../../maps/Rendez-Vous.wmf/elemental:10
 msgid "Suggested Teams: all ok."
 msgstr "Navrhované tímy: všetky sú v poriadku."
@@ -561,6 +564,31 @@ msgid ""
 msgstr ""
 "Navrhované tímy: modrý vs červený, žltý vs zelený, (modrý, žltý) vs "
 "(červený, zelený), (modrý, zelený) vs (červený, žltý)"
+
+#: ../../maps/Long, long way.wmf/elemental:12
+msgid ""
+"Suggested Teams: blue vs red, yellow vs green, (blue, yellow) vs (red, "
+"green), (blue, yellow, black) vs (red, green, orange), (blue, yellow, black, "
+"purple) vs (red, green, orange, white)"
+msgstr ""
+
+#: ../../maps/Plateau.wmf/elemental:10
+msgid "Suggested positions: blue vs yellow"
+msgstr ""
+
+#: ../../maps/The Nile.wmf/elemental:12
+msgid ""
+"Suggested teams: blue vs red, yellow vs green, (blue, yellow) vs (red, "
+"green), (green, orange, white) vs (yellow, black, purple), (blue, orange, "
+"green) vs (red, yellow, black), (blue, green, orange, white) vs (red, "
+"yellow, black, purple)"
+msgstr ""
+
+#: ../../maps/Trident of Fire.wmf/elemental:12
+msgid ""
+"Suggested teams: red vs green, (blue, yellow) vs (green, orange), (blue, "
+"black) vs (green, red), (blue, black, yellow) vs (green, red, orange)"
+msgstr ""
 
 #: ../../maps/Swamp Island.wmf/elemental:9
 msgid "Swamp Island"
@@ -695,8 +723,9 @@ msgstr ""
 
 #: ../../maps/Fellowships.wmf/elemental:12
 msgid ""
-"This map is best suited for three human players, with game speed somewhat "
-"above the normal value. AI performs badly at the time of writing (2013)."
+"This map is best suited for two or three human players, with game speed "
+"somewhat above the normal value. AI performs badly at the time of writing "
+"(2013)."
 msgstr ""
 
 #: ../../maps/Three Warriors.wmf/elemental:9
