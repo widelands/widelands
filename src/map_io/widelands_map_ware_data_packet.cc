@@ -17,7 +17,9 @@
  *
  */
 
-#include "widelands_map_ware_data_packet.h"
+#include "map_io/widelands_map_ware_data_packet.h"
+
+#include <map>
 
 #include "economy/flag.h"
 #include "economy/ware_instance.h"
@@ -27,13 +29,10 @@
 #include "logic/tribe.h"
 #include "logic/widelands_fileread.h"
 #include "logic/widelands_filewrite.h"
-#include "widelands_map_map_object_loader.h"
-#include "widelands_map_map_object_saver.h"
 #include "logic/worker.h"
-
+#include "map_io/widelands_map_map_object_loader.h"
+#include "map_io/widelands_map_map_object_saver.h"
 #include "upcast.h"
-
-#include <map>
 
 namespace Widelands {
 
@@ -66,21 +65,21 @@ throw (_wexception)
 						(serial,
 						 *new WareInstance(Ware_Index::Null(), 0))
 						.init(egbase);
-				} catch (_wexception const & e) {
+				} catch (const _wexception & e) {
 					throw game_data_error(_("%u: %s"), serial, e.what());
 				}
 			}
 		} else
 			throw game_data_error
 				(_("unknown/unhandled version %u"), packet_version);
-	} catch (_wexception const & e) {
+	} catch (const _wexception & e) {
 		throw game_data_error(_("ware data: %s"), e.what());
 	}
 }
 
 
 void Map_Ware_Data_Packet::Write
-	(FileSystem & fs, Editor_Game_Base & egbase, Map_Map_Object_Saver & mos)
+	(FileSystem & /* fs */, Editor_Game_Base & /* egbase */, Map_Map_Object_Saver & /* mos */)
 throw (_wexception)
 {
 	throw wexception("Map_Ware_Data_Packet::Write is obsolete");

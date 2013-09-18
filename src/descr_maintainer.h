@@ -28,7 +28,7 @@
  * Worker_Descr and so on.
  */
 template <typename T> struct Descr_Maintainer {
-	Descr_Maintainer() : capacity(0), nitems(0), items(0) {}
+	Descr_Maintainer() : capacity(0), nitemsw(0), items(0) {}
 	~Descr_Maintainer();
 
 	static typename T::Index invalid_index() {
@@ -37,13 +37,13 @@ template <typename T> struct Descr_Maintainer {
 
 	T * exists(char const * name) const;
 	int32_t add(T *);
-	typename T::Index get_nitems() const throw () {return nitems;}
+	typename T::Index get_nitems() const throw () {return nitemsw;}
 
 	struct Nonexistent {};
 
-	int32_t get_index(std::string const & name) const throw (Nonexistent)
+	int32_t get_index(const std::string & name) const throw (Nonexistent)
 	{
-		for (typename T::Index i = 0; i < nitems; ++i)
+		for (typename T::Index i = 0; i < nitemsw; ++i)
 			if (name == items[i]->name())
 				return i;
 		return -1;
@@ -51,19 +51,19 @@ template <typename T> struct Descr_Maintainer {
 
 	int32_t get_index(const char * const name) const throw (Nonexistent)
 	{
-		for (typename T::Index i = 0; i < nitems; ++i)
+		for (typename T::Index i = 0; i < nitemsw; ++i)
 			if (name == items[i]->name())
 				return i;
 		return -1;
 	}
 
 	T * get(int32_t const idx) const {
-		return idx >= 0 and idx < static_cast<int32_t>(nitems) ? items[idx] : 0;
+		return idx >= 0 and idx < static_cast<int32_t>(nitemsw) ? items[idx] : 0;
 	}
 
 private:
 	typename T::Index capacity;
-	typename T::Index nitems;
+	typename T::Index nitemsw;
 	T * * items;
 
 	void reserve(const typename T::Index n) {
@@ -79,9 +79,9 @@ private:
 
 template <typename T>
 int32_t Descr_Maintainer<T>::add(T * const item) {
-	int32_t const result = nitems;
-	if (++nitems >= capacity)
-		reserve(nitems);
+	int32_t const result = nitemsw;
+	if (++nitemsw >= capacity)
+		reserve(nitemsw);
 	items[result] = item;
 	return result;
 }
@@ -89,14 +89,14 @@ int32_t Descr_Maintainer<T>::add(T * const item) {
 /// Returns the element if it exists, 0 otherwise.
 template <typename T>
 T * Descr_Maintainer<T>::exists(char const * const name) const {
-	for (typename T::Index i = 0; i < nitems; ++i)
+	for (typename T::Index i = 0; i < nitemsw; ++i)
 		if (name == items[i]->name())
 			return items[i];
 	return 0;
 }
 
 template<typename T> Descr_Maintainer<T>::~Descr_Maintainer() {
-	for (typename T::Index i = 0; i < nitems; ++i)
+	for (typename T::Index i = 0; i < nitemsw; ++i)
 		delete items[i];
 	free(items);
 }
@@ -118,7 +118,7 @@ private Descr_Maintainer<T>
 	T_Index get_nitems() const throw () {
 		return T_Index(Descr_Maintainer<T>::get_nitems());
 	}
-	T_Index get_index(std::string const & name) const throw () {
+	T_Index get_index(const std::string & name) const throw () {
 		int32_t idx = Descr_Maintainer<T>::get_index(name);
 		return
 			idx == -1 ? T_Index::Null() :

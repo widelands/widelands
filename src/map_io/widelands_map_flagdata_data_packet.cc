@@ -17,23 +17,23 @@
  *
  */
 
-#include "widelands_map_flagdata_data_packet.h"
+#include "map_io/widelands_map_flagdata_data_packet.h"
 
-#include "logic/building.h"
+#include <map>
+
 #include "economy/flag.h"
 #include "economy/request.h"
 #include "economy/ware_instance.h"
+#include "logic/building.h"
 #include "logic/game.h"
 #include "logic/map.h"
 #include "logic/player.h"
-#include "upcast.h"
 #include "logic/widelands_fileread.h"
 #include "logic/widelands_filewrite.h"
-#include "widelands_map_map_object_loader.h"
-#include "widelands_map_map_object_saver.h"
 #include "logic/worker.h"
-
-#include <map>
+#include "map_io/widelands_map_map_object_loader.h"
+#include "map_io/widelands_map_map_object_saver.h"
+#include "upcast.h"
 
 namespace Widelands {
 
@@ -55,7 +55,7 @@ throw (_wexception)
 	try {
 		uint16_t const packet_version = fr.Unsigned16();
 		if (1 <= packet_version and packet_version <= CURRENT_PACKET_VERSION) {
-			Map const  & map    = egbase.map();
+			const Map  & map    = egbase.map();
 			Extent const extent = map.extent();
 			for (;;) {
 				if (2 <= packet_version and fr.EndOfFile())
@@ -102,7 +102,7 @@ throw (_wexception)
 					if (packet_version < 3) {
 						if (uint32_t const building_serial = fr.Unsigned32())
 							try {
-								Building const & building =
+								const Building & building =
 									mol.get<Building>(building_serial);
 								if (flag.m_building != &building)
 									throw game_data_error
@@ -112,7 +112,7 @@ throw (_wexception)
 										 building_serial,
 										 building.get_position().x,
 										 building.get_position().y);
-							} catch (_wexception const & e) {
+							} catch (const _wexception & e) {
 								throw game_data_error
 									(_("building (%u): %s"), building_serial, e.what());
 							}
@@ -147,14 +147,14 @@ throw (_wexception)
 									try {
 										flag.m_items[i].nextstep =
 											&mol.get<PlayerImmovable>(nextstep_serial);
-									} catch (_wexception const & e) {
+									} catch (const _wexception & e) {
 										throw game_data_error
 											("next step (%u): %s",
 											 nextstep_serial, e.what());
 									}
 								} else
 									flag.m_items[i].nextstep = 0;
-							} catch (_wexception const & e) {
+							} catch (const _wexception & e) {
 								throw game_data_error
 									("item #%u (%u): %s", i, item_serial, e.what());
 							}
@@ -164,7 +164,7 @@ throw (_wexception)
 							try {
 								flag.m_always_call_for_flag =
 									&mol.get<Flag>(always_call_serial);
-							} catch (_wexception const & e) {
+							} catch (const _wexception & e) {
 								throw game_data_error
 									("always_call (%u): %s",
 									 always_call_serial, e.what());
@@ -183,7 +183,7 @@ throw (_wexception)
 								//  (with his stack of tasks) has been fully loaded.
 								flag.m_capacity_wait.push_back
 									(&mol.get<Worker>(worker_serial));
-							} catch (_wexception const & e) {
+							} catch (const _wexception & e) {
 								throw game_data_error
 									("worker #%u (%u): %s", i, worker_serial, e.what());
 							}
@@ -212,14 +212,14 @@ throw (_wexception)
 
 						mol.mark_object_as_loaded(flag);
 					}
-				} catch (_wexception const & e) {
+				} catch (const _wexception & e) {
 					throw game_data_error(_("%u: %s"), serial, e.what());
 				}
 			}
 		} else
 			throw game_data_error
 				(_("unknown/unhandled version %u"), packet_version);
-	} catch (_wexception const & e) {
+	} catch (const _wexception & e) {
 		throw game_data_error(_("flagdata: %s"), e.what());
 	}
 }
@@ -233,7 +233,7 @@ void Map_Flagdata_Data_Packet::Write
 
 	fw.Unsigned16(CURRENT_PACKET_VERSION);
 
-	Map const & map = egbase.map();
+	const Map & map = egbase.map();
 	const Field & fields_end = map[map.max_index()];
 	for (Field * field = &map[0]; field < &fields_end; ++field)
 		if (upcast(Flag const, flag, field->get_immovable())) {
@@ -279,7 +279,7 @@ void Map_Flagdata_Data_Packet::Write
 				fw.Unsigned32(0);
 
 			//  worker waiting for capacity
-			Flag::CapacityWaitQueue const & capacity_wait =
+			const Flag::CapacityWaitQueue & capacity_wait =
 				flag->m_capacity_wait;
 			fw.Unsigned16(capacity_wait.size());
 			container_iterate_const(Flag::CapacityWaitQueue, capacity_wait, i) {
@@ -295,7 +295,7 @@ void Map_Flagdata_Data_Packet::Write
 				assert(mos.is_object_known(*obj));
 				fw.Unsigned32(mos.get_object_file_index(*obj));
 			}
-			Flag::FlagJobs const & flag_jobs = flag->m_flag_jobs;
+			const Flag::FlagJobs & flag_jobs = flag->m_flag_jobs;
 			fw.Unsigned16(flag_jobs.size());
 			container_iterate_const(Flag::FlagJobs, flag_jobs, i) {
 				if (i.current->request) {

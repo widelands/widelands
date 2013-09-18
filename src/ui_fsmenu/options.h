@@ -20,22 +20,22 @@
 #ifndef FULLSCREEN_MENU_OPTIONS_H
 #define FULLSCREEN_MENU_OPTIONS_H
 
-#include "base.h"
+#include <cstring>
+#include <string>
+#include <vector>
 
+#include "ui_fsmenu/base.h"
 #include "ui_basic/button.h"
 #include "ui_basic/checkbox.h"
 #include "ui_basic/listselect.h"
 #include "ui_basic/spinbox.h"
 #include "ui_basic/textarea.h"
 
-#include <string>
-#include <cstring>
-#include <vector>
-
-struct Fullscreen_Menu_Options;
+class Fullscreen_Menu_Options;
 struct Section;
 
-struct Options_Ctrl {
+class Options_Ctrl {
+public:
 	struct Options_Struct {
 		int32_t xres;
 		int32_t yres;
@@ -80,7 +80,8 @@ private:
  * Fullscreen Optionsmenu. A modal optionsmenu
  */
 
-struct Fullscreen_Menu_Options : public Fullscreen_Menu_Base {
+class Fullscreen_Menu_Options : public Fullscreen_Menu_Base {
+public:
 	Fullscreen_Menu_Options(Options_Ctrl::Options_Struct opt);
 	Options_Ctrl::Options_Struct get_values();
 	enum {
@@ -88,6 +89,9 @@ struct Fullscreen_Menu_Options : public Fullscreen_Menu_Base {
 		om_ok      = 1,
 		om_restart = 2
 	};
+
+	/// Handle keypresses
+	virtual bool handle_key(bool down, SDL_keysym code);
 
 private:
 	uint32_t                          m_vbutw;
@@ -127,25 +131,33 @@ private:
 
 	void advanced_options();
 
-	struct res {
+	/// A screen resolution in terms of width, height and pixel depth.
+	class Resolution {
+	public:
 		int32_t xres;
 		int32_t yres;
 		int32_t depth;
 	};
-	std::vector<res> m_resolutions;
+
+	/// All supported screen resolutions.
+	std::vector<Resolution> m_resolutions;
 };
 
 /**
  * Fullscreen Optionsmenu. A modal optionsmenu
  */
 
-struct Fullscreen_Menu_Advanced_Options : public Fullscreen_Menu_Base {
+class Fullscreen_Menu_Advanced_Options : public Fullscreen_Menu_Base {
+public:
 	Fullscreen_Menu_Advanced_Options(Options_Ctrl::Options_Struct opt);
 	Options_Ctrl::Options_Struct get_values();
 	enum {
 		om_cancel =   0,
 		om_ok     =   1
 	};
+
+	/// Handle keypresses
+	virtual bool handle_key(bool down, SDL_keysym code);
 
 private:
 	uint32_t                    m_vbutw;

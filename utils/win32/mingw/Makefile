@@ -4,11 +4,6 @@
 # Do not change this file, instead create a new Makefile.local
 # and overwrite the variables listed here
 
-# Use the GGZ Gamingzone? Enable for releases.
-ifndef USE_GGZ
-USE_GGZ:=NO
-endif
-
 # Use of OpenGL?
 ifndef OPENGL
 OPENGL:=NO
@@ -48,7 +43,7 @@ CXX:=g++
 endif
 
 TARGET:=native
-VERSION:=build16
+VERSION:=build17
 
 WINDRES = windres.exe
 icon.o: Widelands_win.rc
@@ -58,11 +53,6 @@ icon.o: Widelands_win.rc
 ####################################################################
 #  NO USER CHANGES BELOW THIS POINT                                #
 ####################################################################
-
-ifeq ($(USE_GGZ),YES)
-ADD_CFLAGS:= $(ADD_CFLAGS) -DUSE_GGZ
-ADD_LDFLAGS:=-lggzmod -lggzcore -lggz -lexpat
-endif
 
 ifeq ($(OPENGL),YES)
 ADD_CFLAGS:= $(ADD_CFLAGS) -DHAS_OPENGL

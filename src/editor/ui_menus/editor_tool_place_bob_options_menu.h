@@ -20,13 +20,12 @@
 #ifndef EDITOR_TOOL_PLACE_BOB_OPTIONS_MENU_H
 #define EDITOR_TOOL_PLACE_BOB_OPTIONS_MENU_H
 
-#include "editor_tool_options_menu.h"
-
-#include "ui_basic/tabpanel.h"
-
 #include <vector>
 
-class Editor_Place_Bob_Tool;
+#include "editor/ui_menus/editor_tool_options_menu.h"
+#include "ui_basic/tabpanel.h"
+
+struct Editor_Place_Bob_Tool;
 namespace UI {struct Checkbox;}
 
 struct Editor_Tool_Place_Bob_Options_Menu : public Editor_Tool_Options_Menu {

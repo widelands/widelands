@@ -19,3 +19,8 @@
 
 #define upcast(type, identifier, source) type * const identifier = \
 dynamic_cast<type *>(source)
+
+// Useful when you want to know if [typeid(source) == typeof(type)*], without
+// the side-effect upcast has of creating a new identifier which won't be used.
+#define is_a(type, source) \
+(dynamic_cast<const type *>(source) != nullptr)

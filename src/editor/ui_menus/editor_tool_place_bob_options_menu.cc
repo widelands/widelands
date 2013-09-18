@@ -17,40 +17,39 @@
  *
  */
 
-#include "editor_tool_place_bob_options_menu.h"
+#include "editor/ui_menus/editor_tool_place_bob_options_menu.h"
 
-#include "logic/critter_bob.h"
-#include "editor/tools/editor_place_bob_tool.h"
+#include <SDL_keysym.h>
+
 #include "editor/editorinteractive.h"
+#include "editor/tools/editor_place_bob_tool.h"
 #include "graphic/graphic.h"
 #include "i18n.h"
+#include "logic/critter_bob.h"
 #include "logic/map.h"
-#include "wlapplication.h"
 #include "logic/world.h"
-
 #include "ui_basic/box.h"
 #include "ui_basic/button.h"
 #include "ui_basic/checkbox.h"
 #include "ui_basic/tabpanel.h"
 #include "ui_basic/textarea.h"
-
 #include "upcast.h"
+#include "wlapplication.h"
 
-#include <SDL_keysym.h>
 
 Editor_Tool_Place_Bob_Options_Menu::Editor_Tool_Place_Bob_Options_Menu
 	(Editor_Interactive         & parent,
 	 Editor_Place_Bob_Tool      & pit,
 	 UI::UniqueWindow::Registry & registry)
 :
-Editor_Tool_Options_Menu(parent, registry, 100, 100, _("Bobs Menu")),
+Editor_Tool_Options_Menu(parent, registry, 100, 100, _("Bobs")),
 
-m_tabpanel          (this, 0, 0, g_gr->get_picture(PicMod_UI, "pics/but1.png")),
+m_tabpanel          (this, 0, 0, g_gr->images().get("pics/but1.png")),
 m_pit               (pit),
 m_click_recursion_protect(false)
 {
 	int32_t const space  =  5;
-	Widelands::World const & world = parent.egbase().map().world();
+	const Widelands::World & world = parent.egbase().map().world();
 	int32_t const nr_bobs = world.get_nr_bobs();
 	const uint32_t bobs_in_row =
 		std::max
@@ -63,23 +62,21 @@ m_click_recursion_protect(false)
 
 	uint32_t width = 0, height = 0;
 	for (int32_t j = 0; j < nr_bobs; ++j) {
-		uint32_t w, h;
-		g_gr->get_picture_size
-			(g_gr->get_picture
-			 	(PicMod_Game, world.get_bob_descr(j)->get_picture()),
-			 w, h);
+		const Image* pic = g_gr->images().get(world.get_bob_descr(j)->get_picture());
+		uint16_t w = pic->width();
+		uint16_t h = pic->height();
 		if (w > width)
-			width  = w;
+			width = w;
 		if (h > height)
 			height = h;
 	}
 
-	const PictureID tab_icon =
-		g_gr->get_picture(PicMod_Game, "pics/list_first_entry.png");
+	const Image* tab_icon =
+		g_gr->images().get("pics/list_first_entry.png");
 	Point pos;
 	uint32_t cur_x = bobs_in_row;
 	int32_t i = 0;
-	UI::Box * box;
+	UI::Box * box = nullptr;
 	while (i < nr_bobs) {
 		if (cur_x == bobs_in_row) {
 			cur_x = 0;
@@ -88,12 +85,12 @@ m_click_recursion_protect(false)
 			m_tabpanel.add("icons", tab_icon, box);
 		}
 
-		Widelands::Bob::Descr const & descr = *world.get_bob_descr(i);
+		const Widelands::Bob::Descr & descr = *world.get_bob_descr(i);
 		upcast(Widelands::Critter_Bob_Descr const, critter_descr, &descr);
 		UI::Checkbox & cb = *new UI::Checkbox
 			(box,
 			 pos,
-			 g_gr->get_picture(PicMod_Game, descr.get_picture()),
+			 g_gr->images().get(descr.get_picture()),
 			 critter_descr ? critter_descr->descname() : std::string());
 
 		cb.set_desired_size(width, height);

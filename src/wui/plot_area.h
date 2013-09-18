@@ -20,13 +20,13 @@
 #ifndef WUI_PLOT_AREA_H
 #define WUI_PLOT_AREA_H
 
-#include "ui_basic/panel.h"
-#include "ui_basic/slider.h"
-
-#include "rgbcolor.h"
+#include <vector>
 
 #include <boost/bind.hpp>
-#include <vector>
+
+#include "rgbcolor.h"
+#include "ui_basic/panel.h"
+#include "ui_basic/slider.h"
 
 /*
  * A Plot Area is a simple 2D Plot, with the
@@ -43,11 +43,6 @@ struct WUIPlot_Area : public UI::Panel {
 		TIME_EIGHT_HOURS,
 		TIME_16_HOURS,
 		TIME_GAME,
-	};
-	enum UNIT {
-		UNIT_MIN,
-		UNIT_HOUR,
-		UNIT_DAY,
 	};
 	enum PLOTMODE {
 		//  Always take the samples of some times together, so that the graph is
@@ -94,41 +89,25 @@ struct WUIPlot_Area : public UI::Panel {
 	std::vector<std::string> get_labels();
 
 protected:
-	uint32_t draw_diagram
-		(RenderTarget & dst, float const xline_length, float const yline_length);
-	void draw_value
-		(RenderTarget & dst, const char * value, RGBColor color, Point pos);
 	void draw_plot_line
 		(RenderTarget & dst, std::vector<uint32_t> const * dataset, float const yline_length,
 		 uint32_t const highest_scale, float const sub, RGBColor const color, int32_t yoffset);
+	uint32_t get_plot_time();
 
-	int32_t calc_how_many(uint32_t time_in_ms_);
-
-	int32_t const spacing;
-	int32_t const space_at_bottom;
-	int32_t const space_at_right;
-
-	static const uint32_t time_in_ms[];
-	static const uint32_t nr_samples = 30;   // How many samples per diagramm when relative plotting
-
-	struct __plotdata {
+	struct PlotData {
 		const std::vector<uint32_t> * dataset;
 		bool                          showplot;
 		RGBColor                      plotcolor;
 	};
-	std::vector<__plotdata> m_plotdata;
+	std::vector<PlotData> m_plotdata;
 
-	TIME                    m_time;  // How much do you want to list
-	int32_t                 m_sample_rate;
 	int32_t                 m_plotmode;
+	int32_t                 m_sample_rate;
 
 private:
 	uint32_t get_game_time();
-	uint32_t get_plot_time();
-	void calc_game_time_id();
-	UNIT get_suggested_unit(uint32_t game_time);
-	std::string get_unit_name(UNIT unit);
-	uint32_t ms_to_unit(UNIT unit, uint32_t ms);
+
+	TIME                    m_time;  // How much do you want to list
 	int32_t                 m_game_time_id; // what label is used for TIME_GAME
 };
 
@@ -141,7 +120,7 @@ struct WUIPlot_Area_Slider : public UI::DiscreteSlider {
 		(Panel * const parent,
 		 WUIPlot_Area & plot_area,
 		 const int32_t x, const int32_t y, const uint32_t w, const uint32_t h,
-		 const PictureID background_picture_id,
+		 const Image* background_picture_id,
 		 const std::string & tooltip_text = std::string(),
 		 const uint32_t cursor_size = 20,
 		 const bool enabled = true)
@@ -167,5 +146,32 @@ private:
 	WUIPlot_Area & m_plot_area;
 	int32_t m_last_game_time_id;
 };
+
+/**
+ * A Plot Area is a simple 2D Plot, with the
+ * X Axis as time (actually Minus Time)
+ * and the Y Axis as the difference between two data vectors
+ */
+struct DifferentialPlot_Area : public WUIPlot_Area {
+public:
+	DifferentialPlot_Area
+		(UI::Panel * parent, int32_t x, int32_t y, int32_t w, int32_t h);
+
+	virtual void draw(RenderTarget &);
+
+	void register_negative_plot_data
+		(uint32_t id, const std::vector<uint32_t> * data);
+
+private:
+	/**
+	 * for the negative plotdata only the values matter. The color and
+	 * visibility is determined by the normal plotdata.
+	 */
+	struct ReducedPlotData {
+		const std::vector<uint32_t> * dataset;
+	};
+	std::vector<ReducedPlotData>  m_negative_plotdata;
+};
+
 
 #endif

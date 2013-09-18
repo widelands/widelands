@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2008, 2010 - 2011 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2008, 2010-2011, 2013 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -17,18 +17,20 @@
  *
  */
 
-#include "overlay_manager.h"
-
-#include "logic/field.h"
-#include "graphic/graphic.h"
+#include "wui/overlay_manager.h"
 
 #include <algorithm>
+
+#include "graphic/graphic.h"
+#include "logic/field.h"
 
 
 Overlay_Manager::Overlay_Manager() :
 m_are_graphics_loaded(false),
 m_showbuildhelp(false),
-m_callback(0)
+m_callback(0),
+m_callback_data(0),
+m_callback_data_i(0)
 #ifndef NDEBUG
 //  No need to initialize (see comment for get_a_job_id) other than to shut up
 //  Valgrind.
@@ -39,7 +41,7 @@ m_current_job_id(Job_Id::Null())
 
 
 /**
- * Returns the currently registered overlays and the buildhelp for a node.
+ * \returns the currently registered overlays and the buildhelp for a node.
  */
 uint8_t Overlay_Manager::get_overlays
 	(Widelands::FCoords const c, Overlay_Info * const overlays) const
@@ -52,7 +54,7 @@ uint8_t Overlay_Manager::get_overlays
 	Registered_Overlays_Map::const_iterator it = overlay_map.lower_bound(c);
 	while (it != overlay_map.end() and it->first == c and it->second.level <= MAX_OVERLAYS_PER_NODE)
 	{
-		overlays[num_ret].picid = it->second.picid;
+		overlays[num_ret].pic = it->second.pic;
 		overlays[num_ret].hotspot = it->second.hotspot;
 		if (++num_ret == MAX_OVERLAYS_PER_NODE)
 			goto end;
@@ -68,7 +70,7 @@ uint8_t Overlay_Manager::get_overlays
 		}
 	}
 	while (it != overlay_map.end() and it->first == c) {
-		overlays[num_ret].picid = it->second.picid;
+		overlays[num_ret].pic = it->second.pic;
 		overlays[num_ret].hotspot = it->second.hotspot;
 		if (++num_ret == MAX_OVERLAYS_PER_NODE)
 			goto end;
@@ -79,7 +81,7 @@ end:
 }
 
 /**
- * Returns the currently registered overlays for a triangle.
+ * \returns the currently registered overlays for a triangle.
  */
 uint8_t Overlay_Manager::get_overlays
 	(Widelands::TCoords<> const c, Overlay_Info * const overlays) const
@@ -98,7 +100,7 @@ uint8_t Overlay_Manager::get_overlays
 		 and
 		 num_ret < MAX_OVERLAYS_PER_TRIANGLE)
 	{
-		overlays[num_ret].picid = it->second.picid;
+		overlays[num_ret].pic = it->second.pic;
 		overlays[num_ret].hotspot = it->second.hotspot;
 		++num_ret;
 		++it;
@@ -107,7 +109,7 @@ uint8_t Overlay_Manager::get_overlays
 }
 
 
-/*
+/**
  * remove all registered overlays. The Overlay_Manager
  * can than be reused without needing to be delete()ed
  */
@@ -122,7 +124,7 @@ void Overlay_Manager::reset() {
 }
 
 
-/*
+/**
  * Recalculates all calculatable overlays for fields
  */
 void Overlay_Manager::recalc_field_overlays(const Widelands::FCoords fc) {
@@ -134,12 +136,13 @@ void Overlay_Manager::recalc_field_overlays(const Widelands::FCoords fc) {
 		fc.field->nodecaps();
 
 	fc.field->set_buildhelp_overlay_index
-		(caps & Widelands::BUILDCAPS_PORT                                      ?
-		 Widelands::Field::Buildhelp_Port                                      :
-		 caps & Widelands::BUILDCAPS_MINE                                      ?
+		(caps & Widelands::BUILDCAPS_MINE                                      ?
 		 Widelands::Field::Buildhelp_Mine                                      :
 		 (caps & Widelands::BUILDCAPS_SIZEMASK) == Widelands::BUILDCAPS_BIG    ?
-		 Widelands::Field::Buildhelp_Big                                       :
+			(caps & Widelands::BUILDCAPS_PORT ?
+			 Widelands::Field::Buildhelp_Port :
+			 Widelands::Field::Buildhelp_Big)
+		 :
 		 (caps & Widelands::BUILDCAPS_SIZEMASK) == Widelands::BUILDCAPS_MEDIUM ?
 		 Widelands::Field::Buildhelp_Medium                                    :
 		 (caps & Widelands::BUILDCAPS_SIZEMASK) == Widelands::BUILDCAPS_SMALL  ?
@@ -148,12 +151,12 @@ void Overlay_Manager::recalc_field_overlays(const Widelands::FCoords fc) {
 		 Widelands::Field::Buildhelp_Flag : Widelands::Field::Buildhelp_None);
 }
 
-/*
+/**
  * finally, register a new overlay
  */
 void Overlay_Manager::register_overlay
 	(Widelands::TCoords<> const c,
-	 PictureID            const picid,
+	 const Image* pic,
 	 int32_t              const level,
 	 Point                      hotspot,
 	 Job_Id               const jobid)
@@ -162,9 +165,7 @@ void Overlay_Manager::register_overlay
 	assert(level != 5); //  level == 5 is undefined behavior
 
 	if (hotspot == Point::invalid()) {
-		uint32_t picture_width, picture_height;
-		g_gr->get_picture_size(picid, picture_width, picture_height);
-		hotspot = Point(picture_width / 2, picture_height / 2);
+		hotspot = Point(pic->width() / 2, pic->height() / 2);
 	}
 
 	Registered_Overlays_Map & overlay_map = m_overlays[c.t];
@@ -173,7 +174,7 @@ void Overlay_Manager::register_overlay
 		 it != overlay_map.end() and it->first == c;
 		 ++it)
 		if
-			(it->second.picid   == picid
+			(it->second.pic   == pic
 			 and
 			 it->second.hotspot == hotspot
 			 and
@@ -185,7 +186,7 @@ void Overlay_Manager::register_overlay
 
 	overlay_map.insert
 		(std::pair<Widelands::Coords const, Registered_Overlays>
-		 	(c, Registered_Overlays(jobid, picid, hotspot, level)));
+		 	(c, Registered_Overlays(jobid, pic, hotspot, level)));
 
 	//  Now manually sort, so that they are ordered
 	//    * first by c (done by std::multimap)
@@ -202,19 +203,18 @@ void Overlay_Manager::register_overlay
 		if (jt->first == it->first) {
 			// There are several overlays registered for this location.
 			if (jt->second.level < it->second.level) {
-				std::swap<Overlay_Manager::Registered_Overlays>
-					(it->second, jt->second);
+				std::swap(it->second, jt->second);
 				it = overlay_map.lower_bound(c);
 			} else ++it;
 		} else break; // it is the last element, break this loop.
 	} while (it->first == c);
 }
 
-/*
+/**
  * remove one (or many) overlays from a node or triangle
  */
 void Overlay_Manager::remove_overlay
-	(Widelands::TCoords<> const c, PictureID const picid)
+	(Widelands::TCoords<> const c, const Image* pic)
 {
 	assert(c.t <= 2);
 
@@ -223,7 +223,7 @@ void Overlay_Manager::remove_overlay
 	if (overlay_map.count(c)) {
 		Registered_Overlays_Map::iterator it = overlay_map.lower_bound(c);
 		do {
-			if (it->second.picid == picid or picid == g_gr->get_no_picture()) {
+			if (pic and it->second.pic == pic) {
 				overlay_map.erase(it);
 				it = overlay_map.lower_bound(c);
 			} else {
@@ -233,7 +233,7 @@ void Overlay_Manager::remove_overlay
 	}
 }
 
-/*
+/**
  * remove all overlays with this jobid
  */
 void Overlay_Manager::remove_overlay(const Job_Id jobid) {
@@ -248,7 +248,7 @@ void Overlay_Manager::remove_overlay(const Job_Id jobid) {
 		}
 }
 
-/*
+/**
  * Register road overlays
  */
 void Overlay_Manager::register_road_overlay
@@ -264,7 +264,7 @@ void Overlay_Manager::register_road_overlay
 		it->second = overlay;
 }
 
-/*
+/**
  * Remove road overlay
  */
 void Overlay_Manager::remove_road_overlay(const Widelands::Coords c) {
@@ -273,7 +273,7 @@ void Overlay_Manager::remove_road_overlay(const Widelands::Coords c) {
 		m_road_overlays.erase(it);
 }
 
-/*
+/**
  * remove all overlays with this jobid
  */
 void Overlay_Manager::remove_road_overlay(Job_Id const jobid) {
@@ -287,7 +287,7 @@ void Overlay_Manager::remove_road_overlay(Job_Id const jobid) {
 			++it;
 }
 
-/*
+/**
  * call cleanup and then, when graphic is reloaded
  * overlay_manager calls this for himself and everything should be fine
  *
@@ -309,12 +309,8 @@ void Overlay_Manager::load_graphics() {
 	const char * const * filename = filenames;
 
 	//  Special case for flag, which has a different formula for hotspot_y.
-	buildhelp_info->picid = g_gr->get_picture(PicMod_Game, *filename);
-	{
-		uint32_t hotspot_x, hotspot_y;
-		g_gr->get_picture_size(buildhelp_info->picid, hotspot_x, hotspot_y);
-		buildhelp_info->hotspot = Point(hotspot_x / 2, hotspot_y - 1);
-	}
+	buildhelp_info->pic = g_gr->images().get(*filename);
+	buildhelp_info->hotspot = Point(buildhelp_info->pic->width() / 2, buildhelp_info->pic->height() - 1);
 
 	const Overlay_Info * const buildhelp_infos_end =
 		buildhelp_info + Widelands::Field::Buildhelp_None;
@@ -322,10 +318,8 @@ void Overlay_Manager::load_graphics() {
 		++buildhelp_info, ++filename;
 		if (buildhelp_info == buildhelp_infos_end)
 			break;
-		buildhelp_info->picid = g_gr->get_picture(PicMod_Game, *filename);
-		uint32_t hotspot_x, hotspot_y;
-		g_gr->get_picture_size(buildhelp_info->picid, hotspot_x, hotspot_y);
-		buildhelp_info->hotspot = Point(hotspot_x / 2, hotspot_y / 2);
+		buildhelp_info->pic = g_gr->images().get(*filename);
+		buildhelp_info->hotspot = Point(buildhelp_info->pic->width() / 2, buildhelp_info->pic->height() / 2);
 	}
 
 	m_are_graphics_loaded = true;

@@ -20,11 +20,10 @@
 #ifndef UI_MESSAGEBOX_H
 #define UI_MESSAGEBOX_H
 
-#include "align.h"
-#include "window.h"
+#include <boost/signals2.hpp>
 
-#include <boost/scoped_ptr.hpp>
-#include <boost/signal.hpp>
+#include "align.h"
+#include "ui_basic/window.h"
 
 namespace UI {
 
@@ -58,14 +57,13 @@ struct WLMessageBox : public Window {
 		(Panel * parent,
 		 const std::string & caption,
 		 const std::string & text,
-		 MB_Type);
+		 MB_Type,
+		 Align = Align_Center);
 	~WLMessageBox();
 
-	boost::signal<void ()> ok;
-	boost::signal<void ()> yes;
-	boost::signal<void ()> no;
-
-	void set_align(Align);
+	boost::signals2::signal<void ()> ok;
+	boost::signals2::signal<void ()> yes;
+	boost::signals2::signal<void ()> no;
 
 	bool handle_mousepress  (Uint8 btn, int32_t mx, int32_t my);
 	bool handle_mouserelease(Uint8 btn, int32_t mx, int32_t my);
@@ -77,7 +75,7 @@ protected:
 	virtual void pressedNo();
 
 private:
-	boost::scoped_ptr<WLMessageBoxImpl> d;
+	std::unique_ptr<WLMessageBoxImpl> d;
 };
 
 }

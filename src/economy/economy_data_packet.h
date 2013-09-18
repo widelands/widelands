@@ -26,8 +26,8 @@
 namespace Widelands {
 class Economy;
 struct Game;
-class Map_Map_Object_Loader;
-class Map_Map_Object_Saver;
+struct Map_Map_Object_Loader;
+struct Map_Map_Object_Saver;
 
 class EconomyDataPacket {
 	public:

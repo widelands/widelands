@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2008 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2013 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -21,15 +21,13 @@
 #define GENERAL_STATISTICS_MENU_H
 
 #include "constants.h"
-
-#include "plot_area.h"
-
-#include "ui_basic/radiobutton.h"
-#include "ui_basic/button.h"
-#include "ui_basic/unique_window.h"
+#include "wui/plot_area.h"
 #include "ui_basic/box.h"
+#include "ui_basic/button.h"
+#include "ui_basic/radiobutton.h"
+#include "ui_basic/unique_window.h"
 
-struct Interactive_GameBase;
+class Interactive_GameBase;
 namespace UI {
 struct Radiogroup;
 }
@@ -60,7 +58,7 @@ private:
 	WUIPlot_Area         m_plot;
 	UI::Radiogroup       m_radiogroup;
 	int32_t              m_selected_information;
-	UI::Button * m_cbs[MAX_PLAYERS];
+	UI::Button         * m_cbs[MAX_PLAYERS];
 	uint32_t             m_ndatasets;
 
 	void clicked_help();

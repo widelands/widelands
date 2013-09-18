@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002, 2006-2011 by the Widelands Development Team
+ * Copyright (C) 2002, 2006-2008, 2011 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,24 +20,24 @@
 #ifndef EDITORINTERACTIVE_H
 #define EDITORINTERACTIVE_H
 
+#include "editor/tools/editor_history.h"
+#include "editor/tools/editor_increase_height_tool.h"
+#include "editor/tools/editor_increase_resources_tool.h"
+#include "editor/tools/editor_info_tool.h"
+#include "editor/tools/editor_make_infrastructure_tool.h"
+#include "editor/tools/editor_noise_height_tool.h"
+#include "editor/tools/editor_place_bob_tool.h"
+#include "editor/tools/editor_place_immovable_tool.h"
+#include "editor/tools/editor_set_origin_tool.h"
+#include "editor/tools/editor_set_port_space_tool.h"
+#include "editor/tools/editor_set_starting_pos_tool.h"
+#include "editor/tools/editor_set_terrain_tool.h"
 #include "ui_basic/button.h"
 #include "ui_basic/unique_window.h"
 #include "wui/interactive_base.h"
 
-#include "tools/editor_increase_height_tool.h"
-#include "tools/editor_increase_resources_tool.h"
-#include "tools/editor_info_tool.h"
-#include "tools/editor_make_infrastructure_tool.h"
-#include "tools/editor_noise_height_tool.h"
-#include "tools/editor_place_bob_tool.h"
-#include "tools/editor_place_immovable_tool.h"
-#include "tools/editor_set_origin_tool.h"
-#include "tools/editor_set_starting_pos_tool.h"
-#include "tools/editor_set_terrain_tool.h"
-
-
 class Editor;
-struct Editor_Tool;
+class Editor_Tool;
 
 /**
  * This is the EditorInteractive. It is like the InteractivePlayer class,
@@ -46,42 +46,46 @@ struct Editor_Tool;
 struct Editor_Interactive : public Interactive_Base {
 	friend struct Editor_Tool_Menu;
 
-	static void run_editor(std::string const & filename);
+	static void run_editor(const std::string & filename);
 
 private:
 	Editor_Interactive(Widelands::Editor_Game_Base &);
 
 public:
 	void register_overlays();
-	void load(std::string const & filename);
+	void load(const std::string & filename);
 
 	// leaf functions from base class
 	void start();
 	void think();
 
-	void map_clicked();
+	void map_clicked(bool draw = false);
 	virtual void set_sel_pos(Widelands::Node_and_Triangle<>);
 	void set_sel_radius_and_update_menu(uint32_t);
 
-	//  gets called when a keyboard event occurs
+	//  Handle UI elements.
 	bool handle_key(bool down, SDL_keysym);
+	bool handle_mousepress(Uint8 btn, int32_t x, int32_t y);
+	bool handle_mouserelease(Uint8 btn, int32_t x, int32_t y);
 
 	struct Tools {
 		Tools()
 			:
-			current_pointer   (&increase_height),
-			use_tool          (Editor_Tool::First),
-			increase_height   (decrease_height, set_height),
-			noise_height      (set_height),
-			place_immovable   (delete_immovable),
-			place_bob         (delete_bob),
-			increase_resources(decrease_resources, set_resources)
+			current_pointer(&increase_height),
+			use_tool(Editor_Tool::First),
+			increase_height(decrease_height, set_height),
+			noise_height(set_height),
+			place_immovable(delete_immovable),
+			place_bob(delete_bob),
+			increase_resources(decrease_resources, set_resources),
+			set_port_space(unset_port_space)
+
 		{}
 		Editor_Tool & current() const throw () {return *current_pointer;}
 		typedef std::vector<Editor_Tool *> Tool_Vector;
 		typedef Tool_Vector::size_type Index;
 		//Tool_Vector                     tools;
-		Editor_Tool *                   current_pointer;
+		Editor_Tool          *          current_pointer;
 		Editor_Tool::Tool_Index         use_tool;
 		Editor_Info_Tool                info;
 		Editor_Set_Height_Tool          set_height;
@@ -97,6 +101,8 @@ public:
 		Editor_Decrease_Resources_Tool  decrease_resources;
 		Editor_Set_Resources_Tool       set_resources;
 		Editor_Increase_Resources_Tool  increase_resources;
+		Editor_Set_Port_Space_Tool      set_port_space;
+		Editor_Unset_Port_Space_Tool    unset_port_space;
 		Editor_Set_Origin_Tool          set_origin;
 		Editor_Make_Infrastructure_Tool make_infrastructure;
 	} tools;
@@ -109,8 +115,8 @@ public:
 	void exit();
 
 	//  reference functions
-	void   reference_player_tribe(Widelands::Player_Number, void const *);
-	void unreference_player_tribe(Widelands::Player_Number, void const *);
+	void   reference_player_tribe(Widelands::Player_Number, void const * const);
+	void unreference_player_tribe(Widelands::Player_Number, void const * const);
 	bool is_player_tribe_referenced(Widelands::Player_Number);
 	void set_need_save(bool const t) {m_need_save = t;}
 
@@ -119,11 +125,11 @@ public:
 	void change_world();
 
 private:
-	void toggle_buildhelp     ();
-	void tool_menu_btn        ();
-	void toolsize_menu_btn    ();
-	void toggle_mainmenu      ();
-	void toggle_playermenu    ();
+	void toggle_buildhelp();
+	void tool_menu_btn();
+	void toolsize_menu_btn();
+	void toggle_mainmenu();
+	void toggle_playermenu();
 
 	//  state variables
 	bool m_need_save;
@@ -134,6 +140,9 @@ private:
 	std::vector<Player_References> m_player_tribe_references;
 
 	int32_t m_realtime;
+	bool m_left_mouse_button_is_down;
+
+	Editor_History m_history;
 
 	UI::UniqueWindow::Registry m_toolmenu;
 
@@ -153,6 +162,8 @@ private:
 	UI::Button m_toggle_minimap;
 	UI::Button m_toggle_buildhelp;
 	UI::Button m_toggle_player_menu;
+	UI::Button m_undo;
+	UI::Button m_redo;
 };
 
 #endif

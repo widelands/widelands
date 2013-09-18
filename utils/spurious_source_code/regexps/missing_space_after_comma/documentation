@@ -1,1 +1,0 @@
-This catches a comma that is followed by another character than a space, for example "a,b,c", which should be "a, b, c". It is a little complex because it should not catch commas in string constants or character constants.

@@ -1,0 +1,6 @@
+<rt>
+<p><font italic=yes bold=yes underline=true>crazy world</font></p>
+<p><font italic=yes bold=yes>crazy world</font></p>
+<p><font underline=yes bold=yes>crazy world</font></p>
+<p><font italic=yes underline=yes>crazy world</font></p>
+</rt>

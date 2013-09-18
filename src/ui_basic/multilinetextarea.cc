@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2009, 2011 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2009, 2011, 2013 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -17,7 +17,7 @@
  *
  */
 
-#include "multilinetextarea.h"
+#include "ui_basic/multilinetextarea.h"
 
 #include <boost/bind.hpp>
 
@@ -54,7 +54,8 @@ Multiline_Textarea::Multiline_Textarea
 	assert(scrollbar_w() <= w);
 	set_think(false);
 
-	set_align(align);
+	//  do not allow vertical alignment as it does not make sense
+	m_align = static_cast<Align>(align & Align_Horizontal);
 
 	m_scrollbar.moved.connect(boost::bind(&Multiline_Textarea::scrollpos_changed, this, _1));
 
@@ -137,20 +138,10 @@ void Multiline_Textarea::recompute()
 	update(0, 0, get_eff_w(), get_h());
 }
 
-
-/**
- * Change alignment of the textarea
- */
-void Multiline_Textarea::set_align(Align const align)
-{
-	//  do not allow vertical alignment as it does not make sense
-	m_align = static_cast<Align>(align & Align_Horizontal);
-}
-
 /**
  * Callback from the scrollbar.
  */
-void Multiline_Textarea::scrollpos_changed(int32_t const pixels)
+void Multiline_Textarea::scrollpos_changed(int32_t const /* pixels */)
 {
 	update(0, 0, get_eff_w(), get_h());
 }
@@ -191,6 +182,8 @@ void Multiline_Textarea::draw(RenderTarget & dst)
 			break;
 		case Align_Right:
 			anchor = get_eff_w();
+			break;
+		default:
 			break;
 		}
 		m->ww.draw(dst, Point(anchor, -m_scrollbar.get_scrollpos()), m_align);

@@ -1,15 +1,21 @@
 size=medium
 max_soldiers=4
-heal_per_second=2
+heal_per_second=120
 conquers=9
 vision_range=17
 enhancement=high_tower
+prefer_heroes=false
 
 [buildcost]
 trunk=2
 planks=3
 stone=4
 spidercloth=1
+
+[return_on_dismantle]
+trunk=1
+planks=1
+stone=3
 
 [idle]
 pics=tower_i_??.png

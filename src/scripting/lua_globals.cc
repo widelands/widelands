@@ -17,15 +17,16 @@
  *
  */
 
+#include "scripting/lua_globals.h"
+
 #include <lua.hpp>
 
-#include "logic/game.h"
+#include "build_info.h"
 #include "i18n.h"
+#include "logic/game.h"
+#include "scripting/c_utils.h"
+#include "scripting/scripting.h"
 
-#include "scripting.h"
-#include "c_utils.h"
-
-#include "lua_globals.h"
 
 namespace LuaGlobals {
 
@@ -133,9 +134,21 @@ static int L_use(lua_State * L) {
 	return 0;
 }
 
+/* RST
+.. function:: get_build_id()
+
+	returns the version string of this widelands executable.  Something like
+	"build-16[debug]".
+*/
+static int L_get_build_id(lua_State * L) {
+	lua_pushstring(L, build_id());
+	return 1;
+}
+
 const static struct luaL_reg globals [] = {
 	{"set_textdomain", &L_set_textdomain},
 	{"use", &L_use},
+	{"get_build_id", &L_get_build_id},
 	{"_", &L__},
 	{0, 0}
 };

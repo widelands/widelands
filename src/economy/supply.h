@@ -20,9 +20,8 @@
 #ifndef S__SUPPLY_H
 #define S__SUPPLY_H
 
-#include "trackptr.h"
-
 #include "logic/wareworker.h"
+#include "trackptr.h"
 
 namespace Widelands {
 
@@ -84,7 +83,7 @@ struct Supply : public Trackable {
 	 * \return the number of items or workers that can be launched right
 	 * now for the thing requested by the given request
 	 */
-	virtual uint32_t nr_supplies(Game const &, Request const &) const = 0;
+	virtual uint32_t nr_supplies(const Game &, const Request &) const = 0;
 
 	/**
 	 * Prepare an item to satisfy the given request. Note that the caller
@@ -93,7 +92,7 @@ struct Supply : public Trackable {
 	 * \throw wexception if the request is not an item request or no such
 	 * item is available in the supply.
 	 */
-	virtual WareInstance & launch_item(Game &, Request const &) = 0;
+	virtual WareInstance & launch_item(Game &, const Request &) = 0;
 
 	/**
 	 * Prepare a worker to satisfy the given request. Note that the caller
@@ -102,7 +101,7 @@ struct Supply : public Trackable {
 	 * \throw wexception if the request is not a worker request or no such
 	 * worker is available in the supply.
 	 */
-	virtual Worker & launch_worker(Game &, Request const &) = 0;
+	virtual Worker & launch_worker(Game &, const Request &) = 0;
 };
 
 }

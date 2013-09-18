@@ -16,17 +16,14 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-
-#include "slider.h"
-
-#include "mouse_constants.h"
-#include "graphic/offscreensurface.h"
-#include "graphic/rendertarget.h"
-#include "graphic/font.h"
-#include "graphic/font_handler.h"
-
+#include "ui_basic/slider.h"
 
 #include <cmath>
+
+#include "graphic/font.h"
+#include "graphic/font_handler.h"
+#include "graphic/rendertarget.h"
+#include "ui_basic/mouse_constants.h"
 
 namespace UI {
 
@@ -54,7 +51,7 @@ Slider::Slider
 	(Panel * const parent,
 	 const int32_t x, const int32_t y, const uint32_t w, const uint32_t h,
 	 const int32_t min_value, const int32_t max_value, const int32_t value,
-	 const PictureID background_picture_id,
+	 const Image* background_picture_id,
 	 const std::string & tooltip_text,
 	 const uint32_t cursor_size,
 	 const bool enabled,
@@ -213,6 +210,7 @@ void Slider::set_enabled(const bool enabled)
 	if (not enabled) {
 		m_pressed = false;
 		m_highlighted = false;
+		grab_mouse(false);
 	}
 	update();
 }
@@ -554,7 +552,7 @@ DiscreteSlider::DiscreteSlider
 	 const int32_t x, const int32_t y, const uint32_t w, const uint32_t h,
 	 const std::vector<std::string> labels_in,
 	 uint32_t m_value,
-	 const PictureID background_picture_id,
+	 const Image* background_picture_id,
 	 const std::string & tooltip_text,
 	 const uint32_t cursor_size,
 	 const bool enabled)
@@ -609,6 +607,7 @@ void DiscreteSlider::set_labels(const std::vector<std::string> labels_in) {
 void DiscreteSlider::layout() {
 	uint32_t w = get_w();
 	uint32_t h = get_h();
+	assert(labels.size());
 	slider.set_pos(Point(w / (2 * labels.size()) - slider.m_cursor_size / 2, 0));
 	slider.set_size
 		(w - (w / labels.size()) + slider.m_cursor_size,

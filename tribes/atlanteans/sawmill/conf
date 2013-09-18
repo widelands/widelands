@@ -1,6 +1,5 @@
 size=medium
 output=planks
-soundfx=../../../sound/sawmill/sawmill
 
 [aihints]
 is_basic=true
@@ -8,6 +7,10 @@ is_basic=true
 [buildcost]
 trunk=2
 stone=3
+
+[return_on_dismantle]
+trunk=1
+stone=2
 
 [working positions]
 sawyer=1

@@ -71,7 +71,7 @@ class Lua_GetText(object):
                 s += 'msgid "%s"\n' % string
             else:
                 s += 'msgid ""\n'
-                lines = string.splitlines()
+                lines = string.split('\n')
                 s += ''.join('"%s\\n"\n' % l for l in lines[:-1])
                 s += '"%s"\n' % lines[-1]
             s += 'msgstr ""\n\n'

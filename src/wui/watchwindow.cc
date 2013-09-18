@@ -17,26 +17,25 @@
  *
  */
 
-#include "watchwindow.h"
-
-#include "logic/bob.h"
-#include "logic/game.h"
-#include "graphic/graphic.h"
-#include "i18n.h"
-#include "interactive_gamebase.h"
-#include "logic/map.h"
-#include "mapview.h"
-#include "mapviewpixelconstants.h"
-#include "mapviewpixelfunctions.h"
-#include "profile/profile.h"
-
-#include "ui_basic/button.h"
-#include "ui_basic/window.h"
-
-#include "upcast.h"
+#include "wui/watchwindow.h"
 
 #include <vector>
 
+#include "graphic/graphic.h"
+#include "i18n.h"
+#include "logic/bob.h"
+#include "logic/game.h"
+#include "logic/map.h"
+#include "logic/player.h"
+#include "profile/profile.h"
+#include "ui_basic/button.h"
+#include "ui_basic/window.h"
+#include "upcast.h"
+#include "wui/interactive_gamebase.h"
+#include "wui/interactive_player.h"
+#include "wui/mapview.h"
+#include "wui/mapviewpixelconstants.h"
+#include "wui/mapviewpixelfunctions.h"
 
 #define NUM_VIEWS 5
 #define REFRESH_TIME 5000
@@ -59,7 +58,7 @@ struct WatchWindow : public UI::Window {
 		return ref_cast<Interactive_GameBase, UI::Panel>(*get_parent()).game();
 	}
 
-	boost::signal<void (Point)> warp_mainview;
+	boost::signals2::signal<void (Point)> warp_mainview;
 
 	void add_view(Widelands::Coords);
 	void next_view(bool first = false);
@@ -104,8 +103,8 @@ WatchWindow::WatchWindow
 		new UI::Button
 			(this, "follow",
 			 0, h - 34, 34, 34,
-			 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
-			 g_gr->get_picture(PicMod_UI, "pics/menu_watch_follow.png"),
+			 g_gr->images().get("pics/but0.png"),
+			 g_gr->images().get("pics/menu_watch_follow.png"),
 			 _("Follow"));
 	followbtn->sigclicked.connect(boost::bind(&WatchWindow::do_follow, this));
 
@@ -113,8 +112,8 @@ WatchWindow::WatchWindow
 		new UI::Button
 			(this, "center_mainview_here",
 			 34, h - 34, 34, 34,
-			 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
-			 g_gr->get_picture(PicMod_UI, "pics/menu_goto.png"),
+			 g_gr->images().get("pics/but0.png"),
+			 g_gr->images().get("pics/menu_goto.png"),
 			 _("Center mainview on this"));
 	gotobtn->sigclicked.connect(boost::bind(&WatchWindow::do_goto, this));
 
@@ -124,7 +123,7 @@ WatchWindow::WatchWindow
 				new UI::Button
 					(this, "view",
 					 74 + (17 * i), 200 - 34, 17, 34,
-					 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
+					 g_gr->images().get("pics/but0.png"),
 					 "-", std::string(),
 					 false);
 			view_btns[i]->sigclicked.connect
@@ -135,8 +134,8 @@ WatchWindow::WatchWindow
 			new UI::Button
 				(this, "close",
 				 w - 34, h - 34, 34, 34,
-				 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
-				 g_gr->get_picture(PicMod_UI, "pics/menu_abort.png"),
+				 g_gr->images().get("pics/but0.png"),
+				 g_gr->images().get("pics/menu_abort.png"),
 				 _("Close"));
 		closebtn->sigclicked.connect(boost::bind(&WatchWindow::close_cur_view, this));
 	}
@@ -256,8 +255,16 @@ void WatchWindow::think()
 			(game().map(), bob->get_position(), pos.x, pos.y);
 		pos = bob->calc_drawpos(game(), pos);
 
-		mapview.set_viewpoint
-			(pos - Point(mapview.get_w() / 2, mapview.get_h() / 2), false);
+		Widelands::Map & map = game().map();
+		// Drop the tracking if it leaves our vision range
+		Interactive_Player* ipl = game().get_ipl();
+		if (ipl && 1 >= ipl->player().vision(map.get_index(bob->get_position(), map.get_width()))) {
+			// Not in sight
+			views[cur_index].tracking = 0;
+		} else {
+			mapview.set_viewpoint
+				(pos - Point(mapview.get_w() / 2, mapview.get_h() / 2), false);
+		}
 	}
 
 	mapview.need_complete_redraw(); //  make sure that the view gets updated
@@ -286,10 +293,7 @@ void WatchWindow::stop_tracking_by_drag(int32_t, int32_t) {
 void WatchWindow::do_follow()
 {
 	Widelands::Game & g = game();
-	if
-		(Widelands::Map_Object const * const obj =
-			views[cur_index].tracking.get(g))
-	{
+	if (views[cur_index].tracking.get(g)) {
 		views[cur_index].tracking = 0;
 	} else {
 		//  Find the nearest bob. Other object types can not move and are
@@ -325,7 +329,11 @@ void WatchWindow::do_follow()
 			p = bob->calc_drawpos(g, p);
 			int32_t const dist =
 				MapviewPixelFunctions::calc_pix_distance(map, p, pos);
-			if (!closest || closest_dist > dist) {
+			Interactive_Player* ipl = game().get_ipl();
+			if
+				((!closest || closest_dist > dist)
+				 && (!ipl || 1 < ipl->player().vision(map.get_index(bob->get_position(), map.get_width()))))
+			{
 				closest = bob;
 				closest_dist = dist;
 			}

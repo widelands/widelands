@@ -20,11 +20,10 @@
 #ifndef CONSTRUCTIONSITE_H
 #define CONSTRUCTIONSITE_H
 
-#include "partially_finished_building.h"
-
-#include "player.h"
-
 #include <vector>
+
+#include "logic/partially_finished_building.h"
+#include "logic/player.h"
 
 namespace Widelands {
 
@@ -53,8 +52,8 @@ The ConstructionSite's idling animation is the basic construction site marker.
 struct ConstructionSite_Descr : public Building_Descr {
 	ConstructionSite_Descr
 		(char const * name, char const * descname,
-		 std::string const & directory, Profile &, Section & global_s,
-		 Tribe_Descr const & tribe);
+		 const std::string & directory, Profile &, Section & global_s,
+		 const Tribe_Descr & tribe);
 
 	virtual Building & create_object() const;
 };
@@ -72,12 +71,11 @@ public:
 	char const * type_name() const throw () {return "constructionsite";}
 	virtual std::string get_statistics_string();
 
-	const Player::Constructionsite_Information * get_info() {return m_info;}
+	const Player::Constructionsite_Information & get_info() {return m_info;}
 
 	virtual WaresQueue & waresqueue(Ware_Index);
 
 	virtual void set_building(const Building_Descr &);
-	void set_previous_building(const Building_Descr * const);
 	const Building_Descr & building() const throw () {return *m_building;}
 
 	virtual void init   (Editor_Game_Base &);
@@ -96,15 +94,13 @@ protected:
 	static void wares_queue_callback
 		(Game &, WaresQueue *, Ware_Index, void * data);
 
-	virtual void draw(Editor_Game_Base const &, RenderTarget &, FCoords, Point);
+	virtual void draw(const Editor_Game_Base &, RenderTarget &, const FCoords&, const Point&);
 
 private:
-	const Building_Descr * m_prev_building; // Building standing here earlier
-
 	int32_t  m_fetchfromflag;  // # of items to fetch from flag
 
 	bool     m_builder_idle;   // used to determine whether the builder is idle
-	Player::Constructionsite_Information * m_info; // asked for by player point of view for the gameview
+	Player::Constructionsite_Information m_info; // asked for by player point of view for the gameview
 };
 
 }

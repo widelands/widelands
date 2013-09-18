@@ -1,7 +1,8 @@
 size=big
 max_soldiers=12
-heal_per_second=2
+heal_per_second=200
 conquers=12
+prefer_heroes=true
 
 [buildcost]
 planks=4
@@ -10,6 +11,11 @@ trunk=5
 spidercloth=2
 diamond=1
 quartz=1
+
+[return_on_dismantle]
+planks=2
+stone=5
+trunk=2
 
 [idle]
 pics=castle_i_??.png

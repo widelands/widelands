@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2011 by the Widelands Development Team
+ * Copyright (C) 2002-2012 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -17,14 +17,15 @@
  *
  */
 
-#include "campaign_select.h"
+#include "ui_fsmenu/campaign_select.h"
+
 #include "campvis.h"
 #include "constants.h"
 #include "graphic/graphic.h"
 #include "i18n.h"
+#include "map_io/widelands_map_loader.h"
 #include "profile/profile.h"
 #include "wexception.h"
-#include "map_io/widelands_map_loader.h"
 
 
 /*
@@ -69,12 +70,12 @@ Fullscreen_Menu_CampaignSelect::Fullscreen_Menu_CampaignSelect() :
 	b_ok
 		(this, "ok",
 		 get_w() * 71 / 100, get_h() * 9 / 10, m_butw, m_buth,
-		 g_gr->get_picture(PicMod_UI, "pics/but2.png"),
+		 g_gr->images().get("pics/but2.png"),
 		 _("OK"), std::string(), false, false),
 	back
 		(this, "back",
 		 get_w() * 71 / 100, get_h() * 17 / 20, m_butw, m_buth,
-		 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
+		 g_gr->images().get("pics/but0.png"),
 		 _("Back"), std::string(), true, false),
 
 // Campaign list
@@ -157,9 +158,7 @@ void Fullscreen_Menu_CampaignSelect::campaign_selected(uint32_t const i)
 		sprintf(cdescription, "campdesc%u", i);
 		sprintf(cdif_descr, "campdiffdescr%u", i);
 
-		uint32_t dif = s.get_natural(cdifficulty);
-		if (dif > 3)
-			dif = 0;
+		s.get_natural(cdifficulty);
 
 		std::string dif_description = s.get_string
 			(cdif_descr, _("[No value found]"));
@@ -227,7 +226,7 @@ void Fullscreen_Menu_CampaignSelect::fill_list()
 			m_list.add
 				(s.get_string(cname, _("[No value found]")),
 				 s.get_string(csection),
-				 g_gr->get_picture(PicMod_Game, dif_picture_filenames[dif]));
+				 g_gr->images().get(dif_picture_filenames[dif]));
 
 		}
 
@@ -263,7 +262,7 @@ Fullscreen_Menu_CampaignMapSelect::Fullscreen_Menu_CampaignMapSelect() :
 // Text labels
 	title
 		(this,
-		 get_w() / 2, get_h() * 9 / 50, _("Choose your map!"),
+		 get_w() / 2, get_h() * 9 / 50, _("Choose a map"),
 		 UI::Align_HCenter),
 	label_mapname (this, get_w() * 3 / 5,  get_h() * 17 / 50, _("Name:")),
 	tamapname     (this, get_w() * 61 / 100, get_h() * 3 / 8, ""),
@@ -278,12 +277,12 @@ Fullscreen_Menu_CampaignMapSelect::Fullscreen_Menu_CampaignMapSelect() :
 	b_ok
 		(this, "ok",
 		 get_w() * 71 / 100, get_h() * 9 / 10, m_butw, m_buth,
-		 g_gr->get_picture(PicMod_UI, "pics/but2.png"),
+		 g_gr->images().get("pics/but2.png"),
 		 _("OK"), std::string(), false, false),
 	back
 		(this, "back",
 		 get_w() * 71 / 100, get_h() * 17 / 20, m_butw, m_buth,
-		 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
+		 g_gr->images().get("pics/but0.png"),
 		 _("Back"), std::string(), true, false),
 
 // Campaign map list
@@ -352,12 +351,9 @@ void Fullscreen_Menu_CampaignMapSelect::map_selected(uint32_t) {
 	}
 	tdname = "scenario_" + tdname.substr(i + 1);
 
-	i18n::Textdomain td(tdname);
-
 	Widelands::Map map;
 
-	Widelands::Map_Loader * const ml
-		= map.get_correct_loader(campmapfile.c_str());
+	std::unique_ptr<Widelands::Map_Loader> ml(map.get_correct_loader(campmapfile.c_str()));
 	if (!ml) {
 		throw wexception
 			(_("Invalid path to file in cconfig: %s"), campmapfile.c_str());
@@ -366,9 +362,10 @@ void Fullscreen_Menu_CampaignMapSelect::map_selected(uint32_t) {
 	map.set_filename(campmapfile.c_str());
 	ml->preload_map(true);
 
-	tamapname .set_text(map.get_name());
+	i18n::Textdomain td(tdname);
+	tamapname .set_text(_(map.get_name()));
 	taauthor  .set_text(map.get_author());
-	tamapdescr.set_text(map.get_description());
+	tamapdescr.set_text(_(map.get_description()));
 
 	// enable OK button
 	b_ok.set_enabled(true);
@@ -422,7 +419,7 @@ void Fullscreen_Menu_CampaignMapSelect::fill_list()
 			m_list.add
 				(s->get_string("name", _("[No value found]")),
 				 s->get_string("path"),
-				 g_gr->get_picture(PicMod_Game, "pics/ls_wlmap.png"));
+				 g_gr->images().get("pics/ls_wlmap.png"));
 		}
 
 		++i;

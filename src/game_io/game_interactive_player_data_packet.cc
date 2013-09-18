@@ -17,17 +17,17 @@
  *
  */
 
-#include "game_interactive_player_data_packet.h"
+#include "game_io/game_interactive_player_data_packet.h"
 
 #include "logic/game.h"
 #include "logic/game_data_error.h"
-#include "wui/interactive_player.h"
-#include "wui/mapview.h"
-#include "wui/overlay_manager.h"
 #include "logic/player.h"
 #include "logic/tribe.h"
 #include "logic/widelands_fileread.h"
 #include "logic/widelands_filewrite.h"
+#include "wui/interactive_player.h"
+#include "wui/mapview.h"
+#include "wui/overlay_manager.h"
 
 namespace Widelands {
 
@@ -60,23 +60,24 @@ void Game_Interactive_Player_Data_Packet::Read
 			int32_t       const y             = fr.Unsigned16();
 			uint32_t      const display_flags = fr.Unsigned32();
 
-			if (Interactive_Player * const plr = game.get_ipl()) {
-				plr->set_player_number(player_number);
-
-				plr->set_viewpoint(Point(x, y), true);
+			if (Interactive_Base * const ibase = game.get_ibase()) {
+				ibase->set_viewpoint(Point(x, y), true);
 
 				uint32_t const loaded_df =
 					Interactive_Base::dfShowCensus |
 					Interactive_Base::dfShowStatistics;
-				uint32_t const olddf = plr->get_display_flags();
+				uint32_t const olddf = ibase->get_display_flags();
 				uint32_t const realdf =
 					(olddf & ~loaded_df) | (display_flags & loaded_df);
-				plr->set_display_flags(realdf);
+				ibase->set_display_flags(realdf);
+			}
+			if (Interactive_Player * const ipl = game.get_ipl()) {
+				ipl->set_player_number(player_number);
 			}
 		} else
 			throw game_data_error
 				(_("unknown/unhandled version %u"), packet_version);
-	} catch (_wexception const & e) {
+	} catch (const _wexception & e) {
 		throw game_data_error(_("interactive player: %s"), e.what());
 	}
 }
@@ -92,21 +93,22 @@ void Game_Interactive_Player_Data_Packet::Write
 	// Now packet version
 	fw.Unsigned16(CURRENT_PACKET_VERSION);
 
-	Interactive_Player * const plr = game.get_ipl();
+	Interactive_Base * const ibase = game.get_ibase();
+	Interactive_Player * const iplayer = game.get_ipl();
 
 	// Player number
-	fw.Unsigned8(plr ? plr->player_number() : 1);
+	fw.Unsigned8(iplayer ? iplayer->player_number() : 1);
 
 	// Map Position
-	if (plr) {
-		assert(0 <= plr->get_viewpoint().x);
-		assert(0 <= plr->get_viewpoint().y);
+	if (ibase) {
+		assert(0 <= ibase->get_viewpoint().x);
+		assert(0 <= ibase->get_viewpoint().y);
 	}
-	fw.Unsigned16(plr ? plr->get_viewpoint().x : 0);
-	fw.Unsigned16(plr ? plr->get_viewpoint().y : 0);
+	fw.Unsigned16(ibase ? ibase->get_viewpoint().x : 0);
+	fw.Unsigned16(ibase ? ibase->get_viewpoint().y : 0);
 
 	// Display flags
-	fw.Unsigned32(plr ? plr->get_display_flags() : 0);
+	fw.Unsigned32(ibase ? ibase->get_display_flags() : 0);
 
 	fw.Write(fs, "binary/interactive_player");
 }

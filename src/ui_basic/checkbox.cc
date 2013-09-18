@@ -17,39 +17,37 @@
  *
  */
 
-#include "checkbox.h"
+#include "ui_basic/checkbox.h"
 
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
 
-#include "compile_assert.h"
-
 namespace UI {
 /**
  * Stateboxes start out enabled and unchecked.
- * If picid is non-zero, the given picture is used instead of the normal
+ * If pic is non-zero, the given picture is used instead of the normal
  * checkbox graphics.
 */
 Statebox::Statebox
 	(Panel             * const parent,
 	 Point               const p,
-	 PictureID           const picid,
-	 std::string const &       tooltip_text)
+	 const Image* pic,
+	 const std::string &       tooltip_text)
 	:
 	Panel  (parent, p.x, p.y, STATEBOX_WIDTH, STATEBOX_HEIGHT, tooltip_text),
 	m_flags(Is_Enabled)
 {
-	if (picid != g_gr->get_no_picture()) {
-		uint32_t w, h;
-		g_gr->get_picture_size(picid, w, h);
+	if (pic) {
+		uint16_t w = pic->width();
+		uint16_t h = pic->height();
 		set_desired_size(w, h);
 		set_size(w, h);
 
 		set_flags(Has_Custom_Picture, true);
-		m_pic_graphics = picid;
+		m_pic_graphics = pic;
 	} else
 		m_pic_graphics =
-			g_gr->get_picture(PicMod_UI, "pics/checkbox_light_new.png");
+			g_gr->images().get("pics/checkbox_light.png");
 }
 
 
@@ -72,11 +70,9 @@ void Statebox::set_enabled(bool const enabled)
 	set_flags(Is_Enabled, enabled);
 
 	if (not (m_flags & Has_Custom_Picture)) {
-		m_pic_graphics = g_gr->get_picture
-			(PicMod_UI,
-			 enabled ? "pics/checkbox_light_new.png" : "pics/checkbox.png");
+		m_pic_graphics = g_gr->images().get(enabled ? "pics/checkbox_light.png" : "pics/checkbox.png");
 		set_flags
-			(Is_Highlighted, m_flags & Is_Highlighted and m_flags & Is_Enabled);
+			(Is_Highlighted, (m_flags & Is_Highlighted) and (m_flags & Is_Enabled));
 	}
 
 	update();
@@ -105,8 +101,8 @@ void Statebox::draw(RenderTarget & dst)
 {
 	if (m_flags & Has_Custom_Picture) {
 		// center picture
-		uint32_t w, h;
-		g_gr->get_picture_size(m_pic_graphics, w, h);
+		uint16_t w = m_pic_graphics->width();
+		uint16_t h = m_pic_graphics->height();
 
 		dst.blit
 			(Point((get_inner_w() - w) / 2, (get_inner_h() - h) / 2),
@@ -119,8 +115,8 @@ void Statebox::draw(RenderTarget & dst)
 			dst.draw_rect
 				(Rect(Point(0, 0), get_w(), get_h()), RGBColor(100, 100,  80));
 	} else {
-		compile_assert(0 <= STATEBOX_WIDTH);
-		compile_assert(0 <= STATEBOX_HEIGHT);
+		static_assert(0 <= STATEBOX_WIDTH, "assert(0 <= STATEBOX_WIDTH) failed.");
+		static_assert(0 <= STATEBOX_HEIGHT, "assert(0 <= STATEBOX_HEIGHT) failed.");
 		dst.blitrect
 			(Point(0, 0),
 			 m_pic_graphics,
@@ -130,7 +126,7 @@ void Statebox::draw(RenderTarget & dst)
 
 		if (m_flags & Is_Highlighted)
 			dst.draw_rect
-				(Rect(Point(0, 0), get_w(), get_h()), RGBColor(100, 100,  80));
+				(Rect(Point(0, 0), STATEBOX_WIDTH + 1, STATEBOX_HEIGHT + 1), RGBColor(100, 100,  80));
 	}
 }
 
@@ -139,8 +135,11 @@ void Statebox::draw(RenderTarget & dst)
  * Highlight the checkbox when the mouse moves into it
  */
 void Statebox::handle_mousein(bool const inside) {
-	set_flags(Is_Highlighted, inside);
-	update();
+	bool oldhl = m_flags & Is_Highlighted;
+	set_flags(Is_Highlighted, inside and (m_flags & Is_Enabled));
+
+	if (oldhl != (m_flags & Is_Highlighted))
+		update();
 }
 
 
@@ -148,7 +147,7 @@ void Statebox::handle_mousein(bool const inside) {
  * Left-click: Toggle checkbox state
  */
 bool Statebox::handle_mousepress(const Uint8 btn, int32_t, int32_t) {
-	if (btn == SDL_BUTTON_LEFT and m_flags & Is_Enabled) {
+	if (btn == SDL_BUTTON_LEFT and (m_flags & Is_Enabled)) {
 		clicked();
 		return true;
 	} else
@@ -159,6 +158,9 @@ bool Statebox::handle_mouserelease(const Uint8 btn, int32_t, int32_t)
 	return btn == SDL_BUTTON_LEFT;
 }
 
+bool Statebox::handle_mousemove(const Uint8, int32_t, int32_t, int32_t, int32_t) {
+	return true; // We handle this always by lighting up
+}
 
 /**
  * Toggle the checkbox state

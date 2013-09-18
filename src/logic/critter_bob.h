@@ -20,13 +20,13 @@
 #ifndef CRITTER_BOB_H
 #define CRITTER_BOB_H
 
-#include "bob.h"
+#include "logic/bob.h"
 #include "graphic/diranimations.h"
 
 namespace Widelands {
 
-class Critter_BobAction;
-class Critter_BobProgram;
+struct Critter_BobAction;
+struct Critter_BobProgram;
 
 //
 // Description
@@ -34,7 +34,7 @@ class Critter_BobProgram;
 struct Critter_Bob_Descr : public Bob::Descr {
 	Critter_Bob_Descr
 		(char const * name, char const * descname,
-		 std::string const & directory, Profile &, Section & global_s,
+		 const std::string & directory, Profile &, Section & global_s,
 		 Tribe_Descr const *);
 	virtual ~Critter_Bob_Descr();
 
@@ -44,18 +44,18 @@ struct Critter_Bob_Descr : public Bob::Descr {
 	uint32_t movecaps() const throw ();
 	const DirAnimations & get_walk_anims() const throw () {return m_walk_anims;}
 
-	Critter_BobProgram const * get_program(std::string const &) const;
+	Critter_BobProgram const * get_program(const std::string &) const;
 
 private:
 	DirAnimations m_walk_anims;
 	bool          m_swimming;
 	typedef std::map<std::string, Critter_BobProgram *> Programs;
-	Programs    m_programs;
+	Programs      m_programs;
 };
 
 class Critter_Bob : public Bob {
 	friend struct Map_Bobdata_Data_Packet;
-	friend class Critter_BobProgram;
+	friend struct Critter_BobProgram;
 
 	MO_DESCR(Critter_Bob_Descr);
 
@@ -67,14 +67,14 @@ public:
 
 	virtual void init_auto_task(Game &);
 
-	void start_task_program(Game &, std::string const & name);
+	void start_task_program(Game &, const std::string & name);
 	const std::string & descname() const throw () {return descr().descname();}
 
 private:
 	void roam_update   (Game &, State &);
 	void program_update(Game &, State &);
 
-	bool run_remove(Game &, State &, Critter_BobAction const &);
+	bool run_remove(Game &, State &, const Critter_BobAction &);
 
 	static Task const taskRoam;
 	static Task const taskProgram;

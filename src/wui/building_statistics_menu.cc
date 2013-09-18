@@ -17,26 +17,24 @@
  *
  */
 
-#include "building_statistics_menu.h"
+#include "wui/building_statistics_menu.h"
+
+#include <vector>
 
 #include <boost/bind.hpp>
 
-#include "logic/building.h"
 #include "graphic/graphic.h"
+#include "graphic/rendertarget.h"
 #include "i18n.h"
-#include "interactive_player.h"
-#include "mapviewpixelconstants.h"
+#include "logic/building.h"
 #include "logic/player.h"
 #include "logic/productionsite.h"
-#include "graphic/rendertarget.h"
 #include "logic/tribe.h"
-#include "plot_area.h"
-
 #include "ui_basic/button.h"
-
 #include "upcast.h"
-
-#include <vector>
+#include "wui/interactive_player.h"
+#include "wui/mapviewpixelconstants.h"
+#include "wui/plot_area.h"
 
 #define WINDOW_WIDTH         440
 #define WINDOW_HEIGHT        440
@@ -58,7 +56,7 @@
 #define UNPRODUCTIVE_Y       (IN_BUILD_Y           + 24)
 #define FLAG_POINT           Point(125, WINDOW_HEIGHT - 8)
 
-#define LOW_PROD 25
+#define LOW_PROD 33
 
 #define UPDATE_TIME 1000  //  1 second, gametime
 
@@ -127,8 +125,8 @@ Building_Statistics_Menu::Building_Statistics_Menu
 		new UI::Button
 			(this, "previous_owned",
 			 JUMP_PREV_BUTTON_X, OWNED_Y, 24, 24,
-			 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
-			 g_gr->get_picture(PicMod_UI, "pics/scrollbar_left.png"),
+			 g_gr->images().get("pics/but4.png"),
+			 g_gr->images().get("pics/scrollbar_left.png"),
 			 _("Show previous"),
 			 false);
 	m_btn[Prev_Owned]->sigclicked.connect
@@ -138,8 +136,8 @@ Building_Statistics_Menu::Building_Statistics_Menu
 		new UI::Button
 			(this, "next_owned",
 			 JUMP_NEXT_BUTTON_X, OWNED_Y, 24, 24,
-			 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
-			 g_gr->get_picture(PicMod_UI, "pics/scrollbar_right.png"),
+			 g_gr->images().get("pics/but4.png"),
+			 g_gr->images().get("pics/scrollbar_right.png"),
 			 _("Show next"),
 			 false);
 	m_btn[Next_Owned]->sigclicked.connect
@@ -149,8 +147,8 @@ Building_Statistics_Menu::Building_Statistics_Menu
 		new UI::Button
 			(this, "previous_constructed",
 			 JUMP_PREV_BUTTON_X, IN_BUILD_Y, 24, 24,
-			 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
-			 g_gr->get_picture(PicMod_UI, "pics/scrollbar_left.png"),
+			 g_gr->images().get("pics/but4.png"),
+			 g_gr->images().get("pics/scrollbar_left.png"),
 			 _("Show previous"),
 			 false);
 	m_btn[Prev_Construction]->sigclicked.connect
@@ -160,8 +158,8 @@ Building_Statistics_Menu::Building_Statistics_Menu
 		new UI::Button
 			(this, "next_constructed",
 			 JUMP_NEXT_BUTTON_X, IN_BUILD_Y, 24, 24,
-			 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
-			 g_gr->get_picture(PicMod_UI, "pics/scrollbar_right.png"),
+			 g_gr->images().get("pics/but4.png"),
+			 g_gr->images().get("pics/scrollbar_right.png"),
 			 _("Show next"),
 			 false);
 	m_btn[Next_Construction]->sigclicked.connect
@@ -171,8 +169,8 @@ Building_Statistics_Menu::Building_Statistics_Menu
 		new UI::Button
 			(this, "previous_unproductive",
 			 JUMP_PREV_BUTTON_X, UNPRODUCTIVE_Y, 24, 24,
-			 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
-			 g_gr->get_picture(PicMod_UI, "pics/scrollbar_left.png"),
+			 g_gr->images().get("pics/but4.png"),
+			 g_gr->images().get("pics/scrollbar_left.png"),
 			 _("Show previous"),
 			 false);
 	m_btn[Prev_Unproductive]->sigclicked.connect
@@ -182,8 +180,8 @@ Building_Statistics_Menu::Building_Statistics_Menu
 		new UI::Button
 			(this, "next_unproductive",
 			 JUMP_NEXT_BUTTON_X, UNPRODUCTIVE_Y, 24, 24,
-			 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
-			 g_gr->get_picture(PicMod_UI, "pics/scrollbar_right.png"),
+			 g_gr->images().get("pics/but4.png"),
+			 g_gr->images().get("pics/scrollbar_right.png"),
 			 _("Show next"),
 			 false);
 	m_btn[Next_Unproductive]->sigclicked.connect
@@ -195,7 +193,7 @@ Building_Statistics_Menu::Building_Statistics_Menu
  * Update this statistic
  */
 void Building_Statistics_Menu::think() {
-	Widelands::Game const & game = iplayer().game();
+	const Widelands::Game & game = iplayer().game();
 	int32_t const gametime = game.get_gametime();
 
 	if ((gametime - m_lastupdate) > UPDATE_TIME) {
@@ -212,7 +210,7 @@ void Building_Statistics_Menu::think() {
 void Building_Statistics_Menu::draw(RenderTarget & dst) {
 	UI::Window::draw(dst);
 
-	Widelands::Player const & player = iplayer().player();
+	const Widelands::Player & player = iplayer().player();
 	if (m_anim)
 		dst.drawanim
 			(FLAG_POINT - Point(TRIANGLE_WIDTH / 2, TRIANGLE_HEIGHT),
@@ -243,7 +241,7 @@ void Building_Statistics_Menu::clicked_jump(Jump_Targets const id) {
 		iplayer().get_player()->get_building_statistics
 			(Widelands::Building_Index
 				(static_cast<size_t>(m_table.get_selected())));
-	Widelands::Map const & map = iplayer().egbase().map();
+	const Widelands::Map & map = iplayer().egbase().map();
 
 	bool found = true; //  we think, we always find a proper building
 
@@ -323,6 +321,7 @@ void Building_Statistics_Menu::clicked_jump(Jump_Targets const id) {
 	}
 	default:
 		assert(false);
+		break;
 	}
 
 	validate_pointer(&m_last_building_index, vec.size());
@@ -370,16 +369,16 @@ void Building_Statistics_Menu::update() {
 	m_in_build.set_text("");
 	m_progbar .set_state(0);
 
-	Widelands::Player      const & player = iplayer().player();
-	Widelands::Tribe_Descr const & tribe  = player.tribe();
-	Widelands::Map         const & map   = iplayer().game().map();
+	const Widelands::Player      & player = iplayer().player();
+	const Widelands::Tribe_Descr & tribe  = player.tribe();
+	const Widelands::Map         & map   = iplayer().game().map();
 	Widelands::Building_Index      const nr_buildings = tribe.get_nrbuildings();
 	for
 		(Widelands::Building_Index i = Widelands::Building_Index::First();
 		 i < nr_buildings;
 		 ++i)
 	{
-		Widelands::Building_Descr const & building =
+		const Widelands::Building_Descr & building =
 			*tribe.get_building_descr(i);
 		if
 			(not (building.is_buildable()
@@ -387,7 +386,7 @@ void Building_Statistics_Menu::update() {
 			 or building.global()))
 			continue;
 
-		std::vector<Widelands::Player::Building_Stats> const & vec =
+		const std::vector<Widelands::Player::Building_Stats> & vec =
 			player.get_building_statistics(i);
 
 		//  walk all entries, add new ones if needed
@@ -457,8 +456,9 @@ void Building_Statistics_Menu::update() {
 				break;
 			default:
 				assert(false);
+				break;
 			}
-			te->set_picture(Columns::Size, g_gr->get_picture(PicMod_UI, pic));
+			te->set_picture(Columns::Size, g_gr->images().get(pic));
 		}
 
 		if (productionsite and nr_owned) {

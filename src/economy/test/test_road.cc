@@ -18,12 +18,13 @@
  */
 
 #include <exception>
+
 #include <boost/test/unit_test.hpp>
 
-#include "economy/road.h"
 #include "economy/flag.h"
-#include "logic/instances.h"
+#include "economy/road.h"
 #include "logic/editor_game_base.h"
+#include "logic/instances.h"
 #include "logic/player.h"
 
 using namespace Widelands;
@@ -47,12 +48,20 @@ struct TestingMap : public Map {
 /*************************************************************************/
 /*                                 TESTS                                 */
 /*************************************************************************/
-struct SimpleRoadTestsFixture {
+struct WlTestFixture {
+	WlTestFixture() {
+	g_fs = new LayeredFileSystem();
+	}
+	~WlTestFixture() {delete g_fs; g_fs = 0;}
+};
+
+struct SimpleRoadTestsFixture : public WlTestFixture {
 	SimpleRoadTestsFixture() :
+		g(0),
 		path(Coords(5, 5))
 	{
 		map = new TestingMap(32, 32);
-		g.set_map(map, false);
+		g.set_map(map);
 
 		path.append(*map, WALK_E);
 		path.append(*map, WALK_E);

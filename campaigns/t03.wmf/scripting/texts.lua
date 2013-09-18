@@ -15,12 +15,12 @@ end
 
 -- Headings
 function h1(s)
-   return "<p font=FreeSerif font-size=18 font-weight=bold font-color=D1D1D1>"
+   return "<p font=DejaVuSerif font-size=18 font-weight=bold font-color=D1D1D1>"
       ..  s .. "<br></p><p font-size=8> <br></p>"
 end
    
 function direct_speech(heading, text)
-   return "<p font-size=24 font-face=FreeSerif font-weight=bold " ..
+   return "<p font-size=24 font-face=DejaVuSerif font-weight=bold " ..
       "font-color=2F9131>" .. heading .. "</p><p font-size=8> <br></p>" .. text
 end
 
@@ -90,7 +90,7 @@ obj_build_a_warehouse = {
    body= "<rt><p line-spacing=3 font-size=12>" ..
 _"* Build a warehouse to the west of the mountains." ..
 "<br>" ..
-_"-> Warehouses are similiar to your headquarters, with the only difference that it is not defended by soldiers. It is often wise to build a warehouse when your territory is growing and the paths to your headquarters get longer and longer." ..
+_"-> Warehouses are similar to your headquarters, with the only difference that it is not defended by soldiers. It is often wise to build a warehouse when your territory is growing and the paths to your headquarters get longer and longer." ..
 "</p></rt>",
 }
 
@@ -144,7 +144,7 @@ _"* Destroy all enforcements of Thron’s two brothers to liberate the throne-ci
 story_msg_1 = {
    posy=1,
    title=_"Close to home",
-   body ="<rt><p font-size=24 font-face=FreeSerif font-weight=bold font-color=2F9131>" ..
+   body ="<rt><p font-size=24 font-face=DejaVuSerif font-weight=bold font-color=2F9131>" ..
 _"Thron looks worried..." ..
 "</p></rt><rt image=map:chieftain.png><p line-spacing=3 font-size=12>" ..
 
@@ -155,7 +155,7 @@ _[[ "These last days we came closer to our capital. Many people have already joi
 story_msg_2 = {
    posy=1,
    title=_"Another cold day",
-   body ="<rt><p font-size=24 font-face=FreeSerif font-weight=bold font-color=2F9131>" ..
+   body ="<rt><p font-size=24 font-face=DejaVuSerif font-weight=bold font-color=2F9131>" ..
 _"Thron looks worried." ..
 "</p></rt><rt image=map:chieftain.png><p line-spacing=3 font-size=12>" ..
 _[[ "The news that a patrol brought is not good to hear. Our spies tell us, that the wartribes still rage in battle but some of the elder soldiers and tribe leaders seem to grow tired of this senseless war. Kalitath, son of Kun is the first warleader to leave Al’thunran, thus leaving his side weak and vulnerable. As my scouts report, he has set foot on the lower grounds around the capitol, securing the outer fortification rings." ]] ..
@@ -165,7 +165,7 @@ _[[ "The news that a patrol brought is not good to hear. Our spies tell us, that
 story_msg_3 = {
    title=_"Doubts",
    posy=1,
-   body ="<rt><p font-size=24 font-face=FreeSerif font-weight=bold font-color=2F9131>" ..
+   body ="<rt><p font-size=24 font-face=DejaVuSerif font-weight=bold font-color=2F9131>" ..
 _"Boldreth shakes his head." ..
 "</p></rt><rt image=map:boldreth.png><p line-spacing=3 font-size=12>" ..
 _[[ "Thron seeks to believe that Kalitath is tired of fighting and will be willing to join us, once we march to re-establish law and order in Al’thunran. But I don’t think so. Kalitath is son to one of the mightiest generals of our forces and his family never quite liked the thought to bow before the banner of Chat’Karuth. Why should he march with his son to reclaim his heritage and the throne?" ]] ..
@@ -183,7 +183,7 @@ _[[ "However, Thron is not willing to listen to my doubts. He seeks to expand ou
 story_msg_5 = {
    posy=1,
    title=_"Another cold day",
-   body= "<rt><p font-size=24 font-face=FreeSerif font-weight=bold font-color=2F9131>" ..
+   body= "<rt><p font-size=24 font-face=DejaVuSerif font-weight=bold font-color=2F9131>" ..
 _"Thron speaks confidently." ..
 "</p></rt><rt image=map:chieftain.png><p line-spacing=3 font-size=12>" ..
 _[[ "The frontier line of my forces has expanded to the edge of the forests. We have a long and cold winter and so many miles behind us. The fortification that we erected around Ondun will guarantee us a fast supply of men and goods and once Al’thunran is in my hands, the two cities will be linked by a good and defendable infrastructure. Still I hope I will not walk alone on this mission, I hope Kalitath son of Kun will follow my call." ]] ..
@@ -200,7 +200,7 @@ _[[ "I have sent men to meet with Kalitath in his fortress. He has barricaded th
 
 order_msg_7_destroy_kalitaths_army = {
    title=_"Your loyal companion",
-   body= "<rt><p font-size=24 font-face=FreeSerif font-weight=bold font-color=FF0000>" ..
+   body= "<rt><p font-size=24 font-face=DejaVuSerif font-weight=bold font-color=FF0000>" ..
 _"Boldreth shouts out!" ..
 "</p></rt><rt image=map:boldreth.png><p line-spacing=3 font-size=12>" ..
 _[[ "This BASTARD! Only one man of our frontier patrol came back alive. He carried a message from Kalitath telling us that he will punish every move of our troops with their own blood! We cannot accept this behaviour. From now on there is war between Kalitath and us!" ]] ..
@@ -216,7 +216,7 @@ _"-> To attack an enemy you must click on the door of an adversary's military bu
 order_msg_7_renegade_fortification = {
    posy = 1,
    title=_"Renegade fortification",
-   body= "<rt><p font-size=24 font-face=FreeSerif font-weight=bold font-color=2F9131>" ..
+   body= "<rt><p font-size=24 font-face=DejaVuSerif font-weight=bold font-color=2F9131>" ..
 _"Thron speaks:" ..
 "</p></rt><rt image=map:chieftain.png><p line-spacing=3 font-size=12>" ..
 _[[ "The traitor has left his armies dying where they lay as he saw that he would not keep my forces back. Kalitath disappeared in the mess of the war, but I don’t care now. Shall he flee and be forgotten for all times as a tribeleader that would not bow before the wooden throne, that is mine to take now. Even more his flight brought us a big benefit: All year Kalitath was so busy fighting that he did not even care to store enough food for all his men. Now that he has fled, their hunger has brought some of his younger followers to desert. This group holds a strong fortification on the main ring. But there is more news: My scouts reported, that the two raging tribes of my brothers are in chaos and have barely noticed the new danger that is about to strike them. However they would not care if they noticed I guess, blinded by rage and hate, there is no sense left in them at all I believe." ]] ..
@@ -226,7 +226,7 @@ _[[ "The traitor has left his armies dying where they lay as he saw that he woul
 briefing_msg_1 = {
    posy=1,
    title=_"Winter ahead",
-   body= "<rt><p font-size=24 font-weight=bold font-face=FreeSerif font-color=2F9131>" ..
+   body= "<rt><p font-size=24 font-weight=bold font-face=DejaVuSerif font-color=2F9131>" ..
 _"Boldreth speaks:" ..
 "</p></rt><rt image=map:boldreth.png><p line-spacing=3 font-size=12>" ..
 _[[ "This morning I found Thron trouble-minded. He returned from his patrol late last night and sat back against a tree watching over the encampment. The number of quarrels and disputes keeps growing and the winter has us firmly in its grip. We should put food in our storage to survive the long, cold winter!" ]] ..
@@ -236,7 +236,7 @@ _[[ "This morning I found Thron trouble-minded. He returned from his patrol late
 order_msg_1_small_food_economy = {
    posy=1,
    title=_"The advisor",
-   body= "<rt><p font-size=24 font-face=FreeSerif font-weight=bold font-color=8080FF>" ..
+   body= "<rt><p font-size=24 font-face=DejaVuSerif font-weight=bold font-color=8080FF>" ..
 _"Khantrukh nods" ..
 "</p></rt><rt image=map:khantrukh.png><p line-spacing=3 font-size=12>" ..
 _[[ "Boldreth is right! We don't have enough food to survive a long, cold winter. We should start to build a well, a fisher's and a hunter's hut. And if we find enough space, we should as well build up a farm and a bakery! One of our farmers seems to be very clever he already got some crops to grow in this cold soil." ]] ..
@@ -342,7 +342,7 @@ _"* Build a helmsmithy to the west of the mountains to provide your soldiers wit
 story_msg_7 = {
    posy=1,
    title=_"Another cold day",
-   body= "<rt><p font-size=24 font-face=FreeSerif font-weight=bold font-color=2F9131>" ..
+   body= "<rt><p font-size=24 font-face=DejaVuSerif font-weight=bold font-color=2F9131>" ..
 _"Thron looks worried." ..
 "</p></rt><rt image=map:chieftain.png><p line-spacing=3 font-size=12>" ..
 _[[ "My brothers and their soldiers are dead and left fire and destruction behind. In none of all the ruins could I find any man or woman of the normal folk and so I just may hope that they fled from this cruel battleground and started a better life somewhere else. Nothing is left from that beauty I remember, only ruins remain from the old capital. I am sorrowful but also relieved. I never hoped to ever see Al'thunran's old beauty again - it was only a few months ago that I wondered whether I would ever be able to set my feet in Al'thunran again. Now the old town is back in my hands and I will not hesitate to rebuild it with all the strength my people have. I can't wait to see it again in it's old beauty." ]] ..

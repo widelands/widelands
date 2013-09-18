@@ -17,25 +17,22 @@
  *
  */
 
-#include "interactive_spectator.h"
+#include "wui/interactive_spectator.h"
 
 #include "chat.h"
-#include "chatoverlay.h"
-#include "fieldaction.h"
-#include "game_chat_menu.h"
-#include "game_main_menu_save_game.h"
-#include "game_options_menu.h"
 #include "gamecontroller.h"
-#include "general_statistics_menu.h"
 #include "graphic/graphic.h"
 #include "i18n.h"
-
 #include "ui_basic/editbox.h"
 #include "ui_basic/multilinetextarea.h"
 #include "ui_basic/textarea.h"
 #include "ui_basic/unique_window.h"
-
 #include "upcast.h"
+#include "wui/fieldaction.h"
+#include "wui/game_chat_menu.h"
+#include "wui/game_main_menu_save_game.h"
+#include "wui/game_options_menu.h"
+#include "wui/general_statistics_menu.h"
 
 /**
  * Setup the replay UI for the given game.
@@ -43,11 +40,11 @@
 Interactive_Spectator::Interactive_Spectator
 	(Widelands::Game & _game, Section & global_s, bool const multiplayer)
 	:
-	Interactive_GameBase(_game, global_s, OBSERVER, multiplayer),
+	Interactive_GameBase(_game, global_s, OBSERVER, multiplayer, multiplayer),
 
 #define INIT_BTN(picture, name, tooltip)                            \
  TOOLBAR_BUTTON_COMMON_PARAMETERS(name),                                      \
- g_gr->get_picture(PicMod_Game, "pics/" picture ".png"),                      \
+ g_gr->images().get("pics/" picture ".png"),                      \
  tooltip                                                                      \
 
 	m_toggle_chat
@@ -71,20 +68,18 @@ Interactive_Spectator::Interactive_Spectator
 	m_toggle_minimap.sigclicked.connect(boost::bind(&Interactive_Spectator::toggle_minimap, this));
 
 	m_toolbar.set_layout_toplevel(true);
-	m_toolbar.add(&m_toggle_chat,            UI::Box::AlignLeft);
-	if (!multiplayer) {
+	if (!is_multiplayer()) {
 		m_toolbar.add(&m_exit,                UI::Box::AlignLeft);
 		m_toolbar.add(&m_save,                UI::Box::AlignLeft);
 	} else
 		m_toolbar.add(&m_toggle_options_menu, UI::Box::AlignLeft);
 	m_toolbar.add(&m_toggle_statistics,      UI::Box::AlignLeft);
 	m_toolbar.add(&m_toggle_minimap,         UI::Box::AlignLeft);
+	m_toolbar.add(&m_toggle_chat,            UI::Box::AlignLeft);
 
 	// TODO : instead of making unneeded buttons invisible after generation,
 	// they should not at all be generated. -> implement more dynamic toolbar UI
-	if (multiplayer) {
-		m_chatOverlay =
-			new ChatOverlay(this, 10, 25, get_w() - 10, get_h() - 25);
+	if (is_multiplayer()) {
 		m_exit.set_visible(false);
 		m_exit.set_enabled(false);
 		m_save.set_visible(false);
@@ -174,28 +169,30 @@ void Interactive_Spectator::toggle_chat()
 
 void Interactive_Spectator::exit_btn()
 {
-	if (m_chatenabled) //  == multiplayer
+	if (is_multiplayer()) {
 		return;
+	}
 	end_modal(0);
 }
 
 
 void Interactive_Spectator::save_btn()
 {
-	if (m_chatenabled) //  == multiplayer
+	if (is_multiplayer()) {
 		return;
+	}
 	if (m_mainm_windows.savegame.window)
 		delete m_mainm_windows.savegame.window;
 	else {
-		game().gameController()->setDesiredSpeed(0);
 		new Game_Main_Menu_Save_Game(*this, m_mainm_windows.savegame);
 	}
 }
 
 
 void Interactive_Spectator::toggle_options_menu() {
-	if (!m_chatenabled) //  == !multiplayer
+	if (!is_multiplayer()) {
 		return;
+	}
 	if (m_options.window)
 		delete m_options.window;
 	else
@@ -261,7 +258,6 @@ bool Interactive_Spectator::handle_key(bool const down, SDL_keysym const code)
 
 		case SDLK_s:
 			if (code.mod & (KMOD_LCTRL | KMOD_RCTRL)) {
-				game().gameController()->setDesiredSpeed(0);
 				new Game_Main_Menu_Save_Game(*this, m_mainm_windows.savegame);
 			} else
 				set_display_flag

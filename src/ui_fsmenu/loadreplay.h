@@ -20,20 +20,20 @@
 #ifndef FULLSCREEN_MENU_LOADREPLAY_H
 #define FULLSCREEN_MENU_LOADREPLAY_H
 
-#include "base.h"
-
+#include "ui_fsmenu/base.h"
 #include "ui_basic/button.h"
 #include "ui_basic/listselect.h"
 #include "ui_basic/textarea.h"
 
-
+namespace Widelands
+{struct Game;}
 /**
  * Select a replay from a list of replays.
  */
 struct Fullscreen_Menu_LoadReplay : public Fullscreen_Menu_Base {
-	Fullscreen_Menu_LoadReplay();
+	Fullscreen_Menu_LoadReplay(Widelands::Game &);
 
-	std::string const & filename() {return m_filename;}
+	const std::string & filename() {return m_filename;}
 
 	void clicked_ok();
 	void clicked_delete();
@@ -52,13 +52,17 @@ private:
 	UI::Button                             m_back;
 	UI::Button                             m_ok;
 	UI::Button                             m_delete;
-	UI::Listselect<std::string>                     m_list;
-	UI::Textarea                                    m_title;
-	UI::Textarea                                    m_label_mapname;
-	UI::Textarea                                    m_tamapname;
-	UI::Textarea                                    m_label_gametime;
-	UI::Textarea                                    m_tagametime;
-	std::string                                     m_filename;
+	UI::Listselect<std::string>            m_list;
+	UI::Textarea                           m_title;
+	UI::Textarea                           m_label_mapname;
+	UI::Textarea                           m_tamapname;
+	UI::Textarea                           m_label_gametime;
+	UI::Textarea                           m_tagametime;
+	UI::Textarea                           m_label_players;
+	UI::Textarea                           m_ta_players;
+	UI::Textarea                           m_ta_win_condition;
+	std::string                            m_filename;
+	Widelands::Game &                      m_game;
 };
 
 

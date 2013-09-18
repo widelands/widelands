@@ -17,15 +17,15 @@
  *
  */
 
-#include "richtext.h"
+#include "graphic/richtext.h"
 
-#include "font.h"
-#include "graphic.h"
-#include "picture.h"
+#include "graphic/font.h"
+#include "graphic/font_handler.h"
+#include "graphic/graphic.h"
+#include "graphic/image.h"
+#include "graphic/rendertarget.h"
 #include "rect.h"
 #include "text_parser.h"
-#include "rendertarget.h"
-#include "font_handler.h"
 
 namespace UI {
 
@@ -51,7 +51,7 @@ struct Element {
 };
 
 struct ImageElement : Element {
-	ImageElement(const Rect & _bbox, const PictureID & _image)
+	ImageElement(const Rect & _bbox, const Image* _image)
 		: Element(_bbox), image(_image) {}
 
 	virtual void draw(RenderTarget & dst)
@@ -59,7 +59,7 @@ struct ImageElement : Element {
 		dst.blit(Point(0, 0), image);
 	}
 
-	PictureID image;
+	const Image* image;
 };
 
 struct TextlineElement : Element {
@@ -139,7 +139,7 @@ RichTextImpl::~RichTextImpl()
  */
 void RichTextImpl::clear()
 {
-	while (elements.size()) {
+	while (!elements.empty()) {
 		delete elements.back();
 		elements.pop_back();
 	}
@@ -151,9 +151,9 @@ void RichTextImpl::clear()
  * Set the width for the rich text field.
  * Default width is undefined. This must be called before @ref parse.
  */
-void RichText::set_width(uint32_t width)
+void RichText::set_width(uint32_t gwidth)
 {
-	m->width = width;
+	m->width = gwidth;
 }
 
 /**
@@ -218,7 +218,16 @@ struct TextBuilder {
 	/// parts of a line onto the same text baseline).
 	std::vector<Elt> elements;
 
-	TextBuilder(RichTextImpl & _rti) : rti(_rti) {}
+	TextBuilder(RichTextImpl & _rti) :
+		rti(_rti),
+		images_width(0),
+		images_height(0),
+		maxwidth(0),
+		text_y(0),
+		linewidth(0),
+		spacewidth(0),
+		linespacing(0)
+	{}
 
 	/**
 	 * Update data that is specific to the current @ref textblock.
@@ -324,19 +333,19 @@ void RichText::parse(const std::string & rtext)
 		text.images_width = 0;
 
 		for
-			(std::vector<std::string>::const_iterator img_it = cur_block_images.begin();
-			 img_it != cur_block_images.end();
-			 ++img_it)
+			(std::vector<std::string>::const_iterator image_it = cur_block_images.begin();
+			 image_it != cur_block_images.end();
+			 ++image_it)
 		{
-			const PictureID image = g_gr->get_picture(PicMod_Game, *img_it);
+			const Image* image = g_gr->images().get(*image_it);
 			if (!image)
 				continue;
 
 			Rect bbox;
 			bbox.x = text.images_width;
 			bbox.y = m->height;
-			bbox.w = image->get_w();
-			bbox.h = image->get_h();
+			bbox.w = image->width();
+			bbox.h = image->height();
 
 			text.images_height = std::max(text.images_height, bbox.h);
 			text.images_width += bbox.w;
@@ -383,7 +392,7 @@ void RichText::parse(const std::string & rtext)
 			while (word_cnt < words.size() || br_it != line_breaks.end()) {
 				if (br_it != line_breaks.end() && *br_it <= word_cnt) {
 					text.advance_line();
-					br_it++;
+					++br_it;
 					continue;
 				}
 
@@ -463,7 +472,7 @@ void RichText::parse(const std::string & rtext)
  * @note this function may draw content outside the box given offset
  * and @ref width and @ref height, if there were wrapping problems.
  */
-void RichText::draw(RenderTarget & dst, Point offset, bool background)
+void RichText::draw(RenderTarget & dst, const Point& offset, bool background)
 {
 	for
 		(std::vector<Element *>::const_iterator elt = m->elements.begin();

@@ -20,22 +20,37 @@
 #ifndef MESSAGE_H
 #define MESSAGE_H
 
-#include "widelands.h"
-#include "widelands_geometry.h"
-
 #include <string>
+#include <boost/signals2.hpp>
+
+#include "logic/widelands.h"
+#include "logic/widelands_geometry.h"
 
 namespace Widelands {
 
 struct Message {
 	enum Status {New, Read, Archived};
+	/**
+	 * A new message to be displayed to the player
+	 * \param msgsender The message sender
+	 * \param sent_time The (game) time at which the message is sent
+	 * \param d The duration after which the message will expire
+	 * \param t The message title
+	 * \param b The message body
+	 * \param c The message coords. The player will be able to taken there.
+	 * Defaults to Coords::Null()
+	 * \param ser A Map_Object serial. If non null, the message will expire once
+	 * the object is removed from the game. Defaults to 0
+	 * \param s The message status. Defaults to Status::New
+	 */
 	Message
-		(std::string const &       msgsender,
+		(const std::string &       msgsender,
 		 uint32_t                  sent_time,
 		 Duration                  d,
-		 std::string const &       t,
-		 std::string const &       b,
+		 const std::string &       t,
+		 const std::string &       b,
 		 Widelands::Coords   const c = Coords::Null(),
+		 Widelands::Serial         ser = 0,
 		 Status                    s = New)
 		:
 		m_sender(msgsender),
@@ -44,6 +59,7 @@ struct Message {
 		m_sent    (sent_time),
 		m_duration(d),
 		m_position(c),
+		m_serial  (ser),
 		m_status  (s)
 	{}
 
@@ -51,8 +67,9 @@ struct Message {
 	uint32_t            sent    () const            {return m_sent;}
 	Duration            duration() const            {return m_duration;}
 	const std::string & title() const throw ()      {return m_title;}
-	std::string const & body () const               {return m_body;}
+	const std::string & body () const               {return m_body;}
 	Widelands::Coords   position() const            {return m_position;}
+	Widelands::Serial   serial() const              {return m_serial;}
 	Status              status  () const {return m_status;}
 	Status set_status(Status const s) {return m_status = s;}
 
@@ -63,6 +80,7 @@ private:
 	uint32_t          m_sent;
 	Duration          m_duration; /// will expire after this duration
 	Widelands::Coords m_position;
+	Widelands::Serial m_serial; // serial to map object
 	Status            m_status;
 };
 

@@ -34,8 +34,8 @@
 #include "logic/trainingsite.h"
 #include "logic/warehouse.h"
 #include "logic/worker.h"
+#include "scripting/luna.h"
 
-#include "luna.h"
 
 namespace Widelands {
 	struct Soldier_Descr;
@@ -55,6 +55,8 @@ class L_MapModuleClass : public LunaClass {
 class L_Map : public L_MapModuleClass {
 public:
 	LUNA_CLASS_HEAD(L_Map);
+
+	virtual ~L_Map() {}
 
 	L_Map() {}
 	L_Map(lua_State * L) {
@@ -118,8 +120,10 @@ public:
 	 * attributes
 	 */
 	int get___hash(lua_State *);
-	int get_serial(lua_State * L);
-	int get_type(lua_State * L);
+	int get_serial(lua_State *);
+	int get_type(lua_State *);
+	int get_name(lua_State *);
+	int get_descname(lua_State *);
 
 	/*
 	 * Lua Methods
@@ -150,7 +154,6 @@ public:
 	 * Properties
 	 */
 	int get_size(lua_State * L);
-	int get_name(lua_State * L);
 	int get_fields(lua_State * L);
 
 	/*
@@ -227,9 +230,9 @@ struct L_HasWares {
 
 protected:
 	WaresSet m_parse_get_wares_arguments
-		(lua_State *, Widelands::Tribe_Descr const &, bool *);
+		(lua_State *, const Widelands::Tribe_Descr &, bool *);
 	WaresMap m_parse_set_wares_arguments
-		(lua_State *, Widelands::Tribe_Descr const &);
+		(lua_State *, const Widelands::Tribe_Descr &);
 };
 struct L_HasWorkers {
 	virtual ~L_HasWorkers() {}
@@ -243,9 +246,9 @@ struct L_HasWorkers {
 
 protected:
 	WorkersSet m_parse_get_workers_arguments
-		(lua_State *, Widelands::Tribe_Descr const &, bool *);
+		(lua_State *, const Widelands::Tribe_Descr &, bool *);
 	WorkersMap m_parse_set_workers_arguments
-		(lua_State *, Widelands::Tribe_Descr const &);
+		(lua_State *, const Widelands::Tribe_Descr &);
 };
 
 struct L_HasSoldiers {
@@ -289,9 +292,9 @@ struct L_HasSoldiers {
 
 protected:
 	int m_handle_get_soldiers
-		(lua_State *, Widelands::Soldier_Descr const &, SoldiersList const &);
+		(lua_State *, const Widelands::Soldier_Descr &, const SoldiersList &);
 	SoldiersMap m_parse_set_soldiers_arguments
-		(lua_State *, Widelands::Soldier_Descr const &);
+		(lua_State *, const Widelands::Soldier_Descr &);
 	int m_get_soldier_levels
 		(lua_State *, int, const Widelands::Soldier_Descr &, SoldierDescr &);
 };
@@ -551,7 +554,6 @@ public:
 	/*
 	 * Properties
 	 */
-	int get_name(lua_State *);
 	int has_caps(lua_State *);
 
 	/*
@@ -690,9 +692,9 @@ class L_PlayerSlot : public L_MapModuleClass {
 public:
 	LUNA_CLASS_HEAD(L_PlayerSlot);
 
-	L_PlayerSlot() {}
+	L_PlayerSlot() : m_plr(0) {}
 	L_PlayerSlot(Widelands::Player_Number plr) : m_plr(plr) {}
-	L_PlayerSlot(lua_State * L) {
+	L_PlayerSlot(lua_State * L) : m_plr(0) {
 		report_error(L, "Cannot instantiate a 'PlayerSlot' directly!");
 	}
 	virtual ~L_PlayerSlot() {}

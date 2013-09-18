@@ -17,12 +17,13 @@
  *
  */
 
-#include "editor_player_menu_allowed_buildings_menu.h"
+#include "editor/ui_menus/editor_player_menu_allowed_buildings_menu.h"
 
+#include "graphic/graphic.h"
 #include "i18n.h"
 #include "logic/map.h"
-#include "logic/tribe.h"
 #include "logic/player.h"
+#include "logic/tribe.h"
 
 using Widelands::Building_Index;
 
@@ -79,7 +80,7 @@ Editor_Player_Menu_Allowed_Buildings_Menu
 		 m_allowed.get_y()
 		 + (list_height - middle_button_height * 2 - vspacing) / 2,
 		 middle_button_width, middle_button_height,
-		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
+		 g_gr->images().get("pics/but1.png"),
 		 ("->"),
 		 _("Forbid"),
 		 false),
@@ -88,7 +89,7 @@ Editor_Player_Menu_Allowed_Buildings_Menu
 		 m_forbid_button.get_x(),
 		 m_forbid_button.get_y() + middle_button_height + vspacing,
 		 middle_button_width, middle_button_height,
-		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
+		 g_gr->images().get("pics/but1.png"),
 		 _("<-"),
 		 _("Allow"),
 		 false)
@@ -107,10 +108,10 @@ Editor_Player_Menu_Allowed_Buildings_Menu
 	m_forbidden.double_clicked.connect
 		(boost::bind(&Editor_Player_Menu_Allowed_Buildings_Menu::forbidden_double_clicked, this, _1));
 
-	Widelands::Tribe_Descr const & tribe = player.tribe();
+	const Widelands::Tribe_Descr & tribe = player.tribe();
 	Building_Index const nr_buildings = tribe.get_nrbuildings();
 	for (Building_Index i = Building_Index::First(); i < nr_buildings; ++i) {
-		Widelands::Building_Descr const & building =
+		const Widelands::Building_Descr & building =
 			*tribe.get_building_descr(i);
 		if (not building.is_enhanced() and not building.is_buildable())
 			continue;
@@ -152,7 +153,7 @@ void Editor_Player_Menu_Allowed_Buildings_Menu::clicked(const bool allow) {
 
 	Building_Index const building_index = source.get_selected();
 	source.remove_selected();
-	Widelands::Building_Descr const & building =
+	const Widelands::Building_Descr & building =
 		*m_player.tribe().get_building_descr(building_index);
 	target.add
 		(building.descname().c_str(),

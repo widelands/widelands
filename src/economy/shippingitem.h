@@ -27,14 +27,14 @@
 
 namespace Widelands {
 
-struct Economy;
+class Economy;
 struct Game;
 struct Map_Map_Object_Loader;
 struct Map_Map_Object_Saver;
-struct Map_Object;
+class Map_Object;
 struct PortDock;
-struct WareInstance;
-struct Worker;
+class WareInstance;
+class Worker;
 
 /**
  * Wares and workers that are transported through the ship system are

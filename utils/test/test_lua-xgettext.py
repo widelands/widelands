@@ -254,6 +254,21 @@ class TestVerySimpleMultilineString(_TestLua_GetText_SingleFile):
     ]
     code = """_ [[ "There is an old saying:<br> blah ]]"""
 
+class TestRealWorldExample(_TestLua_GetText_SingleFile):
+    items = [
+     ("A young man approaches", 0, 2),
+("May Satul warm you, Jundlina. My name is Ostur and I construct ships. I have\ninvented a new kind of ship: smaller than those we are used to, but much\nsturdier. If we build them correctly, I am confident that we can go with them\na much longer distance and maybe escape from Lutas' influence.\n", 0, 4)
+]
+    code ="""{
+   title = _ "A young man approaches",
+   body = ostur(_
+[[May Satul warm you, Jundlina. My name is Ostur and I construct ships. I have
+invented a new kind of ship: smaller than those we are used to, but much
+sturdier. If we build them correctly, I am confident that we can go with them
+a much longer distance and maybe escape from Lutas' influence.
+]])
+},
+"""
 
 if __name__ == '__main__':
    unittest.main()

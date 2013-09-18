@@ -17,11 +17,10 @@
  *
  */
 
-#include "game.h"
-#include "game_data_error.h"
+#include "logic/cmd_calculate_statistics.h"
 
-#include "cmd_calculate_statistics.h"
-
+#include "logic/game.h"
+#include "logic/game_data_error.h"
 
 namespace Widelands {
 
@@ -43,7 +42,7 @@ void Cmd_CalculateStatistics::Read
 		} else
 			throw game_data_error
 				(_("unknown/unhandled version %u"), packet_version);
-	} catch (_wexception const & e) {
+	} catch (const _wexception & e) {
 		throw game_data_error(_("calculate statistics function: %s"), e.what());
 	}
 }

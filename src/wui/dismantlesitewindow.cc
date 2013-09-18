@@ -18,10 +18,11 @@
  */
 
 
-#include "buildingwindow.h"
+#include "graphic/graphic.h"
 #include "logic/dismantlesite.h"
 #include "ui_basic/progressbar.h"
 #include "ui_basic/tabpanel.h"
+#include "wui/buildingwindow.h"
 
 static const char pic_tab_wares[] = "pics/menu_tab_wares.png";
 
@@ -65,7 +66,7 @@ DismantleSite_Window::DismantleSite_Window
 	for (uint32_t i = 0; i < cs.get_nrwaresqueues(); ++i)
 		Building_Window::create_ware_queue_panel(&box, cs, cs.get_waresqueue(i), true);
 
-	get_tabs()->add("wares", g_gr->get_picture(PicMod_UI, pic_tab_wares), &box);
+	get_tabs()->add("wares", g_gr->images().get(pic_tab_wares), &box, _("Building materials"));
 }
 
 
@@ -78,7 +79,7 @@ void DismantleSite_Window::think()
 {
 	Building_Window::think();
 
-	Widelands::DismantleSite const & ds =
+	const Widelands::DismantleSite & ds =
 		ref_cast<Widelands::DismantleSite, Widelands::Building>(building());
 
 	m_progress->set_state(ds.get_built_per64k());

@@ -17,11 +17,12 @@
  *
  */
 
+#include "graphic/graphic.h"
 #include "logic/trainingsite.h"
-#include "productionsitewindow.h"
-#include "soldiercapacitycontrol.h"
-#include "soldierlist.h"
 #include "ui_basic/tabpanel.h"
+#include "wui/productionsitewindow.h"
+#include "wui/soldiercapacitycontrol.h"
+#include "wui/soldierlist.h"
 
 using Widelands::TrainingSite;
 using Widelands::atrAttack;
@@ -52,7 +53,7 @@ TrainingSite_Window::TrainingSite_Window
 ProductionSite_Window  (parent, ts, registry)
 {
 	get_tabs()->add
-		("soldiers", g_gr->get_picture(PicMod_Game, pic_tab_military),
+		("soldiers", g_gr->images().get(pic_tab_military),
 		 create_soldier_list(*get_tabs(), parent, trainingsite()),
 		 _("Soldiers in training"));
 }
@@ -60,11 +61,6 @@ ProductionSite_Window  (parent, ts, registry)
 void TrainingSite_Window::create_capsbuttons(UI::Box * buttons)
 {
 	ProductionSite_Window::create_capsbuttons(buttons);
-
-	buttons->add_space(8);
-	buttons->add
-		(create_soldier_capacity_control(*buttons, igbase(), trainingsite()),
-		 UI::Box::AlignCenter);
 }
 
 /*

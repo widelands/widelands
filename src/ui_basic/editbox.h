@@ -20,12 +20,12 @@
 #ifndef UI_EDITBOX_H
 #define UI_EDITBOX_H
 
-#include "align.h"
-#include "button.h"
-
-#include <boost/scoped_ptr.hpp>
-#include <boost/signal.hpp>
 #include <SDL_keyboard.h>
+#include <boost/signals2.hpp>
+
+#include "align.h"
+#include "ui_basic/button.h"
+#include "graphic/graphic.h"
 
 #define CHAT_HISTORY_SIZE 5
 
@@ -40,22 +40,20 @@ struct EditBox : public Panel {
 	EditBox
 		(Panel *,
 		 int32_t x, int32_t y, uint32_t w, uint32_t h,
-		 PictureID const & background =
-		 	g_gr->get_picture(PicMod_UI, "pics/but2.png"),
-		 Align align = Align_Center);
+		 const Image* background = g_gr->images().get("pics/but2.png"), Align align = Align_Center);
 	virtual ~EditBox();
 
-	boost::signal<void ()> changed;
-	boost::signal<void ()> ok;
-	boost::signal<void ()> cancel;
+	boost::signals2::signal<void ()> changed;
+	boost::signals2::signal<void ()> ok;
+	boost::signals2::signal<void ()> cancel;
 
-	std::string const & text() const;
-	void setText(std::string const &);
+	const std::string & text() const;
+	void setText(const std::string &);
 	uint32_t maxLength() const;
 	void setMaxLength(uint32_t);
 	Align align() const;
 	void setAlign(Align);
-	void set_font(std::string const & name, int32_t size, RGBColor color);
+	void set_font(const std::string & name, int32_t size, RGBColor color);
 
 	void activate_history(bool activate) {m_history_active = activate;}
 
@@ -66,7 +64,7 @@ struct EditBox : public Panel {
 	void draw(RenderTarget &);
 
 private:
-	boost::scoped_ptr<EditBoxImpl> m;
+	std::unique_ptr<EditBoxImpl> m;
 
 	void check_caret();
 	void insert(SDL_keysym code);

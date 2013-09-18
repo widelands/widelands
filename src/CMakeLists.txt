@@ -62,8 +62,6 @@ add_library (widelands_all STATIC ${WL_SRCS_CC} ${WL_SRCS_H})
 set (WL_SOURCES_ROOT ${CMAKE_CURRENT_SOURCE_DIR})
 set (WL_SOURCES_BINARY_ROOT ${CMAKE_CURRENT_BINARY_DIR})
 
-configure_file (${CMAKE_CURRENT_SOURCE_DIR}/CppCheckSuppressions.cmake ${CMAKE_CURRENT_BINARY_DIR}/CppCheckSuppressions)
-
 if (CMAKE_BUILD_TYPE STREQUAL Debug)
   find_package (PythonInterp REQUIRED)
   set (commands "")
@@ -82,18 +80,6 @@ if (CMAKE_BUILD_TYPE STREQUAL Debug)
       COMMENT "Checking ${sourcewithoutpath} with CodeCheck"
     )
     list(APPEND commands ${CMAKE_CURRENT_BINARY_DIR}/codecheck_${sourcenoslash})
-    if (WL_EXTRAWARNINGS)
-      add_custom_command(
-	OUTPUT "${CMAKE_CURRENT_BINARY_DIR}/cppcheck_${sourcenoslash}"
-	COMMAND ${CMAKE_COMMAND} -DWL_SOURCES_BINARY_ROOT=${WL_SOURCES_BINARY_ROOT} -Dincludedir=${CMAKE_SOURCE_DIR}/src -Dsourcefile=${sourcefile} -DCMAKE_CURRENT_SOURCE_DIR=${CMAKE_CURRENT_SOURCE_DIR} -DCMAKE_CURRENT_BINARY_DIR=${CMAKE_CURRENT_BINARY_DIR} -Dstamp=cppcheck_${sourcenoslash} -P ${CMAKE_SOURCE_DIR}/src/CppCheck.cmake
-	DEPENDS ${sourcefile}
-	COMMENT "Checking ${sourcewithoutpath} with CppCheck"
-      )
-      list(APPEND commands ${CMAKE_CURRENT_BINARY_DIR}/cppcheck_${sourcenoslash})
-#        set_source_files_properties(${sourcefile} PROPERTIES OBJECT_DEPENDS "${CMAKE_CURRENT_BINARY_DIR}/codecheck_${stamp};${CMAKE_CURRENT_BINARY_DIR}/cppcheck_${stamp}")
-    else (WL_EXTRAWARNINGS)
-#        set_source_files_properties(${sourcefile} PROPERTIES OBJECT_DEPENDS "${CMAKE_CURRENT_BINARY_DIR}/codecheck_${stamp}")
-    endif (WL_EXTRAWARNINGS)
   endforeach(sourcefile ${WL_CODECHECK_SRCS})
   add_custom_target(codecheck DEPENDS ${commands})
   add_dependencies(widelands codecheck)
@@ -101,9 +87,21 @@ endif (CMAKE_BUILD_TYPE STREQUAL Debug)
 
 #the subdirectories are only used for test definition
 #temporarily disabled the 'old' tests due to incompatibility
-#add_subdirectory(economy)
-#add_subdirectory(io)
-add_subdirectory(scripting)
+if (WL_UNIT_TESTS)
+  # Tests need to link with SDL library without main
+  set(TEST_EXTRA_SOURCES ${CMAKE_CURRENT_BINARY_DIR}/build_info.cc)
+  set(TEST_EXTRA_LIBS ${SDL_LIBRARY} )
+  list(REMOVE_ITEM TEST_EXTRA_LIBS  ${SDLMAIN_LIBRARY}) 
+
+  add_subdirectory(economy)
+  add_subdirectory(io)
+  add_subdirectory(scripting)
+endif (WL_UNIT_TESTS)
+
+if (NOT MINIZIP_FOUND)
+  add_subdirectory(minizip)
+  target_link_libraries(widelands_all wl_minizip)
+endif (NOT MINIZIP_FOUND)
 
 target_link_libraries(widelands_all ${SDLIMAGE_LIBRARY})
 target_link_libraries(widelands_all ${SDLMIXER_LIBRARY})
@@ -113,13 +111,15 @@ target_link_libraries(widelands_all ${SDLGFX_LIBRARY})
 target_link_libraries(widelands_all ${LUA_LIBRARY})
 target_link_libraries(widelands_all ${PNG_LIBRARY})
 target_link_libraries(widelands_all ${ZLIB_LIBRARY})
-target_link_libraries(widelands_all ${GGZ_CORE_LIBRARY})
 target_link_libraries(widelands_all ${OPENGL_gl_LIBRARY})
 target_link_libraries(widelands_all ${GLEW_LIBRARY})
-target_link_libraries(widelands_all ${Boost_LIBRARIES})
-if (CMAKE_SYSTEM_NAME MATCHES "FreeBSD")
+target_link_libraries(widelands_all ${Boost_SIGNALS_LIBRARY})
+if (MINIZIP_FOUND)
+  target_link_libraries(widelands_all ${MINIZIP_LIBRARY})
+endif (MINIZIP_FOUND)
+if (CMAKE_SYSTEM_NAME MATCHES "FreeBSD" OR CMAKE_SYSTEM_NAME MATCHES "OpenBSD")
   target_link_libraries(widelands_all ${EXECINFO_LIBRARY})
-endif (CMAKE_SYSTEM_NAME MATCHES "FreeBSD")
+endif (CMAKE_SYSTEM_NAME MATCHES "FreeBSD" OR CMAKE_SYSTEM_NAME MATCHES "OpenBSD")
 
 if (DEFINED WL_EXTRA_LINK_LIBRARIES)
   target_link_libraries(widelands_all ${WL_EXTRA_LINK_LIBRARIES})
@@ -128,17 +128,15 @@ endif (DEFINED WL_EXTRA_LINK_LIBRARIES)
 target_link_libraries(widelands widelands_all)
 target_link_libraries(widelands ${SDL_LIBRARY})
 
-if (APPLE OR WIN32)
+if (APPLE OR WIN32 OR CMAKE_SYSTEM_NAME MATCHES "FreeBSD")
   target_link_libraries(widelands_all ${INTL_LIBRARY})
-endif (APPLE OR WIN32)
+endif (APPLE OR WIN32 OR CMAKE_SYSTEM_NAME MATCHES "FreeBSD")
 
 if (WIN32)
   if (DEFINED MSVC)
     target_link_libraries(widelands_all ws2_32)
 
-    #GGZ on MSVC using 3rdparty bundle needs expat and iconv library
-    find_package(EXPAT REQUIRED)
-    target_link_libraries(widelands_all ${EXPAT_LIBRARY})
+    #gettext on MSVC using 3rdparty bundle needs iconv library
     find_library(ICONV_LIBRARY iconv libiconv REQUIRED)
     target_link_libraries(widelands_all ${ICONV_LIBRARY})
 

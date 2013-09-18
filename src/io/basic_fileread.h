@@ -20,15 +20,15 @@
 #ifndef BASIC_FILEREAD_H
 #define BASIC_FILEREAD_H
 
-#include "io/filesystem/filesystem.h"
-#include "machdep.h"
-#ifdef WIN32
-#else
+#include <cassert>
+#include <limits>
+
+#ifndef _WIN32
 #include <sys/mman.h>
 #endif
 
-#include <cassert>
-#include <limits>
+#include "io/filesystem/filesystem.h"
+#include "machdep.h"
 
 /// Can be used to read a file. It works quite naively by reading the entire
 /// file into memory. Convenience functions are available for endian-safe
@@ -50,7 +50,7 @@ template<typename Base> struct basic_FileRead : public Base {
 	struct File_Boundary_Exceeded : public Base::_data_error {
 		File_Boundary_Exceeded() : Base::_data_error("end of file") {}
 	};
-	basic_FileRead () : data(0), m_fast(0) {}; /// Create the object with nothing to read.
+	basic_FileRead () : data(0), length(0), m_fast(0) {}; /// Create the object with nothing to read.
 	~basic_FileRead() {if (data) Close();} /// Close the file if open.
 
 	/// Loads a file into memory. Reserves one additional byte which is zeroed,
@@ -79,7 +79,7 @@ template<typename Base> struct basic_FileRead : public Base {
 	void Close() {
 		assert(data);
 		if (m_fast) {
-#ifdef WIN32
+#ifdef _WIN32
 			assert(false);
 #else
 			munmap(data, length);
@@ -106,7 +106,7 @@ template<typename Base> struct basic_FileRead : public Base {
 	/// does not specify a position.
 	Pos GetPos() const throw () {return filepos;}
 
-	size_t Data(void * const dst, const size_t bufsize) {
+	size_t Data(void * dst, size_t bufsize) {
 		assert(data);
 		size_t read = 0;
 		for (; read < bufsize and filepos < length; ++read, ++filepos)

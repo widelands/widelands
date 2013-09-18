@@ -17,6 +17,23 @@ from time import time
 import os
 import re
 
+def strip_multi_line_c_comments(input_lines):
+    """
+    Remove multi-line C comments from a one-line-per-entry list of strings,
+    but preserve new lines so that line-numbering is not affected.
+    """
+    new_lines = "".join(input_lines)
+
+    def fixup(match):
+        "Remove everything except newlines"
+        orig_string = match.string[match.start():match.end()]
+        return "\n" * orig_string.count("\n")
+
+    # Strip multi-line c-style comments
+    new_lines = re.sub(r"/\*.*?\*/", fixup, new_lines, flags=re.DOTALL | re.M)
+
+    return new_lines.splitlines(True)
+
 class Preprocessor(object):
     """
     This class knows how to remove certain
@@ -62,32 +79,12 @@ $)
             line = self._literal_chars.sub(lambda k: "'%s'" % ((len(k.group(0))-2)*" "),line)
             line = self._literal_strings.sub(lambda k: '"%s"' % ((len(k.group(0))-2)*" "),line)
 
-            # Strip comments and strings
-            # Multiline comments
-            start_idx = line.find('/*')
-            if not in_comment:
-                if start_idx != -1:
-                    stop_idx = line.find("*/",start_idx+2)
-                    if stop_idx != -1:
-                        line = line[:start_idx] + line[stop_idx+2:]
-                    else:
-                        line = line[:start_idx].strip()
-                        in_comment = True
-
-            if in_comment:
-                stop_idx = line.find('*/')
-                if stop_idx == -1:
-                    line = ""
-                else:
-                    line = line[stop_idx+2:].strip()
-                    in_comment = False
-
-            # Single line comments
-            idx = line.find('//')
-            if idx != -1:
-                line = line[:idx].strip()
+            # Remove whitespace followed by single-line comment (old behaviour)
+            line = re.sub(r"\s*//.*$", "", line)
 
             new_lines.append( line )
+
+        new_lines = strip_multi_line_c_comments(new_lines)
 
         self._stripped_comments_and_strings[fn] = new_lines
 
@@ -347,7 +344,7 @@ if __name__ == '__main__':
                 print("%s %s    %s" % (percentage,time,n))
 
     def main():
-        opts, files = getopt.getopt(sys.argv[1:], "hbcp", ["help", "benchmark","color", "colour", "profile"])
+        opts, given_paths = getopt.getopt(sys.argv[1:], "hbcp", ["help", "benchmark","color", "colour", "profile"])
 
         benchmark = False
         color = False
@@ -365,15 +362,31 @@ if __name__ == '__main__':
             if o in ('-p','--profile'):
                 profile = True
 
-        if not len(files):
+        if not len(given_paths):
             usage()
             sys.exit(0)
 
+        given_paths = set(given_paths)
+        files = set()
+        for f in given_paths:
+            if os.path.isdir(f):
+                for (dirpath, dirnames, filenames) in os.walk(f):
+                    for fn in filenames:
+                        files.add(os.path.abspath(os.path.join(dirpath, fn)))
+                continue
+            files.add(os.path.abspath(f))
+
+        source_files = []
+        for f in files:
+            extension = os.path.splitext(f)[-1].lower()
+            if extension in ('.cc', '.h'):
+                source_files.append(f)
+
         if profile:
             import cProfile
-            cProfile.runctx("check_files(files,color,benchmark)",globals(),locals(),"Profile.prof")
+            cProfile.runctx("check_files(source_files,color,benchmark)",globals(),locals(),"Profile.prof")
         else:
-            check_files(files,color,benchmark)
+            check_files(source_files,color,benchmark)
 
     main()
 

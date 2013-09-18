@@ -22,10 +22,12 @@
 
 #include "economy/route.h"
 #include "graphic/animation.h"
+#include "graphic/diranimations.h"
+#include "logic/instances.h"
 #include "point.h"
+#include "port.h"
+#include "logic/walkingdir.h"
 #include "writeHTML.h"
-#include "instances.h"
-#include "walkingdir.h"
 
 namespace Widelands {
 struct Map;
@@ -122,10 +124,10 @@ struct Bob : public Map_Object {
 
 	struct State;
 	typedef void (Bob::*Ptr)(Game &, State &);
-	typedef void (Bob::*PtrSignal)(Game &, State &, std::string const &);
+	typedef void (Bob::*PtrSignal)(Game &, State &, const std::string &);
 	enum Type {CRITTER, WORKER, SHIP};
 
-	/// \see class Bob for in-depth explanation
+	/// \see struct Bob for in-depth explanation
 	struct Task {
 		char const * name;
 
@@ -159,7 +161,7 @@ struct Bob : public Map_Object {
 	 * of a function, while \ref State represents the stackframe of an
 	 * actual execution of the function.
 	 *
-	 * \see class Bob for in-depth explanation
+	 * \see struct Bob for in-depth explanation
 	 */
 	struct State {
 		State(const Task * const the_task = 0) :
@@ -168,7 +170,6 @@ struct Bob : public Map_Object {
 			ivar2   (0),
 			ivar3   (0),
 			coords  (Coords::Null()),
-			diranims(0),
 			path    (0),
 			route   (0),
 			program (0)
@@ -182,7 +183,7 @@ struct Bob : public Map_Object {
 		std::string            svar1;
 
 		Coords                 coords;
-		const DirAnimations  * diranims;
+		DirAnimations          diranims;
 		Path                 * path;
 		Route                * route;
 		const BobProgramBase * program; ///< pointer to current program
@@ -193,7 +194,7 @@ struct Bob : public Map_Object {
 
 		Descr
 			(char const * name, char const * descname,
-			 std::string const & directory, Profile &, Section & global_s,
+			 const std::string & directory, Profile &, Section & global_s,
 			 Tribe_Descr const *);
 
 		virtual ~Descr() {};
@@ -232,11 +233,11 @@ struct Bob : public Map_Object {
 	void schedule_destroy(Game &);
 	void schedule_act(Game &, uint32_t tdelta);
 	void skip_act();
-	Point calc_drawpos(Editor_Game_Base const &, Point) const;
+	Point calc_drawpos(const Editor_Game_Base &, Point) const;
 	void set_owner(Player *);
 	Player * get_owner() const {return m_owner;}
 	void set_position(Editor_Game_Base &, const Coords &);
-	FCoords const & get_position() const {return m_position;}
+	const FCoords & get_position() const {return m_position;}
 	Bob * get_next_bob() const throw () {return m_linknext;}
 	bool is_world_bob() const throw () {return descr().is_world_bob();}
 
@@ -247,13 +248,13 @@ struct Bob : public Map_Object {
 	/// \param commit indicates whether this function is called from the
 	///    \ref start_walk function, i.e. whether the bob will actually move
 	///    onto the \p to node if this function allows it to.
-	virtual bool checkNodeBlocked(Game &, FCoords const &, bool commit);
+	virtual bool checkNodeBlocked(Game &, const FCoords &, bool commit);
 
 	virtual void draw
-		(Editor_Game_Base const &, RenderTarget &, Point) const;
+		(const Editor_Game_Base &, RenderTarget &, const Point&) const;
 
 	// For debug
-	virtual void log_general_info(Editor_Game_Base const &);
+	virtual void log_general_info(const Editor_Game_Base &);
 
 	// default tasks
 	void reset_tasks(Game &);
@@ -291,7 +292,7 @@ struct Bob : public Map_Object {
 		 const int32_t         only_step = -1)
 		__attribute__((warn_unused_result));
 
-	void start_task_move(Game & game, int32_t dir, DirAnimations const *, bool);
+	void start_task_move(Game & game, int32_t dir, const DirAnimations &, bool);
 
 	// higher level handling (task-based)
 	State & top_state() {assert(m_stack.size()); return *m_stack.rbegin();}
@@ -299,9 +300,9 @@ struct Bob : public Map_Object {
 
 
 	std::string get_signal() {return m_signal;}
-	State       * get_state(Task const &);
-	State const * get_state(Task const &) const;
-	void push_task(Game & game, Task const & task, uint32_t tdelta = 10);
+	State       * get_state(const Task &);
+	State const * get_state(const Task &) const;
+	void push_task(Game & game, const Task & task, uint32_t tdelta = 10);
 	void pop_task(Game &);
 
 	void signal_handled();
@@ -383,7 +384,7 @@ private:
 
 	// saving and loading
 protected:
-	class Loader : public Map_Object::Loader {
+	struct Loader : public Map_Object::Loader {
 	public:
 		Loader();
 

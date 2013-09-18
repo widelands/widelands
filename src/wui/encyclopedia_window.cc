@@ -17,34 +17,31 @@
  *
  */
 
-#include "encyclopedia_window.h"
-
-#include "logic/building.h"
-#include "graphic/graphic.h"
-#include "i18n.h"
-#include "interactive_player.h"
-#include "helper.h"
-#include "logic/player.h"
-#include "logic/productionsite.h"
-#include "logic/production_program.h"
-#include "logic/tribe.h"
-#include "logic/warelist.h"
-#include "economy/economy.h"
-
-#include "ui_basic/window.h"
-#include "ui_basic/unique_window.h"
-#include "ui_basic/table.h"
-
-#include "upcast.h"
-#include "type_check.h"
+#include "wui/encyclopedia_window.h"
 
 #include <algorithm>
-#include <set>
-#include <map>
-#include <vector>
-#include <string>
 #include <cstring>
+#include <map>
+#include <set>
+#include <string>
 #include <typeinfo>
+#include <vector>
+
+#include "economy/economy.h"
+#include "graphic/graphic.h"
+#include "helper.h"
+#include "i18n.h"
+#include "logic/building.h"
+#include "logic/player.h"
+#include "logic/production_program.h"
+#include "logic/productionsite.h"
+#include "logic/tribe.h"
+#include "logic/warelist.h"
+#include "ui_basic/table.h"
+#include "ui_basic/unique_window.h"
+#include "ui_basic/window.h"
+#include "upcast.h"
+#include "wui/interactive_player.h"
 
 #define WINDOW_WIDTH  std::min(600, g_gr->get_xres() - 40)
 #define WINDOW_HEIGHT std::min(550, g_gr->get_yres() - 40)
@@ -94,7 +91,7 @@ EncyclopediaWindow::EncyclopediaWindow
 }
 
 void EncyclopediaWindow::fillWares() {
-	Tribe_Descr const & tribe = iaplayer().player().tribe();
+	const Tribe_Descr & tribe = iaplayer().player().tribe();
 	Ware_Index const nr_wares = tribe.get_nrwares();
 	std::vector<Ware> ware_vec;
 
@@ -113,7 +110,7 @@ void EncyclopediaWindow::fillWares() {
 }
 
 void EncyclopediaWindow::wareSelected(uint32_t) {
-	Tribe_Descr const & tribe = iaplayer().player().tribe();
+	const Tribe_Descr & tribe = iaplayer().player().tribe();
 	selectedWare = tribe.get_ware_descr(wares.get_selected());
 
 	descrTxt.set_text(selectedWare->helptext());
@@ -125,7 +122,7 @@ void EncyclopediaWindow::wareSelected(uint32_t) {
 
 	Building_Index const nr_buildings = tribe.get_nrbuildings();
 	for (Building_Index i = Building_Index::First(); i < nr_buildings; ++i) {
-		Building_Descr const & descr = *tribe.get_building_descr(i);
+		const Building_Descr & descr = *tribe.get_building_descr(i);
 		if (upcast(ProductionSite_Descr const, de, &descr)) {
 
 			if
@@ -146,9 +143,9 @@ void EncyclopediaWindow::wareSelected(uint32_t) {
 void EncyclopediaWindow::prodSiteSelected(uint32_t) {
 	assert(prodSites.has_selection());
 	condTable.clear();
-	Tribe_Descr const & tribe = iaplayer().player().tribe();
+	const Tribe_Descr & tribe = iaplayer().player().tribe();
 
-	ProductionSite_Descr::Programs const & programs =
+	const ProductionSite_Descr::Programs & programs =
 		ref_cast<ProductionSite_Descr const, Building_Descr const>
 			(*tribe.get_building_descr(prodSites.get_selected()))
 		.programs();
@@ -177,17 +174,17 @@ void EncyclopediaWindow::prodSiteSelected(uint32_t) {
 		programIt = programs.find("work");
 
 	if (programIt != programs.end()) {
-		ProductionProgram::Actions const & actions =
+		const ProductionProgram::Actions & actions =
 			programIt->second->actions();
 
 		container_iterate_const(ProductionProgram::Actions, actions, i)
 			if (upcast(ProductionProgram::ActConsume const, action, *i.current)) {
-				ProductionProgram::ActConsume::Groups const & groups =
+				const ProductionProgram::ActConsume::Groups & groups =
 					action->groups();
 				container_iterate_const
 					(ProductionProgram::ActConsume::Groups, groups, j)
 				{
-					std::set<Ware_Index> const & ware_types = j.current->first;
+					const std::set<Ware_Index> & ware_types = j.current->first;
 					assert(ware_types.size());
 					std::string ware_type_names;
 					for
@@ -203,8 +200,7 @@ void EncyclopediaWindow::prodSiteSelected(uint32_t) {
 
 					//  Make sure to detect if someone changes the type so that it
 					//  needs more than 3 decimal digits to represent.
-					compile_assert
-						(only1byte<sizeof(j.current->second)>::result);
+					static_assert(sizeof(j.current->second) == 1, "Number is too big for 3 char string.");
 					char amount_string[4]; //  Space for 3 digits + terminator.
 					sprintf(amount_string, "%u", j.current->second);
 

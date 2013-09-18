@@ -1,4 +1,5 @@
 size=medium
+heal_per_second=170
 
 [buildcost]
 trunk=3
@@ -6,6 +7,12 @@ blackwood=2
 raw_stone=2
 grout=3
 thatchreed=1
+
+[return_on_dismantle]
+trunk=1
+blackwood=1
+raw_stone=1
+grout=1
 
 [idle]
 pics=warehouse_i_??.png  # ???

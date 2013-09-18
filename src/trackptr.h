@@ -21,6 +21,7 @@
 #define TRACKPTR_H
 
 #include <cassert>
+
 #include <stdint.h>
 
 class BaseTrackPtr;
@@ -102,13 +103,13 @@ protected:
 		} else
 			m_tracker = 0;
 	}
-	BaseTrackPtr(BaseTrackPtr const & o) {
+	BaseTrackPtr(const BaseTrackPtr & o) {
 		m_tracker = o.m_tracker;
 		if (m_tracker)
 			m_tracker->addref();
 	}
 
-	void set(BaseTrackPtr const & o) {
+	void set(const BaseTrackPtr & o) {
 		if (m_tracker)
 			m_tracker->deref();
 
@@ -155,9 +156,9 @@ struct TrackPtr : BaseTrackPtr {
 	TrackPtr() {}
 
 	TrackPtr(T * ptr) : BaseTrackPtr(ptr) {}
-	TrackPtr(TrackPtr<T> const & o) : BaseTrackPtr(o) {}
+	TrackPtr(const TrackPtr<T> & o) : BaseTrackPtr(o) {}
 
-	TrackPtr & operator= (TrackPtr<T> const &       o) {set(o); return *this;}
+	TrackPtr & operator= (const TrackPtr<T> &       o) {set(o); return *this;}
 	TrackPtr & operator= (T                 * const p) {set(p); return *this;}
 
 	operator T *  () const {return static_cast<T *>(get());}

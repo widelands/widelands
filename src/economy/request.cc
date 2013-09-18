@@ -17,25 +17,23 @@
  *
  */
 
-#include "request.h"
+#include "economy/request.h"
 
-// Package includes
-#include "economy.h"
-#include "transfer.h"
-#include "ware_instance.h"
-
+#include "economy/economy.h"
+#include "economy/transfer.h"
+#include "economy/ware_instance.h"
 #include "logic/constructionsite.h"
 #include "logic/game.h"
+#include "logic/legacy.h"
 #include "logic/player.h"
 #include "logic/productionsite.h"
 #include "logic/soldier.h"
 #include "logic/tribe.h"
-#include "upcast.h"
-#include "map_io/widelands_map_map_object_loader.h"
-#include "map_io/widelands_map_map_object_saver.h"
-#include "logic/legacy.h"
 #include "logic/warehouse.h"
 #include "logic/worker.h"
+#include "map_io/widelands_map_map_object_loader.h"
+#include "map_io/widelands_map_map_object_saver.h"
+#include "upcast.h"
 
 
 namespace Widelands {
@@ -108,12 +106,11 @@ Request::~Request()
 void Request::Read
 	(FileRead & fr, Game & game, Map_Map_Object_Loader & mol)
 {
-	bool fudged_type = false;
-
 	try {
+		bool fudged_type = false;
 		uint16_t const version = fr.Unsigned16();
 		if (2 <= version and version <= REQUEST_VERSION) {
-			Tribe_Descr const & tribe = m_target.owner().tribe();
+			const Tribe_Descr & tribe = m_target.owner().tribe();
 			if (version <= 3) {
 				//  Unfortunately, old versions wrote the index. The best thing
 				//  that we can do with that is to look it up in a table.
@@ -232,7 +229,7 @@ void Request::Read
 							if (fr.Unsigned8())
 								m_requirements.Read (fr, game, mol);
 					}
-				} catch (_wexception const & e) {
+				} catch (const _wexception & e) {
 					throw wexception("transfer %u: %s", i, e.what());
 				}
 			if (version >= 5)
@@ -241,7 +238,7 @@ void Request::Read
 				m_economy->remove_request(*this);
 		} else
 			throw game_data_error(_("unknown/unhandled version %u"), version);
-	} catch (_wexception const & e) {
+	} catch (const _wexception & e) {
 		throw wexception("request: %s", e.what());
 	}
 }
@@ -257,7 +254,7 @@ void Request::Write
 	//  Target and econmy should be set. Same is true for callback stuff.
 
 	assert(m_type == wwWARE or m_type == wwWORKER);
-	Tribe_Descr const & tribe = m_target.owner().tribe();
+	const Tribe_Descr & tribe = m_target.owner().tribe();
 	assert(m_type != wwWARE   or m_index < tribe.get_nrwares  ());
 	assert(m_type != wwWORKER or m_index < tribe.get_nrworkers());
 	fw.CString
@@ -492,7 +489,7 @@ void Request::start_transfer(Game & game, Supply & supp)
 	} else {
 		//  Begin the transfer of an item. The item itself is passive.
 		//  launch_item() ensures the WareInstance is transported out of the
-		//  warehouse Once it's on the flag, the flag code will decide what to
+		//  warehouse. Once it's on the flag, the flag code will decide what to
 		//  do with it.
 		WareInstance & item = supp.launch_item(game, *this);
 		ss.Unsigned32(item.serial());

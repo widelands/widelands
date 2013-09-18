@@ -18,24 +18,29 @@
  */
 
 #include "i18n.h"
-#include "log.h"
-#include "profile/profile.h"
-
-#include <config.h>
-
-#include <libintl.h>
 
 #include <cstdlib>
 #include <utility>
 
-#if __APPLE__  && LIBINTL_VERSION >= 0x001201
+#include <config.h>
+#include <libintl.h>
+
+#include "log.h"
+#include "profile/profile.h"
+
+#ifdef __APPLE__
+# if LIBINTL_VERSION >= 0x001201
 // for older libintl versions, setlocale is just fine
-#define SETLOCALE libintl_setlocale
-#elif _WIN32
-#define SETLOCALE setlocale
-#else
-#define SETLOCALE std::setlocale
+#  define SETLOCALE libintl_setlocale
+# endif // LIBINTL_VERSION
+#else // __APPLE__
+# if defined _WIN32
+#  define SETLOCALE setlocale
+# else
+#  define SETLOCALE std::setlocale
+# endif
 #endif
+
 
 extern int _nl_msg_cat_cntr;
 
@@ -57,7 +62,7 @@ std::string localedir;
 char const * translate(char const * const str) {
 	return gettext(str);
 }
-char const * translate(std::string const & str) {
+char const * translate(const std::string & str) {
 	return gettext(str.c_str());
 }
 
@@ -76,7 +81,7 @@ void set_localedir(std::string dname) {
  * it -> we're back in widelands domain. Negative: We can't translate error
  * messages. Who cares?
  */
-void grab_textdomain(std::string const & domain)
+void grab_textdomain(const std::string & domain)
 {
 	char const * const dom = domain.c_str();
 	char const * const ldir = localedir.c_str();
@@ -100,12 +105,11 @@ void release_textdomain() {
 
 	//don't try to get the previous TD when the very first one ('widelands')
 	//just got dropped
-	if (textdomains.size()) {
+	if (!textdomains.empty()) {
 		char const * const domain = textdomains.back().first.c_str();
-		char const * const localedir = textdomains.back().second.c_str();
 
 		bind_textdomain_codeset(domain, "UTF-8");
-		bindtextdomain(domain, localedir);
+		bindtextdomain(domain, textdomains.back().second.c_str());
 		textdomain(domain);
 	}
 }
@@ -124,12 +128,12 @@ void init_locale() {
 	// first, save environment variable
 	char * lang;
 	lang = getenv("LANG");
-	if (lang != NULL) {
+	if (lang != nullptr) {
 		env_locale = lang;
 	}
 	if (env_locale.empty()) {
 		lang = getenv("LANGUAGE");
-		if (lang != NULL) {
+		if (lang != nullptr) {
 			env_locale = lang;
 		}
 	}
@@ -187,8 +191,8 @@ void set_locale(std::string name) {
 	locale = lang;
 #endif
 
-#ifdef linux
-	char * res = NULL;
+#ifdef __linux__
+	char * res = nullptr;
 	char const * encoding[] = {"", ".utf-8", "@euro", ".UTF-8"};
 	std::size_t found = alt_str.find(',', 0);
 	bool leave_while = false;
@@ -235,15 +239,15 @@ void set_locale(std::string name) {
 
 	SETLOCALE(LC_ALL, ""); //  call to libintl
 
-	if (textdomains.size()) {
+	if (!textdomains.empty()) {
 		char const * const domain = textdomains.back().first.c_str();
-		char const * const localedir = textdomains.back().second.c_str();
+
 		bind_textdomain_codeset (domain, "UTF-8");
-		bindtextdomain(domain, localedir);
+		bindtextdomain(domain, textdomains.back().second.c_str());
 		textdomain(domain);
 	}
 }
 
-std::string const & get_locale() {return locale;}
+const std::string & get_locale() {return locale;}
 
 }

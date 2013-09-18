@@ -20,11 +20,12 @@
 #ifndef WIDELANDS_MAP_MESSAGE_SAVER_H
 #define WIDELANDS_MAP_MESSAGE_SAVER_H
 
-#include "logic/message_id.h"
-
+#include <cassert>
 #include <map>
 
 #include <stdint.h>
+
+#include "logic/message_id.h"
 
 namespace Widelands {
 

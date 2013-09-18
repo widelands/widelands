@@ -20,11 +20,11 @@
 #ifndef CHATOVERLAY_H
 #define CHATOVERLAY_H
 
+#include "logic/notification.h"
 #include "ui_basic/panel.h"
 
-#include <boost/scoped_ptr.hpp>
-
 struct ChatProvider;
+struct LogMessage;
 
 /**
  * The overlay that displays all new chat messages for some timeout on the main window.
@@ -36,12 +36,13 @@ struct ChatOverlay : public UI::Panel {
 	~ChatOverlay();
 
 	void setChatProvider(ChatProvider &);
+	void setLogProvider(Widelands::NoteSender<LogMessage> &);
 	virtual void draw(RenderTarget &);
 	virtual void think();
 
 private:
 	struct Impl;
-	boost::scoped_ptr<Impl> m;
+	std::unique_ptr<Impl> m;
 };
 
 #endif // CHATOVERLAY_H

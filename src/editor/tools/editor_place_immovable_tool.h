@@ -20,8 +20,8 @@
 #ifndef EDITOR_PLACE_IMMOVABLE_TOOL_H
 #define EDITOR_PLACE_IMMOVABLE_TOOL_H
 
-#include "multi_select.h"
-#include "editor_delete_immovable_tool.h"
+#include "editor/tools/editor_delete_immovable_tool.h"
+#include "editor/tools/multi_select.h"
 
 /**
  * This places immovables on the map
@@ -32,7 +32,15 @@ struct Editor_Place_Immovable_Tool : public Editor_Tool, public MultiSelect {
 	{}
 
 	int32_t handle_click_impl
-		(Widelands::Map &, Widelands::Node_and_Triangle<>, Editor_Interactive &);
+		(Widelands::Map & map, Widelands::Node_and_Triangle<> center,
+		 Editor_Interactive & parent, Editor_Action_Args & args);
+
+	int32_t handle_undo_impl
+		(Widelands::Map & map, Widelands::Node_and_Triangle<> center,
+		 Editor_Interactive & parent, Editor_Action_Args & args);
+
+	Editor_Action_Args format_args_impl(Editor_Interactive & parent);
+
 	char const * get_sel_impl() const {
 		return "pics/fsel_editor_place_immovable.png";
 	}

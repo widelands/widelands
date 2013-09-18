@@ -20,13 +20,19 @@
 #include "helper.h"
 
 #include <cstdarg>
+#include <memory>
+#include <string>
+
+#include <boost/random.hpp>
+
+using namespace std;
 
 /// Split a string by separators.
 /// \note This ignores empty elements, so do not use this for example to split
 /// a string with newline characters into lines, because it would ignore empty
 /// lines.
 std::vector<std::string> split_string
-	(std::string const & s, char const * const separators)
+	(const std::string & s, char const * const separators)
 {
 	std::vector<std::string> result;
 	for
@@ -71,3 +77,14 @@ bool is_printable(SDL_keysym k)
 		((k.sym >= SDLK_WORLD_0) && (k.sym <= SDLK_WORLD_95)) ||
 		((k.sym >= SDLK_KP0)     && (k.sym <= SDLK_KP_EQUALS));
 }
+
+static boost::mt19937 random_generator;
+string random_string(const string& chars, int nlen) {
+	boost::uniform_int<> index_dist(0, chars.size() - 1);
+	std::unique_ptr<char[]> buffer(new char[nlen]);
+	for (int i = 0; i < nlen; ++i) {
+		buffer[i] = chars[index_dist(random_generator)];
+	}
+	return string(buffer.get(), nlen);
+}
+

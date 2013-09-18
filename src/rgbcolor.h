@@ -24,25 +24,21 @@
 
 struct RGBAColor;
 
-struct RGBColor : protected SDL_Color {
+struct RGBColor : public SDL_Color {
 	RGBColor() {}
 	RGBColor(Uint8 const R, Uint8 const G, Uint8 const B) {
 		SDL_Color::r = R, SDL_Color::g = G, SDL_Color::b = B;
 	}
 
-	Uint8 r() const throw () {return SDL_Color::r;}
-	Uint8 g() const throw () {return SDL_Color::g;}
-	Uint8 b() const throw () {return SDL_Color::b;}
-
-	Uint32 map(SDL_PixelFormat const & fmt) const {
-		return SDL_MapRGB(&const_cast<SDL_PixelFormat &>(fmt), r(), g(), b());
+	Uint32 map(const SDL_PixelFormat & fmt) const {
+		return SDL_MapRGB(&const_cast<SDL_PixelFormat &>(fmt), r, g, b);
 	}
 	void set(SDL_PixelFormat * const fmt, Uint32 const clr) {
-		SDL_GetRGB(clr, fmt, &(SDL_Color::r), &(SDL_Color::g), &(SDL_Color::b));
+		SDL_GetRGB(clr, fmt, &r, &g, &b);
 	}
 
-	bool operator== (RGBColor const & other) const throw () {
-		return r() == other.r() and g() == other.g() and b() == other.b();
+	bool operator== (const RGBColor & other) const throw () {
+		return r == other.r and g == other.g and b == other.b;
 	}
 };
 
@@ -54,7 +50,9 @@ struct RGBAColor {
 	Uint8 b;
 	Uint8 a;
 
-	RGBAColor() {}
+	RGBAColor() {
+		r = g = b = a = 0;
+	}
 	RGBAColor(Uint8 _r, Uint8 _g, Uint8 _b, Uint8 _a) {
 		r = _r;
 		g = _g;
@@ -62,16 +60,16 @@ struct RGBAColor {
 		a = _a;
 	}
 	RGBAColor(RGBColor c) {
-		r = static_cast<uint8_t>(c.r());
-		g = static_cast<uint8_t>(c.g());
-		b = static_cast<uint8_t>(c.b());
+		r = static_cast<uint8_t>(c.r);
+		g = static_cast<uint8_t>(c.g);
+		b = static_cast<uint8_t>(c.b);
 		a = 255;
 	}
 
 	Uint32 map(const SDL_PixelFormat & fmt) const {
 		return SDL_MapRGBA(&const_cast<SDL_PixelFormat &>(fmt), r, g, b, a);
 	}
-	void set(SDL_PixelFormat const & fmt, Uint32 const clr) {
+	void set(const SDL_PixelFormat & fmt, Uint32 const clr) {
 		SDL_GetRGBA(clr, const_cast<SDL_PixelFormat *>(&fmt), &r, &g, &b, &a);
 	}
 };

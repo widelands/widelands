@@ -17,15 +17,14 @@
  *
  */
 
-#include "game_objectives_menu.h"
+#include "wui/game_objectives_menu.h"
 
-#include "interactive_player.h"
 #include "logic/player.h"
+#include "wui/interactive_player.h"
 
 using namespace Widelands;
 
 #define BUTTON_HEIGHT 20
-#define BUTTON_WIDTH 100
 #define OBJECTIVE_LIST 120
 #define FULL_OBJECTIVE_TEXT 240
 
@@ -62,7 +61,7 @@ GameObjectivesMenu::GameObjectivesMenu
 		 25,
 		 5 + OBJECTIVE_LIST + 5 + FULL_OBJECTIVE_TEXT + 5,
 		 BUTTON_WIDTH, BUTTON_HEIGHT,
-		 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
+		 g_gr->images().get("pics/but4.png"),
 		 &GameObjectivesMenu::claim_victory, *this,
 		 _("Claim Victory"), std::string(), false),
 	m_restart_mission
@@ -70,7 +69,7 @@ GameObjectivesMenu::GameObjectivesMenu
 		 25 + BUTTON_WIDTH + 25,
 		 5 + OBJECTIVE_LIST + 5 + FULL_OBJECTIVE_TEXT + 5,
 		 BUTTON_WIDTH, BUTTON_HEIGHT,
-		 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
+		 g_gr->images().get("pics/but4.png"),
 		 &GameObjectivesMenu::restart_mission, *this,
 		 _("Restart Mission")),
 #endif

@@ -1,12 +1,12 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2011 Widelands Development Team
+# Copyright (C) 2005-2013 Widelands Development Team
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2011-12-02 12:41+0000\n"
+"POT-Creation-Date: 2013-09-15 17:41+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -106,12 +106,8 @@ msgid ""
 "* Build a ranger's hut to the east of the first lumberjack's hut."
 msgstr ""
 
-#: ../../campaigns/t01.wmf/scripting/texts.lua:61
-msgid ""
-"* Build a road between your headquarters and the construction site of the lumberjack's hut.<br> When you place the lumberjack's hut, a flag is created for it. You need to connect it to another flag by building a road between them.<br> If you click on a flag and select to build a road, little symbols will appear around it to show you in which directions you can build it.<br> The colour of these symbols indicates how steep this part of the road will be. Green is for flat, yellow means steep and red stands for very steep. The steeper the road is, the harder it will be for your people to walk on it (and your wares will be transported more slowly).<br> You can click on any of the symbols to build the first part of the road there. New symbols will appear to show you where the next part of the road can go, and so on. However, you can also click farer away from the flag to build several steps at once. Click on the flag at the headquarters to finish the road."
-msgstr ""
-
 #: ../../campaigns/t01.wmf/scripting/texts.lua:11
+#: ../../campaigns/t01.wmf/scripting/texts.lua:61
 msgid ""
 "* Build a road between your headquarters and the construction site of the lumberjack's hut.<br> When you place the lumberjack's hut, a flag is created for it. You need to connect it to another flag by building a road between them.<br> If you click on a flag and select to build a road, little symbols will appear around it to show you in which directions you can build it.<br> The colour of these symbols indicates how steep this part of the road will be. Green is for flat, yellow means steep and red stands for very steep. The steeper the road is, the harder it will be for your people to walk on it (and your wares will be transported more slowly).<br> You can click on any of the symbols to build the first part of the road there. New symbols will appear to show you where the next part of the road can go, and so on. However, you can also click farther away from the flag to build several steps at once. Click on the flag at the headquarters to finish the road."
 msgstr ""

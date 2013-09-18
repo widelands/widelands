@@ -20,6 +20,7 @@
 #include "debugconsole.h"
 
 #include <map>
+
 #include <boost/bind.hpp>
 
 #include "chat.h"
@@ -45,22 +46,22 @@ struct Console : public ChatProvider, public Handler {
 	{
 	}
 
-	void cmdHelp(std::vector<std::string> const &)
+	void cmdHelp(const std::vector<std::string> &)
 	{
 		write("Use 'ls' to list all available commands.");
 	}
 
-	void cmdLs(std::vector<std::string> const &)
+	void cmdLs(const std::vector<std::string> &)
 	{
 		container_iterate_const(CommandMap, commands, i)
 			write(i.current->first);
 	}
 
-	void cmdErr(std::vector<std::string> const & args) {
+	void cmdErr(const std::vector<std::string> & args) {
 		write("Unknown command: " + args[0]);
 	}
 
-	void send(std::string const & msg)
+	void send(const std::string & msg)
 	{
 		std::vector<std::string> arg;
 		std::string::size_type pos = 0;
@@ -85,12 +86,12 @@ struct Console : public ChatProvider, public Handler {
 		it->second(arg);
 	}
 
-	std::vector<ChatMessage> const & getMessages() const
+	const std::vector<ChatMessage> & getMessages() const
 	{
 		return messages;
 	}
 
-	void write(std::string const & msg)
+	void write(const std::string & msg)
 	{
 		ChatMessage cm;
 
@@ -115,7 +116,7 @@ ChatProvider * getChatProvider()
 	return &g_console;
 }
 
-void write(std::string const & text)
+void write(const std::string & text)
 {
 	g_console.write(text);
 }
@@ -134,13 +135,13 @@ Handler::~Handler()
 			g_console.commands.erase(*i.current);
 }
 
-void Handler::addCommand(std::string const & cmd, HandlerFn const & fun)
+void Handler::addCommand(const std::string & cmd, const HandlerFn & fun)
 {
 	g_console.commands[cmd] = fun;
 	m_commands.push_back(cmd);
 }
 
-void Handler::setDefaultCommand(HandlerFn const & fun)
+void Handler::setDefaultCommand(const HandlerFn & fun)
 {
 	g_console.default_handler = fun;
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2011 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2013 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -17,16 +17,18 @@
  *
  */
 
-#include "game_message_menu.h"
+#include "wui/game_message_menu.h"
 
 #include <boost/bind.hpp>
 
-#include "interactive_player.h"
+#include "container_iterate.h"
+#include "graphic/graphic.h"
+#include "logic/instances.h"
 #include "logic/message_queue.h"
 #include "logic/player.h"
 #include "logic/playercommand.h"
-
-#include "container_iterate.h"
+#include "timestring.h"
+#include "wui/interactive_player.h"
 
 using Widelands::Message;
 using Widelands::Message_Id;
@@ -50,6 +52,7 @@ GameMessageMenu::GameMessageMenu
 {
 	list = new UI::Table<uintptr_t>(this, 5, 35, 360, 110);
 	list->selected.connect(boost::bind(&GameMessageMenu::selected, this, _1));
+	list->double_clicked.connect(boost::bind(&GameMessageMenu::double_clicked, this, _1));
 	list->add_column (50, _("Select"), UI::Align_HCenter, true);
 	list->add_column (50, _("Status"), UI::Align_HCenter);
 	list->add_column(136, _("Title"));
@@ -59,7 +62,7 @@ GameMessageMenu::GameMessageMenu
 		new UI::Button
 			(this, "clear_selection",
 			 5, 5, 70, 25,
-			 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
+			 g_gr->images().get("pics/but0.png"),
 			 _("Clear"), _("Clear selection"));
 	clearselectionbtn->sigclicked.connect
 		(boost::bind(&GameMessageMenu::do_clear_selection, this));
@@ -68,7 +71,7 @@ GameMessageMenu::GameMessageMenu
 		new UI::Button
 			(this, "invert_selection",
 			 80, 5, 70, 25,
-			 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
+			 g_gr->images().get("pics/but0.png"),
 			 _("Invert"), _("Invert selection"));
 	invertselectionbtn->sigclicked.connect
 		(boost::bind(&GameMessageMenu::do_invert_selection, this));
@@ -77,8 +80,8 @@ GameMessageMenu::GameMessageMenu
 		new UI::Button
 			(this, "archive_or_restore_selected_messages",
 			 155, 5, 25, 25,
-			 g_gr->get_picture(PicMod_UI, "pics/but2.png"),
-			 g_gr->get_picture(PicMod_Game, "pics/message_archive.png"),
+			 g_gr->images().get("pics/but2.png"),
+			 g_gr->images().get("pics/message_archive.png"),
 			 _("Archive selected messages"));
 	m_archivebtn->sigclicked.connect
 		(boost::bind(&GameMessageMenu::archive_or_restore, this));
@@ -87,7 +90,7 @@ GameMessageMenu::GameMessageMenu
 		new UI::Button
 			(this, "toggle_between_inbox_or_archive",
 			 185, 5, 100, 25,
-			 g_gr->get_picture(PicMod_UI, "pics/but2.png"),
+			 g_gr->images().get("pics/but2.png"),
 			 _("Show Archive"));
 	m_togglemodebtn->sigclicked.connect
 		(boost::bind(&GameMessageMenu::toggle_mode, this));
@@ -96,8 +99,8 @@ GameMessageMenu::GameMessageMenu
 		new UI::Button
 			(this, "center_main_mapview_on_location",
 			 340, 5, 25, 25,
-			 g_gr->get_picture(PicMod_UI, "pics/but2.png"),
-			 g_gr->get_picture(PicMod_Game, "pics/menu_goto.png"),
+			 g_gr->images().get("pics/but2.png"),
+			 g_gr->images().get("pics/menu_goto.png"),
 			 _("center main mapview on location"),
 			 false);
 	m_centerviewbtn->sigclicked.connect(boost::bind(&GameMessageMenu::center_view, this));
@@ -107,6 +110,8 @@ GameMessageMenu::GameMessageMenu
 
 	list->set_column_compare
 		(ColStatus, boost::bind(&GameMessageMenu::status_compare, this, _1, _2));
+	list->set_sort_column(ColTimeSent);
+	list->set_sort_descending(true);
 
 	set_can_focus(true);
 	focus();
@@ -134,7 +139,7 @@ static char const * const status_picture_filename[] = {
 };
 
 void GameMessageMenu::show_new_message
-	(Message_Id const id, Widelands::Message const & message)
+	(Message_Id const id, const Widelands::Message & message)
 {
 	assert(iplayer().player().messages()[id] == &message);
 	assert(not list->find(id.value()));
@@ -152,7 +157,8 @@ void GameMessageMenu::think()
 	// Update messages in the list and remove messages
 	// that should no longer be shown
 	for (uint32_t j = list->size(); j; --j) {
-		if (Message const * const message = mq[Message_Id((*list)[j - 1])]) {
+		Message_Id m_id((*list)[j - 1]);
+		if (Message const * const message = mq[m_id]) {
 			if ((mode == Archive) != (message->status() == Message::Archived)) {
 				list->remove(j - 1);
 			} else {
@@ -166,7 +172,7 @@ void GameMessageMenu::think()
 	// Add new messages to the list
 	container_iterate_const(MessageQueue, mq, i) {
 		Message_Id      const id      =  i.current->first;
-		Message const &       message = *i.current->second;
+		const Message &       message = *i.current->second;
 		Message::Status const status  = message.status();
 		if ((mode == Archive) != (status == Message::Archived))
 			continue;
@@ -195,22 +201,11 @@ void GameMessageMenu::update_record
 {
 	er.set_picture
 		(ColStatus,
-		 g_gr->get_picture(PicMod_UI, status_picture_filename[message.status()]));
+		 g_gr->images().get(status_picture_filename[message.status()]));
 	er.set_string(ColTitle, message.title());
 
-	uint32_t time = message.sent();
-	char timestring[] = "000:00:00.000";
-	timestring[12] +=  time        % 10;
-	timestring[11] += (time /= 10) % 10;
-	timestring[10] += (time /= 10) % 10;
-	timestring [8] += (time /= 10) % 10;
-	timestring [7] += (time /= 10) %  6;
-	timestring [5] += (time /=  6) % 10;
-	timestring [4] += (time /= 10) %  6;
-	timestring [2] += (time /=  6) % 10;
-	timestring [1] += (time /= 10) % 10;
-	timestring [0] +=  time /= 10;
-	er.set_string(ColTimeSent, time < 10 ? timestring : "-------------");
+	const uint32_t time = message.sent();
+	er.set_string(ColTimeSent, gametimestring(time));
 }
 
 /*
@@ -239,6 +234,13 @@ void GameMessageMenu::selected(uint32_t const t) {
 }
 
 /**
+ * a message was double clicked
+ */
+void GameMessageMenu::double_clicked(uint32_t const /* t */) {
+	if (m_centerviewbtn->enabled()) center_view();
+}
+
+/**
  * Handle message menu hotkeys.
  */
 bool GameMessageMenu::handle_key(bool down, SDL_keysym code)
@@ -253,8 +255,9 @@ bool GameMessageMenu::handle_key(bool down, SDL_keysym code)
 		case SDLK_KP_PERIOD:
 			if (code.mod & KMOD_NUM)
 				break;
+			/* no break */
 		case SDLK_DELETE:
-			do_delete();
+			archive_or_restore();
 			return true;
 
 		default:
@@ -262,25 +265,7 @@ bool GameMessageMenu::handle_key(bool down, SDL_keysym code)
 		}
 	}
 
-	return UI::Panel::handle_key(down, code);
-}
-
-/**
- * Delete the currently selected message, if any.
- */
-void GameMessageMenu::do_delete()
-{
-	if (mode == Archive)
-		return;
-
-	if (!list->has_selection())
-		return;
-
-	Widelands::Game & game = iplayer().game();
-	game.send_player_command
-		(*new Widelands::Cmd_MessageSetStatusArchived
-			(game.get_gametime(), iplayer().player_number(),
-			 Message_Id(list->get_selected())));
+	return list->handle_key(down, code);
 }
 
 void GameMessageMenu::archive_or_restore()
@@ -289,28 +274,57 @@ void GameMessageMenu::archive_or_restore()
 	uint32_t                  const gametime = game.get_gametime();
 	Widelands::Player       &       player   = iplayer().player();
 	Widelands::Player_Number  const plnum    = player.player_number();
+	bool work_done = false;
 
 	switch (mode) {
 	case Inbox:
+		//archive selected messages
 		for
 			(wl_index_range<uint8_t> i(0, list->size());
 			 i;
 			 ++i)
 			if (list->get_record(i.current).is_checked(ColSelect))
+			{
+				work_done = true;
 				game.send_player_command
 					(*new Widelands::Cmd_MessageSetStatusArchived
 					 	(gametime, plnum, Message_Id((*list)[i.current])));
+			}
+
+		//archive highlighted message, if nothing was selected
+		if (!work_done) {
+			if (!list->has_selection()) return;
+
+			game.send_player_command
+				(*new Widelands::Cmd_MessageSetStatusArchived
+					(gametime, plnum, Message_Id(list->get_selected())));
+		}
 		break;
 	case Archive:
+		//restore selected messages
 		for
 			(wl_index_range<uint8_t> i(0, list->size());
 			 i;
 			 ++i)
 			if (list->get_record(i.current).is_checked(ColSelect))
+			{
+				work_done = true;
 				game.send_player_command
 					(*new Widelands::Cmd_MessageSetStatusRead
 					 	(gametime, plnum, Message_Id((*list)[i.current])));
+			}
+
+		//restore highlighted message, if nothing was selected
+		if (!work_done) {
+			if (!list->has_selection()) return;
+
+			game.send_player_command
+				(*new Widelands::Cmd_MessageSetStatusRead
+					(gametime, plnum, Message_Id(list->get_selected())));
+		}
 		break;
+	default:
+		assert(false); // there is nothing but Archive and Inbox
 	}
 }
 
@@ -350,16 +364,18 @@ void GameMessageMenu::toggle_mode()
 	case Inbox:
 		mode = Archive;
 		set_title(_("Message Menu: Archive"));
-		m_archivebtn->set_pic(g_gr->get_picture(PicMod_Game, "pics/message_restore.png"));
+		m_archivebtn->set_pic(g_gr->images().get("pics/message_restore.png"));
 		m_archivebtn->set_tooltip(_("Restore selected messages"));
 		m_togglemodebtn->set_title(_("Show Inbox"));
 		break;
 	case Archive:
 		mode = Inbox;
 		set_title(_("Message Menu: Inbox"));
-		m_archivebtn->set_pic(g_gr->get_picture(PicMod_Game, "pics/message_archive.png"));
+		m_archivebtn->set_pic(g_gr->images().get("pics/message_archive.png"));
 		m_archivebtn->set_tooltip(_("Archive selected messages"));
 		m_togglemodebtn->set_title(_("Show Archive"));
 		break;
+	default:
+		assert(false); // there is nothing but Archive and Inbox
 	}
 }

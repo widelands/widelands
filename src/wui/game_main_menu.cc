@@ -17,22 +17,21 @@
  *
  */
 
+#include "wui/game_main_menu.h"
+
 #include <boost/bind.hpp>
-#include <boost/type_traits.hpp>
-#include <boost/lambda/construct.hpp>
 #include <boost/lambda/bind.hpp>
+#include <boost/lambda/construct.hpp>
+#include <boost/type_traits.hpp>
 
-#include "game_main_menu.h"
-
-#include "building_statistics_menu.h"
-#include "general_statistics_menu.h"
 #include "graphic/graphic.h"
 #include "i18n.h"
-#include "interactive_player.h"
-#include "stock_menu.h"
-#include "ware_statistics_menu.h"
-
 #include "ui_basic/unique_window.h"
+#include "wui/building_statistics_menu.h"
+#include "wui/general_statistics_menu.h"
+#include "wui/interactive_player.h"
+#include "wui/stock_menu.h"
+#include "wui/ware_statistics_menu.h"
 
 
 GameMainMenu::GameMainMenu
@@ -46,26 +45,26 @@ m_windows     (windows),
 general_stats
 	(this, "general_stats",
 	 posx(0, 4), posy(0, 3), buttonw(4), buttonh(1),
-	 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
-	 g_gr->get_picture(PicMod_Game, "pics/menu_general_stats.png"),
+	 g_gr->images().get("pics/but4.png"),
+	 g_gr->images().get("pics/menu_general_stats.png"),
 	 _("General Statistics")),
 ware_stats
 	(this, "ware_stats",
 	 posx(1, 4), posy(0, 3), buttonw(4), buttonh(1),
-	 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
-	 g_gr->get_picture(PicMod_Game, "pics/menu_ware_stats.png"),
+	 g_gr->images().get("pics/but4.png"),
+	 g_gr->images().get("pics/menu_ware_stats.png"),
 	 _("Ware Statistics")),
 building_stats
 	(this, "building_stats",
 	 posx(2, 4), posy(0, 3), buttonw(4), buttonh(1),
-	 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
-	 g_gr->get_picture(PicMod_Game, "pics/menu_building_stats.png"),
+	 g_gr->images().get("pics/but4.png"),
+	 g_gr->images().get("pics/menu_building_stats.png"),
 	 _("Building Statistics")),
 stock
 	(this, "stock",
 	 posx(3, 4), posy(0, 3), buttonw(4), buttonh(1),
-	 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
-	 g_gr->get_picture(PicMod_Game, "pics/menu_stock.png"),
+	 g_gr->images().get("pics/but4.png"),
+	 g_gr->images().get("pics/menu_stock.png"),
 	 _("Stock"))
 {
 	general_stats.sigclicked.connect

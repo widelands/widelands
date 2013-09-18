@@ -20,9 +20,9 @@
 #ifndef WARE_TYPES_H
 #define WARE_TYPES_H
 
-#include "widelands.h"
-
 #include <vector>
+
+#include "logic/widelands.h"
 
 namespace Widelands {
 typedef std::vector<std::pair<Ware_Index, uint32_t> > Ware_Types;
@@ -30,7 +30,7 @@ typedef std::vector<std::pair<Ware_Index, uint32_t> > Ware_Types;
 // range structure for iterating ware range with index
 struct ware_range
 {
-	ware_range(Ware_Types const & range) :
+	ware_range(const Ware_Types & range) :
 		i(0), current(range.begin()), end(range.end()) {}
 	ware_range & operator++ () {
 		++i; ++current; return *this;

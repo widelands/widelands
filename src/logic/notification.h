@@ -20,13 +20,11 @@
 #ifndef NOTIFICATION_H
 #define NOTIFICATION_H
 
-
-#include "widelands_geometry.h"
-
-#include "container_iterate.h"
-
 #include <algorithm>
 #include <vector>
+
+#include "container_iterate.h"
+#include "logic/widelands_geometry.h"
 
 namespace Widelands {
 
@@ -52,12 +50,11 @@ class NoteSender {
 
 public:
 	~NoteSender() {
-		while (m_links.size())
+		while (!m_links.empty())
 			(*m_links.rbegin())->disconnect(*this);
 	}
 
-protected:
-	void send(T const & note) {
+	void send(const T & note) const {
 		container_iterate_const(Links, m_links, i)
 			(*i.current)->receive(note);
 	}
@@ -74,7 +71,7 @@ class NoteReceiver {
 
 public:
 	virtual ~NoteReceiver() {
-		while (m_links.size())
+		while (!m_links.empty())
 			disconnect(**m_links.rbegin());
 	}
 
@@ -96,7 +93,7 @@ public:
 			m_links.erase(it);
 	}
 
-	virtual void receive(T const & note) = 0;
+	virtual void receive(const T & note) = 0;
 
 private:
 	Links m_links;
@@ -117,14 +114,14 @@ struct NoteFieldPossession {
 	FCoords fc;
 	losegain_t lg;
 
-	NoteFieldPossession(FCoords const & _fc, losegain_t const _lg)
+	NoteFieldPossession(const FCoords & _fc, losegain_t const _lg)
 		: fc(_fc), lg(_lg) {}
 };
 
 struct NoteFieldTransformed {
 	FCoords fc;
 
-	NoteFieldTransformed(FCoords const & _fc)
+	NoteFieldTransformed(const FCoords & _fc)
 		: fc(_fc) {}
 };
 

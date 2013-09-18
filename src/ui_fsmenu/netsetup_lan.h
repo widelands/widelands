@@ -20,20 +20,18 @@
 #ifndef FULLSCREEN_MENU_NETSETUP_LAN_H
 #define FULLSCREEN_MENU_NETSETUP_LAN_H
 
-#include "network/network_lan_promotion.h"
-
-#include "ui_basic/button.h"
-#include "ui_basic/textarea.h"
-#include "ui_basic/editbox.h"
-#include "ui_basic/table.h"
-
+#include <cstring>
 #include <list>
 #include <string>
-#include <cstring>
 
-#include "base.h"
+#include "ui_fsmenu/base.h"
+#include "network/network_lan_promotion.h"
+#include "ui_basic/button.h"
+#include "ui_basic/editbox.h"
+#include "ui_basic/table.h"
+#include "ui_basic/textarea.h"
 
-class Net_Open_Game;
+struct Net_Open_Game;
 struct Net_Game_Info;
 
 struct Fullscreen_Menu_NetSetupLAN : public Fullscreen_Menu_Base {
@@ -58,7 +56,7 @@ struct Fullscreen_Menu_NetSetupLAN : public Fullscreen_Menu_Base {
 	/**
 	 * \return the name chosen by the player
 	 */
-	std::string const & get_playername();
+	const std::string & get_playername();
 
 private:
 	uint32_t m_butx;

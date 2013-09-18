@@ -20,16 +20,16 @@
 #ifndef IMMOVABLE_H
 #define IMMOVABLE_H
 
-#include "buildcost.h"
 #include "graphic/animation.h"
-#include "instances.h"
-#include "widelands_geometry.h"
+#include "logic/buildcost.h"
+#include "logic/instances.h"
+#include "logic/widelands_geometry.h"
 
 struct Profile;
 
 namespace Widelands {
 
-struct Economy;
+class Economy;
 struct Flag;
 struct Map;
 struct Tribe_Descr;
@@ -48,10 +48,10 @@ class Worker;
  */
 struct BaseImmovable : public Map_Object {
 	enum {
-		NONE,   ///< not robust (i.e. removable by building something over it)
-		SMALL,  ///< small building or robust map element, including trees
-		MEDIUM, ///< medium size building
-		BIG     ///< big building
+		NONE = 0, ///< not robust (i.e. removable by building something over it)
+		SMALL,    ///< small building or robust map element, including trees
+		MEDIUM,   ///< medium size building
+		BIG       ///< big building
 	};
 
 	BaseImmovable(const Map_Object_Descr &);
@@ -68,9 +68,9 @@ struct BaseImmovable : public Map_Object {
 	virtual PositionList get_positions
 		(const Editor_Game_Base &) const throw () = 0;
 	virtual void draw
-		(const Editor_Game_Base &, RenderTarget &, const FCoords, const Point)
+		(const Editor_Game_Base &, RenderTarget &, const FCoords&, const Point&)
 		= 0;
-	virtual std::string const & name() const throw ();
+	virtual const std::string & name() const throw ();
 
 protected:
 	void set_position(Editor_Game_Base &, Coords);
@@ -87,26 +87,24 @@ struct ImmovableActionData;
  * Immovable represents a standard immovable such as trees or stones.
  */
 struct Immovable_Descr : public Map_Object_Descr {
-	friend struct Map_Immovabledata_Data_Packet; // For writing (get_program)
-
 	typedef std::map<std::string, ImmovableProgram *> Programs;
 
 	Immovable_Descr
 		(char const * name, char const * descname,
-		 std::string const & directory, Profile &, Section & global_s,
-		 World const & world, Tribe_Descr const * const);
+		 const std::string & directory, Profile &, Section & global_s,
+		 const World & world, Tribe_Descr const * const);
 	~Immovable_Descr();
 
 	int32_t get_size() const throw () {return m_size;}
 	char const * get_picture() const {return m_picture.c_str();}
-	ImmovableProgram const * get_program(std::string const &) const;
+	ImmovableProgram const * get_program(const std::string &) const;
 
 	Immovable & create(Editor_Game_Base &, Coords) const;
 
 	Tribe_Descr const * get_owner_tribe() const throw () {return m_owner_tribe;}
 
 	/// How well the terrain around f suits an immovable of this type.
-	uint32_t terrain_suitability(FCoords, Map const &) const;
+	uint32_t terrain_suitability(FCoords, const Map &) const;
 
 	const Buildcost & buildcost() const {return m_buildcost;}
 
@@ -133,9 +131,6 @@ class Immovable : public BaseImmovable {
 	friend struct ImmovableProgram;
 	friend struct Map;
 
-	// for writing (obsolete since build-11)
-	friend struct Map_Immovabledata_Data_Packet;
-
 	MO_DESCR(Immovable_Descr);
 
 public:
@@ -152,8 +147,8 @@ public:
 	char const * type_name() const throw () {return "immovable";}
 	virtual int32_t  get_size    () const throw ();
 	virtual bool get_passable() const throw ();
-	std::string const & name() const throw ();
-	void start_animation(Editor_Game_Base const &, uint32_t anim);
+	const std::string & name() const throw ();
+	void start_animation(const Editor_Game_Base &, uint32_t anim);
 
 	void program_step(Game & game, uint32_t const delay = 1) {
 		if (delay)
@@ -165,9 +160,9 @@ public:
 	void cleanup(Editor_Game_Base &);
 	void act(Game &, uint32_t data);
 
-	virtual void draw(Editor_Game_Base const &, RenderTarget &, FCoords, Point);
+	virtual void draw(const Editor_Game_Base &, RenderTarget &, const FCoords&, const Point&);
 
-	void switch_program(Game & game, std::string const & programname);
+	void switch_program(Game & game, const std::string & programname);
 	bool construct_ware_item(Game & game, Ware_Index index);
 	bool construct_remaining_buildcost(Game & game, Buildcost * buildcost);
 
@@ -217,6 +212,7 @@ protected:
 	uint32_t m_anim_construction_done;
 	int32_t m_program_step; ///< time of next step
 #endif
+	std::string m_construct_string;
 
 	/**
 	 * Private persistent data for the currently active program action.
@@ -287,9 +283,9 @@ struct PlayerImmovable : public BaseImmovable {
 	 * immovable. This is not the same as the list of production
 	 * workers returned by \ref ProductionSite::get_production_workers
 	 */
-	Workers const & get_workers() const {return m_workers;}
+	const Workers & get_workers() const {return m_workers;}
 
-	virtual void log_general_info(Editor_Game_Base const &);
+	virtual void log_general_info(const Editor_Game_Base &);
 
 	/**
 	 * These functions are called when a ware or worker arrives at

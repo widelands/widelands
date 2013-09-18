@@ -20,11 +20,12 @@
 #ifndef CHECKSTEP_H
 #define CHECKSTEP_H
 
-#include <boost/shared_ptr.hpp>
 #include <set>
 #include <vector>
 
-#include "widelands_geometry.h"
+#include <boost/shared_ptr.hpp>
+
+#include "logic/widelands_geometry.h"
 
 namespace Widelands {
 
@@ -42,26 +43,26 @@ private:
 	struct BaseCapsule {
 		virtual ~BaseCapsule() {}
 		virtual bool allowed
-			(Map &, FCoords const & start, FCoords const & end,
+			(Map &, const FCoords & start, const FCoords & end,
 			 int32_t dir,
 			 StepId  id)
 			const
 			= 0;
-		virtual bool reachabledest(Map &, FCoords const & dest) const = 0;
+		virtual bool reachabledest(Map &, const FCoords & dest) const = 0;
 	};
 	template<typename T>
 	struct Capsule : public BaseCapsule {
-		Capsule(T const & _op) : op(_op) {}
+		Capsule(const T & _op) : op(_op) {}
 
 		bool allowed
-			(Map & map, FCoords const & start, FCoords const & end,
+			(Map & map, const FCoords & start, const FCoords & end,
 			 int32_t const dir,
 			 StepId  const id)
 			const
 		{
 			return op.allowed(map, start, end, dir, id);
 		}
-		bool reachabledest(Map & map, FCoords const & dest) const {
+		bool reachabledest(Map & map, const FCoords & dest) const {
 			return op.reachabledest(map, dest);
 		}
 
@@ -70,20 +71,20 @@ private:
 
 	boost::shared_ptr<BaseCapsule> capsule;
 
-	static CheckStep const & alwaysfalse();
+	static const CheckStep & alwaysfalse();
 
 public:
 	CheckStep();
 
 	template<typename T>
-	CheckStep(T const & op) : capsule(new Capsule<T>(op)) {}
+	CheckStep(const T & op) : capsule(new Capsule<T>(op)) {}
 
 	/**
 	 * \return \c true true if moving from start to end (single step in the given
 	 * direction) is allowed.
 	 */
 	bool allowed
-		(Map & map, FCoords const & start, FCoords const & end,
+		(Map & map, const FCoords & start, const FCoords & end,
 		 int32_t const dir,
 		 StepId  const id)
 		const
@@ -95,7 +96,7 @@ public:
 	 * \return \c true if the destination field can be reached at all
 	 * (e.g. return false for land-based bobs when dest is in water).
 	 */
-	bool reachabledest(Map & map, FCoords const & dest) const {
+	bool reachabledest(Map & map, const FCoords & dest) const {
 		return capsule->reachabledest(map, dest);
 	}
 };
@@ -106,7 +107,7 @@ public:
  * sub-implementations that have been added via \ref add().
  */
 struct CheckStepAnd {
-	void add(CheckStep const & sub);
+	void add(const CheckStep & sub);
 
 	bool allowed
 		(Map &, FCoords start, FCoords end,
@@ -167,7 +168,7 @@ private:
  * for boats, walking for normal roads).
  */
 struct CheckStepRoad {
-	CheckStepRoad(Player const & player, uint8_t const movecaps)
+	CheckStepRoad(const Player & player, uint8_t const movecaps)
 		: m_player(player), m_movecaps(movecaps)
 	{}
 
@@ -177,7 +178,7 @@ struct CheckStepRoad {
 	bool reachabledest(Map &, FCoords dest) const;
 
 private:
-	Player const & m_player;
+	const Player & m_player;
 	uint8_t m_movecaps;
 };
 

@@ -17,7 +17,7 @@
  *
  */
 
-#include "unique_window.h"
+#include "ui_basic/unique_window.h"
 
 namespace UI {
 /*
@@ -42,7 +42,7 @@ void UniqueWindow::Registry::create() {
 */
 void UniqueWindow::Registry::destroy() {
 	if (window) {
-		delete window;
+		window->die();
 	}
 }
 
@@ -51,7 +51,7 @@ void UniqueWindow::Registry::destroy() {
 */
 void UniqueWindow::Registry::toggle() {
 	if (window) {
-		delete window;
+		window->die();
 	} else {
 		constr();
 	}
@@ -71,10 +71,10 @@ UniqueWindow::Registry::~Registry() {delete window;}
 */
 UniqueWindow::UniqueWindow
 	(Panel                  * const parent,
-	 std::string const & name,
+	 const std::string & name,
 	 UniqueWindow::Registry * const reg,
 	 int32_t const w, int32_t const h,
-	 std::string      const & title)
+	 const std::string      & title)
 	:
 	Window         (parent, name, 0, 0, w, h, title.c_str()),
 	m_registry     (reg),
@@ -84,7 +84,7 @@ UniqueWindow::UniqueWindow
 		delete m_registry->window;
 
 		m_registry->window = this;
-		if (m_registry->x >= 0) {
+		if (m_registry->valid_pos) {
 			set_pos(Point(m_registry->x, m_registry->y));
 			m_usedefaultpos = false;
 		}
@@ -106,6 +106,7 @@ UniqueWindow::~UniqueWindow()
 		m_registry->window = 0;
 		m_registry->x = get_x();
 		m_registry->y = get_y();
+		m_registry->valid_pos = true;
 
 		if (m_registry->onDelete) {
 			m_registry->onDelete();

@@ -17,7 +17,7 @@
  *
  */
 
-#include "widelands_map_player_position_data_packet.h"
+#include "map_io/widelands_map_player_position_data_packet.h"
 
 #include "logic/editor_game_base.h"
 #include "logic/game_data_error.h"
@@ -51,13 +51,13 @@ throw (_wexception)
 					char buffer[10];
 					snprintf(buffer, sizeof(buffer), "player_%u", p);
 					map.set_starting_pos(p, s.get_safe_Coords(buffer, extent));
-				} catch (_wexception const & e) {
+				} catch (const _wexception & e) {
 					throw game_data_error(_("player %u: %s"), p, e.what());
 				}
 		} else
 			throw game_data_error
 				(_("unknown/unhandled version %u"), packet_version);
-	} catch (_wexception const & e) {
+	} catch (const _wexception & e) {
 		throw game_data_error(_("player positions: %s"), e.what());
 	}
 }
@@ -73,7 +73,7 @@ throw (_wexception)
 	s.set_int("packet_version", CURRENT_PACKET_VERSION);
 
 	// Now, all positions in order
-	Map const & map = egbase.map();
+	const Map & map = egbase.map();
 	const Player_Number nr_players = map.get_nrplayers();
 	iterate_player_numbers(p, nr_players) {
 		char buffer[10];

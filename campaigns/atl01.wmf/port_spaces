@@ -1,0 +1,10 @@
+# NOTE: The following port spaces are only defined to enable the work of the shipyard in this map
+
+[global]
+packet_version="1"
+number_of_port_spaces="2"
+
+[port_spaces]
+0="19 65"
+1="20 66"
+

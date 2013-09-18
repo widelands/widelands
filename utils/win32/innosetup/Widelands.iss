@@ -22,9 +22,9 @@
 
 ;Version String
 #define Name "Widelands"
-#define VerName "Widelands Build16"
-#define VerNumber "0.16.0.1"
-#define Copyright "Widelands Development Team 2001-2011"
+#define VerName "Widelands Build18"
+#define VerNumber "0.18.0.1"
+#define Copyright "Widelands Development Team 2001-2013"
 #define SetupFileName "Widelands-Build16-win32"
 
 ;General String
@@ -35,6 +35,7 @@
 #define UrlName "Widelands.url"
 #define HelpName "Widelands-Onlinehelp.url"
 #define HelpNameName "Widelands-Onlinehelp"
+#define Copying "COPYING.txt"
 
 [Setup]
 AppName={#Name}
@@ -122,6 +123,7 @@ Name: {group}\{#Name} - Mapeditor;           Filename: {app}\{#ExeName}; Paramet
 Name: {userappdata}\Microsoft\Internet Explorer\Quick Launch\{#Name}; Filename: {app}\{#ExeName}; Tasks: quicklaunchicon; WorkingDir: {app}; Flags: useapppaths; IconFilename: {app}\widelands.exe
 Name: {userdesktop}\{#Name};                 Filename: {app}\{#ExeName}; Tasks: desktopicon; WorkingDir: {app}; Flags: useapppaths; IconFilename: {app}\widelands.exe
 Name: {userdesktop}\{#Name} - Mapeditor;     Filename: {app}\{#ExeName}; Parameters: " --editor"; Tasks: desktopicon; WorkingDir: {app}; IconFilename: {app}\WL-Editor.ico; Comment: Directly starts the Widelands-Editor; Flags: useapppaths
+Name: {group}\{#Copying};                    Filename: {app}\{#Copying}
 
 [Run]
 Filename: {app}\{#ExeName}; Description: {cm:LaunchProgram,{#Name}}; Flags: nowait postinstall skipifsilent
@@ -154,9 +156,9 @@ Name: Maps;      Description: Widelands Maps;                                   
 Root: HKCR; Subkey: .wgf;                                 ValueType: string; ValueName: ; ValueData: WidelandsSavegame;  Flags: uninsdeletevalue
 Root: HKCR; Subkey: WidelandsSavegame;                    ValueType: string; ValueName: ; ValueData: Widelands Savegame; Flags: uninsdeletekey
 Root: HKCR; Subkey: WidelandsSavegame\DefaultIcon;        ValueType: string; ValueName: ; ValueData: {app}\{#ExeName},0
-Root: HKCR; Subkey: WidelandsSavegame\shell\open\command; ValueType: string; ValueName: ; ValueData: """{app}\{#ExeName}"" ""--loadgame=%1"""
+Root: HKCR; Subkey: WidelandsSavegame\shell\open\command; ValueType: string; ValueName: ; ValueData: """{app}\{#ExeName}"" ""--loadgame=%1"" ""--localedir={app}\locale"""
 
 Root: HKCR; Subkey: .wmf;                                 ValueType: string; ValueName: ; ValueData: WidelandsMapFile;  Flags: uninsdeletevalue
 Root: HKCR; Subkey: WidelandsMapFile;                     ValueType: string; ValueName: ; ValueData: Widelands Mapfile; Flags: uninsdeletekey
 Root: HKCR; Subkey: WidelandsMapFile\DefaultIcon;         ValueType: string; ValueName: ; ValueData: {app}\WL-Editor.ico
-Root: HKCR; Subkey: WidelandsMapFile\shell\open\command;  ValueType: string; ValueName: ; ValueData: """{app}\{#ExeName}"" ""--editor=%1"""
+Root: HKCR; Subkey: WidelandsMapFile\shell\open\command;  ValueType: string; ValueName: ; ValueData: """{app}\{#ExeName}"" ""--editor=%1"" ""--localedir={app}\locale"""

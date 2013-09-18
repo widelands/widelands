@@ -40,8 +40,8 @@ struct Computer_Player :
 
 	virtual void think () = 0;
 
-	virtual void receive(Widelands::NoteImmovable const &) {}
-	virtual void receive(Widelands::NoteFieldPossession     const &) {}
+	virtual void receive(const Widelands::NoteImmovable &) {}
+	virtual void receive(const Widelands::NoteFieldPossession     &) {}
 
 	Widelands::Game & game() const throw () {return m_game;}
 	Widelands::Player_Number player_number() {return m_player_number;}
@@ -64,7 +64,7 @@ struct Computer_Player :
 	/**
 	 * Get a list of available AI implementations.
 	 */
-	static ImplementationVector const & getImplementations();
+	static const ImplementationVector & getImplementations();
 
 	/**
 	 * Get the best matching implementation for this name.

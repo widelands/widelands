@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2010 by the Widelands Development Team
+ * Copyright (C) 2006-2010, 2013 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -17,29 +17,29 @@
  *
  */
 
-#include <string>
+#include "scripting/scripting.h"
+
 #include <stdexcept>
-
-#include "log.h"
-#include "io/filesystem/layered_filesystem.h"
-
-#include "c_utils.h"
-#include "coroutine_impl.h"
-#include "lua_bases.h"
-#include "lua_editor.h"
-#include "lua_game.h"
-#include "lua_globals.h"
-#include "lua_map.h"
-#include "lua_root.h"
-#include "lua_ui.h"
-#include "persistence.h"
-#include "factory.h"
-
-#include "scripting.h"
+#include <string>
 
 #ifdef _MSC_VER
 #include <ctype.h> // for tolower
 #endif
+
+#include "io/filesystem/layered_filesystem.h"
+#include "log.h"
+#include "scripting/c_utils.h"
+#include "scripting/coroutine_impl.h"
+#include "scripting/factory.h"
+#include "scripting/lua_bases.h"
+#include "scripting/lua_editor.h"
+#include "scripting/lua_game.h"
+#include "scripting/lua_globals.h"
+#include "scripting/lua_map.h"
+#include "scripting/lua_root.h"
+#include "scripting/lua_ui.h"
+#include "scripting/persistence.h"
+
 
 /*
 ============================================
@@ -125,7 +125,7 @@ protected:
 		virtual ~LuaInterface_Impl();
 
 		virtual void interpret_string(std::string);
-		virtual std::string const & get_last_error() const {return m_last_error;}
+		virtual const std::string & get_last_error() const {return m_last_error;}
 
 		virtual void register_scripts
 			(FileSystem &, std::string, std::string = "scripting");
@@ -133,10 +133,10 @@ protected:
 			return m_scripts[ns];
 		}
 
-		virtual boost::shared_ptr<LuaTable> run_script(std::string, std::string);
-		virtual boost::shared_ptr<LuaTable> run_script
+		virtual std::unique_ptr<LuaTable> run_script(std::string, std::string);
+		virtual std::unique_ptr<LuaTable> run_script
 			(FileSystem &, std::string, std::string);
-		virtual boost::shared_ptr<LuaTable> get_hook(std::string name);
+		virtual std::unique_ptr<LuaTable> get_hook(std::string name);
 };
 
 
@@ -156,8 +156,13 @@ std::string LuaInterface_Impl::m_register_script
 	(FileSystem & fs, std::string path, std::string ns)
 {
 		size_t length;
-		std::string data(static_cast<char *>(fs.Load(path, length)));
+		void * input_data = fs.Load(path, length);
+
+		std::string data(static_cast<char *>(input_data));
 		std::string name = path.substr(0, path.size() - 4); // strips '.lua'
+
+		// make sure the input_data is freed
+		free(input_data);
 
 		size_t pos = name.find_last_of("/\\");
 		if (pos != std::string::npos)  name = name.substr(pos + 1);
@@ -191,7 +196,7 @@ LuaInterface_Impl::LuaInterface_Impl() : m_last_error("") {
 	m_L = lua_open();
 
 	// Open the Lua libraries
-#ifdef DEBUG
+#ifndef NDEBUG
 	static const luaL_Reg lualibs[] = {
 		{"", luaopen_base},
 		{LUA_LOADLIBNAME, luaopen_package},
@@ -249,7 +254,7 @@ void LuaInterface_Impl::register_scripts
 
 	for
 		(filenameset_t::iterator i = scripting_files.begin();
-		 i != scripting_files.end(); i++)
+		 i != scripting_files.end(); ++i)
 	{
 		if (m_filename_to_short(*i) or not m_is_lua_file(*i))
 			continue;
@@ -263,7 +268,7 @@ void LuaInterface_Impl::interpret_string(std::string cmd) {
 	m_check_for_errors(rv);
 }
 
-boost::shared_ptr<LuaTable> LuaInterface_Impl::run_script
+	std::unique_ptr<LuaTable> LuaInterface_Impl::run_script
 	(FileSystem & fs, std::string path, std::string ns)
 {
 	bool delete_ns = false;
@@ -272,7 +277,7 @@ boost::shared_ptr<LuaTable> LuaInterface_Impl::run_script
 
 	std::string name = m_register_script(fs, path, ns);
 
-	boost::shared_ptr<LuaTable> rv = run_script(ns, name);
+	std::unique_ptr<LuaTable> rv = run_script(ns, name);
 
 	if (delete_ns)
 		m_scripts.erase(ns);
@@ -282,7 +287,7 @@ boost::shared_ptr<LuaTable> LuaInterface_Impl::run_script
 	return rv;
 }
 
-boost::shared_ptr<LuaTable> LuaInterface_Impl::run_script
+	std::unique_ptr<LuaTable> LuaInterface_Impl::run_script
 	(std::string ns, std::string name)
 {
 	if
@@ -303,27 +308,27 @@ boost::shared_ptr<LuaTable> LuaInterface_Impl::run_script
 	}
 	if (not lua_istable(m_L, -1))
 		throw LuaError("Script did not return a table!");
-	return boost::shared_ptr<LuaTable>(new LuaTable_Impl(m_L));
+	return std::unique_ptr<LuaTable>(new LuaTable_Impl(m_L));
 }
 
 /*
  * Returns a given hook if one is defined, otherwise returns 0
  */
-boost::shared_ptr<LuaTable> LuaInterface_Impl::get_hook(std::string name) {
+std::unique_ptr<LuaTable> LuaInterface_Impl::get_hook(std::string name) {
 	lua_getglobal(m_L, "hooks");
 	if (lua_isnil(m_L, -1)) {
 		lua_pop(m_L, 1);
-		return boost::shared_ptr<LuaTable>();
+		return std::unique_ptr<LuaTable>();
 	}
 
 	lua_getfield(m_L, -1, name.c_str());
 	if (lua_isnil(m_L, -1)) {
 		lua_pop(m_L, 2);
-		return boost::shared_ptr<LuaTable>();
+		return std::unique_ptr<LuaTable>();
 	}
 	lua_remove(m_L, -2);
 
-	return boost::shared_ptr<LuaTable>(new LuaTable_Impl(m_L));
+	return std::unique_ptr<LuaTable>(new LuaTable_Impl(m_L));
 }
 
 /*

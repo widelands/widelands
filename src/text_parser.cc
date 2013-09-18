@@ -19,17 +19,15 @@
 
 #include "text_parser.h"
 
+#include <algorithm>
+#include <cstring>
+#include <string>
+#include <vector>
+
 #include "constants.h"
-#include "graphic/graphic.h"
+#include "container_iterate.h"
 #include "helper.h"
 #include "log.h"
-
-#include "container_iterate.h"
-
-#include <vector>
-#include <algorithm>
-#include <string>
-#include <cstring>
 
 namespace UI {
 
@@ -38,7 +36,7 @@ Richtext_Block::Richtext_Block() :
 	m_text_align (Align_Left)
 {}
 
-Richtext_Block::Richtext_Block(Richtext_Block const & src) {
+Richtext_Block::Richtext_Block(const Richtext_Block & src) {
 	m_images.clear();
 	m_text_blocks.clear();
 	for (uint32_t i = 0; i < src.m_images.size(); ++i)
@@ -55,11 +53,11 @@ Text_Block::Text_Block() {
 	m_font_weight = "normal";
 	m_font_style = "normal";
 	m_font_decoration = "none";
-	m_font_face = "FreeSans.ttf";
+	m_font_face = "DejaVuSans.ttf";
 	m_line_spacing = 0;
 }
 
-Text_Block::Text_Block(Text_Block const & src) {
+Text_Block::Text_Block(const Text_Block & src) {
 	m_words.clear();
 	m_line_breaks.clear();
 	for (uint32_t i = 0; i < src.m_words.size(); ++i)
@@ -131,8 +129,7 @@ bool Text_Parser::parse_textblock
 {
 	std::string block_text;
 
-	const bool extract_more =
-		extract_format_block(block, block_text, block_format, "<p", ">", "</p>");
+	const bool extract_more = extract_format_block(block, block_text, block_format, "<p", ">", "</p>");
 
 	//Split the the text because of " "
 	std::vector<std::string> unwrapped_words;
@@ -141,7 +138,18 @@ bool Text_Parser::parse_textblock
 	//Handle user defined line breaks, and save them
 	container_iterate_const(std::vector<std::string>, unwrapped_words, i)
 		for (std::string line = *i.current;;) {
-			std::string::size_type const next_break = line.find("<br>");
+			std::string::size_type next_break = line.find("<br>");
+
+			// Replace &lt; with <
+			std::string::size_type smaller = line.find("&lt;");
+			while (smaller != std::string::npos) {
+				line.replace(smaller, 4, "<");
+				if (next_break > smaller)
+					// Fix position of <br> tag
+					next_break -= 3;
+				smaller = line.find("&lt;");
+			}
+
 			if (next_break == std::string::npos) {
 				if (line.size())
 					words.push_back(line);
@@ -179,9 +187,9 @@ bool Text_Parser::extract_format_block
 	(std::string       & block,
 	 std::string       & block_text,
 	 std::string       & block_format,
-	 std::string const & block_start,
-	 std::string const & format_end,
-	 std::string const & block_end)
+	 const std::string & block_start,
+	 const std::string & format_end,
+	 const std::string & block_end)
 {
 	if (block.compare(0, block_start.size(), block_start)) {
 		const std::string::size_type format_begin_pos = block.find(block_start);
@@ -300,7 +308,7 @@ void Text_Parser::parse_text_attributes
 	}
 }
 
-Align Text_Parser::set_align(std::string const & align) {
+Align Text_Parser::set_align(const std::string & align) {
 	return
 		align == "right"  ? Align_Right   :
 		align == "center" ? Align_HCenter :

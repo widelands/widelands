@@ -1,63 +1,98 @@
 ##### This is the list of terrains, which can be used in world 'desert'
 ##### Most of them are from greenland. I just changed few colors, brightness and contrasts.
 
+##### Name strings are not translatable by purpose: this way mapmakers can share
+##### suggestions without having to worry about the localized name of terrain
+
 [desert1]
+name=_"Desert1"
 is=dry
+dither_layer=20
 
 [desert2]
+name=_"Desert2"
 is=dry
+dither_layer=20
 
 [desert3]
+name=_"Desert3"
 is=dry
+dither_layer=20
 
 [desert4]
+name=_"Desert4"
 def_resources=water 2
 is=green
+dither_layer=20
 
 [drysoil]
+name=_"Dry soil"
 def_resources=water 4
 is=green
+dither_layer=30
 
 [beach]
+name=_"Beach"
 is=dry
+dither_layer=10
 
 [steppe]
+name=_"Steppe"
 def_resources=water 5
 is=green
+dither_layer=30
 
 [meadow]
+name=_"Meadow"
 def_resources=water 10
 is=green
+dither_layer=40
 
 [mountainmeadow]
+name=_"Mountain meadow"
 is=green
+dither_layer=50
 
 [highmountainmeadow]
+name=_"High mountain meadow"
 is=green
+dither_layer=60
 
 [mountain1]
+name=_"Mountain1"
 resources=coal, iron, gold, granit
 is=mountain
+dither_layer=70
 
 [mountain2]
+name=_"Mountain2"
 resources=coal, iron, gold, granit
 is=mountain
+dither_layer=70
 
 [mountain3]
+name=_"Mountain3"
 resources=coal, iron, gold, granit
 is=mountain
+dither_layer=70
 
 [mountain4]
+name=_"Mountain4"
 resources=coal, iron, gold, granit
 is=mountain
+dither_layer=70
 
 
 ##### Here are few imported textures of greenland
 
 [wasser]
+name=_"Water"
 def_resources=fish 4
 is=water
 fps=5
+dither_layer=0
 
 [lava]
+name=_"Lava"
 is=acid
+dither_layer=80

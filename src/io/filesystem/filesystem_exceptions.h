@@ -92,9 +92,9 @@ struct FileAccessDenied_error : public File_error {
 
 struct DirectoryCannotCreate_error : public File_error {
 	explicit DirectoryCannotCreate_error
-		(std::string const & thrower,
-		 std::string const & dirname,
-		 std::string const & message = "cannot create directory")
+		(const std::string & thrower,
+		 const std::string & dirname,
+		 const std::string & message = "cannot create directory")
 		throw ()
 		: File_error(thrower, dirname, message)
 	{}

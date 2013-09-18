@@ -20,12 +20,12 @@
 #ifndef UI_ICONGRID_H
 #define UI_ICONGRID_H
 
-#include "panel.h"
-#include "textarea.h"
-
 #include <vector>
 
-#include <boost/signal.hpp>
+#include <boost/signals2.hpp>
+
+#include "ui_basic/panel.h"
+#include "ui_basic/textarea.h"
 
 namespace UI {
 
@@ -41,15 +41,15 @@ struct Icon_Grid : public Panel {
 		 int32_t x, int32_t y, int32_t cellw, int32_t cellh,
 		 int32_t  cols);
 
-	boost::signal<void (int32_t)> clicked;
-	boost::signal<void (int32_t)> mouseout;
-	boost::signal<void (int32_t)> mousein;
+	boost::signals2::signal<void (int32_t)> clicked;
+	boost::signals2::signal<void (int32_t)> mouseout;
+	boost::signals2::signal<void (int32_t)> mousein;
 
 	int32_t add
-		(std::string const & name,
-		 PictureID           picid,
+		(const std::string & name,
+		 const Image* pic,
 		 void              * data,
-		 std::string const & descr = std::string());
+		 const std::string & tooltip_text = "");
 	void * get_data(int32_t idx);
 
 private:
@@ -64,7 +64,6 @@ private:
 	int32_t m_cell_width; ///< size of one cell
 	int32_t m_cell_height;
 
-	Textarea          m_ta;
 	std::vector<Item> m_items;
 };
 

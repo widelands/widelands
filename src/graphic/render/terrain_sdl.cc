@@ -17,7 +17,7 @@
  *
  */
 
-#include "terrain_sdl.h"
+#include "graphic/render/terrain_sdl.h"
 
 /// get lambda and mu so that
 /// lambda * u + mu * v = (1 0)^T with u = (u1 u2)^T and v = (v1 v2)^T

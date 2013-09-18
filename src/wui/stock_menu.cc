@@ -17,15 +17,15 @@
  *
  */
 
-#include "stock_menu.h"
+#include "wui/stock_menu.h"
 
 #include "economy/economy.h"
 #include "graphic/graphic.h"
 #include "i18n.h"
-#include "interactive_player.h"
 #include "logic/player.h"
 #include "logic/warehouse.h"
 #include "ui_basic/tabpanel.h"
+#include "wui/interactive_player.h"
 
 static const char pic_tab_wares[] = "pics/menu_tab_wares.png";
 static const char pic_tab_workers[] = "pics/menu_tab_workers.png";
@@ -37,37 +37,35 @@ static const char pic_tab_workers_warehouse[] =
 Stock_Menu::Stock_Menu
 	(Interactive_Player & plr, UI::UniqueWindow::Registry & registry)
 :
-UI::UniqueWindow(&plr, "stock_menu", &registry, 640, 480, _("Stock")),
+UI::UniqueWindow(&plr, "stock_menu", &registry, 480, 640, _("Stock")),
 m_player(plr)
 {
-	set_cache(false);
-
 	UI::Tab_Panel * tabs =
 		 new UI::Tab_Panel
-			 (this, 0, 0, g_gr->get_picture(PicMod_UI, "pics/but1.png"));
+			 (this, 0, 0, g_gr->images().get("pics/but1.png"));
 	set_center_panel(tabs);
 
 	m_all_wares = new WaresDisplay(tabs, 0, 0, plr.player().tribe(), Widelands::wwWARE, false);
 	tabs->add
-		("total_wares", g_gr->get_picture(PicMod_UI, pic_tab_wares),
+		("total_wares", g_gr->images().get(pic_tab_wares),
 		 m_all_wares, _("Wares (total)"));
 
 	m_all_workers = new WaresDisplay(tabs, 0, 0, plr.player().tribe(), Widelands::wwWORKER, false);
 	tabs->add
-		("workers_total", g_gr->get_picture(PicMod_UI, pic_tab_workers),
+		("workers_total", g_gr->images().get(pic_tab_workers),
 		 m_all_workers, _("Workers (total)"));
 
 	m_warehouse_wares = new WaresDisplay(tabs, 0, 0, plr.player().tribe(), Widelands::wwWARE, false);
 	tabs->add
 		("wares_in_warehouses",
-		 g_gr->get_picture (PicMod_UI, pic_tab_wares_warehouse),
+		 g_gr->images().get (pic_tab_wares_warehouse),
 		 m_warehouse_wares, _("Wares in warehouses")
 	);
 
 	m_warehouse_workers = new WaresDisplay(tabs, 0, 0, plr.player().tribe(), Widelands::wwWORKER, false);
 	tabs->add
 		("workers_in_warehouses",
-		 g_gr->get_picture(PicMod_UI, pic_tab_workers_warehouse),
+		 g_gr->images().get(pic_tab_workers_warehouse),
 		 m_warehouse_workers, _("Workers in warehouses")
 	);
 }
@@ -95,7 +93,7 @@ void Stock_Menu::fill_total_waresdisplay
 	(WaresDisplay * waresdisplay, Widelands::WareWorker type)
 {
 	waresdisplay->remove_all_warelists();
-	Widelands::Player const & player = *m_player.get_player();
+	const Widelands::Player & player = *m_player.get_player();
 	const uint32_t nrecos = player.get_nr_economies();
 	for (uint32_t i = 0; i < nrecos; ++i)
 		waresdisplay->add_warelist
@@ -112,7 +110,7 @@ void Stock_Menu::fill_warehouse_waresdisplay
 	(WaresDisplay * waresdisplay, Widelands::WareWorker type)
 {
 	waresdisplay->remove_all_warelists();
-	Widelands::Player const & player = *m_player.get_player();
+	const Widelands::Player & player = *m_player.get_player();
 	const uint32_t nrecos = player.get_nr_economies();
 	for (uint32_t i = 0; i < nrecos; ++i) {
 		const std::vector<Widelands::Warehouse *> & warehouses =

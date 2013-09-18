@@ -17,9 +17,10 @@
  *
  */
 
-#include "editor.h"
+#include "ui_fsmenu/editor.h"
 
 #include "constants.h"
+#include "graphic/graphic.h"
 #include "i18n.h"
 
 Fullscreen_Menu_Editor::Fullscreen_Menu_Editor() :
@@ -32,23 +33,23 @@ Fullscreen_Menu_Editor::Fullscreen_Menu_Editor() :
 
 // Title
 	title
-		(this, get_w() / 2, get_h() * 3 / 40, _("Editor Menu"), UI::Align_HCenter),
+		(this, get_w() / 2, get_h() * 3 / 40, _("Editor"), UI::Align_HCenter),
 
 // Buttons
 	new_map
 		(this, "new_map",
 		 m_butx, get_h() * 6 / 25, m_butw, m_buth,
-		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
+		 g_gr->images().get("pics/but1.png"),
 		 _("New Map"), std::string(), true, false),
 	load_map
 		(this, "load_map",
 		 m_butx, get_h() * 61 / 200, m_butw, m_buth,
-		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
+		 g_gr->images().get("pics/but1.png"),
 		 _("Load Map"), std::string(), true, false),
 	back
 		(this, "back",
 		 m_butx, get_h() * 3 / 4, m_butw, m_buth,
-		 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
+		 g_gr->images().get("pics/but0.png"),
 		 _("Back"), std::string(), true, false)
 {
 	new_map.sigclicked.connect

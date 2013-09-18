@@ -17,23 +17,24 @@
  *
  */
 
-#include "editor_tool_change_resources_options_menu.h"
-
-#include "editor/editorinteractive.h"
-#include "i18n.h"
-#include "ui_basic/button.h"
-#include "editor/tools/editor_increase_resources_tool.h"
-#include "editor/tools/editor_set_resources_tool.h"
-#include "logic/map.h"
-#include "logic/widelands.h"
-#include "logic/world.h"
-#include "graphic/graphic.h"
-#include "wui/overlay_manager.h"
+#include "editor/ui_menus/editor_tool_change_resources_options_menu.h"
 
 #include <cstdio>
 
-#define width  20
-#define height 20
+#include "editor/editorinteractive.h"
+#include "editor/tools/editor_increase_resources_tool.h"
+#include "editor/tools/editor_set_resources_tool.h"
+#include "graphic/graphic.h"
+#include "i18n.h"
+#include "logic/map.h"
+#include "logic/widelands.h"
+#include "logic/world.h"
+#include "ui_basic/button.h"
+#include "wui/overlay_manager.h"
+
+const static int BUTTON_WIDTH = 20;
+const static int BUTTON_HEIGHT = 20;
+
 Editor_Tool_Change_Resources_Options_Menu::
 Editor_Tool_Change_Resources_Options_Menu
 		(Editor_Interactive             & parent,
@@ -41,24 +42,25 @@ Editor_Tool_Change_Resources_Options_Menu
 		 UI::UniqueWindow::Registry     & registry)
 	:
 	Editor_Tool_Options_Menu
-		(parent, registry, 164, 120, _("Resources Tools Options")),
+		(parent, registry, 164, 120, _("Resources")),
 	m_change_by_label
 		(this,
-		 hmargin(), vmargin(), get_inner_w() - 2 * hmargin(), height,
+		 hmargin(), vmargin(), get_inner_w() - 2 * hmargin(), BUTTON_HEIGHT,
 		 _("In-/Decrease Value"), UI::Align_BottomCenter),
 	m_change_by_increase
 		(this, "incr_change_by",
-		 hmargin(),
+		 get_inner_w() - hmargin() - BUTTON_WIDTH,
 		 m_change_by_label.get_y() + m_change_by_label.get_h() + spacing(),
-		 width, height,
-		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
-		 g_gr->get_picture(PicMod_Game, "pics/scrollbar_up.png")),
+		 BUTTON_WIDTH, BUTTON_HEIGHT,
+		 g_gr->images().get("pics/but1.png"),
+		 g_gr->images().get("pics/scrollbar_up.png")),
 	m_change_by_decrease
 		(this, "decr_change_by",
-		 get_inner_w() - hmargin() - width, m_change_by_increase.get_y(),
-		 width, height,
-		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
-		 g_gr->get_picture(PicMod_Game, "pics/scrollbar_down.png")),
+		 hmargin(),
+		 m_change_by_increase.get_y(),
+		 BUTTON_WIDTH, BUTTON_HEIGHT,
+		 g_gr->images().get("pics/but1.png"),
+		 g_gr->images().get("pics/scrollbar_down.png")),
 	m_change_by_value
 		(this,
 		 m_change_by_increase.get_x() + m_change_by_increase.get_w() +
@@ -68,29 +70,31 @@ Editor_Tool_Change_Resources_Options_Menu
 		 -
 		 (m_change_by_increase.get_x() + m_change_by_increase.get_w() +
 		  hspacing()),
-		 height,
+		 BUTTON_HEIGHT,
 		 UI::Align_BottomCenter),
 	m_set_to_label
 		(this,
 		 vmargin(),
 		 m_change_by_increase.get_y() + m_change_by_increase.get_h() + vspacing(),
-		 get_inner_w() - 2 * hmargin(), height,
+		 get_inner_w() - 2 * hmargin(), BUTTON_HEIGHT,
 		 _("Set Value"), UI::Align_BottomCenter),
 	m_set_to_increase
 		(this, "incr_set_to",
-		 hmargin(), m_set_to_label.get_y() + m_set_to_label.get_h() + vspacing(),
-		 width, height,
-		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
-		 g_gr->get_picture(PicMod_Game, "pics/scrollbar_up.png")),
+		 m_change_by_increase.get_x(),
+		 m_set_to_label.get_y() + m_set_to_label.get_h() + vspacing(),
+		 BUTTON_WIDTH, BUTTON_HEIGHT,
+		 g_gr->images().get("pics/but1.png"),
+		 g_gr->images().get("pics/scrollbar_up.png")),
 	m_set_to_decrease
 		(this, "decr_set_to",
-		 m_change_by_decrease.get_x(), m_set_to_increase.get_y(), width, height,
-		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
-		 g_gr->get_picture(PicMod_Game, "pics/scrollbar_down.png")),
+		 hmargin(),
+		 m_set_to_increase.get_y(), BUTTON_WIDTH, BUTTON_HEIGHT,
+		 g_gr->images().get("pics/but1.png"),
+		 g_gr->images().get("pics/scrollbar_down.png")),
 	m_set_to_value
 		(this,
 		 m_change_by_value.get_x(), m_set_to_increase.get_y(),
-		 m_change_by_value.get_w(), height,
+		 m_change_by_value.get_w(), BUTTON_HEIGHT,
 		 UI::Align_BottomCenter),
 	m_cur_selection(this, 0, 0, _("Current Selection"), UI::Align_BottomCenter),
 	m_increase_tool(increase_tool)
@@ -120,23 +124,18 @@ Editor_Tool_Change_Resources_Options_Menu
 	m_change_by_decrease.set_repeating(true);
 	m_set_to_increase   .set_repeating(true);
 	m_set_to_decrease   .set_repeating(true);
-	Widelands::World const & world = parent.egbase().map().world();
+	const Widelands::World & world = parent.egbase().map().world();
 	Widelands::Resource_Index const nr_resources = world.get_nr_resources();
 
 	//  Find the maximal width and height for the resource pictures.
-	uint32_t resource_pic_max_width = 0, resource_pic_max_height = 0;
+	uint16_t resource_pic_max_width = 0, resource_pic_max_height = 0;
 	for (Widelands::Resource_Index i = 0; i < nr_resources; ++i) {
-		uint32_t w, h;
-		g_gr->get_picture_size
-			(g_gr->get_picture
-			 	(PicMod_Game,
-			 	 world.get_resource(i)->get_editor_pic(100000).c_str()),
-			 w, h);
-		resource_pic_max_width  = std::max(resource_pic_max_width,  w);
-		resource_pic_max_height = std::max(resource_pic_max_height, h);
+		const Image* pic = g_gr->images().get(world.get_resource(i)->get_editor_pic(100000));
+		resource_pic_max_width  = std::max(resource_pic_max_width,  pic->width());
+		resource_pic_max_height = std::max(resource_pic_max_height, pic->height());
 	}
 
-	const uint32_t resources_in_row =
+	const uint16_t resources_in_row =
 		(get_inner_w() - 2 * hmargin() + spacing())
 		/
 		(resource_pic_max_width + spacing());
@@ -146,7 +145,7 @@ Editor_Tool_Change_Resources_Options_Menu
 	m_radiogroup.clicked.connect
 		(boost::bind(&Editor_Tool_Change_Resources_Options_Menu::selected, this));
 
-	uint32_t cur_x = 0;
+	uint16_t cur_x = 0;
 	Point pos
 		(hmargin(), m_set_to_value.get_y() + m_set_to_value.get_h() + vspacing());
 	for
@@ -162,9 +161,7 @@ Editor_Tool_Change_Resources_Options_Menu
 		m_radiogroup.add_button
 			(this,
 			 pos,
-			 g_gr->get_picture
-			 	(PicMod_Game,
-			 	 world.get_resource(i)->get_editor_pic(100000).c_str()));
+			 g_gr->images().get(world.get_resource(i)->get_editor_pic(100000)));
 	}
 	pos.y += resource_pic_max_height + vspacing();
 
@@ -194,6 +191,7 @@ void Editor_Tool_Change_Resources_Options_Menu::clicked_button(Button const n)
 	case    Set_To_Decrease: set_to    -= 0 < set_to;     break;
 	default:
 		assert(false);
+		break;
 	}
 	m_increase_tool.set_change_by(change_by);
 	m_increase_tool.decrease_tool().set_change_by(change_by);
@@ -234,11 +232,8 @@ void Editor_Tool_Change_Resources_Options_Menu::update() {
 	m_set_to_value.set_text(buf);
 
 	m_cur_selection.set_text
-		(m_increase_tool.set_tool().get_cur_res() ?
-		 ref_cast<Editor_Interactive, UI::Panel>(*get_parent()).egbase().map()
-		 .world().get_resource(m_increase_tool.set_tool().get_cur_res())->name()
-		 :
-		 "");
+		(ref_cast<Editor_Interactive, UI::Panel>(*get_parent()).egbase().map()
+		 .world().get_resource(m_increase_tool.set_tool().get_cur_res())->descname());
 	m_cur_selection.set_pos
 		(Point
 		 	((get_inner_w() - m_cur_selection.get_w()) / 2, get_inner_h() - 20));

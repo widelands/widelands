@@ -20,20 +20,21 @@
 #ifndef PLAYER_H
 #define PLAYER_H
 
-#include "areawatcher.h"
-#include "building.h"
-#include "editor_game_base.h"
-#include "mapregion.h"
-#include "message_queue.h"
-#include "notification.h"
+#include "logic/areawatcher.h"
+#include "logic/building.h"
+#include "logic/editor_game_base.h"
+#include "logic/mapregion.h"
+#include "logic/message_queue.h"
+#include "logic/notification.h"
 #include "rgbcolor.h"
-#include "tribe.h"
+#include "logic/tribe.h"
+#include "logic/warehouse.h"
+#include "logic/widelands.h"
 
-#include "widelands.h"
-
+class Node;
 namespace Widelands {
 
-struct Economy;
+class Economy;
 struct Path;
 struct PlayerImmovable;
 class Soldier;
@@ -68,8 +69,8 @@ struct Player :
 	typedef std::vector<Building_Stats_vector> BuildingStats;
 
 	friend struct Editor_Game_Base;
-	friend class Game_Player_Info_Data_Packet;
-	friend class Game_Player_Economies_Data_Packet;
+	friend struct Game_Player_Info_Data_Packet;
+	friend struct Game_Player_Economies_Data_Packet;
 	friend struct Map_Buildingdata_Data_Packet;
 	friend struct Map_Players_View_Data_Packet;
 	friend struct Map_Exploration_Data_Packet;
@@ -84,7 +85,7 @@ struct Player :
 
 	void allocate_map();
 
-	MessageQueue const & messages() const {return m_messages;}
+	const MessageQueue & messages() const {return m_messages;}
 	MessageQueue       & messages()       {return m_messages;}
 
 	/// Adds the message to the queue. Takes ownership of the message. Assumes
@@ -99,7 +100,11 @@ struct Player :
 	Message_Id add_message_with_timeout
 		(Game &, Message &, uint32_t timeout, uint32_t radius);
 
-	void set_message_status(Message_Id const id, Message::Status const status) {
+	/// Indicates that the object linked to the message has been removed
+	/// from the game. This implementation expires the message.
+	void message_object_removed(Message_Id mid) const;
+
+	void set_message_status(const Message_Id& id, Message::Status const status) {
 		messages().set_message_status(id, status);
 	}
 
@@ -107,7 +112,7 @@ struct Player :
 	Editor_Game_Base       & egbase()       throw () {return m_egbase;}
 	Player_Number     player_number() const throw () {return m_plnum;}
 	TeamNumber team_number() const {return m_team_number;}
-	RGBColor const & get_playercolor() const {return Colors[m_plnum - 1];}
+	const RGBColor & get_playercolor() const {return Colors[m_plnum - 1];}
 	const Tribe_Descr & tribe() const throw () {return m_tribe;}
 
 	const std::string & get_name() const throw () {return m_name;}
@@ -120,7 +125,7 @@ struct Player :
 
 	NodeCaps get_buildcaps(FCoords) const;
 
-	bool is_hostile(Player const &) const;
+	bool is_hostile(const Player &) const;
 
 	// For cheating
 	void set_see_all(bool const t) {m_see_all = t; m_view_changed = true;}
@@ -129,7 +134,7 @@ struct Player :
 	/// Per-player and per-field constructionsite information
 	struct Constructionsite_Information {
 		Constructionsite_Information() : becomes(0), was(0), totaltime(0), completedtime(0) {}
-		const Building_Descr * becomes;
+		const Building_Descr * becomes; // Also works as a marker telling whether there is a construction site.
 		const Building_Descr * was; // only valid if "becomes" is an enhanced building.
 		uint32_t               totaltime;
 		uint32_t               completedtime;
@@ -139,7 +144,14 @@ struct Player :
 	struct Field : boost::noncopyable {
 		Field() :
 			military_influence(0),
-			vision            (0)
+			vision            (0),
+			roads(0),
+			owner(0),
+			time_node_last_unseen(0),
+			border(0),
+			border_r(0),
+			border_br(0),
+			border_bl(0)
 		{
 			//  Must be initialized because the rendering code is accessing it
 			//  even for triangles that the player does not see (it is the
@@ -309,9 +321,16 @@ struct Player :
 		 * if the immovable is big?). (Roads are not stored here.)
 		 */
 		const Map_Object_Descr             * map_object_descr[3];
+
 		/// Information for constructionsite's animation.
 		/// only valid, if there is a constructionsite on this node
-		const Constructionsite_Information * constructionsite[3];
+		Constructionsite_Information constructionsite;
+
+		/// Save whether the player saw a border the last time (s)he saw the node.
+		bool border;
+		bool border_r;
+		bool border_br;
+		bool border_bl;
 
 		//  Summary of intended layout (not yet fully implemented)
 		//
@@ -332,6 +351,11 @@ struct Player :
 		//  map_object_descr[0]             0x0a0  0x20   0x0a0  0x40
 		//  map_object_descr[1]             0x0c0  0x20   0x0e0  0x40
 		//  map_object_descr[2]             0x0e0  0x20   0x120  0x40
+		//  Constructionsite_Information
+		//  border
+		//  border_r
+		//  border_br
+		//  border_bl
 		//  <end>                           0x100         0x160
 	};
 
@@ -346,7 +370,7 @@ struct Player :
 	 * those of the 6 surrounding edges/triangles that are not seen from another
 	 * node.
 	 */
-	void rediscover_node(Map const &, Widelands::Field const &, FCoords)
+	void rediscover_node(const Map &, const Widelands::Field &, FCoords)
 		throw ();
 
 	bool has_view_changed() {
@@ -375,20 +399,19 @@ struct Player :
 		throw ();
 
 	/// Call see_node for each node in the area.
-	void see_area(const Area<FCoords> area)
-		throw ()
-	{
+	void see_area(const Area<FCoords>& area) throw () {
 		const Time gametime = egbase().get_gametime();
 		const Map & map = egbase().map();
 		const Widelands::Field & first_map_field = map[0];
 		MapRegion<Area<FCoords> > mr(map, area);
-		do see_node(map, first_map_field, mr.location(), gametime);
-		while (mr.advance(map));
+		do {
+			see_node(map, first_map_field, mr.location(), gametime);
+		} while (mr.advance(map));
 		m_view_changed = true;
 	}
 
 	/// Decrement this player's vision for each node in an area.
-	void unsee_area(const Area<FCoords> area) throw () {
+	void unsee_area(const Area<FCoords>& area) throw () {
 		const Time gametime = egbase().get_gametime();
 		const Map &                  map      = egbase().map         ();
 		const Widelands::Field & first_map_field = map[0];
@@ -406,13 +429,13 @@ struct Player :
 		return m_fields[i].military_influence;
 	}
 
-	bool is_worker_type_allowed(Ware_Index const i) const throw () {
+	bool is_worker_type_allowed(const Ware_Index& i) const throw () {
 		return m_allowed_worker_types.at(i);
 	}
 	void allow_worker_type(Ware_Index, bool allow);
 
 	// Allowed buildings
-	bool is_building_type_allowed(Building_Index const i) const throw () {
+	bool is_building_type_allowed(const Building_Index& i) const throw () {
 		return m_allowed_building_types[i];
 	}
 	void allow_building_type(Building_Index, bool allow);
@@ -431,16 +454,21 @@ struct Player :
 	// Only to be called indirectly via CmdQueue
 	Flag & force_flag(FCoords);      /// Do what it takes to create the flag.
 	Flag *   build_flag(Coords);      /// Build a flag if it is allowed.
-	Road & force_road(Path const &);
-	Road * build_road(Path const &); /// Build a road if it is allowed.
+	Road & force_road(const Path &);
+	Road * build_road(const Path &); /// Build a road if it is allowed.
 	Building & force_building
-		(Coords,
+		(const Coords,
+		 const Building::FormerBuildings &);
+	Building & force_csite
+		(const Coords,
 		 Building_Index,
-		 bool = false);
-	Building * build(Coords, Building_Index, bool = true);
+		 const Building::FormerBuildings & = Building::FormerBuildings());
+	Building * build(Coords, Building_Index, bool, Building::FormerBuildings &);
 	void bulldoze(PlayerImmovable &, bool recurse = false);
 	void flagaction(Flag &);
 	void start_stop_building(PlayerImmovable &);
+	void military_site_set_soldier_preference(PlayerImmovable &, uint8_t m_soldier_preference);
+	void start_or_cancel_expedition(Warehouse &);
 	void enhance_building
 		(Building *, Building_Index index_of_new_building);
 	void dismantle_building (Building *);
@@ -508,8 +536,8 @@ struct Player :
 	}
 
 	// Statistics
-	Building_Stats_vector const & get_building_statistics
-		(Building_Index const i) const
+	const Building_Stats_vector & get_building_statistics
+		(const Building_Index& i) const
 	{
 		return m_building_stats[i];
 	}
@@ -520,6 +548,9 @@ struct Player :
 	std::vector<uint32_t> const * get_ware_consumption_statistics
 		(Ware_Index const) const;
 
+	std::vector<uint32_t> const * get_ware_stock_statistics
+		(Ware_Index const) const;
+
 	void ReadStatistics(FileRead &, uint32_t version);
 	void WriteStatistics(FileWrite &) const;
 	void sample_statistics();
@@ -528,11 +559,11 @@ struct Player :
 	void ware_consumed(Ware_Index, uint8_t);
 	void next_ware_production_period();
 
-	void receive(NoteImmovable const &);
-	void receive(NoteFieldPossession     const &);
-	void receive(NoteFieldTransformed     const &);
+	void receive(const NoteImmovable &);
+	void receive(const NoteFieldPossession     &);
+	void receive(const NoteFieldTransformed     &);
 
-	void setAI(std::string const &);
+	void setAI(const std::string &);
 	const std::string & getAI() const;
 
 	// used in shared kingdom mode
@@ -564,7 +595,7 @@ private:
 	bool                   m_see_all;
 	bool                   m_view_changed;
 	const Player_Number    m_plnum;
-	Tribe_Descr const    & m_tribe; // buildings, wares, workers, sciences
+	const Tribe_Descr    & m_tribe; // buildings, wares, workers, sciences
 	uint32_t               m_casualties, m_kills;
 	uint32_t               m_msites_lost,     m_msites_defeated;
 	uint32_t               m_civil_blds_lost, m_civil_blds_defeated;
@@ -606,8 +637,19 @@ private:
 	 */
 	std::vector< std::vector<uint32_t> > m_ware_consumptions;
 
+	/**
+	 * Statistics of wares stored inside of warehouses over the
+	 * life of the game, indexed as
+	 * m_ware_stocks[ware_id][time_index]
+	 */
+	std::vector< std::vector<uint32_t> > m_ware_stocks;
+
 	BuildingStats m_building_stats;
 };
+
+void find_former_buildings
+	(const Tribe_Descr & tribe_descr, const Building_Index bi,
+	 Building::FormerBuildings* former_buildings);
 
 }
 

@@ -17,23 +17,23 @@
  *
  */
 
+#include "editor/ui_menus/editor_player_menu.h"
 
+#include "editor/editorinteractive.h"
+#include "editor/tools/editor_set_starting_pos_tool.h"
 #include "graphic/graphic.h"
 #include "i18n.h"
 #include "logic/map.h"
 #include "logic/player.h"
 #include "logic/tribe.h"
 #include "logic/warehouse.h"
-#include "wexception.h"
-#include "wui/overlay_manager.h"
-#include "editor/editorinteractive.h"
-#include "editor/tools/editor_set_starting_pos_tool.h"
 #include "ui_basic/editbox.h"
 #include "ui_basic/messagebox.h"
 #include "ui_basic/textarea.h"
+#include "wexception.h"
+#include "wui/overlay_manager.h"
 
-#include "editor_player_menu.h"
-
+#define UNDEFINED_TRIBE_NAME "<undefined>"
 
 Editor_Player_Menu::Editor_Player_Menu
 	(Editor_Interactive & parent, UI::UniqueWindow::Registry & registry)
@@ -42,16 +42,16 @@ Editor_Player_Menu::Editor_Player_Menu
 		(&parent, "players_menu", &registry, 340, 400, _("Player Options")),
 	m_add_player
 		(this, "add_player",
-		 5, 5, 20, 20,
-		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
-		 g_gr->get_picture(PicMod_UI, "pics/scrollbar_up.png"),
+		 get_inner_w() - 5 - 20, 5, 20, 20,
+		 g_gr->images().get("pics/but1.png"),
+		 g_gr->images().get("pics/scrollbar_up.png"),
 		 _("Add player"),
 		 parent.egbase().map().get_nrplayers() < MAX_PLAYERS),
 	m_remove_last_player
 		(this, "remove_last_player",
-		 get_inner_w() - 5 - 20, 5, 20, 20,
-		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
-		 g_gr->get_picture(PicMod_UI, "pics/scrollbar_down.png"),
+		 5, 5, 20, 20,
+		 g_gr->images().get("pics/but1.png"),
+		 g_gr->images().get("pics/scrollbar_down.png"),
 		 _("Remove last player"),
 		 1 < parent.egbase().map().get_nrplayers())
 {
@@ -140,7 +140,7 @@ void Editor_Player_Menu::update() {
 			m_plr_names[p - 1] =
 				new UI::EditBox
 					(this, posx, posy, 140, size,
-					 g_gr->get_picture(PicMod_UI, "pics/but0.png"));
+					 g_gr->images().get("pics/but0.png"));
 			m_plr_names[p - 1]->changed.connect
 				(boost::bind(&Editor_Player_Menu::name_changed, this, p - 1));
 			posx += 140 + spacing;
@@ -152,13 +152,13 @@ void Editor_Player_Menu::update() {
 				new UI::Button
 					(this, "tribe",
 					 posx, posy, 140, size,
-					 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
-					 std::string());
+					 g_gr->images().get("pics/but0.png"),
+					 "");
 			m_plr_set_tribes_buts[p - 1]->sigclicked.connect
 				(boost::bind(&Editor_Player_Menu::player_tribe_clicked, boost::ref(*this), p - 1));
 			posx += 140 + spacing;
 		}
-		if (map.get_scenario_player_tribe(p) != "<undefined>")
+		if (map.get_scenario_player_tribe(p) != UNDEFINED_TRIBE_NAME)
 			m_plr_set_tribes_buts[p - 1]->set_title
 				(map.get_scenario_player_tribe(p).c_str());
 		else {
@@ -176,17 +176,16 @@ void Editor_Player_Menu::update() {
 				new UI::Button
 					(this, "starting_pos",
 					 posx, posy, size, size,
-					 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
-					 g_gr->get_no_picture(),
-					 std::string());
+					 g_gr->images().get("pics/but0.png"),
+					 nullptr,
+					 "");
 			m_plr_set_pos_buts[p - 1]->sigclicked.connect
 				(boost::bind(&Editor_Player_Menu::set_starting_pos_clicked, boost::ref(*this), p));
-			posx += size + spacing;
 		}
 		char text[] = "pics/fsel_editor_set_player_00_pos.png";
 		text[28] += p / 10;
 		text[29] += p % 10;
-		m_plr_set_pos_buts[p - 1]->set_pic(g_gr->get_picture(PicMod_Game, text));
+		m_plr_set_pos_buts[p - 1]->set_pic(g_gr->images().get(text));
 		posy += size + spacing;
 	}
 	set_inner_size(get_inner_w(), posy + spacing);
@@ -230,7 +229,7 @@ void Editor_Player_Menu::clicked_remove_last_player() {
 			picsname[19] += old_nr_players / 10;
 			picsname[20] += old_nr_players % 10;
 			map.overlay_manager().remove_overlay
-				(sp, g_gr->get_picture(PicMod_Game, picsname));
+				(sp, g_gr->images().get(picsname));
 		}
 	}
 	map.set_nrplayers(nr_players);
@@ -431,7 +430,7 @@ void Editor_Player_Menu::make_infrastructure_clicked(uint8_t n) {
 		picsname += static_cast<char>((n % 10) + 0x30);
 		picsname += "_starting_pos.png";
 		overlay_manager.remove_overlay
-			(start_pos, g_gr->get_picture(PicMod_Game,  picsname));
+			(start_pos, g_gr->images().get(picsname));
 	}
 
 	parent.select_tool(parent.tools.make_infrastructure, Editor_Tool::First);

@@ -1,12 +1,12 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2011 Widelands Development Team
+# Copyright (C) 2005-2013 Widelands Development Team
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2011-12-02 12:41+0000\n"
+"POT-Creation-Date: 2013-09-15 17:41+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -78,7 +78,7 @@ msgid ""
 "therefore need military sites to keep military influence over your land."
 msgstr ""
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:683
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:682
 msgid ""
 "Attack and conquer all military buildings of the enemy and destroy its\n"
 "headquarters."
@@ -145,7 +145,7 @@ msgid ""
 "Census and statistics"
 msgstr ""
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:650
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:649
 msgid ""
 "Citadels can not be built directly. Instead, you have to construct a fortress\n"
 "first and then enhance it to a citadel. To do so, click on the fortress, then\n"
@@ -167,8 +167,8 @@ msgid ""
 "Closing windows"
 msgstr ""
 
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:696
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:697
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:698
 msgid ""
 "Conclusion"
 msgstr ""
@@ -210,29 +210,29 @@ msgid ""
 "that they get a tick-symbol in front of them. Then, you can click the"
 msgstr ""
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:675
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:674
 msgid ""
 "Defeat the enemy"
 msgstr ""
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:688
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:687
 msgid ""
 "Defeat the enemy tribe"
 msgstr ""
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:690
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:689
 msgid ""
 "Defeat the nearby enemy. To attack a building, click on its doors, choose the\n"
 "number of attacking soldiers, then send them via the attack button."
 msgstr ""
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:674
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:689
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:673
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:688
 msgid ""
 "Defeat your enemy"
 msgstr ""
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:629
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:628
 msgid ""
 "Defense is the value that is subtracted from the attack value. The barbarians\n"
 "can not train in this skill and therefore have always defense level 0 which\n"
@@ -242,7 +242,7 @@ msgid ""
 "are because of the defense ability."
 msgstr ""
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:628
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:627
 msgid ""
 "Defense:"
 msgstr ""
@@ -258,28 +258,28 @@ msgid ""
 "Enable the build help"
 msgstr ""
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:644
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:643
 msgid ""
 "Enhance this fortress"
 msgstr ""
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:663
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:662
 msgid ""
 "Enhance your fortress"
 msgstr ""
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:662
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:661
 msgid ""
 "Enhance your fortress to a citadel"
 msgstr ""
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:657
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:656
 msgid ""
 "Enhance your fortress to a citadel now. Remember that you can speed time up\n"
 "by using PAGE_UP, building a citadel takes a while."
 msgstr ""
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:664
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:663
 msgid ""
 "Enhance your fortress to a mighty citadel. The citadel can house 12 soldiers\n"
 "and is the biggest military building the barbarians can build. It also costs a\n"
@@ -287,18 +287,18 @@ msgid ""
 "important points like constricted points or mountains."
 msgstr ""
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:645
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:644
 msgid ""
 "Enhancing buildings"
 msgstr ""
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:636
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:635
 msgid ""
 "Evade is the chance that the soldier is able to dodge an attack. It is 25% for\n"
 "a level 0 evade barbarian and increases in steps of 15% for each level."
 msgstr ""
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:635
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:634
 msgid ""
 "Evade:"
 msgstr ""
@@ -412,7 +412,7 @@ msgid ""
 "youngest and quickest anymore."
 msgstr ""
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:676
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:675
 msgid ""
 "I created a sparring partner for you: It is an empire tribe close to your\n"
 "citadel. To attack its buildings, click on the door of your target building,\n"
@@ -422,7 +422,7 @@ msgid ""
 "intercept your forces."
 msgstr ""
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:646
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:645
 msgid ""
 "I will create an enemy for you soon, but let's make sure you are prepared.\n"
 "This fortress is already quite strong and conquers a lot of space. But there is\n"
@@ -705,7 +705,7 @@ msgid ""
 "move your view over there."
 msgstr ""
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:716
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:715
 msgid ""
 "Thanks for playing this tutorial. Enjoy Widelands and remember\n"
 "to visit us at"
@@ -837,7 +837,7 @@ msgid ""
 "demonstrate."
 msgstr ""
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:700
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:699
 msgid ""
 "This concludes the tutorial. There is some stuff we have not covered here --\n"
 "we have not even built a single producing building even though producing wares\n"
@@ -942,7 +942,7 @@ msgid ""
 "fields farther up."
 msgstr ""
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:708
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:707
 msgid ""
 "You can continue playing this map or you can end this game whenever you like.\n"
 "To leave this game and return to the main menu click on the"
@@ -1015,7 +1015,7 @@ msgid ""
 "build flag symbol."
 msgstr ""
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:714
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:713
 msgid ""
 "exit game button."
 msgstr ""
@@ -1031,7 +1031,7 @@ msgid ""
 "nothing was found here"
 msgstr ""
 
-#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:711
+#: ../../campaigns/tutorial01.wmf/scripting/texts.lua:710
 msgid ""
 "options menu button on the very left at the bottom of the screen.\n"
 "Then click the"

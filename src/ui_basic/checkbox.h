@@ -20,10 +20,9 @@
 #ifndef UI_CHECKBOX_H
 #define UI_CHECKBOX_H
 
-#include <boost/signals.hpp>
+#include <boost/signals2.hpp>
 
-#include "panel.h"
-
+#include "ui_basic/panel.h"
 #include "rgbcolor.h"
 
 #define STATEBOX_WIDTH 20
@@ -39,13 +38,13 @@ struct Statebox : public Panel {
 	Statebox
 		(Panel * parent,
 		 Point,
-		 PictureID picid                  = g_gr->get_no_picture(),
-		 std::string const & tooltip_text = std::string());
+		 const Image* pic                  = 0,
+		 const std::string & tooltip_text = std::string());
 	~Statebox();
 
-	boost::signal<void ()> changed;
-	boost::signal<void (bool)> changedto;
-	boost::signal<void (bool)> clickedto; // same as changedto but only called when clicked
+	boost::signals2::signal<void ()> changed;
+	boost::signals2::signal<void (bool)> changedto;
+	boost::signals2::signal<void (bool)> clickedto; // same as changedto but only called when clicked
 
 	void set_enabled(bool enabled);
 
@@ -63,6 +62,7 @@ struct Statebox : public Panel {
 	void handle_mousein(bool inside);
 	bool handle_mousepress  (Uint8 btn, int32_t x, int32_t y);
 	bool handle_mouserelease(Uint8 btn, int32_t x, int32_t y);
+	bool handle_mousemove(Uint8, int32_t, int32_t, int32_t, int32_t);
 
 private:
 	virtual void clicked() = 0;
@@ -80,7 +80,7 @@ private:
 		if (enable)
 			m_flags |= flags;
 	}
-	PictureID    m_pic_graphics;
+	const Image* m_pic_graphics;
 };
 
 
@@ -94,9 +94,9 @@ struct Checkbox : public Statebox {
 	Checkbox
 		(Panel             * const parent,
 		 Point               const p,
-		 PictureID           const picid        = g_gr->get_no_picture(),
-		 std::string const &       tooltip_text = std::string())
-		: Statebox(parent, p, picid, tooltip_text)
+		 const Image* pic        = 0,
+		 const std::string &       tooltip_text = std::string())
+		: Statebox(parent, p, pic, tooltip_text)
 	{}
 
 private:

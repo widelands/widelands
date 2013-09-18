@@ -1,0 +1,7 @@
+<rt>
+<p>
+This is that<font size=8><space fill="."></font>100 €<br>
+One<font size=8><space fill="."></font>eins<br>
+Two<font size=8><space fill="."></font>zwei
+</p>
+</rt>

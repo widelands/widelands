@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2010 by the Widelands Development Team
+ * Copyright (C) 2010, 2013 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -17,36 +17,54 @@
  *
  */
 
-#include "icon.h"
+#include "ui_basic/icon.h"
+
+#include "graphic/image.h"
 #include "graphic/rendertarget.h"
-#include "graphic/picture.h"
 
 namespace UI {
 
 Icon::Icon
 	(Panel * const parent,
 	 const int32_t x, const int32_t y, const int32_t w, const int32_t h,
-	 const PictureID picture_id)
+	 const Image* picture_id)
 	:
 	Panel(parent, x, y, w, h),
-	m_pic(picture_id),
-	m_w(w),
-	m_h(h)
+	m_pic(picture_id)
 {
 	set_handle_mouse(false);
 	set_think(false);
 }
 
-void Icon::setIcon(PictureID picture_id) {
+void Icon::setIcon(const Image* picture_id) {
 	m_pic = picture_id;
 	update();
 }
 
+void Icon::setFrame(const RGBColor& color)
+{
+	m_draw_frame = true;
+	m_framecolor.r = color.r;
+	m_framecolor.g = color.g;
+	m_framecolor.b = color.b;
+}
+
+void Icon::setNoFrame()
+{
+	m_draw_frame = false;
+}
+
+
+
 void Icon::draw(RenderTarget & dst) {
-	assert(m_pic != g_gr->get_no_picture());
-	int32_t w = (m_w - m_pic->get_w()) / 2;
-	int32_t h = (m_h - m_pic->get_h()) / 2;
-	dst.blit(Point(w, h), m_pic);
+	if (m_pic) {
+		int32_t w = (get_w() - m_pic->width()) / 2;
+		int32_t h = (get_h() - m_pic->height()) / 2;
+		dst.blit(Point(w, h), m_pic);
+	}
+	if (m_draw_frame) {
+		dst.draw_rect(Rect(0, 0, get_w(), get_h()), m_framecolor);
+	}
 }
 
 }

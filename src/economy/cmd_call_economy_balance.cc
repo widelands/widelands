@@ -17,13 +17,13 @@
  *
  */
 
-#include "cmd_call_economy_balance.h"
+#include "economy/cmd_call_economy_balance.h"
 
-#include "economy.h"
+#include "economy/economy.h"
 #include "logic/game.h"
+#include "logic/player.h"
 #include "map_io/widelands_map_map_object_loader.h"
 #include "map_io/widelands_map_map_object_saver.h"
-#include "logic/player.h"
 #include "wexception.h"
 
 namespace Widelands {
@@ -84,7 +84,7 @@ void Cmd_Call_Economy_Balance::Read
 		} else
 			throw game_data_error
 				(_("unknown/unhandled version %u"), packet_version);
-	} catch (_wexception const & e) {
+	} catch (const _wexception & e) {
 		throw wexception(_("call economy balance: %s"), e.what());
 	}
 }

@@ -20,12 +20,12 @@
 #ifndef OBJECTIVE_H
 #define OBJECTIVE_H
 
-#include "named.h"
-#include "i18n.h"
-
 #include <cassert>
-#include <string>
 #include <cstring>
+#include <string>
+
+#include "i18n.h"
+#include "named.h"
 
 namespace Widelands {
 
@@ -51,10 +51,10 @@ struct Objective : public Named {
 	const std::string & descr() const throw ()    {return m_descr;}
 	bool visible() const throw () {return m_visible;}
 	bool done() const throw () {return m_done;}
-	void set_descname(std::string const & new_name) {
+	void set_descname(const std::string & new_name) {
 		m_descname = new_name;
 	}
-	void set_descr  (std::string const & new_descr) {m_descr   = new_descr;}
+	void set_descr  (const std::string & new_descr) {m_descr   = new_descr;}
 	void set_visible(const bool t) throw ()    {m_visible = t;}
 	void set_done(bool t) {m_done = t;}
 

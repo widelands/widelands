@@ -20,7 +20,7 @@
 #ifndef MAPTRIANGLEREGION_H
 #define MAPTRIANGLEREGION_H
 
-#include "map.h"
+#include "logic/map.h"
 
 namespace Widelands {
 
@@ -43,7 +43,7 @@ namespace Widelands {
 template <typename Coords_type = TCoords<>, typename Radius_type = uint16_t>
 struct MapTriangleRegion
 {
-	MapTriangleRegion(Map const &, Coords_type, uint16_t radius);
+	MapTriangleRegion(const Map &, Coords_type, uint16_t radius);
 
 	const Coords_type & location() const throw ();
 
@@ -105,7 +105,7 @@ private:
 };
 template <typename Coords_type> struct MapTriangleRegion<TCoords<Coords_type> >
 {
-	MapTriangleRegion(Map const &, Area<TCoords<Coords_type>, uint16_t>);
+	MapTriangleRegion(const Map &, Area<TCoords<Coords_type>, uint16_t>);
 
 	const TCoords<Coords_type> & location() const throw () {return m_location;}
 

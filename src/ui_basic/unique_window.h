@@ -20,11 +20,10 @@
 #ifndef UI_UNIQUE_WINDOW_H
 #define UI_UNIQUE_WINDOW_H
 
-#include "window.h"
-#include "button.h"
-
 #include <boost/function.hpp>
 
+#include "ui_basic/button.h"
+#include "ui_basic/window.h"
 
 namespace UI {
 struct Panel;
@@ -47,17 +46,18 @@ struct UniqueWindow : public Window {
 		void toggle();
 
 		int32_t x, y;
+		bool valid_pos;
 
-		Registry() : window(0), x(-1), y(-1) {}
+		Registry() : window(0), x(0), y(0), valid_pos(false) {}
 		~Registry();
 	};
 
 	UniqueWindow
 		(Panel             * parent,
-		 std::string const & name,
+		 const std::string & name,
 		 Registry          *,
 		 int32_t w, int32_t h,
-		 std::string const & title);
+		 const std::string & title);
 	virtual ~UniqueWindow();
 
 	bool get_usedefaultpos() {return m_usedefaultpos;}

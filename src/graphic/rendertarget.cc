@@ -17,20 +17,20 @@
  *
  */
 
-#include "rendertarget.h"
+#include "graphic/rendertarget.h"
 
-#include "graphic.h"
-#include "wui/mapviewpixelconstants.h"
-#include "wui/overlay_manager.h"
-
+#include "graphic/animation.h"
+#include "graphic/animation_gfx.h"
+#include "graphic/graphic.h"
+#include "graphic/image_transformations.h"
+#include "graphic/surface.h"
+#include "log.h"
 #include "logic/player.h"
 #include "logic/tribe.h"
-#include "vertex.h"
-
-#include "offscreensurface.h"
-
-#include "log.h"
 #include "upcast.h"
+#include "vertex.h"
+#include "wui/mapviewpixelconstants.h"
+#include "wui/overlay_manager.h"
 
 using Widelands::BaseImmovable;
 using Widelands::Coords;
@@ -43,26 +43,16 @@ using Widelands::TCoords;
 /**
  * Build a render target for the given surface.
  */
-RenderTarget::RenderTarget(SurfacePtr bmp)
-{
-	m_surface = bmp;
-	reset();
-}
-
-/**
- * Build a render target for the given surface.
- */
-RenderTarget::RenderTarget(OffscreenSurfacePtr surf)
+RenderTarget::RenderTarget(Surface* surf)
 {
 	m_surface = surf;
 	reset();
 }
 
-
 /**
  * Sets an arbitrary drawing window.
  */
-void RenderTarget::set_window(Rect const & rc, Point const & ofs)
+void RenderTarget::set_window(const Rect & rc, const Point & ofs)
 {
 	m_rect = rc;
 	m_offset = ofs;
@@ -71,23 +61,23 @@ void RenderTarget::set_window(Rect const & rc, Point const & ofs)
 
 	if (m_rect.x < 0) {
 		m_offset.x += m_rect.x;
-		m_rect.w = std::max(static_cast<int32_t>(m_rect.w) + m_rect.x, 0);
+		m_rect.w = std::max<int32_t>(m_rect.w + m_rect.x, 0);
 		m_rect.x = 0;
 	}
 
-	if (m_rect.x + m_rect.w > m_surface->get_w())
+	if (m_rect.x + m_rect.w > m_surface->width())
 		m_rect.w =
-			std::max(static_cast<int32_t>(m_surface->get_w()) - m_rect.x, 0);
+			std::max<int32_t>(m_surface->width() - m_rect.x, 0);
 
 	if (m_rect.y < 0) {
 		m_offset.y += m_rect.y;
-		m_rect.h = std::max(static_cast<int32_t>(m_rect.h) + m_rect.y, 0);
+		m_rect.h = std::max<int32_t>(m_rect.h + m_rect.y, 0);
 		m_rect.y = 0;
 	}
 
-	if (m_rect.y + m_rect.h > m_surface->get_h())
+	if (m_rect.y + m_rect.h > m_surface->height())
 		m_rect.h =
-			std::max(static_cast<int32_t>(m_surface->get_h()) - m_rect.y, 0);
+			std::max<int32_t>(m_surface->height() - m_rect.y, 0);
 }
 
 /**
@@ -100,7 +90,7 @@ void RenderTarget::set_window(Rect const & rc, Point const & ofs)
  * is not changed at all. Otherwise, the function returns true.
  */
 bool RenderTarget::enter_window
-	(Rect const & rc, Rect * const previous, Point * const prevofs)
+	(const Rect & rc, Rect* previous, Point* prevofs)
 {
 	Rect newrect = rc;
 
@@ -121,17 +111,17 @@ bool RenderTarget::enter_window
 /**
  * Returns the true size of the render target (ignoring the window settings).
  */
-int32_t RenderTarget::get_w() const
+int32_t RenderTarget::width() const
 {
-	return m_surface->get_w();
+	return m_surface->width();
 }
 
 /**
  * Returns the true size of the render target (ignoring the window settings).
  */
-int32_t RenderTarget::get_h() const
+int32_t RenderTarget::height() const
 {
-	return m_surface->get_h();
+	return m_surface->height();
 }
 
 /**
@@ -139,23 +129,24 @@ int32_t RenderTarget::get_h() const
  */
 void RenderTarget::draw_line
 	(int32_t const x1, int32_t const y1, int32_t const x2, int32_t const y2,
-	 RGBColor const color)
+	 const RGBColor& color, uint8_t gwidth)
 {
 	m_surface->draw_line
 		(x1 + m_offset.x + m_rect.x, y1 + m_offset.y + m_rect.y,
-		 x2 + m_offset.x + m_rect.x, y2 + m_offset.y + m_rect.y, color);
+		 x2 + m_offset.x + m_rect.x, y2 + m_offset.y + m_rect.y, color,
+		 gwidth);
 }
 
 /**
  * Clip against window and pass those primitives along to the bitmap.
  */
-void RenderTarget::draw_rect(Rect r, const RGBColor clr)
+void RenderTarget::draw_rect(Rect r, const RGBColor& clr)
 {
 	if (clip(r))
 		m_surface->draw_rect(r, clr);
 }
 
-void RenderTarget::fill_rect(Rect r, const RGBAColor clr)
+void RenderTarget::fill_rect(Rect r, const RGBAColor& clr)
 {
 	if (clip(r))
 		m_surface->fill_rect(r, clr);
@@ -167,61 +158,51 @@ void RenderTarget::brighten_rect(Rect r, const int32_t factor)
 		m_surface->brighten_rect(r, factor);
 }
 
-void RenderTarget::clear()
-{
-	if
-		(not m_rect.x and not m_rect.y
-		 and
-		 m_rect.w == m_surface->get_w() and m_rect.h == m_surface->get_h())
-		m_surface->clear();
-	else m_surface->fill_rect(m_rect, RGBColor(0, 0, 0));
-}
-
 /**
- * Blits a Picture on the screen or (if possible) on another Surface
- * Check g_gr->caps().offscreen_rendering to see if it is possible to blit
- * to a non screen surface.
+ * Blits a Image on another Surface
  *
  * This blit function copies the pixels to the destination surface.
- * I the source surface contains a alpha channel this is used during
+ * If the source surface contains a alpha channel this is used during
  * the blit.
  */
-void RenderTarget::blit(const Point dst, const PictureID picture, Composite cm)
+void RenderTarget::blit(const Point& dst, const Image* image, Composite cm, UI::Align align)
 {
-	if (picture->valid())
-		doblit
-			(Rect(dst, 0, 0),
-			 picture, Rect(Point(0, 0), picture->get_w(), picture->get_h()), cm);
+	Point dstpoint(dst);
+
+	UI::correct_for_align(align, image->width(), image->height(), &dstpoint);
+	doblit(dstpoint, image, Rect(Point(0, 0), image->width(), image->height()), cm);
 }
 
 /**
- * Like \ref blit, but use only a sub-rectangle of the source picture.
+ * Like \ref blit, but use only a sub-rectangle of the source image.
  */
 void RenderTarget::blitrect
-	(Point const dst, PictureID const picture, Rect const srcrc, Composite cm)
+	(Point const dst, const Image* image, Rect const srcrc, Composite cm)
 {
 	assert(0 <= srcrc.x);
 	assert(0 <= srcrc.y);
 
-	if (picture->valid())
-		doblit(Rect(dst, 0, 0), picture, srcrc, cm);
+	doblit(dst, image, srcrc, cm);
 }
 
 /**
- * Fill the given rectangle with the given picture.
+ * Fill the given rectangle with the given image.
  *
- * The pixel from ofs inside picture is placed at the top-left corner of
+ * The pixel from ofs inside image is placed at the top-left corner of
  * the filled rectangle.
  */
-void RenderTarget::tile(Rect r, PictureID const picture, Point ofs, Composite cm)
+void RenderTarget::tile(Rect r, const Image* image, Point ofs, Composite cm)
 {
-	if (!picture->valid())
-		return;
-
-	int32_t srcw = picture->get_w();
-	int32_t srch = picture->get_h();
+	int32_t srcw = image->width();
+	int32_t srch = image->height();
 
 	if (clip(r)) {
+		if (m_offset.x < 0)
+			ofs.x -= m_offset.x;
+
+		if (m_offset.y < 0)
+			ofs.y -= m_offset.y;
+
 		// Make sure the offset is within bounds
 		ofs.x = ofs.x % srcw;
 
@@ -233,7 +214,7 @@ void RenderTarget::tile(Rect r, PictureID const picture, Point ofs, Composite cm
 		if (ofs.y < 0)
 			ofs.y += srch;
 
-		// Blit the picture into the rectangle
+		// Blit the image into the rectangle
 		uint32_t ty = 0;
 
 		while (ty < r.h) {
@@ -254,7 +235,7 @@ void RenderTarget::tile(Rect r, PictureID const picture, Point ofs, Composite cm
 				if (tx + srcrc.w > r.w)
 					srcrc.w = r.w - tx;
 
-				m_surface->blit(r + Point(tx, ty), picture, srcrc, cm);
+				m_surface->blit(r + Point(tx, ty), image->surface(), srcrc, cm);
 
 				tx += srcrc.w;
 
@@ -288,33 +269,27 @@ void RenderTarget::drawanim
 	 uint32_t       const time,
 	 Player const * const player)
 {
-	//log("RenderTarget::drawanim()\n");
-	AnimationData const * const data = g_anim.get_animation(animation);
+	const AnimationData& data = g_anim.get_animation(animation);
 	AnimationGfx        * const gfx  = g_gr-> get_animation(animation);
-	if (!data || !g_gr) {
+	if (!gfx) {
 		log("WARNING: Animation %u does not exist\n", animation);
 		return;
 	}
 
 	// Get the frame and its data
-	uint32_t const framenumber = time / data->frametime % gfx->nr_frames();
-	const PictureID & frame =
-		player ?
-		gfx->get_frame
-			(framenumber, player->player_number(), player->get_playercolor())
-		:
-		gfx->get_frame
-			(framenumber);
+	uint32_t const framenumber = time / data.frametime % gfx->nr_frames();
+	const Image& frame =
+		player ? gfx->get_frame(framenumber, player->get_playercolor()) : gfx->get_frame(framenumber);
 
-	dst -= gfx->get_hotspot();
+	dst -= gfx->hotspot();
 
-	Rect srcrc(Point(0, 0), frame->get_w(), frame->get_h());
+	Rect srcrc(Point(0, 0), frame.width(), frame.height());
 
-	doblit(Rect(dst, 0, 0), frame, srcrc);
+	doblit(dst, &frame, srcrc);
 
 	//  Look if there is a sound effect registered for this frame and trigger
 	//  the effect (see Sound_Handler::stereo_position).
-	data->trigger_soundfx(framenumber, 128);
+	data.trigger_soundfx(framenumber, 128);
 }
 
 void RenderTarget::drawstatic
@@ -322,28 +297,18 @@ void RenderTarget::drawstatic
 	 uint32_t       const animation,
 	 Player const * const player)
 {
-	AnimationData const * const data = g_anim.get_animation(animation);
 	AnimationGfx        * const gfx  = g_gr-> get_animation(animation);
-	if (!data || !g_gr) {
+	if (!gfx) {
 		log("WARNING: Animation %u does not exist\n", animation);
 		return;
 	}
 
 	// Get the frame and its data
-	const PictureID & frame =
-		player ?
-		gfx->get_frame
-			(0, player->player_number(), player->get_playercolor())
-		:
-		gfx->get_frame
-			(0);
+	const Image& frame = player ? gfx->get_frame(0, player->get_playercolor()) : gfx->get_frame(0);
+	const Image* dark_frame = ImageTransformations::change_luminosity(&frame, 1.22, true);
 
-	PictureID dark_frame = g_gr->create_changed_luminosity_pic(frame, 1.22, true);
-
-	dst -= Point(frame->get_w() / 2, frame->get_h() / 2);
-
-	Rect srcrc(Point(0, 0), frame->get_w(), frame->get_h());
-
+	dst -= Point(frame.width() / 2, frame.height() / 2);
+	Rect srcrc(Point(0, 0), frame.width(), frame.height());
 	doblit(Rect(dst, 0, 0), dark_frame, srcrc);
 }
 
@@ -357,29 +322,28 @@ void RenderTarget::drawanimrect
 	 Player const * const player,
 	 Rect                 srcrc)
 {
-	//log("RenderTarget::drawanimrect()\n");
-	AnimationData const * const data = g_anim.get_animation(animation);
+	const AnimationData& data = g_anim.get_animation(animation);
 	AnimationGfx        * const gfx  = g_gr-> get_animation(animation);
-	if (!data || !g_gr) {
+	if (!gfx) {
 		log("WARNING: Animation %u does not exist\n", animation);
 		return;
 	}
 
 	// Get the frame and its data
-	uint32_t const framenumber = time / data->frametime % gfx->nr_frames();
-	const PictureID & frame =
+	uint32_t const framenumber = time / data.frametime % gfx->nr_frames();
+	const Image& frame =
 		player ?
 		gfx->get_frame
-			(framenumber, player->player_number(), player->get_playercolor())
+			(framenumber, player->get_playercolor())
 		:
 		gfx->get_frame
 			(framenumber);
 
-	dst -= g_gr->get_animation(animation)->get_hotspot();
+	dst -= g_gr->get_animation(animation)->hotspot();
 
 	dst += srcrc;
 
-	doblit(Rect(dst, 0, 0), frame, srcrc);
+	doblit(dst, &frame, srcrc);
 }
 
 /**
@@ -389,8 +353,8 @@ void RenderTarget::drawanimrect
 void RenderTarget::reset()
 {
 	m_rect.x = m_rect.y = 0;
-	m_rect.w = m_surface->get_w();
-	m_rect.h = m_surface->get_h();
+	m_rect.w = m_surface->width();
+	m_rect.h = m_surface->height();
 
 	m_offset.x = m_offset.y = 0;
 }
@@ -442,7 +406,7 @@ bool RenderTarget::clip(Rect & r) const throw ()
  * Clip against window and source bitmap, then call the Bitmap blit routine.
  */
 void RenderTarget::doblit
-	(Point dst, PictureID src, Rect srcrc, Composite cm)
+	(Point dst, const Image* src, Rect srcrc, Composite cm)
 {
 	assert(0 <= srcrc.x);
 	assert(0 <= srcrc.y);
@@ -452,11 +416,8 @@ void RenderTarget::doblit
 	if (dst.x < 0) {
 		if (srcrc.w <= static_cast<uint32_t>(-dst.x))
 			return;
-
 		srcrc.x -= dst.x;
-
 		srcrc.w += dst.x;
-
 		dst.x = 0;
 	}
 
@@ -480,7 +441,16 @@ void RenderTarget::doblit
 		srcrc.h = m_rect.h - dst.y;
 	}
 
+	// Also ensure srcrc is not bigger than src
+	// so opengl blits correctly
+	if (src->width() < srcrc.x + srcrc.w) {
+		srcrc.w = src->width() - srcrc.x;
+	}
+	if (src->height() < srcrc.y + srcrc.h) {
+		srcrc.h = src->height() - srcrc.y;
+	}
+
 	dst += m_rect;
 
-	m_surface->blit(dst, src, srcrc, cm);
+	m_surface->blit(dst, src->surface(), srcrc, cm);
 }

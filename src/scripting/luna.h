@@ -64,15 +64,16 @@
 #define UNPERS_STRING(name, value) _UNPERS_TYPE(name, value, string)
 
 
-
 #include <lua.hpp>
-#include "luna_impl.h"
+
+#include "scripting/luna_impl.h"
 
 /**
  * Base Class. All Luna class must derive from this
  */
 class LunaClass {
 	public:
+		virtual ~LunaClass() {}
 		virtual void __persist(lua_State *) = 0;
 		virtual void __unpersist(lua_State *) = 0;
 		virtual const char * get_modulename() = 0;

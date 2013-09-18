@@ -17,7 +17,7 @@
  *
  */
 
-#include "game_game_class_data_packet.h"
+#include "game_io/game_game_class_data_packet.h"
 
 #include "logic/game.h"
 #include "logic/game_data_error.h"
@@ -42,7 +42,7 @@ void Game_Game_Class_Data_Packet::Read
 		} else
 			throw game_data_error
 				(_("unknown/unhandled version %u"), packet_version);
-	} catch (_wexception const & e) {
+	} catch (const _wexception & e) {
 		throw game_data_error(_("game_class: %s"), e.what());
 	}
 }

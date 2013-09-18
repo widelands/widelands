@@ -24,9 +24,8 @@
 
 #include "logic/building.h"
 #include "logic/message_id.h"
-
-#include "lua_bases.h"
-#include "luna.h"
+#include "scripting/lua_bases.h"
+#include "scripting/luna.h"
 
 namespace Widelands {
 	struct Tribe_Descr;
@@ -113,6 +112,8 @@ class L_Objective : public L_GameModuleClass {
 public:
 	LUNA_CLASS_HEAD(L_Objective);
 
+	virtual ~L_Objective() {}
+
 	L_Objective(Widelands::Objective n);
 	L_Objective() : m_name("") {}
 	L_Objective(lua_State * L) {
@@ -153,10 +154,11 @@ class L_Message : public L_GameModuleClass {
 
 public:
 	LUNA_CLASS_HEAD(L_Message);
+	virtual ~L_Message() {}
 
 	L_Message(uint8_t, Widelands::Message_Id);
 	L_Message() : m_plr(0), m_mid(0) {}
-	L_Message(lua_State * L) {
+	L_Message(lua_State * L) : m_plr(0) {
 		report_error(L, "Cannot instantiate a '%s' directly!", className);
 	}
 

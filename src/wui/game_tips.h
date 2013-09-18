@@ -20,17 +20,16 @@
 #ifndef GAME_TIPS_H
 #define GAME_TIPS_H
 
-#include "ui_basic/progresswindow.h"
-
-#include <string>
 #include <cstring>
+#include <string>
 #include <vector>
+
+#include "ui_basic/progresswindow.h"
 
 /// Displays game tips in progress window
 struct GameTips : public UI::IProgressVisualization {
 	GameTips
-		(UI::ProgressWindow & progressWindow, std::vector<std::string>,
-		 std::string style = "default");
+		(UI::ProgressWindow & progressWindow, const std::vector<std::string>&);
 	virtual ~GameTips();
 
 	virtual void update(bool repaint);
@@ -41,30 +40,16 @@ private:
 		std::string  text;
 		int32_t          interval;
 	};
-	void load_style(std::string);
 	void load_tips(std::string);
-
 	void show_tip(int32_t index);
-	RGBColor color_from_hex(const char * hexcode, const RGBColor & def);
-	uint32_t colorvalue_from_hex(char c1, char c2);
 
 	uint32_t             m_lastUpdated;
 	uint32_t             m_updateAfter;
 	UI::ProgressWindow & m_progressWindow;
 	bool                 m_registered;
-	uint32_t                 m_lastTip;
+	uint32_t             m_lastTip;
 
 	std::vector<Tip>     m_tips;
-	std::string          m_background_picture;
-	uint32_t                 m_width;
-	uint32_t                 m_height;
-	uint32_t                 m_pading_l;
-	uint32_t                 m_pading_r;
-	uint32_t                 m_pading_t;
-	uint32_t                 m_pading_b;
-	int32_t                  m_font_size;
-	RGBColor             m_bgcolor;
-	RGBColor             m_color;
 };
 
 #endif

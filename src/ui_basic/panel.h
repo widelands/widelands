@@ -21,21 +21,19 @@
 #ifndef UI_PANEL_H
 #define UI_PANEL_H
 
-#include <boost/signals/trackable.hpp>
-#include <boost/noncopyable.hpp>
-
-#include "point.h"
-#include "graphic/picture_id.h"
-#include "graphic/surfaceptr.h"
-#include "graphic/graphic.h"
+#include <cassert>
+#include <cstring>
+#include <memory>
+#include <string>
 
 #include <SDL_keyboard.h>
+#include <boost/noncopyable.hpp>
+#include <boost/signals2/trackable.hpp>
 
-#include <cassert>
-#include <string>
-#include <cstring>
+#include "point.h"
 
-struct RenderTarget;
+class RenderTarget;
+class Image;
 
 namespace UI {
 
@@ -59,7 +57,7 @@ namespace UI {
  * its desired size changes, this automatically changes the actual size (which then invokes
  * \ref layout and \ref move_inside_parent).
  */
-struct Panel : boost::signals::trackable, boost::noncopyable {
+struct Panel : boost::signals2::trackable, boost::noncopyable {
 	enum {
 		pf_handle_mouse = 1, ///< receive mouse events
 		pf_think = 2, ///< call think() function during run
@@ -82,7 +80,7 @@ struct Panel : boost::signals::trackable, boost::noncopyable {
 		(Panel * const nparent,
 		 int32_t  const nx, int32_t  const ny,
 		 uint32_t const nw, uint32_t const nh,
-		 const std::string & tooltip_text = std::string());
+		 const std::string& tooltip_text = std::string());
 	virtual ~Panel();
 
 	Panel * get_parent() const {return _parent;}
@@ -189,6 +187,8 @@ struct Panel : boost::signals::trackable, boost::noncopyable {
 	virtual bool handle_mousemove
 		(Uint8 state, int32_t x, int32_t y, int32_t xdiff, int32_t ydiff);
 	virtual bool handle_key(bool down, SDL_keysym code);
+	virtual bool handle_alt_drag(int32_t x, int32_t y);
+	virtual bool handle_tooltip();
 
 	/// \returns whether a certain given is currently down.
 	///
@@ -212,7 +212,7 @@ struct Panel : boost::signals::trackable, boost::noncopyable {
 		assert(get_can_focus());
 		return (_parent->_focus == this);
 	}
-	void focus();
+	virtual void focus();
 
 	void set_think(bool yes);
 	bool get_think() const {return _flags & pf_think;}
@@ -228,21 +228,26 @@ struct Panel : boost::signals::trackable, boost::noncopyable {
 	static void set_allow_user_input(bool const t) {_g_allow_user_input = t;}
 	static bool allow_user_input() {return _g_allow_user_input;}
 
+	void set_tooltip(const std::string& text) {_tooltip = text;}
+	const std::string& tooltip() const {return _tooltip;}
+
 	///\return the current set UI font
 	std::string ui_fn();
 
 protected:
-	void die();
+	virtual void die();
 	bool keyboard_free() {return !(_focus);}
 
 	virtual void update_desired_size();
 
 	static void play_click();
 
+	static bool draw_tooltip(RenderTarget &, const std::string & text);
+
 private:
 	void check_child_death();
 
-	void do_draw(RenderTarget &) __attribute__((hot));
+	void do_draw(RenderTarget &);
 	void do_draw_inner(RenderTarget &);
 	void do_think();
 
@@ -254,6 +259,14 @@ private:
 	bool do_mousemove
 		(const Uint8 state, int32_t x, int32_t y, int32_t xdiff, int32_t ydiff);
 	bool do_key(bool down, SDL_keysym code);
+	bool do_tooltip();
+
+	static Panel * ui_trackmouse(int32_t & x, int32_t & y);
+	static void ui_mousepress  (const Uint8 button, int32_t x, int32_t y);
+	static void ui_mouserelease(const Uint8 button, int32_t x, int32_t y);
+	static void ui_mousemove
+		(const Uint8 state, int32_t x, int32_t y, int32_t xdiff, int32_t ydiff);
+	static void ui_key(bool down, SDL_keysym code);
 
 
 	Panel * _parent;
@@ -263,7 +276,7 @@ private:
 	Panel * _focus; //  keyboard focus
 
 	uint32_t _flags;
-	OffscreenSurfacePtr _cache;
+	std::unique_ptr<const Image> _cache;
 	bool _needdraw;
 
 	/**
@@ -280,30 +293,13 @@ private:
 	bool _running;
 	int32_t _retcode;
 
-	char * _tooltip;
-
-protected:
-	static void draw_tooltip(RenderTarget &, const std::string & text);
-
-public:
-	void set_tooltip(const char * const);
-	const char * tooltip() const throw () {return _tooltip;}
-
-
-private:
-	static Panel * ui_trackmouse(int32_t & x, int32_t & y);
-	static void ui_mousepress  (const Uint8 button, int32_t x, int32_t y);
-	static void ui_mouserelease(const Uint8 button, int32_t x, int32_t y);
-	static void ui_mousemove
-		(const Uint8 state, int32_t x, int32_t y, int32_t xdiff, int32_t ydiff);
-	static void ui_key(bool down, SDL_keysym code);
-
+	std::string _tooltip;
 	static Panel * _modal;
 	static Panel * _g_mousegrab;
 	static Panel * _g_mousein;
 	static bool _g_allow_user_input;
-	static PictureID s_default_cursor;
-	static PictureID s_default_cursor_click;
+	static const Image* s_default_cursor;
+	static const Image* s_default_cursor_click;
 };
 
 inline void Panel::set_snap_windows_only_when_overlapping(const bool on) {
@@ -322,15 +318,15 @@ inline void Panel::set_dock_windows_to_edges(const bool on) {
  */
 struct NamedPanel : public Panel {
 	NamedPanel
-		(Panel * const nparent, std::string const & name,
+		(Panel * const nparent, const std::string & name,
 		 int32_t  const nx, int32_t  const ny,
 		 uint32_t const nw, uint32_t const nh,
-		 std::string const & tooltip_text = std::string())
+		 const std::string & tooltip_text = std::string())
 		: Panel(nparent, nx, ny, nw, nh, tooltip_text), m_name(name)
 	{
 	}
 
-	std::string const & get_name() const throw () {return m_name;}
+	const std::string & get_name() const throw () {return m_name;}
 
 private:
 	std::string m_name;

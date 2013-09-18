@@ -5,6 +5,10 @@ output=trunk
 trunk=2
 planks=1
 
+[return_on_dismantle]
+trunk=1
+planks=1
+
 [working positions]
 woodcutter=1
 

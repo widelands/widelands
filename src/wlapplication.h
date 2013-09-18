@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2010 by the Widelands Development Team
+ * Copyright (C) 2006-2012 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,19 +20,20 @@
 #ifndef WLAPPLICATION_H
 #define WLAPPLICATION_H
 
-#include "point.h"
+#include <cstring>
+#include <map>
+#include <stdexcept>
+#include <string>
 
 #include <SDL_events.h>
 #include <SDL_keyboard.h>
 #include <SDL_types.h>
 
-#include <map>
-#include <stdexcept>
-#include <string>
-#include <cstring>
+#include "point.h"
+
 
 namespace Widelands {struct Game;}
-class Journal;
+struct Journal;
 
 ///Thrown if a commandline parameter is faulty
 struct Parameter_error : public std::runtime_error {
@@ -148,7 +149,7 @@ struct WLApplication {
 	static WLApplication * get(int const argc = 0, char const * * argv = 0);
 	~WLApplication();
 
-	enum GameType {NONE, EDITOR, REPLAY, SCENARIO, LOADGAME, NETWORK, GGZ};
+	enum GameType {NONE, EDITOR, REPLAY, SCENARIO, LOADGAME, NETWORK, INTERNET};
 
 	void run();
 
@@ -169,7 +170,7 @@ struct WLApplication {
 	Point get_mouse_position() const throw () {return m_mouse_position;}
 	//
 	/// Find out whether the mouse is currently pressed
-	bool is_mouse_pressed() const {return SDL_GetMouseState(NULL, NULL); }
+	bool is_mouse_pressed() const {return SDL_GetMouseState(nullptr, nullptr); }
 
 	/// Swap left and right mouse key?
 	void set_mouse_swap(const bool swap) {m_mouse_swapped = swap;}
@@ -179,8 +180,15 @@ struct WLApplication {
 	//@}
 
 	void init_graphics
-		(int32_t w, int32_t h, int32_t bpp,
-		 bool fullscreen, bool opengl);
+		(const int32_t w, const int32_t h, const int32_t bpp,
+		 const bool fullscreen, const bool opengl);
+
+	/**
+	 * Refresh the graphics from the latest options.
+	 *
+	 * \note See caveats for \ref init_graphics()
+	 */
+	void refresh_graphics();
 
 	void handle_input(InputCallback const *);
 
@@ -194,8 +202,8 @@ struct WLApplication {
 	bool campaign_game();
 	void replay();
 
-#ifdef DEBUG
-#ifndef WIN32
+#ifndef NDEBUG
+#ifndef _WIN32
 	//not all of these need to be public, but I consider signal handling
 	//a public interface
 	//@{
@@ -262,6 +270,10 @@ protected:
 	///True if left and right mouse button should be swapped
 	bool  m_mouse_swapped;
 
+	/// When apple is involved, the middle mouse button is sometimes send, even
+	/// if it wasn't pressed. We try to revert this and this helps.
+	bool  m_faking_middle_mouse_button;
+
 	///The current position of the mouse pointer
 	Point m_mouse_position;
 
@@ -276,18 +288,6 @@ protected:
 	///true if an external entity wants us to quit
 	bool   m_should_die;
 
-	///The Widelands window's width in pixels
-	int32_t    m_gfx_w;
-
-	///The Widelands window's height in pixels
-	int32_t    m_gfx_h;
-
-	///If true Widelands is (should be, we never know ;-) running
-	///in a fullscreen window
-	bool   m_gfx_fullscreen;
-
-	bool   m_gfx_opengl;
-
 	//do we want to search the default places for widelands installs
 	bool   m_default_datadirs;
 	std::string m_homedir;
@@ -296,9 +296,12 @@ protected:
 	bool m_redirected_stdio;
 private:
 	///Holds this process' one and only instance of WLApplication, if it was
-	///created already. NULL otherwise.
+	///created already. nullptr otherwise.
 	///\note This is private on purpose. Read the class documentation.
 	static WLApplication * the_singleton;
+
+	void _handle_mousebutton(SDL_Event &, InputCallback const *);
+
 };
 
 #endif

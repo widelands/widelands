@@ -1,15 +1,19 @@
 size=medium
 buildable=no
 max_soldiers=5
-heal_per_second=2
+heal_per_second=170
 conquers=9
 vision_range=21
 enhanced_building=yes
+prefer_heroes=true
 
-[buildcost]
+[enhancement_cost]
 trunk=1
 planks=1
 stone=2
+
+[return_on_dismantle_on_enhanced]
+stone=1
 
 [idle]
 pics=high_tower_i_??.png

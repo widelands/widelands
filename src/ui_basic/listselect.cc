@@ -17,20 +17,20 @@
  *
  */
 
-#include "listselect.h"
+#include "ui_basic/listselect.h"
 
-#include "constants.h"
-#include "graphic/font.h"
-#include "graphic/font_handler.h"
-#include "graphic/offscreensurface.h"
-#include "graphic/rendertarget.h"
-#include "wlapplication.h"
-#include "log.h"
-
-#include "container_iterate.h"
+#include <iostream>
 
 #include <boost/bind.hpp>
-#include <iostream>
+
+#include "constants.h"
+#include "container_iterate.h"
+#include "graphic/font.h"
+#include "graphic/font_handler.h"
+#include "graphic/graphic.h"
+#include "graphic/rendertarget.h"
+#include "log.h"
+#include "wlapplication.h"
 
 namespace UI {
 /**
@@ -61,7 +61,8 @@ BaseListselect::BaseListselect
 {
 	set_think(false);
 
-	set_align(align);
+	//  do not allow vertical alignment as it does not make sense
+	m_align = static_cast<Align>(align & Align_Horizontal);
 
 	m_scrollbar.moved.connect(boost::bind(&BaseListselect::set_scrollpos, this, _1));
 	m_scrollbar.set_singlestepsize(g_fh->get_fontheight(m_fontname, m_fontsize));
@@ -71,13 +72,16 @@ BaseListselect::BaseListselect
 
 	if (show_check) {
 		uint32_t pic_h;
-		m_check_picid = g_gr->get_picture(PicMod_Game,  "pics/list_selected.png");
-		g_gr->get_picture_size(m_check_picid, m_max_pic_width, pic_h);
+		m_check_pic = g_gr->images().get("pics/list_selected.png");
+		m_max_pic_width = m_check_pic->width();
+		pic_h = m_check_pic->height();
 		if (pic_h > m_lineheight)
 			m_lineheight = pic_h;
 	}
-	else
+	else {
 		m_max_pic_width = 0;
+	}
+	set_can_focus(true);
 }
 
 
@@ -114,23 +118,25 @@ void BaseListselect::clear() {
  *       sel    if true, directly select the new entry
 */
 void BaseListselect::add
-	(char const * const name,
-	 uint32_t           entry,
-	 PictureID    const picid,
-	 bool         const sel)
+	(char const * const   name,
+	 uint32_t             entry,
+	 const Image*   pic,
+	 bool         const   sel,
+	 const std::string  & tooltip_text)
 {
 	Entry_Record * er = new Entry_Record();
 
 	er->m_entry = entry;
-	er->picid = picid;
+	er->pic   = pic;
 	er->use_clr = false;
-	er->name = std::string(name);
+	er->name    = std::string(name);
+	er->tooltip = tooltip_text;
 	uint32_t entry_height = 0;
-	if (picid == g_gr->get_no_picture()) {
+	if (!pic) {
 		entry_height = g_fh->get_fontheight(m_fontname, m_fontsize);
 	} else {
-		uint32_t w, h;
-		g_gr->get_picture_size(picid, w, h);
+		uint16_t w = pic->width();
+		uint16_t h = pic->height();
 		entry_height = (h >= g_fh->get_fontheight(m_fontname, m_fontsize))
 			? h : g_fh->get_fontheight(m_fontname, m_fontsize);
 		if (m_max_pic_width < w)
@@ -151,9 +157,10 @@ void BaseListselect::add
 }
 
 void BaseListselect::add_front
-	(char const * const name,
-	 PictureID    const picid,
-	 bool         const sel)
+	(char const * const   name,
+	 const Image*   pic,
+	 bool         const   sel,
+	 const std::string  & tooltip_text)
 {
 	Entry_Record * er = new Entry_Record();
 
@@ -161,17 +168,17 @@ void BaseListselect::add_front
 	container_iterate_const(Entry_Record_deque, m_entry_records, i)
 		++(*i.current)->m_entry;
 
-	er->picid = picid;
+	er->pic   = pic;
 	er->use_clr = false;
-	//strcpy(er.name, name);
-	er->name = std::string(name);
+	er->name    = std::string(name);
+	er->tooltip = tooltip_text;
 
 	uint32_t entry_height = 0;
-	if (picid == g_gr->get_no_picture())
+	if (!pic)
 		entry_height = g_fh->get_fontheight(m_fontname, m_fontsize);
 	else {
-		uint32_t w, h;
-		g_gr->get_picture_size(picid, w, h);
+		uint16_t w = pic->width();
+		uint16_t h = pic->height();
 		entry_height = (h >= g_fh->get_fontheight(m_fontname, m_fontsize))
 			? h : g_fh->get_fontheight(m_fontname, m_fontsize);
 		if (m_max_pic_width < w)
@@ -237,15 +244,6 @@ void BaseListselect::sort(const uint32_t Begin, uint32_t End)
 }
 
 /**
- * Set the list alignment (only horizontal alignment works)
-*/
-void BaseListselect::set_align(const Align align)
-{
-	m_align = static_cast<Align>(align & Align_Horizontal);
-}
-
-
-/**
  * Scroll to the given position, in pixels.
 */
 void BaseListselect::set_scrollpos(const int32_t i)
@@ -285,8 +283,8 @@ void BaseListselect::select(const uint32_t i)
 
 	if (m_show_check) {
 		if (m_selection != no_selection_index())
-			m_entry_records[m_selection]->picid = g_gr->get_no_picture();
-		m_entry_records[i]->picid = m_check_picid;
+			m_entry_records[m_selection]->pic = nullptr;
+		m_entry_records[i]->pic = m_check_pic;
 	}
 	m_selection = i;
 
@@ -391,12 +389,10 @@ void BaseListselect::draw(RenderTarget & dst)
 			m_max_pic_width         ? m_max_pic_width + 10 :
 			1;
 
-		const RGBColor col = er.use_clr ? er.clr : UI_FONT_CLR_FG;
-
 		// Horizontal center the string
 		UI::g_fh->draw_text
 			(dst,
-			 TextStyle::makebold(Font::get(m_fontname, m_fontsize), col),
+			 TextStyle::makebold(Font::get(m_fontname, m_fontsize), er.use_clr ? er.clr : UI_FONT_CLR_FG),
 			 Point
 			 	(x,
 			 	 y +
@@ -407,13 +403,9 @@ void BaseListselect::draw(RenderTarget & dst)
 			 m_align);
 
 		// Now draw pictures
-		if (er.picid != g_gr->get_no_picture()) {
-			uint32_t w, h;
-			g_gr->get_picture_size(er.picid, w, h);
-			if (g_gr->caps().offscreen_rendering and false)
-				dst.blit(Point(1, y + (get_lineheight() - h) / 2), er.picid, CM_Solid);
-			else
-				dst.blit(Point(1, y + (get_lineheight() - h) / 2), er.picid);
+		if (er.pic) {
+			uint16_t h = er.pic->height();
+			dst.blit(Point(1, y + (get_lineheight() - h) / 2), er.pic);
 		}
 
 		y += lineheight;
@@ -467,17 +459,28 @@ bool BaseListselect::handle_mouserelease(const Uint8 btn, int32_t, int32_t)
 	return btn == SDL_BUTTON_LEFT;
 }
 
+bool BaseListselect::handle_mousemove(Uint8, int32_t, int32_t y, int32_t, int32_t) {
+	y = (y + m_scrollpos) / get_lineheight();
+	if (y < 0 or static_cast<int32_t>(m_entry_records.size()) <= y) {
+		set_tooltip("");
+		return false;
+	}
+	set_tooltip(m_entry_records.at(y)->tooltip);
+	return true;
+}
+
 bool BaseListselect::handle_key(bool const down, SDL_keysym const code) {
 	if (down) {
-		uint32_t selected;
+		uint32_t selected_idx;
 		switch (code.sym) {
 		case SDLK_KP2:
 			if (code.mod & KMOD_NUM)
 				break;
+			/* no break */
 		case SDLK_DOWN:
-			selected = selection_index() + 1;
-			if (selected < size())
-				select(selected);
+			selected_idx = selection_index() + 1;
+			if (selected_idx < size())
+				select(selected_idx);
 			if ((selection_index() + 1) * get_lineheight() - get_inner_h() > m_scrollpos) {
 				int32_t scrollpos = (selection_index() + 1) * get_lineheight() - get_inner_h();
 				m_scrollpos = (scrollpos < 0) ? 0 : scrollpos;
@@ -487,10 +490,11 @@ bool BaseListselect::handle_key(bool const down, SDL_keysym const code) {
 		case SDLK_KP8:
 			if (code.mod & KMOD_NUM)
 				break;
+			/* no break */
 		case SDLK_UP:
-			selected = selection_index();
-			if (selected > 0)
-				select(selected - 1);
+			selected_idx = selection_index();
+			if (selected_idx > 0)
+				select(selected_idx - 1);
 			if (selection_index() * get_lineheight() < m_scrollpos) {
 				m_scrollpos = selection_index() * get_lineheight();
 				m_scrollbar.set_scrollpos(m_scrollpos);

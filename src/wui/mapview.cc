@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2011 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2013 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -17,22 +17,20 @@
  *
  */
 
-#include "mapview.h"
-
-
-#include "interactive_base.h"
-#include "interactive_player.h"
-#include "mapviewpixelfunctions.h"
-#include "overlay_manager.h"
-#include "wlapplication.h"
-#include "logic/player.h"
-#include "logic/map.h"
+#include "wui/mapview.h"
 
 #include "graphic/graphic.h"
+#include "graphic/render/gamerenderer_gl.h"
+#include "graphic/render/gamerenderer_sdl.h"
 #include "graphic/rendertarget.h"
-#include "graphic/render/gameview.h"
-
+#include "logic/map.h"
+#include "logic/player.h"
 #include "upcast.h"
+#include "wlapplication.h"
+#include "wui/interactive_base.h"
+#include "wui/interactive_player.h"
+#include "wui/mapviewpixelfunctions.h"
+#include "wui/overlay_manager.h"
 
 Map_View::Map_View
 	(UI::Panel * parent,
@@ -46,10 +44,15 @@ m_dragging              (false),
 m_complete_redraw_needed(true)
 {}
 
+Map_View::~Map_View()
+{
+	// explicit destructor so that smart pointer destructors
+	// with forward-declared types are properly instantiated
+}
 
 /// Moves the mouse cursor so that it is directly above the given node
 void Map_View::warp_mouse_to_node(Widelands::Coords const c) {
-	Widelands::Map const & map = intbase().egbase().map();
+	const Widelands::Map & map = intbase().egbase().map();
 	Point p;
 	MapviewPixelFunctions::get_save_pix(map, c, p.x, p.y);
 	p -= m_viewpoint;
@@ -93,16 +96,21 @@ void Map_View::draw(RenderTarget & dst)
 
 	egbase.map().overlay_manager().load_graphics();
 
-	GameView gameview(dst);
-
-	if (upcast(Interactive_Player const, interactive_player, &intbase()))
-		gameview.rendermap(egbase, interactive_player->player(), m_viewpoint);
-	else
-		gameview.rendermap(egbase, m_viewpoint);
+	if (!m_renderer) {
+		if (g_opengl) {
+			m_renderer.reset(new GameRendererGL());
+		} else
+		{
+			m_renderer.reset(new GameRendererSDL());
+		}
+	}
+	if (upcast(Interactive_Player const, interactive_player, &intbase())) {
+		m_renderer->rendermap(dst, egbase, interactive_player->player(), m_viewpoint);
+	} else {
+		m_renderer->rendermap(dst, egbase, m_viewpoint);
+	}
 
 	m_complete_redraw_needed = false;
-	if (char const * const text = tooltip())
-		draw_tooltip(dst, text);
 }
 
 void Map_View::set_changeview(const Map_View::ChangeViewFn & fn)
@@ -146,18 +154,9 @@ void Map_View::stop_dragging() {
 bool Map_View::handle_mousepress
 	(Uint8 const btn, int32_t const x, int32_t const y)
 {
-#ifdef __APPLE__
-	//  SDL does on Mac hardcoded middle mouse button emulation (alt+left).
-	//  This interferes with the editor, which is using alt+left click for third
-	//  tool.  So just handle middle mouse button like left one.
-	//  TODO This should be handled in a more general way someplace else. What
-	//  TODO kind of stupid idea is it to hardcode something like that in SDL?
-	//  TODO Sometimes, people are funny....
-	if (btn == SDL_BUTTON_MIDDLE || btn == SDL_BUTTON_LEFT)
-#else
 	if (btn == SDL_BUTTON_LEFT)
-#endif
 	{
+		stop_dragging();
 		track_sel(Point(x, y));
 
 		fieldclicked();

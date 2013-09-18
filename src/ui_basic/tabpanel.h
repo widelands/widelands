@@ -20,9 +20,9 @@
 #ifndef UI_TABPANEL_H
 #define UI_TABPANEL_H
 
-#include "panel.h"
-
 #include <vector>
+
+#include "ui_basic/panel.h"
 
 namespace UI {
 /**
@@ -38,9 +38,9 @@ struct Tab : public NamedPanel {
 	Tab
 		(Tab_Panel * parent,
 		 uint32_t,
-		 std::string const & name,
-		 PictureID,
-		 std::string const & gtooltip,
+		 const std::string & name,
+		 const Image*,
+		 const std::string & gtooltip,
 		 Panel             * gpanel);
 
 	bool active();
@@ -50,7 +50,7 @@ private:
 	Tab_Panel * m_parent;
 	uint32_t    m_id;
 
-	PictureID   picid;
+	const Image* pic;
 	std::string tooltip;
 	Panel     * panel;
 };
@@ -66,26 +66,26 @@ private:
  *
  */
 struct Tab_Panel : public Panel {
-	friend class Tab;
+	friend struct Tab;
 
-	Tab_Panel(Panel * parent, int32_t x, int32_t y, PictureID background);
+	Tab_Panel(Panel * parent, int32_t x, int32_t y, const Image* background);
 	// For Fullscreen menus
 	Tab_Panel
 		(Panel * parent,
 		 int32_t x, int32_t y, int32_t w, int32_t h,
-		 PictureID background);
+		 const Image* background);
 
 	uint32_t add
-		(std::string const & name,
-		 PictureID           picid,
+		(const std::string & name,
+		 const Image* pic,
 		 Panel             * panel,
-		 std::string const & tooltip = std::string());
+		 const std::string & tooltip = std::string());
 
 	typedef std::vector<Tab *> TabList;
 
 	const TabList & tabs();
 	void activate(uint32_t idx);
-	void activate(std::string const &);
+	void activate(const std::string &);
 	uint32_t active() {return m_active;}
 
 protected:
@@ -107,7 +107,7 @@ private:
 	uint32_t         m_active;         ///< index of the currently active tab
 	int32_t          m_highlight;      ///< index of the highlighted button
 
-	PictureID        m_pic_background; ///< picture used to draw background
+	const Image* m_pic_background; ///< picture used to draw background
 };
 };
 

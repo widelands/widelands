@@ -20,17 +20,17 @@
 #ifndef IMMOVABLE_PROGRAM_H
 #define IMMOVABLE_PROGRAM_H
 
+#include <cstring>
+#include <string>
+
 #include <boost/noncopyable.hpp>
 
 /*
  * Implementation is in immovable.cc
  */
 
-#include "buildcost.h"
-#include "immovable.h"
-
-#include <string>
-#include <cstring>
+#include "logic/buildcost.h"
+#include "logic/immovable.h"
 
 struct Profile;
 
@@ -63,7 +63,7 @@ struct ImmovableProgram {
 	struct ActAnimate : public Action {
 		ActAnimate
 			(char * parameters, Immovable_Descr &,
-			 std::string const & directory, Profile &);
+			 const std::string & directory, Profile &);
 		virtual void execute(Game &, Immovable &) const;
 		uint32_t animation() const {return m_id;}
 	private:
@@ -129,6 +129,8 @@ struct ImmovableProgram {
 	/// Parameter syntax:
 	///    parameters ::= soundFX [priority]
 	/// Parameter semantics:
+	///    directory:
+	///       The directory of the productionsite.
 	///    soundFX:
 	///       The filename of an soundFX (relative to the productionsite's
 	///       directory).
@@ -138,7 +140,7 @@ struct ImmovableProgram {
 	/// Plays the specified soundFX with the specified priority. Whether the
 	/// soundFX is actually played is determined by the sound handler.
 	struct ActPlayFX : public Action {
-		ActPlayFX(char * parameters, Immovable_Descr const &);
+		ActPlayFX(const std::string & directory, char * parameters, const Immovable_Descr &);
 		virtual void execute(Game &, Immovable &) const;
 	private:
 		std::string name;
@@ -159,7 +161,7 @@ struct ImmovableProgram {
 	 *       Time until construction decays one step if no progress has been made.
 	 */
 	struct ActConstruction : public Action {
-		ActConstruction(char * parameters, Immovable_Descr &, std::string const & directory, Profile &);
+		ActConstruction(char * parameters, Immovable_Descr &, const std::string & directory, Profile &);
 		virtual void execute(Game &, Immovable &) const;
 
 		Duration buildtime() const {return m_buildtime;}
@@ -180,24 +182,24 @@ struct ImmovableProgram {
 
 	/// Create a program by parsing a conf-file section.
 	ImmovableProgram
-		(std::string    const & directory,
+		(const std::string    & directory,
 		 Profile              &,
-		 std::string    const & name,
+		 const std::string    & name,
 		 Immovable_Descr      &);
 	~ImmovableProgram() {
 		container_iterate_const(Actions, m_actions, i)
 			delete *i.current;
 	}
 
-	std::string const & name() const {return m_name;}
+	const std::string & name() const {return m_name;}
 	size_t size() const {return m_actions.size();}
-	Action const & operator[](size_t const idx) const {
+	const Action & operator[](size_t const idx) const {
 		assert(idx < m_actions.size());
 		return *m_actions[idx];
 	}
 
 	typedef std::vector<Action *> Actions;
-	Actions const & actions() const {return m_actions;}
+	const Actions & actions() const {return m_actions;}
 
 private:
 	std::string m_name;

@@ -17,22 +17,22 @@
  *
  */
 
+#include "ui_basic/helpwindow.h"
 
 #include <boost/format.hpp>
 
-#include "scripting/scripting.h"
-#include "io/filesystem/layered_filesystem.h"
-
-#include "log.h"
 #include "constants.h"
-#include "i18n.h"
-#include "window.h"
-#include "button.h"
 #include "graphic/font.h"
 #include "graphic/font_handler.h"
+#include "graphic/graphic.h"
+#include "i18n.h"
+#include "io/filesystem/layered_filesystem.h"
+#include "log.h"
+#include "scripting/scripting.h"
+#include "ui_basic/button.h"
+#include "ui_basic/window.h"
 #include "wlapplication.h"
 
-#include "helpwindow.h"
 
 using boost::format;
 
@@ -79,7 +79,7 @@ HelpWindow::HelpWindow
 		(this, "ok",
 		 in_width / 3, in_height - but_height * 3 / 2,
 		 in_width / 3, but_height,
-		 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
+		 g_gr->images().get("pics/but0.png"),
 		 _("OK"), std::string(), true, false);
 	btn->sigclicked.connect(boost::bind(&HelpWindow::pressedOk, boost::ref(*this)));
 	btn->set_font(Font::get(UI_FONT_NAME, (fontsize < 12 ? 12 : fontsize)));
@@ -194,7 +194,7 @@ LuaTextHelpWindow::LuaTextHelpWindow
 	LuaInterface * li = create_LuaInterface();
 
 	try {
-		boost::shared_ptr<LuaTable> t = li->run_script(*g_fs, path_to_script, "help");
+		std::unique_ptr<LuaTable> t = li->run_script(*g_fs, path_to_script, "help");
 		textarea->set_text(t->get_string("text"));
 	} catch (LuaError & err) {
 		textarea->set_text(err.what());

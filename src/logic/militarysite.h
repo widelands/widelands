@@ -20,10 +20,10 @@
 #ifndef MILITARYSITE_H
 #define MILITARYSITE_H
 
-#include "attackable.h"
-#include "productionsite.h"
-#include "requirements.h"
-#include "soldiercontrol.h"
+#include "logic/attackable.h"
+#include "logic/productionsite.h"
+#include "logic/requirements.h"
+#include "logic/soldiercontrol.h"
 
 namespace Widelands {
 
@@ -32,8 +32,8 @@ class Soldier;
 struct MilitarySite_Descr : public ProductionSite_Descr {
 	MilitarySite_Descr
 		(char const * name, char const * descname,
-		 std::string const & directory, Profile &,  Section & global_s,
-		 Tribe_Descr const & tribe);
+		 const std::string & directory, Profile &,  Section & global_s,
+		 const Tribe_Descr & tribe);
 
 	virtual Building & create_object() const;
 
@@ -45,6 +45,7 @@ struct MilitarySite_Descr : public ProductionSite_Descr {
 		return m_heal_per_second;
 	}
 
+	bool     m_prefers_heroes_at_start;
 private:
 	uint32_t m_conquer_radius;
 	uint32_t m_num_soldiers;
@@ -58,7 +59,14 @@ class MilitarySite :
 	MO_DESCR(MilitarySite_Descr);
 
 public:
-	MilitarySite(MilitarySite_Descr const &);
+	// I assume elsewhere, that enum SoldierPreference fits to uint8_t.
+	enum SoldierPreference  : uint8_t {
+		kNoPreference,
+		kPrefersRookies,
+		kPrefersHeroes,
+	};
+
+	MilitarySite(const MilitarySite_Descr &);
 	virtual ~MilitarySite();
 
 	char const * type_name() const throw () {return "militarysite";}
@@ -97,15 +105,20 @@ public:
 	void sendAttacker(Soldier &, Building &, uint8_t);
 
 	/// This methods are helper for use at configure this site.
-	void set_requirements  (Requirements const &);
+	void set_requirements  (const Requirements &);
 	void clear_requirements();
-	Requirements const & get_requirements () const {
+	const Requirements & get_requirements () const {
 		return m_soldier_requirements;
 	}
 
 	void reinit_after_conqueration(Game &);
 
-	void update_soldier_request();
+	void update_soldier_request(bool i = false);
+
+	void set_soldier_preference(SoldierPreference);
+	SoldierPreference get_soldier_preference() const {
+			return m_soldier_preference;
+	}
 
 protected:
 	void conquer_area(Editor_Game_Base &);
@@ -123,10 +136,19 @@ private:
 	bool haveSoldierJob(Soldier &);
 	bool military_presence_kept(Game &);
 	void informPlayer(Game &, bool discovered = false);
+	bool update_upgrade_requirements();
+	void update_normal_soldier_request();
+	void update_upgrade_soldier_request();
+	bool incorporateUpgradedSoldier(Editor_Game_Base & game, Soldier & s);
+	Soldier * find_least_suited_soldier();
+	bool drop_least_suited_soldier(bool new_has_arrived, Soldier * s);
+
 
 private:
-	Requirements m_soldier_requirements;
-	Request    * m_soldier_request;
+	Requirements m_soldier_requirements; // This is used to grab a bunch of soldiers: Anything goes
+	RequireAttribute m_soldier_upgrade_requirements; // This is used when exchanging soldiers.
+	std::unique_ptr<Request> m_normal_soldier_request;  // filling the site
+	std::unique_ptr<Request> m_upgrade_soldier_request; // seeking for better soldiers
 	bool m_didconquer;
 	uint32_t m_capacity;
 
@@ -142,6 +164,10 @@ private:
 		uint8_t     retreat;
 	};
 	std::vector<SoldierJob> m_soldierjobs;
+	SoldierPreference m_soldier_preference;
+	int32_t m_next_swap_soldiers_time;
+	bool m_soldier_upgrade_try; // optimization -- if everybody is zero-level, do not downgrade
+	bool m_doing_upgrade_request;
 };
 
 }

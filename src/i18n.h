@@ -20,37 +20,35 @@
 #ifndef I18N_H
 #define I18N_H
 
-#include <string>
 #include <cstring>
+#include <string>
 #include <vector>
 
 #include <config.h>
 
-#ifdef _MSC_VER
-#define __attribute__(x)
-#endif
+#include "port.h"
 
 ///A macro to make i18n more readable and aid in tagging strings for translation
 #define _(str) i18n::translate(str)
 
 namespace i18n {
 char const * translate(char        const *) __attribute__ ((format_arg (1)));
-char const * translate(std::string const &);
+char const * translate(const std::string &);
 
-void  grab_textdomain(std::string const &);
+void  grab_textdomain(const std::string &);
 void release_textdomain();
 
 /// Create an object of this type to grab a textdomain and make sure that it is
 /// released when the object goes out of scope. This is exception-safe, unlike
 /// calling grab_textdomain and release_textdomain directly.
 struct Textdomain {
-	Textdomain (std::string const & name) {grab_textdomain   (name);}
+	Textdomain (const std::string & name) {grab_textdomain   (name);}
 	~Textdomain()                         {release_textdomain();}
 };
 
 void init_locale();
 void set_locale(std::string);
-std::string const & get_locale();
+const std::string & get_locale();
 
 void set_localedir(std::string);
 }

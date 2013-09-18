@@ -20,7 +20,7 @@
 #ifndef MAPFRINGEREGION_H
 #define MAPFRINGEREGION_H
 
-#include "map.h"
+#include "logic/map.h"
 
 namespace Widelands {
 
@@ -43,7 +43,7 @@ template <typename Area_type = Area<> > struct MapFringeRegion {
 	}
 
 
-	typename Area_type::Coords_type const & location() const {return m_area;}
+	const typename Area_type::Coords_type & location() const {return m_area;}
 
 	/**
 	 * Moves on to the next location. The return value indicates whether the new

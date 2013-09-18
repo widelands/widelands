@@ -17,20 +17,20 @@
  *
  */
 
-#include "game_player_info_data_packet.h"
+#include "game_io/game_player_info_data_packet.h"
 
 #include "computer_player.h"
 #include "logic/game.h"
 #include "logic/game_data_error.h"
-#include "wui/interactive_player.h"
 #include "logic/player.h"
 #include "logic/tribe.h"
 #include "logic/widelands_fileread.h"
 #include "logic/widelands_filewrite.h"
+#include "wui/interactive_player.h"
 
 namespace Widelands {
 
-#define CURRENT_PACKET_VERSION 14
+#define CURRENT_PACKET_VERSION 15
 
 
 void Game_Player_Info_Data_Packet::Read
@@ -80,7 +80,7 @@ void Game_Player_Info_Data_Packet::Read
 					game.add_player(plnum, 0, tribe_name, name, team);
 					Player & player = game.player(plnum);
 					{
-						Tribe_Descr const & tribe = player.tribe();
+						const Tribe_Descr & tribe = player.tribe();
 						try {
 							player.m_frontier_style_index =
 								frontier_style_name ?
@@ -111,7 +111,9 @@ void Game_Player_Info_Data_Packet::Read
 					if (packet_version >= 6)
 						player.setAI(fr.CString());
 
-					if (packet_version >= 14)
+					if (packet_version >= 15)
+						player.ReadStatistics(fr, 3);
+					else if (packet_version >= 14)
 						player.ReadStatistics(fr, 2);
 					else if (packet_version >= 12)
 						player.ReadStatistics(fr, 1);
@@ -139,7 +141,7 @@ void Game_Player_Info_Data_Packet::Read
 		} else
 			throw game_data_error
 				(_("unknown/unhandled version %u"), packet_version);
-	} catch (_wexception const & e) {
+	} catch (const _wexception & e) {
 		throw game_data_error(_("player info: %s"), e.what());
 	}
 }
@@ -165,7 +167,7 @@ void Game_Player_Info_Data_Packet::Write
 		fw.Unsigned8(plr->team_number());
 
 		{
-			Tribe_Descr const & tribe = plr->tribe();
+			const Tribe_Descr & tribe = plr->tribe();
 			fw.CString(tribe.name().c_str());
 			fw.CString(tribe.frontier_style_name(plr->m_frontier_style_index));
 			fw.CString(tribe.flag_style_name    (plr->m_flag_style_index));

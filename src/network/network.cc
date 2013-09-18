@@ -17,7 +17,7 @@
  *
  */
 
-#include "network.h"
+#include "network/network.h"
 
 #include "log.h"
 #include "wlapplication.h"
@@ -186,10 +186,10 @@ bool RecvPacket::EndOfFile() const
 	return m_index < buffer.size();
 }
 
-bool Deserializer::read (TCPsocket sock)
+bool Deserializer::read(TCPsocket sock)
 {
 	uint8_t buffer[512];
-	int32_t const bytes = SDLNet_TCP_Recv(sock, buffer, sizeof(buffer));
+	const int32_t bytes = SDLNet_TCP_Recv(sock, buffer, sizeof(buffer));
 	if (bytes <= 0)
 		return false;
 
@@ -206,7 +206,7 @@ bool Deserializer::avail() const
 	if (queue.size() < 2)
 		return false;
 
-	uint16_t const size = queue[0] << 8 | queue[1];
+	const uint16_t size = queue[0] << 8 | queue[1];
 	if (size < 2)
 		return false;
 

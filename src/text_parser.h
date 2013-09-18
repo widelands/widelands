@@ -20,10 +20,10 @@
 #ifndef TEXT_PARSER_H
 #define TEXT_PARSER_H
 
-#include <vector>
 #include <string>
+#include <vector>
 
-#include "ui_basic/align.h"
+#include "align.h"
 #include "rgbcolor.h"
 
 namespace UI {
@@ -40,25 +40,25 @@ struct Text_Block {
 	void set_font_size(int32_t const font_size) {m_font_size = font_size;}
 	int32_t get_font_size() const throw () {return m_font_size;}
 
-	void set_font_color(RGBColor const & font_color) {m_font_color = font_color;}
+	void set_font_color(const RGBColor & font_color) {m_font_color = font_color;}
 	RGBColor get_font_color() const throw () {return m_font_color;}
 
-	void set_font_weight(std::string const & font_weight) {
+	void set_font_weight(const std::string & font_weight) {
 		m_font_weight = font_weight;
 	}
 	const std::string & get_font_weight() const throw () {return m_font_weight;}
 
-	void set_font_style(std::string const & font_style) {
+	void set_font_style(const std::string & font_style) {
 		m_font_style = font_style;
 	}
 	const std::string & get_font_style() const throw () {return m_font_style;}
 
-	void set_font_decoration(std::string const & font_decoration) {
+	void set_font_decoration(const std::string & font_decoration) {
 		m_font_decoration = font_decoration;
 	}
-	std::string const & get_font_decoration() const {return m_font_decoration;}
+	const std::string & get_font_decoration() const {return m_font_decoration;}
 
-	void set_font_face(std::string const & font_face) {m_font_face = font_face;}
+	void set_font_face(const std::string & font_face) {m_font_face = font_face;}
 	const std::string & get_font_face() const throw () {return m_font_face;}
 
 	void set_line_spacing(int32_t const line_spacing) {
@@ -67,7 +67,7 @@ struct Text_Block {
 	int32_t get_line_spacing() const {return m_line_spacing;}
 
 	void set_words(const std::vector<std::string> & words) {m_words = words;}
-	std::vector<std::string> const & get_words() const {return m_words;}
+	const std::vector<std::string> & get_words() const {return m_words;}
 
 	void set_line_breaks
 		(const std::vector<std::vector<std::string>::size_type> & line_breaks)
@@ -105,10 +105,10 @@ struct Richtext_Block {
 	Richtext_Block();
 	Richtext_Block(const Richtext_Block & src);
 
-	void set_images(std::vector<std::string> const & images) {
+	void set_images(const std::vector<std::string> & images) {
 		m_images = images;
 	}
-	std::vector<std::string> const & get_images() const {return m_images;}
+	const std::vector<std::string> & get_images() const {return m_images;}
 
 	void set_image_align(Align const image_align) {m_image_align = image_align;}
 	Align get_image_align() const throw () {return m_image_align;}
@@ -116,10 +116,10 @@ struct Richtext_Block {
 	void set_text_align(Align const text_align) {m_text_align = text_align;}
 	Align get_text_align() const throw () {return m_text_align;}
 
-	void set_text_blocks(std::vector<Text_Block> const & text_blocks) {
+	void set_text_blocks(const std::vector<Text_Block> & text_blocks) {
 		m_text_blocks = text_blocks;
 	}
-	std::vector<Text_Block> const & get_text_blocks() const {
+	const std::vector<Text_Block> & get_text_blocks() const {
 		return m_text_blocks;
 	}
 private:
@@ -148,7 +148,7 @@ private:
 		 const std::string & block_start,
 		 const std::string & format_end,
 		 const std::string & block_end);
-	Align set_align(std::string const &);
+	Align set_align(const std::string &);
 	void split_words(const std::string & in, std::vector<std::string> * plist);
 };
 

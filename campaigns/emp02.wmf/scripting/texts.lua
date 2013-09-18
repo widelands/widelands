@@ -77,7 +77,7 @@ _"* Finally, build up a fortress on the peninsula<br> (near where the barbarian 
 diary_page_5 = {
    title =_ "A new island",
    posy= 1,
-   body = "<rt><p font-size=24 font-face=FreeSerif font-weight=bold font-color=2F9131>" ..
+   body = "<rt><p font-size=24 font-face=DejaVuSerif font-weight=bold font-color=2F9131>" ..
 _"Diary of Lutius" ..
 "</p></rt><rt image=map:Lutius.png><p line-spacing=3 font-size=12><br>" ..
 _[[ "Finally! This island appears to be made for us, it is a gift from the Gods to my people and myself.<br> Until now, we have only seen a small part of this island, but this part alone is already bringing sunlight in my mind. I feel as if we have found a priceless treasure, a land like paradise.<br> On this island, we will start our new life. We will build up an outpost for our exile, which perhaps will become a new, beautiful home for every one of us." ]] ..
@@ -87,7 +87,7 @@ _[[ "Finally! This island appears to be made for us, it is a gift from the Gods 
 diary_page_5_1 = {
    title =_ "The green forests",
    posy = 1,
-   body="<rt><p font-size=24 font-face=FreeSerif font-weight=bold font-color=2F9131>" ..
+   body="<rt><p font-size=24 font-face=DejaVuSerif font-weight=bold font-color=2F9131>" ..
 _"Diary of Lutius" ..
 "</p></rt><rt image=map:Lutius.png><p line-spacing=3 font-size=12><br>" ..
 _[[ "As Saledus and I walked through these wonderful forests in the north, we felt that our future had just begun. This land is so peaceful, good and beautiful, I could stay here until the end of my life.<br> But until that day, may many years pass! For now, we must concentrate on the present, and build a few lumberjack's houses and a sawmill to produce some basic building materials.<br> But we shouldn't forget to preserve this natural bounty. These forests should last forever, so we really should build a forester's house too."<br><br>-- NEW OBJECTIVE --<br> ]] ..
@@ -98,7 +98,7 @@ _"* Build three lumberjack's houses, a forester's house and a sawmill." ..
 diary_page_5_2 = {
    title =_ "The rocks",
    posy = 1,
-   body="<rt><p font-size=24 font-face=FreeSerif font-weight=bold font-color=2F9131>" ..
+   body="<rt><p font-size=24 font-face=DejaVuSerif font-weight=bold font-color=2F9131>" ..
 _"Diary of Lutius" ..
 "</p></rt><rt image=map:Lutius.png><p line-spacing=3 font-size=12><br>" ..
 _[[ "Later, I walked down to the rocks in the south and looked for a place where we can build a quarry to get some hard stone for our larger buildings.<br> Again, I felt like I'm in paradise when I noticed that some marble-like stones were among the rocks. It seems that we will soon be able to build strong, luxurious buildings, like those we were accustomed to in Fremil."<br><br>-- NEW OBJECTIVE --<br> ]] ..
@@ -109,7 +109,7 @@ _"* Build a quarry to the south of your headquarters." ..
 diary_page_6 = {
    title =_ "Wood for the colony",
    posy=1,
-   body="<rt><p font-size=24 font-face=FreeSerif font-weight=bold font-color=2F9131>" ..
+   body="<rt><p font-size=24 font-face=DejaVuSerif font-weight=bold font-color=2F9131>" ..
 _"Diary of Lutius" ..
 "</p></rt><rt image=map:Lutius.png><p line-spacing=3 font-size=12><br>" ..
 _[[ "Good news! Today our wood economy was completed. Now we can be sure to have enough wood for our future building projects." ]] ..
@@ -119,7 +119,7 @@ _[[ "Good news! Today our wood economy was completed. Now we can be sure to have
 diary_page_7 = {
    title =_ "Stone for the colony",
    posy=1,
-   body="<rt><p font-size=24 text-align=left font-face=FreeSerif font-weight=bold font-color=2F9131>" ..
+   body="<rt><p font-size=24 text-align=left font-face=DejaVuSerif font-weight=bold font-color=2F9131>" ..
 _"Diary of Lutius" ..
 "</p></rt><rt image=map:Lutius.png><p line-spacing=3 font-size=12><br>" ..
 _[[ "Great! Today the building of the quarry was completed. Now we get enough stone to construct larger buildings." ]] ..
@@ -129,7 +129,7 @@ _[[ "Great! Today the building of the quarry was completed. Now we get enough st
 saledus_1 = {
    title =_ "Dangerous shipparts",
    posy = 1,
-   body="<rt><p font-size=24 font-face=FreeSerif font-weight=bold font-color=8F9131>" ..
+   body="<rt><p font-size=24 font-face=DejaVuSerif font-weight=bold font-color=8F9131>" ..
 _"Saledus looks unhappy" ..
 "</p></rt><rt image=map:Saledus.png><p line-spacing=3 font-size=12><br>" ..
 _[[ "Greetings Lutius, I don't want to start a panic, but I found something which gives me a sinking feeling in my stomach and spreads waves of fear in my heart. As I walked down to the southern shore I found the remains of another ship. I don't know whether these parts are all that is left of that ship. In any case, these parts do not seem to be old.<br> Perhaps the people aboard that ship were caught in the same storm which brought us to Malac' Mor - and were brought to this island.<br> I beg you to be cautious and to build some barracks or sentries around our colony."<br><br>-- NEW OBJECTIVE --<br> ]] ..
@@ -139,7 +139,7 @@ _"* Build some barracks and sentries around the colony." ..
 
 saledus_2 = {
    title =_ "Marble on the mountain",
-   body="<rt><p font-size=24 font-face=FreeSerif font-weight=bold font-color=8F9131>" ..
+   body="<rt><p font-size=24 font-face=DejaVuSerif font-weight=bold font-color=8F9131>" ..
 _"Saledus smiles" ..
 "</p></rt><rt image=map:Saledus.png><p line-spacing=3 font-size=12><br>" ..
 _[[ "Lutius, I've got good news for you:<br> As I walked to the east, I found a larger mountain.<br> I am not absolutely sure - a geologist should check if I am right - but I believe we could mine marble from some places on the mountain.<br> It would be a good source to bolster our supply of quality marble, beyond the meagre quantities available from the quarry. Perhaps you were right when you said that this island is like paradise.<br> Let us expand to that mountain and start mining marble."<br><br>-- NEW OBJECTIVE --<br> ]] ..
@@ -149,7 +149,7 @@ _"* Expand to the east, to start mining marble from the mountain." ..
 
 saledus_3 = {
    title =_ "Further mountains",
-   body="<rt><p font-size=24 font-face=FreeSerif font-weight=bold font-color=8F9131>" ..
+   body="<rt><p font-size=24 font-face=DejaVuSerif font-weight=bold font-color=8F9131>" ..
 _"Saledus is amazed" ..
 "</p></rt><rt image=map:Saledus.png><p line-spacing=3 font-size=12><br>" ..
 _[[ "By the Gods, this is an unbelievable strike of fortune! There are two more mountains and it seems that one has a large quantity of coal and the other of iron ore. We should immediately start to build iron ore and coal mines (or at least charcoal burners), smelting works, toolsmith's shops, armour and weapon smithies.<br> However: for all these bigger buildings, we need better and more elegant building materials. So, let's build<br> a stonemason, who cuts columns from marble.<br> After all, now we can begin living as we did in Fremil."<br><br>-- NEW OBJECTIVE --<br> ]] ..
@@ -159,7 +159,7 @@ _"* Build a stonemason and then a complete mining and production infrastructure 
 
 amalea_1 = {
    title =_ "Food for the miners",
-   body="<rt><p font-size=24 font-face=FreeSerif font-weight=bold font-color=AF7511>" ..
+   body="<rt><p font-size=24 font-face=DejaVuSerif font-weight=bold font-color=AF7511>" ..
 _"Amalea comes in..." ..
 "</p></rt><rt image=map:Amalea.png><p line-spacing=3 font-size=12><br>" ..
 _[[ "Hi Lutius, I hope you forgive my criticism, but it seems to me as if you forgot something.<br> It's nice, and of course a good idea, to build up mines, which will give us a more comfortable life,<br> but the people working in the mines are unhappy with the current situation. They have to do hard work and have no time for making their own food.<br> What do you think about helping them out?<br> I can't tell you what exactly we need... but here are my recommendations:"<br><br>-- NEW OBJECTIVE --<br> ]] ..
@@ -170,7 +170,7 @@ _"* To produce some sustaining food for our miners, we could build up a tavern. 
 diary_page_8 = {
    title =_ "The Barbarians",
    posy=1, 
-   body="<rt><p font-size=24 font-face=FreeSerif font-weight=bold font-color=2F9131>" ..
+   body="<rt><p font-size=24 font-face=DejaVuSerif font-weight=bold font-color=2F9131>" ..
 _"Diary of Lutius" ..
 "</p></rt><rt image=map:Lutius.png><p line-spacing=3 font-size=12><br>" ..
 _[[ "By the Gods! This is absolutely terrible. It seems as if we stand close to a test - and it seems as if Saledus was right with his fear concerning the shipwreck he found.<br> Today, as I walked down to the eastern shore,<br> I got a shock. I caught sight of one of those hated, evil, barbarian tribes with whom we have had so many problems before.<br> At first, I was naive and hoped that they were peaceful, but as soon as one of them saw me they charged towards me and started attacking me with their throwing-spears. Thanks be to the Gods that<br> I was able to flee and hide myself, before retreating back to our colony under cover of darkness.<br> Anyway, we must build up stronger military buildings as soon as possible."<br><br>-- NEW OBJECTIVE --<br> ]] ..
@@ -181,7 +181,7 @@ _"* Build up stronger military buildings, such as an outpost, a barrier or a tow
 diary_page_9 = {
    title =_ "Command for Attack",
    posy=1,
-   body="<rt><p font-size=24 font-face=FreeSerif font-weight=bold font-color=2F9131>" ..
+   body="<rt><p font-size=24 font-face=DejaVuSerif font-weight=bold font-color=2F9131>" ..
 _"Diary of Lutius" ..
 "</p></rt><rt image=map:Lutius.png><p line-spacing=3 font-size=12><br>" ..
 _[[ "That's good. The first large military building is complete and the mining infrastructure is getting better and better. Now we should think of preparing ourselves for battle."<br><br>-- NEW OBJECTIVES --<br> ]] ..
@@ -210,7 +210,7 @@ _"7 days later..." ..
 diary_page_11 = {
    title =_ "A Message",
    posy=1,
-   body="<rt><p font-size=24 font-face=FreeSerif font-weight=bold font-color=2F9131>" ..
+   body="<rt><p font-size=24 font-face=DejaVuSerif font-weight=bold font-color=2F9131>" ..
 _"Diary of Lutius" ..
 "</p></rt><rt image=map:Lutius.png><p line-spacing=3 font-size=12><br>" ..
 _[[ "Today a pigeon landed on our island.<br> It brought a message which fills me with dark thoughts and brings back my fears.<br> The message was addressed to me, begging me to come back to Fremil.<br> It says that the Empire is at war with the Barbarians. They were attacked from the north by the tribe I was forbidden to attack.<br> For me, it is clear what I must do...<br><br> You have completed this mission. You may continue playing if you wish, otherwise move on to the next mission." ]] ..
@@ -219,7 +219,7 @@ _[[ "Today a pigeon landed on our island.<br> It brought a message which fills m
 
 amalea_2 = {
    title =_ "Our new tavern",
-   body="<rt><p font-size=24 font-face=FreeSerif font-weight=bold font-color=AF7511>" ..
+   body="<rt><p font-size=24 font-face=DejaVuSerif font-weight=bold font-color=AF7511>" ..
 _"Amalea smiles" ..
 "</p></rt><rt image=map:Amalea.png><p line-spacing=3 font-size=12><br>" ..
 _[[ "Greetings, my friend, I just visited our new tavern<br> 'At the palms'. The beer they serve is really tasty. You really should take a drink there, too.<br> It is good to see that we have now got a warmer and more familiar environment on our island.<br> Thank you, Lutius." ]] ..

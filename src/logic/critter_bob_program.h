@@ -20,14 +20,14 @@
 #ifndef CRITTER_BOB_PROGRAM_H
 #define CRITTER_BOB_PROGRAM_H
 
-#include "bob.h"
+#include "logic/bob.h"
 
 namespace Widelands {
 
 struct Critter_BobAction {
 	typedef
 		bool (Critter_Bob::*execute_t)
-			(Game &, Bob::State &, Critter_BobAction const &);
+			(Game &, Bob::State &, const Critter_BobAction &);
 
 	enum {
 		walkObject, //  walk to objvar1
@@ -51,14 +51,14 @@ struct Critter_BobProgram : public BobProgramBase {
 
 	typedef
 		void (Critter_BobProgram::*parse_t)
-			(Critter_BobAction *, Parser *, std::vector<std::string> const & cmd);
+			(Critter_BobAction *, Parser *, const std::vector<std::string> & cmd);
 
 	Critter_BobProgram(const std::string & name) : m_name(name) {}
 	virtual ~Critter_BobProgram() {}
 
 	std::string get_name() const {return m_name;}
 	int32_t get_size() const {return m_actions.size();}
-	Critter_BobAction const & operator[] (size_t const idx) const {
+	const Critter_BobAction & operator[] (size_t const idx) const {
 		assert(idx < m_actions.size());
 		return m_actions[idx];
 	}
@@ -73,7 +73,7 @@ private:
 
 private:
 	void parse_remove
-		(Critter_BobAction *, Parser *, std::vector<std::string> const & cmd);
+		(Critter_BobAction *, Parser *, const std::vector<std::string> & cmd);
 
 private:
 	std::string                    m_name;

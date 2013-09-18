@@ -19,19 +19,20 @@
 
 #include "backtrace.h"
 
-#ifndef WIN32
+#ifndef _WIN32
 #ifndef __APPLE__
-#include <execinfo.h>
 #include <cstdlib>
-#endif
-#endif
 
-#define BACKTRACE_STACKSIZE 24
+#include <execinfo.h>
+#endif
+#endif
 
 std::string get_backtrace() {
 	std::string result("Backtrace:\n");
-#ifndef WIN32
+#ifndef _WIN32
 #ifndef __APPLE__
+#define BACKTRACE_STACKSIZE 24
+
 	void * stack[BACKTRACE_STACKSIZE];
 	size_t size = backtrace(stack, BACKTRACE_STACKSIZE);
 	char * * const list = backtrace_symbols(stack, size);

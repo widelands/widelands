@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2011 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2013 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -17,14 +17,15 @@
  *
  */
 
-#include "buildingwindow.h"
+#include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
 #include "logic/player.h"
 #include "logic/playercommand.h"
 #include "logic/warehouse.h"
-#include "portdockwaresdisplay.h"
 #include "ui_basic/tabpanel.h"
-#include "waresdisplay.h"
+#include "wui/buildingwindow.h"
+#include "wui/portdockwaresdisplay.h"
+#include "wui/waresdisplay.h"
 
 using Widelands::Warehouse;
 
@@ -32,6 +33,7 @@ static const char pic_tab_wares[] = "pics/menu_tab_wares.png";
 static const char pic_tab_workers[] = "pics/menu_tab_workers.png";
 static const char pic_tab_dock_wares[] = "pics/menu_tab_wares_dock.png";
 static const char pic_tab_dock_workers[] = "pics/menu_tab_workers_dock.png";
+static const char pic_tab_expedition[] = "pics/start_expedition.png";
 
 static const char pic_policy_prefer[] = "pics/stock_policy_prefer.png";
 static const char pic_policy_dontstock[] = "pics/stock_policy_dontstock.png";
@@ -40,29 +42,33 @@ static const char pic_policy_remove[] = "pics/stock_policy_remove.png";
 /**
  * Extends the wares display to show and modify stock policy of items.
  */
-struct WarehouseWaresDisplay : WaresDisplay {
+class WarehouseWaresDisplay : public WaresDisplay {
+public:
 	WarehouseWaresDisplay
 		(UI::Panel * parent, uint32_t width,
-		 Interactive_GameBase &, Warehouse &, Widelands::WareWorker type, bool selectable);
+		 Warehouse & wh, Widelands::WareWorker type, bool selectable);
 
 protected:
 	virtual void draw_ware(RenderTarget & dst, Widelands::Ware_Index ware);
 
 private:
-	Interactive_GameBase & m_igbase;
 	Warehouse & m_warehouse;
 };
 
 WarehouseWaresDisplay::WarehouseWaresDisplay
-	(UI::Panel * parent, uint32_t width, Interactive_GameBase & igbase,
+	(UI::Panel * parent, uint32_t width,
 	 Warehouse & wh, Widelands::WareWorker type, bool selectable)
 :
 WaresDisplay(parent, 0, 0, wh.owner().tribe(), type, selectable),
-m_igbase(igbase),
 m_warehouse(wh)
 {
 	set_inner_size(width, 0);
 	add_warelist(type == Widelands::wwWORKER ? m_warehouse.get_workers() : m_warehouse.get_wares());
+	if (type == Widelands::wwWORKER) {
+		Widelands::Ware_Index carrier_index =
+			m_warehouse.descr().tribe().worker_index("carrier");
+		hide_ware(carrier_index);
+	}
 }
 
 void WarehouseWaresDisplay::draw_ware(RenderTarget & dst, Widelands::Ware_Index ware)
@@ -70,18 +76,18 @@ void WarehouseWaresDisplay::draw_ware(RenderTarget & dst, Widelands::Ware_Index 
 	WaresDisplay::draw_ware(dst, ware);
 
 	Warehouse::StockPolicy policy = m_warehouse.get_stock_policy(get_type(), ware);
-	PictureID picid;
+	const Image* pic;
 
 	switch (policy) {
-	case Warehouse::SP_Prefer: picid = g_gr->get_picture(PicMod_UI, pic_policy_prefer); break;
-	case Warehouse::SP_DontStock: picid = g_gr->get_picture(PicMod_UI, pic_policy_dontstock); break;
-	case Warehouse::SP_Remove: picid = g_gr->get_picture(PicMod_UI, pic_policy_remove); break;
+	case Warehouse::SP_Prefer: pic = g_gr->images().get(pic_policy_prefer); break;
+	case Warehouse::SP_DontStock: pic = g_gr->images().get(pic_policy_dontstock); break;
+	case Warehouse::SP_Remove: pic = g_gr->images().get(pic_policy_remove); break;
 	default:
 		// don't draw anything for the normal policy
 		return;
 	}
 
-	dst.blit(ware_position(ware), picid);
+	dst.blit(ware_position(ware), pic);
 }
 
 /**
@@ -110,7 +116,7 @@ WarehouseWaresPanel::WarehouseWaresPanel
 	m_wh(wh),
 	m_can_act(m_gb.can_act(m_wh.owner().player_number())),
 	m_type(type),
-	m_display(this, width, m_gb, m_wh, m_type, m_can_act)
+	m_display(this, width, m_wh, m_type, m_can_act)
 {
 	add(&m_display, UI::Box::AlignLeft, true);
 
@@ -122,8 +128,8 @@ WarehouseWaresPanel::WarehouseWaresPanel
 #define ADD_POLICY_BUTTON(policy, policyname, tooltip)                                           \
 		b = new UI::Button                                                             \
 			(buttons, #policy, 0, 0, 34, 34,                                                  \
-			 g_gr->get_picture(PicMod_UI, "pics/but4.png"),                                   \
-			 g_gr->get_picture(PicMod_Game, "pics/stock_policy_button_" #policy ".png"),      \
+			 g_gr->images().get("pics/but4.png"),                                   \
+			 g_gr->images().get("pics/stock_policy_button_" #policy ".png"),      \
 			 tooltip),                                                                        \
 		b->sigclicked.connect \
 			(boost::bind(&WarehouseWaresPanel::set_policy, this, Warehouse::SP_##policyname)), \
@@ -185,7 +191,7 @@ Warehouse_Window::Warehouse_Window
 {
 	get_tabs()->add
 		("wares",
-		 g_gr->get_picture(PicMod_UI, pic_tab_wares),
+		 g_gr->images().get(pic_tab_wares),
 		 new WarehouseWaresPanel
 			(get_tabs(),
 			 Width,
@@ -195,7 +201,7 @@ Warehouse_Window::Warehouse_Window
 		 _("Wares"));
 	get_tabs()->add
 		("workers",
-		 g_gr->get_picture(PicMod_UI, pic_tab_workers),
+		 g_gr->images().get(pic_tab_workers),
 		 new WarehouseWaresPanel
 			(get_tabs(),
 			 Width,
@@ -206,15 +212,22 @@ Warehouse_Window::Warehouse_Window
 
 	if (Widelands::PortDock * pd = wh.get_portdock()) {
 		get_tabs()->add
-			("wares",
-			 g_gr->get_picture(PicMod_UI, pic_tab_dock_wares),
+			("dock_wares",
+			 g_gr->images().get(pic_tab_dock_wares),
 			 create_portdock_wares_display(get_tabs(), Width, *pd, Widelands::wwWARE),
 			 _("Wares in dock"));
 		get_tabs()->add
-			("workers",
-			 g_gr->get_picture(PicMod_UI, pic_tab_dock_workers),
+			("dock_workers",
+			 g_gr->images().get(pic_tab_dock_workers),
 			 create_portdock_wares_display(get_tabs(), Width, *pd, Widelands::wwWORKER),
 			 _("Workers in dock"));
+		if (pd->expedition_started()) {
+			get_tabs()->add
+				("expedition_wares_queue",
+				 g_gr->images().get(pic_tab_expedition),
+				 create_portdock_expedition_display(get_tabs(), warehouse(), igbase()),
+				 _("Expedition"));
+		}
 	}
 }
 

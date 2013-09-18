@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2008, 2010 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2008, 2010-2011, 2013 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -17,44 +17,45 @@
  *
  */
 
-#include "widelands_map_loader.h"
+#include "map_io/widelands_map_loader.h"
 
+#include "log.h"
 #include "logic/editor_game_base.h"
 #include "logic/map.h"
 #include "logic/player.h"
 #include "logic/tribe.h"
-#include "warning.h"
-#include "widelands_map_allowed_building_types_data_packet.h"
-#include "widelands_map_allowed_worker_types_data_packet.h"
-#include "widelands_map_bob_data_packet.h"
-#include "widelands_map_bobdata_data_packet.h"
-#include "widelands_map_building_data_packet.h"
-#include "widelands_map_buildingdata_data_packet.h"
-#include "widelands_map_elemental_data_packet.h"
-#include "widelands_map_exploration_data_packet.h"
-#include "widelands_map_extradata_data_packet.h"
-#include "widelands_map_flag_data_packet.h"
-#include "widelands_map_flagdata_data_packet.h"
-#include "widelands_map_heights_data_packet.h"
-#include "widelands_map_map_object_loader.h"
-#include "widelands_map_node_ownership_data_packet.h"
-#include "widelands_map_object_packet.h"
-#include "widelands_map_objective_data_packet.h"
-#include "widelands_map_player_names_and_tribes_data_packet.h"
-#include "widelands_map_player_position_data_packet.h"
-#include "widelands_map_players_areawatchers_data_packet.h"
-#include "widelands_map_players_messages_data_packet.h"
-#include "widelands_map_players_view_data_packet.h"
-#include "widelands_map_resources_data_packet.h"
-#include "widelands_map_road_data_packet.h"
-#include "widelands_map_roaddata_data_packet.h"
-#include "widelands_map_terrain_data_packet.h"
-#include "widelands_map_scripting_data_packet.h"
-#include "widelands_map_ware_data_packet.h"
-#include "widelands_map_waredata_data_packet.h"
 #include "logic/world.h"
-
-#include "log.h"
+#include "map_io/widelands_map_allowed_building_types_data_packet.h"
+#include "map_io/widelands_map_allowed_worker_types_data_packet.h"
+#include "map_io/widelands_map_bob_data_packet.h"
+#include "map_io/widelands_map_bobdata_data_packet.h"
+#include "map_io/widelands_map_building_data_packet.h"
+#include "map_io/widelands_map_buildingdata_data_packet.h"
+#include "map_io/widelands_map_elemental_data_packet.h"
+#include "map_io/widelands_map_exploration_data_packet.h"
+#include "map_io/widelands_map_extradata_data_packet.h"
+#include "map_io/widelands_map_flag_data_packet.h"
+#include "map_io/widelands_map_flagdata_data_packet.h"
+#include "map_io/widelands_map_heights_data_packet.h"
+#include "map_io/widelands_map_map_object_loader.h"
+#include "map_io/widelands_map_node_ownership_data_packet.h"
+#include "map_io/widelands_map_object_packet.h"
+#include "map_io/widelands_map_objective_data_packet.h"
+#include "map_io/widelands_map_player_names_and_tribes_data_packet.h"
+#include "map_io/widelands_map_player_position_data_packet.h"
+#include "map_io/widelands_map_players_areawatchers_data_packet.h"
+#include "map_io/widelands_map_players_messages_data_packet.h"
+#include "map_io/widelands_map_players_view_data_packet.h"
+#include "map_io/widelands_map_port_spaces_data_packet.h"
+#include "map_io/widelands_map_resources_data_packet.h"
+#include "map_io/widelands_map_road_data_packet.h"
+#include "map_io/widelands_map_roaddata_data_packet.h"
+#include "map_io/widelands_map_scripting_data_packet.h"
+#include "map_io/widelands_map_terrain_data_packet.h"
+#include "map_io/widelands_map_version_data_packet.h"
+#include "map_io/widelands_map_ware_data_packet.h"
+#include "map_io/widelands_map_waredata_data_packet.h"
+#include "warning.h"
 
 namespace Widelands {
 
@@ -148,6 +149,16 @@ int32_t WL_Map_Loader::load_map_complete
 	log("done!\n ");
 	// PRELOAD DATA END
 
+	if (m_fs.FileExists("port_spaces")) {
+		log("Reading Port Spaces Data ... ");
+
+		Map_Port_Spaces_Data_Packet p;
+		p.Read(m_fs, egbase, !scenario, *m_mol);
+
+		log("done!\n ");
+	}
+
+
 	log("Reading Heights Data ... ");
 	{Map_Heights_Data_Packet        p; p.Read(m_fs, egbase, !scenario, *m_mol);}
 	log("done!\n ");
@@ -187,6 +198,11 @@ int32_t WL_Map_Loader::load_map_complete
 	log("Reading Map Extra Data ... ");
 	{Map_Extradata_Data_Packet      p; p.Read(m_fs, egbase, !scenario, *m_mol);}
 	log("done!\n ");
+
+	log("Reading Map Version Data ... ");
+	{Map_Version_Data_Packet      p; p.Read(m_fs, egbase, !scenario, *m_mol);}
+	log("done!\n ");
+
 
 	log("Reading Allowed Worker Types Data ... ");
 	{
@@ -272,7 +288,7 @@ int32_t WL_Map_Loader::load_map_complete
 	log("Second and third phase loading Map Objects ... ");
 	mapobjects.LoadFinish();
 	{
-		Field const & fields_end = map()[map().max_index()];
+		const Field & fields_end = map()[map().max_index()];
 		for (Field * field = &map()[0]; field < &fields_end; ++field)
 			if (BaseImmovable * const imm = field->get_immovable()) {
 				if (upcast(Building const, building, imm))

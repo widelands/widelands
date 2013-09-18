@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2008, 2011 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2008, 2011-2012 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -17,8 +17,9 @@
  *
  */
 
-#include "item_ware_descr.h"
+#include "logic/item_ware_descr.h"
 
+#include "graphic/animation.h"
 #include "graphic/graphic.h"
 #include "i18n.h"
 #include "profile/profile.h"
@@ -26,19 +27,18 @@
 namespace Widelands {
 
 Item_Ware_Descr::Item_Ware_Descr
-	(const Tribe_Descr & tribe, char const * const _name,
+	(const Tribe_Descr & gtribe, char const * const _name,
 	 char const * const _descname,
-	 std::string const & directory, Profile & prof, Section & global_s)
+	 const std::string & directory, Profile & prof, Section & global_s)
 	:
 	Map_Object_Descr(_name, _descname),
-	m_tribe(tribe),
+	m_tribe(gtribe),
 	m_helptext(global_s.get_string("help", "")),
 	m_icon_fname(directory + "/menu.png"),
-	m_icon(g_gr ? g_gr->get_picture(PicMod_UI, "pics/but0.png") : PictureID()) // because of dedicated
+	m_icon(g_gr ? g_gr->images().get("pics/but0.png") : 0) // because of dedicated
 {
 	m_default_target_quantity =
-		global_s.get_positive
-			("default_target_quantity", std::numeric_limits<uint32_t>::max());
+		global_s.get_positive("default_target_quantity", std::numeric_limits<uint32_t>::max());
 
 	add_animation("idle", g_anim.get(directory, prof.get_safe_section("idle")));
 
@@ -52,7 +52,7 @@ Item_Ware_Descr::Item_Ware_Descr
  */
 void Item_Ware_Descr::load_graphics()
 {
-	m_icon = g_gr->get_picture(PicMod_Game, m_icon_fname);
+	m_icon = g_gr->images().get(m_icon_fname);
 }
 
 }

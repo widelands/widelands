@@ -17,25 +17,23 @@
  *
  */
 
-#include "instances.h"
-
-#include "cmd_queue.h"
-#include "game.h"
-#include "queue_cmd_ids.h"
-#include "wexception.h"
-#include "widelands_fileread.h"
-#include "widelands_filewrite.h"
-#include "map_io/widelands_map_map_object_loader.h"
-#include "map_io/widelands_map_map_object_saver.h"
-
-#include "log.h"
-
-#include "container_iterate.h"
+#include "logic/instances.h"
 
 #include <cstdarg>
 #include <cstdio>
-#include <string>
 #include <cstring>
+#include <string>
+
+#include "container_iterate.h"
+#include "log.h"
+#include "logic/cmd_queue.h"
+#include "logic/game.h"
+#include "logic/queue_cmd_ids.h"
+#include "logic/widelands_fileread.h"
+#include "logic/widelands_filewrite.h"
+#include "map_io/widelands_map_map_object_loader.h"
+#include "map_io/widelands_map_map_object_saver.h"
+#include "wexception.h"
 
 namespace Widelands {
 
@@ -63,7 +61,7 @@ void Cmd_Destroy_Map_Object::Read
 			if (Serial const serial = fr.Unsigned32())
 				try {
 					obj_serial = mol.get<Map_Object>(serial).serial();
-				} catch (_wexception const & e) {
+				} catch (const _wexception & e) {
 					throw game_data_error("%u: %s", serial, e.what());
 				}
 			else
@@ -71,7 +69,7 @@ void Cmd_Destroy_Map_Object::Read
 		} else
 			throw game_data_error
 				(_("unknown/unhandled version %u"), packet_version);
-	} catch (_wexception const & e) {
+	} catch (const _wexception & e) {
 		throw game_data_error(_("destroy map object: %s"), e.what());
 	}
 }
@@ -119,7 +117,7 @@ void Cmd_Act::Read
 			if (Serial const object_serial = fr.Unsigned32())
 				try {
 					obj_serial = mol.get<Map_Object>(object_serial).serial();
-				} catch (_wexception const & e) {
+				} catch (const _wexception & e) {
 					throw game_data_error
 						(_("object %u: %s"), object_serial, e.what());
 				}
@@ -129,7 +127,7 @@ void Cmd_Act::Read
 		} else
 			throw game_data_error
 				(_("unknown/unhandled version %u"), packet_version);
-	} catch (_wexception const & e) {
+	} catch (const _wexception & e) {
 		throw wexception(_("act: %s"), e.what());
 	}
 }
@@ -179,12 +177,12 @@ void Object_Manager::cleanup(Editor_Game_Base & egbase)
 /**
  * Insert the given Map_Object into the object manager
  */
-void Object_Manager::insert(Map_Object & obj)
+void Object_Manager::insert(Map_Object * obj)
 {
 	++m_lastserial;
 	assert(m_lastserial);
-	obj.m_serial = m_lastserial;
-	m_objects[m_lastserial] = &obj;
+	obj->m_serial = m_lastserial;
+	m_objects[m_lastserial] = obj;
 }
 
 /**
@@ -195,7 +193,21 @@ void Object_Manager::remove(Map_Object & obj)
 	m_objects.erase(obj.m_serial);
 }
 
-Map_Object * Object_Ptr::get(Editor_Game_Base const & egbase)
+/*
+ * Return the list of all serials currently in use
+ */
+std::vector<Serial> Object_Manager::all_object_serials_ordered () const throw () {
+	std::vector<Serial> rv;
+
+	container_iterate_const(objmap_t, m_objects, o)
+		rv.push_back(o->first);
+
+	std::sort(rv.begin(), rv.end());
+
+	return rv;
+}
+
+Map_Object * Object_Ptr::get(const Editor_Game_Base & egbase)
 {
 	if (!m_serial)
 		return 0;
@@ -209,7 +221,7 @@ Map_Object * Object_Ptr::get(Editor_Game_Base const & egbase)
 // because it is logically the pointer that is const, not the object
 // that is pointed to.
 // That is, a 'const Object_Ptr' behaves like a 'Object_Ptr * const'.
-Map_Object * Object_Ptr::get(Editor_Game_Base const & egbase) const {
+Map_Object * Object_Ptr::get(const Editor_Game_Base & egbase) const {
 	return m_serial ? egbase.objects().get_object(m_serial) : 0;
 }
 
@@ -287,7 +299,7 @@ void Map_Object_Descr::add_attribute(uint32_t const attr)
  * Lookup an attribute by name. If the attribute name hasn't been encountered
  * before, we add it to the map.
  */
-uint32_t Map_Object_Descr::get_attribute_id(std::string const & name) {
+uint32_t Map_Object_Descr::get_attribute_id(const std::string & name) {
 	AttribMap::iterator it = s_dyn_attribs.find(name);
 
 	if (it != s_dyn_attribs.end())
@@ -310,7 +322,7 @@ uint32_t Map_Object_Descr::get_attribute_id(std::string const & name) {
  * Lookup an attribute by id. If the attribute isn't found,
  * returns an emtpy string.
  */
-std::string Map_Object_Descr::get_attribute_name(uint32_t const & id) {
+std::string Map_Object_Descr::get_attribute_name(uint32_t id) {
 	for
 		(AttribMap::iterator iter = s_dyn_attribs.begin();
 		 iter != s_dyn_attribs.end(); ++iter)
@@ -343,6 +355,7 @@ m_descr(the_descr), m_serial(0), m_logsink(0)
  */
 void Map_Object::remove(Editor_Game_Base & egbase)
 {
+	removed(m_serial); // Signal call
 	cleanup(egbase);
 	delete this;
 }
@@ -380,7 +393,7 @@ void Map_Object::schedule_destroy(Game & game)
  */
 void Map_Object::init(Editor_Game_Base & egbase)
 {
-	egbase.objects().insert(*this);
+	egbase.objects().insert(this);
 }
 
 /**
@@ -434,7 +447,7 @@ void Map_Object::set_logsink(LogSink * const sink)
 }
 
 
-void Map_Object::log_general_info(Editor_Game_Base const &) {}
+void Map_Object::log_general_info(const Editor_Game_Base &) {}
 
 /**
  * Prints a log message prepended by the object's serial number.
@@ -484,14 +497,14 @@ void Map_Object::Loader::load(FileRead & fr)
 		Serial const serial = fr.Unsigned32();
 		try {
 			mol().register_object<Map_Object>(serial, *get_object());
-		} catch (_wexception const & e) {
+		} catch (const _wexception & e) {
 			throw wexception("%u: %s", serial, e.what());
 		}
-	} catch (_wexception const & e) {
+	} catch (const _wexception & e) {
 		throw wexception("map object: %s", e.what());
 	}
 
-	egbase().objects().insert(*get_object());
+	egbase().objects().insert(get_object());
 }
 
 

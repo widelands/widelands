@@ -12,7 +12,5 @@ BUILD=release
 #Build=debug
 
 #### Version #### // Needed for 'make dist'
-Version="Build16"
+Version="Build17"
 
-#### GGZ usage? NO/YES ####
-USE_GGZ=YES

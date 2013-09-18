@@ -17,18 +17,20 @@
  *
  */
 
-#include "loadreplay.h"
+#include "ui_fsmenu/loadreplay.h"
 
-#include "logic/game.h"
 #include "game_io/game_loader.h"
 #include "game_io/game_preload_data_packet.h"
+#include "graphic/graphic.h"
 #include "i18n.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "log.h"
+#include "logic/game.h"
 #include "logic/replay.h"
+#include "timestring.h"
 #include "ui_basic/messagebox.h"
 
-Fullscreen_Menu_LoadReplay::Fullscreen_Menu_LoadReplay() :
+Fullscreen_Menu_LoadReplay::Fullscreen_Menu_LoadReplay(Widelands::Game & g) :
 	Fullscreen_Menu_Base("choosemapmenu.jpg"),
 
 // Values for alignment and size
@@ -39,17 +41,17 @@ Fullscreen_Menu_LoadReplay::Fullscreen_Menu_LoadReplay() :
 	m_back
 		(this, "back",
 		 get_w() * 71 / 100, get_h() * 9 / 10, m_butw, m_buth,
-		 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
+		 g_gr->images().get("pics/but0.png"),
 		 _("Back"), std::string(), true, false),
 	m_ok
 		(this, "ok",
 		 get_w() * 71 / 100, get_h() * 15 / 20, m_butw, m_buth,
-		 g_gr->get_picture(PicMod_UI, "pics/but2.png"),
+		 g_gr->images().get("pics/but2.png"),
 		 _("OK"), std::string(), false, false),
 	m_delete
 		(this, "delete",
 		 get_w() * 71 / 100, get_h() * 17 / 20, m_butw, m_buth,
-		 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
+		 g_gr->images().get("pics/but0.png"),
 		 _("Delete"), std::string(), false, false),
 
 // Replay list
@@ -62,7 +64,7 @@ Fullscreen_Menu_LoadReplay::Fullscreen_Menu_LoadReplay() :
 	m_title
 		(this,
 		 get_w() / 2, get_h() * 3 / 20,
-		 _("Choose a replay!"), UI::Align_HCenter),
+		 _("Choose a replay"), UI::Align_HCenter),
 	m_label_mapname
 		(this,
 		 get_w() * 7 / 10,  get_h() * 17 / 50,
@@ -72,7 +74,16 @@ Fullscreen_Menu_LoadReplay::Fullscreen_Menu_LoadReplay() :
 		(this,
 		 get_w() * 7 / 10,  get_h() * 3 / 8,
 		 _("Gametime:"), UI::Align_Right),
-	m_tagametime(this, get_w() * 71 / 100, get_h() * 3 / 8)
+	m_tagametime(this, get_w() * 71 / 100, get_h() * 3 / 8),
+	m_label_players
+		(this,
+		 get_w() * 7 / 10,  get_h() * 41 / 100,
+		 _("Players:"), UI::Align_Right),
+	m_ta_players
+		(this, get_w() * 71 / 100, get_h() * 41 / 100),
+	m_ta_win_condition
+		(this, get_w() * 71 / 100, get_h() * 9 / 20),
+	m_game(g)
 {
 	m_back.sigclicked.connect(boost::bind(&Fullscreen_Menu_LoadReplay::end_modal, boost::ref(*this), 0));
 	m_ok.sigclicked.connect(boost::bind(&Fullscreen_Menu_LoadReplay::clicked_ok, boost::ref(*this)));
@@ -80,13 +91,24 @@ Fullscreen_Menu_LoadReplay::Fullscreen_Menu_LoadReplay() :
 		(boost::bind
 		 	 (&Fullscreen_Menu_LoadReplay::clicked_delete, boost::ref(*this)));
 
-	m_title.set_textstyle(ts_big());
 	m_list.set_font(ui_fn(), fs_small());
 	m_list.selected.connect(boost::bind(&Fullscreen_Menu_LoadReplay::replay_selected, this, _1));
 	m_list.double_clicked.connect
 		(boost::bind(&Fullscreen_Menu_LoadReplay::double_clicked, this, _1));
+
+	m_title         .set_font(ui_fn(), fs_big(), UI_FONT_CLR_FG);
+	m_label_mapname .set_font(ui_fn(), fs_small(), UI_FONT_CLR_FG);
+	m_tamapname     .set_font(ui_fn(), fs_small(), UI_FONT_CLR_FG);
+	m_label_gametime.set_font(ui_fn(), fs_small(), UI_FONT_CLR_FG);
+	m_tagametime    .set_font(ui_fn(), fs_small(), UI_FONT_CLR_FG);
+	m_label_players .set_font(ui_fn(), fs_small(), UI_FONT_CLR_FG);
+	m_ta_players    .set_font(ui_fn(), fs_small(), UI_FONT_CLR_FG);
+	m_ta_win_condition.set_font(ui_fn(), fs_small(), UI_FONT_CLR_FG);
+	m_list          .set_font(ui_fn(), fs_small());
 	m_back.set_font(font_small());
 	m_ok.set_font(font_small());
+	m_delete.set_font(font_small());
+
 	fill_list();
 }
 
@@ -150,11 +172,10 @@ void Fullscreen_Menu_LoadReplay::replay_selected(uint32_t const selected)
 
 	if (m_list.has_selection()) {
 		std::string name = m_list.get_selected() + WLGF_SUFFIX;
-		Widelands::Game game;
 		Widelands::Game_Preload_Data_Packet gpdp;
 
 		try {
-			Widelands::Game_Loader gl(name, game);
+			Widelands::Game_Loader gl(name, m_game);
 			gl.preload_game(gpdp);
 		} catch (const _wexception & e) {
 			log("Replay '%s' must have changed from under us\nException: %s\n", name.c_str(), e.what());
@@ -166,15 +187,18 @@ void Fullscreen_Menu_LoadReplay::replay_selected(uint32_t const selected)
 		m_delete.set_enabled(true);
 		m_tamapname.set_text(gpdp.get_mapname());
 
-		char buf[200];
+		char buf[20];
 		uint32_t gametime = gpdp.get_gametime();
+		m_tagametime.set_text(gametimestring(gametime));
 
-		int32_t hours = gametime / 3600000;
-		gametime -= hours * 3600000;
-		int32_t minutes = gametime / 60000;
+		if (gpdp.get_number_of_players() > 0) {
+			sprintf(buf, "%i", gpdp.get_number_of_players());
+		} else {
+			sprintf(buf, "%s", _("Unknown"));
+		}
+		m_ta_players.set_text(buf);
 
-		sprintf(buf, "%02i:%02i", hours, minutes);
-		m_tagametime.set_text(buf);
+		m_ta_win_condition.set_text(gpdp.get_win_condition());
 	} else {
 		no_selection();
 	}
@@ -191,6 +215,7 @@ void Fullscreen_Menu_LoadReplay::fill_list()
 
 	g_fs->FindFiles(REPLAY_DIR, "*" REPLAY_SUFFIX, &files, 1);
 
+	Widelands::Game_Preload_Data_Packet gpdp;
 	for
 		(filenameset_t::iterator pname = files.begin();
 		 pname != files.end();
@@ -202,14 +227,12 @@ void Fullscreen_Menu_LoadReplay::fill_list()
 			continue;
 
 		try {
-			Widelands::Game_Preload_Data_Packet gpdp;
-			Widelands::Game game;
-			Widelands::Game_Loader gl(savename, game);
+			Widelands::Game_Loader gl(savename, m_game);
 			gl.preload_game(gpdp);
 
 			m_list.add
 				(FileSystem::FS_FilenameWoExt(pname->c_str()).c_str(), *pname);
-		} catch (_wexception const &) {} //  we simply skip illegal entries
+		} catch (const _wexception &) {} //  we simply skip illegal entries
 	}
 
 	if (m_list.size())
@@ -226,10 +249,12 @@ bool Fullscreen_Menu_LoadReplay::handle_key(bool down, SDL_keysym code)
 	case SDLK_KP2:
 		if (code.mod & KMOD_NUM)
 			break;
+		/* no break */
 	case SDLK_DOWN:
 	case SDLK_KP8:
 		if (code.mod & KMOD_NUM)
 			break;
+		/* no break */
 	case SDLK_UP:
 		m_list.handle_key(down, code);
 		return true;
@@ -240,6 +265,7 @@ bool Fullscreen_Menu_LoadReplay::handle_key(bool down, SDL_keysym code)
 	case SDLK_KP_PERIOD:
 		if (code.mod & KMOD_NUM)
 			break;
+		/* no break */
 	case SDLK_DELETE:
 		clicked_delete();
 		return true;

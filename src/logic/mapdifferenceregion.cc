@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007, 2010 by the Widelands Development Team
+ * Copyright (C) 2007, 2010-2013 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -17,7 +17,7 @@
  *
  */
 
-#include "mapdifferenceregion.h"
+#include "logic/mapdifferenceregion.h"
 
 namespace Widelands {
 
@@ -63,6 +63,7 @@ throw ()
 	DIRECTION_CASE(WALK_SE, get_brn);
 	DIRECTION_CASE(WALK_SW, get_bln);
 	DIRECTION_CASE(WALK_W,  get_ln);
+	default: assert(false);
 	}
 	--m_direction; if (not m_direction) m_direction = 6;
 	m_remaining_in_edge = m_area.radius;

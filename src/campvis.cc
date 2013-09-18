@@ -18,14 +18,15 @@
  */
 
 #include "campvis.h"
-#include "io/filesystem/filesystem.h"
-#include "profile/profile.h"
-#include "wexception.h"
+
+#include <cstdio>
+#include <cstdlib>
 
 #include <sys/stat.h>
 
-#include <cstdlib>
-#include <cstdio>
+#include "io/filesystem/filesystem.h"
+#include "profile/profile.h"
+#include "wexception.h"
 
 /**
  * Get the path of campaign visibility save-file
@@ -61,7 +62,7 @@ std::string Campaign_visibility_save::get_path()
 /**
  * Create the campaign visibility save-file of the user
  */
-void Campaign_visibility_save::make_campvis(std::string const & savepath)
+void Campaign_visibility_save::make_campvis(const std::string & savepath)
 {
 	// Only prepare campvis-file -> data will be written via update_campvis
 	Profile campvis(savepath.c_str());
@@ -77,14 +78,12 @@ void Campaign_visibility_save::make_campvis(std::string const & savepath)
 /**
  * Update the campaign visibility save-file of the user
  */
-void Campaign_visibility_save::update_campvis(std::string const & savepath)
+void Campaign_visibility_save::update_campvis(const std::string & savepath)
 {
 	// Variable declaration
 	int32_t i = 0;
 	int32_t imap = 0;
 	char csection[12];
-	char cvisible[12];
-	char cnewvisi[12];
 	char number[4];
 	std::string mapsection;
 	std::string cms;
@@ -104,6 +103,8 @@ void Campaign_visibility_save::update_campvis(std::string const & savepath)
 	{
 		Section & vis = campvisw.pull_section("campaigns");
 		sprintf(csection, "campsect%i", i);
+		char cvisible[12];
+		char cnewvisi[12];
 		while (cconf_s.get_string(csection)) {
 			sprintf(cvisible, "campvisi%i", i);
 			sprintf(cnewvisi, "cnewvisi%i", i);
@@ -163,7 +164,7 @@ void Campaign_visibility_save::update_campvis(std::string const & savepath)
  * \param visible should the map be visible?
  */
 void Campaign_visibility_save::set_campaign_visibility
-	(std::string const & entry, bool visible)
+	(const std::string & entry, bool visible)
 {
 	std::string savepath = get_path();
 	Profile campvis(savepath.c_str());
@@ -181,7 +182,7 @@ void Campaign_visibility_save::set_campaign_visibility
  * \param visible should the map be visible?
  */
 void Campaign_visibility_save::set_map_visibility
-	(std::string const & entry, bool visible)
+	(const std::string & entry, bool visible)
 {
 	std::string savepath = get_path();
 	Profile campvis(savepath.c_str());

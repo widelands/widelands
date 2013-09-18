@@ -20,12 +20,11 @@
 #ifndef WIDELANDS_STREAMWRITE_H
 #define WIDELANDS_STREAMWRITE_H
 
-#include "io/streamwrite.h"
-
-#include "widelands.h"
-#include "widelands_geometry.h"
-
 #include <cassert>
+
+#include "io/streamwrite.h"
+#include "logic/widelands.h"
+#include "logic/widelands_geometry.h"
 
 namespace Widelands {
 
@@ -44,10 +43,10 @@ struct StreamWrite : public ::StreamWrite {
 	void Coords32      (const Coords &);
 	void Area48        (Area<Coords, uint16_t>);
 	void Player_Number8(const Player_Number pn) {Unsigned8(pn);}
-	void Tribe         (Tribe_Descr     const &);
+	void Tribe         (const Tribe_Descr     &);
 	void Tribe         (Tribe_Descr     const *);
-	void Immovable_Type(Immovable_Descr const &);
-	void Building_Type (Building_Descr  const &);
+	void Immovable_Type(const Immovable_Descr &);
+	void Building_Type (const Building_Descr  &);
 };
 
 inline void StreamWrite::Direction8           (Direction const d) {

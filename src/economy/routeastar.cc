@@ -17,10 +17,10 @@
  *
  */
 
-#include "routeastar.h"
+#include "economy/routeastar.h"
 
-#include "router.h"
-#include "iroute.h"
+#include "economy/iroute.h"
+#include "economy/router.h"
 
 namespace Widelands {
 

@@ -4,6 +4,7 @@
 size=big
 buildable=no
 destructible=no
+heal_per_second=170
 conquers=9
 
 [idle]

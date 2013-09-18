@@ -20,12 +20,14 @@
 #ifndef WARE_STATISTICS_MENU_H
 #define WARE_STATISTICS_MENU_H
 
-#include "ui_basic/unique_window.h"
-#include "plot_area.h"
-#include "differential_plot_area.h"
-
 #include <vector>
 
+#include "logic/widelands.h"
+#include "wui/plot_area.h"
+#include "ui_basic/slider.h"
+#include "ui_basic/unique_window.h"
+
+struct DifferentialPlot_Area;
 struct Interactive_Player;
 struct WUIPlot_Area;
 
@@ -38,6 +40,7 @@ private:
 	Interactive_Player * m_parent;
 	WUIPlot_Area       * m_plot_production;
 	WUIPlot_Area       * m_plot_consumption;
+	WUIPlot_Area       * m_plot_stock;
 	DifferentialPlot_Area       * m_plot_economy;
 	std::vector<uint8_t> m_color_map; //maps ware index to colors
 	std::vector<bool> m_active_colors;
@@ -59,7 +62,7 @@ struct WUIPlot_Generic_Area_Slider : public UI::DiscreteSlider {
 		 WUIPlot_Area & plot_area,
 		 Ware_Statistics_Menu * signal_listener,
 		 const int32_t x, const int32_t y, const uint32_t w, const uint32_t h,
-		 const PictureID background_picture_id,
+		 const Image* background_picture_id,
 		 const std::string & tooltip_text = std::string(),
 		 const uint32_t cursor_size = 20,
 		 const bool enabled = true)

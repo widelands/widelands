@@ -17,18 +17,11 @@
  *
  */
 
-#include "attack_box.h"
+#include "wui/attack_box.h"
 
+#include "graphic/graphic.h"
 #include "logic/soldier.h"
-
 #include "upcast.h"
-
-#if 0
-static char const * const pic_more_soldiers    = "pics/attack_add_soldier.png";
-static char const * const pic_less_soldiers    = "pics/attack_sub_soldier.png";
-static char const * const pic_more_brave       = "pics/attack_add_soldier.png";
-static char const * const pic_less_brave       = "pics/attack_sub_soldier.png";
-#endif
 
 AttackBox::AttackBox
 	(UI::Panel              * parent,
@@ -82,7 +75,7 @@ UI::Slider & AttackBox::add_slider
 			 0, 0,
 			 width, height,
 			 min, max, initial,
-			 g_gr->get_picture(PicMod_Game, picname),
+			 g_gr->images().get(picname),
 			 hint);
 	parent.add(&result, UI::Box::AlignCenter);
 	return result;
@@ -92,7 +85,7 @@ UI::Textarea & AttackBox::add_text
 	(UI::Box           & parent,
 	 std::string   str,
 	 uint32_t      alignment,
-	 std::string const & fontname,
+	 const std::string & fontname,
 	 uint32_t      fontsize)
 {
 	UI::Textarea & result = *new UI::Textarea(&parent, str.c_str());
@@ -109,13 +102,13 @@ UI::Button & AttackBox::add_button
 	(UI::Box           & parent,
 	 char        const * const text,
 	 void         (AttackBox::*fn)(),
-	 std::string const & tooltip_text)
+	 const std::string & tooltip_text)
 {
 	UI::Button * button =
 		new UI::Button
 			(&parent, text,
 			 8, 8, 26, 26,
-			 g_gr->get_picture(PicMod_UI, "pics/but2.png"),
+			 g_gr->images().get("pics/but2.png"),
 			 text,
 			 tooltip_text);
 	button->sigclicked.connect(boost::bind(fn, boost::ref(*this)));

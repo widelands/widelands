@@ -20,8 +20,9 @@
 #ifndef FINDNODE_H
 #define FINDNODE_H
 
-#include <stdint.h>
 #include <vector>
+
+#include <stdint.h>
 
 namespace Widelands {
 
@@ -39,14 +40,14 @@ private:
 			if (--refcount == 0)
 				delete this;
 		}
-		virtual bool accept(Map const &, FCoords const & coord) const = 0;
+		virtual bool accept(const Map &, const FCoords & coord) const = 0;
 
 		int refcount;
 	};
 	template<typename T>
 	struct Capsule : public BaseCapsule {
-		Capsule(T const & _op) : op(_op) {}
-		bool accept(Map const & map, FCoords const & coord) const {
+		Capsule(const T & _op) : op(_op) {}
+		bool accept(const Map & map, const FCoords & coord) const {
 			return op.accept(map, coord);
 		}
 
@@ -56,7 +57,7 @@ private:
 	BaseCapsule * capsule;
 
 public:
-	FindNode(FindNode const & o) {
+	FindNode(const FindNode & o) {
 		capsule = o.capsule;
 		capsule->addref();
 	}
@@ -64,7 +65,7 @@ public:
 		capsule->deref();
 		capsule = 0;
 	}
-	FindNode & operator= (FindNode const & o) {
+	FindNode & operator= (const FindNode & o) {
 		capsule->deref();
 		capsule = o.capsule;
 		capsule->addref();
@@ -72,12 +73,12 @@ public:
 	}
 
 	template<typename T>
-	FindNode(T const & op) {
+	FindNode(const T & op) {
 		capsule = new Capsule<T>(op);
 	}
 
 	// Return true if this node should be returned by find_fields()
-	bool accept(Map const & map, FCoords const & coord) const {
+	bool accept(const Map & map, const FCoords & coord) const {
 		return capsule->accept(map, coord);
 	}
 };
@@ -85,7 +86,7 @@ public:
 struct FindNodeCaps {
 	FindNodeCaps(uint8_t mincaps) : m_mincaps(mincaps) {}
 
-	bool accept(Map const &, FCoords const &) const;
+	bool accept(const Map &, const FCoords &) const;
 
 private:
 	uint8_t m_mincaps;
@@ -95,16 +96,16 @@ private:
 struct FindNodeAnd {
 	FindNodeAnd() {}
 
-	void add(FindNode const &, bool negate = false);
+	void add(const FindNode &, bool negate = false);
 
-	bool accept(Map const &, FCoords const &) const;
+	bool accept(const Map &, const FCoords &) const;
 
 private:
 	struct Subfunctor {
 		bool negate;
 		FindNode findfield;
 
-		Subfunctor(FindNode const &, bool _negate);
+		Subfunctor(const FindNode &, bool _negate);
 	};
 
 	std::vector<Subfunctor> m_subfunctors;
@@ -124,7 +125,7 @@ struct FindNodeSize {
 
 	FindNodeSize(Size size) : m_size(size) {}
 
-	bool accept(Map const &, FCoords const &) const;
+	bool accept(const Map &, const FCoords &) const;
 
 private:
 	Size m_size;
@@ -141,7 +142,7 @@ struct FindNodeImmovableSize {
 
 	FindNodeImmovableSize(uint32_t sizes) : m_sizes(sizes) {}
 
-	bool accept(Map const &, FCoords const &) const;
+	bool accept(const Map &, const FCoords &) const;
 
 private:
 	uint32_t m_sizes;
@@ -151,7 +152,7 @@ private:
 struct FindNodeImmovableAttribute {
 	FindNodeImmovableAttribute(uint32_t attrib) : m_attribute(attrib) {}
 
-	bool accept(Map const &, FCoords const &) const;
+	bool accept(const Map &, const FCoords &) const;
 
 private:
 	uint32_t m_attribute;
@@ -162,7 +163,7 @@ private:
 struct FindNodeResource {
 	FindNodeResource(uint8_t res) : m_resource(res) {}
 
-	bool accept(Map const &, FCoords const &) const;
+	bool accept(const Map &, const FCoords &) const;
 
 private:
 	uint8_t m_resource;
@@ -173,7 +174,7 @@ private:
 struct FindNodeResourceBreedable {
 	FindNodeResourceBreedable(uint8_t res) : m_resource(res) {}
 
-	bool accept(Map const &, FCoords const &) const;
+	bool accept(const Map &, const FCoords &) const;
 
 private:
 	uint8_t m_resource;
@@ -184,7 +185,7 @@ private:
 struct FindNodeShore {
 	FindNodeShore() {}
 
-	bool accept(Map const &, FCoords const &) const;
+	bool accept(const Map &, const FCoords &) const;
 };
 
 }

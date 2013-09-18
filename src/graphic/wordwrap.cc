@@ -21,11 +21,11 @@
  * from Wesnoth -- http://www.wesnoth.org
  */
 
-#include "wordwrap.h"
+#include "graphic/wordwrap.h"
 
-#include "font_handler.h"
+#include "graphic/font_handler.h"
+#include "graphic/rendertarget.h"
 #include "log.h"
-#include "rendertarget.h"
 
 namespace UI {
 
@@ -38,10 +38,10 @@ WordWrap::WordWrap() :
 {
 }
 
-WordWrap::WordWrap(const TextStyle & style, uint32_t wrapwidth) :
+WordWrap::WordWrap(const TextStyle & style, uint32_t gwrapwidth) :
 	m_style(style)
 {
-	m_wrapwidth = wrapwidth;
+	m_wrapwidth = gwrapwidth;
 
 	if (m_wrapwidth < std::numeric_limits<uint32_t>::max()) {
 		if (m_wrapwidth < 2 * LINE_MARGIN)
@@ -62,9 +62,9 @@ void WordWrap::set_style(const TextStyle & style)
 /**
  * Set the wrap width (i.e. line width limit in pixels) for future wrapping operations.
  */
-void WordWrap::set_wrapwidth(uint32_t wrapwidth)
+void WordWrap::set_wrapwidth(uint32_t gwrapwidth)
 {
-	m_wrapwidth = wrapwidth;
+	m_wrapwidth = gwrapwidth;
 }
 
 /**
@@ -199,15 +199,15 @@ void WordWrap::compute_end_of_line
  */
 uint32_t WordWrap::width() const
 {
-	uint32_t width = 0;
+	uint32_t calculated_width = 0;
 
 	for (uint32_t line = 0; line < m_lines.size(); ++line) {
 		uint32_t linewidth = m_style.calc_bare_width(m_lines[line].text);
-		if (linewidth > width)
-			width = linewidth;
+		if (linewidth > calculated_width)
+			calculated_width = linewidth;
 	}
 
-	return width + 2 * LINE_MARGIN;
+	return calculated_width + 2 * LINE_MARGIN;
 }
 
 /**
@@ -215,7 +215,7 @@ uint32_t WordWrap::width() const
  */
 uint32_t WordWrap::height() const
 {
-	uint32_t fontheight = m_style.font->height();
+	uint16_t fontheight = m_style.font->height();
 	uint32_t lineskip = m_style.font->lineskip();
 
 	return fontheight + (m_lines.size() - 1) * lineskip;
@@ -263,7 +263,7 @@ uint32_t WordWrap::line_offset(uint32_t line) const
  */
 void WordWrap::draw(RenderTarget & dst, Point where, Align align, uint32_t caret)
 {
-	uint32_t fontheight = m_style.font->height();
+	uint16_t fontheight = m_style.font->height();
 	uint32_t lineskip = m_style.font->lineskip();
 	uint32_t caretline, caretpos;
 
@@ -280,7 +280,7 @@ void WordWrap::draw(RenderTarget & dst, Point where, Align align, uint32_t caret
 
 	++where.y;
 	for (uint32_t line = 0; line < m_lines.size(); ++line, where.y += lineskip) {
-		if (where.y >= dst.get_h() || int32_t(where.y + fontheight) <= 0)
+		if (where.y >= dst.height() || int32_t(where.y + fontheight) <= 0)
 			continue;
 
 		g_fh->draw_text

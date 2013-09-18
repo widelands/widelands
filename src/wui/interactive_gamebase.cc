@@ -17,32 +17,31 @@
  *
  */
 
-#include "interactive_gamebase.h"
-
-#include "chatoverlay.h"
-#include "profile/profile.h"
-#include "upcast.h"
+#include "wui/interactive_gamebase.h"
 
 #include "logic/findbob.h"
 #include "logic/game.h"
 #include "logic/player.h"
 #include "logic/ship.h"
+#include "profile/profile.h"
+#include "upcast.h"
+#include "wui/game_summary.h"
 
 Interactive_GameBase::Interactive_GameBase
 	(Widelands::Game & _game, Section & global_s,
-	 PlayerType pt, bool const chatenabled)
+	 PlayerType pt, bool const chatenabled, bool const multiplayer)
 	:
 	Interactive_Base(_game, global_s),
+	m_chatProvider(0),
 	m_building_census_format
 		(global_s.get_string("building_census_format",       "%N")),
 	m_building_statistics_format
 		(global_s.get_string("building_statistics_format",   "%t")),
 	m_building_tooltip_format
 		(global_s.get_string("building_tooltip_format",      "%r")),
-	m_building_window_title_format
-		(global_s.get_string("building_window_title_format", "%A")),
 	m_chatenabled(chatenabled),
-	m_playertype(pt)
+	m_playertype(pt),
+	m_multiplayer(multiplayer)
 {}
 
 /// \return a pointer to the running \ref Game instance.
@@ -97,3 +96,14 @@ bool Interactive_GameBase::try_show_ship_window()
 
 	return false;
 }
+
+void Interactive_GameBase::show_game_summary()
+{
+	if (m_game_summary.window) {
+		m_game_summary.window->set_visible(true);
+		m_game_summary.window->think();
+		return;
+	}
+	new GameSummaryScreen(this, &m_game_summary);
+}
+

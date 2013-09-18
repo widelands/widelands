@@ -1,4 +1,0 @@
-leading_whitespace_not_matching_previous_line.cc:3: leading whitespace character # 1 is ' ' but should be 'HT' according to the previous line
-leading_whitespace_not_matching_previous_line.cc:3: found ' ' as leading whitespace character # 2 but only 1 leading whitespace characters are allowed
-leading_whitespace_not_matching_previous_line.cc:3: found ' ' as leading whitespace character # 3 but only 2 leading whitespace characters are allowed
-leading_whitespace_not_matching_previous_line.cc:8: leading whitespace character # 3 is 'HT' but should be ' ' according to the previous line

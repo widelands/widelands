@@ -17,19 +17,19 @@
  *
  */
 
-#include "playerdescrgroup.h"
+#include "wui/playerdescrgroup.h"
 
 #include "constants.h"
 #include "gamesettings.h"
+#include "graphic/graphic.h"
 #include "i18n.h"
 #include "logic/player.h"
-#include "profile/profile.h"
 #include "logic/tribe.h"
-#include "wexception.h"
-
+#include "profile/profile.h"
 #include "ui_basic/button.h"
 #include "ui_basic/checkbox.h"
 #include "ui_basic/textarea.h"
+#include "wexception.h"
 
 
 struct PlayerDescriptionGroupImpl {
@@ -70,7 +70,7 @@ d(new PlayerDescriptionGroupImpl)
 	d->btnPlayerType = new UI::Button
 		(this, "player_type",
 		 xplayertype, 0, xplayerteam - xplayertype - 2, h,
-		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
+		 g_gr->images().get("pics/but1.png"),
 		 std::string(), std::string(),
 		 true, false);
 	d->btnPlayerType->sigclicked.connect
@@ -79,7 +79,7 @@ d(new PlayerDescriptionGroupImpl)
 	d->btnPlayerTeam = new UI::Button
 		(this, "player_team",
 		 xplayerteam, 0, xplayertribe - xplayerteam - 2, h,
-		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
+		 g_gr->images().get("pics/but1.png"),
 		 std::string(), std::string(),
 		 true, false);
 	d->btnPlayerTeam->sigclicked.connect
@@ -88,7 +88,7 @@ d(new PlayerDescriptionGroupImpl)
 	d->btnPlayerTribe = new UI::Button
 		(this, "player_tribe",
 		 xplayertribe, 0, xplayerinit - xplayertribe - 2, h,
-		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
+		 g_gr->images().get("pics/but1.png"),
 		 std::string(), std::string(),
 		 true, false);
 	d->btnPlayerTribe->sigclicked.connect
@@ -97,7 +97,7 @@ d(new PlayerDescriptionGroupImpl)
 	d->btnPlayerInit = new UI::Button
 		(this, "player_initialization",
 		 xplayerinit, 0, w - xplayerinit, h,
-		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
+		 g_gr->images().get("pics/but1.png"),
 		 std::string(), _("Initialization"),
 		 true, false);
 	d->btnPlayerInit->sigclicked.connect
@@ -120,7 +120,7 @@ PlayerDescriptionGroup::~PlayerDescriptionGroup()
  */
 void PlayerDescriptionGroup::refresh()
 {
-	GameSettings const & settings = d->settings->settings();
+	const GameSettings & settings = d->settings->settings();
 
 	if (d->plnum >= settings.players.size()) {
 		set_visible(false);
@@ -129,7 +129,7 @@ void PlayerDescriptionGroup::refresh()
 
 	set_visible(true);
 
-	PlayerSettings const & player = settings.players[d->plnum];
+	const PlayerSettings & player = settings.players[d->plnum];
 	bool stateaccess = d->settings->canChangePlayerState(d->plnum);
 	bool tribeaccess = d->settings->canChangePlayerTribe(d->plnum);
 	bool const initaccess  = d->settings->canChangePlayerInit(d->plnum);
@@ -235,7 +235,7 @@ void PlayerDescriptionGroup::refresh()
  */
 void PlayerDescriptionGroup::enable_player(bool on)
 {
-	GameSettings const & settings = d->settings->settings();
+	const GameSettings & settings = d->settings->settings();
 
 	if (d->plnum >= settings.players.size())
 		return;
@@ -260,13 +260,13 @@ void PlayerDescriptionGroup::toggle_playertype()
  */
 void PlayerDescriptionGroup::toggle_playertribe()
 {
-	GameSettings const & settings = d->settings->settings();
+	const GameSettings & settings = d->settings->settings();
 
 	if (d->plnum >= settings.players.size())
 		return;
 
-	PlayerSettings const & player = settings.players.at(d->plnum);
-	std::string const & currenttribe = player.tribe;
+	const PlayerSettings & player = settings.players.at(d->plnum);
+	const std::string & currenttribe = player.tribe;
 	std::string nexttribe = settings.tribes.at(0).name;
 	bool random_tribe = false;
 	uint32_t num_tribes = settings.tribes.size();
@@ -317,12 +317,12 @@ void PlayerDescriptionGroup::toggle_playerteam()
 /// Cycle through available initializations for the player's tribe.
 void PlayerDescriptionGroup::toggle_playerinit()
 {
-	GameSettings const & settings = d->settings->settings();
+	const GameSettings & settings = d->settings->settings();
 
 	if (d->plnum >= settings.players.size())
 		return;
 
-	PlayerSettings const & player = settings.players[d->plnum];
+	const PlayerSettings & player = settings.players[d->plnum];
 	container_iterate_const(std::vector<TribeBasicInfo>, settings.tribes, j)
 		if (j.current->name == player.tribe)
 			return

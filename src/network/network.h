@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004-2008 by the Widelands Development Team
+ * Copyright (C) 2004-2008, 2012 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -21,17 +21,18 @@
 #define NETWORK_H
 
 #include <exception>
+#include <string>
+#include <vector>
+
+#include <SDL_net.h>
 
 #include "logic/cmd_queue.h"
 #include "logic/widelands_streamread.h"
 #include "logic/widelands_streamwrite.h"
-#include "network_protocol.h"
+#include "network/network_protocol.h"
 
-#include <SDL_net.h>
-#include <string>
-#include <vector>
 
-struct Deserializer;
+class Deserializer;
 
 struct SyncCallback {
 	virtual ~SyncCallback() {}
@@ -130,7 +131,8 @@ struct NetTransferFile {
 	std::vector<FilePart> parts;
 };
 
-struct Deserializer {
+class Deserializer {
+public:
 	/**
 	 * Read data from the given socket.
 	 * \return \c false if the socket was disconnected or another error
@@ -138,17 +140,16 @@ struct Deserializer {
 	 * \c true if some data could be read (this does not imply that \ref avail
 	 * will return \c true !)
 	 */
-	bool read (TCPsocket);
+	bool read(TCPsocket sock);
 
 	/**
 	 * \return \c true if an entire packet has been received.
 	 */
-	bool avail () const;
+	bool avail() const;
 
 private:
 	friend struct RecvPacket;
 	std::vector<uint8_t> queue;
-	size_t index;
 };
 
 
@@ -168,6 +169,25 @@ struct DisconnectException : public std::exception {
 	virtual const char * what() const throw ();
 private:
 	std::string m_what;
+};
+
+/**
+ * This exception is used internally during protocol handling to indicate that the connection
+ * should be terminated because an unexpected message got received that is disallowed by the protocol.
+ */
+struct ProtocolException : public std::exception {
+	explicit ProtocolException(uint8_t code) throw () {m_what = code;}
+	virtual ~ProtocolException() throw () {}
+
+	/// do NOT use!!! This exception shall only return the command number of the received message
+	/// via \ref ProtocolException:number()
+	virtual const char * what()   const throw () {assert(false); return "dummy";}
+
+	/// \returns the command number of the received message
+	virtual int          number() const throw () {return m_what;}
+private:
+	// no uint8_t, as lexical_cast does not support that format
+	int m_what;
 };
 
 #endif

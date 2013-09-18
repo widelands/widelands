@@ -1,12 +1,12 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2011 Widelands Development Team
+# Copyright (C) 2005-2013 Widelands Development Team
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2011-12-02 12:41+0000\n"
+"POT-Creation-Date: 2013-09-15 17:41+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -16,26 +16,26 @@ msgstr ""
 
 #: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/multiplayer_init.lua:101
 msgid ""
-"%i %s<br>"
+"%i %s<br>\n"
+""
 msgstr ""
 
-#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:52
+#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:51
 msgid ""
 "%s has been King of the Hill since %s!"
 msgstr ""
 
-#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:53
+#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:52
 msgid ""
 "%s has won the game. Congratulations!"
 msgstr ""
 
 #: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:46
 msgid ""
-"%s is now King of the Hill! He needs to keep his castle there for 20\n"
-"minutes to win the game."
+"%s is now King of the Hill and will win the game in 20 minutes, if nobody takes over the hill until than."
 msgstr ""
 
-#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:50
+#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:49
 msgid ""
 "%s lost control of the hill."
 msgstr ""
@@ -99,11 +99,6 @@ msgid ""
 "5 minutes"
 msgstr ""
 
-#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:43
-msgid ""
-"As a reward, he receives:<br><br>%s"
-msgstr ""
-
 #: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:23
 msgid ""
 "Finish rewards"
@@ -123,13 +118,13 @@ msgstr ""
 msgid ""
 "If you finish a castle at the target area on the second island, you will get\n"
 "a third headquarters on the third island. You must build and hold a castle at\n"
-"the center of the third island for 20 minutes to win the game"
+"the center of the third island for 20 minutes to win the game."
 msgstr ""
 
 #: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:8
 msgid ""
 "Island Hopping is a traditional tournament in the Atlantean culture. The\n"
-"rules of the game are simple: You start with a headquarters one one island.\n"
+"rules of the game are simple: You start with a headquarters on one island.\n"
 "When you finish a castle at the end of the first island, you are granted a\n"
 "second headquarters on a second island which will contain all wares from your\n"
 "first headquarters."
@@ -150,6 +145,11 @@ msgid ""
 "The clue is that the first island only offers stones and wood, the second\n"
 "only meadows and resources. The economies you leave behind will continue to\n"
 "work for you, but you only reap the benefits when you reach a new island."
+msgstr ""
+
+#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:43
+msgid ""
+"The reward for this feat amounts to<br><br>%s"
 msgstr ""
 
 #: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:5

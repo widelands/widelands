@@ -17,7 +17,7 @@
  *
  */
 
-#include "game_cmd_queue_data_packet.h"
+#include "game_io/game_cmd_queue_data_packet.h"
 
 #include "logic/cmd_queue.h"
 #include "logic/game.h"
@@ -25,7 +25,6 @@
 #include "logic/queue_cmd_factory.h"
 #include "logic/widelands_fileread.h"
 #include "logic/widelands_filewrite.h"
-
 #include "upcast.h"
 
 namespace Widelands {
@@ -83,7 +82,7 @@ void Game_Cmd_Queue_Data_Packet::Read
 		} else
 			throw game_data_error
 				(_("unknown/unhandled version %u"), packet_version);
-	} catch (_wexception const & e) {
+	} catch (const _wexception & e) {
 		throw game_data_error(_("command queue: %s"), e.what());
 	}
 }
@@ -97,7 +96,7 @@ void Game_Cmd_Queue_Data_Packet::Write
 	// Now packet version
 	fw.Unsigned16(CURRENT_PACKET_VERSION);
 
-	Cmd_Queue const & cmdq = game.cmdqueue();
+	const Cmd_Queue & cmdq = game.cmdqueue();
 
 	// nothing to be done for m_game
 
@@ -114,8 +113,8 @@ void Game_Cmd_Queue_Data_Packet::Write
 		// Make a copy, so we can pop stuff
 		std::priority_queue<Cmd_Queue::cmditem> p = cmdq.m_cmds[time % CMD_QUEUE_BUCKET_SIZE];
 
-		while (p.size()) {
-			Cmd_Queue::cmditem const & it = p.top();
+		while (!p.empty()) {
+			const Cmd_Queue::cmditem & it = p.top();
 			if (it.cmd->duetime() == time) {
 				if (upcast(GameLogicCommand, cmd, it.cmd)) {
 					// The id (aka command type)

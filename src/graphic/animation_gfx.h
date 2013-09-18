@@ -20,52 +20,29 @@
 #ifndef ANIMATION_GFX_H
 #define ANIMATION_GFX_H
 
-#include "animation.h"
-#include "logic/widelands.h"
-#include "picture_id.h"
-#include "rgbcolor.h"
+#include <cstddef>
+#include <vector>
+
+#include "point.h"
+
+class Image;
+class ImageCache;
+struct AnimationData;
+struct RGBColor;
 
 struct AnimationGfx { /// The graphics belonging to an animation.
-	AnimationGfx(AnimationData const * data);
-	~AnimationGfx();
+	AnimationGfx(const AnimationData& data, ImageCache*);
 
-	const Point get_hotspot() const throw () {return m_hotspot;}
-	typedef std::vector<PictureID> Frames;
-	typedef Frames::size_type Index;
-	Index nr_frames() const
-	{
-		assert((*m_plrframes)[0]); return m_plrframes[0].size();
-	}
-
-	const PictureID & get_frame
-		(Index                    const i,
-		 Widelands::Player_Number const player_number,
-		 const RGBColor & playercolor)
-	{
-		assert(i < nr_frames());
-		assert(1 <= player_number);
-		assert     (player_number <= MAX_PLAYERS);
-		if (!m_hasplrclrs)
-			return get_frame(i);
-
-		// Encode for this player
-		if (not m_plrframes[player_number].size())
-			encode(player_number, playercolor);
-		return m_plrframes[player_number][i];
-	}
-
-	const PictureID & get_frame(Index const i) const {
-		assert(i < nr_frames());
-		return m_plrframes[0][i];
-	}
+	size_t nr_frames() const {return m_frames.size();}
+	const Point& hotspot() const throw () {return m_hotspot;}
+	const Image& get_frame(size_t i, const RGBColor& playercolor);
+	const Image& get_frame(size_t i) const;
 
 private:
-	void encode(uint8_t plyr, const RGBColor &);
-
-	Frames m_plrframes[MAX_PLAYERS + 1];
-	Frames m_pcmasks;
-	bool m_hasplrclrs;
+	std::vector<const Image*> m_frames;
+	std::vector<const Image*> m_pcmasks;
 	Point m_hotspot;
+	bool m_hasplrclrs;
 };
 
 #endif

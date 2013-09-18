@@ -17,10 +17,10 @@
  *
  */
 
-#include "buildcost.h"
+#include "logic/buildcost.h"
 
+#include "logic/tribe.h"
 #include "profile/profile.h"
-#include "tribe.h"
 #include "wexception.h"
 
 namespace Widelands {
@@ -41,7 +41,7 @@ void Buildcost::parse(const Tribe_Descr & tribe, Section & buildcost_s)
 			} else
 				throw wexception
 					("tribe does not define a ware type with this name");
-		} catch (_wexception const & e) {
+		} catch (const _wexception & e) {
 			throw wexception
 				("[buildcost] \"%s=%s\": %s",
 				 val->get_name(), val->get_string(), e.what());

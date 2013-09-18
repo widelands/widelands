@@ -16,10 +16,11 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-#include "game_options_sound_menu.h"
+#include "wui/game_options_sound_menu.h"
 
-#include "sound/sound_handler.h"
+#include "graphic/graphic.h"
 #include "i18n.h"
+#include "sound/sound_handler.h"
 
 GameOptionsSoundMenu::GameOptionsSoundMenu
 	(Interactive_GameBase & gb, UI::UniqueWindow::Registry & registry)
@@ -48,7 +49,7 @@ ingame_music_volume
 	 + 1 * vspacing() + ingame_music_volume_label.get_h(),
 	 get_inner_w() - 2 * hmargin(), slideh(),
 	 0, g_sound_handler.get_max_volume(), g_sound_handler.get_music_volume(),
-	 g_gr->get_picture(PicMod_UI, "pics/but1.png")),
+	 g_gr->images().get("pics/but1.png")),
 ingame_sound_volume_label
 	(this,
 	 hmargin(),
@@ -63,7 +64,7 @@ ingame_sound_volume
 	 + ingame_music_volume_label.get_h() + ingame_music_volume_label.get_h(),
 	 get_inner_w() - 2 * hmargin(), slideh(),
 	 0, g_sound_handler.get_max_volume(), g_sound_handler.get_fx_volume(),
-	 g_gr->get_picture(PicMod_UI, "pics/but1.png"))
+	 g_gr->images().get("pics/but1.png"))
 {
 	ingame_music.set_state(not g_sound_handler.get_disable_music());
 	ingame_sound.set_state(not g_sound_handler.get_disable_fx   ());

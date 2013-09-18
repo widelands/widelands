@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2010 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2013 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -23,8 +23,11 @@
 #include "point.h"
 
 struct Rect : public Point {
-	Rect() throw () {}
-	Rect(const Point p, const uint32_t W, const uint32_t H) throw ()
+	Rect() throw () : w(0), h(0) {}
+	Rect(int32_t gx, int32_t gy, uint32_t W, uint32_t H) throw ()
+		: Point(gx, gy), w(W), h(H)
+	{}
+	Rect(const Point& p, uint32_t W, uint32_t H) throw ()
 		: Point(p), w(W), h(H)
 	{}
 	Point bottom_right() const {return *this + Point(w, h);}

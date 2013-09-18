@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2011 by the Widelands Development Team
+ * Copyright (C) 2006-2013 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -19,15 +19,55 @@
 
 #include "wlapplication.h"
 
+#include <cerrno>
+#ifndef _WIN32
+#include <csignal>
+#endif
+#include <cstring>
+#include <ctime>
+#include <fstream>
+#include <iostream>
+#include <stdexcept>
+#include <string>
+
+#include <config.h>
+#ifdef __APPLE__
+#include <mach-o/dyld.h>
+#endif
+#include <sys/stat.h>
+#include <sys/types.h>
+
 #include "build_info.h"
 #include "computer_player.h"
-#include "io/filesystem/disk_filesystem.h"
 #include "editor/editorinteractive.h"
+#include "gamesettings.h"
 #include "graphic/font_handler.h"
+#include "graphic/font_handler1.h"
+#include "i18n.h"
+#include "io/dedicated_log.h"
+#include "io/filesystem/disk_filesystem.h"
+#include "io/filesystem/layered_filesystem.h"
+#include "journal.h"
+#include "log.h"
+#include "logic/game.h"
+#include "logic/game_data_error.h"
+#include "logic/map.h"
+#include "logic/replay.h"
+#include "logic/tribe.h"
+#include "map_io/map_loader.h"
+#include "network/internet_gaming.h"
+#include "network/netclient.h"
+#include "network/nethost.h"
+#include "profile/profile.h"
+#include "sound/sound_handler.h"
+#include "timestring.h"
+#include "ui_basic/messagebox.h"
+#include "ui_basic/progresswindow.h"
 #include "ui_fsmenu/campaign_select.h"
 #include "ui_fsmenu/editor.h"
 #include "ui_fsmenu/editor_mapselect.h"
 #include "ui_fsmenu/fileview.h"
+#include "ui_fsmenu/internet_lobby.h"
 #include "ui_fsmenu/intro.h"
 #include "ui_fsmenu/launchSPG.h"
 #include "ui_fsmenu/loadgame.h"
@@ -35,63 +75,20 @@
 #include "ui_fsmenu/main.h"
 #include "ui_fsmenu/mapselect.h"
 #include "ui_fsmenu/multiplayer.h"
-#include "ui_fsmenu/netsetup_ggz.h"
 #include "ui_fsmenu/netsetup_lan.h"
 #include "ui_fsmenu/options.h"
 #include "ui_fsmenu/singleplayer.h"
-#include "logic/game.h"
-#include "logic/game_data_error.h"
-#include "wui/game_tips.h"
-#include "gamesettings.h"
-#include "i18n.h"
-#include "wui/interactive_player.h"
-#include "wui/interactive_spectator.h"
-#include "journal.h"
-#include "io/filesystem/layered_filesystem.h"
-#include "logic/map.h"
-#include "map_io/map_loader.h"
-#include "network/netclient.h"
-#include "network/nethost.h"
-#include "network/network_ggz.h"
-#include "profile/profile.h"
-#include "logic/replay.h"
-#include "sound/sound_handler.h"
-#include "logic/tribe.h"
-#include "ui_basic/messagebox.h"
-#include "ui_basic/progresswindow.h"
 #include "warning.h"
 #include "wexception.h"
+#include "wui/game_tips.h"
+#include "wui/interactive_player.h"
+#include "wui/interactive_spectator.h"
 
-#include "log.h"
-
-#include "timestring.h"
-
-#include <config.h>
-#include <boost/scoped_ptr.hpp>
-#include <sys/types.h>
-#include <sys/stat.h>
-#ifndef WIN32
-#include <csignal>
-#endif
-
-#include <cerrno>
-#include <cstring>
-#include <iostream>
-#include <fstream>
-#include <stdexcept>
-#include <string>
-#include <ctime>
-
-#ifdef __APPLE__
-#include <mach-o/dyld.h>
-#endif
-
-#ifdef DEBUG
-#ifndef WIN32
+#ifndef NDEBUG
+#ifndef _WIN32
 int32_t WLApplication::pid_me   = 0;
 int32_t WLApplication::pid_peer = 0;
 volatile int32_t WLApplication::may_run = 0;
-#include <csignal>
 #endif
 #endif
 
@@ -99,8 +96,6 @@ volatile int32_t WLApplication::may_run = 0;
 #define SCREENSHOT_DIR "screenshots"
 
 //Always specifying namespaces is good, but let's not go too far ;-)
-//using std::cout;
-std::ostream & wout = std::cout;
 using std::endl;
 
 /**
@@ -111,8 +106,8 @@ using std::endl;
 void WLApplication::setup_searchpaths(std::string argv0)
 {
 	try {
-#ifdef __APPLE__
-		// on mac, the default data dir is relative to the executable directory
+#if defined (__APPLE__) || defined(_WIN32)
+		// on mac and windows, the default data dir is relative to the executable directory
 		std::string s = get_executable_path();
 		log("Adding executable directory to search path\n");
 		g_fs->AddFileSystem(FileSystem::Create(s));
@@ -123,41 +118,44 @@ void WLApplication::setup_searchpaths(std::string argv0)
 			 	(std::string(INSTALL_PREFIX) + '/' + INSTALL_DATADIR));
 #endif
 	}
-	catch (FileNotFound_error e) {}
-	catch (FileAccessDenied_error e) {
+	catch (FileNotFound_error &) {}
+	catch (FileAccessDenied_error & e) {
 		log("Access denied on %s. Continuing.\n", e.m_filename.c_str());
 	}
-	catch (FileType_error e) {
+	catch (FileType_error &) {
 		//TODO: handle me
 	}
 
 	try {
-#ifndef WIN32
+#ifdef __linux__
 		// if that fails, search in FHS standard location (obviously UNIX-only)
 		log ("Adding directory:/usr/share/games/widelands\n");
 		g_fs->AddFileSystem(FileSystem::Create("/usr/share/games/widelands"));
-#else
-		//TODO: is there a "default dir" for this on win32 and mac ?
 #endif
 	}
-	catch (FileNotFound_error e) {}
-	catch (FileAccessDenied_error e) {
+	catch (FileNotFound_error &) {}
+	catch (FileAccessDenied_error & e) {
 		log("Access denied on %s. Continuing.\n", e.m_filename.c_str());
 	}
-	catch (FileType_error e) {
+	catch (FileType_error &) {
 		//TODO: handle me
 	}
 
 	try {
-		// absolute fallback directory is the CWD
+#ifndef __APPLE__
+		/*
+		 * Why? Please do NOT attempt do read from random places.
+		 * absolute fallback directory is the CWD
+		 */
 		log ("Adding directory:.\n");
 		g_fs->AddFileSystem(FileSystem::Create("."));
+#endif
 	}
-	catch (FileNotFound_error e) {}
-	catch (FileAccessDenied_error e) {
+	catch (FileNotFound_error &) {}
+	catch (FileAccessDenied_error & e) {
 		log("Access denied on %s. Continuing.\n", e.m_filename.c_str());
 	}
-	catch (FileType_error e) {
+	catch (FileType_error &) {
 		//TODO: handle me
 	}
 
@@ -178,16 +176,12 @@ void WLApplication::setup_searchpaths(std::string argv0)
 			try {
 				log ("Adding directory: %s\n", argv0.c_str());
 				g_fs->AddFileSystem(FileSystem::Create(argv0));
-#ifdef USE_DATAFILE
-				argv0.append ("/widelands.dat");
-				g_fs->AddFileSystem(new Datafile(argv0.c_str()));
-#endif
 			}
-			catch (FileNotFound_error e) {}
-			catch (FileAccessDenied_error e) {
+			catch (FileNotFound_error &) {}
+			catch (FileAccessDenied_error & e) {
 				log ("Access denied on %s. Continuing.\n", e.m_filename.c_str());
 			}
-			catch (FileType_error e) {
+			catch (FileType_error &) {
 				//TODO: handle me
 			}
 		}
@@ -202,7 +196,7 @@ void WLApplication::setup_homedir() {
 		try {
 			log ("Set home directory: %s\n", m_homedir.c_str());
 
-			std::auto_ptr<FileSystem> home(new RealFSImpl(m_homedir));
+			std::unique_ptr<FileSystem> home(new RealFSImpl(m_homedir));
 			home->EnsureDirectoryExists(".");
 			g_fs->SetHomeFileSystem(*home.release());
 		} catch (const std::exception & e) {
@@ -255,19 +249,20 @@ m_commandline          (std::map<std::string, std::string>()),
 m_game_type            (NONE),
 journal                (0),
 m_mouse_swapped        (false),
+m_faking_middle_mouse_button(false),
 m_mouse_position       (0, 0),
 m_mouse_locked         (0),
 m_mouse_compensate_warp(0, 0),
 m_should_die           (false),
-m_gfx_w(0), m_gfx_h(0),
-m_gfx_fullscreen       (false),
-m_gfx_opengl           (false),
 m_default_datadirs     (true),
+#ifdef _WIN32
+m_homedir(FileSystem::GetHomedir() + "\\.widelands"),
+#else
 m_homedir(FileSystem::GetHomedir() + "/.widelands"),
+#endif
 m_redirected_stdio(false)
 {
 	g_fs = new LayeredFileSystem();
-	UI::g_fh = new UI::Font_Handler();
 
 	parse_commandline(argc, argv); //throws Parameter_error, handled by main.cc
 
@@ -289,10 +284,21 @@ m_redirected_stdio(false)
 	init_language(); // search paths must already be set up
 	cleanup_replays();
 
-	if (!dedicated)
+	if (!dedicated) {
+		// handling of graphics
 		init_hardware();
-	else
+
+		if (TTF_Init() == -1)
+			throw wexception
+				("True Type library did not initialize: %s\n", TTF_GetError());
+
+		UI::g_fh = new UI::Font_Handler();
+		UI::g_fh1 = UI::create_fonthandler(g_gr, g_fs);
+	} else
 		g_gr = 0;
+
+	if (SDLNet_Init() == -1)
+		throw wexception("SDLNet_Init failed: %s\n", SDLNet_GetError());
 
 	//make sure we didn't forget to read any global option
 	g_options.check_used();
@@ -313,6 +319,14 @@ WLApplication::~WLApplication()
 	delete UI::g_fh;
 	UI::g_fh = 0;
 
+	assert(UI::g_fh1);
+	delete UI::g_fh1;
+	UI::g_fh1 = 0;
+
+	SDLNet_Quit();
+
+	TTF_Quit(); // TODO not here
+
 	assert(g_fs);
 	delete g_fs;
 	g_fs = 0;
@@ -324,6 +338,8 @@ WLApplication::~WLApplication()
 		std::cerr.flush();
 		fclose(stderr);
 	}
+
+	SDL_Quit();
 }
 
 /**
@@ -344,9 +360,10 @@ void WLApplication::run()
 		Widelands::Game game;
 		try {
 			game.run_load_game(m_filename.c_str());
-		} catch (Widelands::game_data_error const & e) {
+		} catch (const Widelands::game_data_error & e) {
 			log("Game not loaded: Game data error: %s\n", e.what());
-		} catch (...) {
+		} catch (const std::exception & e) {
+			log("Fatal exception: %s\n", e.what());
 			emergency_save(game);
 			throw;
 		}
@@ -354,44 +371,48 @@ void WLApplication::run()
 		Widelands::Game game;
 		try {
 			game.run_splayer_scenario_direct(m_filename.c_str());
-		} catch (Widelands::game_data_error const & e) {
+		} catch (const Widelands::game_data_error & e) {
 			log("Scenario not started: Game data error: %s\n", e.what());
-		} catch (...) {
+		} catch (const std::exception & e) {
+			log("Fatal exception: %s\n", e.what());
 			emergency_save(game);
 			throw;
 		}
-#if HAVE_GGZ
-	} else if (m_game_type == GGZ) {
+	} else if (m_game_type == INTERNET) {
 		Widelands::Game game;
 		try {
 			// disable sound completely
 			g_sound_handler.m_nosound = true;
 
-			// setup some ggz details about a dedicated server
-			Section & s = g_options.pull_section("global");
-			char const * const meta = s.get_string("metaserver", WL_METASERVER);
-			char const * const name = s.get_string("nickname", "dedicated");
-			char const * const server = s.get_string("servername", name);
+			// setup some details of the dedicated server
+			Section & s = g_options.pull_section      ("global");
+			const std::string & meta   = s.get_string ("metaserver",     INTERNET_GAMING_METASERVER.c_str());
+			uint32_t            port   = s.get_natural("metaserverport", INTERNET_GAMING_PORT);
+			const std::string & name   = s.get_string ("nickname",       "dedicated");
+			const std::string & server = s.get_string ("servername",     name.c_str());
+			const bool registered      = s.get_bool   ("registered",     false);
+			const std::string & pwd    = s.get_string ("password",       "");
+			uint32_t            maxcl  = s.get_natural("maxclients",     8);
 			for (;;) { // endless loop
-				if (!NetGGZ::ref().initcore(meta, name, "", false)) {
-					log(_("ERROR: Could not connect to metaserver (reason above)!\n"));
+				if (!InternetGaming::ref().login(name, pwd, registered, meta, port)) {
+					dedicatedlog(_("ERROR: Could not connect to metaserver (reason above)!\n"));
 					return;
 				}
 				std::string realservername(server);
 				bool name_valid = false;
 				while (not name_valid) {
 					name_valid = true;
-					std::vector<Net_Game_Info> const & hosts = NetGGZ::ref().tables();
+					const std::vector<INet_Game> & hosts = InternetGaming::ref().games();
 					for (uint32_t i = 0; i < hosts.size(); ++i) {
-						if (hosts[i].hostname == realservername)
+						if (hosts.at(i).name == realservername)
 							name_valid = false;
 					}
 					if (not name_valid)
 						realservername += "*";
 				}
 
-				NetGGZ::ref().set_local_servername(realservername);
-				NetGGZ::ref().set_local_maxplayers(7); // > 7 == freeze -> ggz bug
+				InternetGaming::ref().set_local_servername(realservername);
+				InternetGaming::ref().set_local_maxclients(maxcl);
 
 				NetHost netgame(name, true);
 
@@ -399,8 +420,13 @@ void WLApplication::run()
 				Widelands::Map map;
 				i18n::Textdomain td("maps");
 				map.set_filename(m_filename.c_str());
-				Widelands::Map_Loader * const ml = map.get_correct_loader
-					(m_filename.c_str());
+				Widelands::Map_Loader * const ml = map.get_correct_loader(m_filename.c_str());
+				if (!ml) {
+					throw warning
+						(_("Unsupported format"),
+						 _("Widelands could not load the file \"%s\". The file format seems to be incompatible."),
+						 m_filename.c_str());
+				}
 				ml->preload_map(true);
 
 				// fill in the mapdata structure
@@ -421,15 +447,17 @@ void WLApplication::run()
 				// -> autostarts when a player sends "/start" as pm to the server.
 				netgame.run(true);
 
-				NetGGZ::ref().deinitcore();
+				// Cleanup
+				delete ml;
+
+				InternetGaming::ref().logout();
 			}
-		} catch (...) {
+		} catch (const std::exception & e) {
+			log("Fatal exception: %s\n", e.what());
 			emergency_save(game);
 			throw;
 		}
-#endif
 	} else {
-
 		g_sound_handler.start_music("intro");
 
 		{
@@ -473,7 +501,7 @@ restart:
 	if (journal->is_playingback()) {
 		try {
 			haveevent = journal->read_event(ev);
-		} catch (Journalfile_error const & e) {
+		} catch (const Journalfile_error & e) {
 			// An error might occur here when playing back a file that
 			// was not finalized due to a crash etc.
 			// Since playbacks are intended precisely for debugging such
@@ -507,6 +535,11 @@ restart:
 					g_sound_handler.change_music();
 
 				break;
+			case SDL_VIDEOEXPOSE:
+				//log ("SDL Video Window expose event: %i\n", ev.expose.type);
+				g_gr->update_fullscreen();
+				break;
+			default:;
 			}
 		}
 	}
@@ -582,6 +615,7 @@ void WLApplication::handle_input(InputCallback const * cb)
 			case SDL_QUIT:
 				m_should_die = true;
 				break;
+			default:;
 			}
 		}
 	}
@@ -624,53 +658,20 @@ void WLApplication::handle_input(InputCallback const * cb)
 						snprintf(buffer, sizeof(buffer), SCREENSHOT_DIR "/shot%04u.png", nr);
 						if (g_fs->FileExists(buffer))
 							continue;
-						g_gr->screenshot(*buffer);
+						g_gr->screenshot(buffer);
 						break;
 					}
 				}
 				break;
 			}
 			if (cb && cb->key) {
-				int16_t c = ev.key.keysym.unicode;
-
-				//TODO: this kills international characters
-				if (c < 32 || c >= 128)
-					c = 0;
-
 				cb->key(ev.type == SDL_KEYDOWN, ev.key.keysym);
 			}
 			break;
+
 		case SDL_MOUSEBUTTONDOWN:
-			if (cb and cb->mouse_press) {
-				if (m_mouse_swapped) {
-					switch (ev.button.button) {
-					case SDL_BUTTON_LEFT:
-						ev.button.button = SDL_BUTTON_RIGHT;
-						break;
-					case SDL_BUTTON_RIGHT:
-						ev.button.button = SDL_BUTTON_LEFT;
-						break;
-					}
-				}
-				assert(ev.button.state == SDL_PRESSED);
-				cb->mouse_press(ev.button.button, ev.button.x, ev.button.y);
-			}
-			break;
 		case SDL_MOUSEBUTTONUP:
-			if (cb and cb->mouse_release) {
-				if (m_mouse_swapped) {
-					switch (ev.button.button) {
-					case SDL_BUTTON_LEFT:
-						ev.button.button = SDL_BUTTON_RIGHT;
-						break;
-					case SDL_BUTTON_RIGHT:
-						ev.button.button = SDL_BUTTON_LEFT;
-						break;
-					}
-				}
-				assert(ev.button.state == SDL_RELEASED);
-				cb->mouse_release(ev.button.button, ev.button.x, ev.button.y);
-			}
+			_handle_mousebutton(ev, cb);
 			break;
 
 		case SDL_MOUSEMOTION:
@@ -686,8 +687,56 @@ void WLApplication::handle_input(InputCallback const * cb)
 		case SDL_QUIT:
 			m_should_die = true;
 			break;
+		default:;
 		}
 	}
+}
+
+/*
+ * Capsule repetitive code for mouse buttons
+ */
+void WLApplication::_handle_mousebutton
+	(SDL_Event & ev, InputCallback const * cb)
+{
+		if (m_mouse_swapped) {
+			switch (ev.button.button) {
+				case SDL_BUTTON_LEFT:
+					ev.button.button = SDL_BUTTON_RIGHT;
+					break;
+				case SDL_BUTTON_RIGHT:
+					ev.button.button = SDL_BUTTON_LEFT;
+					break;
+				default:
+					break;
+			}
+		}
+
+#ifdef __APPLE__
+		//  On Mac, SDL does middle mouse button emulation (alt+left). This
+		//  interferes with the editor, which is using alt+left click for
+		//  third tool. So if we ever see a middle mouse button on Mac,
+		//  check if any ALT Key is pressed and if, treat it like a left
+		//  mouse button.
+		if
+			(ev.button.button == SDL_BUTTON_MIDDLE and
+			 (get_key_state(SDLK_LALT) || get_key_state(SDLK_RALT)))
+		{
+			ev.button.button = SDL_BUTTON_LEFT;
+			m_faking_middle_mouse_button = true;
+		}
+#endif
+
+		if (ev.type == SDL_MOUSEBUTTONDOWN && cb and cb->mouse_press)
+			cb->mouse_press(ev.button.button, ev.button.x, ev.button.y);
+		else if (ev.type == SDL_MOUSEBUTTONUP) {
+			if (cb and cb->mouse_release) {
+				if (ev.button.button == SDL_BUTTON_MIDDLE and m_faking_middle_mouse_button) {
+					cb->mouse_release(SDL_BUTTON_LEFT, ev.button.x, ev.button.y);
+					m_faking_middle_mouse_button = false;
+				}
+				cb->mouse_release(ev.button.button, ev.button.x, ev.button.y);
+			}
+		}
 }
 
 /**
@@ -748,41 +797,45 @@ void WLApplication::set_input_grab(bool grab)
 }
 
 /**
- * Initialize the graphics subsystem (or shutdown, if system == GFXSYS_NONE)
+ * Initialize the graphics subsystem (or shutdown, if w and h are 0)
  * with the given resolution.
  * Throws an exception on failure.
- *
- * \note Because of the way pictures are handled now, this function must not be
- * called while UI elements are active.
- *
- * \todo Ensure that calling this with active UI elements does barf
- * \todo Document parameters
  */
-
 void WLApplication::init_graphics
-	(int32_t const w, int32_t const h, int32_t const bpp,
-	 bool const fullscreen, bool const opengl)
+	(const int32_t w, const int32_t h, const int32_t bpp,
+	 const bool fullscreen, const bool opengl)
 {
-	if
-		(w == m_gfx_w && h == m_gfx_h &&
-		 fullscreen == m_gfx_fullscreen &&
-		 opengl == m_gfx_opengl)
+	if (!w && !h) { // shutdown.
+		delete g_gr;
+		g_gr = 0;
 		return;
-
-	delete g_gr;
-	g_gr = 0;
-
-	m_gfx_w = w;
-	m_gfx_h = h;
-	m_gfx_fullscreen = fullscreen;
-	m_gfx_opengl = opengl;
-
-
-	// If we are not to be shut down
-	if (w && h) {
-		g_gr = new Graphic
-			(w, h, bpp, fullscreen, opengl);
 	}
+	assert(w > 0 && h > 0);
+
+	if (!g_gr) {
+		g_gr = new Graphic();
+		g_gr->initialize(w, h, bpp, fullscreen, opengl);
+	} else {
+		if
+			(g_gr->get_xres() != w || g_gr->get_yres() != h || g_gr->get_bpp() != bpp
+				|| g_gr->is_fullscreen() != fullscreen || g_opengl != opengl)
+		{
+			g_gr->initialize(w, h, bpp, fullscreen, opengl);
+		}
+	}
+}
+
+void WLApplication::refresh_graphics()
+{
+	Section & s = g_options.pull_section("global");
+
+	//  Switch to the new graphics system now, if necessary.
+	init_graphics
+		(s.get_int("xres", XRES),
+		 s.get_int("yres", YRES),
+		 s.get_int("depth", 32),
+		 s.get_bool("fullscreen", false),
+		 s.get_bool("opengl", true));
 }
 
 /**
@@ -805,16 +858,12 @@ bool WLApplication::init_settings() {
 	set_input_grab(s.get_bool("inputgrab", false));
 	set_mouse_swap(s.get_bool("swapmouse", false));
 
-	m_gfx_fullscreen = s.get_bool("fullscreen", false);
-
-#if USE_OPENGL
-	m_gfx_opengl = s.get_bool("opengl", false);
-#endif
-
 	// KLUDGE!
 	// Without this the following config options get dropped by check_used().
 	// Profile needs support for a Syntax definition to solve this in a
 	// sensible way
+	s.get_bool("fullscreen");
+	s.get_bool("opengl");
 	s.get_int("xres");
 	s.get_int("yres");
 	s.get_int("border_snap_distance");
@@ -874,7 +923,7 @@ void WLApplication::shutdown_settings()
 
 	try { //  overwrite the old config file
 		g_options.write("config", true);
-	} catch (std::exception const & e) {
+	} catch (const std::exception & e) {
 		log("WARNING: could not save configuration: %s\n", e.what());
 	} catch (...)                      {
 		log("WARNING: could not save configuration");
@@ -893,7 +942,7 @@ std::string WLApplication::get_executable_path()
 	std::string executabledir;
 #ifdef __APPLE__
 	uint32_t buffersize = 0;
-	_NSGetExecutablePath(NULL, &buffersize);
+	_NSGetExecutablePath(nullptr, &buffersize);
 	char buffer[buffersize];
 	int32_t check = _NSGetExecutablePath(buffer, &buffersize);
 	if (check != 0) {
@@ -901,7 +950,8 @@ std::string WLApplication::get_executable_path()
 	}
 	executabledir = std::string(buffer);
 	executabledir.resize(executabledir.rfind('/') + 1);
-#elif linux
+#endif
+#ifdef __linux__
 	char buffer[PATH_MAX];
 	size_t size = readlink("/proc/self/exe", buffer, PATH_MAX);
 	if (size <= 0) {
@@ -909,6 +959,12 @@ std::string WLApplication::get_executable_path()
 	}
 	executabledir = std::string(buffer, size);
 	executabledir.resize(executabledir.rfind('/') + 1);
+#endif
+#ifdef _WIN32
+	char filename[_MAX_PATH + 1] = {0};
+	GetModuleFileName(0, filename, _MAX_PATH);
+	executabledir = filename;
+	executabledir = executabledir.substr(0, executabledir.rfind('\\'));
 #endif
 	log("Widelands executable directory: %s\n", executabledir.c_str());
 	return executabledir;
@@ -922,7 +978,7 @@ std::string WLApplication::get_executable_path()
  */
 std::string WLApplication::find_relative_locale_path(std::string localedir)
 {
-#ifndef WIN32
+#ifndef _WIN32
 	if (localedir[0] != '/') {
 		std::string executabledir = get_executable_path();
 		executabledir+= localedir;
@@ -955,7 +1011,7 @@ bool WLApplication::init_hardware() {
 	//  NOTE privacy/powermanagement settings on the sly. The workaround was
 	//  NOTE introduced in SDL 1.2.13, so it will not work for older versions.
 	//  NOTE -> there is no such stdlib-function on win32
-	#ifndef WIN32
+	#ifndef _WIN32
 	setenv("SDL_VIDEO_ALLOW_SCREENSAVER", "1", 0);
 	#endif
 
@@ -964,21 +1020,24 @@ bool WLApplication::init_hardware() {
 	int result = -1;
 
 	//add default video mode
-#if defined(linux) || defined(__FreeBSD__)
+#if defined(__linux__) || defined(__FreeBSD__) || defined(__OpenBSD__)
 	videomode.push_back("x11");
-#elif WIN32
+#endif
+#ifdef _WIN32
 	videomode.push_back("windib");
-#elif __APPLE__
+#endif
+#ifdef __APPLE__
 	videomode.push_back("Quartz");
 #endif
 	//if a video mode is given on the command line, add that one first
-	const char * videodrv;
-	videodrv = getenv("SDL_VIDEODRIVER");
-	if (videodrv) {
-		log("Also adding video driver %s\n", videodrv);
-		videomode.push_back(videodrv);
+	{
+		const char * videodrv;
+		videodrv = getenv("SDL_VIDEODRIVER");
+		if (videodrv) {
+			log("Also adding video driver %s\n", videodrv);
+			videomode.push_back(videodrv);
+		}
 	}
-
 	char videodrvused[26];
 	strcpy(videodrvused, "SDL_VIDEODRIVER=\0");
 	wout << videodrvused << "&" << std::endl;
@@ -986,8 +1045,6 @@ bool WLApplication::init_hardware() {
 		strcpy(videodrvused + 16, videomode[i].c_str());
 		videodrvused[16 + videomode[i].size()] = '\0';
 		putenv(videodrvused);
-		//SDL_VideoDriverName(videodrvused, 16);
-		videodrv = getenv("SDL_VIDEODRIVER");
 		log
 			("Graphics: Trying Video driver: %i %s %s\n",
 			 i, videomode[i].c_str(), videodrvused);
@@ -1003,12 +1060,7 @@ bool WLApplication::init_hardware() {
 	SDL_EnableUNICODE(1); //needed by helper.h:is_printable()
 	SDL_EnableKeyRepeat(SDL_DEFAULT_REPEAT_DELAY, SDL_DEFAULT_REPEAT_INTERVAL);
 
-	uint32_t xres = s.get_int("xres", XRES);
-	uint32_t yres = s.get_int("yres", YRES);
-
-	init_graphics
-		(xres, yres, s.get_int("depth", 16),
-		 m_gfx_fullscreen, m_gfx_opengl);
+	refresh_graphics();
 
 	// Start the audio subsystem
 	// must know the locale before calling this!
@@ -1023,9 +1075,9 @@ bool WLApplication::init_hardware() {
 
 void terminate (int) {
 	 log
-		  (_("Waited 5 seconds to close audio. problems here so killing widelands."
-			  " update your sound driver and/or SDL to fix this problem\n"));
-#ifndef WIN32
+		  (_("Waited 5 seconds to close audio. Problems here so killing Widelands."
+			  " Update your sound driver and/or SDL to fix this problem\n"));
+#ifndef _WIN32
 	raise(SIGKILL);
 #endif
 }
@@ -1040,11 +1092,10 @@ void WLApplication::shutdown_hardware()
 			<< endl;
 
 	init_graphics(0, 0, 0, false, false);
-
 	SDL_QuitSubSystem
 		(SDL_INIT_TIMER|SDL_INIT_VIDEO|SDL_INIT_CDROM|SDL_INIT_JOYSTICK);
 
-#ifndef WIN32
+#ifndef _WIN32
 	// SOUND can lock up with buggy SDL/drivers. we try to do the right thing
 	// but if it doesn't happen we will kill widelands anyway in 5 seconds.
 	signal(SIGALRM, terminate);
@@ -1119,8 +1170,6 @@ void WLApplication::handle_commandline_parameters() throw (Parameter_error)
 			std::ofstream * widelands_out = new std::ofstream(m_logfile.c_str());
 			std::streambuf * logbuf = widelands_out->rdbuf();
 			wout.rdbuf(logbuf);
-		} else {
-			//wout = std::cout;
 		}
 		m_commandline.erase("logfile");
 	}
@@ -1134,7 +1183,6 @@ void WLApplication::handle_commandline_parameters() throw (Parameter_error)
 	}
 
 	if (m_commandline.count("opengl")) {
-#ifdef USE_OPENGL
 		if (m_commandline["opengl"].compare("0") == 0) {
 			g_options.pull_section("global").create_val("opengl", "false");
 		} else if (m_commandline["opengl"].compare("1") == 0) {
@@ -1142,9 +1190,6 @@ void WLApplication::handle_commandline_parameters() throw (Parameter_error)
 		} else {
 			log ("Invalid option opengl=[0|1]\n");
 		}
-#else
-		log("WARNIG: This version was compiled without support for OpenGL\n");
-#endif
 		m_commandline.erase("opengl");
 	}
 
@@ -1156,11 +1201,11 @@ void WLApplication::handle_commandline_parameters() throw (Parameter_error)
 	}
 
 	if (m_commandline.count("double")) {
-#ifdef DEBUG
-#ifndef WIN32
+#ifndef NDEBUG
+#ifndef _WIN32
 		init_double_game();
 #else
-		wout << _("\nSorry, no double-instance debugging on WIN32.\n\n");
+		wout << _("\nSorry, no double-instance debugging on _WIN32.\n\n");
 #endif
 #else
 		wout << _("--double is disabled. This is not a debug build!") << endl;
@@ -1216,7 +1261,6 @@ void WLApplication::handle_commandline_parameters() throw (Parameter_error)
 		m_game_type = SCENARIO;
 		m_commandline.erase("scenario");
 	}
-#if HAVE_GGZ
 	if (m_commandline.count("dedicated")) {
 		if (m_game_type != NONE)
 			throw wexception("dedicated can not be combined with other actions");
@@ -1225,10 +1269,9 @@ void WLApplication::handle_commandline_parameters() throw (Parameter_error)
 			throw wexception("empty value of commandline parameter --dedicated");
 		if (*m_filename.rbegin() == '/')
 			m_filename.erase(m_filename.size() - 1);
-		m_game_type = GGZ;
+		m_game_type = INTERNET;
 		m_commandline.erase("dedicated");
 	}
-#endif
 	//Note: it should be possible to record and playback at the same time,
 	//but why would you?
 	if (m_commandline.count("record")) {
@@ -1237,7 +1280,7 @@ void WLApplication::handle_commandline_parameters() throw (Parameter_error)
 
 		try {
 			journal->start_recording(m_commandline["record"]);
-		} catch (Journalfile_error e) {
+		} catch (Journalfile_error & e) {
 			wout << "Journal file error: " << e.what() << endl;
 		}
 
@@ -1251,7 +1294,7 @@ void WLApplication::handle_commandline_parameters() throw (Parameter_error)
 		try {
 			journal->start_playback(m_commandline["playback"]);
 		}
-		catch (Journalfile_error e) {
+		catch (Journalfile_error & e) {
 			wout << "Journal file error: " << e.what() << endl;
 		}
 
@@ -1300,7 +1343,7 @@ void WLApplication::show_usage()
 			 "                      data files\n"
 			 " --homedir=DIRNAME    Use specified directory for widelands config\n"
 			 "                      files, savegames and replays\n")
-#ifdef linux
+#ifdef __linux__
 		<< _("                      Default is ~/.widelands\n")
 #endif
 		<< _
@@ -1332,9 +1375,7 @@ void WLApplication::show_usage()
 			 " --scenario=FILENAME  Directly starts the map FILENAME as scenario\n"
 			 "                      map.\n"
 			 " --loadgame=FILENAME  Directly loads the savegame FILENAME.\n")
-#if HAVE_GGZ
-		<< _(" --dedicated=FILENAME Starts ggz host with FILENAME as map\n")
-#endif
+		<< _(" --dedicated=FILENAME Starts a dedicated server with FILENAME as map\n")
 		<<
 		_
 			(" --speed_of_new_game  The speed that the new game will run at\n"
@@ -1354,13 +1395,10 @@ void WLApplication::show_usage()
 			 " --depth=[16|32]      Color depth in number of bits per pixel.\n"
 			 " --xres=[...]         Width of the window in pixel.\n"
 			 " --yres=[...]         Height of the window in pixel.\n")
-#if USE_OPENGL
 		<<
 		_
 			 (" --opengl=[0|1]\n"
-			 "                      Enables opengl rendering\n"
-			 "                      *EXPERIMENTAL*\n")
-#endif
+			 "                      Enables OpenGL rendering\n")
 		<<
 		_
 			("\n"
@@ -1382,8 +1420,8 @@ void WLApplication::show_usage()
 			 "                      if the window is overlapping with the\n"
 			 "                      panel.\n"
 			 "\n");
-#ifdef DEBUG
-#ifndef WIN32
+#ifndef NDEBUG
+#ifndef _WIN32
 	wout
 		<<
 		_
@@ -1401,8 +1439,8 @@ void WLApplication::show_usage()
 			 "Hope you enjoy this game!\n\n");
 }
 
-#ifdef DEBUG
-#ifndef WIN32
+#ifndef NDEBUG
+#ifndef _WIN32
 /**
  * Fork off a second game to test network gaming
  *
@@ -1482,7 +1520,18 @@ void WLApplication::mainmenu()
 	std::string messagetitle;
 	std::string message;
 
+	if (g_gr->check_fallback_settings_in_effect())
+	{
+		messagetitle = _("Fallback settings in effect");
+		message = _
+			("Your video settings could not be enabled, and fallback settings are in effect. "
+				"Please check the graphics options!");
+	}
+
 	for (;;) {
+		// Refresh graphics system in case we just changed resolution.
+		refresh_graphics();
+
 		Fullscreen_Menu_Main mm;
 
 		if (message.size()) {
@@ -1492,8 +1541,8 @@ void WLApplication::mainmenu()
 				(&mm,
 				 messagetitle,
 				 message,
-				 UI::WLMessageBox::OK);
-			mmb.set_align(UI::Align_Left);
+				 UI::WLMessageBox::OK,
+				 UI::Align_Left);
 			mmb.run();
 
 			message.clear();
@@ -1507,7 +1556,8 @@ void WLApplication::mainmenu()
 					Widelands::Game game;
 					try {
 						game.run_splayer_scenario_direct("campaigns/tutorial01.wmf");
-					} catch (...) {
+					} catch (const std::exception & e) {
+						log("Fata exception: %s\n", e.what());
 						emergency_save(game);
 						throw;
 					}
@@ -1528,12 +1578,12 @@ void WLApplication::mainmenu()
 				break;
 			}
 			case Fullscreen_Menu_Main::mm_readme: {
-				Fullscreen_Menu_FileView ff("txts/README");
+				Fullscreen_Menu_FileView ff("txts/README.lua");
 				ff.run();
 				break;
 			}
 			case Fullscreen_Menu_Main::mm_license: {
-				Fullscreen_Menu_FileView ff("txts/COPYING");
+				Fullscreen_Menu_FileView ff("txts/license");
 				ff.run();
 				break;
 			}
@@ -1544,16 +1594,16 @@ void WLApplication::mainmenu()
 			case Fullscreen_Menu_Main::mm_exit:
 				return;
 			}
-		} catch (warning const & e) {
+		} catch (const warning & e) {
 			messagetitle = _("Warning: ");
 			messagetitle += e.title();
 			message = e.what();
-		} catch (Widelands::game_data_error const & e) {
+		} catch (const Widelands::game_data_error & e) {
 			messagetitle = _("Game data error");
 			message = e.what();
 		}
-#ifndef DEBUG
-		catch (std::exception const & e) {
+#ifdef NDEBUG
+		catch (const std::exception & e) {
 			messagetitle = _("Unexpected error during the game");
 			message = e.what();
 			message +=
@@ -1580,7 +1630,8 @@ void WLApplication::mainmenu_singleplayer()
 {
 	//  This is the code returned by UI::Panel::run() when the panel is dying.
 	//  Make sure that the program exits when the window manager says so.
-	compile_assert(Fullscreen_Menu_SinglePlayer::Back == UI::Panel::dying_code);
+	static_assert
+		(Fullscreen_Menu_SinglePlayer::Back == UI::Panel::dying_code, "Panel should be dying.");
 
 	for (;;) {
 		int32_t code;
@@ -1605,6 +1656,7 @@ void WLApplication::mainmenu_singleplayer()
 			break;
 		default:
 			assert(false);
+			break;
 		}
 	}
 
@@ -1615,35 +1667,25 @@ void WLApplication::mainmenu_singleplayer()
  */
 void WLApplication::mainmenu_multiplayer()
 {
-#if WIN32
-	//  The Winsock2 library needs to get called through WSAStartup, to initiate
-	//  the use of the Winsock DLL by Widelands.
-	WSADATA wsaData;
-	if (WSAStartup(MAKEWORD(2, 2), &wsaData) != 0)
-		throw wexception("initialization of Wsock2-library failed");
-#endif // WIN32
-
 	int32_t menu_result = Fullscreen_Menu_NetSetupLAN::JOINGAME; // dummy init;
 	for (;;) { // stay in menu until player clicks "back" button
-		std::string playername;
-
-#if HAVE_GGZ
-		bool ggz = false;
-		NetGGZ::ref().deinitcore(); // cleanup for reconnect to the metaserver
+		bool internet = false;
 		Fullscreen_Menu_MultiPlayer mp;
 		switch (mp.run()) {
 			case Fullscreen_Menu_MultiPlayer::Back:
 				return;
 			case Fullscreen_Menu_MultiPlayer::Metaserver:
-				ggz = true;
+				internet = true;
 				break;
 			case Fullscreen_Menu_MultiPlayer::Lan:
 				break;
 			default:
 				assert(false);
+				break;
 		}
-		if (ggz) {
-			playername = mp.get_nickname();
+
+		if (internet) {
+			std::string playername = mp.get_nickname();
 			std::string password(mp.get_password());
 			bool registered = mp.registered();
 
@@ -1654,77 +1696,20 @@ void WLApplication::mainmenu_multiplayer()
 				s.set_string("password", password);
 
 			// reinitalise in every run, else graphics look strange
-			Fullscreen_Menu_NetSetupGGZ ns
-				(playername.c_str(), password.c_str(), registered);
-			menu_result = ns.run();
+			Fullscreen_Menu_Internet_Lobby ns(playername.c_str(), password.c_str(), registered);
+			ns.run();
 
-			switch (menu_result) {
-				case Fullscreen_Menu_NetSetupGGZ::HOSTGAME: {
-					uint32_t max = static_cast<uint32_t>(ns.get_maxplayers());
-					NetGGZ::ref().set_local_maxplayers(max);
-					NetHost netgame(playername, true);
-					netgame.run();
-					NetGGZ::ref().deinitcore();
-					break;
-				}
-				case Fullscreen_Menu_NetSetupGGZ::JOINGAME: {
-					uint32_t const secs = time(0);
-					while (!NetGGZ::ref().ip()) {
-						NetGGZ::ref().data();
-						if (10 < time(0) - secs)
-							throw warning
-								(_("Connection timeouted"), "%s",
-								 _
-								 	("Widelands has not been able to get the IP "
-								 	 "address of the server in time.\n"
-								 	 "There seems to be a network problem, either on "
-								 	 "your side or on side\n"
-								 	 "of the server.\n"));
-					}
-					std::string ip = NetGGZ::ref().ip();
-
-					//  convert IPv6 addresses returned by ggzd to IPv4 addresses.
-					//  At the moment SDL_net does not support IPv6 anyways.
-					if (not ip.compare(0, 7, "::ffff:")) {
-						ip = ip.substr(7);
-						log("GGZClient ## cut IPv6 address: %s\n", ip.c_str());
-					}
-
-					IPaddress peer;
-					if (hostent * const he = gethostbyname(ip.c_str())) {
-						peer.host =
-							(reinterpret_cast<in_addr *>(he->h_addr_list[0]))->s_addr;
-						peer.port = htons(WIDELANDS_PORT);
-					} else
-						throw warning
-							(_("Connection problem"), "%s",
-							 _
-							 	("Widelands has not been able to connect to the "
-							 	 "host."));
-					SDLNet_ResolveHost (&peer, ip.c_str(), WIDELANDS_PORT);
-
-					NetClient netgame(&peer, playername, true);
-					netgame.run();
-					NetGGZ::ref().deinitcore();
-					break;
-				}
-				default:
-					break;
-			}
-		}
-
-#else
-		// If compiled without ggz support, only lan-netsetup will be visible
-		if (menu_result == Fullscreen_Menu_NetSetupLAN::CANCEL || menu_result < 0) {
-			break;
-		}
-#endif // HAVE_GGZ
-
-		else {
+			if (InternetGaming::ref().logged_in())
+				// logout of the metaserver
+				InternetGaming::ref().logout();
+			else
+				// Reset InternetGaming for clean login
+				InternetGaming::ref().reset();
+		} else {
 			// reinitalise in every run, else graphics look strange
 			Fullscreen_Menu_NetSetupLAN ns;
 			menu_result = ns.run();
-			playername = ns.get_playername();
+			std::string playername = ns.get_playername();
 			uint32_t addr;
 			uint16_t port;
 			bool const host_address = ns.get_host_address(addr, port);
@@ -1755,17 +1740,14 @@ void WLApplication::mainmenu_multiplayer()
 			}
 		}
 	}
-#ifdef WIN32
-	// Clean up winsock2 data
-	WSACleanup();
-#endif
 }
 
 void WLApplication::mainmenu_editor()
 {
 	//  This is the code returned by UI::Panel::run() when the panel is dying.
 	//  Make sure that the program exits when the window manager says so.
-	compile_assert(Fullscreen_Menu_Editor::Back == UI::Panel::dying_code);
+	static_assert
+		(Fullscreen_Menu_Editor::Back == UI::Panel::dying_code, "Editor should be dying.");
 
 	for (;;) {
 		int32_t code;
@@ -1793,6 +1775,7 @@ void WLApplication::mainmenu_editor()
 		}
 		default:
 			assert(false);
+			break;
 		}
 	}
 }
@@ -1809,7 +1792,7 @@ struct SinglePlayerGameSettingsProvider : public GameSettingsProvider {
 
 	virtual void setScenario(bool const set) {s.scenario = set;}
 
-	virtual GameSettings const & settings() {return s;}
+	virtual const GameSettings & settings() {return s;}
 
 	virtual bool canChangeMap() {return true;}
 	virtual bool canChangePlayerState(uint8_t number) {
@@ -1828,8 +1811,8 @@ struct SinglePlayerGameSettingsProvider : public GameSettingsProvider {
 	}
 
 	virtual void setMap
-		(std::string const &       mapname,
-		 std::string const &       mapfilename,
+		(const std::string &       mapname,
+		 const std::string &       mapfilename,
 		 uint32_t            const maxplayers,
 		 bool                const savegame)
 	{
@@ -1853,7 +1836,7 @@ struct SinglePlayerGameSettingsProvider : public GameSettingsProvider {
 			player.team = 0;
 			// Set default computerplayer ai type
 			if (player.state == PlayerSettings::stateComputer) {
-				Computer_Player::ImplementationVector const & impls =
+				const Computer_Player::ImplementationVector & impls =
 					Computer_Player::getImplementations();
 				if (impls.size() > 1) {
 					player.ai = impls.at(0)->name;
@@ -1876,7 +1859,7 @@ struct SinglePlayerGameSettingsProvider : public GameSettingsProvider {
 		s.players[number].state = state;
 	}
 
-	virtual void setPlayerAI(uint8_t const number, std::string const & ai, bool const random_ai) {
+	virtual void setPlayerAI(uint8_t const number, const std::string & ai, bool const random_ai) {
 		if (number < s.players.size()) {
 			s.players[number].ai = ai;
 			s.players[number].random_ai = random_ai;
@@ -1887,7 +1870,7 @@ struct SinglePlayerGameSettingsProvider : public GameSettingsProvider {
 		if (number == s.playernum || number >= s.players.size())
 			return;
 
-		Computer_Player::ImplementationVector const & impls =
+		const Computer_Player::ImplementationVector & impls =
 			Computer_Player::getImplementations();
 		if (impls.size() > 1) {
 			Computer_Player::ImplementationVector::const_iterator it =
@@ -1913,7 +1896,7 @@ struct SinglePlayerGameSettingsProvider : public GameSettingsProvider {
 		s.players[number].state = PlayerSettings::stateComputer;
 	}
 
-	virtual void setPlayerTribe(uint8_t const number, std::string const & tribe, bool const random_tribe)
+	virtual void setPlayerTribe(uint8_t const number, const std::string & tribe, bool const random_tribe)
 	{
 		if (number >= s.players.size())
 			return;
@@ -1965,7 +1948,7 @@ struct SinglePlayerGameSettingsProvider : public GameSettingsProvider {
 		// nothing to do
 	}
 
-	virtual void setPlayerName(uint8_t const number, std::string const & name) {
+	virtual void setPlayerName(uint8_t const number, const std::string & name) {
 		if (number < s.players.size())
 			s.players[number].name = name;
 	}
@@ -2018,15 +2001,21 @@ bool WLApplication::new_game()
 	if (code == 2) { // scenario
 		try {
 			game.run_splayer_scenario_direct(sp.getMap().c_str());
-		} catch (...) {
+		} catch (const std::exception & e) {
+			log("Fata exception: %s\n", e.what());
 			emergency_save(game);
 			throw;
 		}
 	} else { // normal singleplayer
 		uint8_t const pn = sp.settings().playernum + 1;
-		boost::scoped_ptr<GameController> ctrl
-			(GameController::createSinglePlayer(game, true, pn));
 		try {
+			// Game controller needs the ibase pointer to init
+			// the chat
+			game.set_ibase
+				(new Interactive_Player
+					(game, g_options.pull_section("global"), pn, false, false));
+			std::unique_ptr<GameController> ctrl
+				(GameController::createSinglePlayer(game, true, pn));
 			UI::ProgressWindow loaderUI;
 			std::vector<std::string> tipstext;
 			tipstext.push_back("general_game");
@@ -2040,12 +2029,10 @@ bool WLApplication::new_game()
 			loaderUI.step(_("Preparing game"));
 
 			game.set_game_controller(ctrl.get());
-			game.set_ibase
-				(new Interactive_Player
-				 	(game, g_options.pull_section("global"), pn, false, false));
 			game.init_newgame(&loaderUI, sp.settings());
 			game.run(&loaderUI, Widelands::Game::NewNonScenario);
-		} catch (...) {
+		} catch (const std::exception & e) {
+			log("Fata exception: %s\n", e.what());
 			emergency_save(game);
 			throw;
 		}
@@ -2075,7 +2062,8 @@ bool WLApplication::load_game()
 	try {
 		if (game.run_load_game(filename))
 			return true;
-	} catch (...) {
+	} catch (const std::exception & e) {
+		log("Fata exception: %s\n", e.what());
 		emergency_save(game);
 		throw;
 	}
@@ -2117,7 +2105,8 @@ bool WLApplication::campaign_game()
 		// Load selected campaign-map-file
 		if (filename.size())
 			return game.run_splayer_scenario_direct(filename.c_str());
-	} catch (...) {
+	} catch (const std::exception & e) {
+		log("Fata exception: %s\n", e.what());
 		emergency_save(game);
 		throw;
 	}
@@ -2125,7 +2114,7 @@ bool WLApplication::campaign_game()
 }
 
 struct ReplayGameController : public GameController {
-	ReplayGameController(Widelands::Game & game, std::string const & filename) :
+	ReplayGameController(Widelands::Game & game, const std::string & filename) :
 		m_game     (game),
 		m_lastframe(WLApplication::get()->get_time()),
 		m_time     (m_game.get_gametime()),
@@ -2178,14 +2167,14 @@ struct ReplayGameController : public GameController {
 				m_game.enqueue_command(cmd);
 
 			if (m_replayreader->EndOfReplay()) {
-				m_replayreader.reset(0);
+				m_replayreader.reset(nullptr);
 				m_game.enqueue_command
 					(new Cmd_ReplayEnd(m_time = m_game.get_gametime()));
 			}
 		}
 	}
 
-	__attribute__((noreturn)) void sendPlayerCommand(Widelands::PlayerCommand &)
+	void sendPlayerCommand(Widelands::PlayerCommand &)
 	{
 		throw wexception("Trying to send a player command during replay");
 	}
@@ -2203,7 +2192,7 @@ struct ReplayGameController : public GameController {
 
 private:
 	Widelands::Game & m_game;
-	boost::scoped_ptr<Widelands::ReplayReader> m_replayreader;
+	std::unique_ptr<Widelands::ReplayReader> m_replayreader;
 	int32_t m_lastframe;
 	int32_t m_time;
 	uint32_t m_speed;
@@ -2215,15 +2204,15 @@ private:
  */
 void WLApplication::replay()
 {
+	Widelands::Game game;
 	if (m_filename.empty()) {
-		Fullscreen_Menu_LoadReplay rm;
+		Fullscreen_Menu_LoadReplay rm(game);
 		if (rm.run() <= 0)
 			return;
 
 		m_filename = rm.filename();
 	}
 
-	Widelands::Game game;
 	try {
 		UI::ProgressWindow loaderUI;
 		std::vector<std::string> tipstext;
@@ -2237,8 +2226,11 @@ void WLApplication::replay()
 		game.set_write_replay(false);
 		ReplayGameController rgc(game, m_filename);
 
-		game.run(&loaderUI, Widelands::Game::Loaded);
-	} catch (...) {
+		game.save_handler().set_allow_saving(false);
+
+		game.run(&loaderUI, Widelands::Game::Loaded, true);
+	} catch (const std::exception & e) {
+		log("Fatal Exception: %s\n", e.what());
 		emergency_save(game);
 		m_filename.clear();
 		throw;
@@ -2333,9 +2325,9 @@ void WLApplication::cleanup_replays()
 bool WLApplication::redirect_output(std::string path)
 {
 	if (path.empty()) {
-#ifdef WIN32
+#ifdef _WIN32
 		char module_name[MAX_PATH];
-		unsigned int name_length = GetModuleFileName(NULL, module_name, MAX_PATH);
+		unsigned int name_length = GetModuleFileName(nullptr, module_name, MAX_PATH);
 		path = module_name;
 		size_t pos = path.find_last_of("/\\");
 		if (pos == std::string::npos) return false;
@@ -2351,12 +2343,13 @@ bool WLApplication::redirect_output(std::string path)
 	/* Redirect standard error */
 	std::string stderrfile = path + "/stderr.txt";
 	newfp = freopen(stderrfile.c_str(), "w", stderr);
+	if (!newfp) return false;
 
 	/* Line buffered */
-	setvbuf(stdout, NULL, _IOLBF, BUFSIZ);
+	setvbuf(stdout, nullptr, _IOLBF, BUFSIZ);
 
 	/* No buffering */
-	setbuf(stderr, NULL);
+	setbuf(stderr, nullptr);
 
 	m_redirected_stdio = true;
 	return true;

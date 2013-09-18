@@ -23,7 +23,10 @@
 #include <cstdio>
 #include <iostream>
 
-extern std::ostream & wout;
+#include "io/dedicated_log.h"
+
+// Default to stdout for logging.
+std::ostream & wout = std::cout;
 
 bool g_verbose = false;
 
@@ -38,3 +41,5 @@ void log(const char * const fmt, ...) {
 	wout << buffer;
 	wout.flush();
 }
+
+

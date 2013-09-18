@@ -1,12 +1,12 @@
-# Automatically created by Widelands bzr6002[trunk] (Debug)
+# Automatically created by Widelands bzr5785[scenarios] (RelWithDebInfo)
 
 [global]
 packet_version="1"
-map_w="112"
-map_h="112"
+map_w="144"
+map_h="144"
 nr_players="4"
 world="greenland"
-name=_"Smugglers"
-author="ISCH,SirVer"
-descr=_"Your well established smuggling routes suddenly got busy: Two other tribes appeared and now a rivalry under smugglers has been started: Which team will be the first to smuggle a certain number of wares? Teams are: Blue + Yellow vs Red + Green."
+name="Smugglers"
+author="Nasenbaer,SirVer"
+descr=_"Your well established smuggling routes suddenly got busy: Two other tribes appeared and now a rivalry under smugglers has been started: Which team will be the first to smuggle a certain number of wares? Teams are: Blue + Red vs Yellow + Green."
 tags="official"

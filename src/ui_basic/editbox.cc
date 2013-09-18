@@ -17,17 +17,17 @@
  *
  */
 
-#include "editbox.h"
+#include "ui_basic/editbox.h"
 
-#include "mouse_constants.h"
+#include <limits>
+
+#include <SDL_keysym.h>
 
 #include "graphic/font.h"
 #include "graphic/font_handler.h"
 #include "graphic/rendertarget.h"
 #include "helper.h"
-
-#include <limits>
-#include <SDL_keysym.h>
+#include "ui_basic/mouse_constants.h"
 
 namespace UI {
 
@@ -42,7 +42,7 @@ struct EditBoxImpl {
 	/*@}*/
 
 	/// Background tile style.
-	PictureID background;
+	const Image* background;
 
 	/// Maximum number of characters in the input
 	uint32_t maxLength;
@@ -63,7 +63,7 @@ struct EditBoxImpl {
 EditBox::EditBox
 	(Panel * const parent,
 	 const int32_t x, const int32_t y, const uint32_t w, const uint32_t h,
-	 const PictureID & background,
+	 const Image* background,
 	 Align _align)
 	:
 	Panel(parent, x, y, w, h),
@@ -100,7 +100,7 @@ EditBox::~EditBox()
 /**
  * \return the current text entered in the edit box
  */
-std::string const & EditBox::text() const
+const std::string & EditBox::text() const
 {
 	return m->text;
 }
@@ -108,7 +108,7 @@ std::string const & EditBox::text() const
 /**
  * Set the font used by the edit box.
  */
-void EditBox::set_font(std::string const & name, int32_t size, RGBColor color)
+void EditBox::set_font(const std::string & name, int32_t size, RGBColor color)
 {
 	m->fontname = name;
 	m->fontsize = size;
@@ -121,7 +121,7 @@ void EditBox::set_font(std::string const & name, int32_t size, RGBColor color)
  * The text is truncated if it is longer than the maximum length set by
  * \ref setMaxLength().
  */
-void EditBox::setText(std::string const & t)
+void EditBox::setText(const std::string & t)
 {
 	if (t == m->text)
 		return;
@@ -247,13 +247,14 @@ bool EditBox::handle_key(bool const down, SDL_keysym const code)
 				insert(code);
 				break;
 			}
+			/* no break */
 		case SDLK_DELETE:
 			if (m->caret < m->text.size()) {
 				while ((m->text[++m->caret] & 0xc0) == 0x80) {};
 				// now handle it like Backspace
 			} else
 				return true;
-
+			/* no break */
 		case SDLK_BACKSPACE:
 			if (m->caret > 0) {
 				while ((m->text[--m->caret] & 0xc0) == 0x80)
@@ -270,6 +271,7 @@ bool EditBox::handle_key(bool const down, SDL_keysym const code)
 				insert(code);
 				break;
 			}
+			/* no break */
 		case SDLK_LEFT:
 			if (m->caret > 0) {
 				while ((m->text[--m->caret] & 0xc0) == 0x80) {};
@@ -289,6 +291,7 @@ bool EditBox::handle_key(bool const down, SDL_keysym const code)
 				insert(code);
 				break;
 			}
+			/* no break */
 		case SDLK_RIGHT:
 			if (m->caret < m->text.size()) {
 				while ((m->text[++m->caret] & 0xc0) == 0x80) {};
@@ -313,6 +316,7 @@ bool EditBox::handle_key(bool const down, SDL_keysym const code)
 				insert(code);
 				break;
 			}
+			/* no break */
 		case SDLK_HOME:
 			if (m->caret != 0) {
 				m->caret = 0;
@@ -327,6 +331,7 @@ bool EditBox::handle_key(bool const down, SDL_keysym const code)
 				insert(code);
 				break;
 			}
+			/* no break */
 		case SDLK_END:
 			if (m->caret != m->text.size()) {
 				m->caret = m->text.size();
@@ -340,6 +345,7 @@ bool EditBox::handle_key(bool const down, SDL_keysym const code)
 				insert(code);
 				break;
 			}
+			/* no break */
 		case SDLK_UP:
 			// Load entry from history if active and text is not empty
 			if (m_history_active) {
@@ -359,6 +365,7 @@ bool EditBox::handle_key(bool const down, SDL_keysym const code)
 				insert(code);
 				break;
 			}
+			/* no break */
 		case SDLK_DOWN:
 			// Load entry from history if active and text is not equivalent to the current one
 			if (m_history_active) {
@@ -383,6 +390,7 @@ bool EditBox::handle_key(bool const down, SDL_keysym const code)
 				insert(code);
 				return true;
 			}
+			break;
 		}
 	}
 

@@ -17,19 +17,20 @@
  *
  */
 
-#include "base.h"
-
-#include "constants.h"
-#include "io/filesystem/filesystem.h"
-#include "graphic/font.h"
-#include "graphic/graphic.h"
-#include "log.h"
-#include "profile/profile.h"
-#include "graphic/rendertarget.h"
-#include "wlapplication.h"
-#include "wexception.h"
+#include "ui_fsmenu/base.h"
 
 #include <cstdio>
+
+#include "constants.h"
+#include "graphic/font.h"
+#include "graphic/graphic.h"
+#include "graphic/image_transformations.h"
+#include "graphic/rendertarget.h"
+#include "io/filesystem/filesystem.h"
+#include "log.h"
+#include "profile/profile.h"
+#include "wexception.h"
+#include "wlapplication.h"
 
 /*
 ==============================================================================
@@ -40,7 +41,7 @@ Fullscreen_Menu_Base
 */
 
 struct Fullscreen_Menu_Base::Data {
-	PictureID res_background;
+	const Image* res_background;
 	UI::TextStyle textstyle_small;
 	UI::TextStyle textstyle_big;
 };
@@ -54,32 +55,10 @@ Fullscreen_Menu_Base::Fullscreen_Menu_Base(char const * const bgpic)
 	: UI::Panel(0, 0, 0, gr_x(), gr_y()),
 	d(new Data)
 {
-	Section & s = g_options.pull_section("global");
-
-#if USE_OPENGL
-#define GET_BOOL_USE_OPENGL s.get_bool("opengl", false)
-#else
-#define GET_BOOL_USE_OPENGL false
-#endif
-	WLApplication::get()->init_graphics
-		(get_w(), get_h(),
-		 s.get_int("depth", 16),
-		 s.get_bool("fullscreen", false),
-		 GET_BOOL_USE_OPENGL);
-#undef GET_BOOL_USE_OPENGL
-
-
 	// Load background graphics
 	char buffer[256];
 	snprintf(buffer, sizeof(buffer), "pics/%s", bgpic);
-	PictureID background = g_gr->get_picture(PicMod_Menu, buffer, false);
-	if (!background || background == g_gr->get_no_picture())
-		throw wexception
-			("could not open splash screen; make sure that all data files are "
-			 "installed");
-
-	d->res_background = g_gr->get_resized_picture
-			(background, get_w(), get_h(), Graphic::ResizeMode_Loose);
+	d->res_background = ImageTransformations::resize(g_gr->images().get(buffer), get_w(), get_h());
 
 	d->textstyle_small = UI::TextStyle::ui_small();
 	d->textstyle_small.font = UI::Font::get(ui_fn(), fs_small());
@@ -102,11 +81,11 @@ void Fullscreen_Menu_Base::draw(RenderTarget & dst) {
 
 
 uint32_t Fullscreen_Menu_Base::gr_x() {
-	return g_options.pull_section("global").get_int("xres", XRES);
+	return g_gr->get_xres();
 }
 
 uint32_t Fullscreen_Menu_Base::gr_y() {
-	return g_options.pull_section("global").get_int("yres", YRES);
+	return g_gr->get_yres();
 }
 
 

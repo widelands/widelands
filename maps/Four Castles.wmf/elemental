@@ -6,7 +6,6 @@ nr_players=4
 world=greenland
 name=_Four Castles
 author=Winterwind
-descr=_""Well protected in their mighty fortresses, four power-hungry warlords are completing their schemes to dominate these lands..."
-" "
-_"Suggested Teams: (blue,red) vs (yellow,green)""
+descr=_ "Well protected in their mighty fortresses, four power-hungry warlords are completing their schemes to dominate these lands..."
+hint=_ "Suggested Teams: (blue, red) vs (yellow, green)"
 tags="official,ffa,2teams"

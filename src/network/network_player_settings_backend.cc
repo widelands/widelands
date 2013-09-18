@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2010-2011 by the Widelands Development Team
+ * Copyright (C) 2010-2012 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -17,7 +17,7 @@
  *
  */
 
-#include "network_player_settings_backend.h"
+#include "network/network_player_settings_backend.h"
 
 #include "gamesettings.h"
 #include "i18n.h"
@@ -37,14 +37,14 @@ void NetworkPlayerSettingsBackend::toggle_type(uint8_t id) {
 
 /// Toggle through the tribes + handle shared in players
 void NetworkPlayerSettingsBackend::toggle_tribe(uint8_t id) {
-	GameSettings const & settings = s->settings();
+	const GameSettings & settings = s->settings();
 
 	if (id >= settings.players.size())
 		return;
 
 	if (settings.players.at(id).state != PlayerSettings::stateShared) {
-		PlayerSettings const & player = settings.players.at(id);
-		std::string const & currenttribe = player.tribe;
+		const PlayerSettings & player = settings.players.at(id);
+		const std::string & currenttribe = player.tribe;
 		std::string nexttribe = settings.tribes.at(0).name;
 		uint32_t num_tribes = settings.tribes.size();
 		bool random_tribe = false;
@@ -100,12 +100,12 @@ void NetworkPlayerSettingsBackend::toggle_tribe(uint8_t id) {
 
 /// Toggle through the initializations
 void NetworkPlayerSettingsBackend::toggle_init(uint8_t id) {
-	GameSettings const & settings = s->settings();
+	const GameSettings & settings = s->settings();
 
 	if (id >= settings.players.size())
 		return;
 
-	PlayerSettings const & player = settings.players[id];
+	const PlayerSettings & player = settings.players[id];
 	container_iterate_const(std::vector<TribeBasicInfo>, settings.tribes, j)
 		if (j.current->name == player.tribe)
 			return
@@ -136,14 +136,14 @@ void NetworkPlayerSettingsBackend::toggle_team(uint8_t id) {
 	s->setPlayerTeam(id, newteam);
 }
 
-/// Check if all settings vor the player are still valid
+/// Check if all settings for the player are still valid
 void NetworkPlayerSettingsBackend::refresh(uint8_t id) {
-	GameSettings const & settings = s->settings();
+	const GameSettings & settings = s->settings();
 
 	if (id >= settings.players.size())
 		return;
 
-	PlayerSettings const & player = settings.players[id];
+	const PlayerSettings & player = settings.players[id];
 
 	if (player.state == PlayerSettings::stateShared) {
 		// ensure that the shared_in player is able to use this starting position

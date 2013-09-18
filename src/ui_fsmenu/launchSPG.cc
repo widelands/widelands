@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002, 2006-2011 by the Widelands Development Team
+ * Copyright (C) 2002, 2006-2012 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -17,29 +17,28 @@
  *
  */
 
+#include "ui_fsmenu/launchSPG.h"
 
 #include "gamecontroller.h"
 #include "gamesettings.h"
 #include "graphic/graphic.h"
 #include "i18n.h"
 #include "io/filesystem/layered_filesystem.h"
-#include "loadgame.h"
 #include "logic/game.h"
 #include "logic/instances.h"
 #include "logic/map.h"
 #include "logic/player.h"
 #include "map_io/map_loader.h"
-#include "mapselect.h"
 #include "profile/profile.h"
 #include "scripting/scripting.h"
+#include "ui_fsmenu/loadgame.h"
+#include "ui_fsmenu/mapselect.h"
 #include "warning.h"
 #include "wui/playerdescrgroup.h"
 
-#include "launchSPG.h"
-
 Fullscreen_Menu_LaunchSPG::Fullscreen_Menu_LaunchSPG
 	(GameSettingsProvider * const settings, GameController * const ctrl,
-	 bool autolaunch)
+	 bool /* autolaunch */)
 	:
 	Fullscreen_Menu_Base("launchgamemenu.jpg"),
 
@@ -51,22 +50,22 @@ Fullscreen_Menu_LaunchSPG::Fullscreen_Menu_LaunchSPG
 	m_select_map
 		(this, "select_map",
 		 get_w() * 7 / 10, get_h() * 3 / 10, m_butw, m_buth,
-		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
+		 g_gr->images().get("pics/but1.png"),
 		 _("Select map"), std::string(), false, false),
 	m_wincondition
 		(this, "win_condition",
 		 get_w() * 7 / 10, get_h() * 4 / 10, m_butw, m_buth,
-		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
+		 g_gr->images().get("pics/but1.png"),
 		 "", std::string(), false, false),
 	m_back
 		(this, "back",
 		 get_w() * 7 / 10, get_h() * 9 / 20, m_butw, m_buth,
-		 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
+		 g_gr->images().get("pics/but0.png"),
 		 _("Back"), std::string(), true, false),
 	m_ok
 		(this, "ok",
 		 get_w() * 7 / 10, get_h() * 1 / 2, m_butw, m_buth,
-		 g_gr->get_picture(PicMod_UI, "pics/but2.png"),
+		 g_gr->images().get("pics/but2.png"),
 		 _("Start game"), std::string(), false, false),
 
 // Text labels
@@ -98,6 +97,10 @@ Fullscreen_Menu_LaunchSPG::Fullscreen_Menu_LaunchSPG
 		(this,
 		 get_w() * 51 / 100, get_h() * 53 / 200,
 		 _("Start type"), UI::Align_Left),
+	m_wincondition_type
+		(this,
+		 get_w() * 7 / 10 + (m_butw / 2), get_h() * 7 / 20,
+		 _("Type of game"), UI::Align_HCenter),
 
 // Variables and objects used in the menu
 	m_settings     (settings),
@@ -127,6 +130,7 @@ Fullscreen_Menu_LaunchSPG::Fullscreen_Menu_LaunchSPG
 
 	m_title  .set_textstyle(ts_big());
 	m_mapname.set_textstyle(ts_small());
+	m_wincondition_type.set_textstyle(ts_small());
 
 	UI::TextStyle tsmaller
 		(UI::TextStyle::makebold
@@ -150,8 +154,8 @@ Fullscreen_Menu_LaunchSPG::Fullscreen_Menu_LaunchSPG
 			new UI::Button
 				(this, "switch_to_position",
 				 get_w() / 100, y += m_buth, get_h() * 17 / 500, get_h() * 17 / 500,
-				 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
-				 g_gr->get_picture(PicMod_Game, posIco),
+				 g_gr->images().get("pics/but1.png"),
+				 g_gr->images().get(posIco),
 				 _("Switch to position"), false);
 		m_pos[i]->sigclicked.connect
 			(boost::bind(&Fullscreen_Menu_LaunchSPG::switch_to_position, boost::ref(*this), i));
@@ -200,7 +204,7 @@ void Fullscreen_Menu_LaunchSPG::back_clicked()
 	m_settings->setMap(std::string(), std::string(), 0);
 	select_map();
 	if (m_settings->settings().mapname.empty())
-		end_modal(0);
+		return end_modal(0);
 	refresh();
 }
 
@@ -227,16 +231,16 @@ void Fullscreen_Menu_LaunchSPG::win_condition_update() {
 		m_wincondition.set_tooltip
 			(_("Win condition is set through the scenario"));
 	} else {
-		boost::shared_ptr<LuaTable> t = m_lua->run_script
+		std::unique_ptr<LuaTable> t = m_lua->run_script
 			("win_conditions", m_settings->getWinCondition());
 
 		try {
 
-			std::string n = t->get_string("name");
-			std::string d = t->get_string("description");
+			std::string name = t->get_string("name");
+			std::string descr = t->get_string("description");
 
-			m_wincondition.set_title(_("Type: ") + n);
-			m_wincondition.set_tooltip(d.c_str());
+			m_wincondition.set_title(name);
+			m_wincondition.set_tooltip(descr.c_str());
 		} catch (LuaTableKeyError &) {
 			// might be that this is not a win condition after all.
 			win_condition_clicked();
@@ -259,7 +263,7 @@ void Fullscreen_Menu_LaunchSPG::start_clicked()
 			 	 "If this happens in a network game, the host might have selected "
 			 	 "a file that you do not own. Normally such a file should be send "
 			 	 "from the host to you, but perhaps the transfer was not yet "
-			 	 "finnished!?!"),
+			 	 "finished!?!"),
 			 m_filename.c_str());
 	if (m_settings->canLaunch()) {
 		end_modal(1 + m_is_scenario);
@@ -273,10 +277,14 @@ void Fullscreen_Menu_LaunchSPG::start_clicked()
  */
 void Fullscreen_Menu_LaunchSPG::refresh()
 {
-	GameSettings const & settings = m_settings->settings();
+	const GameSettings & settings = m_settings->settings();
 
-	m_mapname.set_text
-		(settings.mapname.size() != 0 ? settings.mapname : _("(no map)"));
+	{
+		// Translate the maps name
+		const char * nomap = _("(no map)");
+		i18n::Textdomain td("maps");
+		m_mapname.set_text(settings.mapname.size() != 0 ? _(settings.mapname) : nomap);
+	}
 	m_filename = settings.mapfilename;
 	m_nr_players = settings.players.size();
 
@@ -293,7 +301,7 @@ void Fullscreen_Menu_LaunchSPG::refresh()
 	// "Choose Position" Buttons in frond of PDG
 	for (uint8_t i = 0; i < m_nr_players; ++i) {
 		m_pos[i]->set_visible(true);
-		PlayerSettings const & player = settings.players[i];
+		const PlayerSettings & player = settings.players[i];
 		if
 			(player.state == PlayerSettings::stateOpen or
 			 player.state == PlayerSettings::stateComputer)
@@ -332,7 +340,7 @@ void Fullscreen_Menu_LaunchSPG::select_map()
 	m_is_scenario = code == 2;
 	m_settings->setScenario(m_is_scenario);
 
-	MapData const & mapdata = *msm.get_map();
+	const MapData & mapdata = *msm.get_map();
 	m_nr_players = mapdata.nrplayers;
 
 	safe_place_for_host(m_nr_players);

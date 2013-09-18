@@ -20,23 +20,22 @@
 #ifndef PRODUCTION_PROGRAM_H
 #define PRODUCTION_PROGRAM_H
 
-#include "program_result.h"
-#include "tattribute.h"
-#include "ware_types.h"
-#include "widelands.h"
-#include "writeHTML.h"
-
-#include "io/filewrite.h"
-#include "log.h"
-
-#include "container_iterate.h"
-
 #include <cassert>
-#include <stdint.h>
 #include <cstring>
 #include <set>
 #include <string>
 #include <vector>
+
+#include <stdint.h>
+
+#include "container_iterate.h"
+#include "io/filewrite.h"
+#include "log.h"
+#include "logic/program_result.h"
+#include "logic/tattribute.h"
+#include "logic/ware_types.h"
+#include "logic/widelands.h"
+#include "writeHTML.h"
 
 struct Profile;
 
@@ -47,7 +46,7 @@ struct Immovable_Descr;
 struct ProductionSite_Descr;
 class ProductionSite;
 struct Tribe_Descr;
-struct Worker;
+class Worker;
 
 /// Ordered sequence of actions (at least 1). Has a name.
 struct ProductionProgram {
@@ -73,7 +72,7 @@ struct ProductionProgram {
 		virtual void building_work_failed(Game &, ProductionSite &, Worker &) const;
 
 #ifdef WRITE_GAME_DATA_AS_HTML
-		virtual void writeHTML(::FileWrite &, ProductionSite_Descr const &) const
+		virtual void writeHTML(::FileWrite &, const ProductionSite_Descr &) const
 			= 0;
 #endif
 	};
@@ -86,8 +85,8 @@ struct ProductionProgram {
 	static void parse_ware_type_group
 		(char            * & parameters,
 		 Ware_Type_Group   & group,
-		 Tribe_Descr const & tribe,
-		 Ware_Types  const & inputs);
+		 const Tribe_Descr & tribe,
+		 const Ware_Types  & inputs);
 
 	/// Returns from the program.
 	///
@@ -138,38 +137,38 @@ struct ProductionProgram {
 	/// Note: If the execution reaches the end of the program. the return value
 	/// is implicitly set to Completed.
 	struct ActReturn : public Action {
-		ActReturn(char * parameters, ProductionSite_Descr const &);
+		ActReturn(char * parameters, const ProductionSite_Descr &);
 		virtual ~ActReturn();
 		virtual void execute(Game &, ProductionSite &) const;
 #ifdef WRITE_GAME_DATA_AS_HTML
 		virtual void writeHTML
-			(::FileWrite &, ProductionSite_Descr const &) const;
+			(::FileWrite &, const ProductionSite_Descr &) const;
 #endif
 
 		struct Condition {
 			virtual ~Condition();
-			virtual bool evaluate(ProductionSite const &) const = 0;
-			virtual std::string description(Tribe_Descr const &) const
+			virtual bool evaluate(const ProductionSite &) const = 0;
+			virtual std::string description(const Tribe_Descr &) const
 				= 0;
 #ifdef WRITE_GAME_DATA_AS_HTML
 			virtual void writeHTML
-				(::FileWrite &, ProductionSite_Descr const &) const
+				(::FileWrite &, const ProductionSite_Descr &) const
 				= 0;
 #endif
 		};
 		static Condition * create_condition
-			(char * & parameters, ProductionSite_Descr const &);
+			(char * & parameters, const ProductionSite_Descr &);
 		struct Negation : public Condition {
 			Negation
-				(char * & parameters, ProductionSite_Descr const & descr)
+				(char * & parameters, const ProductionSite_Descr & descr)
 				: operand(create_condition(parameters, descr))
 			{}
 			virtual ~Negation();
-			virtual bool evaluate(ProductionSite const &) const;
-			std::string description(Tribe_Descr const &) const;
+			virtual bool evaluate(const ProductionSite &) const;
+			std::string description(const Tribe_Descr &) const;
 #ifdef WRITE_GAME_DATA_AS_HTML
 		virtual void writeHTML
-				(::FileWrite &, ProductionSite_Descr const &) const;
+				(::FileWrite &, const ProductionSite_Descr &) const;
 #endif
 		private:
 			Condition * const operand;
@@ -177,12 +176,12 @@ struct ProductionProgram {
 
 		/// Tests whether the economy needs a ware of type ware_type.
 		struct Economy_Needs_Ware : public Condition {
-			Economy_Needs_Ware(Ware_Index const i) : ware_type(i) {}
-			virtual bool evaluate(ProductionSite const &) const;
-			std::string description(Tribe_Descr const &) const;
+			Economy_Needs_Ware(const Ware_Index& i) : ware_type(i) {}
+			virtual bool evaluate(const ProductionSite &) const;
+			std::string description(const Tribe_Descr &) const;
 #ifdef WRITE_GAME_DATA_AS_HTML
 			virtual void writeHTML
-				(::FileWrite &, ProductionSite_Descr const &) const;
+				(::FileWrite &, const ProductionSite_Descr &) const;
 #endif
 		private:
 			Ware_Index ware_type;
@@ -190,12 +189,12 @@ struct ProductionProgram {
 
 		/// Tests whether the economy needs a worker of type worker_type.
 		struct Economy_Needs_Worker : public Condition {
-			Economy_Needs_Worker(Ware_Index const i) : worker_type(i) {}
-			virtual bool evaluate(ProductionSite const &) const;
-			std::string description(Tribe_Descr const &) const;
+			Economy_Needs_Worker(const Ware_Index& i) : worker_type(i) {}
+			virtual bool evaluate(const ProductionSite &) const;
+			std::string description(const Tribe_Descr &) const;
 #ifdef WRITE_GAME_DATA_AS_HTML
 			virtual void writeHTML
-				(::FileWrite &, ProductionSite_Descr const &) const;
+				(::FileWrite &, const ProductionSite_Descr &) const;
 #endif
 		private:
 			Ware_Index worker_type;
@@ -205,12 +204,12 @@ struct ProductionProgram {
 		/// wares, combining from any of the types specified, in its input
 		/// queues.
 		struct Site_Has : public Condition {
-			Site_Has(char * & parameters, ProductionSite_Descr const &);
-			virtual bool evaluate(ProductionSite const &) const;
-			std::string description(Tribe_Descr const &) const;
+			Site_Has(char * & parameters, const ProductionSite_Descr &);
+			virtual bool evaluate(const ProductionSite &) const;
+			std::string description(const Tribe_Descr &) const;
 #ifdef WRITE_GAME_DATA_AS_HTML
 			virtual void writeHTML
-				(::FileWrite &, ProductionSite_Descr const &) const;
+				(::FileWrite &, const ProductionSite_Descr &) const;
 #endif
 		private:
 			Ware_Type_Group group;
@@ -219,11 +218,11 @@ struct ProductionProgram {
 		/// Tests whether any of the workers at the site needs experience to
 		/// become upgraded.
 		struct Workers_Need_Experience : public Condition {
-			virtual bool evaluate(ProductionSite const &) const;
-			std::string description(Tribe_Descr const &) const;
+			virtual bool evaluate(const ProductionSite &) const;
+			std::string description(const Tribe_Descr &) const;
 #ifdef WRITE_GAME_DATA_AS_HTML
 		virtual void writeHTML
-			(::FileWrite &, ProductionSite_Descr const &) const;
+			(::FileWrite &, const ProductionSite_Descr &) const;
 #endif
 		};
 
@@ -265,11 +264,11 @@ struct ProductionProgram {
 	///         program (with the same effect as executing "return=skipped").
 	///       * If handling_method is "repeat", the command is repeated.
 	struct ActCall : public Action {
-		ActCall(char * parameters, ProductionSite_Descr const &);
+		ActCall(char * parameters, const ProductionSite_Descr &);
 		virtual void execute(Game &, ProductionSite &) const;
 #ifdef WRITE_GAME_DATA_AS_HTML
 		virtual void writeHTML
-			(::FileWrite &, ProductionSite_Descr const &) const;
+			(::FileWrite &, const ProductionSite_Descr &) const;
 #endif
 	private:
 		ProductionProgram             * m_program;
@@ -286,15 +285,15 @@ struct ProductionProgram {
 	struct ActWorker : public Action {
 		ActWorker
 			(char * parameters, ProductionSite_Descr &,
-			 std::string const & production_program_name);
+			 const std::string & production_program_name);
 		virtual void execute(Game &, ProductionSite &) const;
 		virtual bool get_building_work(Game &, ProductionSite &, Worker &) const;
 		virtual void building_work_failed(Game &, ProductionSite &, Worker &) const;
 #ifdef WRITE_GAME_DATA_AS_HTML
 		virtual void writeHTML
-			(::FileWrite &, ProductionSite_Descr const &) const;
+			(::FileWrite &, const ProductionSite_Descr &) const;
 #endif
-		std::string const & program() const {return m_program;}
+		const std::string & program() const {return m_program;}
 	private:
 		std::string m_program;
 	};
@@ -310,14 +309,39 @@ struct ProductionProgram {
 	///
 	/// Blocks the execution of the program for the specified duration.
 	struct ActSleep : public Action {
-		ActSleep(char * parameters, ProductionSite_Descr const &);
+		ActSleep(char * parameters, const ProductionSite_Descr &);
 		virtual void execute(Game &, ProductionSite &) const;
 #ifdef WRITE_GAME_DATA_AS_HTML
 		virtual void writeHTML
-			(::FileWrite &, ProductionSite_Descr const &) const;
+			(::FileWrite &, const ProductionSite_Descr &) const;
 #endif
 	private:
 		Duration m_duration;
+	};
+
+	/// Checks whether the map has a certain feature enabled.
+	///
+	/// Parameter syntax:
+	///    parameters ::= feature
+	/// Parameter semantics:
+	///    feature:
+	///       The name of the feature that should be checked. Possible values are:
+	///       * Seafaring : to check whether the map has at least two port build spaces
+	///
+	/// Ends the program if the feature is not enabled.
+	struct ActCheck_Map : public Action {
+		ActCheck_Map(char * parameters, const ProductionSite_Descr &);
+		virtual void execute(Game &, ProductionSite &) const;
+#ifdef WRITE_GAME_DATA_AS_HTML
+		virtual void writeHTML
+			(::FileWrite &, const ProductionSite_Descr &) const;
+
+#endif
+	private:
+		 enum {
+			 SEAFARING = 1
+		 };
+		 uint8_t m_feature;
 	};
 
 	/// Runs an animation.
@@ -339,11 +363,11 @@ struct ProductionProgram {
 	struct ActAnimate : public Action {
 		ActAnimate
 			(char * parameters, ProductionSite_Descr &,
-			 std::string const & directory, Profile &);
+			 const std::string & directory, Profile &);
 		virtual void execute(Game &, ProductionSite &) const;
 #ifdef WRITE_GAME_DATA_AS_HTML
 		virtual void writeHTML
-			(::FileWrite &, ProductionSite_Descr const &) const;
+			(::FileWrite &, const ProductionSite_Descr &) const;
 #endif
 	private:
 		uint32_t m_id;
@@ -393,14 +417,14 @@ struct ProductionProgram {
 	/// equivalent to "b,a" because in the internal representation the ware
 	/// types of a group are sorted. FIXME change this!
 	struct ActConsume : public Action {
-		ActConsume(char * parameters, ProductionSite_Descr const &);
+		ActConsume(char * parameters, const ProductionSite_Descr &);
 		virtual void execute(Game &, ProductionSite &) const;
 #ifdef WRITE_GAME_DATA_AS_HTML
 		virtual void writeHTML
-			(::FileWrite &, ProductionSite_Descr const &) const;
+			(::FileWrite &, const ProductionSite_Descr &) const;
 #endif
 		typedef std::vector<Ware_Type_Group> Groups;
-		Groups const & groups() const {return m_groups;}
+		const Groups & groups() const {return m_groups;}
 	private:
 		Groups m_groups;
 	};
@@ -421,15 +445,15 @@ struct ProductionProgram {
 	/// produced wares are of the type specified in the group. How the produced
 	/// wares are handled is defined by the productionsite.
 	struct ActProduce : public Action {
-		ActProduce(char * parameters, ProductionSite_Descr const &);
+		ActProduce(char * parameters, const ProductionSite_Descr &);
 		virtual void execute(Game &, ProductionSite &) const;
 		virtual bool get_building_work(Game &, ProductionSite &, Worker &) const;
 #ifdef WRITE_GAME_DATA_AS_HTML
 		virtual void writeHTML
-			(::FileWrite &, ProductionSite_Descr const &) const;
+			(::FileWrite &, const ProductionSite_Descr &) const;
 #endif
 		typedef std::vector<std::pair<Ware_Index, uint8_t> > Items;
-		Items const & items() const {return m_items;}
+		const Items & items() const {return m_items;}
 	private:
 		Items m_items;
 	};
@@ -450,15 +474,15 @@ struct ProductionProgram {
 	/// The recruited workers are of the type specified in the group. How the
 	/// recruited workers are handled is defined by the productionsite.
 	struct ActRecruit : public Action {
-		ActRecruit(char * parameters, ProductionSite_Descr const &);
+		ActRecruit(char * parameters, const ProductionSite_Descr &);
 		virtual void execute(Game &, ProductionSite &) const;
 		virtual bool get_building_work(Game &, ProductionSite &, Worker &) const;
 #ifdef WRITE_GAME_DATA_AS_HTML
 		virtual void writeHTML
-			(::FileWrite &, ProductionSite_Descr const &) const;
+			(::FileWrite &, const ProductionSite_Descr &) const;
 #endif
 		typedef std::vector<std::pair<Ware_Index, uint8_t> > Items;
-		Items const & items() const {return m_items;}
+		const Items & items() const {return m_items;}
 	private:
 		Items m_items;
 	};
@@ -466,12 +490,12 @@ struct ProductionProgram {
 	struct ActMine : public Action {
 		ActMine
 			(char * parameters, ProductionSite_Descr &,
-			 std::string const & production_program_name);
+			 const std::string & production_program_name);
 		virtual void execute(Game &, ProductionSite &) const;
 		virtual void informPlayer(Game &, ProductionSite &) const;
 #ifdef WRITE_GAME_DATA_AS_HTML
 		virtual void writeHTML
-			(::FileWrite &, ProductionSite_Descr const &) const;
+			(::FileWrite &, const ProductionSite_Descr &) const;
 #endif
 	private:
 		Resource_Index m_resource;
@@ -481,11 +505,11 @@ struct ProductionProgram {
 	};
 
 	struct ActCheck_Soldier : public Action {
-		ActCheck_Soldier(char * parameters, ProductionSite_Descr const &);
+		ActCheck_Soldier(char * parameters, const ProductionSite_Descr &);
 		virtual void execute(Game &, ProductionSite &) const;
 #ifdef WRITE_GAME_DATA_AS_HTML
 		virtual void writeHTML
-			(::FileWrite &, ProductionSite_Descr const &) const;
+			(::FileWrite &, const ProductionSite_Descr &) const;
 #endif
 	private:
 		tAttribute attribute;
@@ -493,11 +517,11 @@ struct ProductionProgram {
 	};
 
 	struct ActTrain : public Action {
-		ActTrain(char * parameters, ProductionSite_Descr const &);
+		ActTrain(char * parameters, const ProductionSite_Descr &);
 		virtual void execute(Game &, ProductionSite &) const;
 #ifdef WRITE_GAME_DATA_AS_HTML
 		virtual void writeHTML
-			(::FileWrite &, ProductionSite_Descr const &) const;
+			(::FileWrite &, const ProductionSite_Descr &) const;
 #endif
 	private:
 		tAttribute attribute;
@@ -510,6 +534,8 @@ struct ProductionProgram {
 	/// Parameter syntax:
 	///    parameters ::= soundFX [priority]
 	/// Parameter semantics:
+	///    directory:
+	///       The directory of the productionsite.
 	///    soundFX:
 	///       The filename of an soundFX (relative to the productionsite's
 	///       directory).
@@ -519,11 +545,11 @@ struct ProductionProgram {
 	/// Plays the specified soundFX with the specified priority. Whether the
 	/// soundFX is actually played is determined by the sound handler.
 	struct ActPlayFX : public Action {
-		ActPlayFX(char * parameters, ProductionSite_Descr const &);
+		ActPlayFX(const std::string & directory, char * parameters, const ProductionSite_Descr &);
 		virtual void execute(Game &, ProductionSite &) const;
 #ifdef WRITE_GAME_DATA_AS_HTML
 		virtual void writeHTML
-			(::FileWrite &, ProductionSite_Descr const &) const;
+			(::FileWrite &, const ProductionSite_Descr &) const;
 #endif
 	private:
 		std::string name;
@@ -554,7 +580,7 @@ struct ProductionProgram {
 
 #ifdef WRITE_GAME_DATA_AS_HTML
 		virtual void writeHTML
-			(::FileWrite &, ProductionSite_Descr const &) const;
+			(::FileWrite &, const ProductionSite_Descr &) const;
 #endif
 	private:
 		std::string objectname;
@@ -563,9 +589,9 @@ struct ProductionProgram {
 	};
 
 	ProductionProgram
-		(std::string    const & directory,
+		(const std::string    & directory,
 		 Profile              &,
-		 std::string    const & name,
+		 const std::string    & name,
 		 char           const * descname,
 		 ProductionSite_Descr *);
 	~ProductionProgram() {
@@ -573,19 +599,19 @@ struct ProductionProgram {
 			delete *i.current;
 	}
 
-	std::string const & name() const {return m_name;}
-	std::string const & descname() const {return m_descname;}
+	const std::string & name() const {return m_name;}
+	const std::string & descname() const {return m_descname;}
 	int32_t get_size() const {return m_actions.size();}
-	Action const & operator[](size_t const idx) const {
+	const Action & operator[](size_t const idx) const {
 		assert(idx < m_actions.size());
 		return *m_actions[idx];
 	}
 
 	typedef std::vector<Action *> Actions;
-	Actions const & actions() const {return m_actions;}
+	const Actions & actions() const {return m_actions;}
 
 #ifdef WRITE_GAME_DATA_AS_HTML
-	void writeHTML(::FileWrite &, ProductionSite_Descr const &) const;
+	void writeHTML(::FileWrite &, const ProductionSite_Descr &) const;
 #endif
 
 private:

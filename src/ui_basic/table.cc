@@ -17,20 +17,21 @@
  *
  */
 
-#include "table.h"
+#include "ui_basic/table.h"
 
-#include "graphic/font.h"
-#include "graphic/font_handler.h"
-#include "graphic/rendertarget.h"
-#include "graphic/surface.h"
-
-#include "button.h"
-#include "mouse_constants.h"
-#include "scrollbar.h"
-#include "wlapplication.h"
+#include <boost/bind.hpp>
 
 #include "container_iterate.h"
-#include <boost/bind.hpp>
+#include "graphic/font.h"
+#include "graphic/font_handler.h"
+#include "graphic/font_handler1.h"
+#include "graphic/graphic.h"
+#include "graphic/rendertarget.h"
+#include "text_layout.h"
+#include "ui_basic/button.h"
+#include "ui_basic/mouse_constants.h"
+#include "ui_basic/scrollbar.h"
+#include "wlapplication.h"
 
 namespace UI {
 
@@ -48,7 +49,6 @@ Table<void *>::Table
 :
 	Panel             (parent, x, y, w, h),
 	m_total_width     (0),
-	m_max_pic_width   (0),
 	m_fontname        (UI_FONT_NAME),
 	m_fontsize        (UI_FONT_SIZE_SMALL),
 	m_headerheight    (15),
@@ -62,6 +62,7 @@ Table<void *>::Table
 	m_sort_descending (descending)
 {
 	set_think(false);
+	set_can_focus(true);
 }
 
 
@@ -77,11 +78,10 @@ Table<void *>::~Table()
 /// Add a new column to this table.
 void Table<void *>::add_column
 	(uint32_t            const width,
-	 std::string const &       title,
+	 const std::string &       title,
 	 Align               const alignment,
 	 bool                const is_checkbox_column)
 {
-
 	//  If there would be existing entries, they would not get the new column.
 	assert(size() == 0);
 
@@ -100,7 +100,7 @@ void Table<void *>::add_column
 				new Button
 					(this, title,
 					 complete_width, 0, width, m_headerheight,
-					 g_gr->get_picture(PicMod_UI, "pics/but3.png"),
+					 g_gr->images().get("pics/but3.png"),
 					 title, "", true, false);
 			c.btn->sigclicked.connect
 				(boost::bind(&Table::header_button_clicked, boost::ref(*this), m_columns.size()));
@@ -137,12 +137,11 @@ void Table<void *>::add_column
 	}
 }
 
-void Table<void *>::set_column_title
-	(uint8_t const col, std::string const & title)
+void Table<void *>::set_column_title(uint8_t const col, const std::string & title)
 {
 	assert(col < m_columns.size());
 	Column & column = m_columns.at(col);
-	if (not column.btn and title.size()) { //  no title before, but now
+	if (!column.btn && !title.empty()) { //  no title before, but now
 		uint32_t complete_width = 0;
 		for (uint8_t i = 0; i < col; ++i)
 			complete_width += m_columns.at(i).width;
@@ -150,14 +149,16 @@ void Table<void *>::set_column_title
 			new Button
 				(this, title,
 				 complete_width, 0, column.width, m_headerheight,
-				 g_gr->get_picture(PicMod_UI, "pics/but3.png"),
+				 g_gr->images().get("pics/but3.png"),
 				 title, "", true, false);
 		column.btn->sigclicked.connect
 			(boost::bind(&Table::header_button_clicked, boost::ref(*this), col));
 		column.btn->set_font(Font::get(m_fontname, m_fontsize));
-	} else if (column.btn and title.empty()) { //  had title before, not now
-		delete column.btn;
-		column.btn = 0;
+	} else if (title.empty()) { //  had title before, not now
+		if (column.btn) {
+			delete column.btn;
+			column.btn = 0;
+		}
 	} else
 		column.btn->set_title(title);
 }
@@ -180,9 +181,7 @@ void Table<void *>::Entry_Record::set_checked
 
 	cell.d_checked = checked;
 	cell.d_picture =
-		g_gr->get_picture
-			(PicMod_UI,
-			 checked ? "pics/checkbox_checked.png" : "pics/checkbox_empty.png");
+		g_gr->images().get(checked ? "pics/checkbox_checked.png" : "pics/checkbox_empty.png");
 }
 
 void Table<void *>::Entry_Record::toggle(uint8_t const col)
@@ -192,7 +191,7 @@ void Table<void *>::Entry_Record::toggle(uint8_t const col)
 
 
 bool Table<void *>::Entry_Record::is_checked(uint8_t const col) const {
-	_data const & cell = m_data.at(col);
+	const _data & cell = m_data.at(col);
 
 	return cell.d_checked;
 }
@@ -266,31 +265,23 @@ void Table<void *>::draw(RenderTarget & dst)
 				 -ms_darken_value);
 		}
 
-		const RGBColor col = er.use_clr ? er.clr : UI_FONT_CLR_FG;
-
 		Columns::size_type const nr_columns = m_columns.size();
 		for (uint32_t i = 0, curx = 0; i < nr_columns; ++i) {
-			Column const & column    = m_columns[i];
+			const Column & column    = m_columns[i];
 			uint32_t const curw      = column.width;
 			Align    const alignment = column.alignment;
 
-			PictureID           const entry_picture = er.get_picture(i);
-			std::string const &       entry_string  = er.get_string (i);
+			const Image* entry_picture = er.get_picture(i);
+			const std::string &       entry_string  = er.get_string (i);
 			uint32_t picw = 0;
 			uint32_t pich = 0;
-			uint32_t stringw = 0;
-			uint32_t stringh = g_fh->get_fontheight(m_fontname, m_fontsize);
-			if (entry_picture != g_gr->get_no_picture())
-				g_gr->get_picture_size(entry_picture, picw, pich);
-			Point point =
-				Point(curx, y)
-				+
-				Point
-					(alignment & Align_Right   ?  curw - (picw + stringw)  - 1 :
-					 alignment & Align_HCenter ? (curw - (picw + stringw)) / 2 :
-					 1,
-					 0);
-			if (entry_picture != g_gr->get_no_picture())
+
+			if (entry_picture) {
+				picw = entry_picture->width();
+				pich = entry_picture->height();
+			}
+			Point point(curx, y);
+			if (entry_picture) {
 				dst.blit
 					(point +
 					 Point
@@ -299,25 +290,54 @@ void Table<void *>::draw(RenderTarget & dst)
 					 	  static_cast<int32_t>(pich))
 					 	 / 2),
 					 entry_picture);
+				point.x += picw;
+			}
 
-			UI::g_fh->draw_text
-				(dst,
-				 TextStyle::makebold(Font::get(m_fontname, m_fontsize), col),
-				 point +
-				 Point
-				 	(picw,
-				 	 (static_cast<int32_t>(lineheight) -
-				 	  static_cast<int32_t>(stringh))
-				 	 / 2),
-				 entry_string,
-				 alignment);
-
+			if (entry_string.empty()) {
+				curx += curw;
+				continue;
+			}
+			const Image* entry_text_im = UI::g_fh1->render(as_uifont(entry_string, m_fontsize));
+			uint16_t text_width = entry_text_im->width();
+			if (alignment & Align_Right) {
+				point.x += curw - picw;
+			} else if (alignment & Align_HCenter) {
+				point.x += (curw - picw) / 2;
+			}
+			UI::correct_for_align(alignment, text_width, entry_text_im->height(), &point);
+			// Crop to column width
+			dst.blitrect(point, entry_text_im, Rect(0, 0, curw - picw, lineheight));
 			curx += curw;
 		}
 
 		y += lineheight;
 		++idx;
 	}
+}
+
+/**
+ * handle key presses
+ */
+bool Table<void *>::handle_key(bool down, SDL_keysym code)
+{
+	if (down) {
+		switch (code.sym) {
+		case SDLK_UP:
+		case SDLK_KP8:
+			move_selection(-1);
+			return true;
+
+		case SDLK_DOWN:
+		case SDLK_KP2:
+			move_selection(1);
+			return true;
+
+		default:
+			break; // not handled
+		}
+	}
+
+	return UI::Panel::handle_key(down, code);
 }
 
 /**
@@ -349,7 +369,7 @@ bool Table<void *>::handle_mousepress
 			select(row);
 			Columns::size_type const nr_cols = m_columns.size();
 			for (uint8_t col = 0; col < nr_cols; ++col) {
-				Column const & column = m_columns.at(col);
+				const Column & column = m_columns.at(col);
 				x -= column.width;
 				if (x <= 0) {
 					if (column.is_checkbox_column) {
@@ -378,6 +398,41 @@ bool Table<void *>::handle_mousepress
 bool Table<void *>::handle_mouserelease(const Uint8 btn, int32_t, int32_t)
 {
 	return btn == SDL_BUTTON_LEFT;
+}
+
+/**
+ * move the currently selected entry up or down.
+ * \param offset positive value move the selection down and
+ *        negative values up.
+ */
+void Table<void *>::move_selection(const int32_t offset)
+{
+	if (!has_selection()) return;
+	int32_t new_selection = m_selection + offset;
+
+	if (new_selection < 0) new_selection = 0;
+	else if (static_cast<uint32_t>(new_selection) > m_entry_records.size() - 1)
+		new_selection = m_entry_records.size() - 1;
+
+	select(static_cast<uint32_t>(new_selection));
+
+	//scroll to newly selected entry
+	if (m_scrollbar)
+	{
+		// Keep an unselected item above or below
+		int32_t scroll_item = new_selection + offset;
+		if (scroll_item < 0) scroll_item = 0;
+		if (scroll_item > static_cast<int32_t>(m_entry_records.size())) {
+			scroll_item = m_entry_records.size();
+		}
+
+		// Ensure scroll_item is visible
+		if (scroll_item * get_lineheight() < static_cast<int32_t>(m_scrollpos)) {
+			m_scrollbar->set_scrollpos(scroll_item * get_lineheight());
+		} else if ((scroll_item + 1) * get_lineheight() - get_inner_h() > m_scrollpos) {
+			m_scrollbar->set_scrollpos((scroll_item + 1) * get_lineheight() - get_inner_h());
+		}
+	}
 }
 
 /**
@@ -414,7 +469,7 @@ Table<void *>::Entry_Record & Table<void *>::add
 		 i; ++i)
 		if (m_columns.at(i.current).is_checkbox_column) {
 			result.m_data.at(i.current).d_picture =
-				g_gr->get_picture(PicMod_UI, "pics/checkbox_empty.png");
+				g_gr->images().get("pics/checkbox_empty.png");
 		}
 
 	m_scrollbar->set_steps
@@ -535,22 +590,22 @@ Table<void *>::Entry_Record::Entry_Record(void * const e)
 {}
 
 void Table<void *>::Entry_Record::set_picture
-	(uint8_t const col, PictureID const picid, std::string const & str)
+	(uint8_t const col, const Image* pic, const std::string & str)
 {
 	assert(col < m_data.size());
 
-	m_data.at(col).d_picture = picid;
+	m_data.at(col).d_picture = pic;
 	m_data.at(col).d_string  = str;
 }
 void Table<void *>::Entry_Record::set_string
-	(uint8_t const col, std::string const & str)
+	(uint8_t const col, const std::string & str)
 {
 	assert(col < m_data.size());
 
-	m_data.at(col).d_picture = g_gr->get_no_picture();
+	m_data.at(col).d_picture = nullptr;
 	m_data.at(col).d_string  = str;
 }
-PictureID Table<void *>::Entry_Record::get_picture(uint8_t const col) const
+const Image* Table<void *>::Entry_Record::get_picture(uint8_t const col) const
 {
 	assert(col < m_data.size());
 

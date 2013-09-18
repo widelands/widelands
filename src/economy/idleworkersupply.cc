@@ -17,19 +17,18 @@
  *
  */
 
-#include "idleworkersupply.h"
+#include "economy/idleworkersupply.h"
 
-#include "economy.h"
-#include "request.h"
-
+#include "economy/economy.h"
+#include "economy/request.h"
 #include "logic/game.h"
 #include "logic/player.h"
 #include "logic/requirements.h"
 #include "logic/soldier.h"
 #include "logic/tribe.h"
-#include "wexception.h"
 #include "logic/warehouse.h"
 #include "logic/worker.h"
+#include "wexception.h"
 
 namespace Widelands {
 
@@ -92,7 +91,7 @@ PlayerImmovable * IdleWorkerSupply::get_position(Game & game)
 }
 
 
-uint32_t IdleWorkerSupply::nr_supplies(Game const &, Request const & req) const
+uint32_t IdleWorkerSupply::nr_supplies(const Game &, const Request & req) const
 {
 	assert
 		(req.get_type() != wwWORKER or
@@ -106,7 +105,7 @@ uint32_t IdleWorkerSupply::nr_supplies(Game const &, Request const & req) const
 	return 0;
 }
 
-WareInstance & IdleWorkerSupply::launch_item(Game &, Request const &)
+WareInstance & IdleWorkerSupply::launch_item(Game &, const Request &)
 {
 	throw wexception("IdleWorkerSupply::launch_item() makes no sense.");
 }
@@ -115,7 +114,7 @@ WareInstance & IdleWorkerSupply::launch_item(Game &, Request const &)
 /**
  * No need to explicitly launch the worker.
  */
-Worker & IdleWorkerSupply::launch_worker(Game &, Request const & req)
+Worker & IdleWorkerSupply::launch_worker(Game &, const Request & req)
 {
 	if (req.get_type() != wwWORKER)
 		throw wexception("IdleWorkerSupply: not a worker request");

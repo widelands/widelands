@@ -20,7 +20,7 @@
 #ifndef _PRODUCTIONSITEWINDOW_H_
 #define _PRODUCTIONSITEWINDOW_H_
 
-#include "buildingwindow.h"
+#include "wui/buildingwindow.h"
 #include "logic/productionsite.h"
 #include "ui_basic/table.h"
 
@@ -33,12 +33,14 @@ struct ProductionSite_Window : public Building_Window {
 	Widelands::ProductionSite & productionsite() {
 		return ref_cast<Widelands::ProductionSite, Widelands::Building>(building());
 	}
-
+	void update_worker_table();
 protected:
 	virtual void think();
+	void evict_worker();
 
 private:
 	UI::Table<uintptr_t> * m_worker_table;
+	UI::Box * m_worker_caps;
 };
 
 #endif // _PRODUCTIONSITEWINDOW_H_

@@ -17,9 +17,9 @@
  *
  */
 
-#include "radiobutton.h"
+#include "ui_basic/radiobutton.h"
 
-#include "checkbox.h"
+#include "ui_basic/checkbox.h"
 
 namespace UI {
 
@@ -29,11 +29,11 @@ namespace UI {
 Radiobutton::Radiobutton
 	(Panel      * const parent,
 	 Point        const p,
-	 PictureID    const picid,
+	 const Image* pic,
 	 Radiogroup &       group,
 	 int32_t      const id)
 	:
-	Statebox (parent, p, picid),
+	Statebox (parent, p, pic),
 	m_nextbtn(group.m_buttons),
 	m_group  (group),
 	m_id     (id)
@@ -96,12 +96,12 @@ Radiogroup::~Radiogroup() {while (m_buttons) delete m_buttons;}
 int32_t Radiogroup::add_button
 	(Panel      * const parent,
 	 Point        const p,
-	 PictureID    const picid,
-	 char const * const tooltip,
+	 const Image* pic,
+	 const std::string& tooltip,
 	 Radiobutton **     ret_btn)
 {
 	++m_highestid;
-	Radiobutton * btn = new Radiobutton(parent, p, picid, *this, m_highestid);
+	Radiobutton * btn = new Radiobutton(parent, p, pic, *this, m_highestid);
 	btn->set_tooltip(tooltip);
 	if (ret_btn) (*ret_btn) = btn;
 	return m_highestid;

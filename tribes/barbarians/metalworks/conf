@@ -1,4 +1,3 @@
-soundfx=../../../sound/smiths/toolsmith
 size=medium
 output=felling_axe
 output=bakingtray
@@ -19,6 +18,11 @@ raw_stone=2
 grout=1
 thatchreed=1
 
+[return_on_dismantle]
+blackwood=1
+raw_stone=1
+grout=1
+
 [working positions]
 blacksmith=1
 
@@ -28,6 +32,7 @@ trunk=8
 
 [aihints]
 build_material=false
+is_basic=true
 
 [programs]
 produce_felling_axe=_Produce felling axe

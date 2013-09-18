@@ -20,16 +20,16 @@
 #ifndef PRODUCTIONSITE_H
 #define PRODUCTIONSITE_H
 
-#include "building.h"
-#include "production_program.h"
-#include "program_result.h"
-#include "ware_types.h"
-
+#include <cstring>
 #include <map>
 #include <set>
 #include <string>
-#include <cstring>
 #include <vector>
+
+#include "logic/building.h"
+#include "logic/production_program.h"
+#include "logic/program_result.h"
+#include "logic/ware_types.h"
 
 namespace Widelands {
 
@@ -38,7 +38,7 @@ struct ProductionProgram;
 class Soldier;
 struct Request;
 struct WaresQueue;
-struct Worker_Descr;
+class Worker_Descr;
 
 
 /**
@@ -56,8 +56,8 @@ struct ProductionSite_Descr : public Building_Descr {
 
 	ProductionSite_Descr
 		(char const * name, char const * descname,
-		 std::string const & directory, Profile &, Section & global_s,
-		 Tribe_Descr const &);
+		 const std::string & directory, Profile &, Section & global_s,
+		 const Tribe_Descr &);
 	virtual ~ProductionSite_Descr();
 
 #ifdef WRITE_GAME_DATA_AS_HTML
@@ -71,22 +71,22 @@ struct ProductionSite_Descr : public Building_Descr {
 			result += i.current->second;
 		return result;
 	}
-	Ware_Types const & working_positions() const throw () {
+	const Ware_Types & working_positions() const throw () {
 		return m_working_positions;
 	}
-	bool is_output_ware_type  (Ware_Index const i) const throw () {
+	bool is_output_ware_type  (const Ware_Index& i) const throw () {
 		return m_output_ware_types  .count(i);
 	}
-	bool is_output_worker_type(Ware_Index const i) const throw () {
+	bool is_output_worker_type(const Ware_Index& i) const throw () {
 		return m_output_worker_types.count(i);
 	}
-	Ware_Types const & inputs() const throw () {return m_inputs;}
+	const Ware_Types & inputs() const throw () {return m_inputs;}
 	typedef std::set<Ware_Index>                       Output;
-	Output   const & output_ware_types  () const {return m_output_ware_types;}
-	Output   const & output_worker_types() const {return m_output_worker_types;}
+	const Output   & output_ware_types  () const {return m_output_ware_types;}
+	const Output   & output_worker_types() const {return m_output_worker_types;}
 	const ProductionProgram * get_program(const std::string &) const;
 	typedef std::map<std::string, ProductionProgram *> Programs;
-	Programs const & programs() const throw () {return m_programs;}
+	const Programs & programs() const throw () {return m_programs;}
 
 	const std::vector<std::string> & compatibility_program(const std::string & progname) const;
 	const std::vector<std::string> & compatibility_working_positions(const std::string & workername) const;
@@ -116,6 +116,7 @@ class ProductionSite : public Building {
 	friend struct ProductionProgram::ActCall;
 	friend struct ProductionProgram::ActWorker;
 	friend struct ProductionProgram::ActSleep;
+	friend struct ProductionProgram::ActCheck_Map;
 	friend struct ProductionProgram::ActAnimate;
 	friend struct ProductionProgram::ActConsume;
 	friend struct ProductionProgram::ActProduce;
@@ -131,7 +132,7 @@ public:
 	ProductionSite(const ProductionSite_Descr & descr);
 	virtual ~ProductionSite();
 
-	void log_general_info(Editor_Game_Base &);
+	void log_general_info(const Editor_Game_Base &);
 
 	bool is_stopped() const {return m_is_stopped;}
 	void set_stopped(bool);
@@ -169,8 +170,8 @@ public:
 	virtual void set_economy(Economy *);
 
 	typedef std::vector<WaresQueue *> Input_Queues;
-	Input_Queues const & warequeues() const {return m_input_queues;}
-	std::vector<Worker *> const & workers() const;
+	const Input_Queues & warequeues() const {return m_input_queues;}
+	const std::vector<Worker *>& workers() const;
 
 	bool can_start_working() const throw ();
 
@@ -195,7 +196,12 @@ protected:
 		Coords coord;
 		/*@}*/
 
-		State() : coord(Coords::Null()) {}
+		State() :
+			program(0),
+			ip(0),
+			phase(0),
+			flags(0),
+			coord(Coords::Null()) {}
 	};
 
 	Request & request_worker(Ware_Index);
@@ -219,7 +225,7 @@ protected:
 	/// duration.
 	void program_step(Game &, uint32_t delay = 10, uint32_t phase = 0);
 
-	void program_start(Game &, std::string const & program_name);
+	void program_start(Game &, const std::string & program_name);
 	virtual void program_end(Game &, Program_Result);
 
 	void calc_statistics();
@@ -250,7 +256,7 @@ protected:  // TrainingSite must have access to this stuff
 	Input_Queues m_input_queues; ///< input queues for all inputs
 	std::vector<bool>        m_statistics;
 	bool                     m_statistics_changed;
-	char                     m_statistics_buffer[40];
+	char                     m_statistics_buffer[128];
 	char                     m_result_buffer   [213];
 	uint8_t                  m_last_stat_percent;
 	bool                     m_is_stopped;
@@ -264,7 +270,7 @@ protected:  // TrainingSite must have access to this stuff
  * releasing some wares out of a building
 */
 struct Input {
-	Input(Ware_Index const Ware, uint8_t const Max) : m_ware(Ware), m_max(Max)
+	Input(const Ware_Index& Ware, uint8_t const Max) : m_ware(Ware), m_max(Max)
 	{}
 	~Input() {}
 

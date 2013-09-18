@@ -17,15 +17,15 @@
  *
  */
 
-#include "spinbox.h"
-
-#include "i18n.h"
-#include "button.h"
-#include "textarea.h"
-#include "wexception.h"
-#include "container_iterate.h"
+#include "ui_basic/spinbox.h"
 
 #include <vector>
+
+#include "container_iterate.h"
+#include "i18n.h"
+#include "ui_basic/button.h"
+#include "ui_basic/textarea.h"
+#include "wexception.h"
 
 namespace UI {
 
@@ -49,7 +49,7 @@ struct SpinBoxImpl {
 	std::string unit;
 
 	/// Background tile style of buttons.
-	PictureID background;
+	const Image* background;
 
 	/// Alignment of the text. Vertical alignment is always centered.
 	Align align;
@@ -76,8 +76,8 @@ SpinBox::SpinBox
 	(Panel * const parent,
 	 const int32_t x, const int32_t y, const uint32_t w, const uint32_t h,
 	 int32_t const startval, int32_t const minval, int32_t const maxval,
-	 std::string const &       unit,
-	 PictureID           const background,
+	 const std::string &       unit,
+	 const Image* background,
 	 bool                const big,
 	 Align               const alignm)
 	:
@@ -103,7 +103,7 @@ SpinBox::SpinBox
 	}
 
 	char buf[64];
-	snprintf(buf, sizeof(buf), "%i%s", sbi->value, sbi->unit.c_str());
+	snprintf(buf, sizeof(buf), "%i %s", sbi->value, sbi->unit.c_str());
 
 	sbi->text = new UI::Textarea
 		(this, butw * 16 / 5, 0, textw, h, buf, Align_Center);
@@ -149,6 +149,11 @@ SpinBox::SpinBox
 	set_font(UI_FONT_NAME, UI_FONT_SIZE_SMALL, UI_FONT_CLR_FG);
 }
 
+SpinBox::~SpinBox() {
+	delete sbi;
+	sbi = 0;
+}
+
 
 /**
  * private function - takes care about all updates in the UI elements
@@ -161,7 +166,7 @@ void SpinBox::update()
 		 ++i)
 		if (i.empty()) {
 			char buf[64];
-			snprintf(buf, sizeof(buf), "%i%s", sbi->value, sbi->unit.c_str());
+			snprintf(buf, sizeof(buf), "%i %s", sbi->value, sbi->unit.c_str());
 			sbi->text->set_text(buf);
 			break;
 		} else if (i.current->value == sbi->value) {
@@ -219,7 +224,7 @@ void SpinBox::setInterval(int32_t const min, int32_t const max)
 /**
  * manually sets the used unit to a given string
  */
-void SpinBox::setUnit(std::string const & unit)
+void SpinBox::setUnit(const std::string & unit)
 {
 	sbi->unit = unit;
 	update();
@@ -269,7 +274,7 @@ void SpinBox::setAlign(Align alignm)
  *
  * @deprecated, see set_textstyle
  */
-void SpinBox::set_font(std::string const & name, int32_t size, RGBColor color)
+void SpinBox::set_font(const std::string & name, int32_t size, RGBColor color)
 {
 	set_textstyle(TextStyle::makebold(Font::get(name, size), color));
 }
@@ -328,7 +333,7 @@ void SpinBox::remove_replacement(int32_t value)
 {
 	if (int32_t i = findReplacement(value) >= 0) {
 		char buf[64];
-		snprintf(buf, sizeof(buf), "%i%s", value, sbi->unit.c_str());
+		snprintf(buf, sizeof(buf), "%i %s", value, sbi->unit.c_str());
 		sbi->valrep[i].text = buf;
 	}
 }

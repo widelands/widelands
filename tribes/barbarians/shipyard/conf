@@ -1,0 +1,58 @@
+size=medium
+
+[aihints]
+build_material=false
+needs_water=true
+
+[buildcost]
+trunk=3
+blackwood=2
+raw_stone=3
+cloth=2
+
+[return_on_dismantle]
+trunk=1
+blackwood=1
+raw_stone=2
+
+[working positions]
+shipwright=1
+
+[inputs]
+blackwood=10
+trunk=2
+cloth=4
+
+[programs]
+ship=_Constructing ship
+work=_Work
+
+[work]
+sleep=20000
+call=ship
+
+[ship]
+check_map=seafaring
+construct=shipconstruction buildship 6
+animate=working 35000
+return=completed
+
+[idle]
+pics=work_??.png
+hotspot=62 48
+playercolor=true
+
+[build]
+pics=build_??.png
+hotspot=62 48
+playercolor=true
+
+[working]
+pics=work_??.png
+hotspot=62 48
+playercolor=true
+
+[unoccupied]
+pics=vacant_??.png
+hotspot=62 48
+playercolor=true

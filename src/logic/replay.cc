@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007-2009 by the Widelands Development Team
+ * Copyright (C) 2007-2009,2013 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -17,21 +17,20 @@
  *
  */
 
-#include "replay.h"
+#include "logic/replay.h"
 
-#include "game.h"
-#include "game_data_error.h"
 #include "game_io/game_loader.h"
 #include "gamecontroller.h"
 #include "io/filesystem/layered_filesystem.h"
+#include "io/streamwrite.h"
+#include "log.h"
+#include "logic/game.h"
+#include "logic/game_data_error.h"
+#include "logic/playercommand.h"
 #include "md5.h"
-#include "playercommand.h"
 #include "random.h"
 #include "save_handler.h"
-#include "io/streamwrite.h"
 #include "wexception.h"
-
-#include "log.h"
 
 namespace Widelands {
 
@@ -48,8 +47,9 @@ enum {
 #define SYNC_INTERVAL 200
 
 
-struct Cmd_ReplaySyncRead : public Command {
-	Cmd_ReplaySyncRead(uint32_t const _duetime, md5_checksum const & hash)
+class Cmd_ReplaySyncRead : public Command {
+public:
+	Cmd_ReplaySyncRead(const uint32_t _duetime, const md5_checksum & hash)
 		: Command(_duetime), m_hash(hash)
 	{}
 
@@ -57,7 +57,7 @@ struct Cmd_ReplaySyncRead : public Command {
 
 	void execute(Game & game)
 	{
-		md5_checksum const myhash = game.get_sync_hash();
+		const md5_checksum myhash = game.get_sync_hash();
 
 		if (m_hash != myhash) {
 			log
@@ -84,8 +84,7 @@ private:
 /**
  * Load the savegame part of the given replay and open the command log.
  */
-ReplayReader::ReplayReader(Game & game, std::string const & filename)
-	: m_game(game)
+ReplayReader::ReplayReader(Game & game, const std::string & filename)
 {
 	m_replaytime = 0;
 
@@ -98,7 +97,7 @@ ReplayReader::ReplayReader(Game & game, std::string const & filename)
 		static_cast<Widelands::StreamRead *>(g_fs->OpenStreamRead(filename));
 
 	try {
-		uint32_t const magic = m_cmdlog->Unsigned32();
+		const uint32_t magic = m_cmdlog->Unsigned32();
 		if (magic == 0x2E21A100)
 			// Note: This was never released as part of a build
 			throw wexception
@@ -109,7 +108,7 @@ ReplayReader::ReplayReader(Game & game, std::string const & filename)
 			throw wexception
 				("%s apparently not a valid replay file", filename.c_str());
 
-		uint8_t const version = m_cmdlog->Unsigned8();
+		const uint8_t version = m_cmdlog->Unsigned8();
 		if (version < REPLAY_VERSION)
 			throw wexception
 				("Replay of version %u is known to have desync problems", version);
@@ -141,7 +140,7 @@ ReplayReader::~ReplayReader()
  * \return a \ref Command that should be enqueued in the command queue
  * or 0 if there are no remaining commands before the given time.
  */
-Command * ReplayReader::GetNextCommand(uint32_t const time)
+Command * ReplayReader::GetNextCommand(const uint32_t time)
 {
 	if (!m_cmdlog)
 		return 0;
@@ -179,18 +178,18 @@ Command * ReplayReader::GetNextCommand(uint32_t const time)
 			delete m_cmdlog;
 			m_cmdlog = 0;
 			return 0;
-			break;
 		}
 
 		default:
 			throw wexception("Unknown packet %u", pkt);
 		}
-	} catch (_wexception const & e) {
+	} catch (const _wexception & e) {
 		log("REPLAY: Caught exception %s\n", e.what());
 		delete m_cmdlog;
 		m_cmdlog = 0;
-		return 0;
 	}
+
+	return 0;
 }
 
 
@@ -207,8 +206,9 @@ bool ReplayReader::EndOfReplay()
  * Command / timer that regularly inserts synchronization hashes into
  * the replay.
  */
-struct Cmd_ReplaySyncWrite : public Command {
-	Cmd_ReplaySyncWrite(uint32_t const _duetime) : Command(_duetime) {}
+class Cmd_ReplaySyncWrite : public Command {
+public:
+	Cmd_ReplaySyncWrite(const uint32_t _duetime) : Command(_duetime) {}
 
 	virtual uint8_t id() const {return QUEUE_CMD_REPLAYSYNCWRITE;}
 
@@ -229,7 +229,7 @@ struct Cmd_ReplaySyncWrite : public Command {
  * This is expected to be called just after game load has completed
  * and the game has changed into running state.
  */
-ReplayWriter::ReplayWriter(Game & game, std::string const & filename)
+ReplayWriter::ReplayWriter(Game & game, const std::string & filename)
 	: m_game(game), m_filename(filename)
 {
 	g_fs->EnsureDirectoryExists(REPLAY_DIR);
@@ -294,7 +294,7 @@ void ReplayWriter::SendPlayerCommand(PlayerCommand * cmd)
 /**
  * Store a synchronization hash for the current game time in the replay.
  */
-void ReplayWriter::SendSync(md5_checksum const & hash)
+void ReplayWriter::SendSync(const md5_checksum & hash)
 {
 	m_cmdlog->Unsigned8(pkt_syncreport);
 	m_cmdlog->Unsigned32(m_game.get_gametime());

@@ -9,6 +9,10 @@ trunk=2
 wood=2
 stone=3
 
+[return_on_dismantle]
+wood=1
+stone=2
+
 [working positions]
 baker=1
 
@@ -20,9 +24,9 @@ water=6
 work=_Work
 
 [work]
+sleep=15000
 return=skipped unless economy needs bread
 consume=flour water
-sleep=15000
 animate=working 15000
 produce=bread
 

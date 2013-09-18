@@ -26,7 +26,7 @@ end
 -- Append an objective text to a dialog box in a nice fashion.
 function new_objectives(...)
    local s = rt(
-   "<p font=FreeSerif font-size=18 font-weight=bold font-color=D1D1D1>"
+   "<p font=DejaVuSerif font-size=18 font-weight=bold font-color=D1D1D1>"
    .. _"New Objectives" .. "</p>")
 
    for idx,obj in ipairs{...} do
@@ -110,8 +110,8 @@ tool smithy.<br><br>
 - Build a mine of each kind. Make sure to send geologists to the mountain first.<br>
 - Build a smelting works.<br>
 - Build an armor smithy and a weapon smithy.<br>
-- Build a tool smithy.<br>
-]])
+- Build a tool smithy.<br>]]
+ )
 }
 
 obj_make_training_buildings = {
@@ -483,8 +483,7 @@ foe? And why is the building burned down? Has this island seen war? Is a
 war being waged on it right now?<br><br>
 We must improve our military capabilities. If there are foes on the island, we
 have to be prepared when we meet them. We should also enforce the fortification
-of our borders.
-]]
+of our borders.]]
    )
 }
 }
@@ -541,8 +540,8 @@ escape?]]
 [[May Satul warm you, Jundlina. My name is Ostur and I construct ships. I have
 invented a new kind of ship: smaller than those we are used to, but much
 sturdier. If we build them correctly, I am confident that we can go with them
-a much longer distance and maybe escape from Lutas' influence.
-]])
+a much longer distance and maybe escape from Lutas' influence.]]
+ )
 },
 {
    title = _ "Jundlina replies",

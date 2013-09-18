@@ -19,11 +19,11 @@
 
 #include "journal.h"
 
-#include "log.h"
-#include "io/filesystem/filesystem.h"
-#include "machdep.h"
-
 #include <cassert>
+
+#include "io/filesystem/filesystem.h"
+#include "log.h"
+#include "machdep.h"
 
 /**
  * Write a signed 8bit value to the recording file.
@@ -74,10 +74,7 @@ void Journal::write(uint32_t v) {
 /// \sa read(SDLMod &v)
 void Journal::write(SDLKey v)
 {
-	Uint32 vv;
-
-	vv = Little32(static_cast<Uint32>(v));
-	m_recordstream.write(reinterpret_cast<char *>(&v), sizeof(v));
+	write(static_cast<uint32_t>(v));
 }
 
 /**
@@ -86,10 +83,7 @@ void Journal::write(SDLKey v)
  */
 void Journal::write(SDLMod v)
 {
-	Uint32 vv;
-
-	vv = Little32(static_cast<Uint32>(v));
-	m_recordstream.write(reinterpret_cast<char *>(&v), sizeof(v));
+	write(static_cast<uint32_t>(v));
 }
 
 /**
@@ -147,13 +141,9 @@ void Journal::read(uint32_t & v) {
  */
 void Journal::read(SDLKey & v)
 {
-	//Look at read(SDLKey v) before changing code here!
-	//Additional reminder: SDLKey is an enum which are signed int32_t !
-
-	Uint32 vv;
-
-	m_playbackstream.read(reinterpret_cast<char *>(&vv), sizeof(Uint32));
-	v = static_cast<SDLKey>(Little32(vv));
+	uint32_t x;
+	read(x);
+	v = static_cast<SDLKey>(x);
 }
 
 /**
@@ -162,13 +152,9 @@ void Journal::read(SDLKey & v)
  */
 void Journal::read(SDLMod & v)
 {
-	//Look at read(SDLMod v) before changing code here!
-	//Additional reminder: SDLKey is an enum which are signed int32_t !
-
-	Uint32 vv;
-
-	m_playbackstream.read(reinterpret_cast<char *>(&vv), sizeof(Uint32));
-	v = static_cast<SDLMod>(Little32(vv));
+	uint32_t x;
+	read(x);
+	v = static_cast<SDLMod>(x);
 }
 
 /**
@@ -213,7 +199,7 @@ Journal::~Journal()
  * \param filename File the events should be written to
  * \todo set the filename somewhere else
  */
-void Journal::start_recording(std::string const & filename)
+void Journal::start_recording(const std::string & filename)
 {
 	assert(!m_recordstream.is_open());
 
@@ -230,7 +216,7 @@ void Journal::start_recording(std::string const & filename)
 		m_record = true;
 		log("Recording into %s\n", m_recordname.c_str());
 	}
-	catch (std::ofstream::failure e) {
+	catch (std::ofstream::failure &) {
 		//TODO: use exception mask to find out what happened
 		//TODO: there should be a messagebox to tell the user.
 		log
@@ -261,7 +247,7 @@ void Journal::stop_recording()
  * \param filename File to get events from
  * \todo set the filename somewhere else
  */
-void Journal::start_playback(std::string const & filename)
+void Journal::start_playback(const std::string & filename)
 {
 	assert(!m_playbackstream.is_open());
 
@@ -280,7 +266,7 @@ void Journal::start_playback(std::string const & filename)
 		m_playback = true;
 		log("Playing back from %s\n", m_playbackname.c_str());
 	}
-	catch (std::ifstream::failure e) {
+	catch (std::ifstream::failure &) {
 		//TODO: use exception mask to find out what happened
 		//TODO: there should be a messagebox to tell the user.
 		log
@@ -311,7 +297,7 @@ void Journal::stop_playback()
  *
  * \param e The event to be recorded
  */
-void Journal::record_event(SDL_Event const & e)
+void Journal::record_event(const SDL_Event & e)
 {
 	if (!m_record)
 		return;
@@ -378,7 +364,7 @@ void Journal::record_event(SDL_Event const & e)
 			break;
 		}
 	}
-	catch (std::ofstream::failure const &) {
+	catch (const std::ofstream::failure &) {
 		//TODO: use exception mask to find out what happened
 		//TODO: there should be a messagebox to tell the user.
 		log("Failed to write to record file. Recording deactivated.\n");
@@ -399,9 +385,9 @@ bool Journal::read_event(SDL_Event & e)
 	if (!m_playback)
 		return false;
 
-	try {
-		bool haveevent = false;
+	bool haveevent = false;
 
+	try {
 		uint8_t recordtype;
 		read(recordtype);
 		switch (recordtype) {
@@ -459,15 +445,15 @@ bool Journal::read_event(SDL_Event & e)
 			throw BadRecord_error(m_playbackname, recordtype, RFC_INVALID);
 			break;
 		}
-
-		return haveevent;
-	} catch (std::ifstream::failure const &) {
+	} catch (const std::ifstream::failure &) {
 		//TODO: use exception mask to find out what happened
 		//TODO: there should be a messagebox to tell the user.
 		log("Failed to read from journal file. Playback deactivated.\n");
 		stop_playback();
 		throw Journalfile_error(m_playbackname);
 	}
+
+	return haveevent;
 }
 
 /**

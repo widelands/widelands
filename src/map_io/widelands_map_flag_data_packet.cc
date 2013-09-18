@@ -17,19 +17,19 @@
  *
  */
 
-#include "widelands_map_flag_data_packet.h"
+#include "map_io/widelands_map_flag_data_packet.h"
+
+#include <map>
 
 #include "economy/flag.h"
 #include "logic/game.h"
 #include "logic/map.h"
 #include "logic/player.h"
-#include "upcast.h"
 #include "logic/widelands_fileread.h"
 #include "logic/widelands_filewrite.h"
-#include "widelands_map_map_object_loader.h"
-#include "widelands_map_map_object_saver.h"
-
-#include <map>
+#include "map_io/widelands_map_map_object_loader.h"
+#include "map_io/widelands_map_map_object_saver.h"
+#include "upcast.h"
 
 namespace Widelands {
 
@@ -52,7 +52,7 @@ throw (_wexception)
 	try {
 		uint16_t const packet_version = fr.Unsigned16();
 		if (packet_version == CURRENT_PACKET_VERSION) {
-			Map const & map = egbase.map();
+			const Map & map = egbase.map();
 			Player_Number const nr_players = map.get_nrplayers();
 			Widelands::Extent const extent = map.extent();
 			iterate_Map_FCoords(map, extent, fc)
@@ -87,7 +87,7 @@ throw (_wexception)
 								if (upcast(Flag const, nf, n.field->get_immovable()))
 									throw game_data_error
 										(_("has a flag (%u)"), nf->serial());
-							} catch (_wexception const & e) {
+							} catch (const _wexception & e) {
 								throw game_data_error
 									(_("neighbour node (%i, %i): %s"),
 									 n.x, n.y, e.what());
@@ -107,7 +107,7 @@ throw (_wexception)
 							 	(ref_cast<Game, Editor_Game_Base>(egbase),
 							 	 egbase.player(owner),
 							 	 fc));
-					} catch (_wexception const & e) {
+					} catch (const _wexception & e) {
 						throw game_data_error
 							("%u (at (%i, %i), owned by player %u): %s",
 							 serial, fc.x, fc.y, owner, e.what());
@@ -116,7 +116,7 @@ throw (_wexception)
 		} else
 			throw game_data_error
 				(_("unknown/unhandled version %u"), packet_version);
-	} catch (_wexception const & e) {
+	} catch (const _wexception & e) {
 		throw game_data_error(_("flags: %s"), e.what());
 	}
 }
@@ -132,8 +132,8 @@ throw (_wexception)
 
 	//  Write flags and owner, register this with the map_object_saver so that
 	//  it's data can be saved later.
-	Map   const & map        = egbase.map();
-	Field const & fields_end = map[map.max_index()];
+	const Map   & map        = egbase.map();
+	const Field & fields_end = map[map.max_index()];
 	for (Field const * field = &map[0]; field < &fields_end; ++field)
 		//  we only write flags, so the upcast is safe
 		if (upcast(Flag const, flag, field->get_immovable())) {

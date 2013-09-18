@@ -20,19 +20,19 @@
 #ifndef SOUND_HANDLER_H
 #define SOUND_HANDLER_H
 
-#include "io/fileread.h"
-#include "fxset.h"
-#include "logic/widelands_geometry.h"
-#include "random.h"
-
+#include <cstring>
 #include <map>
 #include <string>
-#include <cstring>
 #include <vector>
 
 #ifndef _MSC_VER
 #include <unistd.h>
 #endif
+
+#include "sound/fxset.h"
+#include "io/fileread.h"
+#include "logic/widelands_geometry.h"
+#include "random.h"
 
 namespace Widelands {struct Editor_Game_Base;}
 struct Songset;
@@ -176,27 +176,28 @@ public:
 	void read_config();
 	void load_system_sounds();
 
-	void load_fx
-		(std::string const & dir,
-		 std::string const & basename,
+	void load_fx_if_needed
+		(const std::string & dir,
+		 const std::string & filename,
+		 const std::string & fx_name,
 		 bool                recursive = false);
 	void play_fx
-		(std::string const & fx_name,
+		(const std::string & fx_name,
 		 Widelands::Coords   map_position,
 		 uint8_t             priority = PRIO_ALLOW_MULTIPLE + PRIO_MEDIUM);
 	void play_fx
-		(std::string const & fx_name,
+		(const std::string & fx_name,
 		 int32_t             stereo_position,
 		 uint8_t             priority = PRIO_ALLOW_MULTIPLE + PRIO_MEDIUM);
 
 	void register_song
-		(std::string const & dir,
-		 std::string const & basename,
+		(const std::string & dir,
+		 const std::string & basename,
 		 bool                recursive = false);
-	void start_music(std::string const & songset_name, int32_t fadein_ms = 0);
+	void start_music(const std::string & songset_name, int32_t fadein_ms = 0);
 	void stop_music(int32_t fadeout_ms = 0);
 	void change_music
-		(std::string const & songset_name = std::string(),
+		(const std::string & songset_name = std::string(),
 		 int32_t             fadeout_ms   = 0,
 		 int32_t             fadein_ms    = 0);
 
@@ -240,10 +241,10 @@ public:
 
 protected:
 	Mix_Chunk * RWopsify_MixLoadWAV(FileRead &);
-	void load_one_fx(const char * filename, std::string const & fx_name);
+	void load_one_fx(const char * filename, const std::string & fx_name);
 	int32_t stereo_position(Widelands::Coords position);
 	bool play_or_not
-		(std::string const & fx_name,
+		(const std::string & fx_name,
 		 int32_t             stereo_position,
 		 uint8_t             priority);
 

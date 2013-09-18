@@ -20,17 +20,35 @@
 #ifndef LOG_H
 #define LOG_H
 
+#include <iostream>
+
 #ifdef __GNUC__
 #define PRINTF_FORMAT(b, c) __attribute__ ((__format__ (__printf__, b, c)))
 #else
 #define PRINTF_FORMAT(b, c)
 #endif
 
-// Informational messages that can aid in debugging
-#define ALIVE() log("Alive in %s line %i\n", __FILE__, __LINE__)
+// printf macros for size_t, in the style of inttypes.h
+#ifdef _LP64
+#define __PRIS_PREFIX "z"
+#else
+#define __PRIS_PREFIX
+#endif
+
+// Use these macros after a % in a printf format string
+// to get correct 32/64 bit behavior, like this:
+// size_t size = records.size();
+// printf("%" PRIuS "\n", size);
+
+#define PRIdS __PRIS_PREFIX "d"
+#define PRIxS __PRIS_PREFIX "x"
+#define PRIuS __PRIS_PREFIX "u"
+#define PRIXS __PRIS_PREFIX "X"
+#define PRIoS __PRIS_PREFIX "o"
 
 // Print a formatted log messages to wout.
 // wout is either std::cout or specified logfile.
+extern std::ostream & wout;
 void log(const char *, ...) PRINTF_FORMAT(1, 2);
 
 extern bool g_verbose;

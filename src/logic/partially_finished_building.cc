@@ -17,24 +17,22 @@
  *
  */
 
-#include "upcast.h"
+#include "logic/partially_finished_building.h"
 
 #include "economy/request.h"
 #include "economy/wares_queue.h"
+#include "logic/game.h"
+#include "logic/player.h"
+#include "logic/tribe.h"
+#include "logic/worker.h"
 #include "sound/sound_handler.h"
-
-#include "game.h"
-#include "player.h"
-#include "tribe.h"
-#include "worker.h"
-
-#include "partially_finished_building.h"
+#include "upcast.h"
 
 namespace Widelands {
 
 Partially_Finished_Building::Partially_Finished_Building
-	(const Building_Descr & descr) :
-Building         (descr),
+	(const Building_Descr & gdescr) :
+Building         (gdescr),
 m_building       (0),
 m_builder_request(0),
 m_working        (false),
@@ -75,7 +73,7 @@ void Partially_Finished_Building::init(Editor_Game_Base & egbase) {
 	if (upcast(Game, game, &egbase))
 		request_builder(*game);
 
-	g_sound_handler.play_fx("create_construction_site", m_position, 255);
+	g_sound_handler.play_fx("sound/create_construction_site", m_position, 255);
 }
 
 /*
@@ -135,8 +133,8 @@ bulldoze them.
 uint32_t Partially_Finished_Building::get_playercaps() const throw () {
 	uint32_t caps = Building::get_playercaps();
 
-	caps |= 1 << PCap_Bulldoze;
-	caps &= ~(1 << PCap_Dismantle);
+	caps |= PCap_Bulldoze;
+	caps &= ~PCap_Dismantle;
 
 	return caps;
 }

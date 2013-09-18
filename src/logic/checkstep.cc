@@ -17,12 +17,12 @@
  *
  */
 
-#include "checkstep.h"
+#include "logic/checkstep.h"
 
-#include "map.h"
-#include "player.h"
 #include "economy/flag.h"
 #include "economy/road.h"
+#include "logic/map.h"
+#include "logic/player.h"
 
 namespace Widelands {
 
@@ -38,22 +38,22 @@ CheckStep::CheckStep()
 
 struct CheckStepAlwaysFalse {
 	bool allowed
-		(Map &, FCoords const &, FCoords const &, int32_t, CheckStep::StepId)
+		(Map &, const FCoords &, const FCoords &, int32_t, CheckStep::StepId)
 		const
 	{
 		return false;
 	}
-	bool reachabledest(Map &, FCoords const &) const {return false;}
+	bool reachabledest(Map &, const FCoords &) const {return false;}
 };
 
-CheckStep const & CheckStep::alwaysfalse()
+const CheckStep & CheckStep::alwaysfalse()
 {
 	static const CheckStep cstep = CheckStep(CheckStepAlwaysFalse());
 	return cstep;
 }
 
 
-void CheckStepAnd::add(CheckStep const & sub)
+void CheckStepAnd::add(const CheckStep & sub)
 {
 	subs.push_back(sub);
 }
@@ -185,7 +185,7 @@ bool CheckStepRoad::allowed
 			return
 				dynamic_cast<Flag const *>(imm)
 				or
-				(dynamic_cast<Road const *>(imm) and endcaps & BUILDCAPS_FLAG);
+				(dynamic_cast<Road const *>(imm) and (endcaps & BUILDCAPS_FLAG));
 		}
 
 	return true;

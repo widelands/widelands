@@ -20,7 +20,7 @@
 #ifndef CARRIER_H
 #define CARRIER_H
 
-#include "worker.h"
+#include "logic/worker.h"
 
 namespace Widelands {
 
@@ -33,8 +33,8 @@ struct Carrier : public Worker {
 	struct Descr : public Worker_Descr {
 		Descr
 			(char const * const _name, char const * const _descname,
-			 std::string const & directory, Profile & prof, Section & global_s,
-			 Tribe_Descr const & _tribe)
+			 const std::string & directory, Profile & prof, Section & global_s,
+			 const Tribe_Descr & _tribe)
 			:
 				Worker_Descr
 					(_name, _descname, directory,
@@ -49,7 +49,7 @@ struct Carrier : public Worker {
 
 
 	Carrier(const Descr & carrier_descr)
-		: Worker(carrier_descr), m_acked_ware(-1)
+		: Worker(carrier_descr), m_promised_pickup_to(-1)
 	{}
 	virtual ~Carrier() {};
 
@@ -60,7 +60,7 @@ struct Carrier : public Worker {
 	void start_task_transport(Game &, int32_t fromflag);
 	bool start_task_walktoflag(Game &, int32_t flag, bool offset = false);
 
-	virtual void log_general_info(Editor_Game_Base const &);
+	virtual void log_general_info(const Editor_Game_Base &);
 
 private:
 	MO_DESCR(Descr);
@@ -70,6 +70,7 @@ private:
 
 	// internal task stuff
 	void road_update        (Game &, State &);
+	void road_pop           (Game &, State &);
 	void transport_update   (Game &, State &);
 
 	static Task const taskRoad;
@@ -82,11 +83,15 @@ private:
 	bool swap_or_wait       (Game &, State &);
 
 	/// -1: no ware acked; 0/1: acked ware for start/end flag of road
-	int32_t m_acked_ware;
+	// This should be an enum, but this clutters the code with too many casts
+	static const int32_t NOONE = -1;
+	static const int32_t START_FLAG = 0;
+	static const int32_t END_FLAG = 1;
+	int32_t m_promised_pickup_to;
 
 	// saving and loading
 protected:
-	class Loader : public Worker::Loader {
+	struct Loader : public Worker::Loader {
 	public:
 		Loader();
 

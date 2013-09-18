@@ -1,12 +1,17 @@
 size=medium
 buildable=no
 enhanced_building=yes
+output=ration
 output=meal
 
-[buildcost]
+[enhancement_cost]
 wood=2
 marble=2
 marblecolumn=1
+
+[return_on_dismantle_on_enhanced]
+wood=1
+marble=2
 
 [working positions]
 innkeeper=1
@@ -17,19 +22,33 @@ bread=6
 meat=6
 
 [programs]
+produce_ration=_Produce ration
+produce_meal=_Produce meal
 work=_Work
 
-[work]
+[produce_ration]
+return=skipped unless economy needs ration
+consume=bread,fish,meat
+sleep=14000
+animate=working 19000
+produce=ration
+
+[produce_meal]
 return=skipped unless economy needs meal
 consume=bread fish,meat
 sleep=15000
 animate=working 20000
 produce=meal
 
+[work]
+call=produce_ration
+call=produce_meal
+return=skipped
+
 [idle]
 pics=inn_i_??.png  # ???
-hotspot=73 75
+hotspot=52 75
 
 [working]
 pics=inn_i_??.png  # ???
-hotspot=73 75
+hotspot=52 75

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2003, 2006-2011 by the Widelands Development Team
+ * Copyright (C) 2002-2003, 2006-2013 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,18 +20,18 @@
 #ifndef INTERACTIVE_GAMEBASE_H
 #define INTERACTIVE_GAMEBASE_H
 
-#include "interactive_base.h"
+#include "wui/general_statistics_menu.h"
+#include "wui/interactive_base.h"
 #include "logic/game.h"
-#include "graphic/graphic.h"
-#include "general_statistics_menu.h"
 
-struct ChatOverlay;
 struct ChatProvider;
 
 enum PlayerType {NONE, OBSERVER, PLAYING, VICTORIOUS, DEFEATED};
 
-struct Interactive_GameBase : public Interactive_Base {
-	struct Game_Main_Menu_Windows {
+class Interactive_GameBase : public Interactive_Base {
+public:
+	class Game_Main_Menu_Windows {
+	public:
 		UI::UniqueWindow::Registry loadgame;
 		UI::UniqueWindow::Registry savegame;
 		UI::UniqueWindow::Registry readme;
@@ -50,7 +50,8 @@ struct Interactive_GameBase : public Interactive_Base {
 		(Widelands::Game &,
 		 Section         & global_s,
 		 PlayerType        pt          = NONE,
-		 bool              chatenabled = false);
+		 bool              chatenabled = false,
+		 bool              multiplayer = false);
 	Widelands::Game * get_game() const;
 	Widelands::Game &     game() const;
 
@@ -58,17 +59,14 @@ struct Interactive_GameBase : public Interactive_Base {
 	void set_chat_provider(ChatProvider &);
 	ChatProvider * get_chat_provider();
 
-	std::string const & building_census_format      () const {
+	const std::string & building_census_format      () const {
 		return m_building_census_format;
 	}
-	std::string const & building_statistics_format  () const {
+	const std::string & building_statistics_format  () const {
 		return m_building_statistics_format;
 	}
-	std::string const & building_tooltip_format     () const {
+	const std::string & building_tooltip_format     () const {
 		return m_building_tooltip_format;
-	}
-	std::string const & building_window_title_format() const {
-		return m_building_window_title_format;
 	}
 
 	virtual bool can_see(Widelands::Player_Number) const = 0;
@@ -80,19 +78,22 @@ struct Interactive_GameBase : public Interactive_Base {
 	void set_playertype(const PlayerType & pt) {m_playertype = pt;}
 
 	bool try_show_ship_window();
+	bool is_multiplayer() {return m_multiplayer;}
+
+	void show_game_summary();
 
 protected:
 	Game_Main_Menu_Windows m_mainm_windows;
 	ChatProvider           * m_chatProvider;
-	ChatOverlay            * m_chatOverlay;
 	std::string              m_building_census_format;
 	std::string              m_building_statistics_format;
 	std::string              m_building_tooltip_format;
-	std::string              m_building_window_title_format;
 	bool                     m_chatenabled;
+	bool                     m_multiplayer;
 
 	PlayerType m_playertype;
 	UI::UniqueWindow::Registry m_fieldaction;
+	UI::UniqueWindow::Registry m_game_summary;
 };
 
 #endif

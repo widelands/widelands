@@ -21,10 +21,9 @@
 #define UI_MULTILINE_TEXTAREA_H
 
 #include "align.h"
-#include "panel.h"
-#include "scrollbar.h"
-
-#include <boost/scoped_ptr.hpp>
+#include "ui_basic/panel.h"
+#include "rgbcolor.h"
+#include "ui_basic/scrollbar.h"
 
 namespace UI {
 struct Scrollbar;
@@ -47,11 +46,10 @@ struct Multiline_Textarea : public Panel {
 		 const bool always_show_scrollbar = false);
 	~Multiline_Textarea();
 
-	std::string const & get_text() const {return m_text;}
+	const std::string & get_text() const {return m_text;}
 	ScrollMode get_scrollmode() const {return m_scrollmode;}
 
-	void set_text(std::string const &);
-	void set_align(Align);
+	void set_text(const std::string &);
 	void set_scrollmode(ScrollMode mode);
 
 	void set_font(std::string name, int32_t size, RGBColor fg);
@@ -73,7 +71,7 @@ struct Multiline_Textarea : public Panel {
 private:
 	struct Impl;
 
-	boost::scoped_ptr<Impl> m;
+	std::unique_ptr<Impl> m;
 
 	void recompute();
 	void scrollpos_changed(int32_t pixels);

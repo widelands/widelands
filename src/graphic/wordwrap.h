@@ -21,11 +21,11 @@
 
 #include <string>
 
-#include "font.h"
+#include "align.h"
+#include "graphic/font.h"
 #include "point.h"
-#include "ui_basic/align.h"
 
-struct RenderTarget;
+class RenderTarget;
 
 namespace UI {
 

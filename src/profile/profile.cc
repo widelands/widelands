@@ -17,17 +17,7 @@
  *
  */
 
-#include "profile.h"
-
-#include "build_info.h"
-#include "io/fileread.h"
-#include "io/filewrite.h"
-#include "i18n.h"
-#include "logic/player.h"
-#include "logic/tribe.h"
-#include "wexception.h"
-
-#include "log.h"
+#include "profile/profile.h"
 
 #include <cctype>
 #include <cstdarg>
@@ -35,6 +25,15 @@
 #include <cstring>
 #include <limits>
 #include <string>
+
+#include "build_info.h"
+#include "i18n.h"
+#include "io/fileread.h"
+#include "io/filewrite.h"
+#include "log.h"
+#include "logic/player.h"
+#include "logic/tribe.h"
+#include "wexception.h"
 
 #define TRUE_WORDS 4
 char const * trueWords[TRUE_WORDS] =
@@ -60,7 +59,7 @@ Section::Value::Value(const char * const nname, const char * const nval) :
 	m_used(false), m_name(strdup(nname)), m_value(strdup(nval))
 {}
 
-Section::Value::Value(Section::Value const & o) :
+Section::Value::Value(const Section::Value & o) :
 m_used(o.m_used), m_name(strdup(o.m_name)), m_value(strdup(o.m_value)) {}
 
 Section::Value::~Value()
@@ -69,7 +68,7 @@ Section::Value::~Value()
 	free(m_value);
 }
 
-Section::Value & Section::Value::operator= (Section::Value const & o)
+Section::Value & Section::Value::operator= (const Section::Value & o)
 {
 	if (this != &o) {
 		free(m_name);
@@ -205,7 +204,7 @@ Section::Section(const Section & o) :
 
 Section::~Section() {free(m_section_name);}
 
-Section & Section::operator= (Section const & o) {
+Section & Section::operator= (const Section & o) {
 	if (this != &o) {
 		free(m_section_name);
 
@@ -271,7 +270,6 @@ Section::Value * Section::get_val(char const * const name)
 			i.current->mark_used();
 			return &*i.current;
 		}
-
 	return 0;
 }
 
@@ -385,13 +383,13 @@ Widelands::Coords Section::get_safe_Coords
 }
 
 
-Widelands::Immovable_Descr const & Section::get_safe_Immovable_Type
+const Widelands::Immovable_Descr & Section::get_safe_Immovable_Type
 	(char const * tribe, char const * name,
 	 Widelands::Editor_Game_Base & egbase)
 {
 	char const * const immname = get_safe_string(name);
 	if (char const * const tribename = get_string(tribe, 0)) {
-		Widelands::Tribe_Descr const & tridescr =
+		const Widelands::Tribe_Descr & tridescr =
 			egbase.manually_load_tribe(tribename);
 		if
 			(Widelands::Immovable_Descr const * const result =
@@ -402,7 +400,7 @@ Widelands::Immovable_Descr const & Section::get_safe_Immovable_Type
 				("tribe %s does not define immovable type \"%s\"",
 				 tribename,        immname);
 	} else {
-		Widelands::World       const & world    =
+		const Widelands::World       & world    =
 			egbase.map().world();
 		if
 			(Widelands::Immovable_Descr const * const result =
@@ -422,7 +420,7 @@ Widelands::Building_Index Section::get_safe_Building_Index
 	 Widelands::Editor_Game_Base &       egbase,
 	 Widelands::Player_Number      const player)
 {
-	Widelands::Tribe_Descr const & tribe = egbase.manually_load_tribe(player);
+	const Widelands::Tribe_Descr & tribe = egbase.manually_load_tribe(player);
 	char const * const b = get_safe_string(name);
 	if (Widelands::Building_Index const idx = tribe.building_index(b))
 		return idx;
@@ -433,12 +431,12 @@ Widelands::Building_Index Section::get_safe_Building_Index
 }
 
 
-Widelands::Building_Descr const & Section::get_safe_Building_Type
+const Widelands::Building_Descr & Section::get_safe_Building_Type
 	(char const * const name,
 	 Widelands::Editor_Game_Base &       egbase,
 	 Widelands::Player_Number      const player)
 {
-	Widelands::Tribe_Descr const & tribe = egbase.manually_load_tribe(player);
+	const Widelands::Tribe_Descr & tribe = egbase.manually_load_tribe(player);
 	char const * const b = get_safe_string(name);
 	if
 		(Widelands::Building_Descr const * const result =
@@ -468,10 +466,11 @@ int32_t Section::get_int(char const * const name, int32_t const def)
 
 	try {
 		return v->get_int();
-	} catch (std::exception const & e) {
+	} catch (const std::exception & e) {
 		m_profile->error("%s", e.what());
-		return def;
 	}
+
+	return def;
 }
 
 
@@ -480,7 +479,7 @@ uint32_t Section::get_natural(char const * const name, uint32_t const def)
 	if (Value * const v = get_val(name))
 		try {
 			return v->get_natural();
-		} catch (std::exception const & e) {
+		} catch (const std::exception & e) {
 			m_profile->error("%s", e.what());
 			return def;
 		}
@@ -492,16 +491,16 @@ uint32_t Section::get_natural(char const * const name, uint32_t const def)
 
 uint32_t Section::get_positive(char const * const name, uint32_t const def)
 {
-	if (Value * const v = get_val(name))
+	if (Value * const v = get_val(name)) {
 		try {
 			return v->get_positive();
-		} catch (std::exception const & e) {
+		} catch (const std::exception & e) {
 			m_profile->error("%s", e.what());
 			return def;
 		}
-	else
-		return def;
+	}
 
+	return def;
 }
 
 
@@ -522,10 +521,11 @@ bool Section::get_bool(char const * const name, bool const def)
 
 	try {
 		return v->get_bool();
-	} catch (std::exception const & e) {
+	} catch (const std::exception & e) {
 		m_profile->error("%s", e.what());
-		return def;
 	}
+
+	return def;
 }
 
 /**
@@ -636,7 +636,7 @@ void Section::set_Coords
 
 void Section::set_Immovable_Type
 	(char const * const tribe, char const * const name,
-	 Widelands::Immovable_Descr const & descr)
+	 const Widelands::Immovable_Descr & descr)
 {
 	if (Widelands::Tribe_Descr const * const tridescr = descr.get_owner_tribe())
 		set_string(tribe, tridescr->name());
@@ -865,7 +865,7 @@ void Profile::read
 
 		bool reading_multiline = 0;
 		std::string data;
-		char * key;
+		char * key = nullptr;
 		bool translate_line = false;
 		while (char * line = fr.ReadLine()) {
 			++linenr;
@@ -971,12 +971,12 @@ void Profile::read
 			}
 		}
 	}
-	catch (FileNotFound_error const & e) {
+	catch (const FileNotFound_error &) {
 		//It's no problem if the config file does not exist. (It'll get
 		//written on exit anyway)
 		log("There's no configuration file, using default values.\n");
 	}
-	catch (std::exception const & e) {
+	catch (const std::exception & e) {
 		error("%s:%u: %s", filename, linenr, e.what());
 	}
 
@@ -1043,6 +1043,7 @@ void Profile::write
 						break;
 					default:
 						tempstr += *it;
+						break;
 					}
 
 				if (multiline)

@@ -20,15 +20,15 @@
 #ifndef HELPER_H
 #define HELPER_H
 
-#include "wexception.h"
-
-#include <SDL_keyboard.h>
-
 #include <cassert>
 #include <cstring>
 #include <sstream>
 #include <string>
 #include <vector>
+
+#include <SDL_keyboard.h>
+
+#include "wexception.h"
 
 /// Matches the string that candidate points to against the string that
 /// template points to. Stops at when reaching a null character or the
@@ -117,6 +117,8 @@ inline bool match_force_skip(char * & candidate, char const * pattern) {
 			return true;
 		} else if (*p != *pattern)
 			return false;
+
+	return false;
 }
 
 /**
@@ -126,7 +128,7 @@ inline bool match_force_skip(char * & candidate, char const * pattern) {
  *    Programming_Languages/Cplusplus/Q_20670737.html
  * \author AssafLavie on http://www.experts-exchange.com
  */
-template<typename T> T stringTo(std::string const & s) {
+template<typename T> T stringTo(const std::string & s) {
 	std::istringstream iss(s);
 	T x;
 	iss >> x;
@@ -143,17 +145,20 @@ template<typename T> T stringTo(std::string const & s) {
  * Programming_Languages/Cplusplus/Q_20670737.html
  * \author AssafLavie on http://www.experts-exchange.com
  */
-template<typename T> std::string toString(T const & x) {
+template<typename T> std::string toString(const T & x) {
 	std::ostringstream oss;
 	oss << x;
 	return oss.str();
 }
 
 std::vector<std::string> split_string
-	(std::string const &, char const * separators);
+	(const std::string &, char const * separators);
 void remove_spaces(std::string &);
 void log(char * const fmt, ...);
 
 bool is_printable(SDL_keysym k);
+
+/// Generate a random string of given size out of the given alphabet.
+std::string random_string(const std::string& chars, int nlen);
 
 #endif

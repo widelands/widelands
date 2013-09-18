@@ -20,8 +20,9 @@
 #ifndef JOURNAL_EXCEPTIONS_H
 #define JOURNAL_EXCEPTIONS_H
 
-#include <stdint.h>
 #include <stdexcept>
+
+#include <stdint.h>
 
 ///
 /// Thrown for IO-errors occurring with a journal file (unable to open file
@@ -36,7 +37,7 @@
 /// Replace with File*_error where appropriate, migrate from runtime_error to
 /// logic_error (?)
 struct Journalfile_error : public std::runtime_error {
-	explicit Journalfile_error(std::string const & filename) throw ();
+	explicit Journalfile_error(const std::string & filename) throw ();
 	virtual ~Journalfile_error() throw () {}
 
 	virtual char const * what() const throw () {return text.c_str();}
@@ -50,7 +51,7 @@ struct Journalfile_error : public std::runtime_error {
  * \todo add offset into journal file
  */
 struct BadMagic_error : public Journalfile_error {
-	explicit BadMagic_error(std::string const & filename) throw ();
+	explicit BadMagic_error(const std::string & filename) throw ();
 	virtual ~BadMagic_error() throw () {}
 };
 
@@ -60,7 +61,7 @@ struct BadMagic_error : public Journalfile_error {
  */
 struct BadRecord_error : public Journalfile_error {
 	explicit BadRecord_error
-		(std::string const & filename,
+		(const std::string & filename,
 		 const uint8_t     code,
 		 const uint8_t     expectedcode)
 		throw ();
@@ -77,7 +78,7 @@ struct BadRecord_error : public Journalfile_error {
  * \todo add offset into journal file
  */
 struct BadEvent_error : public Journalfile_error {
-	explicit BadEvent_error(std::string const & filename, uint8_t const type)
+	explicit BadEvent_error(const std::string & filename, uint8_t const type)
 		throw ();
 	virtual ~BadEvent_error() throw () {}
 

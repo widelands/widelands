@@ -17,13 +17,26 @@
  *
  */
 
-#include "songset.h"
+#include "sound/songset.h"
+
+#include <utility>
 
 #include "io/fileread.h"
 #include "io/filesystem/layered_filesystem.h"
-#include "sound_handler.h"
-
 #include "log.h"
+#include "sound/sound_handler.h"
+
+namespace {
+	// The behaviour of whether SDL_Mixer frees the RW it uses was changed with SDL_Mixer version 1.2.12, this
+	// check is so that we don't have a memory leak in the new version.
+	// TODO: Once we can demand that everyone use SDL_Mixer version >= 1.2.12, this function should be removed,
+	// and all usages replaced supposing it's true.
+	bool have_to_free_rw() {
+		return
+			SDL_VERSIONNUM(SDL_MIXER_MAJOR_VERSION, SDL_MIXER_MINOR_VERSION, SDL_MIXER_PATCHLEVEL) >=
+			SDL_VERSIONNUM(1, 2, 12);
+	}
+}
 
 /// Prepare infrastructure for reading song files from disk
 Songset::Songset() : m_m(0), m_rwops(0) {}
@@ -35,6 +48,12 @@ Songset::~Songset()
 
 	if (m_m)
 		Mix_FreeMusic(m_m);
+
+	if (m_rwops) {
+		if (have_to_free_rw())
+			SDL_FreeRW(m_rwops);
+		m_fr.Close();
+	}
 }
 
 /** Append a song to the end of the songset
@@ -43,7 +62,7 @@ Songset::~Songset()
  * first song. If you do not want to disturb the (linear) playback order then
  * \ref register_song() all songs before you start playing
  */
-void Songset::add_song(std::string const & filename) {
+void Songset::add_song(const std::string & filename) {
 	m_songs.push_back(filename);
 	m_current_song = m_songs.begin();
 }
@@ -73,16 +92,28 @@ Mix_Music * Songset::get_song()
 	//first, close the previous song and remove it from memory
 	if (m_m) {
 		Mix_FreeMusic(m_m);
+		m_m = 0;
+	}
+
+	if (m_rwops) {
+		if (have_to_free_rw())
+			SDL_FreeRW(m_rwops);
+		m_rwops = 0;
 		m_fr.Close();
 	}
 
 	//then open the new song
-	if (m_fr.TryOpen(*g_fs, filename.c_str()))
-		m_rwops = SDL_RWFromMem(m_fr.Data(0), m_fr.GetSize());
+	if (m_fr.TryOpen(*g_fs, filename.c_str())) {
+		if (!(m_rwops = SDL_RWFromMem(m_fr.Data(0), m_fr.GetSize()))) {
+			m_fr.Close();  // m_fr should be Open iff m_rwops != 0
+			return 0;
+		}
+	}
 	else
 		return 0;
 
-	m_m = Mix_LoadMUS_RW(m_rwops);
+	if (m_rwops)
+		m_m = Mix_LoadMUS_RW(m_rwops);
 
 	if (m_m)
 		log("Sound_Handler: loaded song \"%s\"\n", filename.c_str());

@@ -17,21 +17,23 @@
  *
  */
 
-//config.h must be included first of all!
-#include "build_info.h"
-
-#include "wexception.h"
-#include "wlapplication.h"
-
-#include <config.h>
-
 #include <iostream>
 #include <stdexcept>
 #include <typeinfo>
 
 #include <SDL_main.h>
+#include <config.h>
+#ifndef _WIN32
+#include <fcntl.h>
+#include <syslog.h>
+#endif
+#include <unistd.h>
 
+#include "build_info.h"
+#include "wexception.h"
+#include "wlapplication.h"
 
+using std::cout;
 using std::cerr;
 using std::endl;
 using std::flush;
@@ -41,6 +43,59 @@ using std::flush;
  */
 int main(int argc, char * argv[])
 {
+
+#ifndef _WIN32
+	// if Widelands is called as dedicated server, Widelands should be forked and started as daemon
+	bool dedicated = false;
+	bool daemon    = false;
+
+	for (int i = 1; i < argc && !(daemon && dedicated); ++i) {
+		std::string opt = argv[i];
+
+		// At least a size of 8 is needed for --daemon, --dedicated is even longer
+		if (opt.size() < 8)
+			continue;
+
+		if (opt == "--version") {
+			cout << "Widelands " << build_id() << '(' << build_type() << ')' << "\n";
+			return 0;
+		}
+
+		std::string::size_type const pos = opt.find('=');
+		if (pos == std::string::npos) { //  if no equals sign found
+			if (opt == "--daemon")
+				daemon    = true;
+		} else {
+			opt.erase(pos, opt.size() - pos);
+			if (opt == "--dedicated")
+				dedicated = true;
+		}
+	}
+	if (daemon && dedicated) {
+		pid_t pid;
+		if ((pid = fork()) < 0) {
+			perror("fork() failed");
+			exit(2);
+		}
+		if (pid == 0) {
+			setsid();
+
+			close(STDIN_FILENO);
+			close(STDOUT_FILENO);
+			close(STDERR_FILENO);
+
+			open("/dev/null", O_RDWR);
+			dup(STDIN_FILENO);
+			dup(STDIN_FILENO);
+			// from now on, it's a daemon
+			openlog("FREELINE", LOG_PID, LOG_DAEMON);
+		} else {
+			printf("Child has PID %i.\n", pid);
+			return 0;
+		}
+	}
+#endif
+
 	WLApplication * g_app = 0;
 	try {
 		g_app = WLApplication::get(argc, const_cast<char const * *>(argv));
@@ -50,7 +105,7 @@ int main(int argc, char * argv[])
 		delete g_app;
 
 		return 0;
-	} catch (Parameter_error const & e) {
+	} catch (const Parameter_error & e) {
 		//  handle wrong commandline parameters
 		cerr<<endl<<e.what()<<endl<<endl;
 		WLApplication::show_usage();
@@ -58,8 +113,8 @@ int main(int argc, char * argv[])
 
 		return 0;
 	}
-#ifndef DEBUG
-	catch (_wexception const & e) {
+#ifdef NDEBUG
+	catch (const _wexception & e) {
 		cerr
 			<< "\nCaught exception (of type '" << typeid(e).name()
 			<< "') in outermost handler!\nThe exception said: " << e.what()
@@ -69,7 +124,7 @@ int main(int argc, char * argv[])
 		delete g_app;
 
 		return 1;
-	} catch (std::exception const & e) {
+	} catch (const std::exception & e) {
 		cerr
 			<< "\nCaught exception (of type '" << typeid(e).name()
 			<< "') in outermost handler!\nThe exception said: " << e.what()

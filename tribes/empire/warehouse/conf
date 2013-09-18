@@ -1,4 +1,5 @@
 size=medium
+heal_per_second=170
 
 [buildcost]
 trunk=2
@@ -6,6 +7,12 @@ wood=2
 stone=2
 marble=3
 marblecolumn=2
+
+[return_on_dismantle]
+wood=1
+stone=2
+marble=2
+marblecolumn=1
 
 [idle]
 pics=warehouse_i_??.png  # ???

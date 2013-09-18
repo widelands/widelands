@@ -20,6 +20,7 @@
 #ifndef WUI_ITEMWARESDISPLAY_H
 #define WUI_ITEMWARESDISPLAY_H
 
+#include "logic/widelands.h"
 #include "ui_basic/panel.h"
 
 namespace Widelands {

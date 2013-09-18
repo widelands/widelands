@@ -1,5 +1,6 @@
 size=big
 soldier_capacity=8
+trainer_patience=3
 
 [buildcost]
 trunk=6
@@ -7,6 +8,13 @@ raw_stone=4
 grout=6
 gold=4
 thatchreed=3
+
+[return_on_dismantle]
+trunk=3
+raw_stone=3
+grout=3
+gold=2
+thatchreed=1
 
 [working positions]
 trainer=1
@@ -33,6 +41,7 @@ upgrade_evade_1=_Upgrade soldier evade 1 (only for compatibility with old savega
 
 [sleep]
 sleep=5000
+check_soldier=soldier attack 9    # dummy check to get sleep rated as skipped - else it will change statistics
 
 [upgrade_soldier_evade_0]
 check_soldier=soldier evade 0 # Fails when aren't any soldier of level 0 evade

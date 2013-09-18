@@ -17,13 +17,14 @@
  *
  */
 
-#include "editor_toolsize_menu.h"
-#include "editor/editorinteractive.h"
-#include "graphic/graphic.h"
-#include "i18n.h"
-#include "editor/tools/editor_tool.h"
+#include "editor/ui_menus/editor_toolsize_menu.h"
 
 #include <cstdio>
+
+#include "editor/editorinteractive.h"
+#include "editor/tools/editor_tool.h"
+#include "graphic/graphic.h"
+#include "i18n.h"
 
 inline Editor_Interactive & Editor_Toolsize_Menu::eia() {
 	return ref_cast<Editor_Interactive, UI::Panel>(*get_parent());
@@ -37,20 +38,20 @@ Editor_Toolsize_Menu::Editor_Toolsize_Menu
 	(Editor_Interactive & parent, UI::UniqueWindow::Registry & registry)
 	:
 	UI::UniqueWindow
-		(&parent, "toolsize_menu", &registry, 160, 50, _("Toolsize Menu")),
+		(&parent, "toolsize_menu", &registry, 160, 50, _("Toolsize")),
 	m_textarea(this, 5, 5, 150, 10, std::string(), UI::Align_HCenter),
 	m_increase
 		(this, "incr",
-		 60, 25, 20, 20,
-		 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
-		 g_gr->get_picture(PicMod_Game, "pics/scrollbar_up.png"),
+		 80, 25, 20, 20,
+		 g_gr->images().get("pics/but0.png"),
+		 g_gr->images().get("pics/scrollbar_up.png"),
 		 std::string(),
 		 parent.get_sel_radius() < MAX_TOOL_AREA),
 	m_decrease
 		(this, "decr",
-		 80, 25, 20, 20,
-		 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
-		 g_gr->get_picture(PicMod_Game, "pics/scrollbar_down.png"),
+		 60, 25, 20, 20,
+		 g_gr->images().get("pics/but0.png"),
+		 g_gr->images().get("pics/scrollbar_down.png"),
 		 std::string(),
 		 0 < parent.get_sel_radius())
 {

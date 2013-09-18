@@ -17,9 +17,10 @@
  *
  */
 
-#include "main.h"
+#include "ui_fsmenu/main.h"
 
 #include "build_info.h"
+#include "graphic/graphic.h"
 #include "i18n.h"
 
 Fullscreen_Menu_Main::Fullscreen_Menu_Main() :
@@ -35,47 +36,47 @@ Fullscreen_Menu_Main::Fullscreen_Menu_Main() :
 	playtutorial
 		(this, "play_tutorial",
 		 m_butx, get_h() * 42 / 200, m_butw, m_buth,
-		 g_gr->get_picture(PicMod_UI, "pics/but3.png"),
+		 g_gr->images().get("pics/but3.png"),
 		 _("Play Tutorial"), std::string(), true, false),
 	singleplayer
 		(this, "single_player",
 		 m_butx, get_h() * 61 / 200, m_butw, m_buth,
-		 g_gr->get_picture(PicMod_UI, "pics/but3.png"),
+		 g_gr->images().get("pics/but3.png"),
 		 _("Single Player"), std::string(), true, false),
 	multiplayer
 		(this, "multi_player",
 		 m_butx, get_h() * 37 / 100, m_butw, m_buth,
-		 g_gr->get_picture(PicMod_UI, "pics/but3.png"),
+		 g_gr->images().get("pics/but3.png"),
 		 _("Multi Player"), std::string(), true, false),
 	replay
 		(this, "replay",
 		 m_butx, get_h() * 87 / 200, m_butw, m_buth,
-		 g_gr->get_picture(PicMod_UI, "pics/but3.png"),
+		 g_gr->images().get("pics/but3.png"),
 		 _("Watch Replay"), std::string(), true, false),
 	editor
 		(this, "editor",
 		 m_butx, get_h() * 100 / 200, m_butw, m_buth,
-		 g_gr->get_picture(PicMod_UI, "pics/but3.png"),
+		 g_gr->images().get("pics/but3.png"),
 		 _("Editor"), std::string(), true, false),
 	options
 		(this, "options",
 		 m_butx, get_h() * 119 / 200, m_butw, m_buth,
-		 g_gr->get_picture(PicMod_UI, "pics/but3.png"),
+		 g_gr->images().get("pics/but3.png"),
 		 _("Options"), std::string(), true, false),
 	readme
 		(this, "readme",
 		 m_butx, get_h() * 138 / 200, m_butw, m_buth,
-		 g_gr->get_picture(PicMod_UI, "pics/but3.png"),
+		 g_gr->images().get("pics/but3.png"),
 		 _("View Readme"), std::string(), true, false),
 	license
 		(this, "license",
 		 m_butx, get_h() * 151 / 200, m_butw, m_buth,
-		 g_gr->get_picture(PicMod_UI, "pics/but3.png"),
+		 g_gr->images().get("pics/but3.png"),
 		 _("License"), std::string(), true, false),
 	exit
 		(this, "exit",
 		 m_butx, get_h() * 178 / 200, m_butw, m_buth,
-		 g_gr->get_picture(PicMod_UI, "pics/but3.png"),
+		 g_gr->images().get("pics/but3.png"),
 		 _("Exit Game"), std::string(), true, false),
 
 // Textlabels
@@ -86,8 +87,13 @@ Fullscreen_Menu_Main::Fullscreen_Menu_Main() :
 		 UI::Align_BottomRight),
 	copyright
 		(this,
-		 0, get_h(),
+		 0, get_h() - 0.5 * m_buth,
 		 (wlcr + _("by the Widelands Development Team")).c_str(),
+		 UI::Align_BottomLeft),
+	gpl
+		(this,
+		 0, get_h(),
+		 _("Licensed under the GNU General Public License V2.0"),
 		 UI::Align_BottomLeft)
 {
 	playtutorial.sigclicked.connect
@@ -139,4 +145,5 @@ Fullscreen_Menu_Main::Fullscreen_Menu_Main() :
 
 	version.set_textstyle(ts_small());
 	copyright.set_textstyle(ts_small());
+	gpl.set_textstyle(ts_small());
 }

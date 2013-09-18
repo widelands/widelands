@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2010 by the Widelands Development Team
+ * Copyright (C) 2006-2010, 2013 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -17,6 +17,8 @@
  *
  */
 
+#include "scripting/lua_map.h"
+
 #include <lua.hpp>
 
 #include "container_iterate.h"
@@ -32,12 +34,9 @@
 #include "logic/soldier.h"
 #include "logic/warelist.h"
 #include "logic/widelands_geometry.h"
+#include "scripting/c_utils.h"
+#include "scripting/lua_game.h"
 #include "wui/mapviewpixelfunctions.h"
-
-#include "c_utils.h"
-#include "lua_game.h"
-
-#include "lua_map.h"
 
 using namespace Widelands;
 
@@ -108,6 +107,8 @@ int upcasted_immovable_to_lua(lua_State * L, BaseImmovable * mo) {
 			return CAST_TO_LUA(Flag);
 		case Map_Object::ROAD:
 			return CAST_TO_LUA(Road);
+		default:
+			break;
 	}
 	return to_lua<L_BaseImmovable>(L, new L_BaseImmovable(*mo));
 }
@@ -162,8 +163,7 @@ int _WorkerEmployer::set_workers(lua_State * L)
 				container_iterate_const
 					(PlayerImmovable::Workers, pi->get_workers(), w)
 				{
-					Ware_Index i = tribe.worker_index((*w.current)->descr().name());
-					if (i == sp->first) {
+					if (tribe.worker_index((*w.current)->descr().name()) == sp->first) {
 						const_cast<Worker *>(*w.current)->remove(egbase);
 						++d;
 						break;
@@ -182,7 +182,7 @@ int _WorkerEmployer::set_workers(lua_State * L)
 int _WorkerEmployer::get_workers(lua_State * L)
 {
 	PlayerImmovable * pi = get(L, get_egbase(L));
-	Tribe_Descr const & tribe = pi->owner().tribe();
+	const Tribe_Descr & tribe = pi->owner().tribe();
 
 	bool return_number = false;
 	WorkersSet set = m_parse_get_workers_arguments(L, tribe, &return_number);
@@ -226,7 +226,7 @@ int _WorkerEmployer::get_workers(lua_State * L)
 
 int _WorkerEmployer::get_valid_workers(lua_State * L) {
 	PlayerImmovable * pi = get(L, get_egbase(L));
-	Tribe_Descr const & tribe = pi->owner().tribe();
+	const Tribe_Descr & tribe = pi->owner().tribe();
 
 	WorkersMap valid_workers = _valid_workers(*pi);
 
@@ -251,9 +251,9 @@ int _SoldierEmployer::get_max_soldiers(lua_State * L) {
 int _SoldierEmployer::get_soldiers(lua_State * L) {
 	Editor_Game_Base & egbase = get_egbase(L);
 	SoldierControl * sc = get_sc(L, egbase);
-	Tribe_Descr const & tribe = get(L, egbase)->owner().tribe();
+	const Tribe_Descr & tribe = get(L, egbase)->owner().tribe();
 
-	Soldier_Descr const & soldier_descr =  //  soldiers
+	const Soldier_Descr & soldier_descr =  //  soldiers
 			 ref_cast<Soldier_Descr const, Worker_Descr const>
 						(*tribe.get_worker_descr(tribe.worker_index("soldier")));
 
@@ -268,9 +268,9 @@ int _SoldierEmployer::set_soldiers(lua_State * L) {
 	Editor_Game_Base & egbase = get_egbase(L);
 	SoldierControl * sc = get_sc(L, egbase);
 	Building * building = get(L, egbase);
-	Tribe_Descr const & tribe = building->owner().tribe();
+	const Tribe_Descr & tribe = building->owner().tribe();
 
-	Soldier_Descr const & soldier_descr =  //  soldiers
+	const Soldier_Descr & soldier_descr =  //  soldiers
 		ref_cast<Soldier_Descr const, Worker_Descr const>
 			(*tribe.get_worker_descr(tribe.worker_index("soldier")));
 
@@ -305,8 +305,8 @@ int _SoldierEmployer::set_soldiers(lua_State * L) {
 		int d = sp->second - cur;
 		if (d < 0) {
 			while (d) {
-				std::vector<Soldier *> curs = sc->stationedSoldiers();
-				container_iterate_const(std::vector<Soldier *>, curs, s)
+				std::vector<Soldier *> stationed_soldiers = sc->stationedSoldiers();
+				container_iterate_const(std::vector<Soldier *>, stationed_soldiers, s)
 				{
 					SoldierDescr is
 						((*s.current)->get_hp_level(),
@@ -334,8 +334,8 @@ int _SoldierEmployer::set_soldiers(lua_State * L) {
 					 sp.current->first.de, sp.current->first.ev);
 
 				if (sc->incorporateSoldier(egbase, soldier)) {
-					return report_error(L, "No space left for soldier!");
 					soldier.remove(egbase);
+					return report_error(L, "No space left for soldier!");
 				}
 			}
 		}
@@ -463,7 +463,7 @@ HasWorkers
 
 #define GET_INDEX(type) \
 	static Ware_Index _get_ ## type ## _index \
-		(lua_State * L, Tribe_Descr const & tribe,  const std::string & what) \
+		(lua_State * L, const Tribe_Descr & tribe,  const std::string & what) \
 	{ \
 		Ware_Index idx = tribe. type ## _index(what); \
 		if (!idx) \
@@ -477,7 +477,7 @@ GET_INDEX(worker);
 #define PARSERS(type, btype) \
 L_Has ##btype ## s:: btype ##sSet L_Has ## btype ##s \
 	::m_parse_get_##type##s_arguments \
-		(lua_State * L, Tribe_Descr const & tribe, bool * return_number) \
+		(lua_State * L, const Tribe_Descr & tribe, bool * return_number) \
 { \
 	 /* takes either "all", a name or an array of names */ \
 	int32_t nargs = lua_gettop(L); \
@@ -510,7 +510,7 @@ L_Has ##btype ## s:: btype ##sSet L_Has ## btype ##s \
 \
 L_Has##btype##s::btype##sMap L_Has##btype##s:: \
 	m_parse_set_##type##s_arguments \
-	(lua_State * L, Tribe_Descr const & tribe) \
+	(lua_State * L, const Tribe_Descr & tribe) \
 { \
 	int32_t nargs = lua_gettop(L); \
 	if (nargs != 2 and nargs != 3) \
@@ -688,7 +688,7 @@ int L_HasSoldiers::m_get_soldier_levels
 	return 0;
 }
 L_HasSoldiers::SoldiersMap L_HasSoldiers::m_parse_set_soldiers_arguments
-		(lua_State * L, Soldier_Descr const & soldier_descr)
+		(lua_State * L, const Soldier_Descr & soldier_descr)
 {
 	SoldiersMap rv;
 	uint32_t count;
@@ -713,8 +713,8 @@ L_HasSoldiers::SoldiersMap L_HasSoldiers::m_parse_set_soldiers_arguments
 	return rv;
 }
 int L_HasSoldiers::m_handle_get_soldiers
-		(lua_State * L, Soldier_Descr const & soldier_descr,
-		 SoldiersList const & soldiers)
+		(lua_State * L, const Soldier_Descr & soldier_descr,
+		 const SoldiersList & soldiers)
 {
 	if (lua_gettop(L) != 2)
 		return report_error(L, "Invalid arguments!");
@@ -804,9 +804,9 @@ const PropertyType<L_Map> L_Map::Properties[] = {
 	{0, 0, 0},
 };
 
-void L_Map::__persist(lua_State * L) {
+void L_Map::__persist(lua_State * /* L */) {
 }
-void L_Map::__unpersist(lua_State * L) {
+void L_Map::__unpersist(lua_State * /* L */) {
 }
 
 /*
@@ -893,7 +893,7 @@ int L_Map::place_immovable(lua_State * const L) {
 	BaseImmovable * m = 0;
 	if (from_where != "world") {
 		try {
-			Widelands::Tribe_Descr const & tribe =
+			const Widelands::Tribe_Descr & tribe =
 				egbase.manually_load_tribe(from_where);
 
 			int32_t const imm_idx = tribe.get_immovable_index(objname);
@@ -904,7 +904,7 @@ int L_Map::place_immovable(lua_State * const L) {
 					 objname, from_where.c_str());
 
 			m = &egbase.create_immovable(c->coords(), imm_idx, &tribe);
-		} catch (game_data_error & gd) {
+		} catch (game_data_error &) {
 			return
 				report_error
 					(L, "Problem loading tribe <%s>. Maybe not existent?",
@@ -981,6 +981,8 @@ const PropertyType<L_MapObject> L_MapObject::Properties[] = {
 	PROP_RO(L_MapObject, __hash),
 	PROP_RO(L_MapObject, serial),
 	PROP_RO(L_MapObject, type),
+	PROP_RO(L_MapObject, name),
+	PROP_RO(L_MapObject, descname),
 	{0, 0, 0},
 };
 
@@ -1041,6 +1043,31 @@ int L_MapObject::get_type(lua_State * L) {
 	lua_pushstring(L, get(L, get_egbase(L))->type_name());
 	return 1;
 }
+
+/* RST
+	.. attribute:: name
+
+		(RO) The internal name of this immovable. This is the same as the
+		directory name of this immovable in the tribe or world directory.
+*/
+int L_MapObject::get_name(lua_State * L) {
+	lua_pushstring(L, get(L, get_egbase(L))->descr().name().c_str());
+	return 1;
+}
+
+/* RST
+	.. attribute:: descname
+
+		(RO) The descriptive (and translated) name of this Map Object. Use this
+		in messages to the player instead of name.
+*/
+	int L_MapObject::get_descname(lua_State * L) {
+	lua_pushstring(L, get(L, get_egbase(L))->descr().descname().c_str());
+	return 1;
+}
+
+
+
 
 /*
  ==========================================================
@@ -1184,19 +1211,6 @@ int L_BaseImmovable::get_size(lua_State * L) {
 }
 
 /* RST
-	.. attribute:: name
-
-		(RO) The internal name of this immovable. This is the same as the
-		directory name of this immovable in the tribe or world directory.
-*/
-int L_BaseImmovable::get_name(lua_State * L) {
-	BaseImmovable * o = get(L, get_egbase(L));
-
-	lua_pushstring(L, o->name().c_str());
-	return 1;
-}
-
-/* RST
 	.. attribute:: fields
 
 		(RO) An :class:`array` of :class:`~wl.map.Field` that is occupied by this
@@ -1312,7 +1326,7 @@ const PropertyType<L_Flag> L_Flag::Properties[] = {
  LUA METHODS
  ==========================================================
  */
-static L_Flag::WaresMap _count_wares(Flag & f, Tribe_Descr const & tribe) {
+static L_Flag::WaresMap _count_wares(Flag & f, const Tribe_Descr & tribe) {
 	L_Flag::WaresMap rv;
 	Flag::Wares current_wares = f.get_items();
 	container_iterate_const(Flag::Wares, current_wares, w) {
@@ -1329,7 +1343,7 @@ int L_Flag::set_wares(lua_State * L)
 {
 	Editor_Game_Base & egbase = get_egbase(L);
 	Flag * f = get(L, egbase);
-	Tribe_Descr const & tribe = f->owner().tribe();
+	const Tribe_Descr & tribe = f->owner().tribe();
 
 	WaresMap setpoints = m_parse_set_wares_arguments(L, tribe);
 	WaresMap c_items = _count_wares(*f, tribe);
@@ -1359,8 +1373,7 @@ int L_Flag::set_wares(lua_State * L)
 			while (d) {
 				Flag::Wares current_items = f->get_items();
 				container_iterate_const(Flag::Wares, current_items, w) {
-					Ware_Index i = tribe.ware_index((*w.current)->descr().name());
-					if (i == sp->first) {
+					if (tribe.ware_index((*w.current)->descr().name()) == sp->first) {
 						const_cast<WareInstance *>(*w.current)->remove(egbase);
 						++d;
 						break;
@@ -1369,8 +1382,8 @@ int L_Flag::set_wares(lua_State * L)
 			}
 		} else if (d > 0) {
 			// add items
-			Item_Ware_Descr const & wd = *tribe.get_ware_descr(sp->first);
-			for (int32_t i = 0; i < d; i++) {
+			const Item_Ware_Descr & wd = *tribe.get_ware_descr(sp->first);
+			for (int32_t j = 0; j < d; j++) {
 				WareInstance & item = *new WareInstance(sp->first, &wd);
 				item.init(egbase);
 				f->add_item(egbase, item);
@@ -1383,7 +1396,7 @@ int L_Flag::set_wares(lua_State * L)
 
 // Documented in parent Class
 int L_Flag::get_wares(lua_State * L) {
-	Tribe_Descr const & tribe = get(L, get_egbase(L))->owner().tribe();
+	const Tribe_Descr & tribe = get(L, get_egbase(L))->owner().tribe();
 
 	bool return_number = false;
 	WaresSet wares_set = m_parse_get_wares_arguments(L, tribe, &return_number);
@@ -1702,7 +1715,7 @@ const PropertyType<L_Warehouse> L_Warehouse::Properties[] = {
 #define WH_SET(type, btype) \
 int L_Warehouse::set_##type##s(lua_State * L) { \
 	Warehouse * wh = get(L, get_egbase(L)); \
-	Tribe_Descr const & tribe = wh->owner().tribe(); \
+	const Tribe_Descr & tribe = wh->owner().tribe(); \
 	btype##sMap setpoints = m_parse_set_##type##s_arguments(L, tribe); \
  \
 	container_iterate_const(btype##sMap, setpoints, i) { \
@@ -1724,7 +1737,7 @@ WH_SET(worker, Worker);
 #define WH_GET(type, btype) \
 int L_Warehouse::get_##type##s(lua_State * L) { \
 	Warehouse * wh = get(L, get_egbase(L)); \
-	Tribe_Descr const & tribe = wh->owner().tribe(); \
+	const Tribe_Descr & tribe = wh->owner().tribe(); \
 	bool return_number = false; \
 	btype##sSet set = m_parse_get_##type##s_arguments \
 		(L, tribe, &return_number); \
@@ -1787,7 +1800,7 @@ const PropertyType<L_ProductionSite> L_ProductionSite::Properties[] = {
 int L_ProductionSite::get_valid_wares(lua_State * L) {
 	ProductionSite * ps = get(L, get_egbase(L));
 
-	Tribe_Descr const & tribe = ps->owner().tribe();
+	const Tribe_Descr & tribe = ps->owner().tribe();
 
 	lua_newtable(L);
 	container_iterate_const(Ware_Types, ps->descr().inputs(), i) {
@@ -1855,7 +1868,7 @@ int L_ProductionSite::set_wares(lua_State * L) {
 // documented in parent class
 int L_ProductionSite::get_wares(lua_State * L) {
 	ProductionSite * ps = get(L, get_egbase(L));
-	Tribe_Descr const & tribe = ps->owner().tribe();
+	const Tribe_Descr & tribe = ps->owner().tribe();
 
 	bool return_number = false;
 	WaresSet wares_set = m_parse_get_wares_arguments(L, tribe, &return_number);
@@ -1989,7 +2002,6 @@ const MethodType<L_Bob> L_Bob::Methods[] = {
 	{0, 0},
 };
 const PropertyType<L_Bob> L_Bob::Properties[] = {
-	PROP_RO(L_Bob, name),
 	{0, 0, 0},
 };
 
@@ -1998,16 +2010,6 @@ const PropertyType<L_Bob> L_Bob::Properties[] = {
  PROPERTIES
  ==========================================================
  */
-/* RST
-	.. attribute:: name
-
-		(RO) The name of this bob's type
-*/
-// UNTESTED
-int L_Bob::get_name(lua_State * L) {
-	lua_pushstring(L, get(L, get_egbase(L))->name());
-	return 1;
-}
 
 /* RST
 	.. method:: has_caps(capname)
@@ -2668,28 +2670,32 @@ int L_Field::region(lua_State * L) {
 		* :const:`medium`: Can a medium building be build here?
 		* :const:`big`: Can a big building be build here?
 		* :const:`mine`: Can a mine be build here?
+		* :const:`port`: Can a port be build here?
 		* :const:`flag`: Can a flag be build here?
 		* :const:`walkable`: Is this field passable for walking bobs?
 		* :const:`swimable`: Is this field passable for swimming bobs?
 */
 int L_Field::has_caps(lua_State * L) {
-	Field * field = fcoords(L).field;
+	FCoords f = fcoords(L);
 	std::string query = luaL_checkstring(L, 2);
 
 	if (query == "walkable")
-		lua_pushboolean(L, field->nodecaps() & MOVECAPS_WALK);
+		lua_pushboolean(L, f.field->nodecaps() & MOVECAPS_WALK);
 	else if (query == "swimmable")
-		lua_pushboolean(L, field->nodecaps() & MOVECAPS_SWIM);
+		lua_pushboolean(L, f.field->nodecaps() & MOVECAPS_SWIM);
 	else if (query == "small")
-		lua_pushboolean(L, field->nodecaps() & BUILDCAPS_SMALL);
+		lua_pushboolean(L, f.field->nodecaps() & BUILDCAPS_SMALL);
 	else if (query == "medium")
-		lua_pushboolean(L, field->nodecaps() & BUILDCAPS_MEDIUM);
+		lua_pushboolean(L, f.field->nodecaps() & BUILDCAPS_MEDIUM);
 	else if (query == "big")
-		lua_pushboolean(L, (field->nodecaps() & BUILDCAPS_BIG) == BUILDCAPS_BIG);
-	else if (query == "mine")
-		lua_pushboolean(L, field->nodecaps() & BUILDCAPS_MINE);
+		lua_pushboolean(L, (f.field->nodecaps() & BUILDCAPS_BIG) == BUILDCAPS_BIG);
+	else if (query == "port") {
+		lua_pushboolean
+			(L, (f.field->nodecaps() & BUILDCAPS_PORT) && get_egbase(L).map().is_port_space(f));
+	} else if (query == "mine")
+		lua_pushboolean(L, f.field->nodecaps() & BUILDCAPS_MINE);
 	else if (query == "flag")
-		lua_pushboolean(L, field->nodecaps() & BUILDCAPS_FLAG);
+		lua_pushboolean(L, f.field->nodecaps() & BUILDCAPS_FLAG);
 	else
 		return report_error(L, "Unknown caps queried: %s!", query.c_str());
 

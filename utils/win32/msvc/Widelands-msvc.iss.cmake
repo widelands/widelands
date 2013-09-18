@@ -23,7 +23,7 @@
 #define Name "Widelands"
 #define VerName "Widelands @WL_VERSION@"
 #define VerNumber "@WL_VERSION_MAJOR@.@WL_VERSION_MINOR@.@WL_VERSION_PATCH@"
-#define Copyright "Widelands Development Team 2001-2011"
+#define Copyright "Widelands Development Team 2001-2012"
 #define SetupFileName "Widelands-@WL_VERSION@-win32"
 
 ;General String
@@ -34,6 +34,7 @@
 #define UrlName "Widelands.url"
 #define HelpName "Widelands-Onlinehelp.url"
 #define HelpNameName "Widelands-Onlinehelp"
+#define Copying "COPYING.txt"
 
 [Setup]
 AppName={#Name}
@@ -121,6 +122,7 @@ Name: {group}\{#Name} - Mapeditor;           Filename: {app}\{#ExeName}; Paramet
 Name: {userappdata}\Microsoft\Internet Explorer\Quick Launch\{#Name}; Filename: {app}\{#ExeName}; Tasks: quicklaunchicon; WorkingDir: {app}; Flags: useapppaths; IconFilename: {app}\widelands.exe
 Name: {userdesktop}\{#Name};                 Filename: {app}\{#ExeName}; Tasks: desktopicon; WorkingDir: {app}; Flags: useapppaths; IconFilename: {app}\widelands.exe
 Name: {userdesktop}\{#Name} - Mapeditor;     Filename: {app}\{#ExeName}; Parameters: " --editor"; Tasks: desktopicon; WorkingDir: {app}; IconFilename: {app}\WL-Editor.ico; Comment: Directly starts the Widelands-Editor; Flags: useapppaths
+Name: {group}\{#Copying};                    Filename: {app}\{#Copying}
 
 [Run]
 Filename: {app}\{#ExeName}; Description: {cm:LaunchProgram,{#Name}}; Flags: nowait postinstall skipifsilent

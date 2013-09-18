@@ -17,7 +17,7 @@
  *
  */
 
-#include "widelands_map_object_packet.h"
+#include "map_io/widelands_map_object_packet.h"
 
 #include "economy/fleet.h"
 #include "economy/portdock.h"
@@ -28,12 +28,12 @@
 #include "logic/legacy.h"
 #include "logic/map.h"
 #include "logic/ship.h"
-#include "wexception.h"
 #include "logic/widelands_fileread.h"
 #include "logic/widelands_filewrite.h"
 #include "logic/worker.h"
-#include "widelands_map_map_object_loader.h"
-#include "widelands_map_map_object_saver.h"
+#include "map_io/widelands_map_map_object_loader.h"
+#include "map_io/widelands_map_map_object_saver.h"
+#include "wexception.h"
 
 namespace Widelands {
 
@@ -143,13 +143,15 @@ void Map_Object_Packet::Write
 
 	fw.Unsigned8(CURRENT_PACKET_VERSION);
 
-	Object_Manager::objmap_t const & objs = egbase.objects().get_objects();
+	std::vector<Serial> obj_serials = egbase.objects().all_object_serials_ordered();
 	for
-		(Object_Manager::objmap_t::const_iterator cit = objs.begin();
-		 cit != objs.end();
+		(std::vector<Serial>::iterator cit = obj_serials.begin();
+		 cit != obj_serials.end();
 		 ++cit)
 	{
-		Map_Object & obj = *cit->second;
+		Map_Object * pobj = egbase.objects().get_object(*cit);
+		assert(pobj);
+		Map_Object & obj = *pobj;
 
 		// These checks can be eliminated and the object saver simplified
 		// once all Map_Objects are saved using the new system

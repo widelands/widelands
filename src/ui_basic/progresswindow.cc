@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2007-2008, 2010 by the Widelands Development Team
+ * Copyright (C) 2007-2008, 2010, 2013 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -17,24 +17,25 @@
  *
  */
 
-#include "progresswindow.h"
-
-#include "constants.h"
-#include "graphic/font.h"
-#include "graphic/font_handler.h"
-#include "graphic/rendertarget.h"
-#include "i18n.h"
-#include "io/filesystem/layered_filesystem.h"
-
-#include "container_iterate.h"
+#include "ui_basic/progresswindow.h"
 
 #ifndef _MSC_VER
 #include <sys/time.h>
 #endif
 
+#include "constants.h"
+#include "container_iterate.h"
+#include "graphic/font.h"
+#include "graphic/font_handler.h"
+#include "graphic/graphic.h"
+#include "graphic/image_transformations.h"
+#include "graphic/rendertarget.h"
+#include "i18n.h"
+#include "io/filesystem/layered_filesystem.h"
+
 #define PROGRESS_FONT_COLOR_FG        RGBColor(128, 128, 255)
 #define PROGRESS_FONT_COLOR_BG        RGBColor(64, 64, 0)
-#define PROGRESS_FONT_COLOR PROGRESS_FONT_COLOR_FG, PROGRESS_FONT_COLOR_BG
+//#define PROGRESS_FONT_COLOR PROGRESS_FONT_COLOR_FG, PROGRESS_FONT_COLOR_BG // not used
 #define PROGRESS_STATUS_RECT_PADDING  2
 #define PROGRESS_STATUS_BORDER_X      2
 #define PROGRESS_STATUS_BORDER_Y      2
@@ -44,7 +45,7 @@ namespace UI {
 
 ProgressWindow::ProgressWindow(const std::string & background)
 	: m_xres(0), m_yres(0),
-	m_background_pic(g_gr->get_no_picture())
+	m_background_pic(nullptr)
 {
 	set_background(background);
 	step(_("Preparing..."));
@@ -63,21 +64,9 @@ void ProgressWindow::draw_background
 	m_label_center.y = yres * PROGRESS_LABEL_POSITION_Y / 100;
 	Rect wnd_rect(Point(0, 0), xres, yres);
 
-	if
-		(m_background_pic == g_gr->get_no_picture()
-		 or xres != m_xres or yres != m_yres)
-	{
+	if (!m_background_pic or xres != m_xres or yres != m_yres) {
 		// (Re-)Load background graphics
-		// Note that the old pic is freed automatically
-		PictureID const background_original =
-			g_gr->get_picture(PicMod_Menu, m_background.c_str());
-
-		PictureID const background_resized  =
-			g_gr->get_resized_picture
-				(background_original, xres, yres,
-				 Graphic::ResizeMode_Loose);
-
-		m_background_pic = background_resized;
+		m_background_pic = ImageTransformations::resize(g_gr->images().get(m_background), xres, yres);
 
 		const uint32_t h = g_fh->get_fontheight (UI_FONT_SMALL);
 		m_label_rectangle.x = xres / 4;
@@ -127,9 +116,7 @@ void ProgressWindow::set_background(const std::string & file_name) {
 		}
 	} else
 		m_background = "pics/progress.png";
-	if (m_background_pic != g_gr->get_no_picture()) {
-		m_background_pic = g_gr->get_no_picture();
-	}
+	m_background_pic = nullptr;
 	draw_background(rt, g_gr->get_xres(), g_gr->get_yres());
 	update(true);
 }
@@ -150,7 +137,7 @@ void ProgressWindow::step(const std::string & description) {
 	UI::g_fh->draw_text(rt, ts, m_label_center, description, Align_Center);
 	g_gr->update_rectangle(m_label_rectangle);
 
-#ifdef WIN32
+#ifdef _WIN32
 		// Pump events to prevent "not responding" on windows
 		SDL_PumpEvents();
 #endif

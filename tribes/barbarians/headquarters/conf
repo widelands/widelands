@@ -2,10 +2,10 @@
 # Building, fortified base and some towers made of black wood. Some flags
 # in the player colors may be present
 
-# soundfx=../../../sound/spoken/warehouse-bringitin
 size=big
 buildable=no
 destructible=no
+heal_per_second=220
 conquers=9
 
 [idle]

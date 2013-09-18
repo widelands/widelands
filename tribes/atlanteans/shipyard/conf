@@ -1,10 +1,20 @@
 size=medium
 
+[aihints]
+build_material=false
+needs_water=true
+
 [buildcost]
 trunk=3
 planks=2
 stone=3
 spidercloth=2
+
+[return_on_dismantle]
+trunk=1
+planks=1
+stone=2
+spidercloth=1
 
 [working positions]
 shipwright=1
@@ -23,6 +33,7 @@ sleep=20000
 call=ship
 
 [ship]
+check_map=seafaring
 construct=shipconstruction buildship 6
 return=completed
 
@@ -37,11 +48,11 @@ hotspot=53 66
 playercolor=true
 
 #[working]
-#pics=shipyard_i_??.png 
+#pics=shipyard_i_??.png
 #hotspot=53 66
 #playercolor=true
 #
 #[outofhouse]
-#pics=shipyard_i_??.png 
+#pics=shipyard_i_??.png
 #hotspot=53 66
 #playercolor=true

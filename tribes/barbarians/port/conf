@@ -1,0 +1,31 @@
+size=port
+conquers=5
+heal_per_second=170
+
+[buildcost]
+trunk=3
+blackwood=3
+raw_stone=5
+grout=2
+iron=2
+thatchreed=4
+gold=2
+
+[return_on_dismantle]
+trunk=1
+blackwood=2
+raw_stone=3
+grout=1
+iron=1
+thatchreed=1
+gold=1
+
+[build]
+pics=port_b_??.png  # 4 frames
+hotspot=67 80
+
+[idle]
+pics=port_i_??.png  # 20 frames
+hotspot=67 80
+playercolor=true
+fps=10

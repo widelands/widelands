@@ -17,7 +17,7 @@
  *
  */
 
-#include "gamechatpanel.h"
+#include "wui/gamechatpanel.h"
 
 
 /**
@@ -52,7 +52,8 @@ void GameChatPanel::recalculate()
 
 	std::string str = "<rt>";
 	for (uint32_t i = 0; i < msgs.size(); ++i) {
-		str += msgs[i].toPrintable();
+		// FIXME use toPrintable() when old renderer is kicked out
+		str += msgs[i].toOldRichText();
 		str += '\n';
 	}
 	str += "</rt>";
@@ -68,14 +69,14 @@ void GameChatPanel::focusEdit()
 	editbox.focus();
 }
 
-void GameChatPanel::receive(ChatMessage const &)
+void GameChatPanel::receive(const ChatMessage &)
 {
 	recalculate();
 }
 
 void GameChatPanel::keyEnter()
 {
-	std::string const & str = editbox.text();
+	const std::string & str = editbox.text();
 
 	if (str.size())
 		m_chat.send(str);

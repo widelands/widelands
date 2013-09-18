@@ -1,15 +1,22 @@
 #help=_A sea-worthy ship
 
-capacity=20
+capacity=30
+vision_range=4
 
 [idle]
-pics=ship_i_??.png
-hotspot=118 94
+pics=idle_??.png
+hotspot=89 86
 playercolor=true
 fps=10
 
 [sail]
 dirpics=sail_!!_??.png
-hotspot=118 94
+hotspot=89 86
 fps=10
 playercolor=true
+
+[sinking]
+pics=sinking_??.png
+hotspot=89 86
+playercolor=false
+fps=7

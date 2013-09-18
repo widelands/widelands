@@ -1,0 +1,52 @@
+# Automatically created by Widelands bzr6718[widelands] (Debug)
+
+[global]
+packet_version="2"
+
+[player_1]
+name="Player 1"
+tribe="barbarians"
+ai=
+closeable="true"
+
+[player_2]
+name="Player 2"
+tribe="empire"
+ai=
+closeable="true"
+
+[player_3]
+name="Player 3"
+tribe="atlanteans"
+ai=
+closeable="true"
+
+[player_4]
+name="Player A"
+tribe="barbarians"
+ai="Aggressive"
+closeable="false"
+
+[player_5]
+name="Player B"
+tribe="empire"
+ai="Aggressive"
+closeable="false"
+
+[player_6]
+name="Player C"
+tribe="atlanteans"
+ai="Aggressive"
+closeable="false"
+
+[player_7]
+name="Player D"
+tribe="empire"
+ai="Aggressive"
+closeable="false"
+
+[player_8]
+name="Player E"
+tribe="atlanteans"
+ai="Aggressive"
+closeable="false"

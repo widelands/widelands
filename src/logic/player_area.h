@@ -20,14 +20,13 @@
 #ifndef PLAYER_AREA_H
 #define PLAYER_AREA_H
 
-#include "widelands_geometry.h"
-
-#include "widelands.h"
+#include "logic/widelands.h"
+#include "logic/widelands_geometry.h"
 
 namespace Widelands {
 
 template <typename Area_type = Area<> > struct Player_Area : public Area_type {
-	Player_Area() {}
+	Player_Area() : player_number(0) {}
 	Player_Area(const Player_Number pn, const Area_type area)
 		: Area_type(area), player_number(pn)
 	{}

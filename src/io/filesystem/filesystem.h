@@ -20,16 +20,16 @@
 #ifndef FILESYSTEM_H
 #define FILESYSTEM_H
 
-#include "filesystem_exceptions.h"
-
-#include <stdint.h>
 #include <cstring>
+#include <memory>
 #include <set>
 #include <stdexcept>
 #include <string>
 #include <vector>
-#include <memory>
 
+#include <stdint.h>
+
+#include "io/filesystem/filesystem_exceptions.h"
 
 typedef std::set<std::string> filenameset_t;
 
@@ -42,7 +42,8 @@ struct StreamWrite;
  * operations.
  * \todo const correctness
  */
-struct FileSystem {
+class FileSystem {
+public:
 	//  TODO This should be unnecessary. Make it so.
 	enum Type {
 		DIR,
@@ -52,26 +53,26 @@ struct FileSystem {
 	virtual ~FileSystem() {}
 
 	virtual int32_t FindFiles
-		(std::string const & path,
-		 std::string const & pattern,
+		(const std::string & path,
+		 const std::string & pattern,
 		 filenameset_t     * results,
 		 uint32_t            depth = 0)
 		= 0;
 
 	virtual bool IsWritable() const = 0;
-	virtual bool IsDirectory(std::string const & path) = 0;
-	virtual bool FileExists (std::string const & path) = 0;
+	virtual bool IsDirectory(const std::string & path) = 0;
+	virtual bool FileExists (const std::string & path) = 0;
 
 	virtual void * Load(const std::string & fname, size_t & length) = 0;
 	virtual void * fastLoad
 		(const std::string & fname, size_t & length, bool & fast) = 0;
 
 	virtual void Write
-		(std::string const & fname, void const * data, int32_t length)
+		(const std::string & fname, void const * data, int32_t length)
 		= 0;
-	virtual void EnsureDirectoryExists(std::string const & dirname) = 0;
+	virtual void EnsureDirectoryExists(const std::string & dirname) = 0;
 	//TODO: use this only from inside EnsureDirectoryExists()
-	virtual void MakeDirectory(std::string const & dirname) = 0;
+	virtual void MakeDirectory(const std::string & dirname) = 0;
 
 	/**
 	 * Opens the given file for reading as a stream.
@@ -80,7 +81,7 @@ struct FileSystem {
 	 * \return a \ref StreamRead object for the file. The caller must delete this
 	 * object when done to close the file.
 	 */
-	virtual StreamRead * OpenStreamRead(std::string const & fname) = 0;
+	virtual StreamRead * OpenStreamRead(const std::string & fname) = 0;
 
 	/**
 	 * Opens the given file for writing as a stream.
@@ -92,15 +93,22 @@ struct FileSystem {
 	 * delete this object when done to close the file (which will implicitly
 	 * flush unwritten data).
 	 */
-	virtual StreamWrite * OpenStreamWrite(std::string const & fname) = 0;
+	virtual StreamWrite * OpenStreamWrite(const std::string & fname) = 0;
 
-	virtual FileSystem & MakeSubFileSystem(std::string const & dirname) = 0;
-	virtual FileSystem & CreateSubFileSystem
-		(std::string const & dirname, Type) = 0;
-	virtual void Unlink(std::string const &) = 0;
-	virtual void Rename(std::string const &, std::string const &) = 0;
+	/**
+	 * Creates a subfilesystem from an existing file/directory.
+	 * Passes ownership to caller.
+	 */
+	virtual FileSystem * MakeSubFileSystem(const std::string & dirname) = 0;
+	/**
+	 * Creates a subfilesystem from a new file/directory.
+	 * Passes ownership to caller.
+	 */
+	virtual FileSystem * CreateSubFileSystem(const std::string & dirname, Type) = 0;
+	virtual void Unlink(const std::string &) = 0;
+	virtual void Rename(const std::string &, const std::string &) = 0;
 
-	static FileSystem & Create(std::string const & root)
+	static FileSystem & Create(const std::string & root)
 	throw (FileType_error, FileNotFound_error, FileAccessDenied_error);
 
 	///Retrieve the filesystem root's name == the mountpoint inside a
@@ -108,14 +116,20 @@ struct FileSystem {
 	virtual std::string getBasename() = 0;
 
 	// basic path/filename manipulation
-	std::string fixCrossFile(std::string const &) const;
-	const char  fileSeparator() {return m_filesep;}
+	std::string fixCrossFile(const std::string &) const;
+	char fileSeparator() {return m_filesep;}
 	std::string getWorkingDirectory() const;
 	std::string FS_CanonicalizeName(std::string path) const;
-	bool pathIsAbsolute(std::string const & path) const;
-	static char const * FS_Filename(char const *);
-	static char const * FS_Filename(char const *, char const * & extension);
-	static std::string FS_FilenameWoExt(char const *);
+	bool pathIsAbsolute(const std::string & path) const;
+
+	///Given a filename, return the name with any path stripped off.
+	static const char * FS_Filename(const char * n);
+
+	///Given a filename (without any path), return the extension, if any.
+	static std::string FS_FilenameExt(const std::string & f);
+
+	///Given a filename, return the name with any path or extension stripped off.
+	static std::string FS_FilenameWoExt(const char * n);
 	static std::string GetHomedir();
 
 	virtual unsigned long long DiskSpace() = 0;
@@ -131,7 +145,7 @@ protected:
 	///Character used to separate filename components
 	char m_filesep;
 
-#ifdef WIN32
+#ifdef _WIN32
 private:
 	static bool check_writeable_for_data(char const * path);
 #endif

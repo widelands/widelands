@@ -6,6 +6,10 @@ enhancement=deep_coalmine
 trunk=4
 wood=2
 
+[return_on_dismantle]
+trunk=2
+wood=1
+
 [working positions]
 miner=1
 
@@ -21,8 +25,8 @@ beer=6
 work=_Work
 
 [work]
-return=skipped when economy needs ration and not economy needs coal
-return=skipped when economy needs beer and not economy needs coal
+return=skipped unless economy needs coal or not economy needs ration
+return=skipped unless economy needs coal or not economy needs beer
 sleep=45000
 consume=beer ration
 animate=working 20000

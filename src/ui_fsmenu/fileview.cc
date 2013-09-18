@@ -17,16 +17,44 @@
  *
  */
 
-#include "fileview.h"
+#include "ui_fsmenu/fileview.h"
+
+#include <boost/algorithm/string/predicate.hpp>
 
 #include "constants.h"
-#include "io/filesystem/filesystem.h"
+#include "graphic/graphic.h"
 #include "i18n.h"
+#include "io/filesystem/filesystem.h"
 #include "profile/profile.h"
+#include "scripting/scripting.h"
 
 
+namespace {
+bool read_text(const std::string& filename, std::string* title, std::string* content) {
+	if (boost::algorithm::ends_with(filename, ".lua")) {
+		try {
+			std::unique_ptr<LuaInterface> li(create_LuaInterface());
+			std::unique_ptr<LuaTable> t(li->run_script(*g_fs, filename, "texts"));
+			*content = t->get_string("text");
+			*title = t->get_string("title");
+		} catch (LuaError & err) {
+			*content = err.what();
+			*title = "Lua error";
+			return false;
+		}
+	} else {  // Old style plain text file.
+		Profile prof(filename.c_str(), "global", "texts"); // section-less file
+		Section & s = prof.get_safe_section("global");
+
+		*title = s.get_safe_string("title");
+		*content = s.get_safe_string("text");
+	}
+	return true;
+}
+
+}  // namespace
 Fullscreen_Menu_TextView::Fullscreen_Menu_TextView
-	(std::string const & filename)
+	(const std::string & filename)
 	:
 	Fullscreen_Menu_Base("fileviewmenu.jpg"),
 
@@ -40,18 +68,18 @@ Fullscreen_Menu_TextView::Fullscreen_Menu_TextView
 	close_button
 		(this, "close",
 		 get_w() * 3 / 8, get_h() * 9 / 10, get_w() / 4, get_h() * 9 / 200,
-		 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
+		 g_gr->images().get("pics/but0.png"),
 		 _("Close"), std::string(), true, false)
 {
 	close_button.sigclicked.connect(boost::bind(&Fullscreen_Menu_TextView::end_modal, boost::ref(*this), 0));
 
 	close_button.set_font(font_small());
 
-	Profile prof(filename.c_str(), "global", "texts"); //  section-less file
-	Section & section = prof.get_safe_section("global");
+	std::string content, title_text;
+	read_text(filename, &title_text, &content);
 
-	title   .set_text(section.get_safe_string("title"));
-	textview.set_text(section.get_safe_string("text"));
+	title   .set_text(title_text);
+	textview.set_text(content);
 
 	title.set_font(ui_fn(), fs_big(), UI_FONT_CLR_FG);
 	title.set_pos
@@ -74,7 +102,7 @@ struct FileViewWindow : public UI::UniqueWindow {
 	FileViewWindow
 		(UI::Panel                  & parent,
 		 UI::UniqueWindow::Registry & reg,
-		 std::string          const & filename);
+		 const std::string          & filename);
 private:
 	UI::Multiline_Textarea textview;
 };
@@ -82,17 +110,16 @@ private:
 FileViewWindow::FileViewWindow
 	(UI::Panel                  & parent,
 	 UI::UniqueWindow::Registry & reg,
-	 std::string          const & filename)
+	 const std::string          & filename)
 	:
 	UI::UniqueWindow(&parent, "file_view", &reg, 0, 0, ""),
 	textview(this, 0, 0, 560, 240)
 {
-	Profile prof(filename.c_str(), "global", "texts"); // section-less file
-	Section & s = prof.get_safe_section("global");
+	std::string title_text, content;
+	read_text(filename, &title_text, &content);
 
-	set_title(s.get_safe_string("title"));
+	textview.set_text(content);
 
-	textview.set_text(s.get_safe_string("text"));
 	textview.set_font(PROSA_FONT, PROSA_FONT_CLR_FG);
 
 	set_inner_size(560, 240);
@@ -108,7 +135,7 @@ FileViewWindow::FileViewWindow
 void fileview_window
 	(UI::Panel                  & parent,
 	 UI::UniqueWindow::Registry & reg,
-	 std::string          const & filename)
+	 const std::string          & filename)
 {
 	new FileViewWindow(parent, reg, filename);
 }

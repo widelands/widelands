@@ -16,24 +16,29 @@
  * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#include <lua.hpp>
+#include "scripting/pluto.h"
+
 #include <cstring>
+
+#include <lua.hpp>
 #include <stdint.h>
 
-#include "logic/widelands_filewrite.h"
+#include "compile_diagnostics.h"
 #include "logic/widelands_fileread.h"
+#include "logic/widelands_filewrite.h"
+#include "scripting/pdep/pdep.h"
 
-#include "pdep/pdep.h"
-
-#include "pluto.h"
-
+// Widelands: silence warnings about unused variables, usually because they
+//are only used in conditional asserts
+GCC_DIAG_OFF("-Wunused-macros")
+GCC_DIAG_OFF("-Wunused-variable")
+CLANG_DIAG_OFF("-Wunused-macros")
+CLANG_DIAG_OFF("-Wunused-variable")
 
 // Forward declarated from lua_impl.h. So we do not need to include it
 int luna_restore_object(lua_State * L);
 
 #define PLUTO_TPERMANENT 101
-
-#define verify(x) { int v = (int)((x)); v=v; lua_assert(v); }
 
 typedef struct PersistInfo_t {
 	lua_State * L;
@@ -409,8 +414,8 @@ static UpVal * makeupval(lua_State * L, int stackpos)
 	pdep_link(L, obj2gco(uv), LUA_TUPVAL);
 	uv->tt = LUA_TUPVAL;
 	uv->v = &uv->u.value;
-	uv->u.l.prev = NULL;
-	uv->u.l.next = NULL;
+	uv->u.l.prev = nullptr;
+	uv->u.l.next = nullptr;
 	setobj(L, uv->v, getobject(L, stackpos));
 	return uv;
 }
@@ -593,7 +598,7 @@ static void persistproto(PersistInfo * pi)
 
 	/* Serialize code */
 	{
-		compile_assert(sizeof(Instruction) == 4);
+		static_assert(sizeof(Instruction) == 4, "assert(sizeof(Instruction) == 4) failed.");
 		pi->fw->Signed32(p->sizecode);
 		for (int32_t i = 0; i < p->sizecode; i++)
 			pi->fw->Unsigned32(p->code[i]);
@@ -725,7 +730,7 @@ static void persistthread(PersistInfo * pi)
 		GCObject * gco;
 		UpVal * uv;
 					/* perms reftbl ... thr */
-		for (gco = L2->openupval; gco != NULL; gco = uv->next) {
+		for (gco = L2->openupval; gco != nullptr; gco = uv->next) {
 			uv = gco2uv(gco);
 
 			/* Make sure upvalue is really open */
@@ -903,6 +908,7 @@ static void persist(PersistInfo * pi)
 			break;
 		default:
 			lua_assert(false);
+			break;
 	}
 }
 
@@ -1057,8 +1063,8 @@ static void unpersistproto(int, UnpersistInfo * upi)
 	{
 		p->sizecode = upi->fr->Signed32();
 		pdep_reallocvector(upi->L, p->code, 1, p->sizecode, Instruction);
-		for (int32_t i = 0; i < p->sizecode; i++)
-			p->code[i] = upi->fr->Unsigned32();
+		for (int32_t j = 0; j < p->sizecode; j++)
+			p->code[j] = upi->fr->Unsigned32();
 	}
 
 	/* Read in upvalue names */
@@ -1110,8 +1116,8 @@ static void unpersistproto(int, UnpersistInfo * upi)
 		if (p->sizelineinfo)
 		{
 			pdep_reallocvector(upi->L, p->lineinfo, 0, p->sizelineinfo, int);
-			for (int32_t i = 0; i < p->sizelineinfo; i++)
-				p->lineinfo[i] = upi->fr->Signed32();
+			for (int32_t j = 0; j < p->sizelineinfo; j++)
+				p->lineinfo[j] = upi->fr->Signed32();
 		}
 	}
 
@@ -1144,7 +1150,7 @@ static void gcunlink(lua_State * L, GCObject * gco)
 
 	prevslot = G(L)->rootgc;
 	while (prevslot->gch.next != gco) {
-		lua_assert(prevslot->gch.next != NULL);
+		lua_assert(prevslot->gch.next != nullptr);
 		prevslot = prevslot->gch.next;
 	}
 
@@ -1254,7 +1260,7 @@ static void unpersistthread(int ref, UnpersistInfo * upi)
 			lua_assert
 				(uv->u.l.next->u.l.prev == uv && uv->u.l.prev->u.l.next == uv);
 		}
-		*nextslot = NULL;
+		*nextslot = nullptr;
 	}
 
 	/* The stack must be valid at least to the highest value among the CallInfos
@@ -1267,7 +1273,7 @@ static void unpersistthread(int ref, UnpersistInfo * upi)
 	}
 }
 
-static void unpersistuserdata(int ref, UnpersistInfo * upi)
+static void unpersistuserdata(int /* ref */, UnpersistInfo * upi)
 {
 					/* perms reftbl ... */
 	lua_checkstack(upi->L, 2);
@@ -1330,7 +1336,7 @@ int inreftable(lua_State * L, int ref)
 static void unpersist(UnpersistInfo * upi)
 {
 					/* perms reftbl ... */
-	int stacksize = lua_gettop(upi->L); stacksize = stacksize; /* DEBUG */
+	int stacksize = lua_gettop(upi->L);
 	lua_checkstack(upi->L, 2);
 	if (upi->fr->Unsigned8()) {
 		int ref = upi->fr->Signed32();
@@ -1373,6 +1379,7 @@ static void unpersist(UnpersistInfo * upi)
 				break;
 			default:
 				lua_assert(false);
+				break;
 		}
 					/* perms reftbl ... obj */
 		lua_assert

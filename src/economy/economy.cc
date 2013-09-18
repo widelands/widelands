@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004, 2006-2011 by the Widelands Development Team
+ * Copyright (C) 2004, 2006-2013 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -17,34 +17,31 @@
  *
  */
 
-#include "economy.h"
+#include "economy/economy.h"
 
 #include <boost/bind.hpp>
 
-// Package includes
-#include "flag.h"
-#include "route.h"
-#include "cmd_call_economy_balance.h"
-#include "routeastar.h"
-#include "router.h"
-
+#include "economy/cmd_call_economy_balance.h"
+#include "economy/flag.h"
+#include "economy/request.h"
+#include "economy/route.h"
+#include "economy/routeastar.h"
+#include "economy/router.h"
+#include "economy/warehousesupply.h"
 #include "logic/game.h"
 #include "logic/player.h"
-#include "request.h"
 #include "logic/tribe.h"
-#include "upcast.h"
 #include "logic/warehouse.h"
-#include "warehousesupply.h"
+#include "upcast.h"
 #include "wexception.h"
 
 namespace Widelands {
 
 Economy::Economy(Player & player) :
 	m_owner(player),
-	m_rebuilding     (false),
 	m_request_timerid(0)
 {
-	Tribe_Descr const & tribe = player.tribe();
+	const Tribe_Descr & tribe = player.tribe();
 	Ware_Index const nr_wares   = tribe.get_nrwares();
 	Ware_Index const nr_workers = tribe.get_nrworkers();
 	m_wares.set_nrwares(nr_wares);
@@ -75,8 +72,6 @@ Economy::Economy(Player & player) :
 
 Economy::~Economy()
 {
-	assert(!m_rebuilding);
-
 	m_owner.remove_economy(*this);
 
 	if (m_requests.size())
@@ -120,8 +115,8 @@ void Economy::check_merge(Flag & f1, Flag & f2)
 }
 
 /**
- * Check whether the given flags can still reach each other (pathfinding!).
- * If not, the economy is split in two.
+ * Notify the economy that there may no longer be a connection between
+ * the given flags in the road and seafaring network.
  */
 void Economy::check_split(Flag & f1, Flag & f2)
 {
@@ -133,35 +128,62 @@ void Economy::check_split(Flag & f1, Flag & f2)
 	if (not e)
 		return;
 
-	// Start an A-star search from f1 towards f2.
-	// Keep track of which flags are reachable from f1,
-	// so that we do not have to re-scan everything in case
-	// the economy really does split
-	Map & map = e->owner().egbase().map();
-	RouteAStar<AStarEstimator> astar(*e->m_router, wwWORKER, AStarEstimator(map, f2));
-	astar.push(f1);
+	e->m_split_checks.push_back(std::make_pair(OPtr<Flag>(&f1), OPtr<Flag>(&f2)));
+	e->rebalance_supply(); // the real split-checking is done during rebalance
+}
 
-	std::set<OPtr<Flag> > reachable;
-	while (RoutingNode * current = astar.step()) {
-		Flag * curflag = static_cast<Flag *>(current);
-		if (curflag == &f2)
-			return;
+void Economy::_check_splits()
+{
+	Editor_Game_Base & egbase = owner().egbase();
+	Map & map = egbase.map();
 
-		reachable.insert(curflag);
-	}
+	while (m_split_checks.size()) {
+		Flag * f1 = m_split_checks.back().first.get(egbase);
+		Flag * f2 = m_split_checks.back().second.get(egbase);
+		m_split_checks.pop_back();
 
-	// When we get to this point, a split really did occur
-	// Attempt to split off only a reasonably small part of the economy
-	// for performance reasons
-	if (reachable.size() <= e->m_flags.size() * 3 / 5) {
-		e->_split(reachable);
-	} else {
-		std::set<OPtr<Flag> > others;
-		container_iterate_const(Flags, e->m_flags, it) {
-			if (reachable.count(*it.current) == 0)
-				others.insert(*it.current);
+		if (!f1 || !f2) {
+			if (!f1 && !f2)
+				continue;
+			if (!f1)
+				f1 = f2;
+			if (f1->get_economy() != this)
+				continue;
+
+			// Handle the case when two or more roads are removed simultaneously
+			RouteAStar<AStarZeroEstimator> astar(*m_router, wwWORKER, AStarZeroEstimator());
+			astar.push(*f1);
+			std::set<OPtr<Flag> > reachable;
+			while (RoutingNode * current = astar.step())
+				reachable.insert(&current->base_flag());
+			if (reachable.size() != m_flags.size())
+				_split(reachable);
+			continue;
 		}
-		e->_split(others);
+
+		// If one (or both) of the flags have already been split off, we do not need to re-check
+		if (f1->get_economy() != this || f2->get_economy() != this)
+			continue;
+
+		// Start an A-star searches from f1 with a heuristic bias towards f2,
+		// because we do not need to do anything if f1 is still connected to f2.
+		// If f2 is not reached by the search, split off all the nodes that have been
+		// reached from f1. These nodes induce a connected subgraph.
+		// This means that the newly created economy, which contains all the
+		// flags that have been split, is already connected.
+		RouteAStar<AStarEstimator> astar(*m_router, wwWORKER, AStarEstimator(map, *f2));
+		astar.push(*f1);
+		std::set<OPtr<Flag> > reachable;
+
+		for (;;) {
+			RoutingNode * current = astar.step();
+			if (!current) {
+				_split(reachable);
+				break;
+			} else if (current == f2)
+				break;
+			reachable.insert(&current->base_flag());
+		}
 	}
 }
 
@@ -188,7 +210,7 @@ bool Economy::find_route
 }
 
 struct ZeroEstimator {
-	int32_t operator()(RoutingNode & node) const {return 0;}
+	int32_t operator()(RoutingNode & /* node */) const {return 0;}
 };
 
 /**
@@ -330,6 +352,7 @@ void Economy::add_wares(Ware_Index const id, uint32_t const count)
 	//log("%p: add(%i, %i)\n", this, id, count);
 
 	m_wares.add(id, count);
+	_start_request_timer();
 
 	// TODO: add to global player inventory?
 }
@@ -338,6 +361,7 @@ void Economy::add_workers(Ware_Index const id, uint32_t const count)
 	//log("%p: add(%i, %i)\n", this, id, count);
 
 	m_workers.add(id, count);
+	_start_request_timer();
 
 	// TODO: add to global player inventory?
 }
@@ -528,22 +552,17 @@ void Economy::_merge(Economy & e)
 		show_options_window();
 	}
 
-
-	m_rebuilding = true;
-
-	// Be careful around here. The last e->remove_flag() will cause the other
-	// economy to delete itself.
 	for (std::vector<Flag *>::size_type i = e.get_nrflags() + 1; --i;) {
 		assert(i == e.get_nrflags());
 
 		Flag & flag = *e.m_flags[0];
 
-		e._remove_flag(flag);
+		e._remove_flag(flag); // do not delete other economy yet!
 		add_flag(flag);
 	}
 
-	// Fix up Supply/Request after rebuilding
-	m_rebuilding = false;
+	// Remember that the other economy may not have been connected before the merge
+	m_split_checks.insert(m_split_checks.end(), e.m_split_checks.begin(), e.m_split_checks.end());
 
 	// implicitly delete the economy
 	delete &e;
@@ -567,18 +586,12 @@ void Economy::_split(const std::set<OPtr<Flag> > & flags)
 		e.m_worker_target_quantities[i] = m_worker_target_quantities[i];
 	}
 
-	m_rebuilding = true;
-	e.m_rebuilding = true;
-
 	container_iterate_const(std::set<OPtr<Flag> >, flags, it) {
 		Flag & flag = *it.current->get(owner().egbase());
+		assert(m_flags.size() > 1);  // We will not be deleted in remove_flag, right?
 		remove_flag(flag);
 		e.add_flag(flag);
 	}
-
-	// Fix Supply/Request after rebuilding
-	m_rebuilding = false;
-	e.m_rebuilding = false;
 
 	// As long as rebalance commands are tied to specific flags, we
 	// need this, because the flag that rebalance commands for us were
@@ -603,7 +616,7 @@ void Economy::_start_request_timer(int32_t const delta)
  * \return 0 if no supply is found, the best supply otherwise
 */
 Supply * Economy::_find_best_supply
-	(Game & game, Request const & req, int32_t & cost)
+	(Game & game, const Request & req, int32_t & cost)
 {
 	assert(req.is_open());
 
@@ -666,7 +679,7 @@ struct RequestSupplyPair {
 
 	struct Compare {
 		bool operator()
-			(RequestSupplyPair const & p1, RequestSupplyPair const & p2)
+			(const RequestSupplyPair & p1, const RequestSupplyPair & p2)
 		{
 			return
 				p1.priority == p2.priority ? p1.pairid < p2.pairid :
@@ -687,7 +700,7 @@ struct RSPairStruct {
 	uint32_t pairid;
 	int32_t nexttimer;
 
-	RSPairStruct() : pairid(0) {}
+	RSPairStruct() : pairid(0), nexttimer(0) {}
 };
 
 /**
@@ -754,7 +767,7 @@ void Economy::_balance_requestsupply(Game & game)
 	_process_requests(game, rsps);
 
 	//  Now execute request/supply pairs.
-	while (rsps.queue.size()) {
+	while (!rsps.queue.empty()) {
 		RequestSupplyPair rsp = rsps.queue.top();
 
 		rsps.queue.pop();
@@ -809,9 +822,9 @@ void Economy::_create_requested_worker(Game & game, Ware_Index index)
 	// We have worker demand that is not fulfilled by supplies
 	// Find warehouses where we can create the required workers,
 	// and collect stats about existing build prerequisites
-	Tribe_Descr const & tribe = owner().tribe();
-	Worker_Descr const & w_desc = *tribe.get_worker_descr(index);
-	Worker_Descr::Buildcost const & cost = w_desc.buildcost();
+	const Tribe_Descr & tribe = owner().tribe();
+	const Worker_Descr & w_desc = *tribe.get_worker_descr(index);
+	const Worker_Descr::Buildcost & cost = w_desc.buildcost();
 	std::vector<uint32_t> total_available;
 	uint32_t total_planned = 0;
 
@@ -890,7 +903,7 @@ void Economy::_create_requested_workers(Game & game)
 	if (!warehouses().size())
 		return;
 
-	Tribe_Descr const & tribe = owner().tribe();
+	const Tribe_Descr & tribe = owner().tribe();
 	for
 		(Ware_Index index = Ware_Index::First();
 		 index < tribe.get_nrworkers(); ++index)
@@ -998,6 +1011,8 @@ void Economy::balance(uint32_t const timerid)
 
 	Game & game = ref_cast<Game, Editor_Game_Base>(owner().egbase());
 
+	_check_splits();
+
 	_create_requested_workers (game);
 
 	_balance_requestsupply(game);
@@ -1006,4 +1021,3 @@ void Economy::balance(uint32_t const timerid)
 }
 
 }
-

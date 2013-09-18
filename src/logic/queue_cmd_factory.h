@@ -24,7 +24,7 @@
 
 namespace Widelands {
 
-class GameLogicCommand;
+struct GameLogicCommand;
 
 /*
  * This creates the correct queue commands

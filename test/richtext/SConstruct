@@ -1,0 +1,43 @@
+import os
+import numpy
+
+env = Environment(CXX="clang++")
+env.Append(CCFLAGS= "-Wall -g")
+
+## The main library
+env.ParseConfig("pkg-config sdl --cflags")
+env.ParseConfig("pkg-config sdl --libs")
+env.Append(LIBS="SDL_ttf")
+env.Append(CPPPATH="../../src/")
+env.Append(CPPPATH="/usr/local/include")  # for boost
+rt_lib = env.Library([
+    "../../src/graphic/image_cache.cc",
+    "../../src/graphic/render/sdl_helper.cc",
+    "../../src/graphic/render/sdl_surface.cc",
+    "../../src/graphic/surface_cache.cc",
+    "../../src/graphic/text/rt_parse.cc",
+    "../../src/graphic/text/rt_render.cc",
+    "../../src/graphic/text/sdl_ttf_font_impl.cc",
+    "../../src/graphic/text/sdl_ttf_font_loader_from_file.cc",
+    "../../src/graphic/text/textstream.cc",
+    "../../src/log.cc",
+])
+
+# Debug program that renders one text
+render_env = env.Clone()
+render_env.Append(CXXFLAGS=["-DRENDER_AS_PROGRAM"])
+render_env.Append(LIBS=[rt_lib])
+render_env.Program("render", ["render.cc", "lodepng.cc", "from_file_image_loader.cc"])
+
+# Python library
+pylib_env = env.Environment(PYEXT_USE_DISTUTILS=True, SHCXX="clang++", ENV = {'PATH': os.environ["PATH"]})
+pylib_env.Tool("pyext")
+pylib_env.Tool("cython")
+pylib_env.ParseConfig("pkg-config sdl --cflags")
+pylib_env.ParseConfig("pkg-config sdl --libs")
+pylib_env.Append(CPPPATH="../../src/")
+pylib_env.Append(LIBS=["SDL_ttf", rt_lib])
+pylib_env.Append(CPPPATH=numpy.get_include())
+ext = pylib_env.PythonExtension("pyrt_render",
+    ["pyrt_render.pyx", "lodepng.cc", "render.cc", "from_file_image_loader.cc"],
+)

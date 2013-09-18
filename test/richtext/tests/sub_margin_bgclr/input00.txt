@@ -1,0 +1,12 @@
+<rt>
+<sub background="ff0000">
+<sub margin=2 padding=16 background=00ff00 width=370>
+<p><font color=ff0000 bold=true>
+Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod
+tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At
+vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren,
+no sea takimata sanctus est Lorem ipsum dolor sit amet.
+</font></p>
+</sub>
+</sub>
+</rt>

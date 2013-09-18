@@ -20,11 +20,11 @@
 #ifndef CMD_QUEUE_H
 #define CMD_QUEUE_H
 
-#include "queue_cmd_ids.h"
-#include "widelands_fileread.h"
-#include "widelands_filewrite.h"
-
 #include <queue>
+
+#include "logic/queue_cmd_ids.h"
+#include "logic/widelands_fileread.h"
+#include "logic/widelands_filewrite.h"
 
 namespace Widelands {
 
@@ -111,7 +111,7 @@ struct GameLogicCommand : public Command {
 };
 
 class Cmd_Queue {
-	friend class Game_Cmd_Queue_Data_Packet;
+	friend struct Game_Cmd_Queue_Data_Packet;
 
 	enum {
 		cat_nongamelogic = 0,
@@ -130,7 +130,7 @@ class Cmd_Queue {
 		int32_t category;
 		uint32_t serial;
 
-		bool operator< (cmditem const & c) const
+		bool operator< (const cmditem & c) const
 		{
 			if (cmd->duetime() != c.cmd->duetime())
 				return cmd->duetime() > c.cmd->duetime();

@@ -17,34 +17,33 @@
  *
  */
 
-#include "editor_main_menu_save_map.h"
+#include "editor/ui_menus/editor_main_menu_save_map.h"
+
+#include <cstdio>
+#include <cstring>
+#include <string>
+
+#include <boost/format.hpp>
 
 #include "constants.h"
 #include "editor/editorinteractive.h"
-#include "editor_main_menu_save_map_make_directory.h"
-#include "io/filesystem/filesystem.h"
+#include "editor/ui_menus/editor_main_menu_save_map_make_directory.h"
 #include "graphic/graphic.h"
 #include "i18n.h"
+#include "io/filesystem/filesystem.h"
 #include "io/filesystem/layered_filesystem.h"
-#include "profile/profile.h"
-#include "wexception.h"
+#include "io/filesystem/zip_filesystem.h"
 #include "map_io/widelands_map_loader.h"
 #include "map_io/widelands_map_saver.h"
-#include "io/filesystem/zip_filesystem.h"
-
+#include "profile/profile.h"
 #include "ui_basic/button.h"
 #include "ui_basic/editbox.h"
 #include "ui_basic/listselect.h"
 #include "ui_basic/messagebox.h"
 #include "ui_basic/multilinetextarea.h"
 #include "ui_basic/textarea.h"
-
 #include "upcast.h"
-
-#include <cstdio>
-#include <cstring>
-#include <string>
-
+#include "wexception.h"
 
 inline Editor_Interactive & Main_Menu_Save_Map::eia() {
 	return ref_cast<Editor_Interactive, UI::Panel>(*get_parent());
@@ -72,7 +71,7 @@ Main_Menu_Save_Map::Main_Menu_Save_Map(Editor_Interactive & parent)
 			(this,
 			 posx, posy + get_inner_h() - spacing - offsy - 60 + 3,
 			 get_inner_w() / 2 - spacing, 20,
-			 g_gr->get_picture(PicMod_UI, "pics/but1.png"));
+			 g_gr->images().get("pics/but1.png"));
 	m_editbox->setText(parent.egbase().map().get_name());
 	m_editbox->changed.connect(boost::bind(&Main_Menu_Save_Map::edit_box_changed, this));
 
@@ -124,27 +123,26 @@ Main_Menu_Save_Map::Main_Menu_Save_Map(Editor_Interactive & parent)
 			 "---", UI::Align_CenterLeft);
 
 
-	posx = 5;
 	posy = get_inner_h() - 30;
 
 	m_ok_btn = new UI::Button
 		(this, "ok",
 		 get_inner_w() / 2 - spacing - 80, posy, 80, 20,
-		 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
+		 g_gr->images().get("pics/but0.png"),
 		 _("OK"));
 	m_ok_btn->sigclicked.connect(boost::bind(&Main_Menu_Save_Map::clicked_ok, boost::ref(*this)));
 
 	UI::Button * cancelbtn = new UI::Button
 		(this, "cancel",
-		 get_inner_w() / 2 + spacing, posy, 80, 20,
-		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
+		 posx, posy, 80, 20,
+		 g_gr->images().get("pics/but1.png"),
 		 _("Cancel"));
 	cancelbtn->sigclicked.connect(boost::bind(&Main_Menu_Save_Map::die, boost::ref(*this)));
 
 	UI::Button * make_directorybtn = new UI::Button
 		(this, "make_directory",
 		 spacing, posy, 120, 20,
-		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
+		 g_gr->images().get("pics/but1.png"),
 		 _("Make Directory"));
 	make_directorybtn->sigclicked.connect
 		(boost::bind(&Main_Menu_Save_Map::clicked_make_directory, boost::ref(*this)));
@@ -228,7 +226,7 @@ void Main_Menu_Save_Map::clicked_item(uint32_t) {
 	if (Widelands::WL_Map_Loader::is_widelands_map(name)) {
 		Widelands::Map map;
 		{
-			std::auto_ptr<Widelands::Map_Loader> const ml
+			std::unique_ptr<Widelands::Map_Loader> const ml
 				(map.get_correct_loader(name));
 			ml->preload_map(true); // This has worked before, no problem
 		}
@@ -253,9 +251,13 @@ void Main_Menu_Save_Map::clicked_item(uint32_t) {
 		m_nrplayers->set_text("");
 		m_size     ->set_text("");
 		if (g_fs->IsDirectory(name)) {
-			m_descr    ->set_text(_("<Directory>"));
+			std::string dir_string =
+				(boost::format("\\<%s\\>") % _("directory")).str();
+			m_descr    ->set_text(dir_string);
 		} else {
-			m_descr    ->set_text(_("<Not a map file>"));
+			std::string not_map_string =
+				(boost::format("\\<%s\\>") % _("Not a map file")).str();
+			m_descr    ->set_text(not_map_string);
 		}
 
 	}
@@ -267,12 +269,9 @@ void Main_Menu_Save_Map::clicked_item(uint32_t) {
  */
 void Main_Menu_Save_Map::double_clicked_item(uint32_t) {
 	const char * const name = m_ls->get_selected();
-	if
-		(g_fs->IsDirectory(name)
-		 &&
-		 !Widelands::WL_Map_Loader::is_widelands_map(name))
-	{
-		m_curdir = g_fs->FS_CanonicalizeName(name);
+
+	if (g_fs->IsDirectory(name) && !Widelands::WL_Map_Loader::is_widelands_map(name)) {
+		m_curdir = name;
 		m_ls->clear();
 		m_mapfiles.clear();
 		fill_list();
@@ -289,11 +288,17 @@ void Main_Menu_Save_Map::fill_list() {
 
 	// First, we add all directories. We manually add the parent directory
 	if (m_curdir != m_basedir) {
-		m_parentdir = g_fs->FS_CanonicalizeName(m_curdir + "/..");
+#ifndef _WIN32
+		m_parentdir = m_curdir.substr(0, m_curdir.rfind('/'));
+#else
+		m_parentdir = m_curdir.substr(0, m_curdir.rfind('\\'));
+#endif
+		std::string parent_string =
+				(boost::format("\\<%s\\>") % _("parent")).str();
 		m_ls->add
-			("<parent>",
+			(parent_string.c_str(),
 			 m_parentdir.c_str(),
-			 g_gr->get_picture(PicMod_Game, "pics/ls_dir.png"));
+			 g_gr->images().get("pics/ls_dir.png"));
 	}
 
 	const filenameset_t::const_iterator mapfiles_end = m_mapfiles.end();
@@ -312,7 +317,7 @@ void Main_Menu_Save_Map::fill_list() {
 		m_ls->add
 			(FileSystem::FS_Filename(name),
 			 name,
-			 g_gr->get_picture(PicMod_Game, "pics/ls_dir.png"));
+			 g_gr->images().get("pics/ls_dir.png"));
 	}
 
 	Widelands::Map map;
@@ -324,16 +329,16 @@ void Main_Menu_Save_Map::fill_list() {
 	{
 		char const * const name = pname->c_str();
 
-		// we do not list S2 files since we only write wlmf
-		if (upcast(Widelands::WL_Map_Loader, ml, map.get_correct_loader(name))) {
+		// we do not list S2 files since we only write wmf
+		std::unique_ptr<Widelands::Map_Loader> ml(map.get_correct_loader(name));
+		if (upcast(Widelands::WL_Map_Loader, wml, ml.get())) {
 			try {
-				ml->preload_map(true);
+				wml->preload_map(true);
 				m_ls->add
 					(FileSystem::FS_Filename(name),
 					 name,
-					 g_gr->get_picture(PicMod_Game, "pics/ls_wlmap.png"));
-			} catch (_wexception const &) {} //  we simply skip illegal entries
-			delete ml;
+					 g_gr->images().get("pics/ls_wlmap.png"));
+			} catch (const _wexception &) {} //  we simply skip illegal entries
 		}
 	}
 	if (m_ls->size())
@@ -388,14 +393,13 @@ bool Main_Menu_Save_Map::save_map(std::string filename, bool binary) {
 		g_fs->Unlink(complete_filename);
 	}
 
-	FileSystem & fs =
-		g_fs->CreateSubFileSystem
-			(complete_filename, binary ? FileSystem::ZIP : FileSystem::DIR);
-	Widelands::Map_Saver wms(fs, eia().egbase());
+	std::unique_ptr<FileSystem> fs
+			(g_fs->CreateSubFileSystem(complete_filename, binary ? FileSystem::ZIP : FileSystem::DIR));
+	Widelands::Map_Saver wms(*fs, eia().egbase());
 	try {
 		wms.save();
 		eia().set_need_save(false);
-	} catch (std::exception const & e) {
+	} catch (const std::exception & e) {
 		std::string s =
 			_
 			("Map Saving Error!\nSaved Map-File may be corrupt!\n\nReason "
@@ -405,7 +409,6 @@ bool Main_Menu_Save_Map::save_map(std::string filename, bool binary) {
 			(&eia(), _("Save Map Error!!"), s, UI::WLMessageBox::OK);
 		mbox.run();
 	}
-	delete &fs;
 	die();
 
 	return true;

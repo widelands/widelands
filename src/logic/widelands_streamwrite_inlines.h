@@ -20,13 +20,12 @@
 #ifndef WIDELANDS_STREAMWRITE_INLINES_H
 #define WIDELANDS_STREAMWRITE_INLINES_H
 
-#include "widelands_streamwrite.h"
-
-#include "building.h"
+#include "logic/building.h"
+#include "logic/widelands_streamwrite.h"
 
 namespace Widelands {
 
-inline void StreamWrite::Tribe(Tribe_Descr const & tribe) {
+inline void StreamWrite::Tribe(const Tribe_Descr & tribe) {
 	String(tribe.name());
 }
 
@@ -34,12 +33,12 @@ inline void StreamWrite::Tribe(Tribe_Descr const * tribe) {
 	CString(tribe ? tribe->name().c_str() : "");
 }
 
-inline void StreamWrite::Immovable_Type(Immovable_Descr const & immovable) {
+inline void StreamWrite::Immovable_Type(const Immovable_Descr & immovable) {
 	Tribe (immovable.get_owner_tribe());
 	String(immovable.name());
 }
 
-inline void StreamWrite::Building_Type(Building_Descr const & building) {
+inline void StreamWrite::Building_Type(const Building_Descr & building) {
 	Tribe (building.tribe());
 	String(building.name());
 }

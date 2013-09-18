@@ -20,16 +20,15 @@
 #ifndef EDITOR_PLAYER_MENU_H
 #define EDITOR_PLAYER_MENU_H
 
+#include <cstring>
+#include <string>
+#include <vector>
+
 #include "constants.h"
-
 #include "logic/widelands.h"
-
 #include "ui_basic/button.h"
 #include "ui_basic/unique_window.h"
 
-#include <string>
-#include <cstring>
-#include <vector>
 
 struct Editor_Interactive;
 namespace UI {
@@ -38,7 +37,8 @@ struct EditBox;
 struct Button;
 }
 
-struct Editor_Player_Menu : public UI::UniqueWindow {
+class Editor_Player_Menu : public UI::UniqueWindow {
+public:
 	Editor_Player_Menu
 		(Editor_Interactive &, UI::UniqueWindow::Registry &);
 	virtual ~Editor_Player_Menu() {}
@@ -54,9 +54,6 @@ private:
 		* m_plr_set_pos_buts            [MAX_PLAYERS],
 		* m_plr_set_tribes_buts         [MAX_PLAYERS];
 	std::vector<std::string> m_tribes;
-
-	int32_t m_spt_index;
-	int32_t m_mis_index;
 
 	int32_t m_posy;
 

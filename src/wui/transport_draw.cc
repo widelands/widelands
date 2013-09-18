@@ -20,17 +20,14 @@
 #include "economy/flag.h"
 #include "economy/road.h"
 #include "economy/ware_instance.h"
+#include "graphic/rendertarget.h"
 #include "logic/editor_game_base.h"
 #include "logic/player.h"
-#include "graphic/rendertarget.h"
 
 namespace Widelands {
 
 void Flag::draw
-	(Editor_Game_Base const &       game,
-	 RenderTarget           &       dst,
-	 FCoords,
-	 Point                    const pos)
+	(const Editor_Game_Base& game, RenderTarget& dst, const FCoords&, const Point& pos)
 {
 	static struct {int32_t x, y;} ware_offsets[8] = {
 		{-5,  1},
@@ -63,6 +60,6 @@ void Flag::draw
 }
 
 /** The road is drawn by the terrain renderer via marked fields. */
-void Road::draw(Editor_Game_Base const &, RenderTarget &, FCoords, Point) {}
+void Road::draw(const Editor_Game_Base &, RenderTarget &, const FCoords&, const Point&) {}
 
 }

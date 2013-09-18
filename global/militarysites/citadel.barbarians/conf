@@ -1,8 +1,9 @@
 size=big
 max_soldiers=12
-heal_per_second=2
+heal_per_second=220
 conquers=12
 buildable=no
+prefer_heroes=true
 
 [idle]
 pics=../../../tribes/barbarians/citadel/citadel_i_??.png

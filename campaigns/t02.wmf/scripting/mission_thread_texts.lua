@@ -15,12 +15,12 @@ end
 
 -- Headings
 function h1(s)
-   return "<p font=FreeSerif font-size=18 font-weight=bold font-color=D1D1D1>"
+   return "<p font=DejaVuSerif font-size=18 font-weight=bold font-color=D1D1D1>"
       ..  s .. "<br></p><p font-size=8> <br></p>"
 end
 
 function h2(s)
-   return "<p font=FreeSerif font-size=12 font-weight=bold font-color=D1D1D1>"
+   return "<p font=DejaVuSerif font-size=12 font-weight=bold font-color=D1D1D1>"
       ..  s .. "<br></p><p font-size=4> <br></p>"
 end
 
@@ -40,7 +40,7 @@ function speech(img, clr, g_title, g_text)
      
    local s = ""
    if title then
-      s = rt("<p font-size=20 font-weight=bold font-face=FreeSerif " .. 
+      s = rt("<p font-size=20 font-weight=bold font-face=DejaVuSerif " .. 
          ("font-color=%s>"):format(clr) .. title ..
          "</p><p font-size=8> <br></p>"
       )
@@ -65,7 +65,7 @@ end
 
 function new_objectives(...) 
    local s = rt(
-   "<p font=FreeSerif font-size=18 font-weight=bold font-color=D1D1D1>"
+   "<p font=DejaVuSerif font-size=18 font-weight=bold font-color=D1D1D1>"
    .. _"New Objectives" .. "</p>")
 
    for idx,obj in ipairs{...} do
@@ -309,14 +309,14 @@ order_msg_10_bread = {
    body=khantrukh(_"The elder jumps into the air...", _
 [["Wisdom commands to seek variety.<br> North of the great mountain is a large
 plain - why don't we use the space Mother Nature gave us and build a farm? I
-sure would enjoy a freshly baken pitta bread for a change..."]]) ..
+sure would enjoy a freshly baked pitta bread for a change..."]]) ..
    new_objectives(obj_begin_farming)
 }
 
 order_msg_11_basic_food_began = {
    title=_"Your loyal companion",
    body=boldreth(_"Boldreth cheers up...", _
-[[ "Our hunters are out in the forests, Thron.<br> I promise you, before the sun sets today you will have a magnificient meal fit for the chieftain of all clans!" ]]
+[[ "Our hunters are out in the forests, Thron.<br> I promise you, before the sun sets today you will have a magnificent meal fit for the chieftain of all clans!" ]]
    )
 }
 

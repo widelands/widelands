@@ -775,7 +775,9 @@ msgstr ""
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:381
 msgid "Now we know what's going on. Let's wait for this quarry to finish."
-msgstr "これで、今どうなっているのかが分かるようになりました。採石場が完成するのを待ちましょう。"
+msgstr ""
+"これで、今どうなっているのかが分かるようになりました。"
+"採石場が完成するのを待ちましょう。"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:306
 msgid ""

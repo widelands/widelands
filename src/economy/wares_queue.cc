@@ -17,21 +17,19 @@
  *
  */
 
-#include "wares_queue.h"
+#include "economy/wares_queue.h"
 
-// Package includes
-#include "economy.h"
-
+#include "economy/economy.h"
+#include "economy/request.h"
 #include "logic/editor_game_base.h"
 #include "logic/game.h"
-#include "map_io/widelands_map_map_object_loader.h"
-#include "map_io/widelands_map_map_object_saver.h"
 #include "logic/player.h"
-#include "request.h"
 #include "logic/tribe.h"
-#include "wexception.h"
 #include "logic/widelands_fileread.h"
 #include "logic/widelands_filewrite.h"
+#include "map_io/widelands_map_map_object_loader.h"
+#include "map_io/widelands_map_map_object_saver.h"
+#include "wexception.h"
 
 namespace Widelands {
 
@@ -64,8 +62,8 @@ WaresQueue::WaresQueue
 void WaresQueue::cleanup() {
 	assert(m_ware);
 
-	if (uint8_t const count = m_filled && m_owner.get_economy())
-		m_owner.get_economy()->remove_wares(m_ware, count);
+	if (m_filled && m_owner.get_economy())
+		m_owner.get_economy()->remove_wares(m_ware, m_filled);
 
 	m_filled = 0;
 	m_max_size = 0;
@@ -287,7 +285,7 @@ void WaresQueue::Read(FileRead & fr, Game & game, Map_Map_Object_Loader & mol)
 		} else
 			throw game_data_error
 				(_("unknown/unhandled version %u"), packet_version);
-	} catch (game_data_error const & e) {
+	} catch (const game_data_error & e) {
 		throw game_data_error(_("waresqueue: %s"), e.what());
 	}
 }

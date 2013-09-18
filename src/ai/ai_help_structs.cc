@@ -17,7 +17,8 @@
  *
  */
 
-#include "ai_help_structs.h"
+#include "ai/ai_help_structs.h"
+
 #include "logic/player.h"
 #include "upcast.h"
 
@@ -35,7 +36,7 @@ bool FindNodeWithFlagOrRoad::accept (const Map &, FCoords fc) const
 			(dynamic_cast<Flag const *>(pimm)
 			 or
 			 (dynamic_cast<Road const *>(pimm) &&
-			  fc.field->nodecaps() & BUILDCAPS_FLAG));
+			  (fc.field->nodecaps() & BUILDCAPS_FLAG)));
 	return false;
 }
 

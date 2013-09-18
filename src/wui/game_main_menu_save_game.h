@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006, 2008, 2010-2011 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006, 2008-2013 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,6 +20,8 @@
 #ifndef GAME_MAIN_MENU_SAVE_GAME_H
 #define GAME_MAIN_MENU_SAVE_GAME_H
 
+#include "i18n.h"
+#include "ref_cast.h"
 #include "ui_basic/button.h"
 #include "ui_basic/editbox.h"
 #include "ui_basic/listselect.h"
@@ -27,11 +29,7 @@
 #include "ui_basic/textarea.h"
 #include "ui_basic/unique_window.h"
 
-#include "i18n.h"
-
-#include "ref_cast.h"
-
-struct Interactive_GameBase;
+class Interactive_GameBase;
 
 struct SaveWarnMessageBox;
 struct Game_Main_Menu_Save_Game : public UI::UniqueWindow {
@@ -40,9 +38,11 @@ struct Game_Main_Menu_Save_Game : public UI::UniqueWindow {
 		(Interactive_GameBase &, UI::UniqueWindow::Registry & registry);
 
 	void fill_list();
+	void select_by_name(std::string name);
+protected:
+	virtual void die();
 private:
 	Interactive_GameBase & igbase();
-	void die() {UI::UniqueWindow::die();}
 	void selected      (uint32_t);
 	void double_clicked(uint32_t);
 	void edit_box_changed();
@@ -50,10 +50,12 @@ private:
 	void delete_clicked();
 
 	bool save_game(std::string);
+	void pause_game(bool paused);
 
 	UI::Listselect<std::string> m_ls;
 	UI::EditBox * m_editbox;
-	UI::Textarea m_name_label, m_name, m_gametime_label, m_gametime;
+	UI::Textarea m_name_label, m_mapname, m_gametime_label, m_gametime, m_players_label,
+		m_win_condition_label, m_win_condition;
 	UI::Button * m_button_ok;
 	std::string m_curdir;
 	std::string m_parentdir;

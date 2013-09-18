@@ -1,12 +1,12 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2011 Widelands Development Team
+# Copyright (C) 2005-2013 Widelands Development Team
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2011-12-02 12:41+0000\n"
+"POT-Creation-Date: 2013-09-15 17:41+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -56,7 +56,7 @@ msgstr ""
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:319
 msgid ""
-" \"Our hunters are out in the forests, Thron.<br> I promise you, before the sun sets today you will have a magnificient meal fit for the chieftain of all clans!\" "
+" \"Our hunters are out in the forests, Thron.<br> I promise you, before the sun sets today you will have a magnificent meal fit for the chieftain of all clans!\" "
 msgstr ""
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:235
@@ -184,7 +184,7 @@ msgstr ""
 msgid ""
 "\"Wisdom commands to seek variety.<br> North of the great mountain is a large\n"
 "plain - why don't we use the space Mother Nature gave us and build a farm? I\n"
-"sure would enjoy a freshly baken pitta bread for a change...\""
+"sure would enjoy a freshly baked pitta bread for a change...\""
 msgstr ""
 
 #: ../../campaigns/t02.wmf/elemental:7

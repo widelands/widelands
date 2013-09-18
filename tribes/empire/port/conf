@@ -1,0 +1,31 @@
+size=port
+conquers=5
+heal_per_second=170
+
+[buildcost]
+trunk=3
+wood=4
+stone=4
+marble=2
+marblecolumn=1
+cloth=3
+gold=2
+
+[return_on_dismantle]
+trunk=1
+wood=1
+stone=2
+marble=2
+cloth=1
+gold=1
+
+[build]
+pics=port_b_??.png  # 4 frames
+hotspot=74 96
+playercolor=true
+
+[idle]
+pics=port_i_??.png  # 20 frames
+hotspot=74 96
+playercolor=true
+fps=10

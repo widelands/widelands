@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2011 by the Widelands Development Team
+ * Copyright (C) 2008-2012 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,10 +20,10 @@
 #ifndef NETHOST_H
 #define NETHOST_H
 
-#include "logic/widelands.h"
 #include "gamecontroller.h"
 #include "gamesettings.h"
-#include "network.h"
+#include "logic/widelands.h"
+#include "network/network.h"
 
 struct ChatMessage;
 struct NetHostImpl;
@@ -37,11 +37,11 @@ struct Client;
  * launch, as well as dealing with the actual network protocol.
  */
 struct NetHost : public GameController, private SyncCallback {
-	NetHost (std::string const & playername, bool ggz = false);
+	NetHost (const std::string & playername, bool internet = false);
 	virtual ~NetHost ();
 
 	void run(bool autostart = false);
-	std::string const & getLocalPlayername() const;
+	const std::string & getLocalPlayername() const;
 	int16_t getLocalPlayerposition();
 
 	// GameController interface
@@ -58,19 +58,19 @@ struct NetHost : public GameController, private SyncCallback {
 	// End GameController interface
 
 	// Pregame-related stuff
-	GameSettings const & settings();
+	const GameSettings & settings();
 	bool canLaunch();
 	void setScenario(bool);
 	void setMap
-		(std::string const & mapname,
-		 std::string const & mapfilename,
+		(const std::string & mapname,
+		 const std::string & mapfilename,
 		 uint32_t            maxplayers,
 		 bool                savegame = false);
 	void setPlayerState    (uint8_t number, PlayerSettings::State state, bool host = false);
-	void setPlayerTribe    (uint8_t number, std::string const & tribe, bool const random_tribe = false);
+	void setPlayerTribe    (uint8_t number, const std::string & tribe, bool const random_tribe = false);
 	void setPlayerInit     (uint8_t number, uint8_t index);
-	void setPlayerAI       (uint8_t number, std::string const & name, bool const random_ai = false);
-	void setPlayerName     (uint8_t number, std::string const & name);
+	void setPlayerAI       (uint8_t number, const std::string & name, bool const random_ai = false);
+	void setPlayerName     (uint8_t number, const std::string & name);
 	void setPlayer         (uint8_t number, PlayerSettings);
 	void setPlayerNumber   (uint8_t number);
 	void setPlayerTeam     (uint8_t number, Widelands::TeamNumber team);
@@ -93,6 +93,8 @@ struct NetHost : public GameController, private SyncCallback {
 	void handle_dserver_command(std::string, std::string);
 	void dserver_send_maps_and_saves(Client &);
 
+	void report_result(uint8_t player, Widelands::PlayerEndResult result, const std::string & info);
+
 	void forcePause() {
 		m_forced_pause = true;
 		updateNetworkSpeed();
@@ -110,7 +112,9 @@ struct NetHost : public GameController, private SyncCallback {
 private:
 	NetTransferFile * file;
 
-	void sendSystemChat(char const * fmt, ...) PRINTF_FORMAT(2, 3);
+	void sendSystemMessageCode
+		(const std::string &,
+		 const std::string & a = "", const std::string & b = "", const std::string & c = "");
 	void requestSyncReports();
 	void checkSyncReports();
 	void syncreport();
@@ -129,9 +133,9 @@ private:
 
 	std::string getComputerPlayerName(uint8_t playernum);
 	bool haveUserName
-		(std::string const & name,
+		(const std::string & name,
 		 uint8_t             ignoreplayer = UserSettings::none());
-	void welcomeClient(uint32_t number, std::string const & playername);
+	void welcomeClient(uint32_t number, std::string & playername);
 	void committedNetworkTime(int32_t time);
 	void recvClientTime(uint32_t number, int32_t time);
 
@@ -145,17 +149,16 @@ private:
 
 	void disconnectPlayerController
 		(uint8_t number,
-		 std::string const & name,
-		 std::string const & reason,
-		 bool sendreason = true);
+		 const std::string & name);
 	void disconnectClient
 		(uint32_t number,
-		 std::string const & reason,
-		 bool sendreason = true);
+		 const std::string & reason,
+		 bool sendreason = true,
+		 const std::string & arg = "");
 	void reaper();
 
 	NetHostImpl * d;
-	bool use_ggz;
+	bool m_internet;
 	bool m_is_dedicated;
 	std::string m_password;
 	std::string m_dedicated_motd;

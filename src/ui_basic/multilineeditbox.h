@@ -20,10 +20,9 @@
 #ifndef UI_MULTILINEEDITBOX_H
 #define UI_MULTILINEEDITBOX_H
 
-#include "panel.h"
+#include <boost/signals2.hpp>
 
-#include <boost/scoped_ptr.hpp>
-#include <boost/signal.hpp>
+#include "ui_basic/panel.h"
 
 namespace UI {
 
@@ -37,20 +36,20 @@ struct Multiline_Editbox : public Panel {
 	Multiline_Editbox
 		(Panel *, int32_t x, int32_t y, uint32_t w, uint32_t h, const std::string & text);
 
-	boost::signal<void ()> changed;
+	boost::signals2::signal<void ()> changed;
 
-	std::string const & get_text() const;
-	void set_text(std::string const &);
+	const std::string & get_text() const;
+	void set_text(const std::string &);
 	void set_textstyle(const TextStyle &);
 
 	void set_maximum_bytes(uint32_t n);
 	uint32_t get_maximum_bytes() const;
 
+	virtual void focus();
+
 protected:
 	void draw(RenderTarget &);
 
-	bool handle_mousepress  (Uint8 btn, int32_t x, int32_t y);
-	bool handle_mouserelease(Uint8 btn, int32_t x, int32_t y);
 	bool handle_key(bool down, SDL_keysym);
 
 private:
@@ -58,7 +57,7 @@ private:
 	void insert(SDL_keysym code);
 
 	struct Data;
-	boost::scoped_ptr<Data> d;
+	std::unique_ptr<Data> d;
 };
 
 }

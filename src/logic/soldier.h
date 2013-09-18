@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2010 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2013 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,9 +20,8 @@
 #ifndef SOLDIER_H
 #define SOLDIER_H
 
-#include "graphic/picture_id.h"
-#include "worker.h"
-#include "tattribute.h"
+#include "logic/tattribute.h"
+#include "logic/worker.h"
 
 #define SOLDIER_HP_BAR_WIDTH 13
 
@@ -42,8 +41,8 @@ struct Battle;
 struct Soldier_Descr : public Worker_Descr {
 	Soldier_Descr
 		(char const * const _name, char const * const _descname,
-		 std::string const & directory, Profile &, Section & global_s,
-		 Tribe_Descr const &);
+		 const std::string & directory, Profile &, Section & global_s,
+		 const Tribe_Descr &);
 
 	// NOTE we have to explicitly return Worker_Descr::SOLDIER, as SOLDIER is
 	// NOTE as well defined in an enum in instances.h
@@ -67,16 +66,16 @@ struct Soldier_Descr : public Worker_Descr {
 	uint32_t get_defense_incr_per_level() const {return m_defense_incr;}
 	uint32_t get_evade_incr_per_level  () const {return m_evade_incr;}
 
-	PictureID get_hp_level_pic     (uint32_t const level) const {
+	const Image* get_hp_level_pic     (uint32_t const level) const {
 		assert(level <= m_max_hp_level);      return m_hp_pics     [level];
 	}
-	PictureID get_attack_level_pic (uint32_t const level) const {
+	const Image* get_attack_level_pic (uint32_t const level) const {
 		assert(level <= m_max_attack_level);  return m_attack_pics [level];
 	}
-	PictureID get_defense_level_pic(uint32_t const level) const {
+	const Image* get_defense_level_pic(uint32_t const level) const {
 		assert(level <= m_max_defense_level); return m_defense_pics[level];
 	}
-	PictureID get_evade_level_pic  (uint32_t const level) const {
+	const Image* get_evade_level_pic  (uint32_t const level) const {
 		assert(level <= m_max_evade_level);   return m_evade_pics  [level];
 	}
 
@@ -110,10 +109,10 @@ protected:
 	uint32_t m_max_evade_level;
 
 	//  level pictures
-	std::vector<PictureID>   m_hp_pics;
-	std::vector<PictureID>   m_attack_pics;
-	std::vector<PictureID>   m_evade_pics;
-	std::vector<PictureID>   m_defense_pics;
+	std::vector<const Image* >   m_hp_pics;
+	std::vector<const Image* >   m_attack_pics;
+	std::vector<const Image* >   m_evade_pics;
+	std::vector<const Image* >   m_defense_pics;
 	std::vector<std::string> m_hp_pics_fn;
 	std::vector<std::string> m_attack_pics_fn;
 	std::vector<std::string> m_evade_pics_fn;
@@ -133,7 +132,7 @@ protected:
 	std::vector<std::string> m_die_e_name;
 
 	std::vector<std::string> load_animations_from_string
-			(std::string const & directory, Profile & prof, Section & global_s,
+			(const std::string & directory, Profile & prof, Section & global_s,
 			 const char * anim_name);
 
 };
@@ -197,13 +196,13 @@ public:
 	/// Automatically select a task.
 	void init_auto_task(Game &);
 
-	Point calc_drawpos(Editor_Game_Base const &, Point) const;
+	Point calc_drawpos(const Editor_Game_Base &, Point) const;
 	/// Draw this soldier
 	virtual void draw
-		(const Editor_Game_Base &, RenderTarget &, const Point) const;
+		(const Editor_Game_Base &, RenderTarget &, const Point&) const;
 
 	static void calc_info_icon_size
-		(Tribe_Descr const &, uint32_t & w, uint32_t & h);
+		(const Tribe_Descr &, uint32_t & w, uint32_t & h);
 	void draw_info_icon(RenderTarget &, Point, bool anchor_below) const;
 
 	//  Information function from description.
@@ -227,16 +226,16 @@ public:
 	uint32_t get_defense() const;
 	uint32_t get_evade() const;
 
-	PictureID get_hp_level_pic     () const {
+	const Image* get_hp_level_pic     () const {
 		return descr().get_hp_level_pic     (m_hp_level);
 	}
-	PictureID get_attack_level_pic () const {
+	const Image* get_attack_level_pic () const {
 		return descr().get_attack_level_pic (m_attack_level);
 	}
-	PictureID get_defense_level_pic() const {
+	const Image* get_defense_level_pic() const {
 		return descr().get_defense_level_pic(m_defense_level);
 	}
-	PictureID get_evade_level_pic  () const {
+	const Image* get_evade_level_pic  () const {
 		return descr().get_evade_level_pic  (m_evade_level);
 	}
 
@@ -250,13 +249,13 @@ public:
 	void heal (uint32_t);
 	void damage (uint32_t); /// Damage quantity of hit points
 
-	virtual void log_general_info(Editor_Game_Base const &);
+	virtual void log_general_info(const Editor_Game_Base &);
 
 	bool isOnBattlefield();
 	bool is_attacking_player(Game &, Player &);
 	Battle * getBattle();
 	bool canBeChallenged();
-	virtual bool checkNodeBlocked(Game &, FCoords const &, bool commit);
+	virtual bool checkNodeBlocked(Game &, const FCoords &, bool commit);
 
 	void setBattle(Game &, Battle *);
 
@@ -280,6 +279,9 @@ private:
 	void sendSpaceSignals(Game &);
 	bool stayHome();
 
+	// Pop the current task or, if challenged, start the fighting task.
+	void pop_task_or_fight(Game &);
+
 protected:
 	static Task const taskAttack;
 	static Task const taskDefense;
@@ -287,6 +289,8 @@ protected:
 	static Task const taskMoveInBattle;
 	// May be this can be moved this to bob when finished
 	static Task const taskDie;
+
+	virtual bool is_evict_allowed();
 
 private:
 	uint32_t m_hp_current;
@@ -313,7 +317,7 @@ private:
 
 	// saving and loading
 protected:
-	class Loader : public Worker::Loader {
+	struct Loader : public Worker::Loader {
 	public:
 		Loader();
 

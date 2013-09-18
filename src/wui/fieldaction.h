@@ -36,10 +36,4 @@ void show_field_action
 	 Widelands::Player          * player,
 	 UI::UniqueWindow::Registry * registry);
 
-// building_ui.cc
-void show_bulldoze_confirm
-	(Interactive_Player         & parent,
-	 Widelands::Building        & building,
-	 Widelands::PlayerImmovable * const todestroy);
-
 #endif

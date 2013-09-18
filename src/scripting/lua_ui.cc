@@ -17,16 +17,17 @@
  *
  */
 
+#include "scripting/lua_ui.h"
+
 #include <lua.hpp>
 
+#include "gamecontroller.h"
 #include "logic/player.h"
+#include "scripting/c_utils.h"
+#include "scripting/lua_map.h"
+#include "scripting/luna.h"
 #include "upcast.h"
 #include "wui/interactive_player.h"
-
-#include "c_utils.h"
-#include "lua_map.h"
-
-#include "lua_ui.h"
 
 namespace LuaUi {
 
@@ -362,7 +363,7 @@ int L_Button::get_name(lua_State * L) {
 		Press and hold this button. This is mainly to visualize a pressing
 		event in tutorials
 */
-int L_Button::press(lua_State * L) {
+int L_Button::press(lua_State * /* L */) {
 	get()->handle_mousein(true);
 	get()->handle_mousepress(SDL_BUTTON_LEFT, 1, 1);
 	return 0;
@@ -373,7 +374,7 @@ int L_Button::press(lua_State * L) {
 		Click this button just as if the user would have moused over and clicked
 		it.
 */
-int L_Button::click(lua_State * L) {
+int L_Button::click(lua_State * /* L */) {
 	get()->handle_mousein(true);
 	get()->handle_mousepress(SDL_BUTTON_LEFT, 1, 1);
 	get()->handle_mouserelease(SDL_BUTTON_LEFT, 1, 1);
@@ -433,7 +434,7 @@ int L_Tab::get_active(lua_State * L) {
 
 		Click this tab making it the active one.
 */
-int L_Tab::click(lua_State * L) {
+int L_Tab::click(lua_State * /* L */) {
 	get()->activate();
 	return 0;
 }
@@ -482,7 +483,7 @@ int L_Window::get_name(lua_State * L) {
 		Closes this window. This invalidates this Object, do
 		not use it any longer.
 */
-int L_Window::close(lua_State * L) {
+int L_Window::close(lua_State * /* L */) {
 	delete m_panel;
 	m_panel = 0;
 	return 0;
@@ -525,6 +526,12 @@ L_MapView::L_MapView(lua_State * L) :
 	L_Panel(get_egbase(L).get_ibase()) {
 }
 
+void L_MapView::__unpersist(lua_State* L)
+{
+	Widelands::Game & game = get_game(L);
+	m_panel = game.get_ibase();
+}
+
 
 /*
  * Properties
@@ -542,6 +549,12 @@ int L_MapView::get_viewpoint_x(lua_State * L) {
 	return 1;
 }
 int L_MapView::set_viewpoint_x(lua_State * L) {
+	Widelands::Game & game = get_game(L);
+	// don't move view in replays
+	if (game.gameController()->getGameDescription() == "replay") {
+		return 0;
+	}
+
 	Map_View * mv = get();
 	Point p = mv->get_viewpoint();
 	p.x = luaL_checkuint32(L, -1);
@@ -553,6 +566,12 @@ int L_MapView::get_viewpoint_y(lua_State * L) {
 	return 1;
 }
 int L_MapView::set_viewpoint_y(lua_State * L) {
+	Widelands::Game & game = get_game(L);
+	// don't move view in replays
+	if (game.gameController()->getGameDescription() == "replay") {
+		return 0;
+	}
+
 	Map_View * mv = get();
 	Point p = mv->get_viewpoint();
 	p.y = luaL_checkuint32(L, -1);
@@ -670,7 +689,7 @@ int L_MapView::start_road_building(lua_State * L) {
 		If he wasn't, this will do nothing.
 */
 // UNTESTED
-int L_MapView::abort_road_building(lua_State * L) {
+int L_MapView::abort_road_building(lua_State * /* L */) {
 	Interactive_Base * me = get();
 	if (me->is_building_road())
 		me->abort_build_road();
@@ -686,7 +705,7 @@ int L_MapView::abort_road_building(lua_State * L) {
 		This is especially useful for automated testing of features and is for
 		example used in the widelands Lua test suite.
 */
-int L_MapView::close(lua_State * l) {
+int L_MapView::close(lua_State * /* l */) {
 	get()->end_modal(0);
 	return 0;
 }

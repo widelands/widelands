@@ -20,12 +20,12 @@
 #ifndef WORKER_DESCR_H
 #define WORKER_DESCR_H
 
-#include "bob.h"
+#include "logic/bob.h"
 #include "graphic/diranimations.h"
-#include "graphic/picture_id.h"
-
-#include "immovable.h"
+#include "logic/immovable.h"
 #include "io/filewrite.h"
+
+class Image;
 
 namespace Widelands {
 
@@ -53,8 +53,8 @@ public:
 
 	Worker_Descr
 		(char const * const name, char const * const descname,
-		 std::string const & directory, Profile &,  Section & global_s,
-		 Tribe_Descr const &);
+		 const std::string & directory, Profile &,  Section & global_s,
+		 const Tribe_Descr &);
 	virtual ~Worker_Descr();
 
 	virtual Bob & create_object() const;
@@ -62,7 +62,7 @@ public:
 	virtual void load_graphics();
 
 	bool is_buildable() const {return m_buildable;}
-	Buildcost const & buildcost() const throw () {
+	const Buildcost & buildcost() const throw () {
 		assert(is_buildable());
 		return m_buildcost;
 	}
@@ -90,12 +90,12 @@ public:
 			m_default_target_quantity = 1;
 	}
 
-	PictureID icon() const throw () {return m_icon;}
+	const Image* icon() const throw () {return m_icon;}
 	const DirAnimations & get_walk_anims() const throw () {return m_walk_anims;}
-	DirAnimations const & get_right_walk_anims(bool const carries_ware) const {
+	const DirAnimations & get_right_walk_anims(bool const carries_ware) const {
 		return carries_ware ? m_walkload_anims : m_walk_anims;
 	}
-	WorkerProgram const * get_program(std::string const &) const;
+	WorkerProgram const * get_program(const std::string &) const;
 
 	virtual Worker_Type get_worker_type() const {return NORMAL;}
 
@@ -112,7 +112,7 @@ public:
 	virtual uint32_t movecaps() const throw ();
 
 	typedef std::map<std::string, WorkerProgram *> Programs;
-	Programs const & programs() const throw () {return m_programs;}
+	const Programs & programs() const throw () {return m_programs;}
 
 	const std::string & compatibility_program(const std::string & programname) const;
 
@@ -125,7 +125,7 @@ protected:
 	Point             m_ware_hotspot;
 	uint32_t          m_default_target_quantity;
 	std::string const m_icon_fname; ///< Filename of worker's icon
-	PictureID         m_icon;       ///< Pointer to icon into picture stack
+	const Image     * m_icon;       ///< Pointer to icon into picture stack
 	DirAnimations     m_walk_anims;
 	DirAnimations     m_walkload_anims;
 	bool              m_buildable;

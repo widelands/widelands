@@ -17,14 +17,15 @@
  *
  */
 
-#include "messagebox.h"
+#include "ui_basic/messagebox.h"
 
 #include "constants.h"
-#include "i18n.h"
-#include "window.h"
-#include "multilinetextarea.h"
-#include "button.h"
 #include "graphic/font_handler.h"
+#include "graphic/graphic.h"
+#include "i18n.h"
+#include "ui_basic/button.h"
+#include "ui_basic/multilinetextarea.h"
+#include "ui_basic/window.h"
 #include "wlapplication.h"
 
 namespace UI {
@@ -40,7 +41,8 @@ WLMessageBox::WLMessageBox
 	(Panel * const parent,
 	 const std::string & caption,
 	 const std::string & text,
-	 const MB_Type type)
+	 const MB_Type type,
+	 Align align)
 	:
 	Window(parent, "message_box", 0, 0, 20, 20, caption.c_str()),
 	d(new WLMessageBoxImpl)
@@ -49,7 +51,7 @@ WLMessageBox::WLMessageBox
 	d->textarea = new Multiline_Textarea
 		(this,
 		 5, 5, 30, 30,
-		 text.c_str(), Align_Center);
+		 text.c_str(), align);
 
 	const int32_t outerwidth = parent ?
 		parent->get_inner_w() : g_gr->get_xres();
@@ -86,21 +88,21 @@ WLMessageBox::WLMessageBox
 		UI::Button * okbtn = new Button
 			(this, "ok",
 			 (get_inner_w() - 60) / 2, get_inner_h() - 30, 60, 20,
-			 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
+			 g_gr->images().get("pics/but0.png"),
 			 _("OK"));
 		okbtn->sigclicked.connect(boost::bind(&WLMessageBox::pressedOk, boost::ref(*this)));
 	} else if (type == YESNO) {
 		UI::Button * yesbtn = new Button
 			(this, "yes",
 			 (get_inner_w() / 2 - 60) / 2, get_inner_h() - 30, 60, 20,
-			 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
+			 g_gr->images().get("pics/but0.png"),
 			 _("Yes"));
 		yesbtn->sigclicked.connect(boost::bind(&WLMessageBox::pressedYes, boost::ref(*this)));
 		UI::Button * nobtn = new Button
 			(this, "no",
 			 (get_inner_w() / 2 - 60) / 2 + get_inner_w() / 2, get_inner_h() - 30,
 			 60, 20,
-			 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
+			 g_gr->images().get("pics/but1.png"),
 			 _("No"));
 		nobtn->sigclicked.connect(boost::bind(&WLMessageBox::pressedNo, boost::ref(*this)));
 	}
@@ -109,13 +111,6 @@ WLMessageBox::WLMessageBox
 WLMessageBox::~WLMessageBox()
 {
 }
-
-
-void WLMessageBox::set_align(Align align)
-{
-	d->textarea->set_align(align);
-}
-
 
 /**
  * Handle mouseclick.
@@ -142,22 +137,22 @@ bool WLMessageBox::handle_mouserelease(const Uint8, int32_t, int32_t)
 
 bool WLMessageBox::handle_key(bool down, SDL_keysym code)
 {
-	if (!down)
+	if (!down) {
 		return false;
+	}
 
-	switch (code.sym)
-	{
-	case SDLK_KP_ENTER:
-	case SDLK_RETURN:
-		pressedYes();
-		pressedOk();
-		return true;
-	case SDLK_ESCAPE:
-		pressedNo();
-		pressedOk();
-		return true;
-	default:
-		return false;
+	switch (code.sym) {
+		case SDLK_KP_ENTER:
+		case SDLK_RETURN:
+			pressedYes();
+			pressedOk();
+			return true;
+		case SDLK_ESCAPE:
+			pressedNo();
+			pressedOk();
+			return true;
+		default:
+			return false;
 	}
 
 	return UI::Panel::handle_key(down, code);

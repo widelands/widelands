@@ -1,9 +1,10 @@
 size=small
-heal_per_second=1
+heal_per_second=100
 conquers=5
 vision_range=13
 max_soldiers=3
 buildable=no
+prefer_heroes=false
 
 [idle]
 pics=../../../tribes/atlanteans/small_tower/small_tower_i_??.png

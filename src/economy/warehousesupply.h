@@ -20,9 +20,9 @@
 #ifndef WAREHOUSESUPPLY_H
 #define WAREHOUSESUPPLY_H
 
-#include "supply.h"
 #include "logic/warelist.h"
 #include "logic/wareworker.h"
+#include "economy/supply.h"
 
 namespace Widelands {
 
@@ -39,8 +39,8 @@ struct WarehouseSupply : public Supply {
 	void set_nrworkers(Ware_Index);
 	void set_nrwares  (Ware_Index);
 
-	WareList const & get_wares  () const {return m_wares;}
-	WareList const & get_workers() const {return m_workers;}
+	const WareList & get_wares  () const {return m_wares;}
+	const WareList & get_workers() const {return m_workers;}
 	uint32_t stock_wares  (Ware_Index const i) const {
 		return m_wares  .stock(i);
 	}
@@ -59,9 +59,9 @@ struct WarehouseSupply : public Supply {
 	virtual void get_ware_type(WareWorker & type, Ware_Index & ware) const;
 
 	virtual void send_to_storage(Game &, Warehouse * wh);
-	virtual uint32_t nr_supplies(Game const &, Request const &) const;
-	virtual WareInstance & launch_item(Game &, Request const &);
-	virtual Worker & launch_worker(Game &, Request const &);
+	virtual uint32_t nr_supplies(const Game &, const Request &) const;
+	virtual WareInstance & launch_item(Game &, const Request &);
+	virtual Worker & launch_worker(Game &, const Request &);
 
 private:
 	Economy   * m_economy;

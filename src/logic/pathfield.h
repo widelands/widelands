@@ -20,11 +20,10 @@
 #ifndef PATHFIELD_H
 #define PATHFIELD_H
 
-#include <boost/scoped_array.hpp>
-#include <boost/shared_ptr.hpp>
-
-#include <stdint.h>
 #include <vector>
+
+#include <boost/shared_ptr.hpp>
+#include <stdint.h>
 
 #include "cookie_priority_queue.h"
 
@@ -59,7 +58,7 @@ struct Pathfield {
 };
 
 struct Pathfields {
-	boost::scoped_array<Pathfield> fields;
+	std::unique_ptr<Pathfield[]> fields;
 	uint16_t cycle;
 
 	Pathfields(uint32_t nrfields);
@@ -78,7 +77,7 @@ struct PathfieldManager {
 	boost::shared_ptr<Pathfields> allocate();
 
 private:
-	void clear(boost::shared_ptr<Pathfields> const & pf);
+	void clear(const boost::shared_ptr<Pathfields> & pf);
 
 	typedef std::vector<boost::shared_ptr<Pathfields> > List;
 

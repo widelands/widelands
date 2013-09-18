@@ -17,16 +17,14 @@
  *
  */
 
+#include "timestring.h"
+
 #include <cassert>
-#include <stdint.h>
 #include <ctime>
 
-char timestring_buffer[] =
-#ifdef WIN32
-"YYYY-MM-DDThh.mm.ss"; //  ':' is not a valid file name character under Windows
-#else
-"YYYY-MM-DDThh:mm:ss"; //  use proper ISO 8601 format on all other systems
-#endif
+#include <stdint.h>
+
+char timestring_buffer[] = "YYYY-MM-DDThh.mm.ss"; //  ':' is not a valid file name character for FAT FS
 
 char * timestring() {
 	time_t t;
@@ -80,3 +78,18 @@ char * timestring() {
 	}
 	return timestring_buffer;
 }
+
+char gamestringbuffer[] = "000:00:00";
+char * gametimestring(uint32_t gametime)
+{
+	uint32_t time = gametime / 1000;
+	gamestringbuffer[8] = '0' +  time        % 10;
+	gamestringbuffer[7] = '0' + (time /= 10) %  6;
+	gamestringbuffer[5] = '0' + (time /=  6) % 10;
+	gamestringbuffer[4] = '0' + (time /= 10) %  6;
+	gamestringbuffer[2] = '0' + (time /=  6) % 10;
+	gamestringbuffer[1] = '0' + (time /= 10) % 10;
+	gamestringbuffer[0] = '0' + (time /= 10);
+	return gamestringbuffer;
+}
+

@@ -20,24 +20,15 @@
 #ifndef WIDELANDS_H
 #define WIDELANDS_H
 
-#ifdef _MSC_VER
-#define __attribute__(x)
-#endif
 #include <cassert>
 #include <cstddef>
-#include <stdint.h>
 #include <limits>
 
+#include <stdint.h>
+
+#include "port.h"
+
 namespace Widelands {
-
-/// Maximum numbers of players in a game. The game logic code reserves 5 bits
-/// for player numbers, so it can keep track of 32 different player numbers, of
-/// which the value 0 means neutral and the values 1 .. 31 can be used as the
-/// numbers for actual players. So the upper limit of this value is 31.
-#define MAX_PLAYERS 8
-
-/// How often are statistics to be sampled.
-#define STATISTICS_SAMPLE_TIME 30000
 
 //  Type definitions for the game logic.
 
@@ -78,11 +69,11 @@ typedef uint32_t Serial; /// Serial number for Map_Object.
 /// like "if (index) ...". Operator bool asserts that the index is not null.
 /// The null value is guaranteed to be greater than any valid value. Therefore
 /// validity and upper limit can be tested using "if (index < nrItems)".
-template <typename T> struct _Index {
+template <typename T> struct Index_ {
 	typedef uint8_t value_t;
-	_Index(_Index const & other = Null()) : i(other.i) {}
-	explicit _Index(value_t const I) : i(I) {}
-	explicit _Index(size_t  const I)
+	Index_(const Index_ & other = Null()) : i(other.i) {}
+	explicit Index_(value_t const I) : i(I) {}
+	explicit Index_(size_t  const I)
 		: i(static_cast<value_t>(I))
 	{
 		assert(I < std::numeric_limits<value_t>::max());
@@ -99,10 +90,10 @@ template <typename T> struct _Index {
 	///  Get a value for array subscripting.
 	value_t value() const {assert(*this); return i;}
 
-	bool operator== (_Index const other) const {return i == other.i;}
-	bool operator!= (_Index const other) const {return i != other.i;}
-	bool operator<  (_Index const other) const {return i <  other.i;}
-	bool operator<= (_Index const other) const {return i <=  other.i;}
+	bool operator== (const Index_& other) const {return i == other.i;}
+	bool operator!= (const Index_& other) const {return i != other.i;}
+	bool operator<  (const Index_& other) const {return i <  other.i;}
+	bool operator<= (const Index_& other) const {return i <=  other.i;}
 
 	T operator++ () {return T(++i);}
 	T operator-- () {return T(--i);}
@@ -126,10 +117,10 @@ private:
 };
 
 #define DEFINE_INDEX(NAME)                                                    \
-   struct NAME : public _Index<NAME> {                                        \
-      NAME(NAME const & other = Null()) : _Index<NAME>(other) {}              \
-      explicit NAME(value_t const I) : _Index<NAME>(I) {}                     \
-      explicit NAME(size_t  const I) : _Index<NAME>(I) {}                     \
+   struct NAME : public Index_<NAME> {                                        \
+      NAME(const NAME & other = Null()) : Index_<NAME>(other) {}              \
+      explicit NAME(value_t const I) : Index_<NAME>(I) {}                     \
+      explicit NAME(size_t  const I) : Index_<NAME>(I) {}                     \
       explicit NAME(int32_t const I) __attribute__((deprecated));             \
    };                                                                         \
 

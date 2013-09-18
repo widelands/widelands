@@ -1,8 +1,9 @@
 size=big
 max_soldiers=8
-heal_per_second=1
+heal_per_second=170
 conquers=11
 enhancement=castle
+prefer_heroes=true
 
 [buildcost]
 wood=5
@@ -10,6 +11,13 @@ trunk=2
 stone=8
 marble=2
 marblecolumn=2
+
+[return_on_dismantle]
+wood=2
+trunk=1
+stone=5
+marble=1
+marblecolumn=1
 
 [idle]
 pics=fortress_i_??.png

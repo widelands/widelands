@@ -20,7 +20,7 @@
 #ifndef LAYERED_FILESYSTEM_H
 #define LAYERED_FILESYSTEM_H
 
-#include "filesystem.h"
+#include "io/filesystem/filesystem.h"
 
 /**
  * LayeredFileSystem is a file system which basically merges several layered
@@ -41,41 +41,41 @@
  * $CWD  <-- the current-working directory; this is useful for debugging, when
  * the executable isn't in the root of the game-data directory
  */
-struct LayeredFileSystem : public FileSystem {
+class LayeredFileSystem : public FileSystem {
+public:
 	LayeredFileSystem();
 	virtual ~LayeredFileSystem();
 
 	virtual void    AddFileSystem(FileSystem &);
 	virtual void    SetHomeFileSystem(FileSystem &);
 
-	virtual void RemoveFileSystem(FileSystem const &);
+	virtual void RemoveFileSystem(const FileSystem &);
 
 	virtual int32_t FindFiles
-		(std::string const & path,
-		 std::string const & pattern,
+		(const std::string & path,
+		 const std::string & pattern,
 		 filenameset_t     * results,
 		 uint32_t            depth = 0);
 
 	virtual bool IsWritable() const;
-	virtual bool            FileExists(std::string const & path);
-	virtual bool     IsDirectory      (std::string const & path);
-	virtual void EnsureDirectoryExists(std::string const & dirname);
-	virtual void   MakeDirectory      (std::string const & dirname);
+	virtual bool            FileExists(const std::string & path);
+	virtual bool     IsDirectory      (const std::string & path);
+	virtual void EnsureDirectoryExists(const std::string & dirname);
+	virtual void   MakeDirectory      (const std::string & dirname);
 
-	virtual void * Load(std::string const & fname, size_t & length);
+	virtual void * Load(const std::string & fname, size_t & length);
 	virtual void * fastLoad
-		(std::string const & fname, size_t & length, bool & fast);
+		(const std::string & fname, size_t & length, bool & fast);
 	virtual void Write
-		(std::string const & fname, void const * data, int32_t length);
+		(const std::string & fname, void const * data, int32_t length);
 
-	virtual StreamRead  * OpenStreamRead (std::string const & fname);
-	virtual StreamWrite * OpenStreamWrite(std::string const & fname);
+	virtual StreamRead  * OpenStreamRead (const std::string & fname);
+	virtual StreamWrite * OpenStreamWrite(const std::string & fname);
 
-	virtual FileSystem &   MakeSubFileSystem(std::string const & dirname);
-	virtual FileSystem & CreateSubFileSystem
-		(std::string const & dirname, Type);
-	virtual void Unlink(std::string const & file);
-	virtual void Rename(std::string const &, std::string const &);
+	virtual FileSystem * MakeSubFileSystem(const std::string & dirname);
+	virtual FileSystem * CreateSubFileSystem(const std::string & dirname, Type);
+	virtual void Unlink(const std::string & file);
+	virtual void Rename(const std::string &, const std::string &);
 
 	virtual std::string getBasename() {return std::string();};
 
@@ -102,11 +102,12 @@ extern LayeredFileSystem * g_fs;
 /// stack and make sure that it is removed when the object goes out of scope.
 /// This is exception-safe, unlike calling g_fs->AddFileSystem and
 /// g_fs->RemoveFileSystem directly.
-struct FileSystemLayer {
+class FileSystemLayer {
+public:
 	FileSystemLayer(FileSystem & fs) : m_fs(fs) {g_fs->AddFileSystem(fs);}
 	~FileSystemLayer() {g_fs->RemoveFileSystem(m_fs);}
 private:
-	FileSystem const & m_fs;
+	const FileSystem & m_fs;
 };
 
 #endif

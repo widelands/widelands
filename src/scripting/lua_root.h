@@ -22,7 +22,8 @@
 
 #include <lua.hpp>
 
-#include "luna.h"
+#include "scripting/lua_bases.h"
+#include "scripting/luna.h"
 
 namespace LuaRoot {
 
@@ -53,6 +54,8 @@ public:
 	int set_desired_speed(lua_State *);
 	int get_allow_autosaving(lua_State *);
 	int set_allow_autosaving(lua_State *);
+	int get_allow_saving(lua_State *);
+	int set_allow_saving(lua_State *);
 
 	/*
 	 * Lua methods

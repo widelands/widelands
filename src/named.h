@@ -20,14 +20,14 @@
 #ifndef NAMED_H
 #define NAMED_H
 
-#include <string>
 #include <cstring>
+#include <string>
 
 struct Named {
 	Named(char        const * const Name = "") : m_name(Name) {}
-	Named(std::string const &       Name)      : m_name(Name) {}
-	void set_name(std::string const & new_name) {m_name = new_name;}
-	std::string const & name() const throw () {return m_name;}
+	Named(const std::string &       Name)      : m_name(Name) {}
+	void set_name(const std::string & new_name) {m_name = new_name;}
+	const std::string & name() const throw () {return m_name;}
 private:
 	std::string m_name;
 };

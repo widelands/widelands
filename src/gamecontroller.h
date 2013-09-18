@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2010 by the Widelands Development Team
+ * Copyright (C) 2008-2011, 2013 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,13 +20,14 @@
 #ifndef GAMECONTROLLER_H
 #define GAMECONTROLLER_H
 
-#include "logic/widelands.h"
-
 #include <string>
+
+#include "logic/widelands.h"
 
 namespace Widelands {
 struct Game;
-struct PlayerCommand;
+class PlayerCommand;
+enum class PlayerEndResult: uint8_t;
 }
 
 
@@ -89,6 +90,19 @@ struct GameController {
 	 */
 	static GameController * createSinglePlayer
 		(Widelands::Game &, bool cpls, Widelands::Player_Number local);
+
+	/**
+	 * Report a player result once he has left the game. This may be done through lua
+	 * by the win_condition scripts.
+	 * \param player : the player idx;
+	 * \param result : the player result
+	 * \param info : The info string (\see \struct PlayerEndStatus for allowed values)
+	 */
+	virtual void report_result
+	    (uint8_t /* player */,
+	     Widelands::PlayerEndResult /*result*/,
+	     const std::string & /* info */)
+	{}
 };
 
 #endif

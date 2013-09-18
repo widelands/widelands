@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004, 2006-2011 by the Widelands Development Team
+ * Copyright (C) 2004, 2006-2013 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,11 +20,11 @@
 #ifndef FLAG_H
 #define FLAG_H
 
-#include <vector>
 #include <list>
+#include <vector>
 
 #include "logic/immovable.h"
-#include "routing_node.h"
+#include "economy/routing_node.h"
 
 namespace Widelands {
 class Building;
@@ -52,7 +52,7 @@ class WareInstance;
 struct Flag : public PlayerImmovable, public RoutingNode {
 	typedef std::vector<const WareInstance *> Wares;
 
-	friend struct Economy;
+	friend class Economy;
 	friend struct Router;
 	friend class FlagQueue;
 	friend struct Map_Ware_Data_Packet;     // has to look at pending items
@@ -70,11 +70,11 @@ struct Flag : public PlayerImmovable, public RoutingNode {
 	char const * type_name() const throw () {return "flag";}
 	virtual int32_t  get_size    () const throw ();
 	virtual bool get_passable() const throw ();
-	std::string const & name() const throw ();
+	const std::string & name() const throw ();
 
 	virtual Flag & base_flag();
 
-	Coords get_position() const {return m_position;}
+	const Coords & get_position() const {return m_position;}
 	virtual PositionList get_positions (const Editor_Game_Base &) const throw ();
 	void get_neighbours(WareWorker type, RoutingNodeNeighbours &);
 	int32_t get_waitcost() const {return m_item_filled;}
@@ -106,7 +106,8 @@ struct Flag : public PlayerImmovable, public RoutingNode {
 	void skip_wait_for_capacity(Game &, Worker &);
 	void add_item(Editor_Game_Base &, WareInstance &);
 	bool has_pending_item(Game &, Flag & destflag);
-	bool ack_pending_item(Game &, Flag & destflag);
+	bool ack_pickup(Game &, Flag & destflag);
+	bool cancel_pickup(Game &, Flag & destflag);
 	WareInstance * fetch_pending_item(Game &, PlayerImmovable & dest);
 	Wares get_items();
 
@@ -115,21 +116,19 @@ struct Flag : public PlayerImmovable, public RoutingNode {
 
 	void remove_item(Editor_Game_Base &, WareInstance * const);
 
-	void add_flag_job
-		(Game &, Ware_Index workerware, std::string const & programname);
+	void add_flag_job(Game &, Ware_Index workerware, const std::string & programname);
 
-	virtual void log_general_info(Editor_Game_Base const &);
+	virtual void log_general_info(const Editor_Game_Base &);
 
 protected:
 	virtual void init(Editor_Game_Base &);
 	virtual void cleanup(Editor_Game_Base &);
 
-	virtual void draw(Editor_Game_Base const &, RenderTarget &, FCoords, Point);
+	virtual void draw(const Editor_Game_Base &, RenderTarget &, const FCoords&, const Point&);
 
 	void wake_up_capacity_queue(Game &);
 
-	static void flag_job_request_callback
-		(Game &, Request &, Ware_Index, Worker *, PlayerImmovable &);
+	static void flag_job_request_callback(Game &, Request &, Ware_Index, Worker *, PlayerImmovable &);
 
 	void set_flag_position(Coords coords);
 

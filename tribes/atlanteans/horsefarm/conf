@@ -1,4 +1,3 @@
-soundfx=../../../sound/farm/horse
 size=big
 output=horse
 
@@ -11,6 +10,10 @@ trunk=2
 stone=2
 planks=1
 
+[return_on_dismantle]
+trunk=1
+stone=2
+
 [working positions]
 horsebreeder=1
 
@@ -22,8 +25,8 @@ water=8
 work=_Work
 
 [work]
-return=skipped when economy needs water and not economy needs horse
-return=skipped when economy needs corn and not economy needs horse
+return=skipped unless economy needs horse or not economy needs water
+return=skipped unless economy needs horse or not economy needs corn
 consume=corn water
 playFX=../../../sound/farm/horse 192
 animate=working 30000 # feeding cute little foals ;)
@@ -31,8 +34,8 @@ recruit=horse
 
 [idle]
 pics=horsefarm_i_??.png  # ???
-hotspot=78 68
+hotspot=81 62
 
 [working]
 pics=horsefarm_i_??.png  # ???
-hotspot=78 68
+hotspot=81 62

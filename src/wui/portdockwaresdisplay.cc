@@ -17,15 +17,17 @@
  *
  */
 
-#include "portdockwaresdisplay.h"
+#include "wui/portdockwaresdisplay.h"
 
 #include <boost/lexical_cast.hpp>
 
 #include "economy/portdock.h"
 #include "logic/player.h"
-#include "waresdisplay.h"
+#include "wui/waresdisplay.h"
+#include "wui/waresqueuedisplay.h"
 
 using Widelands::PortDock;
+using Widelands::Warehouse;
 
 namespace {
 
@@ -64,4 +66,24 @@ AbstractWaresDisplay * create_portdock_wares_display
 	(UI::Panel * parent, uint32_t width, PortDock & pd, Widelands::WareWorker type)
 {
 	return new PortDockWaresDisplay(parent, width, pd, type);
+}
+
+/// Create a panel that displays the wares and the builder waiting for the expedition to start.
+UI::Box * create_portdock_expedition_display(UI::Panel * parent, Warehouse & wh, Interactive_GameBase & igb)
+{
+	UI::Box & box = *new UI::Box(parent, 0, 0, UI::Box::Vertical);
+
+	// Add the wares queues
+	for (uint32_t i = 0; i < wh.size_of_expedition_wares_queue(); ++i)
+		box.add(new WaresQueueDisplay(&box, 0, 0, igb, wh, wh.get_wares_queue(i)), UI::Box::AlignLeft);
+
+/* FIXME Implement UI for Builder + Soldiers
+	UI::Box & workers = *new UI::Box(&box, 0, 0, UI::Box::Horizontal);
+	box.add(&workers, UI::Box::AlignLeft);
+
+	//for (uint32_t i = 0; i < wh.get_expedition_workers().size(); ++i)
+		//workers.add(icon of worker, UI::Box::AlignLeft);
+*/
+
+	return &box;
 }

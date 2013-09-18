@@ -3,10 +3,14 @@ buildable=no
 enhanced_building=yes
 output=strongbeer
 
-[buildcost]
+[enhancement_cost]
 trunk=3
 raw_stone=1
 thatchreed=1
+
+[return_on_dismantle_on_enhanced]
+trunk=1
+raw_stone=1
 
 [working positions]
 master-brewer=1
@@ -20,8 +24,8 @@ wheat=8
 work=_Work
 
 [work]
-return=skipped when economy needs water and not economy needs strongbeer
-return=skipped when economy needs wheat and not economy needs strongbeer
+return=skipped unless economy needs strongbeer or not economy needs water
+return=skipped unless economy needs strongbeer or not economy needs wheat
 consume=water wheat
 sleep=30000
 animate=working 30000

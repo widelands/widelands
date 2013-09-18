@@ -20,49 +20,52 @@
 #ifndef DISK_FILESYSTEM_H
 #define DISK_FILESYSTEM_H
 
-#include "filesystem.h"
-
-#include <string>
 #include <cstring>
+#include <string>
+
+#include "io/filesystem/filesystem.h"
 
 /// \todo const correctness
-struct RealFSImpl : public FileSystem {
-	RealFSImpl(std::string const & Directory);
+class RealFSImpl : public FileSystem {
+public:
+	RealFSImpl(const std::string & Directory);
 
 	virtual int32_t FindFiles
-		(std::string const & path,
-		 std::string const & pattern,
+		(const std::string & path,
+		 const std::string & pattern,
 		 filenameset_t     * results,
 		 uint32_t            depth = 0);
 
 	virtual bool IsWritable() const;
-	virtual bool FileExists (std::string const & path);
-	virtual bool IsDirectory(std::string const & path);
-	virtual void EnsureDirectoryExists(std::string const & dirname);
-	virtual void MakeDirectory        (std::string const & dirname);
+	bool FileIsWriteable(const std::string & path);
+	virtual bool FileExists (const std::string & path);
+	virtual bool IsDirectory(const std::string & path);
+	virtual void EnsureDirectoryExists(const std::string & dirname);
+	virtual void MakeDirectory        (const std::string & dirname);
 
 	virtual void * Load(const std::string & fname, size_t & length);
 	virtual void * fastLoad
 		(const std::string & fname, size_t & length, bool & fast);
 
-	virtual void Write
-		(std::string const & fname, void const * data, int32_t length);
 
-	virtual StreamRead  * OpenStreamRead (std::string const & fname);
-	virtual StreamWrite * OpenStreamWrite(std::string const & fname);
+	void Write(const std::string & fname, void const * data, int32_t length, bool append);
+	virtual void Write(const std::string & fname, void const * data, int32_t length)
+		{Write(fname, data, length, false);}
 
-	virtual FileSystem &   MakeSubFileSystem(std::string const & dirname);
-	virtual FileSystem & CreateSubFileSystem
-		(std::string const & dirname, Type);
-	virtual void Unlink(std::string const & file);
-	virtual void Rename(std::string const &, std::string const &);
+	virtual StreamRead  * OpenStreamRead (const std::string & fname);
+	virtual StreamWrite * OpenStreamWrite(const std::string & fname);
+
+	virtual FileSystem * MakeSubFileSystem(const std::string & dirname);
+	virtual FileSystem * CreateSubFileSystem(const std::string & dirname, Type);
+	virtual void Unlink(const std::string & file);
+	virtual void Rename(const std::string & old_name, const std::string & new_name);
 
 	virtual std::string getBasename() {return m_directory;};
 	virtual unsigned long long DiskSpace();
 
 private:
-	void m_unlink_directory(std::string const & file);
-	void m_unlink_file     (std::string const & file);
+	void m_unlink_directory(const std::string & file);
+	void m_unlink_file     (const std::string & file);
 
 	std::string m_directory;
 };

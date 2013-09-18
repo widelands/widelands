@@ -16,7 +16,7 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-#include "gl_utils.h"
+#include "graphic/render/gl_utils.h"
 
 #include <SDL_video.h>
 
@@ -63,7 +63,7 @@ const SDL_PixelFormat & gl_rgba_format()
 GLenum _handle_glerror(const char * file, unsigned int line)
 {
 	GLenum err = glGetError();
-#ifdef DEBUG
+#ifndef NDEBUG
 	if (err == GL_NO_ERROR)
 		return err;
 

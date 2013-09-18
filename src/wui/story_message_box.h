@@ -20,14 +20,14 @@
 #ifndef STORY_MESSAGE_BOX_H
 #define STORY_MESSAGE_BOX_H
 
-#include "ui_basic/window.h"
-
 #include <vector>
+
+#include "ui_basic/window.h"
 
 struct Story_Message_Box : public UI::Window {
 	Story_Message_Box
 		(UI::Panel *,
-		 std::string const &, std::string const &, std::string const &,
+		 const std::string &, const std::string &, const std::string &,
 		 int32_t gposx, int32_t gposy, uint32_t w, uint32_t h);
 
 	bool handle_mousepress(Uint8 btn, int32_t mx, int32_t my);

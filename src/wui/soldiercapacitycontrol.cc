@@ -17,17 +17,16 @@
  *
  */
 
-#include "soldiercapacitycontrol.h"
+#include "wui/soldiercapacitycontrol.h"
 
-#include "interactive_gamebase.h"
+#include "graphic/graphic.h"
 #include "logic/player.h"
 #include "logic/soldiercontrol.h"
 #include "ui_basic/button.h"
+#include "ui_basic/radiobutton.h"
+#include "wui/interactive_gamebase.h"
 
 using Widelands::SoldierControl;
-
-static char const * pic_up_train   = "pics/menu_up_train.png";
-static char const * pic_down_train = "pics/menu_down_train.png";
 
 /**
  * Widget to control the capacity of \ref MilitaryBuilding and \ref TrainingSite
@@ -62,14 +61,14 @@ Box(parent, 0, 0, Horizontal),
 m_igb(igb),
 m_building(building),
 m_decrease
-	(this, "increase", 0, 0, 24, 24,
-	 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
-	 g_gr->get_picture(PicMod_Game, pic_down_train)),
+	(this, "decrease", 0, 0, 32, 32,
+	 g_gr->images().get("pics/but4.png"),
+	 g_gr->images().get("pics/menu_down_train.png"), _("Decrease capacity")),
 m_increase
-	(this, "decrease", 0, 0, 24, 24,
-	 g_gr->get_picture(PicMod_UI, "pics/but4.png"),
-	 g_gr->get_picture(PicMod_Game, pic_up_train)),
-m_value(this, "", UI::Align_Center)
+	(this, "increase", 0, 0, 32, 32,
+	 g_gr->images().get("pics/but4.png"),
+	 g_gr->images().get("pics/menu_up_train.png"), _("Increase capacity")),
+m_value(this, "199", UI::Align_Center)
 {
 	m_decrease.sigclicked.connect(boost::bind(&SoldierCapacityControl::click_decrease, boost::ref(*this)));
 	m_increase.sigclicked.connect(boost::bind(&SoldierCapacityControl::click_increase, boost::ref(*this)));
@@ -78,9 +77,6 @@ m_value(this, "", UI::Align_Center)
 	add(&m_decrease, AlignCenter);
 	add(&m_value, AlignCenter);
 	add(&m_increase, AlignCenter);
-
-	m_value.set_layout_mode(UI::Textarea::Static);
-	m_value.set_fixed_size("199");
 
 	m_decrease.set_repeating(true);
 	m_increase.set_repeating(true);
@@ -92,16 +88,14 @@ void SoldierCapacityControl::think()
 {
 	SoldierControl * soldiers = dynamic_cast<SoldierControl *>(&m_building);
 	uint32_t const capacity = soldiers->soldierCapacity();
-	uint32_t const min_capacity = soldiers->minSoldierCapacity();
-	uint32_t const max_capacity = soldiers->maxSoldierCapacity();
 	char buffer[sizeof("4294967295")];
 
 	sprintf(buffer, "%2u", capacity);
 	m_value.set_text(buffer);
 
 	bool const can_act = m_igb.can_act(m_building.owner().player_number());
-	m_decrease.set_enabled(can_act && min_capacity < capacity);
-	m_increase.set_enabled(can_act && max_capacity > capacity);
+	m_decrease.set_enabled(can_act && soldiers->minSoldierCapacity() < capacity);
+	m_increase.set_enabled(can_act && soldiers->maxSoldierCapacity() > capacity);
 }
 
 void SoldierCapacityControl::change_soldier_capacity(int delta)

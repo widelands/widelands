@@ -20,11 +20,11 @@
 #ifndef EDITOR_MAIN_MENU_RANDOM_MAP_H
 #define EDITOR_MAIN_MENU_RANDOM_MAP_H
 
-#include "ui_basic/window.h"
-#include "ui_basic/editbox.h"
-#include "ui_basic/checkbox.h"
-
 #include <vector>
+
+#include "ui_basic/checkbox.h"
+#include "ui_basic/editbox.h"
+#include "ui_basic/window.h"
 
 namespace Widelands {
 	struct UniqueRandomMapInfo;

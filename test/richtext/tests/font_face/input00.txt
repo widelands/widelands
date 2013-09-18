@@ -1,0 +1,1 @@
+<rt><p>Hello <font face="Widelands/Widelands" color="77995C" size=30>Widelands</font> crowd!</p></rt>

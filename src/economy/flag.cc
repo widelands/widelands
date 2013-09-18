@@ -17,26 +17,24 @@
  *
  */
 
-#include "flag.h"
+#include "economy/flag.h"
 
-// Package includes
-#include "portdock.h"
-#include "road.h"
-#include "economy.h"
-#include "ware_instance.h"
-
+#include "container_iterate.h"
+#include "economy/economy.h"
+#include "economy/portdock.h"
+#include "economy/request.h"
+#include "economy/road.h"
+#include "economy/ware_instance.h"
 #include "logic/building.h"
 #include "logic/editor_game_base.h"
 #include "logic/game.h"
 #include "logic/instances.h"
 #include "logic/player.h"
-#include "request.h"
 #include "logic/tribe.h"
-#include "upcast.h"
-#include "wexception.h"
 #include "logic/warehouse.h"
 #include "logic/worker.h"
-#include "container_iterate.h"
+#include "upcast.h"
+#include "wexception.h"
 
 namespace Widelands {
 
@@ -47,6 +45,7 @@ Map_Object_Descr g_flag_descr("flag", "Flag");
 */
 Flag::Flag() :
 PlayerImmovable(g_flag_descr),
+m_animstart(0),
 m_building(0),
 m_item_capacity(8),
 m_item_filled(0),
@@ -162,7 +161,7 @@ bool Flag::get_passable() const throw ()
 
 
 static std::string const flag_name = "flag";
-std::string const & Flag::name() const throw () {return flag_name;}
+const std::string & Flag::name() const throw () {return flag_name;}
 
 
 Flag & Flag::base_flag()
@@ -206,7 +205,7 @@ void Flag::attach_building(Editor_Game_Base & egbase, Building & building)
 
 	m_building = &building;
 
-	Map const & map = egbase.map();
+	const Map & map = egbase.map();
 	egbase.set_road
 		(map.get_fcoords(map.tl_n(m_position)), Road_SouthEast, Road_Normal);
 
@@ -222,7 +221,7 @@ void Flag::detach_building(Editor_Game_Base & egbase)
 
 	m_building->set_economy(0);
 
-	Map const & map = egbase.map();
+	const Map & map = egbase.map();
 	egbase.set_road
 		(map.get_fcoords(map.tl_n(m_position)), Road_SouthEast, Road_None);
 
@@ -317,7 +316,7 @@ Road * Flag::get_road(Flag & flag)
 uint8_t Flag::nr_of_roads() const {
 	uint8_t counter = 0;
 	for (uint8_t road_id = 6; road_id; --road_id)
-		if (Road * const road = get_road(road_id))
+		if (get_road(road_id) != nullptr)
 			++counter;
 	return counter;
 }
@@ -434,7 +433,7 @@ bool Flag::has_pending_item(Game &, Flag & dest) {
  * item. Item with highest transfer priority is chosen.
  * \return true if an item is actually waiting for the carrier.
  */
-bool Flag::ack_pending_item(Game &, Flag & destflag) {
+bool Flag::ack_pickup(Game &, Flag & destflag) {
 	int32_t highest_pri = -1;
 	int32_t i_pri = -1;
 
@@ -462,13 +461,44 @@ bool Flag::ack_pending_item(Game &, Flag & destflag) {
 
 	return false;
 }
+/**
+ * Called by the carriercode when the carrier is called away from his job
+ * but has acknowledged a ware before. This ware is then freed again
+ * to be picked by another carrier. Returns true if an item was indeed
+ * made pending again
+ */
+bool Flag::cancel_pickup(Game & game, Flag & destflag) {
+	int32_t lowest_prio = MAX_TRANSFER_PRIORITY + 1;
+	int32_t i_pri = -1;
+
+	for (int32_t i = 0; i < m_item_filled; ++i) {
+		if (m_items[i].pending)
+			continue;
+
+		if (m_items[i].nextstep != &destflag)
+			continue;
+
+		if (m_items[i].priority < lowest_prio) {
+			lowest_prio = m_items[i].priority;
+			i_pri = i;
+		}
+	}
+
+	if (i_pri >= 0) {
+		m_items[i_pri].pending = true;
+		m_items[i_pri].item->update(game); //  will call call_carrier() if necessary
+		return true;
+	}
+
+	return false;
+}
 
 /**
  * Wake one sleeper from the capacity queue.
 */
 void Flag::wake_up_capacity_queue(Game & game)
 {
-	while (m_capacity_wait.size()) {
+	while (!m_capacity_wait.empty()) {
 		Worker * const w = m_capacity_wait[0].get(game);
 		m_capacity_wait.erase(m_capacity_wait.begin());
 		if (w and w->wakeup_flag_capacity(game, *this))
@@ -480,7 +510,7 @@ void Flag::wake_up_capacity_queue(Game & game)
  * Called by carrier code to retrieve one of the items on the flag that is meant
  * for that carrier.
  *
- * This function may return 0 even if \ref ack_pending_item() has already been
+ * This function may return 0 even if \ref ack_pickup() has already been
  * called successfully.
 */
 WareInstance * Flag::fetch_pending_item(Game & game, PlayerImmovable & dest)
@@ -683,7 +713,7 @@ void Flag::cleanup(Editor_Game_Base & egbase)
 {
 	//molog("Flag::cleanup\n");
 
-	while (m_flag_jobs.size()) {
+	while (!m_flag_jobs.empty()) {
 		delete m_flag_jobs.begin()->request;
 		m_flag_jobs.erase(m_flag_jobs.begin());
 	}
@@ -741,7 +771,7 @@ void Flag::destroy(Editor_Game_Base & egbase)
  * the given program once it's completed.
 */
 void Flag::add_flag_job
-	(Game &, Ware_Index const workerware, std::string const & programname)
+	(Game &, Ware_Index const workerware, const std::string & programname)
 {
 	FlagJob j;
 

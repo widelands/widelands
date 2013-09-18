@@ -20,10 +20,11 @@
 #ifndef WAREHOUSE_H
 #define WAREHOUSE_H
 
-#include "attackable.h"
-#include "building.h"
-#include "soldiercontrol.h"
-#include "wareworker.h"
+#include "logic/attackable.h"
+#include "logic/building.h"
+#include "economy/request.h"
+#include "logic/soldiercontrol.h"
+#include "logic/wareworker.h"
 
 struct Interactive_Player;
 struct Profile;
@@ -48,15 +49,19 @@ struct WarehouseSupply;
 struct Warehouse_Descr : public Building_Descr {
 	Warehouse_Descr
 		(char const * name, char const * descname,
-		 std::string const & directory, Profile &, Section & global_s,
-		 Tribe_Descr const &);
+		 const std::string & directory, Profile &, Section & global_s,
+		 const Tribe_Descr &);
 
 	virtual Building & create_object() const;
 
 	virtual uint32_t get_conquers() const {return m_conquers;}
 
+	uint32_t get_heal_per_second        () const throw () {
+		return m_heal_per_second;
+	}
 private:
 	int32_t m_conquers;
+	uint32_t m_heal_per_second;
 };
 
 
@@ -126,12 +131,20 @@ public:
 
 	virtual void cleanup(Editor_Game_Base &);
 
+	virtual void destroy(Editor_Game_Base &);
+
 	virtual void act(Game & game, uint32_t data);
 
 	virtual void set_economy(Economy *);
 
-	WareList const & get_wares() const;
-	WareList const & get_workers() const;
+	const WareList & get_wares() const;
+	const WareList & get_workers() const;
+
+	/**
+	 * Returns a vector of all incorporated workers. These are the workers
+	 * that are still present in the game, not just a stock figure.
+	 */
+	Workers get_incorporated_workers();
 
 	void insert_wares  (Ware_Index, uint32_t count);
 	void remove_wares  (Ware_Index, uint32_t count);
@@ -146,7 +159,7 @@ public:
 	uint32_t minSoldierCapacity() const {return 0;}
 	uint32_t maxSoldierCapacity() const {return 4294967295U;}
 	uint32_t soldierCapacity() const {return maxSoldierCapacity();}
-	void setSoldierCapacity(uint32_t capacity) {
+	void setSoldierCapacity(uint32_t /* capacity */) {
 		throw wexception("Not implemented for a Warehouse!");
 	}
 	void dropSoldier(Soldier &) {
@@ -157,8 +170,8 @@ public:
 
 	virtual bool fetch_from_flag(Game &);
 
-	uint32_t count_workers(Game const &, Ware_Index, Requirements const &);
-	Worker & launch_worker(Game &, Ware_Index, Requirements const &);
+	uint32_t count_workers(const Game &, Ware_Index, const Requirements &);
+	Worker & launch_worker(Game &, Ware_Index, const Requirements &);
 	void incorporate_worker(Editor_Game_Base &, Worker &);
 
 	WareInstance & launch_item(Game &, Ware_Index);
@@ -192,9 +205,28 @@ public:
 	void set_ware_policy(Ware_Index ware, StockPolicy policy);
 	void set_worker_policy(Ware_Index ware, StockPolicy policy);
 
+	// PortDock stuff
+	struct Expedition_Worker {
+		Expedition_Worker(Request * const wr = 0, Worker * const w = 0) : worker_request(wr), worker(w) {}
+		Request * worker_request;
+		Worker  * worker;
+	};
 	PortDock * get_portdock() const {return m_portdock;}
+	size_t size_of_expedition_wares_queue() {return m_expedition_wares.size();}
+	WaresQueue * get_wares_queue(uint8_t num) {return m_expedition_wares.at(num);}
+	virtual WaresQueue & waresqueue(Ware_Index);
+	std::vector<WaresQueue *> & get_wares_queue_vector() {return m_expedition_wares;}
+	std::vector<Expedition_Worker *> & get_expedition_workers() {return m_expedition_workers;}
+	/// gets called, if an expedition worker arrives
+	static void request_expedition_worker_callback
+		(Game & g, Request & r, Ware_Index, Worker * w, PlayerImmovable & pi)
+	{
+		Warehouse & wh = ref_cast<Warehouse, PlayerImmovable>(pi);
+		wh.handle_expedition_worker_callback(g, r, w);
+	}
+	void handle_expedition_worker_callback(Game &, Request &, Worker *);
 
-	virtual void log_general_info(Editor_Game_Base const &);
+	virtual void log_general_info(const Editor_Game_Base &);
 
 protected:
 
@@ -245,7 +277,12 @@ private:
 	uint32_t m_next_stock_remove_act;
 
 	std::vector<PlannedWorkers> m_planned_workers;
+
+	// PortDock stuff
 	PortDock * m_portdock;
+	std::vector<WaresQueue *> m_expedition_wares;
+	std::vector<Expedition_Worker *> m_expedition_workers;
+
 };
 
 }

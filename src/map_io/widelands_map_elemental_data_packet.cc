@@ -17,17 +17,16 @@
  *
  */
 
+#include "map_io/widelands_map_elemental_data_packet.h"
+
 #include <boost/algorithm/string.hpp>
 
 #include "container_iterate.h"
-
 #include "logic/editor_game_base.h"
 #include "logic/game_data_error.h"
 #include "logic/map.h"
 #include "logic/world.h"
 #include "profile/profile.h"
-
-#include "widelands_map_elemental_data_packet.h"
 
 namespace Widelands {
 
@@ -50,6 +49,7 @@ throw (_wexception)
 			map->set_name       (s.get_string("name"));
 			map->set_author     (s.get_string("author"));
 			map->set_description(s.get_string("descr"));
+			map->set_hint       (s.get_string("hint", ""));
 			map->set_background (s.get_string("background"));
 
 			std::string t = s.get_string("tags", "");
@@ -66,7 +66,7 @@ throw (_wexception)
 		} else
 			throw game_data_error
 				(_("unknown/unhandled version %i"), packet_version);
-	} catch (_wexception const & e) {
+	} catch (const _wexception & e) {
 		throw game_data_error(_("elemental data: %s"), e.what());
 	}
 }
@@ -89,7 +89,7 @@ throw (_wexception)
 	Section & s = prof.create_section("global");
 
 	s.set_int   ("packet_version", CURRENT_PACKET_VERSION);
-	Map const & map = egbase.map();
+	const Map & map = egbase.map();
 	s.set_int   ("map_w",          map.get_width      ());
 	s.set_int   ("map_h",          map.get_height     ());
 	s.set_int   ("nr_players",     map.get_nrplayers  ());
@@ -97,6 +97,7 @@ throw (_wexception)
 	s.set_string("name",           map.get_name       ());
 	s.set_string("author",         map.get_author     ());
 	s.set_string("descr",          map.get_description());
+	s.set_string("hint",           map.get_hint       ());
 	s.set_string("tags", boost::algorithm::join(map.get_tags(), ","));
 
 	prof.write("elemental", false, fs);

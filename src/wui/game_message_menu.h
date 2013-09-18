@@ -20,17 +20,14 @@
 #ifndef GAME_MESSAGE_MENU_H
 #define GAME_MESSAGE_MENU_H
 
+#include "container_iterate.h"
+#include "i18n.h"
 #include "logic/message_queue.h"
-
+#include "ref_cast.h"
 #include "ui_basic/button.h"
 #include "ui_basic/multilinetextarea.h"
 #include "ui_basic/table.h"
 #include "ui_basic/unique_window.h"
-
-#include "i18n.h"
-
-#include "container_iterate.h"
-#include "ref_cast.h"
 
 namespace Widelands {
 struct Game;
@@ -45,7 +42,7 @@ struct GameMessageMenu : public UI::UniqueWindow {
 	/// Shows a newly created message. Assumes that the message is not yet in
 	/// the list (the message was added to the queue after the last time think()
 	/// was executed.
-	void show_new_message(Widelands::Message_Id, Widelands::Message const &);
+	void show_new_message(Widelands::Message_Id, const Widelands::Message &);
 
 	enum Mode {Inbox, Archive};
 	void think();
@@ -55,16 +52,16 @@ private:
 	enum Cols {ColSelect, ColStatus, ColTitle, ColTimeSent};
 
 	Interactive_Player & iplayer() const;
-	void                 selected(uint32_t);
+	void selected(uint32_t);
+	void double_clicked(uint32_t);
 
 	bool status_compare(uint32_t a, uint32_t b);
-	void do_delete();
 	void do_clear_selection();
 	void do_invert_selection();
 	void archive_or_restore();
 	void toggle_mode();
 	void center_view();
-	void update_record(UI::Table<uintptr_t>::Entry_Record & er, Widelands::Message const &);
+	void update_record(UI::Table<uintptr_t>::Entry_Record & er, const Widelands::Message &);
 
 	UI::Table<uintptr_t> * list;
 	UI::Multiline_Textarea message_body;

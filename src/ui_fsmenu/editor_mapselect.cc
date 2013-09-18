@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2011 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2012 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -17,21 +17,22 @@
  *
  */
 
-#include "editor_mapselect.h"
+#include "ui_fsmenu/editor_mapselect.h"
 
-#include "logic/editor_game_base.h"
+#include <cstdio>
+
+#include <boost/format.hpp>
+
 #include "graphic/graphic.h"
 #include "i18n.h"
 #include "io/filesystem/layered_filesystem.h"
+#include "log.h"
+#include "logic/editor_game_base.h"
 #include "logic/map.h"
+#include "map_io/widelands_map_loader.h"
 #include "profile/profile.h"
 #include "s2map.h"
 #include "wexception.h"
-#include "map_io/widelands_map_loader.h"
-
-#include "log.h"
-
-#include <cstdio>
 
 using Widelands::WL_Map_Loader;
 
@@ -48,7 +49,7 @@ Fullscreen_Menu_Editor_MapSelect::Fullscreen_Menu_Editor_MapSelect() :
 	m_title
 		(this,
 		 get_w() / 2, get_h() * 9 / 50,
-		 _("Choose your map!"), UI::Align_HCenter),
+		 _("Choose a map"), UI::Align_HCenter),
 	m_label_name
 		(this,
 		 get_w() * 7 / 10, get_h() * 17 / 50,
@@ -86,12 +87,12 @@ Fullscreen_Menu_Editor_MapSelect::Fullscreen_Menu_Editor_MapSelect() :
 	m_back
 		(this, "back",
 		 get_w() * 71 / 100, get_h() * 17 / 20, m_butw, m_buth,
-		 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
+		 g_gr->images().get("pics/but0.png"),
 		 _("Back"), std::string(), true, false),
 	m_ok
 		(this, "ok",
 		 get_w() * 71 / 100, get_h() * 9 / 10, m_butw, m_buth,
-		 g_gr->get_picture(PicMod_UI, "pics/but2.png"),
+		 g_gr->images().get("pics/but2.png"),
 		 _("OK"), std::string(), false, false),
 
 // Map list
@@ -169,20 +170,29 @@ void Fullscreen_Menu_Editor_MapSelect::map_selected(uint32_t)
 	if (!g_fs->IsDirectory(name) || WL_Map_Loader::is_widelands_map(name)) {
 		Widelands::Map map;
 		{
-			Widelands::Map_Loader * const m_ml =
-				map.get_correct_loader(name.c_str());
+			Widelands::Map_Loader * const m_ml = map.get_correct_loader(name.c_str());
 			m_ml->preload_map(true); //  This has worked before, no problem.
 			delete m_ml;
 		}
 
-		m_name  .set_text(map.get_name       ());
-		m_author.set_text(map.get_author     ());
-		m_descr .set_text(map.get_description());
-		m_world .set_text(map.get_world_name ());
+		// get translated worldsname
+		std::string world(map.get_world_name());
+		std::string worldpath("worlds/" + world);
+		Profile prof((worldpath + "/conf").c_str(), 0, "world_" + world);
+		Section & global = prof.get_safe_section("world");
+		world = global.get_safe_string("name");
+
+		// Translate the map data
+		i18n::Textdomain td("maps");
+		m_name  .set_text(_(map.get_name()));
+		m_author.set_text(map.get_author());
+		m_descr .set_text
+			(_(map.get_description()) + (map.get_hint().empty() ? "" : (std::string("\n") + _(map.get_hint()))));
+		m_world .set_text(world);
 
 		char buf[200];
 		sprintf(buf, "%i", map.get_nrplayers());
-		m_nr_players .set_text(buf);
+		m_nr_players.set_text(buf);
 
 		sprintf(buf, "%ix%i", map.get_width(), map.get_height());
 		m_size      .set_text(buf);
@@ -211,15 +221,17 @@ void Fullscreen_Menu_Editor_MapSelect::fill_list()
 
 	//  First, we add all directories. We manually add the parent directory.
 	if (m_curdir != m_basedir) {
-#ifndef WIN32
+#ifndef _WIN32
 		m_parentdir = m_curdir.substr(0, m_curdir.rfind('/'));
 #else
 		m_parentdir = m_curdir.substr(0, m_curdir.rfind('\\'));
 #endif
+		std::string parent_string =
+				(boost::format("\\<%s\\>") % _("parent")).str();
 		m_list.add
-			(_("<parent>"),
+			(parent_string.c_str(),
 			 m_parentdir.c_str(),
-			 g_gr->get_picture(PicMod_Game, "pics/ls_dir.png"));
+			 g_gr->images().get("pics/ls_dir.png"));
 	}
 
 	const filenameset_t::const_iterator mapfiles_end = m_mapfiles.end();
@@ -239,7 +251,7 @@ void Fullscreen_Menu_Editor_MapSelect::fill_list()
 		m_list.add
 			(FileSystem::FS_Filename(name),
 			 name,
-			 g_gr->get_picture(PicMod_Game, "pics/ls_dir.png"));
+			 g_gr->images().get("pics/ls_dir.png"));
 	}
 
 	Widelands::Map map;
@@ -257,11 +269,9 @@ void Fullscreen_Menu_Editor_MapSelect::fill_list()
 				m_list.add
 					(FileSystem::FS_Filename(name),
 					 name,
-					 g_gr->get_picture
-					 	(PicMod_Game,
-					 	 dynamic_cast<WL_Map_Loader const *>(m_ml) ?
-					 	 "pics/ls_wlmap.png" : "pics/ls_s2map.png"));
-			} catch (_wexception const &) {} //  we simply skip illegal entries
+					 g_gr->images().get
+						 (dynamic_cast<WL_Map_Loader const *>(m_ml) ? "pics/ls_wlmap.png" : "pics/ls_s2map.png"));
+			} catch (const _wexception &) {} //  we simply skip illegal entries
 			delete m_ml;
 		}
 	}

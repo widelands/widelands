@@ -20,15 +20,15 @@
 #ifndef CMD_INCORPORATE_H
 #define CMD_INCORPORATE_H
 
-#include "cmd_queue.h"
-#include "worker.h"
+#include "logic/cmd_queue.h"
+#include "logic/worker.h"
 
 namespace Widelands {
 
 #define CMD_INCORPORATE_VERSION 1
 
 struct Cmd_Incorporate : public GameLogicCommand {
-	Cmd_Incorporate() : GameLogicCommand(0) {} // For savegame loading
+	Cmd_Incorporate() : GameLogicCommand(0), worker(0) {} // For savegame loading
 	Cmd_Incorporate (int32_t const t, Worker * const w)
 		: GameLogicCommand(t), worker(w)
 	{}

@@ -23,6 +23,7 @@
 #include "logic/game.h"
 #include "logic/player.h"
 #include "logic/playercommand.h"
+#include "logic/playersmanager.h"
 #include "profile/profile.h"
 #include "wlapplication.h"
 
@@ -41,6 +42,7 @@ struct SinglePlayerGameController : public GameController {
 	void setDesiredSpeed(uint32_t speed);
 	bool isPaused();
 	void setPaused(bool paused);
+	void report_result(uint8_t player, Widelands::PlayerEndResult result, const std::string & info);
 
 private:
 	Widelands::Game & m_game;
@@ -58,8 +60,7 @@ SinglePlayerGameController::SinglePlayerGameController
 	(Widelands::Game        &       game,
 	 bool                     const useai,
 	 Widelands::Player_Number const local)
-	:
-	m_game            (game),
+	: m_game          (game),
 	m_useai           (useai),
 	m_lastframe       (WLApplication::get()->get_time()),
 	m_time            (m_game.get_gametime()),
@@ -156,10 +157,24 @@ void SinglePlayerGameController::setPaused(bool paused)
 	m_paused = paused;
 }
 
+void SinglePlayerGameController::report_result
+	(uint8_t p_nr, Widelands::PlayerEndResult result, const std::string & info)
+{
+	Widelands::PlayerEndStatus pes;
+	Widelands::Player* player = m_game.get_player(p_nr);
+	assert(player);
+	pes.player = player->player_number();
+	pes.time = m_game.get_gametime();
+	pes.result = result;
+	pes.info = info;
+	m_game.player_manager()->add_player_end_status(pes);
+}
+
 GameController * GameController::createSinglePlayer
 	(Widelands::Game        &       game,
 	 bool                     const cpls,
 	 Widelands::Player_Number const local)
 {
-	return new SinglePlayerGameController(game, cpls, local);
+	SinglePlayerGameController* spgc =  new SinglePlayerGameController(game, cpls, local);
+	return spgc;
 }

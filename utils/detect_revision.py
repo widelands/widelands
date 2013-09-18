@@ -20,7 +20,7 @@ try:
 except ImportError:
     __has_bzrlib = False
 
-base_path = p.abspath(p.join(p.dirname(__file__),p.pardir))
+base_path = p.abspath(p.join(p.dirname(__file__), p.pardir))
 
 def detect_debian_version():
     """
@@ -33,14 +33,12 @@ def detect_debian_version():
         return None
     f = open(fname)
     version = f.readline()
-    #bzr5905+trunk+
-    pattern = re.compile("bzr[0-9]+\+.+\+")
+    #bzr5905-210307251546
+    pattern = re.compile("bzr[0-9]+-[0-9]+")
     m = pattern.search(version)
     if m == None:
         return None
     version = version[m.start():m.end()]
-    version = string.replace(version,'+','[',1)
-    version = string.replace(version,'+',']',1)
     return version
 
 
@@ -89,7 +87,7 @@ def detect_bzr_revision():
             nick = run_bzr("nick")
         except OSError:
             return None
-    return "bzr%s[%s] " % (revno,nick)
+    return "bzr%s[%s] " % (revno, nick)
 
 def detect_revision():
     for func in (
@@ -102,9 +100,6 @@ def detect_revision():
             return rv
 
     return 'REVDETECT-BROKEN-PLEASE-REPORT-THIS'
-
-
-    return revstring
 
 if __name__ == "__main__":
     print(detect_revision())

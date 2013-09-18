@@ -20,13 +20,12 @@
 #ifndef WARES_QUEUE_H
 #define WARES_QUEUE_H
 
-// Needed for Ware_Index
-#include "logic/widelands.h"
 #include "logic/immovable.h"
+#include "logic/widelands.h"
 
 namespace Widelands {
 
-struct Economy;
+class Economy;
 struct Editor_Game_Base;
 struct Game;
 struct Map_Map_Object_Loader;
@@ -49,10 +48,10 @@ struct WaresQueue {
 	~WaresQueue() {assert(not m_ware);}
 #endif
 
-	Ware_Index get_ware() const {return m_ware;}
-	uint32_t get_max_fill    () const throw () {return m_max_fill;}
-	uint32_t get_max_size        () const throw () {return m_max_size;}
-	uint32_t get_filled          () const throw () {return m_filled;}
+	Ware_Index get_ware()   const          {return m_ware;}
+	uint32_t get_max_fill() const throw () {return m_max_fill;}
+	uint32_t get_max_size() const throw () {return m_max_size;}
+	uint32_t get_filled()   const throw () {return m_filled;}
 
 	void cleanup();
 

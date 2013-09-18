@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2010 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2013 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,20 +20,22 @@
 #ifndef RENDERTARGET_H
 #define RENDERTARGET_H
 
-#include "compositemode.h"
-#include "picture_id.h"
-#include "surfaceptr.h"
+#include <vector>
+
+#include "align.h"
+#include "graphic/compositemode.h"
+#include "graphic/image.h"
 #include "rect.h"
 #include "rgbcolor.h"
 
-#include <vector>
+class Surface;
 
 namespace Widelands {
 struct Player;
 };
 
 /**
- * This abstract class represents anything that can be rendered to.
+ * This class represents anything that can be rendered to.
  *
  * It supports windows, which are composed of a clip rectangle and a drawing
  * offset:
@@ -47,29 +49,24 @@ struct Player;
  * \note If the sub-window would be empty/invisible, \ref enter_window() returns
  * false and doesn't change the window state at all.
 */
-struct RenderTarget {
-	RenderTarget(SurfacePtr);
-	RenderTarget(OffscreenSurfacePtr);
-	void set_window(Rect const & rc, Point const & ofs);
-	bool enter_window(Rect const & rc, Rect * previous, Point * prevofs);
+class RenderTarget {
+public:
+	RenderTarget(Surface*);
+	void set_window(const Rect & rc, const Point & ofs);
+	bool enter_window(const Rect & rc, Rect * previous, Point * prevofs);
 
-	int32_t get_w() const;
-	int32_t get_h() const;
+	int32_t width() const;
+	int32_t height() const;
 
 	void draw_line
-		(int32_t x1,
-		 int32_t y1,
-		 int32_t x2,
-		 int32_t y2,
-		 RGBColor color);
-	void draw_rect(Rect, RGBColor);
-	void fill_rect(Rect, RGBAColor);
+		(int32_t x1, int32_t y1, int32_t x2, int32_t y2, const RGBColor& color, uint8_t width = 1);
+	void draw_rect(Rect, const RGBColor&);
+	void fill_rect(Rect, const RGBAColor&);
 	void brighten_rect(Rect, int32_t factor);
-	void clear();
 
-	void blit(Point dst, PictureID picture, Composite cm = CM_Normal);
-	void blitrect(Point dst, PictureID picture, Rect src, Composite cm = CM_Normal);
-	void tile(Rect, PictureID picture, Point ofs, Composite cm = CM_Normal);
+	void blit(const Point& dst, const Image* image, Composite cm = CM_Normal, UI::Align = UI::Align_TopLeft);
+	void blitrect(Point dst, const Image* image, Rect src, Composite cm = CM_Normal);
+	void tile(Rect, const Image* image, Point ofs, Composite cm = CM_Normal);
 
 	void drawanim
 		(Point                     dst,
@@ -91,20 +88,21 @@ struct RenderTarget {
 
 	void reset();
 
-	SurfacePtr get_surface() {return m_surface;}
+	Surface* get_surface() {return m_surface;}
+	const Rect & get_rect() const {return m_rect;}
+	const Point & get_offset() const {return m_offset;}
 
 protected:
 	bool clip(Rect & r) const throw ();
 
-	void doblit(Point dst, PictureID src, Rect srcrc, Composite cm = CM_Normal);
+	void doblit(Point dst, const Image* src, Rect srcrc, Composite cm = CM_Normal);
 
 	///The target surface
-	SurfacePtr m_surface;
+	Surface* m_surface;
 	///The current clip rectangle
 	Rect m_rect;
 	///Drawing offset
 	Point m_offset;
-
 };
 
 #endif

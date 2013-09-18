@@ -17,14 +17,14 @@
  *
  */
 
-#include "shippingitem.h"
+#include "economy/shippingitem.h"
 
+#include "economy/portdock.h"
+#include "economy/ware_instance.h"
 #include "logic/game_data_error.h"
 #include "logic/worker.h"
 #include "map_io/widelands_map_map_object_loader.h"
 #include "map_io/widelands_map_map_object_saver.h"
-#include "portdock.h"
-#include "ware_instance.h"
 
 namespace Widelands {
 
@@ -73,8 +73,12 @@ void ShippingItem::set_location(Game & game, Map_Object * obj)
 	Worker * worker;
 	get(game, ware, worker);
 
-	if (ware)
-		ware->set_location(game, obj);
+	if (ware) {
+		if (upcast(Building, building, obj))
+			ware->enter_building(game, *building);
+		else
+			ware->set_location(game, obj);
+	}
 	if (worker) {
 		worker->set_location(dynamic_cast<PlayerImmovable *>(obj));
 		if (upcast(Building, building, obj)) {

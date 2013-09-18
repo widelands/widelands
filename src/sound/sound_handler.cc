@@ -17,28 +17,27 @@
  *
  */
 
-#include "sound_handler.h"
-
-#include "io/fileread.h"
-#include "logic/game.h"
-#include "i18n.h"
-#include "wui/interactive_base.h"
-#include "io/filesystem/layered_filesystem.h"
-#include "logic/map.h"
-#include "wui/mapview.h"
-#include "wui/mapviewpixelfunctions.h"
-#include "profile/profile.h"
-#include "songset.h"
-
-#include "log.h"
-
-#include <SDL.h>
+#include "sound/sound_handler.h"
 
 #include <cerrno>
 
+#include <SDL.h>
 #ifdef _WIN32
 #include <windows.h>
 #endif
+
+#include "graphic/graphic.h"
+#include "i18n.h"
+#include "io/fileread.h"
+#include "io/filesystem/layered_filesystem.h"
+#include "log.h"
+#include "logic/game.h"
+#include "logic/map.h"
+#include "profile/profile.h"
+#include "sound/songset.h"
+#include "wui/interactive_base.h"
+#include "wui/mapview.h"
+#include "wui/mapviewpixelfunctions.h"
 
 #define DEFAULT_MUSIC_VOLUME  64
 #define DEFAULT_FX_VOLUME    128
@@ -56,13 +55,16 @@ Sound_Handler g_sound_handler;
  * \sa Sound_Handler::init()
 */
 Sound_Handler::Sound_Handler():
-m_nosound             (false),
-m_lock_audio_disabling(false),
-m_disable_music       (false),
-m_disable_fx          (false),
-m_random_order        (true),
-m_current_songset     (""),
-m_fx_lock             (0)
+	m_egbase              (0),
+	m_nosound             (false),
+	m_lock_audio_disabling(false),
+	m_disable_music       (false),
+	m_disable_fx          (false),
+	m_music_volume        (MIX_MAX_VOLUME),
+	m_fx_volume           (MIX_MAX_VOLUME),
+	m_random_order        (true),
+	m_current_songset     (""),
+	m_fx_lock             (0)
 {}
 
 /// Housekeeping: unset hooks. Audio data will be freed automagically by the
@@ -96,7 +98,7 @@ void Sound_Handler::init()
 	//Windows Music has crickling inside if the buffer has another size
 	//than 4k, but other systems work fine with less, some crash
 	//with big buffers.
-#ifdef WIN32
+#ifdef _WIN32
 	const uint16_t bufsize = 4096;
 #else
 	const uint16_t bufsize = 1024;
@@ -113,9 +115,7 @@ void Sound_Handler::init()
 	if
 		(SDL_InitSubSystem(SDL_INIT_AUDIO) == -1
 		 or
-		 Mix_OpenAudio(MIX_DEFAULT_FREQUENCY, MIX_DEFAULT_FORMAT, 2, bufsize)
-		 ==
-		 -1)
+		 Mix_OpenAudio(MIX_DEFAULT_FREQUENCY, MIX_DEFAULT_FORMAT, 2, bufsize) == -1)
 	{
 		SDL_QuitSubSystem(SDL_INIT_AUDIO);
 		log("WARNING: Failed to initialize sound system: %s\n", Mix_GetError());
@@ -155,9 +155,11 @@ void Sound_Handler::shutdown()
 	if (SDL_InitSubSystem(SDL_INIT_AUDIO) == -1) {
 		log ("audio error %s\n", SDL_GetError());
 	}
-	char * text = new char[15];
+	char * text = new char[21];
 	SDL_AudioDriverName(text, 20);
 	log("SDL_AUDIODRIVER %s\n", text);
+	delete[] text;
+	text = 0;
 
 	if (numtimesopened != 1) {
 		log (_("PROBLEM: sound device opened multiple times, trying to close"));
@@ -206,17 +208,17 @@ void Sound_Handler::read_config()
 */
 void Sound_Handler::load_system_sounds()
 {
-	load_fx("sound", "click");
-	load_fx("sound", "create_construction_site");
-	load_fx("sound", "message");
-	load_fx("sound/military", "under_attack");
-	load_fx("sound/military", "site_occupied");
+	load_fx_if_needed("sound", "click", "sound/click");
+	load_fx_if_needed("sound", "create_construction_site", "sound/create_construction_site");
+	load_fx_if_needed("sound", "message", "sound/message");
+	load_fx_if_needed("sound/military", "under_attack", "sound/military/under_attack");
+	load_fx_if_needed("sound/military", "site_occupied", "sound/military/site_occupied");
 }
 
 /** Load a sound effect. One sound effect can consist of several audio files
  * named EFFECT_XX.ogg, where XX is between 00 and 99. If
  * BASENAME_XX (without extension) is a directory, effects will be loaded
- * recursively.
+ * recursively. If it is already loaded, the function does nothing.
  *
  * Subdirectories of and files under BASENAME_XX can be named anything you want.
  *
@@ -231,34 +233,48 @@ void Sound_Handler::load_system_sounds()
  * \internal
  * \param recursive  Whether to recurse into subdirectories
 */
-void Sound_Handler::load_fx
-	(std::string const & dir, std::string const & fxname, bool const recursive)
+void Sound_Handler::load_fx_if_needed
+	(const std::string & dir,
+	 const std::string & filename,
+	 const std::string & fx_name,
+	 bool                recursive)
 {
 	filenameset_t dirs, files;
 	filenameset_t::const_iterator i;
 
 	assert(g_fs);
 
-	if (m_nosound)
+	if (m_nosound || m_fxs.count(fx_name) > 0)
 		return;
 
-	g_fs->FindFiles(dir, fxname + "_??.ogg." + i18n::get_locale(), &files);
-	if (files.empty())
-		g_fs->FindFiles(dir, fxname + "_??.ogg", &files);
+	m_fxs[fx_name] = new FXset();
 
-	for (i = files.begin(); i != files.end(); ++i) {
-		assert(!g_fs->IsDirectory(*i));
-		load_one_fx(i->c_str(), fxname);
-	}
+	// List for recursion.
+	std::list<std::string> dirs_left;
+	dirs_left.push_back(dir);
 
-	if (recursive) {
-		g_fs->FindFiles(dir, "*_??." + i18n::get_locale(), &dirs);
-		if (dirs.empty())
-			g_fs->FindFiles(dir, "*_??", &dirs);
+	while (!dirs_left.empty()) {
+		std::string current_dir = dirs_left.front();
+		dirs_left.pop_front();
 
-		for (i = dirs.begin(); i != dirs.end(); ++i) {
-			assert(g_fs->IsDirectory(*i));
-			load_fx(*i, fxname, true);
+		g_fs->FindFiles(current_dir, filename + "_??.ogg." + i18n::get_locale(), &files);
+		if (files.empty())
+			g_fs->FindFiles(current_dir, filename + "_??.ogg", &files);
+
+		for (i = files.begin(); i != files.end(); ++i) {
+			assert(!g_fs->IsDirectory(*i));
+			load_one_fx(i->c_str(), fx_name);
+		}
+
+		if (recursive) {
+			g_fs->FindFiles(current_dir, "*_??." + i18n::get_locale(), &dirs);
+			if (dirs.empty())
+				g_fs->FindFiles(current_dir, "*_??", &dirs);
+
+			for (i = dirs.begin(); i != dirs.end(); ++i) {
+				assert(g_fs->IsDirectory(*i));
+				dirs_left.push_back(*i);
+			}
 		}
 	}
 }
@@ -272,15 +288,15 @@ void Sound_Handler::load_fx
  * until the game is finished.
 */
 void Sound_Handler::load_one_fx
-	(char const * const filename, std::string const & fx_name)
+	(char const * const path, const std::string & fx_name)
 {
 	FileRead fr;
 
 	if (m_nosound)
 		return;
 
-	if (not fr.TryOpen(*g_fs, filename)) {
-		log("WARNING: Could not open %s for reading!\n", filename);
+	if (not fr.TryOpen(*g_fs, path)) {
+		log("WARNING: Could not open %s for reading!\n", path);
 		return;
 	}
 
@@ -290,15 +306,14 @@ void Sound_Handler::load_one_fx
 	{
 		//make sure that requested FXset exists
 
-		if (m_fxs.count(fx_name) == 0)
-			m_fxs[fx_name] = new FXset();
+		assert(m_fxs.count(fx_name) > 0);
 
 		m_fxs[fx_name]->add_fx(m);
 	} else
 		log
 			("Sound_Handler: loading sound effect \"%s\" for FXset \"%s\" "
 			 "failed: %s\n",
-			 filename, fx_name.c_str(), Mix_GetError());
+			 path, fx_name.c_str(), Mix_GetError());
 }
 
 /** Calculate  the position of an effect in relation to the visible part of the
@@ -322,11 +337,11 @@ int32_t Sound_Handler::stereo_position(Widelands::Coords const position)
 	assert(m_egbase);
 	assert(position);
 
-	Interactive_Base const & ibase = *m_egbase->get_ibase();
+	const Interactive_Base & ibase = *m_egbase->get_ibase();
 	Point const vp = ibase.get_viewpoint();
 
-	int32_t const xres = ibase.get_xres();
-	int32_t const yres = ibase.get_yres();
+	int32_t const xres = g_gr->get_xres();
+	int32_t const yres = g_gr->get_yres();
 
 	MapviewPixelFunctions::get_pix(m_egbase->map(), position, sx, sy);
 	sx -= vp.x;
@@ -345,7 +360,7 @@ int32_t Sound_Handler::stereo_position(Widelands::Coords const position)
  * \todo What is the selection algorithm? cf class documentation
 */
 bool Sound_Handler::play_or_not
-	(std::string const &       fx_name,
+	(const std::string &       fx_name,
 	 int32_t             const stereo_pos,
 	 uint8_t             const priority)
 {
@@ -430,7 +445,7 @@ bool Sound_Handler::play_or_not
  *         (see \ref FXset::m_priority)
 */
 void Sound_Handler::play_fx
-	(std::string const &       fx_name,
+	(const std::string &       fx_name,
 	 Widelands::Coords   const map_position,
 	 uint8_t             const priority)
 {
@@ -448,7 +463,7 @@ void Sound_Handler::play_fx
  *                         played? (see \ref FXset::m_priority)
 */
 void Sound_Handler::play_fx
-	(std::string const &       fx_name,
+	(const std::string &       fx_name,
 	 int32_t             const stereo_pos,
 	 uint8_t             const priority)
 {
@@ -509,7 +524,7 @@ void Sound_Handler::play_fx
  * Subdirectories of and files under BASENAME_XX can be named anything you want.
 */
 void Sound_Handler::register_song
-	(std::string const & dir, std::string const & basename,
+	(const std::string & dir, const std::string & basename,
 	 bool const recursive)
 {
 	filenameset_t files;
@@ -546,12 +561,12 @@ void Sound_Handler::register_song
  * or \ref change_music() this function will block until the fadeout is complete
 */
 void Sound_Handler::start_music
-	(std::string const & songset_name, int32_t fadein_ms)
+	(const std::string & songset_name, int32_t fadein_ms)
 {
 	if (get_disable_music() or m_nosound)
 		return;
 
-	if (fadein_ms == 0) fadein_ms = 50; //  avoid clicks
+	if (fadein_ms == 0) fadein_ms = 250; //  avoid clicks
 
 	if (Mix_PlayingMusic())
 		change_music(songset_name, 0, fadein_ms);
@@ -581,7 +596,7 @@ void Sound_Handler::stop_music(int32_t fadeout_ms)
 	if (get_disable_music() or m_nosound)
 		return;
 
-	if (fadeout_ms == 0) fadeout_ms = 50; //  avoid clicks
+	if (fadeout_ms == 0) fadeout_ms = 250; //  avoid clicks
 
 	Mix_FadeOutMusic(fadeout_ms);
 }
@@ -597,7 +612,7 @@ void Sound_Handler::stop_music(int32_t fadeout_ms)
  * be selected
 */
 void Sound_Handler::change_music
-	(std::string const & songset_name,
+	(const std::string & songset_name,
 	 int32_t const fadeout_ms, int32_t const fadein_ms)
 {
 	if (m_nosound)

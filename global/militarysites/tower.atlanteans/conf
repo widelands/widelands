@@ -1,9 +1,10 @@
 size=medium
 max_soldiers=4
-heal_per_second=2
+heal_per_second=120
 conquers=9
 vision_range=17
 buildable=no
+prefer_heroes=true
 
 [idle]
 pics=../../../tribes/atlanteans/tower/tower_i_??.png

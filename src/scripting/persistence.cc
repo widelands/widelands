@@ -17,16 +17,15 @@
  *
  */
 
+#include "scripting/persistence.h"
+
 #include <lua.hpp>
 
 #include "log.h"
 #include "logic/widelands_fileread.h"
 #include "logic/widelands_filewrite.h"
-
-#include "pluto.h"
-#include "c_utils.h"
-
-#include "persistence.h"
+#include "scripting/c_utils.h"
+#include "scripting/pluto.h"
 
 /*
  * ========================================================================
@@ -138,7 +137,7 @@ static const char * m_persistent_globals[] = {
 	"os", "package", "pairs", "pcall", "print", "rawequal",
 	"rawget", "rawset", "require", "select", "setfenv", "setmetatable",
 	"table", "tonumber", "tostring", "type", "unpack", "wl", "xpcall",
-	"string", "use", "_", "set_textdomain", "coroutine.yield", 0
+	"string", "use", "_", "set_textdomain", "get_build_id", "coroutine.yield", 0
 };
 
 /**
@@ -188,7 +187,7 @@ uint32_t persist_object
 uint32_t unpersist_object
 	(lua_State * L,
 	 Widelands::FileRead & fr, Widelands::Map_Map_Object_Loader & mol,
-	 uint32_t size)
+	 uint32_t /* size */)
 {
 	// Save the mol in the registry
 	lua_pushlightuserdata(L, &mol);

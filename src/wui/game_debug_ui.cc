@@ -18,38 +18,39 @@
  */
 // UI classes for real-time game debugging
 
+#include "wui/game_debug_ui.h"
+
+#include <cstdio>
+
+#include "graphic/graphic.h"
+#include "i18n.h"
 #include "logic/bob.h"
 #include "logic/building.h"
 #include "logic/field.h"
-#include "logic/player.h"
-#include "graphic/graphic.h"
-#include "i18n.h"
 #include "logic/instances.h"
-#include "interactive_base.h"
 #include "logic/map.h"
-
+#include "logic/player.h"
 #include "ui_basic/button.h"
 #include "ui_basic/listselect.h"
 #include "ui_basic/multilinetextarea.h"
 #include "ui_basic/panel.h"
 #include "ui_basic/tabpanel.h"
 #include "ui_basic/window.h"
-
-#include <cstdio>
+#include "wui/interactive_base.h"
 
 struct MapObjectDebugPanel
 : public UI::Panel, public Widelands::Map_Object::LogSink
 {
 	MapObjectDebugPanel
 		(UI::Panel                   & parent,
-		 Widelands::Editor_Game_Base const &,
+		 const Widelands::Editor_Game_Base &,
 		 Widelands::Map_Object       &);
 	~MapObjectDebugPanel();
 
 	virtual void log(std::string str);
 
 private:
-	Widelands::Editor_Game_Base const & m_egbase;
+	const Widelands::Editor_Game_Base & m_egbase;
 	Widelands::Object_Ptr         m_object;
 
 	UI::Multiline_Textarea        m_log;
@@ -58,7 +59,7 @@ private:
 
 MapObjectDebugPanel::MapObjectDebugPanel
 	(UI::Panel                   & parent,
-	 Widelands::Editor_Game_Base const & egbase,
+	 const Widelands::Editor_Game_Base & egbase,
 	 Widelands::Map_Object       & obj)
 :
 UI::Panel(&parent, 0, 0, 350, 200),
@@ -100,10 +101,10 @@ building_ui.cc).
 ===============
 */
 void Widelands::Map_Object::create_debug_panels
-	(Widelands::Editor_Game_Base const & egbase, UI::Tab_Panel & tabs)
+	(const Widelands::Editor_Game_Base & egbase, UI::Tab_Panel & tabs)
 {
 	tabs.add
-		("debug", g_gr->get_picture(PicMod_Game, "pics/menu_debug.png"),
+		("debug", g_gr->images().get("pics/menu_debug.png"),
 		 new MapObjectDebugPanel(tabs, egbase, *this));
 }
 
@@ -148,7 +149,7 @@ MapObjectDebugWindow::MapObjectDebugWindow
 	m_object          (&obj),
 	m_tabs
 		(this, 0, 0,
-		 g_gr->get_picture(PicMod_UI, "pics/but1.png"))
+		 g_gr->images().get("pics/but1.png"))
 {
 	char buffer[128];
 
@@ -243,7 +244,7 @@ FieldDebugWindow::FieldDebugWindow
 	m_ui_immovable
 		(this, "immovable",
 		 0, 280, 214, 24,
-		 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
+		 g_gr->images().get("pics/but0.png"),
 		 ""),
 
 	m_ui_bobs(this, 0, 304, 214, 96)
@@ -274,7 +275,7 @@ void FieldDebugWindow::think()
 	UI::Window::think();
 
 	// Select information about the field itself
-	Widelands::Editor_Game_Base const & egbase =
+	const Widelands::Editor_Game_Base & egbase =
 		ref_cast<Interactive_Base const, UI::Panel const>(*get_parent())
 		.egbase();
 	{
@@ -307,7 +308,7 @@ void FieldDebugWindow::think()
 	Widelands::Map_Index const i = m_coords.field - &m_map[0];
 	Widelands::Player_Number const nr_players = m_map.get_nrplayers();
 	iterate_players_existing_const(plnum, nr_players, egbase, player) {
-		Widelands::Player::Field const & player_field = player->fields()[i];
+		const Widelands::Player::Field & player_field = player->fields()[i];
 		snprintf(buffer, sizeof(buffer), "Player %u:\n", plnum);
 		str += buffer;
 		snprintf
@@ -342,12 +343,12 @@ void FieldDebugWindow::think()
 		switch (vision) {
 		case 0: str += "  never seen\n"; break;
 		case 1: {
-			AnimationData const * data = 0;
-			if (player_field.map_object_descr[Widelands::TCoords<>::None])
-				data =
-					g_anim.get_animation
-						(player_field.map_object_descr[Widelands::TCoords<>::None]
-						 ->main_animation());
+			std::string animation_name = "(none)";
+			if (player_field.map_object_descr[Widelands::TCoords<>::None]) {
+				animation_name = g_anim.get_animation
+					(player_field.map_object_descr[Widelands::TCoords<>::None]->main_animation()).picnametempl;
+			}
+
 			snprintf
 				(buffer, sizeof(buffer),
 				 "  last seen at %u:\n"
@@ -356,14 +357,29 @@ void FieldDebugWindow::think()
 				 "      ",
 				 player_field.time_node_last_unseen,
 				 player_field.owner,
-				 data ? data->picnametempl.c_str() : "(none)");
+				 animation_name.c_str());
 			str += buffer;
 			break;
 		}
 		default:
 			snprintf(buffer, sizeof(buffer), "  seen %u times\n", vision - 1);
-			str +=  buffer;
+			str += buffer;
+			break;
 		}
+	}
+	{
+		Widelands::Resource_Index ridx = m_coords.field->get_resources();
+		int ramount = m_coords.field->get_resources_amount();
+		int startingAmount = m_coords.field->get_starting_res_amount();
+		snprintf
+		(buffer, sizeof(buffer), _("Resource: %s\n"),
+			m_map.get_world()->get_resource(ridx)->name().c_str());
+
+		str += buffer;
+
+		snprintf
+		(buffer, sizeof(buffer), _("  Amount: %i/%i\n"), ramount, startingAmount);
+		str += buffer;
 	}
 
 	m_ui_field.set_text(str.c_str());
@@ -383,10 +399,34 @@ void FieldDebugWindow::think()
 
 	// Bobs information
 	std::vector<Widelands::Bob *> bobs;
-
-	m_ui_bobs.clear();
-
 	m_map.find_bobs(Widelands::Area<Widelands::FCoords>(m_coords, 0), &bobs);
+
+	// Do not clear the list. Instead parse all bobs and sync lists
+	for (uint32_t idx = 0; idx < m_ui_bobs.size(); idx++) {
+		Widelands::Map_Object* mo =
+			ibase().egbase().objects().get_object(m_ui_bobs[idx]);
+		bool toremove = false;
+		std::vector<Widelands::Bob *>::iterator removeIt;
+		// Nested loop :(
+		container_iterate(std::vector<Widelands::Bob *>, bobs, j) {
+			if ((*j.current) && mo && (*j.current)->serial() == mo->serial()) {
+				// Remove from the bob list if we already
+				// have it in our list
+				toremove = true;
+				removeIt = j.current;
+				break;
+			}
+		}
+		if (toremove) {
+			bobs.erase(removeIt);
+			continue;
+		}
+		// Remove from our list if its not in the bobs
+		// list, or if it doesn't seem to exist anymore
+		m_ui_bobs.remove(idx);
+		idx--; //reiter the same index
+	}
+	// Add remaining
 	container_iterate_const(std::vector<Widelands::Bob *>, bobs, j) {
 		snprintf
 			(buffer, sizeof(buffer),

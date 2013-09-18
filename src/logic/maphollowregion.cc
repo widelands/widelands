@@ -17,12 +17,12 @@
  *
  */
 
-#include "maphollowregion.h"
+#include "logic/maphollowregion.h"
 
 namespace Widelands {
 
 template <> MapHollowRegion<Area<> >::MapHollowRegion
-	(Map const & map, HollowArea<Area<> > const hollow_area)
+	(const Map & map, HollowArea<Area<> > const hollow_area)
 :
 m_hollow_area (hollow_area),
 m_phase       (Top),

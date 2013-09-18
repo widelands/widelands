@@ -17,31 +17,36 @@
  *
  */
 
+#include "logic/building.h"
+
 #include <cstdio>
 #include <sstream>
 
-#include "upcast.h"
-#include "wexception.h"
+#include <boost/foreach.hpp>
 
 #include "economy/flag.h"
 #include "economy/request.h"
 #include "graphic/font.h"
 #include "graphic/font_handler.h"
+#include "graphic/font_handler1.h"
+#include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
 #include "io/filesystem/filesystem.h"
 #include "io/filesystem/layered_filesystem.h"
+#include "logic/constructionsite.h"
+#include "logic/game.h"
+#include "logic/game_data_error.h"
+#include "logic/map.h"
+#include "logic/player.h"
+#include "logic/productionsite.h"
+#include "logic/tribe.h"
+#include "logic/worker.h"
 #include "profile/profile.h"
 #include "sound/sound_handler.h"
+#include "text_layout.h"
+#include "upcast.h"
+#include "wexception.h"
 #include "wui/interactive_player.h"
-
-#include "constructionsite.h"
-#include "game.h"
-#include "game_data_error.h"
-#include "map.h"
-#include "player.h"
-#include "productionsite.h"
-#include "tribe.h"
-#include "worker.h"
 
 namespace Widelands {
 
@@ -50,13 +55,13 @@ static const int32_t BUILDING_LEAVE_INTERVAL = 1000;
 
 Building_Descr::Building_Descr
 	(char const * const _name, char const * const _descname,
-	 std::string const & directory, Profile & prof, Section & global_s,
-	 Tribe_Descr const & _descr)
+	 const std::string & directory, Profile & prof, Section & global_s,
+	 const Tribe_Descr & _descr)
 	:
 	Map_Object_Descr(_name, _descname),
 	m_tribe         (_descr),
 	m_buildable     (true),
-	m_buildicon     (g_gr->get_no_picture()),
+	m_buildicon     (nullptr),
 	m_size          (BaseImmovable::SMALL),
 	m_mine          (false),
 	m_port          (false),
@@ -82,7 +87,7 @@ Building_Descr::Building_Descr
 			throw game_data_error
 				(_("expected %s but found \"%s\""),
 				 "{\"small\"|\"medium\"|\"big\"|\"port\"|\"mine\"}", string);
-	} catch (_wexception const & e) {
+	} catch (const _wexception & e) {
 		throw game_data_error("size: %s", e.what());
 	}
 
@@ -108,7 +113,7 @@ Building_Descr::Building_Descr
 
 				//  Merge the enhancements workarea info into this building's
 				//  workarea info.
-				Building_Descr const & enhancement =
+				const Building_Descr & enhancement =
 					*tribe().get_building_descr(en_i);
 				container_iterate_const
 					(Workarea_Info, enhancement.m_workarea_info, j)
@@ -122,7 +127,7 @@ Building_Descr::Building_Descr
 				throw wexception
 					("\"%s\" has not been defined as a building type (wrong declaration order?)",
 					 target_name.c_str());
-		} catch (_wexception const & e) {
+		} catch (const _wexception & e) {
 			throw wexception("\"enhancements=%s\": %s", v->get_string(), e.what());
 		}
 	m_enhanced_building = global_s.get_bool("enhanced_building", false);
@@ -141,8 +146,19 @@ Building_Descr::Building_Descr
 		}
 
 		// Get costs
-		Section & buildcost_s = prof.get_safe_section("buildcost");
-		m_buildcost.parse(m_tribe, buildcost_s);
+		if (m_buildable) {
+			Section & buildcost_s = prof.get_safe_section("buildcost");
+			m_buildcost.parse(m_tribe, buildcost_s);
+			Section & returnsect_s = prof.get_safe_section("return_on_dismantle");
+			m_return_dismantle.parse(m_tribe, returnsect_s);
+		}
+
+		if (m_enhanced_building) {
+			Section & en_buildcost_s = prof.get_safe_section("enhancement_cost");
+			m_enhance_cost.parse(m_tribe, en_buildcost_s);
+			Section & en_returnsect_s = prof.get_safe_section("return_on_dismantle_on_enhanced");
+			m_return_enhanced.parse(m_tribe, en_returnsect_s);
+		}
 	} else if (m_global) {
 		//  get build icon for global buildings (for statistics window)
 		m_buildicon_fname  = directory;
@@ -161,9 +177,6 @@ Building_Descr::Building_Descr
 				add_animation("empty", g_anim.get(directory.c_str(), *empty, 0));
 	}
 
-	while (Section::Value const * const v = global_s.get_next_val("soundfx"))
-		g_sound_handler.load_fx(directory, v->get_string());
-
 	m_vision_range = global_s.get_int("vision_range");
 }
 
@@ -173,13 +186,16 @@ Building & Building_Descr::create
 	 Player               &       owner,
 	 Coords                 const pos,
 	 bool                   const construct,
-	 Building_Descr const * const old,
-	 bool                         loading)
+	 bool                         loading,
+	 Building::FormerBuildings const former_buildings)
 	const
 {
-	Building & b = construct ? create_constructionsite(old) : create_object();
+	Building & b = construct ? create_constructionsite() : create_object();
 	b.m_position = pos;
 	b.set_owner(&owner);
+	BOOST_FOREACH(Building_Index idx, former_buildings) {
+		b.m_old_buildings.push_back(idx);
+	}
 	if (loading) {
 		b.Building::init(egbase);
 		return b;
@@ -189,7 +205,7 @@ Building & Building_Descr::create
 }
 
 
-int32_t Building_Descr::suitability(Map const &, FCoords const fc) const {
+int32_t Building_Descr::suitability(const Map &, FCoords const fc) const {
 	return m_size <= (fc.field->nodecaps() & Widelands::BUILDCAPS_SIZEMASK);
 }
 
@@ -222,18 +238,15 @@ Called whenever building graphics need to be loaded.
 void Building_Descr::load_graphics()
 {
 	if (m_buildicon_fname.size())
-		m_buildicon = g_gr->get_picture(PicMod_Game, m_buildicon_fname.c_str());
+		m_buildicon = g_gr->images().get(m_buildicon_fname);
 }
 
 /*
 ===============
 Create a construction site for this type of building
-
-if old != 0 this is an enhancement from an older building
 ===============
 */
-Building & Building_Descr::create_constructionsite
-	(Building_Descr const * const old) const
+Building & Building_Descr::create_constructionsite() const
 {
 	Building_Descr const * const descr =
 		m_tribe.get_building_descr
@@ -241,8 +254,6 @@ Building & Building_Descr::create_constructionsite
 	ConstructionSite & csite =
 		ref_cast<ConstructionSite, Map_Object>(descr->create_object());
 	csite.set_building(*this);
-	if (old)
-		csite.set_previous_building(old);
 
 	return csite;
 }
@@ -260,6 +271,9 @@ Building::Building(const Building_Descr & building_descr) :
 PlayerImmovable(building_descr),
 m_optionswindow(0),
 m_flag         (0),
+m_anim(0),
+m_animstart(0),
+m_leave_time(0),
 m_defeating_player(0),
 m_priority (DEFAULT_PRIORITY),
 m_seeing(false)
@@ -322,7 +336,7 @@ Flag & Building::base_flag()
 /**
  * \return a bitfield of commands the owning player can issue for this building.
  *
- * The bits are (1 << PCap_XXX).
+ * The bits are PCap_XXX.
  * By default, all buildings can be bulldozed. If a building should not be
  * destructible, "destructible=no" must be added to buildings conf.
  */
@@ -330,17 +344,17 @@ uint32_t Building::get_playercaps() const throw () {
 	uint32_t caps = 0;
 	const Building_Descr & d = descr();
 	if (d.is_destructible()) {
-		caps |= 1 << PCap_Bulldoze;
+		caps |= PCap_Bulldoze;
 		if (d.is_buildable() or d.is_enhanced())
-			caps |= 1 << PCap_Dismantle;
+			caps |= PCap_Dismantle;
 	}
 	if (d.enhancements().size())
-		caps |= 1 << PCap_Enhancable;
+		caps |= PCap_Enhancable;
 	return caps;
 }
 
 
-std::string const & Building::name() const throw () {return descr().name();}
+const std::string & Building::name() const throw () {return descr().name();}
 
 
 void Building::start_animation(Editor_Game_Base & egbase, uint32_t const anim)
@@ -433,6 +447,9 @@ void Building::cleanup(Editor_Game_Base & egbase)
 	}
 
 	PlayerImmovable::cleanup(egbase);
+
+	BOOST_FOREACH(boost::signals2::connection& c, options_window_connections)
+		c.disconnect();
 }
 
 
@@ -486,7 +503,7 @@ void Building::destroy(Editor_Game_Base & egbase)
 {
 	const bool fire           = burn_on_destroy();
 	const Coords pos          = m_position;
-	Tribe_Descr const & t = tribe();
+	const Tribe_Descr & t = tribe();
 	PlayerImmovable::destroy(egbase);
 	// We are deleted. Only use stack variables beyond this point
 	if (fire)
@@ -506,7 +523,7 @@ uint32_t Building::get_ui_anim() const {return descr().get_ui_anim();}
 
 
 #define FORMAT(key, value) case key: result << value; break
-std::string Building::info_string(std::string const & format) {
+std::string Building::info_string(const std::string & format) {
 	std::ostringstream result;
 	container_iterate_const(std::string, format, i)
 		if (*i.current == '%') {
@@ -552,10 +569,12 @@ std::string Building::info_string(std::string const & format) {
 				break;
 			default: //  invalid format sequence
 				result << '%' << *i.current;
+				break;
 			}
 		} else
 			result << *i.current;
-	return result.str();
+	const std::string result_str = result.str();
+	return result_str.empty() ? result_str : as_uifont(result_str);
 }
 
 
@@ -666,7 +685,7 @@ void Building::act(Game & game, uint32_t const data)
 		bool wakeup = false;
 
 		// Wake up one worker
-		while (m_leave_queue.size()) {
+		while (!m_leave_queue.empty()) {
 			upcast(Worker, worker, m_leave_queue[0].get(game));
 
 			m_leave_queue.erase(m_leave_queue.begin());
@@ -682,7 +701,7 @@ void Building::act(Game & game, uint32_t const data)
 			}
 		}
 
-		if (m_leave_queue.size())
+		if (!m_leave_queue.empty())
 			schedule_act(game, m_leave_time - time);
 
 		if (!wakeup)
@@ -717,10 +736,7 @@ Draw the building.
 ===============
 */
 void Building::draw
-	(Editor_Game_Base const &       game,
-	 RenderTarget           &       dst,
-	 FCoords                  const coords,
-	 Point                    const pos)
+	(const Editor_Game_Base& game, RenderTarget& dst, const FCoords& coords, const Point& pos)
 {
 	if (coords == m_position) { // draw big buildings only once
 		dst.drawanim
@@ -740,23 +756,18 @@ Draw overlay help strings when enabled.
 ===============
 */
 void Building::draw_help
-	(Editor_Game_Base const &       game,
-	 RenderTarget           &       dst,
-	 FCoords,
-	 Point                    const pos)
+	(const Editor_Game_Base& game, RenderTarget& dst, const FCoords&, const Point& pos)
 {
-	Interactive_GameBase const & igbase =
+	const Interactive_GameBase & igbase =
 		ref_cast<Interactive_GameBase const, Interactive_Base const>
 			(*game.get_ibase());
 	uint32_t const dpyflags = igbase.get_display_flags();
 
 	if (dpyflags & Interactive_Base::dfShowCensus) {
-		//  TODO make more here
-		UI::g_fh->draw_text
-			(dst, UI::TextStyle::ui_small(),
-			 pos - Point(0, 45),
-			 info_string(igbase.building_census_format()),
-			 UI::Align_Center);
+		const std::string info = info_string(igbase.building_census_format());
+		if (!info.empty()) {
+			dst.blit(pos - Point(0, 48), UI::g_fh1->render(info), CM_Normal, UI::Align_Center);
+		}
 	}
 
 	if (dpyflags & Interactive_Base::dfShowStatistics) {
@@ -765,11 +776,10 @@ void Building::draw_help
 				(!iplayer->player().see_all() &&
 				 iplayer->player().is_hostile(*get_owner()))
 				return;
-		UI::g_fh->draw_text
-			(dst, UI::TextStyle::ui_small(),
-			 pos - Point(0, 35),
-			 info_string(igbase.building_statistics_format()),
-			 UI::Align_Center);
+		const std::string info = info_string(igbase.building_statistics_format());
+		if (!info.empty()) {
+			dst.blit(pos - Point(0, 35), UI::g_fh1->render(info), CM_Normal, UI::Align_Center);
+		}
 	}
 }
 
@@ -832,7 +842,7 @@ void Building::set_priority
 }
 
 
-void Building::log_general_info(Editor_Game_Base const & egbase) {
+void Building::log_general_info(const Editor_Game_Base & egbase) {
 	PlayerImmovable::log_general_info(egbase);
 
 	molog("m_position: (%i, %i)\n", m_position.x, m_position.y);
@@ -859,6 +869,7 @@ void Building::add_worker(Worker & worker) {
 			set_seeing(true);
 	}
 	PlayerImmovable::add_worker(worker);
+	workers_changed();
 }
 
 
@@ -866,6 +877,7 @@ void Building::remove_worker(Worker & worker) {
 	PlayerImmovable::remove_worker(worker);
 	if (not get_workers().size())
 		set_seeing(false);
+	workers_changed();
 }
 
 /**
@@ -902,24 +914,27 @@ void Building::set_seeing(bool see)
  * \param title user-visible title of the message
  * \param description user-visible message body, will be placed in an
  *   appropriate rich-text paragraph
+ * \param link_to_building_lifetime if true, the message will expire when this
+ *   building is removed from the game. Default is true
  * \param throttle_time if non-zero, the minimum time delay in milliseconds
  *   between messages of this type (see \p msgsender) within the
  *   given \p throttle_radius
  */
 void Building::send_message
 	(Game & game,
-	 std::string const & msgsender,
-	 std::string const & title,
-	 std::string const & description,
+	 const std::string & msgsender,
+	 const std::string & title,
+	 const std::string & description,
+	 bool link_to_building_lifetime,
 	 uint32_t throttle_time,
 	 uint32_t throttle_radius)
 {
-	std::string const & picnametempl =
-		g_anim.get_animation(descr().get_ui_anim())->picnametempl;
+	const std::string & picnametempl =
+		g_anim.get_animation(descr().get_ui_anim()).picnametempl;
 	std::string rt_description;
 	rt_description.reserve
 		(strlen("<rt image=") + picnametempl.size() + 1 +
-		 strlen("<p font-size=14 font-face=FreeSerif></p>") +
+		 strlen("<p font-size=14 font-face=DejaVuSerif></p>") +
 		 description.size() +
 		 strlen("</rt>"));
 	rt_description  = "<rt image=";
@@ -931,13 +946,13 @@ void Building::send_message
 			*it = '0';
 	}
 	rt_description += ".png";
-	rt_description += "><p font-size=14 font-face=FreeSerif>";
+	rt_description += "><p font-size=14 font-face=DejaVuSerif>";
 	rt_description += description;
 	rt_description += "</p></rt>";
 
 	Message * msg = new Message
 		(msgsender, game.get_gametime(), 60 * 60 * 1000,
-		 title, rt_description, get_position());
+		 title, rt_description, get_position(), (link_to_building_lifetime ? m_serial : 0));
 
 	if (throttle_time)
 		owner().add_message_with_timeout

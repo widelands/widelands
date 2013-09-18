@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2011 by the Widelands Development Team
+ * Copyright (C) 2011-2012 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -26,7 +26,7 @@
 
 namespace Widelands {
 
-struct Economy;
+class Economy;
 struct Flag;
 struct PortDock;
 struct RoutingNodeNeighbour;
@@ -36,10 +36,10 @@ struct Ship;
  * Manage all ships and ports of a player that are connected
  * by ocean.
  *
- * That is, two ports belong to the same fleet iff ships can travel
- * between them, and so on. Players may have several fleets, if they
- * build ports that cannot communicate (e.g. one port on the ocean,
- * and another in a lake).
+ * That is, two ports belong to the same fleet if - and only if - ships can
+ * travel between them, and so on. Players may have several fleets, if they
+ * build ports that cannot communicate (e.g. one port on the ocean, and another
+ * in a lake).
  *
  * @paragraph Lifetime
  *
@@ -81,7 +81,7 @@ struct Fleet : Map_Object {
 	void add_port(Editor_Game_Base & egbase, PortDock * port);
 	void remove_port(Editor_Game_Base & egbase, PortDock * port);
 
-	virtual void log_general_info(Editor_Game_Base const &);
+	virtual void log_general_info(const Editor_Game_Base &);
 
 	bool get_path(PortDock & start, PortDock & end, Path & path);
 	void add_neighbours(PortDock & pd, std::vector<RoutingNodeNeighbour> & neighbours);
@@ -105,7 +105,6 @@ private:
 	std::vector<PortDock *> m_ports;
 
 	bool m_act_pending;
-	uint32_t m_port_roundrobin;
 
 	/**
 	 * Store all pairs shortest paths between port docks

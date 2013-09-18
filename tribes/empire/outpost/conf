@@ -1,12 +1,17 @@
 size=medium
 max_soldiers=3
-heal_per_second=1
+heal_per_second=100
 conquers=7
 enhancement=barrier
+prefer_heroes=false
 
 [buildcost]
 trunk=1
 wood=1
+stone=1
+marble=1
+
+[return_on_dismantle]
 stone=1
 marble=1
 

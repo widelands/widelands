@@ -17,15 +17,17 @@
  *
  */
 
-#include "progressbar.h"
-
-#include "constants.h"
-#include "graphic/font.h"
-#include "graphic/font_handler.h"
-#include "graphic/rendertarget.h"
+#include "ui_basic/progressbar.h"
 
 #include <cstdio>
 
+#include <boost/format.hpp>
+
+#include "constants.h"
+#include "graphic/font.h"
+#include "graphic/font_handler1.h"
+#include "graphic/rendertarget.h"
+#include "text_layout.h"
 
 namespace UI {
 /**
@@ -79,10 +81,10 @@ void Progress_Bar::draw(RenderTarget & dst)
 	assert(0 <= fraction);
 	assert     (fraction <= 1);
 
-	const RGBColor color = fraction <= 0.15 ?
+	const RGBColor color = fraction <= 0.33 ?
 		RGBColor(255, 0, 0)
 		:
-		fraction <= 0.5 ? RGBColor(255, 255, 0) : RGBColor(0, 255, 0);
+		fraction <= 0.67 ? RGBColor(255, 255, 0) : RGBColor(0, 255, 0);
 
 	// Draw the actual bar
 	if (m_orientation == Horizontal)
@@ -103,16 +105,11 @@ void Progress_Bar::draw(RenderTarget & dst)
 	}
 
 	// Print the state in percent
-	char buffer[30];
-
-	snprintf
-		(buffer, sizeof(buffer), "%u%%", static_cast<uint32_t>(fraction * 100));
-
-	UI::g_fh->draw_text
-		(dst, UI::TextStyle::ui_small(),
-		 Point(get_w() / 2, get_h() / 2),
-		 buffer,
-		 Align_Center);
+	// TODO use UI_FNT_COLOR_BRIGHT when merged
+	uint32_t percent = static_cast<uint32_t>(fraction * 100);
+	const std::string progress_text =
+		(boost::format("<font color=%1$s>%2$i%%</font>") % "ffffff" % percent).str();
+	const Point pos(get_w() / 2, get_h() / 2);
+	dst.blit(pos, UI::g_fh1->render(as_uifont(progress_text)), CM_Normal, Align_Center);
 }
-
 }

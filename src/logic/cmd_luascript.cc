@@ -17,11 +17,11 @@
  *
  */
 
-#include "cmd_luascript.h"
+#include "logic/cmd_luascript.h"
 
 #include "log.h"
-#include "game.h"
-#include "game_data_error.h"
+#include "logic/game.h"
+#include "logic/game_data_error.h"
 #include "scripting/scripting.h"
 
 namespace Widelands {
@@ -30,7 +30,7 @@ void Cmd_LuaScript::execute (Game & game) {
 	log("Trying to run: %s, %s: ", m_ns.c_str(), m_script.c_str());
 	try {
 		game.lua().run_script(m_ns, m_script);
-	} catch (LuaScriptNotExistingError & e) {
+	} catch (LuaScriptNotExistingError &) {
 		// The script has not been found.
 		log("not found.\n");
 		return;
@@ -54,7 +54,7 @@ void Cmd_LuaScript::Read
 		} else
 			throw game_data_error
 				(_("unknown/unhandled version %u"), packet_version);
-	} catch (_wexception const & e) {
+	} catch (const _wexception & e) {
 		throw game_data_error(_("lua: %s"), e.what());
 	}
 }

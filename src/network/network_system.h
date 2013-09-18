@@ -21,16 +21,15 @@
 #define NETWORK_SYSTEM_H
 
 #include <stdint.h>
-
-#ifndef WIN32
-
+#ifndef _WIN32
 // These includes work on Linux and should be fine on any other Unix-alike.
 // If not, this is the right place to conditionally include what is needed.
+#include <net/if.h>
+#include <netdb.h>
+#include <netinet/in.h>
 #include <sys/ioctl.h>
 #include <sys/socket.h>
-#include <net/if.h>
-#include <netinet/in.h>
-#include <netdb.h>
+#include <sys/types.h>
 #include <unistd.h>
 
 // be compatible to microsoft

@@ -20,8 +20,7 @@
 #ifndef EDITOR_TOOL_NOISE_HEIGHT_OPTIONS_MENU_H
 #define EDITOR_TOOL_NOISE_HEIGHT_OPTIONS_MENU_H
 
-#include "editor_tool_options_menu.h"
-
+#include "editor/ui_menus/editor_tool_options_menu.h"
 #include "ui_basic/button.h"
 #include "ui_basic/textarea.h"
 
@@ -37,10 +36,9 @@ struct Editor_Tool_Noise_Height_Options_Menu : public Editor_Tool_Options_Menu {
 private:
 	Editor_Noise_Height_Tool & m_noise_tool;
 	UI::Textarea m_lower_label, m_upper_label;
-	UI::Button
-		m_lower_increase, m_lower_decrease, m_upper_increase, m_upper_decrease,
-		m_setto_increase, m_setto_decrease;
+	UI::Button m_lower_decrease, m_lower_increase, m_upper_decrease, m_upper_increase;
 	UI::Textarea m_set_label;
+	UI::Button m_setto_decrease, m_setto_increase;
 
 	void clicked_lower_decrease();
 	void clicked_lower_increase();

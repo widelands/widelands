@@ -1,14 +1,21 @@
 size=big
 max_soldiers=8
-heal_per_second=1
+heal_per_second=170
 conquers=11
 enhancement=citadel
+prefer_heroes=true
 
 [buildcost]
 blackwood=9
 trunk=5
 raw_stone=4
 grout=2
+
+[return_on_dismantle]
+blackwood=4
+trunk=2
+raw_stone=2
+grout=1
 
 [build]
 pics=fortress_b_??.png

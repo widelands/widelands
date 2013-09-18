@@ -20,10 +20,9 @@
 #ifndef UI_SCROLLBAR_H
 #define UI_SCROLLBAR_H
 
-#include <boost/signal.hpp>
+#include <boost/signals2.hpp>
 
-#include "panel.h"
-
+#include "ui_basic/panel.h"
 #include "rect.h"
 
 namespace UI {
@@ -51,7 +50,7 @@ public:
 		(Panel * parent,
 		 int32_t x, int32_t y, uint32_t w, uint32_t h, bool horiz);
 
-	boost::signal<void (int32_t)> moved;
+	boost::signals2::signal<void (int32_t)> moved;
 
 	void set_steps(int32_t steps);
 	void set_singlestepsize(uint32_t singlestepsize);
@@ -97,10 +96,10 @@ private:
 	int32_t   m_time_nextact;
 	int32_t   m_knob_grabdelta; ///< only while m_pressed == Knob
 
-	PictureID m_pic_minus;      ///< left/up
-	PictureID m_pic_plus;       ///< right/down
-	PictureID m_pic_background;
-	PictureID m_pic_buttons;
+	const Image* m_pic_minus;      ///< left/up
+	const Image* m_pic_plus;       ///< right/down
+	const Image* m_pic_background;
+	const Image* m_pic_buttons;
 };
 
 }

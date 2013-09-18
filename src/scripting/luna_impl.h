@@ -28,7 +28,7 @@
 
 #include <lua.hpp>
 
-#include "c_utils.h"
+#include "scripting/c_utils.h"
 
 // This is only needed in pluto.cc
 int luna_restore_object(lua_State * L);
@@ -312,8 +312,6 @@ void m_register_methods_in_metatable(lua_State * const L)
 	// We add a lua C closure around the call, the closure gets the pointer to
 	// the c method to call as its only argument. We can then use
 	// method_dispatch as a one-fits-all caller
-	typedef int (T::* const * ConstMethod)(lua_State *);
-
 	for (int i = 0; PT::Methods[i].name; ++i) {
 		lua_pushstring(L, PT::Methods[i].name);
 		lua_pushlightuserdata

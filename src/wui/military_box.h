@@ -20,15 +20,14 @@
 #ifndef _MILITARY_BOX_H_
 #define _MILITARY_BOX_H_
 
-#include "graphic/picture_id.h"
+#include <list>
+
 #include "logic/attackable.h"
 #include "logic/player.h"
-
 #include "ui_basic/box.h"
 #include "ui_basic/button.h"
 #include "ui_basic/slider.h"
 #include "ui_basic/textarea.h"
-#include <list>
 
 /**
  * Military settings tab that is part of the \ref FieldActionWindow
@@ -58,14 +57,14 @@ struct MilitaryBox : public UI::Box {
 			(UI::Box           & parent,
 			 std::string         str,
 			 uint32_t            alignment = UI::Box::AlignTop,
-			 std::string const & fontname = UI_FONT_NAME,
+			 const std::string & fontname = UI_FONT_NAME,
 			 uint32_t            fontsize = UI_FONT_SIZE_SMALL);
 		UI::Button & add_button
 			(UI::Box           & parent,
 			 char const *,
 			 char const *,
 			 void (MilitaryBox::*fn)(),
-			 std::string const & tooltip_text);
+			 const std::string & tooltip_text);
 
 		void update();
 

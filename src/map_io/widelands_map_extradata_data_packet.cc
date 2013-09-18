@@ -17,20 +17,20 @@
  *
  */
 
-#include "widelands_map_extradata_data_packet.h"
-
-#include "logic/editor_game_base.h"
-#include "io/filewrite.h"
-#include "logic/game_data_error.h"
-// Since we are lying about the path of the pictures
-// we also include graphic.h
-#include "graphic/graphic.h"
-#include "logic/map.h"
-#include "profile/profile.h"
-#include "logic/widelands_fileread.h"
-#include "logic/widelands_filewrite.h"
+#include "map_io/widelands_map_extradata_data_packet.h"
 
 #include <SDL_image.h>
+
+#include "graphic/graphic.h"
+#include "graphic/in_memory_image.h"
+#include "graphic/surface.h"
+#include "io/filewrite.h"
+#include "logic/editor_game_base.h"
+#include "logic/game_data_error.h"
+#include "logic/map.h"
+#include "logic/widelands_fileread.h"
+#include "logic/widelands_filewrite.h"
+#include "profile/profile.h"
 
 namespace Widelands {
 
@@ -67,34 +67,37 @@ throw (_wexception)
 					if (fs.IsDirectory(pname->c_str())) // Might be a dir, maybe CVS
 						continue;
 
-					FileRead fr;
+					const std::string hash = std::string("map:") + FileSystem::FS_Filename(pname->c_str());
+					const Image* image = nullptr;
+					if (!g_gr->images().has(hash)) {
+						FileRead fr;
 
-					fr.Open(fs, pname->c_str());
-					SDL_Surface * const surf =
-						IMG_Load_RW(SDL_RWFromMem(fr.Data(0), fr.GetSize()), 1);
-					if (!surf)
-						continue; //  Illegal pic. Skip it.
-
-					PictureID const picture = g_gr->convert_sdl_surface_to_picture(surf);
-
-					std::string picname = FileSystem::FS_Filename(pname->c_str());
-					picname = "map:" + picname;
-
-					g_gr->add_picture_to_cache(PicMod_Game, picname, picture);
+						fr.Open(fs, pname->c_str());
+						SDL_Surface * const surf =
+							IMG_Load_RW(SDL_RWFromMem(fr.Data(0), fr.GetSize()), 1);
+						if (!surf)
+							continue; //  Illegal pic. Skip it.
+						image = g_gr->images().insert(new_in_memory_image(hash, Surface::create(surf)));
+					} else {
+						image = g_gr->images().get(hash);
+					}
+					assert(image);
 
 					//  OK, the pic is now known to the game. But when the game is
 					//  saved, this data has to be regenerated.
 					Map::Extradata_Info info;
 					info.type     = Map::Extradata_Info::PIC;
 					info.filename = *pname;
-					info.data     = picture;
+					info.data     = image;
+					// replace \ with / in path or pics won't be saved on Windows
+					std::replace(info.filename.begin(), info.filename.end(), '\\', '/');
 					map.m_extradatainfos.push_back(info);
 				}
 			}
 		} else
 			throw game_data_error
 				(_("unknown/unhandled version %u"), packet_version);
-	} catch (_wexception const & e) {
+	} catch (const _wexception & e) {
 		throw game_data_error(_("extradata: %s"), e.what());
 	}
 }

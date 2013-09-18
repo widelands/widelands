@@ -1,8 +1,9 @@
 size=small
-heal_per_second=1 # very low -> smallest building
+heal_per_second=60 # very low -> smallest building
 conquers=6
 max_soldiers=1
 buildable=no
+prefer_heroes=false
 
 [idle]
 pics=../../../tribes/empire/barracks/barracks_i_??.png

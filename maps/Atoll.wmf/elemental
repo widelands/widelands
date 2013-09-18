@@ -1,3 +1,5 @@
+# Automatically created by Widelands bzr6709[widelands] (Debug)
+
 [global]
 packet_version="1"
 map_w="160"
@@ -6,7 +8,6 @@ nr_players="4"
 world="desert"
 name=_"Atoll"
 author="Nasenbaer"
-descr=_""Who will be the real King of the big atoll?"
-""
-_"Suggested Teams: (red, green) vs (blue, yellow)""
-tags="official,2teams"
+descr=_"Who will be the real King of the big atoll?"
+hint=_"Suggested Teams: (blue, yellow) vs (red, green)"
+tags="2teams,official,seafaring"

@@ -17,20 +17,18 @@
  *
  */
 
-#include "animation.h"
-
-#include "diranimations.h"
-#include "logic/bob.h"
-#include "constants.h"
-#include "i18n.h"
-#include "profile/profile.h"
-#include "sound/sound_handler.h"
-#include "wexception.h"
-
-#include "helper.h"
+#include "graphic/animation.h"
 
 #include <cstdio>
 
+#include "constants.h"
+#include "graphic/diranimations.h"
+#include "helper.h"
+#include "i18n.h"
+#include "logic/bob.h"
+#include "profile/profile.h"
+#include "sound/sound_handler.h"
+#include "wexception.h"
 
 /// Find out if there is a sound effect registered for the animation's frame
 /// and try to play it. This is used to have sound effects that are tightly
@@ -44,7 +42,7 @@
 ///
 /// \sa RenderTarget::drawanim
 void AnimationData::trigger_soundfx
-	(uint32_t const framenumber, uint32_t const stereo_position) const
+	(uint32_t framenumber, uint32_t stereo_position) const
 {
 	std::map<uint32_t, std::string>::const_iterator const sfx_cue =
 		sfx_cues.find(framenumber);
@@ -86,14 +84,14 @@ void AnimationManager::flush()
  * The sound effects reside in the given directory and are described by
  * the given section.
  *
- * This function looks for pictures in this order:
+ * This function looks for image files in this order:
  *    key 'pics', if present
  *    picnametempl, if not null
  *    \<sectionname\>_??.bmp
  *
  * \param directory     which directory to look in for image and sound files
  * \param s             conffile section to search for data on this animation
- * \param picnametempl  a template for the picture names
+ * \param picnametempl  a template for the image names
 */
 uint32_t AnimationManager::get
 	(char       const * const directory,
@@ -108,7 +106,7 @@ uint32_t AnimationManager::get
 	ad.hotspot.y = 0;
 	ad.picnametempl = "";
 
-	// Determine picture name template
+	// Determine image name template
 
 	char templbuf[256];
 	if (char const * const pics = s.get_string("pics"))
@@ -130,6 +128,7 @@ uint32_t AnimationManager::get
 	// Read mapping from frame numbers to sound effect names and load effects
 	while (Section::Value * const v = s.get_next_val("sfx")) {
 		char * parameters = v->get_string(), * endp;
+		std::string fx_name;
 		unsigned long long int const value = strtoull(parameters, &endp, 0);
 		uint32_t const frame_number = value;
 		try {
@@ -139,7 +138,8 @@ uint32_t AnimationManager::get
 					 _("frame number"), parameters);
 			parameters = endp;
 			force_skip(parameters);
-			g_sound_handler.load_fx(directory, parameters);
+			fx_name = std::string(directory) + "/" + std::string(parameters);
+			g_sound_handler.load_fx_if_needed(directory, parameters, fx_name);
 			std::map<uint32_t, std::string>::const_iterator const it =
 				ad.sfx_cues.find(frame_number);
 			if (it != ad.sfx_cues.end())
@@ -147,10 +147,10 @@ uint32_t AnimationManager::get
 					("redefinition for frame %u to \"%s\" (previously defined to "
 					 "\"%s\")",
 					 frame_number, parameters, it->second.c_str());
-		} catch (_wexception const & e) {
+		} catch (const _wexception & e) {
 			throw wexception("sfx: %s", e.what());
 		}
-		ad.sfx_cues[frame_number] = parameters;
+		ad.sfx_cues[frame_number] = fx_name;
 	}
 
 	ad.hasplrclrs = s.get_bool("playercolor", false);
@@ -181,16 +181,15 @@ uint32_t AnimationManager::get_nranimations() const
 
 /*
 ===============
-Return AnimationData for this animation.
-Returns 0 if the animation doesn't exist.
+Return AnimationData for this animation or throws if this id is unknown.
 ===============
 */
-AnimationData const * AnimationManager::get_animation(uint32_t const id) const
+const AnimationData& AnimationManager::get_animation(uint32_t id) const
 {
 	if (!id || id > m_animations.size())
-		return 0;
+		throw wexception("Requested unknown animation with id: %i", id);
 
-	return &m_animations[id - 1];
+	return m_animations[id - 1];
 }
 
 
@@ -232,7 +231,7 @@ foowalk_??_nn.bmp are used.
 */
 void DirAnimations::parse
 	(Widelands::Map_Object_Descr &       b,
-	 std::string           const &       directory,
+	 const std::string           &       directory,
 	 Profile                     &       prof,
 	 char                  const * const sectnametempl,
 	 Section                     * const defaults)

@@ -20,14 +20,13 @@
 #ifndef WIDELANDS_STREAMREAD_INLINES_H
 #define WIDELANDS_STREAMREAD_INLINES_H
 
-#include "widelands_streamread.h"
-
-#include "immovable.h"
+#include "logic/immovable.h"
+#include "logic/widelands_streamread.h"
 
 namespace Widelands {
 
-inline Tribe_Descr const & StreamRead::Tribe
-	(Editor_Game_Base const & egbase)
+inline const Tribe_Descr & StreamRead::Tribe
+	(const Editor_Game_Base & egbase)
 {
 	char const * const name = CString();
 	if (Tribe_Descr const * const result = egbase.get_tribe(name))
@@ -37,7 +36,7 @@ inline Tribe_Descr const & StreamRead::Tribe
 }
 
 inline Tribe_Descr const * StreamRead::Tribe_allow_null
-	(Editor_Game_Base const & egbase)
+	(const Editor_Game_Base & egbase)
 {
 	char const * const name = CString();
 	if (*name)
@@ -49,8 +48,8 @@ inline Tribe_Descr const * StreamRead::Tribe_allow_null
 		return 0;
 }
 
-inline Immovable_Descr const & StreamRead::Immovable_Type
-	(World const & world)
+inline const Immovable_Descr & StreamRead::Immovable_Type
+	(const World & world)
 {
 	char const * const name = CString();
 	int32_t const index = world.get_immovable_index(name);
@@ -59,8 +58,8 @@ inline Immovable_Descr const & StreamRead::Immovable_Type
 	return *world.get_immovable_descr(index);
 }
 
-inline Immovable_Descr const & StreamRead::Immovable_Type
-	(Editor_Game_Base const & egbase)
+inline const Immovable_Descr & StreamRead::Immovable_Type
+	(const Editor_Game_Base & egbase)
 {
 	if (Tribe_Descr const * const tribe = Tribe_allow_null(egbase))
 		return Immovable_Type(*tribe);
@@ -68,8 +67,8 @@ inline Immovable_Descr const & StreamRead::Immovable_Type
 		return Immovable_Type(egbase.map().world());
 }
 
-inline Building_Descr  const & StreamRead::Building_Type
-	(Tribe_Descr const & tribe)
+inline const Building_Descr  & StreamRead::Building_Type
+	(const Tribe_Descr & tribe)
 {
 	char const * const name = CString();
 	Building_Index const index = tribe.building_index(name);
@@ -78,8 +77,8 @@ inline Building_Descr  const & StreamRead::Building_Type
 	return *tribe.get_building_descr(index);
 }
 
-inline Building_Descr const & StreamRead::Building_Type
-	(Editor_Game_Base const & egbase)
+inline const Building_Descr & StreamRead::Building_Type
+	(const Editor_Game_Base & egbase)
 {
 	return Building_Type(Tribe(egbase));
 }

@@ -20,19 +20,19 @@
 #ifndef AI_HELP_STRUCTS_H
 #define AI_HELP_STRUCTS_H
 
-#include "logic/checkstep.h"
+#include <list>
+
 #include "economy/flag.h"
 #include "economy/road.h"
+#include "logic/checkstep.h"
 #include "logic/findnode.h"
 #include "logic/game.h"
 #include "logic/map.h"
 #include "logic/player.h"
 
-#include <list>
-
 namespace Widelands {
 
-struct ProductionSite;
+class ProductionSite;
 class MilitarySite;
 
 struct CheckStepRoadAI {
@@ -59,7 +59,7 @@ struct FindNodeUnowned {
 		// only interested in fields we can walk on.
 		// Fields should either be completely unowned or owned by an opposing player
 		return
-			fc.field->nodecaps() & MOVECAPS_WALK
+			(fc.field->nodecaps() & MOVECAPS_WALK)
 			&&
 			((fc.field->get_owned_by() == 0)
 			 || player->is_hostile(*game.get_player(fc.field->get_owned_by())))
@@ -78,7 +78,7 @@ struct FindNodeUnowned {
 
 
 struct FindNodeWater {
-	bool accept(Map const & map, FCoords const & coord) const {
+	bool accept(const Map & map, const FCoords & coord) const {
 		return
 			(map.world().terrain_descr(coord.field->terrain_d()).get_is()
 			 & TERRAIN_WATER)
@@ -100,18 +100,18 @@ struct NearFlag {
 	int32_t  cost;
 	int32_t  distance;
 
-	NearFlag (Flag const & f, int32_t const c, int32_t const d) :
+	NearFlag (const Flag & f, int32_t const c, int32_t const d) :
 		flag(&f), cost(c), distance(d)
 	{}
 
-	bool operator< (NearFlag const & f) const {return cost > f.cost;}
+	bool operator< (const NearFlag & f) const {return cost > f.cost;}
 
 	bool operator== (Flag const * const f) const {return flag == f;}
 };
 
 
 struct CompareDistance {
-	bool operator() (NearFlag const & a, NearFlag const & b) const {
+	bool operator() (const NearFlag & a, const NearFlag & b) const {
 		return a.distance < b.distance;
 	}
 };
@@ -163,15 +163,20 @@ struct BuildableField {
 	std::vector<uint8_t> consumers_nearby;
 	std::vector<uint8_t> producers_nearby;
 
-	BuildableField (Widelands::FCoords const & fc)
+	BuildableField (const Widelands::FCoords & fc)
 		:
 		coords             (fc),
 		next_update_due    (0),
 		reachable          (false),
 		preferred          (false),
+		avoid_military(0),
+		enemy_nearby(0),
 		unowned_land_nearby(0),
 		trees_nearby       (0),
-		stones_nearby      (0)
+		stones_nearby      (0),
+		water_nearby(0),
+		space_consumers_nearby(0),
+		military_influence(0)
 	{}
 };
 
@@ -185,11 +190,12 @@ struct MineableField {
 
 	int32_t mines_nearby;
 
-	MineableField (Widelands::FCoords const & fc) :
+	MineableField (const Widelands::FCoords & fc) :
 		coords         (fc),
 		next_update_due(0),
 		reachable      (false),
-		preferred      (false)
+		preferred      (false),
+		mines_nearby(0)
 	{}
 };
 

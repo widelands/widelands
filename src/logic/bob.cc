@@ -17,29 +17,30 @@
  *
  */
 
-#include "bob.h"
+#include "logic/bob.h"
 
-#include "critter_bob.h"
-
-#include "checkstep.h"
-#include "economy/route.h"
-#include "economy/transfer.h"
-#include "findbob.h"
-#include "game.h"
-#include "game_data_error.h"
-#include "map_io/widelands_map_map_object_loader.h"
-#include "map_io/widelands_map_map_object_saver.h"
-#include "wui/mapviewpixelconstants.h"
-#include "path.h"
-#include "player.h"
-#include "profile/profile.h"
-#include "graphic/rendertarget.h"
-#include "soldier.h"
-#include "tribe.h"
-#include "upcast.h"
-#include "wexception.h"
+#include <cstdlib>
 
 #include "backtrace.h"
+#include "economy/route.h"
+#include "economy/transfer.h"
+#include "graphic/rendertarget.h"
+#include "logic/checkstep.h"
+#include "logic/critter_bob.h"
+#include "logic/findbob.h"
+#include "logic/game.h"
+#include "logic/game_data_error.h"
+#include "logic/path.h"
+#include "logic/player.h"
+#include "logic/ship.h"
+#include "logic/soldier.h"
+#include "logic/tribe.h"
+#include "map_io/widelands_map_map_object_loader.h"
+#include "map_io/widelands_map_map_object_saver.h"
+#include "profile/profile.h"
+#include "upcast.h"
+#include "wexception.h"
+#include "wui/mapviewpixelconstants.h"
 
 namespace Widelands {
 
@@ -53,8 +54,11 @@ namespace Widelands {
  */
 uint32_t Bob::Descr::vision_range() const
 {
-	if (m_owner_tribe)
+	if (m_owner_tribe) {
+		if (upcast(const Ship_Descr, ship, this))
+			return ship->vision_range();
 		return m_owner_tribe->get_bob_vision_range();
+	}
 
 	return 0;
 }
@@ -62,7 +66,7 @@ uint32_t Bob::Descr::vision_range() const
 
 Bob::Descr::Descr
 	(char const * const _name, char const * const _descname,
-	 std::string const & directory, Profile & prof, Section & global_s,
+	 const std::string & directory, Profile & prof, Section & global_s,
 	 Tribe_Descr const * const tribe)
 	:
 	Map_Object_Descr(_name, _descname),
@@ -106,7 +110,7 @@ Bob & Bob::Descr::create
 }
 
 
-Bob::Bob(Bob::Descr const & _descr) :
+Bob::Bob(const Bob::Descr & _descr) :
 Map_Object       (&_descr),
 m_owner          (0),
 m_position       (FCoords(Coords(0, 0), 0)), // not linked anywhere
@@ -132,7 +136,7 @@ Bob::~Bob()
 		molog
 			("Map_Object::~Map_Object: m_pos.field != 0, cleanup() not "
 			 "called!\n");
-		*static_cast<int32_t *>(0) = 0;
+		abort();
 	}
 }
 
@@ -159,7 +163,7 @@ void Bob::init(Editor_Game_Base & egbase)
  */
 void Bob::cleanup(Editor_Game_Base & egbase)
 {
-	while (m_stack.size()) //  bobs in the editor do not have tasks
+	while (!m_stack.empty()) //  bobs in the editor do not have tasks
 		do_pop_task(ref_cast<Game, Editor_Game_Base>(egbase));
 
 	set_owner(0); // implicitly remove ourselves from owner's map
@@ -271,7 +275,7 @@ void Bob::skip_act()
  * push_task() itself does not call any functions of the task, so the caller
  * can fill the state information with parameters for the task.
  */
-void Bob::push_task(Game & game, Task const & task, uint32_t const tdelta)
+void Bob::push_task(Game & game, const Task & task, uint32_t const tdelta)
 {
 	assert(not task.unique or not get_state(task));
 	assert(m_in_act || m_stack.empty());
@@ -318,7 +322,7 @@ void Bob::pop_task(Game & game)
  * Get the bottom-most (usually the only) state of this task from the stack.
  * \return 0 if this task is not running at all.
  */
-Bob::State * Bob::get_state(Task const & task)
+Bob::State * Bob::get_state(const Task & task)
 {
 	std::vector<State>::iterator it = m_stack.end();
 
@@ -332,7 +336,7 @@ Bob::State * Bob::get_state(Task const & task)
 	return 0;
 }
 
-Bob::State const * Bob::get_state(Task const & task) const
+Bob::State const * Bob::get_state(const Task & task) const
 {
 	std::vector<State>::const_iterator it = m_stack.end();
 
@@ -393,7 +397,7 @@ void Bob::send_signal(Game & game, char const * const sig)
  */
 void Bob::reset_tasks(Game & game)
 {
-	while (m_stack.size())
+	while (!m_stack.empty())
 		do_pop_task(game);
 
 	m_signal.clear();
@@ -478,7 +482,7 @@ struct BlockedTracker {
 	};
 	// Distance-based ordering as a heuristic for unblock()
 	struct CoordOrdering {
-		bool operator()(CoordData const & a, CoordData const & b) const throw () {
+		bool operator()(const CoordData & a, const CoordData & b) const throw () {
 			if (a.dist != b.dist)
 				return a.dist < b.dist;
 			return a.coord.all < b.coord.all;
@@ -519,7 +523,7 @@ struct BlockedTracker {
 		}
 	}
 
-	bool isBlocked(FCoords const & field) {
+	bool isBlocked(const FCoords & field) {
 		if (disabled)
 			return false;
 
@@ -575,9 +579,9 @@ struct CheckStepBlocked {
  */
 bool Bob::start_task_movepath
 	(Game                & game,
-	 Coords        const & dest,
+	 const Coords        & dest,
 	 int32_t         const persist,
-	 DirAnimations const & anims,
+	 const DirAnimations & anims,
 	 bool            const forceonlast,
 	 int32_t         const only_step)
 {
@@ -613,7 +617,7 @@ bool Bob::start_task_movepath
 	state.ivar1    = 0; // step #
 	state.ivar2    = forceonlast ? 1 : 0;
 	state.ivar3    = only_step;
-	state.diranims = &anims;
+	state.diranims = anims;
 	return true;
 }
 
@@ -622,11 +626,11 @@ bool Bob::start_task_movepath
  * Start moving along the given, precalculated path.
  */
 void Bob::start_task_movepath
-	(Game                &       game,
-	 Path          const &       path,
-	 DirAnimations const &       anims,
-	 bool                  const forceonlast,
-	 int32_t               const only_step)
+	(Game                & game,
+	 const Path          & path,
+	 const DirAnimations & anims,
+	 bool            const forceonlast,
+	 int32_t         const only_step)
 {
 	assert(path.get_start() == get_position());
 
@@ -636,7 +640,7 @@ void Bob::start_task_movepath
 	state.ivar1    = 0;
 	state.ivar2    = forceonlast ? 1 : 0;
 	state.ivar3    = only_step;
-	state.diranims = &anims;
+	state.diranims = anims;
 }
 
 
@@ -648,12 +652,12 @@ void Bob::start_task_movepath
  * the given path index.
  */
 bool Bob::start_task_movepath
-	(Game                &       game,
-	 Path          const &       origpath,
-	 int32_t               const index,
-	 DirAnimations const &       anims,
-	 bool                  const forceonlast,
-	 int32_t               const only_step)
+	(Game                & game,
+	 const Path          & origpath,
+	 int32_t         const index,
+	 const DirAnimations & anims,
+	 bool            const forceonlast,
+	 int32_t         const only_step)
 {
 	CoordPath path(game.map(), origpath);
 	int32_t const curidx = path.get_index(get_position());
@@ -751,16 +755,16 @@ Bob::Task const Bob::taskMove = {
  * Move into the given direction, without passability checks.
  */
 void Bob::start_task_move
-	(Game                &       game,
-	 int32_t               const dir,
-	 DirAnimations const * const anims,
-	 bool                  const forcemove)
+	(Game                & game,
+	 int32_t         const dir,
+	 const DirAnimations & anims,
+	 bool            const forcemove)
 {
 	int32_t const tdelta =
 		start_walk
 			(game,
 			 static_cast<WalkingDir>(dir),
-			 anims->get_animation(dir),
+			 anims.get_animation(dir),
 			 forcemove);
 	if (tdelta < 0)
 		return send_signal(game, tdelta == -2 ? "blocked" : "fail");
@@ -825,18 +829,19 @@ Point Bob::calc_drawpos(const Editor_Game_Base & game, const Point pos) const
 	case IDLE: start.field = 0; break;
 	default:
 		assert(false);
+		break;
 	}
 
 	if (start.field) {
 		spos.y += end.field->get_height() * HEIGHT_FACTOR;
 		spos.y -= start.field->get_height() * HEIGHT_FACTOR;
 
+		assert(m_walkstart <= game.get_gametime());
+		assert(m_walkstart < m_walkend);
 		float f =
 			static_cast<float>(game.get_gametime() - m_walkstart)
 			/
 			(m_walkend - m_walkstart);
-		assert(m_walkstart <= game.get_gametime());
-		assert(m_walkstart < m_walkend);
 
 		if (f < 0)
 			f = 0;
@@ -855,7 +860,7 @@ Point Bob::calc_drawpos(const Editor_Game_Base & game, const Point pos) const
 /// Note that the current node is actually the node that we are walking to, not
 /// the the one that we start from.
 void Bob::draw
-	(Editor_Game_Base const & egbase, RenderTarget & dst, Point const pos) const
+	(const Editor_Game_Base & egbase, RenderTarget & dst, const Point& pos) const
 {
 	if (m_anim)
 		dst.drawanim
@@ -920,14 +925,14 @@ int32_t Bob::start_walk
 }
 
 
-bool Bob::checkNodeBlocked(Game & game, FCoords const & field, bool)
+bool Bob::checkNodeBlocked(Game & game, const FCoords & field, bool)
 {
 	// Battles always block movement!
 	std::vector<Bob *> soldiers;
 	game.map().find_bobs
 		(Area<FCoords>(field, 0), &soldiers, FindBobEnemySoldier(get_owner()));
 
-	if (soldiers.size()) {
+	if (!soldiers.empty()) {
 		container_iterate(std::vector<Bob *>, soldiers, i) {
 			Soldier & soldier = ref_cast<Soldier, Bob>(**i.current);
 			if (soldier.getBattle())
@@ -1003,7 +1008,7 @@ void Bob::set_position(Editor_Game_Base & egbase, const Coords & coords)
 }
 
 /// Give debug information.
-void Bob::log_general_info(Editor_Game_Base const & egbase)
+void Bob::log_general_info(const Editor_Game_Base & egbase)
 {
 	molog("Owner: %p\n", m_owner);
 	molog("Postition: (%i, %i)\n", m_position.x, m_position.y);
@@ -1011,7 +1016,7 @@ void Bob::log_general_info(Editor_Game_Base const & egbase)
 	molog("ActScheduled: %s\n", m_actscheduled ? "true" : "false");
 	molog
 		("Animation: %s\n",
-		 m_anim ? descr().get_animation_name(m_anim).c_str() : "<none>");
+		 m_anim ? descr().get_animation_name(m_anim).c_str() : "\\<none\\>");
 
 	molog("AnimStart: %i\n", m_animstart);
 	molog("WalkingDir: %i\n", m_walking);
@@ -1038,8 +1043,11 @@ void Bob::log_general_info(Editor_Game_Base const & egbase)
 		molog("* svar1: %s\n", m_stack[i].svar1.c_str());
 
 		molog("* coords: (%i, %i)\n", m_stack[i].coords.x, m_stack[i].coords.y);
-		molog("* diranims: %p\n",  m_stack[i].diranims);
-		molog("* path: %p\n",  m_stack[i].path);
+		molog("* diranims:");
+		for (Direction dir = FIRST_DIRECTION; dir <= LAST_DIRECTION; ++dir) {
+			molog(" %d", m_stack[i].diranims.get_animation(dir));
+		}
+		molog("\n* path: %p\n",  m_stack[i].path);
 		if (m_stack[i].path) {
 			const Path & path = *m_stack[i].path;
 			Path::Step_Vector::size_type nr_steps = path.get_nsteps();
@@ -1129,10 +1137,9 @@ void Bob::Loader::load(FileRead & fr)
 
 		if (fr.Unsigned8()) {
 			uint32_t anims[6];
-			for (int i = 0; i < 6; ++i)
-				anims[i] = bob.descr().get_animation(fr.CString());
-			state.diranims = new DirAnimations
-				(anims[0], anims[1], anims[2], anims[3], anims[4], anims[5]);
+			for (int j = 0; j < 6; ++j)
+				anims[j] = bob.descr().get_animation(fr.CString());
+			state.diranims = DirAnimations(anims[0], anims[1], anims[2], anims[3], anims[4], anims[5]);
 		}
 
 		if (fr.Unsigned8()) {
@@ -1177,7 +1184,7 @@ void Bob::Loader::load_finish()
 	//  See bug #537392 for more information:
 	//   https://bugs.launchpad.net/widelands/+bug/537392
 	Bob & bob = get<Bob>();
-	if (!bob.m_stack.size() && !egbase().get_gametime())
+	if (bob.m_stack.empty() && !egbase().get_gametime())
 		if (upcast(Game, game, &egbase())) {
 			bob.init_auto_task(*game);
 		}
@@ -1243,7 +1250,7 @@ void Bob::save
 			for (int dir = 1; dir <= 6; ++dir)
 				fw.CString
 					(descr().get_animation_name
-					 	(state.diranims->get_animation(dir)).c_str());
+						(state.diranims.get_animation(dir)).c_str());
 		} else {
 			fw.Unsigned8(0);
 		}

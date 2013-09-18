@@ -17,22 +17,22 @@
  *
  */
 
-#include "widelands_map_waredata_data_packet.h"
+#include "map_io/widelands_map_waredata_data_packet.h"
 
-#include "logic/bob.h"
 #include "economy/flag.h"
 #include "economy/ware_instance.h"
-#include "logic/legacy.h"
+#include "logic/bob.h"
 #include "logic/editor_game_base.h"
 #include "logic/game.h"
+#include "logic/legacy.h"
 #include "logic/map.h"
 #include "logic/player.h"
 #include "logic/tribe.h"
-#include "upcast.h"
 #include "logic/widelands_fileread.h"
-#include "widelands_map_map_object_loader.h"
-#include "widelands_map_map_object_saver.h"
 #include "logic/worker.h"
+#include "map_io/widelands_map_map_object_loader.h"
+#include "map_io/widelands_map_map_object_saver.h"
+#include "upcast.h"
 
 namespace Widelands {
 
@@ -111,7 +111,7 @@ throw (_wexception)
 							try {
 								ware.m_transfer_nextstep =
 									&mol.get<PlayerImmovable>(nextstep_serial);
-							} catch (_wexception const & e) {
+							} catch (const _wexception & e) {
 								throw game_data_error
 									("nextstep %u: %s", nextstep_serial, e.what());
 							}
@@ -122,12 +122,12 @@ throw (_wexception)
 						//  Do some kind of init.
 						ware.set_location
 							(ref_cast<Game, Editor_Game_Base>(egbase), &location);
-					} catch (_wexception const & e) {
+					} catch (const _wexception & e) {
 						throw game_data_error
 							("location %u: %s", location_serial, e.what());
 					}
 					mol.mark_object_as_loaded(ware);
-				} catch (_wexception const & e) {
+				} catch (const _wexception & e) {
 					throw game_data_error(_("item %u: %s"), serial, e.what());
 				}
 			}
@@ -150,7 +150,7 @@ throw (_wexception)
 								 or
 								 dynamic_cast<Flag     const *>(player_immovable))
 							{
-								Tribe_Descr const & tribe =
+								const Tribe_Descr & tribe =
 									player_immovable->owner().tribe();
 								ware.m_descr_index = tribe.ware_index(type_name);
 								if (!ware.m_descr_index) {
@@ -167,7 +167,7 @@ throw (_wexception)
 								throw game_data_error
 									("is PlayerImmovable but not Building or Flag");
 						} else if (upcast(Worker, worker, &location)) {
-							Tribe_Descr const & tribe = *worker->get_tribe();
+							const Tribe_Descr & tribe = *worker->get_tribe();
 							ware.m_descr =
 								tribe.get_ware_descr
 									(ware.m_descr_index =
@@ -181,7 +181,7 @@ throw (_wexception)
 							try {
 								ware.m_transfer_nextstep =
 									&mol.get<PlayerImmovable>(nextstep_serial);
-							} catch (_wexception const & e) {
+							} catch (const _wexception & e) {
 								throw game_data_error
 									("nextstep %u: %s", nextstep_serial, e.what());
 							}
@@ -192,26 +192,26 @@ throw (_wexception)
 						//  Do some kind of init.
 						ware.set_location
 							(ref_cast<Game, Editor_Game_Base>(egbase), &location);
-					} catch (_wexception const & e) {
+					} catch (const _wexception & e) {
 						throw game_data_error
 							("location %u: %s", location_serial, e.what());
 					}
 					mol.mark_object_as_loaded(ware);
-				} catch (_wexception const & e) {
+				} catch (const _wexception & e) {
 					throw game_data_error(_("item %u: %s"), serial, e.what());
 				}
 			}
 		} else
 			throw game_data_error
 				(_("unknown/unhandled version %u"), packet_version);
-	} catch (_wexception const & e) {
+	} catch (const _wexception & e) {
 		throw game_data_error(_("ware data: %s"), e.what());
 	}
 }
 
 
 void Map_Waredata_Data_Packet::Write
-	(FileSystem & fs, Editor_Game_Base & egbase, Map_Map_Object_Saver & mos)
+	(FileSystem & /* fs */, Editor_Game_Base & /* egbase */, Map_Map_Object_Saver & /* mos */)
 throw (_wexception)
 {
 	throw wexception("Map_Waredata_Data_Packet::Write is obsolete");

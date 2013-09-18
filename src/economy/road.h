@@ -20,11 +20,11 @@
 #ifndef ROAD_H
 #define ROAD_H
 
+#include <vector>
+
 #include "logic/immovable.h"
 #include "logic/path.h"
 #include "logic/roadtype.h"
-
-#include <vector>
 
 namespace Widelands {
 struct Carrier;
@@ -69,7 +69,7 @@ struct Road : public PlayerImmovable {
 
 	static Road & create
 		(Editor_Game_Base &,
-		 Flag & start, Flag & end, Path const &);
+		 Flag & start, Flag & end, const Path &);
 
 	Flag & get_flag(FlagId const flag) const {return *m_flags[flag];}
 
@@ -79,14 +79,14 @@ struct Road : public PlayerImmovable {
 	virtual int32_t  get_size    () const throw ();
 	virtual bool get_passable() const throw ();
 	virtual PositionList get_positions(const Editor_Game_Base &) const throw ();
-	std::string const & name() const throw ();
+	const std::string & name() const throw ();
 
 	virtual Flag & base_flag();
 
 	virtual void set_economy(Economy *);
 
 	int32_t get_cost(FlagId fromflag);
-	Path const & get_path() const {return m_path;}
+	const Path & get_path() const {return m_path;}
 	int32_t get_idle_index() const {return m_idle_index;}
 
 	void presplit(Game &, Coords split);
@@ -97,14 +97,16 @@ struct Road : public PlayerImmovable {
 	virtual void remove_worker(Worker &);
 	void assign_carrier(Carrier &, uint8_t);
 
+	void log_general_info(const Editor_Game_Base &);
+
 protected:
 	virtual void init(Editor_Game_Base &);
 	virtual void cleanup(Editor_Game_Base &);
 
-	virtual void draw(Editor_Game_Base const &, RenderTarget &, FCoords, Point);
+	virtual void draw(const Editor_Game_Base &, RenderTarget &, const FCoords&, const Point&);
 
 private:
-	void _set_path(Editor_Game_Base &, Path const &);
+	void _set_path(Editor_Game_Base &, const Path &);
 
 	void _mark_map(Editor_Game_Base &);
 	void _unmark_map(Editor_Game_Base &);

@@ -1,12 +1,12 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2011 Widelands Development Team
+# Copyright (C) 2005-2013 Widelands Development Team
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2011-12-02 12:41+0000\n"
+"POT-Creation-Date: 2013-09-15 17:41+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -234,7 +234,7 @@ msgstr ""
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:93
 msgid ""
-"-> Warehouses are similiar to your headquarters, with the only difference that it is not defended by soldiers. It is often wise to build a warehouse when your territory is growing and the paths to your headquarters get longer and longer."
+"-> Warehouses are similar to your headquarters, with the only difference that it is not defended by soldiers. It is often wise to build a warehouse when your territory is growing and the paths to your headquarters get longer and longer."
 msgstr ""
 
 #: ../../campaigns/t03.wmf/elemental:7

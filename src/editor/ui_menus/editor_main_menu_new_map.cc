@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2009 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2009, 2013 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -17,25 +17,24 @@
  *
  */
 
-#include "editor_main_menu_new_map.h"
-
-#include "graphic/graphic.h"
-#include "i18n.h"
-#include "editor/editorinteractive.h"
-#include "logic/map.h"
-#include "profile/profile.h"
-#include "logic/world.h"
-#include "logic/editor_game_base.h"
-
-#include "ui_basic/button.h"
-#include "ui_basic/progresswindow.h"
-#include "ui_basic/textarea.h"
-#include "ui_basic/window.h"
+#include "editor/ui_menus/editor_main_menu_new_map.h"
 
 #include <cstdio>
 #include <cstring>
 #include <string>
 #include <vector>
+
+#include "editor/editorinteractive.h"
+#include "graphic/graphic.h"
+#include "i18n.h"
+#include "logic/editor_game_base.h"
+#include "logic/map.h"
+#include "logic/world.h"
+#include "profile/profile.h"
+#include "ui_basic/button.h"
+#include "ui_basic/progresswindow.h"
+#include "ui_basic/textarea.h"
+#include "ui_basic/window.h"
 
 using Widelands::NUMBER_OF_MAP_DIMENSIONS;
 
@@ -55,7 +54,7 @@ Main_Menu_New_Map::Main_Menu_New_Map(Editor_Interactive & parent)
 	int32_t const height  = 20;
 	int32_t       posx    = offsx;
 	int32_t       posy    = offsy;
-	Widelands::Map const & map = parent.egbase().map();
+	const Widelands::Map & map = parent.egbase().map();
 	{
 		Widelands::Extent const map_extent = map.extent();
 		for (m_w = 0; Widelands::MAP_DIMENSIONS[m_w] < map_extent.w; ++m_w) {}
@@ -67,16 +66,16 @@ Main_Menu_New_Map::Main_Menu_New_Map(Editor_Interactive & parent)
 
 	UI::Button * widthupbtn = new UI::Button
 		(this, "width_up",
-		 posx, posy, 20, 20,
-		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
-		 g_gr->get_picture(PicMod_UI, "pics/scrollbar_up.png"));
+		 get_inner_w() - spacing - 20, posy, 20, 20,
+		 g_gr->images().get("pics/but1.png"),
+		 g_gr->images().get("pics/scrollbar_up.png"));
 	widthupbtn->sigclicked.connect(boost::bind(&Main_Menu_New_Map::button_clicked, this, 0));
 
 	UI::Button * widthdownbtn = new UI::Button
 		(this, "width_down",
-		 get_inner_w() - spacing - 20, posy, 20, 20,
-		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
-		 g_gr->get_picture(PicMod_UI, "pics/scrollbar_down.png"));
+		 posx, posy, 20, 20,
+		 g_gr->images().get("pics/but1.png"),
+		 g_gr->images().get("pics/scrollbar_down.png"));
 	widthdownbtn->sigclicked.connect(boost::bind(&Main_Menu_New_Map::button_clicked, this, 1));
 
 	posy += 20 + spacing + spacing;
@@ -88,16 +87,16 @@ Main_Menu_New_Map::Main_Menu_New_Map(Editor_Interactive & parent)
 
 	UI::Button * heightupbtn = new UI::Button
 		(this, "height_up",
-		 posx, posy, 20, 20,
-		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
-		 g_gr->get_picture(PicMod_UI, "pics/scrollbar_up.png"));
+		 get_inner_w() - spacing - 20, posy, 20, 20,
+		 g_gr->images().get("pics/but1.png"),
+		 g_gr->images().get("pics/scrollbar_up.png"));
 	heightupbtn->sigclicked.connect(boost::bind(&Main_Menu_New_Map::button_clicked, this, 2));
 
 	UI::Button * heightdownbtn = new UI::Button
 		(this, "height_down",
-		 get_inner_w() - spacing - 20, posy, 20, 20,
-		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
-		 g_gr->get_picture(PicMod_UI, "pics/scrollbar_down.png"));
+		 posx, posy, 20, 20,
+		 g_gr->images().get("pics/but1.png"),
+		 g_gr->images().get("pics/scrollbar_down.png"));
 	heightdownbtn->sigclicked.connect(boost::bind(&Main_Menu_New_Map::button_clicked, this, 3));
 
 	posy += 20 + spacing + spacing;
@@ -111,7 +110,7 @@ Main_Menu_New_Map::Main_Menu_New_Map(Editor_Interactive & parent)
 	m_world = new UI::Button
 		(this, "world",
 		 posx, posy, width, height,
-		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
+		 g_gr->images().get("pics/but1.png"),
 		 Widelands::World(m_worlds[m_currentworld].c_str()).get_name());
 	m_world->sigclicked.connect(boost::bind(&Main_Menu_New_Map::button_clicked, this, 4));
 
@@ -120,11 +119,9 @@ Main_Menu_New_Map::Main_Menu_New_Map(Editor_Interactive & parent)
 	UI::Button * createbtn = new UI::Button
 		(this, "create_map",
 		 posx, posy, width, height,
-		 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
+		 g_gr->images().get("pics/but0.png"),
 		 _("Create Map"));
 	createbtn->sigclicked.connect(boost::bind(&Main_Menu_New_Map::clicked_create_map, this));
-
-	posy += height + spacing;
 }
 
 
@@ -145,6 +142,8 @@ void Main_Menu_New_Map::button_clicked(int32_t n) {
 			(Widelands::World(m_worlds[m_currentworld].c_str()).get_name
 			 	());
 		break;
+	default:
+		assert(false);
 	}
 
 	char buffer[200];

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2010 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2011, 2013 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -17,39 +17,40 @@
  *
  */
 
-#include "widelands_map_saver.h"
+#include "map_io/widelands_map_saver.h"
 
+#include "log.h"
 #include "logic/editor_game_base.h"
 #include "logic/map.h"
 #include "logic/player.h"
 #include "logic/tribe.h"
+#include "map_io/widelands_map_allowed_building_types_data_packet.h"
+#include "map_io/widelands_map_allowed_worker_types_data_packet.h"
+#include "map_io/widelands_map_building_data_packet.h"
+#include "map_io/widelands_map_buildingdata_data_packet.h"
+#include "map_io/widelands_map_elemental_data_packet.h"
+#include "map_io/widelands_map_exploration_data_packet.h"
+#include "map_io/widelands_map_extradata_data_packet.h"
+#include "map_io/widelands_map_flag_data_packet.h"
+#include "map_io/widelands_map_flagdata_data_packet.h"
+#include "map_io/widelands_map_heights_data_packet.h"
+#include "map_io/widelands_map_map_object_saver.h"
+#include "map_io/widelands_map_node_ownership_data_packet.h"
+#include "map_io/widelands_map_object_packet.h"
+#include "map_io/widelands_map_objective_data_packet.h"
+#include "map_io/widelands_map_player_names_and_tribes_data_packet.h"
+#include "map_io/widelands_map_player_position_data_packet.h"
+#include "map_io/widelands_map_players_areawatchers_data_packet.h"
+#include "map_io/widelands_map_players_messages_data_packet.h"
+#include "map_io/widelands_map_players_view_data_packet.h"
+#include "map_io/widelands_map_port_spaces_data_packet.h"
+#include "map_io/widelands_map_resources_data_packet.h"
+#include "map_io/widelands_map_road_data_packet.h"
+#include "map_io/widelands_map_roaddata_data_packet.h"
+#include "map_io/widelands_map_scripting_data_packet.h"
+#include "map_io/widelands_map_terrain_data_packet.h"
+#include "map_io/widelands_map_version_data_packet.h"
 #include "wexception.h"
-#include "widelands_map_allowed_building_types_data_packet.h"
-#include "widelands_map_allowed_worker_types_data_packet.h"
-#include "widelands_map_building_data_packet.h"
-#include "widelands_map_buildingdata_data_packet.h"
-#include "widelands_map_elemental_data_packet.h"
-#include "widelands_map_exploration_data_packet.h"
-#include "widelands_map_extradata_data_packet.h"
-#include "widelands_map_flag_data_packet.h"
-#include "widelands_map_flagdata_data_packet.h"
-#include "widelands_map_heights_data_packet.h"
-#include "widelands_map_map_object_saver.h"
-#include "widelands_map_node_ownership_data_packet.h"
-#include "widelands_map_object_packet.h"
-#include "widelands_map_objective_data_packet.h"
-#include "widelands_map_player_names_and_tribes_data_packet.h"
-#include "widelands_map_player_position_data_packet.h"
-#include "widelands_map_players_areawatchers_data_packet.h"
-#include "widelands_map_players_messages_data_packet.h"
-#include "widelands_map_players_view_data_packet.h"
-#include "widelands_map_resources_data_packet.h"
-#include "widelands_map_road_data_packet.h"
-#include "widelands_map_roaddata_data_packet.h"
-#include "widelands_map_scripting_data_packet.h"
-#include "widelands_map_terrain_data_packet.h"
-
-#include "log.h"
 
 namespace Widelands {
 
@@ -73,64 +74,63 @@ void Map_Saver::save() throw (_wexception) {
 	// Start with writing the map out, first Elemental data
 	// PRELOAD DATA BEGIN
 	log("Writing Elemental Data ... ");
-	{Map_Elemental_Data_Packet              p; p.Write(m_fs, m_egbase, *m_mos);}
+	{Map_Elemental_Data_Packet               p; p.Write(m_fs, m_egbase, *m_mos);}
 	log("done!\n ");
 
-
 	log("Writing Player Names And Tribe Data ... ");
-	{
-		Map_Player_Names_And_Tribes_Data_Packet
-		p; p.Write(m_fs, m_egbase, *m_mos);
+	{Map_Player_Names_And_Tribes_Data_Packet p; p.Write(m_fs, m_egbase, *m_mos);
 	}
 	log("done!\n ");
 	//  PRELOAD DATA END
 
+	log("Writing Port Spaces Data ... ");
+	{Map_Port_Spaces_Data_Packet             p; p.Write(m_fs, m_egbase, *m_mos);}
+	log("done!\n ");
+
 	log("Writing Heights Data ... ");
-	{Map_Heights_Data_Packet                p; p.Write(m_fs, m_egbase, *m_mos);}
+	{Map_Heights_Data_Packet                 p; p.Write(m_fs, m_egbase, *m_mos);}
 	log("done!\n ");
 
 	log("Writing Terrain Data ... ");
-	{Map_Terrain_Data_Packet                p; p.Write(m_fs, m_egbase, *m_mos);}
+	{Map_Terrain_Data_Packet                 p; p.Write(m_fs, m_egbase, *m_mos);}
 	log("done!\n ");
 
 	log("Writing Player Start Position Data ... ");
-	{Map_Player_Position_Data_Packet        p; p.Write(m_fs, m_egbase, *m_mos);}
+	{Map_Player_Position_Data_Packet         p; p.Write(m_fs, m_egbase, *m_mos);}
 	log("done!\n ");
 
 	//  This must come before anything that references messages, such as:
 	//    * command queue (PlayerMessageCommand, inherited by
 	//      Cmd_MessageSetStatusRead and Cmd_MessageSetStatusArchived)
 	log("Writing Player Message Data ... ");
-	{Map_Players_Messages_Data_Packet       p; p.Write(m_fs, m_egbase, *m_mos);}
+	{Map_Players_Messages_Data_Packet        p; p.Write(m_fs, m_egbase, *m_mos);}
 	log("done!\n ");
 
 	log("Writing Resources Data ... ");
-	{Map_Resources_Data_Packet              p; p.Write(m_fs, m_egbase, *m_mos);}
+	{Map_Resources_Data_Packet               p; p.Write(m_fs, m_egbase, *m_mos);}
 	log("done!\n ");
 
 	//  NON MANDATORY PACKETS BELOW THIS POINT
 	log("Writing Map Extra Data ... ");
-	{Map_Extradata_Data_Packet              p; p.Write(m_fs, m_egbase, *m_mos);}
+	{Map_Extradata_Data_Packet               p; p.Write(m_fs, m_egbase, *m_mos);}
 	log("done!\n ");
 
-	Map const & map = m_egbase.map();
+	log("Writing Map Version ... ");
+	{Map_Version_Data_Packet               p; p.Write(m_fs, m_egbase, *m_mos);}
+	log("done!\n ");
+
+
+
+	const Map & map = m_egbase.map();
 
 	Player_Number const nr_players = map.get_nrplayers();
 
 	//  allowed worker types
-	iterate_players_existing_const(plnum, nr_players, m_egbase, player) {
-		Ware_Index const nr_workers = player->tribe().get_nrworkers();
-		for (Ware_Index i = Ware_Index::First(); i < nr_workers; ++i)
-			if (not player->is_worker_type_allowed(i)) {
-				log("Writing Allowed Worker Types Data ... ");
-				Map_Allowed_Worker_Types_Data_Packet p;
-				p                                  .Write(m_fs, m_egbase, *m_mos);
-				log("done!\n ");
-				goto end_find_a_forbidden_worker_type_loop;
-			}
-	} end_find_a_forbidden_worker_type_loop:;
+	log("Writing Allowed Worker Types Data ... ");
+	{Map_Allowed_Worker_Types_Data_Packet p; p.Write(m_fs, m_egbase, *m_mos);}
+	log("done!\n ");
 
-	//  allowed building types
+ //  allowed building types
 	iterate_players_existing_const(plnum, nr_players, m_egbase, player) {
 		Building_Index const nr_buildings = player->tribe().get_nrbuildings();
 		for (Building_Index i = Building_Index::First(); i < nr_buildings; ++i)

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008-2010 by the Widelands Development Team
+ * Copyright (C) 2008-2010, 2012 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,12 +20,11 @@
 #ifndef DEFAULTAI_H
 #define DEFAULTAI_H
 
-#include "ai_help_structs.h"
+#include <map>
 
+#include "ai/ai_help_structs.h"
 #include "computer_player.h"
 #include "i18n.h"
-
-#include <map>
 
 namespace Widelands {
 struct Road;
@@ -71,8 +70,8 @@ struct DefaultAI : Computer_Player {
 	~DefaultAI();
 	virtual void think ();
 
-	virtual void receive(Widelands::NoteImmovable const &);
-	virtual void receive(Widelands::NoteFieldPossession     const &);
+	virtual void receive(const Widelands::NoteImmovable &);
+	virtual void receive(const Widelands::NoteFieldPossession     &);
 
 	enum {
 		AGGRESSIVE = 2,
@@ -140,17 +139,17 @@ private:
 	int32_t calculate_need_for_ps(BuildingObserver &, int32_t);
 
 	void consider_productionsite_influence
-		(BuildableField &, Widelands::Coords, BuildingObserver const &);
+		(BuildableField &, Widelands::Coords, const BuildingObserver &);
 
 	EconomyObserver  * get_economy_observer (Widelands::Economy &);
 	BuildingObserver & get_building_observer(char const *);
 
 	void gain_immovable (Widelands::PlayerImmovable       &);
-	void lose_immovable (Widelands::PlayerImmovable const &);
+	void lose_immovable (const Widelands::PlayerImmovable &);
 	void gain_building  (Widelands::Building              &);
-	void lose_building  (Widelands::Building        const &);
+	void lose_building  (const Widelands::Building        &);
 
-	bool check_supply (BuildingObserver const &);
+	bool check_supply (const BuildingObserver &);
 
 	bool consider_attack (int32_t);
 
@@ -162,24 +161,25 @@ private:
 	bool m_buildable_changed;
 	bool m_mineable_changed;
 
-	Widelands::Player               * player;
-	Widelands::Tribe_Descr const    * tribe;
+	Widelands::Player                * player;
+	Widelands::Tribe_Descr const     * tribe;
 
-	std::vector<BuildingObserver>     buildings;
-	uint32_t                          total_constructionsites;
+	std::vector<BuildingObserver>      buildings;
+	uint32_t                           total_constructionsites;
 
-	std::list<Widelands::FCoords>     unusable_fields;
-	std::list<BuildableField *>       buildable_fields;
-	std::list<BlockedField *>         blocked_fields;
-	std::list<MineableField *>        mineable_fields;
+	std::list<Widelands::FCoords>      unusable_fields;
+	std::list<BuildableField *>        buildable_fields;
+	std::list<BlockedField>          blocked_fields;
+	std::list<MineableField *>         mineable_fields;
 	std::list<Widelands::Flag const *> new_flags;
+	std::list<Widelands::Coords>       flags_to_be_removed;
 	std::list<Widelands::Road const *> roads;
-	std::list<EconomyObserver *>      economies;
-	std::list<ProductionSiteObserver> productionsites;
-	std::list<ProductionSiteObserver> mines;
-	std::list<MilitarySiteObserver>   militarysites;
+	std::list<EconomyObserver *>       economies;
+	std::list<ProductionSiteObserver>  productionsites;
+	std::list<ProductionSiteObserver>  mines;
+	std::list<MilitarySiteObserver>    militarysites;
 
-	std::vector<WareObserver>         wares;
+	std::vector<WareObserver>          wares;
 
 	int32_t next_road_due;
 	int32_t next_stats_update_due;

@@ -17,16 +17,16 @@
  *
  */
 
-#include "multilineeditbox.h"
+#include "ui_basic/multilineeditbox.h"
 
 #include <boost/bind.hpp>
 
-#include "scrollbar.h"
 #include "constants.h"
 #include "graphic/font_handler.h"
 #include "graphic/rendertarget.h"
 #include "graphic/wordwrap.h"
 #include "helper.h"
+#include "ui_basic/scrollbar.h"
 #include "utf8.h"
 #include "wlapplication.h"
 
@@ -123,7 +123,7 @@ void Multiline_Editbox::Data::update()
 /**
  * Return the text currently stored by the editbox.
  */
-std::string const & Multiline_Editbox::get_text() const
+const std::string & Multiline_Editbox::get_text() const
 {
 	return d->text;
 }
@@ -270,6 +270,7 @@ bool Multiline_Editbox::handle_key(bool const down, SDL_keysym const code)
 		case SDLK_KP_PERIOD:
 			if (code.mod & KMOD_NUM)
 				break;
+			/* no break */
 		case SDLK_DELETE:
 			if (d->cursor_pos < d->text.size()) {
 				d->erase_bytes(d->cursor_pos, d->next_char(d->cursor_pos));
@@ -289,6 +290,7 @@ bool Multiline_Editbox::handle_key(bool const down, SDL_keysym const code)
 				insert(code);
 				break;
 			}
+			/* no break */
 		case SDLK_LEFT: {
 			if (code.mod & (KMOD_LCTRL | KMOD_RCTRL)) {
 				uint32_t newpos = d->prev_char(d->cursor_pos);
@@ -312,6 +314,7 @@ bool Multiline_Editbox::handle_key(bool const down, SDL_keysym const code)
 				insert(code);
 				break;
 			}
+			/* no break */
 		case SDLK_RIGHT:
 			if (code.mod & (KMOD_LCTRL | KMOD_RCTRL)) {
 				uint32_t newpos = d->next_char(d->cursor_pos);
@@ -330,6 +333,7 @@ bool Multiline_Editbox::handle_key(bool const down, SDL_keysym const code)
 				insert(code);
 				break;
 			}
+			/* no break */
 		case SDLK_DOWN:
 			if (d->cursor_pos < d->text.size()) {
 				d->refresh_ww();
@@ -359,6 +363,7 @@ bool Multiline_Editbox::handle_key(bool const down, SDL_keysym const code)
 				insert(code);
 				break;
 			}
+			/* no break */
 		case SDLK_UP:
 			if (d->cursor_pos > 0) {
 				d->refresh_ww();
@@ -386,6 +391,7 @@ bool Multiline_Editbox::handle_key(bool const down, SDL_keysym const code)
 				insert(code);
 				break;
 			}
+			/* no break */
 		case SDLK_HOME:
 			if (code.mod & (KMOD_LCTRL | KMOD_RCTRL)) {
 				d->set_cursor_pos(0);
@@ -404,6 +410,7 @@ bool Multiline_Editbox::handle_key(bool const down, SDL_keysym const code)
 				insert(code);
 				break;
 			}
+			/* no break */
 		case SDLK_END:
 			if (code.mod & (KMOD_LCTRL | KMOD_RCTRL)) {
 				d->set_cursor_pos(d->text.size());
@@ -443,20 +450,12 @@ bool Multiline_Editbox::handle_key(bool const down, SDL_keysym const code)
 }
 
 /**
- * Handle mousebutton events
+ * Grab the focus and redraw.
  */
-bool Multiline_Editbox::handle_mousepress
-		(const Uint8 btn, int32_t x, int32_t y)
-{
-	if (btn == SDL_BUTTON_LEFT and not has_focus()) {
-		focus();
-		return true;
-	}
-	return Panel::handle_mousepress(btn, x, y);
-}
-bool Multiline_Editbox::handle_mouserelease(const Uint8, int32_t, int32_t)
-{
-	return false;
+void Multiline_Editbox::focus() {
+	Panel::focus();
+
+	update();
 }
 
 /**

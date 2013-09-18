@@ -22,10 +22,10 @@
 
 #include <cassert>
 #include <climits>
-#include <stdint.h>
 #include <cstdlib>
 #include <vector>
 
+#include <stdint.h>
 
 /**
  * This class allows for selection of more than just one
@@ -58,10 +58,10 @@ struct MultiSelect {
 	int32_t get_nr_enabled() const {return m_nr_enabled;}
 	int32_t get_random_enabled() const {
 		const int32_t rand_value =
-			static_cast<int32_t>
-				(static_cast<double>(get_nr_enabled())
-				 *
-				 rand() / (RAND_MAX + 1.0));
+		    static_cast<int32_t>
+		    (static_cast<double>(get_nr_enabled())
+		     *
+		     rand() / (RAND_MAX + 1.0));
 		int32_t i = 0;
 		int32_t j = rand_value + 1;
 		while (j) {if (is_enabled(i)) --j; ++i;}

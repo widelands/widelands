@@ -21,10 +21,10 @@ function add_soldiers(hq, soldiers)
    hq:set_soldiers(setpoints)
 end
 
-function _transfer_content(old, new)
+function _remove_content(old)
    local soldiers, workers, wares = {}, {}, {}
 
-   -- transfer soldiers
+   -- salvage soldiers
    for descr, count in pairs(old:get_soldiers("all")) do
       local sdescr = ("%i:%i:%i:%i"):format(unpack(descr))
       if not soldiers[sdescr] then soldiers[sdescr] = 0 end
@@ -53,13 +53,20 @@ function hop_to_next_island(plr, island_idx)
    local new_hq_field = _start_fields[island_idx + 1][plr.number]
    local new_hq = plr:place_building("headquarters", new_hq_field, false, true)
 
+   -- Transfer stuff from HQs
    for i=1,island_idx do
       local old_hq = _start_fields[i][plr.number].immovable
       if not old_hq then break end
 
-      local soldiers, workers, wares = _transfer_content(old_hq, new_hq)
+      local soldiers, workers, wares = _remove_content(old_hq)
+      add_soldiers(new_hq, soldiers)
+      add_workers(new_hq, workers)
+      add_wares(new_hq, wares)
+   end
 
-      -- Transfer all wares over to the new island
+   -- Transfer from existing warehouses
+   for idx,wh in ipairs(plr:get_buildings("warehouse")) do
+      local soldiers, workers, wares = _remove_content(wh)
       add_soldiers(new_hq, soldiers)
       add_workers(new_hq, workers)
       add_wares(new_hq, wares)

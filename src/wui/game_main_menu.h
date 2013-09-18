@@ -20,8 +20,7 @@
 #ifndef GAME_MAIN_MENU_H
 #define GAME_MAIN_MENU_H
 
-#include "interactive_player.h"
-
+#include "wui/interactive_player.h"
 #include "ui_basic/button.h"
 
 // The GameMainMenu is a rather dumb window with lots of buttons

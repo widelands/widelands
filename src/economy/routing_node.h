@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004, 2006-2011 by the Widelands Development Team
+ * Copyright (C) 2004, 2006-2013 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -29,7 +29,7 @@
 namespace Widelands {
 
 struct Flag;
-class RoutingNode;
+struct RoutingNode;
 struct Road;
 
 /**
@@ -87,7 +87,7 @@ public:
 
 	virtual Flag & base_flag() = 0;
 	virtual void get_neighbours(WareWorker type, RoutingNodeNeighbours &) = 0;
-	virtual Coords get_position() const = 0;
+	virtual const Coords & get_position() const = 0;
 };
 
 }

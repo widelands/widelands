@@ -20,15 +20,15 @@
 #ifndef FULLSCREEN_MENU_LAUNCHMPG_H
 #define FULLSCREEN_MENU_LAUNCHMPG_H
 
-#include "base.h"
+#include <string>
 
+#include "ui_fsmenu/base.h"
 #include "ui_basic/button.h"
 #include "ui_basic/helpwindow.h"
-#include "ui_basic/textarea.h"
-#include "ui_basic/multilinetextarea.h"
 #include "ui_basic/listselect.h"
+#include "ui_basic/multilinetextarea.h"
+#include "ui_basic/textarea.h"
 
-#include <string>
 
 struct ChatProvider;
 struct GameChatPanel;
@@ -80,7 +80,7 @@ private:
 
 	UI::Button       m_change_map_or_save, m_ok, m_back, m_wincondition;
 	UI::Button       m_help_button;
-	UI::Textarea              m_title, m_mapname, m_clients, m_players, m_map;
+	UI::Textarea              m_title, m_mapname, m_clients, m_players, m_map, m_wincondition_type;
 	UI::Multiline_Textarea    m_map_info, m_client_info;
 	UI::HelpWindow          * m_help;
 	GameSettingsProvider    * m_settings;

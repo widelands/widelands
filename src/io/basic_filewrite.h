@@ -20,12 +20,13 @@
 #ifndef BASIC_FILEWRITE_H
 #define BASIC_FILEWRITE_H
 
-#include "io/filesystem/filesystem.h"
-#include "machdep.h"
-
 #include <cassert>
 #include <cstdarg>
 #include <limits>
+
+#include "io/filesystem/disk_filesystem.h"
+#include "io/filesystem/filesystem.h"
+#include "machdep.h"
 
 /// Mirror of \ref FileRead : all writes are first stored in a block of memory
 /// and finally written out when Write() is called.
@@ -63,6 +64,12 @@ template <typename Base> struct basic_FileWrite : public Base {
 		fs.Write(filename, data, filelength); Clear();
 	}
 
+	/// Same as above, just that the data is appended to the file
+	/// NOTE RealFSImpl is used by purpose - zip filesystems do not support appending
+	void WriteAppend(RealFSImpl & fs, char const * const filename) {
+		fs.Write(filename, data, filelength, true); Clear();
+	}
+
 	/// Get the position that will be written to in the next write operation that
 	/// does not specify a position.
 	Pos GetPos() const throw () {return filepos;}
@@ -87,7 +94,9 @@ template <typename Base> struct basic_FileWrite : public Base {
 				maxsize += 4096;
 				if (maxsize < i + size)
 					maxsize = i + size;
-				data = static_cast<char *>(realloc(data, maxsize));
+				char* new_data = static_cast<char *>(realloc(data, maxsize));
+				assert(new_data);
+				data = new_data;
 			}
 			filelength = i + size;
 		}

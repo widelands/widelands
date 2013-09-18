@@ -20,21 +20,18 @@
 #ifndef TERRAIN_SDL_H
 #define TERRAIN_SDL_H
 
+#include <cassert>
+
 #include "constants.h"
-#include "log.h"
-#include "random.h"
-#include "upcast.h"
-#include "vertex.h"
-
-#include "wui/mapviewpixelconstants.h"
-
-
-#include "logic/roadtype.h"
-
-#include "surface_sdl.h"
 #include "graphic/graphic.h"
 #include "graphic/texture.h"
-
+#include "log.h"
+#include "logic/roadtype.h"
+#include "random.h"
+#include "graphic/render/sdl_surface.h"
+#include "upcast.h"
+#include "vertex.h"
+#include "wui/mapviewpixelconstants.h"
 
 ///Must be a power of two
 #define DITHER_WIDTH 4
@@ -87,7 +84,7 @@ struct RightEdge {
  * The edge lists will be overwritten with undefined values.
  */
 template<typename T> static void render_edge_lists
-	(SurfaceSDL & dst, Texture const & tex,
+	(SDLSurface & dst, const Texture & tex,
 	 int32_t y, int32_t height,
 	 LeftEdge * left, RightEdge * right,
 	 int32_t dbdx, int32_t dtydx)
@@ -131,10 +128,10 @@ template<typename T> static void render_edge_lists
 	}
 
 	// Cut off lines below screen
-	if (y + height > static_cast<int32_t>(dst.get_h()))
-		height = dst.get_h() - y;
+	if (y + height > static_cast<int32_t>(dst.height()))
+		height = dst.height() - y;
 
-	int32_t dstw = dst.get_w();
+	int32_t dstw = dst.width();
 	while (height > 0) {
 		int32_t leftx = FIXTOI(left->x0);
 		int32_t rightx = FIXTOI(right->x0);
@@ -216,9 +213,9 @@ struct WLPolygon {
  * texture x coordinates.
  */
 template<typename T> static void render_triangle
-	(SurfaceSDL & dst,
-	 Vertex const & p1, Vertex const & p2, Vertex const & p3,
-	 Texture const & tex)
+	(SDLSurface & dst,
+	 const Vertex & p1, const Vertex & p2, const Vertex & p3,
+	 const Texture & tex)
 {
 	if (p1.y == p2.y && p2.y == p3.y)
 		return; // degenerate triangle
@@ -232,7 +229,7 @@ template<typename T> static void render_triangle
 	polygon.nrpoints = 3;
 
 	// Determine a top vertex
-	int32_t top, topy;
+	int32_t top = 0, topy = 0;
 
 	topy = 0x7fffffff;
 	for (uint8_t i = 0; i < polygon.nrpoints; ++i) {
@@ -346,9 +343,9 @@ template<typename T> static void render_triangle
  * rendering could be handled as a special case then.
 */
 template<typename T> static void dither_edge_horiz
-	(SurfaceSDL & dst,
-	 Vertex const & start, Vertex const & end,
-	 Texture const & ttex, Texture const & btex)
+	(SDLSurface & dst,
+	 const Vertex & start, const Vertex & end,
+	 const Texture & ttex, const Texture & btex)
 {
 	uint8_t * tpixels, * bpixels;
 	T * tcolormap, * bcolormap;
@@ -370,8 +367,8 @@ template<typename T> static void dither_edge_horiz
 	// TODO: seed this depending on field coordinates
 	uint32_t rnd = 0;
 
-	const int32_t dstw = dst.get_w();
-	const int32_t dsth = dst.get_h();
+	const int32_t dstw = dst.width();
+	const int32_t dsth = dst.height();
 
 	int32_t ydiff = ITOFIX(end.y - start.y) / (end.x - start.x);
 	int32_t centery = ITOFIX(start.y);
@@ -443,9 +440,9 @@ template<typename T> static void dither_edge_horiz
  * \see dither_edge_horiz
  */
 template<typename T> static void dither_edge_vert
-	(SurfaceSDL & dst,
-	 Vertex const & start, Vertex const & end,
-	 Texture const & ltex, Texture const & rtex)
+	(SDLSurface & dst,
+	 const Vertex & start, const Vertex & end,
+	 const Texture & ltex, const Texture & rtex)
 {
 	uint8_t * lpixels, * rpixels;
 	T * lcolormap, * rcolormap;
@@ -467,8 +464,8 @@ template<typename T> static void dither_edge_vert
 	// TODO: seed this depending on field coordinates
 	uint32_t rnd = 0;
 
-	const int32_t dstw = dst.get_w();
-	const int32_t dsth = dst.get_h();
+	const int32_t dstw = dst.width();
+	const int32_t dsth = dst.height();
 
 	int32_t xdiff = ITOFIX(end.x - start.x) / (end.y - start.y);
 	int32_t centerx = ITOFIX(start.x);
@@ -533,10 +530,10 @@ template<typename T> static void dither_edge_vert
 }
 
 template<typename T> static void render_road_horiz
-	(SurfaceSDL & dst, Point const start, Point const end, SurfaceSDL const & src)
+	(SDLSurface & dst, Point const start, Point const end, const SDLSurface & src)
 {
-	int32_t const dstw = dst.get_w();
-	int32_t const dsth = dst.get_h();
+	int32_t const dstw = dst.width();
+	int32_t const dsth = dst.height();
 
 	int32_t const ydiff = ((end.y - start.y) << 16) / (end.x - start.x);
 	int32_t centery = start.y << 16;
@@ -560,10 +557,10 @@ template<typename T> static void render_road_horiz
 }
 
 template<typename T> static void render_road_vert
-	(SurfaceSDL & dst, Point const start, Point const end, SurfaceSDL const & src)
+	(SDLSurface & dst, Point const start, Point const end, const SDLSurface & src)
 {
-	int32_t const dstw = dst.get_w();
-	int32_t const dsth = dst.get_h();
+	int32_t const dstw = dst.width();
+	int32_t const dsth = dst.height();
 
 	int32_t const xdiff = ((end.x - start.x) << 16) / (end.y - start.y);
 	int32_t centerx = start.x << 16;
@@ -587,21 +584,21 @@ template<typename T> static void render_road_vert
 }
 
 template<typename T> static void draw_field_int
-	(SurfaceSDL       & dst,
-	 Vertex  const &  f_vert,
-	 Vertex  const &  r_vert,
-	 Vertex  const & bl_vert,
-	 Vertex  const & br_vert,
+	(SDLSurface       & dst,
+	 const Vertex  &  f_vert,
+	 const Vertex  &  r_vert,
+	 const Vertex  & bl_vert,
+	 const Vertex  & br_vert,
 	 uint8_t         roads,
-	 Texture const & tr_d_texture,
-	 Texture const &  l_r_texture,
-	 Texture const &  f_d_texture,
-	 Texture const &  f_r_texture)
+	 const Texture & tr_d_texture,
+	 const Texture &  l_r_texture,
+	 const Texture &  f_d_texture,
+	 const Texture &  f_r_texture)
 {
-	upcast(SurfaceSDL, rt_normal, g_gr->get_road_texture(Widelands::Road_Normal).get());
-	upcast(SurfaceSDL, rt_busy, g_gr->get_road_texture(Widelands::Road_Busy).get());
+	SDLSurface& rt_busy = static_cast<SDLSurface&>(g_gr->get_road_texture(Widelands::Road_Busy));
+	SDLSurface& rt_normal = static_cast<SDLSurface&>(g_gr->get_road_texture(Widelands::Road_Normal));
 
-	dst.lock(IPixelAccess::Lock_Normal);
+	dst.lock(Surface::Lock_Normal);
 
 	render_triangle<T> (dst, f_vert, br_vert, r_vert, f_r_texture);
 	render_triangle<T> (dst, f_vert, bl_vert, br_vert, f_d_texture);
@@ -614,13 +611,14 @@ template<typename T> static void draw_field_int
 		if (road) {
 			switch (road) {
 			case Widelands::Road_Normal:
-				render_road_horiz<T> (dst, f_vert, r_vert, *rt_normal);
+				render_road_horiz<T> (dst, f_vert, r_vert, rt_normal);
 				break;
 			case Widelands::Road_Busy:
-				render_road_horiz<T> (dst, f_vert, r_vert, *rt_busy);
+				render_road_horiz<T> (dst, f_vert, r_vert, rt_busy);
 				break;
 			default:
 				assert(false);
+				break;
 			}
 		} else if (&f_r_texture != &tr_d_texture) {
 			dither_edge_horiz<T>(dst, f_vert, r_vert, f_r_texture, tr_d_texture);
@@ -632,13 +630,14 @@ template<typename T> static void draw_field_int
 		if (road) {
 			switch (road) {
 			case Widelands::Road_Normal:
-				render_road_vert<T> (dst, f_vert, br_vert, *rt_normal);
+				render_road_vert<T> (dst, f_vert, br_vert, rt_normal);
 				break;
 			case Widelands::Road_Busy:
-				render_road_vert<T> (dst, f_vert, br_vert, *rt_busy);
+				render_road_vert<T> (dst, f_vert, br_vert, rt_busy);
 				break;
 			default:
 				assert(false);
+				break;
 			}
 		} else if (&f_r_texture != &f_d_texture) {
 			dither_edge_vert<T>(dst, f_vert, br_vert, f_r_texture, f_d_texture);
@@ -650,20 +649,21 @@ template<typename T> static void draw_field_int
 		if (road) {
 			switch (road) {
 			case Widelands::Road_Normal:
-				render_road_vert<T> (dst, f_vert, bl_vert, *rt_normal);
+				render_road_vert<T> (dst, f_vert, bl_vert, rt_normal);
 				break;
 			case Widelands::Road_Busy:
-				render_road_vert<T> (dst, f_vert, bl_vert, *rt_busy);
+				render_road_vert<T> (dst, f_vert, bl_vert, rt_busy);
 				break;
 			default:
 				assert(false);
+				break;
 			}
 		} else if (&l_r_texture != &f_d_texture) {
 			dither_edge_vert<T>(dst, f_vert, bl_vert, f_d_texture, l_r_texture);
 		}
 	}
 
-	dst.unlock(IPixelAccess::Unlock_Update);
+	dst.unlock(Surface::Unlock_Update);
 
 	// FIXME: similar textures may not need dithering
 }

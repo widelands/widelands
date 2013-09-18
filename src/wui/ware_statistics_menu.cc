@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2011 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2013 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -17,37 +17,31 @@
  *
  */
 
-#include "ware_statistics_menu.h"
+#include "wui/ware_statistics_menu.h"
 
 #include "graphic/graphic.h"
-#include "i18n.h"
-#include "interactive_player.h"
-#include "logic/player.h"
 #include "graphic/rendertarget.h"
+#include "i18n.h"
+#include "logic/player.h"
 #include "logic/tribe.h"
 #include "logic/warelist.h"
-#include "plot_area.h"
-#include "differential_plot_area.h"
-#include "waresdisplay.h"
-
 #include "ui_basic/button.h"
 #include "ui_basic/checkbox.h"
-#include "ui_basic/textarea.h"
-#include "ui_basic/tabpanel.h"
 #include "ui_basic/slider.h"
-
-
-#define MIN_WARES_PER_LINE 7
-#define MAX_WARES_PER_LINE 11
+#include "ui_basic/tabpanel.h"
+#include "ui_basic/textarea.h"
+#include "wui/interactive_player.h"
+#include "wui/plot_area.h"
+#include "wui/waresdisplay.h"
 
 #define PLOT_HEIGHT 100
 
 #define INACTIVE 0
 
-//TODO place holder, need to be changed
-static const char pic_tab_production[] = "pics/menu_tab_wares.png";
-static const char pic_tab_consumption[] = "pics/menu_tab_wares.png";
-static const char pic_tab_economy[] = "pics/menu_tab_wares.png";
+static const char pic_tab_production[] = "pics/menu_tab_wares_production.png";
+static const char pic_tab_consumption[] = "pics/menu_tab_wares_consumption.png";
+static const char pic_tab_economy[] = "pics/menu_tab_wares_econ_health.png";
+static const char pic_tab_stock[] = "pics/menu_tab_wares_stock.png"; //TODO replace place holder
 
 static const RGBColor colors[] = {
 	RGBColor(115, 115, 115), //inactive
@@ -113,7 +107,7 @@ public:
 	StatisticWaresDisplay
 		(UI::Panel * const parent,
 		 int32_t const x, int32_t const y,
-		 Widelands::Tribe_Descr const & tribe,
+		 const Widelands::Tribe_Descr & tribe,
 		 boost::function<void(Widelands::Ware_Index, bool)> callback_function,
 		 std::vector<uint8_t> & color_map)
 	:
@@ -125,7 +119,7 @@ public:
 		set_size(w, h);
 	}
 protected:
-	std::string info_for_ware(Widelands::Ware_Index const ware) {
+	std::string info_for_ware(Widelands::Ware_Index const /* ware */) {
 		return "";
 	}
 
@@ -168,7 +162,7 @@ m_parent(&parent)
 
 	UI::Tab_Panel * tabs =
 		 new UI::Tab_Panel
-			 (box, spacing, 0, g_gr->get_picture(PicMod_UI, "pics/but1.png"));
+			 (box, spacing, 0, g_gr->images().get("pics/but1.png"));
 
 
 	m_plot_production =
@@ -179,7 +173,7 @@ m_parent(&parent)
 	m_plot_production->set_plotmode(WUIPlot_Area::PLOTMODE_RELATIVE);
 
 	tabs->add
-		("production", g_gr->get_picture(PicMod_UI, pic_tab_production),
+		("production", g_gr->images().get(pic_tab_production),
 			m_plot_production, _("Production"));
 
 	m_plot_consumption =
@@ -190,7 +184,7 @@ m_parent(&parent)
 	m_plot_consumption->set_plotmode(WUIPlot_Area::PLOTMODE_RELATIVE);
 
 	tabs->add
-		("consumption", g_gr->get_picture(PicMod_UI, pic_tab_consumption),
+		("consumption", g_gr->images().get(pic_tab_consumption),
 			m_plot_consumption, _("Consumption"));
 
 	m_plot_economy =
@@ -201,8 +195,18 @@ m_parent(&parent)
 	m_plot_economy->set_plotmode(WUIPlot_Area::PLOTMODE_RELATIVE);
 
 	tabs->add
-		("economy_health", g_gr->get_picture(PicMod_UI, pic_tab_production),
+		("economy_health", g_gr->images().get(pic_tab_economy),
 			m_plot_economy, _("Economy Health"));
+
+	m_plot_stock = new WUIPlot_Area
+			(tabs,
+			 0, 0, plot_width, plot_height);
+	m_plot_stock->set_sample_rate(STATISTICS_SAMPLE_TIME);
+	m_plot_stock->set_plotmode(WUIPlot_Area::PLOTMODE_ABSOLUTE);
+
+	tabs->add
+		("stock", g_gr->images().get(pic_tab_stock),
+			m_plot_stock, _("Stock"));
 
 	tabs->activate(0);
 
@@ -233,6 +237,12 @@ m_parent(&parent)
 			(cur_ware,
 				parent.get_player()->get_ware_consumption_statistics
 				(Widelands::Ware_Index(cur_ware)));
+
+		m_plot_stock->register_plot_data
+			(cur_ware,
+				parent.get_player()->get_ware_stock_statistics
+				(Widelands::Ware_Index(cur_ware)),
+				colors[cur_ware]);
 	}
 
 	box->add
@@ -246,7 +256,7 @@ m_parent(&parent)
 		(new WUIPlot_Generic_Area_Slider
 			(this, *m_plot_production, this,
 			0, 0, 100, 45,
-			g_gr->get_picture(PicMod_UI, "pics/but1.png")),
+			g_gr->images().get("pics/but1.png")),
 		 UI::Box::AlignLeft, true);
 
 }
@@ -274,6 +284,7 @@ void Ware_Statistics_Menu::cb_changed_to(Widelands::Ware_Index id, bool what) {
 		m_plot_production->set_plotcolor(static_cast<size_t>(id), colors[color_index]);
 		m_plot_consumption->set_plotcolor(static_cast<size_t>(id), colors[color_index]);
 		m_plot_economy->set_plotcolor(static_cast<size_t>(id), colors[color_index]);
+		m_plot_stock->set_plotcolor(static_cast<size_t>(id), colors[color_index]);
 
 	} else { //deactivate ware
 		uint8_t old_color = m_color_map[static_cast<size_t>(id)];
@@ -286,6 +297,7 @@ void Ware_Statistics_Menu::cb_changed_to(Widelands::Ware_Index id, bool what) {
 	m_plot_production->show_plot(static_cast<size_t>(id), what);
 	m_plot_consumption->show_plot(static_cast<size_t>(id), what);
 	m_plot_economy->show_plot(static_cast<size_t>(id), what);
+	m_plot_stock->show_plot(static_cast<size_t>(id), what);
 }
 
 /**
@@ -296,5 +308,6 @@ void Ware_Statistics_Menu::set_time(int32_t timescale) {
 	m_plot_production->set_time_id(timescale);
 	m_plot_consumption->set_time_id(timescale);
 	m_plot_economy->set_time_id(timescale);
+	m_plot_stock->set_time_id(timescale);
 }
 

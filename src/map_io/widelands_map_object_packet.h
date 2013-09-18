@@ -20,11 +20,11 @@
 #ifndef WIDELANDS_MAP_OBJECT_PACKET_H
 #define WIDELANDS_MAP_OBJECT_PACKET_H
 
-#include "logic/instances.h"
-
 #include <set>
 
-struct FileSystem;
+#include "logic/instances.h"
+
+class FileSystem;
 
 namespace Widelands {
 

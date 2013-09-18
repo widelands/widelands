@@ -17,14 +17,14 @@
  *
  */
 
-#include "widelands_map_heights_data_packet.h"
+#include "map_io/widelands_map_heights_data_packet.h"
 
 #include "io/filewrite.h"
 #include "logic/editor_game_base.h"
 #include "logic/game_data_error.h"
 #include "logic/map.h"
-#include "logic/world.h"
 #include "logic/widelands_fileread.h"
+#include "logic/world.h"
 
 namespace Widelands {
 
@@ -49,7 +49,7 @@ throw (_wexception)
 		} else
 			throw game_data_error
 				(_("unknown/unhandled version %u"), packet_version);
-	} catch (_wexception const & e) {
+	} catch (const _wexception & e) {
 		throw game_data_error(_("heights: %s"), e.what());
 	}
 }

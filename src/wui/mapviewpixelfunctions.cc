@@ -17,7 +17,7 @@
  *
  */
 
-#include "mapviewpixelfunctions.h"
+#include "wui/mapviewpixelfunctions.h"
 
 #include "vector.h"
 
@@ -80,7 +80,7 @@ float MapviewPixelFunctions::calc_brightness
  * Compute a - b, taking care to handle wrap-around effects properly.
  */
 Point MapviewPixelFunctions::calc_pix_difference
-	(Widelands::Map const & map, Point a, Point b)
+	(const Widelands::Map & map, Point a, Point b)
 {
 	normalize_pix(map, a);
 	normalize_pix(map, b);
@@ -107,7 +107,7 @@ Point MapviewPixelFunctions::calc_pix_difference
  * taking wrap-arounds into account.
 */
 uint32_t MapviewPixelFunctions::calc_pix_distance
-	(Map const & map, Point a, Point b)
+	(const Map & map, Point a, Point b)
 {
 	normalize_pix(map, a);
 	normalize_pix(map, b);
@@ -127,7 +127,7 @@ uint32_t MapviewPixelFunctions::calc_pix_distance
 
 
 Node_and_Triangle<> MapviewPixelFunctions::calc_node_and_triangle
-	(Map const & map, uint32_t x, uint32_t y)
+	(const Map & map, uint32_t x, uint32_t y)
 {
 	const uint16_t mapwidth = map.get_width();
 	const uint16_t mapheight = map.get_height();

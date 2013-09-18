@@ -20,8 +20,10 @@
 #ifndef MAPVIEWPIXELFUNCTIONS_H
 #define MAPVIEWPIXELFUNCTIONS_H
 
+#include "logic/field.h"
+#include "logic/map.h"
 #include "logic/widelands_geometry.h"
-
+#include "wui/mapviewpixelconstants.h"
 #include "point.h"
 
 namespace Widelands {struct Map;}
@@ -36,11 +38,11 @@ float calc_brightness
 	 int32_t const bl,
 	 int32_t const br);
 
-Point calc_pix_difference(Widelands::Map const &, Point, Point);
-uint32_t calc_pix_distance(Widelands::Map const &, Point, Point);
+Point calc_pix_difference(const Widelands::Map &, Point, Point);
+uint32_t calc_pix_distance(const Widelands::Map &, Point, Point);
 
-uint32_t get_map_end_screen_x(Widelands::Map const &);
-uint32_t get_map_end_screen_y(Widelands::Map const &);
+uint32_t get_map_end_screen_x(const Widelands::Map &);
+uint32_t get_map_end_screen_y(const Widelands::Map &);
 
 /**
  * Calculate the coordinates of the triangle the given point in pixels is in.
@@ -55,9 +57,9 @@ uint32_t get_map_end_screen_y(Widelands::Map const &);
  * <a href="../../../../geometry/index.html">doc/geometry</a>.
  */
 Widelands::Node_and_Triangle<> calc_node_and_triangle
-	(Widelands::Map const &, uint32_t x, uint32_t y);
+	(const Widelands::Map &, uint32_t x, uint32_t y);
 
-void normalize_pix(Widelands::Map const &, Point & p);
+void normalize_pix(const Widelands::Map &, Point & p);
 
 /**
  * Calculate the on-screen position of the node without taking height into
@@ -82,17 +84,13 @@ void get_save_pix
 //  have been in the cc file otherwise. Now objectcode modularity is not
 //  achieved, but only sourcecode modularity is required.
 
-#include "logic/field.h"
-#include "logic/map.h"
-#include "mapviewpixelconstants.h"
-
 inline uint32_t MapviewPixelFunctions::get_map_end_screen_x
-	(Widelands::Map const & map)
+	(const Widelands::Map & map)
 {
 	return map.get_width() * TRIANGLE_WIDTH;
 }
 inline uint32_t MapviewPixelFunctions::get_map_end_screen_y
-	(Widelands::Map const & map)
+	(const Widelands::Map & map)
 {
 	return map.get_height() * TRIANGLE_HEIGHT;
 }
@@ -119,7 +117,7 @@ inline void MapviewPixelFunctions::get_pix
 }
 
 inline void MapviewPixelFunctions::get_pix
-	(Widelands::Map const & map, const Widelands::Coords c,
+	(const Widelands::Map & map, const Widelands::Coords c,
 	 int32_t & px, int32_t & py)
 {
 	get_pix(map.get_fcoords(c), px, py);
@@ -129,7 +127,7 @@ inline void MapviewPixelFunctions::get_pix
 // theres no need for such a function for FCoords, since x, y out of range
 // but field valid doesn't make sense
 inline void MapviewPixelFunctions::get_save_pix
-	(Widelands::Map const & map, Widelands::Coords const c,
+	(const Widelands::Map & map, Widelands::Coords const c,
 	 int32_t & px, int32_t & py)
 {
 	Widelands::Coords c1 = c;

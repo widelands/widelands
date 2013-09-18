@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2009 by the Widelands Development Team
+ * Copyright (C) 2009, 2012 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -17,7 +17,7 @@
  *
  */
 
-#include "editor_set_origin_tool.h"
+#include "editor/tools/editor_set_origin_tool.h"
 
 #include "editor/editorinteractive.h"
 #include "logic/map.h"
@@ -25,17 +25,44 @@
 #include "wui/overlay_manager.h"
 
 int32_t Editor_Set_Origin_Tool::handle_click_impl
-	(Widelands::Map               &       map,
-	 Widelands::Node_and_Triangle<> const center,
-	 Editor_Interactive           &       eia)
+	(Widelands::Map           &          map,
+	Widelands::Node_and_Triangle<> const center,
+	Editor_Interactive        &          eia,
+	Editor_Action_Args        &          /* args */)
 {
 	map.set_origin(center.node);
 	map.overlay_manager().reset();
 	eia.register_overlays();
 	eia.set_rel_viewpoint
-		(Point
-		 	(-(center.node.x * 2 + (center.node.y & 1)) * (TRIANGLE_WIDTH / 2),
-		 	 - center.node.y *                             TRIANGLE_HEIGHT),
-		 true);
+	(Point
+	 (-(center.node.x * 2 + (center.node.y & 1)) * (TRIANGLE_WIDTH / 2),
+	  - center.node.y *                             TRIANGLE_HEIGHT),
+	 true);
 	return 0;
 }
+
+int32_t Editor_Set_Origin_Tool::handle_undo_impl
+	(Widelands::Map & map, Widelands::Node_and_Triangle< Widelands::Coords > center,
+	Editor_Interactive & parent, Editor_Action_Args & /* args */)
+{
+	Widelands::Coords nc
+		(map.get_width()  - center.node.x,
+		 map.get_height() - center.node.y);
+	map.set_origin(nc);
+	map.overlay_manager().reset();
+	parent.register_overlays();
+	parent.set_rel_viewpoint
+	(Point
+	 (- (nc.x * 2 + (nc.y & 1)) *(TRIANGLE_WIDTH / 2),
+	  - nc.y * TRIANGLE_HEIGHT),
+	 true);
+	return 0;
+}
+
+Editor_Action_Args Editor_Set_Origin_Tool::format_args_impl(Editor_Interactive & parent)
+{
+	return Editor_Tool::format_args_impl(parent);
+}
+
+
+

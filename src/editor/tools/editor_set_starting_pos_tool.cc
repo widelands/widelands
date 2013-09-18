@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2010 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2012 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -17,12 +17,12 @@
  *
  */
 
-#include "editor_set_starting_pos_tool.h"
+#include "editor/tools/editor_set_starting_pos_tool.h"
 
-#include "logic/building.h"
 #include "editor/editorinteractive.h"
-#include "editor_tool.h"
+#include "editor/tools/editor_tool.h"
 #include "graphic/graphic.h"
+#include "logic/building.h"
 #include "logic/map.h"
 #include "wui/overlay_manager.h"
 
@@ -36,7 +36,7 @@ int32_t Editor_Tool_Set_Starting_Pos_Callback
 	(Widelands::TCoords<Widelands::FCoords> const c, void * const data, int32_t)
 {
 	assert(data);
-	Widelands::Map const & map = *static_cast<Widelands::Map const *>(data);
+	const Widelands::Map & map = *static_cast<Widelands::Map const *>(data);
 
 	// Area around already placed players
 	Widelands::Player_Number const nr_players = map.get_nrplayers();
@@ -58,9 +58,8 @@ int32_t Editor_Tool_Set_Starting_Pos_Callback
 	return 0;
 }
 
-
 Editor_Set_Starting_Pos_Tool::Editor_Set_Starting_Pos_Tool()
-: Editor_Tool(*this, *this), m_current_sel_pic(0)
+	: Editor_Tool(*this, *this, false), m_current_sel_pic(0)
 {
 	m_current_player = 0;
 	strcpy(fsel_picsname, FSEL_PIC_FILENAME);
@@ -68,9 +67,9 @@ Editor_Set_Starting_Pos_Tool::Editor_Set_Starting_Pos_Tool()
 
 
 int32_t Editor_Set_Starting_Pos_Tool::handle_click_impl
-	(Widelands::Map               &       map,
-	 Widelands::Node_and_Triangle<> const center,
-	 Editor_Interactive           &)
+	(Widelands::Map           &          map,
+	Widelands::Node_and_Triangle<> const center,
+	Editor_Interactive &, Editor_Action_Args &)
 {
 	assert(0 <= center.node.x);
 	assert(center.node.x < map.get_width());
@@ -90,22 +89,20 @@ int32_t Editor_Set_Starting_Pos_Tool::handle_click_impl
 		char picname[] = "pics/editor_player_00_starting_pos.png";
 		picname[19] += m_current_player / 10;
 		picname[20] += m_current_player % 10;
-		const PictureID picid = g_gr->get_picture(PicMod_Game,  picname);
-		uint32_t w, h;
-		g_gr->get_picture_size(picid, w, h);
+		const Image* pic = g_gr->images().get(picname);
 
 		//  check if field is valid
 		if
-			(Editor_Tool_Set_Starting_Pos_Callback
-			 	(map.get_fcoords(center.node), &map, 0))
+		(Editor_Tool_Set_Starting_Pos_Callback
+		        (map.get_fcoords(center.node), &map, 0))
 		{
 			Overlay_Manager & overlay_manager = map.overlay_manager();
 			//  remove old overlay if any
-			overlay_manager.remove_overlay(old_sp, picid);
+			overlay_manager.remove_overlay(old_sp, pic);
 
 			//  add new overlay
 			overlay_manager.register_overlay
-				(center.node, picid, 8, Point(w / 2, STARTING_POS_HOTSPOT_Y));
+			(center.node, pic, 8, Point(pic->width() / 2, STARTING_POS_HOTSPOT_Y));
 
 			//  set new player pos
 			map.set_starting_pos(m_current_player, center.node);
@@ -116,8 +113,8 @@ int32_t Editor_Set_Starting_Pos_Tool::handle_click_impl
 }
 
 Widelands::Player_Number Editor_Set_Starting_Pos_Tool::get_current_player
-	() const
-throw ()
+() const
+throw()
 {
 	return m_current_player;
 }

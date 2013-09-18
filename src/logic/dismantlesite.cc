@@ -17,30 +17,31 @@
  *
  */
 
+#include "logic/dismantlesite.h"
+
 #include <cstdio>
 
-#include "upcast.h"
-#include "wexception.h"
+#include <boost/foreach.hpp>
 
 #include "economy/wares_queue.h"
-#include "editor_game_base.h"
-#include "game.h"
 #include "graphic/animation.h"
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
 #include "i18n.h"
+#include "logic/editor_game_base.h"
+#include "logic/game.h"
+#include "logic/tribe.h"
+#include "logic/worker.h"
 #include "sound/sound_handler.h"
-#include "tribe.h"
-#include "worker.h"
-
-#include "dismantlesite.h"
+#include "upcast.h"
+#include "wexception.h"
 
 namespace Widelands {
 
 DismantleSite_Descr::DismantleSite_Descr
 	(char const * const _name, char const * const _descname,
-	 std::string const & directory, Profile & prof, Section & global_s,
-	 Tribe_Descr const & _tribe)
+	 const std::string & directory, Profile & prof, Section & global_s,
+	 const Tribe_Descr & _tribe)
 : Building_Descr(_name, _descname, directory, prof, global_s, _tribe)
 {
 	add_attribute(Map_Object::CONSTRUCTIONSITE); // Yep, this is correct.
@@ -59,20 +60,25 @@ IMPLEMENTATION
 */
 
 
-DismantleSite::DismantleSite(const DismantleSite_Descr & descr) :
-Partially_Finished_Building(descr)
+DismantleSite::DismantleSite(const DismantleSite_Descr & gdescr) :
+Partially_Finished_Building(gdescr)
 {}
 
 DismantleSite::DismantleSite
-	(const DismantleSite_Descr & descr, Editor_Game_Base & egbase, Coords const c,
-	 Player & plr, const Building_Descr & bdscr, bool loading)
+	(const DismantleSite_Descr & gdescr, Editor_Game_Base & egbase, Coords const c,
+	 Player & plr, bool loading, Building::FormerBuildings & former_buildings)
 :
-Partially_Finished_Building(descr)
+Partially_Finished_Building(gdescr)
 {
-	set_building(bdscr);
-
 	m_position = c;
 	set_owner(&plr);
+
+	assert(!former_buildings.empty());
+	BOOST_FOREACH(Building_Index former_idx, former_buildings) {
+		m_old_buildings.push_back(former_idx);
+	}
+	const Building_Descr* cur_descr = owner().tribe().get_building_descr(m_old_buildings.back());
+	set_building(*cur_descr);
 
 	if (loading) {
 		Building::init(egbase);
@@ -104,41 +110,44 @@ void DismantleSite::init(Editor_Game_Base & egbase)
 {
 	Partially_Finished_Building::init(egbase);
 
-	Tribe_Descr const & t = tribe();
-	Building_Descr const * bd = m_building;
-	Building_Index bd_idx = t.building_index(bd->name());
+	std::map<Ware_Index, uint8_t> wares;
+	count_returned_wares(this, wares);
 
-	std::map<Ware_Index, uint8_t> all_costs;
-	bool done = false;
-	while (not done) {
-		std::map<Ware_Index, uint8_t> const & buildcost = bd->buildcost();
-		for (std::map<Ware_Index, uint8_t>::const_iterator i = buildcost.begin(); i != buildcost.end(); ++i)
-			all_costs[i->first] += i->second;
+	std::map<Ware_Index, uint8_t>::const_iterator it = wares.begin();
+	m_wares.resize(wares.size());
 
-		// Find the (first) predecessor of this building
-		for (Building_Index i = Building_Index::First(); i < t.get_nrbuildings(); ++i) {
-			Building_Descr const * ob = t.get_building_descr(i);
-			if (ob->enhancements().count(bd_idx)) {
-				done = false;
-				bd = ob;
-				bd_idx = i;
-				break;
-			} else
-				done = true;
-		}
-	}
-
-	std::map<Ware_Index, uint8_t>::const_iterator it = all_costs.begin();
-
-	m_wares.resize(all_costs.size());
-
-	for (size_t i = 0; i < all_costs.size(); ++i, ++it) {
-		uint8_t nwares = (it->second + RATIO_RETURNED_WARES - 1) / RATIO_RETURNED_WARES;
+	for (size_t i = 0; i < wares.size(); ++i, ++it) {
 		WaresQueue & wq =
-			*(m_wares[i] = new WaresQueue(*this, it->first, nwares));
+			*(m_wares[i] = new WaresQueue(*this, it->first, it->second));
 
-		wq.set_filled(nwares);
-		m_work_steps += nwares;
+		wq.set_filled(it->second);
+		m_work_steps += it->second;
+	}
+}
+
+/*
+===============
+Count wich wares you get back if you dismantle the given building
+===============
+*/
+void DismantleSite::count_returned_wares
+	(Building* building,
+	 std::map<Ware_Index, uint8_t>   & res)
+{
+	BOOST_FOREACH(Building_Index former_idx, building->get_former_buildings()) {
+		const std::map<Ware_Index, uint8_t> * return_wares;
+		const Building_Descr* former_descr = building->tribe().get_building_descr(former_idx);
+		if (former_idx != building->get_former_buildings().front()) {
+			return_wares = & former_descr->returned_wares_enhanced();
+		} else {
+			return_wares = & former_descr->returned_wares();
+		}
+		assert(return_wares != nullptr);
+
+		std::map<Ware_Index, uint8_t>::const_iterator i;
+		for (i = return_wares->begin(); i != return_wares->end(); ++i) {
+			res[i->first] += i->second;
+		}
 	}
 }
 
@@ -189,7 +198,7 @@ bool DismantleSite::get_building_work(Game & game, Worker & worker, bool) {
 			//update statistics
 			owner().ware_produced(wq.get_ware());
 
-			Item_Ware_Descr const & wd = *tribe().get_ware_descr(wq.get_ware());
+			const Item_Ware_Descr & wd = *tribe().get_ware_descr(wq.get_ware());
 			WareInstance & item = *new WareInstance(wq.get_ware(), &wd);
 			item.init(game);
 			worker.start_task_dropoff(game, item);
@@ -203,7 +212,13 @@ bool DismantleSite::get_building_work(Game & game, Worker & worker, bool) {
 		schedule_destroy(game);
 
 		worker.pop_task(game);
-		worker.start_task_leavebuilding(game, true);
+		// No more building, so move to the flag
+		worker.start_task_move
+				(game,
+				 WALK_SE,
+				 worker.descr().get_right_walk_anims(false),
+				 true);
+		worker.set_location(nullptr);
 	} else if (not m_working) {
 		m_work_steptime = game.get_gametime() + DISMANTLESITE_STEP_TIME;
 		worker.start_task_idle
@@ -220,10 +235,7 @@ Draw it.
 ===============
 */
 void DismantleSite::draw
-	(Editor_Game_Base const & game,
-	 RenderTarget           & dst,
-	 FCoords          const   coords,
-	 Point            const   pos)
+	(const Editor_Game_Base& game, RenderTarget& dst, const FCoords& coords, const Point& pos)
 {
 	assert(0 <= game.get_gametime());
 	const uint32_t gametime = game.get_gametime();
@@ -236,7 +248,7 @@ void DismantleSite::draw
 	dst.drawanim(pos, m_anim, tanim, get_owner());
 
 	// Draw the partially dismantled building
-	compile_assert(0 <= DISMANTLESITE_STEP_TIME);
+	static_assert(0 <= DISMANTLESITE_STEP_TIME, "assert(0 <= DISMANTLESITE_STEP_TIME) failed.");
 	uint32_t total_time = DISMANTLESITE_STEP_TIME * m_work_steps;
 	uint32_t completed_time = DISMANTLESITE_STEP_TIME * m_work_completed;
 
@@ -246,7 +258,7 @@ void DismantleSite::draw
 	uint32_t anim;
 	try {
 		anim = m_building->get_animation("unoccupied");
-	} catch (Map_Object_Descr::Animation_Nonexistent) {
+	} catch (Map_Object_Descr::Animation_Nonexistent &) {
 		anim = m_building->get_animation("idle");
 	}
 	uint32_t w, h;

@@ -17,20 +17,19 @@
  *
  */
 
-#include "cmd_queue.h"
+#include "logic/cmd_queue.h"
 
 #include "io/filewrite.h"
-#include "game.h"
-#include "game_data_error.h"
-#include "instances.h"
+#include "logic/game.h"
+#include "logic/game_data_error.h"
+#include "logic/instances.h"
+#include "logic/player.h"
+#include "logic/playercommand.h"
+#include "logic/widelands_fileread.h"
+#include "logic/worker.h"
 #include "machdep.h"
-#include "player.h"
-#include "playercommand.h"
-#include "wexception.h"
-#include "widelands_fileread.h"
-#include "worker.h"
-
 #include "upcast.h"
+#include "wexception.h"
 
 namespace Widelands {
 
@@ -113,7 +112,7 @@ int32_t Cmd_Queue::run_queue(int32_t const interval, int32_t & game_time_var) {
 	while (game_time_var < final) {
 		std::priority_queue<cmditem> & current_cmds = m_cmds[game_time_var % CMD_QUEUE_BUCKET_SIZE];
 
-		while (current_cmds.size()) {
+		while (!current_cmds.empty()) {
 			Command & c = *current_cmds.top().cmd;
 			if (game_time_var < c.duetime())
 				break;
@@ -190,7 +189,7 @@ void GameLogicCommand::Read
 		} else
 			throw game_data_error
 				(_("unknown/unhandled version %u"), packet_version);
-	} catch (_wexception const & e) {
+	} catch (const _wexception & e) {
 		throw game_data_error(_("game logic: %s"), e.what());
 	}
 }

@@ -20,18 +20,15 @@
 #ifndef SCRIPTING_H
 #define SCRIPTING_H
 
-#include "wexception.h"
-
 #include <map>
-#include <stdint.h>
 #include <string>
 
-#include <boost/shared_ptr.hpp>
-
 #include <lua.hpp>
+#include <stdint.h>
 
-#include "logic/widelands_filewrite.h"
 #include "logic/widelands_fileread.h"
+#include "logic/widelands_filewrite.h"
+#include "wexception.h"
 
 namespace Widelands {
 	struct Editor_Game_Base;
@@ -42,15 +39,15 @@ namespace Widelands {
 }
 
 struct LuaError : public _wexception {
-	LuaError(std::string const & reason) : wexception("%s", reason.c_str()) {}
+	LuaError(const std::string & reason) : wexception("%s", reason.c_str()) {}
 };
 struct LuaValueError : public LuaError {
-	LuaValueError(std::string const & wanted) :
+	LuaValueError(const std::string & wanted) :
 		LuaError("Variable not of expected type: " + wanted)
 	{}
 };
 struct LuaTableKeyError : public LuaError {
-	LuaTableKeyError(std::string const & wanted) :
+	LuaTableKeyError(const std::string & wanted) :
 		LuaError(wanted + " is not a field in this table.")
 	{}
 };
@@ -96,17 +93,17 @@ struct LuaInterface {
 	virtual ~LuaInterface() {}
 
 	virtual void interpret_string(std::string) = 0;
-	virtual std::string const & get_last_error() const = 0;
+	virtual const std::string & get_last_error() const = 0;
 
 	virtual void register_scripts
 		(FileSystem &, std::string, std::string = "scripting") = 0;
 	virtual ScriptContainer & get_scripts_for(std::string) = 0;
 
-	virtual boost::shared_ptr<LuaTable> run_script(std::string, std::string) = 0;
-	virtual boost::shared_ptr<LuaTable> run_script
+	virtual std::unique_ptr<LuaTable> run_script(std::string, std::string) = 0;
+	virtual std::unique_ptr<LuaTable> run_script
 			(FileSystem &, std::string, std::string) = 0;
 
-	virtual boost::shared_ptr<LuaTable> get_hook(std::string name) = 0;
+	virtual std::unique_ptr<LuaTable> get_hook(std::string name) = 0;
 };
 
 struct LuaGameInterface : public virtual LuaInterface {

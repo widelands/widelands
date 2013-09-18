@@ -22,11 +22,10 @@
 
 #include <boost/bind.hpp>
 #include <boost/function.hpp>
-#include <boost/signal.hpp>
+#include <boost/signals2.hpp>
 
 #include "constants.h"
-#include "panel.h"
-
+#include "ui_basic/panel.h"
 #include "rgbcolor.h"
 
 namespace UI {
@@ -39,25 +38,25 @@ struct Font;
 struct Button : public NamedPanel {
 	Button /// for textual buttons
 		(Panel * const parent,
-		 std::string const & name,
+		 const std::string & name,
 		 int32_t const x, int32_t const y, uint32_t const w, uint32_t const h,
-		 PictureID const background_pictute_id,
-		 std::string const & title_text,
-		 std::string const & tooltip_text = std::string(),
+		 const Image* background_pictute_id,
+		 const std::string & title_text,
+		 const std::string & tooltip_text = std::string(),
 		 bool const _enabled = true,
 		 bool const flat    = false);
 	Button /// for pictorial buttons
 		(Panel * const parent,
-		 std::string const & name,
+		 const std::string & name,
 		 const int32_t x, const int32_t y, const uint32_t w, const uint32_t h,
-		 const PictureID background_pictute_id,
-		 const PictureID foreground_picture_id,
-		 std::string const & tooltip_text = std::string(),
+		 const Image* background_pictute_id,
+		 const Image* foreground_picture_id,
+		 const std::string & tooltip_text = std::string(),
 		 bool const _enabled = true,
 		 bool const flat     = false);
 	~Button();
 
-	void set_pic(PictureID picid);
+	void set_pic(const Image* pic);
 	void set_title(const std::string &);
 	const std::string & get_title() const throw () {return m_title;}
 
@@ -69,7 +68,7 @@ struct Button : public NamedPanel {
 	bool is_snap_target() const {return true;}
 
 	// Drawing and event handlers
-	void draw(RenderTarget &)__attribute__((hot));
+	void draw(RenderTarget &);
 	void think();
 
 	void handle_mousein(bool inside);
@@ -86,7 +85,9 @@ struct Button : public NamedPanel {
 	// If no background is drawn, the button is drawn over the current background
 	void set_draw_flat_background(bool set);
 
-	boost::signal<void ()> sigclicked;
+	boost::signals2::signal<void ()> sigclicked;
+	boost::signals2::signal<void ()> sigmousein;
+	boost::signals2::signal<void ()> sigmouseout;
 
 protected:
 	virtual void clicked() {} /// Override this to react on the click.
@@ -103,9 +104,9 @@ protected:
 
 	std::string m_title;          //  title string used when _mypic == 0
 
-	PictureID   m_pic_background; //  background texture (picture ID)
-	PictureID   m_pic_custom;     //  custom icon on the button
-	PictureID   m_pic_custom_disabled;
+	const Image* m_pic_background; //  background texture (picture ID)
+	const Image* m_pic_custom;     //  custom icon on the button
+	const Image* m_pic_custom_disabled;
 	Font * m_font;
 
 	RGBColor    m_clr_down; //  color of border while a flat button is "down"

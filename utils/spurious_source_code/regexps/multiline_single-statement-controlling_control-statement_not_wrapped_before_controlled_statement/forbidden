@@ -1,8 +1,0 @@
-do hl
-	do gam
-else hl
-	else gam
-return a ?
-	return hlj
-if (condition) do_something
-if (a) throw wexception

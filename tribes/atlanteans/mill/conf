@@ -7,6 +7,11 @@ trunk=3
 stone=3
 planks=2
 
+[return_on_dismantle]
+trunk=1
+stone=2
+planks=1
+
 [aihints]
 build_material=false
 
@@ -24,7 +29,7 @@ work=_Work
 
 [produce_cornflour]
 return=skipped when site has blackroot and economy needs blackrootflour and not economy needs cornflour
-return=skipped when economy needs corn and not economy needs cornflour
+return=skipped unless economy needs cornflour or not economy needs corn
 consume=corn
 sleep=3500
 animate=working 15000

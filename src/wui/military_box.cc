@@ -17,12 +17,12 @@
  *
  */
 
-#include "military_box.h"
+#include "wui/military_box.h"
 
-#include "logic/game.h"
+#include "graphic/graphic.h"
 #include "logic/editor_game_base.h"
+#include "logic/game.h"
 #include "logic/playercommand.h"
-
 #include "upcast.h"
 
 using Widelands::Editor_Game_Base;
@@ -64,7 +64,7 @@ UI::Slider & MilitaryBox::add_slider
 			 0, 0,
 			 width, height,
 			 min, max, initial,
-			 g_gr->get_picture(PicMod_Game, picname),
+			 g_gr->images().get(picname),
 			 hint);
 	parent.add(&result, UI::Box::AlignTop);
 	return result;
@@ -74,7 +74,7 @@ UI::Textarea & MilitaryBox::add_text
 	(UI::Box           & parent,
 	 std::string   str,
 	 uint32_t      alignment,
-	 std::string const & fontname,
+	 const std::string & fontname,
 	 uint32_t      fontsize)
 {
 	UI::Textarea & result = *new UI::Textarea(&parent, 0, 0, str.c_str());
@@ -88,13 +88,13 @@ UI::Button & MilitaryBox::add_button
 	 char        const * const name,
 	 char        const * const text,
 	 void         (MilitaryBox::*fn)(),
-	 std::string const & tooltip_text)
+	 const std::string & tooltip_text)
 {
 	UI::Button * button =
 		new UI::Button
 			(&parent, name,
 			 8, 8, 26, 26,
-			 g_gr->get_picture(PicMod_UI, "pics/but2.png"),
+			 g_gr->images().get("pics/but2.png"),
 			 text,
 			 tooltip_text);
 	button->sigclicked.connect(boost::bind(fn, boost::ref(*this)));

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2011 by the Widelands Development Team
+ * Copyright (C) 2011-2012 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -22,14 +22,14 @@
 
 #include "logic/immovable.h"
 #include "logic/wareworker.h"
-#include "shippingitem.h"
+#include "economy/shippingitem.h"
 
 namespace Widelands {
 
 struct Fleet;
 struct RoutingNodeNeighbour;
 struct Ship;
-struct Warehouse;
+class Warehouse;
 
 /**
  * The PortDock occupies the fields in the water at which ships
@@ -66,7 +66,7 @@ struct PortDock : PlayerImmovable {
 
 	Fleet * get_fleet() const {return m_fleet;}
 	PortDock * get_dock(Flag & flag) const;
-	bool get_need_ship() const {return m_need_ship;}
+	bool get_need_ship() const {return m_need_ship || m_expedition_ready;}
 
 	virtual void set_economy(Economy *);
 
@@ -79,8 +79,8 @@ struct PortDock : PlayerImmovable {
 	virtual PositionList get_positions
 		(const Editor_Game_Base &) const throw ();
 	virtual void draw
-		(const Editor_Game_Base &, RenderTarget &, const FCoords, const Point);
-	virtual std::string const & name() const throw ();
+		(const Editor_Game_Base &, RenderTarget &, const FCoords&, const Point&);
+	virtual const std::string & name() const throw ();
 
 	virtual void init(Editor_Game_Base &);
 	virtual void cleanup(Editor_Game_Base &);
@@ -95,9 +95,16 @@ struct PortDock : PlayerImmovable {
 
 	void ship_arrived(Game &, Ship &);
 
-	virtual void log_general_info(Editor_Game_Base const &);
+	virtual void log_general_info(const Editor_Game_Base &);
 
 	uint32_t count_waiting(WareWorker waretype, Ware_Index wareindex);
+
+	bool expedition_started();
+	void start_expedition();
+	void cancel_expedition(Game &);
+	void set_expedition_ready(bool ready) {m_expedition_ready = ready;}
+	static void expedition_wares_queue_callback(Game &, WaresQueue *, Ware_Index, void * data);
+	void check_expedition_wares_and_workers(Game &);
 
 private:
 	friend struct Fleet;
@@ -112,6 +119,8 @@ private:
 	PositionList m_dockpoints;
 	std::vector<ShippingItem> m_waiting;
 	bool m_need_ship;
+	bool m_start_expedition;
+	bool m_expedition_ready;
 
 	// saving and loading
 protected:

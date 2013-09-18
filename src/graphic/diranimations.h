@@ -24,6 +24,8 @@
 
 #include <stdint.h>
 
+#include "logic/widelands.h"
+
 namespace Widelands {struct Map_Object_Descr;}
 
 struct Profile;
@@ -37,14 +39,20 @@ struct DirAnimations {
 
 	void parse
 		(Widelands::Map_Object_Descr &,
-		 std::string           const & directory,
+		 const std::string           & directory,
 		 Profile                     &,
 		 char                  const * sectnametempl,
 		 Section                     * defaults    = 0);
 
-	uint32_t get_animation(int32_t const dir) const {
+	uint32_t get_animation(Widelands::Direction const dir) const {
 		return m_animations[dir - 1];
 	}
+
+	static DirAnimations Null() {
+		return DirAnimations(0); // Since real animation IDs are positive, this is safe
+	}
+
+	operator bool() const throw () {return m_animations[0];}
 
 private:
 	uint32_t m_animations[6];

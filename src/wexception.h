@@ -20,10 +20,13 @@
 #ifndef WEXCEPTION_H
 #define WEXCEPTION_H
 
-#include <stdint.h>
 #include <cstring>
 #include <exception>
 #include <string>
+
+#include <stdint.h>
+
+#include "port.h"
 
 #ifndef PRINTF_FORMAT
 #ifdef __GNUC__

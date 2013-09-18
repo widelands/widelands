@@ -20,8 +20,8 @@
 #ifndef DEBUGCONSOLE_H
 #define DEBUGCONSOLE_H
 
-#include <vector>
 #include <string>
+#include <vector>
 
 #include <boost/function.hpp>
 
@@ -50,14 +50,14 @@ struct Handler {
 	 * The passed array contains a list of all (space-separated) components
 	 * of the command, including the command name itself.
 	 */
-	typedef boost::function<void (std::vector<std::string> const &)> HandlerFn;
+	typedef boost::function<void (const std::vector<std::string> &)> HandlerFn;
 
 	Handler();
 	virtual ~Handler();
 
 protected:
-	void addCommand(std::string const &, HandlerFn const &);
-	void setDefaultCommand(HandlerFn const &);
+	void addCommand(const std::string &, const HandlerFn &);
+	void setDefaultCommand(const HandlerFn &);
 
 private:
 	std::vector<std::string> m_commands;
@@ -81,7 +81,7 @@ ChatProvider * getChatProvider();
  * \ref getChatProvider(). Sending a message via \ref getChatProvider()
  * executes a command, while this function writes to the console.
  */
-void write(std::string const & text);
+void write(const std::string & text);
 
 }
 

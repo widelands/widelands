@@ -3,8 +3,8 @@
 #
 
 """
-Checking for forbidden
-TypeName* and TypeName& which should have a space before
+Checking for forbidden padding.
+TypeName* and TypeName& are okay, as are TypeName * and TypeName &.
 """
 
 error_msg="Missing padding for operator. Needs a space before and after."
@@ -15,7 +15,7 @@ import re
 regexp = re.compile(r"""(?x)
 ([^\s](?:(?:&&)|(?:\|\|)))|
 ((?:(?:&&)|(?:\|\|))[^\s])|
-([^\s>(&*:!{+\-[.](?<!operator)[*&])|          # Type*, Type&, operator
+([^\s>(&*:!{+\-[.](?<!operator)[*&][^*\s>)},])|          # Type*, Type&, operator
 ([+\-*/|^&!<]?={1,2}[^\s=])|   # '+= a', 'a== a', 'a!= a'
 ([^\s=!+-/^*/&|^<>r%][+\-*/^&|!<>%]?={1,2})|   # ' +=a', ' ==a', ' !=a', doesn't match 'r=' for operator=
 
@@ -47,10 +47,6 @@ strip_comments_and_strings = True
 evaluate_matches = match_function
 
 forbidden = [
-    "RoutingNode* a;",
-    "Blahtype& b;",
-    "std::vector<RoutingNode*> & nodes",
-
     " a== b",
     " a ==b",
     " a !=b",
@@ -183,6 +179,15 @@ forbidden = [
     '_ +=_;',
     '_+=_;',
 
+]
+
+allowed = [
+    "char** argv",
+    "AnimationGfx(const IImageLoader&, AnimationData const * data);",
+    "RoutingNode* a;",
+    "Blahtype& b;",
+    "std::vector<RoutingNode*> & nodes",
+
     'type_a& aa = aa;',
     'type_A& AA = AA;',
     'type_b& bb = bb;',
@@ -287,12 +292,11 @@ forbidden = [
     'type_X* XXX;',
     'type_Y* YYY;',
     'type_Z* ZZZ;',
-]
-
-allowed = [
+    "RoutingNode* a;",
+    "Blahtype& b;",
     "RoutingNode * a;",
     "Blahtype & b;",
-    "/** Some comment",
+    "/** Some comment **/",
     "std::vector<RoutingNode *> & nodes",
     "if (a && b)",
     "\tOpen.push(&start);",
@@ -368,5 +372,8 @@ allowed = [
     "friend class NoteReceiver<T>;",
 
     'a %= a;',
+
+    'Texture const &  /* f_r_texture */',
+    'int32_t estimate(Map & /* map */, FCoords /* pos */) const {return 0;}',
 
 ]

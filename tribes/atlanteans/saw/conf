@@ -1,4 +1,4 @@
-help=_A saw is needed by the woodcutter and the carpenter. It is produced by the toolsmith.
+help=_The saw is needed by the woodcutter and the toolsmith. It is produced by the toolsmith.
 
 default_target_quantity=2
 

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002, 2006-2011 by the Widelands Development Team
+ * Copyright (C) 2002, 2006-2012 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -17,39 +17,39 @@
  *
  */
 
+#include "ui_fsmenu/launchMPG.h"
+
+#include <boost/format.hpp>
 
 #include "gamecontroller.h"
 #include "gamesettings.h"
 #include "graphic/graphic.h"
 #include "i18n.h"
 #include "io/filesystem/layered_filesystem.h"
-#include "loadgame.h"
 #include "logic/game.h"
 #include "logic/instances.h"
 #include "logic/map.h"
 #include "logic/player.h"
 #include "map_io/map_loader.h"
-#include "mapselect.h"
 #include "profile/profile.h"
 #include "scripting/scripting.h"
 #include "ui_basic/messagebox.h"
+#include "ui_fsmenu/loadgame.h"
+#include "ui_fsmenu/mapselect.h"
 #include "warning.h"
 #include "wui/gamechatpanel.h"
 #include "wui/multiplayersetupgroup.h"
 
-#include "launchMPG.h"
-
-#include <boost/format.hpp>
 using boost::format;
-
 
 /// Simple user interaction window for selecting either map, save or cancel
 struct MapOrSaveSelectionWindow : public UI::Window {
 	MapOrSaveSelectionWindow
-		(UI::Panel * parent, uint32_t w, uint32_t h,
+		(UI::Panel * parent, GameController * gc, uint32_t w, uint32_t h,
 		 UI::Font * font)
 	:
-	Window(parent, "selection_window", 0, 0, w, h, _("Please select"))
+	Window(parent, "selection_window", 0, 0, w, h, _("Please select")),
+	m_ctrl(gc)
 	{
 		center_to_parent();
 
@@ -60,7 +60,7 @@ struct MapOrSaveSelectionWindow : public UI::Window {
 		UI::Button * btn = new UI::Button
 			(this, "map",
 			 space, y, butw, buth,
-			 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
+			 g_gr->images().get("pics/but0.png"),
 			 _("Map"), _("Select a map"), true, false);
 		btn->sigclicked.connect
 			(boost::bind
@@ -70,7 +70,7 @@ struct MapOrSaveSelectionWindow : public UI::Window {
 		btn = new UI::Button
 			(this, "saved_game",
 			 2 * space + butw, y, butw, buth,
-			 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
+			 g_gr->images().get("pics/but0.png"),
 			 _("Saved game"), _("Select a saved game"), true, false);
 		btn->sigclicked.connect
 			(boost::bind
@@ -80,7 +80,7 @@ struct MapOrSaveSelectionWindow : public UI::Window {
 		btn = new UI::Button
 			(this, "cancel",
 			 3 * space + 2 * butw, y, butw, buth,
-			 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
+			 g_gr->images().get("pics/but1.png"),
 			 _("Cancel"), _("Cancel selection"), true, false);
 		btn->sigclicked.connect
 			(boost::bind
@@ -88,10 +88,17 @@ struct MapOrSaveSelectionWindow : public UI::Window {
 		btn->set_font(font);
 	}
 
+
+	void think() {
+		if (m_ctrl)
+			m_ctrl->think();
+	}
+
 	void pressedButton(uint8_t i) {
 		end_modal(i);
 	}
 	private:
+		GameController * m_ctrl;
 };
 
 Fullscreen_Menu_LaunchMPG::Fullscreen_Menu_LaunchMPG
@@ -109,29 +116,29 @@ Fullscreen_Menu_LaunchMPG::Fullscreen_Menu_LaunchMPG
 	m_change_map_or_save
 		(this, "change_map_or_save",
 		 get_w() * 37 / 50 + m_butw - m_buth, get_h() * 3 / 20, m_buth, m_buth,
-		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
-		 g_gr->get_picture(PicMod_UI, "pics/menu_toggle_minimap.png"),
+		 g_gr->images().get("pics/but1.png"),
+		 g_gr->images().get("pics/menu_toggle_minimap.png"),
 		 _("Change map or saved game"), false, false),
 	m_ok
 		(this, "ok",
 		 get_w() * 37 / 50, get_h() * 12 / 20, m_butw, m_buth,
-		 g_gr->get_picture(PicMod_UI, "pics/but2.png"),
+		 g_gr->images().get("pics/but2.png"),
 		 _("Start game"), std::string(), false, false),
 	m_back
 		(this, "back",
 		 get_w() * 37 / 50, get_h() * 218 / 240, m_butw, m_buth,
-		 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
+		 g_gr->images().get("pics/but0.png"),
 		 _("Back"), std::string(), true, false),
 	m_wincondition
 		(this, "win_condition",
 		 get_w() * 37 / 50, get_h() * 11 / 20, m_butw, m_buth,
-		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
+		 g_gr->images().get("pics/but1.png"),
 		 "", std::string(), false, false),
 	m_help_button
 		(this, "help",
 		 get_w() * 37 / 50 + m_butw - m_buth, get_h() / 100, m_buth, m_buth,
-		 g_gr->get_picture(PicMod_UI, "pics/but1.png"),
-		 g_gr->get_picture(PicMod_UI, "pics/menu_help.png"),
+		 g_gr->images().get("pics/but1.png"),
+		 g_gr->images().get("pics/menu_help.png"),
 		 _("Show the help window"), true, false),
 
 // Text labels
@@ -155,8 +162,12 @@ Fullscreen_Menu_LaunchMPG::Fullscreen_Menu_LaunchMPG
 		(this,
 		 get_w() * 8 / 10, get_h() / 10,
 		 _("Map")),
+	m_wincondition_type
+		(this,
+		 get_w() * 37 / 50 + (m_butw / 2), get_h() * 10 / 20,
+		 _("Type of game"), UI::Align_HCenter),
 
-	m_map_info(this, get_w() * 37 / 50, get_h() * 2 / 10, m_butw, get_h() * 27 / 80),
+	m_map_info(this, get_w() * 37 / 50, get_h() * 2 / 10, m_butw, get_h() * 23 / 80),
 	m_client_info(this, get_w() * 37 / 50, get_h() * 13 / 20, m_butw, get_h() * 5 / 20),
 	m_help(0),
 
@@ -186,6 +197,7 @@ Fullscreen_Menu_LaunchMPG::Fullscreen_Menu_LaunchMPG
 	m_wincondition.set_font(font_small());
 	m_help_button.set_font(font_small());
 	m_change_map_or_save.set_font(font_small());
+	m_wincondition_type.set_textstyle(ts_small());
 
 	m_lua = create_LuaInterface();
 	m_lua->register_scripts(*g_fs, "win_conditions", "scripting/win_conditions");
@@ -223,6 +235,7 @@ Fullscreen_Menu_LaunchMPG::~Fullscreen_Menu_LaunchMPG() {
 	delete m_mpsg;
 	if (m_help)
 		delete m_help;
+	delete m_chat;
 }
 
 
@@ -278,16 +291,16 @@ void Fullscreen_Menu_LaunchMPG::win_condition_update() {
 		m_wincondition.set_tooltip
 			(_("The game is a saved game - the win condition was set before."));
 	} else {
-		boost::shared_ptr<LuaTable> t = m_lua->run_script
+		std::unique_ptr<LuaTable> t = m_lua->run_script
 			("win_conditions", m_settings->getWinCondition());
 
 		try {
 
-			std::string n = t->get_string("name");
-			std::string d = t->get_string("description");
+			std::string name = t->get_string("name");
+			std::string descr = t->get_string("description");
 
-			m_wincondition.set_title(_("Type: ") + n);
-			m_wincondition.set_tooltip(d.c_str());
+			m_wincondition.set_title(name);
+			m_wincondition.set_tooltip(descr.c_str());
 		} catch (LuaTableKeyError &) {
 			// might be that this is not a win condition after all.
 			win_condition_clicked();
@@ -298,7 +311,7 @@ void Fullscreen_Menu_LaunchMPG::win_condition_update() {
 /// Opens a popup window to select a map or saved game
 void Fullscreen_Menu_LaunchMPG::change_map_or_save() {
 	MapOrSaveSelectionWindow selection_window
-		(this, get_w() / 2, get_h() / 20, font_small());
+		(this, m_ctrl, get_w() / 2, get_h() / 20, font_small());
 	switch (selection_window.run()) {
 		case 1:
 			select_map();
@@ -329,8 +342,14 @@ void Fullscreen_Menu_LaunchMPG::select_map() {
 
 	m_settings->setScenario(code == 2);
 
-	MapData const & mapdata = *msm.get_map();
+	const MapData & mapdata = *msm.get_map();
 	m_nr_players = mapdata.nrplayers;
+
+	// If the same map was selected again, maybe the state of the "scenario" check box was changed
+	// So we should recheck all map predefined values,
+	// which is done in refresh(), if m_filename_proof is different to settings.mapfilename -> dummy rename
+	if (mapdata.filename == m_filename_proof)
+		m_filename_proof = m_filename_proof + "new";
 
 	m_settings->setMap(mapdata.name, mapdata.filename, m_nr_players);
 }
@@ -357,9 +376,9 @@ void Fullscreen_Menu_LaunchMPG::select_saved_game() {
 
 	if (g_fs->FileExists(filename.c_str())) {
 		// Read the needed data from file "elemental" of the used map.
-		FileSystem & l_fs = g_fs->MakeSubFileSystem(filename.c_str());
+		std::unique_ptr<FileSystem> l_fs(g_fs->MakeSubFileSystem(filename.c_str()));
 		Profile prof;
-		prof.read("map/elemental", 0, l_fs);
+		prof.read("map/elemental", 0, *l_fs);
 		Section & s = prof.get_safe_section("global");
 
 		std::string mapname = s.get_safe_string("name");
@@ -408,7 +427,7 @@ void Fullscreen_Menu_LaunchMPG::start_clicked()
 			 	 "The file was: %s\n"
 			 	 "If this happens, the host might have selected a file that you do "
 			 	 "not own. Normally such a file should be send from the host to "
-			 	 "you, but perhaps the transfer was not yet finnished!?!"),
+			 	 "you, but perhaps the transfer was not yet finished!?!"),
 			 m_settings->settings().mapfilename.c_str());
 	if (m_settings->canLaunch())
 		end_modal(1);
@@ -421,14 +440,14 @@ void Fullscreen_Menu_LaunchMPG::start_clicked()
  */
 void Fullscreen_Menu_LaunchMPG::refresh()
 {
-	GameSettings const & settings = m_settings->settings();
+	const GameSettings & settings = m_settings->settings();
 
 	if (settings.mapfilename != m_filename_proof) {
 		if (!g_fs->FileExists(settings.mapfilename)) {
 			m_client_info.set_font(m_fn, m_fs, UI_FONT_CLR_WARNING);
 			m_client_info.set_text
 				(_("The selected file can not be found. If it is not automatically "
-				   "transfered to you, please write the host about this problem."));
+				   "transferred to you, please write the host about this problem."));
 		} else {
 			// Reset font color
 			m_client_info.set_font(m_fn, m_fs, UI_FONT_CLR_FG);
@@ -446,7 +465,13 @@ void Fullscreen_Menu_LaunchMPG::refresh()
 				if (settings.scenario)
 					set_scenario_values();
 			}
-			m_mapname.set_text(settings.mapname);
+			//Try to translate the map name.
+			//This will work on every official map as expected
+			//and 'fail silently' (not find a translation) for already translated campaign map names.
+			//It will also translate 'false-positively' on any user-made map which shares a name with
+			//the official maps, but this should not be a problem to worry about.
+			i18n::Textdomain td("maps");
+			m_mapname.set_text(_(settings.mapname));
 		}
 	} else {
 		// Write client infos
@@ -483,7 +508,7 @@ void Fullscreen_Menu_LaunchMPG::refresh()
  */
 void Fullscreen_Menu_LaunchMPG::set_scenario_values()
 {
-	GameSettings const & settings = m_settings->settings();
+	const GameSettings & settings = m_settings->settings();
 	if (settings.mapfilename.empty())
 		throw wexception
 			("settings()->scenario was set to true, but no map is available");
@@ -514,9 +539,9 @@ void Fullscreen_Menu_LaunchMPG::set_scenario_values()
  */
 void Fullscreen_Menu_LaunchMPG::load_previous_playerdata()
 {
-	FileSystem & l_fs = g_fs->MakeSubFileSystem(m_settings->settings().mapfilename.c_str());
+	std::unique_ptr<FileSystem> l_fs(g_fs->MakeSubFileSystem(m_settings->settings().mapfilename.c_str()));
 	Profile prof;
-	prof.read("map/player_names", 0, l_fs);
+	prof.read("map/player_names", 0, *l_fs);
 	std::string strbuf;
 	std::string infotext = _("Saved players are:");
 	std::string player_save_name [MAX_PLAYERS];
@@ -534,11 +559,13 @@ void Fullscreen_Menu_LaunchMPG::load_previous_playerdata()
 		player_save_tribe[i - 1] = s.get_string("tribe");
 		player_save_ai   [i - 1] = s.get_string("ai");
 
-		snprintf(buf, sizeof(buf), "Player %u", i);
+		snprintf(buf, sizeof(buf), _("Player %u"), i);
 		infotext += buf;
 		if (player_save_tribe[i - 1].empty()) {
+			std::string closed_string =
+				(boost::format("\\<%s\\>") % _("closed")).str();
 			infotext += ":\n    ";
-			infotext += _("<closed>");
+			infotext += closed_string;
 			// Close the player
 			m_settings->setPlayerState(i - 1, PlayerSettings::stateClosed);
 			continue; // if tribe is empty, the player does not exist
@@ -625,6 +652,8 @@ void Fullscreen_Menu_LaunchMPG::load_map_info()
 		infotext += (format(_("* Scenario mode selected\n"))).str();
 	infotext += "\n";
 	infotext += map.get_description();
+	infotext += "\n";
+	infotext += map.get_hint();
 
 	m_map_info.set_text(infotext);
 	m_filename_proof = m_settings->settings().mapfilename;
@@ -635,7 +664,7 @@ void Fullscreen_Menu_LaunchMPG::help_clicked() {
 	if (m_help)
 		delete m_help;
 	m_help = new UI::HelpWindow(this, _("Multiplayer Game Setup"), m_fs);
-	m_help->add_paragraph(_("You are in the multi player launch game menu."));
+	m_help->add_paragraph(_("You are in the multiplayer launch game menu."));
 	m_help->add_heading(_("Client settings"));
 	m_help->add_paragraph
 		(_
@@ -665,7 +694,7 @@ void Fullscreen_Menu_LaunchMPG::help_clicked() {
 	m_help->add_picture_li(_("Closed."), "pics/stop.png");
 	m_help->add_block
 		(_
-		 ("The later three are only setable by the hosting client by left clicking the \"type\" button of a "
+		 ("The later three are only settable by the hosting client by left clicking the \"type\" button of a "
 		  "player. Hosting players can further set the initializations of each player (the set of buildings, "
 		  "wares and workers the player starts with) and the tribe an team for computer players"));
 	m_help->add_block

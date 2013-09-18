@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2011 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2013 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -17,39 +17,33 @@
  *
  */
 
+#include "logic/map.h"
+
 #include <algorithm>
 #include <cstdio>
 
-#include "log.h"
-
-#include "checkstep.h"
+#include "build_info.h"
 #include "economy/flag.h"
 #include "economy/road.h"
 #include "editor/tools/editor_increase_resources_tool.h"
-#include "findimmovable.h"
-#include "findnode.h"
 #include "io/filesystem/layered_filesystem.h"
+#include "log.h"
+#include "logic/checkstep.h"
+#include "logic/findimmovable.h"
+#include "logic/findnode.h"
+#include "logic/mapfringeregion.h"
+#include "logic/pathfield.h"
+#include "logic/player.h"
+#include "logic/soldier.h"
+#include "logic/tribe.h"
+#include "logic/worlddata.h"
 #include "map_generator.h"
 #include "map_io/widelands_map_loader.h"
-#include "mapfringeregion.h"
-#include "pathfield.h"
-#include "player.h"
 #include "s2map.h"
-#include "soldier.h"
-#include "tribe.h"
 #include "upcast.h"
 #include "wexception.h"
-#include "worlddata.h"
 #include "wui/overlay_manager.h"
 
-#include "map.h"
-
-
-
-#define AVG_ELEVATION   (0x80000000)
-#define MAX_ELEVATION   (0xffffffff)
-#define MAP_ID_DIGITS   20
-#define ISLAND_BORDER   10
 
 namespace Widelands {
 
@@ -225,7 +219,7 @@ void Map::recalc_default_resources() {
 				const int8_t resr =
 					terr.get_default_resources();
 				if
-					(terr.get_is() & TERRAIN_UNPASSABLE
+					((terr.get_is() & TERRAIN_UNPASSABLE)
 					 and
 					 resr != Descr_Maintainer<Resource_Descr>::invalid_index())
 					m[resr] += 3;
@@ -237,7 +231,7 @@ void Map::recalc_default_resources() {
 				const int8_t resd =
 					terd.get_default_resources();
 				if
-					(terd.get_is() & TERRAIN_UNPASSABLE
+					((terd.get_is() & TERRAIN_UNPASSABLE)
 					 and
 					 resd != Descr_Maintainer<Resource_Descr>::invalid_index())
 					m[resd] += 3;
@@ -252,7 +246,7 @@ void Map::recalc_default_resources() {
 				const int8_t resd =
 					terd.get_default_resources();
 				if
-					(terd.get_is() & TERRAIN_UNPASSABLE
+					((terd.get_is() & TERRAIN_UNPASSABLE)
 					 and
 					 resd != Descr_Maintainer<Resource_Descr>::invalid_index())
 					m[resd] += 3;
@@ -267,7 +261,7 @@ void Map::recalc_default_resources() {
 				const int8_t resr =
 					terr.get_default_resources();
 				if
-					(terr.get_is() & TERRAIN_UNPASSABLE
+					((terr.get_is() & TERRAIN_UNPASSABLE)
 					 and
 					 resr != Descr_Maintainer<Resource_Descr>::invalid_index())
 					m[resr] += 3;
@@ -321,6 +315,8 @@ void Map::cleanup() {
 	m_scenario_closeables.clear();
 
 	m_tags.clear();
+	m_hint = std::string();
+	m_background = std::string();
 
 	if (m_overlay_manager)
 		m_overlay_manager->reset();
@@ -329,12 +325,13 @@ void Map::cleanup() {
 
 	//  Remove all extra data. Pay attention here, maybe some freeing would be
 	//  needed.
-#ifdef DEBUG
+#ifndef NDEBUG
 	for (uint32_t i = 0; i < m_extradatainfos.size(); ++i) {
 		assert(m_extradatainfos[i].type == Extradata_Info::PIC);
 	}
 #endif
 	m_extradatainfos.clear();
+	m_port_spaces.clear();
 }
 
 /*
@@ -345,7 +342,7 @@ the given data
 */
 void Map::create_empty_map
 	(uint32_t const w, uint32_t const h,
-	 std::string const & worldname,
+	 const std::string & worldname,
 	 char const * const name,
 	 char const * const author,
 	 char const * const description)
@@ -391,121 +388,31 @@ void Map::set_origin(Coords const new_origin) {
 	for (uint8_t i = get_nrplayers();              i;)
 		m_starting_pos[--i].reorigin(new_origin, extent());
 
-	//  Rearrange the fields. This is done in 2 steps. First each column is
-	//  rotated. Then each row is rotated. How to rotate an array is described
-	//  at [http://home.tiac.net/~cri/2004/frotate.html].
-	uint16_t const w = m_width, h = m_height;
+	Field * new_field_order = static_cast<Field *>(malloc(sizeof(Field)* m_width * m_height));
+	memset(new_field_order, 0, sizeof(Field) * m_width * m_height);
 
-
-	{ //  Rotate each column. This code is divided into 4 cases:
-		uint16_t const k = new_origin.y, nk = h - k;
-		//    * k = 0:
-		//        Do nothing.
-		//    * k = nk:
-		//        The new origin divides the column in 2 halves, which should
-		//        just be swapped.
-		//    * k < nk:
-		//        The new origin is in the first half. Increment = k.
-		//        Ascending run.
-		//    * k > nk:
-		//        The new origin is in the second half. Decrement = nk.
-		//        Descending run.
-		if        (k == nk) { //  swap first and last halves
-			for (X_Coordinate x = 0; x < w; ++x)
-				for (Y_Coordinate y1 = 0, y2 = k; y2 < h; ++y1, ++y2)
-					std::swap
-						(operator[] (Coords(x, y1)), operator[] (Coords(x, y2)));
-		} else if (k <  nk) { //  ascending run
-			for (X_Coordinate x = 0; x < w; ++x)
-				for (uint16_t first = 0, count = 0; count < k; ++first) {
-					Field const t = operator[](Coords(x, first));
-					uint16_t const last = first + nk;
-					for (uint16_t index = first;;) {
-						++count;
-						while (index < nk) {
-							Field & dst = operator[](Coords(x, index));
-							dst = operator[](Coords(x, index += k));
-						}
-						if (index == last)
-							break;
-						Field & dst = operator[](Coords(x, index));
-						dst = operator[] (Coords(x, index -= nk));
-					}
-					operator[] (Coords(x, last)) = t;
-				}
-		} else if (k >  nk) { //  descending run
-			for (X_Coordinate x = 0; x < w; ++x)
-				for (uint16_t first = h - 1, count = 0; count < nk; --first) {
-					Field const t = operator[](Coords(x, first));
-					uint16_t const last = first - k;
-					for (uint16_t index = first;;) {
-						++count;
-						while (index >= nk) {
-							Field & dst = operator[] (Coords(x, index));
-							dst = operator[] (Coords(x, index -= nk));
-						}
-						if (index == last)
-							break;
-						Field & dst = operator[] (Coords(x, index));
-						dst = operator[] (Coords(x, index += k));
-					}
-					operator[] (Coords(x, last)) = t;
-				}
+	// Rearrange The fields
+	// NOTE because of the triangle design, we have to take special care about cases
+	// NOTE where y is changed by an odd number
+	bool yisodd = (new_origin.y % 2) != 0;
+	for (FCoords c(Coords(0, 0)); c.y < m_height; ++c.y) {
+		bool cyisodd = (c.y % 2) != 0;
+		for (c.x = 0; c.x < m_width; ++c.x) {
+			Coords temp;
+			if (yisodd && cyisodd)
+				temp = Coords(c.x + new_origin.x + 1, c.y + new_origin.y);
+			else
+				temp = Coords(c.x + new_origin.x, c.y + new_origin.y);
+			normalize_coords(temp);
+			new_field_order[get_index(c, m_width)] = operator[](temp);
 		}
 	}
-
-	for (uint8_t i = 2; i;) { //  Rotate each odd row, then each even.
-		--i;
-		uint16_t k = new_origin.x;
-		if (i and new_origin.y & 1 and ++k == w)
-			k = 0;
-		uint16_t const nk = w - k;
-		if      (k == nk)
-			for (Y_Coordinate y = i; y < h; y += 2)
-				for (X_Coordinate x1 = 0, x2 = k; x2 < w; ++x1, ++x2)
-					std::swap
-						(operator[] (Coords(x1, y)), operator[] (Coords(x2, y)));
-		else if (k <  nk)
-			for (Y_Coordinate y = i; y < h; y += 2)
-				for (uint16_t first = 0, count = 0; count < k; ++first) {
-					Field const t = operator[] (Coords(first, y));
-					uint16_t const last = first + nk;
-					for (uint16_t index = first;;) {
-						++count;
-						while (index < nk) {
-							Field & dst = operator[] (Coords(index, y));
-							dst = operator[] (Coords(index += k, y));
-						}
-						if (index == last)
-							break;
-						Field & dst = operator[] (Coords(index, y));
-						dst = operator[] (Coords(index -= nk, y));
-					}
-					operator[] (Coords(last, y)) = t;
-				}
-		else if (k >  nk)
-			for (Y_Coordinate y = i; y < h; y += 2)
-				for (uint16_t first = w - 1, count = 0; count < nk; --first) {
-					Field const t = operator[] (Coords(first, y));
-					uint16_t const last = first - k;
-					for (uint16_t index = first;;) {
-						++count;
-						while (index >= nk) {
-							Field & dst = operator[] (Coords(index, y));
-							dst = operator[] (Coords(index -= nk, y));
-						}
-						if (index == last)
-							break;
-						Field & dst = operator[] (Coords(index, y));
-						dst = operator[] (Coords(index += k, y));
-					}
-					operator[] (Coords(last, y)) = t;
-				}
-	}
+	// Now that we restructured the fields, we just overwrite the old order
+	m_fields = new_field_order;
 
 	//  Inform immovables and bobs about their new coordinates.
-	for (FCoords c(Coords(0, 0), m_fields); c.y < h; ++c.y)
-		for (c.x = 0; c.x < w; ++c.x, ++c.field) {
+	for (FCoords c(Coords(0, 0), m_fields); c.y < m_height; ++c.y)
+		for (c.x = 0; c.x < m_width; ++c.x, ++c.field) {
 			assert(c.field == &operator[] (c));
 			if (upcast(Immovable, immovable, c.field->get_immovable()))
 				immovable->m_position = c;
@@ -519,6 +426,20 @@ void Map::set_origin(Coords const new_origin) {
 				bob->m_position.field = c.field;
 			}
 		}
+
+	// Take care about port spaces
+	PortSpacesSet new_port_spaces;
+	for (PortSpacesSet::iterator it = m_port_spaces.begin(); it != m_port_spaces.end(); ++it) {
+		Coords temp;
+		if (yisodd && ((it->y % 2) == 0))
+			temp = Coords(it->x - new_origin.x - 1, it->y - new_origin.y);
+		else
+			temp = Coords(it->x - new_origin.x, it->y - new_origin.y);
+		normalize_coords(temp);
+		log("(%i,%i) -> (%i,%i)\n", it->x, it->y, temp.x, temp.y);
+		new_port_spaces.insert(temp);
+	}
+	m_port_spaces = new_port_spaces;
 }
 
 
@@ -580,7 +501,7 @@ bool Map::get_scenario_player_closeable(const Player_Number p) const
 	return m_scenario_closeables[p - 1];
 }
 
-void Map::set_scenario_player_tribe(Player_Number const p, std::string const & tribename)
+void Map::set_scenario_player_tribe(Player_Number const p, const std::string & tribename)
 {
 	assert(p);
 	assert(p <= get_nrplayers());
@@ -588,7 +509,7 @@ void Map::set_scenario_player_tribe(Player_Number const p, std::string const & t
 	m_scenario_tribes[p - 1] = tribename;
 }
 
-void Map::set_scenario_player_name(Player_Number const p, std::string const & playername)
+void Map::set_scenario_player_name(Player_Number const p, const std::string & playername)
 {
 	assert(p);
 	assert(p <= get_nrplayers());
@@ -596,7 +517,7 @@ void Map::set_scenario_player_name(Player_Number const p, std::string const & pl
 	m_scenario_names[p - 1] = playername;
 }
 
-void Map::set_scenario_player_ai(Player_Number const p, std::string const & ainame)
+void Map::set_scenario_player_ai(Player_Number const p, const std::string & ainame)
 {
 	assert(p);
 	assert(p <= get_nrplayers());
@@ -626,8 +547,12 @@ void Map::set_nrplayers(Player_Number const nrplayers) {
 		return;
 	}
 
-	m_starting_pos = static_cast<Coords *>
+	Coords* new_starting_pos = static_cast<Coords *>
 		(realloc(m_starting_pos, sizeof(Coords) * nrplayers));
+	if (!new_starting_pos)
+		throw wexception("Out of memory.");
+	m_starting_pos = new_starting_pos;
+
 	while (m_nrplayers < nrplayers)
 		m_starting_pos[m_nrplayers++] = Coords(-1, -1);
 
@@ -674,6 +599,11 @@ void Map::set_description(char const * const string)
 	snprintf(m_description, sizeof(m_description), "%s", string);
 }
 
+void Map::set_hint(std::string string)
+{
+	m_hint = string;
+}
+
 void Map::set_world_name(char const * const string)
 {
 	snprintf(m_worldname, sizeof(m_worldname), "%s", string);
@@ -703,22 +633,21 @@ void Map::load_world()
 		m_world = new World(m_worldname);
 }
 
-/*
-===============
-Load data for the graphics subsystem.
-===============
-*/
+/// Load data for the graphics subsystem.
 void Map::load_graphics()
 {
 	m_world->load_graphics();
 }
 
 
-/*
-===============
-Returns the immovable at the given coordinate
-===============
-*/
+NodeCaps Map::get_max_nodecaps(FCoords & fc) {
+	NodeCaps caps = _calc_nodecaps_pass1(fc, false);
+	caps = _calc_nodecaps_pass2(fc, false, caps);
+	return caps;
+}
+
+
+/// \returns the immovable at the given coordinate
 BaseImmovable * Map::get_immovable(const Coords coord) const
 {
 	return operator[](coord).get_immovable();
@@ -735,7 +664,7 @@ Functor is of the form: functor(Map*, FCoords)
 */
 template<typename functorT>
 void Map::find_reachable
-	(Area<FCoords> const area, CheckStep const & checkstep, functorT & functor)
+	(Area<FCoords> const area, const CheckStep & checkstep, functorT & functor)
 {
 	std::vector<Coords> queue;
 	boost::shared_ptr<Pathfields> pathfields = m_pathfieldmgr->allocate();
@@ -801,7 +730,7 @@ The actual logic behind find_bobs and find_reachable_bobs.
 ===============
 */
 struct FindBobsCallback {
-	FindBobsCallback(std::vector<Bob *> * const list, FindBob const & functor)
+	FindBobsCallback(std::vector<Bob *> * const list, const FindBob & functor)
 		: m_list(list), m_functor(functor), m_found(0) {}
 
 	void operator()(const Map &, const FCoords cur) {
@@ -843,7 +772,7 @@ Returns the number of objects found.
 uint32_t Map::find_bobs
 	(Area<FCoords>        const area,
 	 std::vector<Bob *> * const list,
-	 FindBob      const &       functor)
+	 const FindBob      &       functor)
 {
 	FindBobsCallback cb(list, functor);
 
@@ -868,8 +797,8 @@ Returns the number of objects found.
 uint32_t Map::find_reachable_bobs
 	(Area<FCoords>        const area,
 	 std::vector<Bob *> * const list,
-	 CheckStep    const &       checkstep,
-	 FindBob      const &       functor)
+	 const CheckStep    &       checkstep,
+	 const FindBob      &       functor)
 {
 	FindBobsCallback cb(list, functor);
 
@@ -888,7 +817,7 @@ The actual logic behind find_immovables and find_reachable_immovables.
 */
 struct FindImmovablesCallback {
 	FindImmovablesCallback
-		(std::vector<ImmovableFound> * const list, FindImmovable const & functor)
+		(std::vector<ImmovableFound> * const list, const FindImmovable & functor)
 		: m_list(list), m_functor(functor), m_found(0) {}
 
 	void operator()(const Map &, const FCoords cur) {
@@ -926,7 +855,7 @@ If list is not 0, found immovables are stored in list.
 uint32_t Map::find_immovables
 	(Area<FCoords>                 const area,
 	 std::vector<ImmovableFound> * const list,
-	 FindImmovable const         &       functor)
+	 const FindImmovable         &       functor)
 {
 	FindImmovablesCallback cb(list, functor);
 
@@ -949,8 +878,8 @@ Returns the number of immovables we found.
 uint32_t Map::find_reachable_immovables
 	(Area<FCoords>                 const area,
 	 std::vector<ImmovableFound> * const list,
-	 CheckStep             const &       checkstep,
-	 FindImmovable         const &       functor)
+	 const CheckStep             &       checkstep,
+	 const FindImmovable         &       functor)
 {
 	FindImmovablesCallback cb(list, functor);
 
@@ -997,7 +926,7 @@ The actual logic behind find_fields and find_reachable_fields.
 */
 struct FindNodesCallback {
 	FindNodesCallback
-		(std::vector<Coords> * const list, FindNode const & functor)
+		(std::vector<Coords> * const list, const FindNode & functor)
 		: m_list(list), m_functor(functor), m_found(0) {}
 
 	void operator()(const Map & map, const FCoords cur) {
@@ -1027,7 +956,7 @@ Note that list can be 0.
 uint32_t Map::find_fields
 	(Area<FCoords>         const area,
 	 std::vector<Coords> *       list,
-	 FindNode const      &       functor)
+	 const FindNode      &       functor)
 {
 	FindNodesCallback cb(list, functor);
 
@@ -1049,8 +978,8 @@ Note that list can be 0.
 uint32_t Map::find_reachable_fields
 	(Area<FCoords>         const area,
 	 std::vector<Coords> *       list,
-	 CheckStep     const &       checkstep,
-	 FindNode      const &       functor)
+	 const CheckStep     &       checkstep,
+	 const FindNode      &       functor)
 {
 	FindNodesCallback cb(list, functor);
 
@@ -1138,8 +1067,11 @@ into two passes. You should always perform both passes. See the comment
 above recalc_brightness.
 ===============
 */
-void Map::recalc_nodecaps_pass1(FCoords const f)
-{
+void Map::recalc_nodecaps_pass1(FCoords const f) {
+	f.field->caps = _calc_nodecaps_pass1(f, true);
+}
+
+NodeCaps Map::_calc_nodecaps_pass1(FCoords const f, bool consider_mobs) {
 	uint8_t caps = CAPS_NONE;
 
 	// 1a) Get all the neighbours to make life easier
@@ -1208,33 +1140,33 @@ void Map::recalc_nodecaps_pass1(FCoords const f)
 
 	//  === everything below is used to check buildability ===
 
-	//  3) General buildability check: if a "robust" Map_Object is on this node
-	//  we cannot build anything on it. Exception: we can build flags on roads.
-	if (BaseImmovable * const imm = get_immovable(f))
-		if
-			(not dynamic_cast<Road const *>(imm)
-			 &&
-			 imm->get_size() >= BaseImmovable::SMALL)
-		{
-			// 3b) [OVERRIDE] check for "unpassable" Map_Objects
-			if (!imm->get_passable())
-				caps &= ~(MOVECAPS_WALK | MOVECAPS_SWIM);
-			goto end;
-		}
+	// if we are interested in the maximum theoretically available NodeCaps, this is not run
+	if (consider_mobs) {
+		//  3) General buildability check: if a "robust" Map_Object is on this node
+		//  we cannot build anything on it. Exception: we can build flags on roads.
+		if (BaseImmovable * const imm = get_immovable(f))
+			if
+				(not dynamic_cast<Road const *>(imm)
+				&&
+				imm->get_size() >= BaseImmovable::SMALL)
+			{
+				// 3b) [OVERRIDE] check for "unpassable" Map_Objects
+				if (!imm->get_passable())
+					caps &= ~(MOVECAPS_WALK | MOVECAPS_SWIM);
+				return static_cast<NodeCaps>(caps);
+			}
+	}
 
 	//  4) Flags
 	//  We can build flags on anything that's walkable and buildable, with some
 	//  restrictions
 	if (caps & MOVECAPS_WALK) {
 		//  4b) Flags must be at least 2 edges apart
-		if
-			(find_immovables
-			 	(Area<FCoords>(f, 1), 0, FindImmovableType(Map_Object::FLAG)))
-			goto end;
+		if (consider_mobs && find_immovables(Area<FCoords>(f, 1), 0, FindImmovableType(Map_Object::FLAG)))
+			return static_cast<NodeCaps>(caps);
 		caps |= BUILDCAPS_FLAG;
 	}
-end:
-	f.field->caps = static_cast<NodeCaps>(caps);
+	return static_cast<NodeCaps>(caps);
 }
 
 
@@ -1246,244 +1178,271 @@ on this Field.
 Important: flag buildability has already been checked in the first pass.
 ===============
 */
-void Map::recalc_nodecaps_pass2(FCoords const f)
-{
-	// 1) Collect neighbour information
-	//
-	// NOTE: Yes, this reproduces some of the things done in pass1.
-	// This is unavoidable and shouldn't hurt too much anyway.
+void Map::recalc_nodecaps_pass2(const FCoords & f) {
+	f.field->caps = _calc_nodecaps_pass2(f, true);
+}
 
-	// 1a) Get all the neighbours to make life easier
-	const FCoords  r =  r_n(f);
+NodeCaps Map::_calc_nodecaps_pass2(FCoords const f, bool consider_mobs, NodeCaps initcaps) {
+	uint8_t caps = consider_mobs ? f.field->caps : static_cast<uint8_t>(initcaps);
+
+	// NOTE  This dependency on the bottom-right neighbour is the reason
+	// NOTE  why the caps calculation is split into two passes
+	// NOTE  However this dependency has to be recalculated in case we are interested in the
+	// NOTE  maximum possible NodeCaps for this FCoord
+	const FCoords br = br_n(f);
+	if (consider_mobs) {
+		if
+			(!(br.field->caps & BUILDCAPS_FLAG)
+			&&
+			(!br.field->get_immovable() || br.field->get_immovable()->get_type() != Map_Object::FLAG))
+			return static_cast<NodeCaps>(caps);
+	} else {
+		if (!(_calc_nodecaps_pass1(br, false) & BUILDCAPS_FLAG))
+			return static_cast<NodeCaps>(caps);
+	}
+
+	bool mine;
+	uint8_t buildsize = calc_buildsize(f, true, &mine, consider_mobs, initcaps);
+	if (buildsize < BaseImmovable::SMALL)
+		return static_cast<NodeCaps>(caps);
+	assert(buildsize >= BaseImmovable::SMALL && buildsize <= BaseImmovable::BIG);
+
+	if (buildsize == BaseImmovable::BIG) {
+		if
+			(calc_buildsize(l_n(f),  false, 0, consider_mobs, initcaps) < BaseImmovable::BIG ||
+			 calc_buildsize(tl_n(f), false, 0, consider_mobs, initcaps) < BaseImmovable::BIG ||
+			 calc_buildsize(tr_n(f), false, 0, consider_mobs, initcaps) < BaseImmovable::BIG)
+			buildsize = BaseImmovable::MEDIUM;
+	}
+
+	// Reduce building size if it would block connectivity
+	if (buildsize == BaseImmovable::BIG) {
+		static const WalkingDir cycledirs[10] = {
+			WALK_NE, WALK_NE, WALK_NW,
+			WALK_W, WALK_W, WALK_SW, WALK_SW,
+			WALK_SE, WALK_E, WALK_E
+		};
+		if (!is_cycle_connected(br, 10, cycledirs))
+			buildsize = BUILDCAPS_MEDIUM;
+	}
+	if (buildsize < BaseImmovable::BIG) {
+		static const WalkingDir cycledirs[6] = {
+			WALK_NE, WALK_NW, WALK_W, WALK_SW, WALK_SE, WALK_E
+		};
+		if (!is_cycle_connected(br, 6, cycledirs))
+			return static_cast<NodeCaps>(caps);
+	}
+
+	if (mine) {
+		if (static_cast<int32_t>(br.field->get_height()) - f.field->get_height() < 4)
+			caps |= BUILDCAPS_MINE;
+	} else {
+		Field::Height const f_height = f.field->get_height();
+
+		// Reduce building size based on slope of direct neighbours:
+		//  - slope >= 4: can't build anything here -> return
+		//  - slope >= 3: maximum size is small
+		{
+			MapFringeRegion<Area<FCoords> > mr(*this, Area<FCoords>(f, 1));
+			do {
+				uint16_t const slope =
+					abs(mr.location().field->get_height() - f_height);
+				if (slope >= 4)
+					return static_cast<NodeCaps>(caps);
+				if (slope >= 3)
+					buildsize = BaseImmovable::SMALL;
+			} while (mr.advance(*this));
+		}
+		if (abs(br.field->get_height() - f_height) >= 2)
+			return static_cast<NodeCaps>(caps);
+
+		// Reduce building size based on height diff. of second order
+		// neighbours  If height difference between this field and second
+		// order neighbour is >= 3, we can only build a small house here.
+		// Additionally, we can potentially build a port on this field
+		// if one of the second order neighbours is swimmable.
+		if (buildsize >= BaseImmovable::MEDIUM) {
+			MapFringeRegion<Area<FCoords> > mr(*this, Area<FCoords>(f, 2));
+
+			do {
+				if (abs(mr.location().field->get_height() - f_height) >= 3) {
+					buildsize = BaseImmovable::SMALL;
+					break;
+				}
+			} while (mr.advance(*this));
+		}
+
+		if ((buildsize == BaseImmovable::BIG) && is_port_space(f) && !find_portdock(f).empty())
+			caps |= BUILDCAPS_PORT;
+
+		caps |= buildsize;
+	}
+	return static_cast<NodeCaps>(caps);
+}
+
+/**
+ * Return the size of immovable that is supposed to be buildable on \p f,
+ * based on immovables on \p f and its neighbours.
+ * Sets \p ismine depending on whether the field is on mountaineous terrain
+ * or not.
+ * \p consider_mobs defines, whether mapobjects currently on \p f or neighbour fields should be considered
+ * for the calculation. If not (calculation of maximum theoretical possible buildsize) initcaps must be set.
+ */
+int Map::calc_buildsize
+	(const FCoords & f, bool avoidnature, bool * ismine, bool consider_mobs, NodeCaps initcaps)
+{
+	if (consider_mobs) {
+		if (!(f.field->get_caps() & MOVECAPS_WALK))
+			return BaseImmovable::NONE;
+		if (BaseImmovable const * const immovable = get_immovable(f))
+			if (immovable->get_size() >= BaseImmovable::SMALL)
+				return BaseImmovable::NONE;
+	} else
+		if (!(initcaps & MOVECAPS_WALK))
+			return BaseImmovable::NONE;
+
+	// Get all relevant neighbours and count terrain triangle types.
 	const FCoords tr = tr_n(f);
 	const FCoords tl = tl_n(f);
 	const FCoords  l =  l_n(f);
 
 	const World & w = world();
 
-	uint8_t const tr_d_terrain_is =
-		w.terrain_descr(tr.field->terrain_d()).get_is();
-	uint8_t const tl_r_terrain_is =
-		w.terrain_descr(tl.field->terrain_r()).get_is();
-	uint8_t const tl_d_terrain_is =
-		w.terrain_descr(tl.field->terrain_d()).get_is();
-	uint8_t const  l_r_terrain_is =
-		w.terrain_descr (l.field->terrain_r()).get_is();
-	uint8_t const  f_d_terrain_is =
-		w.terrain_descr (f.field->terrain_d()).get_is();
-	uint8_t const  f_r_terrain_is =
-		w.terrain_descr (f.field->terrain_r()).get_is();
+	uint8_t terrains[6] = {
+		w.terrain_descr(tr.field->terrain_d()).get_is(),
+		w.terrain_descr(tl.field->terrain_r()).get_is(),
+		w.terrain_descr(tl.field->terrain_d()).get_is(),
+		w.terrain_descr (l.field->terrain_r()).get_is(),
+		w.terrain_descr (f.field->terrain_d()).get_is(),
+		w.terrain_descr (f.field->terrain_r()).get_is()
+	};
 
-	// 1b) Collect some information about the neighbours
-	int32_t cnt_unpassable = 0;
-	int32_t cnt_water = 0;
-	int32_t cnt_acid = 0;
-	int32_t cnt_mountain = 0;
-	int32_t cnt_dry = 0;
+	uint32_t cnt_mountain = 0;
+	uint32_t cnt_dry = 0;
+	for (uint32_t i = 0; i < 6; ++i) {
+		if (terrains[i] & TERRAIN_WATER)
+			return BaseImmovable::NONE;
+		if (terrains[i] & TERRAIN_MOUNTAIN) ++cnt_mountain;
+		if (terrains[i] & TERRAIN_DRY) ++cnt_dry;
+	}
 
-	if  (tr_d_terrain_is & TERRAIN_UNPASSABLE) ++cnt_unpassable;
-	if  (tl_r_terrain_is & TERRAIN_UNPASSABLE) ++cnt_unpassable;
-	if  (tl_d_terrain_is & TERRAIN_UNPASSABLE) ++cnt_unpassable;
-	if   (l_r_terrain_is & TERRAIN_UNPASSABLE) ++cnt_unpassable;
-	if   (f_d_terrain_is & TERRAIN_UNPASSABLE) ++cnt_unpassable;
-	if   (f_r_terrain_is & TERRAIN_UNPASSABLE) ++cnt_unpassable;
+	if (cnt_mountain == 6) {
+		if (ismine)
+			*ismine = true;
+		return BaseImmovable::SMALL;
+	}
+	if (cnt_mountain || cnt_dry)
+		return BaseImmovable::NONE;
 
-	if  (tr_d_terrain_is & TERRAIN_WATER)      ++cnt_water;
-	if  (tl_r_terrain_is & TERRAIN_WATER)      ++cnt_water;
-	if  (tl_d_terrain_is & TERRAIN_WATER)      ++cnt_water;
-	if   (l_r_terrain_is & TERRAIN_WATER)      ++cnt_water;
-	if   (f_d_terrain_is & TERRAIN_WATER)      ++cnt_water;
-	if   (f_r_terrain_is & TERRAIN_WATER)      ++cnt_water;
-
-	if  (tr_d_terrain_is & TERRAIN_ACID)       ++cnt_acid;
-	if  (tl_r_terrain_is & TERRAIN_ACID)       ++cnt_acid;
-	if  (tl_d_terrain_is & TERRAIN_ACID)       ++cnt_acid;
-	if   (l_r_terrain_is & TERRAIN_ACID)       ++cnt_acid;
-	if   (f_d_terrain_is & TERRAIN_ACID)       ++cnt_acid;
-	if   (f_r_terrain_is & TERRAIN_ACID)       ++cnt_acid;
-
-	if  (tr_d_terrain_is & TERRAIN_MOUNTAIN)   ++cnt_mountain;
-	if  (tl_r_terrain_is & TERRAIN_MOUNTAIN)   ++cnt_mountain;
-	if  (tl_d_terrain_is & TERRAIN_MOUNTAIN)   ++cnt_mountain;
-	if   (l_r_terrain_is & TERRAIN_MOUNTAIN)   ++cnt_mountain;
-	if   (f_d_terrain_is & TERRAIN_MOUNTAIN)   ++cnt_mountain;
-	if   (f_r_terrain_is & TERRAIN_MOUNTAIN)   ++cnt_mountain;
-
-	if  (tr_d_terrain_is & TERRAIN_DRY)        ++cnt_dry;
-	if  (tl_r_terrain_is & TERRAIN_DRY)        ++cnt_dry;
-	if  (tl_d_terrain_is & TERRAIN_DRY)        ++cnt_dry;
-	if   (l_r_terrain_is & TERRAIN_DRY)        ++cnt_dry;
-	if   (f_d_terrain_is & TERRAIN_DRY)        ++cnt_dry;
-	if   (f_r_terrain_is & TERRAIN_DRY)        ++cnt_dry;
-
-	uint8_t caps = f.field->caps;
-
-	// 2) We can only build something on fields that are
-	//     - walkable
-	//     - have no water triangles next to them
-	//     - are not blocked by "robust" Map_Objects
-	if (not (caps & MOVECAPS_WALK))
-		goto end;
-	if (cnt_water)
-		goto end;
-	if (BaseImmovable const * const immovable = get_immovable(f))
-		if (immovable->get_size() >= BaseImmovable::SMALL)
-			goto end;
-
-	// 3) We can only build something if there is a flag on the
-	// bottom-right neighbour (or if we could build a flag on the
-	// bottom-right neighbour)
-	//
-	// NOTE: This dependency on the bottom-right neighbour is the reason
-	// why the caps calculation is split into two passes
-	{
-		const FCoords br = br_n(f);
-		if
-			(not (br.field->caps & BUILDCAPS_FLAG)
-			 and
-			 not find_immovables
-			 	(Area<FCoords>(br, 0), 0, FindImmovableType(Map_Object::FLAG)))
-			goto end;
-
-	// === passability and flags allow us to build something beyond this
-	// point ===
-
-	// 4) Reduce building size based on nearby objects (incl. buildings)
-	// and roads.
-	//
-	// Small object: allow medium-sized first-order neighbour, big
-	// second-order neighbour
-	//
-	// Medium object: allow small-sized first-order neighbour, big
-	// second-order neighbour
-	//
-	// Big object: allow no first-order neighbours, small second-order
-	// neighbours
-	//
-	// Small buildings: same as small objects
-	// Medium buildings: allow only medium second-order neighbours
-	// Big buildings:  same as big objects
-		{
-			const FCoords bl = bl_n(f);
-			uint8_t building = BUILDCAPS_BIG;
-			std::vector<ImmovableFound> objectlist;
-
-			find_immovables
-				(Area<FCoords>(f, 2),
-				 &objectlist,
-				 FindImmovableSize(BaseImmovable::SMALL, BaseImmovable::BIG));
-			for (uint32_t i = 0; i < objectlist.size(); ++i) {
-				BaseImmovable const & obj = *objectlist[i].object;
-				Coords const objpos = objectlist[i].coords;
-				int32_t const dist = calc_distance(f, objpos);
-				bool main_location = true; //  large buildings occupy 3 extra nodes
-				if (upcast(Building const, building_immovable, &obj))
-					if (building_immovable->get_position() != objpos)
-						main_location = false;
-
-				switch (main_location ? obj.get_size() : BaseImmovable::SMALL) {
-				case BaseImmovable::SMALL:
-					if (dist == 1) {
-						if (building > BUILDCAPS_MEDIUM) {
-							//  A flag to the bottom-right does not reduce building
-							//  size (obvious) additionally, roads going top-right and
-							//  left from a big building's flag should be allowed
-							if
-								((objpos != br and objpos != r and objpos != bl)
-								 or
-								 (not dynamic_cast<Flag const *>(&obj)
-								  &&
-								  not dynamic_cast<Road const *>(&obj)))
-								building = BUILDCAPS_MEDIUM;
-						}
-					}
-					break;
-
-				case BaseImmovable::MEDIUM:
-					if (dynamic_cast<Building const *>(&obj)) {
-						if (building > BUILDCAPS_MEDIUM)
-							building = BUILDCAPS_MEDIUM;
-					} else {
-						if (dist == 1) {
-							if (building > BUILDCAPS_SMALL)
-								building = BUILDCAPS_SMALL;
-						}
-					}
-					break;
-
-				case BaseImmovable::BIG:
-					if (dist == 2)
-						building = BUILDCAPS_SMALL;
-					else
-						goto end; // can't build buildings next to big objects
-				}
-			}
-
-			//  5) Build mines on mountains.
-			if (cnt_mountain == 6) {
-				//  4b) Check the mountain slope
-				if
-					(static_cast<int32_t>(br.field->get_height())
-					 -
-					 f.field->get_height()
-					 <
-					 4)
-					caps |= BUILDCAPS_MINE;
-				goto end;
-			}
-
-			//  6) Can not build anything if there are mountain or desert
-			//  triangles next to the node
-			if (cnt_mountain || cnt_dry)
-				goto end;
-
-			Field::Height const f_height = f.field->get_height();
-
-			//  7) Reduce building size based on slope of direct neighbours:
-			//    - slope >= 4: can't build anything here -> return
-			//    - slope >= 3: maximum size is small
-			{
-				MapFringeRegion<Area<FCoords> > mr(*this, Area<FCoords>(f, 1));
-				do {
-					uint16_t const slope =
-						abs(mr.location().field->get_height() - f_height);
-					if (slope >= 4)
-						goto end;
-					if (slope >= 3)
-						building = BUILDCAPS_SMALL;
-				} while (mr.advance(*this));
-			}
-			if (abs(br.field->get_height() - f_height) >= 2)
-				goto end;
-
-			//  8) Reduce building size based on height diff. of second order
-			//    neighbours  If height difference between this field and second
-			//    order neighbour is >= 3, we can only build a small house here.
-			//    Additionally, we can potentially build a port on this field
-			//    if one of the second order neighbours is swimmable.
-			{
-				MapFringeRegion<Area<FCoords> > mr(*this, Area<FCoords>(f, 2));
-				bool near_water = false;
-
-				do {
-					if (abs(mr.location().field->get_height() - f_height) >= 3) {
-						building = BUILDCAPS_SMALL;
-						break;
-					}
-					// If there is still place for a big building, take care about ports
-					if ((building == BUILDCAPS_BIG) && !near_water)
-						if (mr.location().field->caps & MOVECAPS_SWIM)
-							near_water = true;
-				} while (mr.advance(*this));
-
-				if ((building == BUILDCAPS_BIG) && near_water)
-					caps |= BUILDCAPS_PORT;
-			}
-			caps |= building;
+	// Adjust size based on neighbouring immovables
+	int buildsize = BaseImmovable::BIG;
+	if (consider_mobs) {
+		std::vector<ImmovableFound> objectlist;
+		find_immovables
+			(Area<FCoords>(f, 1),
+			&objectlist,
+			FindImmovableSize(BaseImmovable::SMALL, BaseImmovable::BIG));
+		for (uint32_t i = 0; i < objectlist.size(); ++i) {
+			const BaseImmovable * obj = objectlist[i].object;
+			int objsize = obj->get_size();
+			if (objsize == BaseImmovable::NONE)
+				continue;
+			if (avoidnature && obj->get_type() == Map_Object::IMMOVABLE)
+				objsize += 1;
+			if (objsize + buildsize > BaseImmovable::BIG)
+				buildsize = BaseImmovable::BIG - objsize + 1;
 		}
 	}
-end: //  9) That's it, store the collected information.
-	f.field->caps = static_cast<NodeCaps>(caps);
+
+	if (ismine)
+		*ismine = false;
+	return buildsize;
+}
+
+/**
+ * We call a cycle on the map simply connected
+ * if the subgraph of the cycle which can be walked on is connected.
+ *
+ * The cycle is described as a \p start point plus
+ * a description of the directions in which to walk from the starting point.
+ * The array \p dirs must have length \p length, where \p length is
+ * the length of the cycle.
+ */
+bool Map::is_cycle_connected
+	(const FCoords & start, uint32_t length, const WalkingDir * dirs)
+{
+	FCoords f = start;
+	bool prev_walkable = start.field->get_caps() & MOVECAPS_WALK;
+	uint32_t alternations = 0;
+
+	for (uint32_t i = 0; i < length; ++i) {
+		f = get_neighbour(f, dirs[i]);
+		const bool walkable = f.field->get_caps() & MOVECAPS_WALK;
+		alternations += walkable != prev_walkable;
+		if (alternations > 2)
+			return false;
+		prev_walkable = walkable;
+	}
+
+	assert(start == f);
+
+	return true;
+}
+
+/**
+ * Returns a list of portdock fields (if any) that a port built at \p c should have.
+ */
+std::vector<Coords> Map::find_portdock(const Coords & c) const
+{
+	static const WalkingDir cycledirs[16] = {
+		WALK_NE, WALK_NE, WALK_NE, WALK_NW, WALK_NW,
+		WALK_W, WALK_W, WALK_W,
+		WALK_SW, WALK_SW, WALK_SW, WALK_SE, WALK_SE,
+		WALK_E, WALK_E, WALK_E
+	};
+	const FCoords start = br_n(br_n(get_fcoords(c)));
+	FCoords f[16];
+	bool iswater[16];
+	int firstwater = -1;
+	int lastnonwater = -1;
+	f[0] = start;
+	for (uint32_t i = 0; i < 16; ++i) {
+		iswater[i] = (f[i].field->get_caps() & (MOVECAPS_SWIM|MOVECAPS_WALK)) == MOVECAPS_SWIM;
+		if (iswater[i]) {
+			if (firstwater < 0)
+				firstwater = i;
+		} else {
+			lastnonwater = i;
+		}
+		if (i < 15)
+			f[i + 1] = get_neighbour(f[i], cycledirs[i]);
+	}
+
+	std::vector<Coords> portdock;
+	if (firstwater >= 0) {
+		for (uint32_t i = firstwater; i < 16 && iswater[i]; ++i)
+			portdock.push_back(f[i]);
+		if (firstwater == 0 && lastnonwater >= 0) {
+			for (uint32_t i = lastnonwater + 1; i < 16; ++i)
+				portdock.push_back(f[i]);
+		}
+	}
+
+	return portdock;
+}
+
+/// \returns true, if Coordinates are in port space list
+bool Map::is_port_space(const Coords& c) {
+	return m_port_spaces.count(c);
+}
+
+/// Set or unset a space as port space
+void Map::set_port_space(Coords c, bool allowed) {
+	if (allowed) {
+		m_port_spaces.insert(c);
+	} else {
+		m_port_spaces.erase(c);
+	}
 }
 
 
@@ -1673,7 +1632,7 @@ with the cost of walking in said direction.
 ===============
 */
 void Map::calc_cost
-	(Path const & path, int32_t * const forward, int32_t * const backward) const
+	(const Path & path, int32_t * const forward, int32_t * const backward) const
 {
 	Coords coords = path.get_start();
 
@@ -1707,6 +1666,7 @@ void Map::get_neighbour
 	case WALK_W:  get_ln (f, o); break;
 	default:
 		assert(false);
+		break;
 	}
 }
 
@@ -1722,6 +1682,7 @@ void Map::get_neighbour
 	case WALK_W:  get_ln (f, o); break;
 	default:
 		assert(false);
+		break;
 	}
 }
 
@@ -1736,7 +1697,7 @@ Map_Loader * Map::get_correct_loader(char const * const filename) {
 		 strcasecmp
 		 	(filename + (strlen(filename) - strlen(WLMF_SUFFIX)), WLMF_SUFFIX))
 		try {
-			result = new WL_Map_Loader(g_fs->MakeSubFileSystem(filename), this);
+			result = new WL_Map_Loader(*g_fs->MakeSubFileSystem(filename), this);
 		} catch (...) {
 			//  If this fails, it is an illegal file (maybe old plain binary map
 			//  format)
@@ -1787,7 +1748,7 @@ int32_t Map::findpath
 	 Coords                  inend,
 	 int32_t           const persist,
 	 Path            &       path,
-	 CheckStep const &       checkstep,
+	 const CheckStep &       checkstep,
 	 uint32_t          const flags)
 {
 	FCoords start;
@@ -1933,29 +1894,10 @@ bool Map::can_reach_by_water(const Coords field) const
 
 	FCoords neighb;
 
-	get_tln(fc, &neighb);
-	if (fc.field->nodecaps() & MOVECAPS_SWIM)
-		return true;
-
-	get_trn(fc, &neighb);
-	if (fc.field->nodecaps() & MOVECAPS_SWIM)
-		return true;
-
-	get_rn(fc, &neighb);
-	if (fc.field->nodecaps() & MOVECAPS_SWIM)
-		return true;
-
-	get_brn(fc, &neighb);
-	if (fc.field->nodecaps() & MOVECAPS_SWIM)
-		return true;
-
-	get_bln(fc, &neighb);
-	if (fc.field->nodecaps() & MOVECAPS_SWIM)
-		return true;
-
-	get_ln(fc, &neighb);
-	if (fc.field->nodecaps() & MOVECAPS_SWIM)
-		return true;
+	for (Direction dir = FIRST_DIRECTION; dir <= LAST_DIRECTION; ++dir) {
+		if (get_neighbour(fc, dir).field->nodecaps() & MOVECAPS_SWIM)
+			return true;
+	}
 
 	return false;
 }

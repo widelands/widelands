@@ -17,15 +17,15 @@
  *
  */
 
-#include "widelands_map_players_areawatchers_data_packet.h"
+#include "map_io/widelands_map_players_areawatchers_data_packet.h"
 
 #include "logic/editor_game_base.h"
 #include "logic/map.h"
 #include "logic/player.h"
 #include "logic/widelands_fileread.h"
 #include "logic/widelands_filewrite.h"
-#include "widelands_map_map_object_loader.h"
-#include "widelands_map_map_object_saver.h"
+#include "map_io/widelands_map_map_object_loader.h"
+#include "map_io/widelands_map_map_object_saver.h"
 
 namespace Widelands {
 
@@ -45,7 +45,7 @@ throw (_wexception)
 	if (skip)
 		return;
 
-	Map const & map = egbase.map();
+	const Map & map = egbase.map();
 	Extent const extent = map.extent();
 	const Player_Number nr_players = map.get_nrplayers();
 	iterate_players_existing(p, nr_players, egbase, player) {
@@ -69,7 +69,7 @@ throw (_wexception)
 							 static_cast<long unsigned int>(fr.GetPos() - 4), reg);
 					Coords c;
 					try {c = fr.Coords32(extent);}
-					catch (game_data_error const & e) {
+					catch (const game_data_error & e) {
 						throw game_data_error
 							("%lu: coordinates of watcher %u: %s",
 							 static_cast<long unsigned int>(fr.GetPos() - 4), reg,
@@ -83,7 +83,7 @@ throw (_wexception)
 			} else
 				throw game_data_error
 					("0: unknown/unhandled packet version %u", packet_version);
-		} catch (std::exception const & e) {
+		} catch (const std::exception & e) {
 			throw game_data_error
 				("Map_Players_AreaWatchers_Data_Packet::Read: player %u: in "
 				 "\"%s\": %s",
@@ -98,14 +98,14 @@ void Map_Players_AreaWatchers_Data_Packet::Write
 throw (_wexception)
 {
 	fs.EnsureDirectoryExists("player");
-	Map const & map = egbase.map();
+	const Map & map = egbase.map();
 	const Player_Number nr_players = map.get_nrplayers();
 	iterate_players_existing_const(p, nr_players, egbase, player) {
 		FileWrite fw;
 		fw.Unsigned16(CURRENT_PACKET_VERSION);
 		const Player::AreaWatchers & areawatchers = player->areawatchers();
 		container_iterate_const(Player::AreaWatchers, areawatchers, i) {
-			AreaWatcher const & areawatcher = *i.current->get(egbase);
+			const AreaWatcher & areawatcher = *i.current->get(egbase);
 			fw.Unsigned32(mos.register_object(areawatcher));
 			fw.Area48    (areawatcher);
 			mos.mark_object_as_saved(areawatcher);

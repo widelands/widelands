@@ -20,14 +20,14 @@
 #ifndef SONGSET_H
 #define SONGSET_H
 
-#include "io/fileread.h"
+#include <cstring>
+#include <string>
+#include <vector>
 
-#include <config.h> //  must be included before SDL_mixer.h!
 #include <SDL_mixer.h>
 
-#include <string>
-#include <cstring>
-#include <vector>
+#include "io/fileread.h"
+
 
 /** A collection of several pieces of music meant for the same situation.
  *
@@ -44,7 +44,7 @@ struct Songset {
 	Songset();
 	~Songset();
 
-	void add_song(std::string const & filename);
+	void add_song(const std::string & filename);
 	Mix_Music * get_song();
 	bool empty() {return m_songs.empty();}
 

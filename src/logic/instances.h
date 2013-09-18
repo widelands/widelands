@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2011 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2013 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,22 +20,24 @@
 #ifndef INSTANCES_H
 #define INSTANCES_H
 
+#include <cstring>
 #include <map>
 #include <string>
-#include <cstring>
 #include <vector>
 
 #include <boost/function.hpp>
 #include <boost/noncopyable.hpp>
 #include <boost/unordered_map.hpp>
+#include <boost/signals2.hpp>
 
+#include "logic/cmd_queue.h"
+#include "log.h"
+#include "port.h"
 #include "ref_cast.h"
-
-#include "cmd_queue.h"
 
 
 struct DirAnimations;
-struct RenderTarget;
+class RenderTarget;
 namespace UI {struct Tab_Panel;}
 
 namespace Widelands {
@@ -49,15 +51,14 @@ struct Map_Map_Object_Loader;
  * link them together
  */
 struct Map_Object_Descr : boost::noncopyable {
-	friend struct ::DirAnimations;
 	typedef uint8_t Index;
 	Map_Object_Descr(char const * const _name, char const * const _descname)
 		: m_name(_name), m_descname(_descname)
 	{}
 	virtual ~Map_Object_Descr() {m_anims.clear();}
 
-	std::string const &     name() const throw () {return m_name;}
-	std::string const & descname() const throw () {return m_descname;}
+	const std::string &     name() const throw () {return m_name;}
+	const std::string & descname() const throw () {return m_descname;}
 	struct Animation_Nonexistent {};
 	uint32_t get_animation(char const * const anim) const {
 		std::map<std::string, uint32_t>::const_iterator it = m_anims.find(anim);
@@ -65,8 +66,8 @@ struct Map_Object_Descr : boost::noncopyable {
 			throw Animation_Nonexistent();
 		return it->second;
 	}
-	uint32_t get_animation(const std::string & name) const {
-		return get_animation(name.c_str());
+	uint32_t get_animation(const std::string & animname) const {
+		return get_animation(animname.c_str());
 	}
 
 	uint32_t main_animation() const throw () {
@@ -75,8 +76,8 @@ struct Map_Object_Descr : boost::noncopyable {
 
 	std::string get_animation_name(uint32_t) const; ///< needed for save, debug
 	bool has_attribute(uint32_t) const throw ();
-	static uint32_t get_attribute_id(std::string const & name);
-	static std::string get_attribute_name(uint32_t const & id);
+	static uint32_t get_attribute_id(const std::string & name);
+	static std::string get_attribute_name(uint32_t id);
 
 	bool is_animation_known(const std::string & name) const;
 	void add_animation(const std::string & name, uint32_t anim);
@@ -104,6 +105,7 @@ private:
  * \todo move this to another header??
  */
 extern Map_Object_Descr g_flag_descr;
+extern Map_Object_Descr g_portdock_descr;
 
 /**
  * \par Notes on Map_Object
@@ -126,7 +128,7 @@ extern Map_Object_Descr g_flag_descr;
  * \warning DO NOT allocate/free Map_Objects directly. Use the appropriate
  * type-dependent create() function for creation, and call die() for removal.
  *
- * \note Convenient creation functions are defined in class Game.
+ * \note Convenient creation functions are defined in struct Game.
  *
  * When you do create a new object yourself (i.e. when you're implementing one
  * of the create() functions), you need to allocate the object using new,
@@ -151,7 +153,7 @@ class Map_Object : boost::noncopyable {
 public:
 	enum {
 		AREAWATCHER,
-		BOB,  //  class Bob
+		BOB,  //  struct Bob
 
 		WARE, //  class WareInstance
 		BATTLE,
@@ -196,6 +198,13 @@ public:
 	Serial serial() const {return m_serial;}
 
 	/**
+	 * Is called right before the object will be removed from
+	 * the game. No conncetion is handled in this class.
+	 * \param serial : the object serial
+	 */
+	boost::signals2::signal<void(uint32_t)> removed;
+
+	/**
 	 * Attributes are fixed boolean properties of an object.
 	 * An object either has a certain attribute or it doesn't.
 	 * See the \ref Attribute enume.
@@ -223,13 +232,13 @@ public:
 
 	// implementation is in game_debug_ui.cc
 	virtual void create_debug_panels
-		(Editor_Game_Base const & egbase, UI::Tab_Panel & tabs);
+		(const Editor_Game_Base & egbase, UI::Tab_Panel & tabs);
 
 	LogSink * get_logsink() {return m_logsink;}
 	void set_logsink(LogSink *);
 
 	/// Called when a new logsink is set. Used to give general information.
-	virtual void log_general_info(Editor_Game_Base const &);
+	virtual void log_general_info(const Editor_Game_Base &);
 
 	// saving and loading
 	/**
@@ -261,7 +270,7 @@ public:
 	 * Those are the three phases of loading. After the last phase,
 	 * all Loader objects should be deleted.
 	 */
-	class Loader {
+	struct Loader {
 		Editor_Game_Base      * m_egbase;
 		Map_Map_Object_Loader * m_mol;
 		Map_Object            * m_object;
@@ -336,7 +345,7 @@ inline int32_t get_reverse_dir(int32_t const dir) {
  * Keeps the list of all objects currently in the game.
  */
 struct Object_Manager : boost::noncopyable {
-	typedef boost::unordered_map<uint32_t, Map_Object *> objmap_t;
+	typedef boost::unordered_map<Serial, Map_Object *> objmap_t;
 
 	Object_Manager() {m_lastserial = 0;}
 	~Object_Manager();
@@ -345,10 +354,10 @@ struct Object_Manager : boost::noncopyable {
 
 	Map_Object * get_object(Serial const serial) const {
 		const objmap_t::const_iterator it = m_objects.find(serial);
-		return it != m_objects.end() ? it->second : 0;
+		return it != m_objects.end() ? it->second : nullptr;
 	}
 
-	void insert(Map_Object &);
+	void insert(Map_Object *);
 	void remove(Map_Object &);
 
 	bool object_still_available(const Map_Object * const t) const {
@@ -362,10 +371,10 @@ struct Object_Manager : boost::noncopyable {
 	}
 
 	/**
-	 * Get the map of all objects for the purpose of iterating over it.
-	 * Only provide a const version of the map!
+	 * When saving the map object, ordere matters. Return a vector of all ids
+	 * that are currently available;
 	 */
-	const objmap_t & get_objects() const throw () {return m_objects;}
+	std::vector<Serial> all_object_serials_ordered () const throw ();
 
 private:
 	Serial   m_lastserial;
@@ -376,7 +385,9 @@ private:
  * Provides a safe pointer to a Map_Object
  */
 struct Object_Ptr {
-	Object_Ptr(Map_Object * const obj = 0) {m_serial = obj ? obj->m_serial : 0;}
+	// Provide default constructor to shut up cppcheck.
+	Object_Ptr() {m_serial = 0;}
+	Object_Ptr(Map_Object * const obj) {m_serial = obj ? obj->m_serial : 0;}
 	// can use standard copy constructor and assignment operator
 
 	Object_Ptr & operator= (Map_Object * const obj) {
@@ -388,8 +399,8 @@ struct Object_Ptr {
 
 	// dammit... without a Editor_Game_Base object, we can't implement a
 	// Map_Object* operator (would be _really_ nice)
-	Map_Object * get(Editor_Game_Base const &);
-	Map_Object * get(Editor_Game_Base const & egbase) const;
+	Map_Object * get(const Editor_Game_Base &);
+	Map_Object * get(const Editor_Game_Base & egbase) const;
 
 	bool operator<  (const Object_Ptr & other) const throw () {
 		return m_serial < other.m_serial;
@@ -418,16 +429,16 @@ struct OPtr {
 
 	bool is_set() const {return m.is_set();}
 
-	T * get(Editor_Game_Base const &       egbase) {
+	T * get(const Editor_Game_Base &       egbase) {
 		return static_cast<T *>(m.get(egbase));
 	}
-	T * get(Editor_Game_Base const &       egbase) const {
+	T * get(const Editor_Game_Base &       egbase) const {
 		return static_cast<T *>(m.get(egbase));
 	}
 
-	bool operator<  (OPtr<T> const & other) const {return m <  other.m;}
-	bool operator== (OPtr<T> const & other) const {return m == other.m;}
-	bool operator!= (OPtr<T> const & other) const {return m != other.m;}
+	bool operator<  (const OPtr<T> & other) const {return m <  other.m;}
+	bool operator== (const OPtr<T> & other) const {return m == other.m;}
+	bool operator!= (const OPtr<T> & other) const {return m != other.m;}
 
 	Serial serial() const {return m.serial();}
 
@@ -436,7 +447,7 @@ private:
 };
 
 struct Cmd_Destroy_Map_Object : public GameLogicCommand {
-	Cmd_Destroy_Map_Object() : GameLogicCommand(0) {} ///< For savegame loading
+	Cmd_Destroy_Map_Object() : GameLogicCommand(0), obj_serial(0) {} ///< For savegame loading
 	Cmd_Destroy_Map_Object (int32_t t, Map_Object &);
 	virtual void execute (Game &);
 
@@ -450,7 +461,7 @@ private:
 };
 
 struct Cmd_Act : public GameLogicCommand {
-	Cmd_Act() : GameLogicCommand(0) {} ///< For savegame loading
+	Cmd_Act() : GameLogicCommand(0), obj_serial(0), arg(0) {} ///< For savegame loading
 	Cmd_Act (int32_t t, Map_Object &, int32_t a);
 
 	virtual void execute (Game &);

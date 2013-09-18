@@ -17,31 +17,20 @@
  *
  */
 
-#include "interactive_player.h"
+#include "wui/interactive_player.h"
 
 #include <boost/bind.hpp>
-#include <boost/type_traits.hpp>
-#include <boost/lambda/construct.hpp>
-#include <boost/lambda/bind.hpp>
-#include <boost/lexical_cast.hpp>
 #include <boost/format.hpp>
+#include <boost/lambda/bind.hpp>
+#include <boost/lambda/construct.hpp>
+#include <boost/lexical_cast.hpp>
+#include <boost/type_traits.hpp>
 #include <libintl.h>
 
-#include "building_statistics_menu.h"
-#include "chatoverlay.h"
 #include "debugconsole.h"
 #include "economy/flag.h"
-#include "encyclopedia_window.h"
-#include "fieldaction.h"
-#include "graphic/font_handler.h"
-#include "game_chat_menu.h"
 #include "game_io/game_loader.h"
-#include "game_main_menu.h"
-#include "game_main_menu_save_game.h"
-#include "game_message_menu.h"
-#include "game_objectives_menu.h"
-#include "game_options_menu.h"
-#include "general_statistics_menu.h"
+#include "graphic/font_handler.h"
 #include "helper.h"
 #include "i18n.h"
 #include "logic/building.h"
@@ -49,16 +38,26 @@
 #include "logic/constructionsite.h"
 #include "logic/immovable.h"
 #include "logic/message_queue.h"
-#include "overlay_manager.h"
 #include "logic/player.h"
 #include "logic/productionsite.h"
 #include "logic/soldier.h"
 #include "logic/tribe.h"
 #include "profile/profile.h"
-#include "stock_menu.h"
 #include "ui_basic/unique_window.h"
 #include "upcast.h"
-#include "ware_statistics_menu.h"
+#include "wui/building_statistics_menu.h"
+#include "wui/encyclopedia_window.h"
+#include "wui/fieldaction.h"
+#include "wui/game_chat_menu.h"
+#include "wui/game_main_menu.h"
+#include "wui/game_main_menu_save_game.h"
+#include "wui/game_message_menu.h"
+#include "wui/game_objectives_menu.h"
+#include "wui/game_options_menu.h"
+#include "wui/general_statistics_menu.h"
+#include "wui/overlay_manager.h"
+#include "wui/stock_menu.h"
+#include "wui/ware_statistics_menu.h"
 
 using Widelands::Building;
 using Widelands::Map;
@@ -83,9 +82,9 @@ Interactive_Player::Interactive_Player
 	 bool                     const scenario,
 	 bool                     const multiplayer)
 	:
-	Interactive_GameBase (_game, global_s),
+	Interactive_GameBase (_game, global_s, NONE, multiplayer, multiplayer),
 	m_auto_roadbuild_mode(global_s.get_bool("auto_roadbuild_mode", true)),
-m_flag_to_connect(Widelands::Coords::Null()),
+	m_flag_to_connect(Widelands::Coords::Null()),
 
 // Chat is different, as m_chatProvider needs to be checked when toggling
 // Buildhelp is different as it does not toggle a UniqueWindow
@@ -93,13 +92,13 @@ m_flag_to_connect(Widelands::Coords::Null()),
 
 #define INIT_BTN_this(picture, name, tooltip)                       \
  TOOLBAR_BUTTON_COMMON_PARAMETERS(name),                                      \
- g_gr->get_picture(PicMod_Game, "pics/" picture ".png"),                      \
+ g_gr->images().get("pics/" picture ".png"),                      \
  tooltip                                                                      \
 
 
 #define INIT_BTN(picture, name, tooltip)                            \
  TOOLBAR_BUTTON_COMMON_PARAMETERS(name),                                      \
- g_gr->get_picture(PicMod_Game, "pics/" picture ".png"),                      \
+ g_gr->images().get("pics/" picture ".png"),                      \
  tooltip                                                                      \
 
 
@@ -154,14 +153,10 @@ m_toggle_help
 	m_toolbar.add(&m_toggle_buildhelp,       UI::Box::AlignLeft);
 	if (multiplayer) {
 		m_toolbar.add(&m_toggle_chat,            UI::Box::AlignLeft);
-		// Limit chat width to half the screen, to limit the damage lamers can do
-		// by flooding chat messages
-		m_chatOverlay =
-			new ChatOverlay(this, 10, 25, get_w() / 2, get_h() - 25);
 		m_toggle_chat.set_visible(false);
 		m_toggle_chat.set_enabled(false);
-	} else
-		m_toggle_chat.set_visible(false);
+	}
+
 	m_toolbar.add(&m_toggle_help,            UI::Box::AlignLeft);
 	if (not scenario)
 		m_toggle_objectives.set_visible(false);
@@ -211,8 +206,12 @@ m_toggle_help
 		(boost::lambda::new_ptr<GameMessageMenu>(),
 		 boost::ref(*this),
 		 boost::ref(m_message_menu));
+	m_mainm_windows.stock.constr = boost::lambda::bind
+		(boost::lambda::new_ptr<Stock_Menu>(),
+		 boost::ref(*this),
+		 boost::ref(m_mainm_windows.stock));
 
-#ifdef DEBUG //  only in debug builds
+#ifndef NDEBUG //  only in debug builds
 	addCommand
 		("switchplayer",
 		 boost::bind(&Interactive_Player::cmdSwitchPlayer, this, _1));
@@ -279,8 +278,10 @@ void Interactive_Player::think()
 			m_flag_to_connect = Widelands::Coords::Null();
 		}
 	}
-	m_toggle_chat.set_visible(m_chatenabled);
-	m_toggle_chat.set_enabled(m_chatenabled);
+	if (is_multiplayer()) {
+		m_toggle_chat.set_visible(m_chatenabled);
+		m_toggle_chat.set_enabled(m_chatenabled);
+	}
 	{
 		char         buffer[128];
 		char const * msg_icon    = "pics/menu_toggle_oldmessage_menu.png";
@@ -296,7 +297,7 @@ void Interactive_Player::think()
 				 nr_new_messages);
 			msg_tooltip = buffer;
 		}
-		m_toggle_message_menu.set_pic(g_gr->get_picture(PicMod_UI, msg_icon));
+		m_toggle_message_menu.set_pic(g_gr->images().get(msg_icon));
 		m_toggle_message_menu.set_tooltip(msg_tooltip);
 	}
 }
@@ -334,7 +335,7 @@ void Interactive_Player::postload()
 
 
 void Interactive_Player::popup_message
-	(Widelands::Message_Id const id, Widelands::Message const & message)
+	(Widelands::Message_Id const id, const Widelands::Message & message)
 {
 	m_message_menu.create();
 	ref_cast<GameMessageMenu, UI::UniqueWindow>(*m_message_menu.window)
@@ -367,8 +368,8 @@ Widelands::Player_Number Interactive_Player::player_number() const
 /// Player has clicked on the given node; bring up the context menu.
 void Interactive_Player::node_action()
 {
-	Map const & map = egbase().map();
-	if (player().vision(Map::get_index(get_sel_pos().node, map.get_width())))
+	const Map & map = egbase().map();
+	if (1 < player().vision(Map::get_index(get_sel_pos().node, map.get_width())))
 	{
 		// Special case for buildings
 		if (upcast(Building, building, map.get_immovable(get_sel_pos().node)))
@@ -388,6 +389,7 @@ void Interactive_Player::node_action()
 /**
  * Global in-game keypresses:
  * \li Space: toggles buildhelp
+ * \li i: show stock (inventory)
  * \li m: show minimap
  * \li o: show objectives window
  * \li c: toggle census
@@ -399,10 +401,14 @@ void Interactive_Player::node_action()
 */
 bool Interactive_Player::handle_key(bool const down, SDL_keysym const code)
 {
-	if (down)
+	if (down) {
 		switch (code.sym) {
 		case SDLK_SPACE:
 			toggle_buildhelp();
+			return true;
+
+		case SDLK_i:
+			m_mainm_windows.stock.toggle();
 			return true;
 
 		case SDLK_m:
@@ -436,13 +442,14 @@ bool Interactive_Player::handle_key(bool const down, SDL_keysym const code)
 		case SDLK_KP7:
 			if (code.mod & KMOD_NUM)
 				break;
+			/* no break */
 		case SDLK_HOME:
 			move_view_to(game().map().get_starting_pos(m_player_number));
 			return true;
 
 		case SDLK_KP_ENTER:
 		case SDLK_RETURN:
-			if (!m_chatProvider | !m_chatenabled)
+			if (!m_chatProvider | !m_chatenabled || !is_multiplayer())
 				break;
 
 			if (!m_chat.window)
@@ -452,6 +459,7 @@ bool Interactive_Player::handle_key(bool const down, SDL_keysym const code)
 		default:
 			break;
 		}
+	}
 
 	return Interactive_GameBase::handle_key(down, code);
 }
@@ -471,7 +479,7 @@ void Interactive_Player::set_player_number(uint32_t const n) {
  */
 void Interactive_Player::cleanup_for_load() {}
 
-void Interactive_Player::cmdSwitchPlayer(std::vector<std::string> const & args)
+void Interactive_Player::cmdSwitchPlayer(const std::vector<std::string> & args)
 {
 	if (args.size() != 2) {
 		DebugConsole::write("Usage: switchplayer <nr>");

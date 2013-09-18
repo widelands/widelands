@@ -21,15 +21,15 @@
 #define REQUEST_H
 
 #include "logic/requirements.h"
-#include "trackptr.h"
 #include "logic/wareworker.h"
 #include "logic/widelands.h"
 #include "logic/widelands_fileread.h"
 #include "logic/widelands_filewrite.h"
+#include "trackptr.h"
 
 namespace Widelands {
 
-struct Economy;
+class Economy;
 struct Editor_Game_Base;
 struct Flag;
 struct Game;
@@ -58,7 +58,7 @@ class ConstructionSite;
  * The required time has no meaning for idle requests.
  */
 struct Request : public Trackable {
-	friend struct Economy;
+	friend class Economy;
 	friend class RequestList;
 
 	typedef void (*callback_t)
@@ -99,8 +99,8 @@ struct Request : public Trackable {
 	void transfer_finish(Game &, Transfer &);
 	void transfer_fail  (Game &, Transfer &);
 
-	void set_requirements (Requirements const & r) {m_requirements = r;}
-	Requirements const & get_requirements () const {return m_requirements;}
+	void set_requirements (const Requirements & r) {m_requirements = r;}
+	const Requirements & get_requirements () const {return m_requirements;}
 
 private:
 	int32_t get_base_required_time(Editor_Game_Base &, uint32_t nr) const;

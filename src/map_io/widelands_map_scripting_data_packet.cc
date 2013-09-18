@@ -17,7 +17,7 @@
  *
  */
 
-#include "widelands_map_scripting_data_packet.h"
+#include "map_io/widelands_map_scripting_data_packet.h"
 
 #include "logic/editor_game_base.h"
 #include "logic/game.h"
@@ -29,8 +29,6 @@
 #include "upcast.h"
 
 namespace Widelands {
-
-#define CURRENT_PACKET_VERSION 1
 
 /*
  * ========================================================================

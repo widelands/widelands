@@ -20,12 +20,14 @@
 #ifndef MULTIPLAYERSETUPGROUP_H
 #define MULTIPLAYERSETUPGROUP_H
 
+#include <map>
+#include <string>
+
 #include "constants.h"
+#include "network/network_player_settings_backend.h"
 #include "ui_basic/box.h"
 #include "ui_basic/panel.h"
 #include "ui_basic/textarea.h"
-
-#include <string>
 
 #define MAXCLIENTS 64
 
@@ -47,7 +49,7 @@ struct MultiPlayerSetupGroup : public UI::Panel {
 		 int32_t x, int32_t y, int32_t w, int32_t h,
 		 GameSettingsProvider * settings,
 		 uint32_t butw, uint32_t buth,
-		 std::string const & fname = UI_FONT_NAME,
+		 const std::string & fname = UI_FONT_NAME,
 		 uint32_t fsize = UI_FONT_SIZE_SMALL);
 	~MultiPlayerSetupGroup();
 
@@ -55,6 +57,7 @@ struct MultiPlayerSetupGroup : public UI::Panel {
 
 private:
 	GameSettingsProvider   * const s;
+	std::unique_ptr<NetworkPlayerSettingsBackend> npsb;
 	std::vector<MultiPlayerClientGroup *> c;
 	std::vector<MultiPlayerPlayerGroup *> p;
 	UI::Box                  clientbox, playerbox;
@@ -63,7 +66,7 @@ private:
 	uint32_t    m_buth, m_fsize;
 	std::string m_fname;
 
-	std::map<std::string, PictureID> m_tribepics;
+	std::map<std::string, const Image* > m_tribepics;
 	std::map<std::string, std::string> m_tribenames;
 };
 

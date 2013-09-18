@@ -17,20 +17,17 @@
  *
  */
 
-#include "road.h"
+#include "economy/road.h"
 
-// Package includes
-#include "economy.h"
-#include "flag.h"
-
+#include "economy/economy.h"
+#include "economy/flag.h"
+#include "economy/request.h"
 #include "logic/carrier.h"
-#include "logic/instances.h"
-#include "logic/player.h"
-#include "request.h"
 #include "logic/editor_game_base.h"
 #include "logic/game.h"
+#include "logic/instances.h"
+#include "logic/player.h"
 #include "logic/tribe.h"
-
 #include "upcast.h"
 
 namespace Widelands {
@@ -50,7 +47,8 @@ Road::Road() :
 	PlayerImmovable  (g_road_descr),
 	m_busyness            (0),
 	m_busyness_last_update(0),
-	m_type           (0)
+	m_type           (0),
+	m_idle_index(0)
 {
 	m_flags[0] = m_flags[1] = 0;
 	m_flagidx[0] = m_flagidx[1] = -1;
@@ -87,7 +85,7 @@ Road::~Road()
 */
 Road & Road::create
 	(Editor_Game_Base & egbase,
-	 Flag & start, Flag & end, Path const & path)
+	 Flag & start, Flag & end, const Path & path)
 {
 	assert(start.get_position() == path.get_start());
 	assert(end  .get_position() == path.get_end  ());
@@ -142,7 +140,7 @@ BaseImmovable::PositionList Road::get_positions
 }
 
 static std::string const road_name = "road";
-std::string const & Road::name() const throw () {return road_name;}
+const std::string & Road::name() const throw () {return road_name;}
 
 
 Flag & Road::base_flag()
@@ -162,7 +160,7 @@ int32_t Road::get_cost(FlagId fromflag)
  * Set the new path, calculate costs.
  * You have to set start and end flags before calling this function.
 */
-void Road::_set_path(Editor_Game_Base & egbase, Path const & path)
+void Road::_set_path(Editor_Game_Base & egbase, const Path & path)
 {
 	assert(path.get_nsteps() >= 2);
 	assert(path.get_start() == m_flags[FlagStart]->get_position());
@@ -291,7 +289,7 @@ void Road::_link_into_flags(Editor_Game_Base & egbase) {
 	 * request a new carrier
 	 */
 	if (upcast(Game, game, &egbase))
-	container_iterate(SlotVector, m_carrier_slots, i)
+	container_iterate(SlotVector, m_carrier_slots, i) {
 		if (Carrier * const carrier = i.current->carrier.get(*game)) {
 			//  This happens after a road split. Tell the carrier what's going on.
 			carrier->set_location    (this);
@@ -301,6 +299,7 @@ void Road::_link_into_flags(Editor_Game_Base & egbase) {
 			 (i.current->carrier_type == 1 or
 			  m_type == Road_Busy))
 			_request_carrier(*i.current);
+	}
 }
 
 /**
@@ -608,9 +607,30 @@ bool Road::notify_ware(Game & game, FlagId const flagid)
 				//  decrement the usage busyness.
 				if (500 < tdelta) {
 					m_busyness_last_update = gametime;
-					//  TODO: If m_busyness drops below a limit, release the donkey.
-					if (m_busyness)
+					if (m_busyness) {
 						--m_busyness;
+
+						// If m_busyness drops below a limit, release the donkey.
+						// remember that every time a ware is waiting at the flag
+						// m_busyness increase by 10 but every time a ware is immediatly
+						// acked by a carrier m_busyness is decreased by 1 only.
+						// so the limit is not so easy to reach
+						if (m_busyness < 350) {
+							Carrier * const second_carrier = m_carrier_slots[1].carrier.get(game);
+							if (second_carrier && second_carrier->top_state().task == &Carrier::taskRoad) {
+								second_carrier->send_signal(game, "cancel");
+								// this signal is not handled in any special way
+								// so it simply pop the task off the stack
+								// the string "cancel" has been used to make clear
+								// the final goal we want to achieve
+								// ie: cancelling current task
+								m_carrier_slots[1].carrier = 0;
+								m_carrier_slots[1].carrier_request = 0;
+								m_type = Road_Normal;
+								_mark_map(game);
+							}
+						}
+					}
 				}
 				return true;
 			}
@@ -632,6 +652,12 @@ bool Road::notify_ware(Game & game, FlagId const flagid)
 		}
 	}
 	return false;
+}
+
+void Road::log_general_info(const Editor_Game_Base & egbase)
+{
+	PlayerImmovable::log_general_info(egbase);
+	molog("m_busyness: %i\n", m_busyness);
 }
 
 }

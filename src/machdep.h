@@ -20,11 +20,16 @@
 #ifndef MACHDEP_H
 #define MACHDEP_H
 
-#include <SDL_endian.h>
-
-#include <stdint.h>
 #include <cstring>
 #include <string>
+
+#include <SDL_endian.h>
+#include <stdint.h>
+
+#include "compile_diagnostics.h"
+
+// Disable this warning for files where we might use these macros.
+CLANG_DIAG_OFF("-Wself-assign");
 
 #if SDL_BYTEORDER == SDL_LIL_ENDIAN
 #define Little16(x)    (x)

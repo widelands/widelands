@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2010 by the Widelands Development Team
+ * Copyright (C) 2010-2013 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -21,14 +21,15 @@
 #define _WARESQUEUEDISPLAY_H_
 
 #include <cstdlib>
+
 #include <stdint.h>
 
 #include "logic/item_ware_descr.h"
+#include "ui_basic/button.h"
 #include "ui_basic/panel.h"
 #include "ui_basic/radiobutton.h"
-#include "ui_basic/button.h"
 
-struct Interactive_GameBase;
+class Interactive_GameBase;
 
 namespace UI {
 struct Panel;
@@ -36,7 +37,7 @@ struct Radiogroup;
 }
 
 namespace Widelands {
-struct Building;
+class Building;
 struct WaresQueue;
 }
 
@@ -75,13 +76,14 @@ private:
 	UI::Button   * m_decrease_max_fill;
 	Widelands::Ware_Index   m_ware_index;
 	int32_t          m_ware_type;
-	PictureID        m_icon;            //< Index to ware's picture
-	PictureID        m_icon_grey;
-	PictureID        m_max_fill_indicator;
+	const Image* m_icon;            //< Index to ware's picture
+	const Image* m_icon_grey;
+	const Image* m_max_fill_indicator;
 
 
 	uint32_t         m_cache_size;
 	uint32_t         m_cache_filled;
+	uint32_t         m_cache_max_fill;
 	uint32_t         m_total_height;
 	bool             m_show_only;
 
@@ -91,6 +93,8 @@ private:
 	void decrease_max_fill_clicked();
 	void increase_max_fill_clicked();
 	void radiogroup_changed(int32_t);
+
+	void compute_max_fill_buttons_enabled_state();
 };
 
 #endif // _WARESQUEUEDISPLAY_H_

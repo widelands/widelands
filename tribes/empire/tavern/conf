@@ -7,6 +7,11 @@ wood=2
 stone=2
 marble=1
 
+[return_on_dismantle]
+wood=1
+stone=1
+marble=1
+
 [aihints]
 build_material=false
 
@@ -30,8 +35,8 @@ produce=ration
 
 [idle]
 pics=tavern_i_??.png  # ???
-hotspot=72 56
+hotspot=52 58
 
 [working]
 pics=tavern_i_??.png  # ???
-hotspot=72 56
+hotspot=52 58

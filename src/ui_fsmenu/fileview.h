@@ -20,23 +20,23 @@
 #ifndef FULLSCREEN_MENU_FILEVIEW_H
 #define FULLSCREEN_MENU_FILEVIEW_H
 
-#include "base.h"
+#include <cstring>
+#include <string>
 
+#include "ui_fsmenu/base.h"
 #include "ui_basic/button.h"
 #include "ui_basic/multilinetextarea.h"
 #include "ui_basic/textarea.h"
 #include "ui_basic/unique_window.h"
 
-#include <string>
-#include <cstring>
-
 void fileview_window
 	(UI::Panel                  & parent,
 	 UI::UniqueWindow::Registry & reg,
-	 std::string          const & filename);
+	 const std::string          & filename);
 
 /**
- * Shows a Text in a Fullscreen Menu. Waits for the button Ok to be clicked.
+ * Shows a Text in a Fullscreen Menu. Can automatically handle Lua files and
+ * plain text files. Waits for the button Ok to be clicked.
 */
 struct Fullscreen_Menu_TextView : public Fullscreen_Menu_Base {
 	Fullscreen_Menu_TextView(const std::string & filename);
@@ -55,7 +55,7 @@ private:
  * to be clicked.
  */
 struct Fullscreen_Menu_FileView : public Fullscreen_Menu_TextView {
-	Fullscreen_Menu_FileView(std::string const & filename);
+	Fullscreen_Menu_FileView(const std::string & filename);
 };
 
 

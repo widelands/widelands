@@ -1,0 +1,9 @@
+<rt>
+<p>
+<img src="small_red_box.png">
+</p>
+<vspace gap=2>
+<p>
+<img src="small_red_box.png">
+</p>
+</rt>

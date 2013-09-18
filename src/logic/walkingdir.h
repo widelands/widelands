@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2010 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2010, 2013 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -20,6 +20,8 @@
 #ifndef WALKINGDIR_H
 #define WALKINGDIR_H
 
+#include <stdint.h>
+
 namespace Widelands {
 
 /// Constants for where we are going.
@@ -34,6 +36,10 @@ enum WalkingDir {
 	WALK_NW         = 6,
 	LAST_DIRECTION  = 6,
 };
+
+uint8_t get_cw_neighbour(uint8_t dir);
+uint8_t get_ccw_neighbour(uint8_t dir);
+uint8_t get_backward_dir(uint8_t dir);
 
 }
 

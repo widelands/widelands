@@ -17,7 +17,7 @@
  *
  */
 
-#include "game_map_data_packet.h"
+#include "game_io/game_map_data_packet.h"
 
 #include "io/filesystem/filesystem.h"
 #include "logic/game.h"
@@ -27,13 +27,10 @@
 
 namespace Widelands {
 
-#define CURRENT_PACKET_VERSION 1
-
 Game_Map_Data_Packet::~Game_Map_Data_Packet() {
 	delete m_wms;
 	delete m_wml;
 }
-
 
 void Game_Map_Data_Packet::Read
 	(FileSystem & fs, Game & game, Map_Map_Object_Loader * const)
@@ -44,7 +41,7 @@ void Game_Map_Data_Packet::Read
 	//  Now Load the map as it would be a normal map saving.
 	delete m_wml;
 
-	m_wml = new WL_Map_Loader(fs.MakeSubFileSystem("map"), &game.map());
+	m_wml = new WL_Map_Loader(*fs.MakeSubFileSystem("map"), &game.map());
 
 	m_wml->preload_map(true);
 	m_wml->load_world();
@@ -65,8 +62,8 @@ void Game_Map_Data_Packet::Write
 	(FileSystem & fs, Game & game, Map_Map_Object_Saver * const)
 {
 
-	std::auto_ptr<FileSystem> mapfs
-		(&fs.CreateSubFileSystem("map", FileSystem::DIR));
+	std::unique_ptr<FileSystem> mapfs
+		(fs.CreateSubFileSystem("map", FileSystem::DIR));
 
 	//  Now Write the map as it would be a normal map saving.
 	delete m_wms;

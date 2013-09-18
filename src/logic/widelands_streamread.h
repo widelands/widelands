@@ -20,12 +20,11 @@
 #ifndef WIDELANDS_STREAMREAD_H
 #define WIDELANDS_STREAMREAD_H
 
-#include "io/streamread.h"
-
-#include "widelands.h"
-#include "widelands_geometry.h"
-
 #include <cassert>
+
+#include "io/streamread.h"
+#include "logic/widelands.h"
+#include "logic/widelands_geometry.h"
 
 namespace Widelands {
 
@@ -119,7 +118,7 @@ struct StreamRead : public ::StreamRead {
 	};
 	struct tribe_immovable_nonexistent : public _data_error {
 		tribe_immovable_nonexistent
-			(std::string const & Tribename, const std::string & Name)
+			(const std::string & Tribename, const std::string & Name)
 			:
 			_data_error
 				("tribe %s does not define immovable type \"%s\"",
@@ -143,14 +142,14 @@ struct StreamRead : public ::StreamRead {
 	};
 	struct building_nonexistent : public _data_error {
 		building_nonexistent
-			(std::string const & Tribename, char const * const Name)
+			(const std::string & Tribename, char const * const Name)
 			:
 			_data_error
 				("tribe %s does not define building type \"%s\"",
 				 Tribename.c_str(), Name),
 			tribename(Tribename), name(Name)
 		{}
-		std::string const & tribename;
+		const std::string & tribename;
 		char        const * const name;
 	};
 
@@ -207,7 +206,7 @@ struct StreamRead : public ::StreamRead {
 	/// \returns a pointer to the tribe description.
 	///
 	/// \throws Tribe_Nonexistent if the there is no tribe with that name.
-	Tribe_Descr     const & Tribe           (Editor_Game_Base const &);
+	const Tribe_Descr     & Tribe           (const Editor_Game_Base &);
 
 	/// Reads a CString and interprets it as the name of a tribe.
 	///
@@ -216,7 +215,7 @@ struct StreamRead : public ::StreamRead {
 	///
 	/// \throws Tribe_Nonexistent if the name is not empty and there is no tribe
 	/// with that name.
-	Tribe_Descr     const * Tribe_allow_null(Editor_Game_Base const &);
+	Tribe_Descr     const * Tribe_allow_null(const Editor_Game_Base &);
 
 	/// Reads a CString and interprets t as the name of an immovable type.
 	///
@@ -224,7 +223,7 @@ struct StreamRead : public ::StreamRead {
 	///
 	/// \throws Immovable_Nonexistent if there is no imovable type with that
 	/// name in the World.
-	Immovable_Descr const & Immovable_Type  (World            const &);
+	const Immovable_Descr & Immovable_Type  (const World            &);
 
 	/// Reads a CString and interprets t as the name of an immovable type.
 	///
@@ -232,7 +231,7 @@ struct StreamRead : public ::StreamRead {
 	///
 	/// \throws Immovable_Nonexistent if there is no imovable type with that
 	/// name in the tribe.
-	Immovable_Descr const & Immovable_Type  (Tribe_Descr      const &);
+	const Immovable_Descr & Immovable_Type  (const Tribe_Descr      &);
 
 	/// Reads a CString and interprets t as the name of an immovable type.
 	///
@@ -240,19 +239,19 @@ struct StreamRead : public ::StreamRead {
 	///
 	/// \throws Building_Nonexistent if there is no building type with that
 	/// name in the tribe.
-	Building_Descr  const & Building_Type   (Tribe_Descr      const &);
+	const Building_Descr  & Building_Type   (const Tribe_Descr      &);
 
-	/// Calls Tribe(Editor_Game_Base const &) to read a tribe and then reads a
+	/// Calls Tribe(const Editor_Game_Base &) to read a tribe and then reads a
 	/// CString and interprets it as the name of a building type in that tribe.
 	///
 	/// \returns a reference to the building type description.
-	Building_Descr  const & Building_Type   (Editor_Game_Base const &);
+	const Building_Descr  & Building_Type   (const Editor_Game_Base &);
 
-	/// Calls Tribe_allow_null(Editor_Game_Base const &). If it returns a tribe,
-	/// Immovable_Type(Tribe_Descr const &) is called with that tribe and the
-	/// result is returned. Otherwise Immovable_Type(World const &) is called
+	/// Calls Tribe_allow_null(const Editor_Game_Base &). If it returns a tribe,
+	/// Immovable_Type(const Tribe_Descr &) is called with that tribe and the
+	/// result is returned. Otherwise Immovable_Type(const World &) is called
 	/// and the result is returned.
-	Immovable_Descr const & Immovable_Type  (Editor_Game_Base const &);
+	const Immovable_Descr & Immovable_Type  (const Editor_Game_Base &);
 };
 
 inline Direction StreamRead::Direction8() {

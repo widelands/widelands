@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002, 2006-2011 by the Widelands Development Team
+ * Copyright (C) 2002, 2006-2013 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -16,14 +16,16 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+#include "ui_fsmenu/mapselect.h"
+
 #include <cstdio>
 
-#include "i18n.h"
-#include "wexception.h"
+#include <boost/format.hpp>
 
 #include "gamecontroller.h"
 #include "gamesettings.h"
 #include "graphic/graphic.h"
+#include "i18n.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "log.h"
 #include "logic/editor_game_base.h"
@@ -32,9 +34,7 @@
 #include "s2map.h"
 #include "ui_basic/box.h"
 #include "ui_basic/checkbox.h"
-
-
-#include "mapselect.h"
+#include "wexception.h"
 
 
 using Widelands::WL_Map_Loader;
@@ -51,7 +51,7 @@ Fullscreen_Menu_MapSelect::Fullscreen_Menu_MapSelect
 	m_title
 		(this,
 		 get_w() / 2, get_h() * 7 / 50,
-		 _("Choose your map!"),
+		 _("Choose a map"),
 		 UI::Align_HCenter),
 	m_label_load_map_as_scenario
 		(this,
@@ -101,12 +101,12 @@ Fullscreen_Menu_MapSelect::Fullscreen_Menu_MapSelect
 	m_back
 		(this, "back",
 		 get_w() * 71 / 100, get_h() * 17 / 20, m_butw, m_buth,
-		 g_gr->get_picture(PicMod_UI, "pics/but0.png"),
+		 g_gr->images().get("pics/but0.png"),
 		 _("Back"), std::string(), true, false),
 	m_ok
 		(this, "ok",
 		 get_w() * 71 / 100, get_h() * 9 / 10, m_butw, m_buth,
-		 g_gr->get_picture(PicMod_UI, "pics/but2.png"),
+		 g_gr->images().get("pics/but2.png"),
 		 _("OK"), std::string(), false, false),
 
 // Checkbox
@@ -169,14 +169,15 @@ Fullscreen_Menu_MapSelect::Fullscreen_Menu_MapSelect
 	vbox->set_size(get_w(), 25);
 	vbox = new UI::Box(this, m_table.get_x(), m_table.get_y() - 90, UI::Box::Horizontal, m_table.get_w());
 	_add_tag_checkbox(vbox, "official", _("Official Map"));
+	_add_tag_checkbox(vbox, "seafaring", _("Seafaring Map"));
 	vbox->set_size(get_w(), 25);
 	vbox = new UI::Box(this, m_table.get_x(), m_table.get_y() - 60, UI::Box::Horizontal, m_table.get_w());
 	_add_tag_checkbox(vbox, "1v1", _("1v1"));
-	_add_tag_checkbox(vbox, "2teams", _("2 Player Teams"));
-	_add_tag_checkbox(vbox, "3teams", _("3 Player Teams"));
+	_add_tag_checkbox(vbox, "2teams", _("Teams of 2"));
+	_add_tag_checkbox(vbox, "3teams", _("Teams of 3"));
 	vbox->set_size(get_w(), 25);
 	vbox = new UI::Box(this, m_table.get_x(), m_table.get_y() - 30, UI::Box::Horizontal, m_table.get_w());
-	_add_tag_checkbox(vbox, "4teams", _("4 Player Teams"));
+	_add_tag_checkbox(vbox, "4teams", _("Teams of 4"));
 	_add_tag_checkbox(vbox, "ffa", _("Free for all"));
 	_add_tag_checkbox(vbox, "unbalanced", _("Unbalanced"));
 	vbox->set_size(get_w(), 25);
@@ -190,6 +191,7 @@ Fullscreen_Menu_MapSelect::Fullscreen_Menu_MapSelect
 		m_label_load_map_as_scenario.set_visible(false);
 	}
 
+	m_table.focus();
 	fill_list();
 }
 
@@ -199,11 +201,12 @@ void Fullscreen_Menu_MapSelect::think()
 		m_ctrl->think();
 }
 
+
 bool Fullscreen_Menu_MapSelect::compare_maprows
 	(uint32_t rowa, uint32_t rowb)
 {
-	MapData const & r1 = m_maps_data[m_table[rowa]];
-	MapData const & r2 = m_maps_data[m_table[rowb]];
+	const MapData & r1 = m_maps_data[m_table[rowa]];
+	const MapData & r2 = m_maps_data[m_table[rowb]];
 
 	if (!r1.width and !r2.width) {
 		return r1.name < r2.name;
@@ -230,7 +233,7 @@ MapData const * Fullscreen_Menu_MapSelect::get_map() const
 
 void Fullscreen_Menu_MapSelect::ok()
 {
-	MapData const & mapdata = m_maps_data[m_table.get_selected()];
+	const MapData & mapdata = m_maps_data[m_table.get_selected()];
 
 	if (!mapdata.width) {
 		m_curdir = mapdata.filename;
@@ -247,7 +250,7 @@ void Fullscreen_Menu_MapSelect::ok()
  */
 void Fullscreen_Menu_MapSelect::map_selected(uint32_t)
 {
-	MapData const & map = m_maps_data[m_table.get_selected()];
+	const MapData & map = m_maps_data[m_table.get_selected()];
 
 	if (map.width) {
 		char buf[256];
@@ -261,13 +264,15 @@ void Fullscreen_Menu_MapSelect::map_selected(uint32_t)
 			world = global.get_safe_string("name");
 		}
 
-		m_name      .set_text(map.name);
+		// Translate the map data
+		i18n::Textdomain td("maps");
+		m_name      .set_text(_(map.name));
 		m_author    .set_text(map.author);
 		sprintf(buf, "%-4ux%4u", map.width, map.height);
 		m_size      .set_text(buf);
 		sprintf(buf, "%i", map.nrplayers);
 		m_nr_players.set_text(buf);
-		m_descr     .set_text(map.description);
+		m_descr     .set_text(_(map.description) + (map.hint.empty() ? "" : (std::string("\n") + _(map.hint))));
 		m_world     .set_text(world);
 		m_load_map_as_scenario.set_enabled(map.scenario);
 	} else {
@@ -328,7 +333,7 @@ void Fullscreen_Menu_MapSelect::fill_list()
 		//about the absolute filesystem top!) we manually add ".."
 		if (m_curdir != m_basedir) {
 			MapData map;
-	#ifndef WIN32
+	#ifndef _WIN32
 			map.filename = m_curdir.substr(0, m_curdir.rfind('/'));
 	#else
 			map.filename = m_curdir.substr(0, m_curdir.rfind('\\'));
@@ -338,9 +343,11 @@ void Fullscreen_Menu_MapSelect::fill_list()
 				m_table.add(m_maps_data.size() - 1);
 
 			te.set_string(0, "");
+			std::string parent_string =
+				(boost::format("\\<%s\\>") % _("parent")).str();
 			te.set_picture
-				(1,  g_gr->get_picture(PicMod_Game, "pics/ls_dir.png"),
-				_("<parent>"));
+				(1,  g_gr->images().get("pics/ls_dir.png"),
+				parent_string);
 
 			++ndirs;
 		}
@@ -370,7 +377,7 @@ void Fullscreen_Menu_MapSelect::fill_list()
 
 			te.set_string(0, "");
 			te.set_picture
-				(1,  g_gr->get_picture(PicMod_Game, "pics/ls_dir.png"),
+				(1,  g_gr->images().get("pics/ls_dir.png"),
 				FileSystem::FS_Filename(name));
 
 			++ndirs;
@@ -379,7 +386,6 @@ void Fullscreen_Menu_MapSelect::fill_list()
 		//Add map files(compressed maps) and directories(uncompressed)
 		{
 			Widelands::Map map; //  Map_Loader needs a place to put it's preload data
-			i18n::Textdomain td("maps");
 
 			for
 				(filenameset_t::iterator pname = files.begin();
@@ -397,16 +403,17 @@ void Fullscreen_Menu_MapSelect::fill_list()
 					ml->preload_map(true);
 
 					MapData mapdata;
-					mapdata.filename = name;
-					mapdata.name = map.get_name();
-					mapdata.author = map.get_author();
+					mapdata.filename    = name;
+					mapdata.name        = map.get_name();
+					mapdata.author      = map.get_author();
 					mapdata.description = map.get_description();
-					mapdata.world = map.get_world_name();
-					mapdata.nrplayers = map.get_nrplayers();
-					mapdata.width = map.get_width();
-					mapdata.height = map.get_height();
-					mapdata.scenario = map.scenario_types() & m_scenario_types;
-					mapdata.tags = map.get_tags();
+					mapdata.hint        = map.get_hint();
+					mapdata.world       = map.get_world_name();
+					mapdata.nrplayers   = map.get_nrplayers();
+					mapdata.width       = map.get_width();
+					mapdata.height      = map.get_height();
+					mapdata.scenario    = map.scenario_types() & m_scenario_types;
+					mapdata.tags        = map.get_tags();
 
 					if (!mapdata.width || !mapdata.height)
 						continue;
@@ -424,14 +431,13 @@ void Fullscreen_Menu_MapSelect::fill_list()
 					char buf[256];
 					sprintf(buf, "(%i)", mapdata.nrplayers);
 					te.set_string(0, buf);
+					i18n::Textdomain td("maps");
 					te.set_picture
-						(1,  g_gr->get_picture
-						(PicMod_Game,
-						dynamic_cast<WL_Map_Loader const *>(ml) ?
-						(mapdata.scenario ? "pics/ls_wlscenario.png" : "pics/ls_wlmap.png")
-						:
+						(1,  g_gr->images().get
+						 (dynamic_cast<WL_Map_Loader const *>(ml) ?
+							  (mapdata.scenario ? "pics/ls_wlscenario.png" : "pics/ls_wlmap.png") :
 						"pics/ls_s2map.png"),
-						mapdata.name.c_str());
+						_(mapdata.name));
 				} catch (const std::exception & e) {
 					log
 						("Mapselect: Skip %s due to preload error: %s\n",
@@ -460,16 +466,16 @@ void Fullscreen_Menu_MapSelect::fill_list()
 				map.set_filename(name);
 				ml->preload_map(true);
 
-				MapData mapdata;
-				mapdata.filename = name;
-				mapdata.name = map.get_name();
-				mapdata.author = map.get_author();
+				mapdata.filename    = name;
+				mapdata.name        = map.get_name();
+				mapdata.author      = map.get_author();
 				mapdata.description = map.get_description();
-				mapdata.world = map.get_world_name();
-				mapdata.nrplayers = map.get_nrplayers();
-				mapdata.width = map.get_width();
-				mapdata.height = map.get_height();
-				mapdata.scenario = map.scenario_types() & m_scenario_types;
+				mapdata.hint        = map.get_hint();
+				mapdata.world       = map.get_world_name();
+				mapdata.nrplayers   = map.get_nrplayers();
+				mapdata.width       = map.get_width();
+				mapdata.height      = map.get_height();
+				mapdata.scenario    = map.scenario_types() & m_scenario_types;
 
 				if (mapdata.nrplayers != dmap.players || mapdata.scenario != dmap.scenario)
 					throw wexception("Not useable!");
@@ -485,24 +491,24 @@ void Fullscreen_Menu_MapSelect::fill_list()
 				sprintf(buf, "(%i)", mapdata.nrplayers);
 				te.set_string(0, buf);
 				te.set_picture
-					(1, g_gr->get_picture
-						(PicMod_Game, (mapdata.scenario ? "pics/ls_wlscenario.png" : "pics/ls_wlmap.png")),
+					(1, g_gr->images().get((mapdata.scenario ? "pics/ls_wlscenario.png" : "pics/ls_wlmap.png")),
 					 mapdata.name.c_str());
 
 			} catch (...) {
 				log("Mapselect: Skipped reading locale data for file %s - not valid.\n", name);
 
 				// Fill in the data we got from the dedicated server
-				mapdata.filename = name;
-				mapdata.name = dmap.path.substr(5, dmap.path.size() - 1);
-				mapdata.author = _("unknown");
+				mapdata.filename    = name;
+				mapdata.name        = dmap.path.substr(5, dmap.path.size() - 1);
+				mapdata.author      = _("unknown");
 				mapdata.description =
 					_("This map file is not present on your filesystem. Data shown here was sent by the server.");
-				mapdata.world = _("unknown");
-				mapdata.nrplayers = dmap.players;
-				mapdata.width = 1;
-				mapdata.height = 0;
-				mapdata.scenario = dmap.scenario;
+				mapdata.hint        = "";
+				mapdata.world       = _("unknown");
+				mapdata.nrplayers   = dmap.players;
+				mapdata.width       = 1;
+				mapdata.height      = 0;
+				mapdata.scenario    = dmap.scenario;
 
 				// Finally write the entry to the list
 				m_maps_data.push_back(mapdata);
@@ -512,9 +518,8 @@ void Fullscreen_Menu_MapSelect::fill_list()
 				sprintf(buf, "(%i)", mapdata.nrplayers);
 				te.set_string(0, buf);
 				te.set_picture
-					(1, g_gr->get_picture
-						(PicMod_Game, (mapdata.scenario ? "pics/ls_wlscenario.png" : "pics/ls_wlmap.png")),
-					 mapdata.name.c_str());
+					(1, g_gr->images().get
+					 ((mapdata.scenario ? "pics/ls_wlscenario.png" : "pics/ls_wlmap.png")), mapdata.name.c_str());
 			}
 
 			delete ml;
@@ -541,7 +546,7 @@ UI::Checkbox * Fullscreen_Menu_MapSelect::_add_tag_checkbox
 		(boost::bind(&Fullscreen_Menu_MapSelect::_tagbox_changed, this, id, _1));
 
 	box->add(cb, UI::Box::AlignLeft, true);
-	UI::Textarea * ta = new UI::Textarea(box, displ_name, UI::Align_CenterLeft, 100);
+	UI::Textarea * ta = new UI::Textarea(box, displ_name, UI::Align_CenterLeft);
 	box->add(ta, UI::Box::AlignLeft);
 	box->add_space(25);
 

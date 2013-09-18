@@ -22,10 +22,8 @@
 
 #include <vector>
 
-// Needed for OPtr
+#include "economy/iroute.h"
 #include "logic/instances.h"
-
-#include "iroute.h"
 
 
 namespace Widelands {
@@ -34,7 +32,7 @@ struct Flag;
 struct Editor_Game_Base;
 struct Map_Map_Object_Saver;
 struct Map_Map_Object_Loader;
-class RoutingNode;
+struct RoutingNode;
 
 /**
  * Route stores a route from flag to flag.
@@ -60,7 +58,7 @@ struct Route : public IRoute {
 	};
 
 	void load(LoadData &, FileRead &);
-	void load_pointers(LoadData const &, Map_Map_Object_Loader &);
+	void load_pointers(const LoadData &, Map_Map_Object_Loader &);
 	void save(FileWrite &, Editor_Game_Base &, Map_Map_Object_Saver &);
 
 	void insert_as_first(RoutingNode * node);

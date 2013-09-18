@@ -20,18 +20,15 @@
 #ifndef STREAMWRITE_H
 #define STREAMWRITE_H
 
-#include "machdep.h"
+#include <cassert>
+#include <cstring>
+#include <limits>
+#include <string>
 
 #include <boost/noncopyable.hpp>
 
-#include <cassert>
-#include <limits>
-#include <string>
-#include <cstring>
-
-#ifdef _MSC_VER
-#define __attribute__(x)
-#endif
+#include "machdep.h"
+#include "port.h"
 
 /**
  * Abstract base class for stream-like data sinks.
@@ -81,17 +78,17 @@ struct StreamWrite : boost::noncopyable {
 		uint32_t const y = Little32(x);
 		Data(&y, 4);
 	}
-	void String(std::string const & str) {
+	void String(const std::string & str) {
 		Data(str.c_str(), str.size() + 1);
 	}
 
 	//  Write strings with    null terminator.
 	void CString(char        const * const x) {Data(x,         strlen(x) + 1);}
-	void CString(std::string const &       x) {Data(x.c_str(), x.size()  + 1);}
+	void CString(const std::string &       x) {Data(x.c_str(), x.size()  + 1);}
 
 	//  Write strings without null terminator.
 	void Text   (char        const * const x) {Data(x,         strlen(x));}
-	void Text   (std::string const &       x) {Data(x.c_str(), x.size());}
+	void Text   (const std::string &       x) {Data(x.c_str(), x.size());}
 };
 
 #endif

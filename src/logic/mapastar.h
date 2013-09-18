@@ -21,8 +21,8 @@
 #define LOGIC_MAPASTAR_H
 
 #include "log.h"
-#include "map.h"
-#include "pathfield.h"
+#include "logic/map.h"
+#include "logic/pathfield.h"
 
 namespace Widelands {
 
@@ -70,7 +70,7 @@ struct StepEvalAStar {
 		return est;
 	}
 
-	int32_t stepcost(Map & map, FCoords from, int32_t fromcost, WalkingDir dir, FCoords to) const
+	int32_t stepcost(Map & map, FCoords from, int32_t /* fromcost */, WalkingDir dir, FCoords to) const
 	{
 		if
 			((m_swim && !(to.field->nodecaps() & MOVECAPS_SWIM)) ||

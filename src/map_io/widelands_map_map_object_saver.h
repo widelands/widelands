@@ -20,14 +20,12 @@
 #ifndef WIDELANDS_MAP_MAP_OBJECT_SAVER_H
 #define WIDELANDS_MAP_MAP_OBJECT_SAVER_H
 
-#include "logic/widelands.h"
-#include "widelands_map_message_saver.h"
-
 #include <map>
-
-#ifndef NDEBUG
 #include <string>
-#endif
+
+#include "constants.h"
+#include "logic/widelands.h"
+#include "map_io/widelands_map_message_saver.h"
 
 namespace Widelands {
 
@@ -41,13 +39,13 @@ class Map_Object;
 struct Map_Map_Object_Saver {
 	Map_Map_Object_Saver();
 
-	bool is_object_known(Map_Object const &) const;
-	Serial register_object(Map_Object const &);
+	bool is_object_known(const Map_Object &) const;
+	Serial register_object(const Map_Object &);
 
-	uint32_t get_object_file_index(Map_Object const &);
+	uint32_t get_object_file_index(const Map_Object &);
 	uint32_t get_object_file_index_or_zero(Map_Object const *);
 
-	void mark_object_as_saved(Map_Object const &);
+	void mark_object_as_saved(const Map_Object &);
 
 	// Information functions
 #ifndef NDEBUG
@@ -61,7 +59,7 @@ struct Map_Map_Object_Saver {
 	uint32_t get_nr_immovables     () const throw () {return m_nr_immovables;}
 	uint32_t get_nr_battles        () const throw () {return m_nr_battles;}
 
-	bool is_object_saved(Map_Object const &) throw ();
+	bool is_object_saved(const Map_Object &) throw ();
 
 	/// \note Indexed by player number - 1.
 	Map_Message_Saver message_savers[MAX_PLAYERS];
@@ -77,7 +75,7 @@ private:
 	};
 	typedef std::map<const Map_Object *, MapObjectRec> Map_Object_Map;
 
-	MapObjectRec & get_object_record(Map_Object const &);
+	MapObjectRec & get_object_record(const Map_Object &);
 
 	Map_Object_Map m_objects;
 	uint32_t m_nr_roads;

@@ -9,6 +9,10 @@ trunk=1
 wood=2
 stone=2
 
+[return_on_dismantle]
+wood=1
+stone=1
+
 [working positions]
 brewer=1
 
@@ -20,8 +24,8 @@ wheat=7
 work=_Work
 
 [work]
-return=skipped when economy needs water and not economy needs beer
-return=skipped when economy needs wheat and not economy needs beer
+return=skipped unless economy needs beer or not economy needs water
+return=skipped unless economy needs beer or not economy needs wheat
 consume=water wheat
 sleep=30000
 animate=working 30000

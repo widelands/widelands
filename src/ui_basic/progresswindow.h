@@ -20,11 +20,15 @@
 #ifndef UI_PROGRESSWINDOW_H
 #define UI_PROGRESSWINDOW_H
 
-#include "graphic/graphic.h"
-
-#include <string>
 #include <cstring>
+#include <string>
 #include <vector>
+
+#include "point.h"
+#include "rect.h"
+
+class Image;
+class RenderTarget;
 
 namespace UI {
 
@@ -64,7 +68,7 @@ private:
 	Rect  m_label_rectangle;
 	VisualizationArray m_visualizations;
 	std::string m_background;
-	PictureID m_background_pic;
+	const Image* m_background_pic;
 
 	void draw_background(RenderTarget & rt, uint32_t xres, uint32_t yres);
 	void update(bool repaint);

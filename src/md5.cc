@@ -23,14 +23,18 @@
 
 #include "md5.h"
 
-#include <cassert>
+#include <cstdio>
+
+#include "compile_diagnostics.h"
+
+using namespace std;
 
 /**
  * Create a hex string out of the MD5 checksum.
  */
-std::string md5_checksum::str() const
+string md5_checksum::str() const
 {
-	std::string s;
+	string s;
 
 	for (uint32_t i = 0; i < sizeof(data); ++i) {
 		char buf[3];
@@ -71,10 +75,12 @@ void * md5_finish_ctx (md5_ctx * const ctx, void * const resbuf)
 	memcpy (&ctx->buffer[bytes], fillbuf, pad);
 
 	//  Put the 64-bit file length in *bits* at the end of the buffer.
+GCC_DIAG_OFF("-Wstrict-aliasing");
 	*reinterpret_cast<uint32_t *>(&ctx->buffer[bytes + pad])     =
 		(ctx->total[0] << 3);
 	*reinterpret_cast<uint32_t *>(&ctx->buffer[bytes + pad + 4]) =
 		((ctx->total[1] << 3) | (ctx->total[0] >> 29));
+GCC_DIAG_ON("-Wstrict-aliasing");
 
 	/* Process last bytes.  */
 	md5_process_block (ctx->buffer, bytes + pad + 8, ctx);

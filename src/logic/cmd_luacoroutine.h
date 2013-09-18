@@ -22,15 +22,19 @@
 
 #include <string>
 
-#include "cmd_queue.h"
+#include "logic/cmd_queue.h"
 #include "scripting/scripting.h"
 
 namespace Widelands {
 
 struct Cmd_LuaCoroutine : public GameLogicCommand {
-	Cmd_LuaCoroutine() : GameLogicCommand(0) {} // For savegame loading
+	Cmd_LuaCoroutine() : GameLogicCommand(0), m_cr(0) {} // For savegame loading
 	Cmd_LuaCoroutine(int32_t const _duetime, LuaCoroutine * const cr) :
 		GameLogicCommand(_duetime), m_cr(cr) {}
+
+	~Cmd_LuaCoroutine() {
+		delete m_cr;
+	}
 
 	// Write these commands to a file (for savegames)
 	void Write(FileWrite &, Editor_Game_Base &, Map_Map_Object_Saver  &);

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2004, 2006-2011 by the Widelands Development Team
+ * Copyright (C) 2002-2004, 2006-2012 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -17,12 +17,17 @@
  *
  */
 
-#include "game.h"
+#include "logic/game.h"
 
-#include "carrier.h"
-#include "cmd_calculate_statistics.h"
-#include "cmd_luacoroutine.h"
-#include "cmd_luascript.h"
+#include <cstring>
+#include <string>
+
+#ifndef _WIN32
+#include <unistd.h> // for usleep
+#else
+#include <windows.h>
+#endif
+
 #include "computer_player.h"
 #include "economy/economy.h"
 #include "game_io/game_loader.h"
@@ -33,35 +38,32 @@
 #include "i18n.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "log.h"
+#include "logic/carrier.h"
+#include "logic/cmd_calculate_statistics.h"
+#include "logic/cmd_luacoroutine.h"
+#include "logic/cmd_luascript.h"
+#include "logic/militarysite.h"
+#include "logic/player.h"
+#include "logic/playercommand.h"
+#include "logic/replay.h"
+#include "logic/ship.h"
+#include "logic/soldier.h"
+#include "logic/trainingsite.h"
+#include "logic/tribe.h"
+#include "logic/widelands_fileread.h"
+#include "logic/widelands_filewrite.h"
 #include "map_io/widelands_map_loader.h"
 #include "network/network.h"
-#include "player.h"
-#include "playercommand.h"
 #include "profile/profile.h"
-#include "replay.h"
 #include "scripting/scripting.h"
-#include "soldier.h"
 #include "sound/sound_handler.h"
 #include "timestring.h"
-#include "trainingsite.h"
-#include "tribe.h"
 #include "ui_basic/progresswindow.h"
 #include "upcast.h"
 #include "warning.h"
-#include "widelands_fileread.h"
-#include "widelands_filewrite.h"
 #include "wlapplication.h"
 #include "wui/game_tips.h"
 #include "wui/interactive_player.h"
-
-#include <cstring>
-#include <string>
-
-#ifndef WIN32
-#include <unistd.h> // for usleep
-#else
-#include <windows.h>
-#endif
 
 namespace Widelands {
 
@@ -78,7 +80,7 @@ Game::SyncWrapper::~SyncWrapper() {
 	}
 }
 
-void Game::SyncWrapper::StartDump(std::string const & fname) {
+void Game::SyncWrapper::StartDump(const std::string & fname) {
 	m_dumpfname = fname + ".wss";
 	m_dump = g_fs->OpenStreamWrite(m_dumpfname);
 }
@@ -110,7 +112,7 @@ void Game::SyncWrapper::Data(void const * const data, size_t const size) {
 	if (m_dump) {
 		try {
 			m_dump->Data(data, size);
-		} catch (_wexception const & e) {
+		} catch (const _wexception &) {
 			log
 				("Writing to syncstream file %s failed. Stop synctream dump.\n",
 				 m_dumpfname.c_str());
@@ -134,8 +136,10 @@ Game::Game() :
 	m_state               (gs_notrunning),
 	m_cmdqueue            (*this),
 	m_replaywriter        (0),
-	m_win_condition_string("not_set")
+	m_win_condition_displayname(_("Not set"))
 {
+	// Preload win_conditions as they are displayed in UI
+	lua().register_scripts(*g_fs, "win_conditions", "scripting/win_conditions");
 }
 
 Game::~Game()
@@ -164,13 +168,12 @@ bool Game::get_allow_cheats()
 /**
  * \return a pointer to the \ref Interactive_Player if any.
  * \note This function may return 0 (in particular, it will return 0 during
- * playback)
+ * playback or if player is spectator)
  */
 Interactive_Player * Game::get_ipl()
 {
 	return dynamic_cast<Interactive_Player *>(get_ibase());
 }
-
 
 void Game::set_game_controller(GameController * const ctrl)
 {
@@ -216,24 +219,13 @@ bool Game::run_splayer_scenario_direct(char const * const mapname) {
 
 	set_map(new Map);
 
-	std::auto_ptr<Map_Loader> maploader(map().get_correct_loader(mapname));
+	std::unique_ptr<Map_Loader> maploader(map().get_correct_loader(mapname));
 	if (not maploader.get())
 		throw wexception("could not load \"%s\"", mapname);
 	UI::ProgressWindow loaderUI;
 
-	// Determine text domain
-	std::string td(mapname);
-	uint32_t i;
-	for (i = td.size(); i and td[i] != '/' and td[i] != '\\'; --i) {}
-	td = "scenario_" + td.substr(i + 1);
-
 	loaderUI.step (_("Preloading a map"));
-	{
-
-		i18n::Textdomain textdomain(td); // load scenario textdomain
-		log("Loading the locals for scenario. file: %s.mo\n", mapname);
-		maploader->preload_map(true);
-	}
+	maploader->preload_map(true);
 	std::string const background = map().get_background();
 	if (background.size() > 0)
 		loaderUI.set_background(background);
@@ -253,18 +245,14 @@ bool Game::run_splayer_scenario_direct(char const * const mapname) {
 			 map().get_scenario_player_name (p));
 		get_player(p)->setAI(map().get_scenario_player_ai(p));
 	}
+	m_win_condition_displayname = _("Scenario");
 
 	set_ibase
 		(new Interactive_Player
 		 	(*this, g_options.pull_section("global"), 1, true, false));
 
 	loaderUI.step (_("Loading a map"));
-
-	// Reload campaign textdomain
-	{
-		i18n::Textdomain textdomain(td);
-		maploader->load_map_complete(*this, true);
-	}
+	maploader->load_map_complete(*this, true);
 	maploader.reset();
 
 	set_game_controller(GameController::createSinglePlayer(*this, true, 1));
@@ -278,26 +266,27 @@ bool Game::run_splayer_scenario_direct(char const * const mapname) {
 		m_ctrl = 0;
 		throw;
 	}
+
+	return false;
 }
 
 
 /**
  * Initialize the game based on the given settings.
  *
- * \note loaderUI can be NULL, if this is run as dedicated server.
+ * \note loaderUI can be nullptr, if this is run as dedicated server.
  */
 void Game::init_newgame
-	(UI::ProgressWindow * loaderUI, GameSettings const & settings)
+	(UI::ProgressWindow * loaderUI, const GameSettings & settings)
 {
 	if (loaderUI) {
-		g_gr->flush(PicMod_Menu);
 		loaderUI->step(_("Preloading map"));
 	}
 
 	assert(!get_map());
 	set_map(new Map);
 
-	std::auto_ptr<Map_Loader> maploader
+	std::unique_ptr<Map_Loader> maploader
 		(map().get_correct_loader(settings.mapfilename.c_str()));
 	maploader->preload_map(settings.scenario);
 	std::string const background = map().get_background();
@@ -311,7 +300,7 @@ void Game::init_newgame
 	std::vector<PlayerSettings> shared;
 	std::vector<uint8_t>        shared_num;
 	for (uint32_t i = 0; i < settings.players.size(); ++i) {
-		PlayerSettings const & playersettings = settings.players[i];
+		const PlayerSettings & playersettings = settings.players[i];
 
 		if
 			(playersettings.state == PlayerSettings::stateClosed ||
@@ -331,6 +320,7 @@ void Game::init_newgame
 			 playersettings.team);
 		get_player(i + 1)->setAI(playersettings.ai);
 	}
+
 	// Add shared in starting positions
 	for (uint8_t n = 0; n < shared.size(); ++n) {
 		// This player's starting position is used in another (shared) kingdom
@@ -344,11 +334,14 @@ void Game::init_newgame
 
 	// Check for win_conditions
 	if (!settings.scenario) {
-		m_win_condition_string = settings.win_condition;
-		LuaCoroutine * cr = lua().run_script
-			(*g_fs, "scripting/win_conditions/" + settings.win_condition + ".lua", "win_conditions")
-			->get_coroutine("func");
+		std::unique_ptr<LuaTable> table
+			(lua().run_script
+			 (*g_fs, "scripting/win_conditions/" + settings.win_condition + ".lua", "win_conditions"));
+		m_win_condition_displayname = table->get_string("name");
+		LuaCoroutine * cr = table->get_coroutine("func");
 		enqueue_command(new Cmd_LuaCoroutine(get_gametime() + 100, cr));
+	} else {
+		m_win_condition_displayname = _("Scenario");
 	}
 }
 
@@ -360,13 +353,12 @@ void Game::init_newgame
  * Only difference is, that players are already initialized.
  * run(loaderUI, true) takes care about this difference.
  *
- * \note loaderUI can be NULL, if this is run as dedicated server.
+ * \note loaderUI can be nullptr, if this is run as dedicated server.
  */
 void Game::init_savegame
-	(UI::ProgressWindow * loaderUI, GameSettings const & settings)
+	(UI::ProgressWindow * loaderUI, const GameSettings & settings)
 {
 	if (loaderUI) {
-		g_gr->flush(PicMod_Menu);
 		loaderUI->step(_("Preloading map"));
 	}
 
@@ -374,11 +366,9 @@ void Game::init_savegame
 	set_map(new Map);
 	try {
 		Game_Loader gl(settings.mapfilename, *this);
-
-
 		Widelands::Game_Preload_Data_Packet gpdp;
 		gl.preload_game(gpdp);
-		m_win_condition_string = gpdp.get_win_condition();
+		m_win_condition_displayname = gpdp.get_win_condition();
 		if (loaderUI) {
 			std::string background(gpdp.get_background());
 			loaderUI->set_background(background);
@@ -417,7 +407,6 @@ bool Game::run_load_game(std::string filename) {
 		std::string background(gpdp.get_background());
 		loaderUI.set_background(background);
 		player_nr = gpdp.get_player_nr();
-
 		set_ibase
 			(new Interactive_Player
 			 	(*this, g_options.pull_section("global"), player_nr, true, false));
@@ -425,6 +414,9 @@ bool Game::run_load_game(std::string filename) {
 		loaderUI.step(_("Loading..."));
 		gl.load_game();
 	}
+
+	// Store the filename for further saves
+	save_handler().set_current_filename(filename);
 
 	set_game_controller(GameController::createSinglePlayer(*this, true, player_nr));
 	try {
@@ -437,6 +429,8 @@ bool Game::run_load_game(std::string filename) {
 		m_ctrl = 0;
 		throw;
 	}
+
+	return false;
 }
 
 /**
@@ -475,11 +469,13 @@ void Game::postload()
  *
  * \return true if a game actually took place, false otherwise
  *
- * \note loader_ui can be NULL, if this is run as dedicated server.
+ * \note loader_ui can be nullptr, if this is run as dedicated server.
  */
 bool Game::run
-	(UI::ProgressWindow * loader_ui, Start_Game_Type const start_game_type)
+	(UI::ProgressWindow * loader_ui, Start_Game_Type const start_game_type,
+	 bool replay)
 {
+	m_replay = replay;
 	postload();
 
 	if (start_game_type != Loaded) {
@@ -492,11 +488,10 @@ bool Game::run
 					loader_ui->step(step_description);
 				}
 				plr->create_default_infrastructure();
-
 			}
-		} else
+		} else {
 			// Is a scenario!
-			iterate_players_existing(p, nr_players, *this, plr)
+			iterate_players_existing_novar(p, nr_players, *this) {
 				if (not map().get_starting_pos(p))
 				throw warning
 					(_("Missing starting position"),
@@ -506,6 +501,8 @@ bool Game::run
 					 	 "You can manually add a starting position with Widelands "
 					 	 "Editor, to fix this problem."),
 					 p);
+			}
+		}
 
 		if (get_ipl())
 			get_ipl()->move_view_to
@@ -568,7 +565,7 @@ bool Game::run
 	if (loader_ui) {
 		load_graphics(*loader_ui);
 
-#ifdef WIN32
+#ifdef _WIN32
 		//  Clear the event queue before starting game because we don't want
 		//  to handle events at game start that happened during loading procedure.
 		SDL_Event event;
@@ -581,13 +578,14 @@ bool Game::run
 
 		get_ibase()->run();
 
+		m_state = gs_ending;
+
 		g_sound_handler.change_music("menu", 1000, 0);
 
 		cleanup_objects();
 		delete get_ibase();
 		set_ibase(0);
 
-		g_gr->flush(PicMod_Game);
 		g_anim.flush();
 		g_gr->flush_animations();
 
@@ -598,7 +596,7 @@ bool Game::run
 		//handle network
 		while (m_state == gs_running) {
 			// TODO this should be improved.
-#ifndef WIN32
+#ifndef _WIN32
 			if (usleep(100) == -1)
 				break;
 #else
@@ -785,6 +783,20 @@ void Game::send_player_start_stop_building (Building & building)
 		 	(get_gametime(), building.owner().player_number(), building));
 }
 
+void Game::send_player_militarysite_set_soldier_preference (Building & building, uint8_t my_preference)
+{
+	send_player_command
+		(*new Cmd_MilitarySiteSetSoldierPreference
+		 (get_gametime(), building.owner().player_number(), building, my_preference));
+}
+
+void Game::send_player_start_or_cancel_expedition (Building & building)
+{
+	send_player_command
+		(*new Cmd_StartOrCancelExpedition
+		 	(get_gametime(), building.owner().player_number(), building));
+}
+
 void Game::send_player_enhance_building
 	(Building & building, Building_Index const id)
 {
@@ -793,6 +805,13 @@ void Game::send_player_enhance_building
 	send_player_command
 		(*new Cmd_EnhanceBuilding
 		 	(get_gametime(), building.owner().player_number(), building, id));
+}
+
+void Game::send_player_evict_worker(Worker & worker)
+{
+	send_player_command
+		(*new Cmd_EvictWorker
+			(get_gametime(), worker.owner().player_number(), worker));
 }
 
 void Game::send_player_set_ware_priority
@@ -852,7 +871,7 @@ void Game::send_player_change_soldier_capacity
 
 /////////////////////// TESTING STUFF
 void Game::send_player_enemyflagaction
-	(Flag  const &       flag,
+	(const Flag  &       flag,
 	 Player_Number const who_attacks,
 	 uint32_t      const num_soldiers,
 	 uint8_t       const retreat)
@@ -869,12 +888,45 @@ void Game::send_player_enemyflagaction
 }
 
 
-void Game::send_player_changemilitaryconfig
-	(Player_Number const pid, uint8_t const retreat)
+void Game::send_player_changemilitaryconfig(Player_Number const pid, uint8_t const retreat)
 {
 	send_player_command
 		(*new Cmd_ChangeMilitaryConfig(get_gametime(), pid, retreat));
 }
+
+void Game::send_player_ship_scout_direction(Ship & ship, uint8_t direction)
+{
+	send_player_command
+		(*new Cmd_ShipScoutDirection
+			(get_gametime(), ship.get_owner()->player_number(), ship.serial(), direction));
+}
+
+void Game::send_player_ship_construct_port(Ship & ship, Coords coords)
+{
+	send_player_command
+		(*new Cmd_ShipConstructPort
+			(get_gametime(), ship.get_owner()->player_number(), ship.serial(), coords));
+}
+
+void Game::send_player_ship_explore_island(Ship & ship, bool cw)
+{
+	send_player_command
+		(*new Cmd_ShipExploreIsland
+			(get_gametime(), ship.get_owner()->player_number(), ship.serial(), cw));
+}
+
+void Game::send_player_sink_ship(Ship & ship) {
+	send_player_command
+		(*new Cmd_ShipSink
+			(get_gametime(), ship.get_owner()->player_number(), ship.serial()));
+}
+
+void Game::send_player_cancel_expedition_ship(Ship & ship) {
+	send_player_command
+		(*new Cmd_ShipCancelExpedition
+			(get_gametime(), ship.get_owner()->player_number(), ship.serial()));
+}
+
 
 /**
  * Sample global statistics for the game.
@@ -913,7 +965,7 @@ void Game::sample_statistics()
 	custom_statistic      .resize(nr_plrs);
 
 	//  We walk the map, to gain all needed information.
-	Map const &  themap = map();
+	const Map &  themap = map();
 	Extent const extent = themap.extent();
 	iterate_Map_FCoords(themap, extent, fc) {
 		if (Player_Number const owner = fc.field->get_owned_by())
@@ -983,7 +1035,7 @@ void Game::sample_statistics()
 
 	// If there is a hook function defined to sample special statistics in this
 	// game, call the corresponding Lua function
-	boost::shared_ptr<LuaTable> hook = lua().get_hook("custom_statistic");
+	std::unique_ptr<LuaTable> hook = lua().get_hook("custom_statistic");
 	if (hook) {
 		iterate_players_existing(p, nr_plrs, *this, plr) {
 			LuaCoroutine * cr = hook->get_coroutine("calculator");
@@ -1093,7 +1145,7 @@ void Game::WriteStatistics(FileWrite & fw)
 
 	const Player_Number nr_players = map().get_nrplayers();
 	iterate_players_existing_novar(p, nr_players, *this)
-		if (m_general_stats.size()) {
+		if (!m_general_stats.empty()) {
 			entries = m_general_stats[p - 1].land_size.size();
 			break;
 		}

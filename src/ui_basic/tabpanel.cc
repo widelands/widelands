@@ -17,14 +17,10 @@
  *
  */
 
-#include "tabpanel.h"
+#include "ui_basic/tabpanel.h"
 
-#include "mouse_constants.h"
-
-#include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
-
-#include "compile_assert.h"
+#include "ui_basic/mouse_constants.h"
 
 namespace UI {
 #define TP_BUTTON_WIDTH     34
@@ -41,9 +37,9 @@ namespace UI {
 Tab::Tab
 	(Tab_Panel         * const parent,
 	 uint32_t            const id,
-	 std::string const &       name,
-	 PictureID           const gpicid,
-	 std::string const &       gtooltip,
+	 const std::string &       name,
+	 const Image* gpic,
+	 const std::string &       gtooltip,
 	 Panel             * const gpanel)
 	:
 	NamedPanel
@@ -51,7 +47,7 @@ Tab::Tab
 		 TP_BUTTON_HEIGHT, gtooltip),
 	m_parent(parent),
 	m_id(id),
-	picid(gpicid),
+	pic(gpic),
 	tooltip(gtooltip),
 	panel(gpanel)
 {
@@ -78,7 +74,7 @@ void Tab::activate() {
 Tab_Panel::Tab_Panel
 	(Panel * const parent,
 	 int32_t const x, int32_t const y,
-	 PictureID const background)
+	 const Image* background)
 	:
 	Panel            (parent, x, y, 0, 0),
 	m_active         (0),
@@ -88,7 +84,7 @@ Tab_Panel::Tab_Panel
 Tab_Panel::Tab_Panel
 	(Panel * const parent,
 	 int32_t const x, int32_t const y, int32_t const w, int32_t const h,
-	 PictureID const background)
+	 const Image* background)
 	:
 	Panel            (parent, x, y, w, h),
 	m_active         (0),
@@ -149,16 +145,16 @@ void Tab_Panel::update_desired_size()
  * Add a new tab
 */
 uint32_t Tab_Panel::add
-	(std::string const & name,
-	 PictureID           const picid,
+	(const std::string & name,
+	 const Image* pic,
 	 Panel             * const panel,
-	 std::string const &       tooltip_text)
+	 const std::string &       tooltip_text)
 {
 	assert(panel);
 	assert(panel->get_parent() == this);
 
 	uint32_t id = m_tabs.size();
-	m_tabs.push_back(new Tab(this, id, name, picid, tooltip_text, panel));
+	m_tabs.push_back(new Tab(this, id, name, pic, tooltip_text, panel));
 
 	panel->set_pos(Point(0, TP_BUTTON_HEIGHT + TP_SEPARATOR_HEIGHT));
 	panel->set_visible(id == m_active);
@@ -183,7 +179,7 @@ void Tab_Panel::activate(uint32_t idx)
 	update_desired_size();
 }
 
-void Tab_Panel::activate(std::string const & name)
+void Tab_Panel::activate(const std::string & name)
 {
 	for (uint32_t t = 0; t < m_tabs.size(); ++t)
 		if (m_tabs[t]->get_name() == name)
@@ -206,19 +202,21 @@ void Tab_Panel::draw(RenderTarget & dst)
 	uint32_t x;
 
 	// draw the background
-	compile_assert(2 < TP_BUTTON_WIDTH);
-	compile_assert(4 < TP_BUTTON_HEIGHT);
-	dst.tile
-		(Rect(Point(0, 0), m_tabs.size() * TP_BUTTON_WIDTH, TP_BUTTON_HEIGHT - 2),
-		 m_pic_background, Point(get_x(), get_y()));
-	assert(TP_BUTTON_HEIGHT - 2 <= get_h());
-	dst.tile
-		(Rect
-		 	(Point(0, TP_BUTTON_HEIGHT - 2),
-		 	 get_w(), get_h() - TP_BUTTON_HEIGHT + 2),
-		 m_pic_background,
-		 Point(get_x(), get_y() + TP_BUTTON_HEIGHT - 2));
+	static_assert(2 < TP_BUTTON_WIDTH, "assert(2 < TP_BUTTON_WIDTH) failed.");
+	static_assert(4 < TP_BUTTON_HEIGHT, "assert(4 < TP_BUTTON_HEIGHT) failed.");
 
+	if (m_pic_background) {
+		dst.tile
+			(Rect(Point(0, 0), m_tabs.size() * TP_BUTTON_WIDTH, TP_BUTTON_HEIGHT - 2),
+			 m_pic_background, Point(get_x(), get_y()));
+		assert(TP_BUTTON_HEIGHT - 2 <= get_h());
+		dst.tile
+			(Rect
+			 (Point(0, TP_BUTTON_HEIGHT - 2),
+			  get_w(), get_h() - TP_BUTTON_HEIGHT + 2),
+			 m_pic_background,
+			 Point(get_x(), get_y() + TP_BUTTON_HEIGHT - 2));
+	}
 
 	// draw the buttons
 	for (idx = 0, x = 0; idx < m_tabs.size(); idx++, x += TP_BUTTON_WIDTH) {
@@ -228,12 +226,12 @@ void Tab_Panel::draw(RenderTarget & dst)
 				 MOUSE_OVER_BRIGHT_FACTOR);
 
 		// Draw the icon
-		uint32_t cpw, cph;
-		g_gr->get_picture_size(m_tabs[idx]->picid, cpw, cph);
-
+		assert(m_tabs[idx]->pic);
+		uint16_t cpw = m_tabs[idx]->pic->width();
+		uint16_t cph = m_tabs[idx]->pic->height();
 		dst.blit
 			(Point(x + (TP_BUTTON_WIDTH - cpw) / 2, (TP_BUTTON_HEIGHT - cph) / 2),
-			 m_tabs[idx]->picid);
+			 m_tabs[idx]->pic);
 
 		// Draw top part of border
 		RGBColor black(0, 0, 0);
@@ -313,13 +311,8 @@ bool Tab_Panel::handle_mousemove
 
 	if (hl != m_highlight) {
 		{
-			const char * t = 0;
-			if (hl >= 0) {
-				const std::string & str = m_tabs[hl]->tooltip;
-				if (str.size())
-					t = str.c_str();
-			}
-			set_tooltip(t);
+			if (hl >= 0)
+				set_tooltip(m_tabs[hl]->tooltip);
 		}
 		if (m_highlight >= 0)
 			update
