@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: Widelands svn4575\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2013-09-15 17:41+0000\n"
-"PO-Revision-Date: 2013-09-15 18:43+0000\n"
-"Last-Translator: Patrick van der Leer <pat.vdleer@gmail.com>\n"
+"PO-Revision-Date: 2013-09-17 10:16+0000\n"
+"Last-Translator: fk <Unknown>\n"
 "Language-Team: Dutch <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-09-16 04:36+0000\n"
-"X-Generator: Launchpad (build 16761)\n"
+"X-Launchpad-Export-Date: 2013-09-18 04:43+0000\n"
+"X-Generator: Launchpad (build 16765)\n"
 "X-Poedit-Country: Netherlands\n"
 "X-Poedit-Language: Dutch\n"
 
@@ -37,6 +37,9 @@ msgid ""
 "helps\n"
 "demonstrate the issue, please include one or more screenshots."
 msgstr ""
+"- Als de fout iets betreft wat niet goed wordt weergegeven of wanneer\n"
+"het helpt om het probleem te tonen, voeg dan a.u.b. één of meerdere\n"
+"schermopnames toe."
 
 #: ../../txts/README.lua:114
 msgid ""
@@ -44,6 +47,10 @@ msgid ""
 "crashes where it can be hard to tell exactly what is triggering it), please\n"
 "include that too. For more information, see the section on Replays below."
 msgstr ""
+"- Als je een bewaard spel of een herhaling hebt die het probleem toont\n"
+"(bijvoorbeeld een crash waarvan het moeilijk is om te bepalen wat het\n"
+"precies heeft veroorzaakt), voeg dat dan a.u.b. ook toe. Voor meer\n"
+"informatie, zie de sectie over Herhalingen hieronder."
 
 #: ../../txts/README.lua:106
 msgid ""
@@ -51,6 +58,8 @@ msgid ""
 "as\n"
 "some bugs can be platform specific."
 msgstr ""
+"- Voeg a.u.b. ook toe op welk besturingssysteem je Widelands draait\n"
+"aangezien sommige fouten platformspecifiek kunnen zijn."
 
 #: ../../txts/README.lua:101
 msgid ""
@@ -71,6 +80,10 @@ msgid ""
 "the revision number if you are running a development version or a nightly "
 "build.)"
 msgstr ""
+"- Welke versie van Widelands je draait (de Build-versie van een officiële "
+"versie of\n"
+"het revisienummer indien je een ontwikkelingsversie of een nightly build "
+"draait.)"
 
 #: ../../txts/README.lua:75
 msgid ".: goes to next location"
@@ -150,7 +163,7 @@ msgstr ""
 
 #: ../../txts/README.lua:77
 msgid "CTRL+F10: quits the game immediately"
-msgstr ""
+msgstr "CTRL+F10: beëindigt het spel omnmiddelijk"
 
 #: ../../txts/editor_readme:39
 msgid "CTRL+L   Load Map"
@@ -186,7 +199,7 @@ msgstr "Tsjechisch"
 
 #: ../../txts/README.lua:83
 msgid "DELETE: archives the current message"
-msgstr ""
+msgstr "DELETE: archiveert het huidige bericht"
 
 #: ../../txts/developers:193
 msgid "Dansk"
@@ -222,15 +235,15 @@ msgstr "F        Schakelt volledig scherm aan/uit"
 
 #: ../../txts/README.lua:78
 msgid "F11: takes a screenshot"
-msgstr ""
+msgstr "F11: maakt een schermopname"
 
 #: ../../txts/README.lua:76
 msgid "F6: shows the debug console (only in debug-builds)"
-msgstr ""
+msgstr "F6: toont het debugvenster (alleen in debug-builds)"
 
 #: ../../txts/README.lua:71
 msgid "F: toggles fullscreen (if supported by OS)"
-msgstr ""
+msgstr "F: schakelt volledig scherm aan/uit (indien ondersteund door het OS)"
 
 #: ../../txts/developers:206
 msgid "Finnish"
@@ -246,7 +259,7 @@ msgstr "Frans"
 
 #: ../../txts/README.lua:82
 msgid "G: jumps to location corresponding to current message"
-msgstr ""
+msgstr "G: springt naar locatie die overeenkomt met het huidige bericht"
 
 #: ../../txts/developers:219
 msgid "Galician"
@@ -296,7 +309,7 @@ msgstr ""
 
 #: ../../txts/README.lua:72
 msgid "Home: centers main mapview on starting location"
-msgstr ""
+msgstr "Home: centreert de kaart op de beginlocatie"
 
 #: ../../txts/developers:23
 #: ../../txts/developers:347
@@ -317,11 +330,12 @@ msgstr "I        Activeert informatiegereedschap"
 
 #: ../../txts/README.lua:69
 msgid "I: toggles stock inventory"
-msgstr ""
+msgstr "I: schakelt voorraadoverzicht aan/uit"
 
 #: ../../txts/README.lua:93
 msgid "If you encounter a bug, please report it to our bugtracker:"
 msgstr ""
+"Als je een fout tegenkomt, rapporteer het dan a.u.b. aan onze bugtracker:"
 
 #: ../../txts/README.lua:52
 msgid ""
@@ -330,6 +344,10 @@ msgid ""
 "are\n"
 "removed."
 msgstr ""
+"Als je CTRL ingedrukt houdt tijdens het aanleggen van een weg, dan \n"
+"worden automatisch vlaggen geplaatst. Als je CTRL ingedrukt houdt\n"
+"tijdens het verwijderen van een weg, dan worden alle vlaggen tot aan\n"
+"het eerste kruispunt verwijderd."
 
 #: ../../txts/tips/general_game.tip:58
 msgid ""
@@ -347,6 +365,12 @@ msgid ""
 "Wiki\n"
 "and a detailed description of the tribe economies in our online encyclopedia."
 msgstr ""
+"Als je documentatie of hulp nodig hebt voor Widelands of de Widelands "
+"Editor,\n"
+"bezoek dan beslist onze webpagina. Je kunt recente online hulp vinden in "
+"onze\n"
+"Wiki en een gedetailleerde beschrijving van de economieën van de stammen in\n"
+"onze online encyclopedie."
 
 #: ../../txts/README.lua:80
 msgid ""
@@ -362,6 +386,11 @@ msgid ""
 "economic infrastructure, explore the land around you and face rivaling\n"
 "tribes."
 msgstr ""
+"Je begint in dit spel op een klein stuk land met slechts enige\n"
+"voorraden. Door deze te benutten zul je een imperium creëren met\n"
+"vele duizenden inwoners. Op jouw weg naar dit doel moet je een\n"
+"efficiënte infrastructuur neerzetten, het land om je heen verkennen\n"
+"en rivaliserende stammen het hoofd bieden."
 
 #: ../../txts/README.lua:18
 #: ../../txts/editor_readme:7
@@ -415,7 +444,7 @@ msgstr "M        Schakel minikaart aan/uit"
 
 #: ../../txts/README.lua:65
 msgid "M: toggles minimap"
-msgstr ""
+msgstr "M: schakelt minikaart aan/uit"
 
 #: ../../txts/tips/general_game.tip:34
 msgid ""
@@ -441,7 +470,7 @@ msgstr "Musici"
 
 #: ../../txts/README.lua:66
 msgid "N: toggles messages ('news')"
-msgstr ""
+msgstr "N: schakelt berichten aan/uit ('nieuws')"
 
 #: ../../txts/developers:181
 msgid ""
@@ -466,7 +495,7 @@ msgstr "Niet-Unix Distributies"
 
 #: ../../txts/README.lua:70
 msgid "O: toggles objectives"
-msgstr ""
+msgstr "O: schakelt doelen aan/uit"
 
 #: ../../txts/license:18
 msgid ""
@@ -521,15 +550,15 @@ msgstr "P        Schakel spelersmenu aan/uit"
 
 #: ../../txts/README.lua:62
 msgid "PAGEDOWN: decreases gamespeed"
-msgstr ""
+msgstr "PAGEDOWN: verlaagt spelsnelheid"
 
 #: ../../txts/README.lua:61
 msgid "PAGEUP: increases gamespeed"
-msgstr ""
+msgstr "PAGEUP: verhoogt spelsnelheid"
 
 #: ../../txts/README.lua:63
 msgid "PAUSE: pauses the game"
-msgstr ""
+msgstr "PAUSE: pauzeert het spel"
 
 #: ../../txts/developers:281
 msgid "Packagers"
@@ -589,7 +618,7 @@ msgstr ""
 
 #: ../../txts/README.lua:118
 msgid "Replays"
-msgstr ""
+msgstr "Herhalingen"
 
 #: ../../txts/README.lua:133
 msgid ""
@@ -599,6 +628,12 @@ msgid ""
 "~/.widelands/replays directory on Linux and Mac OS X. On Windows,\n"
 "they are in the 'replays' subdirectory of your Widelands installation."
 msgstr ""
+"Herhalingen zijn een erg bruikbaar middel om fouten in het spel te vinden, "
+"zij\n"
+"kunnen dus nuttig zijn als bijlagen bij foutrapporten. De bestanden van\n"
+"herhalingen worden opgeslagen in de ~/.widelands/replays directorie onder\n"
+"Linux en MAC OS X. Onder Windows staan ze in de 'replays' subdirectorie\n"
+"van je Widelands installatie."
 
 #: ../../txts/README.lua:91
 msgid "Reporting Bugs"
@@ -610,7 +645,7 @@ msgstr "Russisch"
 
 #: ../../txts/README.lua:68
 msgid "S: toggles statistics"
-msgstr ""
+msgstr "S: schakelt statistieken aan/uit"
 
 #: ../../txts/editor_readme:45
 msgid "SHIFT    (Hold) Selects first alternative tool while pressed"
@@ -631,7 +666,7 @@ msgstr ""
 
 #: ../../txts/README.lua:64
 msgid "SPACE: toggles build-help"
-msgstr ""
+msgstr "SPACE: schakelt bouwhulp aan/uit"
 
 #: ../../txts/developers:182
 msgid ""
@@ -752,6 +787,11 @@ msgid ""
 "left\n"
 "mousebutton while holding down CTRL."
 msgstr ""
+"Om een geopend venster te sluiten, klik er rechts op. Om een venster te mini-"
+"/\n"
+"maximaliseren, klik op de titelbalk van dat venster met òf de middelste "
+"muisknop\n"
+"òf met de linker muisknop terwijl CTRL wordt ingedrukt."
 
 #: ../../txts/developers:366
 msgid "Translation"
@@ -805,6 +845,16 @@ msgid ""
 "a\n"
 "different version of the game."
 msgstr ""
+"Door gebruik te maken van de Bekijk Herhalingen optie in het hoofdmenu, zal\n"
+"een eerder gespeeld spel exact gereconstrueerd worden zodat je het kunt\n"
+"bekijken. Merk echter op dat zelfs de kleinste wijzigingen in de "
+"spelgegevens-\n"
+"bestanden of het Widelands programma ertoe kunnen leiden dat een herhaling\n"
+"incompatibel wordt en 'out of sync' loopt. Dit is overeenkomstig aan hoe "
+"spelen\n"
+"over een netwerk onder desynchronisatie te lijden hebben als één van de "
+"spelers\n"
+"een andere versie heeft van het spel."
 
 #: ../../txts/license:16
 msgid "We are also shipping the GPL as text document with Widelands itself."
@@ -823,12 +873,19 @@ msgid ""
 "started\n"
 "through playable tutorials."
 msgstr ""
+"Widelands is een gratis, open source real-time strategiespel met campagnes\n"
+"voor alleen spelen en een multiplayer mode. Het spel werd geïnspireerd door\n"
+"Settlers II maar heeft aanzienlijk meer variatie en diepte. Toch is het nog "
+"steeds\n"
+"gemakkelijk om op weg te komen dankzij speelbare tutorials."
 
 #: ../../txts/README.lua:35
 msgid ""
 "Widelands is licensed under the GNU General Public License (GPL). For more\n"
 "information, see the file 'COPYING'."
 msgstr ""
+"Widelands is gelicenseerd onder de GNU General Public License (GPL). Zie\n"
+"voor meer informatie het bestand 'COPYING\"."
 
 #: ../../txts/README.lua:40
 msgid ""
@@ -841,6 +898,14 @@ msgid ""
 "or\n"
 "creating new maps - get in touch on our homepage."
 msgstr ""
+"Widelands is bijna af en is erg leuk om alleen te spelen en zelfs nog "
+"leuker\n"
+"samen met anderen. Toch is er nog altijd meer werk dat moet worden\n"
+"verricht op alle gebieden. Als je wilt bijdragen - zij het tekenen, "
+"verhelpen\n"
+" van fouten of toevoegen van nieuwe functionaliteit,  vertalen naar je "
+"eigen\n"
+"taal of het bouwen van kaarten - bereik ons via de webpagina."
 
 #: ../../txts/README.lua:120
 msgid ""
@@ -853,6 +918,13 @@ msgid ""
 "tell\n"
 "you the time you started the game."
 msgstr ""
+"Widelands neemt ieder spel dat je speelt op in twee bestanden. Eén van deze\n"
+"heeft een .wrpl.wgf extensie en bevat een initiëel bewaard spel. Het andere\n"
+"bestand heeft een .wrpl extensie en bevat alle opdrachten die werden "
+"gegeven\n"
+"door alle spelers, zoals het aanleggen van een weg of het aanvallen van de "
+"vijand.\n"
+"De rest van de bestandsnaam geeft de tijd aan waarop het spel werd begonnen."
 
 #: ../../txts/tips/editor.tip:2
 msgid ""
@@ -893,6 +965,8 @@ msgid ""
 "You can skip confirmation windows for irreversible actions if you hold CTRL\n"
 "while clicking on the action button."
 msgstr ""
+"Je kunt bevestigingsschermen voor onomkeerbare acties overslaan als je\n"
+"CTRL houdt ingedrukt terwijl je de betreffende knop aanklikt."
 
 #: ../../txts/tips/multiplayer.tip:6
 msgid ""
