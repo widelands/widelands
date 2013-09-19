@@ -88,7 +88,8 @@ m_didconquer  (false),
 m_capacity    (ms_descr.get_max_number_of_soldiers()),
 m_nexthealtime(0),
 m_soldier_preference(ms_descr.m_prefers_heroes_at_start ? kPrefersHeroes : kPrefersRookies),
-m_soldier_upgrade_try(false)
+m_soldier_upgrade_try(false),
+m_doing_upgrade_request(false)
 {
 	m_next_swap_soldiers_time = 0;
 }
