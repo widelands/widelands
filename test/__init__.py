@@ -50,7 +50,6 @@ class WidelandsTestCase(unittest.TestCase):
             widelands = subprocess.Popen(
                     args, shell=False, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
             (self.stdout, self.stderr) = widelands.communicate()
-            # NOCOM(#sirver): remove manual_testing compatibility and document adding new tests to the suite
 
             stderr_file.write(self.stderr)
             stdout_file.write(self.stdout)
