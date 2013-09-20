@@ -37,14 +37,6 @@ class WidelandsTestCase(unittest.TestCase):
     def run_widelands(self, **kwargs):
         """Runs widelands with the arguments given, catching stdout and stderr in files."""
 
-        maps_dir = os.path.join(".", "test", "maps")
-        if "editor" in kwargs:
-            kwargs["editor"] = os.path.join(maps_dir, kwargs["editor"])
-        if "scenario" in kwargs:
-            kwargs["scenario"] = os.path.join(maps_dir, kwargs["scenario"])
-        if "loadgame" in kwargs:
-            kwargs["loadgame"] = os.path.join(self.run_dir, "save", kwargs["loadgame"])
-
         stdout_filename = os.path.join(self.run_dir, "stdout.txt")
         stderr_filename = os.path.join(self.run_dir, "stderr.txt")
 
@@ -58,6 +50,7 @@ class WidelandsTestCase(unittest.TestCase):
             widelands = subprocess.Popen(
                     args, shell=False, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
             (self.stdout, self.stderr) = widelands.communicate()
+            # NOCOM(#sirver): remove manual_testing compatibility and document adding new tests to the suite
 
             stderr_file.write(self.stderr)
             stdout_file.write(self.stdout)
@@ -75,4 +68,3 @@ class WidelandsTestCase(unittest.TestCase):
         self.assertTrue(success,
             "Not all tests pass. Analyze the files in %s to see why this test case failed." % self.run_dir
         )
-

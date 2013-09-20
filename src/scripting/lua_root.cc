@@ -116,7 +116,7 @@ int L_Game::get_time(lua_State * L) {
 	.. attribute:: desired_speed
 
 	(RW) Sets the desired speed of the game in ms per real second, so a speed of
-	1000 means the game runs at 1x speed. Note that this will not work in
+	2000 means the game runs at 2x speed. Note that this will not work in
 	network games as expected.
 */
 // UNTESTED
@@ -293,4 +293,3 @@ void luaopen_wlroot(lua_State * L, bool in_editor) {
 }
 
 };
-
