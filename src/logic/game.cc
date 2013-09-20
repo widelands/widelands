@@ -533,7 +533,7 @@ bool Game::run
 	if (!script_to_run.empty() && (start_game_type == NewSPScenario || start_game_type == Loaded)) {
 		const std::string registered_script =
 			lua().register_script(*g_fs, "commandline", script_to_run);
-		enqueue_command(new Cmd_LuaScript(get_gametime(), "commandline", registered_script));
+		enqueue_command(new Cmd_LuaScript(get_gametime() + 1, "commandline", registered_script));
 	}
 
 	if (m_writereplay || m_writesyncstream) {
