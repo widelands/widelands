@@ -895,7 +895,9 @@ void NetHost::run(bool const autorun)
 		game.run
 			(loaderUI.get(),
 			 d->settings.savegame ? Widelands::Game::Loaded : d->settings.scenario ?
-			 Widelands::Game::NewMPScenario : Widelands::Game::NewNonScenario);
+			 Widelands::Game::NewMPScenario : Widelands::Game::NewNonScenario,
+			 "",
+			 false);
 
 		delete tips;
 
@@ -3001,4 +3003,3 @@ void NetHost::report_result
 		("NetHost::report_result(%d, %d, %s)\n",
 		 player->player_number(), result, info.c_str());
 }
-

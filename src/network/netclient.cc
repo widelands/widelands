@@ -225,7 +225,8 @@ void NetClient::run ()
 			 d->settings.savegame ?
 			 Widelands::Game::Loaded
 			 : d->settings.scenario ?
-			 Widelands::Game::NewMPScenario : Widelands::Game::NewNonScenario);
+			 Widelands::Game::NewMPScenario : Widelands::Game::NewNonScenario,
+			 "", false);
 
 		// if this is an internet game, tell the metaserver that the game is done.
 		if (m_internet)
@@ -909,7 +910,7 @@ void NetClient::handle_packet(RecvPacket & packet)
 			std::string path = "tribes/" + info.name;
 			if (g_fs->IsDirectory(path)) {
 				std::unique_ptr<FileSystem> sub_fs(g_fs->MakeSubFileSystem(path));
-				lua->register_scripts(*sub_fs, "tribe_" + info.name);
+				lua->register_scripts(*sub_fs, "tribe_" + info.name, "scripting");
 			}
 
 			for (uint8_t j = packet.Unsigned8(); j; --j) {

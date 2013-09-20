@@ -46,7 +46,9 @@ class Editor_Tool;
 struct Editor_Interactive : public Interactive_Base {
 	friend struct Editor_Tool_Menu;
 
-	static void run_editor(const std::string & filename);
+	// Runs the Editor via the commandline --editor flag. Will load 'filename' as a
+	// map and run 'script_to_run' directly after all initialization is done.
+	static void run_editor(const std::string & filename, const std::string& script_to_run);
 
 private:
 	Editor_Interactive(Widelands::Editor_Game_Base &);

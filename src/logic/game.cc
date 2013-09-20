@@ -214,7 +214,7 @@ void Game::save_syncstream(bool const save)
 }
 
 
-bool Game::run_splayer_scenario_direct(char const * const mapname) {
+bool Game::run_splayer_scenario_direct(char const * const mapname, const std::string& script_to_run) {
 	assert(!get_map());
 
 	set_map(new Map);
@@ -257,7 +257,7 @@ bool Game::run_splayer_scenario_direct(char const * const mapname) {
 
 	set_game_controller(GameController::createSinglePlayer(*this, true, 1));
 	try {
-		bool const result = run(&loaderUI, NewSPScenario);
+		bool const result = run(&loaderUI, NewSPScenario, script_to_run, false);
 		delete m_ctrl;
 		m_ctrl = 0;
 		return result;
@@ -351,7 +351,7 @@ void Game::init_newgame
  * Initialize the savegame based on the given settings.
  * At return the game is at the same state like a map loaded with Game::init()
  * Only difference is, that players are already initialized.
- * run(loaderUI, true) takes care about this difference.
+ * run() takes care about this difference.
  *
  * \note loaderUI can be nullptr, if this is run as dedicated server.
  */
@@ -380,13 +380,7 @@ void Game::init_savegame
 	}
 }
 
-
-/**
- * Load a game
- * Returns false if the user cancels the dialog. Otherwise returns the result
- * of running the game.
- */
-bool Game::run_load_game(std::string filename) {
+bool Game::run_load_game(std::string filename, const std::string& script_to_run) {
 	UI::ProgressWindow loaderUI;
 	std::vector<std::string> tipstext;
 	tipstext.push_back("general_game");
@@ -420,7 +414,7 @@ bool Game::run_load_game(std::string filename) {
 
 	set_game_controller(GameController::createSinglePlayer(*this, true, player_nr));
 	try {
-		bool const result = run(&loaderUI, Loaded);
+		bool const result = run(&loaderUI, Loaded, script_to_run, false);
 		delete m_ctrl;
 		m_ctrl = 0;
 		return result;
@@ -473,7 +467,7 @@ void Game::postload()
  */
 bool Game::run
 	(UI::ProgressWindow * loader_ui, Start_Game_Type const start_game_type,
-	 bool replay)
+	 const std::string& script_to_run, bool replay)
 {
 	m_replay = replay;
 	postload();
@@ -534,6 +528,12 @@ bool Game::run
 
 		// Queue first statistics calculation
 		enqueue_command(new Cmd_CalculateStatistics(get_gametime() + 1));
+	}
+
+	if (!script_to_run.empty() && (start_game_type == NewSPScenario || start_game_type == Loaded)) {
+		const std::string registered_script =
+			lua().register_script(*g_fs, "commandline", script_to_run);
+		enqueue_command(new Cmd_LuaScript(get_gametime(), "commandline", registered_script));
 	}
 
 	if (m_writereplay || m_writesyncstream) {

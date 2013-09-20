@@ -578,11 +578,7 @@ void Editor_Interactive::change_world() {
 }
 
 
-/**
- * Public static method to create an instance of the editor
- * and run it. This takes care of all the setup and teardown.
- */
-void Editor_Interactive::run_editor(const std::string & filename) {
+void Editor_Interactive::run_editor(const std::string & filename, const std::string& script_to_run) {
 	Widelands::Editor_Game_Base editor(0);
 	Editor_Interactive eia(editor);
 	editor.set_ibase(&eia); // TODO get rid of this
@@ -623,6 +619,10 @@ void Editor_Interactive::run_editor(const std::string & filename) {
 		eia.select_tool(eia.tools.increase_height, Editor_Tool::First);
 		editor.postload();
 		eia.start();
+
+		if (!script_to_run.empty()) {
+			eia.egbase().lua().run_script(*g_fs, script_to_run, "commandline");
+		}
 	}
 	eia.run();
 
@@ -631,4 +631,3 @@ void Editor_Interactive::run_editor(const std::string & filename) {
 	g_gr->flush_animations();
 	g_anim.flush();
 }
-
