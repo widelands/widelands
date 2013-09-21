@@ -1,4 +1,4 @@
-### Build 18 until now
+### Build 18-rc1
 - Added a preview for the costs of a building and the resources gained
   through the dismantling of a building.
 - Added a button to productionsites for evicting a worker.
@@ -291,6 +291,10 @@
 - Fixed bug #1219524: Empire bakery drops from 100% to 0% very quickly when no wares are available.
 - Fixed bug #1219526: Last received chat message never vanishes from main in game screen
 - Fixed bug #1220546: segfault on dismantle a building on ubuntu 12.04
+- Fixed bug #1228518: Chat announces defeat of all network players although only one is defeated
+- Fixed bug #1228529: Defeated player can see_all, but can only use fieled_action_window on prior seen fields
+- Fixed bug #1228592: Internet lobby chat is blocked once another UI part was used (one of the lists, etc.)
+- Fixed bug #1228596: Important system messages are not forwarded to ingame chat
 
 
 ### Build 17
