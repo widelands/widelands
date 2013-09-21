@@ -120,7 +120,7 @@ struct InternetGaming : public ChatProvider {
 	const std::vector<ChatMessage> & getMessages() const {return messages;}
 
 	/// writes the ingame_system_chat messages to \arg msg and resets it afterwards
-	void getIngameSystemMessages(std::vector<ChatMessage> msg) {
+	void getIngameSystemMessages(std::vector<ChatMessage> & msg) {
 		msg = ingame_system_chat;
 		ingame_system_chat.clear();
 	}
