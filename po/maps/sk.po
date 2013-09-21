@@ -7,13 +7,13 @@ msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2013-09-15 17:41+0000\n"
-"PO-Revision-Date: 2013-09-20 02:12+0000\n"
+"PO-Revision-Date: 2013-09-21 02:41+0000\n"
 "Last-Translator: Miroslav Remák <Unknown>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-09-20 05:10+0000\n"
+"X-Launchpad-Export-Date: 2013-09-21 05:11+0000\n"
 "X-Generator: Launchpad (build 16765)\n"
 
 #: ../../campaigns/cconfig:64
@@ -115,6 +115,9 @@ msgid ""
 "in prosperity, will someday collapse into a devastating war. Has your latest "
 "betrayal been one too many and will the prophecy come true?"
 msgstr ""
+"Podľa starej legendy týchto sedem kráľovstiev, ktoré prosperovali celú "
+"večnosť, raz upadne do pustošivej vojny. Bola vaša posledná zrada priveľa a "
+"splní sa proroctvo?"
 
 #: ../../maps/The long way.wmf/elemental:9
 msgid ""
@@ -151,7 +154,7 @@ msgstr "Barbari - Druhá ríša"
 
 #: ../../maps/Calvisson.wmf/elemental:9
 msgid "Calvisson"
-msgstr ""
+msgstr "Calvisson"
 
 #: ../../campaigns/cconfig:44
 msgid "Challenging. Introduces the Atlanteans"
@@ -167,6 +170,9 @@ msgid ""
 "similar, map should be fair. There is plenty of gold near the starting point "
 "- Do you see it?"
 msgstr ""
+"Nájsť uhlie je ťažké - naučte sa ho vyrábať efektívne. Začiatočné pozície sú "
+"podobné; mapa by mala byť fér. Pri začiatočnom bode je množstvo zlata - "
+"vidíte ho?"
 
 #: ../../maps/Comet Island.wmf/elemental:7
 msgid "Comet Island"
@@ -196,6 +202,11 @@ msgid ""
 "priority - expeditions are universally useful and are often the fastest way "
 "to gold deposits."
 msgstr ""
+"Každý hráč začína s odlišnou prekážkou rozpínania, pričom stále existuje "
+"viac ako jeden spôsob, ako ju prekonať. Aj keď AI tu možno poraziť bez "
+"jedinej lode, hráčom sa odporúča, aby považovali prístavy a lodenice za "
+"prioritu - výpravy sú užitočné a sú často najrýchlejším spôsobom, ako nájsť "
+"ložiská zlata."
 
 #: ../../maps/Four Mountains.wmf/elemental:9
 msgid ""
@@ -227,7 +238,7 @@ msgstr "Impérium - Mesiace vo vyhnanstve"
 
 #: ../../maps/Fellowships.wmf/elemental:9
 msgid "Fellowships"
-msgstr ""
+msgstr "Spoločenstvá"
 
 #: ../../maps/Finlakes.wmf/elemental:9
 msgid "Finnish Lakes"
@@ -307,6 +318,10 @@ msgid ""
 "be discovered. But only by becoming a naval power your tribe will be able to "
 "explore enough resources to compete with its opponents."
 msgstr ""
+"Na mieste troch veľkých sopiek, šesť nádherných ostrovov pozýva osadníkov, "
+"aby začali nový život. Púšte a rýchlo rastúci les čakajú na svoje objavenie. "
+"Ale len vytvorením námornej sily bude váš kmeň schopný preskúmať dostatok "
+"zdrojov na to, aby mohol súperiť so svojimi protivníkmi."
 
 #: ../../maps/The pass through the mountains.wmf/elemental:11
 msgid ""
@@ -553,7 +568,7 @@ msgstr "Navrhované tímy: (modrý, žltý) vs (červený, zelený)"
 
 #: ../../maps/Crossing the horizon.wmf/elemental:12
 msgid "Suggested Teams: all ok"
-msgstr ""
+msgstr "Navrhované tímy: všetky v poriadku"
 
 #: ../../maps/Rendez-Vous.wmf/elemental:10
 msgid "Suggested Teams: all ok."
@@ -573,10 +588,13 @@ msgid ""
 "green), (blue, yellow, black) vs (red, green, orange), (blue, yellow, black, "
 "purple) vs (red, green, orange, white)"
 msgstr ""
+"Navrhované tímy: modrý vs červený, žltý vs zelený, (modrý, žltý) vs "
+"(červený, zelený), (modrý, žltý, čierny) vs (červený, zelený, oranžový), "
+"(modrý, žltý, čierny, purpurový) vs (červený, zelený, oranžový, biely)"
 
 #: ../../maps/Plateau.wmf/elemental:10
 msgid "Suggested positions: blue vs yellow"
-msgstr ""
+msgstr "Navrhované pozície: modrá vs žltá"
 
 #: ../../maps/The Nile.wmf/elemental:12
 msgid ""
@@ -585,12 +603,19 @@ msgid ""
 "green) vs (red, yellow, black), (blue, green, orange, white) vs (red, "
 "yellow, black, purple)"
 msgstr ""
+"Navrhované tímy: modrý vs červený, žltý vs zelený, (modrý, žltý) vs "
+"(červený, zelený), (zelený, oranžový, biely) vs (žltý, čierny, purpurový), "
+"(modrý, oranžový, zelený) vs (červený, žltý, čierny), (modrý, zelený, "
+"oranžový, biely) vs (červený, žltý, čierny, purpurový)"
 
 #: ../../maps/Trident of Fire.wmf/elemental:12
 msgid ""
 "Suggested teams: red vs green, (blue, yellow) vs (green, orange), (blue, "
 "black) vs (green, red), (blue, black, yellow) vs (green, red, orange)"
 msgstr ""
+"Navrhované tímy: červený vs zelený, (modrý, žltý) vs (zelený, oranžový), "
+"(modrý, čierny) vs (zelený, červený), (modrý, čierny, žltý) vs (zelený, "
+"červený, oranžový)"
 
 #: ../../maps/Swamp Island.wmf/elemental:9
 msgid "Swamp Island"
@@ -670,6 +695,8 @@ msgid ""
 "The river always provides food and communication. This time eight empires "
 "will fight for the control over this land."
 msgstr ""
+"Táto rieka vždy poskytuje jedlo a komunikáciu. Tentoraz bude o kontrolu nad "
+"týmto územím bojovať osem ríš."
 
 #: ../../maps/Mystical Maze.wmf/elemental:11
 msgid ""
@@ -729,6 +756,9 @@ msgid ""
 "somewhat above the normal value. AI performs badly at the time of writing "
 "(2013)."
 msgstr ""
+"Táto mapa je najvhodnejšia pre dvoch alebo troch ľudských hráčov, s hernou "
+"rýchlosťou o niečo väčšou ako základnou. V čase písania tohto popisu funguje "
+"AI (umelá inteligencia) zle (2013)."
 
 #: ../../maps/Three Warriors.wmf/elemental:9
 msgid "Three Warriors"
@@ -740,11 +770,11 @@ msgstr "V jednote je sila"
 
 #: ../../maps/Trident of Fire.wmf/elemental:9
 msgid "Trident of Fire"
-msgstr ""
+msgstr "Ohnivý trojzubec"
 
 #: ../../maps/Twin Lagoons.wmf/elemental:9
 msgid "Twin Lagoons"
-msgstr ""
+msgstr "Zdvojené lagúny"
 
 #: ../../maps/Twinkling Waves.wmf/elemental:9
 msgid "Twinkling Waves"
@@ -760,7 +790,7 @@ msgstr "Dve ríše súperia o poklady legendárneho polostrova..."
 
 #: ../../maps/Volcanic Winter.wmf/elemental:9
 msgid "Volcanic Winter"
-msgstr ""
+msgstr "Vulkanická zima"
 
 #: ../../maps/War of the Valleys.wmf/elemental:7
 msgid "War of the Valleys"

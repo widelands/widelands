@@ -7,13 +7,13 @@ msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2013-09-15 17:41+0000\n"
-"PO-Revision-Date: 2013-09-16 16:04+0000\n"
+"PO-Revision-Date: 2013-09-20 14:37+0000\n"
 "Last-Translator: Miroslav Remák <Unknown>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-09-17 04:34+0000\n"
+"X-Launchpad-Export-Date: 2013-09-21 05:11+0000\n"
 "X-Generator: Launchpad (build 16765)\n"
 
 #: ../../txts/README.lua:73
@@ -115,6 +115,8 @@ msgid ""
 "An economy consists of all buildings and flags connected by roads. The "
 "supplies and demands of buildings are handled in its economy."
 msgstr ""
+"Ekonomika sa skladá zo všetkých budov a vlajok spojenými cestami. Ponuku a "
+"dopyt každej budovy má na starosti príslušná ekonomika."
 
 #: ../../txts/tips/general_game.tip:22
 msgid ""
@@ -744,6 +746,8 @@ msgid ""
 "This game is Free and Open Source (FOSS), licensed under the GNU General "
 "Public License (GPL) V2.0."
 msgstr ""
+"Táto hra je slobodný softvér s otvoreným zdrojovým kódom (FOSS) licencovaný "
+"pod Všeobecnou verejnou licenciou GNU (GPL) v. 2.0."
 
 #: ../../txts/editor_readme:14
 msgid ""
@@ -761,6 +765,10 @@ msgid ""
 "left\n"
 "mousebutton while holding down CTRL."
 msgstr ""
+"Na zavretie otvoreného okna naň kliknite pravým tlačidlom myši. Ak chcete "
+"minimalizovať/maximalizovať okno, kliknite\n"
+"na titulnú lištu tohto okna buď stredným tlačidlom myši, alebo ľavým\n"
+"tlačidlom myši, držiac CTRL."
 
 #: ../../txts/developers:366
 msgid "Translation"
@@ -891,13 +899,15 @@ msgstr ""
 msgid ""
 "You can find more information on FOSS and the GPL by visiting the following "
 "webpage: "
-msgstr ""
+msgstr "Pre viac informácií o FOSS a GPL navštívte túto webovú stránku: "
 
 #: ../../txts/license:14
 msgid ""
 "You can find the full text of the license there as well as further "
 "information about its philosophy and the legal implications."
 msgstr ""
+"Môžete tam nájsť úplný text licencie, ako aj ďalšie informácie o jej "
+"filozofii a právnych dôsledkoch."
 
 #: ../../txts/tips/editor.tip:6
 msgid ""
