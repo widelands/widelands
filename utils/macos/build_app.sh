@@ -51,7 +51,8 @@ function MakeAppPackage {
       --exclude "manual_test" \
       --exclude "utils" \
       --exclude "*.py" \
-      --exclude "*.sh"
+      --exclude "*.sh" \
+      --exclude ".*"
 
    echo "Copying locales ..."
    rsync -Ca locale $DESTINATION/Widelands.app/Contents/MacOS/
