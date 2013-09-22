@@ -33,8 +33,8 @@
 
 typedef std::set<std::string> filenameset_t;
 
-struct StreamRead;
-struct StreamWrite;
+class StreamRead;
+class StreamWrite;
 
 
 /**

@@ -27,7 +27,6 @@
 
 #include "logic/instances.h"
 #include "io/filewrite.h"
-#include "writeHTML.h"
 
 struct Profile;
 struct Section;
@@ -94,9 +93,6 @@ struct Item_Ware_Descr : public Map_Object_Descr {
 	}
 
 	virtual void load_graphics();
-#ifdef WRITE_GAME_DATA_AS_HTML
-	void writeHTML(::FileWrite &) const;
-#endif
 
 	/// returns the preciousness of the ware. It is used by the computer player
 	uint8_t preciousness() const {return m_preciousness;}

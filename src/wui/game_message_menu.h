@@ -30,7 +30,7 @@
 #include "ui_basic/unique_window.h"
 
 namespace Widelands {
-struct Game;
+class Game;
 struct Message;
 };
 struct Interactive_Player;

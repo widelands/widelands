@@ -33,8 +33,8 @@ namespace Widelands {
 #define WEAKEST   0
 #define STRONGEST 1
 
-struct Editor_Game_Base;
-struct Battle;
+class Editor_Game_Base;
+class Battle;
 
 #define HP_FRAMECOLOR RGBColor(255, 255, 255)
 
@@ -82,9 +82,6 @@ struct Soldier_Descr : public Worker_Descr {
 
 
 	uint32_t get_rand_anim(Game & game, const char * const name) const;
-#ifdef WRITE_GAME_DATA_AS_HTML
-	void writeHTMLSoldier(::FileWrite &) const;
-#endif
 
 protected:
 	virtual Bob & create_object() const;

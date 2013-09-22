@@ -33,7 +33,7 @@
 namespace Widelands {
 
 class Map_Object;
-struct Editor_Game_Base;
+class Editor_Game_Base;
 struct Map_Map_Object_Loader;
 struct Map_Map_Object_Saver;
 

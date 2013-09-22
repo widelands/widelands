@@ -34,7 +34,7 @@
 #include "logic/widelands_geometry.h"
 #include "random.h"
 
-namespace Widelands {struct Editor_Game_Base;}
+namespace Widelands {class Editor_Game_Base;}
 struct Songset;
 struct SDL_mutex;
 

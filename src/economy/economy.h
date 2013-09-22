@@ -34,8 +34,8 @@
 
 
 namespace Widelands {
-struct Player;
-struct Game;
+class Player;
+class Game;
 struct Flag;
 struct Route;
 struct RSPairStruct;

@@ -31,7 +31,7 @@ namespace Widelands {
 
 class Economy;
 struct Flag;
-struct Map;
+class Map;
 struct Tribe_Descr;
 class WareInstance;
 class Worker;
@@ -129,7 +129,7 @@ private:
 class Immovable : public BaseImmovable {
 	friend struct Immovable_Descr;
 	friend struct ImmovableProgram;
-	friend struct Map;
+	friend class Map;
 
 	MO_DESCR(Immovable_Descr);
 

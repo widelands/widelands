@@ -34,7 +34,6 @@
 #include "logic/ware_types.h"
 #include "logic/widelands.h"
 #include "workarea_info.h"
-#include "writeHTML.h"
 
 namespace UI {class Window;}
 struct BuildingHints;
@@ -118,9 +117,6 @@ struct Building_Descr : public Map_Object_Descr {
 		 bool                   loading = false,
 		 FormerBuildings former_buildings = FormerBuildings())
 		const;
-#ifdef WRITE_GAME_DATA_AS_HTML
-	void writeHTML(::FileWrite &) const;
-#endif
 	virtual void load_graphics();
 
 	virtual uint32_t get_conquers() const;

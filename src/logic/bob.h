@@ -27,10 +27,9 @@
 #include "point.h"
 #include "port.h"
 #include "logic/walkingdir.h"
-#include "writeHTML.h"
 
 namespace Widelands {
-struct Map;
+class Map;
 struct Route;
 struct Transfer;
 struct Tribe_Descr;
@@ -118,7 +117,7 @@ struct BobProgramBase {
  * exists, it is always called just before the task is popped from the stack.
  */
 struct Bob : public Map_Object {
-	friend struct Map;
+	friend class Map;
 	friend struct Map_Bobdata_Data_Packet;
 	friend struct Map_Bob_Data_Packet;
 

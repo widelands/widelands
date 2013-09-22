@@ -42,7 +42,8 @@
  *
  * Convenience functions are provided for many data types.
  */
-struct StreamRead : boost::noncopyable {
+class StreamRead : boost::noncopyable {
+public:
 	explicit StreamRead() {}
 	virtual ~StreamRead();
 
@@ -79,4 +80,3 @@ struct StreamRead : boost::noncopyable {
 };
 
 #endif
-

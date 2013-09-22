@@ -25,8 +25,8 @@
 
 class StreamWrite;
 namespace Widelands {
-	struct Player;
-	struct Editor_Game_Base;
+	class Player;
+	class Editor_Game_Base;
 };
 
 /**

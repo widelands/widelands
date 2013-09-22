@@ -25,7 +25,7 @@
 
 namespace Widelands {
 
-struct Game;
+class Game;
 struct Request;
 struct Supply;
 
@@ -50,5 +50,3 @@ private:
 }
 
 #endif
-
-

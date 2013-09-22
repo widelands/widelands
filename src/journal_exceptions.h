@@ -21,6 +21,7 @@
 #define JOURNAL_EXCEPTIONS_H
 
 #include <stdexcept>
+#include <string>
 
 #include <stdint.h>
 

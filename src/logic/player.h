@@ -53,11 +53,12 @@ struct AttackController;
  * \ref GameController and friends, so that replays and network games function
  * properly.
  */
-struct Player :
+class Player :
 	boost::noncopyable,
 	public NoteReceiver<NoteImmovable>, public NoteReceiver<NoteFieldPossession>,
 	public NoteSender  <NoteImmovable>, public NoteSender  <NoteFieldPossession>
 {
+public:
 	// hard-coded playercolors
 	static const RGBColor Colors[MAX_PLAYERS];
 
@@ -68,7 +69,7 @@ struct Player :
 	typedef std::vector<Building_Stats> Building_Stats_vector;
 	typedef std::vector<Building_Stats_vector> BuildingStats;
 
-	friend struct Editor_Game_Base;
+	friend class Editor_Game_Base;
 	friend struct Game_Player_Info_Data_Packet;
 	friend struct Game_Player_Economies_Data_Packet;
 	friend struct Map_Buildingdata_Data_Packet;

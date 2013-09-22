@@ -26,11 +26,11 @@
 namespace Widelands {
 
 class Economy;
-struct Editor_Game_Base;
-struct Game;
+class Editor_Game_Base;
+class Game;
 struct Map_Map_Object_Loader;
 struct Map_Map_Object_Saver;
-struct Player;
+class Player;
 struct Request;
 struct WaresQueue;
 class Worker;
@@ -93,5 +93,3 @@ private:
 }
 
 #endif
-
-

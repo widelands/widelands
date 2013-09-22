@@ -59,6 +59,7 @@ public:
 	void set_chat_provider(ChatProvider &);
 	ChatProvider * get_chat_provider();
 
+	// NOCOM(#sirver): ripe for killing.
 	const std::string & building_census_format      () const {
 		return m_building_census_format;
 	}
@@ -90,7 +91,6 @@ protected:
 	std::string              m_building_tooltip_format;
 	bool                     m_chatenabled;
 	bool                     m_multiplayer;
-
 	PlayerType m_playertype;
 	UI::UniqueWindow::Registry m_fieldaction;
 	UI::UniqueWindow::Registry m_game_summary;

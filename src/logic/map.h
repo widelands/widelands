@@ -46,10 +46,10 @@ namespace Widelands {
 struct MapGenerator;
 struct BaseImmovable;
 struct PathfieldManager;
-struct Player;
+class Player;
 struct World;
-struct Map;
-struct Map_Loader;
+class Map;
+class Map_Loader;
 #define WLMF_SUFFIX ".wmf"
 #define S2MF_SUFFIX ".swd"
 #define S2MF_SUFFIX2 ".wld"
@@ -101,7 +101,7 @@ struct FindBobAlwaysTrue : public FindBob {
 	virtual ~FindBobAlwaysTrue() {}  // make gcc shut up
 };
 
-/** struct Map
+/** class Map
  *
  * This really identifies a map like it is in the game
  *
@@ -115,12 +115,13 @@ struct FindBobAlwaysTrue : public FindBob {
  *
  * Warning: width and height must be even
  */
-struct Map :
-	ITransportCostCalculator,
-	NoteSender<NoteFieldTransformed>
+class Map :
+	public ITransportCostCalculator,
+	public NoteSender<NoteFieldTransformed>
 {
-	friend struct Editor_Game_Base;
-	friend struct Map_Loader;
+public:
+	friend class Editor_Game_Base;
+	friend class Map_Loader;
 	friend struct ::S2_Map_Loader;
 	friend struct WL_Map_Loader;
 	friend struct Map_Elemental_Data_Packet;

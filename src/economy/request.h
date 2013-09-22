@@ -30,9 +30,9 @@
 namespace Widelands {
 
 class Economy;
-struct Editor_Game_Base;
+class Editor_Game_Base;
 struct Flag;
-struct Game;
+class Game;
 struct Map_Map_Object_Loader;
 struct Map_Map_Object_Saver;
 struct PlayerImmovable;

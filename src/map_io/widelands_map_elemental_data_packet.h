@@ -24,7 +24,7 @@
 
 namespace Widelands {
 
-struct Map;
+class Map;
 
 /*
  * The elemental data packet contains all basic and elemental data

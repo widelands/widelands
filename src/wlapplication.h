@@ -32,7 +32,7 @@
 #include "point.h"
 
 
-namespace Widelands {struct Game;}
+namespace Widelands {class Game;}
 struct Journal;
 
 ///Thrown if a commandline parameter is faulty

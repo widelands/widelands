@@ -34,10 +34,10 @@
 
 class IImageLoader;
 namespace Widelands {
-struct Editor_Game_Base;
-struct Game;
-struct Map;
-struct Map_Loader;
+class Editor_Game_Base;
+class Game;
+class Map;
+class Map_Loader;
 };
 class Image;
 class RenderTarget;

@@ -27,7 +27,7 @@
 namespace Widelands {
 
 struct FCoords;
-struct Map;
+class Map;
 
 struct FindNode {
 private:

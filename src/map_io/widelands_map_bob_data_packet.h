@@ -26,7 +26,7 @@
 
 namespace Widelands {
 
-struct StreamRead;
+class StreamRead;
 
 /**
  * This data packet contains the various bobs on

@@ -57,7 +57,7 @@ struct BaseImmovable;
 /// a field like it is represented in the game
 /// \todo This is all one evil hack :(
 struct Field {
-	friend struct Map;
+	friend class Map;
 	friend struct Bob;
 	friend struct BaseImmovable;
 

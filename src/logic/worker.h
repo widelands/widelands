@@ -70,9 +70,6 @@ class Worker : public Bob {
 		std::string sparam1;
 
 		std::vector<std::string> sparamv;
-#ifdef WRITE_GAME_DATA_AS_HTML
-		void writeHTML(::FileWrite &, const Worker_Descr &) const;
-#endif
 	};
 
 

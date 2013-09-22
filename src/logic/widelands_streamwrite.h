@@ -36,7 +36,8 @@ struct Tribe_Descr;
 /// members. Therefore it is binary compatible with StreamWrite, so any
 /// ::StreamWrite can be used as a Widelands::StreamWrite to read
 /// Widelands-specific types.
-struct StreamWrite : public ::StreamWrite {
+class StreamWrite : public ::StreamWrite {
+public:
 	void Direction8           (Direction);
 	void Direction8_allow_null(Direction);
 	void Map_Index32(Map_Index const i) {Unsigned32(i);}

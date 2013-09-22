@@ -117,9 +117,6 @@ public:
 	const std::string & compatibility_program(const std::string & programname) const;
 
 protected:
-#ifdef WRITE_GAME_DATA_AS_HTML
-	void writeHTML(::FileWrite &) const;
-#endif
 
 	std::string       m_helptext;   ///< Short (tooltip-like) help text
 	Point             m_ware_hotspot;

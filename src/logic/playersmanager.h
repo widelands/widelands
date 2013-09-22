@@ -30,7 +30,7 @@ namespace Widelands {
 
 class Editor_Game_Base;
 class Player;
-struct Player;
+class Player;
 
 enum class PlayerEndResult : uint8_t
 	{PLAYER_LOST = 0, PLAYER_WON = 1, PLAYER_RESIGNED = 2, UNDEFINED = 255};

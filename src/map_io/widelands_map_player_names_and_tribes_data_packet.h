@@ -24,7 +24,7 @@
 
 namespace Widelands {
 
-struct Map;
+class Map;
 
 /*
  * This data packet contains player names

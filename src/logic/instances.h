@@ -43,7 +43,7 @@ namespace UI {struct Tab_Panel;}
 namespace Widelands {
 
 struct Path;
-struct Player;
+class Player;
 struct Map_Map_Object_Loader;
 
 /**
@@ -128,7 +128,7 @@ extern Map_Object_Descr g_portdock_descr;
  * \warning DO NOT allocate/free Map_Objects directly. Use the appropriate
  * type-dependent create() function for creation, and call die() for removal.
  *
- * \note Convenient creation functions are defined in struct Game.
+ * \note Convenient creation functions are defined in class Game.
  *
  * When you do create a new object yourself (i.e. when you're implementing one
  * of the create() functions), you need to allocate the object using new,

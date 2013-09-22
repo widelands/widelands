@@ -333,19 +333,6 @@ Tribe_Descr::Tribe_Descr
 	} catch (const _wexception & e) {
 		throw game_data_error(_("tribe %s: %s"), tribename.c_str(), e.what());
 	}
-#ifdef WRITE_GAME_DATA_AS_HTML
-	if (g_options.pull_section("global").get_bool("write_HTML", false)) {
-		m_ware_references     = new HTMLReferences[get_nrwares    ().value()];
-		m_worker_references   = new HTMLReferences[get_nrworkers  ().value()];
-		m_building_references = new HTMLReferences[get_nrbuildings().value()];
-		writeHTMLBuildings(path);
-		writeHTMLWorkers  (path);
-		writeHTMLWares    (path);
-		delete[] m_building_references;
-		delete[] m_worker_references;
-		delete[] m_ware_references;
-	}
-#endif
 }
 
 

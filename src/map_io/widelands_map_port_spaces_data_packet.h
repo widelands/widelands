@@ -24,7 +24,7 @@
 
 namespace Widelands {
 
-struct Map;
+class Map;
 
 /// The port data packet contains all port build spaces
 struct Map_Port_Spaces_Data_Packet : public Map_Data_Packet {

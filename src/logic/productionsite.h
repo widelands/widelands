@@ -60,9 +60,6 @@ struct ProductionSite_Descr : public Building_Descr {
 		 const Tribe_Descr &);
 	virtual ~ProductionSite_Descr();
 
-#ifdef WRITE_GAME_DATA_AS_HTML
-	void writeHTMLProduction(::FileWrite &) const;
-#endif
 	virtual Building & create_object() const;
 
 	uint32_t nr_working_positions() const {

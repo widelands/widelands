@@ -30,7 +30,7 @@ struct Section;
 
 namespace Widelands {
 
-struct Editor_Game_Base;
+class Editor_Game_Base;
 
 #define WORLD_NAME_LEN 128
 #define WORLD_AUTHOR_LEN 128
@@ -292,7 +292,7 @@ private:
   * it can read a world file.
   */
 struct World : boost::noncopyable {
-	friend struct Game;
+	friend class Game;
 
 	enum {
 		OK = 0,

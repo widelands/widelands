@@ -37,7 +37,7 @@ struct AreaWatcher_Descr;
  * is destroyed. Use schedule_act to determine the area watcher's lifetime.
  */
 struct AreaWatcher : public Map_Object, private Player_Area<> {
-	friend struct Player;
+	friend class Player;
 	friend struct Map_Players_AreaWatchers_Data_Packet;
 	AreaWatcher(const Player_Area<>);
 	virtual int32_t get_type() const throw () {return AREAWATCHER;}

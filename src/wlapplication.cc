@@ -1385,8 +1385,6 @@ void WLApplication::show_usage()
 			 "                      Whether to enter roadbuilding mode\n"
 			 "                      automatically after placing a flag that is\n"
 			 "                      not connected to a road.\n"
-			 " --write_HTML=[yes|no]\n"
-			 "                      Write HTML-helpfiles for parsed game data.\n"
 			 "\n"
 			 "Graphic options:\n"
 			 " --fullscreen=[yes|no]\n"

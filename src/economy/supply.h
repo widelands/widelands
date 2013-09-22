@@ -26,7 +26,7 @@
 namespace Widelands {
 
 struct PlayerImmovable;
-struct Game;
+class Game;
 struct Request;
 class Warehouse;
 struct Ware_Index;
@@ -107,5 +107,3 @@ struct Supply : public Trackable {
 }
 
 #endif
-
-

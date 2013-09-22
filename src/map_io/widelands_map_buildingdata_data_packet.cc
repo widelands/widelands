@@ -261,7 +261,7 @@ void Map_Buildingdata_Data_Packet::read_formerbuildings_v2
 	} else if (is_a(Warehouse, &b)) {
 		assert(b.m_old_buildings.empty());
 		b.m_old_buildings.push_back(b_idx);
-	} else if (upcast(DismantleSite, dsite, &b)) {
+	} else if (is_a(DismantleSite, &b)) {
 		// Former buildings filled with the current one
 		// upon building init.
 		assert(!b.m_old_buildings.empty());

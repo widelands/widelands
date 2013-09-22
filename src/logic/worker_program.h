@@ -23,7 +23,6 @@
 #include "logic/bob.h"
 #include "workarea_info.h"
 #include "logic/worker.h"
-#include "writeHTML.h"
 
 namespace Widelands {
 
@@ -59,9 +58,6 @@ struct WorkerProgram : public BobProgramBase {
 
 	void parse(Worker_Descr *, Parser *, char const * name);
 	const Workarea_Info & get_workarea_info() const {return m_workarea_info;}
-#ifdef WRITE_GAME_DATA_AS_HTML
-	void writeHTML(::FileWrite &, const Worker_Descr &) const;
-#endif
 
 private:
 	Workarea_Info m_workarea_info;

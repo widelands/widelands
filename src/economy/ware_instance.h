@@ -29,8 +29,8 @@ namespace Widelands {
 
 class Building;
 class Economy;
-struct Editor_Game_Base;
-struct Game;
+class Editor_Game_Base;
+class Game;
 struct IdleWareSupply;
 class Map_Object;
 struct PlayerImmovable;
@@ -127,4 +127,3 @@ public:
 
 
 #endif
-

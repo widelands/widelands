@@ -31,11 +31,11 @@
 #include "wexception.h"
 
 namespace Widelands {
-	struct Editor_Game_Base;
-	struct Game;
+	class Editor_Game_Base;
+	class Game;
 	struct Map_Map_Object_Loader;
 	struct Map_Map_Object_Saver;
-	struct Player;
+	class Player;
 }
 
 struct LuaError : public _wexception {

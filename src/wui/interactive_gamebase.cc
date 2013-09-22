@@ -40,8 +40,8 @@ Interactive_GameBase::Interactive_GameBase
 	m_building_tooltip_format
 		(global_s.get_string("building_tooltip_format",      "%r")),
 	m_chatenabled(chatenabled),
-	m_playertype(pt),
-	m_multiplayer(multiplayer)
+	m_multiplayer(multiplayer),
+	m_playertype(pt)
 {}
 
 /// \return a pointer to the running \ref Game instance.
@@ -106,4 +106,3 @@ void Interactive_GameBase::show_game_summary()
 	}
 	new GameSummaryScreen(this, &m_game_summary);
 }
-

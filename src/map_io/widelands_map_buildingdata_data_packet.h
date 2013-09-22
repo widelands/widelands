@@ -29,7 +29,7 @@ namespace Widelands {
 class ConstructionSite;
 class Partially_Finished_Building;
 class DismantleSite;
-struct Game;
+class Game;
 class MilitarySite;
 class TrainingSite;
 class ProductionSite;

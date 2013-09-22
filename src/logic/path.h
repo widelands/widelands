@@ -34,10 +34,10 @@ namespace Widelands {
  * Represents a cross-country path found by Path::findpath, for example
  */
 struct CoordPath;
-struct Map;
+class Map;
 
 struct Path {
-	friend struct Map;
+	friend class Map;
 	friend struct MapAStarBase;
 
 	Path() {}
@@ -106,5 +106,3 @@ private:
 }
 
 #endif
-
-

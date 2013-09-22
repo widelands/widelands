@@ -28,7 +28,7 @@
 
 namespace Widelands {
 
-struct Editor_Game_Base;
+class Editor_Game_Base;
 struct Map_Map_Object_Saver;
 struct Map_Map_Object_Loader;
 
@@ -66,7 +66,7 @@ struct Map_Map_Object_Loader;
 // The price we pay is that when saving, we also have to traverse till we no
 // longer find any new command to write. This could theoretically take forever
 // but in my tests it was not noticeable.
-struct Game;
+class Game;
 
 /**
  * A command that is supposed to be executed at a certain gametime.

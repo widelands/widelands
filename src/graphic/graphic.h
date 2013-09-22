@@ -42,7 +42,7 @@ class Surface;
 class SurfaceCache;
 struct Road_Textures;
 struct SDL_Surface;
-struct StreamWrite;
+class StreamWrite;
 struct Texture;
 
 /// Stores the capabilities of opengl

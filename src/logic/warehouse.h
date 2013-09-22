@@ -31,7 +31,7 @@ struct Profile;
 
 namespace Widelands {
 
-struct Editor_Game_Base;
+class Editor_Game_Base;
 struct PortDock;
 struct Request;
 struct Requirements;

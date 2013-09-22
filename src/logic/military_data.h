@@ -23,7 +23,6 @@
 #include <map>
 #include <vector>
 
-#include "HTMLReferences.h"
 #include "logic/bob.h"
 #include "logic/building.h"
 #include "descr_maintainer.h"

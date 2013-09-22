@@ -31,7 +31,7 @@
 class Surface;
 
 namespace Widelands {
-struct Player;
+class Player;
 };
 
 /**

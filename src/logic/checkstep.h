@@ -29,8 +29,8 @@
 
 namespace Widelands {
 
-struct Map;
-struct Player;
+class Map;
+class Player;
 
 struct CheckStep {
 	enum StepId {
