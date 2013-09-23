@@ -1156,7 +1156,7 @@ void WLApplication::parse_commandline
  * was given,
  * true otherwise.
 */
-void WLApplication::handle_commandline_parameters() throw (Parameter_error)
+void WLApplication::handle_commandline_parameters()
 {
 	if (m_commandline.count("help") || m_commandline.count("version")) {
 		throw Parameter_error(); //no message on purpose

@@ -70,7 +70,7 @@ public:
 	virtual ~Editor_Game_Base();
 
 	void set_map(Map *);
-	Map & map() const throw () {return *m_map;}
+	Map & map() const {return *m_map;}
 	Map * get_map() {return m_map;}
 	Map & get_map() const {return *m_map;}
 	const Object_Manager & objects() const {return m_objects;}
@@ -153,7 +153,7 @@ public:
 	void receive(const NoteFieldPossession     &);
 	void receive(const NoteFieldTransformed    &);
 
-	void cleanup_objects() throw () {
+	void cleanup_objects() {
 		objects().cleanup(*this);
 	}
 

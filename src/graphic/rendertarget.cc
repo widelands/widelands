@@ -365,7 +365,7 @@ void RenderTarget::reset()
  * If true is returned, r a valid rectangle that can be used.
  * If false is returned, r may not be used and may be partially modified.
  */
-bool RenderTarget::clip(Rect & r) const throw ()
+bool RenderTarget::clip(Rect & r) const
 {
 	r += m_offset;
 

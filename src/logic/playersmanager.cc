@@ -97,7 +97,7 @@ Player* Players_Manager::add_player
 	return p;
 }
 
-void Players_Manager::add_player_end_status(const PlayerEndStatus& status) throw ()
+void Players_Manager::add_player_end_status(const PlayerEndStatus& status)
 {
 	// Ensure we don't have a status for it yet
 	std::vector<PlayerEndStatus>::iterator it;

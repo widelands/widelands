@@ -54,8 +54,8 @@ struct Multiline_Textarea : public Panel {
 
 	void set_font(std::string name, int32_t size, RGBColor fg);
 
-	uint32_t scrollbar_w() const throw () {return 24;}
-	uint32_t get_eff_w() const throw () {return get_w() - scrollbar_w();}
+	uint32_t scrollbar_w() const {return 24;}
+	uint32_t get_eff_w() const {return get_w() - scrollbar_w();}
 
 	void set_color(RGBColor fg) {m_fcolor = fg;}
 

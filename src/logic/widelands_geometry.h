@@ -29,7 +29,7 @@ namespace Widelands {
 typedef uint32_t Map_Index;
 
 struct Extent {
-	Extent(uint16_t const W, uint16_t const H) throw () : w(W), h(H) {}
+	Extent(uint16_t const W, uint16_t const H) : w(W), h(H) {}
 	uint16_t w, h;
 };
 
@@ -40,22 +40,22 @@ typedef Coordinate Y_Coordinate;
  * Structure used to store map coordinates
  */
 struct Coords {
-	explicit Coords() throw () {}
-	Coords(const X_Coordinate nx, const Y_Coordinate ny) throw ()
+	explicit Coords() {}
+	Coords(const X_Coordinate nx, const Y_Coordinate ny)
 		: x(nx), y(ny)
 	{}
 
 	/// Returns a special value indicating invalidity.
-	static Coords Null() throw () {return Coords(-1, -1);}
+	static Coords Null() {return Coords(-1, -1);}
 
-	bool operator== (const Coords& other) const throw () {
+	bool operator== (const Coords& other) const {
 		return x == other.x and y == other.y;
 	}
-	bool operator!= (const Coords & other) const throw () {
+	bool operator!= (const Coords & other) const {
 		return not (*this == other);
 	}
 
-	operator bool() const throw () {return *this != Null();}
+	operator bool() const {return *this != Null();}
 
 	/**
 	 * For use with standard containers.
@@ -88,15 +88,15 @@ struct Area : public _Coords_type
 {
 	typedef _Coords_type Coords_type;
 	typedef _Radius_type Radius_type;
-	Area() throw () {}
-	Area(const Coords_type center, const Radius_type Radius) throw ()
+	Area() {}
+	Area(const Coords_type center, const Radius_type Radius)
 		: Coords_type(center), radius(Radius)
 	{}
 
-	bool operator== (const Area& other) const throw () {
+	bool operator== (const Area& other) const {
 		return Coords_type::operator== (other) and radius == other.radius;
 	}
-	bool operator!= (const Area& other) const throw () {
+	bool operator!= (const Area& other) const {
 		return Coords_type::operator!= (other) or  radius != other.radius;
 	}
 
@@ -109,11 +109,11 @@ template <typename Area_type = Area<> > struct HollowArea : public Area_type {
 		: Area_type(area), hole_radius(Hole_Radius)
 	{}
 
-	bool operator== (const HollowArea& other) const throw () {
+	bool operator== (const HollowArea& other) const {
 		return
 			Area_type::operator== (other) and hole_radius == other.hole_radius;
 	}
-	bool operator!= (const HollowArea& other) const throw () {
+	bool operator!= (const HollowArea& other) const {
 		return not (*this == other);
 	}
 
@@ -123,8 +123,8 @@ template <typename Area_type = Area<> > struct HollowArea : public Area_type {
 struct Field;
 
 struct FCoords : public Coords {
-	FCoords() throw () : field(0) {}
-	FCoords(const Coords & nc, Field * const nf) throw () : Coords(nc), field(nf)
+	FCoords() : field(0) {}
+	FCoords(const Coords & nc, Field * const nf) : Coords(nc), field(nf)
 	{}
 
 	/**
@@ -133,7 +133,7 @@ struct FCoords : public Coords {
 	 *
 	 * \note You really want to use \ref Map::get_fcoords instead.
 	 */
-	explicit FCoords(const Coords & nc) throw () : Coords(nc), field(0) {}
+	explicit FCoords(const Coords & nc) : Coords(nc), field(0) {}
 
 	Field * field;
 };
@@ -142,15 +142,15 @@ struct FCoords : public Coords {
 template <typename Coords_type = Coords> struct TCoords : public Coords_type {
 	enum TriangleIndex {D, R, None};
 
-	TCoords() throw () : t() {}
-	TCoords(const Coords_type C, const TriangleIndex T = None) throw ()
+	TCoords() : t() {}
+	TCoords(const Coords_type C, const TriangleIndex T = None)
 		: Coords_type(C), t(T)
 	{}
 
-	bool operator== (const TCoords& other) const throw () {
+	bool operator== (const TCoords& other) const {
 		return Coords_type::operator== (other) and t == other.t;
 	}
-	bool operator!= (const TCoords& other) const throw () {
+	bool operator!= (const TCoords& other) const {
 		return Coords_type::operator!= (other) or  t != other.t;
 	}
 
@@ -161,18 +161,18 @@ template <typename Coords_type = Coords> struct TCoords : public Coords_type {
 template
 <typename Node_Coords_type = Coords, typename Triangle_Coords_type = Coords>
 struct Node_and_Triangle {
-	Node_and_Triangle() throw () {}
+	Node_and_Triangle() {}
 	Node_and_Triangle
 		(const Node_Coords_type              Node,
 		 const TCoords<Triangle_Coords_type>& Triangle)
-		throw ()
+
 			: node(Node), triangle(Triangle)
 	{}
 
-	bool operator== (Node_and_Triangle<> const other) const throw () {
+	bool operator== (Node_and_Triangle<> const other) const {
 		return node == other.node and triangle == other.triangle;
 	}
-	bool operator!= (Node_and_Triangle<> const other) const throw () {
+	bool operator!= (Node_and_Triangle<> const other) const {
 		return not (*this == other);
 	}
 

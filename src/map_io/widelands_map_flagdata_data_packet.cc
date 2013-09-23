@@ -44,7 +44,6 @@ void Map_Flagdata_Data_Packet::Read
 	 Editor_Game_Base      &       egbase,
 	 bool                    const skip,
 	 Map_Map_Object_Loader &       mol)
-throw (_wexception)
 {
 	if (skip)
 		return;
@@ -227,7 +226,7 @@ throw (_wexception)
 
 void Map_Flagdata_Data_Packet::Write
 	(FileSystem & fs, Editor_Game_Base & egbase, Map_Map_Object_Saver & mos)
-	throw (_wexception)
+
 {
 	FileWrite fw;
 

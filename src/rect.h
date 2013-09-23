@@ -23,11 +23,11 @@
 #include "point.h"
 
 struct Rect : public Point {
-	Rect() throw () : w(0), h(0) {}
-	Rect(int32_t gx, int32_t gy, uint32_t W, uint32_t H) throw ()
+	Rect() : w(0), h(0) {}
+	Rect(int32_t gx, int32_t gy, uint32_t W, uint32_t H)
 		: Point(gx, gy), w(W), h(H)
 	{}
-	Rect(const Point& p, uint32_t W, uint32_t H) throw ()
+	Rect(const Point& p, uint32_t W, uint32_t H)
 		: Point(p), w(W), h(H)
 	{}
 	Point bottom_right() const {return *this + Point(w, h);}

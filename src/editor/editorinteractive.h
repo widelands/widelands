@@ -81,7 +81,7 @@ public:
 			set_port_space(unset_port_space)
 
 		{}
-		Editor_Tool & current() const throw () {return *current_pointer;}
+		Editor_Tool & current() const {return *current_pointer;}
 		typedef std::vector<Editor_Tool *> Tool_Vector;
 		typedef Tool_Vector::size_type Index;
 		//Tool_Vector                     tools;
@@ -109,7 +109,7 @@ public:
 
 	void select_tool(Editor_Tool &, Editor_Tool::Tool_Index);
 
-	Widelands::Player * get_player() const throw () {return 0;}
+	Widelands::Player * get_player() const {return 0;}
 
 	// action functions
 	void exit();

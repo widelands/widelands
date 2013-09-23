@@ -68,22 +68,22 @@ struct ProductionSite_Descr : public Building_Descr {
 			result += i.current->second;
 		return result;
 	}
-	const Ware_Types & working_positions() const throw () {
+	const Ware_Types & working_positions() const {
 		return m_working_positions;
 	}
-	bool is_output_ware_type  (const Ware_Index& i) const throw () {
+	bool is_output_ware_type  (const Ware_Index& i) const {
 		return m_output_ware_types  .count(i);
 	}
-	bool is_output_worker_type(const Ware_Index& i) const throw () {
+	bool is_output_worker_type(const Ware_Index& i) const {
 		return m_output_worker_types.count(i);
 	}
-	const Ware_Types & inputs() const throw () {return m_inputs;}
+	const Ware_Types & inputs() const {return m_inputs;}
 	typedef std::set<Ware_Index>                       Output;
 	const Output   & output_ware_types  () const {return m_output_ware_types;}
 	const Output   & output_worker_types() const {return m_output_worker_types;}
 	const ProductionProgram * get_program(const std::string &) const;
 	typedef std::map<std::string, ProductionProgram *> Programs;
-	const Programs & programs() const throw () {return m_programs;}
+	const Programs & programs() const {return m_programs;}
 
 	const std::vector<std::string> & compatibility_program(const std::string & progname) const;
 	const std::vector<std::string> & compatibility_working_positions(const std::string & workername) const;
@@ -153,7 +153,7 @@ public:
 
 	virtual WaresQueue & waresqueue(Ware_Index);
 
-	char const * type_name() const throw () {return "productionsite";}
+	char const * type_name() const {return "productionsite";}
 	virtual void init(Editor_Game_Base &);
 	virtual void cleanup(Editor_Game_Base &);
 	virtual void act(Game &, uint32_t data);
@@ -170,7 +170,7 @@ public:
 	const Input_Queues & warequeues() const {return m_input_queues;}
 	const std::vector<Worker *>& workers() const;
 
-	bool can_start_working() const throw ();
+	bool can_start_working() const;
 
 	void set_default_anim(std::string);
 
@@ -271,8 +271,8 @@ struct Input {
 	{}
 	~Input() {}
 
-	Ware_Index ware() const throw () {return m_ware;}
-	uint8_t     max() const throw () {return m_max;}
+	Ware_Index ware() const {return m_ware;}
+	uint8_t     max() const {return m_max;}
 
 private:
 	Ware_Index m_ware;

@@ -36,13 +36,13 @@ struct TrainingSite_Descr : public ProductionSite_Descr {
 
 	virtual Building & create_object() const;
 
-	uint32_t get_max_number_of_soldiers() const throw () {
+	uint32_t get_max_number_of_soldiers() const {
 		return m_num_soldiers;
 	}
-	bool get_train_hp     () const throw () {return m_train_hp;}
-	bool get_train_attack () const throw () {return m_train_attack;}
-	bool get_train_defense() const throw () {return m_train_defense;}
-	bool get_train_evade  () const throw () {return m_train_evade;}
+	bool get_train_hp     () const {return m_train_hp;}
+	bool get_train_attack () const {return m_train_attack;}
+	bool get_train_defense() const {return m_train_defense;}
+	bool get_train_evade  () const {return m_train_evade;}
 
 	int32_t get_min_level(tAttribute) const;
 	int32_t get_max_level(tAttribute) const;
@@ -116,7 +116,7 @@ class TrainingSite : public ProductionSite, public SoldierControl {
 public:
 	TrainingSite(const TrainingSite_Descr &);
 
-	char const * type_name() const throw () {return "trainingsite";}
+	char const * type_name() const {return "trainingsite";}
 	virtual std::string get_statistics_string();
 
 	virtual void init(Editor_Game_Base &);
@@ -142,8 +142,8 @@ public:
 	// Begin implementation of SoldierControl
 	virtual std::vector<Soldier *> presentSoldiers() const;
 	virtual std::vector<Soldier *> stationedSoldiers() const;
-	virtual uint32_t minSoldierCapacity() const throw ();
-	virtual uint32_t maxSoldierCapacity() const throw ();
+	virtual uint32_t minSoldierCapacity() const;
+	virtual uint32_t maxSoldierCapacity() const;
 	virtual uint32_t soldierCapacity() const;
 	virtual void setSoldierCapacity(uint32_t capacity);
 	virtual void dropSoldier(Soldier &);

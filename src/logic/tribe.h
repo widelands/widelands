@@ -68,8 +68,8 @@ struct Tribe_Descr : boost::noncopyable {
 	static void get_all_tribe_infos(std::vector<TribeBasicInfo> &);
 
 
-	const std::string & name() const throw () {return m_name;}
-	const World & world() const throw () {return m_world;}
+	const std::string & name() const {return m_name;}
+	const World & world() const {return m_world;}
 
 	Ware_Index get_nrworkers() const {return m_workers.get_nitems();}
 	Worker_Descr const * get_worker_descr(const Ware_Index& index) const {

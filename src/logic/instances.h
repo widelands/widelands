@@ -57,8 +57,8 @@ struct Map_Object_Descr : boost::noncopyable {
 	{}
 	virtual ~Map_Object_Descr() {m_anims.clear();}
 
-	const std::string &     name() const throw () {return m_name;}
-	const std::string & descname() const throw () {return m_descname;}
+	const std::string &     name() const {return m_name;}
+	const std::string & descname() const {return m_descname;}
 	struct Animation_Nonexistent {};
 	uint32_t get_animation(char const * const anim) const {
 		std::map<std::string, uint32_t>::const_iterator it = m_anims.find(anim);
@@ -70,12 +70,12 @@ struct Map_Object_Descr : boost::noncopyable {
 		return get_animation(animname.c_str());
 	}
 
-	uint32_t main_animation() const throw () {
+	uint32_t main_animation() const {
 		return m_anims.begin() != m_anims.end() ? m_anims.begin()->second : 0;
 	}
 
 	std::string get_animation_name(uint32_t) const; ///< needed for save, debug
-	bool has_attribute(uint32_t) const throw ();
+	bool has_attribute(uint32_t) const;
 	static uint32_t get_attribute_id(const std::string & name);
 	static std::string get_attribute_name(uint32_t id);
 
@@ -192,8 +192,8 @@ protected:
 	virtual ~Map_Object() {}
 
 public:
-	virtual int32_t get_type() const throw () = 0;
-	virtual char const * type_name() const throw () {return "map object";}
+	virtual int32_t get_type() const = 0;
+	virtual char const * type_name() const {return "map object";}
 
 	Serial serial() const {return m_serial;}
 
@@ -374,7 +374,7 @@ struct Object_Manager : boost::noncopyable {
 	 * When saving the map object, ordere matters. Return a vector of all ids
 	 * that are currently available;
 	 */
-	std::vector<Serial> all_object_serials_ordered () const throw ();
+	std::vector<Serial> all_object_serials_ordered () const;
 
 private:
 	Serial   m_lastserial;
@@ -402,13 +402,13 @@ struct Object_Ptr {
 	Map_Object * get(const Editor_Game_Base &);
 	Map_Object * get(const Editor_Game_Base & egbase) const;
 
-	bool operator<  (const Object_Ptr & other) const throw () {
+	bool operator<  (const Object_Ptr & other) const {
 		return m_serial < other.m_serial;
 	}
-	bool operator== (const Object_Ptr & other) const throw () {
+	bool operator== (const Object_Ptr & other) const {
 		return m_serial == other.m_serial;
 	}
-	bool operator!= (const Object_Ptr & other) const throw () {
+	bool operator!= (const Object_Ptr & other) const {
 		return m_serial != other.m_serial;
 	}
 

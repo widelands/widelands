@@ -74,29 +74,29 @@ struct Building_Descr : public Map_Object_Descr {
 	/**
 	 * The build cost for direct construction
 	 */
-	const Buildcost & buildcost() const throw () {return m_buildcost;}
+	const Buildcost & buildcost() const {return m_buildcost;}
 
 	/**
 	 * Returned wares for dismantling
 	 */
-	const Buildcost & returned_wares() const throw () {return m_return_dismantle;}
+	const Buildcost & returned_wares() const {return m_return_dismantle;}
 
 	/**
 	 * The build cost for enhancing a previous building
 	 */
-	const Buildcost & enhancement_cost() const throw () {return m_enhance_cost;}
+	const Buildcost & enhancement_cost() const {return m_enhance_cost;}
 
 	/**
 	 * The returned wares for a enhaced building
 	 */
-	const Buildcost & returned_wares_enhanced() const throw () {return m_return_enhanced;}
+	const Buildcost & returned_wares_enhanced() const {return m_return_enhanced;}
 	const Image* get_buildicon() const {return m_buildicon;}
-	int32_t get_size() const throw () {return m_size;}
+	int32_t get_size() const {return m_size;}
 	bool get_ismine() const {return m_mine;}
 	bool get_isport() const {return m_port;}
 	virtual uint32_t get_ui_anim() const {return get_animation("idle");}
 
-	const Enhancements & enhancements() const throw () {return m_enhancements;}
+	const Enhancements & enhancements() const {return m_enhancements;}
 	void add_enhancement(const Building_Index & i) {
 		assert(not m_enhancements.count(i));
 		m_enhancements.insert(i);
@@ -120,11 +120,11 @@ struct Building_Descr : public Map_Object_Descr {
 	virtual void load_graphics();
 
 	virtual uint32_t get_conquers() const;
-	virtual uint32_t vision_range() const throw ();
+	virtual uint32_t vision_range() const;
 	bool has_help_text() const {return m_helptext_script != "";}
 	std::string helptext_script() const {return m_helptext_script;}
 
-	const Tribe_Descr & tribe() const throw () {return m_tribe;}
+	const Tribe_Descr & tribe() const {return m_tribe;}
 	Workarea_Info m_workarea_info;
 
 	virtual int32_t suitability(const Map &, FCoords) const;
@@ -180,22 +180,22 @@ public:
 
 	void load_finish(Editor_Game_Base &);
 
-	const Tribe_Descr & tribe() const throw () {return descr().tribe();}
+	const Tribe_Descr & tribe() const {return descr().tribe();}
 
-	virtual int32_t  get_type    () const throw ();
-	char const * type_name() const throw () {return "building";}
-	virtual int32_t  get_size    () const throw ();
-	virtual bool get_passable() const throw ();
+	virtual int32_t  get_type    () const;
+	char const * type_name() const {return "building";}
+	virtual int32_t  get_size    () const;
+	virtual bool get_passable() const;
 	virtual uint32_t get_ui_anim () const;
 
 	virtual Flag & base_flag();
-	virtual uint32_t get_playercaps() const throw ();
+	virtual uint32_t get_playercaps() const;
 
-	virtual Coords get_position() const throw () {return m_position;}
-	virtual PositionList get_positions (const Editor_Game_Base &) const throw ();
+	virtual Coords get_position() const {return m_position;}
+	virtual PositionList get_positions (const Editor_Game_Base &) const;
 
-	const std::string & name() const throw ();
-	const std::string & descname() const throw () {return descr().descname();}
+	const std::string & name() const;
+	const std::string & descname() const {return descr().descname();}
 
 	std::string info_string(const std::string & format);
 	virtual std::string get_statistics_string();
@@ -215,8 +215,8 @@ public:
 
 	bool leave_check_and_wait(Game &, Worker &);
 	void leave_skip(Game &, Worker &);
-	uint32_t get_conquers() const throw () {return descr().get_conquers();}
-	virtual uint32_t vision_range() const throw () {
+	uint32_t get_conquers() const {return descr().get_conquers();}
+	virtual uint32_t vision_range() const {
 		return descr().vision_range();
 	}
 
@@ -229,7 +229,7 @@ public:
 	void collect_priorities
 		(std::map<int32_t, std::map<Ware_Index, int32_t> > & p) const;
 
-	const std::set<Building_Index> & enhancements() const throw () {
+	const std::set<Building_Index> & enhancements() const {
 		return descr().enhancements();
 	}
 

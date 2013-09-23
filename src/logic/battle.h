@@ -40,8 +40,8 @@ public:
 	Battle(Game &, Soldier &, Soldier &); //  to create a new battle in the game
 
 	// Implements Map_Object.
-	virtual int32_t get_type() const throw () {return BATTLE;}
-	virtual char const * type_name() const throw () {return "battle";}
+	virtual int32_t get_type() const {return BATTLE;}
+	virtual char const * type_name() const {return "battle";}
 	virtual void init(Editor_Game_Base &);
 	virtual void cleanup(Editor_Game_Base &);
 	virtual bool has_new_save_support() {return true;}

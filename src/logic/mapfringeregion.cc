@@ -22,7 +22,7 @@
 namespace Widelands {
 
 template <>
-bool MapFringeRegion<Area<FCoords> >::advance(const Map & map) throw () {
+bool MapFringeRegion<Area<FCoords> >::advance(const Map & map) {
 	switch (m_phase) {
 	case 0:
 		if (m_area.radius) {
@@ -50,7 +50,7 @@ bool MapFringeRegion<Area<FCoords> >::advance(const Map & map) throw () {
 }
 
 template <>
-bool MapFringeRegion<Area<> >::advance(const Map & map) throw () {
+bool MapFringeRegion<Area<> >::advance(const Map & map) {
 	switch (m_phase) {
 	case 0:
 		if (m_area.radius) {

@@ -28,7 +28,7 @@ class Exception : public std::exception {
 public:
 	Exception(std::string msg) : std::exception(), m_msg(msg) {
 	}
-	virtual ~Exception() throw () {}
+	virtual ~Exception() {}
 	virtual const char* what() const throw () {return m_msg.c_str();}
 
 private:
@@ -55,4 +55,3 @@ DEF_ERR(WidthTooSmall);
 };
 
 #endif /* end of include guard: RT_ERRORS_H */
-

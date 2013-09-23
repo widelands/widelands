@@ -214,7 +214,7 @@ bool Deserializer::avail() const
 }
 
 
-DisconnectException::DisconnectException(const char * fmt, ...) throw ()
+DisconnectException::DisconnectException(const char * fmt, ...)
 {
 	char buffer[512];
 	{
@@ -226,7 +226,7 @@ DisconnectException::DisconnectException(const char * fmt, ...) throw ()
 	m_what = buffer;
 }
 
-DisconnectException::~DisconnectException() throw ()
+DisconnectException::~DisconnectException()
 {
 }
 

@@ -105,23 +105,23 @@ Road & Road::create
 	return road;
 }
 
-int32_t Road::get_type() const throw ()
+int32_t Road::get_type() const
 {
 	return ROAD;
 }
 
-int32_t Road::get_size() const throw ()
+int32_t Road::get_size() const
 {
 	return SMALL;
 }
 
-bool Road::get_passable() const throw ()
+bool Road::get_passable() const
 {
 	return true;
 }
 
 BaseImmovable::PositionList Road::get_positions
-	(const Editor_Game_Base & egbase) const throw ()
+	(const Editor_Game_Base & egbase) const
 {
 	Map & map = egbase.map();
 	Coords curf = map.get_fcoords(m_path.get_start());
@@ -140,7 +140,7 @@ BaseImmovable::PositionList Road::get_positions
 }
 
 static std::string const road_name = "road";
-const std::string & Road::name() const throw () {return road_name;}
+const std::string & Road::name() const {return road_name;}
 
 
 Flag & Road::base_flag()

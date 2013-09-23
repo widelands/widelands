@@ -93,7 +93,7 @@ public:
 	const Point & get_offset() const {return m_offset;}
 
 protected:
-	bool clip(Rect & r) const throw ();
+	bool clip(Rect & r) const;
 
 	void doblit(Point dst, const Image* src, Rect srcrc, Composite cm = CM_Normal);
 

@@ -52,12 +52,12 @@ Fleet::Fleet(Player & player) :
 {
 }
 
-int32_t Fleet::get_type() const throw ()
+int32_t Fleet::get_type() const
 {
 	return FLEET;
 }
 
-char const * Fleet::type_name() const throw ()
+char const * Fleet::type_name() const
 {
 	return "fleet";
 }

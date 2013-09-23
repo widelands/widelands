@@ -204,12 +204,12 @@ public:
 	const Tags & get_tags() const {return m_tags;}
 	bool has_tag(std::string & s) const {return m_tags.count(s);}
 
-	Player_Number get_nrplayers() const throw () {return m_nrplayers;}
-	ScenarioTypes scenario_types() const throw () {return m_scenario_types;}
-	Extent extent() const throw () {return Extent(m_width, m_height);}
-	X_Coordinate get_width   () const throw () {return m_width;}
-	Y_Coordinate get_height  () const throw () {return m_height;}
-	World & world() const throw () {return *m_world;}
+	Player_Number get_nrplayers() const {return m_nrplayers;}
+	ScenarioTypes scenario_types() const {return m_scenario_types;}
+	Extent extent() const {return Extent(m_width, m_height);}
+	X_Coordinate get_width   () const {return m_width;}
+	Y_Coordinate get_height  () const {return m_height;}
+	World & world() const {return *m_world;}
 	World * get_world() const {return m_world;}
 
 	//  The next few functions are only valid when the map is loaded as a
@@ -306,7 +306,7 @@ public:
 
 	void get_neighbour (const Coords &, Direction dir,  Coords *) const;
 	void get_neighbour(const FCoords &, Direction dir, FCoords *) const;
-	FCoords get_neighbour(const FCoords &, Direction dir) const throw ();
+	FCoords get_neighbour(const FCoords &, Direction dir) const;
 
 	// Pathfinding
 	int32_t findpath
@@ -1026,7 +1026,6 @@ inline FCoords Map::br_n(const FCoords & f) const {
 }
 
 inline FCoords Map::get_neighbour(const FCoords & f, const Direction dir) const
-throw ()
 {
 	switch (dir) {
 	case WALK_NW: return tl_n(f);

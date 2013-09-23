@@ -79,7 +79,7 @@ struct Map_View : public UI::Panel {
 	void need_complete_redraw() {m_complete_redraw_needed = true;}
 
 protected:
-	Interactive_Base & intbase() const throw () {return m_intbase;}
+	Interactive_Base & intbase() const {return m_intbase;}
 
 private:
 	void stop_dragging();

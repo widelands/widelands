@@ -38,10 +38,10 @@ struct MilitarySite_Descr : public ProductionSite_Descr {
 	virtual Building & create_object() const;
 
 	virtual uint32_t get_conquers() const {return m_conquer_radius;}
-	uint32_t get_max_number_of_soldiers () const throw () {
+	uint32_t get_max_number_of_soldiers () const {
 		return m_num_soldiers;
 	}
-	uint32_t get_heal_per_second        () const throw () {
+	uint32_t get_heal_per_second        () const {
 		return m_heal_per_second;
 	}
 
@@ -69,7 +69,7 @@ public:
 	MilitarySite(const MilitarySite_Descr &);
 	virtual ~MilitarySite();
 
-	char const * type_name() const throw () {return "militarysite";}
+	char const * type_name() const {return "militarysite";}
 	virtual std::string get_statistics_string();
 
 	virtual void init(Editor_Game_Base &);
@@ -83,8 +83,8 @@ public:
 	// Begin implementation of SoldierControl
 	virtual std::vector<Soldier *> presentSoldiers() const;
 	virtual std::vector<Soldier *> stationedSoldiers() const;
-	virtual uint32_t minSoldierCapacity() const throw ();
-	virtual uint32_t maxSoldierCapacity() const throw ();
+	virtual uint32_t minSoldierCapacity() const;
+	virtual uint32_t maxSoldierCapacity() const;
 	virtual uint32_t soldierCapacity() const;
 	virtual void setSoldierCapacity(uint32_t capacity);
 	virtual void dropSoldier(Soldier &);

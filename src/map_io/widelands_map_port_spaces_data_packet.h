@@ -29,14 +29,12 @@ class Map;
 /// The port data packet contains all port build spaces
 struct Map_Port_Spaces_Data_Packet : public Map_Data_Packet {
 	void Read
-		(FileSystem &, Editor_Game_Base &, bool, Map_Map_Object_Loader &)
-		throw (_wexception);
-	void Write(FileSystem &, Editor_Game_Base &, Map_Map_Object_Saver &)
-		throw (_wexception);
+		(FileSystem &, Editor_Game_Base &, bool, Map_Map_Object_Loader &);
+	void Write(FileSystem &, Editor_Game_Base &, Map_Map_Object_Saver &);
 
 	//  The following function prereads a given map without the need of a
 	//  properly configured Editor_Game_Base object.
-	void Pre_Read(FileSystem &, Map *) throw (_wexception);
+	void Pre_Read(FileSystem &, Map*);
 
 	uint32_t get_version() {return m_version;}
 

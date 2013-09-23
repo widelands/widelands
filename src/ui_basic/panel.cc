@@ -592,7 +592,7 @@ void Panel::do_think()
 /**
  * Get mouse position relative to this panel
 */
-Point Panel::get_mouse_position() const throw () {
+Point Panel::get_mouse_position() const {
 	return
 		(_parent ?
 		 _parent             ->get_mouse_position()

@@ -37,7 +37,7 @@ struct Editor_Set_Terrain_Tool : public Editor_Tool, public MultiSelect {
 	Editor_Action_Args format_args_impl(Editor_Interactive & parent);
 
 	char const * get_sel_impl() const {return "pics/fsel.png";}
-	bool operates_on_triangles() const throw () {return true;};
+	bool operates_on_triangles() const {return true;};
 };
 
 #endif

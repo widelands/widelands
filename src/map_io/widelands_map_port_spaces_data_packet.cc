@@ -34,7 +34,7 @@ namespace Widelands {
 #define CURRENT_PACKET_VERSION 1
 
 void Map_Port_Spaces_Data_Packet::Read
-	(FileSystem & fs, Editor_Game_Base & egbase, bool, Map_Map_Object_Loader &) throw (_wexception)
+	(FileSystem & fs, Editor_Game_Base & egbase, bool, Map_Map_Object_Loader &)
 {
 	Profile prof;
 	prof.read("port_spaces", 0, fs);
@@ -66,7 +66,7 @@ void Map_Port_Spaces_Data_Packet::Read
 
 
 void Map_Port_Spaces_Data_Packet::Write(FileSystem & fs, Editor_Game_Base & egbase, Map_Map_Object_Saver &)
-	throw (_wexception)
+
 {
 	Profile prof;
 	Section & s1 = prof.create_section("global");

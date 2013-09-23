@@ -22,7 +22,7 @@
 
 template<typename T> struct interval {
 	interval(const T Min, const T Max) : min(Min), max(Max) {}
-	bool valid() const throw () {return min <= max;}
+	bool valid() const {return min <= max;}
 	T min, max;
 };
 

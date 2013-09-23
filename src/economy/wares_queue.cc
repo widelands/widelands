@@ -171,7 +171,7 @@ void WaresQueue::add_to_economy(Economy & e)
 /**
  * Change size of the queue.
  */
-void WaresQueue::set_max_size(const uint32_t size) throw ()
+void WaresQueue::set_max_size(const uint32_t size)
 {
 	uint32_t old_size = m_max_size;
 	m_max_size = size;
@@ -192,7 +192,7 @@ void WaresQueue::set_max_size(const uint32_t size) throw ()
  * but if there are more wares than that in the queue, they will not get
  * lost (the building should drop them).
  */
-void WaresQueue::set_max_fill(uint32_t size) throw ()
+void WaresQueue::set_max_fill(uint32_t size)
 {
 	if (size > m_max_size)
 		size = m_max_size;
@@ -205,7 +205,7 @@ void WaresQueue::set_max_fill(uint32_t size) throw ()
 /**
  * Change fill status of the queue.
  */
-void WaresQueue::set_filled(const uint32_t filled) throw () {
+void WaresQueue::set_filled(const uint32_t filled) {
 	if (m_owner.get_economy()) {
 		if (filled > m_filled)
 			m_owner.get_economy()->add_wares(m_ware, filled - m_filled);
@@ -224,7 +224,7 @@ void WaresQueue::set_filled(const uint32_t filled) throw () {
  *
  * This interval is merely a hint for the Supply/Request balancing code.
 */
-void WaresQueue::set_consume_interval(const uint32_t time) throw ()
+void WaresQueue::set_consume_interval(const uint32_t time)
 {
 	m_consume_interval = time;
 

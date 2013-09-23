@@ -22,7 +22,6 @@
 namespace Widelands {
 
 template <> bool MapDifferenceRegion<Area<FCoords> >::advance(const Map & map)
-throw ()
 {
 	assert(1 <= m_direction);
 	assert     (m_direction <= 6);
@@ -43,7 +42,6 @@ throw ()
 
 template <>
 void MapDifferenceRegion<Area<FCoords> >::move_to_other_side(const Map & map)
-throw ()
 {
 	assert(1 <= m_direction);
 	assert     (m_direction <= 6);

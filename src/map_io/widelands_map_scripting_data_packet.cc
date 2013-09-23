@@ -40,7 +40,6 @@ void Map_Scripting_Data_Packet::Read
 	 Editor_Game_Base      &       egbase,
 	 bool is_normal_game,
 	 Map_Map_Object_Loader &       mol)
-throw (_wexception)
 {
 	if (not is_normal_game) { // Only load scripting stuff if this is a scenario
 		egbase.lua().register_scripts(fs, "map");
@@ -60,7 +59,6 @@ throw (_wexception)
 
 void Map_Scripting_Data_Packet::Write
 	(FileSystem & fs, Editor_Game_Base & egbase, Map_Map_Object_Saver & mos)
-throw (_wexception)
 {
 	ScriptContainer & p = egbase.lua().get_scripts_for("map");
 

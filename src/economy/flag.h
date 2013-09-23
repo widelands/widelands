@@ -66,16 +66,16 @@ struct Flag : public PlayerImmovable, public RoutingNode {
 	void load_finish(Editor_Game_Base &);
 	virtual void destroy(Editor_Game_Base &);
 
-	virtual int32_t  get_type    () const throw ();
-	char const * type_name() const throw () {return "flag";}
-	virtual int32_t  get_size    () const throw ();
-	virtual bool get_passable() const throw ();
-	const std::string & name() const throw ();
+	virtual int32_t  get_type    () const;
+	char const * type_name() const {return "flag";}
+	virtual int32_t  get_size    () const;
+	virtual bool get_passable() const;
+	const std::string & name() const;
 
 	virtual Flag & base_flag();
 
 	const Coords & get_position() const {return m_position;}
-	virtual PositionList get_positions (const Editor_Game_Base &) const throw ();
+	virtual PositionList get_positions (const Editor_Game_Base &) const;
 	void get_neighbours(WareWorker type, RoutingNodeNeighbours &);
 	int32_t get_waitcost() const {return m_item_filled;}
 

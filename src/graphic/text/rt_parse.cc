@@ -90,7 +90,7 @@ public:
 	void add_attribute(string name, Attr * a) {
 		m_attrs[name] = a;
 	}
-	const IAttr & operator[] (const std::string & s) const throw (AttributeNotFound) {
+	const IAttr & operator[] (const std::string & s) const {
 		map<string, Attr*>::const_iterator i = m_attrs.find(s);
 		if (i == m_attrs.end())
 			throw AttributeNotFound(s);

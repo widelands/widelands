@@ -92,7 +92,7 @@ public:
 	/**
 	* Adds a new player status for a player that left the game.
 	*/
-	void add_player_end_status(const PlayerEndStatus & status) throw ();
+	void add_player_end_status(const PlayerEndStatus & status);
 
 private:
 	Player                 * m_players[MAX_PLAYERS];

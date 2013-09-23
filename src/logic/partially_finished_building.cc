@@ -120,7 +120,7 @@ void Partially_Finished_Building::request_builder(Game &) {
 Override: construction size is always the same size as the building
 ===============
 */
-int32_t Partially_Finished_Building::get_size() const throw () {
+int32_t Partially_Finished_Building::get_size() const {
 	return m_building->get_size();
 }
 
@@ -130,7 +130,7 @@ Override: Even though construction sites cannot be built themselves, you can
 bulldoze them.
 ===============
 */
-uint32_t Partially_Finished_Building::get_playercaps() const throw () {
+uint32_t Partially_Finished_Building::get_playercaps() const {
 	uint32_t caps = Building::get_playercaps();
 
 	caps |= PCap_Bulldoze;

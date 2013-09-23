@@ -24,12 +24,12 @@
 
 /// Like a point but with an additional bright factor and texture coordinates.
 struct Vertex:public Point {
-	Vertex() throw () : Point (0, 0), b(0), tx(0), ty(0) {}
+	Vertex() : Point (0, 0), b(0), tx(0), ty(0) {}
 	Vertex
 		(const int32_t vx,  const int32_t vy,
 		 const int32_t vb,
 		 const int32_t vtx, const int32_t vty)
-		throw ()
+
 		: Point(vx, vy), b(vb), tx(vtx), ty(vty)
 	{}
 

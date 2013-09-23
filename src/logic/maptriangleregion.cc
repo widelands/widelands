@@ -73,7 +73,7 @@ template <> MapTriangleRegion<>::MapTriangleRegion
 }
 
 
-template <> bool MapTriangleRegion<>::advance(const Map & map) throw () {
+template <> bool MapTriangleRegion<>::advance(const Map & map) {
 	assert(m_remaining_in_row < 10000); //  Catch wrapping (integer underflow)
 	if (m_remaining_in_row == 0)
 		return false;
@@ -200,7 +200,7 @@ template <> MapTriangleRegion<TCoords<FCoords> >::MapTriangleRegion
 
 /// Traverse the region by row.
 template <>
-bool MapTriangleRegion<TCoords<FCoords> >::advance(const Map & map) throw ()
+bool MapTriangleRegion<TCoords<FCoords> >::advance(const Map & map)
 {
 	assert(m_remaining_in_row < 10000); //  Catch wrapping (integer underflow)
 	if (m_remaining_in_row == 0)

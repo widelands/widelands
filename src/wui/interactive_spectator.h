@@ -42,7 +42,7 @@ struct Interactive_Spectator : public Interactive_GameBase {
 
 	void start();
 
-	Widelands::Player * get_player() const throw ();
+	Widelands::Player * get_player() const;
 
 	bool handle_key(bool down, SDL_keysym);
 

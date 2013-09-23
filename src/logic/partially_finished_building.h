@@ -46,8 +46,8 @@ public:
 	virtual void init   (Editor_Game_Base &);
 	virtual void cleanup(Editor_Game_Base &);
 
-	virtual int32_t get_size() const throw ();
-	virtual uint32_t get_playercaps() const throw ();
+	virtual int32_t get_size() const;
+	virtual uint32_t get_playercaps() const;
 	virtual uint32_t get_ui_anim() const;
 
 	virtual void set_economy(Economy *);
@@ -84,4 +84,3 @@ protected:
 }
 
 #endif /* end of include guard: PARTIALLY_FINISHED_BUILDING_H */
-

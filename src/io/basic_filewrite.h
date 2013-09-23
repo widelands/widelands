@@ -37,8 +37,8 @@ template <typename Base> struct basic_FileWrite : public Base {
 		/// Returns a special value indicating invalidity.
 		static Pos Null() {return std::numeric_limits<size_t>::max();}
 
-		bool isNull() const throw () {return *this == Null();}
-		operator size_t() const throw () {return pos;}
+		bool isNull() const {return *this == Null();}
+		operator size_t() const {return pos;}
 		Pos operator++ () {return ++pos;}
 		Pos operator+= (Pos const other) {return pos += other.pos;}
 	private:
@@ -72,11 +72,11 @@ template <typename Base> struct basic_FileWrite : public Base {
 
 	/// Get the position that will be written to in the next write operation that
 	/// does not specify a position.
-	Pos GetPos() const throw () {return filepos;}
+	Pos GetPos() const {return filepos;}
 
 	/// Set the file pointer to a new location. The position can be beyond the
 	/// current end of file.
-	void SetPos(const Pos pos) throw () {filepos = pos;}
+	void SetPos(const Pos pos) {filepos = pos;}
 
 	/**
 	 * Write data at the given location. If pos is NoPos(), write at the

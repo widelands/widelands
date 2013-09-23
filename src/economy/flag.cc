@@ -144,24 +144,24 @@ void Flag::set_flag_position(Coords coords) {
 	m_position = coords;
 }
 
-int32_t Flag::get_type() const throw ()
+int32_t Flag::get_type() const
 {
 	return FLAG;
 }
 
-int32_t Flag::get_size() const throw ()
+int32_t Flag::get_size() const
 {
 	return SMALL;
 }
 
-bool Flag::get_passable() const throw ()
+bool Flag::get_passable() const
 {
 	return true;
 }
 
 
 static std::string const flag_name = "flag";
-const std::string & Flag::name() const throw () {return flag_name;}
+const std::string & Flag::name() const {return flag_name;}
 
 
 Flag & Flag::base_flag()
@@ -254,7 +254,7 @@ void Flag::detach_road(int32_t const dir)
  * Return all positions we occupy on the map. For a Flag, this is only one
 */
 BaseImmovable::PositionList Flag::get_positions
-	(const Editor_Game_Base &) const throw ()
+	(const Editor_Game_Base &) const
 {
 	PositionList rv;
 	rv.push_back(m_position);

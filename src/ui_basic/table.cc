@@ -198,7 +198,7 @@ bool Table<void *>::Entry_Record::is_checked(uint8_t const col) const {
 
 Table<void *>::Entry_Record * Table<void *>::find
 	(const void * const entry) const
-	throw ()
+
 {
 	container_iterate_const(Entry_Record_vector, m_entry_records, i)
 		if ((*i.current)->entry() == entry)

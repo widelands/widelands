@@ -632,13 +632,13 @@ void Sound_Handler::change_music
 }
 
 
-bool Sound_Handler::get_disable_music() const throw () {return m_disable_music;}
-bool Sound_Handler::get_disable_fx   () const throw () {return m_disable_fx;}
-int32_t  Sound_Handler::get_music_volume() const throw ()
+bool Sound_Handler::get_disable_music() const {return m_disable_music;}
+bool Sound_Handler::get_disable_fx   () const {return m_disable_fx;}
+int32_t  Sound_Handler::get_music_volume() const
 {
 	return m_music_volume;
 }
-int32_t  Sound_Handler::get_fx_volume() const throw ()
+int32_t  Sound_Handler::get_fx_volume() const
 {
 	return m_fx_volume;
 }

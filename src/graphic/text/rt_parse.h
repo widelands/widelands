@@ -48,7 +48,7 @@ class IAttrMap {
 public:
 	virtual ~IAttrMap() {};
 
-	virtual const IAttr & operator[] (const std::string&) const throw (AttributeNotFound) = 0;
+	virtual const IAttr & operator[] (const std::string&) const = 0;
 	virtual bool has(const std::string &) const = 0;
 };
 
@@ -89,4 +89,3 @@ IParser * setup_parser();
 }
 
 #endif /* end of include guard: RT_PARSER_H */
-
