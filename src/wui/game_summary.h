@@ -20,8 +20,6 @@
 #ifndef GAME_SUMMARY_H
 #define GAME_SUMMARY_H
 
-#include <boost/signal.hpp>
-
 #include "ui_basic/box.h"
 #include "ui_basic/button.h"
 #include "ui_basic/multilinetextarea.h"
