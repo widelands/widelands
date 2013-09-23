@@ -2,19 +2,42 @@
 
 set -e 
 
-SOURCE_DIR="../../wl_bzr/"
+if [ "$#" == "0" ]; then
+	echo "Usage: $0 <bzr_repo_directory>"
+	exit 1
+fi
+
+SOURCE_DIR=$1
 REVISION=`bzr revno $SOURCE_DIR`
 DESTINATION="WidelandsRelease"
 TYPE="Release"
+if [[ -f $SOURCE_DIR/VERSION ]]; then
+   echo "VERSION file found. But this is not yet implemented :(."
+   exit 1
+else
+   WLVERSION="r$REVISION"
+fi
+
 echo ""
 echo "   Source:      $SOURCE_DIR"
-echo "   Revision:    bzr$REVISION"
+echo "   Version:     $WLVERSION"
 echo "   Destination: $DESTINATION"
 echo "   Type:        $TYPE"
 echo ""
 
+function MakeDMG {
+   # Sanity check: Make sure Widelands is there.
+   test -f $DESTINATION/Widelands.app/Contents/MacOS/widelands
+
+   find $DESTINATION -name ".?*" -exec rm -v {} \;
+   UP=$(dirname $DESTINATION)
+
+   echo "Creating DMG ..."
+   hdiutil create -fs HFS+ -volname "Widelands $WLVERSION" -srcfolder "$DESTINATION" "$UP/widelands_64bit_$WLVERSION.dmg" 
+}
 
 function MakeAppPackage {
+   echo "Making $DESTINATION/Widelands.app now."
    rm -Rf $DESTINATION/
 
    mkdir $DESTINATION/
@@ -29,7 +52,7 @@ function MakeAppPackage {
       CFBundleName = widelands;
       CFBundleDisplayName = Widelands;
       CFBundleIdentifier = "org.widelands.wl";
-      CFBundleVersion = bzr$REVISION;
+      CFBundleVersion = $WLVERSION;
       "CFBundleInfoDictionaryVersion" = "6.0";
       CFBundlePackageType = APPL;
       CFBundleSignature = wdld;
@@ -39,39 +62,37 @@ function MakeAppPackage {
 
    echo "Copying data files ..."
    rsync -Ca $SOURCE_DIR/ $DESTINATION/Widelands.app/Contents/MacOS/ \
+      --exclude "build" \
+      --exclude "cmake" \
       --exclude "doc" \
       --exclude "locale" \
-      --exclude "src" \
-      --exclude "cmake" \
-      --exclude "CMakeLists*" \
-      --exclude "*.cmake" \
-      --exclude "build" \
-      --exclude "po" \
-      --exclude "test" \
       --exclude "manual_test" \
+      --exclude "po" \
+      --exclude "src" \
+      --exclude "test" \
       --exclude "utils" \
+      --exclude "*.cmake" \
       --exclude "*.py" \
       --exclude "*.sh" \
-      --exclude ".*"
+      --exclude ".*" \
+      --exclude "CMakeLists*"
 
    echo "Copying locales ..."
    rsync -Ca locale $DESTINATION/Widelands.app/Contents/MacOS/
 
-   echo "Stripping and copying binary ..."
+   echo "Copying binary ..."
    cp -a src/widelands $DESTINATION/Widelands.app/Contents/MacOS/
+
+   echo "Stripping binary ..."
    strip -u -r $DESTINATION/Widelands.app/Contents/MacOS/widelands 
 	
-   echo "Copying dynamic libraries over ...."
+   echo "Copying dynamic libraries ..."
    dylibbundler -od -b -x $DESTINATION/Widelands.app/Contents/MacOS/widelands  -d $DESTINATION/Widelands.app/Contents/libs
-
-   if [[ ! -f  $DESTINATION/Widelands.app/Contents/MacOS/VERSION ]]; then
-      echo "### WARNING: No VERSION file found. Hopefully this is a nightly."
-   fi
 }
 
 function BuildWidelands() {
    cmake $SOURCE_DIR $GENERATOR \
-      -DCMAKE_CXX_COMPILER:FILEPATH="$(pwd)/compiler_wrapper.sh" \
+      -DCMAKE_CXX_COMPILER:FILEPATH="$(cd $(dirname $0); pwd)/compiler_wrapper.sh" \
       -DCMAKE_OSX_DEPLOYMENT_TARGET:STRING="10.7" \
       -DCMAKE_OSX_SYSROOT:PATH="/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.7.sdk" \
       -DCMAKE_INSTALL_PREFIX:PATH="$DESTINATION/Widelands.app/Contents/MacOS" \
@@ -111,16 +132,13 @@ function BuildWidelands() {
       \
       -DLUA_LIBRARIES:STRING="/usr/local/lib/liblua.a" \
       -DLUA_INCLUDE_DIR:PATH="/usr/local/include" \
-      -DLUA_LIBRARY:FILEPATH="/usr/local/lib/liblua.a" \
-      \
-      -DBoost_USE_STATIC_LIBS="ON"
+      -DLUA_LIBRARY:FILEPATH="/usr/local/lib/liblua.a"
 
    make -j2
 
-   echo "Done building. Check otool output for non System libraries."
-   otool -L src/widelands | egrep -v '\s\/System'
+   echo "Done building."
 }
 
 BuildWidelands
 MakeAppPackage
-
+MakeDMG
