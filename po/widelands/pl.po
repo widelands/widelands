@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: Widelands svn4804\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2013-09-15 19:41+0200\n"
-"PO-Revision-Date: 2013-09-16 10:40+0000\n"
+"PO-Revision-Date: 2013-09-23 19:51+0000\n"
 "Last-Translator: Albert Einstein <aaaaa@tlen.pl>\n"
 "Language-Team: Language <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
@@ -15,8 +15,8 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2013-09-17 04:34+0000\n"
-"X-Generator: Launchpad (build 16765)\n"
+"X-Launchpad-Export-Date: 2013-09-24 05:25+0000\n"
+"X-Generator: Launchpad (build 16771)\n"
 
 #: ../../src/computer_player.cc:38
 msgid "None"
@@ -2004,7 +2004,7 @@ msgstr "magazyn: %s"
 #: ../../src/map_io/widelands_map_buildingdata_data_packet.cc:889
 #, c-format
 msgid "militarysite: %s"
-msgstr "terenwojskowy: %s"
+msgstr "teren wojskowy: %s"
 
 #: ../../src/map_io/widelands_map_buildingdata_data_packet.cc:1046
 #, c-format
@@ -2014,7 +2014,7 @@ msgstr "program %s był pominięty w czasie %u, ale czas jest tylko %u"
 #: ../../src/map_io/widelands_map_buildingdata_data_packet.cc:1264
 #, c-format
 msgid "trainingsite: %s"
-msgstr "obóztreningowy: %s"
+msgstr "obózt reningowy: %s"
 
 #: ../../src/map_io/widelands_map_elemental_data_packet.cc:70
 #, c-format
