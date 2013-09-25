@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: Widelands svn4530\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2013-09-15 17:41+0000\n"
-"PO-Revision-Date: 2012-11-02 16:14+0000\n"
-"Last-Translator: SirVer <Unknown>\n"
+"PO-Revision-Date: 2013-09-24 12:00+0000\n"
+"Last-Translator: Angelo Locritani <Unknown>\n"
 "Language-Team: Gabriel Rota <gabriel.rota@gmail.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-09-16 04:34+0000\n"
-"X-Generator: Launchpad (build 16761)\n"
+"X-Launchpad-Export-Date: 2013-09-25 05:11+0000\n"
+"X-Generator: Launchpad (build 16771)\n"
 "X-Poedit-Country: ITALY\n"
 "X-Poedit-Language: Italian\n"
 "X-Poedit-SourceCharset: utf-8\n"
@@ -48,6 +48,8 @@ msgid ""
 ">Where dat? A thousand miles from here.< [Porgy and Bess] You have to go "
 "long, long way to conquer all the islands. Good luck!"
 msgstr ""
+">Dove? A mille miglia da qui.< [Porgy e Bess] Hai tanta strada da fare per "
+"conquistare tutte le isole. Buona fortuna!"
 
 #: ../../maps/Comet Island.wmf/elemental:9
 msgid ""
@@ -114,6 +116,7 @@ msgstr ""
 #: ../../maps/Ice wars.wmf/elemental:11
 msgid "After autumn is winter. Some things are frozen, but not the war."
 msgstr ""
+"Dopo l'autunno, arriva l'inverno. Alcune cose si congelano, ma non la guerra."
 
 #: ../../maps/Kings and Queens.wmf/elemental:11
 msgid ""
@@ -121,6 +124,9 @@ msgid ""
 "in prosperity, will someday collapse into a devastating war. Has your latest "
 "betrayal been one too many and will the prophecy come true?"
 msgstr ""
+"Un'antica leggenda narra che questi sette regni, fioriti e prosperi per "
+"secoli, un giorno cadranno in una guerra devastante. Forse il tuo ultimo "
+"tradimento è stato di troppo e la profezia si avvererà?"
 
 #: ../../maps/The long way.wmf/elemental:9
 msgid ""
@@ -158,7 +164,7 @@ msgstr "Barbari - Il secondo Impero"
 
 #: ../../maps/Calvisson.wmf/elemental:9
 msgid "Calvisson"
-msgstr ""
+msgstr "Calvisson"
 
 #: ../../campaigns/cconfig:44
 msgid "Challenging. Introduces the Atlanteans"
@@ -174,6 +180,9 @@ msgid ""
 "similar, map should be fair. There is plenty of gold near the starting point "
 "- Do you see it?"
 msgstr ""
+"Il carbone è difficile da trovare - impara a produrlo in maniera efficiente. "
+"Le posizioni di partenza sono simili, la mappa dovrebbe essere equa. C'è "
+"molto oro vicino al punto di partenza - lo vedi?"
 
 #: ../../maps/Comet Island.wmf/elemental:7
 msgid "Comet Island"
@@ -185,7 +194,7 @@ msgstr "Cratere"
 
 #: ../../maps/Crossing the horizon.wmf/elemental:9
 msgid "Crossing the horizon"
-msgstr ""
+msgstr "Attraversando l'orizzonte"
 
 #: ../../maps/Desert Tournament.wmf/elemental:7
 msgid "Desert Tournament"
@@ -203,6 +212,11 @@ msgid ""
 "priority - expeditions are universally useful and are often the fastest way "
 "to gold deposits."
 msgstr ""
+"Ogni giocatore ha un ostacolo differente all'espansione, e vi è sempre più "
+"di un sistema per superarlo. Anche se l'IA può essere sconfitta senza "
+"costruire neanche una nave, consigliamo ai giocatori di costruire appena "
+"possibile porti e cantieri navali - le spedizioni sono incredibilmente utili "
+"e sono spesso la via più rapida per giungere ai depositi d'oro."
 
 #: ../../maps/Four Mountains.wmf/elemental:9
 msgid ""
@@ -211,6 +225,10 @@ msgid ""
 "along the river. Hint II: Snowmen mark additional water sources. Hint III: "
 "Each mountain contains only one resource."
 msgstr ""
+"Ogni tribù è circondata da quattro possenti montagne. Chi le conquisterà per "
+"primo e reclamerà le risorse per la propria tribù? Sugg. 1: puoi trovare "
+"l'acqua lungo il fiumo. Sugg. 2: i pupazzi di neve segnalano ulteriori fonti "
+"d'acqua. Sugg. 3: ogni montagna possiede una sola risorsa."
 
 #: ../../campaigns/cconfig:30
 msgid "Easy. Introduces the Barbarians"
@@ -230,7 +248,7 @@ msgstr "Impero - I mesi dell'esilio"
 
 #: ../../maps/Fellowships.wmf/elemental:9
 msgid "Fellowships"
-msgstr ""
+msgstr "Compagni"
 
 #: ../../maps/Finlakes.wmf/elemental:9
 msgid "Finnish Lakes"
@@ -289,7 +307,7 @@ msgstr "Penisola dorata"
 
 #: ../../maps/Ice wars.wmf/elemental:9
 msgid "Ice wars"
-msgstr ""
+msgstr "Guerre di ghiaccio"
 
 #: ../../maps/Impact.wmf/elemental:7
 msgid "Impact"

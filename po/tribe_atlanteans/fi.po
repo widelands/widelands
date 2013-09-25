@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: Widelands svn4208\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2013-09-15 17:41+0000\n"
-"PO-Revision-Date: 2010-08-30 23:39+0000\n"
-"Last-Translator: Sampo Harjula <sahtor@gmail.com>\n"
+"PO-Revision-Date: 2013-09-24 16:18+0000\n"
+"Last-Translator: Teppo Mäenpää <Unknown>\n"
 "Language-Team: Finnish <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-09-16 04:37+0000\n"
-"X-Generator: Launchpad (build 16761)\n"
+"X-Launchpad-Export-Date: 2013-09-25 05:12+0000\n"
+"X-Generator: Launchpad (build 16771)\n"
 
 #: ../../tribes/atlanteans/golden_tabard/conf:1
 msgid ""
@@ -25,7 +25,7 @@ msgstr ""
 
 #: ../../tribes/atlanteans/ship/conf:1
 msgid "A sea-worthy ship"
-msgstr ""
+msgstr "Merikelpoinen alus"
 
 #: ../../tribes/atlanteans/tabard/conf:1
 msgid ""
@@ -140,7 +140,7 @@ msgstr "Leipä"
 
 #: ../../tribes/atlanteans/conf:59
 msgid "Bread Paddle"
-msgstr ""
+msgstr "Leipurin lasta"
 
 #: ../../tribes/atlanteans/fish_breeder/conf:1
 msgid "Breeds fish."
@@ -148,11 +148,11 @@ msgstr "Kasvattaa kaloja."
 
 #: ../../tribes/atlanteans/spiderbreeder/conf:1
 msgid "Breeds spider for yarn."
-msgstr "Siittää hämähäkin jamssille"
+msgstr "Tarhaa hämähäkkejä, kehrää seitistä lankaa"
 
 #: ../../tribes/atlanteans/horsebreeder/conf:1
 msgid "Breeds the strong atlantean horses"
-msgstr "Siittää vahvoja atlantealaisia hevosia"
+msgstr "Kasvattaa vahvoja atlantislaisia hevosia"
 
 #: ../../tribes/atlanteans/conf:63
 msgid "Buckets"
@@ -164,7 +164,7 @@ msgstr "Rakentaja"
 
 #: ../../tribes/atlanteans/conf:115
 msgid "Burner"
-msgstr "Polttaja"
+msgstr "Hiilenpolttaja"
 
 #: ../../tribes/atlanteans/burner/conf:1
 msgid "Burns coal."
@@ -205,7 +205,7 @@ msgstr "Hiilikaivos"
 
 #: ../../tribes/atlanteans/shipyard/conf:28
 msgid "Constructing ship"
-msgstr ""
+msgstr "Rakentaa laivaa"
 
 #: ../../tribes/atlanteans/conf:142
 msgid "Construction Site"
@@ -271,7 +271,7 @@ msgstr "Paikantaa hyviä kaivosten ja kaivojen paikkoja."
 
 #: ../../tribes/atlanteans/conf:145
 msgid "Dismantle Site"
-msgstr ""
+msgstr "Purkutyömaa"
 
 #: ../../tribes/atlanteans/conf:150
 msgid "Donjon"
@@ -389,7 +389,7 @@ msgstr "Kultainen asetakki"
 
 #: ../../tribes/atlanteans/conf:171
 msgid "Goldweaver"
-msgstr "Kullanpunomo"
+msgstr "Kultalangan kehrääjä"
 
 #: ../../tribes/atlanteans/conf:200
 msgid "Guardhall"
@@ -552,7 +552,7 @@ msgstr "Kaivosmies"
 
 #: ../../tribes/atlanteans/scripting/sc01_castle_village.lua:101
 msgid "Not enough space"
-msgstr ""
+msgstr "Ei ole tarpeeksi tilaa"
 
 #: ../../tribes/atlanteans/conf:159
 msgid "Outpost"
@@ -583,7 +583,7 @@ msgstr ""
 
 #: ../../tribes/atlanteans/blackroot_farm/conf:22
 msgid "Plant blackroot"
-msgstr "Istuta mustajuuri"
+msgstr "Istuta mustajuurta"
 
 #: ../../tribes/atlanteans/farm/conf:24
 msgid "Plant corn"
@@ -603,7 +603,7 @@ msgstr "Istuttaa puita."
 
 #: ../../tribes/atlanteans/conf:165
 msgid "Port"
-msgstr ""
+msgstr "Satama"
 
 #: ../../tribes/atlanteans/armoursmithy/conf:30
 msgid "Produce advanced shield"
@@ -821,19 +821,19 @@ msgstr "Vartiopaikka"
 
 #: ../../tribes/atlanteans/conf:139
 msgid "Ship"
-msgstr ""
+msgstr "Laiva"
 
 #: ../../tribes/atlanteans/conf:55
 msgid "Ship construction site"
-msgstr ""
+msgstr "Telakka-alue"
 
 #: ../../tribes/atlanteans/conf:116
 msgid "Shipwright"
-msgstr ""
+msgstr "Veneseppä"
 
 #: ../../tribes/atlanteans/conf:180
 msgid "Shipyard"
-msgstr ""
+msgstr "Laivatelakka"
 
 #: ../../tribes/atlanteans/conf:91
 msgid "Shovel"
