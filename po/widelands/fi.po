@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: Widelands svn4208\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2013-09-15 19:41+0200\n"
-"PO-Revision-Date: 2013-09-24 17:28+0000\n"
+"PO-Revision-Date: 2013-09-25 12:41+0000\n"
 "Last-Translator: Teppo Mäenpää <Unknown>\n"
 "Language-Team: Finnish <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2013-09-25 05:12+0000\n"
+"X-Launchpad-Export-Date: 2013-09-26 05:10+0000\n"
 "X-Generator: Launchpad (build 16771)\n"
 "X-Poedit-Country: FINLAND\n"
 "X-Poedit-Language: Finnish\n"
@@ -1737,7 +1737,7 @@ msgstr ""
 
 #: ../../src/logic/ship.cc:423
 msgid "Port space found"
-msgstr ""
+msgstr "Luonnonsatama löytyi"
 
 #: ../../src/logic/ship.cc:424
 msgid "An expedition ship found a new port build space."
@@ -2266,7 +2266,7 @@ msgstr ""
 
 #: ../../src/network/internet_gaming.cc:171
 msgid "For hosting a game, please take a look at the notes at:"
-msgstr ""
+msgstr "Ohjeita verkkopelin isännöintiin löytyy osoitteessa"
 
 #: ../../src/network/internet_gaming.cc:302
 msgid "Something went wrong: "
@@ -2294,12 +2294,14 @@ msgid ""
 "Expected a LOGIN, RELOGIN or REJECTED packet from server, but received "
 "command %s. Maybe the metaserver is using a different protocol version ?"
 msgstr ""
+"Odotin saavani joko LOGIN-, RELOGIN- tai REJECTED-paketin palvelimelta, "
+"mutta sainkin %s:n. Ehkä meta-pelipalvelin käyttää protokollan eri versiota?"
 
 #: ../../src/network/internet_gaming.cc:425
 #, c-format
 msgid ""
 "WARNING: Received a %s command although we are not in CONNECTING state."
-msgstr ""
+msgstr "HUOMIO: Sain paketin %s, vaikka olen CONNECTING-tilassa."
 
 #: ../../src/network/internet_gaming.cc:434
 #, c-format
@@ -2337,17 +2339,17 @@ msgstr "Viestinlähetys epäonnistui. Yrititkö lähettää yksityisviestin?"
 
 #: ../../src/network/internet_gaming.cc:778
 msgid "Conversion error"
-msgstr ""
+msgstr "Muunnos epäonnistui"
 
 #: ../../src/network/internet_gaming.cc:779
 #, c-format
 msgid "Conversion from std::string to bool failed. String was \"%s\""
-msgstr ""
+msgstr "Muunnos std:string:stä bool:ksi epäonnistui. Merkkijono oli \"%s\"."
 
 #: ../../src/network/internet_gaming_messages.cc:42
 #, c-format
 msgid "No user with the name %s is logged in!"
-msgstr ""
+msgstr "Käyttäjä %s ei ole kirjautunut."
 
 #: ../../src/network/internet_gaming_messages.cc:43
 #: ../../src/network/nethost.cc:1260
@@ -2367,6 +2369,8 @@ msgid ""
 "You got disconnected, as you sent a superuser command without superuser "
 "permission. This incident will be logged and reported to the administrator."
 msgstr ""
+"Yhteytesi katkaistiin, koska lähetit ylläpitokomennon ilman ylläpito-"
+"oikeuksia. Tämä tapahtuma raportoidaan ylläpidolle."
 
 #: ../../src/network/internet_gaming_messages.cc:50
 msgid "You got disconnected, as the metaserver is currently restarting."
@@ -2394,6 +2398,8 @@ msgid ""
 "You got disconnected from the metaserver, as you did not answer a PING "
 "request in time."
 msgstr ""
+"Yhteytesi meta-pelipalvelimeen katkaistiin, koska et vastannut PING-pyyntöön "
+"ajoissa."
 
 #: ../../src/network/internet_gaming_messages.cc:60
 msgid ""
@@ -2402,6 +2408,8 @@ msgid ""
 "http://wl.widelands.org/wiki/InternetGaming for setting up your internet "
 "connection for hosting a game online."
 msgstr ""
+"Meta-pelipalvelin ei voinut liittää sinua peliin. peliin ei saada yhteyttä. "
+"Katso lisäohjeita osoitteesta http://wl.widelands.org/wiki/InternetGaming"
 
 #: ../../src/network/internet_gaming_messages.cc:64
 msgid ""
@@ -2435,7 +2443,7 @@ msgstr " Automaattinen pelitallenne luodaan."
 
 #: ../../src/network/netclient.cc:1112
 msgid "Disconnected from Host"
-msgstr ""
+msgstr "Yhteys palvelimeen katkesi"
 
 #: ../../src/network/nethost.cc:368
 msgid ""
@@ -2472,7 +2480,7 @@ msgstr ""
 #: ../../src/network/nethost.cc:409 ../../src/network/nethost.cc:435
 #, c-format
 msgid "The client %s could not be found."
-msgstr ""
+msgstr "Asiakasta %s ei löydy."
 
 #: ../../src/network/nethost.cc:420
 msgid "Wrong use, should be: /kick <name> <reason>"
