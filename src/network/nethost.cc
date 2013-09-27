@@ -2881,7 +2881,7 @@ void NetHost::disconnectPlayerController(uint8_t const number, const std::string
 		}
 	}
 
-	setPlayerState(number, PlayerSettings::stateClosed);
+	setPlayerState(number, PlayerSettings::stateOpen);
 	if (d->game)
 		initComputerPlayer(number + 1);
 }
@@ -3000,4 +3000,3 @@ void NetHost::report_result
 		("NetHost::report_result(%d, %d, %s)\n",
 		 player->player_number(), result, info.c_str());
 }
-
