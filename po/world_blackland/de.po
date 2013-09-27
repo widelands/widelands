@@ -6,17 +6,25 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands unofficial-bzr-launchpad-i18n-4955\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2013-06-16 09:11+0000\n"
-"PO-Revision-Date: 2011-03-23 08:03+0000\n"
-"Last-Translator: LAZA <Unknown>\n"
+"POT-Creation-Date: 2013-09-15 17:41+0000\n"
+"PO-Revision-Date: 2013-08-30 13:10+0000\n"
+"Last-Translator: Nasenbaer <Unknown>\n"
 "Language-Team: German <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-06-17 05:15+0000\n"
-"X-Generator: Launchpad (build 16667)\n"
+"X-Launchpad-Export-Date: 2013-09-16 04:47+0000\n"
+"X-Generator: Launchpad (build 16761)\n"
 "X-Poedit-Country: GERMANY\n"
 "X-Poedit-Language: German\n"
+
+#: ../../worlds/blackland/terrainconf:7
+msgid "Ashes"
+msgstr "Asche"
+
+#: ../../worlds/blackland/terrainconf:77
+msgid "Ashes2"
+msgstr "Asche 2"
 
 #: ../../worlds/blackland/conf:45
 msgid "Aspen"
@@ -33,6 +41,10 @@ msgstr "kleine Espe"
 #: ../../worlds/blackland/conf:48
 msgid "Aspen tiny"
 msgstr "junge Espe"
+
+#: ../../worlds/blackland/terrainconf:29
+msgid "Beach"
+msgstr "Strand"
 
 #: ../../worlds/blackland/conf:65
 msgid "Beech"
@@ -128,6 +140,26 @@ msgstr "Granit"
 msgid "Grass"
 msgstr "Gras"
 
+#: ../../worlds/blackland/terrainconf:94
+msgid "Hard lava"
+msgstr "Lavagestein"
+
+#: ../../worlds/blackland/terrainconf:41
+msgid "Hardground1"
+msgstr "Harter Boden"
+
+#: ../../worlds/blackland/terrainconf:47
+msgid "Hardground2"
+msgstr "Harter Boden 2"
+
+#: ../../worlds/blackland/terrainconf:53
+msgid "Hardground3"
+msgstr "Harter Boden 3"
+
+#: ../../worlds/blackland/terrainconf:83
+msgid "Hardground4"
+msgstr "Harter Boden 4"
+
 #: ../../worlds/blackland/resconf:20
 msgid "Iron"
 msgstr "Eisen"
@@ -148,6 +180,18 @@ msgstr "kleine Lärche"
 msgid "Larch tiny"
 msgstr "junge Lärche"
 
+#: ../../worlds/blackland/terrainconf:89
+msgid "Lava"
+msgstr "Lava"
+
+#: ../../worlds/blackland/terrainconf:19
+msgid "Lava stone1"
+msgstr "Lavastein 1"
+
+#: ../../worlds/blackland/terrainconf:24
+msgid "Lava stone2"
+msgstr "Lavastein 2"
+
 #: ../../worlds/blackland/conf:57
 msgid "Maple"
 msgstr "Ahorn"
@@ -163,6 +207,22 @@ msgstr "kleiner Ahorn"
 #: ../../worlds/blackland/conf:60
 msgid "Maple tiny"
 msgstr "junger Ahorn"
+
+#: ../../worlds/blackland/terrainconf:13
+msgid "Mountain1"
+msgstr "Berg 1"
+
+#: ../../worlds/blackland/terrainconf:59
+msgid "Mountain2"
+msgstr "Berg 2"
+
+#: ../../worlds/blackland/terrainconf:65
+msgid "Mountain3"
+msgstr "Berg 3"
+
+#: ../../worlds/blackland/terrainconf:71
+msgid "Mountain4"
+msgstr "Berg 4"
 
 #: ../../worlds/blackland/conf:21
 #: ../../worlds/blackland/conf:22
@@ -268,5 +328,6 @@ msgid "These are the grey, horrible and dangerous blacklands"
 msgstr "Dies ist das graue, dunkle und gefährliche Ödland."
 
 #: ../../worlds/blackland/resconf:36
+#: ../../worlds/blackland/terrainconf:34
 msgid "Water"
 msgstr "Wasser"

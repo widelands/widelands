@@ -45,11 +45,11 @@ struct Multiline_Editbox : public Panel {
 	void set_maximum_bytes(uint32_t n);
 	uint32_t get_maximum_bytes() const;
 
+	virtual void focus();
+
 protected:
 	void draw(RenderTarget &);
 
-	bool handle_mousepress  (Uint8 btn, int32_t x, int32_t y);
-	bool handle_mouserelease(Uint8 btn, int32_t x, int32_t y);
 	bool handle_key(bool down, SDL_keysym);
 
 private:

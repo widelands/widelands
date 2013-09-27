@@ -35,7 +35,8 @@ void fileview_window
 	 const std::string          & filename);
 
 /**
- * Shows a Text in a Fullscreen Menu. Waits for the button Ok to be clicked.
+ * Shows a Text in a Fullscreen Menu. Can automatically handle Lua files and
+ * plain text files. Waits for the button Ok to be clicked.
 */
 struct Fullscreen_Menu_TextView : public Fullscreen_Menu_Base {
 	Fullscreen_Menu_TextView(const std::string & filename);

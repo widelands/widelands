@@ -22,6 +22,7 @@
 #include <algorithm>
 #include <cstdio>
 
+#include "build_info.h"
 #include "economy/flag.h"
 #include "economy/road.h"
 #include "editor/tools/editor_increase_resources_tool.h"
@@ -42,7 +43,6 @@
 #include "upcast.h"
 #include "wexception.h"
 #include "wui/overlay_manager.h"
-
 
 
 namespace Widelands {
@@ -315,6 +315,8 @@ void Map::cleanup() {
 	m_scenario_closeables.clear();
 
 	m_tags.clear();
+	m_hint = std::string();
+	m_background = std::string();
 
 	if (m_overlay_manager)
 		m_overlay_manager->reset();
@@ -391,7 +393,7 @@ void Map::set_origin(Coords const new_origin) {
 
 	// Rearrange The fields
 	// NOTE because of the triangle design, we have to take special care about cases
-	// NOTE where y is changed by a odd number
+	// NOTE where y is changed by an odd number
 	bool yisodd = (new_origin.y % 2) != 0;
 	for (FCoords c(Coords(0, 0)); c.y < m_height; ++c.y) {
 		bool cyisodd = (c.y % 2) != 0;
@@ -424,6 +426,20 @@ void Map::set_origin(Coords const new_origin) {
 				bob->m_position.field = c.field;
 			}
 		}
+
+	// Take care about port spaces
+	PortSpacesSet new_port_spaces;
+	for (PortSpacesSet::iterator it = m_port_spaces.begin(); it != m_port_spaces.end(); ++it) {
+		Coords temp;
+		if (yisodd && ((it->y % 2) == 0))
+			temp = Coords(it->x - new_origin.x - 1, it->y - new_origin.y);
+		else
+			temp = Coords(it->x - new_origin.x, it->y - new_origin.y);
+		normalize_coords(temp);
+		log("(%i,%i) -> (%i,%i)\n", it->x, it->y, temp.x, temp.y);
+		new_port_spaces.insert(temp);
+	}
+	m_port_spaces = new_port_spaces;
 }
 
 

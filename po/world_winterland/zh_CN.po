@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2013-06-16 09:11+0000\n"
+"POT-Creation-Date: 2013-09-15 17:41+0000\n"
 "PO-Revision-Date: 2011-04-25 22:16+0000\n"
 "Last-Translator: raymond <Unknown>\n"
 "Language-Team: Chinese (Simplified) <zh_CN@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-06-17 05:16+0000\n"
-"X-Generator: Launchpad (build 16667)\n"
+"X-Launchpad-Export-Date: 2013-09-16 04:49+0000\n"
+"X-Generator: Launchpad (build 16761)\n"
 
 #: ../../worlds/winterland/conf:45
 msgid "Aspen"
@@ -35,6 +35,10 @@ msgstr ""
 
 #: ../../worlds/winterland/conf:79
 msgid "Badger"
+msgstr ""
+
+#: ../../worlds/winterland/terrainconf:80
+msgid "Beach"
 msgstr ""
 
 #: ../../worlds/winterland/conf:65
@@ -126,6 +130,18 @@ msgstr ""
 msgid "Grass"
 msgstr ""
 
+#: ../../worlds/winterland/terrainconf:31
+msgid "Ice"
+msgstr ""
+
+#: ../../worlds/winterland/terrainconf:19
+msgid "Ice flows"
+msgstr ""
+
+#: ../../worlds/winterland/terrainconf:25
+msgid "Ice flows2"
+msgstr ""
+
 #: ../../worlds/winterland/resconf:20
 msgid "Iron"
 msgstr ""
@@ -144,6 +160,10 @@ msgstr ""
 
 #: ../../worlds/winterland/conf:72
 msgid "Larch tiny"
+msgstr ""
+
+#: ../../worlds/winterland/terrainconf:91
+msgid "Lava"
 msgstr ""
 
 #: ../../worlds/winterland/conf:85
@@ -168,6 +188,22 @@ msgstr ""
 
 #: ../../worlds/winterland/conf:86
 msgid "Marten"
+msgstr ""
+
+#: ../../worlds/winterland/terrainconf:13
+msgid "Mountain1"
+msgstr ""
+
+#: ../../worlds/winterland/terrainconf:62
+msgid "Mountain2"
+msgstr ""
+
+#: ../../worlds/winterland/terrainconf:68
+msgid "Mountain3"
+msgstr ""
+
+#: ../../worlds/winterland/terrainconf:74
+msgid "Mountain4"
 msgstr ""
 
 #: ../../worlds/winterland/conf:19
@@ -230,6 +266,10 @@ msgstr ""
 msgid "Skeleton"
 msgstr ""
 
+#: ../../worlds/winterland/terrainconf:96
+msgid "Snow"
+msgstr ""
+
 #: ../../worlds/winterland/conf:30
 msgid "Snowman"
 msgstr ""
@@ -269,6 +309,10 @@ msgstr ""
 msgid "Stones"
 msgstr ""
 
+#: ../../worlds/winterland/terrainconf:85
+msgid "Taiga"
+msgstr ""
+
 #: ../../worlds/winterland/conf:2
 msgid "The Widelands Development Team"
 msgstr ""
@@ -283,7 +327,24 @@ msgstr ""
 msgid "Track"
 msgstr ""
 
+#: ../../worlds/winterland/terrainconf:7
+msgid "Tundra"
+msgstr ""
+
+#: ../../worlds/winterland/terrainconf:44
+msgid "Tundra taiga"
+msgstr ""
+
+#: ../../worlds/winterland/terrainconf:50
+msgid "Tundra2"
+msgstr ""
+
+#: ../../worlds/winterland/terrainconf:56
+msgid "Tundra3"
+msgstr ""
+
 #: ../../worlds/winterland/resconf:36
+#: ../../worlds/winterland/terrainconf:37
 msgid "Water"
 msgstr ""
 

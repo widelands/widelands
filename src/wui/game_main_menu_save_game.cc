@@ -31,10 +31,10 @@
 #include "io/filesystem/filesystem.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "logic/game.h"
+#include "logic/playersmanager.h"
 #include "profile/profile.h"
 #include "timestring.h"
 #include "wui/interactive_gamebase.h"
-#include "wui/interactive_player.h"
 
 using boost::format;
 
@@ -136,18 +136,14 @@ Game_Main_Menu_Save_Game::Game_Main_Menu_Save_Game
 		m_gametime.set_text(gametimestring(gametime));
 
 		char buf[200];
-		uint8_t player_nr = parent.game().get_number_of_players();
+		uint8_t player_nr = parent.game().player_manager()->get_number_of_players();
 		sprintf(buf, "%i %s", player_nr, ngettext(_("player"), _("players"),  player_nr));
 		m_players_label.set_text(buf);
 		m_win_condition.set_text(parent.game().get_win_condition_displayname());
 	}
 
 	m_editbox->focus();
-	if (parent.game().get_ipl() && !parent.game().get_ipl()->is_multiplayer()) {
-		// Pause the game only if we are part of the game
-		// and not in multiplayer
-		parent.game().gameController()->setPaused(true);
-	}
+	pause_game(true);
 }
 
 
@@ -319,10 +315,8 @@ void Game_Main_Menu_Save_Game::ok()
 
 void Game_Main_Menu_Save_Game::die()
 {
+	pause_game(false);
 	UI::UniqueWindow::die();
-	if (igbase().game().get_ipl() && !igbase().game().get_ipl()->is_multiplayer()) {
-		igbase().game().gameController()->setPaused(false);
-	}
 }
 
 
@@ -371,3 +365,12 @@ void Game_Main_Menu_Save_Game::delete_clicked()
 	if (g_fs->FileExists(complete_filename))
 		new DeletionMessageBox(*this, complete_filename);
 }
+
+void Game_Main_Menu_Save_Game::pause_game(bool paused)
+{
+	if (igbase().is_multiplayer()) {
+		return;
+	}
+	igbase().game().gameController()->setPaused(paused);
+}
+

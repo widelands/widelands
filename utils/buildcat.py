@@ -29,7 +29,7 @@ MAINPOTS = [( "maps/maps", [
                 "../../campaigns/cconfig"
             ] ),
             ( "texts/texts", ["../../txts/license",
-                          "../../txts/README",
+                          "../../txts/*.lua",
                           "../../txts/developers",
                           "../../txts/editor_readme",
                           "../../txts/tips/*.tip"] ),

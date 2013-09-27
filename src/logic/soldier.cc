@@ -312,7 +312,7 @@ IMPLEMENTATION
 /// all done through init
 Soldier::Soldier(const Soldier_Descr & soldier_descr) : Worker(soldier_descr)
 {
-	m_battle = 0;
+	m_battle = nullptr;
 	m_hp_level      = 0;
 	m_attack_level  = 0;
 	m_defense_level = 0;
@@ -659,6 +659,13 @@ void Soldier::calc_info_icon_size
 }
 
 
+void Soldier::pop_task_or_fight(Game& game) {
+	if (m_battle)
+		start_task_battle(game);
+	else
+		pop_task(game);
+}
+
 /**
  *
  *
@@ -755,7 +762,7 @@ void Soldier::init_auto_task(Game & game) {
 struct FindNodeOwned {
 	FindNodeOwned(Player_Number owner) : m_owner(owner)
 	{};
-	bool accept(const Map & map, const FCoords & coords) const {
+	bool accept(const Map&, const FCoords& coords) const {
 		return (coords.field->get_owned_by() == m_owner);
 	}
 private:
@@ -866,7 +873,7 @@ void Soldier::attack_update(Game & game, State & state)
 				// At building, check if attack is required
 				if (!enemy) {
 					molog("[attack] returned home\n");
-					return pop_task(game);
+					return pop_task_or_fight(game);
 				}
 				state.ivar2 = 0;
 				return start_task_leavebuilding(game, false);
@@ -937,7 +944,6 @@ void Soldier::attack_update(Game & game, State & state)
 		}
 	}
 
-
 	if (m_battle)
 		return start_task_battle(game);
 
@@ -989,11 +995,12 @@ void Soldier::attack_update(Game & game, State & state)
 			if (newsite and (&newsite->owner() == &owner())) {
 				if (upcast(SoldierControl, ctrl, newsite)) {
 					state.objvar1 = 0;
+					// We may also have our location destroyed in between
 					if
 						(ctrl->stationedSoldiers().size() < ctrl->soldierCapacity() and
-						location->base_flag().get_position()
-						!=
-						newsite ->base_flag().get_position())
+						(!location || location->base_flag().get_position()
+						              !=
+						              newsite ->base_flag().get_position()))
 					{
 						molog("[attack] enemy belongs to us now, move in\n");
 						pop_task(game);
@@ -1171,7 +1178,7 @@ void Soldier::defense_update(Game & game, State & state)
 	if (state.ivar1 & CF_DEFEND_STAYHOME) {
 		if (position == location and state.ivar2 == 1) {
 			molog("[defense] stayhome: returned home\n");
-			return pop_task(game);
+			return pop_task_or_fight(game);
 		}
 
 		if (position == &baseflag) {
@@ -1235,7 +1242,7 @@ void Soldier::defense_update(Game & game, State & state)
 		// Soldier is inside of building
 		if (position == location) {
 			molog("[defense] returned home\n");
-			return pop_task(game);
+			return pop_task_or_fight(game);
 		}
 
 		// Soldier is on base flag
@@ -1419,7 +1426,7 @@ Bob::Task const Soldier::taskBattle = {
 	true
 };
 
-void Soldier::start_task_battle(Game & game)
+void Soldier::start_task_battle(Game& game)
 {
 	assert(m_battle);
 	m_combat_walking = CD_NONE;
@@ -1530,15 +1537,14 @@ void Soldier::battle_update(Game & game, State &)
 					char buffer[2048];
 					snprintf
 						(buffer, sizeof(buffer),
-						 _
-						 	("The game engine has encountered a logic error. The %s "
-						 	 "#%u of player %u could not find a way from (%i, %i) "
-						 	 "(with %s immovable) to the opponent (%s #%u of player "
-						 	 "%u) at (%i, %i) (with %s immovable). The %s will now "
-						 	 "desert (but will not be executed). Strange things may "
-						 	 "happen. No solution for this problem has been "
-						 	 "implemented yet. (bug #1951113) (The game has been "
-						 	 "paused.)"),
+							"The game engine has encountered a logic error. The %s "
+							"#%u of player %u could not find a way from (%i, %i) "
+							"(with %s immovable) to the opponent (%s #%u of player "
+							"%u) at (%i, %i) (with %s immovable). The %s will now "
+							"desert (but will not be executed). Strange things may "
+							"happen. No solution for this problem has been "
+							"implemented yet. (bug #536066) (The game has been "
+							"paused.)",
 						 descname().c_str(), serial(), owner().player_number(),
 						 get_position().x, get_position().y,
 						 immovable_position ?
@@ -1808,7 +1814,7 @@ void Soldier::log_general_info(const Editor_Game_Base & egbase)
 	molog ("HasBattle:   %s\n", m_battle ? "yes" : "no");
 	if (m_battle) {
 		molog("BattleSerial: %u\n", m_battle->serial());
-		molog("Opponent: %u\n", m_battle->has_opponent(*this) ? m_battle->opponent(*this)->serial() : 0);
+		molog("Opponent: %u\n", m_battle->opponent(*this)->serial());
 	}
 }
 

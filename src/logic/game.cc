@@ -168,13 +168,12 @@ bool Game::get_allow_cheats()
 /**
  * \return a pointer to the \ref Interactive_Player if any.
  * \note This function may return 0 (in particular, it will return 0 during
- * playback)
+ * playback or if player is spectator)
  */
 Interactive_Player * Game::get_ipl()
 {
 	return dynamic_cast<Interactive_Player *>(get_ibase());
 }
-
 
 void Game::set_game_controller(GameController * const ctrl)
 {
@@ -237,7 +236,6 @@ bool Game::run_splayer_scenario_direct(char const * const mapname) {
 
 	// We have to create the players here.
 	Player_Number const nr_players = map().get_nrplayers();
-	m_number_of_players = 0;
 	iterate_player_numbers(p, nr_players) {
 		loaderUI.stepf (_("Adding player %u"), p);
 		add_player
@@ -246,7 +244,6 @@ bool Game::run_splayer_scenario_direct(char const * const mapname) {
 			 map().get_scenario_player_tribe(p),
 			 map().get_scenario_player_name (p));
 		get_player(p)->setAI(map().get_scenario_player_ai(p));
-		m_number_of_players++;
 	}
 	m_win_condition_displayname = _("Scenario");
 
@@ -302,7 +299,6 @@ void Game::init_newgame
 	}
 	std::vector<PlayerSettings> shared;
 	std::vector<uint8_t>        shared_num;
-	m_number_of_players = 0;
 	for (uint32_t i = 0; i < settings.players.size(); ++i) {
 		const PlayerSettings & playersettings = settings.players[i];
 
@@ -323,7 +319,6 @@ void Game::init_newgame
 			 playersettings.name,
 			 playersettings.team);
 		get_player(i + 1)->setAI(playersettings.ai);
-		m_number_of_players++;
 	}
 
 	// Add shared in starting positions
@@ -412,19 +407,12 @@ bool Game::run_load_game(std::string filename) {
 		std::string background(gpdp.get_background());
 		loaderUI.set_background(background);
 		player_nr = gpdp.get_player_nr();
-		m_number_of_players = gpdp.get_number_of_players();
 		set_ibase
 			(new Interactive_Player
 			 	(*this, g_options.pull_section("global"), player_nr, true, false));
 
 		loaderUI.step(_("Loading..."));
 		gl.load_game();
-	}
-	if (m_number_of_players == 0) {
-		// Old savegame loaded, parse players to figure out their amount
-		iterate_players_existing_const(p, map().get_nrplayers(), *this, player_tmp) {
-			m_number_of_players++;
-		}
 	}
 
 	// Store the filename for further saves
@@ -484,8 +472,10 @@ void Game::postload()
  * \note loader_ui can be nullptr, if this is run as dedicated server.
  */
 bool Game::run
-	(UI::ProgressWindow * loader_ui, Start_Game_Type const start_game_type)
+	(UI::ProgressWindow * loader_ui, Start_Game_Type const start_game_type,
+	 bool replay)
 {
+	m_replay = replay;
 	postload();
 
 	if (start_game_type != Loaded) {
@@ -498,11 +488,10 @@ bool Game::run
 					loader_ui->step(step_description);
 				}
 				plr->create_default_infrastructure();
-
 			}
-		} else
+		} else {
 			// Is a scenario!
-			iterate_players_existing_novar(p, nr_players, *this)
+			iterate_players_existing_novar(p, nr_players, *this) {
 				if (not map().get_starting_pos(p))
 				throw warning
 					(_("Missing starting position"),
@@ -512,6 +501,8 @@ bool Game::run
 					 	 "You can manually add a starting position with Widelands "
 					 	 "Editor, to fix this problem."),
 					 p);
+			}
+		}
 
 		if (get_ipl())
 			get_ipl()->move_view_to
@@ -903,21 +894,33 @@ void Game::send_player_ship_scout_direction(Ship & ship, uint8_t direction)
 {
 	send_player_command
 		(*new Cmd_ShipScoutDirection
-			(get_gametime(), ship.get_economy()->owner().player_number(), ship.serial(), direction));
+			(get_gametime(), ship.get_owner()->player_number(), ship.serial(), direction));
 }
 
 void Game::send_player_ship_construct_port(Ship & ship, Coords coords)
 {
 	send_player_command
 		(*new Cmd_ShipConstructPort
-			(get_gametime(), ship.get_economy()->owner().player_number(), ship.serial(), coords));
+			(get_gametime(), ship.get_owner()->player_number(), ship.serial(), coords));
 }
 
 void Game::send_player_ship_explore_island(Ship & ship, bool cw)
 {
 	send_player_command
 		(*new Cmd_ShipExploreIsland
-			(get_gametime(), ship.get_economy()->owner().player_number(), ship.serial(), cw));
+			(get_gametime(), ship.get_owner()->player_number(), ship.serial(), cw));
+}
+
+void Game::send_player_sink_ship(Ship & ship) {
+	send_player_command
+		(*new Cmd_ShipSink
+			(get_gametime(), ship.get_owner()->player_number(), ship.serial()));
+}
+
+void Game::send_player_cancel_expedition_ship(Ship & ship) {
+	send_player_command
+		(*new Cmd_ShipCancelExpedition
+			(get_gametime(), ship.get_owner()->player_number(), ship.serial()));
 }
 
 

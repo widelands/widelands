@@ -1,0 +1,52 @@
+# Automatically created by Widelands bzr6716[widelands] (Debug)
+
+[global]
+packet_version="2"
+
+[player_1]
+name="Gracz 1"
+tribe="barbarians"
+ai=
+closeable="false"
+
+[player_2]
+name="Gracz 2"
+tribe="barbarians"
+ai=
+closeable="false"
+
+[player_3]
+name="Gracz 3"
+tribe="barbarians"
+ai=
+closeable="false"
+
+[player_4]
+name="Gracz 4"
+tribe="barbarians"
+ai=
+closeable="false"
+
+[player_5]
+name="Gracz 5"
+tribe="barbarians"
+ai=
+closeable="false"
+
+[player_6]
+name="Gracz 6"
+tribe="barbarians"
+ai=
+closeable="false"
+
+[player_7]
+name="Gracz 7"
+tribe="barbarians"
+ai=
+closeable="false"
+
+[player_8]
+name="Gracz 8"
+tribe="barbarians"
+ai=
+closeable="false"

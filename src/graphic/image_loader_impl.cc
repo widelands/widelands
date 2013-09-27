@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2012 by the Widelands Development Team
+ * Copyright (C) 2006-2013 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -30,11 +30,15 @@
 
 using namespace std;
 
-Surface* ImageLoaderImpl::load(const string& fname) const {
+Surface* ImageLoaderImpl::load(const string& fname, FileSystem* fs) const {
 	FileRead fr;
 	//log("Loading image %s.\n", fname.c_str());
 
-	fr.fastOpen(*g_fs, fname.c_str());
+	if (fs) {
+		fr.fastOpen(*fs, fname.c_str());
+	} else {
+		fr.fastOpen(*g_fs, fname.c_str());
+	}
 	SDL_Surface* sdlsurf = IMG_Load_RW(SDL_RWFromMem(fr.Data(0), fr.GetSize()), 1);
 
 	if (!sdlsurf)

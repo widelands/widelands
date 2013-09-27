@@ -1,0 +1,13 @@
+# Automatically created by Widelands bzr6716[widelands] (Debug)
+
+[global]
+packet_version="1"
+map_w="256"
+map_h="256"
+nr_players="8"
+world="greenland"
+name=_"Long, long way"
+author="Einstein13"
+descr=_">Where dat? A thousand miles from here.< [Porgy and Bess] You have to go long, long way to conquer all the islands. Good luck!"
+hint=_"Suggested Teams: blue vs red, yellow vs green, (blue, yellow) vs (red, green), (blue, yellow, black) vs (red, green, orange), (blue, yellow, black, purple) vs (red, green, orange, white)"
+tags="seafaring,official,2teams,3teams,4teams"

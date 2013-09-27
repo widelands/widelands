@@ -19,9 +19,13 @@
 
 #include "graphic/render/minimaprenderer.h"
 
+#include <memory>
+
 #include "economy/flag.h"
 #include "economy/road.h"
 #include "graphic/graphic.h"
+#include "graphic/image.h"
+#include "graphic/in_memory_image.h"
 #include "graphic/render/terrain_sdl.h"
 #include "graphic/rendertarget.h"
 #include "graphic/surface.h"
@@ -31,29 +35,49 @@
 #include "logic/player.h"
 #include "upcast.h"
 #include "wui/mapviewpixelconstants.h"
+#include "wui/mapviewpixelfunctions.h"
 #include "wui/minimap.h"
 #include "wui/overlay_manager.h"
 
 using namespace Widelands;
 
 /**
- * Renders a minimap into the current window. The field at viewpoint will be
- * in the top-left corner of the window. Flags specifies what information to
- * display (see Minimap_XXX enums).
- *
- * Calculate the field at the top-left corner of the clipping rect
- * The entire clipping rect will be used for drawing.
+ * Renders a minimap and return a pointer to the created surface.
  */
-void MiniMapRenderer::renderminimap
-	(const Widelands::Editor_Game_Base &       egbase,
-	 Player                      const * const player,
-	 Point                               const viewpoint,
-	 uint32_t                            const flags)
+Surface* MiniMapRenderer::get_minimap_image
+	(const Editor_Game_Base& egbase, const Player* player, Rect rect, Point viewpoint, uint32_t flags)
 {
-	draw_minimap
-		(egbase, player, m_rect, viewpoint -
-			((flags & MiniMap::Zoom2) ? Point(m_offset.x / 2, m_offset.y / 2) : m_offset),
-				viewpoint, flags);
+	Surface* minimap_surf = draw_minimap(egbase, player, rect, viewpoint, flags);
+	return minimap_surf;
+}
+
+void MiniMapRenderer::write_minimap_image
+	(const Editor_Game_Base& egbase, const Player* player, Point viewpoint, uint32_t flags,
+	 ::StreamWrite* const streamwrite)
+{
+	assert(streamwrite != nullptr);
+	// map dimension
+	const int16_t map_w = egbase.get_map().get_width();
+	const int16_t map_h = egbase.get_map().get_height();
+	const int32_t maxx = MapviewPixelFunctions::get_map_end_screen_x(egbase.get_map());
+	const int32_t maxy = MapviewPixelFunctions::get_map_end_screen_y(egbase.get_map());
+	// adjust the viewpoint top topleft in map coords
+	viewpoint.x += g_gr->get_xres() / 2;
+	if (viewpoint.x >= maxx)
+		viewpoint.x -= maxx;
+	viewpoint.y += g_gr->get_yres() / 2;
+	if (viewpoint.y >= maxy)
+		viewpoint.y -= maxy;
+	viewpoint.x /= TRIANGLE_WIDTH;
+	viewpoint.y /= TRIANGLE_HEIGHT;
+	viewpoint.x -= map_w / 2;
+	viewpoint.y -= map_h / 2;
+	// Render minimap
+	std::unique_ptr<Surface> surface
+		(get_minimap_image(egbase, player, Rect(0, 0, map_w, map_h), viewpoint, flags));
+	std::unique_ptr<const Image> image(new_in_memory_image("minimap", surface.release()));
+	g_gr->save_png(image.get(), streamwrite);
+	image.reset();
 }
 
 /*
@@ -90,12 +114,15 @@ inline static uint32_t calc_minimap_color
 	uint32_t pixelcolor = 0;
 
 	if (flags & MiniMap::Terrn) {
+		// We or with format.Amask here because the terrain map texture data is
+		// only RGB and not RGBA in SDL render mode. Or'ing with Amask guarantees
+		// that alpha is set to 255 for this color and is fast.
 		pixelcolor =
 			g_gr->
 			get_maptexture_data
 				(egbase.map().world()
 				 .terrain_descr(f.field->terrain_d()).get_texture())
-			->get_minimap_color(f.field->get_brightness());
+			->get_minimap_color(f.field->get_brightness()) | format.Amask;
 	}
 
 	if (flags & MiniMap::Owner) {
@@ -218,7 +245,6 @@ static void draw_minimap_int
 	 Widelands::Player           const * const player,
 	 Rect                                const rc,
 	 Point                               const viewpoint,
-	 Point                               const framepoint,
 	 uint32_t                            const flags)
 {
 	const Widelands::Map & map = egbase.map();
@@ -229,16 +255,20 @@ static void draw_minimap_int
 	int32_t xsize = g_gr->get_xres() / TRIANGLE_WIDTH / 2;
 	int32_t ysize = g_gr->get_yres() / TRIANGLE_HEIGHT / 2;
 
+	// Framepoint
+	Point frame_point = viewpoint -
+		((flags & MiniMap::Zoom2) ? Point(rc.x / 2, rc.y / 2) : Point(rc.x, rc.y));
+
 	Point ptopleft; // top left point of the current display frame
-	ptopleft.x = framepoint.x + mapwidth / 2 - xsize;
+	ptopleft.x = frame_point.x + mapwidth / 2 - xsize;
 	if (ptopleft.x < 0) ptopleft.x += mapwidth;
-	ptopleft.y = framepoint.y + mapheight / 2 - ysize;
+	ptopleft.y = frame_point.y + mapheight / 2 - ysize;
 	if (ptopleft.y < 0) ptopleft.y += mapheight;
 
 	Point pbottomright; // bottom right point of the current display frame
-	pbottomright.x = framepoint.x + mapwidth / 2 + xsize;
+	pbottomright.x = frame_point.x + mapwidth / 2 + xsize;
 	if (pbottomright.x >= mapwidth) pbottomright.x -= mapwidth;
-	pbottomright.y = framepoint.y + mapheight / 2 + ysize;
+	pbottomright.y = frame_point.y + mapheight / 2 + ysize;
 	if (pbottomright.y >= mapheight) pbottomright.y -= mapheight;
 
 	uint32_t modx = pbottomright.x % 2;
@@ -305,7 +335,7 @@ static void draw_minimap_int
 						 	 player_field.owner,
 						 	 1 < vision)
 						 :
-						 0);
+						 SDL_MapRGB(&const_cast<SDL_PixelFormat &>(format), 0, 0, 0));
 				}
 			}
 		}
@@ -319,61 +349,29 @@ Draw a minimap into the given rectangle of the bitmap.
 viewpt is the field at the top left of the rectangle.
 ===============
 */
-void MiniMapRenderer::draw_minimap
+Surface* MiniMapRenderer::draw_minimap
 	(const Widelands::Editor_Game_Base &       egbase,
 	 Widelands::Player           const * const player,
 	 Rect                                const rc,
 	 Point                               const viewpt,
-	 Point                               const framept,
 	 uint32_t                            const flags)
 {
-	// First create a temporary SDL Surface to draw the minimap. This Surface is
-	// is created in almost display pixel format without alpha channel.
-	// Bits per pixels must be 16 or 32 for the minimap code to work
+	// First create a temporary SDL Surface to draw the minimap.
 	// TODO: Currently the minimap is redrawn every frame. That is not really
 	//       necesary. The created surface could be cached and only redrawn two
 	//       or three times per second
-	const SDL_PixelFormat & fmt =
-		g_gr->get_render_target()->get_surface()->format();
-	SDL_Surface * surface =
-		SDL_CreateRGBSurface
-			(SDL_SWSURFACE,
-			 rc.w,
-			 rc.h,
-			 fmt.BytesPerPixel == 2 ? 16 : 32,
-			 fmt.Rmask,
-			 fmt.Gmask,
-			 fmt.Bmask,
-			 0);
+	Surface* surface = Surface::create(rc.w, rc.h);
 
-	Rect rc2;
-	rc2.x = rc2.y = 0;
-	rc2.w = rc.w;
-	rc2.h = rc.h;
+	surface->fill_rect(rc, RGBAColor(0, 0, 0, 255));
+	surface->lock(Surface::Lock_Normal);
 
-	SDL_FillRect(surface, 0, SDL_MapRGBA(surface->format, 0, 0, 0, 255));
-	SDL_LockSurface(surface);
+	assert (surface->format().BytesPerPixel == sizeof(Uint32));
 
-	Uint8 * const pixels = static_cast<uint8_t *>(surface->pixels);
-	Widelands::X_Coordinate const w = egbase.map().get_width();
-	switch (surface->format->BytesPerPixel) {
-	case sizeof(Uint16):
-		draw_minimap_int<Uint16>
-			(pixels, surface->pitch, *surface->format,
-			 w, egbase, player, rc2, viewpt, framept, flags);
-		break;
-	case sizeof(Uint32):
-		draw_minimap_int<Uint32>
-			(pixels, surface->pitch, *surface->format,
-			 w, egbase, player, rc2, viewpt, framept, flags);
-		break;
-	default:
-		assert(false);
-		break;
-	}
+	draw_minimap_int<Uint32>
+		(surface->get_pixels(), surface->get_pitch(), surface->format(),
+		 egbase.map().get_width(), egbase, player, rc, viewpt, flags);
 
-	SDL_UnlockSurface(surface);
+	surface->unlock(Surface::Unlock_Update);
 
-	std::unique_ptr<Surface> minimap_surface(Surface::create(surface));
-	m_surface->blit(Point(rc.x, rc.y), minimap_surface.get(), rc2);
+	return surface;
 }

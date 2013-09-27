@@ -110,19 +110,17 @@ const RGBColor Player::Colors[MAX_PLAYERS] = {
  */
 void find_former_buildings
 	(const Widelands::Tribe_Descr & tribe_descr, const Widelands::Building_Index bi,
-	 Widelands::Building_Descr::FormerBuildings* former_buildings)
+	 Widelands::Building::FormerBuildings* former_buildings)
 {
 	assert(former_buildings && former_buildings->empty());
-	const Widelands::Building_Descr * first_descr = tribe_descr.get_building_descr(bi);
-	former_buildings->push_back(first_descr);
-	bool done = false;
-	while (not done) {
-		const Widelands::Building_Descr * oldest = former_buildings->front();
+	former_buildings->push_back(bi);
+
+	for (;;) {
+		Widelands::Building_Index oldest_idx = former_buildings->front();
+		const Widelands::Building_Descr * oldest = tribe_descr.get_building_descr(oldest_idx);
 		if (!oldest->is_enhanced()) {
-			done = true;
 			break;
 		}
-		const Widelands::Building_Index & oldest_idx = tribe_descr.building_index(oldest->name());
 		for
 			(Widelands::Building_Index i = Widelands::Building_Index::First();
 			 i < tribe_descr.get_nrbuildings();
@@ -130,7 +128,7 @@ void find_former_buildings
 		{
 			const Widelands::Building_Descr* ob = tribe_descr.get_building_descr(i);
 			if (ob->enhancements().count(oldest_idx)) {
-				former_buildings->insert(former_buildings->begin(), ob);
+				former_buildings->insert(former_buildings->begin(), i);
 				break;
 			}
 		}
@@ -506,7 +504,8 @@ Building & Player::force_building
 	 const Building_Descr::FormerBuildings & former_buildings)
 {
 	Map & map = egbase().map();
-	const Building_Descr* descr = former_buildings.back();
+	Building_Index idx = former_buildings.back();
+	const Building_Descr* descr = tribe().get_building_descr(idx);
 	terraform_for_building(egbase(), player_number(), location, descr);
 	FCoords flag_loc;
 	map.get_brn(map.get_fcoords(location), &flag_loc);
@@ -522,8 +521,11 @@ Building& Player::force_csite
 	 const Building_Descr::FormerBuildings & former_buildings)
 {
 	Map & map = egbase().map();
-	const Building_Descr * descr = tribe().get_building_descr(b_idx);
-	terraform_for_building(egbase(), player_number(), location, descr);
+	if (!former_buildings.empty()) {
+		Building_Index idx = former_buildings.back();
+		const Building_Descr * descr = tribe().get_building_descr(idx);
+		terraform_for_building(egbase(), player_number(), location, descr);
+	}
 	FCoords flag_loc;
 	map.get_brn(map.get_fcoords(location), &flag_loc);
 	force_flag(flag_loc);
@@ -542,7 +544,7 @@ Place a construction site or building, checking that it's legal to do so.
 */
 Building * Player::build
 	(Coords c, Building_Index const idx, bool constructionsite,
-	 Building_Descr::FormerBuildings & former_buidlings)
+	 Building_Descr::FormerBuildings & former_buildings)
 {
 	int32_t buildcaps;
 
@@ -571,9 +573,9 @@ Building * Player::build
 	}
 
 	if (constructionsite)
-		return &egbase().warp_constructionsite(c, m_plnum, idx, false, former_buidlings);
+		return &egbase().warp_constructionsite(c, m_plnum, idx, false, former_buildings);
 	else {
-		return &descr.create(egbase(), *this, c, false, false, former_buidlings);
+		return &descr.create(egbase(), *this, c, false, false, former_buildings);
 	}
 }
 
@@ -736,7 +738,13 @@ void Player::_enhance_or_dismantle
 		//  Get workers and soldiers
 		//  Make copies of the vectors, because the originals are destroyed with
 		//  the building.
-		const std::vector<Worker  *> workers  = building->get_workers();
+		std::vector<Worker  *> workers;
+		upcast(Warehouse, wh, building);
+		if (wh) {
+			workers = wh->get_incorporated_workers();
+		} else {
+			workers = building->get_workers();
+		}
 
 		building->remove(egbase()); //  no fire or stuff
 		//  Hereafter the old building does not exist and building is a dangling
@@ -1138,11 +1146,8 @@ void Player::unsee_node
 throw ()
 {
 	Field & field = m_fields[i];
-	if (field.vision <= 1) { //  Already does not see this
-		//  FIXME This must never happen!
-		log("ERROR: Decreasing vision for node that is not seen. Report bug!\n");
+	if (field.vision <= 1) //  Already does not see this
 		return;
-	}
 
 	//  If this is not already a forwarded call, we should inform allied players
 	//  as well of this change.

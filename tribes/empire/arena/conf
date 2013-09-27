@@ -32,6 +32,7 @@ upgrade_evade_0=_Upgrade soldier evade 0 (only for compatibility with old savega
 
 [sleep]
 sleep=5000
+check_soldier=soldier attack 9    # dummy check to get sleep rated as skipped - else it will change statistics
 
 [upgrade_soldier_evade_0]
 check_soldier=soldier evade 0 # Fails when aren't any soldier of level 0 evade

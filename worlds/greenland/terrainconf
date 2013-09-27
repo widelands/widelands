@@ -4,95 +4,95 @@
 ##### suggestions without having to worry about the localized name of terrain
 
 [steppe]
-name="Steppe"
+name=_"Steppe"
 def_resources=water 5
 is=green
 dither_layer=20
 
 [berg1]
-name="Mountain1"
+name=_"Mountain1"
 resources=coal, iron, gold, granit
 is=mountain
 dither_layer=60
 
 [schnee]
-name="Snow"
+name=_"Snow"
 is=dead
 dither_layer=70
 
 [sumpf]
-name="Swamp"
+name=_"Swamp"
 def_resources=water 20
 is=unpassable
 fps=14
 dither_layer=30
 
 [strand]
-name="Beach"
+name=_"Beach"
 is=dry
 dither_layer=10
 
 [wasser]
-name="Water"
+name=_"Water"
 def_resources=fish 4
 is=water
 fps=14
 dither_layer=0
 
 [wiese1]
-name="Meadow1"
+name=_"Meadow1"
 def_resources=water 10
 is=green
 dither_layer=40
 
 [wiese2]
-name="Meadow2"
+name=_"Meadow2"
 def_resources=water 10
 is=green
 dither_layer=40
 
 [wiese3]
-name="Meadow3"
+name=_"Meadow3"
 def_resources=water 10
 is=green
 dither_layer=40
 
 [berg2]
-name="Mountain2"
+name=_"Mountain2"
 resources=coal, iron, gold, granit
 is=mountain
 dither_layer=60
 
 [berg3]
-name="Mountain3"
+name=_"Mountain3"
 resources=coal, iron, gold, granit
 is=mountain
 dither_layer=60
 
 [berg4]
-name="Mountain4"
+name=_"Mountain4"
 resources=coal, iron, gold, granit
 is=mountain
 dither_layer=60
 
 [steppe_kahl]
-name="Barren steppe"
+name=_"Barren steppe"
 def_resources=water 4
 is=green
 dither_layer=20
 
 [wiese4]
-name="Meadow4"
+name=_"Meadow4"
 def_resources=water 10
 is=green
 dither_layer=40
 
 [lava]
-name="Lava"
+name=_"Lava"
 is=acid
 dither_layer=80
 
 [bergwiese]
-name="Mountain meadow"
+name=_"Mountain meadow"
 is=green
 dither_layer=50

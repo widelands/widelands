@@ -256,12 +256,14 @@ void WatchWindow::think()
 		pos = bob->calc_drawpos(game(), pos);
 
 		Widelands::Map & map = game().map();
-		if (1 < game().get_ipl()->player().vision(map.get_index(bob->get_position(), map.get_width()))) {
+		// Drop the tracking if it leaves our vision range
+		Interactive_Player* ipl = game().get_ipl();
+		if (ipl && 1 >= ipl->player().vision(map.get_index(bob->get_position(), map.get_width()))) {
+			// Not in sight
+			views[cur_index].tracking = 0;
+		} else {
 			mapview.set_viewpoint
 				(pos - Point(mapview.get_w() / 2, mapview.get_h() / 2), false);
-		} else {
-			// stop tracking
-			views[cur_index].tracking = 0;
 		}
 	}
 
@@ -327,9 +329,10 @@ void WatchWindow::do_follow()
 			p = bob->calc_drawpos(g, p);
 			int32_t const dist =
 				MapviewPixelFunctions::calc_pix_distance(map, p, pos);
+			Interactive_Player* ipl = game().get_ipl();
 			if
 				((!closest || closest_dist > dist)
-				 && (1 < game().get_ipl()->player().vision(map.get_index(bob->get_position(), map.get_width()))))
+				 && (!ipl || 1 < ipl->player().vision(map.get_index(bob->get_position(), map.get_width()))))
 			{
 				closest = bob;
 				closest_dist = dist;

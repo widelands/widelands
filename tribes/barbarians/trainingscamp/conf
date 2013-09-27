@@ -60,6 +60,7 @@ upgrade_hp_2=_Upgrade soldier hitpoints 2 (only for compatibility with old saveg
 
 [sleep]
 sleep=5000
+check_soldier=soldier attack 9    # dummy check to get sleep rated as skipped - else it will change statistics
 
 [upgrade_soldier_attack_0]
 check_soldier=soldier attack 0 # Fails when aren't any soldier of level 0 attack

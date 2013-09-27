@@ -107,7 +107,7 @@ GameOptionsMenu::GameOptionsMenu
 	m_windows.readme.constr = boost::bind
 		(&fileview_window, boost::ref(m_gb),
 		 boost::ref(m_windows.readme),
-		 "txts/README");
+		 "txts/README.lua");
 	m_windows.license.constr = boost::bind
 		(&fileview_window, boost::ref(m_gb),
 		 boost::ref(m_windows.license),

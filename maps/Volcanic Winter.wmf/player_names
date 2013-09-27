@@ -1,0 +1,16 @@
+# Automatically created by Widelands bzr6712[widelands] (Debug)
+
+[global]
+packet_version="2"
+
+[player_1]
+name="Haegar"
+tribe="barbarians"
+ai=
+closeable="false"
+
+[player_2]
+name="Julia Cesara"
+tribe="empire"
+ai=
+closeable="false"

@@ -193,8 +193,8 @@ Building & Building_Descr::create
 	Building & b = construct ? create_constructionsite() : create_object();
 	b.m_position = pos;
 	b.set_owner(&owner);
-	BOOST_FOREACH(const Building_Descr * descr, former_buildings) {
-		b.m_old_buildings.push_back(descr);
+	BOOST_FOREACH(Building_Index idx, former_buildings) {
+		b.m_old_buildings.push_back(idx);
 	}
 	if (loading) {
 		b.Building::init(egbase);
@@ -914,6 +914,8 @@ void Building::set_seeing(bool see)
  * \param title user-visible title of the message
  * \param description user-visible message body, will be placed in an
  *   appropriate rich-text paragraph
+ * \param link_to_building_lifetime if true, the message will expire when this
+ *   building is removed from the game. Default is true
  * \param throttle_time if non-zero, the minimum time delay in milliseconds
  *   between messages of this type (see \p msgsender) within the
  *   given \p throttle_radius
@@ -923,6 +925,7 @@ void Building::send_message
 	 const std::string & msgsender,
 	 const std::string & title,
 	 const std::string & description,
+	 bool link_to_building_lifetime,
 	 uint32_t throttle_time,
 	 uint32_t throttle_radius)
 {
@@ -948,7 +951,7 @@ void Building::send_message
 
 	Message * msg = new Message
 		(msgsender, game.get_gametime(), 60 * 60 * 1000,
-		 title, rt_description, get_position(), m_serial);
+		 title, rt_description, get_position(), (link_to_building_lifetime ? m_serial : 0));
 
 	if (throttle_time)
 		owner().add_message_with_timeout

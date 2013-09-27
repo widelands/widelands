@@ -73,6 +73,7 @@ struct ChatMessage {
 	 * \return a richtext string that can be displayed to the user.
 	 */
 	std::string toPrintable() const;
+	std::string toOldRichText() const;
 
 	/**
 	 * \return a plain string containing the sender + message.
@@ -104,12 +105,6 @@ struct ChatProvider : public Widelands::NoteSender<ChatMessage> {
 	 * The message may or may not appear in subsequent calls to \ref getMessages.
 	 */
 	virtual void send(const std::string &) = 0;
-
-	/**
-	 * Sends the given message to the local player only
-	 * This may be used to display useful log messages.
-	 */
-	virtual void send_local(const std::string &) = 0;
 
 	/**
 	 * \return a (chronological) list of received chat messages.

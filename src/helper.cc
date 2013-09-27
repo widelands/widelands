@@ -112,7 +112,7 @@ bool NumberGlob::next(string* s) {
 static boost::mt19937 random_generator;
 string random_string(const string& chars, int nlen) {
 	boost::uniform_int<> index_dist(0, chars.size() - 1);
-	std::unique_ptr<char[]> buffer(new char[nlen - 1]);
+	std::unique_ptr<char[]> buffer(new char[nlen]);
 	for (int i = 0; i < nlen; ++i) {
 		buffer[i] = chars[index_dist(random_generator)];
 	}

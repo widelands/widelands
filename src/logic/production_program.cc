@@ -1228,6 +1228,7 @@ void ProductionProgram::ActMine::informPlayer
 		 _
 		 ("This mines' main vein exhausted. Expect strongly diminished returns on investment. "
 		  "You should consider to expand, dismantle or destruct it."),
+		 true,
 		 60 * 60 * 1000,
 		 0);
 }
@@ -1273,10 +1274,15 @@ void ProductionProgram::ActCheck_Soldier::execute
 {
 	SoldierControl & ctrl = dynamic_cast<SoldierControl &>(ps);
 	const std::vector<Soldier *> soldiers = ctrl.presentSoldiers();
-	const std::vector<Soldier *>::const_iterator soldiers_end = soldiers.end();
-
+	if (soldiers.empty()) {
+			snprintf
+				(ps.m_result_buffer, sizeof(ps.m_result_buffer),
+				 _("No soldier to train!"));
+		return ps.program_end(game, Skipped);
+	}
 	ps.molog("  Checking soldier (%u) level %d)\n", attribute, level);
 
+	const std::vector<Soldier *>::const_iterator soldiers_end = soldiers.end();
 	for (std::vector<Soldier *>::const_iterator it = soldiers.begin();; ++it) {
 		if (it == soldiers_end) {
 			snprintf

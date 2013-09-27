@@ -7,21 +7,21 @@ msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2013-06-16 09:11+0000\n"
-"PO-Revision-Date: 2012-10-06 11:37+0000\n"
-"Last-Translator: Nasenbaer <Unknown>\n"
+"POT-Creation-Date: 2013-09-15 17:41+0000\n"
+"PO-Revision-Date: 2013-07-28 12:12+0000\n"
+"Last-Translator: Johannes Haupt <Unknown>\n"
 "Language-Team: German <de@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-06-17 05:16+0000\n"
-"X-Generator: Launchpad (build 16667)\n"
+"X-Launchpad-Export-Date: 2013-09-16 04:49+0000\n"
+"X-Generator: Launchpad (build 16761)\n"
 
 #: ../../scripting/win_condition_texts.lua:31
 msgid "%i trees."
 msgstr "%i Bäume."
 
-#: ../../scripting/win_condition_texts.lua:54
+#: ../../scripting/win_condition_texts.lua:55
 msgid "%s %s %i%% of the land (%i of %i)."
 msgstr "%s %s %i%% des Landes (%i von %i)."
 
@@ -94,6 +94,10 @@ msgstr "Endlosspiel (kein Nebel)"
 msgid "Keep it for %i more minutes to win the game."
 msgstr "Halte den Zustand für %i weitere Minuten, um das Spiel zu gewinnen."
 
+#: ../../scripting/win_condition_texts.lua:54
+msgid "Otherwise the game will end in %i minutes."
+msgstr "Andernfalls wird das Spiel in %i Minuten enden."
+
 #: ../../scripting/win_condition_texts.lua:23
 #: ../../scripting/win_condition_texts.lua:29
 msgid "Player overview:"
@@ -124,6 +128,7 @@ msgid "Territorial Time"
 msgstr "Landherr (Zeit)"
 
 #: ../../scripting/win_condition_texts.lua:27
+#: ../../scripting/win_condition_texts.lua:53
 msgid "The game will end in %i minutes."
 msgstr "Das Spiel wird in %i Minuten enden."
 
@@ -178,13 +183,6 @@ msgstr ""
 "eingelagert sind. Der Spieler, der nach vier Stunden die höchste Punktzahl "
 "durch Waren besitzt, gewinnt das Spiel."
 
-#: ../../scripting/win_condition_texts.lua:8
-msgid ""
-"You have nothing to command left. If you want, you may continue as spectator."
-msgstr ""
-"Du hast nichts mehr zu kommandieren. Wenn du möchtest, kannst noch als "
-"Zuschauer fortfahren."
-
 #: ../../scripting/win_condition_texts.lua:3
 msgid "You have won this game!"
 msgstr "Du hast dieses Spiel gewonnen!"
@@ -192,6 +190,14 @@ msgstr "Du hast dieses Spiel gewonnen!"
 #: ../../scripting/win_condition_texts.lua:17
 msgid "You lost"
 msgstr "Du hast verloren"
+
+#: ../../scripting/win_condition_texts.lua:8
+msgid ""
+"You lost your last warehouse and are therefore defeated. You may continue as "
+"spectator if you want."
+msgstr ""
+"Du hast ein letztes Warenlager verloren und bist daher besiegt. Du kannst "
+"allerdings als Beobachter des Spiels fortfahren."
 
 #: ../../scripting/win_condition_texts.lua:48
 msgid "You own more than half of the maps area."
@@ -208,10 +214,6 @@ msgstr "Du hast gewonnen"
 #: ../../scripting/win_condition_texts.lua:18
 msgid "You've lost this game!"
 msgstr "Du hast dieses Spiel verloren!"
-
-#: ../../scripting/win_condition_texts.lua:53
-msgid "game will end in %i minutes."
-msgstr "Das Spiel wird in %i Minuten enden."
 
 #: ../../scripting/win_condition_texts.lua:33
 msgid "with %i trees."
