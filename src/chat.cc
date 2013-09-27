@@ -160,7 +160,7 @@ std::string ChatMessage::toPrintable() const
 				}
 			}
 
-			sanitized += "&lt;";
+			sanitized += "\\<";
 		} else {
 			sanitized += msg[pos];
 		}
