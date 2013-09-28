@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: Widelands svn4530\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2013-09-15 19:41+0200\n"
-"PO-Revision-Date: 2013-09-26 12:00+0000\n"
+"PO-Revision-Date: 2013-09-27 11:45+0000\n"
 "Last-Translator: Angelo Locritani <Unknown>\n"
 "Language-Team: Italiano <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2013-09-27 05:15+0000\n"
+"X-Launchpad-Export-Date: 2013-09-28 05:13+0000\n"
 "X-Generator: Launchpad (build 16774)\n"
 "X-Poedit-Country: ITALY\n"
 "X-Poedit-Language: Italian\n"
@@ -36,6 +36,10 @@ msgid ""
 "map in the map editor.\n"
 "\n"
 msgstr ""
+"ATTENZIONE: %i punti di costruzione di porti non possono essere risolti e "
+"sono stati rimossi! Alcune isole potrebbero essere ora irraggiungibili. "
+"Valuta di correggere la mappa nell'editor.\n"
+"\n"
 
 #: ../../src/s2map.cc:886
 msgid "WARNING"
@@ -90,6 +94,9 @@ msgid ""
 "Sorry, no double-instance debugging on _WIN32.\n"
 "\n"
 msgstr ""
+"\n"
+"Spiacente, nessun debugging doppia-istanza su _WIN32.\n"
+"\n"
 
 #: ../../src/wlapplication.cc:1211
 msgid "--double is disabled. This is not a debug build!"
@@ -333,13 +340,16 @@ msgstr ""
 
 #: ../../src/wlapplication.cc:1525
 msgid "Fallback settings in effect"
-msgstr ""
+msgstr "Impostazioni di fallback attive"
 
 #: ../../src/wlapplication.cc:1527
 msgid ""
 "Your video settings could not be enabled, and fallback settings are in "
 "effect. Please check the graphics options!"
 msgstr ""
+"Non è stato possibile configurare il video con i parametri specificati, sono "
+"stati ripristinati i valori di default. Per favore, controlla le opzioni "
+"relative alla grafica!"
 
 #: ../../src/wlapplication.cc:1598
 msgid "Warning: "
@@ -988,7 +998,7 @@ msgstr "sconosciuto"
 #: ../../src/logic/battle.cc:174
 #, c-format
 msgid "[battle] soldier %u lose battle\n"
-msgstr ""
+msgstr "[battaglia] il soldato %u ha perso la battaglia\n"
 
 #: ../../src/logic/battle.cc:178
 #, c-format
@@ -1690,7 +1700,7 @@ msgstr "livello"
 #: ../../src/logic/production_program.cc:1282
 #, c-format
 msgid "No soldier to train!"
-msgstr ""
+msgstr "Nessun soldato da addestrare!"
 
 #: ../../src/logic/production_program.cc:1292
 #: ../../src/logic/production_program.cc:1382
@@ -1717,11 +1727,11 @@ msgstr "(non occupato)"
 
 #: ../../src/logic/productionsite.cc:249
 msgid "Worker missing"
-msgstr ""
+msgstr "Lavoratore mancante"
 
 #: ../../src/logic/productionsite.cc:249
 msgid "Workers missing"
-msgstr ""
+msgstr "Lavoratori mancanti"
 
 #: ../../src/logic/productionsite.cc:258
 msgid "(stopped)"
@@ -1738,36 +1748,39 @@ msgstr ""
 
 #: ../../src/logic/ship.cc:423
 msgid "Port space found"
-msgstr ""
+msgstr "Trovato luogo per costruire un porto"
 
 #: ../../src/logic/ship.cc:424
 msgid "An expedition ship found a new port build space."
 msgstr ""
+"Una nave in spedizione ha trovato un nuovo luogo dove costruire un porto."
 
 #: ../../src/logic/ship.cc:531
 msgid "Island surrounded"
-msgstr ""
+msgstr "Isola circondata"
 
 #: ../../src/logic/ship.cc:532
 msgid "An expedition ship surrounded its island without any events."
-msgstr ""
+msgstr "Una nave in spedizione ha circondato la sua isola senza eventi."
 
 #: ../../src/logic/ship.cc:584
 msgid "Coast reached"
-msgstr ""
+msgstr "Raggiunta la costa"
 
 #: ../../src/logic/ship.cc:586
 msgid ""
 "An expedition ship reached a coast and is waiting for further commands."
 msgstr ""
+"Una nave in spedizione ha raggiunto la costa e sta attendendo ulteriori "
+"ordini."
 
 #: ../../src/logic/ship.cc:722
 msgid "Expedition ready"
-msgstr ""
+msgstr "Spedizione pronta"
 
 #: ../../src/logic/ship.cc:723
 msgid "An expedition ship is waiting for your commands."
-msgstr ""
+msgstr "Una nave in spedizione sta attendendo i tuoi ordini."
 
 #: ../../src/logic/ship.cc:986
 #, c-format
@@ -2233,7 +2246,7 @@ msgstr "terreno: %s"
 #: ../../src/map_io/widelands_map_version_data_packet.cc:76
 #, c-format
 msgid "version: %s"
-msgstr ""
+msgstr "versione: %s"
 
 #: ../../src/map_io/widelands_map_ware_data_packet.cc:76
 #: ../../src/map_io/widelands_map_waredata_data_packet.cc:208
@@ -2254,7 +2267,7 @@ msgstr "Problema di connessione"
 
 #: ../../src/network/internet_gaming.cc:116
 msgid "Widelands could not connect to the metaserver."
-msgstr ""
+msgstr "Widelands non riesce a connettersi al metaserver."
 
 #: ../../src/network/internet_gaming.cc:122 ../../src/network/netclient.cc:102
 msgid "Could not establish connection to host"
@@ -2354,7 +2367,7 @@ msgstr "Errore di conversione"
 #: ../../src/network/internet_gaming.cc:779
 #, c-format
 msgid "Conversion from std::string to bool failed. String was \"%s\""
-msgstr ""
+msgstr "Conversione da std::string a bool fallita. La stringa era \"%s\""
 
 #: ../../src/network/internet_gaming_messages.cc:42
 #, c-format
@@ -2379,6 +2392,9 @@ msgid ""
 "You got disconnected, as you sent a superuser command without superuser "
 "permission. This incident will be logged and reported to the administrator."
 msgstr ""
+"Sei stato disconnesso per aver inviato un comando da superutente senza "
+"averne il permesso. Questo \"incidente\" verrà loggato e comunicato "
+"all'amministratore."
 
 #: ../../src/network/internet_gaming_messages.cc:50
 msgid "You got disconnected, as the metaserver is currently restarting."
