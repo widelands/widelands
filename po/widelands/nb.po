@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2013-09-15 19:41+0200\n"
-"PO-Revision-Date: 2013-08-24 12:36+0000\n"
+"PO-Revision-Date: 2013-09-29 10:59+0000\n"
 "Last-Translator: Hans Joachim Desserud <Unknown>\n"
 "Language-Team: Norwegian Bokmal <nb@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2013-09-16 04:45+0000\n"
-"X-Generator: Launchpad (build 16761)\n"
+"X-Launchpad-Export-Date: 2013-09-30 04:34+0000\n"
+"X-Generator: Launchpad (build 16774)\n"
 
 #: ../../src/computer_player.cc:38
 msgid "None"
@@ -2721,7 +2721,7 @@ msgstr "Ok"
 #: ../../src/scripting/lua_game.cc:1088
 #, c-format
 msgid " (achieved %s)"
-msgstr " (oppnådde %s)"
+msgstr " (oppnådd %s)"
 
 #: ../../src/sound/sound_handler.cc:147
 #, c-format
