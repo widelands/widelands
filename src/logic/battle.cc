@@ -131,7 +131,6 @@ Soldier * Battle::opponent(Soldier& soldier)
 {
 	assert(m_first == &soldier or m_second == &soldier);
 	Soldier* other_soldier = m_first == &soldier ? m_second : m_first;
-	assert(other_soldier);
 	return other_soldier;
 }
 
