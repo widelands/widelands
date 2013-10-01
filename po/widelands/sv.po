@@ -3,15 +3,15 @@ msgstr ""
 "Project-Id-Version: Widelands svn4688\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2013-09-15 19:41+0200\n"
-"PO-Revision-Date: 2013-01-03 00:39+0000\n"
-"Last-Translator: Patrick H. <dajgtre@gmail.com>\n"
+"PO-Revision-Date: 2013-09-30 15:41+0000\n"
+"Last-Translator: karlrune <karlrune@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2013-09-16 04:46+0000\n"
-"X-Generator: Launchpad (build 16761)\n"
+"X-Launchpad-Export-Date: 2013-10-01 05:10+0000\n"
+"X-Generator: Launchpad (build 16774)\n"
 
 #: ../../src/computer_player.cc:38
 msgid "None"
@@ -32,7 +32,7 @@ msgstr ""
 
 #: ../../src/s2map.cc:886
 msgid "WARNING"
-msgstr ""
+msgstr "VARNING"
 
 #: ../../src/save_handler.cc:75
 msgid "Saving game..."
@@ -78,6 +78,9 @@ msgid ""
 "Sorry, no double-instance debugging on _WIN32.\n"
 "\n"
 msgstr ""
+"\n"
+"Tyvärr, ingen dubbel-instans avlusning under _WIN32.\n"
+"\n"
 
 #: ../../src/wlapplication.cc:1211
 msgid "--double is disabled. This is not a debug build!"

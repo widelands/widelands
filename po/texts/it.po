@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: Widelands svn4530\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2013-09-15 17:41+0000\n"
-"PO-Revision-Date: 2013-05-31 16:37+0000\n"
-"Last-Translator: DarkSaivor <ds.aureli@gmail.com>\n"
+"PO-Revision-Date: 2013-09-30 12:00+0000\n"
+"Last-Translator: Angelo Locritani <Unknown>\n"
 "Language-Team: Italiano <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-09-16 04:36+0000\n"
-"X-Generator: Launchpad (build 16761)\n"
+"X-Launchpad-Export-Date: 2013-10-01 05:10+0000\n"
+"X-Generator: Launchpad (build 16774)\n"
 "X-Poedit-Country: ITALY\n"
 "X-Poedit-Language: Italian\n"
 "X-Poedit-SourceCharset: utf-8\n"
@@ -23,14 +23,15 @@ msgstr ""
 #: ../../txts/README.lua:73
 msgid "(CTRL+) 0-9: Remember and go to previously remembered locations"
 msgstr ""
+"(CTRL+) 0-9: Memorizza e vai alle posizioni precedentemente memorizzate"
 
 #: ../../txts/README.lua:74
 msgid ",: goes to previous location"
-msgstr ""
+msgstr ",: vai alla posizione precedente"
 
 #: ../../txts/README.lua:99
 msgid "- Detailed steps on how to trigger the bug, if possible."
-msgstr ""
+msgstr "- Passaggi dettagliati su come riprodurre il bug, se possibile."
 
 #: ../../txts/README.lua:111
 msgid ""
@@ -38,6 +39,9 @@ msgid ""
 "helps\n"
 "demonstrate the issue, please include one or more screenshots."
 msgstr ""
+"- Se il bug si riferisce a qualcosa che non viene visualizzato correttamente "
+"o se può aiutare\n"
+"a dimostrare il problema, per favore includi uno o più screenshot."
 
 #: ../../txts/README.lua:114
 msgid ""
@@ -45,6 +49,11 @@ msgid ""
 "crashes where it can be hard to tell exactly what is triggering it), please\n"
 "include that too. For more information, see the section on Replays below."
 msgstr ""
+"- Se hai un salvataggio o un replay che dimostra il problema (per esempio\n"
+"dei crash per i quali non è facile capire esattamente cosa li genera), per "
+"favore\n"
+"includi anch'essi. Per più informazioni, dai un'occhiata alla sezione Replay "
+"sotto."
 
 #: ../../txts/README.lua:106
 msgid ""
@@ -52,16 +61,20 @@ msgid ""
 "as\n"
 "some bugs can be platform specific."
 msgstr ""
+"- Per favore indica anche su quale sistema operativo sta girando Widelands\n"
+"in quanto alcuni bug possono dipendere dalla piattaforma."
 
 #: ../../txts/README.lua:101
 msgid ""
 "- What you expected to happen when performing the steps and what actually "
 "happened."
 msgstr ""
+"- Cosa ti aspettavi avvenisse quando hai eseguito i passaggi e cosa invece è "
+"accaduto."
 
 #: ../../txts/README.lua:109
 msgid "- Which map you were playing when the bug occurred."
-msgstr ""
+msgstr "- Su quale mappa stavi giocando quando è avvenuto il problema."
 
 #: ../../txts/README.lua:103
 msgid ""
@@ -70,10 +83,13 @@ msgid ""
 "the revision number if you are running a development version or a nightly "
 "build.)"
 msgstr ""
+"- Quale versione di Widelands stai usando (per es: il numero della build o\n"
+"il numero di revisione se stai usando una versione di sviluppo o una nightly "
+"build)"
 
 #: ../../txts/README.lua:75
 msgid ".: goes to next location"
-msgstr ""
+msgstr ".: vai alla posizione seguente"
 
 #: ../../txts/editor_readme:43
 msgid "1-0      Changes tools size"
@@ -111,6 +127,9 @@ msgid ""
 "An economy consists of all buildings and flags connected by roads. The "
 "supplies and demands of buildings are handled in its economy."
 msgstr ""
+"Un'economia è composta da tutti gli edifici e le bandiere collegati da "
+"strade. Le forniture e le esigenze degli edifici sono gestiti all'interno "
+"della propria economia."
 
 #: ../../txts/tips/general_game.tip:22
 msgid ""
@@ -141,11 +160,11 @@ msgstr "C Mostra/Nascondi censimento"
 
 #: ../../txts/README.lua:67
 msgid "C: toggles census"
-msgstr ""
+msgstr "C: attiva/disattiva censo"
 
 #: ../../txts/README.lua:77
 msgid "CTRL+F10: quits the game immediately"
-msgstr ""
+msgstr "CTRL+F10: esci immediatamente dal gioco"
 
 #: ../../txts/editor_readme:39
 msgid "CTRL+L   Load Map"
@@ -173,7 +192,7 @@ msgstr "Programmatori"
 
 #: ../../txts/license:7
 msgid "Copyright 2002 - 2013 by the Widelands Development Team."
-msgstr ""
+msgstr "Copyright 2002 - 2013 by the Widelands Development Team."
 
 #: ../../txts/developers:186
 msgid "Czech"
@@ -181,7 +200,7 @@ msgstr "Ceco"
 
 #: ../../txts/README.lua:83
 msgid "DELETE: archives the current message"
-msgstr ""
+msgstr "DELETE: archivia il messaggio corrente"
 
 #: ../../txts/developers:193
 msgid "Dansk"
@@ -217,15 +236,16 @@ msgstr "F        Cambia tra schermo intero e finestra"
 
 #: ../../txts/README.lua:78
 msgid "F11: takes a screenshot"
-msgstr ""
+msgstr "F11: cattura uno screenshot"
 
 #: ../../txts/README.lua:76
 msgid "F6: shows the debug console (only in debug-builds)"
-msgstr ""
+msgstr "F6: mostra la console debug (solamente nelle build di debug)"
 
 #: ../../txts/README.lua:71
 msgid "F: toggles fullscreen (if supported by OS)"
 msgstr ""
+"F: attiva/disattiva schermo intero (se supportato dal sistema operativo)"
 
 #: ../../txts/developers:206
 msgid "Finnish"
@@ -241,7 +261,7 @@ msgstr "Francese"
 
 #: ../../txts/README.lua:82
 msgid "G: jumps to location corresponding to current message"
-msgstr ""
+msgstr "G: vai alla posizione collegata al messaggio corrente"
 
 #: ../../txts/developers:219
 msgid "Galician"
@@ -290,7 +310,7 @@ msgstr ""
 
 #: ../../txts/README.lua:72
 msgid "Home: centers main mapview on starting location"
-msgstr ""
+msgstr "Home: centra la visuale della mappa sulla posizione di partenza"
 
 #: ../../txts/developers:23
 #: ../../txts/developers:347
