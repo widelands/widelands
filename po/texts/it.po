@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: Widelands svn4530\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2013-09-15 17:41+0000\n"
-"PO-Revision-Date: 2013-09-30 12:00+0000\n"
+"PO-Revision-Date: 2013-10-01 12:01+0000\n"
 "Last-Translator: Angelo Locritani <Unknown>\n"
 "Language-Team: Italiano <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-10-01 05:10+0000\n"
+"X-Launchpad-Export-Date: 2013-10-02 05:10+0000\n"
 "X-Generator: Launchpad (build 16774)\n"
 "X-Poedit-Country: ITALY\n"
 "X-Poedit-Language: Italian\n"
@@ -331,11 +331,11 @@ msgstr "I        Attiva lo strumento d'informazione"
 
 #: ../../txts/README.lua:69
 msgid "I: toggles stock inventory"
-msgstr ""
+msgstr "I: attiva/disattiva inventario merci"
 
 #: ../../txts/README.lua:93
 msgid "If you encounter a bug, please report it to our bugtracker:"
-msgstr ""
+msgstr "Se trovi un bug, per favore segnalalo sul nostro bugtracker:"
 
 #: ../../txts/README.lua:52
 msgid ""
@@ -344,6 +344,11 @@ msgid ""
 "are\n"
 "removed."
 msgstr ""
+"Se tieni premuto CTRL mentre costruisci una strada, verranno posizionate "
+"automaticamente le bandiere.\n"
+"Se tieni premuto CTRL mentre rimuovi una strada, verranno rimosse tutte le "
+"bandiere fino\n"
+"al primo incrocio."
 
 #: ../../txts/tips/general_game.tip:58
 msgid ""
@@ -360,6 +365,10 @@ msgid ""
 "Wiki\n"
 "and a detailed description of the tribe economies in our online encyclopedia."
 msgstr ""
+"Se hai bisogno di documentazione o aiuto per Widelands o per l'editor,\n"
+"visita la nostra homepage. Sulla nostra wiki puoi trovare una guida online\n"
+"aggiornata e nell'enciclopedia online una descrizione dettagliata "
+"dell'economia delle tribù."
 
 #: ../../txts/README.lua:80
 msgid ""
@@ -376,6 +385,12 @@ msgid ""
 "economic infrastructure, explore the land around you and face rivaling\n"
 "tribes."
 msgstr ""
+"In questa partita, cominci con un piccolo appezzamento di terra con solo "
+"poche\n"
+"risorse. Utilizzandole, creerai un impero con diverse migliaia di abitanti.\n"
+"Lungo la strada verso questo obbiettivo, dovrai creare un'infrastruttura "
+"economica,\n"
+"esplorare il terreno intorno a te e fronteggiare tribù rivali."
 
 #: ../../txts/README.lua:18
 #: ../../txts/editor_readme:7
@@ -409,7 +424,7 @@ msgstr "Licenza"
 
 #: ../../txts/license:4
 msgid "Licensing information for Widelands"
-msgstr ""
+msgstr "Informazioni sulla licenza per Widelands"
 
 #: ../../txts/tips/editor.tip:10
 msgid ""
@@ -429,7 +444,7 @@ msgstr "M        Mostra/Nascondi mini mappa"
 
 #: ../../txts/README.lua:65
 msgid "M: toggles minimap"
-msgstr ""
+msgstr "M: attiva/disattiva minimappa"
 
 #: ../../txts/tips/general_game.tip:34
 msgid ""
@@ -455,7 +470,7 @@ msgstr "Musicisti"
 
 #: ../../txts/README.lua:66
 msgid "N: toggles messages ('news')"
-msgstr ""
+msgstr "N: attiva/disattiva messaggi ('notizie')"
 
 #: ../../txts/developers:181
 msgid ""
@@ -470,6 +485,9 @@ msgid ""
 "New soldiers are recruited in the headquarters or a warehouse if all needed "
 "tools are available. Training sites are for improving their abilities."
 msgstr ""
+"I nuovi soldati sono reclutati nel quartier generale o nel magazzino se "
+"tutti gli strumenti necessari sono disponibili. I luoghi di addestramento "
+"servono per migliorare le loro abilità"
 
 #: ../../txts/developers:307
 msgid "Non Unix Distributions"
@@ -477,7 +495,7 @@ msgstr "Distribuzioni Non Unix"
 
 #: ../../txts/README.lua:70
 msgid "O: toggles objectives"
-msgstr ""
+msgstr "O: attiva/disattiva obbiettivi"
 
 #: ../../txts/license:18
 msgid ""
@@ -485,18 +503,25 @@ msgid ""
 "standalone binary package, or in the installation directory (like "
 "/usr/share/games/widelands)."
 msgstr ""
+"Su Linux, puoi trovare il file chiamato COPYING nella cartella principale "
+"dei sorgenti o del pacchetto binario, o nella cartella di installazione "
+"(esempio: /usr/share/games/widelands)."
 
 #: ../../txts/license:20
 msgid ""
 "On MacOS, you can find the file called COPYING in the archive you downloaded "
 "from the website."
 msgstr ""
+"Su MacOS, puoi trovare il file chiamato COPYING nell'archivio che hai "
+"scaricato dal sito."
 
 #: ../../txts/license:19
 msgid ""
 "On Windows, you can find the file called COPYING.txt in the installation "
 "folder and the Widelands Start menu entry provides a link to this file."
 msgstr ""
+"Su MacOS, puoi trovare il file chiamato COPYING.txt nella cartella di "
+"installazione e nel menù Start, sotto Widelands, c'è un link diretto al file."
 
 #: ../../txts/README.lua:85
 msgid "Online Help"
@@ -524,15 +549,15 @@ msgstr "P        Mostra/Nascondi menu giocatore"
 
 #: ../../txts/README.lua:62
 msgid "PAGEDOWN: decreases gamespeed"
-msgstr ""
+msgstr "PAGINA GIU': diminuisci la velocità di gioco"
 
 #: ../../txts/README.lua:61
 msgid "PAGEUP: increases gamespeed"
-msgstr ""
+msgstr "PAGINA SU: aumenta la velocità di gioco"
 
 #: ../../txts/README.lua:63
 msgid "PAUSE: pauses the game"
-msgstr ""
+msgstr "PAUSA: metti il gioco in pausa"
 
 #: ../../txts/developers:281
 msgid "Packagers"
@@ -561,6 +586,8 @@ msgstr ""
 #: ../../txts/tips/general_game.tip:62
 msgid "Press I to quickly toggle the display of your stock inventory."
 msgstr ""
+"Premi I per attivare/disattivare rapidamente la visualizzazione del tuo "
+"inventario di magazzino"
 
 #: ../../txts/tips/general_game.tip:46
 msgid ""
@@ -592,7 +619,7 @@ msgstr ""
 
 #: ../../txts/README.lua:118
 msgid "Replays"
-msgstr ""
+msgstr "Replay"
 
 #: ../../txts/README.lua:133
 msgid ""
@@ -602,6 +629,13 @@ msgid ""
 "~/.widelands/replays directory on Linux and Mac OS X. On Windows,\n"
 "they are in the 'replays' subdirectory of your Widelands installation."
 msgstr ""
+"I replay sono molto utili per individuare bug nella logica del gioco, "
+"quindi\n"
+"possono essere utili come allegato ai bug report. I file di replay sono "
+"salvati\n"
+"nella directory ~/.widelands/replays (su Linux e Mac OS X). Su Windows,\n"
+"sono nella sottodirectory 'replay' nel percorso di installazione di "
+"Widelands."
 
 #: ../../txts/README.lua:91
 msgid "Reporting Bugs"
@@ -613,7 +647,7 @@ msgstr "Russo"
 
 #: ../../txts/README.lua:68
 msgid "S: toggles statistics"
-msgstr ""
+msgstr "S: attiva/disattiva statistiche"
 
 #: ../../txts/editor_readme:45
 msgid "SHIFT    (Hold) Selects first alternative tool while pressed"
@@ -633,7 +667,7 @@ msgstr ""
 
 #: ../../txts/README.lua:64
 msgid "SPACE: toggles build-help"
-msgstr ""
+msgstr "SPAZIO: attiva/disattiva aiuto costruzione"
 
 #: ../../txts/developers:182
 msgid ""
@@ -703,6 +737,8 @@ msgid ""
 "The number keys (1 - 0) allow you to directly set the size of the selected "
 "area around your mouse cursor."
 msgstr ""
+"I tasti numerici (1-0) ti consentono di impostare direttamente l'area della "
+"selezione intorno al cursore del mouse."
 
 #: ../../txts/editor_readme:10
 msgid ""
@@ -723,12 +759,18 @@ msgid ""
 "quesions or general support) or https://launchpad.net/widelands (Bugtracker, "
 "Translations)."
 msgstr ""
+"Il gioco è fornito \"come è\" e senza alcuna garanzia. Per maggiori "
+"informazioni e supporto ci trovi su http://wl.widelands.org (sito, wiki, "
+"forum per domande o supporto generico) o su https://launchpad.net/widelands "
+"(Bugtracker, Traduzioni)."
 
 #: ../../txts/license:9
 msgid ""
 "This game is Free and Open Source (FOSS), licensed under the GNU General "
 "Public License (GPL) V2.0."
 msgstr ""
+"Questo gioco è Free and Open Source (FOSS), rilasciato sotto licenza GNU "
+"General Public License (GPL) V2.0."
 
 #: ../../txts/editor_readme:14
 msgid ""
@@ -802,6 +844,7 @@ msgstr ""
 #: ../../txts/license:16
 msgid "We are also shipping the GPL as text document with Widelands itself."
 msgstr ""
+"Forniamo anche la GPL come documento di testo insieme a Widelands stesso."
 
 #: ../../txts/developers:3
 msgid "Widelands Development Team"
@@ -860,6 +903,8 @@ msgid ""
 "You can find more information on FOSS and the GPL by visiting the following "
 "webpage: "
 msgstr ""
+"Puoi trovare maggiori informazioni sul FOSS e sulla GPL visitando la "
+"seguente pagina: "
 
 #: ../../txts/license:14
 msgid ""
@@ -913,4 +958,4 @@ msgstr "Un gioco di strategia open source"
 
 #: ../../txts/license:12
 msgid "http://www.gnu.org/licenses/old-licenses/gpl-2.0"
-msgstr ""
+msgstr "http://www.gnu.org/licenses/old-licenses/gpl-2.0"

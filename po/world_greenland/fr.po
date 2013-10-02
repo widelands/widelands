@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: Widelands svn4866\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2013-09-15 17:41+0000\n"
-"PO-Revision-Date: 2011-12-29 23:35+0000\n"
-"Last-Translator: SarahSlean <yoda4@hotmail.fr>\n"
+"PO-Revision-Date: 2013-10-01 08:16+0000\n"
+"Last-Translator: fk <Unknown>\n"
 "Language-Team: Language <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-09-16 04:48+0000\n"
-"X-Generator: Launchpad (build 16761)\n"
+"X-Launchpad-Export-Date: 2013-10-02 05:10+0000\n"
+"X-Generator: Launchpad (build 16774)\n"
 
 #: ../../worlds/greenland/conf:58
 msgid "Alder"
@@ -58,7 +58,7 @@ msgstr ""
 
 #: ../../worlds/greenland/terrainconf:31
 msgid "Beach"
-msgstr ""
+msgstr "Plage"
 
 #: ../../worlds/greenland/conf:66
 msgid "Beech"
@@ -192,7 +192,7 @@ msgstr "Mélèze minuscule"
 
 #: ../../worlds/greenland/terrainconf:91
 msgid "Lava"
-msgstr ""
+msgstr "Lave"
 
 #: ../../worlds/greenland/conf:88
 msgid "Lynx"
@@ -220,23 +220,23 @@ msgstr ""
 
 #: ../../worlds/greenland/terrainconf:96
 msgid "Mountain meadow"
-msgstr ""
+msgstr "Alpe"
 
 #: ../../worlds/greenland/terrainconf:13
 msgid "Mountain1"
-msgstr ""
+msgstr "Montagne1"
 
 #: ../../worlds/greenland/terrainconf:61
 msgid "Mountain2"
-msgstr ""
+msgstr "Montagne2"
 
 #: ../../worlds/greenland/terrainconf:67
 msgid "Mountain3"
-msgstr ""
+msgstr "Montagne3"
 
 #: ../../worlds/greenland/terrainconf:73
 msgid "Mountain4"
-msgstr ""
+msgstr "Montagne4"
 
 #: ../../worlds/greenland/conf:22
 #: ../../worlds/greenland/conf:23
@@ -300,7 +300,7 @@ msgstr "Squelette"
 
 #: ../../worlds/greenland/terrainconf:19
 msgid "Snow"
-msgstr ""
+msgstr "Neige"
 
 #: ../../worlds/greenland/conf:54
 msgid "Spruce"
@@ -330,7 +330,7 @@ msgstr "Rochers"
 
 #: ../../worlds/greenland/terrainconf:7
 msgid "Steppe"
-msgstr ""
+msgstr "Steppe"
 
 #: ../../worlds/greenland/conf:40
 #: ../../worlds/greenland/conf:41
@@ -343,7 +343,7 @@ msgstr "Pierres"
 
 #: ../../worlds/greenland/terrainconf:24
 msgid "Swamp"
-msgstr ""
+msgstr "Marais"
 
 #: ../../worlds/greenland/conf:2
 msgid "The Widelands Development Team"
