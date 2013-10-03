@@ -60,8 +60,8 @@ public:
 	Soldier * second() {return m_second;}
 
 	// Returns the other soldier involved in this battle. CHECKs that the given
-	// soldier is participating in this battle and that the opponent is not
-	// nullptr.
+	// soldier is participating in this battle. Can return nullptr, but I have
+	// no idea what that means.
 	Soldier * opponent(Soldier &);
 
 	// Called by the battling soldiers once they've met on a common node and are

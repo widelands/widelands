@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2013-09-15 12:12+0000\n"
+"POT-Creation-Date: 2013-09-15 17:41+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -46,7 +46,7 @@ msgstr ""
 
 #: ../../maps/Long, long way.wmf/elemental:11
 msgid ""
-">Where dat? A thousand miles from here.< [Porgy and Bess] You have to go long, long way to conquere all the islands. Good luck!"
+">Where dat? A thousand miles from here.< [Porgy and Bess] You have to go long, long way to conquer all the islands. Good luck!"
 msgstr ""
 
 #: ../../maps/Comet Island.wmf/elemental:9
@@ -390,6 +390,7 @@ msgid ""
 "Some say that impenetrable lands to the far north scared away even the most courageous settlers and the bravest of the brave warriors. Big and old forests, full of big and predatory game, cut across by wetlands and hills were shrouded in mystery. The ones who had managed to come back mentioned tremendous buildings, decorated with carvings and gold from majestic mountain ranges somewhere amongst the wilderness. Dozens of years after only some crumbly ruins remain of these good old times, covered with moss and trees. Their shapes give only an idea about the craftsmanship of ancient constructors. Nobody knows why they (have) disappeared. Nobody knows why. People say that now nothing is blocking the road to wealth. But many will die pulled apart by wolves, engulfed by swamp... encircled by hostile tribes."
 msgstr ""
 
+#: ../../maps/Ice wars.wmf/elemental:12
 #: ../../maps/Sun of fire.wmf/elemental:12
 msgid ""
 "Start positions are clockwise"
@@ -417,6 +418,11 @@ msgid ""
 "Suggested Teams: (blue, yellow) vs (red, green)"
 msgstr ""
 
+#: ../../maps/Crossing the horizon.wmf/elemental:12
+msgid ""
+"Suggested Teams: all ok"
+msgstr ""
+
 #: ../../maps/Rendez-Vous.wmf/elemental:10
 msgid ""
 "Suggested Teams: all ok."
@@ -425,6 +431,26 @@ msgstr ""
 #: ../../maps/Calvisson.wmf/elemental:12
 msgid ""
 "Suggested Teams: blue vs red, yellow vs green, (blue, yellow) vs (red, green), (blue, green) vs (red, yellow)"
+msgstr ""
+
+#: ../../maps/Long, long way.wmf/elemental:12
+msgid ""
+"Suggested Teams: blue vs red, yellow vs green, (blue, yellow) vs (red, green), (blue, yellow, black) vs (red, green, orange), (blue, yellow, black, purple) vs (red, green, orange, white)"
+msgstr ""
+
+#: ../../maps/Plateau.wmf/elemental:10
+msgid ""
+"Suggested positions: blue vs yellow"
+msgstr ""
+
+#: ../../maps/The Nile.wmf/elemental:12
+msgid ""
+"Suggested teams: blue vs red, yellow vs green, (blue, yellow) vs (red, green), (green, orange, white) vs (yellow, black, purple), (blue, orange, green) vs (red, yellow, black), (blue, green, orange, white) vs (red, yellow, black, purple)"
+msgstr ""
+
+#: ../../maps/Trident of Fire.wmf/elemental:12
+msgid ""
+"Suggested teams: red vs green, (blue, yellow) vs (green, orange), (blue, black) vs (green, red), (blue, black, yellow) vs (green, red, orange)"
 msgstr ""
 
 #: ../../maps/Swamp Island.wmf/elemental:9
@@ -524,7 +550,7 @@ msgstr ""
 
 #: ../../maps/Fellowships.wmf/elemental:12
 msgid ""
-"This map is best suited for three human players, with game speed somewhat above the normal value. AI performs badly at the time of writing (2013)."
+"This map is best suited for two or three human players, with game speed somewhat above the normal value. AI performs badly at the time of writing (2013)."
 msgstr ""
 
 #: ../../maps/Three Warriors.wmf/elemental:9

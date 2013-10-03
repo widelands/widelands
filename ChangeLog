@@ -1,98 +1,300 @@
-### Build 18 until now
+### Build 18-rc1
 - Added a preview for the costs of a building and the resources gained
-  through buildingdismantling.
-- Added a button to productionsites to evict workers.
+  through the dismantling of a building.
+- Added a button to productionsites for evicting a worker.
+- Added control to exchange stationed soldiers of a militarysite
+  with soldiers of a higher resp. lower level.
+- Added seafaring expedition and colonization.
 - Added new win condition: Territorial time similar to territorial lord.
-- Added support for a "message of the day" to Widelands and
-  Widelands' dedicated server.
+- Added a game result screen showing a summary of the game once the game is over
+- Added support for a "message of the day" to Widelands and the Widelands' dedicated server.
 - Added new game tips.
 - Improved start up time through on demand loading of graphics.
 - Improved Widelands' rich text rendering engine a lot and improved
   all kind of text in different places..
 - Improved OpenGL rendering leading to a huge speed up.
+- Improved the handling of solders inside trainingssites:
+  Soliders that did not receive training for some time are now evicted automatically
 - Improved the old stock charts and added some new ones.
 - Improved graphics and animations on many places.
 - Improved graphics used in road building mode to indicate the steepness.
 - Improved multiplayer scenario "Smugglers".
 - Improved Empire Inn to be backward compatible.
+- Improved the handling of game saving
 - Improved Widelands' translations and added some new ones.
 - Fixed a bunch of memory leaks.
 - Fixed a bunch of compiler warnings.
 - Fixed an editor crash when trying to save a map inside a subdirectory.
-- Fixed bug #536161:  Widelands bundles internal copy of unzip.cc 
-- Fixed bug #535806:  Loading images takes a tremendous amount of time 
-- Fixed bug #536482:  Downgrade skilled workers when possible 
-- Fixed bug #536571:  Empire Inns should be able to produce rations. 
-- Fixed bug #566970:  Unable to attack castle 
-- Fixed bug #714036:  Add evict worker button to productionsites 
-- Fixed bug #726139:  Numeric wares display in warehouses not updating correctly 
-- Fixed bug #740401:  Preview required building costs before building or upgrading 
-- Fixed bug #744595:  clang llvm 2.9 compiler widelands crash 
-- Fixed bug #787464:  Hard to tell the difference between actual flags and possible flags for the yellow player 
-- Fixed bug #796673:  Roads "light up" in the fog of war 
-- Fixed bug #796690:  Atleantean resource signs have a red tint 
-- Fixed bug #802432:  wreck sail is blue instead of white 
-- Fixed bug #818823:  Multiplayer game kicked out players after being paused for a while (Broken pipe) 
-- Fixed bug #825957:  Warnings at compile-time (GCC) 
-- Fixed bug #861840:  building near shoreline 
-- Fixed bug #900784:  Screen resolution can be set too large in windowed mode 
-- Fixed bug #902464:  Upgrading building: number of wares in stock window not updated 
-- Fixed bug #913369:  Warnings at compile-time (clang/llvm) 
-- Fixed bug #939709:  Make OpenGL terrain rendering less demanding on hardware 
-- Fixed bug #955908:  Open stockstatistics with a button 
-- Fixed bug #961548:  widelands executable links against boost_unit_test_framework in Debug mode 
-- Fixed bug #963963:  Game crashes when ship construction site cannot be cleared for a new ship 
-- Fixed bug #970264:  Missing SDL_* libraries lead to rather useless messages 
-- Fixed bug #970840:  new graph: availability of wares 
-- Fixed bug #972759:  barbarian beer icons misleading 
-- Fixed bug #974679:  Inconsistent behaviour in soldier creation leads to irregular economy state 
-- Fixed bug #975495:  lua bug in "Together we are strong" map 
-- Fixed bug #975840:  test_routing.cc:97 Same expression on both sides of '-' 
-- Fixed bug #975847:  increase and decrese resource tool has methods with multiple consecutive returns 
-- Fixed bug #976077:  x\y axis in ware statistics are wrong 
-- Fixed bug #976551:  ftbfs with gcc 4.7 if not including <unistd.h> 
-- Fixed bug #978169:  Global militarysites icons not updated 
-- Fixed bug #979937:  Coal can be replaced by other ressources in the editor 
-- Fixed bug #983448:  Improve OpenBSD support 
-- Fixed bug #984110:  memory leak in src/ai/defaultai.cc:1439 
-- Fixed bug #984165:  Make the increase/reduce wares buttons repeatable 
-- Fixed bug #984197:  Suggestion: Confirmation window for dismantling production building 
-- Fixed bug #986534:  Improve in-game checkboxes 
-- Fixed bug #986910:  Multiplayer game setup does not show team suggestions for maps 
-- Fixed bug #988498:  Suggestion: remove cppcheck related stuff from build 
-- Fixed bug #989483:  Widelands host crashes if a client connection breaks 
-- Fixed bug #989489:  After leaving an internet game, Widelands freezes in the lobby 
-- Fixed bug #992466:  dedicated server regression: not able to choose map 
-- Fixed bug #993293:  EnsureDirectoryExists() does only work with a path deepth of 1. 
-- Fixed bug #995011:  They can attack me but I can't attack them 
-- Fixed bug #996965:  Fail to build on amd64 
-- Fixed bug #998828:  Only coal can be placed in the editor 
-- Fixed bug #1016104: The stock plot is quite wrong 
-- Fixed bug #1019585: Building window background "jumping" when previewing upgrade build cost 
-- Fixed bug #1020736: CrossPlatform Path fix: remove ":" in path names on Windows 
-- Fixed bug #1022267: stock chart counts wares in every building 
-- Fixed bug #1023264: Scouts explore consistently to the west 
-- Fixed bug #1024549: Crash in Build Cost Preview in Observer Mode 
-- Fixed bug #1025014: segmentation fault in widelands 
-- Fixed bug #1025848: --version prints more and less than it should 
-- Fixed bug #1027058: Connection lost after some time if all players pause in multiplayer 
-- Fixed bug #1033213: Assertion in nethost is always true 
-- Fixed bug #1033216: Undefined identifiers used 
-- Fixed bug #1050431: Worker icons should not contain letters for levels 
-- Fixed bug #1063233: Starting game while savegame is still being transferred 
-- Fixed bug #1074979: economy mismatch after building a third port 
-- Fixed bug #1090433: dedicated server module not working on windows 
-- Fixed bug #1093848: Remove ware removes wares without placing them outside the building 
-- Fixed bug #1095695: Middle-clicking in any window will crash the game (assertion error) 
-- Fixed bug #1095702: Game crashed with OpenGL ERROR: out of memory 
+- Fixed bug #535806:  Loading images takes a tremendous amount of time
+- Fixed bug #536110:  Some Map Editor tools (Resources) are not translatable
+- Fixed bug #536161:  Widelands bundles internal copy of unzip.cc
+- Fixed bug #536482:  Downgrade skilled workers when possible
+- Fixed bug #536507:  Autosave after reaching objective
+- Fixed bug #536548:  Allow control of stationed Soldiers in Military Buildings
+- Fixed bug #536571:  Empire Inns should be able to produce rations.
+- Fixed bug #537194:  Unable to see full list of bobs on debug
+- Fixed bug #566970:  Unable to attack castle
+- Fixed bug #576347:  show game results screen
+- Fixed bug #580905:  write building status in a different font color for construction sites
+- Fixed bug #657285:  Multiple tooltips may be shown when opening building information
+- Fixed bug #674600:  Long titles in message inbox overlap with time sent
+- Fixed bug #674930:  Rare bug in soldiers code
+- Fixed bug #704637:  Does not start (could not set video mode) using too large resolution in fullscreen mode
+- Fixed bug #706284:  Default save file name is always the first in list
+- Fixed bug #714036:  Add evict worker button to productionsites
+- Fixed bug #706284:  Default save file name is always the first in list
+- Fixed bug #714036:  Add evict worker button to productionsites
+- Fixed bug #722087:  hard to empty warehouse
+- Fixed bug #723113:  Weird green granite in the editor on Blackland maps
+- Fixed bug #726139:  Numeric wares display in warehouses not updating correctly
+- Fixed bug #732142:  Please choose lighter blue player color
+- Fixed bug #738643:  Pause game while in 'save'-dialog
+- Fixed bug #738895:  Show a message when the game is autosaving
+- Fixed bug #740401:  Preview required building costs before building or upgrading
+- Fixed bug #744595:  clang llvm 2.9 compiler widelands crash
+- Fixed bug #751836:  Loading games memory usage
+- Fixed bug #763567:  Sort Messages in Message Inbox to be most recent on top
+- Fixed bug #787217:  editor crashes on map load
+- Fixed bug #787464:  Hard to tell the difference between actual flags and possible flags for
+                      the yellow player
+- Fixed bug #796673:  Roads "light up" in the fog of war
+- Fixed bug #796690:  Atleantean resource signs have a red tint
+- Fixed bug #802432:  wreck sail is blue instead of white
+- Fixed bug #803284:  While building, show range of the building on construction site
+- Fixed bug #818823:  Multiplayer game kicked out players after being paused for a while (Broken pipe)
+- Fixed bug #825957:  Warnings at compile-time (GCC)
+- Fixed bug #846409:  Improving the load game dialog
+- Fixed bug #858517:  Counter for 50% of the land in territorial lord doesn't reset
+- Fixed bug #861840:  building near shoreline
+- Fixed bug #898129:  Workarea color policy
+- Fixed bug #900784:  Screen resolution can be set too large in windowed mode
+- Fixed bug #902464:  Upgrading building: number of wares in stock window not updated
+- Fixed bug #902558:  Workers returning to a building being dismantled will attempt to enter it
+- Fixed bug #913369:  Warnings at compile-time (clang/llvm)
+- Fixed bug #923702:  soldier "lost" if the building he is returning to has been destroyed
+- Fixed bug #933747:  Text refers to bug #1951113
+- Fixed bug #939026:  Sea expedition and colonization
+- Fixed bug #939709:  Make OpenGL terrain rendering less demanding on hardware
+- Fixed bug #955908:  Open stockstatistics with a button
+- Fixed bug #957750:  Add Portspace tool doesn't use the toolsize.
+- Fixed bug #960370:  Atlantean Ship Shows "flashes" on the Hull
+- Fixed bug #961548:  widelands executable links against boost_unit_test_framework in Debug mode
+- Fixed bug #963697:  Port build help icon shown, though no port can be build
+- Fixed bug #963802:  Add option to burn a ship
+- Fixed bug #963963:  Game crashes when ship construction site cannot be cleared for a new ship
+- Fixed bug #965052:  Cannot see which map I am currently playing
+- Fixed bug #970264:  Missing SDL_* libraries lead to rather useless messages
+- Fixed bug #970840:  new graph: availability of wares
+- Fixed bug #972759:  barbarian beer icons misleading
+- Fixed bug #974679:  Inconsistent behaviour in soldier creation leads to irregular economy state
+- Fixed bug #975091:  Ship freezes loaded with wares upon destruction of destination port
+- Fixed bug #975495:  lua bug in "Together we are strong" map
+- Fixed bug #975840:  test_routing.cc:97 Same expression on both sides of '-'
+- Fixed bug #975847:  increase and decrese resource tool has methods with multiple consecutive returns
+- Fixed bug #975852:  lua_map has a statement after a return which will never be executed
+- Fixed bug #976077:  x\y axis in ware statistics are wrong
+- Fixed bug #976551:  ftbfs with gcc 4.7 if not including <unistd.h>
+- Fixed bug #976698:  Atlantean saw has misleading description
+- Fixed bug #978123:  Small icons for wares on ships
+- Fixed bug #978169:  Global militarysites icons not updated
+- Fixed bug #979937:  Coal can be replaced by other ressources in the editor
+- Fixed bug #982364:  Editor in Windows XP suffers high CPU, memory leak
+- Fixed bug #982620:  "no use for ships on this map" blocks building ships in first Atlantis campaign
+                      (atl01.wmf)
+- Fixed bug #983448:  Improve OpenBSD support
+- Fixed bug #984110:  memory leak in src/ai/defaultai.cc:1439
+- Fixed bug #984165:  Make the increase/reduce wares buttons repeatable
+- Fixed bug #984197:  Suggestion: Confirmation window for dismantling production building
+- Fixed bug #985109:  Decreasing vision for node that is not seen
+- Fixed bug #986526:  Clarify "X player teams" map filter
+- Fixed bug #986534:  Improve in-game checkboxes
+- Fixed bug #986910:  Multiplayer game setup does not show team suggestions for maps
+- Fixed bug #988498:  Suggestion: remove cppcheck related stuff from build
+- Fixed bug #988870:  Barbarian weaving mill produces endless cloth
+- Fixed bug #989483:  Widelands host crashes if a client connection breaks
+- Fixed bug #989489:  After leaving an internet game, Widelands freezes in the lobby
+- Fixed bug #990623:  Checkboxes should react when hovered by the mouse cursor
+- Fixed bug #992466:  dedicated server regression: not able to choose map
+- Fixed bug #993293:  EnsureDirectoryExists() does only work with a path deepth of 1.
+- Fixed bug #994712:  GPL Text should maybe not be translateable
+- Fixed bug #995011:  They can attack me but I can't attack them
+- Fixed bug #996965:  Fail to build on amd64
+- Fixed bug #998828:  Only coal can be placed in the editor
+- Fixed bug #1005955: Start using C++11 features in Widelands sources
+- Fixed bug #1008861: Massive memory leak after closing stats window when OpenGL rendering enabled.
+- Fixed bug #1016104: The stock plot is quite wrong
+- Fixed bug #1019585: Building window background "jumping" when previewing upgrade build cost
+- Fixed bug #1020736: CrossPlatform Path fix: remove ":" in path names on Windows
+- Fixed bug #1022267: stock chart counts wares in every building
+- Fixed bug #1023264: Scouts explore consistently to the west
+- Fixed bug #1024549: Crash in Build Cost Preview in Observer Mode
+- Fixed bug #1025014: segmentation fault in widelands
+- Fixed bug #1025848: --version prints more and less than it should
+- Fixed bug #1027058: Connection lost after some time if all players pause in multiplayer
+- Fixed bug #1033213: Assertion in nethost is always true
+- Fixed bug #1033216: Undefined identifiers used
+- Fixed bug #1033615: Consider checking for more warnings when compiling Widelands
+- Fixed bug #1044933: Branch condition evaluates to a garbage value in io/filesystem/filesystem.cc
+- Fixed bug #1044935: Assigned value is garbage or undefined in graphic/render/terrain_sdl.h
+- Fixed bug #1044939: Dead assignment or increment (variables which have values assigned,
+                      but are then never read again)
+- Fixed bug #1050431: Worker icons should not contain letters for levels
+- Fixed bug #1063233: Starting game while savegame is still being transferred
+- Fixed bug #1074655: FPS slowly drops when playing with stock screen open
+- Fixed bug #1074979: r6433 has an economy mismatch after building a third port
+- Fixed bug #1090433: dedicated server module not working on windows
+- Fixed bug #1090887: buildcosts and "wares that get recycled" preview moves the window
+- Fixed bug #1093848: Remove ware removes wares without placing them outside the building
+- Fixed bug #1094711: Fisher runs out of fish even with double breeders
+- Fixed bug #1094750: Usability Suggestion: move economy configuration button to a more obvious location
+                      / clarify its location in documentation and tips.
+- Fixed bug #1095022: Division by zero in ui_basic/slider.cc
+- Fixed bug #1095028: Called C++ object pointer is null in ui_basic/table.cc
+- Fixed bug #1095034: Called C++ object pointer is null in network/nethost.cc
+- Fixed bug #1095695: Middle-clicking in any window will crash the game (assertion error)
+- Fixed bug #1095702: Game crashed with OpenGL ERROR: out of memory
 - Fixed bug #1096362: Crash when increasing speed in a internet game as observer
-                      (only happens on dedicated servers) 
+                      (only happens on dedicated servers)
+- Fixed bug #1096632: Open windows cause game to stall after several hours
 - Fixed bug #1096651: Windowed graphics resolution change does not resize window
-- Fixed bug #1097420: Window tabs in map editor cause exception 
-- Fixed bug #1099094: Tutorial description bug 
-- Fixed bug #1104462: Untranslatable strings 
+- Fixed bug #1096786: Indicate direction of steepness in road building mode
+- Fixed bug #1097420: Window tabs in map editor cause exception
+- Fixed bug #1098263: Widelands does not start if PC has OpenGL problems
+- Fixed bug #1099094: Tutorial description bug
+- Fixed bug #1100045: Carriers can/can't be removed from Warehouses
+- Fixed bug #1101788: Atlantean stone economy target too low
+- Fixed bug #1104462: Untranslatable strings
+- Fixed bug #1108083: Construction site window does not display specific building name
 - Fixed bug #1115664: Extremely slow framerate/performance with OpenGL
-- Fixed bug #1125539: Roads not rendered in road building mode 
+- Fixed bug #1121396: Assertion error upon starting WL (regression after latest opengl changes)
+- Fixed bug #1125539: Roads not rendered in road building mode
+- Fixed bug #1128114: segmentation fault when running with --dedicated
+- Fixed bug #1130469: Textarea does not place cursor correctly on mouse click (map description in the editor)
+- Fixed bug #1130905: OpenGL switch to Software Rendering crash
+- Fixed bug #1132238: Open buildingwindow after closing of constructionsitewindow when
+                      construction has finished
+- Fixed bug #1132466: Evicted workers will become stuck if the are away from home and the building is
+                      not conencted to the road network
+- Fixed bug #1132469: List of workers in building window not updating properly
+- Fixed bug #1132473: soldier hangs at one point
+- Fixed bug #1132476: change yellow color in white(?) - building menu % is unreadable
+- Fixed bug #1132774: Assertion in image cache while loading first barbarian campaign
+- Fixed bug #1137765: displaying tooltips in fullscreen causes crash
+- Fixed bug #1139666: New buildcap allows larger buildings in smaller spaces
+- Fixed bug #1142781: Current BZR version leads to compiler errors on Windows
+- Fixed bug #1144465: Builder gets "lost" after dismantling site
+- Fixed bug #1145376: Dark box when hovering over buildings
+- Fixed bug #1150455: Dedicated servermode segfaults on non-existing maps
+- Fixed bug #1150517: Crash when closing widelands
+- Fixed bug #1153361: OpenPandora patch for FAT FS
+- Fixed bug #1159000: Building WL should check whether gettext is installed
+- Fixed bug #1159432: Warnings at compile-time in GCC 4.8
+- Fixed bug #1159968: Crash in opengl fonthandler_cc:99
+- Fixed bug #1162918: Workers exiting warehouse do not follow flag
+- Fixed bug #1162920: Shovel icon is unclear
+- Fixed bug #1162936: After eviction of a worker, a worker of the same level is requested instead of
+                      the original worker type
+- Fixed bug #1167234: Terrain preview in editor shows nothing
+- Fixed bug #1170086: Imperial sentry returns more wares when dismantled than it needed
+- Fixed bug #1171131: Revision 6559 FTBFS on GNU/Linux due to compile_assert failing
+- Fixed bug #1171233: Opening a Widelands file makes all strings appear in English
+- Fixed bug #1172197: Seefaring doesn't work on nightly Build
+- Fixed bug #1174066: Setting the origin of a map disrupts it
+- Fixed bug #1178327: Empire does not have economy target for marble
+- Fixed bug #1181132: Random Map: Randomize positioning of start positions
+- Fixed bug #1182010: fish breeder does not work
+- Fixed bug #1183479: Evict Worker code possibly incomplete
+- Fixed bug #1184151: Cant load a saved game after update
+- Fixed bug #1186906: Remove entries from the message list that have become obsolete
+- Fixed bug #1189615: WL crashes down while ship makes expedition
+- Fixed bug #1191554: Game crashes when ship with open window is loaded for expedition
+- Fixed bug #1191556: Port window not updated ("Cancel the expedition" starts a new one)
+- Fixed bug #1191568: Expedition feature does not work properly in replay mode
+- Fixed bug #1191889: Ship loads ware but does not transport it
+- Fixed bug #1194194: Show build progress of the current ship
+- Fixed bug #1195639: Ports build into water
+- Fixed bug #1196194: Game freezes when exploring coast when not at coast
+- Fixed bug #1197429: Fail to build in Ubuntu 12.04 LTS
+- Fixed bug #1198624: A player should be considered defeated in Autocrat after losing all warehouses,
+                      rather than all buildings
+- Fixed bug #1198921: Returning null reference in scripting/lua_game.cc
+- Fixed bug #1198930: Use-after-free in wui/building_ui.cc
+- Fixed bug #1199653: Unseen port crashes the game when saving
+- Fixed bug #1199808: Use-after-free in wui/shipwindow.cc
+- Fixed bug #1199812: Use-after-free in economy/economy.cc
+- Fixed bug #1199957: Segmentation fault during combat
+- Fixed bug #1200952: Make error: /wui/buildingwindow.cc
+- Fixed bug #1201081: Building with boost 1.54: "Boost.Signals is no longer being maintained and is
+                      now deprecated. Please switch to Boost.Signals2."
+- Fixed bug #1201330: Dangerous variable-length array (VLA) declaration in map_generator.cc
+- Fixed bug #1202040: Soldier preference button graphics
+- Fixed bug #1202133: Dialogs (and list of maps) have white background and repetition
+- Fixed bug #1202146: With opengl enabled, screenshots display edges in terrain strangely
+- Fixed bug #1202228: Better controls for specifying preference of strong and weak soldiers
+- Fixed bug #1202499: Can't open directory with maps
+- Fixed bug #1203121: Latest trunk FTBFS on Ubuntu 12.04
+                      (src/helper.cc:82:8: error: 'mt19937' in namespace 'boost::random' does not name a type)
+- Fixed bug #1203329: Possible to trigger a crash by saving between story dialogs
+- Fixed bug #1203337: Map name appears untranslated in save dialog, even when translation exists
+- Fixed bug #1203338: According to save dialog, campaign maps have 58 players
+- Fixed bug #1203439: Crash on saving with no human player
+- Fixed bug #1203474: Ingame README needs review
+- Fixed bug #1203492: Fail to build in Ubuntu 10.04 LTS
+- Fixed bug #1204008: Suggestion: widelands-daily should incorporate recent translations
+- Fixed bug #1204144: Cursor Key Navigation in table not complete
+- Fixed bug #1204171: Can't select ware in ware statistics window
+- Fixed bug #1204199: Buildings and building statistics have different color groups for productivity
+- Fixed bug #1204226: FTBFS on Ubuntu 13.04
+                      (use of deleted function ‘void std::unique_ptr<_Tp [], _Dp>::reset(_Up))
+- Fixed bug #1204462: Suggestion: widelands-daily should not only include bzr revision,
+                      but also date/time in the package name
+- Fixed bug #1204481: Militarysite initialization
+- Fixed bug #1204612: FTBFS on Ubuntu Precise and Lucid ('unique_ptr' is not a member of 'std')
+- Fixed bug #1204756: REVDETECT=BROKEN-PLEASE-REPORT-THIS(Release) in PPA builds
+- Fixed bug #1205010: segfault on dismantle on conquered enemy building or starting buildings in campaigns
+- Fixed bug #1205149: Crash on Ubuntu 12.04 when clicking to open a building window
+- Fixed bug #1205457: Fisher produces fish without decreasing resources
+- Fixed bug #1205609: Wincondition scripts reloaded too often
+- Fixed bug #1205806: Ware statistics window too small for empire warelist
+- Fixed bug #1205882: Typo in license text
+- Fixed bug #1205901: Value stored to unread variable in map_io/widelands_map_buildingdata_data_packet.cc
+- Fixed bug #1206211: "Follow" function in watch window crashes in replays or when playing as a spectator
+- Fixed bug #1206441: Autosave leads to crash on replays
+- Fixed bug #1206563: Error when loading savegame saved in replay
+- Fixed bug #1206712: Endless loop in Layout::fit_nodes
+- Fixed bug #1206917: Pausing during save dialog behaves different in replays and games
+- Fixed bug #1207069: Seafaring: cancel expedition button on ship
+- Fixed bug #1207412: Authors button ingame leads to crash
+- Fixed bug #1207477: Assertion `it != end()' failed in message queue
+- Fixed bug #1208130: Desync error after clicking "Prefer rookies/heros" buttons in military buildings
+- Fixed bug #1208229: Segmentation fault in Widelands::Soldier::attack_update
+                      (this=0x99f1ea0, game=..., state=...) at src/logic/soldier.cc:1003
+- Fixed bug #1208440: Some messages directly expired and still play sound
+- Fixed bug #1208474: Need a nice compatibility safegame from b17.
+- Fixed bug #1209125: FTBFS trunk/6705 on Debian Wheezy
+- Fixed bug #1209256: Saving a game not working because of minimap.png code
+- Fixed bug #1209283: Crash at end of game (game statistics window)
+- Fixed bug #1211248: Add map tag "seafaring" and handle in the UI
+- Fixed bug #1211255: Show workarea doesn't work
+- Fixed bug #1211898: bzr 6718 segfault building expedition port
+- Fixed bug #1212191: 100% training site production without any soldier
+- Fixed bug #1212192: Evict worker doesn't work for the second worker
+- Fixed bug #1213330: Called C++ object pointer is null in wui /shipwindow.cc
+- Fixed bug #1215075: Terrains not translateable - feature not a bug???
+- Fixed bug #1215134: Hint text inherited by new map
+- Fixed bug #1216278: Assertion failed when making a port at top left position in this safegame
+- Fixed bug #1216305: It is possible to place ports via expeditions where players can not build them
+                      via normal expansion
+- Fixed bug #1219388: Port spaces missing after change of map origin
+- Fixed bug #1219390: Wine farmer missing in description of shovel
+- Fixed bug #1219507: Savegame crashes Widelands
+- Fixed bug #1219524: Empire bakery drops from 100% to 0% very quickly when no wares are available.
+- Fixed bug #1219526: Last received chat message never vanishes from main in game screen
+- Fixed bug #1220546: segfault on dismantle a building on ubuntu 12.04
+- Fixed bug #1228518: Chat announces defeat of all network players although only one is defeated
+- Fixed bug #1228529: Defeated player can see_all, but can only use fieled_action_window on prior seen fields
+- Fixed bug #1228592: Internet lobby chat is blocked once another UI part was used (one of the lists, etc.)
+- Fixed bug #1228596: Important system messages are not forwarded to ingame chat
 
 
 ### Build 17

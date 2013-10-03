@@ -21,6 +21,7 @@
 #define MAP_REVISION_H
 
 #include <cstring>
+#include <ctime>
 #include <memory>
 #include <set>
 #include <string>

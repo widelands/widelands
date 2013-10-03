@@ -363,7 +363,8 @@ struct Player :
 
 	// See area
 	Vision vision(Map_Index const i) const throw () {
-		return m_see_all + m_fields[i].vision;
+		// Node visible if > 1
+		return (m_see_all ? 2 : 0) + m_fields[i].vision;
 	}
 	/**
 	 * Called when a node becomes seen or has changed.  Discovers the node and

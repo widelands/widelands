@@ -2883,7 +2883,7 @@ void NetHost::disconnectPlayerController(uint8_t const number, const std::string
 		}
 	}
 
-	setPlayerState(number, PlayerSettings::stateClosed);
+	setPlayerState(number, PlayerSettings::stateOpen);
 	if (d->game)
 		initComputerPlayer(number + 1);
 }
@@ -2992,10 +2992,9 @@ void NetHost::report_result
 		if (user.position == p_nr - 1) {
 			user.result               = result;
 			user.win_condition_string = info;
-		}
-
-		if (result == Widelands::PlayerEndResult::PLAYER_LOST) {
-			sendSystemMessageCode("PLAYER_DEFEATED", user.name);
+			if (result == Widelands::PlayerEndResult::PLAYER_LOST) {
+				sendSystemMessageCode("PLAYER_DEFEATED", user.name);
+			}
 		}
 	}
 

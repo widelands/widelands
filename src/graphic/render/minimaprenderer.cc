@@ -114,12 +114,15 @@ inline static uint32_t calc_minimap_color
 	uint32_t pixelcolor = 0;
 
 	if (flags & MiniMap::Terrn) {
+		// We or with format.Amask here because the terrain map texture data is
+		// only RGB and not RGBA in SDL render mode. Or'ing with Amask guarantees
+		// that alpha is set to 255 for this color and is fast.
 		pixelcolor =
 			g_gr->
 			get_maptexture_data
 				(egbase.map().world()
 				 .terrain_descr(f.field->terrain_d()).get_texture())
-			->get_minimap_color(f.field->get_brightness());
+			->get_minimap_color(f.field->get_brightness()) | format.Amask;
 	}
 
 	if (flags & MiniMap::Owner) {
@@ -353,9 +356,7 @@ Surface* MiniMapRenderer::draw_minimap
 	 Point                               const viewpt,
 	 uint32_t                            const flags)
 {
-	// First create a temporary SDL Surface to draw the minimap. This Surface is
-	// is created in almost display pixel format without alpha channel.
-	// Bits per pixels must be 16 or 32 for the minimap code to work
+	// First create a temporary SDL Surface to draw the minimap.
 	// TODO: Currently the minimap is redrawn every frame. That is not really
 	//       necesary. The created surface could be cached and only redrawn two
 	//       or three times per second
@@ -364,23 +365,11 @@ Surface* MiniMapRenderer::draw_minimap
 	surface->fill_rect(rc, RGBAColor(0, 0, 0, 255));
 	surface->lock(Surface::Lock_Normal);
 
-	Uint8 * const pixels = static_cast<uint8_t *>(surface->get_pixels());
-	Widelands::X_Coordinate const w = egbase.map().get_width();
-	switch (surface->format().BytesPerPixel) {
-	case sizeof(Uint16):
-		draw_minimap_int<Uint16>
-			(pixels, surface->get_pitch(), surface->format(),
-			 w, egbase, player, rc, viewpt, flags);
-		break;
-	case sizeof(Uint32):
-		draw_minimap_int<Uint32>
-			(pixels, surface->get_pitch(), surface->format(),
-			 w, egbase, player, rc, viewpt, flags);
-		break;
-	default:
-		assert(false);
-		break;
-	}
+	assert (surface->format().BytesPerPixel == sizeof(Uint32));
+
+	draw_minimap_int<Uint32>
+		(surface->get_pixels(), surface->get_pitch(), surface->format(),
+		 egbase.map().get_width(), egbase, player, rc, viewpt, flags);
 
 	surface->unlock(Surface::Unlock_Update);
 
