@@ -24,6 +24,7 @@ class WidelandsTestCase(unittest.TestCase):
             if os.path.exists(self.run_dir):
                 shutil.rmtree(self.run_dir)
             os.makedirs(self.run_dir)
+        print "stdout: %s/stdout.txt" % self.run_dir
         self.widelands_returncode = 0
 
     def run(self, result=None):
