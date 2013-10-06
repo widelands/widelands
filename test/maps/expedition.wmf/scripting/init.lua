@@ -67,7 +67,7 @@ end)
 
 run(function()
    sleep(100)
-   -- game.desired_speed = 150000
+   print "ALIVE"
 
    mouse_smoothly_to(map:get_field(16, 16), 0)
    mv:click(map:get_field(16, 16))
@@ -75,9 +75,6 @@ run(function()
    mv.windows.building_window:close()
 
    sleep(60 * 1000 * 20)
-
-
-
 
    lunit:run()
    -- mv:close()
