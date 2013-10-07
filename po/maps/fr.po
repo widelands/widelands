@@ -7,13 +7,13 @@ msgstr ""
 "Project-Id-Version: Widelands svn4866\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2013-09-15 17:41+0000\n"
-"PO-Revision-Date: 2013-10-02 08:21+0000\n"
+"PO-Revision-Date: 2013-10-06 11:58+0000\n"
 "Last-Translator: fk <Unknown>\n"
 "Language-Team: French <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-10-03 05:09+0000\n"
+"X-Launchpad-Export-Date: 2013-10-07 05:11+0000\n"
 "X-Generator: Launchpad (build 16791)\n"
 
 #: ../../campaigns/cconfig:64
@@ -405,7 +405,7 @@ msgstr ""
 
 #: ../../maps/Kings and Queens.wmf/elemental:9
 msgid "Kings and Queens"
-msgstr "Rois et Reines"
+msgstr "Les Rois et les Reines"
 
 #: ../../maps/Lake of tranquility.wmf/elemental:7
 msgid "Lake of Tranquility"
@@ -426,7 +426,7 @@ msgstr ""
 
 #: ../../maps/Long, long way.wmf/elemental:9
 msgid "Long, long way"
-msgstr ""
+msgstr "Long, long chemin"
 
 #: ../../maps/Crossing the horizon.wmf/elemental:11
 msgid "Man your ship and sail to the horizon."
@@ -571,7 +571,7 @@ msgstr "Équipes suggérées: (bleu, jaune) contre (rouge, vert)"
 
 #: ../../maps/Crossing the horizon.wmf/elemental:12
 msgid "Suggested Teams: all ok"
-msgstr "Équipes Recommandées: toutes d'acc"
+msgstr "Équipes Suggérées: tout est ok"
 
 #: ../../maps/Rendez-Vous.wmf/elemental:10
 msgid "Suggested Teams: all ok."
@@ -582,8 +582,8 @@ msgid ""
 "Suggested Teams: blue vs red, yellow vs green, (blue, yellow) vs (red, "
 "green), (blue, green) vs (red, yellow)"
 msgstr ""
-"Équipes Recommandées: bleue vs rouge, jaune vs verte, (bleue, jaune) vs "
-"(rouge, verte), (bleue, verte) vs (rouge, jaune)"
+"Équipes Suggérées: bleu contre rouge, jaune contre vert, (bleu, jaune) "
+"contre (rouge, vert), (bleu, vert) contre (rouge, jaune)"
 
 #: ../../maps/Long, long way.wmf/elemental:12
 msgid ""
@@ -591,13 +591,13 @@ msgid ""
 "green), (blue, yellow, black) vs (red, green, orange), (blue, yellow, black, "
 "purple) vs (red, green, orange, white)"
 msgstr ""
-"Équipes Recommandées: bleue vs rouge, jaune vs verte, (bleue, jaune) vs "
-"(rouge, verte), (bleue, jaune, noire) vs (rouge, verte, orange), (belue, "
-"jaune, noire, violette) vs (rouge, verte, orange, blanche)"
+"Équipes Suggérées: bleu contre rouge, jaune contre vert, (bleu, jaune) "
+"contre (rouge, vert), (bleu, jaune, noir) contre (rouge, vert, orange), "
+"(bleu, jaune, noir, violet) contre (rouge, vert, orange, blanc)"
 
 #: ../../maps/Plateau.wmf/elemental:10
 msgid "Suggested positions: blue vs yellow"
-msgstr "Positions recommandées: blue vs jaune"
+msgstr "Positions suggérées: blue contre jaune"
 
 #: ../../maps/The Nile.wmf/elemental:12
 msgid ""
@@ -606,18 +606,18 @@ msgid ""
 "green) vs (red, yellow, black), (blue, green, orange, white) vs (red, "
 "yellow, black, purple)"
 msgstr ""
-"Équipes Recommandées: bleue vs rouge, jaune vs verte, (bleue, jaune) vs "
-"(rouge, verte), (verte, orange, blanche) vs (jaune, noire, violette), "
-"(bleue, orange, verte) vs (rouge, jaune, noire),  (bleue, verte, orange, "
-"blanche) vs (rouge, jaune, noire, violette)"
+"Équipes Suggérées: bleu contre rouge, jaune contre vert, (bleu, jaune) "
+"contre (rouge, vert), (vert, orange, blanc) contre (jaune, noir, violet), "
+"(bleu, orange, vert) contre (rouge, jaune, noir),  (bleu, vert, orange, "
+"blanc) contre (rouge, jaune, noir, violet)"
 
 #: ../../maps/Trident of Fire.wmf/elemental:12
 msgid ""
 "Suggested teams: red vs green, (blue, yellow) vs (green, orange), (blue, "
 "black) vs (green, red), (blue, black, yellow) vs (green, red, orange)"
 msgstr ""
-"Équipes Recommandées: rouge vs verte,  (bleue, jaune) vs (verte, orange), "
-"(bleue, noire) vs (verte, rouge), (bleue, noire, jaune) vs (verte, rouge, "
+"Équipes Suggérées: rouge contre vert,  (bleu, jaune) contre (vert, orange), "
+"(bleu, noir) contre (vert, rouge), (bleu, noire, jaune) contre (vert, rouge, "
 "orange)"
 
 #: ../../maps/Swamp Island.wmf/elemental:9
@@ -776,7 +776,7 @@ msgstr ""
 
 #: ../../maps/Twin Lagoons.wmf/elemental:9
 msgid "Twin Lagoons"
-msgstr "Lagune Jumelles"
+msgstr "Lagunes Jumelles"
 
 #: ../../maps/Twinkling Waves.wmf/elemental:9
 msgid "Twinkling Waves"
