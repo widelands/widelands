@@ -27,11 +27,12 @@
 #include <boost/signals2.hpp>
 
 #include "ai/ai_hints.h"
+#include "io/filewrite.h"
 #include "logic/buildcost.h"
 #include "logic/immovable.h"
-#include "io/filewrite.h"
 #include "logic/soldier_counts.h"
 #include "logic/ware_types.h"
+#include "logic/wareworker.h"
 #include "logic/widelands.h"
 #include "workarea_info.h"
 #include "writeHTML.h"
@@ -224,10 +225,14 @@ public:
 		return descr().vision_range();
 	}
 
-	int32_t get_base_priority() const {return m_priority;}
-	int32_t get_priority
-		(int32_t type, Ware_Index, bool adjust = true) const;
-	void set_priority(int32_t new_priority);
+
+	// Get/Set the priority for this waretype for this building. 'type' defines
+	// if this is for a worker or a ware, 'index' is the type of worker or ware.
+	// If 'adjust' is false, the three possible states HIGH_PRIORITY,
+	// DEFAULT_PRIORITY and LOW_PRIORITY are returned, otherwise numerical
+	// values adjusted to the preciousness of the ware in general are returned.
+	virtual int32_t get_priority
+		(WareWorker type, Ware_Index, bool adjust = true) const;
 	void set_priority(int32_t type, Ware_Index ware_index, int32_t new_priority);
 
 	void collect_priorities

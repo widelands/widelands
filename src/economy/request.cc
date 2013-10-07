@@ -20,6 +20,7 @@
 #include "economy/request.h"
 
 #include "economy/economy.h"
+#include "economy/portdock.h"
 #include "economy/transfer.h"
 #include "economy/ware_instance.h"
 #include "logic/constructionsite.h"
@@ -341,6 +342,10 @@ int32_t Request::get_required_time() const
 /**
  * Return the request priority used to sort requests or -1 to skip request
  */
+// TODO(sirver): this is pretty weird design: we ask the building for the
+// priority it assigns to the ware, at the same time, we also adjust the
+// priorities depending on the building type. Move all of this into the
+// building code.
 int32_t Request::get_priority (int32_t cost) const
 {
 	int MAX_IDLE_PRIORITY = 100;
@@ -354,16 +359,18 @@ int32_t Request::get_priority (int32_t cost) const
 		modifier = m_target_building->get_priority(get_type(), get_index());
 		if (m_target_constructionsite)
 			is_construction_site = true;
-		else if (m_target_warehouse)
-			// if warehouse calculated a priority use it
-			// else lower priority based on cost
-			return
-				modifier != 100 ? modifier :
-				std::max
-					(1,
-					 MAX_IDLE_PRIORITY
-					 -
-					 cost * MAX_IDLE_PRIORITY / PRIORITY_MAX_COST);
+		else if (m_target_warehouse) {
+			// If there is no expedition at this warehouse, use the default
+			// warehouse calculation. Otherwise we use the default priority for
+			// the ware.
+			if
+				(!m_target_warehouse->get_portdock() ||
+				 !m_target_warehouse->get_portdock()->expedition_manager())
+			{
+				modifier =
+					std::max(1, MAX_IDLE_PRIORITY - cost * MAX_IDLE_PRIORITY / PRIORITY_MAX_COST);
+			}
+		}
 	}
 
 	if (cost > PRIORITY_MAX_COST)
@@ -393,6 +400,7 @@ int32_t Request::get_priority (int32_t cost) const
 /**
  * Return the transfer priority, based on the priority set at the destination
  */
+// TODO(sirver): Same comment as for Request::get_priority.
 uint32_t Request::get_transfer_priority() const
 {
 	uint32_t pri = 0;

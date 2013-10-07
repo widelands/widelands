@@ -33,6 +33,7 @@
 #include "logic/battle.h"
 #include "logic/carrier.h"
 #include "logic/editor_game_base.h"
+#include "logic/expedition_manager.h"
 #include "logic/findbob.h"
 #include "logic/findnode.h"
 #include "logic/game.h"
@@ -110,7 +111,7 @@ void WarehouseSupply::set_economy(Economy * const e)
 
 
 /// Add wares and update the economy.
-void WarehouseSupply::add_wares     (Ware_Index const id, uint32_t const count)
+void WarehouseSupply::add_wares(Ware_Index const id, uint32_t const count)
 {
 	if (!count)
 		return;
@@ -122,7 +123,7 @@ void WarehouseSupply::add_wares     (Ware_Index const id, uint32_t const count)
 
 
 /// Remove wares and update the economy.
-void WarehouseSupply::remove_wares  (Ware_Index const id, uint32_t const count)
+void WarehouseSupply::remove_wares(Ware_Index const id, uint32_t const count)
 {
 	if (!count)
 		return;
@@ -134,7 +135,7 @@ void WarehouseSupply::remove_wares  (Ware_Index const id, uint32_t const count)
 
 
 /// Add workers and update the economy.
-void WarehouseSupply::add_workers   (Ware_Index const id, uint32_t const count)
+void WarehouseSupply::add_workers(Ware_Index const id, uint32_t const count)
 {
 	if (!count)
 		return;
@@ -236,21 +237,16 @@ Warehouse Building
 
 /// Warehouse Descr
 Warehouse_Descr::Warehouse_Descr
-	(char const * const _name, char const * const _descname,
-	 const std::string & directory, Profile & prof, Section & global_s,
-	 const Tribe_Descr & _tribe)
-:
-	Building_Descr(_name, _descname, directory, prof, global_s, _tribe),
-m_conquers    (0),
-m_heal_per_second(0)
+	(char const* const _name, char const* const _descname,
+	 const std::string& directory, Profile& prof, Section& global_s, const Tribe_Descr& _tribe)
+ : Building_Descr(_name, _descname, directory, prof, global_s, _tribe),
+	m_conquers(0),
+	m_heal_per_second(0)
 {
-	m_heal_per_second     = global_s.get_safe_int("heal_per_second");
-	if
-		((m_conquers =
-		  	prof.get_safe_section("global").get_positive("conquers", 0)))
+	m_heal_per_second = global_s.get_safe_int("heal_per_second");
+	if ((m_conquers = prof.get_safe_section("global").get_positive("conquers", 0)))
 		m_workarea_info[m_conquers].insert(descname() + _(" conquer"));
 }
-
 
 /*
 ==============================
@@ -1330,6 +1326,13 @@ void Warehouse::check_remove_stock(Game & game)
 		worker.start_task_leavebuilding(game, true);
 		break;
 	}
+}
+
+WaresQueue& Warehouse::waresqueue(Ware_Index index) {
+	assert(m_portdock != nullptr);
+	assert(m_portdock->expedition_manager() != nullptr);
+
+	return m_portdock->expedition_manager()->waresqueue(index);
 }
 
 /*

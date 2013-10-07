@@ -205,11 +205,16 @@ public:
 	void set_ware_policy(Ware_Index ware, StockPolicy policy);
 	void set_worker_policy(Ware_Index ware, StockPolicy policy);
 
+	// Get the portdock if this is a port.
 	PortDock * get_portdock() const {return m_portdock;}
+
+	// Returns the waresqueue of the expedition if this is a port. Will
+	// assert(false) otherwise.
+	virtual WaresQueue& waresqueue(Ware_Index);
+
 	virtual void log_general_info(const Editor_Game_Base &);
 
 protected:
-
 	/// Create the warehouse information window.
 	virtual void create_options_window
 		(Interactive_GameBase &, UI::Window * & registry);

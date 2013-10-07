@@ -68,6 +68,9 @@ public:
 	// Changes the economy for the items that are already in store.
 	void set_economy(Economy* economy);
 
+	// Returns the waresqueue for this ware.
+	WaresQueue& waresqueue(Ware_Index index) const;
+
 	// Delete all items we currently handle.
 	void cleanup(Editor_Game_Base& egbase);
 
@@ -85,8 +88,8 @@ private:
 	PortDock* const portdock_;  // not owned
 	Economy* economy_;
 
-	std::vector<std::unique_ptr<WaresQueue>> expedition_wares_;
-	std::vector<std::unique_ptr<ExpeditionWorker>> expedition_workers_;
+	std::vector<std::unique_ptr<WaresQueue>> wares_;
+	std::vector<std::unique_ptr<ExpeditionWorker>> workers_;
 };
 
 }  // namespace Widelands

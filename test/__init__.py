@@ -39,9 +39,8 @@ class WidelandsTestCase(unittest.TestCase):
         """Runs widelands with the arguments given, catching stdout and stderr in files."""
 
         stdout_filename = os.path.join(self.run_dir, "stdout.txt")
-        stderr_filename = os.path.join(self.run_dir, "stderr.txt")
 
-        with open(stdout_filename, 'a') as stdout_file, open(stderr_filename, 'a') as stderr_file:
+        with open(stdout_filename, 'a') as stdout_file:
             args = [self.path_to_widelands_binary, '--verbose=true',
                     '--datadir=.', '--homedir=%s' % self.run_dir,
                     '--disable_fx=true', '--disable_music=true' ]
@@ -49,21 +48,21 @@ class WidelandsTestCase(unittest.TestCase):
             stdout_file.write("---- TestRunner: Starting Widelands: %s\n\n" % args)
 
             widelands = subprocess.Popen(
-                    args, shell=False, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-            (self.stdout, self.stderr) = widelands.communicate()
-
-            stderr_file.write(self.stderr)
-            stdout_file.write(self.stdout)
+                    args, shell=False, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+            while 1:
+                line = widelands.stdout.readline()
+                if not line:
+                    break
+                stdout_file.write(line)
+                stdout_file.flush()
+            widelands.communicate()
 
             stdout_file.write("\n\n---- TestRunner: Widelands terminated.\n\n")
-
             self.widelands_returncode = widelands.returncode
+        self.stdout = open(stdout_filename, "r").read()
 
     def assert_all_lunit_tests_passed(self):
-        success = (
-            self.widelands_returncode == 0 and
-            re.search("All Tests passed.", self.stdout, re.M) is not None
-        )
+        success = self.widelands_returncode == 0 and "All Tests passed." in self.stdout
 
         self.assertTrue(success,
             "Not all tests pass. Analyze the files in %s to see why this test case failed." % self.run_dir

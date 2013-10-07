@@ -169,7 +169,8 @@ throw (_wexception)
 void Map_Building_Data_Packet::write_priorities
 	(const Building & building, FileWrite & fw)
 {
-	fw.Unsigned32(building.get_base_priority());
+	// Used to be base_priority which is no longer used. Remove after b20.
+	fw.Unsigned32(0);
 
 	std::map<int32_t, std::map<Ware_Index, int32_t> > type_to_priorities;
 	std::map<int32_t, std::map<Ware_Index, int32_t> >::iterator it;
@@ -212,7 +213,7 @@ void Map_Building_Data_Packet::write_priorities
 void Map_Building_Data_Packet::read_priorities
 	(Building & building, FileRead & fr)
 {
-	building.set_priority(fr.Unsigned32());
+	fr.Unsigned32(); // unused, was base_priority which is unused. Remove after b20.
 
 	const Tribe_Descr & tribe = building.tribe();
 	int32_t ware_type = -1;

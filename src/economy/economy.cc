@@ -740,7 +740,7 @@ void Economy::_process_requests(Game & game, RSPairStruct & s)
 			}
 		}
 
-		int32_t const priority = req.get_priority (cost);
+		int32_t const priority = req.get_priority(cost);
 		if (priority < 0)
 			continue;
 
