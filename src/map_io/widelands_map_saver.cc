@@ -62,7 +62,7 @@ Map_Saver::Map_Saver(FileSystem & fs, Editor_Game_Base & egbase)
 Map_Saver::~Map_Saver() {delete m_mos;}
 
 
-void Map_Saver::save() throw (_wexception) {
+void Map_Saver::save() {
 	delete m_mos;
 	m_mos = new Map_Map_Object_Saver();
 

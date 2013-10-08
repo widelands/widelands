@@ -225,7 +225,7 @@ void Map_Players_View_Data_Packet::Read
 	 Editor_Game_Base      &       egbase,
 	 bool                    const skip,
 	 Map_Map_Object_Loader &)
-	throw (_wexception)
+
 {
 	if (skip)
 		return;
@@ -880,7 +880,6 @@ inline static void write_unseen_immovable
 
 void Map_Players_View_Data_Packet::Write
 	(FileSystem & fs, Editor_Game_Base & egbase, Map_Map_Object_Saver &)
-throw (_wexception)
 {
 	fs.EnsureDirectoryExists("player");
 	const Map & map = egbase.map();
@@ -1086,4 +1085,3 @@ throw (_wexception)
 
 
 }
-

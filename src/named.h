@@ -27,7 +27,7 @@ struct Named {
 	Named(char        const * const Name = "") : m_name(Name) {}
 	Named(const std::string &       Name)      : m_name(Name) {}
 	void set_name(const std::string & new_name) {m_name = new_name;}
-	const std::string & name() const throw () {return m_name;}
+	const std::string & name() const {return m_name;}
 private:
 	std::string m_name;
 };

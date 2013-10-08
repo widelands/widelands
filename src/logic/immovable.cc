@@ -57,7 +57,7 @@ Map_Object(&mo_descr)
 
 
 static std::string const base_immovable_name = "unknown";
-const std::string & BaseImmovable::name() const throw () {
+const std::string & BaseImmovable::name() const {
 	return base_immovable_name;
 }
 
@@ -358,13 +358,13 @@ Immovable::~Immovable()
 	m_action_data = 0;
 }
 
-int32_t Immovable::get_type() const throw ()
+int32_t Immovable::get_type() const
 {
 	return IMMOVABLE;
 }
 
 BaseImmovable::PositionList Immovable::get_positions
-	(const Editor_Game_Base &) const throw ()
+	(const Editor_Game_Base &) const
 {
 	PositionList rv;
 
@@ -372,18 +372,18 @@ BaseImmovable::PositionList Immovable::get_positions
 	return rv;
 }
 
-int32_t Immovable::get_size() const throw ()
+int32_t Immovable::get_size() const
 {
 	return descr().get_size();
 }
 
-bool Immovable::get_passable() const throw ()
+bool Immovable::get_passable() const
 {
 	return descr().get_size() < BIG;
 }
 
 
-const std::string & Immovable::name() const throw () {return descr().name();}
+const std::string & Immovable::name() const {return descr().name();}
 
 void Immovable::set_owner(Player * player)
 {

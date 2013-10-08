@@ -198,7 +198,7 @@ bool Table<void *>::Entry_Record::is_checked(uint8_t const col) const {
 
 Table<void *>::Entry_Record * Table<void *>::find
 	(const void * const entry) const
-	throw ()
+
 {
 	container_iterate_const(Entry_Record_vector, m_entry_records, i)
 		if ((*i.current)->entry() == entry)
@@ -427,9 +427,12 @@ void Table<void *>::move_selection(const int32_t offset)
 		}
 
 		// Ensure scroll_item is visible
-		if (scroll_item * get_lineheight() < static_cast<int32_t>(m_scrollpos)) {
+		if (static_cast<int32_t>(scroll_item * get_lineheight()) < m_scrollpos) {
 			m_scrollbar->set_scrollpos(scroll_item * get_lineheight());
-		} else if ((scroll_item + 1) * get_lineheight() - get_inner_h() > m_scrollpos) {
+		} else if
+			(static_cast<int32_t>((scroll_item + 1) * get_lineheight() - get_inner_h())
+			 > m_scrollpos)
+		{
 			m_scrollbar->set_scrollpos((scroll_item + 1) * get_lineheight() - get_inner_h());
 		}
 	}

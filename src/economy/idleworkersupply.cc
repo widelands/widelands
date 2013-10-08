@@ -66,12 +66,12 @@ void IdleWorkerSupply::set_economy(Economy * const e)
 /**
  * Worker is walking around the road network, so active by definition.
  */
-bool IdleWorkerSupply::is_active() const throw ()
+bool IdleWorkerSupply::is_active() const
 {
 	return true;
 }
 
-bool IdleWorkerSupply::has_storage() const throw ()
+bool IdleWorkerSupply::has_storage() const
 {
 	return m_worker.get_transfer();
 }

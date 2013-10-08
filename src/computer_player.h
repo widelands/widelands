@@ -43,7 +43,7 @@ struct Computer_Player :
 	virtual void receive(const Widelands::NoteImmovable &) {}
 	virtual void receive(const Widelands::NoteFieldPossession     &) {}
 
-	Widelands::Game & game() const throw () {return m_game;}
+	Widelands::Game & game() const {return m_game;}
 	Widelands::Player_Number player_number() {return m_player_number;}
 
 	/**

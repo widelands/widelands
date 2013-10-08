@@ -34,8 +34,8 @@
 
 
 namespace Widelands {
-struct Player;
-struct Game;
+class Player;
+class Game;
 struct Flag;
 struct Route;
 struct RSPairStruct;
@@ -91,7 +91,7 @@ public:
 	Economy(Player &);
 	~Economy();
 
-	Player & owner() const throw () {return m_owner;}
+	Player & owner() const {return m_owner;}
 
 	static void check_merge(Flag &, Flag &);
 	static void check_split(Flag &, Flag &);

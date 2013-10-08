@@ -35,7 +35,7 @@
 
 namespace Widelands {
 struct Building_Descr;
-struct Editor_Game_Base;
+class Editor_Game_Base;
 struct Immovable_Descr;
 };
 

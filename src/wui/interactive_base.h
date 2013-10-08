@@ -64,7 +64,7 @@ struct Interactive_Base : public Map_View, public DebugConsole::Handler {
 	void hide_work_area(Overlay_Manager::Job_Id job_id);
 
 	//  point of view for drawing
-	virtual Widelands::Player * get_player() const throw () = 0;
+	virtual Widelands::Player * get_player() const = 0;
 
 	void think();
 	virtual void postload();
@@ -82,12 +82,12 @@ struct Interactive_Base : public Map_View, public DebugConsole::Handler {
 	 * sel_triangles determines whether the mouse pointer selects triangles.
 	 * (False meas that it selects nodes.)
 	 */
-	bool get_sel_triangles() const throw () {return m_sel.triangles;}
-	void set_sel_triangles(const bool yes) throw () {m_sel.triangles = yes;}
+	bool get_sel_triangles() const {return m_sel.triangles;}
+	void set_sel_triangles(const bool yes) {m_sel.triangles = yes;}
 
-	uint32_t get_sel_radius() const throw () {return m_sel.radius;}
+	uint32_t get_sel_radius() const {return m_sel.radius;}
 	virtual void set_sel_pos(Widelands::Node_and_Triangle<>);
-	void set_sel_freeze(const bool yes) throw () {m_sel.freeze = yes;}
+	void set_sel_freeze(const bool yes) {m_sel.freeze = yes;}
 	void set_sel_radius(uint32_t);
 
 	void move_view_to(Widelands::Coords);
@@ -109,8 +109,8 @@ struct Interactive_Base : public Map_View, public DebugConsole::Handler {
 		void abort_build_road();
 		void finish_build_road();
 		bool append_build_road(Widelands::Coords field);
-	Widelands::Coords    get_build_road_start  () const throw ();
-	Widelands::Coords    get_build_road_end    () const throw ();
+	Widelands::Coords    get_build_road_start  () const;
+	Widelands::Coords    get_build_road_end    () const;
 
 	virtual void cleanup_for_load() {};
 

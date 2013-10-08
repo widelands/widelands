@@ -29,7 +29,7 @@ namespace Widelands {
 class ConstructionSite;
 class Partially_Finished_Building;
 class DismantleSite;
-struct Game;
+class Game;
 class MilitarySite;
 class TrainingSite;
 class ProductionSite;
@@ -42,9 +42,9 @@ class Building;
 struct Map_Buildingdata_Data_Packet : public Map_Data_Packet {
 	void Read
 		(FileSystem &, Editor_Game_Base &, bool, Map_Map_Object_Loader &)
-		throw (_wexception);
+	;
 	void Write(FileSystem &, Editor_Game_Base &, Map_Map_Object_Saver &)
-		throw (_wexception);
+	;
 
 private:
 	virtual void read_constructionsite

@@ -701,7 +701,7 @@ void ProductionSite::set_stopped(bool const stopped) {
  * \return True if this production site could theoretically start working (if
  * all workers are present)
  */
-bool ProductionSite::can_start_working() const throw ()
+bool ProductionSite::can_start_working() const
 {
 	for (uint32_t i = descr().nr_working_positions(); i;)
 		if (m_working_positions[--i].worker_request)

@@ -31,7 +31,7 @@ namespace Widelands {
 
 class Economy;
 struct Flag;
-struct Map;
+class Map;
 struct Tribe_Descr;
 class WareInstance;
 class Worker;
@@ -56,8 +56,8 @@ struct BaseImmovable : public Map_Object {
 
 	BaseImmovable(const Map_Object_Descr &);
 
-	virtual int32_t  get_size    () const throw () = 0;
-	virtual bool get_passable() const throw () = 0;
+	virtual int32_t  get_size    () const = 0;
+	virtual bool get_passable() const = 0;
 
 	typedef std::vector<Coords> PositionList;
 	/**
@@ -66,11 +66,11 @@ struct BaseImmovable : public Map_Object {
 	 * if one can be chosen as main.
 	 */
 	virtual PositionList get_positions
-		(const Editor_Game_Base &) const throw () = 0;
+		(const Editor_Game_Base &) const = 0;
 	virtual void draw
 		(const Editor_Game_Base &, RenderTarget &, const FCoords&, const Point&)
 		= 0;
-	virtual const std::string & name() const throw ();
+	virtual const std::string & name() const;
 
 protected:
 	void set_position(Editor_Game_Base &, Coords);
@@ -95,13 +95,13 @@ struct Immovable_Descr : public Map_Object_Descr {
 		 const World & world, Tribe_Descr const * const);
 	~Immovable_Descr();
 
-	int32_t get_size() const throw () {return m_size;}
+	int32_t get_size() const {return m_size;}
 	char const * get_picture() const {return m_picture.c_str();}
 	ImmovableProgram const * get_program(const std::string &) const;
 
 	Immovable & create(Editor_Game_Base &, Coords) const;
 
-	Tribe_Descr const * get_owner_tribe() const throw () {return m_owner_tribe;}
+	Tribe_Descr const * get_owner_tribe() const {return m_owner_tribe;}
 
 	/// How well the terrain around f suits an immovable of this type.
 	uint32_t terrain_suitability(FCoords, const Map &) const;
@@ -129,7 +129,7 @@ private:
 class Immovable : public BaseImmovable {
 	friend struct Immovable_Descr;
 	friend struct ImmovableProgram;
-	friend struct Map;
+	friend class Map;
 
 	MO_DESCR(Immovable_Descr);
 
@@ -141,13 +141,13 @@ public:
 	void set_owner(Player * player);
 
 	Coords get_position() const {return m_position;}
-	virtual PositionList get_positions (const Editor_Game_Base &) const throw ();
+	virtual PositionList get_positions (const Editor_Game_Base &) const;
 
-	virtual int32_t  get_type    () const throw ();
-	char const * type_name() const throw () {return "immovable";}
-	virtual int32_t  get_size    () const throw ();
-	virtual bool get_passable() const throw ();
-	const std::string & name() const throw ();
+	virtual int32_t  get_type    () const;
+	char const * type_name() const {return "immovable";}
+	virtual int32_t  get_size    () const;
+	virtual bool get_passable() const;
+	const std::string & name() const;
 	void start_animation(const Editor_Game_Base &, uint32_t anim);
 
 	void program_step(Game & game, uint32_t const delay = 1) {
@@ -266,8 +266,8 @@ struct PlayerImmovable : public BaseImmovable {
 
 	Player * get_owner() const {return m_owner;}
 	Player & owner() const {return *m_owner;}
-	Economy * get_economy() const throw () {return m_economy;}
-	Economy & economy() const throw () {return *m_economy;}
+	Economy * get_economy() const {return m_economy;}
+	Economy & economy() const {return *m_economy;}
 
 	virtual Flag & base_flag() = 0;
 

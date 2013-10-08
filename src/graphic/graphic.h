@@ -42,7 +42,7 @@ class Surface;
 class SurfaceCache;
 struct Road_Textures;
 struct SDL_Surface;
-struct StreamWrite;
+class StreamWrite;
 struct Texture;
 
 /// Stores the capabilities of opengl
@@ -133,7 +133,7 @@ public:
 	void set_world(std::string);
 	Surface& get_road_texture(int32_t roadtex);
 
-	const GraphicCaps& caps() const throw () {return m_caps;}
+	const GraphicCaps& caps() const {return m_caps;}
 
 	bool check_fallback_settings_in_effect();
 

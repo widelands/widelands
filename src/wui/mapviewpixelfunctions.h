@@ -26,7 +26,7 @@
 #include "wui/mapviewpixelconstants.h"
 #include "point.h"
 
-namespace Widelands {struct Map;}
+namespace Widelands {class Map;}
 
 namespace MapviewPixelFunctions {
 
@@ -52,9 +52,6 @@ uint32_t get_map_end_screen_y(const Widelands::Map &);
  * the 2 neighbouring nodes whose screen coordinates define the rectangle that
  * the point is in. But this should be fully correct for all but the most
  * bizarre triangle shapes, and acceptable even for them.
- *
- * \note More documentation exists in HTML-format with figures in
- * <a href="../../../../geometry/index.html">doc/geometry</a>.
  */
 Widelands::Node_and_Triangle<> calc_node_and_triangle
 	(const Widelands::Map &, uint32_t x, uint32_t y);

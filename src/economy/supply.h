@@ -26,7 +26,7 @@
 namespace Widelands {
 
 struct PlayerImmovable;
-struct Game;
+class Game;
 struct Request;
 class Warehouse;
 struct Ware_Index;
@@ -54,7 +54,7 @@ struct Supply : public Trackable {
 	 * Indicates whether this supply is active as explained above (out
 	 * on the road network).
 	 */
-	virtual bool is_active() const throw () = 0;
+	virtual bool is_active() const = 0;
 
 	/**
 	 * Indicates whether this supply is in storage or on its way to
@@ -62,7 +62,7 @@ struct Supply : public Trackable {
 	 *
 	 * If this is \c false, somebody needs to find this supply a warehouse.
 	 */
-	virtual bool has_storage() const throw () = 0;
+	virtual bool has_storage() const = 0;
 
 	/**
 	 * Gets the ware type of this supply.
@@ -107,5 +107,3 @@ struct Supply : public Trackable {
 }
 
 #endif
-
-

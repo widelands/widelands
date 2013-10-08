@@ -27,7 +27,6 @@
 
 #include "logic/instances.h"
 #include "io/filewrite.h"
-#include "writeHTML.h"
 
 struct Profile;
 struct Section;
@@ -69,11 +68,11 @@ struct Item_Ware_Descr : public Map_Object_Descr {
 	const Tribe_Descr & tribe() const {return m_tribe;}
 
 	/// \return index to ware's icon inside picture stack
-	const Image* icon() const throw () {return m_icon;}
-	std::string icon_name() const throw () {return m_icon_fname;}
+	const Image* icon() const {return m_icon;}
+	std::string icon_name() const {return m_icon_fname;}
 
 	/// \return ware's localized descriptive text
-	const std::string & helptext() const throw () {return m_helptext;}
+	const std::string & helptext() const {return m_helptext;}
 
 	/// How much of the ware type that an economy should store in warehouses.
 	/// The special value std::numeric_limits<uint32_t>::max() means that the
@@ -94,9 +93,6 @@ struct Item_Ware_Descr : public Map_Object_Descr {
 	}
 
 	virtual void load_graphics();
-#ifdef WRITE_GAME_DATA_AS_HTML
-	void writeHTML(::FileWrite &) const;
-#endif
 
 	/// returns the preciousness of the ware. It is used by the computer player
 	uint8_t preciousness() const {return m_preciousness;}

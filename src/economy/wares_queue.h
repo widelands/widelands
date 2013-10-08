@@ -26,11 +26,11 @@
 namespace Widelands {
 
 class Economy;
-struct Editor_Game_Base;
-struct Game;
+class Editor_Game_Base;
+class Game;
 struct Map_Map_Object_Loader;
 struct Map_Map_Object_Saver;
-struct Player;
+class Player;
 struct Request;
 struct WaresQueue;
 class Worker;
@@ -49,9 +49,9 @@ struct WaresQueue {
 #endif
 
 	Ware_Index get_ware()   const          {return m_ware;}
-	uint32_t get_max_fill() const throw () {return m_max_fill;}
-	uint32_t get_max_size() const throw () {return m_max_size;}
-	uint32_t get_filled()   const throw () {return m_filled;}
+	uint32_t get_max_fill() const {return m_max_fill;}
+	uint32_t get_max_size() const {return m_max_size;}
+	uint32_t get_filled()   const {return m_filled;}
 
 	void cleanup();
 
@@ -60,12 +60,12 @@ struct WaresQueue {
 	void remove_from_economy(Economy &);
 	void add_to_economy(Economy &);
 
-	void set_max_size        (uint32_t) throw ();
-	void set_max_fill        (uint32_t) throw ();
-	void set_filled          (uint32_t) throw ();
-	void set_consume_interval(uint32_t) throw ();
+	void set_max_size        (uint32_t);
+	void set_max_fill        (uint32_t);
+	void set_filled          (uint32_t);
+	void set_consume_interval(uint32_t);
 
-	Player & owner() const throw () {return m_owner.owner();}
+	Player & owner() const {return m_owner.owner();}
 
 	void Read (FileRead  &, Game &, Map_Map_Object_Loader &);
 	void Write(FileWrite &, Game &, Map_Map_Object_Saver  &);
@@ -93,5 +93,3 @@ private:
 }
 
 #endif
-
-

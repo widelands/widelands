@@ -20,11 +20,13 @@
 #ifndef WUI_ITEMWARESDISPLAY_H
 #define WUI_ITEMWARESDISPLAY_H
 
+#include <vector>
+
 #include "logic/widelands.h"
 #include "ui_basic/panel.h"
 
 namespace Widelands {
-struct Player;
+class Player;
 }
 
 /**

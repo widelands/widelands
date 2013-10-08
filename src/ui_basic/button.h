@@ -58,7 +58,7 @@ struct Button : public NamedPanel {
 
 	void set_pic(const Image* pic);
 	void set_title(const std::string &);
-	const std::string & get_title() const throw () {return m_title;}
+	const std::string & get_title() const {return m_title;}
 
 	bool enabled() const {return m_enabled;}
 	void set_enabled(bool on);

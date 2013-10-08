@@ -482,7 +482,7 @@ struct BlockedTracker {
 	};
 	// Distance-based ordering as a heuristic for unblock()
 	struct CoordOrdering {
-		bool operator()(const CoordData & a, const CoordData & b) const throw () {
+		bool operator()(const CoordData & a, const CoordData & b) const {
 			if (a.dist != b.dist)
 				return a.dist < b.dist;
 			return a.coord.all < b.coord.all;

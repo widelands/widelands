@@ -64,7 +64,7 @@ Ship_Descr::Ship_Descr
 	m_vision_range = global_s.get_natural("vision_range", 7);
 }
 
-uint32_t Ship_Descr::movecaps() const throw () {
+uint32_t Ship_Descr::movecaps() const {
 	return MOVECAPS_SWIM;
 }
 
@@ -86,7 +86,7 @@ Ship::~Ship() {
 	close_window();
 }
 
-Bob::Type Ship::get_bob_type() const throw () {
+Bob::Type Ship::get_bob_type() const {
 	return SHIP;
 }
 

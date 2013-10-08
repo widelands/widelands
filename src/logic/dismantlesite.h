@@ -63,7 +63,7 @@ public:
 		(const DismantleSite_Descr & descr, Editor_Game_Base &,
 		 Coords const, Player &, bool, Building::FormerBuildings & former_buildings);
 
-	char const * type_name() const throw () {return "dismantlesite";}
+	char const * type_name() const {return "dismantlesite";}
 	virtual std::string get_statistics_string();
 
 	virtual bool burn_on_destroy();

@@ -29,7 +29,7 @@
 namespace Widelands {
 
 struct Building_Descr;
-struct Editor_Game_Base;
+class Editor_Game_Base;
 struct Immovable_Descr;
 struct Tribe_Descr;
 struct World;
@@ -38,7 +38,8 @@ struct World;
 /// members. Therefore it is binary compatible with StreamRead, so any
 /// ::StreamRead can be used as a Widelands::StreamRead to read
 /// Widelands-specific types.
-struct StreamRead : public ::StreamRead {
+class StreamRead : public ::StreamRead {
+public:
 	struct direction_is_null : public _data_error {
 		direction_is_null
 			()
@@ -125,7 +126,7 @@ struct StreamRead : public ::StreamRead {
 				 Tribename.c_str(), Name.c_str()),
 			tribename(Tribename), name(Name)
 		{}
-		virtual ~tribe_immovable_nonexistent() throw () {}
+		virtual ~tribe_immovable_nonexistent() {}
 		std::string tribename;
 		std::string name;
 	};

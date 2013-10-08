@@ -39,8 +39,8 @@ template<typename Base> struct basic_FileRead : public Base {
 		/// Returns a special value indicating invalidity.
 		static Pos Null() {return std::numeric_limits<size_t>::max();}
 
-		bool isNull() const throw () {return *this == Null();}
-		operator size_t() const throw () {return pos;}
+		bool isNull() const {return *this == Null();}
+		operator size_t() const {return pos;}
 		Pos operator++ () {return ++pos;}
 		Pos operator+= (Pos const other) {return pos += other.pos;}
 	private:
@@ -90,8 +90,8 @@ template<typename Base> struct basic_FileRead : public Base {
 		data = 0;
 	}
 
-	size_t GetSize() const throw () {return length;}
-	bool EndOfFile() const throw () {return length <= filepos;}
+	size_t GetSize() const {return length;}
+	bool EndOfFile() const {return length <= filepos;}
 
 	/// Set the file pointer to the given location.
 	/// \throws File_Boundary_Exceeded if the pointer is out of bound.
@@ -104,7 +104,7 @@ template<typename Base> struct basic_FileRead : public Base {
 
 	/// Get the position that will be read from in the next read operation that
 	/// does not specify a position.
-	Pos GetPos() const throw () {return filepos;}
+	Pos GetPos() const {return filepos;}
 
 	size_t Data(void * dst, size_t bufsize) {
 		assert(data);

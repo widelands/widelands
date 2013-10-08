@@ -48,10 +48,10 @@ struct Statebox : public Panel {
 
 	void set_enabled(bool enabled);
 
-	bool get_state() const throw () {return m_flags & Is_Checked;}
+	bool get_state() const {return m_flags & Is_Checked;}
 	void set_state(bool on);
 
-	void set_owns_custom_picture() throw () {
+	void set_owns_custom_picture() {
 		assert(m_flags & Has_Custom_Picture);
 		set_flags(Owns_Custom_Picture, true);
 	}
@@ -75,7 +75,7 @@ private:
 		Owns_Custom_Picture = 0x10
 	};
 	uint8_t m_flags;
-	void set_flags(uint8_t const flags, bool const enable) throw () {
+	void set_flags(uint8_t const flags, bool const enable) {
 		m_flags &= ~flags;
 		if (enable)
 			m_flags |= flags;

@@ -689,10 +689,10 @@ std::vector<Soldier *> MilitarySite::stationedSoldiers() const
 	return soldiers;
 }
 
-uint32_t MilitarySite::minSoldierCapacity() const throw () {
+uint32_t MilitarySite::minSoldierCapacity() const {
 	return 1;
 }
-uint32_t MilitarySite::maxSoldierCapacity() const throw () {
+uint32_t MilitarySite::maxSoldierCapacity() const {
 	return descr().get_max_number_of_soldiers();
 }
 uint32_t MilitarySite::soldierCapacity() const

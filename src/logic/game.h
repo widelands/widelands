@@ -47,7 +47,7 @@ class MilitarySite;
 #define WLGF_SUFFIX ".wgf"
 #define WLGF_MAGIC      "WLgf"
 
-/** struct Game
+/** class Game
  *
  * This class manages the entire lifetime of a game session, from creating the
  * game and setting options, selecting maps to the actual playing phase and the
@@ -59,13 +59,14 @@ enum {
 	gs_ending
 };
 
-struct Player;
-struct Map_Loader;
+class Player;
+class Map_Loader;
 class PlayerCommand;
 class ReplayReader;
 class ReplayWriter;
 
-struct Game : Editor_Game_Base {
+class Game : public Editor_Game_Base {
+public:
 	struct General_Stats {
 		std::vector< uint32_t > land_size;
 		std::vector< uint32_t > nr_workers;

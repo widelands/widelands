@@ -62,13 +62,13 @@ public:
 	virtual void load_graphics();
 
 	bool is_buildable() const {return m_buildable;}
-	const Buildcost & buildcost() const throw () {
+	const Buildcost & buildcost() const {
 		assert(is_buildable());
 		return m_buildcost;
 	}
 
-	const Tribe_Descr * get_tribe() const throw () {return m_owner_tribe;}
-	const Tribe_Descr & tribe() const throw () {return *m_owner_tribe;}
+	const Tribe_Descr * get_tribe() const {return m_owner_tribe;}
+	const Tribe_Descr & tribe() const {return *m_owner_tribe;}
 	std::string helptext() const {return m_helptext;}
 	Point get_ware_hotspot() const {return m_ware_hotspot;}
 
@@ -90,8 +90,8 @@ public:
 			m_default_target_quantity = 1;
 	}
 
-	const Image* icon() const throw () {return m_icon;}
-	const DirAnimations & get_walk_anims() const throw () {return m_walk_anims;}
+	const Image* icon() const {return m_icon;}
+	const DirAnimations & get_walk_anims() const {return m_walk_anims;}
 	const DirAnimations & get_right_walk_anims(bool const carries_ware) const {
 		return carries_ware ? m_walkload_anims : m_walk_anims;
 	}
@@ -100,26 +100,23 @@ public:
 	virtual Worker_Type get_worker_type() const {return NORMAL;}
 
 	// For leveling
-	int32_t get_level_experience() const throw () {return m_level_experience;}
-	Ware_Index becomes() const throw () {return m_becomes;}
-	Ware_Index worker_index() const throw ();
+	int32_t get_level_experience() const {return m_level_experience;}
+	Ware_Index becomes() const {return m_becomes;}
+	Ware_Index worker_index() const;
 	bool can_act_as(Ware_Index) const;
 
 	Worker & create
 		(Editor_Game_Base &, Player &, PlayerImmovable *, Coords) const;
 
 	typedef std::map<Worker_Descr const *, std::string> becomes_map_t;
-	virtual uint32_t movecaps() const throw ();
+	virtual uint32_t movecaps() const;
 
 	typedef std::map<std::string, WorkerProgram *> Programs;
-	const Programs & programs() const throw () {return m_programs;}
+	const Programs & programs() const {return m_programs;}
 
 	const std::string & compatibility_program(const std::string & programname) const;
 
 protected:
-#ifdef WRITE_GAME_DATA_AS_HTML
-	void writeHTML(::FileWrite &) const;
-#endif
 
 	std::string       m_helptext;   ///< Short (tooltip-like) help text
 	Point             m_ware_hotspot;

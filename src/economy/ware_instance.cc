@@ -51,8 +51,8 @@ struct IdleWareSupply : public Supply {
 
 	//  implementation of Supply
 	virtual PlayerImmovable * get_position(Game &);
-	virtual bool is_active() const throw ();
-	virtual bool has_storage() const throw ();
+	virtual bool is_active() const;
+	virtual bool has_storage() const;
 	virtual void get_ware_type(WareWorker & type, Ware_Index & ware) const;
 	virtual void send_to_storage(Game &, Warehouse * wh);
 
@@ -118,12 +118,12 @@ PlayerImmovable * IdleWareSupply::get_position(Game & game)
 	return 0;
 }
 
-bool IdleWareSupply::is_active() const throw ()
+bool IdleWareSupply::is_active() const
 {
 	return true;
 }
 
-bool IdleWareSupply::has_storage()  const throw ()
+bool IdleWareSupply::has_storage()  const
 {
 	return m_ware.is_moving();
 }
@@ -197,7 +197,7 @@ WareInstance::~WareInstance()
 	}
 }
 
-int32_t WareInstance::get_type() const throw ()
+int32_t WareInstance::get_type() const
 {
 	return WARE;
 }
@@ -487,7 +487,7 @@ void WareInstance::cancel_transfer(Game & game)
 /**
  * We are moving when there's a transfer, it's that simple.
 */
-bool WareInstance::is_moving() const throw ()
+bool WareInstance::is_moving() const
 {
 	return m_transfer;
 }
@@ -660,4 +660,3 @@ Map_Object::Loader * WareInstance::load
 }
 
 }
-

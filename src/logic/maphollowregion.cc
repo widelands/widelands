@@ -38,7 +38,7 @@ m_left        (hollow_area)
 	m_left = m_hollow_area;
 }
 
-template <> bool MapHollowRegion<Area<> >::advance(const Map & map) throw () {
+template <> bool MapHollowRegion<Area<> >::advance(const Map & map) {
 	if (m_phase == None)
 		return false;
 	++m_rowpos;

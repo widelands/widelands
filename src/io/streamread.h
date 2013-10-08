@@ -42,7 +42,8 @@
  *
  * Convenience functions are provided for many data types.
  */
-struct StreamRead : boost::noncopyable {
+class StreamRead : boost::noncopyable {
+public:
 	explicit StreamRead() {}
 	virtual ~StreamRead();
 
@@ -73,10 +74,9 @@ struct StreamRead : boost::noncopyable {
 	///  Base of all exceptions that are caused by errors in the data that is
 	///  read.
 	struct _data_error : public _wexception {
-		_data_error(char const * const fmt, ...) throw () PRINTF_FORMAT(2, 3);
+		_data_error(char const * const fmt, ...) PRINTF_FORMAT(2, 3);
 	};
 #define data_error(...) _data_error(__VA_ARGS__)
 };
 
 #endif
-

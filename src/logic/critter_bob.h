@@ -40,9 +40,9 @@ struct Critter_Bob_Descr : public Bob::Descr {
 
 	Bob & create_object() const;
 
-	bool is_swimming() const throw () {return m_swimming;}
-	uint32_t movecaps() const throw ();
-	const DirAnimations & get_walk_anims() const throw () {return m_walk_anims;}
+	bool is_swimming() const {return m_swimming;}
+	uint32_t movecaps() const;
+	const DirAnimations & get_walk_anims() const {return m_walk_anims;}
 
 	Critter_BobProgram const * get_program(const std::string &) const;
 
@@ -62,13 +62,13 @@ class Critter_Bob : public Bob {
 public:
 	Critter_Bob(const Critter_Bob_Descr &);
 
-	char const * type_name() const throw () {return "critter";}
-	virtual Bob::Type get_bob_type() const throw () {return Bob::CRITTER;}
+	char const * type_name() const {return "critter";}
+	virtual Bob::Type get_bob_type() const {return Bob::CRITTER;}
 
 	virtual void init_auto_task(Game &);
 
 	void start_task_program(Game &, const std::string & name);
-	const std::string & descname() const throw () {return descr().descname();}
+	const std::string & descname() const {return descr().descname();}
 
 private:
 	void roam_update   (Game &, State &);

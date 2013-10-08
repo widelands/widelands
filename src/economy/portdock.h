@@ -72,17 +72,17 @@ struct PortDock : PlayerImmovable {
 
 	virtual void set_economy(Economy *);
 
-	virtual int32_t get_size() const throw ();
-	virtual bool get_passable() const throw ();
-	virtual int32_t get_type() const throw ();
-	virtual char const * type_name() const throw ();
+	virtual int32_t get_size() const;
+	virtual bool get_passable() const;
+	virtual int32_t get_type() const;
+	virtual char const * type_name() const;
 
 	virtual Flag & base_flag();
 	virtual PositionList get_positions
-		(const Editor_Game_Base &) const throw ();
+		(const Editor_Game_Base &) const;
 	virtual void draw
 		(const Editor_Game_Base &, RenderTarget &, const FCoords&, const Point&);
-	virtual const std::string & name() const throw ();
+	virtual const std::string & name() const;
 
 	virtual void init(Editor_Game_Base &);
 	virtual void cleanup(Editor_Game_Base &);

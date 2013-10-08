@@ -30,7 +30,7 @@ namespace Widelands {
 
 class Editor_Game_Base;
 class Player;
-struct Player;
+class Player;
 
 enum class PlayerEndResult : uint8_t
 	{PLAYER_LOST = 0, PLAYER_WON = 1, PLAYER_RESIGNED = 2, UNDEFINED = 255};
@@ -92,7 +92,7 @@ public:
 	/**
 	* Adds a new player status for a player that left the game.
 	*/
-	void add_player_end_status(const PlayerEndStatus & status) throw ();
+	void add_player_end_status(const PlayerEndStatus & status);
 
 private:
 	Player                 * m_players[MAX_PLAYERS];

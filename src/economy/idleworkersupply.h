@@ -33,8 +33,8 @@ struct IdleWorkerSupply : public Supply {
 	void set_economy(Economy *);
 	virtual PlayerImmovable * get_position(Game &);
 
-	virtual bool is_active() const throw ();
-	virtual bool has_storage() const throw ();
+	virtual bool is_active() const;
+	virtual bool has_storage() const;
 	virtual void get_ware_type(WareWorker & type, Ware_Index & ware) const;
 	virtual void send_to_storage(Game &, Warehouse * wh);
 

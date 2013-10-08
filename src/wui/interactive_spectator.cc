@@ -137,7 +137,7 @@ Interactive_Spectator::~Interactive_Spectator() {
  * \note We might want to implement a feature to watch a specific player,
  * including their vision. Then this should be changed.
  */
-Widelands::Player * Interactive_Spectator::get_player() const throw ()
+Widelands::Player * Interactive_Spectator::get_player() const
 {
 	return 0;
 }
@@ -286,4 +286,3 @@ bool Interactive_Spectator::handle_key(bool const down, SDL_keysym const code)
 
 	return Interactive_GameBase::handle_key(down, code);
 }
-

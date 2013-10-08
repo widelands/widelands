@@ -206,7 +206,7 @@ const
 }
 
 
-uint32_t Worker_Descr::movecaps() const throw () {return MOVECAPS_WALK;}
+uint32_t Worker_Descr::movecaps() const {return MOVECAPS_WALK;}
 
 
 /**
@@ -232,7 +232,7 @@ bool Worker_Descr::can_act_as(Ware_Index const index) const {
 	return becomes_index ? can_act_as(becomes_index) : false;
 }
 
-Ware_Index Worker_Descr::worker_index() const throw () {
+Ware_Index Worker_Descr::worker_index() const {
 	return tribe().worker_index(name().c_str());
 }
 

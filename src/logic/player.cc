@@ -820,7 +820,7 @@ void Player::remove_economy(Economy & economy) {
 		}
 }
 
-bool Player::has_economy(Economy & economy) const throw () {
+bool Player::has_economy(Economy & economy) const {
 	container_iterate_const(Economies, m_economies, i)
 		if (*i.current == &economy)
 			return true;
@@ -829,7 +829,6 @@ bool Player::has_economy(Economy & economy) const throw () {
 
 Player::Economies::size_type Player::get_economy_number
 	(Economy const * const economy) const
-throw ()
 {
 	Economies::const_iterator const
 		economies_end = m_economies.end(), economies_begin = m_economies.begin();
@@ -989,7 +988,6 @@ void Player::rediscover_node
 	(const Map              &       map,
 	 const Widelands::Field &       first_map_field,
 	 FCoords          const f)
-throw ()
 {
 
 	assert(0 <= f.x);
@@ -1111,7 +1109,6 @@ void Player::see_node
 	 FCoords                  const f,
 	 Time                     const gametime,
 	 bool                     const forward)
-throw ()
 {
 	assert(0 <= f.x);
 	assert(f.x < map.get_width());
@@ -1143,7 +1140,6 @@ throw ()
 
 void Player::unsee_node
 	(Map_Index const i, Time const gametime, bool const forward)
-throw ()
 {
 	Field & field = m_fields[i];
 	if (field.vision <= 1) //  Already does not see this

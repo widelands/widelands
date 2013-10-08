@@ -68,7 +68,7 @@ class ConstructionSite : public Partially_Finished_Building {
 public:
 	ConstructionSite(const ConstructionSite_Descr & descr);
 
-	char const * type_name() const throw () {return "constructionsite";}
+	char const * type_name() const {return "constructionsite";}
 	virtual std::string get_statistics_string();
 
 	const Player::Constructionsite_Information & get_info() {return m_info;}
@@ -76,7 +76,7 @@ public:
 	virtual WaresQueue & waresqueue(Ware_Index);
 
 	virtual void set_building(const Building_Descr &);
-	const Building_Descr & building() const throw () {return *m_building;}
+	const Building_Descr & building() const {return *m_building;}
 
 	virtual void init   (Editor_Game_Base &);
 	virtual void cleanup(Editor_Game_Base &);

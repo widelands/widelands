@@ -358,7 +358,6 @@ std::string FileSystem::FS_FilenameWoExt(const char * const p)
 /// \todo throw FileTypeError if root is not a zipfile (exception from
 /// ZipFilesystem)
 FileSystem & FileSystem::Create(const std::string & root)
-throw (FileType_error, FileNotFound_error, FileAccessDenied_error)
 {
 	struct stat statinfo;
 

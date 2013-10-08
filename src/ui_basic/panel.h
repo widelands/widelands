@@ -177,7 +177,7 @@ struct Panel : boost::signals2::trackable, boost::noncopyable {
 	// Events
 	virtual void think();
 
-	Point get_mouse_position() const throw ();
+	Point get_mouse_position() const;
 	void set_mouse_pos(Point);
 	void center_mouse();
 
@@ -326,7 +326,7 @@ struct NamedPanel : public Panel {
 	{
 	}
 
-	const std::string & get_name() const throw () {return m_name;}
+	const std::string & get_name() const {return m_name;}
 
 private:
 	std::string m_name;

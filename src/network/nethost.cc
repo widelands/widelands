@@ -2999,6 +2999,6 @@ void NetHost::report_result
 	}
 
 	dedicatedlog
-		("NetHost::report_result(%d, %d, %s)\n",
-		 player->player_number(), result, info.c_str());
+		("NetHost::report_result(%d, %u, %s)\n",
+		 player->player_number(), static_cast<uint8_t>(result), info.c_str());
 }

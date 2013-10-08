@@ -90,7 +90,7 @@ bool Map_Map_Object_Saver::is_object_known(const Map_Object & obj) const
 	return it->second.registered;
 }
 
-bool Map_Map_Object_Saver::is_object_saved(const Map_Object & obj) throw ()
+bool Map_Map_Object_Saver::is_object_saved(const Map_Object & obj)
 {
 	return get_object_record(obj).saved;
 }

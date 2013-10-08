@@ -43,24 +43,25 @@ namespace Widelands {
 class Players_Manager;
 
 struct AreaWatcher;
-struct Battle;
+class Battle;
 struct Bob;
 struct Building_Descr;
 class Immovable;
-struct Map;
+class Map;
 struct Object_Manager;
-struct Player;
+class Player;
 struct PlayerImmovable;
 struct Tribe_Descr;
 struct Flag;
 struct AttackController;
 
-struct Editor_Game_Base :
+class Editor_Game_Base :
 	boost::noncopyable,
 	NoteReceiver<NoteImmovable>,
 	NoteReceiver<NoteFieldPossession>,
 	NoteReceiver<NoteFieldTransformed>
 {
+public:
 	friend struct ::Fullscreen_Menu_LaunchGame;
 	friend struct ::Interactive_Base;
 	friend struct Game_Game_Class_Data_Packet;
@@ -69,7 +70,7 @@ struct Editor_Game_Base :
 	virtual ~Editor_Game_Base();
 
 	void set_map(Map *);
-	Map & map() const throw () {return *m_map;}
+	Map & map() const {return *m_map;}
 	Map * get_map() {return m_map;}
 	Map & get_map() const {return *m_map;}
 	const Object_Manager & objects() const {return m_objects;}
@@ -152,7 +153,7 @@ struct Editor_Game_Base :
 	void receive(const NoteFieldPossession     &);
 	void receive(const NoteFieldTransformed    &);
 
-	void cleanup_objects() throw () {
+	void cleanup_objects() {
 		objects().cleanup(*this);
 	}
 

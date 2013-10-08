@@ -32,16 +32,16 @@
 #include "point.h"
 
 
-namespace Widelands {struct Game;}
+namespace Widelands {class Game;}
 struct Journal;
 
 ///Thrown if a commandline parameter is faulty
 struct Parameter_error : public std::runtime_error {
-	explicit Parameter_error() throw () : std::runtime_error("") {}
-	explicit Parameter_error(std::string text) throw ()
+	explicit Parameter_error() : std::runtime_error("") {}
+	explicit Parameter_error(std::string text)
 		: std::runtime_error(text)
 	{}
-	virtual ~Parameter_error() throw () {}
+	virtual ~Parameter_error() {}
 };
 
 // input
@@ -167,7 +167,7 @@ struct WLApplication {
 	void set_input_grab(bool grab);
 
 	/// The mouse's current coordinates
-	Point get_mouse_position() const throw () {return m_mouse_position;}
+	Point get_mouse_position() const {return m_mouse_position;}
 	//
 	/// Find out whether the mouse is currently pressed
 	bool is_mouse_pressed() const {return SDL_GetMouseState(nullptr, nullptr); }
@@ -242,7 +242,7 @@ protected:
 	void shutdown_hardware();
 
 	void parse_commandline(int argc, char const * const * argv);
-	void handle_commandline_parameters() throw (Parameter_error);
+	void handle_commandline_parameters();
 
 	void setup_searchpaths(std::string argv0);
 	void setup_homedir();

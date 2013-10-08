@@ -224,7 +224,7 @@ uint32_t Building_Descr::get_conquers() const
  * \return the radius (in number of fields) of the area seen by this
  * building.
  */
-uint32_t Building_Descr::vision_range() const throw ()
+uint32_t Building_Descr::vision_range() const
 {
 	return m_vision_range ? m_vision_range : get_conquers() + 4;
 }
@@ -320,11 +320,11 @@ void Building::load_finish(Editor_Game_Base & egbase) {
 	}
 }
 
-int32_t Building::get_type() const throw () {return BUILDING;}
+int32_t Building::get_type() const {return BUILDING;}
 
-int32_t Building::get_size() const throw () {return descr().get_size();}
+int32_t Building::get_size() const {return descr().get_size();}
 
-bool Building::get_passable() const throw () {return false;}
+bool Building::get_passable() const {return false;}
 
 Flag & Building::base_flag()
 {
@@ -339,7 +339,7 @@ Flag & Building::base_flag()
  * By default, all buildings can be bulldozed. If a building should not be
  * destructible, "destructible=no" must be added to buildings conf.
  */
-uint32_t Building::get_playercaps() const throw () {
+uint32_t Building::get_playercaps() const {
 	uint32_t caps = 0;
 	const Building_Descr & d = descr();
 	if (d.is_destructible()) {
@@ -353,7 +353,7 @@ uint32_t Building::get_playercaps() const throw () {
 }
 
 
-const std::string & Building::name() const throw () {return descr().name();}
+const std::string & Building::name() const {return descr().name();}
 
 
 void Building::start_animation(Editor_Game_Base & egbase, uint32_t const anim)
@@ -470,7 +470,7 @@ bool Building::burn_on_destroy()
  * Return all positions on the map that we occupy
  */
 BaseImmovable::PositionList Building::get_positions
-	(const Editor_Game_Base & egbase) const throw ()
+	(const Editor_Game_Base & egbase) const
 {
 	PositionList rv;
 

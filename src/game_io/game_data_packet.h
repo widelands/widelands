@@ -26,7 +26,7 @@ class FileSystem;
 
 namespace Widelands {
 
-struct Game;
+class Game;
 struct Map_Map_Object_Loader;
 struct Map_Map_Object_Saver;
 

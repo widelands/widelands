@@ -196,7 +196,7 @@ void Object_Manager::remove(Map_Object & obj)
 /*
  * Return the list of all serials currently in use
  */
-std::vector<Serial> Object_Manager::all_object_serials_ordered () const throw () {
+std::vector<Serial> Object_Manager::all_object_serials_ordered () const {
 	std::vector<Serial> rv;
 
 	container_iterate_const(objmap_t, m_objects, o)
@@ -277,7 +277,7 @@ std::string Map_Object_Descr::get_animation_name(uint32_t const anim) const {
 /**
  * Search for the attribute in the attribute list
  */
-bool Map_Object_Descr::has_attribute(uint32_t const attr) const throw () {
+bool Map_Object_Descr::has_attribute(uint32_t const attr) const {
 	container_iterate_const(Attributes, m_attributes, i)
 		if (*i.current == attr)
 			return true;

@@ -25,20 +25,20 @@
 #include <stdint.h>
 
 struct Point {
-	Point() throw () : x(0), y(0) {}
-	Point(const int32_t px, const int32_t py) throw () : x(px), y(py) {}
+	Point() : x(0), y(0) {}
+	Point(const int32_t px, const int32_t py) : x(px), y(py) {}
 
-	static Point invalid() throw () {
+	static Point invalid() {
 		return
 			Point
 				(std::numeric_limits<int32_t>::max(),
 				 std::numeric_limits<int32_t>::max());
 	}
 
-	bool operator== (const Point & other) const throw () {
+	bool operator== (const Point & other) const {
 		return x == other.x and y == other.y;
 	}
-	bool operator!= (const Point & other) const throw () {
+	bool operator!= (const Point & other) const {
 		return not (*this == other);
 	}
 
@@ -71,7 +71,7 @@ struct Point {
 /// This may not be overflow safe as it could be. If the components of Point
 /// had been unsigned, "((a^b)>>1)+(a&b)" would have worked, but they are
 /// signed.
-inline Point middle(const Point & a, const Point & b) throw ()
+inline Point middle(const Point & a, const Point & b)
 {
 	return Point((a.x + b.x) >> 1, (a.y + b.y) >> 1);
 }

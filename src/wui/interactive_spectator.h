@@ -25,7 +25,7 @@
 #include "wui/interactive_gamebase.h"
 #include "ui_basic/button.h"
 
-namespace Widelands {struct Game;}
+namespace Widelands {class Game;}
 
 /**
  * This class shows a game for somebody who is only a spectator.
@@ -42,7 +42,7 @@ struct Interactive_Spectator : public Interactive_GameBase {
 
 	void start();
 
-	Widelands::Player * get_player() const throw ();
+	Widelands::Player * get_player() const;
 
 	bool handle_key(bool down, SDL_keysym);
 

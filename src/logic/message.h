@@ -63,10 +63,10 @@ struct Message {
 		m_status  (s)
 	{}
 
-	const std::string & sender() const throw ()     {return m_sender;}
+	const std::string & sender() const     {return m_sender;}
 	uint32_t            sent    () const            {return m_sent;}
 	Duration            duration() const            {return m_duration;}
-	const std::string & title() const throw ()      {return m_title;}
+	const std::string & title() const      {return m_title;}
 	const std::string & body () const               {return m_body;}
 	Widelands::Coords   position() const            {return m_position;}
 	Widelands::Serial   serial() const              {return m_serial;}

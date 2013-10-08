@@ -31,7 +31,7 @@ struct Profile;
 
 namespace Widelands {
 
-struct Editor_Game_Base;
+class Editor_Game_Base;
 struct PortDock;
 struct Request;
 struct Requirements;
@@ -56,7 +56,7 @@ struct Warehouse_Descr : public Building_Descr {
 
 	virtual uint32_t get_conquers() const {return m_conquers;}
 
-	uint32_t get_heal_per_second        () const throw () {
+	uint32_t get_heal_per_second        () const {
 		return m_heal_per_second;
 	}
 private:
@@ -111,7 +111,7 @@ public:
 
 	void load_finish(Editor_Game_Base &);
 
-	char const * type_name() const throw () {return "warehouse";}
+	char const * type_name() const {return "warehouse";}
 
 	/// Called only when the oject is logically created in the simulation. If
 	/// called again, such as when the object is loaded from a savegame, it will

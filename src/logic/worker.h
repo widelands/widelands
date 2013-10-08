@@ -70,9 +70,6 @@ class Worker : public Bob {
 		std::string sparam1;
 
 		std::vector<std::string> sparamv;
-#ifdef WRITE_GAME_DATA_AS_HTML
-		void writeHTML(::FileWrite &, const Worker_Descr &) const;
-#endif
 	};
 
 
@@ -83,25 +80,25 @@ public:
 	virtual Worker_Descr::Worker_Type get_worker_type() const {
 		return descr().get_worker_type();
 	}
-	char const * type_name() const throw () {return "worker";}
-	virtual Bob::Type get_bob_type() const throw () {return Bob::WORKER;}
+	char const * type_name() const {return "worker";}
+	virtual Bob::Type get_bob_type() const {return Bob::WORKER;}
 
 	uint32_t get_animation(char const * const str) const {
 		return descr().get_animation(str);
 	}
-	const Image* icon() const throw () {return descr().icon();}
-	Ware_Index becomes() const throw () {return descr().becomes();}
-	Ware_Index worker_index() const throw () {return descr().worker_index();}
-	const Tribe_Descr * get_tribe() const throw () {return descr().get_tribe();}
-	const Tribe_Descr & tribe() const throw () {return descr().tribe();}
-	const std::string & descname() const throw () {return descr().descname();}
+	const Image* icon() const {return descr().icon();}
+	Ware_Index becomes() const {return descr().becomes();}
+	Ware_Index worker_index() const {return descr().worker_index();}
+	const Tribe_Descr * get_tribe() const {return descr().get_tribe();}
+	const Tribe_Descr & tribe() const {return descr().tribe();}
+	const std::string & descname() const {return descr().descname();}
 
 	Player & owner() const {assert(get_owner()); return *get_owner();}
 	PlayerImmovable * get_location(Editor_Game_Base & egbase) {
 		return m_location.get(egbase);
 	}
 	OPtr<PlayerImmovable> get_location() const {return m_location;}
-	Economy * get_economy() const throw () {return m_economy;}
+	Economy * get_economy() const {return m_economy;}
 
 	/// Sets the location of the worker initially. It may not have a previous
 	/// location. Does not add the worker to the location's set of workers (it

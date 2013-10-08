@@ -34,7 +34,7 @@ namespace Widelands {
 
 void Map_Players_Messages_Data_Packet::Read
 	(FileSystem & fs, Editor_Game_Base & egbase, bool, Map_Map_Object_Loader & mol)
-	throw (_wexception)
+
 {
 	uint32_t      const gametime   = egbase.get_gametime ();
 	const Map   &       map        = egbase.map          ();
@@ -169,7 +169,6 @@ void Map_Players_Messages_Data_Packet::Read
 
 void Map_Players_Messages_Data_Packet::Write
 	(FileSystem & fs, Editor_Game_Base & egbase, Map_Map_Object_Saver & mos)
-throw (_wexception)
 {
 	fs.EnsureDirectoryExists("player");
 	Player_Number const nr_players = egbase.map().get_nrplayers();

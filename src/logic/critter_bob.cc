@@ -188,7 +188,7 @@ Critter_BobProgram const * Critter_Bob_Descr::get_program
 }
 
 
-uint32_t Critter_Bob_Descr::movecaps() const throw () {
+uint32_t Critter_Bob_Descr::movecaps() const {
 	return is_swimming() ? MOVECAPS_SWIM : MOVECAPS_WALK;
 }
 

@@ -26,7 +26,7 @@
 #include "ui_basic/textarea.h"
 
 namespace Widelands
-{struct Game;}
+{class Game;}
 /**
  * Select a replay from a list of replays.
  */

@@ -64,10 +64,10 @@ struct Interactive_Player : public Interactive_GameBase
 
 	bool handle_key(bool down, SDL_keysym);
 
-	Widelands::Player & player() const throw () {
+	Widelands::Player & player() const {
 		return game().player(m_player_number);
 	}
-	Widelands::Player * get_player() const throw () {
+	Widelands::Player * get_player() const {
 		assert(&game());
 		return game().get_player(m_player_number);
 	}

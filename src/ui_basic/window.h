@@ -71,7 +71,7 @@ public:
 	void warp_mouse_to_fastclick_panel();
 	void set_fastclick_panel(Panel * p) {m_fastclick_panel = p;}
 
-	bool is_minimal() const throw () {return _is_minimal;}
+	bool is_minimal() const {return _is_minimal;}
 	void restore ();
 	void minimize();
 	bool is_snap_target() const {return true;}

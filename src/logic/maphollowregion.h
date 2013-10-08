@@ -53,7 +53,7 @@ template <typename Area_type = Area<> > struct MapHollowRegion {
 	 * iteration, while advance keeps returning true. When finally advance
 	 * returns false, it means that the iteration is done.
 	 */
-	bool advance(const Map &) throw ();
+	bool advance(const Map &);
 
 private:
 	enum Phase {

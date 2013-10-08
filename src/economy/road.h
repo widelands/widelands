@@ -73,13 +73,13 @@ struct Road : public PlayerImmovable {
 
 	Flag & get_flag(FlagId const flag) const {return *m_flags[flag];}
 
-	virtual int32_t  get_type    () const throw ();
+	virtual int32_t  get_type    () const;
 	uint8_t get_roadtype() const {return m_type;}
-	char const * type_name() const throw () {return "road";}
-	virtual int32_t  get_size    () const throw ();
-	virtual bool get_passable() const throw ();
-	virtual PositionList get_positions(const Editor_Game_Base &) const throw ();
-	const std::string & name() const throw ();
+	char const * type_name() const {return "road";}
+	virtual int32_t  get_size    () const;
+	virtual bool get_passable() const;
+	virtual PositionList get_positions(const Editor_Game_Base &) const;
+	const std::string & name() const;
 
 	virtual Flag & base_flag();
 
@@ -143,5 +143,3 @@ private:
 }
 
 #endif
-
-

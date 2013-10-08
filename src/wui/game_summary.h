@@ -30,7 +30,7 @@
 class Interactive_GameBase;
 namespace Widelands
 {
-struct Game;
+class Game;
 }
 
 /// Shows an ingame summary window on game end

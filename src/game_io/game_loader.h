@@ -28,7 +28,7 @@ class FileSystem;
 
 namespace Widelands {
 
-struct Game;
+class Game;
 struct Game_Preload_Data_Packet;
 
 /*

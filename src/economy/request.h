@@ -30,9 +30,9 @@
 namespace Widelands {
 
 class Economy;
-struct Editor_Game_Base;
+class Editor_Game_Base;
 struct Flag;
-struct Game;
+class Game;
 struct Map_Map_Object_Loader;
 struct Map_Map_Object_Saver;
 struct PlayerImmovable;
@@ -67,13 +67,13 @@ struct Request : public Trackable {
 	Request(PlayerImmovable & target, Ware_Index, callback_t, WareWorker);
 	~Request();
 
-	PlayerImmovable & target() const throw () {return m_target;}
+	PlayerImmovable & target() const {return m_target;}
 	Ware_Index get_index() const {return m_index;}
 	WareWorker get_type() const {return m_type;}
 	uint32_t get_count() const {return m_count;}
 	uint32_t get_open_count() const {return m_count - m_transfers.size();}
 	bool is_open() const {return m_transfers.size() < m_count;}
-	Economy * get_economy() const throw () {return m_economy;}
+	Economy * get_economy() const {return m_economy;}
 	int32_t get_required_time() const;
 	int32_t get_last_request_time() const {return m_last_request_time;}
 	int32_t get_priority(int32_t cost) const;

@@ -34,7 +34,6 @@ void Map_Objective_Data_Packet::Read
 	 Editor_Game_Base      &       egbase,
 	 bool                    const skip,
 	 Map_Map_Object_Loader &)
-throw (_wexception)
 {
 	if (skip)
 		return;
@@ -77,7 +76,6 @@ throw (_wexception)
 
 void Map_Objective_Data_Packet::Write
 	(FileSystem & fs, Editor_Game_Base & egbase, Map_Map_Object_Saver &)
-throw (_wexception)
 {
 	Profile prof;
 	prof.create_section("global").set_int

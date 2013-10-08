@@ -27,10 +27,9 @@
 #include "point.h"
 #include "port.h"
 #include "logic/walkingdir.h"
-#include "writeHTML.h"
 
 namespace Widelands {
-struct Map;
+class Map;
 struct Route;
 struct Transfer;
 struct Tribe_Descr;
@@ -118,7 +117,7 @@ struct BobProgramBase {
  * exists, it is always called just before the task is popped from the stack.
  */
 struct Bob : public Map_Object {
-	friend struct Map;
+	friend class Map;
 	friend struct Map_Bobdata_Data_Packet;
 	friend struct Map_Bob_Data_Packet;
 
@@ -203,11 +202,11 @@ struct Bob : public Map_Object {
 
 		char const * get_picture() const {return m_picture.c_str();}
 
-		Tribe_Descr const * get_owner_tribe() const throw () {
+		Tribe_Descr const * get_owner_tribe() const {
 			return m_owner_tribe;
 		}
 
-		virtual uint32_t movecaps() const throw () {return 0;}
+		virtual uint32_t movecaps() const {return 0;}
 		uint32_t vision_range() const;
 
 	protected:
@@ -222,10 +221,10 @@ struct Bob : public Map_Object {
 	uint32_t get_current_anim() const {return m_anim;}
 	int32_t get_animstart() const {return m_animstart;}
 
-	virtual int32_t get_type() const throw () {return BOB;}
-	virtual char const * type_name() const throw () {return "bob";}
-	virtual Type get_bob_type() const throw () = 0;
-	const std::string & name() const throw () {return descr().name();}
+	virtual int32_t get_type() const {return BOB;}
+	virtual char const * type_name() const {return "bob";}
+	virtual Type get_bob_type() const = 0;
+	const std::string & name() const {return descr().name();}
 
 	virtual void init(Editor_Game_Base &);
 	virtual void cleanup(Editor_Game_Base &);
@@ -238,8 +237,8 @@ struct Bob : public Map_Object {
 	Player * get_owner() const {return m_owner;}
 	void set_position(Editor_Game_Base &, const Coords &);
 	const FCoords & get_position() const {return m_position;}
-	Bob * get_next_bob() const throw () {return m_linknext;}
-	bool is_world_bob() const throw () {return descr().is_world_bob();}
+	Bob * get_next_bob() const {return m_linknext;}
+	bool is_world_bob() const {return descr().is_world_bob();}
 
 	uint32_t vision_range() const {return descr().vision_range();}
 

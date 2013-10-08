@@ -748,7 +748,7 @@ bool Interactive_Base::append_build_road(Coords const field) {
 Return the current road-building startpoint
 ===============
 */
-Coords Interactive_Base::get_build_road_start() const throw () {
+Coords Interactive_Base::get_build_road_start() const {
 	assert(m_buildroad);
 
 	return m_buildroad->get_start();
@@ -759,7 +759,7 @@ Coords Interactive_Base::get_build_road_start() const throw () {
 Return the current road-building endpoint
 ===============
 */
-Coords Interactive_Base::get_build_road_end() const throw () {
+Coords Interactive_Base::get_build_road_end() const {
 	assert(m_buildroad);
 
 	return m_buildroad->get_end();

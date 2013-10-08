@@ -27,7 +27,7 @@ class FileSystem;
 
 namespace Widelands {
 
-struct Editor_Game_Base;
+class Editor_Game_Base;
 struct Map_Map_Object_Loader;
 struct Map_Map_Object_Saver;
 
@@ -39,11 +39,11 @@ struct Map_Data_Packet {
 
 	virtual void Read
 		(FileSystem &, Editor_Game_Base &, bool, Map_Map_Object_Loader &)
-		throw (_wexception)
+
 		= 0;
 	virtual void Write
 		(FileSystem &, Editor_Game_Base &, Map_Map_Object_Saver &)
-		throw (_wexception)
+
 		= 0;
 };
 
@@ -54,10 +54,8 @@ namespace Widelands {                                                         \
 struct name : public Map_Data_Packet {                                        \
    virtual ~name() {}                                                         \
    void Read                                                                  \
-      (FileSystem &, Editor_Game_Base &, bool, Map_Map_Object_Loader &)       \
-      throw (_wexception);                                                    \
-   void Write(FileSystem &, Editor_Game_Base &, Map_Map_Object_Saver &)       \
-      throw (_wexception);                                                    \
+      (FileSystem &, Editor_Game_Base &, bool, Map_Map_Object_Loader &);      \
+   void Write(FileSystem &, Editor_Game_Base &, Map_Map_Object_Saver &);      \
 };                                                                            \
 }                                                                             \
 

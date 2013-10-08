@@ -46,10 +46,10 @@ namespace Widelands {
 struct MapGenerator;
 struct BaseImmovable;
 struct PathfieldManager;
-struct Player;
+class Player;
 struct World;
-struct Map;
-struct Map_Loader;
+class Map;
+class Map_Loader;
 #define WLMF_SUFFIX ".wmf"
 #define S2MF_SUFFIX ".swd"
 #define S2MF_SUFFIX2 ".wld"
@@ -101,7 +101,7 @@ struct FindBobAlwaysTrue : public FindBob {
 	virtual ~FindBobAlwaysTrue() {}  // make gcc shut up
 };
 
-/** struct Map
+/** class Map
  *
  * This really identifies a map like it is in the game
  *
@@ -115,12 +115,13 @@ struct FindBobAlwaysTrue : public FindBob {
  *
  * Warning: width and height must be even
  */
-struct Map :
-	ITransportCostCalculator,
-	NoteSender<NoteFieldTransformed>
+class Map :
+	public ITransportCostCalculator,
+	public NoteSender<NoteFieldTransformed>
 {
-	friend struct Editor_Game_Base;
-	friend struct Map_Loader;
+public:
+	friend class Editor_Game_Base;
+	friend class Map_Loader;
 	friend struct ::S2_Map_Loader;
 	friend struct WL_Map_Loader;
 	friend struct Map_Elemental_Data_Packet;
@@ -204,12 +205,12 @@ struct Map :
 	const Tags & get_tags() const {return m_tags;}
 	bool has_tag(std::string & s) const {return m_tags.count(s);}
 
-	Player_Number get_nrplayers() const throw () {return m_nrplayers;}
-	ScenarioTypes scenario_types() const throw () {return m_scenario_types;}
-	Extent extent() const throw () {return Extent(m_width, m_height);}
-	X_Coordinate get_width   () const throw () {return m_width;}
-	Y_Coordinate get_height  () const throw () {return m_height;}
-	World & world() const throw () {return *m_world;}
+	Player_Number get_nrplayers() const {return m_nrplayers;}
+	ScenarioTypes scenario_types() const {return m_scenario_types;}
+	Extent extent() const {return Extent(m_width, m_height);}
+	X_Coordinate get_width   () const {return m_width;}
+	Y_Coordinate get_height  () const {return m_height;}
+	World & world() const {return *m_world;}
 	World * get_world() const {return m_world;}
 
 	//  The next few functions are only valid when the map is loaded as a
@@ -306,7 +307,7 @@ struct Map :
 
 	void get_neighbour (const Coords &, Direction dir,  Coords *) const;
 	void get_neighbour(const FCoords &, Direction dir, FCoords *) const;
-	FCoords get_neighbour(const FCoords &, Direction dir) const throw ();
+	FCoords get_neighbour(const FCoords &, Direction dir) const;
 
 	// Pathfinding
 	int32_t findpath
@@ -1026,7 +1027,6 @@ inline FCoords Map::br_n(const FCoords & f) const {
 }
 
 inline FCoords Map::get_neighbour(const FCoords & f, const Direction dir) const
-throw ()
 {
 	switch (dir) {
 	case WALK_NW: return tl_n(f);

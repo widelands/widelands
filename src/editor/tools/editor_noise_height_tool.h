@@ -55,7 +55,7 @@ struct Editor_Noise_Height_Tool : public Editor_Tool {
 		m_interval = i;
 	}
 
-	Editor_Set_Height_Tool & set_tool() const throw () {return m_set_tool;}
+	Editor_Set_Height_Tool & set_tool() const {return m_set_tool;}
 
 private:
 	Editor_Set_Height_Tool & m_set_tool;

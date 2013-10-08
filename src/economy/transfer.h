@@ -23,7 +23,7 @@
 #include "economy/route.h"
 
 namespace Widelands {
-struct Game;
+class Game;
 struct PlayerImmovable;
 struct Request;
 class WareInstance;
@@ -87,5 +87,3 @@ private:
 }
 
 #endif
-
-

@@ -25,7 +25,7 @@
 
 #include <stdint.h>
 
-namespace Widelands {struct Game;}
+namespace Widelands {class Game;}
 
 // default autosave interval in minutes
 #define DEFAULT_AUTOSAVE_INTERVAL 15

@@ -44,7 +44,7 @@ struct Editor_Set_Height_Tool : public Editor_Tool {
 		return "pics/fsel_editor_set_height.png";
 	}
 
-	interval<Widelands::Field::Height> get_interval() const throw () {
+	interval<Widelands::Field::Height> get_interval() const {
 		return m_interval;
 	}
 	void set_interval(interval<Widelands::Field::Height> const i) {

@@ -21,6 +21,7 @@
 #define JOURNAL_EXCEPTIONS_H
 
 #include <stdexcept>
+#include <string>
 
 #include <stdint.h>
 
@@ -37,8 +38,8 @@
 /// Replace with File*_error where appropriate, migrate from runtime_error to
 /// logic_error (?)
 struct Journalfile_error : public std::runtime_error {
-	explicit Journalfile_error(const std::string & filename) throw ();
-	virtual ~Journalfile_error() throw () {}
+	explicit Journalfile_error(const std::string & filename);
+	virtual ~Journalfile_error() {}
 
 	virtual char const * what() const throw () {return text.c_str();}
 
@@ -51,8 +52,8 @@ struct Journalfile_error : public std::runtime_error {
  * \todo add offset into journal file
  */
 struct BadMagic_error : public Journalfile_error {
-	explicit BadMagic_error(const std::string & filename) throw ();
-	virtual ~BadMagic_error() throw () {}
+	explicit BadMagic_error(const std::string & filename);
+	virtual ~BadMagic_error() {}
 };
 
 /**
@@ -64,8 +65,8 @@ struct BadRecord_error : public Journalfile_error {
 		(const std::string & filename,
 		 const uint8_t     code,
 		 const uint8_t     expectedcode)
-		throw ();
-	virtual ~BadRecord_error() throw () {}
+	;
+	virtual ~BadRecord_error() {}
 
 	std::streamoff offset;
 	uint8_t code;
@@ -79,8 +80,8 @@ struct BadRecord_error : public Journalfile_error {
  */
 struct BadEvent_error : public Journalfile_error {
 	explicit BadEvent_error(const std::string & filename, uint8_t const type)
-		throw ();
-	virtual ~BadEvent_error() throw () {}
+	;
+	virtual ~BadEvent_error() {}
 
 	std::streamoff offset;
 	uint8_t type;

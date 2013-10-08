@@ -88,28 +88,28 @@ void PortDock::set_fleet(Fleet * fleet)
 	m_fleet = fleet;
 }
 
-int32_t PortDock::get_size() const throw ()
+int32_t PortDock::get_size() const
 {
 	return SMALL;
 }
 
-bool PortDock::get_passable() const throw ()
+bool PortDock::get_passable() const
 {
 	return true;
 }
 
-int32_t PortDock::get_type() const throw ()
+int32_t PortDock::get_type() const
 {
 	return PORTDOCK;
 }
 
-char const * PortDock::type_name() const throw ()
+char const * PortDock::type_name() const
 {
 	return "portdock";
 }
 
 PortDock::PositionList PortDock::get_positions
-	(const Editor_Game_Base &) const throw ()
+	(const Editor_Game_Base &) const
 {
 	return m_dockpoints;
 }
@@ -162,7 +162,7 @@ void PortDock::draw
 	// do nothing
 }
 
-const std::string & PortDock::name() const throw ()
+const std::string & PortDock::name() const
 {
 	static const std::string name_("portdock");
 	return name_;

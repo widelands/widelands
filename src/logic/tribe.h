@@ -23,7 +23,6 @@
 #include <map>
 #include <vector>
 
-#include "HTMLReferences.h"
 #include "TribeBasicInfo.h"
 #include "logic/bob.h"
 #include "logic/building.h"
@@ -40,7 +39,7 @@ namespace Widelands {
 class Warehouse;
 class Worker_Descr;
 struct Building_Descr;
-struct Editor_Game_Base;
+class Editor_Game_Base;
 struct Event;
 struct Item_Ware_Descr;
 struct Resource_Descr;
@@ -69,8 +68,8 @@ struct Tribe_Descr : boost::noncopyable {
 	static void get_all_tribe_infos(std::vector<TribeBasicInfo> &);
 
 
-	const std::string & name() const throw () {return m_name;}
-	const World & world() const throw () {return m_world;}
+	const std::string & name() const {return m_name;}
+	const World & world() const {return m_world;}
 
 	Ware_Index get_nrworkers() const {return m_workers.get_nitems();}
 	Worker_Descr const * get_worker_descr(const Ware_Index& index) const {
@@ -237,21 +236,6 @@ struct Tribe_Descr : boost::noncopyable {
 
 	const std::vector<std::string> & compatibility_immovable(const std::string & name) const;
 
-#ifdef WRITE_GAME_DATA_AS_HTML
-	void referenceBuilding
-		(::FileWrite &, const std::string &, HTMLReferences::Role,
-		 Building_Index)
-		const;
-	void referenceWorker
-		(::FileWrite &, const std::string &, HTMLReferences::Role,
-		 Ware_Index,     uint8_t multiplicity = 1)
-		const;
-	void referenceWare
-		(::FileWrite &, const std::string &, HTMLReferences::Role,
-		 Ware_Index,     uint8_t multiplicity = 1)
-		const;
-#endif
-
 private:
 	const std::string m_name;
 	const World & m_world;
@@ -285,15 +269,6 @@ private:
 	Compatibility m_compatibility_immovable;
 	std::map<std::string, std::string> m_compatibility_wares;
 
-#ifdef WRITE_GAME_DATA_AS_HTML
-	void writeHTMLBuildings(const std::string & directory);
-	void writeHTMLWorkers  (const std::string & directory);
-	void writeHTMLWares    (const std::string & directory);
-	void writeHTMLBobs     (const std::string & directory);
-	HTMLReferences * m_ware_references;
-	HTMLReferences * m_worker_references;
-	HTMLReferences * m_building_references;
-#endif
 };
 
 }

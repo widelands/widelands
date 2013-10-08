@@ -1156,7 +1156,7 @@ void WLApplication::parse_commandline
  * was given,
  * true otherwise.
 */
-void WLApplication::handle_commandline_parameters() throw (Parameter_error)
+void WLApplication::handle_commandline_parameters()
 {
 	if (m_commandline.count("help") || m_commandline.count("version")) {
 		throw Parameter_error(); //no message on purpose
@@ -1396,8 +1396,6 @@ void WLApplication::show_usage()
 			 "                      Whether to enter roadbuilding mode\n"
 			 "                      automatically after placing a flag that is\n"
 			 "                      not connected to a road.\n"
-			 " --write_HTML=[yes|no]\n"
-			 "                      Write HTML-helpfiles for parsed game data.\n"
 			 "\n"
 			 "Graphic options:\n"
 			 " --fullscreen=[yes|no]\n"
