@@ -260,6 +260,10 @@ protected:
 
 	std::string m_filename;
 
+	/// Script to be run after the game was started with --editor,
+	/// --scenario or --loadgame.
+	std::string m_script_to_run;
+
 	//Log all output to this file if set, otherwise use cout
 	std::string m_logfile;
 

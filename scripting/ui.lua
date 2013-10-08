@@ -9,7 +9,7 @@ use("aux", "coroutine")
 --
 
 -- =======================================================================
---                             PRIVATE FUNCTIONS                            
+--                             PRIVATE FUNCTIONS
 -- =======================================================================
 function _calc_move(start, dest, g_T)
    local T = g_T or 1000
@@ -32,11 +32,11 @@ function _calc_move(start, dest, g_T)
             x = start.x + 0.5*a.x*t0*t0 + (a.x*t0)*(t-t0),
             y = start.y + 0.5*a.y*t0*t0 + (a.y*t0)*(t-t0)
          }
-      else 
+      else
          return {
-            x = start.x + 0.5*a.x*t0*t0 + 
+            x = start.x + 0.5*a.x*t0*t0 +
                (a.x*t0)*(t-t0) - 0.5*a.x*(t-t1)*(t-t1),
-            y = start.y + 0.5*a.y*t0*t0 + 
+            y = start.y + 0.5*a.y*t0*t0 +
                (a.y*t0)*(t-t0) - 0.5*a.y*(t-t1)*(t-t1)
          }
       end
@@ -64,7 +64,7 @@ function _calc_move(start, dest, g_T)
 end
 
 -- =======================================================================
---                             PUBLIC FUNCTIONS                             
+--                             PUBLIC FUNCTIONS
 -- =======================================================================
 
 -- RST
@@ -77,7 +77,7 @@ end
 --
 --    .. code-block:: lua
 --
---       use("aux", "table") -- for reverse() 
+--       use("aux", "table") -- for reverse()
 --
 --       -- Move there in one second
 --       pts = scroll_smoothly_to(wl.Game().map:get_field(23, 42))
@@ -96,7 +96,7 @@ function timed_scroll(points, gdt)
    for idx,p in ipairs(points) do
       mv.viewpoint_x = p.x
       mv.viewpoint_y = p.y
-      
+
       sleep(dt)
    end
 end
@@ -107,7 +107,7 @@ end
 --
 --    Make a nice moving transition in a given time to the viewpoint x, y.
 --    The function will return as soon as the transition is completed.
--- 
+--
 --    :arg x: x position to center the view on
 --    :type x: :class:`integer`
 --    :arg y: y position to center the view on
@@ -125,7 +125,7 @@ function scroll_smoothly_to_pos(x, y, g_T)
    local dest = { x = x, y = y }
 
    local pts = _calc_move(start, dest, g_T)
-   
+
    timed_scroll(pts)
 
    return pts
@@ -155,8 +155,8 @@ function scroll_smoothly_to(f, g_T)
    else
       x = f.viewpoint_x + map.width * 64
    end
-   
-   
+
+
    if math.abs(f.viewpoint_y - mv.viewpoint_y) <
       math.abs(f.viewpoint_y + 32 * map.height - mv.viewpoint_y)
    then
@@ -187,7 +187,7 @@ function timed_mouse(points, gdt)
    for idx,p in ipairs(points) do
       mv.mouse_position_x = p.x
       mv.mouse_position_y = p.y
-      
+
       sleep(dt)
    end
 end
@@ -196,7 +196,7 @@ end
 -- .. function:: mouse_smoothly_to_pos(x, y[, T = 1000])
 --
 --    Make a nice moving transition for the mouse to the given pixels relative
---    to the top left corner of the screen. 
+--    to the top left corner of the screen.
 --
 --    :arg x: x position to center the view on
 --    :type x: :class:`integer`
@@ -212,10 +212,10 @@ function mouse_smoothly_to_pos(x, y, g_T)
       x = wl.ui.MapView().mouse_position_x,
       y = wl.ui.MapView().mouse_position_y
    }
-   
+
    local dest = { x = x, y = y }
    pts = _calc_move(start, dest, g_T)
-   
+
    timed_mouse(pts)
 
    return pts
@@ -247,7 +247,7 @@ function mouse_smoothly_to(f, g_T)
    local map = wl.Game().map
    if dx < 0 then dx = dx + map.width * 64 end
    if dy < 0 then dy = dy + map.height * 32 end
-   
+
    if dx > mv.width or dy > mv.height then
       scroll_smoothly_to(f, g_T)
       return mouse_smoothly_to(f, g_T)
@@ -268,7 +268,6 @@ end
 --
 --    :returns: an :class:`array` with the intermediate points that were
 --       targeted
-
 function mouse_smoothly_to_panel(panel, g_T)
    local x, y = wl.ui.MapView():get_descendant_position(panel)
 
@@ -278,5 +277,3 @@ function mouse_smoothly_to_panel(panel, g_T)
       g_T
    )
 end
-
-

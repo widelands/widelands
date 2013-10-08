@@ -102,10 +102,18 @@ struct Game : Editor_Game_Base {
 	void save_syncstream(bool save);
 	void init_newgame (UI::ProgressWindow *, const GameSettings &);
 	void init_savegame(UI::ProgressWindow *, const GameSettings &);
-	bool run_splayer_scenario_direct(char const * mapname);
-	bool run_load_game (std::string filename);
 	enum Start_Game_Type {NewSPScenario, NewNonScenario, Loaded, NewMPScenario};
-	bool run(UI::ProgressWindow * loader_ui, Start_Game_Type, bool replay = false);
+	bool run(UI::ProgressWindow * loader_ui, Start_Game_Type, const std::string& script_to_run, bool replay);
+
+	// Run a single player scenario directly via --scenario on the cmdline. Will
+	// run the 'script_to_run' after any init scripts of the map.
+	// Returns the result of run().
+	bool run_splayer_scenario_direct(char const * mapname, const std::string& script_to_run);
+
+	// Run a single player loaded game directly via --loadgame on the cmdline. Will
+	// run the 'script_to_run' directly after the game was loaded.
+	// Returns the result of run().
+	bool run_load_game (std::string filename, const std::string& script_to_run);
 
 	virtual void postload();
 

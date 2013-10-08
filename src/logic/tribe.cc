@@ -294,7 +294,7 @@ Tribe_Descr::Tribe_Descr
 			// Register Lua scripts
 			if (g_fs->IsDirectory(path + "scripting")) {
 				std::unique_ptr<FileSystem> sub_fs(g_fs->MakeSubFileSystem(path));
-				egbase.lua().register_scripts(*sub_fs, "tribe_" + tribename);
+				egbase.lua().register_scripts(*sub_fs, "tribe_" + tribename, "scripting");
 			}
 
 			// Read initializations -- all scripts are initializations currently

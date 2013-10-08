@@ -60,10 +60,5 @@ include "test_set"
 -- ============
 -- Test Runner
 -- ============
-rv = lunit:run()
-if rv == 0 then -- No errors in the testsuite. Exit.
-   wl.ui.MapView():close()
-elseif not wl.editor then
-   player1.see_all = true
-end
-
+lunit:run()
+wl.ui.MapView():close()

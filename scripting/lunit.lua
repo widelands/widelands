@@ -9,7 +9,7 @@
 
     Copyright (c) 2004 Michael Roth <mroth@nessie.de>
 
-    Permission is hereby granted, free of charge, to any person 
+    Permission is hereby granted, free of charge, to any person
     obtaining a copy of this software and associated documentation
     files (the "Software"), to deal in the Software without restriction,
     including without limitation the rights to use, copy, modify, merge,
@@ -17,7 +17,7 @@
     and to permit persons to whom the Software is furnished to do so,
     subject to the following conditions:
 
-    The above copyright notice and this permission notice shall be 
+    The above copyright notice and this permission notice shall be
     included in all copies or substantial portions of the Software.
 
     THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
@@ -415,7 +415,7 @@ function wrap(name, ...)
     table.insert(arg, 1, name)
     name = "Anonymous Testcase"
   end
-  
+
   local tc = TestCase(name)
   for index, test in ipairs(arg) do
     tc["Test #"..tostring(index)] = test
@@ -433,11 +433,11 @@ end
 ----------------------------------
 
 function run()
-  
+
   ---------------------------
   -- Initialize statistics --
   ---------------------------
-  
+
   stats.testcases = 0	-- Total number of Test Cases
   stats.tests = 0	-- Total number of all Tests in all Test Cases
   stats.run = 0		-- Number of Tests run
@@ -445,51 +445,51 @@ function run()
   stats.failed = 0	-- Number of Tests failed
   stats.passed = 0	-- Number of Test passed
   stats.assertions = 0	-- Number of all assertions made in all Test in all Test Cases
-  
+
   --------------------------------
   -- Count Test Cases and Tests --
   --------------------------------
-  
+
   stats.testcases = table.getn(testcases)
-  
+
   for _, tc in ipairs(testcases) do
     stats_inc("tests" , table.getn(tc.__lunit_tests))
   end
-  
+
   ------------------
   -- Print Header --
   ------------------
-  
+
   print()
   print("#### Test Suite with "..stats.tests.." Tests in "..stats.testcases.." Test Cases loaded.")
-  
+
   ------------------------
   -- Run all Test Cases --
   ------------------------
-  
+
   for _, tc in ipairs(testcases) do
     run_testcase(tc)
   end
-  
+
   ------------------
   -- Print Footer --
   ------------------
-  
+
   print()
   print("#### Test Suite finished.")
-  
+
   local msg_assertions = stats.assertions.." Assertions checked. "
   local msg_passed     = stats.passed == stats.tests and "All Tests passed" or  stats.passed.." Tests passed"
   local msg_failed     = stats.failed > 0 and ", "..stats.failed.." failed" or ""
   local msg_run	       = stats.notrun > 0 and ", "..stats.notrun.." not run" or ""
-  
+
   print()
   print(msg_assertions..msg_passed..msg_failed..msg_run.."!")
-  
+
   -----------------
   -- Return code --
   -----------------
-  
+
   if stats.passed == stats.tests then
     return 0
   else
@@ -505,17 +505,17 @@ end
 -----------------------------
 
 function run_testcase(tc)
-  
+
   orig_assert(is_table(tc))
   orig_assert(is_table(tc.__lunit_tests))
   orig_assert(is_string(tc.__lunit_name))
   orig_assert(is_nil(tc.__lunit_setup) or is_function(tc.__lunit_setup))
   orig_assert(is_nil(tc.__lunit_teardown) or is_function(tc.__lunit_teardown))
-  
+
   --------------------------------------------
   -- Protected call to a Test Case function --
   --------------------------------------------
-  
+
   local function call(errprefix, func)
     orig_assert(is_string(errprefix))
     orig_assert(is_function(func))
@@ -526,23 +526,23 @@ function run_testcase(tc)
     end
     return ok
   end
-  
+
   ------------------------------------
   -- Calls setup() on the Test Case --
   ------------------------------------
-  
+
   local function setup()
-    if tc.__lunit_setup then 
+    if tc.__lunit_setup then
       return call("ERROR: setup() failed", tc.__lunit_setup)
     else
       return true
     end
   end
-  
+
   ------------------------------------------
   -- Calls a single Test on the Test Case --
   ------------------------------------------
-  
+
   local function run(testname)
     orig_assert(is_string(testname))
     orig_assert(is_function(tc[testname]))
@@ -554,24 +554,24 @@ function run_testcase(tc)
     end
     return ok
   end
-  
+
   ---------------------------------------
   -- Calls teardown() on the Test Case --
   ---------------------------------------
-  
+
   local function teardown()
      if tc.__lunit_teardown then
        call("WARNING: teardown() failed", tc.__lunit_teardown)
      end
   end
-  
+
   ---------------------------------
   -- Run all Tests on a TestCase --
   ---------------------------------
-  
+
   print()
   print("#### Running '"..tc.__lunit_name.."' ("..table.getn(tc.__lunit_tests).." Tests)...")
-  
+
   for _, testname in ipairs(tc.__lunit_tests) do
     if setup() then
       run(testname)
@@ -582,7 +582,7 @@ function run_testcase(tc)
       stats_inc("notrun")
     end
   end
-  
+
 end
 
 
@@ -593,24 +593,24 @@ end
 ---------------------
 
 function import(name)
-  
+
   do_assert(is_string(name), "lunit.import() expects a single string as argument")
-  
+
   local user_env = getfenv(2)
-  
+
   --------------------------------------------------
   -- Installs a specific function in the user env --
   --------------------------------------------------
-  
+
   local function install(funcname)
     user_env[funcname] = P[funcname]
   end
-  
-  
+
+
   ----------------------------------------------------------
   -- Install functions matching a pattern in the user env --
   ----------------------------------------------------------
-  
+
   local function install_pattern(pattern)
     for funcname, _ in pairs(P) do
       if string.find(funcname, pattern) then
@@ -618,23 +618,23 @@ function import(name)
       end
     end
   end
-  
+
   ------------------------------------------------------------
   -- Installs assert() and all assert_xxx() in the user env --
   ------------------------------------------------------------
-  
+
   local function install_asserts()
     install_pattern("^assert.*")
   end
-  
+
   -------------------------------------------
   -- Installs all is_xxx() in the user env --
   -------------------------------------------
-  
+
   local function install_tests()
     install_pattern("^is_.+")
   end
-  
+
   if name == "asserts" or name == "assertions" then
     install_asserts()
   elseif name == "tests" or name == "checks" then
@@ -672,7 +672,7 @@ end
 
 
 --------------------------------------------------
--- Increments a counter in the statistics table --  
+-- Increments a counter in the statistics table --
 --------------------------------------------------
 
 function stats_inc(varname, value)

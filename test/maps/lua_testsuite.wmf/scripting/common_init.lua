@@ -1,12 +1,12 @@
-function include(s) 
+function include(s)
    use("map", s)
 end
 
-include "lunit"
+use("aux", "lunit")
 lunit.import "assertions"
 
 -- ============
--- Basic tests 
+-- Basic tests
 -- ============
 use_test = lunit.TestCase("Use test")
 function use_test:test_use_invalid_name()

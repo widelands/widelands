@@ -43,7 +43,7 @@ void Map_Scripting_Data_Packet::Read
 throw (_wexception)
 {
 	if (not is_normal_game) { // Only load scripting stuff if this is a scenario
-		egbase.lua().register_scripts(fs, "map");
+		egbase.lua().register_scripts(fs, "map", "scripting");
 	}
 
 	// Always try to load the global State: even in a normal game, some lua

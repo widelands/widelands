@@ -95,8 +95,15 @@ struct LuaInterface {
 	virtual void interpret_string(std::string) = 0;
 	virtual const std::string & get_last_error() const = 0;
 
+	// Register all Lua files in the directory "subdir" in "fs" under the
+	// namespace "ns".
 	virtual void register_scripts
-		(FileSystem &, std::string, std::string = "scripting") = 0;
+		(FileSystem & fs, const std::string& ns, const std::string& subdir) = 0;
+
+	// Register the Lua file "filename" in "fs" under the namespace "ns". Returns
+	// the name the script was registered, usually $(basename filename).
+	virtual std::string register_script
+		(FileSystem & fs, const std::string& ns, const std::string& filename) = 0;
 	virtual ScriptContainer & get_scripts_for(std::string) = 0;
 
 	virtual std::unique_ptr<LuaTable> run_script(std::string, std::string) = 0;

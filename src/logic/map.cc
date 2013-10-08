@@ -22,6 +22,8 @@
 #include <algorithm>
 #include <cstdio>
 
+#include <boost/algorithm/string/predicate.hpp>
+
 #include "build_info.h"
 #include "economy/flag.h"
 #include "economy/road.h"
@@ -1686,16 +1688,10 @@ void Map::get_neighbour
 	}
 }
 
-/**
- * Returns the correct initialized loader for the given mapfile
-*/
-Map_Loader * Map::get_correct_loader(char const * const filename) {
-	Map_Loader * result = 0;
+Map_Loader * Map::get_correct_loader(const std::string& filename) {
+	Map_Loader * result = nullptr;
 
-	if
-		(!
-		 strcasecmp
-		 	(filename + (strlen(filename) - strlen(WLMF_SUFFIX)), WLMF_SUFFIX))
+	if (boost::algorithm::ends_with(filename, WLMF_SUFFIX)) {
 		try {
 			result = new WL_Map_Loader(*g_fs->MakeSubFileSystem(filename), this);
 		} catch (...) {
@@ -1703,16 +1699,13 @@ Map_Loader * Map::get_correct_loader(char const * const filename) {
 			//  format)
 			//  TODO: catchall hides real errors! Replace with more specific code
 		}
-	else if
-		(!
-		 strcasecmp
-		 	(filename + (strlen(filename) - strlen(S2MF_SUFFIX)), S2MF_SUFFIX)
-		 |
-		 !
-		 strcasecmp
-		 	(filename + (strlen(filename) - strlen(S2MF_SUFFIX2)), S2MF_SUFFIX2))
+	} else if
+		(boost::algorithm::ends_with(filename, S2MF_SUFFIX) ||
+		 boost::algorithm::ends_with(filename, S2MF_SUFFIX2))
+	{
 		//  It is a S2 Map file. Load it as such.
-		result = new S2_Map_Loader(filename, *this);
+		result = new S2_Map_Loader(filename.c_str(), *this);
+	}
 
 	return result;
 }

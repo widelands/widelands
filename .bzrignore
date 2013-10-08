@@ -25,3 +25,6 @@ VERSION
 
 # Local KDevelop settings files
 **/.kdev_include_paths
+
+# Python compiled files.
+*.pyc

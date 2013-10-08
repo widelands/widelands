@@ -895,7 +895,9 @@ void NetHost::run(bool const autorun)
 		game.run
 			(loaderUI.get(),
 			 d->settings.savegame ? Widelands::Game::Loaded : d->settings.scenario ?
-			 Widelands::Game::NewMPScenario : Widelands::Game::NewNonScenario);
+			 Widelands::Game::NewMPScenario : Widelands::Game::NewNonScenario,
+			 "",
+			 false);
 
 		delete tips;
 

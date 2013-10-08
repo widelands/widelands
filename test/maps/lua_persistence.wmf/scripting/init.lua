@@ -70,7 +70,7 @@ function check_coroutine()
 
    -- Attention, lunit contains code that can not be persisted (c functions),
    -- so it must be imported after reload.
-   use("map", "lunit")
+   use("aux", "lunit")
    lunit.import "assertions"
 
    print("###################### CHECKING FOR CORRECT PERSISTENCE")
@@ -133,7 +133,7 @@ function check_coroutine()
    assert_equal(false, mapview.statistics)
    assert_equal(true, mapview.census)
 
-   print("################### ALL TEST PASS!")
+   print("# All Tests passed.")
 
    wl.ui.MapView():close()
 end
