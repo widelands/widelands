@@ -213,7 +213,6 @@ private:
 	uint8_t m_ship_state;
 
 	struct Expedition {
-		// NOCOM(#sirver): Why is this a unique_ptr? Seems like it could be a list.
 		std::unique_ptr<std::list<Coords> > seen_port_buildspaces;
 		bool swimable[LAST_DIRECTION];
 		bool island_exploration;

@@ -304,14 +304,6 @@ void PortDock::ship_arrived(Game & game, Ship & ship)
 	ship.withdraw_items(game, *this, items_brought_by_ship);
 
 	container_iterate(std::vector<ShippingItem>, items_brought_by_ship, it) {
-		WareInstance * ware;
-		Worker * worker;
-		it->get(game, ware, worker);
-		if (ware) {
-			log("#sirver ware");
-		} else {
-			log("#sirver worker: %s\n", worker->name().c_str());
-		}
 		it->set_location(game, m_warehouse);
 		it->end_shipping(game);
 	}
@@ -421,7 +413,7 @@ bool PortDock::expedition_started() {
 void PortDock::start_expedition() {
 	assert(!m_expedition_bootstrap);
 	m_expedition_bootstrap.reset(new ExpeditionBootstrap(this));
-	m_expedition_bootstrap->start_expedition();
+	m_expedition_bootstrap->start();
 
 }
 
@@ -438,7 +430,7 @@ void PortDock::cancel_expedition(Game & game) {
 	// Reset
 	m_expedition_ready = false;
 
-	m_expedition_bootstrap->cancel_expedition(game);
+	m_expedition_bootstrap->cancel(game);
 	m_expedition_bootstrap.reset(nullptr);
 }
 

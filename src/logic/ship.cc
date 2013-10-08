@@ -19,6 +19,8 @@
 
 #include "logic/ship.h"
 
+#include <boost/foreach.hpp>
+
 #include "economy/economy.h"
 #include "economy/flag.h"
 #include "economy/fleet.h"
@@ -189,15 +191,17 @@ void Ship::ship_update(Game & game, Bob::State & state) {
 			// TODO(sirver): What happens if there is no port anymore?
 			if (dst) {
 				start_task_movetodock(game, *dst);
-				// We declare the ship to be in TRANSPORT mode and give control to the fleet
-				// m_ship_state = TRANSPORT;
-				// Some cleanups need to be done, as the workers do not have a destination
-				// NOCOM(#sirver): I do not understand this code. Why are wares economy not touched?
-				log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
-				for (int i = m_items.size() - 1; i >= 0; --i) {
-					WareInstance * ware;
-					Worker * worker;
-					m_items.at(i).get(game, ware, worker);
+				// The workers were hold in an idle state so that they did not try
+				// to become fugitive or run to the next warehouse. But now, we
+				// have a proper destination, so we can just inform them that they
+				// are now getting shipped there.
+				// Theres nowthing to be done for wares - they already changed
+				// economy with us and the warehouse will make sure that they are
+				// getting used.
+				WareInstance * ware;
+				Worker * worker;
+				BOOST_FOREACH(ShippingItem& item, m_items) {
+					item.get(game, ware, worker);
 					if (worker) {
 						worker->reset_tasks(game);
 						worker->start_task_shipping(game, nullptr);
@@ -206,7 +210,6 @@ void Ship::ship_update(Game & game, Bob::State & state) {
 					}
 				}
 			}
-			log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 
 			m_ship_state = TRANSPORT;
 			signal_handled();
@@ -818,15 +821,11 @@ void Ship::exp_cancel (Game & game) {
 	send_signal(game, "cancel_expedition");
 
 	// Bring us back into a fleet and a economy.
-	log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 	set_economy(game, nullptr);
 	init_fleet(game);
-	log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 	assert(get_economy() && get_economy() != m_expedition->economy.get());
 
-	log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 	m_expedition.reset(nullptr);
-	log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 
 	// And finally update our ship window
 	if (upcast(Interactive_GameBase, igb, game.get_ibase()))

@@ -28,8 +28,6 @@
 #include "wui/interactive_gamebase.h"
 
 
-// // NOCOM(#sirver): remove the priority buttons and stuff from the expedition window.
-
 namespace Widelands {
 
 struct ExpeditionBootstrap::ExpeditionWorker {
@@ -51,7 +49,7 @@ ExpeditionBootstrap::~ExpeditionBootstrap() {
 	assert(wares_.empty());
 }
 
-void ExpeditionBootstrap::is_expedition_ready(Game & game) {
+void ExpeditionBootstrap::is_ready(Game & game) {
 	BOOST_FOREACH(std::unique_ptr<WaresQueue>& wq, wares_) {
 		if (wq->get_max_fill() != wq->get_filled())
 			return;
@@ -70,7 +68,7 @@ void ExpeditionBootstrap::is_expedition_ready(Game & game) {
 void ExpeditionBootstrap::ware_callback(Game& game, WaresQueue*, Ware_Index, void* const data)
 {
 	ExpeditionBootstrap* pd = static_cast<ExpeditionBootstrap *>(data);
-	pd->is_expedition_ready(game);
+	pd->is_ready(game);
 }
 
 // static
@@ -97,7 +95,7 @@ void ExpeditionBootstrap::handle_worker_callback(Game& game, Request& request, W
 			worker->reset_tasks(game);
 			worker->start_task_idle(game, 0, -1);
 
-			is_expedition_ready(game);
+			is_ready(game);
 			return;
 		}
 	}
@@ -106,7 +104,7 @@ void ExpeditionBootstrap::handle_worker_callback(Game& game, Request& request, W
 	assert(false);
 }
 
-void ExpeditionBootstrap::start_expedition() {
+void ExpeditionBootstrap::start() {
 	assert(workers_.empty());
 	assert(wares_.empty());
 
@@ -141,7 +139,7 @@ void ExpeditionBootstrap::start_expedition() {
 		warehouse->refresh_options(*igb);
 }
 
-void ExpeditionBootstrap::cancel_expedition(Game& game) {
+void ExpeditionBootstrap::cancel(Game& game) {
 	// Put all wares from the WaresQueues back into the warehouse
 	Warehouse* const warehouse = portdock_->get_warehouse();
 	BOOST_FOREACH(std::unique_ptr<WaresQueue>& wq, wares_) {

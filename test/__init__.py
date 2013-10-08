@@ -61,9 +61,11 @@ class WidelandsTestCase(unittest.TestCase):
             self.widelands_returncode = widelands.returncode
         self.stdout = open(stdout_filename, "r").read()
 
-    def assert_all_lunit_tests_passed(self):
-        success = self.widelands_returncode == 0 and "All Tests passed." in self.stdout
+        self.assertTrue(self.widelands_returncode == 0,
+            "Widelands exited abnormally. Analyze the files in %s to see why this test case failed." % self.run_dir
+        )
 
-        self.assertTrue(success,
+    def assert_all_lunit_tests_passed(self):
+        self.assertTrue("All Tests passed" in self.stdout,
             "Not all tests pass. Analyze the files in %s to see why this test case failed." % self.run_dir
         )

@@ -47,18 +47,16 @@ public:
 	ExpeditionBootstrap(PortDock* const portdock);
 	virtual ~ExpeditionBootstrap();
 
-	// Start an expedition. This will request all wares and workers.
-	void start_expedition();
+	// Start bootstrapping an expedition. This will request all wares and workers.
+	void start();
 
-	// Cancel an ongoing expedition. This will incorporate wares and workers
-	// into the corresponding warehouse.
-	// NOCOM(#sirver): What happens if the ship is already away?
-	void cancel_expedition(Game& game);
+	// Cancel an ongoing bootstrap. This will incorporate wares and workers into
+	// the corresponding warehouse.
+	void cancel(Game& game);
 
-	// Constructs a list of workers and wares that are ready to go to an
+	// Returns a list of workers and wares that are ready to go to an
 	// expedition. Ownership is transferred and the object is in an undefined
 	// state after this and must be deleted.
-	// // NOCOM(#sirver): bad design
 	void get_waiting_workers_and_wares
 		(Game&, const Tribe_Descr&, std::vector<Worker*>* return_workers,
 		 std::vector<WareInstance*>* return_wares);
@@ -84,7 +82,7 @@ private:
 	void handle_worker_callback(Game &, Request &, Worker *);
 
 	// Tests if all wares for the expedition have arrived. If so, informs the portdock.
-	void is_expedition_ready(Game& game);
+	void is_ready(Game& game);
 
 	PortDock* const portdock_;  // not owned
 	Economy* economy_;

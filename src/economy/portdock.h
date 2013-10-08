@@ -101,12 +101,15 @@ struct PortDock : PlayerImmovable {
 
 	uint32_t count_waiting(WareWorker waretype, Ware_Index wareindex);
 
-	// NOCOM(#sirver): document these.
+	// Returns true if a expedition is started or ready to be send out.
 	bool expedition_started();
+
+	// Called when the button in the warehouse window is pressed.
 	void start_expedition();
 	void cancel_expedition(Game &);
 
-	// May return nullptr when there is no expedition ongoing.
+	// May return nullptr when there is no expedition ongoing or if the
+	// expedition ship is already underway.
 	ExpeditionBootstrap* expedition_bootstrap();
 
 	// Gets called by the ExpeditionBootstrap as soon as all wares and workers are available.

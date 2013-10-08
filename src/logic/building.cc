@@ -595,7 +595,6 @@ std::string Building::get_statistics_string()
 
 
 WaresQueue & Building::waresqueue(Ware_Index const wi) {
-	assert(false); // NOCOM(#sirver): remove again.
 	throw wexception
 		("%s (%u) has no WaresQueue for %u",
 		 name().c_str(), serial(), wi.value());
