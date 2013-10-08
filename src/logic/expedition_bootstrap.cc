@@ -24,9 +24,10 @@
 #include "economy/portdock.h"
 #include "logic/player.h"
 #include "logic/warehouse.h"
+#include "map_io/widelands_map_map_object_loader.h"
+#include "map_io/widelands_map_map_object_saver.h"
 #include "upcast.h"
 #include "wui/interactive_gamebase.h"
-
 
 namespace Widelands {
 
@@ -42,7 +43,7 @@ struct ExpeditionBootstrap::ExpeditionWorker {
 };
 
 ExpeditionBootstrap::ExpeditionBootstrap(PortDock* const portdock)
-	 : portdock_(portdock), economy_(portdock->get_warehouse()->get_economy()) {}
+	 : portdock_(portdock), economy_(portdock->get_economy()) {}
 
 ExpeditionBootstrap::~ExpeditionBootstrap() {
 	assert(workers_.empty());
@@ -67,14 +68,14 @@ void ExpeditionBootstrap::is_ready(Game & game) {
 // static
 void ExpeditionBootstrap::ware_callback(Game& game, WaresQueue*, Ware_Index, void* const data)
 {
-	ExpeditionBootstrap* pd = static_cast<ExpeditionBootstrap *>(data);
-	pd->is_ready(game);
+	ExpeditionBootstrap* eb = static_cast<ExpeditionBootstrap *>(data);
+	eb->is_ready(game);
 }
 
 // static
 void ExpeditionBootstrap::worker_callback
-	(Game& game, Request& r, Ware_Index, Worker* worker, PlayerImmovable& pd) {
-	Warehouse* warehouse = static_cast<Warehouse *>(&pd);
+	(Game& game, Request& r, Ware_Index, Worker* worker, PlayerImmovable& pi) {
+	Warehouse* warehouse = static_cast<Warehouse *>(&pi);
 
 	warehouse->get_portdock()->expedition_bootstrap()->handle_worker_callback(game, r, worker);
 }
@@ -161,7 +162,7 @@ void ExpeditionBootstrap::cancel(Game& game) {
 		warehouse->refresh_options(*igb);
 }
 
-void ExpeditionBootstrap::cleanup(Editor_Game_Base& egbase) {
+void ExpeditionBootstrap::cleanup(Editor_Game_Base& /* egbase */) {
 	// This will delete all the requests. We do nothing with the workers as we
 	// do not own them.
 	workers_.clear();
@@ -236,6 +237,61 @@ void ExpeditionBootstrap::get_waiting_workers_and_wares
 	}
 
 	cleanup(game);
+}
+
+void ExpeditionBootstrap::save(FileWrite& fw, Game& game, Map_Map_Object_Saver& mos) {
+	// Expedition workers
+	fw.Unsigned8(workers_.size());
+	BOOST_FOREACH(std::unique_ptr<ExpeditionWorker>& ew, workers_) {
+		fw.Unsigned8(ew->request.get() != nullptr);
+		if (ew->request.get() != nullptr) {
+			ew->request->Write(fw, game, mos);
+		} else {
+			assert(mos.is_object_known(*ew->worker));
+			fw.Unsigned32(mos.get_object_file_index(*ew->worker));
+		}
+	}
+
+	// Expedition WaresQueues
+	fw.Unsigned8(wares_.size());
+	BOOST_FOREACH(std::unique_ptr<WaresQueue>& wq, wares_) {
+		wq->Write(fw, game, mos);
+	}
+}
+
+void ExpeditionBootstrap::load
+	(uint32_t warehouse_packet_version, Warehouse& warehouse, FileRead& fr, Game& game, Map_Map_Object_Loader& mol) {
+	assert(warehouse_packet_version >= 6);
+
+	// Expedition workers
+	const uint8_t num_workers = fr.Unsigned8();
+	for (uint8_t i = 0; i < num_workers; ++i) {
+		workers_.emplace_back(new ExpeditionWorker(nullptr));
+		if (fr.Unsigned8() == 1) {
+			Request* worker_request = new Request
+			  (warehouse, Ware_Index::First(), ExpeditionBootstrap::worker_callback, wwWORKER);
+			workers_.back()->request.reset(worker_request);
+			worker_request->Read(fr, game, mol);
+			workers_.back()->worker = nullptr;
+		} else {
+			workers_.back()->worker = &mol.get<Worker>(fr.Unsigned32());
+		}
+	}
+
+	// Expedition WaresQueues
+	assert(wares_.empty());
+	const uint8_t num_wares = fr.Unsigned8();
+	for (uint8_t i = 0; i < num_wares; ++i) {
+		WaresQueue * wq = new WaresQueue(warehouse, Ware_Index::Null(), 0);
+		wq->Read(fr, game, mol);
+		wq->set_callback(ware_callback, this);
+
+		if (!wq->get_ware()) {
+			delete wq;
+		} else {
+			wares_.emplace_back(wq);
+		}
+	}
 }
 
 }  // namespace Widelands

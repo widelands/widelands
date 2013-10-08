@@ -77,9 +77,8 @@ UI::Box * create_portdock_expedition_display(UI::Panel * parent, Warehouse & wh,
 	UI::Box & box = *new UI::Box(parent, 0, 0, UI::Box::Vertical);
 
 	// Add the wares queues.
-	// NOCOM(#sirver): disable priority and stock indicators here.
 	BOOST_FOREACH(WaresQueue* wq, wh.get_portdock()->expedition_bootstrap()->wares()) {
-		box.add(new WaresQueueDisplay(&box, 0, 0, igb, wh, wq), UI::Box::AlignLeft);
+		box.add(new WaresQueueDisplay(&box, 0, 0, igb, wh, wq, true), UI::Box::AlignLeft);
 	}
 
 /* FIXME Implement UI for Builder + Soldiers

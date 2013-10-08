@@ -32,11 +32,12 @@ namespace Widelands {
 class Economy;
 class Editor_Game_Base;
 class Game;
+class Map_Map_Object_Loader;
 class PortDock;
 class Request;
 class WareInstance;
 class Warehouse;
-class Waresqueue;
+class WaresQueue;
 class Worker;
 
 // Handles the mustering of workers and wares in a port for one Expedition. This
@@ -72,6 +73,13 @@ public:
 
 	// Delete all items we currently handle.
 	void cleanup(Editor_Game_Base& egbase);
+
+	// Save/Load this into a file. The actual data is stored in the buildingdata
+	// packet, and there in the warehouse data packet.
+	void load
+		(uint32_t warehouse_packet_version, Warehouse& warehouse,
+		 FileRead& fr, Game& game, Map_Map_Object_Loader& mol);
+	void save(FileWrite& fw, Game& game, Map_Map_Object_Saver& mos);
 
 private:
 	struct ExpeditionWorker;

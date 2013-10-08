@@ -484,10 +484,11 @@ void PortDock::Loader::load(FileRead & fr, uint8_t version)
 			it->load(fr);
 		}
 
-		// NOCOM(#sirver): this needs redoing, loading and saving changed a lot.
 		if (version >= 3) {
-			// All the other expedition specific stuff is saved in the warehouse
-			bool expedition_bootstrap = fr.Unsigned8();
+			// All the other expedition specific stuff is saved in the warehouse.
+			if (fr.Unsigned8()) {  // Do we have an expedition?
+				pd.m_expedition_bootstrap.reset(new ExpeditionBootstrap(&pd));
+			}
 			pd.m_expedition_ready = (fr.Unsigned8() == 1) ? true : false;
 		} else {
 			pd.m_expedition_ready = false;
