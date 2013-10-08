@@ -41,7 +41,7 @@ struct Parameter_error : public std::runtime_error {
 	explicit Parameter_error(std::string text)
 		: std::runtime_error(text)
 	{}
-	virtual ~Parameter_error() {}
+	virtual ~Parameter_error() throw () {}
 };
 
 // input

@@ -43,7 +43,7 @@ _wexception::_wexception
 	m_what = ost.str();
 }
 
-_wexception::~_wexception() {}
+_wexception::~_wexception() throw () {}
 
 char const * _wexception::what() const throw () {
 	return m_what.c_str();
@@ -66,7 +66,7 @@ warning::warning(char const * const et, char const * const em, ...) :
 	m_what = buffer;
 }
 
-warning::~warning() {}
+warning::~warning() throw () {}
 
 char const * warning::title() const
 {

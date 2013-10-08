@@ -226,7 +226,7 @@ DisconnectException::DisconnectException(const char * fmt, ...)
 	m_what = buffer;
 }
 
-DisconnectException::~DisconnectException()
+DisconnectException::~DisconnectException() throw ()
 {
 }
 

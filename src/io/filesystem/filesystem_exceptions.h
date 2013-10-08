@@ -39,7 +39,7 @@ struct File_error : public std::runtime_error {
 		m_message         (message)
 	{}
 
-	virtual ~File_error() {}
+	virtual ~File_error() throw () {}
 
 	std::string m_thrower;
 	std::string m_filename;

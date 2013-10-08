@@ -39,7 +39,7 @@
 /// logic_error (?)
 struct Journalfile_error : public std::runtime_error {
 	explicit Journalfile_error(const std::string & filename);
-	virtual ~Journalfile_error() {}
+	virtual ~Journalfile_error() throw () {}
 
 	virtual char const * what() const throw () {return text.c_str();}
 
@@ -53,7 +53,7 @@ struct Journalfile_error : public std::runtime_error {
  */
 struct BadMagic_error : public Journalfile_error {
 	explicit BadMagic_error(const std::string & filename);
-	virtual ~BadMagic_error() {}
+	virtual ~BadMagic_error() throw () {}
 };
 
 /**
@@ -66,7 +66,7 @@ struct BadRecord_error : public Journalfile_error {
 		 const uint8_t     code,
 		 const uint8_t     expectedcode)
 	;
-	virtual ~BadRecord_error() {}
+	virtual ~BadRecord_error() throw () {}
 
 	std::streamoff offset;
 	uint8_t code;
@@ -81,7 +81,7 @@ struct BadRecord_error : public Journalfile_error {
 struct BadEvent_error : public Journalfile_error {
 	explicit BadEvent_error(const std::string & filename, uint8_t const type)
 	;
-	virtual ~BadEvent_error() {}
+	virtual ~BadEvent_error() throw () {}
 
 	std::streamoff offset;
 	uint8_t type;

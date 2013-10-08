@@ -45,7 +45,7 @@ struct _wexception : public std::exception {
 	explicit _wexception
 		(const char * file, uint32_t line, const char * fmt, ...)
 	 PRINTF_FORMAT(4, 5);
-	virtual ~_wexception();
+	virtual ~_wexception() throw ();
 
 	/**
     * The target of the returned pointer remains valid during the lifetime of
