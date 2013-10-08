@@ -19,10 +19,10 @@
 
 #include "logic/immovable.h"
 
+#include <cstdio>
+
 #include <boost/format.hpp>
 #include <config.h>
-
-#include <cstdio>
 
 #include "container_iterate.h"
 #include "graphic/animation_gfx.h"

@@ -260,7 +260,9 @@ void ExpeditionBootstrap::save(FileWrite& fw, Game& game, Map_Map_Object_Saver& 
 }
 
 void ExpeditionBootstrap::load
-	(uint32_t warehouse_packet_version, Warehouse& warehouse, FileRead& fr, Game& game, Map_Map_Object_Loader& mol) {
+	(uint32_t warehouse_packet_version, Warehouse& warehouse, FileRead& fr,
+	 Game& game, Map_Map_Object_Loader& mol)
+{
 	assert(warehouse_packet_version >= 6);
 
 	// Expedition workers
