@@ -30,9 +30,9 @@
 #include "economy/warehousesupply.h"
 #include "logic/game.h"
 #include "logic/player.h"
+#include "logic/soldier.h"
 #include "logic/tribe.h"
 #include "logic/warehouse.h"
-#include "logic/soldier.h"
 #include "upcast.h"
 #include "wexception.h"
 
@@ -796,7 +796,7 @@ void Economy::_balance_requestsupply(Game & game)
 }
 
 
-Soldier * Economy::m_soldier_prototype = nullptr;
+std::unique_ptr<Soldier> Economy::m_soldier_prototype = nullptr; // minimal invasive fix of bug 1236538
 
 /**
  * Check whether there is a supply for the given request. If the request is a
@@ -806,20 +806,25 @@ void Economy::_create_requested_worker(Game & game, Ware_Index index)
 {
 	unsigned demand = 0;
 
-	bool soldier_level_check = false;
+	bool soldier_level_check;
 	const Tribe_Descr & tribe = owner().tribe();
 	const Worker_Descr & w_desc = *tribe.get_worker_descr(index);
 
 	// Make a dummy soldier, which should never be assigned to any economy
+	// Minimal invasive fix of bug 1236538
 	if (is_a(Soldier_Descr, &w_desc))
 	{
 		if (nullptr == m_soldier_prototype)
 		{
 			upcast(Soldier_Descr const, s_desc, &w_desc);
-			m_soldier_prototype = static_cast<Soldier*> (&(s_desc->create_object()));
+			Soldier* test_rookie = static_cast<Soldier*> (&(s_desc->create_object()));
+			m_soldier_prototype = static_cast<std::unique_ptr<Widelands::Soldier>> (test_rookie);
 		}
 		soldier_level_check = true;
 	}
+	else
+		soldier_level_check = false;
+
 
 	container_iterate_const(RequestList, m_requests, j) {
 		const Request & req = **j.current;

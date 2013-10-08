@@ -20,6 +20,7 @@
 #ifndef ECONOMY_H
 #define ECONOMY_H
 
+#include <memory>
 #include <set>
 #include <vector>
 
@@ -227,7 +228,7 @@ private:
 	 */
 	uint32_t m_request_timerid;
 
-	static Soldier         * m_soldier_prototype;
+	static std::unique_ptr<Soldier> m_soldier_prototype;
 
 };
 
