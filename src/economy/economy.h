@@ -27,6 +27,7 @@
 #include <boost/utility.hpp>
 
 #include "logic/instances.h"
+#include "logic/soldier.h"
 #include "logic/warelist.h"
 #include "logic/wareworker.h"
 #include "economy/supply_list.h"
@@ -225,6 +226,9 @@ private:
 	 * excessive calls to the request/supply balancing logic.
 	 */
 	uint32_t m_request_timerid;
+
+	static Soldier         * m_soldier_prototype;
+
 };
 
 }

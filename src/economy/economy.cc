@@ -32,6 +32,7 @@
 #include "logic/player.h"
 #include "logic/tribe.h"
 #include "logic/warehouse.h"
+#include "logic/soldier.h"
 #include "upcast.h"
 #include "wexception.h"
 
@@ -794,6 +795,9 @@ void Economy::_balance_requestsupply(Game & game)
 		_start_request_timer(rsps.nexttimer);
 }
 
+
+Soldier * Economy::m_soldier_prototype = nullptr;
+
 /**
  * Check whether there is a supply for the given request. If the request is a
  * worker request without supply, attempt to create a new worker in a warehouse.
@@ -801,6 +805,21 @@ void Economy::_balance_requestsupply(Game & game)
 void Economy::_create_requested_worker(Game & game, Ware_Index index)
 {
 	unsigned demand = 0;
+
+	bool soldier_level_check = false;
+	const Tribe_Descr & tribe = owner().tribe();
+	const Worker_Descr & w_desc = *tribe.get_worker_descr(index);
+
+	// Make a dummy soldier, which should never be assigned to any economy
+	if (is_a(Soldier_Descr, &w_desc))
+	{
+		if (nullptr == m_soldier_prototype)
+		{
+			upcast(Soldier_Descr const, s_desc, &w_desc);
+			m_soldier_prototype = static_cast<Soldier*> (&(s_desc->create_object()));
+		}
+		soldier_level_check = true;
+	}
 
 	container_iterate_const(RequestList, m_requests, j) {
 		const Request & req = **j.current;
@@ -813,17 +832,24 @@ void Economy::_create_requested_worker(Game & game, Ware_Index index)
 		if (m_supplies.have_supplies(game, req))
 			continue;
 
+		// Requests for heroes should not trigger the creation of more rookies
+		if (soldier_level_check)
+		{
+			if (not (req.get_requirements().check(*m_soldier_prototype)))
+				continue;
+		}
+
+
 		demand += req.get_open_count();
 	}
 
 	if (!demand)
 		return;
 
+
 	// We have worker demand that is not fulfilled by supplies
 	// Find warehouses where we can create the required workers,
 	// and collect stats about existing build prerequisites
-	const Tribe_Descr & tribe = owner().tribe();
-	const Worker_Descr & w_desc = *tribe.get_worker_descr(index);
 	const Worker_Descr::Buildcost & cost = w_desc.buildcost();
 	std::vector<uint32_t> total_available;
 	uint32_t total_planned = 0;
