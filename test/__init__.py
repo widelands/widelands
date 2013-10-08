@@ -43,7 +43,7 @@ class WidelandsTestCase(unittest.TestCase):
         with open(stdout_filename, 'a') as stdout_file:
             args = [self.path_to_widelands_binary, '--verbose=true',
                     '--datadir=.', '--homedir=%s' % self.run_dir,
-                    '--disable_fx=true', '--disable_music=true' ]
+                    '--disable_fx=true', '--disable_music=true', '--maxfps=25', ]
             args += [ "--%s=%s" % (key, value) for key, value in kwargs.iteritems() ]
             stdout_file.write("---- TestRunner: Starting Widelands: %s\n\n" % args)
 

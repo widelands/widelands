@@ -165,7 +165,7 @@ public:
 	void cancel_task_transfer(Game &);
 	Transfer * get_transfer() const {return m_transfer;}
 
-	void start_task_shipping(Game &, PortDock &);
+	void start_task_shipping(Game &, PortDock*);
 	void end_shipping(Game &);
 	bool is_shipping();
 

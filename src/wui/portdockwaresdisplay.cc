@@ -23,7 +23,7 @@
 #include <boost/lexical_cast.hpp>
 
 #include "economy/portdock.h"
-#include "logic/expedition_manager.h"
+#include "logic/expedition_bootstrap.h"
 #include "logic/player.h"
 #include "wui/waresdisplay.h"
 #include "wui/waresqueuedisplay.h"
@@ -78,7 +78,7 @@ UI::Box * create_portdock_expedition_display(UI::Panel * parent, Warehouse & wh,
 
 	// Add the wares queues.
 	// NOCOM(#sirver): disable priority and stock indicators here.
-	BOOST_FOREACH(WaresQueue* wq, wh.get_portdock()->expedition_manager()->wares()) {
+	BOOST_FOREACH(WaresQueue* wq, wh.get_portdock()->expedition_bootstrap()->wares()) {
 		box.add(new WaresQueueDisplay(&box, 0, 0, igb, wh, wq), UI::Box::AlignLeft);
 	}
 

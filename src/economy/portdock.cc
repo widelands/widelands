@@ -26,7 +26,7 @@
 #include "economy/ware_instance.h"
 #include "economy/wares_queue.h"
 #include "log.h"
-#include "logic/expedition_manager.h"
+#include "logic/expedition_bootstrap.h"
 #include "logic/game.h"
 #include "logic/game_data_error.h"
 #include "logic/player.h"
@@ -45,13 +45,12 @@ PortDock::PortDock() :
 	m_fleet(0),
 	m_warehouse(0),
 	m_need_ship(false),
-	m_start_expedition(false),
 	m_expedition_ready(false)
 {
 }
 
 PortDock::~PortDock() {
-	assert(m_expedition_manager.get() == nullptr);
+	assert(m_expedition_bootstrap.get() == nullptr);
 }
 
 /**
@@ -152,8 +151,8 @@ void PortDock::set_economy(Economy * e)
 		}
 	}
 
-	if (m_expedition_manager)
-		m_expedition_manager->set_economy(e);
+	if (m_expedition_bootstrap)
+		m_expedition_bootstrap->set_economy(e);
 }
 
 
@@ -210,9 +209,9 @@ void PortDock::cleanup(Editor_Game_Base & egbase)
 		unset_position(egbase, *it.current);
 	}
 
-	if (m_expedition_manager) {
-		m_expedition_manager->cleanup(egbase);
-		m_expedition_manager.reset(nullptr);
+	if (m_expedition_bootstrap) {
+		m_expedition_bootstrap->cleanup(egbase);
+		m_expedition_bootstrap.reset(nullptr);
 	}
 
 	PlayerImmovable::cleanup(egbase);
@@ -305,19 +304,26 @@ void PortDock::ship_arrived(Game & game, Ship & ship)
 	ship.withdraw_items(game, *this, items_brought_by_ship);
 
 	container_iterate(std::vector<ShippingItem>, items_brought_by_ship, it) {
+		WareInstance * ware;
+		Worker * worker;
+		it->get(game, ware, worker);
+		if (ware) {
+			log("#sirver ware");
+		} else {
+			log("#sirver worker: %s\n", worker->name().c_str());
+		}
 		it->set_location(game, m_warehouse);
 		it->end_shipping(game);
 	}
 
-	// NOCOM(#sirver): m_expedition_ready should not be needed. Ask the manager if one is around.
 	if (m_expedition_ready) {
-		assert(m_expedition_manager.get() != nullptr);
+		assert(m_expedition_bootstrap.get() != nullptr);
 
 		if (ship.get_nritems() < 1) {
 			// Load the ship
 			std::vector<Worker*> workers;
 			std::vector<WareInstance*> wares;
-			m_expedition_manager->get_waiting_workers_and_wares(game, owner().tribe(), &workers, &wares);
+			m_expedition_bootstrap->get_waiting_workers_and_wares(game, owner().tribe(), &workers, &wares);
 
 			std::vector<ShippingItem> shipping_items;
 			BOOST_FOREACH(Worker* worker, workers) {
@@ -333,6 +339,7 @@ void PortDock::ship_arrived(Game & game, Ship & ship)
 			}
 
 			ship.start_task_expedition(game);
+
 			// The expedition goods are now on the ship, so from now on it is independent from the port
 			// and thus we switch the port to normal, so we could even start a new expedition,
 			cancel_expedition(game);
@@ -407,38 +414,32 @@ uint32_t PortDock::count_waiting(WareWorker waretype, Ware_Index wareindex)
 
 /// \returns whether an expedition was started or is even ready
 bool PortDock::expedition_started() {
-	return m_start_expedition || m_expedition_ready;
+	return (m_expedition_bootstrap.get() != nullptr) || m_expedition_ready;
 }
 
 /// Start an expedition
 void PortDock::start_expedition() {
-	assert(!m_start_expedition);
-	// NOCOM(#sirver): m_start_expedition is probably not needed. Check for existing of ExpeditionManager.
-	// // NOCOM(#sirver): add douc that ExpeditionManager cares for exactly one expedition.
-	m_start_expedition = true;
-
-	m_expedition_manager.reset(new ExpeditionManager(this));
-	m_expedition_manager->start_expedition();
+	assert(!m_expedition_bootstrap);
+	m_expedition_bootstrap.reset(new ExpeditionBootstrap(this));
+	m_expedition_bootstrap->start_expedition();
 
 }
 
-ExpeditionManager* PortDock::expedition_manager() {
-	return m_expedition_manager.get();
+ExpeditionBootstrap* PortDock::expedition_bootstrap() {
+	return m_expedition_bootstrap.get();
 }
 
-// NOCOM(#sirver): rename. sounds like a getter.
-void PortDock::expedition_is_ready(Game & game) {
+void PortDock::expedition_bootstrap_complete(Game & game) {
 	m_expedition_ready = true;
 	get_fleet()->update(game);
 }
 
 void PortDock::cancel_expedition(Game & game) {
 	// Reset
-	m_start_expedition = false;
 	m_expedition_ready = false;
 
-	m_expedition_manager->cancel_expedition(game);
-	m_expedition_manager.reset(nullptr);
+	m_expedition_bootstrap->cancel_expedition(game);
+	m_expedition_bootstrap.reset(nullptr);
 }
 
 
@@ -494,10 +495,9 @@ void PortDock::Loader::load(FileRead & fr, uint8_t version)
 		// NOCOM(#sirver): this needs redoing, loading and saving changed a lot.
 		if (version >= 3) {
 			// All the other expedition specific stuff is saved in the warehouse
-			pd.m_start_expedition = (fr.Unsigned8() == 1) ? true : false;
+			bool expedition_bootstrap = fr.Unsigned8();
 			pd.m_expedition_ready = (fr.Unsigned8() == 1) ? true : false;
 		} else {
-			pd.m_start_expedition = false;
 			pd.m_expedition_ready = false;
 		}
 	}
@@ -575,7 +575,7 @@ void PortDock::save(Editor_Game_Base & egbase, Map_Map_Object_Saver & mos, FileW
 	}
 
 	// Expedition specific stuff
-	fw.Unsigned8(m_start_expedition ? 1 : 0);
+	fw.Unsigned8(m_expedition_bootstrap.get() != nullptr ? 1 : 0);
 	fw.Unsigned8(m_expedition_ready ? 1 : 0);
 }
 

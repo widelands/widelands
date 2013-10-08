@@ -115,8 +115,11 @@ void Ship::init_fleet(Editor_Game_Base & egbase) {
 }
 
 void Ship::cleanup(Editor_Game_Base & egbase) {
-	if (m_fleet)
-		m_fleet->remove_ship(egbase, this);
+	// First, make sure we are not an economy of our own.
+	if (!m_fleet) {
+		init_fleet(egbase);
+	}
+	m_fleet->remove_ship(egbase, this);
 
 	while (!m_items.empty()) {
 		m_items.back().remove(egbase);
@@ -180,6 +183,34 @@ void Ship::ship_update(Game & game, Bob::State & state) {
 	if (!signal.empty()) {
 		if (signal == "wakeup") {
 			signal_handled();
+		} else if (signal == "cancel_expedition") {
+			pop_task(game);
+			PortDock* dst = m_fleet->get_arbitrary_dock();
+			// TODO(sirver): What happens if there is no port anymore?
+			if (dst) {
+				start_task_movetodock(game, *dst);
+				// We declare the ship to be in TRANSPORT mode and give control to the fleet
+				// m_ship_state = TRANSPORT;
+				// Some cleanups need to be done, as the workers do not have a destination
+				// NOCOM(#sirver): I do not understand this code. Why are wares economy not touched?
+				log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
+				for (int i = m_items.size() - 1; i >= 0; --i) {
+					WareInstance * ware;
+					Worker * worker;
+					m_items.at(i).get(game, ware, worker);
+					if (worker) {
+						worker->reset_tasks(game);
+						worker->start_task_shipping(game, nullptr);
+					} else {
+						assert(ware);
+					}
+				}
+			}
+			log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
+
+			m_ship_state = TRANSPORT;
+			signal_handled();
+			return;
 		} else {
 			send_signal(game, "fail");
 			pop_task(game);
@@ -621,10 +652,15 @@ void Ship::ship_update_idle(Game & game, Bob::State & state) {
 					m_items.resize(i);
 				}
 			}
-			if (m_items.empty())
+			if (m_items.empty()) {
 				m_ship_state = TRANSPORT; // That's it, expedition finished
+
+				init_fleet(game);
+				m_expedition.reset(nullptr);
+
 				if (upcast(Interactive_GameBase, igb, game.get_ibase()))
 					refresh_window(*igb);
+			}
 			return start_task_idle(game, descr().main_animation(), 1500); // unload the next item
 		}
 
@@ -717,6 +753,26 @@ void Ship::start_task_expedition(Game & game) {
 	m_expedition->direction = 0;
 	m_expedition->exploration_start = Coords(0, 0);
 	m_expedition->clockwise = false;
+	m_expedition->economy.reset(new Economy(m_economy->owner()));
+
+	// We are no longer in any other economy, but instead are an economy of our
+	// own.
+	m_fleet->remove_ship(game, this);
+	assert(m_fleet == nullptr);
+
+	set_economy(game, m_expedition->economy.get());
+
+	for (int i = m_items.size() - 1; i >= 0; --i) {
+		WareInstance * ware;
+		Worker * worker;
+		m_items.at(i).get(game, ware, worker);
+		if (worker) {
+			worker->reset_tasks(game);
+			worker->start_task_idle(game, 0, -1);
+		} else {
+			assert(ware);
+		}
+	}
 
 	// Send a message to the player, that an expedition is ready to go
 	const std::string msg_head = _("Expedition ready");
@@ -759,21 +815,19 @@ void Ship::exp_cancel (Game & game) {
 	// + cancelation only works if an expedition is actually running
 	if ((m_ship_state == EXP_COLONIZING) || !state_is_expedition())
 		return;
-	// We declare the ship to be in TRANSPORT mode and give control to the fleet
-	m_ship_state = TRANSPORT;
-	start_task_movetodock(game, *m_fleet->get_arbitrary_dock());
-	// Some cleanups need to be done, as the workers do not have a destination
-	for (int i = m_items.size() - 1; i >= 0; --i) {
-		WareInstance * ware;
-		Worker * worker;
-		m_items.at(i).get(game, ware, worker);
-		if (worker) {
-			worker->set_economy(nullptr);
-			worker->reset_tasks(game);
-		} else {
-			assert(ware);
-		}
-	}
+	send_signal(game, "cancel_expedition");
+
+	// Bring us back into a fleet and a economy.
+	log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
+	set_economy(game, nullptr);
+	init_fleet(game);
+	log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
+	assert(get_economy() && get_economy() != m_expedition->economy.get());
+
+	log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
+	m_expedition.reset(nullptr);
+	log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
+
 	// And finally update our ship window
 	if (upcast(Interactive_GameBase, igb, game.get_ibase()))
 		refresh_window(*igb);

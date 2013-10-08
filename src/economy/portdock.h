@@ -30,7 +30,7 @@ struct Fleet;
 struct RoutingNodeNeighbour;
 struct Ship;
 class Warehouse;
-class ExpeditionManager;
+class ExpeditionBootstrap;
 
 /**
  * The PortDock occupies the fields in the water at which ships
@@ -107,10 +107,10 @@ struct PortDock : PlayerImmovable {
 	void cancel_expedition(Game &);
 
 	// May return nullptr when there is no expedition ongoing.
-	ExpeditionManager* expedition_manager();
+	ExpeditionBootstrap* expedition_bootstrap();
 
-	// Gets called by the ExpeditionManager as soon as all wares and workers are available.
-	void expedition_is_ready(Game& game);
+	// Gets called by the ExpeditionBootstrap as soon as all wares and workers are available.
+	void expedition_bootstrap_complete(Game& game);
 
 private:
 	friend struct Fleet;
@@ -125,10 +125,9 @@ private:
 	PositionList m_dockpoints;
 	std::vector<ShippingItem> m_waiting;
 	bool m_need_ship;
-	bool m_start_expedition;
 	bool m_expedition_ready;
 
-	std::unique_ptr<ExpeditionManager> m_expedition_manager;
+	std::unique_ptr<ExpeditionBootstrap> m_expedition_bootstrap;
 
 	// saving and loading
 protected:

@@ -57,7 +57,9 @@ private:
 };
 
 /**
- * Ships belong to a player and to an economy.
+ * Ships belong to a player and to an economy. The usually are in a (unique)
+ * fleet for a player, but only if they are on standard duty. Exploration ships
+ * are an economy of their own and are not part of a Fleet.
  */
 struct Ship : Bob {
 	MO_DESCR(Ship_Descr);
@@ -151,17 +153,15 @@ struct Ship : Bob {
 
 	/// \returns (in expedition mode only!) whether the next field in direction \arg dir is swimable
 	bool exp_dir_swimable(Direction dir) {
-		if (!state_is_expedition())
+		if (!m_expedition)
 			return false;
-		assert(m_expedition);
 		return m_expedition->swimable[dir - 1];
 	}
 
 	/// \returns whether the expedition ship is close to the coast
 	bool exp_close_to_coast() {
-		if (!state_is_expedition())
+		if (!m_expedition)
 			return false;
-		assert(m_expedition);
 		for (uint8_t dir = FIRST_DIRECTION; dir <= LAST_DIRECTION; ++dir)
 			if (!m_expedition->swimable[dir - 1])
 				return true;
@@ -170,9 +170,8 @@ struct Ship : Bob {
 
 	/// \returns (in expedition mode only!) the list of currently seen port build spaces
 	const std::list<Coords>* exp_port_spaces() {
-		if (!state_is_expedition())
+		if (!m_expedition)
 			return nullptr;
-		assert(m_expedition);
 		return m_expedition->seen_port_buildspaces.get();
 	}
 
@@ -221,6 +220,7 @@ private:
 		uint8_t direction;
 		Coords exploration_start;
 		bool clockwise;
+		std::unique_ptr<Economy> economy;
 	};
 	std::unique_ptr<Expedition> m_expedition;
 

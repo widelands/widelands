@@ -365,7 +365,7 @@ int32_t Request::get_priority (int32_t cost) const
 			// the ware.
 			if
 				(!m_target_warehouse->get_portdock() ||
-				 !m_target_warehouse->get_portdock()->expedition_manager())
+				 !m_target_warehouse->get_portdock()->expedition_bootstrap())
 			{
 				modifier =
 					std::max(1, MAX_IDLE_PRIORITY - cost * MAX_IDLE_PRIORITY / PRIORITY_MAX_COST);

@@ -17,80 +17,85 @@
  *
  */
 
-#include "logic/expedition_manager.h"
+#include "logic/expedition_bootstrap.h"
 
 #include <boost/foreach.hpp>
 
 #include "economy/portdock.h"
-#include "log.h" // NOCOM(#sirver): remove again
 #include "logic/player.h"
 #include "logic/warehouse.h"
 #include "upcast.h"
 #include "wui/interactive_gamebase.h"
 
 
-// NOCOM(#sirver): maybe rename just to Expedition.
 // // NOCOM(#sirver): remove the priority buttons and stuff from the expedition window.
 
 namespace Widelands {
 
-struct ExpeditionManager::ExpeditionWorker {
+struct ExpeditionBootstrap::ExpeditionWorker {
 	// Ownership is taken.
 	ExpeditionWorker(Request * r) : request(r), worker(nullptr) {}
 
 	std::unique_ptr<Request> request;
-	std::unique_ptr<Worker> worker;
+
+	// we never own the worker. Either he is in the PortDock in which case it
+	// owns it or it is on the ship.
+	Worker* worker;
 };
 
-ExpeditionManager::ExpeditionManager(PortDock* const portdock)
+ExpeditionBootstrap::ExpeditionBootstrap(PortDock* const portdock)
 	 : portdock_(portdock), economy_(portdock->get_warehouse()->get_economy()) {}
 
-ExpeditionManager::~ExpeditionManager() {
+ExpeditionBootstrap::~ExpeditionBootstrap() {
 	assert(workers_.empty());
 	assert(wares_.empty());
 }
 
-void ExpeditionManager::is_expedition_ready(Game & game) {
-	log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
+void ExpeditionBootstrap::is_expedition_ready(Game & game) {
 	BOOST_FOREACH(std::unique_ptr<WaresQueue>& wq, wares_) {
-		log("#sirver wq->get_max_fill(): %u,wq->get_filled(): %u\n",
-				wq->get_max_fill(), wq->get_filled());
 		if (wq->get_max_fill() != wq->get_filled())
 			return;
 	}
 
-	log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 	BOOST_FOREACH(std::unique_ptr<ExpeditionWorker>& ew, workers_) {
-		log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 		if (ew->request)
 			return;
 	}
 
 	// If this point is reached, all needed wares and workers are stored and waiting for a ship
-	log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
-	portdock_->expedition_is_ready(game);
+	portdock_->expedition_bootstrap_complete(game);
 }
 
 // static
-void ExpeditionManager::ware_callback(Game& game, WaresQueue*, Ware_Index, void* const data)
+void ExpeditionBootstrap::ware_callback(Game& game, WaresQueue*, Ware_Index, void* const data)
 {
-	ExpeditionManager* pd = static_cast<ExpeditionManager *>(data);
+	ExpeditionBootstrap* pd = static_cast<ExpeditionBootstrap *>(data);
 	pd->is_expedition_ready(game);
 }
 
 // static
-void ExpeditionManager::worker_callback
+void ExpeditionBootstrap::worker_callback
 	(Game& game, Request& r, Ware_Index, Worker* worker, PlayerImmovable& pd) {
 	Warehouse* warehouse = static_cast<Warehouse *>(&pd);
 
-	warehouse->get_portdock()->expedition_manager()->handle_worker_callback(game, r, worker);
+	warehouse->get_portdock()->expedition_bootstrap()->handle_worker_callback(game, r, worker);
 }
 
-void ExpeditionManager::handle_worker_callback(Game& game, Request& request, Worker* worker) {
+void ExpeditionBootstrap::handle_worker_callback(Game& game, Request& request, Worker* worker) {
 	BOOST_FOREACH(std::unique_ptr<ExpeditionWorker>& ew, workers_) {
 		if (ew->request.get() == &request) {
 			ew->request.reset(nullptr);  // deletes &request.
-			ew->worker.reset(worker);
+			ew->worker = worker;
+
+			// This is not really correct. All the wares are not in the portdock,
+			// so why should the worker be there. Well, it has to be somewhere
+			// (location != nullptr) and it should be in our economy so he is
+			// properly accounted for, so why not in the portdock. Alternatively
+			// we could kill him and recreate him as soon as we bord the ship -
+			// this should be no problem as workers are not gaining experience.
+			worker->set_location(portdock_);
+			worker->reset_tasks(game);
+			worker->start_task_idle(game, 0, -1);
 
 			is_expedition_ready(game);
 			return;
@@ -101,7 +106,7 @@ void ExpeditionManager::handle_worker_callback(Game& game, Request& request, Wor
 	assert(false);
 }
 
-void ExpeditionManager::start_expedition() {
+void ExpeditionBootstrap::start_expedition() {
 	assert(workers_.empty());
 	assert(wares_.empty());
 
@@ -128,7 +133,7 @@ void ExpeditionManager::start_expedition() {
 		(new ExpeditionWorker
 		 (new Request(*warehouse,
 						  warehouse->owner().tribe().safe_worker_index("builder"),
-						  ExpeditionManager::worker_callback, wwWORKER))
+						  ExpeditionBootstrap::worker_callback, wwWORKER))
 	);
 
 	// Update the user interface
@@ -136,7 +141,7 @@ void ExpeditionManager::start_expedition() {
 		warehouse->refresh_options(*igb);
 }
 
-void ExpeditionManager::cancel_expedition(Game& game) {
+void ExpeditionBootstrap::cancel_expedition(Game& game) {
 	// Put all wares from the WaresQueues back into the warehouse
 	Warehouse* const warehouse = portdock_->get_warehouse();
 	BOOST_FOREACH(std::unique_ptr<WaresQueue>& wq, wares_) {
@@ -148,7 +153,7 @@ void ExpeditionManager::cancel_expedition(Game& game) {
 	// Send all workers from the expedition list back inside the warehouse
 	BOOST_FOREACH(std::unique_ptr<ExpeditionWorker>& ew, workers_) {
 		if (ew->worker) {
-			warehouse->incorporate_worker(game, *ew->worker.release());
+			warehouse->incorporate_worker(game, *ew->worker);
 		}
 	}
 	workers_.clear();
@@ -158,13 +163,9 @@ void ExpeditionManager::cancel_expedition(Game& game) {
 		warehouse->refresh_options(*igb);
 }
 
-void ExpeditionManager::cleanup(Editor_Game_Base& egbase) {
-	// Send all workers from the expedition list back inside the warehouse
-	BOOST_FOREACH(std::unique_ptr<ExpeditionWorker>& ew, workers_) {
-		if (ew->worker) {
-			ew->worker->cleanup(egbase);
-		}
-	}
+void ExpeditionBootstrap::cleanup(Editor_Game_Base& egbase) {
+	// This will delete all the requests. We do nothing with the workers as we
+	// do not own them.
 	workers_.clear();
 
 	BOOST_FOREACH(std::unique_ptr<WaresQueue>& wq, wares_) {
@@ -173,7 +174,7 @@ void ExpeditionManager::cleanup(Editor_Game_Base& egbase) {
 	wares_.clear();
 }
 
-WaresQueue& ExpeditionManager::waresqueue(Ware_Index index) const {
+WaresQueue& ExpeditionBootstrap::waresqueue(Ware_Index index) const {
 	BOOST_FOREACH(const std::unique_ptr<WaresQueue>& wq, wares_) {
 		if (wq->get_ware() == index) {
 			return *wq.get();
@@ -182,16 +183,15 @@ WaresQueue& ExpeditionManager::waresqueue(Ware_Index index) const {
 	assert(false); // Never here, otherwise we do not have a queue for this ware.
 }
 
-std::vector<WaresQueue*> ExpeditionManager::wares() const {
+std::vector<WaresQueue*> ExpeditionBootstrap::wares() const {
 	std::vector<WaresQueue*> return_value;
 	BOOST_FOREACH(const std::unique_ptr<WaresQueue>& wq, wares_) {
 		return_value.emplace_back(wq.get());
 	}
-	log("#sirver return_values.size(): %u\n", return_value.size());
 	return return_value;
 }
 
-void ExpeditionManager::set_economy(Economy* new_economy) {
+void ExpeditionBootstrap::set_economy(Economy* new_economy) {
 	if (new_economy == economy_)
 		return;
 
@@ -215,7 +215,7 @@ void ExpeditionManager::set_economy(Economy* new_economy) {
 	economy_ = new_economy;
 }
 
-void ExpeditionManager::get_waiting_workers_and_wares
+void ExpeditionBootstrap::get_waiting_workers_and_wares
 	(Game& game, const Tribe_Descr& tribe, std::vector<Worker*>* return_workers,
 	 std::vector<WareInstance*>* return_wares)
 {
@@ -232,9 +232,9 @@ void ExpeditionManager::get_waiting_workers_and_wares
 	}
 
 	BOOST_FOREACH(std::unique_ptr<ExpeditionWorker>& ew, workers_) {
-		assert(ew->worker.get() != nullptr);
+		assert(ew->worker != nullptr);
 		assert(!ew->request);
-		return_workers->emplace_back(ew->worker.release());
+		return_workers->emplace_back(ew->worker);
 	}
 
 	cleanup(game);

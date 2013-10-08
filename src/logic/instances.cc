@@ -467,7 +467,7 @@ void Map_Object::molog(char const * fmt, ...) const
 	if (m_logsink)
 		m_logsink->log(buffer);
 
-	log("MO(%u): %s", m_serial, buffer);
+	log("MO(%u,%s): %s", m_serial, descr().name().c_str(), buffer);
 }
 
 

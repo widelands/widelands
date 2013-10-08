@@ -33,7 +33,7 @@
 #include "logic/battle.h"
 #include "logic/carrier.h"
 #include "logic/editor_game_base.h"
-#include "logic/expedition_manager.h"
+#include "logic/expedition_bootstrap.h"
 #include "logic/findbob.h"
 #include "logic/findnode.h"
 #include "logic/game.h"
@@ -239,9 +239,9 @@ Warehouse Building
 Warehouse_Descr::Warehouse_Descr
 	(char const* const _name, char const* const _descname,
 	 const std::string& directory, Profile& prof, Section& global_s, const Tribe_Descr& _tribe)
- : Building_Descr(_name, _descname, directory, prof, global_s, _tribe),
-	m_conquers(0),
-	m_heal_per_second(0)
+	: Building_Descr(_name, _descname, directory, prof, global_s, _tribe),
+	  m_conquers(0),
+	  m_heal_per_second(0)
 {
 	m_heal_per_second = global_s.get_safe_int("heal_per_second");
 	if ((m_conquers = prof.get_safe_section("global").get_positive("conquers", 0)))
@@ -1330,9 +1330,9 @@ void Warehouse::check_remove_stock(Game & game)
 
 WaresQueue& Warehouse::waresqueue(Ware_Index index) {
 	assert(m_portdock != nullptr);
-	assert(m_portdock->expedition_manager() != nullptr);
+	assert(m_portdock->expedition_bootstrap() != nullptr);
 
-	return m_portdock->expedition_manager()->waresqueue(index);
+	return m_portdock->expedition_bootstrap()->waresqueue(index);
 }
 
 /*

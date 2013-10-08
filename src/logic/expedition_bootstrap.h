@@ -17,8 +17,8 @@
  *
  */
 
-#ifndef EXPEDITION_MANAGER_H
-#define EXPEDITION_MANAGER_H
+#ifndef EXPEDITION_BOOTSTRAP_H
+#define EXPEDITION_BOOTSTRAP_H
 
 #include <vector>
 #include <memory>
@@ -39,12 +39,13 @@ class Warehouse;
 class Waresqueue;
 class Worker;
 
-// NOCOM(#sirver): what if some wares are already in this warehouse?
-// Handles the starting of Expeditions in a Warehouse.
-class ExpeditionManager : boost::noncopyable {
+// Handles the mustering of workers and wares in a port for one Expedition. This
+// object is created in the port dock as soon as the start expedition button is
+// pressed. As soon as the ship is loaded, this object gets destroyed.
+class ExpeditionBootstrap : boost::noncopyable {
 public:
-	ExpeditionManager(PortDock* const portdock);
-	virtual ~ExpeditionManager();
+	ExpeditionBootstrap(PortDock* const portdock);
+	virtual ~ExpeditionBootstrap();
 
 	// Start an expedition. This will request all wares and workers.
 	void start_expedition();
@@ -94,4 +95,4 @@ private:
 
 }  // namespace Widelands
 
-#endif /* end of include guard: EXPEDITION_MANAGER_H */
+#endif /* end of include guard: EXPEDITION_BOOTSTRAP_H */
