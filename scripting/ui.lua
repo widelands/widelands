@@ -277,3 +277,68 @@ function mouse_smoothly_to_panel(panel, g_T)
       g_T
    )
 end
+
+-- RST
+-- .. function:: click_building(p, building_name[, T = 1000])
+--
+-- 	Click on the first building of the given name for the given player.
+--
+--    :arg p: Player to search building for.
+--    :type p: :class:`wl.game.Player`
+--    :arg building_name: Building name to look for.
+--    :type building_name: :class:`string`
+--    :arg T: Time in ms to take for the transition.
+--    :type T: :class:`integer`
+--
+-- 	:returns: :const:`true` if a building was clicked
+--
+function click_building(p, building_name, g_T)
+   local building = p:get_buildings(building_name)[1]
+   mouse_smoothly_to(building.fields[1], g_T)
+   wl.ui.MapView():click(building.fields[1])
+   return true
+end
+
+-- RST
+-- .. function:: click_button(name)
+--
+-- 	Goes through all open windows and searches for a button of the given name
+-- 	and, if found, clicks it.
+--
+-- 	:arg name: Name of the button to click.
+-- 	:type name: :class:`string`.
+--
+-- 	:returns: :const:`true` if a button was clicked
+--
+function click_button(name)
+   for button_name, button in pairs(wl.ui.MapView().buttons) do
+      if button_name == name then
+         button:click()
+         return true
+      end
+   end
+
+   for window_name, window in pairs(wl.ui.MapView().windows) do
+      for button_name, button in pairs(window.buttons) do
+         if button_name == name then
+            print(window_name, button_name)
+            button:click()
+            return true
+         end
+      end
+   end
+   return false
+end
+
+-- RST
+-- .. function:: close_windows()
+--
+-- 	Closes all currently open windows.
+--
+-- 	:returns: :const:`nil`
+--
+function close_windows()
+   for k,v in pairs(wl.ui.MapView().windows) do
+      v:close()
+   end
+end

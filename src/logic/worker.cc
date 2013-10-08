@@ -1497,7 +1497,7 @@ void Worker::transfer_update(Game & game, State & /* state */) {
 		if (&building->base_flag() != nextstep) {
 			if (upcast(Warehouse, warehouse, building)) {
 				if (warehouse->get_portdock() == nextstep)
-					return start_task_shipping(game, *warehouse->get_portdock());
+					return start_task_shipping(game, warehouse->get_portdock());
 			}
 
 			throw wexception("MO(%u): [transfer]: in building, nextstep is not building's flag", serial());
@@ -1601,15 +1601,18 @@ const Bob::Task Worker::taskShipping = {
 };
 
 /**
- * Add us as a shipping item to the given dock and start the shipping task.
+ * Start the shipping task. If pd != nullptr, add us as a shipping item. We
+ * could be an expedition worker though, so we will not be a shipping item
+ * though.
  *
  * ivar1 = end shipping?
  */
-void Worker::start_task_shipping(Game & game, PortDock & pd)
+void Worker::start_task_shipping(Game & game, PortDock* pd)
 {
 	push_task(game, taskShipping);
 	top_state().ivar1 = 0;
-	pd.add_shippingitem(game, *this);
+	if (pd)
+		pd->add_shippingitem(game, *this);
 }
 
 /**

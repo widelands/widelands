@@ -30,6 +30,7 @@ struct Fleet;
 struct RoutingNodeNeighbour;
 struct Ship;
 class Warehouse;
+class ExpeditionBootstrap;
 
 /**
  * The PortDock occupies the fields in the water at which ships
@@ -59,6 +60,7 @@ class Warehouse;
  */
 struct PortDock : PlayerImmovable {
 	PortDock();
+	virtual ~PortDock();
 
 	void add_position(Widelands::Coords where);
 	void set_warehouse(Warehouse * wh);
@@ -99,12 +101,19 @@ struct PortDock : PlayerImmovable {
 
 	uint32_t count_waiting(WareWorker waretype, Ware_Index wareindex);
 
+	// Returns true if a expedition is started or ready to be send out.
 	bool expedition_started();
+
+	// Called when the button in the warehouse window is pressed.
 	void start_expedition();
 	void cancel_expedition(Game &);
-	void set_expedition_ready(bool ready) {m_expedition_ready = ready;}
-	static void expedition_wares_queue_callback(Game &, WaresQueue *, Ware_Index, void * data);
-	void check_expedition_wares_and_workers(Game &);
+
+	// May return nullptr when there is no expedition ongoing or if the
+	// expedition ship is already underway.
+	ExpeditionBootstrap* expedition_bootstrap();
+
+	// Gets called by the ExpeditionBootstrap as soon as all wares and workers are available.
+	void expedition_bootstrap_complete(Game& game);
 
 private:
 	friend struct Fleet;
@@ -119,8 +128,9 @@ private:
 	PositionList m_dockpoints;
 	std::vector<ShippingItem> m_waiting;
 	bool m_need_ship;
-	bool m_start_expedition;
 	bool m_expedition_ready;
+
+	std::unique_ptr<ExpeditionBootstrap> m_expedition_bootstrap;
 
 	// saving and loading
 protected:

@@ -31,6 +31,7 @@
 #include "logic/constructionsite.h"
 #include "logic/dismantlesite.h"
 #include "logic/editor_game_base.h"
+#include "logic/expedition_bootstrap.h"
 #include "logic/game.h"
 #include "logic/map.h"
 #include "logic/militarysite.h"
@@ -697,41 +698,12 @@ void Map_Buildingdata_Data_Packet::read_warehouse
 					if (Serial portdock = fr.Unsigned32()) {
 						warehouse.m_portdock = &mol.get<PortDock>(portdock);
 						warehouse.m_portdock->set_economy(warehouse.get_economy());
-
-						// Expedition specific stuff
+						// Expedition specific stuff. This is done in this packet
+						// because the "new style" loader is not supported and
+						// doesn't lend itself to request and other stuff.
 						if (warehouse.m_portdock->expedition_started()) {
-							// Expedition workers
-							uint8_t num_of_workers = fr.Unsigned8();
-							for (uint8_t i = 0; i < num_of_workers; ++i) {
-								warehouse.get_expedition_workers().push_back(new Warehouse::Expedition_Worker);
-								if (fr.Unsigned8() == 1) {
-									warehouse.get_expedition_workers().back()->worker_request =
-										new Request
-											(warehouse,
-											Ware_Index::First(),
-											Warehouse::request_expedition_worker_callback,
-											wwWORKER);
-									warehouse.get_expedition_workers().back()->worker_request->Read(fr, game, mol);
-								} else {
-									warehouse.get_expedition_workers().back()->worker =
-										&mol.get<Worker>(fr.Unsigned32());
-								}
-							}
-
-							// Expedition WaresQueues
-							uint8_t nr_queues = fr.Unsigned8();
-							assert(warehouse.get_wares_queue_vector().empty());
-							for (uint8_t i = 0; i < nr_queues; ++i) {
-								WaresQueue * wq = new WaresQueue(warehouse, Ware_Index::Null(), 0);
-								wq->Read(fr, game, mol);
-								wq->set_callback(PortDock::expedition_wares_queue_callback, warehouse.m_portdock);
-
-								if (!wq->get_ware()) {
-									delete wq;
-								} else {
-									warehouse.get_wares_queue_vector().push_back(wq);
-								}
-							}
+							warehouse.m_portdock->expedition_bootstrap()->load
+								(packet_version, warehouse, fr, game, mol);
 						}
 					}
 				}
@@ -1533,30 +1505,9 @@ void Map_Buildingdata_Data_Packet::write_warehouse
 	if (warehouse.descr().get_isport()) {
 		fw.Unsigned32(mos.get_object_file_index_or_zero(warehouse.m_portdock));
 
-		// Expedition specific stuff
+		// Expedition specific stuff. See comment in loader.
 		if (warehouse.m_portdock->expedition_started()) {
-			Warehouse & n_warehouse(const_cast<Warehouse &>(warehouse));
-			// Expedition workers
-			std::vector<Warehouse::Expedition_Worker *> & ew = n_warehouse.get_expedition_workers();
-			fw.Unsigned8(ew.size());
-			for (uint8_t i = 0; i < ew.size(); ++i) {
-				Request const * const r = ew.at(i)->worker_request;
-				fw.Unsigned8(r ? 1 : 0);
-				if (r)
-					r->Write(fw, game, mos);
-				else {
-					assert(!ew.at(i)->worker_request);
-					Worker const * const w = ew.at(i)->worker;
-					assert(mos.is_object_known(*w));
-					fw.Unsigned32(mos.get_object_file_index(*w));
-				}
-			}
-
-			// Expedition WaresQueues
-			std::vector<WaresQueue *> & l_expedition_wares = n_warehouse.get_wares_queue_vector();
-			fw.Unsigned8(l_expedition_wares.size());
-			for (uint8_t i = 0; i < l_expedition_wares.size(); ++i)
-				l_expedition_wares.at(i)->Write(fw, game, mos);
+			warehouse.m_portdock->expedition_bootstrap()->save(fw, game, mos);
 		}
 	}
 }

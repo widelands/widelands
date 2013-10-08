@@ -99,6 +99,7 @@ public:
 	int place_road(lua_State * L);
 	int place_building(lua_State * L);
 	int conquer(lua_State * L);
+	int get_workers(lua_State* L);
 
 	/*
 	 * C methods

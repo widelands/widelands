@@ -89,12 +89,14 @@ Economy::~Economy()
 
 
 /**
- * \return an arbitrary flag in this economy, or 0 if no flag exists
+ * \return an arbitrary flag in this economy.
  */
-Flag & Economy::get_arbitrary_flag()
+Flag* Economy::get_arbitrary_flag()
 {
-	assert(m_flags.size());
-	return *m_flags[0];
+	if (m_flags.empty())
+		return nullptr;
+
+	return m_flags[0];
 }
 
 /**
@@ -740,7 +742,7 @@ void Economy::_process_requests(Game & game, RSPairStruct & s)
 			}
 		}
 
-		int32_t const priority = req.get_priority (cost);
+		int32_t const priority = req.get_priority(cost);
 		if (priority < 0)
 			continue;
 

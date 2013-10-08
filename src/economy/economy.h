@@ -111,7 +111,10 @@ public:
 	std::vector<Flag *>::size_type get_nrflags() const {return m_flags.size();}
 	void    add_flag(Flag &);
 	void remove_flag(Flag &);
-	Flag & get_arbitrary_flag();
+
+	// Returns an arbitrary flag or nullptr if this is an economy without flags
+	// (i.e. an Expedition ship).
+	Flag* get_arbitrary_flag();
 
 	void set_ware_target_quantity  (Ware_Index, uint32_t, Time);
 	void set_worker_target_quantity(Ware_Index, uint32_t, Time);

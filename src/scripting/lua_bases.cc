@@ -21,6 +21,7 @@
 
 #include <lua.hpp>
 
+#include "economy/economy.h"
 #include "logic/checkstep.h"
 #include "logic/player.h"
 #include "scripting/lua_map.h"
@@ -162,6 +163,7 @@ const MethodType<L_PlayerBase> L_PlayerBase::Methods[] = {
 	METHOD(L_PlayerBase, place_road),
 	METHOD(L_PlayerBase, place_building),
 	METHOD(L_PlayerBase, conquer),
+	METHOD(L_PlayerBase, get_workers),
 	{0, 0},
 };
 const PropertyType<L_PlayerBase> L_PlayerBase::Properties[] = {
@@ -447,6 +449,30 @@ int L_PlayerBase::conquer(lua_State * L) {
 	return 0;
 }
 
+/* RST
+	.. method:: get_workers(name)
+
+		Returns the number of workers of this type in the players stock. This does not implement
+		everything that :class:`HasWares` offers.
+
+		:arg name: name of the worker to get
+		:type name: :class:`string`.
+		:returns: the number of wares
+*/
+// UNTESTED
+int L_PlayerBase::get_workers(lua_State * L) {
+	Player& player = get(L, get_egbase(L));
+	const std::string workername = luaL_checkstring(L, -1);
+
+	const Ware_Index worker = player.tribe().worker_index(workername);
+
+	uint32_t nworkers = 0;
+	for (uint32_t i = 0; i < player.get_nr_economies(); ++i) {
+		 nworkers += player.get_economy_by_number(i)->stock_worker(worker);
+	}
+	lua_pushuint32(L, nworkers);
+	return 1;
+}
 
 
 /*
@@ -486,4 +512,3 @@ void luaopen_wlbases(lua_State * const L) {
 }
 
 };
-

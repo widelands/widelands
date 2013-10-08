@@ -33,6 +33,7 @@
 #include "logic/battle.h"
 #include "logic/carrier.h"
 #include "logic/editor_game_base.h"
+#include "logic/expedition_bootstrap.h"
 #include "logic/findbob.h"
 #include "logic/findnode.h"
 #include "logic/game.h"
@@ -110,7 +111,7 @@ void WarehouseSupply::set_economy(Economy * const e)
 
 
 /// Add wares and update the economy.
-void WarehouseSupply::add_wares     (Ware_Index const id, uint32_t const count)
+void WarehouseSupply::add_wares(Ware_Index const id, uint32_t const count)
 {
 	if (!count)
 		return;
@@ -122,7 +123,7 @@ void WarehouseSupply::add_wares     (Ware_Index const id, uint32_t const count)
 
 
 /// Remove wares and update the economy.
-void WarehouseSupply::remove_wares  (Ware_Index const id, uint32_t const count)
+void WarehouseSupply::remove_wares(Ware_Index const id, uint32_t const count)
 {
 	if (!count)
 		return;
@@ -134,7 +135,7 @@ void WarehouseSupply::remove_wares  (Ware_Index const id, uint32_t const count)
 
 
 /// Add workers and update the economy.
-void WarehouseSupply::add_workers   (Ware_Index const id, uint32_t const count)
+void WarehouseSupply::add_workers(Ware_Index const id, uint32_t const count)
 {
 	if (!count)
 		return;
@@ -236,21 +237,16 @@ Warehouse Building
 
 /// Warehouse Descr
 Warehouse_Descr::Warehouse_Descr
-	(char const * const _name, char const * const _descname,
-	 const std::string & directory, Profile & prof, Section & global_s,
-	 const Tribe_Descr & _tribe)
-:
-	Building_Descr(_name, _descname, directory, prof, global_s, _tribe),
-m_conquers    (0),
-m_heal_per_second(0)
+	(char const* const _name, char const* const _descname,
+	 const std::string& directory, Profile& prof, Section& global_s, const Tribe_Descr& _tribe)
+	: Building_Descr(_name, _descname, directory, prof, global_s, _tribe),
+	  m_conquers(0),
+	  m_heal_per_second(0)
 {
-	m_heal_per_second     = global_s.get_safe_int("heal_per_second");
-	if
-		((m_conquers =
-		  	prof.get_safe_section("global").get_positive("conquers", 0)))
+	m_heal_per_second = global_s.get_safe_int("heal_per_second");
+	if ((m_conquers = prof.get_safe_section("global").get_positive("conquers", 0)))
 		m_workarea_info[m_conquers].insert(descname() + _(" conquer"));
 }
-
 
 /*
 ==============================
@@ -289,12 +285,6 @@ Warehouse::~Warehouse()
 {
 	delete m_supply;
 	delete[] m_next_worker_without_cost_spawn;
-	for (uint8_t i = 0; i < m_expedition_wares.size(); ++i) {
-		if (m_expedition_wares.at(i)) {
-			m_expedition_wares.at(i)->cleanup();
-			delete m_expedition_wares.at(i);
-		}
-	}
 }
 
 /**
@@ -508,34 +498,9 @@ void Warehouse::init_portdock(Editor_Game_Base & egbase)
 	}
 	m_portdock->init(egbase);
 
-	if (get_economy() != 0)
+	if (get_economy() != nullptr)
 		m_portdock->set_economy(get_economy());
 }
-
-
-/// PortDock's expedition waresqueue
-WaresQueue & Warehouse::waresqueue(Ware_Index const wi) {
-	container_iterate_const(std::vector<WaresQueue *>, m_expedition_wares, i)
-		if ((*i.current)->get_ware() == wi)
-			return **i.current;
-	throw wexception
-		("%s (%u) (building %s) has no WaresQueue for %u",
-		 name().c_str(), serial(), name().c_str(), wi.value());
-}
-
-/// keeps track of arriving expedition workers
-void Warehouse::handle_expedition_worker_callback(Game & g, Request & r, Worker * w) {
-	for (uint8_t i = 0; i < m_expedition_workers.size(); ++i)
-		if (m_expedition_workers.at(i)->worker_request == &r) {
-			m_expedition_workers.at(i)->worker_request = 0;
-			m_expedition_workers.at(i)->worker = w;
-			delete &r;
-			// Check if this one was the last one we waited for
-			return m_portdock->check_expedition_wares_and_workers(g);
-		}
-	assert(false);
-}
-
 
 void Warehouse::destroy(Editor_Game_Base & egbase)
 {
@@ -562,17 +527,7 @@ void Warehouse::cleanup(Editor_Game_Base & egbase)
 {
 	if (m_portdock) {
 		m_portdock->remove(egbase);
-		m_portdock = 0;
-		// Wares are deleted later on, after Building::cleanup was run
-		for (uint8_t i = 0; i < m_expedition_workers.size(); ++i) {
-			if (m_expedition_workers.at(i)->worker_request)
-				delete m_expedition_workers.at(i)->worker_request;
-			if (m_expedition_workers.at(i)->worker) {
-				m_expedition_workers.at(i)->worker->cleanup(egbase);
-				delete m_expedition_workers.at(i)->worker;
-			}
-			delete m_expedition_workers.at(i);
-		}
+		m_portdock = nullptr;
 	}
 
 	while (!m_planned_workers.empty()) {
@@ -724,13 +679,8 @@ void Warehouse::set_economy(Economy * const e)
 			(*req_it.current)->set_economy(e);
 	}
 
-	// Take care about the expeditions WaresQueues
-	for (uint8_t i = 0; i < m_expedition_wares.size(); ++i) {
-		if (old)
-			m_expedition_wares.at(i)->remove_from_economy(*old);
-		if (e)
-			m_expedition_wares.at(i)->add_to_economy(*e);
-	}
+	if (m_portdock)
+		m_portdock->set_economy(e);
 
 	if (e)
 		e->add_warehouse(*this);
@@ -897,38 +847,30 @@ void Warehouse::incorporate_worker(Editor_Game_Base & egbase, Worker & w)
 {
 	assert(w.get_owner() == &owner());
 
-	// Do not add workers, that are in the expedition list
-	bool expedition_worker = false;
-	if (!m_expedition_workers.empty())
-		for (uint8_t i = 0; i < m_expedition_workers.size() && !expedition_worker; ++i)
-			if (m_expedition_workers.at(i)->worker && &w == m_expedition_workers.at(i)->worker)
-				expedition_worker = true;
+	if (WareInstance * const item = w.fetch_carried_item(egbase))
+		incorporate_item(egbase, *item); //  rescue an item
 
-	if (!expedition_worker) {
-		if (WareInstance * const item = w.fetch_carried_item(egbase))
-			incorporate_item(egbase, *item); //  rescue an item
+	Ware_Index worker_index = tribe().worker_index(w.name().c_str());
+	m_supply->add_workers(worker_index, 1);
 
-		Ware_Index worker_index = tribe().worker_index(w.name().c_str());
-		m_supply->add_workers(worker_index, 1);
-
-		//  We remove carriers, but we keep other workers around.
-		//  FIXME Remove all workers that do not have properties such as experience.
-		//  FIXME And even such workers should be removed and only a small record
-		//  FIXME with the experience (and possibly other data that must survive)
-		//  FIXME may be kept.
-		//  FIXME When this is done, the get_incorporated_workers method above must
-		//  FIXME be reworked so that workers are recreated, and rescheduled for
-		//  FIXME incorporation.
-		if (dynamic_cast<Carrier const *>(&w)) {
-			w.remove(egbase);
-			return;
-		}
-
-		// Incorporate the worker
-		if (!m_incorporated_workers.count(worker_index))
-			m_incorporated_workers[worker_index] = std::vector<Worker *>();
-		m_incorporated_workers[worker_index].push_back(&w);
+	//  We remove carriers, but we keep other workers around.
+	//  FIXME Remove all workers that do not have properties such as experience.
+	//  FIXME And even such workers should be removed and only a small record
+	//  FIXME with the experience (and possibly other data that must survive)
+	//  FIXME may be kept.
+	//  FIXME When this is done, the get_incorporated_workers method above must
+	//  FIXME be reworked so that workers are recreated, and rescheduled for
+	//  FIXME incorporation.
+	if (dynamic_cast<Carrier const *>(&w)) {
+		w.remove(egbase);
+		return;
 	}
+
+	// Incorporate the worker
+	if (!m_incorporated_workers.count(worker_index))
+		m_incorporated_workers[worker_index] = std::vector<Worker *>();
+	m_incorporated_workers[worker_index].push_back(&w);
+
 	w.set_location(0); //  no longer in an economy
 
 	if (upcast(Game, game, &egbase)) {
@@ -1384,6 +1326,13 @@ void Warehouse::check_remove_stock(Game & game)
 		worker.start_task_leavebuilding(game, true);
 		break;
 	}
+}
+
+WaresQueue& Warehouse::waresqueue(Ware_Index index) {
+	assert(m_portdock != nullptr);
+	assert(m_portdock->expedition_bootstrap() != nullptr);
+
+	return m_portdock->expedition_bootstrap()->waresqueue(index);
 }
 
 /*

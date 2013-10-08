@@ -275,7 +275,6 @@ m_anim(0),
 m_animstart(0),
 m_leave_time(0),
 m_defeating_player(0),
-m_priority (DEFAULT_PRIORITY),
 m_seeing(false)
 {}
 
@@ -783,15 +782,10 @@ void Building::draw_help
 	}
 }
 
-/**
-* Get priority of a requested ware.
-* Currently always returns base priority - to be extended later
- */
 int32_t Building::get_priority
-	(int32_t const type, Ware_Index const ware_index, bool const adjust) const
+	(WareWorker type, Ware_Index const ware_index, bool adjust) const
 {
-	int32_t priority = m_priority;
-
+	int32_t priority = DEFAULT_PRIORITY;
 	if (type == wwWARE) {
 		// if priority is defined for specific ware,
 		// combine base priority and ware priority
@@ -827,10 +821,6 @@ void Building::collect_priorities
 /**
 * Set base priority for this building (applies for all wares)
  */
-void Building::set_priority(int32_t const new_priority) {
-	m_priority = new_priority;
-}
-
 void Building::set_priority
 	(int32_t    const type,
 	 Ware_Index const ware_index,
