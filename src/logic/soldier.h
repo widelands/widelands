@@ -39,6 +39,7 @@ class Battle;
 #define HP_FRAMECOLOR RGBColor(255, 255, 255)
 
 struct Soldier_Descr : public Worker_Descr {
+	friend class Economy;
 	Soldier_Descr
 		(char const * const _name, char const * const _descname,
 		 const std::string & directory, Profile &, Section & global_s,

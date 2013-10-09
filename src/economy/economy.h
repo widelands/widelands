@@ -20,6 +20,7 @@
 #ifndef ECONOMY_H
 #define ECONOMY_H
 
+#include <memory>
 #include <set>
 #include <vector>
 
@@ -34,15 +35,17 @@
 
 
 namespace Widelands {
-class Player;
+
 class Game;
-struct Flag;
-struct Route;
-struct RSPairStruct;
+class Player;
+class Soldier;
 class Warehouse;
+struct Flag;
+struct RSPairStruct;
 struct Request;
-struct Supply;
+struct Route;
 struct Router;
+struct Supply;
 
 /**
  * Each Economy represents all building and flags, which are connected over the same
@@ -228,6 +231,9 @@ private:
 	 * excessive calls to the request/supply balancing logic.
 	 */
 	uint32_t m_request_timerid;
+
+	static std::unique_ptr<Soldier> m_soldier_prototype;
+
 };
 
 }
