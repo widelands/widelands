@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: Widelands svn4804\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2013-09-15 17:41+0000\n"
-"PO-Revision-Date: 2013-09-17 10:55+0000\n"
-"Last-Translator: Albert Einstein <aaaaa@tlen.pl>\n"
+"PO-Revision-Date: 2013-09-24 10:59+0000\n"
+"Last-Translator: Wesmania <ikk_pl@yahoo.co.uk>\n"
 "Language-Team: Language <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-09-18 04:43+0000\n"
-"X-Generator: Launchpad (build 16765)\n"
+"X-Launchpad-Export-Date: 2013-09-25 05:12+0000\n"
+"X-Generator: Launchpad (build 16771)\n"
 
 #: ../../txts/README.lua:73
 msgid "(CTRL+) 0-9: Remember and go to previously remembered locations"
@@ -34,6 +34,8 @@ msgid ""
 "helps\n"
 "demonstrate the issue, please include one or more screenshots."
 msgstr ""
+"- Jeśli błąd dotyczy wyświetlania czegoś w zły sposób lub pomoże to w\n"
+"przedstawieniu problemu, proszę zawrzeć jeden lub więcej zrzutów ekranu."
 
 #: ../../txts/README.lua:114
 msgid ""
@@ -41,6 +43,9 @@ msgid ""
 "crashes where it can be hard to tell exactly what is triggering it), please\n"
 "include that too. For more information, see the section on Replays below."
 msgstr ""
+"- Jeśli masz zapis gry lub powtórkę demonstrującą błąd (np. dla błędów,\n"
+"których przyczynę trudno dokładnie ustalić), załącz ją również. Więcej\n"
+"informacji znajdziesz w sekcji \"Powtórki\" poniżej."
 
 #: ../../txts/README.lua:106
 msgid ""
@@ -48,6 +53,9 @@ msgid ""
 "as\n"
 "some bugs can be platform specific."
 msgstr ""
+"- Proszę zawrzeć informację, na jakim systemie operacyjnym działa "
+"Widelands.\n"
+"Niektóre błędy mogą być związane z używaną platformą."
 
 #: ../../txts/README.lua:101
 msgid ""
@@ -67,6 +75,8 @@ msgid ""
 "the revision number if you are running a development version or a nightly "
 "build.)"
 msgstr ""
+"- Której wersji używasz (tzn. zarówno numer builda jak i numer rewizji\n"
+"jeśli używasz wersji rozwojowej lub codziennej kompilacji)"
 
 #: ../../txts/README.lua:75
 msgid ".: goes to next location"
@@ -218,7 +228,7 @@ msgstr "F11: wykonuje zrzut ekranu"
 
 #: ../../txts/README.lua:76
 msgid "F6: shows the debug console (only in debug-builds)"
-msgstr ""
+msgstr "F6: pokazuje konsolę debugu (tylko w buildach debugowych)"
 
 #: ../../txts/README.lua:71
 msgid "F: toggles fullscreen (if supported by OS)"
@@ -307,11 +317,12 @@ msgstr "I         Aktywuje narzędzie informacyjne"
 
 #: ../../txts/README.lua:69
 msgid "I: toggles stock inventory"
-msgstr ""
+msgstr "I: przełącza spis składów"
 
 #: ../../txts/README.lua:93
 msgid "If you encounter a bug, please report it to our bugtracker:"
 msgstr ""
+"Jeśli natrafisz na buga, Powiadom nas proszę o nim na naszym bugtrackerze:"
 
 #: ../../txts/README.lua:52
 msgid ""
@@ -320,6 +331,9 @@ msgid ""
 "are\n"
 "removed."
 msgstr ""
+"Jeśli przytrzymasz CTRL podczas budowy drogi, automatycznie zostaną\n"
+"umieszczone flagi. Jeśli przytrzymasz CTRL podczas usuwania drogi,\n"
+"wszystkie flagi do pierwszego skrzyżowania zostaną usunięte."
 
 #: ../../txts/tips/general_game.tip:58
 msgid ""
@@ -336,6 +350,9 @@ msgid ""
 "Wiki\n"
 "and a detailed description of the tribe economies in our online encyclopedia."
 msgstr ""
+"Jeśli szukasz dokumentacji lub pomocy z Widelands lub edytorem Widelands,\n"
+"sprawdź naszą stronę domową. Na naszej Wiki znajdziesz aktualną pomoc, zaś\n"
+"w naszej encyklopedii online dokładne opisy ekonomii plemion."
 
 #: ../../txts/README.lua:80
 msgid ""
@@ -350,6 +367,10 @@ msgid ""
 "economic infrastructure, explore the land around you and face rivaling\n"
 "tribes."
 msgstr ""
+"W tej grze zaczynasz na małym kawałku ziemi z niewielką ilością surowców.\n"
+"Używając tego zbudujesz imperium z tysiącami mieszkańców. Na drodze\n"
+"do celu będziesz musiał stworzyć infrastrukturę gospodarczą, zbadać teren\n"
+"i stawić czoła rywalizującym plemionom."
 
 #: ../../txts/README.lua:18
 #: ../../txts/editor_readme:7
@@ -403,7 +424,7 @@ msgstr "M        otwiera okno minimapy"
 
 #: ../../txts/README.lua:65
 msgid "M: toggles minimap"
-msgstr ""
+msgstr "M: przełącza mini-mapę"
 
 #: ../../txts/tips/general_game.tip:34
 msgid ""
@@ -428,15 +449,15 @@ msgstr "Muzycy"
 
 #: ../../txts/README.lua:66
 msgid "N: toggles messages ('news')"
-msgstr ""
+msgstr "N: przełącza okno wiadomości"
 
 #: ../../txts/developers:181
 msgid ""
 "NOTE: this list holds people that translated Widelands before we moved to "
 "launchpad.net. "
 msgstr ""
-"UWAGA: na tej liście są wypisani tylko ludzie, którzy tłumaczyli Widelands "
-"przed przesunięciem na launchpad.net. "
+"UWAGA: na tej liście są wypisane osoby, które tłumaczyły Widelands przed "
+"przeniesieniem na launchpad.net. "
 
 #: ../../txts/tips/general_game.tip:54
 msgid ""
@@ -584,6 +605,10 @@ msgid ""
 "~/.widelands/replays directory on Linux and Mac OS X. On Windows,\n"
 "they are in the 'replays' subdirectory of your Widelands installation."
 msgstr ""
+"Powtórki są bardzo przydatną pomocą w znajdowaniu błędów\n"
+"w logice gry, więc mogą być użytecznym załącznikiem do raportu o błędach.\n"
+"Pliki powtórek są zapisywane w katalogu ~/.widelands/replays na Linuksie i\n"
+"Mac OS X. Na Windowsie są w podkatalogu 'replays' w miejscu instalacji gry."
 
 #: ../../txts/README.lua:91
 msgid "Reporting Bugs"
@@ -616,7 +641,7 @@ msgstr ""
 
 #: ../../txts/README.lua:64
 msgid "SPACE: toggles build-help"
-msgstr ""
+msgstr "Spacja: przełącza ikony budowy"
 
 #: ../../txts/developers:182
 msgid ""
@@ -735,6 +760,9 @@ msgid ""
 "left\n"
 "mousebutton while holding down CTRL."
 msgstr ""
+"Aby zamknąć otwarte okno, kliknij je prawym przyciskiem myszy. Aby je\n"
+"zmaksymalizować lub zminimalizować, kliknij na pasku tytułu okna środkowym\n"
+"przyciskiem myszy lub lewym przyciskiem myszy z przytrzymanym klawiszem CTRL."
 
 #: ../../txts/developers:366
 msgid "Translation"
@@ -788,6 +816,15 @@ msgid ""
 "a\n"
 "different version of the game."
 msgstr ""
+"Przycisk \"Obejrzyj powtórkę\" w menu głównym precyzyjnie odtworzy "
+"poprzednią\n"
+"rozgrywkę do obejrzenia. Miej na uwadze, że nawet niewielkie zmiany w "
+"plikach\n"
+"danych gry lub pliku wykonywalnym Widelands mogą sprawić, że powtórka "
+"stanie\n"
+"się niekompatybilna i ulegnie desynchronizacji. Działa to na podobnej "
+"zasadzie, co\n"
+"desynchronizacje gier w sieci, gdy gracze mają różne wersje gry."
 
 #: ../../txts/license:16
 msgid "We are also shipping the GPL as text document with Widelands itself."
@@ -806,12 +843,20 @@ msgid ""
 "started\n"
 "through playable tutorials."
 msgstr ""
+"Widelands to darmowa i otwarta strategia czasu rzeczywistego z kampaniami\n"
+"dla jednego gracza i trybem dla wielu graczy. Gra zainspirowana została "
+"przez grę\n"
+"Settlers II, lecz jest zdecydowanie bardziej złożona i zróżnicowana. Pomimo "
+"to,\n"
+"samouczki w formie kampanii pozwalają szybko opanować podstawy."
 
 #: ../../txts/README.lua:35
 msgid ""
 "Widelands is licensed under the GNU General Public License (GPL). For more\n"
 "information, see the file 'COPYING'."
 msgstr ""
+"Widelands oparte jest na licencji GNU General Public License (GPL). Więcej\n"
+"informacji znajdziesz w pliku 'COPYING'."
 
 #: ../../txts/README.lua:40
 msgid ""
@@ -824,6 +869,14 @@ msgid ""
 "or\n"
 "creating new maps - get in touch on our homepage."
 msgstr ""
+"Widelands jest niemal kompletne pod względem mechaniki gry i stanowi dobrą\n"
+"rozrywkę tak dla jednego, jak i dla wielu graczy. Wciąż jednak pozostaje "
+"wiele do\n"
+"zrobienia. Jeśli chciałbyś pomóc rozwijać grę - tworząc grafikę, naprawiając "
+"błędy\n"
+"lub dodając nową funkcjonalność, tłumacząc grę na swój język czy tworząc "
+"nowe\n"
+"mapy - skontaktuj się z nami na naszej stronie głównej."
 
 #: ../../txts/README.lua:120
 msgid ""
@@ -836,6 +889,14 @@ msgid ""
 "tell\n"
 "you the time you started the game."
 msgstr ""
+"Widelands zapisuje przebieg każdej twojej gry w dwóch plikach. Jeden z nich "
+"ma\n"
+"rozszerzenie .wrpl.wgf i zawiera początkowy zapis gry. Drugi ma rozszerzenie "
+".wrpl\n"
+"i zawiera wszystkie polecenia wykonane przez graczy, takie, jak budowa "
+"drogi\n"
+"czy zaatakowanie przeciwnika. Nazwy plików informują o czasie rozpoczęcia "
+"gry."
 
 #: ../../txts/tips/editor.tip:2
 msgid ""
@@ -876,6 +937,8 @@ msgid ""
 "You can skip confirmation windows for irreversible actions if you hold CTRL\n"
 "while clicking on the action button."
 msgstr ""
+"Możesz pominąć okno potwierdzenia dla nieodwracalnej akcji przytrzymując\n"
+"klawisz CTRL przy klikaniu na przycisk tej akcji."
 
 #: ../../txts/tips/multiplayer.tip:6
 msgid ""

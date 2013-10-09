@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: Widelands svn4530\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2013-09-15 17:41+0000\n"
-"PO-Revision-Date: 2011-12-27 12:33+0000\n"
+"PO-Revision-Date: 2013-09-24 11:48+0000\n"
 "Last-Translator: Angelo Locritani <Unknown>\n"
 "Language-Team: Italiano <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-09-16 04:48+0000\n"
-"X-Generator: Launchpad (build 16761)\n"
+"X-Launchpad-Export-Date: 2013-09-25 05:12+0000\n"
+"X-Generator: Launchpad (build 16771)\n"
 
 #: ../../worlds/greenland/conf:58
 msgid "Alder"
@@ -54,11 +54,11 @@ msgstr "Tasso"
 
 #: ../../worlds/greenland/terrainconf:79
 msgid "Barren steppe"
-msgstr ""
+msgstr "Steppa arida"
 
 #: ../../worlds/greenland/terrainconf:31
 msgid "Beach"
-msgstr ""
+msgstr "Spiaggia"
 
 #: ../../worlds/greenland/conf:66
 msgid "Beech"
@@ -192,7 +192,7 @@ msgstr "Larice minuscolo"
 
 #: ../../worlds/greenland/terrainconf:91
 msgid "Lava"
-msgstr ""
+msgstr "Lava"
 
 #: ../../worlds/greenland/conf:88
 msgid "Lynx"
@@ -204,39 +204,39 @@ msgstr "Martora"
 
 #: ../../worlds/greenland/terrainconf:43
 msgid "Meadow1"
-msgstr ""
+msgstr "Prato 1"
 
 #: ../../worlds/greenland/terrainconf:49
 msgid "Meadow2"
-msgstr ""
+msgstr "Prato 2"
 
 #: ../../worlds/greenland/terrainconf:55
 msgid "Meadow3"
-msgstr ""
+msgstr "Prato 3"
 
 #: ../../worlds/greenland/terrainconf:85
 msgid "Meadow4"
-msgstr ""
+msgstr "Prato 4"
 
 #: ../../worlds/greenland/terrainconf:96
 msgid "Mountain meadow"
-msgstr ""
+msgstr "Pascolo di montagna"
 
 #: ../../worlds/greenland/terrainconf:13
 msgid "Mountain1"
-msgstr ""
+msgstr "Montagna 1"
 
 #: ../../worlds/greenland/terrainconf:61
 msgid "Mountain2"
-msgstr ""
+msgstr "Montagna 2"
 
 #: ../../worlds/greenland/terrainconf:67
 msgid "Mountain3"
-msgstr ""
+msgstr "Montagna 3"
 
 #: ../../worlds/greenland/terrainconf:73
 msgid "Mountain4"
-msgstr ""
+msgstr "Montagna 4"
 
 #: ../../worlds/greenland/conf:22
 #: ../../worlds/greenland/conf:23
@@ -300,7 +300,7 @@ msgstr "Scheletro"
 
 #: ../../worlds/greenland/terrainconf:19
 msgid "Snow"
-msgstr ""
+msgstr "Neve"
 
 #: ../../worlds/greenland/conf:54
 msgid "Spruce"
@@ -330,7 +330,7 @@ msgstr "Megaliti"
 
 #: ../../worlds/greenland/terrainconf:7
 msgid "Steppe"
-msgstr ""
+msgstr "Steppa"
 
 #: ../../worlds/greenland/conf:40
 #: ../../worlds/greenland/conf:41
@@ -343,7 +343,7 @@ msgstr "Pietre"
 
 #: ../../worlds/greenland/terrainconf:24
 msgid "Swamp"
-msgstr ""
+msgstr "Palude"
 
 #: ../../worlds/greenland/conf:2
 msgid "The Widelands Development Team"

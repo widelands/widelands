@@ -7,29 +7,29 @@ msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2013-09-15 17:41+0000\n"
-"PO-Revision-Date: 2011-03-21 20:18+0000\n"
-"Last-Translator: Jari Hautio <Unknown>\n"
+"PO-Revision-Date: 2013-10-02 14:58+0000\n"
+"Last-Translator: Teppo Mäenpää <Unknown>\n"
 "Language-Team: Finnish <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-09-16 04:36+0000\n"
-"X-Generator: Launchpad (build 16761)\n"
+"X-Launchpad-Export-Date: 2013-10-03 05:09+0000\n"
+"X-Generator: Launchpad (build 16791)\n"
 "X-Poedit-Country: FINLAND\n"
 "X-Poedit-Language: Finnish\n"
 "X-Poedit-SourceCharset: utf-8\n"
 
 #: ../../txts/README.lua:73
 msgid "(CTRL+) 0-9: Remember and go to previously remembered locations"
-msgstr ""
+msgstr "(CTRL+) 0-9: Tallenna ja palaa kohteisiin"
 
 #: ../../txts/README.lua:74
 msgid ",: goes to previous location"
-msgstr ""
+msgstr ",: palaa edelliseen kohteeseen"
 
 #: ../../txts/README.lua:99
 msgid "- Detailed steps on how to trigger the bug, if possible."
-msgstr ""
+msgstr "- Yksityiskohtaiset ohjeet bugin liipaisemiseen, jos pystyt"
 
 #: ../../txts/README.lua:111
 msgid ""
@@ -37,6 +37,8 @@ msgid ""
 "helps\n"
 "demonstrate the issue, please include one or more screenshots."
 msgstr ""
+"- Jos bugi koskee jotain virheellisesti piirtyvää, liitä "
+"kuvaruutukaappauksia jos voit."
 
 #: ../../txts/README.lua:114
 msgid ""
@@ -44,6 +46,7 @@ msgid ""
 "crashes where it can be hard to tell exactly what is triggering it), please\n"
 "include that too. For more information, see the section on Replays below."
 msgstr ""
+"- Voit liittää pelitallenteen, jos sellainen helpottaa ongelman toistamista."
 
 #: ../../txts/README.lua:106
 msgid ""
@@ -51,16 +54,18 @@ msgid ""
 "as\n"
 "some bugs can be platform specific."
 msgstr ""
+"- Kerro, mitä käyttöjärjestelmää käytät; jotkin bugit ovat "
+"alustariippuvaisia."
 
 #: ../../txts/README.lua:101
 msgid ""
 "- What you expected to happen when performing the steps and what actually "
 "happened."
-msgstr ""
+msgstr "- Mitä piti tapahtua ja mitä tapahtui."
 
 #: ../../txts/README.lua:109
 msgid "- Which map you were playing when the bug occurred."
-msgstr ""
+msgstr "- Mitä karttaa pelasit kun ongelma ilmeni."
 
 #: ../../txts/README.lua:103
 msgid ""
@@ -68,11 +73,11 @@ msgid ""
 "or\n"
 "the revision number if you are running a development version or a nightly "
 "build.)"
-msgstr ""
+msgstr "-Mitä Widelandsin versiota käytit."
 
 #: ../../txts/README.lua:75
 msgid ".: goes to next location"
-msgstr ""
+msgstr ".: mene seuraavaan kohteeseen"
 
 #: ../../txts/editor_readme:43
 msgid "1-0      Changes tools size"
@@ -108,6 +113,8 @@ msgid ""
 "An economy consists of all buildings and flags connected by roads. The "
 "supplies and demands of buildings are handled in its economy."
 msgstr ""
+"Yksi talous koostuu rakennuksista ja ne toisiinsa liittävistä teistä. "
+"Tavaroiden tuottaminen ja kuluttaminen tapahtuu talouden piirissä."
 
 #: ../../txts/tips/general_game.tip:22
 msgid ""
@@ -120,7 +127,7 @@ msgstr ""
 
 #: ../../txts/developers:171
 msgid "Atlantean"
-msgstr ""
+msgstr "Atlantislainen"
 
 #: ../../txts/developers:161
 msgid "Barbarian"
@@ -143,7 +150,7 @@ msgstr ""
 
 #: ../../txts/README.lua:77
 msgid "CTRL+F10: quits the game immediately"
-msgstr ""
+msgstr "CTRL + F10: poistuu välittömästi"
 
 #: ../../txts/editor_readme:39
 msgid "CTRL+L   Load Map"
@@ -171,7 +178,7 @@ msgstr "Ohjelmoijat"
 
 #: ../../txts/license:7
 msgid "Copyright 2002 - 2013 by the Widelands Development Team."
-msgstr ""
+msgstr "(C) 2002 - 2013 Widelands-kehittäjät"
 
 #: ../../txts/developers:186
 msgid "Czech"
@@ -179,7 +186,7 @@ msgstr "Tsekki"
 
 #: ../../txts/README.lua:83
 msgid "DELETE: archives the current message"
-msgstr ""
+msgstr "DELETE: siirrä viesti arkistoon"
 
 #: ../../txts/developers:193
 msgid "Dansk"
@@ -215,15 +222,16 @@ msgstr "F        Koko ruudun tila käyttöön/pois"
 
 #: ../../txts/README.lua:78
 msgid "F11: takes a screenshot"
-msgstr ""
+msgstr "F11: ota kuvaruutukaappaus"
 
 #: ../../txts/README.lua:76
 msgid "F6: shows the debug console (only in debug-builds)"
-msgstr ""
+msgstr "F6: näytä debuggauskonsoli. Tämä toimii vain, debug-käännöksissä."
 
 #: ../../txts/README.lua:71
 msgid "F: toggles fullscreen (if supported by OS)"
 msgstr ""
+"F: kokoruutumoodi päälle/pois, jos käyttöjärjestelmä tukee toimintoa."
 
 #: ../../txts/developers:206
 msgid "Finnish"
@@ -239,7 +247,7 @@ msgstr "Ranska"
 
 #: ../../txts/README.lua:82
 msgid "G: jumps to location corresponding to current message"
-msgstr ""
+msgstr "G: siirry siihen kohtaan karttaa, jota viesti koskee."
 
 #: ../../txts/developers:219
 msgid "Galician"
@@ -282,10 +290,13 @@ msgid ""
 "cases the complete opposite of the normal tool (for example deletion of an "
 "object instead of placing one)."
 msgstr ""
+"Vaihtoehtoisen työkalun saat käytöön, kun pidät SHIFT-näppäintä painettuna. "
+"Useissa tapauksissa vaihtoehtotyökalu tekee alkuperäisen työkalun "
+"käänteistoiminnon."
 
 #: ../../txts/README.lua:72
 msgid "Home: centers main mapview on starting location"
-msgstr ""
+msgstr "Home: keskittää kartan aloituspaikkaasi."
 
 #: ../../txts/developers:23
 #: ../../txts/developers:347
@@ -306,11 +317,12 @@ msgstr "I        Aktivoi infotyökalu"
 
 #: ../../txts/README.lua:69
 msgid "I: toggles stock inventory"
-msgstr ""
+msgstr "I: näyttää tai piiloittaa varastoluettelon."
 
 #: ../../txts/README.lua:93
 msgid "If you encounter a bug, please report it to our bugtracker:"
 msgstr ""
+"Jos törmäät bugiin, kerro siitä meidän bugiraportointijärjestelmällemme:"
 
 #: ../../txts/README.lua:52
 msgid ""
@@ -319,12 +331,18 @@ msgid ""
 "are\n"
 "removed."
 msgstr ""
+"Jos pidät CTRL-näppäintä pohjassa kun rakennat tietä, tielle laitetaan "
+"lippuja automaattisesti.\n"
+"Jos pidät CTRL-näppäintä pohjassa kun purat tietä, liput poistetaan "
+"automaattisesti."
 
 #: ../../txts/tips/general_game.tip:58
 msgid ""
 "If you like to live dangerously, pressing Ctrl while clicking the enhance, "
 "dismantle or destroy building buttons will skip the confirmation."
 msgstr ""
+"Jos pidät CTRL-näppäintä pohjassa, sivuutan turhat varmistuskysymykset "
+"rakenuksia päivitettäessä ja tuhottaessa. Vain rohkeille!"
 
 #: ../../txts/README.lua:87
 msgid ""
@@ -333,11 +351,14 @@ msgid ""
 "Wiki\n"
 "and a detailed description of the tribe economies in our online encyclopedia."
 msgstr ""
+"Jos tarvitset lisäohjeita Widelandsin tai editorin kanssa, kotisivumme "
+"auttaa.\n"
+"Wikisivuilta löytyy myös yksityiskohtaista tietoja eri heimoista."
 
 #: ../../txts/README.lua:80
 msgid ""
 "In the message window, the following additional shortcuts are available:"
-msgstr ""
+msgstr "Seuraavat pikakomennot toimivat viesti-ikkunassa:"
 
 #: ../../txts/README.lua:25
 msgid ""
@@ -380,7 +401,7 @@ msgstr "Lisenssi"
 
 #: ../../txts/license:4
 msgid "Licensing information for Widelands"
-msgstr ""
+msgstr "Pelin lisenssi:"
 
 #: ../../txts/tips/editor.tip:10
 msgid ""
@@ -401,7 +422,7 @@ msgstr "M        Näytä/piilota minikartta"
 
 #: ../../txts/README.lua:65
 msgid "M: toggles minimap"
-msgstr ""
+msgstr "M: käännä minikartta päälle tai pois."
 
 #: ../../txts/tips/general_game.tip:34
 msgid ""
@@ -409,6 +430,9 @@ msgid ""
 "messages window, then use 'G' for Go To and the Delete key to archive "
 "messages."
 msgstr ""
+"Tehosta viestinhallintaasi. N kääntää uudet viestit päälle tai pois G "
+"siirtyy viestiä vastaavaan kohtaan kartalla ja delete-painike arkistoi "
+"viestin."
 
 #: ../../txts/developers:138
 msgid "Maps and Missions"
@@ -424,19 +448,23 @@ msgstr "Muusikot"
 
 #: ../../txts/README.lua:66
 msgid "N: toggles messages ('news')"
-msgstr ""
+msgstr "N: Kääntää \"news\" -viestit päälle tai pois."
 
 #: ../../txts/developers:181
 msgid ""
 "NOTE: this list holds people that translated Widelands before we moved to "
 "launchpad.net. "
 msgstr ""
+"Tämä näyttää widelandsin kääntäjät ennen kuin pelin kehitys siirtyi "
+"launchpad.net -alustalle. "
 
 #: ../../txts/tips/general_game.tip:54
 msgid ""
 "New soldiers are recruited in the headquarters or a warehouse if all needed "
 "tools are available. Training sites are for improving their abilities."
 msgstr ""
+"Uusia sotilaita rektytoidaan päämajassa ja varastoissa tarpeen mukaan, jos "
+"tarvikkeita on. Koulutuspaikat parantavat sotilaiden taistelutaitoja."
 
 #: ../../txts/developers:307
 msgid "Non Unix Distributions"
@@ -444,7 +472,7 @@ msgstr "Muut kuin Unix-jakelut"
 
 #: ../../txts/README.lua:70
 msgid "O: toggles objectives"
-msgstr ""
+msgstr "kirjain O: näytä tavoitteet."
 
 #: ../../txts/license:18
 msgid ""
@@ -493,15 +521,15 @@ msgstr "P        Näytä/piilota pelaajavalikko"
 
 #: ../../txts/README.lua:62
 msgid "PAGEDOWN: decreases gamespeed"
-msgstr ""
+msgstr "PAGEDOWN: hidastaa pelin kulkua."
 
 #: ../../txts/README.lua:61
 msgid "PAGEUP: increases gamespeed"
-msgstr ""
+msgstr "PAGEUP: nopeuttaa pelin kulkua"
 
 #: ../../txts/README.lua:63
 msgid "PAUSE: pauses the game"
-msgstr ""
+msgstr "PAUSE: pysäyttää pelin"
 
 #: ../../txts/developers:281
 msgid "Packagers"
@@ -525,10 +553,11 @@ msgstr "Puola"
 msgid ""
 "Press Ctrl+(0-9) to store important locations, then press 0-9 to recall them."
 msgstr ""
+"CTRL + 0-9 tallentaa kiinnostavia paikkoja kartalla, 0-9 palaa niihin."
 
 #: ../../txts/tips/general_game.tip:62
 msgid "Press I to quickly toggle the display of your stock inventory."
-msgstr ""
+msgstr "I näyttää tai piiloittaa varastoluettelon."
 
 #: ../../txts/tips/general_game.tip:46
 msgid ""

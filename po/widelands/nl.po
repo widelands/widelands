@@ -7,15 +7,15 @@ msgstr ""
 "Project-Id-Version: Widelands svn4575\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2013-09-15 19:41+0200\n"
-"PO-Revision-Date: 2013-09-17 08:54+0000\n"
+"PO-Revision-Date: 2013-10-04 21:15+0000\n"
 "Last-Translator: fk <Unknown>\n"
 "Language-Team: Dutch <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2013-09-18 04:43+0000\n"
-"X-Generator: Launchpad (build 16765)\n"
+"X-Launchpad-Export-Date: 2013-10-05 05:13+0000\n"
+"X-Generator: Launchpad (build 16791)\n"
 "X-Poedit-Country: NETHERLANDS\n"
 "X-Poedit-Language: Dutch\n"
 
@@ -677,7 +677,7 @@ msgstr "Documentatie voor programma commando's "
 
 #: ../../src/writeHTML.cc:1017
 msgid "workers of this site"
-msgstr "werkers van deze plaats"
+msgstr "werkers van dit gebouw"
 
 #: ../../src/writeHTML.cc:1047
 #, c-format
@@ -3945,7 +3945,7 @@ msgstr "Bouwkosten:"
 
 #: ../../src/wui/buildingwindow.cc:261
 msgid "Destroy"
-msgstr "Vernietig"
+msgstr "Vernietigen"
 
 #: ../../src/wui/buildingwindow.cc:279
 msgid "Dismantle"

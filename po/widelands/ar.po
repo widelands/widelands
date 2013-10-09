@@ -2,22 +2,23 @@
 # Copyright (c) 2011 Rosetta Contributors and Canonical Ltd 2011
 # This file is distributed under the same license as the widelands package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2011.
-#
+# popo <popo49_abdo@hotmail.com>, 2013.
 msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2013-09-15 19:41+0200\n"
-"PO-Revision-Date: 2013-05-01 09:02+0000\n"
-"Last-Translator: m-abudrais <m.abudrais@yahoo.com>\n"
+"PO-Revision-Date: 2013-10-05 18:06+0000\n"
+"Last-Translator: popo <popo49_abdo@hotmail.com>\n"
 "Language-Team: Arabic <ar@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n % 100 >= "
 "3 && n % 100 <= 10 ? 3 : n % 100 >= 11 && n % 100 <= 99 ? 4 : 5;\n"
-"X-Launchpad-Export-Date: 2013-09-16 04:41+0000\n"
-"X-Generator: Launchpad (build 16761)\n"
+"X-Launchpad-Export-Date: 2013-10-06 04:32+0000\n"
+"X-Generator: Launchpad (build 16791)\n"
+"Language: ar\n"
 
 #: ../../src/computer_player.cc:38
 msgid "None"
@@ -38,19 +39,19 @@ msgstr ""
 
 #: ../../src/s2map.cc:886
 msgid "WARNING"
-msgstr ""
+msgstr "تحذير"
 
 #: ../../src/save_handler.cc:75
 msgid "Saving game..."
-msgstr ""
+msgstr "تُحفظ اللعبه..."
 
 #: ../../src/save_handler.cc:94
 msgid "Saving failed!"
-msgstr ""
+msgstr "فشل الحفظ"
 
 #: ../../src/save_handler.cc:113
 msgid "Game saved"
-msgstr ""
+msgstr "حُفظت بنجاح"
 
 #: ../../src/wlapplication.cc:398
 msgid "ERROR: Could not connect to metaserver (reason above)!\n"
@@ -90,7 +91,7 @@ msgstr ""
 
 #: ../../src/wlapplication.cc:1332
 msgid "This is Widelands-"
-msgstr "هذه وايلاند-"
+msgstr "هذه وايد لاندس-"
 
 #: ../../src/wlapplication.cc:1334
 msgid ""
@@ -103,7 +104,7 @@ msgid ""
 "Options:\n"
 "\n"
 msgstr ""
-"خيارات :\n"
+"إعدادات:\n"
 "\n"
 
 #: ../../src/wlapplication.cc:1339
@@ -235,6 +236,12 @@ msgid ""
 "Hope you enjoy this game!\n"
 "\n"
 msgstr ""
+"اترغب بالإبلاغ عن علل؟او تقديم إقتراحات؟تفضل بزياره موقعنا على الشبكه "
+"العنكبوتيه\n"
+"        https://launchpad.net/widelands\n"
+"\n"
+"نتمنى لك لعباً ممتعاً\n"
+"\n"
 
 #: ../../src/wlapplication.cc:1525
 msgid "Fallback settings in effect"
@@ -252,11 +259,11 @@ msgstr "تحذير: "
 
 #: ../../src/wlapplication.cc:1602
 msgid "Game data error"
-msgstr ""
+msgstr "خطأ فى بيانات اللعبه"
 
 #: ../../src/wlapplication.cc:1607
 msgid "Unexpected error during the game"
-msgstr ""
+msgstr "حدث خطأ غير متوقع"
 
 #: ../../src/wlapplication.cc:1611
 msgid ""
@@ -282,16 +289,16 @@ msgstr ""
 #: ../../src/wlapplication.cc:1834 ../../src/network/nethost.cc:2050
 #: ../../src/wui/game_summary.cc:90
 msgid "Player"
-msgstr ""
+msgstr "اللاعب"
 
 #: ../../src/wlapplication.cc:2029 ../../src/network/netclient.cc:197
 #: ../../src/network/nethost.cc:839
 msgid "Preparing game"
-msgstr ""
+msgstr "تُحضر اللعبه"
 
 #: ../../src/wlapplication.cc:2137
 msgid "End of replay"
-msgstr ""
+msgstr "إنتهت اﻹعاده"
 
 #: ../../src/wlapplication.cc:2139
 msgid ""
@@ -302,7 +309,7 @@ msgstr ""
 #: ../../src/wlapplication.cc:2222 ../../src/logic/game.cc:375
 #: ../../src/logic/game.cc:414
 msgid "Loading..."
-msgstr ""
+msgstr "يُحمل..."
 
 #: ../../src/writeHTML.cc:42
 msgid "Requesters"
@@ -331,7 +338,7 @@ msgstr ""
 #: ../../src/writeHTML.cc:276 ../../src/writeHTML.cc:510
 #: ../../src/writeHTML.cc:1463
 msgid "Icon"
-msgstr ""
+msgstr "الايقونه"
 
 #: ../../src/writeHTML.cc:278 ../../src/writeHTML.cc:512
 #: ../../src/writeHTML.cc:1465 ../../src/ui_fsmenu/internet_lobby.cc:155
@@ -345,7 +352,7 @@ msgstr "حجم"
 
 #: ../../src/writeHTML.cc:282
 msgid "Buildable"
-msgstr ""
+msgstr "قابل للبناء"
 
 #: ../../src/writeHTML.cc:284
 msgid "Enhanced"
@@ -367,7 +374,7 @@ msgstr ""
 #: ../../src/writeHTML.cc:319 ../../src/writeHTML.cc:387
 #: ../../src/logic/building.cc:546
 msgid "Small"
-msgstr ""
+msgstr "صغير"
 
 #: ../../src/writeHTML.cc:323 ../../src/writeHTML.cc:381
 #: ../../src/logic/building.cc:547
@@ -412,7 +419,7 @@ msgstr ""
 
 #: ../../src/writeHTML.cc:396
 msgid "Is not buildable."
-msgstr ""
+msgstr "غير قابل للبناء"
 
 #: ../../src/writeHTML.cc:403
 msgid "Is enhanced."
@@ -430,7 +437,7 @@ msgstr ""
 
 #: ../../src/writeHTML.cc:426 ../../src/writeHTML.cc:649
 msgid "Build cost"
-msgstr ""
+msgstr "كلفه البناء"
 
 #: ../../src/writeHTML.cc:436
 #, c-format
@@ -460,7 +467,7 @@ msgstr ""
 
 #: ../../src/writeHTML.cc:577
 msgid "Combat Properties"
-msgstr ""
+msgstr "خصائص المعركه"
 
 #: ../../src/writeHTML.cc:584
 #, c-format
@@ -510,7 +517,7 @@ msgstr "برامج"
 
 #: ../../src/writeHTML.cc:764
 msgid "UNKNOWN"
-msgstr ""
+msgstr "UNKNOWN"
 
 #: ../../src/writeHTML.cc:771 ../../src/wui/ware_statistics_menu.cc:177
 msgid "Production"
@@ -520,7 +527,7 @@ msgstr "الإنتاج"
 #: ../../src/wui/productionsitewindow.cc:106 ../../src/wui/transport_ui.cc:66
 #: ../../src/wui/warehousewindow.cc:211
 msgid "Workers"
-msgstr ""
+msgstr "العمال"
 
 #: ../../src/writeHTML.cc:786
 #, c-format
@@ -529,21 +536,21 @@ msgstr ""
 
 #: ../../src/writeHTML.cc:796
 msgid "Inputs"
-msgstr ""
+msgstr "مُدخلات"
 
 #: ../../src/writeHTML.cc:807
 #, c-format
 msgid "%s's input"
-msgstr ""
+msgstr "مُدخلات %s"
 
 #: ../../src/writeHTML.cc:819
 msgid "Output"
-msgstr ""
+msgstr "مُخرجات"
 
 #: ../../src/writeHTML.cc:830 ../../src/writeHTML.cc:844
 #, c-format
 msgid "%s's output"
-msgstr ""
+msgstr "مُخرجات %s"
 
 #: ../../src/writeHTML.cc:893 ../../src/writeHTML.cc:1037
 #: ../../src/writeHTML.cc:1100 ../../src/writeHTML.cc:1129
@@ -678,7 +685,7 @@ msgstr ""
 
 #: ../../src/editor/editorinteractive.cc:64
 msgid "Menu"
-msgstr ""
+msgstr "القائمه"
 
 #: ../../src/editor/editorinteractive.cc:67
 #: ../../src/editor/ui_menus/editor_tool_menu.cc:46
@@ -694,25 +701,25 @@ msgstr ""
 #: ../../src/wui/interactive_player.cc:119
 #: ../../src/wui/interactive_spectator.cc:61
 msgid "Minimap"
-msgstr ""
+msgstr "الخريطه المُصغره"
 
 #: ../../src/editor/editorinteractive.cc:77
 #: ../../src/wui/interactive_player.cc:122
 msgid "Buildhelp"
-msgstr ""
+msgstr "مُساعد البناء"
 
 #: ../../src/editor/editorinteractive.cc:80
 #: ../../src/ui_fsmenu/launchMPG.cc:160
 msgid "Players"
-msgstr ""
+msgstr "اللاعبين"
 
 #: ../../src/editor/editorinteractive.cc:83
 msgid "Undo"
-msgstr ""
+msgstr "تراجع"
 
 #: ../../src/editor/editorinteractive.cc:86
 msgid "Redo"
-msgstr ""
+msgstr "إعاده"
 
 #: ../../src/editor/editorinteractive.cc:190
 #: ../../src/editor/editorinteractive.cc:610
@@ -722,17 +729,17 @@ msgstr ""
 
 #: ../../src/editor/editorinteractive.cc:196
 msgid "Creating players"
-msgstr ""
+msgstr "يُنشىء اللاعبين"
 
 #: ../../src/editor/editorinteractive.cc:203
 #: ../../src/logic/editor_game_base.cc:276
 msgid "Loading world data"
-msgstr ""
+msgstr "يُحمل بيانات عالم اللعبه"
 
 #: ../../src/editor/editorinteractive.cc:206
 #: ../../src/editor/editorinteractive.cc:614
 msgid "Loading graphics..."
-msgstr ""
+msgstr "يُحمل الرسوميات..."
 
 #: ../../src/editor/editorinteractive.cc:252
 msgid "Map unsaved"
@@ -740,7 +747,7 @@ msgstr ""
 
 #: ../../src/editor/editorinteractive.cc:253
 msgid "The Map is unsaved, do you really want to quit?"
-msgstr ""
+msgstr "هذه الخريطه لم تُحفظ بعد ، اترغب حقاً بالخروج؟"
 
 #: ../../src/editor/editorinteractive.cc:601
 #: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:179
@@ -748,7 +755,7 @@ msgstr ""
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:182
 #: ../../src/logic/map.h:166
 msgid "No Name"
-msgstr ""
+msgstr "بدون إسم"
 
 #: ../../src/editor/editorinteractive.cc:603
 #: ../../src/ui_fsmenu/loadgame.cc:241 ../../src/ui_fsmenu/loadreplay.cc:197
@@ -870,7 +877,7 @@ msgstr ""
 #: ../../src/io/dedicated_log.cc:66 ../../src/network/internet_gaming.cc:795
 #: ../../src/ui_fsmenu/mapselect.cc:503 ../../src/ui_fsmenu/mapselect.cc:507
 msgid "unknown"
-msgstr ""
+msgstr "مجهول"
 
 #: ../../src/logic/battle.cc:174
 #, c-format
@@ -894,12 +901,12 @@ msgstr "الألغام"
 #: ../../src/logic/building.cc:541
 #: ../../src/editor/tools/editor_info_tool.cc:60
 msgid "small"
-msgstr ""
+msgstr "صغير"
 
 #: ../../src/logic/building.cc:542
 #: ../../src/editor/tools/editor_info_tool.cc:61
 msgid "medium"
-msgstr ""
+msgstr "متوسط"
 
 #: ../../src/logic/building.cc:542
 #: ../../src/editor/tools/editor_info_tool.cc:62
@@ -943,7 +950,7 @@ msgstr ""
 
 #: ../../src/logic/editor_game_base.cc:283
 msgid "Loading tribes"
-msgstr ""
+msgstr "يُحمل القبائل"
 
 #: ../../src/logic/game.cc:139
 msgid "Not set"
@@ -973,7 +980,7 @@ msgstr ""
 
 #: ../../src/logic/game.cc:298
 msgid "Configuring players"
-msgstr ""
+msgstr "إعدادات اللاعبين"
 
 #: ../../src/logic/game.cc:332
 msgid "Loading map"
@@ -1117,7 +1124,7 @@ msgstr "اللاعب 1"
 
 #: ../../src/logic/military_data.cc:51 ../../src/logic/soldier.cc:70
 msgid "\"min-max\""
-msgstr ""
+msgstr "\"الاصغر-الاكبر\""
 
 #: ../../src/logic/military_data.cc:59
 msgid "positive integer <= 100"
@@ -1395,26 +1402,26 @@ msgstr "فشل"
 
 #: ../../src/logic/production_program.cc:425
 msgid "completed"
-msgstr ""
+msgstr "إنتهى"
 
 #: ../../src/logic/production_program.cc:425
 msgid "skipped"
-msgstr ""
+msgstr "خُطِى"
 
 #: ../../src/logic/production_program.cc:431
 #: ../../src/logic/production_program.cc:839
 msgid " and "
-msgstr ""
+msgstr " و "
 
 #: ../../src/logic/production_program.cc:432
 #: ../../src/logic/production_program.cc:818
 msgid " because: "
-msgstr ""
+msgstr " because: "
 
 #: ../../src/logic/production_program.cc:443
 #: ../../src/wui/encyclopedia_window.cc:198
 msgid " or "
-msgstr ""
+msgstr " او "
 
 #: ../../src/logic/production_program.cc:444
 msgid " because not: "
@@ -1444,7 +1451,7 @@ msgstr ""
 
 #: ../../src/logic/production_program.cc:525
 msgid "skip"
-msgstr ""
+msgstr "تخطى"
 
 #: ../../src/logic/production_program.cc:530
 msgid "{\"failure\"|\"completion\"|\"skip\"}"
@@ -1495,25 +1502,25 @@ msgstr ""
 #: ../../src/logic/production_program.cc:1030
 #, c-format
 msgid "%u "
-msgstr ""
+msgstr "%u "
 
 #: ../../src/logic/production_program.cc:941
 #: ../../src/logic/production_program.cc:1037
 msgid ", "
-msgstr ""
+msgstr ", "
 
 #: ../../src/logic/production_program.cc:944
 #, c-format
 msgid "Produced %s"
-msgstr ""
+msgstr "انتج %s"
 
 #: ../../src/logic/production_program.cc:1022
 msgid "Recruited "
-msgstr ""
+msgstr "جند "
 
 #: ../../src/logic/production_program.cc:1069
 msgid "distance"
-msgstr ""
+msgstr "مسافه"
 
 #: ../../src/logic/production_program.cc:1080
 #: ../../src/logic/production_program.cc:1091
@@ -1538,7 +1545,7 @@ msgstr ""
 #: ../../src/logic/production_program.cc:1246
 #: ../../src/logic/production_program.cc:1327
 msgid "soldier type"
-msgstr ""
+msgstr "نوع الجندى"
 
 #: ../../src/logic/production_program.cc:1259
 #, c-format
@@ -1548,12 +1555,12 @@ msgstr ""
 #: ../../src/logic/production_program.cc:1268
 #: ../../src/logic/production_program.cc:1348
 msgid "level"
-msgstr ""
+msgstr "مستوى"
 
 #: ../../src/logic/production_program.cc:1282
 #, c-format
 msgid "No soldier to train!"
-msgstr ""
+msgstr "لا يوجد جندى لتدريبه"
 
 #: ../../src/logic/production_program.cc:1292
 #: ../../src/logic/production_program.cc:1382
@@ -1588,7 +1595,7 @@ msgstr ""
 
 #: ../../src/logic/productionsite.cc:258
 msgid "(stopped)"
-msgstr ""
+msgstr "(متوقف)"
 
 #: ../../src/logic/requirements.cc:233
 #, c-format
@@ -1607,7 +1614,7 @@ msgstr ""
 
 #: ../../src/logic/ship.cc:531
 msgid "Island surrounded"
-msgstr ""
+msgstr "الجزيره مُحاصره"
 
 #: ../../src/logic/ship.cc:532
 msgid "An expedition ship surrounded its island without any events."
@@ -1633,7 +1640,7 @@ msgstr ""
 #: ../../src/logic/ship.cc:986
 #, c-format
 msgid "loading ship: %s"
-msgstr ""
+msgstr "يُحمل السفينه: %s"
 
 #: ../../src/logic/soldier.cc:78
 msgid "positive integer"
@@ -1655,11 +1662,11 @@ msgstr ""
 
 #: ../../src/logic/soldier.cc:1560 ../../src/logic/soldier.cc:1565
 msgid "no"
-msgstr ""
+msgstr "لا"
 
 #: ../../src/logic/soldier.cc:1572 ../../src/logic/soldier.cc:1581
 msgid "Logic error"
-msgstr ""
+msgstr "خطأ منطقى"
 
 #: ../../src/logic/tribe.cc:133
 msgid "constructionsite type \"constructionsite\" is missing"
@@ -1803,7 +1810,7 @@ msgstr ""
 #: ../../src/map_io/widelands_map_bobdata_data_packet.cc:484
 #, c-format
 msgid "soldier: %s"
-msgstr ""
+msgstr "جندى: %s"
 
 #: ../../src/map_io/widelands_map_bobdata_data_packet.cc:500
 #, c-format
@@ -2160,11 +2167,11 @@ msgstr ""
 
 #: ../../src/network/internet_gaming.cc:535
 msgid "ERROR: "
-msgstr ""
+msgstr "ERROR: "
 
 #: ../../src/network/internet_gaming.cc:539
 msgid "Chat message could not be sent. "
-msgstr ""
+msgstr "فشل إرسال الرساله. "
 
 #: ../../src/network/internet_gaming.cc:560
 msgid "Received an unknown command from the metaserver: "
@@ -2195,7 +2202,7 @@ msgstr ""
 #: ../../src/network/internet_gaming_messages.cc:43
 #: ../../src/network/nethost.cc:1260
 msgid "The sent password was incorrect!"
-msgstr ""
+msgstr "كلمه المرور المدخله غير صحيحه!"
 
 #: ../../src/network/internet_gaming_messages.cc:44
 msgid "The protocol version you are using is not supported!"
@@ -2210,6 +2217,8 @@ msgid ""
 "You got disconnected, as you sent a superuser command without superuser "
 "permission. This incident will be logged and reported to the administrator."
 msgstr ""
+"لقد فُصلت عن الخادم ، فلقد ادخلت احد اوامر المستخدم الجذر فى حين انك لا تملك "
+"تصاريح الجذر. سيتم تسجيل هذه الحادثه وإبلاغها للمشرف"
 
 #: ../../src/network/internet_gaming_messages.cc:50
 msgid "You got disconnected, as the metaserver is currently restarting."
@@ -2296,7 +2305,7 @@ msgstr ""
 
 #: ../../src/network/nethost.cc:403
 msgid "Why would you warn yourself?"
-msgstr ""
+msgstr "أتمزح؟ لماذا ترغب بتحذير نفسك؟"
 
 #: ../../src/network/nethost.cc:405
 msgid "Why would you want to warn the dedicated server?"
@@ -2313,7 +2322,7 @@ msgstr ""
 
 #: ../../src/network/nethost.cc:431
 msgid "You can not kick yourself!"
-msgstr ""
+msgstr "أتمزح؟ لا يمكنك طرد نفسك!"
 
 #: ../../src/network/nethost.cc:433
 msgid "You can not kick the dedicated server"
@@ -2322,7 +2331,7 @@ msgstr ""
 #: ../../src/network/nethost.cc:438
 #, c-format
 msgid "Are you sure you want to kick %s?<br>"
-msgstr ""
+msgstr "أمتأكد من رغبتك بطرد %s؟<br>"
 
 #: ../../src/network/nethost.cc:439
 #, c-format
@@ -2403,7 +2412,7 @@ msgstr ""
 
 #: ../../src/network/nethost.cc:1248
 msgid "Game successfully saved!"
-msgstr ""
+msgstr "حُفظت اللعبه بنجاح!"
 
 #: ../../src/network/nethost.cc:1250
 #, c-format
@@ -2412,11 +2421,11 @@ msgstr ""
 
 #: ../../src/network/nethost.cc:1257
 msgid "This server is not password protected!"
-msgstr ""
+msgstr "هذا الخادم غير محمى بكلمه مرور!"
 
 #: ../../src/network/nethost.cc:1273
 msgid "The password was correct, access was granted!"
-msgstr ""
+msgstr "كلمه المرور صحيحه ، يمكنك الولوج الان!"
 
 #: ../../src/network/nethost.cc:1279
 #, c-format
@@ -2445,7 +2454,7 @@ msgstr ""
 
 #: ../../src/network/network_gaming_messages.cc:124
 msgid "Connection was lost."
-msgstr ""
+msgstr "فُقِدَ اﻹتصال"
 
 #: ../../src/network/network_gaming_messages.cc:125
 msgid "Server has left the game."
@@ -2461,7 +2470,7 @@ msgstr ""
 
 #: ../../src/network/network_gaming_messages.cc:128
 msgid "Connection to client timeouted: no response for 10 minutes!"
-msgstr ""
+msgstr "إنتهت مُهله اﻹتصال بالعميل: لا إستجابه لـ 10 دقائق"
 
 #: ../../src/network/network_gaming_messages.cc:129
 msgid "Client and host have become desynchronized."
@@ -2485,12 +2494,12 @@ msgstr ""
 #: ../../src/network/network_gaming_messages.cc:133
 #, c-format
 msgid "%s has left the game (%s)"
-msgstr ""
+msgstr "لقد خرج %s من اللعبه (%s)"
 
 #: ../../src/network/network_gaming_messages.cc:134
 #, c-format
 msgid "Unknown user has left the game (%s)"
-msgstr ""
+msgstr "لاعب مجهول خرج من اللعبه (%s)"
 
 #: ../../src/network/network_gaming_messages.cc:135
 msgid "Server sent a SYNCREQUEST even though no game is running."
@@ -2535,7 +2544,7 @@ msgstr ""
 
 #: ../../src/network/network_gaming_messages.cc:145
 msgid "The game has already started."
-msgstr ""
+msgstr "بُدأت اللعبه قبل مجيئك بالفعل."
 
 #: ../../src/network/network_gaming_messages.cc:146
 msgid "Client has no access to other player's settings."
@@ -2582,44 +2591,44 @@ msgstr ""
 #: ../../src/network/network_gaming_messages.cc:156
 #, c-format
 msgid "%s has joined the game"
-msgstr ""
+msgstr "إنضم %s الى اللعبه"
 
 #: ../../src/network/network_gaming_messages.cc:157
 #, c-format
 msgid "Game was saved as %s."
-msgstr ""
+msgstr "حُفظت اللعبه كـ %s."
 
 #: ../../src/network/network_gaming_messages.cc:158
 #, c-format
 msgid "Started to send file %s to %s!"
-msgstr ""
+msgstr "يُرسَل الملف %s لـ %s!"
 
 #: ../../src/network/network_gaming_messages.cc:159
 #, c-format
 msgid "Completed transfer of file %s to %s"
-msgstr ""
+msgstr "نُقِلَ الملف %s لـ %s بنجاح"
 
 #: ../../src/network/network_gaming_messages.cc:160
 #, c-format
 msgid "Sending part %s of file %s to %s"
-msgstr ""
+msgstr "يُرسَل الجزء %s من الملف %s لـ %s"
 
 #: ../../src/network/network_gaming_messages.cc:161
 #, c-format
 msgid "The player \"%s\" was defeated and became spectator."
-msgstr ""
+msgstr "هُزمَ اللاعب \"%s\" وتحول لوضع المشاهدين"
 
 #: ../../src/network/network_gaming_messages.cc:162
 #, c-format
 msgid "Client %s did not answer for more than %s seconds."
-msgstr ""
+msgstr "العميل %s لم يستجب ﻷكثر من %s ثانيه"
 
 #: ../../src/network/network_gaming_messages.cc:164
 #, c-format
 msgid ""
 "Client %s will automatically be kicked, if no answer is received within %s "
 "seconds."
-msgstr ""
+msgstr "العميل %s سيطرد فى حاله عدم إستجابته خلال %s ثانيه"
 
 #: ../../src/scripting/lua_game.cc:444 ../../src/ui_basic/helpwindow.cc:83
 #: ../../src/ui_basic/messagebox.cc:92
@@ -2659,19 +2668,19 @@ msgstr ""
 
 #: ../../src/ui_basic/spinbox.cc:115
 msgid "Increase the value"
-msgstr ""
+msgstr "رفع القيمه"
 
 #: ../../src/ui_basic/spinbox.cc:123
 msgid "Decrease the value"
-msgstr ""
+msgstr "خفض القيمه"
 
 #: ../../src/ui_basic/spinbox.cc:134
 msgid "Increase the value by 10"
-msgstr ""
+msgstr "رفع القيمه بـ 10"
 
 #: ../../src/ui_basic/spinbox.cc:142
 msgid "Decrease the value by 10"
-msgstr ""
+msgstr "خفض القيمه بـ 10"
 
 #: ../../src/ui_fsmenu/campaign_select.cc:53
 msgid "Select a campaign"
@@ -2683,7 +2692,7 @@ msgstr "حملة:"
 
 #: ../../src/ui_fsmenu/campaign_select.cc:59
 msgid "Difficulty:"
-msgstr "صعوبة:"
+msgstr "الصعوبه:"
 
 #: ../../src/ui_fsmenu/campaign_select.cc:63
 #: ../../src/ui_fsmenu/campaign_select.cc:271
@@ -2718,13 +2727,13 @@ msgstr ""
 #: ../../src/ui_fsmenu/editor_mapselect.cc:52
 #: ../../src/ui_fsmenu/mapselect.cc:54
 msgid "Choose a map"
-msgstr ""
+msgstr "إختر خريطه"
 
 #: ../../src/ui_fsmenu/campaign_select.cc:267
 #: ../../src/ui_fsmenu/editor_mapselect.cc:56
 #: ../../src/ui_fsmenu/mapselect.cc:64
 msgid "Name:"
-msgstr "إسم:"
+msgstr "اﻹسم:"
 
 #: ../../src/ui_fsmenu/campaign_select.cc:269
 #: ../../src/ui_fsmenu/editor_mapselect.cc:61
@@ -2746,7 +2755,7 @@ msgstr ""
 #: ../../src/editor/ui_menus/editor_main_menu.cc:56
 #: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:46
 msgid "New Map"
-msgstr ""
+msgstr "خريطه جديده"
 
 #: ../../src/ui_fsmenu/editor.cc:48
 #: ../../src/editor/ui_menus/editor_main_menu.cc:66
@@ -2758,7 +2767,7 @@ msgstr ""
 #: ../../src/ui_fsmenu/mapselect.cc:76
 #: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:66
 msgid "Size:"
-msgstr ""
+msgstr "الحجم:"
 
 #: ../../src/ui_fsmenu/editor_mapselect.cc:71
 #: ../../src/ui_fsmenu/mapselect.cc:82
@@ -2770,7 +2779,7 @@ msgstr "العالم:"
 #: ../../src/ui_fsmenu/loadgame.cc:97 ../../src/ui_fsmenu/loadreplay.cc:81
 #: ../../src/ui_fsmenu/mapselect.cc:88
 msgid "Players:"
-msgstr "لاعبي:"
+msgstr "اللاعبين:"
 
 #: ../../src/ui_fsmenu/editor_mapselect.cc:81
 #: ../../src/ui_fsmenu/mapselect.cc:94
@@ -2786,7 +2795,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/fileview.cc:72 ../../src/wui/watchwindow.cc:139
 msgid "Close"
-msgstr ""
+msgstr "أغلق"
 
 #: ../../src/ui_fsmenu/internet_lobby.cc:52
 msgid "Metaserver Lobby"
@@ -2798,7 +2807,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/internet_lobby.cc:60
 msgid "List of games:"
-msgstr ""
+msgstr "قائمه اﻷلعاب الموجوده حالياً:"
 
 #: ../../src/ui_fsmenu/internet_lobby.cc:64
 msgid "Name of your server:"
@@ -2827,7 +2836,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/internet_lobby.cc:379
 msgid "Connection timed out"
-msgstr ""
+msgstr "إنتهت مهله اﻹتصال"
 
 #: ../../src/ui_fsmenu/internet_lobby.cc:382
 msgid ""
@@ -2838,11 +2847,11 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/internet_lobby.cc:410
 msgid "Widelands has not been able to connect to the host."
-msgstr ""
+msgstr "تعذر على وايد لاندس اﻹتصال بالمضيف"
 
 #: ../../src/ui_fsmenu/intro.cc:32
 msgid "Press ESC or click to continue ..."
-msgstr ""
+msgstr "إضغط ESC او إضغط بزر الفأره"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:51
 msgid "Please select"
@@ -2855,15 +2864,15 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/launchMPG.cc:64
 msgid "Select a map"
-msgstr ""
+msgstr "حدد خريطه"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:74
 msgid "Saved game"
-msgstr ""
+msgstr "لعبه محفوظه"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:74
 msgid "Select a saved game"
-msgstr ""
+msgstr "إختر لعبه محفوظه"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:84 ../../src/ui_fsmenu/options.cc:56
 #: ../../src/ui_fsmenu/options.cc:400
@@ -2872,23 +2881,23 @@ msgstr ""
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:139
 #: ../../src/editor/ui_menus/editor_main_menu_save_map_make_directory.cc:67
 msgid "Cancel"
-msgstr "إلغاء"
+msgstr "إلغ"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:84
 msgid "Cancel selection"
-msgstr ""
+msgstr "إلغ إختيارى"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:121
 msgid "Change map or saved game"
-msgstr ""
+msgstr "إختر خريطه او لعبه محفوظه"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:126 ../../src/ui_fsmenu/launchSPG.cc:69
 msgid "Start game"
-msgstr ""
+msgstr "إبدأ اللعبه"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:142
 msgid "Show the help window"
-msgstr ""
+msgstr "أظهر نافذه المساعده"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:148 ../../src/ui_fsmenu/launchMPG.cc:666
 msgid "Multiplayer Game Setup"
@@ -2896,15 +2905,15 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/launchMPG.cc:156
 msgid "Clients"
-msgstr ""
+msgstr "العملاء"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:168 ../../src/ui_fsmenu/launchSPG.cc:103
 msgid "Type of game"
-msgstr ""
+msgstr "نوع اللعبه"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:214 ../../src/ui_fsmenu/launchSPG.cc:284
 msgid "(no map)"
-msgstr ""
+msgstr "(لا خريطه)"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:215
 msgid "The host has not yet selected a map or saved game."
@@ -2979,7 +2988,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/launchMPG.cc:485
 msgid "Click on the \"?\" in the right top corner to get help."
-msgstr ""
+msgstr "إضغط على رمز الـ \"?\" فى اقصى اعلى اليمين للحصول على المساعده"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:546
 msgid "Saved players are:"
@@ -2992,15 +3001,15 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/launchMPG.cc:566
 msgid "closed"
-msgstr ""
+msgstr "اُغلقت"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:630
 msgid "There was an error!"
-msgstr ""
+msgstr "حدث خطأ!"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:630
 msgid "The map file seems to be invalid!"
-msgstr ""
+msgstr "هذه الخريطه غير صالحه!"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:647
 msgid "Map informations:\n"
@@ -3031,7 +3040,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/launchMPG.cc:668
 msgid "Client settings"
-msgstr ""
+msgstr "إعدادات العميل"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:671
 msgid ""
@@ -3051,10 +3060,12 @@ msgid ""
 "And spectator mode, meaning you can see everything, but can not control any "
 "player"
 msgstr ""
+"وبالنسبه لوضع المشاهدين،فهو وضع يسمح لك بمشاهده كل ما يحدث فى اى مكان بدون "
+"إمكانيه المشاركه او التحكم فى اى شيء"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:681
 msgid "Player settings"
-msgstr ""
+msgstr "إعدادات اللاعبين"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:684
 msgid ""
@@ -3079,7 +3090,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/launchMPG.cc:694
 msgid "Closed."
-msgstr ""
+msgstr "اُغلقت"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:697
 msgid ""
@@ -3097,7 +3108,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/launchMPG.cc:704
 msgid "Map informations"
-msgstr ""
+msgstr "معلومات الخريطه"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:707
 msgid ""
@@ -3109,28 +3120,28 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/launchSPG.cc:54
 msgid "Select map"
-msgstr ""
+msgstr "حدد الخريطه"
 
 #: ../../src/ui_fsmenu/launchSPG.cc:75
 msgid "Launch Game"
-msgstr ""
+msgstr "أطلق اللعبه"
 
 #: ../../src/ui_fsmenu/launchSPG.cc:83
 msgid "Player's name"
-msgstr ""
+msgstr "إسم اللاعب"
 
 #: ../../src/ui_fsmenu/launchSPG.cc:87
 msgid "Player's type"
-msgstr ""
+msgstr "نوع اللاعب"
 
 #: ../../src/ui_fsmenu/launchSPG.cc:91 ../../src/wui/game_summary.cc:91
 #: ../../src/wui/multiplayersetupgroup.cc:462
 msgid "Team"
-msgstr "فريق"
+msgstr "الفريق"
 
 #: ../../src/ui_fsmenu/launchSPG.cc:95
 msgid "Player's tribe"
-msgstr ""
+msgstr "قبيله اللاعب"
 
 #: ../../src/ui_fsmenu/launchSPG.cc:99
 msgid "Start type"
@@ -3154,32 +3165,32 @@ msgstr ""
 #: ../../src/ui_fsmenu/loadgame.cc:72 ../../src/ui_fsmenu/loadreplay.cc:55
 #: ../../src/wui/game_main_menu_save_game.cc:114
 msgid "Delete"
-msgstr "حذف"
+msgstr "إحذف"
 
 #: ../../src/ui_fsmenu/loadgame.cc:83
 msgid "Choose saved game"
-msgstr ""
+msgstr "إختر لعبه محفوظه"
 
 #: ../../src/ui_fsmenu/loadgame.cc:87 ../../src/ui_fsmenu/loadreplay.cc:71
 #: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:57
 msgid "Map Name:"
-msgstr ""
+msgstr "إسم الخريطه:"
 
 #: ../../src/ui_fsmenu/loadgame.cc:92 ../../src/ui_fsmenu/loadreplay.cc:76
 msgid "Gametime:"
-msgstr ""
+msgstr "زمن اللعبه:"
 
 #: ../../src/ui_fsmenu/loadgame.cc:105
 msgid "Minimap:"
-msgstr ""
+msgstr "الخريطه المُصفره:"
 
 #: ../../src/ui_fsmenu/loadgame.cc:157 ../../src/ui_fsmenu/loadreplay.cc:138
 msgid "Delete file"
-msgstr ""
+msgstr "إحذف الملف"
 
 #: ../../src/ui_fsmenu/loadgame.cc:158 ../../src/ui_fsmenu/loadreplay.cc:139
 msgid "Do you really want to delete "
-msgstr ""
+msgstr "أمتأكد من رغبتك فى الحذف "
 
 #: ../../src/ui_fsmenu/loadgame.cc:215
 msgid "Savegame from dedicated server"
@@ -3191,15 +3202,15 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/loadreplay.cc:67
 msgid "Choose a replay"
-msgstr ""
+msgstr "إختر إعاده لتشغيلها"
 
 #: ../../src/ui_fsmenu/main.cc:40
 msgid "Play Tutorial"
-msgstr ""
+msgstr "شغل البرنامج التعليمى"
 
 #: ../../src/ui_fsmenu/main.cc:45
 msgid "Single Player"
-msgstr ""
+msgstr "اللعب الفردى"
 
 #: ../../src/ui_fsmenu/main.cc:50
 msgid "Multi Player"
@@ -3207,18 +3218,18 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/main.cc:55
 msgid "Watch Replay"
-msgstr ""
+msgstr "شاهد اﻹعادات"
 
 #: ../../src/ui_fsmenu/main.cc:65 ../../src/wui/game_options_menu.cc:47
 #: ../../src/wui/interactive_player.cc:110
 #: ../../src/wui/interactive_spectator.cc:57
 msgid "Options"
-msgstr "خيارات"
+msgstr "إعدادات"
 
 #: ../../src/ui_fsmenu/main.cc:70
 #: ../../src/editor/ui_menus/editor_main_menu.cc:81
 msgid "View Readme"
-msgstr ""
+msgstr "عرض ملف \"إقرأنى\""
 
 #: ../../src/ui_fsmenu/main.cc:75 ../../src/wui/game_options_menu.cc:63
 msgid "License"
@@ -3226,19 +3237,19 @@ msgstr "الترخيص"
 
 #: ../../src/ui_fsmenu/main.cc:80 ../../src/wui/game_options_menu.cc:94
 msgid "Exit Game"
-msgstr ""
+msgstr "إخرج من اللعبه"
 
 #: ../../src/ui_fsmenu/main.cc:86
 msgid "Version "
-msgstr ""
+msgstr "اﻹصدار "
 
 #: ../../src/ui_fsmenu/main.cc:91
 msgid "by the Widelands Development Team"
-msgstr ""
+msgstr "مُقدم لك من قِبَل فريق تطوير وايد لاندس"
 
 #: ../../src/ui_fsmenu/main.cc:96
 msgid "Licensed under the GNU General Public License V2.0"
-msgstr ""
+msgstr "تحت اﻹصدار الثانى من رخصه جنو العموميه العامه"
 
 #: ../../src/ui_fsmenu/mapselect.cc:59
 msgid "Load Map as scenario: "
@@ -3246,19 +3257,19 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/mapselect.cc:149
 msgid "#"
-msgstr ""
+msgstr "#"
 
 #: ../../src/ui_fsmenu/mapselect.cc:151
 msgid "Map Name"
-msgstr ""
+msgstr "إسم الخريطه"
 
 #: ../../src/ui_fsmenu/mapselect.cc:166
 msgid "Show all maps"
-msgstr ""
+msgstr "اظهر كل الخرائط"
 
 #: ../../src/ui_fsmenu/mapselect.cc:171
 msgid "Official Map"
-msgstr ""
+msgstr "خريطه مقرره"
 
 #: ../../src/ui_fsmenu/mapselect.cc:172
 msgid "Seafaring Map"
@@ -3266,23 +3277,23 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/mapselect.cc:175
 msgid "1v1"
-msgstr ""
+msgstr "1ضد1"
 
 #: ../../src/ui_fsmenu/mapselect.cc:176
 msgid "Teams of 2"
-msgstr ""
+msgstr "فرق من 2"
 
 #: ../../src/ui_fsmenu/mapselect.cc:177
 msgid "Teams of 3"
-msgstr ""
+msgstr "فرق من 3"
 
 #: ../../src/ui_fsmenu/mapselect.cc:180
 msgid "Teams of 4"
-msgstr ""
+msgstr "فرق من 4"
 
 #: ../../src/ui_fsmenu/mapselect.cc:181
 msgid "Free for all"
-msgstr ""
+msgstr "حره للجميع"
 
 #: ../../src/ui_fsmenu/mapselect.cc:182
 msgid "Unbalanced"
@@ -3300,11 +3311,11 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/multiplayer.cc:41
 msgid "Choose game type"
-msgstr ""
+msgstr "إختر نوع اللعبه"
 
 #: ../../src/ui_fsmenu/multiplayer.cc:48
 msgid "Internet game"
-msgstr ""
+msgstr "لعب عبر الشبكه العنكبوتيه"
 
 #: ../../src/ui_fsmenu/multiplayer.cc:53
 msgid "LAN / Direct IP"
@@ -3317,19 +3328,19 @@ msgstr ""
 #: ../../src/ui_fsmenu/multiplayer.cc:115
 #: ../../src/ui_fsmenu/netsetup_lan.cc:120 ../../src/wui/login_box.cc:74
 msgid "nobody"
-msgstr "لا أحد"
+msgstr "لا احد"
 
 #: ../../src/ui_fsmenu/netsetup_lan.cc:42
 msgid "Begin Network Game"
-msgstr ""
+msgstr "إبدأ اللعب عبر الشبكه"
 
 #: ../../src/ui_fsmenu/netsetup_lan.cc:46
 msgid "List of games in your local network:"
-msgstr ""
+msgstr "قائمه الالعاب المتوفره فى شبكتك المحليه:"
 
 #: ../../src/ui_fsmenu/netsetup_lan.cc:50
 msgid "Your nickname:"
-msgstr ""
+msgstr "لقبك:"
 
 #: ../../src/ui_fsmenu/netsetup_lan.cc:54
 msgid "Host to connect:"
@@ -3345,11 +3356,11 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/netsetup_lan.cc:125
 msgid "Host"
-msgstr ""
+msgstr "المضيف"
 
 #: ../../src/ui_fsmenu/netsetup_lan.cc:127
 msgid "State"
-msgstr ""
+msgstr "الحاله"
 
 #: ../../src/ui_fsmenu/netsetup_lan.cc:196
 #: ../../src/wui/multiplayersetupgroup.cc:270
@@ -3360,11 +3371,11 @@ msgstr "فتح"
 #: ../../src/ui_fsmenu/netsetup_lan.cc:197
 #: ../../src/wui/multiplayersetupgroup.cc:259
 msgid "Closed"
-msgstr ""
+msgstr "اُغلقت"
 
 #: ../../src/ui_fsmenu/options.cc:51 ../../src/ui_fsmenu/options.cc:429
 msgid "Advanced Options"
-msgstr ""
+msgstr "إعدادات متقدمه"
 
 #: ../../src/ui_fsmenu/options.cc:61 ../../src/ui_fsmenu/options.cc:405
 msgid "Apply"
@@ -3380,11 +3391,11 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/options.cc:85
 msgid "General Options"
-msgstr ""
+msgstr "إعدادات عامه"
 
 #: ../../src/ui_fsmenu/options.cc:92
 msgid "Fullscreen"
-msgstr ""
+msgstr "شاشه كبيره"
 
 #: ../../src/ui_fsmenu/options.cc:98
 msgid "Grab Input"
@@ -3392,15 +3403,15 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/options.cc:104
 msgid "Enable Music"
-msgstr ""
+msgstr "تفعيل الموسيقى"
 
 #: ../../src/ui_fsmenu/options.cc:110
 msgid "Enable Sound"
-msgstr ""
+msgstr "تفعيل الاصوات"
 
 #: ../../src/ui_fsmenu/options.cc:115
 msgid "Maximum FPS:"
-msgstr ""
+msgstr "اقصى حد مسموح به من الـ FPS:"
 
 #: ../../src/ui_fsmenu/options.cc:125
 msgid "In-game resolution"
@@ -3436,11 +3447,11 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/options.cc:179
 msgid "Save game automatically every"
-msgstr ""
+msgstr "إحفظ اللعبه تلقائياً كل"
 
 #: ../../src/ui_fsmenu/options.cc:183
 msgid "Remove Replays older than:"
-msgstr ""
+msgstr "إحذف مقاطع اﻹعادات الاقدم من:"
 
 #: ../../src/ui_fsmenu/options.cc:198
 msgid "Off"
@@ -3448,11 +3459,11 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/options.cc:199
 msgid "Never"
-msgstr ""
+msgstr "ابداً"
 
 #: ../../src/ui_fsmenu/options.cc:200
 msgid "1 day"
-msgstr ""
+msgstr "1 يوم"
 
 #: ../../src/ui_fsmenu/options.cc:265
 #, c-format
@@ -3461,7 +3472,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/options.cc:287
 msgid "Try system language"
-msgstr ""
+msgstr "إستخدم لغه نظام تشغيلى"
 
 #: ../../src/ui_fsmenu/options.cc:411
 msgid "x"
@@ -3477,7 +3488,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/options.cc:446
 msgid "Play a sound at message arrival."
-msgstr ""
+msgstr "فعل اصوات وصول الرسائل"
 
 #: ../../src/ui_fsmenu/options.cc:454
 msgid "Do not zip widelands data files (maps, replays and savegames)."
@@ -3521,7 +3532,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/singleplayer.cc:47
 msgid "New Game"
-msgstr ""
+msgstr "إبدأ لعبه جديده"
 
 #: ../../src/ui_fsmenu/singleplayer.cc:52
 msgid "Campaigns"
@@ -3533,21 +3544,21 @@ msgstr ""
 
 #: ../../src/wui/actionconfirm.cc:223
 msgid "Destroy building?"
-msgstr ""
+msgstr "تدمير المبنى؟"
 
 #: ../../src/wui/actionconfirm.cc:224
 #, c-format
 msgid "Do you really want to destroy this %s?"
-msgstr ""
+msgstr "أمتأكد من رغبتك فى تدمير هذا الـ %s؟"
 
 #: ../../src/wui/actionconfirm.cc:288
 msgid "Dismantle building?"
-msgstr ""
+msgstr "تفكيك المبنى؟"
 
 #: ../../src/wui/actionconfirm.cc:289
 #, c-format
 msgid "Do you really want to dismantle this %s?"
-msgstr ""
+msgstr "أمتأكد من رغبتك فى تفكيك هذا الـ %s؟"
 
 #: ../../src/wui/actionconfirm.cc:349
 msgid "Enhance building?"
@@ -3560,11 +3571,11 @@ msgstr ""
 
 #: ../../src/wui/actionconfirm.cc:402 ../../src/wui/actionconfirm.cc:443
 msgid "Sink the ship?"
-msgstr ""
+msgstr "إغراق السفينه؟"
 
 #: ../../src/wui/actionconfirm.cc:402
 msgid "Do you really want to sink this ship?"
-msgstr ""
+msgstr "أمتأكد من رغبتك فى إغراق هذه السفينه؟"
 
 #: ../../src/wui/actionconfirm.cc:443
 msgid "Do you really want to cancel the active expedition?"
@@ -3572,19 +3583,19 @@ msgstr ""
 
 #: ../../src/wui/attack_box.cc:167
 msgid "Soldiers:"
-msgstr ""
+msgstr "الجنود:"
 
 #: ../../src/wui/attack_box.cc:175
 msgid "Send less soldiers"
-msgstr ""
+msgstr "ارسل جنوداً اقل"
 
 #: ../../src/wui/attack_box.cc:192
 msgid "Number of soldiers"
-msgstr ""
+msgstr "عدد الجنود"
 
 #: ../../src/wui/attack_box.cc:202
 msgid "Send more soldiers"
-msgstr ""
+msgstr "ارسل جنوداً اكثر"
 
 #: ../../src/wui/attack_box.cc:213 ../../src/wui/military_box.cc:129
 msgid "Retreat: Never!"
@@ -3601,15 +3612,15 @@ msgstr ""
 #: ../../src/wui/building_statistics_menu.cc:77
 #: ../../src/wui/game_main_menu.cc:62
 msgid "Building Statistics"
-msgstr ""
+msgstr "إحصائيات المبنى"
 
 #: ../../src/wui/building_statistics_menu.cc:87
 msgid "Total Productivity: "
-msgstr ""
+msgstr "اﻹنتاج الكلى: "
 
 #: ../../src/wui/building_statistics_menu.cc:91
 msgid "Owned: "
-msgstr ""
+msgstr "ملك: "
 
 #: ../../src/wui/building_statistics_menu.cc:97
 msgid "In Build: "
@@ -3625,7 +3636,7 @@ msgstr ""
 
 #: ../../src/wui/building_statistics_menu.cc:113
 msgid "Owned"
-msgstr ""
+msgstr "ملك"
 
 #: ../../src/wui/building_statistics_menu.cc:114
 msgid "Build"
@@ -3635,13 +3646,13 @@ msgstr ""
 #: ../../src/wui/building_statistics_menu.cc:152
 #: ../../src/wui/building_statistics_menu.cc:174
 msgid "Show previous"
-msgstr ""
+msgstr "اظهر السابق"
 
 #: ../../src/wui/building_statistics_menu.cc:141
 #: ../../src/wui/building_statistics_menu.cc:163
 #: ../../src/wui/building_statistics_menu.cc:185
 msgid "Show next"
-msgstr ""
+msgstr "اظهر التالى"
 
 #: ../../src/wui/buildingwindow.cc:181
 msgid "Cancel the expedition"
@@ -3653,11 +3664,11 @@ msgstr ""
 
 #: ../../src/wui/buildingwindow.cc:207 ../../src/wui/game_summary.cc:77
 msgid "Continue"
-msgstr ""
+msgstr "اكمل"
 
 #: ../../src/wui/buildingwindow.cc:207
 msgid "Stop"
-msgstr "قِفْ"
+msgstr "قف"
 
 #: ../../src/wui/buildingwindow.cc:234
 #, c-format
@@ -3666,15 +3677,15 @@ msgstr ""
 
 #: ../../src/wui/buildingwindow.cc:240 ../../src/wui/fieldaction.cc:112
 msgid "Construction costs:"
-msgstr ""
+msgstr "تكاليف البناء:"
 
 #: ../../src/wui/buildingwindow.cc:261
 msgid "Destroy"
-msgstr ""
+msgstr "دمر"
 
 #: ../../src/wui/buildingwindow.cc:279
 msgid "Dismantle"
-msgstr ""
+msgstr "فكك"
 
 #: ../../src/wui/buildingwindow.cc:279
 msgid "Returns:"
@@ -3686,7 +3697,7 @@ msgstr ""
 
 #: ../../src/wui/buildingwindow.cc:326
 msgid "Debug"
-msgstr ""
+msgstr "صحح"
 
 #: ../../src/wui/buildingwindow.cc:337
 msgid "Center view on this"
@@ -3703,7 +3714,7 @@ msgstr ""
 #: ../../src/wui/constructionsitewindow.cc:75
 #: ../../src/wui/dismantlesitewindow.cc:69
 msgid "Building materials"
-msgstr ""
+msgstr "مواد البناء"
 
 #: ../../src/wui/encyclopedia_window.cc:67
 msgid "Tribe ware encyclopedia"
@@ -3719,15 +3730,15 @@ msgstr "الكمية"
 
 #: ../../src/wui/fieldaction.cc:247
 msgid "Build small buildings"
-msgstr ""
+msgstr "إبن مبانى صغيره"
 
 #: ../../src/wui/fieldaction.cc:248
 msgid "Build medium buildings"
-msgstr ""
+msgstr "إبن مبانى متوسطه"
 
 #: ../../src/wui/fieldaction.cc:249
 msgid "Build large buildings"
-msgstr ""
+msgstr "إبن مبانى كبيره"
 
 #: ../../src/wui/fieldaction.cc:250
 msgid "Build port buildings"
@@ -3739,7 +3750,7 @@ msgstr ""
 
 #: ../../src/wui/fieldaction.cc:367
 msgid "Build road"
-msgstr ""
+msgstr "إبن طريق"
 
 #: ../../src/wui/fieldaction.cc:379
 msgid "Destroy this flag"
@@ -3751,7 +3762,7 @@ msgstr ""
 
 #: ../../src/wui/fieldaction.cc:393
 msgid "Send geologist to explore site"
-msgstr ""
+msgstr "ارسل جيولوجى لاستكشاف موقع"
 
 #: ../../src/wui/fieldaction.cc:411
 msgid "Put a flag"
@@ -3759,7 +3770,7 @@ msgstr ""
 
 #: ../../src/wui/fieldaction.cc:418
 msgid "Destroy a road"
-msgstr ""
+msgstr "دمر طريق"
 
 #: ../../src/wui/fieldaction.cc:436
 msgid "Watch field in a separate window"
@@ -3779,7 +3790,7 @@ msgstr ""
 
 #: ../../src/wui/fieldaction.cc:461 ../../src/wui/fieldaction.cc:609
 msgid "Build roads"
-msgstr ""
+msgstr "إبن طريق"
 
 #: ../../src/wui/fieldaction.cc:463 ../../src/wui/watchwindow.cc:97
 msgid "Watch"
@@ -3791,7 +3802,7 @@ msgstr ""
 
 #: ../../src/wui/fieldaction.cc:497
 msgid "Start attack"
-msgstr ""
+msgstr "إبدأ الهجوم"
 
 #: ../../src/wui/fieldaction.cc:502
 msgid "Attack"
@@ -3811,7 +3822,7 @@ msgstr ""
 
 #: ../../src/wui/game_chat_menu.cc:37
 msgid "Chat Menu"
-msgstr ""
+msgstr "قائمه الدردشه"
 
 #: ../../src/wui/game_debug_ui.cc:237
 msgid "Debug Field"
@@ -3830,12 +3841,12 @@ msgstr ""
 #: ../../src/wui/game_main_menu.cc:42
 #: ../../src/editor/ui_menus/editor_main_menu.cc:51
 msgid "Main Menu"
-msgstr ""
+msgstr "القائمه الرئيسيه"
 
 #: ../../src/wui/game_main_menu.cc:50
 #: ../../src/wui/general_statistics_menu.cc:47
 msgid "General Statistics"
-msgstr ""
+msgstr "إحصائيات عامه"
 
 #: ../../src/wui/game_main_menu.cc:56
 #: ../../src/wui/ware_statistics_menu.cc:138
@@ -4087,15 +4098,15 @@ msgstr ""
 
 #: ../../src/wui/general_statistics_menu.cc:204
 msgid "Productivity"
-msgstr "إنتاجية"
+msgstr "اﻹنتاجيه"
 
 #: ../../src/wui/general_statistics_menu.cc:212
 msgid "Casualties"
-msgstr ""
+msgstr "الخسائر"
 
 #: ../../src/wui/general_statistics_menu.cc:220
 msgid "Kills"
-msgstr ""
+msgstr "القتلى"
 
 #: ../../src/wui/general_statistics_menu.cc:228
 msgid "Military buildings lost"
@@ -4120,7 +4131,7 @@ msgstr ""
 
 #: ../../src/wui/interactive_base.cc:319
 msgid "PAUSE"
-msgstr "بوقفة"
+msgstr "PAUSE"
 
 #: ../../src/wui/interactive_base.cc:339
 #, c-format
@@ -4134,21 +4145,21 @@ msgstr ""
 #: ../../src/wui/interactive_player.cc:107
 #: ../../src/wui/interactive_spectator.cc:51
 msgid "Chat"
-msgstr ""
+msgstr "الدردشه"
 
 #: ../../src/wui/interactive_player.cc:113
 #: ../../src/wui/interactive_spectator.cc:59
 msgid "Statistics"
-msgstr ""
+msgstr "اﻹحصائيات"
 
 #: ../../src/wui/interactive_player.cc:116
 msgid "Objectives"
-msgstr ""
+msgstr "العناصر"
 
 #: ../../src/wui/interactive_player.cc:125
 #: ../../src/wui/interactive_player.cc:288
 msgid "Messages"
-msgstr ""
+msgstr "الرسائل"
 
 #: ../../src/wui/interactive_player.cc:128
 msgid "Ware help"
@@ -4171,11 +4182,11 @@ msgstr ""
 
 #: ../../src/wui/login_box.cc:33
 msgid "Nickname:"
-msgstr ""
+msgstr "اللقب:"
 
 #: ../../src/wui/login_box.cc:39
 msgid "Password:"
-msgstr "كلمة السر:"
+msgstr "كلمة المرور:"
 
 #: ../../src/wui/login_box.cc:48
 msgid "WARNING: Password will be shown and saved readable!"
@@ -4187,39 +4198,39 @@ msgstr ""
 
 #: ../../src/wui/login_box.cc:58
 msgid "Automatically use this login information from now on."
-msgstr ""
+msgstr "إستخدم نفس بيانات الولوج هذه من الان فصاعداً"
 
 #: ../../src/wui/login_box.cc:64
 msgid "Login"
-msgstr "تسجيل الدخول"
+msgstr "ولوج"
 
 #: ../../src/wui/login_box.cc:86
 msgid "Empty Nickname"
-msgstr ""
+msgstr "خانه اللقب فارغه"
 
 #: ../../src/wui/login_box.cc:86
 msgid "Please enter a nickname!"
-msgstr ""
+msgstr "من فضلك ادخل لقباً!"
 
 #: ../../src/wui/login_box.cc:93
 msgid "Space in Nickname"
-msgstr ""
+msgstr "لقد ادخلت مسافات فى خانه اللقب"
 
 #: ../../src/wui/login_box.cc:94
 msgid "Sorry, but spaces are not allowed in nicknames!"
-msgstr ""
+msgstr "اسف،ولكن المسافات غير مسموحه فى خانه اللقب!"
 
 #: ../../src/wui/login_box.cc:101
 msgid "Empty Password"
-msgstr ""
+msgstr "خانه كلمه المرور فارغه"
 
 #: ../../src/wui/login_box.cc:101
 msgid "Please enter your password!"
-msgstr ""
+msgstr "من فضلك ادخل كلمه مرور!"
 
 #: ../../src/wui/militarysitewindow.cc:59
 msgid "Soldiers"
-msgstr "جنود"
+msgstr "الجنود"
 
 #: ../../src/wui/minimap.cc:154
 #: ../../src/editor/ui_menus/editor_tool_menu.cc:67
@@ -4228,7 +4239,7 @@ msgstr "أرض"
 
 #: ../../src/wui/minimap.cc:160
 msgid "Owner"
-msgstr ""
+msgstr "المالك"
 
 #: ../../src/wui/minimap.cc:166
 msgid "Flags"
@@ -4236,11 +4247,11 @@ msgstr ""
 
 #: ../../src/wui/minimap.cc:172
 msgid "Roads"
-msgstr ""
+msgstr "الطرق"
 
 #: ../../src/wui/minimap.cc:184
 msgid "Zoom"
-msgstr ""
+msgstr "تقريب"
 
 #: ../../src/wui/multiplayersetupgroup.cc:103
 msgid "free"
@@ -4264,24 +4275,24 @@ msgstr ""
 #: ../../src/wui/multiplayersetupgroup.cc:320
 #: ../../src/wui/playerdescrgroup.cc:174 ../../src/wui/playerdescrgroup.cc:192
 msgid "Random"
-msgstr ""
+msgstr "عشوائى"
 
 #: ../../src/wui/multiplayersetupgroup.cc:314
 #: ../../src/wui/playerdescrgroup.cc:180
 msgid "Human"
-msgstr ""
+msgstr "إنسان"
 
 #: ../../src/wui/multiplayersetupgroup.cc:410
 msgid "Client name"
-msgstr ""
+msgstr "إسم العميل"
 
 #: ../../src/wui/multiplayersetupgroup.cc:418
 msgid "Role"
-msgstr ""
+msgstr "دور"
 
 #: ../../src/wui/multiplayersetupgroup.cc:434
 msgid "Start"
-msgstr "ابدء"
+msgstr "إبدأ"
 
 #: ../../src/wui/multiplayersetupgroup.cc:442
 msgid "Type"
@@ -4298,11 +4309,11 @@ msgstr ""
 
 #: ../../src/wui/plot_area.cc:108
 msgid "d"
-msgstr ""
+msgstr "د"
 
 #: ../../src/wui/plot_area.cc:109
 msgid "h"
-msgstr ""
+msgstr "ح"
 
 #: ../../src/wui/plot_area.cc:110
 msgid "min"
@@ -4319,11 +4330,11 @@ msgstr "عامل"
 
 #: ../../src/wui/productionsitewindow.cc:80
 msgid "Exp"
-msgstr ""
+msgstr "الخبره"
 
 #: ../../src/wui/productionsitewindow.cc:81
 msgid "Next Level"
-msgstr ""
+msgstr "المستوى التالى"
 
 #: ../../src/wui/productionsitewindow.cc:94
 msgid "Terminate the employment of the selected worker"
@@ -4492,15 +4503,15 @@ msgstr ""
 
 #: ../../src/wui/waresqueuedisplay.cc:184
 msgid "Highest priority"
-msgstr ""
+msgstr "اعلى اولويه ممكنه"
 
 #: ../../src/wui/waresqueuedisplay.cc:187
 msgid "Normal priority"
-msgstr ""
+msgstr "اولويه عاديه"
 
 #: ../../src/wui/waresqueuedisplay.cc:190
 msgid "Lowest priority"
-msgstr ""
+msgstr "اقل اولويه ممكنه"
 
 #: ../../src/wui/waresqueuedisplay.cc:236
 msgid "Decrease the number of wares you want to be stored here."
@@ -4654,27 +4665,27 @@ msgstr ""
 #: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:70
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:81
 msgid "Name: "
-msgstr ""
+msgstr "الاسم: "
 
 #: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:77
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:88
 msgid "Author: "
-msgstr ""
+msgstr "المؤلف: "
 
 #: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:84
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:95
 msgid "Size: "
-msgstr "حجم: "
+msgstr "الحجم: "
 
 #: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:91
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:102
 msgid "World: "
-msgstr ""
+msgstr "العالم: "
 
 #: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:98
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:109
 msgid "Players: "
-msgstr ""
+msgstr "اللاعبين: "
 
 #: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:106
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:116
@@ -4753,11 +4764,11 @@ msgstr "الموارد:"
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:254
 msgid "Low"
-msgstr ""
+msgstr "منخفض"
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:256
 msgid "High"
-msgstr ""
+msgstr "مرتفع"
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:293
 msgid "Map ID:"
@@ -4771,11 +4782,11 @@ msgstr ""
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:340
 msgid "Generate Map"
-msgstr ""
+msgstr "ولد خريطه"
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:489
 msgid "Generating random map..."
-msgstr ""
+msgstr "يولد الخريطه العشوائيه..."
 
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:146
 #: ../../src/editor/ui_menus/editor_main_menu_save_map_make_directory.cc:33
@@ -4833,11 +4844,11 @@ msgstr ""
 
 #: ../../src/editor/ui_menus/editor_player_menu.cc:203
 msgid "Player "
-msgstr "لاعب "
+msgstr "اللاعب "
 
 #: ../../src/editor/ui_menus/editor_player_menu.cc:322
 msgid "Error!"
-msgstr ""
+msgstr "خطأ!"
 
 #: ../../src/editor/ui_menus/editor_player_menu.cc:324
 msgid ""
@@ -4867,7 +4878,7 @@ msgstr ""
 
 #: ../../src/editor/ui_menus/editor_player_menu_allowed_buildings_menu.cc:94
 msgid "Allow"
-msgstr "سماح"
+msgstr "إسمح"
 
 #: ../../src/editor/ui_menus/editor_tool_change_height_options_menu.cc:39
 msgid "Height Tools Options"

@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: Widelands svn4866\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2013-09-15 17:41+0000\n"
-"PO-Revision-Date: 2013-07-21 11:59+0000\n"
-"Last-Translator: Tubuntu <Unknown>\n"
+"PO-Revision-Date: 2013-10-06 11:58+0000\n"
+"Last-Translator: fk <Unknown>\n"
 "Language-Team: French <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-09-16 04:34+0000\n"
-"X-Generator: Launchpad (build 16761)\n"
+"X-Launchpad-Export-Date: 2013-10-07 05:11+0000\n"
+"X-Generator: Launchpad (build 16791)\n"
 
 #: ../../campaigns/cconfig:64
 msgid "01 - Eyes in the Dark"
@@ -110,6 +110,7 @@ msgstr ""
 #: ../../maps/Ice wars.wmf/elemental:11
 msgid "After autumn is winter. Some things are frozen, but not the war."
 msgstr ""
+"Apres automne il y a hiver. Quelque choses ont gelé, mais pas la guerre."
 
 #: ../../maps/Kings and Queens.wmf/elemental:11
 msgid ""
@@ -117,6 +118,9 @@ msgid ""
 "in prosperity, will someday collapse into a devastating war. Has your latest "
 "betrayal been one too many and will the prophecy come true?"
 msgstr ""
+"Une vieille légende dit que les sept royaumes, qui ont prospéré pendant des "
+"siècles en abondance, ils effondreront un jour dans une guerre destructeuse. "
+"Est-ce que ta dernière trahison fut de trop et que la prophétie sera realisé?"
 
 #: ../../maps/The long way.wmf/elemental:9
 msgid ""
@@ -154,7 +158,7 @@ msgstr "Barbares - Le second Empire"
 
 #: ../../maps/Calvisson.wmf/elemental:9
 msgid "Calvisson"
-msgstr ""
+msgstr "Calvisson"
 
 #: ../../campaigns/cconfig:44
 msgid "Challenging. Introduces the Atlanteans"
@@ -181,7 +185,7 @@ msgstr "Cratère"
 
 #: ../../maps/Crossing the horizon.wmf/elemental:9
 msgid "Crossing the horizon"
-msgstr ""
+msgstr "Franchir l'horizon"
 
 #: ../../maps/Desert Tournament.wmf/elemental:7
 msgid "Desert Tournament"
@@ -401,7 +405,7 @@ msgstr ""
 
 #: ../../maps/Kings and Queens.wmf/elemental:9
 msgid "Kings and Queens"
-msgstr ""
+msgstr "Les Rois et les Reines"
 
 #: ../../maps/Lake of tranquility.wmf/elemental:7
 msgid "Lake of Tranquility"
@@ -422,7 +426,7 @@ msgstr ""
 
 #: ../../maps/Long, long way.wmf/elemental:9
 msgid "Long, long way"
-msgstr ""
+msgstr "Long, long chemin"
 
 #: ../../maps/Crossing the horizon.wmf/elemental:11
 msgid "Man your ship and sail to the horizon."
@@ -567,7 +571,7 @@ msgstr "Équipes suggérées: (bleu, jaune) contre (rouge, vert)"
 
 #: ../../maps/Crossing the horizon.wmf/elemental:12
 msgid "Suggested Teams: all ok"
-msgstr ""
+msgstr "Équipes Suggérées: tout est ok"
 
 #: ../../maps/Rendez-Vous.wmf/elemental:10
 msgid "Suggested Teams: all ok."
@@ -578,6 +582,8 @@ msgid ""
 "Suggested Teams: blue vs red, yellow vs green, (blue, yellow) vs (red, "
 "green), (blue, green) vs (red, yellow)"
 msgstr ""
+"Équipes Suggérées: bleu contre rouge, jaune contre vert, (bleu, jaune) "
+"contre (rouge, vert), (bleu, vert) contre (rouge, jaune)"
 
 #: ../../maps/Long, long way.wmf/elemental:12
 msgid ""
@@ -585,10 +591,13 @@ msgid ""
 "green), (blue, yellow, black) vs (red, green, orange), (blue, yellow, black, "
 "purple) vs (red, green, orange, white)"
 msgstr ""
+"Équipes Suggérées: bleu contre rouge, jaune contre vert, (bleu, jaune) "
+"contre (rouge, vert), (bleu, jaune, noir) contre (rouge, vert, orange), "
+"(bleu, jaune, noir, violet) contre (rouge, vert, orange, blanc)"
 
 #: ../../maps/Plateau.wmf/elemental:10
 msgid "Suggested positions: blue vs yellow"
-msgstr ""
+msgstr "Positions suggérées: blue contre jaune"
 
 #: ../../maps/The Nile.wmf/elemental:12
 msgid ""
@@ -597,12 +606,19 @@ msgid ""
 "green) vs (red, yellow, black), (blue, green, orange, white) vs (red, "
 "yellow, black, purple)"
 msgstr ""
+"Équipes Suggérées: bleu contre rouge, jaune contre vert, (bleu, jaune) "
+"contre (rouge, vert), (vert, orange, blanc) contre (jaune, noir, violet), "
+"(bleu, orange, vert) contre (rouge, jaune, noir),  (bleu, vert, orange, "
+"blanc) contre (rouge, jaune, noir, violet)"
 
 #: ../../maps/Trident of Fire.wmf/elemental:12
 msgid ""
 "Suggested teams: red vs green, (blue, yellow) vs (green, orange), (blue, "
 "black) vs (green, red), (blue, black, yellow) vs (green, red, orange)"
 msgstr ""
+"Équipes Suggérées: rouge contre vert,  (bleu, jaune) contre (vert, orange), "
+"(bleu, noir) contre (vert, rouge), (bleu, noire, jaune) contre (vert, rouge, "
+"orange)"
 
 #: ../../maps/Swamp Island.wmf/elemental:9
 msgid "Swamp Island"
@@ -622,7 +638,7 @@ msgstr "Le Plateau Vert"
 
 #: ../../maps/The Nile.wmf/elemental:9
 msgid "The Nile"
-msgstr ""
+msgstr "Le Nil"
 
 #: ../../maps/The Oasis Triangle.wmf/elemental:7
 msgid "The Oasis Triangle"
@@ -760,7 +776,7 @@ msgstr ""
 
 #: ../../maps/Twin Lagoons.wmf/elemental:9
 msgid "Twin Lagoons"
-msgstr ""
+msgstr "Lagunes Jumelles"
 
 #: ../../maps/Twinkling Waves.wmf/elemental:9
 msgid "Twinkling Waves"
@@ -777,7 +793,7 @@ msgstr ""
 
 #: ../../maps/Volcanic Winter.wmf/elemental:9
 msgid "Volcanic Winter"
-msgstr ""
+msgstr "Hiver Volcanique"
 
 #: ../../maps/War of the Valleys.wmf/elemental:7
 msgid "War of the Valleys"

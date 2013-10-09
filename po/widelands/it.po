@@ -7,15 +7,15 @@ msgstr ""
 "Project-Id-Version: Widelands svn4530\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2013-09-15 19:41+0200\n"
-"PO-Revision-Date: 2013-03-15 10:11+0000\n"
-"Last-Translator: Guybrush88 <Unknown>\n"
+"PO-Revision-Date: 2013-09-30 11:51+0000\n"
+"Last-Translator: Angelo Locritani <Unknown>\n"
 "Language-Team: Italiano <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2013-09-16 04:44+0000\n"
-"X-Generator: Launchpad (build 16761)\n"
+"X-Launchpad-Export-Date: 2013-10-01 05:10+0000\n"
+"X-Generator: Launchpad (build 16774)\n"
 "X-Poedit-Country: ITALY\n"
 "X-Poedit-Language: Italian\n"
 "X-Poedit-SourceCharset: utf-8\n"
@@ -36,22 +36,26 @@ msgid ""
 "map in the map editor.\n"
 "\n"
 msgstr ""
+"ATTENZIONE: %i punti di costruzione di porti non possono essere risolti e "
+"sono stati rimossi! Alcune isole potrebbero essere ora irraggiungibili. "
+"Valuta di correggere la mappa nell'editor.\n"
+"\n"
 
 #: ../../src/s2map.cc:886
 msgid "WARNING"
-msgstr ""
+msgstr "ATTENZIONE"
 
 #: ../../src/save_handler.cc:75
 msgid "Saving game..."
-msgstr ""
+msgstr "Salvataggio..."
 
 #: ../../src/save_handler.cc:94
 msgid "Saving failed!"
-msgstr ""
+msgstr "Salvataggio fallito!"
 
 #: ../../src/save_handler.cc:113
 msgid "Game saved"
-msgstr ""
+msgstr "Gioco salvato"
 
 #: ../../src/wlapplication.cc:398
 msgid "ERROR: Could not connect to metaserver (reason above)!\n"
@@ -90,6 +94,9 @@ msgid ""
 "Sorry, no double-instance debugging on _WIN32.\n"
 "\n"
 msgstr ""
+"\n"
+"Spiacente, nessun debugging doppia-istanza su _WIN32.\n"
+"\n"
 
 #: ../../src/wlapplication.cc:1211
 msgid "--double is disabled. This is not a debug build!"
@@ -333,13 +340,16 @@ msgstr ""
 
 #: ../../src/wlapplication.cc:1525
 msgid "Fallback settings in effect"
-msgstr ""
+msgstr "Impostazioni di fallback attive"
 
 #: ../../src/wlapplication.cc:1527
 msgid ""
 "Your video settings could not be enabled, and fallback settings are in "
 "effect. Please check the graphics options!"
 msgstr ""
+"Non è stato possibile configurare il video con i parametri specificati, sono "
+"stati ripristinati i valori di default. Per favore, controlla le opzioni "
+"relative alla grafica!"
 
 #: ../../src/wlapplication.cc:1598
 msgid "Warning: "
@@ -918,7 +928,7 @@ msgstr "informazioni sul giocatore: %s"
 
 #: ../../src/game_io/game_preload_data_packet.cc:72
 msgid "Endless Game"
-msgstr ""
+msgstr "Partita senza fine"
 
 #: ../../src/game_io/game_preload_data_packet.cc:77
 #: ../../src/logic/game.cc:248 ../../src/logic/game.cc:344
@@ -988,7 +998,7 @@ msgstr "sconosciuto"
 #: ../../src/logic/battle.cc:174
 #, c-format
 msgid "[battle] soldier %u lose battle\n"
-msgstr ""
+msgstr "[battaglia] il soldato %u ha perso la battaglia\n"
 
 #: ../../src/logic/battle.cc:178
 #, c-format
@@ -1060,7 +1070,7 @@ msgstr "Caricamento tribù"
 
 #: ../../src/logic/game.cc:139
 msgid "Not set"
-msgstr ""
+msgstr "Non impostato"
 
 #: ../../src/logic/game.cc:227
 msgid "Preloading a map"
@@ -1690,7 +1700,7 @@ msgstr "livello"
 #: ../../src/logic/production_program.cc:1282
 #, c-format
 msgid "No soldier to train!"
-msgstr ""
+msgstr "Nessun soldato da addestrare!"
 
 #: ../../src/logic/production_program.cc:1292
 #: ../../src/logic/production_program.cc:1382
@@ -1717,11 +1727,11 @@ msgstr "(non occupato)"
 
 #: ../../src/logic/productionsite.cc:249
 msgid "Worker missing"
-msgstr ""
+msgstr "Lavoratore mancante"
 
 #: ../../src/logic/productionsite.cc:249
 msgid "Workers missing"
-msgstr ""
+msgstr "Lavoratori mancanti"
 
 #: ../../src/logic/productionsite.cc:258
 msgid "(stopped)"
@@ -1738,36 +1748,39 @@ msgstr ""
 
 #: ../../src/logic/ship.cc:423
 msgid "Port space found"
-msgstr ""
+msgstr "Trovato luogo per costruire un porto"
 
 #: ../../src/logic/ship.cc:424
 msgid "An expedition ship found a new port build space."
 msgstr ""
+"Una nave in spedizione ha trovato un nuovo luogo dove costruire un porto."
 
 #: ../../src/logic/ship.cc:531
 msgid "Island surrounded"
-msgstr ""
+msgstr "Isola circondata"
 
 #: ../../src/logic/ship.cc:532
 msgid "An expedition ship surrounded its island without any events."
-msgstr ""
+msgstr "Una nave in spedizione ha circondato la sua isola senza eventi."
 
 #: ../../src/logic/ship.cc:584
 msgid "Coast reached"
-msgstr ""
+msgstr "Raggiunta la costa"
 
 #: ../../src/logic/ship.cc:586
 msgid ""
 "An expedition ship reached a coast and is waiting for further commands."
 msgstr ""
+"Una nave in spedizione ha raggiunto la costa e sta attendendo ulteriori "
+"ordini."
 
 #: ../../src/logic/ship.cc:722
 msgid "Expedition ready"
-msgstr ""
+msgstr "Spedizione pronta"
 
 #: ../../src/logic/ship.cc:723
 msgid "An expedition ship is waiting for your commands."
-msgstr ""
+msgstr "Una nave in spedizione sta attendendo i tuoi ordini."
 
 #: ../../src/logic/ship.cc:986
 #, c-format
@@ -2233,7 +2246,7 @@ msgstr "terreno: %s"
 #: ../../src/map_io/widelands_map_version_data_packet.cc:76
 #, c-format
 msgid "version: %s"
-msgstr ""
+msgstr "versione: %s"
 
 #: ../../src/map_io/widelands_map_ware_data_packet.cc:76
 #: ../../src/map_io/widelands_map_waredata_data_packet.cc:208
@@ -2254,7 +2267,7 @@ msgstr "Problema di connessione"
 
 #: ../../src/network/internet_gaming.cc:116
 msgid "Widelands could not connect to the metaserver."
-msgstr ""
+msgstr "Widelands non riesce a connettersi al metaserver."
 
 #: ../../src/network/internet_gaming.cc:122 ../../src/network/netclient.cc:102
 msgid "Could not establish connection to host"
@@ -2354,7 +2367,7 @@ msgstr "Errore di conversione"
 #: ../../src/network/internet_gaming.cc:779
 #, c-format
 msgid "Conversion from std::string to bool failed. String was \"%s\""
-msgstr ""
+msgstr "Conversione da std::string a bool fallita. La stringa era \"%s\""
 
 #: ../../src/network/internet_gaming_messages.cc:42
 #, c-format
@@ -2379,6 +2392,9 @@ msgid ""
 "You got disconnected, as you sent a superuser command without superuser "
 "permission. This incident will be logged and reported to the administrator."
 msgstr ""
+"Sei stato disconnesso per aver inviato un comando da superutente senza "
+"averne il permesso. Questo \"incidente\" verrà loggato e comunicato "
+"all'amministratore."
 
 #: ../../src/network/internet_gaming_messages.cc:50
 msgid "You got disconnected, as the metaserver is currently restarting."
@@ -2552,6 +2568,8 @@ msgid ""
 "This is a dedicated server. Send \"@%s help\" to get a full list of "
 "available commands."
 msgstr ""
+"Questo è un server dedicato. Invia \"@%s help\" per ottenere la lista "
+"completa dei comandi disponibili."
 
 #: ../../src/network/nethost.cc:1201
 msgid ""
@@ -2847,7 +2865,7 @@ msgstr "OK"
 #: ../../src/scripting/lua_game.cc:1088
 #, c-format
 msgid " (achieved %s)"
-msgstr ""
+msgstr " (ottenuto %s)"
 
 #: ../../src/sound/sound_handler.cc:147
 #, c-format
@@ -2927,7 +2945,7 @@ msgstr "[voce non valida]"
 #: ../../src/ui_fsmenu/editor_mapselect.cc:52
 #: ../../src/ui_fsmenu/mapselect.cc:54
 msgid "Choose a map"
-msgstr ""
+msgstr "Scegli una mappa"
 
 #: ../../src/ui_fsmenu/campaign_select.cc:267
 #: ../../src/ui_fsmenu/editor_mapselect.cc:56
@@ -2991,7 +3009,7 @@ msgstr "Descrizione:"
 #: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:224
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:297
 msgid "parent"
-msgstr ""
+msgstr "superiore"
 
 #: ../../src/ui_fsmenu/fileview.cc:72 ../../src/wui/watchwindow.cc:139
 msgid "Close"
@@ -3218,11 +3236,11 @@ msgstr "I giocatori salvati sono:"
 #: ../../src/ui_fsmenu/launchMPG.cc:562
 #, c-format
 msgid "Player %u"
-msgstr ""
+msgstr "Giocatore %u"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:566
 msgid "closed"
-msgstr ""
+msgstr "Chiuso"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:630
 msgid "There was an error!"
@@ -3419,7 +3437,7 @@ msgstr "Elimina"
 
 #: ../../src/ui_fsmenu/loadgame.cc:83
 msgid "Choose saved game"
-msgstr ""
+msgstr "Scegli un salvataggio"
 
 #: ../../src/ui_fsmenu/loadgame.cc:87 ../../src/ui_fsmenu/loadreplay.cc:71
 #: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:57
@@ -3432,7 +3450,7 @@ msgstr "Tempo di gioco:"
 
 #: ../../src/ui_fsmenu/loadgame.cc:105
 msgid "Minimap:"
-msgstr ""
+msgstr "Minimappa:"
 
 #: ../../src/ui_fsmenu/loadgame.cc:157 ../../src/ui_fsmenu/loadreplay.cc:138
 msgid "Delete file"
@@ -3452,7 +3470,7 @@ msgstr "Tempo di gioco sconosciuto"
 
 #: ../../src/ui_fsmenu/loadreplay.cc:67
 msgid "Choose a replay"
-msgstr ""
+msgstr "Scegli un replay"
 
 #: ../../src/ui_fsmenu/main.cc:40
 msgid "Play Tutorial"
@@ -3499,7 +3517,7 @@ msgstr "dal gruppo di sviluppo di Widelands"
 
 #: ../../src/ui_fsmenu/main.cc:96
 msgid "Licensed under the GNU General Public License V2.0"
-msgstr ""
+msgstr "Rilasciato con licenza GNU General Public License V2.0"
 
 #: ../../src/ui_fsmenu/mapselect.cc:59
 msgid "Load Map as scenario: "
@@ -3523,7 +3541,7 @@ msgstr "Mappa ufficiale"
 
 #: ../../src/ui_fsmenu/mapselect.cc:172
 msgid "Seafaring Map"
-msgstr ""
+msgstr "Mappa con porti"
 
 #: ../../src/ui_fsmenu/mapselect.cc:175
 msgid "1v1"
@@ -3531,15 +3549,15 @@ msgstr "1 contro 1"
 
 #: ../../src/ui_fsmenu/mapselect.cc:176
 msgid "Teams of 2"
-msgstr ""
+msgstr "Squadre da 2"
 
 #: ../../src/ui_fsmenu/mapselect.cc:177
 msgid "Teams of 3"
-msgstr ""
+msgstr "Squadre da 3"
 
 #: ../../src/ui_fsmenu/mapselect.cc:180
 msgid "Teams of 4"
-msgstr ""
+msgstr "Squadre da 4"
 
 #: ../../src/ui_fsmenu/mapselect.cc:181
 msgid "Free for all"
@@ -3825,15 +3843,15 @@ msgstr "Vuoi davvero potenziare questo/a %s?"
 
 #: ../../src/wui/actionconfirm.cc:402 ../../src/wui/actionconfirm.cc:443
 msgid "Sink the ship?"
-msgstr ""
+msgstr "Affonda la nave?"
 
 #: ../../src/wui/actionconfirm.cc:402
 msgid "Do you really want to sink this ship?"
-msgstr ""
+msgstr "Vuoi davvero affondare questa nave?"
 
 #: ../../src/wui/actionconfirm.cc:443
 msgid "Do you really want to cancel the active expedition?"
-msgstr ""
+msgstr "Vuoi davvero cancellare la spedizione attiva?"
 
 #: ../../src/wui/attack_box.cc:167
 msgid "Soldiers:"
@@ -3910,11 +3928,11 @@ msgstr "Mostra il prossimo"
 
 #: ../../src/wui/buildingwindow.cc:181
 msgid "Cancel the expedition"
-msgstr ""
+msgstr "Cancella la spedizione"
 
 #: ../../src/wui/buildingwindow.cc:191
 msgid "Start an expedition"
-msgstr ""
+msgstr "Inizia una spedizione"
 
 #: ../../src/wui/buildingwindow.cc:207 ../../src/wui/game_summary.cc:77
 msgid "Continue"
@@ -4085,12 +4103,12 @@ msgstr "Campo di debug"
 #: ../../src/wui/game_debug_ui.cc:375
 #, c-format
 msgid "Resource: %s\n"
-msgstr ""
+msgstr "Risorsa: %s\n"
 
 #: ../../src/wui/game_debug_ui.cc:381
 #, c-format
 msgid "  Amount: %i/%i\n"
-msgstr ""
+msgstr "  Quantità: %i/%i\n"
 
 #: ../../src/wui/game_main_menu.cc:42
 #: ../../src/editor/ui_menus/editor_main_menu.cc:51
@@ -4128,17 +4146,17 @@ msgstr "Tempo di gioco: "
 
 #: ../../src/wui/game_main_menu_save_game.cc:79
 msgid "Win condition: "
-msgstr ""
+msgstr "Condizione di vittoria: "
 
 #: ../../src/wui/game_main_menu_save_game.cc:140
 #: ../../src/wui/game_main_menu_save_game.cc:178
 msgid "player"
-msgstr ""
+msgstr "gicoatore"
 
 #: ../../src/wui/game_main_menu_save_game.cc:140
 #: ../../src/wui/game_main_menu_save_game.cc:178
 msgid "players"
-msgstr ""
+msgstr "giocatori"
 
 #: ../../src/wui/game_main_menu_save_game.cc:248
 msgid ""
@@ -4281,64 +4299,64 @@ msgstr "Volume effetti sonori"
 
 #: ../../src/wui/game_summary.cc:44
 msgid "Game over"
-msgstr ""
+msgstr "Partita terminata"
 
 #: ../../src/wui/game_summary.cc:60
 msgid "Elapsed time:"
-msgstr ""
+msgstr "Tempo impiegato:"
 
 #: ../../src/wui/game_summary.cc:77
 msgid "Continue playing"
-msgstr ""
+msgstr "Continua la partita"
 
 #: ../../src/wui/game_summary.cc:83
 msgid "Quit"
-msgstr ""
+msgstr "Esci"
 
 #: ../../src/wui/game_summary.cc:83
 msgid "Return to main menu"
-msgstr ""
+msgstr "Tornare al menu principale"
 
 #: ../../src/wui/game_summary.cc:93
 msgid "Time"
-msgstr ""
+msgstr "Tempo"
 
 #: ../../src/wui/game_summary.cc:157
 msgid "Lost"
-msgstr ""
+msgstr "Perso"
 
 #: ../../src/wui/game_summary.cc:160
 msgid "Won"
-msgstr ""
+msgstr "Vinto"
 
 #: ../../src/wui/game_summary.cc:168
 msgid "Resigned"
-msgstr ""
+msgstr "Ritirato"
 
 #: ../../src/wui/game_summary.cc:180
 msgid "You won!"
-msgstr ""
+msgstr "Hai Vinto!"
 
 #: ../../src/wui/game_summary.cc:182
 msgid "You lost."
-msgstr ""
+msgstr "Hai perso."
 
 #: ../../src/wui/game_summary.cc:187
 #, c-format
 msgid "%s won!"
-msgstr ""
+msgstr "Ha vinto %s!"
 
 #: ../../src/wui/game_summary.cc:191
 msgid "Team %|1$u| won!"
-msgstr ""
+msgstr "La squadra %|1$u| ha vinto!"
 
 #: ../../src/wui/game_summary.cc:245
 msgid "Score"
-msgstr ""
+msgstr "Punteggio"
 
 #: ../../src/wui/game_summary.cc:254
 msgid "Player info"
-msgstr ""
+msgstr "Informazione giocatore"
 
 #: ../../src/wui/general_statistics_menu.cc:172
 msgid "Land"
@@ -4513,7 +4531,7 @@ msgstr "Zoom"
 
 #: ../../src/wui/multiplayersetupgroup.cc:103
 msgid "free"
-msgstr ""
+msgstr "libero"
 
 #: ../../src/wui/multiplayersetupgroup.cc:281
 msgid "Shared in"
@@ -4612,39 +4630,39 @@ msgstr "Nave"
 
 #: ../../src/wui/shipwindow.cc:116
 msgid "Scout towards the north west"
-msgstr ""
+msgstr "Esplora verso nord ovest"
 
 #: ../../src/wui/shipwindow.cc:122
 msgid "Explore the island's coast clockwise"
-msgstr ""
+msgstr "Esplora la costa dell'isola in senso orario"
 
 #: ../../src/wui/shipwindow.cc:128
 msgid "Scout towards the north east"
-msgstr ""
+msgstr "Esplora verso nord est"
 
 #: ../../src/wui/shipwindow.cc:134
 msgid "Scout towards the west"
-msgstr ""
+msgstr "Esplora verso ovest"
 
 #: ../../src/wui/shipwindow.cc:140
 msgid "Construct a port at the current location"
-msgstr ""
+msgstr "Costruisci un porto in questa posizione"
 
 #: ../../src/wui/shipwindow.cc:146
 msgid "Scout towards the east"
-msgstr ""
+msgstr "Esplora verso est"
 
 #: ../../src/wui/shipwindow.cc:152
 msgid "Scout towards the south west"
-msgstr ""
+msgstr "Esplora verso sud ovest"
 
 #: ../../src/wui/shipwindow.cc:158
 msgid "Explore the island's coast counter clockwise"
-msgstr ""
+msgstr "Esplora la costa dell'isola in senso antiorario"
 
 #: ../../src/wui/shipwindow.cc:164
 msgid "Scout towards the south east"
-msgstr ""
+msgstr "Esplora verso sud est"
 
 #: ../../src/wui/shipwindow.cc:176
 msgid "Go to ship"
@@ -4656,11 +4674,11 @@ msgstr "Vai alla destinazione"
 
 #: ../../src/wui/shipwindow.cc:188
 msgid "Sink the ship"
-msgstr ""
+msgstr "Affonda la nave"
 
 #: ../../src/wui/shipwindow.cc:193
 msgid "Cancel the Expedition"
-msgstr ""
+msgstr "Cancella la spedizione"
 
 #: ../../src/wui/soldiercapacitycontrol.cc:66
 msgid "Decrease capacity"
@@ -4681,11 +4699,11 @@ msgstr "Clicca soldato per inviarlo via"
 
 #: ../../src/wui/soldierlist.cc:413
 msgid "Prefer Rookies"
-msgstr ""
+msgstr "Preferisci le reclute"
 
 #: ../../src/wui/soldierlist.cc:415
 msgid "Prefer Heroes"
-msgstr ""
+msgstr "Preferisci gli eroi"
 
 #: ../../src/wui/stock_menu.cc:51
 msgid "Wares (total)"
@@ -4757,7 +4775,7 @@ msgstr "Lavoratori sul molo"
 
 #: ../../src/wui/warehousewindow.cc:229
 msgid "Expedition"
-msgstr ""
+msgstr "Spedizione"
 
 #: ../../src/wui/waresqueuedisplay.cc:184
 msgid "Highest priority"
@@ -5084,11 +5102,11 @@ msgstr "senza nome"
 
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:255
 msgid "directory"
-msgstr ""
+msgstr "cartella"
 
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:259
 msgid "Not a map file"
-msgstr ""
+msgstr "Non un file di mappa"
 
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:387
 msgid " exists already. Overwrite?"
@@ -5189,7 +5207,7 @@ msgstr "Imposta valore"
 #: ../../src/editor/ui_menus/editor_tool_change_resources_options_menu.cc:45
 #: ../../src/editor/ui_menus/editor_tool_menu.cc:70
 msgid "Resources"
-msgstr ""
+msgstr "Risorse"
 
 #: ../../src/editor/ui_menus/editor_tool_change_resources_options_menu.cc:99
 msgid "Current Selection"
@@ -5205,12 +5223,12 @@ msgstr "Perturba altezza"
 
 #: ../../src/editor/ui_menus/editor_tool_menu.cc:68
 msgid "Immovables"
-msgstr ""
+msgstr "Immobili"
 
 #: ../../src/editor/ui_menus/editor_tool_menu.cc:69
 #: ../../src/editor/ui_menus/editor_tool_place_bob_options_menu.cc:45
 msgid "Bobs"
-msgstr ""
+msgstr "Bobs"
 
 #: ../../src/editor/ui_menus/editor_tool_menu.cc:71
 msgid "Set port space"
@@ -5237,7 +5255,7 @@ msgstr "Impostare il valore: %u"
 
 #: ../../src/editor/ui_menus/editor_tool_place_immovable_options_menu.cc:45
 msgid "Immovable Bobs"
-msgstr ""
+msgstr "Bobs immobili"
 
 #: ../../src/editor/ui_menus/editor_tool_set_terrain_options_menu.cc:46
 msgid "Terrain Select"

@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2013-09-15 17:41+0000\n"
-"PO-Revision-Date: 2013-09-12 17:07+0000\n"
+"PO-Revision-Date: 2013-09-20 14:51+0000\n"
 "Last-Translator: Miroslav Remák <Unknown>\n"
 "Language-Team: Prometheus <mmatej@yahoo.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-09-16 04:41+0000\n"
-"X-Generator: Launchpad (build 16761)\n"
+"X-Launchpad-Export-Date: 2013-09-21 05:11+0000\n"
+"X-Generator: Launchpad (build 16765)\n"
 "X-Poedit-Country: Czech Republic\n"
 "X-Poedit-Language: czech\n"
 
@@ -678,7 +678,7 @@ msgstr "Vyrobiť pekáč"
 
 #: ../../tribes/empire/toolsmithy/conf:46
 msgid "Produce basket"
-msgstr "Vyrobiť košík"
+msgstr "Vyrobiť kôš"
 
 #: ../../tribes/empire/armoursmithy/conf:33
 msgid "Produce chain armour"
@@ -1064,7 +1064,7 @@ msgid ""
 "This basket is needed by the vinefarmer for harvesting the grapes. It is "
 "produced by the toolsmith."
 msgstr ""
-"Tento košík potrebuje vinohradník na zber hrozna. Vyrába ho kováč nástrojov."
+"Tento kôš potrebuje vinohradník na zber hrozna. Vyrába ho kováč nástrojov."
 
 #: ../../tribes/empire/beer/conf:1
 msgid ""

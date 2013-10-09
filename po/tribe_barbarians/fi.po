@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: Widelands svn4208\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2013-09-15 17:41+0000\n"
-"PO-Revision-Date: 2011-03-21 20:26+0000\n"
-"Last-Translator: Jari Hautio <Unknown>\n"
+"PO-Revision-Date: 2013-10-02 17:19+0000\n"
+"Last-Translator: Teppo Mäenpää <Unknown>\n"
 "Language-Team: Finnish <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-09-16 04:38+0000\n"
-"X-Generator: Launchpad (build 16761)\n"
+"X-Launchpad-Export-Date: 2013-10-03 05:09+0000\n"
+"X-Generator: Launchpad (build 16791)\n"
 "X-Poedit-Country: FINLAND\n"
 "X-Poedit-Language: Finnish\n"
 "X-Poedit-SourceCharset: utf-8\n"
@@ -25,46 +25,58 @@ msgstr ""
 msgid ""
 "\"A new Warriors Axe brings forth the best in its wielder – or the worst in "
 "its maker.\""
-msgstr ""
+msgstr "Uusi sotakirves tuo kantajansa parhaat puolet esiin."
 
 #: ../../tribes/barbarians/hunters_hut/help.lua:12
 msgid ""
 "\"As silent as a panther,<br> as deft as a weasel,<br> as swift as an "
 "arrow,<br> as deadly as a viper.\""
 msgstr ""
+"Yhtä hiljainen kuin pantteri, viekas kuin kettu, nopea kuin nuoli, tappava "
+"kuin käärme."
 
 #: ../../tribes/barbarians/battlearena/help.lua:17
 msgid ""
 "\"Evade\" increases the soldier's chance not to be hit by the enemy and so "
 "to remain totally unaffected."
 msgstr ""
+"Taito väistää lisää sotilaan mahdollisuuksia kohdistaa vihollisen isku oman "
+"kehon ulkopuoliseen maailmankaikkeuteen."
 
 #: ../../tribes/barbarians/lime_kiln/help.lua:12
 msgid "\"Forming new stone from old with fire and water.\""
-msgstr ""
+msgstr "Tekee uutta kiveä vanhasta tulen ja veden avulla."
 
 #: ../../tribes/barbarians/gamekeepers_hut/help.lua:12
 msgid ""
 "\"He loves the animals and to breed them<br>as we love to cook and eat "
 "them.\""
 msgstr ""
+"Hän pitää eläimistä, ja saa ne lisääntymään, meidän keitellessä ja "
+"maistellessa liikayksilöitä."
 
 #: ../../tribes/barbarians/rangers_hut/help.lua:13
 msgid ""
 "\"He who can grow two trees where normally grows only one exceeds the most "
 "important general!\""
 msgstr ""
+"Hän, joka kasvattaa kaksi puuta siinä kuin muut yhden, ylittää tärkeydessään "
+"kenraalitkin."
 
 #: ../../tribes/barbarians/trainingscamp/help.lua:12
 msgid ""
 "\"He who is strong shall not forgive nor forget, but revenge injustice "
 "suffered - in the past and for all future.\""
 msgstr ""
+"Voimakas ei anna anteeksi tai unohda, vaan kostaa menneisyyden vääryydet - "
+"tulevaisuuden myös."
 
 #: ../../tribes/barbarians/granitemine/help.lua:12
 msgid ""
 "\"I can handle tons of granite, man, but no more of your vain prattle.\""
 msgstr ""
+"Minulle tonnissa kiveä ei ole vastusta, kunhan sinä pidättäyt turhasta "
+"kaskusta."
 
 #: ../../tribes/barbarians/deep_oremine/help.lua:12
 #: ../../tribes/barbarians/deeper_oremine/help.lua:12
@@ -73,23 +85,27 @@ msgid ""
 "\"I look at my own pick wearing away day by day and I realize why my work is "
 "important.\""
 msgstr ""
+"Kun näen hakkuni kuluvan päivästä toiseen, tiedän tekeväni työtä jolla on "
+"tarkoitus."
 
 #: ../../tribes/barbarians/micro-brewery/help.lua:12
 msgid ""
 "\"Let the first one drive away the hunger, the second one put you at ease; "
 "when you have swallowed up your third one, it's time for the next shift!\""
 msgstr ""
+"Ensimmäinen tuoppi vie janon, toinen rentouttaa, kolmas päättää työpäivän."
 
 #: ../../tribes/barbarians/battlearena/help.lua:12
 msgid ""
 "\"No better friend you have in battle than the enemy's blow that misses.\""
-msgstr ""
+msgstr "Vihollisen hutilointi on taistelijan paras ystävä."
 
 #: ../../tribes/barbarians/well/help.lua:12
 msgid ""
 "\"Oh how sweet is the source of life,<br> that comes down from the sky <br> "
 "and lets the earth drink.\""
 msgstr ""
+"Elämän eliksiiri, taivaasta luoksemme saapunut, nousee jälleen päivänvaloon."
 
 #: ../../tribes/barbarians/deep_goldmine/help.lua:12
 #: ../../tribes/barbarians/deeper_goldmine/help.lua:12
@@ -98,6 +114,7 @@ msgid ""
 "\"Soft and supple.<br> And yet untouched by time and weather.<br> Rays of "
 "sun, wrought into eternity ...\""
 msgstr ""
+"Pehmeää täydellistä, aikaa ja säätä kestävä. Ikuiseksi taottu auringonvalo."
 
 #: ../../tribes/barbarians/lumberjacks_hut/help.lua:12
 msgid ""
@@ -105,22 +122,24 @@ msgid ""
 "soldier. Take 50 and you're a hero. Take 20 and soon you will be a honorable "
 "lumberjack.\""
 msgstr ""
+"Kaada puu 200 iskulla, ja olet saamaton. 100 iskulla, niin olet sotilas, 50 "
+"iskulla, ja olet sankari. 20 iskulla, ja olet tukkijätkä."
 
 #: ../../tribes/barbarians/hunters_hut/help.lua:13
 msgid "\"The Art of Hunting\""
-msgstr ""
+msgstr "Metsästystaito"
 
 #: ../../tribes/barbarians/fernery/help.lua:12
 msgid "\"We grow roofs\""
-msgstr ""
+msgstr "Me kasvatamme katon pääsi päälle."
 
 #: ../../tribes/barbarians/metalworks/help.lua:12
 msgid "\"We make it work!\""
-msgstr ""
+msgstr "Me saamme kaiken toimimaan!"
 
 #: ../../tribes/barbarians/fishers_hut/help.lua:12
 msgid "\"What do you mean, my fish ain't fresh?!\""
-msgstr ""
+msgstr "Minun kalanihan on aina tuoretta."
 
 #: ../../tribes/barbarians/deep_goldmine/help.lua:30
 #: ../../tribes/barbarians/deep_oremine/help.lua:30
@@ -129,7 +148,7 @@ msgstr ""
 #: ../../tribes/barbarians/goldmine/help.lua:31
 #: ../../tribes/barbarians/oremine/help.lua:31
 msgid "%s always goes to the %s. It has no other use."
-msgstr ""
+msgstr "%s menee aina %s:lle. Joskus asiat ovat yksinkertaisia."
 
 #: ../../tribes/barbarians/battlearena/help.lua:27
 #: ../../tribes/barbarians/battlearena/help.lua:28
@@ -139,7 +158,7 @@ msgstr ""
 #: ../../tribes/barbarians/trainingscamp/help.lua:34
 #: ../../tribes/barbarians/warmill/help.lua:58
 msgid "%s and"
-msgstr ""
+msgstr "%s ja"
 
 #: ../../tribes/barbarians/coalmine/help.lua:28
 #: ../../tribes/barbarians/deep_coalmine/help.lua:27
@@ -152,14 +171,14 @@ msgstr ""
 #: ../../tribes/barbarians/granitemine/help.lua:27
 #: ../../tribes/barbarians/oremine/help.lua:27
 msgid "%s from a Big Inn"
-msgstr ""
+msgstr "%s suuresta majatalosta"
 
 #: ../../tribes/barbarians/coalmine/help.lua:26
 #: ../../tribes/barbarians/goldmine/help.lua:25
 #: ../../tribes/barbarians/granitemine/help.lua:25
 #: ../../tribes/barbarians/oremine/help.lua:25
 msgid "%s from a Tavern"
-msgstr ""
+msgstr "%s krouvista"
 
 #: ../../tribes/barbarians/coalmine/help.lua:27
 #: ../../tribes/barbarians/deep_coalmine/help.lua:26
@@ -169,32 +188,32 @@ msgstr ""
 #: ../../tribes/barbarians/granitemine/help.lua:26
 #: ../../tribes/barbarians/oremine/help.lua:26
 msgid "%s from an Inn"
-msgstr ""
+msgstr "%s majatalosta"
 
 #: ../../tribes/barbarians/axefactory/help.lua:26
 #: ../../tribes/barbarians/lime_kiln/help.lua:26
 msgid "%s from the Coal mine or the Charcoal Burner's House"
-msgstr ""
+msgstr "%s hiilikaivoksesta tai hiilenpolttajalta."
 
 #: ../../tribes/barbarians/metalworks/help.lua:26
 msgid "%s from the Lumberjack's hut"
-msgstr ""
+msgstr "%s tukkijätkän mökistä."
 
 #: ../../tribes/barbarians/axefactory/help.lua:24
 #: ../../tribes/barbarians/metalworks/help.lua:25
 #: ../../tribes/barbarians/warmill/help.lua:24
 #: ../../tribes/barbarians/warmill/help.lua:25
 msgid "%s from the Smelting Works"
-msgstr ""
+msgstr "%s sulattamosta."
 
 #: ../../tribes/barbarians/rangers_hut/help.lua:14
 msgid "%s in a conversation with a %s"
-msgstr ""
+msgstr "%s keskustelee %s:n kanssa."
 
 #: ../../tribes/barbarians/battlearena/help.lua:29
 #: ../../tribes/barbarians/trainingscamp/help.lua:35
 msgid "%s or %s"
-msgstr ""
+msgstr "%s tai %s"
 
 #: ../../tribes/barbarians/axefactory/help.lua:56
 #: ../../tribes/barbarians/coalmine/help.lua:50
@@ -213,13 +232,13 @@ msgstr ""
 #: ../../tribes/barbarians/oremine/help.lua:46
 #: ../../tribes/barbarians/warmill/help.lua:59
 msgid "%s or better"
-msgstr ""
+msgstr "%s tai parempi"
 
 #: ../../tribes/barbarians/deeper_coalmine/help.lua:53
 #: ../../tribes/barbarians/deeper_goldmine/help.lua:49
 #: ../../tribes/barbarians/deeper_oremine/help.lua:49
 msgid "%s or better and"
-msgstr ""
+msgstr "%s tai parempi, sekä"
 
 #: ../../tribes/barbarians/axefactory/help.lua:60
 #: ../../tribes/barbarians/coalmine/help.lua:53
@@ -246,7 +265,7 @@ msgstr ""
 #: ../../tribes/barbarians/oremine/help.lua:49
 #: ../../tribes/barbarians/warmill/help.lua:62
 msgid "%s to %s (%s EP)"
-msgstr ""
+msgstr "%s:stä %s:ksi (%s koulutettu)"
 
 #: ../../tribes/barbarians/deeper_coalmine/help.lua:17
 #: ../../tribes/barbarians/deeper_goldmine/help.lua:16
@@ -256,6 +275,8 @@ msgid ""
 "A %s exploits all of the resource down to the deepest level.<br>But even "
 "after having done so, it will still have a %s chance of finding some more %s."
 msgstr ""
+"%s kaivaa syvimmätkin esiintymät, ja vielä sen jälkeenkin tekee kaikkeensa "
+"löytääkseen lisää."
 
 #: ../../tribes/barbarians/coalmine/help.lua:17
 #: ../../tribes/barbarians/goldmine/help.lua:16
@@ -263,6 +284,8 @@ msgid ""
 "A %s exploits only %s of the resource. <br> From there on, it will only have "
 "a 5%% chance of finding %s."
 msgstr ""
+"%s hyödyntää vain resurssin %s. Sen jälkeen %s löytyy vain 5%% "
+"todennäköisyydellä."
 
 #: ../../tribes/barbarians/deep_coalmine/help.lua:17
 #: ../../tribes/barbarians/deep_goldmine/help.lua:16
@@ -271,10 +294,12 @@ msgid ""
 "A %s exploits only %s of the resource.<br>From there on, it will only have a "
 "5%% chance of finding %s."
 msgstr ""
+"%s hyödyntää vain resurssin %s. Sen jälkeen %s löytyy vain 5%% "
+"todennäköisyydellä."
 
 #: ../../tribes/barbarians/fernery/help.lua:47
 msgid "A Fernery can produce a sheaf of Thatch Reed in about %s on average."
-msgstr ""
+msgstr "Kaislankasvattajalta saa kaislamattoa keskimäärin %s:ssä."
 
 #: ../../tribes/barbarians/snack/conf:1
 msgid ""
@@ -306,7 +331,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/ship/conf:1
 msgid "A sea-worthy ship"
-msgstr ""
+msgstr "Merikelpoinen alus"
 
 #: ../../tribes/barbarians/ration/conf:1
 msgid ""
@@ -338,24 +363,30 @@ msgid ""
 "\t\t\tWood may serve for a household fire and to keep you warm, but when it "
 "comes to working with iron or gold, there is no way around coal."
 msgstr ""
+"Kauan, kauan sitten, barbaarit oppivat kaivamaan vuorista sitä mustaa "
+"ainetta, joka pitää heidän ahjonsa kuumina."
 
 #: ../../tribes/barbarians/axefactory/help.lua:64
 msgid ""
 "All three weapons take the same time for making, but the required raw "
 "materials vary."
-msgstr ""
+msgstr "Kunkin aseen valmistus kestää yhtä kauan; raaka-aineissa on eroja."
 
 #: ../../tribes/barbarians/warmill/help.lua:66
 msgid ""
 "All weapons require the same time for making, but the consumption of the "
 "same raw materials increases from step to step. The last two need gold."
 msgstr ""
+"Kunkin aseen valmistus kestää yhtä kauan. Raaka-ainetarve kasvaa sitä mukaa "
+"kun ase kasvaa. Kahteen viimeiseen tarvitaan myös kultaa."
 
 #: ../../tribes/barbarians/oremine/help.lua:16
 msgid ""
 "An %s exploits only %s of the resource. <br> From there on, it will only "
 "have a 5%% chance of finding %s."
 msgstr ""
+"%s hyödyntää vain esiintymästä vain %s. Sen jälkeen, %s kaivuu onnistuu vain "
+"5%% todennäköisyydellä."
 
 #: ../../tribes/barbarians/axefactory/help.lua:13
 #: ../../tribes/barbarians/warmill/help.lua:13
@@ -363,6 +394,7 @@ msgid ""
 "An old Barbarian proverb<br> meaning that you need to take some risks "
 "sometimes."
 msgstr ""
+"Barbaarimainen sanonta, jonka mukaan joskus pitää ottaa vähän riskejä."
 
 #: ../../tribes/barbarians/conf:40
 msgid "Ashes"
@@ -370,11 +402,11 @@ msgstr "Tuhkaa"
 
 #: ../../tribes/barbarians/trainingscamp/help.lua:61
 msgid "Attack"
-msgstr ""
+msgstr "Hyökkäys"
 
 #: ../../tribes/barbarians/trainingscamp/help.lua:25
 msgid "Attack Training:"
-msgstr ""
+msgstr "Hyökkäyskoulutus:"
 
 #: ../../tribes/barbarians/conf:72
 msgid "Axe"
@@ -393,7 +425,7 @@ msgstr "Kirvestehdas"
 
 #: ../../tribes/barbarians/bakery/help.lua:16
 msgid "Bake Pitta Bread for Soldiers and Miners alike."
-msgstr ""
+msgstr "Leipoo pitaleipää sotilaille ja kaivostyöläisille."
 
 #: ../../tribes/barbarians/bakery/help.lua:50
 #: ../../tribes/barbarians/conf:121
@@ -413,11 +445,11 @@ msgstr "Leipoo leipää työntekijöille."
 
 #: ../../tribes/barbarians/bakery/help.lua:51
 msgid "Baking Tray"
-msgstr ""
+msgstr "Leipälapio"
 
 #: ../../tribes/barbarians/gamekeepers_hut/help.lua:13
 msgid "Barbarian nursery rhyme"
-msgstr ""
+msgstr "Barbaarien loruleikki"
 
 #: ../../tribes/barbarians/conf:5
 msgid "Barbarians"
@@ -481,7 +513,7 @@ msgstr "Suuri majatalo"
 #: ../../tribes/barbarians/farm/help.lua:31
 #: ../../tribes/barbarians/trainingscamp/help.lua:38
 msgid "Big plot"
-msgstr ""
+msgstr "Suuri alue"
 
 #: ../../tribes/barbarians/axefactory/help.lua:56
 #: ../../tribes/barbarians/axefactory/help.lua:60
@@ -518,19 +550,19 @@ msgstr "Mustapuu"
 
 #: ../../tribes/barbarians/trainingscamp/help.lua:33
 msgid "Both Trainings:"
-msgstr ""
+msgstr "Kummatkin koulutukset:"
 
 #: ../../tribes/barbarians/conf:73
 msgid "Bread Paddle"
-msgstr ""
+msgstr "Leipälapio"
 
 #: ../../tribes/barbarians/cattlefarm/help.lua:16
 msgid "Breed Oxen for adding them to the transportation system."
-msgstr ""
+msgstr "Kasvattaa härkiä tavaroita kuljettamaan."
 
 #: ../../tribes/barbarians/cattlebreeder/conf:1
 msgid "Breeds the strong oxen that help in the transportation of wares."
-msgstr "Siittää vahvan härän joka auttaa tavaroiden kuljetuksessa."
+msgstr "Jalostaa vahvoja tavarankuljetushärkiä."
 
 #: ../../tribes/barbarians/conf:125
 #: ../../tribes/barbarians/micro-brewery/help.lua:47
@@ -574,7 +606,7 @@ msgstr "Pronssikirves"
 #: ../../tribes/barbarians/trainingscamp/help.lua:40
 #: ../../tribes/barbarians/well/help.lua:34
 msgid "Build Cost:"
-msgstr ""
+msgstr "Rakennustarvikkeet:"
 
 #: ../../tribes/barbarians/conf:126
 #: ../../tribes/barbarians/metalworks/help.lua:32
@@ -610,11 +642,11 @@ msgstr "Rakentaja"
 #: ../../tribes/barbarians/warmill/help.lua:33
 #: ../../tribes/barbarians/well/help.lua:31
 msgid "Building"
-msgstr ""
+msgstr "Rakennus"
 
 #: ../../tribes/barbarians/conf:127
 msgid "Burner"
-msgstr "Polttaja"
+msgstr "Hiilenpolttaja"
 
 #: ../../tribes/barbarians/burner/conf:1
 msgid "Burns coal."
@@ -622,11 +654,11 @@ msgstr "Polttaa hiiliä."
 
 #: ../../tribes/barbarians/lime-burner/conf:1
 msgid "Burns lime in the lime kiln."
-msgstr ""
+msgstr "Polttaa kalkkikiveä kalkiksi."
 
 #: ../../tribes/barbarians/farm/help.lua:50
 msgid "Calculation needed"
-msgstr ""
+msgstr "Pitää laskea"
 
 #: ../../tribes/barbarians/conf:114
 #: ../../tribes/barbarians/well/help.lua:42
@@ -639,11 +671,11 @@ msgstr "Kantaa tavaroita teitä pitkin."
 
 #: ../../tribes/barbarians/quarry/help.lua:17
 msgid "Carve %s out of stones standing near the hut."
-msgstr ""
+msgstr "Leikkaa %s mökin läheltä löytyvistä lohkareista."
 
 #: ../../tribes/barbarians/granitemine/help.lua:18
 msgid "Carve %s out of the rock in mountain terrain."
-msgstr ""
+msgstr "Leikkaa %s vuorilta."
 
 #: ../../tribes/barbarians/conf:160
 #: ../../tribes/barbarians/conf:169
@@ -653,7 +685,7 @@ msgstr "Linna"
 #: ../../tribes/barbarians/cattlefarm/help.lua:43
 #: ../../tribes/barbarians/conf:148
 msgid "Cattle Breeder"
-msgstr "Karjasiittäjä"
+msgstr "Karjankasvattaja"
 
 #: ../../tribes/barbarians/conf:204
 #: ../../tribes/barbarians/farm/help.lua:28
@@ -668,7 +700,7 @@ msgstr "Hiilenpolttajan talo"
 
 #: ../../tribes/barbarians/trainingscamp/help.lua:13
 msgid "Chief Chat'Karuth in a speech to his army."
-msgstr ""
+msgstr "Päällikkä Chat'Karuth puheessaan armeijalleen."
 
 #: ../../tribes/barbarians/coalmine/help.lua:53
 #: ../../tribes/barbarians/coalmine/help.lua:53
@@ -739,7 +771,7 @@ msgstr "Hiili"
 
 #: ../../tribes/barbarians/warmill/help.lua:27
 msgid "Coal from the Coal mine or the Charcoal Burner's House"
-msgstr ""
+msgstr "Hiiltä kaivoksesta tai hiilenpolttajalta"
 
 #: ../../tribes/barbarians/coalmine/help.lua:17
 #: ../../tribes/barbarians/conf:211
@@ -776,11 +808,11 @@ msgstr "Hiilikaivos"
 #: ../../tribes/barbarians/warmill/help.lua:19
 #: ../../tribes/barbarians/well/help.lua:18
 msgid "Conquer range:"
-msgstr ""
+msgstr "Valloitettava alue:"
 
 #: ../../tribes/barbarians/shipyard/conf:27
 msgid "Constructing ship"
-msgstr ""
+msgstr "Rakentaa laivaa"
 
 #: ../../tribes/barbarians/conf:154
 #: ../../tribes/barbarians/fernery/help.lua:25
@@ -800,7 +832,7 @@ msgstr "Rakennustyömaa"
 #: ../../tribes/barbarians/deeper_oremine/help.lua:37
 #: ../../tribes/barbarians/warmill/help.lua:42
 msgid "Cost cumulative:"
-msgstr ""
+msgstr "Kokonaiskustannus:"
 
 #: ../../tribes/barbarians/axefactory/help.lua:55
 #: ../../tribes/barbarians/bakery/help.lua:49
@@ -831,7 +863,7 @@ msgstr ""
 #: ../../tribes/barbarians/warmill/help.lua:57
 #: ../../tribes/barbarians/well/help.lua:41
 msgid "Crew required:"
-msgstr ""
+msgstr "Työläistarve:"
 
 #: ../../tribes/barbarians/stonemason/conf:1
 msgid "Cuts raw pieces of granite out of laying stones."
@@ -913,7 +945,7 @@ msgstr "Puolusta ja valloita!"
 #: ../../tribes/barbarians/warmill/help.lua:22
 #: ../../tribes/barbarians/well/help.lua:21
 msgid "Dependencies"
-msgstr ""
+msgstr "Riippuvuudet"
 
 #: ../../tribes/barbarians/conf:41
 msgid "Destroyed building"
@@ -929,7 +961,7 @@ msgstr "Tuhoutunut rakennus"
 #: ../../tribes/barbarians/goldmine/help.lua:18
 #: ../../tribes/barbarians/oremine/help.lua:18
 msgid "Dig %s out of the ground in mountain terrain."
-msgstr ""
+msgstr "Kaivaa vuorilta %smalmia"
 
 #: ../../tribes/barbarians/geologist/conf:1
 msgid "Discovers resources for mining."
@@ -937,7 +969,7 @@ msgstr "Paikantaa hyviä kaivosten ja kaivojen paikkoja."
 
 #: ../../tribes/barbarians/conf:157
 msgid "Dismantle Site"
-msgstr ""
+msgstr "Purkutyömaa"
 
 #: ../../tribes/barbarians/axefactory/help.lua:46
 #: ../../tribes/barbarians/bakery/help.lua:41
@@ -968,7 +1000,7 @@ msgstr ""
 #: ../../tribes/barbarians/warmill/help.lua:48
 #: ../../tribes/barbarians/well/help.lua:36
 msgid "Dismantle yields:"
-msgstr ""
+msgstr "Kierrätyskelpoiset purkujätteet:"
 
 #: ../../tribes/barbarians/conf:225
 msgid "Donjon"
@@ -976,22 +1008,22 @@ msgstr "Keskustorni"
 
 #: ../../tribes/barbarians/well/help.lua:16
 msgid "Draw Water out of the deep."
-msgstr ""
+msgstr "Nostaa pohjavettä maan pinnalle"
 
 #: ../../tribes/barbarians/battlearena/help.lua:55
 msgid "Evade"
-msgstr ""
+msgstr "Väistö"
 
 #: ../../tribes/barbarians/battlearena/help.lua:26
 msgid "Evade Training:"
-msgstr ""
+msgstr "Väistelykoulutus:"
 
 #: ../../tribes/barbarians/deep_goldmine/help.lua:13
 #: ../../tribes/barbarians/deeper_goldmine/help.lua:13
 #: ../../tribes/barbarians/goldmine/help.lua:13
 msgid ""
 "Excerpt from \"Our Treasures Underground\",<br> a traditional Barbarian song."
-msgstr ""
+msgstr "Pätkä barbaarilaulua \"Aarteemme maan alla\""
 
 #: ../../tribes/barbarians/axefactory/help.lua:58
 #: ../../tribes/barbarians/bakery/help.lua:52
@@ -1022,7 +1054,7 @@ msgstr ""
 #: ../../tribes/barbarians/warmill/help.lua:61
 #: ../../tribes/barbarians/well/help.lua:44
 msgid "Experience levels:"
-msgstr ""
+msgstr "Kokemustaso:"
 
 #: ../../tribes/barbarians/conf:206
 msgid "Farm"
@@ -1036,7 +1068,7 @@ msgstr "Viljelijä"
 
 #: ../../tribes/barbarians/lumberjacks_hut/help.lua:17
 msgid "Fell trees in the surrounding area and process them into trunks."
-msgstr ""
+msgstr "Kaataa lähialueen puut tukeiksi."
 
 #: ../../tribes/barbarians/conf:81
 #: ../../tribes/barbarians/lumberjacks_hut/help.lua:44
@@ -1111,7 +1143,7 @@ msgstr "Kalastajan maja"
 
 #: ../../tribes/barbarians/fishers_hut/help.lua:17
 msgid "Fishes on the coast near the hut."
-msgstr ""
+msgstr "Tyhjentää mökkinsä lähellä olevat ranta-alueet kaloistaan."
 
 #: ../../tribes/barbarians/conf:84
 #: ../../tribes/barbarians/fishers_hut/help.lua:45
@@ -1172,7 +1204,7 @@ msgstr "Riistanvartijan maja"
 #: ../../tribes/barbarians/warmill/help.lua:15
 #: ../../tribes/barbarians/well/help.lua:15
 msgid "General"
-msgstr ""
+msgstr "Yleinen"
 
 # TODO: it'd be nice to be able to translate these differently in different tribes for style -> need to poke at "send geologist" -button.
 #: ../../tribes/barbarians/conf:134
@@ -1182,7 +1214,7 @@ msgstr "Geologi"
 
 #: ../../tribes/barbarians/fisher/conf:1
 msgid "Gets fish out of the sea."
-msgstr "Kiskoo kalaa vedestä."
+msgstr "Pyydystää kalaa luonnonvesistä."
 
 #: ../../tribes/barbarians/battlearena/help.lua:35
 #: ../../tribes/barbarians/battlearena/help.lua:41
@@ -1327,11 +1359,11 @@ msgstr "Suurtorni"
 
 #: ../../tribes/barbarians/trainingscamp/help.lua:61
 msgid "Hitpoints"
-msgstr ""
+msgstr "Sisukkuus"
 
 #: ../../tribes/barbarians/trainingscamp/help.lua:30
 msgid "Hitpoints Training:"
-msgstr ""
+msgstr "Sisukoulutus"
 
 #: ../../tribes/barbarians/kitchen_tools/conf:1
 msgid ""
@@ -1346,7 +1378,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/hunters_hut/help.lua:17
 msgid "Hunt animals to produce meat."
-msgstr ""
+msgstr "Metsästää eläimiä, tuottaa lihaa."
 
 #: ../../tribes/barbarians/conf:136
 #: ../../tribes/barbarians/hunters_hut/help.lua:46
@@ -1369,19 +1401,22 @@ msgid ""
 "If all needed wares are delivered in time, a %s can train %s for one soldier "
 "from 0 to the highest level in %s on average."
 msgstr ""
+"Jos tarvikkeista ei ole pulaa, %s voi kouluttaa sotilaan %s maksimiin %s:ssä."
 
 #: ../../tribes/barbarians/trainingscamp/help.lua:61
 msgid ""
 "If all needed wares are delivered in time, a %s can train one new soldier in "
 "%s and %s to the final level in %s on average."
 msgstr ""
+"Jos tarvikkeista ei ole pulaa, %s voi kouluttaa sotilaan %s ja %s kyvyt "
+"maksimiin %s:ssä."
 
 #: ../../tribes/barbarians/bakery/help.lua:55
 #: ../../tribes/barbarians/cattlefarm/help.lua:48
 msgid ""
 "If all needed wares are delivered in time, this building can produce %s in "
 "%s on average."
-msgstr ""
+msgstr "Jos tarvikkeista ei ole pulaa, rakennus voi tuottaa %s %s:ssä."
 
 #: ../../tribes/barbarians/axefactory/help.lua:63
 #: ../../tribes/barbarians/lime_kiln/help.lua:54
@@ -1391,7 +1426,7 @@ msgstr ""
 msgid ""
 "If all needed wares are delivered in time, this building can produce %s in "
 "about %s on average."
-msgstr ""
+msgstr "Jos tarvikkeista ei ole pulaa, täällä voidaan tehdä %s noin %s:ssä."
 
 #: ../../tribes/barbarians/coalmine/help.lua:56
 #: ../../tribes/barbarians/deep_coalmine/help.lua:59
@@ -1405,7 +1440,7 @@ msgstr ""
 #: ../../tribes/barbarians/oremine/help.lua:52
 msgid ""
 "If the food supply is steady, this mine can produce %s in %s on average."
-msgstr ""
+msgstr "Jos ruoasta ei ole pulaa, kaivos voi tuottaa %s:n noin %s:ssä."
 
 #: ../../tribes/barbarians/axefactory/help.lua:23
 #: ../../tribes/barbarians/bakery/help.lua:22
@@ -1434,7 +1469,7 @@ msgstr ""
 #: ../../tribes/barbarians/warmill/help.lua:23
 #: ../../tribes/barbarians/well/help.lua:22
 msgid "Incoming:"
-msgstr ""
+msgstr "Saapuva:"
 
 #: ../../tribes/barbarians/bakery/help.lua:28
 #: ../../tribes/barbarians/conf:196
@@ -1506,17 +1541,19 @@ msgstr ""
 
 #: ../../tribes/barbarians/axefactory/help.lua:17
 msgid "It can make Axes, Sharp Axes and Broad Axes."
-msgstr ""
+msgstr "Voi tehdä kirveitä, teräviä kirveitä ja leveitä kirveitä."
 
 #: ../../tribes/barbarians/metalworks/help.lua:18
 msgid ""
 "It can make Bread Paddles, Felling Axes, Fire Tongs, Fishing Rods, Hammers, "
 "Hunting Spears, Kitchen Tools, Picks, Scythes and Shovels."
 msgstr ""
+"Voi tehdä leipälaioita, katkaisukirveitä, pihtehä, onkia, vasaroita, "
+"metsästyskeihäitä, keittiötarvikkeita, hakkuja, viikatteita ja lapioita."
 
 #: ../../tribes/barbarians/granitemine/help.lua:16
 msgid "It can not be upgraded."
-msgstr ""
+msgstr "Ei voi päivittää."
 
 #: ../../tribes/barbarians/conf:93
 msgid "Kitchen Tools"
@@ -1524,7 +1561,7 @@ msgstr "Keittiövälineet"
 
 #: ../../tribes/barbarians/lumberjacks_hut/help.lua:13
 msgid "Krumta, carpenter of Chat'Karuth"
-msgstr ""
+msgstr "Krumta, Chat'Karuthin seppä."
 
 #: ../../tribes/barbarians/coalmine/help.lua:35
 #: ../../tribes/barbarians/conf:190
@@ -1570,7 +1607,7 @@ msgstr "Kalkinpolttaja"
 #: ../../tribes/barbarians/warmill/help.lua:10
 #: ../../tribes/barbarians/well/help.lua:10
 msgid "Lore"
-msgstr ""
+msgstr "Perinnetieto"
 
 #: ../../tribes/barbarians/conf:139
 #: ../../tribes/barbarians/lumberjacks_hut/help.lua:43
@@ -1650,7 +1687,7 @@ msgstr ""
 #: ../../tribes/barbarians/micro-brewery/help.lua:31
 #: ../../tribes/barbarians/warmill/help.lua:34
 msgid "Medium plot"
-msgstr ""
+msgstr "Suurehko alue"
 
 #: ../../tribes/barbarians/axefactory/help.lua:33
 #: ../../tribes/barbarians/conf:203
@@ -1675,7 +1712,7 @@ msgstr "Pienpanimo"
 #: ../../tribes/barbarians/granitemine/help.lua:34
 #: ../../tribes/barbarians/oremine/help.lua:34
 msgid "Mine plot"
-msgstr ""
+msgstr "Kaivosalue"
 
 #: ../../tribes/barbarians/coalmine/help.lua:50
 #: ../../tribes/barbarians/coalmine/help.lua:53
@@ -1745,7 +1782,7 @@ msgstr ""
 #: ../../tribes/barbarians/warmill/help.lua:28
 #: ../../tribes/barbarians/well/help.lua:23
 msgid "Outgoing:"
-msgstr ""
+msgstr "Lähtevä:"
 
 #: ../../tribes/barbarians/conf:171
 msgid "Outpost"
@@ -1786,7 +1823,7 @@ msgstr "Härkä"
 #: ../../tribes/barbarians/warmill/help.lua:65
 #: ../../tribes/barbarians/well/help.lua:47
 msgid "Performance:"
-msgstr ""
+msgstr "Tehokkuus:"
 
 #: ../../tribes/barbarians/coalmine/help.lua:51
 #: ../../tribes/barbarians/conf:97
@@ -1818,7 +1855,7 @@ msgstr "Istuta kaislaa"
 
 #: ../../tribes/barbarians/rangers_hut/help.lua:17
 msgid "Plant trees in the surrounding area."
-msgstr ""
+msgstr "Istuttaa puita lähiympäristöönsä."
 
 #: ../../tribes/barbarians/farm/conf:21
 msgid "Plant wheat"
@@ -1834,7 +1871,7 @@ msgstr "Istuttaa puita."
 
 #: ../../tribes/barbarians/conf:178
 msgid "Port"
-msgstr ""
+msgstr "Satama"
 
 #: ../../tribes/barbarians/axefactory/conf:32
 #: ../../tribes/barbarians/warmill/conf:36
@@ -1981,13 +2018,13 @@ msgstr "Tuottaa aseita sotilaille ja työkaluja työntekijöille."
 #: ../../tribes/barbarians/warmill/help.lua:64
 #: ../../tribes/barbarians/well/help.lua:46
 msgid "Production"
-msgstr ""
+msgstr "Tuotanto"
 
 #: ../../tribes/barbarians/trainingscamp/help.lua:27
 #: ../../tribes/barbarians/trainingscamp/help.lua:29
 #: ../../tribes/barbarians/trainingscamp/help.lua:32
 msgid "Provided by the "
-msgstr ""
+msgstr "Lähteenä "
 
 #: ../../tribes/barbarians/axefactory/help.lua:16
 #: ../../tribes/barbarians/bakery/help.lua:16
@@ -2018,7 +2055,7 @@ msgstr ""
 #: ../../tribes/barbarians/warmill/help.lua:16
 #: ../../tribes/barbarians/well/help.lua:16
 msgid "Purpose:"
-msgstr ""
+msgstr "Tarkoitus:"
 
 #: ../../tribes/barbarians/conf:181
 msgid "Quarry"
@@ -2028,13 +2065,15 @@ msgstr "Kivilouhos"
 #: ../../tribes/barbarians/deeper_oremine/help.lua:13
 #: ../../tribes/barbarians/oremine/help.lua:13
 msgid "Quote from an anonymous miner."
-msgstr ""
+msgstr "Nimettömän kaivosmiehen mukaan."
 
 #: ../../tribes/barbarians/lime_kiln/help.lua:13
 msgid ""
 "Ragnald the Child's answer to the question, what he's doing in the dirt. His "
 "\"new stone\" now is an important building material."
 msgstr ""
+"Lapsi Ragnald vastaa kysymykseen, mitä hän tekee mudassa. Hänen \"uusi "
+"kivensä\" on tärkeä rakennusmateriaali."
 
 #: ../../tribes/barbarians/conf:141
 #: ../../tribes/barbarians/metalworks/help.lua:41
@@ -2129,7 +2168,7 @@ msgstr "Raakakivi"
 
 #: ../../tribes/barbarians/lime_kiln/help.lua:24
 msgid "Raw Stone from the Granite Mine or Quarry"
-msgstr ""
+msgstr "Raakakiveä kaivoksesta tai kivilouhoksesta."
 
 #: ../../tribes/barbarians/raw_stone/conf:1
 msgid ""
@@ -2144,8 +2183,8 @@ msgid ""
 "Raw stone can be processed into grout which provides a solid, non burning "
 "building material. Grout is produced in a lime kiln."
 msgstr ""
-"Raakakivi voidaan prosessoida laastiksi, joka on kiinteää ja palamatonta "
-"rakennusmeteriaalia. Laastia tuotetaan kalkinpolttouunissa."
+"Raakakivi voidaan prosessoida laastiksi, jonka avulla saadaan kiinteää ja "
+"palamatonta rakennusmeteriaalia. Laastia tuotetaan kalkinpolttouunissa."
 
 #: ../../tribes/barbarians/conf:47
 msgid "Reed medium"
@@ -2165,7 +2204,7 @@ msgstr "Kaisla hyvin pieni"
 
 #: ../../tribes/barbarians/gamekeepers_hut/help.lua:16
 msgid "Releases animals into the wild to steady the meat production."
-msgstr ""
+msgstr "Vapauttaa eläimiä luontoon hyvää metsästysonnea varmistaakseen."
 
 #: ../../tribes/barbarians/conf:51
 msgid "Resource indicator coal little"
@@ -2209,7 +2248,7 @@ msgstr "Resurssimerkki vettä"
 
 #: ../../tribes/barbarians/battlearena/help.lua:13
 msgid "Said to originate from Neidhardt, the famous trainer."
-msgstr ""
+msgstr "Peräisin kuuluisalta kouluttajalta Heidhardilta."
 
 #: ../../tribes/barbarians/conf:147
 msgid "Scout"
@@ -2233,7 +2272,7 @@ msgstr "Viikate"
 
 #: ../../tribes/barbarians/farm/help.lua:16
 msgid "Seed and harvest wheat."
-msgstr ""
+msgstr "Kylvää ja korjaa vehnää."
 
 #: ../../tribes/barbarians/conf:166
 #: ../../tribes/barbarians/conf:221
@@ -2246,19 +2285,19 @@ msgstr "Terävä kirves"
 
 #: ../../tribes/barbarians/conf:151
 msgid "Ship"
-msgstr ""
+msgstr "Alus"
 
 #: ../../tribes/barbarians/conf:61
 msgid "Ship construction site"
-msgstr ""
+msgstr "Telakka-alue"
 
 #: ../../tribes/barbarians/conf:142
 msgid "Shipwright"
-msgstr ""
+msgstr "Veneseppä"
 
 #: ../../tribes/barbarians/conf:200
 msgid "Shipyard"
-msgstr ""
+msgstr "Venetelakka"
 
 #: ../../tribes/barbarians/conf:103
 #: ../../tribes/barbarians/fernery/help.lua:43
@@ -2273,7 +2312,7 @@ msgstr "Lepää"
 
 #: ../../tribes/barbarians/fernery/help.lua:13
 msgid "Slogan of the Guild of Ferners"
-msgstr ""
+msgstr "Punojien killan tunnuslause."
 
 #: ../../tribes/barbarians/conf:164
 msgid "Small Tower"
@@ -2287,7 +2326,7 @@ msgstr "Pieni torni"
 #: ../../tribes/barbarians/rangers_hut/help.lua:28
 #: ../../tribes/barbarians/well/help.lua:32
 msgid "Small plot"
-msgstr ""
+msgstr "Alue pienelle rakennukselle"
 
 #: ../../tribes/barbarians/smelting_works/conf:30
 msgid "Smelt gold"
@@ -2367,7 +2406,7 @@ msgstr ""
 #: ../../tribes/barbarians/fishers_hut/help.lua:13
 #: ../../tribes/barbarians/quarry/help.lua:13
 msgid "Source needed"
-msgstr ""
+msgstr "Lähde puuttuu"
 
 #: ../../tribes/barbarians/axefactory/help.lua:32
 #: ../../tribes/barbarians/bakery/help.lua:34
@@ -2398,7 +2437,7 @@ msgstr ""
 #: ../../tribes/barbarians/warmill/help.lua:34
 #: ../../tribes/barbarians/well/help.lua:32
 msgid "Space required:"
-msgstr ""
+msgstr "Tilantarve:"
 
 #: ../../tribes/barbarians/conf:144
 #: ../../tribes/barbarians/metalworks/help.lua:39
@@ -2428,7 +2467,7 @@ msgstr "Krouvi"
 #: ../../tribes/barbarians/farm/help.lua:12
 #: ../../tribes/barbarians/quarry/help.lua:12
 msgid "Text needed"
-msgstr ""
+msgstr "Teksti puuttuu"
 
 #: ../../tribes/barbarians/axefactory/help.lua:36
 #: ../../tribes/barbarians/axefactory/help.lua:42
@@ -2464,7 +2503,7 @@ msgstr ""
 #: ../../tribes/barbarians/hunters_hut/help.lua:51
 #: ../../tribes/barbarians/quarry/help.lua:46
 msgid "The %s pauses %s before going to work again."
-msgstr ""
+msgstr "%s pysäyttää %s:n ennen jatkamistaan."
 
 #: ../../tribes/barbarians/axe/conf:1
 msgid ""
@@ -2475,7 +2514,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/axefactory/help.lua:8
 msgid "The Barbarian Axefactory"
-msgstr ""
+msgstr "Barbaarien kirvestehdas"
 
 #: ../../tribes/barbarians/axefactory/help.lua:16
 msgid ""
@@ -2483,90 +2522,92 @@ msgid ""
 "three buildings. It is an upgrade from the Metalwork Shop but doesn't "
 "require additional qualification for the worker."
 msgstr ""
+"Kirvestehdas on keskimmäinen vaihe laitoksen kehityksessä. Se on paranneltu "
+"metallipaja, joka ei vaadi työntekijältään erityiskoulutusta."
 
 #: ../../tribes/barbarians/bakery/help.lua:8
 msgid "The Barbarian Bakery"
-msgstr ""
+msgstr "Barbaarien leipomo"
 
 #: ../../tribes/barbarians/battlearena/help.lua:8
 msgid "The Barbarian Battle Arena"
-msgstr ""
+msgstr "Barbaarien taisteluareena."
 
 #: ../../tribes/barbarians/cattlefarm/help.lua:8
 msgid "The Barbarian Cattle Farm"
-msgstr ""
+msgstr "Barbaarien karjatila"
 
 #: ../../tribes/barbarians/coalmine/help.lua:8
 msgid "The Barbarian Coal Mine"
-msgstr ""
+msgstr "Barbaarien hiilikaivos"
 
 #: ../../tribes/barbarians/deep_coalmine/help.lua:8
 msgid "The Barbarian Deep Coal Mine"
-msgstr ""
+msgstr "Barbaarien keskisyvä hiilikaivos"
 
 #: ../../tribes/barbarians/deep_goldmine/help.lua:8
 msgid "The Barbarian Deep Gold Mine"
-msgstr ""
+msgstr "Barbaarien keskisyvä kultakaivos"
 
 #: ../../tribes/barbarians/deep_oremine/help.lua:8
 msgid "The Barbarian Deep Iron Ore Mine"
-msgstr ""
+msgstr "Barbaarien keskisyvä rautakaivos"
 
 #: ../../tribes/barbarians/deeper_coalmine/help.lua:8
 msgid "The Barbarian Deeper Coal Mine"
-msgstr ""
+msgstr "Barbaarien syvä hiilikaivos"
 
 #: ../../tribes/barbarians/deeper_goldmine/help.lua:8
 msgid "The Barbarian Deeper Gold Mine"
-msgstr ""
+msgstr "Barbaarien syvä kultakaivos"
 
 #: ../../tribes/barbarians/deeper_oremine/help.lua:8
 msgid "The Barbarian Deeper Iron Ore Mine"
-msgstr ""
+msgstr "Barbaarien syvä rautakaivos"
 
 #: ../../tribes/barbarians/farm/help.lua:8
 msgid "The Barbarian Farm"
-msgstr ""
+msgstr "Barbaarien maatila"
 
 #: ../../tribes/barbarians/fernery/help.lua:8
 msgid "The Barbarian Fernery"
-msgstr ""
+msgstr "Barbaarien kaiskankasvattamo"
 
 #: ../../tribes/barbarians/fishers_hut/help.lua:8
 msgid "The Barbarian Fisher's Hut"
-msgstr ""
+msgstr "Barbaarien kalastusmökki"
 
 #: ../../tribes/barbarians/gamekeepers_hut/help.lua:8
 msgid "The Barbarian Gamekeeper's Hut"
-msgstr ""
+msgstr "Barbaarien riistanvartija"
 
 #: ../../tribes/barbarians/goldmine/help.lua:8
 msgid "The Barbarian Gold Mine"
-msgstr ""
+msgstr "Barbaarien kultakaivos"
 
 #: ../../tribes/barbarians/granitemine/help.lua:8
 msgid "The Barbarian Granite Mine"
-msgstr ""
+msgstr "Barbaarien kivikaivos"
 
 #: ../../tribes/barbarians/hunters_hut/help.lua:8
 msgid "The Barbarian Hunter's Hut"
-msgstr ""
+msgstr "Barbaarien metsästysmaja"
 
 #: ../../tribes/barbarians/oremine/help.lua:8
 msgid "The Barbarian Iron Ore Mine"
-msgstr ""
+msgstr "Barbaarien rautakaivos"
 
 #: ../../tribes/barbarians/lime_kiln/help.lua:8
 msgid "The Barbarian Limekiln"
-msgstr ""
+msgstr "Barbaarien kalkinpolttaja"
 
 #: ../../tribes/barbarians/lumberjacks_hut/help.lua:8
 msgid "The Barbarian Lumberjack's Hut"
-msgstr ""
+msgstr "Barbaaritukkijätkien mökki"
 
 #: ../../tribes/barbarians/metalworks/help.lua:8
 msgid "The Barbarian Metalwork Shop"
-msgstr ""
+msgstr "Barbaarien metallityöpaja"
 
 #: ../../tribes/barbarians/metalworks/help.lua:16
 msgid ""
@@ -2574,40 +2615,44 @@ msgid ""
 "three buildings and creates all the tools that Barbarians need. The others "
 "are for weapons."
 msgstr ""
+"Barbaarien metallityöpaja on yksinkertaisin metallintyöstöpaikka. Pajalla "
+"tehdään työkaluja. Työkalupajan voi myöhemmin muokata asepajaksi."
 
 #: ../../tribes/barbarians/micro-brewery/help.lua:8
 msgid "The Barbarian Micro Brewery"
-msgstr ""
+msgstr "Barbaarien pienpanimo"
 
 #: ../../tribes/barbarians/quarry/help.lua:8
 msgid "The Barbarian Quarry"
-msgstr ""
+msgstr "Barbaarinen kivilouhos"
 
 #: ../../tribes/barbarians/rangers_hut/help.lua:8
 msgid "The Barbarian Ranger's Hut"
-msgstr ""
+msgstr "Barbaarien metsänvartijan mökki"
 
 #: ../../tribes/barbarians/trainingscamp/help.lua:8
 msgid "The Barbarian Trainingscamp"
-msgstr ""
+msgstr "Barbaarien sotilaiden harjoitusleiri"
 
 #: ../../tribes/barbarians/warmill/help.lua:8
 msgid "The Barbarian War Mill"
-msgstr ""
+msgstr "Barbaarien sotamylly"
 
 #: ../../tribes/barbarians/warmill/help.lua:16
 msgid ""
 "The Barbarian War Mill is their most advanced production site for weapons. "
 "As such it needs to be upgraded from an Axefactory."
 msgstr ""
+"Barbaarien sotamylly tekee parhaat aseet. Kirvestehtaan voi laajentaa "
+"sotamyllyksi."
 
 #: ../../tribes/barbarians/well/help.lua:8
 msgid "The Barbarian Well"
-msgstr ""
+msgstr "Barbaarien kaivo"
 
 #: ../../tribes/barbarians/well/help.lua:47
 msgid "The Carrier needs %s to get one bucket full of water."
-msgstr ""
+msgstr "kantaja tarvitsee %s saadakseen ämpärillisen vettä."
 
 #: ../../tribes/barbarians/fernery/help.lua:16
 msgid ""
@@ -2615,14 +2660,18 @@ msgid ""
 "Barbarian tribe.<br>It is the traditional material for roofing, and it is "
 "woven into the extremely durable cloth that they use for their ship's sails."
 msgstr ""
+"Kasvattamolta saadaan kaislaa, jota barbaarit käyttävät kahteen "
+"tarkoitukseen: Siitä tehdään perinteisiä kattoja, ja kankaita mm. laivojen "
+"purjeisiin."
 
 #: ../../tribes/barbarians/fernery/help.lua:26
 msgid "The Fernery's output will only go to construction sites that need it."
 msgstr ""
+"Kaislakasvattamon tuotteet menevät niitä tarvitseville rakennustyömaille."
 
 #: ../../tribes/barbarians/fishers_hut/help.lua:23
 msgid "The Fisher's Hut needs water full of fish in the vicinity."
-msgstr ""
+msgstr "Kalastusmökki tarvitsee kalaisia vesialueita ympärilleen."
 
 #: ../../tribes/barbarians/gamekeeper/conf:1
 msgid ""
@@ -2637,29 +2686,33 @@ msgstr "Metsästäjä tuo hyvää lihaa väellesi."
 
 #: ../../tribes/barbarians/hunters_hut/help.lua:23
 msgid "The Hunter's Hut needs animals in the vicinity to hunt."
-msgstr ""
+msgstr "Metsästäjän mökin seutuvilta pitää löytyä metsästettäviä eläimiä."
 
 #: ../../tribes/barbarians/lime_kiln/help.lua:16
 msgid ""
 "The Limekiln processes Raw Stones to make \"Grout\", a substance that "
 "solidifies and so reinforces masonry."
-msgstr ""
+msgstr "Kalkinpolttaja tekee laastia; näin muureista tulee vahvempia."
 
 #: ../../tribes/barbarians/lime_kiln/help.lua:32
 msgid ""
 "The Limekiln's output will only go to construction sites that need it. Those "
 "are predominantly houses that work with fire, and some military sites."
 msgstr ""
+"Kalkinpolttajan tuotteet menevät niitä tarvitseville työmaille. Lähinnä "
+"tulityötä tekeviin pajoihin ja sotilaiden vahvimpiin linnoituksiin."
 
 #: ../../tribes/barbarians/lumberjacks_hut/help.lua:48
 msgid ""
 "The Lumberjack needs %s to fell a tree, not counting the time he needs to "
 "reach the destination and go home again."
 msgstr ""
+"Tukkijätkä tarvitsee %sn puun kaatoon. Tämän lisäksi hän tarvitsee vain "
+"aikaa ja kaadettavia puita ympärilleen."
 
 #: ../../tribes/barbarians/lumberjacks_hut/help.lua:23
 msgid "The Lumberjack's Hut needs trees in the immediate vicinity to fell."
-msgstr ""
+msgstr "Tukkijätkän tuvan ympäristössä pitää olla kaadettavia puita."
 
 #: ../../tribes/barbarians/micro-brewery/help.lua:16
 msgid ""
@@ -2667,22 +2720,26 @@ msgid ""
 "component of the Snacks that Inns and Big Inns prepare for Miners in Deep "
 "Mines."
 msgstr ""
+"Pienpanimossa pannaan kaljaa, jota tarvitaan keskisyvässä kaivoksessa "
+"nautittaviin välipaloihin."
 
 #: ../../tribes/barbarians/quarry/help.lua:23
 msgid "The Quarry needs stones in the vicinity."
-msgstr ""
+msgstr "Kiviveistämö tarvitsee kiviä lähiseudulleen."
 
 #: ../../tribes/barbarians/rangers_hut/help.lua:43
 msgid ""
 "The Ranger needs %s to plant a tree, not counting the time he needs to reach "
 "the destination and go home again."
 msgstr ""
+"Metsänvartijan tarvitsee %sn puiden istutuksiin. Tämän lisäksi hän tarvitsee "
+"vain aikaa, ja tilaa puille."
 
 #: ../../tribes/barbarians/rangers_hut/help.lua:23
 msgid ""
 "The Ranger's Hut needs free space in the immediate vicinity to plant the "
 "trees."
-msgstr ""
+msgstr "Metsänvartijan mökin ympäristöön  tarvitaan vapaata tilaa."
 
 #: ../../tribes/barbarians/conf:4
 msgid "The Widelands Development Team"
@@ -2708,6 +2765,8 @@ msgid ""
 "produced by the building if the metal works is enhanced to an axefactory and "
 "war mill)."
 msgstr ""
+"Leipälapio on leipurin työkalu; jokainen leipuri tarvitsee omansa. "
+"Leipälaipioita tehdään metallipajassa. (Kirvestehtaissa keskitytään aseisiin)"
 
 #: ../../tribes/barbarians/broadaxe/conf:1
 msgid ""
@@ -2904,10 +2963,12 @@ msgid ""
 "Trains soldiers in Attack up to level 4, and in Hitpoints up to level "
 "2.<br>Equips the soldiers with all necessary weapons and armour parts."
 msgstr ""
+"Kouluttaa sotilaan hyökkäyskykyä tasolle 4, ja Sisua kakkostasolle saakka. "
+"Varustaa sotilaan tarvittavin asein ja panssarein."
 
 #: ../../tribes/barbarians/battlearena/help.lua:16
 msgid "Trains soldiers in Evade up to level 2."
-msgstr ""
+msgstr "Kouluttaa sotilaan väistökykyä tasolle 2 saakka."
 
 #: ../../tribes/barbarians/trainer/conf:1
 msgid "Trains the soldiers."
@@ -3000,7 +3061,7 @@ msgstr ""
 #: ../../tribes/barbarians/axefactory/help.lua:34
 #: ../../tribes/barbarians/warmill/help.lua:36
 msgid "Upgrade Cost:"
-msgstr ""
+msgstr "Päivitystarvikkeet:"
 
 #: ../../tribes/barbarians/deep_coalmine/help.lua:39
 #: ../../tribes/barbarians/deep_goldmine/help.lua:35
@@ -3009,7 +3070,7 @@ msgstr ""
 #: ../../tribes/barbarians/deeper_goldmine/help.lua:34
 #: ../../tribes/barbarians/deeper_oremine/help.lua:34
 msgid "Upgrade cost:"
-msgstr ""
+msgstr "Päivitystarvikkeet:"
 
 #: ../../tribes/barbarians/trainingscamp/conf:44
 msgid "Upgrade soldier attack 0"
@@ -3095,39 +3156,33 @@ msgstr ""
 
 #: ../../tribes/barbarians/trainingscamp/conf:54
 msgid "Upgrade soldier hitpoints 0"
-msgstr "Paranna sotilaan voimapisteitä (0)"
+msgstr "Kasvattaa sotilaan sisukkuutta tasolla 0"
 
 #: ../../tribes/barbarians/trainingscamp/conf:55
 msgid ""
 "Upgrade soldier hitpoints 0 (only for compatibility with old savegames "
 "(build13))"
-msgstr ""
-"Paranna sotilaan voimapisteitä (0) (vain tallennustiedostojen taaksepäin "
-"yhteensopivuuden varalta (build13))"
+msgstr "Kasvattaa sotilaan sisukkuutta tasolla 0"
 
 #: ../../tribes/barbarians/trainingscamp/conf:56
 msgid "Upgrade soldier hitpoints 1"
-msgstr "Paranna sotilaan voimapisteitä (1)"
+msgstr "Kasvattaa sotilaan sisukkuutta tasolla 1"
 
 #: ../../tribes/barbarians/trainingscamp/conf:57
 msgid ""
 "Upgrade soldier hitpoints 1 (only for compatibility with old savegames "
 "(build13))"
-msgstr ""
-"Paranna sotilaan voimapisteitä (1) (vain tallennustiedostojen taaksepäin "
-"yhteensopivuuden varalta (build13))"
+msgstr "Kasvattaa sotilaan sisukkuutta tasolla 1"
 
 #: ../../tribes/barbarians/trainingscamp/conf:58
 msgid "Upgrade soldier hitpoints 2"
-msgstr "Paranna sotilaan voimapisteitä (2)"
+msgstr "Kasvattaa sotilaan sisukkuutta tasolla 2"
 
 #: ../../tribes/barbarians/trainingscamp/conf:59
 msgid ""
 "Upgrade soldier hitpoints 2 (only for compatibility with old savegames "
 "(build13))"
-msgstr ""
-"Paranna sotilaan voimapisteitä (2) (vain tallennustiedostojen taaksepäin "
-"yhteensopivuuden varalta (build13))"
+msgstr "Kasvattaa sotilaan sisukkuutta tasolla 2"
 
 #: ../../tribes/barbarians/axefactory/help.lua:52
 #: ../../tribes/barbarians/bakery/help.lua:46
@@ -3158,7 +3213,7 @@ msgstr ""
 #: ../../tribes/barbarians/warmill/help.lua:54
 #: ../../tribes/barbarians/well/help.lua:38
 msgid "Upgradeable to:"
-msgstr ""
+msgstr "Päivitettävissä:"
 
 #: ../../tribes/barbarians/axefactory/help.lua:33
 #: ../../tribes/barbarians/bakery/help.lua:35
@@ -3189,7 +3244,7 @@ msgstr ""
 #: ../../tribes/barbarians/warmill/help.lua:35
 #: ../../tribes/barbarians/well/help.lua:33
 msgid "Upgraded from:"
-msgstr ""
+msgstr "Aiemmin:"
 
 #: ../../tribes/barbarians/axefactory/help.lua:20
 #: ../../tribes/barbarians/bakery/help.lua:19
@@ -3220,7 +3275,7 @@ msgstr ""
 #: ../../tribes/barbarians/warmill/help.lua:20
 #: ../../tribes/barbarians/well/help.lua:19
 msgid "Vision range:"
-msgstr ""
+msgstr "Tarkkailuala:"
 
 #: ../../tribes/barbarians/conf:108
 msgid "War Helmet"
@@ -3251,13 +3306,13 @@ msgstr "Vesi"
 
 #: ../../tribes/barbarians/lime_kiln/help.lua:27
 msgid "Water from a Well"
-msgstr ""
+msgstr "Vettä kaivosta"
 
 #: ../../tribes/barbarians/bakery/help.lua:24
 #: ../../tribes/barbarians/cattlefarm/help.lua:24
 #: ../../tribes/barbarians/micro-brewery/help.lua:23
 msgid "Water from the Well"
-msgstr ""
+msgstr "Vettä kaivosta"
 
 #: ../../tribes/barbarians/water/conf:1
 msgid ""
@@ -3290,7 +3345,7 @@ msgstr "Vehnä"
 #: ../../tribes/barbarians/cattlefarm/help.lua:23
 #: ../../tribes/barbarians/micro-brewery/help.lua:24
 msgid "Wheat from the Farm"
-msgstr ""
+msgstr "Vehnää maatilalta"
 
 #: ../../tribes/barbarians/wheat/conf:1
 msgid ""
@@ -3377,7 +3432,7 @@ msgstr "Työskentele (pääohjelna)"
 #: ../../tribes/barbarians/trainingscamp/help.lua:57
 #: ../../tribes/barbarians/well/help.lua:43
 msgid "Worker uses:"
-msgstr ""
+msgstr "Työkalu:"
 
 #: ../../tribes/barbarians/axefactory/help.lua:54
 #: ../../tribes/barbarians/bakery/help.lua:48
@@ -3408,7 +3463,7 @@ msgstr ""
 #: ../../tribes/barbarians/warmill/help.lua:56
 #: ../../tribes/barbarians/well/help.lua:40
 msgid "Workers"
-msgstr ""
+msgstr "Työläiset"
 
 #: ../../tribes/barbarians/deep_coalmine/help.lua:54
 #: ../../tribes/barbarians/deep_goldmine/help.lua:50
@@ -3419,7 +3474,7 @@ msgstr ""
 #: ../../tribes/barbarians/micro-brewery/help.lua:48
 #: ../../tribes/barbarians/warmill/help.lua:60
 msgid "Workers use:"
-msgstr ""
+msgstr "Työntekijä tarvitsee:"
 
 #: ../../tribes/barbarians/axefactory/help.lua:18
 #: ../../tribes/barbarians/bakery/help.lua:17
@@ -3450,7 +3505,7 @@ msgstr ""
 #: ../../tribes/barbarians/warmill/help.lua:18
 #: ../../tribes/barbarians/well/help.lua:17
 msgid "Working radius:"
-msgstr ""
+msgstr "Työskentelyalue:"
 
 #: ../../tribes/barbarians/builder/conf:1
 msgid "Works at construction sites to raise a new building."
@@ -3458,7 +3513,7 @@ msgstr "Työskentelee rakennuspaikoilla pystyttääkseen uuden rakennuksen."
 
 #: ../../tribes/barbarians/shipwright/conf:1
 msgid "Works at the shipyard and constructs new ships."
-msgstr ""
+msgstr "Työskentelee telakalla, rakentaa uusia aluksia."
 
 #: ../../tribes/barbarians/chief-miner/conf:1
 #: ../../tribes/barbarians/master-miner/conf:1
@@ -3483,8 +3538,8 @@ msgstr ""
 #: ../../tribes/barbarians/metalworks/help.lua:70
 #: ../../tribes/barbarians/warmill/help.lua:65
 msgid "each item"
-msgstr ""
+msgstr "jokainen esine"
 
 #: ../../tribes/barbarians/metalworks/help.lua:46
 msgid "n/a"
-msgstr ""
+msgstr "Ei mitään"
