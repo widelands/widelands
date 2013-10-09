@@ -2,22 +2,23 @@
 # Copyright (c) 2013 Rosetta Contributors and Canonical Ltd 2013
 # This file is distributed under the same license as the widelands package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2013.
-#
+# GunChleoc <fios@foramnagaidhlig.net>, 2013.
 msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2013-09-15 19:41+0200\n"
-"PO-Revision-Date: 2013-10-08 01:40+0000\n"
+"PO-Revision-Date: 2013-10-08 17:37+0000\n"
 "Last-Translator: GunChleoc <Unknown>\n"
-"Language-Team: Gaelic; Scottish <gd@li.org>\n"
+"Language-Team: Fòram na Gàidhlig http://www.foramnagaidhlig.net\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n==1 || n==11) ? 0 : (n==2 || n==12) ? 1 : "
 "(n > 2 && n < 20) ? 2 : 3;\n"
-"X-Launchpad-Export-Date: 2013-10-08 05:11+0000\n"
+"X-Launchpad-Export-Date: 2013-10-09 05:12+0000\n"
 "X-Generator: Launchpad (build 16799)\n"
+"Language: gd\n"
 
 #: ../../src/computer_player.cc:38
 msgid "None"
@@ -227,7 +228,7 @@ msgstr ""
 
 #: ../../src/wlapplication.cc:1433
 msgid " --help               Show this help\n"
-msgstr ""
+msgstr " --help               Seall a' chobhair seo\n"
 
 #: ../../src/wlapplication.cc:1437
 msgid ""
@@ -260,7 +261,7 @@ msgstr "Rabhadh: "
 
 #: ../../src/wlapplication.cc:1602
 msgid "Game data error"
-msgstr ""
+msgstr "Mearachd le dàta a' gheama"
 
 #: ../../src/wlapplication.cc:1607
 msgid "Unexpected error during the game"
@@ -310,7 +311,7 @@ msgstr ""
 #: ../../src/wlapplication.cc:2222 ../../src/logic/game.cc:375
 #: ../../src/logic/game.cc:414
 msgid "Loading..."
-msgstr ""
+msgstr "'Ga luchdadh..."
 
 #: ../../src/writeHTML.cc:42
 msgid "Requesters"
@@ -330,77 +331,77 @@ msgstr ""
 
 #: ../../src/writeHTML.cc:102
 msgid "Employers"
-msgstr ""
+msgstr "Fastaichean"
 
 #: ../../src/writeHTML.cc:265 ../../src/writeHTML.cc:271
 msgid "Building types"
-msgstr ""
+msgstr "Seòrsaichean thogalaichean"
 
 #: ../../src/writeHTML.cc:276 ../../src/writeHTML.cc:510
 #: ../../src/writeHTML.cc:1463
 msgid "Icon"
-msgstr ""
+msgstr "Ìomhaigheag"
 
 #: ../../src/writeHTML.cc:278 ../../src/writeHTML.cc:512
 #: ../../src/writeHTML.cc:1465 ../../src/ui_fsmenu/internet_lobby.cc:155
 #: ../../src/wui/building_statistics_menu.cc:110
 msgid "Name"
-msgstr ""
+msgstr "Ainm"
 
 #: ../../src/writeHTML.cc:280 ../../src/wui/building_statistics_menu.cc:111
 msgid "Size"
-msgstr ""
+msgstr "Meud"
 
 #: ../../src/writeHTML.cc:282
 msgid "Buildable"
-msgstr ""
+msgstr "Gabhaidh seo togail"
 
 #: ../../src/writeHTML.cc:284
 msgid "Enhanced"
-msgstr ""
+msgstr "Leasaichte"
 
 #: ../../src/writeHTML.cc:286
 msgid "Conquer<br/>range"
-msgstr ""
+msgstr "Astar<br/>ceannsachaidh"
 
 #: ../../src/writeHTML.cc:288 ../../src/writeHTML.cc:514
 msgid "Vision<br/>range"
-msgstr ""
+msgstr "Astar<br/>lèirsinne"
 
 #: ../../src/writeHTML.cc:315 ../../src/writeHTML.cc:371
 #: ../../src/logic/building.cc:545
 msgid "Mine"
-msgstr ""
+msgstr "Mèinn"
 
 #: ../../src/writeHTML.cc:319 ../../src/writeHTML.cc:387
 #: ../../src/logic/building.cc:546
 msgid "Small"
-msgstr ""
+msgstr "Beag"
 
 #: ../../src/writeHTML.cc:323 ../../src/writeHTML.cc:381
 #: ../../src/logic/building.cc:547
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:255
 msgid "Medium"
-msgstr ""
+msgstr "Meadhanach"
 
 #: ../../src/writeHTML.cc:328 ../../src/writeHTML.cc:376
 #: ../../src/logic/building.cc:547
 msgid "Big"
-msgstr ""
+msgstr "Mòr"
 
 #: ../../src/writeHTML.cc:332 ../../src/writeHTML.cc:335
 #: ../../src/ui_basic/messagebox.cc:99
 #: ../../src/editor/tools/editor_info_tool.cc:75
 #: ../../src/editor/tools/editor_info_tool.cc:76
 msgid "Yes"
-msgstr ""
+msgstr "Tha"
 
 #: ../../src/writeHTML.cc:332 ../../src/writeHTML.cc:335
 #: ../../src/ui_basic/messagebox.cc:106
 #: ../../src/editor/tools/editor_info_tool.cc:75
 #: ../../src/editor/tools/editor_info_tool.cc:76
 msgid "No"
-msgstr ""
+msgstr "Chan eil"
 
 #: ../../src/writeHTML.cc:373
 msgid "Is mine."
@@ -408,63 +409,63 @@ msgstr ""
 
 #: ../../src/writeHTML.cc:378
 msgid "Is big."
-msgstr ""
+msgstr "Tha e mòr."
 
 #: ../../src/writeHTML.cc:383
 msgid "Is medium."
-msgstr ""
+msgstr "Tha e meadhanach."
 
 #: ../../src/writeHTML.cc:389
 msgid "Is small."
-msgstr ""
+msgstr "Tha e beag."
 
 #: ../../src/writeHTML.cc:396
 msgid "Is not buildable."
-msgstr ""
+msgstr "Cha ghabh seo togail."
 
 #: ../../src/writeHTML.cc:403
 msgid "Is enhanced."
-msgstr ""
+msgstr "Tha e leasaichte."
 
 #: ../../src/writeHTML.cc:410
 #, c-format
 msgid "Conquer range is %u."
-msgstr ""
+msgstr "'S e %u a tha san astar ceannsachaidh."
 
 #: ../../src/writeHTML.cc:418 ../../src/writeHTML.cc:642
 #, c-format
 msgid "Vision range is %u."
-msgstr ""
+msgstr "'S e %u a tha san astar lèirsinne."
 
 #: ../../src/writeHTML.cc:426 ../../src/writeHTML.cc:649
 msgid "Build cost"
-msgstr ""
+msgstr "Cosgaisean togail"
 
 #: ../../src/writeHTML.cc:436
 #, c-format
 msgid "%s's constructionsite"
-msgstr ""
+msgstr "An làrach-togail aig %s"
 
 #: ../../src/writeHTML.cc:448
 msgid "Enhancements"
-msgstr ""
+msgstr "Leasachaidhean"
 
 #: ../../src/writeHTML.cc:458
 #, c-format
 msgid "%s's enhancement"
-msgstr ""
+msgstr "An leasachadh aig %s"
 
 #: ../../src/writeHTML.cc:499 ../../src/writeHTML.cc:505
 msgid "Worker types"
-msgstr ""
+msgstr "Seòrsaichean de dh'obraichean"
 
 #: ../../src/writeHTML.cc:516
 msgid "Needed<br/>experience"
-msgstr ""
+msgstr "Eòlas<br/>a dhìth"
 
 #: ../../src/writeHTML.cc:518
 msgid "Becomes"
-msgstr ""
+msgstr "Thèid e na"
 
 #: ../../src/writeHTML.cc:577
 msgid "Combat Properties"
@@ -518,22 +519,22 @@ msgstr ""
 
 #: ../../src/writeHTML.cc:764
 msgid "UNKNOWN"
-msgstr ""
+msgstr "CHAN EIL FHIOS"
 
 #: ../../src/writeHTML.cc:771 ../../src/wui/ware_statistics_menu.cc:177
 msgid "Production"
-msgstr ""
+msgstr "Saothrachadh"
 
 #: ../../src/writeHTML.cc:775 ../../src/wui/general_statistics_menu.cc:180
 #: ../../src/wui/productionsitewindow.cc:106 ../../src/wui/transport_ui.cc:66
 #: ../../src/wui/warehousewindow.cc:211
 msgid "Workers"
-msgstr ""
+msgstr "Obraichean"
 
 #: ../../src/writeHTML.cc:786
 #, c-format
 msgid "%s's employee"
-msgstr ""
+msgstr "Cosnaiche aig %s"
 
 #: ../../src/writeHTML.cc:796
 msgid "Inputs"
@@ -565,7 +566,7 @@ msgstr ""
 
 #: ../../src/writeHTML.cc:1017
 msgid "workers of this site"
-msgstr ""
+msgstr "luchd-obrach na làraich seo"
 
 #: ../../src/writeHTML.cc:1047
 #, c-format
@@ -584,7 +585,7 @@ msgstr ""
 
 #: ../../src/writeHTML.cc:1452 ../../src/writeHTML.cc:1458
 msgid "Ware types"
-msgstr ""
+msgstr "Seòrsaichean de bhathar"
 
 #: ../../src/economy/cmd_call_economy_balance.cc:86
 #: ../../src/economy/fleet.cc:767 ../../src/economy/portdock.cc:619
@@ -686,69 +687,71 @@ msgstr ""
 
 #: ../../src/editor/editorinteractive.cc:64
 msgid "Menu"
-msgstr ""
+msgstr "Clàr-taice"
 
 #: ../../src/editor/editorinteractive.cc:67
 #: ../../src/editor/ui_menus/editor_tool_menu.cc:46
 msgid "Tools"
-msgstr ""
+msgstr "Innealan"
 
 #: ../../src/editor/editorinteractive.cc:71
 #: ../../src/editor/ui_menus/editor_toolsize_menu.cc:41
 msgid "Toolsize"
-msgstr ""
+msgstr "Meud nan inneal"
 
 #: ../../src/editor/editorinteractive.cc:74
 #: ../../src/wui/interactive_player.cc:119
 #: ../../src/wui/interactive_spectator.cc:61
 msgid "Minimap"
-msgstr ""
+msgstr "Meanbh-mhapa"
 
 #: ../../src/editor/editorinteractive.cc:77
 #: ../../src/wui/interactive_player.cc:122
 msgid "Buildhelp"
-msgstr ""
+msgstr "Cobhair le togail"
 
 #: ../../src/editor/editorinteractive.cc:80
 #: ../../src/ui_fsmenu/launchMPG.cc:160
 msgid "Players"
-msgstr ""
+msgstr "Cluicheadairean"
 
 #: ../../src/editor/editorinteractive.cc:83
 msgid "Undo"
-msgstr ""
+msgstr "Neo-dhèan"
 
 #: ../../src/editor/editorinteractive.cc:86
 msgid "Redo"
-msgstr ""
+msgstr "Ath-dhèan"
 
 #: ../../src/editor/editorinteractive.cc:190
 #: ../../src/editor/editorinteractive.cc:610
 #, c-format
 msgid "Loading tribe: %s"
-msgstr ""
+msgstr "A' luchdadh treubh: %s"
 
 #: ../../src/editor/editorinteractive.cc:196
 msgid "Creating players"
-msgstr ""
+msgstr "A' cruthachadh cluicheadairean"
 
 #: ../../src/editor/editorinteractive.cc:203
 #: ../../src/logic/editor_game_base.cc:276
 msgid "Loading world data"
-msgstr ""
+msgstr "A' luchdadh dàta an t-saogail"
 
 #: ../../src/editor/editorinteractive.cc:206
 #: ../../src/editor/editorinteractive.cc:614
 msgid "Loading graphics..."
-msgstr ""
+msgstr "A' luchdadh a' ghrafaigeachd..."
 
 #: ../../src/editor/editorinteractive.cc:252
 msgid "Map unsaved"
-msgstr ""
+msgstr "Mapa gun sàbhaladh"
 
 #: ../../src/editor/editorinteractive.cc:253
 msgid "The Map is unsaved, do you really want to quit?"
 msgstr ""
+"Cha deach am mapa a shàbhaladh, a bheil thu cinnteach gu bheil thu airson "
+"fàgail?"
 
 #: ../../src/editor/editorinteractive.cc:601
 #: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:179
@@ -756,7 +759,7 @@ msgstr ""
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:182
 #: ../../src/logic/map.h:166
 msgid "No Name"
-msgstr ""
+msgstr "Gun ainm"
 
 #: ../../src/editor/editorinteractive.cc:603
 #: ../../src/ui_fsmenu/loadgame.cc:241 ../../src/ui_fsmenu/loadreplay.cc:197
@@ -765,62 +768,62 @@ msgstr ""
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:487
 #: ../../src/logic/map.h:167
 msgid "Unknown"
-msgstr ""
+msgstr "Chan eil fhios"
 
 #: ../../src/game_io/game_cmd_queue_data_packet.cc:86
 #, c-format
 msgid "command queue: %s"
-msgstr ""
+msgstr "ciutha nan àitheantan: %s"
 
 #: ../../src/game_io/game_game_class_data_packet.cc:46
 #, c-format
 msgid "game_class: %s"
-msgstr ""
+msgstr "clas a' gheama: %s"
 
 #: ../../src/game_io/game_interactive_player_data_packet.cc:57
 msgid "The game has no players!"
-msgstr ""
+msgstr "Chan eil cluicheadair aig a' gheama!"
 
 #: ../../src/game_io/game_interactive_player_data_packet.cc:81
 #, c-format
 msgid "interactive player: %s"
-msgstr ""
+msgstr "cluicheadair eadar-ghnìomhach: %s"
 
 #: ../../src/game_io/game_player_economies_data_packet.cc:65
 msgid "there is no flag at the specified location"
-msgstr ""
+msgstr "chan eil bratach aig an ionad shònraichte"
 
 #: ../../src/game_io/game_player_economies_data_packet.cc:67
 #: ../../src/map_io/widelands_map_player_position_data_packet.cc:55
 #, c-format
 msgid "player %u: %s"
-msgstr ""
+msgstr "cluicheadair %u: %s"
 
 #: ../../src/game_io/game_player_economies_data_packet.cc:73
 #, c-format
 msgid "economies: %s"
-msgstr ""
+msgstr "eaconamaidhean: %s"
 
 #: ../../src/game_io/game_player_info_data_packet.cc:54
 #, c-format
 msgid "player number (%i) is out of range (1 .. %u)"
-msgstr ""
+msgstr "tha cluicheadair (%i) a-mach à rainse (1 .. %u)"
 
 #: ../../src/game_io/game_player_info_data_packet.cc:145
 #, c-format
 msgid "player info: %s"
-msgstr ""
+msgstr "fiosrachadh mun chluicheadair: %s"
 
 #: ../../src/game_io/game_preload_data_packet.cc:72
 msgid "Endless Game"
-msgstr ""
+msgstr "Geama gun chrìch"
 
 #: ../../src/game_io/game_preload_data_packet.cc:77
 #: ../../src/logic/game.cc:248 ../../src/logic/game.cc:344
 #: ../../src/ui_fsmenu/launchMPG.cc:286 ../../src/ui_fsmenu/launchSPG.cc:230
 #: ../../src/wui/multiplayersetupgroup.cc:356
 msgid "Scenario"
-msgstr ""
+msgstr "Cnàmh-sgeul"
 
 #: ../../src/game_io/game_preload_data_packet.cc:104
 #: ../../src/map_io/widelands_map_allowed_building_types_data_packet.cc:93
@@ -831,12 +834,12 @@ msgstr ""
 #: ../../src/map_io/widelands_map_port_spaces_data_packet.cc:61
 #, c-format
 msgid "unknown/unhandled version %i"
-msgstr ""
+msgstr "tionndadh %i neo-aithnichte/gun làimhseachadh"
 
 #: ../../src/game_io/game_preload_data_packet.cc:107
 #, c-format
 msgid "preload: %s"
-msgstr ""
+msgstr "ro-luchdadh: %s"
 
 #: ../../src/graphic/animation.cc:137 ../../src/logic/building.cc:88
 #: ../../src/logic/immovable.cc:192 ../../src/logic/immovable.cc:828
@@ -869,16 +872,16 @@ msgstr ""
 #: ../../src/map_io/widelands_map_players_messages_data_packet.cc:131
 #, c-format
 msgid "expected %s but found \"%s\""
-msgstr ""
+msgstr "bhathar an dùil air %s ach chaidh \"%s\" a lorg"
 
 #: ../../src/graphic/animation.cc:138
 msgid "frame number"
-msgstr ""
+msgstr "àireamh an fhrèama"
 
 #: ../../src/io/dedicated_log.cc:66 ../../src/network/internet_gaming.cc:795
 #: ../../src/ui_fsmenu/mapselect.cc:503 ../../src/ui_fsmenu/mapselect.cc:507
 msgid "unknown"
-msgstr ""
+msgstr "chan eil fhios"
 
 #: ../../src/logic/battle.cc:174
 #, c-format
@@ -917,7 +920,7 @@ msgstr ""
 #: ../../src/logic/cmd_calculate_statistics.cc:46
 #, c-format
 msgid "calculate statistics function: %s"
-msgstr ""
+msgstr "foincsean àireamhachadh na stadastaireachd: %s"
 
 #: ../../src/logic/cmd_luacoroutine.cc:77
 #, c-format
@@ -947,53 +950,53 @@ msgstr ""
 #: ../../src/logic/dismantlesite.cc:100
 #, c-format
 msgid "%u%% dismantled"
-msgstr ""
+msgstr "%u%% air a thoirt às a chèile"
 
 #: ../../src/logic/editor_game_base.cc:283
 msgid "Loading tribes"
-msgstr ""
+msgstr "A' luchdadh treubhan"
 
 #: ../../src/logic/game.cc:139
 msgid "Not set"
-msgstr ""
+msgstr "Cha deach a shuidheachadh"
 
 #: ../../src/logic/game.cc:227
 msgid "Preloading a map"
-msgstr ""
+msgstr "A ro-luchdadh mapa"
 
 #: ../../src/logic/game.cc:234
 msgid "Loading a world"
-msgstr ""
+msgstr "A' luchdadh saoghal"
 
 #: ../../src/logic/game.cc:240
 #, c-format
 msgid "Adding player %u"
-msgstr ""
+msgstr "A' cur cluicheadair %u ris"
 
 #: ../../src/logic/game.cc:254
 msgid "Loading a map"
-msgstr ""
+msgstr "A' luchdadh mapa"
 
 #: ../../src/logic/game.cc:283 ../../src/logic/game.cc:362
 #: ../../src/logic/game.cc:397
 msgid "Preloading map"
-msgstr ""
+msgstr "A ro-luchdadh am mapa"
 
 #: ../../src/logic/game.cc:298
 msgid "Configuring players"
-msgstr ""
+msgstr "A' rèiteachadh nan cluicheadairean"
 
 #: ../../src/logic/game.cc:332
 msgid "Loading map"
-msgstr ""
+msgstr "A' luchdadh am mapa"
 
 #: ../../src/logic/game.cc:484
 msgid "Creating player infrastructure"
-msgstr ""
+msgstr "A' cruthachadh bun-structar a' chluicheadair"
 
 #: ../../src/logic/game.cc:497 ../../src/logic/player.cc:221
 msgid "Missing starting position"
-msgstr ""
+msgstr "Ionad tòiseachadh a dhìth"
 
 #: ../../src/logic/game.cc:499 ../../src/logic/player.cc:223
 #, c-format
@@ -1011,7 +1014,7 @@ msgstr ""
 
 #: ../../src/logic/immovable.cc:145
 msgid "no actions"
-msgstr ""
+msgstr "gun ghnìomh"
 
 #: ../../src/logic/immovable.cc:218
 msgid "this program has already been declared"
@@ -1149,38 +1152,42 @@ msgstr ""
 #, c-format
 msgid "%u soldier"
 msgid_plural "%u soldiers"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%u saighdear"
+msgstr[1] "%u shaighdear"
+msgstr[2] "%u saighdearan"
+msgstr[3] "%u saighdear"
 
 #: ../../src/logic/militarysite.cc:124
 #, c-format
 msgid "%u(+%u) soldier"
 msgid_plural "%u(+%u) soldiers"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%u(+%u) saighdear"
+msgstr[1] "%u(+%u) shaighdear"
+msgstr[2] "%u(+%u) saighdearan"
+msgstr[3] "%u(+%u) saighdear"
 
 #: ../../src/logic/militarysite.cc:239
 #, c-format
 msgid "Your soldiers occupied your %s."
-msgstr ""
+msgstr "Ghabh na saighdearan agad còmhnaidh sa %s agad."
 
 #: ../../src/logic/militarysite.cc:840
 #, c-format
 msgid "The enemy defeated your soldiers at the %s."
-msgstr ""
+msgstr "Chuir an nàmhaid ruaig air na saighdearan agad aig %s."
 
 #: ../../src/logic/militarysite.cc:845
 msgid "Militarysite lost!"
-msgstr ""
+msgstr "Chaill thu ionad an airm!"
 
 #: ../../src/logic/militarysite.cc:899
 #, c-format
 msgid "Your soldiers defeated the enemy at the %s."
-msgstr ""
+msgstr "Chuir na saighdearan agad ruaig air an nàmhaid aig %s."
 
 #: ../../src/logic/militarysite.cc:904
 msgid "Enemy at site defeated!"
-msgstr ""
+msgstr "Chuir thu ruaig air an nàmhaid aig ionad!"
 
 #: ../../src/logic/militarysite.cc:949
 #, c-format
@@ -1190,17 +1197,17 @@ msgstr ""
 #: ../../src/logic/militarysite.cc:950
 #, c-format
 msgid "Your %s is under attack.</p>"
-msgstr ""
+msgstr "Thathar a' toirt ionnsaigh air %s agad.</p>"
 
 #: ../../src/logic/militarysite.cc:958
 msgid "You are under attack"
-msgstr ""
+msgstr "Thathar a' toirt ionnsaigh ort"
 
 #: ../../src/logic/playercommand.cc:147
 #: ../../src/map_io/widelands_map_building_data_packet.cc:105
 #, c-format
 msgid "player %u does not exist"
-msgstr ""
+msgstr "chan eil an cluicheadair %u ann"
 
 #: ../../src/logic/playercommand.cc:153
 #, c-format
@@ -1220,17 +1227,17 @@ msgstr ""
 #: ../../src/logic/playercommand.cc:255
 #, c-format
 msgid "build: %s"
-msgstr ""
+msgstr "tog: %s"
 
 #: ../../src/logic/playercommand.cc:303
 #, c-format
 msgid "build flag: %s"
-msgstr ""
+msgstr "tog bratach: %s"
 
 #: ../../src/logic/playercommand.cc:390
 #, c-format
 msgid "build road: %s"
-msgstr ""
+msgstr "tog rathad: %s"
 
 #: ../../src/logic/playercommand.cc:444
 #, c-format
@@ -1240,7 +1247,7 @@ msgstr ""
 #: ../../src/logic/playercommand.cc:450
 #, c-format
 msgid "flag action: %s"
-msgstr ""
+msgstr "gnìomh a' bhrataich: %s"
 
 #: ../../src/logic/playercommand.cc:501 ../../src/logic/playercommand.cc:575
 #: ../../src/logic/playercommand.cc:619 ../../src/logic/playercommand.cc:677
@@ -1304,7 +1311,7 @@ msgstr ""
 #: ../../src/logic/playercommand.cc:1759
 #, c-format
 msgid "change soldier capacity: %s"
-msgstr ""
+msgstr "atharraich an rum airson saighdearan: %s"
 
 #: ../../src/logic/playercommand.cc:1924
 #, c-format
@@ -1542,6 +1549,9 @@ msgid ""
 "This mines' main vein exhausted. Expect strongly diminished returns on "
 "investment. You should consider to expand, dismantle or destruct it."
 msgstr ""
+"Tha cuisle na mèinne seo air a caitheamh. Bi an dùil gum faigh thu mòran nas "
+"lugha a-mach aiste a-nis. Bu chòir dhut a leasachadh, a thoirt às a chèile "
+"no a mhilleadh."
 
 #: ../../src/logic/production_program.cc:1246
 #: ../../src/logic/production_program.cc:1327
@@ -1641,7 +1651,7 @@ msgstr ""
 #: ../../src/logic/ship.cc:986
 #, c-format
 msgid "loading ship: %s"
-msgstr ""
+msgstr "a' luchdadh long: %s"
 
 #: ../../src/logic/soldier.cc:78
 msgid "positive integer"
@@ -1671,11 +1681,11 @@ msgstr ""
 
 #: ../../src/logic/tribe.cc:133
 msgid "constructionsite type \"constructionsite\" is missing"
-msgstr ""
+msgstr "tha an seòrsa làraich-togail \"constructionsite\" a dhìth"
 
 #: ../../src/logic/tribe.cc:142
 msgid "dismantlesite type \"distmantlesite\" is missing"
-msgstr ""
+msgstr "tha an seòrsa toirt às a chèile \"distmantlesite\" a dhìth"
 
 #: ../../src/logic/tribe.cc:259 ../../src/logic/tribe.cc:280
 #, c-format
@@ -1746,7 +1756,7 @@ msgstr ""
 #: ../../src/logic/worker.cc:3088
 #, c-format
 msgid "loading worker: %s"
-msgstr ""
+msgstr "a' luchdadh obraiche: %s"
 
 #: ../../src/logic/world.cc:628
 #, c-format
@@ -1832,7 +1842,7 @@ msgstr ""
 #: ../../src/map_io/widelands_map_buildingdata_data_packet.cc:440
 #, c-format
 msgid "wares: %s"
-msgstr ""
+msgstr "bathar: %s"
 
 #: ../../src/map_io/widelands_map_buildingdata_data_packet.cc:350
 #, c-format
@@ -1842,12 +1852,12 @@ msgstr ""
 #: ../../src/map_io/widelands_map_buildingdata_data_packet.cc:387
 #, c-format
 msgid "constructionsite: %s"
-msgstr ""
+msgstr "làrach-togail: %s"
 
 #: ../../src/map_io/widelands_map_buildingdata_data_packet.cc:467
 #, c-format
 msgid "dismantlesite: %s"
-msgstr ""
+msgstr "toirt às a chèile: %s"
 
 #: ../../src/map_io/widelands_map_buildingdata_data_packet.cc:651
 #, c-format
@@ -2035,7 +2045,7 @@ msgstr ""
 #: ../../src/map_io/widelands_map_players_messages_data_packet.cc:166
 #, c-format
 msgid "messages for player %u: %s"
-msgstr ""
+msgstr "teachdaireachdan airson cluicheadair %u: %s"
 
 #: ../../src/map_io/widelands_map_players_view_data_packet.cc:216
 #, c-format
@@ -2641,7 +2651,7 @@ msgstr ""
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:132
 #: ../../src/editor/ui_menus/editor_main_menu_save_map_make_directory.cc:57
 msgid "OK"
-msgstr ""
+msgstr "Ceart ma-thà"
 
 #: ../../src/scripting/lua_game.cc:1088
 #, c-format
@@ -2659,44 +2669,44 @@ msgstr ""
 
 #: ../../src/ui_basic/helpwindow.cc:47 ../../src/ui_basic/helpwindow.cc:191
 msgid "Help: "
-msgstr ""
+msgstr "Cobhair: "
 
 #: ../../src/ui_basic/progresswindow.cc:51
 msgid "Preparing..."
-msgstr ""
+msgstr "'Ga ullachadh..."
 
 #: ../../src/ui_basic/spinbox.cc:115
 msgid "Increase the value"
-msgstr ""
+msgstr "Meudaich an luach"
 
 #: ../../src/ui_basic/spinbox.cc:123
 msgid "Decrease the value"
-msgstr ""
+msgstr "Lùghdaich an luach"
 
 #: ../../src/ui_basic/spinbox.cc:134
 msgid "Increase the value by 10"
-msgstr ""
+msgstr "Meudaich an luach le 10"
 
 #: ../../src/ui_basic/spinbox.cc:142
 msgid "Decrease the value by 10"
-msgstr ""
+msgstr "Lùghdaich an luach le 10"
 
 #: ../../src/ui_fsmenu/campaign_select.cc:53
 msgid "Select a campaign"
-msgstr ""
+msgstr "Tagh iomairt"
 
 #: ../../src/ui_fsmenu/campaign_select.cc:55
 msgid "Campaign:"
-msgstr ""
+msgstr "Iomairt:"
 
 #: ../../src/ui_fsmenu/campaign_select.cc:59
 msgid "Difficulty:"
-msgstr ""
+msgstr "Duilgheas:"
 
 #: ../../src/ui_fsmenu/campaign_select.cc:63
 #: ../../src/ui_fsmenu/campaign_select.cc:271
 msgid "Description:"
-msgstr ""
+msgstr "Tuairisgeul:"
 
 #: ../../src/ui_fsmenu/campaign_select.cc:79
 #: ../../src/ui_fsmenu/campaign_select.cc:286 ../../src/ui_fsmenu/editor.cc:53
@@ -2708,7 +2718,7 @@ msgstr ""
 #: ../../src/ui_fsmenu/netsetup_lan.cc:71
 #: ../../src/ui_fsmenu/singleplayer.cc:62
 msgid "Back"
-msgstr ""
+msgstr "Air ais"
 
 #: ../../src/ui_fsmenu/campaign_select.cc:164
 #: ../../src/ui_fsmenu/campaign_select.cc:166
@@ -2716,126 +2726,126 @@ msgstr ""
 #: ../../src/ui_fsmenu/campaign_select.cc:227
 #: ../../src/ui_fsmenu/campaign_select.cc:420
 msgid "[No value found]"
-msgstr ""
+msgstr "[Cha deach luach a lorg]"
 
 #: ../../src/ui_fsmenu/campaign_select.cc:171
 msgid "[Invalid entry]"
-msgstr ""
+msgstr "[Innteart mì-dhligheach]"
 
 #: ../../src/ui_fsmenu/campaign_select.cc:265
 #: ../../src/ui_fsmenu/editor_mapselect.cc:52
 #: ../../src/ui_fsmenu/mapselect.cc:54
 msgid "Choose a map"
-msgstr ""
+msgstr "Tagh mapa"
 
 #: ../../src/ui_fsmenu/campaign_select.cc:267
 #: ../../src/ui_fsmenu/editor_mapselect.cc:56
 #: ../../src/ui_fsmenu/mapselect.cc:64
 msgid "Name:"
-msgstr ""
+msgstr "Ainm:"
 
 #: ../../src/ui_fsmenu/campaign_select.cc:269
 #: ../../src/ui_fsmenu/editor_mapselect.cc:61
 #: ../../src/ui_fsmenu/mapselect.cc:70
 #: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:80
 msgid "Author:"
-msgstr ""
+msgstr "Ùghdar:"
 
 #: ../../src/ui_fsmenu/campaign_select.cc:359
 #, c-format
 msgid "Invalid path to file in cconfig: %s"
-msgstr ""
+msgstr "Slighe mhì-dhligheach dhan fhaidhle ann an cconfig: %s"
 
 #: ../../src/ui_fsmenu/editor.cc:36 ../../src/ui_fsmenu/main.cc:60
 msgid "Editor"
-msgstr ""
+msgstr "Deasaiche"
 
 #: ../../src/ui_fsmenu/editor.cc:43
 #: ../../src/editor/ui_menus/editor_main_menu.cc:56
 #: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:46
 msgid "New Map"
-msgstr ""
+msgstr "Mapa ùr"
 
 #: ../../src/ui_fsmenu/editor.cc:48
 #: ../../src/editor/ui_menus/editor_main_menu.cc:66
 #: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:52
 msgid "Load Map"
-msgstr ""
+msgstr "Luchdaich mapa"
 
 #: ../../src/ui_fsmenu/editor_mapselect.cc:66
 #: ../../src/ui_fsmenu/mapselect.cc:76
 #: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:66
 msgid "Size:"
-msgstr ""
+msgstr "Meud:"
 
 #: ../../src/ui_fsmenu/editor_mapselect.cc:71
 #: ../../src/ui_fsmenu/mapselect.cc:82
 #: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:75
 msgid "World:"
-msgstr ""
+msgstr "Saoghal:"
 
 #: ../../src/ui_fsmenu/editor_mapselect.cc:76
 #: ../../src/ui_fsmenu/loadgame.cc:97 ../../src/ui_fsmenu/loadreplay.cc:81
 #: ../../src/ui_fsmenu/mapselect.cc:88
 msgid "Players:"
-msgstr ""
+msgstr "Cluicheadairean:"
 
 #: ../../src/ui_fsmenu/editor_mapselect.cc:81
 #: ../../src/ui_fsmenu/mapselect.cc:94
 msgid "Descr:"
-msgstr ""
+msgstr "Tuairisgeul:"
 
 #: ../../src/ui_fsmenu/editor_mapselect.cc:230
 #: ../../src/ui_fsmenu/mapselect.cc:347
 #: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:224
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:297
 msgid "parent"
-msgstr ""
+msgstr "pàrant"
 
 #: ../../src/ui_fsmenu/fileview.cc:72 ../../src/wui/watchwindow.cc:139
 msgid "Close"
-msgstr ""
+msgstr "Dùin"
 
 #: ../../src/ui_fsmenu/internet_lobby.cc:52
 msgid "Metaserver Lobby"
-msgstr ""
+msgstr "Lobaidh a' mheata-fhrithealaiche:"
 
 #: ../../src/ui_fsmenu/internet_lobby.cc:56
 msgid "Clients online:"
-msgstr ""
+msgstr "Cliantan air loidhne:"
 
 #: ../../src/ui_fsmenu/internet_lobby.cc:60
 msgid "List of games:"
-msgstr ""
+msgstr "Liosta dhe na geamaichean:"
 
 #: ../../src/ui_fsmenu/internet_lobby.cc:64
 msgid "Name of your server:"
-msgstr ""
+msgstr "Ainm an fhrithealaiche agad:"
 
 #: ../../src/ui_fsmenu/internet_lobby.cc:68
 msgid "Maximum of players:"
-msgstr ""
+msgstr "Cluicheadairean as motha:"
 
 #: ../../src/ui_fsmenu/internet_lobby.cc:81
 #: ../../src/ui_fsmenu/netsetup_lan.cc:61
 msgid "Join this game"
-msgstr ""
+msgstr "Gabh pàirt sa gheama seo"
 
 #: ../../src/ui_fsmenu/internet_lobby.cc:86
 msgid "Open a new game"
-msgstr ""
+msgstr "Fosgail geama ùr"
 
 #: ../../src/ui_fsmenu/internet_lobby.cc:156
 msgid "Points"
-msgstr ""
+msgstr "Puingean"
 
 #: ../../src/ui_fsmenu/internet_lobby.cc:157
 msgid "Game"
-msgstr ""
+msgstr "Geama"
 
 #: ../../src/ui_fsmenu/internet_lobby.cc:379
 msgid "Connection timed out"
-msgstr ""
+msgstr "Dh'fhalbh an ùine air a' cheangal"
 
 #: ../../src/ui_fsmenu/internet_lobby.cc:382
 msgid ""
@@ -2846,32 +2856,32 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/internet_lobby.cc:410
 msgid "Widelands has not been able to connect to the host."
-msgstr ""
+msgstr "Cha deach le Widelands ceangal ris an òstair."
 
 #: ../../src/ui_fsmenu/intro.cc:32
 msgid "Press ESC or click to continue ..."
-msgstr ""
+msgstr "Brùth air ESC no briog airson leantainn air adhart..."
 
 #: ../../src/ui_fsmenu/launchMPG.cc:51
 msgid "Please select"
-msgstr ""
+msgstr "An dèan thu taghadh?"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:64 ../../src/ui_fsmenu/launchMPG.cc:164
 #: ../../src/ui_fsmenu/netsetup_lan.cc:126 ../../src/wui/minimap.cc:146
 msgid "Map"
-msgstr ""
+msgstr "Mapa"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:64
 msgid "Select a map"
-msgstr ""
+msgstr "Tagh mapa"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:74
 msgid "Saved game"
-msgstr ""
+msgstr "Geama air a shàbhaladh"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:74
 msgid "Select a saved game"
-msgstr ""
+msgstr "Tagh geama air a shàbhaladh"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:84 ../../src/ui_fsmenu/options.cc:56
 #: ../../src/ui_fsmenu/options.cc:400
@@ -2880,43 +2890,43 @@ msgstr ""
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:139
 #: ../../src/editor/ui_menus/editor_main_menu_save_map_make_directory.cc:67
 msgid "Cancel"
-msgstr ""
+msgstr "Sguir dheth"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:84
 msgid "Cancel selection"
-msgstr ""
+msgstr "Sguir dhen taghadh"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:121
 msgid "Change map or saved game"
-msgstr ""
+msgstr "Atharraich am mapa no an geama air a shàbhaladh"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:126 ../../src/ui_fsmenu/launchSPG.cc:69
 msgid "Start game"
-msgstr ""
+msgstr "Tòisich air a' gheama"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:142
 msgid "Show the help window"
-msgstr ""
+msgstr "Seall a' chobhair"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:148 ../../src/ui_fsmenu/launchMPG.cc:666
 msgid "Multiplayer Game Setup"
-msgstr ""
+msgstr "A' suidheachadh geama ioma-chluicheadair"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:156
 msgid "Clients"
-msgstr ""
+msgstr "Cliantan"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:168 ../../src/ui_fsmenu/launchSPG.cc:103
 msgid "Type of game"
-msgstr ""
+msgstr "Seòrsa a' gheama"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:214 ../../src/ui_fsmenu/launchSPG.cc:284
 msgid "(no map)"
-msgstr ""
+msgstr "(gun mhapa)"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:215
 msgid "The host has not yet selected a map or saved game."
-msgstr ""
+msgstr "Cha do thagh an t-òstair mapa no geama air a shàbhaladh fhathast."
 
 #: ../../src/ui_fsmenu/launchMPG.cc:288 ../../src/ui_fsmenu/launchSPG.cc:232
 msgid "Win condition is set through the scenario"
@@ -2925,15 +2935,17 @@ msgstr ""
 #: ../../src/ui_fsmenu/launchMPG.cc:290
 #: ../../src/wui/multiplayersetupgroup.cc:358
 msgid "Savegame"
-msgstr ""
+msgstr "Geama air a shàbhaladh"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:292
 msgid "The game is a saved game - the win condition was set before."
 msgstr ""
+"'S e geama air a shàbhaladh a tha sa gheama - chaidh cumha na buaidhe a "
+"shuidheachadh mar-thà."
 
 #: ../../src/ui_fsmenu/launchMPG.cc:393
 msgid "Saved game is directory"
-msgstr ""
+msgstr "'S e pasgan a tha sa gheama air a shàbhaladh"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:395
 msgid ""
@@ -2946,7 +2958,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/launchMPG.cc:423 ../../src/ui_fsmenu/launchSPG.cc:258
 msgid "File not found"
-msgstr ""
+msgstr "Cha deach am faidhle a lorg"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:425
 #, c-format
@@ -2970,13 +2982,13 @@ msgstr ""
 #: ../../src/wui/multiplayersetupgroup.cc:286
 #, c-format
 msgid "Player %i"
-msgstr ""
+msgstr "Cluicheadair %i"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:483
 #: ../../src/wui/multiplayersetupgroup.cc:122
 #, c-format
 msgid "Spectator"
-msgstr ""
+msgstr "Amharc"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:484
 #, c-format
@@ -3117,36 +3129,36 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/launchSPG.cc:54
 msgid "Select map"
-msgstr ""
+msgstr "Tagh am mapa"
 
 #: ../../src/ui_fsmenu/launchSPG.cc:75
 msgid "Launch Game"
-msgstr ""
+msgstr "Tòisich air a' gheama"
 
 #: ../../src/ui_fsmenu/launchSPG.cc:83
 msgid "Player's name"
-msgstr ""
+msgstr "Ainm a' chluicheadair"
 
 #: ../../src/ui_fsmenu/launchSPG.cc:87
 msgid "Player's type"
-msgstr ""
+msgstr "Seòrsa a' chluicheadair"
 
 #: ../../src/ui_fsmenu/launchSPG.cc:91 ../../src/wui/game_summary.cc:91
 #: ../../src/wui/multiplayersetupgroup.cc:462
 msgid "Team"
-msgstr ""
+msgstr "Sgioba"
 
 #: ../../src/ui_fsmenu/launchSPG.cc:95
 msgid "Player's tribe"
-msgstr ""
+msgstr "Treubh a' chluicheadair"
 
 #: ../../src/ui_fsmenu/launchSPG.cc:99
 msgid "Start type"
-msgstr ""
+msgstr "Seòrsa tòiseachaidh"
 
 #: ../../src/ui_fsmenu/launchSPG.cc:159
 msgid "Switch to position"
-msgstr ""
+msgstr "Gearr leum dhan ionad"
 
 #: ../../src/ui_fsmenu/launchSPG.cc:260
 #, c-format
@@ -3162,28 +3174,28 @@ msgstr ""
 #: ../../src/ui_fsmenu/loadgame.cc:72 ../../src/ui_fsmenu/loadreplay.cc:55
 #: ../../src/wui/game_main_menu_save_game.cc:114
 msgid "Delete"
-msgstr ""
+msgstr "Sguab às"
 
 #: ../../src/ui_fsmenu/loadgame.cc:83
 msgid "Choose saved game"
-msgstr ""
+msgstr "Tagh geama air a shàbhaladh"
 
 #: ../../src/ui_fsmenu/loadgame.cc:87 ../../src/ui_fsmenu/loadreplay.cc:71
 #: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:57
 msgid "Map Name:"
-msgstr ""
+msgstr "Ainm a' mhapa:"
 
 #: ../../src/ui_fsmenu/loadgame.cc:92 ../../src/ui_fsmenu/loadreplay.cc:76
 msgid "Gametime:"
-msgstr ""
+msgstr "Àm a' gheama:"
 
 #: ../../src/ui_fsmenu/loadgame.cc:105
 msgid "Minimap:"
-msgstr ""
+msgstr "Meanbh-mhapa:"
 
 #: ../../src/ui_fsmenu/loadgame.cc:157 ../../src/ui_fsmenu/loadreplay.cc:138
 msgid "Delete file"
-msgstr ""
+msgstr "Sguab às am faidhle"
 
 #: ../../src/ui_fsmenu/loadgame.cc:158 ../../src/ui_fsmenu/loadreplay.cc:139
 msgid "Do you really want to delete "
@@ -3199,58 +3211,58 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/loadreplay.cc:67
 msgid "Choose a replay"
-msgstr ""
+msgstr "Tagh ath-chluiche"
 
 #: ../../src/ui_fsmenu/main.cc:40
 msgid "Play Tutorial"
-msgstr ""
+msgstr "Cluich oideachadh"
 
 #: ../../src/ui_fsmenu/main.cc:45
 msgid "Single Player"
-msgstr ""
+msgstr "Aon chluicheadair"
 
 #: ../../src/ui_fsmenu/main.cc:50
 msgid "Multi Player"
-msgstr ""
+msgstr "Ioma-chluicheadair"
 
 #: ../../src/ui_fsmenu/main.cc:55
 msgid "Watch Replay"
-msgstr ""
+msgstr "Coimhead air ath-chluiche"
 
 #: ../../src/ui_fsmenu/main.cc:65 ../../src/wui/game_options_menu.cc:47
 #: ../../src/wui/interactive_player.cc:110
 #: ../../src/wui/interactive_spectator.cc:57
 msgid "Options"
-msgstr ""
+msgstr "Roghainnean"
 
 #: ../../src/ui_fsmenu/main.cc:70
 #: ../../src/editor/ui_menus/editor_main_menu.cc:81
 msgid "View Readme"
-msgstr ""
+msgstr "Seall an leughmi"
 
 #: ../../src/ui_fsmenu/main.cc:75 ../../src/wui/game_options_menu.cc:63
 msgid "License"
-msgstr ""
+msgstr "Ceadachas"
 
 #: ../../src/ui_fsmenu/main.cc:80 ../../src/wui/game_options_menu.cc:94
 msgid "Exit Game"
-msgstr ""
+msgstr "Fàg an geama"
 
 #: ../../src/ui_fsmenu/main.cc:86
 msgid "Version "
-msgstr ""
+msgstr "Tionndadh "
 
 #: ../../src/ui_fsmenu/main.cc:91
 msgid "by the Widelands Development Team"
-msgstr ""
+msgstr "leis an sgioba leasachaidh Widelands"
 
 #: ../../src/ui_fsmenu/main.cc:96
 msgid "Licensed under the GNU General Public License V2.0"
-msgstr ""
+msgstr "Fo cheadachas GNU General Public License tionndadh 2.0"
 
 #: ../../src/ui_fsmenu/mapselect.cc:59
 msgid "Load Map as scenario: "
-msgstr ""
+msgstr "Luchdaich mapa mar chnàmh-sgeul: "
 
 #: ../../src/ui_fsmenu/mapselect.cc:149
 msgid "#"
@@ -3258,35 +3270,35 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/mapselect.cc:151
 msgid "Map Name"
-msgstr ""
+msgstr "Ainm a' mhapa"
 
 #: ../../src/ui_fsmenu/mapselect.cc:166
 msgid "Show all maps"
-msgstr ""
+msgstr "Seall na h-uile mapa"
 
 #: ../../src/ui_fsmenu/mapselect.cc:171
 msgid "Official Map"
-msgstr ""
+msgstr "Mapa oifigeil"
 
 #: ../../src/ui_fsmenu/mapselect.cc:172
 msgid "Seafaring Map"
-msgstr ""
+msgstr "Mapa-mara"
 
 #: ../../src/ui_fsmenu/mapselect.cc:175
 msgid "1v1"
-msgstr ""
+msgstr "Còmhrag-dhithis"
 
 #: ../../src/ui_fsmenu/mapselect.cc:176
 msgid "Teams of 2"
-msgstr ""
+msgstr "Sgiobaidhean de 2"
 
 #: ../../src/ui_fsmenu/mapselect.cc:177
 msgid "Teams of 3"
-msgstr ""
+msgstr "Sgiobaidhean de 3"
 
 #: ../../src/ui_fsmenu/mapselect.cc:180
 msgid "Teams of 4"
-msgstr ""
+msgstr "Sgiobaidhean de 4"
 
 #: ../../src/ui_fsmenu/mapselect.cc:181
 msgid "Free for all"
@@ -3294,89 +3306,91 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/mapselect.cc:182
 msgid "Unbalanced"
-msgstr ""
+msgstr "Gun mheidh"
 
 #: ../../src/ui_fsmenu/mapselect.cc:280
 msgid "(directory)"
-msgstr ""
+msgstr "(pasgan)"
 
 #: ../../src/ui_fsmenu/mapselect.cc:505
 msgid ""
 "This map file is not present on your filesystem. Data shown here was sent by "
 "the server."
 msgstr ""
+"Chan eil am faidhle mapa seo san t-siostam-fhaidhlichean agad. Chaidh an "
+"dàta a chì thu an-seo a chur leis an fhrithealaiche."
 
 #: ../../src/ui_fsmenu/multiplayer.cc:41
 msgid "Choose game type"
-msgstr ""
+msgstr "Tagh seòrsa a' gheama"
 
 #: ../../src/ui_fsmenu/multiplayer.cc:48
 msgid "Internet game"
-msgstr ""
+msgstr "Geama eadar-lìn"
 
 #: ../../src/ui_fsmenu/multiplayer.cc:53
 msgid "LAN / Direct IP"
-msgstr ""
+msgstr "LAN / IP dìreach"
 
 #: ../../src/ui_fsmenu/multiplayer.cc:84
 msgid "Show login dialog"
-msgstr ""
+msgstr "Seall còmhradh logaidh a-steach"
 
 #: ../../src/ui_fsmenu/multiplayer.cc:115
 #: ../../src/ui_fsmenu/netsetup_lan.cc:120 ../../src/wui/login_box.cc:74
 msgid "nobody"
-msgstr ""
+msgstr "gun ainm"
 
 #: ../../src/ui_fsmenu/netsetup_lan.cc:42
 msgid "Begin Network Game"
-msgstr ""
+msgstr "Tòisich air geama lìonraidh"
 
 #: ../../src/ui_fsmenu/netsetup_lan.cc:46
 msgid "List of games in your local network:"
-msgstr ""
+msgstr "Liosta dhe na geamaichean air an lìonra ionadail agad:"
 
 #: ../../src/ui_fsmenu/netsetup_lan.cc:50
 msgid "Your nickname:"
-msgstr ""
+msgstr "D' fhar-ainm:"
 
 #: ../../src/ui_fsmenu/netsetup_lan.cc:54
 msgid "Host to connect:"
-msgstr ""
+msgstr "Òstair gus ceangal ris:"
 
 #: ../../src/ui_fsmenu/netsetup_lan.cc:66
 msgid "Host a new game"
-msgstr ""
+msgstr "Òstaich geama ùr"
 
 #: ../../src/ui_fsmenu/netsetup_lan.cc:77
 msgid "Load previous host"
-msgstr ""
+msgstr "Luchdaich an t-òstair roimhe"
 
 #: ../../src/ui_fsmenu/netsetup_lan.cc:125
 msgid "Host"
-msgstr ""
+msgstr "Òstair"
 
 #: ../../src/ui_fsmenu/netsetup_lan.cc:127
 msgid "State"
-msgstr ""
+msgstr "Staid"
 
 #: ../../src/ui_fsmenu/netsetup_lan.cc:196
 #: ../../src/wui/multiplayersetupgroup.cc:270
 #: ../../src/wui/playerdescrgroup.cc:157
 msgid "Open"
-msgstr ""
+msgstr "Fosgailte"
 
 #: ../../src/ui_fsmenu/netsetup_lan.cc:197
 #: ../../src/wui/multiplayersetupgroup.cc:259
 msgid "Closed"
-msgstr ""
+msgstr "Dùinte"
 
 #: ../../src/ui_fsmenu/options.cc:51 ../../src/ui_fsmenu/options.cc:429
 msgid "Advanced Options"
-msgstr ""
+msgstr "Roghainnean adhartach"
 
 #: ../../src/ui_fsmenu/options.cc:61 ../../src/ui_fsmenu/options.cc:405
 msgid "Apply"
-msgstr ""
+msgstr "Cuir an sàs"
 
 #: ../../src/ui_fsmenu/options.cc:72
 msgid "min."
@@ -3384,15 +3398,15 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/options.cc:78
 msgid "days"
-msgstr ""
+msgstr "làithean"
 
 #: ../../src/ui_fsmenu/options.cc:85
 msgid "General Options"
-msgstr ""
+msgstr "Roghainnean coitcheann"
 
 #: ../../src/ui_fsmenu/options.cc:92
 msgid "Fullscreen"
-msgstr ""
+msgstr "Làn-sgrìn"
 
 #: ../../src/ui_fsmenu/options.cc:98
 msgid "Grab Input"
@@ -3400,27 +3414,27 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/options.cc:104
 msgid "Enable Music"
-msgstr ""
+msgstr "Cuir an ceòl an comas"
 
 #: ../../src/ui_fsmenu/options.cc:110
 msgid "Enable Sound"
-msgstr ""
+msgstr "Cuir an fhuaim an comas"
 
 #: ../../src/ui_fsmenu/options.cc:115
 msgid "Maximum FPS:"
-msgstr ""
+msgstr "FPS as motha:"
 
 #: ../../src/ui_fsmenu/options.cc:125
 msgid "In-game resolution"
-msgstr ""
+msgstr "Dùmhlachd-bhreacaidh am broinn a' gheama"
 
 #: ../../src/ui_fsmenu/options.cc:130
 msgid "Language"
-msgstr ""
+msgstr "Cànan"
 
 #: ../../src/ui_fsmenu/options.cc:141
 msgid "In-game Options"
-msgstr ""
+msgstr "Roghainnean am broinn a' gheama"
 
 #: ../../src/ui_fsmenu/options.cc:148
 msgid "Use single Watchwindow Mode"
@@ -3428,11 +3442,11 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/options.cc:154
 msgid "Start roadbuilding after placing flag"
-msgstr ""
+msgstr "Tòisich air rathad a thogail às dèidh bratach a chur ann"
 
 #: ../../src/ui_fsmenu/options.cc:161
 msgid "Show buildings area preview"
-msgstr ""
+msgstr "Ro-sheall an raon togail"
 
 #: ../../src/ui_fsmenu/options.cc:168
 msgid "Snap windows only when overlapping"
@@ -3444,23 +3458,23 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/options.cc:179
 msgid "Save game automatically every"
-msgstr ""
+msgstr "Sàbhail an geama gu fèin-obrachail gach"
 
 #: ../../src/ui_fsmenu/options.cc:183
 msgid "Remove Replays older than:"
-msgstr ""
+msgstr "Thoir ath-chluichean air falbh a bhios nas sine na:"
 
 #: ../../src/ui_fsmenu/options.cc:198
 msgid "Off"
-msgstr ""
+msgstr "Dheth"
 
 #: ../../src/ui_fsmenu/options.cc:199
 msgid "Never"
-msgstr ""
+msgstr "Chan ann idir"
 
 #: ../../src/ui_fsmenu/options.cc:200
 msgid "1 day"
-msgstr ""
+msgstr "1 latha"
 
 #: ../../src/ui_fsmenu/options.cc:265
 #, c-format
@@ -3469,7 +3483,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/options.cc:287
 msgid "Try system language"
-msgstr ""
+msgstr "Feuch cànan an t-siostaim"
 
 #: ../../src/ui_fsmenu/options.cc:411
 msgid "x"
@@ -3481,7 +3495,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/options.cc:440
 msgid "Main menu font:"
-msgstr ""
+msgstr "Cruth-clò a' phrìomh chlàir-taice:"
 
 #: ../../src/ui_fsmenu/options.cc:446
 msgid "Play a sound at message arrival."
@@ -3513,66 +3527,66 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/options.cc:484
 msgid "Show in game chat with transparent background"
-msgstr ""
+msgstr "Seall cabadaich am broinn a' gheama le cùlaibh trìd-shoilleir"
 
 #: ../../src/ui_fsmenu/options.cc:520
 msgid "Pause"
-msgstr ""
+msgstr "Cuir 'na stad"
 
 #: ../../src/ui_fsmenu/options.cc:531
 msgid "DejaVuSerif (Default)"
-msgstr ""
+msgstr "DejaVuSerif (Tùsail)"
 
 #: ../../src/ui_fsmenu/singleplayer.cc:40
 msgid "Single Player Menu"
-msgstr ""
+msgstr "Clàr-taice aon-chluicheadair"
 
 #: ../../src/ui_fsmenu/singleplayer.cc:47
 msgid "New Game"
-msgstr ""
+msgstr "Geama ùr"
 
 #: ../../src/ui_fsmenu/singleplayer.cc:52
 msgid "Campaigns"
-msgstr ""
+msgstr "Iomairtean"
 
 #: ../../src/ui_fsmenu/singleplayer.cc:57
 msgid "Load Game"
-msgstr ""
+msgstr "Luchdaich geama"
 
 #: ../../src/wui/actionconfirm.cc:223
 msgid "Destroy building?"
-msgstr ""
+msgstr "A bheil thu airson an togalach a mhilleadh?"
 
 #: ../../src/wui/actionconfirm.cc:224
 #, c-format
 msgid "Do you really want to destroy this %s?"
-msgstr ""
+msgstr "A bheil thu airson a' %s seo a mhilleadh?"
 
 #: ../../src/wui/actionconfirm.cc:288
 msgid "Dismantle building?"
-msgstr ""
+msgstr "A bheil thu airson an togalach a thoirt às a chèile?"
 
 #: ../../src/wui/actionconfirm.cc:289
 #, c-format
 msgid "Do you really want to dismantle this %s?"
-msgstr ""
+msgstr "A bheil thu airson a' %s seo a thoirt às a chèile?"
 
 #: ../../src/wui/actionconfirm.cc:349
 msgid "Enhance building?"
-msgstr ""
+msgstr "A bheil thu airson an togalach a leasachadh?"
 
 #: ../../src/wui/actionconfirm.cc:350
 #, c-format
 msgid "Do you really want to enhance this %s?"
-msgstr ""
+msgstr "A bheil thu airson a' %s seo a leasachadh?"
 
 #: ../../src/wui/actionconfirm.cc:402 ../../src/wui/actionconfirm.cc:443
 msgid "Sink the ship?"
-msgstr ""
+msgstr "A bheil thu airson an long a chur fodha?"
 
 #: ../../src/wui/actionconfirm.cc:402
 msgid "Do you really want to sink this ship?"
-msgstr ""
+msgstr "A bheil thu airson an long seo a chur fodha?"
 
 #: ../../src/wui/actionconfirm.cc:443
 msgid "Do you really want to cancel the active expedition?"
@@ -3580,23 +3594,23 @@ msgstr ""
 
 #: ../../src/wui/attack_box.cc:167
 msgid "Soldiers:"
-msgstr ""
+msgstr "Saighdearan:"
 
 #: ../../src/wui/attack_box.cc:175
 msgid "Send less soldiers"
-msgstr ""
+msgstr "Cuir nas lugha dhe shaighdearan"
 
 #: ../../src/wui/attack_box.cc:192
 msgid "Number of soldiers"
-msgstr ""
+msgstr "Àireamh de shaighdearan"
 
 #: ../../src/wui/attack_box.cc:202
 msgid "Send more soldiers"
-msgstr ""
+msgstr "Cuir barrachd shaighdearan"
 
 #: ../../src/wui/attack_box.cc:213 ../../src/wui/military_box.cc:129
 msgid "Retreat: Never!"
-msgstr ""
+msgstr "Cùlachadh: Chan ann gu bràth tuilleadh!"
 
 #: ../../src/wui/attack_box.cc:232 ../../src/wui/military_box.cc:148
 msgid "Supported damage before retreat"
@@ -3609,11 +3623,11 @@ msgstr ""
 #: ../../src/wui/building_statistics_menu.cc:77
 #: ../../src/wui/game_main_menu.cc:62
 msgid "Building Statistics"
-msgstr ""
+msgstr "Stadastaireachd nan togalach"
 
 #: ../../src/wui/building_statistics_menu.cc:87
 msgid "Total Productivity: "
-msgstr ""
+msgstr "Saothrachadh iomlan: "
 
 #: ../../src/wui/building_statistics_menu.cc:91
 msgid "Owned: "
@@ -3621,7 +3635,7 @@ msgstr ""
 
 #: ../../src/wui/building_statistics_menu.cc:97
 msgid "In Build: "
-msgstr ""
+msgstr "'Ga thogail: "
 
 #: ../../src/wui/building_statistics_menu.cc:103
 msgid "Jump to unproductive: "
@@ -3643,13 +3657,13 @@ msgstr ""
 #: ../../src/wui/building_statistics_menu.cc:152
 #: ../../src/wui/building_statistics_menu.cc:174
 msgid "Show previous"
-msgstr ""
+msgstr "Seall an tè roimhpe"
 
 #: ../../src/wui/building_statistics_menu.cc:141
 #: ../../src/wui/building_statistics_menu.cc:163
 #: ../../src/wui/building_statistics_menu.cc:185
 msgid "Show next"
-msgstr ""
+msgstr "Seall an ath thè"
 
 #: ../../src/wui/buildingwindow.cc:181
 msgid "Cancel the expedition"
@@ -3665,24 +3679,24 @@ msgstr ""
 
 #: ../../src/wui/buildingwindow.cc:207
 msgid "Stop"
-msgstr ""
+msgstr "Sguir dheth"
 
 #: ../../src/wui/buildingwindow.cc:234
 #, c-format
 msgid "Enhance to %s"
-msgstr ""
+msgstr "Leasaich gu %s"
 
 #: ../../src/wui/buildingwindow.cc:240 ../../src/wui/fieldaction.cc:112
 msgid "Construction costs:"
-msgstr ""
+msgstr "Cosgais na togail:"
 
 #: ../../src/wui/buildingwindow.cc:261
 msgid "Destroy"
-msgstr ""
+msgstr "Mill"
 
 #: ../../src/wui/buildingwindow.cc:279
 msgid "Dismantle"
-msgstr ""
+msgstr "Thoir às a chèile"
 
 #: ../../src/wui/buildingwindow.cc:279
 msgid "Returns:"
@@ -3690,198 +3704,198 @@ msgstr ""
 
 #: ../../src/wui/buildingwindow.cc:311 ../../src/wui/buildingwindow.cc:514
 msgid "Hide workarea"
-msgstr ""
+msgstr "Falaich an raon obrach"
 
 #: ../../src/wui/buildingwindow.cc:326
 msgid "Debug"
-msgstr ""
+msgstr "Dì-bhugaich"
 
 #: ../../src/wui/buildingwindow.cc:337
 msgid "Center view on this"
-msgstr ""
+msgstr "Meadhanaich an sealladh air"
 
 #: ../../src/wui/buildingwindow.cc:355
 msgid "Help"
-msgstr ""
+msgstr "Cobhair"
 
 #: ../../src/wui/buildingwindow.cc:517
 msgid "Show workarea"
-msgstr ""
+msgstr "Seall an raon obrach"
 
 #: ../../src/wui/constructionsitewindow.cc:75
 #: ../../src/wui/dismantlesitewindow.cc:69
 msgid "Building materials"
-msgstr ""
+msgstr "Stuth togail"
 
 #: ../../src/wui/encyclopedia_window.cc:67
 msgid "Tribe ware encyclopedia"
-msgstr ""
+msgstr "Leabhar-eòlais bathar na treubha"
 
 #: ../../src/wui/encyclopedia_window.cc:84
 msgid "Consumed ware type(s)"
-msgstr ""
+msgstr "Seòrsa(ichean) de bhathar air a chaitheamh"
 
 #: ../../src/wui/encyclopedia_window.cc:85
 msgid "Quantity"
-msgstr ""
+msgstr "Uiread"
 
 #: ../../src/wui/fieldaction.cc:247
 msgid "Build small buildings"
-msgstr ""
+msgstr "Tog togalach beag"
 
 #: ../../src/wui/fieldaction.cc:248
 msgid "Build medium buildings"
-msgstr ""
+msgstr "Tog togalach meadhanach"
 
 #: ../../src/wui/fieldaction.cc:249
 msgid "Build large buildings"
-msgstr ""
+msgstr "Tog togalach mòr"
 
 #: ../../src/wui/fieldaction.cc:250
 msgid "Build port buildings"
-msgstr ""
+msgstr "Tog togalach puirt"
 
 #: ../../src/wui/fieldaction.cc:282
 msgid "Action"
-msgstr ""
+msgstr "Gnìomhan"
 
 #: ../../src/wui/fieldaction.cc:367
 msgid "Build road"
-msgstr ""
+msgstr "Tog rathad"
 
 #: ../../src/wui/fieldaction.cc:379
 msgid "Destroy this flag"
-msgstr ""
+msgstr "Mill a' bhratach seo"
 
 #: ../../src/wui/fieldaction.cc:387
 msgid "Configure economy"
-msgstr ""
+msgstr "Rèitich an eaconamaidh"
 
 #: ../../src/wui/fieldaction.cc:393
 msgid "Send geologist to explore site"
-msgstr ""
+msgstr "Cuir clach-eòlaiche gus an làrach a rùrachadh"
 
 #: ../../src/wui/fieldaction.cc:411
 msgid "Put a flag"
-msgstr ""
+msgstr "Cuir bratach ann"
 
 #: ../../src/wui/fieldaction.cc:418
 msgid "Destroy a road"
-msgstr ""
+msgstr "Mill rathad"
 
 #: ../../src/wui/fieldaction.cc:436
 msgid "Watch field in a separate window"
-msgstr ""
+msgstr "Cum sùil air an raon ann an uinneag fa leth"
 
 #: ../../src/wui/fieldaction.cc:441
 msgid "Toggle building statistics display"
-msgstr ""
+msgstr "Toglaich an sealladh airson stadastaireachd nan togalach"
 
 #: ../../src/wui/fieldaction.cc:447
 msgid "Toggle building label display"
-msgstr ""
+msgstr "Toglaich sealladh leubailean nan togalach"
 
 #: ../../src/wui/fieldaction.cc:454
 msgid "Debug window"
-msgstr ""
+msgstr "Uinneag dì-bhugachaidh"
 
 #: ../../src/wui/fieldaction.cc:461 ../../src/wui/fieldaction.cc:609
 msgid "Build roads"
-msgstr ""
+msgstr "Tog rathaidean"
 
 #: ../../src/wui/fieldaction.cc:463 ../../src/wui/watchwindow.cc:97
 msgid "Watch"
-msgstr ""
+msgstr "Cum sùil air"
 
 #: ../../src/wui/fieldaction.cc:471
 msgid "Military settings"
-msgstr ""
+msgstr "Roghainnean an airm"
 
 #: ../../src/wui/fieldaction.cc:497
 msgid "Start attack"
-msgstr ""
+msgstr "Thoir ionnsaigh"
 
 #: ../../src/wui/fieldaction.cc:502
 msgid "Attack"
-msgstr ""
+msgstr "Ionnsaigh"
 
 #: ../../src/wui/fieldaction.cc:586
 msgid "Build mines"
-msgstr ""
+msgstr "Tog mèinn"
 
 #: ../../src/wui/fieldaction.cc:602
 msgid "Build flag"
-msgstr ""
+msgstr "Tog bratach"
 
 #: ../../src/wui/fieldaction.cc:606
 msgid "Cancel road"
-msgstr ""
+msgstr "Sguir dhen rathad"
 
 #: ../../src/wui/game_chat_menu.cc:37
 msgid "Chat Menu"
-msgstr ""
+msgstr "Clàr-taice na cabadaich"
 
 #: ../../src/wui/game_debug_ui.cc:237
 msgid "Debug Field"
-msgstr ""
+msgstr "Dì-bhugaich an raon"
 
 #: ../../src/wui/game_debug_ui.cc:375
 #, c-format
 msgid "Resource: %s\n"
-msgstr ""
+msgstr "Stòras: %s\n"
 
 #: ../../src/wui/game_debug_ui.cc:381
 #, c-format
 msgid "  Amount: %i/%i\n"
-msgstr ""
+msgstr "  Uiread: %i/%i\n"
 
 #: ../../src/wui/game_main_menu.cc:42
 #: ../../src/editor/ui_menus/editor_main_menu.cc:51
 msgid "Main Menu"
-msgstr ""
+msgstr "Am prìomh clàr-taice"
 
 #: ../../src/wui/game_main_menu.cc:50
 #: ../../src/wui/general_statistics_menu.cc:47
 msgid "General Statistics"
-msgstr ""
+msgstr "Stadastaireachd choitcheann"
 
 #: ../../src/wui/game_main_menu.cc:56
 #: ../../src/wui/ware_statistics_menu.cc:138
 msgid "Ware Statistics"
-msgstr ""
+msgstr "Stadastaireachd nam bathar"
 
 #: ../../src/wui/game_main_menu.cc:68 ../../src/wui/stock_menu.cc:40
 #: ../../src/wui/ware_statistics_menu.cc:209 ../../src/wui/waresdisplay.cc:59
 msgid "Stock"
-msgstr ""
+msgstr "An stòras"
 
 #: ../../src/wui/game_main_menu_save_game.cc:66
 #: ../../src/wui/game_options_menu.cc:85
 #: ../../src/wui/interactive_spectator.cc:55
 msgid "Save Game"
-msgstr ""
+msgstr "Sàbhail an geama"
 
 #: ../../src/wui/game_main_menu_save_game.cc:69
 msgid "Map Name: "
-msgstr ""
+msgstr "Ainm a' mhapa: "
 
 #: ../../src/wui/game_main_menu_save_game.cc:73
 msgid "Game Time: "
-msgstr ""
+msgstr "Àm a' gheama: "
 
 #: ../../src/wui/game_main_menu_save_game.cc:79
 msgid "Win condition: "
-msgstr ""
+msgstr "Cumha na buaidhe: "
 
 #: ../../src/wui/game_main_menu_save_game.cc:140
 #: ../../src/wui/game_main_menu_save_game.cc:178
 msgid "player"
-msgstr ""
+msgstr "cluicheadair"
 
 #: ../../src/wui/game_main_menu_save_game.cc:140
 #: ../../src/wui/game_main_menu_save_game.cc:178
 msgid "players"
-msgstr ""
+msgstr "cluicheadairean"
 
 #: ../../src/wui/game_main_menu_save_game.cc:248
 msgid ""
@@ -3890,212 +3904,217 @@ msgid ""
 "\n"
 "Reason given:\n"
 msgstr ""
+"Mearachd le sàbhaladh a' gheama!\n"
+"Dh'fhaoidte gu bheil faidhle a' gheama coirbte!\n"
+"\n"
+"Adhbhar:\n"
 
 #: ../../src/wui/game_main_menu_save_game.cc:252
 #: ../../src/wui/game_main_menu_save_game.cc:264
 msgid "Save Game Error!!"
-msgstr ""
+msgstr "Mearachd le sàbhaladh a' gheama!!"
 
 #: ../../src/wui/game_main_menu_save_game.cc:265
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:385
 msgid "A File with the name "
-msgstr ""
+msgstr "Tha faidhle air a bheil an t-ainm "
 
 #: ../../src/wui/game_main_menu_save_game.cc:269
 msgid " already exists. Overwrite?"
-msgstr ""
+msgstr " ann mar-thà. A bheil thu airson sgrìobhadh thairis air?"
 
 #: ../../src/wui/game_main_menu_save_game.cc:330
 msgid "File deletion"
-msgstr ""
+msgstr "A' sguabadh às faidhle"
 
 #: ../../src/wui/game_main_menu_save_game.cc:332
 #, c-format
 msgid "Do you really want to delete the file %s?"
 msgstr ""
+"A bheil thu cinnteach gu bheil thu airson am faidhle %s a sguabadh às?"
 
 #: ../../src/wui/game_message_menu.cc:46
 #: ../../src/wui/game_message_menu.cc:373
 msgid "Message Menu: Inbox"
-msgstr ""
+msgstr "Clàr-taice nan teachdaireachd: Am bogsa a-steach"
 
 #: ../../src/wui/game_message_menu.cc:56
 msgid "Select"
-msgstr ""
+msgstr "Tagh"
 
 #: ../../src/wui/game_message_menu.cc:57 ../../src/wui/game_summary.cc:92
 msgid "Status"
-msgstr ""
+msgstr "Staid"
 
 #: ../../src/wui/game_message_menu.cc:58
 msgid "Title"
-msgstr ""
+msgstr "Tiotal"
 
 #: ../../src/wui/game_message_menu.cc:59
 msgid "Time sent"
-msgstr ""
+msgstr "Chaidh a chur"
 
 #: ../../src/wui/game_message_menu.cc:66
 msgid "Clear"
-msgstr ""
+msgstr "Falamhaich"
 
 #: ../../src/wui/game_message_menu.cc:66
 msgid "Clear selection"
-msgstr ""
+msgstr "Falamhaich an taghadh"
 
 #: ../../src/wui/game_message_menu.cc:75
 msgid "Invert"
-msgstr ""
+msgstr "Ais-thionndaidh"
 
 #: ../../src/wui/game_message_menu.cc:75
 msgid "Invert selection"
-msgstr ""
+msgstr "Ais-thionndaidh na thagh thu"
 
 #: ../../src/wui/game_message_menu.cc:85
 #: ../../src/wui/game_message_menu.cc:375
 msgid "Archive selected messages"
-msgstr ""
+msgstr "Cuir na teachdaireachdan a thagh thu ann an tasglann"
 
 #: ../../src/wui/game_message_menu.cc:94
 #: ../../src/wui/game_message_menu.cc:376
 msgid "Show Archive"
-msgstr ""
+msgstr "Dhan tasglann"
 
 #: ../../src/wui/game_message_menu.cc:104
 msgid "center main mapview on location"
-msgstr ""
+msgstr "meadhanaich sealladh a' mhapa air an ionad"
 
 #: ../../src/wui/game_message_menu.cc:366
 msgid "Message Menu: Archive"
-msgstr ""
+msgstr "Clàr-taice nan teachdaireachd: Tasglann"
 
 #: ../../src/wui/game_message_menu.cc:368
 msgid "Restore selected messages"
-msgstr ""
+msgstr "Aisig na teachdaireachdan a thagh thu"
 
 #: ../../src/wui/game_message_menu.cc:369
 msgid "Show Inbox"
-msgstr ""
+msgstr "Dhan bhogsa a-steach"
 
 #: ../../src/wui/game_objectives_menu.cc:44
 msgid "Objectives Menu"
-msgstr ""
+msgstr "Clàr-taice nan amasan"
 
 #: ../../src/wui/game_objectives_menu.cc:66
 msgid "Claim Victory"
-msgstr ""
+msgstr "Gairm buaidh"
 
 #: ../../src/wui/game_objectives_menu.cc:74
 msgid "Restart Mission"
-msgstr ""
+msgstr "Ath-thòisich am misean"
 
 #: ../../src/wui/game_options_menu.cc:56
 msgid "README"
-msgstr ""
+msgstr "LEUGHMI"
 
 #: ../../src/wui/game_options_menu.cc:70
 msgid "Authors"
-msgstr ""
+msgstr "Ùghdaran"
 
 #: ../../src/wui/game_options_menu.cc:77
 #: ../../src/wui/game_options_sound_menu.cc:29
 msgid "Sound Options"
-msgstr ""
+msgstr "Roghainnean fuaime"
 
 #: ../../src/wui/game_options_sound_menu.cc:34
 msgid "Ingame Music"
-msgstr ""
+msgstr "Ceòl am broinn a' gheama"
 
 #: ../../src/wui/game_options_sound_menu.cc:40
 msgid "Sound FX"
-msgstr ""
+msgstr "Èifeachdan fuaime"
 
 #: ../../src/wui/game_options_sound_menu.cc:44
 msgid "Ingame Music Volume"
-msgstr ""
+msgstr "Àirde a' chiùil"
 
 #: ../../src/wui/game_options_sound_menu.cc:58
 msgid "Sound FX Volume"
-msgstr ""
+msgstr "Àirde nan èifeachdan fuaime"
 
 #: ../../src/wui/game_summary.cc:44
 msgid "Game over"
-msgstr ""
+msgstr "Crìoch a' gheama"
 
 #: ../../src/wui/game_summary.cc:60
 msgid "Elapsed time:"
-msgstr ""
+msgstr "An ùine a dh'fhalbh:"
 
 #: ../../src/wui/game_summary.cc:77
 msgid "Continue playing"
-msgstr ""
+msgstr "Lean air adhart a' cluiche"
 
 #: ../../src/wui/game_summary.cc:83
 msgid "Quit"
-msgstr ""
+msgstr "Fàg an-seo"
 
 #: ../../src/wui/game_summary.cc:83
 msgid "Return to main menu"
-msgstr ""
+msgstr "Till dhan phrìomh clàr-taice"
 
 #: ../../src/wui/game_summary.cc:93
 msgid "Time"
-msgstr ""
+msgstr "Ùine"
 
 #: ../../src/wui/game_summary.cc:157
 msgid "Lost"
-msgstr ""
+msgstr "Ruaig"
 
 #: ../../src/wui/game_summary.cc:160
 msgid "Won"
-msgstr ""
+msgstr "Buaidh"
 
 #: ../../src/wui/game_summary.cc:168
 msgid "Resigned"
-msgstr ""
+msgstr "Gèilleadh"
 
 #: ../../src/wui/game_summary.cc:180
 msgid "You won!"
-msgstr ""
+msgstr "Bhuannaich thu!"
 
 #: ../../src/wui/game_summary.cc:182
 msgid "You lost."
-msgstr ""
+msgstr "Chaill thu."
 
 #: ../../src/wui/game_summary.cc:187
 #, c-format
 msgid "%s won!"
-msgstr ""
+msgstr "Bhuannaich %s!"
 
 #: ../../src/wui/game_summary.cc:191
 msgid "Team %|1$u| won!"
-msgstr ""
+msgstr "Bhuannaich an sgioba %|1$u|!"
 
 #: ../../src/wui/game_summary.cc:245
 msgid "Score"
-msgstr ""
+msgstr "Sgòr"
 
 #: ../../src/wui/game_summary.cc:254
 msgid "Player info"
-msgstr ""
+msgstr "Fiosrachadh a' chluicheadair"
 
 #: ../../src/wui/general_statistics_menu.cc:172
 msgid "Land"
-msgstr ""
+msgstr "Tìr"
 
 #: ../../src/wui/general_statistics_menu.cc:188 ../../src/wui/minimap.cc:178
 msgid "Buildings"
-msgstr ""
+msgstr "Togalaichean"
 
 #: ../../src/wui/general_statistics_menu.cc:196
 #: ../../src/wui/productionsitewindow.cc:66 ../../src/wui/transport_ui.cc:61
 #: ../../src/wui/warehousewindow.cc:201
 msgid "Wares"
-msgstr ""
+msgstr "Bathar"
 
 #: ../../src/wui/general_statistics_menu.cc:204
 msgid "Productivity"
-msgstr ""
+msgstr "Saothrachadh"
 
 #: ../../src/wui/general_statistics_menu.cc:212
 msgid "Casualties"
@@ -4124,74 +4143,78 @@ msgstr ""
 #: ../../src/wui/interactive_base.cc:316
 #, c-format
 msgid "%u.%ux"
-msgstr ""
+msgstr "%u.%ux"
 
 #: ../../src/wui/interactive_base.cc:319
 msgid "PAUSE"
-msgstr ""
+msgstr "'NA STAD"
 
 #: ../../src/wui/interactive_base.cc:339
 #, c-format
 msgid "%s (%s)"
-msgstr ""
+msgstr "%s (%s)"
 
 #: ../../src/wui/interactive_base.cc:344
 msgid "NO GAME CONTROLLER"
-msgstr ""
+msgstr "GUN UIDHEAM-SMACHD GEAMA"
 
 #: ../../src/wui/interactive_player.cc:107
 #: ../../src/wui/interactive_spectator.cc:51
 msgid "Chat"
-msgstr ""
+msgstr "Cabadaich"
 
 #: ../../src/wui/interactive_player.cc:113
 #: ../../src/wui/interactive_spectator.cc:59
 msgid "Statistics"
-msgstr ""
+msgstr "Stadastaireachd"
 
 #: ../../src/wui/interactive_player.cc:116
 msgid "Objectives"
-msgstr ""
+msgstr "Amasan"
 
 #: ../../src/wui/interactive_player.cc:125
 #: ../../src/wui/interactive_player.cc:288
 msgid "Messages"
-msgstr ""
+msgstr "Teachdaireachdan"
 
 #: ../../src/wui/interactive_player.cc:128
 msgid "Ware help"
-msgstr ""
+msgstr "Cobhair le bathar"
 
 #: ../../src/wui/interactive_player.cc:296
 #, c-format
 msgid "%u new message"
 msgid_plural "%u new messages"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%u teachdaireachd ùr"
+msgstr[1] "%u theachdaireachd ùr"
+msgstr[2] "%u teachdaireachdan ùr"
+msgstr[3] "%u teachdaireachd ùr"
 
 #: ../../src/wui/interactive_spectator.cc:53
 msgid "Exit Replay"
-msgstr ""
+msgstr "Fàg an ath-chluiche"
 
 #: ../../src/wui/login_box.cc:29
 msgid "Metaserver login"
-msgstr ""
+msgstr "Logadh a-steach a' mheata-fhrithealaiche:"
 
 #: ../../src/wui/login_box.cc:33
 msgid "Nickname:"
-msgstr ""
+msgstr "Far-ainm:"
 
 #: ../../src/wui/login_box.cc:39
 msgid "Password:"
-msgstr ""
+msgstr "Facal-faire:"
 
 #: ../../src/wui/login_box.cc:48
 msgid "WARNING: Password will be shown and saved readable!"
 msgstr ""
+"RABHADH: Thèid am facal-faire a shealltainn is a shàbhaladh air dòigh a "
+"ghabhas leughadh!"
 
 #: ../../src/wui/login_box.cc:53
 msgid "Log in to a registered account"
-msgstr ""
+msgstr "Log a-steach le cunntas clàraichte"
 
 #: ../../src/wui/login_box.cc:58
 msgid "Automatically use this login information from now on."
@@ -4227,127 +4250,127 @@ msgstr ""
 
 #: ../../src/wui/militarysitewindow.cc:59
 msgid "Soldiers"
-msgstr ""
+msgstr "Saighdearan"
 
 #: ../../src/wui/minimap.cc:154
 #: ../../src/editor/ui_menus/editor_tool_menu.cc:67
 msgid "Terrain"
-msgstr ""
+msgstr "Cruth-tìre"
 
 #: ../../src/wui/minimap.cc:160
 msgid "Owner"
-msgstr ""
+msgstr "Seilbheadair"
 
 #: ../../src/wui/minimap.cc:166
 msgid "Flags"
-msgstr ""
+msgstr "Brataich"
 
 #: ../../src/wui/minimap.cc:172
 msgid "Roads"
-msgstr ""
+msgstr "Rathaidean"
 
 #: ../../src/wui/minimap.cc:184
 msgid "Zoom"
-msgstr ""
+msgstr "Sùm"
 
 #: ../../src/wui/multiplayersetupgroup.cc:103
 msgid "free"
-msgstr ""
+msgstr "saor"
 
 #: ../../src/wui/multiplayersetupgroup.cc:281
 msgid "Shared in"
-msgstr ""
+msgstr "Co-roinnte ann a'"
 
 #: ../../src/wui/multiplayersetupgroup.cc:301
 #: ../../src/wui/playerdescrgroup.cc:170
 msgid "Computer"
-msgstr ""
+msgstr "Coimpiutair"
 
 #: ../../src/wui/multiplayersetupgroup.cc:304
 #: ../../src/wui/playerdescrgroup.cc:172
 msgid "AI: "
-msgstr ""
+msgstr "IF: "
 
 #: ../../src/wui/multiplayersetupgroup.cc:306
 #: ../../src/wui/multiplayersetupgroup.cc:320
 #: ../../src/wui/playerdescrgroup.cc:174 ../../src/wui/playerdescrgroup.cc:192
 msgid "Random"
-msgstr ""
+msgstr "Air thuaiream"
 
 #: ../../src/wui/multiplayersetupgroup.cc:314
 #: ../../src/wui/playerdescrgroup.cc:180
 msgid "Human"
-msgstr ""
+msgstr "Daonna"
 
 #: ../../src/wui/multiplayersetupgroup.cc:410
 msgid "Client name"
-msgstr ""
+msgstr "Ainm a' chliant"
 
 #: ../../src/wui/multiplayersetupgroup.cc:418
 msgid "Role"
-msgstr ""
+msgstr "Dreuchd"
 
 #: ../../src/wui/multiplayersetupgroup.cc:434
 msgid "Start"
-msgstr ""
+msgstr "Tòisich"
 
 #: ../../src/wui/multiplayersetupgroup.cc:442
 msgid "Type"
-msgstr ""
+msgstr "Seòrsa"
 
 #: ../../src/wui/multiplayersetupgroup.cc:450
 msgid "Tribe"
-msgstr ""
+msgstr "Treubh"
 
 #: ../../src/wui/multiplayersetupgroup.cc:458
 #: ../../src/wui/playerdescrgroup.cc:101
 msgid "Initialization"
-msgstr ""
+msgstr "Tòiseachadh"
 
 #: ../../src/wui/plot_area.cc:108
 msgid "d"
-msgstr ""
+msgstr "l"
 
 #: ../../src/wui/plot_area.cc:109
 msgid "h"
-msgstr ""
+msgstr "u"
 
 #: ../../src/wui/plot_area.cc:110
 msgid "min"
-msgstr ""
+msgstr "mion"
 
 #: ../../src/wui/plot_area.cc:279
 msgid "game"
-msgstr ""
+msgstr "geama"
 
 #: ../../src/wui/productionsitewindow.cc:79
 #: ../../src/wui/productionsitewindow.cc:106
 msgid "Worker"
-msgstr ""
+msgstr "Obraiche"
 
 #: ../../src/wui/productionsitewindow.cc:80
 msgid "Exp"
-msgstr ""
+msgstr "Èolas"
 
 #: ../../src/wui/productionsitewindow.cc:81
 msgid "Next Level"
-msgstr ""
+msgstr "An t-ath leibheil"
 
 #: ../../src/wui/productionsitewindow.cc:94
 msgid "Terminate the employment of the selected worker"
-msgstr ""
+msgstr "Cuir an obraiche a thagh thu a-mach à dreuchd"
 
 #: ../../src/wui/productionsitewindow.cc:195
 msgid "(vacant)"
-msgstr ""
+msgstr "(falamh)"
 
 #: ../../src/wui/productionsitewindow.cc:195
 msgid "(coming)"
-msgstr ""
+msgstr "(a' tighinn)"
 
 #: ../../src/wui/shipwindow.cc:91
 msgid "Ship"
-msgstr ""
+msgstr "Long"
 
 #: ../../src/wui/shipwindow.cc:116
 msgid "Scout towards the north west"
@@ -4367,7 +4390,7 @@ msgstr ""
 
 #: ../../src/wui/shipwindow.cc:140
 msgid "Construct a port at the current location"
-msgstr ""
+msgstr "Tog port aig an ionad làithreach"
 
 #: ../../src/wui/shipwindow.cc:146
 msgid "Scout towards the east"
@@ -4387,15 +4410,15 @@ msgstr ""
 
 #: ../../src/wui/shipwindow.cc:176
 msgid "Go to ship"
-msgstr ""
+msgstr "Rach dhan long"
 
 #: ../../src/wui/shipwindow.cc:181
 msgid "Go to destination"
-msgstr ""
+msgstr "Rach dhan cheann-uidhe"
 
 #: ../../src/wui/shipwindow.cc:188
 msgid "Sink the ship"
-msgstr ""
+msgstr "Cuir an long fodha"
 
 #: ../../src/wui/shipwindow.cc:193
 msgid "Cancel the Expedition"
@@ -4403,96 +4426,96 @@ msgstr ""
 
 #: ../../src/wui/soldiercapacitycontrol.cc:66
 msgid "Decrease capacity"
-msgstr ""
+msgstr "Lùghdaich an rum"
 
 #: ../../src/wui/soldiercapacitycontrol.cc:70
 msgid "Increase capacity"
-msgstr ""
+msgstr "Meudaich an rum"
 
 #: ../../src/wui/soldiercapacitycontrol.cc:76
 msgid "Capacity"
-msgstr ""
+msgstr "Rum"
 
 #: ../../src/wui/soldierlist.cc:390 ../../src/wui/soldierlist.cc:404
 #: ../../src/wui/soldierlist.cc:471
 msgid "Click soldier to send away"
-msgstr ""
+msgstr "Tagh saighdear gus a chur air falbh"
 
 #: ../../src/wui/soldierlist.cc:413
 msgid "Prefer Rookies"
-msgstr ""
+msgstr "B' fhearr leam saighdearan ùra"
 
 #: ../../src/wui/soldierlist.cc:415
 msgid "Prefer Heroes"
-msgstr ""
+msgstr "B' fhearr leam seann-ghaisgich"
 
 #: ../../src/wui/stock_menu.cc:51
 msgid "Wares (total)"
-msgstr ""
+msgstr "Bathar (iomlan)"
 
 #: ../../src/wui/stock_menu.cc:56
 msgid "Workers (total)"
-msgstr ""
+msgstr "Obraichean (iomlan)"
 
 #: ../../src/wui/stock_menu.cc:62
 msgid "Wares in warehouses"
-msgstr ""
+msgstr "Bathar ann an taighean-stòrais"
 
 #: ../../src/wui/stock_menu.cc:69
 msgid "Workers in warehouses"
-msgstr ""
+msgstr "Obraichean ann an taighean-stòrais"
 
 #: ../../src/wui/trainingsitewindow.cc:58
 msgid "Soldiers in training"
-msgstr ""
+msgstr "Saighdearan 'gan trèanadh"
 
 #: ../../src/wui/transport_ui.cc:52
 msgid "Economy options"
-msgstr ""
+msgstr "Roghainnean an eaconamaidh"
 
 #: ../../src/wui/transport_ui.cc:147 ../../src/wui/transport_ui.cc:243
 msgid "Decrease target"
-msgstr ""
+msgstr "Lùghdaich an t-amas"
 
 #: ../../src/wui/transport_ui.cc:149 ../../src/wui/transport_ui.cc:245
 msgid "Increase target"
-msgstr ""
+msgstr "Meudaich an t-amas"
 
 #: ../../src/wui/transport_ui.cc:152 ../../src/wui/transport_ui.cc:248
 msgid "Reset to default"
-msgstr ""
+msgstr "Ath-shuidhich air a' bhun-roghainn"
 
 #: ../../src/wui/ware_statistics_menu.cc:188
 msgid "Consumption"
-msgstr ""
+msgstr "Caitheamh"
 
 #: ../../src/wui/ware_statistics_menu.cc:199
 msgid "Economy Health"
-msgstr ""
+msgstr "Slàinte an eaconamaidh"
 
 #: ../../src/wui/warehousewindow.cc:138
 msgid "Normal policy"
-msgstr ""
+msgstr "Poileasaidh àbhaisteach"
 
 #: ../../src/wui/warehousewindow.cc:139
 msgid "Preferably store selected wares here"
-msgstr ""
+msgstr "Glèidh am bathar air a thaghadh an-seo ma ghabhas seo dèanamh"
 
 #: ../../src/wui/warehousewindow.cc:140
 msgid "Do not store selected wares here"
-msgstr ""
+msgstr "Na glèidh am bathar air a thaghadh an-seo"
 
 #: ../../src/wui/warehousewindow.cc:141
 msgid "Remove selected wares from here"
-msgstr ""
+msgstr "Thoir am bathar air a thaghadh air falbh on a sheo"
 
 #: ../../src/wui/warehousewindow.cc:218
 msgid "Wares in dock"
-msgstr ""
+msgstr "Bathar sa chala"
 
 #: ../../src/wui/warehousewindow.cc:223
 msgid "Workers in dock"
-msgstr ""
+msgstr "Obraichean sa chala"
 
 #: ../../src/wui/warehousewindow.cc:229
 msgid "Expedition"
@@ -4500,35 +4523,35 @@ msgstr ""
 
 #: ../../src/wui/waresqueuedisplay.cc:184
 msgid "Highest priority"
-msgstr ""
+msgstr "Prìomhachas as àirde"
 
 #: ../../src/wui/waresqueuedisplay.cc:187
 msgid "Normal priority"
-msgstr ""
+msgstr "Prìomhachas àbhaisteach"
 
 #: ../../src/wui/waresqueuedisplay.cc:190
 msgid "Lowest priority"
-msgstr ""
+msgstr "Prìomhachas as ìsle"
 
 #: ../../src/wui/waresqueuedisplay.cc:236
 msgid "Decrease the number of wares you want to be stored here."
-msgstr ""
+msgstr "Lùghdaich an àireamh de bhathar a tha thu airson glèidheadh an-seo."
 
 #: ../../src/wui/waresqueuedisplay.cc:246
 msgid "Increase the number of wares you want to be stored here."
-msgstr ""
+msgstr "Meudaich an àireamh de bhathar a tha thu airson glèidheadh an-seo."
 
 #: ../../src/wui/watchwindow.cc:108
 msgid "Follow"
-msgstr ""
+msgstr "Lean air"
 
 #: ../../src/wui/watchwindow.cc:117
 msgid "Center mainview on this"
-msgstr ""
+msgstr "Meadhanaich am prìomh shealladh air seo"
 
 #: ../../src/editor/tools/editor_info_tool.cc:42
 msgid "Field Information"
-msgstr ""
+msgstr "Fiosrachadh an raoin"
 
 #: ../../src/editor/tools/editor_info_tool.cc:54
 #, c-format
@@ -4605,6 +4628,8 @@ msgid ""
 "4) Map Info\n"
 " Name: "
 msgstr ""
+"4) Fiosrachadh mun mhapa\n"
+" Ainm: "
 
 #: ../../src/editor/tools/editor_info_tool.cc:118
 #, c-format
@@ -4613,6 +4638,9 @@ msgid ""
 " Size: %ix%i\n"
 " Author: "
 msgstr ""
+"\n"
+" Meud: %ix%i\n"
+" Ùghdar: "
 
 #: ../../src/editor/tools/editor_info_tool.cc:121
 #: ../../src/editor/tools/editor_info_tool.cc:132
@@ -4620,6 +4648,8 @@ msgid ""
 "\n"
 " Descr: "
 msgstr ""
+"\n"
+" Tuairisgeul: "
 
 #: ../../src/editor/tools/editor_info_tool.cc:125
 #, c-format
@@ -4627,75 +4657,81 @@ msgid ""
 "\n"
 " Number of Players: %i\n"
 msgstr ""
+"\n"
+" Àireamh de chluicheadairean: %i\n"
 
 #: ../../src/editor/tools/editor_info_tool.cc:128
 msgid ""
 "5) World Info\n"
 " Name: "
 msgstr ""
+"5) Fiosrachadh mun t-saoghal\n"
+" Ainm: "
 
 #: ../../src/editor/tools/editor_info_tool.cc:130
 msgid ""
 "\n"
 " Author: "
 msgstr ""
+"\n"
+" Ùghdar: "
 
 #: ../../src/editor/ui_menus/editor_main_menu.cc:61
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:49
 msgid "New Random Map"
-msgstr ""
+msgstr "Mapa air thuaiream ùr"
 
 #: ../../src/editor/ui_menus/editor_main_menu.cc:71
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:54
 msgid "Save Map"
-msgstr ""
+msgstr "Sàbhail am mapa"
 
 #: ../../src/editor/ui_menus/editor_main_menu.cc:76
 #: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:48
 msgid "Map Options"
-msgstr ""
+msgstr "Roghainnean a' mhapa"
 
 #: ../../src/editor/ui_menus/editor_main_menu.cc:86
 msgid "Exit Editor"
-msgstr ""
+msgstr "Fàg an deasaiche"
 
 #: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:70
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:81
 msgid "Name: "
-msgstr ""
+msgstr "Ainm: "
 
 #: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:77
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:88
 msgid "Author: "
-msgstr ""
+msgstr "Ùghdar: "
 
 #: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:84
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:95
 msgid "Size: "
-msgstr ""
+msgstr "Meud: "
 
 #: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:91
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:102
 msgid "World: "
-msgstr ""
+msgstr "World: "
 
 #: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:98
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:109
 msgid "Players: "
-msgstr ""
+msgstr "Cluicheadairean: "
 
 #: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:106
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:116
 msgid "Descr: "
-msgstr ""
+msgstr "Tuairisgeul: "
 
 #: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:71
 msgid "Nr Players:"
-msgstr ""
+msgstr "Àireamh de chluicheadairean:"
 
 #: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:102
 msgid "Set origin"
-msgstr ""
+msgstr "Suidhich an tùs"
 
 #: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:104
 msgid ""
@@ -4821,31 +4857,31 @@ msgstr ""
 
 #: ../../src/editor/ui_menus/editor_main_menu_save_map_make_directory.cc:39
 msgid "Enter Directory Name: "
-msgstr ""
+msgstr "Cuir a-steach ainm a' phasgain: "
 
 #: ../../src/editor/ui_menus/editor_player_menu.cc:42
 msgid "Player Options"
-msgstr ""
+msgstr "Roghainnean nan cluicheadairean"
 
 #: ../../src/editor/ui_menus/editor_player_menu.cc:48
 msgid "Add player"
-msgstr ""
+msgstr "Cuir cluicheadair ris"
 
 #: ../../src/editor/ui_menus/editor_player_menu.cc:55
 msgid "Remove last player"
-msgstr ""
+msgstr "Thoir an cluicheadair mu dheireadh air falbh"
 
 #: ../../src/editor/ui_menus/editor_player_menu.cc:70
 msgid "Number of Players"
-msgstr ""
+msgstr "Àireamh de chluicheadairean"
 
 #: ../../src/editor/ui_menus/editor_player_menu.cc:203
 msgid "Player "
-msgstr ""
+msgstr "Cluicheadair "
 
 #: ../../src/editor/ui_menus/editor_player_menu.cc:322
 msgid "Error!"
-msgstr ""
+msgstr "Mearachd!"
 
 #: ../../src/editor/ui_menus/editor_player_menu.cc:324
 msgid ""
@@ -4898,7 +4934,7 @@ msgstr ""
 
 #: ../../src/editor/ui_menus/editor_tool_change_resources_options_menu.cc:99
 msgid "Current Selection"
-msgstr ""
+msgstr "An taghadh làithreach"
 
 #: ../../src/editor/ui_menus/editor_tool_menu.cc:65
 msgid "Change height"
@@ -4946,7 +4982,7 @@ msgstr ""
 
 #: ../../src/editor/ui_menus/editor_tool_set_terrain_options_menu.cc:46
 msgid "Terrain Select"
-msgstr ""
+msgstr "Tagh cruth-tìre"
 
 #: ../../src/editor/ui_menus/editor_tool_set_terrain_options_menu.cc:151
 #: ../../src/editor/ui_menus/editor_tool_set_terrain_options_menu.cc:200

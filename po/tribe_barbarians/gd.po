@@ -2,20 +2,21 @@
 # Copyright (c) 2013 Rosetta Contributors and Canonical Ltd 2013
 # This file is distributed under the same license as the widelands package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2013.
-#
+# GunChleoc <fios@foramnagaidhlig.net>, 2013.
 msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2013-09-15 17:41+0000\n"
-"PO-Revision-Date: 2013-10-08 01:33+0000\n"
+"PO-Revision-Date: 2013-10-08 17:36+0000\n"
 "Last-Translator: GunChleoc <Unknown>\n"
-"Language-Team: Gaelic; Scottish <gd@li.org>\n"
+"Language-Team: Fòram na Gàidhlig http://www.foramnagaidhlig.net\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-10-08 05:11+0000\n"
+"X-Launchpad-Export-Date: 2013-10-09 05:12+0000\n"
 "X-Generator: Launchpad (build 16799)\n"
+"Language: gd\n"
 
 #: ../../tribes/barbarians/axefactory/help.lua:12
 #: ../../tribes/barbarians/warmill/help.lua:12
@@ -38,7 +39,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/lime_kiln/help.lua:12
 msgid "\"Forming new stone from old with fire and water.\""
-msgstr ""
+msgstr "\"A' dèanamh clach ùr o sheann tè le teine is uisge.\""
 
 #: ../../tribes/barbarians/gamekeepers_hut/help.lua:12
 msgid ""
@@ -117,7 +118,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/fishers_hut/help.lua:12
 msgid "\"What do you mean, my fish ain't fresh?!\""
-msgstr ""
+msgstr "\"B' àill leat, nach eil an t-iasg agam ùr?!\""
 
 #: ../../tribes/barbarians/deep_goldmine/help.lua:30
 #: ../../tribes/barbarians/deep_oremine/help.lua:30
@@ -126,7 +127,7 @@ msgstr ""
 #: ../../tribes/barbarians/goldmine/help.lua:31
 #: ../../tribes/barbarians/oremine/help.lua:31
 msgid "%s always goes to the %s. It has no other use."
-msgstr ""
+msgstr "Thèid %s gun %s an-còmhnaidh. Chan eil e gu feum eile."
 
 #: ../../tribes/barbarians/battlearena/help.lua:27
 #: ../../tribes/barbarians/battlearena/help.lua:28
@@ -136,7 +137,7 @@ msgstr ""
 #: ../../tribes/barbarians/trainingscamp/help.lua:34
 #: ../../tribes/barbarians/warmill/help.lua:58
 msgid "%s and"
-msgstr ""
+msgstr "%s is"
 
 #: ../../tribes/barbarians/coalmine/help.lua:28
 #: ../../tribes/barbarians/deep_coalmine/help.lua:27
@@ -149,14 +150,14 @@ msgstr ""
 #: ../../tribes/barbarians/granitemine/help.lua:27
 #: ../../tribes/barbarians/oremine/help.lua:27
 msgid "%s from a Big Inn"
-msgstr ""
+msgstr "%s o thaigh-seinnse"
 
 #: ../../tribes/barbarians/coalmine/help.lua:26
 #: ../../tribes/barbarians/goldmine/help.lua:25
 #: ../../tribes/barbarians/granitemine/help.lua:25
 #: ../../tribes/barbarians/oremine/help.lua:25
 msgid "%s from a Tavern"
-msgstr ""
+msgstr "%s o thaigh-tàirn"
 
 #: ../../tribes/barbarians/coalmine/help.lua:27
 #: ../../tribes/barbarians/deep_coalmine/help.lua:26
@@ -166,23 +167,23 @@ msgstr ""
 #: ../../tribes/barbarians/granitemine/help.lua:26
 #: ../../tribes/barbarians/oremine/help.lua:26
 msgid "%s from an Inn"
-msgstr ""
+msgstr "%s o thaigh-òil"
 
 #: ../../tribes/barbarians/axefactory/help.lua:26
 #: ../../tribes/barbarians/lime_kiln/help.lua:26
 msgid "%s from the Coal mine or the Charcoal Burner's House"
-msgstr ""
+msgstr "%s on mhèinn guail no seada gual-fhiodha"
 
 #: ../../tribes/barbarians/metalworks/help.lua:26
 msgid "%s from the Lumberjack's hut"
-msgstr ""
+msgstr "%s o bhothan coillteir"
 
 #: ../../tribes/barbarians/axefactory/help.lua:24
 #: ../../tribes/barbarians/metalworks/help.lua:25
 #: ../../tribes/barbarians/warmill/help.lua:24
 #: ../../tribes/barbarians/warmill/help.lua:25
 msgid "%s from the Smelting Works"
-msgstr ""
+msgstr "%s o cheàrdach leaghadair"
 
 #: ../../tribes/barbarians/rangers_hut/help.lua:14
 msgid "%s in a conversation with a %s"
@@ -191,7 +192,7 @@ msgstr ""
 #: ../../tribes/barbarians/battlearena/help.lua:29
 #: ../../tribes/barbarians/trainingscamp/help.lua:35
 msgid "%s or %s"
-msgstr ""
+msgstr "%s no %s"
 
 #: ../../tribes/barbarians/axefactory/help.lua:56
 #: ../../tribes/barbarians/coalmine/help.lua:50
@@ -210,13 +211,13 @@ msgstr ""
 #: ../../tribes/barbarians/oremine/help.lua:46
 #: ../../tribes/barbarians/warmill/help.lua:59
 msgid "%s or better"
-msgstr ""
+msgstr "%s no nas fhearr"
 
 #: ../../tribes/barbarians/deeper_coalmine/help.lua:53
 #: ../../tribes/barbarians/deeper_goldmine/help.lua:49
 #: ../../tribes/barbarians/deeper_oremine/help.lua:49
 msgid "%s or better and"
-msgstr ""
+msgstr "%s no nas fhearr is"
 
 #: ../../tribes/barbarians/axefactory/help.lua:60
 #: ../../tribes/barbarians/coalmine/help.lua:53
@@ -243,7 +244,7 @@ msgstr ""
 #: ../../tribes/barbarians/oremine/help.lua:49
 #: ../../tribes/barbarians/warmill/help.lua:62
 msgid "%s to %s (%s EP)"
-msgstr ""
+msgstr "%s gu %s (%s PE)"
 
 #: ../../tribes/barbarians/deeper_coalmine/help.lua:17
 #: ../../tribes/barbarians/deeper_goldmine/help.lua:16
@@ -351,15 +352,15 @@ msgstr ""
 
 #: ../../tribes/barbarians/trainingscamp/help.lua:61
 msgid "Attack"
-msgstr ""
+msgstr "Ionnsaigh"
 
 #: ../../tribes/barbarians/trainingscamp/help.lua:25
 msgid "Attack Training:"
-msgstr ""
+msgstr "Trèanadh ionnsaighe:"
 
 #: ../../tribes/barbarians/conf:72
 msgid "Axe"
-msgstr ""
+msgstr "Tuagh"
 
 #: ../../tribes/barbarians/coalmine/help.lua:31
 #: ../../tribes/barbarians/conf:202
@@ -369,7 +370,7 @@ msgstr ""
 #: ../../tribes/barbarians/trainingscamp/help.lua:27
 #: ../../tribes/barbarians/warmill/help.lua:35
 msgid "Axefactory"
-msgstr ""
+msgstr "Factaraidh thuaghan"
 
 #: ../../tribes/barbarians/bakery/help.lua:16
 msgid "Bake Pitta Bread for Soldiers and Miners alike."
@@ -379,13 +380,13 @@ msgstr ""
 #: ../../tribes/barbarians/conf:121
 #: ../../tribes/barbarians/metalworks/help.lua:28
 msgid "Baker"
-msgstr ""
+msgstr "Fuineadair"
 
 #: ../../tribes/barbarians/conf:192
 #: ../../tribes/barbarians/farm/help.lua:25
 #: ../../tribes/barbarians/well/help.lua:25
 msgid "Bakery"
-msgstr ""
+msgstr "Taigh-fuine"
 
 #: ../../tribes/barbarians/baker/conf:1
 msgid "Bakes bread for workers."
@@ -393,7 +394,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/bakery/help.lua:51
 msgid "Baking Tray"
-msgstr ""
+msgstr "Treidhe-arain"
 
 #: ../../tribes/barbarians/gamekeepers_hut/help.lua:13
 msgid "Barbarian nursery rhyme"
@@ -401,16 +402,16 @@ msgstr ""
 
 #: ../../tribes/barbarians/conf:5
 msgid "Barbarians"
-msgstr ""
+msgstr "Na Borbairean"
 
 #: ../../tribes/barbarians/conf:167
 msgid "Barracks"
-msgstr ""
+msgstr "Taighean-feachd"
 
 #: ../../tribes/barbarians/conf:168
 #: ../../tribes/barbarians/conf:220
 msgid "Barrier"
-msgstr ""
+msgstr "Taigh-faire"
 
 #: ../../tribes/barbarians/bakery/help.lua:30
 #: ../../tribes/barbarians/battlearena/help.lua:55
@@ -418,17 +419,17 @@ msgstr ""
 #: ../../tribes/barbarians/fishers_hut/help.lua:27
 #: ../../tribes/barbarians/hunters_hut/help.lua:27
 msgid "Battle Arena"
-msgstr ""
+msgstr "Raon catha"
 
 #: ../../tribes/barbarians/conf:74
 msgid "Battle Axe"
-msgstr ""
+msgstr "Tuagh-chatha"
 
 #: ../../tribes/barbarians/conf:75
 #: ../../tribes/barbarians/micro-brewery/help.lua:26
 #: ../../tribes/barbarians/micro-brewery/help.lua:53
 msgid "Beer"
-msgstr ""
+msgstr "Leann"
 
 #: ../../tribes/barbarians/beer/conf:1
 msgid ""
@@ -449,7 +450,7 @@ msgstr ""
 #: ../../tribes/barbarians/hunters_hut/help.lua:31
 #: ../../tribes/barbarians/micro-brewery/help.lua:28
 msgid "Big Inn"
-msgstr ""
+msgstr "Taigh-seinnse"
 
 #: ../../tribes/barbarians/battlearena/help.lua:32
 #: ../../tribes/barbarians/cattlefarm/help.lua:29
@@ -467,7 +468,7 @@ msgstr ""
 #: ../../tribes/barbarians/warmill/help.lua:59
 #: ../../tribes/barbarians/warmill/help.lua:62
 msgid "Blacksmith"
-msgstr ""
+msgstr "Gobha-dubh"
 
 #: ../../tribes/barbarians/axefactory/help.lua:35
 #: ../../tribes/barbarians/axefactory/help.lua:41
@@ -489,7 +490,7 @@ msgstr ""
 #: ../../tribes/barbarians/warmill/help.lua:43
 #: ../../tribes/barbarians/warmill/help.lua:49
 msgid "Blackwood"
-msgstr ""
+msgstr "Fiodh cruaidh"
 
 #: ../../tribes/barbarians/trainingscamp/help.lua:33
 msgid "Both Trainings:"
@@ -497,7 +498,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/conf:73
 msgid "Bread Paddle"
-msgstr ""
+msgstr "Crann-arain"
 
 #: ../../tribes/barbarians/cattlefarm/help.lua:16
 msgid "Breed Oxen for adding them to the transportation system."
@@ -511,22 +512,22 @@ msgstr ""
 #: ../../tribes/barbarians/micro-brewery/help.lua:47
 #: ../../tribes/barbarians/micro-brewery/help.lua:50
 msgid "Brewer"
-msgstr ""
+msgstr "Grùdair"
 
 #: ../../tribes/barbarians/conf:193
 #: ../../tribes/barbarians/farm/help.lua:27
 #: ../../tribes/barbarians/micro-brewery/help.lua:43
 #: ../../tribes/barbarians/well/help.lua:27
 msgid "Brewery"
-msgstr ""
+msgstr "Taigh-grùide"
 
 #: ../../tribes/barbarians/conf:77
 msgid "Broad Axe"
-msgstr ""
+msgstr "Tuagh mhòr"
 
 #: ../../tribes/barbarians/conf:78
 msgid "Bronze Axe"
-msgstr ""
+msgstr "Tuagh umha"
 
 #: ../../tribes/barbarians/bakery/help.lua:36
 #: ../../tribes/barbarians/battlearena/help.lua:34
@@ -549,12 +550,12 @@ msgstr ""
 #: ../../tribes/barbarians/trainingscamp/help.lua:40
 #: ../../tribes/barbarians/well/help.lua:34
 msgid "Build Cost:"
-msgstr ""
+msgstr "Cosgaisean togail:"
 
 #: ../../tribes/barbarians/conf:126
 #: ../../tribes/barbarians/metalworks/help.lua:32
 msgid "Builder"
-msgstr ""
+msgstr "Togalaiche"
 
 #: ../../tribes/barbarians/axefactory/help.lua:31
 #: ../../tribes/barbarians/bakery/help.lua:33
@@ -585,61 +586,61 @@ msgstr ""
 #: ../../tribes/barbarians/warmill/help.lua:33
 #: ../../tribes/barbarians/well/help.lua:31
 msgid "Building"
-msgstr ""
+msgstr "Togalach"
 
 #: ../../tribes/barbarians/conf:127
 msgid "Burner"
-msgstr ""
+msgstr "Loisgeadair"
 
 #: ../../tribes/barbarians/burner/conf:1
 msgid "Burns coal."
-msgstr ""
+msgstr "Loisgidh e gual."
 
 #: ../../tribes/barbarians/lime-burner/conf:1
 msgid "Burns lime in the lime kiln."
-msgstr ""
+msgstr "Loisgidh e aol san àth-aoil."
 
 #: ../../tribes/barbarians/farm/help.lua:50
 msgid "Calculation needed"
-msgstr ""
+msgstr "Tha feum air àireamhachadh"
 
 #: ../../tribes/barbarians/conf:114
 #: ../../tribes/barbarians/well/help.lua:42
 msgid "Carrier"
-msgstr ""
+msgstr "Giùlanair"
 
 #: ../../tribes/barbarians/carrier/conf:1
 msgid "Carries items along the roads."
-msgstr ""
+msgstr "Giùlainidh e rudan air na rathaidean."
 
 #: ../../tribes/barbarians/quarry/help.lua:17
 msgid "Carve %s out of stones standing near the hut."
-msgstr ""
+msgstr "Gearr %s à clachan faisg air a' bhothan."
 
 #: ../../tribes/barbarians/granitemine/help.lua:18
 msgid "Carve %s out of the rock in mountain terrain."
-msgstr ""
+msgstr "Gearr %s às na creagan sna beanntan."
 
 #: ../../tribes/barbarians/conf:160
 #: ../../tribes/barbarians/conf:169
 msgid "Castle"
-msgstr ""
+msgstr "Caisteal"
 
 #: ../../tribes/barbarians/cattlefarm/help.lua:43
 #: ../../tribes/barbarians/conf:148
 msgid "Cattle Breeder"
-msgstr ""
+msgstr "Tàrmachair crodh"
 
 #: ../../tribes/barbarians/conf:204
 #: ../../tribes/barbarians/farm/help.lua:28
 #: ../../tribes/barbarians/well/help.lua:28
 msgid "Cattle Farm"
-msgstr ""
+msgstr "Tuathanas crodh"
 
 #: ../../tribes/barbarians/conf:198
 #: ../../tribes/barbarians/lumberjacks_hut/help.lua:28
 msgid "Charcoal Burner's House"
-msgstr ""
+msgstr "Seada gual-fhiodha"
 
 #: ../../tribes/barbarians/trainingscamp/help.lua:13
 msgid "Chief Chat'Karuth in a speech to his army."
@@ -673,20 +674,20 @@ msgstr ""
 #: ../../tribes/barbarians/oremine/help.lua:49
 #: ../../tribes/barbarians/oremine/help.lua:49
 msgid "Chief Miner"
-msgstr ""
+msgstr "Àrd-mhèinnear"
 
 #: ../../tribes/barbarians/conf:223
 msgid "Citadel"
-msgstr ""
+msgstr "Cathair"
 
 #: ../../tribes/barbarians/conf:233
 #: ../../tribes/barbarians/scripting/sc01_citadel_village.lua:10
 msgid "Citadel village"
-msgstr ""
+msgstr "Cathair-bhaile"
 
 #: ../../tribes/barbarians/conf:79
 msgid "Cloth"
-msgstr ""
+msgstr "Clò"
 
 #: ../../tribes/barbarians/cloth/conf:2
 msgid ""
@@ -709,7 +710,7 @@ msgstr ""
 #: ../../tribes/barbarians/deeper_coalmine/help.lua:60
 #: ../../tribes/barbarians/lime_kiln/help.lua:26
 msgid "Coal"
-msgstr ""
+msgstr "Gual"
 
 #: ../../tribes/barbarians/warmill/help.lua:27
 msgid "Coal from the Coal mine or the Charcoal Burner's House"
@@ -719,7 +720,7 @@ msgstr ""
 #: ../../tribes/barbarians/conf:211
 #: ../../tribes/barbarians/deep_coalmine/help.lua:38
 msgid "Coal mine"
-msgstr ""
+msgstr "Mèinn guail"
 
 #: ../../tribes/barbarians/axefactory/help.lua:19
 #: ../../tribes/barbarians/bakery/help.lua:18
@@ -754,7 +755,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/shipyard/conf:27
 msgid "Constructing ship"
-msgstr ""
+msgstr "A' togail long"
 
 #: ../../tribes/barbarians/conf:154
 #: ../../tribes/barbarians/fernery/help.lua:25
@@ -763,7 +764,7 @@ msgstr ""
 #: ../../tribes/barbarians/lumberjacks_hut/help.lua:27
 #: ../../tribes/barbarians/quarry/help.lua:27
 msgid "Construction Site"
-msgstr ""
+msgstr "Làrach-togail"
 
 #: ../../tribes/barbarians/axefactory/help.lua:40
 #: ../../tribes/barbarians/deep_coalmine/help.lua:42
@@ -805,54 +806,54 @@ msgstr ""
 #: ../../tribes/barbarians/warmill/help.lua:57
 #: ../../tribes/barbarians/well/help.lua:41
 msgid "Crew required:"
-msgstr ""
+msgstr "Feum air sgioba:"
 
 #: ../../tribes/barbarians/stonemason/conf:1
 msgid "Cuts raw pieces of granite out of laying stones."
-msgstr ""
+msgstr "Gearraidh e pìosan de ghraineal à chlachan."
 
 #: ../../tribes/barbarians/coalmine/help.lua:46
 #: ../../tribes/barbarians/conf:210
 #: ../../tribes/barbarians/deep_coalmine/help.lua:17
 #: ../../tribes/barbarians/deeper_coalmine/help.lua:37
 msgid "Deep Coal Mine"
-msgstr ""
+msgstr "Mèinn guail dhomhain"
 
 #: ../../tribes/barbarians/conf:216
 #: ../../tribes/barbarians/deep_goldmine/help.lua:16
 #: ../../tribes/barbarians/deeper_goldmine/help.lua:33
 #: ../../tribes/barbarians/goldmine/help.lua:42
 msgid "Deep Gold Mine"
-msgstr ""
+msgstr "Mèinn òir dhomhain"
 
 #: ../../tribes/barbarians/conf:213
 #: ../../tribes/barbarians/deep_oremine/help.lua:16
 #: ../../tribes/barbarians/deeper_oremine/help.lua:33
 #: ../../tribes/barbarians/oremine/help.lua:42
 msgid "Deep Iron Ore Mine"
-msgstr ""
+msgstr "Mèinn cloich-iarainn dhomhain"
 
 #: ../../tribes/barbarians/conf:209
 #: ../../tribes/barbarians/deep_coalmine/help.lua:48
 #: ../../tribes/barbarians/deeper_coalmine/help.lua:17
 msgid "Deeper Coal Mine"
-msgstr ""
+msgstr "Mèinn guail as doimhne"
 
 #: ../../tribes/barbarians/conf:215
 #: ../../tribes/barbarians/deep_goldmine/help.lua:44
 #: ../../tribes/barbarians/deeper_goldmine/help.lua:16
 msgid "Deeper Gold Mine"
-msgstr ""
+msgstr "Mèinn òir as doimhne"
 
 #: ../../tribes/barbarians/conf:212
 #: ../../tribes/barbarians/deep_oremine/help.lua:44
 #: ../../tribes/barbarians/deeper_oremine/help.lua:16
 msgid "Deeper Iron Ore Mine"
-msgstr ""
+msgstr "Mèinn cloich-iarainn as doimhne"
 
 #: ../../tribes/barbarians/conf:64
 msgid "Deer"
-msgstr ""
+msgstr "Fiadh"
 
 #: ../../tribes/barbarians/soldier/conf:1
 msgid "Defend and Conquer!"
@@ -887,11 +888,11 @@ msgstr ""
 #: ../../tribes/barbarians/warmill/help.lua:22
 #: ../../tribes/barbarians/well/help.lua:21
 msgid "Dependencies"
-msgstr ""
+msgstr "Eisimeileachdan"
 
 #: ../../tribes/barbarians/conf:41
 msgid "Destroyed building"
-msgstr ""
+msgstr "Togalach air a mhilleadh"
 
 #: ../../tribes/barbarians/coalmine/help.lua:19
 #: ../../tribes/barbarians/deep_coalmine/help.lua:19
@@ -903,15 +904,15 @@ msgstr ""
 #: ../../tribes/barbarians/goldmine/help.lua:18
 #: ../../tribes/barbarians/oremine/help.lua:18
 msgid "Dig %s out of the ground in mountain terrain."
-msgstr ""
+msgstr "Gearr %s às an talamh sna beanntan."
 
 #: ../../tribes/barbarians/geologist/conf:1
 msgid "Discovers resources for mining."
-msgstr ""
+msgstr "Lorgaidh e stòrasan airson mèinneadh."
 
 #: ../../tribes/barbarians/conf:157
 msgid "Dismantle Site"
-msgstr ""
+msgstr "Thoir an togalach às a chèile"
 
 #: ../../tribes/barbarians/axefactory/help.lua:46
 #: ../../tribes/barbarians/bakery/help.lua:41
@@ -942,11 +943,11 @@ msgstr ""
 #: ../../tribes/barbarians/warmill/help.lua:48
 #: ../../tribes/barbarians/well/help.lua:36
 msgid "Dismantle yields:"
-msgstr ""
+msgstr "Bheir an toirt às a chèile dhut:"
 
 #: ../../tribes/barbarians/conf:225
 msgid "Donjon"
-msgstr ""
+msgstr "Tùr-faire"
 
 #: ../../tribes/barbarians/well/help.lua:16
 msgid "Draw Water out of the deep."
@@ -954,11 +955,11 @@ msgstr ""
 
 #: ../../tribes/barbarians/battlearena/help.lua:55
 msgid "Evade"
-msgstr ""
+msgstr "Teàrnadh"
 
 #: ../../tribes/barbarians/battlearena/help.lua:26
 msgid "Evade Training:"
-msgstr ""
+msgstr "A' trèanadh teàrnadh:"
 
 #: ../../tribes/barbarians/deep_goldmine/help.lua:13
 #: ../../tribes/barbarians/deeper_goldmine/help.lua:13
@@ -996,17 +997,17 @@ msgstr ""
 #: ../../tribes/barbarians/warmill/help.lua:61
 #: ../../tribes/barbarians/well/help.lua:44
 msgid "Experience levels:"
-msgstr ""
+msgstr "Leibheilean eòlais:"
 
 #: ../../tribes/barbarians/conf:206
 msgid "Farm"
-msgstr ""
+msgstr "Tuathanas"
 
 #: ../../tribes/barbarians/conf:130
 #: ../../tribes/barbarians/farm/help.lua:45
 #: ../../tribes/barbarians/metalworks/help.lua:40
 msgid "Farmer"
-msgstr ""
+msgstr "Tuathanach"
 
 #: ../../tribes/barbarians/lumberjacks_hut/help.lua:17
 msgid "Fell trees in the surrounding area and process them into trunks."
@@ -1015,7 +1016,7 @@ msgstr ""
 #: ../../tribes/barbarians/conf:81
 #: ../../tribes/barbarians/lumberjacks_hut/help.lua:44
 msgid "Felling Axe"
-msgstr ""
+msgstr "Tuagh leagail"
 
 #: ../../tribes/barbarians/lumberjack/conf:1
 msgid "Fells trees."
@@ -1025,35 +1026,35 @@ msgstr ""
 #: ../../tribes/barbarians/fernery/help.lua:42
 #: ../../tribes/barbarians/metalworks/help.lua:42
 msgid "Ferner"
-msgstr ""
+msgstr "Gàirnealair feòir"
 
 #: ../../tribes/barbarians/conf:191
 msgid "Fernery"
-msgstr ""
+msgstr "Feur-lios"
 
 #: ../../tribes/barbarians/conf:46
 msgid "Field harvested"
-msgstr ""
+msgstr "Achadh air a bhuain"
 
 #: ../../tribes/barbarians/conf:42
 msgid "Field medium"
-msgstr ""
+msgstr "Achadh meadhanach"
 
 #: ../../tribes/barbarians/conf:45
 msgid "Field ripe"
-msgstr ""
+msgstr "Achadh abaich"
 
 #: ../../tribes/barbarians/conf:43
 msgid "Field small"
-msgstr ""
+msgstr "Achadh beag"
 
 #: ../../tribes/barbarians/conf:44
 msgid "Field tiny"
-msgstr ""
+msgstr "Achadh beag bìodach"
 
 #: ../../tribes/barbarians/conf:82
 msgid "Fire Tongs"
-msgstr ""
+msgstr "Clobha teine"
 
 #: ../../tribes/barbarians/fire_tongs/conf:1
 msgid ""
@@ -1067,18 +1068,18 @@ msgstr ""
 #: ../../tribes/barbarians/fishers_hut/help.lua:26
 #: ../../tribes/barbarians/trainingscamp/help.lua:35
 msgid "Fish"
-msgstr ""
+msgstr "Iasg"
 
 #: ../../tribes/barbarians/conf:132
 #: ../../tribes/barbarians/fishers_hut/help.lua:44
 #: ../../tribes/barbarians/fishers_hut/help.lua:49
 #: ../../tribes/barbarians/metalworks/help.lua:31
 msgid "Fisher"
-msgstr ""
+msgstr "Iasgair"
 
 #: ../../tribes/barbarians/conf:184
 msgid "Fisher's Hut"
-msgstr ""
+msgstr "Bothan-iasgair"
 
 #: ../../tribes/barbarians/fishers_hut/help.lua:17
 msgid "Fishes on the coast near the hut."
@@ -1087,7 +1088,7 @@ msgstr ""
 #: ../../tribes/barbarians/conf:84
 #: ../../tribes/barbarians/fishers_hut/help.lua:45
 msgid "Fishing Rod"
-msgstr ""
+msgstr "Slat-iasgaich"
 
 #: ../../tribes/barbarians/fishing_rod/conf:1
 msgid ""
@@ -1099,17 +1100,17 @@ msgstr ""
 #: ../../tribes/barbarians/conf:170
 #: ../../tribes/barbarians/conf:224
 msgid "Fortress"
-msgstr ""
+msgstr "Dùn"
 
 #: ../../tribes/barbarians/conf:133
 #: ../../tribes/barbarians/gamekeepers_hut/help.lua:38
 #: ../../tribes/barbarians/gamekeepers_hut/help.lua:43
 msgid "Gamekeeper"
-msgstr ""
+msgstr "Geamair"
 
 #: ../../tribes/barbarians/conf:186
 msgid "Gamekeeper's Hut"
-msgstr ""
+msgstr "Bothan-geamair"
 
 #: ../../tribes/barbarians/axefactory/help.lua:15
 #: ../../tribes/barbarians/bakery/help.lua:15
@@ -1145,7 +1146,7 @@ msgstr ""
 #: ../../tribes/barbarians/conf:134
 #: ../../tribes/barbarians/metalworks/help.lua:33
 msgid "Geologist"
-msgstr ""
+msgstr "Clach-eòlaiche"
 
 #: ../../tribes/barbarians/fisher/conf:1
 msgid "Gets fish out of the sea."
@@ -1158,13 +1159,13 @@ msgstr ""
 #: ../../tribes/barbarians/trainingscamp/help.lua:47
 #: ../../tribes/barbarians/warmill/help.lua:25
 msgid "Gold"
-msgstr ""
+msgstr "Òr"
 
 #: ../../tribes/barbarians/conf:217
 #: ../../tribes/barbarians/deep_goldmine/help.lua:34
 #: ../../tribes/barbarians/goldmine/help.lua:16
 msgid "Gold Mine"
-msgstr ""
+msgstr "Mèinn òir"
 
 #: ../../tribes/barbarians/conf:86
 #: ../../tribes/barbarians/deep_goldmine/help.lua:16
@@ -1183,7 +1184,7 @@ msgstr ""
 #: ../../tribes/barbarians/goldmine/help.lua:31
 #: ../../tribes/barbarians/goldmine/help.lua:52
 msgid "Gold Ore"
-msgstr ""
+msgstr "Clach-òir"
 
 #: ../../tribes/barbarians/gold/conf:1
 msgid ""
@@ -1203,7 +1204,7 @@ msgstr ""
 #: ../../tribes/barbarians/conf:208
 #: ../../tribes/barbarians/granitemine/help.lua:16
 msgid "Granite Mine"
-msgstr ""
+msgstr "Mèinn graineil"
 
 #: ../../tribes/barbarians/axefactory/help.lua:38
 #: ../../tribes/barbarians/axefactory/help.lua:44
@@ -1221,7 +1222,7 @@ msgstr ""
 #: ../../tribes/barbarians/warmill/help.lua:46
 #: ../../tribes/barbarians/warmill/help.lua:52
 msgid "Grout"
-msgstr ""
+msgstr "Aol-tàthaidh"
 
 #: ../../tribes/barbarians/ferner/conf:1
 msgid "Grows thatch reed."
@@ -1229,45 +1230,45 @@ msgstr ""
 
 #: ../../tribes/barbarians/conf:161
 msgid "Guardhall"
-msgstr ""
+msgstr "Talla-faire"
 
 #: ../../tribes/barbarians/conf:162
 msgid "Guardhouse"
-msgstr ""
+msgstr "Bothan-faire"
 
 #: ../../tribes/barbarians/axefactory/help.lua:57
 #: ../../tribes/barbarians/conf:88
 #: ../../tribes/barbarians/metalworks/help.lua:64
 #: ../../tribes/barbarians/warmill/help.lua:60
 msgid "Hammer"
-msgstr ""
+msgstr "Òrd"
 
 #: ../../tribes/barbarians/fernery/conf:21
 msgid "Harvest reed"
-msgstr ""
+msgstr "Buain feur"
 
 #: ../../tribes/barbarians/farm/conf:23
 msgid "Harvest wheat"
-msgstr ""
+msgstr "Buain cruithneachd"
 
 #: ../../tribes/barbarians/conf:175
 #: ../../tribes/barbarians/conf:176
 msgid "Headquarters"
-msgstr ""
+msgstr "Prìomh-àras"
 
 #: ../../tribes/barbarians/conf:232
 #: ../../tribes/barbarians/scripting/sc00_headquarters_medium.lua:10
 msgid "Headquarters medium"
-msgstr ""
+msgstr "Prìomh-àras meadhanach"
 
 #: ../../tribes/barbarians/conf:89
 msgid "Helmet"
-msgstr ""
+msgstr "Clogaid"
 
 #: ../../tribes/barbarians/conf:135
 #: ../../tribes/barbarians/metalworks/help.lua:34
 msgid "Helmsmith"
-msgstr ""
+msgstr "Gobha chlogaidean"
 
 #: ../../tribes/barbarians/coalmine/help.lua:33
 #: ../../tribes/barbarians/conf:207
@@ -1275,7 +1276,7 @@ msgstr ""
 #: ../../tribes/barbarians/deeper_coalmine/help.lua:31
 #: ../../tribes/barbarians/trainingscamp/help.lua:32
 msgid "Helmsmithy"
-msgstr ""
+msgstr "Ceàrdach chlogaidean"
 
 #: ../../tribes/barbarians/ox/conf:1
 msgid "Helps to carry items at heavily used roads."
@@ -1283,15 +1284,15 @@ msgstr ""
 
 #: ../../tribes/barbarians/conf:163
 msgid "High Tower"
-msgstr ""
+msgstr "Tùr àrd"
 
 #: ../../tribes/barbarians/trainingscamp/help.lua:61
 msgid "Hitpoints"
-msgstr ""
+msgstr "Puingean-beatha"
 
 #: ../../tribes/barbarians/trainingscamp/help.lua:30
 msgid "Hitpoints Training:"
-msgstr ""
+msgstr "A' trèanadh puingean-beatha:"
 
 #: ../../tribes/barbarians/kitchen_tools/conf:1
 msgid ""
@@ -1309,16 +1310,16 @@ msgstr ""
 #: ../../tribes/barbarians/hunters_hut/help.lua:51
 #: ../../tribes/barbarians/metalworks/help.lua:36
 msgid "Hunter"
-msgstr ""
+msgstr "Sealgair"
 
 #: ../../tribes/barbarians/conf:185
 msgid "Hunter's Hut"
-msgstr ""
+msgstr "Bothan-sealgair"
 
 #: ../../tribes/barbarians/conf:90
 #: ../../tribes/barbarians/hunters_hut/help.lua:47
 msgid "Hunting Spear"
-msgstr ""
+msgstr "Sleagh seilg"
 
 #: ../../tribes/barbarians/battlearena/help.lua:55
 msgid ""
@@ -1398,12 +1399,12 @@ msgstr ""
 #: ../../tribes/barbarians/hunters_hut/help.lua:30
 #: ../../tribes/barbarians/micro-brewery/help.lua:27
 msgid "Inn"
-msgstr ""
+msgstr "Taigh-òil"
 
 #: ../../tribes/barbarians/conf:137
 #: ../../tribes/barbarians/metalworks/help.lua:37
 msgid "Innkeeper"
-msgstr ""
+msgstr "Tàrnadaiche"
 
 #: ../../tribes/barbarians/metalworks/help.lua:13
 msgid ""
@@ -1416,7 +1417,7 @@ msgstr ""
 #: ../../tribes/barbarians/metalworks/help.lua:25
 #: ../../tribes/barbarians/warmill/help.lua:24
 msgid "Iron"
-msgstr ""
+msgstr "Iarann"
 
 #: ../../tribes/barbarians/conf:92
 #: ../../tribes/barbarians/deep_oremine/help.lua:16
@@ -1435,13 +1436,13 @@ msgstr ""
 #: ../../tribes/barbarians/oremine/help.lua:31
 #: ../../tribes/barbarians/oremine/help.lua:52
 msgid "Iron Ore"
-msgstr ""
+msgstr "Clach-iarainn"
 
 #: ../../tribes/barbarians/conf:214
 #: ../../tribes/barbarians/deep_oremine/help.lua:34
 #: ../../tribes/barbarians/oremine/help.lua:16
 msgid "Iron Ore Mine"
-msgstr ""
+msgstr "Mèinn cloich-iarainn"
 
 #: ../../tribes/barbarians/iron/conf:1
 msgid ""
@@ -1472,7 +1473,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/conf:93
 msgid "Kitchen Tools"
-msgstr ""
+msgstr "Acainnean cidsin"
 
 #: ../../tribes/barbarians/lumberjacks_hut/help.lua:13
 msgid "Krumta, carpenter of Chat'Karuth"
@@ -1486,12 +1487,12 @@ msgstr ""
 #: ../../tribes/barbarians/quarry/help.lua:28
 #: ../../tribes/barbarians/well/help.lua:29
 msgid "Lime Kiln"
-msgstr ""
+msgstr "Àth-aoil"
 
 #: ../../tribes/barbarians/conf:138
 #: ../../tribes/barbarians/lime_kiln/help.lua:49
 msgid "Lime-Burner"
-msgstr ""
+msgstr "Loisgeadair aoil"
 
 #: ../../tribes/barbarians/axefactory/help.lua:10
 #: ../../tribes/barbarians/bakery/help.lua:10
@@ -1528,15 +1529,15 @@ msgstr ""
 #: ../../tribes/barbarians/lumberjacks_hut/help.lua:43
 #: ../../tribes/barbarians/metalworks/help.lua:29
 msgid "Lumberjack"
-msgstr ""
+msgstr "Coilltear"
 
 #: ../../tribes/barbarians/conf:182
 msgid "Lumberjack's Hut"
-msgstr ""
+msgstr "Bothan coillteir"
 
 #: ../../tribes/barbarians/conf:94
 msgid "Mask"
-msgstr ""
+msgstr "Aghaidh-choimheach"
 
 #: ../../tribes/barbarians/axefactory/help.lua:60
 #: ../../tribes/barbarians/conf:122
@@ -1544,12 +1545,12 @@ msgstr ""
 #: ../../tribes/barbarians/warmill/help.lua:58
 #: ../../tribes/barbarians/warmill/help.lua:62
 msgid "Master Blacksmith"
-msgstr ""
+msgstr "Sàr-ghobha-dubh"
 
 #: ../../tribes/barbarians/conf:124
 #: ../../tribes/barbarians/micro-brewery/help.lua:50
 msgid "Master Brewer"
-msgstr ""
+msgstr "Sàr-ghrùdair"
 
 #: ../../tribes/barbarians/coalmine/help.lua:53
 #: ../../tribes/barbarians/conf:128
@@ -1566,21 +1567,21 @@ msgstr ""
 #: ../../tribes/barbarians/granitemine/help.lua:49
 #: ../../tribes/barbarians/oremine/help.lua:49
 msgid "Master Miner"
-msgstr ""
+msgstr "Sàr-mhèinnear"
 
 #: ../../tribes/barbarians/conf:95
 #: ../../tribes/barbarians/deeper_coalmine/help.lua:26
 #: ../../tribes/barbarians/deeper_goldmine/help.lua:25
 #: ../../tribes/barbarians/deeper_oremine/help.lua:25
 msgid "Meal"
-msgstr ""
+msgstr "Biadh"
 
 #: ../../tribes/barbarians/battlearena/help.lua:29
 #: ../../tribes/barbarians/conf:96
 #: ../../tribes/barbarians/hunters_hut/help.lua:26
 #: ../../tribes/barbarians/trainingscamp/help.lua:35
 msgid "Meat"
-msgstr ""
+msgstr "Feòil"
 
 #: ../../tribes/barbarians/meat/conf:1
 msgid ""
@@ -1604,13 +1605,13 @@ msgstr ""
 #: ../../tribes/barbarians/conf:203
 #: ../../tribes/barbarians/lumberjacks_hut/help.lua:29
 msgid "Metalwork Shop"
-msgstr ""
+msgstr "Ceàrdach meatailt"
 
 #: ../../tribes/barbarians/conf:194
 #: ../../tribes/barbarians/farm/help.lua:26
 #: ../../tribes/barbarians/well/help.lua:26
 msgid "Micro Brewery"
-msgstr ""
+msgstr "Taigh-grùide beag"
 
 #: ../../tribes/barbarians/coalmine/help.lua:38
 #: ../../tribes/barbarians/deep_coalmine/help.lua:37
@@ -1648,11 +1649,11 @@ msgstr ""
 #: ../../tribes/barbarians/oremine/help.lua:46
 #: ../../tribes/barbarians/oremine/help.lua:49
 msgid "Miner"
-msgstr ""
+msgstr "Mèinnear"
 
 #: ../../tribes/barbarians/scripting/sc01_citadel_village.lua:94
 msgid "Not enough space"
-msgstr ""
+msgstr "Chan eil rum gu leòr ann"
 
 #: ../../tribes/barbarians/strongbeer/conf:1
 msgid ""
@@ -1693,13 +1694,13 @@ msgstr ""
 
 #: ../../tribes/barbarians/conf:171
 msgid "Outpost"
-msgstr ""
+msgstr "Gearastan"
 
 #: ../../tribes/barbarians/cattlefarm/help.lua:26
 #: ../../tribes/barbarians/cattlefarm/help.lua:48
 #: ../../tribes/barbarians/conf:115
 msgid "Ox"
-msgstr ""
+msgstr "Damh"
 
 #: ../../tribes/barbarians/axefactory/help.lua:63
 #: ../../tribes/barbarians/bakery/help.lua:55
@@ -1745,7 +1746,7 @@ msgstr ""
 #: ../../tribes/barbarians/oremine/help.lua:47
 #: ../../tribes/barbarians/quarry/help.lua:42
 msgid "Pick"
-msgstr ""
+msgstr "Piocaid"
 
 #: ../../tribes/barbarians/bakery/help.lua:26
 #: ../../tribes/barbarians/bakery/help.lua:55
@@ -1753,144 +1754,146 @@ msgstr ""
 #: ../../tribes/barbarians/conf:98
 #: ../../tribes/barbarians/trainingscamp/help.lua:34
 msgid "Pitta Bread"
-msgstr ""
+msgstr "Aran tur"
 
 #: ../../tribes/barbarians/fernery/conf:19
 msgid "Plant reed"
-msgstr ""
+msgstr "Cuir feur"
 
 #: ../../tribes/barbarians/rangers_hut/help.lua:17
 msgid "Plant trees in the surrounding area."
-msgstr ""
+msgstr "Cuir craobhan am fagas."
 
 #: ../../tribes/barbarians/farm/conf:21
 msgid "Plant wheat"
-msgstr ""
+msgstr "Cuir cruithneachd"
 
 #: ../../tribes/barbarians/farmer/conf:1
 msgid "Plants fields."
-msgstr ""
+msgstr "Cuiridh e achaidhean."
 
 #: ../../tribes/barbarians/ranger/conf:1
 msgid "Plants trees."
-msgstr ""
+msgstr "Cuiridh e craobhan."
 
 #: ../../tribes/barbarians/conf:178
 msgid "Port"
-msgstr ""
+msgstr "Port"
 
 #: ../../tribes/barbarians/axefactory/conf:32
 #: ../../tribes/barbarians/warmill/conf:36
 msgid "Produce axe"
-msgstr ""
+msgstr "Dèan tuagh"
 
 #: ../../tribes/barbarians/metalworks/conf:39
 msgid "Produce bakingtray"
-msgstr ""
+msgstr "Dèan treidhe-arain"
 
 #: ../../tribes/barbarians/warmill/conf:40
 msgid "Produce battleaxe"
-msgstr ""
+msgstr "Dèan tuagh-chatha"
 
 #: ../../tribes/barbarians/axefactory/conf:34
 #: ../../tribes/barbarians/warmill/conf:38
 msgid "Produce broadaxe"
-msgstr ""
+msgstr "Dèan tuagh mhòr"
 
 #: ../../tribes/barbarians/warmill/conf:39
 msgid "Produce bronzeaxe"
-msgstr ""
+msgstr "Dèan tuagh umha"
 
 #: ../../tribes/barbarians/metalworks/conf:38
 msgid "Produce felling axe"
-msgstr ""
+msgstr "Dèan tuagh leagail"
 
 #: ../../tribes/barbarians/metalworks/conf:40
 msgid "Produce fire tongs"
-msgstr ""
+msgstr "Dèan clobha teine"
 
 #: ../../tribes/barbarians/metalworks/conf:41
 msgid "Produce fishing rod"
-msgstr ""
+msgstr "Dèan slat-iasgaich"
 
 #: ../../tribes/barbarians/metalworks/conf:42
 msgid "Produce hammer"
-msgstr ""
+msgstr "Dèan òrd"
 
 #: ../../tribes/barbarians/helmsmithy/conf:31
 msgid "Produce helm"
-msgstr ""
+msgstr "Dèan clogaid"
 
 #: ../../tribes/barbarians/metalworks/conf:47
 msgid "Produce hunting spear"
-msgstr ""
+msgstr "Dèan sleagh seilg"
 
 #: ../../tribes/barbarians/metalworks/conf:43
 msgid "Produce kitchen tools"
-msgstr ""
+msgstr "Dèan acainnean cidsin"
 
 #: ../../tribes/barbarians/helmsmithy/conf:32
 msgid "Produce mask"
-msgstr ""
+msgstr "Dèan aghaidh-choimheach"
 
 #: ../../tribes/barbarians/big_inn/conf:29
 msgid "Produce meal"
-msgstr ""
+msgstr "Dèan biadh"
 
 #: ../../tribes/barbarians/metalworks/conf:44
 msgid "Produce pick"
-msgstr ""
+msgstr "Dèan piocaid"
 
 #: ../../tribes/barbarians/big_inn/conf:27
 #: ../../tribes/barbarians/inn/conf:27
 #: ../../tribes/barbarians/tavern/conf:28
 msgid "Produce ration"
-msgstr ""
+msgstr "Dèan greimeag"
 
 #: ../../tribes/barbarians/metalworks/conf:45
 msgid "Produce scythe"
-msgstr ""
+msgstr "Dèan fàl"
 
 #: ../../tribes/barbarians/axefactory/conf:33
 #: ../../tribes/barbarians/warmill/conf:37
 msgid "Produce sharpaxe"
-msgstr ""
+msgstr "Dèan tuagh gheur"
 
 #: ../../tribes/barbarians/metalworks/conf:46
 msgid "Produce shovel"
-msgstr ""
+msgstr "Dèan sluasaid"
 
 #: ../../tribes/barbarians/big_inn/conf:28
 #: ../../tribes/barbarians/inn/conf:28
 msgid "Produce snack"
-msgstr ""
+msgstr "Dèan lòn"
 
 #: ../../tribes/barbarians/helmsmithy/conf:33
 msgid "Produce warhelmet"
-msgstr ""
+msgstr "Dèan clogaid cogaidh"
 
 #: ../../tribes/barbarians/warmill/conf:41
 msgid "Produce warriorsaxe"
-msgstr ""
+msgstr "Dèan tuagh-ghaisgich"
 
 #: ../../tribes/barbarians/weaver/conf:1
 msgid "Produces cloth for ships and soldiers."
-msgstr ""
+msgstr "Nì seo clò airson longan is saighdearan."
 
 #: ../../tribes/barbarians/innkeeper/conf:1
 msgid "Produces food for miners."
-msgstr ""
+msgstr "Nì seo biadh airson mèinnearan."
 
 #: ../../tribes/barbarians/brewer/conf:1
 #: ../../tribes/barbarians/master-brewer/conf:1
 msgid ""
 "Produces the finest ales to keep warriors strong and happy in training."
 msgstr ""
+"Nì seo na leannan as fhearr ach am bi na gaisgich làidir toilichte fhad 's a "
+"bhios iad a' trèanadh."
 
 #: ../../tribes/barbarians/blacksmith/conf:1
 #: ../../tribes/barbarians/master-blacksmith/conf:1
 msgid "Produces weapons for soldiers and tools for workers."
-msgstr ""
+msgstr "Nì seo airm airson saighdearan is acainnean airson obraichean."
 
 #: ../../tribes/barbarians/axefactory/help.lua:62
 #: ../../tribes/barbarians/bakery/help.lua:54
@@ -1921,7 +1924,7 @@ msgstr ""
 #: ../../tribes/barbarians/warmill/help.lua:64
 #: ../../tribes/barbarians/well/help.lua:46
 msgid "Production"
-msgstr ""
+msgstr "Saothrachadh"
 
 #: ../../tribes/barbarians/trainingscamp/help.lua:27
 #: ../../tribes/barbarians/trainingscamp/help.lua:29
@@ -1962,7 +1965,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/conf:181
 msgid "Quarry"
-msgstr ""
+msgstr "Coireall"
 
 #: ../../tribes/barbarians/deep_oremine/help.lua:13
 #: ../../tribes/barbarians/deeper_oremine/help.lua:13
@@ -1975,17 +1978,20 @@ msgid ""
 "Ragnald the Child's answer to the question, what he's doing in the dirt. His "
 "\"new stone\" now is an important building material."
 msgstr ""
+"Seo na dh'fhreagair e do Raghnall Beag nuair a dh'fhaighnich e na bhiodh e "
+"ris san t-salchair. 'S e stuth togail cudromach a th' anns a' \"chlach ùr\" "
+"aige a-nis."
 
 #: ../../tribes/barbarians/conf:141
 #: ../../tribes/barbarians/metalworks/help.lua:41
 #: ../../tribes/barbarians/rangers_hut/help.lua:14
 #: ../../tribes/barbarians/rangers_hut/help.lua:38
 msgid "Ranger"
-msgstr ""
+msgstr "Maor-coille"
 
 #: ../../tribes/barbarians/conf:183
 msgid "Ranger's Hut"
-msgstr ""
+msgstr "Bothan maoir-choille"
 
 #: ../../tribes/barbarians/coalmine/help.lua:26
 #: ../../tribes/barbarians/coalmine/help.lua:27
@@ -2001,7 +2007,7 @@ msgstr ""
 #: ../../tribes/barbarians/oremine/help.lua:26
 #: ../../tribes/barbarians/oremine/help.lua:27
 msgid "Ration"
-msgstr ""
+msgstr "Greimeag"
 
 #: ../../tribes/barbarians/axefactory/help.lua:37
 #: ../../tribes/barbarians/axefactory/help.lua:43
@@ -2065,39 +2071,43 @@ msgstr ""
 #: ../../tribes/barbarians/warmill/help.lua:45
 #: ../../tribes/barbarians/warmill/help.lua:51
 msgid "Raw Stone"
-msgstr ""
+msgstr "Clach"
 
 #: ../../tribes/barbarians/lime_kiln/help.lua:24
 msgid "Raw Stone from the Granite Mine or Quarry"
-msgstr ""
+msgstr "Clach on mhèinn graineil no coireall"
 
 #: ../../tribes/barbarians/raw_stone/conf:1
 msgid ""
 "Raw Stones are a basic building material of the barbarians. It is produced "
 "in quarries and granite mines."
 msgstr ""
+"'S e stuth togail bunasach aig na Borbairean a th' anns na clachan. Thèid an "
+"saothrachadh ann am mèinnean graineil is ann an coirill."
 
 #: ../../tribes/barbarians/grout/conf:1
 msgid ""
 "Raw stone can be processed into grout which provides a solid, non burning "
 "building material. Grout is produced in a lime kiln."
 msgstr ""
+"Nì thu aol-tàthaidh de chlachan a bheir stuth togail seasmhach dhut nach "
+"loisgeas. Saothraichidh tu aol-tàthaidh ann an àth-aoil."
 
 #: ../../tribes/barbarians/conf:47
 msgid "Reed medium"
-msgstr ""
+msgstr "Feur meadhanach"
 
 #: ../../tribes/barbarians/conf:50
 msgid "Reed ripe"
-msgstr ""
+msgstr "Feur abaich"
 
 #: ../../tribes/barbarians/conf:48
 msgid "Reed small"
-msgstr ""
+msgstr "Feur beag"
 
 #: ../../tribes/barbarians/conf:49
 msgid "Reed tiny"
-msgstr ""
+msgstr "Feur beag bìodach"
 
 #: ../../tribes/barbarians/gamekeepers_hut/help.lua:16
 msgid "Releases animals into the wild to steady the meat production."
@@ -2149,11 +2159,11 @@ msgstr ""
 
 #: ../../tribes/barbarians/conf:147
 msgid "Scout"
-msgstr ""
+msgstr "Rabhadair"
 
 #: ../../tribes/barbarians/conf:188
 msgid "Scout's Hut"
-msgstr ""
+msgstr "Taigh-rabhadair"
 
 #: ../../tribes/barbarians/scout/conf:1
 msgid ""
@@ -2163,47 +2173,47 @@ msgstr ""
 #: ../../tribes/barbarians/conf:101
 #: ../../tribes/barbarians/farm/help.lua:46
 msgid "Scythe"
-msgstr ""
+msgstr "Fàl"
 
 #: ../../tribes/barbarians/farm/help.lua:16
 msgid "Seed and harvest wheat."
-msgstr ""
+msgstr "Cuir is buain cruithneachd."
 
 #: ../../tribes/barbarians/conf:166
 #: ../../tribes/barbarians/conf:221
 msgid "Sentry"
-msgstr ""
+msgstr "Freiceadan"
 
 #: ../../tribes/barbarians/conf:102
 msgid "Sharp Axe"
-msgstr ""
+msgstr "Tuagh gheur"
 
 #: ../../tribes/barbarians/conf:151
 msgid "Ship"
-msgstr ""
+msgstr "Long"
 
 #: ../../tribes/barbarians/conf:61
 msgid "Ship construction site"
-msgstr ""
+msgstr "Làrach-togail luinge"
 
 #: ../../tribes/barbarians/conf:142
 msgid "Shipwright"
-msgstr ""
+msgstr "Saor-luinge"
 
 #: ../../tribes/barbarians/conf:200
 msgid "Shipyard"
-msgstr ""
+msgstr "Cala"
 
 #: ../../tribes/barbarians/conf:103
 #: ../../tribes/barbarians/fernery/help.lua:43
 #: ../../tribes/barbarians/rangers_hut/help.lua:39
 msgid "Shovel"
-msgstr ""
+msgstr "Sluasaid"
 
 #: ../../tribes/barbarians/battlearena/conf:36
 #: ../../tribes/barbarians/trainingscamp/conf:43
 msgid "Sleep"
-msgstr ""
+msgstr "'Na chadal"
 
 #: ../../tribes/barbarians/fernery/help.lua:13
 msgid "Slogan of the Guild of Ferners"
@@ -2211,7 +2221,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/conf:164
 msgid "Small Tower"
-msgstr ""
+msgstr "Tùr beag"
 
 #: ../../tribes/barbarians/fishers_hut/help.lua:34
 #: ../../tribes/barbarians/gamekeepers_hut/help.lua:26
@@ -2225,16 +2235,16 @@ msgstr ""
 
 #: ../../tribes/barbarians/smelting_works/conf:30
 msgid "Smelt gold"
-msgstr ""
+msgstr "Òr air a leaghadh"
 
 #: ../../tribes/barbarians/smelting_works/conf:29
 msgid "Smelt iron"
-msgstr ""
+msgstr "Iarann air a leaghadh"
 
 #: ../../tribes/barbarians/conf:143
 #: ../../tribes/barbarians/metalworks/help.lua:30
 msgid "Smelter"
-msgstr ""
+msgstr "Leaghadair"
 
 #: ../../tribes/barbarians/coalmine/help.lua:34
 #: ../../tribes/barbarians/conf:199
@@ -2253,15 +2263,15 @@ msgstr ""
 #: ../../tribes/barbarians/oremine/help.lua:30
 #: ../../tribes/barbarians/oremine/help.lua:31
 msgid "Smelting Works"
-msgstr ""
+msgstr "Ceàrdach leaghadair"
 
 #: ../../tribes/barbarians/helmsmith/conf:1
 msgid "Smelts helmets for soldiers."
-msgstr ""
+msgstr "Leaghaidh e clogaidean airson saighdearan."
 
 #: ../../tribes/barbarians/smelter/conf:1
 msgid "Smelts iron."
-msgstr ""
+msgstr "Leaghaidh e iarann."
 
 #: ../../tribes/barbarians/conf:104
 #: ../../tribes/barbarians/deep_coalmine/help.lua:26
@@ -2271,13 +2281,13 @@ msgstr ""
 #: ../../tribes/barbarians/deep_oremine/help.lua:25
 #: ../../tribes/barbarians/deep_oremine/help.lua:26
 msgid "Snack"
-msgstr ""
+msgstr "Lòn"
 
 #: ../../tribes/barbarians/axefactory/help.lua:28
 #: ../../tribes/barbarians/conf:118
 #: ../../tribes/barbarians/warmill/help.lua:29
 msgid "Soldier"
-msgstr ""
+msgstr "Saighdear"
 
 #: ../../tribes/barbarians/scripting/sc01_citadel_village.lua:95
 msgid ""
@@ -2298,7 +2308,7 @@ msgstr ""
 #: ../../tribes/barbarians/fishers_hut/help.lua:13
 #: ../../tribes/barbarians/quarry/help.lua:13
 msgid "Source needed"
-msgstr ""
+msgstr "Tha feum air tùs"
 
 #: ../../tribes/barbarians/axefactory/help.lua:32
 #: ../../tribes/barbarians/bakery/help.lua:34
@@ -2329,37 +2339,37 @@ msgstr ""
 #: ../../tribes/barbarians/warmill/help.lua:34
 #: ../../tribes/barbarians/well/help.lua:32
 msgid "Space required:"
-msgstr ""
+msgstr "Àite air a bheil feum:"
 
 #: ../../tribes/barbarians/conf:144
 #: ../../tribes/barbarians/metalworks/help.lua:39
 #: ../../tribes/barbarians/quarry/help.lua:41
 #: ../../tribes/barbarians/quarry/help.lua:46
 msgid "Stonemason"
-msgstr ""
+msgstr "Clachair"
 
 #: ../../tribes/barbarians/battlearena/help.lua:28
 #: ../../tribes/barbarians/conf:105
 msgid "Strong Beer"
-msgstr ""
+msgstr "Leann làidir"
 
 #: ../../tribes/barbarians/conf:222
 msgid "Stronghold"
-msgstr ""
+msgstr "Daingean"
 
 #: ../../tribes/barbarians/bakery/help.lua:27
 #: ../../tribes/barbarians/conf:197
 #: ../../tribes/barbarians/fishers_hut/help.lua:29
 #: ../../tribes/barbarians/hunters_hut/help.lua:29
 msgid "Tavern"
-msgstr ""
+msgstr "Taigh-tàrn"
 
 #: ../../tribes/barbarians/bakery/help.lua:12
 #: ../../tribes/barbarians/cattlefarm/help.lua:12
 #: ../../tribes/barbarians/farm/help.lua:12
 #: ../../tribes/barbarians/quarry/help.lua:12
 msgid "Text needed"
-msgstr ""
+msgstr "Tha feum air teacsa"
 
 #: ../../tribes/barbarians/axefactory/help.lua:36
 #: ../../tribes/barbarians/axefactory/help.lua:42
@@ -2380,7 +2390,7 @@ msgstr ""
 #: ../../tribes/barbarians/warmill/help.lua:44
 #: ../../tribes/barbarians/warmill/help.lua:50
 msgid "Thatch Reed"
-msgstr ""
+msgstr "Feur tughaidh"
 
 #: ../../tribes/barbarians/thatchreed/conf:1
 msgid ""
@@ -2393,7 +2403,7 @@ msgstr ""
 #: ../../tribes/barbarians/hunters_hut/help.lua:51
 #: ../../tribes/barbarians/quarry/help.lua:46
 msgid "The %s pauses %s before going to work again."
-msgstr ""
+msgstr "Sguiridh %s dheth fad %s mus tòisich e air an obair a-rithist."
 
 #: ../../tribes/barbarians/axe/conf:1
 msgid ""
@@ -2571,6 +2581,8 @@ msgid ""
 "The Limekiln processes Raw Stones to make \"Grout\", a substance that "
 "solidifies and so reinforces masonry."
 msgstr ""
+"Nì àth-aoil aol-tàthaidh de clachan, seo stuth a nì clachaireachd nas treasa "
+"seasmhaiche."
 
 #: ../../tribes/barbarians/lime_kiln/help.lua:32
 msgid ""
@@ -2597,7 +2609,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/quarry/help.lua:23
 msgid "The Quarry needs stones in the vicinity."
-msgstr ""
+msgstr "Tha an coireall feumail air clach am fagas."
 
 #: ../../tribes/barbarians/rangers_hut/help.lua:43
 msgid ""
@@ -2753,6 +2765,9 @@ msgid ""
 "metalwork shop (but ceases to be produced by the building if it is enhanced "
 "to an axefactory and war mill)."
 msgstr ""
+"Cleachdaidh clachairean is mèinnearan a' phiocaid seo. Thèid a saothrachadh "
+"ann an ceàrdach meatailt (ach cha saothraich an togalach i tuilleadh nuair a "
+"thèid a leasachadh gu factaraidh thuaghan is ceàrdach-cogaidh)."
 
 #: ../../tribes/barbarians/hunting_spear/conf:1
 msgid ""
@@ -2765,13 +2780,13 @@ msgstr ""
 #: ../../tribes/barbarians/conf:165
 #: ../../tribes/barbarians/conf:172
 msgid "Tower"
-msgstr ""
+msgstr "Tùr"
 
 #: ../../tribes/barbarians/battlearena/help.lua:50
 #: ../../tribes/barbarians/conf:145
 #: ../../tribes/barbarians/trainingscamp/help.lua:56
 msgid "Trainer"
-msgstr ""
+msgstr "Trèanair"
 
 #: ../../tribes/barbarians/axefactory/help.lua:29
 #: ../../tribes/barbarians/bakery/help.lua:31
@@ -2781,7 +2796,7 @@ msgstr ""
 #: ../../tribes/barbarians/trainingscamp/help.lua:61
 #: ../../tribes/barbarians/warmill/help.lua:31
 msgid "Trainingscamp"
-msgstr ""
+msgstr "Campa trèanaidh"
 
 #: ../../tribes/barbarians/trainingscamp/help.lua:16
 msgid ""
@@ -2795,7 +2810,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/trainer/conf:1
 msgid "Trains the soldiers."
-msgstr ""
+msgstr "Trèanaidh seo na saighdearan."
 
 #: ../../tribes/barbarians/axefactory/help.lua:39
 #: ../../tribes/barbarians/axefactory/help.lua:45
@@ -2865,7 +2880,7 @@ msgstr ""
 #: ../../tribes/barbarians/well/help.lua:35
 #: ../../tribes/barbarians/well/help.lua:37
 msgid "Trunk"
-msgstr ""
+msgstr "Stoc"
 
 #: ../../tribes/barbarians/trunk/conf:1
 msgid ""
@@ -2879,7 +2894,7 @@ msgstr ""
 #: ../../tribes/barbarians/axefactory/help.lua:34
 #: ../../tribes/barbarians/warmill/help.lua:36
 msgid "Upgrade Cost:"
-msgstr ""
+msgstr "Cosgaisean an àrdachaidh:"
 
 #: ../../tribes/barbarians/deep_coalmine/help.lua:39
 #: ../../tribes/barbarians/deep_goldmine/help.lua:35
@@ -2888,11 +2903,11 @@ msgstr ""
 #: ../../tribes/barbarians/deeper_goldmine/help.lua:34
 #: ../../tribes/barbarians/deeper_oremine/help.lua:34
 msgid "Upgrade cost:"
-msgstr ""
+msgstr "Cosgaisean an àrdachaidh:"
 
 #: ../../tribes/barbarians/trainingscamp/conf:44
 msgid "Upgrade soldier attack 0"
-msgstr ""
+msgstr "Àrdaich ionnsaigh an t-saighdeir 0"
 
 #: ../../tribes/barbarians/trainingscamp/conf:45
 msgid ""
@@ -2902,7 +2917,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/trainingscamp/conf:46
 msgid "Upgrade soldier attack 1"
-msgstr ""
+msgstr "Àrdaich ionnsaigh an t-saighdeir 1"
 
 #: ../../tribes/barbarians/trainingscamp/conf:47
 msgid ""
@@ -2912,7 +2927,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/trainingscamp/conf:48
 msgid "Upgrade soldier attack 2"
-msgstr ""
+msgstr "Àrdaich ionnsaigh an t-saighdeir 2"
 
 #: ../../tribes/barbarians/trainingscamp/conf:49
 msgid ""
@@ -2922,7 +2937,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/trainingscamp/conf:50
 msgid "Upgrade soldier attack 3"
-msgstr ""
+msgstr "Àrdaich ionnsaigh an t-saighdeir 3"
 
 #: ../../tribes/barbarians/trainingscamp/conf:51
 msgid ""
@@ -2932,7 +2947,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/trainingscamp/conf:52
 msgid "Upgrade soldier attack 4"
-msgstr ""
+msgstr "Àrdaich ionnsaigh an t-saighdeir 4"
 
 #: ../../tribes/barbarians/trainingscamp/conf:53
 msgid ""
@@ -2942,7 +2957,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/battlearena/conf:37
 msgid "Upgrade soldier evade 0"
-msgstr ""
+msgstr "Àrdaich teàrnadh an t-saighdeir 0"
 
 #: ../../tribes/barbarians/battlearena/conf:38
 msgid ""
@@ -2951,7 +2966,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/battlearena/conf:39
 msgid "Upgrade soldier evade 1"
-msgstr ""
+msgstr "Àrdaich teàrnadh an t-saighdeir 1"
 
 #: ../../tribes/barbarians/battlearena/conf:40
 msgid ""
@@ -2960,7 +2975,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/trainingscamp/conf:54
 msgid "Upgrade soldier hitpoints 0"
-msgstr ""
+msgstr "Àrdaich puingean-beatha an t-saighdeir 0"
 
 #: ../../tribes/barbarians/trainingscamp/conf:55
 msgid ""
@@ -2970,7 +2985,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/trainingscamp/conf:56
 msgid "Upgrade soldier hitpoints 1"
-msgstr ""
+msgstr "Àrdaich puingean-beatha an t-saighdeir 1"
 
 #: ../../tribes/barbarians/trainingscamp/conf:57
 msgid ""
@@ -2980,7 +2995,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/trainingscamp/conf:58
 msgid "Upgrade soldier hitpoints 2"
-msgstr ""
+msgstr "Àrdaich puingean-beatha an t-saighdeir 2"
 
 #: ../../tribes/barbarians/trainingscamp/conf:59
 msgid ""
@@ -3017,7 +3032,7 @@ msgstr ""
 #: ../../tribes/barbarians/warmill/help.lua:54
 #: ../../tribes/barbarians/well/help.lua:38
 msgid "Upgradeable to:"
-msgstr ""
+msgstr "Gabhaidh àrdachadh gu:"
 
 #: ../../tribes/barbarians/axefactory/help.lua:33
 #: ../../tribes/barbarians/bakery/help.lua:35
@@ -3048,7 +3063,7 @@ msgstr ""
 #: ../../tribes/barbarians/warmill/help.lua:35
 #: ../../tribes/barbarians/well/help.lua:33
 msgid "Upgraded from:"
-msgstr ""
+msgstr "Air àrdachadh o:"
 
 #: ../../tribes/barbarians/axefactory/help.lua:20
 #: ../../tribes/barbarians/bakery/help.lua:19
@@ -3079,11 +3094,11 @@ msgstr ""
 #: ../../tribes/barbarians/warmill/help.lua:20
 #: ../../tribes/barbarians/well/help.lua:19
 msgid "Vision range:"
-msgstr ""
+msgstr "Astar lèirsinne:"
 
 #: ../../tribes/barbarians/conf:108
 msgid "War Helmet"
-msgstr ""
+msgstr "Clogaid cogaidh"
 
 #: ../../tribes/barbarians/axefactory/help.lua:52
 #: ../../tribes/barbarians/coalmine/help.lua:32
@@ -3092,30 +3107,30 @@ msgstr ""
 #: ../../tribes/barbarians/deeper_coalmine/help.lua:30
 #: ../../tribes/barbarians/trainingscamp/help.lua:29
 msgid "War Mill"
-msgstr ""
+msgstr "Ceàrdach-cogaidh"
 
 #: ../../tribes/barbarians/conf:177
 msgid "Warehouse"
-msgstr ""
+msgstr "Taigh-stòrais"
 
 #: ../../tribes/barbarians/conf:109
 msgid "Warriors Axe"
-msgstr ""
+msgstr "Tuagh-ghaisgich"
 
 #: ../../tribes/barbarians/conf:110
 #: ../../tribes/barbarians/well/help.lua:24
 msgid "Water"
-msgstr ""
+msgstr "Uisge"
 
 #: ../../tribes/barbarians/lime_kiln/help.lua:27
 msgid "Water from a Well"
-msgstr ""
+msgstr "Uisge o thobar"
 
 #: ../../tribes/barbarians/bakery/help.lua:24
 #: ../../tribes/barbarians/cattlefarm/help.lua:24
 #: ../../tribes/barbarians/micro-brewery/help.lua:23
 msgid "Water from the Well"
-msgstr ""
+msgstr "Uisge on tobar"
 
 #: ../../tribes/barbarians/water/conf:1
 msgid ""
@@ -3126,27 +3141,27 @@ msgstr ""
 
 #: ../../tribes/barbarians/conf:146
 msgid "Weaver"
-msgstr ""
+msgstr "Figheadair"
 
 #: ../../tribes/barbarians/conf:205
 #: ../../tribes/barbarians/fernery/help.lua:27
 msgid "Weaving-Mill"
-msgstr ""
+msgstr "Taigh nam beart"
 
 #: ../../tribes/barbarians/conf:187
 msgid "Well"
-msgstr ""
+msgstr "Tobar"
 
 #: ../../tribes/barbarians/conf:111
 #: ../../tribes/barbarians/farm/help.lua:24
 msgid "Wheat"
-msgstr ""
+msgstr "Cruithneachd"
 
 #: ../../tribes/barbarians/bakery/help.lua:23
 #: ../../tribes/barbarians/cattlefarm/help.lua:23
 #: ../../tribes/barbarians/micro-brewery/help.lua:24
 msgid "Wheat from the Farm"
-msgstr ""
+msgstr "Cruithneachd on tuathanas"
 
 #: ../../tribes/barbarians/wheat/conf:1
 msgid ""
@@ -3161,12 +3176,12 @@ msgstr ""
 
 #: ../../tribes/barbarians/conf:65
 msgid "Wildboar"
-msgstr ""
+msgstr "Fiadh-thorc"
 
 #: ../../tribes/barbarians/conf:189
 #: ../../tribes/barbarians/lumberjacks_hut/help.lua:30
 msgid "Wood Hardener"
-msgstr ""
+msgstr "Cruadhaichear fiodha"
 
 #: ../../tribes/barbarians/axefactory/conf:35
 #: ../../tribes/barbarians/bakery/conf:26
@@ -3206,7 +3221,7 @@ msgstr ""
 #: ../../tribes/barbarians/weaving-mill/conf:23
 #: ../../tribes/barbarians/well/conf:17
 msgid "Work"
-msgstr ""
+msgstr "Obair"
 
 #: ../../tribes/barbarians/axefactory/help.lua:57
 #: ../../tribes/barbarians/bakery/help.lua:51
@@ -3229,7 +3244,7 @@ msgstr ""
 #: ../../tribes/barbarians/trainingscamp/help.lua:57
 #: ../../tribes/barbarians/well/help.lua:43
 msgid "Worker uses:"
-msgstr ""
+msgstr "Cleachdaidh an t-obraiche:"
 
 #: ../../tribes/barbarians/axefactory/help.lua:54
 #: ../../tribes/barbarians/bakery/help.lua:48
@@ -3260,7 +3275,7 @@ msgstr ""
 #: ../../tribes/barbarians/warmill/help.lua:56
 #: ../../tribes/barbarians/well/help.lua:40
 msgid "Workers"
-msgstr ""
+msgstr "Obraichean"
 
 #: ../../tribes/barbarians/deep_coalmine/help.lua:54
 #: ../../tribes/barbarians/deep_goldmine/help.lua:50
@@ -3271,7 +3286,7 @@ msgstr ""
 #: ../../tribes/barbarians/micro-brewery/help.lua:48
 #: ../../tribes/barbarians/warmill/help.lua:60
 msgid "Workers use:"
-msgstr ""
+msgstr "Cleachdaidh na h-obraichean:"
 
 #: ../../tribes/barbarians/axefactory/help.lua:18
 #: ../../tribes/barbarians/bakery/help.lua:17
@@ -3330,7 +3345,7 @@ msgstr ""
 #: ../../tribes/barbarians/metalworks/help.lua:70
 #: ../../tribes/barbarians/warmill/help.lua:65
 msgid "each item"
-msgstr ""
+msgstr "gach nì"
 
 #: ../../tribes/barbarians/metalworks/help.lua:46
 msgid "n/a"
