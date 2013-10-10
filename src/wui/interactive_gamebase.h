@@ -59,7 +59,7 @@ public:
 	void set_chat_provider(ChatProvider &);
 	ChatProvider * get_chat_provider();
 
-	// NOCOM(#sirver): ripe for killing.
+	// TODO(sirver): Remove the use of these methods as the strings are no longer configurable.
 	const std::string & building_census_format      () const {
 		return m_building_census_format;
 	}

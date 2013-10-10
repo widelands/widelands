@@ -35,6 +35,7 @@
 #include "logic/game.h"
 #include "logic/player.h"
 #include "map_io/widelands_map_map_object_loader.h"
+#include "scoped_timer.h"
 
 namespace Widelands {
 
@@ -61,36 +62,37 @@ int32_t Game_Loader::preload_game(Game_Preload_Data_Packet & mp) {
  * Load the complete file
  */
 int32_t Game_Loader::load_game(bool const multiplayer) {
+	ScopedTimer timer("Game_Loader::load() took %ums");
 
 	log("Game: Reading Preload Data ... ");
 	{Game_Preload_Data_Packet                     p; p.Read(m_fs, m_game);}
-	log(" done\n");
+	log("took %ums\n", timer.ms_since_last_query());
 
 	log("Game: Reading Game Class Data ... ");
 	{Game_Game_Class_Data_Packet                  p; p.Read(m_fs, m_game);}
-	log(" done\n");
+	log("took %ums\n", timer.ms_since_last_query());
 
 	log("Game: Reading Map Data ... ");
 	Game_Map_Data_Packet M;                          M.Read(m_fs, m_game);
-	log(" done\n");
+	log("Game: Reading Map Data took %ums\n", timer.ms_since_last_query());
 
 	log("Game: Reading Player Info ... ");
 	{Game_Player_Info_Data_Packet                 p; p.Read(m_fs, m_game);}
-	log(" done\n");
+	log("Game: Reading Player Info took %ums\n", timer.ms_since_last_query());
 
-	log("Game: Reading Map Data Complete!\n");
+	log("Game: Calling Read_Complete()\n");
 	M.Read_Complete(m_game);
-	log("Game: Reading Map Data Complete done!\n");
+	log("Game: Read_Complete took: %ums\n", timer.ms_since_last_query());
 
 	Map_Map_Object_Loader * const mol = M.get_map_object_loader();
 
 	log("Game: Reading Player Economies Info ... ");
 	{Game_Player_Economies_Data_Packet            p; p.Read(m_fs, m_game, mol);}
-	log(" done\n");
+	log("took %ums\n", timer.ms_since_last_query());
 
 	log("Game: Reading Command Queue Data ... ");
 	{Game_Cmd_Queue_Data_Packet                   p; p.Read(m_fs, m_game, mol);}
-	log(" done\n");
+	log("took %ums\n", timer.ms_since_last_query());
 
 	//  This must be after the command queue has been read.
 	log("Game: Parsing messages ... ");
@@ -116,7 +118,7 @@ int32_t Game_Loader::load_game(bool const multiplayer) {
 			}
 		}
 	}
-	log(" done\n");
+	log("took %ums\n", timer.ms_since_last_query());
 
 	// For compatibility hacks only
 	mol->load_finish_game(m_game);
@@ -127,7 +129,7 @@ int32_t Game_Loader::load_game(bool const multiplayer) {
 	if (!multiplayer) {
 		log("Game: Reading Interactive Player Data ... ");
 		{Game_Interactive_Player_Data_Packet       p; p.Read(m_fs, m_game, mol);}
-		log(" done\n");
+		log("took %ums\n", timer.ms_since_last_query());
 	}
 
 	return 0;

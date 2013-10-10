@@ -169,8 +169,6 @@ uint32_t persist_object
 	pluto_persist(L, fw);
 	uint32_t nwritten = fw.GetPos() - cpos;
 
-	log("nwritten: %u\n", nwritten);
-
 	lua_pop(L, 2); // pop the object and the table
 
 	// Delete the entry in the registry

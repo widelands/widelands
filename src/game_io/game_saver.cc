@@ -29,6 +29,7 @@
 #include "io/filesystem/filesystem.h"
 #include "log.h"
 #include "logic/game.h"
+#include "scoped_timer.h"
 
 namespace Widelands {
 
@@ -40,38 +41,39 @@ Game_Saver::Game_Saver(FileSystem & fs, Game & game) : m_fs(fs), m_game(game) {
  * The core save function
  */
 void Game_Saver::save() {
+	ScopedTimer timer("Game_Saver::save() took %ums");
 
 	m_fs.EnsureDirectoryExists("binary");
 
 	log("Game: Writing Preload Data ... ");
 	{Game_Preload_Data_Packet                    p; p.Write(m_fs, m_game, 0);}
-	log(" done\n");
+	log("took %ums\n", timer.ms_since_last_query());
 
 	log("Game: Writing Game Class Data ... ");
 	{Game_Game_Class_Data_Packet                 p; p.Write(m_fs, m_game, 0);}
-	log(" done\n");
+	log("took %ums\n", timer.ms_since_last_query());
 
 	log("Game: Writing Player Info ... ");
 	{Game_Player_Info_Data_Packet                p; p.Write(m_fs, m_game, 0);}
-	log(" done\n");
+	log("took %ums\n", timer.ms_since_last_query());
 
 	log("Game: Writing Map Data!\n");
 	Game_Map_Data_Packet                         M; M.Write(m_fs, m_game, 0);
-	log("Game: Writing Map Data done!\n");
+	log("Game: Writing Map Data took %ums\n", timer.ms_since_last_query());
 
 	Map_Map_Object_Saver * const mos = M.get_map_object_saver();
 
 	log("Game: Writing Player Economies Info ... ");
 	{Game_Player_Economies_Data_Packet           p; p.Write(m_fs, m_game, mos);}
-	log(" done\n");
+	log("took %ums\n", timer.ms_since_last_query());
 
 	log("Game: Writing Command Queue Data ... ");
 	{Game_Cmd_Queue_Data_Packet                  p; p.Write(m_fs, m_game, mos);}
-	log(" done\n");
+	log("took %ums\n", timer.ms_since_last_query());
 
 	log("Game: Writing Interactive Player Data ... ");
 	{Game_Interactive_Player_Data_Packet         p; p.Write(m_fs, m_game, mos);}
-	log(" done\n");
+	log("took %ums\n", timer.ms_since_last_query());
 }
 
 }
