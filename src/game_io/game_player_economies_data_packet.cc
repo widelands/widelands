@@ -24,6 +24,7 @@
 #include "logic/game.h"
 #include "logic/game_data_error.h"
 #include "logic/player.h"
+#include "logic/ship.h"
 #include "logic/widelands_fileread.h"
 #include "logic/widelands_filewrite.h"
 #include "upcast.h"
@@ -50,19 +51,33 @@ void Game_Player_Economies_Data_Packet::Read
 					Player::Economies & economies = player->m_economies;
 					uint16_t const nr_economies = economies.size();
 					Player::Economies ecos(nr_economies);
-					container_iterate(Player::Economies, ecos, i)
-						if
-							(upcast
-							 	(Flag const,
-							 	 flag,
-							 	 map[fr.Map_Index32(max_index)].get_immovable()))
-						{
-							*i.current = flag->get_economy();
-							EconomyDataPacket d(flag->get_economy());
-							d.Read(fr);
-						} else
-							throw game_data_error
-								(_("there is no flag at the specified location"));
+					container_iterate(Player::Economies, ecos, i) {
+						uint32_t value = fr.Unsigned32();
+						if (value < 0xffffffff) {
+							if (upcast(Flag const, flag, map[value].get_immovable())) {
+								*i.current = flag->get_economy();
+								EconomyDataPacket d(flag->get_economy());
+								d.Read(fr);
+							} else {
+								throw game_data_error(_("there is no flag at the specified location"));
+							}
+						} else {
+							bool read_this_economy = false;
+
+							Bob* bob = map[fr.Map_Index32(max_index)].get_first_bob();
+							while (bob) {
+								if (upcast(Ship const, ship, bob)) {
+									EconomyDataPacket d(ship->get_economy());
+									d.Read(fr);
+									read_this_economy = true;
+								}
+								bob = bob->get_next_bob();
+							}
+							if (!read_this_economy) {
+								throw game_data_error("there is no ship at this location.");
+							}
+						}
+					}
 				} catch (const _wexception & e) {
 					throw game_data_error(_("player %u: %s"), p, e.what());
 				}
@@ -90,6 +105,8 @@ void Game_Player_Economies_Data_Packet::Write
 	iterate_players_existing_const(p, nr_players, game, player) {
 		const Player::Economies & economies = player->m_economies;
 		container_iterate_const(Player::Economies, economies, i) {
+			bool wrote_this_economy = false;
+
 			// Walk the map so that we find a representant.
 			for (Field const * field = &field_0;; ++field) {
 				assert(field < &map[map.max_index()]); //  should never reach end
@@ -99,9 +116,32 @@ void Game_Player_Economies_Data_Packet::Write
 
 						EconomyDataPacket d(flag->get_economy());
 						d.Write(fw);
+						wrote_this_economy = true;
 						break;
 					}
+				} else {
+					// Expeditions ships are special and have their own economy
+					// (which will not have a flag), therefore we have to special
+					// case them.
+					// TODO(sirver): the 0xffffffff is ugly and the worker(s) on the
+					// expedition ship aren not properly put back into the economy,
+					// because they do not show up in stock untill the expedition is
+					// finishs.
+					Bob* bob = field->get_first_bob();
+					while (bob) {
+						if (upcast(Ship const, ship, bob)) {
+							fw.Unsigned32(0xffffffff);  // Sentinel value.
+							fw.Map_Index32(field - &field_0);
+
+							EconomyDataPacket d(ship->get_economy());
+							d.Write(fw);
+							wrote_this_economy = true;
+						}
+						bob = bob->get_next_bob();
+					}
 				}
+				if (wrote_this_economy)
+					break;
 			}
 		}
 	}
