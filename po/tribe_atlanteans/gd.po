@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2013-09-15 17:41+0000\n"
-"PO-Revision-Date: 2013-10-08 17:38+0000\n"
+"PO-Revision-Date: 2013-10-09 20:42+0000\n"
 "Last-Translator: GunChleoc <Unknown>\n"
 "Language-Team: Fòram na Gàidhlig http://www.foramnagaidhlig.net\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-10-09 05:12+0000\n"
+"X-Launchpad-Export-Date: 2013-10-10 04:33+0000\n"
 "X-Generator: Launchpad (build 16799)\n"
 "Language: gd\n"
 
@@ -27,7 +27,7 @@ msgstr ""
 
 #: ../../tribes/atlanteans/ship/conf:1
 msgid "A sea-worthy ship"
-msgstr ""
+msgstr "Long muir-acainneach"
 
 #: ../../tribes/atlanteans/tabard/conf:1
 msgid ""
@@ -37,15 +37,15 @@ msgstr ""
 
 #: ../../tribes/atlanteans/conf:58
 msgid "Advanced Shield"
-msgstr ""
+msgstr "Sgiath adhartach"
 
 #: ../../tribes/atlanteans/conf:111
 msgid "Armoursmith"
-msgstr ""
+msgstr "Gobha armachd"
 
 #: ../../tribes/atlanteans/conf:186
 msgid "Armoursmithy"
-msgstr ""
+msgstr "Ceàrdach armachd"
 
 #: ../../tribes/atlanteans/smoked_fish/conf:1
 msgid ""
@@ -55,32 +55,32 @@ msgstr ""
 
 #: ../../tribes/atlanteans/conf:33
 msgid "Ashes"
-msgstr ""
+msgstr "Luaithre"
 
 #: ../../tribes/atlanteans/conf:5
 msgid "Atlanteans"
-msgstr ""
+msgstr "Na h-Atlantaich"
 
 #: ../../tribes/atlanteans/conf:112
 msgid "Baker"
-msgstr ""
+msgstr "Fuineadair"
 
 #: ../../tribes/atlanteans/conf:181
 msgid "Bakery"
-msgstr ""
+msgstr "Taigh-fuine"
 
 #: ../../tribes/atlanteans/baker/conf:1
 msgid "Bakes bread for workers."
-msgstr ""
+msgstr "Fuinidh e aran airson nan obraichean."
 
 #: ../../tribes/atlanteans/conf:155
 msgid "Barracks"
-msgstr ""
+msgstr "Taighean-feachd"
 
 #: ../../tribes/atlanteans/conf:148
 #: ../../tribes/atlanteans/conf:156
 msgid "Barrier"
-msgstr ""
+msgstr "Taigh-faire"
 
 #: ../../tribes/atlanteans/bucket/conf:1
 msgid "Big buckets for the fish breeder - produced by the toolsmith."
@@ -88,15 +88,15 @@ msgstr ""
 
 #: ../../tribes/atlanteans/conf:61
 msgid "Blackroot"
-msgstr ""
+msgstr "Freumhag"
 
 #: ../../tribes/atlanteans/conf:191
 msgid "Blackroot Farm"
-msgstr ""
+msgstr "Tuathanas fhreumhagan"
 
 #: ../../tribes/atlanteans/conf:60
 msgid "Blackroot Flour"
-msgstr ""
+msgstr "Min-freumhaige"
 
 #: ../../tribes/atlanteans/blackrootflour/conf:1
 msgid ""
@@ -106,27 +106,27 @@ msgstr ""
 
 #: ../../tribes/atlanteans/conf:113
 msgid "Blackroot farmer"
-msgstr ""
+msgstr "Tuathanach fhreumhagan"
 
 #: ../../tribes/atlanteans/conf:34
 msgid "Blackrootfield"
-msgstr ""
+msgstr "Achadh fhreumhagan"
 
 #: ../../tribes/atlanteans/conf:35
 msgid "Blackrootfield harvested"
-msgstr ""
+msgstr "Achadh fhreumhagan air a bhuain"
 
 #: ../../tribes/atlanteans/conf:36
 msgid "Blackrootfield medium"
-msgstr ""
+msgstr "Achadh fhreumhagan meadhanach"
 
 #: ../../tribes/atlanteans/conf:37
 msgid "Blackrootfield small"
-msgstr ""
+msgstr "Achadh fhreumhagan beag"
 
 #: ../../tribes/atlanteans/conf:38
 msgid "Blackrootfield tiny"
-msgstr ""
+msgstr "Achadh fhreumhagan beag bìodach"
 
 #: ../../tribes/atlanteans/blackroot/conf:1
 msgid ""
@@ -137,108 +137,108 @@ msgstr ""
 
 #: ../../tribes/atlanteans/conf:62
 msgid "Bread"
-msgstr ""
+msgstr "Aran"
 
 #: ../../tribes/atlanteans/conf:59
 msgid "Bread Paddle"
-msgstr ""
+msgstr "Crann-arain"
 
 #: ../../tribes/atlanteans/fish_breeder/conf:1
 msgid "Breeds fish."
-msgstr ""
+msgstr "Tàrmaichidh e èisg."
 
 #: ../../tribes/atlanteans/spiderbreeder/conf:1
 msgid "Breeds spider for yarn."
-msgstr ""
+msgstr "Tàrmaichidh e damhain airson snàth."
 
 #: ../../tribes/atlanteans/horsebreeder/conf:1
 msgid "Breeds the strong atlantean horses"
-msgstr ""
+msgstr "Tàrmaichidh e na h-eich Atlantach làidir."
 
 #: ../../tribes/atlanteans/conf:63
 msgid "Buckets"
-msgstr ""
+msgstr "Peilichean"
 
 #: ../../tribes/atlanteans/conf:114
 msgid "Builder"
-msgstr ""
+msgstr "Togalaiche"
 
 #: ../../tribes/atlanteans/conf:115
 msgid "Burner"
-msgstr ""
+msgstr "Loisgeadair"
 
 #: ../../tribes/atlanteans/burner/conf:1
 msgid "Burns coal."
-msgstr ""
+msgstr "Loisgidh e gual."
 
 #: ../../tribes/atlanteans/conf:104
 msgid "Carrier"
-msgstr ""
+msgstr "Giùlanair"
 
 #: ../../tribes/atlanteans/carrier/conf:1
 msgid "Carries items along your roads."
-msgstr ""
+msgstr "Giùlainidh e rudan air na rathaidean agad."
 
 #: ../../tribes/atlanteans/conf:157
 #: ../../tribes/atlanteans/conf:204
 msgid "Castle"
-msgstr ""
+msgstr "Caisteal"
 
 #: ../../tribes/atlanteans/scripting/sc01_castle_village.lua:10
 msgid "Castle village"
-msgstr ""
+msgstr "Baile caisteil"
 
 #: ../../tribes/atlanteans/conf:182
 msgid "Charcoal Burner's House"
-msgstr ""
+msgstr "Seada gual-fhiodha"
 
 #: ../../tribes/atlanteans/conf:149
 msgid "Citadel"
-msgstr ""
+msgstr "Cathair"
 
 #: ../../tribes/atlanteans/conf:64
 msgid "Coal"
-msgstr ""
+msgstr "Gual"
 
 #: ../../tribes/atlanteans/conf:193
 msgid "Coal Mine"
-msgstr ""
+msgstr "Mèinn guail"
 
 #: ../../tribes/atlanteans/shipyard/conf:28
 msgid "Constructing ship"
-msgstr ""
+msgstr "A' togail long"
 
 #: ../../tribes/atlanteans/conf:142
 msgid "Construction Site"
-msgstr ""
+msgstr "Làrach-togail"
 
 #: ../../tribes/atlanteans/conf:66
 msgid "Corn"
-msgstr ""
+msgstr "Coirce"
 
 #: ../../tribes/atlanteans/conf:39
 msgid "Cornfield"
-msgstr ""
+msgstr "Achadh coirce"
 
 #: ../../tribes/atlanteans/conf:40
 msgid "Cornfield harvested"
-msgstr ""
+msgstr "Achadh coirce air a bhuain"
 
 #: ../../tribes/atlanteans/conf:41
 msgid "Cornfield medium"
-msgstr ""
+msgstr "Achadh coirce meadhanach"
 
 #: ../../tribes/atlanteans/conf:42
 msgid "Cornfield small"
-msgstr ""
+msgstr "Achadh coirce beag"
 
 #: ../../tribes/atlanteans/conf:43
 msgid "Cornfield tiny"
-msgstr ""
+msgstr "Achadh coirce beag bìodach"
 
 #: ../../tribes/atlanteans/conf:65
 msgid "Cornflour"
-msgstr ""
+msgstr "Min-coirce"
 
 #: ../../tribes/atlanteans/cornflour/conf:1
 msgid ""
@@ -248,7 +248,7 @@ msgstr ""
 
 #: ../../tribes/atlanteans/conf:192
 msgid "Crystal Mine"
-msgstr ""
+msgstr "Mèinn criostail"
 
 #: ../../tribes/atlanteans/stonecutter/conf:1
 msgid "Cuts raw pieces of granite out of laying stones."
@@ -260,15 +260,15 @@ msgstr ""
 
 #: ../../tribes/atlanteans/conf:44
 msgid "Destroyed building"
-msgstr ""
+msgstr "Togalach air a mhilleadh"
 
 #: ../../tribes/atlanteans/conf:67
 msgid "Diamond"
-msgstr ""
+msgstr "Daoimean"
 
 #: ../../tribes/atlanteans/geologist/conf:1
 msgid "Discovers resources for mining."
-msgstr ""
+msgstr "Lorgaidh e stòrasan airson mèinneadh."
 
 #: ../../tribes/atlanteans/conf:145
 msgid "Dismantle Site"
@@ -276,31 +276,31 @@ msgstr "Thoir an togalach às a chèile"
 
 #: ../../tribes/atlanteans/conf:150
 msgid "Donjon"
-msgstr ""
+msgstr "Tùr-faire"
 
 #: ../../tribes/atlanteans/conf:68
 msgid "Double Trident"
-msgstr ""
+msgstr "Muirgheadh dhùbailte"
 
 #: ../../tribes/atlanteans/conf:208
 msgid "Dungeon"
-msgstr ""
+msgstr "Toll-dubh"
 
 #: ../../tribes/atlanteans/conf:190
 msgid "Farm"
-msgstr ""
+msgstr "Tuathanas"
 
 #: ../../tribes/atlanteans/conf:117
 msgid "Farmer"
-msgstr ""
+msgstr "Tuathanach"
 
 #: ../../tribes/atlanteans/woodcutter/conf:1
 msgid "Fells trees."
-msgstr ""
+msgstr "Leagaidh e craobhan."
 
 #: ../../tribes/atlanteans/conf:69
 msgid "Fire Tongs"
-msgstr ""
+msgstr "Clobha teine"
 
 #: ../../tribes/atlanteans/fire_tongs/conf:1
 msgid ""
@@ -310,15 +310,15 @@ msgstr ""
 
 #: ../../tribes/atlanteans/conf:71
 msgid "Fish"
-msgstr ""
+msgstr "Iasg"
 
 #: ../../tribes/atlanteans/conf:118
 msgid "Fish Breeder"
-msgstr ""
+msgstr "Tàrmachair iasg"
 
 #: ../../tribes/atlanteans/conf:173
 msgid "Fish Breeder's House"
-msgstr ""
+msgstr "Taigh tàrmachair iasg"
 
 #: ../../tribes/atlanteans/fish/conf:1
 msgid ""
@@ -329,48 +329,48 @@ msgstr ""
 
 #: ../../tribes/atlanteans/conf:119
 msgid "Fisher"
-msgstr ""
+msgstr "Iasgair"
 
 #: ../../tribes/atlanteans/conf:172
 msgid "Fisher's House"
-msgstr ""
+msgstr "Taigh-iasgair"
 
 #: ../../tribes/atlanteans/conf:70
 msgid "Fishing Net"
-msgstr ""
+msgstr "Lìon-èisg"
 
 #: ../../tribes/atlanteans/conf:120
 msgid "Forester"
-msgstr ""
+msgstr "Planntair-coille"
 
 #: ../../tribes/atlanteans/conf:170
 msgid "Forester's House"
-msgstr ""
+msgstr "Taigh planntair-choille"
 
 #: ../../tribes/atlanteans/conf:151
 #: ../../tribes/atlanteans/conf:158
 msgid "Fortress"
-msgstr ""
+msgstr "Dùn"
 
 #: ../../tribes/atlanteans/conf:121
 msgid "Geologist"
-msgstr ""
+msgstr "Clach-eòlaiche"
 
 #: ../../tribes/atlanteans/conf:74
 msgid "Gold"
-msgstr ""
+msgstr "Òr"
 
 #: ../../tribes/atlanteans/conf:195
 msgid "Gold Mine"
-msgstr ""
+msgstr "Mèinn òir"
 
 #: ../../tribes/atlanteans/conf:73
 msgid "Gold Ore"
-msgstr ""
+msgstr "Clach-òir"
 
 #: ../../tribes/atlanteans/conf:75
 msgid "Gold Yarn"
-msgstr ""
+msgstr "Snàth òir"
 
 #: ../../tribes/atlanteans/gold/conf:1
 msgid ""
@@ -383,66 +383,68 @@ msgstr ""
 msgid ""
 "Gold ores are mined in gold mines and processed to gold in smelting works."
 msgstr ""
+"Tochlaidh tu clachan-òir ann am mèinnean òir is nì thu òr dhiubh ann an "
+"ceàrdach leaghadair."
 
 #: ../../tribes/atlanteans/conf:72
 msgid "Golden Tabard"
-msgstr ""
+msgstr "Lèine òir"
 
 #: ../../tribes/atlanteans/conf:171
 msgid "Goldweaver"
-msgstr ""
+msgstr "Figheadair-òir"
 
 #: ../../tribes/atlanteans/conf:200
 msgid "Guardhall"
-msgstr ""
+msgstr "Talla-faire"
 
 #: ../../tribes/atlanteans/conf:199
 msgid "Guardhouse"
-msgstr ""
+msgstr "Bothan-faire"
 
 #: ../../tribes/atlanteans/conf:76
 msgid "Hammer"
-msgstr ""
+msgstr "Òrd"
 
 #: ../../tribes/atlanteans/blackroot_farm/conf:24
 msgid "Harvest blackroot"
-msgstr ""
+msgstr "Buain freumhagan"
 
 #: ../../tribes/atlanteans/farm/conf:26
 msgid "Harvest corn"
-msgstr ""
+msgstr "Buain coirce"
 
 #: ../../tribes/atlanteans/conf:163
 msgid "Headquarters"
-msgstr ""
+msgstr "Prìomh-àras"
 
 #: ../../tribes/atlanteans/scripting/sc00_headquarters_medium.lua:10
 msgid "Headquarters medium"
-msgstr ""
+msgstr "Prìomh-àras meadhanach"
 
 #: ../../tribes/atlanteans/conf:77
 msgid "Heavy Double Trident"
-msgstr ""
+msgstr "Muirgheadh dhùbailte throm"
 
 #: ../../tribes/atlanteans/conf:201
 msgid "High Tower"
-msgstr ""
+msgstr "Tùr àrd"
 
 #: ../../tribes/atlanteans/conf:78
 msgid "Hook pole"
-msgstr ""
+msgstr "Crann-greimiche"
 
 #: ../../tribes/atlanteans/conf:105
 msgid "Horse"
-msgstr ""
+msgstr "Each"
 
 #: ../../tribes/atlanteans/conf:136
 msgid "Horse Breeder"
-msgstr ""
+msgstr "Tàrmachair each"
 
 #: ../../tribes/atlanteans/conf:187
 msgid "Horse Farm"
-msgstr ""
+msgstr "Tuathanas each"
 
 #: ../../tribes/atlanteans/horse/conf:1
 msgid ""
@@ -452,27 +454,27 @@ msgstr ""
 
 #: ../../tribes/atlanteans/conf:122
 msgid "Hunter"
-msgstr ""
+msgstr "Sealgair"
 
 #: ../../tribes/atlanteans/conf:174
 msgid "Hunter's House"
-msgstr ""
+msgstr "Taigh-sealgair"
 
 #: ../../tribes/atlanteans/conf:79
 msgid "Hunting Bow"
-msgstr ""
+msgstr "Bogha seilg"
 
 #: ../../tribes/atlanteans/conf:81
 msgid "Iron"
-msgstr ""
+msgstr "Iarann"
 
 #: ../../tribes/atlanteans/conf:194
 msgid "Iron Mine"
-msgstr ""
+msgstr "Mèinn iarainn"
 
 #: ../../tribes/atlanteans/conf:80
 msgid "Iron Ore"
-msgstr ""
+msgstr "Clach-iarainn"
 
 #: ../../tribes/atlanteans/iron/conf:1
 msgid ""
@@ -488,19 +490,19 @@ msgstr ""
 
 #: ../../tribes/atlanteans/conf:209
 msgid "Labyrinth"
-msgstr ""
+msgstr "Cuartan"
 
 #: ../../tribes/atlanteans/conf:82
 msgid "Light trident"
-msgstr ""
+msgstr "Muirgheadh aotrom"
 
 #: ../../tribes/atlanteans/conf:83
 msgid "Long Trident"
-msgstr ""
+msgstr "Muirgheadh fhada"
 
 #: ../../tribes/atlanteans/conf:84
 msgid "Meat"
-msgstr ""
+msgstr "Feòil"
 
 #: ../../tribes/atlanteans/meat/conf:1
 msgid ""
@@ -511,7 +513,7 @@ msgstr ""
 
 #: ../../tribes/atlanteans/conf:85
 msgid "Milking Tongs"
-msgstr ""
+msgstr "Clobha bleoghainn"
 
 #: ../../tribes/atlanteans/milking_tongs/conf:1
 msgid ""
@@ -521,11 +523,11 @@ msgstr ""
 
 #: ../../tribes/atlanteans/conf:179
 msgid "Mill"
-msgstr ""
+msgstr "Muilleann"
 
 #: ../../tribes/atlanteans/conf:123
 msgid "Miller"
-msgstr ""
+msgstr "Muillear"
 
 #: ../../tribes/atlanteans/miller/conf:1
 msgid ""
@@ -535,11 +537,11 @@ msgstr ""
 
 #: ../../tribes/atlanteans/crystalmine/conf:29
 msgid "Mine diamond"
-msgstr ""
+msgstr "Tochail daoimeanan"
 
 #: ../../tribes/atlanteans/crystalmine/conf:28
 msgid "Mine quartz"
-msgstr ""
+msgstr "Tochail èiteagan"
 
 #: ../../tribes/atlanteans/crystalmine/conf:27
 msgid "Mine stone"
@@ -547,19 +549,19 @@ msgstr "Tochail clach"
 
 #: ../../tribes/atlanteans/conf:124
 msgid "Miner"
-msgstr ""
+msgstr "Mèinnear"
 
 #: ../../tribes/atlanteans/scripting/sc01_castle_village.lua:101
 msgid "Not enough space"
-msgstr ""
+msgstr "Chan eil rum gu leòr ann"
 
 #: ../../tribes/atlanteans/conf:159
 msgid "Outpost"
-msgstr ""
+msgstr "Gearastan"
 
 #: ../../tribes/atlanteans/conf:87
 msgid "Pick"
-msgstr ""
+msgstr "Piocaid"
 
 #: ../../tribes/atlanteans/pick/conf:1
 msgid ""
@@ -571,7 +573,7 @@ msgstr ""
 
 #: ../../tribes/atlanteans/conf:88
 msgid "Planks"
-msgstr ""
+msgstr "Bùird"
 
 #: ../../tribes/atlanteans/planks/conf:1
 msgid ""
@@ -586,205 +588,209 @@ msgstr ""
 
 #: ../../tribes/atlanteans/blackroot_farm/conf:22
 msgid "Plant blackroot"
-msgstr ""
+msgstr "Cuir freumhagan"
 
 #: ../../tribes/atlanteans/farm/conf:24
 msgid "Plant corn"
-msgstr ""
+msgstr "Cuir coirce"
 
 #: ../../tribes/atlanteans/blackroot_farmer/conf:1
 msgid "Plants and harvests blackroot."
-msgstr ""
+msgstr "Cuiridh is buainidh e freumhagan."
 
 #: ../../tribes/atlanteans/farmer/conf:1
 msgid "Plants fields."
-msgstr ""
+msgstr "Cuiridh e achaidhean."
 
 #: ../../tribes/atlanteans/forester/conf:1
 msgid "Plants trees."
-msgstr ""
+msgstr "Cuiridh e craobhan."
 
 #: ../../tribes/atlanteans/conf:165
 msgid "Port"
-msgstr ""
+msgstr "Port"
 
 #: ../../tribes/atlanteans/armoursmithy/conf:30
 msgid "Produce advanced shield"
-msgstr ""
+msgstr "Dèan sgiath adhartach"
 
 #: ../../tribes/atlanteans/armoursmithy/conf:31
 msgid ""
 "Produce advanced shield (only for compatibility with old savegames (build13))"
 msgstr ""
+"Dèan sgiath adhartach (airson co-chòrdalachd ri seann gheamaichean air an "
+"sàbhaladh (build13) a-mhàin)"
 
 #: ../../tribes/atlanteans/toolsmithy/conf:38
 msgid "Produce bakingtray"
-msgstr ""
+msgstr "Dèan treidhe-arain"
 
 #: ../../tribes/atlanteans/mill/conf:27
 msgid "Produce blackrootflour"
-msgstr ""
+msgstr "Dèan min-freumhaige"
 
 #: ../../tribes/atlanteans/toolsmithy/conf:44
 msgid "Produce bow"
-msgstr ""
+msgstr "Dèan bogha"
 
 #: ../../tribes/atlanteans/toolsmithy/conf:39
 msgid "Produce bucket"
-msgstr ""
+msgstr "Dèan peile"
 
 #: ../../tribes/atlanteans/mill/conf:26
 msgid "Produce cornflour"
-msgstr ""
+msgstr "Dèan min-coirce"
 
 #: ../../tribes/atlanteans/weaponsmithy/conf:36
 msgid "Produce double trident"
-msgstr ""
+msgstr "Dèan muirgheadh dhùbailte"
 
 #: ../../tribes/atlanteans/toolsmithy/conf:40
 msgid "Produce fire tongs"
-msgstr ""
+msgstr "Dèan clobha teine"
 
 #: ../../tribes/atlanteans/toolsmithy/conf:41
 msgid "Produce fishing net"
-msgstr ""
+msgstr "Dèan lìon-èisg"
 
 #: ../../tribes/atlanteans/weaving-mill/conf:26
 msgid "Produce golden tabard"
-msgstr ""
+msgstr "Dèan lèine òir"
 
 #: ../../tribes/atlanteans/toolsmithy/conf:42
 msgid "Produce hammer"
-msgstr ""
+msgstr "Dèan òrd"
 
 #: ../../tribes/atlanteans/weaponsmithy/conf:37
 msgid "Produce heavy double trident"
-msgstr ""
+msgstr "Dèan muirgheadh dhùbailte throm"
 
 #: ../../tribes/atlanteans/toolsmithy/conf:43
 msgid "Produce hook pole"
-msgstr ""
+msgstr "Dèan crann-greimiche"
 
 #: ../../tribes/atlanteans/weaponsmithy/conf:33
 msgid "Produce light trident"
-msgstr ""
+msgstr "Dèan muirgheadh aotrom"
 
 #: ../../tribes/atlanteans/weaponsmithy/conf:34
 msgid "Produce long trident"
-msgstr ""
+msgstr "Dèan muirgheadh fhada"
 
 #: ../../tribes/atlanteans/toolsmithy/conf:45
 msgid "Produce milking tongs"
-msgstr ""
+msgstr "Dèan clobha bleoghainn"
 
 #: ../../tribes/atlanteans/toolsmithy/conf:46
 msgid "Produce pick"
-msgstr ""
+msgstr "Dèan piocaid"
 
 #: ../../tribes/atlanteans/toolsmithy/conf:47
 msgid "Produce saw"
-msgstr ""
+msgstr "Dèan sàbh"
 
 #: ../../tribes/atlanteans/toolsmithy/conf:48
 msgid "Produce scythe"
-msgstr ""
+msgstr "Dèan fàl"
 
 #: ../../tribes/atlanteans/toolsmithy/conf:49
 msgid "Produce shovel"
-msgstr ""
+msgstr "Dèan sluasaid"
 
 #: ../../tribes/atlanteans/weaving-mill/conf:24
 msgid "Produce spidercloth"
-msgstr ""
+msgstr "Dèan clò damhain"
 
 #: ../../tribes/atlanteans/armoursmithy/conf:28
 msgid "Produce steel shield"
-msgstr ""
+msgstr "Dèan sgiath stàilinn"
 
 #: ../../tribes/atlanteans/armoursmithy/conf:29
 msgid ""
 "Produce steel shield (only for compatibility with old savegames (build13))"
 msgstr ""
+"Dèan sgiath stàilinn (airson co-chòrdalachd ri seann gheamaichean air an "
+"sàbhaladh (build13) a-mhàin)"
 
 #: ../../tribes/atlanteans/weaponsmithy/conf:35
 msgid "Produce steel trident"
-msgstr ""
+msgstr "Dèan muirgheadh stàilinn"
 
 #: ../../tribes/atlanteans/weaving-mill/conf:25
 msgid "Produce tabard"
-msgstr ""
+msgstr "Dèan lèine"
 
 #: ../../tribes/atlanteans/armoursmith/conf:1
 msgid "Produces armour for the soldiers."
-msgstr ""
+msgstr "Nì e armachd airson nan saighdearan."
 
 #: ../../tribes/atlanteans/weaver/conf:1
 msgid "Produces cloth for buildings, ships and soldiers."
-msgstr ""
+msgstr "Nì e clò airson togalaichean, longan is saighdearan."
 
 #: ../../tribes/atlanteans/toolsmith/conf:1
 msgid "Produces tools for the workers."
-msgstr ""
+msgstr "Nì e acainnean airson nan obraichean."
 
 #: ../../tribes/atlanteans/weaponsmith/conf:1
 msgid "Produces weapons for the soldiers."
-msgstr ""
+msgstr "Nì e airm airson nan saighdearan."
 
 #: ../../tribes/atlanteans/conf:168
 msgid "Quarry"
-msgstr ""
+msgstr "Coireall"
 
 #: ../../tribes/atlanteans/conf:86
 msgid "Quartz"
-msgstr ""
+msgstr "Èiteag"
 
 #: ../../tribes/atlanteans/conf:45
 msgid "Resource indicator coal little"
-msgstr ""
+msgstr "Taisbeanair-stòrasan – beagan guail"
 
 #: ../../tribes/atlanteans/conf:46
 msgid "Resource indicator coal much"
-msgstr ""
+msgstr "Taisbeanair-stòrasan – mòran guail"
 
 #: ../../tribes/atlanteans/conf:47
 msgid "Resource indicator gold little"
-msgstr ""
+msgstr "Taisbeanair-stòrasan – beagan òir"
 
 #: ../../tribes/atlanteans/conf:48
 msgid "Resource indicator gold much"
-msgstr ""
+msgstr "Taisbeanair-stòrasan – mòran òir"
 
 #: ../../tribes/atlanteans/conf:49
 msgid "Resource indicator granite little"
-msgstr ""
+msgstr "Taisbeanair-stòrasan – beagan graineil"
 
 #: ../../tribes/atlanteans/conf:50
 msgid "Resource indicator granite much"
-msgstr ""
+msgstr "Taisbeanair-stòrasan – mòran graineil"
 
 #: ../../tribes/atlanteans/conf:51
 msgid "Resource indicator iron little"
-msgstr ""
+msgstr "Taisbeanair-stòrasan – beagan iarainn"
 
 #: ../../tribes/atlanteans/conf:52
 msgid "Resource indicator iron much"
-msgstr ""
+msgstr "Taisbeanair-stòrasan – mòran iarainn"
 
 #: ../../tribes/atlanteans/conf:53
 msgid "Resource indicator no resource"
-msgstr ""
+msgstr "Taisbeanair-stòrasan – gun stòras"
 
 #: ../../tribes/atlanteans/conf:54
 msgid "Resource indicator water"
-msgstr ""
+msgstr "Taisbeanair-stòrasan – uisge"
 
 #: ../../tribes/atlanteans/conf:89
 msgid "Saw"
-msgstr ""
+msgstr "Sàbh"
 
 #: ../../tribes/atlanteans/conf:177
 msgid "Sawmill"
-msgstr ""
+msgstr "Muillean sàbhaidh"
 
 #: ../../tribes/atlanteans/sawyer/conf:1
 msgid "Saws the wood to produce planks."
@@ -792,15 +798,15 @@ msgstr ""
 
 #: ../../tribes/atlanteans/conf:125
 msgid "Sawyer"
-msgstr ""
+msgstr "Sàbhadair"
 
 #: ../../tribes/atlanteans/conf:135
 msgid "Scout"
-msgstr ""
+msgstr "Rabhadair"
 
 #: ../../tribes/atlanteans/conf:176
 msgid "Scout's House"
-msgstr ""
+msgstr "Taigh-rabhadair"
 
 #: ../../tribes/atlanteans/scout/conf:1
 msgid ""
@@ -809,32 +815,32 @@ msgstr ""
 
 #: ../../tribes/atlanteans/conf:90
 msgid "Scythe"
-msgstr ""
+msgstr "Fàl"
 
 #: ../../tribes/atlanteans/conf:152
 #: ../../tribes/atlanteans/conf:154
 msgid "Sentry"
-msgstr ""
+msgstr "Freiceadan"
 
 #: ../../tribes/atlanteans/conf:139
 msgid "Ship"
-msgstr ""
+msgstr "Long"
 
 #: ../../tribes/atlanteans/conf:55
 msgid "Ship construction site"
-msgstr ""
+msgstr "Làrach-togail luinge"
 
 #: ../../tribes/atlanteans/conf:116
 msgid "Shipwright"
-msgstr ""
+msgstr "Saor-luinge"
 
 #: ../../tribes/atlanteans/conf:180
 msgid "Shipyard"
-msgstr ""
+msgstr "Cala"
 
 #: ../../tribes/atlanteans/conf:91
 msgid "Shovel"
-msgstr ""
+msgstr "Sluasaid"
 
 #: ../../tribes/atlanteans/shovel/conf:1
 msgid ""
@@ -845,47 +851,47 @@ msgstr ""
 #: ../../tribes/atlanteans/dungeon/conf:39
 #: ../../tribes/atlanteans/labyrinth/conf:45
 msgid "Sleep"
-msgstr ""
+msgstr "'Na chadal"
 
 #: ../../tribes/atlanteans/conf:202
 msgid "Small Tower"
-msgstr ""
+msgstr "Tùr beag"
 
 #: ../../tribes/atlanteans/smelting_works/conf:27
 msgid "Smelt gold"
-msgstr ""
+msgstr "Òr air a leaghadh"
 
 #: ../../tribes/atlanteans/smelting_works/conf:26
 msgid "Smelt iron"
-msgstr ""
+msgstr "Iarann air a leaghadh"
 
 #: ../../tribes/atlanteans/conf:126
 msgid "Smelter"
-msgstr ""
+msgstr "Leaghadair"
 
 #: ../../tribes/atlanteans/conf:183
 msgid "Smelting Works"
-msgstr ""
+msgstr "Ceàrdach leaghadair"
 
 #: ../../tribes/atlanteans/smelter/conf:1
 msgid "Smelts iron."
-msgstr ""
+msgstr "Leaghaidh e iarann."
 
 #: ../../tribes/atlanteans/smokery/conf:29
 msgid "Smoke fish"
-msgstr ""
+msgstr "Toit iasg"
 
 #: ../../tribes/atlanteans/smokery/conf:28
 msgid "Smoke meat"
-msgstr ""
+msgstr "Toit feòil"
 
 #: ../../tribes/atlanteans/conf:92
 msgid "Smoked fish"
-msgstr ""
+msgstr "Iasg-rèiste"
 
 #: ../../tribes/atlanteans/conf:93
 msgid "Smoked meat"
-msgstr ""
+msgstr "Feòil-rèiste"
 
 #: ../../tribes/atlanteans/smoked_meat/conf:1
 msgid ""
@@ -896,19 +902,19 @@ msgstr ""
 
 #: ../../tribes/atlanteans/conf:127
 msgid "Smoker"
-msgstr ""
+msgstr "Toitear"
 
 #: ../../tribes/atlanteans/conf:178
 msgid "Smokery"
-msgstr ""
+msgstr "Taigh-toitidh"
 
 #: ../../tribes/atlanteans/smoker/conf:1
 msgid "Smokes meat and fish."
-msgstr ""
+msgstr "Toitidh e feòil is èisg."
 
 #: ../../tribes/atlanteans/conf:108
 msgid "Soldier"
-msgstr ""
+msgstr "Saighdear"
 
 #: ../../tribes/atlanteans/scripting/sc01_castle_village.lua:102
 msgid ""
@@ -919,11 +925,11 @@ msgstr ""
 
 #: ../../tribes/atlanteans/conf:128
 msgid "Spiderbreeder"
-msgstr ""
+msgstr "Tàrmachair dhamhan"
 
 #: ../../tribes/atlanteans/conf:94
 msgid "Spidercloth"
-msgstr ""
+msgstr "Clò damhain"
 
 #: ../../tribes/atlanteans/spidercloth/conf:1
 msgid ""
@@ -934,19 +940,19 @@ msgstr ""
 
 #: ../../tribes/atlanteans/conf:188
 msgid "Spiderfarm"
-msgstr ""
+msgstr "Tuathanas dhamhan"
 
 #: ../../tribes/atlanteans/conf:95
 msgid "Spideryarn"
-msgstr ""
+msgstr "Snàth damhain"
 
 #: ../../tribes/atlanteans/conf:96
 msgid "Steel Shield"
-msgstr ""
+msgstr "Sgiath stàilinn"
 
 #: ../../tribes/atlanteans/conf:97
 msgid "Steel Trident"
-msgstr ""
+msgstr "Muirgheadh stàilinn"
 
 #: ../../tribes/atlanteans/conf:98
 msgid "Stone"
@@ -966,11 +972,11 @@ msgstr "Tochailtear"
 
 #: ../../tribes/atlanteans/conf:153
 msgid "Stronghold"
-msgstr ""
+msgstr "Daingean"
 
 #: ../../tribes/atlanteans/conf:99
 msgid "Tabard"
-msgstr ""
+msgstr "Lèine"
 
 #: ../../tribes/atlanteans/coal/conf:1
 msgid ""
@@ -1125,28 +1131,28 @@ msgstr ""
 
 #: ../../tribes/atlanteans/conf:130
 msgid "Toolsmith"
-msgstr ""
+msgstr "Gobha acainnean"
 
 #: ../../tribes/atlanteans/conf:184
 msgid "Toolsmithy"
-msgstr ""
+msgstr "Ceàrdach acainnean"
 
 #: ../../tribes/atlanteans/conf:160
 #: ../../tribes/atlanteans/conf:203
 msgid "Tower"
-msgstr ""
+msgstr "Tùr"
 
 #: ../../tribes/atlanteans/conf:131
 msgid "Trainer"
-msgstr ""
+msgstr "Trèanair"
 
 #: ../../tribes/atlanteans/trainer/conf:1
 msgid "Trains the soldiers."
-msgstr ""
+msgstr "Trèanaidh e na saighdearan."
 
 #: ../../tribes/atlanteans/conf:100
 msgid "Trunk"
-msgstr ""
+msgstr "Stoc"
 
 #: ../../tribes/atlanteans/trunk/conf:1
 msgid ""
@@ -1157,99 +1163,117 @@ msgstr ""
 
 #: ../../tribes/atlanteans/dungeon/conf:40
 msgid "Upgrade soldier attack 0"
-msgstr ""
+msgstr "Àrdaich ionnsaigh an t-saighdeir 0"
 
 #: ../../tribes/atlanteans/dungeon/conf:41
 msgid ""
 "Upgrade soldier attack 0 (only for compatibility with old savegames "
 "(build13))"
 msgstr ""
+"Àrdaich ionnsaigh an t-saighdeir 0 (airson co-chòrdalachd ri seann "
+"gheamaichean air an sàbhaladh (build13) a-mhàin)"
 
 #: ../../tribes/atlanteans/dungeon/conf:42
 msgid "Upgrade soldier attack 1"
-msgstr ""
+msgstr "Àrdaich ionnsaigh an t-saighdeir 1"
 
 #: ../../tribes/atlanteans/dungeon/conf:43
 msgid ""
 "Upgrade soldier attack 1 (only for compatibility with old savegames "
 "(build13))"
 msgstr ""
+"Àrdaich ionnsaigh an t-saighdeir 1 (airson co-chòrdalachd ri seann "
+"gheamaichean air an sàbhaladh (build13) a-mhàin)"
 
 #: ../../tribes/atlanteans/dungeon/conf:44
 msgid "Upgrade soldier attack 2"
-msgstr ""
+msgstr "Àrdaich ionnsaigh an t-saighdeir 2"
 
 #: ../../tribes/atlanteans/dungeon/conf:45
 msgid ""
 "Upgrade soldier attack 2 (only for compatibility with old savegames "
 "(build13))"
 msgstr ""
+"Àrdaich ionnsaigh an t-saighdeir 2 (airson co-chòrdalachd ri seann "
+"gheamaichean air an sàbhaladh (build13) a-mhàin)"
 
 #: ../../tribes/atlanteans/dungeon/conf:46
 msgid "Upgrade soldier attack 3"
-msgstr ""
+msgstr "Àrdaich ionnsaigh an t-saighdeir 3"
 
 #: ../../tribes/atlanteans/dungeon/conf:47
 msgid ""
 "Upgrade soldier attack 3 (only for compatibility with old savegames "
 "(build13))"
 msgstr ""
+"Àrdaich ionnsaigh an t-saighdeir 3 (airson co-chòrdalachd ri seann "
+"gheamaichean air an sàbhaladh (build13) a-mhàin)"
 
 #: ../../tribes/atlanteans/labyrinth/conf:46
 msgid "Upgrade soldier defense 0"
-msgstr ""
+msgstr "Àrdaich dìon an t-saighdeir 0"
 
 #: ../../tribes/atlanteans/labyrinth/conf:47
 msgid ""
 "Upgrade soldier defense 0 (only for compatibility with old savegames "
 "(build13))"
 msgstr ""
+"Àrdaich dìon an t-saighdeir 0 (airson co-chòrdalachd ri seann gheamaichean "
+"air an sàbhaladh (build13) a-mhàin)"
 
 #: ../../tribes/atlanteans/labyrinth/conf:48
 msgid "Upgrade soldier defense 1"
-msgstr ""
+msgstr "Àrdaich dìon an t-saighdeir 1"
 
 #: ../../tribes/atlanteans/labyrinth/conf:49
 msgid ""
 "Upgrade soldier defense 1 (only for compatibility with old savegames "
 "(build13))"
 msgstr ""
+"Àrdaich dìon an t-saighdeir 1 (airson co-chòrdalachd ri seann gheamaichean "
+"air an sàbhaladh (build13) a-mhàin)"
 
 #: ../../tribes/atlanteans/labyrinth/conf:52
 msgid "Upgrade soldier evade 0"
-msgstr ""
+msgstr "Àrdaich teàrnadh an t-saighdeir 0"
 
 #: ../../tribes/atlanteans/labyrinth/conf:53
 msgid ""
 "Upgrade soldier evade 0 (only for compatibility with old savegames (build13))"
 msgstr ""
+"Àrdaich teàrnadh an t-saighdeir 0 (airson co-chòrdalachd ri seann "
+"gheamaichean air an sàbhaladh (build13) a-mhàin)"
 
 #: ../../tribes/atlanteans/labyrinth/conf:54
 msgid "Upgrade soldier evade 1"
-msgstr ""
+msgstr "Àrdaich teàrnadh an t-saighdeir 1"
 
 #: ../../tribes/atlanteans/labyrinth/conf:55
 msgid ""
 "Upgrade soldier evade 1 (only for compatibility with old savegames (build13))"
 msgstr ""
+"Àrdaich teàrnadh an t-saighdeir 1 (airson co-chòrdalachd ri seann "
+"gheamaichean air an sàbhaladh (build13) a-mhàin)"
 
 #: ../../tribes/atlanteans/labyrinth/conf:50
 msgid "Upgrade soldier hitpoints 0"
-msgstr ""
+msgstr "Àrdaich puingean-beatha an t-saighdeir 0"
 
 #: ../../tribes/atlanteans/labyrinth/conf:51
 msgid ""
 "Upgrade soldier hitpoints 0 (only for compatibility with old savegames "
 "(build13))"
 msgstr ""
+"Àrdaich puingean-beatha an t-saighdeir 0 (airson co-chòrdalachd ri seann "
+"gheamaichean air an sàbhaladh (build13) a-mhàin)"
 
 #: ../../tribes/atlanteans/conf:164
 msgid "Warehouse"
-msgstr ""
+msgstr "Taigh-stòrais"
 
 #: ../../tribes/atlanteans/conf:101
 msgid "Water"
-msgstr ""
+msgstr "Uisge"
 
 #: ../../tribes/atlanteans/water/conf:1
 msgid ""
@@ -1259,31 +1283,31 @@ msgstr ""
 
 #: ../../tribes/atlanteans/conf:185
 msgid "Weapon Smithy"
-msgstr ""
+msgstr "Ceàrdach arm"
 
 #: ../../tribes/atlanteans/conf:132
 msgid "Weaponsmith"
-msgstr ""
+msgstr "Gobha arm"
 
 #: ../../tribes/atlanteans/conf:133
 msgid "Weaver"
-msgstr ""
+msgstr "Figheadair"
 
 #: ../../tribes/atlanteans/conf:189
 msgid "Weaving-Mill"
-msgstr ""
+msgstr "Taigh nam beart"
 
 #: ../../tribes/atlanteans/conf:175
 msgid "Well"
-msgstr ""
+msgstr "Tobar"
 
 #: ../../tribes/atlanteans/conf:134
 msgid "Woodcutter"
-msgstr ""
+msgstr "Buaineadair-fiodha"
 
 #: ../../tribes/atlanteans/conf:169
 msgid "Woodcutter's House"
-msgstr ""
+msgstr "Taigh buaineadair-fhiodha"
 
 #: ../../tribes/atlanteans/armoursmithy/conf:32
 #: ../../tribes/atlanteans/bakery/conf:25
@@ -1314,16 +1338,17 @@ msgstr ""
 #: ../../tribes/atlanteans/well/conf:17
 #: ../../tribes/atlanteans/woodcutters_house/conf:20
 msgid "Work"
-msgstr ""
+msgstr "Obair"
 
 #: ../../tribes/atlanteans/builder/conf:1
 msgid "Works at construction sites to create a new building."
-msgstr ""
+msgstr "Obraichidh e aig làraichean-thogail gus togalach ur a chruthachadh."
 
 #: ../../tribes/atlanteans/shipwright/conf:1
 msgid "Works at the shipyard and constructs new ships."
-msgstr ""
+msgstr "Obraichidh e aig a' chala is togaidh e longan ùra."
 
 #: ../../tribes/atlanteans/miner/conf:1
 msgid "Works deep in the mines to produce coal, iron or gold."
 msgstr ""
+"Obraichidh e sìos sna mèinnean gus gual, iarrann no òr a shaothrachadh."
