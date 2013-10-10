@@ -174,6 +174,7 @@ void Fleet::find_other_fleet(Editor_Game_Base & egbase)
 
 			if (upcast(Ship, ship, bob)) {
 				if (ship->get_fleet() != this && ship->get_owner() == get_owner()) {
+					// NOCOM(#sirver): fleet could be zero here if this is an expedition.
 					ship->get_fleet()->merge(egbase, this);
 					return;
 				}

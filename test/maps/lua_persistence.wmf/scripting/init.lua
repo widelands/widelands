@@ -3,12 +3,10 @@
 -- =======================================================================
 -- This tests saving and loading of various Lua objects in the global
 -- environment.
---
--- To run this test, go to the top level directory, set the path to your
--- widelands binary and run:
---
--- $PATH_TO_WIDELANDS_BINARY --datadir="." --nozip --scenario=test/lua/persistence.wmf && \
---   $PATH_TO_WIDELANDS_BINARY --datadir="." --loadgame=~/.widelands/save/lua_persistence.wgf
+
+use("aux", "lunit")
+lunit.import "assertions"
+
 
 -- ====================
 -- Test Data to persist
@@ -67,11 +65,6 @@ end
 function check_coroutine()
    -- Sleep till the save routine has done its job.
    coroutine.yield(wl.Game().time + 2000)
-
-   -- Attention, lunit contains code that can not be persisted (c functions),
-   -- so it must be imported after reload.
-   use("aux", "lunit")
-   lunit.import "assertions"
 
    print("###################### CHECKING FOR CORRECT PERSISTENCE")
    assert_equal("SirVer", my_name)

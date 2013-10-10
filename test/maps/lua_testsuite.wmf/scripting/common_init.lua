@@ -15,5 +15,3 @@ end
 function use_test:test_use_invalid_ns()
    assert_error("not existant", function() use("thisdoesntexist", "init") end)
 end
-
-

@@ -130,6 +130,9 @@ static void m_add_iterator_function_to_not_unpersist
  * ========================================================================
  */
 
+// Those are the globals that will be regenerated (not by the persistence engine),
+// e.g. C-functions or automatically populated fields. Changing the ordering here will
+// break safe game compatibility.
 static const char * m_persistent_globals[] = {
 	"_VERSION", "assert", "collectgarbage", "coroutine", "debug",
 	"dofile", "error", "gcinfo", "getfenv", "getmetatable", "io", "ipairs",

@@ -49,11 +49,11 @@ local string = string
 local table = table
 local pcall = pcall
 local xpcall = xpcall
-local traceback = debug.traceback
+local debug = debug
+local assert = assert
 local error = error
 local setmetatable = setmetatable
 local rawset = rawset
-local orig_assert = assert
 local getfenv = getfenv
 local setfenv = setfenv
 local tostring = tostring
@@ -120,14 +120,6 @@ end
 ----------------------
 -- Assert functions --
 ----------------------
-
-function assert(assertion, msg)
-  stats_inc("assertions")
-  check_msg("assert", msg)
-  do_assert(not not assertion, "assertion failed (was: "..tostring(assertion)..")", msg)		-- (convert assertion to bool)
-  return assertion
-end
-
 
 function assert_fail(msg)
   stats_inc("assertions")
@@ -345,9 +337,9 @@ end
 -----------------------------------------------------------
 
 function do_assert(assertion, base_msg, user_msg)
-  orig_assert(is_boolean(assertion))
-  orig_assert(is_string(base_msg))
-  orig_assert(is_string(user_msg) or is_nil(user_msg))
+  assert(is_boolean(assertion))
+  assert(is_string(base_msg))
+  assert(is_string(user_msg) or is_nil(user_msg))
   if not assertion then
     if user_msg then
       error(base_msg..": "..user_msg, 3)
@@ -362,7 +354,7 @@ end
 -------------------------------------------
 
 function check_msg(name, msg)
-  orig_assert(is_string(name))
+  assert(is_string(name))
   if not (is_nil(msg) or is_string(msg)) then
     error("lunit."..name.."() expects the optional message as a string but it was a "..type(msg).."!" ,3)
   end
@@ -506,20 +498,20 @@ end
 
 function run_testcase(tc)
 
-  orig_assert(is_table(tc))
-  orig_assert(is_table(tc.__lunit_tests))
-  orig_assert(is_string(tc.__lunit_name))
-  orig_assert(is_nil(tc.__lunit_setup) or is_function(tc.__lunit_setup))
-  orig_assert(is_nil(tc.__lunit_teardown) or is_function(tc.__lunit_teardown))
+  assert(is_table(tc))
+  assert(is_table(tc.__lunit_tests))
+  assert(is_string(tc.__lunit_name))
+  assert(is_nil(tc.__lunit_setup) or is_function(tc.__lunit_setup))
+  assert(is_nil(tc.__lunit_teardown) or is_function(tc.__lunit_teardown))
 
   --------------------------------------------
   -- Protected call to a Test Case function --
   --------------------------------------------
 
   local function call(errprefix, func)
-    orig_assert(is_string(errprefix))
-    orig_assert(is_function(func))
-    local ok, errmsg = xpcall(function() func(tc) end, traceback)
+    assert(is_string(errprefix))
+    assert(is_function(func))
+    local ok, errmsg = xpcall(function() func(tc) end, debug.traceback)
     if not ok then
       print()
       print(errprefix..": "..errmsg)
@@ -544,8 +536,8 @@ function run_testcase(tc)
   ------------------------------------------
 
   local function run(testname)
-    orig_assert(is_string(testname))
-    orig_assert(is_function(tc[testname]))
+    assert(is_string(testname))
+    assert(is_function(tc[testname]))
     local ok = call("FAIL: "..testname, tc[testname])
     if not ok then
       stats_inc("failed")
@@ -676,13 +668,9 @@ end
 --------------------------------------------------
 
 function stats_inc(varname, value)
-  orig_assert(is_table(stats))
-  orig_assert(is_string(varname))
-  orig_assert(is_nil(value) or is_number(value))
+  assert(is_table(stats))
+  assert(is_string(varname))
+  assert(is_nil(value) or is_number(value))
   if not stats[varname] then return end
   stats[varname] = stats[varname] + (value or 1)
 end
-
-
-
-
