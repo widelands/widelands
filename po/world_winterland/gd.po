@@ -2,80 +2,81 @@
 # Copyright (c) 2013 Rosetta Contributors and Canonical Ltd 2013
 # This file is distributed under the same license as the widelands package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2013.
-#
+# GunChleoc <fios@foramnagaidhlig.net>, 2013.
 msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2013-09-15 17:41+0000\n"
-"PO-Revision-Date: 2013-10-08 08:19+0000\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: Gaelic; Scottish <gd@li.org>\n"
+"PO-Revision-Date: 2013-10-10 16:49+0000\n"
+"Last-Translator: GunChleoc <Unknown>\n"
+"Language-Team: Fòram na Gàidhlig http://www.foramnagaidhlig.net\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-10-09 05:12+0000\n"
+"X-Launchpad-Export-Date: 2013-10-11 04:35+0000\n"
 "X-Generator: Launchpad (build 16799)\n"
+"Language: gd\n"
 
 #: ../../worlds/winterland/conf:45
 msgid "Aspen"
-msgstr ""
+msgstr "Critheann"
 
 #: ../../worlds/winterland/conf:46
 msgid "Aspen medium"
-msgstr ""
+msgstr "Critheann meadhanach"
 
 #: ../../worlds/winterland/conf:47
 msgid "Aspen small"
-msgstr ""
+msgstr "Critheann beag"
 
 #: ../../worlds/winterland/conf:48
 msgid "Aspen tiny"
-msgstr ""
+msgstr "Critheann beag bìodach"
 
 #: ../../worlds/winterland/conf:79
 msgid "Badger"
-msgstr ""
+msgstr "Broc"
 
 #: ../../worlds/winterland/terrainconf:80
 msgid "Beach"
-msgstr ""
+msgstr "Traigh"
 
 #: ../../worlds/winterland/conf:65
 msgid "Beech"
-msgstr ""
+msgstr "Faidhbhile"
 
 #: ../../worlds/winterland/conf:66
 msgid "Beech medium"
-msgstr ""
+msgstr "Faidhbhile mheadhanach"
 
 #: ../../worlds/winterland/conf:67
 msgid "Beech small"
-msgstr ""
+msgstr "Faidhbhile bheag"
 
 #: ../../worlds/winterland/conf:68
 msgid "Beech tiny"
-msgstr ""
+msgstr "Faidhbhile bheag bhìodach"
 
 #: ../../worlds/winterland/conf:61
 msgid "Birch"
-msgstr ""
+msgstr "Beith"
 
 #: ../../worlds/winterland/conf:62
 msgid "Birch medium"
-msgstr ""
+msgstr "Beith mheadhanach"
 
 #: ../../worlds/winterland/conf:63
 msgid "Birch small"
-msgstr ""
+msgstr "Beith bheag"
 
 #: ../../worlds/winterland/conf:64
 msgid "Birch tiny"
-msgstr ""
+msgstr "Beith bheag bhìodach"
 
 #: ../../worlds/winterland/conf:80
 msgid "Bunny"
-msgstr ""
+msgstr "Coineanach"
 
 #: ../../worlds/winterland/conf:7
 #: ../../worlds/winterland/conf:8
@@ -83,149 +84,149 @@ msgstr ""
 #: ../../worlds/winterland/conf:10
 #: ../../worlds/winterland/conf:11
 msgid "Bush"
-msgstr ""
+msgstr "Preas"
 
 #: ../../worlds/winterland/resconf:4
 msgid "Coal"
-msgstr ""
+msgstr "Gual"
 
 #: ../../worlds/winterland/conf:12
 #: ../../worlds/winterland/conf:13
 #: ../../worlds/winterland/conf:14
 #: ../../worlds/winterland/conf:15
 msgid "Dead Tree"
-msgstr ""
+msgstr "Craobh mharbh"
 
 #: ../../worlds/winterland/conf:81
 msgid "Deer"
-msgstr ""
+msgstr "Fiadh"
 
 #: ../../worlds/winterland/conf:82
 msgid "Duck"
-msgstr ""
+msgstr "Tunnag"
 
 #: ../../worlds/winterland/conf:83
 msgid "Elk"
-msgstr ""
+msgstr "Lon"
 
 #: ../../worlds/winterland/resconf:41
 msgid "Fish"
-msgstr ""
+msgstr "Iasg"
 
 #: ../../worlds/winterland/conf:84
 msgid "Fox"
-msgstr ""
+msgstr "Sionnach"
 
 #: ../../worlds/winterland/resconf:12
 msgid "Gold"
-msgstr ""
+msgstr "Òr"
 
 #: ../../worlds/winterland/resconf:28
 msgid "Granite"
-msgstr ""
+msgstr "Graineal"
 
 #: ../../worlds/winterland/conf:16
 #: ../../worlds/winterland/conf:17
 #: ../../worlds/winterland/conf:18
 msgid "Grass"
-msgstr ""
+msgstr "Feur"
 
 #: ../../worlds/winterland/terrainconf:31
 msgid "Ice"
-msgstr ""
+msgstr "Deigh"
 
 #: ../../worlds/winterland/terrainconf:19
 msgid "Ice flows"
-msgstr ""
+msgstr "Clàran-deighe"
 
 #: ../../worlds/winterland/terrainconf:25
 msgid "Ice flows2"
-msgstr ""
+msgstr "Clàran-deighe 2"
 
 #: ../../worlds/winterland/resconf:20
 msgid "Iron"
-msgstr ""
+msgstr "Iarann"
 
 #: ../../worlds/winterland/conf:69
 msgid "Larch"
-msgstr ""
+msgstr "Learag"
 
 #: ../../worlds/winterland/conf:70
 msgid "Larch medium"
-msgstr ""
+msgstr "Learag mheadhanach"
 
 #: ../../worlds/winterland/conf:71
 msgid "Larch small"
-msgstr ""
+msgstr "Learag bheag"
 
 #: ../../worlds/winterland/conf:72
 msgid "Larch tiny"
-msgstr ""
+msgstr "Learag bheag bhìodach"
 
 #: ../../worlds/winterland/terrainconf:91
 msgid "Lava"
-msgstr ""
+msgstr "Làbha"
 
 #: ../../worlds/winterland/conf:85
 msgid "Lynx"
-msgstr ""
+msgstr "Lincs"
 
 #: ../../worlds/winterland/conf:57
 msgid "Maple"
-msgstr ""
+msgstr "Malpas"
 
 #: ../../worlds/winterland/conf:58
 msgid "Maple medium"
-msgstr ""
+msgstr "Malpas meadhanach"
 
 #: ../../worlds/winterland/conf:59
 msgid "Maple small"
-msgstr ""
+msgstr "Malpas beag"
 
 #: ../../worlds/winterland/conf:60
 msgid "Maple tiny"
-msgstr ""
+msgstr "Malpas beag bìodach"
 
 #: ../../worlds/winterland/conf:86
 msgid "Marten"
-msgstr ""
+msgstr "Taghan"
 
 #: ../../worlds/winterland/terrainconf:13
 msgid "Mountain1"
-msgstr ""
+msgstr "Beinn 1"
 
 #: ../../worlds/winterland/terrainconf:62
 msgid "Mountain2"
-msgstr ""
+msgstr "Beinn 2"
 
 #: ../../worlds/winterland/terrainconf:68
 msgid "Mountain3"
-msgstr ""
+msgstr "Beinn 3"
 
 #: ../../worlds/winterland/terrainconf:74
 msgid "Mountain4"
-msgstr ""
+msgstr "Beinn 4"
 
 #: ../../worlds/winterland/conf:19
 #: ../../worlds/winterland/conf:20
 msgid "Mushroom"
-msgstr ""
+msgstr "Balgan-buachair"
 
 #: ../../worlds/winterland/conf:49
 msgid "Oak"
-msgstr ""
+msgstr "Darach"
 
 #: ../../worlds/winterland/conf:50
 msgid "Oak medium"
-msgstr ""
+msgstr "Darach meadhanach"
 
 #: ../../worlds/winterland/conf:51
 msgid "Oak small"
-msgstr ""
+msgstr "Darach beag"
 
 #: ../../worlds/winterland/conf:52
 msgid "Oak tiny"
-msgstr ""
+msgstr "Darach beag bìodach"
 
 #: ../../worlds/winterland/conf:21
 #: ../../worlds/winterland/conf:22
@@ -234,61 +235,61 @@ msgstr ""
 #: ../../worlds/winterland/conf:25
 #: ../../worlds/winterland/conf:26
 msgid "Pebble"
-msgstr ""
+msgstr "Morghan"
 
 #: ../../worlds/winterland/conf:87
 msgid "Reindeer"
-msgstr ""
+msgstr "Fast"
 
 #: ../../worlds/winterland/conf:73
 msgid "Rowan"
-msgstr ""
+msgstr "Caorann"
 
 #: ../../worlds/winterland/conf:74
 msgid "Rowan medium"
-msgstr ""
+msgstr "Caorann meadhanach"
 
 #: ../../worlds/winterland/conf:75
 msgid "Rowan small"
-msgstr ""
+msgstr "Caorann beag"
 
 #: ../../worlds/winterland/conf:76
 msgid "Rowan tiny"
-msgstr ""
+msgstr "Caorann bìodach"
 
 #: ../../worlds/winterland/conf:88
 msgid "Sheep"
-msgstr ""
+msgstr "Caora"
 
 #: ../../worlds/winterland/conf:27
 #: ../../worlds/winterland/conf:28
 #: ../../worlds/winterland/conf:29
 msgid "Skeleton"
-msgstr ""
+msgstr "Cnàimhneach"
 
 #: ../../worlds/winterland/terrainconf:96
 msgid "Snow"
-msgstr ""
+msgstr "Sneachd"
 
 #: ../../worlds/winterland/conf:30
 msgid "Snowman"
-msgstr ""
+msgstr "Bodach-sneachda"
 
 #: ../../worlds/winterland/conf:53
 msgid "Spruce"
-msgstr ""
+msgstr "Giuthas"
 
 #: ../../worlds/winterland/conf:54
 msgid "Spruce medium"
-msgstr ""
+msgstr "Giuthas meadhanach"
 
 #: ../../worlds/winterland/conf:55
 msgid "Spruce small"
-msgstr ""
+msgstr "Giuthas beag"
 
 #: ../../worlds/winterland/conf:56
 msgid "Spruce tiny"
-msgstr ""
+msgstr "Giuthas beag bìodach"
 
 #: ../../worlds/winterland/conf:31
 #: ../../worlds/winterland/conf:32
@@ -298,7 +299,7 @@ msgstr ""
 #: ../../worlds/winterland/conf:36
 #: ../../worlds/winterland/conf:37
 msgid "Standing Stones"
-msgstr ""
+msgstr "Tursachan"
 
 #: ../../worlds/winterland/conf:38
 #: ../../worlds/winterland/conf:39
@@ -307,7 +308,7 @@ msgstr ""
 #: ../../worlds/winterland/conf:42
 #: ../../worlds/winterland/conf:43
 msgid "Stones"
-msgstr ""
+msgstr "Clachan"
 
 #: ../../worlds/winterland/terrainconf:85
 msgid "Taiga"
@@ -315,21 +316,23 @@ msgstr ""
 
 #: ../../worlds/winterland/conf:2
 msgid "The Widelands Development Team"
-msgstr ""
+msgstr "An sgioba leasachaidh Widelands"
 
 #: ../../worlds/winterland/conf:4
 msgid ""
 "These are the white, wide and frosty winterlands, in which the Northmen "
 "dwell."
 msgstr ""
+"Seo dùthaich gheamhraidh fharsaing fhuar bhàn sa bheil na Lochlannaich a' "
+"fuireach."
 
 #: ../../worlds/winterland/conf:44
 msgid "Track"
-msgstr ""
+msgstr "Slighe"
 
 #: ../../worlds/winterland/terrainconf:7
 msgid "Tundra"
-msgstr ""
+msgstr "Tundra"
 
 #: ../../worlds/winterland/terrainconf:44
 msgid "Tundra taiga"
@@ -337,25 +340,25 @@ msgstr ""
 
 #: ../../worlds/winterland/terrainconf:50
 msgid "Tundra2"
-msgstr ""
+msgstr "Tundra 2"
 
 #: ../../worlds/winterland/terrainconf:56
 msgid "Tundra3"
-msgstr ""
+msgstr "Tundra 3"
 
 #: ../../worlds/winterland/resconf:36
 #: ../../worlds/winterland/terrainconf:37
 msgid "Water"
-msgstr ""
+msgstr "Uisge"
 
 #: ../../worlds/winterland/conf:3
 msgid "Winterland"
-msgstr ""
+msgstr "Tìr geamhraidh"
 
 #: ../../worlds/winterland/conf:89
 msgid "Wisent"
-msgstr ""
+msgstr "Tarbh-allaidh"
 
 #: ../../worlds/winterland/conf:90
 msgid "Wolf"
-msgstr ""
+msgstr "Madadh-allaidh"

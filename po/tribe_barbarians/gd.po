@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2013-09-15 17:41+0000\n"
-"PO-Revision-Date: 2013-10-09 20:28+0000\n"
+"PO-Revision-Date: 2013-10-10 14:37+0000\n"
 "Last-Translator: GunChleoc <Unknown>\n"
 "Language-Team: Fòram na Gàidhlig http://www.foramnagaidhlig.net\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-10-10 04:33+0000\n"
+"X-Launchpad-Export-Date: 2013-10-11 04:34+0000\n"
 "X-Generator: Launchpad (build 16799)\n"
 "Language: gd\n"
 
@@ -196,7 +196,7 @@ msgstr "%s o thaigh-òil"
 #: ../../tribes/barbarians/axefactory/help.lua:26
 #: ../../tribes/barbarians/lime_kiln/help.lua:26
 msgid "%s from the Coal mine or the Charcoal Burner's House"
-msgstr "%s on mhèinn guail no seada gual-fhiodha"
+msgstr "%s on mhèinn guail no sloc gual-fhiodha"
 
 #: ../../tribes/barbarians/metalworks/help.lua:26
 msgid "%s from the Lumberjack's hut"
@@ -671,7 +671,7 @@ msgstr "Tuathanas crodh"
 #: ../../tribes/barbarians/conf:198
 #: ../../tribes/barbarians/lumberjacks_hut/help.lua:28
 msgid "Charcoal Burner's House"
-msgstr "Seada gual-fhiodha"
+msgstr "Sloc gual-fhiodha"
 
 #: ../../tribes/barbarians/trainingscamp/help.lua:13
 msgid "Chief Chat'Karuth in a speech to his army."
@@ -746,7 +746,7 @@ msgstr "Gual"
 
 #: ../../tribes/barbarians/warmill/help.lua:27
 msgid "Coal from the Coal mine or the Charcoal Burner's House"
-msgstr "Gual on mhèinn guail no seada gual-fhiodha"
+msgstr "Gual on mhèinn guail no sloc gual-fhiodha"
 
 #: ../../tribes/barbarians/coalmine/help.lua:17
 #: ../../tribes/barbarians/conf:211
@@ -838,7 +838,7 @@ msgstr "A' chosgais tionalach:"
 #: ../../tribes/barbarians/warmill/help.lua:57
 #: ../../tribes/barbarians/well/help.lua:41
 msgid "Crew required:"
-msgstr "Feum air sgioba:"
+msgstr "Sgioba riatanach:"
 
 #: ../../tribes/barbarians/stonemason/conf:1
 msgid "Cuts raw pieces of granite out of laying stones."
@@ -1624,7 +1624,7 @@ msgstr "Sàr-mhèinnear"
 #: ../../tribes/barbarians/deeper_goldmine/help.lua:25
 #: ../../tribes/barbarians/deeper_oremine/help.lua:25
 msgid "Meal"
-msgstr "Biadh"
+msgstr "Mias"
 
 #: ../../tribes/barbarians/battlearena/help.lua:29
 #: ../../tribes/barbarians/conf:96
@@ -1890,7 +1890,7 @@ msgstr "Dèan aghaidh-choimheach"
 
 #: ../../tribes/barbarians/big_inn/conf:29
 msgid "Produce meal"
-msgstr "Dèan biadh"
+msgstr "Dèan mias"
 
 #: ../../tribes/barbarians/metalworks/conf:44
 msgid "Produce pick"
@@ -1930,24 +1930,24 @@ msgstr "Dèan tuagh-ghaisgich"
 
 #: ../../tribes/barbarians/weaver/conf:1
 msgid "Produces cloth for ships and soldiers."
-msgstr "Nì seo clò airson longan is saighdearan."
+msgstr "Nì e clò airson longan is saighdearan."
 
 #: ../../tribes/barbarians/innkeeper/conf:1
 msgid "Produces food for miners."
-msgstr "Nì seo biadh airson mèinnearan."
+msgstr "Nì e biadh airson mèinnearan."
 
 #: ../../tribes/barbarians/brewer/conf:1
 #: ../../tribes/barbarians/master-brewer/conf:1
 msgid ""
 "Produces the finest ales to keep warriors strong and happy in training."
 msgstr ""
-"Nì seo na leannan as fhearr ach am bi na gaisgich làidir toilichte fhad 's a "
+"Nì e na leannan as fhearr ach am bi na gaisgich làidir toilichte fhad 's a "
 "bhios iad a' trèanadh."
 
 #: ../../tribes/barbarians/blacksmith/conf:1
 #: ../../tribes/barbarians/master-blacksmith/conf:1
 msgid "Produces weapons for soldiers and tools for workers."
-msgstr "Nì seo airm airson saighdearan is acainnean airson obraichean."
+msgstr "Nì e airm airson saighdearan is acainnean airson obraichean."
 
 #: ../../tribes/barbarians/axefactory/help.lua:62
 #: ../../tribes/barbarians/bakery/help.lua:54
@@ -2032,7 +2032,7 @@ msgid ""
 "Ragnald the Child's answer to the question, what he's doing in the dirt. His "
 "\"new stone\" now is an important building material."
 msgstr ""
-"Seo na dh'fhreagair e do Raghnall Beag nuair a dh'fhaighnich e na bhiodh e "
+"Seo na dh'fhreagair e do Ragnald Beag nuair a dh'fhaighnich e na bhiodh e "
 "ris san t-salchair. 'S e stuth togail cudromach a th' anns a' \"chlach ùr\" "
 "aige a-nis."
 
@@ -2219,7 +2219,7 @@ msgstr "Rabhadair"
 
 #: ../../tribes/barbarians/conf:188
 msgid "Scout's Hut"
-msgstr "Taigh-rabhadair"
+msgstr "Bothan-rabhadair"
 
 #: ../../tribes/barbarians/scout/conf:1
 msgid ""
@@ -2881,7 +2881,7 @@ msgstr "Trèanaidh seo saighdearan ann an teàrnadh suas gu leibheil 2."
 
 #: ../../tribes/barbarians/trainer/conf:1
 msgid "Trains the soldiers."
-msgstr "Trèanaidh seo na saighdearan."
+msgstr "Trèanaidh e na saighdearan."
 
 #: ../../tribes/barbarians/axefactory/help.lua:39
 #: ../../tribes/barbarians/axefactory/help.lua:45
@@ -3335,7 +3335,7 @@ msgstr "Obair"
 #: ../../tribes/barbarians/trainingscamp/help.lua:57
 #: ../../tribes/barbarians/well/help.lua:43
 msgid "Worker uses:"
-msgstr "Cleachdaidh an t-obraiche:"
+msgstr "Acainn:"
 
 #: ../../tribes/barbarians/axefactory/help.lua:54
 #: ../../tribes/barbarians/bakery/help.lua:48
