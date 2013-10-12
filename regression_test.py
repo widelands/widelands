@@ -5,6 +5,7 @@ from glob import glob
 import argparse
 import os
 import re
+import sys
 import unittest
 
 import test
@@ -62,7 +63,7 @@ def main():
     test_loader = unittest.TestLoader()
     all_tests = test_loader.loadTestsFromNames(all_modules)
 
-    unittest.TextTestRunner(verbosity=2).run(all_tests)
+    return unittest.TextTestRunner(verbosity=2).run(all_tests).wasSuccessful()
 
 if __name__ == '__main__':
-    main()
+    sys.exit(0 if main() else 1)
