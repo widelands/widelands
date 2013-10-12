@@ -68,7 +68,8 @@ second_ship = nil
 function stable_save(safename)
    local old_speed = game.desired_speed
    game:save(safename)
-   sleep(1000)
+   game.desired_speed = 1000
+   sleep(8000)  -- Give the loaded game a chance to catch up
    game.desired_speed = old_speed
 end
 
@@ -221,7 +222,7 @@ run(function()
 
    -- Give the tests that load this game some time to pass too.
    game.desired_speed = 1000 * 1000
-   sleep(30 * minutes)
+   sleep(60 * minutes)
 
    wl.ui.MapView():close()
 end)

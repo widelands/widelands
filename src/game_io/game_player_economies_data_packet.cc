@@ -108,9 +108,8 @@ void Game_Player_Economies_Data_Packet::Write
 		container_iterate_const(Player::Economies, economies, i) {
 			bool wrote_this_economy = false;
 
-			// Walk the map so that we find a representant.
-			for (Field const * field = &field_0;; ++field) {
-				assert(field < &map[map.max_index()]); //  should never reach end
+			// Walk the map so that we find a representative Flag.
+			for (Field const * field = &field_0; field < &map[map.max_index()]; ++field) {
 				if (upcast(Flag const, flag, field->get_immovable())) {
 					if (flag->get_economy() == *i.current) {
 						fw.Map_Index32(field - &field_0);
@@ -120,30 +119,35 @@ void Game_Player_Economies_Data_Packet::Write
 						wrote_this_economy = true;
 						break;
 					}
-				} else {
-					// Expeditions ships are special and have their own economy
-					// (which will not have a flag), therefore we have to special
-					// case them.
-					// TODO(sirver): the 0xffffffff is ugly and the worker(s) on the
-					// expedition ship aren not properly put back into the economy,
-					// because they do not show up in stock untill the expedition is
-					// finishs.
+				}
+			}
+			if (wrote_this_economy)
+				continue;
+
+			// No flag found, let's look for a representative Ship. Expeditions
+			// ships are special and have their own economy (which will not have a
+			// flag), therefore we have to special case them.
+			for (Field const* field = &field_0; field < &map[map.max_index()]; ++field) {
 					Bob* bob = field->get_first_bob();
 					while (bob) {
 						if (upcast(Ship const, ship, bob)) {
-							fw.Unsigned32(0xffffffff);  // Sentinel value.
-							fw.Map_Index32(field - &field_0);
+							if (ship->get_economy() == *i.current) {
+								// TODO(sirver): the 0xffffffff is ugly and fragile.
+								fw.Unsigned32(0xffffffff); // Sentinel value.
+								fw.Map_Index32(field - &field_0);
 
-							EconomyDataPacket d(ship->get_economy());
-							d.Write(fw);
-							wrote_this_economy = true;
+								EconomyDataPacket d(ship->get_economy());
+								d.Write(fw);
+								wrote_this_economy = true;
+							}
 						}
 						bob = bob->get_next_bob();
 					}
 				}
-				if (wrote_this_economy)
-					break;
-			}
+
+			// If we have not written this economy, it has no ship and no flag
+			// associated. It should not exist.
+			assert(wrote_this_economy);
 		}
 	}
 
