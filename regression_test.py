@@ -22,6 +22,9 @@ def parse_args():
         "if you want to run a test more often than once and not reopen stdout.txt "
         "in your editor."
     )
+    p.add_argument("-k", "--keep-around", action="store_true", default = False,
+        help = "Keep the output files around even when a test terminates successfully."
+    )
     p.add_argument("-b", "--binary", type=str,
         help = "Run this binary as Widelands. Otherwise some default paths are searched."
     )
@@ -48,6 +51,7 @@ def main():
     test.WidelandsTestCase.path_to_widelands_binary = args.binary
     print "Using '%s' binary." % args.binary
     test.WidelandsTestCase.do_use_random_directory = not args.nonrandom
+    test.WidelandsTestCase.keep_output_around = args.keep_around
 
     all_files = [os.path.basename(filename) for filename in glob("test/test_*.py") ]
     if args.regexp:

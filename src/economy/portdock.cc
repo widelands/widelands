@@ -311,23 +311,18 @@ void PortDock::ship_arrived(Game & game, Ship & ship)
 	if (m_expedition_ready) {
 		assert(m_expedition_bootstrap.get() != nullptr);
 
+		// Only use an empty ship.
 		if (ship.get_nritems() < 1) {
 			// Load the ship
 			std::vector<Worker*> workers;
 			std::vector<WareInstance*> wares;
 			m_expedition_bootstrap->get_waiting_workers_and_wares(game, owner().tribe(), &workers, &wares);
 
-			std::vector<ShippingItem> shipping_items;
 			BOOST_FOREACH(Worker* worker, workers) {
-				shipping_items.push_back(ShippingItem(*worker));
+				ship.add_item(game, ShippingItem(*worker));
 			}
 			BOOST_FOREACH(WareInstance* ware, wares) {
-				shipping_items.push_back(ShippingItem(*ware));
-			}
-
-			while (!shipping_items.empty()) {
-				ship.add_item(game, shipping_items.back());
-				shipping_items.pop_back();
+				ship.add_item(game, ShippingItem(*ware));
 			}
 
 			ship.start_task_expedition(game);

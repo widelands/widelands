@@ -214,7 +214,7 @@ int L_Game::launch_coroutine(lua_State * L) {
 		:returns: :const:`nil`
 */
 int L_Game::save(lua_State * L) {
-	std::string filename = luaL_checkstring(L, -1);
+	const std::string filename = luaL_checkstring(L, -1);
 	get_game(L).save_handler().request_save(filename);
 
 	return 0;

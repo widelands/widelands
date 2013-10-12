@@ -67,6 +67,7 @@ void Game_Player_Economies_Data_Packet::Read
 							Bob* bob = map[fr.Map_Index32(max_index)].get_first_bob();
 							while (bob) {
 								if (upcast(Ship const, ship, bob)) {
+									assert(ship->get_economy());
 									EconomyDataPacket d(ship->get_economy());
 									d.Read(fr);
 									read_this_economy = true;

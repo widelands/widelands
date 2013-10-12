@@ -1209,7 +1209,7 @@ void Worker::cleanup(Editor_Game_Base & egbase)
 	if (get_location(egbase))
 		set_location(0);
 
-	assert(!get_economy());
+	set_economy(nullptr);
 
 	Bob::cleanup(egbase);
 }
@@ -3009,16 +3009,17 @@ void Worker::Loader::load_finish()
 {
 	Bob::Loader::load_finish();
 
-	// it's not entirely clear whether this is the best place to put this code,
-	// keep an open mind once player immovables are also handled via the new
-	// save code
 	Worker & worker = get<Worker>();
-	Economy * economy = 0;
-	if (PlayerImmovable * const location = worker.m_location.get(egbase()))
-		economy = location->get_economy();
-	worker.set_economy(economy);
-	if (WareInstance * const carried_item = worker.m_carried_item.get(egbase()))
-		carried_item->set_economy(economy);
+
+	// If our economy is unclear because we have no location, it is wise to not
+	// mess with it. For example ships will not be a location for Workers
+	// (because they are no PlayerImmovable), but they will handle economies for
+	// us and will do so on load too. To make the order at which we are loaded
+	// not a factor, we do not overwrite the economy they might have set for us
+	// already.
+	if (PlayerImmovable * const location = worker.m_location.get(egbase())) {
+		worker.set_economy(location->get_economy());
+	}
 }
 
 const Bob::Task * Worker::Loader::get_task(const std::string & name)

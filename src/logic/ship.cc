@@ -39,6 +39,7 @@
 #include "logic/warehouse.h"
 #include "map_io/widelands_map_map_object_loader.h"
 #include "map_io/widelands_map_map_object_saver.h"
+#include "ref_cast.h"
 #include "wui/interactive_gamebase.h"
 
 namespace Widelands {
@@ -191,27 +192,8 @@ void Ship::ship_update(Game & game, Bob::State & state) {
 			// TODO(sirver): What happens if there is no port anymore?
 			if (dst) {
 				start_task_movetodock(game, *dst);
-				// The workers were hold in an idle state so that they did not try
-				// to become fugitive or run to the next warehouse. But now, we
-				// have a proper destination, so we can just inform them that they
-				// are now getting shipped there.
-				// Theres nowthing to be done for wares - they already changed
-				// economy with us and the warehouse will make sure that they are
-				// getting used.
-				WareInstance * ware;
-				Worker * worker;
-				BOOST_FOREACH(ShippingItem& item, m_items) {
-					item.get(game, ware, worker);
-					if (worker) {
-						worker->reset_tasks(game);
-						worker->start_task_shipping(game, nullptr);
-					} else {
-						assert(ware);
-					}
-				}
 			}
 
-			m_ship_state = TRANSPORT;
 			signal_handled();
 			return;
 		} else {
@@ -367,7 +349,7 @@ void Ship::ship_update_expedition(Game & game, Bob::State &) {
 				// NOTE territory, as "clearing" is not yet implemented.
 				// NOTE further it checks, whether there is a Player_immovable on one of the fields.
 				// FIXME handle this more gracefully concering opposing players
-				Player_Number pn = m_economy->owner().player_number();
+				Player_Number pn = get_owner()->player_number();
 				FCoords coord = fc;
 				bool invalid = false;
 				for (uint8_t step = 0; !invalid && step < 5; ++step) {
@@ -679,6 +661,9 @@ void Ship::ship_update_idle(Game & game, Bob::State & state) {
 }
 
 void Ship::set_economy(Game & game, Economy * e) {
+	// Do not check here that the economy actually changed, because on loading
+	// we rely that wares really get reassigned our economy.
+
 	m_economy = e;
 	container_iterate(std::vector<ShippingItem>, m_items, it) {
 		it->set_economy(game, e);
@@ -756,7 +741,7 @@ void Ship::start_task_expedition(Game & game) {
 	m_expedition->direction = 0;
 	m_expedition->exploration_start = Coords(0, 0);
 	m_expedition->clockwise = false;
-	m_expedition->economy.reset(new Economy(m_economy->owner()));
+	m_expedition->economy.reset(new Economy(*get_owner()));
 
 	// We are no longer in any other economy, but instead are an economy of our
 	// own.
@@ -796,8 +781,8 @@ void Ship::exp_scout_direction(Game &, uint8_t direction) {
 /// @note only called via player command
 void Ship::exp_construct_port (Game &, const Coords& c) {
 	assert(m_expedition);
-	Building_Index port_idx = m_economy->owner().tribe().safe_building_index("port");
-	m_economy->owner().force_csite(c, port_idx);
+	Building_Index port_idx = get_owner()->tribe().safe_building_index("port");
+	get_owner()->force_csite(c, port_idx);
 	m_ship_state = EXP_COLONIZING;
 }
 
@@ -820,11 +805,32 @@ void Ship::exp_cancel (Game & game) {
 		return;
 	send_signal(game, "cancel_expedition");
 
+	// The workers were hold in an idle state so that they did not try
+	// to become fugitive or run to the next warehouse. But now, we
+	// have a proper destination, so we can just inform them that they
+	// are now getting shipped there.
+	// Theres nothing to be done for wares - they already changed
+	// economy with us and the warehouse will make sure that they are
+	// getting used.
+	WareInstance * ware;
+	Worker * worker;
+	BOOST_FOREACH(ShippingItem& item, m_items) {
+		item.get(game, ware, worker);
+		if (worker) {
+			worker->reset_tasks(game);
+			worker->start_task_shipping(game, nullptr);
+		} else {
+			assert(ware);
+		}
+	}
+	m_ship_state = TRANSPORT;
+
 	// Bring us back into a fleet and a economy.
 	set_economy(game, nullptr);
 	init_fleet(game);
 	assert(get_economy() && get_economy() != m_expedition->economy.get());
 
+	// Delete the expedition and the economy it created.
 	m_expedition.reset(nullptr);
 
 	// And finally update our ship window
@@ -892,7 +898,7 @@ void Ship::send_message
 		(msgsender, game.get_gametime(), 60 * 60 * 1000,
 		 title, rt_description, get_position(), m_serial);
 
-	m_economy->owner().add_message(game, *msg);
+	get_owner()->add_message(game, *msg);
 }
 
 
@@ -995,15 +1001,19 @@ void Ship::Loader::load_finish()
 	ship.m_ship_state = m_ship_state;
 
 	// if the ship is on an expedition, restore the expedition specific data
-	if (m_expedition)
+	if (m_expedition) {
 		ship.m_expedition.swap(m_expedition);
-	else
-		assert(m_ship_state == TRANSPORT);
+		ship.m_expedition->economy.reset(new Economy(*ship.get_owner()));
+		ship.m_economy = ship.m_expedition->economy.get();
+	} else assert(m_ship_state == TRANSPORT);
 
-	// For robustness, in case our fleet did not get restored from the savegame
-	// for whatever reason
-	if (!ship.m_fleet)
-		ship.init_fleet(egbase());
+	// Workers load code set their economy to the economy of their location
+	// (which is a PlayerImmovable), that means that workers on ships do not get
+	// a correct economy assigned. We, as ship therefore have to reset the
+	// economy of all workers we're transporting so that they are in the correct
+	// economy. Also, we might are on an expedition which means that we just now
+	// created the economy of this ship and must inform all wares.
+	ship.set_economy(ref_cast<Game>(egbase()), ship.m_economy);
 }
 
 

@@ -623,13 +623,16 @@ void Game::think()
 	m_ctrl->think();
 
 	if (m_state == gs_running) {
-		cmdqueue().run_queue(m_ctrl->getFrametime(), get_game_time_pointer());
+		while (m_ctrl->getFrametime()) {
+			// check if autosave is needed
+			m_savehandler.think(*this, WLApplication::get()->get_time());
+			// TODO(sirver): This is stupid, should just take the next command and
+			// run it or return false if it is too early for this.
+			cmdqueue().run_queue(1, get_game_time_pointer());
+		}
 
 		if (g_gr) // not in dedicated server mode
 			g_gr->animate_maptextures(get_gametime());
-
-		// check if autosave is needed
-		m_savehandler.think(*this, WLApplication::get()->get_time());
 	}
 }
 

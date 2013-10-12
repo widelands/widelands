@@ -61,14 +61,24 @@ port = map:get_field(16, 16).immovable
 
 connected_road(p1, map:get_field(8,19).immovable, "r,r|r,r|r,r|r,tr,tr|", true)
 connected_road(p1, map:get_field(7,21).immovable, "tr,tr|", true)
+first_ship = nil
+second_ship = nil
 
-function click_on_ship()
+-- Save the game so that reloading does not skip
+function stable_save(safename)
+   local old_speed = game.desired_speed
+   game:save(safename)
+   sleep(1000)
+   game.desired_speed = old_speed
+end
+
+function click_on_ship(which_ship)
    for x=0,map.width-1 do
       for y=0,map.height-1 do
          local field = map:get_field(x,y)
          for idx, bob in ipairs(field.bobs) do
-            if bob.name == "ship" then
-               mouse_smoothly_to(field)
+            if bob == which_ship then
+               mouse_smoothly_to(field, 1)
                wl.ui.MapView():click(field)
                return
             end
@@ -109,14 +119,24 @@ function cancel_expedition_in_port()
    sleep(100)
 end
 
-function cancel_expedition_in_shipwindow()
-   click_on_ship()
+function cancel_expedition_in_shipwindow(which_ship)
+   click_on_ship(which_ship or first_ship)
    assert_true(click_button("cancel_expedition"))
    sleep(100)
    assert_true(click_button("ok"))
    sleep(100)
    close_windows()
    sleep(100)
+end
+
+function dismantle_hardener()
+   assert_true(click_building(p1, "hardener"))
+   assert_true(click_button("dismantle"))
+   assert_true(click_button("ok"))
+   close_windows()
+   while map:get_field(10, 18).immovable do
+      sleep(317)
+   end
 end
 
 function archive_messages()
@@ -148,112 +168,60 @@ run(function()
    end
 end)
 
--- Main logic.
+-- Setup the game for everybody.
 run(function()
-   sleep(100)
-   game.desired_speed = 10 * 1000
+   stable_save("no_ship")
 
-   -- Start and immediately cancel an expedition.
-   print("---- 1 -----")
-   start_expedition()
-   cancel_expedition_in_port()
-   sleep(500)
-   assert_equal(1, p1:get_workers("builder"))
+   -- Wait for the ship
+   game.desired_speed = 100 * 1000
+   sleep(25 * minutes)
 
-   -- Start an expedition, but let them carry some wares into it. This also
-   -- gives the builder enough time to walk over.
-   print("---- 2 -----")
-   start_expedition()
-   sleep(70000)
-   cancel_expedition_in_port()
-   sleep(500)
-   assert_equal(1, p1:get_workers("builder"))
+   game.desired_speed = 1000
 
-   -- Wait till the expedition is ready (we need to build a ship).
-   print("---- 3 -----")
-   start_expedition()
-   wait_for_message("Expedition ready")
-
-   -- Now cancel the expedition before it even got send out.
-   print("---- 4 -----")
-   cancel_expedition_in_shipwindow()
-   sleep(100)
-   assert_equal(1, p1:get_workers("builder"))
-   sleep(8000)  -- ship needs a while to get wares back.
-   check_wares_in_port_are_all_there()
-   assert_equal(1, p1:get_workers("builder"))
-
-   print("---- 5 -----")
-   -- Dismantle the hardener to make sure that the builder is able to do his work.
-   assert_true(click_building(p1, "hardener"))
-   assert_true(click_button("dismantle"))
-   assert_true(click_button("ok"))
-   close_windows()
-   while map:get_field(10, 18).immovable ~= nil do
-      sleep(317)
+   sleep(2000)
+   for x=0,map.width-1 do
+      for y=0,map.height-1 do
+         local field = map:get_field(x,y)
+         for idx, bob in ipairs(field.bobs) do
+            if bob.name == "ship" then
+               first_ship = bob
+               break
+            end
+         end
+      end
    end
-   sleep(1000)
+   stable_save("one_ship")
+   sleep(2000)
 
-   print("---- 6 -----")
-   -- Start a new one and cancel again in port.
-   start_expedition()
-   sleep(45000)
-   cancel_expedition_in_port()
-   sleep(80000)  -- let the workers some time to carry wares back in.
-   assert_equal(1, p1:get_workers("builder"))
-   check_wares_in_port_are_all_there()
+   -- Give the builder more materials again.
+   p1:get_buildings("shipyard")[1]:set_wares{
+      blackwood = 10,
+      trunk = 2,
+      cloth = 4,
+   }
 
-   -- Start a new expedition and cancel it while the ship is underway.
-   print("---- 7 -----")
-   start_expedition()
-   wait_for_message("Expedition ready")
+   -- Wait for the ship
+   game.desired_speed = 100 * 1000
+   sleep(25 * minutes)
 
-   click_on_ship()
-   assert_true(click_button("expccw"))
-   sleep(8000)
-   cancel_expedition_in_shipwindow()
-   sleep(20000)
-   assert_equal(1, p1:get_workers("builder"))
-   check_wares_in_port_are_all_there()
-   print("---- 8 -----")
+   game.desired_speed = 1000
+   sleep(2000)
+   for x=0,map.width-1 do
+      for y=0,map.height-1 do
+         local field = map:get_field(x,y)
+         for idx, bob in ipairs(field.bobs) do
+            if bob.name == "ship" and bob ~= first_ship then
+               second_ship = bob
+               break
+            end
+         end
+      end
+   end
+   stable_save("two_ships")
 
-   -- Start an expedition and let it go to the port place.
-   print("---- 9 -----")
-   start_expedition()
-   wait_for_message("Expedition ready")
-   sleep(500)
-   assert_equal(1, p1:get_workers("builder"))
-
-   print("---- 10 -----")
-   click_on_ship()
-   assert_true(click_button("expccw"))
-   wait_for_message("Port space found")
-   sleep(500)
-   assert_equal(1, p1:get_workers("builder"))
-
-   print("---- 11 -----")
-   assert_true(click_button("buildport"))
-   wait_for_message("Port")
-   sleep(500)
-   assert_equal(1, p1:get_workers("builder"))
-
-   -- Build a lumberjack and see if the ship starts transporting stuff
-   print("---- 12 -----")
-   p1:place_building("lumberjacks_hut", map:get_field(17, 1), true)
-   connected_road(p1, map:get_field(18,2).immovable, "bl,l|", true)
-   sleep(5 * minutes)  -- wait for the lumberjack to complete.
-   assert_equal("lumberjacks_hut", map:get_field(17, 1).immovable.name)
-   assert_equal(1, map:get_field(17, 1).immovable:get_workers("lumberjack"))
-   sleep(500)
-   assert_equal(1, p1:get_workers("builder"))
-
-   print("---- Build a lumberjack and see if the builder gets transported")
-   p1:place_building("lumberjacks_hut", map:get_field(12, 18), true)
-   sleep(5 * minutes)  -- wait for the lumberjack to complete.
-   assert_equal("lumberjacks_hut", map:get_field(12, 18).immovable.name)
-   assert_equal(1, p1:get_workers("builder"))
-
-   print("# All Tests passed.")
+   -- Give the tests that load this game some time to pass too.
+   game.desired_speed = 1000 * 1000
+   sleep(30 * minutes)
 
    wl.ui.MapView():close()
 end)

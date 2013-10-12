@@ -752,7 +752,6 @@ Map_Object::Loader * Fleet::load
 
 	try {
 		// The header has been peeled away by the caller
-
 		uint8_t const version = fr.Unsigned8();
 		if (1 <= version && version <= FLEET_SAVEGAME_VERSION) {
 			Player_Number owner_number = fr.Unsigned8();
