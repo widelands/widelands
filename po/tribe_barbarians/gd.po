@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2013-09-15 17:41+0000\n"
-"PO-Revision-Date: 2013-10-10 14:37+0000\n"
+"PO-Revision-Date: 2013-10-12 00:48+0000\n"
 "Last-Translator: GunChleoc <Unknown>\n"
 "Language-Team: Fòram na Gàidhlig http://www.foramnagaidhlig.net\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-10-11 04:34+0000\n"
+"X-Launchpad-Export-Date: 2013-10-12 04:34+0000\n"
 "X-Generator: Launchpad (build 16799)\n"
 "Language: gd\n"
 
@@ -278,6 +278,9 @@ msgid ""
 "A %s exploits all of the resource down to the deepest level.<br>But even "
 "after having done so, it will still have a %s chance of finding some more %s."
 msgstr ""
+"Togaidh %s a h-uile stòras gu ruige an doimhne as motha.<br>ach fiù 's às "
+"dèidh seo a dhèanamh, bidh seans de %s aice fhathast gun lorg i %s a "
+"bharrachd."
 
 #: ../../tribes/barbarians/coalmine/help.lua:17
 #: ../../tribes/barbarians/goldmine/help.lua:16
@@ -285,6 +288,8 @@ msgid ""
 "A %s exploits only %s of the resource. <br> From there on, it will only have "
 "a 5%% chance of finding %s."
 msgstr ""
+"Cha tog %s ach %s dhen stòras.<br>An uairsin, cha bhi ach seans de 5%% aice "
+"gun lorg i %s."
 
 #: ../../tribes/barbarians/deep_coalmine/help.lua:17
 #: ../../tribes/barbarians/deep_goldmine/help.lua:16
@@ -293,16 +298,21 @@ msgid ""
 "A %s exploits only %s of the resource.<br>From there on, it will only have a "
 "5%% chance of finding %s."
 msgstr ""
+"Cha tog %s ach %s dhen stòras.<br>An uairsin, cha bhi ach seans de 5%% aice "
+"gun lorg i %s."
 
 #: ../../tribes/barbarians/fernery/help.lua:47
 msgid "A Fernery can produce a sheaf of Thatch Reed in about %s on average."
-msgstr ""
+msgstr "Saothrachaidh feur-lios sguab feòir gach %s sa chuibheas."
 
 #: ../../tribes/barbarians/snack/conf:1
 msgid ""
 "A bigger morsel than the ration to provide miners in deep mines. It is "
 "produced in an inn or a big inn out of fish/meat, pitta bread and beer."
 msgstr ""
+"Seo greim bidhe nas motha na a' ghreimeag gus mèinnearan ann am mèinnean "
+"domhain a bhiadhadh. Nì taigh-òil no taigh-seinnse e dhe iasg/feòil, aran "
+"tur is leann."
 
 #: ../../tribes/barbarians/helm/conf:1
 msgid ""
@@ -319,7 +329,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/ship/conf:1
 msgid "A sea-worthy ship"
-msgstr ""
+msgstr "Long muir-acainneach"
 
 #: ../../tribes/barbarians/ration/conf:1
 msgid ""
@@ -1369,12 +1379,16 @@ msgid ""
 "If all needed wares are delivered in time, a %s can train %s for one soldier "
 "from 0 to the highest level in %s on average."
 msgstr ""
+"Ma thèid a h-uile bathar air a bheul feum a lìbhrigeadh ri àm, trèanaidh %s "
+"%s airson saighdeir o 0 gun leibheil as àirde an ceann %s sa chuibheas."
 
 #: ../../tribes/barbarians/trainingscamp/help.lua:61
 msgid ""
 "If all needed wares are delivered in time, a %s can train one new soldier in "
 "%s and %s to the final level in %s on average."
 msgstr ""
+"Ma thèid a h-uile bathar air a bheil feum a lìbhrigeadh ri àm, trèanaidh %s "
+"saighdear ùr ann an %s is %s gun leibheil as àirde an ceann %s sa chuibheas."
 
 #: ../../tribes/barbarians/bakery/help.lua:55
 #: ../../tribes/barbarians/cattlefarm/help.lua:48
@@ -1382,6 +1396,8 @@ msgid ""
 "If all needed wares are delivered in time, this building can produce %s in "
 "%s on average."
 msgstr ""
+"Ma thèid a h-uile bathar air a bheil feum a lìbhrigeadh ri àm, saothraichidh "
+"an togalach seo %s an ceann %s sa chuibheas."
 
 #: ../../tribes/barbarians/axefactory/help.lua:63
 #: ../../tribes/barbarians/lime_kiln/help.lua:54
@@ -1392,6 +1408,8 @@ msgid ""
 "If all needed wares are delivered in time, this building can produce %s in "
 "about %s on average."
 msgstr ""
+"Ma thèid a h-uile bathar air a bheil feum a lìbhrigeadh ri àm, saothraichidh "
+"an togalach seo %s an ceann mu %s sa chuibheas."
 
 #: ../../tribes/barbarians/coalmine/help.lua:56
 #: ../../tribes/barbarians/deep_coalmine/help.lua:59
@@ -1406,6 +1424,8 @@ msgstr ""
 msgid ""
 "If the food supply is steady, this mine can produce %s in %s on average."
 msgstr ""
+"Ma thèid biadh a lìbhrigeadh dha gu cunbhalach, saothrichidh a' mhèinn seo "
+"%s an ceann %s sa chuibheas."
 
 #: ../../tribes/barbarians/axefactory/help.lua:23
 #: ../../tribes/barbarians/bakery/help.lua:22
@@ -1785,7 +1805,7 @@ msgstr "Damh"
 #: ../../tribes/barbarians/warmill/help.lua:65
 #: ../../tribes/barbarians/well/help.lua:47
 msgid "Performance:"
-msgstr ""
+msgstr "Dèanadas:"
 
 #: ../../tribes/barbarians/coalmine/help.lua:51
 #: ../../tribes/barbarians/conf:97
@@ -2471,6 +2491,8 @@ msgid ""
 "The Axe is a basic weapon for the barbarians. All young soldiers are "
 "equipped with it."
 msgstr ""
+"'S e an t-arm bunasach aig na Borbairean a th' anns an tuagh. Beiridh gach "
+"saighdear òg tè."
 
 #: ../../tribes/barbarians/axefactory/help.lua:8
 msgid "The Barbarian Axefactory"
@@ -2606,7 +2628,7 @@ msgstr "Tobar nam Borbairean"
 
 #: ../../tribes/barbarians/well/help.lua:47
 msgid "The Carrier needs %s to get one bucket full of water."
-msgstr ""
+msgstr "Bheir an giùlanair %s gus peile uisge fhaighinn."
 
 #: ../../tribes/barbarians/fernery/help.lua:16
 msgid ""
@@ -2621,21 +2643,23 @@ msgstr ""
 
 #: ../../tribes/barbarians/fishers_hut/help.lua:23
 msgid "The Fisher's Hut needs water full of fish in the vicinity."
-msgstr ""
+msgstr "Tha am bothan-iasgair feumach air uisge làn iasg am fagas."
 
 #: ../../tribes/barbarians/gamekeeper/conf:1
 msgid ""
 "The Gamekeeper makes sure that the natural population of animals never drops "
 "too low."
 msgstr ""
+"Nì an geamair cinnteach nach bi ro bheag dhe bheathaichean fiadhaich ann."
 
 #: ../../tribes/barbarians/hunter/conf:1
 msgid "The Hunter brings good meat to the colonists."
-msgstr ""
+msgstr "Bheir an sealgair feòil mhath dha na tuinichean."
 
 #: ../../tribes/barbarians/hunters_hut/help.lua:23
 msgid "The Hunter's Hut needs animals in the vicinity to hunt."
 msgstr ""
+"Tha am bothan-sealgair feumach air beathaichean a shealgas e am fagas."
 
 #: ../../tribes/barbarians/lime_kiln/help.lua:16
 msgid ""
@@ -2680,12 +2704,16 @@ msgid ""
 "The Ranger needs %s to plant a tree, not counting the time he needs to reach "
 "the destination and go home again."
 msgstr ""
+"Bheir maor-coille %s gus craobh a chur is bheir e ùine a bharrachd gus an "
+"ceann-uidhe a ruigsinn is tilleadh dhachaigh."
 
 #: ../../tribes/barbarians/rangers_hut/help.lua:23
 msgid ""
 "The Ranger's Hut needs free space in the immediate vicinity to plant the "
 "trees."
 msgstr ""
+"Tha am bothan maoir-choille feumach air rum saor am fagas gus craobhan a "
+"chur."
 
 #: ../../tribes/barbarians/conf:4
 msgid "The Widelands Development Team"

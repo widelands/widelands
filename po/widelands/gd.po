@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2013-09-15 19:41+0200\n"
-"PO-Revision-Date: 2013-10-10 14:36+0000\n"
+"PO-Revision-Date: 2013-10-12 00:47+0000\n"
 "Last-Translator: GunChleoc <Unknown>\n"
 "Language-Team: Fòram na Gàidhlig http://www.foramnagaidhlig.net\n"
 "MIME-Version: 1.0\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n==1 || n==11) ? 0 : (n==2 || n==12) ? 1 : "
 "(n > 2 && n < 20) ? 2 : 3;\n"
-"X-Launchpad-Export-Date: 2013-10-11 04:35+0000\n"
+"X-Launchpad-Export-Date: 2013-10-12 04:34+0000\n"
 "X-Generator: Launchpad (build 16799)\n"
 "Language: gd\n"
 
@@ -26,7 +26,7 @@ msgstr "Chan eil gin"
 
 #: ../../src/s2map.cc:231
 msgid "Bluebyte Settlers II Map. No comment defined!"
-msgstr ""
+msgstr "Mapa Bluebyte Settlers II. Cha deach beachd a mhìneachadh!"
 
 #: ../../src/s2map.cc:874
 #, c-format
@@ -36,6 +36,10 @@ msgid ""
 "map in the map editor.\n"
 "\n"
 msgstr ""
+"RABHADH: Tha %i raointean-togail puirt mì-dhigheach ann nach gabh càradh is "
+"chaidh an toirt air falbh! Dh'fhaoidte nach gabh a h-uile eilean ruigsinn a-"
+"nis. An càraich thu am mapa san deasaiche?\n"
+"\n"
 
 #: ../../src/s2map.cc:886
 msgid "WARNING"
@@ -56,6 +60,8 @@ msgstr "Chaidh an geama a shàbhaladh"
 #: ../../src/wlapplication.cc:398
 msgid "ERROR: Could not connect to metaserver (reason above)!\n"
 msgstr ""
+"MEARACHD: Cha b' urrainn dhuinn ceangal ris a' mheata-fhrithealaiche "
+"(adhbhar gu h-àrd)!\n"
 
 #: ../../src/wlapplication.cc:426 ../../src/editor/editorinteractive.cc:171
 msgid "Unsupported format"
@@ -73,12 +79,17 @@ msgstr ""
 #: ../../src/wlapplication.cc:949 ../../src/wlapplication.cc:958
 msgid "could not find the path of the main executable"
 msgstr ""
+"cha b' urrainn dhuinn an t-slighe dhan phrìomh fhaidhle sho-ghnìomhaichte a "
+"lorg"
 
 #: ../../src/wlapplication.cc:1078
 msgid ""
 "Waited 5 seconds to close audio. Problems here so killing Widelands. Update "
 "your sound driver and/or SDL to fix this problem\n"
 msgstr ""
+"Air feitheamh fad 5 diogan ach an dùnadh an fhuaim. Tha duilgheadas ann a "
+"sheo is mar sin marbhaidh sinn Widelands. Ùraich an draibhear fuaime is/no "
+"SDL agad gus an duilgheadas seo a chàradh\n"
 
 #: ../../src/wlapplication.cc:1208
 msgid ""
@@ -86,10 +97,14 @@ msgid ""
 "Sorry, no double-instance debugging on _WIN32.\n"
 "\n"
 msgstr ""
+"\n"
+"Duilich ach chan eil dì-bhugachadh airson ionstansan dùblaichte ri làimh air "
+"_WIN32.\n"
+"\n"
 
 #: ../../src/wlapplication.cc:1211
 msgid "--double is disabled. This is not a debug build!"
-msgstr ""
+msgstr "Tha --double à comas Chan e togail dhì-bhugachaidh a th' ann!"
 
 #: ../../src/wlapplication.cc:1332
 msgid "This is Widelands-"
@@ -100,6 +115,8 @@ msgid ""
 "Usage: widelands <option0>=<value0> ... <optionN>=<valueN>\n"
 "\n"
 msgstr ""
+"Cleachdadh: widelands <roghainn0>=<luach0> ... <roghainnN>=<luachN>\n"
+"\n"
 
 #: ../../src/wlapplication.cc:1335
 msgid ""
@@ -120,10 +137,23 @@ msgid ""
 " --homedir=DIRNAME    Use specified directory for widelands config\n"
 "                      files, savegames and replays\n"
 msgstr ""
+" Sgrìobhaidh --<ainm-innteirt-config>=luach thairis air gach roghainn\n"
+" san fhaidhle config\n"
+"\n"
+" --logfile=AINM-FHAIDHLE   Sgrìobh às-chur an loga gun fhaidhle AINM-"
+"FHAIDHLE\n"
+"                           an àite às-chur an tèirmineil\n"
+" --datadir=AINM-PASGAIN    Cleachd am pasgan sònraichte airson nam "
+"faidhlichean\n"
+"                           dàta aig widelands\n"
+" --homedir=AINM-PASGAIN    Cleachd am pasgan sònraichte airson nam "
+"faidhlichean\n"
+"                           rèiteachaidh, geamannan air an sàbhaladh is\n"
+"                           ath-chluichean aig widelands\n"
 
 #: ../../src/wlapplication.cc:1347
 msgid "                      Default is ~/.widelands\n"
-msgstr ""
+msgstr "                      ~/.widelands gu tùsail\n"
 
 #: ../../src/wlapplication.cc:1350
 msgid ""
@@ -142,6 +172,23 @@ msgid ""
 "                      Remove replays after this amount of days.\n"
 "                      If this is 0 replays are not deleted.\n"
 msgstr ""
+" --record=AINM-FAIDHLE     Clàraich na h-uile tachartas dhan ainm-fhaidhle\n"
+"                           shònraichte gus ath-chluiche an uairsin\n"
+" --playback=AINM-FAIDHLE   Cluich an ainm-faidhle sònraichte (faic --"
+"record)\n"
+"\n"
+" --coredump=[yes|no]       Gin core dump le segfaults an aite an SDL\n"
+" --language=[gd_GB|de_DE|...]\n"
+"                           An sgeama ionadail ri chleachdadh.\n"
+" --localedir=AINM-PASGAIN  Cleachd AINM-PASGAIN 'na ionad airson an\n"
+"                           sgeama ionadail\n"
+" --remove_syncstreams=[true|false]\n"
+"                           Thoir air falbh na faidhlichean syncstream leis\n"
+"                           an tòiseachadh\n"
+" --remove_replays=[...]    Thoir air falbh na h-ath-chluichean às dèidh an\n"
+"                           àireimh de làithean seo.\n"
+"                           Cha tèid faidhlichean a sguabadh às mas e 0 a th' "
+"ann.\n"
 
 #: ../../src/wlapplication.cc:1365
 msgid ""
@@ -221,10 +268,15 @@ msgid ""
 "                      testing)\n"
 "\n"
 msgstr ""
+" --double                  Tòisich an geama dà thuras (airson deuchainnean\n"
+"                           lìonraidh air localhost)\n"
+"\n"
 
 #: ../../src/wlapplication.cc:1432
 msgid " --verbose            Enable verbose debug messages\n"
 msgstr ""
+" --verbose                 Cuir teachdaireachdan dì-bhugachaidh briathrach "
+"an comas\n"
 
 #: ../../src/wlapplication.cc:1433
 msgid " --help               Show this help\n"
