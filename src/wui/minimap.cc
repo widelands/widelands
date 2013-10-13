@@ -69,7 +69,6 @@ void MiniMap::View::draw(RenderTarget & dst)
 		(mmr.get_minimap_image
 			(m_ibase.egbase(),
 			m_ibase.get_player(),
-			Rect(0, 0, dst.get_rect().w, dst.get_rect().h),
 			(*m_flags) & (MiniMap::Zoom2) ?
 				Point((m_viewx - get_w() / 4), (m_viewy - get_h() / 4)):
 				Point((m_viewx - get_w() / 2), (m_viewy - get_h() / 2)),
