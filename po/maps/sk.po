@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2013-09-15 17:41+0000\n"
-"PO-Revision-Date: 2013-09-27 16:02+0000\n"
+"PO-Revision-Date: 2013-10-13 03:21+0000\n"
 "Last-Translator: Miroslav Remák <Unknown>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-09-28 05:13+0000\n"
-"X-Generator: Launchpad (build 16774)\n"
+"X-Launchpad-Export-Date: 2013-10-13 05:14+0000\n"
+"X-Generator: Launchpad (build 16799)\n"
 
 #: ../../campaigns/cconfig:64
 msgid "01 - Eyes in the Dark"
@@ -184,7 +184,7 @@ msgstr "Kráter"
 
 #: ../../maps/Crossing the horizon.wmf/elemental:9
 msgid "Crossing the horizon"
-msgstr ""
+msgstr "Cesta za obzor"
 
 #: ../../maps/Desert Tournament.wmf/elemental:7
 msgid "Desert Tournament"
@@ -410,6 +410,9 @@ msgid ""
 "the ways to encompass these large territories are long and meandering, so it "
 "is easy to err in the land of the foreign clans."
 msgstr ""
+"Je potešením usadiť sa v kráse tejto rozbrázdenej krajiny. Predsa však cesty "
+"vedúce k obkľúčeniu týchto rozsiahlych oblastí sú dlhé a kľukaté, a preto je "
+"na území cudzích kmeňov ľahké zablúdiť."
 
 #: ../../maps/Kings and Queens.wmf/elemental:9
 msgid "Kings and Queens"
@@ -860,6 +863,11 @@ msgid ""
 "reason. Defend your transport lines or use ships to bypass the opponent. "
 "Then remove all enemy activity."
 msgstr ""
+"Keď vietor vzdul prvé duny na tieto opustené zdvojené lagúny, málokto by "
+"predpokladal, že dva kmene, ktoré zúfalo hľadajú viac zdrojov na podporu "
+"svojich nekonečných vojen, skončia na tomto zabudnutom mieste v rovnakom "
+"čase a pre rovnaký známy dôvod. Obráňte svoje dopravné trasy alebo obíďte "
+"protivníka pomocou lodí. Potom odstráňte akúkoľvek nepriateľskú činnosť."
 
 #: ../../maps/Checkmate.wmf/elemental:9
 msgid ""

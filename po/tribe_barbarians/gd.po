@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2013-09-15 17:41+0000\n"
-"PO-Revision-Date: 2013-10-12 00:48+0000\n"
+"PO-Revision-Date: 2013-10-12 18:50+0000\n"
 "Last-Translator: GunChleoc <Unknown>\n"
 "Language-Team: Fòram na Gàidhlig http://www.foramnagaidhlig.net\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-10-12 04:34+0000\n"
+"X-Launchpad-Export-Date: 2013-10-13 05:15+0000\n"
 "X-Generator: Launchpad (build 16799)\n"
 "Language: gd\n"
 
@@ -161,7 +161,7 @@ msgstr "Thèid %s gun %s an-còmhnaidh. Chan eil e gu feum eile."
 #: ../../tribes/barbarians/trainingscamp/help.lua:34
 #: ../../tribes/barbarians/warmill/help.lua:58
 msgid "%s and"
-msgstr "%s is"
+msgstr "%s agus"
 
 #: ../../tribes/barbarians/coalmine/help.lua:28
 #: ../../tribes/barbarians/deep_coalmine/help.lua:27
@@ -241,7 +241,7 @@ msgstr "%s no nas fhearr"
 #: ../../tribes/barbarians/deeper_goldmine/help.lua:49
 #: ../../tribes/barbarians/deeper_oremine/help.lua:49
 msgid "%s or better and"
-msgstr "%s no nas fhearr is"
+msgstr "%s no nas fhearr agus"
 
 #: ../../tribes/barbarians/axefactory/help.lua:60
 #: ../../tribes/barbarians/coalmine/help.lua:53
@@ -320,12 +320,18 @@ msgid ""
 "and used in the trainingscamp - together with food -  to train soldiers from "
 "healthpoints level 0 to healphpoints level 1."
 msgstr ""
+"'S e acainn bunasach a th' anns a' chlogaid gus gaisgeach a dhìon. "
+"Saothraichidh tu ann an ceàrdach chlogaidean e is thèid a chleachdadh sa "
+"champa trèanaidh – mar a thèid biadh – gus saighdearan a thrèanadh o "
+"phuingean-beatha leibheil 0 gu puingean-beatha leibheil 1."
 
 #: ../../tribes/barbarians/meal/conf:1
 msgid ""
 "A meal is made out of pitta bread, strongbeer and fish/meat in a big inn. "
 "This substantial food is exactly what workers in a deeper mine need."
 msgstr ""
+"Nì thu mias à aran tur, leann làidir is iasg/feòil ann an taigh-seinnse. Seo "
+"am biadh mòr a bhios a dhìth aig obraichean sa mhèinn as doimhne."
 
 #: ../../tribes/barbarians/ship/conf:1
 msgid "A sea-worthy ship"
@@ -337,6 +343,10 @@ msgid ""
 "rations on his scouting trips. Rations are produced in a tavern, an inn or a "
 "big inn out of fish or meat or pitta bread."
 msgstr ""
+"Seo biadh beag a chumas na mèinnearan làidir is ag obair. Ithidh an "
+"rabhadair greimeagan air na tursan aige cuideachd. Saothraichidh tu "
+"greimeagan de èisg, feòil no aran tur ann an taigh-tàirn, taigh-òil no taigh-"
+"seinnse."
 
 #: ../../tribes/barbarians/warhelmet/conf:1
 msgid ""
@@ -344,6 +354,10 @@ msgid ""
 "a helmsmithy and used in a trainingscamp - together with food - to train "
 "soldiers from healthpoints level 1 to level 2."
 msgstr ""
+"'S e armachd leasaichte a th' anns a' chlogaid cogaidh gus gaisgeach a "
+"dhìon. Saothraichidh tu ann an ceàrdach chlogaidean e is thèid a chleachdadh "
+"sa champa trèanaidh – mar a thèid biadh – gus saighdearan a thrèanadh o "
+"phuingean-beatha leibheil 1 gu puingean-beatha leibheil 2."
 
 #: ../../tribes/barbarians/coalmine/help.lua:12
 #: ../../tribes/barbarians/deep_coalmine/help.lua:12
@@ -354,24 +368,35 @@ msgid ""
 "\t\t\tWood may serve for a household fire and to keep you warm, but when it "
 "comes to working with iron or gold, there is no way around coal."
 msgstr ""
+"Dh'ionnsaich na Tùsanaich o chionn linntean mar a thochlar sna bràigheachan "
+"an tòir an stuith dhuibh a bhiadhas na fùirneisean aca.<br>Bidh fiodh math "
+"gu leòr gus do thaigh a chumail blàth, ach a thaobh obrach le iarann no òr, "
+"cha dèan ach gual a' chùis."
 
 #: ../../tribes/barbarians/axefactory/help.lua:64
 msgid ""
 "All three weapons take the same time for making, but the required raw "
 "materials vary."
 msgstr ""
+"Gabhaidh an trì seòrsa de dh'airm an aon ùine gus an dèanamh, ach bidh stuth "
+"eadar-dhealaichte a dhìth."
 
 #: ../../tribes/barbarians/warmill/help.lua:66
 msgid ""
 "All weapons require the same time for making, but the consumption of the "
 "same raw materials increases from step to step. The last two need gold."
 msgstr ""
+"Gabhaidh na h-uile seòrsa de dh'airm an aon ùine gus an dèanamh, ach "
+"caithidh iad barrachd bathair leis gach ceum. Bidh feum aig an dà fhear mu "
+"dheireadh air òr."
 
 #: ../../tribes/barbarians/oremine/help.lua:16
 msgid ""
 "An %s exploits only %s of the resource. <br> From there on, it will only "
 "have a 5%% chance of finding %s."
 msgstr ""
+"Cha tog %s ach %s dhen stòras.<br>An uairsin, cha bhi ach seans de 5%% aice "
+"gun lorg i %s."
 
 #: ../../tribes/barbarians/axefactory/help.lua:13
 #: ../../tribes/barbarians/warmill/help.lua:13
@@ -379,8 +404,8 @@ msgid ""
 "An old Barbarian proverb<br> meaning that you need to take some risks "
 "sometimes."
 msgstr ""
-"Seo seann-fhacal nam Borbairean.<br>Is ciall dha gun luach beagan cunnairt "
-"aig amannan."
+"Seo seann-fhacal nan Tùsanach.<br>Is ciall dha gun luach beagan cunnairt aig "
+"amannan."
 
 #: ../../tribes/barbarians/conf:40
 msgid "Ashes"
@@ -434,11 +459,11 @@ msgstr "Treidhe-arain"
 
 #: ../../tribes/barbarians/gamekeepers_hut/help.lua:13
 msgid "Barbarian nursery rhyme"
-msgstr "Rann cloinne nam Borbairean"
+msgstr "Rann cloinne nan Tùsanach"
 
 #: ../../tribes/barbarians/conf:5
 msgid "Barbarians"
-msgstr "Na Borbairean"
+msgstr "Na Tùsanaich"
 
 #: ../../tribes/barbarians/conf:167
 msgid "Barracks"
@@ -481,8 +506,8 @@ msgid ""
 "It is used in the taverns, inns and big inns and in the trainingsites "
 "(trainingscamp and battle arena)."
 msgstr ""
-"A bharrachd air aran tur is feòil, is na h-èisg biadh eile airson nam "
-"Borbairean. Cleachdaidh na taighean-tàirn, taighean-òil, taighean-seinnse is "
+"A bharrachd air aran tur is feòil, is na h-èisg biadh eile airson nan "
+"Tùsanach. Cleachdaidh na taighean-tàirn, taighean-òil, taighean-seinnse is "
 "làraichean-trèanaidh (campaichean trèanaidh is raointean catha) iad."
 
 #: ../../tribes/barbarians/bakery/help.lua:29
@@ -643,7 +668,7 @@ msgstr "Loisgidh e aol san àth-aoil."
 
 #: ../../tribes/barbarians/farm/help.lua:50
 msgid "Calculation needed"
-msgstr "Tha feum air àireamhachadh"
+msgstr "Cha deach seo àireamhachadh fhathast"
 
 #: ../../tribes/barbarians/conf:114
 #: ../../tribes/barbarians/well/help.lua:42
@@ -734,7 +759,7 @@ msgstr "Clò"
 msgid ""
 "Cloth is needed for barbarian ships. It is produced out of thatch reed."
 msgstr ""
-"Tha longan nam Borbairean feumaich air clò. Nì thu de dh'fheur tughaidh e."
+"Tha longan nan Tùsanach feumaich air clò. Nì thu de dh'fheur tughaidh e."
 
 #: ../../tribes/barbarians/axefactory/help.lua:26
 #: ../../tribes/barbarians/coalmine/help.lua:17
@@ -954,7 +979,7 @@ msgstr "Lorgaidh e stòrasan airson mèinneadh."
 
 #: ../../tribes/barbarians/conf:157
 msgid "Dismantle Site"
-msgstr "Thoir an togalach às a chèile"
+msgstr "'Ga thoirt às a chèile"
 
 #: ../../tribes/barbarians/axefactory/help.lua:46
 #: ../../tribes/barbarians/bakery/help.lua:41
@@ -1009,7 +1034,7 @@ msgstr "A' trèanadh teàrnadh:"
 msgid ""
 "Excerpt from \"Our Treasures Underground\",<br> a traditional Barbarian song."
 msgstr ""
-"Earrann à òran dualchasach nam Borbairean<br> \"Ar ulaidhean fon talamh\"."
+"Earrann à òran dualchasach nan Tùsanach<br> \"Ar ulaidhean fon talamh\"."
 
 #: ../../tribes/barbarians/axefactory/help.lua:58
 #: ../../tribes/barbarians/bakery/help.lua:52
@@ -1143,10 +1168,10 @@ msgid ""
 "basic tools produced in a metalwork shop (but ceases to be produced by the "
 "building if it is enhanced to an axefactory and war mill)."
 msgstr ""
-"Feumaidh iasgairean nam Borbairean slatan-iasgaich gus iasgach. Seo aon dhe "
-"na h-acainnean bunasach a nì thu ann an ceàrdach meatailt (ach cha "
-"saothraich an togalach iad tuilleadh nuair a thèid a leasachadh gu "
-"factaraidh thuaghan is ceàrdach-cogaidh)."
+"Feumaidh iasgairean nan Tùsanach slatan-iasgaich gus iasgach. Seo aon dhe na "
+"h-acainnean bunasach a nì thu ann an ceàrdach meatailt (ach cha saothraich "
+"an togalach iad tuilleadh nuair a thèid a leasachadh gu factaraidh thuaghan "
+"is ceàrdach-cogaidh)."
 
 #: ../../tribes/barbarians/conf:170
 #: ../../tribes/barbarians/conf:224
@@ -2004,7 +2029,7 @@ msgstr "Saothrachadh"
 #: ../../tribes/barbarians/trainingscamp/help.lua:29
 #: ../../tribes/barbarians/trainingscamp/help.lua:32
 msgid "Provided by the "
-msgstr "Provided by the "
+msgstr "Ga sholar le "
 
 #: ../../tribes/barbarians/axefactory/help.lua:16
 #: ../../tribes/barbarians/bakery/help.lua:16
@@ -2156,7 +2181,7 @@ msgid ""
 "Raw Stones are a basic building material of the barbarians. It is produced "
 "in quarries and granite mines."
 msgstr ""
-"'S e stuth togail bunasach aig na Borbairean a th' anns na clachan. Thèid an "
+"'S e stuth togail bunasach aig na Tùsanaich a th' anns na clachan. Thèid an "
 "saothrachadh ann am mèinnean graineil is ann an coirill."
 
 #: ../../tribes/barbarians/grout/conf:1
@@ -2389,7 +2414,7 @@ msgstr ""
 #: ../../tribes/barbarians/fishers_hut/help.lua:13
 #: ../../tribes/barbarians/quarry/help.lua:13
 msgid "Source needed"
-msgstr "Tha feum air tùs"
+msgstr "Tha tùs a dhìth"
 
 #: ../../tribes/barbarians/axefactory/help.lua:32
 #: ../../tribes/barbarians/bakery/help.lua:34
@@ -2450,7 +2475,7 @@ msgstr "Taigh-tàrn"
 #: ../../tribes/barbarians/farm/help.lua:12
 #: ../../tribes/barbarians/quarry/help.lua:12
 msgid "Text needed"
-msgstr "Tha feum air teacsa"
+msgstr "Tha teacsa a dhìth"
 
 #: ../../tribes/barbarians/axefactory/help.lua:36
 #: ../../tribes/barbarians/axefactory/help.lua:42
@@ -2484,19 +2509,19 @@ msgstr ""
 #: ../../tribes/barbarians/hunters_hut/help.lua:51
 #: ../../tribes/barbarians/quarry/help.lua:46
 msgid "The %s pauses %s before going to work again."
-msgstr "Sguiridh %s dheth fad %s mus tòisich e air an obair a-rithist."
+msgstr "Gabhaidh an %s fois fad %s mus tòisich e air an obair a-rithist."
 
 #: ../../tribes/barbarians/axe/conf:1
 msgid ""
 "The Axe is a basic weapon for the barbarians. All young soldiers are "
 "equipped with it."
 msgstr ""
-"'S e an t-arm bunasach aig na Borbairean a th' anns an tuagh. Beiridh gach "
+"'S e an t-arm bunasach aig na Tùsanaich a th' anns an tuagh. Beiridh gach "
 "saighdear òg tè."
 
 #: ../../tribes/barbarians/axefactory/help.lua:8
 msgid "The Barbarian Axefactory"
-msgstr "Factaraidh thuaghan nam Borbairean"
+msgstr "Factaraidh thuaghan nan Tùsanach"
 
 #: ../../tribes/barbarians/axefactory/help.lua:16
 msgid ""
@@ -2507,87 +2532,87 @@ msgstr ""
 
 #: ../../tribes/barbarians/bakery/help.lua:8
 msgid "The Barbarian Bakery"
-msgstr "Taigh-fuine nam Borbairean"
+msgstr "Taigh-fuine nan Tùsanach"
 
 #: ../../tribes/barbarians/battlearena/help.lua:8
 msgid "The Barbarian Battle Arena"
-msgstr "Raon catha nam Borbairean"
+msgstr "Raon catha nan Tùsanach"
 
 #: ../../tribes/barbarians/cattlefarm/help.lua:8
 msgid "The Barbarian Cattle Farm"
-msgstr "Tuathanas crodh nam Borbairean"
+msgstr "Tuathanas crodh nan Tùsanach"
 
 #: ../../tribes/barbarians/coalmine/help.lua:8
 msgid "The Barbarian Coal Mine"
-msgstr "Mèinn guail nam Borbairean"
+msgstr "Mèinn guail nan Tùsanach"
 
 #: ../../tribes/barbarians/deep_coalmine/help.lua:8
 msgid "The Barbarian Deep Coal Mine"
-msgstr "Mèinn guail dhomhain nam Borbairean"
+msgstr "Mèinn guail dhomhain nan Tùsanach"
 
 #: ../../tribes/barbarians/deep_goldmine/help.lua:8
 msgid "The Barbarian Deep Gold Mine"
-msgstr "Mèinn òir dhomhain nam Borbairean"
+msgstr "Mèinn òir dhomhain nan Tùsanach"
 
 #: ../../tribes/barbarians/deep_oremine/help.lua:8
 msgid "The Barbarian Deep Iron Ore Mine"
-msgstr "Mèinn iarainn dhomhain nam Borbairean"
+msgstr "Mèinn iarainn dhomhain nan Tùsanach"
 
 #: ../../tribes/barbarians/deeper_coalmine/help.lua:8
 msgid "The Barbarian Deeper Coal Mine"
-msgstr "Mèinn guail as doimhne nam Borbairean"
+msgstr "Mèinn guail as doimhne nan Tùsanach"
 
 #: ../../tribes/barbarians/deeper_goldmine/help.lua:8
 msgid "The Barbarian Deeper Gold Mine"
-msgstr "Mèinn òir as doimhne nam Borbairean"
+msgstr "Mèinn òir as doimhne nan Tùsanach"
 
 #: ../../tribes/barbarians/deeper_oremine/help.lua:8
 msgid "The Barbarian Deeper Iron Ore Mine"
-msgstr "Mèinn iarainn as doimhne nam Borbairean"
+msgstr "Mèinn iarainn as doimhne nan Tùsanach"
 
 #: ../../tribes/barbarians/farm/help.lua:8
 msgid "The Barbarian Farm"
-msgstr "Tuathanas nam Borbairean"
+msgstr "Tuathanas nan Tùsanach"
 
 #: ../../tribes/barbarians/fernery/help.lua:8
 msgid "The Barbarian Fernery"
-msgstr "Feur-lios nam Borbairean"
+msgstr "Feur-lios nan Tùsanach"
 
 #: ../../tribes/barbarians/fishers_hut/help.lua:8
 msgid "The Barbarian Fisher's Hut"
-msgstr "Bothan-iasgair nam Borbairean"
+msgstr "Bothan-iasgair nan Tùsanach"
 
 #: ../../tribes/barbarians/gamekeepers_hut/help.lua:8
 msgid "The Barbarian Gamekeeper's Hut"
-msgstr "Bothan-geamair nam Borbairean"
+msgstr "Bothan-geamair nan Tùsanach"
 
 #: ../../tribes/barbarians/goldmine/help.lua:8
 msgid "The Barbarian Gold Mine"
-msgstr "Mèinn òir nam Borbairean"
+msgstr "Mèinn òir nan Tùsanach"
 
 #: ../../tribes/barbarians/granitemine/help.lua:8
 msgid "The Barbarian Granite Mine"
-msgstr "Mèinn graineil nam Borbairean"
+msgstr "Mèinn graineil nan Tùsanach"
 
 #: ../../tribes/barbarians/hunters_hut/help.lua:8
 msgid "The Barbarian Hunter's Hut"
-msgstr "Bothan-sealgair nam Borbairean"
+msgstr "Bothan-sealgair nan Tùsanach"
 
 #: ../../tribes/barbarians/oremine/help.lua:8
 msgid "The Barbarian Iron Ore Mine"
-msgstr "Mèinn cloich-iarainn dhomhain nam Borbairean"
+msgstr "Mèinn cloich-iarainn dhomhain nan Tùsanach"
 
 #: ../../tribes/barbarians/lime_kiln/help.lua:8
 msgid "The Barbarian Limekiln"
-msgstr "Àth-aoil nam Borbairean"
+msgstr "Àth-aoil nan Tùsanach"
 
 #: ../../tribes/barbarians/lumberjacks_hut/help.lua:8
 msgid "The Barbarian Lumberjack's Hut"
-msgstr "Bothan coillteir nam Borbairean"
+msgstr "Bothan coillteir nan Tùsanach"
 
 #: ../../tribes/barbarians/metalworks/help.lua:8
 msgid "The Barbarian Metalwork Shop"
-msgstr "Ceàrdach meatailt nam Borbairean"
+msgstr "Ceàrdach meatailt nan Tùsanach"
 
 #: ../../tribes/barbarians/metalworks/help.lua:16
 msgid ""
@@ -2598,23 +2623,23 @@ msgstr ""
 
 #: ../../tribes/barbarians/micro-brewery/help.lua:8
 msgid "The Barbarian Micro Brewery"
-msgstr "Taigh-grùide beag nam Borbairean"
+msgstr "Taigh-grùide beag nan Tùsanach"
 
 #: ../../tribes/barbarians/quarry/help.lua:8
 msgid "The Barbarian Quarry"
-msgstr "Coireall nam Borbairean"
+msgstr "Coireall nan Tùsanach"
 
 #: ../../tribes/barbarians/rangers_hut/help.lua:8
 msgid "The Barbarian Ranger's Hut"
-msgstr "Bothan maoir-choille nam Borbairean"
+msgstr "Bothan maoir-choille nan Tùsanach"
 
 #: ../../tribes/barbarians/trainingscamp/help.lua:8
 msgid "The Barbarian Trainingscamp"
-msgstr "Campa trèanaidh nam Borbairean"
+msgstr "Campa trèanaidh nan Tùsanach"
 
 #: ../../tribes/barbarians/warmill/help.lua:8
 msgid "The Barbarian War Mill"
-msgstr "Ceàrdach-cogaidh nam Borbairean"
+msgstr "Ceàrdach-cogaidh nan Tùsanach"
 
 #: ../../tribes/barbarians/warmill/help.lua:16
 msgid ""
@@ -2624,7 +2649,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/well/help.lua:8
 msgid "The Barbarian Well"
-msgstr "Tobar nam Borbairean"
+msgstr "Tobar nan Tùsanach"
 
 #: ../../tribes/barbarians/well/help.lua:47
 msgid "The Carrier needs %s to get one bucket full of water."
@@ -2989,6 +3014,12 @@ msgid ""
 "burner's house in the production of coal. The wood hardener refines trunks "
 "by hardening them in the fire which gives blackwood."
 msgstr ""
+"'S e an stuth togail bunasach aig na Tùsanaich a th' anns na stuic. Thèid na "
+"craobhan a leagail le coilltearan is gabhaidh maoir-choille cùram dhe na "
+"craobhan. Cleachdaich an ceàrdach meatailt stuic cuideachd gus acainnean "
+"bunasach a dhèanamh is an sloc gual-fhiodha gus gual a dhèanamh. Leasaichidh "
+"an cruadhaichear fiodha na stuic is crudhaichidh e ann an teine iad gus "
+"fiodh cruaidh a thoirt dhut."
 
 #: ../../tribes/barbarians/axefactory/help.lua:34
 #: ../../tribes/barbarians/warmill/help.lua:36
@@ -3006,120 +3037,120 @@ msgstr "Cosgaisean an àrdachaidh:"
 
 #: ../../tribes/barbarians/trainingscamp/conf:44
 msgid "Upgrade soldier attack 0"
-msgstr "Àrdaich ionnsaigh an t-saighdeir 0"
+msgstr "Ag àrdachadh ionnsaigh saighdeir o 0"
 
 #: ../../tribes/barbarians/trainingscamp/conf:45
 msgid ""
 "Upgrade soldier attack 0 (only for compatibility with old savegames "
 "(build13))"
 msgstr ""
-"Àrdaich ionnsaigh an t-saighdeir 0 (airson co-chòrdalachd ri seann "
+"Ag àrdachadh ionnsaigh saighdeir o 0 (airson co-chòrdalachd ri seann "
 "gheamaichean air an sàbhaladh (build13) a-mhàin)"
 
 #: ../../tribes/barbarians/trainingscamp/conf:46
 msgid "Upgrade soldier attack 1"
-msgstr "Àrdaich ionnsaigh an t-saighdeir 1"
+msgstr "Ag àrdachadh ionnsaigh saighdeir o 1"
 
 #: ../../tribes/barbarians/trainingscamp/conf:47
 msgid ""
 "Upgrade soldier attack 1 (only for compatibility with old savegames "
 "(build13))"
 msgstr ""
-"Àrdaich ionnsaigh an t-saighdeir 1 (airson co-chòrdalachd ri seann "
+"Ag àrdachadh ionnsaigh saighdeir o 1 (airson co-chòrdalachd ri seann "
 "gheamaichean air an sàbhaladh (build13) a-mhàin)"
 
 #: ../../tribes/barbarians/trainingscamp/conf:48
 msgid "Upgrade soldier attack 2"
-msgstr "Àrdaich ionnsaigh an t-saighdeir 2"
+msgstr "Ag àrdachadh ionnsaigh saighdeir o 2"
 
 #: ../../tribes/barbarians/trainingscamp/conf:49
 msgid ""
 "Upgrade soldier attack 2 (only for compatibility with old savegames "
 "(build13))"
 msgstr ""
-"Àrdaich ionnsaigh an t-saighdeir 2 (airson co-chòrdalachd ri seann "
+"Ag àrdachadh ionnsaigh saighdeir o 2 (airson co-chòrdalachd ri seann "
 "gheamaichean air an sàbhaladh (build13) a-mhàin)"
 
 #: ../../tribes/barbarians/trainingscamp/conf:50
 msgid "Upgrade soldier attack 3"
-msgstr "Àrdaich ionnsaigh an t-saighdeir 3"
+msgstr "Ag àrdachadh ionnsaigh saighdeir o 3"
 
 #: ../../tribes/barbarians/trainingscamp/conf:51
 msgid ""
 "Upgrade soldier attack 3 (only for compatibility with old savegames "
 "(build13))"
 msgstr ""
-"Àrdaich ionnsaigh an t-saighdeir 3 (airson co-chòrdalachd ri seann "
+"Ag àrdachadh ionnsaigh saighdeir o 3 (airson co-chòrdalachd ri seann "
 "gheamaichean air an sàbhaladh (build13) a-mhàin)"
 
 #: ../../tribes/barbarians/trainingscamp/conf:52
 msgid "Upgrade soldier attack 4"
-msgstr "Àrdaich ionnsaigh an t-saighdeir 4"
+msgstr "Ag àrdachadh ionnsaigh saighdeir o 4"
 
 #: ../../tribes/barbarians/trainingscamp/conf:53
 msgid ""
 "Upgrade soldier attack 4 (only for compatibility with old savegames "
 "(build13))"
 msgstr ""
-"Àrdaich ionnsaigh an t-saighdeir 4 (airson co-chòrdalachd ri seann "
+"Ag àrdachadh ionnsaigh saighdeir o 4 (airson co-chòrdalachd ri seann "
 "gheamaichean air an sàbhaladh (build13) a-mhàin)"
 
 #: ../../tribes/barbarians/battlearena/conf:37
 msgid "Upgrade soldier evade 0"
-msgstr "Àrdaich teàrnadh an t-saighdeir 0"
+msgstr "Ag àrdachadh teàrnadh saighdeir o 0"
 
 #: ../../tribes/barbarians/battlearena/conf:38
 msgid ""
 "Upgrade soldier evade 0 (only for compatibility with old savegames (build13))"
 msgstr ""
-"Àrdaich teàrnadh an t-saighdeir 0 (airson co-chòrdalachd ri seann "
+"Ag àrdachadh teàrnadh saighdeir o 0 (airson co-chòrdalachd ri seann "
 "gheamaichean air an sàbhaladh (build13) a-mhàin)"
 
 #: ../../tribes/barbarians/battlearena/conf:39
 msgid "Upgrade soldier evade 1"
-msgstr "Àrdaich teàrnadh an t-saighdeir 1"
+msgstr "Ag àrdachadh teàrnadh saighdeir o 1"
 
 #: ../../tribes/barbarians/battlearena/conf:40
 msgid ""
 "Upgrade soldier evade 1 (only for compatibility with old savegames (build13))"
 msgstr ""
-"Àrdaich teàrnadh an t-saighdeir 1 (airson co-chòrdalachd ri seann "
+"Ag àrdachadh teàrnadh saighdeir o 1 (airson co-chòrdalachd ri seann "
 "gheamaichean air an sàbhaladh (build13) a-mhàin)"
 
 #: ../../tribes/barbarians/trainingscamp/conf:54
 msgid "Upgrade soldier hitpoints 0"
-msgstr "Àrdaich puingean-beatha an t-saighdeir 0"
+msgstr "Ag àrdachadh puingean-beatha saighdeir o 0"
 
 #: ../../tribes/barbarians/trainingscamp/conf:55
 msgid ""
 "Upgrade soldier hitpoints 0 (only for compatibility with old savegames "
 "(build13))"
 msgstr ""
-"Àrdaich puingean-beatha an t-saighdeir 0 (airson co-chòrdalachd ri seann "
+"Ag àrdachadh puingean-beatha saighdeir o 0 (airson co-chòrdalachd ri seann "
 "gheamaichean air an sàbhaladh (build13) a-mhàin)"
 
 #: ../../tribes/barbarians/trainingscamp/conf:56
 msgid "Upgrade soldier hitpoints 1"
-msgstr "Àrdaich puingean-beatha an t-saighdeir 1"
+msgstr "Ag àrdachadh puingean-beatha saighdeir o 1"
 
 #: ../../tribes/barbarians/trainingscamp/conf:57
 msgid ""
 "Upgrade soldier hitpoints 1 (only for compatibility with old savegames "
 "(build13))"
 msgstr ""
-"Àrdaich puingean-beatha an t-saighdeir 1 (airson co-chòrdalachd ri seann "
+"Ag àrdachadh puingean-beatha saighdeir o 1 (airson co-chòrdalachd ri seann "
 "gheamaichean air an sàbhaladh (build13) a-mhàin)"
 
 #: ../../tribes/barbarians/trainingscamp/conf:58
 msgid "Upgrade soldier hitpoints 2"
-msgstr "Àrdaich puingean-beatha an t-saighdeir 2"
+msgstr "Ag àrdachadh puingean-beatha saighdeir o 2"
 
 #: ../../tribes/barbarians/trainingscamp/conf:59
 msgid ""
 "Upgrade soldier hitpoints 2 (only for compatibility with old savegames "
 "(build13))"
 msgstr ""
-"Àrdaich puingean-beatha an t-saighdeir 2 (airson co-chòrdalachd ri seann "
+"Ag àrdachadh puingean-beatha saighdeir o 2 (airson co-chòrdalachd ri seann "
 "gheamaichean air an sàbhaladh (build13) a-mhàin)"
 
 #: ../../tribes/barbarians/axefactory/help.lua:52

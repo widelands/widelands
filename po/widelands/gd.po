@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2013-09-15 19:41+0200\n"
-"PO-Revision-Date: 2013-10-12 00:47+0000\n"
+"PO-Revision-Date: 2013-10-12 18:52+0000\n"
 "Last-Translator: GunChleoc <Unknown>\n"
 "Language-Team: Fòram na Gàidhlig http://www.foramnagaidhlig.net\n"
 "MIME-Version: 1.0\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n==1 || n==11) ? 0 : (n==2 || n==12) ? 1 : "
 "(n > 2 && n < 20) ? 2 : 3;\n"
-"X-Launchpad-Export-Date: 2013-10-12 04:34+0000\n"
+"X-Launchpad-Export-Date: 2013-10-13 05:15+0000\n"
 "X-Generator: Launchpad (build 16799)\n"
 "Language: gd\n"
 
@@ -280,7 +280,7 @@ msgstr ""
 
 #: ../../src/wlapplication.cc:1433
 msgid " --help               Show this help\n"
-msgstr " --help               Seall a' chobhair seo\n"
+msgstr " --help                    Seall a' chobhair seo\n"
 
 #: ../../src/wlapplication.cc:1437
 msgid ""
@@ -1002,7 +1002,7 @@ msgstr "a' luchdadh beathach: %s"
 #: ../../src/logic/dismantlesite.cc:100
 #, c-format
 msgid "%u%% dismantled"
-msgstr "%u%% air a thoirt às a chèile"
+msgstr "%u%% dheth às a chèile"
 
 #: ../../src/logic/editor_game_base.cc:283
 msgid "Loading tribes"
@@ -1232,7 +1232,7 @@ msgstr "Chuir an nàmhaid ruaig air na saighdearan agad aig %s."
 
 #: ../../src/logic/militarysite.cc:845
 msgid "Militarysite lost!"
-msgstr "Chaill thu ionad an airm!"
+msgstr "Chaill thu togalach!"
 
 #: ../../src/logic/militarysite.cc:899
 #, c-format
@@ -1241,12 +1241,12 @@ msgstr "Chuir na saighdearan agad ruaig air an nàmhaid aig %s."
 
 #: ../../src/logic/militarysite.cc:904
 msgid "Enemy at site defeated!"
-msgstr "Chuir thu ruaig air an nàmhaid aig ionad!"
+msgstr "Ghabh thu togalach!"
 
 #: ../../src/logic/militarysite.cc:949
 #, c-format
 msgid "Your %s discovered an aggressor.</p>"
-msgstr "Lorg an %s agad ionnsaighear.</p>"
+msgstr "Mhothaich an %s agad ionnsaighear.</p>"
 
 #: ../../src/logic/militarysite.cc:950
 #, c-format
@@ -1255,7 +1255,7 @@ msgstr "Thathar a' toirt ionnsaigh air %s agad.</p>"
 
 #: ../../src/logic/militarysite.cc:958
 msgid "You are under attack"
-msgstr "Thathar a' toirt ionnsaigh ort"
+msgstr "Fo ionnsaigh!"
 
 #: ../../src/logic/playercommand.cc:147
 #: ../../src/map_io/widelands_map_building_data_packet.cc:105
@@ -1450,7 +1450,7 @@ msgstr "cumha mhì-dhligheach: %s"
 #, c-format
 msgid "expected {\"failed\"|\"completed\"|\"skipped\"} but found \"%s\""
 msgstr ""
-"an dùil air {\"dh'fhàillig e\"|\"coileanta\"|\"air leigeil seachad\"} ach "
+"an dùil air {\"dh'fhàillig le\"|\"coileanta\"|\"a' leigeil seachad\"} ach "
 "fhuair sinn \"%s\""
 
 #: ../../src/logic/production_program.cc:376
@@ -1468,7 +1468,7 @@ msgstr "an dùil air \"or\" no deireadh an ion-chuir"
 #: ../../src/logic/production_program.cc:424
 #: ../../src/logic/production_program.cc:815
 msgid "failed"
-msgstr "dh'fhàillig e"
+msgstr "Dh'fhàillig le"
 
 #: ../../src/logic/production_program.cc:425
 msgid "completed"
@@ -1476,7 +1476,7 @@ msgstr "coileanta"
 
 #: ../../src/logic/production_program.cc:425
 msgid "skipped"
-msgstr "air leigeil seachad"
+msgstr "A' leigeil seachad"
 
 #: ../../src/logic/production_program.cc:431
 #: ../../src/logic/production_program.cc:839
@@ -1610,7 +1610,7 @@ msgstr "Cha deach stòras air fhàgail a lorg!"
 
 #: ../../src/logic/production_program.cc:1229
 msgid "Main vein exhausted"
-msgstr "Tha am prìomh-chuisle air a chaitheamh"
+msgstr "Stòras air a chaitheamh"
 
 #: ../../src/logic/production_program.cc:1231
 msgid ""
@@ -1814,8 +1814,8 @@ msgid ""
 "The worker of this building cannot find any more resources of the following "
 "type: "
 msgstr ""
-"Chan urrainn dhan obraiche aig an togalach seo stòras sam bith dhen t-seòrsa "
-"a leanas a lorg tuilleadh: "
+"Chan urrainn dhan obraiche aig an togalach seo dad sam bith dhen stòras seo "
+"a lorg tuilleadh: "
 
 #: ../../src/logic/worker.cc:956
 msgid "A geologist found resources."
@@ -3219,7 +3219,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/launchSPG.cc:54
 msgid "Select map"
-msgstr "Tagh am mapa"
+msgstr "Tagh mapa"
 
 #: ../../src/ui_fsmenu/launchSPG.cc:75
 msgid "Launch Game"
@@ -3484,7 +3484,7 @@ msgstr "Cuir an sàs"
 
 #: ../../src/ui_fsmenu/options.cc:72
 msgid "min."
-msgstr "mion."
+msgstr "m."
 
 #: ../../src/ui_fsmenu/options.cc:78
 msgid "days"
@@ -3532,7 +3532,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/options.cc:154
 msgid "Start roadbuilding after placing flag"
-msgstr "Tòisich air rathad a thogail às dèidh bratach a chur ann"
+msgstr "Tòisich air rathad a thogail às dèidh bratach a thogail"
 
 #: ../../src/ui_fsmenu/options.cc:161
 msgid "Show buildings area preview"
@@ -3647,7 +3647,7 @@ msgstr "Luchdaich geama"
 
 #: ../../src/wui/actionconfirm.cc:223
 msgid "Destroy building?"
-msgstr "A bheil thu airson an togalach a mhilleadh?"
+msgstr "Am mill sinn an togalach?"
 
 #: ../../src/wui/actionconfirm.cc:224
 #, c-format
@@ -3656,7 +3656,7 @@ msgstr "A bheil thu airson a' %s seo a mhilleadh?"
 
 #: ../../src/wui/actionconfirm.cc:288
 msgid "Dismantle building?"
-msgstr "A bheil thu airson an togalach a thoirt às a chèile?"
+msgstr "An toir sinn an togalach às a chèile?"
 
 #: ../../src/wui/actionconfirm.cc:289
 #, c-format
@@ -3665,7 +3665,7 @@ msgstr "A bheil thu airson a' %s seo a thoirt às a chèile?"
 
 #: ../../src/wui/actionconfirm.cc:349
 msgid "Enhance building?"
-msgstr "A bheil thu airson an togalach a leasachadh?"
+msgstr "An leasaich sinn an togalach?"
 
 #: ../../src/wui/actionconfirm.cc:350
 #, c-format
@@ -3674,7 +3674,7 @@ msgstr "A bheil thu airson a' %s seo a leasachadh?"
 
 #: ../../src/wui/actionconfirm.cc:402 ../../src/wui/actionconfirm.cc:443
 msgid "Sink the ship?"
-msgstr "A bheil thu airson an long a chur fodha?"
+msgstr "An cuir sinn an long fodha?"
 
 #: ../../src/wui/actionconfirm.cc:402
 msgid "Do you really want to sink this ship?"
@@ -3869,7 +3869,7 @@ msgstr "Cuir clach-eòlaiche gus an làrach a rùrachadh"
 
 #: ../../src/wui/fieldaction.cc:411
 msgid "Put a flag"
-msgstr "Cuir bratach ann"
+msgstr "Tog bratach"
 
 #: ../../src/wui/fieldaction.cc:418
 msgid "Destroy a road"
@@ -4009,11 +4009,11 @@ msgstr "Mearachd le sàbhaladh a' gheama!!"
 #: ../../src/wui/game_main_menu_save_game.cc:265
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:385
 msgid "A File with the name "
-msgstr "Tha faidhle air a bheil an t-ainm "
+msgstr "Tha faidhle air a bheil "
 
 #: ../../src/wui/game_main_menu_save_game.cc:269
 msgid " already exists. Overwrite?"
-msgstr " ann mar-thà. A bheil thu airson sgrìobhadh thairis air?"
+msgstr " ann. A bheil thu airson sgrìobhadh thairis air?"
 
 #: ../../src/wui/game_main_menu_save_game.cc:330
 msgid "File deletion"
@@ -4028,7 +4028,7 @@ msgstr ""
 #: ../../src/wui/game_message_menu.cc:46
 #: ../../src/wui/game_message_menu.cc:373
 msgid "Message Menu: Inbox"
-msgstr "Clàr-taice nan teachdaireachd: Am bogsa a-steach"
+msgstr "Do theachdaireachdan: Am bogsa a-steach"
 
 #: ../../src/wui/game_message_menu.cc:56
 msgid "Select"
@@ -4044,7 +4044,7 @@ msgstr "Tiotal"
 
 #: ../../src/wui/game_message_menu.cc:59
 msgid "Time sent"
-msgstr "Chaidh a chur"
+msgstr "Chaidh a cur"
 
 #: ../../src/wui/game_message_menu.cc:66
 msgid "Clear"
@@ -4065,7 +4065,7 @@ msgstr "Ais-thionndaidh na thagh thu"
 #: ../../src/wui/game_message_menu.cc:85
 #: ../../src/wui/game_message_menu.cc:375
 msgid "Archive selected messages"
-msgstr "Cuir na teachdaireachdan a thagh thu ann an tasglann"
+msgstr "Cuir na teachdaireachdan a thagh thu san tasglann"
 
 #: ../../src/wui/game_message_menu.cc:94
 #: ../../src/wui/game_message_menu.cc:376
@@ -4078,7 +4078,7 @@ msgstr "meadhanaich sealladh a' mhapa air an ionad"
 
 #: ../../src/wui/game_message_menu.cc:366
 msgid "Message Menu: Archive"
-msgstr "Clàr-taice nan teachdaireachd: Tasglann"
+msgstr "Do theachdaireachdan: An tasglann"
 
 #: ../../src/wui/game_message_menu.cc:368
 msgid "Restore selected messages"
@@ -4090,7 +4090,7 @@ msgstr "Dhan bhogsa a-steach"
 
 #: ../../src/wui/game_objectives_menu.cc:44
 msgid "Objectives Menu"
-msgstr "Clàr-taice nan amasan"
+msgstr "Na h-amasan"
 
 #: ../../src/wui/game_objectives_menu.cc:66
 msgid "Claim Victory"
@@ -4279,7 +4279,7 @@ msgid "%u new message"
 msgid_plural "%u new messages"
 msgstr[0] "%u teachdaireachd ùr"
 msgstr[1] "%u theachdaireachd ùr"
-msgstr[2] "%u teachdaireachdan ùr"
+msgstr[2] "%u teachdaireachdan ùra"
 msgstr[3] "%u teachdaireachd ùr"
 
 #: ../../src/wui/interactive_spectator.cc:53

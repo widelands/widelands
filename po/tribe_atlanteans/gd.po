@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2013-09-15 17:41+0000\n"
-"PO-Revision-Date: 2013-10-10 14:37+0000\n"
+"PO-Revision-Date: 2013-10-12 18:51+0000\n"
 "Last-Translator: GunChleoc <Unknown>\n"
 "Language-Team: Fòram na Gàidhlig http://www.foramnagaidhlig.net\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-10-11 04:34+0000\n"
+"X-Launchpad-Export-Date: 2013-10-13 05:14+0000\n"
 "X-Generator: Launchpad (build 16799)\n"
 "Language: gd\n"
 
@@ -272,7 +272,7 @@ msgstr "Lorgaidh e stòrasan airson mèinneadh."
 
 #: ../../tribes/atlanteans/conf:145
 msgid "Dismantle Site"
-msgstr "Thoir an togalach às a chèile"
+msgstr "'Ga thoirt às a chèile"
 
 #: ../../tribes/atlanteans/conf:150
 msgid "Donjon"
@@ -1163,108 +1163,108 @@ msgstr ""
 
 #: ../../tribes/atlanteans/dungeon/conf:40
 msgid "Upgrade soldier attack 0"
-msgstr "Àrdaich ionnsaigh an t-saighdeir 0"
+msgstr "Ag àrdachadh ionnsaigh saighdeir o 0"
 
 #: ../../tribes/atlanteans/dungeon/conf:41
 msgid ""
 "Upgrade soldier attack 0 (only for compatibility with old savegames "
 "(build13))"
 msgstr ""
-"Àrdaich ionnsaigh an t-saighdeir 0 (airson co-chòrdalachd ri seann "
+"Ag àrdachadh ionnsaigh saighdeir o 0 (airson co-chòrdalachd ri seann "
 "gheamaichean air an sàbhaladh (build13) a-mhàin)"
 
 #: ../../tribes/atlanteans/dungeon/conf:42
 msgid "Upgrade soldier attack 1"
-msgstr "Àrdaich ionnsaigh an t-saighdeir 1"
+msgstr "Ag àrdachadh ionnsaigh saighdeir o 1"
 
 #: ../../tribes/atlanteans/dungeon/conf:43
 msgid ""
 "Upgrade soldier attack 1 (only for compatibility with old savegames "
 "(build13))"
 msgstr ""
-"Àrdaich ionnsaigh an t-saighdeir 1 (airson co-chòrdalachd ri seann "
+"Ag àrdachadh ionnsaigh saighdeir o 1 (airson co-chòrdalachd ri seann "
 "gheamaichean air an sàbhaladh (build13) a-mhàin)"
 
 #: ../../tribes/atlanteans/dungeon/conf:44
 msgid "Upgrade soldier attack 2"
-msgstr "Àrdaich ionnsaigh an t-saighdeir 2"
+msgstr "Ag àrdachadh ionnsaigh saighdeir o 2"
 
 #: ../../tribes/atlanteans/dungeon/conf:45
 msgid ""
 "Upgrade soldier attack 2 (only for compatibility with old savegames "
 "(build13))"
 msgstr ""
-"Àrdaich ionnsaigh an t-saighdeir 2 (airson co-chòrdalachd ri seann "
+"Ag àrdachadh ionnsaigh saighdeir o 2 (airson co-chòrdalachd ri seann "
 "gheamaichean air an sàbhaladh (build13) a-mhàin)"
 
 #: ../../tribes/atlanteans/dungeon/conf:46
 msgid "Upgrade soldier attack 3"
-msgstr "Àrdaich ionnsaigh an t-saighdeir 3"
+msgstr "Ag àrdachadh ionnsaigh saighdeir o 3"
 
 #: ../../tribes/atlanteans/dungeon/conf:47
 msgid ""
 "Upgrade soldier attack 3 (only for compatibility with old savegames "
 "(build13))"
 msgstr ""
-"Àrdaich ionnsaigh an t-saighdeir 3 (airson co-chòrdalachd ri seann "
+"Ag àrdachadh ionnsaigh saighdeir o 3 (airson co-chòrdalachd ri seann "
 "gheamaichean air an sàbhaladh (build13) a-mhàin)"
 
 #: ../../tribes/atlanteans/labyrinth/conf:46
 msgid "Upgrade soldier defense 0"
-msgstr "Àrdaich dìon an t-saighdeir 0"
+msgstr "Ag àrdachadh dìon saighdeir o 0"
 
 #: ../../tribes/atlanteans/labyrinth/conf:47
 msgid ""
 "Upgrade soldier defense 0 (only for compatibility with old savegames "
 "(build13))"
 msgstr ""
-"Àrdaich dìon an t-saighdeir 0 (airson co-chòrdalachd ri seann gheamaichean "
+"Ag àrdachadh dìon saighdeir o 0 (airson co-chòrdalachd ri seann gheamaichean "
 "air an sàbhaladh (build13) a-mhàin)"
 
 #: ../../tribes/atlanteans/labyrinth/conf:48
 msgid "Upgrade soldier defense 1"
-msgstr "Àrdaich dìon an t-saighdeir 1"
+msgstr "Ag àrdachadh dìon saighdeir o 1"
 
 #: ../../tribes/atlanteans/labyrinth/conf:49
 msgid ""
 "Upgrade soldier defense 1 (only for compatibility with old savegames "
 "(build13))"
 msgstr ""
-"Àrdaich dìon an t-saighdeir 1 (airson co-chòrdalachd ri seann gheamaichean "
+"Ag àrdachadh dìon saighdeir o 1 (airson co-chòrdalachd ri seann gheamaichean "
 "air an sàbhaladh (build13) a-mhàin)"
 
 #: ../../tribes/atlanteans/labyrinth/conf:52
 msgid "Upgrade soldier evade 0"
-msgstr "Àrdaich teàrnadh an t-saighdeir 0"
+msgstr "Ag àrdachadh teàrnadh saighdeir o 0"
 
 #: ../../tribes/atlanteans/labyrinth/conf:53
 msgid ""
 "Upgrade soldier evade 0 (only for compatibility with old savegames (build13))"
 msgstr ""
-"Àrdaich teàrnadh an t-saighdeir 0 (airson co-chòrdalachd ri seann "
+"Ag àrdachadh teàrnadh saighdeir o 0 (airson co-chòrdalachd ri seann "
 "gheamaichean air an sàbhaladh (build13) a-mhàin)"
 
 #: ../../tribes/atlanteans/labyrinth/conf:54
 msgid "Upgrade soldier evade 1"
-msgstr "Àrdaich teàrnadh an t-saighdeir 1"
+msgstr "Ag àrdachadh teàrnadh saighdeir o 1"
 
 #: ../../tribes/atlanteans/labyrinth/conf:55
 msgid ""
 "Upgrade soldier evade 1 (only for compatibility with old savegames (build13))"
 msgstr ""
-"Àrdaich teàrnadh an t-saighdeir 1 (airson co-chòrdalachd ri seann "
+"Ag àrdachadh teàrnadh saighdeir o 1 (airson co-chòrdalachd ri seann "
 "gheamaichean air an sàbhaladh (build13) a-mhàin)"
 
 #: ../../tribes/atlanteans/labyrinth/conf:50
 msgid "Upgrade soldier hitpoints 0"
-msgstr "Àrdaich puingean-beatha an t-saighdeir 0"
+msgstr "Ag àrdachadh puingean-beatha saighdeir o 0"
 
 #: ../../tribes/atlanteans/labyrinth/conf:51
 msgid ""
 "Upgrade soldier hitpoints 0 (only for compatibility with old savegames "
 "(build13))"
 msgstr ""
-"Àrdaich puingean-beatha an t-saighdeir 0 (airson co-chòrdalachd ri seann "
+"Ag àrdachadh puingean-beatha saighdeir o 0 (airson co-chòrdalachd ri seann "
 "gheamaichean air an sàbhaladh (build13) a-mhàin)"
 
 #: ../../tribes/atlanteans/conf:164
