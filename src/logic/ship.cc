@@ -118,11 +118,9 @@ void Ship::init_fleet(Editor_Game_Base & egbase) {
 }
 
 void Ship::cleanup(Editor_Game_Base & egbase) {
-	// First, make sure we are not an economy of our own.
-	if (!m_fleet) {
-		init_fleet(egbase);
+	if (m_fleet) {
+		m_fleet->remove_ship(egbase, this);
 	}
-	m_fleet->remove_ship(egbase, this);
 
 	while (!m_items.empty()) {
 		m_items.back().remove(egbase);
