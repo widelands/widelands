@@ -120,7 +120,7 @@ inline uint32_t calc_minimap_color
 }
 
 // Draws the dotted frame border onto the minimap.
-bool draw_minimap_frameborder
+bool is_minimap_frameborder
 	(const Widelands::FCoords& f, const Point& ptopleft, const Point& pbottomright,
 	 int32_t mapwidth, int32_t mapheight, int32_t modx, int32_t mody)
 {
@@ -182,18 +182,19 @@ void draw_minimap_int
 	int32_t xsize = g_gr->get_xres() / TRIANGLE_WIDTH / 2;
 	int32_t ysize = g_gr->get_yres() / TRIANGLE_HEIGHT / 2;
 
-	Point ptopleft; // top left point of the current display frame
 	const int32_t mapwidth = egbase.get_map().get_width();
 	const int32_t mapheight = map.get_height();
-	ptopleft.x = mapwidth / 2 - xsize;
+
+	Point ptopleft; // top left point of the current display frame
+	ptopleft.x = viewpoint.x + mapwidth / 2 - xsize;
 	if (ptopleft.x < 0) ptopleft.x += mapwidth;
-	ptopleft.y =  mapheight / 2 - ysize;
+	ptopleft.y = viewpoint.y + mapheight / 2 - ysize;
 	if (ptopleft.y < 0) ptopleft.y += mapheight;
 
 	Point pbottomright; // bottom right point of the current display frame
-	pbottomright.x = mapwidth / 2 + xsize;
+	pbottomright.x = viewpoint.x + mapwidth / 2 + xsize;
 	if (pbottomright.x >= mapwidth) pbottomright.x -= mapwidth;
-	pbottomright.y = mapheight / 2 + ysize;
+	pbottomright.y = viewpoint.y + mapheight / 2 + ysize;
 	if (pbottomright.y >= mapheight) pbottomright.y -= mapheight;
 
 	uint32_t modx = pbottomright.x % 2;
@@ -213,7 +214,7 @@ void draw_minimap_int
 					move_r(mapwidth, f, i);
 
 				if
-					(draw_minimap_frameborder
+					(is_minimap_frameborder
 					 (f, ptopleft, pbottomright, mapwidth, mapheight, modx, mody))
 				{
 					*reinterpret_cast<Uint32 *>(pix) = static_cast<Uint32>
@@ -241,7 +242,7 @@ void draw_minimap_int
 					move_r(mapwidth, f, i);
 
 				if
-					(draw_minimap_frameborder
+					(is_minimap_frameborder
 					 (f, ptopleft, pbottomright, mapwidth, mapheight, modx, mody))
 				{
 					*reinterpret_cast<Uint32 *>(pix) = static_cast<Uint32>
