@@ -1075,7 +1075,7 @@ void Cmd_ShipCancelExpedition::execute (Game & game)
 
 void Cmd_ShipCancelExpedition::serialize (StreamWrite & ser)
 {
-	ser.Unsigned8 (PLCMD_SHIP_SINK);
+	ser.Unsigned8 (PLCMD_SHIP_CANCELEXPEDITION);
 	ser.Unsigned8 (sender());
 	ser.Unsigned32(serial);
 }

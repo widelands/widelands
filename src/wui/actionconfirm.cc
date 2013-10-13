@@ -469,7 +469,7 @@ void ShipCancelExpeditionConfirm::think()
 
 
 /**
- * The "Ok" button was clicked, so issue the CMD_ENHANCEBUILDING command for this building.
+ * The "Ok" button was clicked, so issue the command for this building.
  */
 void ShipCancelExpeditionConfirm::ok()
 {

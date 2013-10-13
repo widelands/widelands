@@ -403,7 +403,7 @@ struct Cmd_ShipCancelExpedition : public PlayerCommand {
 	void Write(FileWrite &, Editor_Game_Base &, Map_Map_Object_Saver  &);
 	void Read (FileRead  &, Editor_Game_Base &, Map_Map_Object_Loader &);
 
-	virtual uint8_t id() const {return QUEUE_CMD_SHIP_SINK;}
+	virtual uint8_t id() const {return QUEUE_CMD_SHIP_CANCELEXPEDITION;}
 
 	Cmd_ShipCancelExpedition(StreamRead &);
 
