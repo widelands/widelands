@@ -245,6 +245,9 @@ protected:
 	static bool draw_tooltip(RenderTarget &, const std::string & text);
 
 private:
+	class CacheImage;
+	friend class CacheImage;
+
 	void check_child_death();
 
 	void do_draw(RenderTarget &);

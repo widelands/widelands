@@ -38,33 +38,37 @@ using namespace std;
 
 namespace UI {
 
-namespace  {
-class CacheImage : public Image {
+// Caches the image of the inner of a panel. Will redraw the Panel on cache misses.
+class Panel::CacheImage : public Image {
 public:
-	CacheImage(uint16_t w, uint16_t h) :
-		width_(w), height_(h),
+	CacheImage(Panel* const panel) :
+		panel_(panel),
 		hash_("cache_image_" + random_string("0123456789ABCDEFGH", 32)) {}
 	virtual ~CacheImage() {}
 
 	// Implements Image.
-	virtual uint16_t width() const {return width_;}
-	virtual uint16_t height() const {return height_;}
+	virtual uint16_t width() const {return panel_->get_inner_w();}
+	virtual uint16_t height() const {return panel_->get_inner_h();}
 	virtual const string& hash() const {return hash_;}
 	virtual Surface* surface() const {
 		Surface* rv = g_gr->surfaces().get(hash_);
 		if (rv)
 			return rv;
 
-		rv = g_gr->surfaces().insert(hash_, Surface::create(width_, height_), true);
+		rv = g_gr->surfaces().insert(hash_, Surface::create(width(), height()), true);
+
+		// Cache miss! We have to redraw our panel onto our surface.
+		RenderTarget inner(rv);
+		panel_->do_draw_inner(inner);
+
 		return rv;
 	}
 
 private:
-	const int16_t width_, height_;
+	Panel* const panel_;  // not owned.
 	const string hash_;
 };
 
-}  // namespace
 Panel * Panel::_modal       = 0;
 Panel * Panel::_g_mousegrab = 0;
 Panel * Panel::_g_mousein   = 0;
@@ -562,7 +566,7 @@ void Panel::set_cache(bool cache)
 		_flags |= pf_cache;
 	} else {
 		_flags &= ~pf_cache;
-		_cache.reset(nullptr);
+		_cache.reset();
 	}
 }
 
@@ -874,7 +878,7 @@ void Panel::do_draw(RenderTarget & dst)
 		uint32_t innerh = _h - (_tborder + _bborder);
 
 	if (!_cache || _cache->width() != innerw || _cache->height() != innerh) {
-			_cache.reset(new CacheImage(innerw, innerh));
+			_cache.reset(new CacheImage(this));
 			_needdraw = true;
 		}
 
