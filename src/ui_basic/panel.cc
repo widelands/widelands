@@ -41,21 +41,23 @@ namespace UI {
 // Caches the image of the inner of a panel. Will redraw the Panel on cache misses.
 class Panel::CacheImage : public Image {
 public:
-	CacheImage(Panel* const panel) :
+	CacheImage(Panel* const panel, uint16_t w, uint16_t h) :
+		width_(w),
+		height_(h),
 		panel_(panel),
 		hash_("cache_image_" + random_string("0123456789ABCDEFGH", 32)) {}
 	virtual ~CacheImage() {}
 
 	// Implements Image.
-	virtual uint16_t width() const {return panel_->get_inner_w();}
-	virtual uint16_t height() const {return panel_->get_inner_h();}
+	virtual uint16_t width() const {return width_;}
+	virtual uint16_t height() const {return height_;}
 	virtual const string& hash() const {return hash_;}
 	virtual Surface* surface() const {
 		Surface* rv = g_gr->surfaces().get(hash_);
 		if (rv)
 			return rv;
 
-		rv = g_gr->surfaces().insert(hash_, Surface::create(width(), height()), true);
+		rv = g_gr->surfaces().insert(hash_, Surface::create(width_, height_), true);
 
 		// Cache miss! We have to redraw our panel onto our surface.
 		RenderTarget inner(rv);
@@ -65,6 +67,7 @@ public:
 	}
 
 private:
+	const int16_t width_, height_;
 	Panel* const panel_;  // not owned.
 	const string hash_;
 };
@@ -878,7 +881,7 @@ void Panel::do_draw(RenderTarget & dst)
 		uint32_t innerh = _h - (_tborder + _bborder);
 
 	if (!_cache || _cache->width() != innerw || _cache->height() != innerh) {
-			_cache.reset(new CacheImage(this));
+			_cache.reset(new CacheImage(this, innerw, innerh));
 			_needdraw = true;
 		}
 
