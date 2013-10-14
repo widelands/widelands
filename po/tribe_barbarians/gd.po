@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2013-09-15 17:41+0000\n"
-"PO-Revision-Date: 2013-10-12 18:50+0000\n"
+"PO-Revision-Date: 2013-10-13 21:57+0000\n"
 "Last-Translator: GunChleoc <Unknown>\n"
 "Language-Team: Fòram na Gàidhlig http://www.foramnagaidhlig.net\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-10-13 05:15+0000\n"
+"X-Launchpad-Export-Date: 2013-10-14 05:11+0000\n"
 "X-Generator: Launchpad (build 16799)\n"
 "Language: gd\n"
 
@@ -1269,6 +1269,10 @@ msgid ""
 "used as a precious building material and to produce different axes (in the "
 "war mill) and different armours (in the helmsmithy)."
 msgstr ""
+"Is òr a' mheatailt as uaisle; cha tèid ach nithean fìor chudromach a "
+"sgeadachadh leis. Gheibh thu à clach-òir e ann an ceàrdach leaghadair. "
+"Cleachdaidh tu mar stuth togail uasal e is an caochladh de thuaghan (sa "
+"cheàrdach-cogaidh) is armachd (sa cheàrdach chlogaidean) a shaothrachadh."
 
 #: ../../tribes/barbarians/goldstone/conf:5
 msgid ""
@@ -1276,6 +1280,9 @@ msgid ""
 "gold, which is used as a precious building material and to produce weapons "
 "and armours."
 msgstr ""
+"Tochlaidh tu clach-òir ann am mèinn òir. Thèid e na òr ma leaghas tu ann an "
+"ceàrdach leaghadair e is thèid a chleachdadh mas stuth togail uasal is gus "
+"airm is armachd a shaothrachadh."
 
 #: ../../tribes/barbarians/conf:208
 #: ../../tribes/barbarians/granitemine/help.lua:16
@@ -1302,7 +1309,7 @@ msgstr "Aol-tàthaidh"
 
 #: ../../tribes/barbarians/ferner/conf:1
 msgid "Grows thatch reed."
-msgstr ""
+msgstr "Fàsaidh e feur tughaidh."
 
 #: ../../tribes/barbarians/conf:161
 msgid "Guardhall"
@@ -1378,6 +1385,10 @@ msgid ""
 "Be sure to have a metalworks to produce this basic tool (but ceases to be "
 "produced by the building if it is enhanced to an axefactory and war mill)."
 msgstr ""
+"Ciamar a dhèanadh tu mias, lòn no greimeag às aonais acainnean cidsin? Dèan "
+"cinnteach gu bheil ceàrdach meatailt agad gus an acainn bhunasach seo a "
+"shaothrachadh (ach cha dèan an togalach iad tuilleadh nuair a thèid "
+"leasachadh gu factaraidh thuaghan is ceàrdach-cogaidh)."
 
 #: ../../tribes/barbarians/hunters_hut/help.lua:17
 msgid "Hunt animals to produce meat."
@@ -1499,6 +1510,9 @@ msgid ""
 "Inscription on the threshold of the now ruined Olde Forge at Harradsheim, "
 "the eldest known smithy."
 msgstr ""
+"Snaidh-sgrìobhadh air stairsneach seann cheàrdach gobhainn Harradsheim a tha "
+"na fhuigheall a-nis, seo a' cheàrdach gobhainn as sine air a bheil sinn "
+"eòlach."
 
 #: ../../tribes/barbarians/axefactory/help.lua:24
 #: ../../tribes/barbarians/conf:91
@@ -1761,6 +1775,10 @@ msgid ""
 "soldier's evade level from 0 to 1 to 2. Strong beer is also used in big inns "
 "to prepare meals."
 msgstr ""
+"Cha ghabh na gaisgich ann an raon catha ach ris an leann seo. Tha cuid ag "
+"ràdh gu bheil neart slàn nan Tùsanach san leann seo. Cuidichidh e ach an "
+"trèanaich thu teàrnadh saighdeir o leibheil 0 gu 1 gu 2. Cleachdaidh na "
+"taighean-seinnse leann làidir cuideachd gus miasan ullachadh."
 
 #: ../../tribes/barbarians/axefactory/help.lua:27
 #: ../../tribes/barbarians/bakery/help.lua:25
@@ -2407,6 +2425,8 @@ msgid ""
 "Song written by Sigurd the Bard<br> when the first rain fell after the Great "
 "Drought in the 21st year of Chat'Karuth' reign."
 msgstr ""
+"Òran a rinn an fhilidh Sigurd<br>nuair a thuit a' chiad uisge an dèidh an "
+"Tairt Mhòir sa 21ad bliadhna aig rìoghachadh Chat'Karuth'."
 
 #: ../../tribes/barbarians/bakery/help.lua:13
 #: ../../tribes/barbarians/cattlefarm/help.lua:13
@@ -2503,6 +2523,8 @@ msgid ""
 "Thatch reed is produced in a fernery and used to make the roofs of buildings "
 "waterproof."
 msgstr ""
+"Nì thu feur tughaidh ann am feur-lios is dìonaidh tu mullaich nan taighean "
+"an aghaidh an uisge leis."
 
 #: ../../tribes/barbarians/fishers_hut/help.lua:49
 #: ../../tribes/barbarians/gamekeepers_hut/help.lua:43
@@ -2529,6 +2551,9 @@ msgid ""
 "three buildings. It is an upgrade from the Metalwork Shop but doesn't "
 "require additional qualification for the worker."
 msgstr ""
+"'S e an togalach air ìre meadhanach ann an sreath de trì togalaichean a th' "
+"anns an fhactaraidh thuaghan. Thèid a leasachadh on cheàrdach meatailt ach "
+"chan eil eòlas sònraichte a dhìth air an obraiche."
 
 #: ../../tribes/barbarians/bakery/help.lua:8
 msgid "The Barbarian Bakery"
@@ -2620,6 +2645,9 @@ msgid ""
 "three buildings and creates all the tools that Barbarians need. The others "
 "are for weapons."
 msgstr ""
+"'S e an togalach saothrachaidh bunasach ann an sreath de thrì togalaichean a "
+"th' anns a' cheàrdach meatailt is cruthaichidh i na h-uile acainn air a "
+"bheil na Tùsanaich feumach. Nì an dà chuid eile airm."
 
 #: ../../tribes/barbarians/micro-brewery/help.lua:8
 msgid "The Barbarian Micro Brewery"
@@ -2646,6 +2674,9 @@ msgid ""
 "The Barbarian War Mill is their most advanced production site for weapons. "
 "As such it needs to be upgraded from an Axefactory."
 msgstr ""
+"'S e an togalach saothrachaidh as adhartaiche airson arm aig na Tùsanaich a "
+"th' anns a' cheàrdach-cogaidh. Gheibh thu fear le leasachadh o fhactaraidh "
+"thuaghan."
 
 #: ../../tribes/barbarians/well/help.lua:8
 msgid "The Barbarian Well"
@@ -2661,10 +2692,14 @@ msgid ""
 "Barbarian tribe.<br>It is the traditional material for roofing, and it is "
 "woven into the extremely durable cloth that they use for their ship's sails."
 msgstr ""
+"Togaidh am feur-lios feur a choileanas dà fheumalachdan do threubh nan "
+"Tùsanach.<br>Is feur an stuth togail dualchasach airson mhullaichean is "
+"thèid fhighe na chlò throm airson siùil nan longan aca."
 
 #: ../../tribes/barbarians/fernery/help.lua:26
 msgid "The Fernery's output will only go to construction sites that need it."
 msgstr ""
+"Cha tèid às-chur an fheur-liosa ach gu làraichean-togail a bhios feumach air."
 
 #: ../../tribes/barbarians/fishers_hut/help.lua:23
 msgid "The Fisher's Hut needs water full of fish in the vicinity."
@@ -2699,6 +2734,9 @@ msgid ""
 "The Limekiln's output will only go to construction sites that need it. Those "
 "are predominantly houses that work with fire, and some military sites."
 msgstr ""
+"Cha tèid às-chur an àth-aoil ach gu làraichean-togail a bhios feumach air. "
+"Seo taighean a dh'obraicheas le teine gu h-àraidh is cuid a thogalaichean an "
+"airm."
 
 #: ../../tribes/barbarians/lumberjacks_hut/help.lua:48
 msgid ""
@@ -2719,6 +2757,9 @@ msgid ""
 "component of the Snacks that Inns and Big Inns prepare for Miners in Deep "
 "Mines."
 msgstr ""
+"Nì an taigh-grùide beag leann an ìre ìosal. 'S e co-phàirt cudromach sna "
+"lòin a th' ann a nì na taighean-òil is taighean-seinnse airson nam "
+"mèinnearan sna mèinnean domhain."
 
 #: ../../tribes/barbarians/quarry/help.lua:23
 msgid "The Quarry needs stones in the vicinity."
