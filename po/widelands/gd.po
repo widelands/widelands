@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2013-09-15 19:41+0200\n"
-"PO-Revision-Date: 2013-10-13 19:28+0000\n"
+"PO-Revision-Date: 2013-10-14 17:27+0000\n"
 "Last-Translator: GunChleoc <Unknown>\n"
 "Language-Team: Fòram na Gàidhlig http://www.foramnagaidhlig.net\n"
 "MIME-Version: 1.0\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n==1 || n==11) ? 0 : (n==2 || n==12) ? 1 : "
 "(n > 2 && n < 20) ? 2 : 3;\n"
-"X-Launchpad-Export-Date: 2013-10-14 05:11+0000\n"
+"X-Launchpad-Export-Date: 2013-10-15 04:32+0000\n"
 "X-Generator: Launchpad (build 16799)\n"
 "Language: gd\n"
 
@@ -2368,7 +2368,7 @@ msgstr ""
 #: ../../src/network/internet_gaming.cc:434
 #, c-format
 msgid "Server time offset is %i seconds."
-msgstr "Tha frith-àireamh ama an frithealaiche na %i diog(an)."
+msgstr "Tha frith-àireamh ama an fhrithealaiche 'na %i diog(an)."
 
 #: ../../src/network/internet_gaming.cc:454
 msgid "Invalid message type"

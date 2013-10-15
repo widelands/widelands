@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2013-09-15 17:41+0000\n"
-"PO-Revision-Date: 2013-10-12 18:48+0000\n"
+"PO-Revision-Date: 2013-10-14 12:09+0000\n"
 "Last-Translator: GunChleoc <Unknown>\n"
 "Language-Team: Fòram na Gàidhlig http://www.foramnagaidhlig.net\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-10-13 05:15+0000\n"
+"X-Launchpad-Export-Date: 2013-10-15 04:32+0000\n"
 "X-Generator: Launchpad (build 16799)\n"
 "Language: gd\n"
 
@@ -23,6 +23,8 @@ msgid ""
 "A real meal is made in inns out of bread and fish/meat. It satisfies the "
 "needs of miners in deep mines."
 msgstr ""
+"Thèid fìor-mhias a dhèanamh ann an taighean-òil à aran is iasg/feòil. "
+"Coileanaidh i feumalachdan nam mèinnearan ann am mèinnean domhain."
 
 #: ../../tribes/empire/ship/conf:1
 msgid "A sea-worthy ship"
@@ -34,6 +36,9 @@ msgid ""
 "the scout on his scouting trips. They are produced in a tavern out of fish "
 "or meat or bread."
 msgstr ""
+"Seo biadh beag a chumas na mèinnearan làidir is ag obair. Ithidh an "
+"rabhadair greimeagan air na tursan aige cuideachd. Saothraichidh tu "
+"greimeagan de èisg, feòil no aran ann an taigh-tàirn."
 
 #: ../../tribes/empire/conf:57
 msgid "Advanced Lance"
@@ -90,6 +95,10 @@ msgid ""
 "used in the trainingscamp - together with food- to train soldiers from "
 "healthpoints level 1 to healthpoints level 2."
 msgstr ""
+"Seo armachd bhunasach aig saighdearan na h-Impireachd. Saothraichidh tu ann "
+"an ceàrdach armachd i is thèid a cleachdadh sa champa trèanaidh – le biadh – "
+"gus saighdearan a thrèanadh o phuingean-beatha leibheil 1 gu puingean-beatha "
+"leibheil 2."
 
 #: ../../tribes/empire/conf:61
 msgid "Basket"
@@ -104,6 +113,9 @@ msgid ""
 "Besides bread and meat, fish is also a foodstuff for the Empire. Fish are "
 "used in taverns, inns and training sites (arena, colosseum, trainingscamp)."
 msgstr ""
+"A bharrachd air aran is feòil, is na h-èisg biadh eile airson na h-"
+"Impireachd. Cleachdaidh na taighean-tàirn, taighean-òil is làraichean-"
+"trèanaidh (raointean spòrs, coileasaman is campaichean trèanaidh) iad."
 
 #: ../../tribes/empire/conf:63
 msgid "Bread"
@@ -115,7 +127,7 @@ msgstr "Crann-arain"
 
 #: ../../tribes/empire/donkeybreeder/conf:1
 msgid "Breeds cute and helpful donkeys"
-msgstr ""
+msgstr "Tàrmaichidh e asalan stampa cuideachail"
 
 #: ../../tribes/empire/pig-breeder/conf:1
 msgid "Breeds pigs."
@@ -184,6 +196,8 @@ msgid ""
 "Cloth is needed to build several buildings. It is also consumed in the "
 "armour smithy."
 msgstr ""
+"Feumaidh tu clò gus caochladh thogalaichean a thogail. Thèid a chleachdadh "
+"ann an ceàrdach armachd cuideachd."
 
 #: ../../tribes/empire/conf:66
 msgid "Coal"
@@ -302,6 +316,9 @@ msgid ""
 "Fire tongs are tools of the smelter, who works in the smelting works. They "
 "are produced by the toolsmith."
 msgstr ""
+"'S e acainn a chleachdas an leaghadair a tha sa chlobha teine a "
+"dh'obraicheas ann an ceàrdach leaghadair. Thèid a saothrachadh le gobha "
+"acainnean."
 
 #: ../../tribes/empire/conf:68
 msgid "Fish"
@@ -323,6 +340,8 @@ msgstr "Slat-iasgaich"
 msgid ""
 "Fishing rods are needed by fishers, to catch fish. Produced by the toolsmith."
 msgstr ""
+"Feumaidh na h-iasgairean slatan-iasgaich gus iasgach. Nì thu an gobha "
+"acainnean iad."
 
 #: ../../tribes/empire/conf:70
 msgid "Flour"
@@ -333,6 +352,8 @@ msgid ""
 "Flour is produced by the mill out of wheat and is needed in the bakery to "
 "produce the tasty Empire bread."
 msgstr ""
+"Nì am muileann flùr à cruithneachd is tha an taigh-fuine feumach air gus "
+"aran blasta na h-Impireachd a dhèanamh."
 
 #: ../../tribes/empire/conf:118
 msgid "Forester"
@@ -447,6 +468,9 @@ msgid ""
 "How can one create a ration or meal if there are no kitchen tools? They are "
 "produced in a toolsmithy and used in taverns and inns."
 msgstr ""
+"Ciamar a dhèanadh tu greimeag no mias às aonais acainnean cidsin? Nì gobha "
+"acainnean iad is thèid an cleachdadh ann an taighean-tàirn is taighean-"
+"seinnse."
 
 #: ../../tribes/empire/conf:120
 msgid "Hunter"
@@ -485,6 +509,8 @@ msgid ""
 "Iron ores need to be smelted in the smelting works to give iron. Iron ores "
 "are produced in iron mines."
 msgstr ""
+"Feumaidh tu clach-iarainn a leaghadh ann an ceàrdach leaghadair gus iarann "
+"fhaighinn. Gheibh thu clach-iarainn à mèinnean iarainn."
 
 #: ../../tribes/empire/shepherd/conf:1
 msgid "Keeping sheep."
@@ -516,7 +542,7 @@ msgstr "Colbh marbhail"
 
 #: ../../tribes/empire/conf:197
 msgid "Marble Mine"
-msgstr ""
+msgstr "Mèinn marbhail"
 
 #: ../../tribes/empire/marblecolumn/conf:1
 msgid ""
@@ -557,6 +583,11 @@ msgid ""
 "colosseum, trainingscamp). There are two sources of meat: pork out of "
 "piggeries and the meat of wild game hunted by the hunters."
 msgstr ""
+"Tha tòrr chumhachd san fheòil. Thèid a cleachdadh sna taighean-tàirn is "
+"taighean-òil gus biadh ullachadh do na mèinnearan. Ithear seo sna làraichean-"
+"trèanaidh cuideachd (raointean spòrs, coileasaman is campaichean trèanaidh). "
+"Tha dà thùs feòla ann: feòil-muice à failean is sitheann a shealgas an "
+"sealgair."
 
 #: ../../tribes/empire/conf:178
 msgid "Mill"
@@ -568,7 +599,7 @@ msgstr "Muillear"
 
 #: ../../tribes/empire/miller/conf:1
 msgid "Mills the wheat to produce flour."
-msgstr ""
+msgstr "Bleithidh seo a' chruithneachd gus flùr a shaothrachadh."
 
 #: ../../tribes/empire/marblemine/conf:26
 #: ../../tribes/empire/quarry/conf:22
@@ -940,12 +971,12 @@ msgstr "Taigh-tàrn"
 
 #: ../../tribes/empire/hunter/conf:1
 msgid "The Hunter brings good meat to the colonists."
-msgstr ""
+msgstr "Bheir an sealgair feòil mhath dha na tuinichean."
 
 #: ../../tribes/empire/scythe/conf:1
 msgid ""
 "The Scythe is the tool of the farmers. It is produced by the toolsmith."
-msgstr ""
+msgstr "Tha tuathanaich feumach air an fhàl seo. Nì an gobha acainnean e."
 
 #: ../../tribes/empire/conf:4
 msgid "The Widelands Development Team"
@@ -954,7 +985,7 @@ msgstr "An sgioba leasachaidh Widelands"
 #: ../../tribes/empire/axe/conf:1
 msgid ""
 "The axe is the tool for the lumberjack. It is produced by the toolsmith."
-msgstr ""
+msgstr "Tha coilltearan feumach air an tuagh seo. Nì an gobha acainnean e."
 
 #: ../../tribes/empire/bread/conf:1
 msgid ""
@@ -962,12 +993,18 @@ msgid ""
 "is used in taverns and inns to prepare rations and meals. Bread is also "
 "consumed in the training sites (arena, colosseum, trainingscamp)."
 msgstr ""
+"Nì fuineadairean na h-Ìmpireachd aran uabhasach blasta à flùr is uisge. "
+"Cleachdaich na taighean-tàirn is taighean-òil e gus greimeagan is miasan "
+"ullachadh. Ithear e ann an làraichean-trèanaidh (raointean spòrs, "
+"coileasaman is campaichean trèanaidh) cuideachd."
 
 #: ../../tribes/empire/bakingtray/conf:1
 msgid ""
 "The bread paddle is the tool of the baker, each baker needs its own. It is "
 "produced by the toolsmith."
 msgstr ""
+"Is acainn an fhuineadair a th' anns a' chrann-arain is bith feum aig gach "
+"fuineadair air fear aige fhèin. Thèid a shaothrachadh le gobha acainnean."
 
 #: ../../tribes/empire/chain_armour/conf:1
 msgid ""
@@ -975,6 +1012,10 @@ msgid ""
 "an armour smithy and used in a trainingscamp - together with food - to train "
 "soldiers from healthpoints level 2 to level 3."
 msgstr ""
+"'S e armachd mheadhanach aig saighdearan na h-Impireachd a th' anns a "
+"mhàilleach. Saothraichidh tu ann an ceàrdach armachd i is thèid a cleachdadh "
+"sa champa trèanaidh – le biadh – gus saighdearan a thrèanadh o phuingean-"
+"beatha leibheil 2 gu puingean-beatha leibheil 3."
 
 #: ../../tribes/empire/coal/conf:1
 msgid ""
@@ -982,6 +1023,9 @@ msgid ""
 "are usually fed with coal. It is mined in coal mines or produced by a "
 "charcoal burner out of trunks."
 msgstr ""
+"Thèid teintean aig ceàrdach leaghadair, ceàrdach armachd is ceàrdach arm na "
+"h-Impireachd a bhiadhadh le gual mar as trice. Tochlaidh thu gual à mèinn "
+"guail no nì thu i à stuic ann an sloc gual-fhiodha."
 
 #: ../../tribes/empire/hammer/conf:1
 msgid ""
@@ -989,6 +1033,9 @@ msgid ""
 "the armour- and weaponsmith. Make sure you always have some in reserve! It "
 "is produced by the toolsmith."
 msgstr ""
+"'S e acainn riatanach a th' anns an òrd. Feumaidh gach clach-eòlaiche, "
+"togalaiche, gobha armachd is gobha arm fear. Dèan cinnteach gu bheil cuid "
+"air fhàgail dhut an-còmhnaidh! Nì an gobha acainnean iad."
 
 #: ../../tribes/empire/helm/conf:1
 msgid ""
@@ -997,6 +1044,11 @@ msgid ""
 "soldiers. Helmets are also used in trainingscamps - together with food - to "
 "train soldiers from healthpoints level 0 to healthpoints level 1."
 msgstr ""
+"'S e acainn bunasach a th' anns a' chlogaid gus gaisgeach a dhìon. "
+"Saothraichidh tu ann an ceàrdach armachd i is thèid a cleachdadh le lannsa "
+"fiodha gus gaisgich òga uidheamachadh. Thèid clogaidean a chleachdadh sa "
+"champa trèanaidh cuideachd – le biadh – gus saighdearan a thrèanadh o "
+"phuingean-beatha leibheil 0 gu puingean-beatha leibheil 1."
 
 #: ../../tribes/empire/plate_armour/conf:1
 msgid ""
@@ -1004,12 +1056,19 @@ msgid ""
 "It is produced in the armour smithy and used in the trainingscamp  - "
 "together with food - to train soldiers from healthpoints level 3 to level 4."
 msgstr ""
+"'S e an armachd as treasa aig saighdearan na h-Impireachd a th' anns an "
+"lùireach meatailt. Saothraichidh tu ann an ceàrdach armachd i is thèid a "
+"cleachdadh sa champa trèanaidh – le biadh – gus saighdearan a thrèanadh o "
+"phuingean-beatha leibheil 3 gu puingean-beatha leibheil 4."
 
 #: ../../tribes/empire/shovel/conf:1
 msgid ""
 "The shovel is needed for proper handling of plants. Therefore the forester "
 "and the vinefarmer use it. It is produced by the toolsmith."
 msgstr ""
+"Feumaidh tu sluasaid gus lusan a làimhseachadh mar bu chòir. Mar sin, "
+"cleachdaidh am planntair-coille is an tuathanach-fìona tè. Thèid a "
+"saothrachadh le gobha acainnean."
 
 #: ../../tribes/empire/grape/conf:1
 msgid ""
@@ -1042,6 +1101,9 @@ msgid ""
 "and used in a trainingscamp - together with food - to train soldiers from "
 "attack level 1 to level 2."
 msgstr ""
+"Seo lannsa leasaichte le barr stàilinn. Saothraichidh tu ann an ceàrdach arm "
+"i is thèid a cleachdadh sa champa trèanaidh – le biadh – gus ionnsaigh nan "
+"saighdearan a thrèanadh o leibheil 1 gu leibheil 2."
 
 #: ../../tribes/empire/war_lance/conf:1
 msgid ""
@@ -1060,6 +1122,9 @@ msgid ""
 "a trainingscamp - together with food - to train soldiers from attack level 0 "
 "to attack level 1."
 msgstr ""
+"Tha spìc iarainn aig an lannsa seo. Saothraichidh tu ann an ceàrdach arm i "
+"is thèid a cleachdadh sa champa trèanaidh – le biadh – gus ionnsaigh nan "
+"saighdearan a thrèanadh o leibheil 0 gu leibheil 1."
 
 #: ../../tribes/empire/pick/conf:1
 msgid ""
@@ -1290,6 +1355,9 @@ msgid ""
 "Also the donkeyfarm, the sheepfarm and the piggery need to be supplied with "
 "water."
 msgstr ""
+"Is bith-bhrìgh an t-uisge! Cleachdaidh an taigh-fuine is an taigh-grùide e. "
+"Tha an tuathanas asalan, an tuathanas chaorach is an fhail feumach air uisge "
+"cuideachd."
 
 #: ../../tribes/empire/conf:195
 msgid "Weapon Smithy"
@@ -1327,6 +1395,9 @@ msgid ""
 "mills and breweries. Also donkeyfarms, sheepfarms and piggeries need to be "
 "supplied with wheat."
 msgstr ""
+"Tha mhair thu beò gun chruithneachd. Saothraichidh na tuathanasan i is thèid "
+"a chleachdadh leis na muileannan is na taighean-grùide. Tha tuathanasan "
+"asalan, tuathanasan chaorach is failean feumach air cruithneachd cuideachd."
 
 #: ../../tribes/empire/conf:97
 msgid "Wine"
@@ -1357,6 +1428,8 @@ msgstr "Clòimh"
 #: ../../tribes/empire/wool/conf:1
 msgid "Wool is the hair of sheep. Weaving mills use it to make cloth."
 msgstr ""
+"'S e gaoisid nan caorach a th' anns a' chlòimh. Cleachdaidh taighean nam "
+"beart i gus clò a dhèanamh."
 
 #: ../../tribes/empire/armoursmithy/conf:35
 #: ../../tribes/empire/bakery/conf:24
