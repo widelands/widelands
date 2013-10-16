@@ -2245,7 +2245,8 @@ void NetHost::checkHungClients()
 					// inform the other clients about the problem regulary
 					if (deltanow - d->clients.at(i).lastdelta > 30) {
 						char buf[5];
-						snprintf(buf, sizeof(buf), "%li", deltanow);
+						//snprintf(buf, sizeof(buf), "%li", deltanow);
+						snprintf(buf, sizeof(buf), ngettext("%li second", "%li seconds", deltanow), deltanow);
 						sendSystemMessageCode
 							("CLIENT_HUNG", d->settings.users.at(d->clients.at(i).usernum).name, buf);
 						d->clients.at(i).lastdelta = deltanow;

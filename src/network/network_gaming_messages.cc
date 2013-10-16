@@ -159,8 +159,8 @@ void NetworkGamingMessages::fill_map() {
 	ngmessages["COMPLETED_FILE_TRANSFER"] = _("Completed transfer of file %s to %s");
 	ngmessages["SENDING_FILE_PART"]       = _("Sending part %s of file %s to %s");
 	ngmessages["PLAYER_DEFEATED"]         = _("The player \"%s\" was defeated and became spectator.");
-	ngmessages["CLIENT_HUNG"]             = _("Client %s did not answer for more than %s seconds.");
+	ngmessages["CLIENT_HUNG"]             = _("Client %s did not answer for more than %s.");
 	ngmessages["CLIENT_HUNG_AUTOKICK"]    =
-		_("Client %s will automatically be kicked, if no answer is received within %s seconds.");
+		_("Client %s will automatically be kicked, if no answer is received within %s.");
 
 }
