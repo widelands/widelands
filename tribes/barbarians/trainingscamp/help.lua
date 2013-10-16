@@ -24,12 +24,12 @@ return {
 		dependencies({"tribes/barbarians/soldier/untrained+evade.png","tribes/barbarians/trainingscamp/menu.png","tribes/barbarians/soldier/fulltrained.png"}) ..
 		rt(h3(_"Attack Training:")) ..
 		dependencies({"tribes/barbarians/axefactory/menu.png","tribes/barbarians/sharpaxe/menu.png;tribes/barbarians/broadaxe/menu.png","tribes/barbarians/trainingscamp/menu.png"}) ..
-		rt(p(_"Provided by the " .. _"Axefactory")) ..
+		rt(p(_"Provided by the Axefactory")) ..
 		dependencies({"tribes/barbarians/warmill/menu.png","tribes/barbarians/sharpaxe/menu.png;tribes/barbarians/broadaxe/menu.png;tribes/barbarians/bronzeaxe/menu.png;tribes/barbarians/battleaxe/menu.png;tribes/barbarians/warriorsaxe/menu.png","tribes/barbarians/trainingscamp/menu.png"}) ..
-		rt(p(_"Provided by the " .. _"War Mill")) ..
+		rt(p(_"Provided by the War Mill")) ..
 		rt(h3(_"Hitpoints Training:")) ..
 		dependencies({"tribes/barbarians/helmsmithy/menu.png","tribes/barbarians/helm/menu.png;tribes/barbarians/mask/menu.png;tribes/barbarians/warhelmet/menu.png","tribes/barbarians/trainingscamp/menu.png"}) ..
-		rt(p(_"Provided by the " .. _"Helmsmithy")) ..
+		rt(p(_"Provided by the Helmsmithy")) ..
 		rt(h3(_"Both Trainings:")) ..
 		image_line("tribes/barbarians/pittabread/menu.png",1,p(_"%s and":format(_"Pitta Bread"))) ..
 		image_line("tribes/barbarians/fish/menu.png;tribes/barbarians/meat/menu.png",1,p(_"%s or %s":format(_"Fish",_"Meat"))) ..
@@ -58,5 +58,5 @@ return {
 		text_line(_"Experience levels:", "n/a") ..
 	--Production Section
 		rt(h2(_"Production")) ..
-		text_line(_"Performance:", _"If all needed wares are delivered in time, a %s can train one new soldier in %s and %s to the final level in %s on average.":format(_"Trainingscamp",_"Attack",_"Hitpoints","4m40s"))
+		text_line(_"Performance:", _"If all needed wares are delivered in time, a %1s can train one new soldier in %2s and %3s to the final level in %4s on average.":format(_"Trainingscamp",_"Attack",_"Hitpoints","4m40s"))
 }
