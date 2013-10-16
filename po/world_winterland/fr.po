@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: Widelands svn4866\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2013-09-15 17:41+0000\n"
-"PO-Revision-Date: 2013-09-18 16:32+0000\n"
-"Last-Translator: Yves MATHIEU <MisterY_vonvon@hotmail.com>\n"
+"PO-Revision-Date: 2013-10-15 11:50+0000\n"
+"Last-Translator: fk <Unknown>\n"
 "Language-Team: Language <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-09-19 04:32+0000\n"
-"X-Generator: Launchpad (build 16765)\n"
+"X-Launchpad-Export-Date: 2013-10-16 04:33+0000\n"
+"X-Generator: Launchpad (build 16799)\n"
 
 #: ../../worlds/winterland/conf:45
 msgid "Aspen"
@@ -38,7 +38,7 @@ msgstr "Blaireau"
 
 #: ../../worlds/winterland/terrainconf:80
 msgid "Beach"
-msgstr ""
+msgstr "Plage"
 
 #: ../../worlds/winterland/conf:65
 msgid "Beech"
@@ -131,15 +131,15 @@ msgstr "Herbe"
 
 #: ../../worlds/winterland/terrainconf:31
 msgid "Ice"
-msgstr ""
+msgstr "Glace"
 
 #: ../../worlds/winterland/terrainconf:19
 msgid "Ice flows"
-msgstr ""
+msgstr "Glaçons"
 
 #: ../../worlds/winterland/terrainconf:25
 msgid "Ice flows2"
-msgstr ""
+msgstr "Glaçons2"
 
 #: ../../worlds/winterland/resconf:20
 msgid "Iron"
@@ -163,7 +163,7 @@ msgstr "Mélèze minuscule"
 
 #: ../../worlds/winterland/terrainconf:91
 msgid "Lava"
-msgstr ""
+msgstr "Lave"
 
 #: ../../worlds/winterland/conf:85
 msgid "Lynx"
@@ -267,7 +267,7 @@ msgstr "Squelette"
 
 #: ../../worlds/winterland/terrainconf:96
 msgid "Snow"
-msgstr ""
+msgstr "Neige"
 
 #: ../../worlds/winterland/conf:30
 msgid "Snowman"
@@ -338,11 +338,11 @@ msgstr "Toundra taïga"
 
 #: ../../worlds/winterland/terrainconf:50
 msgid "Tundra2"
-msgstr ""
+msgstr "Toundra2"
 
 #: ../../worlds/winterland/terrainconf:56
 msgid "Tundra3"
-msgstr ""
+msgstr "Toundra3"
 
 #: ../../worlds/winterland/resconf:36
 #: ../../worlds/winterland/terrainconf:37

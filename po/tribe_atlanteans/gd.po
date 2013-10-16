@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2013-09-15 17:41+0000\n"
-"PO-Revision-Date: 2013-10-12 18:51+0000\n"
+"PO-Revision-Date: 2013-10-15 11:14+0000\n"
 "Last-Translator: GunChleoc <Unknown>\n"
 "Language-Team: Fòram na Gàidhlig http://www.foramnagaidhlig.net\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-10-13 05:14+0000\n"
+"X-Launchpad-Export-Date: 2013-10-16 04:33+0000\n"
 "X-Generator: Launchpad (build 16799)\n"
 "Language: gd\n"
 
@@ -256,7 +256,7 @@ msgstr "Gearraidh e pìosan de ghraineal à chlachan."
 
 #: ../../tribes/atlanteans/soldier/conf:1
 msgid "Defend and Conquer!"
-msgstr ""
+msgstr "Dìon is ceannsaich!"
 
 #: ../../tribes/atlanteans/conf:44
 msgid "Destroyed building"
@@ -307,6 +307,9 @@ msgid ""
 "Fire tongs are tools of the smelter, who works in the smelting works. They "
 "are produced by the toolsmith."
 msgstr ""
+"'S e acainn a chleachdas an leaghadair a tha sa chlobha teine a "
+"dh'obraicheas ann an ceàrdach leaghadair. Thèid a saothrachadh le gobha "
+"acainnean."
 
 #: ../../tribes/atlanteans/conf:71
 msgid "Fish"
@@ -812,6 +815,8 @@ msgstr "Taigh-rabhadair"
 msgid ""
 "Scouts like Scotty the scout scout unscouted area in a scouty fashion."
 msgstr ""
+"An rabhadair a rabhas mun aineol mar a bheachdaicheas am beachdadair air "
+"nach eil fios no fàth air."
 
 #: ../../tribes/atlanteans/conf:90
 msgid "Scythe"
@@ -847,6 +852,9 @@ msgid ""
 "Shovels are needed for proper handling of plants. Therefore the forester and "
 "the blackroot farmer are using them. They are produced by the toolsmith."
 msgstr ""
+"Feumaidh tu sluasaid gus lusan a làimhseachadh mar bu chòir. Mar sin, "
+"cleachdaidh am planntair-coille is an tuathanach fhreumhagan tè. Thèid a "
+"saothrachadh le gobha acainnean."
 
 #: ../../tribes/atlanteans/dungeon/conf:39
 #: ../../tribes/atlanteans/labyrinth/conf:45
@@ -922,6 +930,9 @@ msgid ""
 "weren't build. You are at an disadvantage with this; consider restarting\n"
 "this map with a fair starting condition."
 msgstr ""
+"Cha robh rum gu leòr ann airson cuid dhe na togalaichean tòiseachaidh agad\n"
+"is cha deach an togail. Cuiridh seo èis ort; saoil an tòisich thu\n"
+"air a' mhapa seo a-rithist le cumhan tòiseachaidh cothromach?"
 
 #: ../../tribes/atlanteans/conf:128
 msgid "Spiderbreeder"
@@ -992,17 +1003,19 @@ msgstr ""
 #: ../../tribes/atlanteans/scythe/conf:1
 msgid ""
 "The Scythe is the tool of the farmers. It is produced by the toolsmith."
-msgstr ""
+msgstr "Tha tuathanaich feumach air an fhàl seo. Nì an gobha acainnean e."
 
 #: ../../tribes/atlanteans/conf:4
 msgid "The Widelands Development Team"
-msgstr ""
+msgstr "An sgioba leasachaidh Widelands"
 
 #: ../../tribes/atlanteans/bakingtray/conf:1
 msgid ""
 "The bread paddle is the tool of the baker, each baker needs its own. It is "
 "produced by the toolsmith."
 msgstr ""
+"Is acainn an fhuineadair a th' anns a' chrann-arain is bith feum aig gach "
+"fuineadair air fear aige fhèin. Thèid a shaothrachadh le gobha acainnean."
 
 #: ../../tribes/atlanteans/double_trident/conf:1
 msgid ""
@@ -1013,7 +1026,7 @@ msgstr ""
 
 #: ../../tribes/atlanteans/fisher/conf:1
 msgid "The fisher fishes delicious fish."
-msgstr ""
+msgstr "Iasgaichidh an t-iasgair iasg gu h-èasgaidh."
 
 #: ../../tribes/atlanteans/fishing_net/conf:1
 msgid "The fishing net is used by the fisher and produced by the toolsmith."
@@ -1025,6 +1038,9 @@ msgid ""
 "weaponsmiths and armoursmiths. Make sure you always got some in reserve! It "
 "is produced by the toolsmith."
 msgstr ""
+"'S e acainn riatanach a th' anns an òrd. Feumaidh gach clach-eòlaiche, "
+"togalaiche, gobha armachd is gobha arm fear. Dèan cinnteach gu bheil cuid "
+"air fhàgail dhut an-còmhnaidh! Nì an gobha acainnean iad."
 
 #: ../../tribes/atlanteans/long_trident/conf:1
 msgid ""
@@ -1062,6 +1078,8 @@ msgstr ""
 msgid ""
 "This bow is used by the Atlantean hunter. It is produced by the toolsmith."
 msgstr ""
+"Cleachdaidh sealgairean nan Atlantach am bogha seo. Saothraichidh an gobha "
+"acainnean e."
 
 #: ../../tribes/atlanteans/corn/conf:1
 msgid ""
@@ -1116,6 +1134,7 @@ msgid ""
 "This tribe is known from the oldest tales. The sons and daughters of "
 "Atlantis."
 msgstr ""
+"Tha sinn eòlach air an treubh seo o shean. Seo mic is nigheannan Atlantais."
 
 #: ../../tribes/atlanteans/spideryarn/conf:1
 msgid ""

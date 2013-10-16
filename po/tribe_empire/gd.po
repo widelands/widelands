@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2013-09-15 17:41+0000\n"
-"PO-Revision-Date: 2013-10-14 12:09+0000\n"
+"PO-Revision-Date: 2013-10-15 11:13+0000\n"
 "Last-Translator: GunChleoc <Unknown>\n"
 "Language-Team: Fòram na Gàidhlig http://www.foramnagaidhlig.net\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-10-15 04:32+0000\n"
+"X-Launchpad-Export-Date: 2013-10-16 04:33+0000\n"
 "X-Generator: Launchpad (build 16799)\n"
 "Language: gd\n"
 
@@ -443,7 +443,7 @@ msgstr "Prìomh-àras meadhanach"
 
 #: ../../tribes/empire/conf:164
 msgid "Headquarters shipwreck"
-msgstr ""
+msgstr "Prìomh-àras luinge briste"
 
 #: ../../tribes/empire/conf:75
 msgid "Heavy Lance"
@@ -1075,18 +1075,24 @@ msgid ""
 "These grapes are the basic for a tasty wine. They are harvested in a "
 "vineyard and processed in a winery."
 msgstr ""
+"Cha dèan thu fìon às aonais nam fìon-dhearcan blasta seo. Buainidh tu ann am "
+"fìon-lios iad is nì thu fìon dhiubh ann am fìon-lann."
 
 #: ../../tribes/empire/basket/conf:1
 msgid ""
 "This basket is needed by the vinefarmer for harvesting the grapes. It is "
 "produced by the toolsmith."
 msgstr ""
+"Feumaidh gach tuathanach-fìona basgaid gus na fìon-dhearcan a bhuain. Nì an "
+"gobha acainnean iad."
 
 #: ../../tribes/empire/beer/conf:1
 msgid ""
 "This beer is produced in a brewery out of wheat and water. It is consumed by "
 "miners in coal and iron ore mines."
 msgstr ""
+"Nì thu an leann seo ann an taigh-grùide à cruithneachd is uisge. Òlaidh na "
+"mèinnearan sna mèinnean guail is cloich-iarainn e."
 
 #: ../../tribes/empire/heavy_lance/conf:1
 msgid ""
@@ -1094,6 +1100,9 @@ msgid ""
 "in the weapon smithy and used in the trainingscamp - together with food - to "
 "train soldiers from attack level 2 to level 3."
 msgstr ""
+"Seo lannsa làidir le barr stàilinn is lann bheag. Saothraichidh tu ann an "
+"ceàrdach arm i is thèid a cleachdadh sa champa trèanaidh – le biadh – gus "
+"ionnsaigh nan saighdearan a thrèanadh o leibheil 2 gu leibheil 3."
 
 #: ../../tribes/empire/advanced_lance/conf:1
 msgid ""
@@ -1111,6 +1120,9 @@ msgid ""
 "warriors. It is used in the trainingscamp - together with food - to train "
 "soldiers from attack level 3 to level 4."
 msgstr ""
+"Seo an arm as fhearr is as geura a nì goibhnean arm na h-Impireachd airson "
+"nan gaisgeach. Thèid a chleachdadh sa champa trèanaidh – le biadh – gus "
+"ionnsaigh nan saighdearan a thrèanadh o leibheil 3 gu leibheil 4."
 
 #: ../../tribes/empire/conf:6
 msgid "This is the culture of the roman Empire."
@@ -1143,12 +1155,17 @@ msgid ""
 "This spear is light enough to be thrown, but heavy enough to kill any animal "
 "in one blow. It is only used by the hunters."
 msgstr ""
+"Tha an t-sleagh seo aotrom gu leòr ach an tilg thu i, ach trom gu leòr ach "
+"am marbh thu beathach sam bith leatha le aon bhuille. Cha chleachd ach "
+"sealgairean i."
 
 #: ../../tribes/empire/wine/conf:1
 msgid ""
 "This tasty wine is consumed in marble and gold mines. It is produced in a "
 "winery."
 msgstr ""
+"Òlar am fìon blasta seo sna mèinnean marbhail is òir. Nì thu ann am fìon-"
+"lann e."
 
 #: ../../tribes/empire/wood_lance/conf:1
 msgid ""
@@ -1156,6 +1173,9 @@ msgid ""
 "produced in the weapon smithy. Together with a helmet it is the equipment to "
 "fit out young soldiers."
 msgstr ""
+"'S e an t-arm bunasach ann an siostam arm na h-Impireachd a th' anns an "
+"lannsa fiodha. Thèid a shaothrachadh ann an ceàrdach arm. Beiridh gach "
+"saighdear òr tè is clogaid."
 
 #: ../../tribes/empire/conf:131
 msgid "Toolsmith"
@@ -1192,6 +1212,10 @@ msgid ""
 "fell the trees; foresters care for the supply of trees. Trunks are also used "
 "by the charcoal burner, the toolsmithy and the sawmill."
 msgstr ""
+"'S e stuth togail cudromach airson na h-Impireachd a th' anns na stuic. "
+"Thèid na craobhan a leagail le coilltearan is gabhaidh planntairean-coille "
+"cùram dhe na craobhan. Cleachdaich an loisgeadair fiodha, a' cheàrdach "
+"acainnean is am muileann sàbhaidh stuic cuideachd."
 
 #: ../../tribes/empire/trainingscamp/conf:47
 msgid "Upgrade soldier attack 0"
@@ -1368,6 +1392,8 @@ msgid ""
 "Weapons, armour and tools are made of iron. It is retrieved from iron ores "
 "in the smelting works."
 msgstr ""
+"Nì thu arim, armachd is acainnean de dh'iarainn. Gheibh tu iarainn à clach-"
+"iarainn ann an ceàrdach leaghadair."
 
 #: ../../tribes/empire/conf:133
 msgid "Weaponsmith"
@@ -1420,6 +1446,8 @@ msgid ""
 "Wood is a basic building material of the Empire. It is also consumed in the "
 "weapon smithy."
 msgstr ""
+"'S e stuth togail bunasach aig an Impireachd a th' anns an fhiodh. Tha a' "
+"cheàrdach arm feumach air cuideachd."
 
 #: ../../tribes/empire/conf:100
 msgid "Wool"
