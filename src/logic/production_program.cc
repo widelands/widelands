@@ -1019,7 +1019,7 @@ void ProductionProgram::ActRecruit::execute
 	ps.m_working_positions[0].worker->update_task_buildingwork(game);
 
 	const Tribe_Descr & tribe = ps.owner().tribe();
-	std::string result_string = _("Recruited ");
+	std::string unit_string = ("");
 	assert(m_items.size());
 	for (wl_const_range<Items> i(m_items); i;)
 	{
@@ -1028,14 +1028,15 @@ void ProductionProgram::ActRecruit::execute
 			if (1 < count) {
 				char buffer[5];
 				sprintf(buffer, _("%u "), count);
-				result_string += buffer;
+				unit_string += buffer;
 			}
 		}
-		result_string += tribe.get_worker_descr(i.current->first)->descname();
+		unit_string += tribe.get_worker_descr(i.current->first)->descname();
 		if (i.advance().empty())
 			break;
-		result_string += _(", ");
+		unit_string += _(", ");
 	}
+	std::string result_string = (boost::format(_("Recruited %s?")) % unit_string).str();
 	snprintf
 		(ps.m_result_buffer, sizeof(ps.m_result_buffer),
 		 "%s", result_string.c_str());

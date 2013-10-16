@@ -20,6 +20,7 @@
 #include "map_io/widelands_map_flag_data_packet.h"
 
 #include <map>
+#include <boost/format.hpp>
 
 #include "economy/flag.h"
 #include "logic/game.h"

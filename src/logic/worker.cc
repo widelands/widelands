@@ -17,6 +17,7 @@
  *
  */
 
+#include <boost/format.hpp>
 #include "logic/worker.h"
 
 #include "economy/economy.h"
@@ -602,7 +603,7 @@ void Worker::informPlayer
 	building.send_message
 		(game,
 		 "mine",
-		 _("Out of ") + res_type,
+		 (boost::format(_("Out of %s")) % res_type).str(),
 		 std::string
 		 	(_
 		 	 ("The worker of this building cannot find any more resources "
