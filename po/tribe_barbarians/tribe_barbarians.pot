@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2013-09-15 17:41+0000\n"
+"POT-Creation-Date: 2013-10-16 06:12+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -358,7 +358,6 @@ msgstr ""
 #: ../../tribes/barbarians/deep_coalmine/help.lua:30
 #: ../../tribes/barbarians/deeper_coalmine/help.lua:29
 #: ../../tribes/barbarians/metalworks/help.lua:59
-#: ../../tribes/barbarians/trainingscamp/help.lua:27
 #: ../../tribes/barbarians/warmill/help.lua:35
 msgid ""
 "Axefactory"
@@ -1365,7 +1364,6 @@ msgstr ""
 #: ../../tribes/barbarians/conf:207
 #: ../../tribes/barbarians/deep_coalmine/help.lua:32
 #: ../../tribes/barbarians/deeper_coalmine/help.lua:31
-#: ../../tribes/barbarians/trainingscamp/help.lua:32
 msgid ""
 "Helmsmithy"
 msgstr ""
@@ -1419,14 +1417,14 @@ msgid ""
 "Hunting Spear"
 msgstr ""
 
+#: ../../tribes/barbarians/trainingscamp/help.lua:61
+msgid ""
+"If all needed wares are delivered in time, a %1s can train one new soldier in %2s and %3s to the final level in %4s on average."
+msgstr ""
+
 #: ../../tribes/barbarians/battlearena/help.lua:55
 msgid ""
 "If all needed wares are delivered in time, a %s can train %s for one soldier from 0 to the highest level in %s on average."
-msgstr ""
-
-#: ../../tribes/barbarians/trainingscamp/help.lua:61
-msgid ""
-"If all needed wares are delivered in time, a %s can train one new soldier in %s and %s to the final level in %s on average."
 msgstr ""
 
 #: ../../tribes/barbarians/bakery/help.lua:55
@@ -2073,10 +2071,18 @@ msgid ""
 msgstr ""
 
 #: ../../tribes/barbarians/trainingscamp/help.lua:27
-#: ../../tribes/barbarians/trainingscamp/help.lua:29
+msgid ""
+"Provided by the Axefactory"
+msgstr ""
+
 #: ../../tribes/barbarians/trainingscamp/help.lua:32
 msgid ""
-"Provided by the "
+"Provided by the Helmsmithy"
+msgstr ""
+
+#: ../../tribes/barbarians/trainingscamp/help.lua:29
+msgid ""
+"Provided by the War Mill"
 msgstr ""
 
 #: ../../tribes/barbarians/axefactory/help.lua:16
@@ -3283,7 +3289,6 @@ msgstr ""
 #: ../../tribes/barbarians/conf:201
 #: ../../tribes/barbarians/deep_coalmine/help.lua:31
 #: ../../tribes/barbarians/deeper_coalmine/help.lua:30
-#: ../../tribes/barbarians/trainingscamp/help.lua:29
 msgid ""
 "War Mill"
 msgstr ""

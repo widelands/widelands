@@ -1523,8 +1523,29 @@ msgid "Produced %s"
 msgstr ""
 
 #: ../../src/logic/production_program.cc:1022
-msgid "Recruited "
-msgstr ""
+msgid "Recruited %s"
+msgstr "%s air a thrusadh"
+
+#
+msgid "Provided by the Axefactory"
+msgstr "'Ga sholar leis an fhactaraidh thuaghan"
+
+#
+msgid "Provided by the War Mill"
+msgstr "'Ga sholar leis a' cheàrdach-cogaidh"
+
+#
+msgid "Provided by the Helmsmithy"
+msgstr "'Ga sholar leis a' cheàrdach chlogaidean"
+
+msgid "If all needed wares are delivered in time, "
+"a %1s can train one new soldier in %2s and %3s "
+"to the final level in %4s on average."
+msgstr "Ma thèid na h-uile bathar a lìbhrigeadh ri àm, "
+"bheir %1s %4s 'sa chuibheas gus %2s is %3s aig saighdear "
+"a thrèanadh gun leibheil dheireannach."
+
+
 
 #: ../../src/logic/production_program.cc:1069
 msgid "distance"
@@ -1727,12 +1748,13 @@ msgstr ""
 #, c-format
 msgid ""
 "should breed resource type %s, which does not exist in world; tribe is not "
-"compatible with world"
+"compatible with world" 
+
 msgstr ""
 
 #: ../../src/logic/worker.cc:605
-msgid "Out of "
-msgstr ""
+msgid "Out of %s"
+msgstr "%s a dhìth"
 
 #: ../../src/logic/worker.cc:608
 msgid ""
@@ -2164,8 +2186,22 @@ msgstr ""
 
 #: ../../src/network/internet_gaming.cc:434
 #, c-format
-msgid "Server time offset is %i seconds."
-msgstr ""
+msgid "Server time offset is %u second."
+msgid_plural "Server time offset is %u seconds."
+msgstr[0] "Tha frith-àireamh ama an fhrithealaiche na %u diog."
+msgstr[1] "Tha frith-àireamh ama an fhrithealaiche na %u dhiog."
+msgstr[2] "Tha frith-àireamh ama an fhrithealaiche na %u diogan."
+msgstr[3] "Tha frith-àireamh ama an fhrithealaiche na %u diog."
+
+#: ../../src/network/internet_gaming.cc:434
+#, c-format
+msgid "InternetGaming: Server time offset is %u second."
+msgid_plural "InternetGaming: Server time offset is %u seconds."
+msgstr[0] "Geama eadar-lìn: Tha frith-àireamh ama an fhrithealaiche na %u diog."
+msgstr[1] "Geama eadar-lìn: Tha frith-àireamh ama an fhrithealaiche na %u dhiog."
+msgstr[2] "Geama eadar-lìn: Tha frith-àireamh ama an fhrithealaiche na %u diogan."
+msgstr[3] "Geama eadar-lìn: Tha frith-àireamh ama an fhrithealaiche na %u diog."
+
 
 #: ../../src/network/internet_gaming.cc:454
 msgid "Invalid message type"
@@ -2538,6 +2574,10 @@ msgstr ""
 #, c-format
 msgid "Received command number %s, that is disallowed in this state."
 msgstr ""
+
+#, c-format
+msgid "%1$i%% built"
+msgstr "%1$i%% air a thogail"
 
 #: ../../src/network/network_gaming_messages.cc:142
 msgid "Client reports time to host that is running backwards."
@@ -3033,8 +3073,13 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/launchMPG.cc:649
 #, c-format
-msgid "* %i Players\n"
-msgstr ""
+msgid "* %u Player\n"
+msgid_plural "* %u Players\n"
+msgstr[0] "* %u chluicheadair\n"
+msgstr[1] "* %u chluicheadair\n"
+msgstr[2] "* %u cluicheadairean\n"
+msgstr[3] "* %u cluicheadair\n"
+
 
 #: ../../src/ui_fsmenu/launchMPG.cc:650
 #, c-format
@@ -3198,8 +3243,8 @@ msgid "Delete file"
 msgstr "Sguab às am faidhle"
 
 #: ../../src/ui_fsmenu/loadgame.cc:158 ../../src/ui_fsmenu/loadreplay.cc:139
-msgid "Do you really want to delete "
-msgstr ""
+msgid "Do you really want to delete %s?"
+msgstr "A bheil thu airson %s a sguabadh às?"
 
 #: ../../src/ui_fsmenu/loadgame.cc:215
 msgid "Savegame from dedicated server"
