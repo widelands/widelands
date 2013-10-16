@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2013-10-16 07:12+0100\n"
+"POT-Creation-Date: 2013-10-16 10:13+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -369,27 +369,27 @@ msgstr ""
 #: ../../src/logic/military_data.cc:58 ../../src/logic/immovable.cc:192
 #: ../../src/logic/immovable.cc:828 ../../src/logic/immovable.cc:868
 #: ../../src/logic/immovable.cc:1033 ../../src/logic/production_program.cc:114
-#: ../../src/logic/production_program.cc:276
-#: ../../src/logic/production_program.cc:283
-#: ../../src/logic/production_program.cc:301
-#: ../../src/logic/production_program.cc:318
-#: ../../src/logic/production_program.cc:397
-#: ../../src/logic/production_program.cc:401
-#: ../../src/logic/production_program.cc:532
-#: ../../src/logic/production_program.cc:546
-#: ../../src/logic/production_program.cc:664
-#: ../../src/logic/production_program.cc:738
-#: ../../src/logic/production_program.cc:894
-#: ../../src/logic/production_program.cc:992
-#: ../../src/logic/production_program.cc:1073
-#: ../../src/logic/production_program.cc:1083
-#: ../../src/logic/production_program.cc:1094
-#: ../../src/logic/production_program.cc:1250
-#: ../../src/logic/production_program.cc:1272
-#: ../../src/logic/production_program.cc:1331
+#: ../../src/logic/production_program.cc:281
+#: ../../src/logic/production_program.cc:288
+#: ../../src/logic/production_program.cc:306
+#: ../../src/logic/production_program.cc:323
+#: ../../src/logic/production_program.cc:402
+#: ../../src/logic/production_program.cc:406
+#: ../../src/logic/production_program.cc:541
+#: ../../src/logic/production_program.cc:555
+#: ../../src/logic/production_program.cc:673
+#: ../../src/logic/production_program.cc:747
+#: ../../src/logic/production_program.cc:907
+#: ../../src/logic/production_program.cc:1005
+#: ../../src/logic/production_program.cc:1086
+#: ../../src/logic/production_program.cc:1096
+#: ../../src/logic/production_program.cc:1107
+#: ../../src/logic/production_program.cc:1262
+#: ../../src/logic/production_program.cc:1284
 #: ../../src/logic/production_program.cc:1343
-#: ../../src/logic/production_program.cc:1352
-#: ../../src/logic/production_program.cc:1442 ../../src/logic/soldier.cc:70
+#: ../../src/logic/production_program.cc:1355
+#: ../../src/logic/production_program.cc:1364
+#: ../../src/logic/production_program.cc:1454 ../../src/logic/soldier.cc:70
 #: ../../src/logic/soldier.cc:77 ../../src/logic/soldier.cc:185
 #, c-format
 msgid "expected %s but found \"%s\""
@@ -2080,7 +2080,7 @@ msgid ""
 "atrTotal (%u) but found unknown attribute value (%u)"
 msgstr ""
 
-#: ../../src/logic/immovable.cc:141 ../../src/logic/production_program.cc:1651
+#: ../../src/logic/immovable.cc:141 ../../src/logic/production_program.cc:1663
 #, c-format
 msgid "unknown command type \"%s\""
 msgstr ""
@@ -2142,12 +2142,12 @@ msgstr ""
 msgid "immovable type %s"
 msgstr ""
 
-#: ../../src/logic/immovable.cc:829 ../../src/logic/production_program.cc:665
-#: ../../src/logic/production_program.cc:739
+#: ../../src/logic/immovable.cc:829 ../../src/logic/production_program.cc:674
+#: ../../src/logic/production_program.cc:748
 msgid "duration in ms"
 msgstr ""
 
-#: ../../src/logic/immovable.cc:868 ../../src/logic/production_program.cc:1442
+#: ../../src/logic/immovable.cc:868 ../../src/logic/production_program.cc:1454
 msgid "priority"
 msgstr ""
 
@@ -2406,8 +2406,8 @@ msgid ""
 msgstr ""
 
 #: ../../src/logic/production_program.cc:114
-#: ../../src/logic/production_program.cc:895
-#: ../../src/logic/production_program.cc:993
+#: ../../src/logic/production_program.cc:908
+#: ../../src/logic/production_program.cc:1006
 msgid "count"
 msgstr ""
 
@@ -2418,230 +2418,264 @@ msgid ""
 "type(s) is only %u, so the group can never be fulfilled by the site"
 msgstr ""
 
-#: ../../src/logic/production_program.cc:154
-msgid "not "
+#: ../../src/logic/production_program.cc:155
+#, c-format
+msgid "not %s"
 msgstr ""
 
-#: ../../src/logic/production_program.cc:176
-#: ../../src/logic/production_program.cc:197
-msgid "economy needs "
+#: ../../src/logic/production_program.cc:178
+#: ../../src/logic/production_program.cc:200
+#, c-format
+msgid "economy needs %s"
 msgstr ""
 
-#: ../../src/logic/production_program.cc:226
-msgid "site has "
+#: ../../src/logic/production_program.cc:232
+#: ../../src/logic/production_program.cc:835
+#: ../../src/logic/production_program.cc:856
+#, c-format
+msgid "%1$s %2$s"
 msgstr ""
 
-#: ../../src/logic/production_program.cc:252
+#: ../../src/logic/production_program.cc:234
+#: ../../src/logic/production_program.cc:839
+#, c-format
+msgid "%s,"
+msgstr ""
+
+#: ../../src/logic/production_program.cc:237
+#: ../../src/logic/production_program.cc:846
+#, c-format
+msgid "%s (%i)"
+msgstr ""
+
+#: ../../src/logic/production_program.cc:241
+#, c-format
+msgid "site has%s"
+msgstr ""
+
+#: ../../src/logic/production_program.cc:257
 msgid "workers need experience"
 msgstr ""
 
-#: ../../src/logic/production_program.cc:277
+#: ../../src/logic/production_program.cc:282
 msgid "ware type or worker type"
 msgstr ""
 
-#: ../../src/logic/production_program.cc:346
+#: ../../src/logic/production_program.cc:351
 #, c-format
 msgid "invalid condition: %s"
 msgstr ""
 
-#: ../../src/logic/production_program.cc:363
+#: ../../src/logic/production_program.cc:368
 #, c-format
 msgid "expected {\"failed\"|\"completed\"|\"skipped\"} but found \"%s\""
 msgstr ""
 
-#: ../../src/logic/production_program.cc:376
+#: ../../src/logic/production_program.cc:381
 msgid "expected \"and\" or end of input"
 msgstr ""
 
-#: ../../src/logic/production_program.cc:385
+#: ../../src/logic/production_program.cc:390
 msgid "expected condition at end of input"
 msgstr ""
 
-#: ../../src/logic/production_program.cc:391
+#: ../../src/logic/production_program.cc:396
 msgid "expected \"or\" or end of input"
-msgstr ""
-
-#: ../../src/logic/production_program.cc:425
-#, c-format
-msgid "Failed %s?"
 msgstr ""
 
 #: ../../src/logic/production_program.cc:426
 #, c-format
-msgid "Completed %s?"
+msgid "Failed %s"
 msgstr ""
 
-#: ../../src/logic/production_program.cc:427
+#: ../../src/logic/production_program.cc:428
 #, c-format
-msgid "Skipped %s?"
+msgid "Completed %s"
 msgstr ""
 
-#: ../../src/logic/production_program.cc:434
-#: ../../src/logic/production_program.cc:842
-msgid " and "
-msgstr ""
-
-#: ../../src/logic/production_program.cc:435
-#: ../../src/logic/production_program.cc:821
-msgid " because: "
+#: ../../src/logic/production_program.cc:430
+#, c-format
+msgid "Skipped %s"
 msgstr ""
 
 #: ../../src/logic/production_program.cc:446
-#: ../../src/wui/encyclopedia_window.cc:198
-msgid " or "
+#, c-format
+msgid "%s and "
 msgstr ""
 
-#: ../../src/logic/production_program.cc:447
-msgid " because not: "
+#: ../../src/logic/production_program.cc:449
+#, c-format
+msgid "%1$s because: %2$s"
 msgstr ""
 
-#: ../../src/logic/production_program.cc:496
+#: ../../src/logic/production_program.cc:462
+#, c-format
+msgid "%s or "
+msgstr ""
+
+#: ../../src/logic/production_program.cc:465
+#, c-format
+msgid "%1$s because not: %2$s"
+msgstr ""
+
+#: ../../src/logic/production_program.cc:505
 #, c-format
 msgid ""
 "the program \"%s\" has not (yet) been declared in %s (wrong declaration "
 "order?)"
 msgstr ""
 
-#: ../../src/logic/production_program.cc:518
-#: ../../src/logic/production_program.cc:523
-#: ../../src/logic/production_program.cc:528
+#: ../../src/logic/production_program.cc:527
+#: ../../src/logic/production_program.cc:532
+#: ../../src/logic/production_program.cc:537
 #, c-format
 msgid "%s handling method already defined"
 msgstr ""
 
-#: ../../src/logic/production_program.cc:518
+#: ../../src/logic/production_program.cc:527
 msgid "failure"
 msgstr ""
 
-#: ../../src/logic/production_program.cc:523
+#: ../../src/logic/production_program.cc:532
 msgid "completion"
 msgstr ""
 
-#: ../../src/logic/production_program.cc:528
+#: ../../src/logic/production_program.cc:537
 msgid "skip"
 msgstr ""
 
-#: ../../src/logic/production_program.cc:533
+#: ../../src/logic/production_program.cc:542
 msgid "{\"failure\"|\"completion\"|\"skip\"}"
 msgstr ""
 
-#: ../../src/logic/production_program.cc:547
+#: ../../src/logic/production_program.cc:556
 msgid "{\"fail\"|\"complete\"|\"skip\"|\"repeat\"}"
 msgstr ""
 
-#: ../../src/logic/production_program.cc:669
-#: ../../src/logic/production_program.cc:691
+#: ../../src/logic/production_program.cc:678
+#: ../../src/logic/production_program.cc:700
 #, c-format
 msgid "sleep: %s"
 msgstr ""
 
-#: ../../src/logic/production_program.cc:687
+#: ../../src/logic/production_program.cc:696
 #, c-format
 msgid "Unknown parameter \"%s\""
 msgstr ""
 
-#: ../../src/logic/production_program.cc:689
+#: ../../src/logic/production_program.cc:698
 msgid "No parameter given!"
 msgstr ""
 
-#: ../../src/logic/production_program.cc:722
+#: ../../src/logic/production_program.cc:731
 msgid "idle animation is default; calling is not allowed"
 msgstr ""
 
-#: ../../src/logic/production_program.cc:771
+#: ../../src/logic/production_program.cc:780
 msgid "expected ware_type1[,ware_type2[,...]][:N] ..."
 msgstr ""
 
-#: ../../src/logic/production_program.cc:818
-msgid "failed"
+#: ../../src/logic/production_program.cc:828
+#, c-format
+msgid "Failed %s because:"
 msgstr ""
 
-#: ../../src/logic/production_program.cc:845
+#: ../../src/logic/production_program.cc:852
+#, c-format
+msgid "%s and"
+msgstr ""
+
+#: ../../src/logic/production_program.cc:857
 msgid " is missing"
 msgid_plural " are missing"
 msgstr[0] ""
 msgstr[1] ""
 
-#: ../../src/logic/production_program.cc:910
-#: ../../src/logic/production_program.cc:1008
+#: ../../src/logic/production_program.cc:923
+#: ../../src/logic/production_program.cc:1021
 #, c-format
 msgid ""
 "%s is not declared as an output (\"output=%s\" was not found in the [global] "
 "section)"
 msgstr ""
 
-#: ../../src/logic/production_program.cc:937
-#: ../../src/logic/production_program.cc:1033
+#: ../../src/logic/production_program.cc:950
+#: ../../src/logic/production_program.cc:1046
 #, c-format
 msgid "%u "
 msgstr ""
 
-#: ../../src/logic/production_program.cc:944
-#: ../../src/logic/production_program.cc:1040
+#: ../../src/logic/production_program.cc:957
+#: ../../src/logic/production_program.cc:1053
 msgid ", "
 msgstr ""
 
-#: ../../src/logic/production_program.cc:947
+#: ../../src/logic/production_program.cc:960
 #, c-format
 msgid "Produced %s"
 msgstr ""
 
-#: ../../src/logic/production_program.cc:1042
+#: ../../src/logic/production_program.cc:1055
 #, c-format
 msgid "Recruited %s?"
 msgstr ""
 
-#: ../../src/logic/production_program.cc:1073
+#: ../../src/logic/production_program.cc:1086
 msgid "distance"
 msgstr ""
 
-#: ../../src/logic/production_program.cc:1084
-#: ../../src/logic/production_program.cc:1095
+#: ../../src/logic/production_program.cc:1097
+#: ../../src/logic/production_program.cc:1108
 msgid "percentage"
 msgstr ""
 
-#: ../../src/logic/production_program.cc:1212
+#: ../../src/logic/production_program.cc:1112
+#, c-format
+msgid "%1$s %2$s mine %3$s"
+msgstr ""
+
+#: ../../src/logic/production_program.cc:1224
 #, c-format
 msgid "No left resources found!"
 msgstr ""
 
-#: ../../src/logic/production_program.cc:1233
+#: ../../src/logic/production_program.cc:1245
 msgid "Main vein exhausted"
 msgstr ""
 
-#: ../../src/logic/production_program.cc:1235
+#: ../../src/logic/production_program.cc:1247
 msgid ""
 "This mines' main vein exhausted. Expect strongly diminished returns on "
 "investment. You should consider to expand, dismantle or destruct it."
 msgstr ""
 
-#: ../../src/logic/production_program.cc:1250
-#: ../../src/logic/production_program.cc:1331
+#: ../../src/logic/production_program.cc:1262
+#: ../../src/logic/production_program.cc:1343
 msgid "soldier type"
 msgstr ""
 
-#: ../../src/logic/production_program.cc:1263
+#: ../../src/logic/production_program.cc:1275
 #, c-format
 msgid "expected {\"hp\"|\"attack\"|\"defense\"|\"evade\"} but found \"%s\""
 msgstr ""
 
-#: ../../src/logic/production_program.cc:1272
-#: ../../src/logic/production_program.cc:1352
+#: ../../src/logic/production_program.cc:1284
+#: ../../src/logic/production_program.cc:1364
 msgid "level"
 msgstr ""
 
-#: ../../src/logic/production_program.cc:1286
+#: ../../src/logic/production_program.cc:1298
 #, c-format
 msgid "No soldier to train!"
 msgstr ""
 
-#: ../../src/logic/production_program.cc:1296
-#: ../../src/logic/production_program.cc:1386
+#: ../../src/logic/production_program.cc:1308
+#: ../../src/logic/production_program.cc:1398
 #, c-format
 msgid "No soldier for this training level found!"
 msgstr ""
 
-#: ../../src/logic/production_program.cc:1362
+#: ../../src/logic/production_program.cc:1374
 #, c-format
 msgid "expected level > %u but found \"%s\""
 msgstr ""
@@ -3620,6 +3654,10 @@ msgstr ""
 
 #: ../../src/wui/encyclopedia_window.cc:85
 msgid "Quantity"
+msgstr ""
+
+#: ../../src/wui/encyclopedia_window.cc:198
+msgid " or "
 msgstr ""
 
 #: ../../src/wui/interactive_base.cc:316
