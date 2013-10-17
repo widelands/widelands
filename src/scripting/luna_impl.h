@@ -188,11 +188,16 @@ int m_method_dispatch(lua_State * const L) {
  */
 template <class T>
 int m_garbage_collect(lua_State * const L) {
+	log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 	T * * const obj = static_cast<T * *>(luaL_checkudata(L, -1, T::className));
+	log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 
+	log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 	if (obj)
 		delete *obj;
+	log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 
+	log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 	return 0;
 }
 

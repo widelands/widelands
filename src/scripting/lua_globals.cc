@@ -127,6 +127,8 @@ static int L_use(lua_State * L) {
 
 		lua->run_script(ns, script);
 	} catch (LuaError & e) {
+		// NOCOM(#sirver): Report_error does not seem to print anything? Maybe something to be done with pcallk.
+		log("#sirver e.what(): %s\n", e.what());
 		report_error(L, "%s", e.what());
 	}
 	return 0;
