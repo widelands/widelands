@@ -90,7 +90,7 @@ local function _calc_points(plr)
 	)
 
 	local points = 0
-	local descr = { game_status_collectors.title:format(plr.name) }
+	local descr = { (_"Status for %s"):format(plr.name) .. "<br>"}
 	for idx, ware in ipairs(point_table[plr.tribe_name .. "_order"]) do
 		local value = point_table[plr.tribe_name][ware]
 		local count = 0
@@ -103,7 +103,8 @@ local function _calc_points(plr)
 			ware, value, count, lpoints
 		)
 	end
-	descr[#descr+1] = game_status_collectors.total:format(points)
+	-- TODO needs ngettext
+	descr[#descr+1] = (_"Total: %i points"):format(points)
 
 	return points, p(table.concat(descr, "\n"))
 end
@@ -114,11 +115,12 @@ local function _send_state(remaining_time, plrs)
 	local m = remaining_time % 60
 	local time = ""
 	if h > 0 then
-		time = ("%ih%02im"):format(h,m)
+		-- TRANSLATORS: Context: "The game will end in %s."
+		time = (_"%ih%02im"):format(h,m)
 	else
 		time = ("%i minutes"):format(m)
 	end
-	local msg = p(game_status_collectors.end_in):format(time)
+	local msg = p(_"The game will end in %s."):format(time)
 	msg = msg .. "\n\n"
 
 	for idx, plr in ipairs(plrs) do
@@ -149,7 +151,7 @@ end
 -- Instantiate the hook to calculate points
 if hooks == nil then hooks = {} end
 hooks.custom_statistic = {
-	name = game_status_collectors.points,
+	name = _("Points"),
 	pic = "pics/genstats_points.png",
 	calculator = function(p)
 		local pts = _calc_points(p)

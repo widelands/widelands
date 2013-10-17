@@ -147,17 +147,19 @@ return {
 		end
 
 		function _send_state()
-			local msg1 = game_status_territoral_lord.other1:format(currentcandidate)
+			local candidate = currentcandidate
 			if candidateisteam then
-				local teamstr = game_status_territoral_lord.team:format(currentcandidate)
-				msg1 = game_status_territoral_lord.other1:format(teamstr)
+				candidate = (_"Team %i"):format(currentcandidate)
 			end
+			local msg1 = (_"%s owns more than half of the map's area."):format(candidate)
 			msg1 = msg1 .. "\n"
-			msg1 = msg1 .. game_status_territoral_lord.other2:format(remaining_time / 60)
+			-- TODO needs ngettext
+			msg1 = msg1 .. (_"You still got %i minutes to prevent a victory."):format(remaining_time / 60)
 
-			local msg2 = game_status_territoral_lord.player1
+			local msg2 = _"You own more than half of the map's area."
 			msg2 = msg2 .. "\n"
-			msg2 = msg2 .. game_status_territoral_lord.player2:format(remaining_time / 60)
+			-- TODO needs ngettext
+			msg2 = msg2 .. (_"Keep it for %i more minutes to win the game."):format(remaining_time / 60)
 
 			for idx, p in ipairs(plrs) do
 				if candidateisteam and currentcandidate == p.team

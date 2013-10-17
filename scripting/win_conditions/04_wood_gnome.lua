@@ -79,12 +79,15 @@ return {
 
 	local function _send_state()
 		local playerpoints = _calc_points()
-		local msg = game_status_woodgnome.end_in:format(remaining_time)
+		-- TODO needs ngettext
+		local msg = (_"The game will end in %i minutes."):format(remaining_time)
 		msg = msg .. "\n\n"
 		msg = msg .. game_status.body
 		for idx,plr in ipairs(plrs) do
 			msg = msg .. "\n"
-			msg = msg .. game_status_woodgnome.trees:format(plr.name, playerpoints[plr.number])
+			-- TODO needs ngettext
+			local trees = (_"%i trees"):format(playerpoints[plr.number])
+			msg = msg ..  (_"%1s has %2s at the moment."):format(playerpoints[plr.number])
 		end
 
 		broadcast(plrs, game_status.title, msg)
@@ -99,7 +102,7 @@ return {
 	-- Install statistics hook
 	if hooks == nil then hooks = {} end
 	hooks.custom_statistic = {
-		name = game_status_woodgnome.owned,
+		name = _"Trees owned",
 		pic = "pics/genstats_trees.png",
 		calculator = function(p)
 			local pts = _calc_points(p)
@@ -134,12 +137,15 @@ return {
 	msg = msg .. game_status.body
 	for idx,plr in ipairs(plrs) do
 		msg = msg .. "\n"
-		msg = msg .. game_status_woodgnome.had1:format(plr.name)
-		msg = msg .. game_status_woodgnome.had2:format(playerpoints[plr.number])
+		-- TODO needs ngettext
+		local trees = (_"%i trees"):format(playerpoints[plr.number])
+		msg = msg ..  (_"%1s had %2s."):format(plr.name,trees)
 	end
 	msg = msg .. "\n\n"
-	msg = msg .. game_status_woodgnome.winner1:format(points[#points][1].name)
-	msg = msg .. game_status_woodgnome.winner2:format(playerpoints[points[#points][1].number])
+	-- TODO needs ngettext
+	local trees = (_"%i trees"):format(playerpoints[points[#points][1].number])
+	msg = msg ..  (_"The winner is %1s with %2s."):format(points[#points][1].name, trees)
+
 	local privmsg = ""
 	for i=1,#points-1 do
 		privmsg = lost_game_over.title
