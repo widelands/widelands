@@ -64,8 +64,7 @@
 #define UNPERS_STRING(name, value) _UNPERS_TYPE(name, value, string)
 
 
-#include <lua.hpp>
-
+#include "scripting/eris/lua.hpp"
 #include "scripting/luna_impl.h"
 
 /**
@@ -198,5 +197,3 @@ T ** get_base_user_class(lua_State * const L, int narg) {
 
 
 #endif /* end of include guard: __S_LUNA_H */
-
-

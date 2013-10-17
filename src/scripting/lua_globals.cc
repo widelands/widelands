@@ -19,12 +19,11 @@
 
 #include "scripting/lua_globals.h"
 
-#include <lua.hpp>
-
 #include "build_info.h"
 #include "i18n.h"
 #include "logic/game.h"
 #include "scripting/c_utils.h"
+#include "scripting/eris/lua.hpp"
 #include "scripting/scripting.h"
 
 
@@ -145,7 +144,7 @@ static int L_get_build_id(lua_State * L) {
 	return 1;
 }
 
-const static struct luaL_reg globals [] = {
+const static struct luaL_Reg globals [] = {
 	{"set_textdomain", &L_set_textdomain},
 	{"use", &L_use},
 	{"get_build_id", &L_get_build_id},
@@ -154,7 +153,9 @@ const static struct luaL_reg globals [] = {
 };
 
 void luaopen_globals(lua_State * L) {
-	lua_pushvalue(L, LUA_GLOBALSINDEX);
+	lua_rawgeti(L, LUA_REGISTRYINDEX, LUA_RIDX_GLOBALS);
+	// NOCOM(#sirver): I think the line above is correct now.
+	// lua_pushvalue(L, LUA_GLOBALSINDEX);
 	luaL_register(L, 0, globals);
 	lua_pop(L, 1);
 
@@ -162,4 +163,3 @@ void luaopen_globals(lua_State * L) {
 
 
 };
-

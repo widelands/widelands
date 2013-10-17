@@ -19,19 +19,44 @@
 
 #include "scripting/persistence.h"
 
-#include <lua.hpp>
-
 #include "log.h"
 #include "logic/widelands_fileread.h"
 #include "logic/widelands_filewrite.h"
 #include "scripting/c_utils.h"
-#include "scripting/pluto.h"
+#include "scripting/eris/lua.hpp"
+
+// NOCOM(#sirver): ugly.
+extern "C" {
+#include "scripting/eris/eris.h"
+}
 
 /*
  * ========================================================================
  *                            PRIVATE CLASSES
  * ========================================================================
  */
+
+namespace {
+
+int LuaWriter(lua_State* /* L */, const void* data, size_t len, void* userdata) {
+	Widelands::FileWrite* fw = static_cast<Widelands::FileWrite*>(userdata);
+
+	fw->Data(data, len, Widelands::FileWrite::Pos::Null());
+	return 0;
+}
+
+// NOCOM(#sirver): Very inefficient - But we cannot know how much to read beforehand. right now.
+// // NOCOM(#sirver): this also leaks memory - the data block is never freed.
+const char* LuaReader(lua_State* /* L */, void* userdata, size_t* bytes_read) {
+	Widelands::FileRead* fr = static_cast<Widelands::FileRead*>(userdata);
+
+	char* block = new char[1];
+
+	*bytes_read = fr->Data(block, 1);
+	return block;
+}
+
+}  // namespace
 
 /**
  * Add one object to the table of objects that should not
@@ -169,7 +194,7 @@ uint32_t persist_object
 
 
 	size_t cpos = fw.GetPos();
-	pluto_persist(L, fw);
+	eris_dump(L, &LuaWriter, &fw);
 	uint32_t nwritten = fw.GetPos() - cpos;
 
 	lua_pop(L, 2); // pop the object and the table
@@ -204,7 +229,7 @@ uint32_t unpersist_object
 	m_add_iterator_function_to_not_unpersist(L, "pairs", i++);
 	m_add_iterator_function_to_not_unpersist(L, "ipairs", i++);
 
-	pluto_unpersist(L, fr);
+	eris_undump(L, &LuaReader, &fr);
 	lua_remove(L, -2); // remove the globals table
 
 	// Delete the entry in the registry

@@ -168,41 +168,39 @@ bool LuaInterface_Impl::m_is_lua_file(const std::string & s) {
 	return (ext == ".lua");
 }
 
+namespace {
+
+	// NOCOM(#sirver): move and document
+void load_library(lua_State* L, const std::string& name, lua_CFunction method_to_call, bool register_globally) {
+	lua_pushcfunction(L, method_to_call);  // S: function
+	lua_pushstring(L, name); // S: function name
+	lua_call(L, 1, 1); // S: module_table
+
+	if (register_globally) {
+		lua_setglobal(L, name.c_str()); // S:
+	} else {
+		lua_pop(L, 1); // S:
+	}
+}
+
+}  // namespace
 /*************************
  * Public functions
  *************************/
 LuaInterface_Impl::LuaInterface_Impl() : m_last_error("") {
-	m_L = lua_open();
+	m_L = luaL_newstate();
 
 	// Open the Lua libraries
+	load_library(m_L, "", luaopen_base, false);
+	load_library(m_L, LUA_TABLIBNAME, luaopen_table, true);
+	load_library(m_L, LUA_STRLIBNAME, luaopen_string, true);
+	load_library(m_L, LUA_MATHLIBNAME, luaopen_math, true);
+
 #ifndef NDEBUG
-	static const luaL_Reg lualibs[] = {
-		{"", luaopen_base},
-		{LUA_LOADLIBNAME, luaopen_package},
-		{LUA_TABLIBNAME, luaopen_table},
-		{LUA_IOLIBNAME, luaopen_io},
-		{LUA_OSLIBNAME, luaopen_os},
-		{LUA_STRLIBNAME, luaopen_string},
-		{LUA_MATHLIBNAME, luaopen_math},
-		{LUA_DBLIBNAME, luaopen_debug},
-		{0,               0}
-	};
-#else
-	static const luaL_Reg lualibs[] = {
-		{"", luaopen_base},
-		{LUA_TABLIBNAME, luaopen_table},
-		{LUA_STRLIBNAME, luaopen_string},
-		{LUA_MATHLIBNAME, luaopen_math},
-		{LUA_DBLIBNAME, luaopen_debug}, // needed for testsuite
-		{0,               0}
-	};
+	load_library(m_L, LUA_LOADLIBNAME, luaopen_package, true);
+	load_library(m_L, LUA_IOLIBNAME, luaopen_io, true);
+	load_library(m_L, LUA_OSLIBNAME, luaopen_os, true);
 #endif
-	const luaL_Reg * lib = lualibs;
-	for (; lib->func; lib++) {
-		lua_pushcfunction(m_L, lib->func);
-		lua_pushstring(m_L, lib->name);
-		lua_call(m_L, 1, 0);
-	}
 
 	// Push the instance of this class into the registry
 	// MSVC2008 requires that stored and retrieved types are
@@ -460,23 +458,37 @@ static int L_math_random(lua_State * L) {
 LuaGameInterface_Impl::LuaGameInterface_Impl(Widelands::Game * g) :
 	LuaEditorGameBaseInterface_Impl(g)
 {
+	log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 	// Overwrite math.random
 	lua_getglobal(m_L, "math");
+	log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 	lua_pushcfunction(m_L, L_math_random);
+	log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 	lua_setfield(m_L, -2, "random");
+	log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 	lua_pop(m_L, 1); // pop "math"
+	log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 
+	log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 	LuaRoot::luaopen_wlroot(m_L, false);
+	log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 	LuaGame::luaopen_wlgame(m_L);
+	log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 
 	// Push the game into the registry
+	log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 	lua_pushlightuserdata(m_L, static_cast<void *>(g));
+	log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 	lua_setfield(m_L, LUA_REGISTRYINDEX, "game");
+	log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 
 	// Push the factory class into the registry
+	log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 	lua_pushlightuserdata
 		(m_L, reinterpret_cast<void *>(dynamic_cast<Factory *>(&m_factory)));
+	log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 	lua_setfield(m_L, LUA_REGISTRYINDEX, "factory");
+	log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 }
 
 LuaCoroutine * LuaGameInterface_Impl::read_coroutine
@@ -515,16 +527,17 @@ void LuaGameInterface_Impl::read_global_env
 	while (lua_next(m_L, -2) != 0) {
 		// key value
 		lua_pushvalue(m_L, -2); // key value key
-		lua_gettable(m_L, LUA_GLOBALSINDEX); // key value global_value
-		if (lua_equal(m_L, -1, -2)) {
+		lua_rawgeti(m_L, LUA_REGISTRYINDEX, LUA_RIDX_GLOBALS);
+		if (lua_compare(m_L, -1, -2, LUA_OPEQ)) {
 			lua_pop(m_L, 2); // key
 			continue;
 		} else {
 			// Make this a global value
 			lua_pop(m_L, 1); // key value
 			lua_pushvalue(m_L, -2); // key value key
-			lua_pushvalue(m_L, -2); // key value key value
-			lua_settable(m_L, LUA_GLOBALSINDEX); // key value
+			const std::string name = luaL_checkstring(m_L, -1);  // key value
+			lua_pushvalue(m_L, -1); // key value value
+			lua_setglobal(m_L, name.c_str()); // key value
 			lua_pop(m_L, 1); // key
 		}
 	}
@@ -537,7 +550,7 @@ uint32_t LuaGameInterface_Impl::write_global_env
 {
 	// Empty table + object to persist on the stack Stack
 	lua_newtable(m_L);
-	lua_pushvalue(m_L, LUA_GLOBALSINDEX);
+	lua_rawgeti(m_L, LUA_REGISTRYINDEX, LUA_RIDX_GLOBALS);
 
 	return persist_object(m_L, fw, mos);
 }

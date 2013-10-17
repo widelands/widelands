@@ -22,8 +22,6 @@
 
 #include <set>
 
-#include <lua.hpp>
-
 #include "economy/flag.h"
 #include "economy/road.h"
 #include "logic/constructionsite.h"
@@ -34,6 +32,7 @@
 #include "logic/trainingsite.h"
 #include "logic/warehouse.h"
 #include "logic/worker.h"
+#include "scripting/eris/lua.hpp"
 #include "scripting/luna.h"
 
 

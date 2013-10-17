@@ -20,8 +20,7 @@
 #ifndef LUA_BASES_H
 #define LUA_BASES_H
 
-#include <lua.hpp>
-
+#include "scripting/eris/lua.hpp"
 #include "scripting/luna.h"
 
 namespace LuaBases {

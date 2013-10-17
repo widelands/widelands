@@ -19,8 +19,6 @@
 
 #include "scripting/lua_game.h"
 
-#include <lua.hpp>
-
 #include "campvis.h"
 #include "economy/economy.h"
 #include "economy/flag.h"
@@ -32,6 +30,7 @@
 #include "logic/playersmanager.h"
 #include "logic/tribe.h"
 #include "scripting/c_utils.h"
+#include "scripting/eris/lua.hpp"
 #include "scripting/lua_map.h"
 #include "scripting/scripting.h"
 #include "wui/interactive_player.h"
@@ -1335,7 +1334,7 @@ static int L_report_result(lua_State * L) {
  *                            MODULE FUNCTIONS
  * ========================================================================
  */
-const static struct luaL_reg wlgame [] = {
+const static struct luaL_Reg wlgame [] = {
 	{"report_result", &L_report_result},
 	{0, 0}
 };
@@ -1353,4 +1352,3 @@ void luaopen_wlgame(lua_State * L) {
 }
 
 };
-

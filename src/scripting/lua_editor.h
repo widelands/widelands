@@ -20,8 +20,7 @@
 #ifndef LUA_EDITOR_H
 #define LUA_EDITOR_H
 
-#include <lua.hpp>
-
+#include "scripting/eris/lua.hpp"
 #include "scripting/lua_bases.h"
 
 namespace LuaEditor {

@@ -19,12 +19,11 @@
 
 #include "scripting/lua_editor.h"
 
-#include <lua.hpp>
-
 #include "log.h"
 #include "logic/game.h"
 #include "logic/player.h"
 #include "scripting/c_utils.h"
+#include "scripting/eris/lua.hpp"
 #include "wui/interactive_player.h"
 
 namespace LuaEditor {
@@ -87,7 +86,7 @@ const PropertyType<L_Player> L_Player::Properties[] = {
  * ========================================================================
  */
 
-const static struct luaL_reg wleditor [] = {
+const static struct luaL_Reg wleditor [] = {
 	{0, 0}
 };
 
@@ -101,4 +100,3 @@ void luaopen_wleditor(lua_State * const L) {
 }
 
 };
-

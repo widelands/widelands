@@ -19,8 +19,6 @@
 
 #include "scripting/lua_map.h"
 
-#include <lua.hpp>
-
 #include "container_iterate.h"
 #include "economy/wares_queue.h"
 #include "log.h"
@@ -35,6 +33,7 @@
 #include "logic/warelist.h"
 #include "logic/widelands_geometry.h"
 #include "scripting/c_utils.h"
+#include "scripting/eris/lua.hpp"
 #include "scripting/lua_game.h"
 #include "wui/mapviewpixelfunctions.h"
 
@@ -2836,7 +2835,7 @@ int L_PlayerSlot::get_starting_field(lua_State * L) {
  * ========================================================================
  */
 
-const static struct luaL_reg wlmap [] = {
+const static struct luaL_Reg wlmap [] = {
 	{0, 0}
 };
 
@@ -2930,4 +2929,3 @@ void luaopen_wlmap(lua_State * L) {
 }
 
 };
-

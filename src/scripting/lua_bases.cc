@@ -19,11 +19,10 @@
 
 #include "scripting/lua_bases.h"
 
-#include <lua.hpp>
-
 #include "economy/economy.h"
 #include "logic/checkstep.h"
 #include "logic/player.h"
+#include "scripting/eris/lua.hpp"
 #include "scripting/lua_map.h"
 
 
@@ -499,7 +498,7 @@ Player & L_PlayerBase::get
  */
 
 
-const static struct luaL_reg wlbases [] = {
+const static struct luaL_Reg wlbases [] = {
 	{0, 0}
 };
 

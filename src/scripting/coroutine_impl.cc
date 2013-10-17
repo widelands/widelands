@@ -43,7 +43,7 @@ LuaCoroutine_Impl::~LuaCoroutine_Impl()
 
 int LuaCoroutine_Impl::resume(uint32_t * sleeptime)
 {
-	int rv = lua_resume(m_L, m_nargs);
+	int rv = lua_resume(m_L, nullptr, m_nargs);
 	m_nargs = 0;
 	int n = lua_gettop(m_L);
 
@@ -140,5 +140,3 @@ void LuaCoroutine_Impl::m_reference() {
 void LuaCoroutine_Impl::m_unreference() {
 	luaL_unref(m_L, LUA_REGISTRYINDEX, m_idx);
 }
-
-

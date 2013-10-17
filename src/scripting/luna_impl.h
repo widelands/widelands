@@ -26,9 +26,8 @@
 #ifndef LUNA_IMPL_H
 #define LUNA_IMPL_H
 
-#include <lua.hpp>
-
 #include "scripting/c_utils.h"
+#include "scripting/eris/lua.hpp"
 
 // This is only needed in pluto.cc
 int luna_restore_object(lua_State * L);
@@ -337,8 +336,9 @@ void m_extract_userdata_from_user_class(lua_State * const L, int narg) {
 	else
 		lua_rawget(L, narg - 1);
 
-	if (not lua_isuserdata(L, -1))
-		luaL_typerror(L, narg, T::className);
+	// NOCOM(#sirver): bring back
+	// if (not lua_isuserdata(L, -1))
+		// luaL_typerror(L, narg, T::className);
 }
 
 #endif

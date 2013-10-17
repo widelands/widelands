@@ -273,7 +273,7 @@ void L_Editor::__unpersist(lua_State * /* L */) {
  ==========================================================
  */
 
-const static struct luaL_reg wlroot [] = {
+const static struct luaL_Reg wlroot [] = {
 	{0, 0}
 };
 

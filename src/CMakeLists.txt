@@ -36,16 +36,19 @@ foreach (sourcefile ${WL_SRCS_CC} ${WL_SRCS_H})
     list (REMOVE_ITEM WL_SRCS_CC ${sourcefile})
     list (REMOVE_ITEM WL_SRCS_H ${sourcefile})
   endif (${sourcefile} MATCHES ".*/test/.*")
-  # exclude test sources from Codecheck, as well as the scripting/pdep sources from lua
-  if (NOT ${sourcefile} MATCHES ".*/scripting/pdep/.*" AND NOT ${sourcefile} MATCHES ".*/test/.*")
+  # exclude test sources from Codecheck, as well as the scripting/eris sources from lua
+  if (NOT ${sourcefile} MATCHES ".*/scripting/eris/.*" AND NOT ${sourcefile} MATCHES ".*/test/.*")
     list (APPEND WL_CODECHECK_SRCS ${sourcefile})
-  endif (NOT ${sourcefile} MATCHES ".*/scripting/pdep/.*" AND NOT ${sourcefile} MATCHES ".*/test/.*")
+  endif (NOT ${sourcefile} MATCHES ".*/scripting/eris/.*" AND NOT ${sourcefile} MATCHES ".*/test/.*")
 endforeach (sourcefile ${WL_SRCS_CC} ${WL_SRCS_H})
 foreach (sourcefile ${WL_SRCS_CPP})
   list (APPEND WL_CODECHECK_SRCS ${sourcefile})
 endforeach (sourcefile ${WL_SRCS_CPP})
 #convention: main.cc should be removed from all lists
 list (REMOVE_ITEM WL_SRCS_CC "${CMAKE_CURRENT_SOURCE_DIR}/main.cc")
+
+# NOCOM(#sirver): we should not depend on this I guess.
+add_definitions(-DLUA_COMPAT_MODULE)
 
 IF (DEFINED MSVC)
   add_executable (widelands ${GUI_TYPE} main.cc build_info.cc widelands.rc)
@@ -91,7 +94,7 @@ if (WL_UNIT_TESTS)
   # Tests need to link with SDL library without main
   set(TEST_EXTRA_SOURCES ${CMAKE_CURRENT_BINARY_DIR}/build_info.cc)
   set(TEST_EXTRA_LIBS ${SDL_LIBRARY} )
-  list(REMOVE_ITEM TEST_EXTRA_LIBS  ${SDLMAIN_LIBRARY}) 
+  list(REMOVE_ITEM TEST_EXTRA_LIBS  ${SDLMAIN_LIBRARY})
 
   add_subdirectory(economy)
   add_subdirectory(io)
@@ -103,17 +106,18 @@ if (NOT MINIZIP_FOUND)
   target_link_libraries(widelands_all wl_minizip)
 endif (NOT MINIZIP_FOUND)
 
+target_link_libraries(widelands_all eris)
 target_link_libraries(widelands_all ${SDLIMAGE_LIBRARY})
 target_link_libraries(widelands_all ${SDLMIXER_LIBRARY})
 target_link_libraries(widelands_all ${SDLNET_LIBRARY})
 target_link_libraries(widelands_all ${SDLTTF_LIBRARY})
 target_link_libraries(widelands_all ${SDLGFX_LIBRARY})
-target_link_libraries(widelands_all ${LUA_LIBRARY})
 target_link_libraries(widelands_all ${PNG_LIBRARY})
 target_link_libraries(widelands_all ${ZLIB_LIBRARY})
 target_link_libraries(widelands_all ${OPENGL_gl_LIBRARY})
 target_link_libraries(widelands_all ${GLEW_LIBRARY})
 target_link_libraries(widelands_all ${Boost_SIGNALS_LIBRARY})
+
 if (MINIZIP_FOUND)
   target_link_libraries(widelands_all ${MINIZIP_LIBRARY})
 endif (MINIZIP_FOUND)

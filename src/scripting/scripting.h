@@ -23,11 +23,11 @@
 #include <map>
 #include <string>
 
-#include <lua.hpp>
 #include <stdint.h>
 
 #include "logic/widelands_fileread.h"
 #include "logic/widelands_filewrite.h"
+#include "scripting/eris/lua.hpp"
 #include "wexception.h"
 
 namespace Widelands {

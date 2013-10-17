@@ -19,11 +19,10 @@
 
 #include "scripting/lua_ui.h"
 
-#include <lua.hpp>
-
 #include "gamecontroller.h"
 #include "logic/player.h"
 #include "scripting/c_utils.h"
+#include "scripting/eris/lua.hpp"
 #include "scripting/lua_map.h"
 #include "scripting/luna.h"
 #include "upcast.h"
@@ -749,7 +748,7 @@ static int L_get_user_input_allowed(lua_State * L) {
 }
 
 
-const static struct luaL_reg wlui [] = {
+const static struct luaL_Reg wlui [] = {
 	{"set_user_input_allowed", &L_set_user_input_allowed},
 	{"get_user_input_allowed", &L_get_user_input_allowed},
 	{0, 0}
@@ -780,4 +779,3 @@ void luaopen_wlui(lua_State * L) {
 
 
 };
-
