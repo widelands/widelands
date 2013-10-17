@@ -187,17 +187,17 @@ int m_method_dispatch(lua_State * const L) {
  * Deletes a given object, as soon as Lua wants to get rid of it
  */
 template <class T>
-int m_garbage_collect(lua_State * const L) {
-	log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
-	T * * const obj = static_cast<T * *>(luaL_checkudata(L, -1, T::className));
-	log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
+int m_garbage_collect(lua_State* const L) {
+	// This method is called in two cases - either the userdata that we store at
+	// key 0 in all of our objects is deleted or the table that represents our
+	// classes itself is deleted. If it is the table, the following check will
+	// return nullptr and we have nothing else today. In other cases, we have to
+	// delete our object.
+	T** const obj = static_cast<T**>(luaL_testudata(L, -1, T::className));
+	if (!obj)
+		return 0;
 
-	log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
-	if (obj)
-		delete *obj;
-	log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
-
-	log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
+	delete *obj;
 	return 0;
 }
 
@@ -341,9 +341,9 @@ void m_extract_userdata_from_user_class(lua_State * const L, int narg) {
 	else
 		lua_rawget(L, narg - 1);
 
-	// NOCOM(#sirver): bring back
-	// if (not lua_isuserdata(L, -1))
-		// luaL_typerror(L, narg, T::className);
+	if (!lua_isuserdata(L, -1)) {
+		report_error(L, "Expected a userdata, but got something else.");
+	}
 }
 
 #endif

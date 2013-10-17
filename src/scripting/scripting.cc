@@ -197,6 +197,7 @@ LuaInterface_Impl::LuaInterface_Impl() : m_last_error("") {
 	load_library(m_L, LUA_STRLIBNAME, luaopen_string, true);
 	load_library(m_L, LUA_MATHLIBNAME, luaopen_math, true);
 	load_library(m_L, LUA_DBLIBNAME, luaopen_debug, true);
+	load_library(m_L, LUA_COLIBNAME, luaopen_coroutine, true);
 
 #ifndef NDEBUG
 	load_library(m_L, LUA_LOADLIBNAME, luaopen_package, true);

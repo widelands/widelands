@@ -303,7 +303,6 @@ function lunit.TestCase(name)
   return tc
 end
 
--- NOCOM(#sirver): this is borked. What does it do?
 lunit.tc_mt = {
   __newindex = function(tc, key, value)
     rawset(tc, key, value)
@@ -397,91 +396,90 @@ function lunit.run()
   end
 end
 
--- -----------------------------
--- -- Runs a single Test Case --
--- -----------------------------
--- NOCOM(#sirver): something here is borked too
--- function lunit_run_testcase(tc)
-  -- assert(is_table(tc))
-  -- assert(is_table(tc.__lunit_tests))
-  -- assert(is_string(tc.__lunit_name))
-  -- assert(is_nil(tc.__lunit_setup) or is_function(tc.__lunit_setup))
-  -- assert(is_nil(tc.__lunit_teardown) or is_function(tc.__lunit_teardown))
+-----------------------------
+-- Runs a single Test Case --
+-----------------------------
+function lunit_run_testcase(tc)
+  assert(is_table(tc))
+  assert(is_table(tc.__lunit_tests))
+  assert(is_string(tc.__lunit_name))
+  assert(is_nil(tc.__lunit_setup) or is_function(tc.__lunit_setup))
+  assert(is_nil(tc.__lunit_teardown) or is_function(tc.__lunit_teardown))
 
-  -- --------------------------------------------
-  -- -- Protected call to a Test Case function --
-  -- --------------------------------------------
-  -- local function call(errprefix, func)
-    -- assert(is_string(errprefix))
-    -- assert(is_function(func))
-    -- local ok, errmsg = xpcall(function() func(tc) end, debug.traceback)
-    -- if not ok then
-      -- print()
-      -- print(errprefix..": "..errmsg)
-    -- end
-    -- return ok
-  -- end
+  --------------------------------------------
+  -- Protected call to a Test Case function --
+  --------------------------------------------
+  local function call(errprefix, func)
+    assert(is_string(errprefix))
+    assert(is_function(func))
+    local ok, errmsg = xpcall(function() func(tc) end, debug.traceback)
+    if not ok then
+      print()
+      print(errprefix..": "..errmsg)
+    end
+    return ok
+  end
 
-  -- ------------------------------------
-  -- -- Calls setup() on the Test Case --
-  -- ------------------------------------
-  -- local function setup()
-    -- if tc.__lunit_setup then
-      -- return call("ERROR: setup() failed", tc.__lunit_setup)
-    -- else
-      -- return true
-    -- end
-  -- end
+  ------------------------------------
+  -- Calls setup() on the Test Case --
+  ------------------------------------
+  local function setup()
+    if tc.__lunit_setup then
+      return call("ERROR: setup() failed", tc.__lunit_setup)
+    else
+      return true
+    end
+  end
 
-  -- ------------------------------------------
-  -- -- Calls a single Test on the Test Case --
-  -- ------------------------------------------
-  -- local function run(testname)
-    -- assert(is_string(testname))
-    -- assert(is_function(tc[testname]))
-    -- local ok = call("FAIL: "..testname, tc[testname])
-    -- if not ok then
-      -- lunit_stats_inc("failed")
-    -- else
-      -- lunit_stats_inc("passed")
-    -- end
-    -- return ok
-  -- end
+  ------------------------------------------
+  -- Calls a single Test on the Test Case --
+  ------------------------------------------
+  local function run(testname)
+    assert(is_string(testname))
+    assert(is_function(tc[testname]))
+    local ok = call("FAIL: "..testname, tc[testname])
+    if not ok then
+      lunit_stats_inc("failed")
+    else
+      lunit_stats_inc("passed")
+    end
+    return ok
+  end
 
-  -- ---------------------------------------
-  -- -- Calls teardown() on the Test Case --
-  -- ---------------------------------------
-  -- local function teardown()
-     -- if tc.__lunit_teardown then
-       -- call("WARNING: teardown() failed", tc.__lunit_teardown)
-     -- end
-  -- end
+  ---------------------------------------
+  -- Calls teardown() on the Test Case --
+  ---------------------------------------
+  local function teardown()
+     if tc.__lunit_teardown then
+       call("WARNING: teardown() failed", tc.__lunit_teardown)
+     end
+  end
 
-  -- ---------------------------------
-  -- -- Run all Tests on a TestCase --
-  -- ---------------------------------
-  -- print()
-  -- print("#### Running '"..tc.__lunit_name.."' ("..#tc.__lunit_tests.." Tests)...")
+  ---------------------------------
+  -- Run all Tests on a TestCase --
+  ---------------------------------
+  print()
+  print("#### Running '"..tc.__lunit_name.."' ("..#tc.__lunit_tests.." Tests)...")
 
-  -- for _, testname in ipairs(tc.__lunit_tests) do
-    -- if setup() then
-      -- run(testname)
-      -- lunit_stats_inc("run")
-      -- teardown()
-    -- else
-      -- print("WARN: Skipping '"..testname.."'...")
-      -- lunit_stats_inc("notrun")
-    -- end
-  -- end
--- end
+  for _, testname in ipairs(tc.__lunit_tests) do
+    if setup() then
+      run(testname)
+      lunit_stats_inc("run")
+      teardown()
+    else
+      print("WARN: Skipping '"..testname.."'...")
+      lunit_stats_inc("notrun")
+    end
+  end
+end
 
--- --------------------------------------------------
--- -- Increments a counter in the statistics table --
--- --------------------------------------------------
--- function lunit_stats_inc(varname, value)
-  -- assert(is_table(lunit.stats))
-  -- assert(is_string(varname))
-  -- assert(is_nil(value) or is_number(value))
-  -- if not lunit.stats[varname] then return end
-  -- lunit.stats[varname] = lunit.stats[varname] + (value or 1)
--- end
+--------------------------------------------------
+-- Increments a counter in the statistics table --
+--------------------------------------------------
+function lunit_stats_inc(varname, value)
+  assert(is_table(lunit.stats))
+  assert(is_string(varname))
+  assert(is_nil(value) or is_number(value))
+  if not lunit.stats[varname] then return end
+  lunit.stats[varname] = lunit.stats[varname] + (value or 1)
+end
