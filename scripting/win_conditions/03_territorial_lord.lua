@@ -151,6 +151,7 @@ return {
 			if candidateisteam then
 				candidate = (_"Team %i"):format(currentcandidate)
 			end
+			-- TODO test this
 			local msg1 = (_"%s owns more than half of the map's area."):format(candidate)
 			msg1 = msg1 .. "\n"
 			-- TODO needs ngettext
