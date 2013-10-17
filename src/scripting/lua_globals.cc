@@ -23,7 +23,6 @@
 #include "i18n.h"
 #include "logic/game.h"
 #include "scripting/c_utils.h"
-#include "scripting/eris/lua.hpp"
 #include "scripting/scripting.h"
 
 
@@ -154,9 +153,7 @@ const static struct luaL_Reg globals [] = {
 
 void luaopen_globals(lua_State * L) {
 	lua_rawgeti(L, LUA_REGISTRYINDEX, LUA_RIDX_GLOBALS);
-	// NOCOM(#sirver): I think the line above is correct now.
-	// lua_pushvalue(L, LUA_GLOBALSINDEX);
-	luaL_register(L, 0, globals);
+	luaL_setfuncs(L, globals, 0);
 	lua_pop(L, 1);
 
 }

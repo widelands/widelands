@@ -22,7 +22,6 @@
 #include "gamecontroller.h"
 #include "logic/player.h"
 #include "scripting/c_utils.h"
-#include "scripting/eris/lua.hpp"
 #include "scripting/lua_map.h"
 #include "scripting/luna.h"
 #include "upcast.h"
@@ -755,8 +754,11 @@ const static struct luaL_Reg wlui [] = {
 };
 
 void luaopen_wlui(lua_State * L) {
-	luaL_register(L, "wl.ui", wlui);
-	lua_pop(L, 1); // pop the table from the stack
+	lua_getglobal(L, "wl");  // S: wl_table
+	lua_pushstring(L, "ui"); // S: wl_table "ui"
+	luaL_newlib(L, wlui);  // S: wl_table "ui" wl.ui_table
+	lua_settable(L, -3); // S: wl_table
+	lua_pop(L, 1); // S:
 
 	register_class<L_Panel>(L, "ui");
 

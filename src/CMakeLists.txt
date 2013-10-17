@@ -47,9 +47,6 @@ endforeach (sourcefile ${WL_SRCS_CPP})
 #convention: main.cc should be removed from all lists
 list (REMOVE_ITEM WL_SRCS_CC "${CMAKE_CURRENT_SOURCE_DIR}/main.cc")
 
-# NOCOM(#sirver): we should not depend on this I guess.
-add_definitions(-DLUA_COMPAT_MODULE)
-
 IF (DEFINED MSVC)
   add_executable (widelands ${GUI_TYPE} main.cc build_info.cc widelands.rc)
 else (DEFINED MSVC)
@@ -98,8 +95,9 @@ if (WL_UNIT_TESTS)
 
   add_subdirectory(economy)
   add_subdirectory(io)
-  add_subdirectory(scripting)
 endif (WL_UNIT_TESTS)
+
+add_subdirectory(scripting)
 
 if (NOT MINIZIP_FOUND)
   add_subdirectory(minizip)

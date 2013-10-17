@@ -171,7 +171,8 @@ bool LuaInterface_Impl::m_is_lua_file(const std::string & s) {
 namespace {
 
 	// NOCOM(#sirver): move and document
-void load_library(lua_State* L, const std::string& name, lua_CFunction method_to_call, bool register_globally) {
+void load_library
+	(lua_State* L, const std::string& name, lua_CFunction method_to_call, bool register_globally) {
 	lua_pushcfunction(L, method_to_call);  // S: function
 	lua_pushstring(L, name); // S: function name
 	lua_call(L, 1, 1); // S: module_table
@@ -211,6 +212,10 @@ LuaInterface_Impl::LuaInterface_Impl() : m_last_error("") {
 
 	// Now our own
 	LuaGlobals::luaopen_globals(m_L);
+
+	// Also push the "wl" table.
+	lua_newtable(m_L);
+	lua_setglobal(m_L, "wl");
 
 	register_scripts(*g_fs, "aux", "scripting");
 }
@@ -341,8 +346,8 @@ struct LuaEditorGameBaseInterface_Impl : public LuaInterface_Impl
 };
 
 LuaEditorGameBaseInterface_Impl::LuaEditorGameBaseInterface_Impl
-	(Widelands::Editor_Game_Base * g) :
-LuaInterface()
+	(Widelands::Editor_Game_Base * g)
+		: LuaInterface_Impl()
 {
 	LuaBases::luaopen_wlbases(m_L);
 	LuaMap::luaopen_wlmap(m_L);
@@ -458,37 +463,23 @@ static int L_math_random(lua_State * L) {
 LuaGameInterface_Impl::LuaGameInterface_Impl(Widelands::Game * g) :
 	LuaEditorGameBaseInterface_Impl(g)
 {
-	log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 	// Overwrite math.random
 	lua_getglobal(m_L, "math");
-	log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 	lua_pushcfunction(m_L, L_math_random);
-	log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 	lua_setfield(m_L, -2, "random");
-	log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 	lua_pop(m_L, 1); // pop "math"
-	log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 
-	log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 	LuaRoot::luaopen_wlroot(m_L, false);
-	log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 	LuaGame::luaopen_wlgame(m_L);
-	log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 
 	// Push the game into the registry
-	log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 	lua_pushlightuserdata(m_L, static_cast<void *>(g));
-	log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 	lua_setfield(m_L, LUA_REGISTRYINDEX, "game");
-	log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 
 	// Push the factory class into the registry
-	log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 	lua_pushlightuserdata
 		(m_L, reinterpret_cast<void *>(dynamic_cast<Factory *>(&m_factory)));
-	log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 	lua_setfield(m_L, LUA_REGISTRYINDEX, "factory");
-	log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 }
 
 LuaCoroutine * LuaGameInterface_Impl::read_coroutine

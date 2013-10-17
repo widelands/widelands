@@ -24,7 +24,6 @@
 #include <cstdio>
 #include <iostream>
 
-#include "scripting/eris/lua.hpp"
 #include "scripting/factory.h"
 #include "scripting/scripting.h"
 
@@ -109,7 +108,6 @@ int report_error(lua_State * L, const char * const fmt, ...) {
 	va_end(va);
 
 	// Also create a traceback
-	// // NOCOM(#sirver): this should always work now - debug is always included in builds.
 	lua_getglobal(L, "debug");
 	if (!lua_istable(L, -1)) {
 		lua_pop(L, 1);

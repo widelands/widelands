@@ -30,7 +30,6 @@
 #include "logic/playersmanager.h"
 #include "logic/tribe.h"
 #include "scripting/c_utils.h"
-#include "scripting/eris/lua.hpp"
 #include "scripting/lua_map.h"
 #include "scripting/scripting.h"
 #include "wui/interactive_player.h"
@@ -1340,8 +1339,11 @@ const static struct luaL_Reg wlgame [] = {
 };
 
 void luaopen_wlgame(lua_State * L) {
-	luaL_register(L, "wl.game", wlgame);
-	lua_pop(L, 1); // pop the table
+	lua_getglobal(L, "wl");  // S: wl_table
+	lua_pushstring(L, "game"); // S: wl_table "game"
+	luaL_newlib(L, wlgame);  // S: wl_table "game" wl.game_table
+	lua_settable(L, -3); // S: wl_table
+	lua_pop(L, 1); // S:
 
 	register_class<L_Player>(L, "game", true);
 	add_parent<L_Player, LuaBases::L_PlayerBase>(L);

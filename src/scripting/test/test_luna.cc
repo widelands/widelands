@@ -183,16 +183,18 @@ void InitLuaTests(lua_State* L)
 {
 	luaL_openlibs(L);
 
-	luaL_register(L, "wl", wl);
-	lua_pop(L, 1); // pop the table from the stack
-	luaL_register(L, "wl.test", wltest);
+	luaL_newlib(L, wl);  // S: wl_table
+	lua_setglobal(L, "wl"); // S:
 
-	lua_pushcfunction (L, &test_check_int);
-	lua_setfield(L, -2, "CheckInt");
+	lua_getglobal(L, "wl");  // S: wl_table
+	lua_pushstring(L, "test"); // S: wl_table "test"
+	luaL_newlib(L, wltest);  // S: wl_table "test" wl.test_table
+	lua_settable(L, -3); // S: wl_table
+	lua_getfield(L, -1, "test"); // S: wl_table wl.test_table
 
-	lua_pop(L, 1); // pop the table from the stack
-
-
+	lua_pushcfunction (L, &test_check_int);  // S: wl_table wl.test_table func
+	lua_setfield(L, -2, "CheckInt");  // S: wl_table wl.test_table
+	lua_pop(L, 2); // S:
 }
 
 BOOST_AUTO_TEST_CASE(test_luna_simple)
@@ -248,7 +250,6 @@ BOOST_AUTO_TEST_CASE(test_luna_inheritance)
 
 	BOOST_REQUIRE_EQUAL(0, luaL_loadbuffer(L, script2, strlen(script2), "testscript2"));
 	BOOST_REQUIRE_EQUAL(0, lua_pcall(L, 0, 1, 0));
-
 }
 
 BOOST_AUTO_TEST_CASE(test_luna_virtualbase_method)

@@ -278,8 +278,9 @@ const static struct luaL_Reg wlroot [] = {
 };
 
 void luaopen_wlroot(lua_State * L, bool in_editor) {
-	luaL_register(L, "wl", wlroot);
-	lua_pop(L, 1); // pop the table
+	lua_getglobal(L, "wl");  // S: wl
+	luaL_setfuncs(L, wlroot, 0); // S: wl
+	lua_pop(L, 1);  // S:
 
 	if (in_editor) {
 		register_class<L_Editor>(L, "", true);

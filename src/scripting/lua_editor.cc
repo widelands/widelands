@@ -23,7 +23,6 @@
 #include "logic/game.h"
 #include "logic/player.h"
 #include "scripting/c_utils.h"
-#include "scripting/eris/lua.hpp"
 #include "wui/interactive_player.h"
 
 namespace LuaEditor {
@@ -91,8 +90,11 @@ const static struct luaL_Reg wleditor [] = {
 };
 
 void luaopen_wleditor(lua_State * const L) {
-	luaL_register(L, "wl.editor", wleditor);
-	lua_pop(L, 1); // pop the table from the stack again
+	lua_getglobal(L, "wl");  // S: wl_table
+	lua_pushstring(L, "editor"); // S: wl_table "editor"
+	luaL_newlib(L, wleditor);  // S: wl_table "editor" wl.editor_table
+	lua_settable(L, -3); // S: wl_table
+	lua_pop(L, 1); // S:
 
 	register_class<L_Player>(L, "editor", true);
 	add_parent<L_Player, LuaBases::L_PlayerBase>(L);

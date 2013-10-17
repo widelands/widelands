@@ -33,7 +33,6 @@
 #include "logic/warelist.h"
 #include "logic/widelands_geometry.h"
 #include "scripting/c_utils.h"
-#include "scripting/eris/lua.hpp"
 #include "scripting/lua_game.h"
 #include "wui/mapviewpixelfunctions.h"
 
@@ -2840,8 +2839,11 @@ const static struct luaL_Reg wlmap [] = {
 };
 
 void luaopen_wlmap(lua_State * L) {
-	luaL_register(L, "wl.map", wlmap);
-	lua_pop(L, 1); // pop the table from the stack
+	lua_getglobal(L, "wl");  // S: wl_table
+	lua_pushstring(L, "map"); // S: wl_table "map"
+	luaL_newlib(L, wlmap);  // S: wl_table "map" wl.map_table
+	lua_settable(L, -3); // S: wl_table
+	lua_pop(L, 1); // S:
 
 	register_class<L_Map>(L, "map");
 	register_class<L_Field>(L, "map");

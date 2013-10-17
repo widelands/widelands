@@ -22,7 +22,6 @@
 #include "economy/economy.h"
 #include "logic/checkstep.h"
 #include "logic/player.h"
-#include "scripting/eris/lua.hpp"
 #include "scripting/lua_map.h"
 
 
@@ -503,8 +502,11 @@ const static struct luaL_Reg wlbases [] = {
 };
 
 void luaopen_wlbases(lua_State * const L) {
-	luaL_register(L, "wl.bases", wlbases);
-	lua_pop(L, 1); // pop the table from the stack again
+	lua_getglobal(L, "wl");  // S: wl_table
+	lua_pushstring(L, "bases"); // S: wl_table "bases"
+	luaL_newlib(L, wlbases);  // S: wl_table "bases" wl.bases_table
+	lua_settable(L, -3); // S: wl_table
+	lua_pop(L, 1); // S:
 
 	register_class<L_EditorGameBase>(L, "bases");
 	register_class<L_PlayerBase>(L, "bases");
