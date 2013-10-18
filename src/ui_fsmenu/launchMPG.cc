@@ -646,7 +646,7 @@ void Fullscreen_Menu_LaunchMPG::load_map_info()
 
 	std::string infotext;
 	infotext += _("Map informations:\n");
-	infotext += (format(_("* Size: %ux%u\n")) % map.get_width() % map.get_height()).str();
+	infotext += (format(_("* Size: %1$ux%2$u\n")) % map.get_width() % map.get_height()).str();
 	infotext += (format(ngettext("* %u Player\n", "* %u Players\n", m_nr_players)) % m_nr_players).str();
 	infotext += (format(_("* World type: %s\n")) % world).str();
 	if (m_settings->settings().scenario)

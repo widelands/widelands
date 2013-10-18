@@ -85,7 +85,7 @@ Building_Descr::Building_Descr
 			m_port = true;
 		} else
 			throw game_data_error
-				(_("expected %s but found \"%s\""),
+				(_("expected %1$s but found \"%2$s\""),
 				 "{\"small\"|\"medium\"|\"big\"|\"port\"|\"mine\"}", string);
 	} catch (const _wexception & e) {
 		throw game_data_error("size: %s", e.what());
@@ -128,7 +128,7 @@ Building_Descr::Building_Descr
 					("\"%s\" has not been defined as a building type (wrong declaration order?)",
 					 target_name.c_str());
 		} catch (const _wexception & e) {
-			throw wexception("\"enhancements=%s\": %s", v->get_string(), e.what());
+			throw wexception("\"enhancements=%1$s\": %2$s", v->get_string(), e.what());
 		}
 	m_enhanced_building = global_s.get_bool("enhanced_building", false);
 	m_global = directory.find("global/") < directory.size();
@@ -295,8 +295,8 @@ void Building::load_finish(Editor_Game_Base & egbase) {
 				(worker_location.serial() !=             serial() and
 				 worker_location.serial() != base_flag().serial())
 				log
-					("WARNING: worker %u is in the leave queue of building %u with "
-					 "base flag %u but is neither inside the building nor at the "
+					("WARNING: worker %1$u is in the leave queue of building %2$u with "
+					 "base flag %3$u but is neither inside the building nor at the "
 					 "flag!\n",
 					 worker.serial(), serial(), base_flag().serial());
 		}
@@ -304,13 +304,13 @@ void Building::load_finish(Editor_Game_Base & egbase) {
 			worker.get_state(Worker::taskLeavebuilding);
 		if (not state)
 			log
-				("WARNING: worker %u is in the leave queue of building %u but "
+				("WARNING: worker %1$u is in the leave queue of building %2$u but "
 				 "does not have a leavebuilding task! Removing from queue.\n",
 				 worker.serial(), serial());
 		else if (state->objvar1 != this)
 			log
-				("WARNING: worker %u is in the leave queue of building %u but its "
-				 "leavebuilding task is for map object %u! Removing from queue.\n",
+				("WARNING: worker %1$u is in the leave queue of building %2$u but its "
+				 "leavebuilding task is for map object %3$u! Removing from queue.\n",
 				 worker.serial(), serial(), state->objvar1.serial());
 		else {
 			++i;
@@ -596,7 +596,7 @@ std::string Building::get_statistics_string()
 
 WaresQueue & Building::waresqueue(Ware_Index const wi) {
 	throw wexception
-		("%s (%u) has no WaresQueue for %u",
+		("%1$s (%2$u) has no WaresQueue for %3$u",
 		 name().c_str(), serial(), wi.value());
 }
 
@@ -612,7 +612,7 @@ Return false if there's nothing to be done.
 bool Building::get_building_work(Game &, Worker & worker, bool)
 {
 	throw wexception
-		("MO(%u): get_building_work() for unknown worker %u",
+		("MO(%1$u): get_building_work() for unknown worker %2$u",
 		 serial(), worker.serial());
 }
 
@@ -835,10 +835,10 @@ void Building::set_priority
 void Building::log_general_info(const Editor_Game_Base & egbase) {
 	PlayerImmovable::log_general_info(egbase);
 
-	molog("m_position: (%i, %i)\n", m_position.x, m_position.y);
+	molog("m_position: (%1$i, %2$i)\n", m_position.x, m_position.y);
 	molog("m_flag: %p\n", m_flag);
 	molog
-		("* position: (%i, %i)\n",
+		("* position: (%1$i, %2$i)\n",
 		 m_flag->get_position().x, m_flag->get_position().y);
 
 	molog("m_anim: %s\n", descr().get_animation_name(m_anim).c_str());

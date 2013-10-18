@@ -134,7 +134,7 @@ uint32_t AnimationManager::get
 		try {
 			if (endp == parameters or frame_number != value)
 				throw wexception
-					(_("expected %s but found \"%s\""),
+					(_("expected %1$s but found \"%2$s\""),
 					 _("frame number"), parameters);
 			parameters = endp;
 			force_skip(parameters);
@@ -144,8 +144,8 @@ uint32_t AnimationManager::get
 				ad.sfx_cues.find(frame_number);
 			if (it != ad.sfx_cues.end())
 				throw wexception
-					("redefinition for frame %u to \"%s\" (previously defined to "
-					 "\"%s\")",
+					("redefinition for frame %1$u to \"%2$s\" (previously defined to "
+					 "\"%3$s\")",
 					 frame_number, parameters, it->second.c_str());
 		} catch (const _wexception & e) {
 			throw wexception("sfx: %s", e.what());

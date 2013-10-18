@@ -144,7 +144,7 @@ void Sound_Handler::shutdown()
 	Uint16 format;
 	numtimesopened = Mix_QuerySpec(&frequency, &format, &channels);
 	log
-		(_("Sound_Handler closing times %i, freq %i, format %i, chan %i\n"),
+		(_("Sound_Handler closing times %1$i, freq %2$i, format %3$i, chan %4$i\n"),
 		 numtimesopened, frequency, format, channels);
 
 	if (!numtimesopened)
@@ -311,8 +311,8 @@ void Sound_Handler::load_one_fx
 		m_fxs[fx_name]->add_fx(m);
 	} else
 		log
-			("Sound_Handler: loading sound effect \"%s\" for FXset \"%s\" "
-			 "failed: %s\n",
+			("Sound_Handler: loading sound effect \"%1$s\" for FXset \"%2$s\" "
+			 "failed: %3$s\n",
 			 path, fx_name.c_str(), Mix_GetError());
 }
 

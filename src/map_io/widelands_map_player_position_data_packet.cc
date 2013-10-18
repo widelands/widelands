@@ -51,7 +51,7 @@ void Map_Player_Position_Data_Packet::Read
 					snprintf(buffer, sizeof(buffer), "player_%u", p);
 					map.set_starting_pos(p, s.get_safe_Coords(buffer, extent));
 				} catch (const _wexception & e) {
-					throw game_data_error(_("player %u: %s"), p, e.what());
+					throw game_data_error(_("player %1$u: %2$s"), p, e.what());
 				}
 		} else
 			throw game_data_error

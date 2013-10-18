@@ -189,7 +189,7 @@ Immovable_Descr::Immovable_Descr
 				m_size = BaseImmovable::BIG;
 			else
 				throw game_data_error
-					(_("expected %s but found \"%s\""),
+					(_("expected %1$s but found \"%2$s\""),
 					 "{\"small\"|\"medium\"|\"big\"}", string);
 		} catch (const _wexception & e) {
 			throw game_data_error("size: %s", e.what());
@@ -221,7 +221,7 @@ Immovable_Descr::Immovable_Descr
 		} catch (const std::exception & e) {
 			delete program;
 			throw game_data_error
-				(_("program %s: %s"), program_name.c_str(), e.what());
+				(_("program %1$s: %2$s"), program_name.c_str(), e.what());
 		}
 	}
 
@@ -258,7 +258,7 @@ Immovable_Descr::Immovable_Descr
 					throw game_data_error(_("duplicated"));
 			} catch (const _wexception & e) {
 				throw game_data_error
-					("[terrain affinity] %s: %s", terrain_type_name, e.what());
+					("[terrain affinity] %1$s: %2$s", terrain_type_name, e.what());
 			}
 		}
 		if (owner_tribe) {
@@ -273,7 +273,7 @@ Immovable_Descr::Immovable_Descr
 						throw game_data_error(_("duplicated"));
 				} catch (const _wexception & e) {
 					throw game_data_error
-						(_("[terrain affinity] \"%s\" (not in current world): %s"),
+						(_("[terrain affinity] \"%1$s\" (not in current world): %2$s"),
 						 v->get_name(), e.what());
 				}
 		}
@@ -309,7 +309,7 @@ ImmovableProgram const * Immovable_Descr::get_program
 
 	if (it == m_programs.end())
 		throw game_data_error
-			(_("immovable %s has no program \"%s\""),
+			(_("immovable %1$s has no program \"%2$s\""),
 			 name().c_str(), programname.c_str());
 
 	return it->second;
@@ -614,7 +614,7 @@ void Immovable::Loader::load(FileRead & fr, uint8_t const version)
 	} catch (const Map_Object_Descr::Animation_Nonexistent &) {
 		imm.m_anim = imm.descr().main_animation();
 		log
-			("Warning: Animation \"%s\" not found, using animation %s).\n",
+			("Warning: Animation \"%1$s\" not found, using animation %2$s).\n",
 			 animname, imm.descr().get_animation_name(imm.m_anim).c_str());
 	}
 	imm.m_animstart = fr.Signed32();
@@ -649,7 +649,7 @@ void Immovable::Loader::load(FileRead & fr, uint8_t const version)
 			// Note that in some cases, the immovable may end up broken despite
 			// the fixup, but there isn't really anything we can do against that.
 			log
-				("Warning: Immovable '%s', size of program '%s' seems to have "
+				("Warning: Immovable '%1$s', size of program '%2$s' seems to have "
 				 "changed.\n",
 				 imm.descr().name().c_str(), imm.m_program->name().c_str());
 			imm.m_program_ptr = 0;
@@ -764,7 +764,7 @@ Map_Object::Loader * Immovable::load
 							effective_name = compat[1];
 						} else
 							throw game_data_error
-								("bad compatibility_immovable code %s for %s",
+								("bad compatibility_immovable code %1$s for %2$s",
 								 compat[0].c_str(), name);
 					}
 
@@ -773,7 +773,7 @@ Map_Object::Loader * Immovable::load
 						imm = new Immovable(*tribe->get_immovable_descr(idx));
 					else
 						throw game_data_error
-							(_("tribe %s does not define immovable type \"%s\""),
+							(_("tribe %1$s does not define immovable type \"%2$s\""),
 							 owner, effective_name.c_str());
 				} else
 					throw wexception(_("unknown tribe %s"), owner);
@@ -825,7 +825,7 @@ ImmovableProgram::ActAnimate::ActAnimate
 			long int const value = strtol(parameters, &endp, 0);
 			if (*endp or value <= 0)
 				throw game_data_error
-					(_("expected %s but found \"%s\""),
+					(_("expected %1$s but found \"%2$s\""),
 					 _("duration in ms"), parameters);
 			m_duration = value;
 		} else
@@ -865,7 +865,7 @@ ImmovableProgram::ActPlayFX::ActPlayFX
 			priority = value;
 			if (*endp or priority != value)
 				throw game_data_error
-					(_("expected %s but found \"%s\""), _("priority"), parameters);
+					(_("expected %1$s but found \"%2$s\""), _("priority"), parameters);
 		} else
 			priority = 127;
 
@@ -1030,7 +1030,7 @@ ImmovableProgram::ActRemove::ActRemove(char * parameters, Immovable_Descr &)
 			long int const value = strtol(parameters, &endp, 0);
 			if (*endp or value < 1 or 254 < value)
 				throw game_data_error
-					(_("expected %s but found \"%s\""),
+					(_("expected %1$s but found \"%2$s\""),
 					 _("probability in range [1, 254]"), parameters);
 			probability = value;
 		} else
@@ -1290,7 +1290,7 @@ bool Immovable::construct_ware_item(Game & game, Ware_Index index)
 	m_anim_construction_done = d->delivered.total();
 	m_animstart = game.get_gametime();
 
-	molog("construct_ware_item: total %u delivered: %u", index.value(), d->delivered[index]);
+	molog("construct_ware_item: total %1$u delivered: %2$u", index.value(), d->delivered[index]);
 
 	Buildcost remaining;
 	construct_remaining_buildcost(game, &remaining);
@@ -1428,7 +1428,7 @@ void PlayerImmovable::cleanup(Editor_Game_Base & egbase)
 void PlayerImmovable::receive_ware(Game &, Ware_Index ware)
 {
 	throw wexception
-		("MO(%u): Received a ware(%u), do not know what to do with it",
+		("MO(%1$u): Received a ware(%2$u), do not know what to do with it",
 		 serial(), ware.value());
 }
 
@@ -1439,7 +1439,7 @@ void PlayerImmovable::receive_ware(Game &, Ware_Index ware)
 void PlayerImmovable::receive_worker(Game &, Worker & worker)
 {
 	throw wexception
-		("MO(%u): Received a worker(%u), do not know what to do with it",
+		("MO(%1$u): Received a worker(%2$u), do not know what to do with it",
 		 serial(), worker.serial());
 }
 
@@ -1477,7 +1477,7 @@ void PlayerImmovable::Loader::load(FileRead & fr)
 
 			if (!owner_number || owner_number > egbase().map().get_nrplayers())
 				throw game_data_error
-					("owner number is %u but there are only %u players",
+					("owner number is %1$u but there are only %2$u players",
 					 owner_number, egbase().map().get_nrplayers());
 
 			Player * owner = egbase().get_player(owner_number);

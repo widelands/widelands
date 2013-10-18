@@ -91,7 +91,7 @@ void Map_Bobdata_Data_Packet::Read
 					if (Player_Number const read_owner = fr.Player_Number8()) {
 						if (nr_players < read_owner)
 							throw game_data_error
-								("owner number is %u but there are only %u players",
+								("owner number is %1$u but there are only %2$u players",
 								 read_owner, nr_players);
 						if (Player * const owner = egbase.get_player(read_owner))
 							bob.set_owner(owner);
@@ -145,7 +145,7 @@ void Map_Bobdata_Data_Packet::Read
 					bob.m_walkend   = fr.Signed32();
 					if (bob.m_walkend < bob.m_walkstart)
 						throw game_data_error
-							("walkend (%i) < walkstart (%i)",
+							("walkend (%1$i) < walkstart (%2$i)",
 							 bob.m_walkend, bob.m_walkstart);
 
 					uint16_t const old_stacksize = bob.m_stack.size();
@@ -243,7 +243,7 @@ void Map_Bobdata_Data_Packet::Read
 										&mol.get<Map_Object>(objvar1_serial);
 								} catch (const _wexception & e) {
 									throw game_data_error
-										("objvar1 (%u): %s", objvar1_serial, e.what());
+										("objvar1 (%1$u): %2$s", objvar1_serial, e.what());
 								}
 							} else
 								state.objvar1 = 0;
@@ -254,7 +254,7 @@ void Map_Bobdata_Data_Packet::Read
 								state.coords = Coords(x, y);
 								if (state.coords and (extent.w <= x or extent.h <= y))
 									throw game_data_error
-										("invalid coordinates (%i, %i)", x, y);
+										("invalid coordinates (%1$i, %2$i)", x, y);
 							} else
 								state.coords = fr.Coords32_allow_null(extent);
 
@@ -296,7 +296,7 @@ void Map_Bobdata_Data_Packet::Read
 											state.path->append(map, fr.Direction8());
 										} catch (const _wexception & e) {
 											throw game_data_error
-												("step #%u: %s",
+												("step #%1$u: %2$s",
 												 pathsteps - step, e.what());
 										}
 								} catch (const _wexception & e) {
@@ -343,7 +343,7 @@ void Map_Bobdata_Data_Packet::Read
 
 						} catch (const _wexception & e) {
 							throw game_data_error
-								("(%s) reading state %u: %s",
+								("(%1$s) reading state %2$u: %3$s",
 								 bob.descr().descname().c_str(), i, e.what());
 						}
 					}
@@ -364,7 +364,7 @@ void Map_Bobdata_Data_Packet::Read
 
 					mol.mark_object_as_loaded(bob);
 				} catch (const _wexception & e) {
-					throw game_data_error(_("bob %u: %s"), serial, e.what());
+					throw game_data_error(_("bob %1$u: %2$s"), serial, e.what());
 				}
 			}
 		} else
@@ -472,7 +472,7 @@ void Map_Bobdata_Data_Packet::read_worker_bob
 								(soldier->m_combat_walkend <
 								 soldier->m_combat_walkstart)
 								throw game_data_error
-									("combat_walkend (%i) < combat_walkstart (%i)",
+									("combat_walkend (%1$i) < combat_walkstart (%2$i)",
 									 soldier->m_combat_walkend,
 									 soldier->m_combat_walkstart);
 						}
@@ -506,7 +506,7 @@ void Map_Bobdata_Data_Packet::read_worker_bob
 					worker.set_location(&mol.get<PlayerImmovable>(location_serial));
 				} catch (const _wexception & e) {
 					throw game_data_error
-						("location (%u): %s", location_serial, e.what());
+						("location (%1$u): %2$s", location_serial, e.what());
 				}
 			} else
 				worker.m_location = 0;
@@ -517,7 +517,7 @@ void Map_Bobdata_Data_Packet::read_worker_bob
 						&mol.get<WareInstance>(carried_item_serial);
 				} catch (const _wexception & e) {
 					throw game_data_error
-						("carried item (%u): %s", carried_item_serial, e.what());
+						("carried item (%1$u): %2$s", carried_item_serial, e.what());
 				}
 			} else
 				worker.m_carried_item = 0;
@@ -549,7 +549,7 @@ void Map_Bobdata_Data_Packet::read_worker_bob
 				(_("unknown/unhandled version %u"), packet_version);
 	} catch (const _wexception & e) {
 		throw game_data_error
-			("worker %p (%u): %s", &worker, worker.serial(), e.what());
+			("worker %1$p (%2$u): %3$s", &worker, worker.serial(), e.what());
 	}
 }
 

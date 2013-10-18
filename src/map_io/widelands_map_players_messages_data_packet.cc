@@ -54,19 +54,19 @@ void Map_Players_Messages_Data_Packet::Read
 				MessageQueue::const_iterator const begin = messages.begin();
 				if (begin != messages.end()) {
 					log
-						("ERROR: The message queue for player %u contains a message "
+						("ERROR: The message queue for player %1$u contains a message "
 						 "before any messages have been loade into it. This is a bug "
 						 "in the savegame loading code. It created a new message and "
 						 "added it to the queue. This is only allowed during "
 						 "simulation, not at load. The following messge will be "
 						 "removed when the queue is reset:\n"
-						 "\tsender  : %s\n"
-						 "\ttitle   : %s\n"
-						 "\tsent    : %u\n"
-						 "\tduration: %u\n"
-						 "\tposition: (%i, %i)\n"
-						 "\tstatus  : %u\n"
-						 "\tbody    : %s\n",
+						 "\tsender  : %2$s\n"
+						 "\ttitle   : %3$s\n"
+						 "\tsent    : %4$u\n"
+						 "\tduration: %5$u\n"
+						 "\tposition: (%6$i, %7$i)\n"
+						 "\tstatus  : %8$u\n"
+						 "\tbody    : %9$s\n",
 						 p,
 						 begin->second->sender  ().c_str(),
 						 begin->second->title   ().c_str(),
@@ -86,14 +86,14 @@ void Map_Players_Messages_Data_Packet::Read
 					if (sent < previous_message_sent)
 						throw game_data_error
 							(_
-							 	("messages are not ordered: sent at %u but previous "
-							 	 "message sent at %u"),
+							 	("messages are not ordered: sent at %1$u but previous "
+							 	 "message sent at %2$u"),
 							 sent, previous_message_sent);
 					if (gametime < sent)
 						throw game_data_error
 							(_
-							 	("message is sent in the future: sent at %u but "
-							 	 "gametime is only %u"),
+							 	("message is sent in the future: sent at %1$u but "
+							 	 "gametime is only %2$u"),
 							 sent, gametime);
 					uint32_t duration = Forever(); //  default duration
 					if (Section::Value const * const dv = s->get_val("duration")) {
@@ -109,14 +109,14 @@ void Map_Players_Messages_Data_Packet::Read
 						if (sent + duration < sent)
 							throw game_data_error
 								(_
-								 	("duration %u is too large; causes numeric "
-								 	 "overflow when added to sent time %u"),
+								 	("duration %1$u is too large; causes numeric "
+								 	 "overflow when added to sent time %2$u"),
 								 duration, sent);
 						if (sent + duration < gametime)
 							throw game_data_error
 								(_
-								 	("message should have expired at %u; sent at %u "
-								 	 "with duration %u but gametime is already %u"),
+								 	("message should have expired at %1$u; sent at %2$u "
+								 	 "with duration %3$u but gametime is already %4$u"),
 								 sent + duration, sent, duration, gametime);
 					}
 					Message::Status status = Message::Archived; //  default status
@@ -128,7 +128,7 @@ void Map_Players_Messages_Data_Packet::Read
 								status = Message::Read;
 							else
 								throw game_data_error
-									(_("expected %s but found \"%s\""),
+									(_("expected %1$s but found \"%2$s\""),
 									 "{new|read}", status_string);
 						} catch (const _wexception & e) {
 							throw game_data_error("status: %s", e.what());
@@ -158,12 +158,12 @@ void Map_Players_Messages_Data_Packet::Read
 					previous_message_sent = sent;
 				} catch (const _wexception & e) {
 					throw game_data_error
-						(_("\"%s\": %s"), s->get_name(), e.what());
+						(_("\"%1$s\": %2$s"), s->get_name(), e.what());
 				}
 				prof.check_used();
 		} catch (const _wexception & e) {
 			throw game_data_error
-				(_("messages for player %u: %s"), p, e.what());
+				(_("messages for player %1$u: %2$s"), p, e.what());
 		}
 }
 
@@ -192,12 +192,12 @@ void Map_Players_Messages_Data_Packet::Write
 				 static_cast<uint32_t>(egbase.get_gametime()))
 				log
 					("ERROR: Trying to save a message that should have expired:\n"
-					 "\tsent = %u, duration = %u, expiry = %u, gametime = %u\n"
-					 "\tsender = \"%s\"\n"
-					 "\ttitle: %s\n"
-					 "\tbody: %s\n"
-					 "\tposition: (%i, %i)\n"
-					 "\tstatus: %s\n",
+					 "\tsent = %1$u, duration = %2$u, expiry = %3$u, gametime = %4$u\n"
+					 "\tsender = \"%5$s\"\n"
+					 "\ttitle: %6$s\n"
+					 "\tbody: %7$s\n"
+					 "\tposition: (%8$i, %9$i)\n"
+					 "\tstatus: %10$s\n",
 					 message.sent(), message.duration(),
 					 message.sent() + message.duration(), egbase.get_gametime(),
 					 message.sender().c_str(), message.title().c_str(),

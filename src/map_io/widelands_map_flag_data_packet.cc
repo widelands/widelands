@@ -89,7 +89,7 @@ void Map_Flag_Data_Packet::Read
 										(_("has a flag (%u)"), nf->serial());
 							} catch (const _wexception & e) {
 								throw game_data_error
-									(_("neighbour node (%i, %i): %s"),
+									(_("neighbour node (%1$i, %2$i): %3$s"),
 									 n.x, n.y, e.what());
 							}
 						}
@@ -109,7 +109,7 @@ void Map_Flag_Data_Packet::Read
 							 	 fc));
 					} catch (const _wexception & e) {
 						throw game_data_error
-							("%u (at (%i, %i), owned by player %u): %s",
+							("%1$u (at (%2$i, %3$i), owned by player %4$u): %5$s",
 							 serial, fc.x, fc.y, owner, e.what());
 					}
 				}

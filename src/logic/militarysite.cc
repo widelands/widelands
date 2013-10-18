@@ -122,7 +122,7 @@ std::string MilitarySite::get_statistics_string()
 	} else {
 		snprintf
 			(buffer, sizeof(buffer),
-			 ngettext("%u(+%u) soldier", "%u(+%u) soldiers", total),
+			 ngettext("%1$u(+%2$u) soldier", "%1$u(+%2$u) soldiers", total),
 			 present, total - present);
 	}
 	str = buffer;

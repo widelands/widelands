@@ -62,7 +62,7 @@ void Map_Objective_Data_Packet::Read
 					objective.set_visible (s->get_safe_bool  ("visible"));
 					objective.set_done       (s->get_bool  ("done", false));
 				} catch (const _wexception & e) {
-					throw game_data_error(_("%s: %s"), name, e.what());
+					throw game_data_error(_("%1$s: %2$s"), name, e.what());
 				}
 			}
 		} else

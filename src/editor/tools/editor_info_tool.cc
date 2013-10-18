@@ -51,7 +51,7 @@ int32_t Editor_Info_Tool::handle_click_impl
 
 	snprintf
 	(buf1, sizeof(buf1),
-	 _("1) Node info\n Coordinates: (%i, %i)\n Height: %u\n Caps: "),
+	 _("1) Node info\n Coordinates: (%1$i, %2$i)\n Height: %3$u\n Caps: "),
 	 center.node.x, center.node.y, f.get_height());
 	buf += buf1;
 	{
@@ -70,7 +70,7 @@ int32_t Editor_Info_Tool::handle_click_impl
 	}
 	snprintf
 	(buf1, sizeof(buf1),
-	 _("\n Owned by %i\n Has base immovable: %s\n Has bobs: %s\n"),
+	 _("\n Owned by %1$i\n Has base immovable: %2$s\n Has bobs: %3$s\n"),
 	 f.get_owned_by(),
 	 f.get_immovable() ? _("Yes") : _("No"),
 	 f.get_first_bob() ? _("Yes") : _("No"));
@@ -115,7 +115,7 @@ int32_t Editor_Info_Tool::handle_click_impl
 	buf += map.get_name();
 	snprintf
 	(buf1, sizeof(buf1),
-	 _("\n Size: %ix%i\n Author: "), map.get_width(), map.get_height());
+	 _("\n Size: %1$ix%2$i\n Author: "), map.get_width(), map.get_height());
 	buf += buf1;
 	buf += map.get_author();
 	buf += _("\n Descr: ");

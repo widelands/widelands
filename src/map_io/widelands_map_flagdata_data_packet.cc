@@ -81,12 +81,12 @@ void Map_Flagdata_Data_Packet::Read
 						{
 							if (mf != &flag)
 								throw game_data_error
-									(_("wrong flag (%u) at given position (%i, %i)"),
+									(_("wrong flag (%1$u) at given position (%2$i, %3$i)"),
 									 mf->serial(),
 									 flag.m_position.x, flag.m_position.y);
 						} else
 							throw game_data_error
-								(_("no flag at given position (%i, %i)"),
+								(_("no flag at given position (%1$i, %2$i)"),
 								 flag.m_position.x, flag.m_position.y);
 					}
 					flag.m_animstart = fr.Unsigned16();
@@ -106,14 +106,14 @@ void Map_Flagdata_Data_Packet::Read
 								if (flag.m_building != &building)
 									throw game_data_error
 										(_
-										 	("has building %u at (%i, %i), which is not "
+										 	("has building %1$u at (%2$i, %3$i), which is not "
 										 	 "at the top left node"),
 										 building_serial,
 										 building.get_position().x,
 										 building.get_position().y);
 							} catch (const _wexception & e) {
 								throw game_data_error
-									(_("building (%u): %s"), building_serial, e.what());
+									(_("building (%1$u): %2$s"), building_serial, e.what());
 							}
 						else
 							flag.m_building = 0;
@@ -148,14 +148,14 @@ void Map_Flagdata_Data_Packet::Read
 											&mol.get<PlayerImmovable>(nextstep_serial);
 									} catch (const _wexception & e) {
 										throw game_data_error
-											("next step (%u): %s",
+											("next step (%1$u): %2$s",
 											 nextstep_serial, e.what());
 									}
 								} else
 									flag.m_items[i].nextstep = 0;
 							} catch (const _wexception & e) {
 								throw game_data_error
-									("item #%u (%u): %s", i, item_serial, e.what());
+									("item #%1$u (%2$u): %3$s", i, item_serial, e.what());
 							}
 						}
 
@@ -165,7 +165,7 @@ void Map_Flagdata_Data_Packet::Read
 									&mol.get<Flag>(always_call_serial);
 							} catch (const _wexception & e) {
 								throw game_data_error
-									("always_call (%u): %s",
+									("always_call (%1$u): %2$s",
 									 always_call_serial, e.what());
 							}
 						else
@@ -184,7 +184,7 @@ void Map_Flagdata_Data_Packet::Read
 									(&mol.get<Worker>(worker_serial));
 							} catch (const _wexception & e) {
 								throw game_data_error
-									("worker #%u (%u): %s", i, worker_serial, e.what());
+									("worker #%1$u (%2$u): %3$s", i, worker_serial, e.what());
 							}
 						}
 
@@ -212,7 +212,7 @@ void Map_Flagdata_Data_Packet::Read
 						mol.mark_object_as_loaded(flag);
 					}
 				} catch (const _wexception & e) {
-					throw game_data_error(_("%u: %s"), serial, e.what());
+					throw game_data_error(_("%1$u: %2$s"), serial, e.what());
 				}
 			}
 		} else

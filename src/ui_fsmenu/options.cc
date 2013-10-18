@@ -74,7 +74,7 @@ Fullscreen_Menu_Options::Fullscreen_Menu_Options
 
 	m_sb_remove_replays
 		(this,
-		 get_w() * 6767 / 10000, get_h() * 8631 / 10000, get_w() / 4, m_vbutw,
+		 get_w() * 6767 / 10000, get_h() * 8631 / 10000,  get_w() / 4, m_vbutw,
 		 opt.remove_replays, 0, 365, _("days"),
 		 g_gr->images().get("pics/but1.png"), true),
 
@@ -262,7 +262,7 @@ Fullscreen_Menu_Options::Fullscreen_Menu_Options
 	for (uint32_t i = 0; i < m_resolutions.size(); ++i) {
 		char buf[32];
 		sprintf
-			(buf, _("%ix%i %i bit"), m_resolutions[i].xres,
+			(buf, _("%1$ix%2$i %3$i bit"), m_resolutions[i].xres,
 			 m_resolutions[i].yres, m_resolutions[i].depth);
 		const bool selected =
 			m_resolutions[i].xres  == opt.xres and
@@ -273,7 +273,7 @@ Fullscreen_Menu_Options::Fullscreen_Menu_Options
 	}
 	if (not did_select_a_res) {
 		char buf[32];
-		sprintf(buf, "%ix%i %i bit", opt.xres, opt.yres, opt.depth);
+		sprintf(buf, "%1$ix%2$i %3$i bit", opt.xres, opt.yres, opt.depth);
 		m_reslist.add(buf, 0, nullptr, true);
 		uint32_t entry = m_resolutions.size();
 		m_resolutions.resize(entry + 1);

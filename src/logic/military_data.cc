@@ -48,19 +48,19 @@ void Military_Data::parse(Section & s)
 		std::vector<std::string> list(split_string(interval, "-"));
 		if (list.size() != 2)
 			throw game_data_error
-				(_("expected %s but found \"%s\""), _("\"min-max\""), interval);
+				(_("expected %1$s but found \"%2$s\""), _("\"min-max\""), interval);
 		container_iterate(std::vector<std::string>, list, i)
 			remove_spaces(*i.current);
 		char * endp;
 		m_min_retreat = strtol(list[0].c_str(), &endp, 0);
 		if (*endp or m_min_retreat > 100)
 			throw game_data_error
-				(_("expected %s but found \"%s\""),
+				(_("expected %1$s but found \"%2$s\""),
 				 _("positive integer <= 100"), list[0].c_str());
 		m_max_retreat = strtol(list[1].c_str(), &endp, 0);
 		if (*endp or m_max_retreat > 100 or m_max_retreat < m_min_retreat)
 			throw game_data_error
-				(_("expected positive integer >= %u <= 100 but found \"%s\""),
+				(_("expected positive integer >= %1$u <= 100 but found \"%2$s\""),
 				 m_min_retreat, list[1].c_str());
 
 		// That is default value for retreat
@@ -72,7 +72,7 @@ void Military_Data::parse(Section & s)
 
 		if (m_retreat < m_min_retreat or m_retreat > m_max_retreat)
 			throw game_data_error
-				(_("expected positive integer >= %u <= %u but found \"%u\""),
+				(_("expected positive integer >= %1$u <= %2$u but found \"%3$u\""),
 				 m_min_retreat,
 				 m_max_retreat,
 				 m_retreat);

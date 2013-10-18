@@ -192,7 +192,7 @@ void Cmd_Bulldoze::Read
 				recurse = 2 <= packet_version ? fr.Unsigned8() : false;
 			} catch (const _wexception & e) {
 				throw game_data_error
-					(_("player immovable %u: %s"), pimm_serial, e.what());
+					(_("player immovable %1$u: %2$s"), pimm_serial, e.what());
 			}
 		} else
 			throw game_data_error
@@ -441,7 +441,7 @@ void Cmd_FlagAction::Read
 			try {
 				serial = mol.get<Map_Object>(flag_serial).serial();
 			} catch (const _wexception & e) {
-				throw game_data_error(_("flag %u: %s"), flag_serial, e.what());
+				throw game_data_error(_("flag %1$u: %2$s"), flag_serial, e.what());
 			}
 		} else
 			throw game_data_error
@@ -498,7 +498,7 @@ void Cmd_StartStopBuilding::Read
 				serial = mol.get<Map_Object>(building_serial).serial();
 			} catch (const _wexception & e) {
 				throw game_data_error
-					(_("building %u: %s"), building_serial, e.what());
+					(_("building %1$u: %2$s"), building_serial, e.what());
 			}
 		} else
 			throw game_data_error
@@ -572,7 +572,7 @@ void Cmd_MilitarySiteSetSoldierPreference::Read
 				serial = mol.get<Map_Object>(building_serial).serial();
 			} catch (const _wexception & e) {
 				throw game_data_error
-					(_("building %u: %s"), building_serial, e.what());
+					(_("building %1$u: %2$s"), building_serial, e.what());
 			}
 		} else
 			throw game_data_error
@@ -616,7 +616,7 @@ void Cmd_StartOrCancelExpedition::Read
 				serial = mol.get<Map_Object>(building_serial).serial();
 			} catch (const _wexception & e) {
 				throw game_data_error
-					(_("building %u: %s"), building_serial, e.what());
+					(_("building %1$u: %2$s"), building_serial, e.what());
 			}
 		} else
 			throw game_data_error
@@ -674,7 +674,7 @@ void Cmd_EnhanceBuilding::Read
 				serial = mol.get<Map_Object>(building_serial).serial();
 			} catch (const _wexception & e) {
 				throw game_data_error
-					(_("building %u: %s"), building_serial, e.what());
+					(_("building %1$u: %2$s"), building_serial, e.what());
 			}
 			bi =
 				Building_Index
@@ -735,7 +735,7 @@ void Cmd_DismantleBuilding::Read
 				serial = mol.get<Map_Object>(building_serial).serial();
 			} catch (const _wexception & e) {
 				throw game_data_error
-					("building %u: %s", building_serial, e.what());
+					("building %1$u: %2$s", building_serial, e.what());
 			}
 		} else
 			throw game_data_error
@@ -791,7 +791,7 @@ void Cmd_EvictWorker::Read
 				serial = mol.get<Map_Object>(worker_serial).serial();
 			} catch (const _wexception & e) {
 				throw game_data_error
-					("worker %u: %s", worker_serial, e.what());
+					("worker %1$u: %2$s", worker_serial, e.what());
 			}
 		} else
 			throw game_data_error
@@ -850,7 +850,7 @@ void Cmd_ShipScoutDirection::Read
 			try {
 				serial = mol.get<Map_Object>(ship_serial).serial();
 			} catch (const _wexception & e) {
-				throw game_data_error("Ship %u: %s", ship_serial, e.what());
+				throw game_data_error("Ship %1$u: %2$s", ship_serial, e.what());
 			}
 			// direction
 			dir = fr.Unsigned8();
@@ -913,7 +913,7 @@ void Cmd_ShipConstructPort::Read
 			try {
 				serial = mol.get<Map_Object>(ship_serial).serial();
 			} catch (const _wexception & e) {
-				throw game_data_error("Ship %u: %s", ship_serial, e.what());
+				throw game_data_error("Ship %1$u: %2$s", ship_serial, e.what());
 			}
 			// Coords
 			coords = fr.Coords32();
@@ -976,7 +976,7 @@ void Cmd_ShipExploreIsland::Read
 			try {
 				serial = mol.get<Map_Object>(ship_serial).serial();
 			} catch (const _wexception & e) {
-				throw game_data_error("Ship %u: %s", ship_serial, e.what());
+				throw game_data_error("Ship %1$u: %2$s", ship_serial, e.what());
 			}
 			clockwise = fr.Unsigned8() == 1;
 		} else
@@ -1036,7 +1036,7 @@ void Cmd_ShipSink::Read
 			try {
 				serial = mol.get<Map_Object>(ship_serial).serial();
 			} catch (const _wexception & e) {
-				throw game_data_error("Ship %u: %s", ship_serial, e.what());
+				throw game_data_error("Ship %1$u: %2$s", ship_serial, e.what());
 			}
 		} else
 			throw game_data_error("unknown/unhandled version %u", packet_version);
@@ -1092,7 +1092,7 @@ void Cmd_ShipCancelExpedition::Read
 			try {
 				serial = mol.get<Map_Object>(ship_serial).serial();
 			} catch (const _wexception & e) {
-				throw game_data_error("Ship %u: %s", ship_serial, e.what());
+				throw game_data_error("Ship %1$u: %2$s", ship_serial, e.what());
 			}
 		} else
 			throw game_data_error("unknown/unhandled version %u", packet_version);
@@ -1166,7 +1166,7 @@ void Cmd_SetWarePriority::Read
 			try {
 				m_serial = mol.get<Map_Object>(serial).serial();
 			} catch (const _wexception & e) {
-				throw game_data_error(_("site %u: %s"), serial, e.what());
+				throw game_data_error(_("site %1$u: %2$s"), serial, e.what());
 			}
 
 			m_type = fr.Unsigned8();
@@ -1248,7 +1248,7 @@ void Cmd_SetWareMaxFill::Read
 			try {
 				m_serial = mol.get<Map_Object>(serial).serial();
 			} catch (const _wexception & e) {
-				throw game_data_error("site %u: %s", serial, e.what());
+				throw game_data_error("site %1$u: %2$s", serial, e.what());
 			}
 
 			m_index = Ware_Index(static_cast<Ware_Index::value_t>(fr.Signed32()));
@@ -1606,7 +1606,7 @@ void Cmd_ChangeTrainingOptions::Read
 				serial    = mol.get<Map_Object>(trainingsite_serial).serial();
 			} catch (const _wexception & e) {
 				throw game_data_error
-					("trainingsite %u: %s", trainingsite_serial, e.what());
+					("trainingsite %1$u: %2$s", trainingsite_serial, e.what());
 			}
 			attribute = fr.Unsigned16();
 			value     = fr.Unsigned16();
@@ -1671,14 +1671,14 @@ void Cmd_DropSoldier::Read
 				serial  = mol.get<PlayerImmovable>(site_serial).serial();
 			} catch (const _wexception & e) {
 				throw game_data_error
-					(_("site %u: %s"),    site_serial, e.what());
+					(_("site %1$u: %2$s"),    site_serial, e.what());
 			}
 			const uint32_t soldier_serial = fr.Unsigned32();
 			try {
 				soldier = mol.get<Soldier>        (soldier_serial).serial();
 			} catch (const _wexception & e) {
 				throw game_data_error
-					(_("soldier %u: %s"), soldier_serial, e.what());
+					(_("soldier %1$u: %2$s"), soldier_serial, e.what());
 			}
 		} else
 			throw game_data_error
@@ -1749,7 +1749,7 @@ void Cmd_ChangeSoldierCapacity::Read
 				serial = mol.get<Map_Object>(militarysite_serial).serial();
 			} catch (const _wexception & e) {
 				throw game_data_error
-					(_("site %u: %s"), militarysite_serial, e.what());
+					(_("site %1$u: %2$s"), militarysite_serial, e.what());
 			}
 			val = fr.Signed16();
 		} else
@@ -1795,8 +1795,8 @@ void Cmd_EnemyFlagAction::execute (Game & game)
 
 	if (upcast(Flag, flag, game.objects().get_object(serial))) {
 		log
-			("Cmd_EnemyFlagAction::execute player(%u): flag->owner(%d) "
-			 "number=%u\n",
+			("Cmd_EnemyFlagAction::execute player(%1$u): flag->owner(%2$d) "
+			 "number=%3$u\n",
 			 player.player_number(), flag->owner().player_number(), number);
 
 		if (const Building * const building = flag->get_building()) {
@@ -1845,7 +1845,7 @@ void Cmd_EnemyFlagAction::Read
 			try {
 				serial = flag_serial ? mol.get<Map_Object>(flag_serial).serial() : 0;
 			} catch (const _wexception & e) {
-				throw game_data_error("flag %u: %s", flag_serial, e.what());
+				throw game_data_error("flag %1$u: %2$s", flag_serial, e.what());
 			}
 			fr           .Unsigned8 ();
 			number   = fr.Unsigned8 ();
@@ -1921,7 +1921,7 @@ void Cmd_ChangeMilitaryConfig::Read
 				 or
 				 retreat > plr->tribe().get_military_data().get_max_retreat())
 				throw game_data_error
-					(_("retreat: value out of range. Received %u expected %u-%u"),
+					(_("retreat: value out of range. Received %1$u expected %2$u-%3$u"),
 					 retreat,
 					 plr->tribe().get_military_data().get_min_retreat(),
 					 plr->tribe().get_military_data().get_max_retreat());
@@ -2051,7 +2051,7 @@ void Cmd_SetStockPolicy::execute(Game & game)
 		{
 			if (&warehouse->owner() != plr) {
 				log
-					("Cmd_SetStockPolicy: sender %u, but warehouse owner %u\n",
+					("Cmd_SetStockPolicy: sender %1$u, but warehouse owner %2$u\n",
 					 sender(), warehouse->owner().player_number());
 				return;
 			}
@@ -2064,7 +2064,7 @@ void Cmd_SetStockPolicy::execute(Game & game)
 				break;
 			default:
 				log
-					("Cmd_SetStockPolicy: sender %u, bad policy %u\n",
+					("Cmd_SetStockPolicy: sender %1$u, bad policy %2$u\n",
 					 sender(), m_policy);
 				return;
 			}
@@ -2073,7 +2073,7 @@ void Cmd_SetStockPolicy::execute(Game & game)
 			if (m_isworker) {
 				if (!(m_ware < tribe.get_nrworkers())) {
 					log
-						("Cmd_SetStockPolicy: sender %u, worker %u out of bounds\n",
+						("Cmd_SetStockPolicy: sender %1$u, worker %2$u out of bounds\n",
 						 sender(), m_ware.value());
 					return;
 				}
@@ -2081,7 +2081,7 @@ void Cmd_SetStockPolicy::execute(Game & game)
 			} else {
 				if (!(m_ware < tribe.get_nrwares())) {
 					log
-						("Cmd_SetStockPolicy: sender %u, ware %u out of bounds\n",
+						("Cmd_SetStockPolicy: sender %1$u, ware %2$u out of bounds\n",
 						 sender(), m_ware.value());
 					return;
 				}

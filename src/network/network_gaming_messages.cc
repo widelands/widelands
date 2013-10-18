@@ -130,7 +130,7 @@ void NetworkGamingMessages::fill_map() {
 	ngmessages["KICKED"]                  = _("Kicked by the host: %s");
 	ngmessages["MALFORMED_COMMANDS"]      = _("Client sent malformed commands: %s");
 	ngmessages["SOMETHING_WRONG"]         = _("Something went wrong: %s");
-	ngmessages["CLIENT_X_LEFT_GAME"]      = _("%s has left the game (%s)");
+	ngmessages["CLIENT_X_LEFT_GAME"]      = _("%1$s has left the game (%2$s)");
 	ngmessages["UNKNOWN_LEFT_GAME"]       = _("Unknown user has left the game (%s)");
 	ngmessages["SYNCREQUEST_WO_GAME"]     = _("Server sent a SYNCREQUEST even though no game is running.");
 	ngmessages["PLAYERCMD_WO_GAME"]       = _("Received a PLAYERCOMMAND even though no game is running.");
@@ -152,15 +152,15 @@ void NetworkGamingMessages::fill_map() {
 	ngmessages["REQUEST_OF_N_E_FILE"]     = _("Client requests file although none is available to send.");
 	ngmessages["REQUEST_OF_N_E_FILEPART"] = _("Client requests file part that does not exist.");
 	ngmessages["SENT_PLAYER_TO_LOBBY"]    = _("Host sent player %s to the lobby!");
-	ngmessages["DIFFERENT_WL_VERSION"]    = _("WARNING: %s uses version: %s, while Host uses version: %s");
+	ngmessages["DIFFERENT_WL_VERSION"]    = _("WARNING: %1$s uses version: %2$s, while Host uses version: %3$s");
 	ngmessages["CLIENT_HAS_JOINED_GAME"]  = _("%s has joined the game");
 	ngmessages["GAME_SAVED_AS"]           = _("Game was saved as %s.");
-	ngmessages["STARTED_SENDING_FILE"]    = _("Started to send file %s to %s!");
-	ngmessages["COMPLETED_FILE_TRANSFER"] = _("Completed transfer of file %s to %s");
-	ngmessages["SENDING_FILE_PART"]       = _("Sending part %s of file %s to %s");
+	ngmessages["STARTED_SENDING_FILE"]    = _("Started to send file %1$s to %2$s!");
+	ngmessages["COMPLETED_FILE_TRANSFER"] = _("Completed transfer of file %1$s to %2$s");
+	ngmessages["SENDING_FILE_PART"]       = _("Sending part %1$s of file %2$s to %3$s");
 	ngmessages["PLAYER_DEFEATED"]         = _("The player \"%s\" was defeated and became spectator.");
-	ngmessages["CLIENT_HUNG"]             = _("Client %s did not answer for more than %s.");
+	ngmessages["CLIENT_HUNG"]             = _("Client %1$s did not answer for more than %2$s.");
 	ngmessages["CLIENT_HUNG_AUTOKICK"]    =
-		_("Client %s will automatically be kicked, if no answer is received within %s.");
+		_("Client %1$s will automatically be kicked, if no answer is received within %2$s.");
 
 }

@@ -65,7 +65,7 @@ void Map_Ware_Data_Packet::Read
 						 *new WareInstance(Ware_Index::Null(), 0))
 						.init(egbase);
 				} catch (const _wexception & e) {
-					throw game_data_error(_("%u: %s"), serial, e.what());
+					throw game_data_error(_("%1$u: %2$s"), serial, e.what());
 				}
 			}
 		} else

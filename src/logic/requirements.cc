@@ -230,8 +230,8 @@ static Requirements readAttribute
 		 at != atrTotal)
 		throw game_data_error
 			(_
-			 	("expected atrHP (%u), atrAttack (%u), atrDefense (%u), atrEvade "
-			 	 "(%u) or atrTotal (%u) but found unknown attribute value (%u)"),
+			 	("expected atrHP (%1$u), atrAttack (%2$u), atrDefense (%3$u), atrEvade "
+			 	 "(%4$u) or atrTotal (%5$u) but found unknown attribute value (%6$u)"),
 			 atrHP, atrAttack, atrDefense, atrEvade, atrTotal, at);
 	int32_t const min = fr.Signed32();
 	int32_t const max = fr.Signed32();

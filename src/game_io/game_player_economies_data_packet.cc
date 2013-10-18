@@ -80,7 +80,7 @@ void Game_Player_Economies_Data_Packet::Read
 						}
 					}
 				} catch (const _wexception & e) {
-					throw game_data_error(_("player %u: %s"), p, e.what());
+					throw game_data_error(_("player %1$u: %2$s"), p, e.what());
 				}
 		} else
 			throw game_data_error
