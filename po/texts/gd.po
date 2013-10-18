@@ -8,27 +8,30 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2013-09-15 17:41+0000\n"
-"PO-Revision-Date: 2013-10-08 17:37+0000\n"
+"PO-Revision-Date: 2013-10-17 23:28+0000\n"
 "Last-Translator: GunChleoc <Unknown>\n"
 "Language-Team: Fòram na Gàidhlig http://www.foramnagaidhlig.net\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-10-09 05:12+0000\n"
+"X-Launchpad-Export-Date: 2013-10-18 05:13+0000\n"
 "X-Generator: Launchpad (build 16799)\n"
 "Language: gd\n"
 
 #: ../../txts/README.lua:73
 msgid "(CTRL+) 0-9: Remember and go to previously remembered locations"
 msgstr ""
+"(CTRL+) 0-9: Cuimhnich is rach gu ionadan air an cuimhneachadh roimhe"
 
 #: ../../txts/README.lua:74
 msgid ",: goes to previous location"
-msgstr ""
+msgstr ",: rach dhan ionad roimhe"
 
 #: ../../txts/README.lua:99
 msgid "- Detailed steps on how to trigger the bug, if possible."
 msgstr ""
+"- Ceuman mionaideach air mar a dh'adhbharaicheas tu am buga ma ghabh seo "
+"dèanamh."
 
 #: ../../txts/README.lua:111
 msgid ""
@@ -36,6 +39,9 @@ msgid ""
 "helps\n"
 "demonstrate the issue, please include one or more screenshots."
 msgstr ""
+"- Cuir glacadh-sgrìn no dhà rid ma tha am buga mu dheidhinn rudeigin nach "
+"tèid a shealltainn mar bu chòir no ma chuireas iad ri mìneachadh an "
+"duilgheadais."
 
 #: ../../txts/README.lua:114
 msgid ""
@@ -56,10 +62,11 @@ msgid ""
 "- What you expected to happen when performing the steps and what actually "
 "happened."
 msgstr ""
+"- Na tha thu an dùil air nuair a nì thu na ceuman is na thachair dha-rìribh."
 
 #: ../../txts/README.lua:109
 msgid "- Which map you were playing when the bug occurred."
-msgstr ""
+msgstr "- Am mapa a bha thu a' cluiche nuair a thachair am buga."
 
 #: ../../txts/README.lua:103
 msgid ""
@@ -68,14 +75,17 @@ msgid ""
 "the revision number if you are running a development version or a nightly "
 "build.)"
 msgstr ""
+"- An tionndadh de Widelands a th' agad ('s e seo àireamh an togail no an "
+"lèirmheis nuair a bhios tu a' ruith tionndadh leasachaidh no togail "
+"oidhcheil.)"
 
 #: ../../txts/README.lua:75
 msgid ".: goes to next location"
-msgstr ""
+msgstr ".: rach dhan ath-ionad"
 
 #: ../../txts/editor_readme:43
 msgid "1-0      Changes tools size"
-msgstr ""
+msgstr "1-0      Atharraich meud an inneil"
 
 #: ../../txts/editor_readme:47
 msgid "ALT      (Hold) Selects second alternative tool while pressed"
@@ -112,148 +122,154 @@ msgid ""
 "Any further questions? Our FAQs, the wiki and of course our community forums "
 "can be found at www.widelands.org."
 msgstr ""
+"A bheil ceist sam bith eile agad? Thoir sùil air na CÀBHA, an uicidh is am "
+"bòrd-brath air www.widelands.org."
 
 #: ../../txts/developers:171
 msgid "Atlantean"
-msgstr ""
+msgstr "Atlantach"
 
 #: ../../txts/developers:161
 msgid "Barbarian"
-msgstr ""
+msgstr "Tùsanach"
 
 #: ../../txts/tips/general_game.tip:6
 msgid ""
 "Be sure to send a geologist to survey sites before building a well or a mine."
 msgstr ""
+"Dèan cinnteach gun cuir thu clach-eòlaiche airson làraichean a rùrachadh mus "
+"tog thu tobar no mèinn."
 
 #: ../../txts/editor_readme:23
 msgid "C        Toggles census on/off"
-msgstr ""
+msgstr "C        Toglaich an cunntas-sluaigh air no dheth"
 
 #: ../../txts/README.lua:67
 msgid "C: toggles census"
-msgstr ""
+msgstr "C: toglaich an cunntas-sluaigh"
 
 #: ../../txts/README.lua:77
 msgid "CTRL+F10: quits the game immediately"
-msgstr ""
+msgstr "CTRL+F10: fàgaidh seo an geama sa bhad"
 
 #: ../../txts/editor_readme:39
 msgid "CTRL+L   Load Map"
-msgstr ""
+msgstr "CTRL+L   Luchdaidh mapa"
 
 #: ../../txts/editor_readme:41
 msgid "CTRL+S   Save Map"
-msgstr ""
+msgstr "CTRL+S   Sàbhail am mapa"
 
 #: ../../txts/developers:158
 msgid "Campaign Story"
-msgstr ""
+msgstr "Sgeulachd na h-iomairte"
 
 #: ../../txts/README.lua:31
 msgid "Check out the Widelands project homepage:"
-msgstr ""
+msgstr "Thoir sùil air làrach-lìn a' phròiseict Widelands:"
 
 #: ../../txts/developers:8
 msgid "Chieftain"
-msgstr ""
+msgstr "Ceannard"
 
 #: ../../txts/developers:34
 msgid "Coders"
-msgstr ""
+msgstr "Prògramairean"
 
 #: ../../txts/license:7
 msgid "Copyright 2002 - 2013 by the Widelands Development Team."
-msgstr ""
+msgstr "Còir-lethbhreac 2002 - 2013 leis an sgioba leasachaidh Widelands."
 
 #: ../../txts/developers:186
 msgid "Czech"
-msgstr ""
+msgstr "Seicis"
 
 #: ../../txts/README.lua:83
 msgid "DELETE: archives the current message"
-msgstr ""
+msgstr "DELETE: cuir an teachdaireachd làithreach dhan tasglann"
 
 #: ../../txts/developers:193
 msgid "Dansk"
-msgstr ""
+msgstr "Danmhairgis"
 
 #: ../../txts/developers:1
 msgid "Development"
-msgstr ""
+msgstr "Leasachadh"
 
 #: ../../txts/developers:328
 msgid "Documentation, Help and Wiki"
-msgstr ""
+msgstr "An docamaideadh, a' chobhair is an uicidh"
 
 #: ../../txts/developers:199
 msgid "Dutch"
-msgstr ""
+msgstr "Duitsis"
 
 #: ../../txts/editor_readme:25
 msgid "E        Toggles event menu"
-msgstr ""
+msgstr "H        Toglaich clàr-taice nan tachartasan"
 
 #: ../../txts/developers:14
 msgid "Elders"
-msgstr ""
+msgstr "Seanairean"
 
 #: ../../txts/developers:167
 msgid "Empire"
-msgstr ""
+msgstr "An Impireachd"
 
 #: ../../txts/editor_readme:27
 msgid "F        Toggles fullscreen"
-msgstr ""
+msgstr "F        Toglaich làn-sgrìn"
 
 #: ../../txts/README.lua:78
 msgid "F11: takes a screenshot"
-msgstr ""
+msgstr "F11: tog glacadh-sgrìn"
 
 #: ../../txts/README.lua:76
 msgid "F6: shows the debug console (only in debug-builds)"
 msgstr ""
+"F6: seall a' chonsoil dhì-bhugachaidh (le toglaichean dì-bhugachaidh a-mhàin)"
 
 #: ../../txts/README.lua:71
 msgid "F: toggles fullscreen (if supported by OS)"
-msgstr ""
+msgstr "F: toglaich làn-sgrìn (ma chuireas an siostam-obrachaidh taic ris)"
 
 #: ../../txts/developers:206
 msgid "Finnish"
-msgstr ""
+msgstr "Fionnlainnis"
 
 #: ../../txts/developers:343
 msgid "Former elders"
-msgstr ""
+msgstr "Seanairean roimhe"
 
 #: ../../txts/developers:212
 msgid "French"
-msgstr ""
+msgstr "Fraingis"
 
 #: ../../txts/README.lua:82
 msgid "G: jumps to location corresponding to current message"
 msgstr ""
+"G: gearr leum dhan ionad co-cheangailte ris an teachdaireachd làithreach"
 
 #: ../../txts/developers:219
 msgid "Galician"
-msgstr ""
+msgstr "Gailìsis"
 
 #: ../../txts/README.lua:46
 msgid "General game control"
-msgstr ""
+msgstr "Uidheaman-smachd coitcheann a' gheama"
 
 #: ../../txts/developers:224
 msgid "German"
-msgstr ""
+msgstr "Gearmailtis"
 
 #: ../../txts/developers:86
 msgid "Graphicians"
-msgstr ""
+msgstr "Luchd-grafaigeachd"
 
 #: ../../txts/developers:18
 #: ../../txts/developers:354
 msgid "Graphics"
-msgstr ""
+msgstr "Grafaigeachd"
 
 #: ../../txts/editor_readme:29
 msgid "H        Toggles main menu"
@@ -261,7 +277,7 @@ msgstr "H        Toglaichidh seo an clàr-taice"
 
 #: ../../txts/developers:236
 msgid "Hebrew"
-msgstr ""
+msgstr "Eabhra"
 
 #: ../../txts/tips/editor.tip:18
 msgid "Holding down ALT switches second alternative tool on (if it exists)."
@@ -281,23 +297,23 @@ msgstr ""
 #: ../../txts/developers:23
 #: ../../txts/developers:347
 msgid "Homepage"
-msgstr ""
+msgstr "Duilleag-dhachaigh"
 
 #: ../../txts/developers:319
 msgid "Homepage Coders"
-msgstr ""
+msgstr "Prògramairean na duilleige-dachaigh"
 
 #: ../../txts/developers:241
 msgid "Hungarian"
-msgstr ""
+msgstr "Ungairis"
 
 #: ../../txts/editor_readme:37
 msgid "I        Activates information tool"
-msgstr ""
+msgstr "I        gnìomhaich an t-inneal fiosrachaidh"
 
 #: ../../txts/README.lua:69
 msgid "I: toggles stock inventory"
-msgstr ""
+msgstr "I: toglaich cunntas an stòrais"
 
 #: ../../txts/README.lua:93
 msgid "If you encounter a bug, please report it to our bugtracker:"
@@ -345,11 +361,11 @@ msgstr ""
 #: ../../txts/README.lua:18
 #: ../../txts/editor_readme:7
 msgid "Introduction"
-msgstr ""
+msgstr "Ro-ràdh"
 
 #: ../../txts/developers:246
 msgid "Italian"
-msgstr ""
+msgstr "Eadailtis"
 
 #: ../../txts/tips/barbarians.tip:6
 #: ../../txts/tips/empire.tip:6
@@ -368,7 +384,7 @@ msgstr ""
 
 #: ../../txts/license:1
 msgid "License"
-msgstr ""
+msgstr "Ceadachas"
 
 #: ../../txts/license:4
 msgid "Licensing information for Widelands"
@@ -409,7 +425,7 @@ msgstr ""
 
 #: ../../txts/developers:116
 msgid "Musicians"
-msgstr ""
+msgstr "Ceòladairean"
 
 #: ../../txts/README.lua:66
 msgid "N: toggles messages ('news')"
@@ -460,7 +476,7 @@ msgstr ""
 
 #: ../../txts/developers:373
 msgid "Other"
-msgstr ""
+msgstr "Eile"
 
 #: ../../txts/developers:296
 msgid "Other Unix Distributions"
@@ -490,7 +506,7 @@ msgstr ""
 
 #: ../../txts/developers:281
 msgid "Packagers"
-msgstr ""
+msgstr "Luchd-pacaididh"
 
 #: ../../txts/editor_readme:12
 msgid "Please look into our enduser manuals in our wiki-pages at:"
@@ -502,7 +518,7 @@ msgstr ""
 
 #: ../../txts/developers:251
 msgid "Polish"
-msgstr ""
+msgstr "Pòlainnis"
 
 #: ../../txts/tips/general_game.tip:42
 msgid ""
@@ -521,7 +537,7 @@ msgstr ""
 
 #: ../../txts/README.lua:7
 msgid "README"
-msgstr ""
+msgstr "LEUGHMI"
 
 #: ../../txts/editor_readme:4
 msgid "README for the Editor"
@@ -539,7 +555,7 @@ msgstr ""
 
 #: ../../txts/README.lua:118
 msgid "Replays"
-msgstr ""
+msgstr "Ath-chluichean"
 
 #: ../../txts/README.lua:133
 msgid ""
@@ -552,11 +568,11 @@ msgstr ""
 
 #: ../../txts/README.lua:91
 msgid "Reporting Bugs"
-msgstr ""
+msgstr "A' dèanamh aithris air bugaichean"
 
 #: ../../txts/developers:259
 msgid "Russian"
-msgstr ""
+msgstr "Ruisis"
 
 #: ../../txts/README.lua:68
 msgid "S: toggles statistics"
@@ -587,7 +603,7 @@ msgstr ""
 
 #: ../../txts/developers:264
 msgid "Slovak"
-msgstr ""
+msgstr "Slòbhacais"
 
 #: ../../txts/tips/atlanteans.tip:2
 #: ../../txts/tips/barbarians.tip:2
@@ -600,15 +616,15 @@ msgstr ""
 #: ../../txts/developers:28
 #: ../../txts/developers:361
 msgid "Sound"
-msgstr ""
+msgstr "Fuaim"
 
 #: ../../txts/developers:128
 msgid "Sound Effects"
-msgstr ""
+msgstr "Èifeachdan fuaime"
 
 #: ../../txts/developers:269
 msgid "Spanish"
-msgstr ""
+msgstr "Spàinntis"
 
 #: ../../txts/tips/general_game.tip:18
 msgid ""
@@ -618,15 +634,15 @@ msgstr ""
 
 #: ../../txts/README.lua:38
 msgid "Status"
-msgstr ""
+msgstr "Staid"
 
 #: ../../txts/developers:274
 msgid "Swedish"
-msgstr ""
+msgstr "Suainis"
 
 #: ../../txts/editor_readme:35
 msgid "T        Toggles tools menu"
-msgstr ""
+msgstr "H        Toglaich clàr-taice nan inneal"
 
 #: ../../txts/tips/general_game.tip:2
 msgid ""
@@ -679,11 +695,11 @@ msgstr ""
 
 #: ../../txts/developers:366
 msgid "Translation"
-msgstr ""
+msgstr "Eadar-theangachadh"
 
 #: ../../txts/developers:178
 msgid "Translators"
-msgstr ""
+msgstr "Eadar-theangadairean"
 
 #: ../../txts/tips/multiplayer.tip:10
 msgid ""
@@ -728,7 +744,7 @@ msgstr ""
 
 #: ../../txts/developers:3
 msgid "Widelands Development Team"
-msgstr ""
+msgstr "An sgioba leasachaidh Widelands"
 
 #: ../../txts/README.lua:20
 msgid ""
@@ -825,4 +841,4 @@ msgstr ""
 
 #: ../../txts/license:12
 msgid "http://www.gnu.org/licenses/old-licenses/gpl-2.0"
-msgstr ""
+msgstr "http://www.gnu.org/licenses/old-licenses/gpl-2.0"

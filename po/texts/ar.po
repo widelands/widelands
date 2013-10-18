@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2013-09-15 17:41+0000\n"
-"PO-Revision-Date: 2010-04-12 09:14+0000\n"
-"Last-Translator: SirVer <Unknown>\n"
+"PO-Revision-Date: 2013-10-17 13:48+0000\n"
+"Last-Translator: abdXelrhman <abdXelrhman@gmail.com>\n"
 "Language-Team: Arabic <ar@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-09-16 04:36+0000\n"
-"X-Generator: Launchpad (build 16761)\n"
+"X-Launchpad-Export-Date: 2013-10-18 05:13+0000\n"
+"X-Generator: Launchpad (build 16799)\n"
 
 #: ../../txts/README.lua:73
 msgid "(CTRL+) 0-9: Remember and go to previously remembered locations"
@@ -27,7 +27,7 @@ msgstr ""
 
 #: ../../txts/README.lua:99
 msgid "- Detailed steps on how to trigger the bug, if possible."
-msgstr ""
+msgstr "- تفاصيل دقيقه حول كيفيه إفتعال العله من جديد، لو امكن."
 
 #: ../../txts/README.lua:111
 msgid ""
@@ -35,6 +35,8 @@ msgid ""
 "helps\n"
 "demonstrate the issue, please include one or more screenshots."
 msgstr ""
+"لو ظننت ان رؤيه ما يُعرَض على الشاشه ستساعد\n"
+"فى تحديد العله بدقه اكبر او برهنتها، فيُرجَى إرسال بضع لقطات للشاشه."
 
 #: ../../txts/README.lua:114
 msgid ""
@@ -42,6 +44,10 @@ msgid ""
 "crashes where it can be hard to tell exactly what is triggering it), please\n"
 "include that too. For more information, see the section on Replays below."
 msgstr ""
+"- إذا إمتلكت لعبه محفوظه او مَقطع إعاده تظهر فيه العله (هذا مفيد فى حالات "
+"اﻹنهيار الفورى\n"
+"حيث يكون من شبه المُستحيل تحديد ما اطلق العله بدقه)، فيُرجَى إدراجهم ايضاً. "
+"لمزيد من المعلومات يمكنك قراءه قسم مقاطع اﻹعادات ادناه."
 
 #: ../../txts/README.lua:106
 msgid ""
@@ -49,16 +55,17 @@ msgid ""
 "as\n"
 "some bugs can be platform specific."
 msgstr ""
+"- كما يُرجَى إدراج إسم نظام تشغيلك حيث ان بعض العلل قد تحدث على منصات محدده."
 
 #: ../../txts/README.lua:101
 msgid ""
 "- What you expected to happen when performing the steps and what actually "
 "happened."
-msgstr ""
+msgstr "- ما إنتظرت حدوثه عندما نفذت تلك الخطوات وما حدث بالفعل."
 
 #: ../../txts/README.lua:109
 msgid "- Which map you were playing when the bug occurred."
-msgstr ""
+msgstr "- فى اى خريطه كنت تلعب عندما وقعت العله."
 
 #: ../../txts/README.lua:103
 msgid ""
@@ -67,6 +74,9 @@ msgid ""
 "the revision number if you are running a development version or a nightly "
 "build.)"
 msgstr ""
+"- اى إصدار من لعبه وايد لاندس كنت تستخدم (رقم البنيه\n"
+"فى حاله إستخدامك ﻹصدار عادى او رقم الترقيع فى حاله إستخدامك ﻹصدار تطويرى او "
+"بنيه ليليه.)"
 
 #: ../../txts/README.lua:75
 msgid ".: goes to next location"
@@ -107,6 +117,9 @@ msgid ""
 "Any further questions? Our FAQs, the wiki and of course our community forums "
 "can be found at www.widelands.org."
 msgstr ""
+"مازلت حائراً؟ يمكنك زياره صفحه اسئلتنا الشائعه، الموسوعه، وبالطبع يمكنك "
+"إنشاء منشور جديد فى منتديات مُجتمعنا الحبيب، كل هذا يمكن العثور عليه فى "
+"www.widelands.org."
 
 #: ../../txts/developers:171
 msgid "Atlantean"
@@ -114,12 +127,14 @@ msgstr ""
 
 #: ../../txts/developers:161
 msgid "Barbarian"
-msgstr ""
+msgstr "البربرى"
 
 #: ../../txts/tips/general_game.tip:6
 msgid ""
 "Be sure to send a geologist to survey sites before building a well or a mine."
 msgstr ""
+"إحرص دائماً على إرسال عالم جيولجيا لفحص المواقع المُراد بناء ابار او مناجم "
+"بها."
 
 #: ../../txts/editor_readme:23
 msgid "C        Toggles census on/off"
@@ -131,15 +146,15 @@ msgstr ""
 
 #: ../../txts/README.lua:77
 msgid "CTRL+F10: quits the game immediately"
-msgstr ""
+msgstr "مفتاح كنترول + إف عشره للخروج من اللعبه فوراً"
 
 #: ../../txts/editor_readme:39
 msgid "CTRL+L   Load Map"
-msgstr ""
+msgstr "مفتاح كنترول + م لتحميل لعبه مَحفوظه سابقاً"
 
 #: ../../txts/editor_readme:41
 msgid "CTRL+S   Save Map"
-msgstr ""
+msgstr "مفتاح كنترول + س لحفظ اللعبه"
 
 #: ../../txts/developers:158
 msgid "Campaign Story"
@@ -147,23 +162,23 @@ msgstr ""
 
 #: ../../txts/README.lua:31
 msgid "Check out the Widelands project homepage:"
-msgstr ""
+msgstr "تفقد صفحه مشروع وايد لاندس على الشبكه العنكبوتيه:"
 
 #: ../../txts/developers:8
 msgid "Chieftain"
-msgstr ""
+msgstr "الرئيس"
 
 #: ../../txts/developers:34
 msgid "Coders"
-msgstr ""
+msgstr "المُبرمجون"
 
 #: ../../txts/license:7
 msgid "Copyright 2002 - 2013 by the Widelands Development Team."
-msgstr ""
+msgstr "حقوق النسخ 2002 - 2013 بواسطه فريق تطوير وايد لاندس"
 
 #: ../../txts/developers:186
 msgid "Czech"
-msgstr ""
+msgstr "التشيكيه"
 
 #: ../../txts/README.lua:83
 msgid "DELETE: archives the current message"
@@ -175,15 +190,15 @@ msgstr ""
 
 #: ../../txts/developers:1
 msgid "Development"
-msgstr "التّطوير"
+msgstr "التطوير"
 
 #: ../../txts/developers:328
 msgid "Documentation, Help and Wiki"
-msgstr ""
+msgstr "التوثيق،الموسوعه،والمساعده"
 
 #: ../../txts/developers:199
 msgid "Dutch"
-msgstr "الألمانية"
+msgstr "الالمانيه"
 
 #: ../../txts/editor_readme:25
 msgid "E        Toggles event menu"
@@ -195,27 +210,29 @@ msgstr ""
 
 #: ../../txts/developers:167
 msgid "Empire"
-msgstr ""
+msgstr "اﻹمبراطوريه"
 
 #: ../../txts/editor_readme:27
 msgid "F        Toggles fullscreen"
-msgstr ""
+msgstr "مفتاح ب للتبديل بين الشاشه الكامله/الناقصه"
 
 #: ../../txts/README.lua:78
 msgid "F11: takes a screenshot"
-msgstr ""
+msgstr "مفتاح إف11 يأخذ لقطه من الشاشه"
 
 #: ../../txts/README.lua:76
 msgid "F6: shows the debug console (only in debug-builds)"
-msgstr ""
+msgstr "مفتاح إف6 يظهر مُحَاوِرَه المُعالجه (فقط فى البنيات التى تدعم ذلك)"
 
 #: ../../txts/README.lua:71
 msgid "F: toggles fullscreen (if supported by OS)"
 msgstr ""
+"مفتاح ب للتبديل بين الشاشه الكامله/الناقصه (فقط فى انظمه التشغيل التى تدعم "
+"ذلك)"
 
 #: ../../txts/developers:206
 msgid "Finnish"
-msgstr "الفنلندية"
+msgstr "الفنلنديه"
 
 #: ../../txts/developers:343
 msgid "Former elders"
@@ -223,7 +240,7 @@ msgstr ""
 
 #: ../../txts/developers:212
 msgid "French"
-msgstr "الفرنسية"
+msgstr "الفرنسيه"
 
 #: ../../txts/README.lua:82
 msgid "G: jumps to location corresponding to current message"
@@ -231,15 +248,15 @@ msgstr ""
 
 #: ../../txts/developers:219
 msgid "Galician"
-msgstr ""
+msgstr "الجاليكيه"
 
 #: ../../txts/README.lua:46
 msgid "General game control"
-msgstr ""
+msgstr "إعدادات اللعبه العامه"
 
 #: ../../txts/developers:224
 msgid "German"
-msgstr ""
+msgstr "الالمانيه"
 
 #: ../../txts/developers:86
 msgid "Graphicians"
@@ -248,7 +265,7 @@ msgstr ""
 #: ../../txts/developers:18
 #: ../../txts/developers:354
 msgid "Graphics"
-msgstr ""
+msgstr "الرسوميات"
 
 #: ../../txts/editor_readme:29
 msgid "H        Toggles main menu"
@@ -256,7 +273,7 @@ msgstr ""
 
 #: ../../txts/developers:236
 msgid "Hebrew"
-msgstr ""
+msgstr "العبريه"
 
 #: ../../txts/tips/editor.tip:18
 msgid "Holding down ALT switches second alternative tool on (if it exists)."
@@ -271,20 +288,20 @@ msgstr ""
 
 #: ../../txts/README.lua:72
 msgid "Home: centers main mapview on starting location"
-msgstr ""
+msgstr "مفتاح home يُظهر مكان بدايتك"
 
 #: ../../txts/developers:23
 #: ../../txts/developers:347
 msgid "Homepage"
-msgstr "الصفحة الرئيسية"
+msgstr "الصفحه الرئيسيه"
 
 #: ../../txts/developers:319
 msgid "Homepage Coders"
-msgstr ""
+msgstr "مُبرمجوا الصفحه الرئيسيه"
 
 #: ../../txts/developers:241
 msgid "Hungarian"
-msgstr ""
+msgstr "الهنجاريه"
 
 #: ../../txts/editor_readme:37
 msgid "I        Activates information tool"
@@ -296,7 +313,7 @@ msgstr ""
 
 #: ../../txts/README.lua:93
 msgid "If you encounter a bug, please report it to our bugtracker:"
-msgstr ""
+msgstr "إذا صادفتك عله فيُرجَى إبلاغها لمتعقب العلل:"
 
 #: ../../txts/README.lua:52
 msgid ""
@@ -305,6 +322,8 @@ msgid ""
 "are\n"
 "removed."
 msgstr ""
+"يمكنك الضغط على مفتاح كنترول اثناء بناء طريق لوضع الاعلام تلقائياً.\n"
+"يمكنك الضغط على مفتاح كنترول اثناء إزاله طريق ﻹزاله الاعلام تلقائياً"
 
 #: ../../txts/tips/general_game.tip:58
 msgid ""
@@ -319,6 +338,11 @@ msgid ""
 "Wiki\n"
 "and a detailed description of the tribe economies in our online encyclopedia."
 msgstr ""
+"إذا كنت تحتاج لرؤيه ملفات توثيق مُحَرِر وايد لاندس او تحتاج للمساعده، "
+"فيمكنك\n"
+"زياره موقعنا على الشبكه العنكبوتيه. هناك يمكنك العثور على المساعده عبر "
+"موسوعتُنا\n"
+"ووصف دقيق للقبائل وانواع إقتصادها"
 
 #: ../../txts/README.lua:80
 msgid ""
@@ -333,15 +357,20 @@ msgid ""
 "economic infrastructure, explore the land around you and face rivaling\n"
 "tribes."
 msgstr ""
+"فى هذه اللعبه ستبدأ على قطعه ارض صغيره مع موارد\n"
+"بسيطه. باستخدامها، إستخدمها لتنشئ حضاره بملايين\n"
+"السكان! فى طريقك نحو هذا الهدف السامى يتوجب إنشاء\n"
+"بنيه إقتصاديه تحتيه، إكتشاف الاراضى من حولك، ومنافسه قبائل\n"
+"الاعداء"
 
 #: ../../txts/README.lua:18
 #: ../../txts/editor_readme:7
 msgid "Introduction"
-msgstr "المقدمة"
+msgstr "المُقدمه"
 
 #: ../../txts/developers:246
 msgid "Italian"
-msgstr "الإيطالية"
+msgstr "اﻹيطاليه"
 
 #: ../../txts/tips/barbarians.tip:6
 #: ../../txts/tips/empire.tip:6
@@ -349,22 +378,24 @@ msgid ""
 "Keep an eye on your fishers. After fish resources are exhausted in their "
 "working area, they will stop to fish."
 msgstr ""
+"راقب صياد الاسماك جيداً. فبعد إنتهاء الثروه السمكيه فى منطقه عمله سيتوقفون "
+"عن العمل"
 
 #: ../../txts/editor_readme:18
 msgid "Keyboard shortcuts"
-msgstr "اختصارات لوحة المفاتيح"
+msgstr "إختصارات لوحه المفاتيح"
 
 #: ../../txts/README.lua:59
 msgid "Keyboard shortcuts (in-game)"
-msgstr ""
+msgstr "إختصارات لوحه المفاتيح (الخاصه باللعبه نفسها)"
 
 #: ../../txts/license:1
 msgid "License"
-msgstr "الرخصة"
+msgstr "الرخصه"
 
 #: ../../txts/license:4
 msgid "Licensing information for Widelands"
-msgstr ""
+msgstr "معلومات ترخيص وايد لاندس"
 
 #: ../../txts/tips/editor.tip:10
 msgid ""
@@ -374,15 +405,15 @@ msgstr ""
 
 #: ../../txts/developers:285
 msgid "Linux Distributions"
-msgstr ""
+msgstr "توزيعات اللينكس"
 
 #: ../../txts/editor_readme:31
 msgid "M        Toggles minimap"
-msgstr ""
+msgstr "مفتاح ة للتبديل بين الخريطه الصغيره/الكبيره"
 
 #: ../../txts/README.lua:65
 msgid "M: toggles minimap"
-msgstr ""
+msgstr "مفتاح ة للتبديل بين الخريطه الصغيره/الكبيره"
 
 #: ../../txts/tips/general_game.tip:34
 msgid ""
@@ -397,11 +428,11 @@ msgstr "الخرائط و المهمات"
 
 #: ../../txts/tips/general_game.tip:14
 msgid "Miners will only work if supplied with food."
-msgstr ""
+msgstr "المُنَجِمون لن يعملوا الا إذا اعطيتهم طعاماً"
 
 #: ../../txts/developers:116
 msgid "Musicians"
-msgstr ""
+msgstr "الموسيقيون"
 
 #: ../../txts/README.lua:66
 msgid "N: toggles messages ('news')"
@@ -412,16 +443,20 @@ msgid ""
 "NOTE: this list holds people that translated Widelands before we moved to "
 "launchpad.net. "
 msgstr ""
+"مُلاحظه: إعلم ان هذه القائمه تحتوى على هؤلاء من ترجموا لعبه وايد لاندس قبل "
+"إنتقالها الى منصه اﻹطلاق \"لانش باد\". "
 
 #: ../../txts/tips/general_game.tip:54
 msgid ""
 "New soldiers are recruited in the headquarters or a warehouse if all needed "
 "tools are available. Training sites are for improving their abilities."
 msgstr ""
+"يمكنك تجنيد جنود من خلال مقرك الرئيسى او المستودع فقط إذا توافرت جميع "
+"الادوات المطلوبه لتجنيد جندى جديد. كما يوجد مراكز تدريب لتحسين قدراتهم"
 
 #: ../../txts/developers:307
 msgid "Non Unix Distributions"
-msgstr ""
+msgstr "ما ليس يونكس"
 
 #: ../../txts/README.lua:70
 msgid "O: toggles objectives"
@@ -439,30 +474,36 @@ msgid ""
 "On MacOS, you can find the file called COPYING in the archive you downloaded "
 "from the website."
 msgstr ""
+"فى نظام تشغيل الماك يمكنك إيجاد ملف رخصه اللعبه (مُسَمى بـ\"copying\") فى "
+"الارشيف الذى نزلته من موقع اللعبه"
 
 #: ../../txts/license:19
 msgid ""
 "On Windows, you can find the file called COPYING.txt in the installation "
 "folder and the Widelands Start menu entry provides a link to this file."
 msgstr ""
+"فى نظام تشغيل النوافذ يمكنك إيجاد ملف رخصه اللعبه (مُسَمى بـ\"COPYING.txt\") "
+"بداخل مجلد تثبيت اللعبه او من خلال إختصار اللعبه الموجود بقائمه إبدأ"
 
 #: ../../txts/README.lua:85
 msgid "Online Help"
-msgstr "المسـاعدة على الانترنت"
+msgstr "المساعده عبر الشبكه العنكبوتيه"
 
 #: ../../txts/developers:373
 msgid "Other"
-msgstr ""
+msgstr "آخر"
 
 #: ../../txts/developers:296
 msgid "Other Unix Distributions"
-msgstr ""
+msgstr "توزيعات اللينكس الاخرى"
 
 #: ../../txts/tips/singleplayer.tip:2
 msgid ""
 "Our computer players are too boring? Visit our website at www.widelands.org "
 "and meet other players to play online."
 msgstr ""
+"امللت من اللعب ضد الذكاء الصناعى؟ تفضل بزياره موقعنا على الشبكه العنكبوتيه "
+"www.widelands.org وتعرف على لاعبوا وايد لاندس من حول العالم وإلعب ضدهم!"
 
 #: ../../txts/editor_readme:33
 msgid "P        Toggles player menu"
@@ -470,11 +511,11 @@ msgstr ""
 
 #: ../../txts/README.lua:62
 msgid "PAGEDOWN: decreases gamespeed"
-msgstr ""
+msgstr "مفتاح pagedown لنقص سرعه اللعبه"
 
 #: ../../txts/README.lua:61
 msgid "PAGEUP: increases gamespeed"
-msgstr ""
+msgstr "مفتاح pageup لزياده سرعه اللعبه"
 
 #: ../../txts/README.lua:63
 msgid "PAUSE: pauses the game"
@@ -486,20 +527,22 @@ msgstr ""
 
 #: ../../txts/editor_readme:12
 msgid "Please look into our enduser manuals in our wiki-pages at:"
-msgstr ""
+msgstr "يمكنك تفقد دليل اﻹستخدام من خلال صفحه الويكى:"
 
 #: ../../txts/README.lua:97
 msgid "Please provide enough background information. Tell us:"
-msgstr ""
+msgstr "يُرجَى تزويدنا بما يكفى من المعلومات. اخبرنا عن:"
 
 #: ../../txts/developers:251
 msgid "Polish"
-msgstr "البولندية"
+msgstr "البولنديه"
 
 #: ../../txts/tips/general_game.tip:42
 msgid ""
 "Press Ctrl+(0-9) to store important locations, then press 0-9 to recall them."
 msgstr ""
+"إضغط مفتاح كنترول + الارقام من 1 الى 9 لتخزين المواقع الهامه، ثم إستخدام "
+"مفاتيح الارقام من 1 الى 9 ﻹستدعائهم مره اخرى."
 
 #: ../../txts/tips/general_game.tip:62
 msgid "Press I to quickly toggle the display of your stock inventory."
@@ -513,7 +556,7 @@ msgstr ""
 
 #: ../../txts/README.lua:7
 msgid "README"
-msgstr "اقرأني"
+msgstr "إقرأنى"
 
 #: ../../txts/editor_readme:4
 msgid "README for the Editor"
@@ -531,7 +574,7 @@ msgstr ""
 
 #: ../../txts/README.lua:118
 msgid "Replays"
-msgstr ""
+msgstr "مقاطع اﻹعادات"
 
 #: ../../txts/README.lua:133
 msgid ""

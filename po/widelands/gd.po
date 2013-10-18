@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2013-09-15 19:41+0200\n"
-"PO-Revision-Date: 2013-10-14 17:27+0000\n"
+"PO-Revision-Date: 2013-10-17 23:28+0000\n"
 "Last-Translator: GunChleoc <Unknown>\n"
 "Language-Team: Fòram na Gàidhlig http://www.foramnagaidhlig.net\n"
 "MIME-Version: 1.0\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n==1 || n==11) ? 0 : (n==2 || n==12) ? 1 : "
 "(n > 2 && n < 20) ? 2 : 3;\n"
-"X-Launchpad-Export-Date: 2013-10-15 04:32+0000\n"
+"X-Launchpad-Export-Date: 2013-10-18 05:13+0000\n"
 "X-Generator: Launchpad (build 16799)\n"
 "Language: gd\n"
 
@@ -1689,7 +1689,7 @@ msgstr "Chaidh %s a shaothrachadh"
 
 #: ../../src/logic/production_program.cc:1022
 msgid "Recruited "
-msgstr ""
+msgstr "Na chaidh a thrusadh: "
 
 #: ../../src/logic/production_program.cc:1069
 msgid "distance"
@@ -1904,7 +1904,7 @@ msgstr ""
 
 #: ../../src/logic/worker.cc:605
 msgid "Out of "
-msgstr ""
+msgstr "A dhìth: "
 
 #: ../../src/logic/worker.cc:608
 msgid ""
@@ -3531,7 +3531,7 @@ msgstr "Sguab às am faidhle"
 
 #: ../../src/ui_fsmenu/loadgame.cc:158 ../../src/ui_fsmenu/loadreplay.cc:139
 msgid "Do you really want to delete "
-msgstr ""
+msgstr "A bheil thu airson sguabadh às dha "
 
 #: ../../src/ui_fsmenu/loadgame.cc:215
 msgid "Savegame from dedicated server"
