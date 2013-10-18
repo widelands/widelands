@@ -238,16 +238,24 @@ void m_add_instantiator_to_lua(lua_State * const L) {
 
 template <class T>
 int m_persist(lua_State * const L) {
+	log("#sirver persisting T::className: %s\n", T::className);
 	T * * const obj = get_user_class<T>(L, 1);
+	log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 
+	log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 	lua_newtable(L);
 
+	log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 	lua_pushstring(L, (*obj)->get_modulename());
+	log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 	lua_setfield(L, -2, "module");
 
+	log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 	lua_pushstring(L, T::className);
+	log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 	lua_setfield(L, -2, "class");
 
+	log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 	(*obj)->__persist(L);
 
 	return 1;

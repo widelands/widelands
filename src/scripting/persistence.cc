@@ -163,7 +163,7 @@ static const char * m_persistent_globals[] = {
 	"dofile", "error", "gcinfo", "getfenv", "getmetatable", "io", "ipairs",
 	"load", "loadfile", "loadstring", "math", "module", "newproxy", "next",
 	"os", "package", "pairs", "pcall", "print", "rawequal",
-	"rawget", "rawset", "require", "select", "setfenv", "setmetatable",
+	"rawget", "rawset", "rawlen", "require", "select", "setfenv", "setmetatable",
 	"table", "tonumber", "tostring", "type", "unpack", "wl", "xpcall",
 	"string", "use", "_", "set_textdomain", "get_build_id", "coroutine.yield", 0
 };
@@ -188,10 +188,19 @@ uint32_t persist_object
 	for (i = 0; m_persistent_globals[i]; i++)
 		m_add_object_to_not_persist(L, m_persistent_globals[i], i + 1);
 
+	// NOCOM(#sirver): this is bad - this means adding something to the globals will also invalidate safegames.
 	++i;
 	m_add_iterator_function_to_not_persist(L, "pairs", i++);
 	m_add_iterator_function_to_not_persist(L, "ipairs", i++);
 
+	// NOCOM(#sirver): remove again maybe?
+	log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
+	lua_pushboolean(L, true);
+	log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
+	eris_set_setting(L, "path", lua_gettop(L));
+	log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
+	lua_pop(L, 1);
+	log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 
 	size_t cpos = fw.GetPos();
 	eris_dump(L, &LuaWriter, &fw);
@@ -209,6 +218,7 @@ uint32_t persist_object
 /**
  * Does all the unpersisting work. Returns the number of bytes
  * written
+ * // NOCOM(#sirver): Check docu.
  */
 uint32_t unpersist_object
 	(lua_State * L,
@@ -220,6 +230,7 @@ uint32_t unpersist_object
 	lua_setfield(L, LUA_REGISTRYINDEX, "mol");
 
 	// Push objects that should not be loaded
+	// // NOCOM(#sirver): otherway here too
 	lua_newtable(L);
 	uint32_t i = 0;
 	for (i = 0; m_persistent_globals[i]; i++)
