@@ -174,14 +174,14 @@ return {
 				msg = msg .. "\n"
 				if (has_had == "has") then
 					msg = msg ..
-						(_("%1s has %2i%% of the land (%3i of %4i).")):format(
+						(_("%s has %i%% of the land (%i of %i).")):format(
 							points[i][1],
 							_percent(points[i][2], #fields),
 							points[i][2],
 							#fields)
 				else
 					msg = msg ..
-						(_("%1s had %2i%% of the land (%3i of %4i).")):format(
+						(_("%s had %i%% of the land (%i of %i).")):format(
 							points[i][1],
 							_percent(points[i][2], #fields),
 							points[i][2],

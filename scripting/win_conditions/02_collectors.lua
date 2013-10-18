@@ -99,7 +99,8 @@ local function _calc_points(plr)
 		end
 		local lpoints = count * value
 		points = points + lpoints
-		descr[#descr+1] = ("  %s (%i P) x %i = %i P<br>"):format(
+		-- TRANSLATORS: For example: "gold (3 P) x 4 = 12 P", P meaning "Points"
+		descr[#descr+1] = (_"  %s (%i P) x %i = %i P<br>"):format(
 			ware, value, count, lpoints
 		)
 	end

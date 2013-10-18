@@ -87,7 +87,7 @@ return {
 			msg = msg .. "\n"
 			-- TODO needs ngettext
 			local trees = (_"%i trees"):format(playerpoints[plr.number])
-			msg = msg ..  (_"%1s has %2s at the moment."):format(playerpoints[plr.number])
+			msg = msg ..  (_"%s has %s at the moment."):format(plr.name,playerpoints[plr.number])
 		end
 
 		broadcast(plrs, game_status.title, msg)
