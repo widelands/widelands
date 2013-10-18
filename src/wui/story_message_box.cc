@@ -55,7 +55,7 @@ Story_Message_Box::Story_Message_Box
 	if (m_text)
 		m_text->set_text(body);
 
-	int32_t const but_width = 80;
+	int32_t const but_width = 120;
 	int32_t space = get_inner_w() - 2 * spacing;
 	space -= but_width;
 	space /= 2; // center button

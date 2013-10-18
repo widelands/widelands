@@ -36,7 +36,7 @@
 #include "wui/mapviewpixelconstants.h"
 #include "wui/plot_area.h"
 
-#define WINDOW_WIDTH         440
+#define WINDOW_WIDTH         625
 #define WINDOW_HEIGHT        440
 #define VMARGIN                5
 #define HMARGIN                5
@@ -44,8 +44,8 @@
 #define HSPACING               5
 #define BUILDING_LIST_HEIGHT 285
 #define BUILDING_LIST_WIDTH  (WINDOW_WIDTH - HMARGIN - HMARGIN)
-#define LABEL_X              178
-#define LABEL_WIDTH          122
+#define LABEL_X              200
+#define LABEL_WIDTH          150
 #define VALUE_X              (LABEL_X + LABEL_WIDTH)
 #define JUMP_PREV_BUTTON_X   (WINDOW_WIDTH - HMARGIN - 24 - HSPACING - 24)
 #define JUMP_NEXT_BUTTON_X   (WINDOW_WIDTH - HMARGIN - 24)
@@ -107,11 +107,11 @@ Building_Statistics_Menu::Building_Statistics_Menu
 	m_last_table_index   (0)
 {
 	//  building list
-	m_table.add_column(206, _("Name"));
-	m_table.add_column (50, _("Size"),     UI::Align_HCenter);
-	m_table.add_column (50, _("Prod"),     UI::Align_Right);
-	m_table.add_column (50, _("Owned"),    UI::Align_Right);
-	m_table.add_column (50, _("Build"),    UI::Align_HCenter);
+	m_table.add_column(310, _("Name"));
+	m_table.add_column (70, _("Size"),     UI::Align_HCenter);
+	m_table.add_column (70, _("Prod"),     UI::Align_Right);
+	m_table.add_column (70, _("Owned"),    UI::Align_Right);
+	m_table.add_column (70, _("Build"),    UI::Align_Right);
 	m_table.selected.connect(boost::bind(&Building_Statistics_Menu::table_changed, this, _1));
 	m_table.set_column_compare
 		(Columns::Size,
