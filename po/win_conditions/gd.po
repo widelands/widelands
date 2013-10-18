@@ -25,13 +25,20 @@ msgstr ""
 msgid "%s %s %i%% of the land (%i of %i)."
 msgstr ""
 
+
+msgid "  %1s (%2i P) x %3i = %4i P<br>"
+msgstr "  reversed string? %4i = %3i x (%2i P) %1sP<br>"
+
+
+
+
 #: ../../scripting/win_condition_texts.lua:30
-msgid "%s had "
-msgstr ""
+msgid "%1s had %2s."
+msgstr "Bha %2s aig %1s"
 
 #: ../../scripting/win_condition_texts.lua:28
-msgid "%s has %i trees at the moment."
-msgstr ""
+msgid "%1s has %2s at the moment."
+msgstr "Tha %2s aig %1s an-dràsta."
 
 #: ../../scripting/win_condition_texts.lua:46
 msgid "%s owns more than half of the maps area."

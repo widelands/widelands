@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2013-10-17 09:39+0000\n"
+"POT-Creation-Date: 2013-10-18 14:52+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -14,24 +14,14 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: ../../scripting/win_conditions/03_territorial_time.lua:182
+#: ../../scripting/win_conditions/02_collectors.lua:103
 msgid ""
-"%1s had %2i%% of the land (%3i of %4i)."
+"  %s (%i P) x %i = %i P<br>"
 msgstr ""
 
 #: ../../scripting/win_conditions/04_wood_gnome.lua:142
 msgid ""
 "%1s had %2s."
-msgstr ""
-
-#: ../../scripting/win_conditions/03_territorial_time.lua:175
-msgid ""
-"%1s has %2i%% of the land (%3i of %4i)."
-msgstr ""
-
-#: ../../scripting/win_conditions/04_wood_gnome.lua:90
-msgid ""
-"%1s has %2s at the moment."
 msgstr ""
 
 #: ../../scripting/win_conditions/04_wood_gnome.lua:89
@@ -41,9 +31,34 @@ msgid ""
 "%i trees"
 msgstr ""
 
-#: ../../scripting/win_conditions/03_territorial_lord.lua:154
+#: ../../scripting/win_conditions/02_collectors.lua:120
+msgid ""
+"%ih%02im"
+msgstr ""
+
+#: ../../scripting/win_conditions/03_territorial_time.lua:184
+msgid ""
+"%s had %i%% of the land (%i of %i)."
+msgstr ""
+
+#: ../../scripting/win_conditions/03_territorial_time.lua:177
+msgid ""
+"%s has %i%% of the land (%i of %i)."
+msgstr ""
+
+#: ../../scripting/win_conditions/04_wood_gnome.lua:90
+msgid ""
+"%s has %s at the moment."
+msgstr ""
+
+#: ../../scripting/win_conditions/03_territorial_lord.lua:155
 msgid ""
 "%s owns more than half of the map's area."
+msgstr ""
+
+#: ../../scripting/win_conditions/03_territorial_time.lua:196
+msgid ""
+"%s owns more than half of the maps area."
 msgstr ""
 
 #: ../../scripting/win_conditions/04_wood_gnome.lua:16
@@ -88,12 +103,13 @@ msgid ""
 "Endless Game (no fog)"
 msgstr ""
 
-#: ../../scripting/win_conditions/03_territorial_lord.lua:162
+#: ../../scripting/win_conditions/03_territorial_lord.lua:163
+#: ../../scripting/win_conditions/03_territorial_time.lua:204
 msgid ""
 "Keep it for %i more minutes to win the game."
 msgstr ""
 
-#: ../../scripting/win_conditions/03_territorial_time.lua:213
+#: ../../scripting/win_conditions/03_territorial_time.lua:217
 msgid ""
 "Otherwise the game will end in %i minutes."
 msgstr ""
@@ -103,7 +119,7 @@ msgid ""
 "Player overview:"
 msgstr ""
 
-#: ../../scripting/win_conditions/02_collectors.lua:154
+#: ../../scripting/win_conditions/02_collectors.lua:155
 msgid ""
 "Points"
 msgstr ""
@@ -118,7 +134,8 @@ msgid ""
 "Status for %s"
 msgstr ""
 
-#: ../../scripting/win_conditions/03_territorial_lord.lua:152
+#: ../../scripting/win_conditions/03_territorial_lord.lua:153
+#: ../../scripting/win_conditions/03_territorial_time.lua:21
 msgid ""
 "Team %i"
 msgstr ""
@@ -133,13 +150,13 @@ msgid ""
 "Territorial Time"
 msgstr ""
 
-#: ../../scripting/win_conditions/03_territorial_time.lua:216
+#: ../../scripting/win_conditions/03_territorial_time.lua:220
 #: ../../scripting/win_conditions/04_wood_gnome.lua:83
 msgid ""
 "The game will end in %i minutes."
 msgstr ""
 
-#: ../../scripting/win_conditions/02_collectors.lua:123
+#: ../../scripting/win_conditions/02_collectors.lua:124
 msgid ""
 "The game will end in %s."
 msgstr ""
@@ -209,12 +226,18 @@ msgid ""
 "You lost your last warehouse and are therefore defeated. You may continue as spectator if you want."
 msgstr ""
 
-#: ../../scripting/win_conditions/03_territorial_lord.lua:159
+#: ../../scripting/win_conditions/03_territorial_lord.lua:160
 msgid ""
 "You own more than half of the map's area."
 msgstr ""
 
-#: ../../scripting/win_conditions/03_territorial_lord.lua:157
+#: ../../scripting/win_conditions/03_territorial_time.lua:201
+msgid ""
+"You own more than half of the maps area."
+msgstr ""
+
+#: ../../scripting/win_conditions/03_territorial_lord.lua:158
+#: ../../scripting/win_conditions/03_territorial_time.lua:199
 msgid ""
 "You still got %i minutes to prevent a victory."
 msgstr ""

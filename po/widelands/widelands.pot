@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2013-10-17 10:39+0100\n"
+"POT-Creation-Date: 2013-10-18 15:52+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -355,7 +355,7 @@ msgstr ""
 
 #: ../../src/sound/sound_handler.cc:147
 #, c-format
-msgid "Sound_Handler closing times %i, freq %i, format %i, chan %i\n"
+msgid "Sound_Handler closing times %1$i, freq %2$i, format %3$i, chan %4$i\n"
 msgstr ""
 
 #: ../../src/sound/sound_handler.cc:165
@@ -373,26 +373,29 @@ msgstr ""
 #: ../../src/logic/production_program.cc:289
 #: ../../src/logic/production_program.cc:307
 #: ../../src/logic/production_program.cc:324
-#: ../../src/logic/production_program.cc:403
-#: ../../src/logic/production_program.cc:407
-#: ../../src/logic/production_program.cc:542
-#: ../../src/logic/production_program.cc:556
-#: ../../src/logic/production_program.cc:674
-#: ../../src/logic/production_program.cc:748
-#: ../../src/logic/production_program.cc:910
-#: ../../src/logic/production_program.cc:1008
-#: ../../src/logic/production_program.cc:1089
-#: ../../src/logic/production_program.cc:1099
-#: ../../src/logic/production_program.cc:1110
-#: ../../src/logic/production_program.cc:1265
-#: ../../src/logic/production_program.cc:1287
-#: ../../src/logic/production_program.cc:1346
-#: ../../src/logic/production_program.cc:1358
-#: ../../src/logic/production_program.cc:1367
-#: ../../src/logic/production_program.cc:1457 ../../src/logic/soldier.cc:70
+#: ../../src/logic/production_program.cc:349
+#: ../../src/logic/production_program.cc:368
+#: ../../src/logic/production_program.cc:401
+#: ../../src/logic/production_program.cc:405
+#: ../../src/logic/production_program.cc:540
+#: ../../src/logic/production_program.cc:554
+#: ../../src/logic/production_program.cc:672
+#: ../../src/logic/production_program.cc:746
+#: ../../src/logic/production_program.cc:908
+#: ../../src/logic/production_program.cc:1006
+#: ../../src/logic/production_program.cc:1087
+#: ../../src/logic/production_program.cc:1097
+#: ../../src/logic/production_program.cc:1108
+#: ../../src/logic/production_program.cc:1263
+#: ../../src/logic/production_program.cc:1275
+#: ../../src/logic/production_program.cc:1283
+#: ../../src/logic/production_program.cc:1342
+#: ../../src/logic/production_program.cc:1354
+#: ../../src/logic/production_program.cc:1363
+#: ../../src/logic/production_program.cc:1454 ../../src/logic/soldier.cc:70
 #: ../../src/logic/soldier.cc:77 ../../src/logic/soldier.cc:185
 #, c-format
-msgid "expected %s but found \"%s\""
+msgid "expected %1$s but found \"%2$s\""
 msgstr ""
 
 #: ../../src/graphic/animation.cc:138
@@ -401,7 +404,7 @@ msgstr ""
 
 #: ../../src/game_io/game_player_info_data_packet.cc:54
 #, c-format
-msgid "player number (%i) is out of range (1 .. %u)"
+msgid "player number (%1$i) is out of range (1 .. %2$u)"
 msgstr ""
 
 #: ../../src/game_io/game_player_info_data_packet.cc:143
@@ -509,7 +512,7 @@ msgstr ""
 #: ../../src/game_io/game_player_economies_data_packet.cc:83
 #: ../../src/map_io/widelands_map_player_position_data_packet.cc:54
 #, c-format
-msgid "player %u: %s"
+msgid "player %1$u: %2$s"
 msgstr ""
 
 #: ../../src/game_io/game_player_economies_data_packet.cc:89
@@ -553,28 +556,28 @@ msgstr ""
 
 #: ../../src/map_io/widelands_map_flagdata_data_packet.cc:84
 #, c-format
-msgid "wrong flag (%u) at given position (%i, %i)"
+msgid "wrong flag (%1$u) at given position (%2$i, %3$i)"
 msgstr ""
 
 #: ../../src/map_io/widelands_map_flagdata_data_packet.cc:89
 #, c-format
-msgid "no flag at given position (%i, %i)"
+msgid "no flag at given position (%1$i, %2$i)"
 msgstr ""
 
 #: ../../src/map_io/widelands_map_flagdata_data_packet.cc:109
 #, c-format
-msgid "has building %u at (%i, %i), which is not at the top left node"
+msgid "has building %1$u at (%2$i, %3$i), which is not at the top left node"
 msgstr ""
 
 #: ../../src/map_io/widelands_map_flagdata_data_packet.cc:116
 #, c-format
-msgid "building (%u): %s"
+msgid "building (%1$u): %2$s"
 msgstr ""
 
 #: ../../src/map_io/widelands_map_flagdata_data_packet.cc:215
 #: ../../src/map_io/widelands_map_ware_data_packet.cc:68
 #, c-format
-msgid "%u: %s"
+msgid "%1$u: %2$s"
 msgstr ""
 
 #: ../../src/map_io/widelands_map_flagdata_data_packet.cc:222
@@ -586,7 +589,7 @@ msgstr ""
 #: ../../src/logic/playercommand.cc:501 ../../src/logic/playercommand.cc:575
 #: ../../src/logic/playercommand.cc:619 ../../src/logic/playercommand.cc:677
 #, c-format
-msgid "building %u: %s"
+msgid "building %1$u: %2$s"
 msgstr ""
 
 #: ../../src/map_io/widelands_map_buildingdata_data_packet.cc:249
@@ -618,8 +621,8 @@ msgstr ""
 #: ../../src/map_io/widelands_map_buildingdata_data_packet.cc:651
 #, c-format
 msgid ""
-"%s %u has a next_spawn time for worker type \"%s\" set to %u, but it was "
-"previously set to %u\n"
+"%1$s %2$u has a next_spawn time for worker type \"%3$s\" set to %4$u, but it "
+"was previously set to %5$u\n"
 msgstr ""
 
 #: ../../src/map_io/widelands_map_buildingdata_data_packet.cc:736
@@ -634,7 +637,7 @@ msgstr ""
 
 #: ../../src/map_io/widelands_map_buildingdata_data_packet.cc:1017
 #, c-format
-msgid "program %s was skipped at time %u, but time is only %u"
+msgid "program %1$s was skipped at time %2$u, but time is only %3$u"
 msgstr ""
 
 #: ../../src/map_io/widelands_map_buildingdata_data_packet.cc:1235
@@ -644,7 +647,7 @@ msgstr ""
 
 #: ../../src/map_io/widelands_map_objective_data_packet.cc:65
 #, c-format
-msgid "%s: %s"
+msgid "%1$s: %2$s"
 msgstr ""
 
 #: ../../src/map_io/widelands_map_objective_data_packet.cc:72
@@ -659,12 +662,13 @@ msgstr ""
 
 #: ../../src/map_io/widelands_map_players_messages_data_packet.cc:89
 #, c-format
-msgid "messages are not ordered: sent at %u but previous message sent at %u"
+msgid ""
+"messages are not ordered: sent at %1$u but previous message sent at %2$u"
 msgstr ""
 
 #: ../../src/map_io/widelands_map_players_messages_data_packet.cc:95
 #, c-format
-msgid "message is sent in the future: sent at %u but gametime is only %u"
+msgid "message is sent in the future: sent at %1$u but gametime is only %2$u"
 msgstr ""
 
 #: ../../src/map_io/widelands_map_players_messages_data_packet.cc:104
@@ -678,24 +682,25 @@ msgstr ""
 #: ../../src/map_io/widelands_map_players_messages_data_packet.cc:112
 #, c-format
 msgid ""
-"duration %u is too large; causes numeric overflow when added to sent time %u"
+"duration %1$u is too large; causes numeric overflow when added to sent time "
+"%2$u"
 msgstr ""
 
 #: ../../src/map_io/widelands_map_players_messages_data_packet.cc:118
 #, c-format
 msgid ""
-"message should have expired at %u; sent at %u with duration %u but gametime "
-"is already %u"
+"message should have expired at %1$u; sent at %2$u with duration %3$u but "
+"gametime is already %4$u"
 msgstr ""
 
 #: ../../src/map_io/widelands_map_players_messages_data_packet.cc:161
 #, c-format
-msgid "\"%s\": %s"
+msgid "\"%1$s\": %2$s"
 msgstr ""
 
 #: ../../src/map_io/widelands_map_players_messages_data_packet.cc:166
 #, c-format
-msgid "messages for player %u: %s"
+msgid "messages for player %1$u: %2$s"
 msgstr ""
 
 #: ../../src/map_io/widelands_map_bobdata_data_packet.cc:227
@@ -715,7 +720,7 @@ msgstr ""
 
 #: ../../src/map_io/widelands_map_bobdata_data_packet.cc:367
 #, c-format
-msgid "bob %u: %s"
+msgid "bob %1$u: %2$s"
 msgstr ""
 
 #: ../../src/map_io/widelands_map_bobdata_data_packet.cc:374
@@ -766,7 +771,7 @@ msgstr ""
 #: ../../src/map_io/widelands_map_waredata_data_packet.cc:130
 #: ../../src/map_io/widelands_map_waredata_data_packet.cc:200
 #, c-format
-msgid "item %u: %s"
+msgid "item %1$u: %2$s"
 msgstr ""
 
 #: ../../src/map_io/widelands_map_waredata_data_packet.cc:207
@@ -792,7 +797,7 @@ msgstr ""
 
 #: ../../src/map_io/widelands_map_flag_data_packet.cc:92
 #, c-format
-msgid "neighbour node (%i, %i): %s"
+msgid "neighbour node (%1$i, %2$i): %3$s"
 msgstr ""
 
 #: ../../src/map_io/widelands_map_flag_data_packet.cc:120
@@ -878,7 +883,7 @@ msgstr ""
 
 #: ../../src/map_io/widelands_map_roaddata_data_packet.cc:201
 #, c-format
-msgid "road %u: %s"
+msgid "road %1$u: %2$s"
 msgstr ""
 
 #: ../../src/map_io/widelands_map_roaddata_data_packet.cc:208
@@ -1221,7 +1226,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/launchMPG.cc:649
 #, c-format
-msgid "* Size: %ux%u\n"
+msgid "* Size: %1$ux%2$u\n"
 msgstr ""
 
 #: ../../src/ui_fsmenu/launchMPG.cc:650
@@ -1526,7 +1531,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/options.cc:265
 #, c-format
-msgid "%ix%i %i bit"
+msgid "%1$ix%2$i %3$i bit"
 msgstr ""
 
 #: ../../src/ui_fsmenu/options.cc:287
@@ -1607,7 +1612,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/main.cc:65 ../../src/wui/interactive_player.cc:110
 #: ../../src/wui/interactive_spectator.cc:57
-#: ../../src/wui/game_options_menu.cc:47
+#: ../../src/wui/game_options_menu.cc:46
 msgid "Options"
 msgstr ""
 
@@ -1616,11 +1621,11 @@ msgstr ""
 msgid "View Readme"
 msgstr ""
 
-#: ../../src/ui_fsmenu/main.cc:75 ../../src/wui/game_options_menu.cc:63
+#: ../../src/ui_fsmenu/main.cc:75 ../../src/wui/game_options_menu.cc:62
 msgid "License"
 msgstr ""
 
-#: ../../src/ui_fsmenu/main.cc:80 ../../src/wui/game_options_menu.cc:94
+#: ../../src/ui_fsmenu/main.cc:80 ../../src/wui/game_options_menu.cc:93
 msgid "Exit Game"
 msgstr ""
 
@@ -1880,7 +1885,7 @@ msgstr ""
 
 #: ../../src/logic/cmd_queue.cc:181
 #, c-format
-msgid "duetime (%i) < gametime (%i)"
+msgid "duetime (%1$i) < gametime (%2$i)"
 msgstr ""
 
 #: ../../src/logic/cmd_queue.cc:186
@@ -1931,7 +1936,7 @@ msgstr ""
 
 #: ../../src/logic/tribe.cc:334
 #, c-format
-msgid "tribe %s: %s"
+msgid "tribe %1$s: %2$s"
 msgstr ""
 
 #: ../../src/logic/building.cc:539
@@ -1977,7 +1982,7 @@ msgstr ""
 
 #: ../../src/logic/instances.cc:122
 #, c-format
-msgid "object %u: %s"
+msgid "object %1$u: %2$s"
 msgstr ""
 
 #: ../../src/logic/instances.cc:131
@@ -1995,12 +2000,12 @@ msgstr ""
 
 #: ../../src/logic/military_data.cc:63
 #, c-format
-msgid "expected positive integer >= %u <= 100 but found \"%s\""
+msgid "expected positive integer >= %1$u <= 100 but found \"%2$s\""
 msgstr ""
 
 #: ../../src/logic/military_data.cc:75
 #, c-format
-msgid "expected positive integer >= %u <= %u but found \"%u\""
+msgid "expected positive integer >= %1$u <= %2$u but found \"%3$u\""
 msgstr ""
 
 #: ../../src/logic/game.cc:139
@@ -2076,11 +2081,11 @@ msgstr ""
 #: ../../src/logic/requirements.cc:233
 #, c-format
 msgid ""
-"expected atrHP (%u), atrAttack (%u), atrDefense (%u), atrEvade (%u) or "
-"atrTotal (%u) but found unknown attribute value (%u)"
+"expected atrHP (%1$u), atrAttack (%2$u), atrDefense (%3$u), atrEvade (%4$u) "
+"or atrTotal (%5$u) but found unknown attribute value (%6$u)"
 msgstr ""
 
-#: ../../src/logic/immovable.cc:141 ../../src/logic/production_program.cc:1666
+#: ../../src/logic/immovable.cc:141 ../../src/logic/production_program.cc:1663
 #, c-format
 msgid "unknown command type \"%s\""
 msgstr ""
@@ -2100,7 +2105,7 @@ msgstr ""
 
 #: ../../src/logic/immovable.cc:224
 #, c-format
-msgid "program %s: %s"
+msgid "program %1$s: %2$s"
 msgstr ""
 
 #: ../../src/logic/immovable.cc:256 ../../src/logic/immovable.cc:271
@@ -2114,17 +2119,17 @@ msgstr ""
 
 #: ../../src/logic/immovable.cc:276
 #, c-format
-msgid "[terrain affinity] \"%s\" (not in current world): %s"
+msgid "[terrain affinity] \"%1$s\" (not in current world): %2$s"
 msgstr ""
 
 #: ../../src/logic/immovable.cc:312
 #, c-format
-msgid "immovable %s has no program \"%s\""
+msgid "immovable %1$s has no program \"%2$s\""
 msgstr ""
 
 #: ../../src/logic/immovable.cc:776
 #, c-format
-msgid "tribe %s does not define immovable type \"%s\""
+msgid "tribe %1$s does not define immovable type \"%2$s\""
 msgstr ""
 
 #: ../../src/logic/immovable.cc:779
@@ -2142,12 +2147,12 @@ msgstr ""
 msgid "immovable type %s"
 msgstr ""
 
-#: ../../src/logic/immovable.cc:829 ../../src/logic/production_program.cc:675
-#: ../../src/logic/production_program.cc:749
+#: ../../src/logic/immovable.cc:829 ../../src/logic/production_program.cc:673
+#: ../../src/logic/production_program.cc:747
 msgid "duration in ms"
 msgstr ""
 
-#: ../../src/logic/immovable.cc:868 ../../src/logic/production_program.cc:1457
+#: ../../src/logic/immovable.cc:868 ../../src/logic/production_program.cc:1454
 msgid "priority"
 msgstr ""
 
@@ -2198,8 +2203,8 @@ msgstr[1] ""
 
 #: ../../src/logic/militarysite.cc:125
 #, c-format
-msgid "%u(+%u) soldier"
-msgid_plural "%u(+%u) soldiers"
+msgid "%1$u(+%2$u) soldier"
+msgid_plural "%1$u(+%2$u) soldiers"
 msgstr[0] ""
 msgstr[1] ""
 
@@ -2276,7 +2281,7 @@ msgstr ""
 
 #: ../../src/logic/playercommand.cc:195
 #, c-format
-msgid "player immovable %u: %s"
+msgid "player immovable %1$u: %2$s"
 msgstr ""
 
 #: ../../src/logic/playercommand.cc:201
@@ -2301,7 +2306,7 @@ msgstr ""
 
 #: ../../src/logic/playercommand.cc:444
 #, c-format
-msgid "flag %u: %s"
+msgid "flag %1$u: %2$s"
 msgstr ""
 
 #: ../../src/logic/playercommand.cc:450
@@ -2323,7 +2328,7 @@ msgstr ""
 #: ../../src/logic/playercommand.cc:1169 ../../src/logic/playercommand.cc:1674
 #: ../../src/logic/playercommand.cc:1752
 #, c-format
-msgid "site %u: %s"
+msgid "site %1$u: %2$s"
 msgstr ""
 
 #: ../../src/logic/playercommand.cc:1179
@@ -2353,7 +2358,7 @@ msgstr ""
 
 #: ../../src/logic/playercommand.cc:1681
 #, c-format
-msgid "soldier %u: %s"
+msgid "soldier %1$u: %2$s"
 msgstr ""
 
 #: ../../src/logic/playercommand.cc:1687
@@ -2368,7 +2373,7 @@ msgstr ""
 
 #: ../../src/logic/playercommand.cc:1924
 #, c-format
-msgid "retreat: value out of range. Received %u expected %u-%u"
+msgid "retreat: value out of range. Received %1$u expected %2$u-%3$u"
 msgstr ""
 
 #: ../../src/logic/playercommand.cc:1935
@@ -2394,28 +2399,28 @@ msgstr ""
 #: ../../src/logic/production_program.cc:87
 #, c-format
 msgid ""
-"%s is not declared as an input (\"%s=<count>\" was not found in the [inputs] "
-"section)"
+"%1$s is not declared as an input (\"%2$s=<count>\" was not found in the "
+"[inputs] section)"
 msgstr ""
 
 #: ../../src/logic/production_program.cc:100
 #, c-format
 msgid ""
-"wrong order of ware types within group: ware type %s appears after ware type "
-"%s (fix order!)"
+"wrong order of ware types within group: ware type %1$s appears after ware "
+"type %2$s (fix order!)"
 msgstr ""
 
 #: ../../src/logic/production_program.cc:114
-#: ../../src/logic/production_program.cc:911
-#: ../../src/logic/production_program.cc:1009
+#: ../../src/logic/production_program.cc:909
+#: ../../src/logic/production_program.cc:1007
 msgid "count"
 msgstr ""
 
 #: ../../src/logic/production_program.cc:119
 #, c-format
 msgid ""
-"group count is %u but (total) input storage capacity of the specified ware "
-"type(s) is only %u, so the group can never be fulfilled by the site"
+"group count is %1$u but (total) input storage capacity of the specified ware "
+"type(s) is only %2$u, so the group can never be fulfilled by the site"
 msgstr ""
 
 #: ../../src/logic/production_program.cc:155
@@ -2430,22 +2435,22 @@ msgid "economy needs %s"
 msgstr ""
 
 #: ../../src/logic/production_program.cc:232
-#: ../../src/logic/production_program.cc:837
-#: ../../src/logic/production_program.cc:859
+#: ../../src/logic/production_program.cc:835
+#: ../../src/logic/production_program.cc:857
 #, c-format
 msgid "%1$s %2$s"
 msgstr ""
 
 #: ../../src/logic/production_program.cc:234
-#: ../../src/logic/production_program.cc:842
+#: ../../src/logic/production_program.cc:840
 #, c-format
 msgid "%s,"
 msgstr ""
 
 #: ../../src/logic/production_program.cc:238
-#: ../../src/logic/production_program.cc:849
+#: ../../src/logic/production_program.cc:847
 #, c-format
-msgid "%s (%i)"
+msgid "%1$s (%2$i)"
 msgstr ""
 
 #: ../../src/logic/production_program.cc:242
@@ -2466,218 +2471,198 @@ msgstr ""
 msgid "invalid condition: %s"
 msgstr ""
 
-#: ../../src/logic/production_program.cc:369
+#: ../../src/logic/production_program.cc:380
+#: ../../src/logic/production_program.cc:395
 #, c-format
-msgid "expected {\"failed\"|\"completed\"|\"skipped\"} but found \"%s\""
+msgid "expected \"%s\" or end of input"
 msgstr ""
 
-#: ../../src/logic/production_program.cc:382
-msgid "expected \"and\" or end of input"
-msgstr ""
-
-#: ../../src/logic/production_program.cc:391
+#: ../../src/logic/production_program.cc:389
 msgid "expected condition at end of input"
 msgstr ""
 
-#: ../../src/logic/production_program.cc:397
-msgid "expected \"or\" or end of input"
-msgstr ""
-
-#: ../../src/logic/production_program.cc:427
+#: ../../src/logic/production_program.cc:425
 #, c-format
 msgid "Failed %s"
 msgstr ""
 
-#: ../../src/logic/production_program.cc:429
+#: ../../src/logic/production_program.cc:427
 #, c-format
 msgid "Completed %s"
 msgstr ""
 
-#: ../../src/logic/production_program.cc:431
+#: ../../src/logic/production_program.cc:429
 #, c-format
 msgid "Skipped %s"
 msgstr ""
 
-#: ../../src/logic/production_program.cc:447
+#: ../../src/logic/production_program.cc:445
 #, c-format
 msgid "%s and "
 msgstr ""
 
-#: ../../src/logic/production_program.cc:450
+#: ../../src/logic/production_program.cc:448
 #, c-format
 msgid "%1$s because: %2$s"
 msgstr ""
 
-#: ../../src/logic/production_program.cc:463
+#: ../../src/logic/production_program.cc:461
 #, c-format
 msgid "%s or "
 msgstr ""
 
-#: ../../src/logic/production_program.cc:466
+#: ../../src/logic/production_program.cc:464
 #, c-format
 msgid "%1$s because not: %2$s"
 msgstr ""
 
-#: ../../src/logic/production_program.cc:506
+#: ../../src/logic/production_program.cc:504
 #, c-format
 msgid ""
-"the program \"%s\" has not (yet) been declared in %s (wrong declaration "
+"the program \"%1$s\" has not (yet) been declared in %2$s (wrong declaration "
 "order?)"
 msgstr ""
 
-#: ../../src/logic/production_program.cc:528
-#: ../../src/logic/production_program.cc:533
-#: ../../src/logic/production_program.cc:538
+#: ../../src/logic/production_program.cc:526
+#: ../../src/logic/production_program.cc:531
+#: ../../src/logic/production_program.cc:536
 #, c-format
 msgid "%s handling method already defined"
 msgstr ""
 
-#: ../../src/logic/production_program.cc:528
+#: ../../src/logic/production_program.cc:526
 msgid "failure"
 msgstr ""
 
-#: ../../src/logic/production_program.cc:533
+#: ../../src/logic/production_program.cc:531
 msgid "completion"
 msgstr ""
 
-#: ../../src/logic/production_program.cc:538
+#: ../../src/logic/production_program.cc:536
 msgid "skip"
 msgstr ""
 
-#: ../../src/logic/production_program.cc:543
-msgid "{\"failure\"|\"completion\"|\"skip\"}"
-msgstr ""
-
-#: ../../src/logic/production_program.cc:557
-msgid "{\"fail\"|\"complete\"|\"skip\"|\"repeat\"}"
-msgstr ""
-
-#: ../../src/logic/production_program.cc:679
-#: ../../src/logic/production_program.cc:701
+#: ../../src/logic/production_program.cc:677
+#: ../../src/logic/production_program.cc:699
 #, c-format
 msgid "sleep: %s"
 msgstr ""
 
-#: ../../src/logic/production_program.cc:697
+#: ../../src/logic/production_program.cc:695
 #, c-format
 msgid "Unknown parameter \"%s\""
 msgstr ""
 
-#: ../../src/logic/production_program.cc:699
+#: ../../src/logic/production_program.cc:697
 msgid "No parameter given!"
 msgstr ""
 
-#: ../../src/logic/production_program.cc:732
+#: ../../src/logic/production_program.cc:730
 msgid "idle animation is default; calling is not allowed"
 msgstr ""
 
-#: ../../src/logic/production_program.cc:781
+#: ../../src/logic/production_program.cc:779
 msgid "expected ware_type1[,ware_type2[,...]][:N] ..."
 msgstr ""
 
-#: ../../src/logic/production_program.cc:829
+#: ../../src/logic/production_program.cc:827
 #, c-format
 msgid "Failed %s because:"
 msgstr ""
 
-#: ../../src/logic/production_program.cc:855
+#: ../../src/logic/production_program.cc:853
 #, c-format
 msgid "%s and"
 msgstr ""
 
-#: ../../src/logic/production_program.cc:860
+#: ../../src/logic/production_program.cc:858
 msgid " is missing"
 msgid_plural " are missing"
 msgstr[0] ""
 msgstr[1] ""
 
-#: ../../src/logic/production_program.cc:926
-#: ../../src/logic/production_program.cc:1024
+#: ../../src/logic/production_program.cc:924
+#: ../../src/logic/production_program.cc:1022
 #, c-format
 msgid ""
-"%s is not declared as an output (\"output=%s\" was not found in the [global] "
-"section)"
+"%1$s is not declared as an output (\"output=%2$s\" was not found in the "
+"[global] section)"
 msgstr ""
 
-#: ../../src/logic/production_program.cc:953
-#: ../../src/logic/production_program.cc:1049
+#: ../../src/logic/production_program.cc:951
+#: ../../src/logic/production_program.cc:1047
 #, c-format
 msgid "%u "
 msgstr ""
 
-#: ../../src/logic/production_program.cc:960
-#: ../../src/logic/production_program.cc:1056
+#: ../../src/logic/production_program.cc:958
+#: ../../src/logic/production_program.cc:1054
 msgid ", "
 msgstr ""
 
-#: ../../src/logic/production_program.cc:963
+#: ../../src/logic/production_program.cc:961
 #, c-format
 msgid "Produced %s"
 msgstr ""
 
-#: ../../src/logic/production_program.cc:1058
+#: ../../src/logic/production_program.cc:1056
 #, c-format
 msgid "Recruited %s?"
 msgstr ""
 
-#: ../../src/logic/production_program.cc:1089
+#: ../../src/logic/production_program.cc:1087
 msgid "distance"
 msgstr ""
 
-#: ../../src/logic/production_program.cc:1100
-#: ../../src/logic/production_program.cc:1111
+#: ../../src/logic/production_program.cc:1098
+#: ../../src/logic/production_program.cc:1109
 msgid "percentage"
 msgstr ""
 
-#: ../../src/logic/production_program.cc:1115
+#: ../../src/logic/production_program.cc:1113
 #, c-format
 msgid "%1$s %2$s mine %3$s"
 msgstr ""
 
-#: ../../src/logic/production_program.cc:1227
+#: ../../src/logic/production_program.cc:1225
 #, c-format
 msgid "No left resources found!"
 msgstr ""
 
-#: ../../src/logic/production_program.cc:1248
+#: ../../src/logic/production_program.cc:1246
 msgid "Main vein exhausted"
 msgstr ""
 
-#: ../../src/logic/production_program.cc:1250
+#: ../../src/logic/production_program.cc:1248
 msgid ""
 "This mines' main vein exhausted. Expect strongly diminished returns on "
 "investment. You should consider to expand, dismantle or destruct it."
 msgstr ""
 
-#: ../../src/logic/production_program.cc:1265
-#: ../../src/logic/production_program.cc:1346
+#: ../../src/logic/production_program.cc:1263
+#: ../../src/logic/production_program.cc:1342
 msgid "soldier type"
 msgstr ""
 
-#: ../../src/logic/production_program.cc:1278
-#, c-format
-msgid "expected {\"hp\"|\"attack\"|\"defense\"|\"evade\"} but found \"%s\""
-msgstr ""
-
-#: ../../src/logic/production_program.cc:1287
-#: ../../src/logic/production_program.cc:1367
+#: ../../src/logic/production_program.cc:1283
+#: ../../src/logic/production_program.cc:1363
 msgid "level"
 msgstr ""
 
-#: ../../src/logic/production_program.cc:1301
+#: ../../src/logic/production_program.cc:1297
 #, c-format
 msgid "No soldier to train!"
 msgstr ""
 
-#: ../../src/logic/production_program.cc:1311
-#: ../../src/logic/production_program.cc:1401
+#: ../../src/logic/production_program.cc:1307
+#: ../../src/logic/production_program.cc:1398
 #, c-format
 msgid "No soldier for this training level found!"
 msgstr ""
 
-#: ../../src/logic/production_program.cc:1377
+#: ../../src/logic/production_program.cc:1374
 #, c-format
-msgid "expected level > %u but found \"%s\""
+msgid "expected level > %1$u but found \"%2$s\""
 msgstr ""
 
 #: ../../src/logic/soldier.cc:78
@@ -2686,7 +2671,7 @@ msgstr ""
 
 #: ../../src/logic/soldier.cc:82
 #, c-format
-msgid "expected positive integer >= %u but found \"%s\""
+msgid "expected positive integer >= %1$u but found \"%2$s\""
 msgstr ""
 
 #: ../../src/logic/soldier.cc:186
@@ -3216,7 +3201,7 @@ msgstr ""
 
 #: ../../src/wui/interactive_spectator.cc:55
 #: ../../src/wui/game_main_menu_save_game.cc:66
-#: ../../src/wui/game_options_menu.cc:85
+#: ../../src/wui/game_options_menu.cc:84
 msgid "Save Game"
 msgstr ""
 
@@ -3371,15 +3356,15 @@ msgstr ""
 msgid "Cancel the Expedition"
 msgstr ""
 
-#: ../../src/wui/game_options_menu.cc:56
+#: ../../src/wui/game_options_menu.cc:55
 msgid "README"
 msgstr ""
 
-#: ../../src/wui/game_options_menu.cc:70
+#: ../../src/wui/game_options_menu.cc:69
 msgid "Authors"
 msgstr ""
 
-#: ../../src/wui/game_options_menu.cc:77
+#: ../../src/wui/game_options_menu.cc:76
 #: ../../src/wui/game_options_sound_menu.cc:29
 msgid "Sound Options"
 msgstr ""
@@ -3662,7 +3647,7 @@ msgstr ""
 
 #: ../../src/wui/interactive_base.cc:316
 #, c-format
-msgid "%u.%ux"
+msgid "%1$u.%2$ux"
 msgstr ""
 
 #: ../../src/wui/interactive_base.cc:319
@@ -3671,7 +3656,7 @@ msgstr ""
 
 #: ../../src/wui/interactive_base.cc:339
 #, c-format
-msgid "%s (%s)"
+msgid "%1$s (%2$s)"
 msgstr ""
 
 #: ../../src/wui/interactive_base.cc:344
@@ -3689,7 +3674,7 @@ msgstr ""
 
 #: ../../src/wui/game_debug_ui.cc:381
 #, c-format
-msgid "  Amount: %i/%i\n"
+msgid "  Amount: %1$i/%2$i\n"
 msgstr ""
 
 #: ../../src/wui/login_box.cc:29
@@ -3960,7 +3945,7 @@ msgstr ""
 
 #: ../../src/network/network_gaming_messages.cc:133
 #, c-format
-msgid "%s has left the game (%s)"
+msgid "%1$s has left the game (%2$s)"
 msgstr ""
 
 #: ../../src/network/network_gaming_messages.cc:134
@@ -4052,7 +4037,7 @@ msgstr ""
 
 #: ../../src/network/network_gaming_messages.cc:155
 #, c-format
-msgid "WARNING: %s uses version: %s, while Host uses version: %s"
+msgid "WARNING: %1$s uses version: %2$s, while Host uses version: %3$s"
 msgstr ""
 
 #: ../../src/network/network_gaming_messages.cc:156
@@ -4067,17 +4052,17 @@ msgstr ""
 
 #: ../../src/network/network_gaming_messages.cc:158
 #, c-format
-msgid "Started to send file %s to %s!"
+msgid "Started to send file %1$s to %2$s!"
 msgstr ""
 
 #: ../../src/network/network_gaming_messages.cc:159
 #, c-format
-msgid "Completed transfer of file %s to %s"
+msgid "Completed transfer of file %1$s to %2$s"
 msgstr ""
 
 #: ../../src/network/network_gaming_messages.cc:160
 #, c-format
-msgid "Sending part %s of file %s to %s"
+msgid "Sending part %1$s of file %2$s to %3$s"
 msgstr ""
 
 #: ../../src/network/network_gaming_messages.cc:161
@@ -4087,13 +4072,14 @@ msgstr ""
 
 #: ../../src/network/network_gaming_messages.cc:162
 #, c-format
-msgid "Client %s did not answer for more than %s."
+msgid "Client %1$s did not answer for more than %2$s."
 msgstr ""
 
 #: ../../src/network/network_gaming_messages.cc:164
 #, c-format
 msgid ""
-"Client %s will automatically be kicked, if no answer is received within %s."
+"Client %1$s will automatically be kicked, if no answer is received within "
+"%2$s."
 msgstr ""
 
 #: ../../src/network/nethost.cc:368
@@ -4210,7 +4196,7 @@ msgstr ""
 
 #: ../../src/network/nethost.cc:1227
 #, c-format
-msgid "%s told me to run the command: \"%s\""
+msgid "%1$s told me to run the command: \"%2$s\""
 msgstr ""
 
 #: ../../src/network/nethost.cc:1236
@@ -4227,7 +4213,7 @@ msgstr ""
 
 #: ../../src/network/nethost.cc:1252
 #, c-format
-msgid "Could not save the game to the file \"%s\"! (%s)"
+msgid "Could not save the game to the file \"%1$s\"! (%2$s)"
 msgstr ""
 
 #: ../../src/network/nethost.cc:1259
@@ -4687,8 +4673,8 @@ msgstr ""
 #, c-format
 msgid ""
 "1) Node info\n"
-" Coordinates: (%i, %i)\n"
-" Height: %u\n"
+" Coordinates: (%1$i, %2$i)\n"
+" Height: %3$u\n"
 " Caps: "
 msgstr ""
 
@@ -4716,9 +4702,9 @@ msgstr ""
 #, c-format
 msgid ""
 "\n"
-" Owned by %i\n"
-" Has base immovable: %s\n"
-" Has bobs: %s\n"
+" Owned by %1$i\n"
+" Has base immovable: %2$s\n"
+" Has bobs: %3$s\n"
 msgstr ""
 
 #: ../../src/editor/tools/editor_info_tool.cc:79
@@ -4763,7 +4749,7 @@ msgstr ""
 #, c-format
 msgid ""
 "\n"
-" Size: %ix%i\n"
+" Size: %1$ix%2$i\n"
 " Author: "
 msgstr ""
 
