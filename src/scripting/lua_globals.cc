@@ -158,7 +158,6 @@ void luaopen_globals(lua_State * L) {
 	lua_rawgeti(L, LUA_REGISTRYINDEX, LUA_RIDX_GLOBALS);
 	luaL_setfuncs(L, globals, 0);
 	lua_pop(L, 1);
-
 }
 
 

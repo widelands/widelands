@@ -510,28 +510,29 @@ void LuaGameInterface_Impl::read_global_env
 	(Widelands::FileRead & fr, Widelands::Map_Map_Object_Loader & mol,
 	 uint32_t size)
 {
-	// Empty table + object to persist on the stack Stack
+	assert(lua_gettop(m_L) == 0); // S:
 	unpersist_object(m_L, fr, mol, size);
+	assert(lua_gettop(m_L) == 1); // S: unpersisted_object
 	luaL_checktype(m_L, -1, LUA_TTABLE);
 
 	// Now, we have to merge all keys from the loaded table
 	// into the global table
-	lua_pushnil(m_L);
-	while (lua_next(m_L, -2) != 0) {
-		// key value
-		lua_pushvalue(m_L, -2); // key value key
-		lua_rawgeti(m_L, LUA_REGISTRYINDEX, LUA_RIDX_GLOBALS);
-		if (lua_compare(m_L, -1, -2, LUA_OPEQ)) {
-			lua_pop(m_L, 2); // key
+	lua_pushnil(m_L);  // S: table nil
+	while (lua_next(m_L, 1) != 0) {
+		// S: table key value
+		lua_rawgeti(m_L, LUA_REGISTRYINDEX, LUA_RIDX_GLOBALS);  // S: table key value globals_table
+		lua_pushvalue(m_L, -3); // S: table key value globals_table key
+		lua_gettable(m_L, -2);  // S: table key value globals_table value_in_globals
+		if (lua_compare(m_L, -1, -3, LUA_OPEQ)) {
+			lua_pop(m_L, 3); // S: table key
 			continue;
 		} else {
 			// Make this a global value
-			lua_pop(m_L, 1); // key value
-			lua_pushvalue(m_L, -2); // key value key
-			const std::string name = luaL_checkstring(m_L, -1);  // key value
-			lua_pushvalue(m_L, -1); // key value value
-			lua_setglobal(m_L, name.c_str()); // key value
-			lua_pop(m_L, 1); // key
+			lua_pop(m_L, 1);  // S: table key value globals_table
+			lua_pushvalue(m_L, -3);  // S: table key value globals_table key
+			lua_pushvalue(m_L, -3);  // S: table key value globals_table key value
+			lua_settable(m_L, -3);  // S: table key value globals_table
+			lua_pop(m_L, 2);  // S: table key
 		}
 	}
 

@@ -33,11 +33,7 @@
 #define LUNA_CLASS_HEAD(klass) \
 	static const char className[]; \
 	static const MethodType<klass> Methods[]; \
-	static const PropertyType<klass> Properties[]; \
-	\
-   virtual void __finish_unpersist(lua_State * L) { \
-      lua_remove(L, -2); /* table luna_obj -> luna_obj */ \
-	}
+	static const PropertyType<klass> Properties[];
 
 /*
  * Macros for filling the description tables
@@ -76,8 +72,6 @@ class LunaClass {
 		virtual void __persist(lua_State *) = 0;
 		virtual void __unpersist(lua_State *) = 0;
 		virtual const char * get_modulename() = 0;
-		// The next class gets defined by LUNA_CLASS_HEAD
-		virtual void __finish_unpersist(lua_State *) = 0;
 };
 
 /**

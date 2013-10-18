@@ -33,12 +33,14 @@
  */
 static void m_instantiate_new_lua_class(lua_State * L) {
 	lua_getfield(L, -1, "module");
-	std::string module = luaL_checkstring(L, -1);
+	const std::string module = luaL_checkstring(L, -1);
 	lua_pop(L, 1);
 
 	lua_getfield(L, -1, "class");
-	std::string klass = luaL_checkstring(L, -1);
+	const std::string klass = luaL_checkstring(L, -1);
 	lua_pop(L, 1);
+
+	log("#sirver Unpersisting: %s:%s\n", module.c_str(), klass.c_str());
 
 	// get this classes instantiator
 	lua_getglobal(L, "wl"); // table wl
@@ -47,7 +49,7 @@ static void m_instantiate_new_lua_class(lua_State * L) {
 	else
 		lua_pushvalue(L, -1); // table wl wl
 
-	std::string instantiator = "__" + klass;
+	const std::string instantiator = "__" + klass;
 	lua_getfield(L, -1, instantiator.c_str()); // table wl module func
 
 	// Hopefully this is a function!
@@ -81,13 +83,15 @@ static LunaClass ** m_get_new_empty_user_data(lua_State * L) {
  * the instantiator for this object and fills it with
  * information from the table via its __unpersist function
  */
+// NOCOM(#sirver): rename, this is now a normal blubby
 int luna_restore_object(lua_State * L) {
-	LunaClass ** obj = m_get_new_empty_user_data(L);
-	// table luna_obj
+	// NOCOM(#sirver): maybe remove and instead fix the macros to use upvalueindex directly?
+	lua_pushvalue(L, lua_upvalueindex(1));  // table
+	LunaClass ** obj = m_get_new_empty_user_data(L); // table luna_obj
 
 	(*obj)->__unpersist(L);
-	(*obj)->__finish_unpersist(L);
+
+	lua_remove(L, -2);  // S: luna_obj
 
 	return 1;
 }
-

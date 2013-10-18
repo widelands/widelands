@@ -29,7 +29,6 @@
 #include "scripting/c_utils.h"
 #include "scripting/eris/lua.hpp"
 
-// This is only needed in pluto.cc
 int luna_restore_object(lua_State * L);
 
 /**
@@ -238,25 +237,23 @@ void m_add_instantiator_to_lua(lua_State * const L) {
 
 template <class T>
 int m_persist(lua_State * const L) {
-	log("#sirver persisting T::className: %s\n", T::className);
+	assert(lua_gettop(L) == 1); // S: lightuserdata
 	T * * const obj = get_user_class<T>(L, 1);
-	log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 
-	log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
-	lua_newtable(L);
+	lua_newtable(L);  // S: user_obj table
 
-	log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 	lua_pushstring(L, (*obj)->get_modulename());
-	log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 	lua_setfield(L, -2, "module");
 
-	log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 	lua_pushstring(L, T::className);
-	log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 	lua_setfield(L, -2, "class");
 
-	log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
+	assert(lua_gettop(L) == 2); // S: user_obj table
 	(*obj)->__persist(L);
+	assert(lua_gettop(L) == 2); // S: user_obj table
+
+	lua_pushcclosure(L, &luna_restore_object, 1);
+	assert(lua_gettop(L) == 2); // S: user_obj closure
 
 	return 1;
 }
