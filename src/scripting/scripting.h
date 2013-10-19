@@ -38,6 +38,9 @@ namespace Widelands {
 	class Player;
 }
 
+class EditorFactory;
+class GameFactory;
+
 struct LuaError : public _wexception {
 	LuaError(const std::string & reason) : wexception("%s", reason.c_str()) {}
 };
@@ -91,46 +94,70 @@ private:
 	lua_State * m_L;
 };
 
-/*
- * This is the thin class that is used to execute code
- */
+// Provides an interface to call and execute Lua Code.
 typedef std::map<std::string, std::string> ScriptContainer;
 class LuaInterface {
 public:
-	virtual ~LuaInterface() {}
-
-	virtual void interpret_string(std::string) = 0;
-	virtual const std::string & get_last_error() const = 0;
+	LuaInterface();
+	virtual ~LuaInterface();
 
 	// Register all Lua files in the directory "subdir" in "fs" under the
 	// namespace "ns".
-	virtual void register_scripts
-		(FileSystem & fs, const std::string& ns, const std::string& subdir) = 0;
+	void register_scripts
+		(FileSystem & fs, const std::string& ns, const std::string& subdir);
 
 	// Register the Lua file "filename" in "fs" under the namespace "ns". Returns
 	// the name the script was registered, usually $(basename filename).
-	virtual std::string register_script
-		(FileSystem & fs, const std::string& ns, const std::string& filename) = 0;
-	virtual ScriptContainer & get_scripts_for(std::string) = 0;
+	std::string register_script
+		(FileSystem & fs, const std::string& ns, const std::string& filename);
 
-	virtual std::unique_ptr<LuaTable> run_script(std::string, std::string) = 0;
-	virtual std::unique_ptr<LuaTable> run_script
-			(FileSystem &, std::string, std::string) = 0;
+	// Returns the scripts that have been registered for this namespace.
+	const ScriptContainer& get_scripts_for(const std::string&);
 
-	virtual std::unique_ptr<LuaTable> get_hook(std::string name) = 0;
+	// Interpret the given string, will throw 'LuaError' on any error.
+	void interpret_string(const std::string&);
+
+	std::unique_ptr<LuaTable> run_script(std::string, std::string);
+	std::unique_ptr<LuaTable> run_script
+			(FileSystem &, std::string, std::string);
+
+	std::unique_ptr<LuaTable> get_hook(std::string name);
+
+protected:
+	lua_State * m_L;
+
+private:
+	std::map<std::string, ScriptContainer> m_scripts;
 };
 
-class LuaGameInterface : public virtual LuaInterface {
+class LuaEditorInterface : public LuaInterface {
 public:
-	virtual LuaCoroutine * read_coroutine
-		(Widelands::FileRead &, Widelands::Map_Map_Object_Loader &, uint32_t) = 0;
-	virtual uint32_t write_coroutine
-		(Widelands::FileWrite &, Widelands::Map_Map_Object_Saver &, LuaCoroutine *) = 0;
+	LuaEditorInterface(Widelands::Editor_Game_Base * g);
+	virtual ~LuaEditorInterface();
 
-	virtual void read_global_env
-		(Widelands::FileRead &, Widelands::Map_Map_Object_Loader &, uint32_t) = 0;
-	virtual uint32_t write_global_env
-		(Widelands::FileWrite &, Widelands::Map_Map_Object_Saver &) = 0;
+private:
+	std::unique_ptr<EditorFactory> m_factory;
+};
+
+class LuaGameInterface : public LuaInterface {
+public:
+	LuaGameInterface(Widelands::Game * g);
+	virtual ~LuaGameInterface();
+
+	// Input/output for coroutines.
+	LuaCoroutine * read_coroutine
+		(Widelands::FileRead &, Widelands::Map_Map_Object_Loader &, uint32_t);
+	uint32_t write_coroutine
+		(Widelands::FileWrite &, Widelands::Map_Map_Object_Saver &, LuaCoroutine *);
+
+	// Input output for the global game state.
+	void read_global_env
+		(Widelands::FileRead &, Widelands::Map_Map_Object_Loader &, uint32_t);
+	uint32_t write_global_env
+		(Widelands::FileWrite &, Widelands::Map_Map_Object_Saver &);
+
+private:
+	std::unique_ptr<GameFactory> m_factory;
 };
 
 LuaGameInterface * create_LuaGameInterface(Widelands::Game *);

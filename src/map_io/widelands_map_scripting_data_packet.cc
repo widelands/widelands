@@ -60,11 +60,11 @@ void Map_Scripting_Data_Packet::Read
 void Map_Scripting_Data_Packet::Write
 	(FileSystem & fs, Editor_Game_Base & egbase, Map_Map_Object_Saver & mos)
 {
-	ScriptContainer & p = egbase.lua().get_scripts_for("map");
+	const ScriptContainer& p = egbase.lua().get_scripts_for("map");
 
 	fs.EnsureDirectoryExists("scripting");
 
-	for (ScriptContainer::iterator i = p.begin(); i != p.end(); ++i) {
+	for (ScriptContainer::const_iterator i = p.begin(); i != p.end(); ++i) {
 		std::string fname = "scripting/";
 		fname += i->first;
 		fname += ".lua";

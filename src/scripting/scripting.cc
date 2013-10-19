@@ -161,40 +161,7 @@ LuaCoroutine * LuaTable::get_coroutine(std::string s) {
        Lua Interface
 ============================================
 */
-class LuaInterface_Impl : public virtual LuaInterface {
-public:
-	LuaInterface_Impl();
-	virtual ~LuaInterface_Impl();
-
-	virtual void interpret_string(std::string);
-	virtual const std::string & get_last_error() const {return m_last_error;}
-
-	virtual void register_scripts
-		(FileSystem &, const std::string&, const std::string&);
-	virtual std::string register_script
-		(FileSystem &, const std::string&, const std::string&);
-	virtual ScriptContainer & get_scripts_for(std::string ns) {
-		return m_scripts[ns];
-	}
-
-	virtual std::unique_ptr<LuaTable> run_script(std::string, std::string);
-	virtual std::unique_ptr<LuaTable> run_script
-		(FileSystem &, std::string, std::string);
-	virtual std::unique_ptr<LuaTable> get_hook(std::string name);
-
-protected:
-	lua_State * m_L;
-
-private:
-	std::string m_last_error;
-	std::map<std::string, ScriptContainer> m_scripts;
-};
-
-
-/*************************
- * Public functions
- *************************/
-LuaInterface_Impl::LuaInterface_Impl() : m_last_error("") {
+LuaInterface::LuaInterface() {
 	m_L = luaL_newstate();
 
 	// Open the Lua libraries
@@ -228,11 +195,15 @@ LuaInterface_Impl::LuaInterface_Impl() : m_last_error("") {
 	register_scripts(*g_fs, "aux", "scripting");
 }
 
-LuaInterface_Impl::~LuaInterface_Impl() {
+LuaInterface::~LuaInterface() {
 	lua_close(m_L);
 }
 
-std::string LuaInterface_Impl::register_script
+const ScriptContainer& LuaInterface::get_scripts_for(const std::string& ns) {
+	return m_scripts[ns];
+}
+
+std::string LuaInterface::register_script
 	(FileSystem & fs, const std::string& ns, const std::string& path)
 {
 		size_t length;
@@ -253,7 +224,7 @@ std::string LuaInterface_Impl::register_script
 		return name;
 }
 
-void LuaInterface_Impl::register_scripts
+void LuaInterface::register_scripts
 	(FileSystem & fs, const std::string& ns, const std::string& subdir)
 {
 	filenameset_t scripting_files;
@@ -274,12 +245,12 @@ void LuaInterface_Impl::register_scripts
 	}
 }
 
-void LuaInterface_Impl::interpret_string(std::string cmd) {
+void LuaInterface::interpret_string(const std::string& cmd) {
 	int rv = luaL_dostring(m_L, cmd.c_str());
 	check_return_value_for_errors(m_L, rv);
 }
 
-	std::unique_ptr<LuaTable> LuaInterface_Impl::run_script
+std::unique_ptr<LuaTable> LuaInterface::run_script
 	(FileSystem & fs, std::string path, std::string ns)
 {
 	bool delete_ns = false;
@@ -298,7 +269,7 @@ void LuaInterface_Impl::interpret_string(std::string cmd) {
 	return rv;
 }
 
-	std::unique_ptr<LuaTable> LuaInterface_Impl::run_script
+	std::unique_ptr<LuaTable> LuaInterface::run_script
 	(std::string ns, std::string name)
 {
 	if
@@ -325,7 +296,7 @@ void LuaInterface_Impl::interpret_string(std::string cmd) {
 /*
  * Returns a given hook if one is defined, otherwise returns 0
  */
-std::unique_ptr<LuaTable> LuaInterface_Impl::get_hook(std::string name) {
+std::unique_ptr<LuaTable> LuaInterface::get_hook(std::string name) {
 	lua_getglobal(m_L, "hooks");
 	if (lua_isnil(m_L, -1)) {
 		lua_pop(m_L, 1);
@@ -345,27 +316,22 @@ std::unique_ptr<LuaTable> LuaInterface_Impl::get_hook(std::string name) {
 
 /*
  * ===========================
- * LuaEditorInterface_Impl
+ * LuaEditorInterface
  * ===========================
  */
-class LuaEditorInterface_Impl : public LuaInterface_Impl {
-public:
-	LuaEditorInterface_Impl(Widelands::Editor_Game_Base * g);
-	virtual ~LuaEditorInterface_Impl() {}
-
-private:
-	EditorFactory m_factory;
-};
-
-LuaEditorInterface_Impl::LuaEditorInterface_Impl(Widelands::Editor_Game_Base * g) {
+LuaEditorInterface::LuaEditorInterface(Widelands::Editor_Game_Base* g)
+	: m_factory(new EditorFactory())
+{
 	setup_for_editor_and_game(m_L, g);
 	LuaRoot::luaopen_wlroot(m_L, true);
 	LuaEditor::luaopen_wleditor(m_L);
 
 	// Push the factory class into the registry
-	lua_pushlightuserdata
-		(m_L, reinterpret_cast<void *>(dynamic_cast<Factory *>(&m_factory)));
+	lua_pushlightuserdata(m_L, reinterpret_cast<void*>(dynamic_cast<Factory*>(m_factory.get())));
 	lua_setfield(m_L, LUA_REGISTRYINDEX, "factory");
+}
+
+LuaEditorInterface::~LuaEditorInterface() {
 }
 
 
@@ -374,41 +340,16 @@ LuaEditorInterface_Impl::LuaEditorInterface_Impl(Widelands::Editor_Game_Base * g
  * LuaGameInterface
  * ===========================
  */
-class LuaGameInterface_Impl : public LuaInterface_Impl,
-	public virtual LuaGameInterface
-{
-public:
-	LuaGameInterface_Impl(Widelands::Game * g);
-	virtual ~LuaGameInterface_Impl() {}
 
-	virtual LuaCoroutine * read_coroutine
-		(Widelands::FileRead &, Widelands::Map_Map_Object_Loader &,
-		 uint32_t);
-	virtual uint32_t write_coroutine
-		(Widelands::FileWrite &, Widelands::Map_Map_Object_Saver &,
-		 LuaCoroutine *);
+// Special handling of math.random.
 
-	virtual void read_global_env
-		(Widelands::FileRead &, Widelands::Map_Map_Object_Loader &,
-		 uint32_t);
-	virtual uint32_t write_global_env
-		(Widelands::FileWrite &, Widelands::Map_Map_Object_Saver &);
+// We inject this function to make sure that Lua uses our random number
+// generator.  This guarantees that the game stays in sync over the network and
+// in replays. Obviously, we only do this for LuaGameInterface, not for
+// the others.
 
-private:
-	GameFactory m_factory;
-};
-
-/*
- * Special handling of math.random.
- *
- * We inject this function to make sure that Lua uses our random number
- * generator.  This guarantees that the game stays in sync over the network and
- * in replays. Obviously, we only do this for LuaGameInterface, not for
- * the others.
- *
- * The function was designed to simulate the standard math.random function and
- * was therefore copied nearly verbatim from the Lua sources.
- */
+// The function was designed to simulate the standard math.random function and
+// was therefore copied nearly verbatim from the Lua sources.
 static int L_math_random(lua_State * L) {
 	Widelands::Game & game = get_game(L);
 	uint32_t t = game.logic_rand();
@@ -443,7 +384,9 @@ static int L_math_random(lua_State * L) {
 
 }
 
-LuaGameInterface_Impl::LuaGameInterface_Impl(Widelands::Game * g) {
+LuaGameInterface::LuaGameInterface(Widelands::Game * g)
+	: m_factory(new GameFactory())
+{
 	setup_for_editor_and_game(m_L, g);
 
 	// Overwrite math.random
@@ -461,11 +404,14 @@ LuaGameInterface_Impl::LuaGameInterface_Impl(Widelands::Game * g) {
 
 	// Push the factory class into the registry
 	lua_pushlightuserdata
-		(m_L, reinterpret_cast<void *>(dynamic_cast<Factory *>(&m_factory)));
+		(m_L, reinterpret_cast<void *>(dynamic_cast<Factory *>(m_factory.get())));
 	lua_setfield(m_L, LUA_REGISTRYINDEX, "factory");
 }
 
-LuaCoroutine * LuaGameInterface_Impl::read_coroutine
+LuaGameInterface::~LuaGameInterface() {
+}
+
+LuaCoroutine * LuaGameInterface::read_coroutine
 	(Widelands::FileRead & fr, Widelands::Map_Map_Object_Loader & mol,
 	 uint32_t size)
 {
@@ -476,10 +422,10 @@ LuaCoroutine * LuaGameInterface_Impl::read_coroutine
 	return rv;
 }
 
-uint32_t LuaGameInterface_Impl::write_coroutine
-	(Widelands::FileWrite & fw, Widelands::Map_Map_Object_Saver & mos,
-	 LuaCoroutine * cr)
+uint32_t LuaGameInterface::write_coroutine
+	(Widelands::FileWrite & fw, Widelands::Map_Map_Object_Saver & mos, LuaCoroutine * cr)
 {
+	// NOCOM(#sirver): reconsider and grep for dynamic_cast
 	// we do not want to make the write function public by adding
 	// it to the interface of LuaCoroutine. Therefore, we make a cast
 	// to the Implementation function here.
@@ -487,7 +433,7 @@ uint32_t LuaGameInterface_Impl::write_coroutine
 }
 
 
-void LuaGameInterface_Impl::read_global_env
+void LuaGameInterface::read_global_env
 	(Widelands::FileRead & fr, Widelands::Map_Map_Object_Loader & mol,
 	 uint32_t size)
 {
@@ -526,7 +472,7 @@ void LuaGameInterface_Impl::read_global_env
 	lua_gc(m_L, LUA_GCCOLLECT, 0);
 }
 
-uint32_t LuaGameInterface_Impl::write_global_env
+uint32_t LuaGameInterface::write_global_env
 	(Widelands::FileWrite & fw, Widelands::Map_Map_Object_Saver & mos)
 {
 	// Clean out the garbage before writing.
@@ -549,17 +495,14 @@ uint32_t LuaGameInterface_Impl::write_global_env
        Global functions
 ============================================
 */
-/*
- * Factory Function, create Lua interfaces for the following use cases:
- *
- * "game": load all libraries needed for the game to run properly
- */
-LuaGameInterface * create_LuaGameInterface(Widelands::Game * g) {
-	return new LuaGameInterface_Impl(g);
-}
+
 LuaInterface * create_LuaEditorInterface(Widelands::Editor_Game_Base * g) {
-	return new LuaEditorInterface_Impl(g);
+	return new LuaEditorInterface(g);
 }
+// NOCOM(#sirver): this method is unnecessary
 LuaInterface * create_LuaInterface() {
-	return new LuaInterface_Impl();
+	return new LuaInterface();
+}
+LuaGameInterface * create_LuaGameInterface(Widelands::Game * g) {
+	return new LuaGameInterface(g);
 }
