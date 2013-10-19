@@ -29,7 +29,6 @@
 #include "io/filesystem/layered_filesystem.h"
 #include "log.h"
 #include "scripting/c_utils.h"
-#include "scripting/coroutine_impl.h"
 #include "scripting/factory.h"
 #include "scripting/lua_bases.h"
 #include "scripting/lua_editor.h"
@@ -101,6 +100,20 @@ void setup_for_editor_and_game(lua_State* L, Widelands::Editor_Game_Base * g) {
 	lua_setfield(L, LUA_REGISTRYINDEX, "egbase");
 }
 
+// Push a reference to this coroutine into the registry so that it will not get
+// garbage collected. Returns the index of the reference in the registry.
+uint32_t reference_coroutine(lua_State* L) {
+	assert(L != nullptr);
+	lua_pushthread(L);
+	return luaL_ref(L, LUA_REGISTRYINDEX);
+}
+
+// Unreference the coroutine with the given index in the registry again. I might then get garbage
+// collected.
+void unreference_coroutine(lua_State* L, uint32_t idx) {
+	luaL_unref(L, LUA_REGISTRYINDEX, idx);
+}
+
 }  // namespace
 
 /*
@@ -151,7 +164,7 @@ LuaCoroutine * LuaTable::get_coroutine(std::string s) {
 		lua_pop(m_L, 1);
 		throw LuaError(s + "is not a function value.");
 	}
-	LuaCoroutine * cr = new LuaCoroutine_Impl(luaL_checkthread(m_L, -1));
+	LuaCoroutine * cr = new LuaCoroutine(luaL_checkthread(m_L, -1));
 	lua_pop(m_L, 1); // Remove coroutine from stack
 	return cr;
 }
@@ -415,8 +428,7 @@ LuaCoroutine * LuaGameInterface::read_coroutine
 	(Widelands::FileRead & fr, Widelands::Map_Map_Object_Loader & mol,
 	 uint32_t size)
 {
-	LuaCoroutine_Impl * rv = new LuaCoroutine_Impl(0);
-
+	LuaCoroutine * rv = new LuaCoroutine(0);
 	rv->read(m_L, fr, mol, size);
 
 	return rv;
@@ -425,11 +437,7 @@ LuaCoroutine * LuaGameInterface::read_coroutine
 uint32_t LuaGameInterface::write_coroutine
 	(Widelands::FileWrite & fw, Widelands::Map_Map_Object_Saver & mos, LuaCoroutine * cr)
 {
-	// NOCOM(#sirver): reconsider and grep for dynamic_cast
-	// we do not want to make the write function public by adding
-	// it to the interface of LuaCoroutine. Therefore, we make a cast
-	// to the Implementation function here.
-	return dynamic_cast<LuaCoroutine_Impl *>(cr)->write(m_L, fw, mos);
+	return cr->write(m_L, fw, mos);
 }
 
 
@@ -491,18 +499,107 @@ uint32_t LuaGameInterface::write_global_env
 }
 
 /*
-============================================
-       Global functions
-============================================
-*/
+ * ===========================
+ * LuaCoroutine
+ * ===========================
+ */
+LuaCoroutine::LuaCoroutine(lua_State * ms)
+	: m_L(ms), m_idx(LUA_REFNIL), m_nargs(0)
+{
+	if (m_L) {
+		m_idx = reference_coroutine(m_L);
+	}
+}
 
-LuaInterface * create_LuaEditorInterface(Widelands::Editor_Game_Base * g) {
-	return new LuaEditorInterface(g);
+LuaCoroutine::~LuaCoroutine() {
+	unreference_coroutine(m_L, m_idx);
 }
-// NOCOM(#sirver): this method is unnecessary
-LuaInterface * create_LuaInterface() {
-	return new LuaInterface();
+
+int LuaCoroutine::get_status() {
+	return lua_status(m_L);
 }
-LuaGameInterface * create_LuaGameInterface(Widelands::Game * g) {
-	return new LuaGameInterface(g);
+
+int LuaCoroutine::resume(uint32_t * sleeptime)
+{
+	int rv = lua_resume(m_L, nullptr, m_nargs);
+	m_nargs = 0;
+	int n = lua_gettop(m_L);
+
+	uint32_t sleep_for = 0;
+	if (n == 1) {
+		sleep_for = luaL_checkint32(m_L, -1);
+		lua_pop(m_L, 1);
+	}
+
+	if (sleeptime)
+		*sleeptime = sleep_for;
+
+	if (rv != 0 && rv != YIELDED) {
+		throw LuaError(lua_tostring(m_L, -1));
+	}
+
+	return rv;
+}
+
+void LuaCoroutine::push_arg(const Widelands::Player * plr) {
+	to_lua<LuaGame::L_Player>(m_L, new LuaGame::L_Player(plr->player_number()));
+	m_nargs++;
+}
+
+void LuaCoroutine::push_arg(const Widelands::Coords & coords) {
+	to_lua<LuaMap::L_Field>(m_L, new LuaMap::L_Field(coords));
+	++m_nargs;
+}
+
+#define COROUTINE_DATA_PACKET_VERSION 1
+uint32_t LuaCoroutine::write
+	(lua_State * parent, Widelands::FileWrite & fw,
+	 Widelands::Map_Map_Object_Saver & mos)
+{
+	// Clean out the garbage before we write this.
+	lua_gc(m_L, LUA_GCCOLLECT, 0);
+
+	fw.Unsigned8(COROUTINE_DATA_PACKET_VERSION);
+
+	// The current numbers of arguments on the stack
+	fw.Unsigned32(m_nargs);
+
+	// Empty table + object to persist on the stack Stack
+	lua_newtable(parent);
+	lua_pushthread(m_L);
+	lua_xmove (m_L, parent, 1);
+
+	const uint32_t nwritten = persist_object(parent, fw, mos);
+
+	// Clean out the garbage again.
+	lua_gc(m_L, LUA_GCCOLLECT, 0);
+
+	return nwritten;
+}
+
+void LuaCoroutine::read
+	(lua_State * parent, Widelands::FileRead & fr,
+	 Widelands::Map_Map_Object_Loader & mol, uint32_t size)
+{
+	uint8_t version = fr.Unsigned8();
+
+	if (version != COROUTINE_DATA_PACKET_VERSION)
+		throw wexception("Unknown data packet version: %i\n", version);
+
+	// The current numbers of arguments on the stack
+	m_nargs = fr.Unsigned32();
+
+	// Empty table + object to persist on the stack Stack
+	unpersist_object(parent, fr, mol, size);
+
+	m_L = luaL_checkthread(parent, -1);
+	lua_pop(parent, 1);
+
+	// Cache a lua reference to this object so that it does not
+	// get garbage collected
+	lua_pushthread(m_L);
+	m_idx = luaL_ref(m_L, LUA_REGISTRYINDEX);
+
+	// Clean out the garbage again.
+	lua_gc(m_L, LUA_GCCOLLECT, 0);
 }

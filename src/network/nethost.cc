@@ -293,7 +293,7 @@ struct HostGameSettingsProvider : public GameSettingsProvider {
 		if (m_win_conditions.size() < 1) {
 			// Register win condition scripts
 			if (!m_lua)
-				m_lua = create_LuaInterface();
+				m_lua = new LuaInterface();
 			m_lua->register_scripts(*g_fs, "win_conditions", "scripting/win_conditions");
 
 			ScriptContainer sc = m_lua->get_scripts_for("win_conditions");

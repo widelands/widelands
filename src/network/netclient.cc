@@ -119,15 +119,14 @@ NetClient::NetClient
 	file = 0;
 
 	// Temporarily register win condition scripts to get the default
-	LuaInterface * lua = create_LuaInterface();
-	lua->register_scripts(*g_fs, "win_conditions", "scripting/win_conditions");
-	ScriptContainer sc = lua->get_scripts_for("win_conditions");
+	LuaInterface lua;
+	lua.register_scripts(*g_fs, "win_conditions", "scripting/win_conditions");
+	ScriptContainer sc = lua.get_scripts_for("win_conditions");
 	std::vector<std::string> win_conditions;
 	container_iterate_const(ScriptContainer, sc, wc)
 		win_conditions.push_back(wc->first);
 	assert(win_conditions.size());
 	d->settings.win_condition = win_conditions[0];
-	delete lua;
 }
 
 NetClient::~NetClient ()
@@ -906,16 +905,16 @@ void NetClient::handle_packet(RecvPacket & packet)
 			info.name = packet.String();
 
 			// Get initializations (we have to do this locally, for translations)
-			LuaInterface * lua = create_LuaInterface();
+			LuaInterface lua;
 			std::string path = "tribes/" + info.name;
 			if (g_fs->IsDirectory(path)) {
 				std::unique_ptr<FileSystem> sub_fs(g_fs->MakeSubFileSystem(path));
-				lua->register_scripts(*sub_fs, "tribe_" + info.name, "scripting");
+				lua.register_scripts(*sub_fs, "tribe_" + info.name, "scripting");
 			}
 
 			for (uint8_t j = packet.Unsigned8(); j; --j) {
 				std::string const name = packet.String();
-				std::unique_ptr<LuaTable> t = lua->run_script
+				std::unique_ptr<LuaTable> t = lua.run_script
 					("tribe_" + info.name, name);
 				info.initializations.push_back
 					(TribeBasicInfo::Initialization(name, t->get_string("name")));

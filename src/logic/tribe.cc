@@ -376,7 +376,7 @@ bool Tribe_Descr::exists_tribe
 	buf            += name;
 	buf            += "/conf";
 
-	LuaInterface * lua = create_LuaInterface();
+	LuaInterface lua;
 	FileRead f;
 	if (f.TryOpen(*g_fs, buf.c_str())) {
 		if (info)
@@ -389,30 +389,25 @@ bool Tribe_Descr::exists_tribe
 				std::string path = "tribes/" + name + "/scripting";
 				if (g_fs->IsDirectory(path)) {
 					std::unique_ptr<FileSystem> sub_fs(g_fs->MakeSubFileSystem(path));
-					lua->register_scripts(*sub_fs, "tribe_" + name, "");
+					lua.register_scripts(*sub_fs, "tribe_" + name, "");
 				}
 
-				const ScriptContainer& scripts = lua->get_scripts_for("tribe_" + name);
+				const ScriptContainer& scripts = lua.get_scripts_for("tribe_" + name);
 				container_iterate_const(ScriptContainer, scripts, s) {
 					std::unique_ptr<LuaTable> t =
-						lua->run_script("tribe_" + name, s->first);
+						lua.run_script("tribe_" + name, s->first);
 
 					info->initializations.push_back
 						(TribeBasicInfo::Initialization
 						 	(s->first, t->get_string("name")));
 				}
 			} catch (const _wexception & e) {
-				delete lua;
 				throw game_data_error
 					("reading basic info for tribe \"%s\": %s",
 					 name.c_str(), e.what());
 			}
-
-		delete lua;
 		return true;
 	}
-
-	delete lua;
 	return false;
 }
 

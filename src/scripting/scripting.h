@@ -59,24 +59,7 @@ struct LuaScriptNotExistingError : public LuaError {
 		LuaError("The script '" + ns + ":" + name + "' was not found!") {}
 };
 
-/**
- * Easy handling of LuaCoroutines
- */
-class LuaCoroutine {
-public:
-	virtual ~LuaCoroutine() {}
-
-	enum {
-		DONE = 0,
-		YIELDED = LUA_YIELD,
-	};
-
-	virtual int get_status() = 0;
-	virtual int resume(uint32_t * = 0) = 0;
-
-	virtual void push_arg(const Widelands::Player *) = 0;
-	virtual void push_arg(const Widelands::Coords &) = 0;
-};
+class LuaCoroutine;
 
 /*
  * Easy handling of return values from Wideland's Lua configurations
@@ -88,7 +71,7 @@ public:
 	~LuaTable();
 
 	std::string get_string(std::string);
-	LuaCoroutine * get_coroutine(std::string);
+	LuaCoroutine* get_coroutine(std::string);
 
 private:
 	lua_State * m_L;
@@ -160,8 +143,46 @@ private:
 	std::unique_ptr<GameFactory> m_factory;
 };
 
-LuaGameInterface * create_LuaGameInterface(Widelands::Game *);
-LuaInterface * create_LuaEditorInterface(Widelands::Editor_Game_Base *);
-LuaInterface * create_LuaInterface();
+// Easy handling of function objects and coroutines.
+class LuaCoroutine {
+public:
+	// The state of the coroutine, which can either be yielded, i.e. it expects
+	// to be resumed again or done which means that it will not do any more work
+	// and can be deleted.
+	enum {
+		DONE = 0,
+		YIELDED = LUA_YIELD,
+	};
+
+	LuaCoroutine(lua_State * L);
+	virtual ~LuaCoroutine();
+
+	// Returns either 'DONE' or 'YIELDED'.
+	int get_status();
+
+	// Resumes the coroutine and returns it's state after it did its execution.
+	// If 'sleeptime' is not null, it will contain the time in milliseconds the
+	// lua code requested for this coroutine to sleep before it should be
+	// resumed again.
+	int resume(uint32_t* sleeptime = nullptr);
+
+	// Push the given arguments onto the Lua stack, so that a Coroutine can
+	// receive them. This is for example used in the initialization scripts or
+	// in hooks.
+	void push_arg(const Widelands::Player *);
+	void push_arg(const Widelands::Coords &);
+
+private:
+	friend class LuaGameInterface;
+
+	// Input/Output for coroutines. Do not call directly, instead use
+	// LuaGameInterface methods for this.
+	uint32_t write(lua_State *, Widelands::FileWrite &, Widelands::Map_Map_Object_Saver &);
+	void read(lua_State *, Widelands::FileRead &, Widelands::Map_Map_Object_Loader &, uint32_t);
+
+	lua_State* m_L;
+	uint32_t m_idx;
+	uint32_t m_nargs;
+};
 
 #endif

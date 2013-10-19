@@ -199,7 +199,7 @@ Fullscreen_Menu_LaunchMPG::Fullscreen_Menu_LaunchMPG
 	m_change_map_or_save.set_font(font_small());
 	m_wincondition_type.set_textstyle(ts_small());
 
-	m_lua = create_LuaInterface();
+	m_lua = new LuaInterface();
 	m_lua->register_scripts(*g_fs, "win_conditions", "scripting/win_conditions");
 	win_condition_clicked();
 
