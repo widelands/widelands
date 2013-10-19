@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2013-09-15 17:41+0000\n"
-"PO-Revision-Date: 2013-10-17 23:28+0000\n"
+"PO-Revision-Date: 2013-10-18 12:28+0000\n"
 "Last-Translator: GunChleoc <Unknown>\n"
 "Language-Team: Fòram na Gàidhlig http://www.foramnagaidhlig.net\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-10-18 05:13+0000\n"
-"X-Generator: Launchpad (build 16799)\n"
+"X-Launchpad-Export-Date: 2013-10-19 04:31+0000\n"
+"X-Generator: Launchpad (build 16807)\n"
 "Language: gd\n"
 
 #: ../../txts/README.lua:73
@@ -273,7 +273,7 @@ msgstr "Grafaigeachd"
 
 #: ../../txts/editor_readme:29
 msgid "H        Toggles main menu"
-msgstr "H        Toglaichidh seo an clàr-taice"
+msgstr "H        Toglaich am prìomh chlàr-taice"
 
 #: ../../txts/developers:236
 msgid "Hebrew"
