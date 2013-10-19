@@ -217,7 +217,8 @@ public:
 	CASTED_GET(Building);
 };
 
-struct L_HasWares {
+class L_HasWares {
+public:
 	virtual ~L_HasWares() {}
 
 	virtual int set_wares(lua_State * L) = 0;
@@ -233,7 +234,8 @@ protected:
 	WaresMap m_parse_set_wares_arguments
 		(lua_State *, const Widelands::Tribe_Descr &);
 };
-struct L_HasWorkers {
+class L_HasWorkers {
+public:
 	virtual ~L_HasWorkers() {}
 
 	virtual int set_workers(lua_State * L) = 0;
@@ -250,7 +252,8 @@ protected:
 		(lua_State *, const Widelands::Tribe_Descr &);
 };
 
-struct L_HasSoldiers {
+class L_HasSoldiers {
+public:
 	struct SoldierDescr {
 		SoldierDescr(uint8_t ghp, uint8_t gat, uint8_t gde, uint8_t gev) :
 			hp(ghp), at(gat), de(gde), ev(gev) {}
@@ -327,7 +330,8 @@ public:
 
 // Small helper class that contains the commonalities between L_Road and
 // L_ProductionSite in relation to Worker employment.
-struct _WorkerEmployer : public L_HasWorkers {
+class _WorkerEmployer : public L_HasWorkers {
+public:
 	virtual int get_workers(lua_State * L);
 	virtual int set_workers(lua_State * L);
 
@@ -342,7 +346,8 @@ protected:
 		(Widelands::PlayerImmovable &, Widelands::Editor_Game_Base &, const Widelands::Worker_Descr *) = 0;
 };
 
-struct _SoldierEmployer : public L_HasSoldiers {
+class _SoldierEmployer : public L_HasSoldiers {
+public:
 	virtual int get_soldiers(lua_State * L);
 	virtual int set_soldiers(lua_State * L);
 

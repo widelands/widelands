@@ -105,7 +105,7 @@ const MethodType<L_SubClass> L_SubClass::Methods[] = {
 BEGIN_LUNA_PROPERTIES(L_SubClass)
 END_LUNA_PROPERTIES()
 
-class L_VirtualClass : public virtual L_Class
+class L_VirtualClass : public L_Class
 {
 	int z;
 public:

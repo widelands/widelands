@@ -59,7 +59,8 @@ struct LuaScriptNotExistingError : public LuaError {
 /**
  * Easy handling of LuaCoroutines
  */
-struct LuaCoroutine {
+class LuaCoroutine {
+public:
 	virtual ~LuaCoroutine() {}
 
 	enum {
@@ -78,7 +79,8 @@ struct LuaCoroutine {
  * Easy handling of return values from Wideland's Lua configurations
  * scripts: they return a Lua table with (string,value) pairs.
  */
-struct LuaTable {
+class LuaTable {
+public:
 	virtual ~LuaTable() {}
 
 	virtual std::string get_string(std::string) = 0;
@@ -89,7 +91,8 @@ struct LuaTable {
  * This is the thin class that is used to execute code
  */
 typedef std::map<std::string, std::string> ScriptContainer;
-struct LuaInterface {
+class LuaInterface {
+public:
 	virtual ~LuaInterface() {}
 
 	virtual void interpret_string(std::string) = 0;
@@ -113,7 +116,8 @@ struct LuaInterface {
 	virtual std::unique_ptr<LuaTable> get_hook(std::string name) = 0;
 };
 
-struct LuaGameInterface : public virtual LuaInterface {
+class LuaGameInterface : public virtual LuaInterface {
+public:
 	virtual LuaCoroutine * read_coroutine
 		(Widelands::FileRead &, Widelands::Map_Map_Object_Loader &, uint32_t) = 0;
 	virtual uint32_t write_coroutine

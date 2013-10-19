@@ -58,6 +58,49 @@ void open_lua_library
 	}
 }
 
+// Checks the return value of a function all for nonzero state and throws the
+// string that the function hopefully pushed as an Error. Returns 'rv' if there
+// is no error.
+int check_return_value_for_errors(lua_State* L, int rv) {
+	if (rv) {
+		const std::string err = luaL_checkstring(L, -1);
+		lua_pop(L, 1);
+		throw LuaError(err);
+	}
+	return rv;
+}
+
+// Returns true if 's' is too short for having an extension.
+bool too_short_for_extension(const std::string & s) {
+	return s.size() < 4;
+}
+
+// Returns true if 's' ends with .lua.
+bool is_lua_file(const std::string& s) {
+	std::string ext = s.substr(s.size() - 4, s.size());
+	// std::transform fails on older system, therefore we use an explicit loop
+	for (uint32_t i = 0; i < ext.size(); i++) {
+#ifndef _MSC_VER
+		ext[i] = std::tolower(ext[i]);
+#else
+		ext[i] = tolower(ext[i]);
+#endif
+	}
+	return (ext == ".lua");
+}
+
+// Setup the basic Widelands functions and pushes egbase into the Lua registry
+// so that it is available for all the other Lua functions.
+void setup_for_editor_and_game(lua_State* L, Widelands::Editor_Game_Base * g) {
+	LuaBases::luaopen_wlbases(L);
+	LuaMap::luaopen_wlmap(L);
+	LuaUi::luaopen_wlui(L);
+
+	// Push the editor game base
+	lua_pushlightuserdata(L, static_cast<void *>(g));
+	lua_setfield(L, LUA_REGISTRYINDEX, "egbase");
+}
+
 }  // namespace
 
 /*
@@ -65,7 +108,7 @@ void open_lua_library
        Lua Table
 ============================================
 */
-class LuaTable_Impl : virtual public LuaTable {
+class LuaTable_Impl : public LuaTable {
 	lua_State * m_L;
 
 public:
@@ -122,70 +165,35 @@ public:
        Lua Interface
 ============================================
 */
-struct LuaInterface_Impl : public virtual LuaInterface {
-	std::string m_last_error;
-	std::map<std::string, ScriptContainer> m_scripts;
+class LuaInterface_Impl : public virtual LuaInterface {
+public:
+	LuaInterface_Impl();
+	virtual ~LuaInterface_Impl();
+
+	virtual void interpret_string(std::string);
+	virtual const std::string & get_last_error() const {return m_last_error;}
+
+	virtual void register_scripts
+		(FileSystem &, const std::string&, const std::string&);
+	virtual std::string register_script
+		(FileSystem &, const std::string&, const std::string&);
+	virtual ScriptContainer & get_scripts_for(std::string ns) {
+		return m_scripts[ns];
+	}
+
+	virtual std::unique_ptr<LuaTable> run_script(std::string, std::string);
+	virtual std::unique_ptr<LuaTable> run_script
+		(FileSystem &, std::string, std::string);
+	virtual std::unique_ptr<LuaTable> get_hook(std::string name);
 
 protected:
 	lua_State * m_L;
 
-	/*
-	 * Private functions
-	 */
-	private:
-		int m_check_for_errors(int);
-		bool m_filename_to_short(const std::string &);
-		bool m_is_lua_file(const std::string &);
-
-	public:
-		LuaInterface_Impl();
-		virtual ~LuaInterface_Impl();
-
-		virtual void interpret_string(std::string);
-		virtual const std::string & get_last_error() const {return m_last_error;}
-
-		virtual void register_scripts
-			(FileSystem &, const std::string&, const std::string&);
-		virtual std::string register_script
-			(FileSystem &, const std::string&, const std::string&);
-		virtual ScriptContainer & get_scripts_for(std::string ns) {
-			return m_scripts[ns];
-		}
-
-		virtual std::unique_ptr<LuaTable> run_script(std::string, std::string);
-		virtual std::unique_ptr<LuaTable> run_script
-			(FileSystem &, std::string, std::string);
-		virtual std::unique_ptr<LuaTable> get_hook(std::string name);
+private:
+	std::string m_last_error;
+	std::map<std::string, ScriptContainer> m_scripts;
 };
 
-
-/*************************
- * Private functions
- *************************/
-int LuaInterface_Impl::m_check_for_errors(int rv) {
-	if (rv) {
-		std::string err = luaL_checkstring(m_L, -1);
-		lua_pop(m_L, 1);
-		throw LuaError(err);
-	}
-	return rv;
-}
-
-bool LuaInterface_Impl::m_filename_to_short(const std::string & s) {
-	return s.size() < 4;
-}
-bool LuaInterface_Impl::m_is_lua_file(const std::string & s) {
-	std::string ext = s.substr(s.size() - 4, s.size());
-	// std::transform fails on older system, therefore we use an explicit loop
-	for (uint32_t i = 0; i < ext.size(); i++) {
-#ifndef _MSC_VER
-		ext[i] = std::tolower(ext[i]);
-#else
-		ext[i] = tolower(ext[i]);
-#endif
-	}
-	return (ext == ".lua");
-}
 
 /*************************
  * Public functions
@@ -263,7 +271,7 @@ void LuaInterface_Impl::register_scripts
 		(filenameset_t::iterator i = scripting_files.begin();
 		 i != scripting_files.end(); ++i)
 	{
-		if (m_filename_to_short(*i) or not m_is_lua_file(*i))
+		if (too_short_for_extension(*i) or not is_lua_file(*i))
 			continue;
 
 		register_script(fs, ns, *i);
@@ -272,7 +280,7 @@ void LuaInterface_Impl::register_scripts
 
 void LuaInterface_Impl::interpret_string(std::string cmd) {
 	int rv = luaL_dostring(m_L, cmd.c_str());
-	m_check_for_errors(rv);
+	check_return_value_for_errors(m_L, rv);
 }
 
 	std::unique_ptr<LuaTable> LuaInterface_Impl::run_script
@@ -304,8 +312,8 @@ void LuaInterface_Impl::interpret_string(std::string cmd) {
 
 	const std::string & s = m_scripts[ns][name];
 
-	m_check_for_errors
-		(luaL_loadbuffer(m_L, s.c_str(), s.size(), (ns + ":" + name).c_str()) ||
+	check_return_value_for_errors
+		(m_L, luaL_loadbuffer(m_L, s.c_str(), s.size(), (ns + ":" + name).c_str()) ||
 		 lua_pcall(m_L, 0, 1, 0)
 	);
 
@@ -338,38 +346,14 @@ std::unique_ptr<LuaTable> LuaInterface_Impl::get_hook(std::string name) {
 	return std::unique_ptr<LuaTable>(new LuaTable_Impl(m_L));
 }
 
-/*
- * ===========================
- * LuaEditorGameBaseInterface_Impl
- * ===========================
- */
-struct LuaEditorGameBaseInterface_Impl : public LuaInterface_Impl
-{
-	LuaEditorGameBaseInterface_Impl(Widelands::Editor_Game_Base * g);
-	virtual ~LuaEditorGameBaseInterface_Impl() {}
-};
-
-LuaEditorGameBaseInterface_Impl::LuaEditorGameBaseInterface_Impl
-	(Widelands::Editor_Game_Base * g)
-		: LuaInterface_Impl()
-{
-	LuaBases::luaopen_wlbases(m_L);
-	LuaMap::luaopen_wlmap(m_L);
-	LuaUi::luaopen_wlui(m_L);
-
-	// Push the editor game base
-	lua_pushlightuserdata(m_L, static_cast<void *>(g));
-	lua_setfield(m_L, LUA_REGISTRYINDEX, "egbase");
-}
-
 
 /*
  * ===========================
  * LuaEditorInterface_Impl
  * ===========================
  */
-struct LuaEditorInterface_Impl : public LuaEditorGameBaseInterface_Impl
-{
+class LuaEditorInterface_Impl : public LuaInterface_Impl {
+public:
 	LuaEditorInterface_Impl(Widelands::Editor_Game_Base * g);
 	virtual ~LuaEditorInterface_Impl() {}
 
@@ -377,10 +361,8 @@ private:
 	EditorFactory m_factory;
 };
 
-LuaEditorInterface_Impl::LuaEditorInterface_Impl
-	(Widelands::Editor_Game_Base * g) :
-LuaEditorGameBaseInterface_Impl(g)
-{
+LuaEditorInterface_Impl::LuaEditorInterface_Impl(Widelands::Editor_Game_Base * g) {
+	setup_for_editor_and_game(m_L, g);
 	LuaRoot::luaopen_wlroot(m_L, true);
 	LuaEditor::luaopen_wleditor(m_L);
 
@@ -396,9 +378,10 @@ LuaEditorGameBaseInterface_Impl(g)
  * LuaGameInterface
  * ===========================
  */
-struct LuaGameInterface_Impl : public LuaEditorGameBaseInterface_Impl,
+class LuaGameInterface_Impl : public LuaInterface_Impl,
 	public virtual LuaGameInterface
 {
+public:
 	LuaGameInterface_Impl(Widelands::Game * g);
 	virtual ~LuaGameInterface_Impl() {}
 
@@ -464,9 +447,9 @@ static int L_math_random(lua_State * L) {
 
 }
 
-LuaGameInterface_Impl::LuaGameInterface_Impl(Widelands::Game * g) :
-	LuaEditorGameBaseInterface_Impl(g)
-{
+LuaGameInterface_Impl::LuaGameInterface_Impl(Widelands::Game * g) {
+	setup_for_editor_and_game(m_L, g);
+
 	// Overwrite math.random
 	lua_getglobal(m_L, "math");
 	lua_pushcfunction(m_L, L_math_random);
