@@ -32,42 +32,43 @@
  * =======================================
  */
 static void m_instantiate_new_lua_class(lua_State * L) {
-	lua_getfield(L, -1, "module");
-	const std::string module = luaL_checkstring(L, -1);
-	lua_pop(L, 1);
+	assert(lua_gettop(L) == 0);  // S:
 
-	lua_getfield(L, -1, "class");
-	const std::string klass = luaL_checkstring(L, -1);
-	lua_pop(L, 1);
-
-	log("#sirver Unpersisting: %s:%s\n", module.c_str(), klass.c_str());
+	std::string module, klass;
+	UNPERS_STRING("module", module);
+	UNPERS_STRING("class", klass);
 
 	// get this classes instantiator
-	lua_getglobal(L, "wl"); // table wl
+	lua_getglobal(L, "wl"); //  S: wl
 	if (module != "")
-		lua_getfield(L, -1, module.c_str()); // table wl module
+		lua_getfield(L, -1, module.c_str()); // S: wl module
 	else
-		lua_pushvalue(L, -1); // table wl wl
+		lua_pushvalue(L, -1); // S: wl wl
 
 	const std::string instantiator = "__" + klass;
-	lua_getfield(L, -1, instantiator.c_str()); // table wl module func
+	lua_getfield(L, -1, instantiator.c_str()); // S: wl module func
 
 	// Hopefully this is a function!
 	luaL_checktype(L, -1, LUA_TFUNCTION);
 
-	lua_call(L, 0, 1);
+	lua_call(L, 0, 1);  // S: wl module luna_obj
+
+	lua_remove(L, -2); // S: wl luna_obj
+	lua_remove(L, -2); // S: luna_obj
+
+	assert(lua_gettop(L) == 1);
 }
 
-static LunaClass ** m_get_new_empty_user_data(lua_State * L) {
-	m_instantiate_new_lua_class(L);
+static LunaClass** m_get_new_empty_user_data(lua_State * L) {
+	assert(lua_gettop(L) == 0);  // S:
 
-	lua_pushint32(L, 0); // table wl module? lua_obj int
-	lua_gettable(L, -2); // table wl module? lua_obj obj
+	m_instantiate_new_lua_class(L); // S: luna_obj
 
-	LunaClass ** obj = static_cast<LunaClass ** >(lua_touserdata(L, - 1));
-	lua_pop(L, 1); // table wl module lua_obj
-	lua_remove(L, -2); // table wl lua_obj
-	lua_remove(L, -2); // table lua_obj
+	lua_pushint32(L, 0); // luna_obj int
+	lua_gettable(L, -2); // luna_obj userdata
+
+	LunaClass** obj = static_cast<LunaClass**>(lua_touserdata(L, -1));
+	lua_pop(L, 1); // luna_obj
 
 	return obj;
 }
@@ -79,19 +80,17 @@ static LunaClass ** m_get_new_empty_user_data(lua_State * L) {
  */
 
 /*
- * Expects a table on the stack. Calls
- * the instantiator for this object and fills it with
- * information from the table via its __unpersist function
+ * This is the closure that is used to persist our own classes. It will be called
+ * by eris while unpersisting. It will call the instantiator for this object
+ * and fill it with information from the table (the upvalue for the closure)
+ * via its __unpersist function.
  */
-// NOCOM(#sirver): rename, this is now a normal blubby
-int luna_restore_object(lua_State * L) {
-	// NOCOM(#sirver): maybe remove and instead fix the macros to use upvalueindex directly?
-	lua_pushvalue(L, lua_upvalueindex(1));  // table
-	LunaClass ** obj = m_get_new_empty_user_data(L); // table luna_obj
+int luna_unpersisting_closure(lua_State * L) {
+	assert(lua_gettop(L) == 0);
+
+	LunaClass ** obj = m_get_new_empty_user_data(L); // S: luna_obj
 
 	(*obj)->__unpersist(L);
-
-	lua_remove(L, -2);  // S: luna_obj
 
 	return 1;
 }

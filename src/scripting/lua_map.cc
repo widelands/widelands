@@ -985,15 +985,15 @@ const PropertyType<L_MapObject> L_MapObject::Properties[] = {
 };
 
 void L_MapObject::__persist(lua_State * L) {
-		Map_Map_Object_Saver & mos = *get_mos(L);
-		Game & game = get_game(L);
+	Map_Map_Object_Saver & mos = *get_mos(L);
+	Game & game = get_game(L);
 
-		uint32_t idx = 0;
-		if (m_ptr && m_ptr->get(game))
-			idx = mos.get_object_file_index(*m_ptr->get(game));
+	uint32_t idx = 0;
+	if (m_ptr && m_ptr->get(game))
+		idx = mos.get_object_file_index(*m_ptr->get(game));
 
-		PERS_UINT32("file_index", idx);
-	}
+	PERS_UINT32("file_index", idx);
+}
 void L_MapObject::__unpersist(lua_State * L) {
 	uint32_t idx;
 	UNPERS_UINT32("file_index", idx);

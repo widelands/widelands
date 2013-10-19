@@ -29,7 +29,7 @@
 #include "scripting/c_utils.h"
 #include "scripting/eris/lua.hpp"
 
-int luna_restore_object(lua_State * L);
+int luna_unpersisting_closure(lua_State * L);
 
 /**
  * Descriptions for the Properties/Methods that should be available to Lua
@@ -252,7 +252,7 @@ int m_persist(lua_State * const L) {
 	(*obj)->__persist(L);
 	assert(lua_gettop(L) == 2); // S: user_obj table
 
-	lua_pushcclosure(L, &luna_restore_object, 1);
+	lua_pushcclosure(L, &luna_unpersisting_closure, 1);
 	assert(lua_gettop(L) == 2); // S: user_obj closure
 
 	return 1;

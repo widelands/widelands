@@ -40,6 +40,25 @@
 #include "scripting/lua_ui.h"
 #include "scripting/persistence.h"
 
+namespace {
+
+// Calls 'method_to_call' with argument 'name'. This expects that this will
+// return a table with registered functions in it. If 'register_globally' is
+// true, this will also do name = <table> globally.
+void open_lua_library
+	(lua_State* L, const std::string& name, lua_CFunction method_to_call, bool register_globally) {
+	lua_pushcfunction(L, method_to_call);  // S: function
+	lua_pushstring(L, name); // S: function name
+	lua_call(L, 1, 1); // S: module_table
+
+	if (register_globally) {
+		lua_setglobal(L, name.c_str()); // S:
+	} else {
+		lua_pop(L, 1); // S:
+	}
+}
+
+}  // namespace
 
 /*
 ============================================
@@ -168,23 +187,6 @@ bool LuaInterface_Impl::m_is_lua_file(const std::string & s) {
 	return (ext == ".lua");
 }
 
-namespace {
-
-	// NOCOM(#sirver): move and document
-void load_library
-	(lua_State* L, const std::string& name, lua_CFunction method_to_call, bool register_globally) {
-	lua_pushcfunction(L, method_to_call);  // S: function
-	lua_pushstring(L, name); // S: function name
-	lua_call(L, 1, 1); // S: module_table
-
-	if (register_globally) {
-		lua_setglobal(L, name.c_str()); // S:
-	} else {
-		lua_pop(L, 1); // S:
-	}
-}
-
-}  // namespace
 /*************************
  * Public functions
  *************************/
@@ -192,17 +194,17 @@ LuaInterface_Impl::LuaInterface_Impl() : m_last_error("") {
 	m_L = luaL_newstate();
 
 	// Open the Lua libraries
-	load_library(m_L, "", luaopen_base, false);
-	load_library(m_L, LUA_TABLIBNAME, luaopen_table, true);
-	load_library(m_L, LUA_STRLIBNAME, luaopen_string, true);
-	load_library(m_L, LUA_MATHLIBNAME, luaopen_math, true);
-	load_library(m_L, LUA_DBLIBNAME, luaopen_debug, true);
-	load_library(m_L, LUA_COLIBNAME, luaopen_coroutine, true);
+	open_lua_library(m_L, "", luaopen_base, false);
+	open_lua_library(m_L, LUA_TABLIBNAME, luaopen_table, true);
+	open_lua_library(m_L, LUA_STRLIBNAME, luaopen_string, true);
+	open_lua_library(m_L, LUA_MATHLIBNAME, luaopen_math, true);
+	open_lua_library(m_L, LUA_DBLIBNAME, luaopen_debug, true);
+	open_lua_library(m_L, LUA_COLIBNAME, luaopen_coroutine, true);
 
 #ifndef NDEBUG
-	load_library(m_L, LUA_LOADLIBNAME, luaopen_package, true);
-	load_library(m_L, LUA_IOLIBNAME, luaopen_io, true);
-	load_library(m_L, LUA_OSLIBNAME, luaopen_os, true);
+	open_lua_library(m_L, LUA_LOADLIBNAME, luaopen_package, true);
+	open_lua_library(m_L, LUA_IOLIBNAME, luaopen_io, true);
+	open_lua_library(m_L, LUA_OSLIBNAME, luaopen_os, true);
 #endif
 
 	// Push the instance of this class into the registry
@@ -510,6 +512,9 @@ void LuaGameInterface_Impl::read_global_env
 	(Widelands::FileRead & fr, Widelands::Map_Map_Object_Loader & mol,
 	 uint32_t size)
 {
+	// Clean out the garbage before loading.
+	lua_gc(m_L, LUA_GCCOLLECT, 0);
+
 	assert(lua_gettop(m_L) == 0); // S:
 	unpersist_object(m_L, fr, mol, size);
 	assert(lua_gettop(m_L) == 1); // S: unpersisted_object
@@ -537,16 +542,27 @@ void LuaGameInterface_Impl::read_global_env
 	}
 
 	lua_pop(m_L, 1); // pop the table returned by unpersist_object
+
+	// Clean out the garbage before returning.
+	lua_gc(m_L, LUA_GCCOLLECT, 0);
 }
 
 uint32_t LuaGameInterface_Impl::write_global_env
 	(Widelands::FileWrite & fw, Widelands::Map_Map_Object_Saver & mos)
 {
+	// Clean out the garbage before writing.
+	lua_gc(m_L, LUA_GCCOLLECT, 0);
+
 	// Empty table + object to persist on the stack Stack
 	lua_newtable(m_L);
 	lua_rawgeti(m_L, LUA_REGISTRYINDEX, LUA_RIDX_GLOBALS);
 
-	return persist_object(m_L, fw, mos);
+	uint32_t nwritten = persist_object(m_L, fw, mos);
+
+	// Garbage collect once more, so we do not return unnecessary stuff.
+	lua_gc(m_L, LUA_GCCOLLECT, 0);
+
+	return nwritten;
 }
 
 /*

@@ -1,12 +1,11 @@
-Our scripting support contains the stripped down essentials of pluto[1]. You
-find the complete source and README of pluto on the github repo from one of
-it's authors Rob Hoelz at [2]. Our version of pluto has been heavily modified
-to create system agnostic files and to work with the widelands file streaming.
-The Widelands Team wishes to expresses total and complete gratitude to the
-authors of Pluto for making it public domain. 
+This directory contains a verbatim copy of Eris by Florian Nücke.
 
-[1] http://luaforge.net/projects/pluto/
-[2] http://github.com/hoelzro/pluto
+URL: https://github.com/fnuecke/eris
+VERSION: 8746276c5dc8f81086c2687a3bb50ce1560abfb4
 
-NOCOM(#sirver): add in Eris version number.
+We use this for heavy persistence and it also brings with it the Lua version
+that we use in Widelands. The Widelands Team wishes to expresses total and
+complete gratitude to the authors of Eris for making it available under the MIT
+License. 
+
    -- SirVer, in behalf of the Widelands Team

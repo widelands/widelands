@@ -84,6 +84,9 @@ uint32_t LuaCoroutine_Impl::write
 	(lua_State * parent, Widelands::FileWrite & fw,
 	 Widelands::Map_Map_Object_Saver & mos)
 {
+	// Clean out the garbage before we write this.
+	lua_gc(m_L, LUA_GCCOLLECT, 0);
+
 	fw.Unsigned8(COROUTINE_DATA_PACKET_VERSION);
 
 	// The current numbers of arguments on the stack
@@ -94,7 +97,12 @@ uint32_t LuaCoroutine_Impl::write
 	lua_pushthread(m_L);
 	lua_xmove (m_L, parent, 1);
 
-	return persist_object(parent, fw, mos);
+	uint32_t nwritten = persist_object(parent, fw, mos);
+
+	// Clean out the garbage again.
+	lua_gc(m_L, LUA_GCCOLLECT, 0);
+
+	return nwritten;
 }
 
 void LuaCoroutine_Impl::read
@@ -120,6 +128,8 @@ void LuaCoroutine_Impl::read
 	lua_pushthread(m_L);
 	m_idx = luaL_ref(m_L, LUA_REGISTRYINDEX);
 
+	// Clean out the garbage again.
+	lua_gc(m_L, LUA_GCCOLLECT, 0);
 }
 
 /*

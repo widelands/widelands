@@ -19,16 +19,14 @@
 
 #include "scripting/persistence.h"
 
+#include <memory>
+
 #include "log.h"
 #include "logic/widelands_fileread.h"
 #include "logic/widelands_filewrite.h"
 #include "scripting/c_utils.h"
+#include "scripting/eris.h"
 #include "scripting/luna_impl.h"
-
-// NOCOM(#sirver): ugly.
-extern "C" {
-#include "scripting/eris/eris.h"
-}
 
 /*
  * ========================================================================
@@ -38,6 +36,11 @@ extern "C" {
 
 namespace {
 
+struct LuaReaderHelper {
+	std::unique_ptr<char []> data;
+	size_t data_len;
+};
+
 int LuaWriter(lua_State* /* L */, const void* data, size_t len, void* userdata) {
 	Widelands::FileWrite* fw = static_cast<Widelands::FileWrite*>(userdata);
 
@@ -45,15 +48,11 @@ int LuaWriter(lua_State* /* L */, const void* data, size_t len, void* userdata) 
 	return 0;
 }
 
-// NOCOM(#sirver): Very inefficient - But we cannot know how much to read beforehand. right now.
-// // NOCOM(#sirver): this also leaks memory - the data block is never freed.
 const char* LuaReader(lua_State* /* L */, void* userdata, size_t* bytes_read) {
-	Widelands::FileRead* fr = static_cast<Widelands::FileRead*>(userdata);
+	LuaReaderHelper* helper = static_cast<LuaReaderHelper*>(userdata);
 
-	char* block = new char[1];
-
-	*bytes_read = fr->Data(block, 1);
-	return block;
+	*bytes_read = helper->data_len;
+	return helper->data.get();
 }
 
 }  // namespace
@@ -189,7 +188,7 @@ uint32_t persist_object
 	uint32_t i = 1;
 
 	// First, the restore function for __persist.
-	lua_pushcfunction(L, &luna_restore_object);
+	lua_pushcfunction(L, &luna_unpersisting_closure);
 	lua_pushuint32(L, i++);
 	lua_settable(L, 1);
 
@@ -238,7 +237,7 @@ void unpersist_object
 
 	// Luna restore (for persistence).
 	lua_pushuint32(L, i++);
-	lua_pushcfunction(L, &luna_restore_object);
+	lua_pushcfunction(L, &luna_unpersisting_closure);
 	lua_settable(L, 1);
 
 	m_add_iterator_function_to_not_unpersist(L, "pairs", i++);
@@ -248,10 +247,12 @@ void unpersist_object
 		m_add_object_to_not_unpersist(L, m_persistent_globals[j], i++);
 	}
 
-	size_t cpos = fr.GetPos();
-	eris_undump(L, &LuaReader, &fr);
-	uint32_t nread = fr.GetPos() - cpos;
-	assert(nread == size);
+	LuaReaderHelper helper;
+	helper.data_len = size;
+	helper.data.reset(new char[size]);
+	fr.Data(helper.data.get(), size);
+
+	eris_undump(L, &LuaReader, &helper);
 
 	lua_remove(L, -2); // remove the globals table
 
