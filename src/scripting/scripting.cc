@@ -108,58 +108,54 @@ void setup_for_editor_and_game(lua_State* L, Widelands::Editor_Game_Base * g) {
        Lua Table
 ============================================
 */
-class LuaTable_Impl : public LuaTable {
-	lua_State * m_L;
+LuaTable::LuaTable(lua_State * L) : m_L(L) {}
 
-public:
-		LuaTable_Impl(lua_State * L) : m_L(L) {}
+LuaTable::~LuaTable() {
+	lua_pop(m_L, 1);
+}
 
-		virtual ~LuaTable_Impl() {
-			lua_pop(m_L, 1);
-		}
-
-		virtual std::string get_string(std::string s) {
-			lua_getfield(m_L, -1, s.c_str());
-			if (lua_isnil(m_L, -1)) {
-				lua_pop(m_L, 1);
-				throw LuaTableKeyError(s);
-			}
-			if (not lua_isstring(m_L, -1)) {
-				lua_pop(m_L, 1);
-				throw LuaError(s + "is not a string value.");
-			}
-			std::string rv = lua_tostring(m_L, -1);
-			lua_pop(m_L, 1);
-
-			return rv;
-		}
-
-	virtual LuaCoroutine * get_coroutine(std::string s) {
-		lua_getfield(m_L, -1, s.c_str());
-
-		if (lua_isnil(m_L, -1)) {
-				lua_pop(m_L, 1);
-				throw LuaTableKeyError(s);
-		}
-		if (lua_isfunction(m_L, -1)) {
-			// Oh well, a function, not a coroutine. Let's turn it into one
-			lua_State * t = lua_newthread(m_L);
-			lua_pop(m_L, 1); // Immediately remove this thread again
-
-			lua_xmove(m_L, t, 1); // Move function to coroutine
-			lua_pushthread(t); // Now, move thread object back
-			lua_xmove(t, m_L, 1);
-		}
-
-		if (not lua_isthread(m_L, -1)) {
-			lua_pop(m_L, 1);
-			throw LuaError(s + "is not a function value.");
-		}
-		LuaCoroutine * cr = new LuaCoroutine_Impl(luaL_checkthread(m_L, -1));
-		lua_pop(m_L, 1); // Remove coroutine from stack
-		return cr;
+std::string LuaTable::get_string(std::string s) {
+	lua_getfield(m_L, -1, s.c_str());
+	if (lua_isnil(m_L, -1)) {
+		lua_pop(m_L, 1);
+		throw LuaTableKeyError(s);
 	}
-};
+	if (not lua_isstring(m_L, -1)) {
+		lua_pop(m_L, 1);
+		throw LuaError(s + "is not a string value.");
+	}
+	std::string rv = lua_tostring(m_L, -1);
+	lua_pop(m_L, 1);
+
+	return rv;
+}
+
+LuaCoroutine * LuaTable::get_coroutine(std::string s) {
+	lua_getfield(m_L, -1, s.c_str());
+
+	if (lua_isnil(m_L, -1)) {
+			lua_pop(m_L, 1);
+			throw LuaTableKeyError(s);
+	}
+	if (lua_isfunction(m_L, -1)) {
+		// Oh well, a function, not a coroutine. Let's turn it into one
+		lua_State * t = lua_newthread(m_L);
+		lua_pop(m_L, 1); // Immediately remove this thread again
+
+		lua_xmove(m_L, t, 1); // Move function to coroutine
+		lua_pushthread(t); // Now, move thread object back
+		lua_xmove(t, m_L, 1);
+	}
+
+	if (not lua_isthread(m_L, -1)) {
+		lua_pop(m_L, 1);
+		throw LuaError(s + "is not a function value.");
+	}
+	LuaCoroutine * cr = new LuaCoroutine_Impl(luaL_checkthread(m_L, -1));
+	lua_pop(m_L, 1); // Remove coroutine from stack
+	return cr;
+}
+
 /*
 ============================================
        Lua Interface
@@ -323,7 +319,7 @@ void LuaInterface_Impl::interpret_string(std::string cmd) {
 	}
 	if (not lua_istable(m_L, -1))
 		throw LuaError("Script did not return a table!");
-	return std::unique_ptr<LuaTable>(new LuaTable_Impl(m_L));
+	return std::unique_ptr<LuaTable>(new LuaTable(m_L));
 }
 
 /*
@@ -343,7 +339,7 @@ std::unique_ptr<LuaTable> LuaInterface_Impl::get_hook(std::string name) {
 	}
 	lua_remove(m_L, -2);
 
-	return std::unique_ptr<LuaTable>(new LuaTable_Impl(m_L));
+	return std::unique_ptr<LuaTable>(new LuaTable(m_L));
 }
 
 

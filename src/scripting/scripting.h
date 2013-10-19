@@ -81,10 +81,14 @@ public:
  */
 class LuaTable {
 public:
-	virtual ~LuaTable() {}
+	LuaTable(lua_State* L);
+	~LuaTable();
 
-	virtual std::string get_string(std::string) = 0;
-	virtual LuaCoroutine * get_coroutine(std::string) = 0;
+	std::string get_string(std::string);
+	LuaCoroutine * get_coroutine(std::string);
+
+private:
+	lua_State * m_L;
 };
 
 /*
