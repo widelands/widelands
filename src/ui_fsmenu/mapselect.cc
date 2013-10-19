@@ -50,7 +50,7 @@ Fullscreen_Menu_MapSelect::Fullscreen_Menu_MapSelect
 // Text labels
 	m_title
 		(this,
-		 get_w() / 2, get_h() * 7 / 50,
+		 get_w() / 2, get_h() / 10,
 		 _("Choose a map"),
 		 UI::Align_HCenter),
 	m_label_load_map_as_scenario

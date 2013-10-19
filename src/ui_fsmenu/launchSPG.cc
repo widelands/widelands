@@ -54,17 +54,17 @@ Fullscreen_Menu_LaunchSPG::Fullscreen_Menu_LaunchSPG
 		 _("Select map"), std::string(), false, false),
 	m_wincondition
 		(this, "win_condition",
-		 get_w() * 7 / 10, get_h() * 4 / 10, m_butw, m_buth,
+		 get_w() * 7 / 10, get_h() * 4 / 10 + m_buth, m_butw, m_buth,
 		 g_gr->images().get("pics/but1.png"),
 		 "", std::string(), false, false),
 	m_back
 		(this, "back",
-		 get_w() * 7 / 10, get_h() * 9 / 20, m_butw, m_buth,
+		 get_w() * 7 / 10, get_h() * 17 / 20, m_butw, m_buth,
 		 g_gr->images().get("pics/but0.png"),
 		 _("Back"), std::string(), true, false),
 	m_ok
 		(this, "ok",
-		 get_w() * 7 / 10, get_h() * 1 / 2, m_butw, m_buth,
+		 get_w() * 7 / 10, get_h() * 9 / 10, m_butw, m_buth,
 		 g_gr->images().get("pics/but2.png"),
 		 _("Start game"), std::string(), false, false),
 
@@ -75,31 +75,32 @@ Fullscreen_Menu_LaunchSPG::Fullscreen_Menu_LaunchSPG
 		 _("Launch Game"), UI::Align_HCenter),
 	m_mapname
 		(this,
-		 get_w() * 7 / 10 + m_butw / 2, get_h() * 5 / 20,
+		 get_w() * 7 / 10 + m_butw / 2, get_h() * 53 / 200 - 15,
 		 std::string(), UI::Align_HCenter),
 	m_name
 		(this,
-		 get_w() * 1 / 25, get_h() * 53 / 200,
+		 get_w() * 1 / 25, get_h() * 53 / 200 - 15,
 		 _("Player's name"), UI::Align_Left),
 	m_type
 		(this,
-		 get_w() * 19 / 100, get_h() * 53 / 200,
+		 // (Element x) + (PlayerDescriptionGroup x)  + border
+		 ((get_w()*16/25)*35/125) + (get_w()/25) + 2, get_h() * 53 / 200 - 15,
 		 _("Player's type"), UI::Align_Left),
 	m_team
 		(this,
-		 get_w() * 31 / 100, get_h() * 53 / 200,
+		 ((get_w()*16/25)*35/125) + (get_w()/25) + 2, get_h() * 53 / 200,
 		 _("Team"), UI::Align_Left),
 	m_tribe
 		(this,
-		 get_w() * 36 / 100, get_h() * 53 / 200,
+		 ((get_w()*16/25)*80/125) + (get_w()/25) + 2, get_h() * 53 / 200 - 15,
 		 _("Player's tribe"), UI::Align_Left),
 	m_init
 		(this,
-		 get_w() * 51 / 100, get_h() * 53 / 200,
+		 ((get_w()*16/25)*55/125) + (get_w()/25) + 2, get_h() * 53 / 200,
 		 _("Start type"), UI::Align_Left),
 	m_wincondition_type
 		(this,
-		 get_w() * 7 / 10 + (m_butw / 2), get_h() * 7 / 20,
+		 get_w() * 7 / 10 + (m_butw / 2), get_h() * 7 / 20 + m_buth,
 		 _("Type of game"), UI::Align_HCenter),
 
 // Variables and objects used in the menu
@@ -146,7 +147,7 @@ Fullscreen_Menu_LaunchSPG::Fullscreen_Menu_LaunchSPG
 	m_back.set_font(font_small());
 	m_ok.set_font(font_small());
 
-	uint32_t y = get_h() / 4;
+	uint32_t y = get_h() * 3 / 10 - m_buth;
 	char posIco[42];
 	for (uint32_t i = 0; i < MAX_PLAYERS; ++i) {
 		sprintf(posIco, "pics/fsel_editor_set_player_0%i_pos.png", i + 1);
@@ -162,8 +163,9 @@ Fullscreen_Menu_LaunchSPG::Fullscreen_Menu_LaunchSPG
 		m_players[i] =
 			new PlayerDescriptionGroup
 				(this,
-				 get_w() / 25, y, get_w() * 16 / 25, get_h() * 17 / 500,
+				 get_w() / 25, y, get_w() * 16 / 25, get_h() * 17 / 500 * 2,
 				 settings, i, font_small());
+		y += m_buth/1.17;
 	}
 }
 
