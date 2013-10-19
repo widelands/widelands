@@ -55,9 +55,9 @@ struct MapOrSaveSelectionWindow : public UI::Window {
 		center_to_parent();
 
 		uint32_t y     = get_inner_h() / 10;
-		uint32_t space = get_inner_w() / 40;
-		uint32_t butw  = get_inner_w() * 3 / 10;
-		uint32_t buth  = get_inner_h() * 8 / 10;
+		uint32_t space = y;
+		uint32_t butw  = get_inner_w() - 2 * space;
+		uint32_t buth  = (get_inner_h() - 2 * space) / 5;
 		UI::Button * btn = new UI::Button
 			(this, "map",
 			 space, y, butw, buth,
@@ -70,7 +70,7 @@ struct MapOrSaveSelectionWindow : public UI::Window {
 
 		btn = new UI::Button
 			(this, "saved_game",
-			 2 * space + butw, y, butw, buth,
+			 space, y + buth + space, butw, buth,
 			 g_gr->images().get("pics/but0.png"),
 			 _("Saved game"), _("Select a saved game"), true, false);
 		btn->sigclicked.connect
@@ -80,7 +80,7 @@ struct MapOrSaveSelectionWindow : public UI::Window {
 
 		btn = new UI::Button
 			(this, "cancel",
-			 3 * space + 2 * butw, y, butw, buth,
+			 space + butw / 4, y + 3 * buth + 2 * space, butw / 2, buth,
 			 g_gr->images().get("pics/but1.png"),
 			 _("Cancel"), _("Cancel selection"), true, false);
 		btn->sigclicked.connect
@@ -312,7 +312,7 @@ void Fullscreen_Menu_LaunchMPG::win_condition_update() {
 /// Opens a popup window to select a map or saved game
 void Fullscreen_Menu_LaunchMPG::change_map_or_save() {
 	MapOrSaveSelectionWindow selection_window
-		(this, m_ctrl, get_w() / 2, get_h() / 20, font_small());
+		(this, m_ctrl, get_w() / 3, get_h() / 4, font_small());
 	switch (selection_window.run()) {
 		case 1:
 			select_map();
