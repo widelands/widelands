@@ -536,7 +536,8 @@ Ware_Index Tribe_Descr::safe_ware_index(const std::string & warename) const {
 		return result;
 	else
 		// If this point is reached, the defined ware is neither defined as normal ware nor as a compatibility.
-		throw game_data_error("tribe %1$s does not define ware type \"%2$s\"", name().c_str(), warename.c_str());
+		throw game_data_error
+			("tribe %1$s does not define ware type \"%2$s\"", name().c_str(), warename.c_str());
 }
 Ware_Index Tribe_Descr::safe_ware_index(const char * const warename) const {
 	if (Ware_Index const result = ware_index(warename))

@@ -1040,7 +1040,9 @@ void NetHost::send(ChatMessage msg)
 				s.Unsigned8(1);
 				s.String(msg.recipient);
 				s.send(d->clients.at(clientnum).sock);
-				dedicatedlog("[Host]: personal chat: from %1$s to %2$s\n", msg.sender.c_str(), msg.recipient.c_str());
+				dedicatedlog
+					("[Host]: personal chat: from %1$s to %2$s\n",
+					 msg.sender.c_str(), msg.recipient.c_str());
 			} else {
 				std::string fail = "Failed to send message: Recipient \"";
 				fail += msg.recipient + "\" could not be found!";
@@ -1249,7 +1251,10 @@ void NetHost::handle_dserver_command(std::string cmdarray, std::string sender)
 			if (sh.save_game(*d->game, savename, error))
 				c.msg = _("Game successfully saved!");
 			else
-				c.msg = (format(_("Could not save the game to the file \"%1$s\"! (%2$s)")) % savename % error).str();
+				c.msg =
+					(format(_("Could not save the game to the file \"%1$s\"! (%2$s)"))
+					 % savename % error)
+					 .str();
 			send(c);
 			delete error;
 		}
@@ -2817,7 +2822,9 @@ void NetHost::handle_packet(uint32_t const i, RecvPacket & r)
 		uint32_t part = r.Unsigned32();
 		std::string x = r.String();
 		if (x != file->md5sum) {
-			dedicatedlog("[Host]: File transfer checksum missmatch %1$s != %2$s\n", x.c_str(), file->md5sum.c_str());
+			dedicatedlog
+				("[Host]: File transfer checksum missmatch %1$s != %2$s\n",
+				 x.c_str(), file->md5sum.c_str());
 			return; // Surely the file was changed, so we cancel here.
 		}
 		if (part >= file->parts.size())

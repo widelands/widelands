@@ -70,7 +70,7 @@ d(new PlayerDescriptionGroupImpl)
 		(boost::bind(&PlayerDescriptionGroup::enable_player, this, _1));
 	d->btnPlayerType = new UI::Button
 		(this, "player_type",
-		 xplayertype, 0, xplayertribe - xplayertype - 2, h/2,
+		 xplayertype, 0, xplayertribe - xplayertype - 2, h / 2,
 		 g_gr->images().get("pics/but1.png"),
 		 std::string(), std::string(),
 		 true, false);
@@ -79,7 +79,7 @@ d(new PlayerDescriptionGroupImpl)
 	d->btnPlayerType->set_font(font);
 	d->btnPlayerTeam = new UI::Button
 		(this, "player_team",
-		 xplayerteam, h/2, xplayerinit - xplayerteam - 2, h/2,
+		 xplayerteam, h / 2, xplayerinit - xplayerteam - 2, h / 2,
 		 g_gr->images().get("pics/but1.png"),
 		 std::string(), std::string(),
 		 true, false);
@@ -88,7 +88,7 @@ d(new PlayerDescriptionGroupImpl)
 	d->btnPlayerTeam->set_font(font);
 	d->btnPlayerTribe = new UI::Button
 		(this, "player_tribe",
-		 xplayertribe, 0, w - xplayertribe, h/2,
+		 xplayertribe, 0, w - xplayertribe, h / 2,
 		 g_gr->images().get("pics/but1.png"),
 		 std::string(), std::string(),
 		 true, false);
@@ -97,7 +97,7 @@ d(new PlayerDescriptionGroupImpl)
 	d->btnPlayerTribe->set_font(font);
 	d->btnPlayerInit = new UI::Button
 		(this, "player_initialization",
-		 xplayerinit, h/2, w - xplayerinit, h/2,
+		 xplayerinit, h / 2, w - xplayerinit, h / 2,
 		 g_gr->images().get("pics/but1.png"),
 		 std::string(), _("Initialization"),
 		 true, false);

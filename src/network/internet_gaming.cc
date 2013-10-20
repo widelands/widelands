@@ -430,10 +430,17 @@ void InternetGaming::handle_packet(RecvPacket & packet)
 		else if (cmd == IGPCMD_TIME) {
 			// Client received the server time
 			time_offset = boost::lexical_cast<int>(packet.String()) - time(0);
-			dedicatedlog(ngettext("InternetGaming: Server time offset is %u second.", 
-			        "InternetGaming: Server time offset is %u seconds.", time_offset), time_offset);
-			std::string temp = (boost::format(ngettext("Server time offset is %u second.", 
-			        "Server time offset is %u seconds.", time_offset)) % time_offset).str();
+			dedicatedlog
+				(ngettext
+					("InternetGaming: Server time offset is %u second.",
+				 	 "InternetGaming: Server time offset is %u seconds.", time_offset),
+				 time_offset);
+			std::string temp =
+				(boost::format
+					(ngettext("Server time offset is %u second.",
+			        	 "Server time offset is %u seconds.", time_offset))
+				 % time_offset)
+				 .str();
 			formatAndAddChat("", "", true, temp);
 		}
 

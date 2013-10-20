@@ -17,8 +17,9 @@
  *
  */
 
-#include <boost/format.hpp>
 #include "logic/worker.h"
+
+#include <boost/format.hpp>
 
 #include "economy/economy.h"
 #include "economy/flag.h"

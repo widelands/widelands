@@ -84,19 +84,19 @@ Fullscreen_Menu_LaunchSPG::Fullscreen_Menu_LaunchSPG
 	m_type
 		(this,
 		 // (Element x) + (PlayerDescriptionGroup x)  + border
-		 ((get_w()*16/25)*35/125) + (get_w()/25) + 2, get_h() * 53 / 200 - 15,
+		 ((get_w() * 16 / 25) * 35 / 125) + (get_w() / 25) + 2, get_h() * 53 / 200 - 15,
 		 _("Player's type"), UI::Align_Left),
 	m_team
 		(this,
-		 ((get_w()*16/25)*35/125) + (get_w()/25) + 2, get_h() * 53 / 200,
+		 ((get_w() * 16 / 25) * 35 / 125) + (get_w() / 25) + 2, get_h() * 53 / 200,
 		 _("Team"), UI::Align_Left),
 	m_tribe
 		(this,
-		 ((get_w()*16/25)*80/125) + (get_w()/25) + 2, get_h() * 53 / 200 - 15,
+		 ((get_w() * 16 / 25) * 80 / 125) + (get_w() / 25) + 2, get_h() * 53 / 200 - 15,
 		 _("Player's tribe"), UI::Align_Left),
 	m_init
 		(this,
-		 ((get_w()*16/25)*55/125) + (get_w()/25) + 2, get_h() * 53 / 200,
+		 ((get_w() * 16 / 25) * 55 / 125) + (get_w() / 25) + 2, get_h() * 53 / 200,
 		 _("Start type"), UI::Align_Left),
 	m_wincondition_type
 		(this,
@@ -165,7 +165,7 @@ Fullscreen_Menu_LaunchSPG::Fullscreen_Menu_LaunchSPG
 				(this,
 				 get_w() / 25, y, get_w() * 16 / 25, get_h() * 17 / 500 * 2,
 				 settings, i, font_small());
-		y += m_buth/1.17;
+		y += m_buth / 1.17;
 	}
 }
 

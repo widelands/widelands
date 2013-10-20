@@ -20,6 +20,7 @@
 #include "ui_fsmenu/loadreplay.h"
 
 #include <boost/format.hpp>
+
 #include "game_io/game_loader.h"
 #include "game_io/game_preload_data_packet.h"
 #include "graphic/graphic.h"

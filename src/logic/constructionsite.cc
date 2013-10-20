@@ -88,7 +88,9 @@ std::string ConstructionSite::get_statistics_string()
 {
 	unsigned int percent = (get_built_per64k() * 100) >> 16;
 	std::string perc_s =
-		(boost::format("<font color=%s>%s</font>") % UI_FONT_CLR_DARK_HEX % (boost::format(_("%1$i%% built")) % percent).str()).str();
+		(boost::format("<font color=%s>%s</font>")
+		 % UI_FONT_CLR_DARK_HEX % (boost::format(_("%1$i%% built")) % percent).str())
+		 .str();
 	return perc_s;
 }
 
