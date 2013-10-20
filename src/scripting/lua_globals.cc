@@ -19,6 +19,7 @@
 
 #include "scripting/lua_globals.h"
 
+#include <boost/format.hpp>
 #include <lua.hpp>
 
 #include "build_info.h"
@@ -52,6 +53,64 @@ access to other scripts in other locations, localisation features and more.
  *                         MODULE FUNCTIONS
  * ========================================================================
  */
+
+/* RST
+.. function:: string.bformat
+
+	Not really a global function. But we add a method to string built in type in
+	Lua that has similar functionality to the built in string.format, but
+	instead uses boost::format. This allows for better control of the formatting
+	as well as reordering of arguments which is needed for proper localisation.
+
+   :returns: :const:`nil`
+*/
+static int L_string_bformat(lua_State * L) {
+	try {
+		boost::format fmt(luaL_checkstring(L, 1));
+		const int nargs = lua_gettop(L);
+
+		// Start with argument, the first is already consumed
+		for (int i = 2; i <= nargs; ++i) {
+			switch (lua_type(L, i)) {
+				case LUA_TNIL:
+					fmt % "nil";
+					break;
+
+				case LUA_TNUMBER:
+					{
+						int d = lua_tointeger(L, i);
+						if (d == 0 && !lua_isnumber(L, 1)) {
+							fmt % d;
+						} else {
+							fmt % luaL_checknumber(L, i);
+						}
+					}
+					break;
+
+				case LUA_TBOOLEAN:
+					fmt % luaL_checkboolean(L, i);
+					break;
+
+				case LUA_TSTRING:
+					fmt % luaL_checkstring(L, i);
+					break;
+
+				case LUA_TTABLE:
+				case LUA_TFUNCTION:
+				case LUA_TUSERDATA:
+				case LUA_TTHREAD:
+				case LUA_TLIGHTUSERDATA:
+					report_error(L, "Cannot format the given type %s at index %i", lua_typename(L, i), i);
+					break;
+			}
+		}
+
+		lua_pushstring(L, fmt.str());
+		return 1;
+	} catch (const boost::io::format_error& err) {
+		return report_error(L, "Error in bformat: %s", err.what());
+	}
+}
 /* RST
 	.. function:: set_textdomain(domain)
 
@@ -158,8 +217,14 @@ void luaopen_globals(lua_State * L) {
 	luaL_register(L, 0, globals);
 	lua_pop(L, 1);
 
+	// Also add in string.bformat to use boost::format instead, so that we get
+	// proper localisation.
+	lua_getglobal(L, "string");  // S: string_lib
+	lua_pushstring(L, "bformat");  // S: string_lib "bformat"
+	lua_pushcfunction(L, &L_string_bformat);  // S: string_lib "bformat" function
+	lua_settable(L, -3);  // S: string_lib
+	lua_pop(L, 1);
 }
 
 
 };
-
