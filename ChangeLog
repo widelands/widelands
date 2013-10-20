@@ -244,8 +244,7 @@
 - Fixed bug #1204144: Cursor Key Navigation in table not complete
 - Fixed bug #1204171: Can't select ware in ware statistics window
 - Fixed bug #1204199: Buildings and building statistics have different color groups for productivity
-- Fixed bug #1204226: FTBFS on Ubuntu 13.04
-                      (use of deleted function ‘void std::unique_ptr<_Tp [], _Dp>::reset(_Up))
+- Fixed bug #1204226: FTBFS on Ubuntu 13.04 fixed.
 - Fixed bug #1204462: Suggestion: widelands-daily should not only include bzr revision,
                       but also date/time in the package name
 - Fixed bug #1204481: Militarysite initialization
