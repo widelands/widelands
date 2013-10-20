@@ -437,7 +437,7 @@ m_fname(fname)
 	labels.push_back
 		(new UI::Textarea
 			(this,
-			 w * 6 / 15 + buth, buth / 3,
+			 w * 6 / 15 + buth, buth / 3 - 10,
 			 buth, buth));
 	labels.back()->set_text(_("Type"));
 	labels.back()->set_textstyle(tsmaller);
@@ -458,7 +458,7 @@ m_fname(fname)
 	labels.back()->set_text(_("Initialization"));
 	labels.back()->set_textstyle(tsmaller);
 
-	labels.push_back(new UI::Textarea(this, w - buth, buth / 3, buth, buth));
+	labels.push_back(new UI::Textarea(this, w - buth, buth / 3, buth, buth, UI::Align_Right));
 	labels.back()->set_text(_("Team"));
 	labels.back()->set_textstyle(tsmaller);
 

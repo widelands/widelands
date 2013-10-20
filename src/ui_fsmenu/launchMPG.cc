@@ -153,16 +153,17 @@ Fullscreen_Menu_LaunchMPG::Fullscreen_Menu_LaunchMPG
 		 std::string()),
 	m_clients
 		(this,
-		 get_w() / 10, get_h() / 10,
-		 _("Clients")),
+		 // (get_w() * 57 / 80) is the width of the MultiPlayerSetupGroup
+		 get_w() / 50, get_h() / 10, (get_w() * 57 / 80) / 3, get_h() / 10,
+		 _("Clients"), UI::Align_HCenter),
 	m_players
 		(this,
-		 get_w() / 2, get_h() / 10,
-		 _("Players")),
+		 get_w() / 50 + (get_w() * 57 / 80) * 6 / 15, get_h() / 10, (get_w() * 57 / 80) * 9 / 15, get_h() / 10,
+		 _("Players"), UI::Align_HCenter),
 	m_map
 		(this,
-		 get_w() * 8 / 10, get_h() / 10,
-		 _("Map")),
+		 get_w() * 37 / 50, get_h() / 10, m_butw, get_h() / 10,
+		 _("Map"), UI::Align_HCenter),
 	m_wincondition_type
 		(this,
 		 get_w() * 37 / 50 + (m_butw / 2), get_h() * 10 / 20,
