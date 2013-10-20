@@ -21,6 +21,7 @@
 
 #include <boost/format.hpp>
 #include <boost/lexical_cast.hpp>
+#include <libintl.h>
 
 #include "compile_diagnostics.h"
 #include "i18n.h"
@@ -818,4 +819,3 @@ void InternetGaming::formatAndAddChat(std::string from, std::string to, bool sys
 		ingame_system_chat.push_back(c);
 	}
 }
-

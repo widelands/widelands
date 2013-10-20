@@ -23,6 +23,7 @@
 
 #include <boost/format.hpp>
 #include <boost/lexical_cast.hpp>
+#include <libintl.h>
 #ifndef _WIN32
 #include <unistd.h> // for usleep
 #endif
