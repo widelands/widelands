@@ -20,6 +20,7 @@
 #include "scripting/lua_globals.h"
 
 #include <boost/format.hpp>
+#include <libintl.h>
 #include <lua.hpp>
 
 #include "build_info.h"
@@ -141,7 +142,7 @@ static int L_set_textdomain(lua_State * L) {
 
 		:arg str: text to translate.
 		:type str: :class:`string`
-		:returns: :const:`nil`
+		:returns: The translated string.
 */
 static int L__(lua_State * L) {
 	lua_getglobal(L, "__TEXTDOMAIN");
@@ -151,6 +152,38 @@ static int L__(lua_State * L) {
 		lua_pushstring(L, i18n::translate(luaL_checkstring(L, 1)));
 	} else {
 		lua_pushstring(L, i18n::translate(luaL_checkstring(L, 1)));
+	}
+	return 1;
+}
+
+/* RST
+.. function:: ngettext(msgid, msgid_plural, n)
+
+	A wrapper for the ngettext() function, needed for translations of numbered
+	strings.
+
+	:arg msgid: text to translate (singular)
+	:type msgid: :class:`string`
+	:arg msgid_plural: text to translate (plural)
+	:type msgid:_plural :class:`string`
+	:arg n: The number of elements.
+	:type n: An unsigned integer.
+
+	:returns: The translated string.
+*/
+// UNTESTED
+static int L_ngettext(lua_State * L) {
+	//  S: msgid msgid_plural n
+	const std::string msgid = luaL_checkstring(L, 1);
+	const std::string msgid_plural = luaL_checkstring(L, 2);
+	const uint32_t n = luaL_checkuint32(L, 3);
+
+	lua_getglobal(L, "__TEXTDOMAIN");
+	if (not lua_isnil(L, -1)) {
+		i18n::Textdomain dom(luaL_checkstring(L, -1));
+		lua_pushstring(L, ngettext(msgid.c_str(), msgid_plural.c_str(), n));
+	} else {
+		lua_pushstring(L, ngettext(msgid.c_str(), msgid_plural.c_str(), n));
 	}
 	return 1;
 }
@@ -209,6 +242,7 @@ const static struct luaL_reg globals [] = {
 	{"use", &L_use},
 	{"get_build_id", &L_get_build_id},
 	{"_", &L__},
+	{"ngettext", &L_ngettext},
 	{0, 0}
 };
 
