@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2013-09-15 17:41+0000\n"
-"PO-Revision-Date: 2013-10-12 18:51+0000\n"
+"PO-Revision-Date: 2013-10-21 22:04+0000\n"
 "Last-Translator: GunChleoc <Unknown>\n"
 "Language-Team: Fòram na Gàidhlig http://www.foramnagaidhlig.net\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-10-13 05:14+0000\n"
-"X-Generator: Launchpad (build 16799)\n"
+"X-Launchpad-Export-Date: 2013-10-22 04:38+0000\n"
+"X-Generator: Launchpad (build 16807)\n"
 "Language: gd\n"
 
 #: ../../campaigns/cconfig:64
@@ -47,6 +47,8 @@ msgid ""
 ">Where dat? A thousand miles from here.< [Porgy and Bess] You have to go "
 "long, long way to conquer all the islands. Good luck!"
 msgstr ""
+"Cà bheil e? Mìle mìle on a sheo! Feumaidh tu dol astar fada fada gus a h-"
+"uile eilean a cheannsachadh. Gura math a thèid leat!"
 
 #: ../../maps/Comet Island.wmf/elemental:9
 msgid ""
@@ -64,16 +66,21 @@ msgid ""
 "few months ago another tribe came over the mountains and settled down. And "
 "you are sure, that there is only enough place for one tribe."
 msgstr ""
+"Tha do threubh air a bhith a' còmhnaidh air an loch-deighe àlainn aonaranach "
+"seo o shean. Cha chuireadh duine sam bith dragh oirbh is dh'fhoghnadh na bha "
+"ann de stòrasan airson na treubha gu lèir, ach thàinig treubh eile thar nam "
+"beanntan o chionn beagan mhìosan airson tuineachadh. Tha thu cinnteach nach "
+"eil rum gu leòr ann ach airson treubha a-mhàin."
 
 #: ../../maps/Two frontiers.wmf/elemental:9
 msgid "A multiplayer-battle-map on a small circle-shaped island."
-msgstr ""
+msgstr "Mapa sabaid ioma-chluicheadair air eilean beag cruinn."
 
 #: ../../maps/Riverlands.wmf/elemental:9
 msgid ""
 "A mystical land, full of different landscapes, which are all crossed by a "
 "handful of big rivers."
-msgstr ""
+msgstr "Tìr rùnach le caochladh crutha-tìre le aibhnean mòra ann."
 
 #: ../../maps/MP Scenarios/Island Hopping.wmf/elemental:9
 msgid ""
@@ -89,10 +96,15 @@ msgid ""
 "are connected by ice and stone, setting an end to the peaceful coexistence "
 "of three tribes."
 msgstr ""
+"Às dèidh dreag a bhualadh is a' gheamhraidh a lean air, chaidh trì eileanan "
+"a cheangal ri chèile le deigh is clachan na chuir crìoch air an t-sìth eadar "
+"trì treubhan."
 
 #: ../../maps/Ice wars.wmf/elemental:11
 msgid "After autumn is winter. Some things are frozen, but not the war."
 msgstr ""
+"Thig an geamhradh às dèidh an fhoghair. Bidh iomad rud reòite ach cha bhi an "
+"cogadh."
 
 #: ../../maps/Kings and Queens.wmf/elemental:11
 msgid ""

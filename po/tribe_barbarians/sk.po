@@ -7,13 +7,13 @@ msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2013-09-15 17:41+0000\n"
-"PO-Revision-Date: 2013-10-18 12:51+0000\n"
+"PO-Revision-Date: 2013-10-21 15:30+0000\n"
 "Last-Translator: Miroslav Remák <Unknown>\n"
 "Language-Team: Prometheus <mmatej@yahoo.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-10-19 04:31+0000\n"
+"X-Launchpad-Export-Date: 2013-10-22 04:38+0000\n"
 "X-Generator: Launchpad (build 16807)\n"
 "X-Poedit-Country: Czech Republic\n"
 "X-Poedit-Language: czech\n"
@@ -92,7 +92,7 @@ msgid ""
 "when you have swallowed up your third one, it's time for the next shift!\""
 msgstr ""
 "\"Nech prvý zaženie hlad, druhý ťa upokojí; keď prehltneš tretí, je čas na "
-"ďalšiu smenu!\""
+"ďalšiu zmenu!\""
 
 #: ../../tribes/barbarians/battlearena/help.lua:12
 msgid ""
@@ -104,8 +104,8 @@ msgid ""
 "\"Oh how sweet is the source of life,<br> that comes down from the sky <br> "
 "and lets the earth drink.\""
 msgstr ""
-"\"Och, aký príjemný je zdroj života,<br> ktorý zíde z neba <br> a dá zemi "
-"napiť.\""
+"\"Och, aký príjemný je zdroj života,<br> ktorý schádza z neba <br> a dáva "
+"zemi napiť.\""
 
 #: ../../tribes/barbarians/deep_goldmine/help.lua:12
 #: ../../tribes/barbarians/deeper_goldmine/help.lua:12
@@ -2383,7 +2383,7 @@ msgstr "Taví železo."
 #: ../../tribes/barbarians/deep_oremine/help.lua:25
 #: ../../tribes/barbarians/deep_oremine/help.lua:26
 msgid "Snack"
-msgstr "Olovrant"
+msgstr "Desiata"
 
 #: ../../tribes/barbarians/axefactory/help.lua:28
 #: ../../tribes/barbarians/conf:118

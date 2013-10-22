@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2013-09-15 17:41+0000\n"
-"PO-Revision-Date: 2013-10-15 11:14+0000\n"
+"PO-Revision-Date: 2013-10-21 22:04+0000\n"
 "Last-Translator: GunChleoc <Unknown>\n"
 "Language-Team: Fòram na Gàidhlig http://www.foramnagaidhlig.net\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-10-16 04:33+0000\n"
-"X-Generator: Launchpad (build 16799)\n"
+"X-Launchpad-Export-Date: 2013-10-22 04:38+0000\n"
+"X-Generator: Launchpad (build 16807)\n"
 "Language: gd\n"
 
 #: ../../tribes/atlanteans/golden_tabard/conf:1
@@ -24,6 +24,9 @@ msgid ""
 "is used in the trainingscamp - together with food - to train soldiers from "
 "healthpoints level 0 to level 1."
 msgstr ""
+"Nì thu lèine òir de shnàth òir ann an taigh nam beart. Thèid a cleachdadh sa "
+"champa trèanaidh – le biadh – gus saighdearan a thrèanadh o phuingean-beatha "
+"leibheil 0 gu puingean-beatha leibheil 1."
 
 #: ../../tribes/atlanteans/ship/conf:1
 msgid "A sea-worthy ship"
@@ -34,6 +37,8 @@ msgid ""
 "A tabard and a light trident are the basic equipment for young soldiers. "
 "Tabards are produced in the weaving-mill."
 msgstr ""
+"'S e acainn bunasach nan saighdearan òga a th' anns an lèine is muirgheadh. "
+"Nì thu lèintean ann an taighean nam beart."
 
 #: ../../tribes/atlanteans/conf:58
 msgid "Advanced Shield"
@@ -52,6 +57,8 @@ msgid ""
 "As no Atlantean likes raw fish, smoking it in a smokery is the most common "
 "way to make it edible."
 msgstr ""
+"Is lugha air na h-Atlantaich iasg amh is thèid a thoiteadh ann an taigh-"
+"toitidh mar as trice ach an gabh e ithe."
 
 #: ../../tribes/atlanteans/conf:33
 msgid "Ashes"
@@ -85,6 +92,8 @@ msgstr "Taigh-faire"
 #: ../../tribes/atlanteans/bucket/conf:1
 msgid "Big buckets for the fish breeder - produced by the toolsmith."
 msgstr ""
+"Peilichean mòra airson an tàrmachair iasg a thèid an saothrachadh leis a' "
+"ghobha acainnean."
 
 #: ../../tribes/atlanteans/conf:61
 msgid "Blackroot"
@@ -103,6 +112,8 @@ msgid ""
 "Blackroot Flour is produced in mills out of blackroots. It is used in "
 "bakeries to make a tasty bread."
 msgstr ""
+"Thèid min-freumhaige a shaothrachadh à freumhagan ann am muileann. "
+"Cleachdaidh tu ann an taighean-fuine i gus aran blasta a dhèanamh."
 
 #: ../../tribes/atlanteans/conf:113
 msgid "Blackroot farmer"
@@ -134,6 +145,9 @@ msgid ""
 "processed in mills. The Atlanteans like their strong taste and use its flour "
 "for making bread."
 msgstr ""
+"Saothraichidh tu freumhagan ann an tuathanasan fhreumhagan is bheir thu dhan "
+"mhuileann iad an uairsin. Is toil leis na h-Atlantaich am blas làidir is "
+"cleachdaidh iad am min gus aran a dhèanamh."
 
 #: ../../tribes/atlanteans/conf:62
 msgid "Bread"
@@ -245,6 +259,8 @@ msgid ""
 "Cornflour is produced in a mill out of corn and is one of three parts of the "
 "Atlantean bread produced in bakeries."
 msgstr ""
+"Saothraichidh tu min-coirce à coirce ann am muileann is 's e seo aon dhe na "
+"trì pàirtean dhen aran a nì na h-Atlantaich sna taighean-fuine."
 
 #: ../../tribes/atlanteans/conf:192
 msgid "Crystal Mine"
@@ -329,6 +345,9 @@ msgid ""
 "smoked in a smokery before being delivered to mines, training sites and "
 "scouts."
 msgstr ""
+"'S e aon dhe na stòrasan bìdh as motha aig na h-Atlantaich a th' anns na h-"
+"èisg. Feumaidh tu an toiteadh ann an taigh-toitidh mus lìbhrig thu dha na "
+"mèinnean, làraichean-trèanaidh is rabhadairean iad."
 
 #: ../../tribes/atlanteans/conf:119
 msgid "Fisher"
@@ -381,6 +400,9 @@ msgid ""
 "in the smelting works. Gold is used by the armoursmithy, the weapon smithy "
 "and the goldweaver."
 msgstr ""
+"'S e stuth luachmhor a th' anns an òr. Gheibh thu à clach-òir e ann an "
+"ceàrdach leaghadair. Cleachdaidh an ceàrdach armachd, an ceàrdach arm is am "
+"figheadair-òir e."
 
 #: ../../tribes/atlanteans/goldore/conf:1
 msgid ""
@@ -454,6 +476,8 @@ msgid ""
 "Horses help to carry items at heavily used roads. They are raised in a horse "
 "farm."
 msgstr ""
+"Cuidichidh eich le giùlan nan nithean air rathaidean a tha 'gan cleachdadh "
+"gu tric. Togaidh tu ann an tuathanas each iad."
 
 #: ../../tribes/atlanteans/conf:122
 msgid "Hunter"
@@ -484,12 +508,16 @@ msgid ""
 "Iron is made out of iron ores in the smelting works. It is used in the "
 "toolsmithy, armoursmithy and weapon smithy."
 msgstr ""
+"Gheibh thu iarainn o chlach-iarainn ann an ceàrdach leaghadair. Cleachdaidh "
+"tu ann an ceàrdach acainnean, ceàrdach armachd is ceàrdach arm e."
 
 #: ../../tribes/atlanteans/ironore/conf:1
 msgid ""
 "Iron ores are mined in iron mines. They get smelted in a smelting works to "
 "retrieve the iron."
 msgstr ""
+"Tochlaidh tu clach-iarainn ann am mèinnean iarainn. Bheir seo iarainn dhut "
+"ma leaghas tu i ann an ceàrdach leaghadair."
 
 #: ../../tribes/atlanteans/conf:209
 msgid "Labyrinth"
