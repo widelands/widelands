@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2013-10-18 14:52+0000\n"
+"POT-Creation-Date: 2013-10-23 05:46+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -31,7 +31,7 @@ msgid ""
 "%i trees"
 msgstr ""
 
-#: ../../scripting/win_conditions/02_collectors.lua:120
+#: ../../scripting/win_conditions/02_collectors.lua:119
 msgid ""
 "%ih%02im"
 msgstr ""
@@ -83,12 +83,12 @@ msgid ""
 "Congratulations!"
 msgstr ""
 
-#: ../../scripting/win_conditions/03_territorial_time.lua:15
+#: ../../scripting/win_conditions/03_territorial_time.lua:16
 msgid ""
 "Each player or team tries to obtain more than half of the maps' area. The winner will be the player or the team that is able to keep that area for at least 20 minutes or the one with the most territory after 4 hours, whichever comes first."
 msgstr ""
 
-#: ../../scripting/win_conditions/03_territorial_lord.lua:15
+#: ../../scripting/win_conditions/03_territorial_lord.lua:16
 msgid ""
 "Each player or team tries to obtain more than half of the maps' area. The winner will be the player or the team that is able to keep that area for at least 20 minutes."
 msgstr ""
@@ -119,7 +119,7 @@ msgid ""
 "Player overview:"
 msgstr ""
 
-#: ../../scripting/win_conditions/02_collectors.lua:155
+#: ../../scripting/win_conditions/02_collectors.lua:154
 msgid ""
 "Points"
 msgstr ""
@@ -156,7 +156,7 @@ msgid ""
 "The game will end in %i minutes."
 msgstr ""
 
-#: ../../scripting/win_conditions/02_collectors.lua:124
+#: ../../scripting/win_conditions/02_collectors.lua:123
 msgid ""
 "The game will end in %s."
 msgstr ""
@@ -181,10 +181,13 @@ msgid ""
 "This is an endless game without rules. Fog of war is disabled."
 msgstr ""
 
-#: ../../scripting/win_conditions/02_collectors.lua:108
+#: ../../scripting/win_conditions/02_collectors.lua:107
 msgid ""
+"Total: %i point"
+msgid_plural ""
 "Total: %i points"
-msgstr ""
+msgstr[0] ""
+msgstr[1] ""
 
 #: ../../scripting/win_conditions/04_wood_gnome.lua:105
 msgid ""
@@ -206,7 +209,7 @@ msgid ""
 "You are the winner!"
 msgstr ""
 
-#: ../../scripting/win_conditions/02_collectors.lua:15
+#: ../../scripting/win_conditions/02_collectors.lua:16
 msgid ""
 "You get points for precious wares in your warehouses, the player with the highest number of wares at the end of 4 hours wins the game."
 msgstr ""

@@ -104,8 +104,7 @@ local function _calc_points(plr)
 			ware, value, count, lpoints
 		)
 	end
-	-- TODO needs ngettext
-	descr[#descr+1] = (_"Total: %i points"):format(points)
+	descr[#descr+1] = ngettext("Total: %i point", "Total: %i points", points):format(points)
 
 	return points, p(table.concat(descr, "\n"))
 end

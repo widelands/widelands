@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2013-10-18 14:52+0000\n"
+"POT-Creation-Date: 2013-10-23 05:46+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -86,12 +86,12 @@ msgid ""
 "* Build a forester's house to preserve the wood resources of this island."
 msgstr ""
 
-#: ../../campaigns/emp01.wmf/scripting/texts.lua:69
+#: ../../campaigns/emp01.wmf/scripting/texts.lua:70
 msgid ""
 "* Build a lumberjack's house at the red house symbol, south of your provisional headquarters. Cutting down enough trees for more buildings will take a while. You can speed the game up using PAGE UP and slow it down again with PAGE DOWN."
 msgstr ""
 
-#: ../../campaigns/emp01.wmf/scripting/texts.lua:153
+#: ../../campaigns/emp01.wmf/scripting/texts.lua:154
 msgid ""
 "* Build a lumberjack's house at the red point, south of your provisional headquarters. Cutting down enough trees for more buildings will take a while. You can speed the game up using PAGE UP and slow it down again with PAGE DOWN."
 msgstr ""

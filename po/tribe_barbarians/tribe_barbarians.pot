@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2013-10-18 14:52+0000\n"
+"POT-Creation-Date: 2013-10-23 05:46+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -2607,119 +2607,9 @@ msgid ""
 "The Axe is a basic weapon for the barbarians. All young soldiers are equipped with it."
 msgstr ""
 
-#: ../../tribes/barbarians/axefactory/help.lua:8
-msgid ""
-"The Barbarian Axefactory"
-msgstr ""
-
 #: ../../tribes/barbarians/axefactory/help.lua:16
 msgid ""
 "The Barbarian Axefactory is the intermediate production site in a series of three buildings. It is an upgrade from the Metalwork Shop but doesn't require additional qualification for the worker."
-msgstr ""
-
-#: ../../tribes/barbarians/bakery/help.lua:8
-msgid ""
-"The Barbarian Bakery"
-msgstr ""
-
-#: ../../tribes/barbarians/battlearena/help.lua:8
-msgid ""
-"The Barbarian Battle Arena"
-msgstr ""
-
-#: ../../tribes/barbarians/cattlefarm/help.lua:8
-msgid ""
-"The Barbarian Cattle Farm"
-msgstr ""
-
-#: ../../tribes/barbarians/coalmine/help.lua:8
-msgid ""
-"The Barbarian Coal Mine"
-msgstr ""
-
-#: ../../tribes/barbarians/deep_coalmine/help.lua:8
-msgid ""
-"The Barbarian Deep Coal Mine"
-msgstr ""
-
-#: ../../tribes/barbarians/deep_goldmine/help.lua:8
-msgid ""
-"The Barbarian Deep Gold Mine"
-msgstr ""
-
-#: ../../tribes/barbarians/deep_oremine/help.lua:8
-msgid ""
-"The Barbarian Deep Iron Ore Mine"
-msgstr ""
-
-#: ../../tribes/barbarians/deeper_coalmine/help.lua:8
-msgid ""
-"The Barbarian Deeper Coal Mine"
-msgstr ""
-
-#: ../../tribes/barbarians/deeper_goldmine/help.lua:8
-msgid ""
-"The Barbarian Deeper Gold Mine"
-msgstr ""
-
-#: ../../tribes/barbarians/deeper_oremine/help.lua:8
-msgid ""
-"The Barbarian Deeper Iron Ore Mine"
-msgstr ""
-
-#: ../../tribes/barbarians/farm/help.lua:8
-msgid ""
-"The Barbarian Farm"
-msgstr ""
-
-#: ../../tribes/barbarians/fernery/help.lua:8
-msgid ""
-"The Barbarian Fernery"
-msgstr ""
-
-#: ../../tribes/barbarians/fishers_hut/help.lua:8
-msgid ""
-"The Barbarian Fisher's Hut"
-msgstr ""
-
-#: ../../tribes/barbarians/gamekeepers_hut/help.lua:8
-msgid ""
-"The Barbarian Gamekeeper's Hut"
-msgstr ""
-
-#: ../../tribes/barbarians/goldmine/help.lua:8
-msgid ""
-"The Barbarian Gold Mine"
-msgstr ""
-
-#: ../../tribes/barbarians/granitemine/help.lua:8
-msgid ""
-"The Barbarian Granite Mine"
-msgstr ""
-
-#: ../../tribes/barbarians/hunters_hut/help.lua:8
-msgid ""
-"The Barbarian Hunter's Hut"
-msgstr ""
-
-#: ../../tribes/barbarians/oremine/help.lua:8
-msgid ""
-"The Barbarian Iron Ore Mine"
-msgstr ""
-
-#: ../../tribes/barbarians/lime_kiln/help.lua:8
-msgid ""
-"The Barbarian Limekiln"
-msgstr ""
-
-#: ../../tribes/barbarians/lumberjacks_hut/help.lua:8
-msgid ""
-"The Barbarian Lumberjack's Hut"
-msgstr ""
-
-#: ../../tribes/barbarians/metalworks/help.lua:8
-msgid ""
-"The Barbarian Metalwork Shop"
 msgstr ""
 
 #: ../../tribes/barbarians/metalworks/help.lua:16
@@ -2727,39 +2617,9 @@ msgid ""
 "The Barbarian Metalwork Shop is the basic production site in a series of three buildings and creates all the tools that Barbarians need. The others are for weapons."
 msgstr ""
 
-#: ../../tribes/barbarians/micro-brewery/help.lua:8
-msgid ""
-"The Barbarian Micro Brewery"
-msgstr ""
-
-#: ../../tribes/barbarians/quarry/help.lua:8
-msgid ""
-"The Barbarian Quarry"
-msgstr ""
-
-#: ../../tribes/barbarians/rangers_hut/help.lua:8
-msgid ""
-"The Barbarian Ranger's Hut"
-msgstr ""
-
-#: ../../tribes/barbarians/trainingscamp/help.lua:8
-msgid ""
-"The Barbarian Trainingscamp"
-msgstr ""
-
-#: ../../tribes/barbarians/warmill/help.lua:8
-msgid ""
-"The Barbarian War Mill"
-msgstr ""
-
 #: ../../tribes/barbarians/warmill/help.lua:16
 msgid ""
 "The Barbarian War Mill is their most advanced production site for weapons. As such it needs to be upgraded from an Axefactory."
-msgstr ""
-
-#: ../../tribes/barbarians/well/help.lua:8
-msgid ""
-"The Barbarian Well"
 msgstr ""
 
 #: ../../tribes/barbarians/well/help.lua:47
