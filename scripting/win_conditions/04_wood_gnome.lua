@@ -16,7 +16,7 @@ local wc_desc = _
 [[As wood gnome you like big forests, so your task is, to have more trees on
 your territory than any other player. The game will end after 4 hours of
 playing. The one with the most trees at that point will win the game.]]
-
+local wc_trees_owned = _"Trees owned"
 return {
 	name = wc_name,
 	description = wc_desc,
@@ -78,16 +78,17 @@ return {
 	end
 
 	local function _send_state()
+		set_textdomain("win_conditions")
 		local playerpoints = _calc_points()
-		-- TODO needs ngettext
-		local msg = (_"The game will end in %i minutes."):format(remaining_time)
+		local msg = (ngettext("The game will end in %i minute.", "The game will end in %i minutes.", remaining_time))
+				:format(remaining_time)
 		msg = msg .. "\n\n"
 		msg = msg .. game_status.body
 		for idx,plr in ipairs(plrs) do
 			msg = msg .. "\n"
-			-- TODO needs ngettext
-			local trees = (_"%i trees"):format(playerpoints[plr.number])
-			msg = msg ..  (_"%s has %s at the moment."):format(plr.name,playerpoints[plr.number])
+			local trees = (ngettext ("%i tree", "%i trees", playerpoints[plr.number]))
+					:format(playerpoints[plr.number])
+			msg = msg ..  (_"%1$s has %2$s at the moment."):bformat(plr.name,trees)
 		end
 
 		broadcast(plrs, game_status.title, msg)
@@ -102,7 +103,7 @@ return {
 	-- Install statistics hook
 	if hooks == nil then hooks = {} end
 	hooks.custom_statistic = {
-		name = _"Trees owned",
+		name = wc_trees_owned,
 		pic = "pics/genstats_trees.png",
 		calculator = function(p)
 			local pts = _calc_points(p)
@@ -137,14 +138,13 @@ return {
 	msg = msg .. game_status.body
 	for idx,plr in ipairs(plrs) do
 		msg = msg .. "\n"
-		-- TODO needs ngettext
-		local trees = (_"%i trees"):format(playerpoints[plr.number])
-		msg = msg ..  (_"%1s had %2s."):format(plr.name,trees)
+		local trees = (ngettext ("%i tree", "%i trees", playerpoints[plr.number])):format(playerpoints[plr.number])
+		msg = msg ..  (_"%1$s had %2$s."):bformat(plr.name,trees)
 	end
 	msg = msg .. "\n\n"
-	-- TODO needs ngettext
-	local trees = (_"%i trees"):format(playerpoints[points[#points][1].number])
-	msg = msg ..  (_"The winner is %1s with %2s."):format(points[#points][1].name, trees)
+	local trees = (ngettext ("%i tree", "%i trees", playerpoints[points[#points][1].number]))
+			:format(playerpoints[points[#points][1].number])
+	msg = msg ..  (_"The winner is %1$s with %2$s."):bformat(points[#points][1].name, trees)
 
 	local privmsg = ""
 	for i=1,#points-1 do

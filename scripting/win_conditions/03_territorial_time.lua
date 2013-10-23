@@ -18,6 +18,8 @@ local wc_desc = _ (
 	"that area for at least 20 minutes or the one with the most territory " ..
 	"after 4 hours, whichever comes first."
 )
+local wc_has_territory = _"%1$s has %2$3.0f%% of the land (%3$i of %4$i)."
+local wc_had_territory = _"%1$s had %2$3.0f%% of the land (%3$i of %4$i)."
 local team_str = _"Team %i"
 
 return {
@@ -174,14 +176,14 @@ return {
 				msg = msg .. "\n"
 				if (has_had == "has") then
 					msg = msg ..
-						(_("%s has %i%% of the land (%i of %i).")):format(
+						(wc_has_territory):bformat(
 							points[i][1],
 							_percent(points[i][2], #fields),
 							points[i][2],
 							#fields)
 				else
 					msg = msg ..
-						(_("%s had %i%% of the land (%i of %i).")):format(
+						(wc_had_territory):bformat(
 							points[i][1],
 							_percent(points[i][2], #fields),
 							points[i][2],
@@ -193,16 +195,20 @@ return {
 		end
 
 		function _send_state(points)
+			set_textdomain("win_conditions")
 			local msg1 = (_"%s owns more than half of the maps area."):format(currentcandidate)
 			msg1 = msg1 .. "\n"
-			-- TODO needs ngettext
-			msg1 = msg1 .. (_"You still got %i minutes to prevent a victory."):format(remaining_time / 60)
+			msg1 = msg1 .. (ngettext("You still got %i minute to prevent a victory.",
+						 "You still got %i minutes to prevent a victory.",
+						 remaining_time / 60))
+					:format(remaining_time / 60)
 
 			local msg2 = _"You own more than half of the maps area."
 			msg2 = msg2 .. "\n"
-			-- TODO needs ngettext
-			msg2 = msg2 .. (_"Keep it for %i more minutes to win the game."):format(remaining_time / 60)
-
+			msg2 = msg2 .. (ngettext("Keep it for %i more minute to win the game.",
+						 "Keep it for %i more minutes to win the game.",
+						 remaining_time / 60))
+					:format(remaining_time / 60)
 
 			for idx, p in ipairs(plrs) do
 				local msg = ""
@@ -213,11 +219,16 @@ return {
 					else
 						msg = msg .. msg1 .. "\n\n"
 					end
-					-- TODO needs ngettext
-					msg = msg .. (_"Otherwise the game will end in %i minutes."):format(remaining_max_time/60)
+					msg = msg .. (ngettext("Otherwise the game will end in %i minute.",
+							       "Otherwise the game will end in %i minutes.",
+							       remaining_max_time / 60))
+						:format(remaining_max_time / 60)
 				else
-					-- TODO needs ngettext
-					msg = msg .. (_"The game will end in %i minutes."):format(remaining_max_time/60)
+					msg = msg .. (ngettext("The game will end in %i minute.",
+							       "The game will end in %i minutes.",
+							       remaining_max_time / 60))
+						:format(remaining_max_time / 60)
+
 				end
 				msg = msg .. "\n\n"
 				msg = msg .. game_status.body

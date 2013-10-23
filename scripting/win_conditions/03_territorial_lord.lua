@@ -146,21 +146,25 @@ return {
 			end
 		end
 
-		-- TODO test this
 		function _send_state()
+			set_textdomain("win_conditions")
 			local candidate = currentcandidate
 			if candidateisteam then
 				candidate = (_"Team %i"):format(currentcandidate)
 			end
 			local msg1 = (_"%s owns more than half of the map's area."):format(candidate)
 			msg1 = msg1 .. "\n"
-			-- TODO needs ngettext
-			msg1 = msg1 .. (_"You still got %i minutes to prevent a victory."):format(remaining_time / 60)
+			msg1 = msg1 .. (ngettext("You still got %i minute to prevent a victory.",
+						 "You still got %i minutes to prevent a victory.",
+						 remaining_time / 60))
+					:format(remaining_time / 60)
 
 			local msg2 = _"You own more than half of the map's area."
 			msg2 = msg2 .. "\n"
-			-- TODO needs ngettext
-			msg2 = msg2 .. (_"Keep it for %i more minutes to win the game."):format(remaining_time / 60)
+			msg2 = msg2 .. (ngettext("Keep it for %i more minute to win the game.",
+						 "Keep it for %i more minutes to win the game.",
+						 remaining_time / 60))
+					:format(remaining_time / 60)
 
 			for idx, p in ipairs(plrs) do
 				if candidateisteam and currentcandidate == p.team

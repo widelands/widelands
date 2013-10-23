@@ -16,6 +16,7 @@ local wc_desc = _ (
 	"You get points for precious wares in your warehouses, the player with " ..
 	"the highest number of wares at the end of 4 hours wins the game."
 )
+local wc_points = _"Points"
 return {
 	name = wc_name,
 	description = wc_desc,
@@ -85,6 +86,7 @@ local point_table = {
 
 -- Calculate the momentary points for one player
 local function _calc_points(plr)
+	set_textdomain("win_conditions")
 	local bs = array_combine(
 		plr:get_buildings("headquarters"), plr:get_buildings("warehouse")
 	)
@@ -100,25 +102,25 @@ local function _calc_points(plr)
 		local lpoints = count * value
 		points = points + lpoints
 		-- TRANSLATORS: For example: "gold (3 P) x 4 = 12 P", P meaning "Points"
-		descr[#descr+1] = (_"  %s (%i P) x %i = %i P<br>"):format(
+		descr[#descr+1] = (_"  %1$s (%2$i P) x %3$i = %4$i P<br>"):bformat(
 			ware, value, count, lpoints
 		)
 	end
-	descr[#descr+1] = ngettext("Total: %i point", "Total: %i points", points):format(points)
-
+	descr[#descr+1] = (ngettext("Total: %i point", "Total: %i points", points)):format(points)
 	return points, p(table.concat(descr, "\n"))
 end
 
 -- Send all players the momentary game state
 local function _send_state(remaining_time, plrs)
+	set_textdomain("win_conditions")
 	local h = math.floor(remaining_time / 60)
 	local m = remaining_time % 60
 	local time = ""
 	if h > 0 then
 		-- TRANSLATORS: Context: "The game will end in %s."
-		time = (_"%ih%02im"):format(h,m)
+		time = (_"%1$ih%2$02im"):bformat(h,m)
 	else
-		time = ("%i minutes"):format(m)
+		time = (ngettext("%i minute", "%i minutes", m)):format(m)
 	end
 	local msg = p(_"The game will end in %s."):format(time)
 	msg = msg .. "\n\n"
@@ -151,7 +153,7 @@ end
 -- Instantiate the hook to calculate points
 if hooks == nil then hooks = {} end
 hooks.custom_statistic = {
-	name = _("Points"),
+	name = wc_points,
 	pic = "pics/genstats_points.png",
 	calculator = function(p)
 		local pts = _calc_points(p)
