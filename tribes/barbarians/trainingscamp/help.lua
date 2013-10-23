@@ -38,17 +38,17 @@ return {
 		text_line(_"Space required:",_"Big plot","pics/big.png") ..
 		text_line(_"Upgraded from:", "n/a") ..
 		rt(h3(_"Build Cost:")) ..
-		image_line("tribes/barbarians/gold/menu.png",4,p("4 " .. _"Gold")) ..
-		image_line("tribes/barbarians/thatchreed/menu.png",3,p("3 " .. _"Thatch Reed")) ..
-		image_line("tribes/barbarians/raw_stone/menu.png",4,p("4 " .. _"Raw Stone")) ..
-		image_line("tribes/barbarians/grout/menu.png",6,p("6 " .. _"Grout")) ..
-		image_line("tribes/barbarians/trunk/menu.png",6,p("6 " .. _"Trunk")) ..
+		help_building_line("barbarians", "gold", ngettext("%i Gold", "%i Gold", 4), 4) ..
+		help_building_line("barbarians", "thatchreed", ngettext("%i Thatch Reed", "%i Thatch Reeds", 3), 3) ..
+		help_building_line("barbarians", "grout", ngettext("%i Grout", "%i Grout", 6), 6) ..
+		help_building_line("barbarians", "raw_stone", ngettext("%i Raw Stone", "%i Raw Stones", 4), 4) ..
+		help_building_line("barbarians", "trunk", ngettext("%i Trunk", "%i Trunks", 6), 6) ..
 		rt(h3(_"Dismantle yields:")) ..
-		image_line("tribes/barbarians/gold/menu.png",2,p("2 " .. _"Gold")) ..
-		image_line("tribes/barbarians/thatchreed/menu.png",2,p("2 " .. _"Thatch Reed")) ..
-		image_line("tribes/barbarians/raw_stone/menu.png",2,p("2 " .. _"Raw Stone")) ..
-		image_line("tribes/barbarians/grout/menu.png",3,p("3 " .. _"Grout")) ..
-		image_line("tribes/barbarians/trunk/menu.png",3,p("3 " .. _"Trunk")) ..
+		help_building_line("barbarians", "gold", ngettext("%i Gold", "%i Gold", 2), 2) ..
+		help_building_line("barbarians", "thatchreed", ngettext("%i Thatch Reed", "%i Thatch Reeds", 2), 2) ..
+		help_building_line("barbarians", "grout", ngettext("%i Grout", "%i Grout", 3), 3) ..
+		help_building_line("barbarians", "raw_stone", ngettext("%i Raw Stone", "%i Raw Stones", 2), 2) ..
+		help_building_line("barbarians", "trunk", ngettext("%i Trunk", "%i Trunks", 3), 3) ..
 		text_line(_"Upgradeable to:","n/a") ..
 	--Workers Section
 		rt(h2(_"Workers")) ..

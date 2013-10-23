@@ -31,13 +31,13 @@ return {
 		text_line(_"Space required:",_"Big plot","pics/big.png") ..
 		text_line(_"Upgraded from:", "n/a") ..
 		rt(h3(_"Build Cost:")) ..
-		image_line("tribes/barbarians/blackwood/menu.png", 1, p("1 " .. _"Blackwood")) ..
-		image_line("tribes/barbarians/raw_stone/menu.png", 3, p("3 " .. _"Raw Stone")) ..
-		image_line("tribes/barbarians/trunk/menu.png", 4, p("4 " .. _"Trunk")) ..
+		help_building_line("barbarians", "blackwood", ngettext("%i Blackwood", "%i Blackwood", 1), 1) ..
+		help_building_line("barbarians", "raw_stone", ngettext("%i Raw Stone", "%i Raw Stones", 3), 3) ..
+		help_building_line("barbarians", "trunk", ngettext("%i Trunk", "%i Trunks", 4), 4) ..
 		rt(h3(_"Dismantle yields:")) ..
-		image_line("tribes/barbarians/blackwood/menu.png", 1, p("1 " .. _"Blackwood")) ..
-		image_line("tribes/barbarians/raw_stone/menu.png", 2, p("2 " .. _"Raw Stone")) ..
-		image_line("tribes/barbarians/trunk/menu.png", 2, p("2 " .. _"Trunk")) ..
+		help_building_line("barbarians", "blackwood", ngettext("%i Blackwood", "%i Blackwood", 1), 1) ..
+		help_building_line("barbarians", "raw_stone", ngettext("%i Raw Stone", "%i Raw Stones", 2), 2) ..
+		help_building_line("barbarians", "trunk", ngettext("%i Trunk", "%i Trunks", 2), 2) ..
 		text_line(_"Upgradeable to:","n/a") ..
 	--Workers Section
 		rt(h2(_"Workers")) ..

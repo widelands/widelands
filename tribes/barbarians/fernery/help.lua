@@ -30,11 +30,11 @@ return {
 		text_line(_"Space required:",_"Medium plot","pics/medium.png") ..
 		text_line(_"Upgraded from:", "n/a") ..
 		rt(h3(_"Build Cost:")) ..
-		image_line("tribes/barbarians/raw_stone/menu.png", 2, p("2 " .. _"Raw Stone")) ..
-		image_line("tribes/barbarians/trunk/menu.png", 5, p("5 " .. _"Trunk")) ..
+		help_building_line("barbarians", "raw_stone", ngettext("%i Raw Stone", "%i Raw Stones", 2), 2) ..
+		help_building_line("barbarians", "trunk", ngettext("%i Trunk", "%i Trunks", 5), 5) ..
 		rt(h3(_"Dismantle yields:")) ..
-		image_line("tribes/barbarians/raw_stone/menu.png", 1, p("1 " .. _"Raw Stone")) ..
-		image_line("tribes/barbarians/trunk/menu.png", 3, p("3 " .. _"Trunk")) ..
+		help_building_line("barbarians", "raw_stone", ngettext("%i Raw Stone", "%i Raw Stones", 1), 1) ..
+		help_building_line("barbarians", "trunk", ngettext("%i Trunk", "%i Trunks", 3), 3) ..
 		text_line(_"Upgradeable to:","n/a") ..
 	--Workers Section
 		rt(h2(_"Workers")) ..

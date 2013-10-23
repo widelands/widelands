@@ -45,17 +45,17 @@ return {
 		text_line(_"Space required:",_"Medium plot","pics/medium.png") ..
 		text_line(_"Upgraded from:", _"n/a") ..
 		rt(h3(_"Build Cost:")) ..
-		image_line("tribes/barbarians/blackwood/menu.png", 1, p("1 " .. _"Blackwood")) ..
-		image_line("tribes/barbarians/thatchreed/menu.png", 1, p("1 " .. _"Thatch Reed")) ..
-		image_line("tribes/barbarians/raw_stone/menu.png", 2, p("2 " .. _"Raw Stone")) ..
-		image_line("tribes/barbarians/grout/menu.png", 1, p("1 " .. _"Grout")) ..
-		image_line("tribes/barbarians/trunk/menu.png", 1, p("1 " .. _"Trunk")) ..
+		help_building_line("barbarians", "blackwood", ngettext("%i Blackwood", "%i Blackwood", 1), 1) ..
+		help_building_line("barbarians", "thatchreed", ngettext("%i Thatch Reed", "%i Thatch Reeds", 1), 1) ..
+		help_building_line("barbarians", "grout", ngettext("%i Grout", "%i Grout", 1), 1) ..
+		help_building_line("barbarians", "raw_stone", ngettext("%i Raw Stone", "%i Raw Stones", 2), 2) ..
+		help_building_line("barbarians", "trunk", ngettext("%i Trunk", "%i Trunks", 1), 1) ..
 		rt(h3(_"Dismantle yields:")) ..
-		image_line("tribes/barbarians/blackwood/menu.png", 1, p("1 " .. _"Blackwood")) ..
-		image_line("tribes/barbarians/thatchreed/menu.png", 1, p("1 " .. _"Thatch Reed")) ..
-		image_line("tribes/barbarians/raw_stone/menu.png", 1, p("1 " .. _"Raw Stone")) ..
-		image_line("tribes/barbarians/grout/menu.png", 1, p("1 " .. _"Grout")) ..
-		image_line("tribes/barbarians/trunk/menu.png", 1, p("1 " .. _"Trunk")) ..
+		help_building_line("barbarians", "blackwood", ngettext("%i Blackwood", "%i Blackwood", 1), 1) ..
+		help_building_line("barbarians", "thatchreed", ngettext("%i Thatch Reed", "%i Thatch Reeds", 1), 1) ..
+		help_building_line("barbarians", "grout", ngettext("%i Grout", "%i Grout", 1), 1) ..
+		help_building_line("barbarians", "raw_stone", ngettext("%i Raw Stone", "%i Raw Stones", 1), 1) ..
+		help_building_line("barbarians", "trunk", ngettext("%i Trunk", "%i Trunks", 1), 1) ..
 		text_line(_"Upgradeable to:",_"Axefactory","tribes/barbarians/axefactory/menu.png") ..
 	--Workers Section
 		rt(h2(_"Workers")) ..

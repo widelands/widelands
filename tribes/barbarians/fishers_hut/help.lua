@@ -34,9 +34,9 @@ return {
 		text_line(_"Space required:",_"Small plot","pics/small.png") ..
 		text_line(_"Upgraded from:", "n/a") ..
 		rt(h3(_"Build Cost:")) ..
-		image_line("tribes/barbarians/trunk/menu.png", 4, p("4 " .. _"Trunk")) ..
+		help_building_line("barbarians", "trunk", ngettext("%i Trunk", "%i Trunks", 4), 4) ..
 		rt(h3(_"Dismantle yields:")) ..
-		image_line("tribes/barbarians/trunk/menu.png", 2, p("2 " .. _"Trunk")) ..
+		help_building_line("barbarians", "trunk", ngettext("%i Trunk", "%i Trunks", 2), 2) ..
 		text_line(_"Upgradeable to:","n/a") ..
 	--Workers Section
 		rt(h2(_"Workers")) ..

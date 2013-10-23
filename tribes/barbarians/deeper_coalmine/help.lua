@@ -36,15 +36,14 @@ return {
 		text_line(_"Space required:",_"Mine plot","pics/mine.png") ..
 		text_line(_"Upgraded from:",_"Deep Coal Mine","tribes/barbarians/deep_coalmine/menu.png") ..
 		rt(h3(_"Upgrade cost:")) ..
-		image_line("tribes/barbarians/raw_stone/menu.png", 2, p("2 " .. _"Raw Stone")) ..
-		image_line("tribes/barbarians/trunk/menu.png", 4, p("4 " .. _"Trunk")) ..
+		help_building_line("barbarians", "raw_stone", ngettext("%i Raw Stone", "%i Raw Stones", 2), 2) ..
+		help_building_line("barbarians", "trunk", ngettext("%i Trunk", "%i Trunks", 4), 4) ..
 		rt(h3(_"Cost cumulative:")) ..
-		image_line("tribes/barbarians/raw_stone/menu.png", 6, p("6 " .. _"Raw Stone")) ..
-		image_line("tribes/barbarians/trunk/menu.png", 6, p("12 " .. _"Trunk")) ..
-		image_line("tribes/barbarians/trunk/menu.png", 6) ..
+		help_building_line("barbarians", "raw_stone", ngettext("%i Raw Stone", "%i Raw Stones", 6), 6) ..
+		help_building_line("barbarians", "trunk", ngettext("%i Trunk", "%i Trunks", 12), 12) ..
 		rt(h3(_"Dismantle yields:")) ..
-		image_line("tribes/barbarians/raw_stone/menu.png", 3, p("3 " .. _"Raw Stone")) ..
-		image_line("tribes/barbarians/trunk/menu.png", 6, p("6 " .. _"Trunk")) ..
+		help_building_line("barbarians", "raw_stone", ngettext("%i Raw Stone", "%i Raw Stones", 3), 3) ..
+		help_building_line("barbarians", "trunk", ngettext("%i Trunk", "%i Trunks", 6), 6) ..
 		text_line(_"Upgradeable to:","n/a") ..
 	--Workers Section
 		rt(h2(_"Workers")) ..

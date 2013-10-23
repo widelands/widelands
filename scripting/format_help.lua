@@ -82,3 +82,27 @@ function make_tabs_array(t1, t2)
      }
   }
 end
+
+-- RST
+-- .. help_building_line(tribe, material, material_str, number)
+--
+--    Creates an image_line with a number formatted string.
+--
+--    :arg tribe: name of tribe in the file system.
+--    :arg material: name of material in the file system.
+--    :arg material_str: containing number placeholder + name of material fetched with ngettext previously.
+--    :arg number: the number used for ngettext in material_str
+--    :returns: image_line.
+--
+function help_building_line(tribe, material, material_str, number)
+	local image = "tribes/" .. tribe .. "/" .. material .. "/menu.png"
+	if number <=6 then
+		return image_line(image,number,p(material_str:format(number)))
+	else
+		if number <=12 then
+			return image_line(image,6,p(material_str:format(number))) .. image_line(image, number-6)
+		else
+			return image_line(image,6,p(material_str:format(number))) .. image_line(image, 6) .. image_line(image, number-12)
+		end
+	end
+end
