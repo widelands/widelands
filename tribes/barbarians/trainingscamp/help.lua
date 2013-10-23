@@ -58,5 +58,5 @@ return {
 		text_line(_"Experience levels:", "n/a") ..
 	--Production Section
 		rt(h2(_"Production")) ..
-		text_line(_"Performance:", _"If all needed wares are delivered in time, a %1s can train one new soldier in %2s and %3s to the final level in %4s on average.":format(_"Trainingscamp",_"Attack",_"Hitpoints","4m40s"))
+		text_line(_"Performance:", _"If all needed wares are delivered in time, a %1$s can train one new soldier in %2$s and %3$s to the final level in %4$s on average.":bformat(_"Trainingscamp",_"Attack",_"Hitpoints",_"%1$im%2$is":bformat(4,40)))
 }
