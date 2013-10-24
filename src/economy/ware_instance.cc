@@ -314,6 +314,9 @@ void WareInstance::update(Game & game)
 	}
 
 	if (!loc) {
+		// Before dying, output as much information as we can.
+		log_general_info(game);
+
 		// If our location gets lost, our owner is supposed to destroy us
 		throw wexception("WARE(%u): WareInstance::update has no location\n", serial());
 	}
