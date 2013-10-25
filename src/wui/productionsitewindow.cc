@@ -19,6 +19,8 @@
 
 #include "wui/productionsitewindow.h"
 
+#include <libintl.h>
+
 #include "economy/request.h"
 #include "graphic/graphic.h"
 #include "logic/constructionsite.h"
@@ -76,8 +78,8 @@ ProductionSite_Window::ProductionSite_Window
 		m_worker_table = new UI::Table<uintptr_t>(worker_box, 0, 0, 0, 100);
 		m_worker_caps = new UI::Box(worker_box, 0, 0, UI::Box::Horizontal);
 
-		m_worker_table->add_column(150, _("Worker"));
-		m_worker_table->add_column(40, _("Exp"));
+		m_worker_table->add_column(150, (ngettext("Worker", "Workers", productionsite().descr().nr_working_positions())));
+		m_worker_table->add_column(60, _("Exp"));
 		m_worker_table->add_column(150, _("Next Level"));
 
 		for
@@ -102,8 +104,8 @@ ProductionSite_Window::ProductionSite_Window
 		get_tabs()->add
 			("workers", g_gr->images().get(pic_tab_workers),
 			 worker_box,
-			 productionsite().descr().nr_working_positions() > 1 ?
-			 _("Workers") : _("Worker"));
+			 (ngettext("Worker", "Workers", productionsite().descr().nr_working_positions()))
+			);
 		update_worker_table();
 	}
 }
