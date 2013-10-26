@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2013-09-15 19:41+0200\n"
-"PO-Revision-Date: 2013-10-17 23:28+0000\n"
+"PO-Revision-Date: 2013-10-25 19:45+0000\n"
 "Last-Translator: GunChleoc <Unknown>\n"
 "Language-Team: Fòram na Gàidhlig http://www.foramnagaidhlig.net\n"
 "MIME-Version: 1.0\n"
@@ -16,8 +16,8 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n==1 || n==11) ? 0 : (n==2 || n==12) ? 1 : "
 "(n > 2 && n < 20) ? 2 : 3;\n"
-"X-Launchpad-Export-Date: 2013-10-19 04:32+0000\n"
-"X-Generator: Launchpad (build 16807)\n"
+"X-Launchpad-Export-Date: 2013-10-26 05:13+0000\n"
+"X-Generator: Launchpad (build 16810)\n"
 "Language: gd\n"
 
 #: ../../src/computer_player.cc:38
@@ -3067,7 +3067,7 @@ msgstr "Saoghal:"
 #: ../../src/ui_fsmenu/loadgame.cc:97 ../../src/ui_fsmenu/loadreplay.cc:81
 #: ../../src/ui_fsmenu/mapselect.cc:88
 msgid "Players:"
-msgstr "Cluicheadairean:"
+msgstr "Cluichead.:"
 
 #: ../../src/ui_fsmenu/editor_mapselect.cc:81
 #: ../../src/ui_fsmenu/mapselect.cc:94
@@ -3515,11 +3515,11 @@ msgstr "Tagh geama air a shàbhaladh"
 #: ../../src/ui_fsmenu/loadgame.cc:87 ../../src/ui_fsmenu/loadreplay.cc:71
 #: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:57
 msgid "Map Name:"
-msgstr "Ainm a' mhapa:"
+msgstr "Mapa:"
 
 #: ../../src/ui_fsmenu/loadgame.cc:92 ../../src/ui_fsmenu/loadreplay.cc:76
 msgid "Gametime:"
-msgstr "Àm a' gheama:"
+msgstr "Àm:"
 
 #: ../../src/ui_fsmenu/loadgame.cc:105
 msgid "Minimap:"
@@ -3671,7 +3671,7 @@ msgstr "Seall còmhradh logaidh a-steach"
 #: ../../src/ui_fsmenu/multiplayer.cc:115
 #: ../../src/ui_fsmenu/netsetup_lan.cc:120 ../../src/wui/login_box.cc:74
 msgid "nobody"
-msgstr "gun ainm"
+msgstr "gun_ainm"
 
 #: ../../src/ui_fsmenu/netsetup_lan.cc:42
 msgid "Begin Network Game"
@@ -4035,7 +4035,7 @@ msgstr "Thoir às a chèile"
 
 #: ../../src/wui/buildingwindow.cc:279
 msgid "Returns:"
-msgstr "Tilleadh:"
+msgstr "Toradh:"
 
 #: ../../src/wui/buildingwindow.cc:311 ../../src/wui/buildingwindow.cc:514
 msgid "Hide workarea"
@@ -4068,7 +4068,7 @@ msgstr "Leabhar-eòlais bathar na treubha"
 
 #: ../../src/wui/encyclopedia_window.cc:84
 msgid "Consumed ware type(s)"
-msgstr "Seòrsa(ichean) de bhathar air a chaitheamh"
+msgstr "Bathar air a bheil feum"
 
 #: ../../src/wui/encyclopedia_window.cc:85
 msgid "Quantity"
