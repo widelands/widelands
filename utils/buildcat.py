@@ -26,7 +26,8 @@ import confgettext
 MAINPOTS = [( "maps/maps", [
                 "../../maps/*/elemental",
                 "../../maps/*/*/elemental",
-                "../../campaigns/cconfig"
+                "../../campaigns/cconfig",
+                "../../campaigns/*/elemental"
             ] ),
             ( "texts/texts", ["../../txts/license",
                           "../../txts/*.lua",
@@ -63,7 +64,7 @@ MAINPOTS = [( "maps/maps", [
 # with the name of the instance.
 ITERATIVEPOTS = [
     ("scenario_%(name)s/scenario_%(name)s", "campaigns/",
-         ["../../campaigns/%(name)s/e*",
+         ["../../campaigns/%(name)s/extra_data",
           "../../campaigns/%(name)s/objective",
           "../../campaigns/%(name)s/scripting/*.lua"
          ]

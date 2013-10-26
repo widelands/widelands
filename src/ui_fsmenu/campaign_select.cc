@@ -342,15 +342,6 @@ void Fullscreen_Menu_CampaignMapSelect::set_campaign(uint32_t const i) {
  */
 void Fullscreen_Menu_CampaignMapSelect::map_selected(uint32_t) {
 	campmapfile = m_list.get_selected();
-
-	// Load the maps textdomain to translate the strings from map
-	// Determine text domain
-	std::string tdname(campmapfile);
-	uint32_t i;
-	for (i = tdname.size(); i and tdname[i] != '/' and tdname[i] != '\\'; --i) {
-	}
-	tdname = "scenario_" + tdname.substr(i + 1);
-
 	Widelands::Map map;
 
 	std::unique_ptr<Widelands::Map_Loader> ml(map.get_correct_loader(campmapfile.c_str()));
@@ -362,7 +353,7 @@ void Fullscreen_Menu_CampaignMapSelect::map_selected(uint32_t) {
 	map.set_filename(campmapfile.c_str());
 	ml->preload_map(true);
 
-	i18n::Textdomain td(tdname);
+	i18n::Textdomain td("maps");
 	tamapname .set_text(_(map.get_name()));
 	taauthor  .set_text(map.get_author());
 	tamapdescr.set_text(_(map.get_description()));
