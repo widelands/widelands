@@ -5,34 +5,8 @@
 -- =========================
 -- Some formating functions
 -- =========================
--- Rich Text
-function rt(text_or_opts, text)
-   k = "<rt>"
-   if text then
-      k = ("<rt %s>"):format(text_or_opts)
-   else
-      text = text_or_opts
-   end
 
-   return k .. text .. "</rt>"
-end
-
--- Headings
-function h1(s)
-   return "<p font=DejaVuSerif font-size=18 font-weight=bold font-color=D1D1D1>"
-      ..  s .. "<br></p><p font-size=8> <br></p>"
-end
-
-function h2(s)
-   return "<p font=DejaVuSerif font-size=12 font-weight=bold font-color=D1D1D1>"
-      ..  s .. "<br></p><p font-size=4> <br></p>"
-end
-
--- Simple flowing text. One Paragraph
-function p(s)
-   return "<p line-spacing=3 font-size=12>" .. s .. "<br></p>" ..
-      "<p font-size=8> <br></p>"
-end
+use("aux", "formatting")
 
 -- =============
 -- Texts below

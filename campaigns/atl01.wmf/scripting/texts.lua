@@ -3,6 +3,16 @@
 -- =======================================================================
 
 use("aux", "formatting")
+use("aux", "format_scenario")
+
+-- Append an objective text with a header to a dialog box in a nice fashion.
+function new_objectives(...)
+   local s = ""
+   for idx,obj in ipairs{...} do
+	s = objective_header(ngettext("New Objective", "New Objectives", obj.number) , obj.body)
+   end
+   return s
+end
 
 function jundlina(title, text)
    return speech("map:princess.png", "2F9131", title, text)
@@ -23,24 +33,13 @@ function ostur(text)
    return speech("map:ostur.png", "375FFC", "Ostur", text)
 end
 
--- Append an objective text to a dialog box in a nice fashion.
-function new_objectives(...)
-   local s = rt(
-   "<p font=DejaVuSerif font-size=18 font-weight=bold font-color=D1D1D1>"
-   .. _"New Objectives" .. "</p>")
-
-   for idx,obj in ipairs{...} do
-      s = s .. obj.body
-   end
-   return s
-end
-
 -- =======================================================================
 --                                Objectives
 -- =======================================================================
 obj_ensure_build_wares_production = {
    name = "obj_ensure_build_wares_production",
    title = _ "Ensure the supply of build wares",
+   number = 6,
    body = objective_text(_"The supply of build wares", _
 [[Build a quarry, two woodcutter's houses, two forester's houses and a
 sawmill.]]
@@ -50,6 +49,7 @@ sawmill.]]
 obj_expand = {
    name = "obj_expand",
    title = _ "Expand your territory and explore the island",
+   number = 1,
    body = objective_text(_"Expand and Explore", _
 [[The island is huge and as long as we are not sure that we are alone
 here, we cannot relax. Explore and conquer it, this is the
@@ -60,6 +60,7 @@ only way to protect us from threats on the island and from Atlantis.]]
 obj_make_food_infrastructure = {
    name = "obj_make_food_infrastructure",
    title = _ "Establish a solid food production",
+   number = 10,
    body = objective_text(_"Establish a food production", _
 [[Food is very important for mines and military training areas. Establish
 a well working food environment by building at least one farm, one blackroot
@@ -85,6 +86,7 @@ will need at least two of those.<br><br>
 obj_spidercloth_production = {
    name = "obj_spidercloth_production",
    title = _ "Build a spiderfarm and a weaving mill",
+   number = 3,
    body = objective_text(_"Establish a spidercloth production", _
 [[The weavers produce spidercloth and tabards in the weaving-mill. Spidercloth
 is needed for the construction of some buildings and clothing while tabards
@@ -100,6 +102,7 @@ produced by the gold weaver out of gold.<br><br>
 obj_make_heavy_industry_and_mining = {
    name = "obj_make_heavy_industry_and_mining",
    title = _ "Build industry and mines",
+   number = 5,
    body = objective_text(_"Build industry and mines", _
 [[Iron ore, gold ore and coal are mined in the respective mines. The crystal mine
 is digging for crystal, quartz and diamond - all of them are rare materials and
@@ -117,6 +120,7 @@ tool smithy.<br><br>
 obj_make_training_buildings = {
    name = "obj_make_training_buildings",
    title = _"Build training buildings",
+   number = 2,
    body = objective_text(_"Build training buildings to improve your soldiers", _
 [[As all other tribes, the Atlanteans are also able to train soldiers: the
 dungeon trains attack - the major attribute of the Atlanteans - and the
@@ -128,6 +132,7 @@ industry are used to train better soldiers in the two training buildings.<br><br
 obj_horsefarm_and_warehouse = {
    name = "obj_horsefarm_and_warehouse",
    title = _"Build a warehouse and a horsefarm",
+   number = 2,
    body = objective_text(_"Build a warehouse and a horsefarm", _
 [[As your road network gets longer and more complicated, you should employ
 horses to help out your carriers. Horses are bred in horsefarms using water and
@@ -138,6 +143,7 @@ collapse.]])
 obj_build_ships = {
    name = "obj_build_ships",
    title = _ "Build 3 ships to escape from the island",
+   number = 1,
    body = objective_text(_"Escape from the island", _
 [[There is a lake at the top of the island. Build 3 ships in these waters
 and you might be able to rescue your people when the island is swallowed
@@ -591,7 +597,7 @@ of this island, the water rises faster by the hour. But we can make our escape
 now and start over in some country farther away... I expect a long journey, but
 we will find the land of Satul in the end. This is what I promised my people.
 And myself.]]
-      ) .. rt(h1(_ "Congratulations") .. p(_
+      ) .. rt("<p font-size=10> <br></p>" .. h1(_ "Congratulations") .. p(_
 [[You have won this mission. Continue with the next one or keep playing for
 as long as you like.]]
       )),
