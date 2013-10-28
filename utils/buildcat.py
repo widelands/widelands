@@ -66,7 +66,8 @@ ITERATIVEPOTS = [
     ("scenario_%(name)s/scenario_%(name)s", "campaigns/",
          ["../../campaigns/%(name)s/extra_data",
           "../../campaigns/%(name)s/objective",
-          "../../campaigns/%(name)s/scripting/*.lua"
+          "../../campaigns/%(name)s/scripting/*.lua",
+          "../../scripting/format_scenario.lua"
          ]
     ),
     ("map_%(name)s/map_%(name)s", "maps/",

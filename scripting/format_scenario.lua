@@ -72,12 +72,14 @@ end
 --    :returns: a rich text object that contains the formatted
 --       objective text & title.
 --
-function objective_header(title, body)
-   local s = rt("<p font-size=10> <br></p>" ..
+function new_objectives(...)
+   local s = ""
+   for idx,obj in ipairs{...} do
+   	s = rt("<p font-size=10> <br></p>" ..
 	   "<p font=DejaVuSerif font-size=18 font-weight=bold font-color=D1D1D1>"
-	   .. title .. "</p>")
-	   .. body
+	   .. ngettext("New Objective", "New Objectives", obj.number) .. "</p>")
+	   .. obj.body
+   end
    return s
 end
-
 

@@ -5,15 +5,6 @@
 use("aux", "formatting")
 use("aux", "format_scenario")
 
--- Append an objective text with a header to a dialog box in a nice fashion.
-function new_objectives(...)
-   local s = ""
-   for idx,obj in ipairs{...} do
-	s = objective_header(ngettext("New Objective", "New Objectives", obj.number) , obj.body)
-   end
-   return s
-end
-
 function lutius(title, text)
    return speech("map:Lutius.png", "2F9131", title, text)
 end
