@@ -85,7 +85,7 @@ Graphic::Graphic()
 	SDL_FreeSurface(s);
 }
 
-void Graphic::initialize(int32_t w, int32_t h, int32_t bpp, bool fullscreen, bool opengl) {
+void Graphic::initialize(int32_t w, int32_t h, bool fullscreen, bool opengl) {
 	cleanup();
 
 	// Set video mode using SDL. First collect the flags
@@ -104,16 +104,16 @@ void Graphic::initialize(int32_t w, int32_t h, int32_t bpp, bool fullscreen, boo
 		log("Graphics: Trying FULLSCREEN\n");
 	}
 
-	log("Graphics: Try to set Videomode %ux%u %uBit\n", w, h, bpp);
+	log("Graphics: Try to set Videomode %ux%u 32 Bit\n", w, h);
 	// Here we actually set the video mode
-	sdlsurface = SDL_SetVideoMode(w, h, bpp, flags);
+	sdlsurface = SDL_SetVideoMode(w, h, 32, flags);
 
 	// If we tried opengl and it was not successful try without opengl
 	if (!sdlsurface and opengl)
 	{
 		log("Graphics: Could not set videomode: %s, trying without opengl\n", SDL_GetError());
 		flags &= ~SDL_OPENGL;
-		sdlsurface = SDL_SetVideoMode(w, h, bpp, flags);
+		sdlsurface = SDL_SetVideoMode(w, h, 32, flags);
 	}
 
 	if (!sdlsurface)
@@ -355,11 +355,6 @@ int32_t Graphic::get_xres()
 int32_t Graphic::get_yres()
 {
 	return screen_->height();
-}
-
-int32_t Graphic::get_bpp()
-{
-	return m_sdl_screen->format->BitsPerPixel;
 }
 
 bool Graphic::is_fullscreen()
@@ -726,4 +721,3 @@ Surface& Graphic::get_road_texture(int32_t roadtex)
 	return
 		roadtex == Widelands::Road_Normal ? *pic_road_normal_.get() : *pic_road_busy_.get();
 }
-

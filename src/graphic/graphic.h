@@ -91,11 +91,10 @@ public:
 
 	// Initialize or reinitialize the graphics system. Throws on error.
 	void initialize
-		(int32_t w, int32_t h, int32_t bpp, bool fullscreen, bool opengl);
+		(int32_t w, int32_t h, bool fullscreen, bool opengl);
 
 	int32_t get_xres();
 	int32_t get_yres();
-	int32_t get_bpp();
 	bool is_fullscreen();
 
 	RenderTarget * get_render_target();
