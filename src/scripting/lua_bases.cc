@@ -162,6 +162,7 @@ const MethodType<L_PlayerBase> L_PlayerBase::Methods[] = {
 	METHOD(L_PlayerBase, place_flag),
 	METHOD(L_PlayerBase, place_road),
 	METHOD(L_PlayerBase, place_building),
+	METHOD(L_PlayerBase, place_bob),
 	METHOD(L_PlayerBase, conquer),
 	METHOD(L_PlayerBase, get_workers),
 	{0, 0},
@@ -419,6 +420,39 @@ int L_PlayerBase::place_building(lua_State * L) {
 		return report_error(L, "Couldn't place building!");
 
 	LuaMap::upcasted_immovable_to_lua(L, b);
+	return 1;
+}
+
+/* RST
+	.. method:: place_bob(name, field)
+
+		Places a bob that must be described by the tribe and will be
+		owned by the player.
+
+		TODO(sirver): name must be "ship" right now, everything else
+		is not implemented.
+
+		:arg name: name of the bob to place. Must be defined in the tribe of this player.
+		:type name: :class:`string`.
+		:arg field: where the bob should be placed.
+		:type field: :class:`wl.map.Field`
+
+		:returns: The created bob.
+*/
+// UNTESTED
+int L_PlayerBase::place_bob(lua_State * L) {
+	const std::string name = luaL_checkstring(L, 2);
+	LuaMap::L_Field* c = *get_user_class<LuaMap::L_Field>(L, 3);
+
+	if (name != "ship")
+		report_error(L, "Can currently only place ships.");
+
+	Editor_Game_Base & egbase = get_egbase(L);
+	Player& player = get(L, egbase);
+	Bob& bob = egbase.create_bob(c->coords(), name, &player.tribe(), &player);
+
+	LuaMap::upcasted_bob_to_lua(L, &bob);
+
 	return 1;
 }
 

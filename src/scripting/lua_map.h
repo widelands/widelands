@@ -39,6 +39,7 @@
 
 namespace Widelands {
 	struct Soldier_Descr;
+	struct Bob;
 }
 
 namespace LuaMap {
@@ -719,6 +720,7 @@ public:
 };
 
 int upcasted_immovable_to_lua(lua_State * L, Widelands::BaseImmovable * bi);
+int upcasted_bob_to_lua(lua_State * L, Widelands::Bob * mo);
 
 void luaopen_wlmap(lua_State *);
 
