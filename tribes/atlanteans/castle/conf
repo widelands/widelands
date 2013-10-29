@@ -3,6 +3,7 @@ max_soldiers=12
 heal_per_second=200
 conquers=12
 prefer_heroes=true
+occupied_string=_Your soldiers have occupied your Castle
 
 [buildcost]
 planks=4

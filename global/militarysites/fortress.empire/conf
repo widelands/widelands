@@ -4,6 +4,7 @@ heal_per_second=170
 conquers=11
 buildable=no
 prefer_heroes=true
+occupied_string=_Your soldiers have occupied your Fortress
 
 [idle]
 pics=../../../tribes/empire/fortress/fortress_i_??.png

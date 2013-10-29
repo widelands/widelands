@@ -5,6 +5,7 @@ conquers=9
 vision_range=21
 buildable=no
 prefer_heroes=true
+occupied_string=_Your soldiers have occupied your High Tower
 
 [idle]
 pics=../../../tribes/atlanteans/high_tower/high_tower_i_??.png

@@ -4,6 +4,7 @@ heal_per_second=170
 conquers=11
 enhancement=citadel
 prefer_heroes=true
+occupied_string=_Your soldiers have occupied your Fortress
 
 [buildcost]
 blackwood=9

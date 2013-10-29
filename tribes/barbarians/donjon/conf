@@ -4,6 +4,7 @@ heal_per_second=150
 conquers=8
 vision_range=17
 prefer_heroes=true
+occupied_string=_Your soldiers have occupied your Donjon
 
 [buildcost]
 blackwood=7

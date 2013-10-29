@@ -3,6 +3,7 @@ max_soldiers=5
 heal_per_second=130
 conquers=8
 prefer_heroes=true
+occupied_string=_Your soldiers have occupied your Barrier
 
 [buildcost]
 blackwood=5

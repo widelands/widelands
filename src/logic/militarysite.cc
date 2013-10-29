@@ -58,10 +58,11 @@ m_heal_per_second    (0)
 	m_conquer_radius      = global_s.get_safe_int("conquers");
 	m_num_soldiers        = global_s.get_safe_int("max_soldiers");
 	m_heal_per_second     = global_s.get_safe_int("heal_per_second");
+
 	if (m_conquer_radius > 0)
 		m_workarea_info[m_conquer_radius].insert(descname() + _(" conquer"));
 	m_prefers_heroes_at_start = global_s.get_safe_bool("prefer_heroes");
-
+	m_occupied_str        = global_s.get_safe_string("occupied_string");
 }
 
 /**
@@ -88,6 +89,7 @@ m_didconquer  (false),
 m_capacity    (ms_descr.get_max_number_of_soldiers()),
 m_nexthealtime(0),
 m_soldier_preference(ms_descr.m_prefers_heroes_at_start ? kPrefersHeroes : kPrefersRookies),
+m_occupied_str(ms_descr.m_occupied_str),
 m_soldier_upgrade_try(false),
 m_doing_upgrade_request(false)
 {
@@ -234,16 +236,11 @@ int MilitarySite::incorporateSoldier(Editor_Game_Base & egbase, Soldier & s)
 		start_animation(egbase, descr().get_animation("idle"));
 
 		if (upcast(Game, game, &egbase)) {
-			char message[256];
-			snprintf
-				(message, sizeof(message),
-				 _("Your soldiers occupied your %s."),
-				 descname().c_str());
 			send_message
 				(*game,
 				 "site_occupied",
 				 descname(),
-				 message,
+				 m_occupied_str,
 				 true);
 		}
 	}

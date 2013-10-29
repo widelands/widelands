@@ -3,6 +3,7 @@ max_soldiers=7
 heal_per_second=140
 conquers=7
 prefer_heroes=true
+occupied_string=_Your soldiers have occupied your Guardhall
 
 [buildcost]
 trunk=2

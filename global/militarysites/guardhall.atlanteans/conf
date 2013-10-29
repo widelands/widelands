@@ -4,6 +4,7 @@ heal_per_second=140
 conquers=7
 buildable=no
 prefer_heroes=true
+occupied_string=_Your soldiers have occupied your Guardhall
 
 [idle]
 pics=../../../tribes/atlanteans/guardhall/guardhall_i_??.png

@@ -5,6 +5,7 @@ heal_per_second=220
 conquers=12
 enhanced_building=yes
 prefer_heroes=true
+occupied_string=_Your soldiers have occupied your Citadel
 
 [enhancement_cost]
 blackwood=9

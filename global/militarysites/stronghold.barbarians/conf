@@ -4,6 +4,7 @@ heal_per_second=110
 conquers=7
 buildable=no
 prefer_heroes=false
+occupied_string=_Your soldiers have occupied your Stronghold
 
 [idle]
 pics=../../../tribes/barbarians/stronghold/stronghold_i_??.png

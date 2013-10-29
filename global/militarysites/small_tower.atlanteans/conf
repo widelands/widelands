@@ -5,6 +5,7 @@ vision_range=13
 max_soldiers=3
 buildable=no
 prefer_heroes=false
+occupied_string=_Your soldiers have occupied your Small Tower
 
 [idle]
 pics=../../../tribes/atlanteans/small_tower/small_tower_i_??.png

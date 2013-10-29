@@ -5,6 +5,7 @@ conquers=8
 vision_range=17
 buildable=no
 prefer_heroes=true
+occupied_string=_Your soldiers have occupied your Donjon
 
 [idle]
 pics=../../../tribes/barbarians/donjon/donjon_i_??.png

@@ -4,6 +4,7 @@ heal_per_second=130
 conquers=8
 buildable=no
 prefer_heroes=true
+occupied_string=_Your soldiers have occupied your Barrier
 
 [idle]
 pics=../../../tribes/barbarians/barrier/barrier_i_??.png

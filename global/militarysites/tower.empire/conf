@@ -5,6 +5,7 @@ conquers=9
 vision_range=19
 buildable=no
 prefer_heroes=true
+occupied_string=_Your soldiers have occupied your Tower
 
 [idle]
 pics=../../../tribes/empire/tower/tower_i_??.png

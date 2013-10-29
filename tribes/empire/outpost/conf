@@ -4,6 +4,7 @@ heal_per_second=100
 conquers=7
 enhancement=barrier
 prefer_heroes=false
+occupied_string=_Your soldiers have occupied your Outpost
 
 [buildcost]
 trunk=1

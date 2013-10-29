@@ -6,6 +6,7 @@ conquers=9
 vision_range=21
 enhanced_building=yes
 prefer_heroes=true
+occupied_string=_Your soldiers have occupied your High Tower
 
 [enhancement_cost]
 trunk=1

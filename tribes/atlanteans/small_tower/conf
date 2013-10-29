@@ -4,6 +4,7 @@ conquers=5
 vision_range=13
 max_soldiers=3
 prefer_heroes=true
+occupied_string=_Your soldiers have occupied your Small Tower
 
 [buildcost]
 trunk=1
