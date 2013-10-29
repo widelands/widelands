@@ -5,6 +5,9 @@ vision_range=13
 max_soldiers=3
 prefer_heroes=true
 occupied_string=_Your soldiers have occupied your Small Tower
+aggressor_string=_Your Small Tower discovered an aggressor.
+attack_string=_Your Small Tower is under attack.
+at_string=_at the Small Tower
 
 [buildcost]
 trunk=1

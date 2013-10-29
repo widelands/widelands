@@ -4,6 +4,9 @@ heal_per_second=130
 conquers=8
 prefer_heroes=true
 occupied_string=_Your soldiers have occupied your Barrier
+aggressor_string=_Your Barrier discovered an aggressor.
+attack_string=_Your Barrier is under attack.
+at_string=_at the Barrier
 
 [buildcost]
 blackwood=5

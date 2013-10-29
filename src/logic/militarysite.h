@@ -47,6 +47,9 @@ struct MilitarySite_Descr : public ProductionSite_Descr {
 
 	bool     m_prefers_heroes_at_start;
 	std::string m_occupied_str;
+	std::string m_aggressor_str;
+	std::string m_attack_str;
+	std::string m_at_str;
 private:
 	uint32_t m_conquer_radius;
 	uint32_t m_num_soldiers;
@@ -167,6 +170,9 @@ private:
 	std::vector<SoldierJob> m_soldierjobs;
 	SoldierPreference m_soldier_preference;
 	std::string m_occupied_str;
+	std::string m_aggressor_str;
+	std::string m_attack_str;
+	std::string m_at_str;
 	int32_t m_next_swap_soldiers_time;
 	bool m_soldier_upgrade_try; // optimization -- if everybody is zero-level, do not downgrade
 	bool m_doing_upgrade_request;

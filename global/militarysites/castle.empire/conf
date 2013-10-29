@@ -4,7 +4,10 @@ heal_per_second=220
 conquers=12
 buildable=no
 prefer_heroes=true
-occupied_string=_Your soldiers have occupied your Castle
+occupied_string=
+aggressor_string=_Your Castle discovered an aggressor.
+attack_string=_Your Castle is under attack.
+at_string=_at the Castle
 
 [idle]
 pics=../../../tribes/empire/castle/castle_i_??.png

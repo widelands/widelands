@@ -4,7 +4,10 @@ heal_per_second=220
 conquers=12
 buildable=no
 prefer_heroes=true
-occupied_string=_Your soldiers have occupied your Citadel
+occupied_string=
+aggressor_string=_Your Citadel discovered an aggressor.
+attack_string=_Your Citadel is under attack.
+at_string=_at the Citadel
 
 [idle]
 pics=../../../tribes/barbarians/citadel/citadel_i_??.png

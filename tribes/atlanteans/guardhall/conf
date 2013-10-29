@@ -4,6 +4,9 @@ heal_per_second=140
 conquers=7
 prefer_heroes=true
 occupied_string=_Your soldiers have occupied your Guardhall
+aggressor_string=_Your Guardhall discovered an aggressor.
+attack_string=_Your Guardhall is under attack.
+at_string=_at the Guardhall
 
 [buildcost]
 trunk=2

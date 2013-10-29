@@ -5,6 +5,9 @@ conquers=8
 enhanced_building=yes
 prefer_heroes=true
 occupied_string=_Your soldiers have occupied your Barrier
+aggressor_string=_Your Barrier discovered an aggressor.
+attack_string=_Your Barrier is under attack.
+at_string=_at the Barrier
 
 [buildcost]
 trunk=2

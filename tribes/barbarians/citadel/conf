@@ -6,6 +6,9 @@ conquers=12
 enhanced_building=yes
 prefer_heroes=true
 occupied_string=_Your soldiers have occupied your Citadel
+aggressor_string=_Your Citadel discovered an aggressor.
+attack_string=_Your Citadel is under attack.
+at_string=_at the Citadel
 
 [enhancement_cost]
 blackwood=9

@@ -62,7 +62,10 @@ m_heal_per_second    (0)
 	if (m_conquer_radius > 0)
 		m_workarea_info[m_conquer_radius].insert(descname() + _(" conquer"));
 	m_prefers_heroes_at_start = global_s.get_safe_bool("prefer_heroes");
-	m_occupied_str        = global_s.get_safe_string("occupied_string");
+	m_occupied_str = global_s.get_safe_string("occupied_string");
+	m_aggressor_str = global_s.get_safe_string("aggressor_string");
+	m_attack_str = global_s.get_safe_string("attack_string");
+	m_at_str = global_s.get_safe_string("at_string");
 }
 
 /**
@@ -90,6 +93,9 @@ m_capacity    (ms_descr.get_max_number_of_soldiers()),
 m_nexthealtime(0),
 m_soldier_preference(ms_descr.m_prefers_heroes_at_start ? kPrefersHeroes : kPrefersRookies),
 m_occupied_str(ms_descr.m_occupied_str),
+m_aggressor_str(ms_descr.m_aggressor_str),
+m_attack_str(ms_descr.m_attack_str),
+m_at_str(ms_descr.m_at_str),
 m_soldier_upgrade_try(false),
 m_doing_upgrade_request(false)
 {
@@ -835,8 +841,9 @@ bool MilitarySite::attack(Soldier & enemy)
 			char message[2048];
 			snprintf
 				(message, sizeof(message),
-				 _("The enemy defeated your soldiers at the %s."),
-				 descname().c_str());
+				 /** TRANSLATORS %s = "at the <militarysite>" */
+				 _("The enemy defeated your soldiers %s."),
+				 m_at_str.c_str());
 			send_message
 				(game,
 				 "site_lost",
@@ -894,8 +901,9 @@ bool MilitarySite::attack(Soldier & enemy)
 		char message[2048];
 		snprintf
 			(message, sizeof(message),
-			 _("Your soldiers defeated the enemy at the %s."),
-			 newsite->descname().c_str());
+			/** TRANSLATORS %s = "at the <militarysite>" */
+			 _("Your soldiers defeated the enemy %s."),
+			 newsite->m_at_str.c_str());
 		newsite->send_message
 			(game,
 			 "site_defeated",
@@ -940,21 +948,14 @@ bool MilitarySite::military_presence_kept(Game & game)
 /// Informs the player about an attack of his opponent.
 void MilitarySite::informPlayer(Game & game, bool const discovered)
 {
-	char message[2048];
-	snprintf
-		(message, sizeof(message),
-		 discovered ?
-		 _("Your %s discovered an aggressor.</p>") :
-		 _("Your %s is under attack.</p>"),
-		 descname().c_str());
-
 	// Add a message as long as no previous message was send from a point with
 	// radius <= 5 near the current location in the last 60 seconds
 	send_message
 		(game,
 		 "under_attack",
 		 _("You are under attack"),
-		 message, false,
+		 discovered ? m_aggressor_str : m_attack_str,
+		 false,
 		 60 * 1000, 5);
 }
 

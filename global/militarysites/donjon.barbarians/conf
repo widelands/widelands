@@ -5,7 +5,10 @@ conquers=8
 vision_range=17
 buildable=no
 prefer_heroes=true
-occupied_string=_Your soldiers have occupied your Donjon
+occupied_string=
+aggressor_string=_Your Donjon discovered an aggressor.
+attack_string=_Your Donjon is under attack.
+at_string=_at the Donjon
 
 [idle]
 pics=../../../tribes/barbarians/donjon/donjon_i_??.png

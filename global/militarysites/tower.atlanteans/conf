@@ -5,7 +5,10 @@ conquers=9
 vision_range=17
 buildable=no
 prefer_heroes=true
-occupied_string=_Your soldiers have occupied your Tower
+occupied_string=
+aggressor_string=_Your Tower discovered an aggressor.
+attack_string=_Your Tower is under attack.
+at_string=_at the Tower
 
 [idle]
 pics=../../../tribes/atlanteans/tower/tower_i_??.png

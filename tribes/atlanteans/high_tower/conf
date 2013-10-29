@@ -7,6 +7,9 @@ vision_range=21
 enhanced_building=yes
 prefer_heroes=true
 occupied_string=_Your soldiers have occupied your High Tower
+aggressor_string=_Your High Tower discovered an aggressor.
+attack_string=_Your High Tower is under attack.
+at_string=_at the High Tower
 
 [enhancement_cost]
 trunk=1

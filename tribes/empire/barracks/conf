@@ -5,6 +5,9 @@ max_soldiers=1
 enhancement=sentry
 prefer_heroes=false
 occupied_string=_Your soldiers have occupied your Barracks
+aggressor_string=_Your Barracks discovered an aggressor.
+attack_string=_Your Barracks is under attack.
+at_string=_at the Barracks
 
 [buildcost]
 trunk=1

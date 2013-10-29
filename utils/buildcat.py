@@ -80,7 +80,8 @@ ITERATIVEPOTS = [
         ["../../tribes/%(name)s/conf",
          "../../tribes/%(name)s/*/conf",
          "../../tribes/%(name)s/scripting/*.lua",
-		 "../../tribes/%(name)s/*/help.lua"
+         "../../tribes/%(name)s/*/help.lua",
+         "../../global/militarysites/*/conf"
     ]
     ),
     ("world_%(name)s/world_%(name)s", "worlds/",

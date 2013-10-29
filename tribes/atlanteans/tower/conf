@@ -6,6 +6,9 @@ vision_range=17
 enhancement=high_tower
 prefer_heroes=false
 occupied_string=_Your soldiers have occupied your Tower
+aggressor_string=_Your Tower discovered an aggressor.
+attack_string=_Your Tower is under attack.
+at_string=_at the Tower
 
 [buildcost]
 trunk=2

@@ -5,6 +5,9 @@ max_soldiers=2
 enhanced_building=yes
 prefer_heroes=false
 occupied_string=_Your soldiers have occupied your Sentry
+aggressor_string=_Your Sentry discovered an aggressor.
+attack_string=_Your Sentry is under attack.
+at_string=_at the Sentry
 
 [buildcost]
 wood=1

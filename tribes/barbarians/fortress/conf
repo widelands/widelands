@@ -5,6 +5,9 @@ conquers=11
 enhancement=citadel
 prefer_heroes=true
 occupied_string=_Your soldiers have occupied your Fortress
+aggressor_string=_Your Fortress discovered an aggressor.
+attack_string=_Your Fortress is under attack.
+at_string=_at the Fortress
 
 [buildcost]
 blackwood=9
