@@ -65,7 +65,8 @@ m_heal_per_second    (0)
 	m_occupied_str = global_s.get_safe_string("occupied_string");
 	m_aggressor_str = global_s.get_safe_string("aggressor_string");
 	m_attack_str = global_s.get_safe_string("attack_string");
-	m_at_str = global_s.get_safe_string("at_string");
+	m_defeated_enemy_str = global_s.get_safe_string("defeated_enemy_string");
+	m_defeated_you_str = global_s.get_safe_string("defeated_you_string");
 }
 
 /**
@@ -95,7 +96,8 @@ m_soldier_preference(ms_descr.m_prefers_heroes_at_start ? kPrefersHeroes : kPref
 m_occupied_str(ms_descr.m_occupied_str),
 m_aggressor_str(ms_descr.m_aggressor_str),
 m_attack_str(ms_descr.m_attack_str),
-m_at_str(ms_descr.m_at_str),
+m_defeated_enemy_str(ms_descr.m_defeated_enemy_str),
+m_defeated_you_str(ms_descr.m_defeated_you_str),
 m_soldier_upgrade_try(false),
 m_doing_upgrade_request(false)
 {
@@ -838,17 +840,11 @@ bool MilitarySite::attack(Soldier & enemy)
 		// The enemy has defeated our forces, we should inform the player
 		const Coords coords = get_position();
 		{
-			char message[2048];
-			snprintf
-				(message, sizeof(message),
-				 /** TRANSLATORS %s = "at the <militarysite>" */
-				 _("The enemy defeated your soldiers %s."),
-				 m_at_str.c_str());
 			send_message
 				(game,
 				 "site_lost",
 				 _("Militarysite lost!"),
-				 message,
+				 m_defeated_enemy_str,
 				 false);
 		}
 
@@ -898,17 +894,11 @@ bool MilitarySite::attack(Soldier & enemy)
 		newsite->reinit_after_conqueration(game);
 
 		// Of course we should inform the victorious player as well
-		char message[2048];
-		snprintf
-			(message, sizeof(message),
-			/** TRANSLATORS %s = "at the <militarysite>" */
-			 _("Your soldiers defeated the enemy %s."),
-			 newsite->m_at_str.c_str());
 		newsite->send_message
 			(game,
 			 "site_defeated",
 			 _("Enemy at site defeated!"),
-			 message,
+			 newsite->m_defeated_you_str,
 			 true);
 
 		return false;

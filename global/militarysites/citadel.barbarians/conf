@@ -7,7 +7,9 @@ prefer_heroes=true
 occupied_string=
 aggressor_string=_Your Citadel discovered an aggressor.
 attack_string=_Your Citadel is under attack.
-at_string=_at the Citadel
+defeated_enemy_string=_The enemy defeated your soldiers at the Citadel
+defeated_you_string=_Your soldiers defeated the enemy at the Citadel
+
 
 [idle]
 pics=../../../tribes/barbarians/citadel/citadel_i_??.png

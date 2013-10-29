@@ -7,7 +7,8 @@ prefer_heroes=false
 occupied_string=
 aggressor_string=_Your Barracks discovered an aggressor.
 attack_string=_Your Barracks is under attack.
-at_string=_at the Barracks
+defeated_enemy_string=_The enemy defeated your soldiers at the Barracks
+defeated_you_string=_Your soldiers defeated the enemy at the Barracks
 
 
 [idle]

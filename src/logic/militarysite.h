@@ -49,7 +49,8 @@ struct MilitarySite_Descr : public ProductionSite_Descr {
 	std::string m_occupied_str;
 	std::string m_aggressor_str;
 	std::string m_attack_str;
-	std::string m_at_str;
+	std::string m_defeated_enemy_str;
+	std::string m_defeated_you_str;
 private:
 	uint32_t m_conquer_radius;
 	uint32_t m_num_soldiers;
@@ -172,7 +173,8 @@ private:
 	std::string m_occupied_str;
 	std::string m_aggressor_str;
 	std::string m_attack_str;
-	std::string m_at_str;
+	std::string m_defeated_enemy_str;
+	std::string m_defeated_you_str;
 	int32_t m_next_swap_soldiers_time;
 	bool m_soldier_upgrade_try; // optimization -- if everybody is zero-level, do not downgrade
 	bool m_doing_upgrade_request;

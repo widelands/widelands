@@ -8,7 +8,9 @@ prefer_heroes=true
 occupied_string=
 aggressor_string=_Your Tower discovered an aggressor.
 attack_string=_Your Tower is under attack.
-at_string=_at the Tower
+defeated_enemy_string=_The enemy defeated your soldiers at the Tower
+defeated_you_string=_Your soldiers defeated the enemy at the Tower
+
 
 [idle]
 pics=../../../tribes/atlanteans/tower/tower_i_??.png

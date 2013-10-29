@@ -7,7 +7,9 @@ prefer_heroes=false
 occupied_string=
 aggressor_string=_Your Outpost discovered an aggressor.
 attack_string=_Your Outpost is under attack.
-at_string=_at the Outpost
+defeated_enemy_string=_The enemy defeated your soldiers at the Outpost
+defeated_you_string=_Your soldiers defeated the enemy at the Outpost
+
 
 [idle]
 pics=../../../tribes/empire/outpost/outpost_i_??.png
