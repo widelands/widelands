@@ -58,12 +58,12 @@ Fullscreen_Menu_CampaignSelect::Fullscreen_Menu_CampaignSelect() :
 	label_difficulty
 		(this, get_w() *  3 /   5, get_h() * 17 / 40, _("Difficulty:")),
 	tadifficulty
-		(this, get_w() * 61 / 100, get_h() * 23 / 50, ""),
+		(this, get_w() * 61 / 100, get_h() * 23 / 50, get_w() * 9 / 25, get_h() * 3 / 50, ""),
 	label_campdescr
-		(this, get_w() *  3 /   5, get_h() * 51 / 100, _("Description:")),
+		(this, get_w() *  3 /   5, get_h() * 17 / 32, _("Description:")),
 	tacampdescr
 		(this,
-		 get_w() * 61 / 100, get_h() * 11 / 20, get_w() * 9 / 25, get_h() * 7 / 25,
+		 get_w() * 61 / 100, get_h() * 45 / 80, get_w() * 9 / 25, get_h() * 7 / 25,
 		 ""),
 
 // Buttons
