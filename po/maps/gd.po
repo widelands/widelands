@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2013-09-15 17:41+0000\n"
-"PO-Revision-Date: 2013-10-21 22:04+0000\n"
+"PO-Revision-Date: 2013-10-29 17:24+0000\n"
 "Last-Translator: GunChleoc <Unknown>\n"
 "Language-Team: Fòram na Gàidhlig http://www.foramnagaidhlig.net\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-10-22 04:38+0000\n"
-"X-Generator: Launchpad (build 16807)\n"
+"X-Launchpad-Export-Date: 2013-10-30 05:11+0000\n"
+"X-Generator: Launchpad (build 16820)\n"
 "Language: gd\n"
 
 #: ../../campaigns/cconfig:64
@@ -58,6 +58,11 @@ msgid ""
 "Gods? You believe it is and you hope, that your tribe will find the treasure "
 "of this island, before other tribes will follow."
 msgstr ""
+"Tha eilean beag gun ainm beagan mhìltean air falbh o oirthir Gerion. Cha "
+"robh adhbhar gus a sheòladh ann gu ruige seo, ach thàinig bàla teine sìos às "
+"na speuran an-dè is laigh e ann am meadhan an eilein. An e samhla o na "
+"diathan a th' ann? Cha chreid thu nach eil is tha thu an dòchais gun lorg do "
+"threubh ulaidh an eilein seo mus lean treubha eile."
 
 #: ../../maps/Glacier Lake.wmf/elemental:9
 msgid ""
@@ -89,6 +94,10 @@ msgid ""
 "as possible, to be the first building up a castle on the top of the center "
 "mountain."
 msgstr ""
+"'S e fèill-chluich shònraichte ann an cultar nan Atlantach a th' anns an "
+"\"starraineachd nan eilean\" far am feuch dà bhuidheann no an corr ris an "
+"eilean meadhanach a ruigsinn cho luath 's a ghabhas ach an tog iad caisteal "
+"air mullach na beinne meadhanaich mus dèan càch e."
 
 #: ../../maps/Impact.wmf/elemental:9
 msgid ""
@@ -375,13 +384,15 @@ msgstr "Fad air falbh"
 
 #: ../../maps/Crossing the horizon.wmf/elemental:11
 msgid "Man your ship and sail to the horizon."
-msgstr ""
+msgstr "Cruinnich sgioba is seòl dhan aineolach."
 
 #: ../../maps/Twinkling Waves.wmf/elemental:11
 msgid ""
 "Many beautiful, green islands await the ones brave enough to pass the "
 "thousand waves, twinkling in the sun."
 msgstr ""
+"Tha iomadh eilean àlainn uaine a' feitheamh air an fheadhainn a bhios dàna "
+"gu leòr gus tighinn thar drilean nam mìle tonn."
 
 #: ../../maps/Three Warriors.wmf/elemental:11
 msgid ""
@@ -389,6 +400,9 @@ msgid ""
 "connects the valleys and thus a fight seems inescapable! Hint: Water can be "
 "found around the lakes."
 msgstr ""
+"Tha an tìr seo sgaraichte ann an trì gleanntan torrach le beanntan mòra. Tha "
+"slighe a' ceangal nan gleanntan co-dhiù is cha ghabh strì a sheachnadh! "
+"Gliocas: Lorgaidh tu uisge faisg air na lochan."
 
 #: ../../maps/Mystical Maze.wmf/elemental:9
 msgid "Mystical Maze"
@@ -747,7 +761,7 @@ msgstr ""
 
 #: ../../maps/Atoll.wmf/elemental:11
 msgid "Who will be the real King of the big atoll?"
-msgstr ""
+msgstr "Cò thèid na rìgh an atail mhòir?"
 
 #: ../../maps/Wisent Valley.wmf/elemental:9
 msgid "Wisent Valley"
