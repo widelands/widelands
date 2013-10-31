@@ -302,18 +302,25 @@ void WareInstance::act(Game & game, uint32_t)
  */
 void WareInstance::update(Game & game)
 {
+	molog("#sirver m_transfer: %p\n", m_transfer);
 	Map_Object * const loc = m_location.get(game);
+	if (loc)
+		molog("#sirver loc->name(): %s\n", loc->descr().name().c_str());
 
 	if (!m_descr) // Upsy, we're not even initialized. Happens on load
 		return;
 
+	molog("#sirver m_transfer: %p\n", m_transfer);
 	// Reset our state if we're not on location or outside an economy
 	if (!get_economy()) {
+	molog("#sirver m_transfer: %p\n", m_transfer);
 		cancel_moving();
 		return;
 	}
 
+	molog("#sirver m_transfer: %p\n", m_transfer);
 	if (!loc) {
+	molog("#sirver m_transfer: %p\n", m_transfer);
 		// Before dying, output as much information as we can.
 		log_general_info(game);
 
@@ -322,6 +329,7 @@ void WareInstance::update(Game & game)
 	}
 
 	// Update whether we have a Supply or not
+	molog("#sirver m_transfer: %p\n", m_transfer);
 	if (!m_transfer || !m_transfer->get_request()) {
 		if (!m_supply)
 			m_supply = new IdleWareSupply(*this);
@@ -332,6 +340,7 @@ void WareInstance::update(Game & game)
 
 	// Deal with transfers
 	if (m_transfer) {
+	molog("#sirver m_transfer: %p\n", m_transfer);
 		upcast(PlayerImmovable, location, loc);
 		if (not location)
 			return; // wait
@@ -384,7 +393,9 @@ void WareInstance::update(Game & game)
  */
 void WareInstance::enter_building(Game & game, Building & building)
 {
+	molog("#sirver m_transfer: %p\n", m_transfer);
 	if (m_transfer) {
+		molog("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 		if (m_transfer->get_destination(game) == &building) {
 			Transfer * t = m_transfer;
 
@@ -395,11 +406,13 @@ void WareInstance::enter_building(Game & game, Building & building)
 			return;
 		}
 
+		molog("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 		bool success;
 		PlayerImmovable * const nextstep =
 			m_transfer->get_next_step(&building, success);
 		m_transfer_nextstep = nextstep;
 
+		molog("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 		if (success) {
 			assert(nextstep);
 
@@ -429,17 +442,30 @@ void WareInstance::enter_building(Game & game, Building & building)
 				 building.get_position().y, nextstep->serial(),
 				 nextstep->name().c_str());
 		} else {
+		molog("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 			Transfer * t = m_transfer;
 
+		molog("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 			m_transfer = 0;
 			m_transfer_nextstep = 0;
 
+		molog("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 			t->has_failed();
+		molog("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 			cancel_moving();
-			update(game);
+		molog("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
+
+			if (upcast(Warehouse, warehouse, &building)) {
+				building.receive_ware(game, m_descr_index);
+				remove(game);
+			} else {
+				update(game);
+			}
+		molog("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 			return;
 		}
 	} else {
+		molog("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 		// We don't have a transfer, so just enter the building
 		building.receive_ware(game, m_descr_index);
 		remove(game);

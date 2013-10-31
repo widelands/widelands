@@ -1,0 +1,9 @@
+# Automatically created by Widelands bzr6699[regression_testing] (RelWithDebug)
+
+[global]
+packet_version="1"
+number_of_port_spaces="2"
+
+[port_spaces]
+0="16 2"
+1="16 16"

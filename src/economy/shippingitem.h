@@ -41,9 +41,6 @@ class Worker;
  * encapsulated in this structure during shipping and the waiting time in the @ref PortDock.
  */
 struct ShippingItem {
-	friend struct PortDock;
-	friend struct Ship;
-
 	ShippingItem() {}
 	ShippingItem(WareInstance & ware);
 	ShippingItem(Worker & worker);
@@ -54,8 +51,6 @@ struct ShippingItem {
 	void get(Editor_Game_Base & game, WareInstance * & ware, Worker * & worker);
 
 	void set_economy(Game &, Economy * e);
-	void set_location(Game &, Map_Object * obj);
-	void end_shipping(Game &);
 	PortDock * get_destination(Game &);
 	void fetch_destination(Game &, PortDock &);
 	void schedule_update(Game &, int32_t delay);
@@ -73,6 +68,15 @@ struct ShippingItem {
 	void save(Editor_Game_Base & egbase, Map_Map_Object_Saver & mos, FileWrite & fw);
 
 private:
+	friend struct PortDock;
+	friend struct Ship;
+
+	// Called when a port is reached. The item will act again on its own.
+	void end_shipping(Game &);
+
+	// Sets the location of this shippingitem, this could be a ship, a portdock or a warehouse.
+	void set_location(Game&, Map_Object* obj);
+
 	Object_Ptr m_object;
 	OPtr<PortDock> m_destination_dock;
 };

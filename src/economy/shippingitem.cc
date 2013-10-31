@@ -67,19 +67,23 @@ void ShippingItem::set_economy(Game & game, Economy * e)
 		worker->set_economy(e);
 }
 
-void ShippingItem::set_location(Game & game, Map_Object * obj)
-{
+void ShippingItem::set_location(Game& game, Map_Object* obj) {
 	WareInstance * ware;
 	Worker * worker;
 	get(game, ware, worker);
 
 	if (ware) {
-		if (upcast(Building, building, obj))
+		log("#sirver Is ware\n");
+		if (upcast(Building, building, obj)) {
+			log("#sirver Entering building.\n");
 			ware->enter_building(game, *building);
-		else
+		} else {
+			log("#sirver setting location.\n");
 			ware->set_location(game, obj);
+		}
 	}
 	if (worker) {
+		log("#sirver Is worker\n");
 		worker->set_location(dynamic_cast<PlayerImmovable *>(obj));
 		if (upcast(Building, building, obj)) {
 			worker->set_position(game, building->get_position());
@@ -93,8 +97,10 @@ void ShippingItem::end_shipping(Game & game)
 	Worker * worker;
 	get(game, ware, worker);
 
-	if (ware)
+	if (ware) {
+		ware->update(game);
 		ware->schedule_act(game, 10);
+	}
 	if (worker)
 		worker->end_shipping(game);
 }

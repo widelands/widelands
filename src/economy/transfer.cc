@@ -250,8 +250,7 @@ void Transfer::has_finished()
 		m_request->transfer_finish(m_game, *this);
 	} else {
 		PlayerImmovable * destination = m_destination.get(m_game);
-		if (!destination)
-			throw wexception("Transfer: claims to have finished successfully, but destination is gone");
+		assert(destination);
 		if (m_worker) {
 			destination->receive_worker(m_game, *m_worker);
 			m_worker = 0;
