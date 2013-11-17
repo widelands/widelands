@@ -71,8 +71,6 @@ public:
 
 			// There has to be a better way to do this.
 			game.gameController()->setDesiredSpeed(0);
-		} else {
-			log("REPLAY: Sync checked successfully.\n");
 		}
 	}
 
