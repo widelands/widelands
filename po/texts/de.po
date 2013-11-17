@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: Widelands unofficial-bzr-launchpad-i18n-4955\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2013-09-15 17:41+0000\n"
-"PO-Revision-Date: 2013-10-10 20:23+0000\n"
-"Last-Translator: Tobias Margiani <Unknown>\n"
+"PO-Revision-Date: 2013-11-16 11:40+0000\n"
+"Last-Translator: Mister Pi <imyaccounts@myopera.com>\n"
 "Language-Team: German <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-10-11 04:34+0000\n"
-"X-Generator: Launchpad (build 16799)\n"
+"X-Launchpad-Export-Date: 2013-11-17 05:15+0000\n"
+"X-Generator: Launchpad (build 16831)\n"
 "X-Poedit-Country: GERMANY\n"
 "X-Poedit-Language: German\n"
 
@@ -26,7 +26,7 @@ msgstr ""
 
 #: ../../txts/README.lua:74
 msgid ",: goes to previous location"
-msgstr ",: geht zur vorherigen Position auf der Karte"
+msgstr ",: springe zur vorherigen Position auf der Karte"
 
 #: ../../txts/README.lua:99
 msgid "- Detailed steps on how to trigger the bug, if possible."
@@ -92,7 +92,7 @@ msgstr ""
 
 #: ../../txts/README.lua:75
 msgid ".: goes to next location"
-msgstr ".: geht zur nächsten Position auf der Karte"
+msgstr ".: springt zur nächsten Position auf der Karte"
 
 #: ../../txts/editor_readme:43
 msgid "1-0      Changes tools size"
@@ -112,7 +112,7 @@ msgstr ""
 
 #: ../../txts/tips/empire.tip:10
 msgid "Always build a forester's house so you will not run out of trunks."
-msgstr "Baue immer ein Forsthaus, damit du nie ohne Holz da stehst!"
+msgstr "Baue immer eine Forsthütte, damit dir nie das Holz ausgeht!"
 
 #: ../../txts/tips/barbarians.tip:10
 msgid ""
@@ -136,7 +136,7 @@ msgid ""
 "Any further questions? Our FAQs, the wiki and of course our community forums "
 "can be found at www.widelands.org."
 msgstr ""
-"Irgendwelche Fragen? Dann triff uns auf www.widelands.org. Dort findest du "
+"Irgendwelche Fragen? Du findest uns auf www.widelands.org. Dort findest du "
 "unsere FAQs, das Wiki und natürlich unsere Gemeinschaftsforen."
 
 #: ../../txts/developers:171

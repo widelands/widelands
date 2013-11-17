@@ -7,15 +7,15 @@ msgstr ""
 "Project-Id-Version: Widelands svn4866\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2013-09-15 19:41+0200\n"
-"PO-Revision-Date: 2013-09-18 08:08+0000\n"
-"Last-Translator: Yves MATHIEU <MisterY_vonvon@hotmail.com>\n"
+"PO-Revision-Date: 2013-11-16 21:09+0000\n"
+"Last-Translator: Tubuntu <Unknown>\n"
 "Language-Team: French <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Launchpad-Export-Date: 2013-09-19 04:32+0000\n"
-"X-Generator: Launchpad (build 16765)\n"
+"X-Launchpad-Export-Date: 2013-11-17 05:16+0000\n"
+"X-Generator: Launchpad (build 16831)\n"
 
 #: ../../src/computer_player.cc:38
 msgid "None"
@@ -44,7 +44,7 @@ msgstr "ATTENTION"
 
 #: ../../src/save_handler.cc:75
 msgid "Saving game..."
-msgstr ""
+msgstr "Sauvegarde du jeu..."
 
 #: ../../src/save_handler.cc:94
 msgid "Saving failed!"
@@ -2275,7 +2275,7 @@ msgstr "Problème de connexion"
 
 #: ../../src/network/internet_gaming.cc:116
 msgid "Widelands could not connect to the metaserver."
-msgstr ""
+msgstr "Widelands ne peut pas se connecter au méta-serveur."
 
 #: ../../src/network/internet_gaming.cc:122 ../../src/network/netclient.cc:102
 msgid "Could not establish connection to host"
@@ -2402,6 +2402,9 @@ msgid ""
 "You got disconnected, as you sent a superuser command without superuser "
 "permission. This incident will be logged and reported to the administrator."
 msgstr ""
+"Vous avez été déconnecté car vous avez envoyé une commande superuser sans en "
+"avoir les permissions. Cet incident sera journalisé et transmis à "
+"l'administrateur."
 
 #: ../../src/network/internet_gaming_messages.cc:50
 msgid "You got disconnected, as the metaserver is currently restarting."
@@ -3479,7 +3482,7 @@ msgstr "Temps du jeu inconnu"
 
 #: ../../src/ui_fsmenu/loadreplay.cc:67
 msgid "Choose a replay"
-msgstr ""
+msgstr "Choisissez l'enregistrement à revoir"
 
 #: ../../src/ui_fsmenu/main.cc:40
 msgid "Play Tutorial"
@@ -4324,7 +4327,7 @@ msgstr "Quitter"
 
 #: ../../src/wui/game_summary.cc:83
 msgid "Return to main menu"
-msgstr ""
+msgstr "Retour au menu principal"
 
 #: ../../src/wui/game_summary.cc:93
 msgid "Time"
@@ -4340,7 +4343,7 @@ msgstr "Gagné"
 
 #: ../../src/wui/game_summary.cc:168
 msgid "Resigned"
-msgstr ""
+msgstr "Abandon"
 
 #: ../../src/wui/game_summary.cc:180
 msgid "You won!"
@@ -4357,7 +4360,7 @@ msgstr "%s a gagné !"
 
 #: ../../src/wui/game_summary.cc:191
 msgid "Team %|1$u| won!"
-msgstr ""
+msgstr "L'équipe %|1$u| a gagné !"
 
 #: ../../src/wui/game_summary.cc:245
 msgid "Score"
@@ -4365,7 +4368,7 @@ msgstr "Score"
 
 #: ../../src/wui/game_summary.cc:254
 msgid "Player info"
-msgstr ""
+msgstr "Information du joueur"
 
 #: ../../src/wui/general_statistics_menu.cc:172
 msgid "Land"
@@ -4690,7 +4693,7 @@ msgstr "Couler le bateau"
 
 #: ../../src/wui/shipwindow.cc:193
 msgid "Cancel the Expedition"
-msgstr ""
+msgstr "Annuler l'expédition"
 
 #: ../../src/wui/soldiercapacitycontrol.cc:66
 msgid "Decrease capacity"

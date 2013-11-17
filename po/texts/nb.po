@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2013-09-15 17:41+0000\n"
-"PO-Revision-Date: 2013-07-19 10:33+0000\n"
+"PO-Revision-Date: 2013-11-16 18:21+0000\n"
 "Last-Translator: Hans Joachim Desserud <Unknown>\n"
 "Language-Team: Norwegian Bokmal <nb@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-09-16 04:37+0000\n"
-"X-Generator: Launchpad (build 16761)\n"
+"X-Launchpad-Export-Date: 2013-11-17 05:15+0000\n"
+"X-Generator: Launchpad (build 16831)\n"
 
 #: ../../txts/README.lua:73
 msgid "(CTRL+) 0-9: Remember and go to previously remembered locations"
@@ -27,7 +27,7 @@ msgstr ""
 
 #: ../../txts/README.lua:99
 msgid "- Detailed steps on how to trigger the bug, if possible."
-msgstr ""
+msgstr "- Detaljerte steg for å fremprovosere problemet, hvis mulig."
 
 #: ../../txts/README.lua:111
 msgid ""
@@ -35,6 +35,8 @@ msgid ""
 "helps\n"
 "demonstrate the issue, please include one or more screenshots."
 msgstr ""
+"- Hvis problemet gjelder noe som ikke vises korrekt eller hvis det gjør\n"
+"det enklere å forklare, vennligst legg til en eller flere skjermdumper."
 
 #: ../../txts/README.lua:114
 msgid ""
@@ -42,6 +44,10 @@ msgid ""
 "crashes where it can be hard to tell exactly what is triggering it), please\n"
 "include that too. For more information, see the section on Replays below."
 msgstr ""
+"- Hvis du har et lagret spill eller reprise som viser problemet (for\n"
+"eksempel en krasj hvor det kan være vanskelige å si nøyaktig hva grunnen "
+"er), vennligst\n"
+"ta det med. For mer informasjon, se delen om Repriser under."
 
 #: ../../txts/README.lua:106
 msgid ""
@@ -49,16 +55,20 @@ msgid ""
 "as\n"
 "some bugs can be platform specific."
 msgstr ""
+"- Fint hvis du nevner hvilket operativsystem du kjører Widelands på, siden "
+"noen problemer rammer bare enkelte platformer."
 
 #: ../../txts/README.lua:101
 msgid ""
 "- What you expected to happen when performing the steps and what actually "
 "happened."
 msgstr ""
+"- Hva du forventet ville skje etter å ha fulgt stegene og hva som faktisk "
+"skjer."
 
 #: ../../txts/README.lua:109
 msgid "- Which map you were playing when the bug occurred."
-msgstr ""
+msgstr "- Hvilket kart du spilte på da problemet oppstod."
 
 #: ../../txts/README.lua:103
 msgid ""
@@ -67,6 +77,8 @@ msgid ""
 "the revision number if you are running a development version or a nightly "
 "build.)"
 msgstr ""
+"- Hvilken versjon av Widelands du har (dvs. enten byggnummeret eller\n"
+"revisjonsnummeret hvis du kjører utviklingsversjonen eller et nattbygg)"
 
 #: ../../txts/README.lua:75
 msgid ".: goes to next location"
@@ -134,7 +146,7 @@ msgstr ""
 
 #: ../../txts/README.lua:77
 msgid "CTRL+F10: quits the game immediately"
-msgstr ""
+msgstr "CTRL+F10: avslutter spillet umiddelbart"
 
 #: ../../txts/editor_readme:39
 msgid "CTRL+L   Load Map"
@@ -170,7 +182,7 @@ msgstr "Tsjekkisk"
 
 #: ../../txts/README.lua:83
 msgid "DELETE: archives the current message"
-msgstr ""
+msgstr "DELETE: arkiverer den valgte meldingen"
 
 #: ../../txts/developers:193
 msgid "Dansk"
@@ -206,11 +218,11 @@ msgstr "F        Bytter til/fra fullskjerm"
 
 #: ../../txts/README.lua:78
 msgid "F11: takes a screenshot"
-msgstr ""
+msgstr "F11: tar en skjermdump"
 
 #: ../../txts/README.lua:76
 msgid "F6: shows the debug console (only in debug-builds)"
-msgstr ""
+msgstr "F6: viser feilsøkingskonsollet (kun i feilsøkingsbygg)"
 
 #: ../../txts/README.lua:71
 msgid "F: toggles fullscreen (if supported by OS)"
@@ -394,7 +406,7 @@ msgstr "M Slår minikart på/av"
 
 #: ../../txts/README.lua:65
 msgid "M: toggles minimap"
-msgstr ""
+msgstr "M: viser/skjuler minikart"
 
 #: ../../txts/tips/general_game.tip:34
 msgid ""
@@ -417,7 +429,7 @@ msgstr "Musikere"
 
 #: ../../txts/README.lua:66
 msgid "N: toggles messages ('news')"
-msgstr ""
+msgstr "N: viser/skjuler meldinger (\"nyheter\")"
 
 #: ../../txts/developers:181
 msgid ""
@@ -495,7 +507,7 @@ msgstr ""
 
 #: ../../txts/README.lua:63
 msgid "PAUSE: pauses the game"
-msgstr ""
+msgstr "PAUSE: pauser spillet"
 
 #: ../../txts/developers:281
 msgid "Packagers"
@@ -548,7 +560,7 @@ msgstr ""
 
 #: ../../txts/README.lua:118
 msgid "Replays"
-msgstr ""
+msgstr "Repriser"
 
 #: ../../txts/README.lua:133
 msgid ""
@@ -569,7 +581,7 @@ msgstr "Russisk"
 
 #: ../../txts/README.lua:68
 msgid "S: toggles statistics"
-msgstr ""
+msgstr "S: viser/skjuler statistikk"
 
 #: ../../txts/editor_readme:45
 msgid "SHIFT    (Hold) Selects first alternative tool while pressed"

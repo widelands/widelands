@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: Widelands svn4866\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2013-09-15 17:41+0000\n"
-"PO-Revision-Date: 2013-10-15 12:27+0000\n"
-"Last-Translator: fk <Unknown>\n"
+"PO-Revision-Date: 2013-11-16 21:18+0000\n"
+"Last-Translator: Tubuntu <Unknown>\n"
 "Language-Team: French <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-10-16 04:33+0000\n"
-"X-Generator: Launchpad (build 16799)\n"
+"X-Launchpad-Export-Date: 2013-11-17 05:15+0000\n"
+"X-Generator: Launchpad (build 16831)\n"
 
 #: ../../campaigns/cconfig:64
 msgid "01 - Eyes in the Dark"
@@ -176,6 +176,8 @@ msgid ""
 "similar, map should be fair. There is plenty of gold near the starting point "
 "- Do you see it?"
 msgstr ""
+"Il n'est pas aisé de trouver du charbon - apprenez à le faire efficacement. "
+"Les positions de départ sont similaires, la carte devrait être équitable."
 
 #: ../../maps/Comet Island.wmf/elemental:7
 msgid "Comet Island"
@@ -237,7 +239,7 @@ msgstr "L'Empire - Les Mois d'Exil"
 
 #: ../../maps/Fellowships.wmf/elemental:9
 msgid "Fellowships"
-msgstr ""
+msgstr "Compagnons"
 
 #: ../../maps/Finlakes.wmf/elemental:9
 msgid "Finnish Lakes"
@@ -296,7 +298,7 @@ msgstr "Péninsule Dorée"
 
 #: ../../maps/Ice wars.wmf/elemental:9
 msgid "Ice wars"
-msgstr ""
+msgstr "Guerres des glaces"
 
 #: ../../maps/Impact.wmf/elemental:7
 msgid "Impact"
@@ -432,7 +434,7 @@ msgstr "Long, long chemin"
 
 #: ../../maps/Crossing the horizon.wmf/elemental:11
 msgid "Man your ship and sail to the horizon."
-msgstr ""
+msgstr "Equipez votre navire et naviguer vers l'horizon."
 
 #: ../../maps/Twinkling Waves.wmf/elemental:11
 msgid ""
@@ -481,7 +483,7 @@ msgstr "Rendez-Vous"
 
 #: ../../maps/River Explorers.wmf/elemental:9
 msgid "River Explorers"
-msgstr ""
+msgstr "Explorateurs de rivières"
 
 #: ../../maps/Riverlands.wmf/elemental:7
 msgid "Riverlands"
@@ -702,6 +704,8 @@ msgid ""
 "The river always provides food and communication. This time eight empires "
 "will fight for the control over this land."
 msgstr ""
+"Les rivières procurent toujours nourriture et communication. Cette fois huit "
+"empires combattront pour le contrôle de ce territoire."
 
 #: ../../maps/Mystical Maze.wmf/elemental:11
 msgid ""
