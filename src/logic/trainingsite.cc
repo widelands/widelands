@@ -770,7 +770,7 @@ void
 TrainingSite::trainingDone()
 {
 	TrainFailCount_t::iterator it;
-	log("TrainingSite::trainingDone() ");
+	// log("TrainingSite::trainingDone() ");
 	for (it = training_failure_count.begin(); it != training_failure_count.end(); it++)
 	{
 		// If a soldier is present at this training level, deteoriate
@@ -782,9 +782,9 @@ TrainingSite::trainingDone()
 		else // If no soldier, let's become optimistic
 		if (0 < it->second.first)
 			it->second.first--;
-		log("%d.%d %3d || ", it->first.first, it->first.second, it->second.first);
+		// log("%d.%d %3d || ", it->first.first, it->first.second, it->second.first);
 	}
-	log(" / %3d\n", max_stall_val);
+	// log(" / %3d\n", max_stall_val);
 }
 
 }
