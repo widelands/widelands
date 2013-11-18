@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: Widelands svn4866\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2013-09-15 17:41+0000\n"
-"PO-Revision-Date: 2013-10-13 10:46+0000\n"
-"Last-Translator: fk <Unknown>\n"
+"PO-Revision-Date: 2013-11-17 16:59+0000\n"
+"Last-Translator: Emmanuel Andry <Unknown>\n"
 "Language-Team: French <eandry@mandriva.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-10-14 05:11+0000\n"
-"X-Generator: Launchpad (build 16799)\n"
+"X-Launchpad-Export-Date: 2013-11-18 05:16+0000\n"
+"X-Generator: Launchpad (build 16831)\n"
 
 #: ../../txts/README.lua:73
 msgid "(CTRL+) 0-9: Remember and go to previously remembered locations"
@@ -27,6 +27,7 @@ msgstr ".: va à site dernièr"
 #: ../../txts/README.lua:99
 msgid "- Detailed steps on how to trigger the bug, if possible."
 msgstr ""
+"- Étapes détaillées sur la manière de déclencher le bogue, si possible."
 
 #: ../../txts/README.lua:111
 msgid ""
@@ -34,6 +35,9 @@ msgid ""
 "helps\n"
 "demonstrate the issue, please include one or more screenshots."
 msgstr ""
+"- Si le bogue concerne quelque chose qui ne s'affiche pas correctement ou si "
+"cela aide à démontrer le problème, veuillez inclure une ou plusieurs "
+"captures d'écran."
 
 #: ../../txts/README.lua:114
 msgid ""
@@ -48,16 +52,21 @@ msgid ""
 "as\n"
 "some bugs can be platform specific."
 msgstr ""
+"- Veuillez inclure également le système d'exploitation sur lequel vous "
+"exécutez Widelands, quelques bogues pouvant être spécifiques à la plate-"
+"forme."
 
 #: ../../txts/README.lua:101
 msgid ""
 "- What you expected to happen when performing the steps and what actually "
 "happened."
 msgstr ""
+"- Qu'attendiez-vous qu'il se passe en effectuant les étapes et que s'est-il "
+"réellement passé."
 
 #: ../../txts/README.lua:109
 msgid "- Which map you were playing when the bug occurred."
-msgstr ""
+msgstr "- Quelle carte vous jouiez lorsque le bogue est survenu."
 
 #: ../../txts/README.lua:103
 msgid ""
@@ -66,6 +75,9 @@ msgid ""
 "the revision number if you are running a development version or a nightly "
 "build.)"
 msgstr ""
+"- Quelle version de Widelands vous utilisez (c'est à dire soit le numéro de "
+"build ou le numéro de révision si vous exécutez une version de développement "
+"ou une nightly build)."
 
 #: ../../txts/README.lua:75
 msgid ".: goes to next location"
@@ -145,7 +157,7 @@ msgstr ""
 
 #: ../../txts/README.lua:77
 msgid "CTRL+F10: quits the game immediately"
-msgstr ""
+msgstr "CTRL+F10: quitte le jeu immédiatemment"
 
 #: ../../txts/editor_readme:39
 msgid "CTRL+L   Load Map"
@@ -181,7 +193,7 @@ msgstr "Tchèque"
 
 #: ../../txts/README.lua:83
 msgid "DELETE: archives the current message"
-msgstr ""
+msgstr "SUPPR : archive le message actuel"
 
 #: ../../txts/developers:193
 msgid "Dansk"
@@ -217,15 +229,17 @@ msgstr "F        Bascule le plein écran"
 
 #: ../../txts/README.lua:78
 msgid "F11: takes a screenshot"
-msgstr ""
+msgstr "F11: prend une capture d'écran"
 
 #: ../../txts/README.lua:76
 msgid "F6: shows the debug console (only in debug-builds)"
 msgstr ""
+"F6: affiche la console de déboguage (seulement dans les compilations de "
+"déboguage)"
 
 #: ../../txts/README.lua:71
 msgid "F: toggles fullscreen (if supported by OS)"
-msgstr ""
+msgstr "F: active le mode plein écran (si supporté par l'OS)"
 
 #: ../../txts/developers:206
 msgid "Finnish"
@@ -241,7 +255,7 @@ msgstr "Français"
 
 #: ../../txts/README.lua:82
 msgid "G: jumps to location corresponding to current message"
-msgstr ""
+msgstr "G: va à l'endroit correspondant au message actuel"
 
 #: ../../txts/developers:219
 msgid "Galician"
@@ -290,6 +304,7 @@ msgstr ""
 #: ../../txts/README.lua:72
 msgid "Home: centers main mapview on starting location"
 msgstr ""
+"Home: centre la vue principale de la carte sur l'emplacement de départ"
 
 #: ../../txts/developers:23
 #: ../../txts/developers:347
@@ -315,6 +330,7 @@ msgstr ""
 #: ../../txts/README.lua:93
 msgid "If you encounter a bug, please report it to our bugtracker:"
 msgstr ""
+"Si vous rencontrez un bogue, merci de le reporter sur notre bugtracker :"
 
 #: ../../txts/README.lua:52
 msgid ""
@@ -323,6 +339,11 @@ msgid ""
 "are\n"
 "removed."
 msgstr ""
+"Si vous maintenez la touche Ctrl tout en construisant une route, les "
+"drapeaux seront placés automatiquement.\n"
+"Si vous maintenez la touche Ctrl tout en supprimant une route, tous les "
+"drapeaux jusqu'à la première \n"
+"intersection seront supprimés."
 
 #: ../../txts/tips/general_game.tip:58
 msgid ""
@@ -340,6 +361,12 @@ msgid ""
 "Wiki\n"
 "and a detailed description of the tribe economies in our online encyclopedia."
 msgstr ""
+"Si vous avez besoin de documentation ou d'aide pour Widelands ou l'éditeur "
+"Widelands,\n"
+"n'oubliez pas de visiter notre page d'accueil. Vous pouvez trouver une aide "
+"en ligne actualisée \n"
+"dans notre Wiki et une description détaillée de l'économie tribale dans nos "
+"encyclopédie en ligne."
 
 #: ../../txts/README.lua:80
 msgid ""
@@ -356,6 +383,12 @@ msgid ""
 "economic infrastructure, explore the land around you and face rivaling\n"
 "tribes."
 msgstr ""
+"Dans ce jeu, vous démarrez sur un petit lopin de terre avec juste un peu\n"
+" de ressources. Grâce à elles, vous allez créer un empire avec des milliers "
+"d'\n"
+"habitants. Sur la route vers cet objectif, vous devrez établir une\n"
+"infrastructure économique, explorer les terres autour de vous et faire face\n"
+"aux tribus rivales."
 
 #: ../../txts/README.lua:18
 #: ../../txts/editor_readme:7
@@ -409,7 +442,7 @@ msgstr "M        Afficher/Masquer la carte"
 
 #: ../../txts/README.lua:65
 msgid "M: toggles minimap"
-msgstr ""
+msgstr "M: active la minicarte"
 
 #: ../../txts/tips/general_game.tip:34
 msgid ""
@@ -460,7 +493,7 @@ msgstr "Les distributions non Unix"
 
 #: ../../txts/README.lua:70
 msgid "O: toggles objectives"
-msgstr ""
+msgstr "O: active les objectifs"
 
 #: ../../txts/license:18
 msgid ""
@@ -468,18 +501,25 @@ msgid ""
 "standalone binary package, or in the installation directory (like "
 "/usr/share/games/widelands)."
 msgstr ""
+"Sous Linux, vous pouvez trouver le fichier appelé COPYING à la racine de la "
+"source ou du paquet binaire autonome, soit dans le répertoire d'installation "
+"(comme /usr/share/games/widelands)."
 
 #: ../../txts/license:20
 msgid ""
 "On MacOS, you can find the file called COPYING in the archive you downloaded "
 "from the website."
 msgstr ""
+"Sur MacOS, vous pouvez trouver le fichier appelé COPYING dans l'archive que "
+"vous avez téléchargé à partir du site Web."
 
 #: ../../txts/license:19
 msgid ""
 "On Windows, you can find the file called COPYING.txt in the installation "
 "folder and the Widelands Start menu entry provides a link to this file."
 msgstr ""
+"Sous Windows, vous pouvez trouver le fichier appelé COPYING.txt dans le "
+"dossier d'installation et dans l'entrée du menu démarrer Widelands."
 
 #: ../../txts/README.lua:85
 msgid "Online Help"
@@ -507,15 +547,15 @@ msgstr "P        Afficher/Masquer le menu joueur"
 
 #: ../../txts/README.lua:62
 msgid "PAGEDOWN: decreases gamespeed"
-msgstr ""
+msgstr "PAGEDOWN: ralenti la vitesse du jeu"
 
 #: ../../txts/README.lua:61
 msgid "PAGEUP: increases gamespeed"
-msgstr ""
+msgstr "PAGEUP: accélère la vitesse du jeu"
 
 #: ../../txts/README.lua:63
 msgid "PAUSE: pauses the game"
-msgstr ""
+msgstr "PAUSE: met le jeu en pause"
 
 #: ../../txts/developers:281
 msgid "Packagers"
@@ -576,7 +616,7 @@ msgstr ""
 
 #: ../../txts/README.lua:118
 msgid "Replays"
-msgstr ""
+msgstr "Replays"
 
 #: ../../txts/README.lua:133
 msgid ""
@@ -597,7 +637,7 @@ msgstr "Russe"
 
 #: ../../txts/README.lua:68
 msgid "S: toggles statistics"
-msgstr ""
+msgstr "S: active les statistiques"
 
 #: ../../txts/editor_readme:45
 msgid "SHIFT    (Hold) Selects first alternative tool while pressed"
@@ -711,12 +751,18 @@ msgid ""
 "quesions or general support) or https://launchpad.net/widelands (Bugtracker, "
 "Translations)."
 msgstr ""
+"Ce jeu est livré tel quel, sans aucune garantie. Pour plus d'informations et "
+"de support, vous pouvez nous trouver sur http://wl.widelands.org (Site Web, "
+"Wiki, Forum pour questions ou un support en général) ou "
+"https://launchpad.net/widelands (bugtracker, traductions)."
 
 #: ../../txts/license:9
 msgid ""
 "This game is Free and Open Source (FOSS), licensed under the GNU General "
 "Public License (GPL) V2.0."
 msgstr ""
+"Ce jeu est gratuit et Open Source (FOSS), sous la licence GNU General Public "
+"(GPL) V2.0."
 
 #: ../../txts/editor_readme:14
 msgid ""
@@ -805,12 +851,20 @@ msgid ""
 "started\n"
 "through playable tutorials."
 msgstr ""
+"Widelands est un jeu de stratégie en temps réel gratuit et open source avec\n"
+"campagnes solo et un mode multijoueur. Le jeu a été inspiré par Settler II "
+"mais a\n"
+"significativement plus de variété et de profondeur. Pourtant, il est facile "
+"de se\n"
+" lancer à travers des tutoriels jouables."
 
 #: ../../txts/README.lua:35
 msgid ""
 "Widelands is licensed under the GNU General Public License (GPL). For more\n"
 "information, see the file 'COPYING'."
 msgstr ""
+"Widelands est sous licence GNU General Public License (GPL). Pour plus\n"
+"d'informations, voir le fichier «cCOPYING»."
 
 #: ../../txts/README.lua:40
 msgid ""
@@ -823,6 +877,17 @@ msgid ""
 "or\n"
 "creating new maps - get in touch on our homepage."
 msgstr ""
+"Widelands est presque complet en termes de fonctionnalités et est amusant à "
+"jouer\n"
+" seul et même encore plus en multijoueur. Pourtant il reste toujours du "
+"travail\n"
+" à faire dans tous les domaines. Si vous êtes intéressé pour contribuer - "
+"que ce soit\n"
+" en faisant des graphismes, des corrections de bogues ou l'ajout de "
+"nouvelles \n"
+"fonctionnalités, traduire le jeu dans votre langue ou la création de "
+"nouvelles cartes\n"
+" - entrez en contact sur ​​notre page d'accueil."
 
 #: ../../txts/README.lua:120
 msgid ""
@@ -849,12 +914,17 @@ msgid ""
 "You can find more information on FOSS and the GPL by visiting the following "
 "webpage: "
 msgstr ""
+"Vous pouvez trouver plus d'informations sur les logiciels libres et la GPL "
+"en visitant le site web suivant: "
 
 #: ../../txts/license:14
 msgid ""
 "You can find the full text of the license there as well as further "
 "information about its philosophy and the legal implications."
 msgstr ""
+"Vous pourrez y trouver le texte complet de la licence ainsi que de plus "
+"amples informations au sujet de sa philosophie et ses implications "
+"juridiques."
 
 #: ../../txts/tips/editor.tip:6
 msgid ""
@@ -871,6 +941,9 @@ msgid ""
 "You can skip confirmation windows for irreversible actions if you hold CTRL\n"
 "while clicking on the action button."
 msgstr ""
+"Vous pouvez passer les fenêtres de confirmation pour les actions "
+"irréversibles\n"
+"si vous maintenez la touche CTRL en cliquant sur le bouton d'action."
 
 #: ../../txts/tips/multiplayer.tip:6
 msgid ""
@@ -902,4 +975,4 @@ msgstr "Un jeu de stratégie open-source"
 
 #: ../../txts/license:12
 msgid "http://www.gnu.org/licenses/old-licenses/gpl-2.0"
-msgstr ""
+msgstr "http://www.gnu.org/licenses/old-licenses/gpl-2.0"
