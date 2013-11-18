@@ -17,36 +17,38 @@
  *
  */
 
+#include "wui/interactive_base.h"
+
 #include <boost/bind.hpp>
 #include <boost/format.hpp>
 
 #include "constants.h"
 #include "economy/flag.h"
 #include "economy/road.h"
-#include "game_chat_menu.h"
-#include "game_debug_ui.h"
 #include "gamecontroller.h"
 #include "graphic/font_handler1.h"
 #include "graphic/rendertarget.h"
-#include "interactive_player.h"
 #include "logic/checkstep.h"
 #include "logic/cmd_queue.h"
 #include "logic/game.h"
 #include "logic/immovable.h"
+#include "logic/maphollowregion.h"
 #include "logic/maptriangleregion.h"
 #include "logic/player.h"
 #include "logic/productionsite.h"
-#include "logic/maphollowregion.h"
-#include "mapviewpixelconstants.h"
-#include "mapviewpixelfunctions.h"
-#include "minimap.h"
-#include "overlay_manager.h"
 #include "profile/profile.h"
-#include "quicknavigation.h"
 #include "scripting/scripting.h"
 #include "text_layout.h"
 #include "upcast.h"
 #include "wlapplication.h"
+#include "wui/game_chat_menu.h"
+#include "wui/game_debug_ui.h"
+#include "wui/interactive_player.h"
+#include "wui/mapviewpixelconstants.h"
+#include "wui/mapviewpixelfunctions.h"
+#include "wui/minimap.h"
+#include "wui/overlay_manager.h"
+#include "wui/quicknavigation.h"
 
 using boost::format;
 using Widelands::Area;
@@ -91,6 +93,8 @@ Interactive_Base::Interactive_Base
 	m_road_buildhelp_overlay_jobid(Overlay_Manager::Job_Id::Null()),
 	m_buildroad                   (0),
 	m_road_build_player           (0),
+	// Initialize chatoveraly before the toolbar so it is below
+	m_chatOverlay                 (new ChatOverlay(this, 10, 25, get_w() / 2, get_h() - 25)),
 	m_toolbar                     (this, 0, 0, UI::Box::Horizontal),
 	m_label_speed_shadow
 		(this, get_w() - 1, 0, std::string(), UI::Align_TopRight),
@@ -112,6 +116,8 @@ Interactive_Base::Interactive_Base
 		(global_s.get_bool("snap_windows_only_when_overlapping", false));
 	set_dock_windows_to_edges
 		(global_s.get_bool("dock_windows_to_edges", false));
+
+	m_chatOverlay->setLogProvider(m_log_sender);
 
 	//  Switch to the new graphics system now, if necessary.
 	WLApplication::get()->refresh_graphics();
@@ -742,7 +748,7 @@ bool Interactive_Base::append_build_road(Coords const field) {
 Return the current road-building startpoint
 ===============
 */
-Coords Interactive_Base::get_build_road_start() const throw () {
+Coords Interactive_Base::get_build_road_start() const {
 	assert(m_buildroad);
 
 	return m_buildroad->get_start();
@@ -753,11 +759,21 @@ Coords Interactive_Base::get_build_road_start() const throw () {
 Return the current road-building endpoint
 ===============
 */
-Coords Interactive_Base::get_build_road_end() const throw () {
+Coords Interactive_Base::get_build_road_end() const {
 	assert(m_buildroad);
 
 	return m_buildroad->get_end();
 }
+
+void Interactive_Base::log_message(const std::string& message) const
+{
+	// Send to linked receivers
+	LogMessage lm;
+	lm.msg = message;
+	lm.time = time(nullptr);
+	m_log_sender.send(lm);
+}
+
 
 
 /*

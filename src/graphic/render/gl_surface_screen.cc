@@ -16,10 +16,12 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-#include <algorithm>
+#include "graphic/render/gl_surface_screen.h"
 
-#include "gl_utils.h"
-#include "gl_surface_screen.h"
+#include <algorithm>
+#include <cassert>
+
+#include "graphic/render/gl_utils.h"
 
 GLSurfaceScreen::GLSurfaceScreen(uint16_t w, uint16_t h)
 {
@@ -57,6 +59,12 @@ void GLSurfaceScreen::lock(Surface::LockMode mode)
 	m_pixels.reset(new uint8_t[m_w * m_h * 4]);
 
 	if (mode == Lock_Normal) {
+		// FIXME: terrain dither picture somehow leave the alpha
+		// channel with non-1 values, so it is cleared before
+		// accessing pixels.
+		glColorMask(false, false, false, true);
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+		glColorMask(true, true, true, true);
 		glReadPixels(0, 0, m_w, m_h, GL_RGBA, GL_UNSIGNED_BYTE, m_pixels.get());
 		swap_rows();
 	}
@@ -71,7 +79,7 @@ void GLSurfaceScreen::unlock(Surface::UnlockMode mode)
 		glDrawPixels(m_w, m_h, GL_RGBA, GL_UNSIGNED_BYTE, m_pixels.get());
 	}
 
-	m_pixels.reset(0);
+	m_pixels.reset(nullptr);
 }
 
 uint16_t GLSurfaceScreen::get_pitch() const {

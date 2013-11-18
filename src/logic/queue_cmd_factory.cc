@@ -17,16 +17,16 @@
  *
  */
 
-#include "queue_cmd_factory.h"
+#include "logic/queue_cmd_factory.h"
 
-#include "cmd_calculate_statistics.h"
-#include "cmd_incorporate.h"
-#include "cmd_luacoroutine.h"
-#include "cmd_luascript.h"
 #include "economy/cmd_call_economy_balance.h"
-#include "instances.h"
-#include "playercommand.h"
-#include "queue_cmd_ids.h"
+#include "logic/cmd_calculate_statistics.h"
+#include "logic/cmd_incorporate.h"
+#include "logic/cmd_luacoroutine.h"
+#include "logic/cmd_luascript.h"
+#include "logic/instances.h"
+#include "logic/playercommand.h"
+#include "logic/queue_cmd_ids.h"
 #include "wexception.h"
 
 namespace Widelands {
@@ -53,6 +53,10 @@ GameLogicCommand & Queue_Cmd_Factory::create_correct_queue_command
 		return *new Cmd_ShipScoutDirection        ();
 	case QUEUE_CMD_SHIP_EXPLORE:
 		return *new Cmd_ShipExploreIsland         ();
+	case QUEUE_CMD_SHIP_SINK:
+		return *new Cmd_ShipSink                  ();
+	case QUEUE_CMD_SHIP_CANCELEXPEDITION:
+		return *new Cmd_ShipCancelExpedition      ();
 	case QUEUE_CMD_ENHANCEBUILDING:
 		return *new Cmd_EnhanceBuilding           ();
 	case QUEUE_CMD_BULLDOZE:
@@ -99,6 +103,8 @@ GameLogicCommand & Queue_Cmd_Factory::create_correct_queue_command
 		return *new Cmd_DismantleBuilding         ();
 	case QUEUE_CMD_EVICTWORKER:
 		return *new Cmd_EvictWorker();
+	case QUEUE_CMD_MILITARYSITESETSOLDIERPREFERENCE:
+		return *new Cmd_MilitarySiteSetSoldierPreference();
 	default:
 		throw wexception("Unknown Queue_Cmd_Id in file: %u", id);
 	}

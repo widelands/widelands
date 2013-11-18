@@ -20,6 +20,7 @@
 #ifndef ANIMATION_GFX_H
 #define ANIMATION_GFX_H
 
+#include <cstddef>
 #include <vector>
 
 #include "point.h"
@@ -33,7 +34,7 @@ struct AnimationGfx { /// The graphics belonging to an animation.
 	AnimationGfx(const AnimationData& data, ImageCache*);
 
 	size_t nr_frames() const {return m_frames.size();}
-	const Point& hotspot() const throw () {return m_hotspot;}
+	const Point& hotspot() const {return m_hotspot;}
 	const Image& get_frame(size_t i, const RGBColor& playercolor);
 	const Image& get_frame(size_t i) const;
 

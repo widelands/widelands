@@ -7,21 +7,21 @@ msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2013-06-16 09:11+0000\n"
+"POT-Creation-Date: 2013-09-15 17:41+0000\n"
 "PO-Revision-Date: 2013-04-10 20:26+0000\n"
 "Last-Translator: Kiibakun <kibafang@gmail.com>\n"
 "Language-Team: Spanish <es@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-06-17 05:16+0000\n"
-"X-Generator: Launchpad (build 16667)\n"
+"X-Launchpad-Export-Date: 2013-09-16 04:49+0000\n"
+"X-Generator: Launchpad (build 16761)\n"
 
 #: ../../scripting/win_condition_texts.lua:31
 msgid "%i trees."
 msgstr "%i árboles"
 
-#: ../../scripting/win_condition_texts.lua:54
+#: ../../scripting/win_condition_texts.lua:55
 msgid "%s %s %i%% of the land (%i of %i)."
 msgstr "%s %s %i%% de la tierra (%i de %i)."
 
@@ -95,6 +95,10 @@ msgstr "Juego Interminable (sin niebla)"
 msgid "Keep it for %i more minutes to win the game."
 msgstr "Conservarlo por %i minutos para ganar el juego."
 
+#: ../../scripting/win_condition_texts.lua:54
+msgid "Otherwise the game will end in %i minutes."
+msgstr ""
+
 #: ../../scripting/win_condition_texts.lua:23
 #: ../../scripting/win_condition_texts.lua:29
 msgid "Player overview:"
@@ -125,6 +129,7 @@ msgid "Territorial Time"
 msgstr ""
 
 #: ../../scripting/win_condition_texts.lua:27
+#: ../../scripting/win_condition_texts.lua:53
 msgid "The game will end in %i minutes."
 msgstr "El juego terminará en %i minutos."
 
@@ -178,12 +183,6 @@ msgstr ""
 "Obtienes puntos por mercancías preciosa en tus almacenes, el jugador con el "
 "mayor número de mercancías al final de 4 horas gana el juego."
 
-#: ../../scripting/win_condition_texts.lua:8
-msgid ""
-"You have nothing to command left. If you want, you may continue as spectator."
-msgstr ""
-"No tienes nada por hacer. Si quieres, puedes continuar como espectador."
-
 #: ../../scripting/win_condition_texts.lua:3
 msgid "You have won this game!"
 msgstr "Has ganado este juego!"
@@ -191,6 +190,12 @@ msgstr "Has ganado este juego!"
 #: ../../scripting/win_condition_texts.lua:17
 msgid "You lost"
 msgstr "Has perdido"
+
+#: ../../scripting/win_condition_texts.lua:8
+msgid ""
+"You lost your last warehouse and are therefore defeated. You may continue as "
+"spectator if you want."
+msgstr ""
 
 #: ../../scripting/win_condition_texts.lua:48
 msgid "You own more than half of the maps area."
@@ -207,10 +212,6 @@ msgstr "Has ganado"
 #: ../../scripting/win_condition_texts.lua:18
 msgid "You've lost this game!"
 msgstr "Has pedido este juego!"
-
-#: ../../scripting/win_condition_texts.lua:53
-msgid "game will end in %i minutes."
-msgstr "el juego terminará en %i minutos"
 
 #: ../../scripting/win_condition_texts.lua:33
 msgid "with %i trees."

@@ -17,24 +17,22 @@
  *
  */
 
+#include "map_io/widelands_map_elemental_data_packet.h"
+
 #include <boost/algorithm/string.hpp>
 
 #include "container_iterate.h"
-
 #include "logic/editor_game_base.h"
 #include "logic/game_data_error.h"
 #include "logic/map.h"
 #include "logic/world.h"
 #include "profile/profile.h"
 
-#include "widelands_map_elemental_data_packet.h"
-
 namespace Widelands {
 
 #define CURRENT_PACKET_VERSION 1
 
 void Map_Elemental_Data_Packet::Pre_Read(FileSystem & fs, Map * map)
-throw (_wexception)
 {
 	Profile prof;
 	prof.read("elemental", 0, fs);
@@ -75,7 +73,6 @@ throw (_wexception)
 
 void Map_Elemental_Data_Packet::Read
 	(FileSystem & fs, Editor_Game_Base & egbase, bool, Map_Map_Object_Loader &)
-throw (_wexception)
 {
 	Pre_Read(fs, &egbase.map());
 }
@@ -83,7 +80,6 @@ throw (_wexception)
 
 void Map_Elemental_Data_Packet::Write
 	(FileSystem & fs, Editor_Game_Base & egbase, Map_Map_Object_Saver &)
-throw (_wexception)
 {
 
 	Profile prof;

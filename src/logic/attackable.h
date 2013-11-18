@@ -22,7 +22,7 @@
 
 namespace Widelands {
 
-struct Player;
+class Player;
 class Soldier;
 
 enum {

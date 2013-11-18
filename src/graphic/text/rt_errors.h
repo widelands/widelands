@@ -55,4 +55,3 @@ DEF_ERR(WidthTooSmall);
 };
 
 #endif /* end of include guard: RT_ERRORS_H */
-

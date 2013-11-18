@@ -17,7 +17,7 @@
  *
  */
 
-#include "game_chat_menu.h"
+#include "wui/game_chat_menu.h"
 
 #include "i18n.h"
 

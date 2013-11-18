@@ -21,11 +21,10 @@
 #define UI_EDITBOX_H
 
 #include <SDL_keyboard.h>
-#include <boost/signal.hpp>
-
-#include "button.h"
+#include <boost/signals2.hpp>
 
 #include "align.h"
+#include "ui_basic/button.h"
 #include "graphic/graphic.h"
 
 #define CHAT_HISTORY_SIZE 5
@@ -44,9 +43,9 @@ struct EditBox : public Panel {
 		 const Image* background = g_gr->images().get("pics/but2.png"), Align align = Align_Center);
 	virtual ~EditBox();
 
-	boost::signal<void ()> changed;
-	boost::signal<void ()> ok;
-	boost::signal<void ()> cancel;
+	boost::signals2::signal<void ()> changed;
+	boost::signals2::signal<void ()> ok;
+	boost::signals2::signal<void ()> cancel;
 
 	const std::string & text() const;
 	void setText(const std::string &);

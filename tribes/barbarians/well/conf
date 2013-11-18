@@ -4,6 +4,9 @@ output=water
 [buildcost]
 trunk=4
 
+[return_on_dismantle]
+trunk=2
+
 [aihints]
 build_material=false
 

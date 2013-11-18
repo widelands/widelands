@@ -20,11 +20,10 @@
 #ifndef CONSTRUCTIONSITE_H
 #define CONSTRUCTIONSITE_H
 
-#include "partially_finished_building.h"
-
-#include "player.h"
-
 #include <vector>
+
+#include "logic/partially_finished_building.h"
+#include "logic/player.h"
 
 namespace Widelands {
 
@@ -69,7 +68,7 @@ class ConstructionSite : public Partially_Finished_Building {
 public:
 	ConstructionSite(const ConstructionSite_Descr & descr);
 
-	char const * type_name() const throw () {return "constructionsite";}
+	char const * type_name() const {return "constructionsite";}
 	virtual std::string get_statistics_string();
 
 	const Player::Constructionsite_Information & get_info() {return m_info;}
@@ -77,8 +76,7 @@ public:
 	virtual WaresQueue & waresqueue(Ware_Index);
 
 	virtual void set_building(const Building_Descr &);
-	void set_previous_building(const Building_Descr * const);
-	const Building_Descr & building() const throw () {return *m_building;}
+	const Building_Descr & building() const {return *m_building;}
 
 	virtual void init   (Editor_Game_Base &);
 	virtual void cleanup(Editor_Game_Base &);
@@ -99,8 +97,6 @@ protected:
 	virtual void draw(const Editor_Game_Base &, RenderTarget &, const FCoords&, const Point&);
 
 private:
-	const Building_Descr * m_prev_building; // Building standing here earlier
-
 	int32_t  m_fetchfromflag;  // # of items to fetch from flag
 
 	bool     m_builder_idle;   // used to determine whether the builder is idle

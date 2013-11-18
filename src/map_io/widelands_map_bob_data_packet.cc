@@ -17,13 +17,12 @@
  *
  */
 
-#include "widelands_map_bob_data_packet.h"
+#include "map_io/widelands_map_bob_data_packet.h"
 
 #include "logic/player.h"
 #include "logic/tribe.h"
-
-#include "widelands_map_map_object_loader.h"
-#include "widelands_map_map_object_saver.h"
+#include "map_io/widelands_map_map_object_loader.h"
+#include "map_io/widelands_map_map_object_saver.h"
 
 namespace Widelands {
 
@@ -113,7 +112,6 @@ void Map_Bob_Data_Packet::Read
 	 Editor_Game_Base      &       egbase,
 	 bool                    const skip,
 	 Map_Map_Object_Loader &       mol)
-throw (_wexception)
 {
 	FileRead fr;
 	fr.Open(fs, "binary/bob");
@@ -143,7 +141,6 @@ throw (_wexception)
 
 void Map_Bob_Data_Packet::Write
 	(FileSystem & /* fs */, Editor_Game_Base & /* egbase */, Map_Map_Object_Saver & /* mos */)
-throw (_wexception)
 {
 	throw wexception("bob packet is deprecated");
 }

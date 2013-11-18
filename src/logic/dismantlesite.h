@@ -20,10 +20,9 @@
 #ifndef DISMANTLESITE_H
 #define DISMANTLESITE_H
 
-#include "building.h"
-#include "player.h"
-
-#include "partially_finished_building.h"
+#include "logic/building.h"
+#include "logic/partially_finished_building.h"
+#include "logic/player.h"
 
 namespace Widelands {
 
@@ -55,7 +54,6 @@ class DismantleSite : public Partially_Finished_Building {
 	friend struct Map_Buildingdata_Data_Packet;
 
 	static const uint32_t DISMANTLESITE_STEP_TIME = 45000;
-	static const uint8_t RATIO_RETURNED_WARES = 2;  // you get half the wares back
 
 	MO_DESCR(DismantleSite_Descr);
 
@@ -63,9 +61,9 @@ public:
 	DismantleSite(const DismantleSite_Descr & descr);
 	DismantleSite
 		(const DismantleSite_Descr & descr, Editor_Game_Base &,
-		 Coords const, Player &, const Building_Descr &, bool);
+		 Coords const, Player &, bool, Building::FormerBuildings & former_buildings);
 
-	char const * type_name() const throw () {return "dismantlesite";}
+	char const * type_name() const {return "dismantlesite";}
 	virtual std::string get_statistics_string();
 
 	virtual bool burn_on_destroy();
@@ -73,7 +71,7 @@ public:
 
 	virtual bool get_building_work(Game &, Worker &, bool success);
 
-	static void count_returned_wares(const Building_Descr & building, std::map<Ware_Index, uint8_t> & res);
+	static void count_returned_wares(Building* building, std::map<Ware_Index, uint8_t> & res);
 
 protected:
 	virtual uint32_t build_step_time() const {return DISMANTLESITE_STEP_TIME;}

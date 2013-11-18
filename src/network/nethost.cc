@@ -17,46 +17,47 @@
  *
  */
 
-#include "nethost.h"
+#include "network/nethost.h"
+
+#include <sstream>
+
+#include <boost/format.hpp>
+#include <boost/lexical_cast.hpp>
+#ifndef _WIN32
+#include <unistd.h> // for usleep
+#endif
 
 #include "build_info.h"
 #include "chat.h"
 #include "computer_player.h"
 #include "game_io/game_loader.h"
 #include "game_io/game_preload_data_packet.h"
-#include "ui_fsmenu/launchMPG.h"
 #include "i18n.h"
-#include "internet_gaming.h"
 #include "io/dedicated_log.h"
 #include "io/fileread.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "logic/game.h"
 #include "logic/player.h"
 #include "logic/playercommand.h"
+#include "logic/playersmanager.h"
 #include "logic/tribe.h"
 #include "map_io/widelands_map_loader.h"
 #include "md5.h"
-#include "network_gaming_messages.h"
-#include "network_lan_promotion.h"
-#include "network_player_settings_backend.h"
-#include "network_protocol.h"
-#include "network_system.h"
+#include "network/internet_gaming.h"
+#include "network/network_gaming_messages.h"
+#include "network/network_lan_promotion.h"
+#include "network/network_player_settings_backend.h"
+#include "network/network_protocol.h"
+#include "network/network_system.h"
 #include "profile/profile.h"
 #include "scripting/scripting.h"
 #include "ui_basic/progresswindow.h"
+#include "ui_fsmenu/launchMPG.h"
 #include "wexception.h"
 #include "wlapplication.h"
 #include "wui/game_tips.h"
 #include "wui/interactive_player.h"
 #include "wui/interactive_spectator.h"
-
-#include <boost/format.hpp>
-#include <boost/lexical_cast.hpp>
-#include <sstream>
-
-#ifndef _WIN32
-#include <unistd.h> // for usleep
-#endif
 
 using boost::format;
 
@@ -497,13 +498,6 @@ struct HostChatProvider : public ChatProvider {
 		h->send(c);
 	}
 
-	void send_local(const std::string & msg) {
-		ChatMessage c;
-		c.time = time(0);
-		c.msg = msg;
-		ChatProvider::send(c);
-	}
-
 	const std::vector<ChatMessage> & getMessages() const {
 		return messages;
 	}
@@ -901,7 +895,9 @@ void NetHost::run(bool const autorun)
 		game.run
 			(loaderUI.get(),
 			 d->settings.savegame ? Widelands::Game::Loaded : d->settings.scenario ?
-			 Widelands::Game::NewMPScenario : Widelands::Game::NewNonScenario);
+			 Widelands::Game::NewMPScenario : Widelands::Game::NewNonScenario,
+			 "",
+			 false);
 
 		delete tips;
 
@@ -916,7 +912,7 @@ void NetHost::run(bool const autorun)
 				// We do *not* only check connected users but all, as normally the players are already
 				// disconnected once the server reaches this line of code.
 				if (d->settings.users.at(i).name != d->localplayername) // all names, but the dedicated server
-					if (d->settings.users.at(i).winner)
+					if (d->settings.users.at(i).result == Widelands::PlayerEndResult::PLAYER_WON)
 						winners.push_back(d->settings.users.at(i).name);
 			DedicatedLog::get()->game_end(winners);
 		}
@@ -2039,16 +2035,14 @@ void NetHost::welcomeClient (uint32_t const number, std::string & playername)
 		for (uint32_t i = 0; i < d->settings.users.size(); ++i)
 			if (d->settings.users[i].position == UserSettings::notConnected()) {
 				client.usernum = i;
-				d->settings.users[i].winner = false;
-				d->settings.users[i].points = 0;
+				d->settings.users[i].result = Widelands::PlayerEndResult::UNDEFINED;
 				d->settings.users[i].ready  = true;
 				break;
 			}
 	if (client.usernum == -1) {
 		client.usernum = d->settings.users.size();
 		UserSettings newuser;
-		newuser.winner = false;
-		newuser.points = 0;
+		newuser.result = Widelands::PlayerEndResult::UNDEFINED;
 		newuser.ready  = true;
 		d->settings.users.push_back(newuser);
 	}
@@ -2978,22 +2972,33 @@ void NetHost::reaper()
 }
 
 
-void NetHost::report_result(uint8_t player, int32_t points, bool win, std::string extra)
+void NetHost::report_result
+	(uint8_t p_nr, Widelands::PlayerEndResult result, const std::string & info)
 {
+	// Send to game
+	Widelands::PlayerEndStatus pes;
+	Widelands::Player* player = d->game->get_player(p_nr);
+	assert(player);
+	pes.player = player->player_number();
+	pes.time = d->game->get_gametime();
+	pes.result = result;
+	pes.info = info;
+	d->game->player_manager()->add_player_end_status(pes);
+
 	// there might be more than one client that control this Widelands player
 	// and maybe even none -> computer player
 	for (uint16_t i = 0; i < d->settings.users.size(); ++i) {
 		UserSettings & user = d->settings.users.at(i);
-		if (user.position == player - 1) {
-			user.winner               = win;
-			user.points               = points;
-			user.win_condition_string = extra;
-
-		if (!win)
-			sendSystemMessageCode("PLAYER_DEFEATED", user.name);
+		if (user.position == p_nr - 1) {
+			user.result               = result;
+			user.win_condition_string = info;
+			if (result == Widelands::PlayerEndResult::PLAYER_LOST) {
+				sendSystemMessageCode("PLAYER_DEFEATED", user.name);
+			}
 		}
 	}
 
-	dedicatedlog("NetHost::report_result(%d, %d, %s, %s)\n", player, points, win?"won":"lost", extra.c_str());
+	dedicatedlog
+		("NetHost::report_result(%d, %u, %s)\n",
+		 player->player_number(), static_cast<uint8_t>(result), info.c_str());
 }
-

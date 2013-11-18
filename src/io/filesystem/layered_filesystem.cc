@@ -17,18 +17,17 @@
  *
  */
 
-#include "layered_filesystem.h"
-#include "io/fileread.h"
-#include "io/streamread.h"
-
-#include "build_info.h"
-#include "log.h"
-#include "wexception.h"
-
-#include "container_iterate.h"
+#include "io/filesystem/layered_filesystem.h"
 
 #include <cstdio>
 #include <memory>
+
+#include "build_info.h"
+#include "container_iterate.h"
+#include "io/fileread.h"
+#include "io/streamread.h"
+#include "log.h"
+#include "wexception.h"
 
 LayeredFileSystem * g_fs;
 
@@ -407,7 +406,6 @@ FileSystem * LayeredFileSystem::MakeSubFileSystem(const std::string & dirname)
 		if ((*it)->IsWritable() and (*it)->FileExists(dirname))
 			return (*it)->MakeSubFileSystem(dirname);
 
-	printf("dirname %s\n", dirname.c_str());
 	throw wexception("LayeredFileSystem: unable to create sub filesystem");
 }
 
@@ -426,7 +424,6 @@ FileSystem * LayeredFileSystem::CreateSubFileSystem(const std::string & dirname,
 		if ((*it)->IsWritable() and not (*it)->FileExists(dirname))
 			return (*it)->CreateSubFileSystem(dirname, type);
 
-	printf("dirname %s\n", dirname.c_str());
 	throw wexception("LayeredFileSystem: unable to create sub filesystem");
 }
 

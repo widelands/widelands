@@ -22,7 +22,7 @@
 
 #include <lua.hpp>
 
-#include "lua_bases.h"
+#include "scripting/lua_bases.h"
 
 namespace LuaEditor {
 

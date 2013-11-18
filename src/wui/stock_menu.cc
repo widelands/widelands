@@ -17,15 +17,15 @@
  *
  */
 
-#include "stock_menu.h"
+#include "wui/stock_menu.h"
 
 #include "economy/economy.h"
 #include "graphic/graphic.h"
 #include "i18n.h"
-#include "interactive_player.h"
 #include "logic/player.h"
 #include "logic/warehouse.h"
 #include "ui_basic/tabpanel.h"
+#include "wui/interactive_player.h"
 
 static const char pic_tab_wares[] = "pics/menu_tab_wares.png";
 static const char pic_tab_workers[] = "pics/menu_tab_workers.png";
@@ -37,7 +37,7 @@ static const char pic_tab_workers_warehouse[] =
 Stock_Menu::Stock_Menu
 	(Interactive_Player & plr, UI::UniqueWindow::Registry & registry)
 :
-UI::UniqueWindow(&plr, "stock_menu", &registry, 640, 480, _("Stock")),
+UI::UniqueWindow(&plr, "stock_menu", &registry, 480, 640, _("Stock")),
 m_player(plr)
 {
 	UI::Tab_Panel * tabs =

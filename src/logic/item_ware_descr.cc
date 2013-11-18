@@ -17,12 +17,12 @@
  *
  */
 
+#include "logic/item_ware_descr.h"
+
 #include "graphic/animation.h"
 #include "graphic/graphic.h"
 #include "i18n.h"
 #include "profile/profile.h"
-
-#include "item_ware_descr.h"
 
 namespace Widelands {
 

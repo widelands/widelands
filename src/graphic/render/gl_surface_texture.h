@@ -19,7 +19,7 @@
 #ifndef GL_SURFACE_TEXTURE_H
 #define GL_SURFACE_TEXTURE_H
 
-#include "gl_surface.h"
+#include "graphic/render/gl_surface.h"
 
 struct SDL_Surface;
 

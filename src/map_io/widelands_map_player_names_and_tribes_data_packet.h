@@ -20,11 +20,11 @@
 #ifndef WIDELANDS_MAP_PLAYER_NAMES_AND_TRIBES_DATA_PACKET_H
 #define WIDELANDS_MAP_PLAYER_NAMES_AND_TRIBES_DATA_PACKET_H
 
-#include "widelands_map_data_packet.h"
+#include "map_io/widelands_map_data_packet.h"
 
 namespace Widelands {
 
-struct Map;
+class Map;
 
 /*
  * This data packet contains player names
@@ -35,9 +35,9 @@ struct Map_Player_Names_And_Tribes_Data_Packet : public Map_Data_Packet {
 
 	virtual void Read
 		(FileSystem &, Editor_Game_Base &, bool, Map_Map_Object_Loader &)
-		throw (_wexception);
+	;
 	void Write(FileSystem &, Editor_Game_Base &, Map_Map_Object_Saver &)
-		throw (_wexception);
+	;
 
 	void Pre_Read(FileSystem &, Map *, bool skip);
 };

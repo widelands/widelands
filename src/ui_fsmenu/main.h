@@ -20,8 +20,7 @@
 #ifndef FULLSCREEN_MENU_MAIN_H
 #define FULLSCREEN_MENU_MAIN_H
 
-#include "base.h"
-
+#include "ui_fsmenu/base.h"
 #include "ui_basic/button.h"
 #include "ui_basic/textarea.h"
 
@@ -32,6 +31,7 @@
 struct Fullscreen_Menu_Main : public Fullscreen_Menu_Base {
 	Fullscreen_Menu_Main();
 	enum {
+		mm_summary,
 		mm_playtutorial,
 		mm_singleplayer,
 		mm_multiplayer,
@@ -58,6 +58,7 @@ private:
 	UI::Button                     exit;
 	UI::Textarea                                version;
 	UI::Textarea                                copyright;
+	UI::Textarea                                gpl;
 };
 
 #endif

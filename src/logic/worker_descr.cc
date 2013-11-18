@@ -17,24 +17,21 @@
  *
  */
 
-#include "worker_descr.h"
-
-#include "carrier.h"
+#include "logic/worker_descr.h"
 
 #include "graphic/graphic.h"
 #include "helper.h"
 #include "i18n.h"
-#include "nodecaps.h"
+#include "logic/carrier.h"
+#include "logic/nodecaps.h"
+#include "logic/soldier.h"
+#include "logic/tribe.h"
+#include "logic/worker.h"
+#include "logic/worker_program.h"
 #include "profile/profile.h"
-#include "soldier.h"
-#include "sound/sound_handler.h"
-#include "tribe.h"
-#include "wexception.h"
-#include "worker.h"
-#include "worker_program.h"
-
 #include "ref_cast.h"
-#include <scripting/pdep/llimits.h>
+#include "sound/sound_handler.h"
+#include "wexception.h"
 
 namespace Widelands {
 
@@ -209,7 +206,7 @@ const
 }
 
 
-uint32_t Worker_Descr::movecaps() const throw () {return MOVECAPS_WALK;}
+uint32_t Worker_Descr::movecaps() const {return MOVECAPS_WALK;}
 
 
 /**
@@ -235,7 +232,7 @@ bool Worker_Descr::can_act_as(Ware_Index const index) const {
 	return becomes_index ? can_act_as(becomes_index) : false;
 }
 
-Ware_Index Worker_Descr::worker_index() const throw () {
+Ware_Index Worker_Descr::worker_index() const {
 	return tribe().worker_index(name().c_str());
 }
 

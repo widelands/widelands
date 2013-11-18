@@ -13,6 +13,11 @@ stone=2
 marble=2
 marblecolumn=3
 
+[return_on_dismantle]
+stone=1
+marble=1
+marblecolumn=2
+
 [working positions]
 armoursmith=1
 

@@ -20,18 +20,18 @@
 #ifndef EDITOR_GAME_BASE_H
 #define EDITOR_GAME_BASE_H
 
-#include "bob.h"
-#include "building.h"
-#include "constants.h"
-#include "map.h"
-#include "notification.h"
-#include "player_area.h"
+#include <cstring>
+#include <string>
+#include <vector>
 
 #include <boost/noncopyable.hpp>
 
-#include <string>
-#include <cstring>
-#include <vector>
+#include "logic/bob.h"
+#include "logic/building.h"
+#include "constants.h"
+#include "logic/map.h"
+#include "logic/notification.h"
+#include "logic/player_area.h"
 
 namespace UI {struct ProgressWindow;}
 struct Fullscreen_Menu_LaunchGame;
@@ -40,25 +40,28 @@ struct LuaInterface;
 
 namespace Widelands {
 
+class Players_Manager;
+
 struct AreaWatcher;
-struct Battle;
+class Battle;
 struct Bob;
 struct Building_Descr;
 class Immovable;
-struct Map;
+class Map;
 struct Object_Manager;
-struct Player;
+class Player;
 struct PlayerImmovable;
 struct Tribe_Descr;
 struct Flag;
 struct AttackController;
 
-struct Editor_Game_Base :
+class Editor_Game_Base :
 	boost::noncopyable,
 	NoteReceiver<NoteImmovable>,
 	NoteReceiver<NoteFieldPossession>,
 	NoteReceiver<NoteFieldTransformed>
 {
+public:
 	friend struct ::Fullscreen_Menu_LaunchGame;
 	friend struct ::Interactive_Base;
 	friend struct Game_Game_Class_Data_Packet;
@@ -67,7 +70,7 @@ struct Editor_Game_Base :
 	virtual ~Editor_Game_Base();
 
 	void set_map(Map *);
-	Map & map() const throw () {return *m_map;}
+	Map & map() const {return *m_map;}
 	Map * get_map() {return m_map;}
 	Map & get_map() const {return *m_map;}
 	const Object_Manager & objects() const {return m_objects;}
@@ -84,16 +87,8 @@ struct Editor_Game_Base :
 		 const std::string & tribe,
 		 const std::string & name,
 		 TeamNumber team = 0);
-	Player * get_player(const int32_t n) const {
-		assert(1 <= n);
-		assert     (n <= MAX_PLAYERS);
-		return m_players[n - 1];
-	}
-	Player & player(const int32_t n) const {
-		assert(1 <= n);
-		assert     (n <= MAX_PLAYERS);
-		return *m_players[n - 1];
-	}
+	Player * get_player(int32_t n) const;
+	Player & player(int32_t n) const;
 	virtual Player * get_safe_player(Player_Number);
 
 	// loading stuff
@@ -106,12 +101,15 @@ struct Editor_Game_Base :
 	void set_road(FCoords, uint8_t direction, uint8_t roadtype);
 
 	// warping stuff. instantly creating map_objects
-	Building & warp_building(Coords, Player_Number, Building_Index);
-	Building & warp_constructionsite
+	Building & warp_building
 		(Coords, Player_Number, Building_Index,
-		 Building_Index oldid = Building_Index::Null(), bool loading = false);
+		Building::FormerBuildings former_buildings = Building::FormerBuildings());
+	Building & warp_constructionsite
+		(Coords, Player_Number, Building_Index, bool loading = false,
+		 Building::FormerBuildings former_buildings = Building::FormerBuildings());
 	Building & warp_dismantlesite
-		(Coords, Player_Number, Building_Index, bool loading = false);
+		(Coords, Player_Number, bool loading = false,
+		Building::FormerBuildings former_buildings = Building::FormerBuildings());
 	Bob & create_bob(Coords, const Bob::Descr &, Player * owner = 0);
 	Bob & create_bob
 		(Coords, Bob::Descr::Index, Tribe_Descr const * const = 0, Player * owner = 0);
@@ -155,7 +153,7 @@ struct Editor_Game_Base :
 	void receive(const NoteFieldPossession     &);
 	void receive(const NoteFieldTransformed    &);
 
-	void cleanup_objects() throw () {
+	void cleanup_objects() {
 		objects().cleanup(*this);
 	}
 
@@ -167,13 +165,18 @@ struct Editor_Game_Base :
 	/// Lua frontend, used to run Lua scripts
 	LuaInterface & lua() {return *m_lua;}
 
+	Players_Manager* player_manager() {return m_player_manager.get();}
+
+	Interactive_GameBase * get_igbase();
+
 private:
 	// FIXME -- SDL returns time as uint32. Why do I have int32 ? Please comment or change this to uint32.
 	int32_t m_gametime;
-	Player                   * m_players[MAX_PLAYERS];
 	Object_Manager             m_objects;
 
 	LuaInterface             * m_lua;
+	std::unique_ptr<Players_Manager> m_player_manager;
+
 protected:
 	typedef std::vector<Tribe_Descr *> Tribe_Vector;
 	Tribe_Vector           m_tribes;

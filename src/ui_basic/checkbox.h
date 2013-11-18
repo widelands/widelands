@@ -20,10 +20,9 @@
 #ifndef UI_CHECKBOX_H
 #define UI_CHECKBOX_H
 
-#include <boost/signals.hpp>
+#include <boost/signals2.hpp>
 
-#include "panel.h"
-
+#include "ui_basic/panel.h"
 #include "rgbcolor.h"
 
 #define STATEBOX_WIDTH 20
@@ -43,16 +42,16 @@ struct Statebox : public Panel {
 		 const std::string & tooltip_text = std::string());
 	~Statebox();
 
-	boost::signal<void ()> changed;
-	boost::signal<void (bool)> changedto;
-	boost::signal<void (bool)> clickedto; // same as changedto but only called when clicked
+	boost::signals2::signal<void ()> changed;
+	boost::signals2::signal<void (bool)> changedto;
+	boost::signals2::signal<void (bool)> clickedto; // same as changedto but only called when clicked
 
 	void set_enabled(bool enabled);
 
-	bool get_state() const throw () {return m_flags & Is_Checked;}
+	bool get_state() const {return m_flags & Is_Checked;}
 	void set_state(bool on);
 
-	void set_owns_custom_picture() throw () {
+	void set_owns_custom_picture() {
 		assert(m_flags & Has_Custom_Picture);
 		set_flags(Owns_Custom_Picture, true);
 	}
@@ -76,7 +75,7 @@ private:
 		Owns_Custom_Picture = 0x10
 	};
 	uint8_t m_flags;
-	void set_flags(uint8_t const flags, bool const enable) throw () {
+	void set_flags(uint8_t const flags, bool const enable) {
 		m_flags &= ~flags;
 		if (enable)
 			m_flags |= flags;

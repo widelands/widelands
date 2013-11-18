@@ -17,28 +17,29 @@
  *
  */
 
+#include "network/netclient.h"
+
 #include <boost/lexical_cast.hpp>
 #include <config.h>
-#ifndef HAVE_VARARRAY
-#include <climits>
-#endif
-
-#include "netclient.h"
 
 #include "build_info.h"
 #include "game_io/game_loader.h"
 #include "i18n.h"
-#include "internet_gaming.h"
 #include "io/fileread.h"
 #include "io/filewrite.h"
 #include "logic/game.h"
+#include "logic/player.h"
 #include "logic/playercommand.h"
+#include "logic/playersmanager.h"
 #include "map_io/widelands_map_loader.h"
-#include "network_gaming_messages.h"
-#include "network_protocol.h"
-#include "network_system.h"
+#include "network/internet_gaming.h"
+#include "network/network_gaming_messages.h"
+#include "network/network_protocol.h"
+#include "network/network_system.h"
 #include "profile/profile.h"
 #include "scripting/scripting.h"
+#include "ui_basic/messagebox.h"
+#include "ui_basic/progresswindow.h"
 #include "ui_fsmenu/launchMPG.h"
 #include "warning.h"
 #include "wexception.h"
@@ -46,9 +47,6 @@
 #include "wui/game_tips.h"
 #include "wui/interactive_player.h"
 #include "wui/interactive_spectator.h"
-
-#include "ui_basic/messagebox.h"
-#include "ui_basic/progresswindow.h"
 
 
 struct NetClientImpl {
@@ -227,7 +225,8 @@ void NetClient::run ()
 			 d->settings.savegame ?
 			 Widelands::Game::Loaded
 			 : d->settings.scenario ?
-			 Widelands::Game::NewMPScenario : Widelands::Game::NewNonScenario);
+			 Widelands::Game::NewMPScenario : Widelands::Game::NewNonScenario,
+			 "", false);
 
 		// if this is an internet game, tell the metaserver that the game is done.
 		if (m_internet)
@@ -301,6 +300,21 @@ std::string NetClient::getGameDescription()
 	snprintf(buf, sizeof(buf), "network player %i", d->settings.playernum);
 	return buf;
 }
+
+void NetClient::report_result
+	(uint8_t player_nr, Widelands::PlayerEndResult result, const std::string & info)
+{
+	// Send to game
+	Widelands::PlayerEndStatus pes;
+	Widelands::Player* player = d->game->get_player(player_nr);
+	assert(player);
+	pes.player = player->player_number();
+	pes.time = d->game->get_gametime();
+	pes.result = result;
+	pes.info = info;
+	d->game->player_manager()->add_player_end_status(pes);
+}
+
 
 const GameSettings & NetClient::settings()
 {
@@ -627,15 +641,6 @@ void NetClient::send(const std::string & msg)
 	s.send(d->sock);
 }
 
-void NetClient::send_local(const std::string& msg)
-{
-	ChatMessage c;
-	c.msg = msg;
-	c.time = time(0);
-	d->chatmessages.push_back(c);
-	ChatProvider::send(c);
-}
-
 const std::vector<ChatMessage> & NetClient::getMessages() const
 {
 	return d->chatmessages;
@@ -755,16 +760,12 @@ void NetClient::handle_packet(RecvPacket & packet)
 				FileRead fr;
 				fr.Open(*g_fs, path.c_str());
 				if (bytes == fr.GetSize()) {
-#ifdef HAVE_VARARRAY
-					char complete[bytes];
-#else
-					boost::scoped_array<char> complete_buf(new char[bytes]);
-					if (!complete_buf.get()) throw wexception("Out of memory");
-					char * complete = complete_buf.get();
-#endif
-					fr.DataComplete(complete, bytes);
+					std::unique_ptr<char[]> complete(new char[bytes]);
+					if (!complete) throw wexception("Out of memory");
+
+					fr.DataComplete(complete.get(), bytes);
 					SimpleMD5Checksum md5sum;
-					md5sum.Data(complete, bytes);
+					md5sum.Data(complete.get(), bytes);
 					md5sum.FinishChecksum();
 					std::string localmd5 = md5sum.GetChecksum().str();
 					if (localmd5 == md5)
@@ -815,12 +816,9 @@ void NetClient::handle_packet(RecvPacket & packet)
 
 		FilePart fp;
 
-#ifdef HAVE_VARARRAY
-		char buf[size];
-#else
 		char buf[NETFILEPARTSIZE];
 		assert(size <= NETFILEPARTSIZE);
-#endif
+
 		if (packet.Data(buf, size) != size)
 			log("Readproblem. Will try to go on anyways\n");
 		memcpy(fp.part, &buf[0], size);
@@ -846,16 +844,13 @@ void NetClient::handle_packet(RecvPacket & packet)
 			// Check for consistence
 			FileRead fr;
 			fr.Open(*g_fs, file->filename.c_str());
-#ifdef HAVE_VARARRAY
-			char complete[file->bytes];
-#else
-			boost::scoped_array<char> complete_buf(new char[file->bytes]);
-			if (!complete_buf.get()) throw wexception("Out of memory");
-			char * complete = complete_buf.get();
-#endif
-			fr.DataComplete(complete, file->bytes);
+
+			std::unique_ptr<char[]> complete(new char[file->bytes]);
+			if (!complete) throw wexception("Out of memory");
+
+			fr.DataComplete(complete.get(), file->bytes);
 			SimpleMD5Checksum md5sum;
-			md5sum.Data(complete, file->bytes);
+			md5sum.Data(complete.get(), file->bytes);
 			md5sum.FinishChecksum();
 			std::string localmd5 = md5sum.GetChecksum().str();
 			if (localmd5 != file->md5sum) {
@@ -915,7 +910,7 @@ void NetClient::handle_packet(RecvPacket & packet)
 			std::string path = "tribes/" + info.name;
 			if (g_fs->IsDirectory(path)) {
 				std::unique_ptr<FileSystem> sub_fs(g_fs->MakeSubFileSystem(path));
-				lua->register_scripts(*sub_fs, "tribe_" + info.name);
+				lua->register_scripts(*sub_fs, "tribe_" + info.name, "scripting");
 			}
 
 			for (uint8_t j = packet.Unsigned8(); j; --j) {

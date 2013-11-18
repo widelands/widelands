@@ -20,21 +20,21 @@
 #ifndef BUILDING_H
 #define BUILDING_H
 
-#include "ai/ai_hints.h"
-#include "buildcost.h"
-#include "immovable.h"
-#include "soldier_counts.h"
-#include "workarea_info.h"
-#include "writeHTML.h"
-#include "ware_types.h"
-#include "widelands.h"
-
-#include "io/filewrite.h"
-
-#include <string>
 #include <cstring>
+#include <string>
 #include <vector>
-#include <boost/signal.hpp>
+
+#include <boost/signals2.hpp>
+
+#include "ai/ai_hints.h"
+#include "io/filewrite.h"
+#include "logic/buildcost.h"
+#include "logic/immovable.h"
+#include "logic/soldier_counts.h"
+#include "logic/ware_types.h"
+#include "logic/wareworker.h"
+#include "logic/widelands.h"
+#include "workarea_info.h"
 
 namespace UI {class Window;}
 struct BuildingHints;
@@ -59,6 +59,9 @@ class Building;
  * Common to all buildings!
  */
 struct Building_Descr : public Map_Object_Descr {
+	typedef std::set<Building_Index> Enhancements;
+	typedef std::vector<Building_Index> FormerBuildings;
+
 	Building_Descr
 		(char const * _name, char const * _descname,
 		 const std::string & directory, Profile &, Section & global_s,
@@ -68,15 +71,33 @@ struct Building_Descr : public Map_Object_Descr {
 	bool is_destructible() const {return m_destructible;}
 	bool is_enhanced    () const {return m_enhanced_building;}
 	bool global() const {return m_global;}
-	const Buildcost & buildcost() const throw () {return m_buildcost;}
+
+	/**
+	 * The build cost for direct construction
+	 */
+	const Buildcost & buildcost() const {return m_buildcost;}
+
+	/**
+	 * Returned wares for dismantling
+	 */
+	const Buildcost & returned_wares() const {return m_return_dismantle;}
+
+	/**
+	 * The build cost for enhancing a previous building
+	 */
+	const Buildcost & enhancement_cost() const {return m_enhance_cost;}
+
+	/**
+	 * The returned wares for a enhaced building
+	 */
+	const Buildcost & returned_wares_enhanced() const {return m_return_enhanced;}
 	const Image* get_buildicon() const {return m_buildicon;}
-	int32_t get_size() const throw () {return m_size;}
+	int32_t get_size() const {return m_size;}
 	bool get_ismine() const {return m_mine;}
 	bool get_isport() const {return m_port;}
 	virtual uint32_t get_ui_anim() const {return get_animation("idle");}
 
-	typedef std::set<Building_Index> Enhancements;
-	const Enhancements & enhancements() const throw () {return m_enhancements;}
+	const Enhancements & enhancements() const {return m_enhancements;}
 	void add_enhancement(const Building_Index & i) {
 		assert(not m_enhancements.count(i));
 		m_enhancements.insert(i);
@@ -88,26 +109,23 @@ struct Building_Descr : public Map_Object_Descr {
 	/// a building during savegame loading. (It would cause many bugs.)
 	///
 	/// Does not perform any sanity checks.
-	/// If old != 0 this is an enhancing.
+	/// If former_buildings is not empty this is an enhancing.
 	Building & create
 		(Editor_Game_Base &,
 		 Player &,
 		 Coords,
 		 bool                   construct,
-		 Building_Descr const * old = 0,
-		 bool                   loading = false)
+		 bool                   loading = false,
+		 FormerBuildings former_buildings = FormerBuildings())
 		const;
-#ifdef WRITE_GAME_DATA_AS_HTML
-	void writeHTML(::FileWrite &) const;
-#endif
 	virtual void load_graphics();
 
 	virtual uint32_t get_conquers() const;
-	virtual uint32_t vision_range() const throw ();
+	virtual uint32_t vision_range() const;
 	bool has_help_text() const {return m_helptext_script != "";}
 	std::string helptext_script() const {return m_helptext_script;}
 
-	const Tribe_Descr & tribe() const throw () {return m_tribe;}
+	const Tribe_Descr & tribe() const {return m_tribe;}
 	Workarea_Info m_workarea_info;
 
 	virtual int32_t suitability(const Map &, FCoords) const;
@@ -115,13 +133,16 @@ struct Building_Descr : public Map_Object_Descr {
 
 protected:
 	virtual Building & create_object() const = 0;
-	Building & create_constructionsite(Building_Descr const * old) const;
+	Building & create_constructionsite() const;
 
 private:
 	const Tribe_Descr & m_tribe;
 	bool          m_buildable;       // the player can build this himself
 	bool          m_destructible;    // the player can destruct this himself
 	Buildcost     m_buildcost;
+	Buildcost     m_return_dismantle; // Returned wares on dismantle
+	Buildcost     m_enhance_cost;     // cost for enhancing
+	Buildcost     m_return_enhanced;   // Returned ware for dismantling an enhanced building
 	const Image*     m_buildicon;       // if buildable: picture in the build dialog
 	std::string   m_buildicon_fname; // filename for this icon
 	int32_t       m_size;            // size of the building
@@ -152,28 +173,30 @@ public:
 		PCap_Enhancable = 1 << 2, // can be enhanced to something
 	};
 
+	typedef std::vector<Building_Index> FormerBuildings;
+
 public:
 	Building(const Building_Descr &);
 	virtual ~Building();
 
 	void load_finish(Editor_Game_Base &);
 
-	const Tribe_Descr & tribe() const throw () {return descr().tribe();}
+	const Tribe_Descr & tribe() const {return descr().tribe();}
 
-	virtual int32_t  get_type    () const throw ();
-	char const * type_name() const throw () {return "building";}
-	virtual int32_t  get_size    () const throw ();
-	virtual bool get_passable() const throw ();
+	virtual int32_t  get_type    () const;
+	char const * type_name() const {return "building";}
+	virtual int32_t  get_size    () const;
+	virtual bool get_passable() const;
 	virtual uint32_t get_ui_anim () const;
 
 	virtual Flag & base_flag();
-	virtual uint32_t get_playercaps() const throw ();
+	virtual uint32_t get_playercaps() const;
 
-	virtual Coords get_position() const throw () {return m_position;}
-	virtual PositionList get_positions (const Editor_Game_Base &) const throw ();
+	virtual Coords get_position() const {return m_position;}
+	virtual PositionList get_positions (const Editor_Game_Base &) const;
 
-	const std::string & name() const throw ();
-	const std::string & descname() const throw () {return descr().descname();}
+	const std::string & name() const;
+	const std::string & descname() const {return descr().descname();}
 
 	std::string info_string(const std::string & format);
 	virtual std::string get_statistics_string();
@@ -193,22 +216,37 @@ public:
 
 	bool leave_check_and_wait(Game &, Worker &);
 	void leave_skip(Game &, Worker &);
-	uint32_t get_conquers() const throw () {return descr().get_conquers();}
-	virtual uint32_t vision_range() const throw () {
+	uint32_t get_conquers() const {return descr().get_conquers();}
+	virtual uint32_t vision_range() const {
 		return descr().vision_range();
 	}
 
-	int32_t get_base_priority() const {return m_priority;}
-	int32_t get_priority
-		(int32_t type, Ware_Index, bool adjust = true) const;
-	void set_priority(int32_t new_priority);
+
+	// Get/Set the priority for this waretype for this building. 'type' defines
+	// if this is for a worker or a ware, 'index' is the type of worker or ware.
+	// If 'adjust' is false, the three possible states HIGH_PRIORITY,
+	// DEFAULT_PRIORITY and LOW_PRIORITY are returned, otherwise numerical
+	// values adjusted to the preciousness of the ware in general are returned.
+	virtual int32_t get_priority
+		(WareWorker type, Ware_Index, bool adjust = true) const;
 	void set_priority(int32_t type, Ware_Index ware_index, int32_t new_priority);
 
 	void collect_priorities
 		(std::map<int32_t, std::map<Ware_Index, int32_t> > & p) const;
 
-	const std::set<Building_Index> & enhancements() const throw () {
+	const std::set<Building_Index> & enhancements() const {
 		return descr().enhancements();
+	}
+
+	/**
+	 * The former buildings vector keeps track of all former buildings
+	 * that have been enhanced up to the current one. The current building
+	 * index will be in the last position. For construction sites, it is
+	 * empty exceptenhancements. For a dismantle site, the last item will
+	 * be the one being dismantled.
+	 */
+	const FormerBuildings get_former_buildings() {
+		return m_old_buildings;
 	}
 
 	virtual void log_general_info(const Editor_Game_Base &);
@@ -224,16 +262,16 @@ public:
 
 	void    add_worker(Worker &);
 	void remove_worker(Worker &);
-	mutable boost::signal<void ()> workers_changed;
+	mutable boost::signals2::signal<void ()> workers_changed;
 
 	void send_message
 		(Game & game,
 		 const std::string & msgsender,
 		 const std::string & title,
 		 const std::string & description,
+		 bool link_to_building_lifetime = true,
 		 uint32_t throttle_time = 0,
 		 uint32_t throttle_radius = 0);
-
 protected:
 	void start_animation(Editor_Game_Base &, uint32_t anim);
 
@@ -272,7 +310,10 @@ protected:
 	bool m_seeing;
 
 	// Signals connected for the option window
-	std::vector<boost::signals::connection> options_window_connections;
+	std::vector<boost::signals2::connection> options_window_connections;
+
+	// The former buildings names, with the current one in last position.
+	FormerBuildings m_old_buildings;
 };
 
 }

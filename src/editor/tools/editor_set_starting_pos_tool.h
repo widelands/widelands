@@ -20,8 +20,7 @@
 #ifndef EDITOR_SET_STARTING_POS_TOOL_H
 #define EDITOR_SET_STARTING_POS_TOOL_H
 
-#include "editor_tool.h"
-
+#include "editor/tools/editor_tool.h"
 #include "logic/widelands.h"
 
 // How much place should be left around a player position
@@ -41,7 +40,7 @@ struct Editor_Set_Starting_Pos_Tool : public Editor_Tool {
 	char const * get_sel_impl() const
 		{return m_current_sel_pic;}
 
-	Widelands::Player_Number get_current_player() const throw ();
+	Widelands::Player_Number get_current_player() const;
 	void set_current_player(int32_t);
 	bool has_size_one() const {return true;}
 

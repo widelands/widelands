@@ -20,18 +20,17 @@
 #ifndef S__WARE_INSTANCE_H
 #define S__WARE_INSTANCE_H
 
-#include "logic/widelands.h"
 #include "logic/instances.h"
 #include "logic/item_ware_descr.h"
-
-#include "transfer.h"
+#include "logic/widelands.h"
+#include "economy/transfer.h"
 
 namespace Widelands {
 
 class Building;
 class Economy;
-struct Editor_Game_Base;
-struct Game;
+class Editor_Game_Base;
+class Game;
 struct IdleWareSupply;
 class Map_Object;
 struct PlayerImmovable;
@@ -62,14 +61,14 @@ public:
 	WareInstance(Ware_Index, const Item_Ware_Descr * const);
 	~WareInstance();
 
-	virtual int32_t get_type() const throw ();
-	char const * type_name() const throw () {return "ware";}
+	virtual int32_t get_type() const;
+	char const * type_name() const {return "ware";}
 
 	Map_Object * get_location(Editor_Game_Base & egbase) {
 		return m_location.get(egbase);
 	}
-	Economy * get_economy() const throw () {return m_economy;}
-	Ware_Index descr_index() const throw () {return m_descr_index;}
+	Economy * get_economy() const {return m_economy;}
+	Ware_Index descr_index() const {return m_descr_index;}
 
 	void init(Editor_Game_Base &);
 	void cleanup(Editor_Game_Base &);
@@ -81,7 +80,7 @@ public:
 
 	void enter_building(Game &, Building & building);
 
-	bool is_moving() const throw ();
+	bool is_moving() const;
 	void cancel_moving();
 
 	PlayerImmovable * get_next_move_step(Game &);
@@ -128,4 +127,3 @@ public:
 
 
 #endif
-

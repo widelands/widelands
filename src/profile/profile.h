@@ -20,6 +20,8 @@
 #ifndef PROFILE_H
 #define PROFILE_H
 
+#include <vector>
+
 #include <boost/noncopyable.hpp>
 
 //TODO: as soon as g_fs is not needed anymore, next include can be changed
@@ -30,11 +32,10 @@
 #include "point.h"
 #include "port.h"
 
-#include <vector>
 
 namespace Widelands {
 struct Building_Descr;
-struct Editor_Game_Base;
+class Editor_Game_Base;
 struct Immovable_Descr;
 };
 

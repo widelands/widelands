@@ -1,7 +1,0 @@
-_cast< foo>
-_cast< foo *>
-_cast< const foo *>
-_cast< foo const *>
-_cast< foo const * const *>
-_cast< foo const * const * const *>
-_cast< foo const * * *>

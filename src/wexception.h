@@ -20,10 +20,11 @@
 #ifndef WEXCEPTION_H
 #define WEXCEPTION_H
 
-#include <stdint.h>
 #include <cstring>
 #include <exception>
 #include <string>
+
+#include <stdint.h>
 
 #include "port.h"
 
@@ -43,7 +44,7 @@
 struct _wexception : public std::exception {
 	explicit _wexception
 		(const char * file, uint32_t line, const char * fmt, ...)
-		throw () PRINTF_FORMAT(4, 5);
+	 PRINTF_FORMAT(4, 5);
 	virtual ~_wexception() throw ();
 
 	/**
@@ -51,6 +52,7 @@ struct _wexception : public std::exception {
 	 * the _wexception object.
 	 */
 	virtual const char * what() const throw ();
+
 protected:
 	_wexception() {};
 	std::string m_what;

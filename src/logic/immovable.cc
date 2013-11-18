@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002-2003, 2006-2011 by the Widelands Development Team
+ * Copyright (C) 2002-2003, 2006-2011, 2013 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -17,39 +17,38 @@
  *
  */
 
-#include "immovable.h"
-
-#include "editor_game_base.h"
-#include "game_data_error.h"
-#include "field.h"
-#include "game.h"
-#include "helper.h"
-#include "immovable_program.h"
-#include "player.h"
-#include "map.h"
-#include "mapfringeregion.h"
-#include "profile/profile.h"
-#include "graphic/animation_gfx.h"
-#include "graphic/graphic.h"
-#include "graphic/rendertarget.h"
-#include "sound/sound_handler.h"
-#include "tribe.h"
-#include "wexception.h"
-#include "widelands_fileread.h"
-#include "widelands_filewrite.h"
-#include "worker.h"
-
-#include "upcast.h"
-
-#include "container_iterate.h"
+#include "logic/immovable.h"
 
 #include <cstdio>
 
+#include <boost/format.hpp>
 #include <config.h>
 
-#ifndef HAVE_VARARRAY
-#include <climits>
-#endif
+#include "container_iterate.h"
+#include "graphic/animation_gfx.h"
+#include "graphic/font_handler1.h"
+#include "graphic/graphic.h"
+#include "graphic/rendertarget.h"
+#include "helper.h"
+#include "logic/editor_game_base.h"
+#include "logic/field.h"
+#include "logic/game.h"
+#include "logic/game_data_error.h"
+#include "logic/immovable_program.h"
+#include "logic/map.h"
+#include "logic/mapfringeregion.h"
+#include "logic/player.h"
+#include "logic/tribe.h"
+#include "logic/widelands_fileread.h"
+#include "logic/widelands_filewrite.h"
+#include "logic/worker.h"
+#include "profile/profile.h"
+#include "sound/sound_handler.h"
+#include "text_layout.h"
+#include "upcast.h"
+#include "wexception.h"
+#include "wui/interactive_base.h"
+
 namespace Widelands {
 
 BaseImmovable::BaseImmovable(const Map_Object_Descr & mo_descr) :
@@ -58,7 +57,7 @@ Map_Object(&mo_descr)
 
 
 static std::string const base_immovable_name = "unknown";
-const std::string & BaseImmovable::name() const throw () {
+const std::string & BaseImmovable::name() const {
 	return base_immovable_name;
 }
 
@@ -66,18 +65,17 @@ const std::string & BaseImmovable::name() const throw () {
  * Associate the given field with this immovable. Recalculate if necessary.
  *
  * Only call this during init.
-*/
+ *
+ * \note this function will remove the immovable (if existing) currently connected to this position.
+ */
 void BaseImmovable::set_position(Editor_Game_Base & egbase, Coords const c)
 {
 	assert(c);
 
 	Map & map = egbase.map();
 	FCoords f = map.get_fcoords(c);
-	if (f.field->immovable && f.field->immovable != this) {
-		assert(f.field->immovable->get_size() == NONE);
-
+	if (f.field->immovable && f.field->immovable != this)
 		f.field->immovable->remove(egbase);
-	}
 
 	f.field->immovable = this;
 
@@ -360,13 +358,13 @@ Immovable::~Immovable()
 	m_action_data = 0;
 }
 
-int32_t Immovable::get_type() const throw ()
+int32_t Immovable::get_type() const
 {
 	return IMMOVABLE;
 }
 
 BaseImmovable::PositionList Immovable::get_positions
-	(const Editor_Game_Base &) const throw ()
+	(const Editor_Game_Base &) const
 {
 	PositionList rv;
 
@@ -374,18 +372,18 @@ BaseImmovable::PositionList Immovable::get_positions
 	return rv;
 }
 
-int32_t Immovable::get_size() const throw ()
+int32_t Immovable::get_size() const
 {
 	return descr().get_size();
 }
 
-bool Immovable::get_passable() const throw ()
+bool Immovable::get_passable() const
 {
 	return descr().get_size() < BIG;
 }
 
 
-const std::string & Immovable::name() const throw () {return descr().name();}
+const std::string & Immovable::name() const {return descr().name();}
 
 void Immovable::set_owner(Player * player)
 {
@@ -539,6 +537,15 @@ void Immovable::draw_construction
 	assert(lines <= curh);
 	dst.drawanimrect
 		(pos, m_anim, current_frame * frametime, get_owner(), Rect(Point(0, curh - lines), curw, lines));
+
+	// Additionnaly, if statistics are enabled, draw a progression string
+	if (game.get_ibase()->get_display_flags() & Interactive_Base::dfShowStatistics) {
+		unsigned int percent = (100 * done / total);
+		m_construct_string =
+			(boost::format("<font color=%1$s>%2$i%% built</font>") % UI_FONT_CLR_DARK_HEX % percent).str();
+		m_construct_string = as_uifont(m_construct_string);
+		dst.blit(pos - Point(0, 48), UI::g_fh1->render(m_construct_string), CM_Normal, UI::Align_Center);
+	}
 }
 
 

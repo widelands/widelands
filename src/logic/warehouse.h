@@ -20,18 +20,18 @@
 #ifndef WAREHOUSE_H
 #define WAREHOUSE_H
 
-#include "attackable.h"
-#include "building.h"
 #include "economy/request.h"
-#include "soldiercontrol.h"
-#include "wareworker.h"
+#include "logic/attackable.h"
+#include "logic/building.h"
+#include "logic/soldiercontrol.h"
+#include "logic/wareworker.h"
 
 struct Interactive_Player;
 struct Profile;
 
 namespace Widelands {
 
-struct Editor_Game_Base;
+class Editor_Game_Base;
 struct PortDock;
 struct Request;
 struct Requirements;
@@ -56,7 +56,7 @@ struct Warehouse_Descr : public Building_Descr {
 
 	virtual uint32_t get_conquers() const {return m_conquers;}
 
-	uint32_t get_heal_per_second        () const throw () {
+	uint32_t get_heal_per_second        () const {
 		return m_heal_per_second;
 	}
 private:
@@ -111,7 +111,7 @@ public:
 
 	void load_finish(Editor_Game_Base &);
 
-	char const * type_name() const throw () {return "warehouse";}
+	char const * type_name() const {return "warehouse";}
 
 	/// Called only when the oject is logically created in the simulation. If
 	/// called again, such as when the object is loaded from a savegame, it will
@@ -139,6 +139,12 @@ public:
 
 	const WareList & get_wares() const;
 	const WareList & get_workers() const;
+
+	/**
+	 * Returns a vector of all incorporated workers. These are the workers
+	 * that are still present in the game, not just a stock figure.
+	 */
+	Workers get_incorporated_workers();
 
 	void insert_wares  (Ware_Index, uint32_t count);
 	void remove_wares  (Ware_Index, uint32_t count);
@@ -199,31 +205,16 @@ public:
 	void set_ware_policy(Ware_Index ware, StockPolicy policy);
 	void set_worker_policy(Ware_Index ware, StockPolicy policy);
 
-	// PortDock stuff
-	struct Expedition_Worker {
-		Expedition_Worker(Request * const wr = 0, Worker * const w = 0) : worker_request(wr), worker(w) {}
-		Request * worker_request;
-		Worker  * worker;
-	};
+	// Get the portdock if this is a port.
 	PortDock * get_portdock() const {return m_portdock;}
-	size_t size_of_expedition_wares_queue() {return m_expedition_wares.size();}
-	WaresQueue * get_wares_queue(uint8_t num) {return m_expedition_wares.at(num);}
-	virtual WaresQueue & waresqueue(Ware_Index);
-	std::vector<WaresQueue *> & get_wares_queue_vector() {return m_expedition_wares;}
-	std::vector<Expedition_Worker *> & get_expedition_workers() {return m_expedition_workers;}
-	/// gets called, if an expedition worker arrives
-	static void request_expedition_worker_callback
-		(Game & g, Request & r, Ware_Index, Worker * w, PlayerImmovable & pi)
-	{
-		Warehouse & wh = ref_cast<Warehouse, PlayerImmovable>(pi);
-		wh.handle_expedition_worker_callback(g, r, w);
-	}
-	void handle_expedition_worker_callback(Game &, Request &, Worker *);
+
+	// Returns the waresqueue of the expedition if this is a port. Will
+	// assert(false) otherwise.
+	virtual WaresQueue& waresqueue(Ware_Index);
 
 	virtual void log_general_info(const Editor_Game_Base &);
 
 protected:
-
 	/// Create the warehouse information window.
 	virtual void create_options_window
 		(Interactive_GameBase &, UI::Window * & registry);
@@ -272,11 +263,7 @@ private:
 
 	std::vector<PlannedWorkers> m_planned_workers;
 
-	// PortDock stuff
 	PortDock * m_portdock;
-	std::vector<WaresQueue *> m_expedition_wares;
-	std::vector<Expedition_Worker *> m_expedition_workers;
-
 };
 
 }

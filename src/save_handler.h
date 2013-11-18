@@ -20,12 +20,12 @@
 #ifndef SAVE_HANDLER_H
 #define SAVE_HANDLER_H
 
-#include <stdint.h>
 #include <cstring>
 #include <string>
 
+#include <stdint.h>
 
-namespace Widelands {struct Game;}
+namespace Widelands {class Game;}
 
 // default autosave interval in minutes
 #define DEFAULT_AUTOSAVE_INTERVAL 15

@@ -22,16 +22,14 @@
 
 #include <vector>
 
-// Needed for OPtr
+#include "economy/iroute.h"
 #include "logic/instances.h"
-
-#include "iroute.h"
 
 
 namespace Widelands {
 
 struct Flag;
-struct Editor_Game_Base;
+class Editor_Game_Base;
 struct Map_Map_Object_Saver;
 struct Map_Map_Object_Loader;
 struct RoutingNode;

@@ -28,9 +28,10 @@
  * playercommands.
  */
 
-#include <stdint.h>
 #include <cstring>
 #include <string>
+
+#include <stdint.h>
 
 #define REPLAY_DIR "replays"
 #define REPLAY_SUFFIX ".wrpl"
@@ -39,10 +40,10 @@ struct md5_checksum;
 
 namespace Widelands {
 struct Command;
-struct Game;
+class Game;
 class PlayerCommand;
-struct StreamRead;
-struct StreamWrite;
+class StreamRead;
+class StreamWrite;
 
 /**
  * Read game replays from disk.
@@ -81,4 +82,3 @@ private:
 }
 
 #endif
-

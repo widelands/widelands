@@ -1,0 +1,16 @@
+# Automatically created by Widelands bzr6718[widelands] (Debug)
+
+[global]
+packet_version="2"
+
+[player_1]
+name="Player 1"
+tribe="barbarians"
+ai=
+closeable="false"
+
+[player_2]
+name="Player 2"
+tribe="barbarians"
+ai=
+closeable="false"

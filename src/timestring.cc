@@ -17,9 +17,12 @@
  *
  */
 
+#include "timestring.h"
+
 #include <cassert>
-#include <stdint.h>
 #include <ctime>
+
+#include <stdint.h>
 
 char timestring_buffer[] = "YYYY-MM-DDThh.mm.ss"; //  ':' is not a valid file name character for FAT FS
 

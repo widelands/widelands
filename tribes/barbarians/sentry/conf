@@ -7,6 +7,9 @@ prefer_heroes=false
 [buildcost]
 blackwood=2
 
+[return_on_dismantle]
+blackwood=1
+
 [idle]
 pics=sentry_i_??.png
 hotspot=39 40

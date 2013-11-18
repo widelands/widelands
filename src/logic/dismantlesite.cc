@@ -17,23 +17,24 @@
  *
  */
 
+#include "logic/dismantlesite.h"
+
 #include <cstdio>
 
-#include "upcast.h"
-#include "wexception.h"
+#include <boost/foreach.hpp>
 
 #include "economy/wares_queue.h"
-#include "editor_game_base.h"
-#include "game.h"
 #include "graphic/animation.h"
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
 #include "i18n.h"
+#include "logic/editor_game_base.h"
+#include "logic/game.h"
+#include "logic/tribe.h"
+#include "logic/worker.h"
 #include "sound/sound_handler.h"
-#include "tribe.h"
-#include "worker.h"
-
-#include "dismantlesite.h"
+#include "upcast.h"
+#include "wexception.h"
 
 namespace Widelands {
 
@@ -65,14 +66,19 @@ Partially_Finished_Building(gdescr)
 
 DismantleSite::DismantleSite
 	(const DismantleSite_Descr & gdescr, Editor_Game_Base & egbase, Coords const c,
-	 Player & plr, const Building_Descr & bdscr, bool loading)
+	 Player & plr, bool loading, Building::FormerBuildings & former_buildings)
 :
 Partially_Finished_Building(gdescr)
 {
-	set_building(bdscr);
-
 	m_position = c;
 	set_owner(&plr);
+
+	assert(!former_buildings.empty());
+	BOOST_FOREACH(Building_Index former_idx, former_buildings) {
+		m_old_buildings.push_back(former_idx);
+	}
+	const Building_Descr* cur_descr = owner().tribe().get_building_descr(m_old_buildings.back());
+	set_building(*cur_descr);
 
 	if (loading) {
 		Building::init(egbase);
@@ -105,7 +111,7 @@ void DismantleSite::init(Editor_Game_Base & egbase)
 	Partially_Finished_Building::init(egbase);
 
 	std::map<Ware_Index, uint8_t> wares;
-	count_returned_wares(*m_building, wares);
+	count_returned_wares(this, wares);
 
 	std::map<Ware_Index, uint8_t>::const_iterator it = wares.begin();
 	m_wares.resize(wares.size());
@@ -125,34 +131,23 @@ Count wich wares you get back if you dismantle the given building
 ===============
 */
 void DismantleSite::count_returned_wares
-	(const Widelands::Building_Descr & building,
+	(Building* building,
 	 std::map<Ware_Index, uint8_t>   & res)
 {
-	const Tribe_Descr & t = building.tribe();
-	Building_Descr const * bd = &building;
-	Building_Index bd_idx = t.building_index(bd->name());
-
-	bool done = false;
-	while (not done) {
-		const std::map<Ware_Index, uint8_t> & buildcost = bd->buildcost();
-		for (std::map<Ware_Index, uint8_t>::const_iterator i = buildcost.begin(); i != buildcost.end(); ++i)
-			res[i->first] += i->second;
-
-		// Find the (first) predecessor of this building
-		for (Building_Index i = Building_Index::First(); i < t.get_nrbuildings(); ++i) {
-			Building_Descr const * ob = t.get_building_descr(i);
-			if (ob->enhancements().count(bd_idx)) {
-				done = false;
-				bd = ob;
-				bd_idx = i;
-				break;
-			} else
-				done = true;
+	BOOST_FOREACH(Building_Index former_idx, building->get_former_buildings()) {
+		const std::map<Ware_Index, uint8_t> * return_wares;
+		const Building_Descr* former_descr = building->tribe().get_building_descr(former_idx);
+		if (former_idx != building->get_former_buildings().front()) {
+			return_wares = & former_descr->returned_wares_enhanced();
+		} else {
+			return_wares = & former_descr->returned_wares();
 		}
-	}
+		assert(return_wares != nullptr);
 
-	for (std::map<Ware_Index, uint8_t>::iterator it = res.begin(); it != res.end(); ++it) {
-		it->second = (it->second + RATIO_RETURNED_WARES - 1) / RATIO_RETURNED_WARES;
+		std::map<Ware_Index, uint8_t>::const_iterator i;
+		for (i = return_wares->begin(); i != return_wares->end(); ++i) {
+			res[i->first] += i->second;
+		}
 	}
 }
 
@@ -217,7 +212,13 @@ bool DismantleSite::get_building_work(Game & game, Worker & worker, bool) {
 		schedule_destroy(game);
 
 		worker.pop_task(game);
-		worker.start_task_leavebuilding(game, true);
+		// No more building, so move to the flag
+		worker.start_task_move
+				(game,
+				 WALK_SE,
+				 worker.descr().get_right_walk_anims(false),
+				 true);
+		worker.set_location(nullptr);
 	} else if (not m_working) {
 		m_work_steptime = game.get_gametime() + DISMANTLESITE_STEP_TIME;
 		worker.start_task_idle

@@ -17,7 +17,7 @@
  *
  */
 
-#include "widelands_map_player_position_data_packet.h"
+#include "map_io/widelands_map_player_position_data_packet.h"
 
 #include "logic/editor_game_base.h"
 #include "logic/game_data_error.h"
@@ -31,7 +31,6 @@ namespace Widelands {
 
 void Map_Player_Position_Data_Packet::Read
 	(FileSystem & fs, Editor_Game_Base & egbase, bool, Map_Map_Object_Loader &)
-throw (_wexception)
 {
 	Profile prof;
 	prof.read("player_position", 0, fs);
@@ -65,7 +64,6 @@ throw (_wexception)
 
 void Map_Player_Position_Data_Packet::Write
 	(FileSystem & fs, Editor_Game_Base & egbase, Map_Map_Object_Saver &)
-throw (_wexception)
 {
 	Profile prof;
 	Section & s = prof.create_section("global");

@@ -20,7 +20,7 @@
 #ifndef EDITOR_DELETE_IMMOVABLE_TOOL_H
 #define EDITOR_DELETE_IMMOVABLE_TOOL_H
 
-#include "editor_tool.h"
+#include "editor/tools/editor_tool.h"
 
 /// Deletes immovables from the map.
 struct Editor_Delete_Immovable_Tool : public Editor_Tool {

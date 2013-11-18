@@ -1,1 +1,0 @@
-This catches std::string constants that are passed by value. They should be passed by reference to avoid needless construction/destruction.

@@ -22,17 +22,18 @@
 
 #include <string>
 
-#include "logic/widelands_filewrite.h"
+#include <lua.hpp>
+
 #include "logic/widelands_fileread.h"
+#include "logic/widelands_filewrite.h"
 
 namespace Widelands {
 	struct Map_Map_Object_Loader;
 	struct Map_Map_Object_Saver;
-	struct Editor_Game_Base;
-	struct Game;
+	class Editor_Game_Base;
+	class Game;
 }
 
-#include <lua.hpp>
 
 /**
  * This persists the lua object at the stack position
@@ -48,4 +49,3 @@ uint32_t unpersist_object
 	 uint32_t size);
 
 #endif /* end of include guard: PERSISTENCE_H */
-

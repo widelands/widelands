@@ -19,10 +19,10 @@
 
 #include "graphic/graphic.h"
 #include "logic/trainingsite.h"
-#include "productionsitewindow.h"
-#include "soldiercapacitycontrol.h"
-#include "soldierlist.h"
 #include "ui_basic/tabpanel.h"
+#include "wui/productionsitewindow.h"
+#include "wui/soldiercapacitycontrol.h"
+#include "wui/soldierlist.h"
 
 using Widelands::TrainingSite;
 using Widelands::atrAttack;

@@ -22,10 +22,10 @@
 
 #include <cstdlib>
 
-#include "interactive_gamebase.h"
+#include "wui/interactive_gamebase.h"
 #include "ui_basic/button.h"
 #include "ui_basic/window.h"
-#include "waresdisplay.h"
+#include "wui/waresdisplay.h"
 
 /**
  * Base class for all building windows.
@@ -66,8 +66,6 @@ protected:
 	void toggle_workarea();
 	void configure_workarea_button();
 	void act_start_stop();
-	void act_prefer_rookies();
-	void act_prefer_heroes();
 	void act_start_or_cancel_expedition();
 	void act_enhance(Widelands::Building_Index);
 	void clicked_goto();

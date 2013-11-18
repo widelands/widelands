@@ -21,10 +21,8 @@
 #define GAMECHATPANEL_H
 
 #include "chat.h"
-
 #include "ui_basic/editbox.h"
 #include "ui_basic/multilinetextarea.h"
-
 
 struct ChatProvider;
 
@@ -43,12 +41,12 @@ struct GameChatPanel :
 	/**
 	 * Signal is called when a message has been sent by the user.
 	 */
-	boost::signal<void ()> sent;
+	boost::signals2::signal<void ()> sent;
 
 	/**
 	 * Signal is called when the user has aborted entering a message.
 	 */
-	boost::signal<void ()> aborted;
+	boost::signals2::signal<void ()> aborted;
 
 	const std::string & get_edit_text() const {return editbox.text();}
 	void set_edit_text(const std::string & text) {editbox.setText(text);}

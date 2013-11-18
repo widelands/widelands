@@ -17,12 +17,17 @@
  *
  */
 
-#include "game.h"
+#include "logic/game.h"
 
-#include "carrier.h"
-#include "cmd_calculate_statistics.h"
-#include "cmd_luacoroutine.h"
-#include "cmd_luascript.h"
+#include <cstring>
+#include <string>
+
+#ifndef _WIN32
+#include <unistd.h> // for usleep
+#else
+#include <windows.h>
+#endif
+
 #include "computer_player.h"
 #include "economy/economy.h"
 #include "game_io/game_loader.h"
@@ -33,37 +38,32 @@
 #include "i18n.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "log.h"
+#include "logic/carrier.h"
+#include "logic/cmd_calculate_statistics.h"
+#include "logic/cmd_luacoroutine.h"
+#include "logic/cmd_luascript.h"
+#include "logic/militarysite.h"
+#include "logic/player.h"
+#include "logic/playercommand.h"
+#include "logic/replay.h"
+#include "logic/ship.h"
+#include "logic/soldier.h"
+#include "logic/trainingsite.h"
+#include "logic/tribe.h"
+#include "logic/widelands_fileread.h"
+#include "logic/widelands_filewrite.h"
 #include "map_io/widelands_map_loader.h"
 #include "network/network.h"
-#include "player.h"
-#include "playercommand.h"
 #include "profile/profile.h"
-#include "replay.h"
 #include "scripting/scripting.h"
-#include "ship.h"
-#include "soldier.h"
 #include "sound/sound_handler.h"
 #include "timestring.h"
-#include "trainingsite.h"
-#include "tribe.h"
 #include "ui_basic/progresswindow.h"
 #include "upcast.h"
 #include "warning.h"
-#include "widelands_fileread.h"
-#include "widelands_filewrite.h"
 #include "wlapplication.h"
 #include "wui/game_tips.h"
 #include "wui/interactive_player.h"
-#include "militarysite.h"
-
-#include <cstring>
-#include <string>
-
-#ifndef _WIN32
-#include <unistd.h> // for usleep
-#else
-#include <windows.h>
-#endif
 
 namespace Widelands {
 
@@ -168,13 +168,12 @@ bool Game::get_allow_cheats()
 /**
  * \return a pointer to the \ref Interactive_Player if any.
  * \note This function may return 0 (in particular, it will return 0 during
- * playback)
+ * playback or if player is spectator)
  */
 Interactive_Player * Game::get_ipl()
 {
 	return dynamic_cast<Interactive_Player *>(get_ibase());
 }
-
 
 void Game::set_game_controller(GameController * const ctrl)
 {
@@ -215,13 +214,13 @@ void Game::save_syncstream(bool const save)
 }
 
 
-bool Game::run_splayer_scenario_direct(char const * const mapname) {
+bool Game::run_splayer_scenario_direct(char const * const mapname, const std::string& script_to_run) {
 	assert(!get_map());
 
 	set_map(new Map);
 
 	std::unique_ptr<Map_Loader> maploader(map().get_correct_loader(mapname));
-	if (not maploader.get())
+	if (!maploader)
 		throw wexception("could not load \"%s\"", mapname);
 	UI::ProgressWindow loaderUI;
 
@@ -237,7 +236,6 @@ bool Game::run_splayer_scenario_direct(char const * const mapname) {
 
 	// We have to create the players here.
 	Player_Number const nr_players = map().get_nrplayers();
-	m_number_of_players = 0;
 	iterate_player_numbers(p, nr_players) {
 		loaderUI.stepf (_("Adding player %u"), p);
 		add_player
@@ -246,7 +244,6 @@ bool Game::run_splayer_scenario_direct(char const * const mapname) {
 			 map().get_scenario_player_tribe(p),
 			 map().get_scenario_player_name (p));
 		get_player(p)->setAI(map().get_scenario_player_ai(p));
-		m_number_of_players++;
 	}
 	m_win_condition_displayname = _("Scenario");
 
@@ -260,7 +257,7 @@ bool Game::run_splayer_scenario_direct(char const * const mapname) {
 
 	set_game_controller(GameController::createSinglePlayer(*this, true, 1));
 	try {
-		bool const result = run(&loaderUI, NewSPScenario);
+		bool const result = run(&loaderUI, NewSPScenario, script_to_run, false);
 		delete m_ctrl;
 		m_ctrl = 0;
 		return result;
@@ -302,7 +299,6 @@ void Game::init_newgame
 	}
 	std::vector<PlayerSettings> shared;
 	std::vector<uint8_t>        shared_num;
-	m_number_of_players = 0;
 	for (uint32_t i = 0; i < settings.players.size(); ++i) {
 		const PlayerSettings & playersettings = settings.players[i];
 
@@ -323,7 +319,6 @@ void Game::init_newgame
 			 playersettings.name,
 			 playersettings.team);
 		get_player(i + 1)->setAI(playersettings.ai);
-		m_number_of_players++;
 	}
 
 	// Add shared in starting positions
@@ -356,7 +351,7 @@ void Game::init_newgame
  * Initialize the savegame based on the given settings.
  * At return the game is at the same state like a map loaded with Game::init()
  * Only difference is, that players are already initialized.
- * run(loaderUI, true) takes care about this difference.
+ * run() takes care about this difference.
  *
  * \note loaderUI can be nullptr, if this is run as dedicated server.
  */
@@ -385,13 +380,7 @@ void Game::init_savegame
 	}
 }
 
-
-/**
- * Load a game
- * Returns false if the user cancels the dialog. Otherwise returns the result
- * of running the game.
- */
-bool Game::run_load_game(std::string filename) {
+bool Game::run_load_game(std::string filename, const std::string& script_to_run) {
 	UI::ProgressWindow loaderUI;
 	std::vector<std::string> tipstext;
 	tipstext.push_back("general_game");
@@ -412,7 +401,6 @@ bool Game::run_load_game(std::string filename) {
 		std::string background(gpdp.get_background());
 		loaderUI.set_background(background);
 		player_nr = gpdp.get_player_nr();
-		m_number_of_players = gpdp.get_number_of_players();
 		set_ibase
 			(new Interactive_Player
 			 	(*this, g_options.pull_section("global"), player_nr, true, false));
@@ -420,19 +408,13 @@ bool Game::run_load_game(std::string filename) {
 		loaderUI.step(_("Loading..."));
 		gl.load_game();
 	}
-	if (m_number_of_players == 0) {
-		// Old savegame loaded, parse players to figure out their amount
-		iterate_players_existing_const(p, map().get_nrplayers(), *this, player_tmp) {
-			m_number_of_players++;
-		}
-	}
 
 	// Store the filename for further saves
 	save_handler().set_current_filename(filename);
 
 	set_game_controller(GameController::createSinglePlayer(*this, true, player_nr));
 	try {
-		bool const result = run(&loaderUI, Loaded);
+		bool const result = run(&loaderUI, Loaded, script_to_run, false);
 		delete m_ctrl;
 		m_ctrl = 0;
 		return result;
@@ -484,8 +466,10 @@ void Game::postload()
  * \note loader_ui can be nullptr, if this is run as dedicated server.
  */
 bool Game::run
-	(UI::ProgressWindow * loader_ui, Start_Game_Type const start_game_type)
+	(UI::ProgressWindow * loader_ui, Start_Game_Type const start_game_type,
+	 const std::string& script_to_run, bool replay)
 {
+	m_replay = replay;
 	postload();
 
 	if (start_game_type != Loaded) {
@@ -498,11 +482,10 @@ bool Game::run
 					loader_ui->step(step_description);
 				}
 				plr->create_default_infrastructure();
-
 			}
-		} else
+		} else {
 			// Is a scenario!
-			iterate_players_existing_novar(p, nr_players, *this)
+			iterate_players_existing_novar(p, nr_players, *this) {
 				if (not map().get_starting_pos(p))
 				throw warning
 					(_("Missing starting position"),
@@ -512,6 +495,8 @@ bool Game::run
 					 	 "You can manually add a starting position with Widelands "
 					 	 "Editor, to fix this problem."),
 					 p);
+			}
+		}
 
 		if (get_ipl())
 			get_ipl()->move_view_to
@@ -543,6 +528,12 @@ bool Game::run
 
 		// Queue first statistics calculation
 		enqueue_command(new Cmd_CalculateStatistics(get_gametime() + 1));
+	}
+
+	if (!script_to_run.empty() && (start_game_type == NewSPScenario || start_game_type == Loaded)) {
+		const std::string registered_script =
+			lua().register_script(*g_fs, "commandline", script_to_run);
+		enqueue_command(new Cmd_LuaScript(get_gametime() + 1, "commandline", registered_script));
 	}
 
 	if (m_writereplay || m_writesyncstream) {
@@ -632,6 +623,10 @@ void Game::think()
 	m_ctrl->think();
 
 	if (m_state == gs_running) {
+		// TODO(sirver): This is not good. Here, it depends on the speed of the
+		// computer and the fps if and when the game is saved - this is very bad
+		// for scenarios and even worse for the regression suite (which relies on
+		// the timings of savings.
 		cmdqueue().run_queue(m_ctrl->getFrametime(), get_game_time_pointer());
 
 		if (g_gr) // not in dedicated server mode
@@ -907,21 +902,33 @@ void Game::send_player_ship_scout_direction(Ship & ship, uint8_t direction)
 {
 	send_player_command
 		(*new Cmd_ShipScoutDirection
-			(get_gametime(), ship.get_economy()->owner().player_number(), ship.serial(), direction));
+			(get_gametime(), ship.get_owner()->player_number(), ship.serial(), direction));
 }
 
 void Game::send_player_ship_construct_port(Ship & ship, Coords coords)
 {
 	send_player_command
 		(*new Cmd_ShipConstructPort
-			(get_gametime(), ship.get_economy()->owner().player_number(), ship.serial(), coords));
+			(get_gametime(), ship.get_owner()->player_number(), ship.serial(), coords));
 }
 
 void Game::send_player_ship_explore_island(Ship & ship, bool cw)
 {
 	send_player_command
 		(*new Cmd_ShipExploreIsland
-			(get_gametime(), ship.get_economy()->owner().player_number(), ship.serial(), cw));
+			(get_gametime(), ship.get_owner()->player_number(), ship.serial(), cw));
+}
+
+void Game::send_player_sink_ship(Ship & ship) {
+	send_player_command
+		(*new Cmd_ShipSink
+			(get_gametime(), ship.get_owner()->player_number(), ship.serial()));
+}
+
+void Game::send_player_cancel_expedition_ship(Ship & ship) {
+	send_player_command
+		(*new Cmd_ShipCancelExpedition
+			(get_gametime(), ship.get_owner()->player_number(), ship.serial()));
 }
 
 

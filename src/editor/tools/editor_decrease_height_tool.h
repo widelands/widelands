@@ -20,7 +20,7 @@
 #ifndef EDITOR_DECREASE_HEIGHT_TOOL_H
 #define EDITOR_DECREASE_HEIGHT_TOOL_H
 
-#include "editor_tool.h"
+#include "editor/tools/editor_tool.h"
 
 ///  Decreases the height of a node by a value.
 struct Editor_Decrease_Height_Tool : public Editor_Tool {
@@ -40,8 +40,8 @@ struct Editor_Decrease_Height_Tool : public Editor_Tool {
 		return "pics/fsel_editor_decrease_height.png";
 	}
 
-	int32_t get_change_by() const throw () {return m_change_by;}
-	void set_change_by(const int32_t n) throw () {m_change_by = n;}
+	int32_t get_change_by() const {return m_change_by;}
+	void set_change_by(const int32_t n) {m_change_by = n;}
 
 private:
 	int32_t m_change_by;

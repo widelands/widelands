@@ -17,23 +17,23 @@
  *
  */
 
-#include "trainingsite.h"
-
-#include "editor_game_base.h"
-#include "game.h"
-#include "helper.h"
-#include "i18n.h"
-#include "player.h"
-#include "production_program.h"
-#include "profile/profile.h"
-#include "economy/request.h"
-#include "soldier.h"
-#include "tribe.h"
-#include "worker.h"
-
-#include "upcast.h"
+#include "logic/trainingsite.h"
 
 #include <cstdio>
+
+#include "economy/request.h"
+#include "helper.h"
+#include "i18n.h"
+#include "logic/editor_game_base.h"
+#include "logic/game.h"
+#include "logic/player.h"
+#include "logic/production_program.h"
+#include "logic/soldier.h"
+#include "logic/tribe.h"
+#include "logic/worker.h"
+#include "profile/profile.h"
+#include "upcast.h"
+
 
 namespace Widelands {
 
@@ -404,10 +404,10 @@ std::vector<Soldier *> TrainingSite::stationedSoldiers() const
 	return m_soldiers;
 }
 
-uint32_t TrainingSite::minSoldierCapacity() const throw () {
+uint32_t TrainingSite::minSoldierCapacity() const {
 	return 0;
 }
-uint32_t TrainingSite::maxSoldierCapacity() const throw () {
+uint32_t TrainingSite::maxSoldierCapacity() const {
 	return descr().get_max_number_of_soldiers();
 }
 uint32_t TrainingSite::soldierCapacity() const

@@ -20,13 +20,13 @@
 #ifndef S__CMD_CALL_ECONOMY_BALANCE_H
 #define S__CMD_CALL_ECONOMY_BALANCE_H
 
+#include "economy/flag.h"
 #include "logic/cmd_queue.h"
-#include "flag.h"
 #include "logic/instances.h"
 
 namespace Widelands {
 class Economy;
-struct Game;
+class Game;
 struct Map_Map_Object_Loader;
 struct Map_Map_Object_Loader;
 
@@ -51,5 +51,3 @@ private:
 }
 
 #endif
-
-

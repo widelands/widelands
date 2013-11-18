@@ -1,40 +1,45 @@
-# Portuguese translation for widelands
-# Copyright (c) 2010 Rosetta Contributors and Canonical Ltd 2010
-# This file is distributed under the same license as the widelands package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, 2010.
-#
 msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
-"Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2013-06-16 09:11+0000\n"
-"PO-Revision-Date: 2010-12-06 11:17+0000\n"
-"Last-Translator: Almufadado <Unknown>\n"
+"Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
+"POT-Creation-Date: 2013-09-15 17:41+0000\n"
+"PO-Revision-Date: 2013-06-27 16:57+0000\n"
+"Last-Translator: trewe <Unknown>\n"
 "Language-Team: Portuguese <pt@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-06-17 05:09+0000\n"
-"X-Generator: Launchpad (build 16667)\n"
+"X-Launchpad-Export-Date: 2013-09-16 04:35+0000\n"
+"X-Generator: Launchpad (build 16761)\n"
+"Language: pt\n"
 
+#
+# File: ../../campaigns/t01.wmf/scripting/initial_messages.lua, line: 27
+# File: ../../campaigns/t01.wmf/scripting/initial_messages.lua, line: 27
 #: ../../campaigns/t01.wmf/scripting/initial_messages.lua:27
 msgid ""
 " \"As father told me, there are times to fight and times to lie and wait, "
 "trying not to fall asleep or die before the right time comes. And so I do... "
 "wait.\" "
 msgstr ""
-" \"Tal como o meu pai me disse, tens de saber quando lutar, quando ficar e "
+" “Tal como o meu pai me disse, tens de saber quando lutar, quando ficar e "
 "esperar, mas tenta não adormecer ou morrer antes do tempo certo chegar. E "
-"por isso ...  estou à espera.\" "
+"por isso ...  estou à espera.” "
 
+#
+# File: ../../campaigns/t01.wmf/scripting/texts.lua, line: 45
+# File: ../../campaigns/t01.wmf/scripting/texts.lua, line: 45
 #: ../../campaigns/t01.wmf/scripting/texts.lua:45
 msgid ""
 " \"Hail, chieftain. I am Khantrukh and have seen many winters pass. Please "
 "allow me to aid you with my counsel through these darkened days.\" "
 msgstr ""
-" \"Avé, Grande-chefe ! O meu nome é Khantrukh e já vi muito invernos passar. "
-"Deixa que te ajude com os meus conselhos durante estes negros dias.\" "
+" “Avé, Grande-chefe ! O meu nome é Khantrukh e já vi muito invernos passar. "
+"Deixa que te ajude com os meus conselhos durante estes negros dias.” "
 
+#
+# File: ../../campaigns/t01.wmf/scripting/texts.lua, line: 89
+# File: ../../campaigns/t01.wmf/scripting/texts.lua, line: 89
 #: ../../campaigns/t01.wmf/scripting/texts.lua:89
 msgid ""
 " \"I am well aware, chieftain, that neither you nor your warriors have the "
@@ -45,14 +50,17 @@ msgid ""
 "a gift of destiny - there are indeed great rocks just nearby...\"<br><br>-- "
 "NEW OBJECTIVE --<br> "
 msgstr ""
-" \"Eu tenho consciência, ó Grande-chefe, que nem tu nem os teus guerreiros "
+" “Eu tenho consciência, ó Grande-chefe, que nem tu nem os teus guerreiros "
 "têm o desejo de ficar neste lugar amaldiçoado por muito tempo. Mas mesmo "
 "assim, a nossa guerra para reconquistar a nossa terra vai levar mais tempo e "
 "é aconselhável começarmo-nos já a preparar para isso.<br> O meu conselho é "
 "começar a juntar pedra a pensar no futuro pois ninguém sabe que "
 "fortificações vamos precisar de construir. E, como um presente do destino, "
-"há mesmo muita pedra aqui perto ...\"<br><br>-- NOVO OBJECTIVO --<br> "
+"há mesmo muita pedra aqui perto ...”<br><br>-- NOVO OBJECTIVO --<br> "
 
+#
+# File: ../../campaigns/t01.wmf/scripting/texts.lua, line: 105
+# File: ../../campaigns/t01.wmf/scripting/texts.lua, line: 105
 #: ../../campaigns/t01.wmf/scripting/texts.lua:105
 msgid ""
 " \"In another sleepless night, I went up to the hill and gazed to the north. "
@@ -60,23 +68,29 @@ msgid ""
 "legacy.<br> They are a constant reminder why we have to hide here... and why "
 "we must return in the end!\" "
 msgstr ""
-" \"Em mais uma noite de insónias, fui passear ao monte e parei para "
+" “Em mais uma noite de insónias, fui passear ao monte e parei para "
 "contemplar o Norte. Os fogos continuam a arder, satisfazendo a fome que eles "
 "têm do legado do meu pai.<br> Eles são uma lembrança constante da razão "
 "porque estamos aqui escondidos ... e a razão pela qual temos que regressar "
-"no fim!\" "
+"no fim!” "
 
+#
+# File: ../../campaigns/t01.wmf/scripting/initial_messages.lua, line: 11
+# File: ../../campaigns/t01.wmf/scripting/initial_messages.lua, line: 11
 #: ../../campaigns/t01.wmf/scripting/initial_messages.lua:11
 msgid ""
 " \"It's been months and we are still hiding where the forests are old and "
 "dark.<br> My warriors hunt at day and lie awake at night - listening to the "
 "sounds of the cruel slaughter echoing from afar amongst the ancient trees.\" "
 msgstr ""
-" \"Já passaram meses e ainda estamos escondidos onde as florestas são "
-"antigas e escuras.<br> Os meus guerreiros caçam de dia e ficam alerta de "
-"noite, enquanto ouvem os sons da chacina ecoando lá longe por entre as "
-"árvores antigas.\" "
+" “Já passaram meses e ainda estamos escondidos onde as florestas são antigas "
+"e escuras.<br> Os meus guerreiros caçam de dia e ficam alerta de noite, "
+"enquanto ouvem os sons da chacina ecoando lá longe por entre as árvores "
+"antigas.” "
 
+#
+# File: ../../campaigns/t01.wmf/scripting/initial_messages.lua, line: 22
+# File: ../../campaigns/t01.wmf/scripting/initial_messages.lua, line: 22
 #: ../../campaigns/t01.wmf/scripting/initial_messages.lua:22
 msgid ""
 " \"My father's bones rest peacefully in the grounds on which he once ended "
@@ -86,14 +100,17 @@ msgid ""
 "my spirits high and those of my warriors awake, not to let greed or despair "
 "destroy the bonds between us as well.\" "
 msgstr ""
-" \"Os ossos do meu pai já encontraram descanso eterno no chão em que ele um "
+" “Os ossos do meu pai já encontraram descanso eterno no chão em que ele um "
 "dia terminou com o derramamento de sangue sem sentido que se tinha instalado "
 "entre nós. É doloroso para mim pensar que essa paz apenas durou uma "
 "geração.<br> O Bolderado, o meu mais leal amigo e companheiro, é uma fonte "
 "de paz e conforto neste dias cinzentos. Ele transmite-me confiança e mantém "
 "os meus guerreiros alerta, não deixando que nem a ganância nem o desespero "
-"destruam  os laços que nos unem.\" "
+"destruam  os laços que nos unem.” "
 
+#
+# File: ../../campaigns/t01.wmf/scripting/texts.lua, line: 51
+# File: ../../campaigns/t01.wmf/scripting/texts.lua, line: 51
 #: ../../campaigns/t01.wmf/scripting/texts.lua:51
 msgid ""
 " \"None but the gods know how long we have to remain hidden here. The "
@@ -103,14 +120,17 @@ msgid ""
 "harsh lands. I believe to the east of our campsite are a few places where we "
 "could raise a lumberjack's hut.\"<br><br>-- NEW OBJECTIVES --<br> "
 msgstr ""
-" \"Apenas os Deuses sabem o tempo que temos de ficar aqui escondidos. Os "
+" “Apenas os Deuses sabem o tempo que temos de ficar aqui escondidos. Os "
 "guerreiros desejam que marchemos gloriosamente muito brevemente, mas eu acho "
 "que isso não vai acontecer tão cedo. E os dias já estão a ficar mais curtos "
 "e frios ...<br> Devemos preparar-nos para o caso de termos de enfrentar o "
 "inverno nestas terras agrestes. Acredito que a Este do campo existem alguns "
-"locais onde possamos construir uma cabana para o Lenhador.\" <br><br>-- "
-"NOVOS OBJECTIVOS --<br> "
+"locais onde possamos construir uma cabana para o Lenhador.” <br><br>-- NOVOS "
+"OBJECTIVOS --<br> "
 
+#
+# File: ../../campaigns/t01.wmf/scripting/texts.lua, line: 60
+# File: ../../campaigns/t01.wmf/scripting/texts.lua, line: 60
 #: ../../campaigns/t01.wmf/scripting/texts.lua:60
 msgid ""
 " \"Obviously, it would be too exhausting for our people to walk all the way "
@@ -119,13 +139,16 @@ msgid ""
 "men would appreciate a way as short and plain as possible - the wood will "
 "surely be heavy enough, nevertheless.\"<br><br>-- NEW OBJECTIVE --<br> "
 msgstr ""
-" \"Obviamente que seria demasiado cansativo para a nossa gente ter que fazer "
+" “Obviamente que seria demasiado cansativo para a nossa gente ter que fazer "
 "o caminho todo desde o Lenhador através dos descampados.Por isso teremos que "
 "construir uma  estrada entre o nossa sede e a cabana do lenhador. Não é "
 "preciso ser adivinho para saber que quanto mais curto e plano for o caminho, "
 "melhor pois a madeira já é pesada demais para ainda estarmos a dificultar as "
-"coisas.\" <br><br>-- NOVO OBJECTIVO --<br> "
+"coisas.” <br><br>-- NOVO OBJECTIVO --<br> "
 
+#
+# File: ../../campaigns/t01.wmf/scripting/texts.lua, line: 81
+# File: ../../campaigns/t01.wmf/scripting/texts.lua, line: 81
 #: ../../campaigns/t01.wmf/scripting/texts.lua:81
 msgid ""
 " \"Of course, if we intended to build a bigger settlement, many more "
@@ -136,14 +159,17 @@ msgid ""
 "should build a ranger's hut, preferably close to the lumberjack's "
 "hut.\"<br><br>-- NEW OBJECTIVE --<br> "
 msgstr ""
-" \"Claro que se quisermos construir uma colónia maior precisamos de muitos "
+" “Claro que se quisermos construir uma colónia maior precisamos de muitos "
 "mais Lenhadores, mas estes por agora chegam.<br> Não nunca esqueças: estas "
 "florestas são uma herança que nos foi confiada pelos nossos antepassados. "
 "Temos de respeitá-la e tomar conta dela. O tanto que tiramos é o tanto que "
 "temos que dar de volta.<br> Por isso para reflorestar precisamos de "
 "construir uma casa ao Silvicultor, de preferência perto da casa do "
-"Lenhador.\" <br><br>-- NOVO OBJECTIVO --<br> "
+"Lenhador.” <br><br>-- NOVO OBJECTIVO --<br> "
 
+#
+# File: ../../campaigns/t01.wmf/scripting/texts.lua, line: 115
+# File: ../../campaigns/t01.wmf/scripting/texts.lua, line: 115
 #: ../../campaigns/t01.wmf/scripting/texts.lua:115
 msgid ""
 " \"Once again, I went up to my father's tomb, in a sacred grove at the foot "
@@ -152,12 +178,15 @@ msgid ""
 "it felt like a farewell. For the first time, I wondered what the future "
 "might hold for me...\" "
 msgstr ""
-" \"Fui de novo visitar a campa do meu pai. no bosque sagrado no sopé do "
+" “Fui de novo visitar a campa do meu pai. no bosque sagrado no sopé do "
 "grande pináculo de Kal'mavrath. Fiquei ali, meditando, sem dar conta das "
 "horas a passar nem da chuva que caia dos negros céus ...<br> De certa forma "
 "foi como uma despedida. Pela primeira vez interrogo-me sobre o que o destino "
-"tem reservado para mim ...\" "
+"tem reservado para mim ...” "
 
+#
+# File: ../../campaigns/t01.wmf/scripting/texts.lua, line: 125
+# File: ../../campaigns/t01.wmf/scripting/texts.lua, line: 125
 #: ../../campaigns/t01.wmf/scripting/texts.lua:125
 msgid ""
 " \"Some time ago, Boldreth came to me. His advice was to move to a place "
@@ -167,13 +196,16 @@ msgid ""
 "not happen any time soon. He might still be right, but I fear the bloodshed "
 "that returning too fast would cause both on our and the other side...\" "
 msgstr ""
-" \"Há já algum tempo, o Bolderado veio ter comigo. O seu conselho foi nos "
+" “Há já algum tempo, o Bolderado veio ter comigo. O seu conselho foi nos "
 "aproximarmos mais da terra natal e atacar ao primeiro sinal de fraqueza dos "
 "meus irmãos.<br> Mas quando olho para além da floresta ainda vejo o fumo "
 "negro subindo aos céus. Eu sei que ainda é cedo demais e o que ele me pede "
 "ainda vai demorar a acontecer. Ele até pode ter razão mas eu temo a matança "
-"desnecessária de ambos os lados se regressarmos cedo de mais ...\" "
+"desnecessária de ambos os lados se regressarmos cedo de mais ...” "
 
+#
+# File: ../../campaigns/t01.wmf/scripting/texts.lua, line: 74
+# File: ../../campaigns/t01.wmf/scripting/texts.lua, line: 74
 #: ../../campaigns/t01.wmf/scripting/texts.lua:74
 msgid ""
 " \"The northern winds tell us that the coming winter will be a long and "
@@ -181,22 +213,28 @@ msgid ""
 "people. More trees wait for our axes just south of our new crossroads - let "
 "us raise a second lumberjack's hut there!\"<br><br>-- NEW OBJECTIVE --<br> "
 msgstr ""
-" \"O ventos do Norte dizem-me que este inverno vai ser longo e cruel. Um só "
+" “O ventos do Norte dizem-me que este inverno vai ser longo e cruel. Um só "
 "Lenhador não vai ser suficiente para as nossas necessidades. Mais árvores "
 "esperam os nossos machados a Sul do nosso novo cruzamento. Vamos construir "
-"uma segunda casa do Lenhador ai !\"<br><br>-- NOVO OBJECTIVO --<br> "
+"uma segunda casa do Lenhador ai !”<br><br>-- NOVO OBJECTIVO --<br> "
 
+#
+# File: ../../campaigns/t01.wmf/scripting/texts.lua, line: 67
+# File: ../../campaigns/t01.wmf/scripting/texts.lua, line: 67
 #: ../../campaigns/t01.wmf/scripting/texts.lua:67
 msgid ""
 " \"There is an old saying:<br> 'A burden divided is easier to endure.'<br> A "
 "crossroads on the way between our headquarters and the lumberjack's hut "
 "would ease the work of our carriers.\"<br><br>-- NEW OBJECTIVE --<br> "
 msgstr ""
-" \"Há um ditado antigo que diz:<br> 'Um peso dividido é mais fácil de "
+" “Há um ditado antigo que diz:<br> 'Um peso dividido é mais fácil de "
 "levar'.<br> Um cruzamento no caminho entre o nosso Quartel-general e a casa "
-"do Lenhador vai facilitar a vida aos nossos carregadores.\"<br><br>-- NOVO "
+"do Lenhador vai facilitar a vida aos nossos carregadores.”<br><br>-- NOVO "
 "OBJECTIVO --<br> "
 
+#
+# File: ../../campaigns/t01.wmf/scripting/texts.lua, line: 134
+# File: ../../campaigns/t01.wmf/scripting/texts.lua, line: 134
 #: ../../campaigns/t01.wmf/scripting/texts.lua:134
 msgid ""
 " \"Today, my warriors picked up an old man, wandering sick and wounded "
@@ -204,11 +242,14 @@ msgid ""
 "atrocities taking place in Al'thunran.<br> I hereby renew my oath - I will "
 "stop this madness at any cost!\" "
 msgstr ""
-" \"Hoje, os meus guerreiros encontraram um velho homem doente e ferido que "
+" “Hoje, os meus guerreiros encontraram um velho homem doente e ferido que "
 "andava a vaguear pela floresta escura. Escutámos horrorizados enquanto ele "
 "nos contava as atrocidades que estão a acontecer em Al'thunran.<br> Renovo "
-"aqui a minha promessa: Eu vou para com esta loucura a todo o custo!\" "
+"aqui a minha promessa: Eu vou para com esta loucura a todo o custo!” "
 
+#
+# File: ../../campaigns/t01.wmf/scripting/texts.lua, line: 94
+# File: ../../campaigns/t01.wmf/scripting/texts.lua, line: 94
 #: ../../campaigns/t01.wmf/scripting/texts.lua:94
 msgid ""
 " \"Very well done, chieftain. We now have all we need to face the winter and "
@@ -216,22 +257,25 @@ msgid ""
 "VICTORY! ----------------------<br><br> You may continue to play this map if "
 "you wish. Otherwise, move on to the next mission.\" "
 msgstr ""
-" \"Excelente, Grande-chefe ! Agora já temos tudo o que precisamos para "
+" “Excelente, Grande-chefe ! Agora já temos tudo o que precisamos para "
 "enfrentar o inverno e podemos nos preparar para as batalhas que se seguirão. "
 "<br>--------------------- VICTÓRIA! ----------------------<br><br> Podes "
 "continuar a jogar este mapa se o desejares ou então podes começar uma nova "
-"missão.\" "
+"missão.” "
 
+#
+# File: ../../campaigns/t01.wmf/scripting/initial_messages.lua, line: 17
+# File: ../../campaigns/t01.wmf/scripting/initial_messages.lua, line: 17
 #: ../../campaigns/t01.wmf/scripting/initial_messages.lua:17
 msgid ""
 " \"We can see the raging flames that swallow Al'thunran from here, miles "
 "away.<br> The red lights flash in the darkness and dance to the rhythm of "
 "the wardrums that haunt me even in my nightmares.\" "
 msgstr ""
-" \"Podemos ver as chamas que devoram Al'thunran a kilómetros de "
+" “Podemos ver as chamas que devoram Al'thunran a kilómetros de "
 "distância.<br> As luzes vermelhas cintilam na escuridão como se dançassem ao "
 "ritmo dos tambores de guerra. Esta imagem persegue-me até nos meus pesadelos "
-"!\" "
+"!” "
 
 #: ../../campaigns/t01.wmf/scripting/texts.lua:10
 #: ../../campaigns/t01.wmf/scripting/texts.lua:53

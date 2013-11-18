@@ -17,7 +17,7 @@
  *
  */
 
-#include "singleplayer.h"
+#include "ui_fsmenu/singleplayer.h"
 
 #include "constants.h"
 #include "graphic/graphic.h"

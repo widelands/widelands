@@ -1,0 +1,13 @@
+# Automatically created by Widelands bzr6713[widelands] (Debug)
+
+[global]
+packet_version="1"
+map_w="256"
+map_h="256"
+nr_players="8"
+world="winterland"
+name=_"Ice wars"
+author="Einstein13"
+descr=_"After autumn is winter. Some things are frozen, but not the war."
+hint=_"Start positions are clockwise"
+tags="seafaring,official,4teams,3teams,2teams"

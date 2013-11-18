@@ -20,23 +20,21 @@
 #ifndef EDITORINTERACTIVE_H
 #define EDITORINTERACTIVE_H
 
+#include "editor/tools/editor_history.h"
+#include "editor/tools/editor_increase_height_tool.h"
+#include "editor/tools/editor_increase_resources_tool.h"
+#include "editor/tools/editor_info_tool.h"
+#include "editor/tools/editor_make_infrastructure_tool.h"
+#include "editor/tools/editor_noise_height_tool.h"
+#include "editor/tools/editor_place_bob_tool.h"
+#include "editor/tools/editor_place_immovable_tool.h"
+#include "editor/tools/editor_set_origin_tool.h"
+#include "editor/tools/editor_set_port_space_tool.h"
+#include "editor/tools/editor_set_starting_pos_tool.h"
+#include "editor/tools/editor_set_terrain_tool.h"
 #include "ui_basic/button.h"
 #include "ui_basic/unique_window.h"
 #include "wui/interactive_base.h"
-
-#include "tools/editor_increase_height_tool.h"
-#include "tools/editor_increase_resources_tool.h"
-#include "tools/editor_info_tool.h"
-#include "tools/editor_make_infrastructure_tool.h"
-#include "tools/editor_noise_height_tool.h"
-#include "tools/editor_place_bob_tool.h"
-#include "tools/editor_place_immovable_tool.h"
-#include "tools/editor_set_origin_tool.h"
-#include "tools/editor_set_port_space_tool.h"
-#include "tools/editor_set_starting_pos_tool.h"
-#include "tools/editor_set_terrain_tool.h"
-#include "tools/editor_history.h"
-
 
 class Editor;
 class Editor_Tool;
@@ -48,7 +46,9 @@ class Editor_Tool;
 struct Editor_Interactive : public Interactive_Base {
 	friend struct Editor_Tool_Menu;
 
-	static void run_editor(const std::string & filename);
+	// Runs the Editor via the commandline --editor flag. Will load 'filename' as a
+	// map and run 'script_to_run' directly after all initialization is done.
+	static void run_editor(const std::string & filename, const std::string& script_to_run);
 
 private:
 	Editor_Interactive(Widelands::Editor_Game_Base &);
@@ -83,7 +83,7 @@ public:
 			set_port_space(unset_port_space)
 
 		{}
-		Editor_Tool & current() const throw () {return *current_pointer;}
+		Editor_Tool & current() const {return *current_pointer;}
 		typedef std::vector<Editor_Tool *> Tool_Vector;
 		typedef Tool_Vector::size_type Index;
 		//Tool_Vector                     tools;
@@ -111,7 +111,7 @@ public:
 
 	void select_tool(Editor_Tool &, Editor_Tool::Tool_Index);
 
-	Widelands::Player * get_player() const throw () {return 0;}
+	Widelands::Player * get_player() const {return 0;}
 
 	// action functions
 	void exit();

@@ -4,6 +4,9 @@ size=small
 trunk=2
 stone=1
 
+[return_on_dismantle]
+trunk=1
+
 [aihints]
 build_material=false
 

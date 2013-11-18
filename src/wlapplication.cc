@@ -19,6 +19,24 @@
 
 #include "wlapplication.h"
 
+#include <cerrno>
+#ifndef _WIN32
+#include <csignal>
+#endif
+#include <cstring>
+#include <ctime>
+#include <fstream>
+#include <iostream>
+#include <stdexcept>
+#include <string>
+
+#include <config.h>
+#ifdef __APPLE__
+#include <mach-o/dyld.h>
+#endif
+#include <sys/stat.h>
+#include <sys/types.h>
+
 #include "build_info.h"
 #include "computer_player.h"
 #include "editor/editorinteractive.h"
@@ -30,6 +48,7 @@
 #include "io/filesystem/disk_filesystem.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "journal.h"
+#include "log.h"
 #include "logic/game.h"
 #include "logic/game_data_error.h"
 #include "logic/map.h"
@@ -41,6 +60,7 @@
 #include "network/nethost.h"
 #include "profile/profile.h"
 #include "sound/sound_handler.h"
+#include "timestring.h"
 #include "ui_basic/messagebox.h"
 #include "ui_basic/progresswindow.h"
 #include "ui_fsmenu/campaign_select.h"
@@ -64,35 +84,11 @@
 #include "wui/interactive_player.h"
 #include "wui/interactive_spectator.h"
 
-#include "log.h"
-
-#include "timestring.h"
-
-#include <config.h>
-#include <sys/types.h>
-#include <sys/stat.h>
-#ifndef _WIN32
-#include <csignal>
-#endif
-
-#include <cerrno>
-#include <cstring>
-#include <iostream>
-#include <fstream>
-#include <stdexcept>
-#include <string>
-#include <ctime>
-
-#ifdef __APPLE__
-#include <mach-o/dyld.h>
-#endif
-
 #ifndef NDEBUG
 #ifndef _WIN32
 int32_t WLApplication::pid_me   = 0;
 int32_t WLApplication::pid_peer = 0;
 volatile int32_t WLApplication::may_run = 0;
-#include <csignal>
 #endif
 #endif
 
@@ -180,10 +176,6 @@ void WLApplication::setup_searchpaths(std::string argv0)
 			try {
 				log ("Adding directory: %s\n", argv0.c_str());
 				g_fs->AddFileSystem(FileSystem::Create(argv0));
-#ifdef USE_DATAFILE
-				argv0.append ("/widelands.dat");
-				g_fs->AddFileSystem(new Datafile(argv0.c_str()));
-#endif
 			}
 			catch (FileNotFound_error &) {}
 			catch (FileAccessDenied_error & e) {
@@ -361,13 +353,13 @@ void WLApplication::run()
 {
 	if (m_game_type == EDITOR) {
 		g_sound_handler.start_music("ingame");
-		Editor_Interactive::run_editor(m_filename);
+		Editor_Interactive::run_editor(m_filename, m_script_to_run);
 	} else if (m_game_type == REPLAY)   {
 		replay();
 	} else if (m_game_type == LOADGAME) {
 		Widelands::Game game;
 		try {
-			game.run_load_game(m_filename.c_str());
+			game.run_load_game(m_filename.c_str(), m_script_to_run);
 		} catch (const Widelands::game_data_error & e) {
 			log("Game not loaded: Game data error: %s\n", e.what());
 		} catch (const std::exception & e) {
@@ -378,7 +370,7 @@ void WLApplication::run()
 	} else if (m_game_type == SCENARIO) {
 		Widelands::Game game;
 		try {
-			game.run_splayer_scenario_direct(m_filename.c_str());
+			game.run_splayer_scenario_direct(m_filename.c_str(), m_script_to_run);
 		} catch (const Widelands::game_data_error & e) {
 			log("Scenario not started: Game data error: %s\n", e.what());
 		} catch (const std::exception & e) {
@@ -809,9 +801,7 @@ void WLApplication::set_input_grab(bool grab)
  * with the given resolution.
  * Throws an exception on failure.
  */
-void WLApplication::init_graphics
-	(const int32_t w, const int32_t h, const int32_t bpp,
-	 const bool fullscreen, const bool opengl)
+void WLApplication::init_graphics(int32_t w, int32_t h, bool fullscreen, bool opengl)
 {
 	if (!w && !h) { // shutdown.
 		delete g_gr;
@@ -822,13 +812,13 @@ void WLApplication::init_graphics
 
 	if (!g_gr) {
 		g_gr = new Graphic();
-		g_gr->initialize(w, h, bpp, fullscreen, opengl);
+		g_gr->initialize(w, h, fullscreen, opengl);
 	} else {
 		if
-			(g_gr->get_xres() != w || g_gr->get_yres() != h || g_gr->get_bpp() != bpp
+			(g_gr->get_xres() != w || g_gr->get_yres() != h
 				|| g_gr->is_fullscreen() != fullscreen || g_opengl != opengl)
 		{
-			g_gr->initialize(w, h, bpp, fullscreen, opengl);
+			g_gr->initialize(w, h, fullscreen, opengl);
 		}
 	}
 }
@@ -841,7 +831,6 @@ void WLApplication::refresh_graphics()
 	init_graphics
 		(s.get_int("xres", XRES),
 		 s.get_int("yres", YRES),
-		 s.get_int("depth", 32),
 		 s.get_bool("fullscreen", false),
 		 s.get_bool("opengl", true));
 }
@@ -1099,7 +1088,7 @@ void WLApplication::shutdown_hardware()
 			"alive!"
 			<< endl;
 
-	init_graphics(0, 0, 0, false, false);
+	init_graphics(0, 0, false, false);
 	SDL_QuitSubSystem
 		(SDL_INIT_TIMER|SDL_INIT_VIDEO|SDL_INIT_CDROM|SDL_INIT_JOYSTICK);
 
@@ -1164,7 +1153,7 @@ void WLApplication::parse_commandline
  * was given,
  * true otherwise.
 */
-void WLApplication::handle_commandline_parameters() throw (Parameter_error)
+void WLApplication::handle_commandline_parameters()
 {
 	if (m_commandline.count("help") || m_commandline.count("version")) {
 		throw Parameter_error(); //no message on purpose
@@ -1280,8 +1269,16 @@ void WLApplication::handle_commandline_parameters() throw (Parameter_error)
 		m_game_type = INTERNET;
 		m_commandline.erase("dedicated");
 	}
-	//Note: it should be possible to record and playback at the same time,
-	//but why would you?
+	if (m_commandline.count("script")) {
+		m_script_to_run = m_commandline["script"];
+		if (m_script_to_run.empty())
+			throw wexception("empty value of command line parameter --script");
+		if (*m_script_to_run.rbegin() == '/')
+			m_script_to_run.erase(m_script_to_run.size() - 1);
+		m_commandline.erase("script");
+	}
+
+	// TODO(sirver): this framework has not been useful in a long time. Kill it.
 	if (m_commandline.count("record")) {
 		if (m_commandline["record"].empty())
 			throw Parameter_error("ERROR: --record needs a filename!");
@@ -1383,6 +1380,9 @@ void WLApplication::show_usage()
 			 " --scenario=FILENAME  Directly starts the map FILENAME as scenario\n"
 			 "                      map.\n"
 			 " --loadgame=FILENAME  Directly loads the savegame FILENAME.\n")
+		<< _
+			(" --script=FILENAME    Run the given Lua script after initialization.\n"
+			 "                      Only valid with --scenario, --loadgame, or --editor.\n")
 		<< _(" --dedicated=FILENAME Starts a dedicated server with FILENAME as map\n")
 		<<
 		_
@@ -1393,8 +1393,6 @@ void WLApplication::show_usage()
 			 "                      Whether to enter roadbuilding mode\n"
 			 "                      automatically after placing a flag that is\n"
 			 "                      not connected to a road.\n"
-			 " --write_HTML=[yes|no]\n"
-			 "                      Write HTML-helpfiles for parsed game data.\n"
 			 "\n"
 			 "Graphic options:\n"
 			 " --fullscreen=[yes|no]\n"
@@ -1563,7 +1561,7 @@ void WLApplication::mainmenu()
 				{
 					Widelands::Game game;
 					try {
-						game.run_splayer_scenario_direct("campaigns/tutorial01.wmf");
+						game.run_splayer_scenario_direct("campaigns/tutorial01.wmf", "");
 					} catch (const std::exception & e) {
 						log("Fata exception: %s\n", e.what());
 						emergency_save(game);
@@ -1586,12 +1584,12 @@ void WLApplication::mainmenu()
 				break;
 			}
 			case Fullscreen_Menu_Main::mm_readme: {
-				Fullscreen_Menu_FileView ff("txts/README");
+				Fullscreen_Menu_FileView ff("txts/README.lua");
 				ff.run();
 				break;
 			}
 			case Fullscreen_Menu_Main::mm_license: {
-				Fullscreen_Menu_FileView ff("txts/COPYING");
+				Fullscreen_Menu_FileView ff("txts/license");
 				ff.run();
 				break;
 			}
@@ -1767,7 +1765,7 @@ void WLApplication::mainmenu_editor()
 		case Fullscreen_Menu_Editor::Back:
 			return;
 		case Fullscreen_Menu_Editor::New_Map:
-			Editor_Interactive::run_editor(m_filename);
+			Editor_Interactive::run_editor(m_filename, m_script_to_run);
 			return;
 		case Fullscreen_Menu_Editor::Load_Map: {
 			std::string filename;
@@ -1778,7 +1776,7 @@ void WLApplication::mainmenu_editor()
 
 				filename = emsm.get_map();
 			}
-			Editor_Interactive::run_editor(filename.c_str());
+			Editor_Interactive::run_editor(filename.c_str(), "");
 			return;
 		}
 		default:
@@ -2008,9 +2006,9 @@ bool WLApplication::new_game()
 		return false;
 	if (code == 2) { // scenario
 		try {
-			game.run_splayer_scenario_direct(sp.getMap().c_str());
+			game.run_splayer_scenario_direct(sp.getMap().c_str(), "");
 		} catch (const std::exception & e) {
-			log("Fata exception: %s\n", e.what());
+			log("Fatal exception: %s\n", e.what());
 			emergency_save(game);
 			throw;
 		}
@@ -2038,7 +2036,7 @@ bool WLApplication::new_game()
 
 			game.set_game_controller(ctrl.get());
 			game.init_newgame(&loaderUI, sp.settings());
-			game.run(&loaderUI, Widelands::Game::NewNonScenario);
+			game.run(&loaderUI, Widelands::Game::NewNonScenario, "", false);
 		} catch (const std::exception & e) {
 			log("Fata exception: %s\n", e.what());
 			emergency_save(game);
@@ -2068,7 +2066,7 @@ bool WLApplication::load_game()
 		return false;
 
 	try {
-		if (game.run_load_game(filename))
+		if (game.run_load_game(filename, ""))
 			return true;
 	} catch (const std::exception & e) {
 		log("Fata exception: %s\n", e.what());
@@ -2112,7 +2110,7 @@ bool WLApplication::campaign_game()
 	try {
 		// Load selected campaign-map-file
 		if (filename.size())
-			return game.run_splayer_scenario_direct(filename.c_str());
+			return game.run_splayer_scenario_direct(filename.c_str(), "");
 	} catch (const std::exception & e) {
 		log("Fata exception: %s\n", e.what());
 		emergency_save(game);
@@ -2175,7 +2173,7 @@ struct ReplayGameController : public GameController {
 				m_game.enqueue_command(cmd);
 
 			if (m_replayreader->EndOfReplay()) {
-				m_replayreader.reset(0);
+				m_replayreader.reset(nullptr);
 				m_game.enqueue_command
 					(new Cmd_ReplayEnd(m_time = m_game.get_gametime()));
 			}
@@ -2212,15 +2210,15 @@ private:
  */
 void WLApplication::replay()
 {
+	Widelands::Game game;
 	if (m_filename.empty()) {
-		Fullscreen_Menu_LoadReplay rm;
+		Fullscreen_Menu_LoadReplay rm(game);
 		if (rm.run() <= 0)
 			return;
 
 		m_filename = rm.filename();
 	}
 
-	Widelands::Game game;
 	try {
 		UI::ProgressWindow loaderUI;
 		std::vector<std::string> tipstext;
@@ -2234,7 +2232,9 @@ void WLApplication::replay()
 		game.set_write_replay(false);
 		ReplayGameController rgc(game, m_filename);
 
-		game.run(&loaderUI, Widelands::Game::Loaded);
+		game.save_handler().set_allow_saving(false);
+
+		game.run(&loaderUI, Widelands::Game::Loaded, "", true);
 	} catch (const std::exception & e) {
 		log("Fatal Exception: %s\n", e.what());
 		emergency_save(game);

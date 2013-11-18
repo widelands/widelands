@@ -21,42 +21,35 @@
 #define WIDELANDS_MINIMAPRENDERER_H
 
 #include "graphic/rendertarget.h"
+#include <memory>
 
+class StreamWrite;
 namespace Widelands {
-	struct Player;
-	struct Editor_Game_Base;
+	class Player;
+	class Editor_Game_Base;
 };
 
 /**
  * This class renders the minimap.
  */
-class MiniMapRenderer : public RenderTarget
+class MiniMapRenderer
 {
 public:
-	MiniMapRenderer(RenderTarget & rt) :
-		RenderTarget(rt) {}
+	MiniMapRenderer() {}
 	virtual ~MiniMapRenderer() {}
 
-	/**
-	 * Render the minimap. If player is not 0, it renders from that player's
-	 * point of view.
-	 */
-	void renderminimap
-		(const Widelands::Editor_Game_Base & egbase,
-		 Widelands::Player           const * player,
-		 Point                               viewpoint,
-		 uint32_t                            flags);
+	/// Render the minimap. If player is not 0, it renders from that player's
+	/// point of view. The caller must dispose of the returned surface properly.
+	/// \param viewpoint: top left corner in map coordinates
+	Surface* get_minimap_image
+		(const Widelands::Editor_Game_Base& egbase, const Widelands::Player* player,
+		 const Point& viewpoint, uint32_t flags);
 
-protected:
-	/// A helper function to draw the minimap. This is called from
-	/// renderminimap().
-	void draw_minimap
-		(const Widelands::Editor_Game_Base &,
-		 Widelands::Player           const *,
-		 Rect                                rc,
-		 Point                               viewpt,
-		 Point                               framept,
-		 uint32_t                            flags);
+	/// Render the minimap to a file. 1 pixel will be used for each fields.
+	/// \param viewpoint : The game point of view as returned by interactive_base.get_viewpoint();
+	void write_minimap_image
+		(const Widelands::Editor_Game_Base& egbase, Widelands::Player const* player,
+		 const Point& viewpoint, uint32_t flags, StreamWrite* const streamwrite);
 };
 
 #endif //WIDELANDS_MINIMAPRENDERER_H

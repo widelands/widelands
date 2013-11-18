@@ -21,16 +21,15 @@
 #ifndef UI_LISTSELECT_H
 #define UI_LISTSELECT_H
 
-#include <limits>
 #include <deque>
+#include <limits>
 
-#include <boost/signal.hpp>
+#include <boost/signals2.hpp>
 
 #include "align.h"
-
-#include "panel.h"
+#include "ui_basic/panel.h"
 #include "rgbcolor.h"
-#include "scrollbar.h"
+#include "ui_basic/scrollbar.h"
 
 namespace UI {
 struct Scrollbar;
@@ -52,9 +51,9 @@ struct BaseListselect : public Panel {
 		 bool show_check = false);
 	~BaseListselect();
 
-	boost::signal<void (uint32_t)> selected;
-	boost::signal<void (uint32_t)> clicked;
-	boost::signal<void (uint32_t)> double_clicked;
+	boost::signals2::signal<void (uint32_t)> selected;
+	boost::signals2::signal<void (uint32_t)> clicked;
+	boost::signals2::signal<void (uint32_t)> double_clicked;
 
 	void clear();
 	void sort
@@ -76,7 +75,7 @@ struct BaseListselect : public Panel {
 
 	void switch_entries(uint32_t, uint32_t);
 
-	void set_entry_color(uint32_t, RGBColor) throw ();
+	void set_entry_color(uint32_t, RGBColor);
 	void set_font(const std::string & fontname, int32_t const fontsize) {
 		m_fontname = fontname;
 		m_fontsize = fontsize;
@@ -85,33 +84,33 @@ struct BaseListselect : public Panel {
 	uint32_t size () const {return m_entry_records.size ();}
 	bool     empty() const {return m_entry_records.empty();}
 
-	uint32_t operator[](const uint32_t i) const throw ()
+	uint32_t operator[](const uint32_t i) const
 	{
 		assert(i < size());
 		return m_entry_records[i]->m_entry;
 	}
 
-	static uint32_t no_selection_index() throw ()
+	static uint32_t no_selection_index()
 	{
 		return std::numeric_limits<uint32_t>::max();
 	}
 
-	uint32_t selection_index() const throw ()
+	uint32_t selection_index() const
 	{
 		return m_selection;
 	}
 
 	void select(uint32_t i);
-	bool has_selection() const throw ();
+	bool has_selection() const;
 
 	struct No_Selection {};
-	uint32_t get_selected() const throw (No_Selection);
-	void remove_selected() throw (No_Selection);
+	uint32_t get_selected() const;
+	void remove_selected();
 
 	///  Return the total height (text + spacing) occupied by a single line.
-	uint32_t get_lineheight() const throw ();
+	uint32_t get_lineheight() const;
 
-	uint32_t get_eff_w     () const throw ();
+	uint32_t get_eff_w     () const;
 
 	// Drawing and event handling
 	void draw(RenderTarget &);
@@ -187,7 +186,7 @@ struct Listselect : public BaseListselect {
 		BaseListselect::add_front(name, pic, select_this, tooltip_text);
 	}
 
-	const Entry & operator[](uint32_t const i) const throw ()
+	const Entry & operator[](uint32_t const i) const
 	{
 		return m_entry_cache[BaseListselect::operator[](i)];
 	}
@@ -240,7 +239,7 @@ struct Listselect<Entry &> : public Listselect<Entry *> {
 		Base::add_front(name, &value, pic, select_this, tooltip_text);
 	}
 
-	Entry & operator[](uint32_t const i) const throw ()
+	Entry & operator[](uint32_t const i) const
 	{
 		return *Base::operator[](i);
 	}

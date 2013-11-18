@@ -17,12 +17,12 @@
  *
  */
 
-#include "legacy.h"
+#include "logic/legacy.h"
 
-#include "editor_game_base.h"
-#include "game_data_error.h"
-#include "immovable.h"
-#include "tribe.h"
+#include "logic/editor_game_base.h"
+#include "logic/game_data_error.h"
+#include "logic/immovable.h"
+#include "logic/tribe.h"
 
 namespace Widelands {
 
@@ -360,12 +360,12 @@ Map_Object_Descr g_FakeAttackController_Descr
 struct FakeAttackController : public BaseImmovable {
 	FakeAttackController() : BaseImmovable(g_FakeAttackController_Descr) {}
 
-	virtual int32_t get_type() const throw () {return BATTLE;}
-	virtual int32_t get_size() const throw () {return SMALL;}
-	virtual bool get_passable() const throw () {return true;}
+	virtual int32_t get_type() const {return BATTLE;}
+	virtual int32_t get_size() const {return SMALL;}
+	virtual bool get_passable() const {return true;}
 	virtual void draw (const Editor_Game_Base &, RenderTarget &, const FCoords&, const Point&)
 	{}
-	virtual PositionList get_positions (const Editor_Game_Base &) const throw ()
+	virtual PositionList get_positions (const Editor_Game_Base &) const
 	{
 		// This violates what I had in mind for get_positions, but since this is
 		// attic code and get_positions was added long after this code was gone
@@ -442,12 +442,12 @@ Map_Object_Descr g_FakeBattle_Descr("battle", "Battle");
 struct FakeBattle : public BaseImmovable {
 	FakeBattle() : BaseImmovable(g_FakeBattle_Descr) {}
 
-	virtual int32_t get_type() const throw () {return BATTLE;}
-	virtual int32_t get_size() const throw () {return SMALL;}
-	virtual bool get_passable() const throw () {return true;}
+	virtual int32_t get_type() const {return BATTLE;}
+	virtual int32_t get_size() const {return SMALL;}
+	virtual bool get_passable() const {return true;}
 	virtual void draw (const Editor_Game_Base &, RenderTarget &, const FCoords&, const Point&)
 	{}
-	virtual PositionList get_positions (const Editor_Game_Base &) const throw ()
+	virtual PositionList get_positions (const Editor_Game_Base &) const
 	{
 		// This violates what I had in mind for get_positions, but since this is
 		// attic code and get_positions was added long after this code was gone

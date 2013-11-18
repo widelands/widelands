@@ -24,11 +24,11 @@
 
 #include <boost/noncopyable.hpp>
 
+#include "editor/tools/editor_action_args.h"
 #include "logic/widelands_geometry.h"
-#include "editor_action_args.h"
 
 struct Editor_Interactive;
-namespace Widelands {struct Map;}
+namespace Widelands {class Map;}
 
 /**
  * An editor tool is a tool that can be selected in the editor. Examples are:

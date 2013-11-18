@@ -17,16 +17,15 @@
  *
  */
 
-#include "widelands_map_exploration_data_packet.h"
+#include "map_io/widelands_map_exploration_data_packet.h"
 
+#include "log.h"
 #include "logic/editor_game_base.h"
 #include "logic/game_data_error.h"
 #include "logic/map.h"
 #include "logic/player.h"
 #include "logic/widelands_fileread.h"
 #include "logic/widelands_filewrite.h"
-
-#include "log.h"
 
 namespace Widelands {
 
@@ -38,7 +37,6 @@ void Map_Exploration_Data_Packet::Read
 	 Editor_Game_Base      &       egbase,
 	 bool                    const skip,
 	 Map_Map_Object_Loader &)
-throw (_wexception)
 {
 	if (skip)
 		return;
@@ -99,7 +97,6 @@ throw (_wexception)
 
 void Map_Exploration_Data_Packet::Write
 	(FileSystem & fs, Editor_Game_Base & egbase, Map_Map_Object_Saver &)
-throw (_wexception)
 {
 	FileWrite fw;
 

@@ -20,15 +20,15 @@
 #ifndef WIDELANDS_MAP_OBJECT_PACKET_H
 #define WIDELANDS_MAP_OBJECT_PACKET_H
 
-#include "logic/instances.h"
-
 #include <set>
+
+#include "logic/instances.h"
 
 class FileSystem;
 
 namespace Widelands {
 
-struct Editor_Game_Base;
+class Editor_Game_Base;
 struct Map_Map_Object_Loader;
 struct Map_Map_Object_Saver;
 

@@ -20,10 +20,10 @@
 #ifndef COROUTINE_IMPL_H
 #define COROUTINE_IMPL_H
 
-#include "scripting.h"
+#include "scripting/scripting.h"
 
 namespace Widelands {
-	struct Player;
+	class Player;
 }
 
 /*
@@ -61,4 +61,3 @@ private:
 
 
 #endif /* end of include guard: COROUTINE_IMPL_H */
-

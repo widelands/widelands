@@ -17,7 +17,7 @@
  *
  */
 
-#include "checkbox.h"
+#include "ui_basic/checkbox.h"
 
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"

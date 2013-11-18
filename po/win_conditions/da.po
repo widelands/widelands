@@ -7,21 +7,21 @@ msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2013-06-16 09:11+0000\n"
+"POT-Creation-Date: 2013-09-15 17:41+0000\n"
 "PO-Revision-Date: 2011-08-21 14:24+0000\n"
 "Last-Translator: Nasenbaer <Unknown>\n"
 "Language-Team: Danish <da@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-06-17 05:16+0000\n"
-"X-Generator: Launchpad (build 16667)\n"
+"X-Launchpad-Export-Date: 2013-09-16 04:49+0000\n"
+"X-Generator: Launchpad (build 16761)\n"
 
 #: ../../scripting/win_condition_texts.lua:31
 msgid "%i trees."
 msgstr ""
 
-#: ../../scripting/win_condition_texts.lua:54
+#: ../../scripting/win_condition_texts.lua:55
 msgid "%s %s %i%% of the land (%i of %i)."
 msgstr ""
 
@@ -90,6 +90,10 @@ msgstr ""
 msgid "Keep it for %i more minutes to win the game."
 msgstr ""
 
+#: ../../scripting/win_condition_texts.lua:54
+msgid "Otherwise the game will end in %i minutes."
+msgstr ""
+
 #: ../../scripting/win_condition_texts.lua:23
 #: ../../scripting/win_condition_texts.lua:29
 msgid "Player overview:"
@@ -120,6 +124,7 @@ msgid "Territorial Time"
 msgstr ""
 
 #: ../../scripting/win_condition_texts.lua:27
+#: ../../scripting/win_condition_texts.lua:53
 msgid "The game will end in %i minutes."
 msgstr ""
 
@@ -171,17 +176,18 @@ msgstr ""
 "Du får point for værdifulde varer i dine varehuse. Spilleren med det højeste "
 "antal varer efter 4 timers spil vinder."
 
-#: ../../scripting/win_condition_texts.lua:8
-msgid ""
-"You have nothing to command left. If you want, you may continue as spectator."
-msgstr ""
-
 #: ../../scripting/win_condition_texts.lua:3
 msgid "You have won this game!"
 msgstr ""
 
 #: ../../scripting/win_condition_texts.lua:17
 msgid "You lost"
+msgstr ""
+
+#: ../../scripting/win_condition_texts.lua:8
+msgid ""
+"You lost your last warehouse and are therefore defeated. You may continue as "
+"spectator if you want."
 msgstr ""
 
 #: ../../scripting/win_condition_texts.lua:48
@@ -198,10 +204,6 @@ msgstr ""
 
 #: ../../scripting/win_condition_texts.lua:18
 msgid "You've lost this game!"
-msgstr ""
-
-#: ../../scripting/win_condition_texts.lua:53
-msgid "game will end in %i minutes."
 msgstr ""
 
 #: ../../scripting/win_condition_texts.lua:33

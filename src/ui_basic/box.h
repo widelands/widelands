@@ -20,9 +20,9 @@
 #ifndef UI_BOX_H
 #define UI_BOX_H
 
-#include "panel.h"
-
 #include <vector>
+
+#include "ui_basic/panel.h"
 
 namespace UI {
 struct Scrollbar;

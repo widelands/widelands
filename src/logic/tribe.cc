@@ -17,37 +17,36 @@
  *
  */
 
-#include "tribe.h"
+#include "logic/tribe.h"
 
-#include "carrier.h"
-#include "constructionsite.h"
-#include "critter_bob.h"
-#include "dismantlesite.h"
-#include "editor_game_base.h"
-#include "game.h"
-#include "game_data_error.h"
+#include <iostream>
+
+#include <boost/algorithm/string.hpp>
+
 #include "helper.h"
 #include "i18n.h"
-#include "immovable.h"
+#include "io/filesystem/disk_filesystem.h"
 #include "io/filesystem/layered_filesystem.h"
-#include "militarysite.h"
+#include "logic/carrier.h"
+#include "logic/constructionsite.h"
+#include "logic/critter_bob.h"
+#include "logic/dismantlesite.h"
+#include "logic/editor_game_base.h"
+#include "logic/game.h"
+#include "logic/game_data_error.h"
+#include "logic/immovable.h"
+#include "logic/militarysite.h"
+#include "logic/ship.h"
+#include "logic/soldier.h"
+#include "logic/trainingsite.h"
+#include "logic/warehouse.h"
+#include "logic/widelands_fileread.h"
+#include "logic/worker.h"
+#include "logic/world.h"
 #include "parse_map_object_types.h"
 #include "profile/profile.h"
 #include "scripting/scripting.h"
-#include "ship.h"
-#include "soldier.h"
-#include "trainingsite.h"
-#include "warehouse.h"
-#include "widelands_fileread.h"
-#include "worker.h"
-#include "world.h"
-
-#include "io/filesystem/disk_filesystem.h"
-
 #include "upcast.h"
-
-#include <iostream>
-#include <boost/algorithm/string.hpp>
 
 using namespace std;
 
@@ -295,7 +294,7 @@ Tribe_Descr::Tribe_Descr
 			// Register Lua scripts
 			if (g_fs->IsDirectory(path + "scripting")) {
 				std::unique_ptr<FileSystem> sub_fs(g_fs->MakeSubFileSystem(path));
-				egbase.lua().register_scripts(*sub_fs, "tribe_" + tribename);
+				egbase.lua().register_scripts(*sub_fs, "tribe_" + tribename, "scripting");
 			}
 
 			// Read initializations -- all scripts are initializations currently
@@ -334,19 +333,6 @@ Tribe_Descr::Tribe_Descr
 	} catch (const _wexception & e) {
 		throw game_data_error(_("tribe %s: %s"), tribename.c_str(), e.what());
 	}
-#ifdef WRITE_GAME_DATA_AS_HTML
-	if (g_options.pull_section("global").get_bool("write_HTML", false)) {
-		m_ware_references     = new HTMLReferences[get_nrwares    ().value()];
-		m_worker_references   = new HTMLReferences[get_nrworkers  ().value()];
-		m_building_references = new HTMLReferences[get_nrbuildings().value()];
-		writeHTMLBuildings(path);
-		writeHTMLWorkers  (path);
-		writeHTMLWares    (path);
-		delete[] m_building_references;
-		delete[] m_worker_references;
-		delete[] m_ware_references;
-	}
-#endif
 }
 
 

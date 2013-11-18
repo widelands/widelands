@@ -1,3 +1,0 @@
-m_b
-gthis->m_b
-(this->*(action->function))(g, state, action)

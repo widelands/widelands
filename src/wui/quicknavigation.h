@@ -1,6 +1,3 @@
-
-namespace Widelands {
-struct Map;}
 /*
  * Copyright (C) 2010 by the Widelands Development Team
  *
@@ -23,16 +20,16 @@ struct Map;}
 #ifndef QUICKNAVIGATION_H
 #define QUICKNAVIGATION_H
 
-#include <boost/function.hpp>
-#include <stdint.h>
 #include <vector>
 
 #include <SDL_keyboard.h>
+#include <boost/function.hpp>
+#include <stdint.h>
 
 #include "point.h"
 
 namespace Widelands {
-struct Editor_Game_Base;
+class Editor_Game_Base;
 }
 
 /**

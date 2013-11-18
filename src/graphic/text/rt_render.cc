@@ -17,6 +17,8 @@
  *
  */
 
+#include "graphic/text/rt_render.h"
+
 #include <queue>
 #include <string>
 #include <vector>
@@ -28,12 +30,10 @@
 
 #include "graphic/image_cache.h"
 #include "graphic/surface.h"
-
+#include "graphic/text/rt_parse.h"
+#include "graphic/text/textstream.h"
 #include "rect.h"
-#include "rt_parse.h"
-#include "textstream.h"
 
-#include "rt_render.h"
 
 using namespace std;
 using namespace boost;
@@ -174,7 +174,10 @@ private:
 	priority_queue<ConstraintChange> m_constraint_changes;
 };
 uint16_t Layout::m_fit_line(vector<RenderNode*>& rv, uint16_t w, const Borders& p) {
-	while (m_idx < m_all_nodes.size() and m_all_nodes[m_idx]->is_non_mandatory_space())
+	while
+		(m_idx < m_all_nodes.size()
+		 and m_all_nodes[m_idx]->is_non_mandatory_space()
+		 and m_all_nodes[m_idx]->width() >= INFINITE_WIDTH) // only remove newline
 		delete m_all_nodes[m_idx++];
 
 	uint16_t x = p.left;

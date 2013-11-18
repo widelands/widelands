@@ -17,18 +17,18 @@
  *
  */
 
-#include "internet_gaming.h"
-
-#include "compile_diagnostics.h"
-#include "i18n.h"
-#include "internet_gaming_messages.h"
-#include "io/dedicated_log.h"
-#include "io/filesystem/layered_filesystem.h"
-#include "log.h"
-#include "warning.h"
+#include "network/internet_gaming.h"
 
 #include <boost/format.hpp>
 #include <boost/lexical_cast.hpp>
+
+#include "compile_diagnostics.h"
+#include "i18n.h"
+#include "io/dedicated_log.h"
+#include "io/filesystem/layered_filesystem.h"
+#include "log.h"
+#include "network/internet_gaming_messages.h"
+#include "warning.h"
 
 
 
@@ -113,7 +113,7 @@ GCC_DIAG_OFF("-Wold-style-cast")
 GCC_DIAG_ON("-Wold-style-cast")
 	} else
 		throw warning
-			(_("Connection problem"), "%s", _("Widelands has not been able to connect to the metaserver."));
+			(_("Connection problem"), "%s", _("Widelands could not connect to the metaserver."));
 
 	SDLNet_ResolveHost (&peer, m_meta.c_str(), m_port);
 	m_sock = SDLNet_TCP_Open(&peer);
@@ -766,15 +766,6 @@ void InternetGaming::send(const std::string & msg) {
 	}
 
 	s.send(m_sock);
-}
-
-void InternetGaming::send_local(const std::string& msg)
-{
-	ChatMessage c;
-	c.msg = msg;
-	c.time = time(0);
-	messages.push_back(c);
-	ChatProvider::send(c);
 }
 
 /**

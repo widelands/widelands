@@ -20,23 +20,22 @@
 #ifndef SCRIPTING_H
 #define SCRIPTING_H
 
-#include "wexception.h"
-
 #include <map>
-#include <stdint.h>
 #include <string>
 
 #include <lua.hpp>
+#include <stdint.h>
 
-#include "logic/widelands_filewrite.h"
 #include "logic/widelands_fileread.h"
+#include "logic/widelands_filewrite.h"
+#include "wexception.h"
 
 namespace Widelands {
-	struct Editor_Game_Base;
-	struct Game;
+	class Editor_Game_Base;
+	class Game;
 	struct Map_Map_Object_Loader;
 	struct Map_Map_Object_Saver;
-	struct Player;
+	class Player;
 }
 
 struct LuaError : public _wexception {
@@ -96,8 +95,15 @@ struct LuaInterface {
 	virtual void interpret_string(std::string) = 0;
 	virtual const std::string & get_last_error() const = 0;
 
+	// Register all Lua files in the directory "subdir" in "fs" under the
+	// namespace "ns".
 	virtual void register_scripts
-		(FileSystem &, std::string, std::string = "scripting") = 0;
+		(FileSystem & fs, const std::string& ns, const std::string& subdir) = 0;
+
+	// Register the Lua file "filename" in "fs" under the namespace "ns". Returns
+	// the name the script was registered, usually $(basename filename).
+	virtual std::string register_script
+		(FileSystem & fs, const std::string& ns, const std::string& filename) = 0;
 	virtual ScriptContainer & get_scripts_for(std::string) = 0;
 
 	virtual std::unique_ptr<LuaTable> run_script(std::string, std::string) = 0;

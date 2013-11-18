@@ -20,9 +20,9 @@
 #ifndef SOLDIER_TYPES_H
 #define SOLDIER_TYPES_H
 
-#include "widelands.h"
-
 #include <map>
+
+#include "logic/widelands.h"
 
 namespace Widelands {
 typedef std::map<Soldier_Strength, uint32_t> Soldier_Counts;

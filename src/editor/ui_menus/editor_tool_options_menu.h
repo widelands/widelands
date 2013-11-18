@@ -21,7 +21,6 @@
 #define EDITOR_TOOL_OPTIONS_MENU_H
 
 #include "editor/editorinteractive.h"
-
 #include "ui_basic/unique_window.h"
 
 struct Editor_Tool_Options_Menu : public UI::UniqueWindow {
@@ -37,11 +36,11 @@ struct Editor_Tool_Options_Menu : public UI::UniqueWindow {
 	 */
 	void select_correct_tool();
 
-	uint32_t  spacing() const throw () {return 5;}
-	uint32_t hspacing() const throw () {return spacing();}
-	uint32_t vspacing() const throw () {return spacing();}
-	uint32_t hmargin () const throw () {return spacing();}
-	uint32_t vmargin () const throw () {return spacing();}
+	uint32_t  spacing() const {return 5;}
+	uint32_t hspacing() const {return spacing();}
+	uint32_t vspacing() const {return spacing();}
+	uint32_t hmargin () const {return spacing();}
+	uint32_t vmargin () const {return spacing();}
 
 private:
 	Editor_Tool * m_current_pointer;

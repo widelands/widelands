@@ -20,15 +20,14 @@
 #ifndef GAME_MAIN_MENU_SAVE_GAME_H
 #define GAME_MAIN_MENU_SAVE_GAME_H
 
+#include "i18n.h"
+#include "ref_cast.h"
 #include "ui_basic/button.h"
 #include "ui_basic/editbox.h"
 #include "ui_basic/listselect.h"
 #include "ui_basic/messagebox.h"
 #include "ui_basic/textarea.h"
 #include "ui_basic/unique_window.h"
-
-#include "i18n.h"
-#include "ref_cast.h"
 
 class Interactive_GameBase;
 
@@ -40,9 +39,10 @@ struct Game_Main_Menu_Save_Game : public UI::UniqueWindow {
 
 	void fill_list();
 	void select_by_name(std::string name);
+protected:
+	virtual void die();
 private:
 	Interactive_GameBase & igbase();
-	void die();
 	void selected      (uint32_t);
 	void double_clicked(uint32_t);
 	void edit_box_changed();
@@ -50,6 +50,7 @@ private:
 	void delete_clicked();
 
 	bool save_game(std::string);
+	void pause_game(bool paused);
 
 	UI::Listselect<std::string> m_ls;
 	UI::EditBox * m_editbox;

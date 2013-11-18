@@ -17,31 +17,29 @@
  *
  */
 
-#include "militarysite.h"
-
-#include "battle.h"
-#include "economy/flag.h"
-#include "economy/request.h"
-#include "editor_game_base.h"
-#include "findbob.h"
-#include "game.h"
-#include "i18n.h"
-#include "message_queue.h"
-#include "player.h"
-#include "profile/profile.h"
-#include "soldier.h"
-#include "tribe.h"
-#include "worker.h"
-
-#include "log.h"
-
-#include "upcast.h"
-
-#include <libintl.h>
+#include "logic/militarysite.h"
 
 #include <clocale>
 #include <cstdio>
-#include "boost/foreach.hpp"
+
+#include <boost/foreach.hpp>
+#include <libintl.h>
+
+#include "economy/flag.h"
+#include "economy/request.h"
+#include "i18n.h"
+#include "log.h"
+#include "logic/battle.h"
+#include "logic/editor_game_base.h"
+#include "logic/findbob.h"
+#include "logic/game.h"
+#include "logic/message_queue.h"
+#include "logic/player.h"
+#include "logic/soldier.h"
+#include "logic/tribe.h"
+#include "logic/worker.h"
+#include "profile/profile.h"
+#include "upcast.h"
 
 namespace Widelands {
 
@@ -89,8 +87,9 @@ ProductionSite(ms_descr),
 m_didconquer  (false),
 m_capacity    (ms_descr.get_max_number_of_soldiers()),
 m_nexthealtime(0),
-m_soldier_preference(ms_descr.m_prefers_heroes_at_start ? kPrefersHeroes : kNoPreference),
-m_soldier_upgrade_try(false)
+m_soldier_preference(ms_descr.m_prefers_heroes_at_start ? kPrefersHeroes : kPrefersRookies),
+m_soldier_upgrade_try(false),
+m_doing_upgrade_request(false)
 {
 	m_next_swap_soldiers_time = 0;
 }
@@ -244,7 +243,8 @@ int MilitarySite::incorporateSoldier(Editor_Game_Base & egbase, Soldier & s)
 				(*game,
 				 "site_occupied",
 				 descname(),
-				 message);
+				 message,
+				 true);
 		}
 	}
 
@@ -689,10 +689,10 @@ std::vector<Soldier *> MilitarySite::stationedSoldiers() const
 	return soldiers;
 }
 
-uint32_t MilitarySite::minSoldierCapacity() const throw () {
+uint32_t MilitarySite::minSoldierCapacity() const {
 	return 1;
 }
-uint32_t MilitarySite::maxSoldierCapacity() const throw () {
+uint32_t MilitarySite::maxSoldierCapacity() const {
 	return descr().get_max_number_of_soldiers();
 }
 uint32_t MilitarySite::soldierCapacity() const
@@ -844,7 +844,8 @@ bool MilitarySite::attack(Soldier & enemy)
 				(game,
 				 "site_lost",
 				 _("Militarysite lost!"),
-				 message);
+				 message,
+				 false);
 		}
 
 		// Now let's see whether the enemy conquers our militarysite, or whether
@@ -864,23 +865,30 @@ bool MilitarySite::attack(Soldier & enemy)
 		// the old location.
 		Player            * enemyplayer = enemy.get_owner();
 		const Tribe_Descr & enemytribe  = enemyplayer->tribe();
-		std::string bldname = name();
 
-		// Has this building already a suffix? == conquered building?
-		std::string::size_type const dot = bldname.rfind('.');
-		if (dot >= bldname.size()) {
-			// Add suffix, if the new owner uses another tribe than we.
-			if (enemytribe.name() != owner().tribe().name())
-				bldname += "." + owner().tribe().name();
-		} else if (enemytribe.name() == bldname.substr(dot + 1, bldname.size()))
-			bldname = bldname.substr(0, dot);
-		Building_Index bldi = enemytribe.safe_building_index(bldname.c_str());
+		// Add suffix to all descr in former buildings in cases
+		// the new owner comes from another tribe
+		Building::FormerBuildings former_buildings;
+		BOOST_FOREACH(Building_Index former_idx, m_old_buildings) {
+			const Building_Descr * old_descr = tribe().get_building_descr(former_idx);
+			std::string bldname = old_descr->name();
+			// Has this building already a suffix? == conquered building?
+			std::string::size_type const dot = bldname.rfind('.');
+			if (dot >= bldname.size()) {
+				// Add suffix, if the new owner uses another tribe than we.
+				if (enemytribe.name() != owner().tribe().name())
+					bldname += "." + owner().tribe().name();
+			} else if (enemytribe.name() == bldname.substr(dot + 1, bldname.size()))
+				bldname = bldname.substr(0, dot);
+			Building_Index bldi = enemytribe.safe_building_index(bldname.c_str());
+			former_buildings.push_back(bldi);
+		}
 
 		// Now we destroy the old building before we place the new one.
 		set_defeating_player(enemy.owner().player_number());
 		schedule_destroy(game);
 
-		enemyplayer->force_building(coords, bldi);
+		enemyplayer->force_building(coords, former_buildings);
 		BaseImmovable * const newimm = game.map()[coords].get_immovable();
 		upcast(MilitarySite, newsite, newimm);
 		newsite->reinit_after_conqueration(game);
@@ -895,7 +903,8 @@ bool MilitarySite::attack(Soldier & enemy)
 			(game,
 			 "site_defeated",
 			 _("Enemy at site defeated!"),
-			 message);
+			 message,
+			 true);
 
 		return false;
 	}
@@ -948,7 +957,7 @@ void MilitarySite::informPlayer(Game & game, bool const discovered)
 		(game,
 		 "under_attack",
 		 _("You are under attack"),
-		 message,
+		 message, false,
 		 60 * 1000, 5);
 }
 

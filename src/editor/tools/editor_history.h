@@ -22,8 +22,8 @@
 
 #include <deque>
 
-#include "editor_tool.h"
-#include "editor_draw_tool.h"
+#include "editor/tools/editor_draw_tool.h"
+#include "editor/tools/editor_tool.h"
 
 //struct Editor_Action_Args;
 struct Editor_Interactive;

@@ -17,16 +17,16 @@
  *
  */
 
-#include "widelands_map_bobdata_data_packet.h"
+#include "map_io/widelands_map_bobdata_data_packet.h"
 
+#include "economy/route.h"
+#include "economy/transfer.h"
+#include "economy/ware_instance.h"
 #include "logic/battle.h"
 #include "logic/bob.h"
 #include "logic/carrier.h"
 #include "logic/critter_bob.h"
 #include "logic/critter_bob_program.h"
-#include "economy/route.h"
-#include "economy/transfer.h"
-#include "economy/ware_instance.h"
 #include "logic/game.h"
 #include "logic/game_data_error.h"
 #include "logic/map.h"
@@ -35,12 +35,12 @@
 #include "logic/player.h"
 #include "logic/soldier.h"
 #include "logic/tribe.h"
-#include "upcast.h"
 #include "logic/widelands_fileread.h"
 #include "logic/widelands_filewrite.h"
-#include "widelands_map_map_object_loader.h"
-#include "widelands_map_map_object_saver.h"
 #include "logic/worker_program.h"
+#include "map_io/widelands_map_map_object_loader.h"
+#include "map_io/widelands_map_map_object_saver.h"
+#include "upcast.h"
 
 namespace Widelands {
 
@@ -60,7 +60,7 @@ void Map_Bobdata_Data_Packet::Read
 	 Editor_Game_Base      &       egbase,
 	 bool                    const skip,
 	 Map_Map_Object_Loader &       mol)
-	throw (_wexception)
+
 {
 	if (skip)
 		return;
@@ -556,7 +556,6 @@ void Map_Bobdata_Data_Packet::read_worker_bob
 
 void Map_Bobdata_Data_Packet::Write
 	(FileSystem & /* fs */, Editor_Game_Base & /* egbase */, Map_Map_Object_Saver & /* mos */)
-throw (_wexception)
 {
 	throw wexception("bobdata packet is deprecated");
 }

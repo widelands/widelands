@@ -22,11 +22,11 @@
 
 #include "logic/widelands_fileread.h"
 #include "logic/widelands_geometry.h"
-#include "widelands_map_data_packet.h"
+#include "map_io/widelands_map_data_packet.h"
 
 namespace Widelands {
 
-struct StreamRead;
+class StreamRead;
 
 /**
  * This data packet contains the various bobs on
@@ -39,9 +39,9 @@ struct StreamRead;
 struct Map_Bob_Data_Packet : public Map_Data_Packet {
 	void Read
 		(FileSystem &, Editor_Game_Base &, bool, Map_Map_Object_Loader &)
-		throw (_wexception);
+	;
 	void Write(FileSystem &, Editor_Game_Base &, Map_Map_Object_Saver &)
-		throw (_wexception);
+	;
 
 private:
 	void ReadBob

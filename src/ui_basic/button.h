@@ -22,11 +22,10 @@
 
 #include <boost/bind.hpp>
 #include <boost/function.hpp>
-#include <boost/signal.hpp>
+#include <boost/signals2.hpp>
 
 #include "constants.h"
-#include "panel.h"
-
+#include "ui_basic/panel.h"
 #include "rgbcolor.h"
 
 namespace UI {
@@ -59,7 +58,7 @@ struct Button : public NamedPanel {
 
 	void set_pic(const Image* pic);
 	void set_title(const std::string &);
-	const std::string & get_title() const throw () {return m_title;}
+	const std::string & get_title() const {return m_title;}
 
 	bool enabled() const {return m_enabled;}
 	void set_enabled(bool on);
@@ -86,9 +85,9 @@ struct Button : public NamedPanel {
 	// If no background is drawn, the button is drawn over the current background
 	void set_draw_flat_background(bool set);
 
-	boost::signal<void ()> sigclicked;
-	boost::signal<void ()> sigmousein;
-	boost::signal<void ()> sigmouseout;
+	boost::signals2::signal<void ()> sigclicked;
+	boost::signals2::signal<void ()> sigmousein;
+	boost::signals2::signal<void ()> sigmouseout;
 
 protected:
 	virtual void clicked() {} /// Override this to react on the click.

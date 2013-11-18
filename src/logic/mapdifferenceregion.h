@@ -20,7 +20,7 @@
 #ifndef MAPDIFFERENCEREGION_H
 #define MAPDIFFERENCEREGION_H
 
-#include "map.h"
+#include "logic/map.h"
 
 namespace Widelands {
 
@@ -76,9 +76,9 @@ template <typename Area_type = Area<> > struct MapDifferenceRegion {
 	 * keeps returning true. When finally advance returns false, it means that
 	 * the iteration is done.
 	 */
-	bool advance(const Map & map) throw ();
+	bool advance(const Map & map);
 
-	void move_to_other_side(const Map & map) throw ();
+	void move_to_other_side(const Map & map);
 
 	typename Area_type::Radius_type radius() const {return m_area.radius;}
 private:

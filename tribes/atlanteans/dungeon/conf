@@ -14,6 +14,14 @@ spidercloth=2
 gold=2
 trunk=4
 
+[return_on_dismantle]
+planks=1
+stone=3
+diamond=1
+quartz=1
+gold=1
+trunk=1
+
 [working positions]
 trainer=1
 
@@ -43,6 +51,7 @@ upgrade_attack_3=_Upgrade soldier attack 3 (only for compatibility with old save
 
 [sleep]
 sleep=5000
+check_soldier=soldier attack 9    # dummy check to get sleep rated as skipped - else it will change statistics
 
 [upgrade_soldier_attack_0]
 check_soldier=soldier attack 0

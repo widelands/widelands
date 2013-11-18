@@ -17,11 +17,13 @@
  *
  */
 
+#include "map_io/widelands_map_players_view_data_packet.h"
+
 #include <iostream>
 #include <typeinfo>
 
-#include "widelands_map_players_view_data_packet.h"
-
+#include "economy/road.h"
+#include "log.h"
 #include "logic/editor_game_base.h"
 #include "logic/field.h"
 #include "logic/game_data_error.h"
@@ -30,11 +32,6 @@
 #include "logic/tribe.h"
 #include "logic/widelands_streamread_inlines.h"
 #include "logic/widelands_streamwrite_inlines.h"
-
-#include "economy/road.h"
-
-#include "log.h"
-
 #include "upcast.h"
 
 
@@ -228,7 +225,7 @@ void Map_Players_View_Data_Packet::Read
 	 Editor_Game_Base      &       egbase,
 	 bool                    const skip,
 	 Map_Map_Object_Loader &)
-	throw (_wexception)
+
 {
 	if (skip)
 		return;
@@ -883,7 +880,6 @@ inline static void write_unseen_immovable
 
 void Map_Players_View_Data_Packet::Write
 	(FileSystem & fs, Editor_Game_Base & egbase, Map_Map_Object_Saver &)
-throw (_wexception)
 {
 	fs.EnsureDirectoryExists("player");
 	const Map & map = egbase.map();
@@ -1089,4 +1085,3 @@ throw (_wexception)
 
 
 }
-

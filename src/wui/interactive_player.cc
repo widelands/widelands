@@ -17,31 +17,20 @@
  *
  */
 
-#include "interactive_player.h"
+#include "wui/interactive_player.h"
 
 #include <boost/bind.hpp>
-#include <boost/type_traits.hpp>
-#include <boost/lambda/construct.hpp>
-#include <boost/lambda/bind.hpp>
-#include <boost/lexical_cast.hpp>
 #include <boost/format.hpp>
+#include <boost/lambda/bind.hpp>
+#include <boost/lambda/construct.hpp>
+#include <boost/lexical_cast.hpp>
+#include <boost/type_traits.hpp>
 #include <libintl.h>
 
-#include "building_statistics_menu.h"
-#include "chatoverlay.h"
 #include "debugconsole.h"
 #include "economy/flag.h"
-#include "encyclopedia_window.h"
-#include "fieldaction.h"
-#include "graphic/font_handler.h"
-#include "game_chat_menu.h"
 #include "game_io/game_loader.h"
-#include "game_main_menu.h"
-#include "game_main_menu_save_game.h"
-#include "game_message_menu.h"
-#include "game_objectives_menu.h"
-#include "game_options_menu.h"
-#include "general_statistics_menu.h"
+#include "graphic/font_handler.h"
 #include "helper.h"
 #include "i18n.h"
 #include "logic/building.h"
@@ -49,16 +38,26 @@
 #include "logic/constructionsite.h"
 #include "logic/immovable.h"
 #include "logic/message_queue.h"
-#include "overlay_manager.h"
 #include "logic/player.h"
 #include "logic/productionsite.h"
 #include "logic/soldier.h"
 #include "logic/tribe.h"
 #include "profile/profile.h"
-#include "stock_menu.h"
 #include "ui_basic/unique_window.h"
 #include "upcast.h"
-#include "ware_statistics_menu.h"
+#include "wui/building_statistics_menu.h"
+#include "wui/encyclopedia_window.h"
+#include "wui/fieldaction.h"
+#include "wui/game_chat_menu.h"
+#include "wui/game_main_menu.h"
+#include "wui/game_main_menu_save_game.h"
+#include "wui/game_message_menu.h"
+#include "wui/game_objectives_menu.h"
+#include "wui/game_options_menu.h"
+#include "wui/general_statistics_menu.h"
+#include "wui/overlay_manager.h"
+#include "wui/stock_menu.h"
+#include "wui/ware_statistics_menu.h"
 
 using Widelands::Building;
 using Widelands::Map;
@@ -83,10 +82,9 @@ Interactive_Player::Interactive_Player
 	 bool                     const scenario,
 	 bool                     const multiplayer)
 	:
-	Interactive_GameBase (_game, global_s),
+	Interactive_GameBase (_game, global_s, NONE, multiplayer, multiplayer),
 	m_auto_roadbuild_mode(global_s.get_bool("auto_roadbuild_mode", true)),
 	m_flag_to_connect(Widelands::Coords::Null()),
-	m_multiplayer(multiplayer),
 
 // Chat is different, as m_chatProvider needs to be checked when toggling
 // Buildhelp is different as it does not toggle a UniqueWindow
@@ -153,10 +151,6 @@ m_toggle_help
 	m_toolbar.add(&m_toggle_statistics_menu, UI::Box::AlignLeft);
 	m_toolbar.add(&m_toggle_minimap,         UI::Box::AlignLeft);
 	m_toolbar.add(&m_toggle_buildhelp,       UI::Box::AlignLeft);
-	// Limit chat width to half the screen, to limit the damage lamers can do
-	// by flooding chat messages
-	m_chatOverlay =
-		new ChatOverlay(this, 10, 25, get_w() / 2, get_h() - 25);
 	if (multiplayer) {
 		m_toolbar.add(&m_toggle_chat,            UI::Box::AlignLeft);
 		m_toggle_chat.set_visible(false);
@@ -284,7 +278,7 @@ void Interactive_Player::think()
 			m_flag_to_connect = Widelands::Coords::Null();
 		}
 	}
-	if (m_multiplayer) {
+	if (is_multiplayer()) {
 		m_toggle_chat.set_visible(m_chatenabled);
 		m_toggle_chat.set_enabled(m_chatenabled);
 	}
@@ -455,7 +449,7 @@ bool Interactive_Player::handle_key(bool const down, SDL_keysym const code)
 
 		case SDLK_KP_ENTER:
 		case SDLK_RETURN:
-			if (!m_chatProvider | !m_chatenabled || !m_multiplayer)
+			if (!m_chatProvider | !m_chatenabled || !is_multiplayer())
 				break;
 
 			if (!m_chat.window)

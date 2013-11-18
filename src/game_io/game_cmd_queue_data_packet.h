@@ -20,11 +20,11 @@
 #ifndef GAME_CMD_QUEUE_DATA_PACKET_H
 #define GAME_CMD_QUEUE_DATA_PACKET_H
 
-#include "game_data_packet.h"
+#include "game_io/game_data_packet.h"
 
 namespace Widelands {
 
-struct Game;
+class Game;
 
 /*
  * This contains all the preload data needed to identify

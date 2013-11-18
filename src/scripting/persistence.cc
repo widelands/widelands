@@ -17,16 +17,15 @@
  *
  */
 
+#include "scripting/persistence.h"
+
 #include <lua.hpp>
 
 #include "log.h"
 #include "logic/widelands_fileread.h"
 #include "logic/widelands_filewrite.h"
-
-#include "pluto.h"
-#include "c_utils.h"
-
-#include "persistence.h"
+#include "scripting/c_utils.h"
+#include "scripting/pluto.h"
 
 /*
  * ========================================================================
@@ -131,6 +130,9 @@ static void m_add_iterator_function_to_not_unpersist
  * ========================================================================
  */
 
+// Those are the globals that will be regenerated (not by the persistence engine),
+// e.g. C-functions or automatically populated fields. Changing the ordering here will
+// break safe game compatibility.
 static const char * m_persistent_globals[] = {
 	"_VERSION", "assert", "collectgarbage", "coroutine", "debug",
 	"dofile", "error", "gcinfo", "getfenv", "getmetatable", "io", "ipairs",
@@ -169,8 +171,6 @@ uint32_t persist_object
 	size_t cpos = fw.GetPos();
 	pluto_persist(L, fw);
 	uint32_t nwritten = fw.GetPos() - cpos;
-
-	log("nwritten: %u\n", nwritten);
 
 	lua_pop(L, 2); // pop the object and the table
 

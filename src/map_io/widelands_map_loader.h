@@ -20,15 +20,16 @@
 #ifndef WIDELANDS_MAP_LOADER_H
 #define WIDELANDS_MAP_LOADER_H
 
-#include <string>
 #include <cstring>
-#include "map_loader.h"
+#include <string>
+
+#include "map_io/map_loader.h"
 
 class FileSystem;
 
 namespace Widelands {
 
-struct Editor_Game_Base;
+class Editor_Game_Base;
 struct Map_Map_Object_Loader;
 
 /// Takes ownership of the filesystem that is passed to it.

@@ -20,10 +20,10 @@
 #ifndef EDITOR_MAIN_MENU_SAVE_MAP_MAKE_DIRECTORY_H
 #define EDITOR_MAIN_MENU_SAVE_MAP_MAKE_DIRECTORY_H
 
-#include "ui_basic/window.h"
-
-#include <string>
 #include <cstring>
+#include <string>
+
+#include "ui_basic/window.h"
 
 namespace UI {
 struct EditBox;

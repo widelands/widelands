@@ -53,5 +53,4 @@ void log(const char *, ...) PRINTF_FORMAT(1, 2);
 
 extern bool g_verbose;
 
-
 #endif

@@ -21,13 +21,12 @@
 #define EDITOR_PLAYER_MENU_ALLOWED_BUILDINGS_MENU_H
 
 #include "logic/widelands.h"
-
 #include "ui_basic/button.h"
 #include "ui_basic/listselect.h"
 #include "ui_basic/textarea.h"
 #include "ui_basic/unique_window.h"
 
-namespace Widelands {struct Player;}
+namespace Widelands {class Player;}
 
 /**
  * Let's the user choose which buildings should be available

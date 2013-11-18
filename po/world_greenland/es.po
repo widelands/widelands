@@ -6,15 +6,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands unofficial-git-6aa148a(svn4769+changes)\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2013-06-16 09:11+0000\n"
+"POT-Creation-Date: 2013-09-15 17:41+0000\n"
 "PO-Revision-Date: 2012-01-22 02:04+0000\n"
 "Last-Translator: MadkaT <Unknown>\n"
 "Language-Team: Español <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-06-17 05:16+0000\n"
-"X-Generator: Launchpad (build 16667)\n"
+"X-Launchpad-Export-Date: 2013-09-16 04:48+0000\n"
+"X-Generator: Launchpad (build 16761)\n"
 "X-Poedit-Country: SPAIN\n"
 "X-Poedit-Language: Spanish\n"
 "X-Poedit-SourceCharset: utf-8\n"
@@ -54,6 +54,14 @@ msgstr "Álamo temblón diminuto"
 #: ../../worlds/greenland/conf:80
 msgid "Badger"
 msgstr "Tejón"
+
+#: ../../worlds/greenland/terrainconf:79
+msgid "Barren steppe"
+msgstr ""
+
+#: ../../worlds/greenland/terrainconf:31
+msgid "Beach"
+msgstr ""
 
 #: ../../worlds/greenland/conf:66
 msgid "Beech"
@@ -185,6 +193,10 @@ msgstr "Alerce pequeño"
 msgid "Larch tiny"
 msgstr "Alerce diminuto"
 
+#: ../../worlds/greenland/terrainconf:91
+msgid "Lava"
+msgstr ""
+
 #: ../../worlds/greenland/conf:88
 msgid "Lynx"
 msgstr "Lince"
@@ -192,6 +204,42 @@ msgstr "Lince"
 #: ../../worlds/greenland/conf:89
 msgid "Marten"
 msgstr "Marta"
+
+#: ../../worlds/greenland/terrainconf:43
+msgid "Meadow1"
+msgstr ""
+
+#: ../../worlds/greenland/terrainconf:49
+msgid "Meadow2"
+msgstr ""
+
+#: ../../worlds/greenland/terrainconf:55
+msgid "Meadow3"
+msgstr ""
+
+#: ../../worlds/greenland/terrainconf:85
+msgid "Meadow4"
+msgstr ""
+
+#: ../../worlds/greenland/terrainconf:96
+msgid "Mountain meadow"
+msgstr ""
+
+#: ../../worlds/greenland/terrainconf:13
+msgid "Mountain1"
+msgstr ""
+
+#: ../../worlds/greenland/terrainconf:61
+msgid "Mountain2"
+msgstr ""
+
+#: ../../worlds/greenland/terrainconf:67
+msgid "Mountain3"
+msgstr ""
+
+#: ../../worlds/greenland/terrainconf:73
+msgid "Mountain4"
+msgstr ""
 
 #: ../../worlds/greenland/conf:22
 #: ../../worlds/greenland/conf:23
@@ -253,6 +301,10 @@ msgstr "Oveja"
 msgid "Skeleton"
 msgstr "Esqueleto"
 
+#: ../../worlds/greenland/terrainconf:19
+msgid "Snow"
+msgstr ""
+
 #: ../../worlds/greenland/conf:54
 msgid "Spruce"
 msgstr "Abeto"
@@ -279,6 +331,10 @@ msgstr "Abeto diminuto"
 msgid "Standing Stones"
 msgstr "Monolito"
 
+#: ../../worlds/greenland/terrainconf:7
+msgid "Steppe"
+msgstr ""
+
 #: ../../worlds/greenland/conf:40
 #: ../../worlds/greenland/conf:41
 #: ../../worlds/greenland/conf:42
@@ -287,6 +343,10 @@ msgstr "Monolito"
 #: ../../worlds/greenland/conf:45
 msgid "Stones"
 msgstr "Piedras"
+
+#: ../../worlds/greenland/terrainconf:24
+msgid "Swamp"
+msgstr ""
 
 #: ../../worlds/greenland/conf:2
 msgid "The Widelands Development Team"
@@ -297,6 +357,7 @@ msgid "These are the beauty and bountiful countries of the barbarians"
 msgstr "Estos son los bellos y abundantes países de los bárbaros"
 
 #: ../../worlds/greenland/resconf:36
+#: ../../worlds/greenland/terrainconf:36
 msgid "Water"
 msgstr "Agua"
 

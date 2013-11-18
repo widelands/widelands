@@ -20,12 +20,12 @@
 #ifndef SUPPLY_LIST_H
 #define SUPPLY_LIST_H
 
-#include <vector>
 #include <cstddef>
+#include <vector>
 
 namespace Widelands {
 
-struct Game;
+class Game;
 struct Request;
 struct Supply;
 
@@ -50,5 +50,3 @@ private:
 }
 
 #endif
-
-

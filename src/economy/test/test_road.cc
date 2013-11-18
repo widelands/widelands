@@ -18,12 +18,13 @@
  */
 
 #include <exception>
+
 #include <boost/test/unit_test.hpp>
 
-#include "economy/road.h"
 #include "economy/flag.h"
-#include "logic/instances.h"
+#include "economy/road.h"
 #include "logic/editor_game_base.h"
+#include "logic/instances.h"
 #include "logic/player.h"
 
 using namespace Widelands;

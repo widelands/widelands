@@ -20,12 +20,12 @@
 #ifndef ANIMATION_H
 #define ANIMATION_H
 
-#include "point.h"
-
 #include <cstring>
 #include <map>
 #include <string>
 #include <vector>
+
+#include "point.h"
 
 namespace Widelands {struct Map_Object_Descr;}
 

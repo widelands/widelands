@@ -1,2 +1,0 @@
-illegal_token_after_closing_parenthesis_opened_on_earlier_line.cc:5: found '=' but only closing tokens are allowed after closing parenthesis with corresponding opening parenthesis on an earlier line
-illegal_token_after_closing_parenthesis_opened_on_earlier_line.cc:13: found 'f' but only closing tokens are allowed after closing parenthesis with corresponding opening parenthesis on an earlier line

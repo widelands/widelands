@@ -1,4 +1,0 @@
-This catches const qualifiers for parameters passed by value to functions, in function delcarations. Such qualifiers should only be in the definitions. It will miss:
-* declarations with complex type names (template types) or default value assignments,
-* functions with things like __attribute__ and
-* pointers with const qualifiers

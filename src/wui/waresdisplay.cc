@@ -17,9 +17,12 @@
  *
  */
 
+#include "wui/waresdisplay.h"
+
+#include <cstdio>
+
 #include <boost/foreach.hpp>
 #include <boost/lexical_cast.hpp>
-#include <cstdio>
 
 #include "graphic/font.h"
 #include "graphic/font_handler.h"
@@ -33,8 +36,6 @@
 #include "logic/worker.h"
 #include "text_layout.h"
 #include "wexception.h"
-
-#include "waresdisplay.h"
 
 const int WARE_MENU_INFO_SIZE = 12;
 
@@ -71,10 +72,6 @@ AbstractWaresDisplay::AbstractWaresDisplay
 	m_selection_anchor(Widelands::Ware_Index::Null()),
 	m_callback_function(callback_function)
 {
-	//resize the configuration of our wares if they won't fit in the current window
-	int number = (g_gr->get_yres() - 160) / (WARE_MENU_PIC_HEIGHT + WARE_MENU_INFO_SIZE + WARE_MENU_PIC_PAD_Y);
-	const_cast<Widelands::Tribe_Descr &>(m_tribe).resize_ware_orders(number);
-
 	// Find out geometry from icons_order
 	unsigned int columns = icons_order().size();
 	unsigned int rows = 0;
@@ -274,7 +271,7 @@ void AbstractWaresDisplay::layout()
 
 void WaresDisplay::remove_all_warelists() {
 	m_warelists.clear();
-	BOOST_FOREACH(boost::signals::connection& c, connections_)
+	BOOST_FOREACH(boost::signals2::connection& c, connections_)
 		c.disconnect();
 	connections_.clear();
 	update();
@@ -402,6 +399,8 @@ void AbstractWaresDisplay::select_ware(Widelands::Ware_Index ware)
 
 	m_selected[ware] = true;
 	update();
+	if (m_callback_function)
+			m_callback_function(ware, true);
 }
 
 void AbstractWaresDisplay::unselect_ware(Widelands::Ware_Index ware)
@@ -411,6 +410,8 @@ void AbstractWaresDisplay::unselect_ware(Widelands::Ware_Index ware)
 
 	m_selected[ware] = false;
 	update();
+	if (m_callback_function)
+			m_callback_function(ware, false);
 }
 
 bool AbstractWaresDisplay::ware_selected(Widelands::Ware_Index ware) {

@@ -6,6 +6,10 @@ trunk=2
 stone=2
 planks=2
 
+[return_on_dismantle]
+stone=1
+planks=1
+
 [working positions]
 spiderbreeder=1
 

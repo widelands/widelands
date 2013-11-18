@@ -20,15 +20,14 @@
 #ifndef WARESDISPLAY_H
 #define WARESDISPLAY_H
 
-#include <boost/signal.hpp>
+#include <vector>
 
+#include <boost/signals2.hpp>
+
+#include "logic/tribe.h"
 #include "logic/warelist.h"
 #include "logic/wareworker.h"
-#include "logic/tribe.h"
-
 #include "ui_basic/textarea.h"
-
-#include <vector>
 
 namespace UI {struct Textarea;}
 
@@ -52,7 +51,7 @@ public:
 		 Widelands::WareWorker type,
 		 bool selectable,
 		 boost::function<void(Widelands::Ware_Index, bool)> callback_function = 0,
-		 bool horizontal = true);
+		 bool horizontal = false);
 
 	bool handle_mousemove
 		(uint8_t state, int32_t x, int32_t y, int32_t xdiff, int32_t ydiff);
@@ -63,14 +62,6 @@ public:
 	void select_ware(Widelands::Ware_Index);
 	void unselect_ware(Widelands::Ware_Index);
 	bool ware_selected(Widelands::Ware_Index);
-	void toggle_ware(Widelands::Ware_Index ware) {
-		if (ware_selected(ware))
-			unselect_ware(ware);
-		else
-			select_ware(ware);
-		if (m_callback_function)
-			m_callback_function(ware, ware_selected(ware));
-	}
 
 	// Wares may be hidden
 	void hide_ware(Widelands::Ware_Index);
@@ -153,7 +144,7 @@ protected:
 private:
 	typedef std::vector<const Widelands::WareList *> vector_type;
 	vector_type         m_warelists;
-	std::vector<boost::signals::connection> connections_;
+	std::vector<boost::signals2::connection> connections_;
 };
 
 std::string waremap_to_richtext

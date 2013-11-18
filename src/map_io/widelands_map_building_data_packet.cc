@@ -17,7 +17,9 @@
  *
  */
 
-#include "widelands_map_building_data_packet.h"
+#include "map_io/widelands_map_building_data_packet.h"
+
+#include <map>
 
 #include "economy/request.h"
 #include "graphic/graphic.h"
@@ -28,13 +30,10 @@
 #include "logic/tribe.h"
 #include "logic/widelands_fileread.h"
 #include "logic/widelands_filewrite.h"
-#include "widelands_map_map_object_loader.h"
-#include "widelands_map_map_object_saver.h"
-#include "wui/interactive_base.h"
-
+#include "map_io/widelands_map_map_object_loader.h"
+#include "map_io/widelands_map_map_object_saver.h"
 #include "upcast.h"
-
-#include <map>
+#include "wui/interactive_base.h"
 
 namespace Widelands {
 
@@ -48,7 +47,6 @@ void Map_Building_Data_Packet::Read
 	 Editor_Game_Base      &       egbase,
 	 bool                    const skip,
 	 Map_Map_Object_Loader &       mol)
-throw (_wexception)
 {
 	if (skip)
 		return;
@@ -62,8 +60,8 @@ throw (_wexception)
 			X_Coordinate const width  = map.get_width ();
 			Y_Coordinate const height = map.get_height();
 			FCoords c;
-			for (c.y = 0; c.y < height; ++c.y)
-				for (c.x = 0; c.x < width; ++c.x)
+			for (c.y = 0; c.y < height; ++c.y) {
+				for (c.x = 0; c.x < width; ++c.x) {
 					if (fr.Unsigned8()) {
 						Player_Number const p                   = fr.Unsigned8 ();
 						Serial        const serial              = fr.Unsigned32();
@@ -75,22 +73,24 @@ throw (_wexception)
 						//  Get the tribe and the building index.
 						if (Player * const player = egbase.get_safe_player(p)) {
 							const Tribe_Descr & tribe = player->tribe();
-							Building_Index const index = tribe.building_index(name);
-							if (not index)
+							const Building_Index index = tribe.building_index(name);
+							if (not index) {
 								throw game_data_error
 									("tribe %s does not define building type \"%s\"",
 									 tribe.name().c_str(), name);
+							}
 
 							//  Now, create this Building, take extra special care for
 							//  constructionsites. All data is read later.
 							Building * building;
-							if (special_type == 1) // Constructionsite
-								  building = &egbase.warp_constructionsite
-									  	(c, p, index, Building_Index::Null(), true);
-							else if (special_type == 2) // DismantleSite
-								  building = &egbase.warp_dismantlesite (c, p, index, true);
-							else
-								  building = &egbase.warp_building(c, p, index);
+							if (special_type == 1) { // Constructionsite
+								building = &egbase.warp_constructionsite(c, p, index, true);
+							} else if (special_type == 2) {// DismantleSite
+								Building::FormerBuildings formers = {index};
+								building = &egbase.warp_dismantlesite(c, p, true, formers);
+							} else {
+								building = &egbase.warp_building(c, p, index);
+							}
 
 							mol.register_object<Building> (serial, *building);
 
@@ -103,6 +103,8 @@ throw (_wexception)
 						} else
 							throw game_data_error(_("player %u does not exist"), p);
 					}
+				}
+			}
 		} else
 			throw game_data_error
 				(_("unknown/unhandled version %u"), packet_version);
@@ -117,7 +119,6 @@ throw (_wexception)
  */
 void Map_Building_Data_Packet::Write
 	(FileSystem & fs, Editor_Game_Base & egbase, Map_Map_Object_Saver & mos)
-throw (_wexception)
 {
 	FileWrite fw;
 
@@ -166,7 +167,8 @@ throw (_wexception)
 void Map_Building_Data_Packet::write_priorities
 	(const Building & building, FileWrite & fw)
 {
-	fw.Unsigned32(building.get_base_priority());
+	// Used to be base_priority which is no longer used. Remove after b20.
+	fw.Unsigned32(0);
 
 	std::map<int32_t, std::map<Ware_Index, int32_t> > type_to_priorities;
 	std::map<int32_t, std::map<Ware_Index, int32_t> >::iterator it;
@@ -209,7 +211,7 @@ void Map_Building_Data_Packet::write_priorities
 void Map_Building_Data_Packet::read_priorities
 	(Building & building, FileRead & fr)
 {
-	building.set_priority(fr.Unsigned32());
+	fr.Unsigned32(); // unused, was base_priority which is unused. Remove after b20.
 
 	const Tribe_Descr & tribe = building.tribe();
 	int32_t ware_type = -1;

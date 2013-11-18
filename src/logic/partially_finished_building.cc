@@ -17,18 +17,16 @@
  *
  */
 
-#include "upcast.h"
+#include "logic/partially_finished_building.h"
 
 #include "economy/request.h"
 #include "economy/wares_queue.h"
+#include "logic/game.h"
+#include "logic/player.h"
+#include "logic/tribe.h"
+#include "logic/worker.h"
 #include "sound/sound_handler.h"
-
-#include "game.h"
-#include "player.h"
-#include "tribe.h"
-#include "worker.h"
-
-#include "partially_finished_building.h"
+#include "upcast.h"
 
 namespace Widelands {
 
@@ -122,7 +120,7 @@ void Partially_Finished_Building::request_builder(Game &) {
 Override: construction size is always the same size as the building
 ===============
 */
-int32_t Partially_Finished_Building::get_size() const throw () {
+int32_t Partially_Finished_Building::get_size() const {
 	return m_building->get_size();
 }
 
@@ -132,7 +130,7 @@ Override: Even though construction sites cannot be built themselves, you can
 bulldoze them.
 ===============
 */
-uint32_t Partially_Finished_Building::get_playercaps() const throw () {
+uint32_t Partially_Finished_Building::get_playercaps() const {
 	uint32_t caps = Building::get_playercaps();
 
 	caps |= PCap_Bulldoze;

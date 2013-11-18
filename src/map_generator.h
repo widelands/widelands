@@ -22,8 +22,6 @@
 
 #include "logic/world.h"
 
-#include <boost/scoped_array.hpp>
-
 // This is the first step of separating map generation from
 // map.
 // TODO: Put other generation stuff here too...
@@ -32,8 +30,8 @@ struct RNG;
 
 namespace Widelands {
 
-struct Map;
-struct Editor_Game_Base;
+class Map;
+class Editor_Game_Base;
 
 /**
  * This helper class repesents the complete map initialization
@@ -90,7 +88,7 @@ struct MapGenerator {
 private:
 
 	void generate_bobs
-		(boost::scoped_array<uint32_t> const * random_bobs,
+		(std::unique_ptr<uint32_t[]> const * random_bobs,
 		 Coords,
 		 RNG                             &,
 		 MapGenAreaInfo::MapGenTerrainType terrType);

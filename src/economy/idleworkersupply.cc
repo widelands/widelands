@@ -17,19 +17,18 @@
  *
  */
 
-#include "idleworkersupply.h"
+#include "economy/idleworkersupply.h"
 
-#include "economy.h"
-#include "request.h"
-
+#include "economy/economy.h"
+#include "economy/request.h"
 #include "logic/game.h"
 #include "logic/player.h"
 #include "logic/requirements.h"
 #include "logic/soldier.h"
 #include "logic/tribe.h"
-#include "wexception.h"
 #include "logic/warehouse.h"
 #include "logic/worker.h"
+#include "wexception.h"
 
 namespace Widelands {
 
@@ -67,12 +66,12 @@ void IdleWorkerSupply::set_economy(Economy * const e)
 /**
  * Worker is walking around the road network, so active by definition.
  */
-bool IdleWorkerSupply::is_active() const throw ()
+bool IdleWorkerSupply::is_active() const
 {
 	return true;
 }
 
-bool IdleWorkerSupply::has_storage() const throw ()
+bool IdleWorkerSupply::has_storage() const
 {
 	return m_worker.get_transfer();
 }

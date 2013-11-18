@@ -20,13 +20,13 @@
 #ifndef PLAYERCOMMAND_H
 #define PLAYERCOMMAND_H
 
-#include "cmd_queue.h"
+#include "logic/cmd_queue.h"
 #include "economy/flag.h"
-#include "message_id.h"
-#include "path.h"
-#include "trainingsite.h"
-#include "warehouse.h"
-#include "worker.h"
+#include "logic/message_id.h"
+#include "logic/path.h"
+#include "logic/trainingsite.h"
+#include "logic/warehouse.h"
+#include "logic/worker.h"
 
 namespace Widelands {
 
@@ -370,6 +370,48 @@ struct Cmd_ShipExploreIsland : public PlayerCommand {
 private:
 	Serial serial;
 	bool clockwise;
+};
+
+struct Cmd_ShipSink : public PlayerCommand {
+	Cmd_ShipSink() : PlayerCommand(), serial(0) {} // For savegame loading
+	Cmd_ShipSink
+		(int32_t const t, Player_Number const p, Serial s)
+		: PlayerCommand(t, p), serial(s)
+	{}
+
+	void Write(FileWrite &, Editor_Game_Base &, Map_Map_Object_Saver  &);
+	void Read (FileRead  &, Editor_Game_Base &, Map_Map_Object_Loader &);
+
+	virtual uint8_t id() const {return QUEUE_CMD_SHIP_SINK;}
+
+	Cmd_ShipSink(StreamRead &);
+
+	virtual void execute (Game &);
+	virtual void serialize (StreamWrite &);
+
+private:
+	Serial serial;
+};
+
+struct Cmd_ShipCancelExpedition : public PlayerCommand {
+	Cmd_ShipCancelExpedition() : PlayerCommand(), serial(0) {} // For savegame loading
+	Cmd_ShipCancelExpedition
+		(int32_t const t, Player_Number const p, Serial s)
+		: PlayerCommand(t, p), serial(s)
+	{}
+
+	void Write(FileWrite &, Editor_Game_Base &, Map_Map_Object_Saver  &);
+	void Read (FileRead  &, Editor_Game_Base &, Map_Map_Object_Loader &);
+
+	virtual uint8_t id() const {return QUEUE_CMD_SHIP_CANCELEXPEDITION;}
+
+	Cmd_ShipCancelExpedition(StreamRead &);
+
+	virtual void execute (Game &);
+	virtual void serialize (StreamWrite &);
+
+private:
+	Serial serial;
 };
 
 struct Cmd_SetWarePriority : public PlayerCommand {

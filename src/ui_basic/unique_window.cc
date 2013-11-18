@@ -17,7 +17,7 @@
  *
  */
 
-#include "unique_window.h"
+#include "ui_basic/unique_window.h"
 
 namespace UI {
 /*
@@ -42,7 +42,7 @@ void UniqueWindow::Registry::create() {
 */
 void UniqueWindow::Registry::destroy() {
 	if (window) {
-		delete window;
+		window->die();
 	}
 }
 
@@ -51,7 +51,7 @@ void UniqueWindow::Registry::destroy() {
 */
 void UniqueWindow::Registry::toggle() {
 	if (window) {
-		delete window;
+		window->die();
 	} else {
 		constr();
 	}

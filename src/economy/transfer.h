@@ -20,10 +20,10 @@
 #ifndef TRANSFER_H
 #define TRANSFER_H
 
-#include "route.h"
+#include "economy/route.h"
 
 namespace Widelands {
-struct Game;
+class Game;
 struct PlayerImmovable;
 struct Request;
 class WareInstance;
@@ -87,5 +87,3 @@ private:
 }
 
 #endif
-
-

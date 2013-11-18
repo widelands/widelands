@@ -20,11 +20,12 @@
 #ifndef TEXTURE_H
 #define TEXTURE_H
 
-#include <stdint.h>
 #include <string>
 #include <vector>
 
-#include "colormap.h"
+#include <stdint.h>
+
+#include "graphic/colormap.h"
 #include "graphic/render/gl_surface_texture.h"
 
 /** struct Texture
@@ -52,7 +53,7 @@ struct Texture {
 
 	void animate(uint32_t time);
 	void reset_was_animated() {m_was_animated = false;}
-	bool was_animated() const throw () {return m_was_animated;}
+	bool was_animated() const {return m_was_animated;}
 	uint32_t getTexture() const
 		{return m_glFrames.at(m_frame_num)->get_gl_texture();}
 

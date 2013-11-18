@@ -20,7 +20,7 @@
 #ifndef LAYERED_FILESYSTEM_H
 #define LAYERED_FILESYSTEM_H
 
-#include "filesystem.h"
+#include "io/filesystem/filesystem.h"
 
 /**
  * LayeredFileSystem is a file system which basically merges several layered

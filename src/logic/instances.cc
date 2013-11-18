@@ -17,25 +17,23 @@
  *
  */
 
-#include "instances.h"
-
-#include "cmd_queue.h"
-#include "game.h"
-#include "queue_cmd_ids.h"
-#include "wexception.h"
-#include "widelands_fileread.h"
-#include "widelands_filewrite.h"
-#include "map_io/widelands_map_map_object_loader.h"
-#include "map_io/widelands_map_map_object_saver.h"
-
-#include "log.h"
-
-#include "container_iterate.h"
+#include "logic/instances.h"
 
 #include <cstdarg>
 #include <cstdio>
-#include <string>
 #include <cstring>
+#include <string>
+
+#include "container_iterate.h"
+#include "log.h"
+#include "logic/cmd_queue.h"
+#include "logic/game.h"
+#include "logic/queue_cmd_ids.h"
+#include "logic/widelands_fileread.h"
+#include "logic/widelands_filewrite.h"
+#include "map_io/widelands_map_map_object_loader.h"
+#include "map_io/widelands_map_map_object_saver.h"
+#include "wexception.h"
 
 namespace Widelands {
 
@@ -85,13 +83,7 @@ void Cmd_Destroy_Map_Object::Write
 	GameLogicCommand::Write(fw, egbase, mos);
 
 	// Now serial
-	if (const Map_Object * const obj = egbase.objects().get_object(obj_serial)) {
-		// The object might have vanished
-		assert(mos.is_object_known(*obj));
-		fw.Unsigned32(mos.get_object_file_index(*obj));
-	} else
-		fw.Unsigned32(0);
-
+	fw.Unsigned32(mos.get_object_file_index_or_zero(egbase.objects().get_object(obj_serial)));
 }
 
 Cmd_Act::Cmd_Act(int32_t const t, Map_Object & o, int32_t const a) :
@@ -143,12 +135,7 @@ void Cmd_Act::Write
 	GameLogicCommand::Write(fw, egbase, mos);
 
 	// Now serial
-	if (Map_Object const * const obj = egbase.objects().get_object(obj_serial))
-	{ //  object might have disappeared
-		assert(mos.is_object_known(*obj));
-		fw.Unsigned32(mos.get_object_file_index(*obj));
-	} else
-		fw.Unsigned32(0);
+	fw.Unsigned32(mos.get_object_file_index_or_zero(egbase.objects().get_object(obj_serial)));
 
 	// And arg
 	fw.Unsigned32(arg);
@@ -198,7 +185,7 @@ void Object_Manager::remove(Map_Object & obj)
 /*
  * Return the list of all serials currently in use
  */
-std::vector<Serial> Object_Manager::all_object_serials_ordered () const throw () {
+std::vector<Serial> Object_Manager::all_object_serials_ordered () const {
 	std::vector<Serial> rv;
 
 	container_iterate_const(objmap_t, m_objects, o)
@@ -279,7 +266,7 @@ std::string Map_Object_Descr::get_animation_name(uint32_t const anim) const {
 /**
  * Search for the attribute in the attribute list
  */
-bool Map_Object_Descr::has_attribute(uint32_t const attr) const throw () {
+bool Map_Object_Descr::has_attribute(uint32_t const attr) const {
 	container_iterate_const(Attributes, m_attributes, i)
 		if (*i.current == attr)
 			return true;
@@ -357,6 +344,7 @@ m_descr(the_descr), m_serial(0), m_logsink(0)
  */
 void Map_Object::remove(Editor_Game_Base & egbase)
 {
+	removed(m_serial); // Signal call
 	cleanup(egbase);
 	delete this;
 }
@@ -468,7 +456,7 @@ void Map_Object::molog(char const * fmt, ...) const
 	if (m_logsink)
 		m_logsink->log(buffer);
 
-	log("MO(%u): %s", m_serial, buffer);
+	log("MO(%u,%s): %s", m_serial, descr().name().c_str(), buffer);
 }
 
 

@@ -25,8 +25,16 @@ of your team mate.]]
 statistics menu. Good luck!]]
 ))
 
-smuggling_route_established = rt(p(_
+smuggling_route_established_other_team = rt(p(_
 [[A new smuggling route from %s to %s has been established!. Every ware smuggled here
+is worth %i points.]]
+))
+smuggling_route_established_sender = rt(p(_
+[[Your team established a new smuggling route. You have the sending warehouse. Every ware smuggled here
+is worth %i points.]]
+))
+smuggling_route_established_receiver = rt(p(_
+[[Your team established a new smuggling route. You have the receiving warehouse. Every ware smuggled here
 is worth %i points.]]
 ))
 smuggling_route_broken = rt(p(_

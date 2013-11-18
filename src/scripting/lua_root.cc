@@ -17,6 +17,8 @@
  *
  */
 
+#include "scripting/lua_root.h"
+
 #include "gamecontroller.h"
 #include "log.h"
 #include "logic/cmd_luacoroutine.h"
@@ -24,13 +26,10 @@
 #include "logic/game.h"
 #include "logic/immovable.h"
 #include "logic/tribe.h"
-
-#include "lua_game.h"
-#include "lua_editor.h"
-#include "lua_map.h"
-#include "coroutine_impl.h"
-
-#include "lua_root.h"
+#include "scripting/coroutine_impl.h"
+#include "scripting/lua_editor.h"
+#include "scripting/lua_game.h"
+#include "scripting/lua_map.h"
 
 using namespace Widelands;
 
@@ -117,7 +116,7 @@ int L_Game::get_time(lua_State * L) {
 	.. attribute:: desired_speed
 
 	(RW) Sets the desired speed of the game in ms per real second, so a speed of
-	1000 means the game runs at 1x speed. Note that this will not work in
+	2000 means the game runs at 2x speed. Note that this will not work in
 	network games as expected.
 */
 // UNTESTED
@@ -215,7 +214,7 @@ int L_Game::launch_coroutine(lua_State * L) {
 		:returns: :const:`nil`
 */
 int L_Game::save(lua_State * L) {
-	std::string filename = luaL_checkstring(L, -1);
+	const std::string filename = luaL_checkstring(L, -1);
 	get_game(L).save_handler().request_save(filename);
 
 	return 0;
@@ -294,4 +293,3 @@ void luaopen_wlroot(lua_State * L, bool in_editor) {
 }
 
 };
-

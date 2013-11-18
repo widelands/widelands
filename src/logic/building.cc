@@ -17,12 +17,12 @@
  *
  */
 
+#include "logic/building.h"
+
 #include <cstdio>
 #include <sstream>
-#include <boost/foreach.hpp>
 
-#include "upcast.h"
-#include "wexception.h"
+#include <boost/foreach.hpp>
 
 #include "economy/flag.h"
 #include "economy/request.h"
@@ -33,19 +33,20 @@
 #include "graphic/rendertarget.h"
 #include "io/filesystem/filesystem.h"
 #include "io/filesystem/layered_filesystem.h"
+#include "logic/constructionsite.h"
+#include "logic/game.h"
+#include "logic/game_data_error.h"
+#include "logic/map.h"
+#include "logic/player.h"
+#include "logic/productionsite.h"
+#include "logic/tribe.h"
+#include "logic/worker.h"
 #include "profile/profile.h"
 #include "sound/sound_handler.h"
 #include "text_layout.h"
+#include "upcast.h"
+#include "wexception.h"
 #include "wui/interactive_player.h"
-
-#include "constructionsite.h"
-#include "game.h"
-#include "game_data_error.h"
-#include "map.h"
-#include "player.h"
-#include "productionsite.h"
-#include "tribe.h"
-#include "worker.h"
 
 namespace Widelands {
 
@@ -145,8 +146,19 @@ Building_Descr::Building_Descr
 		}
 
 		// Get costs
-		Section & buildcost_s = prof.get_safe_section("buildcost");
-		m_buildcost.parse(m_tribe, buildcost_s);
+		if (m_buildable) {
+			Section & buildcost_s = prof.get_safe_section("buildcost");
+			m_buildcost.parse(m_tribe, buildcost_s);
+			Section & returnsect_s = prof.get_safe_section("return_on_dismantle");
+			m_return_dismantle.parse(m_tribe, returnsect_s);
+		}
+
+		if (m_enhanced_building) {
+			Section & en_buildcost_s = prof.get_safe_section("enhancement_cost");
+			m_enhance_cost.parse(m_tribe, en_buildcost_s);
+			Section & en_returnsect_s = prof.get_safe_section("return_on_dismantle_on_enhanced");
+			m_return_enhanced.parse(m_tribe, en_returnsect_s);
+		}
 	} else if (m_global) {
 		//  get build icon for global buildings (for statistics window)
 		m_buildicon_fname  = directory;
@@ -174,13 +186,16 @@ Building & Building_Descr::create
 	 Player               &       owner,
 	 Coords                 const pos,
 	 bool                   const construct,
-	 Building_Descr const * const old,
-	 bool                         loading)
+	 bool                         loading,
+	 Building::FormerBuildings const former_buildings)
 	const
 {
-	Building & b = construct ? create_constructionsite(old) : create_object();
+	Building & b = construct ? create_constructionsite() : create_object();
 	b.m_position = pos;
 	b.set_owner(&owner);
+	BOOST_FOREACH(Building_Index idx, former_buildings) {
+		b.m_old_buildings.push_back(idx);
+	}
 	if (loading) {
 		b.Building::init(egbase);
 		return b;
@@ -209,7 +224,7 @@ uint32_t Building_Descr::get_conquers() const
  * \return the radius (in number of fields) of the area seen by this
  * building.
  */
-uint32_t Building_Descr::vision_range() const throw ()
+uint32_t Building_Descr::vision_range() const
 {
 	return m_vision_range ? m_vision_range : get_conquers() + 4;
 }
@@ -229,12 +244,9 @@ void Building_Descr::load_graphics()
 /*
 ===============
 Create a construction site for this type of building
-
-if old != 0 this is an enhancement from an older building
 ===============
 */
-Building & Building_Descr::create_constructionsite
-	(Building_Descr const * const old) const
+Building & Building_Descr::create_constructionsite() const
 {
 	Building_Descr const * const descr =
 		m_tribe.get_building_descr
@@ -242,8 +254,6 @@ Building & Building_Descr::create_constructionsite
 	ConstructionSite & csite =
 		ref_cast<ConstructionSite, Map_Object>(descr->create_object());
 	csite.set_building(*this);
-	if (old)
-		csite.set_previous_building(old);
 
 	return csite;
 }
@@ -265,7 +275,6 @@ m_anim(0),
 m_animstart(0),
 m_leave_time(0),
 m_defeating_player(0),
-m_priority (DEFAULT_PRIORITY),
 m_seeing(false)
 {}
 
@@ -311,11 +320,11 @@ void Building::load_finish(Editor_Game_Base & egbase) {
 	}
 }
 
-int32_t Building::get_type() const throw () {return BUILDING;}
+int32_t Building::get_type() const {return BUILDING;}
 
-int32_t Building::get_size() const throw () {return descr().get_size();}
+int32_t Building::get_size() const {return descr().get_size();}
 
-bool Building::get_passable() const throw () {return false;}
+bool Building::get_passable() const {return false;}
 
 Flag & Building::base_flag()
 {
@@ -330,7 +339,7 @@ Flag & Building::base_flag()
  * By default, all buildings can be bulldozed. If a building should not be
  * destructible, "destructible=no" must be added to buildings conf.
  */
-uint32_t Building::get_playercaps() const throw () {
+uint32_t Building::get_playercaps() const {
 	uint32_t caps = 0;
 	const Building_Descr & d = descr();
 	if (d.is_destructible()) {
@@ -344,7 +353,7 @@ uint32_t Building::get_playercaps() const throw () {
 }
 
 
-const std::string & Building::name() const throw () {return descr().name();}
+const std::string & Building::name() const {return descr().name();}
 
 
 void Building::start_animation(Editor_Game_Base & egbase, uint32_t const anim)
@@ -438,7 +447,7 @@ void Building::cleanup(Editor_Game_Base & egbase)
 
 	PlayerImmovable::cleanup(egbase);
 
-	BOOST_FOREACH(boost::signals::connection& c, options_window_connections)
+	BOOST_FOREACH(boost::signals2::connection& c, options_window_connections)
 		c.disconnect();
 }
 
@@ -461,7 +470,7 @@ bool Building::burn_on_destroy()
  * Return all positions on the map that we occupy
  */
 BaseImmovable::PositionList Building::get_positions
-	(const Editor_Game_Base & egbase) const throw ()
+	(const Editor_Game_Base & egbase) const
 {
 	PositionList rv;
 
@@ -773,15 +782,10 @@ void Building::draw_help
 	}
 }
 
-/**
-* Get priority of a requested ware.
-* Currently always returns base priority - to be extended later
- */
 int32_t Building::get_priority
-	(int32_t const type, Ware_Index const ware_index, bool const adjust) const
+	(WareWorker type, Ware_Index const ware_index, bool adjust) const
 {
-	int32_t priority = m_priority;
-
+	int32_t priority = DEFAULT_PRIORITY;
 	if (type == wwWARE) {
 		// if priority is defined for specific ware,
 		// combine base priority and ware priority
@@ -817,10 +821,6 @@ void Building::collect_priorities
 /**
 * Set base priority for this building (applies for all wares)
  */
-void Building::set_priority(int32_t const new_priority) {
-	m_priority = new_priority;
-}
-
 void Building::set_priority
 	(int32_t    const type,
 	 Ware_Index const ware_index,
@@ -904,6 +904,8 @@ void Building::set_seeing(bool see)
  * \param title user-visible title of the message
  * \param description user-visible message body, will be placed in an
  *   appropriate rich-text paragraph
+ * \param link_to_building_lifetime if true, the message will expire when this
+ *   building is removed from the game. Default is true
  * \param throttle_time if non-zero, the minimum time delay in milliseconds
  *   between messages of this type (see \p msgsender) within the
  *   given \p throttle_radius
@@ -913,6 +915,7 @@ void Building::send_message
 	 const std::string & msgsender,
 	 const std::string & title,
 	 const std::string & description,
+	 bool link_to_building_lifetime,
 	 uint32_t throttle_time,
 	 uint32_t throttle_radius)
 {
@@ -939,7 +942,7 @@ void Building::send_message
 
 	Message * msg = new Message
 		(msgsender, game.get_gametime(), 60 * 60 * 1000,
-		 title, rt_description, get_position());
+		 title, rt_description, get_position(), (link_to_building_lifetime ? m_serial : 0));
 
 	if (throttle_time)
 		owner().add_message_with_timeout

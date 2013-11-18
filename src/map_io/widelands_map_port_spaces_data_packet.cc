@@ -17,26 +17,24 @@
  *
  */
 
+#include "map_io/widelands_map_port_spaces_data_packet.h"
+
 #include <boost/algorithm/string.hpp>
 #include <boost/foreach.hpp>
 
 #include "container_iterate.h"
-
+#include "log.h"
 #include "logic/editor_game_base.h"
 #include "logic/game_data_error.h"
 #include "logic/map.h"
 #include "profile/profile.h"
-
-#include "log.h"
-
-#include "widelands_map_port_spaces_data_packet.h"
 
 namespace Widelands {
 
 #define CURRENT_PACKET_VERSION 1
 
 void Map_Port_Spaces_Data_Packet::Read
-	(FileSystem & fs, Editor_Game_Base & egbase, bool, Map_Map_Object_Loader &) throw (_wexception)
+	(FileSystem & fs, Editor_Game_Base & egbase, bool, Map_Map_Object_Loader &)
 {
 	Profile prof;
 	prof.read("port_spaces", 0, fs);
@@ -68,30 +66,32 @@ void Map_Port_Spaces_Data_Packet::Read
 
 
 void Map_Port_Spaces_Data_Packet::Write(FileSystem & fs, Editor_Game_Base & egbase, Map_Map_Object_Saver &)
-	throw (_wexception)
+
 {
 	Profile prof;
 	Section & s1 = prof.create_section("global");
 	s1.set_int("packet_version", CURRENT_PACKET_VERSION);
 
-	Map & map = egbase.map();
-	Map::PortSpacesSet port_spaces(map.get_port_spaces());
 
-	// Clean up before saving: Delete port build spaces that are defined for a FCoord, that
-	// can in no way be a building of size big.
+	// Clean up before saving: Delete port build spaces that are defined for a
+	// FCoord, that can in no way be a building of size big.
 	//
-	// NOTE  This clean up might interfer with scenarios that alter the terrain or the height of the map.
-	// NOTE  However those types of  scenarios can be seen to be a rare case in which the port spaces can be
-	// NOTE  handled by rewriting port spaces via a LUA script once the terrain is changed.
-	BOOST_FOREACH(const Coords & c, port_spaces) {
+	// This clean up might interfer with scenarios that alter the terrain or the
+	// height of the map. However those types of scenarios can be seen to be a
+	// rare case in which the port spaces can be handled by rewriting port
+	// spaces via a LUA script once the terrain is changed.
+	Map::PortSpacesSet port_spaces;
+	Map& map = egbase.map();
+	BOOST_FOREACH(const Coords & c, map.get_port_spaces()) {
 		FCoords fc = map.get_fcoords(c);
 		if
 			((map.get_max_nodecaps(fc) & BUILDCAPS_SIZEMASK) != BUILDCAPS_BIG
 			 ||
 			 map.find_portdock(fc).empty())
 		{
-			port_spaces.erase(c);
+			continue;
 		}
+		port_spaces.insert(c);
 	}
 
 	const uint16_t num = port_spaces.size();

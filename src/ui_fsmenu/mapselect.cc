@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2002, 2006-2012 by the Widelands Development Team
+ * Copyright (C) 2002, 2006-2013 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -16,15 +16,16 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-#include <cstdio>
-#include <boost/format.hpp>
+#include "ui_fsmenu/mapselect.h"
 
-#include "i18n.h"
-#include "wexception.h"
+#include <cstdio>
+
+#include <boost/format.hpp>
 
 #include "gamecontroller.h"
 #include "gamesettings.h"
 #include "graphic/graphic.h"
+#include "i18n.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "log.h"
 #include "logic/editor_game_base.h"
@@ -33,9 +34,7 @@
 #include "s2map.h"
 #include "ui_basic/box.h"
 #include "ui_basic/checkbox.h"
-
-
-#include "mapselect.h"
+#include "wexception.h"
 
 
 using Widelands::WL_Map_Loader;
@@ -52,7 +51,7 @@ Fullscreen_Menu_MapSelect::Fullscreen_Menu_MapSelect
 	m_title
 		(this,
 		 get_w() / 2, get_h() * 7 / 50,
-		 _("Choose your map!"),
+		 _("Choose a map"),
 		 UI::Align_HCenter),
 	m_label_load_map_as_scenario
 		(this,
@@ -170,6 +169,7 @@ Fullscreen_Menu_MapSelect::Fullscreen_Menu_MapSelect
 	vbox->set_size(get_w(), 25);
 	vbox = new UI::Box(this, m_table.get_x(), m_table.get_y() - 90, UI::Box::Horizontal, m_table.get_w());
 	_add_tag_checkbox(vbox, "official", _("Official Map"));
+	_add_tag_checkbox(vbox, "seafaring", _("Seafaring Map"));
 	vbox->set_size(get_w(), 25);
 	vbox = new UI::Box(this, m_table.get_x(), m_table.get_y() - 60, UI::Box::Horizontal, m_table.get_w());
 	_add_tag_checkbox(vbox, "1v1", _("1v1"));
@@ -191,6 +191,7 @@ Fullscreen_Menu_MapSelect::Fullscreen_Menu_MapSelect
 		m_label_load_map_as_scenario.set_visible(false);
 	}
 
+	m_table.focus();
 	fill_list();
 }
 
@@ -199,6 +200,7 @@ void Fullscreen_Menu_MapSelect::think()
 	if (m_ctrl)
 		m_ctrl->think();
 }
+
 
 bool Fullscreen_Menu_MapSelect::compare_maprows
 	(uint32_t rowa, uint32_t rowb)

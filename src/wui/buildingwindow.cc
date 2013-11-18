@@ -17,12 +17,13 @@
  *
  */
 
-#include "buildingconfirm.h"
-#include "game_debug_ui.h"
+#include "wui/buildingwindow.h"
+
+#include <boost/format.hpp>
+
 #include "graphic/graphic.h"
 #include "graphic/image.h"
 #include "graphic/rendertarget.h"
-#include "interactive_player.h"
 #include "logic/constructionsite.h"
 #include "logic/dismantlesite.h"
 #include "logic/maphollowregion.h"
@@ -34,11 +35,10 @@
 #include "ui_basic/helpwindow.h"
 #include "ui_basic/tabpanel.h"
 #include "upcast.h"
-#include "waresqueuedisplay.h"
-
-#include <boost/format.hpp>
-
-#include "buildingwindow.h"
+#include "wui/actionconfirm.h"
+#include "wui/game_debug_ui.h"
+#include "wui/interactive_player.h"
+#include "wui/waresqueuedisplay.h"
 
 static const char * pic_bulldoze           = "pics/menu_bld_bulldoze.png";
 static const char * pic_dismantle          = "pics/menu_bld_dismantle.png";
@@ -197,35 +197,7 @@ void Building_Window::create_capsbuttons(UI::Box * capsbuttons)
 		}
 		else
 		if (upcast(const Widelands::ProductionSite, productionsite, &m_building)) {
-			if (upcast(const Widelands::MilitarySite, ms, productionsite))
-			{
-				if (Widelands::MilitarySite::kPrefersHeroes == ms->get_soldier_preference())
-				{
-					UI::Button * cs_btn =
-					new UI::Button
-					(capsbuttons, "rookies", 0, 0, 34, 34,
-						g_gr->images().get("pics/but4.png"),
-						g_gr->images().get("pics/msite_prefer_rookies.png"),
-						_("Prefer rookies"));
-					cs_btn->sigclicked.connect
-					(boost::bind(&Building_Window::act_prefer_rookies, boost::ref(*this)));
-					capsbuttons->add (cs_btn, UI::Box::AlignCenter);
-				}
-				else
-				{
-					UI::Button * cs_btn =
-					new UI::Button
-					(capsbuttons, "heroes", 0, 0, 34, 34,
-						g_gr->images().get("pics/but4.png"),
-						g_gr->images().get("pics/msite_prefer_heroes.png"),
-						_("Prefer heroes"));
-					cs_btn->sigclicked.connect
-					(boost::bind(&Building_Window::act_prefer_heroes, boost::ref(*this)));
-					capsbuttons->add (cs_btn, UI::Box::AlignCenter);
-				}
-			}
-			else // is not a MilitarySite (but is still a productionsite)
-			{
+			if (!is_a(Widelands::MilitarySite, productionsite)) {
 				const bool is_stopped = productionsite->is_stopped();
 				UI::Button * stopbtn =
 					new UI::Button
@@ -266,7 +238,8 @@ void Building_Window::create_capsbuttons(UI::Box * capsbuttons)
 							 g_gr->images().get("pics/but4.png"),
 							 building_descr.get_buildicon(),
 							 std::string(buffer) + "<br><font size=11>" + _("Construction costs:") + "</font><br>" +
-								 waremap_to_richtext(tribe, building_descr.buildcost())); //  button id = building id
+								 waremap_to_richtext(tribe, building_descr.enhancement_cost()));
+					//  button id = building id
 					enhancebtn->sigclicked.connect
 						(boost::bind
 							(&Building_Window::act_enhance,
@@ -297,7 +270,7 @@ void Building_Window::create_capsbuttons(UI::Box * capsbuttons)
 
 		if (m_capscache & Widelands::Building::PCap_Dismantle) {
 			std::map<Widelands::Ware_Index, uint8_t> wares;
-			Widelands::DismantleSite::count_returned_wares(m_building.descr(), wares);
+			Widelands::DismantleSite::count_returned_wares(&m_building, wares);
 			UI::Button * dismantlebtn =
 				new UI::Button
 					(capsbuttons, "dismantle", 0, 0, 34, 34,
@@ -323,7 +296,13 @@ void Building_Window::create_capsbuttons(UI::Box * capsbuttons)
 	}
 
 	if (can_see) {
-		if (m_building.descr().m_workarea_info.size()) {
+		Workarea_Info wa_info;
+		if (upcast(Widelands::ConstructionSite, csite, &m_building)) {
+			wa_info = csite->building().m_workarea_info;
+		} else {
+			wa_info = m_building.descr().m_workarea_info;
+		}
+		if (!wa_info.empty()) {
 			m_toggle_workarea = new UI::Button
 				(capsbuttons, "workarea",
 				 0, 0, 34, 34,
@@ -444,24 +423,6 @@ void Building_Window::act_start_stop() {
 	die();
 }
 
-void Building_Window::act_prefer_rookies()
-{
-	if (is_a(Widelands::MilitarySite, &m_building))
-		igbase().game().send_player_militarysite_set_soldier_preference
-			(m_building, Widelands::MilitarySite::kPrefersRookies);
-
-	die();
-}
-
-void
-Building_Window::act_prefer_heroes()
-{
-	if (is_a(Widelands::MilitarySite, &m_building))
-		igbase().game().send_player_militarysite_set_soldier_preference
-			(m_building, Widelands::MilitarySite::kPrefersHeroes);
-
-	die();
-}
 
 /**
 ===============
@@ -516,7 +477,15 @@ void Building_Window::show_workarea()
 	if (m_workarea_job_id) {
 		return; // already shown, nothing to be done
 	}
-	const Workarea_Info & workarea_info = m_building.descr().m_workarea_info;
+	Workarea_Info workarea_info;
+	if (upcast(Widelands::ConstructionSite, csite, &m_building)) {
+		workarea_info = csite->building().m_workarea_info;
+	} else {
+		workarea_info = m_building.descr().m_workarea_info;
+	}
+	if (workarea_info.empty()) {
+		return;
+	}
 	m_workarea_job_id = igbase().show_work_area(workarea_info, m_building.get_position());
 
 	configure_workarea_button();

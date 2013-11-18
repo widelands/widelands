@@ -17,14 +17,15 @@
  *
  */
 
+#include "scripting/lua_bases.h"
+
 #include <lua.hpp>
 
+#include "economy/economy.h"
 #include "logic/checkstep.h"
 #include "logic/player.h"
+#include "scripting/lua_map.h"
 
-#include "lua_map.h"
-
-#include "lua_bases.h"
 
 using namespace Widelands;
 
@@ -161,7 +162,9 @@ const MethodType<L_PlayerBase> L_PlayerBase::Methods[] = {
 	METHOD(L_PlayerBase, place_flag),
 	METHOD(L_PlayerBase, place_road),
 	METHOD(L_PlayerBase, place_building),
+	METHOD(L_PlayerBase, place_bob),
 	METHOD(L_PlayerBase, conquer),
+	METHOD(L_PlayerBase, get_workers),
 	{0, 0},
 };
 const PropertyType<L_PlayerBase> L_PlayerBase::Properties[] = {
@@ -389,22 +392,67 @@ int L_PlayerBase::place_building(lua_State * L) {
 	if (lua_gettop(L) >= 5)
 		force = luaL_checkboolean(L, 5);
 
-	Building_Index i = get(L, get_egbase(L)).tribe().building_index(name);
+	const Tribe_Descr& td = get(L, get_egbase(L)).tribe();
+	Building_Index i = td.building_index(name);
 	if (i == Building_Index::Null())
 		return report_error(L, "Unknown Building: '%s'", name);
 
-	Building * b = 0;
-	if (force)
-		b = &get(L, get_egbase(L)).force_building
-			(c->coords(), i, constructionsite);
-	else
-		b = get(L, get_egbase(L)).build
-			(c->coords(), i, constructionsite);
+	Building_Descr::FormerBuildings former_buildings;
+	find_former_buildings(td, i, &former_buildings);
+	if (constructionsite) {
+		former_buildings.pop_back();
+	}
 
+	Building * b = 0;
+	if (force) {
+		if (constructionsite) {
+			b = &get(L, get_egbase(L)).force_csite
+				(c->coords(), i, former_buildings);
+		} else {
+			b = &get(L, get_egbase(L)).force_building
+				(c->coords(), former_buildings);
+		}
+	} else {
+		b = get(L, get_egbase(L)).build
+			(c->coords(), i, constructionsite, former_buildings);
+	}
 	if (not b)
 		return report_error(L, "Couldn't place building!");
 
 	LuaMap::upcasted_immovable_to_lua(L, b);
+	return 1;
+}
+
+/* RST
+	.. method:: place_bob(name, field)
+
+		Places a bob that must be described by the tribe and will be
+		owned by the player.
+
+		TODO(sirver): name must be "ship" right now, everything else
+		is not implemented.
+
+		:arg name: name of the bob to place. Must be defined in the tribe of this player.
+		:type name: :class:`string`.
+		:arg field: where the bob should be placed.
+		:type field: :class:`wl.map.Field`
+
+		:returns: The created bob.
+*/
+// UNTESTED
+int L_PlayerBase::place_bob(lua_State * L) {
+	const std::string name = luaL_checkstring(L, 2);
+	LuaMap::L_Field* c = *get_user_class<LuaMap::L_Field>(L, 3);
+
+	if (name != "ship")
+		report_error(L, "Can currently only place ships.");
+
+	Editor_Game_Base & egbase = get_egbase(L);
+	Player& player = get(L, egbase);
+	Bob& bob = egbase.create_bob(c->coords(), name, &player.tribe(), &player);
+
+	LuaMap::upcasted_bob_to_lua(L, &bob);
+
 	return 1;
 }
 
@@ -435,6 +483,30 @@ int L_PlayerBase::conquer(lua_State * L) {
 	return 0;
 }
 
+/* RST
+	.. method:: get_workers(name)
+
+		Returns the number of workers of this type in the players stock. This does not implement
+		everything that :class:`HasWares` offers.
+
+		:arg name: name of the worker to get
+		:type name: :class:`string`.
+		:returns: the number of wares
+*/
+// UNTESTED
+int L_PlayerBase::get_workers(lua_State * L) {
+	Player& player = get(L, get_egbase(L));
+	const std::string workername = luaL_checkstring(L, -1);
+
+	const Ware_Index worker = player.tribe().worker_index(workername);
+
+	uint32_t nworkers = 0;
+	for (uint32_t i = 0; i < player.get_nr_economies(); ++i) {
+		 nworkers += player.get_economy_by_number(i)->stock_worker(worker);
+	}
+	lua_pushuint32(L, nworkers);
+	return 1;
+}
 
 
 /*
@@ -474,4 +546,3 @@ void luaopen_wlbases(lua_State * const L) {
 }
 
 };
-

@@ -20,20 +20,19 @@
 #ifndef INTERNET_GAMING_H
 #define INTERNET_GAMING_H
 
-#include "build_info.h"
-#include "chat.h"
-#include "internet_gaming_protocol.h"
-#include "network.h"
-#include "network_lan_promotion.h"
-
-#include <stdint.h>
 #include <string>
 #include <vector>
 
 #ifdef _WIN32
-#include <winsock2.h>
 #include <io.h>
+#include <winsock2.h>
 #endif
+
+#include "build_info.h"
+#include "chat.h"
+#include "network/internet_gaming_protocol.h"
+#include "network/network.h"
+#include "network/network_lan_promotion.h"
 
 
 /// A simple network client struct
@@ -114,9 +113,6 @@ struct InternetGaming : public ChatProvider {
 	// ChatProvider: sends a message via the metaserver.
 	void send(const std::string &);
 
-	// ChatProvider: sends local messages
-	void send_local(const std::string &);
-
 	/// ChatProvider: adds the message to the message list and calls parent.
 	void receive(const ChatMessage & msg) {messages.push_back(msg); ChatProvider::send(msg);}
 
@@ -124,7 +120,7 @@ struct InternetGaming : public ChatProvider {
 	const std::vector<ChatMessage> & getMessages() const {return messages;}
 
 	/// writes the ingame_system_chat messages to \arg msg and resets it afterwards
-	void getIngameSystemMessages(std::vector<ChatMessage> msg) {
+	void getIngameSystemMessages(std::vector<ChatMessage> & msg) {
 		msg = ingame_system_chat;
 		ingame_system_chat.clear();
 	}

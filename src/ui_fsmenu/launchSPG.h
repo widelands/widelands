@@ -20,14 +20,13 @@
 #ifndef FULLSCREEN_MENU_LAUNCHSPG_H
 #define FULLSCREEN_MENU_LAUNCHSPG_H
 
-#include "base.h"
-
-#include "ui_basic/button.h"
-#include "ui_basic/textarea.h"
-#include "ui_basic/multilinetextarea.h"
-#include "ui_basic/listselect.h"
-
 #include <string>
+
+#include "ui_fsmenu/base.h"
+#include "ui_basic/button.h"
+#include "ui_basic/listselect.h"
+#include "ui_basic/multilinetextarea.h"
+#include "ui_basic/textarea.h"
 
 struct ChatProvider;
 struct GameController;

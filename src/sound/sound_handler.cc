@@ -17,29 +17,27 @@
  *
  */
 
-#include "sound_handler.h"
+#include "sound/sound_handler.h"
+
+#include <cerrno>
+
+#include <SDL.h>
+#ifdef _WIN32
+#include <windows.h>
+#endif
 
 #include "graphic/graphic.h"
 #include "i18n.h"
 #include "io/fileread.h"
 #include "io/filesystem/layered_filesystem.h"
+#include "log.h"
 #include "logic/game.h"
 #include "logic/map.h"
 #include "profile/profile.h"
-#include "songset.h"
+#include "sound/songset.h"
 #include "wui/interactive_base.h"
 #include "wui/mapview.h"
 #include "wui/mapviewpixelfunctions.h"
-
-#include "log.h"
-
-#include <SDL.h>
-
-#include <cerrno>
-
-#ifdef _WIN32
-#include <windows.h>
-#endif
 
 #define DEFAULT_MUSIC_VOLUME  64
 #define DEFAULT_FX_VOLUME    128
@@ -634,13 +632,13 @@ void Sound_Handler::change_music
 }
 
 
-bool Sound_Handler::get_disable_music() const throw () {return m_disable_music;}
-bool Sound_Handler::get_disable_fx   () const throw () {return m_disable_fx;}
-int32_t  Sound_Handler::get_music_volume() const throw ()
+bool Sound_Handler::get_disable_music() const {return m_disable_music;}
+bool Sound_Handler::get_disable_fx   () const {return m_disable_fx;}
+int32_t  Sound_Handler::get_music_volume() const
 {
 	return m_music_volume;
 }
-int32_t  Sound_Handler::get_fx_volume() const throw ()
+int32_t  Sound_Handler::get_fx_volume() const
 {
 	return m_fx_volume;
 }

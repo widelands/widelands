@@ -17,6 +17,8 @@
  *
  */
 
+#include "ui_basic/panel.h"
+
 #include "constants.h"
 #include "graphic/font_handler.h"
 #include "graphic/font_handler1.h"
@@ -31,17 +33,18 @@
 #include "text_layout.h"
 #include "wlapplication.h"
 
-#include "panel.h"
 
 using namespace std;
 
 namespace UI {
 
-namespace  {
-class CacheImage : public Image {
+// Caches the image of the inner of a panel. Will redraw the Panel on cache misses.
+class Panel::CacheImage : public Image {
 public:
-	CacheImage(uint16_t w, uint16_t h) :
-		width_(w), height_(h),
+	CacheImage(Panel* const panel, uint16_t w, uint16_t h) :
+		width_(w),
+		height_(h),
+		panel_(panel),
 		hash_("cache_image_" + random_string("0123456789ABCDEFGH", 32)) {}
 	virtual ~CacheImage() {}
 
@@ -55,15 +58,20 @@ public:
 			return rv;
 
 		rv = g_gr->surfaces().insert(hash_, Surface::create(width_, height_), true);
+
+		// Cache miss! We have to redraw our panel onto our surface.
+		RenderTarget inner(rv);
+		panel_->do_draw_inner(inner);
+
 		return rv;
 	}
 
 private:
 	const int16_t width_, height_;
+	Panel* const panel_;  // not owned.
 	const string hash_;
 };
 
-}  // namespace
 Panel * Panel::_modal       = 0;
 Panel * Panel::_g_mousegrab = 0;
 Panel * Panel::_g_mousein   = 0;
@@ -561,7 +569,7 @@ void Panel::set_cache(bool cache)
 		_flags |= pf_cache;
 	} else {
 		_flags &= ~pf_cache;
-		_cache.reset(nullptr);
+		_cache.reset();
 	}
 }
 
@@ -591,7 +599,7 @@ void Panel::do_think()
 /**
  * Get mouse position relative to this panel
 */
-Point Panel::get_mouse_position() const throw () {
+Point Panel::get_mouse_position() const {
 	return
 		(_parent ?
 		 _parent             ->get_mouse_position()
@@ -758,8 +766,9 @@ void Panel::focus()
 	// can't. but focus is called recursivly
 	// assert(get_can_focus());
 
-	if (!_parent || this == _modal)
+	if (!_parent || this == _modal) {
 		return;
+	}
 	if (_parent->_focus == this)
 		return;
 
@@ -872,7 +881,7 @@ void Panel::do_draw(RenderTarget & dst)
 		uint32_t innerh = _h - (_tborder + _bborder);
 
 	if (!_cache || _cache->width() != innerw || _cache->height() != innerh) {
-			_cache.reset(new CacheImage(innerw, innerh));
+			_cache.reset(new CacheImage(this, innerw, innerh));
 			_needdraw = true;
 		}
 
@@ -947,9 +956,12 @@ void Panel::do_mousein(bool const inside)
  * Returns whether the event was processed.
  */
 bool Panel::do_mousepress(const Uint8 btn, int32_t x, int32_t y) {
-	if (not _g_allow_user_input)
+	if (not _g_allow_user_input) {
 		return true;
-
+	}
+	if (get_can_focus()) {
+		focus();
+	}
 	x -= _lborder;
 	y -= _tborder;
 	if (_flags & pf_top_on_click)
@@ -971,8 +983,10 @@ bool Panel::do_mousepress(const Uint8 btn, int32_t x, int32_t y) {
 			(Panel * child = _fchild;
 			 (child = child_at_mouse_cursor(x, y, child));
 			 child = child->_next)
-			if (child->do_mousepress(btn, x - child->_x, y - child->_y))
-				return true;
+			{
+				if (child->do_mousepress(btn, x - child->_x, y - child->_y))
+					return true;
+			}
 	return handle_mousepress(btn, x, y);
 }
 bool Panel::do_mouserelease(const Uint8 btn, int32_t x, int32_t y) {

@@ -20,16 +20,14 @@
 #ifndef INTERACTIVE_PLAYER_H
 #define INTERACTIVE_PLAYER_H
 
-#include "interactive_gamebase.h"
-
-#include "ui_basic/button.h"
-#include "ui_basic/textarea.h"
-
-#include "logic/message_id.h"
+#include <vector>
 
 #include <SDL_keyboard.h>
 
-#include <vector>
+#include "wui/interactive_gamebase.h"
+#include "logic/message_id.h"
+#include "ui_basic/button.h"
+#include "ui_basic/textarea.h"
 
 namespace UI {
 struct Multiline_Textarea;
@@ -66,10 +64,10 @@ struct Interactive_Player : public Interactive_GameBase
 
 	bool handle_key(bool down, SDL_keysym);
 
-	Widelands::Player & player() const throw () {
+	Widelands::Player & player() const {
 		return game().player(m_player_number);
 	}
-	Widelands::Player * get_player() const throw () {
+	Widelands::Player * get_player() const {
 		assert(&game());
 		return game().get_player(m_player_number);
 	}
@@ -88,15 +86,12 @@ struct Interactive_Player : public Interactive_GameBase
 
 	void popup_message(Widelands::Message_Id, const Widelands::Message &);
 
-	bool is_multiplayer() {return m_multiplayer;}
-
 private:
 	void cmdSwitchPlayer(const std::vector<std::string> & args);
 
 	Widelands::Player_Number m_player_number;
 	bool                     m_auto_roadbuild_mode;
 	Widelands::Coords        m_flag_to_connect;
-	bool                     m_multiplayer;
 
 	UI::Button m_toggle_chat;
 	UI::Button m_toggle_options_menu;

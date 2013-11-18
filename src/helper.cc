@@ -17,16 +17,15 @@
  *
  */
 
+#include "helper.h"
+
 #include <cstdarg>
+#include <memory>
 #include <string>
 
 #include <boost/random.hpp>
-#include <boost/scoped_array.hpp>
-
-#include "helper.h"
 
 using namespace std;
-
 
 /// Split a string by separators.
 /// \note This ignores empty elements, so do not use this for example to split
@@ -82,7 +81,7 @@ bool is_printable(SDL_keysym k)
 static boost::mt19937 random_generator;
 string random_string(const string& chars, int nlen) {
 	boost::uniform_int<> index_dist(0, chars.size() - 1);
-	boost::scoped_array<char> buffer(new char[nlen - 1]);
+	std::unique_ptr<char[]> buffer(new char[nlen]);
 	for (int i = 0; i < nlen; ++i) {
 		buffer[i] = chars[index_dist(random_generator)];
 	}

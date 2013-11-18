@@ -17,22 +17,21 @@
  *
  */
 
-#include "table.h"
+#include "ui_basic/table.h"
 
-#include "graphic/font.h"
-#include "graphic/font_handler.h"
-#include "graphic/graphic.h"
-#include "graphic/rendertarget.h"
-#include "graphic/font_handler1.h"
-
-#include "button.h"
-#include "mouse_constants.h"
-#include "scrollbar.h"
-#include "wlapplication.h"
-#include "text_layout.h"
+#include <boost/bind.hpp>
 
 #include "container_iterate.h"
-#include <boost/bind.hpp>
+#include "graphic/font.h"
+#include "graphic/font_handler.h"
+#include "graphic/font_handler1.h"
+#include "graphic/graphic.h"
+#include "graphic/rendertarget.h"
+#include "text_layout.h"
+#include "ui_basic/button.h"
+#include "ui_basic/mouse_constants.h"
+#include "ui_basic/scrollbar.h"
+#include "wlapplication.h"
 
 namespace UI {
 
@@ -63,6 +62,7 @@ Table<void *>::Table
 	m_sort_descending (descending)
 {
 	set_think(false);
+	set_can_focus(true);
 }
 
 
@@ -198,7 +198,7 @@ bool Table<void *>::Entry_Record::is_checked(uint8_t const col) const {
 
 Table<void *>::Entry_Record * Table<void *>::find
 	(const void * const entry) const
-	throw ()
+
 {
 	container_iterate_const(Entry_Record_vector, m_entry_records, i)
 		if ((*i.current)->entry() == entry)
@@ -419,11 +419,22 @@ void Table<void *>::move_selection(const int32_t offset)
 	//scroll to newly selected entry
 	if (m_scrollbar)
 	{
-		int32_t scroll_offset = 0;
-		if (new_selection > 0) scroll_offset = -1;
+		// Keep an unselected item above or below
+		int32_t scroll_item = new_selection + offset;
+		if (scroll_item < 0) scroll_item = 0;
+		if (scroll_item > static_cast<int32_t>(m_entry_records.size())) {
+			scroll_item = m_entry_records.size();
+		}
 
-		m_scrollbar->set_scrollpos
-			((new_selection + scroll_offset) * get_lineheight());
+		// Ensure scroll_item is visible
+		if (static_cast<int32_t>(scroll_item * get_lineheight()) < m_scrollpos) {
+			m_scrollbar->set_scrollpos(scroll_item * get_lineheight());
+		} else if
+			(static_cast<int32_t>((scroll_item + 1) * get_lineheight() - get_inner_h())
+			 > m_scrollpos)
+		{
+			m_scrollbar->set_scrollpos((scroll_item + 1) * get_lineheight() - get_inner_h());
+		}
 	}
 }
 

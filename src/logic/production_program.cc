@@ -17,34 +17,33 @@
  *
  */
 
-#include "production_program.h"
+#include "logic/production_program.h"
 
-#include "checkstep.h"
+#include <boost/format.hpp>
+#include <config.h>
+#include <libintl.h>
+
 #include "economy/economy.h"
 #include "economy/flag.h"
 #include "economy/wares_queue.h"
-#include "findimmovable.h"
-#include "findnode.h"
-#include "game.h"
-#include "game_data_error.h"
 #include "helper.h"
-#include "mapregion.h"
-#include "message_queue.h"
-#include "player.h"
-#include "productionsite.h"
+#include "logic/checkstep.h"
+#include "logic/findimmovable.h"
+#include "logic/findnode.h"
+#include "logic/game.h"
+#include "logic/game_data_error.h"
+#include "logic/mapregion.h"
+#include "logic/message_queue.h"
+#include "logic/player.h"
+#include "logic/productionsite.h"
+#include "logic/soldier.h"
+#include "logic/soldiercontrol.h"
+#include "logic/trainingsite.h"
+#include "logic/tribe.h"
+#include "logic/worker_program.h"
 #include "profile/profile.h"
-#include "soldier.h"
-#include "soldiercontrol.h"
 #include "sound/sound_handler.h"
-#include "tribe.h"
 #include "upcast.h"
-#include "worker_program.h"
-#include "trainingsite.h"
-
-#include <libintl.h>
-#include <boost/format.hpp>
-
-#include <config.h>
 
 namespace Widelands {
 
@@ -777,11 +776,8 @@ void ProductionProgram::ActConsume::execute
 {
 	std::vector<WaresQueue *> const warequeues = ps.warequeues();
 	size_t const nr_warequeues = warequeues.size();
-#ifdef HAVE_VARARRAY
-	uint8_t consumption_quantities[nr_warequeues];
-#else
 	std::vector<uint8_t> consumption_quantities(nr_warequeues, 0);
-#endif
+
 	Groups l_groups = m_groups; //  make a copy for local modification
 	//log("ActConsume::execute(%s):\n", ps.descname().c_str());
 
@@ -1234,6 +1230,7 @@ void ProductionProgram::ActMine::informPlayer
 		 _
 		 ("This mines' main vein exhausted. Expect strongly diminished returns on investment. "
 		  "You should consider to expand, dismantle or destruct it."),
+		 true,
 		 60 * 60 * 1000,
 		 0);
 }
@@ -1279,10 +1276,15 @@ void ProductionProgram::ActCheck_Soldier::execute
 {
 	SoldierControl & ctrl = dynamic_cast<SoldierControl &>(ps);
 	const std::vector<Soldier *> soldiers = ctrl.presentSoldiers();
-	const std::vector<Soldier *>::const_iterator soldiers_end = soldiers.end();
-
+	if (soldiers.empty()) {
+			snprintf
+				(ps.m_result_buffer, sizeof(ps.m_result_buffer),
+				 _("No soldier to train!"));
+		return ps.program_end(game, Skipped);
+	}
 	ps.molog("  Checking soldier (%u) level %d)\n", attribute, level);
 
+	const std::vector<Soldier *>::const_iterator soldiers_end = soldiers.end();
 	for (std::vector<Soldier *>::const_iterator it = soldiers.begin();; ++it) {
 		if (it == soldiers_end) {
 			snprintf

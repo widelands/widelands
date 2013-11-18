@@ -17,7 +17,7 @@
  *
  */
 
-#include "walkingdir.h"
+#include "logic/walkingdir.h"
 
 namespace Widelands {
 
@@ -56,6 +56,25 @@ uint8_t get_ccw_neighbour(uint8_t dir) {
 			return WALK_SE;
 		case WALK_SE:
 			return WALK_E;
+		default:
+			return 0;
+	}
+}
+
+uint8_t get_backward_dir(uint8_t dir) {
+	switch (dir) {
+		case WALK_E:
+			return WALK_W;
+		case WALK_NE:
+			return WALK_SW;
+		case WALK_NW:
+			return WALK_SE;
+		case WALK_W:
+			return WALK_E;
+		case WALK_SW:
+			return WALK_NE;
+		case WALK_SE:
+			return WALK_NW;
 		default:
 			return 0;
 	}

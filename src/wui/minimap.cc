@@ -17,16 +17,19 @@
  *
  */
 
-#include "minimap.h"
+#include "wui/minimap.h"
 
-#include "i18n.h"
-#include "interactive_player.h"
-#include "logic/map.h"
-#include "mapviewpixelconstants.h"
+#include <memory>
 
 #include "graphic/graphic.h"
-#include "graphic/rendertarget.h"
+#include "graphic/in_memory_image.h"
 #include "graphic/render/minimaprenderer.h"
+#include "graphic/rendertarget.h"
+#include "graphic/surface.h"
+#include "i18n.h"
+#include "logic/map.h"
+#include "wui/interactive_player.h"
+#include "wui/mapviewpixelconstants.h"
 
 
 MiniMap::View::View
@@ -60,15 +63,20 @@ void MiniMap::View::set_view_pos(const int32_t x, const int32_t y)
 
 void MiniMap::View::draw(RenderTarget & dst)
 {
-	MiniMapRenderer mmr(dst);
+	MiniMapRenderer mmr;
 
-	mmr.renderminimap
-		(m_ibase.egbase(),
-		 m_ibase.get_player(),
-		 (*m_flags) & (MiniMap::Zoom2) ?
-		 	Point((m_viewx - get_w() / 4), (m_viewy - get_h() / 4)):
-		 	Point((m_viewx - get_w() / 2), (m_viewy - get_h() / 2)),
-		 *m_flags);
+	std::unique_ptr<Surface> surface
+		(mmr.get_minimap_image
+			(m_ibase.egbase(),
+			m_ibase.get_player(),
+			(*m_flags) & (MiniMap::Zoom2) ?
+				Point((m_viewx - get_w() / 4), (m_viewy - get_h() / 4)):
+				Point((m_viewx - get_w() / 2), (m_viewy - get_h() / 2)),
+			*m_flags));
+	// Give ownership of the surface to the new image
+	std::unique_ptr<const Image> im(new_in_memory_image("minimap", surface.release()));
+	dst.blit(Point(), im.get());
+	im.reset();
 }
 
 

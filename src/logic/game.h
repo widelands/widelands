@@ -20,8 +20,8 @@
 #ifndef GAME_H
 #define GAME_H
 
-#include "cmd_queue.h"
-#include "editor_game_base.h"
+#include "logic/cmd_queue.h"
+#include "logic/editor_game_base.h"
 #include "md5.h"
 #include "random.h"
 #include "save_handler.h"
@@ -40,13 +40,14 @@ struct Flag;
 struct Path;
 struct PlayerImmovable;
 struct Ship;
+struct PlayerEndStatus;
 class TrainingSite;
 class MilitarySite;
 
 #define WLGF_SUFFIX ".wgf"
 #define WLGF_MAGIC      "WLgf"
 
-/** struct Game
+/** class Game
  *
  * This class manages the entire lifetime of a game session, from creating the
  * game and setting options, selecting maps to the actual playing phase and the
@@ -58,13 +59,14 @@ enum {
 	gs_ending
 };
 
-struct Player;
-struct Map_Loader;
+class Player;
+class Map_Loader;
 class PlayerCommand;
 class ReplayReader;
 class ReplayWriter;
 
-struct Game : Editor_Game_Base {
+class Game : public Editor_Game_Base {
+public:
 	struct General_Stats {
 		std::vector< uint32_t > land_size;
 		std::vector< uint32_t > nr_workers;
@@ -101,10 +103,18 @@ struct Game : Editor_Game_Base {
 	void save_syncstream(bool save);
 	void init_newgame (UI::ProgressWindow *, const GameSettings &);
 	void init_savegame(UI::ProgressWindow *, const GameSettings &);
-	bool run_splayer_scenario_direct(char const * mapname);
-	bool run_load_game (std::string filename);
 	enum Start_Game_Type {NewSPScenario, NewNonScenario, Loaded, NewMPScenario};
-	bool run(UI::ProgressWindow * loader_ui, Start_Game_Type);
+	bool run(UI::ProgressWindow * loader_ui, Start_Game_Type, const std::string& script_to_run, bool replay);
+
+	// Run a single player scenario directly via --scenario on the cmdline. Will
+	// run the 'script_to_run' after any init scripts of the map.
+	// Returns the result of run().
+	bool run_splayer_scenario_direct(char const * mapname, const std::string& script_to_run);
+
+	// Run a single player loaded game directly via --loadgame on the cmdline. Will
+	// run the 'script_to_run' directly after the game was loaded.
+	// Returns the result of run().
+	bool run_load_game (std::string filename, const std::string& script_to_run);
 
 	virtual void postload();
 
@@ -170,6 +180,8 @@ struct Game : Editor_Game_Base {
 	void send_player_ship_scout_direction(Ship &, uint8_t);
 	void send_player_ship_construct_port(Ship &, Coords);
 	void send_player_ship_explore_island(Ship &, bool);
+	void send_player_sink_ship(Ship &);
+	void send_player_cancel_expedition_ship(Ship &);
 
 	Interactive_Player * get_ipl();
 
@@ -186,8 +198,8 @@ struct Game : Editor_Game_Base {
 	void sample_statistics();
 
 	const std::string & get_win_condition_displayname() {return m_win_condition_displayname;}
-	// Returns the number of players (human or ai) occupying a slot.
-	uint8_t get_number_of_players() {return m_number_of_players;}
+
+	bool is_replay() const {return m_replay;};
 
 private:
 	void SyncReset();
@@ -253,7 +265,7 @@ private:
 
 	/// For save games and statistics generation
 	std::string          m_win_condition_displayname;
-	uint8_t              m_number_of_players;
+	bool                 m_replay;
 };
 
 inline Coords Game::random_location(Coords location, uint8_t radius) {

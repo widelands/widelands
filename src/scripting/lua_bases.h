@@ -22,7 +22,7 @@
 
 #include <lua.hpp>
 
-#include "luna.h"
+#include "scripting/luna.h"
 
 namespace LuaBases {
 
@@ -98,7 +98,9 @@ public:
 	int place_flag(lua_State * L);
 	int place_road(lua_State * L);
 	int place_building(lua_State * L);
+	int place_bob(lua_State* L);
 	int conquer(lua_State * L);
+	int get_workers(lua_State* L);
 
 	/*
 	 * C methods

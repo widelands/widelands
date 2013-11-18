@@ -17,24 +17,22 @@
  *
  */
 
-#include "ware_statistics_menu.h"
+#include "wui/ware_statistics_menu.h"
 
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
 #include "i18n.h"
-#include "interactive_player.h"
 #include "logic/player.h"
 #include "logic/tribe.h"
 #include "logic/warelist.h"
-#include "plot_area.h"
-#include "waresdisplay.h"
-
 #include "ui_basic/button.h"
 #include "ui_basic/checkbox.h"
-#include "ui_basic/textarea.h"
-#include "ui_basic/tabpanel.h"
 #include "ui_basic/slider.h"
-
+#include "ui_basic/tabpanel.h"
+#include "ui_basic/textarea.h"
+#include "wui/interactive_player.h"
+#include "wui/plot_area.h"
+#include "wui/waresdisplay.h"
 
 #define PLOT_HEIGHT 100
 

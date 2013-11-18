@@ -17,16 +17,17 @@
  *
  */
 
+#include "graphic/text/rt_parse.h"
+
+#include <vector>
+
 #include <SDL.h>
 #include <boost/format.hpp>
 #include <boost/unordered_map.hpp>
 #include <boost/unordered_set.hpp>
 
-#include <vector>
-
-#include "rt_parse.h"
-#include "textstream.h"
-#include "rt_errors_impl.h"
+#include "graphic/text/rt_errors_impl.h"
+#include "graphic/text/textstream.h"
 
 using namespace std;
 using namespace boost;
@@ -89,7 +90,7 @@ public:
 	void add_attribute(string name, Attr * a) {
 		m_attrs[name] = a;
 	}
-	const IAttr & operator[] (const std::string & s) const throw (AttributeNotFound) {
+	const IAttr & operator[] (const std::string & s) const {
 		map<string, Attr*>::const_iterator i = m_attrs.find(s);
 		if (i == m_attrs.end())
 			throw AttributeNotFound(s);

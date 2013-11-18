@@ -20,20 +20,20 @@
 #ifndef REQUIREMENTS_H
 #define REQUIREMENTS_H
 
+#include <climits>
 #include <map>
 #include <vector>
-#include <climits>
 
 #include <boost/shared_ptr.hpp>
 
-#include "tattribute.h"
-#include "widelands_fileread.h"
-#include "widelands_filewrite.h"
+#include "logic/tattribute.h"
+#include "logic/widelands_fileread.h"
+#include "logic/widelands_filewrite.h"
 
 namespace Widelands {
 
 class Map_Object;
-struct Editor_Game_Base;
+class Editor_Game_Base;
 struct Map_Map_Object_Loader;
 struct Map_Map_Object_Saver;
 

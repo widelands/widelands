@@ -23,10 +23,11 @@
 #include "chat.h"
 #include "gamecontroller.h"
 #include "gamesettings.h"
-#include "network.h"
+#include "network/network.h"
 
 struct NetClientImpl;
 
+//FIXME Use composition instead of inheritance
 /**
  * NetClient manages the lifetime of a network game in which this computer
  * participates as a client.
@@ -56,6 +57,8 @@ struct NetClient :
 	void setDesiredSpeed(uint32_t speed);
 	bool isPaused();
 	void setPaused(bool paused);
+	void report_result
+		(uint8_t player, Widelands::PlayerEndResult result, const std::string & info);
 	// End GameController interface
 
 	// GameSettingsProvider interface
@@ -92,7 +95,6 @@ struct NetClient :
 
 	// ChatProvider interface
 	void send(const std::string & msg);
-	void send_local(const std::string & msg);
 	const std::vector<ChatMessage> & getMessages() const;
 
 private:

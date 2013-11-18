@@ -40,7 +40,8 @@
  *
  * Convenience functions are provided for many data types.
  */
-struct StreamWrite : boost::noncopyable {
+class StreamWrite : boost::noncopyable {
+public:
 	explicit StreamWrite() {}
 	virtual ~StreamWrite();
 

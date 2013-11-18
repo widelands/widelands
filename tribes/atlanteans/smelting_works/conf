@@ -8,6 +8,9 @@ stone=4
 planks=1
 spidercloth=1
 
+[return_on_dismantle]
+stone=3
+
 [aihints]
 build_material=false
 

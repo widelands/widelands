@@ -17,24 +17,23 @@
  *
  */
 
-#include "economy.h"
+#include "economy/economy.h"
 
 #include <boost/bind.hpp>
 
-// Package includes
-#include "flag.h"
-#include "route.h"
-#include "cmd_call_economy_balance.h"
-#include "routeastar.h"
-#include "router.h"
-
+#include "economy/cmd_call_economy_balance.h"
+#include "economy/flag.h"
+#include "economy/request.h"
+#include "economy/route.h"
+#include "economy/routeastar.h"
+#include "economy/router.h"
+#include "economy/warehousesupply.h"
 #include "logic/game.h"
 #include "logic/player.h"
-#include "request.h"
+#include "logic/soldier.h"
 #include "logic/tribe.h"
-#include "upcast.h"
 #include "logic/warehouse.h"
-#include "warehousesupply.h"
+#include "upcast.h"
 #include "wexception.h"
 
 namespace Widelands {
@@ -91,12 +90,14 @@ Economy::~Economy()
 
 
 /**
- * \return an arbitrary flag in this economy, or 0 if no flag exists
+ * \return an arbitrary flag in this economy.
  */
-Flag & Economy::get_arbitrary_flag()
+Flag* Economy::get_arbitrary_flag()
 {
-	assert(m_flags.size());
-	return *m_flags[0];
+	if (m_flags.empty())
+		return nullptr;
+
+	return m_flags[0];
 }
 
 /**
@@ -742,7 +743,7 @@ void Economy::_process_requests(Game & game, RSPairStruct & s)
 			}
 		}
 
-		int32_t const priority = req.get_priority (cost);
+		int32_t const priority = req.get_priority(cost);
 		if (priority < 0)
 			continue;
 
@@ -796,6 +797,9 @@ void Economy::_balance_requestsupply(Game & game)
 		_start_request_timer(rsps.nexttimer);
 }
 
+
+std::unique_ptr<Soldier> Economy::m_soldier_prototype = nullptr; // minimal invasive fix of bug 1236538
+
 /**
  * Check whether there is a supply for the given request. If the request is a
  * worker request without supply, attempt to create a new worker in a warehouse.
@@ -803,6 +807,24 @@ void Economy::_balance_requestsupply(Game & game)
 void Economy::_create_requested_worker(Game & game, Ware_Index index)
 {
 	unsigned demand = 0;
+
+	bool soldier_level_check;
+	const Tribe_Descr & tribe = owner().tribe();
+	const Worker_Descr & w_desc = *tribe.get_worker_descr(index);
+
+	// Make a dummy soldier, which should never be assigned to any economy
+	// Minimal invasive fix of bug 1236538: never create a rookie for a request
+	// that required a hero.
+	if (upcast(const Soldier_Descr, s_desc, &w_desc)) {
+		if (!m_soldier_prototype) {
+			Soldier* test_rookie = static_cast<Soldier*> (&(s_desc->create_object()));
+			m_soldier_prototype.reset(test_rookie);
+		}
+		soldier_level_check = true;
+	} else {
+		soldier_level_check = false;
+	}
+
 
 	container_iterate_const(RequestList, m_requests, j) {
 		const Request & req = **j.current;
@@ -815,6 +837,13 @@ void Economy::_create_requested_worker(Game & game, Ware_Index index)
 		if (m_supplies.have_supplies(game, req))
 			continue;
 
+		// Requests for heroes should not trigger the creation of more rookies
+		if (soldier_level_check)
+		{
+			if (not (req.get_requirements().check(*m_soldier_prototype)))
+				continue;
+		}
+
 		demand += req.get_open_count();
 	}
 
@@ -824,8 +853,6 @@ void Economy::_create_requested_worker(Game & game, Ware_Index index)
 	// We have worker demand that is not fulfilled by supplies
 	// Find warehouses where we can create the required workers,
 	// and collect stats about existing build prerequisites
-	const Tribe_Descr & tribe = owner().tribe();
-	const Worker_Descr & w_desc = *tribe.get_worker_descr(index);
 	const Worker_Descr::Buildcost & cost = w_desc.buildcost();
 	std::vector<uint32_t> total_available;
 	uint32_t total_planned = 0;

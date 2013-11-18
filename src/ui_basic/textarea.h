@@ -23,8 +23,7 @@
 #include "align.h"
 #include "constants.h"
 #include "graphic/font.h"
-
-#include "panel.h"
+#include "ui_basic/panel.h"
 
 namespace UI {
 
@@ -98,6 +97,7 @@ private:
 
 	LayoutMode m_layoutmode;
 	std::string m_text;
+	const Image* m_text_image;
 	Align m_align;
 	TextStyle m_textstyle;
 };

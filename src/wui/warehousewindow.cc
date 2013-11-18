@@ -17,15 +17,15 @@
  *
  */
 
-#include "buildingwindow.h"
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
 #include "logic/player.h"
 #include "logic/playercommand.h"
 #include "logic/warehouse.h"
-#include "portdockwaresdisplay.h"
 #include "ui_basic/tabpanel.h"
-#include "waresdisplay.h"
+#include "wui/buildingwindow.h"
+#include "wui/portdockwaresdisplay.h"
+#include "wui/waresdisplay.h"
 
 using Widelands::Warehouse;
 
@@ -64,6 +64,11 @@ m_warehouse(wh)
 {
 	set_inner_size(width, 0);
 	add_warelist(type == Widelands::wwWORKER ? m_warehouse.get_workers() : m_warehouse.get_wares());
+	if (type == Widelands::wwWORKER) {
+		Widelands::Ware_Index carrier_index =
+			m_warehouse.descr().tribe().worker_index("carrier");
+		hide_ware(carrier_index);
+	}
 }
 
 void WarehouseWaresDisplay::draw_ware(RenderTarget & dst, Widelands::Ware_Index ware)

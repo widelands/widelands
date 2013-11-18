@@ -17,14 +17,13 @@
  *
  */
 
-#include "widelands_map_allowed_worker_types_data_packet.h"
+#include "map_io/widelands_map_allowed_worker_types_data_packet.h"
 
 #include "logic/game.h"
 #include "logic/game_data_error.h"
 #include "logic/player.h"
-#include "profile/profile.h"
 #include "logic/tribe.h"
-
+#include "profile/profile.h"
 #include "upcast.h"
 
 namespace Widelands {
@@ -36,7 +35,6 @@ void Map_Allowed_Worker_Types_Data_Packet::Read
 	 Editor_Game_Base      &       egbase,
 	 bool                    skip,
 	 Map_Map_Object_Loader &)
-throw (_wexception)
 {
 	if (skip)
 		return;
@@ -86,7 +84,6 @@ throw (_wexception)
 
 void Map_Allowed_Worker_Types_Data_Packet::Write
 	(FileSystem & fs, Editor_Game_Base & egbase, Map_Map_Object_Saver &)
-throw (_wexception)
 {
 	Profile prof;
 	prof.create_section("global").set_int

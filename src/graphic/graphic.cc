@@ -17,19 +17,31 @@
  *
  */
 
+#include "graphic/graphic.h"
+
 #include <cstring>
 #include <iostream>
 
-#include <boost/foreach.hpp>
-
 #include <SDL_image.h>
+#include <boost/foreach.hpp>
 #include <config.h>
 
 #include "build_info.h"
 #include "compile_diagnostics.h"
 #include "constants.h"
 #include "container_iterate.h"
-#include "diranimations.h"
+#include "graphic/animation.h"
+#include "graphic/animation_gfx.h"
+#include "graphic/diranimations.h"
+#include "graphic/font_handler.h"
+#include "graphic/image.h"
+#include "graphic/image_loader_impl.h"
+#include "graphic/image_transformations.h"
+#include "graphic/render/gl_surface_screen.h"
+#include "graphic/render/sdl_surface.h"
+#include "graphic/rendertarget.h"
+#include "graphic/surface_cache.h"
+#include "graphic/texture.h"
 #include "i18n.h"
 #include "io/fileread.h"
 #include "io/filesystem/layered_filesystem.h"
@@ -37,23 +49,10 @@
 #include "log.h"
 #include "logic/roadtype.h"
 #include "logic/widelands_fileread.h"
-#include "surface_cache.h"
 #include "ui_basic/progresswindow.h"
 #include "upcast.h"
 #include "wexception.h"
 
-#include "animation.h"
-#include "animation_gfx.h"
-#include "font_handler.h"
-#include "image.h"
-#include "image_loader_impl.h"
-#include "image_transformations.h"
-#include "render/gl_surface_screen.h"
-#include "render/sdl_surface.h"
-#include "rendertarget.h"
-#include "texture.h"
-
-#include "graphic.h"
 
 using namespace std;
 
@@ -86,7 +85,7 @@ Graphic::Graphic()
 	SDL_FreeSurface(s);
 }
 
-void Graphic::initialize(int32_t w, int32_t h, int32_t bpp, bool fullscreen, bool opengl) {
+void Graphic::initialize(int32_t w, int32_t h, bool fullscreen, bool opengl) {
 	cleanup();
 
 	// Set video mode using SDL. First collect the flags
@@ -105,16 +104,16 @@ void Graphic::initialize(int32_t w, int32_t h, int32_t bpp, bool fullscreen, boo
 		log("Graphics: Trying FULLSCREEN\n");
 	}
 
-	log("Graphics: Try to set Videomode %ux%u %uBit\n", w, h, bpp);
+	log("Graphics: Try to set Videomode %ux%u 32 Bit\n", w, h);
 	// Here we actually set the video mode
-	sdlsurface = SDL_SetVideoMode(w, h, bpp, flags);
+	sdlsurface = SDL_SetVideoMode(w, h, 32, flags);
 
 	// If we tried opengl and it was not successful try without opengl
 	if (!sdlsurface and opengl)
 	{
 		log("Graphics: Could not set videomode: %s, trying without opengl\n", SDL_GetError());
 		flags &= ~SDL_OPENGL;
-		sdlsurface = SDL_SetVideoMode(w, h, bpp, flags);
+		sdlsurface = SDL_SetVideoMode(w, h, 32, flags);
 	}
 
 	if (!sdlsurface)
@@ -358,11 +357,6 @@ int32_t Graphic::get_yres()
 	return screen_->height();
 }
 
-int32_t Graphic::get_bpp()
-{
-	return m_sdl_screen->format->BitsPerPixel;
-}
-
 bool Graphic::is_fullscreen()
 {
 	return m_sdl_screen->flags & SDL_FULLSCREEN;
@@ -515,7 +509,7 @@ void Graphic::save_png_(Surface & surf, StreamWrite * sw) const
 		uint16_t surf_h = surf.height();
 		uint32_t row_size = 4 * surf_w;
 
-		boost::scoped_array<png_byte> row(new png_byte[row_size]);
+		std::unique_ptr<png_byte[]> row(new png_byte[row_size]);
 
 		//Write each row
 		const SDL_PixelFormat & fmt = surf.format();
@@ -727,4 +721,3 @@ Surface& Graphic::get_road_texture(int32_t roadtex)
 	return
 		roadtex == Widelands::Road_Normal ? *pic_road_normal_.get() : *pic_road_busy_.get();
 }
-

@@ -17,19 +17,17 @@
  *
  */
 
-#include <boost/foreach.hpp>
+#include "graphic/texture.h"
 
 #include <SDL_image.h>
+#include <boost/foreach.hpp>
 
-#include "io/filesystem/layered_filesystem.h"
-#include "io/fileread.h"
-
-#include "log.h"
 #include "constants.h"
-#include "wexception.h"
 #include "container_iterate.h"
-
-#include "texture.h"
+#include "io/fileread.h"
+#include "io/filesystem/layered_filesystem.h"
+#include "log.h"
+#include "wexception.h"
 
 extern bool g_opengl;
 
@@ -50,6 +48,9 @@ Texture::Texture(const string& fnametmpl, uint32_t frametime, const SDL_PixelFor
 		is_32bit   (format.BytesPerPixel == 4),
 		m_was_animated(false)
 {
+	// TODO(sirver): There is no 16bit mode anymore. Kill is_32bit and replace through true.
+	assert(is_32bit);
+
 	// Load the images one by one
 	char fname[256];
 
@@ -220,6 +221,7 @@ Uint32 Texture::get_minimap_color(char shade) {
 		return m_mmap_color[128 + shade];
 
 	uint8_t clr = m_pixels[0]; // just use the top-left pixel
+
 	uint32_t table = static_cast<uint8_t>(shade);
 	return
 		is_32bit ?

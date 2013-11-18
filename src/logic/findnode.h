@@ -20,13 +20,14 @@
 #ifndef FINDNODE_H
 #define FINDNODE_H
 
-#include <stdint.h>
 #include <vector>
+
+#include <stdint.h>
 
 namespace Widelands {
 
 struct FCoords;
-struct Map;
+class Map;
 
 struct FindNode {
 private:

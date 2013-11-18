@@ -18,12 +18,12 @@
  */
 
 #include "random.h"
-#include "io/streamread.h"
-#include "io/streamwrite.h"
-#include "wexception.h"
 
 #include <cstdio>
 
+#include "io/streamread.h"
+#include "io/streamwrite.h"
+#include "wexception.h"
 
 RNG::RNG () : state0(0), state1(0) {}
 

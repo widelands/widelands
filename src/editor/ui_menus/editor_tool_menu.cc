@@ -17,34 +17,33 @@
  *
  */
 
-#include "editor_tool_menu.h"
-
-#include "editor_tool_change_resources_options_menu.h"
-#include "editor_tool_change_height_options_menu.h"
-#include "editor_tool_set_terrain_options_menu.h"
-#include "editor_tool_noise_height_options_menu.h"
-#include "editor_tool_place_immovable_options_menu.h"
-#include "editor_tool_place_bob_options_menu.h"
+#include "editor/ui_menus/editor_tool_menu.h"
 
 #include "editor/editorinteractive.h"
+#include "editor/tools/editor_decrease_height_tool.h"
+#include "editor/tools/editor_decrease_resources_tool.h"
+#include "editor/tools/editor_increase_height_tool.h"
+#include "editor/tools/editor_increase_resources_tool.h"
+#include "editor/tools/editor_noise_height_tool.h"
+#include "editor/tools/editor_place_bob_tool.h"
+#include "editor/tools/editor_place_immovable_tool.h"
+#include "editor/tools/editor_set_port_space_tool.h"
+#include "editor/tools/editor_set_terrain_tool.h"
+#include "editor/ui_menus/editor_tool_change_height_options_menu.h"
+#include "editor/ui_menus/editor_tool_change_resources_options_menu.h"
+#include "editor/ui_menus/editor_tool_noise_height_options_menu.h"
+#include "editor/ui_menus/editor_tool_place_bob_options_menu.h"
+#include "editor/ui_menus/editor_tool_place_immovable_options_menu.h"
+#include "editor/ui_menus/editor_tool_set_terrain_options_menu.h"
 #include "graphic/graphic.h"
 #include "i18n.h"
 #include "ui_basic/radiobutton.h"
 #include "ui_basic/textarea.h"
-#include "editor/tools/editor_increase_height_tool.h"
-#include "editor/tools/editor_decrease_height_tool.h"
-#include "editor/tools/editor_noise_height_tool.h"
-#include "editor/tools/editor_place_immovable_tool.h"
-#include "editor/tools/editor_set_port_space_tool.h"
-#include "editor/tools/editor_set_terrain_tool.h"
-#include "editor/tools/editor_place_bob_tool.h"
-#include "editor/tools/editor_increase_resources_tool.h"
-#include "editor/tools/editor_decrease_resources_tool.h"
 
 Editor_Tool_Menu::Editor_Tool_Menu
 	(Editor_Interactive & parent, UI::UniqueWindow::Registry & registry)
 :
-UI::UniqueWindow(&parent, "tool_menu", &registry, 350, 400, _("Tool Menu"))
+UI::UniqueWindow(&parent, "tool_menu", &registry, 350, 400, _("Tools"))
 {
 
 #define spacing 5
@@ -66,9 +65,9 @@ UI::UniqueWindow(&parent, "tool_menu", &registry, 350, 400, _("Tool Menu"))
 	ADD_BUTTON("change_height",    _("Change height"));
 	ADD_BUTTON("noise_height",     _("Noise height"));
 	ADD_BUTTON("set_terrain",      _("Terrain"));
-	ADD_BUTTON("place_immovable",  _("Immovable"));
-	ADD_BUTTON("place_bob",        _("Bob"));
-	ADD_BUTTON("change_resources", _("Resource"));
+	ADD_BUTTON("place_immovable",  _("Immovables"));
+	ADD_BUTTON("place_bob",        _("Bobs"));
+	ADD_BUTTON("change_resources", _("Resources"));
 	ADD_BUTTON("set_port_space",   _("Set port space"));
 
 	set_inner_size

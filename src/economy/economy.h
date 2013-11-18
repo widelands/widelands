@@ -20,29 +20,32 @@
 #ifndef ECONOMY_H
 #define ECONOMY_H
 
+#include <memory>
 #include <set>
 #include <vector>
 
 #include <boost/function.hpp>
 #include <boost/utility.hpp>
 
-#include "supply_list.h"
-#include "ui_basic/unique_window.h"
 #include "logic/instances.h"
 #include "logic/warelist.h"
 #include "logic/wareworker.h"
+#include "economy/supply_list.h"
+#include "ui_basic/unique_window.h"
 
 
 namespace Widelands {
-struct Player;
-struct Game;
-struct Flag;
-struct Route;
-struct RSPairStruct;
+
+class Game;
+class Player;
+class Soldier;
 class Warehouse;
+struct Flag;
+struct RSPairStruct;
 struct Request;
-struct Supply;
+struct Route;
 struct Router;
+struct Supply;
 
 /**
  * Each Economy represents all building and flags, which are connected over the same
@@ -91,7 +94,7 @@ public:
 	Economy(Player &);
 	~Economy();
 
-	Player & owner() const throw () {return m_owner;}
+	Player & owner() const {return m_owner;}
 
 	static void check_merge(Flag &, Flag &);
 	static void check_split(Flag &, Flag &);
@@ -111,7 +114,10 @@ public:
 	std::vector<Flag *>::size_type get_nrflags() const {return m_flags.size();}
 	void    add_flag(Flag &);
 	void remove_flag(Flag &);
-	Flag & get_arbitrary_flag();
+
+	// Returns an arbitrary flag or nullptr if this is an economy without flags
+	// (i.e. an Expedition ship).
+	Flag* get_arbitrary_flag();
 
 	void set_ware_target_quantity  (Ware_Index, uint32_t, Time);
 	void set_worker_target_quantity(Ware_Index, uint32_t, Time);
@@ -225,6 +231,9 @@ private:
 	 * excessive calls to the request/supply balancing logic.
 	 */
 	uint32_t m_request_timerid;
+
+	static std::unique_ptr<Soldier> m_soldier_prototype;
+
 };
 
 }

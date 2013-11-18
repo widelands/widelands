@@ -17,12 +17,12 @@
  *
  */
 
+#include "graphic/in_memory_image.h"
+
 #include <memory>
 
-#include "image.h"
-#include "surface.h"
-
-#include "in_memory_image.h"
+#include "graphic/image.h"
+#include "graphic/surface.h"
 
 using namespace std;
 
@@ -40,7 +40,8 @@ class InMemoryImage : public Image {
 public:
 	InMemoryImage(const string& ghash, Surface* surf) :
 		hash_(ghash), surf_(surf) {}
-	virtual ~InMemoryImage() {}
+	virtual ~InMemoryImage() {
+	}
 
 	// Implements Image.
 	virtual uint16_t width() const {return surf_->width();}

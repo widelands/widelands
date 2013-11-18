@@ -69,8 +69,8 @@ struct Fleet : Map_Object {
 
 	bool active() const;
 
-	virtual int32_t get_type() const throw ();
-	virtual char const * type_name() const throw ();
+	virtual int32_t get_type() const;
+	virtual char const * type_name() const;
 
 	virtual void init(Editor_Game_Base &);
 	virtual void cleanup(Editor_Game_Base &);

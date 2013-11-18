@@ -20,8 +20,7 @@
 #ifndef EDITOR_MAKE_INFRASTRUCTURE_TOOL_H
 #define EDITOR_MAKE_INFRASTRUCTURE_TOOL_H
 
-#include "editor_tool.h"
-
+#include "editor/tools/editor_tool.h"
 #include "ui_basic/unique_window.h"
 
 /**
@@ -31,16 +30,16 @@
 struct Editor_Make_Infrastructure_Tool : public Editor_Tool {
 	Editor_Make_Infrastructure_Tool() : Editor_Tool(*this, *this, false), m_player(0) {}
 
-	void set_player(Widelands::Player_Number const n) throw ()
+	void set_player(Widelands::Player_Number const n)
 		{m_player = n;}
-	Widelands::Player_Number get_player() const throw ()
+	Widelands::Player_Number get_player() const
 		{return m_player;}
 
 	int32_t handle_click_impl
 		(Widelands::Map & map, Widelands::Node_and_Triangle<> center,
 		 Editor_Interactive & parent, Editor_Action_Args & args);
 
-	const char * get_sel_impl() const throw ()
+	const char * get_sel_impl() const
 		{return "pics/fsel.png";} //  Standard sel icon, most complex tool of all
 
 private:

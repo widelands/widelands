@@ -22,18 +22,19 @@
 
 #include "logic/widelands_fileread.h"
 #include "logic/widelands_filewrite.h"
-#include "widelands_map_data_packet.h"
+#include "map_io/widelands_map_data_packet.h"
 
 namespace Widelands {
 
 class ConstructionSite;
 class Partially_Finished_Building;
 class DismantleSite;
-struct Game;
+class Game;
 class MilitarySite;
 class TrainingSite;
 class ProductionSite;
 class Warehouse;
+class Building;
 
 /*
  * This cares for the data of buildings
@@ -41,9 +42,9 @@ class Warehouse;
 struct Map_Buildingdata_Data_Packet : public Map_Data_Packet {
 	void Read
 		(FileSystem &, Editor_Game_Base &, bool, Map_Map_Object_Loader &)
-		throw (_wexception);
+	;
 	void Write(FileSystem &, Editor_Game_Base &, Map_Map_Object_Saver &)
-		throw (_wexception);
+	;
 
 private:
 	virtual void read_constructionsite
@@ -62,6 +63,8 @@ private:
 		(TrainingSite           &, FileRead  &, Game &, Map_Map_Object_Loader &);
 	virtual void read_productionsite
 		(ProductionSite         &, FileRead  &, Game &, Map_Map_Object_Loader &);
+	virtual void read_formerbuildings_v2
+		(Building               &, FileRead  &, Game &, Map_Map_Object_Loader &);
 
 	virtual void write_constructionsite
 		(const ConstructionSite &, FileWrite &, Game &, Map_Map_Object_Saver  &);

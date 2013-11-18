@@ -21,14 +21,14 @@
 #define RT_PARSER_H
 
 #include <map>
-#include <stdint.h>
 #include <set>
 #include <string>
 #include <vector>
 
-#include "rgbcolor.h"
+#include <stdint.h>
 
-#include "rt_errors.h"
+#include "rgbcolor.h"
+#include "graphic/text/rt_errors.h"
 
 namespace RT {
 
@@ -48,7 +48,7 @@ class IAttrMap {
 public:
 	virtual ~IAttrMap() {};
 
-	virtual const IAttr & operator[] (const std::string&) const throw (AttributeNotFound) = 0;
+	virtual const IAttr & operator[] (const std::string&) const = 0;
 	virtual bool has(const std::string &) const = 0;
 };
 
@@ -89,4 +89,3 @@ IParser * setup_parser();
 }
 
 #endif /* end of include guard: RT_PARSER_H */
-

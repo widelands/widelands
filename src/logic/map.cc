@@ -17,33 +17,34 @@
  *
  */
 
+#include "logic/map.h"
+
 #include <algorithm>
 #include <cstdio>
 
-#include "log.h"
+#include <boost/algorithm/string/predicate.hpp>
 
-#include "checkstep.h"
+#include "build_info.h"
 #include "economy/flag.h"
 #include "economy/road.h"
 #include "editor/tools/editor_increase_resources_tool.h"
-#include "findimmovable.h"
-#include "findnode.h"
 #include "io/filesystem/layered_filesystem.h"
+#include "log.h"
+#include "logic/checkstep.h"
+#include "logic/findimmovable.h"
+#include "logic/findnode.h"
+#include "logic/mapfringeregion.h"
+#include "logic/pathfield.h"
+#include "logic/player.h"
+#include "logic/soldier.h"
+#include "logic/tribe.h"
+#include "logic/worlddata.h"
 #include "map_generator.h"
 #include "map_io/widelands_map_loader.h"
-#include "mapfringeregion.h"
-#include "pathfield.h"
-#include "player.h"
 #include "s2map.h"
-#include "soldier.h"
-#include "tribe.h"
 #include "upcast.h"
 #include "wexception.h"
-#include "worlddata.h"
 #include "wui/overlay_manager.h"
-
-#include "map.h"
-
 
 
 namespace Widelands {
@@ -316,6 +317,8 @@ void Map::cleanup() {
 	m_scenario_closeables.clear();
 
 	m_tags.clear();
+	m_hint = std::string();
+	m_background = std::string();
 
 	if (m_overlay_manager)
 		m_overlay_manager->reset();
@@ -387,121 +390,31 @@ void Map::set_origin(Coords const new_origin) {
 	for (uint8_t i = get_nrplayers();              i;)
 		m_starting_pos[--i].reorigin(new_origin, extent());
 
-	//  Rearrange the fields. This is done in 2 steps. First each column is
-	//  rotated. Then each row is rotated. How to rotate an array is described
-	//  at [http://home.tiac.net/~cri/2004/frotate.html].
-	uint16_t const w = m_width, h = m_height;
+	Field * new_field_order = static_cast<Field *>(malloc(sizeof(Field)* m_width * m_height));
+	memset(new_field_order, 0, sizeof(Field) * m_width * m_height);
 
-
-	{ //  Rotate each column. This code is divided into 4 cases:
-		uint16_t const k = new_origin.y, nk = h - k;
-		//    * k = 0:
-		//        Do nothing.
-		//    * k = nk:
-		//        The new origin divides the column in 2 halves, which should
-		//        just be swapped.
-		//    * k < nk:
-		//        The new origin is in the first half. Increment = k.
-		//        Ascending run.
-		//    * k > nk:
-		//        The new origin is in the second half. Decrement = nk.
-		//        Descending run.
-		if        (k == nk) { //  swap first and last halves
-			for (X_Coordinate x = 0; x < w; ++x)
-				for (Y_Coordinate y1 = 0, y2 = k; y2 < h; ++y1, ++y2)
-					std::swap
-						(operator[] (Coords(x, y1)), operator[] (Coords(x, y2)));
-		} else if (k <  nk) { //  ascending run
-			for (X_Coordinate x = 0; x < w; ++x)
-				for (uint16_t first = 0, count = 0; count < k; ++first) {
-					const Field& t = operator[](Coords(x, first));
-					uint16_t const last = first + nk;
-					for (uint16_t index = first;;) {
-						++count;
-						while (index < nk) {
-							Field & dst = operator[](Coords(x, index));
-							dst = operator[](Coords(x, index += k));
-						}
-						if (index == last)
-							break;
-						Field & dst = operator[](Coords(x, index));
-						dst = operator[] (Coords(x, index -= nk));
-					}
-					operator[] (Coords(x, last)) = t;
-				}
-		} else if (k >  nk) { //  descending run
-			for (X_Coordinate x = 0; x < w; ++x)
-				for (uint16_t first = h - 1, count = 0; count < nk; --first) {
-					const Field& t = operator[](Coords(x, first));
-					uint16_t const last = first - k;
-					for (uint16_t index = first;;) {
-						++count;
-						while (index >= nk) {
-							Field & dst = operator[] (Coords(x, index));
-							dst = operator[] (Coords(x, index -= nk));
-						}
-						if (index == last)
-							break;
-						Field & dst = operator[] (Coords(x, index));
-						dst = operator[] (Coords(x, index += k));
-					}
-					operator[] (Coords(x, last)) = t;
-				}
+	// Rearrange The fields
+	// NOTE because of the triangle design, we have to take special care about cases
+	// NOTE where y is changed by an odd number
+	bool yisodd = (new_origin.y % 2) != 0;
+	for (FCoords c(Coords(0, 0)); c.y < m_height; ++c.y) {
+		bool cyisodd = (c.y % 2) != 0;
+		for (c.x = 0; c.x < m_width; ++c.x) {
+			Coords temp;
+			if (yisodd && cyisodd)
+				temp = Coords(c.x + new_origin.x + 1, c.y + new_origin.y);
+			else
+				temp = Coords(c.x + new_origin.x, c.y + new_origin.y);
+			normalize_coords(temp);
+			new_field_order[get_index(c, m_width)] = operator[](temp);
 		}
 	}
-
-	for (uint8_t i = 2; i;) { //  Rotate each odd row, then each even.
-		--i;
-		uint16_t k = new_origin.x;
-		if (i and (new_origin.y & 1) and ++k == w)
-			k = 0;
-		uint16_t const nk = w - k;
-		if      (k == nk)
-			for (Y_Coordinate y = i; y < h; y += 2)
-				for (X_Coordinate x1 = 0, x2 = k; x2 < w; ++x1, ++x2)
-					std::swap
-						(operator[] (Coords(x1, y)), operator[] (Coords(x2, y)));
-		else if (k <  nk)
-			for (Y_Coordinate y = i; y < h; y += 2)
-				for (uint16_t first = 0, count = 0; count < k; ++first) {
-					const Field& t = operator[] (Coords(first, y));
-					uint16_t const last = first + nk;
-					for (uint16_t index = first;;) {
-						++count;
-						while (index < nk) {
-							Field & dst = operator[] (Coords(index, y));
-							dst = operator[] (Coords(index += k, y));
-						}
-						if (index == last)
-							break;
-						Field & dst = operator[] (Coords(index, y));
-						dst = operator[] (Coords(index -= nk, y));
-					}
-					operator[] (Coords(last, y)) = t;
-				}
-		else if (k >  nk)
-			for (Y_Coordinate y = i; y < h; y += 2)
-				for (uint16_t first = w - 1, count = 0; count < nk; --first) {
-					const Field& t = operator[] (Coords(first, y));
-					uint16_t const last = first - k;
-					for (uint16_t index = first;;) {
-						++count;
-						while (index >= nk) {
-							Field & dst = operator[] (Coords(index, y));
-							dst = operator[] (Coords(index -= nk, y));
-						}
-						if (index == last)
-							break;
-						Field & dst = operator[] (Coords(index, y));
-						dst = operator[] (Coords(index += k, y));
-					}
-					operator[] (Coords(last, y)) = t;
-				}
-	}
+	// Now that we restructured the fields, we just overwrite the old order
+	m_fields = new_field_order;
 
 	//  Inform immovables and bobs about their new coordinates.
-	for (FCoords c(Coords(0, 0), m_fields); c.y < h; ++c.y)
-		for (c.x = 0; c.x < w; ++c.x, ++c.field) {
+	for (FCoords c(Coords(0, 0), m_fields); c.y < m_height; ++c.y)
+		for (c.x = 0; c.x < m_width; ++c.x, ++c.field) {
 			assert(c.field == &operator[] (c));
 			if (upcast(Immovable, immovable, c.field->get_immovable()))
 				immovable->m_position = c;
@@ -515,6 +428,20 @@ void Map::set_origin(Coords const new_origin) {
 				bob->m_position.field = c.field;
 			}
 		}
+
+	// Take care about port spaces
+	PortSpacesSet new_port_spaces;
+	for (PortSpacesSet::iterator it = m_port_spaces.begin(); it != m_port_spaces.end(); ++it) {
+		Coords temp;
+		if (yisodd && ((it->y % 2) == 0))
+			temp = Coords(it->x - new_origin.x - 1, it->y - new_origin.y);
+		else
+			temp = Coords(it->x - new_origin.x, it->y - new_origin.y);
+		normalize_coords(temp);
+		log("(%i,%i) -> (%i,%i)\n", it->x, it->y, temp.x, temp.y);
+		new_port_spaces.insert(temp);
+	}
+	m_port_spaces = new_port_spaces;
 }
 
 
@@ -1761,16 +1688,10 @@ void Map::get_neighbour
 	}
 }
 
-/**
- * Returns the correct initialized loader for the given mapfile
-*/
-Map_Loader * Map::get_correct_loader(char const * const filename) {
-	Map_Loader * result = 0;
+Map_Loader * Map::get_correct_loader(const std::string& filename) {
+	Map_Loader * result = nullptr;
 
-	if
-		(!
-		 strcasecmp
-		 	(filename + (strlen(filename) - strlen(WLMF_SUFFIX)), WLMF_SUFFIX))
+	if (boost::algorithm::ends_with(filename, WLMF_SUFFIX)) {
 		try {
 			result = new WL_Map_Loader(*g_fs->MakeSubFileSystem(filename), this);
 		} catch (...) {
@@ -1778,16 +1699,13 @@ Map_Loader * Map::get_correct_loader(char const * const filename) {
 			//  format)
 			//  TODO: catchall hides real errors! Replace with more specific code
 		}
-	else if
-		(!
-		 strcasecmp
-		 	(filename + (strlen(filename) - strlen(S2MF_SUFFIX)), S2MF_SUFFIX)
-		 |
-		 !
-		 strcasecmp
-		 	(filename + (strlen(filename) - strlen(S2MF_SUFFIX2)), S2MF_SUFFIX2))
+	} else if
+		(boost::algorithm::ends_with(filename, S2MF_SUFFIX) ||
+		 boost::algorithm::ends_with(filename, S2MF_SUFFIX2))
+	{
 		//  It is a S2 Map file. Load it as such.
-		result = new S2_Map_Loader(filename, *this);
+		result = new S2_Map_Loader(filename.c_str(), *this);
+	}
 
 	return result;
 }

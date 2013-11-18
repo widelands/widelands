@@ -17,7 +17,7 @@
  *
  */
 
-#include "network.h"
+#include "network/network.h"
 
 #include "log.h"
 #include "wlapplication.h"
@@ -214,7 +214,7 @@ bool Deserializer::avail() const
 }
 
 
-DisconnectException::DisconnectException(const char * fmt, ...) throw ()
+DisconnectException::DisconnectException(const char * fmt, ...)
 {
 	char buffer[512];
 	{

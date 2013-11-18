@@ -12,6 +12,14 @@ spidercloth=5
 diamond=2
 quartz=2
 
+[return_on_dismantle]
+trunk=1
+stone=3
+planks=2
+spidercloth=2
+diamond=1
+quartz=1
+
 [working positions]
 carrier=1
 
@@ -50,6 +58,7 @@ upgrade_evade_1=_Upgrade soldier evade 1 (only for compatibility with old savega
 
 [sleep]
 sleep=5000
+check_soldier=soldier attack 9    # dummy check to get sleep rated as skipped - else it will change statistics
 
 [upgrade_soldier_defense_0]
 check_soldier=soldier defense 0 # Fails when aren't any soldier of level 0 defense

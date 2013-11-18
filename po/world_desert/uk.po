@@ -7,15 +7,19 @@ msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2013-06-16 09:11+0000\n"
+"POT-Creation-Date: 2013-09-15 17:41+0000\n"
 "PO-Revision-Date: 2010-08-30 23:42+0000\n"
 "Last-Translator: Nasenbaer <Unknown>\n"
 "Language-Team: Ukrainian <uk@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-06-17 05:15+0000\n"
-"X-Generator: Launchpad (build 16667)\n"
+"X-Launchpad-Export-Date: 2013-09-16 04:48+0000\n"
+"X-Generator: Launchpad (build 16761)\n"
+
+#: ../../worlds/desert/terrainconf:35
+msgid "Beach"
+msgstr ""
 
 #: ../../worlds/desert/conf:71
 msgid "Beech"
@@ -69,6 +73,26 @@ msgstr "Олень"
 msgid "Desert"
 msgstr "Пустеля"
 
+#: ../../worlds/desert/terrainconf:8
+msgid "Desert1"
+msgstr ""
+
+#: ../../worlds/desert/terrainconf:13
+msgid "Desert2"
+msgstr ""
+
+#: ../../worlds/desert/terrainconf:18
+msgid "Desert3"
+msgstr ""
+
+#: ../../worlds/desert/terrainconf:23
+msgid "Desert4"
+msgstr ""
+
+#: ../../worlds/desert/terrainconf:29
+msgid "Dry soil"
+msgstr ""
+
 #: ../../worlds/desert/conf:87
 msgid "Duck"
 msgstr "Качка"
@@ -95,6 +119,10 @@ msgstr "Граніт"
 msgid "Grass"
 msgstr "Трава"
 
+#: ../../worlds/desert/terrainconf:57
+msgid "High mountain meadow"
+msgstr ""
+
 #: ../../worlds/desert/resconf:20
 msgid "Iron"
 msgstr "Залізо"
@@ -114,6 +142,34 @@ msgstr "Мала листвениця"
 #: ../../worlds/desert/conf:78
 msgid "Larch tiny"
 msgstr "Крихітна листвениця"
+
+#: ../../worlds/desert/terrainconf:96
+msgid "Lava"
+msgstr ""
+
+#: ../../worlds/desert/terrainconf:46
+msgid "Meadow"
+msgstr ""
+
+#: ../../worlds/desert/terrainconf:52
+msgid "Mountain meadow"
+msgstr ""
+
+#: ../../worlds/desert/terrainconf:62
+msgid "Mountain1"
+msgstr ""
+
+#: ../../worlds/desert/terrainconf:68
+msgid "Mountain2"
+msgstr ""
+
+#: ../../worlds/desert/terrainconf:74
+msgid "Mountain3"
+msgstr ""
+
+#: ../../worlds/desert/terrainconf:80
+msgid "Mountain4"
+msgstr ""
 
 #: ../../worlds/desert/conf:21
 #: ../../worlds/desert/conf:22
@@ -201,6 +257,10 @@ msgstr "Кістяк"
 msgid "Standing Stones"
 msgstr "Скелі"
 
+#: ../../worlds/desert/terrainconf:40
+msgid "Steppe"
+msgstr ""
+
 #: ../../worlds/desert/conf:45
 #: ../../worlds/desert/conf:46
 #: ../../worlds/desert/conf:47
@@ -219,6 +279,7 @@ msgid "This is the wide and sandy country of the bedouins"
 msgstr "Це широка, піщана країна бедуїнів"
 
 #: ../../worlds/desert/resconf:36
+#: ../../worlds/desert/terrainconf:89
 msgid "Water"
 msgstr "Вода"
 

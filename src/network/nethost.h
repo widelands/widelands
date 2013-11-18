@@ -20,10 +20,10 @@
 #ifndef NETHOST_H
 #define NETHOST_H
 
-#include "logic/widelands.h"
 #include "gamecontroller.h"
 #include "gamesettings.h"
-#include "network.h"
+#include "logic/widelands.h"
+#include "network/network.h"
 
 struct ChatMessage;
 struct NetHostImpl;
@@ -93,7 +93,7 @@ struct NetHost : public GameController, private SyncCallback {
 	void handle_dserver_command(std::string, std::string);
 	void dserver_send_maps_and_saves(Client &);
 
-	void report_result(uint8_t player, int32_t points, bool win, std::string extra);
+	void report_result(uint8_t player, Widelands::PlayerEndResult result, const std::string & info);
 
 	void forcePause() {
 		m_forced_pause = true;

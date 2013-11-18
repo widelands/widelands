@@ -1,0 +1,12 @@
+# Automatically created by Widelands bzr6716[widelands] (Debug)
+
+[global]
+packet_version="2"
+player_1="0 1"
+player_2="127 128"
+player_3="127 0"
+player_4="253 129"
+player_5="69 61"
+player_6="198 193"
+player_7="201 64"
+player_8="75 191"

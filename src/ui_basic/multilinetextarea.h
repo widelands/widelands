@@ -20,11 +20,10 @@
 #ifndef UI_MULTILINE_TEXTAREA_H
 #define UI_MULTILINE_TEXTAREA_H
 
-#include "rgbcolor.h"
 #include "align.h"
-
-#include "panel.h"
-#include "scrollbar.h"
+#include "ui_basic/panel.h"
+#include "rgbcolor.h"
+#include "ui_basic/scrollbar.h"
 
 namespace UI {
 struct Scrollbar;
@@ -55,8 +54,8 @@ struct Multiline_Textarea : public Panel {
 
 	void set_font(std::string name, int32_t size, RGBColor fg);
 
-	uint32_t scrollbar_w() const throw () {return 24;}
-	uint32_t get_eff_w() const throw () {return get_w() - scrollbar_w();}
+	uint32_t scrollbar_w() const {return 24;}
+	uint32_t get_eff_w() const {return get_w() - scrollbar_w();}
 
 	void set_color(RGBColor fg) {m_fcolor = fg;}
 

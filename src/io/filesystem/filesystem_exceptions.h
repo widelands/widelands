@@ -31,7 +31,7 @@ struct File_error : public std::runtime_error {
 		(const std::string & thrower,
 		 const std::string & filename,
 		 const std::string & message = "problem with file/directory")
-	throw ()
+
 		:
 		std::runtime_error(thrower + ": " + message + ": " + filename),
 		m_thrower         (thrower),
@@ -55,7 +55,7 @@ struct FileNotFound_error : public File_error {
 		(const std::string & thrower,
 		 const std::string & filename,
 		 const std::string & message = "could not find file or directory")
-	throw ()
+
 		: File_error(thrower, filename, message)
 	{}
 };
@@ -68,7 +68,7 @@ struct FileType_error : public File_error {
 		(const std::string & thrower,
 		 const std::string & filename,
 		 const std::string & message = "file or directory has wrong type")
-	throw ()
+
 		: File_error(thrower, filename, message)
 	{}
 };
@@ -81,7 +81,7 @@ struct FileAccessDenied_error : public File_error {
 		(const std::string & thrower,
 		 const std::string & filename,
 		 const std::string & message = "access denied on file or directory")
-	throw ()
+
 		: File_error(thrower, filename, message)
 	{}
 };
@@ -95,7 +95,7 @@ struct DirectoryCannotCreate_error : public File_error {
 		(const std::string & thrower,
 		 const std::string & dirname,
 		 const std::string & message = "cannot create directory")
-		throw ()
+
 		: File_error(thrower, dirname, message)
 	{}
 };

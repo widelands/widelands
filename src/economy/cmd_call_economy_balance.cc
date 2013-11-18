@@ -17,13 +17,13 @@
  *
  */
 
-#include "cmd_call_economy_balance.h"
+#include "economy/cmd_call_economy_balance.h"
 
-#include "economy.h"
+#include "economy/economy.h"
 #include "logic/game.h"
+#include "logic/player.h"
 #include "map_io/widelands_map_map_object_loader.h"
 #include "map_io/widelands_map_map_object_saver.h"
-#include "logic/player.h"
 #include "wexception.h"
 
 namespace Widelands {
@@ -32,7 +32,7 @@ Cmd_Call_Economy_Balance::Cmd_Call_Economy_Balance
 	(int32_t const starttime, Economy * const economy, uint32_t const timerid)
 	: GameLogicCommand(starttime)
 {
-	m_flag = &economy->get_arbitrary_flag();
+	m_flag = economy->get_arbitrary_flag();
 	m_timerid = timerid;
 }
 
@@ -71,7 +71,7 @@ void Cmd_Call_Economy_Balance::Read
 				uint16_t const economy_number = fr.Unsigned16();
 				if (economy_number < player->get_nr_economies())
 					m_flag =
-						&player->get_economy_by_number(economy_number)
+						player->get_economy_by_number(economy_number)
 						->get_arbitrary_flag();
 				else
 					throw wexception("invalid economy number %u", economy_number);

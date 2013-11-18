@@ -1,3 +1,0 @@
-replace(pos, 1, "ab");
-replace(pos, 2, "a");
-at(pos) = 'a';

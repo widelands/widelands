@@ -17,20 +17,17 @@
  *
  */
 
-#include "road.h"
+#include "economy/road.h"
 
-// Package includes
-#include "economy.h"
-#include "flag.h"
-
+#include "economy/economy.h"
+#include "economy/flag.h"
+#include "economy/request.h"
 #include "logic/carrier.h"
-#include "logic/instances.h"
-#include "logic/player.h"
-#include "request.h"
 #include "logic/editor_game_base.h"
 #include "logic/game.h"
+#include "logic/instances.h"
+#include "logic/player.h"
 #include "logic/tribe.h"
-
 #include "upcast.h"
 
 namespace Widelands {
@@ -108,23 +105,23 @@ Road & Road::create
 	return road;
 }
 
-int32_t Road::get_type() const throw ()
+int32_t Road::get_type() const
 {
 	return ROAD;
 }
 
-int32_t Road::get_size() const throw ()
+int32_t Road::get_size() const
 {
 	return SMALL;
 }
 
-bool Road::get_passable() const throw ()
+bool Road::get_passable() const
 {
 	return true;
 }
 
 BaseImmovable::PositionList Road::get_positions
-	(const Editor_Game_Base & egbase) const throw ()
+	(const Editor_Game_Base & egbase) const
 {
 	Map & map = egbase.map();
 	Coords curf = map.get_fcoords(m_path.get_start());
@@ -143,7 +140,7 @@ BaseImmovable::PositionList Road::get_positions
 }
 
 static std::string const road_name = "road";
-const std::string & Road::name() const throw () {return road_name;}
+const std::string & Road::name() const {return road_name;}
 
 
 Flag & Road::base_flag()

@@ -17,10 +17,10 @@
  *
  */
 
-#include "findbob.h"
+#include "logic/findbob.h"
 
-#include "player.h"
-#include "soldier.h"
+#include "logic/player.h"
+#include "logic/soldier.h"
 #include "upcast.h"
 
 namespace Widelands {

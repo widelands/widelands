@@ -11,6 +11,21 @@ wood=2
 stone=2
 marble=1
 
+[return_on_dismantle]
+trunk=1
+wood=1
+stone=1
+
+[enhancement_cost]
+trunk=1
+wood=2
+stone=1
+marble=1
+
+[return_on_dismantle_on_enhanced]
+wood=1
+stone=1
+
 [idle]
 pics=barrier_i_??.png
 hotspot=49 77

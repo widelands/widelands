@@ -17,26 +17,26 @@
  *
  */
 
+#include "logic/constructionsite.h"
+
 #include <cstdio>
+
 #include <boost/format.hpp>
 
-#include "editor_game_base.h"
-#include "i18n.h"
-#include "upcast.h"
-#include "wexception.h"
-
 #include "economy/wares_queue.h"
-#include "game.h"
 #include "graphic/animation.h"
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
+#include "i18n.h"
+#include "logic/editor_game_base.h"
+#include "logic/game.h"
+#include "logic/tribe.h"
+#include "logic/worker.h"
 #include "sound/sound_handler.h"
 #include "ui_basic/window.h"
+#include "upcast.h"
+#include "wexception.h"
 #include "wui/interactive_gamebase.h"
-#include "tribe.h"
-#include "worker.h"
-
-#include "constructionsite.h"
 
 namespace Widelands {
 
@@ -74,7 +74,6 @@ IMPLEMENTATION
 
 ConstructionSite::ConstructionSite(const ConstructionSite_Descr & cs_descr) :
 Partially_Finished_Building (cs_descr),
-m_prev_building  (0),
 m_fetchfromflag  (0),
 m_builder_idle   (false)
 {}
@@ -122,20 +121,6 @@ void ConstructionSite::set_building(const Building_Descr & building_descr) {
 }
 
 /*
- * Set previous building
- * That is the building that was here before, we're
- * an enhancement
- */
-void ConstructionSite::set_previous_building
-	(Building_Descr const * const previous_building_descr)
-{
-	assert(!m_prev_building);
-
-	m_prev_building = previous_building_descr;
-	m_info.was = previous_building_descr;
-}
-
-/*
 ===============
 Initialize the construction site by starting orders
 ===============
@@ -144,13 +129,23 @@ void ConstructionSite::init(Editor_Game_Base & egbase)
 {
 	Partially_Finished_Building::init(egbase);
 
+	const std::map<Ware_Index, uint8_t> * buildcost;
+	if (!m_old_buildings.empty()) {
+		// Enhancement
+		Building_Index was_index = m_old_buildings.back();
+		const Building_Descr* was_descr = tribe().get_building_descr(was_index);
+		m_info.was = was_descr;
+		buildcost = &m_building->enhancement_cost();
+	} else {
+		buildcost = &m_building->buildcost();
+	}
+
 	//  TODO figure out whether planing is necessary
 
 	//  initialize the wares queues
-	const std::map<Ware_Index, uint8_t> & buildcost = m_building->buildcost();
-	size_t const buildcost_size = buildcost.size();
+	size_t const buildcost_size = buildcost->size();
 	m_wares.resize(buildcost_size);
-	std::map<Ware_Index, uint8_t>::const_iterator it = buildcost.begin();
+	std::map<Ware_Index, uint8_t>::const_iterator it = buildcost->begin();
 
 	for (size_t i = 0; i < buildcost_size; ++i, ++it) {
 		WaresQueue & wq =
@@ -176,8 +171,10 @@ void ConstructionSite::cleanup(Editor_Game_Base & egbase)
 
 	if (m_work_steps <= m_work_completed) {
 		// Put the real building in place
+		Building_Index becomes_idx = tribe().building_index(m_building->name());
+		m_old_buildings.push_back(becomes_idx);
 		Building & b =
-			m_building->create(egbase, owner(), m_position, false);
+			m_building->create(egbase, owner(), m_position, false, false, m_old_buildings);
 		if (Worker * const builder = m_builder.get(egbase)) {
 			builder->reset_tasks(ref_cast<Game, Editor_Game_Base>(egbase));
 			builder->set_location(&b);
@@ -204,7 +201,7 @@ bool ConstructionSite::burn_on_destroy()
 	if (m_work_completed >= m_work_steps)
 		return false; // completed, so don't burn
 
-	return m_work_completed or m_prev_building;
+	return m_work_completed or !m_old_buildings.empty();
 }
 
 /*
@@ -392,14 +389,16 @@ void ConstructionSite::draw
 	if (cur_frame) //  not the first pic
 		//  draw the prev pic from top to where next image will be drawing
 		dst.drawanimrect(pos, anim, tanim - FRAME_LENGTH, get_owner(), Rect(Point(0, 0), w, h - lines));
-	else if (m_prev_building) {
+	else if (!m_old_buildings.empty()) {
+		Building_Index prev_idx = m_old_buildings.back();
+		const Building_Descr* prev_building = tribe().get_building_descr(prev_idx);
 		//  Is the first picture but there was another building here before,
 		//  get its most fitting picture and draw it instead.
 		uint32_t a;
 		try {
-			a = m_prev_building->get_animation("unoccupied");
+			a = prev_building->get_animation("unoccupied");
 		} catch (Map_Object_Descr::Animation_Nonexistent &) {
-			a = m_prev_building->get_animation("idle");
+			a = prev_building->get_animation("idle");
 		}
 		uint32_t wa, ha;
 		g_gr->get_animation_size(a, tanim, wa, ha);

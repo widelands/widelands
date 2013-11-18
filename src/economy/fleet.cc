@@ -17,11 +17,13 @@
  *
  */
 
-#include "fleet.h"
+#include "economy/fleet.h"
 
 #include "container_iterate.h"
-#include "economy.h"
-#include "flag.h"
+#include "economy/economy.h"
+#include "economy/flag.h"
+#include "economy/portdock.h"
+#include "economy/routing_node.h"
 #include "logic/game.h"
 #include "logic/mapastar.h"
 #include "logic/path.h"
@@ -30,8 +32,6 @@
 #include "logic/warehouse.h"
 #include "map_io/widelands_map_map_object_loader.h"
 #include "map_io/widelands_map_map_object_saver.h"
-#include "portdock.h"
-#include "routing_node.h"
 #include "upcast.h"
 
 namespace Widelands {
@@ -52,12 +52,12 @@ Fleet::Fleet(Player & player) :
 {
 }
 
-int32_t Fleet::get_type() const throw ()
+int32_t Fleet::get_type() const
 {
 	return FLEET;
 }
 
-char const * Fleet::type_name() const throw ()
+char const * Fleet::type_name() const
 {
 	return "fleet";
 }
@@ -173,7 +173,11 @@ void Fleet::find_other_fleet(Editor_Game_Base & egbase)
 				continue;
 
 			if (upcast(Ship, ship, bob)) {
-				if (ship->get_fleet() != this && ship->get_owner() == get_owner()) {
+				if
+					(ship->get_fleet() != nullptr &&
+					 ship->get_fleet() != this &&
+					 ship->get_owner() == get_owner())
+				{
 					ship->get_fleet()->merge(egbase, this);
 					return;
 				}
@@ -748,7 +752,6 @@ Map_Object::Loader * Fleet::load
 
 	try {
 		// The header has been peeled away by the caller
-
 		uint8_t const version = fr.Unsigned8();
 		if (1 <= version && version <= FLEET_SAVEGAME_VERSION) {
 			Player_Number owner_number = fr.Unsigned8();

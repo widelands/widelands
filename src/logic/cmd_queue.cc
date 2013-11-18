@@ -17,20 +17,19 @@
  *
  */
 
-#include "cmd_queue.h"
+#include "logic/cmd_queue.h"
 
 #include "io/filewrite.h"
-#include "game.h"
-#include "game_data_error.h"
-#include "instances.h"
+#include "logic/game.h"
+#include "logic/game_data_error.h"
+#include "logic/instances.h"
+#include "logic/player.h"
+#include "logic/playercommand.h"
+#include "logic/widelands_fileread.h"
+#include "logic/worker.h"
 #include "machdep.h"
-#include "player.h"
-#include "playercommand.h"
-#include "wexception.h"
-#include "widelands_fileread.h"
-#include "worker.h"
-
 #include "upcast.h"
+#include "wexception.h"
 
 namespace Widelands {
 
@@ -99,13 +98,6 @@ void Cmd_Queue::enqueue (Command * const cmd)
 	++ m_ncmds;
 }
 
-/**
- * Run all commands scheduled for the next interval milliseconds, and update the
- * internal time as well.
- * the game_time_var represents the current game time, which we update and with
- * which we must mess around (to run all queued cmd.s) and which we update (add
- * the interval)
- */
 int32_t Cmd_Queue::run_queue(int32_t const interval, int32_t & game_time_var) {
 	int32_t const final = game_time_var + interval;
 	int32_t cnt = 0;

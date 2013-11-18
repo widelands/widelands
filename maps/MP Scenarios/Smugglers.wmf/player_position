@@ -1,8 +1,8 @@
-# Automatically created by Widelands bzr5785[scenarios] (RelWithDebInfo)
+# Automatically created by Widelands bzr6743[widelands] (Debug)
 
 [global]
 packet_version="2"
-player_1="54 84"
-player_2="103 42"
+player_1="49 91"
+player_2="96 42"
 player_3="100 93"
-player_4="48 39"
+player_4="47 36"

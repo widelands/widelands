@@ -17,9 +17,9 @@
  *
  */
 
-#include "widelands_streamread.h"
+#include "logic/widelands_streamread.h"
 
-#include "tribe.h"
+#include "logic/tribe.h"
 
 namespace Widelands {
 

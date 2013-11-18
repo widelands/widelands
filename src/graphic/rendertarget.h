@@ -23,16 +23,15 @@
 #include <vector>
 
 #include "align.h"
+#include "graphic/compositemode.h"
+#include "graphic/image.h"
 #include "rect.h"
 #include "rgbcolor.h"
-
-#include "compositemode.h"
-#include "image.h"
 
 class Surface;
 
 namespace Widelands {
-struct Player;
+class Player;
 };
 
 /**
@@ -94,7 +93,7 @@ public:
 	const Point & get_offset() const {return m_offset;}
 
 protected:
-	bool clip(Rect & r) const throw ();
+	bool clip(Rect & r) const;
 
 	void doblit(Point dst, const Image* src, Rect srcrc, Composite cm = CM_Normal);
 

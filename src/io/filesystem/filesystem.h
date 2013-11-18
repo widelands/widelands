@@ -20,21 +20,21 @@
 #ifndef FILESYSTEM_H
 #define FILESYSTEM_H
 
-#include "filesystem_exceptions.h"
-
-#include <stdint.h>
 #include <cstring>
+#include <memory>
 #include <set>
 #include <stdexcept>
 #include <string>
 #include <vector>
-#include <memory>
 
+#include <stdint.h>
+
+#include "io/filesystem/filesystem_exceptions.h"
 
 typedef std::set<std::string> filenameset_t;
 
-struct StreamRead;
-struct StreamWrite;
+class StreamRead;
+class StreamWrite;
 
 
 /**
@@ -109,7 +109,7 @@ public:
 	virtual void Rename(const std::string &, const std::string &) = 0;
 
 	static FileSystem & Create(const std::string & root)
-	throw (FileType_error, FileNotFound_error, FileAccessDenied_error);
+;
 
 	///Retrieve the filesystem root's name == the mountpoint inside a
 	///LayeredFileSystem
