@@ -7,13 +7,13 @@ msgstr ""
 "Project-Id-Version: Widelands svn4866\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2013-09-15 17:41+0000\n"
-"PO-Revision-Date: 2013-11-17 16:59+0000\n"
+"PO-Revision-Date: 2013-11-18 11:56+0000\n"
 "Last-Translator: Emmanuel Andry <Unknown>\n"
 "Language-Team: French <eandry@mandriva.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-11-18 05:16+0000\n"
+"X-Launchpad-Export-Date: 2013-11-19 05:13+0000\n"
 "X-Generator: Launchpad (build 16831)\n"
 
 #: ../../txts/README.lua:73
@@ -45,6 +45,10 @@ msgid ""
 "crashes where it can be hard to tell exactly what is triggering it), please\n"
 "include that too. For more information, see the section on Replays below."
 msgstr ""
+"- Si vous avez une sauvegarde de jeu ou replay montrant le problème \n"
+"(par exemple les plantages où il peut être difficile de dire exactement\n"
+" ce qui les déclenche), merci de les inclure. Pour plus d'informations,\n"
+" voir la section sur les replays ci-dessous."
 
 #: ../../txts/README.lua:106
 msgid ""
@@ -153,7 +157,7 @@ msgstr "C        Afficher/Masquer le Recensement"
 
 #: ../../txts/README.lua:67
 msgid "C: toggles census"
-msgstr ""
+msgstr "C: Affiche/cache le recensement"
 
 #: ../../txts/README.lua:77
 msgid "CTRL+F10: quits the game immediately"
@@ -325,7 +329,7 @@ msgstr "I        Active l'outil d'information"
 
 #: ../../txts/README.lua:69
 msgid "I: toggles stock inventory"
-msgstr ""
+msgstr "I: Affiche/cache l'inventaire du stock"
 
 #: ../../txts/README.lua:93
 msgid "If you encounter a bug, please report it to our bugtracker:"
@@ -468,7 +472,7 @@ msgstr "Musiciens"
 
 #: ../../txts/README.lua:66
 msgid "N: toggles messages ('news')"
-msgstr ""
+msgstr "N: Affiche/cache les messages (\"Nouvelles\")"
 
 #: ../../txts/developers:181
 msgid ""
@@ -626,6 +630,15 @@ msgid ""
 "~/.widelands/replays directory on Linux and Mac OS X. On Windows,\n"
 "they are in the 'replays' subdirectory of your Widelands installation."
 msgstr ""
+"Les replays sont un outil très utile pour trouver des bogues dans la "
+"logique\n"
+" du jeu, de sorte qu'ils peut être utile en tant que pièces jointes à des "
+"rapports\n"
+" de bogues. Les fichiers de replay sont enregistrés dans le dossier~ / "
+".widelands/replays\n"
+" sur Linux et Mac OS X. Sous Windows, ils sont dans le sous-dossier "
+"«replays» \n"
+"de votre installation Widelands."
 
 #: ../../txts/README.lua:91
 msgid "Reporting Bugs"
@@ -658,7 +671,7 @@ msgstr ""
 
 #: ../../txts/README.lua:64
 msgid "SPACE: toggles build-help"
-msgstr ""
+msgstr "ESPACE: Affiche/cache l'aide à la construction"
 
 #: ../../txts/developers:182
 msgid ""
@@ -780,6 +793,12 @@ msgid ""
 "left\n"
 "mousebutton while holding down CTRL."
 msgstr ""
+"Pour fermer une fenêtre ouverte, faire un clic droit dessus. Pour minimiser "
+"/ maximiser\n"
+" une fenêtre, cliquez sur sur la barre de titre de cette fenêtre soit avec "
+"le bouton du milieu\n"
+"de la souris soit avec le bouton gauche tout en maintenant la touche CTRL "
+"enfoncée."
 
 #: ../../txts/developers:366
 msgid "Translation"
@@ -833,10 +852,24 @@ msgid ""
 "a\n"
 "different version of the game."
 msgstr ""
+"En utilisant l'option voir Replay dans le menu principal, un jeu joué "
+"précédemment\n"
+" sera précisément reconstruit pour que vous le regardiez. Notez, cependant, "
+"que \n"
+"même les petits changements dans les fichiers de données de jeu ou "
+"l'exécutable \n"
+"Widelands peuvent provoquer une incompatibilité du replay et à «sortir de la "
+"\n"
+"synchronisation\". Ceci est similaire à la façon dont les parties en réseau "
+"vont souffrir\n"
+" de problèmes de désynchronisation si l'un des joueurs a une version "
+"différente \n"
+"du jeu."
 
 #: ../../txts/license:16
 msgid "We are also shipping the GPL as text document with Widelands itself."
 msgstr ""
+"Nous fournissons également la GPL en tant que document texte avec Widelands."
 
 #: ../../txts/developers:3
 msgid "Widelands Development Team"
@@ -900,6 +933,16 @@ msgid ""
 "tell\n"
 "you the time you started the game."
 msgstr ""
+"Widelands enregistre chaque partie que vous jouez dans deux fichiers.\n"
+" Un de ces fichiers a une extension .wrpl.wgf et contient la sauvegarde du "
+"jeu\n"
+" initial. L'autre fichier possède une extension. wrpl et contient toutes les "
+"commandes\n"
+" qui ont été émises par l'ensemble des acteurs, tels que la construction "
+"d'une route \n"
+"ou l'attaque d'un ennemi. Le reste des noms de fichiers vous donnera l'heure "
+"à laquelle \n"
+"vous avez commencé la partie."
 
 #: ../../txts/tips/editor.tip:2
 msgid ""
