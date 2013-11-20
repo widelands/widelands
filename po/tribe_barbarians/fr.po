@@ -7,13 +7,13 @@ msgstr ""
 "Project-Id-Version: Widelands svn4866\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2013-09-15 17:41+0000\n"
-"PO-Revision-Date: 2013-11-18 13:51+0000\n"
-"Last-Translator: Emmanuel Andry <Unknown>\n"
+"PO-Revision-Date: 2013-11-19 14:20+0000\n"
+"Last-Translator: Nasenbaer <Unknown>\n"
 "Language-Team: Language <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-11-19 05:13+0000\n"
+"X-Launchpad-Export-Date: 2013-11-20 05:14+0000\n"
 "X-Generator: Launchpad (build 16831)\n"
 
 #: ../../tribes/barbarians/axefactory/help.lua:12
@@ -1313,7 +1313,7 @@ msgstr "Mine de granit"
 #: ../../tribes/barbarians/warmill/help.lua:46
 #: ../../tribes/barbarians/warmill/help.lua:52
 msgid "Grout"
-msgstr "Ciment"
+msgstr "Chaux"
 
 #: ../../tribes/barbarians/ferner/conf:1
 msgid "Grows thatch reed."
@@ -2215,8 +2215,8 @@ msgid ""
 "Raw stone can be processed into grout which provides a solid, non burning "
 "building material. Grout is produced in a lime kiln."
 msgstr ""
-"La pierre brute peut être transformée en ciment qui donne un matériau de "
-"construction solide et ininflammable. Le ciment est produit dans un four à "
+"La pierre brute peut être transformée en chaux qui donne un matériau de "
+"construction solide et ininflammable. La chaux est produite dans un four à "
 "chaux."
 
 #: ../../tribes/barbarians/conf:47
@@ -2739,7 +2739,7 @@ msgid ""
 "The Limekiln processes Raw Stones to make \"Grout\", a substance that "
 "solidifies and so reinforces masonry."
 msgstr ""
-"Le four à chaux traite les pierres brutes pour faire du \"ciment\", une "
+"Le four à chaux traite les pierres brutes pour faire de la \"chaux\", une "
 "substance qui se solidifie et renforce donc la maçonnerie."
 
 #: ../../tribes/barbarians/lime_kiln/help.lua:32

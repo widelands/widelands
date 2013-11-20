@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2013-09-15 17:41+0000\n"
-"PO-Revision-Date: 2013-11-17 16:46+0000\n"
+"PO-Revision-Date: 2013-11-19 14:40+0000\n"
 "Last-Translator: Emmanuel Andry <Unknown>\n"
 "Language-Team: French <fr@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-11-18 05:16+0000\n"
+"X-Launchpad-Export-Date: 2013-11-20 05:14+0000\n"
 "X-Generator: Launchpad (build 16831)\n"
 
 #: ../../scripting/win_condition_texts.lua:31
@@ -23,7 +23,7 @@ msgstr "%i arbres."
 
 #: ../../scripting/win_condition_texts.lua:55
 msgid "%s %s %i%% of the land (%i of %i)."
-msgstr "%s %s %i%% du territoire (%i of %i)."
+msgstr "%s %s %i%% du territoire (%i de %i)."
 
 #: ../../scripting/win_condition_texts.lua:30
 msgid "%s had "
@@ -81,7 +81,7 @@ msgid ""
 msgstr ""
 "Chaque joueur ou équipe tente de posséder plus de la moitié de la surface de "
 "la carte. Le vainqueur sera le joueur ou l'équipe qui gardera ce territoire "
-"pour au moins 20 minutes."
+"pendant au moins 20 minutes."
 
 #: ../../scripting/win_conditions/00_endless_game.lua:12
 msgid "Endless Game"
@@ -198,12 +198,12 @@ msgid ""
 "You lost your last warehouse and are therefore defeated. You may continue as "
 "spectator if you want."
 msgstr ""
-"Vous avez perdu votre dernier entrepôt. Vous avez donc perdu. Vous pouvez "
+"Vous avez perdu votre dernier entrepôt et êtes donc vaincu. Vous pouvez "
 "continuer le jeu en spectateur si vous le désirez."
 
 #: ../../scripting/win_condition_texts.lua:48
 msgid "You own more than half of the maps area."
-msgstr "Vous possédez plus le la moitié de la carte"
+msgstr "Vous possédez plus le la moitié de la carte."
 
 #: ../../scripting/win_condition_texts.lua:47
 msgid "You still got %i minutes to prevent a victory."

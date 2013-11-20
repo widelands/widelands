@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: Widelands svn4866\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2013-09-15 19:41+0200\n"
-"PO-Revision-Date: 2013-11-17 16:08+0000\n"
+"PO-Revision-Date: 2013-11-19 11:24+0000\n"
 "Last-Translator: Emmanuel Andry <Unknown>\n"
 "Language-Team: French <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Launchpad-Export-Date: 2013-11-18 05:16+0000\n"
+"X-Launchpad-Export-Date: 2013-11-20 05:14+0000\n"
 "X-Generator: Launchpad (build 16831)\n"
 
 #: ../../src/computer_player.cc:38
@@ -338,7 +338,7 @@ msgstr ""
 "Signalement de bogue ? Suggestions ? Venez visiter le site web du projet:\n"
 "        https://launchpad.net/widelands\n"
 "\n"
-"Nous espérons que vous avez apprécié ce jeu !\n"
+"Nous espérons que vous appréciez ce jeu !\n"
 "\n"
 
 #: ../../src/wlapplication.cc:1525
@@ -571,7 +571,7 @@ msgstr "Types d'ouvriers"
 
 #: ../../src/writeHTML.cc:516
 msgid "Needed<br/>experience"
-msgstr "Besoin<br/>expérience"
+msgstr "Expérience<br/>nécessaire"
 
 #: ../../src/writeHTML.cc:518
 msgid "Becomes"
@@ -662,16 +662,16 @@ msgstr "Entrées"
 #: ../../src/writeHTML.cc:807
 #, c-format
 msgid "%s's input"
-msgstr "entrées de %s"
+msgstr "entrée de %s"
 
 #: ../../src/writeHTML.cc:819
 msgid "Output"
-msgstr "Sorties"
+msgstr "Sortie"
 
 #: ../../src/writeHTML.cc:830 ../../src/writeHTML.cc:844
 #, c-format
 msgid "%s's output"
-msgstr "sorties de %s"
+msgstr "sortie de %s"
 
 #: ../../src/writeHTML.cc:893 ../../src/writeHTML.cc:1037
 #: ../../src/writeHTML.cc:1100 ../../src/writeHTML.cc:1129
@@ -766,12 +766,12 @@ msgstr "Types de marchandises"
 #: ../../src/map_io/widelands_map_waredata_data_packet.cc:206
 #, c-format
 msgid "unknown/unhandled version %u"
-msgstr "version inconnue ou non gérée (%u)"
+msgstr "version %u inconnue ou non gérée"
 
 #: ../../src/economy/cmd_call_economy_balance.cc:88
 #, c-format
 msgid "call economy balance: %s"
-msgstr "Appeler la balance économique: %s"
+msgstr "Afficher la balance économique: %s"
 
 #: ../../src/economy/economy_data_packet.cc:61
 #: ../../src/economy/economy_data_packet.cc:80
@@ -787,7 +787,7 @@ msgstr "Quantité cible: %s"
 #: ../../src/economy/economy_data_packet.cc:96
 #, c-format
 msgid "unknown version %u"
-msgstr "Version inconnue %u"
+msgstr "Version %u inconnue"
 
 #: ../../src/economy/economy_data_packet.cc:99
 #, c-format
@@ -951,7 +951,7 @@ msgstr "Scénario"
 #: ../../src/map_io/widelands_map_port_spaces_data_packet.cc:61
 #, c-format
 msgid "unknown/unhandled version %i"
-msgstr "version inconnue ou non prise en charge : %i"
+msgstr "version %i inconnue ou non prise en charge"
 
 #: ../../src/game_io/game_preload_data_packet.cc:107
 #, c-format
@@ -1003,7 +1003,7 @@ msgstr "inconnu"
 #: ../../src/logic/battle.cc:174
 #, c-format
 msgid "[battle] soldier %u lose battle\n"
-msgstr "[Bataille] le soldat %u a perdu la bataille\n"
+msgstr "[bataille] le soldat %u a perdu la bataille\n"
 
 #: ../../src/logic/battle.cc:178
 #, c-format
@@ -1131,7 +1131,7 @@ msgstr ""
 #: ../../src/logic/immovable.cc:141 ../../src/logic/production_program.cc:1647
 #, c-format
 msgid "unknown command type \"%s\""
-msgstr "Type de commande inconnue \"%s\""
+msgstr "Type de commande \"%s\" inconnue"
 
 #: ../../src/logic/immovable.cc:145
 msgid "no actions"

@@ -7,13 +7,13 @@ msgstr ""
 "Project-Id-Version: Widelands svn4866\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2013-09-15 17:41+0000\n"
-"PO-Revision-Date: 2013-11-18 12:54+0000\n"
+"PO-Revision-Date: 2013-11-19 14:27+0000\n"
 "Last-Translator: Emmanuel Andry <Unknown>\n"
 "Language-Team: Language <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-11-19 05:13+0000\n"
+"X-Launchpad-Export-Date: 2013-11-20 05:14+0000\n"
 "X-Generator: Launchpad (build 16831)\n"
 
 #: ../../tribes/empire/meal/conf:1
@@ -1073,7 +1073,7 @@ msgid ""
 "vineyard and processed in a winery."
 msgstr ""
 "Ces raisins sont la base d'un vin savoureux. Ils sont récoltés dans les "
-"vignobles et traités dans une cave."
+"vignobles et transformés dans un pressoir."
 
 #: ../../tribes/empire/basket/conf:1
 msgid ""
@@ -1164,8 +1164,8 @@ msgid ""
 "This tasty wine is consumed in marble and gold mines. It is produced in a "
 "winery."
 msgstr ""
-"Ce vin goûteux est consommé dans les mines de marbre et d'or. Il est produit "
-"dans une cave."
+"Ce vin savoureux est consommé dans les mines de marbre et d'or. Il est "
+"produit dans un pressoir."
 
 #: ../../tribes/empire/wood_lance/conf:1
 msgid ""
@@ -1430,7 +1430,7 @@ msgstr "Vin"
 
 #: ../../tribes/empire/conf:182
 msgid "Winery"
-msgstr "Vinerie"
+msgstr "Pressoir"
 
 #: ../../tribes/empire/conf:98
 msgid "Wood"
