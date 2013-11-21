@@ -7,13 +7,13 @@ msgstr ""
 "Project-Id-Version: Widelands svn4866\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2013-09-15 17:41+0000\n"
-"PO-Revision-Date: 2013-11-19 14:20+0000\n"
-"Last-Translator: Nasenbaer <Unknown>\n"
+"PO-Revision-Date: 2013-11-20 12:57+0000\n"
+"Last-Translator: Emmanuel Andry <Unknown>\n"
 "Language-Team: Language <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-11-20 05:14+0000\n"
+"X-Launchpad-Export-Date: 2013-11-21 05:11+0000\n"
 "X-Generator: Launchpad (build 16831)\n"
 
 #: ../../tribes/barbarians/axefactory/help.lua:12
@@ -199,7 +199,7 @@ msgstr "%s d'une auberge"
 #: ../../tribes/barbarians/axefactory/help.lua:26
 #: ../../tribes/barbarians/lime_kiln/help.lua:26
 msgid "%s from the Coal mine or the Charcoal Burner's House"
-msgstr "%s d'une mine de charbon ou d'une charbonnière"
+msgstr "%s d'une mine de charbon ou d'une maison du charbonnier"
 
 #: ../../tribes/barbarians/metalworks/help.lua:26
 msgid "%s from the Lumberjack's hut"
@@ -325,9 +325,9 @@ msgid ""
 "healthpoints level 0 to healphpoints level 1."
 msgstr ""
 "Un casque est l'outil de base de protection des guerriers. Il est produit "
-"dans la forge de casques et utilisé dans les camps d'entraînement - avec de "
-"la nourriture - pour améliorer les points de santé des soldats du niveau 0 "
-"au niveau 1."
+"dans la fabrique de casques et utilisé dans les camps d'entraînement - avec "
+"de la nourriture - pour améliorer les points de santé des soldats du niveau "
+"0 au niveau 1."
 
 #: ../../tribes/barbarians/meal/conf:1
 msgid ""
@@ -360,7 +360,7 @@ msgid ""
 "soldiers from healthpoints level 1 to level 2."
 msgstr ""
 "Un casque de guerre est une pièce avancée de l'armure des guerriers "
-"barbares. Il est produit dans les forges de casques et utilisé dans les "
+"barbares. Il est produit dans la fabrique de casques et utilisé dans les "
 "camps d'entraînement - avec de la nourriture - pour améliorer les points de "
 "santé des soldats du niveau 1 au niveau 2."
 
@@ -503,8 +503,8 @@ msgid ""
 "Beer is produced in micro breweries used in inns and big inns to produce "
 "snacks."
 msgstr ""
-"La bière est produite dans les micro brasseries et utilisée dans les grandes "
-"auberges pour produire des casse-croûtes."
+"La bière est produite dans les petites brasseries et utilisée dans les "
+"grandes auberges pour produire des casse-croûtes."
 
 #: ../../tribes/barbarians/fish/conf:1
 msgid ""
@@ -789,7 +789,8 @@ msgstr "Charbon"
 
 #: ../../tribes/barbarians/warmill/help.lua:27
 msgid "Coal from the Coal mine or the Charcoal Burner's House"
-msgstr "Charbon provenant de la mine de charbon ou de la charbonnerie."
+msgstr ""
+"Charbon provenant de la mine de charbon ou de la maison du charbonnier."
 
 #: ../../tribes/barbarians/coalmine/help.lua:17
 #: ../../tribes/barbarians/conf:211
@@ -1122,11 +1123,11 @@ msgstr "Champ mûr"
 
 #: ../../tribes/barbarians/conf:43
 msgid "Field small"
-msgstr "Champ petit"
+msgstr "Petit champ"
 
 #: ../../tribes/barbarians/conf:44
 msgid "Field tiny"
-msgstr "Champ très petit"
+msgstr "Champ minuscule"
 
 #: ../../tribes/barbarians/conf:82
 msgid "Fire Tongs"
@@ -1280,7 +1281,7 @@ msgstr ""
 "sont incrustées. Il est obtenu à partir du minerai d'or dans la fonderie. Il "
 "est utilisé comme précieux matériau de construction et pour produire "
 "différentes haches (dans le moulin de guerre) et différentes armures (dans "
-"la forge de casques)."
+"la fabrique de casques)."
 
 #: ../../tribes/barbarians/goldstone/conf:5
 msgid ""
@@ -1367,7 +1368,7 @@ msgstr "Forgeron de casques"
 #: ../../tribes/barbarians/deeper_coalmine/help.lua:31
 #: ../../tribes/barbarians/trainingscamp/help.lua:32
 msgid "Helmsmithy"
-msgstr "Forgeron de heaumes"
+msgstr "Fabrique de casques"
 
 #: ../../tribes/barbarians/ox/conf:1
 msgid "Helps to carry items at heavily used roads."
@@ -1559,7 +1560,7 @@ msgid ""
 msgstr ""
 "Le fer est extrait du minerai de fer dans les fonderies. Il est utilisé pour "
 "produire des armes et des outils dans la ferronerie, l'usine de hache, le "
-"moulin de guerre et la forge de casques."
+"moulin de guerre et la fabrique de casques."
 
 #: ../../tribes/barbarians/ironore/conf:1
 msgid ""
@@ -2229,11 +2230,11 @@ msgstr "Roseau mûr"
 
 #: ../../tribes/barbarians/conf:48
 msgid "Reed small"
-msgstr "Roseau petit"
+msgstr "Petit roseau"
 
 #: ../../tribes/barbarians/conf:49
 msgid "Reed tiny"
-msgstr "Roseau très petit"
+msgstr "Roseau minuscule"
 
 #: ../../tribes/barbarians/gamekeepers_hut/help.lua:16
 msgid "Releases animals into the wild to steady the meat production."
@@ -2672,7 +2673,7 @@ msgstr "La cabane de garde forestier Barbare"
 
 #: ../../tribes/barbarians/trainingscamp/help.lua:8
 msgid "The Barbarian Trainingscamp"
-msgstr "Le champ d'entraînement Barbare"
+msgstr "Le camp d'entraînement Barbare"
 
 #: ../../tribes/barbarians/warmill/help.lua:8
 msgid "The Barbarian War Mill"
@@ -2732,7 +2733,7 @@ msgstr "Le chasseur apporte de la bonne viande aux colons."
 #: ../../tribes/barbarians/hunters_hut/help.lua:23
 msgid "The Hunter's Hut needs animals in the vicinity to hunt."
 msgstr ""
-"La hutte du chasseur a besoin d'animaux dans le voisinage pour la chasse."
+"La cabane du chasseur a besoin d'animaux dans le voisinage pour la chasse."
 
 #: ../../tribes/barbarians/lime_kiln/help.lua:16
 msgid ""
@@ -2876,10 +2877,10 @@ msgid ""
 "be produced by the building if it is enhanced to an axefactory and war mill)."
 msgstr ""
 "Le marteau est un outil essentiel. Il est nécessaire au géologue, au "
-"bâtisseur, au forgeron et à l'armurier forgeron. Assurez-vous de toujours en "
-"avoir en réserve! C'est un outil basique produit dans la ferronnerie, (mais "
-"cesse d'être produit par le bâtiment si amélioré en usine de hache et moulin "
-"de guerre)."
+"bâtisseur, au forgeron et au forgeron de casques. Assurez-vous de toujours "
+"en avoir en réserve! C'est un outil basique produit dans la ferronnerie, "
+"(mais cesse d'être produit par le bâtiment si amélioré en usine de hache et "
+"moulin de guerre)."
 
 #: ../../tribes/barbarians/barrier/help.lua:8
 #: ../../tribes/barbarians/big_inn/help.lua:8
@@ -3361,7 +3362,7 @@ msgstr "Champ de vision :"
 
 #: ../../tribes/barbarians/conf:108
 msgid "War Helmet"
-msgstr "Heaume de guerre"
+msgstr "Casque de guerre"
 
 #: ../../tribes/barbarians/axefactory/help.lua:52
 #: ../../tribes/barbarians/coalmine/help.lua:32

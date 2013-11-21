@@ -7,13 +7,13 @@ msgstr ""
 "Project-Id-Version: Widelands svn4866\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2013-09-15 17:41+0000\n"
-"PO-Revision-Date: 2013-11-19 14:51+0000\n"
+"PO-Revision-Date: 2013-11-20 18:55+0000\n"
 "Last-Translator: Emmanuel Andry <Unknown>\n"
 "Language-Team: French <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-11-20 05:14+0000\n"
+"X-Launchpad-Export-Date: 2013-11-21 05:11+0000\n"
 "X-Generator: Launchpad (build 16831)\n"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:93
@@ -35,7 +35,7 @@ msgstr ""
 "scierie, afin de produire des matériaux de construction de base.<br> Mais "
 "nous ne devons pas oublier de préserver les ressources naturelles. Ces "
 "forêts doivent durer éternellement, aussi nous devrions vraiment construire "
-"une cabane de sylviculteur.\"<br><br>-- NOUVEL OBJECTIF --<br> "
+"une cabane de garde forestier.\"<br><br>-- NOUVEL OBJECTIF --<br> "
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:176
 msgid ""
@@ -79,11 +79,11 @@ msgstr ""
 "deux montagnes supplémentaires et il semble que celle-ci recèle de grandes "
 "quantités de charbon, et celle-là de minerai de fer. Nous devrions "
 "immédiatement commencer la construction de mines de fer et aussi de charbon "
-"(ou au moins un charbonnier), des fonderies, des forges d'outils et des "
+"(ou au moins un charbonnier), des fonderies, des fabriques d'outils et des "
 "forges d'armes et d'armures.<br> Cependant, pour ces grands bâtiments, nous "
 "aurons besoin de meilleurs et de plus élégants matériaux de construction. "
-"Donc, construisons<br> un tailleur de pierre, qui produira des colonnes à "
-"partir du marbre.<br> Enfin, nous pourrons vivre comme nous vivions à "
+"Donc, construisons<br> une marbrerie, qui produira des colonnes à partir du "
+"marbre.<br> Enfin, nous pourrons vivre comme nous vivions à "
 "Fremil.\"<br><br>-- NOUVEL OBJECTIF --<br> "
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:83
@@ -279,10 +279,9 @@ msgid ""
 "infrastructure (coal mine and / or charcoal burner, iron ore mine, "
 "toolsmith's shop, weapon smithy, armour smithy and smelting works)."
 msgstr ""
-"* Construisez une cabane de tailleur de pierre puis une infrastructure "
-"complète d'exploitation minière et de production (mine de charbon et / ou "
-"charbonnier, mine de fer, forges d'outils, d'armes et d'armures et une "
-"fonderie)."
+"* Construisez une marbrerie puis une infrastructure complète d'exploitation "
+"minière et de production (mine de charbon et / ou charbonnier, mine de fer, "
+"fabriques d'outils, d'armes et d'armures et une fonderie)."
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:28
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:136
@@ -293,8 +292,8 @@ msgstr "* Construisez des casernes et des sentinelles autour de la colonie."
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:94
 msgid "* Build three lumberjack's houses, a forester's house and a sawmill."
 msgstr ""
-"* Construisez trois cabanes de bûcheron, une maison de sylviculteur et une "
-"scierie."
+"* Construisez trois cabanes de bûcheron, une maison de garde forestier et "
+"une scierie."
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:60
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:177
@@ -384,7 +383,7 @@ msgstr "Construisez une carrière"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:42
 msgid "Build a stonemason and mining infrastructure"
-msgstr "Construisez un tailleur de pierre et une infrastructure minière"
+msgstr "Construisez une marbrerie et une infrastructure minière"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:10
 msgid "Build up a wood economy"

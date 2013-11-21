@@ -7,13 +7,13 @@ msgstr ""
 "Project-Id-Version: Widelands svn4866\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2013-09-15 17:41+0000\n"
-"PO-Revision-Date: 2013-11-19 13:51+0000\n"
-"Last-Translator: Emmanuel Andry <Unknown>\n"
+"PO-Revision-Date: 2013-11-20 12:40+0000\n"
+"Last-Translator: Jean-Pierre Gemble <Unknown>\n"
 "Language-Team: Language <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-11-20 05:14+0000\n"
+"X-Launchpad-Export-Date: 2013-11-21 05:11+0000\n"
 "X-Generator: Launchpad (build 16831)\n"
 "X-Poedit-Language: French\n"
 
@@ -142,8 +142,8 @@ msgstr ""
 "héritage, nos ancêtres nous les ont confié. Nous leur devons de les "
 "respecter et d'en prendre soin. Ce que nous prenons, nous devrons le "
 "rendre.<br> Ainsi, pour remplacer les arbres abattus, nous devrions "
-"construire une cabane de sylviculteur, de préférence proche de la cabane de "
-"bûcheron.\"<br><br>-- NOUVEL OBJECTIF --<br> "
+"construire une cabane de garde forestier, de préférence proche de la cabane "
+"de bûcheron.\"<br><br>-- NOUVEL OBJECTIF --<br> "
 
 #: ../../campaigns/t01.wmf/scripting/texts.lua:115
 msgid ""
@@ -251,7 +251,7 @@ msgstr ""
 #: ../../campaigns/t01.wmf/scripting/texts.lua:82
 msgid "* Build a ranger's hut to the east of the first lumberjack's hut."
 msgstr ""
-"* Construisez une cabane de sylviculteur à l'est de la cabane du premier "
+"* Construisez une cabane de garde forestier à l'est de la cabane du premier "
 "bûcheron."
 
 #: ../../campaigns/t01.wmf/scripting/texts.lua:11
@@ -354,7 +354,7 @@ msgstr "Construisez une cabane de bûcheron"
 
 #: ../../campaigns/t01.wmf/scripting/texts.lua:25
 msgid "Build a ranger's hut"
-msgstr "Construisez une cabane de sylviculteur"
+msgstr "Construisez une cabane de garde forestier"
 
 #: ../../campaigns/t01.wmf/scripting/texts.lua:17
 msgid "Build another lumberjack's hut"

@@ -7,13 +7,13 @@ msgstr ""
 "Project-Id-Version: Widelands svn4866\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2013-09-15 17:41+0000\n"
-"PO-Revision-Date: 2013-11-18 11:28+0000\n"
+"PO-Revision-Date: 2013-11-20 13:23+0000\n"
 "Last-Translator: Emmanuel Andry <Unknown>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-11-19 05:13+0000\n"
+"X-Launchpad-Export-Date: 2013-11-21 05:11+0000\n"
 "X-Generator: Launchpad (build 16831)\n"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:306
@@ -375,8 +375,8 @@ msgid ""
 "* Build a helmsmithy to the west of the mountains to provide your soldiers "
 "with better armor."
 msgstr ""
-"* Construisez un forgeron de casques à l'ouest des montagnes afin de fournir "
-"à vos soldats de meilleures armures."
+"* Construisez une fabrique de casques à l'ouest des montagnes afin de "
+"fournir à vos soldats de meilleures armures."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:91
 #: ../../campaigns/t03.wmf/scripting/texts.lua:332

@@ -7,13 +7,13 @@ msgstr ""
 "Project-Id-Version: Widelands svn4866\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2013-09-15 17:41+0000\n"
-"PO-Revision-Date: 2013-11-19 14:27+0000\n"
+"PO-Revision-Date: 2013-11-20 18:53+0000\n"
 "Last-Translator: Emmanuel Andry <Unknown>\n"
 "Language-Team: Language <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-11-20 05:14+0000\n"
+"X-Launchpad-Export-Date: 2013-11-21 05:11+0000\n"
 "X-Generator: Launchpad (build 16831)\n"
 
 #: ../../tribes/empire/meal/conf:1
@@ -53,7 +53,7 @@ msgstr "Armure"
 
 #: ../../tribes/empire/conf:189
 msgid "Armour Smithy"
-msgstr "Forgeron d'armures"
+msgstr "Fabrique d'armures"
 
 #: ../../tribes/empire/conf:110
 msgid "Armoursmith"
@@ -94,9 +94,9 @@ msgid ""
 "used in the trainingscamp - together with food- to train soldiers from "
 "healthpoints level 1 to healthpoints level 2."
 msgstr ""
-"Armure de base pour soldats de l'Empire. Elle est produite dans la forge  et "
-"utilisée dans les camps d'entraînement - avec de la nourriture - pour "
-"entrainer les soldats du niveau de santé 1 au niveau de santé 2."
+"Armure de base pour soldats de l'Empire. Elle est produite dans la fabrique "
+"d'armures  et utilisée dans les camps d'entraînement - avec de la nourriture "
+"- pour entrainer les soldats du niveau de santé 1 au niveau de santé 2."
 
 #: ../../tribes/empire/conf:61
 msgid "Basket"
@@ -195,7 +195,7 @@ msgid ""
 "armour smithy."
 msgstr ""
 "Le tissu est nécessaire à la construction de divers bâtiments. Il est aussi "
-"utilisé dans la forge d'armures."
+"utilisé dans la fabrique d'armures."
 
 #: ../../tribes/empire/conf:66
 msgid "Coal"
@@ -300,11 +300,11 @@ msgstr "Champ mûr"
 
 #: ../../tribes/empire/conf:35
 msgid "Field small"
-msgstr "Champ petit"
+msgstr "Petit champ"
 
 #: ../../tribes/empire/conf:36
 msgid "Field tiny"
-msgstr "Champ très petit"
+msgstr "Champ minuscule"
 
 #: ../../tribes/empire/conf:67
 msgid "Fire Tongs"
@@ -316,7 +316,7 @@ msgid ""
 "are produced by the toolsmith."
 msgstr ""
 "Les tenailles sont l'outil du fondeur, qui travaille à la fonderie. Elles "
-"sont produites par le forgeron."
+"sont produites par le forgeron d'outils."
 
 #: ../../tribes/empire/conf:68
 msgid "Fish"
@@ -355,11 +355,11 @@ msgstr ""
 
 #: ../../tribes/empire/conf:118
 msgid "Forester"
-msgstr "Sylviculteur"
+msgstr "Garde forestier"
 
 #: ../../tribes/empire/conf:171
 msgid "Forester's House"
-msgstr "Cabane de sylviculteur"
+msgstr "Maison de garde forestier"
 
 #: ../../tribes/empire/conf:158
 #: ../../tribes/empire/conf:213
@@ -389,8 +389,8 @@ msgid ""
 "in the armour smithy and the weapon smithy."
 msgstr ""
 "L'or est le plus précieux des métaux; armures et armes en sont serties. Il "
-"est raffiné dans les fonderies à partir de minerai d'or et préparé dans les "
-"forges d'armures et d'armes."
+"est raffiné dans les fonderies à partir de minerai d'or et utilisé dans les "
+"fabriques d'armures et d'armes."
 
 #: ../../tribes/empire/conf:72
 msgid "Goldstone"
@@ -465,7 +465,7 @@ msgid ""
 "produced in a toolsmithy and used in taverns and inns."
 msgstr ""
 "Comment quelqu'un peut il créer une ration ou un repas s'il n'y a pas "
-"d'ustensiles de cuisine. Ils sont produits dans une forge d'outils et "
+"d'ustensiles de cuisine ? Ils sont produits dans une fabrique d'outils et "
 "utilisés dans les tavernes et les auberges."
 
 #: ../../tribes/empire/conf:120
@@ -547,7 +547,8 @@ msgid ""
 "stonemason's house."
 msgstr ""
 "Les colonnes de marbre représentent la grandeur culturelle de l'Empire, "
-"alors elles sont nécessaires pour pratiquement chaque grand bâtiment."
+"alors elles sont nécessaires pour pratiquement chaque grand bâtiment. Elles "
+"sont produites dans une marbrerie."
 
 #: ../../tribes/empire/marble/conf:1
 msgid ""
@@ -557,7 +558,7 @@ msgid ""
 msgstr ""
 "Le marbre est une pierre de toute beauté, elle est extraite des montagnes ou "
 "produite dans une carrière. Le marbre est utilisé en tant que matériau de "
-"construction et est taillé en colonnes dans la maison du tailleur de pierre."
+"construction et est taillé en colonnes dans la marbrerie."
 
 #: ../../tribes/empire/conf:123
 msgid "Master Miner"
@@ -943,7 +944,7 @@ msgstr "Tailleur de pierre"
 
 #: ../../tribes/empire/conf:176
 msgid "Stonemason's House"
-msgstr "Maison du Tailleur de Pierres"
+msgstr "Marbrerie"
 
 #: ../../tribes/empire/conf:92
 msgid "Stones"
@@ -1011,7 +1012,7 @@ msgid ""
 "soldiers from healthpoints level 2 to level 3."
 msgstr ""
 "La cotte de maille est l'armure moyenne pour les soldats de l'Empire. Elle "
-"est produite dans une forge d'armures et utilisée dans un camp "
+"est produite dans une fabrique d'armures et utilisée dans un camp "
 "d'entraînement - avec de le nourriture - pour entrainer la santé des soldats "
 "du niveau 2 au niveau 3."
 
@@ -1032,8 +1033,8 @@ msgid ""
 "is produced by the toolsmith."
 msgstr ""
 "Le marteau est un outil essentiel. Il est nécessaire au géologue, au "
-"constructeur, aux forgerons d'armures et d'armes. Assurez vous de toujours "
-"en avoir en réserve! Il est produit par le forgeron d'outils."
+"bâtisseur, aux forgerons d'armures et d'armes. Assurez vous de toujours en "
+"avoir en réserve! Il est produit par le forgeron d'outils."
 
 #: ../../tribes/empire/helm/conf:1
 msgid ""
@@ -1043,7 +1044,7 @@ msgid ""
 "train soldiers from healthpoints level 0 to healthpoints level 1."
 msgstr ""
 "Le casque est la protection de base d'un guerrier. Il est produit dans la "
-"forge d'armures. Avec la lance de bois c'est l'équipement qui habille les "
+"fabrique d'armures. Avec la lance de bois c'est l'équipement qui habille les "
 "jeunes soldats. Les casques sont aussi utilisés dans les camps "
 "d'entraînement - avec de la nourriture - pour entraîner  la santé des "
 "soldats du niveau 0 au niveau 1."
@@ -1055,8 +1056,8 @@ msgid ""
 "together with food - to train soldiers from healthpoints level 3 to level 4."
 msgstr ""
 "L'armure de plaques est l'armure la plus solide existante pour les soldats "
-"de l'Empire. Elle est produite dans la forge d'armures et utilisée dans le "
-"camp d'entraînement - avec de la nourriture - pour entraîner la santé des "
+"de l'Empire. Elle est produite dans la fabrique d'armures et utilisée dans "
+"le camp d'entraînement - avec de la nourriture - pour entraîner la santé des "
 "soldats du niveau 3 au niveau 4."
 
 #: ../../tribes/empire/shovel/conf:1
@@ -1064,8 +1065,8 @@ msgid ""
 "The shovel is needed for proper handling of plants. Therefore the forester "
 "and the vinefarmer use it. It is produced by the toolsmith."
 msgstr ""
-"La pelle est nécessaire pour travailler avec les plantes. Le sylviculteur et "
-"le vigneron l'utilisent donc. Elle est produite par le forgeron d'outils."
+"La pelle est nécessaire pour travailler avec les plantes. Le garde forestier "
+"et le vigneron l'utilisent donc. Elle est produite par le forgeron d'outils."
 
 #: ../../tribes/empire/grape/conf:1
 msgid ""
@@ -1080,7 +1081,7 @@ msgid ""
 "This basket is needed by the vinefarmer for harvesting the grapes. It is "
 "produced by the toolsmith."
 msgstr ""
-"Ce panier est nécessaire au vigneron pour récolter les raisins. Il est "
+"Ce panier est nécessaire au vigneron pour vendanger le raisin. Il est "
 "produit par le forgeron d'outils."
 
 #: ../../tribes/empire/beer/conf:1
@@ -1098,9 +1099,9 @@ msgid ""
 "train soldiers from attack level 2 to level 3."
 msgstr ""
 "C'est une lance forte avec un bout en acier et une petite lame. Elle est "
-"fabriquée dans la forge d'armes et utilisée dans les camps d'entraînement - "
-"avec de la nourriture - pour entraîner les soldats en attaque du niveau 2 au "
-"niveau 3."
+"fabriquée dans la fabrique d'armes et utilisée dans les camps d'entraînement "
+"- avec de la nourriture - pour entraîner les soldats en attaque du niveau 2 "
+"au niveau 3."
 
 #: ../../tribes/empire/advanced_lance/conf:1
 msgid ""
@@ -1109,7 +1110,7 @@ msgid ""
 "attack level 1 to level 2."
 msgstr ""
 "C'est une lance améliorée, avec un bout en acier. Elle est fabriquée dans la "
-"forge d'armes et utilisée dans les camps d'entraînement - avec de la "
+"fabrique d'armes et utilisée dans les camps d'entraînement - avec de la "
 "nourriture - pour entraîner les soldats en attaque du niveau 1 au niveau 3."
 
 #: ../../tribes/empire/war_lance/conf:1
@@ -1133,9 +1134,9 @@ msgid ""
 "a trainingscamp - together with food - to train soldiers from attack level 0 "
 "to attack level 1."
 msgstr ""
-"Cette lance a une pointe en fer. Elle est fabriquée dans la forge d'armes et "
-"utilisée dans les camps d'entraînement - avec de la nourriture - pour "
-"entraîner les soldats en attaque du niveau 0 au niveau 1."
+"Cette lance a une pointe en fer. Elle est fabriquée dans la fabrique d'armes "
+"et utilisée dans les camps d'entraînement - avec de la nourriture - pour "
+"former les soldats en attaque du niveau 0 au niveau 1."
 
 #: ../../tribes/empire/pick/conf:1
 msgid ""
@@ -1174,8 +1175,8 @@ msgid ""
 "fit out young soldiers."
 msgstr ""
 "Cette lance de bois est l'arme de base du système militaire de l'Empire. "
-"Elle est fabriquée dans une forge d'armes. Avec un casque c'est l'équipement "
-"qui habille les jeunes soldats."
+"Elle est fabriquée dans la fabrique d'armes. Avec un casque c'est "
+"l'équipement qui habille les jeunes soldats."
 
 #: ../../tribes/empire/conf:131
 msgid "Toolsmith"
@@ -1183,7 +1184,7 @@ msgstr "Forgeron d'outils"
 
 #: ../../tribes/empire/conf:188
 msgid "Toolsmithy"
-msgstr "Forgeron d'outils"
+msgstr "Fabrique d'outils"
 
 #: ../../tribes/empire/conf:154
 #: ../../tribes/empire/conf:211
@@ -1213,8 +1214,9 @@ msgid ""
 "by the charcoal burner, the toolsmithy and the sawmill."
 msgstr ""
 "Les troncs sont un importants matériau de construction pour l'Empire. Les "
-"bûcherons abattent les arbres, les sylviculteurs les replantent. Les troncs "
-"sont aussi utilisés par le charbonnier, le forgeron d'outils et la scierie."
+"bûcherons abattent les arbres, les gardes forestier les replantent. Les "
+"troncs sont aussi utilisés par le charbonnier, la fabrique d'outils et la "
+"scierie."
 
 #: ../../tribes/empire/trainingscamp/conf:47
 msgid "Upgrade soldier attack 0"
@@ -1342,7 +1344,7 @@ msgstr "Vigneron"
 
 #: ../../tribes/empire/conf:50
 msgid "Vine medium"
-msgstr "Vin moyen"
+msgstr "Vigne moyenne"
 
 #: ../../tribes/empire/conf:53
 msgid "Vine ripe"
@@ -1350,11 +1352,11 @@ msgstr "vigne mûre"
 
 #: ../../tribes/empire/conf:51
 msgid "Vine small"
-msgstr "Vin petit"
+msgstr "Petite vigne"
 
 #: ../../tribes/empire/conf:52
 msgid "Vine tiny"
-msgstr "Vin très petit"
+msgstr "Vigne minuscule"
 
 #: ../../tribes/empire/conf:181
 msgid "Vineyard"
@@ -1384,7 +1386,7 @@ msgstr ""
 
 #: ../../tribes/empire/conf:195
 msgid "Weapon Smithy"
-msgstr "Forgeron d'armes"
+msgstr "Fabrique d'armes"
 
 #: ../../tribes/empire/iron/conf:1
 msgid ""
@@ -1446,7 +1448,7 @@ msgid ""
 "weapon smithy."
 msgstr ""
 "Le bois est un des matériaux de base de construction de l'Empire. Il est "
-"aussi utilisé dans la forge d'armes."
+"aussi utilisé dans la fabrique d'armes."
 
 #: ../../tribes/empire/conf:100
 msgid "Wool"

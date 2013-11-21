@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2013-09-15 17:41+0000\n"
-"PO-Revision-Date: 2013-09-23 20:15+0000\n"
-"Last-Translator: Urra <lention@qip.ru>\n"
+"PO-Revision-Date: 2013-11-20 18:14+0000\n"
+"Last-Translator: Александр <sa13690@yandex.ru>\n"
 "Language-Team: Russian <ru@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-09-24 05:25+0000\n"
-"X-Generator: Launchpad (build 16771)\n"
+"X-Launchpad-Export-Date: 2013-11-21 05:11+0000\n"
+"X-Generator: Launchpad (build 16831)\n"
 "X-Poedit-Country: RUSSIAN FEDERATION\n"
 "X-Poedit-Language: Russian\n"
 
@@ -396,7 +396,7 @@ msgstr ""
 
 #: ../../maps/Kings and Queens.wmf/elemental:9
 msgid "Kings and Queens"
-msgstr ""
+msgstr "Короли и Королевы"
 
 #: ../../maps/Lake of tranquility.wmf/elemental:7
 msgid "Lake of Tranquility"
@@ -555,7 +555,7 @@ msgstr "Соревнующиеся команды: (синие, желтые) п
 
 #: ../../maps/Crossing the horizon.wmf/elemental:12
 msgid "Suggested Teams: all ok"
-msgstr ""
+msgstr "Соревнующиеся команды: все"
 
 #: ../../maps/Rendez-Vous.wmf/elemental:10
 msgid "Suggested Teams: all ok."
@@ -566,6 +566,8 @@ msgid ""
 "Suggested Teams: blue vs red, yellow vs green, (blue, yellow) vs (red, "
 "green), (blue, green) vs (red, yellow)"
 msgstr ""
+"Соревнующиеся команды: синие притив красных, желтые против зеленых, (синие, "
+"желтые) против (красных, зеленых), (синие, зеленые) против (красных, желтых)"
 
 #: ../../maps/Long, long way.wmf/elemental:12
 msgid ""
@@ -573,6 +575,10 @@ msgid ""
 "green), (blue, yellow, black) vs (red, green, orange), (blue, yellow, black, "
 "purple) vs (red, green, orange, white)"
 msgstr ""
+"Соревнующиеся команды: синие притив красных, желтые против зеленых, (синие, "
+"желтые) против (красных, зеленых), (синие, желтые, черные) против (красных, "
+"зеленых, оранжевых), (синие, желтые, черные, фиолетовые) против (красных, "
+"зеленых, оранжевых, белых)"
 
 #: ../../maps/Plateau.wmf/elemental:10
 msgid "Suggested positions: blue vs yellow"
