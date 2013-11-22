@@ -7,13 +7,13 @@ msgstr ""
 "Project-Id-Version: Widelands svn4866\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2013-09-15 17:41+0000\n"
-"PO-Revision-Date: 2013-11-20 12:57+0000\n"
+"PO-Revision-Date: 2013-11-21 16:08+0000\n"
 "Last-Translator: Emmanuel Andry <Unknown>\n"
 "Language-Team: Language <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-11-21 05:11+0000\n"
+"X-Launchpad-Export-Date: 2013-11-22 05:12+0000\n"
 "X-Generator: Launchpad (build 16831)\n"
 
 #: ../../tribes/barbarians/axefactory/help.lua:12
@@ -1140,8 +1140,8 @@ msgid ""
 "is enhanced to an axefactory and war mill)."
 msgstr ""
 "Les tenailles sont les outils du fondeur, qui travaille dans la fonderie. "
-"Elles sont produites dans la ferronnerie (mais cessent d'êtres produites par "
-"le bâtiment s'il est  amélioré en usine de hache ou moulin de guerre)."
+"Elles sont produites dans la forge (mais cessent d'êtres produites par le "
+"bâtiment s'il est amélioré en fabrique de haches ou en moulin de guerre)."
 
 #: ../../tribes/barbarians/battlearena/help.lua:29
 #: ../../tribes/barbarians/conf:83
@@ -1177,9 +1177,8 @@ msgid ""
 "building if it is enhanced to an axefactory and war mill)."
 msgstr ""
 "Les cannes à pêche sont nécessaires aux pêcheurs barbares pour pêcher. C'est "
-"l'un des outils de base produit dans la ferronerie (mais cessent d'être "
-"produites si le bâtiment est amélioré en usine de hache et en moulin de "
-"guerre)."
+"l'un des outils de base produit dans la forge (mais cessent d'être produites "
+"si le bâtiment est amélioré en fabrique de haches et en moulin de guerre)."
 
 #: ../../tribes/barbarians/conf:170
 #: ../../tribes/barbarians/conf:224
@@ -1392,10 +1391,10 @@ msgid ""
 "Be sure to have a metalworks to produce this basic tool (but ceases to be "
 "produced by the building if it is enhanced to an axefactory and war mill)."
 msgstr ""
-"Comment pouvons nous faire un repas, une collation ou une ration, si nous "
-"n'avons pas d'outils de cuisine ? Assurez-vous d'avoir une ferronerie pour "
+"Comment pouvons nous faire un repas, un casse-croûte ou une ration, si nous "
+"n'avons pas d'ustensiles de cuisine ? Assurez-vous d'avoir une forge pour "
 "produire les outils de base (mais cesse de les produire si le bâtiment est "
-"amélioré en usine de haches et moulin de guerre)."
+"amélioré en fabrique de haches ou en moulin de guerre)."
 
 #: ../../tribes/barbarians/hunters_hut/help.lua:17
 msgid "Hunt animals to produce meat."
@@ -1559,7 +1558,7 @@ msgid ""
 "the helmsmithy."
 msgstr ""
 "Le fer est extrait du minerai de fer dans les fonderies. Il est utilisé pour "
-"produire des armes et des outils dans la ferronerie, l'usine de hache, le "
+"produire des armes et des outils dans la forge, la fabrique de haches, le "
 "moulin de guerre et la fabrique de casques."
 
 #: ../../tribes/barbarians/ironore/conf:1
@@ -1727,7 +1726,7 @@ msgstr "Parcelle moyenne"
 #: ../../tribes/barbarians/conf:203
 #: ../../tribes/barbarians/lumberjacks_hut/help.lua:29
 msgid "Metalwork Shop"
-msgstr "Ferronerie"
+msgstr "Forge"
 
 #: ../../tribes/barbarians/conf:194
 #: ../../tribes/barbarians/farm/help.lua:26
@@ -2562,8 +2561,8 @@ msgid ""
 "require additional qualification for the worker."
 msgstr ""
 "La fabrique de haches Barbare est le site de production intermédiaire d'une "
-"série de trois bâtiments. Il s'agit d'une mise à niveau de la ferronnerie, "
-"mais ne nécessite pas une qualification supplémentaire pour le travailleur."
+"série de trois bâtiments. Il s'agit d'une mise à niveau de la forge, mais ne "
+"nécessite pas une qualification supplémentaire pour le travailleur."
 
 #: ../../tribes/barbarians/bakery/help.lua:8
 msgid "The Barbarian Bakery"
@@ -2647,7 +2646,7 @@ msgstr "La cabane de bûcheron Barbare"
 
 #: ../../tribes/barbarians/metalworks/help.lua:8
 msgid "The Barbarian Metalwork Shop"
-msgstr "La ferronnerie Barbare"
+msgstr "La forge Barbare"
 
 #: ../../tribes/barbarians/metalworks/help.lua:16
 msgid ""
@@ -2655,9 +2654,9 @@ msgid ""
 "three buildings and creates all the tools that Barbarians need. The others "
 "are for weapons."
 msgstr ""
-"La ferronnerie Barbare est le site de production de base dans une série de "
-"trois bâtiments et crée tous les outils dont les Barbares ont besoin. Les "
-"autres sont pour les armes."
+"La forge Barbare est le site de production de base dans une série de trois "
+"bâtiments et crée tous les outils dont les Barbares ont besoin. Les autres "
+"sont pour les armes."
 
 #: ../../tribes/barbarians/micro-brewery/help.lua:8
 msgid "The Barbarian Micro Brewery"
@@ -2820,9 +2819,9 @@ msgid ""
 "war mill)."
 msgstr ""
 "La planche à pain est un outil du boulanger et chaque boulanger en a besoin. "
-"Elle est produite à la ferronnerie comme les autres outils (mais cesse "
-"d'être produite par le bâtiment si la ferronnerie est améliorée en usine de "
-"hache ou en moulin de guerre)."
+"Elle est produite à la forge comme les autres outils (mais cesse d'être "
+"produite par le bâtiment si la forge est améliorée en fabrique de haches ou "
+"en moulin de guerre)."
 
 #: ../../tribes/barbarians/broadaxe/conf:1
 msgid ""
@@ -2853,8 +2852,8 @@ msgid ""
 "it is enhanced to an axefactory and war mill)."
 msgstr ""
 "La cognée est l'outil des bûcherons pour abattre les arbres. Elle est "
-"produite dans une ferronnerie (mais cesse d'être produite si le bâtiment est "
-"amélioré en usine de hache et moulin de guerre)."
+"produite dans une forge (mais cesse d'être produite si le bâtiment est "
+"amélioré en fabrique de haches ou en moulin de guerre)."
 
 #: ../../tribes/barbarians/coal/conf:1
 msgid ""
@@ -2878,8 +2877,8 @@ msgid ""
 msgstr ""
 "Le marteau est un outil essentiel. Il est nécessaire au géologue, au "
 "bâtisseur, au forgeron et au forgeron de casques. Assurez-vous de toujours "
-"en avoir en réserve! C'est un outil basique produit dans la ferronnerie, "
-"(mais cesse d'être produit par le bâtiment si amélioré en usine de hache et "
+"en avoir en réserve! C'est un outil basique produit dans la forge (mais "
+"cesse d'être produit par le bâtiment si amélioré en fabrique de haches ou en "
 "moulin de guerre)."
 
 #: ../../tribes/barbarians/barrier/help.lua:8
@@ -2916,9 +2915,9 @@ msgid ""
 "(but ceases to be produced by the building if it is enhanced to an "
 "axefactory and war mill)."
 msgstr ""
-"La faux est l'outil des fermiers. Elle est produite dans la ferronnerie "
-"(mais cesse d'être produite par le bâtiment s'il est amélioré en usine de "
-"hache et moulin de guerre)."
+"La faux est l'outil des fermiers. Elle est produite dans la forge (mais "
+"cesse d'être produite par le bâtiment s'il est amélioré en fabrique de "
+"haches ou en moulin de guerre)."
 
 #: ../../tribes/barbarians/shovel/conf:1
 msgid ""
@@ -2927,9 +2926,9 @@ msgid ""
 "by the building if it is enhanced to an axefactory and war mill)."
 msgstr ""
 "La pelle est nécessaire à la bonne manutention des plantes. Par conséquent, "
-"l'horticulteur et le garde forestier l'utilisent. Produite dans la "
-"ferronnerie (mais cesse d'être produite par le bâtiment si amélioré vers "
-"usine de hache et moulin de guerre)."
+"l'horticulteur et le garde forestier l'utilisent. Produite dans la forge "
+"(mais cesse d'être produite par le bâtiment s'il est amélioré en fabrique de "
+"haches ou en moulin de guerre)."
 
 #: ../../tribes/barbarians/warriorsaxe/conf:1
 msgid ""
@@ -2997,8 +2996,8 @@ msgid ""
 "to an axefactory and war mill)."
 msgstr ""
 "Cette pioche est utilisée par les tailleurs de pierre et les mineurs. Elle "
-"est produite dans la ferronnerie (mais cesse d'être produite si le bâtiment "
-"est amélioré en usine de hache et moulin de guerre)."
+"est produite dans la forge (mais cesse d'être produite par le bâtiment s'il "
+"est amélioré en fabrique de haches ou en moulin de guerre)."
 
 #: ../../tribes/barbarians/hunting_spear/conf:1
 msgid ""
@@ -3009,8 +3008,8 @@ msgid ""
 msgstr ""
 "Cette lance est assez légère pour être lancée, mais assez lourde pour tuer "
 "n'importe quel animal en un coup. Elle est utilisée seulement par les "
-"chasseurs. Produite dans la ferronnerie (mais cesse d'être produite si le "
-"bâtiment est amélioré en usine de hache et moulin de guerre)."
+"chasseurs. Produite dans la forge (mais cesse d'être produite par le "
+"bâtiment s'il est amélioré en fabrique de haches ou en moulin de guerre)."
 
 #: ../../tribes/barbarians/conf:165
 #: ../../tribes/barbarians/conf:172
@@ -3130,10 +3129,10 @@ msgid ""
 msgstr ""
 "Les troncs sont le matériau de construction  principal des barbares. Les "
 "arbres sont abattus par les bûcherons; les gardes forestiers s'occupent de "
-"l'approvisionnement en arbres. Les troncs sont aussi utilisés dans la "
-"ferronnerie pour construire des outils de base, et dans la maison du "
-"charbonnier pour la production du charbon. Le durcisseur de bois transforme "
-"les troncs en les durcissant au feu ce qui donne du bois dur."
+"l'approvisionnement en arbres. Les troncs sont aussi utilisés dans la forge "
+"pour construire des outils de base, et dans la maison du charbonnier pour la "
+"production du charbon. Le durcisseur de bois transforme les troncs en les "
+"durcissant au feu ce qui donne du bois dur."
 
 #: ../../tribes/barbarians/axefactory/help.lua:34
 #: ../../tribes/barbarians/warmill/help.lua:36

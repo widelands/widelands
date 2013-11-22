@@ -7,13 +7,13 @@ msgstr ""
 "Project-Id-Version: Widelands svn4866\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2013-09-15 17:41+0000\n"
-"PO-Revision-Date: 2013-11-20 13:23+0000\n"
+"PO-Revision-Date: 2013-11-21 16:16+0000\n"
 "Last-Translator: Emmanuel Andry <Unknown>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-11-21 05:11+0000\n"
+"X-Launchpad-Export-Date: 2013-11-22 05:12+0000\n"
 "X-Generator: Launchpad (build 16831)\n"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:306
@@ -95,9 +95,9 @@ msgstr ""
 " \"J'ai envoyé des hommes rencontrer Kalilath dans sa forteresse. Il tente "
 "de faire le siège autour d'Al'thuran et a barricadé l'ancien accès principal "
 "à la capitale. Il ne laissera personne entrer ni sortir de la ville tant que "
-"son encerclement est complet. Jusqu'ici, il n'a jamais répondu à mes "
-"messages. Mais ce n'est pas du temps perdu. Je vais continuer d'entrainer "
-"mes soldats et nous préparer à la bataille.\" "
+"son blocus durera. Jusqu'ici, il n'a jamais répondu à mes messages. Mais ce "
+"n'est pas du temps perdu. Je vais continuer à entraîner mes soldats et nous "
+"préparer à la bataille.\" "
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:298
 msgid ""
@@ -121,9 +121,9 @@ msgstr ""
 " \"Je viens de parler à notre chef de patrouille. Il m'a dit qu'ils avaient "
 "trouvé quelques montagnes au nord-est et à l'est de notre territoire. Avec "
 "un peu de chance, cela nous donne une nouvelle opportunité de réarmer nos "
-"hommes, parce que aussi loin que je me souvienne, la plupart des montagnes à "
-"l'ouest de Al'thunran contiennent du charbon et quelques minerais "
-"métalliques. \" "
+"hommes, parce que d'aussi loin que je me souvienne, la plupart des montagnes "
+"à l'ouest de Al'thunran contiennent du charbon et quelques minerais "
+"métalliques.\" "
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:254
 msgid ""
@@ -155,7 +155,7 @@ msgstr ""
 "revoir la beauté antique de Al'Thuran, il y a encore quelques mois je me "
 "demandais encore si je pourrais jamais y revenir. Maintenant la cité est à "
 "nouveau entre mes mains et je n'hésiterai pas à la reconstruire avec la "
-"force de mes gens. Je suis impatient de revoir son ancienne gloire.\" "
+"force de mon peuple. Je suis impatient de revoir son ancienne gloire.\" "
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:326
 msgid ""
@@ -286,7 +286,7 @@ msgstr ""
 " \"Ces derniers jours nous nous sommes rapprochés de notre capitale. Maints "
 "braves nous ont déjà rejoint et m'ont confié leurs espoirs. Cependant, j'ai "
 "peur que nous ne soyons pas encore assez forts pour l'emporter sur mes "
-"frères.<br>Pour le moment, nous nous reposons à la frontière de la vielle "
+"frères.<br>Pour le moment, nous nous reposons à la frontière de la vieille "
 "forêt et nous nous préparons pour les jours à venir.\" "
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:206
@@ -398,7 +398,7 @@ msgid ""
 "* Build up a basic food economy - a fisher's hut, a hunter's hut, a well, a "
 "farm and a bakery, to provide your people with food."
 msgstr ""
-"* Construisez une économie alimentaire de base -  une hutte de pêcheur, de "
+"* Construisez une économie alimentaire de base -  une cabane de pêcheur, de "
 "chasseur, un puits, une ferme et une boulangerie, afin de fournir de la "
 "nourriture à vos gens."
 
@@ -408,8 +408,7 @@ msgstr "* Détruisez l'armée de Kalitath et étendez votre territoire à l'Est.
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:127
 msgid "* Destroy Kalitaths army and expand your territory to the east."
-msgstr ""
-"* Détruisez l'armée de Kalitaths et étendez votre territoire à l'Est."
+msgstr "* Détruisez l'armée de Kalitath et étendez votre territoire à l'Est."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:137
 #: ../../campaigns/t03.wmf/scripting/texts.lua:364
@@ -427,10 +426,10 @@ msgid ""
 "blacksmith reaches his next level (master blacksmith), you can even enhance "
 "it to a war mill which produces additional weapons."
 msgstr ""
-"* Améliorer votre forgeron en un forgeur de hache pour produire des armes et "
-"construisez un autre forgeron pour garantir la production d'outils. Quand le "
-"forgeron atteint son niveau suivant (Maître-forgeron), vous pouvez même "
-"l'améliorer en un chantier de guerre qui produit des armes supplémentaires."
+"* Améliorez votre forge en fabrique de haches pour produire des armes et "
+"construisez une autre forge pour garantir la production d'outils. Quand le "
+"forgeron atteint son niveau suivant (Maître-forgeron), vous pourrez même "
+"l'améliorer en moulin de guerre qui produit des armes supplémentaires."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:111
 msgid ""
@@ -439,10 +438,10 @@ msgid ""
 "blacksmith reaches his next level (master blacksmith), you can even enhance "
 "your axefactory to a war mill."
 msgstr ""
-"* Améliorer votre forgeron en un forgeur de hache pour produire des armes et "
-"construisez un autre forgeron pour garantir la production d'outils. Quand le "
-"forgeron atteint son niveau suivant (Maître-forgeron), vous pouvez améliorer "
-"votre forgeur de hache en un chantier de guerre."
+"* Améliorez votre forge en fabrique de haches pour produire des armes et "
+"construisez une autre forge pour garantir la production d'outils. Quand le "
+"forgeron atteint son niveau suivant (Maître-forgeron), vous pourrez même "
+"l'améliorer en moulin de guerre."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:75
 #: ../../campaigns/t03.wmf/scripting/texts.lua:290
@@ -453,7 +452,7 @@ msgid ""
 msgstr ""
 "* Etendez votre territoire jusqu'aux montagnes, envoyez des géologues à la "
 "recherche de minerai et de charbon et bâtissez une économie minière avec des "
-"mines, des tavernes, des fonderies et des forgerons."
+"mines, des tavernes, des fonderies et des forges."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:208
 #: ../../campaigns/t03.wmf/scripting/texts.lua:244
@@ -510,7 +509,7 @@ msgstr ""
 "Les entrepôts sont similaires à vos quartiers généraux, à la seule "
 "différence qu'ils ne sont pas défendus par des soldats. Il est souvent sage "
 "de construire un entrepôt lorsque votre territoire s'étend et que les "
-"chemins vers vos quartiers généraux deviennent de plus en plus longs."
+"chemins vers votre quartier général deviennent de plus en plus longs."
 
 #: ../../campaigns/t03.wmf/elemental:7
 msgid "03 - This Land is our Land"
@@ -592,7 +591,7 @@ msgstr "Doutes"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:324
 msgid "Enhanced economy and training"
-msgstr "Amélioration de l'économie et entraînement"
+msgstr "Économie et entraînement améliorés"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:65
 msgid "Explore further"
