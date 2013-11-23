@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2013-09-15 17:41+0000\n"
-"PO-Revision-Date: 2013-09-23 20:37+0000\n"
-"Last-Translator: Georgiy <Unknown>\n"
+"PO-Revision-Date: 2013-11-22 19:46+0000\n"
+"Last-Translator: Александр <sa13690@yandex.ru>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-09-24 05:25+0000\n"
-"X-Generator: Launchpad (build 16771)\n"
+"X-Launchpad-Export-Date: 2013-11-23 05:14+0000\n"
+"X-Generator: Launchpad (build 16831)\n"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:306
 msgid ""
@@ -131,6 +131,9 @@ msgid ""
 "there are still a lot of men and women waiting in our hall to get a task, so "
 "they can help our soldiers to prepare for the future fights."
 msgstr ""
+" \"Хорошие новости, поставки руды идут исправно! Тем не менее, множество "
+"мужчин и женщин всё ещё ждут от нас новых заданий, пусть они помогут нашим "
+"солдатам подготовиться к предстоящим битвам."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:360
 msgid ""
@@ -240,22 +243,25 @@ msgstr ""
 #: ../../campaigns/t03.wmf/scripting/texts.lua:334
 msgid ""
 "* Build a battle arena and a trainings camp to the west of the mountains."
-msgstr ""
+msgstr "* Постройте арену поединков и тренировочный лагерь западнее гор."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:59
 msgid ""
 "* Build a donjon at the northeast of your territory to get a farther visual "
 "range and to protect your people from sudden attacks of enemies."
 msgstr ""
+"* Постройте дозорную башню на северо-востоке от вашей территории, чтобы "
+"увеличить дальность обзора и защитить свой народ от внезапного нападения "
+"врагов."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:266
 msgid "* Build a donjon at the northeast of your territory."
-msgstr ""
+msgstr "* Постройте дозорную башню на северо-востоке от вашей территории."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:83
 #: ../../campaigns/t03.wmf/scripting/texts.lua:310
 msgid "* Build a fortress to the east of the mountains."
-msgstr ""
+msgstr "*Постройте крепость восточнее гор."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:119
 #: ../../campaigns/t03.wmf/scripting/texts.lua:338
@@ -263,11 +269,13 @@ msgid ""
 "* Build a helmsmithy to the west of the mountains to provide your soldiers "
 "with better armor."
 msgstr ""
+"* Постройте шлемную мастерскую на западе от гор, чтобы обеспечить ваших "
+"солдат лучшей броней."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:91
 #: ../../campaigns/t03.wmf/scripting/texts.lua:332
 msgid "* Build a warehouse to the west of the mountains."
-msgstr ""
+msgstr "* Постройте склад на западе от гор."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:67
 #: ../../campaigns/t03.wmf/scripting/texts.lua:278
@@ -275,6 +283,8 @@ msgid ""
 "* Build more military buildings to explore the area around the headquarters "
 "and to ensure the safety of your people."
 msgstr ""
+"* Постройте больше военных зданий, чтобы исследовать земли вокруг штаба и "
+"убедиться в безопасности ваших людей."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:42
 #: ../../campaigns/t03.wmf/scripting/texts.lua:246
@@ -285,11 +295,11 @@ msgstr ""
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:210
 msgid "* Destroy Kalitath's army and expand your territory to the east."
-msgstr ""
+msgstr "* Уничтожьте армию Калитата и расширьте свои владения на восток."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:127
 msgid "* Destroy Kalitaths army and expand your territory to the east."
-msgstr ""
+msgstr "* Уничтожьте армию Калитата и расширьте свои владения на восток."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:137
 #: ../../campaigns/t03.wmf/scripting/texts.lua:364
@@ -305,6 +315,11 @@ msgid ""
 "blacksmith reaches his next level (master blacksmith), you can even enhance "
 "it to a war mill which produces additional weapons."
 msgstr ""
+"* Улучшите вашу кузницу до фабрики топоров для того, чтобы производить "
+"оружие, и постройте другую кузницу для обеспечения производства "
+"инструментов. Когда кузнец достигнет следующего уровня (опытный кузнец), вы "
+"сможете даже улучшить фабрику до военного завода, который производит "
+"дополнительное оружие."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:111
 msgid ""
@@ -313,6 +328,10 @@ msgid ""
 "blacksmith reaches his next level (master blacksmith), you can even enhance "
 "your axefactory to a war mill."
 msgstr ""
+"* Улучшите вашу кузницу до фабрики топоров, чтобы начать производить оружие, "
+"и постройте другую кузницу для обеспечения производства инструментов. Когда "
+"кузнец достигнет следующего уровня (опытный кузнец), вы сможете даже "
+"улучшить фабрику до военного завода."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:75
 #: ../../campaigns/t03.wmf/scripting/texts.lua:290
@@ -339,7 +358,7 @@ msgstr "-- НОВЫЕ ЗАДАНИЯ --"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:350
 msgid "--------------------- VICTORY! ----------------------"
-msgstr ""
+msgstr "--------------------- ПОБЕДА! ----------------------"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:129
 #: ../../campaigns/t03.wmf/scripting/texts.lua:212
@@ -368,7 +387,7 @@ msgstr ""
 
 #: ../../campaigns/t03.wmf/elemental:7
 msgid "03 - This Land is our Land"
-msgstr ""
+msgstr "03 - Эта земля - Наша земля"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:157
 #: ../../campaigns/t03.wmf/scripting/texts.lua:185
@@ -397,23 +416,23 @@ msgstr ""
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:57
 msgid "Build a donjon"
-msgstr ""
+msgstr "Постройте дозорную башню"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:81
 msgid "Build a fortress"
-msgstr ""
+msgstr "Постройте крепость"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:117
 msgid "Build a helmsmithy"
-msgstr ""
+msgstr "Постройте шлемную мастерскую"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:89
 msgid "Build a warehouse"
-msgstr ""
+msgstr "Постройте склад"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:73
 msgid "Build mines"
-msgstr ""
+msgstr "Постройте шахты"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:99
 msgid "Build trainingssites"
@@ -425,7 +444,7 @@ msgstr ""
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:109
 msgid "Build weapon productions"
-msgstr ""
+msgstr "Постройте оружейное производство"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:146
 msgid "Close to home"
@@ -433,7 +452,7 @@ msgstr "Ближе к дому"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:125
 msgid "Destroy Kalitaths army"
-msgstr ""
+msgstr "Уничтожьте армию Калитата"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:166
 msgid "Doubts"
@@ -528,7 +547,7 @@ msgstr ""
 #: ../../campaigns/t03.wmf/scripting/texts.lua:159
 #: ../../campaigns/t03.wmf/scripting/texts.lua:346
 msgid "Thron looks worried."
-msgstr ""
+msgstr "Трон выглядит обеспокоенным."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:148
 msgid "Thron looks worried..."
@@ -540,7 +559,7 @@ msgstr ""
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:220
 msgid "Thron speaks:"
-msgstr ""
+msgstr "Трон говорит:"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:260
 msgid "Tracks"
@@ -555,6 +574,8 @@ msgid ""
 "You have completed the last mission of the barbarian tutorial campaign. You "
 "may continue playing if you wish, otherwise move on to the next campaign."
 msgstr ""
+"Вы завершили последнюю миссию ознакомительной кампании. Вы можете продолжить "
+"играть, если хотите, или перейти к следующей кампании."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:202
 msgid "Your loyal companion"

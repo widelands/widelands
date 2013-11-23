@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: Widelands svn4866\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2013-09-15 19:41+0200\n"
-"PO-Revision-Date: 2013-11-19 11:24+0000\n"
+"PO-Revision-Date: 2013-11-22 18:04+0000\n"
 "Last-Translator: Emmanuel Andry <Unknown>\n"
 "Language-Team: French <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Launchpad-Export-Date: 2013-11-20 05:14+0000\n"
+"X-Launchpad-Export-Date: 2013-11-23 05:14+0000\n"
 "X-Generator: Launchpad (build 16831)\n"
 
 #: ../../src/computer_player.cc:38
@@ -1163,12 +1163,12 @@ msgstr "[affinité de terrain] \"%s\" (pas dans le monde actuel): %s"
 #: ../../src/logic/immovable.cc:312
 #, c-format
 msgid "immovable %s has no program \"%s\""
-msgstr "l'objet inamovible %s n'a pas le programme \"%s\""
+msgstr "l'objet immobile %s n'a pas le programme \"%s\""
 
 #: ../../src/logic/immovable.cc:776
 #, c-format
 msgid "tribe %s does not define immovable type \"%s\""
-msgstr "la tribu %s ne définit pas le type inamovible \"%s\""
+msgstr "la tribu %s ne définit pas le type immobile \"%s\""
 
 #: ../../src/logic/immovable.cc:779
 #, c-format
@@ -1178,12 +1178,12 @@ msgstr "tribu %s inconnue"
 #: ../../src/logic/immovable.cc:785
 #, c-format
 msgid "world does not define immovable type \"%s\""
-msgstr "le monde ne définit pas le type inamovible \"%s\""
+msgstr "le monde ne définit pas le type immobile \"%s\""
 
 #: ../../src/logic/immovable.cc:795
 #, c-format
 msgid "immovable type %s"
-msgstr "type inamovible %s"
+msgstr "type immobile %s"
 
 #: ../../src/logic/immovable.cc:829 ../../src/logic/production_program.cc:662
 #: ../../src/logic/production_program.cc:736
@@ -1215,7 +1215,7 @@ msgstr "transformation illégale en même type"
 #, c-format
 msgid "immovable type not in tribe but target type has scope (\"%s\")"
 msgstr ""
-"le type inamovible n'est pas dans la tribu, mais la cible a la portée "
+"le type immobile n'est pas dans la tribu, mais le type de cible une portée "
 "(\"%s\")"
 
 #: ../../src/logic/immovable.cc:986 ../../src/logic/immovable.cc:1073
@@ -1338,7 +1338,7 @@ msgstr "commande du joueur : %s"
 #: ../../src/logic/playercommand.cc:195
 #, c-format
 msgid "player immovable %u: %s"
-msgstr "joueur inamovible %u : %s"
+msgstr "joueur immobile %u : %s"
 
 #: ../../src/logic/playercommand.cc:201
 #, c-format
@@ -2208,7 +2208,7 @@ msgstr "Messages pour le joueur %u : %s"
 #: ../../src/map_io/widelands_map_players_view_data_packet.cc:216
 #, c-format
 msgid "unseen immovable: %s"
-msgstr "Immeuble non découvert:%s"
+msgstr "immobile non découvert:%s"
 
 #: ../../src/map_io/widelands_map_port_spaces_data_packet.cc:63
 #, c-format
@@ -5178,7 +5178,7 @@ msgid ""
 "and bobs that depend on this player and try again."
 msgstr ""
 "Impossible de retirer ce joueur. Il est référencé quelque part. Enlevez tous "
-"les bâtiments et objets liés à ce joueur et recommencez."
+"les bâtiments et bobs liés à ce joueur et recommencez."
 
 #: ../../src/editor/ui_menus/editor_player_menu_allowed_buildings_menu.cc:57
 msgid "Allowed Buildings"
@@ -5237,7 +5237,7 @@ msgstr "Niveau de Bruit"
 
 #: ../../src/editor/ui_menus/editor_tool_menu.cc:68
 msgid "Immovables"
-msgstr "Inamovibles"
+msgstr "Immobiles"
 
 #: ../../src/editor/ui_menus/editor_tool_menu.cc:69
 #: ../../src/editor/ui_menus/editor_tool_place_bob_options_menu.cc:45
@@ -5269,7 +5269,7 @@ msgstr "Définir la valeur: %u"
 
 #: ../../src/editor/ui_menus/editor_tool_place_immovable_options_menu.cc:45
 msgid "Immovable Bobs"
-msgstr "Bobs inamovibles"
+msgstr "Bobs immobiles"
 
 #: ../../src/editor/ui_menus/editor_tool_set_terrain_options_menu.cc:46
 msgid "Terrain Select"
