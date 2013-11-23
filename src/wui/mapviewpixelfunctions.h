@@ -65,6 +65,12 @@ void normalize_pix(const Widelands::Map &, Point & p);
 void get_basepix(Widelands::Coords fc, int32_t & px, int32_t & py);
 
 /**
+ * Calculate the on-screen position of the node without taking height into
+ * account giving non isometric coordinates.
+ */
+void get_basepix3d(Widelands::Coords fc, int32_t & px, int32_t & py);
+
+/**
  * Calculate the on-screen position of the node.
  */
 void get_pix(Widelands::FCoords fc, int32_t & px, int32_t & py);
@@ -103,6 +109,13 @@ inline void MapviewPixelFunctions::get_basepix
 {
 	py = c.y * TRIANGLE_HEIGHT;
 	px = c.x * TRIANGLE_WIDTH + (c.y & 1) * (TRIANGLE_WIDTH / 2);
+}
+
+inline void MapviewPixelFunctions::get_basepix3d
+	(Widelands::Coords const  c, int32_t & px, int32_t & py)
+{
+	py = c.y * TRIANGLE_WIDTH;
+	px = c.x * TRIANGLE_WIDTH+ (c.y & 1) * (TRIANGLE_WIDTH / 2);
 }
 
 

@@ -152,6 +152,18 @@ void RenderTarget::fill_rect(Rect r, const RGBAColor& clr)
 		m_surface->fill_rect(r, clr);
 }
 
+void RenderTarget::draw_rect3d(Rect r,int32_t z, const RGBColor& clr)
+{
+	if (clip(r))
+		m_surface->draw_rect3d(r,z, clr);
+}
+
+void RenderTarget::fill_rect3d(Rect r, int32_t z, const RGBAColor& clr)
+{
+	if (clip(r))
+		m_surface->fill_rect3d(r,z, clr);
+}
+
 void RenderTarget::brighten_rect(Rect r, const int32_t factor)
 {
 	if (clip(r))
@@ -171,6 +183,21 @@ void RenderTarget::blit(const Point& dst, const Image* image, Composite cm, UI::
 
 	UI::correct_for_align(align, image->width(), image->height(), &dstpoint);
 	doblit(dstpoint, image, Rect(Point(0, 0), image->width(), image->height()), cm);
+}
+
+/**
+ * Blits a Image on another Surface
+ *
+ * This blit function copies the pixels to the destination surface.
+ * If the source surface contains a alpha channel this is used during
+ * the blit.
+ */
+void RenderTarget::blit3d(const Point3D& dst, const Image* image, Composite cm, UI::Align align)
+{
+	Point3D dstpoint(dst);
+
+	UI::correct_for_align3d(align, image->width(), image->height(), &dstpoint);
+	doblit3d(dstpoint, image, Rect(Point(0, 0), image->width(), image->height()), cm);
 }
 
 /**
@@ -347,6 +374,104 @@ void RenderTarget::drawanimrect
 }
 
 /**
+ * Draws a frame of an animation at the given location
+ * Plays sound effect that is registered with this frame (the Sound_Handler
+ * decides if the fx really does get played)
+ *
+ * \param dstx, dsty the on-screen location of the animation hot spot
+ * \param animation the animation ID
+ * \param time the time, in milliseconds, in the animation
+ * \param player the player this object belongs to, for player colour
+ * purposes. May be 0 (for example, for world objects).
+ *
+ * \todo Correctly calculate the stereo position for sound effects
+ * \todo The chosen semantics of animation sound effects is problematic:
+ * What if the game runs very slowly or very quickly?
+ */
+void RenderTarget::drawanim3d
+	(Point3D                dst,
+	 uint32_t       const animation,
+	 uint32_t       const time,
+	 Player const * const player)
+{
+	const AnimationData& data = g_anim.get_animation(animation);
+	AnimationGfx        * const gfx  = g_gr-> get_animation(animation);
+	if (!gfx) {
+		log("WARNING: Animation %u does not exist\n", animation);
+		return;
+	}
+
+	// Get the frame and its data
+	uint32_t const framenumber = time / data.frametime % gfx->nr_frames();
+	const Image& frame =
+		player ? gfx->get_frame(framenumber, player->get_playercolor()) : gfx->get_frame(framenumber);
+
+	dst -= gfx->hotspot();
+
+	Rect srcrc(Point(0, 0), frame.width(), frame.height());
+
+	doblit3d(dst, &frame, srcrc);
+
+	//  Look if there is a sound effect registered for this frame and trigger
+	//  the effect (see Sound_Handler::stereo_position).
+	data.trigger_soundfx(framenumber, 128);
+}
+
+void RenderTarget::drawstatic3d
+	(Point3D                dst,
+	 uint32_t       const animation,
+	 Player const * const player)
+{
+	AnimationGfx        * const gfx  = g_gr-> get_animation(animation);
+	if (!gfx) {
+		log("WARNING: Animation %u does not exist\n", animation);
+		return;
+	}
+
+	// Get the frame and its data
+	const Image& frame = player ? gfx->get_frame(0, player->get_playercolor()) : gfx->get_frame(0);
+	const Image* dark_frame = ImageTransformations::change_luminosity(&frame, 1.22, true);
+
+	dst -= Point3D(frame.width() / 2, frame.height() / 2,0);
+	Rect srcrc(Point(0, 0), frame.width(), frame.height());
+	doblit3d(dst, dark_frame, srcrc);
+}
+
+/**
+ * Draws a part of a frame of an animation at the given location
+ */
+void RenderTarget::drawanimrect3d
+	(Point3D                dst,
+	 uint32_t       const animation,
+	 uint32_t       const time,
+	 Player const * const player,
+	 Rect                 srcrc)
+{
+	const AnimationData& data = g_anim.get_animation(animation);
+	AnimationGfx        * const gfx  = g_gr-> get_animation(animation);
+	if (!gfx) {
+		log("WARNING: Animation %u does not exist\n", animation);
+		return;
+	}
+
+	// Get the frame and its data
+	uint32_t const framenumber = time / data.frametime % gfx->nr_frames();
+	const Image& frame =
+		player ?
+		gfx->get_frame
+			(framenumber, player->get_playercolor())
+		:
+		gfx->get_frame
+			(framenumber);
+
+	dst -= g_gr->get_animation(animation)->hotspot();
+
+	dst += srcrc;
+
+	doblit3d(dst, &frame, srcrc);
+}
+
+/**
  * Called every time before the render target is handed out by the Graphic
  * implementation to start in a neutral state.
  */
@@ -453,4 +578,32 @@ void RenderTarget::doblit
 	dst += m_rect;
 
 	m_surface->blit(dst, src->surface(), srcrc, cm);
+}
+
+/**
+ * Clip against source bitmap, then call the Bitmap blit3D routine.
+ * Clipping has to be done using OpenGL
+ */
+void RenderTarget::doblit3d
+	(Point3D dst, const Image* src, Rect srcrc, Composite cm)
+{
+	assert(0 <= srcrc.x);
+	assert(0 <= srcrc.y);
+	dst += m_offset;
+
+	// Also ensure srcrc is not bigger than src
+	// so opengl blits correctly
+	if (src->width() < srcrc.x + srcrc.w) {
+		srcrc.w = src->width() - srcrc.x;
+	}
+	if (src->height() < srcrc.y + srcrc.h) {
+		srcrc.h = src->height() - srcrc.y;
+	}
+
+	dst += m_rect; // To be removed later
+
+	//dst.y -= srcrc.h;
+	//dst.x -= srcrc.w / 2;
+
+	m_surface->blit3d(dst, src->surface(), srcrc, cm);
 }

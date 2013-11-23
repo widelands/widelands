@@ -59,7 +59,41 @@ void Flag::draw
 	}
 }
 
+void Flag::draw3d
+	(const Editor_Game_Base& game, RenderTarget& dst, const FCoords&, const Point3D& pos)
+{
+	static struct {int32_t x, y;} ware_offsets[8] = {
+		{-5,  1},
+		{-1,  3},
+		{3,  3},
+		{7,  1},
+		{-6, -3},
+		{-1, -2},
+		{3, -2},
+		{8, -3}
+	};
+
+	dst.drawanim3d
+		(pos, owner().flag_anim(), game.get_gametime() - m_animstart, &owner());
+
+	const uint32_t item_filled = m_item_filled;
+	for (uint32_t i = 0; i < item_filled; ++i) { //  draw wares
+		Point3D warepos = pos;
+		if (i < 8) {
+			warepos.x += ware_offsets[i].x;
+			warepos.y += ware_offsets[i].y;
+		} else
+			warepos.y -= 6 + (i - 8) * 3;
+		dst.drawanim3d
+			(warepos,
+			 m_items[i].item->descr().get_animation("idle"),
+			 0,
+			 get_owner());
+	}
+}
+
 /** The road is drawn by the terrain renderer via marked fields. */
 void Road::draw(const Editor_Game_Base &, RenderTarget &, const FCoords&, const Point&) {}
+void Road::draw3d(const Editor_Game_Base &, RenderTarget &, const FCoords&, const Point3D&) {}
 
 }

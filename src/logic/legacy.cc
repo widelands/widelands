@@ -365,6 +365,8 @@ struct FakeAttackController : public BaseImmovable {
 	virtual bool get_passable() const {return true;}
 	virtual void draw (const Editor_Game_Base &, RenderTarget &, const FCoords&, const Point&)
 	{}
+	virtual void draw3d (const Editor_Game_Base &, RenderTarget &, const FCoords&, const Point3D&)
+	{}
 	virtual PositionList get_positions (const Editor_Game_Base &) const
 	{
 		// This violates what I had in mind for get_positions, but since this is
@@ -446,6 +448,8 @@ struct FakeBattle : public BaseImmovable {
 	virtual int32_t get_size() const {return SMALL;}
 	virtual bool get_passable() const {return true;}
 	virtual void draw (const Editor_Game_Base &, RenderTarget &, const FCoords&, const Point&)
+	{}
+	virtual void draw3d (const Editor_Game_Base &, RenderTarget &, const FCoords&, const Point3D&)
 	{}
 	virtual PositionList get_positions (const Editor_Game_Base &) const
 	{

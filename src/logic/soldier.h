@@ -195,13 +195,17 @@ public:
 	void init_auto_task(Game &);
 
 	Point calc_drawpos(const Editor_Game_Base &, Point) const;
+	Point3D calc_drawpos3d(const Editor_Game_Base &, Point3D) const;
 	/// Draw this soldier
 	virtual void draw
 		(const Editor_Game_Base &, RenderTarget &, const Point&) const;
+	virtual void draw3d
+			(const Editor_Game_Base &, RenderTarget &, const Point3D&) const;
 
 	static void calc_info_icon_size
 		(const Tribe_Descr &, uint32_t & w, uint32_t & h);
 	void draw_info_icon(RenderTarget &, Point, bool anchor_below) const;
+	void draw_info_icon3d(RenderTarget &, Point3D, bool anchor_below) const;
 
 	//  Information function from description.
 	uint32_t get_max_hp_level     () const {

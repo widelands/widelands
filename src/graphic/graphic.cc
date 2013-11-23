@@ -58,6 +58,7 @@ using namespace std;
 
 Graphic * g_gr;
 bool g_opengl;
+bool g_rend3D;
 
 /**
  * Initialize the SDL video mode.
@@ -91,6 +92,7 @@ void Graphic::initialize(int32_t w, int32_t h, bool fullscreen, bool opengl) {
 	// Set video mode using SDL. First collect the flags
 	int32_t flags = 0;
 	g_opengl = false;
+	g_rend3D = false;
 	SDL_Surface * sdlsurface = 0;
 
 	if (opengl) {
@@ -181,6 +183,7 @@ void Graphic::initialize(int32_t w, int32_t h, bool fullscreen, bool opengl) {
 	if (0 != (sdlsurface->flags & SDL_OPENGL)) {
 		//  We now really have a working opengl screen...
 		g_opengl = true;
+		g_rend3D = true;
 
 		GLboolean glBool;
 		glGetBooleanv(GL_DOUBLEBUFFER, &glBool);
@@ -276,6 +279,10 @@ GCC_DIAG_ON ("-Wold-style-cast")
 		(("Widelands " + build_id() + '(' + build_type() + ')').c_str(),
 		 "Widelands");
 
+	log
+		("Graphics: 3D Rendering path %s\n",
+		(g_rend3D)?"enabled":"disabled");
+
 	if (g_opengl) {
 		glViewport(0, 0, w, h);
 
@@ -288,7 +295,17 @@ GCC_DIAG_ON ("-Wold-style-cast")
 		// just must not be null and have different sign.
 		glMatrixMode(GL_PROJECTION);
 		glLoadIdentity();
-		glOrtho(0, w, h, 0, -1, 1);
+		if (g_rend3D) {
+			const GLfloat proj_matrix [4*4]= {
+			  2.f /((GLfloat) w ), 0., 0., 0.f,
+			  0.f, -2.f /((GLfloat) h ),0.f , 0.f,
+			  0.f, -1.f / ((GLfloat) h ),- 1.f/((GLfloat) h )*0.f, 0.f, // fix the z coordinate after converting all to 3D
+			  -1.f, 1.f, 0.f, 1.f
+		    }; //Plain simple isometric projection
+			glMultMatrixf(proj_matrix);
+		} else {
+			glOrtho(0, w, h, 0, -1, 1);
+		}
 
 		// Reset modelview matrix, disable depth testing (we do not need it)
 		// And select backbuffer as default drawing target

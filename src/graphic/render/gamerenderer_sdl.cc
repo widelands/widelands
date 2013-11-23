@@ -56,7 +56,7 @@ inline static Sint8 node_brightness
 
 void GameRendererSDL::draw()
 {
-	draw_terrain();
+	//draw_terrain();
 	draw_objects();
 }
 

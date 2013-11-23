@@ -82,6 +82,8 @@ struct PortDock : PlayerImmovable {
 		(const Editor_Game_Base &) const;
 	virtual void draw
 		(const Editor_Game_Base &, RenderTarget &, const FCoords&, const Point&);
+	virtual void draw3d
+			(const Editor_Game_Base &, RenderTarget &, const FCoords&, const Point3D&);
 	virtual const std::string & name() const;
 
 	virtual void init(Editor_Game_Base &);

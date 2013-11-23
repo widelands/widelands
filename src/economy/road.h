@@ -104,6 +104,7 @@ protected:
 	virtual void cleanup(Editor_Game_Base &);
 
 	virtual void draw(const Editor_Game_Base &, RenderTarget &, const FCoords&, const Point&);
+	virtual void draw3d(const Editor_Game_Base &, RenderTarget &, const FCoords&, const Point3D&);
 
 private:
 	void _set_path(Editor_Game_Base &, const Path &);

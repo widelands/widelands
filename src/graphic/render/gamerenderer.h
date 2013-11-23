@@ -72,6 +72,7 @@ protected:
 	virtual void draw() = 0;
 
 	void draw_objects();
+	void draw_objects3d();
 
 	/**
 	 * The following variables, which are setup by @ref rendermap,

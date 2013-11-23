@@ -414,4 +414,89 @@ void ConstructionSite::draw
 	draw_help(game, dst, coords, pos);
 }
 
+/*
+===============
+Draw the construction site.
+===============
+*/
+void ConstructionSite::draw3d
+	(const Editor_Game_Base & game, RenderTarget & dst, const FCoords& coords, const Point3D& pos)
+{
+	assert(0 <= game.get_gametime());
+	const uint32_t gametime = game.get_gametime();
+	uint32_t tanim = gametime - m_animstart;
+
+	if (coords != m_position)
+		return; // draw big buildings only once
+
+	// Draw the construction site marker
+	dst.drawanim3d(pos, m_anim, tanim, get_owner());
+
+	// Draw the partially finished building
+
+	static_assert(0 <= CONSTRUCTIONSITE_STEP_TIME, "assert(0 <= CONSTRUCTIONSITE_STEP_TIME) failed.");
+	m_info.totaltime = CONSTRUCTIONSITE_STEP_TIME * m_work_steps;
+	m_info.completedtime = CONSTRUCTIONSITE_STEP_TIME * m_work_completed;
+
+	if (m_working) {
+		assert
+			(m_work_steptime
+			 <=
+			 m_info.completedtime + CONSTRUCTIONSITE_STEP_TIME + gametime);
+		m_info.completedtime += CONSTRUCTIONSITE_STEP_TIME + gametime - m_work_steptime;
+	}
+
+	uint32_t anim;
+	uint32_t cur_frame;
+	try {
+		anim = building().get_animation("build");
+	} catch (Map_Object_Descr::Animation_Nonexistent &) {
+		try {
+			anim = building().get_animation("unoccupied");
+		} catch (Map_Object_Descr::Animation_Nonexistent) {
+			anim = building().get_animation("idle");
+		}
+	}
+	const size_t nr_frames = g_gr->nr_frames(anim);
+	cur_frame = m_info.totaltime ? m_info.completedtime * nr_frames / m_info.totaltime : 0;
+	// Redefine tanim
+	tanim = cur_frame * FRAME_LENGTH;
+
+	uint32_t w, h;
+	g_gr->get_animation_size(anim, tanim, w, h);
+
+	uint32_t lines = h * m_info.completedtime * nr_frames;
+	if (m_info.totaltime)
+		lines /= m_info.totaltime;
+	assert(h * cur_frame <= lines);
+	lines -= h * cur_frame; //  This won't work if pictures have various sizes.
+
+	if (cur_frame) //  not the first pic
+		//  draw the prev pic from top to where next image will be drawing
+		dst.drawanimrect3d(pos, anim, tanim - FRAME_LENGTH, get_owner(), Rect(Point(0, 0), w, h - lines));
+	else if (!m_old_buildings.empty()) {
+		Building_Index prev_idx = m_old_buildings.back();
+		const Building_Descr* prev_building = tribe().get_building_descr(prev_idx);
+		//  Is the first picture but there was another building here before,
+		//  get its most fitting picture and draw it instead.
+		uint32_t a;
+		try {
+			a = prev_building->get_animation("unoccupied");
+		} catch (Map_Object_Descr::Animation_Nonexistent &) {
+			a = prev_building->get_animation("idle");
+		}
+		uint32_t wa, ha;
+		g_gr->get_animation_size(a, tanim, wa, ha);
+		dst.drawanimrect3d
+			(pos, a, tanim - FRAME_LENGTH, get_owner(),
+			 Rect(Point(0, 0), wa, std::min(ha, h - lines)));
+	}
+
+	assert(lines <= h);
+	dst.drawanimrect3d(pos, anim, tanim, get_owner(), Rect(Point(0, h - lines), w, lines));
+
+	// Draw help strings
+	draw_help3d(game, dst, coords, pos);
+}
+
 }

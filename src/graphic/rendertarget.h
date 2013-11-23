@@ -25,6 +25,7 @@
 #include "align.h"
 #include "graphic/compositemode.h"
 #include "graphic/image.h"
+#include "point3d.h"
 #include "rect.h"
 #include "rgbcolor.h"
 
@@ -62,11 +63,15 @@ public:
 		(int32_t x1, int32_t y1, int32_t x2, int32_t y2, const RGBColor& color, uint8_t width = 1);
 	void draw_rect(Rect, const RGBColor&);
 	void fill_rect(Rect, const RGBAColor&);
+	void draw_rect3d(Rect,int32_t z, const RGBColor&);
+	void fill_rect3d(Rect,int32_t z, const RGBAColor&);
 	void brighten_rect(Rect, int32_t factor);
 
 	void blit(const Point& dst, const Image* image, Composite cm = CM_Normal, UI::Align = UI::Align_TopLeft);
 	void blitrect(Point dst, const Image* image, Rect src, Composite cm = CM_Normal);
 	void tile(Rect, const Image* image, Point ofs, Composite cm = CM_Normal);
+
+	void blit3d(const Point3D& dst, const Image* image, Composite cm = CM_Normal, UI::Align = UI::Align_TopLeft);
 
 	void drawanim
 		(Point                     dst,
@@ -86,6 +91,24 @@ public:
 		 Widelands::Player const *,
 		 Rect                      srcrc);
 
+	void drawanim3d
+		(Point3D                     dst,
+		 uint32_t                  animation,
+		 uint32_t                  time,
+		 Widelands::Player const * = 0);
+
+	void drawstatic3d
+			(Point3D                     dst,
+			 uint32_t                  animation,
+			 Widelands::Player const * = 0);
+
+	void drawanimrect3d
+		(Point3D                     dst,
+		 uint32_t                  animation,
+		 uint32_t                  time,
+		 Widelands::Player const *,
+		 Rect                      srcrc);
+
 	void reset();
 
 	Surface* get_surface() {return m_surface;}
@@ -96,6 +119,8 @@ protected:
 	bool clip(Rect & r) const;
 
 	void doblit(Point dst, const Image* src, Rect srcrc, Composite cm = CM_Normal);
+
+	void doblit3d(Point3D dst, const Image* src, Rect srcrc, Composite cm = CM_Normal);
 
 	///The target surface
 	Surface* m_surface;

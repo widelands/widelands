@@ -39,5 +39,23 @@ void correct_for_align(Align align, uint32_t w, uint32_t h, Point* pt) {
 	}
 }
 
+void correct_for_align3d(Align align, uint32_t w, uint32_t h, Point3D* pt) {
+	//Vertical Align
+	if (align & (Align_VCenter | Align_Bottom)) {
+		if (align & Align_VCenter)
+			pt->y -= h / 2;
+		else
+			pt->y -= h;
+	}
+
+	//Horizontal Align
+	if ((align & Align_Horizontal) != Align_Left) {
+		if (align & Align_HCenter)
+			pt->x -= w / 2;
+		else if (align & Align_Right)
+			pt->x -= w;
+	}
+}
+
 }  // namespace UI
 

@@ -748,6 +748,26 @@ void Building::draw
 	}
 }
 
+/*
+===============
+Draw the building.
+===============
+*/
+void Building::draw3d
+	(const Editor_Game_Base& game, RenderTarget& dst, const FCoords& coords, const Point3D& pos)
+{
+	if (coords == m_position) { // draw big buildings only once
+		dst.drawanim3d
+			(pos, m_anim, game.get_gametime() - m_animstart, get_owner());
+
+		//  door animation?
+
+		//  overlay strings (draw when enabled)
+		draw_help3d(game, dst, coords, pos);
+	}
+}
+
+
 
 /*
 ===============
@@ -778,6 +798,39 @@ void Building::draw_help
 		const std::string info = info_string(igbase.building_statistics_format());
 		if (!info.empty()) {
 			dst.blit(pos - Point(0, 35), UI::g_fh1->render(info), CM_Normal, UI::Align_Center);
+		}
+	}
+}
+
+/*
+===============
+Draw overlay help strings when enabled.
+===============
+*/
+void Building::draw_help3d
+	(const Editor_Game_Base& game, RenderTarget& dst, const FCoords&, const Point3D& pos)
+{
+	const Interactive_GameBase & igbase =
+		ref_cast<Interactive_GameBase const, Interactive_Base const>
+			(*game.get_ibase());
+	uint32_t const dpyflags = igbase.get_display_flags();
+
+	if (dpyflags & Interactive_Base::dfShowCensus) {
+		const std::string info = info_string(igbase.building_census_format());
+		if (!info.empty()) {
+			dst.blit3d(pos - Point(0, 48), UI::g_fh1->render(info), CM_Normal, UI::Align_Center);
+		}
+	}
+
+	if (dpyflags & Interactive_Base::dfShowStatistics) {
+		if (upcast(Interactive_Player const, iplayer, &igbase))
+			if
+				(!iplayer->player().see_all() &&
+				 iplayer->player().is_hostile(*get_owner()))
+				return;
+		const std::string info = info_string(igbase.building_statistics_format());
+		if (!info.empty()) {
+			dst.blit3d(pos - Point(0, 35), UI::g_fh1->render(info), CM_Normal, UI::Align_Center);
 		}
 	}
 }

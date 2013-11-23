@@ -140,7 +140,11 @@ void GameRendererGL::draw()
 	}
 	prepare_roads();
 	draw_roads();
-	draw_objects();
+	if (g_rend3D) {
+	   draw_objects3d();
+	} else {
+	   draw_objects();
+	}
 
 	glDisable(GL_SCISSOR_TEST);
 }

@@ -162,6 +162,30 @@ void SDLSurface::draw_rect(const Rect& rc, const RGBColor clr) {
 	}
 }
 
+/*
+===============
+Draws the outline of a rectangle
+===============
+*/
+void SDLSurface::draw_rect3d(const Rect& rc,int32_t z, const RGBColor clr) {
+	assert(m_surface);
+	assert(rc.x >= 0);
+	assert(rc.y+z/2 >= 0);
+
+	const uint32_t color = clr.map(format());
+
+	const Point bl = rc.bottom_right() - Point(1, 1);
+
+	for (int32_t x = rc.x + 1; x < bl.x; ++x) {
+		set_pixel(x, rc.y+z/2, color);
+		set_pixel(x, bl.y+z/2, color);
+	}
+	for (int32_t y = rc.y+z/2; y <= (bl.y+z/2); ++y) {
+		set_pixel(rc.x, y, color);
+		set_pixel(bl.x, y, color);
+	}
+}
+
 
 /*
 ===============
@@ -177,6 +201,25 @@ void SDLSurface::fill_rect(const Rect& rc, const RGBAColor clr) {
 
 	SDL_Rect r = {
 		static_cast<Sint16>(rc.x), static_cast<Sint16>(rc.y),
+		static_cast<Uint16>(rc.w), static_cast<Uint16>(rc.h)
+		};
+	SDL_FillRect(m_surface, &r, color);
+}
+
+/*
+===============
+Draws a filled rectangle
+===============
+*/
+void SDLSurface::fill_rect3d(const Rect& rc, int32_t z, const RGBAColor clr) {
+	assert(m_surface);
+	assert(rc.x >= 0);
+	assert(rc.y >= 0);
+
+	const uint32_t color = clr.map(format());
+
+	SDL_Rect r = {
+		static_cast<Sint16>(rc.x), static_cast<Sint16>(rc.y)+z/2,
 		static_cast<Uint16>(rc.w), static_cast<Uint16>(rc.h)
 		};
 	SDL_FillRect(m_surface, &r, color);
@@ -325,6 +368,34 @@ void SDLSurface::blit
 		};
 	SDL_Rect dstrect = {
 		static_cast<Sint16>(dst.x), static_cast<Sint16>(dst.y),
+		0, 0
+		};
+
+	bool alpha;
+	uint8_t alphaval;
+	if (cm == CM_Solid || cm == CM_Copy) {
+		alpha = sdlsurf->flags & SDL_SRCALPHA;
+		alphaval = sdlsurf->format->alpha;
+		SDL_SetAlpha(sdlsurf, 0, 0);
+	}
+
+	SDL_BlitSurface(sdlsurf, &srcrect, m_surface, &dstrect);
+
+	if (cm == CM_Solid || cm == CM_Copy) {
+		SDL_SetAlpha(sdlsurf, alpha?SDL_SRCALPHA:0, alphaval);
+	}
+}
+
+void SDLSurface::blit3d
+	(const Point3D& dst, const Surface* src, const Rect& srcrc, Composite cm)
+{
+	SDL_Surface* sdlsurf = static_cast<const SDLSurface*>(src)->get_sdl_surface();
+	SDL_Rect srcrect = {
+		static_cast<Sint16>(srcrc.x), static_cast<Sint16>(srcrc.y),
+		static_cast<Uint16>(srcrc.w), static_cast<Uint16>(srcrc.h)
+		};
+	SDL_Rect dstrect = {
+		static_cast<Sint16>(dst.x), static_cast<Sint16>(dst.y+dst.z),
 		0, 0
 		};
 

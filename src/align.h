@@ -21,6 +21,7 @@
 #define ALIGN_H
 
 #include "point.h"
+#include "point3d.h"
 
 namespace UI {
 
@@ -50,6 +51,7 @@ enum Align {
 };
 
 void correct_for_align(Align, uint32_t w, uint32_t h, Point* pt);
+void correct_for_align3d(Align, uint32_t w, uint32_t h, Point3D* pt);
 
 }
 #endif

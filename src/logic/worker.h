@@ -193,6 +193,8 @@ protected:
 	virtual bool is_evict_allowed();
 	void draw_inner(const Editor_Game_Base &, RenderTarget &, const Point&) const;
 	virtual void draw(const Editor_Game_Base &, RenderTarget &, const Point&) const;
+	void draw_inner3d(const Editor_Game_Base &, RenderTarget &, const Point3D&) const;
+	virtual void draw3d(const Editor_Game_Base &, RenderTarget &, const Point3D&) const;
 	virtual void init_auto_task(Game &);
 
 	bool does_carry_ware() {return m_carried_item.is_set();}

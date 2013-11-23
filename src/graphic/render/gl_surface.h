@@ -42,7 +42,11 @@ public:
 	virtual void blit(const Point&, const Surface*, const Rect& srcrc, Composite cm);
 	virtual void fill_rect(const Rect&, RGBAColor);
 	virtual void draw_rect(const Rect&, RGBColor);
+	virtual void fill_rect3d(const Rect&, int32_t, RGBAColor);
+	virtual void draw_rect3d(const Rect&, int32_t, RGBColor);
 	virtual void brighten_rect(const Rect&, int32_t factor);
+
+	virtual void blit3d(const Point3D&, const Surface*, const Rect& srcrc, Composite cm);
 
 	virtual void draw_line
 		(int32_t x1, int32_t y1, int32_t x2, int32_t y2, const RGBColor&, uint8_t width);

@@ -500,6 +500,17 @@ void Immovable::draw
 	}
 }
 
+void Immovable::draw3d
+	(const Editor_Game_Base& game, RenderTarget& dst, const FCoords&, const Point3D& pos)
+{
+	if (m_anim) {
+		if (!m_anim_construction_total)
+			dst.drawanim3d(pos, m_anim, game.get_gametime() - m_animstart, 0);
+		else
+			draw_construction3d(game, dst, pos);
+	}
+}
+
 void Immovable::draw_construction
 	(const Editor_Game_Base & game, RenderTarget & dst, const Point pos)
 {
@@ -545,6 +556,54 @@ void Immovable::draw_construction
 			(boost::format("<font color=%1$s>%2$i%% built</font>") % UI_FONT_CLR_DARK_HEX % percent).str();
 		m_construct_string = as_uifont(m_construct_string);
 		dst.blit(pos - Point(0, 48), UI::g_fh1->render(m_construct_string), CM_Normal, UI::Align_Center);
+	}
+}
+
+void Immovable::draw_construction3d
+	(const Editor_Game_Base & game, RenderTarget & dst, const Point3D pos)
+{
+	const ImmovableProgram::ActConstruction * constructionact = 0;
+	if (m_program_ptr < m_program->size())
+		constructionact = dynamic_cast<const ImmovableProgram::ActConstruction *>
+			(&(*m_program)[m_program_ptr]);
+
+	const int32_t steptime = constructionact ? constructionact->buildtime() : 5000;
+	uint32_t total = m_anim_construction_total * steptime;
+	uint32_t done = 0;
+
+	if (m_anim_construction_done > 0) {
+		done = steptime * (m_anim_construction_done - 1);
+		done += std::min(steptime, game.get_gametime() - m_animstart);
+	}
+
+	if (done > total)
+		done = total;
+
+	const size_t nr_frames = g_gr->nr_frames(m_anim);
+	uint32_t frametime = g_anim.get_animation(m_anim).frametime;
+	uint32_t units_per_frame = (total + nr_frames - 1) / nr_frames;
+	const size_t current_frame = done / units_per_frame;
+	uint32_t curw, curh;
+	g_gr->get_animation_size(m_anim, current_frame * frametime, curw, curh);
+
+	uint32_t lines = ((done % units_per_frame) * curh) / units_per_frame;
+
+	if (current_frame > 0) {
+		// Not the first pic, so draw the previous one in the back
+		dst.drawanim3d(pos, m_anim, (current_frame-1) * frametime, get_owner());
+	}
+
+	assert(lines <= curh);
+	dst.drawanimrect3d
+		(pos, m_anim, current_frame * frametime, get_owner(), Rect(Point(0, curh - lines), curw, lines));
+
+	// Additionnaly, if statistics are enabled, draw a progression string
+	if (game.get_ibase()->get_display_flags() & Interactive_Base::dfShowStatistics) {
+		unsigned int percent = (100 * done / total);
+		m_construct_string =
+			(boost::format("<font color=%1$s>%2$i%% built</font>") % UI_FONT_CLR_DARK_HEX % percent).str();
+		m_construct_string = as_uifont(m_construct_string);
+		dst.blit3d(pos - Point(0, 48), UI::g_fh1->render(m_construct_string), CM_Normal, UI::Align_Center);
 	}
 }
 

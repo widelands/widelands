@@ -99,6 +99,47 @@ void GLSurface::fill_rect(const Rect& rc, const RGBAColor clr) {
 }
 
 /**
+ * Draws the outline of a rectangle
+ */
+void GLSurface::draw_rect3d(const Rect& rc,int32_t z, const RGBColor clr)
+{
+	assert(g_opengl);
+	glDisable(GL_BLEND);
+	glDisable(GL_TEXTURE_2D);
+	glLineWidth(1);
+
+	glBegin(GL_LINE_LOOP); {
+		glColor3ub(clr.r, clr.g, clr.b);
+		glVertex3f(rc.x + 0.5f,        rc.y + 0.5f, z);
+		glVertex3f(rc.x + rc.w - 0.5f, rc.y + 0.5f,z);
+		glVertex3f(rc.x + rc.w - 0.5f, rc.y + rc.h - 0.5f, z);
+		glVertex3f(rc.x + 0.5f,        rc.y + rc.h - 0.5f, z);
+	} glEnd();
+	glEnable(GL_TEXTURE_2D);
+}
+
+
+/**
+ * Draws a filled rectangle
+ */
+void GLSurface::fill_rect3d(const Rect& rc,int32_t z, const RGBAColor clr) {
+	assert(rc.x >= 0);
+	assert(rc.y >= 0);
+	assert(g_opengl);
+	glDisable(GL_TEXTURE_2D);
+	glDisable(GL_BLEND);
+
+	glBegin(GL_QUADS); {
+		glColor4ub(clr.r, clr.g, clr.b, clr.a);
+		glVertex3f(rc.x,        rc.y, z);
+		glVertex3f(rc.x + rc.w, rc.y, z);
+		glVertex3f(rc.x + rc.w, rc.y + rc.h, z);
+		glVertex3f(rc.x,        rc.y + rc.h, z);
+	} glEnd();
+	glEnable(GL_TEXTURE_2D);
+}
+
+/**
  * Change the brightness of the given rectangle
  */
 void GLSurface::brighten_rect(const Rect& rc, const int32_t factor)
@@ -219,6 +260,59 @@ void GLSurface::blit
 		glTexCoord2i(srcrc.x, srcrc.y + srcrc.h);
 		glVertex2f(dst.x, dst.y + srcrc.h);
 	} glEnd();
+}
+#include "log.h"
+void GLSurface::blit3d
+	(const Point3D& dst, const Surface* image, const Rect& srcrc, Composite cm)
+{
+	// Note: This function is highly optimized and therefore does not restore
+	// all state. It also assumes that all other glStuff restores state to make
+	// this function faster.
+
+	assert(g_opengl);
+	const GLSurfaceTexture& surf = *static_cast<const GLSurfaceTexture*>(image);
+
+	/* Set a texture scaling factor. Normally texture coordinates
+	* (see glBegin()...glEnd() Block below) are given in the range 0-1
+	* to avoid the calculation (and let opengl do it) the texture
+	* space is modified. glMatrixMode select which matrixconst  to manipulate
+	* (the texture transformation matrix in this case). glLoadIdentity()
+	* resets the (selected) matrix to the identity matrix. And finally
+	* glScalef() calculates the texture matrix.
+	*/
+	glMatrixMode(GL_TEXTURE);
+	glLoadIdentity();
+	glScalef
+		(1.0f / static_cast<GLfloat>(surf.get_tex_w()),
+		 1.0f / static_cast<GLfloat>(surf.get_tex_h()), 1);
+
+	// Enable Alpha blending
+	if (cm == CM_Normal) {
+		glEnable(GL_BLEND);
+		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	} else {
+		glDisable(GL_BLEND);
+	}
+
+	glBindTexture(GL_TEXTURE_2D, surf.get_gl_texture());
+
+	glBegin(GL_QUADS); {
+		// set color white, otherwise textures get mixed with color
+		glColor3f(1.0, 1.0, 1.0);
+		// top-left
+		glTexCoord2i(srcrc.x, srcrc.y);
+		glVertex3i(dst.x, dst.y, dst.z);
+		// top-right
+		glTexCoord2i(srcrc.x + srcrc.w, srcrc.y);
+		glVertex3f((dst.x + (int32_t) srcrc.w), dst.y, dst.z);
+		// bottom-right
+		glTexCoord2i(srcrc.x + srcrc.w, srcrc.y + srcrc.h);
+		glVertex3f((dst.x + (int32_t) srcrc.w), (dst.y + (int32_t) srcrc.h), dst.z);
+		// bottom-left
+		glTexCoord2i(srcrc.x, srcrc.y + srcrc.h);
+		glVertex3f(dst.x, (dst.y + (int32_t) srcrc.h), dst.z);
+	} glEnd();
+
 }
 
 

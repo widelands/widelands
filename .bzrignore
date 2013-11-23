@@ -28,3 +28,10 @@ VERSION
 
 # Python compiled files.
 *.pyc
+./.cproject
+./.project
+./Default
+./rebuild.sh
+./stderr.txt
+./stdout.txt
+./widelands.exe

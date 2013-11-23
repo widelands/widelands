@@ -162,6 +162,12 @@ void PortDock::draw
 	// do nothing
 }
 
+void PortDock::draw3d
+		(const Editor_Game_Base &, RenderTarget &, const FCoords&, const Point3D&)
+{
+	// do nothing
+}
+
 const std::string & PortDock::name() const
 {
 	static const std::string name_("portdock");

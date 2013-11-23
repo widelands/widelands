@@ -95,6 +95,7 @@ protected:
 		(Game &, WaresQueue *, Ware_Index, void * data);
 
 	virtual void draw(const Editor_Game_Base &, RenderTarget &, const FCoords&, const Point&);
+	virtual void draw3d(const Editor_Game_Base &, RenderTarget &, const FCoords&, const Point3D&);
 
 private:
 	int32_t  m_fetchfromflag;  // # of items to fetch from flag

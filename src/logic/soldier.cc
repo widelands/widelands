@@ -549,6 +549,71 @@ Point Soldier::calc_drawpos
 	return epos;
 }
 
+/// Calculates the actual position to draw on from the base node position.
+/// This function takes battling into account.
+///
+/// pos is the location, in pixels, of the node m_position (height is already
+/// taken into account).
+Point3D Soldier::calc_drawpos3d
+	(const Editor_Game_Base & game, const Point3D pos) const
+{
+	if (m_combat_walking == CD_NONE) {
+		return Bob::calc_drawpos3d(game, pos);
+	}
+
+	bool moving = false;
+	Point3D spos = pos, epos = pos;
+
+	switch (m_combat_walking) {
+		case CD_WALK_W:
+			moving = true;
+			epos.x -= TRIANGLE_WIDTH / 4;
+			break;
+		case CD_WALK_E:
+			moving = true;
+			epos.x += TRIANGLE_WIDTH / 4;
+			break;
+		case CD_RETURN_W:
+			moving = true;
+			spos.x -= TRIANGLE_WIDTH / 4;
+			break;
+		case CD_RETURN_E:
+			moving = true;
+			spos.x += TRIANGLE_WIDTH / 4;
+			break;
+		case CD_COMBAT_W:
+			moving = false;
+			epos.x -= TRIANGLE_WIDTH / 4;
+			break;
+		case CD_COMBAT_E:
+			moving = false;
+			epos.x += TRIANGLE_WIDTH / 4;
+			break;
+		case CD_NONE:
+			break;
+		default:
+			assert(false);
+	}
+
+	if (moving) {
+
+		float f =
+			static_cast<float>(game.get_gametime() - m_combat_walkstart)
+			/
+			(m_combat_walkend - m_combat_walkstart);
+		assert(m_combat_walkstart <= game.get_gametime());
+		assert(m_combat_walkstart < m_combat_walkend);
+
+		if (f < 0)
+			f = 0;
+		else if (f > 1)
+			f = 1;
+
+		epos.x = static_cast<int32_t>(f * epos.x + (1 - f) * spos.x);
+	}
+	return epos;
+}
+
 /*
  * Draw this soldier. This basically draws him as a worker, but add hitpoints
  */
@@ -569,6 +634,29 @@ void Soldier::draw
 		draw_info_icon(dst, Point(drawpos.x, drawpos.y - h - 7), true);
 
 		draw_inner(game, dst, drawpos);
+	}
+}
+
+/*
+ * Draw this soldier. This basically draws him as a worker, but add hitpoints
+ */
+void Soldier::draw3d
+	(const Editor_Game_Base & game, RenderTarget & dst, const Point3D& pos) const
+{
+	if (const uint32_t anim = get_current_anim()) {
+
+		const Point3D drawpos = calc_drawpos3d(game, pos);
+
+		uint32_t w, h;
+		g_gr->get_animation_size
+			(anim,
+			 game.get_gametime() - get_animstart(),
+			 w,
+			 h);
+
+		draw_info_icon3d(dst, Point3D(drawpos.x, drawpos.y - h - 7, drawpos.z), true);
+
+		draw_inner3d(game, dst, drawpos);
 	}
 }
 
@@ -635,6 +723,72 @@ void Soldier::draw_info_icon
 		dst.blit(pt + Point(0, -(evh + deh)), defensepic);
 		dst.blit(pt + Point(-hpw, -hph), hppic);
 		dst.blit(pt + Point(0, -evh), evadepic);
+	}
+}
+
+/**
+ * Draw the info icon (level indicators + HP bar) for this soldier.
+ *
+ * \param anchor_below if \c true, the icon is drawn horizontally centered above
+ * \p pt. Otherwise, the icon is drawn below and right of \p pt.
+ */
+void Soldier::draw_info_icon3d
+	(RenderTarget & dst, Point3D pt, bool anchor_below) const
+{
+	// Gather information to determine coordinates
+	uint32_t w;
+	w = SOLDIER_HP_BAR_WIDTH;
+
+	const Image* hppic = get_hp_level_pic();
+	const Image* attackpic = get_attack_level_pic();
+	const Image* defensepic = get_defense_level_pic();
+	const Image* evadepic = get_evade_level_pic();
+
+	uint16_t hpw = hppic->width();
+	uint16_t hph = hppic->height();
+	uint16_t atw = attackpic->width();
+	uint16_t ath = attackpic->height();
+	uint16_t dew = defensepic->width();
+	uint16_t deh = defensepic->height();
+	uint16_t evw = evadepic->width();
+	uint16_t evh = evadepic->height();
+
+	uint32_t totalwidth = std::max<int>(std::max<int>(atw + dew, hpw + evw), 2 * w);
+	uint32_t totalheight = 5 + std::max<int>(hph + ath, evh + deh);
+
+	if (!anchor_below) {
+		pt.x += totalwidth / 2;
+		pt.y += totalheight - 5;
+	} else {
+		pt.y -= 5;
+	}
+
+	// Draw energy bar
+	Rect energy_outer(Point(pt.x - w, pt.y), w * 2, 5);
+	dst.draw_rect3d(energy_outer, pt.z, HP_FRAMECOLOR);
+
+	assert(get_max_hitpoints());
+	uint32_t health_width = 2 * (w - 1) * m_hp_current / get_max_hitpoints();
+	Rect energy_inner(Point(pt.x - w + 1, pt.y + 1), health_width, 3);
+	Rect energy_complement
+		(energy_inner + Point(health_width, 0), 2 * (w - 1) - health_width, 3);
+	const RGBColor & color = owner().get_playercolor();
+	RGBColor complement_color;
+
+	if (static_cast<uint32_t>(color.r) + color.g + color.b > 128 * 3)
+		complement_color = RGBColor(32, 32, 32);
+	else
+		complement_color = RGBColor(224, 224, 224);
+
+	dst.fill_rect3d(energy_inner,pt.z, color);
+	dst.fill_rect3d(energy_complement,pt.z, complement_color);
+
+	// Draw level pictures
+	{
+		dst.blit3d(pt + Point(-atw, -(hph + ath)), attackpic);
+		dst.blit3d(pt + Point(0, -(evh + deh)), defensepic);
+		dst.blit3d(pt + Point(-hpw, -hph), hppic);
+		dst.blit3d(pt + Point(0, -evh), evadepic);
 	}
 }
 

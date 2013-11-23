@@ -282,6 +282,9 @@ protected:
 	virtual void draw(const Editor_Game_Base &, RenderTarget &, const FCoords&, const Point&);
 	void draw_help(const Editor_Game_Base &, RenderTarget &, const FCoords&, const Point&);
 
+	virtual void draw3d(const Editor_Game_Base &, RenderTarget &, const FCoords&, const Point3D&);
+	void draw_help3d(const Editor_Game_Base &, RenderTarget &, const FCoords&, const Point3D&);
+
 	virtual void create_options_window
 		(Interactive_GameBase &, UI::Window * & registry)
 		= 0;

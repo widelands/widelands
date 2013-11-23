@@ -23,6 +23,7 @@
 #include <boost/noncopyable.hpp>
 
 #include "graphic/compositemode.h"
+#include "point3d.h"
 #include "rect.h"
 #include "rgbcolor.h"
 
@@ -48,11 +49,20 @@ public:
 	/// This draws a part of another surface to this surface
 	virtual void blit(const Point&, const Surface*, const Rect& srcrc, Composite cm = CM_Normal) = 0;
 
+	/// This draws a part of another surface to this surface
+	virtual void blit3d(const Point3D&, const Surface*, const Rect& srcrc, Composite cm = CM_Normal) = 0;
+
 	/// Draws a filled rect to the surface.
 	virtual void fill_rect(const Rect&, RGBAColor) = 0;
 
 	/// Draws a rect (frame only) to the surface.
 	virtual void draw_rect(const Rect&, RGBColor) = 0;
+
+	/// Draws a filled rect to the surface.
+	virtual void fill_rect3d(const Rect&,int32_t, RGBAColor) = 0;
+
+	/// Draws a rect (frame only) to the surface.
+	virtual void draw_rect3d(const Rect&,int32_t, RGBColor) = 0;
 
 	/// draw a line to the surface
 	virtual void draw_line

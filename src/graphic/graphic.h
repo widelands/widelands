@@ -187,5 +187,6 @@ protected:
 
 extern Graphic * g_gr;
 extern bool g_opengl;
+extern bool g_rend3D;
 
 #endif

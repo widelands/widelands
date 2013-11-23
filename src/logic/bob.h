@@ -25,6 +25,7 @@
 #include "graphic/diranimations.h"
 #include "logic/instances.h"
 #include "point.h"
+#include "point3d.h"
 #include "port.h"
 #include "logic/walkingdir.h"
 
@@ -233,6 +234,7 @@ struct Bob : public Map_Object {
 	void schedule_act(Game &, uint32_t tdelta);
 	void skip_act();
 	Point calc_drawpos(const Editor_Game_Base &, Point) const;
+	Point3D calc_drawpos3d(const Editor_Game_Base &, Point3D) const;
 	void set_owner(Player *);
 	Player * get_owner() const {return m_owner;}
 	void set_position(Editor_Game_Base &, const Coords &);
@@ -251,6 +253,9 @@ struct Bob : public Map_Object {
 
 	virtual void draw
 		(const Editor_Game_Base &, RenderTarget &, const Point&) const;
+
+	virtual void draw3d
+			(const Editor_Game_Base &, RenderTarget &, const Point3D&) const;
 
 	// For debug
 	virtual void log_general_info(const Editor_Game_Base &);

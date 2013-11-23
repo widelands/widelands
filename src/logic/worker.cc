@@ -2946,6 +2946,35 @@ void Worker::draw_inner
 /**
  * Draw the worker, taking the carried item into account.
  */
+void Worker::draw3d
+	(const Editor_Game_Base & game, RenderTarget & dst, const Point3D& pos) const
+{
+	if (get_current_anim())
+		draw_inner3d(game, dst, calc_drawpos3d(game, pos));
+}
+
+void Worker::draw_inner3d
+	(const Editor_Game_Base& game, RenderTarget& dst, const Point3D& drawpos)
+	const
+{
+	dst.drawanim3d
+		(drawpos,
+		 get_current_anim(),
+		 game.get_gametime() - get_animstart(),
+		 get_owner());
+
+	if (WareInstance const * const carried_item = get_carried_item(game))
+		dst.drawanim3d
+			(drawpos - descr().get_ware_hotspot(),
+			 carried_item->descr().get_animation("idle"),
+			 0,
+			 get_owner());
+}
+
+
+/**
+ * Draw the worker, taking the carried item into account.
+ */
 void Worker::draw
 	(const Editor_Game_Base & game, RenderTarget & dst, const Point& pos) const
 {

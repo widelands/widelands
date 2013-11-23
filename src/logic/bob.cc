@@ -783,6 +783,93 @@ void Bob::move_update(Game & game, State &)
 		return schedule_act(game, m_walkend - game.get_gametime());
 }
 
+/// Calculates the actual position to draw on from the base node position.
+/// This function takes walking etc. into account.
+///
+/// pos is the location, in pixels, of the node m_position (height is already
+/// taken into account).
+Point3D Bob::calc_drawpos3d(const Editor_Game_Base & game, const Point3D pos) const
+{
+	const Map & map = game.get_map();
+	const FCoords end = m_position;
+	FCoords start;
+	Point3D spos = pos, epos = pos;
+
+	switch (m_walking) {
+	case WALK_NW:
+		map.get_brn(end, &start);
+		spos.x += TRIANGLE_WIDTH / 2;
+		spos.z += TRIANGLE_WIDTH;
+		break;
+	case WALK_NE:
+		map.get_bln(end, &start);
+		spos.x -= TRIANGLE_WIDTH / 2;
+		spos.z += TRIANGLE_WIDTH;
+		break;
+	case WALK_W:
+		map.get_rn(end, &start);
+		spos.x += TRIANGLE_WIDTH;
+		break;
+	case WALK_E:
+		map.get_ln(end, &start);
+		spos.x -= TRIANGLE_WIDTH;
+		break;
+	case WALK_SW:
+		map.get_trn(end, &start);
+		spos.x += TRIANGLE_WIDTH / 2;
+		spos.z -= TRIANGLE_WIDTH;
+		break;
+	case WALK_SE:
+		map.get_tln(end, &start);
+		spos.x -= TRIANGLE_WIDTH / 2;
+		spos.z -= TRIANGLE_WIDTH;
+		break;
+
+	case IDLE: start.field = 0; break;
+	default:
+		assert(false);
+		break;
+	}
+
+	if (start.field) {
+		spos.z += end.field->get_height() * HEIGHT_FACTOR;
+		spos.z -= start.field->get_height() * HEIGHT_FACTOR;
+
+		assert(m_walkstart <= game.get_gametime());
+		assert(m_walkstart < m_walkend);
+		float f =
+			static_cast<float>(game.get_gametime() - m_walkstart)
+			/
+			(m_walkend - m_walkstart);
+
+		if (f < 0)
+			f = 0;
+		else if (f > 1)
+			f = 1;
+
+		epos.x = static_cast<int32_t>(f * epos.x + (1 - f) * spos.x);
+		epos.y = static_cast<int32_t>(f * epos.y + (1 - f) * spos.y);
+		epos.z = static_cast<int32_t>(f * epos.z + (1 - f) * spos.z);
+	}
+
+	return epos;
+}
+
+
+/// It LERPs between start and end position when we are walking.
+/// Note that the current node is actually the node that we are walking to, not
+/// the the one that we start from.
+void Bob::draw3d
+	(const Editor_Game_Base & egbase, RenderTarget & dst, const Point3D& pos) const
+{
+	if (m_anim)
+		dst.drawanim3d
+			(calc_drawpos3d(egbase, pos),
+			 m_anim,
+			 egbase.get_gametime() - m_animstart,
+			 get_owner());
+}
+
 
 /// Calculates the actual position to draw on from the base node position.
 /// This function takes walking etc. into account.
