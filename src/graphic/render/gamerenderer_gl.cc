@@ -40,7 +40,8 @@ GameRendererGL::GameRendererGL() :
 	m_patch_vertices_size(0),
 	m_patch_indices_size(0),
 	m_edge_vertices_size(0),
-	m_road_vertices_size(0)
+	m_road_vertices_size(0),
+	m_road_vertices_size3d(0)
 {
 }
 
@@ -138,11 +139,14 @@ void GameRendererGL::draw()
 		prepare_terrain_dither();
 		draw_terrain_dither();
 	}
-	prepare_roads();
-	draw_roads();
+
 	if (g_rend3D) {
+	   prepare_roads3d();
+	   draw_roads3d();
 	   draw_objects3d();
 	} else {
+	   prepare_roads();
+	   draw_roads();
 	   draw_objects();
 	}
 
@@ -166,6 +170,30 @@ void GameRendererGL::compute_basevertex(const Coords & coords, vertex & vtx) con
 	MapviewPixelFunctions::get_basepix(coords, tex.x, tex.y);
 	vtx.tcx = float(tex.x) / TEXTURE_WIDTH;
 	vtx.tcy = float(tex.y) / TEXTURE_HEIGHT;
+	uint8_t brightness = field_brightness(fcoords);
+	vtx.color[0] = vtx.color[1] = vtx.color[2] = brightness;
+	vtx.color[3] = 255;
+}
+
+template<typename vertex>
+void GameRendererGL::compute_basevertex3d(const Coords & coords, vertex & vtx) const
+{
+	const Map & map = m_egbase->map();
+	Coords ncoords(coords);
+	map.normalize_coords(ncoords);
+	FCoords fcoords = map.get_fcoords(ncoords);
+	Point3D pix;
+	MapviewPixelFunctions::get_basepix3d(coords, pix.x, pix.z);
+	pix.y -= fcoords.field->get_height() * HEIGHT_FACTOR;
+	pix.x += m_surface_offset.x;
+	pix.z += m_surface_offset.y*2; //TODO convert the surface offset also to 3D coordinates
+	vtx.x = pix.x;
+	vtx.y = pix.y;
+	vtx.z = pix.z;
+	Point tex;
+	MapviewPixelFunctions::get_basepix3d(coords, tex.x, tex.y);
+	vtx.tcx = float(tex.x) / TEXTURE_WIDTH;
+	vtx.tcy = float(tex.y/2) / TEXTURE_HEIGHT;
 	uint8_t brightness = field_brightness(fcoords);
 	vtx.color[0] = vtx.color[1] = vtx.color[2] = brightness;
 	vtx.color[3] = 255;
@@ -634,6 +662,128 @@ void GameRendererGL::prepare_roads()
 	assert(indexs[1] == 4 * nrquads);
 }
 
+// TODO make the rendering independent from an rectangular rendering area
+void GameRendererGL::prepare_roads3d()
+{
+	const Map & map = m_egbase->map();
+
+	m_road_freq[0] = 0;
+	m_road_freq[1] = 0;
+
+	for (int32_t fy = m_minfy; fy <= m_maxfy; ++fy) {
+		for (int32_t fx = m_minfx; fx <= m_maxfx; ++fx) {
+			Coords ncoords(fx, fy);
+			map.normalize_coords(ncoords);
+			FCoords fcoords = map.get_fcoords(ncoords);
+			uint8_t roads = field_roads(fcoords);
+
+			for (int dir = 0; dir < 3; ++dir) {
+				uint8_t road = (roads >> (2 * dir)) & Road_Mask;
+				if (road >= Road_Normal && road <= Road_Busy) {
+					++m_road_freq[road - Road_Normal];
+				}
+			}
+		}
+	}
+
+	uint32_t nrquads = m_road_freq[0] + m_road_freq[1];
+	if (4 * nrquads > m_road_vertices_size) {
+		m_road_vertices3d.reset(new basevertex3D[4 * nrquads]);
+		m_road_vertices_size3d = 4 * nrquads;
+	}
+
+	uint32_t indexs[2];
+	indexs[0] = 0;
+	indexs[1] = 4 * m_road_freq[0];
+
+	for (int32_t fy = m_minfy; fy <= m_maxfy; ++fy) {
+		for (int32_t fx = m_minfx; fx <= m_maxfx; ++fx) {
+			Coords ncoords(fx, fy);
+			map.normalize_coords(ncoords);
+			FCoords fcoords = map.get_fcoords(ncoords);
+			uint8_t roads = field_roads(fcoords);
+
+			uint8_t road = (roads >> Road_East) & Road_Mask;
+			if (road >= Road_Normal && road <= Road_Busy) {
+				uint32_t index = indexs[road - Road_Normal];
+				basevertex3D start, end;
+				compute_basevertex3d(Coords(fx, fy), start);
+				compute_basevertex3d(Coords(fx + 1, fy), end);
+				m_road_vertices3d[index] = start;
+				m_road_vertices3d[index].z -= 3;
+				m_road_vertices3d[index].tcy -= 2.0 / TEXTURE_HEIGHT;
+				++index;
+				m_road_vertices3d[index] = start;
+				m_road_vertices3d[index].z += 3;
+				m_road_vertices3d[index].tcy += 2.0 / TEXTURE_HEIGHT;
+				++index;
+				m_road_vertices3d[index] = end;
+				m_road_vertices3d[index].z += 3;
+				m_road_vertices3d[index].tcy += 2.0 / TEXTURE_HEIGHT;
+				++index;
+				m_road_vertices3d[index] = end;
+				m_road_vertices3d[index].z -= 3;
+				m_road_vertices3d[index].tcy -= 2.0 / TEXTURE_HEIGHT;
+				++index;
+				indexs[road - Road_Normal] = index;
+			}
+
+			road = (roads >> Road_SouthEast) & Road_Mask;
+			if (road >= Road_Normal && road <= Road_Busy) {
+				uint32_t index = indexs[road - Road_Normal];
+				basevertex3D start, end;
+				compute_basevertex3d(Coords(fx, fy), start);
+				compute_basevertex3d(Coords(fx + (fy & 1), fy + 1), end);
+				m_road_vertices3d[index] = start;
+				m_road_vertices3d[index].x += 3;
+				m_road_vertices3d[index].tcx += 3.0 / TEXTURE_HEIGHT;
+				++index;
+				m_road_vertices3d[index] = start;
+				m_road_vertices3d[index].x -= 3;
+				m_road_vertices3d[index].tcx -= 3.0 / TEXTURE_HEIGHT;
+				++index;
+				m_road_vertices3d[index] = end;
+				m_road_vertices3d[index].x -= 3;
+				m_road_vertices3d[index].tcx -= 3.0 / TEXTURE_HEIGHT;
+				++index;
+				m_road_vertices3d[index] = end;
+				m_road_vertices3d[index].x += 3;
+				m_road_vertices3d[index].tcx += 3.0 / TEXTURE_HEIGHT;
+				++index;
+				indexs[road - Road_Normal] = index;
+			}
+
+			road = (roads >> Road_SouthWest) & Road_Mask;
+			if (road >= Road_Normal && road <= Road_Busy) {
+				uint32_t index = indexs[road - Road_Normal];
+				basevertex3D start, end;
+				compute_basevertex3d(Coords(fx, fy), start);
+				compute_basevertex3d(Coords(fx + (fy & 1) - 1, fy + 1), end);
+				m_road_vertices3d[index] = start;
+				m_road_vertices3d[index].x += 3;
+				m_road_vertices3d[index].tcx += 3.0 / TEXTURE_HEIGHT;
+				++index;
+				m_road_vertices3d[index] = start;
+				m_road_vertices3d[index].x -= 3;
+				m_road_vertices3d[index].tcx -= 3.0 / TEXTURE_HEIGHT;
+				++index;
+				m_road_vertices3d[index] = end;
+				m_road_vertices3d[index].x -= 3;
+				m_road_vertices3d[index].tcx -= 3.0 / TEXTURE_HEIGHT;
+				++index;
+				m_road_vertices3d[index] = end;
+				m_road_vertices3d[index].x += 3;
+				m_road_vertices3d[index].tcx += 3.0 / TEXTURE_HEIGHT;
+				++index;
+				indexs[road - Road_Normal] = index;
+			}
+		}
+	}
+
+	assert(indexs[0] == 4 * m_road_freq[0]);
+	assert(indexs[1] == 4 * nrquads);
+}
+
 void GameRendererGL::draw_roads()
 {
 	if (!m_road_freq[0] && !m_road_freq[1])
@@ -649,6 +799,42 @@ void GameRendererGL::draw_roads()
 	glVertexPointer(2, GL_FLOAT, sizeof(basevertex), &m_road_vertices[0].x);
 	glTexCoordPointer(2, GL_FLOAT, sizeof(basevertex), &m_road_vertices[0].tcx);
 	glColorPointer(4, GL_UNSIGNED_BYTE, sizeof(basevertex), &m_road_vertices[0].color);
+	glEnableClientState(GL_VERTEX_ARRAY);
+	glEnableClientState(GL_TEXTURE_COORD_ARRAY);
+	glEnableClientState(GL_COLOR_ARRAY);
+
+	glDisable(GL_BLEND);
+
+	if (m_road_freq[0]) {
+		glBindTexture(GL_TEXTURE_2D, rt_normal);
+		glDrawArrays(GL_QUADS, 0, 4 * m_road_freq[0]);
+	}
+
+	if (m_road_freq[1]) {
+		glBindTexture(GL_TEXTURE_2D, rt_busy);
+		glDrawArrays(GL_QUADS, 4 * m_road_freq[0], 4 * m_road_freq[1]);
+	}
+
+	glDisableClientState(GL_VERTEX_ARRAY);
+	glDisableClientState(GL_TEXTURE_COORD_ARRAY);
+	glDisableClientState(GL_COLOR_ARRAY);
+}
+
+void GameRendererGL::draw_roads3d()
+{
+	if (!m_road_freq[0] && !m_road_freq[1])
+		return;
+
+	GLuint rt_normal =
+		dynamic_cast<const GLSurfaceTexture &>
+		(g_gr->get_road_texture(Widelands::Road_Normal)).get_gl_texture();
+	GLuint rt_busy =
+		dynamic_cast<const GLSurfaceTexture &>
+		(g_gr->get_road_texture(Widelands::Road_Busy)).get_gl_texture();
+
+	glVertexPointer(3, GL_FLOAT, sizeof(basevertex3D), &m_road_vertices3d[0].x);
+	glTexCoordPointer(2, GL_FLOAT, sizeof(basevertex3D), &m_road_vertices3d[0].tcx);
+	glColorPointer(4, GL_UNSIGNED_BYTE, sizeof(basevertex3D), &m_road_vertices3d[0].color);
 	glEnableClientState(GL_VERTEX_ARRAY);
 	glEnableClientState(GL_TEXTURE_COORD_ARRAY);
 	glEnableClientState(GL_COLOR_ARRAY);

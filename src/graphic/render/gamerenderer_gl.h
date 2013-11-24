@@ -65,6 +65,28 @@ private:
 		uint32_t pad[1];
 	};
 
+	struct basevertex3D {
+		float x;
+		float y;
+		float z;
+		float tcx;
+		float tcy;
+		uint8_t color[4];
+		uint32_t pad[3];
+	};
+
+	struct dithervertex3D {
+		float x;
+		float y;
+		float z;
+		float tcx;
+		float tcy;
+		float edgex;
+		float edgey;
+		uint8_t color[4];
+		uint32_t pad[1];
+	};
+
 	const GLSurfaceTexture * get_dither_edge_texture(const Widelands::World & world);
 
 	void draw();
@@ -84,12 +106,16 @@ private:
 	void draw_terrain_dither();
 	void prepare_roads();
 	void draw_roads();
+	void prepare_roads3d();
+	void draw_roads3d();
 
 	uint32_t patch_index(const Widelands::Coords & f) const;
 	uint8_t field_brightness(const Widelands::FCoords & coords) const;
 	uint8_t field_roads(const Widelands::FCoords & coords) const;
 	template<typename vertex>
 	void compute_basevertex(const Widelands::Coords & coords, vertex & vtx) const;
+	template<typename vertex>
+	void compute_basevertex3d(const Widelands::Coords & coords, vertex & vtx) const;
 
 	/**
 	 * The following variables are only valid during rendering.
@@ -122,6 +148,8 @@ private:
 	uint32_t m_road_freq[2];
 	std::unique_ptr<basevertex[]> m_road_vertices;
 	uint32_t m_road_vertices_size;
+	std::unique_ptr<basevertex3D[]> m_road_vertices3d;
+	uint32_t m_road_vertices_size3d;
 	/*@}*/
 };
 
