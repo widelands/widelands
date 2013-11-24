@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: Widelands svn4866\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2013-09-15 17:41+0000\n"
-"PO-Revision-Date: 2013-10-15 12:07+0000\n"
-"Last-Translator: fk <Unknown>\n"
+"PO-Revision-Date: 2013-11-23 12:30+0000\n"
+"Last-Translator: Emmanuel Andry <Unknown>\n"
 "Language-Team: Language <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-10-16 04:33+0000\n"
-"X-Generator: Launchpad (build 16799)\n"
+"X-Launchpad-Export-Date: 2013-11-24 05:18+0000\n"
+"X-Generator: Launchpad (build 16831)\n"
 
 #: ../../worlds/blackland/terrainconf:7
 msgid "Ashes"
@@ -78,7 +78,7 @@ msgstr "Bouleau minuscule"
 
 #: ../../worlds/blackland/conf:3
 msgid "Blackland"
-msgstr "Les Contrées Ténebreuses"
+msgstr "Les Contrées Ténébreuses"
 
 #: ../../worlds/blackland/conf:79
 msgid "Bunny"
@@ -140,7 +140,7 @@ msgstr "Herbe"
 
 #: ../../worlds/blackland/terrainconf:94
 msgid "Hard lava"
-msgstr "Lave dur"
+msgstr "Lave durcie"
 
 #: ../../worlds/blackland/terrainconf:41
 msgid "Hardground1"
@@ -250,7 +250,7 @@ msgstr "Chêne minuscule"
 #: ../../worlds/blackland/conf:27
 #: ../../worlds/blackland/conf:28
 msgid "Pebble"
-msgstr "Gallet"
+msgstr "Caillou"
 
 #: ../../worlds/blackland/conf:83
 msgid "Reindeer"
@@ -323,7 +323,7 @@ msgstr "L'équipe de développement de Widelands"
 
 #: ../../worlds/blackland/conf:4
 msgid "These are the grey, horrible and dangerous blacklands"
-msgstr "Ceci sont les sombres, horribles et dangereuses Contrées Ténebreuses"
+msgstr "Ceci sont les sombres, horribles et dangereuses Contrées Ténébreuses"
 
 #: ../../worlds/blackland/resconf:36
 #: ../../worlds/blackland/terrainconf:34
