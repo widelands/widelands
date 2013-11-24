@@ -261,7 +261,7 @@ void GLSurface::blit
 		glVertex2f(dst.x, dst.y + srcrc.h);
 	} glEnd();
 }
-#include "log.h"
+
 void GLSurface::blit3d
 	(const Point3D& dst, const Surface* image, const Rect& srcrc, Composite cm)
 {

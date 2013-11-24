@@ -378,7 +378,7 @@ void RenderTarget::drawanimrect
  * Plays sound effect that is registered with this frame (the Sound_Handler
  * decides if the fx really does get played)
  *
- * \param dstx, dsty the on-screen location of the animation hot spot
+ * \param dstx, dsty, dstz the on-screen location of the animation hot spot
  * \param animation the animation ID
  * \param time the time, in milliseconds, in the animation
  * \param player the player this object belongs to, for player colour
@@ -406,9 +406,16 @@ void RenderTarget::drawanim3d
 	const Image& frame =
 		player ? gfx->get_frame(framenumber, player->get_playercolor()) : gfx->get_frame(framenumber);
 
-	dst -= gfx->hotspot();
+	Point hotspot=gfx->hotspot();
+	dst -= hotspot;
 
 	Rect srcrc(Point(0, 0), frame.width(), frame.height());
+
+	//Correct isometric perspective, quick fix, to be replaced when using true imposters
+	uint32_t corr_z= srcrc.h - hotspot.y;
+	dst.y -= corr_z;
+	dst.z -= corr_z*2;
+	//Correct end
 
 	doblit3d(dst, &frame, srcrc);
 
@@ -464,7 +471,14 @@ void RenderTarget::drawanimrect3d
 		gfx->get_frame
 			(framenumber);
 
-	dst -= g_gr->get_animation(animation)->hotspot();
+	Point hotspot = g_gr->get_animation(animation)->hotspot();
+	dst -= hotspot;
+
+	//Correct isometric perspective, quick fix, to be replaced when using true imposters
+	uint32_t corr_z= srcrc.h - hotspot.y;
+	dst.y -= corr_z;
+	dst.z -= corr_z*2;
+	//Correct end
 
 	dst += srcrc;
 

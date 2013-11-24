@@ -72,7 +72,7 @@ private:
 		float tcx;
 		float tcy;
 		uint8_t color[4];
-		uint32_t pad[3];
+		uint32_t pad[2];
 	};
 
 	struct dithervertex3D {
@@ -84,26 +84,36 @@ private:
 		float edgex;
 		float edgey;
 		uint8_t color[4];
-		uint32_t pad[1];
+		//uint32_t pad[0];
 	};
 
 	const GLSurfaceTexture * get_dither_edge_texture(const Widelands::World & world);
 
 	void draw();
 	void prepare_terrain_base();
+	void prepare_terrain_base3d();
 	void collect_terrain_base(bool onlyscan);
+	void collect_terrain_base3d(bool onlyscan);
 	void count_terrain_base(Widelands::Terrain_Index ter);
 	void add_terrain_base_triangle
 		(Widelands::Terrain_Index ter,
 		 const Widelands::Coords & p1, const Widelands::Coords & p2, const Widelands::Coords & p3);
 	void draw_terrain_base();
+	void draw_terrain_base3d();
 	void prepare_terrain_dither();
+	void prepare_terrain_dither3d();
 	void collect_terrain_dither(bool onlyscan);
+	void collect_terrain_dither3d(bool onlyscan);
 	void add_terrain_dither_triangle
 		(bool onlyscan, Widelands::Terrain_Index ter,
 		 const Widelands::Coords & edge1, const Widelands::Coords & edge2,
 		 const Widelands::Coords & opposite);
+	void add_terrain_dither_triangle3d
+			(bool onlyscan, Widelands::Terrain_Index ter,
+			 const Widelands::Coords & edge1, const Widelands::Coords & edge2,
+			 const Widelands::Coords & opposite);
 	void draw_terrain_dither();
+	void draw_terrain_dither3d();
 	void prepare_roads();
 	void draw_roads();
 	void prepare_roads3d();
@@ -134,6 +144,8 @@ private:
 	Rect m_patch_size;
 	std::unique_ptr<basevertex[]> m_patch_vertices;
 	uint32_t m_patch_vertices_size;
+	std::unique_ptr<basevertex3D[]> m_patch_vertices3d;
+	uint32_t m_patch_vertices_size3d;
 	std::unique_ptr<uint16_t[]> m_patch_indices;
 	uint32_t m_patch_indices_size;
 	std::vector<uint32_t> m_patch_indices_indexs;
@@ -141,6 +153,8 @@ private:
 	std::vector<uint32_t> m_terrain_freq_cum;
 	std::unique_ptr<dithervertex[]> m_edge_vertices;
 	uint32_t m_edge_vertices_size;
+	std::unique_ptr<dithervertex3D[]> m_edge_vertices3d;
+	uint32_t m_edge_vertices_size3d;
 	std::vector<uint32_t> m_terrain_edge_freq;
 	std::vector<uint32_t> m_terrain_edge_freq_cum;
 	std::vector<uint32_t> m_terrain_edge_indexs;

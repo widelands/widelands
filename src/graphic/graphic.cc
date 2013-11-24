@@ -299,7 +299,7 @@ GCC_DIAG_ON ("-Wold-style-cast")
 			const GLfloat proj_matrix [4*4]= {
 			  2.f /((GLfloat) w ), 0., 0., 0.f,
 			  0.f, -2.f /((GLfloat) h ),0.f , 0.f,
-			  0.f, -1.f / ((GLfloat) h ),- 1.f/((GLfloat) h )*0.f, 0.f, // fix the z coordinate after converting all to 3D
+			  0.f, 1.f / ((GLfloat) h ),0.4f/((GLfloat) h ), 0.f, // fix the z coordinate after converting all to 3D
 			  -1.f, 1.f, 0.f, 1.f
 		    }; //Plain simple isometric projection
 			glMultMatrixf(proj_matrix);
@@ -311,7 +311,10 @@ GCC_DIAG_ON ("-Wold-style-cast")
 		// And select backbuffer as default drawing target
 		glMatrixMode(GL_MODELVIEW);
 		glLoadIdentity();
-		glDisable(GL_DEPTH_TEST);
+		if(g_rend3D) {
+			glEnable(GL_DEPTH_TEST);
+			glDepthFunc(GL_LEQUAL);
+		}else glDisable(GL_DEPTH_TEST);
 		glDrawBuffer(GL_BACK);
 
 		// Clear the screen before running the game.
@@ -447,6 +450,8 @@ void Graphic::refresh(bool force)
 {
 	if (g_opengl) {
 		SDL_GL_SwapBuffers();
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); //Clearing the screen is important for
+		// graphics chips using tile based rendering, e.g. mobile phones and tablets
 		m_update_fullscreen = false;
 		m_nr_update_rects = 0;
 		return;

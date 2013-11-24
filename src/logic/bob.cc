@@ -799,12 +799,12 @@ Point3D Bob::calc_drawpos3d(const Editor_Game_Base & game, const Point3D pos) co
 	case WALK_NW:
 		map.get_brn(end, &start);
 		spos.x += TRIANGLE_WIDTH / 2;
-		spos.z += TRIANGLE_WIDTH;
+		spos.z -= TRIANGLE_WIDTH;
 		break;
 	case WALK_NE:
 		map.get_bln(end, &start);
 		spos.x -= TRIANGLE_WIDTH / 2;
-		spos.z += TRIANGLE_WIDTH;
+		spos.z -= TRIANGLE_WIDTH;
 		break;
 	case WALK_W:
 		map.get_rn(end, &start);
@@ -817,12 +817,12 @@ Point3D Bob::calc_drawpos3d(const Editor_Game_Base & game, const Point3D pos) co
 	case WALK_SW:
 		map.get_trn(end, &start);
 		spos.x += TRIANGLE_WIDTH / 2;
-		spos.z -= TRIANGLE_WIDTH;
+		spos.z += TRIANGLE_WIDTH;
 		break;
 	case WALK_SE:
 		map.get_tln(end, &start);
 		spos.x -= TRIANGLE_WIDTH / 2;
-		spos.z -= TRIANGLE_WIDTH;
+		spos.z += TRIANGLE_WIDTH;
 		break;
 
 	case IDLE: start.field = 0; break;
@@ -832,8 +832,8 @@ Point3D Bob::calc_drawpos3d(const Editor_Game_Base & game, const Point3D pos) co
 	}
 
 	if (start.field) {
-		spos.z += end.field->get_height() * HEIGHT_FACTOR;
-		spos.z -= start.field->get_height() * HEIGHT_FACTOR;
+		spos.y += end.field->get_height() * HEIGHT_FACTOR;
+		spos.y -= start.field->get_height() * HEIGHT_FACTOR;
 
 		assert(m_walkstart <= game.get_gametime());
 		assert(m_walkstart < m_walkend);

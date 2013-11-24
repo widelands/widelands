@@ -71,6 +71,8 @@ void GameRenderer::draw_wrapper()
 	assert(tl_map.x >= 0); // divisions involving negative numbers are bad
 	assert(tl_map.y >= 0);
 
+	m_dst_z_offset=m_dst->get_rect().h+100;
+
 	m_minfx = tl_map.x / TRIANGLE_WIDTH - 1;
 	m_minfy = tl_map.y / TRIANGLE_HEIGHT - 1;
 	m_maxfx = (tl_map.x + m_dst->get_rect().w + (TRIANGLE_WIDTH / 2)) / TRIANGLE_WIDTH;
@@ -306,9 +308,9 @@ void GameRenderer::draw_objects3d()
 			MapviewPixelFunctions::get_basepix3d(Coords(fx + (fy & 1) - 1, fy + 1), pos[BL].x, pos[BL].z);
 			MapviewPixelFunctions::get_basepix3d(Coords(fx + (fy & 1), fy + 1), pos[BR].x, pos[BR].z);
 			for (uint32_t d = 0; d < 4; ++d) {
-				pos[d].y -= coords[d].field->get_height() * HEIGHT_FACTOR;
+				pos[d].y =m_dst_z_offset - coords[d].field->get_height() * HEIGHT_FACTOR;
 				pos[d].x += m_dst_offset.x;
-				pos[d].z += m_dst_offset.y*2; // TODO convert this to 3D coordinates
+				pos[d].z += -m_dst_offset.y*2 +m_dst_z_offset*2; // TODO convert this to 3D coordinates
 			}
 
 			Player_Number owner_number[4];

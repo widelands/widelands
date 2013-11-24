@@ -87,6 +87,8 @@ protected:
 	/// Translation from map pixel coordinates to @ref m_dst pixel coordinates
 	Point m_dst_offset;
 
+	int32_t m_dst_z_offset;
+
 	int32_t m_minfx;
 	int32_t m_minfy;
 	int32_t m_maxfx;

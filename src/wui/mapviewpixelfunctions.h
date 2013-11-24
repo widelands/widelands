@@ -112,9 +112,9 @@ inline void MapviewPixelFunctions::get_basepix
 }
 
 inline void MapviewPixelFunctions::get_basepix3d
-	(Widelands::Coords const  c, int32_t & px, int32_t & py)
+	(Widelands::Coords const  c, int32_t & px, int32_t & pz)
 {
-	py = c.y * TRIANGLE_WIDTH;
+	pz =-c.y * TRIANGLE_WIDTH;
 	px = c.x * TRIANGLE_WIDTH+ (c.y & 1) * (TRIANGLE_WIDTH / 2);
 }
 
