@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2013-09-15 17:41+0000\n"
-"PO-Revision-Date: 2013-11-16 18:21+0000\n"
+"PO-Revision-Date: 2013-11-24 13:56+0000\n"
 "Last-Translator: Hans Joachim Desserud <Unknown>\n"
 "Language-Team: Norwegian Bokmal <nb@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-11-17 05:15+0000\n"
+"X-Launchpad-Export-Date: 2013-11-25 05:12+0000\n"
 "X-Generator: Launchpad (build 16831)\n"
 
 #: ../../txts/README.lua:73
@@ -55,8 +55,8 @@ msgid ""
 "as\n"
 "some bugs can be platform specific."
 msgstr ""
-"- Fint hvis du nevner hvilket operativsystem du kjører Widelands på, siden "
-"noen problemer rammer bare enkelte platformer."
+"- Fint hvis du nevner hvilket operativsystem du kjører Widelands på,\n"
+"siden noen problemer rammer bare enkelte platformer."
 
 #: ../../txts/README.lua:101
 msgid ""
@@ -91,23 +91,28 @@ msgstr "1-0 Endrer verktøystørrelse"
 #: ../../txts/editor_readme:47
 msgid "ALT      (Hold) Selects second alternative tool while pressed"
 msgstr ""
-"ALT      (hold nede) Velger andre alternative form av verktøy når holdt nede"
+"Alt      (hold nede) Velger andre alternative form av verktøy når holdt nede"
 
 #: ../../txts/tips/atlanteans.tip:6
 msgid ""
 "Always build a forester's and a fish breeder's house, so you will not run "
 "out of trunks and food."
 msgstr ""
+"Sørg alltid for å bygge hus til skogforvalteren og fiskeoppdretteren slik at "
+"du ikke går til for trær og mat."
 
 #: ../../txts/tips/empire.tip:10
 msgid "Always build a forester's house so you will not run out of trunks."
 msgstr ""
+"Sørg alltid for å bygge hus til skogforvalteren så du ikke går tom for trær."
 
 #: ../../txts/tips/barbarians.tip:10
 msgid ""
 "Always build a ranger's and a gamekeeper's hut, so you will not run out of "
 "trunks and food."
 msgstr ""
+"Sørg alltid for å bygge hus til skogvokteren og viltforvalteren så du ikke "
+"går tom for trær og mat."
 
 #: ../../txts/tips/general_game.tip:66
 msgid ""
@@ -138,23 +143,23 @@ msgstr ""
 
 #: ../../txts/editor_readme:23
 msgid "C        Toggles census on/off"
-msgstr ""
+msgstr "C Viser/skjuler folketelling"
 
 #: ../../txts/README.lua:67
 msgid "C: toggles census"
-msgstr ""
+msgstr "C: viser/skjuler folketelling"
 
 #: ../../txts/README.lua:77
 msgid "CTRL+F10: quits the game immediately"
-msgstr "CTRL+F10: avslutter spillet umiddelbart"
+msgstr "Ctrl+F10: avslutter spillet umiddelbart"
 
 #: ../../txts/editor_readme:39
 msgid "CTRL+L   Load Map"
-msgstr "CTRL+L   Last kart"
+msgstr "Ctrl+L Last kart"
 
 #: ../../txts/editor_readme:41
 msgid "CTRL+S   Save Map"
-msgstr "CTRL+S   Lagre kart"
+msgstr "Ctrl+S   Lagre kart"
 
 #: ../../txts/developers:158
 msgid "Campaign Story"
@@ -182,7 +187,7 @@ msgstr "Tsjekkisk"
 
 #: ../../txts/README.lua:83
 msgid "DELETE: archives the current message"
-msgstr "DELETE: arkiverer den valgte meldingen"
+msgstr "Delete: arkiverer den valgte meldingen"
 
 #: ../../txts/developers:193
 msgid "Dansk"
@@ -227,6 +232,7 @@ msgstr "F6: viser feilsøkingskonsollet (kun i feilsøkingsbygg)"
 #: ../../txts/README.lua:71
 msgid "F: toggles fullscreen (if supported by OS)"
 msgstr ""
+"F: bytter til/fra fullskjerm (hvis det er støttet av operativsystemet)"
 
 #: ../../txts/developers:206
 msgid "Finnish"
@@ -300,7 +306,7 @@ msgstr "Hjemmeside"
 
 #: ../../txts/developers:319
 msgid "Homepage Coders"
-msgstr ""
+msgstr "Hjemmeside utviklet av"
 
 #: ../../txts/developers:241
 msgid "Hungarian"
@@ -312,11 +318,11 @@ msgstr ""
 
 #: ../../txts/README.lua:69
 msgid "I: toggles stock inventory"
-msgstr ""
+msgstr "I: viser/skjuler lagerbeholdningen"
 
 #: ../../txts/README.lua:93
 msgid "If you encounter a bug, please report it to our bugtracker:"
-msgstr ""
+msgstr "Hvis du oppdager en feil, vennligst lag en feilrapport på:"
 
 #: ../../txts/README.lua:52
 msgid ""
@@ -343,7 +349,7 @@ msgstr ""
 #: ../../txts/README.lua:80
 msgid ""
 "In the message window, the following additional shortcuts are available:"
-msgstr ""
+msgstr "I meldingsvinduet er følgende ekstra snarveier tilgjengelige:"
 
 #: ../../txts/README.lua:25
 msgid ""
@@ -353,6 +359,11 @@ msgid ""
 "economic infrastructure, explore the land around you and face rivaling\n"
 "tribes."
 msgstr ""
+"I dette spillet starter du med et lite landområde og bare noen få\n"
+"ressurser. Ved hjelp av disse vil du skape et imperium med flere tusen \n"
+"innbyggere. På veien mot dette målet, vil du etablere en \n"
+"stabil økonomi, utforske landet rundt deg og møte rivaliserende \n"
+"stammer."
 
 #: ../../txts/README.lua:18
 #: ../../txts/editor_readme:7
@@ -370,7 +381,7 @@ msgid ""
 "working area, they will stop to fish."
 msgstr ""
 "Hold et øye med fiskerne dine. Etter at fiskeressursene i et område er "
-"oppbrukt, vil de stoppe å fiske."
+"oppbrukt, vil de slutte å fiske."
 
 #: ../../txts/editor_readme:18
 msgid "Keyboard shortcuts"
@@ -402,7 +413,7 @@ msgstr "Linux-distribusjoner"
 
 #: ../../txts/editor_readme:31
 msgid "M        Toggles minimap"
-msgstr "M Slår minikart på/av"
+msgstr "M Viser/skjuler minikart"
 
 #: ../../txts/README.lua:65
 msgid "M: toggles minimap"
@@ -454,7 +465,7 @@ msgstr ""
 
 #: ../../txts/README.lua:70
 msgid "O: toggles objectives"
-msgstr ""
+msgstr "O: viser/skjuler mål"
 
 #: ../../txts/license:18
 msgid ""
@@ -532,13 +543,13 @@ msgstr ""
 
 #: ../../txts/tips/general_game.tip:62
 msgid "Press I to quickly toggle the display of your stock inventory."
-msgstr ""
+msgstr "Trykk I for å raskt vise eller skjuler lagerbeholdningen."
 
 #: ../../txts/tips/general_game.tip:46
 msgid ""
 "Pressing and holding ALT GR key lets you drag the window below the mouse "
 "pointer."
-msgstr ""
+msgstr "Hvis du holder nede Alt Gr kan du dra vinduet under musepekeren."
 
 #: ../../txts/README.lua:7
 msgid "README"
@@ -590,7 +601,7 @@ msgstr ""
 
 #: ../../txts/editor_readme:21
 msgid "SPACE    Toggles build help"
-msgstr "MELLOMROM Slår byggehjelp på/av"
+msgstr "Mellomrom Viser/skjuler byggehjelp"
 
 #: ../../txts/tips/editor.tip:26
 msgid ""
@@ -601,7 +612,7 @@ msgstr ""
 
 #: ../../txts/README.lua:64
 msgid "SPACE: toggles build-help"
-msgstr ""
+msgstr "Mellomrom: viser/skjuler byggehjelp"
 
 #: ../../txts/developers:182
 msgid ""
@@ -609,7 +620,7 @@ msgid ""
 "helped to translate Widelands via launchpad.net."
 msgstr ""
 "Se https://translations.launchpad.net/widelands for en liste over de som har "
-"vært med å oversette Widelands via launchpad.net."
+"vært med å oversette Widelands gjennom launchpad.net."
 
 #: ../../txts/developers:264
 msgid "Slovak"

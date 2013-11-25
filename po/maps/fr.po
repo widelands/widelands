@@ -7,13 +7,13 @@ msgstr ""
 "Project-Id-Version: Widelands svn4866\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2013-09-15 17:41+0000\n"
-"PO-Revision-Date: 2013-11-23 13:02+0000\n"
+"PO-Revision-Date: 2013-11-24 11:55+0000\n"
 "Last-Translator: Emmanuel Andry <Unknown>\n"
 "Language-Team: French <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-11-24 05:18+0000\n"
+"X-Launchpad-Export-Date: 2013-11-25 05:12+0000\n"
 "X-Generator: Launchpad (build 16831)\n"
 
 #: ../../campaigns/cconfig:64
@@ -112,7 +112,7 @@ msgstr ""
 #: ../../maps/Ice wars.wmf/elemental:11
 msgid "After autumn is winter. Some things are frozen, but not the war."
 msgstr ""
-"Après l'automne il y a hiver. Des choses ont gelé, mais pas la guerre."
+"Après l'automne il y a hiver. Des choses sont gelées, mais pas la guerre."
 
 #: ../../maps/Kings and Queens.wmf/elemental:11
 msgid ""

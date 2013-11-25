@@ -7,13 +7,13 @@ msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2013-09-15 17:41+0000\n"
-"PO-Revision-Date: 2013-11-23 07:41+0000\n"
+"PO-Revision-Date: 2013-11-24 18:09+0000\n"
 "Last-Translator: Александр <sa13690@yandex.ru>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-11-24 05:18+0000\n"
+"X-Launchpad-Export-Date: 2013-11-25 05:12+0000\n"
 "X-Generator: Launchpad (build 16831)\n"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:306
@@ -298,6 +298,8 @@ msgid ""
 "* Build up a basic food economy - a fisher's hut, a hunter's hut, a well, a "
 "farm and a bakery, to provide your people with food."
 msgstr ""
+"* Создайте базовую пищевую экономику - хижину рыбака, хижину охотника, "
+"колодец, ферму и пекарню, чтобы обеспечить ваших людей едой."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:210
 msgid "* Destroy Kalitath's army and expand your territory to the east."
@@ -346,6 +348,8 @@ msgid ""
 "and coal and build a mining economy with mines, taverns, smelting works and "
 "metalworks."
 msgstr ""
+"* Расширьте свои владения к горам, пошлите геолога искать руду и уголь и "
+"постройте добывающую экономику с шахтами, тавернами, плавильнями и кузницами."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:208
 #: ../../campaigns/t03.wmf/scripting/texts.lua:244
@@ -393,6 +397,9 @@ msgid ""
 "when your territory is growing and the paths to your headquarters get longer "
 "and longer."
 msgstr ""
+"-> Склады похожи на ваш штаб, с той лишь разницей, что их не защищают "
+"солдаты. Зачастую целесообразно строить склады, когда ваша территория "
+"увеличивается и дороги до штаба становятся всё длиннее."
 
 #: ../../campaigns/t03.wmf/elemental:7
 msgid "03 - This Land is our Land"
@@ -413,7 +420,7 @@ msgstr ""
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:169
 msgid "Boldreth shakes his head."
-msgstr ""
+msgstr "Болдреф качает головой."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:204
 msgid "Boldreth shouts out!"
@@ -421,7 +428,7 @@ msgstr ""
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:230
 msgid "Boldreth speaks:"
-msgstr ""
+msgstr "Болдреф говорит:"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:57
 msgid "Build a donjon"
@@ -465,7 +472,7 @@ msgstr "Уничтожьте армию Калитата"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:166
 msgid "Doubts"
-msgstr ""
+msgstr "Сомнения"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:324
 msgid "Enhanced economy and training"
@@ -481,7 +488,7 @@ msgstr ""
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:316
 msgid "Fortress completed"
-msgstr ""
+msgstr "Крепость построена"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:304
 msgid "Fortress needed"
@@ -493,15 +500,15 @@ msgstr ""
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:371
 msgid "Khantrukh approaches"
-msgstr ""
+msgstr "Хантрух приближается"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:240
 msgid "Khantrukh nods"
-msgstr ""
+msgstr "Хантрух кивает"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:369
 msgid "Khantrukh speaks"
-msgstr ""
+msgstr "Хантрух говорит"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:358
 msgid "Military assault"
@@ -529,10 +536,17 @@ msgid ""
 "neither have a good weapon nor are they well trained. We should build up "
 "trainingssites to prepare them for their future tasks.\" "
 msgstr ""
+"Наши геологи нашли крупные залежи железной руды, угля и даже золота. Мы "
+"должны улучшить шахты как только наши шахтёры наберутся опыта. Следует "
+"создать больше шахт, увеличить производство продовольствия, чтобы всгда "
+"снабжать наших людей достаточным количеством еды для дальнейшего развития "
+"экономики. Но это ещё не всё - многие из наших солдат довольно молоды и не "
+"обладают ни хорошим оружием, ни хорошей подготовкой. Мы должны создать места "
+"для подготовки их к будущим заданиям.\" "
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:48
 msgid "Remember to build a cattle farm"
-msgstr ""
+msgstr "Не забудьте построить ранчо"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:218
 msgid "Renegade fortification"
@@ -545,7 +559,7 @@ msgstr "Советник"
 #: ../../campaigns/t03.wmf/scripting/texts.lua:177
 #: ../../campaigns/t03.wmf/scripting/texts.lua:195
 msgid "The story continues"
-msgstr ""
+msgstr "История продолжается"
 
 #: ../../campaigns/t03.wmf/elemental:9
 msgid ""
@@ -560,11 +574,11 @@ msgstr "Трон выглядит обеспокоенным."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:148
 msgid "Thron looks worried..."
-msgstr ""
+msgstr "Трон выглядит обеспокоенным..."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:187
 msgid "Thron speaks confidently."
-msgstr ""
+msgstr "Трон говорит уверенно."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:220
 msgid "Thron speaks:"
@@ -588,4 +602,4 @@ msgstr ""
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:202
 msgid "Your loyal companion"
-msgstr ""
+msgstr "Ваш верный спутник"
