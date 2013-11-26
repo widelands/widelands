@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2013-09-15 19:41+0200\n"
-"PO-Revision-Date: 2013-11-16 11:17+0000\n"
-"Last-Translator: Mister Pi <imyaccounts@myopera.com>\n"
+"PO-Revision-Date: 2013-11-25 16:39+0000\n"
+"Last-Translator: Wolfgang Kurz <wolfgang@uwkurz.de>\n"
 "Language-Team: Low German <nds@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2013-11-17 05:16+0000\n"
-"X-Generator: Launchpad (build 16831)\n"
+"X-Launchpad-Export-Date: 2013-11-26 05:13+0000\n"
+"X-Generator: Launchpad (build 16840)\n"
 
 #: ../../src/computer_player.cc:38
 msgid "None"
@@ -24,7 +24,7 @@ msgstr "Keine"
 
 #: ../../src/s2map.cc:231
 msgid "Bluebyte Settlers II Map. No comment defined!"
-msgstr ""
+msgstr "Bluebyte Siedler II Karte. Keine Kommentare definiert."
 
 #: ../../src/s2map.cc:874
 #, c-format
@@ -34,6 +34,11 @@ msgid ""
 "map in the map editor.\n"
 "\n"
 msgstr ""
+"WARNUNG %i unzulässige(r) Hafenbauplatz/Hafenbauplätze konnte(n) nicht "
+"korrigiert werden und wurde(n) daher entfernt!\n"
+"Einige Inseln könnten daher nicht erreichbar sein. Díe Karte sollte mit dem "
+"Karteneditor korrigiert werden.\n"
+"\n"
 
 #: ../../src/s2map.cc:886
 msgid "WARNING"
@@ -41,7 +46,7 @@ msgstr "WARNUNG"
 
 #: ../../src/save_handler.cc:75
 msgid "Saving game..."
-msgstr "Speichere Spiel ..."
+msgstr "Spiel wird gespeichert..."
 
 #: ../../src/save_handler.cc:94
 msgid "Saving failed!"
@@ -53,7 +58,8 @@ msgstr "Spiel gespeichert!"
 
 #: ../../src/wlapplication.cc:398
 msgid "ERROR: Could not connect to metaserver (reason above)!\n"
-msgstr "FEHLER: Konnte nicht mit Meta-Server verbinden (Grund oben)\n"
+msgstr ""
+"FEHLER: Verbindung zum Meta-Server nicht möglich (Grund siehe oben).\n"
 
 #: ../../src/wlapplication.cc:426 ../../src/editor/editorinteractive.cc:171
 msgid "Unsupported format"
@@ -65,17 +71,22 @@ msgid ""
 "Widelands could not load the file \"%s\". The file format seems to be "
 "incompatible."
 msgstr ""
-"Widelands konnte nicht \"%s\" laden. Das Dateiformat wird nicht unterstützt."
+"Widelands konnte die Datei \"%s\" nicht laden. Vermutlich Dateiformat "
+"inkompatibel / nicht untersützt."
 
 #: ../../src/wlapplication.cc:949 ../../src/wlapplication.cc:958
 msgid "could not find the path of the main executable"
-msgstr ""
+msgstr "Der Dateipfad zum Hauptprogramm wurde nicht gefunden."
 
 #: ../../src/wlapplication.cc:1078
 msgid ""
 "Waited 5 seconds to close audio. Problems here so killing Widelands. Update "
 "your sound driver and/or SDL to fix this problem\n"
 msgstr ""
+"5 Sekunden gewartet, um Audio zu beenden. Wegen hier existierender Problem "
+"wurde Widelands abgebrochen.\n"
+"Den zweiten Treiber und/oder die SDL auf den neuesten Stand bringen, um das "
+"Problem zu beheben.\n"
 
 #: ../../src/wlapplication.cc:1208
 msgid ""
@@ -90,20 +101,22 @@ msgstr ""
 
 #: ../../src/wlapplication.cc:1332
 msgid "This is Widelands-"
-msgstr "Dit is Widelands-"
+msgstr "Dies ist Widelands -"
 
 #: ../../src/wlapplication.cc:1334
 msgid ""
 "Usage: widelands <option0>=<value0> ... <optionN>=<valueN>\n"
 "\n"
 msgstr ""
+"Verwendung: Widelands <option0>=<value0> .... <optionN>=<valueN>\n"
+"\n"
 
 #: ../../src/wlapplication.cc:1335
 msgid ""
 "Options:\n"
 "\n"
 msgstr ""
-"Instellungen:\n"
+"Auswahlmöglichkeiten:\n"
 "\n"
 
 #: ../../src/wlapplication.cc:1339
@@ -120,7 +133,7 @@ msgstr ""
 
 #: ../../src/wlapplication.cc:1347
 msgid "                      Default is ~/.widelands\n"
-msgstr ""
+msgstr "                      Standardvorgabe ist ~/.widelands\n"
 
 #: ../../src/wlapplication.cc:1350
 msgid ""
@@ -188,6 +201,8 @@ msgid ""
 " --opengl=[0|1]\n"
 "                      Enables OpenGL rendering\n"
 msgstr ""
+" --opengl=[0|1]\n"
+"Ermöglicht OpenGL Bildaufbau\n"
 
 #: ../../src/wlapplication.cc:1404
 msgid ""
@@ -221,11 +236,11 @@ msgstr ""
 
 #: ../../src/wlapplication.cc:1432
 msgid " --verbose            Enable verbose debug messages\n"
-msgstr ""
+msgstr " --verbose Zeigt die ausführlichen Nachrichten im Fehlersuchmodus.\n"
 
 #: ../../src/wlapplication.cc:1433
 msgid " --help               Show this help\n"
-msgstr ""
+msgstr " --help Hilfetext anzeigen\n"
 
 #: ../../src/wlapplication.cc:1437
 msgid ""
@@ -238,25 +253,28 @@ msgstr ""
 
 #: ../../src/wlapplication.cc:1525
 msgid "Fallback settings in effect"
-msgstr ""
+msgstr "Notfalleinstellungen aktiviert."
 
 #: ../../src/wlapplication.cc:1527
 msgid ""
 "Your video settings could not be enabled, and fallback settings are in "
 "effect. Please check the graphics options!"
 msgstr ""
+"Die Video Einstellungen konnten nicht aktiviert werden und die Notfall-"
+"Einstellungen sind angeschaltet.\r\n"
+"Bitte die Grafik Optionen überprüfen."
 
 #: ../../src/wlapplication.cc:1598
 msgid "Warning: "
-msgstr "Wohrschau: "
+msgstr "Warnung: "
 
 #: ../../src/wlapplication.cc:1602
 msgid "Game data error"
-msgstr "Speeldatenfailer"
+msgstr "Fehler in den Spieledaten"
 
 #: ../../src/wlapplication.cc:1607
 msgid "Unexpected error during the game"
-msgstr ""
+msgstr "Unerwarteter Fehler bei der Spielausführung"
 
 #: ../../src/wlapplication.cc:1611
 msgid ""
@@ -266,6 +284,12 @@ msgid ""
 "related messages in the standard output (stdout.txt on Windows). You are "
 "using build "
 msgstr ""
+"\n"
+"\n"
+"Bitte diesen Fehler melden, damit Widelands verbessert werden kann.\n"
+"Im Standard Output (stdout.txt unter Windows) findet man zugeordnete "
+"Nachrichten.\n"
+"Benutzt wird Build "
 
 #: ../../src/wlapplication.cc:1617
 msgid ""
@@ -273,71 +297,75 @@ msgid ""
 "\n"
 "Widelands attempts to create a savegame when errors occur during the game. "
 "It is often - though not always - possible to load it and continue playing.\n"
-msgstr ""
+msgstr ". Bitte folgende Information dem Fehlerreport anfügen.\n"
 
 #: ../../src/wlapplication.cc:1729
 msgid "The address of the game server is invalid"
-msgstr ""
+msgstr "Die Adresse des Spiel-Servers ist nicht korrekt."
 
 #: ../../src/wlapplication.cc:1834 ../../src/network/nethost.cc:2050
 #: ../../src/wui/game_summary.cc:90
 msgid "Player"
-msgstr "Speeler"
+msgstr "Spieler"
 
 #: ../../src/wlapplication.cc:2029 ../../src/network/netclient.cc:197
 #: ../../src/network/nethost.cc:839
 msgid "Preparing game"
-msgstr "Mak Spel praat"
+msgstr "Spiel wird vorbereitet"
 
 #: ../../src/wlapplication.cc:2137
 msgid "End of replay"
-msgstr ""
+msgstr "Spielwiedergabe ist beendet."
 
 #: ../../src/wlapplication.cc:2139
 msgid ""
 "The end of the replay has been reached and the game has been paused. You may "
 "unpause the game and continue watching if you want to."
 msgstr ""
+"Das Ende der Speilwiedergabe ist erreicht und das Spiel wurde "
+"unterbrochen.\r\n"
+"Mit der Wiederaufnahme kann das Spiel - so gewünscht - weiter angesehen "
+"werden."
 
 #: ../../src/wlapplication.cc:2222 ../../src/logic/game.cc:375
 #: ../../src/logic/game.cc:414
 msgid "Loading..."
-msgstr "Lade..."
+msgstr "Spiel wird geladen...."
 
 #: ../../src/writeHTML.cc:42
 msgid "Requesters"
-msgstr "Kunnen"
+msgstr "Anforderer:"
 
 #: ../../src/writeHTML.cc:57
 msgid "Providers"
-msgstr "Anbeders"
+msgstr "Anbieter:"
 
 #: ../../src/writeHTML.cc:72
 msgid "Successors"
-msgstr "Nafolger"
+msgstr "Nachfolger:"
 
 #: ../../src/writeHTML.cc:87
 msgid "Predecessors"
-msgstr ""
+msgstr "Vorausgehend:"
 
 #: ../../src/writeHTML.cc:102
 msgid "Employers"
-msgstr "Arbeiders"
+msgstr "Arbeitgeber:"
 
 #: ../../src/writeHTML.cc:265 ../../src/writeHTML.cc:271
 msgid "Building types"
-msgstr "Huus Aart"
+msgstr "Gebäudetypen:"
 
 #: ../../src/writeHTML.cc:276 ../../src/writeHTML.cc:510
 #: ../../src/writeHTML.cc:1463
 msgid "Icon"
-msgstr "Lüttbild"
+msgstr "Symbol"
 
 #: ../../src/writeHTML.cc:278 ../../src/writeHTML.cc:512
 #: ../../src/writeHTML.cc:1465 ../../src/ui_fsmenu/internet_lobby.cc:155
 #: ../../src/wui/building_statistics_menu.cc:110
 msgid "Name"
-msgstr "Naam"
+msgstr "Name"
 
 #: ../../src/writeHTML.cc:280 ../../src/wui/building_statistics_menu.cc:111
 msgid "Size"
@@ -353,11 +381,11 @@ msgstr "Uttimmert"
 
 #: ../../src/writeHTML.cc:286
 msgid "Conquer<br/>range"
-msgstr ""
+msgstr "Erobere<br/>Bereich"
 
 #: ../../src/writeHTML.cc:288 ../../src/writeHTML.cc:514
 msgid "Vision<br/>range"
-msgstr ""
+msgstr "Ansicht<br/>Bereich"
 
 #: ../../src/writeHTML.cc:315 ../../src/writeHTML.cc:371
 #: ../../src/logic/building.cc:545
@@ -421,12 +449,12 @@ msgstr "Is uttimmert."
 #: ../../src/writeHTML.cc:410
 #, c-format
 msgid "Conquer range is %u."
-msgstr ""
+msgstr "Eroberungsbereich ist %u"
 
 #: ../../src/writeHTML.cc:418 ../../src/writeHTML.cc:642
 #, c-format
 msgid "Vision range is %u."
-msgstr ""
+msgstr "Anzeigebereich ist %u"
 
 #: ../../src/writeHTML.cc:426 ../../src/writeHTML.cc:649
 msgid "Build cost"
@@ -439,12 +467,12 @@ msgstr "%s's Baustee"
 
 #: ../../src/writeHTML.cc:448
 msgid "Enhancements"
-msgstr ""
+msgstr "Erweiterungen"
 
 #: ../../src/writeHTML.cc:458
 #, c-format
 msgid "%s's enhancement"
-msgstr ""
+msgstr "Erweiterung von %s"
 
 #: ../../src/writeHTML.cc:499 ../../src/writeHTML.cc:505
 msgid "Worker types"
@@ -452,7 +480,7 @@ msgstr "Arbeider Aart"
 
 #: ../../src/writeHTML.cc:516
 msgid "Needed<br/>experience"
-msgstr ""
+msgstr "Erfahrung<br/>benötigt"
 
 #: ../../src/writeHTML.cc:518
 msgid "Becomes"
@@ -460,13 +488,14 @@ msgstr "Ward"
 
 #: ../../src/writeHTML.cc:577
 msgid "Combat Properties"
-msgstr ""
+msgstr "Kampfeigenschaften"
 
 #: ../../src/writeHTML.cc:584
 #, c-format
 msgid ""
 "Hitpoints is %u, plus %u for each level above 0 (maximum level is %u)."
 msgstr ""
+"Trefferpunkte sind %u, plus %u für jeden Level über 0 (Höchstlevel ist %u)"
 
 #: ../../src/writeHTML.cc:594
 #, c-format
@@ -474,21 +503,25 @@ msgid ""
 "Attack is between %u and %u, plus %u for each level above 0 (maximum level "
 "is %u)."
 msgstr ""
+"Angriff ist zwischen %u und %u plus %u für jeden Level über 0 (Höchstlevel "
+"ist %u)"
 
 #: ../../src/writeHTML.cc:604
 #, c-format
 msgid "Defense is %u, plus %u for each level above 0 (maximum level is %u)."
 msgstr ""
+"Verteidigung ist %u, plus %u für jeden Level über 0 (Höchstlevel ist %u)"
 
 #: ../../src/writeHTML.cc:614
 #, c-format
 msgid "Evade is %u, plus %u for each level above 0 (maximum level is %u)."
 msgstr ""
+"Ausweichen ist %u, plus %u für jeden Level über 0 (Höchstlevel ist %u)"
 
 #: ../../src/writeHTML.cc:660 ../../src/writeHTML.cc:671
 #, c-format
 msgid "%s's creation"
-msgstr ""
+msgstr "Kreation von %s"
 
 #: ../../src/writeHTML.cc:682
 msgid "Spawns in warehouses."
@@ -497,12 +530,12 @@ msgstr ""
 #: ../../src/writeHTML.cc:691
 #, c-format
 msgid "Needs experience from working %u times to become"
-msgstr ""
+msgstr "Erfordert %u fache Arbeitserfahrung zum Aufstieg zum"
 
 #: ../../src/writeHTML.cc:699
 #, c-format
 msgid "%s's promotion"
-msgstr ""
+msgstr "Beförderung von %s"
 
 #: ../../src/writeHTML.cc:710 ../../src/writeHTML.cc:855
 msgid "Programs"
@@ -525,7 +558,7 @@ msgstr "Arbeiders"
 #: ../../src/writeHTML.cc:786
 #, c-format
 msgid "%s's employee"
-msgstr ""
+msgstr "Angestellter von %s"
 
 #: ../../src/writeHTML.cc:796
 msgid "Inputs"
@@ -553,7 +586,7 @@ msgstr "%s's Utgang"
 #: ../../src/writeHTML.cc:1344 ../../src/writeHTML.cc:1369
 #: ../../src/writeHTML.cc:1394 ../../src/writeHTML.cc:1412
 msgid "Documentation for program command "
-msgstr ""
+msgstr "Dokumentation für Programmbefehl "
 
 #: ../../src/writeHTML.cc:1017
 msgid "workers of this site"
@@ -567,7 +600,7 @@ msgstr ""
 #: ../../src/writeHTML.cc:1114
 #, c-format
 msgid "%s's program %s"
-msgstr ""
+msgstr "s%'s Programm %s"
 
 #: ../../src/writeHTML.cc:1138 ../../src/writeHTML.cc:1179
 #, c-format
@@ -638,28 +671,28 @@ msgstr "Kraam Aarten"
 #: ../../src/map_io/widelands_map_waredata_data_packet.cc:206
 #, c-format
 msgid "unknown/unhandled version %u"
-msgstr ""
+msgstr "unbekannte/unbehandelte Version %u"
 
 #: ../../src/economy/cmd_call_economy_balance.cc:88
 #, c-format
 msgid "call economy balance: %s"
-msgstr ""
+msgstr "Rufe Wirtschafts-Balance %s auf"
 
 #: ../../src/economy/economy_data_packet.cc:61
 #: ../../src/economy/economy_data_packet.cc:80
 #, c-format
 msgid "duplicated entry for %s"
-msgstr ""
+msgstr "doppelter Eintrag für %s"
 
 #: ../../src/economy/economy_data_packet.cc:92
 #, c-format
 msgid "target quantities: %s"
-msgstr ""
+msgstr "Zielanzahl: %s"
 
 #: ../../src/economy/economy_data_packet.cc:96
 #, c-format
 msgid "unknown version %u"
-msgstr ""
+msgstr "unbekannte Version %u"
 
 #: ../../src/economy/economy_data_packet.cc:99
 #, c-format
@@ -674,7 +707,7 @@ msgstr ""
 #: ../../src/economy/wares_queue.cc:289
 #, c-format
 msgid "waresqueue: %s"
-msgstr ""
+msgstr "Warenschlange: %s"
 
 #: ../../src/editor/editorinteractive.cc:64
 msgid "Menu"
@@ -688,7 +721,7 @@ msgstr "Warktüüch"
 #: ../../src/editor/editorinteractive.cc:71
 #: ../../src/editor/ui_menus/editor_toolsize_menu.cc:41
 msgid "Toolsize"
-msgstr ""
+msgstr "Werkzeuggröße/Werkzeugabmessung"
 
 #: ../../src/editor/editorinteractive.cc:74
 #: ../../src/wui/interactive_player.cc:119
@@ -718,7 +751,7 @@ msgstr "Wedderhalen"
 #: ../../src/editor/editorinteractive.cc:610
 #, c-format
 msgid "Loading tribe: %s"
-msgstr ""
+msgstr "Stamm %s wird geladen."
 
 #: ../../src/editor/editorinteractive.cc:196
 msgid "Creating players"
@@ -727,20 +760,20 @@ msgstr "Speeler herstellen"
 #: ../../src/editor/editorinteractive.cc:203
 #: ../../src/logic/editor_game_base.cc:276
 msgid "Loading world data"
-msgstr ""
+msgstr "Welt Daten werden geladen"
 
 #: ../../src/editor/editorinteractive.cc:206
 #: ../../src/editor/editorinteractive.cc:614
 msgid "Loading graphics..."
-msgstr ""
+msgstr "Graphiken werden geladen..."
 
 #: ../../src/editor/editorinteractive.cc:252
 msgid "Map unsaved"
-msgstr ""
+msgstr "Karte nicht gesichert"
 
 #: ../../src/editor/editorinteractive.cc:253
 msgid "The Map is unsaved, do you really want to quit?"
-msgstr ""
+msgstr "Die Karte wurde nicht gesichert. Soll wirklich abgebrochen werden."
 
 #: ../../src/editor/editorinteractive.cc:601
 #: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:179
@@ -762,12 +795,12 @@ msgstr "Nich bekannt"
 #: ../../src/game_io/game_cmd_queue_data_packet.cc:86
 #, c-format
 msgid "command queue: %s"
-msgstr ""
+msgstr "Befehlsschlange: %s"
 
 #: ../../src/game_io/game_game_class_data_packet.cc:46
 #, c-format
 msgid "game_class: %s"
-msgstr ""
+msgstr "Spielklasse: %s"
 
 #: ../../src/game_io/game_interactive_player_data_packet.cc:57
 msgid "The game has no players!"
@@ -776,7 +809,7 @@ msgstr "De Speel het keen Speeler!"
 #: ../../src/game_io/game_interactive_player_data_packet.cc:81
 #, c-format
 msgid "interactive player: %s"
-msgstr ""
+msgstr "Interaktiver Spieler: %s"
 
 #: ../../src/game_io/game_player_economies_data_packet.cc:65
 msgid "there is no flag at the specified location"
@@ -805,7 +838,7 @@ msgstr ""
 
 #: ../../src/game_io/game_preload_data_packet.cc:72
 msgid "Endless Game"
-msgstr ""
+msgstr "Endlosspiel"
 
 #: ../../src/game_io/game_preload_data_packet.cc:77
 #: ../../src/logic/game.cc:248 ../../src/logic/game.cc:344
@@ -823,12 +856,12 @@ msgstr ""
 #: ../../src/map_io/widelands_map_port_spaces_data_packet.cc:61
 #, c-format
 msgid "unknown/unhandled version %i"
-msgstr ""
+msgstr "unbekannte/unbehandelte Version %i"
 
 #: ../../src/game_io/game_preload_data_packet.cc:107
 #, c-format
 msgid "preload: %s"
-msgstr ""
+msgstr "Vorab geladen ist: %s"
 
 #: ../../src/graphic/animation.cc:137 ../../src/logic/building.cc:88
 #: ../../src/logic/immovable.cc:192 ../../src/logic/immovable.cc:828
@@ -889,22 +922,22 @@ msgstr ""
 
 #: ../../src/logic/building.cc:540
 msgid "mine"
-msgstr ""
+msgstr "Bergwerk"
 
 #: ../../src/logic/building.cc:541
 #: ../../src/editor/tools/editor_info_tool.cc:60
 msgid "small"
-msgstr ""
+msgstr "klein"
 
 #: ../../src/logic/building.cc:542
 #: ../../src/editor/tools/editor_info_tool.cc:61
 msgid "medium"
-msgstr ""
+msgstr "mittel"
 
 #: ../../src/logic/building.cc:542
 #: ../../src/editor/tools/editor_info_tool.cc:62
 msgid "big"
-msgstr ""
+msgstr "groß"
 
 #: ../../src/logic/cmd_calculate_statistics.cc:46
 #, c-format
