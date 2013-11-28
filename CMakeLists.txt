@@ -317,6 +317,11 @@ if (DEFINED MSVC)
   set (CMAKE_EXE_LINKER_FLAGS_DEBUG "/debug /LTCG /NODEFAULTLIB:libcmt.lib" CACHE STRING "Set by widelands CMakeLists.txt" FORCE)
 endif (DEFINED MSVC)
 
+IF (MINGW)
+  set (CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -Wl,--large-address-aware" CACHE STRING "Set by widelands CMakeLists.txt" FORCE)
+  message (STATUS "Enabled large address awareness on mingw32")
+endif (MINGW)
+
 IF (CMAKE_BUILD_TYPE STREQUAL "Debug")
   message (STATUS "Using compiler flags: ${CMAKE_CXX_FLAGS_DEBUG}")
 ELSE (CMAKE_BUILD_TYPE STREQUAL "Debug")
