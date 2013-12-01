@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2013-09-15 17:41+0000\n"
-"PO-Revision-Date: 2013-11-24 18:35+0000\n"
+"PO-Revision-Date: 2013-11-30 14:54+0000\n"
 "Last-Translator: Hans Joachim Desserud <Unknown>\n"
 "Language-Team: Norwegian Bokmal <nb@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-11-25 05:12+0000\n"
-"X-Generator: Launchpad (build 16831)\n"
+"X-Launchpad-Export-Date: 2013-12-01 05:15+0000\n"
+"X-Generator: Launchpad (build 16856)\n"
 
 #: ../../campaigns/cconfig:64
 msgid "01 - Eyes in the Dark"
@@ -35,7 +35,7 @@ msgstr "02 - Et hjemsted"
 
 #: ../../campaigns/cconfig:86
 msgid "02 - An Outpost for Exile"
-msgstr ""
+msgstr "02 - En eksil-utpost"
 
 #: ../../campaigns/cconfig:74
 msgid "03 - This Land is our Land"
@@ -418,7 +418,7 @@ msgstr ""
 
 #: ../../maps/Long, long way.wmf/elemental:9
 msgid "Long, long way"
-msgstr ""
+msgstr "Lang, lang vei"
 
 #: ../../maps/Crossing the horizon.wmf/elemental:11
 msgid "Man your ship and sail to the horizon."
@@ -546,7 +546,7 @@ msgstr "Anbefalte lag: (blå, gul) mot (rød, grønn)"
 
 #: ../../maps/Crossing the horizon.wmf/elemental:12
 msgid "Suggested Teams: all ok"
-msgstr ""
+msgstr "Anbefalte lag: alle ok"
 
 #: ../../maps/Rendez-Vous.wmf/elemental:10
 msgid "Suggested Teams: all ok."
@@ -566,10 +566,13 @@ msgid ""
 "green), (blue, yellow, black) vs (red, green, orange), (blue, yellow, black, "
 "purple) vs (red, green, orange, white)"
 msgstr ""
+"Anbefalte lag: blå mot rød, gul mot grønn, (blå, gul) mot (rød, grønn), "
+"(blå, gul, svart) mot (rød, grønn, oransje), (blå, gul, svart, lilla) mot "
+"(rød, grønn, oransje, hvit)"
 
 #: ../../maps/Plateau.wmf/elemental:10
 msgid "Suggested positions: blue vs yellow"
-msgstr ""
+msgstr "Anbefalte posisjoner: blå mot gul"
 
 #: ../../maps/The Nile.wmf/elemental:12
 msgid ""
@@ -578,12 +581,17 @@ msgid ""
 "green) vs (red, yellow, black), (blue, green, orange, white) vs (red, "
 "yellow, black, purple)"
 msgstr ""
+"Anbefalte lag: blå mot rød, gul mot grønn, (blå, gul) mot (rød, grønn), "
+"(grønn, oransj, hvit) mot (gul, svart, lilla), (blå, oransje, grønn) mot "
+"(rød, gul, svart), (blå, grønn, oransje, hvit) mot (rød, gul, svart, lilla)"
 
 #: ../../maps/Trident of Fire.wmf/elemental:12
 msgid ""
 "Suggested teams: red vs green, (blue, yellow) vs (green, orange), (blue, "
 "black) vs (green, red), (blue, black, yellow) vs (green, red, orange)"
 msgstr ""
+"Anbefalte lag: rød mot grønn, (blå, gul) mot (grønn, oransje), (blå, svart) "
+"mot (grønn, rød), (blå, svart, gul) mot (grønn, rød, oransje)"
 
 #: ../../maps/Swamp Island.wmf/elemental:9
 msgid "Swamp Island"

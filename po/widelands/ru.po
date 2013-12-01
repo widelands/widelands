@@ -7,16 +7,16 @@ msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2013-09-15 19:41+0200\n"
-"PO-Revision-Date: 2013-10-16 07:01+0000\n"
-"Last-Translator: Alexander Glukhov <Unknown>\n"
+"PO-Revision-Date: 2013-11-30 10:24+0000\n"
+"Last-Translator: Александр <sa13690@yandex.ru>\n"
 "Language-Team: русский <ru@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2013-10-17 05:08+0000\n"
-"X-Generator: Launchpad (build 16799)\n"
+"X-Launchpad-Export-Date: 2013-12-01 05:15+0000\n"
+"X-Generator: Launchpad (build 16856)\n"
 "X-Poedit-Country: RUSSIAN FEDERATION\n"
 "X-Poedit-Language: Russian\n"
 "X-Poedit-SourceCharset: utf-8\n"
@@ -326,13 +326,15 @@ msgstr ""
 
 #: ../../src/wlapplication.cc:1525
 msgid "Fallback settings in effect"
-msgstr ""
+msgstr "Задействованы настройки по умолчанию."
 
 #: ../../src/wlapplication.cc:1527
 msgid ""
 "Your video settings could not be enabled, and fallback settings are in "
 "effect. Please check the graphics options!"
 msgstr ""
+"Настройки видео не могут быть применены, задействованы настройки по "
+"умолчанию. Пожалуйстра, проверьте настройки графики!"
 
 #: ../../src/wlapplication.cc:1598
 msgid "Warning: "
@@ -909,7 +911,7 @@ msgstr "Информация игрока:%s"
 
 #: ../../src/game_io/game_preload_data_packet.cc:72
 msgid "Endless Game"
-msgstr ""
+msgstr "Свободная игра"
 
 #: ../../src/game_io/game_preload_data_packet.cc:77
 #: ../../src/logic/game.cc:248 ../../src/logic/game.cc:344
@@ -1335,7 +1337,7 @@ msgstr "построить дорогу: %s"
 #: ../../src/logic/playercommand.cc:444
 #, c-format
 msgid "flag %u: %s"
-msgstr ""
+msgstr "флаг %u: %s"
 
 #: ../../src/logic/playercommand.cc:450
 #, c-format
@@ -1573,7 +1575,7 @@ msgstr "спать: %s"
 #: ../../src/logic/production_program.cc:684
 #, c-format
 msgid "Unknown parameter \"%s\""
-msgstr ""
+msgstr "Неизвестный параметр \"%s\""
 
 #: ../../src/logic/production_program.cc:686
 msgid "No parameter given!"
@@ -1634,17 +1636,19 @@ msgstr "процент"
 #: ../../src/logic/production_program.cc:1208
 #, c-format
 msgid "No left resources found!"
-msgstr ""
+msgstr "Не обнаружено оставшихся ресурсов!"
 
 #: ../../src/logic/production_program.cc:1229
 msgid "Main vein exhausted"
-msgstr ""
+msgstr "Главная жила исчерпана"
 
 #: ../../src/logic/production_program.cc:1231
 msgid ""
 "This mines' main vein exhausted. Expect strongly diminished returns on "
 "investment. You should consider to expand, dismantle or destruct it."
 msgstr ""
+"Главная жила этой шахты исчерпана. Ожидается сильное уменьшение отдачи от "
+"инвестиций. Вы должны расширить, демонтировать или разрушить её."
 
 #: ../../src/logic/production_program.cc:1246
 #: ../../src/logic/production_program.cc:1327
@@ -1665,7 +1669,7 @@ msgstr "уровень"
 #: ../../src/logic/production_program.cc:1282
 #, c-format
 msgid "No soldier to train!"
-msgstr ""
+msgstr "Нет солдат для тренировки!"
 
 #: ../../src/logic/production_program.cc:1292
 #: ../../src/logic/production_program.cc:1382
@@ -1692,11 +1696,11 @@ msgstr "(не занято)"
 
 #: ../../src/logic/productionsite.cc:249
 msgid "Worker missing"
-msgstr ""
+msgstr "Рабочий отсутствует"
 
 #: ../../src/logic/productionsite.cc:249
 msgid "Workers missing"
-msgstr ""
+msgstr "Рабочие отсютствуют"
 
 #: ../../src/logic/productionsite.cc:258
 msgid "(stopped)"
@@ -1711,11 +1715,11 @@ msgstr ""
 
 #: ../../src/logic/ship.cc:423
 msgid "Port space found"
-msgstr ""
+msgstr "Найдено место для порта"
 
 #: ../../src/logic/ship.cc:424
 msgid "An expedition ship found a new port build space."
-msgstr ""
+msgstr "Экспедиционный корабль нашел место для строительства нового порта."
 
 #: ../../src/logic/ship.cc:531
 msgid "Island surrounded"
@@ -1727,20 +1731,20 @@ msgstr ""
 
 #: ../../src/logic/ship.cc:584
 msgid "Coast reached"
-msgstr ""
+msgstr "Достигнуто побережье"
 
 #: ../../src/logic/ship.cc:586
 msgid ""
 "An expedition ship reached a coast and is waiting for further commands."
-msgstr ""
+msgstr "Экспедиционный корабль достиг побережья и ждёт дальнейших указаний."
 
 #: ../../src/logic/ship.cc:722
 msgid "Expedition ready"
-msgstr ""
+msgstr "Экспедиция готова"
 
 #: ../../src/logic/ship.cc:723
 msgid "An expedition ship is waiting for your commands."
-msgstr ""
+msgstr "Экспедиционный корабль ждёт ваших указаний."
 
 #: ../../src/logic/ship.cc:986
 #, c-format
@@ -2002,7 +2006,7 @@ msgstr ""
 #: ../../src/map_io/widelands_map_flag_data_packet.cc:66
 #, c-format
 msgid "the node is owned by player %u"
-msgstr ""
+msgstr "узел принадлежит игроку %u"
 
 #: ../../src/map_io/widelands_map_flag_data_packet.cc:80
 #, c-format
@@ -2189,7 +2193,7 @@ msgstr "местность: %s"
 #: ../../src/map_io/widelands_map_version_data_packet.cc:76
 #, c-format
 msgid "version: %s"
-msgstr ""
+msgstr "версия: %s"
 
 #: ../../src/map_io/widelands_map_ware_data_packet.cc:76
 #: ../../src/map_io/widelands_map_waredata_data_packet.cc:208
