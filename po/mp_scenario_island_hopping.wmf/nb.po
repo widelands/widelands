@@ -8,18 +8,18 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2013-09-15 17:41+0000\n"
-"PO-Revision-Date: 2012-11-02 16:03+0000\n"
-"Last-Translator: SirVer <Unknown>\n"
+"PO-Revision-Date: 2013-12-02 19:48+0000\n"
+"Last-Translator: Hans Joachim Desserud <Unknown>\n"
 "Language-Team: Norwegian Bokmal <nb@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-09-16 04:50+0000\n"
-"X-Generator: Launchpad (build 16761)\n"
+"X-Launchpad-Export-Date: 2013-12-03 05:13+0000\n"
+"X-Generator: Launchpad (build 16856)\n"
 
 #: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/multiplayer_init.lua:101
 msgid "%i %s<br>\n"
-msgstr ""
+msgstr "%i %s<br>\n"
 
 #: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:51
 msgid "%s has been King of the Hill since %s!"
@@ -68,22 +68,22 @@ msgstr "15 minutter"
 #: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:25
 #: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:30
 msgid "1st to finish"
-msgstr ""
+msgstr "Første slott ferdig"
 
 #: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:26
 #: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:31
 msgid "2nd to finish"
-msgstr ""
+msgstr "Andre slott ferdig"
 
 #: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:27
 #: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:32
 msgid "3rd to finish"
-msgstr ""
+msgstr "Tredje slott ferdig"
 
 #: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:28
 #: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:33
 msgid "4th to finish"
-msgstr ""
+msgstr "Fjerde slott ferdig"
 
 #: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/first_island.lua:70
 msgid "5 minutes"
@@ -91,7 +91,7 @@ msgstr "5 minutter"
 
 #: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:23
 msgid "Finish rewards"
-msgstr ""
+msgstr "Belønning"
 
 #: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:24
 msgid "First Island"
@@ -109,6 +109,9 @@ msgid ""
 "at\n"
 "the center of the third island for 20 minutes to win the game."
 msgstr ""
+"Hvis du fullfører slottet i målområdet på den andre øyen, vil du få\n"
+"et tredje hovedkvarter på den tredje øyen. Du må bygge og holde\n"
+"på et slott i sentrum av den tredje øyen i 20 minutter for å vinne spillet."
 
 #: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:8
 msgid ""
@@ -119,6 +122,11 @@ msgid ""
 "your\n"
 "first headquarters."
 msgstr ""
+"Øyhopping er en tradisjonell atlantisk turnering. Reglene\n"
+"er enkle: Du starter med et hovedkvarter på en øy.\n"
+"Når du har fullført et slott i enden av den første øyen, vil du få et\n"
+"nytt hovedkvarter på den andre øyen som inneholder alle varene fra\n"
+"det første."
 
 #: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:6
 msgid "Rules"
@@ -155,4 +163,4 @@ msgstr ""
 "spillere\n"
 "som har blitt ferdig med øyen før deg. Desto tidligere du blir ferdig, desto "
 "færre varer får\n"
-"du. Se under for detailjer."
+"du. Se under for detaljer."

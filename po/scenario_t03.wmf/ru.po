@@ -7,13 +7,13 @@ msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2013-09-15 17:41+0000\n"
-"PO-Revision-Date: 2013-11-30 11:17+0000\n"
+"PO-Revision-Date: 2013-12-02 15:43+0000\n"
 "Last-Translator: Александр <sa13690@yandex.ru>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-12-01 05:15+0000\n"
+"X-Launchpad-Export-Date: 2013-12-03 05:13+0000\n"
 "X-Generator: Launchpad (build 16856)\n"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:306
@@ -271,6 +271,11 @@ msgid ""
 "firmly in its grip. We should put food in our storage to survive the long, "
 "cold winter!\" "
 msgstr ""
+" \"Этим утром я нашёл Трона обеспокоенным. Он вернулся из патруля вчера "
+"поздно вечером и сел спиной к дереву, наблюдая за лагерем. Количество ссор и "
+"споров продолжает расти, а зима крепто держит нас в своих объятьях. Мы "
+"должны заполнить едой наши хранилища, чтобы пережить пережить долгую "
+"холодную зиму!\" "
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:171
 msgid ""
@@ -281,6 +286,12 @@ msgid ""
 "before the banner of Chat’Karuth. Why should he march with his son to "
 "reclaim his heritage and the throne?\" "
 msgstr ""
+" \"Трон хочет верить, что Калитат устал от борьбы и будет готов "
+"присоединиться к нам, как только мы придём, чтобы восстановить закон и "
+"порядок в Альтунране.. Но я так не думаю. Калитат является сыном одного из "
+"самых могущественных генералов наших сил и его семье никогда не понравится "
+"мысль преклониться перед знаменем Чат Каруда. Почему он должен идти с  его "
+"сыном, чтобы вернуть наследие и престол?\" "
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:262
 msgid ""
@@ -289,6 +300,10 @@ msgid ""
 "range on the area around our hall to protect our people from sudden "
 "attacks.\" "
 msgstr ""
+" \"Трон сказал мне, что он обнаружил следы на снегу северо-восточнее "
+"поселения. Он распорядился построить дозорную башню, чтобы иметь лучшую "
+"видимость на территории вокруг  нашего штаба и защитить наших людей от "
+"внезапной атаки.\" "
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:101
 #: ../../campaigns/t03.wmf/scripting/texts.lua:334
@@ -504,7 +519,7 @@ msgstr ""
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:40
 msgid "Build up a small food economy"
-msgstr ""
+msgstr "Создайте малую пищевую экономику"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:109
 msgid "Build weapon productions"
@@ -524,7 +539,7 @@ msgstr "Сомнения"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:324
 msgid "Enhanced economy and training"
-msgstr ""
+msgstr "Улучшенная экономика и обучение"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:65
 msgid "Explore further"
