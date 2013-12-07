@@ -108,9 +108,9 @@ void Request::Read
 	(FileRead & fr, Game & game, Map_Map_Object_Loader & mol)
 {
 	try {
-		bool fudged_type = false;
 		uint16_t const version = fr.Unsigned16();
 		if (2 <= version and version <= REQUEST_VERSION) {
+			bool fudged_type = false;
 			const Tribe_Descr & tribe = m_target.owner().tribe();
 			if (version <= 3) {
 				//  Unfortunately, old versions wrote the index. The best thing
