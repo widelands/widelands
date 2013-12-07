@@ -446,7 +446,6 @@ struct HostChatProvider : public ChatProvider {
 
 			// Acknowledge kick
 			else if (cmd == "ack_kick") {
-				std::string name;
 				if (arg1.empty())
 					c.msg = _("kick acknowledgement cancelled: No name given!");
 				else if (arg2.size())
