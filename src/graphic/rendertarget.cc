@@ -40,6 +40,8 @@ using Widelands::Map_Object_Descr;
 using Widelands::Player;
 using Widelands::TCoords;
 
+uint64_t RenderTarget::rend_number=0;
+
 /**
  * Build a render target for the given surface.
  */
@@ -152,16 +154,27 @@ void RenderTarget::fill_rect(Rect r, const RGBAColor& clr)
 		m_surface->fill_rect(r, clr);
 }
 
+void RenderTarget::start_rendering3d(Vector z_proj)
+{
+	rend_number++;
+	m_surface->start_rendering3d(z_proj);
+}
+
+void RenderTarget::end_rendering3d()
+{
+	m_surface->end_rendering3d();
+}
+
 void RenderTarget::draw_rect3d(Rect r,int32_t z, const RGBColor& clr)
 {
-	if (clip(r))
-		m_surface->draw_rect3d(r,z, clr);
+	//if (clip(r))
+	m_surface->draw_rect3d(r,z, clr);
 }
 
 void RenderTarget::fill_rect3d(Rect r, int32_t z, const RGBAColor& clr)
 {
-	if (clip(r))
-		m_surface->fill_rect3d(r,z, clr);
+	//if (clip(r))
+	m_surface->fill_rect3d(r,z, clr);
 }
 
 void RenderTarget::brighten_rect(Rect r, const int32_t factor)
@@ -412,7 +425,8 @@ void RenderTarget::drawanim3d
 	Rect srcrc(Point(0, 0), frame.width(), frame.height());
 
 	//Correct isometric perspective, quick fix, to be replaced when using true imposters
-	uint32_t corr_z= srcrc.h - hotspot.y;
+	int32_t corr_z= frame.height() - hotspot.y;
+	if (corr_z < 0) corr_z = 0;
 	dst.y -= corr_z;
 	dst.z -= corr_z*2;
 	//Correct end

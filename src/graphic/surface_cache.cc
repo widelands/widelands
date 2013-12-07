@@ -27,6 +27,7 @@
 #include <SDL.h>
 
 #include "graphic/surface.h"
+#include "graphic/rendertarget.h"
 
 using namespace std;
 
@@ -50,11 +51,13 @@ private:
 	typedef list<string> AccessHistory;
 	struct Entry {
 		Entry(Surface* gs, const AccessHistory::iterator& it, bool transient) :
-			surface(gs), is_transient(transient), last_access(SDL_GetTicks()), list_iterator(it) {}
+			surface(gs), is_transient(transient), last_access(SDL_GetTicks()), list_iterator(it),
+			rend_num(RenderTarget::get_rendnum()){}
 
 		std::unique_ptr<Surface> surface;
 		bool is_transient;
 		uint32_t last_access;  // Mainly for debugging and analysis.
+		uint64_t rend_num;
 		const AccessHistory::iterator list_iterator;  // Only valid if is_transient is true.
 	};
 	typedef map<string, Entry*> Container;
@@ -88,6 +91,7 @@ Surface* SurfaceCacheImpl::get(const string& hash) {
 	if (it->second->is_transient) {
 		access_history_.splice(access_history_.end(), access_history_, it->second->list_iterator);
 		it->second->last_access = SDL_GetTicks();
+		it->second->rend_num = RenderTarget::get_rendnum();
 	}
 	return it->second->surface.get();
 }
@@ -119,6 +123,7 @@ void SurfaceCacheImpl::drop() {
 	const Container::iterator it = entries_.find(access_history_.front());
 	assert(it != entries_.end());
 	assert(it->second->is_transient);
+	assert(it->second->rend_num != RenderTarget::get_rendnum());
 
 	const uint32_t surface_size = it->second->surface->width() * it->second->surface->height() * 4;
 	used_transient_memory_ -= surface_size;

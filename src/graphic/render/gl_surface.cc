@@ -101,21 +101,11 @@ void GLSurface::fill_rect(const Rect& rc, const RGBAColor clr) {
 /**
  * Draws the outline of a rectangle
  */
-void GLSurface::draw_rect3d(const Rect& rc,int32_t z, const RGBColor clr)
+void GLSurface::draw_rect3d(const Rect& rc, int32_t z, const RGBColor clr)
 {
 	assert(g_opengl);
-	glDisable(GL_BLEND);
-	glDisable(GL_TEXTURE_2D);
-	glLineWidth(1);
 
-	glBegin(GL_LINE_LOOP); {
-		glColor3ub(clr.r, clr.g, clr.b);
-		glVertex3f(rc.x + 0.5f,        rc.y + 0.5f, z);
-		glVertex3f(rc.x + rc.w - 0.5f, rc.y + 0.5f,z);
-		glVertex3f(rc.x + rc.w - 0.5f, rc.y + rc.h - 0.5f, z);
-		glVertex3f(rc.x + 0.5f,        rc.y + rc.h - 0.5f, z);
-	} glEnd();
-	glEnable(GL_TEXTURE_2D);
+	render_tasks.insert(RenderTask(task_draw_rect, z_project *  Point3D(rc, z) , rc, z, clr ));
 }
 
 
@@ -126,17 +116,8 @@ void GLSurface::fill_rect3d(const Rect& rc,int32_t z, const RGBAColor clr) {
 	assert(rc.x >= 0);
 	assert(rc.y >= 0);
 	assert(g_opengl);
-	glDisable(GL_TEXTURE_2D);
-	glDisable(GL_BLEND);
 
-	glBegin(GL_QUADS); {
-		glColor4ub(clr.r, clr.g, clr.b, clr.a);
-		glVertex3f(rc.x,        rc.y, z);
-		glVertex3f(rc.x + rc.w, rc.y, z);
-		glVertex3f(rc.x + rc.w, rc.y + rc.h, z);
-		glVertex3f(rc.x,        rc.y + rc.h, z);
-	} glEnd();
-	glEnable(GL_TEXTURE_2D);
+	render_tasks.insert(RenderTask(task_fill_rect, z_project * Point3D(rc, z) , rc, z, clr ));
 }
 
 /**
@@ -265,54 +246,108 @@ void GLSurface::blit
 void GLSurface::blit3d
 	(const Point3D& dst, const Surface* image, const Rect& srcrc, Composite cm)
 {
-	// Note: This function is highly optimized and therefore does not restore
-	// all state. It also assumes that all other glStuff restores state to make
-	// this function faster.
-
 	assert(g_opengl);
-	const GLSurfaceTexture& surf = *static_cast<const GLSurfaceTexture*>(image);
-
-	/* Set a texture scaling factor. Normally texture coordinates
-	* (see glBegin()...glEnd() Block below) are given in the range 0-1
-	* to avoid the calculation (and let opengl do it) the texture
-	* space is modified. glMatrixMode select which matrixconst  to manipulate
-	* (the texture transformation matrix in this case). glLoadIdentity()
-	* resets the (selected) matrix to the identity matrix. And finally
-	* glScalef() calculates the texture matrix.
-	*/
-	glMatrixMode(GL_TEXTURE);
-	glLoadIdentity();
-	glScalef
-		(1.0f / static_cast<GLfloat>(surf.get_tex_w()),
-		 1.0f / static_cast<GLfloat>(surf.get_tex_h()), 1);
-
-	// Enable Alpha blending
-	if (cm == CM_Normal) {
-		glEnable(GL_BLEND);
-		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-	} else {
-		glDisable(GL_BLEND);
-	}
-
-	glBindTexture(GL_TEXTURE_2D, surf.get_gl_texture());
-
-	glBegin(GL_QUADS); {
-		// set color white, otherwise textures get mixed with color
-		glColor3f(1.0, 1.0, 1.0);
-		// top-left
-		glTexCoord2i(srcrc.x, srcrc.y);
-		glVertex3i(dst.x, dst.y, dst.z);
-		// top-right
-		glTexCoord2i(srcrc.x + srcrc.w, srcrc.y);
-		glVertex3f((dst.x + (int32_t) srcrc.w), dst.y, dst.z);
-		// bottom-right
-		glTexCoord2i(srcrc.x + srcrc.w, srcrc.y + srcrc.h);
-		glVertex3f((dst.x + (int32_t) srcrc.w), (dst.y + (int32_t) srcrc.h), dst.z);
-		// bottom-left
-		glTexCoord2i(srcrc.x, srcrc.y + srcrc.h);
-		glVertex3f(dst.x, (dst.y + (int32_t) srcrc.h), dst.z);
-	} glEnd();
-
+	render_tasks.insert(RenderTask(task_blit, z_project * dst, dst, image, srcrc, cm));
 }
 
+
+
+void GLSurface::start_rendering3d(Vector z_proj)
+{
+	z_project = z_proj;
+}
+
+void GLSurface::end_rendering3d()
+{
+	std::multiset<RenderTask>::iterator itty;
+	for (itty = render_tasks.begin(); itty != render_tasks.end(); itty++)
+	{
+		const RenderTask & cur=*itty;
+		switch (cur.task_id) {
+		case task_fill_rect: {
+			glDisable(GL_TEXTURE_2D);
+			glDisable(GL_BLEND);
+
+			glBegin(GL_QUADS); {
+				glColor4ub(cur.clr.r, cur.clr.g, cur.clr.b, cur.clr.a);
+				glVertex3f(cur.rect0.x,cur.rect0.y, cur.point0.z);
+				glVertex3f(cur.rect0.x + cur.rect0.w, cur.rect0.y, cur.point0.z);
+				glVertex3f(cur.rect0.x + cur.rect0.w, cur.rect0.y + cur.rect0.h, cur.point0.z);
+				glVertex3f(cur.rect0.x, cur.rect0.y + cur.rect0.h, cur.point0.z);
+			} glEnd();
+			glEnable(GL_TEXTURE_2D);
+
+		} break;
+		case task_draw_rect: {
+			glDisable(GL_BLEND);
+			glDisable(GL_TEXTURE_2D);
+			glLineWidth(1);
+
+			glBegin(GL_LINE_LOOP); {
+				glColor3ub(cur.clr.r, cur.clr.g, cur.clr.b);
+				glVertex3f(cur.rect0.x + 0.5f, cur.rect0.y + 0.5f, cur.point0.z);
+				glVertex3f(cur.rect0.x + cur.rect0.w - 0.5f, cur.rect0.y + 0.5f,cur.point0.z);
+				glVertex3f(cur.rect0.x + cur.rect0.w - 0.5f, cur.rect0.y + cur.rect0.h - 0.5f, cur.point0.z);
+				glVertex3f(cur.rect0.x + 0.5f, cur.rect0.y + cur.rect0.h - 0.5f, cur.point0.z);
+			} glEnd();
+			glEnable(GL_TEXTURE_2D);
+
+		} break;
+		case task_blit: {
+			// Note: This function is highly optimized and therefore does not restore
+			// all state. It also assumes that all other glStuff restores state to make
+			// this function faster.
+			const GLSurfaceTexture& surf =
+					*static_cast<const GLSurfaceTexture*> (cur.image);
+
+			/* Set a texture scaling factor. Normally texture coordinates
+			 * (see glBegin()...glEnd() Block below) are given in the range 0-1
+			 * to avoid the calculation (and let opengl do it) the texture
+			 * space is modified. glMatrixMode select which matrixconst  to manipulate
+			 * (the texture transformation matrix in this case). glLoadIdentity()
+			 * resets the (selected) matrix to the identity matrix. And finally
+			 * glScalef() calculates the texture matrix.
+			 */
+			glMatrixMode( GL_TEXTURE);
+			glLoadIdentity();
+			glScalef(1.0f / static_cast<GLfloat> (surf.get_tex_w()),
+					1.0f / static_cast<GLfloat> (surf.get_tex_h()), 1);
+
+			// Enable Alpha blending
+			if (cur.cm == CM_Normal) {
+				glEnable( GL_BLEND);
+				glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+			} else {
+				glDisable( GL_BLEND);
+			}
+
+			glBindTexture(GL_TEXTURE_2D, surf.get_gl_texture());
+
+			glBegin( GL_QUADS);
+			{
+				// set color white, otherwise textures get mixed with color
+				glColor3f(1.0, 1.0, 1.0);
+				// top-left
+				glTexCoord2i(cur.rect0.x, cur.rect0.y);
+				glVertex3i(cur.point0.x, cur.point0.y, cur.point0.z);
+				// top-right
+				glTexCoord2i(cur.rect0.x + cur.rect0.w, cur.rect0.y);
+				glVertex3f((cur.point0.x + (int32_t) cur.rect0.w),cur.point0.y, cur.point0.z);
+				// bottom-right
+				glTexCoord2i(cur.rect0.x + cur.rect0.w, cur.rect0.y + cur.rect0.h);
+				glVertex3f((cur.point0.x + (int32_t) cur.rect0.w),
+						(cur.point0.y + (int32_t) cur.rect0.h), cur.point0.z);
+				// bottom-left
+				glTexCoord2i(cur.rect0.x, cur.rect0.y + cur.rect0.h);
+				glVertex3f(cur.point0.x, (cur.point0.y + (int32_t) cur.rect0.h), cur.point0.z);
+			}
+			glEnd();
+
+		}
+			break;
+		};
+
+	}
+	render_tasks.clear();
+}
 

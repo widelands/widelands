@@ -215,7 +215,7 @@ bool DismantleSite::get_building_work(Game & game, Worker & worker, bool) {
 		// No more building, so move to the flag
 		worker.start_task_move
 				(game,
-				 WALK_SE,
+				 WALK_SE, true,
 				 worker.descr().get_right_walk_anims(false),
 				 true);
 		worker.set_location(nullptr);

@@ -273,6 +273,7 @@ struct Bob : public Map_Object {
 		 const Coords        & dest,
 		 const int32_t         persist,
 		 const DirAnimations &,
+		 bool            const into2donlast,
 		 const bool            forceonlast = false,
 		 const int32_t         only_step = -1)
 		__attribute__((warn_unused_result));
@@ -284,6 +285,7 @@ struct Bob : public Map_Object {
 		(Game                &,
 		 const Path          &,
 		 const DirAnimations &,
+		 bool            const into2donlast,
 		 const bool            forceonlast  = false,
 		 const int32_t         only_step = -1);
 
@@ -292,11 +294,12 @@ struct Bob : public Map_Object {
 		 const Path          &,
 		 const int32_t         index,
 		 const DirAnimations &,
+		 bool            const into2donlast,
 		 const bool            forceonlast = false,
 		 const int32_t         only_step = -1)
 		__attribute__((warn_unused_result));
 
-	void start_task_move(Game & game, int32_t dir, const DirAnimations &, bool);
+	void start_task_move(Game & game, int32_t dir, bool move2D, const DirAnimations &, bool);
 
 	// higher level handling (task-based)
 	State & top_state() {assert(m_stack.size()); return *m_stack.rbegin();}
@@ -340,7 +343,7 @@ private:
 	void move_update(Game &, State &);
 
 	int32_t start_walk
-		(Game & game, WalkingDir, uint32_t anim, bool force = false);
+		(Game & game, WalkingDir, bool walk2d, uint32_t anim, bool force = false);
 
 	/**
 	 * Call this from your task_act() function that was scheduled after
@@ -360,6 +363,7 @@ private:
 	uint32_t       m_anim;
 	int32_t        m_animstart; ///< gametime when the animation was started
 	WalkingDir m_walking;
+	bool m_walking_2d;
 	int32_t        m_walkstart; ///< start time (used for interpolation)
 	int32_t        m_walkend;   ///< end time (used for interpolation)
 

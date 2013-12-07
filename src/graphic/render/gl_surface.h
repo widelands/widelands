@@ -21,6 +21,7 @@
 #define GL_SURFACE_H
 
 #include <memory>
+#include <set>
 
 #define NO_SDL_GLEXT
 #include <GL/glew.h>
@@ -46,6 +47,9 @@ public:
 	virtual void draw_rect3d(const Rect&, int32_t, RGBColor);
 	virtual void brighten_rect(const Rect&, int32_t factor);
 
+	virtual void start_rendering3d(Vector z_proj);
+	virtual void end_rendering3d();
+
 	virtual void blit3d(const Point3D&, const Surface*, const Rect& srcrc, Composite cm);
 
 	virtual void draw_line
@@ -56,8 +60,45 @@ protected:
 	/// Logical width and height of the surface
 	uint16_t m_w, m_h;
 
+	/// Vector that projects to z axis of camera
+	Vector z_project;
+
+
+
 	/// Pixel data, while the texture is locked
 	std::unique_ptr<uint8_t[]> m_pixels;
+
+	enum RenderTaskId {
+		task_fill_rect = 1,
+		task_draw_rect = 2,
+		task_blit = 3
+	};
+
+	struct RenderTask {
+		RenderTask(RenderTaskId id, float z_val, const Rect& rc, int32_t z, const RGBAColor colr):
+		 task_id(id), z_value(z_val), rect0(rc), point0(0,0,z), clr(colr) { }
+
+		RenderTask(RenderTaskId id, float z_val, const Point3D& dst, const Surface* imag, const Rect& srcrc, Composite com):
+				 task_id(id), z_value(z_val), rect0(srcrc), point0(dst), cm(com), image(imag) { }
+
+		RenderTaskId task_id;
+		float z_value;
+
+
+		Rect rect0;
+		Point3D point0;
+		union {
+			Composite cm;
+			const RGBAColor clr;
+		};
+		const Surface* image;
+
+		bool operator< (const RenderTask & other) const {
+				return z_value < other.z_value;
+		}
+	};
+	std::multiset<RenderTask> render_tasks;
+
 };
 
 #endif /* end of include guard: GL_SURFACE_H */

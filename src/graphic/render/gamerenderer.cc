@@ -292,6 +292,7 @@ void GameRenderer::draw_objects3d()
 	static const uint32_t BL = 2;
 	static const uint32_t BR = 3;
 	const Map & map = m_egbase->map();
+	m_dst->start_rendering3d(Vector(0.f,0.f,-1.f));
 
 	for (int32_t fy = m_minfy; fy <= m_maxfy; ++fy) {
 		for (int32_t fx = m_minfx; fx <= m_maxfx; ++fx) {
@@ -437,8 +438,13 @@ void GameRenderer::draw_objects3d()
 				for
 					(const Overlay_Manager::Overlay_Info * it = overlay_info;
 					 it < end;
-					 ++it)
-					m_dst->blit3d(pos[F] - it->hotspot, it->pic);
+					 ++it) {
+					int32_t corr_z= it->pic->height() - it->hotspot.y ;
+					if (corr_z<0) corr_z=0;
+					Point3D corr(0,-corr_z,-corr_z*2);
+					m_dst->blit3d(pos[F] - it->hotspot + corr, it->pic);
+				}
+
 			}
 
 			{
@@ -484,4 +490,5 @@ void GameRenderer::draw_objects3d()
 			}
 		}
 	}
+	m_dst->end_rendering3d();
 }

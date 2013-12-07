@@ -119,6 +119,7 @@ m_linkpprev      (0),
 m_anim           (0),
 m_animstart      (0),
 m_walking        (IDLE),
+m_walking_2d (false),
 m_walkstart      (0),
 m_walkend        (0),
 m_actid          (0),
@@ -582,6 +583,7 @@ bool Bob::start_task_movepath
 	 const Coords        & dest,
 	 int32_t         const persist,
 	 const DirAnimations & anims,
+	 bool            const into2donlast,
 	 bool            const forceonlast,
 	 int32_t         const only_step)
 {
@@ -615,7 +617,7 @@ bool Bob::start_task_movepath
 	State & state  = top_state();
 	state.path     = new Path(path);
 	state.ivar1    = 0; // step #
-	state.ivar2    = forceonlast ? 1 : 0;
+	state.ivar2    = (forceonlast ? 1 : 0) | (into2donlast ? 2 : 0);
 	state.ivar3    = only_step;
 	state.diranims = anims;
 	return true;
@@ -629,6 +631,7 @@ void Bob::start_task_movepath
 	(Game                & game,
 	 const Path          & path,
 	 const DirAnimations & anims,
+	 bool            const into2donlast,
 	 bool            const forceonlast,
 	 int32_t         const only_step)
 {
@@ -638,7 +641,7 @@ void Bob::start_task_movepath
 	State & state  = top_state();
 	state.path     = new Path(path);
 	state.ivar1    = 0;
-	state.ivar2    = forceonlast ? 1 : 0;
+	state.ivar2    = (forceonlast ? 1 : 0) | (into2donlast ? 2 : 0);
 	state.ivar3    = only_step;
 	state.diranims = anims;
 }
@@ -656,6 +659,7 @@ bool Bob::start_task_movepath
 	 const Path          & origpath,
 	 int32_t         const index,
 	 const DirAnimations & anims,
+	 bool            const into2donlast,
 	 bool            const forceonlast,
 	 int32_t         const only_step)
 {
@@ -683,7 +687,7 @@ bool Bob::start_task_movepath
 			path.starttrim(index);
 			path.reverse();
 		}
-		start_task_movepath(game, path, anims, forceonlast, only_step);
+		start_task_movepath(game, path, anims, into2donlast, forceonlast, only_step);
 		return true;
 	}
 
@@ -720,19 +724,20 @@ void Bob::movepath_update(Game & game, State & state)
 
 	Direction const dir = (*path)[state.ivar1];
 	bool forcemove = false;
+	bool is2dstep = false;
 
 	if
-		(state.ivar2
-		 and
+		(
 		 static_cast<Path::Step_Vector::size_type>(state.ivar1) + 1
 		 ==
 		 path->get_nsteps())
 	{
-		forcemove = true;
+		if (state.ivar2 & 1) forcemove = true;
+		if (state.ivar2 & 2) is2dstep = true;
 	}
 
 	++state.ivar1;
-	return start_task_move(game, dir, state.diranims, forcemove);
+	return start_task_move(game, dir, is2dstep, state.diranims, forcemove);
 	// Note: state pointer is invalid beyond this point
 }
 
@@ -757,6 +762,7 @@ Bob::Task const Bob::taskMove = {
 void Bob::start_task_move
 	(Game                & game,
 	 int32_t         const dir,
+	 bool move2d,
 	 const DirAnimations & anims,
 	 bool            const forcemove)
 {
@@ -764,6 +770,7 @@ void Bob::start_task_move
 		start_walk
 			(game,
 			 static_cast<WalkingDir>(dir),
+			 move2d,
 			 anims.get_animation(dir),
 			 forcemove);
 	if (tdelta < 0)
@@ -794,12 +801,17 @@ Point3D Bob::calc_drawpos3d(const Editor_Game_Base & game, const Point3D pos) co
 	const FCoords end = m_position;
 	FCoords start;
 	Point3D spos = pos, epos = pos;
-
 	switch (m_walking) {
 	case WALK_NW:
 		map.get_brn(end, &start);
 		spos.x += TRIANGLE_WIDTH / 2;
 		spos.z -= TRIANGLE_WIDTH;
+		if (m_walking_2d ) {
+			epos.z -=TRIANGLE_WIDTH;
+			epos.y -= TRIANGLE_HEIGHT;
+			spos.z -=TRIANGLE_WIDTH;
+			spos.y -= TRIANGLE_HEIGHT;
+		}
 		break;
 	case WALK_NE:
 		map.get_bln(end, &start);
@@ -822,10 +834,17 @@ Point3D Bob::calc_drawpos3d(const Editor_Game_Base & game, const Point3D pos) co
 	case WALK_SE:
 		map.get_tln(end, &start);
 		spos.x -= TRIANGLE_WIDTH / 2;
-		spos.z += TRIANGLE_WIDTH;
+		if (m_walking_2d) spos.y -= TRIANGLE_HEIGHT;
+		else spos.z += TRIANGLE_WIDTH;
 		break;
 
-	case IDLE: start.field = 0; break;
+	case IDLE:
+		start.field = 0;
+		if (m_walking_2d) { // we are inside a building, move to buildings z-coordinate
+			epos.z -=TRIANGLE_WIDTH;
+			epos.y -= TRIANGLE_HEIGHT;
+		}
+		break;
 	default:
 		assert(false);
 		break;
@@ -977,7 +996,7 @@ void Bob::set_animation(Editor_Game_Base & egbase, uint32_t const anim)
  * if the step is forbidden, and -2 if it is currently blocked.
  */
 int32_t Bob::start_walk
-	(Game & game, WalkingDir const dir, uint32_t const a, bool const force)
+	(Game & game, WalkingDir const dir, bool walk_2d, uint32_t const a, bool const force)
 {
 	FCoords newnode;
 
@@ -1000,8 +1019,8 @@ int32_t Bob::start_walk
 	// Move is go
 	int32_t const tdelta = map.calc_cost(m_position, dir);
 	assert(tdelta);
-
 	m_walking = dir;
+	m_walking_2d = walk_2d;
 	m_walkstart = game.get_gametime();
 	m_walkend = m_walkstart + tdelta;
 
@@ -1107,6 +1126,7 @@ void Bob::log_general_info(const Editor_Game_Base & egbase)
 
 	molog("AnimStart: %i\n", m_animstart);
 	molog("WalkingDir: %i\n", m_walking);
+	molog("Walking in 2D: %i\n", m_walking_2d);
 	molog("WalkingStart: %i\n", m_walkstart);
 	molog("WalkEnd: %i\n", m_walkend);
 
@@ -1199,6 +1219,7 @@ void Bob::Loader::load(FileRead & fr)
 	bob.m_anim = animname.size() ? bob.descr().get_animation(animname) : 0;
 	bob.m_animstart = fr.Signed32();
 	bob.m_walking = static_cast<WalkingDir>(fr.Direction8_allow_null());
+	bob.m_walking_2d = false; // do not store this, since it is only fixing drawing stuff
 	if (bob.m_walking) {
 		bob.m_walkstart = fr.Signed32();
 		bob.m_walkend = fr.Signed32();

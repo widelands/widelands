@@ -275,7 +275,7 @@ bool Ship::ship_update_transport(Game & game, Bob::State &) {
 							idx++;
 						}
 
-						start_task_movepath(game, subpath, descr().get_sail_anims());
+						start_task_movepath(game, subpath, descr().get_sail_anims(), true);
 						return true;
 					}
 
@@ -293,7 +293,7 @@ bool Ship::ship_update_transport(Game & game, Bob::State &) {
 
 				if (closest_target) {
 					molog("Closest target en route is (%i,%i)\n", closest_target.x, closest_target.y);
-					if (start_task_movepath(game, closest_target, 0, descr().get_sail_anims()))
+					if (start_task_movepath(game, closest_target, 0, descr().get_sail_anims(), true))
 						return true;
 
 					molog("  Failed to find path!!! Retry full search\n");
@@ -519,7 +519,7 @@ void Ship::ship_update_idle(Game & game, Bob::State & state) {
 				}
 
 				state.ivar1 = 1;
-				start_task_move(game, dir, descr().get_sail_anims(), false);
+				start_task_move(game, dir, false, descr().get_sail_anims(), false);
 				return;
 			}
 			// No desire to move around, so sleep
@@ -562,7 +562,7 @@ void Ship::ship_update_idle(Game & game, Bob::State & state) {
 						} while (!exp_dir_swimable(m_expedition->direction));
 					}
 					state.ivar1 = 1;
-					return start_task_move(game, m_expedition->direction, descr().get_sail_anims(), false);
+					return start_task_move(game, m_expedition->direction, false, descr().get_sail_anims(), false);
 				} else {
 					// The ship got the command to scout around an island, but is not close to any island
 					// Most likely the command was send as the ship was on an exploration and just leaving
@@ -577,7 +577,7 @@ void Ship::ship_update_idle(Game & game, Bob::State & state) {
 								// However, we do neither save the position as starting position, nor do we save
 								// the direction we currently go. So the ship can start exploring normally
 								state.ivar1 = 1;
-								return start_task_move(game, dir, descr().get_sail_anims(), false);
+								return start_task_move(game, dir, false, descr().get_sail_anims(), false);
 							}
 					}
 					// if we are here, it seems something really strange happend.
@@ -589,7 +589,7 @@ void Ship::ship_update_idle(Game & game, Bob::State & state) {
 				if (exp_dir_swimable(m_expedition->direction)) {
 					// the scouting direction is still free to move
 					state.ivar1 = 1;
-					start_task_move(game, m_expedition->direction, descr().get_sail_anims(), false);
+					start_task_move(game, m_expedition->direction, false, descr().get_sail_anims(), false);
 					return;
 				} else { // coast reached
 					m_ship_state = EXP_WAITING;
@@ -719,7 +719,7 @@ void Ship::start_task_movetodock(Game & game, PortDock & pd) {
 		if (cur.field->get_immovable() == &pd) {
 			Path path;
 			astar.pathto(cur, path);
-			start_task_movepath(game, path, descr().get_sail_anims());
+			start_task_movepath(game, path, descr().get_sail_anims(), true);
 			return;
 		}
 	}

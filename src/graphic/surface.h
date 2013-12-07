@@ -25,6 +25,7 @@
 #include "graphic/compositemode.h"
 #include "point3d.h"
 #include "rect.h"
+#include "graphic/vector.h"
 #include "rgbcolor.h"
 
 /**
@@ -45,6 +46,11 @@ public:
 	/// Dimensions.
 	virtual uint16_t width() const = 0;
 	virtual uint16_t height() const = 0;
+
+	/// This tells the surface that 3d rendering is starting, of course using z ordering for alpha blended stuff
+	virtual void start_rendering3d(Vector z_proj) {};
+	/// end 3d rendering
+	virtual void end_rendering3d() {};
 
 	/// This draws a part of another surface to this surface
 	virtual void blit(const Point&, const Surface*, const Rect& srcrc, Composite cm = CM_Normal) = 0;

@@ -28,6 +28,7 @@
 #include "point3d.h"
 #include "rect.h"
 #include "rgbcolor.h"
+#include "vector.h"
 
 class Surface;
 
@@ -59,6 +60,9 @@ public:
 	int32_t width() const;
 	int32_t height() const;
 
+	void start_rendering3d(Vector z_proj);
+	void end_rendering3d();
+
 	void draw_line
 		(int32_t x1, int32_t y1, int32_t x2, int32_t y2, const RGBColor& color, uint8_t width = 1);
 	void draw_rect(Rect, const RGBColor&);
@@ -70,6 +74,7 @@ public:
 	void blit(const Point& dst, const Image* image, Composite cm = CM_Normal, UI::Align = UI::Align_TopLeft);
 	void blitrect(Point dst, const Image* image, Rect src, Composite cm = CM_Normal);
 	void tile(Rect, const Image* image, Point ofs, Composite cm = CM_Normal);
+
 
 	void blit3d(const Point3D& dst, const Image* image, Composite cm = CM_Normal, UI::Align = UI::Align_TopLeft);
 
@@ -115,6 +120,8 @@ public:
 	const Rect & get_rect() const {return m_rect;}
 	const Point & get_offset() const {return m_offset;}
 
+	static uint64_t get_rendnum() { return rend_number; };
+
 protected:
 	bool clip(Rect & r) const;
 
@@ -128,6 +135,8 @@ protected:
 	Rect m_rect;
 	///Drawing offset
 	Point m_offset;
+
+	static uint64_t rend_number;
 };
 
 #endif

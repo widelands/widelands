@@ -629,6 +629,7 @@ bool Worker::run_walk(Game & game, State & state, const Action & action)
 	BaseImmovable const * const imm = game.map()[get_position()].get_immovable();
 	Coords dest(Coords::Null());
 	bool forceonlast = false;
+	bool islast2d = false;
 	int32_t max_steps = -1;
 
 	// First of all, make sure we're outside
@@ -655,6 +656,7 @@ bool Worker::run_walk(Game & game, State & state, const Action & action)
 			max_steps = 1;
 
 			forceonlast = true;
+			islast2d = true;
 		}
 	}
 	if (!dest && (action.iparam1 & Action::walkCoords)) {
@@ -680,7 +682,7 @@ bool Worker::run_walk(Game & game, State & state, const Action & action)
 		 	 dest,
 		 	 10,
 		 	 descr().get_right_walk_anims(does_carry_ware()),
-		 	 forceonlast, max_steps))
+		 	 islast2d, forceonlast, max_steps))
 	{
 		molog("  could not find path\n");
 		send_signal(game, "fail");
@@ -1508,8 +1510,7 @@ void Worker::transfer_update(Game & game, State & /* state */) {
 		if        (upcast(Building, nextbuild, nextstep)) { //  Flag to Building
 			if (&nextbuild->base_flag() != location)
 				throw wexception("MO(%u): [transfer]: next step is building, but we are nowhere near", serial());
-
-			return start_task_move(game, WALK_NW, descr().get_right_walk_anims(does_carry_ware()), true);
+			return start_task_move(game, WALK_NW, true, descr().get_right_walk_anims(does_carry_ware()), true);
 		} else if (upcast(Flag,     nextflag,  nextstep)) { //  Flag to Flag
 			Road & road = *flag->get_road(*nextflag);
 
@@ -1519,7 +1520,7 @@ void Worker::transfer_update(Game & game, State & /* state */) {
 				path.reverse();
 
 			molog("[transfer]: starting task [movepath] and setting location to road %u\n", road.serial());
-			start_task_movepath(game, path, descr().get_right_walk_anims(does_carry_ware()));
+			start_task_movepath(game, path, descr().get_right_walk_anims(does_carry_ware()), false);
 			set_location(&road);
 		} else if (upcast(Road,    road,      nextstep)) { //  Flag to Road
 			if
@@ -1553,7 +1554,7 @@ void Worker::transfer_update(Game & game, State & /* state */) {
 					 	(game,
 					 	 path,
 					 	 index,
-					 	 descr().get_right_walk_anims(does_carry_ware())))
+					 	 descr().get_right_walk_anims(does_carry_ware()), false))
 				{
 					molog
 						("[transfer]: from road %u to flag %u\n",
@@ -1845,7 +1846,7 @@ void Worker::return_update(Game & game, State & state)
 					return
 						start_task_move
 							(game,
-							WALK_NW,
+							WALK_NW, true,
 							descr().get_right_walk_anims(does_carry_ware()),
 							true);
 				}
@@ -1854,14 +1855,13 @@ void Worker::return_update(Game & game, State & state)
 	}
 
 	// Determine the building's flag and move to it
-
 	if
 		(not
 		 start_task_movepath
 		 	(game,
 		 	 location->base_flag().get_position(),
 		 	 15,
-		 	 descr().get_right_walk_anims(does_carry_ware())))
+		 	 descr().get_right_walk_anims(does_carry_ware()), true))
 	{
 		molog("[return]: Failed to return\n");
 		char buffer[2048];
@@ -2135,7 +2135,7 @@ void Worker::dropoff_update(Game & game, State &)
 			molog("[dropoff]: flag is overloaded\n");
 			start_task_move
 				(game,
-				 WALK_NW,
+				 WALK_NW, false,
 				 descr().get_right_walk_anims(does_carry_ware()),
 				 true);
 			return;
@@ -2150,7 +2150,7 @@ void Worker::dropoff_update(Game & game, State &)
 		return
 			start_task_move
 				(game,
-				 WALK_NW,
+				 WALK_NW, true,
 				 descr().get_right_walk_anims(does_carry_ware()),
 				 true);
 
@@ -2248,7 +2248,7 @@ void Worker::fetchfromflag_update(Game & game, State & state)
 		return
 			start_task_move
 				(game,
-				 WALK_NW,
+				 WALK_NW, true,
 				 descr().get_right_walk_anims(does_carry_ware()), true);
 	}
 
@@ -2431,7 +2431,7 @@ void Worker::leavebuilding_update(Game & game, State & state)
 		return
 			start_task_move
 				(game,
-				 WALK_SE,
+				 WALK_SE, true,
 				 descr().get_right_walk_anims(does_carry_ware()),
 				 true);
 	} else {
@@ -2443,7 +2443,7 @@ void Worker::leavebuilding_update(Game & game, State & state)
 		if (get_position() == flagpos)
 			return pop_task(game);
 
-		if (!start_task_movepath(game, flagpos, 0, descr().get_right_walk_anims(does_carry_ware()))) {
+		if (!start_task_movepath(game, flagpos, 0, descr().get_right_walk_anims(does_carry_ware()), false)) {
 			molog("[leavebuilding]: outside of building, but failed to walk back to flag");
 			set_location(0);
 			return pop_task(game);
@@ -2604,6 +2604,7 @@ void Worker::fugitive_update(Game & game, State & state)
 				 	 0,
 				 	 descr().get_right_walk_anims(does_carry_ware()),
 				 	 false,
+				 	 false,
 				 	 4))
 				return;
 		}
@@ -2621,7 +2622,7 @@ void Worker::fugitive_update(Game & game, State & state)
 		 	(game,
 		 	 game.random_location(get_position(), vision_range()),
 		 	 4,
-		 	 descr().get_right_walk_anims(does_carry_ware())))
+		 	 descr().get_right_walk_anims(does_carry_ware()), false))
 		return;
 
 	return start_task_idle(game, descr().get_animation("idle"), 50);
@@ -2750,7 +2751,7 @@ void Worker::geologist_update(Game & game, State & state)
 					 	(game,
 					 	 target,
 					 	 0,
-					 	 descr().get_right_walk_anims(does_carry_ware())))
+					 	 descr().get_right_walk_anims(does_carry_ware()), false))
 				{
 
 					molog("[geologist]: BUG: could not find path\n");
@@ -2770,7 +2771,7 @@ void Worker::geologist_update(Game & game, State & state)
 	if
 		(not
 		 start_task_movepath
-		 	(game, owner_area, 0, descr().get_right_walk_anims(does_carry_ware())))
+		 	(game, owner_area, 0, descr().get_right_walk_anims(does_carry_ware()), false))
 	{
 		molog("[geologist]: could not find path home\n");
 		send_signal(game, "fail");
@@ -2875,7 +2876,7 @@ void Worker::scout_update(Game & game, State & state)
 						 coord.x, coord.y);
 					if
 						(!start_task_movepath(game, coord, 0,
-						 descr().get_right_walk_anims(does_carry_ware())))
+						 descr().get_right_walk_anims(does_carry_ware()), false))
 							molog("[scout]: failed to reach destination\n");
 					else
 						return; //start_task_movepath was successfull.
@@ -2908,7 +2909,7 @@ void Worker::scout_update(Game & game, State & state)
 				if
 					(!start_task_movepath
 					 (game, oldest_coords, 0,
-						  descr().get_right_walk_anims(does_carry_ware())))
+						  descr().get_right_walk_anims(does_carry_ware()), false))
 						molog("[scout]: Failed to reach destination\n");
 				else
 					return; //Start task movepath success.

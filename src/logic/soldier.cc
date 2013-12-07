@@ -1028,7 +1028,7 @@ void Soldier::attack_update(Game & game, State & state)
 				return
 					start_task_move
 						(game,
-							WALK_NW,
+							WALK_NW, true,
 							descr().get_right_walk_anims(does_carry_ware()),
 							true);
 			}
@@ -1047,7 +1047,7 @@ void Soldier::attack_update(Game & game, State & state)
 					(game,
 						baseflag.get_position(),
 						4, // use larger persist when returning home
-						descr().get_right_walk_anims(does_carry_ware())))
+						descr().get_right_walk_anims(does_carry_ware()), true))
 				return;
 			else {
 				molog("[attack] failed to return home\n");
@@ -1098,7 +1098,7 @@ void Soldier::attack_update(Game & game, State & state)
 					(game,
 						target,
 						4, // use larger persist when returning home
-						descr().get_right_walk_anims(does_carry_ware())))
+						descr().get_right_walk_anims(does_carry_ware()), true))
 				return;
 			else {
 				molog("[attack] failed to return to own land\n");
@@ -1187,7 +1187,7 @@ void Soldier::attack_update(Game & game, State & state)
 			 	(game,
 			 	 enemy->base_flag().get_position(),
 			 	 3,
-			 	 descr().get_right_walk_anims(does_carry_ware())))
+			 	 descr().get_right_walk_anims(does_carry_ware()), true))
 			return;
 		else {
 			molog
@@ -1413,7 +1413,7 @@ void Soldier::defense_update(Game & game, State & state)
 			return
 				start_task_move
 					(game,
-					 WALK_NW,
+					 WALK_NW, true,
 					 descr().get_right_walk_anims(does_carry_ware()),
 					 true);
 		}
@@ -1424,7 +1424,7 @@ void Soldier::defense_update(Game & game, State & state)
 			 	(game,
 			 	 baseflag.get_position(),
 			 	 4, // use larger persist when returning home
-			 	 descr().get_right_walk_anims(does_carry_ware())))
+			 	 descr().get_right_walk_anims(does_carry_ware()), true))
 			return;
 
 		molog("[defense] could not find way home\n");
@@ -1476,7 +1476,7 @@ void Soldier::defense_update(Game & game, State & state)
 			 	 3,
 			 	 descr().get_right_walk_anims(does_carry_ware()),
 			 	 false,
-			 	 1))
+			 	 1, false))
 		{
 			molog("[defense] move towards soldier %u\n", target.s->serial());
 			return;
@@ -1645,7 +1645,7 @@ void Soldier::battle_update(Game & game, State &)
 			return
 				start_task_move
 					(game,
-					 WALK_SE,
+					 WALK_SE, true,
 					 descr().get_right_walk_anims(does_carry_ware()),
 					 true);
 		}
@@ -1686,7 +1686,7 @@ void Soldier::battle_update(Game & game, State &)
 					 	 dest,
 					 	 0,
 					 	 descr().get_right_walk_anims(does_carry_ware()),
-					 	 false, (dist + 3) / 4))
+					 	 false, (dist + 3) / 4), true)
 				{
 					molog
 						("[battle] player %u's soldier started task_movepath to (%i,%i)\n",

@@ -33,7 +33,7 @@ enum WalkingDir {
 	WALK_SE         = 3,
 	WALK_SW         = 4,
 	WALK_W          = 5,
-	WALK_NW         = 6,
+	WALK_NW   = 6, // This is normal movement on the map
 	LAST_DIRECTION  = 6,
 };
 

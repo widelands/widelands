@@ -107,7 +107,7 @@ void Carrier::road_update(Game & game, State & state)
 		 	(game,
 		 	 road.get_path(),
 		 	 road.get_idle_index(),
-		 	 descr().get_right_walk_anims(does_carry_ware())))
+		 	 descr().get_right_walk_anims(does_carry_ware()),false))
 		return;
 
 	// Be bored. There's nothing good on TV, either.
@@ -203,7 +203,7 @@ void Carrier::transport_update(Game & game, State & state)
 		else if
 			((flag.has_capacity() || !swap_or_wait(game, state))
 			 &&
-			 !start_task_walktoflag(game, state.ivar1 ^ 1))
+			 !start_task_walktoflag(game, state.ivar1 ^ 1, false))
 			// Drop the item, possible exchanging it with another one
 			drop_item(game, state);
 	}
@@ -252,7 +252,7 @@ void Carrier::deliver_to_building(Game & game, State & state)
 		return
 			start_task_move
 				(game,
-				 WALK_SE,
+				 WALK_SE, true,
 				 descr().get_right_walk_anims(does_carry_ware()),
 				 true);
 	} else {
@@ -272,7 +272,7 @@ void Carrier::deliver_to_building(Game & game, State & state)
 void Carrier::pickup_from_flag(Game & game, State & state)
 {
 	int32_t const ivar1 = state.ivar1;
-	if (!start_task_walktoflag(game, ivar1)) {
+	if (!start_task_walktoflag(game, ivar1, false)) {
 
 		m_promised_pickup_to = NOONE;
 
@@ -351,12 +351,12 @@ void Carrier::drop_item(Game & game, State & state)
  */
 void Carrier::enter_building(Game & game, State & state)
 {
-	if (!start_task_walktoflag(game, state.ivar1 ^ 1)) {
+	if (!start_task_walktoflag(game, state.ivar1 ^ 1, true)) {
 		state.ivar1 = -1;
 		return
 			start_task_move
 				(game,
-				 WALK_NW,
+				 WALK_NW, true,
 				 descr().get_right_walk_anims(does_carry_ware()),
 				 true);
 	}
@@ -394,7 +394,7 @@ bool Carrier::swap_or_wait(Game & game, State & state)
 
 		m_promised_pickup_to = state.ivar1 ^ 1;
 		return false;
-	} else if (!start_task_walktoflag(game, state.ivar1 ^ 1, true))
+	} else if (!start_task_walktoflag(game, state.ivar1 ^ 1, false, true))
 		start_task_waitforcapacity(game, flag); //  wait one node away
 
 	return true;
@@ -547,7 +547,7 @@ int32_t Carrier::find_closest_flag(Game & game)
  * the target field.
  */
 bool Carrier::start_task_walktoflag
-	(Game & game, int32_t const flag, bool const offset)
+	(Game & game, int32_t const flag, bool const ismove2d, bool const offset)
 {
 	const Path & path =
 		ref_cast<Road, PlayerImmovable>(*get_location(game)).get_path();
@@ -565,7 +565,7 @@ bool Carrier::start_task_walktoflag
 
 	return
 		start_task_movepath
-			(game, path, idx, descr().get_right_walk_anims(does_carry_ware()));
+			(game, path, idx, descr().get_right_walk_anims(does_carry_ware()), ismove2d);
 }
 
 void Carrier::log_general_info(const Widelands::Editor_Game_Base & egbase)

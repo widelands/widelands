@@ -58,7 +58,7 @@ struct Carrier : public Worker {
 	void start_task_road(Game &);
 	void update_task_road(Game &);
 	void start_task_transport(Game &, int32_t fromflag);
-	bool start_task_walktoflag(Game &, int32_t flag, bool offset = false);
+	bool start_task_walktoflag(Game &, int32_t flag, bool move2d, bool offset = false);
 
 	virtual void log_general_info(const Editor_Game_Base &);
 
