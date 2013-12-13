@@ -2,20 +2,21 @@
 # Copyright (c) 2013 Rosetta Contributors and Canonical Ltd 2013
 # This file is distributed under the same license as the widelands package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2013.
-#
+# GunChleoc <fios@foramnagaidhlig.net>, 2013.
 msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2013-09-15 17:41+0000\n"
-"PO-Revision-Date: 2013-10-08 08:18+0000\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: Gaelic; Scottish <gd@li.org>\n"
+"PO-Revision-Date: 2013-12-13 05:06+0000\n"
+"Last-Translator: GunChleoc <Unknown>\n"
+"Language-Team: Fòram na Gàidhlig http://www.foramnagaidhlig.net\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-10-09 05:11+0000\n"
-"X-Generator: Launchpad (build 16799)\n"
+"X-Launchpad-Export-Date: 2013-12-13 05:13+0000\n"
+"X-Generator: Launchpad (build 16869)\n"
+"Language: gd\n"
 
 #: ../../campaigns/t01.wmf/scripting/initial_messages.lua:27
 msgid ""
@@ -23,12 +24,18 @@ msgid ""
 "trying not to fall asleep or die before the right time comes. And so I do... "
 "wait.\" "
 msgstr ""
+" \"Mar a dh'innis m' athair dhomh, bidh àm cogaidh ann 's àm gus dol am "
+"falach 's a' feitheamh, a' feuchainn nach tig cadal no bàs ort mus tig an t-"
+"àm dhut. 'S e seo na nì mi... feitheamh.\" "
 
 #: ../../campaigns/t01.wmf/scripting/texts.lua:45
 msgid ""
 " \"Hail, chieftain. I am Khantrukh and have seen many winters pass. Please "
 "allow me to aid you with my counsel through these darkened days.\" "
 msgstr ""
+" \"Fàilte, a cheannaird. 'S mise Khantrukh is chunnaic mi iomadh geamhradh "
+"a' dol seachad. Gum faodainn ur cuideachadh le comhairle rè nan làithean "
+"dorcha seo.\" "
 
 #: ../../campaigns/t01.wmf/scripting/texts.lua:89
 msgid ""
@@ -219,61 +226,63 @@ msgstr ""
 
 #: ../../campaigns/t01.wmf/elemental:7
 msgid "01 - Eyes in the Dark"
-msgstr ""
+msgstr "01 - Sùilean san dorchadas"
 
 #: ../../campaigns/t01.wmf/scripting/texts.lua:43
 msgid "An old man says..."
-msgstr ""
+msgstr "Tha bodach a' bruidhinn riut..."
 
 #: ../../campaigns/t01.wmf/scripting/texts.lua:111
 msgid "At the tomb"
-msgstr ""
+msgstr "Aig an uaigh"
 
 #: ../../campaigns/t01.wmf/scripting/texts.lua:7
 msgid "Build a lumberjack's hut"
-msgstr ""
+msgstr "Tog bothan coillteir"
 
 #: ../../campaigns/t01.wmf/scripting/texts.lua:25
 msgid "Build a ranger's hut"
-msgstr ""
+msgstr "Tog bothan maoir-choille"
 
 #: ../../campaigns/t01.wmf/scripting/texts.lua:17
 msgid "Build another lumberjack's hut"
-msgstr ""
+msgstr "Tog bothan coillteir eile"
 
 #: ../../campaigns/t01.wmf/scripting/texts.lua:32
 msgid "Build two quarries"
-msgstr ""
+msgstr "Tog dà choireall"
 
 #: ../../campaigns/t01.wmf/scripting/texts.lua:101
 msgid "In the night"
-msgstr ""
+msgstr "Air an oidhche"
 
 #: ../../campaigns/t01.wmf/elemental:9
 msgid ""
 "In this tutorial the basic gameplay and control as well as basic production "
 "buildings of the Barbarians are introduced."
 msgstr ""
+"Ionnsaichidh tu mu uidheaman-smachd is rudan bunasach eile mun gheama san "
+"oideachadh seo cho math ri mu thogalaichean bunasach nan tùsanach."
 
 #: ../../campaigns/t01.wmf/scripting/texts.lua:49
 msgid "Khantrukh continues..."
-msgstr ""
+msgstr "Tha Khantrukh a' leantainn air adhart..."
 
 #: ../../campaigns/t01.wmf/scripting/texts.lua:79
 msgid "Khantrukh nods..."
-msgstr ""
+msgstr "Tha Khantrukh ag aontachadh..."
 
 #: ../../campaigns/t01.wmf/scripting/texts.lua:65
 msgid "Khantrukh remembers..."
-msgstr ""
+msgstr "Tha cuimhne air Khantrukh..."
 
 #: ../../campaigns/t01.wmf/scripting/khantrukhs_talking.lua:58
 msgid "Mission Complete"
-msgstr ""
+msgstr "Tha am misean coileanta"
 
 #: ../../campaigns/t01.wmf/scripting/khantrukhs_talking.lua:22
 msgid "Somebody comes up to you"
-msgstr ""
+msgstr "Tha cuideigin a' teannadh a-nall"
 
 #: ../../campaigns/t01.wmf/scripting/khantrukhs_talking.lua:23
 #: ../../campaigns/t01.wmf/scripting/khantrukhs_talking.lua:29
@@ -282,45 +291,45 @@ msgstr ""
 #: ../../campaigns/t01.wmf/scripting/khantrukhs_talking.lua:45
 #: ../../campaigns/t01.wmf/scripting/khantrukhs_talking.lua:52
 msgid "The advisor"
-msgstr ""
+msgstr "An comhairleach"
 
 #: ../../campaigns/t01.wmf/scripting/texts.lua:58
 msgid "The elder remarks..."
-msgstr ""
+msgstr "Tha an seanair a' beachdachadh..."
 
 #: ../../campaigns/t01.wmf/scripting/texts.lua:87
 msgid "The elder speaks..."
-msgstr ""
+msgstr "Tha an seanair ag ràdh..."
 
 #: ../../campaigns/t01.wmf/scripting/texts.lua:130
 msgid "The oath"
-msgstr ""
+msgstr "A' bhòid"
 
 #: ../../campaigns/t01.wmf/scripting/texts.lua:72
 msgid "The old man looks to the sky..."
-msgstr ""
+msgstr "Tha am bodach a' coimhead dha na speuran..."
 
 #: ../../campaigns/t01.wmf/scripting/texts.lua:121
 msgid "The other day"
-msgstr ""
+msgstr "An latha eile"
 
 #: ../../campaigns/t01.wmf/scripting/initial_messages.lua:7
 msgid "The story begins"
-msgstr ""
+msgstr "Tha an sgeulachd air tòiseachadh"
 
 #: ../../campaigns/t01.wmf/scripting/texts.lua:132
 msgid "Thron looks furious..."
-msgstr ""
+msgstr "Tha an ainmein air Thron..."
 
 #: ../../campaigns/t01.wmf/scripting/texts.lua:123
 msgid "Thron says thoughtfully..."
-msgstr ""
+msgstr "Tha Thron a' cnuasadh..."
 
 #: ../../campaigns/t01.wmf/scripting/initial_messages.lua:9
 msgid "Thron sighs..."
-msgstr ""
+msgstr "Tha Thron ag osnachadh..."
 
 #: ../../campaigns/t01.wmf/scripting/texts.lua:103
 #: ../../campaigns/t01.wmf/scripting/texts.lua:113
 msgid "Thron speaks..."
-msgstr ""
+msgstr "Tha Thron a' bruidhinn..."

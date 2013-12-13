@@ -2,20 +2,21 @@
 # Copyright (c) 2013 Rosetta Contributors and Canonical Ltd 2013
 # This file is distributed under the same license as the widelands package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2013.
-#
+# GunChleoc <fios@foramnagaidhlig.net>, 2013.
 msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2013-09-15 17:41+0000\n"
-"PO-Revision-Date: 2013-10-08 08:20+0000\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: Gaelic; Scottish <gd@li.org>\n"
+"PO-Revision-Date: 2013-12-13 05:07+0000\n"
+"Last-Translator: GunChleoc <Unknown>\n"
+"Language-Team: Fòram na Gàidhlig http://www.foramnagaidhlig.net\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-10-09 05:11+0000\n"
-"X-Generator: Launchpad (build 16799)\n"
+"X-Launchpad-Export-Date: 2013-12-13 05:13+0000\n"
+"X-Generator: Launchpad (build 16869)\n"
+"Language: gd\n"
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:36
 msgid ""
@@ -197,19 +198,19 @@ msgstr ""
 
 #: ../../campaigns/emp01.wmf/elemental:7
 msgid "01 - The Strands of Malac' Mor"
-msgstr ""
+msgstr "01 - Traighean Mhalac' Mhòir"
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:10
 msgid "A dark night"
-msgstr ""
+msgstr "Oidhche dhorcha"
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:43
 msgid "A foreboding"
-msgstr ""
+msgstr "Ro-eòlas"
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:113
 msgid "A step forward"
-msgstr ""
+msgstr "Ceum air adhart"
 
 #: ../../campaigns/emp01.wmf/elemental:9
 msgid ""
@@ -222,88 +223,88 @@ msgstr ""
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:93
 msgid "Amalea comes in..."
-msgstr ""
+msgstr "Tha Amalea a' tighinn a-steach..."
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:82
 msgid "Amalea recommends..."
-msgstr ""
+msgstr "Tha Amalea a' moladh..."
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:66
 msgid "Amalea smiles..."
-msgstr ""
+msgstr "Tha fiamh a' ghàire air Amalea..."
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:144
 msgid "Build a barracks"
-msgstr ""
+msgstr "Tog taighean-feachd"
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:169
 msgid "Build a forester's house"
-msgstr ""
+msgstr "Tog taigh planntair-choille"
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:151
 msgid "Build a lumberjack's house"
-msgstr ""
+msgstr "Tog taigh coillteir"
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:176
 msgid "Build a quarry"
-msgstr ""
+msgstr "Tog coireall"
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:162
 msgid "Build two lumberjack's houses and a sawmill"
-msgstr ""
+msgstr "Tog dà thaigh coillteir is muileann sàbhaidh"
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:12
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:23
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:34
 msgid "Diary of Lutius"
-msgstr ""
+msgstr "An leabhar-latha aig Lutius"
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:123
 msgid "Mission Complete"
-msgstr ""
+msgstr "Tha am misean coileanta"
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:131
 msgid "Safe Peninsula"
-msgstr ""
+msgstr "Rubha sàbhailte"
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:55
 msgid "Safe for now"
-msgstr ""
+msgstr "Sàbhailte an-dràsa"
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:45
 msgid "Saledus looks around nervously..."
-msgstr ""
+msgstr "Tha sgàth air Saledus..."
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:115
 msgid "Saledus looks promising..."
-msgstr ""
+msgstr "Tha Saledus misneachail..."
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:104
 msgid "Saledus notes..."
-msgstr ""
+msgstr "Tha Saledus a' beachdachadh..."
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:57
 msgid "Saledus speaks with a sigh of relief..."
-msgstr ""
+msgstr "Tha Saledus ag osnachadh leis an fhaochadh..."
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:133
 msgid "Saledus speaks:"
-msgstr ""
+msgstr "Tha Saledus a' bruidhinn:"
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:32
 msgid "Survivor"
-msgstr ""
+msgstr "Neach-tarrsainn"
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:21
 msgid "The rough sea"
-msgstr ""
+msgstr "An cuan garbh"
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:102
 msgid "Thinking about the future"
-msgstr ""
+msgstr "A' cnuasadh air an àm ri teachd"
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:64
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:80
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:91
 msgid "Young Amalea"
-msgstr ""
+msgstr "Amalea òg"
