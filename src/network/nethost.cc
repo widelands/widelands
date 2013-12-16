@@ -2608,6 +2608,8 @@ void NetHost::handle_packet(uint32_t const i, RecvPacket & r)
 			if (!client.dedicated_access)
 				throw DisconnectException("NO_ACCESS_TO_SERVER");
 
+			// We want to skip past the name, so read that but don't do anything with it
+			r.String();
 			std::string path = g_fs->FileSystem::fixCrossFile(r.String());
 			bool savegame    = r.Unsigned8() == 1;
 			bool scenario    = r.Unsigned8() == 1;
