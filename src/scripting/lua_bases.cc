@@ -24,6 +24,7 @@
 #include "economy/economy.h"
 #include "logic/checkstep.h"
 #include "logic/player.h"
+#include "logic/tribe.h"
 #include "scripting/lua_map.h"
 
 
@@ -72,6 +73,7 @@ EditorGameBase
 
 const char L_EditorGameBase::className[] = "EditorGameBase";
 const MethodType<L_EditorGameBase> L_EditorGameBase::Methods[] = {
+	METHOD(L_EditorGameBase,get_building_description),
 	{0, 0},
 };
 const PropertyType<L_EditorGameBase> L_EditorGameBase::Properties[] = {
@@ -138,6 +140,30 @@ int L_EditorGameBase::get_players(lua_State * L) {
  LUA METHODS
  ==========================================================
  */
+
+/* RST
+	TODO
+*/
+int L_EditorGameBase::get_building_description(lua_State *L) {
+	if(lua_gettop(L)!=3)
+	{
+		report_error(L,"Wrong number of arguments");
+	}
+	const std::string tribe_name = luaL_checkstring(L,2);
+	const std::string building_name = luaL_checkstring(L,3);
+	const Tribe_Descr *tdescr = get_egbase(L).get_tribe(tribe_name);
+	if(!tdescr)
+	{
+		report_error(L,"Tribe %s does not exist",tribe_name.c_str());
+	}
+	Building_Index bindex = tdescr->building_index(building_name);
+	if(!bindex)
+	{
+		report_error(L,"Building %s does not exist",building_name.c_str());
+	}
+	const Building_Descr *bdescr = tdescr->get_building_descr(bindex);
+	return to_lua<LuaMap::L_BuildingDescription>(L, new LuaMap::L_BuildingDescription(bdescr));
+}
 
 /*
  ==========================================================

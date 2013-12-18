@@ -25,6 +25,8 @@
 #include "ui_basic/unique_window.h"
 #include "ui_basic/window.h"
 
+class LuaInterface;
+
 namespace UI {
 
 /**
@@ -82,7 +84,8 @@ struct LuaTextHelpWindow : public UI::UniqueWindow {
 	LuaTextHelpWindow
 		(Panel * parent, UI::UniqueWindow::Registry &,
 		 const std::string & caption,
-		 std::string path_to_script,
+		 const std::string & path_to_script,
+		 LuaInterface * const lua,
 		 uint32_t width = 300, uint32_t height = 400);
 	~LuaTextHelpWindow();
 

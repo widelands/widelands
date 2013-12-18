@@ -376,7 +376,8 @@ void Building_Window::help_clicked()
 		new UI::LuaTextHelpWindow
 			(&igbase(), m_helpwindow_registry,
 			 m_building.descname(),
-			 m_building.descr().helptext_script());
+			 m_building.descr().helptext_script(),
+			 &igbase().egbase().lua());
 }
 
 /**

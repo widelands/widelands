@@ -39,6 +39,7 @@
 
 namespace Widelands {
 	struct Soldier_Descr;
+	struct Building_Descr;
 }
 
 namespace LuaMap {
@@ -84,6 +85,39 @@ public:
 	 * C methods
 	 */
 private:
+};
+
+
+class L_BuildingDescription : public L_MapModuleClass {
+public:
+	LUNA_CLASS_HEAD(L_BuildingDescription);
+
+	virtual ~L_BuildingDescription() {}
+
+	L_BuildingDescription():buildingdescr_(nullptr) {}
+	L_BuildingDescription(const Widelands::Building_Descr * const buildingdescr):buildingdescr_(buildingdescr) {
+	}
+	L_BuildingDescription(lua_State * L):buildingdescr_(nullptr) {
+		report_error(L, "Cannot instantiate a 'BuildingDescription' directly!");
+	}
+
+	virtual void __persist(lua_State * L);
+	virtual void __unpersist(lua_State * L);
+
+	/*
+	 * Properties
+	 */
+	int get_buildable(lua_State *);
+
+	/*
+	 * Lua methods
+	 */
+
+	/*
+	 * C methods
+	 */
+private:
+	const Widelands::Building_Descr * const buildingdescr_;
 };
 
 

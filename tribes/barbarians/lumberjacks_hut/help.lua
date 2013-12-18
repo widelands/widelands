@@ -8,6 +8,7 @@ return {
 		--rt(h1(_"The Barbarian Lumberjack's Hut")) ..
 	--Lore Section
 		rt(h2(_"Lore")) ..
+	-- code/testing example for reading building_descr rt(h2("XXX TODO TEST" .. tostring(wl.Game():get_building_description("barbarians","lumberjacks_hut").buildable))) ..
 		rt("image=tribes/barbarians/lumberjacks_hut/lumberjacks_hut_i_00.png", p(
 			_[["Take 200 hits to fell a tree and you're a baby. Take 100 and you're a soldier. Take 50 and you're a hero. Take 20 and soon you will be a honorable lumberjack."]])) ..
 		rt("text-align=right",p("font-size=10 font-style=italic", _[[Krumta, carpenter of Chat'Karuth]])) ..

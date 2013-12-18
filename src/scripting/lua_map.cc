@@ -960,6 +960,69 @@ int L_Map::recalculate(lua_State * L) {
  */
 
 
+
+/* RST
+BuildingDescription
+---
+
+TODO
+*/
+const char L_BuildingDescription::className[] = "BuildingDescription";
+const MethodType<L_BuildingDescription> L_BuildingDescription::Methods[] = {
+	{0, 0},
+};
+const PropertyType<L_BuildingDescription> L_BuildingDescription::Properties[] = {
+	PROP_RO(L_BuildingDescription, buildable),
+	{0, 0, 0},
+};
+
+void L_BuildingDescription::__persist(lua_State * /* L */) {
+}
+void L_BuildingDescription::__unpersist(lua_State * /* L */) {
+}
+
+/*
+ ==========================================================
+ PROPERTIES
+ ==========================================================
+ */
+/* RST
+	TODO
+*/
+int L_BuildingDescription::get_buildable(lua_State * L) {
+	assert(buildingdescr_!=nullptr);
+	lua_pushboolean(L, buildingdescr_->is_buildable());
+	return 1;
+}
+
+/*
+ ==========================================================
+ LUA METHODS
+ ==========================================================
+ */
+
+
+/* RST
+TODO
+	.. method:: recalculate()
+
+		This map recalculates the whole map state: height of fields, buildcaps
+		and so on. You only need to call this function if you changed
+		Field.raw_height in any way.
+*/
+//int L_Map::recalculate(lua_State * L) {
+//	get_egbase(L).map().recalc_whole_map();
+//	return 0;
+//}
+
+/*
+ ==========================================================
+ C METHODS
+ ==========================================================
+ */
+
+
+
 /* RST
 MapObject
 ----------
@@ -2845,6 +2908,7 @@ void luaopen_wlmap(lua_State * L) {
 	lua_pop(L, 1); // pop the table from the stack
 
 	register_class<L_Map>(L, "map");
+	register_class<L_BuildingDescription>(L, "map");
 	register_class<L_Field>(L, "map");
 	register_class<L_PlayerSlot>(L, "map");
 	register_class<L_MapObject>(L, "map");

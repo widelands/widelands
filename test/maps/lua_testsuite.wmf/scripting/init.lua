@@ -30,6 +30,7 @@ include "test_cfield"
 include "test_cplr_access"
 
 include "test_immovables"
+include "test_immovables_descriptions"
 
 if not wl.editor then
    include "test_game"

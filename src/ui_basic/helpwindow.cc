@@ -185,22 +185,20 @@ LuaTextHelpWindow::LuaTextHelpWindow
 	(Panel * const parent,
 	 UI::UniqueWindow::Registry & reg,
 	 const std::string & caption,
-	 std::string path_to_script,
+	 const std::string & path_to_script,
+	 LuaInterface * const lua,
 	 uint32_t width, uint32_t height)
 	:
 	UI::UniqueWindow(parent, "help_window", &reg, width, height, (_("Help: ") + caption).c_str()),
 	textarea(new Multiline_Textarea(this, 5, 5, width - 10, height -10, std::string(), Align_Left))
 {
-	LuaInterface * li = create_LuaInterface();
-
 	try {
-		std::unique_ptr<LuaTable> t = li->run_script(*g_fs, path_to_script, "help");
+		std::unique_ptr<LuaTable> t = lua->run_script(*g_fs, path_to_script, "help");
 		textarea->set_text(t->get_string("text"));
 	} catch (LuaError & err) {
 		textarea->set_text(err.what());
 	}
 
-	delete li;
 }
 
 LuaTextHelpWindow::~LuaTextHelpWindow()

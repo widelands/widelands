@@ -57,6 +57,7 @@ public:
 	/*
 	 * Lua methods
 	 */
+	int get_building_description(lua_State *L);
 
 	/*
 	 * C methods
