@@ -94,10 +94,10 @@ public:
 
 	virtual ~L_BuildingDescription() {}
 
-	L_BuildingDescription():buildingdescr_(nullptr) {}
-	L_BuildingDescription(const Widelands::Building_Descr * const buildingdescr):buildingdescr_(buildingdescr) {
-	}
-	L_BuildingDescription(lua_State * L):buildingdescr_(nullptr) {
+	L_BuildingDescription() : buildingdescr_(nullptr) {}
+	L_BuildingDescription(const Widelands::Building_Descr* const buildingdescr)
+		: buildingdescr_(buildingdescr) {}
+	L_BuildingDescription(lua_State* L) : buildingdescr_(nullptr) {
 		report_error(L, "Cannot instantiate a 'BuildingDescription' directly!");
 	}
 
@@ -114,7 +114,7 @@ public:
 	int get_ismine(lua_State *);
 	int get_isport(lua_State *);
 	int get_size(lua_State *);
-	int get_totalbuildcost(lua_State *);
+	int get_build_cost(lua_State *);
 	int get_totalreturnedwares(lua_State *);
 	int get_totalenhancementcost(lua_State *);
 	int get_totalreturnedwaresenhanced(lua_State *);
@@ -126,6 +126,7 @@ public:
 	/*
 	 * C methods
 	 */
+
 private:
 	const Widelands::Building_Descr * const buildingdescr_;
 };

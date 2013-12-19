@@ -142,26 +142,24 @@ int L_EditorGameBase::get_players(lua_State * L) {
  */
 
 /* RST
-	TODO
+	// TODO(GunChleoc): documentation
 */
-int L_EditorGameBase::get_building_description(lua_State *L) {
-	if(lua_gettop(L)!=3)
-	{
-		report_error(L,"Wrong number of arguments");
+int L_EditorGameBase::get_building_description(lua_State* L) {
+	// TODO(GunChleoc): style comment - askew abbreviations. I know we wrote that code together :)
+	if (lua_gettop(L) != 3) {
+		report_error(L, "Wrong number of arguments");
 	}
-	const std::string tribe_name = luaL_checkstring(L,2);
-	const std::string building_name = luaL_checkstring(L,3);
-	const Tribe_Descr *tdescr = get_egbase(L).get_tribe(tribe_name);
-	if(!tdescr)
-	{
-		report_error(L,"Tribe %s does not exist",tribe_name.c_str());
+	const std::string tribe_name = luaL_checkstring(L, 2);
+	const std::string building_name = luaL_checkstring(L, 3);
+	const Tribe_Descr* tribe_description = get_egbase(L).get_tribe(tribe_name);
+	if (!tribe_description) {
+		report_error(L, "Tribe %s does not exist", tribe_name.c_str());
 	}
-	Building_Index bindex = tdescr->building_index(building_name);
-	if(!bindex)
-	{
-		report_error(L,"Building %s does not exist",building_name.c_str());
+	Building_Index building_index = tribe_description->building_index(building_name);
+	if (!building_index) {
+		report_error(L, "Building %s does not exist", building_name.c_str());
 	}
-	const Building_Descr *bdescr = tdescr->get_building_descr(bindex);
+	const Building_Descr* bdescr = tribe_description->get_building_descr(building_index);
 	return to_lua<LuaMap::L_BuildingDescription>(L, new LuaMap::L_BuildingDescription(bdescr));
 }
 

@@ -19,6 +19,7 @@
 
 #include "scripting/lua_map.h"
 
+#include <boost/foreach.hpp>
 #include <lua.hpp>
 
 #include "container_iterate.h"
@@ -41,6 +42,22 @@
 using namespace Widelands;
 
 namespace LuaMap {
+
+namespace  {
+
+// Pushes a lua table with (name, count) pairs for the given 'wares_map' on the
+// stack. Returns 1.
+int wares_map_to_lua(lua_State* L, const Buildcost& wares_map, const Tribe_Descr& tribe) {
+	lua_newtable(L);
+	BOOST_FOREACH(const auto & ware_pair, wares_map) {
+		lua_pushstring(L, tribe.get_ware_descr(ware_pair.first)->name());
+		lua_pushuint32(L, ware_pair.second);
+		lua_settable(L, -3);
+	}
+	return 1;
+}
+
+}  // namespace
 
 /* RST
 :mod:`wl.map`
@@ -975,11 +992,29 @@ const PropertyType<L_BuildingDescription> L_BuildingDescription::Properties[] = 
 	PROP_RO(L_BuildingDescription, buildable),
 	PROP_RO(L_BuildingDescription, destructible),
 	PROP_RO(L_BuildingDescription, enhanced),
+	// TODO(GunChleoc): I do not think global is useful, it is more an implementation detail and mostly confusing for scripters. I'd say kill it.
 	PROP_RO(L_BuildingDescription, global),
+	// TODO(GunChleoc): I rather have a type similar to Building.building_type.
+	// In fact, Building.building_type can be killed after thatn and be replaced
+	// through building.description.building_type. I am not sure if I like
+	// building.description. Maybe building.static_data is better? Opinions? see
+	// also https://wl.widelands.org/docs/wl/autogen_wl_map/#wl.map.Building
 	PROP_RO(L_BuildingDescription, ismine),
 	PROP_RO(L_BuildingDescription, isport),
+
+	// size should be similar to
+	// https://wl.widelands.org/docs/wl/autogen_wl_map/#wl.map.BaseImmovable.size.
+	// In fact, as soon as all descriptions are wrapped (also for other
+	// immovables besides buildings) we should get rid of BaseImmovable.size.
 	PROP_RO(L_BuildingDescription, size),
-	PROP_RO(L_BuildingDescription, totalbuildcost),
+
+	// TODO(GunChleoc): not a fan off summing them up directly. All of the
+	// methods return a mapping from ware type to number. I think the scripter
+	// can sum them up if need be. Also, I think there should be some _
+	// separating the words, I think the Lua API uses them throughout. I fixed
+	// build_cost as a template for you (did not fix the tests though), can you
+	// try doing the others?
+	PROP_RO(L_BuildingDescription, build_cost),
 	PROP_RO(L_BuildingDescription, totalreturnedwares),
 	PROP_RO(L_BuildingDescription, totalenhancementcost),
 	PROP_RO(L_BuildingDescription, totalreturnedwaresenhanced),
@@ -997,7 +1032,7 @@ void L_BuildingDescription::__unpersist(lua_State * /* L */) {
  ==========================================================
  */
 /* RST
-	TODO
+	// TODO(GunChleoc): all of these need documentation.
 */
 int L_BuildingDescription::get_buildable(lua_State * L) {
 	assert(buildingdescr_!=nullptr);
@@ -1036,15 +1071,14 @@ int L_BuildingDescription::get_isport(lua_State * L) {
 }
 
 int L_BuildingDescription::get_size(lua_State * L) {
-	assert(buildingdescr_!=nullptr);
+	assert(buildingdescr_ != nullptr);
 	lua_pushinteger(L, buildingdescr_->get_size());
 	return 1;
 }
 
-int L_BuildingDescription::get_totalbuildcost(lua_State * L) {
-	assert(buildingdescr_!=nullptr);
-	lua_pushinteger(L, buildingdescr_->buildcost().total());
-	return 1;
+int L_BuildingDescription::get_build_cost(lua_State * L) {
+	assert(buildingdescr_ != nullptr);
+	return wares_map_to_lua(L, buildingdescr_->buildcost(), buildingdescr_->tribe());
 }
 
 int L_BuildingDescription::get_totalreturnedwares(lua_State * L) {
@@ -1074,7 +1108,7 @@ int L_BuildingDescription::get_totalreturnedwaresenhanced(lua_State * L) {
 
 
 /* RST
-TODO
+	// TODO(GunChleoc): remember to delete this if you do not need it anymore.
 	.. method:: recalculate()
 
 		This map recalculates the whole map state: height of fields, buildcaps
@@ -3065,4 +3099,3 @@ void luaopen_wlmap(lua_State * L) {
 }
 
 };
-

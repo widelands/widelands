@@ -192,6 +192,15 @@ LuaTextHelpWindow::LuaTextHelpWindow
 	UI::UniqueWindow(parent, "help_window", &reg, width, height, (_("Help: ") + caption).c_str()),
 	textarea(new Multiline_Textarea(this, 5, 5, width - 10, height -10, std::string(), Align_Left))
 {
+	// TODO(GunChleoc): just for your fyi, the solution we came up here is not
+	// ideal. It leaks the global game state to the help script which can modify
+	// it at will - i.e. if it uses a global variable with the same name as
+	// anyone already defined in the global state we will silently overwrite it.
+	// Not good :). There is no real good solution to this problem though.
+	// However, I think the problem is much bettered if we instead of returning
+	// a table with a string from the .lua script, we return a table with a
+	// method and run it here (with some parameters). Then the help scripts can
+	// have at least local variables.
 	try {
 		std::unique_ptr<LuaTable> t = lua->run_script(*g_fs, path_to_script, "help");
 		textarea->set_text(t->get_string("text"));
