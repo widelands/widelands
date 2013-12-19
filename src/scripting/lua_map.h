@@ -114,6 +114,10 @@ public:
 	int get_ismine(lua_State *);
 	int get_isport(lua_State *);
 	int get_size(lua_State *);
+	int get_totalbuildcost(lua_State *);
+	int get_totalreturnedwares(lua_State *);
+	int get_totalenhancementcost(lua_State *);
+	int get_totalreturnedwaresenhanced(lua_State *);
 
 	/*
 	 * Lua methods

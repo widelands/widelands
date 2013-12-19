@@ -979,7 +979,10 @@ const PropertyType<L_BuildingDescription> L_BuildingDescription::Properties[] = 
 	PROP_RO(L_BuildingDescription, ismine),
 	PROP_RO(L_BuildingDescription, isport),
 	PROP_RO(L_BuildingDescription, size),
-	PROP_RO(L_BuildingDescription, size),
+	PROP_RO(L_BuildingDescription, totalbuildcost),
+	PROP_RO(L_BuildingDescription, totalreturnedwares),
+	PROP_RO(L_BuildingDescription, totalenhancementcost),
+	PROP_RO(L_BuildingDescription, totalreturnedwaresenhanced),
 	{0, 0, 0},
 };
 
@@ -1037,6 +1040,31 @@ int L_BuildingDescription::get_size(lua_State * L) {
 	lua_pushinteger(L, buildingdescr_->get_size());
 	return 1;
 }
+
+int L_BuildingDescription::get_totalbuildcost(lua_State * L) {
+	assert(buildingdescr_!=nullptr);
+	lua_pushinteger(L, buildingdescr_->buildcost().total());
+	return 1;
+}
+
+int L_BuildingDescription::get_totalreturnedwares(lua_State * L) {
+	assert(buildingdescr_!=nullptr);
+	lua_pushinteger(L, buildingdescr_->returned_wares().total());
+	return 1;
+}
+
+int L_BuildingDescription::get_totalenhancementcost(lua_State * L) {
+	assert(buildingdescr_!=nullptr);
+	lua_pushinteger(L, buildingdescr_->enhancement_cost().total());
+	return 1;
+}
+
+int L_BuildingDescription::get_totalreturnedwaresenhanced(lua_State * L) {
+	assert(buildingdescr_!=nullptr);
+	lua_pushinteger(L, buildingdescr_->returned_wares_enhanced().total());
+	return 1;
+}
+
 
 /*
  ==========================================================
