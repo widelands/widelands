@@ -31,7 +31,7 @@ return {
 		rt(p(_"Trainingscamp")) ..
 	--Building Section
 		rt(h2(_"Building")) ..
-		text_line(_"Space required:",_"Medium plot","pics/medium.png") ..
+		building_size_string("barbarians", "warmill") ..
 		text_line(_"Upgraded from:", _"Axefactory","tribes/barbarians/axefactory/menu.png") ..
 		rt(h3(_"Upgrade Cost:")) ..
 		image_line("tribes/barbarians/blackwood/menu.png",1,p("1 " .. _"Blackwood")) ..

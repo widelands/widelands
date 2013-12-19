@@ -82,3 +82,33 @@ function make_tabs_array(t1, t2)
      }
   }
 end
+
+
+-- RST
+-- .. function building_size_string(tribename, buildingname)
+--
+--    Creates a text_line that describes the building's size in a help text.
+--
+--    :arg t1: tribename, e.g. "barbarians".
+--    :arg t2: buildingname, e.g. "lumberjakcs_hut".
+--    :returns: "Space required" header followed by size description text and image.
+--
+function building_size_string(tribename, buildingname)
+  if(wl.Game():get_building_description(tribename,buildingname).ismine) then
+	return text_line(_"Space required:",_"Mine plot","pics/mine.png")
+  elseif(wl.Game():get_building_description(tribename,buildingname).isport) then
+	return text_line(_"Space required:",_"Port plot","pics/port.png")
+  else
+	size = wl.Game():get_building_description(tribename,buildingname).size
+	if (size == 1) then
+ 		return text_line(_"Space required:",_"Small plot","pics/small.png")
+	elseif (size == 2) then
+  		return text_line(_"Space required:",_"Medium plot","pics/medium.png")
+	elseif (size == 3) then
+		return text_line(_"Space required:",_"Big plot","pics/big.png")
+	else
+		return p(_"Space required:" .. _"n/a")
+	end
+  end
+end
+

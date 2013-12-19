@@ -30,7 +30,7 @@ return {
 		rt(p(_"%s always goes to the %s. It has no other use.":format(_"Gold Ore",_"Smelting Works"))) ..
 	--Building Section
 		rt(h2(_"Building")) ..
-		text_line(_"Space required:",_"Mine plot","pics/mine.png") ..
+		building_size_string("barbarians", "deep_goldmine") ..
 		text_line(_"Upgraded from:",_"Gold Mine","tribes/barbarians/goldmine/menu.png") ..
 		rt(h3(_"Upgrade cost:")) ..
 		image_line("tribes/barbarians/raw_stone/menu.png", 2, p("2 " .. _"Raw Stone")) ..

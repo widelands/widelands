@@ -42,7 +42,7 @@ return {
 		dependencies({"tribes/barbarians/metalworks/menu.png","tribes/barbarians/shovel/menu.png","tribes/barbarians/headquarters/menu.png","tribes/barbarians/ferner/menu.png" },p(_"Ferner")) ..
 	--Building Section
 		rt(h2(_"Building")) ..
-		text_line(_"Space required:",_"Medium plot","pics/medium.png") ..
+		building_size_string("barbarians", "metalworks") ..
 		text_line(_"Upgraded from:", _"n/a") ..
 		rt(h3(_"Build Cost:")) ..
 		image_line("tribes/barbarians/blackwood/menu.png", 1, p("1 " .. _"Blackwood")) ..

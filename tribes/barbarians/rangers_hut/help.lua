@@ -25,7 +25,7 @@ return {
 		text_line(_"Outgoing:","n/a") ..
 	--Building Section
 		rt(h2(_"Building")) ..
-		text_line(_"Space required:",_"Small plot","pics/small.png") ..
+		building_size_string("barbarians", "rangers_hut") ..
 		text_line(_"Upgraded from:", "n/a") ..
 		rt(h3(_"Build Cost:")) ..
 		image_line("tribes/barbarians/trunk/menu.png", 4, p("4 " .. _"Trunk")) ..

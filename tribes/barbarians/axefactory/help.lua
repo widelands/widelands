@@ -29,7 +29,7 @@ return {
 		dependencies({"tribes/barbarians/axefactory/menu.png","tribes/barbarians/sharpaxe/menu.png;tribes/barbarians/broadaxe/menu.png","tribes/barbarians/trainingscamp/menu.png"},p(_"Trainingscamp")) ..
 	--Building Section
 		rt(h2(_"Building")) ..
-		text_line(_"Space required:",_"Medium plot","pics/medium.png") ..
+		building_size_string("barbarians", "axefactory") ..
 		text_line(_"Upgraded from:", _"Metalwork Shop","tribes/barbarians/metalworks/menu.png") ..
 		rt(h3(_"Upgrade Cost:")) ..
 		image_line("tribes/barbarians/blackwood/menu.png",1,p("1 " .. _"Blackwood")) ..

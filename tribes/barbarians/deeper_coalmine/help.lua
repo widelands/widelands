@@ -33,7 +33,7 @@ return {
 		dependencies({"tribes/barbarians/coal/menu.png","tribes/barbarians/lime_kiln/menu.png"}, p(_"Lime Kiln")) ..
 	--Building Section
 		rt(h2(_"Building")) ..
-		text_line(_"Space required:",_"Mine plot","pics/mine.png") ..
+		building_size_string("barbarians", "deeper_coalmine") ..
 		text_line(_"Upgraded from:",_"Deep Coal Mine","tribes/barbarians/deep_coalmine/menu.png") ..
 		rt(h3(_"Upgrade cost:")) ..
 		image_line("tribes/barbarians/raw_stone/menu.png", 2, p("2 " .. _"Raw Stone")) ..

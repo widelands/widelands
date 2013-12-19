@@ -32,7 +32,7 @@ return {
 		rt(p(_"The Limekiln's output will only go to construction sites that need it. Those are predominantly houses that work with fire, and some military sites.")) ..
 	--Building Section
 		rt(h2(_"Building")) ..
-		text_line(_"Space required:",_"Medium plot","pics/medium.png") ..
+		building_size_string("barbarians", "limekiln") ..
 		text_line(_"Upgraded from:", "n/a") ..
 		rt(h3(_"Build Cost:")) ..
 		image_line("tribes/barbarians/blackwood/menu.png", 1, p("1 " .. _"Blackwood")) ..

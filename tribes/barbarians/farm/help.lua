@@ -28,7 +28,7 @@ return {
 		dependencies({"tribes/barbarians/wheat/menu.png","tribes/barbarians/cattlefarm/menu.png"},p(_"Cattle Farm")) ..
 	--Building Section
 		rt(h2(_"Building")) ..
-		text_line(_"Space required:",_"Big plot","pics/big.png") ..
+		building_size_string("barbarians", "farm") ..
 		text_line(_"Upgraded from:", "n/a") ..
 		rt(h3(_"Build Cost:")) ..
 		image_line("tribes/barbarians/blackwood/menu.png", 1, p("1 " .. _"Blackwood")) ..

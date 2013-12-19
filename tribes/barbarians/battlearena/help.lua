@@ -29,7 +29,7 @@ return {
 		image_line("tribes/barbarians/fish/menu.png;tribes/barbarians/meat/menu.png",1,p(_"%s or %s":format(_"Fish",_"Meat"))) ..
 	--Building Section
 		rt(h2(_"Building")) ..
-		text_line(_"Space required:",_"Big plot","pics/big.png") ..
+		building_size_string("barbarians", "battlearena") ..
 		text_line(_"Upgraded from:", "n/a") ..
 		rt(h3(_"Build Cost:")) ..
 		image_line("tribes/barbarians/gold/menu.png",4,p("4 " .. _"Gold")) ..
