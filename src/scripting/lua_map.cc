@@ -974,6 +974,12 @@ const MethodType<L_BuildingDescription> L_BuildingDescription::Methods[] = {
 const PropertyType<L_BuildingDescription> L_BuildingDescription::Properties[] = {
 	PROP_RO(L_BuildingDescription, buildable),
 	PROP_RO(L_BuildingDescription, destructible),
+	PROP_RO(L_BuildingDescription, enhanced),
+	PROP_RO(L_BuildingDescription, global),
+	PROP_RO(L_BuildingDescription, ismine),
+	PROP_RO(L_BuildingDescription, isport),
+	PROP_RO(L_BuildingDescription, size),
+	PROP_RO(L_BuildingDescription, size),
 	{0, 0, 0},
 };
 
@@ -1002,6 +1008,35 @@ int L_BuildingDescription::get_destructible(lua_State * L) {
 	return 1;
 }
 
+int L_BuildingDescription::get_enhanced(lua_State * L) {
+	assert(buildingdescr_!=nullptr);
+	lua_pushboolean(L, buildingdescr_->is_enhanced());
+	return 1;
+}
+
+int L_BuildingDescription::get_global(lua_State * L) {
+	assert(buildingdescr_!=nullptr);
+	lua_pushboolean(L, buildingdescr_->global());
+	return 1;
+}
+
+int L_BuildingDescription::get_ismine(lua_State * L) {
+	assert(buildingdescr_!=nullptr);
+	lua_pushboolean(L, buildingdescr_->get_ismine());
+	return 1;
+}
+
+int L_BuildingDescription::get_isport(lua_State * L) {
+	assert(buildingdescr_!=nullptr);
+	lua_pushboolean(L, buildingdescr_->get_isport());
+	return 1;
+}
+
+int L_BuildingDescription::get_size(lua_State * L) {
+	assert(buildingdescr_!=nullptr);
+	lua_pushinteger(L, buildingdescr_->get_size());
+	return 1;
+}
 
 /*
  ==========================================================
