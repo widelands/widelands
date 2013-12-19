@@ -37,7 +37,7 @@ public:
 	virtual ~LuaCoroutine_Impl();
 
 	virtual int get_status() {return lua_status(m_L);}
-	virtual int resume(uint32_t * sleeptime = 0);
+	virtual int resume();
 
 	virtual uint32_t write
 		(lua_State *, Widelands::FileWrite &,
@@ -46,8 +46,11 @@ public:
 		(lua_State *, Widelands::FileRead &,
 		 Widelands::Map_Map_Object_Loader &, uint32_t);
 
-	virtual void push_arg(const Widelands::Player *);
-	virtual void push_arg(const Widelands::Coords &);
+	virtual void push_arg(const Widelands::Player*);
+	virtual void push_arg(const Widelands::Coords&);
+	virtual void push_arg(const Widelands::Building_Descr*);
+	virtual uint32_t pop_uint32();
+	virtual std::string pop_string();
 
 private:
 	void m_reference();
@@ -56,7 +59,8 @@ private:
 private:
 	lua_State * m_L;
 	uint32_t m_idx;
-	uint32_t m_nargs;
+	uint32_t m_ninput_args;
+	uint32_t m_nreturn_values;
 };
 
 

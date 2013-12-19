@@ -374,10 +374,7 @@ void Building_Window::help_clicked()
 		delete m_helpwindow_registry.window;
 	else
 		new UI::LuaTextHelpWindow
-			(&igbase(), m_helpwindow_registry,
-			 m_building.descname(),
-			 m_building.descr().helptext_script(),
-			 &igbase().egbase().lua());
+			(&igbase(), m_helpwindow_registry, m_building.descr(), &igbase().egbase().lua());
 }
 
 /**
@@ -548,4 +545,3 @@ void Building_Window::clicked_goto()
 {
 	igbase().move_view_to(building().get_position());
 }
-

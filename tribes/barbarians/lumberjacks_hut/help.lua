@@ -1,13 +1,17 @@
 use("aux", "formatting")
 use("aux", "format_help")
 
-set_textdomain("tribe_barbarians")
 
 return {
-	text =
+   func = function(building_description)
+      set_textdomain("tribe_barbarians")
+
+      -- TODO(GunChleoc): the building_description is now passed into this
+      -- function. I suggest adding methods to get to the image and menu
+      -- picture into the description (they are in the c++ class as well). Then, we can get rid of hardcoding everything in here.
 		--rt(h1(_"The Barbarian Lumberjack's Hut")) ..
 	--Lore Section
-		rt(h2(_"Lore")) ..
+		return rt(h2(_"Lore")) ..
 	-- code/testing example for reading building_descr rt(h2("XXX TODO TEST" .. tostring(wl.Game():get_building_description("barbarians","lumberjacks_hut").buildable))) ..
 		rt("image=tribes/barbarians/lumberjacks_hut/lumberjacks_hut_i_00.png", p(
 			_[["Take 200 hits to fell a tree and you're a baby. Take 100 and you're a soldier. Take 50 and you're a hero. Take 20 and soon you will be a honorable lumberjack."]])) ..
@@ -47,4 +51,5 @@ return {
 	--Production Section
 		rt(h2(_"Production")) ..
 		text_line(_"Performance:", _"The Lumberjack needs %s to fell a tree, not counting the time he needs to reach the destination and go home again.":format("12s"))
+   end
 }

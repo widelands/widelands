@@ -31,7 +31,7 @@
 #include "scripting/persistence.h"
 
 LuaCoroutine_Impl::LuaCoroutine_Impl(lua_State * ms)
-	: m_L(ms), m_idx(LUA_REFNIL), m_nargs(0)
+	: m_L(ms), m_idx(LUA_REFNIL), m_ninput_args(0), m_nreturn_values(0)
 {
 	m_reference();
 }
@@ -41,24 +41,13 @@ LuaCoroutine_Impl::~LuaCoroutine_Impl()
 	m_unreference();
 }
 
-int LuaCoroutine_Impl::resume(uint32_t * sleeptime)
+int LuaCoroutine_Impl::resume()
 {
-	int rv = lua_resume(m_L, m_nargs);
-	m_nargs = 0;
-	int n = lua_gettop(m_L);
-
-	uint32_t sleep_for = 0;
-	if (n == 1) {
-		sleep_for = luaL_checkint32(m_L, -1);
-		lua_pop(m_L, 1);
-	}
-
-	if (sleeptime)
-		*sleeptime = sleep_for;
+	int rv = lua_resume(m_L, m_ninput_args);
+	m_ninput_args = 0;
+	m_nreturn_values = lua_gettop(m_L);
 
 	if (rv != 0 && rv != YIELDED) {
-		// lua_error() never returns. prints error and exit program imediately
-		//return  lua_error(m_L);
 		const char * err = lua_tostring(m_L, -1);
 		throw LuaError(err);
 	}
@@ -72,22 +61,54 @@ int LuaCoroutine_Impl::resume(uint32_t * sleeptime)
  */
 void LuaCoroutine_Impl::push_arg(const Widelands::Player * plr) {
 	to_lua<LuaGame::L_Player>(m_L, new LuaGame::L_Player(plr->player_number()));
-	m_nargs++;
+	m_ninput_args++;
 }
 void LuaCoroutine_Impl::push_arg(const Widelands::Coords & coords) {
 	to_lua<LuaMap::L_Field>(m_L, new LuaMap::L_Field(coords));
-	++m_nargs;
+	++m_ninput_args;
+}
+void LuaCoroutine_Impl::push_arg(const Widelands::Building_Descr* building_descr) {
+	assert(building_descr != nullptr);
+	to_lua<LuaMap::L_BuildingDescription>(m_L, new LuaMap::L_BuildingDescription(building_descr));
+	++m_ninput_args;
 }
 
-#define COROUTINE_DATA_PACKET_VERSION 1
+std::string LuaCoroutine_Impl::pop_string() {
+	if (!m_nreturn_values) {
+		return "";
+	}
+	if (!lua_isstring(m_L, -1)) {
+		throw LuaError("pop_string(), but no string on the stack.");
+	}
+	const std::string return_value = lua_tostring(m_L, -1);
+	lua_pop(m_L, 1);
+	--m_nreturn_values;
+	return return_value;
+}
+
+uint32_t LuaCoroutine_Impl::pop_uint32() {
+	if (!m_nreturn_values) {
+		return 0;
+	}
+	if (!lua_isnumber(m_L, -1)) {
+		throw LuaError("pop_string(), but no integer on the stack.");
+	}
+	const uint32_t return_value = luaL_checkuint32(m_L, -1);
+	lua_pop(m_L, 1);
+	--m_nreturn_values;
+	return return_value;
+}
+
+
+#define COROUTINE_DATA_PACKET_VERSION 2
 uint32_t LuaCoroutine_Impl::write
 	(lua_State * parent, Widelands::FileWrite & fw,
 	 Widelands::Map_Map_Object_Saver & mos)
 {
 	fw.Unsigned8(COROUTINE_DATA_PACKET_VERSION);
 
-	// The current numbers of arguments on the stack
-	fw.Unsigned32(m_nargs);
+	fw.Unsigned32(m_ninput_args);
+	fw.Unsigned32(m_nreturn_values);
 
 	// Empty table + object to persist on the stack Stack
 	lua_newtable(parent);
@@ -103,11 +124,14 @@ void LuaCoroutine_Impl::read
 {
 	uint8_t version = fr.Unsigned8();
 
-	if (version != COROUTINE_DATA_PACKET_VERSION)
+	if (version > COROUTINE_DATA_PACKET_VERSION)
 		throw wexception("Unknown data packet version: %i\n", version);
 
 	// The current numbers of arguments on the stack
-	m_nargs = fr.Unsigned32();
+	m_ninput_args = fr.Unsigned32();
+	if (version > 1) {
+		m_nreturn_values = fr.Unsigned32();
+	}
 
 	// Empty table + object to persist on the stack Stack
 	unpersist_object(parent, fr, mol, size);
@@ -119,7 +143,6 @@ void LuaCoroutine_Impl::read
 	// get garbage collected
 	lua_pushthread(m_L);
 	m_idx = luaL_ref(m_L, LUA_REGISTRYINDEX);
-
 }
 
 /*
@@ -140,5 +163,3 @@ void LuaCoroutine_Impl::m_reference() {
 void LuaCoroutine_Impl::m_unreference() {
 	luaL_unref(m_L, LUA_REGISTRYINDEX, m_idx);
 }
-
-

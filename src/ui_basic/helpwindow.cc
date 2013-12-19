@@ -28,6 +28,7 @@
 #include "i18n.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "log.h"
+#include "logic/building.h"
 #include "scripting/scripting.h"
 #include "ui_basic/button.h"
 #include "ui_basic/window.h"
@@ -184,12 +185,11 @@ LuaTextHelpWindow
 LuaTextHelpWindow::LuaTextHelpWindow
 	(Panel * const parent,
 	 UI::UniqueWindow::Registry & reg,
-	 const std::string & caption,
-	 const std::string & path_to_script,
+	 const Widelands::Building_Descr& building_description,
 	 LuaInterface * const lua,
 	 uint32_t width, uint32_t height)
 	:
-	UI::UniqueWindow(parent, "help_window", &reg, width, height, (_("Help: ") + caption).c_str()),
+	UI::UniqueWindow(parent, "help_window", &reg, width, height, (_("Help: ") + building_description.descname()).c_str()),
 	textarea(new Multiline_Textarea(this, 5, 5, width - 10, height -10, std::string(), Align_Left))
 {
 	// TODO(GunChleoc): just for your fyi, the solution we came up here is not
@@ -202,12 +202,16 @@ LuaTextHelpWindow::LuaTextHelpWindow
 	// method and run it here (with some parameters). Then the help scripts can
 	// have at least local variables.
 	try {
-		std::unique_ptr<LuaTable> t = lua->run_script(*g_fs, path_to_script, "help");
-		textarea->set_text(t->get_string("text"));
+		std::unique_ptr<LuaTable> t
+			(lua->run_script(*g_fs, building_description.helptext_script(), "help"));
+		std::unique_ptr<LuaCoroutine> cr(t->get_coroutine("func"));
+		cr->push_arg(&building_description);
+		cr->resume();
+		const std::string help_text = cr->pop_string();
+		textarea->set_text(help_text);
 	} catch (LuaError & err) {
 		textarea->set_text(err.what());
 	}
-
 }
 
 LuaTextHelpWindow::~LuaTextHelpWindow()

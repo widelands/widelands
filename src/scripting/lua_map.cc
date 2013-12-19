@@ -989,10 +989,20 @@ const MethodType<L_BuildingDescription> L_BuildingDescription::Methods[] = {
 	{0, 0},
 };
 const PropertyType<L_BuildingDescription> L_BuildingDescription::Properties[] = {
+	// TODO(GunChleoc): I think it would be beneficial to add classes
+	// Map_Object_Descr and inherit from this in L_BuildingDescription. See at
+	// the bottom of this file how inheritance is defined for Lua (the
+	// L_ProductionSite class is one example). For example stuff like name()
+	// descname() and attributes() (like is_tree or is_stone) are tracked there.
+	// It could be beneficial to add a "base directory" (e.g.
+	// tribes/barbarians/lumberjacks_hut) or something in there too, but only do
+	// this if you need it for the help files.
 	PROP_RO(L_BuildingDescription, buildable),
 	PROP_RO(L_BuildingDescription, destructible),
 	PROP_RO(L_BuildingDescription, enhanced),
-	// TODO(GunChleoc): I do not think global is useful, it is more an implementation detail and mostly confusing for scripters. I'd say kill it.
+	// TODO(GunChleoc): I do not think global is useful, it is more an
+	// implementation detail and mostly confusing for scripters. I'd say kill
+	// it.
 	PROP_RO(L_BuildingDescription, global),
 	// TODO(GunChleoc): I rather have a type similar to Building.building_type.
 	// In fact, Building.building_type can be killed after thatn and be replaced

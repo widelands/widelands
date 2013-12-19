@@ -1042,10 +1042,10 @@ void Game::sample_statistics()
 	std::unique_ptr<LuaTable> hook = lua().get_hook("custom_statistic");
 	if (hook) {
 		iterate_players_existing(p, nr_plrs, *this, plr) {
-			LuaCoroutine * cr = hook->get_coroutine("calculator");
+			std::unique_ptr<LuaCoroutine> cr(hook->get_coroutine("calculator"));
 			cr->push_arg(plr);
-			cr->resume(&custom_statistic[p - 1]);
-			delete cr;
+			cr->resume();
+			custom_statistic[p - 1] = cr->pop_uint32();
 		}
 	}
 

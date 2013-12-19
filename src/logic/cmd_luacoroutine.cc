@@ -31,8 +31,8 @@ namespace Widelands {
 
 void Cmd_LuaCoroutine::execute (Game & game) {
 	try {
-		uint32_t sleeptime;
-		int rv = m_cr->resume(&sleeptime);
+		int rv = m_cr->resume();
+		const uint32_t sleeptime = m_cr->pop_uint32();
 		if (rv == LuaCoroutine::YIELDED) {
 			game.enqueue_command(new Widelands::Cmd_LuaCoroutine(sleeptime, m_cr));
 			m_cr = 0;  // Remove our ownership so we don't delete.

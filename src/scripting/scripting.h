@@ -36,6 +36,7 @@ namespace Widelands {
 	struct Map_Map_Object_Loader;
 	struct Map_Map_Object_Saver;
 	class Player;
+	struct Building_Descr;
 }
 
 struct LuaError : public _wexception {
@@ -68,10 +69,24 @@ struct LuaCoroutine {
 	};
 
 	virtual int get_status() = 0;
-	virtual int resume(uint32_t * = 0) = 0;
 
+	// Resumes the coroutine. This passes the arguments given via push_arg() if
+	// it is the first time the method is resumed. Any yielded or returned
+	// values can be accessed via the pop_* methods.
+	virtual int resume() = 0;
+
+	// Push an Lua table representing the corresponding class to the stack. This
+	// means it will be passed to the next resume() call as an argument.
 	virtual void push_arg(const Widelands::Player *) = 0;
 	virtual void push_arg(const Widelands::Coords &) = 0;
+	virtual void push_arg(const Widelands::Building_Descr*) = 0;
+
+	// Check if there is a return value from the last call to resume() and try
+	// to convert it into the given type. If there is nothing on the stack, the
+	// default empty value is returned (i.e. 0 for integers, "" for empty
+	// string).
+	virtual uint32_t pop_uint32() = 0;
+	virtual std::string pop_string() = 0;
 };
 
 /*
