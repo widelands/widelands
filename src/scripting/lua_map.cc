@@ -973,6 +973,7 @@ const MethodType<L_BuildingDescription> L_BuildingDescription::Methods[] = {
 };
 const PropertyType<L_BuildingDescription> L_BuildingDescription::Properties[] = {
 	PROP_RO(L_BuildingDescription, buildable),
+	PROP_RO(L_BuildingDescription, destructible),
 	{0, 0, 0},
 };
 
@@ -994,6 +995,13 @@ int L_BuildingDescription::get_buildable(lua_State * L) {
 	lua_pushboolean(L, buildingdescr_->is_buildable());
 	return 1;
 }
+
+int L_BuildingDescription::get_destructible(lua_State * L) {
+	assert(buildingdescr_!=nullptr);
+	lua_pushboolean(L, buildingdescr_->is_destructible());
+	return 1;
+}
+
 
 /*
  ==========================================================

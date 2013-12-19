@@ -108,6 +108,7 @@ public:
 	 * Properties
 	 */
 	int get_buildable(lua_State *);
+	int get_destructible(lua_State *);
 
 	/*
 	 * Lua methods
