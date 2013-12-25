@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2013-09-15 17:41+0000\n"
-"PO-Revision-Date: 2013-10-28 12:31+0000\n"
-"Last-Translator: István Kiss <kissistvan@kibk.extra.hu>\n"
+"PO-Revision-Date: 2013-12-24 17:37+0000\n"
+"Last-Translator: cn4ij <Unknown>\n"
 "Language-Team: Hungarian <hu@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-10-29 04:34+0000\n"
-"X-Generator: Launchpad (build 16818)\n"
+"X-Launchpad-Export-Date: 2013-12-25 05:11+0000\n"
+"X-Generator: Launchpad (build 16877)\n"
 
 #: ../../campaigns/atl01.wmf/elemental:9
 msgid "01 - From Nemesis to Genesis"
@@ -23,7 +23,7 @@ msgstr ""
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:472
 msgid "A dangerous finding"
-msgstr ""
+msgstr "Veszélyes felfedezés"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:564
 msgid ""
@@ -113,7 +113,7 @@ msgstr ""
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:495
 msgid "Another building."
-msgstr ""
+msgstr "Még egy épület"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:121
 msgid ""
@@ -125,6 +125,13 @@ msgid ""
 "buildings.<br><br>\n"
 "- Build a dungeon and a labyrinth.<br>"
 msgstr ""
+"Mint minden más nép, az atlantiszi is tudja képezni katonáit: a kazamatában\n"
+"a támadást fejlesztik – ami az atlantisziak fő vonása –, a labirintusban "
+"pedig a\n"
+"kitérést, az életerőt és a védekezést. Az ipar termékeit használják fel, "
+"hogy\n"
+"jobb katonákat képezzenek az előbbi épületekben.<br><br>\n"
+"– Építs egy kazamatát és egy labirintust.<br>"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:132
 msgid ""
@@ -160,15 +167,15 @@ msgstr ""
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:102
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:103
 msgid "Build industry and mines"
-msgstr ""
+msgstr "Építs ki ipart és bányászatot"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:119
 msgid "Build training buildings"
-msgstr ""
+msgstr "Építs kiképzőépületeket"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:120
 msgid "Build training buildings to improve your soldiers"
-msgstr ""
+msgstr "Építs kiképzőépületeket katonáid fejlesztésére"
 
 #: ../../campaigns/atl01.wmf/scripting/init.lua:75
 msgid "Building lost!"
@@ -306,7 +313,7 @@ msgstr ""
 "a füstölőben zajlik, legalább kettőre lesz szükséged belőlük.<br><br>\n"
 "– Építs egy tanyát és egy feketegyökérkertet.<br>\n"
 "– Építs egy malmot liszt és feketegyökérliszt készítéséhez.<br>\n"
-"– Építs egy kutat.\n"
+"– Építs egy kutat.<br>\n"
 "– Építs egy pékséget, hogy kenyér készülhessen a lisztből, "
 "feketegyökérlisztből\n"
 "és vízből.<br>\n"
@@ -339,6 +346,13 @@ msgid ""
 "labyrinth for them.  I have the plans ready, but I guess they won't come\n"
 "cheap."
 msgstr ""
+"Egyetértek, és keményen megbüntettem a bajkeverőket. De nagyon nehéz\n"
+"nyugodtan tartani embereimet: unatkoznak és nincs mit csinálniuk. Én\n"
+"fokoznám a kiképzésüket. Úgy gondolom, a nagyobb rendszeresség lekötné\n"
+"őket, és a feladataikra terelné a figyelmüket. Szükségem lenne ehhez egy\n"
+"kazamatára és egy labirintusra. Készen vannak a tervek, de attól tartok, "
+"nem\n"
+"lesznek olcsók."
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:430
 msgid ""
@@ -349,6 +363,11 @@ msgid ""
 "if similar things happen again, I will make you responsible for them.\n"
 "Dismissed."
 msgstr ""
+"Nem sajnálom a költséget és a munkát, ha ezzel kordában tarthatom\n"
+"embereidet. Megkapod az épületeket. De figyelmeztetlek, hogy nem\n"
+"tűrök meg egy latort sem: ha még egyszer ilyen történik, téged vonlak\n"
+"felelősségre.\n"
+"Elmehetsz."
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:400
 msgid ""
@@ -356,6 +375,8 @@ msgid ""
 "this\n"
 "a priority for now. You shall get your industry and soon!"
 msgstr ""
+"Gondoltam már rá, Sidolus. És azt hiszem, eljött az ideje. Előre is vesszük\n"
+"most ezt. Megkapod az ipart, nem is sokára!"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:442
 msgid ""
@@ -388,6 +409,20 @@ msgid ""
 "- Build an armor smithy and a weapon smithy.<br>\n"
 "- Build a tool smithy.<br>"
 msgstr ""
+"A vasércet, az aranyércet és a szenet a megfelelő bányákban termelik ki. A\n"
+"kristálybánya kristályt, kvarcot és gyémántot is keres – mindhárom ritka "
+"anyag,\n"
+"és nagyon ritkán kerül elő. Míg keresik, egy csomó követ termel ki a "
+"bánya.<br>\n"
+"Az ércekből először egy kohóban ki kell nyerni a fémeket. Az így nyert "
+"anyagokat\n"
+"aztán a fegyver-, a páncél- és a szerszámkovácsműhelyben használják "
+"fel.<br><br>\n"
+"– Építs minden bányából egyet. De előtte mindenképpen küldj geológusokat a\n"
+"hegyre.<br>\n"
+"– Építs egy kohót.<br>\n"
+"– Építs egy páncél-, illetve egy fegyverkovácsműhelyet.<br>\n"
+"– Építs egy szerszámkovácsműhelyet.<br>"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:247
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:297
@@ -413,7 +448,7 @@ msgstr "Jundlina dühös"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:473
 msgid "Jundlina is in thought"
-msgstr ""
+msgstr "Jundlina elmélkedik"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:585
 msgid "Jundlina is relieved"
@@ -421,7 +456,7 @@ msgstr ""
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:334
 msgid "Jundlina is reviewing the reports"
-msgstr ""
+msgstr "Jundlina áttekinti a jelentéseket"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:280
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:333
@@ -434,7 +469,7 @@ msgstr "Jundlina aggódik"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:399
 msgid "Jundlina nods"
-msgstr ""
+msgstr "Jundlina bólint"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:440
 msgid "Jundlina received a letter"
@@ -453,7 +488,7 @@ msgstr "Jundlina válaszol"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:408
 msgid "Jundlina summons Sidolus"
-msgstr ""
+msgstr "Jundlina beidézi Sidolust"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:226
 msgid "Jundlina writes down her memories"
@@ -608,6 +643,13 @@ msgid ""
 "and tools; this would help enormously. Of course, we would need smelters,\n"
 "a weapon smithy, an armor smithy and a tool smithy. And maybe even more."
 msgstr ""
+"Satul melegítsen, Jundlina. Gondoltál már arra, hogy bányászhatnánk a\n"
+"környező hegyekből? Fogytán van a kvarcunk, a kristályunk és a gyémántunk,\n"
+"melyek az épületekhez kellenek. Ezenkívül hasznát vennénk még a vasnak, az\n"
+"aranynak, és különösen a szénnek. Ha bő forrásra lelnénk ezekből az\n"
+"anyagokból, akkor elkezdhetnénk fegyvereket és szerszámokat készíteni,\n"
+"ez óriási segítség lenne. Természetesen akkor kohókra, fegyver-, páncél- és\n"
+"szerszámkovácsműhelyre is szükségünk lesz. Talán többre is."
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:345
 msgid ""
@@ -729,14 +771,16 @@ msgid ""
 "together\n"
 "nicely. It is really starting to feel like home here."
 msgstr ""
+"Úgy látom, élelemtermelő gazdaságunk elkészült, és mindenki szépen\n"
+"együtt dolgozik. Most már igazán kezd ez a hely otthonossá válni."
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:387
 msgid "Sidolus seeks out Jundlina"
-msgstr ""
+msgstr "Sidolus felkeresi Jundlinát"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:417
 msgid "Sidolus seems contrite"
-msgstr ""
+msgstr "Sidolus bűnbánónak tűnik"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:267
 msgid "Sidolus speaks"
@@ -866,6 +910,23 @@ msgid ""
 "fortification\n"
 "of our borders."
 msgstr ""
+"Találtunk egy régi épületet, mely lángoktól pusztult el. Nagyon aggaszt ez "
+"a\n"
+"felfedezés. Ilyen épületet még sosem láttam. Kizárt, hogy olyan atlantiszi\n"
+"építész tervezte volna, akiről valaha is hallottam. Faragása durva, "
+"összeszerelése\n"
+"hanyag. Ugyanakkor az építőelemek igen ellenállóak: úgy tűnik, faanyagát "
+"valamilyen\n"
+"különös módon kiégették, mielőtt felhasználták volna – kemény, akár a "
+"kő.<br><br>\n"
+"A kilátások félelmetesek. Mások is vannak a szigeten? És akkor hol vannak? "
+"Tűzzel\n"
+"dolgoznak, hát ők is Satult imádják? Barátok vagy ellenségek? És miért égett "
+"le az\n"
+"épület? Háború sújtotta a szigetet? Vagy épp most vívják?<br><br>\n"
+"Növelnünk kell katonai erőnket. Ha ellenségek vannak a szigeten, fel kell "
+"készülnünk\n"
+"a velük való találkozásra. Meg kell erősítenünk határaink védelmét is."
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:497
 msgid ""
@@ -878,6 +939,12 @@ msgid ""
 "with my generals. I will not allow that a potential enemy will find us\n"
 "unprepared."
 msgstr ""
+"Még egy ilyen különös készítésű épületre leltünk. Már csak az építőit\n"
+"kellene megtalálnunk. Nyilván élt itt korábban egy közösség a szigeten, "
+"amely\n"
+"aztán felfegyverkezett. Tudakozódnom kell katonai felkészültségünkről\n"
+"hadvezéreimtől. Nem engedem, hogy egy esetleges ellenség felkészületlenül\n"
+"találjon minket."
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:240
 msgid ""
@@ -942,6 +1009,11 @@ msgid ""
 "are servants for the common good and must not misuse their powers. This is\n"
 "inexcusable! Explain this, if you will!"
 msgstr ""
+"Miket hallok, Sidolus? Az hírlik, hogy a katonáid rosszul viselik magukat\n"
+"és zaklatják a köznépet. Hogy történhet ez? Mindnyájan a közjó "
+"szolgálatában\n"
+"állnak, és nem élhetnek vissza erejükkel. Ez megbocsáthatatlan! Magyarázd\n"
+"meg, ha tudod!"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:595
 msgid ""
