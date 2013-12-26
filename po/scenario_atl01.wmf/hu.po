@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2013-09-15 17:41+0000\n"
-"PO-Revision-Date: 2013-12-24 17:37+0000\n"
+"PO-Revision-Date: 2013-12-25 19:06+0000\n"
 "Last-Translator: cn4ij <Unknown>\n"
 "Language-Team: Hungarian <hu@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-12-25 05:11+0000\n"
+"X-Launchpad-Export-Date: 2013-12-26 05:11+0000\n"
 "X-Generator: Launchpad (build 16877)\n"
 
 #: ../../campaigns/atl01.wmf/elemental:9
@@ -110,6 +110,14 @@ msgid ""
 "our guard down as we continue to explore this beautiful island. But without\n"
 "obvious dangers I am feeling very much at home here already."
 msgstr ""
+"És még egy újabb azokból az épületekből. Most már tudjuk, hogy a nép, mely\n"
+"építette ezeket, egykor teljesen uralta a szigetet. De immár nem félek\n"
+"annyira az esetleges ellenségtől. Már akkora részét ismerjük a szigetnek, "
+"és\n"
+"mégsincs más nyoma ennek a régi gazdaságnak. Hagyom magam ellazulni, ám\n"
+"nem így az őröket, amíg folytatjuk e gyönyörű sziget felfedezését. De "
+"minthogy\n"
+"nem fenyeget nyilvánvaló veszély, már igazán otthon érzem magam."
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:495
 msgid "Another building."
@@ -142,6 +150,11 @@ msgid ""
 "not\n"
 "collapse."
 msgstr ""
+"Ahogy úthálózatod egyre hosszabbá és bonyolultabbá válik, kívánatos lovakat\n"
+"alkalmaznod, hogy segítsék hordáraidat. A lovakat a lovardában tenyésztik "
+"vízen\n"
+"és kukoricán. A raktár is segít megelőzni, hogy szállítási rendszered\n"
+"összeomoljon."
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:140
 msgid "Build 3 ships to escape from the island"
@@ -162,7 +175,7 @@ msgstr ""
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:130
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:131
 msgid "Build a warehouse and a horsefarm"
-msgstr ""
+msgstr "Építs egy raktárat és egy lovardát"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:102
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:103
@@ -390,6 +403,12 @@ msgid ""
 "from\n"
 "bullying the civil population."
 msgstr ""
+"Meghívást kaptam Sidolustól. Holnap lesz az első edzésnap az újonnan "
+"elkészült\n"
+"labirintusban. A kazamata is felépült, és hamarosan működni kezd. Már várom\n"
+"a holnapot, kíváncsi vagyok, miként zajlik katonáink kiképzése, és hogy "
+"vajon\n"
+"a megnövelt munka visszatartja-e őket attól, hogy a köznépet zaklassák."
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:104
 msgid ""
@@ -440,7 +459,7 @@ msgstr "Jundlina egyetért"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:453
 msgid "Jundlina considers the economy"
-msgstr ""
+msgstr "Jundlina szemléli a gazdaságot"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:409
 msgid "Jundlina is angry"
@@ -473,7 +492,7 @@ msgstr "Jundlina bólint"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:440
 msgid "Jundlina received a letter"
-msgstr ""
+msgstr "Jundlina levelet kapott"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:296
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:355
@@ -744,6 +763,14 @@ msgid ""
 "to\n"
 "avoid having to transport everything up and down the slopes."
 msgstr ""
+"Az emberek panaszkodnak, hogy zsúfoltak az utcák, és hogy lassú a "
+"szállítás.\n"
+"Segítenünk kell az utakon hordárainknak. Úgy döntöttem, hogy építünk egy\n"
+"lovardát, hogy a lovak segíthessenek cipelni a nehéz árut.<br>\n"
+"Egy másik mód a zsúfoltság csökkentésére, hogy raktárakat építünk. Immár\n"
+"miénk a hegy, célszerű lenne a fennsíkon egy raktárat létesíteni, hogy ne "
+"kelljen\n"
+"mindent fel- és levinni az emelkedőkön."
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:587
 msgid ""
