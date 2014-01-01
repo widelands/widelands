@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2013-09-15 19:41+0200\n"
-"PO-Revision-Date: 2013-11-30 15:36+0000\n"
+"PO-Revision-Date: 2013-12-31 14:02+0000\n"
 "Last-Translator: Hans Joachim Desserud <Unknown>\n"
 "Language-Team: Norwegian Bokmal <nb@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2013-12-01 05:15+0000\n"
-"X-Generator: Launchpad (build 16856)\n"
+"X-Launchpad-Export-Date: 2014-01-01 05:11+0000\n"
+"X-Generator: Launchpad (build 16877)\n"
 
 #: ../../src/computer_player.cc:38
 msgid "None"
@@ -988,7 +988,7 @@ msgstr "laster skapning: %s"
 #: ../../src/logic/dismantlesite.cc:100
 #, c-format
 msgid "%u%% dismantled"
-msgstr ""
+msgstr "%u%% demontert"
 
 #: ../../src/logic/editor_game_base.cc:283
 msgid "Loading tribes"
@@ -1724,7 +1724,7 @@ msgstr "byggeplasstype «byggeplass» mangler"
 
 #: ../../src/logic/tribe.cc:142
 msgid "dismantlesite type \"distmantlesite\" is missing"
-msgstr ""
+msgstr "demonteringssted type «demonteringssted» mangler"
 
 #: ../../src/logic/tribe.cc:259 ../../src/logic/tribe.cc:280
 #, c-format
@@ -1899,7 +1899,7 @@ msgstr "byggeplass: %s"
 #: ../../src/map_io/widelands_map_buildingdata_data_packet.cc:467
 #, c-format
 msgid "dismantlesite: %s"
-msgstr ""
+msgstr "demontertingssted: %s"
 
 #: ../../src/map_io/widelands_map_buildingdata_data_packet.cc:651
 #, c-format
@@ -3441,7 +3441,7 @@ msgstr "Vert"
 
 #: ../../src/ui_fsmenu/netsetup_lan.cc:127
 msgid "State"
-msgstr ""
+msgstr "Status"
 
 #: ../../src/ui_fsmenu/netsetup_lan.cc:196
 #: ../../src/wui/multiplayersetupgroup.cc:270
@@ -3496,7 +3496,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/options.cc:125
 msgid "In-game resolution"
-msgstr ""
+msgstr "Spilloppløsning"
 
 #: ../../src/ui_fsmenu/options.cc:130
 msgid "Language"
@@ -3634,12 +3634,12 @@ msgstr "Vil du virkelig ødelegge %s?"
 
 #: ../../src/wui/actionconfirm.cc:288
 msgid "Dismantle building?"
-msgstr ""
+msgstr "Demonter bygning?"
 
 #: ../../src/wui/actionconfirm.cc:289
 #, c-format
 msgid "Do you really want to dismantle this %s?"
-msgstr ""
+msgstr "Vil du virkelig demontere %s?"
 
 #: ../../src/wui/actionconfirm.cc:349
 msgid "Enhance building?"
@@ -3766,7 +3766,7 @@ msgstr "Ødelegg"
 
 #: ../../src/wui/buildingwindow.cc:279
 msgid "Dismantle"
-msgstr ""
+msgstr "Demonter"
 
 #: ../../src/wui/buildingwindow.cc:279
 msgid "Returns:"
@@ -4124,7 +4124,7 @@ msgstr "Avslutt"
 
 #: ../../src/wui/game_summary.cc:83
 msgid "Return to main menu"
-msgstr ""
+msgstr "Tilbake til hovedmeny"
 
 #: ../../src/wui/game_summary.cc:93
 msgid "Time"
@@ -4483,7 +4483,7 @@ msgstr ""
 
 #: ../../src/wui/shipwindow.cc:188
 msgid "Sink the ship"
-msgstr ""
+msgstr "Senk skipet"
 
 #: ../../src/wui/shipwindow.cc:193
 msgid "Cancel the Expedition"
@@ -4675,18 +4675,18 @@ msgstr ""
 
 #: ../../src/editor/tools/editor_info_tool.cc:91
 msgid "3) Resources Info\n"
-msgstr ""
+msgstr "3) Ressursinfo\n"
 
 #: ../../src/editor/tools/editor_info_tool.cc:98
 #: ../../src/editor/tools/editor_info_tool.cc:108
 #, c-format
 msgid " Resource name: %s\n"
-msgstr ""
+msgstr " Navn på ressurs: %s\n"
 
 #: ../../src/editor/tools/editor_info_tool.cc:102
 #, c-format
 msgid " Resource amount: %i\n"
-msgstr ""
+msgstr " Mengde av ressurs: %i\n"
 
 #: ../../src/editor/tools/editor_info_tool.cc:108
 msgid "none"
@@ -4793,13 +4793,15 @@ msgstr "Antall spillere:"
 
 #: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:102
 msgid "Set origin"
-msgstr ""
+msgstr "Velg origo"
 
 #: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:104
 msgid ""
 "Set the position that will have the coordinates (0, 0). This will be the top-"
 "left corner of a generated minimap."
 msgstr ""
+"Velg posisjonen som skal ha koordinatene (0,0). Dette blir det øverste "
+"venstre hjørnet i et generert minikart."
 
 #: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:64
 #: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:156
@@ -4894,11 +4896,11 @@ msgstr "navnløs"
 
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:255
 msgid "directory"
-msgstr ""
+msgstr "mappe"
 
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:259
 msgid "Not a map file"
-msgstr ""
+msgstr "Ikke en kartfil"
 
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:387
 msgid " exists already. Overwrite?"
