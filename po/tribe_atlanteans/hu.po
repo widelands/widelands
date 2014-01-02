@@ -7,13 +7,13 @@ msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2013-09-15 17:41+0000\n"
-"PO-Revision-Date: 2013-12-31 15:51+0000\n"
-"Last-Translator: cn4ij <Unknown>\n"
+"PO-Revision-Date: 2014-01-01 11:08+0000\n"
+"Last-Translator: Varga Dániel <vargad88@gmail.com>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-01-01 05:11+0000\n"
+"X-Launchpad-Export-Date: 2014-01-02 05:09+0000\n"
 "X-Generator: Launchpad (build 16877)\n"
 
 #: ../../tribes/atlanteans/golden_tabard/conf:1
@@ -28,7 +28,7 @@ msgstr ""
 
 #: ../../tribes/atlanteans/ship/conf:1
 msgid "A sea-worthy ship"
-msgstr ""
+msgstr "Hajózásra alkalmas hajó"
 
 #: ../../tribes/atlanteans/tabard/conf:1
 msgid ""
@@ -85,11 +85,12 @@ msgstr "Laktanya"
 #: ../../tribes/atlanteans/conf:148
 #: ../../tribes/atlanteans/conf:156
 msgid "Barrier"
-msgstr "Erődítmény"
+msgstr "Határvédmű"
 
 #: ../../tribes/atlanteans/bucket/conf:1
 msgid "Big buckets for the fish breeder - produced by the toolsmith."
-msgstr "A haltenyésztő által használt nagy vödör. A szerszámkovács készíti."
+msgstr ""
+"A haltenyésztő által használt nagy vödrök. A szerszámkovács készíti őket."
 
 #: ../../tribes/atlanteans/conf:61
 msgid "Blackroot"
@@ -113,7 +114,7 @@ msgstr ""
 
 #: ../../tribes/atlanteans/conf:113
 msgid "Blackroot farmer"
-msgstr "Feketegyökér termelő"
+msgstr "Feketegyökér-termelő"
 
 #: ../../tribes/atlanteans/conf:34
 msgid "Blackrootfield"
@@ -121,19 +122,19 @@ msgstr "Feketegyökér-ültetvény"
 
 #: ../../tribes/atlanteans/conf:35
 msgid "Blackrootfield harvested"
-msgstr "Learatott feketegyökér-ültetvény"
+msgstr ""
 
 #: ../../tribes/atlanteans/conf:36
 msgid "Blackrootfield medium"
-msgstr "Közepes méretű feketegyökér-ültetvény"
+msgstr "Közepes feketegyökér"
 
 #: ../../tribes/atlanteans/conf:37
 msgid "Blackrootfield small"
-msgstr "Kis feketegyökér-ültetvény"
+msgstr "Kis feketegyökér"
 
 #: ../../tribes/atlanteans/conf:38
 msgid "Blackrootfield tiny"
-msgstr "Apró feketegyökér palánták"
+msgstr "Apró feketegyökér"
 
 #: ../../tribes/atlanteans/blackroot/conf:1
 msgid ""
@@ -159,7 +160,7 @@ msgstr "Halakat tenyészt."
 
 #: ../../tribes/atlanteans/spiderbreeder/conf:1
 msgid "Breeds spider for yarn."
-msgstr "Pókot tenyészt a fonálkészítéshez."
+msgstr "Pókot tenyészt a fonalukért."
 
 #: ../../tribes/atlanteans/horsebreeder/conf:1
 msgid "Breeds the strong atlantean horses"
@@ -175,7 +176,7 @@ msgstr "Építész"
 
 #: ../../tribes/atlanteans/conf:115
 msgid "Burner"
-msgstr "Faszénkészítő"
+msgstr "Faszénégető"
 
 #: ../../tribes/atlanteans/burner/conf:1
 msgid "Burns coal."
@@ -183,7 +184,7 @@ msgstr "Faszenet készít."
 
 #: ../../tribes/atlanteans/conf:104
 msgid "Carrier"
-msgstr "Szállító"
+msgstr "Hordár"
 
 #: ../../tribes/atlanteans/carrier/conf:1
 msgid "Carries items along your roads."
@@ -196,7 +197,7 @@ msgstr "Vár"
 
 #: ../../tribes/atlanteans/scripting/sc01_castle_village.lua:10
 msgid "Castle village"
-msgstr ""
+msgstr "Kastély körüli falu"
 
 #: ../../tribes/atlanteans/conf:182
 msgid "Charcoal Burner's House"
@@ -204,7 +205,7 @@ msgstr "Faszénégetőház"
 
 #: ../../tribes/atlanteans/conf:149
 msgid "Citadel"
-msgstr "Citadella"
+msgstr "Fellegvár"
 
 #: ../../tribes/atlanteans/conf:64
 msgid "Coal"
@@ -216,7 +217,7 @@ msgstr "Szénbánya"
 
 #: ../../tribes/atlanteans/shipyard/conf:28
 msgid "Constructing ship"
-msgstr "Építőhajó"
+msgstr "a hajóépítés"
 
 #: ../../tribes/atlanteans/conf:142
 msgid "Construction Site"
@@ -483,7 +484,7 @@ msgstr "Vadászház"
 
 #: ../../tribes/atlanteans/conf:79
 msgid "Hunting Bow"
-msgstr "Vadász íj"
+msgstr "Vadászíj"
 
 #: ../../tribes/atlanteans/conf:81
 msgid "Iron"
@@ -502,12 +503,15 @@ msgid ""
 "Iron is made out of iron ores in the smelting works. It is used in the "
 "toolsmithy, armoursmithy and weapon smithy."
 msgstr ""
+"A vasat vasércből nyerik a kohóban. Felhasználják a szerszám-, a páncél- és "
+"a fegyverkovácsműhelyben."
 
 #: ../../tribes/atlanteans/ironore/conf:1
 msgid ""
 "Iron ores are mined in iron mines. They get smelted in a smelting works to "
 "retrieve the iron."
 msgstr ""
+"A vasércet vasércbányákban termelik ki. A kohóban nyerik ki belőle a vasat."
 
 #: ../../tribes/atlanteans/conf:209
 msgid "Labyrinth"
@@ -821,7 +825,7 @@ msgstr "Rönköket fűrészeli, hogy deszkát készítsen."
 
 #: ../../tribes/atlanteans/conf:125
 msgid "Sawyer"
-msgstr "Fűrészelő munkás"
+msgstr "Fűrészelő"
 
 #: ../../tribes/atlanteans/conf:135
 msgid "Scout"
@@ -893,7 +897,7 @@ msgstr "Vasat készít"
 
 #: ../../tribes/atlanteans/conf:126
 msgid "Smelter"
-msgstr "Olvasztómester"
+msgstr "Kohász"
 
 #: ../../tribes/atlanteans/conf:183
 msgid "Smelting Works"
@@ -931,7 +935,7 @@ msgstr ""
 
 #: ../../tribes/atlanteans/conf:127
 msgid "Smoker"
-msgstr ""
+msgstr "Füstölő"
 
 #: ../../tribes/atlanteans/conf:178
 msgid "Smokery"
@@ -1016,6 +1020,9 @@ msgid ""
 "fed with coal. This coal is mined in coal mines or produced out of trunks by "
 "a charcoal burner."
 msgstr ""
+"Az atlantisziak kohóik, páncél- és fegyverkovácsműhelyeik tüzeit szénnel "
+"táplálják. Ezt a szenet szénbányákban termelik ki, vagy farönkökből készíti "
+"a faszénégető."
 
 #: ../../tribes/atlanteans/hunter/conf:1
 msgid "The Hunter brings fresh, raw meat to the Atlanteans."
@@ -1035,6 +1042,8 @@ msgid ""
 "The bread paddle is the tool of the baker, each baker needs its own. It is "
 "produced by the toolsmith."
 msgstr ""
+"A sütőlapát a pék eszköze, minden péknek sajátja van. A szerszámkovács "
+"készíti."
 
 #: ../../tribes/atlanteans/double_trident/conf:1
 msgid ""
@@ -1112,6 +1121,7 @@ msgstr ""
 msgid ""
 "This bow is used by the Atlantean hunter. It is produced by the toolsmith."
 msgstr ""
+"Ezt az íjat az atlantiszi vadászok használják. A szerszámkovács készíti."
 
 #: ../../tribes/atlanteans/corn/conf:1
 msgid ""
@@ -1358,8 +1368,8 @@ msgid ""
 "Water is the essence for life! It is used in the bakery, the horse farm and "
 "the spiderfarm."
 msgstr ""
-"A víz az élet eszenciája. A pékségben a lovardába, illetve a pók "
-"tenyészetnél is szükség van rá."
+"A víz az élet alapja! Felhasználják a pékségben, a lovardában és a "
+"póktenyészetben."
 
 #: ../../tribes/atlanteans/conf:185
 msgid "Weapon Smithy"
