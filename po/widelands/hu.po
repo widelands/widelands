@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2013-09-15 19:41+0200\n"
-"PO-Revision-Date: 2013-12-29 16:32+0000\n"
+"PO-Revision-Date: 2014-01-02 17:39+0000\n"
 "Last-Translator: cn4ij <Unknown>\n"
 "Language-Team: Language <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2013-12-30 04:34+0000\n"
+"X-Launchpad-Export-Date: 2014-01-03 05:10+0000\n"
 "X-Generator: Launchpad (build 16877)\n"
 
 #: ../../src/computer_player.cc:38
@@ -2838,7 +2838,7 @@ msgstr "[Hibás adat]"
 #: ../../src/ui_fsmenu/editor_mapselect.cc:52
 #: ../../src/ui_fsmenu/mapselect.cc:54
 msgid "Choose a map"
-msgstr ""
+msgstr "Válassz térképet"
 
 #: ../../src/ui_fsmenu/campaign_select.cc:267
 #: ../../src/ui_fsmenu/editor_mapselect.cc:56
@@ -3385,7 +3385,7 @@ msgstr "Hivatalos térkép"
 
 #: ../../src/ui_fsmenu/mapselect.cc:172
 msgid "Seafaring Map"
-msgstr ""
+msgstr "Hajózós térkép"
 
 #: ../../src/ui_fsmenu/mapselect.cc:175
 msgid "1v1"
@@ -3393,15 +3393,15 @@ msgstr "1v1"
 
 #: ../../src/ui_fsmenu/mapselect.cc:176
 msgid "Teams of 2"
-msgstr ""
+msgstr "2-es csapatok"
 
 #: ../../src/ui_fsmenu/mapselect.cc:177
 msgid "Teams of 3"
-msgstr ""
+msgstr "3-as csapatok"
 
 #: ../../src/ui_fsmenu/mapselect.cc:180
 msgid "Teams of 4"
-msgstr ""
+msgstr "4-es csapatok"
 
 #: ../../src/ui_fsmenu/mapselect.cc:181
 msgid "Free for all"

@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: Widelands svn4888\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2013-09-15 17:41+0000\n"
-"PO-Revision-Date: 2012-06-25 20:27+0000\n"
+"PO-Revision-Date: 2014-01-02 21:24+0000\n"
 "Last-Translator: Jiří Locker <jiri.locker@gmail.com>\n"
 "Language-Team: Czech <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-09-16 04:38+0000\n"
-"X-Generator: Launchpad (build 16761)\n"
+"X-Launchpad-Export-Date: 2014-01-03 05:10+0000\n"
+"X-Generator: Launchpad (build 16877)\n"
 "X-Poedit-Country: CZECH REPUBLIC\n"
 "X-Poedit-Language: Czech\n"
 
@@ -668,11 +668,11 @@ msgstr "Přenáší předměty po cestách."
 
 #: ../../tribes/barbarians/quarry/help.lua:17
 msgid "Carve %s out of stones standing near the hut."
-msgstr ""
+msgstr "Lámát %s ze skal stojících poblíž chaty."
 
 #: ../../tribes/barbarians/granitemine/help.lua:18
 msgid "Carve %s out of the rock in mountain terrain."
-msgstr ""
+msgstr "Lámat %s ze skal v horském terénu."
 
 #: ../../tribes/barbarians/conf:160
 #: ../../tribes/barbarians/conf:169
@@ -804,7 +804,7 @@ msgstr "Uhelný důl"
 #: ../../tribes/barbarians/warmill/help.lua:19
 #: ../../tribes/barbarians/well/help.lua:18
 msgid "Conquer range:"
-msgstr ""
+msgstr "Oblast vlivu:"
 
 #: ../../tribes/barbarians/shipyard/conf:27
 msgid "Constructing ship"
@@ -828,7 +828,7 @@ msgstr "Staveniště"
 #: ../../tribes/barbarians/deeper_oremine/help.lua:37
 #: ../../tribes/barbarians/warmill/help.lua:42
 msgid "Cost cumulative:"
-msgstr ""
+msgstr "Celkové náklady:"
 
 #: ../../tribes/barbarians/axefactory/help.lua:55
 #: ../../tribes/barbarians/bakery/help.lua:49
@@ -957,7 +957,7 @@ msgstr "Zničená budova"
 #: ../../tribes/barbarians/goldmine/help.lua:18
 #: ../../tribes/barbarians/oremine/help.lua:18
 msgid "Dig %s out of the ground in mountain terrain."
-msgstr ""
+msgstr "Zde se těží %s z hlubin horského terénu."
 
 #: ../../tribes/barbarians/geologist/conf:1
 msgid "Discovers resources for mining."
@@ -1004,7 +1004,7 @@ msgstr "Donjon"
 
 #: ../../tribes/barbarians/well/help.lua:16
 msgid "Draw Water out of the deep."
-msgstr ""
+msgstr "Tahání Vody z podzemí."
 
 #: ../../tribes/barbarians/battlearena/help.lua:55
 msgid "Evade"
@@ -1200,7 +1200,7 @@ msgstr "Chata hajného"
 #: ../../tribes/barbarians/warmill/help.lua:15
 #: ../../tribes/barbarians/well/help.lua:15
 msgid "General"
-msgstr ""
+msgstr "Obecné"
 
 #: ../../tribes/barbarians/conf:134
 #: ../../tribes/barbarians/metalworks/help.lua:33
