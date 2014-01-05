@@ -71,15 +71,17 @@ int upcasted_bob_to_lua(lua_State * L, Bob * mo) {
 	if (!mo)
 		return 0;
 
-	const char * type_name = mo->type_name();
-	if (!strcmp(type_name, "worker")) {
-		if (mo->name() == "soldier")
-			return CAST_TO_LUA(Soldier);
-
-		return CAST_TO_LUA(Worker);
+	switch (mo->get_bob_type()) {
+		case Bob::CRITTER:
+			return to_lua<L_Bob>(L, new L_Bob(*mo));
+		case Bob::WORKER:
+			if (mo->name() == "soldier")
+				return CAST_TO_LUA(Soldier);
+			return CAST_TO_LUA(Worker);
+		case Bob::SHIP:
+			return CAST_TO_LUA(Ship);
 	}
-
-	return to_lua<L_Bob>(L, new L_Bob(*mo));
+	assert(0);  // Never here, hopefully.
 }
 int upcasted_immovable_to_lua(lua_State * L, BaseImmovable * mo) {
 	if (!mo)
@@ -1263,6 +1265,7 @@ const MethodType<L_PlayerImmovable> L_PlayerImmovable::Methods[] = {
 };
 const PropertyType<L_PlayerImmovable> L_PlayerImmovable::Properties[] = {
 	PROP_RO(L_PlayerImmovable, owner),
+	PROP_RO(L_PlayerImmovable, debug_economy),
 	{0, 0, 0},
 };
 
@@ -1281,6 +1284,13 @@ int L_PlayerImmovable::get_owner(lua_State * L) {
 		(L, get(L, get_egbase(L))->get_owner()->player_number());
 	return 1;
 }
+
+// UNTESTED, for debug only
+int L_PlayerImmovable::get_debug_economy(lua_State* L) {
+	lua_pushlightuserdata(L, get(L, get_egbase(L)));
+	return 1;
+}
+
 
 /*
  ==========================================================
@@ -1590,6 +1600,7 @@ const MethodType<L_Building> L_Building::Methods[] = {
 };
 const PropertyType<L_Building> L_Building::Properties[] = {
 	PROP_RO(L_Building, building_type),
+	PROP_RO(L_Building, flag),
 	{0, 0, 0},
 };
 
@@ -1613,6 +1624,19 @@ int L_Building::get_building_type(lua_State * L) {
 	lua_pushstring(L, get(L, get_egbase(L))->type_name());
 	return 1;
 }
+
+/* RST
+	.. attribute:: flag
+
+		(RO) The flag that belongs to this building (that is to the bottom right
+		of it's main location).
+*/
+// UNTESTED
+int L_Building::get_flag(lua_State * L) {
+	upcasted_immovable_to_lua(L, &get(L, get_egbase(L))->base_flag());
+	return 1;
+}
+
 
 /*
  ==========================================================
@@ -2049,6 +2073,49 @@ int L_Bob::has_caps(lua_State * L) {
  C METHODS
  ==========================================================
  */
+
+/* RST
+Ship
+----
+
+.. class:: Ship
+
+	This represents a ship in game.
+*/
+
+const char L_Ship::className[] = "Ship";
+const MethodType<L_Ship> L_Ship::Methods[] = {
+	{0, 0},
+};
+const PropertyType<L_Ship> L_Ship::Properties[] = {
+	PROP_RO(L_Ship, debug_economy),
+	{0, 0, 0},
+};
+
+
+/*
+ ==========================================================
+ PROPERTIES
+ ==========================================================
+ */
+// UNTESTED, for debug only
+int L_Ship::get_debug_economy(lua_State* L) {
+	lua_pushlightuserdata(L, get(L, get_egbase(L)));
+	return 1;
+}
+
+/*
+ ==========================================================
+ LUA METHODS
+ ==========================================================
+ */
+
+/*
+ ==========================================================
+ C METHODS
+ ==========================================================
+ */
+
 
 /* RST
 Worker
@@ -2863,6 +2930,11 @@ void luaopen_wlmap(lua_State * L) {
 	add_parent<L_Soldier, L_Worker>(L);
 	add_parent<L_Soldier, L_Bob>(L);
 	add_parent<L_Soldier, L_MapObject>(L);
+	lua_pop(L, 1); // Pop the meta table
+
+	register_class<L_Ship>(L, "map", true);
+	add_parent<L_Ship, L_Bob>(L);
+	add_parent<L_Ship, L_MapObject>(L);
 	lua_pop(L, 1); // Pop the meta table
 
 	register_class<L_BaseImmovable>(L, "map", true);

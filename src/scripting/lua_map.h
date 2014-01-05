@@ -30,6 +30,7 @@
 #include "logic/game.h"
 #include "logic/militarysite.h"
 #include "logic/productionsite.h"
+#include "logic/ship.h"
 #include "logic/soldier.h"
 #include "logic/trainingsite.h"
 #include "logic/warehouse.h"
@@ -181,6 +182,7 @@ public:
 	 * Properties
 	 */
 	int get_owner(lua_State * L);
+	int get_debug_economy(lua_State* L);
 
 	/*
 	 * Lua Methods
@@ -190,8 +192,6 @@ public:
 	 * C Methods
 	 */
 	CASTED_GET(PlayerImmovable);
-
-protected:
 };
 
 class L_Building : public L_PlayerImmovable {
@@ -207,7 +207,8 @@ public:
 	/*
 	 * Properties
 	 */
-	int get_building_type(lua_State * L);
+	int get_building_type(lua_State* L);
+	int get_flag(lua_State* L);
 
 	/*
 	 * Lua Methods
@@ -617,6 +618,30 @@ public:
 	 * C methods
 	 */
 	CASTED_GET(Soldier);
+};
+
+class L_Ship : public L_Bob {
+public:
+	LUNA_CLASS_HEAD(L_Ship);
+
+	L_Ship() {}
+	L_Ship(Widelands::Ship& s) : L_Bob(s) {}
+	L_Ship(lua_State* L) : L_Bob(L) {}
+	virtual ~L_Ship() {}
+
+	/*
+	 * Properties
+	 */
+	int get_debug_economy(lua_State * L);
+
+	/*
+	 * Lua methods
+	 */
+
+	/*
+	 * C methods
+	 */
+	CASTED_GET(Ship);
 };
 #undef CASTED_GET
 
