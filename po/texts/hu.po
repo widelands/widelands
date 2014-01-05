@@ -7,22 +7,24 @@ msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2013-09-15 17:41+0000\n"
-"PO-Revision-Date: 2013-08-03 09:50+0000\n"
-"Last-Translator: István Kiss <kissistvan@kibk.extra.hu>\n"
+"PO-Revision-Date: 2014-01-04 16:55+0000\n"
+"Last-Translator: cn4ij <Unknown>\n"
 "Language-Team: Language <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-09-16 04:36+0000\n"
-"X-Generator: Launchpad (build 16761)\n"
+"X-Launchpad-Export-Date: 2014-01-05 05:16+0000\n"
+"X-Generator: Launchpad (build 16877)\n"
 
 #: ../../txts/README.lua:73
 msgid "(CTRL+) 0-9: Remember and go to previously remembered locations"
 msgstr ""
+"(CTRL+) 0-9: megjegyez helyszíneket, ill. az így megjegyzett helyszínekre "
+"ugrik"
 
 #: ../../txts/README.lua:74
 msgid ",: goes to previous location"
-msgstr ""
+msgstr ",: az előző helyszínre ugrik"
 
 #: ../../txts/README.lua:99
 msgid "- Detailed steps on how to trigger the bug, if possible."
@@ -69,7 +71,7 @@ msgstr ""
 
 #: ../../txts/README.lua:75
 msgid ".: goes to next location"
-msgstr ""
+msgstr ".: a következő helyszínre ugrik"
 
 #: ../../txts/editor_readme:43
 msgid "1-0      Changes tools size"
@@ -134,11 +136,11 @@ msgstr "C               Épületek nevének megjelenítése"
 
 #: ../../txts/README.lua:67
 msgid "C: toggles census"
-msgstr ""
+msgstr "C: megjeleníti/elrejti az épületek nevét"
 
 #: ../../txts/README.lua:77
 msgid "CTRL+F10: quits the game immediately"
-msgstr ""
+msgstr "CTRL+F10: azonnal kilép a játékból"
 
 #: ../../txts/editor_readme:39
 msgid "CTRL+L   Load Map"
@@ -174,7 +176,7 @@ msgstr "Cseh"
 
 #: ../../txts/README.lua:83
 msgid "DELETE: archives the current message"
-msgstr ""
+msgstr "DELETE: archiválja a kiválasztott üzenetet"
 
 #: ../../txts/developers:193
 msgid "Dansk"
@@ -210,15 +212,17 @@ msgstr "F Teljes képernyőre vált"
 
 #: ../../txts/README.lua:78
 msgid "F11: takes a screenshot"
-msgstr ""
+msgstr "F11: képernyőképet készít"
 
 #: ../../txts/README.lua:76
 msgid "F6: shows the debug console (only in debug-builds)"
 msgstr ""
+"F6: megjeleníti a hibakereső konzolt (csak a program „debug” fordításában)"
 
 #: ../../txts/README.lua:71
 msgid "F: toggles fullscreen (if supported by OS)"
 msgstr ""
+"F: vált ablakos és teljes képernyős mód között (ha támogatja az op. rendszer)"
 
 #: ../../txts/developers:206
 msgid "Finnish"
@@ -234,7 +238,7 @@ msgstr "Francia"
 
 #: ../../txts/README.lua:82
 msgid "G: jumps to location corresponding to current message"
-msgstr ""
+msgstr "G: arra a helyre ugrik, amelyről a kiválasztott üzenet szól"
 
 #: ../../txts/developers:219
 msgid "Galician"
@@ -283,7 +287,7 @@ msgstr ""
 
 #: ../../txts/README.lua:72
 msgid "Home: centers main mapview on starting location"
-msgstr ""
+msgstr "Home: a kiindulóhelyet a fő térképnézet közepére igazítja"
 
 #: ../../txts/developers:23
 #: ../../txts/developers:347
@@ -304,7 +308,7 @@ msgstr "I Bekapcsolja az információs eszközt"
 
 #: ../../txts/README.lua:69
 msgid "I: toggles stock inventory"
-msgstr ""
+msgstr "I: megjeleníti/elrejti a raktárkészletet"
 
 #: ../../txts/README.lua:93
 msgid "If you encounter a bug, please report it to our bugtracker:"
@@ -317,6 +321,9 @@ msgid ""
 "are\n"
 "removed."
 msgstr ""
+"Ha nyomva tartod a CTRL-t, mialatt utat építesz, maguktól kerülnek rá\n"
+"zászlók. Ha nyomva tartod a CTRL-t, mialatt eltávolítasz egy utat, az első\n"
+"elágazásig minden zászló eltűnik."
 
 #: ../../txts/tips/general_game.tip:58
 msgid ""
@@ -345,6 +352,11 @@ msgid ""
 "economic infrastructure, explore the land around you and face rivaling\n"
 "tribes."
 msgstr ""
+"Ebben a játékban egy kis darabka földön kezdesz mindössze néhány\n"
+"forrással. Ezek felhasználásával többezer lelket számláló birodalmat\n"
+"építhetsz. Míg e célt eléred, fel kell állítanod egy gazdasági rendszert,\n"
+"fel kell fedezned a környező vidéket, és szembe kell nézned a veled\n"
+"versengő törzsekkel."
 
 #: ../../txts/README.lua:18
 #: ../../txts/editor_readme:7
@@ -398,7 +410,7 @@ msgstr "M           Térkép megjelenítése"
 
 #: ../../txts/README.lua:65
 msgid "M: toggles minimap"
-msgstr ""
+msgstr "M: megjeleníti/elrejti a kistérképet"
 
 #: ../../txts/tips/general_game.tip:34
 msgid ""
@@ -421,7 +433,7 @@ msgstr "Zenészek"
 
 #: ../../txts/README.lua:66
 msgid "N: toggles messages ('news')"
-msgstr ""
+msgstr "N: megjeleníti/elrejti az üzeneteket"
 
 #: ../../txts/developers:181
 msgid ""
@@ -443,7 +455,7 @@ msgstr "Nem Unix disztribúciók"
 
 #: ../../txts/README.lua:70
 msgid "O: toggles objectives"
-msgstr ""
+msgstr "O: megjeleníti/elrejti a célkitűzéseket"
 
 #: ../../txts/license:18
 msgid ""
@@ -491,15 +503,15 @@ msgstr "P           Megjeleníti a játékos beállítási ablakot"
 
 #: ../../txts/README.lua:62
 msgid "PAGEDOWN: decreases gamespeed"
-msgstr ""
+msgstr "PAGEDOWN: csökkenti a játéksebességet"
 
 #: ../../txts/README.lua:61
 msgid "PAGEUP: increases gamespeed"
-msgstr ""
+msgstr "PAGEUP: növeli a játéksebességet"
 
 #: ../../txts/README.lua:63
 msgid "PAUSE: pauses the game"
-msgstr ""
+msgstr "PAUSE: megállítja a játékot"
 
 #: ../../txts/developers:281
 msgid "Packagers"
@@ -574,7 +586,7 @@ msgstr "Orosz"
 
 #: ../../txts/README.lua:68
 msgid "S: toggles statistics"
-msgstr ""
+msgstr "S: megjeleníti/elrejti az épületek állapotát"
 
 #: ../../txts/editor_readme:45
 msgid "SHIFT    (Hold) Selects first alternative tool while pressed"
@@ -593,7 +605,7 @@ msgstr ""
 
 #: ../../txts/README.lua:64
 msgid "SPACE: toggles build-help"
-msgstr ""
+msgstr "SZÓKÖZ: megjeleníti/elrejti az építési segítséget"
 
 #: ../../txts/developers:182
 msgid ""
@@ -706,6 +718,11 @@ msgid ""
 "left\n"
 "mousebutton while holding down CTRL."
 msgstr ""
+"Egy nyitott ablak bezárásához kattints rajta a jobb egérgombbal. Hogy "
+"lekicsinyíts\n"
+"vagy felnagyíts egy ablakot, a címsorán kattints a középső egérgombbal avagy "
+"a\n"
+"CTRL billentyű lenyomása mellett a bal egérgombbal."
 
 #: ../../txts/developers:366
 msgid "Translation"
@@ -775,12 +792,21 @@ msgid ""
 "started\n"
 "through playable tutorials."
 msgstr ""
+"A Widelands egy ingyenes, szabad forrású valós idejű stratégiai játék "
+"egyjátékos\n"
+"hadjáratokkal és többjátékos móddal. A játékot a Settlers II ihlette, ám "
+"annál\n"
+"lényegesen gazdagabb és mélyebb. Mégis könnyen elkezdhető az oktatójátékok\n"
+"segítségével."
 
 #: ../../txts/README.lua:35
 msgid ""
 "Widelands is licensed under the GNU General Public License (GPL). For more\n"
 "information, see the file 'COPYING'."
 msgstr ""
+"A Widelands használatára és terjesztésére a GNU General Public License "
+"(GPL)\n"
+"vonatkozik. További tudnivalókért lásd a „COPYING” fájlt."
 
 #: ../../txts/README.lua:40
 msgid ""
@@ -793,6 +819,14 @@ msgid ""
 "or\n"
 "creating new maps - get in touch on our homepage."
 msgstr ""
+"A Widelands funkciói már közel teljesek, és jó szórakozást nyújt "
+"egyszemélyes\n"
+"játékban, még jobbat többjátékosban másokkal. Még mindig sok teendő van\n"
+"azonban minden téren. Ha szívesen segítenél – legyen az rajzolás, "
+"hibajavítás,\n"
+"új funkciók hozzáadása, a játék saját nyelvedre való lefordítása vagy új "
+"térképek\n"
+"készítése –, keress minket honlapunkon."
 
 #: ../../txts/README.lua:120
 msgid ""
@@ -841,6 +875,8 @@ msgid ""
 "You can skip confirmation windows for irreversible actions if you hold CTRL\n"
 "while clicking on the action button."
 msgstr ""
+"Eltekinthetsz a visszafordíthatatlan műveletekhez megerősítést kérő\n"
+"ablakoktól, ha a művelet gombjára a CTRL nyomva tartása mellett kattintasz."
 
 #: ../../txts/tips/multiplayer.tip:6
 msgid ""

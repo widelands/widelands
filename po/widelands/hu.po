@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2013-09-15 19:41+0200\n"
-"PO-Revision-Date: 2014-01-03 15:27+0000\n"
-"Last-Translator: Gyönki Bendegúz <gyonkibendeguz@gmail.com>\n"
+"PO-Revision-Date: 2014-01-04 16:05+0000\n"
+"Last-Translator: cn4ij <Unknown>\n"
 "Language-Team: Language <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-01-04 05:12+0000\n"
+"X-Launchpad-Export-Date: 2014-01-05 05:17+0000\n"
 "X-Generator: Launchpad (build 16877)\n"
 
 #: ../../src/computer_player.cc:38
@@ -2903,7 +2903,7 @@ msgstr "Leírás:"
 #: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:224
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:297
 msgid "parent"
-msgstr ""
+msgstr "szülő"
 
 #: ../../src/ui_fsmenu/fileview.cc:72 ../../src/wui/watchwindow.cc:139
 msgid "Close"
@@ -3319,7 +3319,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/main.cc:40
 msgid "Play Tutorial"
-msgstr "Oktató játék"
+msgstr "Oktatójáték"
 
 #: ../../src/ui_fsmenu/main.cc:45
 msgid "Single Player"
@@ -3362,11 +3362,11 @@ msgstr "Widelands fejlesztőcsapat"
 
 #: ../../src/ui_fsmenu/main.cc:96
 msgid "Licensed under the GNU General Public License V2.0"
-msgstr ""
+msgstr "Licenc: GNU General Public License V2.0"
 
 #: ../../src/ui_fsmenu/mapselect.cc:59
 msgid "Load Map as scenario: "
-msgstr "Térkép betöltése scenarioként "
+msgstr "Térkép betöltése forgatókönyvként: "
 
 #: ../../src/ui_fsmenu/mapselect.cc:149
 msgid "#"
