@@ -109,6 +109,8 @@ int upcasted_immovable_to_lua(lua_State * L, BaseImmovable * mo) {
 			return CAST_TO_LUA(Flag);
 		case Map_Object::ROAD:
 			return CAST_TO_LUA(Road);
+		case Map_Object::PORTDOCK:
+			return CAST_TO_LUA(PortDock);
 		default:
 			break;
 	}
@@ -1287,7 +1289,7 @@ int L_PlayerImmovable::get_owner(lua_State * L) {
 
 // UNTESTED, for debug only
 int L_PlayerImmovable::get_debug_economy(lua_State* L) {
-	lua_pushlightuserdata(L, get(L, get_egbase(L)));
+	lua_pushlightuserdata(L, get(L, get_egbase(L))->get_economy());
 	return 1;
 }
 
@@ -1583,6 +1585,52 @@ int L_Road::_new_worker
  ==========================================================
  */
 
+/* RST
+PortDock
+--------
+
+.. class:: PortDock
+
+	Child of: :class:`PlayerImmovable`
+
+	Each :class:`Warehouse` that is a port has a dock attached to
+	it. The PortDock is an immovable that also occupies a field on
+	the water near the port.
+*/
+
+const char L_PortDock::className[] = "PortDock";
+const MethodType<L_PortDock> L_PortDock::Methods[] = {
+	{0, 0},
+};
+const PropertyType<L_PortDock> L_PortDock::Properties[] = {
+	PROP_RO(L_PortDock, debug_economy),
+	{0, 0, 0},
+};
+
+
+/*
+ ==========================================================
+ PROPERTIES
+ ==========================================================
+ */
+// UNTESTED, for debug only
+int L_PortDock::get_debug_economy(lua_State* L) {
+	lua_pushlightuserdata(L, get(L, get_egbase(L))->get_economy());
+	return 1;
+}
+
+/*
+ ==========================================================
+ LUA METHODS
+ ==========================================================
+ */
+
+/*
+ ==========================================================
+ C METHODS
+ ==========================================================
+ */
+
 
 /* RST
 Building
@@ -1722,6 +1770,7 @@ const MethodType<L_Warehouse> L_Warehouse::Methods[] = {
 	{0, 0},
 };
 const PropertyType<L_Warehouse> L_Warehouse::Properties[] = {
+	PROP_RO(L_Warehouse, portdock),
 	{0, 0, 0},
 };
 
@@ -1730,6 +1779,17 @@ const PropertyType<L_Warehouse> L_Warehouse::Properties[] = {
  PROPERTIES
  ==========================================================
  */
+// UNTESTED
+/* RST
+	.. attribute:: portdock
+
+		(RO) If this Warehouse is a port, returns the
+		:class:`PortDock` attached to it, otherwise nil.
+*/
+int L_Warehouse::get_portdock(lua_State * L) {
+	return upcasted_immovable_to_lua(L, get(L, get_egbase(L))->get_portdock());
+}
+
 
 /*
  ==========================================================
@@ -2100,7 +2160,7 @@ const PropertyType<L_Ship> L_Ship::Properties[] = {
  */
 // UNTESTED, for debug only
 int L_Ship::get_debug_economy(lua_State* L) {
-	lua_pushlightuserdata(L, get(L, get_egbase(L)));
+	lua_pushlightuserdata(L, get(L, get_egbase(L))->get_economy());
 	return 1;
 }
 
@@ -2950,6 +3010,12 @@ void luaopen_wlmap(lua_State * L) {
 	add_parent<L_Building, L_PlayerImmovable>(L);
 	add_parent<L_Building, L_BaseImmovable>(L);
 	add_parent<L_Building, L_MapObject>(L);
+	lua_pop(L, 1); // Pop the meta table
+
+	register_class<L_PortDock>(L, "map", true);
+	add_parent<L_PortDock, L_PlayerImmovable>(L);
+	add_parent<L_PortDock, L_BaseImmovable>(L);
+	add_parent<L_PortDock, L_MapObject>(L);
 	lua_pop(L, 1); // Pop the meta table
 
 	register_class<L_Flag>(L, "map", true);

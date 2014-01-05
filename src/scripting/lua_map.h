@@ -25,6 +25,7 @@
 #include <lua.hpp>
 
 #include "economy/flag.h"
+#include "economy/portdock.h"
 #include "economy/road.h"
 #include "logic/constructionsite.h"
 #include "logic/game.h"
@@ -192,6 +193,31 @@ public:
 	 * C Methods
 	 */
 	CASTED_GET(PlayerImmovable);
+};
+
+class L_PortDock : public L_PlayerImmovable {
+public:
+	LUNA_CLASS_HEAD(L_PortDock);
+
+	L_PortDock() {}
+	L_PortDock(Widelands::PortDock & mo) : L_PlayerImmovable(mo) {
+	}
+	L_PortDock(lua_State * L) : L_PlayerImmovable(L) {}
+	virtual ~L_PortDock() {}
+
+	/*
+	 * Properties
+	 */
+	int get_debug_economy(lua_State* L);
+
+	/*
+	 * Lua methods
+	 */
+
+	/*
+	 * C methods
+	 */
+	CASTED_GET(PortDock);
 };
 
 class L_Building : public L_PlayerImmovable {
@@ -433,6 +459,7 @@ public:
 	/*
 	 * Properties
 	 */
+	int get_portdock(lua_State* L);
 
 	/*
 	 * Lua Methods
