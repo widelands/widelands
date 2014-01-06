@@ -7,13 +7,13 @@ msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2013-09-15 17:41+0000\n"
-"PO-Revision-Date: 2014-01-04 16:55+0000\n"
+"PO-Revision-Date: 2014-01-05 18:18+0000\n"
 "Last-Translator: cn4ij <Unknown>\n"
 "Language-Team: Language <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-01-05 05:16+0000\n"
+"X-Launchpad-Export-Date: 2014-01-06 04:35+0000\n"
 "X-Generator: Launchpad (build 16877)\n"
 
 #: ../../txts/README.lua:73
@@ -28,7 +28,7 @@ msgstr ",: az előző helyszínre ugrik"
 
 #: ../../txts/README.lua:99
 msgid "- Detailed steps on how to trigger the bug, if possible."
-msgstr ""
+msgstr "– Részletes lépések, amiként reprodukálható a hiba, ha lehetséges."
 
 #: ../../txts/README.lua:111
 msgid ""
@@ -36,6 +36,9 @@ msgid ""
 "helps\n"
 "demonstrate the issue, please include one or more screenshots."
 msgstr ""
+"– Ha a hiba olyasmi, hogy valami nem jelenik meg helyesen; vagy általában,\n"
+"ha segít szemléltetni a dolgot, akkor kérjük, mellékelj egy vagy több\n"
+"képernyőképet."
 
 #: ../../txts/README.lua:114
 msgid ""
@@ -43,6 +46,10 @@ msgid ""
 "crashes where it can be hard to tell exactly what is triggering it), please\n"
 "include that too. For more information, see the section on Replays below."
 msgstr ""
+"– Ha van egy játékmentésed vagy felvételed, ami szemlélteti a dolgot\n"
+"(például egy összeomlást, amelynek pontos okozóját nehéz megtalálni), \n"
+"kérjük, azt is mellékeld. További tudnivalókért lásd az alábbi,\n"
+"visszajátszásokról szóló szakaszt."
 
 #: ../../txts/README.lua:106
 msgid ""
@@ -50,16 +57,19 @@ msgid ""
 "as\n"
 "some bugs can be platform specific."
 msgstr ""
+"– Kérjük, azt is közöld, milyen operációs rendszeren futtatod a "
+"Widelandset,\n"
+"mivel egyes hibák platformfüggőek lehetnek."
 
 #: ../../txts/README.lua:101
 msgid ""
 "- What you expected to happen when performing the steps and what actually "
 "happened."
-msgstr ""
+msgstr "– Mit vártál e lépésektől, és mi történt valójában."
 
 #: ../../txts/README.lua:109
 msgid "- Which map you were playing when the bug occurred."
-msgstr ""
+msgstr "– Melyik térképen játszottál, amikor a hiba megjelent."
 
 #: ../../txts/README.lua:103
 msgid ""
@@ -68,6 +78,9 @@ msgid ""
 "the revision number if you are running a development version or a nightly "
 "build.)"
 msgstr ""
+"– A Widelands milyen verzióját használod (a build száma; vagy a revízió "
+"száma, ha\n"
+"fejlesztői változatot vagy nightly buildet futtatsz)."
 
 #: ../../txts/README.lua:75
 msgid ".: goes to next location"
@@ -106,6 +119,8 @@ msgid ""
 "An economy consists of all buildings and flags connected by roads. The "
 "supplies and demands of buildings are handled in its economy."
 msgstr ""
+"Egy gazdaság egy úthálózattal összekötött épületekből és zászlókból áll. Az "
+"épületek termékeit és szükségleteit azok saját gazdaságában kezelik."
 
 #: ../../txts/tips/general_game.tip:22
 msgid ""
@@ -168,7 +183,7 @@ msgstr "Programozók"
 
 #: ../../txts/license:7
 msgid "Copyright 2002 - 2013 by the Widelands Development Team."
-msgstr "Copyright 2002 - 2013 a Widelands fejlesztési csapat."
+msgstr "Copyright 2002–2013, a Widelands fejlesztési csapat."
 
 #: ../../txts/developers:186
 msgid "Czech"
@@ -312,7 +327,7 @@ msgstr "I: megjeleníti/elrejti a raktárkészletet"
 
 #: ../../txts/README.lua:93
 msgid "If you encounter a bug, please report it to our bugtracker:"
-msgstr ""
+msgstr "Ha hibával találkozol, kérjük, jelentsd hibakövetőnkön:"
 
 #: ../../txts/README.lua:52
 msgid ""
@@ -330,6 +345,9 @@ msgid ""
 "If you like to live dangerously, pressing Ctrl while clicking the enhance, "
 "dismantle or destroy building buttons will skip the confirmation."
 msgstr ""
+"Ha szereted a veszélyt, kihagyhatod a megerősítést, ha lenyomva tartod a "
+"Ctrl billentyűt, mialatt a Továbbfejlesztés, Lebontás vagy Megsemmisítés "
+"gombokra kattintasz."
 
 #: ../../txts/README.lua:87
 msgid ""
@@ -338,6 +356,11 @@ msgid ""
 "Wiki\n"
 "and a detailed description of the tribe economies in our online encyclopedia."
 msgstr ""
+"Ha dokumentációra vagy segítségre lenne szükséged a Widelandshez vagy a\n"
+"Widelands pályaszerkesztőhöz, bátran keresd fel honlapunkat. Naprakész on-"
+"line\n"
+"súgót találsz wikinkben, illetve a törzsek gazdaságának részletes leírását\n"
+"on-line enciklopédiánkban."
 
 #: ../../txts/README.lua:80
 msgid ""
@@ -418,6 +441,9 @@ msgid ""
 "messages window, then use 'G' for Go To and the Delete key to archive "
 "messages."
 msgstr ""
+"Kezeld üzeneteidet még hatékonyabban: használd az N billentyűt az üzenetek "
+"ablakának megjelenítéséhez, majd a G-t az ugráshoz, és a Delete-et az üzenet "
+"archiválásához."
 
 #: ../../txts/developers:138
 msgid "Maps and Missions"
@@ -448,6 +474,9 @@ msgid ""
 "New soldiers are recruited in the headquarters or a warehouse if all needed "
 "tools are available. Training sites are for improving their abilities."
 msgstr ""
+"Új katonákat a főhadiszálláson vagy egy raktárban toboroznak, ha minden "
+"szükséges eszköz megvan. A kiképzőhelyek a képességeik fejlesztésére "
+"szolgálnak."
 
 #: ../../txts/developers:307
 msgid "Non Unix Distributions"
@@ -463,18 +492,25 @@ msgid ""
 "standalone binary package, or in the installation directory (like "
 "/usr/share/games/widelands)."
 msgstr ""
+"Linuxon a COPYING nevű fájlt megtalálod a forrás- vagy az önálló bináris "
+"csomag gyökerében, vagy pedig a telepítési könyvtárban (ami ilyesmi: "
+"/usr/share/games/widelands)."
 
 #: ../../txts/license:20
 msgid ""
 "On MacOS, you can find the file called COPYING in the archive you downloaded "
 "from the website."
 msgstr ""
+"MacOS-en a COPYING nevű fájlt a honlapról letöltött archívumban találod."
 
 #: ../../txts/license:19
 msgid ""
 "On Windows, you can find the file called COPYING.txt in the installation "
 "folder and the Widelands Start menu entry provides a link to this file."
 msgstr ""
+"Windowson a COPYING.txt nevű fájlt a telepítési könyvtárban találod, illetve "
+"a Widelands Start menüben lévő bejegyzése is tartalmaz egy parancsikont a "
+"fájlra."
 
 #: ../../txts/README.lua:85
 msgid "Online Help"
@@ -524,7 +560,7 @@ msgstr ""
 
 #: ../../txts/README.lua:97
 msgid "Please provide enough background information. Tell us:"
-msgstr "Kérlek adj meg elegendő háttérinformációt:"
+msgstr "Kérjük, adj meg elegendő háttérinformációt:"
 
 #: ../../txts/developers:251
 msgid "Polish"
@@ -534,16 +570,21 @@ msgstr "Lengyel"
 msgid ""
 "Press Ctrl+(0-9) to store important locations, then press 0-9 to recall them."
 msgstr ""
+"Jegyezd meg a fontos helyeket a Ctrl+(0-9) billentyűkkel, majd ugorj rájuk a "
+"0-9 gombokkal."
 
 #: ../../txts/tips/general_game.tip:62
 msgid "Press I to quickly toggle the display of your stock inventory."
 msgstr ""
+"Nyomd meg az I billentyűt raktárkészleteid azonnali megjelenítéséhez."
 
 #: ../../txts/tips/general_game.tip:46
 msgid ""
 "Pressing and holding ALT GR key lets you drag the window below the mouse "
 "pointer."
 msgstr ""
+"Az ALT GR nyomva tartása mellett mozgathatod az egérrel a kurzor alatti "
+"ablakot."
 
 #: ../../txts/README.lua:7
 msgid "README"
@@ -562,10 +603,12 @@ msgid ""
 "Removing a road holding Ctrl let you remove all flags up to the first "
 "junction."
 msgstr ""
+"Ha nyomva tartod a Ctrl-t, miközben utat távolítasz el, akkor eltűnik minden "
+"zászló az első elágazásig."
 
 #: ../../txts/README.lua:118
 msgid "Replays"
-msgstr ""
+msgstr "Felvételek"
 
 #: ../../txts/README.lua:133
 msgid ""
@@ -575,6 +618,11 @@ msgid ""
 "~/.widelands/replays directory on Linux and Mac OS X. On Windows,\n"
 "they are in the 'replays' subdirectory of your Widelands installation."
 msgstr ""
+"A felvételek sokat segíthetnek a játék logikáját illető hibák "
+"felderítésében,\n"
+"így hasznos lehet őket csatolni hibajelentésekhez. A felvételek fájljai a\n"
+"~/.widelands/replays könyvtárban vannak Linuxon és Mac OS X-en.\n"
+"Windowson a Widelands telepítés „replays” alkönyvtárában találhatók."
 
 #: ../../txts/README.lua:91
 msgid "Reporting Bugs"
@@ -675,6 +723,8 @@ msgid ""
 "The number keys (1 - 0) allow you to directly set the size of the selected "
 "area around your mouse cursor."
 msgstr ""
+"A számbillentyűk (0–9) lehetővé teszik, hogy közvetlenül megadd az "
+"egérkurzor körül kiválasztott terület nagyságát."
 
 #: ../../txts/editor_readme:10
 msgid ""
@@ -695,12 +745,18 @@ msgid ""
 "quesions or general support) or https://launchpad.net/widelands (Bugtracker, "
 "Translations)."
 msgstr ""
+"Ez a játék olyan, amilyen; semmilyen garancia nem jár hozzá. További "
+"információkért és segítségért keress minket a http://wl.widelands.org "
+"(honlap, wiki, fórum a kérdéseknek, illetve általános segítség) vagy a "
+"https://launchpad.net/widelands (hibakövető, fordítások) címen."
 
 #: ../../txts/license:9
 msgid ""
 "This game is Free and Open Source (FOSS), licensed under the GNU General "
 "Public License (GPL) V2.0."
 msgstr ""
+"Ez a játék szabad és nyílt forrású, rá a GNU General Public License (GPL) "
+"V2.0 vonatkozik."
 
 #: ../../txts/editor_readme:14
 msgid ""
@@ -760,6 +816,8 @@ msgid ""
 "Use the 'configure economy' menu to adjust the target quantity of wares. It "
 "can be accessed via the flag menu."
 msgstr ""
+"Használd a „Gazdaság beállítása” menüt, hogy meghatározd az áruk kívánt "
+"mennyiségét. Ez a zászló menüből érhető el."
 
 #: ../../txts/README.lua:126
 msgid ""
@@ -774,10 +832,19 @@ msgid ""
 "a\n"
 "different version of the game."
 msgstr ""
+"A főmenü „Felvétel megtekintése” lehetőségével egy korábbi játék pontos\n"
+"menete nézhető vissza. Fontos azonban tudni, hogy a játék adatfájljaiban "
+"vagy\n"
+"a Widelands futtatható állományában bekövetkező – akár kisebb – változások "
+"könnyen\n"
+"azt okozhatják, hogy a felvétel már nem lesz kompatibilis, nem lesz\n"
+"„szinkronban”. Ez hasonló ahhoz, amiként a hálózati játékok ún. "
+"deszinkronizációs\n"
+"problémával küzdenek, amikor az egyik játékos más verziójú játékot használ."
 
 #: ../../txts/license:16
 msgid "We are also shipping the GPL as text document with Widelands itself."
-msgstr ""
+msgstr "A GPL-t szöveges dokumentumként a Widelandsszel is mellékeljük."
 
 #: ../../txts/developers:3
 msgid "Widelands Development Team"
@@ -839,6 +906,13 @@ msgid ""
 "tell\n"
 "you the time you started the game."
 msgstr ""
+"A Widelands rögzíti minden játékodat, játékonként két fájlban. Ezek egyike\n"
+".wrpl.wgf kiterjesztésű, és egy kezdeti játékmentést tartalmaz. A másik "
+"fájl\n"
+".wrpl kiterjesztésű, és a játékosok által kiadott parancsokat tartalmazza, "
+"mint\n"
+"például egy út építése vagy egy ellenség megtámadása. A fájlnév maradék\n"
+"részében a játék elkezdésének időpontja olvasható."
 
 #: ../../txts/tips/editor.tip:2
 msgid ""
@@ -853,12 +927,18 @@ msgid ""
 "You can find more information on FOSS and the GPL by visiting the following "
 "webpage: "
 msgstr ""
+"A szabad és nyílt forrású szoftverekről, valamint a GPL-ről az alábbi "
+"honlapon többet olvashatsz: "
 
 #: ../../txts/license:14
 msgid ""
 "You can find the full text of the license there as well as further "
 "information about its philosophy and the legal implications."
 msgstr ""
+"Itt megtalálod a licenc teljes szövegét, illetve további tudnivalókat ennek "
+"filozófiájáról és jogi következményeiről.\r\n"
+"(A fordító megjegyzése: A GPL nemhivatalos magyar fordítása elérhető a "
+"http://gnu.hu/gpl.html webcímen.)"
 
 #: ../../txts/tips/editor.tip:6
 msgid ""

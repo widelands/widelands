@@ -7,13 +7,13 @@ msgstr ""
 "Project-Id-Version: Widelands svn4888\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2013-09-15 17:41+0000\n"
-"PO-Revision-Date: 2014-01-02 21:24+0000\n"
+"PO-Revision-Date: 2014-01-05 17:27+0000\n"
 "Last-Translator: Jiří Locker <jiri.locker@gmail.com>\n"
 "Language-Team: Czech <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-01-03 05:10+0000\n"
+"X-Launchpad-Export-Date: 2014-01-06 04:35+0000\n"
 "X-Generator: Launchpad (build 16877)\n"
 "X-Poedit-Country: CZECH REPUBLIC\n"
 "X-Poedit-Language: Czech\n"
@@ -312,7 +312,7 @@ msgid ""
 "and used in the trainingscamp - together with food -  to train soldiers from "
 "healthpoints level 0 to healphpoints level 1."
 msgstr ""
-"Helma je poskytuje válečníkům základní ochranu. Vyrábí se ve zbrojírně "
+"Helma poskytuje válečníkům základní ochranu. Vyrábí se ve zbrojírně a "
 "používá se ve výcvikových táborech - spolu s jídlem - k posílení zdraví "
 "vojáků (z úrovně 0 na úroveň 1)."
 
@@ -336,8 +336,8 @@ msgid ""
 "big inn out of fish or meat or pitta bread."
 msgstr ""
 "Něco na zub, co udrží pracující horníky při síle. Porce jídla potřebují také "
-"zvědi na svých výpravách. Porce umí připravit v kuchyni,  hospodě nebo "
-"hostinci z ryby nebo masa nebo chlebových placek."
+"zvědi na svých výpravách. Porce umí připravit v kuchyni, hospodě nebo "
+"hostinci z ryby, masa nebo chlebových placek."
 
 #: ../../tribes/barbarians/warhelmet/conf:1
 msgid ""
@@ -346,7 +346,7 @@ msgid ""
 "soldiers from healthpoints level 1 to level 2."
 msgstr ""
 "Válečná helma je vylepšené brnění pro barbarské válečníky. Vyrábí se ve "
-"zbrojířství a používá se ve výcvikovém táboře - spolu s jídlem - k posílení "
+"zbrojírně a používá se ve výcvikovém táboře - spolu s jídlem - k posílení "
 "zdraví vojáků (z úrovně 1 na úroveň 2)."
 
 #: ../../tribes/barbarians/coalmine/help.lua:12
@@ -1019,7 +1019,7 @@ msgstr "Trénink úhybu:"
 #: ../../tribes/barbarians/goldmine/help.lua:13
 msgid ""
 "Excerpt from \"Our Treasures Underground\",<br> a traditional Barbarian song."
-msgstr ""
+msgstr "Výtah z \"Našich pokladů pod zemí\",<br> tradiční barbarská píseň."
 
 #: ../../tribes/barbarians/axefactory/help.lua:58
 #: ../../tribes/barbarians/bakery/help.lua:52
@@ -1115,9 +1115,9 @@ msgid ""
 "Produced in the metal works (but ceases to be produced by the building if it "
 "is enhanced to an axefactory and war mill)."
 msgstr ""
-"Žárové kleště jsou nástroj slévače, kteří pracují ve slévárnách. Vyrábí se "
-"železárnách (budovy vylepšené na továrnu na sekery nebo válečnou akademii už "
-"kleště nevyrábí)."
+"Žárové kleště jsou nástrojem slévačů, kteří pracují ve slévárnách. Vyrábí se "
+"v železárnách (budovy vylepšené na továrnu na sekery nebo válečnou akademii "
+"už kleště nevyrábí)."
 
 #: ../../tribes/barbarians/battlearena/help.lua:29
 #: ../../tribes/barbarians/conf:83
@@ -1139,7 +1139,7 @@ msgstr "Chata rybáře"
 
 #: ../../tribes/barbarians/fishers_hut/help.lua:17
 msgid "Fishes on the coast near the hut."
-msgstr ""
+msgstr "Lovení ryb na březích poblíž chaty."
 
 #: ../../tribes/barbarians/conf:84
 #: ../../tribes/barbarians/fishers_hut/help.lua:45
@@ -1366,9 +1366,9 @@ msgid ""
 "Be sure to have a metalworks to produce this basic tool (but ceases to be "
 "produced by the building if it is enhanced to an axefactory and war mill)."
 msgstr ""
-"Jak bez kuchyňského náčiní připravit jídlo, svačinu nebo porci?\" Je to "
-"jeden ze základních nástrojů vyráběných v železárnách (budovy vylepšené na "
-"továrnu na sekery nebo válečnou akademii už kuchyňské náčiní nevyrábí)."
+"Jak bez kuchyňského náčiní připravit jídlo, svačinu nebo porci? Je to jeden "
+"ze základních nástrojů vyráběných v železárnách (budovy vylepšené na továrnu "
+"na sekery nebo válečnou akademii už kuchyňské náčiní nevyrábí)."
 
 #: ../../tribes/barbarians/hunters_hut/help.lua:17
 msgid "Hunt animals to produce meat."
@@ -1522,7 +1522,7 @@ msgid ""
 "the helmsmithy."
 msgstr ""
 "Železo se získává zpracováním železné rudy ve slévárně. Používá se na výrobu "
-"zbraní a nástrojů v dílně, továrně na sekery, válečné akademii a zbrojířství."
+"zbraní a nástrojů v dílně, továrně na sekery, válečné akademii a zbrojírně."
 
 #: ../../tribes/barbarians/ironore/conf:1
 msgid ""
@@ -1541,8 +1541,8 @@ msgid ""
 "It can make Bread Paddles, Felling Axes, Fire Tongs, Fishing Rods, Hammers, "
 "Hunting Spears, Kitchen Tools, Picks, Scythes and Shovels."
 msgstr ""
-"Může vyrábět Pekařské lopaty, dřevorubecké sekery, kovářské kleště, rybářské "
-"pruty, kladiva, lovecké oštěpy, kuchyňské nářadí, krumpáče, kosy a rýče."
+"Může vyrábět pekařské lopaty, dřevorubecké sekery, kovářské kleště, rybářské "
+"pruty, kladiva, lovecké oštěpy, kuchyňské náčiní, krumpáče, kosy a rýče."
 
 #: ../../tribes/barbarians/granitemine/help.lua:16
 msgid "It can not be upgraded."
@@ -1554,7 +1554,7 @@ msgstr "Kuchyňské náčiní"
 
 #: ../../tribes/barbarians/lumberjacks_hut/help.lua:13
 msgid "Krumta, carpenter of Chat'Karuth"
-msgstr ""
+msgstr "Krumta, tesař z Chat'Karuthu"
 
 #: ../../tribes/barbarians/coalmine/help.lua:35
 #: ../../tribes/barbarians/conf:190
@@ -1667,7 +1667,7 @@ msgid ""
 "miners. It is also consumed in the training sites (trainingscamp and battle "
 "arena)."
 msgstr ""
-"Maso obsahuje mnoho energie. Získávají jej lovci a používá se v kuchyních , "
+"Maso obsahuje mnoho energie. Získávají jej lovci a používá se v kuchyních, "
 "hospodách a hostincích na přípravu porcí, svačin a jídel pro horníky. Také "
 "se konzumuje ve výcvikových táborech (výcvikový tábor, bitevní aréna)."
 
@@ -2744,6 +2744,9 @@ msgid ""
 "the trainingscamp - together with food- to train warriors with a fundamental "
 "fighting knowledge (from attack level 1 to attack level 2)."
 msgstr ""
+"Širočina se vyrábí v továrně na sekery a ve válečné akademii. Ve výcvikovém "
+"táboře se používá - spolu s jídlem - k výcviku vojáků, kteří již mají "
+"základní znalosti boje (zlepšení útoku z úrovně 1 na úroveň 2)."
 
 #: ../../tribes/barbarians/bronzeaxe/conf:1
 msgid ""
@@ -2751,6 +2754,10 @@ msgid ""
 "can use this. It is produced in the war mill and used in the trainingscamp "
 "(trains -together with food - from attack level 2 to level 3)."
 msgstr ""
+"Bronzová sekera je považována za obtížněji zvládnutelnou zbraň. Dokážou s ní "
+"zacházet jen zruční válečníci. Vyrábí se ve válečné akademii a používá se ve "
+"výcvikovém táboře - spolu s jídlem - k výcviku vojáků (zlepšení útoku z "
+"úrovně 2 na úroveň 3)."
 
 #: ../../tribes/barbarians/felling_axe/conf:1
 msgid ""
@@ -2758,7 +2765,7 @@ msgid ""
 "produced in the metalwork shop (but ceases to be produced by the building if "
 "it is enhanced to an axefactory and war mill)."
 msgstr ""
-"Dřevorubecká sekera je nástroj dřevorubce na porážení stromů. Vyrábí se "
+"Dřevorubecká sekera je nástroj dřevorubce na porážení stromů. Vyrábí se v "
 "železárnách (budovy vylepšené na továrnu na sekery nebo válečnou akademii už "
 "dřevorubecké sekery nevyrábí)."
 
@@ -2819,6 +2826,8 @@ msgid ""
 "(but ceases to be produced by the building if it is enhanced to an "
 "axefactory and war mill)."
 msgstr ""
+"Kosa je nástroj sedláků. Vyrábí se v železárnách (budovy vylepšené na "
+"továrnu na sekery nebo válečnou akademii už kosy nevyrábí)."
 
 #: ../../tribes/barbarians/shovel/conf:1
 msgid ""
@@ -2867,6 +2876,9 @@ msgid ""
 "and used in the trainingscamp - together with food - to train soldiers from "
 "healthpoints level 2 to healthpoints level 3."
 msgstr ""
+"Maska je nejlepší barbarské brnění. Vyrábí se ve zbrojírně a používá se ve "
+"výcvikovém táboře - spolu s jídlem - k posílení zdraví vojáků (z úrovně 2 na "
+"úroveň 3)."
 
 #: ../../tribes/barbarians/granitemine/help.lua:13
 msgid ""
@@ -2882,6 +2894,8 @@ msgid ""
 "metalwork shop (but ceases to be produced by the building if it is enhanced "
 "to an axefactory and war mill)."
 msgstr ""
+"Krumpáč používají kameníci a horníci. Vyrábí se v železárnách (budovy "
+"vylepšené na továrnu na sekery nebo válečnou akademii už krumpáče nevyrábí)."
 
 #: ../../tribes/barbarians/hunting_spear/conf:1
 msgid ""
@@ -2890,6 +2904,10 @@ msgid ""
 "(but ceases to be produced by the building if it is enhanced to an "
 "axefactory and war mill)."
 msgstr ""
+"Tento oštěp je dost lehký na to, aby se jím dalo házet, a přesto dostatečně "
+"účinný, aby zabil jakékoli zvíře jednou ranou. Používají jej pouze lovci. "
+"Vyrábí se v železárnách (budovy vylepšené na továrnu na sekery nebo válečnou "
+"akademii už lovecké oštěpy nevyrábí)."
 
 #: ../../tribes/barbarians/conf:165
 #: ../../tribes/barbarians/conf:172
@@ -3484,7 +3502,7 @@ msgid ""
 "soldiers from attack level 0 to level 1."
 msgstr ""
 "Mladí válečníci jsou pyšní, když zvládnou boj s kalenou sekerou. Je těžší a "
-"ostřejší než obyčejná sekera. vyrábí se v továrně na sekery a válečné "
+"ostřejší než obyčejná sekera. Vyrábí se v továrně na sekery a válečné "
 "akademii. Ve výcvikovém táboře se používá - spolu s jídlem - k výcviků "
 "vojáků (zlepšení útoku z úrovně 0 na úroveň 1)."
 
