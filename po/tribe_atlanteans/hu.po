@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2013-09-15 17:41+0000\n"
-"PO-Revision-Date: 2014-01-02 17:31+0000\n"
-"Last-Translator: Varga Dániel <vargad88@gmail.com>\n"
+"PO-Revision-Date: 2014-01-10 07:02+0000\n"
+"Last-Translator: cn4ij <Unknown>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-01-03 05:10+0000\n"
-"X-Generator: Launchpad (build 16877)\n"
+"X-Launchpad-Export-Date: 2014-01-11 05:12+0000\n"
+"X-Generator: Launchpad (build 16890)\n"
 
 #: ../../tribes/atlanteans/golden_tabard/conf:1
 msgid ""
@@ -197,7 +197,7 @@ msgstr "Vár"
 
 #: ../../tribes/atlanteans/scripting/sc01_castle_village.lua:10
 msgid "Castle village"
-msgstr "Kastély körüli falu"
+msgstr "Vár körüli falu"
 
 #: ../../tribes/atlanteans/conf:182
 msgid "Charcoal Burner's House"
