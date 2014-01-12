@@ -2145,10 +2145,15 @@ Ship
 
 const char L_Ship::className[] = "Ship";
 const MethodType<L_Ship> L_Ship::Methods[] = {
+	METHOD(L_Ship, get_wares),
+	METHOD(L_Ship, get_workers),
 	{0, 0},
 };
 const PropertyType<L_Ship> L_Ship::Properties[] = {
 	PROP_RO(L_Ship, debug_economy),
+	PROP_RO(L_Ship, debug_state),
+	PROP_RO(L_Ship, last_portdock),
+	PROP_RO(L_Ship, destination),
 	{0, 0, 0},
 };
 
@@ -2164,11 +2169,117 @@ int L_Ship::get_debug_economy(lua_State* L) {
 	return 1;
 }
 
+// UNTESTED, for debug only
+int L_Ship::get_debug_state(lua_State* L) {
+	std::string state;
+	switch (get(L, get_egbase(L))->get_ship_state()) {
+	case Ship::TRANSPORT:
+		state = "TRANSPORT";
+		break;
+	case Ship::EXP_WAITING:
+		state = "EXP_WAITING";
+		break;
+	case Ship::EXP_SCOUTING:
+		state = "EXP_SCOUTING";
+		break;
+	case Ship::EXP_FOUNDPORTSPACE:
+		state = "EXP_FOUNDPORTSPACE";
+		break;
+	case Ship::EXP_COLONIZING:
+		state = "EXP_COLONIZING";
+		break;
+	case Ship::SINK_REQUEST:
+		state = "SINK_REQUEST";
+		break;
+	case Ship::SINK_ANIMATION:
+		state = "SINK_ANIMATION";
+		break;
+	default:
+		return report_error(L, "Unknown state in L_Ship::get_debug_state");
+	}
+	lua_pushstring(L, state);
+	return 1;
+}
+
+/* RST
+	.. attribute:: destination
+
+		(RO) Either :const:`nil` if there is no current destination, otherwise the :class:`PortDock`.
+*/
+// UNTESTED
+int L_Ship::get_destination(lua_State* L) {
+	Editor_Game_Base & egbase = get_egbase(L);
+	return upcasted_immovable_to_lua(L, get(L, egbase)->get_destination(egbase));
+}
+
+/* RST
+	.. attribute:: last_portdock
+
+		(RO) Either :const:`nil` if no port was ever visited or the last portdock
+		was destroyed, otherwise the otherwise the :class:`PortDock` of the last
+		visited port.
+*/
+// UNTESTED
+int L_Ship::get_last_portdock(lua_State* L) {
+	Editor_Game_Base & egbase = get_egbase(L);
+	return upcasted_immovable_to_lua(L, get(L, egbase)->get_lastdock(egbase));
+}
+
 /*
  ==========================================================
  LUA METHODS
  ==========================================================
  */
+
+/* RST
+	.. method:: get_wares()
+
+		Returns the number of wares on this ship. This does not implement
+		everything that :class:`HasWares` offers.
+
+		:returns: the number of wares
+*/
+// UNTESTED
+int L_Ship::get_wares(lua_State* L) {
+	Editor_Game_Base& egbase = get_egbase(L);
+	int nwares = 0;
+	WareInstance* ware;
+	Ship* ship = get(L, egbase);
+	for (uint32_t i = 0; i < ship->get_nritems(); ++i) {
+		const ShippingItem& item = ship->get_item(i);
+		item.get(egbase, &ware, nullptr);
+		if (ware != nullptr) {
+			++nwares;
+		}
+	}
+	lua_pushint32(L, nwares);
+	return 1;
+}
+
+/* RST
+	.. method:: get_workers()
+
+		Returns the number of workers on this ship. This does not implement
+		everything that :class:`HasWorkers` offers.
+
+		:returns: the number of workers
+*/
+// UNTESTED
+int L_Ship::get_workers(lua_State* L) {
+	Editor_Game_Base& egbase = get_egbase(L);
+	int nworkers = 0;
+	Worker* worker;
+	Ship* ship = get(L, egbase);
+	for (uint32_t i = 0; i < ship->get_nritems(); ++i) {
+		const ShippingItem& item = ship->get_item(i);
+		item.get(egbase, nullptr, &worker);
+		if (worker != nullptr) {
+			++nworkers;
+		}
+	}
+	lua_pushint32(L, nworkers);
+	return 1;
+}
 
 /*
  ==========================================================

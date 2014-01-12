@@ -302,25 +302,20 @@ void WareInstance::act(Game & game, uint32_t)
  */
 void WareInstance::update(Game & game)
 {
-	molog("#sirver m_transfer: %p\n", m_transfer);
 	Map_Object * const loc = m_location.get(game);
-	if (loc)
-		molog("#sirver loc->name(): %s\n", loc->descr().name().c_str());
 
 	if (!m_descr) // Upsy, we're not even initialized. Happens on load
 		return;
 
-	molog("#sirver m_transfer: %p\n", m_transfer);
 	// Reset our state if we're not on location or outside an economy
 	if (!get_economy()) {
-	molog("#sirver m_transfer: %p\n", m_transfer);
+		molog("#sirver Outside of an economy. Canceling moving.\n");
 		cancel_moving();
 		return;
 	}
 
-	molog("#sirver m_transfer: %p\n", m_transfer);
 	if (!loc) {
-	molog("#sirver m_transfer: %p\n", m_transfer);
+		molog("#sirver not on an economy.\n");
 		// Before dying, output as much information as we can.
 		log_general_info(game);
 
@@ -329,7 +324,6 @@ void WareInstance::update(Game & game)
 	}
 
 	// Update whether we have a Supply or not
-	molog("#sirver m_transfer: %p\n", m_transfer);
 	if (!m_transfer || !m_transfer->get_request()) {
 		if (!m_supply)
 			m_supply = new IdleWareSupply(*this);
@@ -340,10 +334,30 @@ void WareInstance::update(Game & game)
 
 	// Deal with transfers
 	if (m_transfer) {
-	molog("#sirver m_transfer: %p\n", m_transfer);
+		molog("#sirver now dealing with transfer.");
+
 		upcast(PlayerImmovable, location, loc);
-		if (not location)
-			return; // wait
+
+		if (!location) {
+			// We are not in an immovable. So we must be on a ship. Check if our
+			// destination is still valid.
+			auto* destination = m_transfer->get_destination(game) ;
+			if (!destination || destination->get_economy() != get_economy()) {
+				// NOCOM(#sirver): check if destiny is still in the same economy.
+				molog("#sirver Our destination has vanished or is now in another economy!");
+				// NOCOM(#sirver): try using m_transfer_nextstep. Also see where it is used.
+				Transfer * const t = m_transfer;
+
+				m_transfer = 0;
+				m_transfer_nextstep = 0;
+
+				t->has_failed();
+
+				cancel_moving();
+				update(game);
+			}
+			return;  // wait
+		}
 
 		bool success;
 		PlayerImmovable * const nextstep =
@@ -351,6 +365,7 @@ void WareInstance::update(Game & game)
 		m_transfer_nextstep = nextstep;
 
 		if (!nextstep) {
+			molog("#sirver Ups, no nextstep.");
 			if (upcast(Flag, flag, location))
 				flag->call_carrier(game, *this, 0);
 
@@ -360,9 +375,11 @@ void WareInstance::update(Game & game)
 			m_transfer_nextstep = 0;
 
 			if (success) {
+				molog("#sirver But transfer has succeeded. Yay!");
 				t->has_finished();
 				return;
 			} else {
+				molog("#sirver And transfer has failed. :(");
 				t->has_failed();
 
 				cancel_moving();
@@ -480,6 +497,7 @@ void WareInstance::enter_building(Game & game, Building & building)
  */
 void WareInstance::set_transfer(Game & game, Transfer & t)
 {
+	log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 	m_transfer_nextstep = 0;
 
 	// Reset current transfer
@@ -507,6 +525,7 @@ void WareInstance::set_transfer(Game & game, Transfer & t)
 */
 void WareInstance::cancel_transfer(Game & game)
 {
+	log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 	m_transfer = 0;
 	m_transfer_nextstep = 0;
 
@@ -518,6 +537,7 @@ void WareInstance::cancel_transfer(Game & game)
 */
 bool WareInstance::is_moving() const
 {
+	log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 	return m_transfer;
 }
 
@@ -527,6 +547,7 @@ bool WareInstance::is_moving() const
 */
 void WareInstance::cancel_moving()
 {
+	log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 	molog("cancel_moving\n");
 
 	if (m_transfer) {
@@ -542,6 +563,7 @@ void WareInstance::cancel_moving()
 */
 PlayerImmovable * WareInstance::get_next_move_step(Game & game)
 {
+	log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 	return
 		m_transfer ?
 		dynamic_cast<PlayerImmovable *>(m_transfer_nextstep.get(game)) : 0;

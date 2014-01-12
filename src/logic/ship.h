@@ -67,8 +67,18 @@ struct Ship : Bob {
 	Ship(const Ship_Descr & descr);
 	virtual ~Ship();
 
-	Fleet * get_fleet() const {return m_fleet;}
-	PortDock * get_destination(Editor_Game_Base & egbase);
+	// Returns the fleet the ship is a part of.
+	Fleet * get_fleet() const;
+
+	// Returns the current destination or nullptr if there is no current
+	// destination.
+	PortDock* get_destination(Editor_Game_Base& egbase) const;
+
+	// Returns the last visited portdock of this ship or nullptr if there is none or
+	// the last visited was removed.
+	PortDock* get_lastdock(Editor_Game_Base& egbase) const;
+
+
 
 	virtual Type get_bob_type() const;
 

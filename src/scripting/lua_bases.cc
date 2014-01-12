@@ -159,12 +159,13 @@ const char L_PlayerBase::className[] = "PlayerBase";
 const MethodType<L_PlayerBase> L_PlayerBase::Methods[] = {
 	METHOD(L_PlayerBase, __eq),
 	METHOD(L_PlayerBase, __tostring),
+	METHOD(L_PlayerBase, conquer),
+	METHOD(L_PlayerBase, get_wares),
+	METHOD(L_PlayerBase, get_workers),
+	METHOD(L_PlayerBase, place_bob),
+	METHOD(L_PlayerBase, place_building),
 	METHOD(L_PlayerBase, place_flag),
 	METHOD(L_PlayerBase, place_road),
-	METHOD(L_PlayerBase, place_building),
-	METHOD(L_PlayerBase, place_bob),
-	METHOD(L_PlayerBase, conquer),
-	METHOD(L_PlayerBase, get_workers),
 	{0, 0},
 };
 const PropertyType<L_PlayerBase> L_PlayerBase::Properties[] = {
@@ -487,7 +488,7 @@ int L_PlayerBase::conquer(lua_State * L) {
 	.. method:: get_workers(name)
 
 		Returns the number of workers of this type in the players stock. This does not implement
-		everything that :class:`HasWares` offers.
+		everything that :class:`HasWorkers` offers.
 
 		:arg name: name of the worker to get
 		:type name: :class:`string`.
@@ -508,6 +509,30 @@ int L_PlayerBase::get_workers(lua_State * L) {
 	return 1;
 }
 
+/* RST
+	.. method:: get_wares(name)
+
+		Returns the number of wares of this type in the players stock. This does not implement
+		everything that :class:`HasWorkers` offers.
+
+		:arg name: name of the worker to get
+		:type name: :class:`string`.
+		:returns: the number of wares
+*/
+// UNTESTED
+int L_PlayerBase::get_wares(lua_State * L) {
+	Player& player = get(L, get_egbase(L));
+	const std::string warename = luaL_checkstring(L, -1);
+
+	const Ware_Index ware = player.tribe().ware_index(warename);
+
+	uint32_t nwares = 0;
+	for (uint32_t i = 0; i < player.get_nr_economies(); ++i) {
+		 nwares += player.get_economy_by_number(i)->stock_ware(ware);
+	}
+	lua_pushuint32(L, nwares);
+	return 1;
+}
 
 /*
  ==========================================================

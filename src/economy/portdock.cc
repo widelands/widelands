@@ -313,6 +313,7 @@ void PortDock::ship_arrived(Game & game, Ship & ship)
 		it->set_location(game, m_warehouse);
 		it->end_shipping(game);
 	}
+	log("#sirver items_brought_by_ship.size(): %lu\n", items_brought_by_ship.size());
 
 	if (m_expedition_ready) {
 		assert(m_expedition_bootstrap.get() != nullptr);
@@ -407,7 +408,7 @@ uint32_t PortDock::count_waiting(WareWorker waretype, Ware_Index wareindex)
 	container_iterate(std::vector<ShippingItem>, m_waiting, it) {
 		WareInstance * ware;
 		Worker * worker;
-		it.current->get(owner().egbase(), ware, worker);
+		it.current->get(owner().egbase(), &ware, &worker);
 
 		if (waretype == wwWORKER) {
 			if (worker && worker->worker_index() == wareindex)

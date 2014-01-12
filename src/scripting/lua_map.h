@@ -660,10 +660,15 @@ public:
 	 * Properties
 	 */
 	int get_debug_economy(lua_State * L);
+	int get_debug_state(lua_State* L);
+	int get_last_portdock(lua_State* L);
+	int get_destination(lua_State* L);
 
 	/*
 	 * Lua methods
 	 */
+	int get_wares(lua_State* L);
+	int get_workers(lua_State* L);
 
 	/*
 	 * C methods

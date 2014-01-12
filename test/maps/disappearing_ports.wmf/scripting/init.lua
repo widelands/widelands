@@ -16,7 +16,10 @@ function create_first_port()
       workers = {},
       soldiers = {}
    })
-   port1 = map:get_field(16, 16).immovable
+end
+
+function port1()
+   return map:get_field(16, 16).immovable
 end
 
 function create_second_port()
@@ -26,16 +29,23 @@ function create_second_port()
       workers = {},
       soldiers = {}
    })
-   port2 = map:get_field(16, 2).immovable
+end
+
+function port2()
+   local o = map:get_field(16, 2).immovable
+   if o and o.name == "port" then
+      return o
+   end
+   return nil
 end
 
 function start_building_farm()
-   port1:set_wares{
+   port1():set_wares{
       blackwood = 1,
       -- trunk = 4,
       -- raw_stone = 3
    }
-   port1:set_workers{
+   port1():set_workers{
       -- NOCOM(#sirver): this is broken too.
       -- builder = 1,
    }
