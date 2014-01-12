@@ -1603,7 +1603,6 @@ const MethodType<L_PortDock> L_PortDock::Methods[] = {
 	{0, 0},
 };
 const PropertyType<L_PortDock> L_PortDock::Properties[] = {
-	PROP_RO(L_PortDock, debug_economy),
 	{0, 0, 0},
 };
 
@@ -1613,11 +1612,6 @@ const PropertyType<L_PortDock> L_PortDock::Properties[] = {
  PROPERTIES
  ==========================================================
  */
-// UNTESTED, for debug only
-int L_PortDock::get_debug_economy(lua_State* L) {
-	lua_pushlightuserdata(L, get(L, get_egbase(L))->get_economy());
-	return 1;
-}
 
 /*
  ==========================================================

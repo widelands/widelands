@@ -95,11 +95,8 @@ void Cmd_Act::execute(Game & game)
 {
 	game.syncstream().Unsigned32(obj_serial);
 
-	if (Map_Object * const obj = game.objects().get_object(obj_serial)) {
+	if (Map_Object * const obj = game.objects().get_object(obj_serial))
 		obj->act(game, arg);
-	} else {
-		log("#sirver Not acting \n");
-	}
 	// the object must queue the next CMD_ACT itself if necessary
 }
 

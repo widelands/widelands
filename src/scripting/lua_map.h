@@ -208,7 +208,6 @@ public:
 	/*
 	 * Properties
 	 */
-	int get_debug_economy(lua_State* L);
 
 	/*
 	 * Lua methods
