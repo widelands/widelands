@@ -31,7 +31,7 @@ run(function()
    sleep(1000)
 
    -- There are no more ports, therefore also no fleet. The wares on the ship
-   -- are not accesible and should therefore not show up in the stock anymore.
+   -- are not accessible and should therefore not show up in the stock anymore.
    -- One could also argue that the ship is an economy of its own now and the
    -- wares should still appear in stock. Such a corner case that it seems not
    -- to matter.
