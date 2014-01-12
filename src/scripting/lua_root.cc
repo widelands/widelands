@@ -217,6 +217,10 @@ int L_Game::save(lua_State * L) {
 	const std::string filename = luaL_checkstring(L, -1);
 	get_game(L).save_handler().request_save(filename);
 
+	// DO NOT REMOVE THIS OUTPUT. It is used by the regression test suite to
+	// figure out which files to load after a save was requested in a test.
+	log("Script requests save to: %s\n", filename.c_str());
+
 	return 0;
 }
 
