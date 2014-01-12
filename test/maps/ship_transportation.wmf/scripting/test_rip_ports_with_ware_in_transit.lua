@@ -5,8 +5,6 @@ run(function()
    create_first_port()
    create_second_port()
 
-   game.desired_speed = 3 * 1000
-   sleep(1000)
    start_building_farm()
    port1():set_wares{
       blackwood = 1,
