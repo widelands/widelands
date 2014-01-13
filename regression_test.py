@@ -48,8 +48,8 @@ class WidelandsTestCase(unittest.TestCase):
         if self.currentResult.wasSuccessful() and not self.keep_output_around:
             shutil.rmtree(self.run_dir)
 
-    def run_widelands(self, args, which_time):
-        """Run Widelands with the given 'args'. 'which_time' is an integer
+    def run_widelands(self, wlargs, which_time):
+        """Run Widelands with the given 'wlargs'. 'which_time' is an integer
         defining the number of times Widelands has been run this test case
         (i.e. because we might load a saved game from an earlier run. This will
         impact the filenames for stdout.txt.
@@ -63,7 +63,7 @@ class WidelandsTestCase(unittest.TestCase):
             args = [self.path_to_widelands_binary, '--verbose=true',
                     '--datadir=.', '--homedir=%s' % self.run_dir,
                     '--disable_fx=true', '--disable_music=true' ]
-            args += [ "--%s=%s" % (key, value) for key, value in self._wlargs.iteritems() ]
+            args += [ "--%s=%s" % (key, value) for key, value in wlargs.iteritems() ]
 
             widelands = subprocess.Popen(
                     args, shell=False, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
@@ -140,13 +140,11 @@ def parse_args():
         potential_binaries = (
             glob("widelands") +
             glob("src/widelands") +
-            glob("../*/src/widelands") +
             glob("../*/src/widelands")
         )
         if not potential_binaries:
             p.error("No widelands binary found. Please specify with -b.")
         args.binary = potential_binaries[0]
-
     return args
 
 

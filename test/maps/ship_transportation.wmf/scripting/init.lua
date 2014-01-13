@@ -7,14 +7,15 @@ game = wl.Game()
 map = game.map
 p1 = game.players[1]
 
--- NOCOM(#sirver): what if the first port is deleted?
+-- NOCOM(#sirver): also saving and loading
+-- NOCOM(#sirver): before the ship grabs the ware
 -- NOCOM(#sirver): what about expeditions?
--- NOCOM(#sirver): what if the ship is deleted?
--- NOCOM(#sirver): what if destination is deleted while en route?
 -- NOCOM(#sirver): what if the farm disappears? what should happen to the wares then.
--- NOCOM(#sirver): workers in portdock
+-- NOCOM(#sirver): what if the ship is deleted?
 -- NOCOM(#sirver): ware in portdock?
+-- NOCOM(#sirver): workers in portdock
 
+-- NOCOM(#sirver): most functions in this file are not actually used.
 
 -- NOCOM(#sirver):  Wenn ein schiff, oder ein
 -- port verschwindet müssen alle anderen ports geupdated werden und die
@@ -53,21 +54,8 @@ function port2()
 end
 
 function start_building_farm()
-   port1():set_wares{
-      blackwood = 1,
-      -- trunk = 4,
-      -- raw_stone = 3
-   }
-   port1():set_workers{
-      -- NOCOM(#sirver): this is broken too.
-      -- builder = 1,
-   }
    p1:place_building("farm", map:get_field(18, 4), true, true)
    connected_road(p1, map:get_field(18,5).immovable, "l,l|tl,tr|", true)
-end
-
-function is_farm_done()
-   return map:get_field(18, 4).immovable.name == "farm"
 end
 
 ship = p1:place_bob("ship", map:get_field(10, 10))
