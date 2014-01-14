@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2013-09-15 17:41+0000\n"
-"PO-Revision-Date: 2014-01-11 08:30+0000\n"
+"PO-Revision-Date: 2014-01-13 15:00+0000\n"
 "Last-Translator: cn4ij <Unknown>\n"
 "Language-Team: Hungarian <hu@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-01-12 05:18+0000\n"
+"X-Launchpad-Export-Date: 2014-01-14 05:14+0000\n"
 "X-Generator: Launchpad (build 16890)\n"
 
 #: ../../scripting/win_condition_texts.lua:31
@@ -23,7 +23,7 @@ msgstr "%i fát szerzett."
 
 #: ../../scripting/win_condition_texts.lua:55
 msgid "%s %s %i%% of the land (%i of %i)."
-msgstr ""
+msgstr "%s birtoka %s a terület %i%-a (%i/%i egység)"
 
 #: ../../scripting/win_condition_texts.lua:30
 msgid "%s had "
@@ -101,7 +101,7 @@ msgstr "Különben a játék %i perc múlva véget ér."
 #: ../../scripting/win_condition_texts.lua:23
 #: ../../scripting/win_condition_texts.lua:29
 msgid "Player overview:"
-msgstr "Játékos áttekintése:"
+msgstr "Játékosok áttekintése:"
 
 #: ../../scripting/win_condition_texts.lua:41
 msgid "Points"
@@ -179,12 +179,12 @@ msgid ""
 "You get points for precious wares in your warehouses, the player with the "
 "highest number of wares at the end of 4 hours wins the game."
 msgstr ""
-"Pontokat kapsz az értékes árukért a raktáradban, az a játékos, akinek 4 óra "
-"elteltével a legtöbb pontja van, megnyeri a játékot."
+"Pontokat kapsz raktáraid értékes áruiért. A győztes az a játékos, akinek 4 "
+"óra elteltével a legtöbb pontja van."
 
 #: ../../scripting/win_condition_texts.lua:3
 msgid "You have won this game!"
-msgstr "Megnyerted ezt a játékot!"
+msgstr "Megnyerted a játékot!"
 
 #: ../../scripting/win_condition_texts.lua:17
 msgid "You lost"
@@ -200,7 +200,7 @@ msgstr ""
 
 #: ../../scripting/win_condition_texts.lua:48
 msgid "You own more than half of the maps area."
-msgstr "Te uralod a játékterület több, mint felét."
+msgstr "Te uralod a játékterület több mint felét."
 
 #: ../../scripting/win_condition_texts.lua:47
 msgid "You still got %i minutes to prevent a victory."
@@ -212,7 +212,7 @@ msgstr "Nyertél"
 
 #: ../../scripting/win_condition_texts.lua:18
 msgid "You've lost this game!"
-msgstr "Elvesztetted ezt a játékot!"
+msgstr "Elvesztetted a játékot!"
 
 #: ../../scripting/win_condition_texts.lua:33
 msgid "with %i trees."
