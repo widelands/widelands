@@ -1065,7 +1065,7 @@ int L_MapObject::get_name(lua_State * L) {
 		(RO) The descriptive (and translated) name of this Map Object. Use this
 		in messages to the player instead of name.
 */
-	int L_MapObject::get_descname(lua_State * L) {
+int L_MapObject::get_descname(lua_State * L) {
 	lua_pushstring(L, get(L, get_egbase(L))->descr().descname().c_str());
 	return 1;
 }

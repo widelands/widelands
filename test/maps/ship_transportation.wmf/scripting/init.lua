@@ -11,7 +11,6 @@ p1 = game.players[1]
 -- NOCOM(#sirver): before the ship grabs the ware
 -- NOCOM(#sirver): what about expeditions?
 -- NOCOM(#sirver): what if the farm disappears? what should happen to the wares then.
--- NOCOM(#sirver): what if the ship is deleted?
 -- NOCOM(#sirver): ware in portdock?
 -- NOCOM(#sirver): workers in portdock
 

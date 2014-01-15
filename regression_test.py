@@ -88,8 +88,8 @@ class WidelandsTestCase(unittest.TestCase):
         savegame_done = { fn: False for fn in find_saves(stdout) }
         which_time = 1
         while not all(savegame_done.values()):
-            for savegame, done in savegame_done.items():
-                if done: continue
+            for savegame in sorted(savegame_done):
+                if not savegame_done[savegame]: break
             out("  Loading savegame: %s ... " % savegame)
             stdout_filename = self.run_widelands({ "loadgame": os.path.join(
                 self.run_dir, "save", "%s.wgf" % savegame) }, which_time)
