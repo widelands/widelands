@@ -68,6 +68,10 @@ void PortDock::add_position(Coords where)
 	m_dockpoints.push_back(where);
 }
 
+Warehouse* Portdock::get_warehouse() const {
+	return m_warehouse;
+}
+
 /**
  * Update which @ref Fleet we belong to.
  *

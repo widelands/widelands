@@ -63,7 +63,7 @@ struct PortDock : PlayerImmovable {
 	virtual ~PortDock();
 
 	void add_position(Widelands::Coords where);
-	Warehouse * get_warehouse() const {return m_warehouse;}
+	Warehouse * get_warehouse() const;
 
 	Fleet * get_fleet() const {return m_fleet;}
 	PortDock * get_dock(Flag & flag) const;

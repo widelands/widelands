@@ -305,7 +305,6 @@ void WareInstance::update(Game & game)
 	if (!m_descr) // Upsy, we're not even initialized. Happens on load
 		return;
 
-	// NOCOM(#sirver): use object pointer in Warehouse and Portdock.
 	Map_Object * const loc = m_location.get(game);
 
 	// Reset our state if we're not on location or outside an economy
@@ -315,10 +314,9 @@ void WareInstance::update(Game & game)
 	}
 
 	if (!loc) {
-		// NOCOM(#sirver): comment is probably wrong.
-		// If we were owned by somebody, it should destroy us if it goes away. But when we were shipped
-		// and end_shipping() was called while we were in the PortDock and then the Warehouse is destroyed,
-		// it can happen that we are not on a location anymore and noone
+		// Before dying, output as much information as we can.
+		log_general_info(game);
+
 		// If our location gets lost, our owner is supposed to destroy us
 		throw wexception("WARE(%u): WareInstance::update has no location\n", serial());
 	}
