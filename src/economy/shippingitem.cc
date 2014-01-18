@@ -83,17 +83,13 @@ void ShippingItem::set_location(Game& game, Map_Object* obj) {
 	get(game, &ware, &worker);
 
 	if (ware) {
-		log("#sirver Is ware\n");
 		if (upcast(Building, building, obj)) {
-			log("#sirver Entering building.\n");
 			ware->enter_building(game, *building);
 		} else {
-			log("#sirver setting location.\n");
 			ware->set_location(game, obj);
 		}
 	}
 	if (worker) {
-		log("#sirver Is worker\n");
 		worker->set_location(dynamic_cast<PlayerImmovable *>(obj));
 		if (upcast(Building, building, obj)) {
 			worker->set_position(game, building->get_position());
@@ -148,8 +144,7 @@ void ShippingItem::schedule_update(Game & game, int32_t delay)
 	get(game, &ware, &worker);
 
 	if (ware) {
-		uint32_t time = ware->schedule_act(game, delay);
-		log("#sirver next time the ware will act: time: %u\n", time);
+		ware->schedule_act(game, delay);
 	}
 	if (worker) {
 		worker->send_signal(game, "wakeup");
@@ -161,7 +156,6 @@ void ShippingItem::schedule_update(Game & game, int32_t delay)
  */
 void ShippingItem::remove(Editor_Game_Base & egbase)
 {
-	log("#sirver removing ShippingItem this: %p\n", this);
 	if (Map_Object * obj = m_object.get(egbase)) {
 		obj->remove(egbase);
 		m_object = 0;

@@ -370,29 +370,23 @@ void Fleet::add_ship(Ship * ship)
 
 void Fleet::remove_ship(Editor_Game_Base & egbase, Ship * ship)
 {
-	log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 	std::vector<Ship *>::iterator it = std::find(m_ships.begin(), m_ships.end(), ship);
 	if (it != m_ships.end()) {
 		*it = m_ships.back();
 		m_ships.pop_back();
 	}
-	log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 	ship->set_fleet(0);
 	if (upcast(Game, game, &egbase))
 		ship->set_economy(*game, 0);
 
-	log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 	if (ship->get_destination(egbase)) {
-	log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 		update(egbase);
 	}
 
 	if (m_ships.empty()) {
-		log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 		if (m_ports.empty()) {
 			remove(egbase);
 		} else {
-			log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 			Flag & base = m_ports[0]->base_flag();
 			for (uint32_t i = 1; i < m_ports.size(); ++i) {
 				// since two ports can be connected by land, it is possible that
@@ -667,9 +661,6 @@ void Fleet::act(Game & game, uint32_t /* data */)
 			}
 
 			if (!success) {
-				// NOCOM(#sirver): check if this solves some issues.
-				// this should update all the shippingitems.
-				// pd.update_shippingitem(game, *this);
 				schedule_act(game, 5000); // retry in the next time
 				m_act_pending = true;
 				break;

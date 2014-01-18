@@ -282,20 +282,15 @@ void PortDock::update_shippingitem(Game & game, Worker & worker)
 
 void PortDock::_update_shippingitem(Game & game, std::vector<ShippingItem>::iterator it)
 {
-	molog("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 	it->fetch_destination(game, *this);
 
-	molog("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 	PortDock * dst = it->get_destination(game);
 	assert(dst != this);
 
-	molog("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 	// Destination might have vanished or be in another economy altogether.
 	if (dst && dst->get_economy() == get_economy()) {
-	molog("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 		set_need_ship(game, true);
 	} else {
-	molog("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 		it->end_shipping(game);
 		it->set_location(game, m_warehouse);
 		*it = m_waiting.back();
@@ -319,7 +314,6 @@ void PortDock::ship_arrived(Game & game, Ship & ship)
 		it->set_location(game, m_warehouse);
 		it->end_shipping(game);
 	}
-	log("#sirver items_brought_by_ship.size(): %lu\n", items_brought_by_ship.size());
 
 	if (m_expedition_ready) {
 		assert(m_expedition_bootstrap.get() != nullptr);
@@ -358,26 +352,10 @@ void PortDock::ship_arrived(Game & game, Ship & ship)
 				// Destination is valid, so we load the item onto the ship
 				ship.add_item(game, m_waiting.back());
 			} else {
-				// log("#sirver Destination did vanish!\n");
-				// _update_shippingitem(game, --m_waiting.end());
-				// Obviously the item has no valid destination anymore, so we just carry it back in the warehouse
+				// The item has no valid destination anymore, so we just carry it
+				// back in the warehouse
 				m_waiting.back().set_location(game, m_warehouse);
 				m_waiting.back().end_shipping(game);
-				// NOCOM(#sirver): I think we just end the shipping here and rely that they find their way to the warehouse.
-				// WareInstance * ware;
-				// Worker * worker;
-				// m_waiting.back().get(owner().egbase(), ware, worker);
-				// if (ware) {
-					// // ware->cancel_moving();
-					// // ware->set_location(game, m_warehouse);
-				// } else {
-					// // worker->set_location(m_warehouse);
-					// // worker->set_position(game, m_warehouse->get_position());
-				// }
-				// m_waiting.back().set_location(game, m_warehouse);
-				// // NOCOM(#sirver): test case where ship vanishes
-				// m_waiting.back().end_shipping(game);
-				// m_waiting.back().schedule_update(game, 20);
 			}
 			m_waiting.pop_back();
 		}

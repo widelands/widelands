@@ -307,26 +307,21 @@ void WareInstance::update(Game & game)
 
 	// NOCOM(#sirver): use object pointer in Warehouse and Portdock.
 	Map_Object * const loc = m_location.get(game);
-	molog("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 
 	// Reset our state if we're not on location or outside an economy
 	if (!get_economy()) {
 		cancel_moving();
 		return;
 	}
-	molog("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 
 	if (!loc) {
 		// NOCOM(#sirver): comment is probably wrong.
 		// If we were owned by somebody, it should destroy us if it goes away. But when we were shipped
-	molog("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 		// and end_shipping() was called while we were in the PortDock and then the Warehouse is destroyed,
 		// it can happen that we are not on a location anymore and noone
-		molog("#sirver not on an economy.\n");
 		// If our location gets lost, our owner is supposed to destroy us
 		throw wexception("WARE(%u): WareInstance::update has no location\n", serial());
 	}
-	molog("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 
 	// Update whether we have a Supply or not
 	if (!m_transfer || !m_transfer->get_request()) {
@@ -339,8 +334,6 @@ void WareInstance::update(Game & game)
 
 	// Deal with transfers
 	if (m_transfer) {
-		molog("#sirver now dealing with transfer.\n");
-
 		upcast(PlayerImmovable, location, loc);
 
 		if (!location) {
@@ -348,9 +341,6 @@ void WareInstance::update(Game & game)
 			// destination is still valid.
 			auto* destination = m_transfer->get_destination(game) ;
 			if (!destination || destination->get_economy() != get_economy()) {
-				// NOCOM(#sirver): check if destiny is still in the same economy.
-				molog("#sirver Our destination has vanished or is now in another economy!\n");
-				// NOCOM(#sirver): try using m_transfer_nextstep. Also see where it is used.
 				Transfer * const t = m_transfer;
 
 				m_transfer = 0;
@@ -370,7 +360,6 @@ void WareInstance::update(Game & game)
 		m_transfer_nextstep = nextstep;
 
 		if (!nextstep) {
-			molog("#sirver Ups, no nextstep.");
 			if (upcast(Flag, flag, location))
 				flag->call_carrier(game, *this, 0);
 
@@ -380,11 +369,9 @@ void WareInstance::update(Game & game)
 			m_transfer_nextstep = 0;
 
 			if (success) {
-				molog("#sirver But transfer has succeeded. Yay!\n");
 				t->has_finished();
 				return;
 			} else {
-				molog("#sirver And transfer has failed. :(\n");
 				t->has_failed();
 
 				cancel_moving();
@@ -415,9 +402,7 @@ void WareInstance::update(Game & game)
  */
 void WareInstance::enter_building(Game & game, Building & building)
 {
-	molog("#sirver m_transfer: %p\n", m_transfer);
 	if (m_transfer) {
-		molog("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 		if (m_transfer->get_destination(game) == &building) {
 			Transfer * t = m_transfer;
 
@@ -428,23 +413,18 @@ void WareInstance::enter_building(Game & game, Building & building)
 			return;
 		}
 
-		molog("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 		bool success;
 		PlayerImmovable * const nextstep =
 			m_transfer->get_next_step(&building, success);
 		m_transfer_nextstep = nextstep;
 
-		molog("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 		if (success) {
-			log("#sirver nextstep->descr().name(): %s\n", nextstep->descr().name().c_str());
 			assert(nextstep);
 
 			if (upcast(PortDock, pd, nextstep)) {
-			log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 				pd->add_shippingitem(game, *this);
 				return;
 			}
-			log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 
 			// There are some situations where we might end up in a warehouse
 			// as part of a requested route, and we need to move out of it
@@ -455,11 +435,9 @@ void WareInstance::enter_building(Game & game, Building & building)
 			//    shipped across the sea, but a better, land-based route has been
 			//    found
 			if (upcast(Warehouse, warehouse, &building)) {
-			log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 				warehouse->do_launch_item(game, *this);
 				return;
 			}
-			log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 
 			throw wexception
 				("MO(%u): ware(%s): do not know how to move from building %u (%s at (%u,%u)) "
@@ -469,18 +447,13 @@ void WareInstance::enter_building(Game & game, Building & building)
 				 building.get_position().y, nextstep->serial(),
 				 nextstep->name().c_str());
 		} else {
-		molog("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 			Transfer * t = m_transfer;
 
-		molog("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 			m_transfer = 0;
 			m_transfer_nextstep = 0;
 
-		molog("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 			t->has_failed();
-		molog("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 			cancel_moving();
-		molog("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 
 			if (upcast(Warehouse, warehouse, &building)) {
 				building.receive_ware(game, m_descr_index);
@@ -488,11 +461,9 @@ void WareInstance::enter_building(Game & game, Building & building)
 			} else {
 				update(game);
 			}
-		molog("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 			return;
 		}
 	} else {
-		molog("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 		// We don't have a transfer, so just enter the building
 		building.receive_ware(game, m_descr_index);
 		remove(game);
@@ -507,7 +478,6 @@ void WareInstance::enter_building(Game & game, Building & building)
  */
 void WareInstance::set_transfer(Game & game, Transfer & t)
 {
-	molog("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 	m_transfer_nextstep = 0;
 
 	// Reset current transfer
@@ -535,7 +505,6 @@ void WareInstance::set_transfer(Game & game, Transfer & t)
 */
 void WareInstance::cancel_transfer(Game & game)
 {
-	molog("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 	m_transfer = 0;
 	m_transfer_nextstep = 0;
 
@@ -547,7 +516,6 @@ void WareInstance::cancel_transfer(Game & game)
 */
 bool WareInstance::is_moving() const
 {
-	molog("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 	return m_transfer;
 }
 
@@ -557,7 +525,6 @@ bool WareInstance::is_moving() const
 */
 void WareInstance::cancel_moving()
 {
-	molog("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 	molog("cancel_moving\n");
 
 	if (m_transfer) {
@@ -573,7 +540,6 @@ void WareInstance::cancel_moving()
 */
 PlayerImmovable * WareInstance::get_next_move_step(Game & game)
 {
-	molog("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 	return
 		m_transfer ?
 		dynamic_cast<PlayerImmovable *>(m_transfer_nextstep.get(game)) : 0;

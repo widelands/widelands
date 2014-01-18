@@ -475,18 +475,6 @@ void Ship::ship_update_idle(Game & game, Bob::State & state) {
 	// If we are waiting for the next transport job, check if we should move away from ships and shores
 	switch (m_ship_state) {
 		case TRANSPORT: {
-			// if (!m_items.empty()) {
-				// log("#sirver I have a bunch of idle wares in my ship.\n");
-				// m_fleet->update(game);
-				// // assert(m_fleet);
-				// // PortDock* dst = m_fleet->get_arbitrary_dock();
-				// // BOOST_FOREACH(ShippingItem & item, m_items) { item.schedule_update(game, 10); }
-				// // if (dst) {
-					// // // NOCOM(#sirver): what if there is no portdock?
-					// // start_task_movetodock(game, *dst);
-				// // }
-				// return;
-			// }
 			FCoords position = get_position();
 			Map & map = game.map();
 			unsigned int dirs[LAST_DIRECTION + 1];
@@ -722,7 +710,6 @@ void Ship::withdraw_items(Game & game, PortDock & pd, std::vector<ShippingItem> 
 	uint32_t dst = 0;
 	for (uint32_t src = 0; src < m_items.size(); ++src) {
 		PortDock * destination = m_items[src].get_destination(game);
-		log("#sirver destination: %p\n", destination);
 		if (!destination || destination == &pd) {
 			items.push_back(m_items[src]);
 		} else {
