@@ -509,11 +509,9 @@ void Warehouse::destroy(Editor_Game_Base & egbase)
 /// Destroy the warehouse.
 void Warehouse::cleanup(Editor_Game_Base & egbase)
 {
-
-	if (m_portdock) {
+	if (egbase.objects().object_still_available(m_portdock)) {
 		// NOCOM(#sirver): this should probably happen on portdock cleanup.
-		molog("#sirver Calling empty into warehouse.\n");
-		molog("#sirver m_portdock: %p\n", m_portdock);
+		molog("#sirver Removing portdock.\n");
 		m_portdock->remove(egbase);
 		m_portdock = nullptr;
 	}

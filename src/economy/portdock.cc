@@ -187,8 +187,15 @@ void PortDock::cleanup(Editor_Game_Base & egbase)
 		// Transfer all our wares into the warehouse.
 		if (upcast(Game, game, &egbase)) {
 			BOOST_FOREACH(ShippingItem & shipping_item, m_waiting) {
-				shipping_item.set_location(*game, m_warehouse);
-				shipping_item.end_shipping(*game);
+				WareInstance* ware;
+				shipping_item.get(*game, &ware, nullptr);
+				if (ware) {
+					ware->cancel_moving();
+					m_warehouse->incorporate_ware(*game, ware);
+				} else {
+					shipping_item.set_location(*game, m_warehouse);
+					shipping_item.end_shipping(*game);
+				}
 			}
 		}
 		m_waiting.clear();
