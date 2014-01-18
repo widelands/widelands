@@ -52,7 +52,6 @@ struct ShippingItem {
 
 	void set_economy(Game &, Economy * e);
 	PortDock * get_destination(Game &);
-	void fetch_destination(Game &, PortDock &);
 	void schedule_update(Game &, int32_t delay);
 
 	void remove(Editor_Game_Base &);
@@ -68,14 +67,17 @@ struct ShippingItem {
 	void save(Editor_Game_Base & egbase, Map_Map_Object_Saver & mos, FileWrite & fw);
 
 private:
-	friend struct PortDock;
-	friend struct Ship;
+	friend PortDock;
+	friend Ship;
 
 	// Called when a port is reached. The item will act again on its own.
 	void end_shipping(Game &);
 
 	// Sets the location of this shippingitem, this could be a ship, a portdock or a warehouse.
 	void set_location(Game&, Map_Object* obj);
+
+	// Updates m_destination_dock.
+	void update_destination(Game &, PortDock &);
 
 	Object_Ptr m_object;
 	OPtr<PortDock> m_destination_dock;

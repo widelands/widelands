@@ -152,7 +152,6 @@ public:
 	void remove_workers(Ware_Index, uint32_t count);
 
 	/* SoldierControl implementation */
-	// TODO(sirver): get rid of camel casing.
 	std::vector<Soldier *> presentSoldiers() const;
 	std::vector<Soldier *> stationedSoldiers() const {
 		return presentSoldiers();

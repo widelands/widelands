@@ -81,7 +81,7 @@ int upcasted_bob_to_lua(lua_State * L, Bob * mo) {
 		case Bob::SHIP:
 			return CAST_TO_LUA(Ship);
 	}
-	assert(0);  // Never here, hopefully.
+	assert(false);  // Never here, hopefully.
 }
 int upcasted_immovable_to_lua(lua_State * L, BaseImmovable * mo) {
 	if (!mo)
@@ -1675,8 +1675,7 @@ int L_Building::get_building_type(lua_State * L) {
 */
 // UNTESTED
 int L_Building::get_flag(lua_State * L) {
-	upcasted_immovable_to_lua(L, &get(L, get_egbase(L))->base_flag());
-	return 1;
+	return upcasted_immovable_to_lua(L, &get(L, get_egbase(L))->base_flag());
 }
 
 
@@ -2145,7 +2144,6 @@ const MethodType<L_Ship> L_Ship::Methods[] = {
 };
 const PropertyType<L_Ship> L_Ship::Properties[] = {
 	PROP_RO(L_Ship, debug_economy),
-	PROP_RO(L_Ship, debug_state),
 	PROP_RO(L_Ship, last_portdock),
 	PROP_RO(L_Ship, destination),
 	{0, 0, 0},
@@ -2163,42 +2161,11 @@ int L_Ship::get_debug_economy(lua_State* L) {
 	return 1;
 }
 
-// UNTESTED, for debug only
-int L_Ship::get_debug_state(lua_State* L) {
-	std::string state;
-	switch (get(L, get_egbase(L))->get_ship_state()) {
-	case Ship::TRANSPORT:
-		state = "TRANSPORT";
-		break;
-	case Ship::EXP_WAITING:
-		state = "EXP_WAITING";
-		break;
-	case Ship::EXP_SCOUTING:
-		state = "EXP_SCOUTING";
-		break;
-	case Ship::EXP_FOUNDPORTSPACE:
-		state = "EXP_FOUNDPORTSPACE";
-		break;
-	case Ship::EXP_COLONIZING:
-		state = "EXP_COLONIZING";
-		break;
-	case Ship::SINK_REQUEST:
-		state = "SINK_REQUEST";
-		break;
-	case Ship::SINK_ANIMATION:
-		state = "SINK_ANIMATION";
-		break;
-	default:
-		return report_error(L, "Unknown state in L_Ship::get_debug_state");
-	}
-	lua_pushstring(L, state);
-	return 1;
-}
-
 /* RST
 	.. attribute:: destination
 
-		(RO) Either :const:`nil` if there is no current destination, otherwise the :class:`PortDock`.
+		(RO) Either :const:`nil` if there is no current destination, otherwise
+		the :class:`PortDock`.
 */
 // UNTESTED
 int L_Ship::get_destination(lua_State* L) {
@@ -2210,8 +2177,7 @@ int L_Ship::get_destination(lua_State* L) {
 	.. attribute:: last_portdock
 
 		(RO) Either :const:`nil` if no port was ever visited or the last portdock
-		was destroyed, otherwise the otherwise the :class:`PortDock` of the last
-		visited port.
+		was destroyed, otherwise the :class:`PortDock` of the last visited port.
 */
 // UNTESTED
 int L_Ship::get_last_portdock(lua_State* L) {

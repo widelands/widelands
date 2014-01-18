@@ -335,20 +335,6 @@ void WareInstance::update(Game & game)
 		upcast(PlayerImmovable, location, loc);
 
 		if (!location) {
-			// We are not in an immovable. So we must be on a ship. Check if our
-			// destination is still valid.
-			auto* destination = m_transfer->get_destination(game) ;
-			if (!destination || destination->get_economy() != get_economy()) {
-				Transfer * const t = m_transfer;
-
-				m_transfer = 0;
-				m_transfer_nextstep = 0;
-
-				t->has_failed();
-
-				cancel_moving();
-				update(game);
-			}
 			return;  // wait
 		}
 

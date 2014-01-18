@@ -59,7 +59,7 @@ void ShippingItem::get(Editor_Game_Base& game, WareInstance** ware, Worker** wor
 			}
 			break;
 		default:
-			assert(0);  // never here or unknown map object being shipped.
+			assert(false);  // never here or unknown map object being shipped.
 			break;
 		}
 	}
@@ -116,7 +116,7 @@ PortDock * ShippingItem::get_destination(Game & game)
 	return m_destination_dock.get(game);
 }
 
-void ShippingItem::fetch_destination(Game & game, PortDock & pd)
+void ShippingItem::update_destination(Game & game, PortDock & pd)
 {
 	WareInstance * ware;
 	Worker * worker;

@@ -68,7 +68,7 @@ void PortDock::add_position(Coords where)
 	m_dockpoints.push_back(where);
 }
 
-Warehouse* Portdock::get_warehouse() const {
+Warehouse* PortDock::get_warehouse() const {
 	return m_warehouse;
 }
 
@@ -286,7 +286,7 @@ void PortDock::update_shippingitem(Game & game, Worker & worker)
 
 void PortDock::_update_shippingitem(Game & game, std::vector<ShippingItem>::iterator it)
 {
-	it->fetch_destination(game, *this);
+	it->update_destination(game, *this);
 
 	PortDock * dst = it->get_destination(game);
 	assert(dst != this);
@@ -295,8 +295,8 @@ void PortDock::_update_shippingitem(Game & game, std::vector<ShippingItem>::iter
 	if (dst && dst->get_economy() == get_economy()) {
 		set_need_ship(game, true);
 	} else {
-		it->end_shipping(game);
 		it->set_location(game, m_warehouse);
+		it->end_shipping(game);
 		*it = m_waiting.back();
 		m_waiting.pop_back();
 

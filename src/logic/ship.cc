@@ -99,7 +99,9 @@ PortDock* Ship::get_lastdock(Editor_Game_Base& egbase) const {
 	return m_lastdock.get(egbase);
 }
 
-Fleet* Ship::get_fleet() const { return m_fleet; }
+Fleet* Ship::get_fleet() const {
+	return m_fleet;
+}
 
 void Ship::init_auto_task(Game & game) {
 	start_task_ship(game);
