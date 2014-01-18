@@ -40,10 +40,10 @@ namespace Widelands {
 
 Map_Object_Descr g_portdock_descr("portdock", "Port Dock");
 
-PortDock::PortDock() :
+PortDock::PortDock(Warehouse* wh) :
 	PlayerImmovable(g_portdock_descr),
 	m_fleet(0),
-	m_warehouse(0),
+	m_warehouse(wh),
 	m_need_ship(false),
 	m_expedition_ready(false)
 {
@@ -66,16 +66,6 @@ PortDock::~PortDock() {
 void PortDock::add_position(Coords where)
 {
 	m_dockpoints.push_back(where);
-}
-
-/**
- * Set the @ref Warehouse buddy of this dock. May only be called once.
- */
-void PortDock::set_warehouse(Warehouse * wh)
-{
-	assert(!m_warehouse);
-
-	m_warehouse = wh;
 }
 
 /**
@@ -193,8 +183,17 @@ void PortDock::init_fleet(Editor_Game_Base & egbase)
 
 void PortDock::cleanup(Editor_Game_Base & egbase)
 {
-	if (m_warehouse)
+	if (egbase.objects().object_still_available(m_warehouse)) {
+		// Transfer all our wares into the warehouse.
+		if (upcast(Game, game, &egbase)) {
+			BOOST_FOREACH(ShippingItem & shipping_item, m_waiting) {
+				shipping_item.set_location(*game, m_warehouse);
+				shipping_item.end_shipping(*game);
+			}
+		}
+		m_waiting.clear();
 		m_warehouse->m_portdock = nullptr;
+	}
 
 	if (upcast(Game, game, &egbase)) {
 		container_iterate(std::vector<ShippingItem>, m_waiting, it) {
@@ -555,7 +554,7 @@ Map_Object::Loader * PortDock::load
 
 		uint8_t const version = fr.Unsigned8();
 		if (1 <= version && version <= PORTDOCK_SAVEGAME_VERSION) {
-			loader->init(egbase, mol, *new PortDock);
+			loader->init(egbase, mol, *new PortDock(nullptr));
 			loader->load(fr, version);
 		} else
 			throw game_data_error(_("unknown/unhandled version %u"), version);

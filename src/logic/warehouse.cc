@@ -489,9 +489,8 @@ void Warehouse::init_portdock(Editor_Game_Base & egbase)
 
 	molog("Found %" PRIuS " fields for the dock\n", dock.size());
 
-	m_portdock = new PortDock;
+	m_portdock = new PortDock(this);
 	m_portdock->set_owner(get_owner());
-	m_portdock->set_warehouse(this);
 	m_portdock->set_economy(get_economy());
 	container_iterate_const(std::vector<Coords>, dock, it) {
 		m_portdock->add_position(*it.current);
@@ -504,52 +503,41 @@ void Warehouse::init_portdock(Editor_Game_Base & egbase)
 
 void Warehouse::destroy(Editor_Game_Base & egbase)
 {
-	Game & game = ref_cast<Game, Editor_Game_Base>(egbase);
-
-	const WareList & workers = get_workers();
-
-	// This will empty the stock and launch all workers
-	// including incorporated ones
-	for (Ware_Index id = Ware_Index::First(); id < workers.get_nrwareids(); ++id) {
-		const uint32_t stock = workers.stock(id);
-
-		for (uint32_t i = 0; i < stock; ++i) {
-			launch_worker(game, id, Requirements()).start_task_leavebuilding
-				(game, true);
-		}
-	}
-
 	Building::destroy(egbase);
 }
 
 /// Destroy the warehouse.
 void Warehouse::cleanup(Editor_Game_Base & egbase)
 {
+
 	if (m_portdock) {
+		// NOCOM(#sirver): this should probably happen on portdock cleanup.
+		molog("#sirver Calling empty into warehouse.\n");
+		molog("#sirver m_portdock: %p\n", m_portdock);
 		m_portdock->remove(egbase);
 		m_portdock = nullptr;
 	}
+
+	// This will empty the stock and launch all workers including incorporated
+	// ones.
+	if (upcast(Game, game, &egbase)) {
+		const WareList& workers = get_workers();
+		for (Ware_Index id = Ware_Index::First(); id < workers.get_nrwareids(); ++id) {
+			const uint32_t stock = workers.stock(id);
+			for (uint32_t i = 0; i < stock; ++i) {
+				launch_worker(*game, id, Requirements()).start_task_leavebuilding(*game, true);
+			}
+			assert(!m_incorporated_workers.count(id) || m_incorporated_workers[id].empty());
+		}
+	}
+	m_incorporated_workers.clear();
 
 	while (!m_planned_workers.empty()) {
 		m_planned_workers.back().cleanup();
 		m_planned_workers.pop_back();
 	}
 
-	//  all cached workers are unbound and freed
-	container_iterate(IncorporatedWorkers, m_incorporated_workers, cpair) {
-		WorkerList & clist = cpair->second;
-		while (!clist.empty()) {
-			Worker * w = clist.back();
-			clist.pop_back();
-
-			if (upcast(Game, game, &egbase))
-				if (game->objects().object_still_available(w))
-					w->reset_tasks(*game);
-		}
-	}
-	m_incorporated_workers.clear();
-
-	Map & map = egbase.map();
+	Map& map = egbase.map();
 	if (const uint32_t conquer_radius = get_conquers())
 		egbase.unconquer_area
 			(Player_Area<Area<FCoords> >
@@ -801,6 +789,13 @@ Worker & Warehouse::launch_worker
 
 				container_iterate (WorkerList, incorporated_workers, i) {
 					Worker * worker = *i.current;
+					if (!game.objects().object_still_available(worker)) {
+						// On cleanup, it could be that the worker was deleted under
+						// us, so we erase the pointer we had to it and create a new
+						// one.
+						incorporated_workers.erase(i.current);
+						continue;
+					}
 
 					--unincorporated;
 
@@ -839,18 +834,15 @@ Worker & Warehouse::launch_worker
 }
 
 
-/**
- * This is the opposite of launch_worker: destroy the worker and add the
- * appropriate ware to our warelist
- */
-void Warehouse::incorporate_worker(Editor_Game_Base & egbase, Worker & w)
+void Warehouse::incorporate_worker(Editor_Game_Base & egbase, Worker* w)
 {
-	assert(w.get_owner() == &owner());
+	assert(w != nullptr);
+	assert(w->get_owner() == &owner());
 
-	if (WareInstance * const item = w.fetch_carried_item(egbase))
-		incorporate_item(egbase, *item); //  rescue an item
+	if (WareInstance* ware = w->fetch_carried_item(egbase))
+		incorporate_ware(egbase, ware);
 
-	Ware_Index worker_index = tribe().worker_index(w.name().c_str());
+	Ware_Index worker_index = tribe().worker_index(w->name().c_str());
 	m_supply->add_workers(worker_index, 1);
 
 	//  We remove carriers, but we keep other workers around.
@@ -861,22 +853,22 @@ void Warehouse::incorporate_worker(Editor_Game_Base & egbase, Worker & w)
 	//  FIXME When this is done, the get_incorporated_workers method above must
 	//  FIXME be reworked so that workers are recreated, and rescheduled for
 	//  FIXME incorporation.
-	if (dynamic_cast<Carrier const *>(&w)) {
-		w.remove(egbase);
+	if (upcast(Carrier, carrier, w)) {
+		carrier->remove(egbase);
 		return;
 	}
 
 	// Incorporate the worker
 	if (!m_incorporated_workers.count(worker_index))
 		m_incorporated_workers[worker_index] = std::vector<Worker *>();
-	m_incorporated_workers[worker_index].push_back(&w);
+	m_incorporated_workers[worker_index].push_back(w);
 
-	w.set_location(0); //  no longer in an economy
+	w->set_location(0); //  no longer in an economy
 
 	if (upcast(Game, game, &egbase)) {
 		//  Bind the worker into this house, hide him on the map.
-		w.reset_tasks(*game);
-		w.start_task_idle(*game, 0, -1);
+		w->reset_tasks(*game);
+		w->start_task_idle(*game, 0, -1);
 	}
 }
 
@@ -912,11 +904,10 @@ void Warehouse::do_launch_item(Game & game, WareInstance & item)
 }
 
 
-/// Swallow the item, adding it to out inventory.
-void Warehouse::incorporate_item(Editor_Game_Base & egbase, WareInstance & item)
+void Warehouse::incorporate_ware(Editor_Game_Base & egbase, WareInstance* ware)
 {
-	m_supply->add_wares(item.descr_index(), 1);
-	return item.destroy(egbase);
+	m_supply->add_wares(ware->descr_index(), 1);
+	ware->destroy(egbase);
 }
 
 
@@ -1010,7 +1001,7 @@ void Warehouse::create_worker(Game & game, Ware_Index const worker) {
 			remove_workers(tribe().safe_worker_index(input), i.current->second);
 	}
 
-	incorporate_worker(game, w_desc.create(game, owner(), this, m_position));
+	incorporate_worker(game, &w_desc.create(game, owner(), this, m_position));
 
 	// Update PlannedWorkers::amount here if appropriate, because this function
 	// may have been called directly by the Economy.
@@ -1355,7 +1346,7 @@ std::vector<Soldier *> Warehouse::presentSoldiers() const
 	return rv;
 }
 int Warehouse::incorporateSoldier(Editor_Game_Base & egbase, Soldier & soldier) {
-	incorporate_worker(egbase, soldier);
+	incorporate_worker(egbase, &soldier);
 	return 0;
 }
 

@@ -161,6 +161,7 @@ void ShippingItem::schedule_update(Game & game, int32_t delay)
  */
 void ShippingItem::remove(Editor_Game_Base & egbase)
 {
+	log("#sirver removing ShippingItem this: %p\n", this);
 	if (Map_Object * obj = m_object.get(egbase)) {
 		obj->remove(egbase);
 		m_object = 0;

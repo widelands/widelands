@@ -1096,45 +1096,64 @@ void Worker::log_general_info(const Editor_Game_Base & egbase)
  */
 void Worker::set_location(PlayerImmovable * const location)
 {
+	if (location != nullptr) {
+		molog("#sirver location->name(): %s\n", location->name().c_str());
+	}
 	assert(not location or Object_Ptr(location).get(owner().egbase()));
 
 	PlayerImmovable * const oldlocation = get_location(owner().egbase());
+	if (oldlocation != nullptr) {
+		molog("#sirver oldlocation->name(): %s\n", oldlocation->name().c_str());
+	}
 	if (oldlocation == location)
 		return;
 
 	if (oldlocation) {
+		molog("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 		// Note: even though we have an oldlocation, m_economy may be zero
 		// (oldlocation got deleted)
 		oldlocation->remove_worker(*this);
 	} else {
+		molog("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 		if (!is_shipping()) {
+		molog("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 			assert(!m_economy);
 		}
 	}
 
+		molog("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 	m_location = location;
 
 	if (location) {
+		molog("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 		Economy * const eco = location->get_economy();
 
 		// NOTE we have to explicitly check Worker_Descr::SOLDIER, as SOLDIER is
 		// NOTE as well defined in an enum in instances.h
-		if (!m_economy || (get_worker_type() == Worker_Descr::SOLDIER))
+		if (!m_economy || (get_worker_type() == Worker_Descr::SOLDIER)) {
+		molog("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 			set_economy(eco);
-		else if (m_economy != eco)
+		} else if (m_economy != eco) {
 			throw wexception
 				("Worker::set_location changes economy, but worker is no soldier");
+		}
 
+		molog("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 		location->add_worker(*this);
 	} else {
+		molog("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 		if (!is_shipping()) {
+		molog("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 			// Our location has been destroyed, we are now fugitives.
 			// Interrupt whatever we've been doing.
 			set_economy(0);
 
+		molog("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 			Editor_Game_Base & egbase = owner().egbase();
-			if (upcast(Game, game, &egbase))
+			if (upcast(Game, game, &egbase)) {
+				molog("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 				send_signal (*game, "location");
+			}
 		}
 	}
 }
@@ -1263,12 +1282,11 @@ void Worker::schedule_incorporate(Game & game)
 
 /**
  * Incorporate the worker into the warehouse it's standing on immediately.
- * This will delete the worker.
  */
 void Worker::incorporate(Game & game)
 {
 	if (upcast(Warehouse, wh, get_location(game))) {
-		wh->incorporate_worker(game, *this);
+		wh->incorporate_worker(game, this);
 		return;
 	}
 
@@ -1639,9 +1657,10 @@ bool Worker::is_shipping()
 void Worker::shipping_pop(Game & game, State & /* state */)
 {
 	// Defense against unorderly cleanup via reset_tasks
+	// // NOCOM(#sirver): whiy is this here?
 	if (!get_location(game)) {
 		set_economy(0);
-		schedule_destroy(game);
+		// schedule_destroy(game);
 	}
 }
 
@@ -1651,13 +1670,16 @@ void Worker::shipping_update(Game & game, State & state)
 	PlayerImmovable * location = get_location(game);
 
 	// Signal handling
-	std::string const signal = get_signal();
+	const std::string signal = get_signal();
 
 	if (signal.size()) {
 		if (signal == "endshipping") {
-			if (!dynamic_cast<Warehouse *>(location))
-				molog("shipping_update: received signal 'endshipping' while not in warehouse!\n");
 			signal_handled();
+			if (!dynamic_cast<Warehouse *>(location)) {
+				molog("shipping_update: received signal 'endshipping' while not in warehouse!\n");
+				pop_task(game);
+				return;
+			}
 		}
 		if (signal == "transfer" || signal == "wakeup")
 			signal_handled();

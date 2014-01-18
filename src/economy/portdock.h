@@ -59,11 +59,10 @@ class ExpeditionBootstrap;
  * implemented at the moment.
  */
 struct PortDock : PlayerImmovable {
-	PortDock();
+	PortDock(Warehouse* warehouse);
 	virtual ~PortDock();
 
 	void add_position(Widelands::Coords where);
-	void set_warehouse(Warehouse * wh);
 	Warehouse * get_warehouse() const {return m_warehouse;}
 
 	Fleet * get_fleet() const {return m_fleet;}
