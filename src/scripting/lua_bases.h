@@ -101,6 +101,7 @@ public:
 	int place_bob(lua_State* L);
 	int conquer(lua_State * L);
 	int get_workers(lua_State* L);
+	int get_wares(lua_State* L);
 
 	/*
 	 * C methods

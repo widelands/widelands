@@ -379,8 +379,9 @@ void Fleet::remove_ship(Editor_Game_Base & egbase, Ship * ship)
 	if (upcast(Game, game, &egbase))
 		ship->set_economy(*game, 0);
 
-	if (ship->get_destination(egbase))
+	if (ship->get_destination(egbase)) {
 		update(egbase);
+	}
 
 	if (m_ships.empty()) {
 		if (m_ports.empty()) {

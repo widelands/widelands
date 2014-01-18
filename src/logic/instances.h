@@ -361,6 +361,8 @@ struct Object_Manager : boost::noncopyable {
 	void remove(Map_Object &);
 
 	bool object_still_available(const Map_Object * const t) const {
+		if (!t)
+			return false;
 		objmap_t::const_iterator it = m_objects.begin();
 		while (it != m_objects.end()) {
 			if (it->second == t)
