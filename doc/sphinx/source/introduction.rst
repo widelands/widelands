@@ -165,24 +165,16 @@ for debugging scenarios though.
 Regression testing infrastructure
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-The `test` directory in the repository contains the regression testing
-infrastructure. Each python file contains one test class, the test suite can
-be started through the `regression_test.py` script in the root directory.
+The `test` directory in the repository contains the regression test suite. A
+test is either a savegame plus a set of Lua scripts (test_*.lua) or a map that
+contains in its scripting directory a set of (test_*.lua and/or
+editor_test*.lua which are only run in the Editor) files.
 
 Each test starts Widelands using either the `--editor`, `--loadgame` or
 `--scenario` switch and additionally, the `--script` switch can be supplied to
 run a Lua script directly after the game is ready to take commands.
 
-A test can therefore consist of either
-
-    - a map containing scripting (e.g `test_lua_api_in_editor.py`),
-    - a savegame with an additional Lua script (`test_compatibility*.py`), or
-    - a map file with an additional Lua script (no example yet).
-
-The tests are run as standard python tests, so they should check that the
-stdout of Widelands contains bits that proof that the test should pass (e.g.
-by using the lunit test suite runner and assert_all_lunit_tests_passed()).
-
-
-
-
+The tests communicate with the test runner through standard output. If a
+script outputs "All Tests passed." the test is considered to pass, otherwise
+to fail. Whenever a savegame is written inside a test it is later loaded by
+the test runner as an additional test.

@@ -179,9 +179,7 @@ struct WLApplication {
 	void set_mouse_lock(const bool locked) {m_mouse_locked = locked;}
 	//@}
 
-	void init_graphics
-		(const int32_t w, const int32_t h, const int32_t bpp,
-		 const bool fullscreen, const bool opengl);
+	void init_graphics(int32_t w, int32_t h, bool fullscreen, bool opengl);
 
 	/**
 	 * Refresh the graphics from the latest options.

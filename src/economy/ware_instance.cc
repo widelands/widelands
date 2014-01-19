@@ -302,10 +302,10 @@ void WareInstance::act(Game & game, uint32_t)
  */
 void WareInstance::update(Game & game)
 {
-	Map_Object * const loc = m_location.get(game);
-
 	if (!m_descr) // Upsy, we're not even initialized. Happens on load
 		return;
+
+	Map_Object * const loc = m_location.get(game);
 
 	// Reset our state if we're not on location or outside an economy
 	if (!get_economy()) {
@@ -314,6 +314,9 @@ void WareInstance::update(Game & game)
 	}
 
 	if (!loc) {
+		// Before dying, output as much information as we can.
+		log_general_info(game);
+
 		// If our location gets lost, our owner is supposed to destroy us
 		throw wexception("WARE(%u): WareInstance::update has no location\n", serial());
 	}
@@ -330,8 +333,10 @@ void WareInstance::update(Game & game)
 	// Deal with transfers
 	if (m_transfer) {
 		upcast(PlayerImmovable, location, loc);
-		if (not location)
-			return; // wait
+
+		if (!location) {
+			return;  // wait
+		}
 
 		bool success;
 		PlayerImmovable * const nextstep =
@@ -433,7 +438,13 @@ void WareInstance::enter_building(Game & game, Building & building)
 
 			t->has_failed();
 			cancel_moving();
-			update(game);
+
+			if (upcast(Warehouse, warehouse, &building)) {
+				building.receive_ware(game, m_descr_index);
+				remove(game);
+			} else {
+				update(game);
+			}
 			return;
 		}
 	} else {
@@ -616,8 +627,8 @@ Map_Object::Loader * WareInstance::load
 		if (version != WAREINSTANCE_SAVEGAME_VERSION)
 			throw wexception("unknown/unhandled version %i", version);
 
-		std::string tribename = fr.CString();
-		std::string warename = fr.CString();
+		const std::string tribename = fr.CString();
+		const std::string warename = fr.CString();
 
 		egbase.manually_load_tribe(tribename);
 

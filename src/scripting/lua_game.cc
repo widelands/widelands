@@ -1314,6 +1314,7 @@ const Message & L_Message::get(lua_State * L, Widelands::Game & game) {
 	:type info: :class:`string`
 
 */
+// TODO(sirver): this should be a method of wl.Game(). Fix for b19.
 static int L_report_result(lua_State * L) {
 	std::string info = "";
 	if (lua_gettop(L) >= 3)

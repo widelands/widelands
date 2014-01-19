@@ -165,18 +165,23 @@ public:
 	void dropSoldier(Soldier &) {
 		throw wexception("Not implemented for a Warehouse!");
 	}
-	int incorporateSoldier(Editor_Game_Base &, Soldier &);
 	int outcorporateSoldier(Editor_Game_Base &, Soldier &);
+	int incorporateSoldier(Editor_Game_Base &, Soldier& soldier);
 
 	virtual bool fetch_from_flag(Game &);
 
 	uint32_t count_workers(const Game &, Ware_Index, const Requirements &);
 	Worker & launch_worker(Game &, Ware_Index, const Requirements &);
-	void incorporate_worker(Editor_Game_Base &, Worker &);
+
+	// Adds the worker to the inventory. Takes ownership and might delete
+	// 'worker'.
+	void incorporate_worker(Editor_Game_Base&, Worker* worker);
 
 	WareInstance & launch_item(Game &, Ware_Index);
 	void do_launch_item(Game &, WareInstance &);
-	void incorporate_item(Editor_Game_Base &, WareInstance &);
+
+	// Adds the ware to our inventory. Takes ownership and might delete 'ware'.
+	void incorporate_ware(Editor_Game_Base&, WareInstance* ware);
 
 	bool can_create_worker(Game &, Ware_Index) const;
 	void     create_worker(Game &, Ware_Index);

@@ -801,9 +801,7 @@ void WLApplication::set_input_grab(bool grab)
  * with the given resolution.
  * Throws an exception on failure.
  */
-void WLApplication::init_graphics
-	(const int32_t w, const int32_t h, const int32_t bpp,
-	 const bool fullscreen, const bool opengl)
+void WLApplication::init_graphics(int32_t w, int32_t h, bool fullscreen, bool opengl)
 {
 	if (!w && !h) { // shutdown.
 		delete g_gr;
@@ -814,13 +812,13 @@ void WLApplication::init_graphics
 
 	if (!g_gr) {
 		g_gr = new Graphic();
-		g_gr->initialize(w, h, bpp, fullscreen, opengl);
+		g_gr->initialize(w, h, fullscreen, opengl);
 	} else {
 		if
-			(g_gr->get_xres() != w || g_gr->get_yres() != h || g_gr->get_bpp() != bpp
+			(g_gr->get_xres() != w || g_gr->get_yres() != h
 				|| g_gr->is_fullscreen() != fullscreen || g_opengl != opengl)
 		{
-			g_gr->initialize(w, h, bpp, fullscreen, opengl);
+			g_gr->initialize(w, h, fullscreen, opengl);
 		}
 	}
 }
@@ -833,7 +831,6 @@ void WLApplication::refresh_graphics()
 	init_graphics
 		(s.get_int("xres", XRES),
 		 s.get_int("yres", YRES),
-		 s.get_int("depth", 32),
 		 s.get_bool("fullscreen", false),
 		 s.get_bool("opengl", true));
 }
@@ -1091,7 +1088,7 @@ void WLApplication::shutdown_hardware()
 			"alive!"
 			<< endl;
 
-	init_graphics(0, 0, 0, false, false);
+	init_graphics(0, 0, false, false);
 	SDL_QuitSubSystem
 		(SDL_INIT_TIMER|SDL_INIT_VIDEO|SDL_INIT_CDROM|SDL_INIT_JOYSTICK);
 

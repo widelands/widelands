@@ -224,7 +224,7 @@ void ShipWindow::think()
 		Widelands::ShippingItem item = m_ship.get_item(idx);
 		Widelands::WareInstance * ware;
 		Widelands::Worker * worker;
-		item.get(m_igbase.egbase(), ware, worker);
+		item.get(m_igbase.egbase(), &ware, &worker);
 
 		if (ware) {
 			m_display->add(false, ware->descr_index());

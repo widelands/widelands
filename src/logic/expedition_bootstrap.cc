@@ -152,7 +152,7 @@ void ExpeditionBootstrap::cancel(Game& game) {
 	// Send all workers from the expedition list back inside the warehouse
 	BOOST_FOREACH(std::unique_ptr<ExpeditionWorker>& ew, workers_) {
 		if (ew->worker) {
-			warehouse->incorporate_worker(game, *ew->worker);
+			warehouse->incorporate_worker(game, ew->worker);
 		}
 	}
 	workers_.clear();

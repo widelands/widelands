@@ -1119,12 +1119,12 @@ void Worker::set_location(PlayerImmovable * const location)
 
 		// NOTE we have to explicitly check Worker_Descr::SOLDIER, as SOLDIER is
 		// NOTE as well defined in an enum in instances.h
-		if (!m_economy || (get_worker_type() == Worker_Descr::SOLDIER))
+		if (!m_economy || (get_worker_type() == Worker_Descr::SOLDIER)) {
 			set_economy(eco);
-		else if (m_economy != eco)
+		} else if (m_economy != eco) {
 			throw wexception
 				("Worker::set_location changes economy, but worker is no soldier");
-
+		}
 		location->add_worker(*this);
 	} else {
 		if (!is_shipping()) {
@@ -1133,8 +1133,9 @@ void Worker::set_location(PlayerImmovable * const location)
 			set_economy(0);
 
 			Editor_Game_Base & egbase = owner().egbase();
-			if (upcast(Game, game, &egbase))
+			if (upcast(Game, game, &egbase)) {
 				send_signal (*game, "location");
+			}
 		}
 	}
 }
@@ -1263,12 +1264,11 @@ void Worker::schedule_incorporate(Game & game)
 
 /**
  * Incorporate the worker into the warehouse it's standing on immediately.
- * This will delete the worker.
  */
 void Worker::incorporate(Game & game)
 {
 	if (upcast(Warehouse, wh, get_location(game))) {
-		wh->incorporate_worker(game, *this);
+		wh->incorporate_worker(game, this);
 		return;
 	}
 
@@ -1641,7 +1641,6 @@ void Worker::shipping_pop(Game & game, State & /* state */)
 	// Defense against unorderly cleanup via reset_tasks
 	if (!get_location(game)) {
 		set_economy(0);
-		schedule_destroy(game);
 	}
 }
 
@@ -1651,13 +1650,16 @@ void Worker::shipping_update(Game & game, State & state)
 	PlayerImmovable * location = get_location(game);
 
 	// Signal handling
-	std::string const signal = get_signal();
+	const std::string signal = get_signal();
 
 	if (signal.size()) {
 		if (signal == "endshipping") {
-			if (!dynamic_cast<Warehouse *>(location))
-				molog("shipping_update: received signal 'endshipping' while not in warehouse!\n");
 			signal_handled();
+			if (!dynamic_cast<Warehouse *>(location)) {
+				molog("shipping_update: received signal 'endshipping' while not in warehouse!\n");
+				pop_task(game);
+				return;
+			}
 		}
 		if (signal == "transfer" || signal == "wakeup")
 			signal_handled();
