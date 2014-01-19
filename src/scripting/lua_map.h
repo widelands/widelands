@@ -244,41 +244,6 @@ public:
 	CASTED_GET(Building);
 };
 
-class L_HasWares {
-public:
-	virtual ~L_HasWares() {}
-
-	virtual int set_wares(lua_State * L) = 0;
-	virtual int get_wares(lua_State * L) = 0;
-
-	typedef std::set<Widelands::Ware_Index> WaresSet;
-	typedef std::map<Widelands::Ware_Index, uint32_t> WaresMap;
-	typedef std::pair<Widelands::Ware_Index, uint32_t> WareAmount;
-
-protected:
-	WaresSet m_parse_get_wares_arguments
-		(lua_State *, const Widelands::Tribe_Descr &, bool *);
-	WaresMap m_parse_set_wares_arguments
-		(lua_State *, const Widelands::Tribe_Descr &);
-};
-class L_HasWorkers {
-public:
-	virtual ~L_HasWorkers() {}
-
-	virtual int set_workers(lua_State * L) = 0;
-	virtual int get_workers(lua_State * L) = 0;
-
-	typedef std::set<Widelands::Ware_Index> WorkersSet;
-	typedef std::map<Widelands::Ware_Index, uint32_t> WorkersMap;
-	typedef std::pair<Widelands::Ware_Index, uint32_t> WorkerAmount;
-
-protected:
-	WorkersSet m_parse_get_workers_arguments
-		(lua_State *, const Widelands::Tribe_Descr &, bool *);
-	WorkersMap m_parse_set_workers_arguments
-		(lua_State *, const Widelands::Tribe_Descr &);
-};
-
 class L_HasSoldiers {
 public:
 	struct SoldierDescr {
@@ -329,7 +294,7 @@ protected:
 };
 
 
-class L_Flag : public L_PlayerImmovable, public L_HasWares {
+class L_Flag : public L_PlayerImmovable {
 public:
 	LUNA_CLASS_HEAD(L_Flag);
 
@@ -357,7 +322,9 @@ public:
 
 // Small helper class that contains the commonalities between L_Road and
 // L_ProductionSite in relation to Worker employment.
-class _WorkerEmployer : public L_HasWorkers {
+typedef std::map<Widelands::Ware_Index, uint32_t> WorkersMap;
+// NOCOM(#sirver): this has to go too.
+class _WorkerEmployer {
 public:
 	virtual int get_workers(lua_State * L);
 	virtual int set_workers(lua_State * L);
@@ -447,8 +414,7 @@ public:
 };
 
 
-class L_Warehouse : public L_Building,
-	public L_HasWares, public L_HasWorkers, public _SoldierEmployer
+class L_Warehouse : public L_Building, public _SoldierEmployer
 {
 public:
 	LUNA_CLASS_HEAD(L_Warehouse);
@@ -484,8 +450,7 @@ public:
 };
 
 
-class L_ProductionSite : public L_Building,
-	public _WorkerEmployer, public L_HasWares {
+class L_ProductionSite : public L_Building, public _WorkerEmployer {
 public:
 	LUNA_CLASS_HEAD(L_ProductionSite);
 

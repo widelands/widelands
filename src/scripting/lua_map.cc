@@ -53,68 +53,114 @@ namespace LuaMap {
 
 */
 
-/*
- * ========================================================================
- *                         HELPER FUNCTIONS
- * ========================================================================
- */
-/*
- * Upcast the given base immovable to a higher type and hand this to
- * Lua. We use this so that scripters always work with the highest class
- * object available.
- */
-#define CAST_TO_LUA(k) to_lua<L_ ##k> \
-   (L, new L_ ##k(*static_cast<k *>(mo)))
-int upcasted_bob_to_lua(lua_State * L, Bob * mo) {
-	if (!mo)
-		return 0;
+namespace {
 
-	switch (mo->get_bob_type()) {
-		case Bob::CRITTER:
-			return to_lua<L_Bob>(L, new L_Bob(*mo));
-		case Bob::WORKER:
-			if (mo->name() == "soldier")
-				return CAST_TO_LUA(Soldier);
-			return CAST_TO_LUA(Worker);
-		case Bob::SHIP:
-			return CAST_TO_LUA(Ship);
+
+typedef std::map<Widelands::Ware_Index, uint32_t> WaresMap;
+typedef std::pair<Widelands::Ware_Index, uint32_t> WareAmount;
+typedef std::pair<Widelands::Ware_Index, uint32_t> WorkerAmount;
+typedef std::set<Widelands::Ware_Index> WaresSet;
+typedef std::set<Widelands::Ware_Index> WorkersSet;
+typedef std::pair<uint8_t, uint32_t> PlrInfluence;
+
+// parses the get argument for all classes that can be asked for their
+// current wares. Returns a set with all Ware_Indexes that must be considered.
+#define GET_INDEX(type) \
+	Ware_Index m_get_ ## type ## _index \
+		(lua_State * L, const Tribe_Descr & tribe,  const std::string & what) \
+	{ \
+		Ware_Index idx = tribe. type ## _index(what); \
+		if (!idx) \
+			report_error(L, "Invalid " #type ": <%s>", what.c_str()); \
+		return idx; \
 	}
-	assert(false);  // Never here, hopefully.
+GET_INDEX(ware);
+GET_INDEX(worker);
+#undef GET_INDEX
+
+#define PARSERS(type, btype) \
+btype ##sSet m_parse_get_##type##s_arguments \
+		(lua_State * L, const Tribe_Descr & tribe, bool * return_number) \
+{ \
+	 /* takes either "all", a name or an array of names */ \
+	int32_t nargs = lua_gettop(L); \
+	if (nargs != 2) \
+		report_error(L, "Wrong number of arguments to get_" #type "!"); \
+	*return_number = false; \
+	btype ## sSet rv; \
+	if (lua_isstring(L, 2)) { \
+		std::string what = luaL_checkstring(L, -1); \
+		if (what == "all") { \
+			for (Ware_Index i = Ware_Index::First(); \
+					i < tribe.get_nr##type##s (); ++i) \
+				rv.insert(i); \
+		} else { \
+			/* Only one item requested */ \
+			rv.insert(m_get_##type##_index(L, tribe, what)); \
+			*return_number = true; \
+		} \
+	} else { \
+		/* array of names */ \
+		luaL_checktype(L, 2, LUA_TTABLE); \
+		lua_pushnil(L); \
+		while (lua_next(L, 2) != 0) { \
+			rv.insert(m_get_##type##_index(L, tribe, luaL_checkstring(L, -1))); \
+			lua_pop(L, 1); \
+		} \
+	} \
+	return rv; \
+} \
+\
+btype##sMap m_parse_set_##type##s_arguments \
+	(lua_State * L, const Tribe_Descr & tribe) \
+{ \
+	int32_t nargs = lua_gettop(L); \
+	if (nargs != 2 and nargs != 3) \
+		report_error(L, "Wrong number of arguments to set_" #type "!"); \
+   btype##sMap rv; \
+	if (nargs == 3) { \
+		/* name amount */ \
+		rv.insert(btype##Amount( \
+			m_get_##type##_index(L, tribe, luaL_checkstring(L, 2)), \
+			luaL_checkuint32(L, 3) \
+		)); \
+	} else { \
+		/* array of (name, count) */ \
+		luaL_checktype(L, 2, LUA_TTABLE); \
+		lua_pushnil(L); \
+		while (lua_next(L, 2) != 0) { \
+			rv.insert(btype##Amount( \
+				m_get_##type##_index(L, tribe, luaL_checkstring(L, -2)), \
+				luaL_checkuint32(L, -1) \
+			)); \
+			lua_pop(L, 1); \
+		} \
+	} \
+	return rv; \
 }
-int upcasted_immovable_to_lua(lua_State * L, BaseImmovable * mo) {
-	if (!mo)
-		return 0;
+PARSERS(ware, Ware);
+PARSERS(worker, Worker);
+#undef PARSERS
 
-	switch  (mo->get_type()) {
-		case Map_Object::BUILDING:
-		{
-			const char * type_name = mo->type_name();
-			if (!strcmp(type_name, "constructionsite"))
-				return CAST_TO_LUA(ConstructionSite);
-			else if (!strcmp(type_name, "productionsite"))
-				return CAST_TO_LUA(ProductionSite);
-			else if (!strcmp(type_name, "militarysite"))
-				return CAST_TO_LUA(MilitarySite);
-			else if (!strcmp(type_name, "warehouse"))
-				return CAST_TO_LUA(Warehouse);
-			else if (!strcmp(type_name, "trainingsite"))
-				return CAST_TO_LUA(TrainingSite);
-			else
-				return CAST_TO_LUA(Building);
-		}
-
-		case Map_Object::FLAG:
-			return CAST_TO_LUA(Flag);
-		case Map_Object::ROAD:
-			return CAST_TO_LUA(Road);
-		case Map_Object::PORTDOCK:
-			return CAST_TO_LUA(PortDock);
-		default:
-			break;
+WaresMap count_wares_on_flag_(Flag& f, const Tribe_Descr & tribe) {
+	WaresMap rv;
+	Flag::Wares current_wares = f.get_items();
+	container_iterate_const(Flag::Wares, current_wares, w) {
+		Ware_Index i = tribe.ware_index((*w.current)->descr().name());
+		if (not rv.count(i))
+			rv.insert(WareAmount(i, 1));
+		else
+			rv[i] += 1;
 	}
-	return to_lua<L_BaseImmovable>(L, new L_BaseImmovable(*mo));
+	return rv;
 }
-#undef CAST_TO_LUA
+
+// Sort functor to sort the owners claiming a field by their influence.
+static int sort_claimers(const PlrInfluence& first, const PlrInfluence& second) {
+	return first.second > second.second;
+}
+
+}  // namespace
 
 /*
  * ========================================================================
@@ -137,7 +183,7 @@ int _WorkerEmployer::set_workers(lua_State * L)
 	container_iterate_const(PlayerImmovable::Workers, pi->get_workers(), w) {
 		Ware_Index i = tribe.worker_index((*w.current)->descr().name());
 		if (not c_workers.count(i))
-			c_workers.insert(L_ProductionSite::WorkerAmount(i, 1));
+			c_workers.insert(WorkerAmount(i, 1));
 		else
 			c_workers[i] += 1;
 		if (not setpoints.count(i))
@@ -345,6 +391,63 @@ int _SoldierEmployer::set_soldiers(lua_State * L) {
 	return 0;
 }
 
+/*
+ * Upcast the given base immovable to a higher type and hand this to
+ * Lua. We use this so that scripters always work with the highest class
+ * object available.
+ */
+#define CAST_TO_LUA(k) to_lua<L_ ##k> \
+   (L, new L_ ##k(*static_cast<k *>(mo)))
+int upcasted_bob_to_lua(lua_State * L, Bob * mo) {
+	if (!mo)
+		return 0;
+
+	switch (mo->get_bob_type()) {
+		case Bob::CRITTER:
+			return to_lua<L_Bob>(L, new L_Bob(*mo));
+		case Bob::WORKER:
+			if (mo->name() == "soldier")
+				return CAST_TO_LUA(Soldier);
+			return CAST_TO_LUA(Worker);
+		case Bob::SHIP:
+			return CAST_TO_LUA(Ship);
+	}
+	assert(false);  // Never here, hopefully.
+}
+int upcasted_immovable_to_lua(lua_State * L, BaseImmovable * mo) {
+	if (!mo)
+		return 0;
+
+	switch  (mo->get_type()) {
+		case Map_Object::BUILDING:
+		{
+			const char * type_name = mo->type_name();
+			if (!strcmp(type_name, "constructionsite"))
+				return CAST_TO_LUA(ConstructionSite);
+			else if (!strcmp(type_name, "productionsite"))
+				return CAST_TO_LUA(ProductionSite);
+			else if (!strcmp(type_name, "militarysite"))
+				return CAST_TO_LUA(MilitarySite);
+			else if (!strcmp(type_name, "warehouse"))
+				return CAST_TO_LUA(Warehouse);
+			else if (!strcmp(type_name, "trainingsite"))
+				return CAST_TO_LUA(TrainingSite);
+			else
+				return CAST_TO_LUA(Building);
+		}
+
+		case Map_Object::FLAG:
+			return CAST_TO_LUA(Flag);
+		case Map_Object::ROAD:
+			return CAST_TO_LUA(Road);
+		case Map_Object::PORTDOCK:
+			return CAST_TO_LUA(PortDock);
+		default:
+			break;
+	}
+	return to_lua<L_BaseImmovable>(L, new L_BaseImmovable(*mo));
+}
+#undef CAST_TO_LUA
 
 
 /*
@@ -454,93 +557,6 @@ HasWorkers
 		(RO) Similar to :attr:`HasWares.valid_wares` but for workers in this
 		location.
 */
-
-/*
- ==========================================================
- C Methods
- ==========================================================
- */
-// parses the get argument for all classes that can be asked for their
-// current wares. Returns a set with all Ware_Indexes that must be considered.
-
-#define GET_INDEX(type) \
-	static Ware_Index _get_ ## type ## _index \
-		(lua_State * L, const Tribe_Descr & tribe,  const std::string & what) \
-	{ \
-		Ware_Index idx = tribe. type ## _index(what); \
-		if (!idx) \
-			report_error(L, "Invalid " #type ": <%s>", what.c_str()); \
-		return idx; \
-	}
-GET_INDEX(ware);
-GET_INDEX(worker);
-#undef GET_INDEX
-
-#define PARSERS(type, btype) \
-L_Has ##btype ## s:: btype ##sSet L_Has ## btype ##s \
-	::m_parse_get_##type##s_arguments \
-		(lua_State * L, const Tribe_Descr & tribe, bool * return_number) \
-{ \
-	 /* takes either "all", a name or an array of names */ \
-	int32_t nargs = lua_gettop(L); \
-	if (nargs != 2) \
-		report_error(L, "Wrong number of arguments to get_" #type "!"); \
-	*return_number = false; \
-	btype ## sSet rv; \
-	if (lua_isstring(L, 2)) { \
-		std::string what = luaL_checkstring(L, -1); \
-		if (what == "all") { \
-			for (Ware_Index i = Ware_Index::First(); \
-					i < tribe.get_nr##type##s (); ++i) \
-				rv.insert(i); \
-		} else { \
-			/* Only one item requested */ \
-			rv.insert(_get_##type##_index(L, tribe, what)); \
-			*return_number = true; \
-		} \
-	} else { \
-		/* array of names */ \
-		luaL_checktype(L, 2, LUA_TTABLE); \
-		lua_pushnil(L); \
-		while (lua_next(L, 2) != 0) { \
-			rv.insert(_get_##type##_index(L, tribe, luaL_checkstring(L, -1))); \
-			lua_pop(L, 1); \
-		} \
-	} \
-	return rv; \
-} \
-\
-L_Has##btype##s::btype##sMap L_Has##btype##s:: \
-	m_parse_set_##type##s_arguments \
-	(lua_State * L, const Tribe_Descr & tribe) \
-{ \
-	int32_t nargs = lua_gettop(L); \
-	if (nargs != 2 and nargs != 3) \
-		report_error(L, "Wrong number of arguments to set_" #type "!"); \
-   btype##sMap rv; \
-	if (nargs == 3) { \
-		/* name amount */ \
-		rv.insert(btype##Amount( \
-			_get_##type##_index(L, tribe, luaL_checkstring(L, 2)), \
-			luaL_checkuint32(L, 3) \
-		)); \
-	} else { \
-		/* array of (name, count) */ \
-		luaL_checktype(L, 2, LUA_TTABLE); \
-		lua_pushnil(L); \
-		while (lua_next(L, 2) != 0) { \
-			rv.insert(btype##Amount( \
-				_get_##type##_index(L, tribe, luaL_checkstring(L, -2)), \
-				luaL_checkuint32(L, -1) \
-			)); \
-			lua_pop(L, 1); \
-		} \
-	} \
-	return rv; \
-}
-PARSERS(ware, Ware);
-PARSERS(worker, Worker);
-#undef PARSERS
 
 /* RST
 HasSoldiers
@@ -1336,18 +1352,6 @@ const PropertyType<L_Flag> L_Flag::Properties[] = {
  LUA METHODS
  ==========================================================
  */
-static L_Flag::WaresMap _count_wares(Flag & f, const Tribe_Descr & tribe) {
-	L_Flag::WaresMap rv;
-	Flag::Wares current_wares = f.get_items();
-	container_iterate_const(Flag::Wares, current_wares, w) {
-		Ware_Index i = tribe.ware_index((*w.current)->descr().name());
-		if (not rv.count(i))
-			rv.insert(L_Flag::WareAmount(i, 1));
-		else
-			rv[i] += 1;
-	}
-	return rv;
-}
 // Documented in ParentClass
 int L_Flag::set_wares(lua_State * L)
 {
@@ -1356,7 +1360,7 @@ int L_Flag::set_wares(lua_State * L)
 	const Tribe_Descr & tribe = f->owner().tribe();
 
 	WaresMap setpoints = m_parse_set_wares_arguments(L, tribe);
-	WaresMap c_items = _count_wares(*f, tribe);
+	WaresMap c_items = count_wares_on_flag_(*f, tribe);
 
 	uint32_t nitems = 0;
 	container_iterate_const(WaresMap, c_items, c) {
@@ -1411,7 +1415,7 @@ int L_Flag::get_wares(lua_State * L) {
 	bool return_number = false;
 	WaresSet wares_set = m_parse_get_wares_arguments(L, tribe, &return_number);
 
-	WaresMap items = _count_wares(*get(L, get_egbase(L)), tribe);
+	WaresMap items = count_wares_on_flag_(*get(L, get_egbase(L)), tribe);
 
 	if (wares_set.size() == tribe.get_nrwares().value()) { // Want all returned
 		wares_set.clear();
@@ -1537,7 +1541,7 @@ int L_Road::get_road_type(lua_State * L) {
  */
 
 // This is for get_/set_ workers which is implemented in _WorkerEmployer
-L_HasWorkers::WorkersMap L_Road::_valid_workers
+WorkersMap L_Road::_valid_workers
 		(PlayerImmovable & pi)
 {
 	Road & r = static_cast<Road &>(pi);
@@ -1893,7 +1897,7 @@ int L_ProductionSite::get_valid_wares(lua_State * L) {
  */
 
 // This is for get_/set_ workers which is implemented in _WorkerEmployer
-L_HasWorkers::WorkersMap L_ProductionSite::_valid_workers
+WorkersMap L_ProductionSite::_valid_workers
 		(PlayerImmovable & pi)
 {
 	ProductionSite & ps = static_cast<ProductionSite &>(pi);
@@ -2761,33 +2765,26 @@ int L_Field::get_owner(lua_State * L) {
 
 		Note: The one currently owning the field is in :attr:`owner`.
 */
-typedef std::pair<uint8_t, uint32_t> _PlrInfluence;
-static int _sort_claimers
-		(const _PlrInfluence & first,
-		 const _PlrInfluence & second)
-{
-	return first.second > second.second;
-}
 int L_Field::get_claimers(lua_State * L) {
 	Editor_Game_Base & egbase = get_egbase(L);
 	Map & map = egbase.map();
 
-	std::vector<_PlrInfluence> claimers;
+	std::vector<PlrInfluence> claimers;
 
 	iterate_players_existing(other_p, map.get_nrplayers(), egbase, plr)
 		claimers.push_back
-			(_PlrInfluence(plr->player_number(), plr->military_influence
+			(PlrInfluence(plr->player_number(), plr->military_influence
 					(map.get_index(m_c, map.get_width()))
 			)
 		);
 
-	std::stable_sort (claimers.begin(), claimers.end(), _sort_claimers);
+	std::stable_sort (claimers.begin(), claimers.end(), sort_claimers);
 
 	lua_createtable(L, 1, 0); // We mostly expect one claimer per field.
 
 	// Push the players with military influence
 	uint32_t cidx = 1;
-	container_iterate_const (std::vector<_PlrInfluence>, claimers, i) {
+	container_iterate_const (std::vector<PlrInfluence>, claimers, i) {
 		if (i.current->second <= 0)
 			continue;
 		lua_pushuint32(L, cidx ++);
