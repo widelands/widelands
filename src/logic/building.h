@@ -28,10 +28,10 @@
 
 #include "ai/ai_hints.h"
 #include "io/filewrite.h"
+#include "logic/bill_of_materials.h"
 #include "logic/buildcost.h"
 #include "logic/immovable.h"
 #include "logic/soldier_counts.h"
-#include "logic/ware_types.h"
 #include "logic/wareworker.h"
 #include "logic/widelands.h"
 #include "workarea_info.h"

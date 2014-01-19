@@ -31,9 +31,9 @@
 #include "container_iterate.h"
 #include "io/filewrite.h"
 #include "log.h"
+#include "logic/bill_of_materials.h"
 #include "logic/program_result.h"
 #include "logic/tattribute.h"
-#include "logic/ware_types.h"
 #include "logic/widelands.h"
 
 struct Profile;
@@ -80,7 +80,7 @@ struct ProductionProgram {
 		(char            * & parameters,
 		 Ware_Type_Group   & group,
 		 const Tribe_Descr & tribe,
-		 const Ware_Types  & inputs);
+		 const BillOfMaterials  & inputs);
 
 	/// Returns from the program.
 	///

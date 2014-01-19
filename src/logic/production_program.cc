@@ -66,7 +66,7 @@ void ProductionProgram::parse_ware_type_group
 	(char            * & parameters,
 	 Ware_Type_Group   & group,
 	 const Tribe_Descr & tribe,
-	 const Ware_Types  & inputs)
+	 const BillOfMaterials  & inputs)
 {
 	std::set<Ware_Index>::iterator last_insert_pos = group.first.end();
 	uint8_t count     = 1;
@@ -80,7 +80,7 @@ void ProductionProgram::parse_ware_type_group
 		char const terminator = *parameters;
 		*parameters = '\0';
 		Ware_Index const ware_index = tribe.safe_ware_index(ware);
-		for (wl_const_range<Ware_Types> i(inputs);; ++i)
+		for (wl_const_range<BillOfMaterials> i(inputs);; ++i)
 			if (i.empty())
 				throw game_data_error
 					(_

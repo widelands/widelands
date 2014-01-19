@@ -320,26 +320,6 @@ public:
 	CASTED_GET(Flag);
 };
 
-// Small helper class that contains the commonalities between L_Road and
-// L_ProductionSite in relation to Worker employment.
-typedef std::map<Widelands::Ware_Index, uint32_t> WorkersMap;
-// NOCOM(#sirver): this has to go too.
-class _WorkerEmployer {
-public:
-	virtual int get_workers(lua_State * L);
-	virtual int set_workers(lua_State * L);
-
-	int get_valid_workers(lua_State * L);
-
-	virtual Widelands::PlayerImmovable * get
-		(lua_State *, Widelands::Editor_Game_Base &) = 0;
-
-protected:
-	virtual WorkersMap _valid_workers(Widelands::PlayerImmovable &) = 0;
-	virtual int _new_worker
-		(Widelands::PlayerImmovable &, Widelands::Editor_Game_Base &, const Widelands::Worker_Descr *) = 0;
-};
-
 class _SoldierEmployer : public L_HasSoldiers {
 public:
 	virtual int get_soldiers(lua_State * L);
@@ -353,7 +333,7 @@ public:
 		(lua_State *, Widelands::Editor_Game_Base &) = 0;
 };
 
-class L_Road : public L_PlayerImmovable, public _WorkerEmployer {
+class L_Road : public L_PlayerImmovable {
 public:
 	LUNA_CLASS_HEAD(L_Road);
 
@@ -366,24 +346,25 @@ public:
 	/*
 	 * Properties
 	 */
-	int get_length(lua_State * L);
-	int get_start_flag(lua_State * L);
 	int get_end_flag(lua_State * L);
+	int get_length(lua_State * L);
 	int get_road_type(lua_State * L);
+	int get_start_flag(lua_State * L);
+	int get_valid_workers(lua_State * L);
 
 	/*
 	 * Lua Methods
 	 */
+	int get_workers(lua_State* L);
+	int set_workers(lua_State* L);
 
 	/*
 	 * C Methods
 	 */
 	CASTED_GET(Road);
-protected:
-	virtual WorkersMap _valid_workers(Widelands::PlayerImmovable &);
-	virtual int _new_worker
-		(Widelands::PlayerImmovable &,
-		 Widelands::Editor_Game_Base &, const Widelands::Worker_Descr *);
+	static int create_new_worker
+			(Widelands::PlayerImmovable &,
+			 Widelands::Editor_Game_Base &, const Widelands::Worker_Descr *);
 };
 
 
@@ -450,7 +431,7 @@ public:
 };
 
 
-class L_ProductionSite : public L_Building, public _WorkerEmployer {
+class L_ProductionSite : public L_Building {
 public:
 	LUNA_CLASS_HEAD(L_ProductionSite);
 
@@ -464,21 +445,21 @@ public:
 	 * Properties
 	 */
 	int get_valid_wares(lua_State * L);
+	int get_valid_workers(lua_State* L);
 
 	/*
 	 * Lua Methods
 	 */
-	int set_wares(lua_State * L);
 	int get_wares(lua_State * L);
+	int get_workers(lua_State* L);
+	int set_wares(lua_State * L);
+	int set_workers(lua_State* L);
 
 	/*
 	 * C Methods
 	 */
 	CASTED_GET(ProductionSite);
-
-protected:
-	virtual WorkersMap _valid_workers(Widelands::PlayerImmovable &);
-	virtual int _new_worker
+	static int create_new_worker
 		(Widelands::PlayerImmovable &, Widelands::Editor_Game_Base &,
 		 const Widelands::Worker_Descr *);
 };

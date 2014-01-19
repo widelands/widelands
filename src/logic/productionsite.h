@@ -26,10 +26,10 @@
 #include <string>
 #include <vector>
 
+#include "logic/bill_of_materials.h"
 #include "logic/building.h"
 #include "logic/production_program.h"
 #include "logic/program_result.h"
-#include "logic/ware_types.h"
 
 namespace Widelands {
 
@@ -64,11 +64,11 @@ struct ProductionSite_Descr : public Building_Descr {
 
 	uint32_t nr_working_positions() const {
 		uint32_t result = 0;
-		container_iterate_const(Ware_Types, working_positions(), i)
+		container_iterate_const(BillOfMaterials, working_positions(), i)
 			result += i.current->second;
 		return result;
 	}
-	const Ware_Types & working_positions() const {
+	const BillOfMaterials & working_positions() const {
 		return m_working_positions;
 	}
 	bool is_output_ware_type  (const Ware_Index& i) const {
@@ -77,7 +77,7 @@ struct ProductionSite_Descr : public Building_Descr {
 	bool is_output_worker_type(const Ware_Index& i) const {
 		return m_output_worker_types.count(i);
 	}
-	const Ware_Types & inputs() const {return m_inputs;}
+	const BillOfMaterials & inputs() const {return m_inputs;}
 	typedef std::set<Ware_Index>                       Output;
 	const Output   & output_ware_types  () const {return m_output_ware_types;}
 	const Output   & output_worker_types() const {return m_output_worker_types;}
@@ -89,8 +89,8 @@ struct ProductionSite_Descr : public Building_Descr {
 	const std::vector<std::string> & compatibility_working_positions(const std::string & workername) const;
 
 private:
-	Ware_Types m_working_positions;
-	Ware_Types m_inputs;
+	BillOfMaterials m_working_positions;
+	BillOfMaterials m_inputs;
 	Output   m_output_ware_types;
 	Output   m_output_worker_types;
 	Programs m_programs;

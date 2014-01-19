@@ -25,12 +25,13 @@
 #include "logic/widelands.h"
 
 namespace Widelands {
-typedef std::vector<std::pair<Ware_Index, uint32_t> > Ware_Types;
+typedef std::pair<Ware_Index, uint32_t> WareAmount;
+typedef std::vector<WareAmount> BillOfMaterials;
 
 // range structure for iterating ware range with index
 struct ware_range
 {
-	ware_range(const Ware_Types & range) :
+	ware_range(const BillOfMaterials & range) :
 		i(0), current(range.begin()), end(range.end()) {}
 	ware_range & operator++ () {
 		++i; ++current; return *this;
@@ -39,9 +40,9 @@ struct ware_range
 	operator bool() const {return not empty();}
 
 	uint8_t i;
-	Ware_Types::const_iterator current;
+	BillOfMaterials::const_iterator current;
 private:
-	Ware_Types::const_iterator const end;
+	BillOfMaterials::const_iterator const end;
 };
 
 }
