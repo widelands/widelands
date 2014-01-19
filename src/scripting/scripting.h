@@ -41,20 +41,24 @@ namespace Widelands {
 class EditorFactory;
 class GameFactory;
 
-struct LuaError : public _wexception {
+class LuaError : public _wexception {
+public:
 	LuaError(const std::string & reason) : wexception("%s", reason.c_str()) {}
 };
-struct LuaValueError : public LuaError {
+class LuaValueError : public LuaError {
+public:
 	LuaValueError(const std::string & wanted) :
 		LuaError("Variable not of expected type: " + wanted)
 	{}
 };
-struct LuaTableKeyError : public LuaError {
+class LuaTableKeyError : public LuaError {
+public:
 	LuaTableKeyError(const std::string & wanted) :
 		LuaError(wanted + " is not a field in this table.")
 	{}
 };
-struct LuaScriptNotExistingError : public LuaError {
+class LuaScriptNotExistingError : public LuaError {
+public:
 	LuaScriptNotExistingError(std::string ns, std::string name) :
 		LuaError("The script '" + ns + ":" + name + "' was not found!") {}
 };
