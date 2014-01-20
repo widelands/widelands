@@ -57,12 +57,46 @@ namespace LuaMap {
 
 namespace {
 
+struct SoldierDescr {
+	SoldierDescr(uint8_t ghp, uint8_t gat, uint8_t gde, uint8_t gev)
+	   : hp(ghp), at(gat), de(gde), ev(gev) {
+	}
+	SoldierDescr() : hp(0), at(0), de(0), ev(0) {
+	}
+
+	uint8_t hp;
+	uint8_t at;
+	uint8_t de;
+	uint8_t ev;
+
+	bool operator<(const SoldierDescr& ot) const {
+		bool hp_eq = hp == ot.hp;
+		bool at_eq = at == ot.at;
+		bool de_eq = de == ot.de;
+		if (hp_eq && at_eq && de_eq)
+			return ev < ot.ev;
+		if (hp_eq && at_eq)
+			return de < ot.de;
+		if (hp_eq)
+			return at < ot.at;
+		return hp < ot.hp;
+	}
+	bool operator == (const SoldierDescr& ot) const {
+		if (hp == ot.hp && at == ot.at && de == ot.de && ev == ot.ev)
+			return true;
+		return false;
+	}
+};
+
+typedef std::map<SoldierDescr, uint32_t> SoldiersMap;
 typedef std::map<Widelands::Ware_Index, uint32_t> WaresMap;
 typedef std::map<Widelands::Ware_Index, uint32_t> WorkersMap;
+typedef std::pair<SoldierDescr, uint32_t> SoldierAmount;
 typedef std::pair<Widelands::Ware_Index, uint32_t> WorkerAmount;
 typedef std::pair<uint8_t, uint32_t> PlrInfluence;
 typedef std::set<Widelands::Ware_Index> WaresSet;
 typedef std::set<Widelands::Ware_Index> WorkersSet;
+typedef std::vector<Widelands::Soldier *> SoldiersList;
 
 // parses the get argument for all classes that can be asked for their
 // current wares. Returns a set with all Ware_Indexes that must be considered.
@@ -237,15 +271,6 @@ int do_get_workers(lua_State* L, const PlayerImmovable& pi, const WorkersMap& va
 	return 1;
 }
 
-
-}  // namespace
-
-/*
- * ========================================================================
- *                         HELPER CLASSES
- * ========================================================================
- */
-
 // Does most of the work of set_workers for player immovables (buildings and roads mainly).
 template <typename T>
 int do_set_workers(lua_State* L, PlayerImmovable* pi, const WorkersMap& valid_workers) {
@@ -296,50 +321,147 @@ int do_set_workers(lua_State* L, PlayerImmovable* pi, const WorkersMap& valid_wo
 	return 0;
 }
 
-/*
- * _SoldierEmployer
- */
-int _SoldierEmployer::get_max_soldiers(lua_State * L) {
-	lua_pushuint32(L, get_sc(L, get_egbase(L))->maxSoldierCapacity());
-	return 1;
+// Unpacks the Lua table of the form {hp, at, de, ev} at the stack index
+// 'table_index' into a SoldierDescr struct.
+SoldierDescr unbox_lua_soldier_description(lua_State* L, int table_index, const Soldier_Descr& sd) {
+	SoldierDescr soldier_descr;
+
+	lua_pushuint32(L, 1);
+	lua_rawget(L, table_index);
+	soldier_descr.hp = luaL_checkuint32(L, -1);
+	lua_pop(L, 1);
+	if (soldier_descr.hp > sd.get_max_hp_level())
+		report_error
+			(L, "hp level (%i) > max hp level (%i)", soldier_descr.hp, sd.get_max_hp_level());
+
+	lua_pushuint32(L, 2);
+	lua_rawget(L, table_index);
+	soldier_descr.at = luaL_checkuint32(L, -1);
+	lua_pop(L, 1);
+	if (soldier_descr.at > sd.get_max_attack_level())
+		report_error
+			(L, "attack level (%i) > max attack level (%i)", soldier_descr.at, sd.get_max_attack_level());
+
+	lua_pushuint32(L, 3);
+	lua_rawget(L, table_index);
+	soldier_descr.de = luaL_checkuint32(L, -1);
+	lua_pop(L, 1);
+	if (soldier_descr.de > sd.get_max_defense_level())
+		report_error
+			(L, "defense level (%i) > max defense level (%i)", soldier_descr.de,
+			 sd.get_max_defense_level());
+
+	lua_pushuint32(L, 4);
+	lua_rawget(L, table_index);
+	soldier_descr.ev = luaL_checkuint32(L, -1);
+	lua_pop(L, 1);
+	if (soldier_descr.ev > sd.get_max_evade_level())
+		report_error
+			(L, "evade level (%i) > max evade level (%i)", soldier_descr.ev, sd.get_max_evade_level());
+
+	return soldier_descr;
 }
-int _SoldierEmployer::get_soldiers(lua_State * L) {
-	Editor_Game_Base & egbase = get_egbase(L);
-	SoldierControl * sc = get_sc(L, egbase);
-	const Tribe_Descr & tribe = get(L, egbase)->owner().tribe();
 
-	const Soldier_Descr & soldier_descr =  //  soldiers
-			 ref_cast<Soldier_Descr const, Worker_Descr const>
-						(*tribe.get_worker_descr(tribe.worker_index("soldier")));
-
-	std::vector<Soldier *> vec = sc->stationedSoldiers();
-	SoldiersList current_soldiers;
-	container_iterate_const(std::vector<Soldier *>, vec, i)
-		current_soldiers.push_back(*i);
-
-	return m_handle_get_soldiers(L, soldier_descr, current_soldiers);
+// Parser the arguments of set_soldiers() into a setpoint. See the
+// documentation in HasSoldiers to understand the valid arguments.
+SoldiersMap m_parse_set_soldiers_arguments(lua_State* L, const Soldier_Descr& soldier_descr) {
+	SoldiersMap rv;
+	if (lua_gettop(L) > 2) {
+		// STACK: cls, descr, count
+		const uint32_t count = luaL_checkuint32(L, 3);
+		const SoldierDescr d = unbox_lua_soldier_description(L, 2, soldier_descr);
+		rv.insert(SoldierAmount(d, count));
+	} else {
+		lua_pushnil(L);
+		while (lua_next(L, 2) != 0) {
+			const SoldierDescr d = unbox_lua_soldier_description(L, 3, soldier_descr);
+			const uint32_t count = luaL_checkuint32(L, -1);
+			rv.insert(SoldierAmount(d, count));
+			lua_pop(L, 1);
+		}
+	}
+	return rv;
 }
-int _SoldierEmployer::set_soldiers(lua_State * L) {
-	Editor_Game_Base & egbase = get_egbase(L);
-	SoldierControl * sc = get_sc(L, egbase);
-	Building * building = get(L, egbase);
-	const Tribe_Descr & tribe = building->owner().tribe();
 
-	const Soldier_Descr & soldier_descr =  //  soldiers
-		ref_cast<Soldier_Descr const, Worker_Descr const>
+// Does most of the work of get_soldiers for buildings.
+int do_get_soldiers(lua_State* L, const Widelands::SoldierControl& sc, const Tribe_Descr& tribe) {
+	if (lua_gettop(L) != 2)
+		return report_error(L, "Invalid arguments!");
+
+	const SoldiersList soldiers = sc.stationedSoldiers();
+	if (lua_isstring(L, -1)) {
+		if (std::string(luaL_checkstring(L, -1)) != "all")
+			return report_error(L, "Invalid arguments!");
+
+		// Return All Soldiers
+		SoldiersMap hist;
+		BOOST_FOREACH(const Soldier* s, soldiers) {
+			SoldierDescr sd
+				(s->get_hp_level(), s->get_attack_level(),
+				 s->get_defense_level(), s->get_evade_level());
+
+			SoldiersMap::iterator i = hist.find(sd);
+			if (i == hist.end())
+				hist[sd] = 1;
+			else
+				i->second += 1;
+		}
+
+		// Get this to Lua.
+		lua_newtable(L);
+		BOOST_FOREACH(const SoldiersMap::value_type& i, hist) {
+			lua_createtable(L, 4, 0);
+#define PUSHLEVEL(idx, name)                                                                       \
+	lua_pushuint32(L, idx);                                                                         \
+	lua_pushuint32(L, i.first.name);                                                                \
+	lua_rawset(L, -3);
+			PUSHLEVEL(1, hp);
+			PUSHLEVEL(2, at);
+			PUSHLEVEL(3, de);
+			PUSHLEVEL(4, ev);
+#undef PUSHLEVEL
+
+			lua_pushuint32(L, i.second);
+			lua_rawset(L, -3);
+		}
+	} else {
+		const Soldier_Descr& soldier_descr = ref_cast<Soldier_Descr const, Worker_Descr const>
 			(*tribe.get_worker_descr(tribe.worker_index("soldier")));
 
+		// Only return the number of those requested
+		const SoldierDescr wanted = unbox_lua_soldier_description(L, 2, soldier_descr);
+		uint32_t rv = 0;
+		BOOST_FOREACH(const Soldier* s, soldiers) {
+			SoldierDescr sd
+				(s->get_hp_level(), s->get_attack_level(), s->get_defense_level(), s->get_evade_level());
+			if (sd == wanted)
+				++rv;
+		}
+		lua_pushuint32(L, rv);
+	}
+	return 1;
+}
+
+// Does most of the work of set_soldiers for buildings.
+int do_set_soldiers
+	(lua_State* L, const Coords& building_position, SoldierControl* sc, Player* owner)
+{
+	assert(sc != nullptr);
+	assert(owner != nullptr);
+
+	const Tribe_Descr& tribe = owner->tribe();
+	const Soldier_Descr& soldier_descr =  //  soldiers
+	   ref_cast<Soldier_Descr const, Worker_Descr const>
+			(*tribe.get_worker_descr(tribe.worker_index("soldier")));
 	SoldiersMap setpoints = m_parse_set_soldiers_arguments(L, soldier_descr);
 
 	// Get information about current soldiers
-	std::vector<Soldier *> curs = sc->stationedSoldiers();
+	const std::vector<Soldier*> curs = sc->stationedSoldiers();
 	SoldiersMap hist;
-	container_iterate (std::vector<Soldier * >, curs, s) {
+	BOOST_FOREACH(const Soldier* s, curs) {
 		SoldierDescr sd
-			((*s.current)->get_hp_level(),
-			 (*s.current)->get_attack_level(),
-			 (*s.current)->get_defense_level(),
-			 (*s.current)->get_evade_level());
+			(s->get_hp_level(), s->get_attack_level(),
+			 s->get_defense_level(), s->get_evade_level());
 
 		SoldiersMap::iterator i = hist.find(sd);
 		if (i == hist.end())
@@ -351,27 +473,24 @@ int _SoldierEmployer::set_soldiers(lua_State * L) {
 	}
 
 	// Now adjust them
-	container_iterate_const(SoldiersMap, setpoints, sp) {
+	Editor_Game_Base& egbase = get_egbase(L);
+	BOOST_FOREACH(const SoldiersMap::value_type& sp, setpoints) {
 		uint32_t cur = 0;
-		SoldiersMap::iterator i = hist.find(sp->first);
+		SoldiersMap::iterator i = hist.find(sp.first);
 		if (i != hist.end())
 			cur = i->second;
 
-		int d = sp->second - cur;
+		int d = sp.second - cur;
 		if (d < 0) {
 			while (d) {
-				std::vector<Soldier *> stationed_soldiers = sc->stationedSoldiers();
-				container_iterate_const(std::vector<Soldier *>, stationed_soldiers, s)
-				{
+				BOOST_FOREACH(Soldier * s, sc->stationedSoldiers()) {
 					SoldierDescr is
-						((*s.current)->get_hp_level(),
-						 (*s.current)->get_attack_level(),
-						 (*s.current)->get_defense_level(),
-						 (*s.current)->get_evade_level());
+						(s->get_hp_level(), s->get_attack_level(),
+						 s->get_defense_level(), s->get_evade_level());
 
-					if (is == sp->first) {
-						sc->outcorporateSoldier(egbase, **s);
-						(*s.current)->remove(egbase);
+					if (is == sp.first) {
+						sc->outcorporateSoldier(egbase, *s);
+						s->remove(egbase);
 						++d;
 						break;
 					}
@@ -379,15 +498,10 @@ int _SoldierEmployer::set_soldiers(lua_State * L) {
 			}
 		} else if (d > 0) {
 			for (; d; --d) {
-				Soldier & soldier =
-					ref_cast<Soldier, Worker>
-					(soldier_descr.create
-					 (egbase, building->owner(), 0, building->get_position()));
-
+				Soldier& soldier = ref_cast<Soldier, Worker>
+					(soldier_descr.create(egbase, *owner, 0, building_position));
 				soldier.set_level
-					(sp.current->first.hp, sp.current->first.at,
-					 sp.current->first.de, sp.current->first.ev);
-
+					(sp.first.hp, sp.first.at, sp.first.de, sp.first.ev);
 				if (sc->incorporateSoldier(egbase, soldier)) {
 					soldier.remove(egbase);
 					return report_error(L, "No space left for soldier!");
@@ -397,6 +511,8 @@ int _SoldierEmployer::set_soldiers(lua_State * L) {
 	}
 	return 0;
 }
+}  // namespace
+
 
 /*
  * Upcast the given base immovable to a higher type and hand this to
@@ -421,6 +537,7 @@ int upcasted_bob_to_lua(lua_State * L, Bob * mo) {
 	}
 	assert(false);  // Never here, hopefully.
 }
+
 int upcasted_immovable_to_lua(lua_State * L, BaseImmovable * mo) {
 	if (!mo)
 		return 0;
@@ -661,144 +778,6 @@ HasSoldiers
 		this will be :const:`nil`.
 */
 
-/*
- ==========================================================
- C Methods
- ==========================================================
- */
-
-int L_HasSoldiers::m_get_soldier_levels
-	(lua_State * L, int tidx, const Soldier_Descr & sd, SoldierDescr & rv)
-{
-	lua_pushuint32(L, 1);
-	lua_rawget(L, tidx);
-	rv.hp = luaL_checkuint32(L, -1);
-	lua_pop(L, 1);
-	if (rv.hp > sd.get_max_hp_level())
-		return
-			report_error
-				(L, "hp level (%i) > max hp level (%i)",
-				 rv.hp, sd.get_max_hp_level());
-
-	lua_pushuint32(L, 2);
-	lua_rawget(L, tidx);
-	rv.at = luaL_checkuint32(L, -1);
-	lua_pop(L, 1);
-	if (rv.at > sd.get_max_attack_level())
-		return
-			report_error
-			(L, "attack level (%i) > max attack level (%i)",
-			 rv.at, sd.get_max_attack_level());
-
-	lua_pushuint32(L, 3);
-	lua_rawget(L, tidx);
-	rv.de = luaL_checkuint32(L, -1);
-	lua_pop(L, 1);
-	if (rv.de > sd.get_max_defense_level())
-		return
-			report_error
-			(L, "defense level (%i) > max defense level (%i)",
-			 rv.de, sd.get_max_defense_level());
-
-	lua_pushuint32(L, 4);
-	lua_rawget(L, tidx);
-	rv.ev = luaL_checkuint32(L, -1);
-	lua_pop(L, 1);
-	if (rv.ev > sd.get_max_evade_level())
-		return
-			report_error
-			(L, "evade level (%i) > max evade level (%i)",
-			 rv.ev, sd.get_max_evade_level());
-
-	return 0;
-}
-L_HasSoldiers::SoldiersMap L_HasSoldiers::m_parse_set_soldiers_arguments
-		(lua_State * L, const Soldier_Descr & soldier_descr)
-{
-	SoldiersMap rv;
-	uint32_t count;
-
-	if (lua_gettop(L) > 2) {
-		// STACK: cls, descr, count
-		count = luaL_checkuint32(L, 3);
-		SoldierDescr d;
-		m_get_soldier_levels(L, 2, soldier_descr, d);
-
-		rv.insert(SoldierAmount(d, count));
-	} else {
-		lua_pushnil(L);
-		while (lua_next(L, 2) != 0) {
-			SoldierDescr d;
-			m_get_soldier_levels(L, 3, soldier_descr, d);
-			count = luaL_checkuint32(L, -1);
-			rv.insert(SoldierAmount(d, count));
-			lua_pop(L, 1);
-		}
-	}
-	return rv;
-}
-int L_HasSoldiers::m_handle_get_soldiers
-		(lua_State * L, const Soldier_Descr & soldier_descr,
-		 const SoldiersList & soldiers)
-{
-	if (lua_gettop(L) != 2)
-		return report_error(L, "Invalid arguments!");
-
-	if (lua_isstring(L, -1)) {
-		if (std::string(luaL_checkstring(L, -1)) != "all")
-			return report_error(L, "Invalid arguments!");
-
-		// Return All Soldiers
-		SoldiersMap hist;
-		container_iterate_const(SoldiersList, soldiers, s) {
-			SoldierDescr sd
-				((*s.current)->get_hp_level(),
-				 (*s.current)->get_attack_level(),
-				 (*s.current)->get_defense_level(),
-				 (*s.current)->get_evade_level());
-
-			SoldiersMap::iterator i = hist.find(sd);
-			if (i == hist.end())
-				hist[sd] = 1;
-			else
-				i->second += 1;
-		}
-
-		// Get this to lua
-		lua_newtable(L);
-		container_iterate_const(SoldiersMap, hist, i) {
-			lua_createtable(L, 4, 0);
-#define PUSHLEVEL(idx, name) \
-			lua_pushuint32(L, idx); lua_pushuint32(L, i.current->first.name); \
-			lua_rawset(L, -3);
-			PUSHLEVEL(1, hp);
-			PUSHLEVEL(2, at);
-			PUSHLEVEL(3, de);
-			PUSHLEVEL(4, ev);
-#undef PUSHLEVEL
-
-			lua_pushuint32(L, i.current->second);
-			lua_rawset(L, -3);
-		}
-	} else {
-		// Only return the number of those requested
-		SoldierDescr wanted;
-		m_get_soldier_levels(L, 2, soldier_descr, wanted);
-
-		uint32_t rv = 0;
-		container_iterate_const(SoldiersList, soldiers, s) {
-			SoldierDescr sd
-				((*s.current)->get_hp_level(),
-				 (*s.current)->get_attack_level(),
-				 (*s.current)->get_defense_level(),
-				 (*s.current)->get_evade_level());
-			if (sd == wanted)
-				++ rv;
-		}
-		lua_pushuint32(L, rv);
-	}
-	return 1;
-}
 
 /* RST
 Module Classes
@@ -1016,21 +995,20 @@ void L_MapObject::__persist(lua_State * L) {
 	Game & game = get_game(L);
 
 	uint32_t idx = 0;
-	if (m_ptr && m_ptr->get(game))
-		idx = mos.get_object_file_index(*m_ptr->get(game));
+	if (Map_Object* obj = m_ptr.get(game))
+		idx = mos.get_object_file_index(*obj);
 
 	PERS_UINT32("file_index", idx);
 }
-void L_MapObject::__unpersist(lua_State * L) {
+void L_MapObject::__unpersist(lua_State* L) {
 	uint32_t idx;
 	UNPERS_UINT32("file_index", idx);
 
 	if (!idx)
 		m_ptr = 0;
 	else {
-		Map_Map_Object_Loader & mol = *get_mol(L);
-
-		m_ptr = new Object_Ptr(&mol.get<Map_Object>(idx));
+		Map_Map_Object_Loader& mol = *get_mol(L);
+		m_ptr = &mol.get<Map_Object>(idx);
 	}
 }
 
@@ -1162,23 +1140,15 @@ int L_MapObject::has_attribute(lua_State * L) {
  C METHODS
  ==========================================================
  */
-Map_Object * L_MapObject::get
-	(lua_State * L, Editor_Game_Base & egbase, std::string name)
-{
-	Map_Object * o = m_get_or_zero(egbase);
+Map_Object* L_MapObject::get(lua_State* L, Editor_Game_Base& egbase, std::string name) {
+	Map_Object* o = m_get_or_zero(egbase);
 	if (!o)
 		report_error(L, "%s no longer exists!", name.c_str());
 	return o;
 }
-Map_Object * L_MapObject::m_get_or_zero(Editor_Game_Base & egbase)
-{
-	Map_Object * o = 0;
-	if (m_ptr)
-		o = m_ptr->get(egbase);
-	return o;
+Map_Object* L_MapObject::m_get_or_zero(Editor_Game_Base& egbase) {
+	return m_ptr.get(egbase);
 }
-
-
 
 /* RST
 BaseImmovable
@@ -1849,6 +1819,18 @@ WH_GET(ware, Ware);
 WH_GET(worker, Worker);
 #undef GET
 
+// documented in parent class
+int L_Warehouse::get_soldiers(lua_State* L) {
+	Warehouse* wh = get(L, get_egbase(L));
+	return do_get_soldiers(L, *wh, wh->owner().tribe());
+}
+
+// documented in parent class
+int L_Warehouse::set_soldiers(lua_State* L) {
+	Warehouse* wh = get(L, get_egbase(L));
+	return do_set_soldiers(L, wh->get_position(), wh, wh->get_owner());
+}
+
 /*
  ==========================================================
  C METHODS
@@ -2032,11 +2014,29 @@ const PropertyType<L_MilitarySite> L_MilitarySite::Properties[] = {
  ==========================================================
  */
 
+// documented in parent class
+int L_MilitarySite::get_max_soldiers(lua_State* L) {
+	lua_pushuint32(L, get(L, get_egbase(L))->soldierCapacity());
+	return 1;
+}
+
 /*
  ==========================================================
  LUA METHODS
  ==========================================================
  */
+
+// documented in parent class
+int L_MilitarySite::get_soldiers(lua_State* L) {
+	MilitarySite* ms = get(L, get_egbase(L));
+	return do_get_soldiers(L, *ms, ms->owner().tribe());
+}
+
+// documented in parent class
+int L_MilitarySite::set_soldiers(lua_State* L) {
+	MilitarySite* ms = get(L, get_egbase(L));
+	return do_set_soldiers(L, ms->get_position(), ms, ms->get_owner());
+}
 
 /*
  ==========================================================
@@ -2071,11 +2071,29 @@ const PropertyType<L_TrainingSite> L_TrainingSite::Properties[] = {
  ==========================================================
  */
 
+// documented in parent class
+int L_TrainingSite::get_max_soldiers(lua_State* L) {
+	lua_pushuint32(L, get(L, get_egbase(L))->soldierCapacity());
+	return 1;
+}
+
 /*
  ==========================================================
  LUA METHODS
  ==========================================================
  */
+
+// documented in parent class
+int L_TrainingSite::get_soldiers(lua_State* L) {
+	TrainingSite* ts = get(L, get_egbase(L));
+	return do_get_soldiers(L, *ts, ts->owner().tribe());
+}
+
+// documented in parent class
+int L_TrainingSite::set_soldiers(lua_State* L) {
+	TrainingSite* ts = get(L, get_egbase(L));
+	return do_set_soldiers(L, ts->get_position(), ts, ts->get_owner());
+}
 
 /*
  ==========================================================
