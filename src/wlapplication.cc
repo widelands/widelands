@@ -888,6 +888,8 @@ bool WLApplication::init_settings() {
 	s.get_string("servername");
 	s.get_string("realname");
 	s.get_string("ui_font");
+	s.get_string("metaserver");
+	s.get_natural("metaserverport");
 	// KLUDGE!
 
 	return true;
