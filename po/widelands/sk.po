@@ -7,15 +7,15 @@ msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2013-09-15 19:41+0200\n"
-"PO-Revision-Date: 2013-09-20 15:15+0000\n"
+"PO-Revision-Date: 2014-01-03 13:19+0000\n"
 "Last-Translator: Miroslav Remák <Unknown>\n"
 "Language-Team: Prometheus <mmatej@yahoo.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 1 : (n>=2 && n<=4) ? 2 : 0;\n"
-"X-Launchpad-Export-Date: 2013-09-21 05:11+0000\n"
-"X-Generator: Launchpad (build 16765)\n"
+"X-Launchpad-Export-Date: 2014-01-04 05:12+0000\n"
+"X-Generator: Launchpad (build 16877)\n"
 "X-Poedit-Country: czech republic\n"
 "X-Poedit-Language: czech\n"
 
@@ -71,8 +71,8 @@ msgid ""
 "Widelands could not load the file \"%s\". The file format seems to be "
 "incompatible."
 msgstr ""
-"Widelands nemohol načítať súbor \"%s\". Vyzerá to tak, že formát súboru nie "
-"je kompatibilný."
+"Nebolo možné načítať súbor \"%s\". Zdá sa, že formát súboru nie je "
+"kompatibilný."
 
 #: ../../src/wlapplication.cc:949 ../../src/wlapplication.cc:958
 msgid "could not find the path of the main executable"
@@ -143,7 +143,7 @@ msgstr ""
 "                      hry Widelands\n"
 " --homedir=NÁZOV_PRIEČINKA\n"
 "                      Používať stanovený priečinok na konfiguračné\n"
-"                      súbory, uložené hry a nahrávky\n"
+"                      súbory, uložené hry a záznamy\n"
 
 #: ../../src/wlapplication.cc:1347
 msgid "                      Default is ~/.widelands\n"
@@ -167,11 +167,11 @@ msgid ""
 "                      If this is 0 replays are not deleted.\n"
 msgstr ""
 " --record=NÁZOV_SÚBORU\n"
-"                      Uloží všetky udalosti do určeného súboru pre\n"
+"                      Uložiť všetky udalosti do určeného súboru pre\n"
 "                      neskoršie prehrávanie.\n"
 " --playback=NÁZOV_SÚBORU\n"
-"                      Prehrá určený súbor (viď --record)\n"
-" --coredump=[yes|no]  Generuje výpis pamäte pri chybách segmentácie\n"
+"                      Prehrať určený súbor (viď --record)\n"
+" --coredump=[yes|no]  Generovať výpis pamäte pri chybách segmentácie\n"
 "                      namiesto použitia SDL\n"
 " --language=[de_DE|sv_SE|...]\n"
 "                      Používaná lokalizácia.\n"
@@ -181,8 +181,8 @@ msgstr ""
 " --remove_syncstreams=[true|false]\n"
 "                      Pri spustení odstrániť syncstream súbory\n"
 " --remove_replays=[...]\n"
-"                      Odstániť nahrávky po stanovenom počte dní.\n"
-"                      Ak je nastavené na 0, nahrávky sa nezmažú.\n"
+"                      Odstániť záznamy po stanovenom počte dní.\n"
+"                      Ak je nastavené na 0, záznamy sa nezmažú.\n"
 
 #: ../../src/wlapplication.cc:1365
 msgid ""
@@ -404,15 +404,15 @@ msgstr "Pripravuje sa hra"
 
 #: ../../src/wlapplication.cc:2137
 msgid "End of replay"
-msgstr "Koniec nahrávky"
+msgstr "Koniec záznamu"
 
 #: ../../src/wlapplication.cc:2139
 msgid ""
 "The end of the replay has been reached and the game has been paused. You may "
 "unpause the game and continue watching if you want to."
 msgstr ""
-"Bol dosiahnutý koniec nahrávky a hra bola pozastavená. Môžete hru opäť "
-"spustiť a pokračovať v pozeraní, ak chcete."
+"Bol dosiahnutý koniec záznamu a hra bola pozastavená. Ak chete, môžete hru "
+"opäť spustiť a pokračovať v pozeraní."
 
 #: ../../src/wlapplication.cc:2222 ../../src/logic/game.cc:375
 #: ../../src/logic/game.cc:414
@@ -3088,7 +3088,7 @@ msgstr "Zmeniť mapu alebo uloženú hru"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:126 ../../src/ui_fsmenu/launchSPG.cc:69
 msgid "Start game"
-msgstr "Začni hrať"
+msgstr "Začať hru"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:142
 msgid "Show the help window"
@@ -3437,7 +3437,7 @@ msgstr "Neznámy herný čas"
 
 #: ../../src/ui_fsmenu/loadreplay.cc:67
 msgid "Choose a replay"
-msgstr "Zvoľte nahrávku"
+msgstr "Zvoľte záznam hry"
 
 #: ../../src/ui_fsmenu/main.cc:40
 msgid "Play Tutorial"
@@ -3453,7 +3453,7 @@ msgstr "Sieťová hra"
 
 #: ../../src/ui_fsmenu/main.cc:55
 msgid "Watch Replay"
-msgstr "Pozrieť nahrávku"
+msgstr "Sledovať záznam"
 
 #: ../../src/ui_fsmenu/main.cc:65 ../../src/wui/game_options_menu.cc:47
 #: ../../src/wui/interactive_player.cc:110
@@ -3569,7 +3569,7 @@ msgstr "nikto"
 
 #: ../../src/ui_fsmenu/netsetup_lan.cc:42
 msgid "Begin Network Game"
-msgstr "Začni sieťovú hru"
+msgstr "Začať sieťovú hru"
 
 #: ../../src/ui_fsmenu/netsetup_lan.cc:46
 msgid "List of games in your local network:"
@@ -3688,7 +3688,7 @@ msgstr "Automaticky uložiť hru každých"
 
 #: ../../src/ui_fsmenu/options.cc:183
 msgid "Remove Replays older than:"
-msgstr "Vymazať nahrávky staršie ako:"
+msgstr "Mazať záznamy staršie ako:"
 
 #: ../../src/ui_fsmenu/options.cc:198
 msgid "Off"
@@ -3729,7 +3729,7 @@ msgstr "Prehrať zvuk pri príchode správy."
 
 #: ../../src/ui_fsmenu/options.cc:454
 msgid "Do not zip widelands data files (maps, replays and savegames)."
-msgstr "Nekomprimovať súbory dát (mapy, nahrávky a uložené hry)."
+msgstr "Nekomprimovať súbory dát (mapy, záznamy a uložené hry)."
 
 #: ../../src/ui_fsmenu/options.cc:459
 msgid "Speed of a new game:"
@@ -5025,7 +5025,7 @@ msgstr "Hory: %u %%"
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:244
 msgid "Island mode:"
-msgstr "Mód ostrova:"
+msgstr "Režim ostrova:"
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:251
 msgid "Resources:"

@@ -2,179 +2,180 @@
 # Copyright (c) 2013 Rosetta Contributors and Canonical Ltd 2013
 # This file is distributed under the same license as the widelands package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2013.
-#
+# GunChleoc <fios@foramnagaidhlig.net>, 2013.
 msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2013-09-15 17:41+0000\n"
-"PO-Revision-Date: 2013-10-08 08:18+0000\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: Gaelic; Scottish <gd@li.org>\n"
+"PO-Revision-Date: 2013-10-10 17:03+0000\n"
+"Last-Translator: GunChleoc <Unknown>\n"
+"Language-Team: Fòram na Gàidhlig http://www.foramnagaidhlig.net\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-10-09 05:12+0000\n"
+"X-Launchpad-Export-Date: 2013-10-11 04:35+0000\n"
 "X-Generator: Launchpad (build 16799)\n"
+"Language: gd\n"
 
 #: ../../worlds/desert/terrainconf:35
 msgid "Beach"
-msgstr ""
+msgstr "Traigh"
 
 #: ../../worlds/desert/conf:71
 msgid "Beech"
-msgstr ""
+msgstr "Faidhbhile"
 
 #: ../../worlds/desert/conf:72
 msgid "Beech medium"
-msgstr ""
+msgstr "Faidhbhile mheadhanach"
 
 #: ../../worlds/desert/conf:73
 msgid "Beech small"
-msgstr ""
+msgstr "Faidhbhile bheag"
 
 #: ../../worlds/desert/conf:74
 msgid "Beech tiny"
-msgstr ""
+msgstr "Faidhbhile bheag bhìodach"
 
 #: ../../worlds/desert/conf:85
 msgid "Bunny"
-msgstr ""
+msgstr "Coineanach"
 
 #: ../../worlds/desert/conf:7
 #: ../../worlds/desert/conf:8
 #: ../../worlds/desert/conf:9
 msgid "Bush"
-msgstr ""
+msgstr "Preas"
 
 #: ../../worlds/desert/conf:10
 #: ../../worlds/desert/conf:11
 #: ../../worlds/desert/conf:12
 #: ../../worlds/desert/conf:13
 msgid "Cactus"
-msgstr ""
+msgstr "Cactas"
 
 #: ../../worlds/desert/resconf:4
 msgid "Coal"
-msgstr ""
+msgstr "Gual"
 
 #: ../../worlds/desert/conf:14
 #: ../../worlds/desert/conf:15
 #: ../../worlds/desert/conf:16
 #: ../../worlds/desert/conf:17
 msgid "Dead Tree"
-msgstr ""
+msgstr "Craobh mharbh"
 
 #: ../../worlds/desert/conf:86
 msgid "Deer"
-msgstr ""
+msgstr "Fiadh"
 
 #: ../../worlds/desert/conf:3
 msgid "Desert"
-msgstr ""
+msgstr "Fàsach"
 
 #: ../../worlds/desert/terrainconf:8
 msgid "Desert1"
-msgstr ""
+msgstr "Fàsach 1"
 
 #: ../../worlds/desert/terrainconf:13
 msgid "Desert2"
-msgstr ""
+msgstr "Fàsach 2"
 
 #: ../../worlds/desert/terrainconf:18
 msgid "Desert3"
-msgstr ""
+msgstr "Fàsach 3"
 
 #: ../../worlds/desert/terrainconf:23
 msgid "Desert4"
-msgstr ""
+msgstr "Fàsach 4"
 
 #: ../../worlds/desert/terrainconf:29
 msgid "Dry soil"
-msgstr ""
+msgstr "Ùir thioram"
 
 #: ../../worlds/desert/conf:87
 msgid "Duck"
-msgstr ""
+msgstr "Tunnag"
 
 #: ../../worlds/desert/resconf:41
 msgid "Fish"
-msgstr ""
+msgstr "Iasg"
 
 #: ../../worlds/desert/conf:88
 msgid "Fox"
-msgstr ""
+msgstr "Sionnach"
 
 #: ../../worlds/desert/resconf:12
 msgid "Gold"
-msgstr ""
+msgstr "Òr"
 
 #: ../../worlds/desert/resconf:28
 msgid "Granite"
-msgstr ""
+msgstr "Graineal"
 
 #: ../../worlds/desert/conf:18
 #: ../../worlds/desert/conf:19
 #: ../../worlds/desert/conf:20
 msgid "Grass"
-msgstr ""
+msgstr "Feur"
 
 #: ../../worlds/desert/terrainconf:57
 msgid "High mountain meadow"
-msgstr ""
+msgstr "Cluain àrd"
 
 #: ../../worlds/desert/resconf:20
 msgid "Iron"
-msgstr ""
+msgstr "Iarann"
 
 #: ../../worlds/desert/conf:75
 msgid "Larch"
-msgstr ""
+msgstr "Learag"
 
 #: ../../worlds/desert/conf:76
 msgid "Larch medium"
-msgstr ""
+msgstr "Learag mheadhanach"
 
 #: ../../worlds/desert/conf:77
 msgid "Larch small"
-msgstr ""
+msgstr "Learag bheag"
 
 #: ../../worlds/desert/conf:78
 msgid "Larch tiny"
-msgstr ""
+msgstr "Learag bheag bhìodach"
 
 #: ../../worlds/desert/terrainconf:96
 msgid "Lava"
-msgstr ""
+msgstr "Làbha"
 
 #: ../../worlds/desert/terrainconf:46
 msgid "Meadow"
-msgstr ""
+msgstr "Faiche"
 
 #: ../../worlds/desert/terrainconf:52
 msgid "Mountain meadow"
-msgstr ""
+msgstr "Cluain"
 
 #: ../../worlds/desert/terrainconf:62
 msgid "Mountain1"
-msgstr ""
+msgstr "Beinn 1"
 
 #: ../../worlds/desert/terrainconf:68
 msgid "Mountain2"
-msgstr ""
+msgstr "Beinn 2"
 
 #: ../../worlds/desert/terrainconf:74
 msgid "Mountain3"
-msgstr ""
+msgstr "Beinn 3"
 
 #: ../../worlds/desert/terrainconf:80
 msgid "Mountain4"
-msgstr ""
+msgstr "Beinn 4"
 
 #: ../../worlds/desert/conf:21
 #: ../../worlds/desert/conf:22
 msgid "Mushroom"
-msgstr ""
+msgstr "Balgan-buachair"
 
 #: ../../worlds/desert/conf:51
 #: ../../worlds/desert/conf:55
@@ -182,7 +183,7 @@ msgstr ""
 #: ../../worlds/desert/conf:63
 #: ../../worlds/desert/conf:67
 msgid "Palm"
-msgstr ""
+msgstr "Pailm"
 
 #: ../../worlds/desert/conf:52
 #: ../../worlds/desert/conf:56
@@ -190,7 +191,7 @@ msgstr ""
 #: ../../worlds/desert/conf:64
 #: ../../worlds/desert/conf:68
 msgid "Palm medium"
-msgstr ""
+msgstr "Pailm mheadhanach"
 
 #: ../../worlds/desert/conf:53
 #: ../../worlds/desert/conf:57
@@ -198,7 +199,7 @@ msgstr ""
 #: ../../worlds/desert/conf:65
 #: ../../worlds/desert/conf:69
 msgid "Palm small"
-msgstr ""
+msgstr "Pailm bheag"
 
 #: ../../worlds/desert/conf:54
 #: ../../worlds/desert/conf:58
@@ -206,7 +207,7 @@ msgstr ""
 #: ../../worlds/desert/conf:66
 #: ../../worlds/desert/conf:70
 msgid "Palm tiny"
-msgstr ""
+msgstr "Pailm bheag bhìodach"
 
 #: ../../worlds/desert/conf:23
 #: ../../worlds/desert/conf:24
@@ -215,37 +216,37 @@ msgstr ""
 #: ../../worlds/desert/conf:27
 #: ../../worlds/desert/conf:28
 msgid "Pebble"
-msgstr ""
+msgstr "Morghan"
 
 #: ../../worlds/desert/conf:79
 msgid "Rowan"
-msgstr ""
+msgstr "Caorann"
 
 #: ../../worlds/desert/conf:80
 msgid "Rowan medium"
-msgstr ""
+msgstr "Caorann meadhanach"
 
 #: ../../worlds/desert/conf:81
 msgid "Rowan small"
-msgstr ""
+msgstr "Caorann beag"
 
 #: ../../worlds/desert/conf:82
 msgid "Rowan tiny"
-msgstr ""
+msgstr "Caorann bìodach"
 
 #: ../../worlds/desert/conf:89
 msgid "Sheep"
-msgstr ""
+msgstr "Caora"
 
 #: ../../worlds/desert/conf:37
 msgid "Shell"
-msgstr ""
+msgstr "Slige"
 
 #: ../../worlds/desert/conf:34
 #: ../../worlds/desert/conf:35
 #: ../../worlds/desert/conf:36
 msgid "Skeleton"
-msgstr ""
+msgstr "Cnàimhneach"
 
 #: ../../worlds/desert/conf:38
 #: ../../worlds/desert/conf:39
@@ -255,11 +256,11 @@ msgstr ""
 #: ../../worlds/desert/conf:43
 #: ../../worlds/desert/conf:44
 msgid "Standing Stones"
-msgstr ""
+msgstr "Tursachan"
 
 #: ../../worlds/desert/terrainconf:40
 msgid "Steppe"
-msgstr ""
+msgstr "Steip"
 
 #: ../../worlds/desert/conf:45
 #: ../../worlds/desert/conf:46
@@ -268,20 +269,20 @@ msgstr ""
 #: ../../worlds/desert/conf:49
 #: ../../worlds/desert/conf:50
 msgid "Stones"
-msgstr ""
+msgstr "Clachan"
 
 #: ../../worlds/desert/conf:2
 msgid "The Widelands Development Team"
-msgstr ""
+msgstr "An sgioba leasachaidh Widelands"
 
 #: ../../worlds/desert/conf:4
 msgid "This is the wide and sandy country of the bedouins"
-msgstr ""
+msgstr "Seo dùthaich fharsaing ghainmheach nam Beidiunach"
 
 #: ../../worlds/desert/resconf:36
 #: ../../worlds/desert/terrainconf:89
 msgid "Water"
-msgstr ""
+msgstr "Uisge"
 
 #: ../../worlds/desert/conf:29
 #: ../../worlds/desert/conf:30
@@ -289,4 +290,4 @@ msgstr ""
 #: ../../worlds/desert/conf:32
 #: ../../worlds/desert/conf:33
 msgid "ruins"
-msgstr ""
+msgstr "Làrach"

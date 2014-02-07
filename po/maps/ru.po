@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2013-09-15 17:41+0000\n"
-"PO-Revision-Date: 2013-09-23 20:15+0000\n"
-"Last-Translator: Urra <lention@qip.ru>\n"
+"PO-Revision-Date: 2013-11-22 08:40+0000\n"
+"Last-Translator: Александр <sa13690@yandex.ru>\n"
 "Language-Team: Russian <ru@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-09-24 05:25+0000\n"
-"X-Generator: Launchpad (build 16771)\n"
+"X-Launchpad-Export-Date: 2013-11-23 05:13+0000\n"
+"X-Generator: Launchpad (build 16831)\n"
 "X-Poedit-Country: RUSSIAN FEDERATION\n"
 "X-Poedit-Language: Russian\n"
 
@@ -32,7 +32,7 @@ msgstr "01 - Пряди Малак Мора"
 
 #: ../../campaigns/cconfig:69
 msgid "02 - A Place to call Home"
-msgstr "02 - Место, завущееся домом"
+msgstr "02 - Место, зовущееся домом"
 
 #: ../../campaigns/cconfig:86
 msgid "02 - An Outpost for Exile"
@@ -40,7 +40,7 @@ msgstr "02 - Аванпост  Изгнания"
 
 #: ../../campaigns/cconfig:74
 msgid "03 - This Land is our Land"
-msgstr "Эта земля - Наша земля"
+msgstr "03 - Эта земля - Наша земля"
 
 #: ../../maps/Long, long way.wmf/elemental:11
 msgid ""
@@ -396,7 +396,7 @@ msgstr ""
 
 #: ../../maps/Kings and Queens.wmf/elemental:9
 msgid "Kings and Queens"
-msgstr ""
+msgstr "Короли и Королевы"
 
 #: ../../maps/Lake of tranquility.wmf/elemental:7
 msgid "Lake of Tranquility"
@@ -416,7 +416,7 @@ msgstr ""
 
 #: ../../maps/Long, long way.wmf/elemental:9
 msgid "Long, long way"
-msgstr ""
+msgstr "Долгий путь"
 
 #: ../../maps/Crossing the horizon.wmf/elemental:11
 msgid "Man your ship and sail to the horizon."
@@ -555,7 +555,7 @@ msgstr "Соревнующиеся команды: (синие, желтые) п
 
 #: ../../maps/Crossing the horizon.wmf/elemental:12
 msgid "Suggested Teams: all ok"
-msgstr ""
+msgstr "Соревнующиеся команды: все"
 
 #: ../../maps/Rendez-Vous.wmf/elemental:10
 msgid "Suggested Teams: all ok."
@@ -566,6 +566,8 @@ msgid ""
 "Suggested Teams: blue vs red, yellow vs green, (blue, yellow) vs (red, "
 "green), (blue, green) vs (red, yellow)"
 msgstr ""
+"Соревнующиеся команды: синие притив красных, желтые против зеленых, (синие, "
+"желтые) против (красных, зеленых), (синие, зеленые) против (красных, желтых)"
 
 #: ../../maps/Long, long way.wmf/elemental:12
 msgid ""
@@ -573,6 +575,10 @@ msgid ""
 "green), (blue, yellow, black) vs (red, green, orange), (blue, yellow, black, "
 "purple) vs (red, green, orange, white)"
 msgstr ""
+"Соревнующиеся команды: синие притив красных, желтые против зеленых, (синие, "
+"желтые) против (красных, зеленых), (синие, желтые, черные) против (красных, "
+"зеленых, оранжевых), (синие, желтые, черные, фиолетовые) против (красных, "
+"зеленых, оранжевых, белых)"
 
 #: ../../maps/Plateau.wmf/elemental:10
 msgid "Suggested positions: blue vs yellow"

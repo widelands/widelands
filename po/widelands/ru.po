@@ -7,16 +7,16 @@ msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2013-09-15 19:41+0200\n"
-"PO-Revision-Date: 2013-07-15 13:01+0000\n"
-"Last-Translator: alexbols <alexbols@list.ru>\n"
+"PO-Revision-Date: 2013-12-02 16:19+0000\n"
+"Last-Translator: Александр <sa13690@yandex.ru>\n"
 "Language-Team: русский <ru@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2013-09-16 04:45+0000\n"
-"X-Generator: Launchpad (build 16761)\n"
+"X-Launchpad-Export-Date: 2013-12-03 05:13+0000\n"
+"X-Generator: Launchpad (build 16856)\n"
 "X-Poedit-Country: RUSSIAN FEDERATION\n"
 "X-Poedit-Language: Russian\n"
 "X-Poedit-SourceCharset: utf-8\n"
@@ -45,19 +45,19 @@ msgstr ""
 
 #: ../../src/s2map.cc:886
 msgid "WARNING"
-msgstr ""
+msgstr "ВНИМАНИЕ"
 
 #: ../../src/save_handler.cc:75
 msgid "Saving game..."
-msgstr ""
+msgstr "Сохранение игры..."
 
 #: ../../src/save_handler.cc:94
 msgid "Saving failed!"
-msgstr ""
+msgstr "Ошибки при сохранении игры!"
 
 #: ../../src/save_handler.cc:113
 msgid "Game saved"
-msgstr ""
+msgstr "Игра сохранена"
 
 #: ../../src/wlapplication.cc:398
 msgid "ERROR: Could not connect to metaserver (reason above)!\n"
@@ -326,13 +326,15 @@ msgstr ""
 
 #: ../../src/wlapplication.cc:1525
 msgid "Fallback settings in effect"
-msgstr ""
+msgstr "Задействованы настройки по умолчанию."
 
 #: ../../src/wlapplication.cc:1527
 msgid ""
 "Your video settings could not be enabled, and fallback settings are in "
 "effect. Please check the graphics options!"
 msgstr ""
+"Настройки видео не могут быть применены, задействованы настройки по "
+"умолчанию. Пожалуйстра, проверьте настройки графики!"
 
 #: ../../src/wlapplication.cc:1598
 msgid "Warning: "
@@ -909,7 +911,7 @@ msgstr "Информация игрока:%s"
 
 #: ../../src/game_io/game_preload_data_packet.cc:72
 msgid "Endless Game"
-msgstr ""
+msgstr "Свободная игра"
 
 #: ../../src/game_io/game_preload_data_packet.cc:77
 #: ../../src/logic/game.cc:248 ../../src/logic/game.cc:344
@@ -1335,7 +1337,7 @@ msgstr "построить дорогу: %s"
 #: ../../src/logic/playercommand.cc:444
 #, c-format
 msgid "flag %u: %s"
-msgstr ""
+msgstr "флаг %u: %s"
 
 #: ../../src/logic/playercommand.cc:450
 #, c-format
@@ -1573,7 +1575,7 @@ msgstr "спать: %s"
 #: ../../src/logic/production_program.cc:684
 #, c-format
 msgid "Unknown parameter \"%s\""
-msgstr ""
+msgstr "Неизвестный параметр \"%s\""
 
 #: ../../src/logic/production_program.cc:686
 msgid "No parameter given!"
@@ -1634,17 +1636,19 @@ msgstr "процент"
 #: ../../src/logic/production_program.cc:1208
 #, c-format
 msgid "No left resources found!"
-msgstr ""
+msgstr "Не обнаружено оставшихся ресурсов!"
 
 #: ../../src/logic/production_program.cc:1229
 msgid "Main vein exhausted"
-msgstr ""
+msgstr "Главная жила исчерпана"
 
 #: ../../src/logic/production_program.cc:1231
 msgid ""
 "This mines' main vein exhausted. Expect strongly diminished returns on "
 "investment. You should consider to expand, dismantle or destruct it."
 msgstr ""
+"Главная жила этой шахты исчерпана. Ожидается сильное уменьшение отдачи от "
+"инвестиций. Вы должны расширить, демонтировать или разрушить её."
 
 #: ../../src/logic/production_program.cc:1246
 #: ../../src/logic/production_program.cc:1327
@@ -1665,7 +1669,7 @@ msgstr "уровень"
 #: ../../src/logic/production_program.cc:1282
 #, c-format
 msgid "No soldier to train!"
-msgstr ""
+msgstr "Нет солдат для тренировки!"
 
 #: ../../src/logic/production_program.cc:1292
 #: ../../src/logic/production_program.cc:1382
@@ -1692,11 +1696,11 @@ msgstr "(не занято)"
 
 #: ../../src/logic/productionsite.cc:249
 msgid "Worker missing"
-msgstr ""
+msgstr "Рабочий отсутствует"
 
 #: ../../src/logic/productionsite.cc:249
 msgid "Workers missing"
-msgstr ""
+msgstr "Рабочие отсютствуют"
 
 #: ../../src/logic/productionsite.cc:258
 msgid "(stopped)"
@@ -1711,11 +1715,11 @@ msgstr ""
 
 #: ../../src/logic/ship.cc:423
 msgid "Port space found"
-msgstr ""
+msgstr "Найдено место для порта"
 
 #: ../../src/logic/ship.cc:424
 msgid "An expedition ship found a new port build space."
-msgstr ""
+msgstr "Экспедиционный корабль нашел место для строительства нового порта."
 
 #: ../../src/logic/ship.cc:531
 msgid "Island surrounded"
@@ -1727,20 +1731,20 @@ msgstr ""
 
 #: ../../src/logic/ship.cc:584
 msgid "Coast reached"
-msgstr ""
+msgstr "Достигнуто побережье"
 
 #: ../../src/logic/ship.cc:586
 msgid ""
 "An expedition ship reached a coast and is waiting for further commands."
-msgstr ""
+msgstr "Экспедиционный корабль достиг побережья и ждёт дальнейших указаний."
 
 #: ../../src/logic/ship.cc:722
 msgid "Expedition ready"
-msgstr ""
+msgstr "Экспедиция готова"
 
 #: ../../src/logic/ship.cc:723
 msgid "An expedition ship is waiting for your commands."
-msgstr ""
+msgstr "Экспедиционный корабль ждёт ваших указаний."
 
 #: ../../src/logic/ship.cc:986
 #, c-format
@@ -2002,7 +2006,7 @@ msgstr ""
 #: ../../src/map_io/widelands_map_flag_data_packet.cc:66
 #, c-format
 msgid "the node is owned by player %u"
-msgstr ""
+msgstr "узел принадлежит игроку %u"
 
 #: ../../src/map_io/widelands_map_flag_data_packet.cc:80
 #, c-format
@@ -2189,7 +2193,7 @@ msgstr "местность: %s"
 #: ../../src/map_io/widelands_map_version_data_packet.cc:76
 #, c-format
 msgid "version: %s"
-msgstr ""
+msgstr "версия: %s"
 
 #: ../../src/map_io/widelands_map_ware_data_packet.cc:76
 #: ../../src/map_io/widelands_map_waredata_data_packet.cc:208
@@ -2846,7 +2850,7 @@ msgstr ""
 #: ../../src/ui_fsmenu/editor_mapselect.cc:52
 #: ../../src/ui_fsmenu/mapselect.cc:54
 msgid "Choose a map"
-msgstr ""
+msgstr "Выбор карты"
 
 #: ../../src/ui_fsmenu/campaign_select.cc:267
 #: ../../src/ui_fsmenu/editor_mapselect.cc:56
@@ -3040,7 +3044,7 @@ msgstr "На хосте ещё не выбрана карта или сохра�
 
 #: ../../src/ui_fsmenu/launchMPG.cc:288 ../../src/ui_fsmenu/launchSPG.cc:232
 msgid "Win condition is set through the scenario"
-msgstr ""
+msgstr "Условия для победы установлены с помощью сценария"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:290
 #: ../../src/wui/multiplayersetupgroup.cc:358
@@ -3049,7 +3053,7 @@ msgstr "Сохранение"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:292
 msgid "The game is a saved game - the win condition was set before."
-msgstr ""
+msgstr "Это сохранённая игра - условия победы были установлены заранее."
 
 #: ../../src/ui_fsmenu/launchMPG.cc:393
 msgid "Saved game is directory"
@@ -3118,7 +3122,7 @@ msgstr "Сохранённые игроки:"
 #: ../../src/ui_fsmenu/launchMPG.cc:562
 #, c-format
 msgid "Player %u"
-msgstr ""
+msgstr "Игрок %u"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:566
 msgid "closed"
@@ -3130,7 +3134,7 @@ msgstr "Произошла ошибка!"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:630
 msgid "The map file seems to be invalid!"
-msgstr ""
+msgstr "Файл карты повреждён!"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:647
 msgid "Map informations:\n"
@@ -3294,7 +3298,7 @@ msgstr "Удалить"
 
 #: ../../src/ui_fsmenu/loadgame.cc:83
 msgid "Choose saved game"
-msgstr ""
+msgstr "Выбор сохранённой игры"
 
 #: ../../src/ui_fsmenu/loadgame.cc:87 ../../src/ui_fsmenu/loadreplay.cc:71
 #: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:57
@@ -3307,7 +3311,7 @@ msgstr "Время игры:"
 
 #: ../../src/ui_fsmenu/loadgame.cc:105
 msgid "Minimap:"
-msgstr ""
+msgstr "Миникарта:"
 
 #: ../../src/ui_fsmenu/loadgame.cc:157 ../../src/ui_fsmenu/loadreplay.cc:138
 msgid "Delete file"
@@ -3327,7 +3331,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/loadreplay.cc:67
 msgid "Choose a replay"
-msgstr ""
+msgstr "Выбор повтора"
 
 #: ../../src/ui_fsmenu/main.cc:40
 msgid "Play Tutorial"
@@ -3406,19 +3410,19 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/mapselect.cc:176
 msgid "Teams of 2"
-msgstr ""
+msgstr "Команды по 2"
 
 #: ../../src/ui_fsmenu/mapselect.cc:177
 msgid "Teams of 3"
-msgstr ""
+msgstr "Команды по 3"
 
 #: ../../src/ui_fsmenu/mapselect.cc:180
 msgid "Teams of 4"
-msgstr ""
+msgstr "Команды по 3"
 
 #: ../../src/ui_fsmenu/mapselect.cc:181
 msgid "Free for all"
-msgstr ""
+msgstr "Все против всех"
 
 #: ../../src/ui_fsmenu/mapselect.cc:182
 msgid "Unbalanced"
@@ -3433,6 +3437,8 @@ msgid ""
 "This map file is not present on your filesystem. Data shown here was sent by "
 "the server."
 msgstr ""
+"Данная карта отстутсвует в вашей файловой системе. Указанные здесь данные "
+"были отпраняты с сервера."
 
 #: ../../src/ui_fsmenu/multiplayer.cc:41
 msgid "Choose game type"
@@ -3678,7 +3684,7 @@ msgstr "Вы точно хотите разрушить %s?"
 
 #: ../../src/wui/actionconfirm.cc:288
 msgid "Dismantle building?"
-msgstr ""
+msgstr "Разобрать строение?"
 
 #: ../../src/wui/actionconfirm.cc:289
 #, c-format
@@ -3781,11 +3787,11 @@ msgstr "Показать следующий"
 
 #: ../../src/wui/buildingwindow.cc:181
 msgid "Cancel the expedition"
-msgstr ""
+msgstr "Отменить экспедицию"
 
 #: ../../src/wui/buildingwindow.cc:191
 msgid "Start an expedition"
-msgstr ""
+msgstr "Начать экспедицию"
 
 #: ../../src/wui/buildingwindow.cc:207 ../../src/wui/game_summary.cc:77
 msgid "Continue"
@@ -3802,7 +3808,7 @@ msgstr "Улучшить до %s"
 
 #: ../../src/wui/buildingwindow.cc:240 ../../src/wui/fieldaction.cc:112
 msgid "Construction costs:"
-msgstr ""
+msgstr "Стоимость постройки:"
 
 #: ../../src/wui/buildingwindow.cc:261
 msgid "Destroy"
@@ -3999,17 +4005,17 @@ msgstr "Время игры: "
 
 #: ../../src/wui/game_main_menu_save_game.cc:79
 msgid "Win condition: "
-msgstr ""
+msgstr "Условия победы: "
 
 #: ../../src/wui/game_main_menu_save_game.cc:140
 #: ../../src/wui/game_main_menu_save_game.cc:178
 msgid "player"
-msgstr ""
+msgstr "игрок"
 
 #: ../../src/wui/game_main_menu_save_game.cc:140
 #: ../../src/wui/game_main_menu_save_game.cc:178
 msgid "players"
-msgstr ""
+msgstr "игроки"
 
 #: ../../src/wui/game_main_menu_save_game.cc:248
 msgid ""
@@ -4152,7 +4158,7 @@ msgstr "Громкость звуков"
 
 #: ../../src/wui/game_summary.cc:44
 msgid "Game over"
-msgstr ""
+msgstr "Игра окончена"
 
 #: ../../src/wui/game_summary.cc:60
 msgid "Elapsed time:"
@@ -4160,19 +4166,19 @@ msgstr ""
 
 #: ../../src/wui/game_summary.cc:77
 msgid "Continue playing"
-msgstr ""
+msgstr "Продолжить игру"
 
 #: ../../src/wui/game_summary.cc:83
 msgid "Quit"
-msgstr ""
+msgstr "Выйти"
 
 #: ../../src/wui/game_summary.cc:83
 msgid "Return to main menu"
-msgstr ""
+msgstr "Вернуться в главное меню"
 
 #: ../../src/wui/game_summary.cc:93
 msgid "Time"
-msgstr ""
+msgstr "Время"
 
 #: ../../src/wui/game_summary.cc:157
 msgid "Lost"
@@ -4188,20 +4194,20 @@ msgstr ""
 
 #: ../../src/wui/game_summary.cc:180
 msgid "You won!"
-msgstr ""
+msgstr "Вы победили!"
 
 #: ../../src/wui/game_summary.cc:182
 msgid "You lost."
-msgstr ""
+msgstr "Вы проиграли."
 
 #: ../../src/wui/game_summary.cc:187
 #, c-format
 msgid "%s won!"
-msgstr ""
+msgstr "%s победил!"
 
 #: ../../src/wui/game_summary.cc:191
 msgid "Team %|1$u| won!"
-msgstr ""
+msgstr "Команда %|1$u| выиграла!"
 
 #: ../../src/wui/game_summary.cc:245
 msgid "Score"
@@ -4488,7 +4494,7 @@ msgstr ""
 
 #: ../../src/wui/shipwindow.cc:122
 msgid "Explore the island's coast clockwise"
-msgstr ""
+msgstr "Исследовать побережье острова по часовой стрелке"
 
 #: ../../src/wui/shipwindow.cc:128
 msgid "Scout towards the north east"
@@ -4500,7 +4506,7 @@ msgstr ""
 
 #: ../../src/wui/shipwindow.cc:140
 msgid "Construct a port at the current location"
-msgstr ""
+msgstr "Построить порт в текущей локации"
 
 #: ../../src/wui/shipwindow.cc:146
 msgid "Scout towards the east"
@@ -4512,7 +4518,7 @@ msgstr ""
 
 #: ../../src/wui/shipwindow.cc:158
 msgid "Explore the island's coast counter clockwise"
-msgstr ""
+msgstr "Исследовать побережье острова против часовой стрелки"
 
 #: ../../src/wui/shipwindow.cc:164
 msgid "Scout towards the south east"
@@ -4532,7 +4538,7 @@ msgstr ""
 
 #: ../../src/wui/shipwindow.cc:193
 msgid "Cancel the Expedition"
-msgstr ""
+msgstr "Отменить экспедицию"
 
 #: ../../src/wui/soldiercapacitycontrol.cc:66
 msgid "Decrease capacity"
@@ -4629,7 +4635,7 @@ msgstr "Работники в доке"
 
 #: ../../src/wui/warehousewindow.cc:229
 msgid "Expedition"
-msgstr ""
+msgstr "Экспедиция"
 
 #: ../../src/wui/waresqueuedisplay.cc:184
 msgid "Highest priority"
@@ -4713,6 +4719,8 @@ msgid ""
 "\n"
 " Texture Number: %i\n"
 msgstr ""
+"\n"
+" Номер текстуры: %i\n"
 
 #: ../../src/editor/tools/editor_info_tool.cc:91
 msgid "3) Resources Info\n"
@@ -4844,6 +4852,8 @@ msgid ""
 "Set the position that will have the coordinates (0, 0). This will be the top-"
 "left corner of a generated minimap."
 msgstr ""
+"Задайте позицию с координатами (0,0). Это будет левый верхний угол "
+"сгенерированной миникарты."
 
 #: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:64
 #: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:156
@@ -4938,7 +4948,7 @@ msgstr "без названия"
 
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:255
 msgid "directory"
-msgstr ""
+msgstr "каталог"
 
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:259
 msgid "Not a map file"
@@ -5042,7 +5052,7 @@ msgstr "Задать значение"
 #: ../../src/editor/ui_menus/editor_tool_change_resources_options_menu.cc:45
 #: ../../src/editor/ui_menus/editor_tool_menu.cc:70
 msgid "Resources"
-msgstr ""
+msgstr "Ресурсы"
 
 #: ../../src/editor/ui_menus/editor_tool_change_resources_options_menu.cc:99
 msgid "Current Selection"
@@ -5067,7 +5077,7 @@ msgstr ""
 
 #: ../../src/editor/ui_menus/editor_tool_menu.cc:71
 msgid "Set port space"
-msgstr ""
+msgstr "Задать место для порта"
 
 #: ../../src/editor/ui_menus/editor_tool_noise_height_options_menu.cc:42
 msgid "Noise Height Options"
