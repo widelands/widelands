@@ -213,6 +213,8 @@ void Sound_Handler::load_system_sounds()
 	load_fx_if_needed("sound", "message", "sound/message");
 	load_fx_if_needed("sound/military", "under_attack", "sound/military/under_attack");
 	load_fx_if_needed("sound/military", "site_occupied", "sound/military/site_occupied");
+	load_fx_if_needed("sound", "message_chat", "sound/message_chat");
+	load_fx_if_needed("sound", "message_freshmen", "sound/message_freshmen");
 }
 
 /** Load a sound effect. One sound effect can consist of several audio files

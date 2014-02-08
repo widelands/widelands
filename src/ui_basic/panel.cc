@@ -815,6 +815,15 @@ void Panel::play_click()
 {
 	g_sound_handler.play_fx("sound/click", 128, PRIO_ALWAYS_PLAY);
 }
+void Panel::play_new_chat_message()
+{
+	g_sound_handler.play_fx("sound/message_chat", 128, PRIO_ALWAYS_PLAY);
+}
+void Panel::play_new_chat_member()
+{
+	g_sound_handler.play_fx("sound/message_freshmen", 128, PRIO_ALWAYS_PLAY);
+}
+
 
 /**
  * Recursively walk the panel tree, killing panels that are marked for death
