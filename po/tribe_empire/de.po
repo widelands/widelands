@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: Widelands unofficial-bzr-launchpad-i18n-4955\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2013-09-15 17:41+0000\n"
-"PO-Revision-Date: 2014-01-19 16:03+0000\n"
-"Last-Translator: Nasenbaer <Unknown>\n"
+"PO-Revision-Date: 2014-02-07 19:07+0000\n"
+"Last-Translator: MilliMarg <mirian.margiani@gmail.com>\n"
 "Language-Team: German <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-01-20 05:13+0000\n"
-"X-Generator: Launchpad (build 16901)\n"
+"X-Launchpad-Export-Date: 2014-02-08 05:25+0000\n"
+"X-Generator: Launchpad (build 16916)\n"
 "X-Poedit-Country: GERMANY\n"
 "X-Poedit-Language: German\n"
 
@@ -205,7 +205,7 @@ msgstr "Kohle"
 
 #: ../../tribes/empire/conf:199
 msgid "Coal Mine"
-msgstr "Kohlemine"
+msgstr "Kohlenmine"
 
 #: ../../tribes/empire/conf:217
 msgid "Colosseum"
@@ -225,7 +225,7 @@ msgstr "Bricht grobe Granitblöcke und Marmor aus Felsen."
 
 #: ../../tribes/empire/conf:198
 msgid "Deep Coal Mine"
-msgstr "Tiefe Kohlemine"
+msgstr "Tiefe Kohlenmine"
 
 #: ../../tribes/empire/conf:202
 msgid "Deep Gold Mine"
@@ -1024,7 +1024,7 @@ msgid ""
 "charcoal burner out of trunks."
 msgstr ""
 "Die Feuer der Gießerein, Rüstungsschmieden und Waffenschmieden werden mit "
-"Kohle beheizt. Sie wird in Kohleminen abgebaut oder in Köhlereien aus "
+"Kohle beheizt. Sie wird in Kohlenminen abgebaut oder in Köhlereien aus "
 "Stämmen hergestellt."
 
 #: ../../tribes/empire/hammer/conf:1
