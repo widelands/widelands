@@ -7,22 +7,22 @@ msgstr ""
 "Project-Id-Version: Widelands unofficial-bzr-launchpad-i18n-4955\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2013-09-15 17:41+0000\n"
-"PO-Revision-Date: 2014-01-07 13:51+0000\n"
+"PO-Revision-Date: 2014-02-08 15:25+0000\n"
 "Last-Translator: MilliMarg <mirian.margiani@gmail.com>\n"
 "Language-Team: German <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-01-08 04:34+0000\n"
-"X-Generator: Launchpad (build 16877)\n"
+"X-Launchpad-Export-Date: 2014-02-09 05:46+0000\n"
+"X-Generator: Launchpad (build 16916)\n"
 "X-Poedit-Country: GERMANY\n"
 "X-Poedit-Language: German\n"
 
 #: ../../txts/README.lua:73
 msgid "(CTRL+) 0-9: Remember and go to previously remembered locations"
 msgstr ""
-"(STRG+) 0-9: Speichere die aktuelle Position auf der Karte für ein "
-"Schnellzugriff unter der gewählten Nummer"
+"(STRG+) 0-9: Speichert die aktuelle Position auf der Karte um schnell "
+"zurückkehren zu können"
 
 #: ../../txts/README.lua:74
 msgid ",: goes to previous location"
@@ -50,11 +50,11 @@ msgid ""
 "crashes where it can be hard to tell exactly what is triggering it), please\n"
 "include that too. For more information, see the section on Replays below."
 msgstr ""
-"- Wenn Du ein gespeichertes Spiel oder eine Wiederholung des Spiels hast, "
-"das den Fehler zeigt (zum Beispiel\n"
-"ein Absturz, wo es schwierig sein kann,durch was dieser Absturz ausgelöst "
-"wurde), füge dieses bitte auch an.\n"
-"Für mehr Informationen schaue unter dem Abschnitt Wiederholung des Spiels "
+"- Hast du ein gespeichertes Spiel oder eine Spielaufzeichnung, in dem der "
+"Fehler auftritt (zum Beispiel\n"
+"ein Absturz, dessen Auslöser nicht leicht zu finden ist), füge es bitte "
+"ebenfalls an.\n"
+"Für mehr Informationen schaue unter dem Abschnitt \"Spielaufzeichnungen\" "
 "weiter unten nach."
 
 #: ../../txts/README.lua:106
@@ -70,9 +70,7 @@ msgstr ""
 msgid ""
 "- What you expected to happen when performing the steps and what actually "
 "happened."
-msgstr ""
-"- Was Du eigentlich erwartet hast, was passieren sollte und was tatsächlich "
-"passiert ist."
+msgstr "- Was du erwartet hast und was tatsächlich passiert ist."
 
 #: ../../txts/README.lua:109
 msgid "- Which map you were playing when the bug occurred."
@@ -107,12 +105,12 @@ msgid ""
 "Always build a forester's and a fish breeder's house, so you will not run "
 "out of trunks and food."
 msgstr ""
-"Baue immer einen Förster und ein Fischzüchterhaus, damit du nie ohne Holz "
+"Baue immer eine Förster- und eine Fischzüchterhütte, damit du nie ohne Holz "
 "oder Nahrung da stehst!"
 
 #: ../../txts/tips/empire.tip:10
 msgid "Always build a forester's house so you will not run out of trunks."
-msgstr "Baue immer eine Forsthütte, damit dir nie das Holz ausgeht!"
+msgstr "Baue immer eine Försterhütte, damit dir nie das Holz ausgeht!"
 
 #: ../../txts/tips/barbarians.tip:10
 msgid ""
@@ -164,7 +162,7 @@ msgstr "C: Schaltet die Objektbezeichnungen an/aus"
 
 #: ../../txts/README.lua:77
 msgid "CTRL+F10: quits the game immediately"
-msgstr "STRG+F10: Beendet das Spiel direkt"
+msgstr "STRG+F10: Beendet das Spiel sofort"
 
 #: ../../txts/editor_readme:39
 msgid "CTRL+L   Load Map"
@@ -192,7 +190,7 @@ msgstr "Programmierer"
 
 #: ../../txts/license:7
 msgid "Copyright 2002 - 2013 by the Widelands Development Team."
-msgstr "Copyright 2002 - 2013, das Widelands Entwicklungs Team."
+msgstr "Copyright 2002 - 2013, das Widelands Entwicklungs-Team."
 
 #: ../../txts/developers:186
 msgid "Czech"
@@ -308,7 +306,7 @@ msgid ""
 msgstr ""
 "Festhalten der Umschalttaste aktiviert das erste alternative Werkzeug. "
 "Dieses Werkzeug macht meistens das Gegenteil dessen, was das normale tut "
-"(beispielsweise das Entfernen eines Objektes anstatt des Plazierens)."
+"(beispielsweise das Entfernen eines Objektes anstatt des Platzierens)."
 
 #: ../../txts/README.lua:72
 msgid "Home: centers main mapview on starting location"
@@ -329,7 +327,7 @@ msgstr "Ungarisch"
 
 #: ../../txts/editor_readme:37
 msgid "I        Activates information tool"
-msgstr "I        Aktiviert das Informations Werkzeug"
+msgstr "I        Aktiviert das Informations-Werkzeug"
 
 #: ../../txts/README.lua:69
 msgid "I: toggles stock inventory"
@@ -347,20 +345,18 @@ msgid ""
 "are\n"
 "removed."
 msgstr ""
-"Wenn du STRG gedrückt hältst, während du einen Straßenbau abschließt, werden "
-"automatisch Flaggen gesetzt.\n"
-"Wenn du STRG gedrückt hältst, wenn du eine Flagge entfernst, wird die Straße "
-"und alle Flaggen bis zum nächsten Gebäude oder zur nächsten Kreuzung "
-"entfernt."
+"Wenn du STRG drückts, während du eine Straße baust, werden automatisch "
+"Flaggen gesetzt.\n"
+"Wenn du STRG drückst, wenn du eine Flagge entfernst, werden Straße und "
+"Flaggen bis zur nächsten Kreuzung entfernt."
 
 #: ../../txts/tips/general_game.tip:58
 msgid ""
 "If you like to live dangerously, pressing Ctrl while clicking the enhance, "
 "dismantle or destroy building buttons will skip the confirmation."
 msgstr ""
-"Wenn du den Nervenkitzel magst, kannst du während du auf den Knopf zum "
-"Erweitern, Abreißen oder Zerstören eines Gebäudes klickst STRG gedrückt "
-"halten. Die Bestätigungsfrage wird dann übersprungen."
+"Drückst du STRG während du auf den Knopf zum Ausbauen, Abreißen oder "
+"Zerstören eines Gebäudes klickst, wird die Bestätigungsfrage übersprungen."
 
 #: ../../txts/README.lua:87
 msgid ""
@@ -369,9 +365,9 @@ msgid ""
 "Wiki\n"
 "and a detailed description of the tribe economies in our online encyclopedia."
 msgstr ""
-"Falls Du mehr Dokumentation oder Hilfe für Widelands oder den Widelands "
+"Falls du eine Dokumentation oder Hilfe für Widelands oder den Widelands-"
 "Editor benötigst,\n"
-"schaue auf unserer Homepage nach. Dort findest Du eine aktuelle Hilfe in "
+"schaue auf unserer Homepage nach. Dort findest du eine aktuelle Hilfe in "
 "unserem Wiki\n"
 "und detaillierte Beschreibungen der unterschiedlichen Wirtschaftszweige der "
 "Völker in\n"
@@ -393,11 +389,11 @@ msgid ""
 "tribes."
 msgstr ""
 "In diesem Spiel beginnst du auf einem kleinen Stück Land mit nur wenigen\n"
-"Ressourcen. Indem du diese verwendest, wirst du ein Imperium mit Tausenden "
+"Rohstoffen. Indem du diese verwendest, wirst du ein Imperium mit Tausenden "
 "von\n"
 "Einwohnern erschaffen. Auf deinem Weg zu diesem Ziel wirst du eine "
 "wirtschaftliche\n"
-"Infrastruktur erstellen, das Land um dich herum erkunden und rivalisierenden "
+"Infrastruktur aufbauen, das Land um dich herum erkunden und rivalisierenden "
 "Stämmen\n"
 "entgegentreten müssen."
 
@@ -416,7 +412,7 @@ msgid ""
 "Keep an eye on your fishers. After fish resources are exhausted in their "
 "working area, they will stop to fish."
 msgstr ""
-"Beobachte deine Fischer. Wenn die Fischressourcen schwinden, werden die "
+"Beobachte deine Fischer. Wenn die Fischbestände schwinden, werden die "
 "Fischer aufhören zu arbeiten."
 
 #: ../../txts/editor_readme:18
@@ -461,9 +457,9 @@ msgid ""
 "messages window, then use 'G' for Go To and the Delete key to archive "
 "messages."
 msgstr ""
-"Verwalte Deine Nachrichten effizienter: Drücke 'N' für News, um in das "
-"Nachrichten-Fenster zu gelangen, verwende dann 'G' für Go To und die Entf-"
-"Taste zum Archivieren von Nachrichten."
+"Verwalte deine Nachrichten effizienter: Drücke 'N', um das "
+"Nachrichtenfenster zu öffnen, verwende dann 'G', um zum Ort des Ereignisses "
+"zu springen und 'Entf' um die Nachricht zu archivieren."
 
 #: ../../txts/developers:138
 msgid "Maps and Missions"
@@ -501,7 +497,7 @@ msgstr ""
 
 #: ../../txts/developers:307
 msgid "Non Unix Distributions"
-msgstr "Nicht Unix-Distributionen"
+msgstr "Nicht-Unix-Distributionen"
 
 #: ../../txts/README.lua:70
 msgid "O: toggles objectives"
@@ -513,7 +509,7 @@ msgid ""
 "standalone binary package, or in the installation directory (like "
 "/usr/share/games/widelands)."
 msgstr ""
-"Unter Linux befindet sich die Datei COPYING im Wurzelverzeichnis des Quell- "
+"Unter Linux befindet sich die Datei COPYING im Stammverzeichnis des Quell- "
 "oder Binärpakets oder im Installationsverzeichnis (etwa "
 "/usr/share/games/widelands)"
 
@@ -522,7 +518,7 @@ msgid ""
 "On MacOS, you can find the file called COPYING in the archive you downloaded "
 "from the website."
 msgstr ""
-"Unter MacOS befindet sich die Datei COPYING im Archiv, das Du von der "
+"Unter MacOS befindet sich die Datei COPYING im Archiv, das du von der "
 "Website heruntergeladen hast."
 
 #: ../../txts/license:19
@@ -595,8 +591,7 @@ msgstr ""
 
 #: ../../txts/tips/general_game.tip:62
 msgid "Press I to quickly toggle the display of your stock inventory."
-msgstr ""
-"Drücken sie 'I', um einen Schnellwechsel in den Lagerstand vorzunehmen."
+msgstr "Drücke 'I', um schnell die Lagerstandsübersicht zu öffnen."
 
 #: ../../txts/tips/general_game.tip:46
 msgid ""
@@ -648,7 +643,7 @@ msgstr ""
 
 #: ../../txts/README.lua:91
 msgid "Reporting Bugs"
-msgstr "Berichten von Fehlern."
+msgstr "Berichten von Fehlern"
 
 #: ../../txts/developers:259
 msgid "Russian"
@@ -664,13 +659,13 @@ msgstr "SHIFT(gehalten)    Wählt das erste alternative Werkzeug aus."
 
 #: ../../txts/editor_readme:21
 msgid "SPACE    Toggles build help"
-msgstr "Leertaste     Zeigt die Bauhilfe."
+msgstr "LEERTASTE    Toggles build help"
 
 #: ../../txts/tips/editor.tip:26
 msgid ""
 "SPACE key behaves like in normal game. It switches buildhelp on or off."
 msgstr ""
-"Die LEERTASTE verhält sich wie im normalen Spiel. Sie schaltet die Bauhilfe "
+"Die Leertaste verhält sich wie im normalen Spiel. Sie schaltet die Bauhilfe "
 "an oder aus."
 
 #: ../../txts/README.lua:64
@@ -683,7 +678,7 @@ msgid ""
 "helped to translate Widelands via launchpad.net."
 msgstr ""
 "Auf https://translations.launchpad.net/widelands sind alle Personen "
-"gelistet, die nun über Launchpad bei der Übersetzung mitgeholfen haben."
+"aufgelistet, die über Launchpad bei der Übersetzung geholfen haben."
 
 #: ../../txts/developers:264
 msgid "Slovak"
@@ -719,7 +714,7 @@ msgid ""
 "speed up transportation of your wares."
 msgstr ""
 "Teile deine Straßen durch Flaggen in viele kleine Teile auf. Das wird den "
-"Transport deiner Waren beschleunigen."
+"Transport der Waren beschleunigen."
 
 #: ../../txts/README.lua:38
 msgid "Status"
@@ -854,15 +849,15 @@ msgid ""
 "a\n"
 "different version of the game."
 msgstr ""
-"Mit der Option\"Aufnahme abspielen\" im Hauptmenü wird Dir ein früher "
-"gespieltes Spiel,\n"
-"genau so nachgestellt, präsentiert. Beachte aber, dass auch kleine "
-"Änderungen im Spieldatensatz oder\n"
+"Mit der Option\"Aufnahme abspielen\" im Hauptmenü wird dir ein früher "
+"gespieltes Spiel\n"
+"noch einmal gezeigt. Beachte aber, dass auch kleine Änderungen im "
+"Spieldatensatz oder\n"
 "der Widelands Ausführungsdatei (widelands.exe) ein Wiederholungsspiel "
-"inkompatibel machen können\n"
-"oder nicht harmonieren (out of sync). Das ist ähnlich wie bei "
-"Netzwerkspielen, die unter einem Zeitversatz\n"
-"leiden (laggen), wenn unterschiedliche Versionen gespielt werden."
+"inkompatibel\n"
+"machen können. Das ist ähnlich wie bei Netzwerkspielen, die unter einem "
+"Zeitversatz\n"
+"leiden, wenn unterschiedliche Versionen gespielt werden."
 
 #: ../../txts/license:16
 msgid "We are also shipping the GPL as text document with Widelands itself."
@@ -967,9 +962,9 @@ msgid ""
 "during selection. If you then click on the map, an instance of one of the "
 "selected object types will be placed."
 msgstr ""
-"Du kannst mehrere Naturobjekte (Bobs) selektieren, wenn du bei der Auswahl "
-"mit der Maus STRG gedrückt hältst. Beim Setzen der Objekte wird dann "
-"zufällig eines der zuvor selektierten Objekte gewählt."
+"Du kannst mehrere Naturobjekte (Bobs) wählen, wenn du bei der Auswahl mit "
+"der Maus STRG gedrückt hältst. Beim Setzen der Objekte wird dann zufällig "
+"eines der zuvor selektierten Objekte gewählt."
 
 #: ../../txts/README.lua:56
 msgid ""

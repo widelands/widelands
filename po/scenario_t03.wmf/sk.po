@@ -7,13 +7,13 @@ msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2013-09-15 17:41+0000\n"
-"PO-Revision-Date: 2014-02-01 20:41+0000\n"
+"PO-Revision-Date: 2014-02-08 17:59+0000\n"
 "Last-Translator: Miroslav Remák <Unknown>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-02-02 05:25+0000\n"
+"X-Launchpad-Export-Date: 2014-02-09 05:46+0000\n"
 "X-Generator: Launchpad (build 16916)\n"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:306
@@ -156,8 +156,8 @@ msgid ""
 "there are still a lot of men and women waiting in our hall to get a task, so "
 "they can help our soldiers to prepare for the future fights."
 msgstr ""
-" \"Zdá sa, že naša banícka ekonomika funguje dokonale, to už je skvelá "
-"správa! Každopádne čaká v našej hale na prácu stále veľa mužov a žien, aby "
+" \"Zdá sa, že naša banícka ekonomika funguje dokonale: to už je dobrá "
+"správa! Každopádne v našej hale čaká na prácu stále veľa mužov a žien, aby "
 "mohli pomôcť našim vojakom pripraviť sa na budúce bitky."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:360
@@ -225,9 +225,9 @@ msgid ""
 "vulnerable. As my scouts report, he has set foot on the lower grounds around "
 "the capitol, securing the outer fortification rings.\" "
 msgstr ""
-" \"Novinky, ktoré priniesla hliadka, neznejú dobre. Naši špióni vravia, že v "
+" \"Novinky, ktoré priniesla hliadka, neznejú dobre. Naši špióni hlásia, že v "
 "bitke stále zúria bojovné kmene, ale niektorí zo starších vojakov a vodcov "
-"kmeňov sa zdajú byť unavení z tejto nezmyselnej vojny. Kalitath, syn Kun-a, "
+"kmeňov sa zdajú byť unavení z tejto nezmyselnej vojny. Kalitath, Kunov syn, "
 "je prvým vojenským vodcom, ktorý opustil Al’thunran a nechal tak svoju "
 "stranu napospas osudu. Ako hlásia moji prieskumníci, vkročil do nížin okolo "
 "hlavného mesta, chrániac prstence vonkajšieho opevnenia.\" "
@@ -248,17 +248,17 @@ msgid ""
 "blinded by rage and hate, there is no sense left in them at all I believe.\" "
 msgstr ""
 " \"Ten zradca nechal svoje vojsko umrieť tam, kde ležali, keď pochopil, že "
-"nedokáže čeliť môjmu. Kalitath zmizol v zmätku vojny, ale už mi je to jedno. "
-"Nech uteká a nech na večné časy zabudne sa naň ako na vodcu kmeňa "
-"odmietajúceho poddať sa drevenému trónu, ktorý teraz prevezmem ja. Dokonca "
-"nám jeho útek priniesol úžitok: celý rok bol Kalitath taký zaneprázdnený "
-"vojnou, že pre svojich ľudí ani nemal v zásobe dosť jedla. Teraz, keď "
+"nedokáže čeliť môjmu. Kalitath zmizol v zmätku vojny, ale už je mi to jedno. "
+"Nech utečie a nech na večné časy zabudne sa naň ako na vodcu kmeňa, ktorý sa "
+"odmietol poddať drevenému trónu, ktorý teraz prevezmem ja. Dokonca nám jeho "
+"útek priniesol úžitok: celý rok bol Kalitath taký zaneprázdnený vojnou, že "
+"sa nestaral zaobstarať pre svojich ľudí dosť jedla do zásoby. Teraz, keď "
 "odišiel, hlad prinútil niektorých jeho mladších stúpencov vzdať sa. Táto "
 "skupina drží silnú pevnosť v hlavnom prstenci. Ale mám ďalšiu správu: moji "
 "prieskumníci ohlásili, že medzi dvomi zúrivými kmeňmi mojich bratov nastal "
-"chaos a ani si nevšimli nebezpečenstvo, ktoré sa na nich chystá. Ale myslím "
-"si, že by tomu nevenovali pozornosť, aj keby si všimli; zaslepení hnevom a "
-"nenávisťou, nezostal v nich ani kúsok rozumu.\" "
+"chaos a ani si nevšimli nebezpečenstvo, ktoré sa na nich chystá. Avšak "
+"myslím si, že by tomu nevenovali pozornosť, aj keby si všimli; zaslepení "
+"hnevom a nenávisťou, nezostal v nich ani kúsok rozumu.\" "
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:151
 msgid ""
@@ -268,9 +268,9 @@ msgid ""
 "rest at the borders of the old forest and prepare for the coming days.\" "
 msgstr ""
 " \"Počas posledných dní sme sa priblížili k nášmu hlavnému mestu. Mnoho ľudí "
-"sa k nám na pochode pripojilo a upriamilo vo mne nádej. Ale bojím sa, že nie "
-"sme dosť silní na vojnu s mojimi bratmi.<br>Zatiaľ odpočívame na hraniciach "
-"starého lesa a pripravujeme sa na nasledujúce dni.\" "
+"sa k nám na pochode pripojilo a upriamilo vo mne nádej. Bojím sa však, že "
+"nie sme dosť silní na vojnu s mojimi bratmi.<br>Zatiaľ odpočívame na "
+"hraniciach starého lesa a pripravujeme sa na nasledujúce dni.\" "
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:206
 msgid ""
@@ -294,8 +294,8 @@ msgid ""
 msgstr ""
 " \"Dnes ráno som našiel Throna pri nepokojných myšlienkach. Včera v noci sa "
 "vrátil neskoro z hliadky a oprel sa o strom, dozerajúc na tábor. Hádky a "
-"konflikty neustále vzrastajú a zima nás má pevne v hrsti. Mali by sme "
-"nahromadiť jedlo do zásoby, ak chceme prežiť túto dlhú, studenú zimu!\" "
+"konflikty neustále vzrastajú a zima nás má pevne v hrsti. Ak chceme prežiť "
+"túto dlhú, studenú zimu, mali by sme nahromadiť jedlo do zásoby!\" "
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:171
 msgid ""
@@ -368,7 +368,7 @@ msgid ""
 "and to ensure the safety of your people."
 msgstr ""
 "* Postavte viac vojenských budov, aby ste preskúmali oblasť okolo základne a "
-"zaistili bezpečie svojich ľudí."
+"zaistili bezpečnosť svojich ľudí."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:42
 #: ../../campaigns/t03.wmf/scripting/texts.lua:246
@@ -376,16 +376,16 @@ msgid ""
 "* Build up a basic food economy - a fisher's hut, a hunter's hut, a well, a "
 "farm and a bakery, to provide your people with food."
 msgstr ""
-"* Vybudujte základnú potravinársku ekonomiku - rybárovu chatrč, lovcovu "
-"chatrč, studňu, farmu a pekáreň, aby ste svojim ľudom poskytli jedlo."
+"* Vybudujte základnú potravinársku ekonomiku - rybársku chatrč, loveckú "
+"chatrč, studňu, farmu a pekáreň, aby ste svojim ľudom mohli poskytnúť jedlo."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:210
 msgid "* Destroy Kalitath's army and expand your territory to the east."
-msgstr "* Porazte Kalitath-ovu armádu a rozšírte svoje územie na východ."
+msgstr "* Porazte Kalitathovu armádu a rozšírte svoje územie na východ."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:127
 msgid "* Destroy Kalitaths army and expand your territory to the east."
-msgstr "* Porazte Kalitath-ovu armádu a rozšírte svoje územie na východ."
+msgstr "* Porazte Kalitathovu armádu a rozšírte svoje územie na východ."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:137
 #: ../../campaigns/t03.wmf/scripting/texts.lua:364
@@ -458,7 +458,8 @@ msgid ""
 msgstr ""
 "-> Aby ste zaútočili na nepriateľa, musíte kliknúť na dvere nepriateľskej "
 "vojenskej budovy. Zjaví sa menu, ktoré vám umožní vybrať počet vojakov, "
-"ktorí zaútočia. Keď už máte vybratý počet, kliknite na kríž ('Začať útok')."
+"ktorí majú zaútočiť. Keď už máte vybratý počet, kliknite na symbol kríža "
+"('Začať útok')."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:103
 msgid ""
@@ -480,7 +481,7 @@ msgid ""
 "and longer."
 msgstr ""
 "-> Sklady sú podobné základni. Jediným rozdielom je, že ich nebránia vojaci. "
-"Často je rozumné nejaký postaviť, ak sa vaše územie rozrastá a cesty k "
+"Je často rozumné postaviť sklad, keď sa vaše územie rozrastá a cesty k "
 "základni neustále predlžujú."
 
 #: ../../campaigns/t03.wmf/elemental:7
@@ -499,9 +500,9 @@ msgid ""
 " of your oxen to help transport wares quicker. Remember to build a cattle\n"
 " farm!"
 msgstr ""
-"Keďže sa predlžujú vaše cesty a narastá ekonomika, mali by ste využiť "
+"Keďže sa predlžujú vaše cesty a vaša ekonomika narastá, mali by ste využiť "
 "svojich\n"
-" volov na rýchlejšiu prepravu tovarov. Nezabudnite postaviť kravín!"
+" volov na rýchlejšiu prepravu tovaru. Nezabudnite postaviť kravín!"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:169
 msgid "Boldreth shakes his head."
@@ -553,7 +554,7 @@ msgstr "Blízko pri domove"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:125
 msgid "Destroy Kalitaths army"
-msgstr "Porazte Kalitath-ovu armádu"
+msgstr "Porazte Kalitathovu armádu"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:166
 msgid "Doubts"
@@ -561,11 +562,11 @@ msgstr "Pochybnosti"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:324
 msgid "Enhanced economy and training"
-msgstr "Zlepšená ekonomika a výcvik"
+msgstr "Vylepšená ekonomika a výcvik"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:65
 msgid "Explore further"
-msgstr "Robte ďalší prieskum"
+msgstr "Vykonajte ďalší prieskum"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:252
 msgid "Food economy completed"
@@ -601,7 +602,7 @@ msgstr "Ozbrojený útok"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:135
 msgid "Military assault on Al’thunran"
-msgstr "Ozbrojený útok na Al’thunran-a"
+msgstr "Ozbrojený útok na Al’thunran"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:296
 msgid "Mining economy completed"
@@ -622,12 +623,12 @@ msgid ""
 "trainingssites to prepare them for their future tasks.\" "
 msgstr ""
 "Naši geológovia našli oveľa viac ložísk železnej rudy, uhlia a dokonca aj "
-"zlata. Keď naberú baníci skúsenosti, mali by sme doterajšie bane vylepšiť. "
-"Mali by sme postaviť viac baní, vybudovať väčšiu potravinovú infraštruktúru, "
-"ktorá by zásobovala našich ľudí jedlom, a ďalšiu výrobnú ekonomiku. Ale to "
-"stále nie je všetko - väčšina z našich vojakov je dosť mladá a nemá ani "
-"vhodnú zbraň, ani dobrý výcvik. Mali by sme postaviť výcvikové stavby a "
-"pripraviť ich tak na budúce úlohy.\" "
+"zlata. Akonáhle naberú baníci viac skúsenosti, mali by sme doterajšie bane "
+"vylepšiť. Mali by sme postaviť viac baní, vybudovať väčšiu potravinovú "
+"infraštruktúru, ktorá by zásobovala našich ľudí jedlom, a ďalšiu výrobnú "
+"ekonomiku. To však stále nie je všetko - väčšina našich vojakov je dosť "
+"mladá a nemá ani vhodnú zbraň, ani dobrý výcvik. Mali by sme postaviť "
+"výcvikové stavby a pripraviť ich tak na budúce úlohy.\" "
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:48
 msgid "Remember to build a cattle farm"
@@ -652,7 +653,7 @@ msgid ""
 "and will introduce fighting."
 msgstr ""
 "Tento scenár vysvetlí zaobchádzanie s vojenskými a výcvikovými budovami a "
-"oboznámi vás s bojovaním."
+"oboznámi vás s bojom."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:159
 #: ../../campaigns/t03.wmf/scripting/texts.lua:346
@@ -684,8 +685,8 @@ msgid ""
 "You have completed the last mission of the barbarian tutorial campaign. You "
 "may continue playing if you wish, otherwise move on to the next campaign."
 msgstr ""
-"Dokončili ste poslednú misiu v úvodnej kampani barbarov. Ak si prajete, "
-"môžete pokračovať v hraní, inak prejdite na ďalšiu misu."
+"Dokončili ste poslednú misiu v úvodnej kampani barbarov. Ak chcete, môžete "
+"pokračovať v hraní. V opačnom prípade prejdite na ďalšiu kampaň."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:202
 msgid "Your loyal companion"

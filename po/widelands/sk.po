@@ -7,15 +7,15 @@ msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2013-09-15 19:41+0200\n"
-"PO-Revision-Date: 2014-01-03 13:19+0000\n"
+"PO-Revision-Date: 2014-02-09 05:09+0000\n"
 "Last-Translator: Miroslav Remák <Unknown>\n"
 "Language-Team: Prometheus <mmatej@yahoo.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 1 : (n>=2 && n<=4) ? 2 : 0;\n"
-"X-Launchpad-Export-Date: 2014-01-04 05:12+0000\n"
-"X-Generator: Launchpad (build 16877)\n"
+"X-Launchpad-Export-Date: 2014-02-09 05:46+0000\n"
+"X-Generator: Launchpad (build 16916)\n"
 "X-Poedit-Country: czech republic\n"
 "X-Poedit-Language: czech\n"
 
@@ -1533,7 +1533,7 @@ msgstr "dokončené"
 
 #: ../../src/logic/production_program.cc:425
 msgid "skipped"
-msgstr "preskočený"
+msgstr "preskočená činnosť"
 
 #: ../../src/logic/production_program.cc:431
 #: ../../src/logic/production_program.cc:839
@@ -1552,7 +1552,7 @@ msgstr " alebo "
 
 #: ../../src/logic/production_program.cc:444
 msgid " because not: "
-msgstr " pretože neplatí: "
+msgstr " , pretože nie je splnené: "
 
 #: ../../src/logic/production_program.cc:493
 #, c-format
@@ -1840,7 +1840,7 @@ msgstr "kmeň %s: %s"
 #: ../../src/logic/warehouse.cc:464
 #, c-format
 msgid "A new %s was added to your economy."
-msgstr "Nová %s bola pridaná do vašej ekonomiky."
+msgstr "Nová budova %s bola pridaná do vašej ekonomiky."
 
 #: ../../src/logic/worker.cc:109
 #, c-format
