@@ -7,15 +7,15 @@ msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2013-09-15 19:41+0200\n"
-"PO-Revision-Date: 2013-08-10 14:40+0000\n"
-"Last-Translator: István Kiss <kissistvan@kibk.extra.hu>\n"
+"PO-Revision-Date: 2014-01-27 10:52+0000\n"
+"Last-Translator: cn4ij <Unknown>\n"
 "Language-Team: Language <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2013-09-16 04:43+0000\n"
-"X-Generator: Launchpad (build 16761)\n"
+"X-Launchpad-Export-Date: 2014-01-28 05:16+0000\n"
+"X-Generator: Launchpad (build 16914)\n"
 
 #: ../../src/computer_player.cc:38
 msgid "None"
@@ -2586,7 +2586,7 @@ msgstr "A kliens és a hoszt nincs többé szinkronban."
 #: ../../src/network/network_gaming_messages.cc:130
 #, c-format
 msgid "Kicked by the host: %s"
-msgstr ""
+msgstr "Kirúgva a kiszolgáló által: %s"
 
 #: ../../src/network/network_gaming_messages.cc:131
 #, c-format
@@ -2768,6 +2768,7 @@ msgstr ""
 #: ../../src/sound/sound_handler.cc:165
 msgid "PROBLEM: sound device opened multiple times, trying to close"
 msgstr ""
+"PROBLÉMA: a hangeszköz többször is meg van nyitva, bezárás megpróbálása"
 
 #: ../../src/ui_basic/helpwindow.cc:47 ../../src/ui_basic/helpwindow.cc:191
 msgid "Help: "
@@ -2838,7 +2839,7 @@ msgstr "[Hibás adat]"
 #: ../../src/ui_fsmenu/editor_mapselect.cc:52
 #: ../../src/ui_fsmenu/mapselect.cc:54
 msgid "Choose a map"
-msgstr ""
+msgstr "Válassz térképet"
 
 #: ../../src/ui_fsmenu/campaign_select.cc:267
 #: ../../src/ui_fsmenu/editor_mapselect.cc:56
@@ -2902,7 +2903,7 @@ msgstr "Leírás:"
 #: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:224
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:297
 msgid "parent"
-msgstr ""
+msgstr "szülő"
 
 #: ../../src/ui_fsmenu/fileview.cc:72 ../../src/wui/watchwindow.cc:139
 msgid "Close"
@@ -2910,7 +2911,7 @@ msgstr "Bezár"
 
 #: ../../src/ui_fsmenu/internet_lobby.cc:52
 msgid "Metaserver Lobby"
-msgstr "Metakiszolgáló lobbi"
+msgstr "Szerverközi várakozó"
 
 #: ../../src/ui_fsmenu/internet_lobby.cc:56
 msgid "Clients online:"
@@ -3318,7 +3319,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/main.cc:40
 msgid "Play Tutorial"
-msgstr "Oktató játék"
+msgstr "Oktatójáték"
 
 #: ../../src/ui_fsmenu/main.cc:45
 msgid "Single Player"
@@ -3361,11 +3362,11 @@ msgstr "Widelands fejlesztőcsapat"
 
 #: ../../src/ui_fsmenu/main.cc:96
 msgid "Licensed under the GNU General Public License V2.0"
-msgstr ""
+msgstr "Licenc: GNU General Public License V2.0"
 
 #: ../../src/ui_fsmenu/mapselect.cc:59
 msgid "Load Map as scenario: "
-msgstr "Térkép betöltése scenarioként "
+msgstr "Térkép betöltése forgatókönyvként: "
 
 #: ../../src/ui_fsmenu/mapselect.cc:149
 msgid "#"
@@ -3385,7 +3386,7 @@ msgstr "Hivatalos térkép"
 
 #: ../../src/ui_fsmenu/mapselect.cc:172
 msgid "Seafaring Map"
-msgstr ""
+msgstr "Hajózós térkép"
 
 #: ../../src/ui_fsmenu/mapselect.cc:175
 msgid "1v1"
@@ -3393,15 +3394,15 @@ msgstr "1v1"
 
 #: ../../src/ui_fsmenu/mapselect.cc:176
 msgid "Teams of 2"
-msgstr ""
+msgstr "2-es csapatok"
 
 #: ../../src/ui_fsmenu/mapselect.cc:177
 msgid "Teams of 3"
-msgstr ""
+msgstr "3-as csapatok"
 
 #: ../../src/ui_fsmenu/mapselect.cc:180
 msgid "Teams of 4"
-msgstr ""
+msgstr "4-es csapatok"
 
 #: ../../src/ui_fsmenu/mapselect.cc:181
 msgid "Free for all"
@@ -4542,11 +4543,11 @@ msgstr "Kattints a katonára a kiküldéshez"
 
 #: ../../src/wui/soldierlist.cc:413
 msgid "Prefer Rookies"
-msgstr "Elsőbbség adása hősöknek"
+msgstr "Elsőbbség adása újoncoknak"
 
 #: ../../src/wui/soldierlist.cc:415
 msgid "Prefer Heroes"
-msgstr "Elsőbbség adása újoncoknak"
+msgstr "Elsőbbség adása hősöknek"
 
 #: ../../src/wui/stock_menu.cc:51
 msgid "Wares (total)"

@@ -7,28 +7,28 @@ msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2013-09-15 17:41+0000\n"
-"PO-Revision-Date: 2012-11-20 00:49+0000\n"
-"Last-Translator: Gigabye <Unknown>\n"
+"PO-Revision-Date: 2013-11-30 09:59+0000\n"
+"Last-Translator: Александр <sa13690@yandex.ru>\n"
 "Language-Team: Language <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-09-16 04:37+0000\n"
-"X-Generator: Launchpad (build 16761)\n"
+"X-Launchpad-Export-Date: 2013-12-01 05:15+0000\n"
+"X-Generator: Launchpad (build 16856)\n"
 "X-Poedit-Country: RUSSIAN FEDERATION\n"
 "X-Poedit-Language: Russian\n"
 
 #: ../../txts/README.lua:73
 msgid "(CTRL+) 0-9: Remember and go to previously remembered locations"
-msgstr ""
+msgstr "(CTRL+) 0-9: Запоминание и переход к ранее запомненным локациям"
 
 #: ../../txts/README.lua:74
 msgid ",: goes to previous location"
-msgstr ""
+msgstr ",: переход к предыдущей локации"
 
 #: ../../txts/README.lua:99
 msgid "- Detailed steps on how to trigger the bug, if possible."
-msgstr ""
+msgstr "- Подробное описание, как воспроизвести ошибку (баг), если возможно"
 
 #: ../../txts/README.lua:111
 msgid ""
@@ -50,16 +50,18 @@ msgid ""
 "as\n"
 "some bugs can be platform specific."
 msgstr ""
+"- Также, пожалуйста, сообщите, на какой операционной системе вы запускали\n"
+"Widelands, так как некоторые ошибки могут быть платформозависимыми."
 
 #: ../../txts/README.lua:101
 msgid ""
 "- What you expected to happen when performing the steps and what actually "
 "happened."
-msgstr ""
+msgstr "- Что вы ожидали, выполняя действия, и что на самом деле произошло."
 
 #: ../../txts/README.lua:109
 msgid "- Which map you were playing when the bug occurred."
-msgstr ""
+msgstr "- На какой карте вы играли, когда произошла ошибка."
 
 #: ../../txts/README.lua:103
 msgid ""
@@ -68,10 +70,12 @@ msgid ""
 "the revision number if you are running a development version or a nightly "
 "build.)"
 msgstr ""
+"- Какую версию Widelands вы запускали (например либо номер сборки, либо\n"
+"номер ревизии, если у вас разрабатываемая версия или тестовая сборка.)"
 
 #: ../../txts/README.lua:75
 msgid ".: goes to next location"
-msgstr ""
+msgstr ".: переход к следующей локации"
 
 #: ../../txts/editor_readme:43
 msgid "1-0      Changes tools size"
@@ -138,11 +142,11 @@ msgstr "C        Включить/отключить надписи"
 
 #: ../../txts/README.lua:67
 msgid "C: toggles census"
-msgstr ""
+msgstr "C: вывести список населения"
 
 #: ../../txts/README.lua:77
 msgid "CTRL+F10: quits the game immediately"
-msgstr ""
+msgstr "CTRL+F10: незамедлительный выход из игры"
 
 #: ../../txts/editor_readme:39
 msgid "CTRL+L   Load Map"
@@ -170,7 +174,7 @@ msgstr "Кодеры"
 
 #: ../../txts/license:7
 msgid "Copyright 2002 - 2013 by the Widelands Development Team."
-msgstr ""
+msgstr "Copyright 2002 - 2013 Команда разработчиков Widelands."
 
 #: ../../txts/developers:186
 msgid "Czech"
@@ -178,7 +182,7 @@ msgstr "Чешский"
 
 #: ../../txts/README.lua:83
 msgid "DELETE: archives the current message"
-msgstr ""
+msgstr "DELETE: архивировать текущее сообщение"
 
 #: ../../txts/developers:193
 msgid "Dansk"
@@ -214,15 +218,15 @@ msgstr "F Переключает полноэкранный режим"
 
 #: ../../txts/README.lua:78
 msgid "F11: takes a screenshot"
-msgstr ""
+msgstr "F11: сделать скриншот"
 
 #: ../../txts/README.lua:76
 msgid "F6: shows the debug console (only in debug-builds)"
-msgstr ""
+msgstr "F6: показать отладочную консоль (только в отладочных сборках)"
 
 #: ../../txts/README.lua:71
 msgid "F: toggles fullscreen (if supported by OS)"
-msgstr ""
+msgstr "F: во весь экран (если поддерживается ОС)"
 
 #: ../../txts/developers:206
 msgid "Finnish"
@@ -238,7 +242,7 @@ msgstr "Французский"
 
 #: ../../txts/README.lua:82
 msgid "G: jumps to location corresponding to current message"
-msgstr ""
+msgstr "G: перейти к локации, указанной в текущем сообщении"
 
 #: ../../txts/developers:219
 msgid "Galician"
@@ -287,7 +291,7 @@ msgstr ""
 
 #: ../../txts/README.lua:72
 msgid "Home: centers main mapview on starting location"
-msgstr ""
+msgstr "Home: центрировать карту в начальное положение"
 
 #: ../../txts/developers:23
 #: ../../txts/developers:347
@@ -308,11 +312,12 @@ msgstr "I Активизирует информационную панель"
 
 #: ../../txts/README.lua:69
 msgid "I: toggles stock inventory"
-msgstr ""
+msgstr "I: показать содержимое складов"
 
 #: ../../txts/README.lua:93
 msgid "If you encounter a bug, please report it to our bugtracker:"
 msgstr ""
+"Если вы обнаружили ошибку, пожалуйста, сообщите о ней на наш багтрекер:"
 
 #: ../../txts/README.lua:52
 msgid ""
@@ -321,6 +326,10 @@ msgid ""
 "are\n"
 "removed."
 msgstr ""
+"Если удерживать CTRL при строительстве дороги, флаги будут расставлены \n"
+"автоматически.\n"
+"Если удерживать CTRL при удалении дороги, все флаги до первого перекрестка \n"
+"будут удалены."
 
 #: ../../txts/tips/general_game.tip:58
 msgid ""

@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: Widelands svn4866\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2013-09-15 17:41+0000\n"
-"PO-Revision-Date: 2013-10-01 07:42+0000\n"
-"Last-Translator: fk <Unknown>\n"
+"PO-Revision-Date: 2013-11-23 13:06+0000\n"
+"Last-Translator: Emmanuel Andry <Unknown>\n"
 "Language-Team: Language <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-10-02 05:10+0000\n"
-"X-Generator: Launchpad (build 16774)\n"
+"X-Launchpad-Export-Date: 2013-11-24 05:18+0000\n"
+"X-Generator: Launchpad (build 16831)\n"
 "X-Poedit-Country: FRANCE\n"
 "X-Poedit-Language: French\n"
 
@@ -122,7 +122,7 @@ msgstr "Herbe"
 
 #: ../../worlds/desert/terrainconf:57
 msgid "High mountain meadow"
-msgstr "Alpe haute"
+msgstr "Prairie de haute montagne"
 
 #: ../../worlds/desert/resconf:20
 msgid "Iron"
@@ -154,7 +154,7 @@ msgstr "Prairie"
 
 #: ../../worlds/desert/terrainconf:52
 msgid "Mountain meadow"
-msgstr "Alpe"
+msgstr "Prairie de montagne"
 
 #: ../../worlds/desert/terrainconf:62
 msgid "Mountain1"
@@ -277,7 +277,7 @@ msgstr "L'équipe de développement de Widelands"
 
 #: ../../worlds/desert/conf:4
 msgid "This is the wide and sandy country of the bedouins"
-msgstr "Ce sont les grandes et sableuses contrées bédouines"
+msgstr "Ce sont les grandes et sablonneuses contrées bédouines"
 
 #: ../../worlds/desert/resconf:36
 #: ../../worlds/desert/terrainconf:89

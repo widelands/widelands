@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2013-09-15 19:41+0200\n"
-"PO-Revision-Date: 2013-09-29 10:59+0000\n"
+"PO-Revision-Date: 2013-12-31 14:02+0000\n"
 "Last-Translator: Hans Joachim Desserud <Unknown>\n"
 "Language-Team: Norwegian Bokmal <nb@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2013-09-30 04:34+0000\n"
-"X-Generator: Launchpad (build 16774)\n"
+"X-Launchpad-Export-Date: 2014-01-01 05:11+0000\n"
+"X-Generator: Launchpad (build 16877)\n"
 
 #: ../../src/computer_player.cc:38
 msgid "None"
@@ -692,7 +692,7 @@ msgstr "ukjent/uhåndtert versjon %u"
 #: ../../src/economy/cmd_call_economy_balance.cc:88
 #, c-format
 msgid "call economy balance: %s"
-msgstr ""
+msgstr "kaller økonomibalanse: %s"
 
 #: ../../src/economy/economy_data_packet.cc:61
 #: ../../src/economy/economy_data_packet.cc:80
@@ -924,7 +924,7 @@ msgstr "ukjent"
 #: ../../src/logic/battle.cc:174
 #, c-format
 msgid "[battle] soldier %u lose battle\n"
-msgstr ""
+msgstr "[strid] soldat %u taper strid\n"
 
 #: ../../src/logic/battle.cc:178
 #, c-format
@@ -958,7 +958,7 @@ msgstr "stor"
 #: ../../src/logic/cmd_calculate_statistics.cc:46
 #, c-format
 msgid "calculate statistics function: %s"
-msgstr ""
+msgstr "beregner statistikk-funksjon: %s"
 
 #: ../../src/logic/cmd_luacoroutine.cc:77
 #, c-format
@@ -988,7 +988,7 @@ msgstr "laster skapning: %s"
 #: ../../src/logic/dismantlesite.cc:100
 #, c-format
 msgid "%u%% dismantled"
-msgstr ""
+msgstr "%u%% demontert"
 
 #: ../../src/logic/editor_game_base.cc:283
 msgid "Loading tribes"
@@ -1146,7 +1146,7 @@ msgstr "sannsynlighet i utvalg [1, 254]"
 #: ../../src/logic/immovable.cc:1491
 #, c-format
 msgid "loading player immovable: %s"
-msgstr ""
+msgstr "laster spiller uflyttbar: %s"
 
 #: ../../src/logic/instances.cc:73
 #, c-format
@@ -1254,7 +1254,7 @@ msgstr "spillerkommando: %s"
 #: ../../src/logic/playercommand.cc:195
 #, c-format
 msgid "player immovable %u: %s"
-msgstr ""
+msgstr "spiller uflyttbar %u: %s"
 
 #: ../../src/logic/playercommand.cc:201
 #, c-format
@@ -1609,7 +1609,7 @@ msgstr "nivå"
 #: ../../src/logic/production_program.cc:1282
 #, c-format
 msgid "No soldier to train!"
-msgstr ""
+msgstr "Ingen soldater å trene!"
 
 #: ../../src/logic/production_program.cc:1292
 #: ../../src/logic/production_program.cc:1382
@@ -1724,7 +1724,7 @@ msgstr "byggeplasstype «byggeplass» mangler"
 
 #: ../../src/logic/tribe.cc:142
 msgid "dismantlesite type \"distmantlesite\" is missing"
-msgstr ""
+msgstr "demonteringssted type «demonteringssted» mangler"
 
 #: ../../src/logic/tribe.cc:259 ../../src/logic/tribe.cc:280
 #, c-format
@@ -1899,7 +1899,7 @@ msgstr "byggeplass: %s"
 #: ../../src/map_io/widelands_map_buildingdata_data_packet.cc:467
 #, c-format
 msgid "dismantlesite: %s"
-msgstr ""
+msgstr "demontertingssted: %s"
 
 #: ../../src/map_io/widelands_map_buildingdata_data_packet.cc:651
 #, c-format
@@ -2143,7 +2143,7 @@ msgstr "terreng: %s"
 #: ../../src/map_io/widelands_map_version_data_packet.cc:76
 #, c-format
 msgid "version: %s"
-msgstr ""
+msgstr "versjon: %s"
 
 #: ../../src/map_io/widelands_map_ware_data_packet.cc:76
 #: ../../src/map_io/widelands_map_waredata_data_packet.cc:208
@@ -2198,7 +2198,7 @@ msgstr "Forvirret"
 
 #: ../../src/network/internet_gaming.cc:399
 msgid "The metaserver sent a strange ERROR during connection"
-msgstr ""
+msgstr "Metatjeneren sendte en merkelig FEIL under tilkobling"
 
 #: ../../src/network/internet_gaming.cc:410
 msgid "Unexpected packet"
@@ -2430,7 +2430,7 @@ msgstr "Pause var allerede fremtvunget - spillet burde være pauset."
 
 #: ../../src/network/nethost.cc:482
 msgid "There is no forced pause - nothing to end."
-msgstr ""
+msgstr "Ingen fremtvunget pause - ingenting å avslutte."
 
 #: ../../src/network/nethost.cc:493
 msgid "Invalid command! Type /help for a list of commands."
@@ -3441,7 +3441,7 @@ msgstr "Vert"
 
 #: ../../src/ui_fsmenu/netsetup_lan.cc:127
 msgid "State"
-msgstr ""
+msgstr "Status"
 
 #: ../../src/ui_fsmenu/netsetup_lan.cc:196
 #: ../../src/wui/multiplayersetupgroup.cc:270
@@ -3496,7 +3496,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/options.cc:125
 msgid "In-game resolution"
-msgstr ""
+msgstr "Spilloppløsning"
 
 #: ../../src/ui_fsmenu/options.cc:130
 msgid "Language"
@@ -3634,12 +3634,12 @@ msgstr "Vil du virkelig ødelegge %s?"
 
 #: ../../src/wui/actionconfirm.cc:288
 msgid "Dismantle building?"
-msgstr ""
+msgstr "Demonter bygning?"
 
 #: ../../src/wui/actionconfirm.cc:289
 #, c-format
 msgid "Do you really want to dismantle this %s?"
-msgstr ""
+msgstr "Vil du virkelig demontere %s?"
 
 #: ../../src/wui/actionconfirm.cc:349
 msgid "Enhance building?"
@@ -3766,7 +3766,7 @@ msgstr "Ødelegg"
 
 #: ../../src/wui/buildingwindow.cc:279
 msgid "Dismantle"
-msgstr ""
+msgstr "Demonter"
 
 #: ../../src/wui/buildingwindow.cc:279
 msgid "Returns:"
@@ -4108,7 +4108,7 @@ msgstr "Lydstyrke for lydeffekter"
 
 #: ../../src/wui/game_summary.cc:44
 msgid "Game over"
-msgstr ""
+msgstr "Spillet er slutt"
 
 #: ../../src/wui/game_summary.cc:60
 msgid "Elapsed time:"
@@ -4124,7 +4124,7 @@ msgstr "Avslutt"
 
 #: ../../src/wui/game_summary.cc:83
 msgid "Return to main menu"
-msgstr ""
+msgstr "Tilbake til hovedmeny"
 
 #: ../../src/wui/game_summary.cc:93
 msgid "Time"
@@ -4157,11 +4157,11 @@ msgstr "%s vant!"
 
 #: ../../src/wui/game_summary.cc:191
 msgid "Team %|1$u| won!"
-msgstr ""
+msgstr "Lag %|1$u| vant!"
 
 #: ../../src/wui/game_summary.cc:245
 msgid "Score"
-msgstr ""
+msgstr "Poeng"
 
 #: ../../src/wui/game_summary.cc:254
 msgid "Player info"
@@ -4483,11 +4483,11 @@ msgstr ""
 
 #: ../../src/wui/shipwindow.cc:188
 msgid "Sink the ship"
-msgstr ""
+msgstr "Senk skipet"
 
 #: ../../src/wui/shipwindow.cc:193
 msgid "Cancel the Expedition"
-msgstr ""
+msgstr "Avbryt ekspedisjonen"
 
 #: ../../src/wui/soldiercapacitycontrol.cc:66
 msgid "Decrease capacity"
@@ -4675,18 +4675,18 @@ msgstr ""
 
 #: ../../src/editor/tools/editor_info_tool.cc:91
 msgid "3) Resources Info\n"
-msgstr ""
+msgstr "3) Ressursinfo\n"
 
 #: ../../src/editor/tools/editor_info_tool.cc:98
 #: ../../src/editor/tools/editor_info_tool.cc:108
 #, c-format
 msgid " Resource name: %s\n"
-msgstr ""
+msgstr " Navn på ressurs: %s\n"
 
 #: ../../src/editor/tools/editor_info_tool.cc:102
 #, c-format
 msgid " Resource amount: %i\n"
-msgstr ""
+msgstr " Mengde av ressurs: %i\n"
 
 #: ../../src/editor/tools/editor_info_tool.cc:108
 msgid "none"
@@ -4793,13 +4793,15 @@ msgstr "Antall spillere:"
 
 #: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:102
 msgid "Set origin"
-msgstr ""
+msgstr "Velg origo"
 
 #: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:104
 msgid ""
 "Set the position that will have the coordinates (0, 0). This will be the top-"
 "left corner of a generated minimap."
 msgstr ""
+"Velg posisjonen som skal ha koordinatene (0,0). Dette blir det øverste "
+"venstre hjørnet i et generert minikart."
 
 #: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:64
 #: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:156
@@ -4894,11 +4896,11 @@ msgstr "navnløs"
 
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:255
 msgid "directory"
-msgstr ""
+msgstr "mappe"
 
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:259
 msgid "Not a map file"
-msgstr ""
+msgstr "Ikke en kartfil"
 
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:387
 msgid " exists already. Overwrite?"

@@ -8,18 +8,18 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2013-09-15 17:41+0000\n"
-"PO-Revision-Date: 2013-05-28 21:54+0000\n"
-"Last-Translator: m-abudrais <m.abudrais@yahoo.com>\n"
+"PO-Revision-Date: 2013-10-16 14:56+0000\n"
+"Last-Translator: abdXelrhman <popo49_abdo@hotmail.com>\n"
 "Language-Team: Arabic <ar@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-09-16 04:33+0000\n"
-"X-Generator: Launchpad (build 16761)\n"
+"X-Launchpad-Export-Date: 2013-10-17 05:08+0000\n"
+"X-Generator: Launchpad (build 16799)\n"
 
 #: ../../campaigns/cconfig:64
 msgid "01 - Eyes in the Dark"
-msgstr "01-عيون في الظلام"
+msgstr "01 - عيون فى الظلام"
 
 #: ../../campaigns/cconfig:98
 msgid "01 - From Nemesis to Genesis"
@@ -31,7 +31,7 @@ msgstr ""
 
 #: ../../campaigns/cconfig:69
 msgid "02 - A Place to call Home"
-msgstr ""
+msgstr "02 - البَيت بَيتُك"
 
 #: ../../campaigns/cconfig:86
 msgid "02 - An Outpost for Exile"
@@ -39,7 +39,7 @@ msgstr ""
 
 #: ../../campaigns/cconfig:74
 msgid "03 - This Land is our Land"
-msgstr "03-هذه الارض ارضنا"
+msgstr "03 - هذه ارضنا"
 
 #: ../../maps/Long, long way.wmf/elemental:11
 msgid ""
@@ -55,10 +55,11 @@ msgid ""
 "Gods? You believe it is and you hope, that your tribe will find the treasure "
 "of this island, before other tribes will follow."
 msgstr ""
-"على بعد بضعة اميال من ساحل جريون توجد جزيرة ليس لها اسم. حتى الان لم يكن "
-"هنالك سبب لذهابك الى تلك الجزيرة، لكن بالامس سقطت كرة نارية من السماء في وسط "
-"الجزيرة. هل هذه رسالة من السماء؟ انت تصدقها  وتأمل ان تبحر وتجد كنز الجزيرة "
-"قبل ان يتبعك الاخرون."
+"بضعه اميال بعيداً عن ساحل جريون عند جزيره غير مُسماه. لم يكن من اسباب تدفعك "
+"للذهاب هناك، ولكن بالبارحه سقطت كره نار من السماء وتلامست مع الجزيره تماماً "
+"فى المُنتصف، بدت وكأنها آتيه من الجحيم، تقول لنفسك بصوتاً خافت داخل عقلك "
+"\"هل هذه إشاره من الالهه؟\" وتصدق ما تمنى عقلك ان يكون، وتأمل بداخلك ان تكون "
+"انت وقبيلتك اول الواصلين لكنز هذه الجزيره، قبل ان تفعل باقى القبائل."
 
 #: ../../maps/Glacier Lake.wmf/elemental:9
 msgid ""
@@ -67,19 +68,21 @@ msgid ""
 "few months ago another tribe came over the mountains and settled down. And "
 "you are sure, that there is only enough place for one tribe."
 msgstr ""
-"منذ مدة طويلة قبيلتك تسكن في هه البحيرة الجميلة والوحيدة المتجمدة. لم يزعجكم "
-"احد وكانت الموارد كافية للقبيلة, لكن قبل عدة اشهر جاءت قبيلة اخرى واستقرت في "
-"الجبال. لكنك متأكد من انه يوجد مكان لقبيلة واحدة فقط."
+"مده طويله قبل الان. عاشت قبيلتك على ضفاف هذه البحيره الجليديه. لم يزعجكم احد "
+"وكفت الموارد، ولكن دوام الحال من المُحال! قبل بضعه اشهر ظهرت قبيله آخرى "
+"وإستقرت عند الجبال. رغم تأكدك من عدم وجود مكان ﻷى قبائل آخرى."
 
 #: ../../maps/Two frontiers.wmf/elemental:9
 msgid "A multiplayer-battle-map on a small circle-shaped island."
-msgstr "خرطة متعددة اللاعبين في جزيرة دائرية صغيرة"
+msgstr "خريطه معارك متعدده اللاعبين فى فى جزيره دائريه صغيره."
 
 #: ../../maps/Riverlands.wmf/elemental:9
 msgid ""
 "A mystical land, full of different landscapes, which are all crossed by a "
 "handful of big rivers."
-msgstr "أرضٌ غامضة،بها مشاهد طبيعية مختلفة، ويشقها نهر بحجم قبضة اليد."
+msgstr ""
+"ارض غامضه، اراضيها مُختلفه البنيه الجيولوجيه، والتى يشقها جميعاً حِفِنَه من "
+"الانهار الكبيره."
 
 #: ../../maps/MP Scenarios/Island Hopping.wmf/elemental:9
 msgid ""
@@ -88,9 +91,9 @@ msgid ""
 "as possible, to be the first building up a castle on the top of the center "
 "mountain."
 msgstr ""
-"منافسة خاصة في التراث الاطلانطي تعرف ب\"حلم الجزيرة\"، حيث تحاول مجموعتان "
-"الوصول مركز الجزيرة باقصى سرعة ممكنة، وبناء قلعة في مركز الجبل قبل المجموعة "
-"الاخرى."
+"منافسه خاصه فى الثقافه الاطلنطيه مُسماه بـ \"حُلم الجزيره\"، حيث تتنافس "
+"مجموعتان او اكثر فى سرعه الوصول الى الجزيره المركزيه، ثم بناء قلعه على اعلى "
+"نقطه فى الجبل المركزى."
 
 #: ../../maps/Impact.wmf/elemental:9
 msgid ""
@@ -98,12 +101,13 @@ msgid ""
 "are connected by ice and stone, setting an end to the peaceful coexistence "
 "of three tribes."
 msgstr ""
-"بعد سقوط كويكب تلاه شتاء قاسي، اتصلت جزيرتان بالثلج والحجارة، منهية فترة "
-"سلام بين ثلالثة قبائل."
+"بعد سقوط كويكب متلو بشتاء قاسى، وَصَلَ الثلج والحجاره بين 3 جزر وبعضها "
+"البعض، مُعلِنَاً بذلك إنهاء حقبه جميله من السلام بين 3 قبائل ، وبدأ حقبه "
+"لعينه من الحروب المتتاليه."
 
 #: ../../maps/Ice wars.wmf/elemental:11
 msgid "After autumn is winter. Some things are frozen, but not the war."
-msgstr ""
+msgstr "بعد الخريف يأتى الشتاء. قد تتجمد بعض الاشياء، ولكن ليس الحروب."
 
 #: ../../maps/Kings and Queens.wmf/elemental:11
 msgid ""
@@ -111,13 +115,15 @@ msgid ""
 "in prosperity, will someday collapse into a devastating war. Has your latest "
 "betrayal been one too many and will the prophecy come true?"
 msgstr ""
+"تُحَدِثِنا الاساطير القديمه عن السبع مماليك التى إزدهرت لدهور دهور، ستشتعل "
+"بينهم شراره الحرب فى سلسله من المعارك المُدمِره، فهل ستحقق خيانتك النبوءه؟"
 
 #: ../../maps/The long way.wmf/elemental:9
 msgid ""
 "Another strange test by the Gods. To reach the other side, there seems to be "
 "no other way, than occupying the land of your enemies."
 msgstr ""
-"اختبار قاس اخر. يبدو انه لا سبيل للوصول الى الجانب الاخر الا باحتلال ارض "
+"إختبار غريب آخر من الالهه. يبدو انه لا طريق للجانب اﻵخر سوى بإحتلال اراضى "
 "اعدائك."
 
 #: ../../maps/The Thaw.wmf/elemental:11
@@ -128,21 +134,21 @@ msgid ""
 "ancient altar, build there a splendid castle and gain goodwill and the "
 "respect of the Gods."
 msgstr ""
-"حل جو دافئ اخر، ثلاثة قبائل احتمت من الشتاء القارس في جبال عظيمة، في الوحدة "
-"استمعو للكهنة وتجهزوا للحرب، الناجي الوحيد سيقدم كنوز اعداءه كقرابين في مذبح "
-"الجبل، ويبني قلعة شهيرة هناك ويحصل على ارادة قوية."
+"دفىء آخر. 3 قبائل إحتمت بين الجبال المهيبه من الشتاء الحاد. وبمجرد حلول "
+"الدفىء إستمعوا لكَهَنَتِهِم وتجهزوا للحرب. آخر من يصمد سيضحى بغنائم اعدائه "
+"فى المَذبَح القديم، يبنى قلعه مُفَخَمَه، وستحترمه الالهه وترضى عنه."
 
 #: ../../campaigns/cconfig:41
 msgid "Atlanteans - The Run for the Fire"
-msgstr "اطلنطسي- الجري للنار"
+msgstr "اطلانطس - الركض للنار"
 
 #: ../../maps/Atoll.wmf/elemental:9
 msgid "Atoll"
-msgstr "جزيرة مرجانية"
+msgstr "جزيره مرجانيه"
 
 #: ../../campaigns/cconfig:27
 msgid "Barbarians - The second Empire"
-msgstr "البربري- الامبراطورية الثانية"
+msgstr "البرابره - اﻹمبراطوريه الثانيه"
 
 #: ../../maps/Calvisson.wmf/elemental:9
 msgid "Calvisson"
@@ -150,11 +156,11 @@ msgstr ""
 
 #: ../../campaigns/cconfig:44
 msgid "Challenging. Introduces the Atlanteans"
-msgstr "تحدي. مقدمة الاطلنطيسي"
+msgstr "التحدى."
 
 #: ../../maps/Checkmate.wmf/elemental:7
 msgid "Checkmate"
-msgstr "مات الملك"
+msgstr "كِش مات"
 
 #: ../../maps/Fellowships.wmf/elemental:11
 msgid ""
@@ -162,26 +168,28 @@ msgid ""
 "similar, map should be fair. There is plenty of gold near the starting point "
 "- Do you see it?"
 msgstr ""
+"يصعب العثور على الفحم - تعلم صنعه بكفاءه. مراكز البدايه متشابهه، الخريطه "
+"عادله فى توزيع الموارد. كما يوجد العديد من الذهب عند مركز البدايه - أتراه؟"
 
 #: ../../maps/Comet Island.wmf/elemental:7
 msgid "Comet Island"
-msgstr "ارض المذنب"
+msgstr "ارض الذنب"
 
 #: ../../maps/Crater.wmf/elemental:7
 msgid "Crater"
-msgstr "فوهة"
+msgstr "الفوهه"
 
 #: ../../maps/Crossing the horizon.wmf/elemental:9
 msgid "Crossing the horizon"
-msgstr ""
+msgstr "اثناء عبر الافق"
 
 #: ../../maps/Desert Tournament.wmf/elemental:7
 msgid "Desert Tournament"
-msgstr "مباراة الصحراء"
+msgstr "الدوره الصحراويه"
 
 #: ../../maps/Dry Riverbed.wmf/elemental:7
 msgid "Dry Riverbed"
-msgstr "مجرى نهر جاف"
+msgstr ""
 
 #: ../../maps/River Explorers.wmf/elemental:11
 msgid ""
@@ -191,6 +199,10 @@ msgid ""
 "priority - expeditions are universally useful and are often the fastest way "
 "to gold deposits."
 msgstr ""
+"كل لاعب لديه عقبه مُخِتَلَفَه لتخطيها، ودائماً يوجد اكثر من طريقه لتخطيها. "
+"فبينما يمكن هزم الذكاء الصناعى هنا بدون حتى صناعه سفينه واحده، يُنصَح "
+"اللاعبون بجعل المراسى ومستودعات السفن اولويه - البعثات مفيده بشكل عام "
+"وغالباً ما تكون الوسيله الاسرع لودائع الذهب"
 
 #: ../../maps/Four Mountains.wmf/elemental:9
 msgid ""
@@ -199,22 +211,26 @@ msgid ""
 "along the river. Hint II: Snowmen mark additional water sources. Hint III: "
 "Each mountain contains only one resource."
 msgstr ""
+"كل قبيله مُحاصره بـ 4 اربع جباره. من سيكون اول الغزاه والمُطالب بحقه فى جميع "
+"الموارد؟ التلميح الاول: يمكن العثور على الماء على طول النهر. التلميح الثانى: "
+"رجال الثلج يُعَلِمون موارد الماء اﻹضافيه. التلميح الثالث: يحتوى كل جبل على "
+"نوع واحد فقط من الموارد."
 
 #: ../../campaigns/cconfig:30
 msgid "Easy. Introduces the Barbarians"
-msgstr ""
+msgstr "سهل. يُقَدِم البرابره"
 
 #: ../../campaigns/cconfig:37
 msgid "Easy. Introduces the Empire"
-msgstr ""
+msgstr "سهل. يُقَدِم اﻹمبراطوريه"
 
 #: ../../maps/Elven Forests.wmf/elemental:7
 msgid "Elven Forests"
-msgstr "احدى عشرة غابة"
+msgstr "11 غابه"
 
 #: ../../campaigns/cconfig:34
 msgid "Empire - The Months of Exile"
-msgstr "امبراطورية -شهور المنفى"
+msgstr "إمبراطوريه - شهور الغُربه"
 
 #: ../../maps/Fellowships.wmf/elemental:9
 msgid "Fellowships"
@@ -222,11 +238,11 @@ msgstr ""
 
 #: ../../maps/Finlakes.wmf/elemental:9
 msgid "Finnish Lakes"
-msgstr "بحيرات فنلندية"
+msgstr "بحيرات فنلنديه"
 
 #: ../../maps/Firegames.wmf/elemental:7
 msgid "Firegames"
-msgstr "العاب النار"
+msgstr "العاب ناريه"
 
 #: ../../maps/Islands at war.wmf/elemental:11
 msgid ""
@@ -234,6 +250,8 @@ msgid ""
 "neighboured island. This peace seems to end now - your neighbour begins to "
 "expand."
 msgstr ""
+"عشت اربع قرون بسلام مع قبيله الجزيره المجاوره. يبدو ان حقبه السلام إنتهت - "
+"حيث يحاول جارك التوسع"
 
 #: ../../maps/Sun of fire.wmf/elemental:11
 msgid ""
@@ -242,17 +260,17 @@ msgid ""
 "barefaced enough to settle on the coast of that island, a lot others "
 "followed afterwards."
 msgstr ""
-"لمئات السنين تم الاحتفاظ بهذه الارض كمعابد للالهة. لم يتجرأ شخص على وضع قدمه "
-"عليها. لكن الان تلك القبيلة لديه من قلة الحياء للنزول على تلك الجزيرة، "
-"وتبعها الكثيرون."
+"اُحتُفِظَ لمئات الاعوام بهذه الجزيره كمأوى للألهه. لم يتجرأ اى رَجُل بوضع "
+"قدمه عليها من قبل. ولكن الان، تلك القبيله وقحه بما فيه الكفايه ﻹستطوان ساحل "
+"تلك الجزيره، وتبعها الكثيرون."
 
 #: ../../maps/Four Castles.wmf/elemental:7
 msgid "Four Castles"
-msgstr "اربع قلاع"
+msgstr "4 قلاع"
 
 #: ../../maps/Four Mountains.wmf/elemental:7
 msgid "Four Mountains"
-msgstr "اربعة جبال"
+msgstr "4 جبال"
 
 #: ../../maps/Desert Tournament.wmf/elemental:9
 msgid ""
@@ -260,17 +278,17 @@ msgid ""
 "the mountain of gold that promises riches beyond belief. But can the two "
 "remaining ones share the resources wisely?"
 msgstr ""
-"اربع قبائل تتصارع مع اقرب جاراتها من اجل ان تتمكن احداها من الوصول اولا الى "
-"جبل الذهب والذي يحتوي على كمية من الذهب تفوق الخيال. لكن هل ستتمكن القبيلتان "
-"الناجيتان من مشاركة مصدر الذهب بحكمة."
+"ارب قبائل تتصارع مع اقرب جيرانها لتكون اول من يصل الى جبل الذهب الذى يعدهم "
+"بالغنا وراء اﻹيمان. ولكن هل ستتمكن القبيلتين المتبقيتين من تشارك الموارد "
+"بحكمه؟"
 
 #: ../../maps/Glacier Lake.wmf/elemental:7
 msgid "Glacier Lake"
-msgstr ""
+msgstr "بحيره جليديه"
 
 #: ../../maps/Golden Peninsula.wmf/elemental:7
 msgid "Golden Peninsula"
-msgstr "شبه الجزيرة الذهبية"
+msgstr "شبه الجزيره الذهبيه"
 
 #: ../../maps/Ice wars.wmf/elemental:9
 msgid "Ice wars"
@@ -278,7 +296,7 @@ msgstr ""
 
 #: ../../maps/Impact.wmf/elemental:7
 msgid "Impact"
-msgstr "تصادم"
+msgstr "إصطدام"
 
 #: ../../maps/Volcanic Winter.wmf/elemental:11
 msgid ""
@@ -302,6 +320,8 @@ msgid ""
 "In this mountainous area two princes have settled. Now they are expanding "
 "their territories unaware of the fact that they are not alone!"
 msgstr ""
+"فى هذه المناطق الجبليه إستقر اميران. والان يحاولان التوسع بمملكتيهما غير "
+"مدركين بحقيقه انهما ليسا وحدهما!"
 
 #: ../../maps/Firegames.wmf/elemental:9
 msgid ""
@@ -310,10 +330,13 @@ msgid ""
 "if you are alone, but no-one knows, what might happen if you meet an "
 "opponent tribe?"
 msgstr ""
+"أهذا إختبار من الالهه ام خطه شريره من شخص اخر، انت وقبيلتك تستيقظون على هذه "
+"الجزيره بين النيران ومقذوفات البراكين؟ حتى الان يبدو انك وحدك، ولكن لا احد "
+"يعلم، ما قد يحدث إذا واجهت قبيله خصمه؟"
 
 #: ../../maps/MP Scenarios/Island Hopping.wmf/elemental:7
 msgid "Island Hopping"
-msgstr ""
+msgstr "حلم الجزيره"
 
 #: ../../maps/Islands at war.wmf/elemental:9
 msgid "Islands at war"
@@ -363,29 +386,31 @@ msgstr ""
 
 #: ../../maps/Kings and Queens.wmf/elemental:9
 msgid "Kings and Queens"
-msgstr ""
+msgstr "ملوك وملكات"
 
 #: ../../maps/Lake of tranquility.wmf/elemental:7
 msgid "Lake of Tranquility"
-msgstr ""
+msgstr "بحيره الهدوء"
 
 #: ../../maps/Last Bastion.wmf/elemental:9
 msgid "Last Bastion"
-msgstr ""
+msgstr "الحصن الاخير"
 
 #: ../../maps/Crater.wmf/elemental:9
 msgid ""
 "Long after a meteor crashed into a couple of mountains, life blossoms in the "
 "crater. Two tribes are now fighting for the rich resources."
 msgstr ""
+"طويلاً بعد اصطدام نيزك فى جبلين، ظهرت موارد عند الفوهه. والان تتقاتل قبيلتين "
+"للحصول على تلك الموارد"
 
 #: ../../maps/Long, long way.wmf/elemental:9
 msgid "Long, long way"
-msgstr ""
+msgstr "طَرِيقُاً طَوِوِوِوِيِل"
 
 #: ../../maps/Crossing the horizon.wmf/elemental:11
 msgid "Man your ship and sail to the horizon."
-msgstr ""
+msgstr "إملأ سُفُنَك بالرجال الاشداء وابحر نحو الافق"
 
 #: ../../maps/Twinkling Waves.wmf/elemental:11
 msgid ""

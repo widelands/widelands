@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2013-09-15 17:41+0000\n"
-"PO-Revision-Date: 2013-09-23 20:37+0000\n"
-"Last-Translator: Georgiy <Unknown>\n"
+"PO-Revision-Date: 2013-12-02 15:43+0000\n"
+"Last-Translator: Александр <sa13690@yandex.ru>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-09-24 05:25+0000\n"
-"X-Generator: Launchpad (build 16771)\n"
+"X-Launchpad-Export-Date: 2013-12-03 05:13+0000\n"
+"X-Generator: Launchpad (build 16856)\n"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:306
 msgid ""
@@ -78,6 +78,9 @@ msgid ""
 "our fortifications to the borders of Kalitath’s territory and reunite with "
 "his forces. I have to keep an eye on everything that happens here.\" "
 msgstr ""
+" \"Тем не менее, Трон не прислушивается к моим доводам. Он стремится "
+"расширить наши укрепления к границам с территорией Калитата и воссоединиться "
+"со своими силами. Я должен следить за всем, что здесь происходит.\" "
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:197
 msgid ""
@@ -88,6 +91,12 @@ msgid ""
 "time I wait won't be lost. I will further upgrade my soldiers and prepare "
 "for battle.\" "
 msgstr ""
+" \"Я отправил людей к Калитату, в его укрепление. Он забарикадировал главные "
+"ворота столицы, и пытается полностью окружить Альтунран. Пока окружение не "
+"будет прервано, он не позволит никому ни покинуть город, ни войти в него. До "
+"сих пор он не ответил ни на одно мое сообщение. Но время, потраченное на "
+"ожидаение не потеряно впустую. Я продолжу обучать моих солдат и готовиться к "
+"битве.\" "
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:298
 msgid ""
@@ -95,6 +104,9 @@ msgid ""
 "brought a smile to my face - even if the hardest part is still waiting to be "
 "done, now our smiths will give their best to further ease our lives.\" "
 msgstr ""
+" \"Меня известили о начале поставок руды. Это радует меня, даже несмотря на "
+"то, что самое тяжелое еще впереди, но наши кузнецы могут приступать к работе "
+"и облегчить нашу жизнь.\" "
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:286
 msgid ""
@@ -104,12 +116,19 @@ msgid ""
 "remember, most of the mountains west to Al'thunran hold coal and some metal "
 "ores.\" "
 msgstr ""
+" \"Я только что разговаривал с командиром нашего патруля. Он сообщил мне, "
+"что они обнаружили горы на северо-востоке и востоке от нашей территории. "
+"Если повезет то это даст нам еще один шанс для перевооружения наших людей, "
+"потому что, насколько я помню, большинство гор на западе от Альтунран "
+"содержат уголь и немного металлической руды.\" "
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:254
 msgid ""
 " \"Khantrukh just informed me, that our basic food economy was built up "
 "successfully. Finally none of us has to fear starvation anymore."
 msgstr ""
+" \"Кхантрук сообщил мне, что поставки еды налажены. Наконец-то мы можем не "
+"бояться голода."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:348
 msgid ""
@@ -124,6 +143,15 @@ msgid ""
 "not hesitate to rebuild it with all the strength my people have. I can't "
 "wait to see it again in it's old beauty.\" "
 msgstr ""
+" \"Мои братья и их солдаты мерты, остались только огонь и руины. Нигде в "
+"руинах я не смог найти уцелевших людей ни мужчин, ни женщин, и остается "
+"только надеяться, что они уцелели и бежали из этой битвы, и начали новую "
+"жизнь где бы то ни было. Не осталось ничего из того что я помню, только "
+"руины напоминают о старой столице. Я опечален, но и чувствую облегчение. Я "
+"никогда не увижу прежнюю красоту Альтунран - еще несколько месяцев назад я "
+"думал о том ступит ли еще хоть раз моя нога в Альтунран. Пока город в моих "
+"руках, в моих силах его возродить для моего народа. Я не могу ждать пока "
+"увижу его прежнее величие.\" "
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:326
 msgid ""
@@ -131,6 +159,9 @@ msgid ""
 "there are still a lot of men and women waiting in our hall to get a task, so "
 "they can help our soldiers to prepare for the future fights."
 msgstr ""
+" \"Хорошие новости, поставки руды идут исправно! Тем не менее, множество "
+"мужчин и женщин всё ещё ждут от нас новых заданий, пусть они помогут нашим "
+"солдатам подготовиться к предстоящим битвам."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:360
 msgid ""
@@ -142,6 +173,12 @@ msgid ""
 "newborn lamb in the honour of my father whose eyes are set upon me "
 "today.<br>So be it!\" "
 msgstr ""
+" \"Так и быть, генералы требуют выдвигать войска, и Болдреф сам возглавит "
+"первый удар. Я поеду рядом с ним, дабы освободить Альтунран от этой войны и "
+"вернуть мир в нашу столицу. Когда молодое солнце взойдёт над деревьями "
+"завтра утром, я прикажу начать штурм. К сумеркам, я буду праздновать победу "
+"в деревянных залах военачальника и принесу в жертву новорожденного ягненка в "
+"честь моего отца, чьи глаза наблюдают за мной сегодня.<br>Да будет так!\" "
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:274
 msgid ""
@@ -166,6 +203,12 @@ msgid ""
 "linked by a good and defendable infrastructure. Still I hope I will not walk "
 "alone on this mission, I hope Kalitath son of Kun will follow my call.\" "
 msgstr ""
+" \"Границы моих сил расширились до края леса. Теперь долгая и холодная зима "
+"и так много миль позади нас. Укрепления, что мы возвели вокруг Ондуна, "
+"обеспечат нам быструю поставку мужчин и товаров, и однажды Альтунран будет в "
+"моих руках, два города будут связаны хорошей и продуманной инфраструктурой. "
+"Тем не менее, я надеюсь, что я не отправлюсь один на эту миссию, я надеюсь, "
+"Калитат, сын Куна, примет мой призыв\". "
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:161
 msgid ""
@@ -176,6 +219,12 @@ msgid ""
 "vulnerable. As my scouts report, he has set foot on the lower grounds around "
 "the capitol, securing the outer fortification rings.\" "
 msgstr ""
+" \"Новости, принесённые дозором, неприятно слышать. Наши шпионы сообщают, "
+"что племена по-прежнему яростны в бою, но некоторые из старших солдат и "
+"вожди племен, кажется, устали от этой бессмысленной войны. Калитат, сын "
+"Куна, является первым полководцем, оставившим Альтунран, в результате чего "
+"его сторона слаба и уязвима. Как доложили мои разведчики, он вступил в "
+"нижние земли вокруг столицы, обеспечив внешнее кольцо блокады.\" "
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:222
 msgid ""
@@ -200,6 +249,11 @@ msgid ""
 "are not strong enough to take up the battle with my brothers.<br>For now we "
 "rest at the borders of the old forest and prepare for the coming days.\" "
 msgstr ""
+" \"За прошедшие дни мы приблизились к нашей столице. Многие люди уже "
+"присоединились к нам на наш марш и возлагают надежды на меня. Тем не менее, "
+"я боюсь, что мы не достаточно сильны, чтобы сражаться с моими "
+"братьями.<br>Пока мы отдыхаем на границах старого леса и подготовимся в "
+"течение ближайших дней \". "
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:206
 msgid ""
@@ -217,6 +271,11 @@ msgid ""
 "firmly in its grip. We should put food in our storage to survive the long, "
 "cold winter!\" "
 msgstr ""
+" \"Этим утром я нашёл Трона обеспокоенным. Он вернулся из патруля вчера "
+"поздно вечером и сел спиной к дереву, наблюдая за лагерем. Количество ссор и "
+"споров продолжает расти, а зима крепто держит нас в своих объятьях. Мы "
+"должны заполнить едой наши хранилища, чтобы пережить пережить долгую "
+"холодную зиму!\" "
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:171
 msgid ""
@@ -227,6 +286,12 @@ msgid ""
 "before the banner of Chat’Karuth. Why should he march with his son to "
 "reclaim his heritage and the throne?\" "
 msgstr ""
+" \"Трон хочет верить, что Калитат устал от борьбы и будет готов "
+"присоединиться к нам, как только мы придём, чтобы восстановить закон и "
+"порядок в Альтунране.. Но я так не думаю. Калитат является сыном одного из "
+"самых могущественных генералов наших сил и его семье никогда не понравится "
+"мысль преклониться перед знаменем Чат Каруда. Почему он должен идти с  его "
+"сыном, чтобы вернуть наследие и престол?\" "
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:262
 msgid ""
@@ -235,27 +300,34 @@ msgid ""
 "range on the area around our hall to protect our people from sudden "
 "attacks.\" "
 msgstr ""
+" \"Трон сказал мне, что он обнаружил следы на снегу северо-восточнее "
+"поселения. Он распорядился построить дозорную башню, чтобы иметь лучшую "
+"видимость на территории вокруг  нашего штаба и защитить наших людей от "
+"внезапной атаки.\" "
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:101
 #: ../../campaigns/t03.wmf/scripting/texts.lua:334
 msgid ""
 "* Build a battle arena and a trainings camp to the west of the mountains."
-msgstr ""
+msgstr "* Постройте арену поединков и тренировочный лагерь западнее гор."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:59
 msgid ""
 "* Build a donjon at the northeast of your territory to get a farther visual "
 "range and to protect your people from sudden attacks of enemies."
 msgstr ""
+"* Постройте дозорную башню на северо-востоке от вашей территории, чтобы "
+"увеличить дальность обзора и защитить свой народ от внезапного нападения "
+"врагов."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:266
 msgid "* Build a donjon at the northeast of your territory."
-msgstr ""
+msgstr "* Постройте дозорную башню на северо-востоке от вашей территории."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:83
 #: ../../campaigns/t03.wmf/scripting/texts.lua:310
 msgid "* Build a fortress to the east of the mountains."
-msgstr ""
+msgstr "*Постройте крепость восточнее гор."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:119
 #: ../../campaigns/t03.wmf/scripting/texts.lua:338
@@ -263,11 +335,13 @@ msgid ""
 "* Build a helmsmithy to the west of the mountains to provide your soldiers "
 "with better armor."
 msgstr ""
+"* Постройте шлемную мастерскую на западе от гор, чтобы обеспечить ваших "
+"солдат лучшей броней."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:91
 #: ../../campaigns/t03.wmf/scripting/texts.lua:332
 msgid "* Build a warehouse to the west of the mountains."
-msgstr ""
+msgstr "* Постройте склад на западе от гор."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:67
 #: ../../campaigns/t03.wmf/scripting/texts.lua:278
@@ -275,6 +349,8 @@ msgid ""
 "* Build more military buildings to explore the area around the headquarters "
 "and to ensure the safety of your people."
 msgstr ""
+"* Постройте больше военных зданий, чтобы исследовать земли вокруг штаба и "
+"убедиться в безопасности ваших людей."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:42
 #: ../../campaigns/t03.wmf/scripting/texts.lua:246
@@ -282,14 +358,16 @@ msgid ""
 "* Build up a basic food economy - a fisher's hut, a hunter's hut, a well, a "
 "farm and a bakery, to provide your people with food."
 msgstr ""
+"* Создайте базовую пищевую экономику - хижину рыбака, хижину охотника, "
+"колодец, ферму и пекарню, чтобы обеспечить ваших людей едой."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:210
 msgid "* Destroy Kalitath's army and expand your territory to the east."
-msgstr ""
+msgstr "* Уничтожьте армию Калитата и расширьте свои владения на восток."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:127
 msgid "* Destroy Kalitaths army and expand your territory to the east."
-msgstr ""
+msgstr "* Уничтожьте армию Калитата и расширьте свои владения на восток."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:137
 #: ../../campaigns/t03.wmf/scripting/texts.lua:364
@@ -305,6 +383,11 @@ msgid ""
 "blacksmith reaches his next level (master blacksmith), you can even enhance "
 "it to a war mill which produces additional weapons."
 msgstr ""
+"* Улучшите вашу кузницу до фабрики топоров для того, чтобы производить "
+"оружие, и постройте другую кузницу для обеспечения производства "
+"инструментов. Когда кузнец достигнет следующего уровня (опытный кузнец), вы "
+"сможете даже улучшить фабрику до военного завода, который производит "
+"дополнительное оружие."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:111
 msgid ""
@@ -313,6 +396,10 @@ msgid ""
 "blacksmith reaches his next level (master blacksmith), you can even enhance "
 "your axefactory to a war mill."
 msgstr ""
+"* Улучшите вашу кузницу до фабрики топоров, чтобы начать производить оружие, "
+"и постройте другую кузницу для обеспечения производства инструментов. Когда "
+"кузнец достигнет следующего уровня (опытный кузнец), вы сможете даже "
+"улучшить фабрику до военного завода."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:75
 #: ../../campaigns/t03.wmf/scripting/texts.lua:290
@@ -321,6 +408,8 @@ msgid ""
 "and coal and build a mining economy with mines, taverns, smelting works and "
 "metalworks."
 msgstr ""
+"* Расширьте свои владения к горам, пошлите геолога искать руду и уголь и "
+"постройте добывающую экономику с шахтами, тавернами, плавильнями и кузницами."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:208
 #: ../../campaigns/t03.wmf/scripting/texts.lua:244
@@ -339,7 +428,7 @@ msgstr "-- НОВЫЕ ЗАДАНИЯ --"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:350
 msgid "--------------------- VICTORY! ----------------------"
-msgstr ""
+msgstr "--------------------- ПОБЕДА! ----------------------"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:129
 #: ../../campaigns/t03.wmf/scripting/texts.lua:212
@@ -349,6 +438,9 @@ msgid ""
 "that should attack. When you are ready with setting the number, click on the "
 "cross ('start attack')"
 msgstr ""
+"-> Чтобы атаковать врага, вы должны нажать на дверь военного здания "
+"противника. Появится меню, позволяющее выбрать количество солдат для атаки. "
+"Когда вы, указав количество, будете готовы, нажмите на крест ('начать атаку')"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:103
 msgid ""
@@ -365,10 +457,13 @@ msgid ""
 "when your territory is growing and the paths to your headquarters get longer "
 "and longer."
 msgstr ""
+"-> Склады похожи на ваш штаб, с той лишь разницей, что их не защищают "
+"солдаты. Зачастую целесообразно строить склады, когда ваша территория "
+"увеличивается и дороги до штаба становятся всё длиннее."
 
 #: ../../campaigns/t03.wmf/elemental:7
 msgid "03 - This Land is our Land"
-msgstr ""
+msgstr "03 - Эта земля - Наша земля"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:157
 #: ../../campaigns/t03.wmf/scripting/texts.lua:185
@@ -382,10 +477,13 @@ msgid ""
 " of your oxen to help transport wares quicker. Remember to build a cattle\n"
 " farm!"
 msgstr ""
+"Так как дороги становятся длиннее, а экономика растёт, нужно найти хорошее\n"
+" применение волам, чтобы быстрее транспортировать товары. Не забудьте\n"
+" построить ранчо!"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:169
 msgid "Boldreth shakes his head."
-msgstr ""
+msgstr "Болдреф качает головой."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:204
 msgid "Boldreth shouts out!"
@@ -393,27 +491,27 @@ msgstr ""
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:230
 msgid "Boldreth speaks:"
-msgstr ""
+msgstr "Болдреф говорит:"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:57
 msgid "Build a donjon"
-msgstr ""
+msgstr "Постройте дозорную башню"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:81
 msgid "Build a fortress"
-msgstr ""
+msgstr "Постройте крепость"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:117
 msgid "Build a helmsmithy"
-msgstr ""
+msgstr "Постройте шлемную мастерскую"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:89
 msgid "Build a warehouse"
-msgstr ""
+msgstr "Постройте склад"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:73
 msgid "Build mines"
-msgstr ""
+msgstr "Постройте шахты"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:99
 msgid "Build trainingssites"
@@ -421,11 +519,11 @@ msgstr ""
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:40
 msgid "Build up a small food economy"
-msgstr ""
+msgstr "Создайте малую пищевую экономику"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:109
 msgid "Build weapon productions"
-msgstr ""
+msgstr "Постройте оружейное производство"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:146
 msgid "Close to home"
@@ -433,15 +531,15 @@ msgstr "Ближе к дому"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:125
 msgid "Destroy Kalitaths army"
-msgstr ""
+msgstr "Уничтожьте армию Калитата"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:166
 msgid "Doubts"
-msgstr ""
+msgstr "Сомнения"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:324
 msgid "Enhanced economy and training"
-msgstr ""
+msgstr "Улучшенная экономика и обучение"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:65
 msgid "Explore further"
@@ -453,7 +551,7 @@ msgstr ""
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:316
 msgid "Fortress completed"
-msgstr ""
+msgstr "Крепость построена"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:304
 msgid "Fortress needed"
@@ -465,15 +563,15 @@ msgstr ""
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:371
 msgid "Khantrukh approaches"
-msgstr ""
+msgstr "Хантрух приближается"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:240
 msgid "Khantrukh nods"
-msgstr ""
+msgstr "Хантрух кивает"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:369
 msgid "Khantrukh speaks"
-msgstr ""
+msgstr "Хантрух говорит"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:358
 msgid "Military assault"
@@ -489,7 +587,7 @@ msgstr ""
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:284
 msgid "Mountains found"
-msgstr ""
+msgstr "Горы найдены"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:328
 msgid ""
@@ -501,10 +599,17 @@ msgid ""
 "neither have a good weapon nor are they well trained. We should build up "
 "trainingssites to prepare them for their future tasks.\" "
 msgstr ""
+"Наши геологи нашли крупные залежи железной руды, угля и даже золота. Мы "
+"должны улучшить шахты как только наши шахтёры наберутся опыта. Следует "
+"создать больше шахт, увеличить производство продовольствия, чтобы всгда "
+"снабжать наших людей достаточным количеством еды для дальнейшего развития "
+"экономики. Но это ещё не всё - многие из наших солдат довольно молоды и не "
+"обладают ни хорошим оружием, ни хорошей подготовкой. Мы должны создать места "
+"для подготовки их к будущим заданиям.\" "
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:48
 msgid "Remember to build a cattle farm"
-msgstr ""
+msgstr "Не забудьте построить ранчо"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:218
 msgid "Renegade fortification"
@@ -517,30 +622,32 @@ msgstr "Советник"
 #: ../../campaigns/t03.wmf/scripting/texts.lua:177
 #: ../../campaigns/t03.wmf/scripting/texts.lua:195
 msgid "The story continues"
-msgstr ""
+msgstr "История продолжается"
 
 #: ../../campaigns/t03.wmf/elemental:9
 msgid ""
 "This tutorial explains the handling of military and training site buildings "
 "and will introduce fighting."
 msgstr ""
+"Это обучение объясняет управление войсками и тренировочными зданиями и "
+"представит боевые действия."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:159
 #: ../../campaigns/t03.wmf/scripting/texts.lua:346
 msgid "Thron looks worried."
-msgstr ""
+msgstr "Трон выглядит обеспокоенным."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:148
 msgid "Thron looks worried..."
-msgstr ""
+msgstr "Трон выглядит обеспокоенным..."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:187
 msgid "Thron speaks confidently."
-msgstr ""
+msgstr "Трон говорит уверенно."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:220
 msgid "Thron speaks:"
-msgstr ""
+msgstr "Трон говорит:"
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:260
 msgid "Tracks"
@@ -555,7 +662,9 @@ msgid ""
 "You have completed the last mission of the barbarian tutorial campaign. You "
 "may continue playing if you wish, otherwise move on to the next campaign."
 msgstr ""
+"Вы завершили последнюю миссию ознакомительной кампании. Вы можете продолжить "
+"играть, если хотите, или перейти к следующей кампании."
 
 #: ../../campaigns/t03.wmf/scripting/texts.lua:202
 msgid "Your loyal companion"
-msgstr ""
+msgstr "Ваш верный спутник"
