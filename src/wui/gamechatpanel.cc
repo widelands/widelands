@@ -64,10 +64,13 @@ void GameChatPanel::recalculate()
 
 	chatbox.set_text(str);
 
-	// If there are new messages
+	// If there are new messages, play a sound
 	if (msgs.size() > chat_message_counter)
 	{
 		// computer generated ones are ignored
+		// Note: if many messages arrive simultaneously,
+		// the latest is a system message and some others
+		// are not, then this act wrong!
 		if (not msgs . back() . sender . empty())
 			// Alert me!
 			play_new_chat_message();
