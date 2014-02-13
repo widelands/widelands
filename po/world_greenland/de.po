@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: Widelands unofficial-bzr-launchpad-i18n-4955\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2013-09-15 17:41+0000\n"
-"PO-Revision-Date: 2013-08-30 13:13+0000\n"
-"Last-Translator: Nasenbaer <Unknown>\n"
+"PO-Revision-Date: 2014-02-12 11:03+0000\n"
+"Last-Translator: Mirian Margiani <mirian.margiani@gmail.com>\n"
 "Language-Team: German <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-09-16 04:48+0000\n"
-"X-Generator: Launchpad (build 16761)\n"
+"X-Launchpad-Export-Date: 2014-02-13 05:25+0000\n"
+"X-Generator: Launchpad (build 16916)\n"
 
 #: ../../worlds/greenland/conf:58
 msgid "Alder"
@@ -22,7 +22,7 @@ msgstr "Erle"
 
 #: ../../worlds/greenland/conf:59
 msgid "Alder medium"
-msgstr "mittelhohe Erle"
+msgstr "mittelgrosse Erle"
 
 #: ../../worlds/greenland/conf:60
 msgid "Alder small"
@@ -38,7 +38,7 @@ msgstr "Zitterpappel"
 
 #: ../../worlds/greenland/conf:47
 msgid "Aspen medium"
-msgstr "mittelhohe Zitterpappel"
+msgstr "mittelgrosse Zitterpappel"
 
 #: ../../worlds/greenland/conf:48
 msgid "Aspen small"
@@ -66,7 +66,7 @@ msgstr "Buche"
 
 #: ../../worlds/greenland/conf:67
 msgid "Beech medium"
-msgstr "mittelhohe Buche"
+msgstr "mittelgrosse Buche"
 
 #: ../../worlds/greenland/conf:68
 msgid "Beech small"
@@ -82,7 +82,7 @@ msgstr "Birke"
 
 #: ../../worlds/greenland/conf:63
 msgid "Birch medium"
-msgstr "mittelhohe Birke"
+msgstr "mittelgrosse Birke"
 
 #: ../../worlds/greenland/conf:64
 msgid "Birch small"
@@ -180,7 +180,7 @@ msgstr "Lärche"
 
 #: ../../worlds/greenland/conf:71
 msgid "Larch medium"
-msgstr "mittelhohe Lärche"
+msgstr "mittelgrosse Lärche"
 
 #: ../../worlds/greenland/conf:72
 msgid "Larch small"
@@ -249,7 +249,7 @@ msgstr "Eiche"
 
 #: ../../worlds/greenland/conf:51
 msgid "Oak medium"
-msgstr "mittelhohe Eiche"
+msgstr "mittelgrosse Eiche"
 
 #: ../../worlds/greenland/conf:52
 msgid "Oak small"
@@ -278,7 +278,7 @@ msgstr "Eberesche"
 
 #: ../../worlds/greenland/conf:75
 msgid "Rowan medium"
-msgstr "mittelhohe Eberesche"
+msgstr "mittelgrosse Eberesche"
 
 #: ../../worlds/greenland/conf:76
 msgid "Rowan small"
@@ -308,7 +308,7 @@ msgstr "Fichte"
 
 #: ../../worlds/greenland/conf:55
 msgid "Spruce medium"
-msgstr "mittelhohe Fichte"
+msgstr "mittelgrosse Fichte"
 
 #: ../../worlds/greenland/conf:56
 msgid "Spruce small"

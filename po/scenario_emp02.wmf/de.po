@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: Widelands unofficial-bzr-launchpad-i18n-4955\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2013-09-15 17:41+0000\n"
-"PO-Revision-Date: 2011-08-21 14:16+0000\n"
+"PO-Revision-Date: 2014-02-12 17:21+0000\n"
 "Last-Translator: Nasenbaer <Unknown>\n"
 "Language-Team: German <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-09-16 04:35+0000\n"
-"X-Generator: Launchpad (build 16761)\n"
+"X-Launchpad-Export-Date: 2014-02-13 05:25+0000\n"
+"X-Generator: Launchpad (build 16916)\n"
 "X-Poedit-Country: GERMANY\n"
 "X-Poedit-Language: German\n"
 
@@ -379,15 +379,15 @@ msgstr "Die Zeit vergeht"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:18
 msgid "Build a quarry"
-msgstr "Baue einen Steinbruch."
+msgstr "Baue einen Steinbruch"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:42
 msgid "Build a stonemason and mining infrastructure"
-msgstr "Baue einen Steinmetz und Minen."
+msgstr "Baue einen Steinmetz und Minen"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:10
 msgid "Build up a wood economy"
-msgstr "Baue eine Holzproduktionskette."
+msgstr "Baue eine Holzproduktionskette"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:182
 msgid "Command for Attack"
@@ -399,7 +399,7 @@ msgstr "Gefährliche Schiffsteile"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:66
 msgid "Destroy the barbarian tribe"
-msgstr "Besiege den Barbarenstamm."
+msgstr "Besiege den Barbarenstamm"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:81
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:91
@@ -455,11 +455,11 @@ msgstr "Versorge deine Bergarbeiter mit Nahrung."
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:153
 msgid "Saledus is amazed"
-msgstr "Saledus ist begeistert."
+msgstr "Saledus ist begeistert"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:133
 msgid "Saledus looks unhappy"
-msgstr "Saledus sieht unglücklich aus."
+msgstr "Saledus sieht unglücklich aus"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:143
 msgid "Saledus smiles"

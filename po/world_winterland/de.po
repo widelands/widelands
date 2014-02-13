@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: Widelands unofficial-bzr-launchpad-i18n-4955\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2013-09-15 17:41+0000\n"
-"PO-Revision-Date: 2013-08-30 13:14+0000\n"
-"Last-Translator: Nasenbaer <Unknown>\n"
+"PO-Revision-Date: 2014-02-12 11:01+0000\n"
+"Last-Translator: Mirian Margiani <mirian.margiani@gmail.com>\n"
 "Language-Team: German <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-09-16 04:48+0000\n"
-"X-Generator: Launchpad (build 16761)\n"
+"X-Launchpad-Export-Date: 2014-02-13 05:25+0000\n"
+"X-Generator: Launchpad (build 16916)\n"
 
 #: ../../worlds/winterland/conf:45
 msgid "Aspen"
@@ -22,7 +22,7 @@ msgstr "Espe"
 
 #: ../../worlds/winterland/conf:46
 msgid "Aspen medium"
-msgstr "mittelhohe Espe"
+msgstr "mittelgrosse Espe"
 
 #: ../../worlds/winterland/conf:47
 msgid "Aspen small"
@@ -46,7 +46,7 @@ msgstr "Buche"
 
 #: ../../worlds/winterland/conf:66
 msgid "Beech medium"
-msgstr "mittelhohe Buche"
+msgstr "mittelgrosse Buche"
 
 #: ../../worlds/winterland/conf:67
 msgid "Beech small"
@@ -62,7 +62,7 @@ msgstr "Birke"
 
 #: ../../worlds/winterland/conf:62
 msgid "Birch medium"
-msgstr "mittelhohe Birke"
+msgstr "mittelgrosse Birke"
 
 #: ../../worlds/winterland/conf:63
 msgid "Birch small"
@@ -151,7 +151,7 @@ msgstr "Lärche"
 
 #: ../../worlds/winterland/conf:70
 msgid "Larch medium"
-msgstr "mittelhohe Lärche"
+msgstr "mittelgrosse Lärche"
 
 #: ../../worlds/winterland/conf:71
 msgid "Larch small"
@@ -175,7 +175,7 @@ msgstr "Ahorn"
 
 #: ../../worlds/winterland/conf:58
 msgid "Maple medium"
-msgstr "mittelhoher Ahorn"
+msgstr "mittelgrosser Ahorn"
 
 #: ../../worlds/winterland/conf:59
 msgid "Maple small"
@@ -216,7 +216,7 @@ msgstr "Eiche"
 
 #: ../../worlds/winterland/conf:50
 msgid "Oak medium"
-msgstr "mittelhohe Eiche"
+msgstr "mittelgrosse Eiche"
 
 #: ../../worlds/winterland/conf:51
 msgid "Oak small"
@@ -245,7 +245,7 @@ msgstr "Eberesche"
 
 #: ../../worlds/winterland/conf:74
 msgid "Rowan medium"
-msgstr "mittelhohe Eberesche"
+msgstr "mittelgrosse Eberesche"
 
 #: ../../worlds/winterland/conf:75
 msgid "Rowan small"
@@ -279,7 +279,7 @@ msgstr "Fichte"
 
 #: ../../worlds/winterland/conf:54
 msgid "Spruce medium"
-msgstr "mittelhohe Fichte"
+msgstr "mittelgrosse Fichte"
 
 #: ../../worlds/winterland/conf:55
 msgid "Spruce small"

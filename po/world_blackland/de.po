@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: Widelands unofficial-bzr-launchpad-i18n-4955\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2013-09-15 17:41+0000\n"
-"PO-Revision-Date: 2013-08-30 13:10+0000\n"
-"Last-Translator: Nasenbaer <Unknown>\n"
+"PO-Revision-Date: 2014-02-12 11:05+0000\n"
+"Last-Translator: Mirian Margiani <mirian.margiani@gmail.com>\n"
 "Language-Team: German <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-09-16 04:47+0000\n"
-"X-Generator: Launchpad (build 16761)\n"
+"X-Launchpad-Export-Date: 2014-02-13 05:25+0000\n"
+"X-Generator: Launchpad (build 16916)\n"
 "X-Poedit-Country: GERMANY\n"
 "X-Poedit-Language: German\n"
 
@@ -32,7 +32,7 @@ msgstr "Espe"
 
 #: ../../worlds/blackland/conf:46
 msgid "Aspen medium"
-msgstr "mittelhohe Espe"
+msgstr "mittelgrosse Espe"
 
 #: ../../worlds/blackland/conf:47
 msgid "Aspen small"
@@ -52,7 +52,7 @@ msgstr "Buche"
 
 #: ../../worlds/blackland/conf:66
 msgid "Beech medium"
-msgstr "mittelhohe Buche"
+msgstr "mittelgrosse Buche"
 
 #: ../../worlds/blackland/conf:67
 msgid "Beech small"
@@ -68,7 +68,7 @@ msgstr "Birke"
 
 #: ../../worlds/blackland/conf:62
 msgid "Birch medium"
-msgstr "mittelhohe Birke"
+msgstr "mittelgrosse Birke"
 
 #: ../../worlds/blackland/conf:63
 msgid "Birch small"
@@ -170,7 +170,7 @@ msgstr "Lärche"
 
 #: ../../worlds/blackland/conf:70
 msgid "Larch medium"
-msgstr "mittelhohe Lärche"
+msgstr "mittelgrosse Lärche"
 
 #: ../../worlds/blackland/conf:71
 msgid "Larch small"
@@ -198,7 +198,7 @@ msgstr "Ahorn"
 
 #: ../../worlds/blackland/conf:58
 msgid "Maple medium"
-msgstr "mittelhoher Ahorn"
+msgstr "mittelgrosser Ahorn"
 
 #: ../../worlds/blackland/conf:59
 msgid "Maple small"
@@ -235,7 +235,7 @@ msgstr "Eiche"
 
 #: ../../worlds/blackland/conf:50
 msgid "Oak medium"
-msgstr "mittelhohe Eiche"
+msgstr "mittelgrosse Eiche"
 
 #: ../../worlds/blackland/conf:51
 msgid "Oak small"
@@ -264,7 +264,7 @@ msgstr "Eberesche"
 
 #: ../../worlds/blackland/conf:74
 msgid "Rowan medium"
-msgstr "mittelhohe Eberesche"
+msgstr "mittelgrosse Eberesche"
 
 #: ../../worlds/blackland/conf:75
 msgid "Rowan small"
@@ -290,7 +290,7 @@ msgstr "Fichte"
 
 #: ../../worlds/blackland/conf:54
 msgid "Spruce medium"
-msgstr "mittelhohe Fichte"
+msgstr "mittelgrosse Fichte"
 
 #: ../../worlds/blackland/conf:55
 msgid "Spruce small"

@@ -7,13 +7,13 @@ msgstr ""
 "Project-Id-Version: Widelands unofficial-bzr-launchpad-i18n-4955\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2013-09-15 17:41+0000\n"
-"PO-Revision-Date: 2014-02-06 11:06+0000\n"
-"Last-Translator: Nasenbaer <Unknown>\n"
+"PO-Revision-Date: 2014-02-12 17:06+0000\n"
+"Last-Translator: Mirian Margiani <mirian.margiani@gmail.com>\n"
 "Language-Team: German <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-02-07 05:29+0000\n"
+"X-Launchpad-Export-Date: 2014-02-13 05:25+0000\n"
 "X-Generator: Launchpad (build 16916)\n"
 "X-Poedit-Country: GERMANY\n"
 "X-Poedit-Language: German\n"
@@ -67,7 +67,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/lime_kiln/help.lua:12
 msgid "\"Forming new stone from old with fire and water.\""
-msgstr "\"Bilde mit Hilfe von Feuer und Wasser neue Steine.\""
+msgstr "„Bilde mit Hilfe von Feuer und Wasser neue Steine.“"
 
 #: ../../tribes/barbarians/gamekeepers_hut/help.lua:12
 msgid ""
@@ -82,23 +82,23 @@ msgid ""
 "\"He who can grow two trees where normally grows only one exceeds the most "
 "important general!\""
 msgstr ""
-"\"Wer zwei Bäume wachsen lassen kann, wo normalerweise nur einer wächst, "
-"übertrifft den besten General!\""
+"„Wer zwei Bäume wachsen lassen kann, wo normalerweise nur einer wächst, "
+"übertrifft den besten General!“"
 
 #: ../../tribes/barbarians/trainingscamp/help.lua:12
 msgid ""
 "\"He who is strong shall not forgive nor forget, but revenge injustice "
 "suffered - in the past and for all future.\""
 msgstr ""
-"\"Wer stark ist, wird weder vergeben noch vergessen, aber erlittenes Unrecht "
-"rächen - in der Vergangenheit und für alle Zukunft.\""
+"„Wer stark ist, wird weder vergeben noch vergessen, aber erlittenes Unrecht "
+"rächen - in der Vergangenheit und für alle Zukunft.“"
 
 #: ../../tribes/barbarians/granitemine/help.lua:12
 msgid ""
 "\"I can handle tons of granite, man, but no more of your vain prattle.\""
 msgstr ""
-"\"Ich kann Unmengen von Granit bearbeiten, aber mit Eurem eitlen Geschwätz "
-"kann ich nichts anfangen!\""
+"„Ich kann Unmengen von Granit bearbeiten, aber mit Eurem eitlen Geschwätz "
+"kann ich nichts anfangen!“"
 
 #: ../../tribes/barbarians/deep_oremine/help.lua:12
 #: ../../tribes/barbarians/deeper_oremine/help.lua:12
@@ -107,32 +107,32 @@ msgid ""
 "\"I look at my own pick wearing away day by day and I realize why my work is "
 "important.\""
 msgstr ""
-"\"Ich schaue Tag für Tag auf das, was ich herausschlage, und verstehe, warum "
-"meine Arbeit wichtig ist.\""
+"„Ich schaue Tag für Tag auf das, was ich herausschlage, und verstehe, warum "
+"meine Arbeit wichtig ist.“"
 
 #: ../../tribes/barbarians/micro-brewery/help.lua:12
 msgid ""
 "\"Let the first one drive away the hunger, the second one put you at ease; "
 "when you have swallowed up your third one, it's time for the next shift!\""
 msgstr ""
-"\" Lass die erste deinen Hunger stillen, die zweite dir die Nervosität "
-"nehmen; und wenn Du die dritte runtergeschluckt hast ist es Zeit für die "
-"nächste Schicht!\""
+"„Lass die erste deinen Hunger stillen, die zweite dir die Nervosität nehmen; "
+"und wenn Du die dritte runtergeschluckt hast ist es Zeit für die nächste "
+"Schicht!“"
 
 #: ../../tribes/barbarians/battlearena/help.lua:12
 msgid ""
 "\"No better friend you have in battle than the enemy's blow that misses.\""
 msgstr ""
-"\"Der beste Freund in der Schlacht ist der feindliche Schlag, der Dich "
-"verfehlt.\""
+"„Der beste Freund in der Schlacht ist der feindliche Schlag, der Dich "
+"verfehlt.“"
 
 #: ../../tribes/barbarians/well/help.lua:12
 msgid ""
 "\"Oh how sweet is the source of life,<br> that comes down from the sky <br> "
 "and lets the earth drink.\""
 msgstr ""
-"Oh wie süß ist der Quell des Lebens,<br> der vom Himmel herab kommt <br> und "
-"die Erde trinken lässt."
+"„Oh wie süß ist der Quell des Lebens,<br> der vom Himmel herab kommt <br> "
+"und die Erde trinken lässt.“"
 
 #: ../../tribes/barbarians/deep_goldmine/help.lua:12
 #: ../../tribes/barbarians/deeper_goldmine/help.lua:12
@@ -141,8 +141,8 @@ msgid ""
 "\"Soft and supple.<br> And yet untouched by time and weather.<br> Rays of "
 "sun, wrought into eternity ...\""
 msgstr ""
-"\"Weich und geschmeidig.<br> Und doch von Wetter und Zeit unberührt.<br> "
-"Sonnenstrahlen, hervorgebracht in Ewigkeit...\""
+"„Weich und geschmeidig.<br> Und doch von Wetter und Zeit unberührt.<br> "
+"Sonnenstrahlen, hervorgebracht in Ewigkeit...“"
 
 #: ../../tribes/barbarians/lumberjacks_hut/help.lua:12
 msgid ""
@@ -150,25 +150,25 @@ msgid ""
 "soldier. Take 50 and you're a hero. Take 20 and soon you will be a honorable "
 "lumberjack.\""
 msgstr ""
-"\"Benötige 200 Schläge um einen Baum zu fällen und Du bist ein Baby. "
-"Benötige 100 und Du bist ein Soldat. Benötige 50 und Du bist ein Held. "
-"Benötige 20 und Du wirst bald ein ehrenwerter Holzfäller sein.\""
+"„Benötige 200 Schläge um einen Baum zu fällen und du bist ein Baby. Benötige "
+"100 und du bist ein Soldat. Benötige 50 und du bist ein Held. Benötige 20 "
+"und du wirst bald ein ehrenwerter Holzfäller sein.“"
 
 #: ../../tribes/barbarians/hunters_hut/help.lua:13
 msgid "\"The Art of Hunting\""
-msgstr "\"Die Kunst des Jagens\""
+msgstr "„Die Kunst des Jagens“"
 
 #: ../../tribes/barbarians/fernery/help.lua:12
 msgid "\"We grow roofs\""
-msgstr "\"Wir züchten Dächer.\""
+msgstr "„Wir züchten Dächer“"
 
 #: ../../tribes/barbarians/metalworks/help.lua:12
 msgid "\"We make it work!\""
-msgstr "\"Wir bringen es zum Laufen!\""
+msgstr "„Wir bringen es zum Laufen!“"
 
 #: ../../tribes/barbarians/fishers_hut/help.lua:12
 msgid "\"What do you mean, my fish ain't fresh?!\""
-msgstr "\"Was soll das heißen, mein Fisch sei nicht frisch?!\""
+msgstr "„Was soll das heißen, mein Fisch sei nicht frisch?!“"
 
 #: ../../tribes/barbarians/deep_goldmine/help.lua:30
 #: ../../tribes/barbarians/deep_oremine/help.lua:30
@@ -1039,8 +1039,8 @@ msgstr "Ausweichtraining:"
 msgid ""
 "Excerpt from \"Our Treasures Underground\",<br> a traditional Barbarian song."
 msgstr ""
-"Auszug aus dem traditionellen Barbarenlied<br> \"Unsere Schätze aus der "
-"Tiefe\"."
+"Auszug aus dem traditionellen Barbarenlied<br> „Unsere Schätze aus der "
+"Tiefe“."
 
 #: ../../tribes/barbarians/axefactory/help.lua:58
 #: ../../tribes/barbarians/bakery/help.lua:52
@@ -2098,7 +2098,7 @@ msgid ""
 "\"new stone\" now is an important building material."
 msgstr ""
 "Die Antwort von Ragnald, dem Kind, auf die Frage, was er im Schmutz mache. "
-"Seine \"neuen Steine​​\" sind jetzt ein wichtiger Baustoff."
+"Seine „neuen Steine​​“ sind jetzt ein wichtiger Baustoff."
 
 #: ../../tribes/barbarians/conf:141
 #: ../../tribes/barbarians/metalworks/help.lua:41

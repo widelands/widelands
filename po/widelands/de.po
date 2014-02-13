@@ -7,15 +7,15 @@ msgstr ""
 "Project-Id-Version: Widelands unofficial-bzr-launchpad-i18n-4955\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2013-09-15 19:41+0200\n"
-"PO-Revision-Date: 2013-11-26 09:25+0000\n"
-"Last-Translator: Nasenbaer <Unknown>\n"
+"PO-Revision-Date: 2014-02-12 11:42+0000\n"
+"Last-Translator: Mirian Margiani <mirian.margiani@gmail.com>\n"
 "Language-Team: German <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2013-11-27 04:31+0000\n"
-"X-Generator: Launchpad (build 16845)\n"
+"X-Launchpad-Export-Date: 2014-02-13 05:25+0000\n"
+"X-Generator: Launchpad (build 16916)\n"
 
 #: ../../src/computer_player.cc:38
 msgid "None"
@@ -982,7 +982,7 @@ msgstr "Vorladung: %s"
 #: ../../src/map_io/widelands_map_players_messages_data_packet.cc:131
 #, c-format
 msgid "expected %s but found \"%s\""
-msgstr "erwartete %s fand aber \"%s\""
+msgstr "erwartete %s fand aber „%s“"
 
 #: ../../src/graphic/animation.cc:138
 msgid "frame number"
@@ -1006,7 +1006,7 @@ msgstr "[Schlacht] Gewinner aufwecken %d\n"
 #: ../../src/logic/bob.cc:88 ../../src/logic/immovable.cc:204
 #, c-format
 msgid "bad attribute \"%s\""
-msgstr "Schlechtes Attribut \"%s\""
+msgstr "Schlechtes Attribut „%s“"
 
 #: ../../src/logic/building.cc:540
 msgid "mine"
@@ -1124,7 +1124,7 @@ msgstr ""
 #: ../../src/logic/immovable.cc:141 ../../src/logic/production_program.cc:1647
 #, c-format
 msgid "unknown command type \"%s\""
-msgstr "unbekannter Befehlstyp \"%s\""
+msgstr "unbekannter Befehlstyp „%s“"
 
 #: ../../src/logic/immovable.cc:145
 msgid "no actions"
@@ -1151,17 +1151,17 @@ msgstr "dupliziert"
 #: ../../src/logic/immovable.cc:276
 #, c-format
 msgid "[terrain affinity] \"%s\" (not in current world): %s"
-msgstr "[Geländeneigung] \"%s\" (nicht in momentaner Welt): %s"
+msgstr "[Geländeneigung] „%s“ (nicht in momentaner Welt): %s"
 
 #: ../../src/logic/immovable.cc:312
 #, c-format
 msgid "immovable %s has no program \"%s\""
-msgstr "unbewegbares %s hat kein Programm \"%s\""
+msgstr "unbewegbares %s hat kein Programm „%s“"
 
 #: ../../src/logic/immovable.cc:776
 #, c-format
 msgid "tribe %s does not define immovable type \"%s\""
-msgstr "Stamm %s definiert keinen unbeweglichen Typ \"%s\""
+msgstr "Stamm %s definiert keinen unbeweglichen Typ „%s“"
 
 #: ../../src/logic/immovable.cc:779
 #, c-format
@@ -1171,7 +1171,7 @@ msgstr "Unbekannter Stamm %s"
 #: ../../src/logic/immovable.cc:785
 #, c-format
 msgid "world does not define immovable type \"%s\""
-msgstr "Welt definiert keinen unbeweglichen Typ \"%s\""
+msgstr "Welt definiert keinen unbeweglichen Typ „%s“"
 
 #: ../../src/logic/immovable.cc:795
 #, c-format
@@ -1192,15 +1192,15 @@ msgstr "Priorität"
 msgid "expected probability in range [1, 254] but found \"%s\""
 msgstr ""
 "unerwartete Wahrscheinlichkeit in Reichweite [1, 254] gefunden wurde jedoch "
-"\"%s\""
+"„%s“"
 
 #: ../../src/logic/immovable.cc:927
 #, c-format
 msgid ""
 "unknown scope \"%s\" given for target type (must be \"world\" or \"tribe\")"
 msgstr ""
-"Unbekannter Bereich \"%s\" für den Zieltyp angegeben (muss entweder "
-"\"world\" oder \"tribe\" sein)."
+"Unbekannter Bereich „%s“ für den Zieltyp angegeben (muss entweder „world“ "
+"oder „tribe“ sein)."
 
 #: ../../src/logic/immovable.cc:938
 msgid "illegal transformation to the same type"
@@ -1214,8 +1214,7 @@ msgstr "unbeweglicher Typ nicht im Stamm, Ziel hat jedoch Weite (\"%s\")"
 #: ../../src/logic/immovable.cc:986 ../../src/logic/immovable.cc:1073
 #, c-format
 msgid "scope \"%s\" given for target type (must be \"world\")"
-msgstr ""
-"Weite \"%s\", die für den Zieltypen gegeben wurde (muss \"Welt\" sein)"
+msgstr "Weite „%s“, die für den Zieltypen gegeben wurde (muss “Welt“ sein)"
 
 #: ../../src/logic/immovable.cc:1034
 msgid "probability in range [1, 254]"
@@ -1256,12 +1255,12 @@ msgstr "positive Ganzzahl <= 100"
 #: ../../src/logic/military_data.cc:63
 #, c-format
 msgid "expected positive integer >= %u <= 100 but found \"%s\""
-msgstr "Benötigt ganze positive Zahl >= %u <= 100 aber \"%s\" wurde gefunden"
+msgstr "Benötigt ganze positive Zahl >= %u <= 100 aber „%s“ wurde gefunden"
 
 #: ../../src/logic/military_data.cc:75
 #, c-format
 msgid "expected positive integer >= %u <= %u but found \"%u\""
-msgstr "erwartet war positive Ganzzahl >= %u <= %u, gefunden wurde \"%u\""
+msgstr "erwartet war positive Ganzzahl >= %u <= %u, gefunden wurde „%u“"
 
 #: ../../src/logic/militarysite.cc:62 ../../src/logic/warehouse.cc:251
 msgid " conquer"
@@ -1513,12 +1512,12 @@ msgstr "Ungültige Verhältnisse: %s"
 #, c-format
 msgid "expected {\"failed\"|\"completed\"|\"skipped\"} but found \"%s\""
 msgstr ""
-"erwarte {\"fehlgeschlagen\"|\"vollständig\"|\"übersprungen\"}, gefunden "
-"wurde jedoch \"%s\""
+"erwarte {„fehlgeschlagen“|„vollständig“|„übersprungen“}, gefunden wurde "
+"jedoch „%s“"
 
 #: ../../src/logic/production_program.cc:376
 msgid "expected \"and\" or end of input"
-msgstr "erwartet \"und\" oder Ende der Eingabe"
+msgstr "erwartet „und“ oder Ende der Eingabe"
 
 #: ../../src/logic/production_program.cc:385
 msgid "expected condition at end of input"
@@ -1526,7 +1525,7 @@ msgstr "erwartete Verhältnisse am Ende der Eingabe"
 
 #: ../../src/logic/production_program.cc:391
 msgid "expected \"or\" or end of input"
-msgstr "Erwarte \"oder\" oder Ende der Eingabe"
+msgstr "Erwarte „oder“ oder Ende der Eingabe"
 
 #: ../../src/logic/production_program.cc:424
 #: ../../src/logic/production_program.cc:815
@@ -1566,7 +1565,7 @@ msgid ""
 "the program \"%s\" has not (yet) been declared in %s (wrong declaration "
 "order?)"
 msgstr ""
-"Das Programm \"%s\" wurde (noch) nicht in %s deklariert (falsche "
+"Das Programm „%s“ wurde (noch) nicht in %s deklariert (falsche "
 "Erklärungsanweisung?)"
 
 #: ../../src/logic/production_program.cc:515
@@ -1605,7 +1604,7 @@ msgstr "Schlafe: %s"
 #: ../../src/logic/production_program.cc:684
 #, c-format
 msgid "Unknown parameter \"%s\""
-msgstr "Unbekannter Parameter \"%s\""
+msgstr "Unbekannter Parameter „%s“"
 
 #: ../../src/logic/production_program.cc:686
 msgid "No parameter given!"
@@ -1692,7 +1691,7 @@ msgstr "Soldatenart"
 #, c-format
 msgid "expected {\"hp\"|\"attack\"|\"defense\"|\"evade\"} but found \"%s\""
 msgstr ""
-"{\"hp\"|\"attack\"|\"defense\"|\"evade\"} erwartet, aber \"%s\" gefunden."
+"{\"hp\"|\"attack\"|\"defense\"|\"evade\"} erwartet, aber „%s“ gefunden."
 
 #: ../../src/logic/production_program.cc:1268
 #: ../../src/logic/production_program.cc:1348
@@ -1713,7 +1712,7 @@ msgstr "Kein Soldat für diese Trainingsstufe gefunden!"
 #: ../../src/logic/production_program.cc:1358
 #, c-format
 msgid "expected level > %u but found \"%s\""
-msgstr "erwarteter level > %u  , fand jedoch \"%s\""
+msgstr "erwarteter level > %u  , fand jedoch „%s“"
 
 #: ../../src/logic/productionsite.cc:71
 msgid "this ware type has already been declared as an output"
@@ -1797,7 +1796,7 @@ msgstr "positive Ganzzahl"
 #: ../../src/logic/soldier.cc:82
 #, c-format
 msgid "expected positive integer >= %u but found \"%s\""
-msgstr "erwartete positive Ganzzahl >= %u fand aber \"%s\""
+msgstr "erwartete positive Ganzzahl >= %u fand aber „%s“"
 
 #: ../../src/logic/soldier.cc:186
 msgid "\"anim_name[,another_anim,...]\""
@@ -1818,11 +1817,11 @@ msgstr "Logikfehler"
 
 #: ../../src/logic/tribe.cc:133
 msgid "constructionsite type \"constructionsite\" is missing"
-msgstr "Baustellentyp \"Baustelle\" fehlt"
+msgstr "Baustellentyp „Baustelle“ fehlt"
 
 #: ../../src/logic/tribe.cc:142
 msgid "dismantlesite type \"distmantlesite\" is missing"
-msgstr "Typ \"Gebäude abreissen\" ist nicht vorhanden"
+msgstr "Typ „Gebäude abreissen“ ist nicht vorhanden"
 
 #: ../../src/logic/tribe.cc:259 ../../src/logic/tribe.cc:280
 #, c-format
@@ -1924,7 +1923,7 @@ msgstr "unbekannter Objekttyp %u"
 #: ../../src/map_io/widelands_map_bob_data_packet.cc:101
 #, c-format
 msgid "tribe \"%s\" does not exist"
-msgstr "Stamm \"%s\" existiert nicht"
+msgstr "Stamm „%s“ existiert nicht"
 
 #: ../../src/map_io/widelands_map_bob_data_packet.cc:138
 #, c-format
@@ -1934,7 +1933,7 @@ msgstr "Natur Objekte: %s"
 #: ../../src/map_io/widelands_map_bobdata_data_packet.cc:227
 #, c-format
 msgid "unknown task type \"%s\""
-msgstr "unbekannter Aufgabentyp \"%s\""
+msgstr "unbekannter Aufgabentyp „%s“"
 
 #: ../../src/map_io/widelands_map_bobdata_data_packet.cc:231
 #, c-format
@@ -2008,7 +2007,7 @@ msgid ""
 "%s %u has a next_spawn time for worker type \"%s\" set to %u, but it was "
 "previously set to %u\n"
 msgstr ""
-"%s %u hat für den Arbeitertyp \"%s\" einen Timer auf %u gesetzt, aber dieser "
+"%s %u hat für den Arbeitertyp „%s“ einen Timer auf %u gesetzt, aber dieser "
 "war vorher auf %u gesetzt\n"
 
 #: ../../src/map_io/widelands_map_buildingdata_data_packet.cc:765
@@ -2117,8 +2116,8 @@ msgstr "Unzulässige Welt"
 #, c-format
 msgid "The world \"%s\" set by the map, does not exist on your filesystem."
 msgstr ""
-"Die Welt \"%s\" die von der Karte vorgegeben wird, existiert nicht auf "
-"deinem Dateisystem."
+"Die Welt „%s“ die von der Karte vorgegeben wird, existiert nicht auf deinem "
+"Dateisystem."
 
 #: ../../src/map_io/widelands_map_node_ownership_data_packet.cc:64
 #, c-format
@@ -2345,7 +2344,7 @@ msgstr "Ungültige Nachrichten-Art"
 #: ../../src/network/internet_gaming.cc:454
 #, c-format
 msgid "Invalid chat message type \"%s\"."
-msgstr "Ungültige Chat-Nachrichten-Art \"%s\""
+msgstr "Ungültige Chat-Nachrichten-Art „%s“"
 
 #: ../../src/network/internet_gaming.cc:535
 msgid "ERROR: "
@@ -2380,7 +2379,7 @@ msgstr "Umwandlungsfehler"
 msgid "Conversion from std::string to bool failed. String was \"%s\""
 msgstr ""
 "Es ist ein Fehler bei der Umwandlung eines std::string zu bool aufgetreten. "
-"Der String war \"%s\""
+"Der String war „%s“"
 
 #: ../../src/network/internet_gaming_messages.cc:42
 #, c-format
@@ -2506,11 +2505,11 @@ msgstr ""
 
 #: ../../src/network/nethost.cc:382
 msgid "Wrong use, should be: /announce <message>"
-msgstr "Falsche Verwendung. Der Befehl sollte \"/announce <Nachricht>\" sein"
+msgstr "Falsche Verwendung. Der Befehl sollte „/announce <Nachricht>“ sein"
 
 #: ../../src/network/nethost.cc:395
 msgid "Wrong use, should be: /warn <name> <reason>"
-msgstr "Falsche Verwendung. Der Befehl sollte \"/warn <Name> <Grund>\" sein"
+msgstr "Falsche Verwendung. Der Befehl sollte „/warn <Name> <Grund>“ sein"
 
 #: ../../src/network/nethost.cc:403
 msgid "Why would you warn yourself?"
@@ -2527,7 +2526,7 @@ msgstr "Der Benutzer %s konnte nicht gefunden werden."
 
 #: ../../src/network/nethost.cc:420
 msgid "Wrong use, should be: /kick <name> <reason>"
-msgstr "Falsche Verwendung. Der Befehl sollte \"/kick <Name> <Grund>\" sein"
+msgstr "Falsche Verwendung. Der Befehl sollte „/kick <Name> <Grund>“ sein"
 
 #: ../../src/network/nethost.cc:431
 msgid "You can not kick yourself!"
@@ -2558,7 +2557,7 @@ msgstr "Kick-Zustimmung abgebrochen: Es wurde kein Name angegeben!"
 
 #: ../../src/network/nethost.cc:453
 msgid "Wrong use, should be: /ack_kick <name>"
-msgstr "Falsche Verwendung. Der Befehl sollte \"/ack_kick <Name>\" sein"
+msgstr "Falsche Verwendung. Der Befehl sollte „/ack_kick <Name>“ sein"
 
 #: ../../src/network/nethost.cc:459
 msgid "kick acknowledgement cancelled: Wrong name given!"
@@ -2583,7 +2582,7 @@ msgid ""
 "This is a dedicated server. Send \"@%s help\" to get a full list of "
 "available commands."
 msgstr ""
-"Dies ist ein dedizierter Server. Sende \"@%s help\" um eine Liste von "
+"Dies ist ein dedizierter Server. Sende „@%s help“ um eine Liste von "
 "verfügbaren Kommandos angezeigt zu bekommen."
 
 #: ../../src/network/nethost.cc:1201
@@ -2619,7 +2618,7 @@ msgstr ""
 #: ../../src/network/nethost.cc:1225
 #, c-format
 msgid "%s told me to run the command: \"%s\""
-msgstr "%s meint, ich solle folgenden Befehl ausführen: \"%s\""
+msgstr "%s meint, ich solle folgenden Befehl ausführen: „%s“"
 
 #: ../../src/network/nethost.cc:1234
 msgid "Sorry! Saving was deactivated on this dedicated server!"
@@ -2637,7 +2636,7 @@ msgstr "Spiel erfolgreich gespeichert!"
 #: ../../src/network/nethost.cc:1250
 #, c-format
 msgid "Could not save the game to the file \"%s\"! (%s)"
-msgstr "Das Spiel konnte nicht als Datei \"%s\" gespeichert werden! (%s)"
+msgstr "Das Spiel konnte nicht als Datei „%s“ gespeichert werden! (%s)"
 
 #: ../../src/network/nethost.cc:1257
 msgid "This server is not password protected!"
@@ -2650,7 +2649,7 @@ msgstr "Das Passwort war korrekt, Zugriff gewährt!"
 #: ../../src/network/nethost.cc:1279
 #, c-format
 msgid "Unknown dedicated server command \"%s\"!"
-msgstr "Unbekanntes Serverkommando \"%s\"!"
+msgstr "Unbekanntes Serverkommando „%s“!"
 
 #: ../../src/network/nethost.cc:1984
 #, c-format
@@ -2663,8 +2662,8 @@ msgid ""
 "This server is password protected. You can send the password with: \"@%s pwd "
 "PASSWORD\""
 msgstr ""
-"Dieser Server ist passwortgeschützt. Du kannst das Passwort mit \"@%s pwd "
-"PASSWORT\" senden."
+"Dieser Server ist passwortgeschützt. Du kannst das Passwort mit „@%s pwd "
+"PASSWORT“ senden."
 
 #: ../../src/network/network_gaming_messages.cc:122
 msgid "Client has left the game."
@@ -2859,7 +2858,7 @@ msgstr "Sende Teil %s der Datei %s zu %s"
 #: ../../src/network/network_gaming_messages.cc:161
 #, c-format
 msgid "The player \"%s\" was defeated and became spectator."
-msgstr "Der Spieler \"%s\" wurde besiegt und ist nun Zuschauer."
+msgstr "Der Spieler „%s“ wurde besiegt und ist nun Zuschauer."
 
 #: ../../src/network/network_gaming_messages.cc:162
 #, c-format
@@ -3197,12 +3196,12 @@ msgid ""
 msgstr ""
 "WARNUNG:\n"
 "Der Spielstand, den du ausgewählt hast, ist ein Verzeichnis. Dies kann zum "
-"Beispiel passieren, wenn du die Option \"nozip\" auf \"true\" gesetzt hast "
-"oder den Spielstand manuell entpackt hast.\n"
+"Beispiel passieren, wenn du die Option „nozip“ auf „true“ gesetzt hast oder "
+"den Spielstand manuell entpackt hast.\n"
 "Widelands ist nicht in der Lage Verzeichnisstrukturen zu anderen Mitspielern "
 "zu versenden. Bitte wähle entweder einen anderen Spielstand oder verpacke "
 "den Inhalt des Spielstand-Verzeichnisses in eine Zip-Datei mit der Endung "
-"\".wgf\" ."
+"„.wgf“."
 
 #: ../../src/ui_fsmenu/launchMPG.cc:423 ../../src/ui_fsmenu/launchSPG.cc:258
 msgid "File not found"
@@ -3258,8 +3257,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/launchMPG.cc:485
 msgid "Click on the \"?\" in the right top corner to get help."
-msgstr ""
-"Klicke auf das \"?\" in der rechten oberen Ecke, um Hilfe zu erhalten."
+msgstr "Klicke auf das „?“ in der rechten oberen Ecke, um Hilfe zu erhalten."
 
 #: ../../src/ui_fsmenu/launchMPG.cc:546
 msgid "Saved players are:"
@@ -3356,7 +3354,7 @@ msgstr ""
 #: ../../src/ui_fsmenu/launchMPG.cc:687
 msgid "Connected to one or more clients (see \"Client settings\")."
 msgstr ""
-"Mit einem oder mehreren Benutzern verknüpft (siehe \"Benutzereinstellungen\")"
+"Mit einem oder mehreren Benutzern verknüpft (siehe „Benutzereinstellungen“)"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:690
 msgid ""
@@ -3382,10 +3380,10 @@ msgid ""
 "initializations of each player (the set of buildings, wares and workers the "
 "player starts with) and the tribe an team for computer players"
 msgstr ""
-"Die letzten drei können nur durch den Gastgeber, durch Klicken auf den "
-"\"Typ\"-Knopf des Spielers gesetzt werden. Der Gastgeber kann darüber hinaus "
-"die Startbedingungen der einzelnen Spieler (die Menge von Gebäuden, Waren "
-"und Arbeitern mit denen der Spieler beginnt) und den Stamm für die "
+"Die letzten drei können nur durch den Gastgeber, durch Klicken auf den „Typ“-"
+"Knopf des Spielers gesetzt werden. Der Gastgeber kann darüber hinaus die "
+"Startbedingungen der einzelnen Spieler (die Menge von Gebäuden, Waren und "
+"Arbeitern mit denen der Spieler beginnt) und den Stamm für die "
 "Computerspieler einstellen."
 
 #: ../../src/ui_fsmenu/launchMPG.cc:702
@@ -3393,8 +3391,8 @@ msgid ""
 "Every client connected to a player (the set \"role\" player) can set the "
 "tribe and the team for that player"
 msgstr ""
-"Jeder Benutzer, der mit einem Spieler verknüpft ist (also die \"Rolle\" "
-"dieses Spielers hat), kann das Volk und das Team dieses Spielers einstellen."
+"Jeder Benutzer, der mit einem Spieler verknüpft ist (also die „Rolle“ dieses "
+"Spielers hat), kann das Volk und das Team dieses Spielers einstellen."
 
 #: ../../src/ui_fsmenu/launchMPG.cc:704
 msgid "Map informations"
