@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2013-09-15 19:41+0200\n"
-"PO-Revision-Date: 2013-12-31 14:02+0000\n"
+"PO-Revision-Date: 2014-02-13 20:17+0000\n"
 "Last-Translator: Hans Joachim Desserud <Unknown>\n"
 "Language-Team: Norwegian Bokmal <nb@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-01-01 05:11+0000\n"
-"X-Generator: Launchpad (build 16877)\n"
+"X-Launchpad-Export-Date: 2014-02-14 05:26+0000\n"
+"X-Generator: Launchpad (build 16916)\n"
 
 #: ../../src/computer_player.cc:38
 msgid "None"
@@ -2268,7 +2268,7 @@ msgstr "Ingen bruker med navnet %s er logget inn!"
 #: ../../src/network/internet_gaming_messages.cc:43
 #: ../../src/network/nethost.cc:1260
 msgid "The sent password was incorrect!"
-msgstr ""
+msgstr "Det oppgitte passordet var feil!"
 
 #: ../../src/network/internet_gaming_messages.cc:44
 msgid "The protocol version you are using is not supported!"
@@ -2302,7 +2302,7 @@ msgstr "Metatjeneren svarte ikke"
 
 #: ../../src/network/internet_gaming_messages.cc:55
 msgid "Your game is not connectable from the internet"
-msgstr ""
+msgstr "Det er ikke mulig å koble seg til spillet ditt fra Internett"
 
 #: ../../src/network/internet_gaming_messages.cc:57
 msgid ""
@@ -2323,6 +2323,8 @@ msgid ""
 "You tried to relogin, but the server has no more knowledge of your previous "
 "state."
 msgstr ""
+"Du forsøkte å logge inn på nytt, men tjeneren kjenner ikke til den forrige "
+"tilstanden."
 
 #: ../../src/network/netclient.cc:104
 msgid ""
@@ -2460,13 +2462,15 @@ msgstr ""
 
 #: ../../src/network/nethost.cc:1213
 msgid "pwd          $ - Sends the password $ to the host"
-msgstr ""
+msgstr "pwd          $ - Sender passordet $ til verten"
 
 #: ../../src/network/nethost.cc:1220
 msgid ""
 "Access to host commands denied. To gain access, send the password with pwd "
 "command."
 msgstr ""
+"Ikke tilgang til vertskommandoer. For å få tilgang, oppgi passordet med "
+"kommandoen «pwd»."
 
 #: ../../src/network/nethost.cc:1225
 #, c-format
@@ -2514,6 +2518,8 @@ msgid ""
 "This server is password protected. You can send the password with: \"@%s pwd "
 "PASSWORD\""
 msgstr ""
+"Denne tjeneren er passordbeskyttet. Du kan oppgi passordet med kommandoen "
+"«@%s pwd PASSORD»"
 
 #: ../../src/network/network_gaming_messages.cc:122
 msgid "Client has left the game."
@@ -2630,7 +2636,7 @@ msgstr "Klient har ikke tilgang til tjenerens innstillinger."
 
 #: ../../src/network/network_gaming_messages.cc:148
 msgid "Client sent start command, although server is not yet ready."
-msgstr ""
+msgstr "Klient sendte en start-kommando, selv om tjeneren ikke er klar ennå."
 
 #: ../../src/network/network_gaming_messages.cc:149
 msgid "Client sent TIME command even though game is not running."
@@ -3574,6 +3580,7 @@ msgstr "Spill av en lyd når man mottar meldinger."
 #: ../../src/ui_fsmenu/options.cc:454
 msgid "Do not zip widelands data files (maps, replays and savegames)."
 msgstr ""
+"Ikke komprimer datafiler for Widelands (kart, repriser og lagrede spill)."
 
 #: ../../src/ui_fsmenu/options.cc:459
 msgid "Speed of a new game:"
@@ -3859,11 +3866,11 @@ msgstr "Se området i et eget vindu"
 
 #: ../../src/wui/fieldaction.cc:441
 msgid "Toggle building statistics display"
-msgstr ""
+msgstr "Vis/skjul bygningsstatistikk"
 
 #: ../../src/wui/fieldaction.cc:447
 msgid "Toggle building label display"
-msgstr ""
+msgstr "Vis/skjul bygningsnavn"
 
 #: ../../src/wui/fieldaction.cc:454
 msgid "Debug window"
