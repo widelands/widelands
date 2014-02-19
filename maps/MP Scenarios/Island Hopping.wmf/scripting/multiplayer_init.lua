@@ -50,6 +50,8 @@ _finish_areas = {
       map:get_field( 26,161):region(3)  -- player 4
    }
 }
+
+-- if you add a new resource type here, make sure it is also listed in getplural(count, resource) below
 _finish_rewards = {
    { -- Island 1
       { -- 1st to finish
@@ -89,18 +91,46 @@ hill = map:get_field(0,0):region(3)
 -- ==================
 -- Utility functions
 -- ==================
+
+-- Sends a game status message to all players
 function send_to_all(text)
    for idx,plr in ipairs(game.players) do
       plr:send_message(_ "Game Status", text, {popup=true})
    end
 end
 
+-- Returns a list of rewards from _finish_rewards, formatted with getplural(count, resource)
 function format_rewards(r)
    rv = {}
    for name,count in pairs(r) do
-      rv[#rv + 1] = (_"%i %s<br>\n"):format(count, name)
+      rv[#rv + 1] = getplural(count, name) .. "<br>\n"
    end
    return table.concat(rv)
+end
+
+
+-- This function gets the translated text according to each language's plural rules
+-- for the resources in _finish_rewards
+function getplural(count, resource)
+   if  resource == "trunk" then
+      return ngettext("%s Trunk","%s Trunks",count):bformat(count)
+   elseif  resource == "planks" then
+      return ngettext("%s Plank","%s Planks",count):bformat(count)
+   elseif  resource == "stone" then
+      return ngettext("%s Stone","%s Stones",count):bformat(count)
+   elseif  resource == "spidercloth" then
+      return ngettext("%s Spidercloth","%s Spidercloths",count):bformat(count)
+   elseif  resource == "corn" then
+      return ngettext("%s Corn","%s Corn",count):bformat(count)
+   elseif  resource == "coal" then
+      return ngettext("%s Coal","%s Coal",count):bformat(count)
+   elseif  resource == "ironore" then
+      return ngettext("%s Iron Ore","%s Iron Ore",count):bformat(count)
+   elseif  resource == "goldore" then
+      return ngettext("%s Gold Ore","%s Gold Ore",count):bformat(count)
+   else
+      return (_"%1$i %2$s"):bformat(count, resource)
+   end
 end
 
 
