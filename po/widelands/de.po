@@ -7,15 +7,15 @@ msgstr ""
 "Project-Id-Version: Widelands unofficial-bzr-launchpad-i18n-4955\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2013-09-15 19:41+0200\n"
-"PO-Revision-Date: 2014-02-12 11:42+0000\n"
-"Last-Translator: Mirian Margiani <mirian.margiani@gmail.com>\n"
+"PO-Revision-Date: 2014-02-21 12:50+0000\n"
+"Last-Translator: Das MC <Unknown>\n"
 "Language-Team: German <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-02-13 05:25+0000\n"
-"X-Generator: Launchpad (build 16916)\n"
+"X-Launchpad-Export-Date: 2014-02-22 05:26+0000\n"
+"X-Generator: Launchpad (build 16926)\n"
 
 #: ../../src/computer_player.cc:38
 msgid "None"
@@ -36,7 +36,7 @@ msgstr ""
 "WARNUNG: %i ungültige Hafenbauplätze konnten nicht repariert werden und "
 "wurden daher komplett entfernt! Eventuell sind nun manche Inseln "
 "unerreichbar. Möglichst die Karte mittels des Karten-Editors öffnen, "
-"überprüfen und korrrigieren.\n"
+"überprüfen und korrigieren.\n"
 "\n"
 
 #: ../../src/s2map.cc:886
@@ -196,7 +196,7 @@ msgstr ""
 " --disable_fx         Schaltet die Ausgabe von Geräuschen ab.\n"
 " --disable_music      Schaltet die Musik stumm.\n"
 "\n"
-" --nozip              Dateien nicht als binäres Zip-Archiv spreichern.\n"
+" --nozip              Dateien nicht als binäres Zip-Archiv speichern.\n"
 "\n"
 " --editor             Widelands Editor sofort starten.\n"
 "                      Die Ergänzung mit =DATEINAME ermöglicht,\n"
@@ -289,7 +289,7 @@ msgstr ""
 "                      der angegebene Wert ist.\n"
 " --dock_windows_to_edges=[yes|no]\n"
 "                      Entferne den am Bildschirmrand gelegenen Rahmen eines "
-"Fensters das direkt am Bildschirmrand abschließt.\n"
+"Fensters, das direkt am Bildschirmrand abschließt.\n"
 "                      \n"
 " --panel_snap_distance=[0 ...]\n"
 "                      Verschiebe Fenster an den Panelrand,\n"
@@ -336,7 +336,7 @@ msgstr ""
 
 #: ../../src/wlapplication.cc:1525
 msgid "Fallback settings in effect"
-msgstr "Die Notfall-Einstellungen werden verwendet."
+msgstr "Die Notfalleinstellungen werden verwendet."
 
 #: ../../src/wlapplication.cc:1527
 msgid ""
@@ -344,7 +344,7 @@ msgid ""
 "effect. Please check the graphics options!"
 msgstr ""
 "Die vorgegebenen Videoeinstellungen konnten nicht angewendet werden, die "
-"Notfall-Einstellungen werden verwendet. Bitte die Grafikeinstellungen "
+"Notfalleinstellungen werden verwendet. Bitte die Grafikeinstellungen "
 "überprüfen!"
 
 #: ../../src/wlapplication.cc:1598
@@ -371,7 +371,7 @@ msgstr ""
 "\n"
 "Bitte das aufgetretene Problem melden, damit Widelands entsprechend "
 "verbessert werden kann. Weitere Informationen sind in der Standardausgabe "
-"(stdout.txt unter Windows). Benutzte Build-Version "
+"(stdout.txt unter Windows). Benutzte Buildversion "
 
 #: ../../src/wlapplication.cc:1617
 msgid ""
@@ -388,7 +388,7 @@ msgstr ""
 
 #: ../../src/wlapplication.cc:1729
 msgid "The address of the game server is invalid"
-msgstr "Die Adresse des Spiel-Servers ist ungültig"
+msgstr "Die Adresse des Spielservers ist ungültig"
 
 #: ../../src/wlapplication.cc:1834 ../../src/network/nethost.cc:2050
 #: ../../src/wui/game_summary.cc:90
