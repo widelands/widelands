@@ -33,7 +33,7 @@ return {
 		rt(h2(_"Building")) ..
 		text_line(_"Space required:",_"Medium plot","pics/medium.png") ..
 		text_line(_"Upgraded from:", _"Axefactory","tribes/barbarians/axefactory/menu.png") ..
-		rt(h3(_"Upgrade Cost:")) ..
+		rt(h3(_"Upgrade cost:")) ..
 		image_line("tribes/barbarians/blackwood/menu.png",1,p("1 " .. _"Blackwood")) ..
 		image_line("tribes/barbarians/thatchreed/menu.png",1,p("1 " .. _"Thatch Reed")) ..
 		image_line("tribes/barbarians/raw_stone/menu.png",2,p("2 " .. _"Raw Stone")) ..
