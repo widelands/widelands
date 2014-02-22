@@ -21,10 +21,10 @@ return {
 	--Dependencies
 		rt(h2(_"Dependencies")) ..
 		rt(h3(_"Incoming:")) ..
-		dependencies({"tribes/barbarians/smelting_works/menu.png","tribes/barbarians/iron/menu.png","tribes/barbarians/warmill/menu.png"},p(_"%s from the Smelting Works":format(_"Iron"))) ..
-		dependencies({"tribes/barbarians/smelting_works/menu.png","tribes/barbarians/gold/menu.png","tribes/barbarians/warmill/menu.png"},p(_"%s from the Smelting Works":format(_"Gold"))) ..
+		dependencies({"tribes/barbarians/smelting_works/menu.png","tribes/barbarians/iron/menu.png","tribes/barbarians/warmill/menu.png"},p(_"%s from a Smelting Works":format(_"Iron"))) ..
+		dependencies({"tribes/barbarians/smelting_works/menu.png","tribes/barbarians/gold/menu.png","tribes/barbarians/warmill/menu.png"},p(_"%s from a Smelting Works":format(_"Gold"))) ..
 		dependencies({"tribes/barbarians/coalmine/menu.png;tribes/barbarians/burners_house/menu.png","tribes/barbarians/coal/menu.png","tribes/barbarians/warmill/menu.png"}) ..
-		rt(p(_"Coal from the Coal mine or the Charcoal Burner's House")) ..
+		rt(p(_"Coal from a Coal mine or a Charcoal Burner's House")) ..
 		rt(h3(_"Outgoing:")) ..
 		dependencies({"tribes/barbarians/warmill/menu.png","tribes/barbarians/axe/menu.png","tribes/barbarians/headquarters/menu.png","tribes/barbarians/soldier/menu.png"},p(_"Soldier")) ..
 		dependencies({"tribes/barbarians/warmill/menu.png","tribes/barbarians/sharpaxe/menu.png;tribes/barbarians/broadaxe/menu.png;tribes/barbarians/bronzeaxe/menu.png;tribes/barbarians/battleaxe/menu.png;tribes/barbarians/warriorsaxe/menu.png","tribes/barbarians/trainingscamp/menu.png"}) ..
