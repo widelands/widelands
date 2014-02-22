@@ -19,19 +19,43 @@
 
 #include "scripting/persistence.h"
 
-#include <lua.hpp>
+#include <memory>
 
 #include "log.h"
 #include "logic/widelands_fileread.h"
 #include "logic/widelands_filewrite.h"
 #include "scripting/c_utils.h"
-#include "scripting/pluto.h"
+#include "scripting/eris.h"
+#include "scripting/luna_impl.h"
 
 /*
  * ========================================================================
  *                            PRIVATE CLASSES
  * ========================================================================
  */
+
+namespace {
+
+struct LuaReaderHelper {
+	std::unique_ptr<char []> data;
+	size_t data_len;
+};
+
+int LuaWriter(lua_State* /* L */, const void* data, size_t len, void* userdata) {
+	Widelands::FileWrite* fw = static_cast<Widelands::FileWrite*>(userdata);
+
+	fw->Data(data, len, Widelands::FileWrite::Pos::Null());
+	return 0;
+}
+
+const char* LuaReader(lua_State* /* L */, void* userdata, size_t* bytes_read) {
+	LuaReaderHelper* helper = static_cast<LuaReaderHelper*>(userdata);
+
+	*bytes_read = helper->data_len;
+	return helper->data.get();
+}
+
+}  // namespace
 
 /**
  * Add one object to the table of objects that should not
@@ -88,28 +112,30 @@ static void m_add_iterator_function_to_not_persist
 
 static bool m_add_object_to_not_unpersist
 	(lua_State * L, std::string name, uint32_t idx) {
+	// S: ... globals
+
 	// Search for a dot. If one is found, we first have
 	// to get the global module.
-	std::string::size_type pos = name.find('.');
+	const std::string::size_type pos = name.find('.');
 
 	if (pos != std::string::npos) {
-		std::string table = name.substr(0, pos);
+		const std::string table = name.substr(0, pos);
 		name = name.substr(pos + 1);
 
-		lua_getglobal(L, table.c_str()); // gtables table
+		lua_getglobal(L, table.c_str()); // S: ... gtables table
 		assert(!lua_isnil(L, -1)); // table must already exist!
 
-		lua_pushint32(L, idx); // gtables table int
+		lua_pushint32(L, idx); // S: ... gtables table idx
 
-		lua_getfield(L, -2, name.c_str()); // gtables table int function
+		lua_getfield(L, -2, name.c_str()); // S: ... gtables table idx function
 		assert(!lua_isnil(L, -1)); // function must already exist
 
-		lua_settable(L, -4); //  table[int] = function
-		lua_pop(L, 1); // pop table
+		lua_settable(L, -4); //  gtables[int] = function, S: ... gtables table
+		lua_pop(L, 1); // S: ... gtables
 	} else {
-		lua_pushint32(L, idx); // stack: table int
-		lua_getglobal(L, name.c_str()); // stack: table int value
-		lua_settable(L, -3); //  table[int] = object
+		lua_pushint32(L, idx); // S: ... gtable int
+		lua_getglobal(L, name.c_str()); // S: ... gtable int object
+		lua_settable(L, -3); // S: gtable[int] = object
 	}
 	return true;
 }
@@ -117,11 +143,11 @@ static bool m_add_object_to_not_unpersist
 static void m_add_iterator_function_to_not_unpersist
 	(lua_State * L, std::string global, uint32_t idx)
 {
-	lua_pushuint32(L, idx); // integer
-	lua_getglobal(L, global.c_str());
-	lua_newtable(L);
-	lua_call(L, 1, 1); // pairs{}, stack now contains iterator function
-	lua_settable(L, -3); //  table[int] = function
+	lua_pushuint32(L, idx); // S: ... globals idx
+	lua_getglobal(L, global.c_str());  // S: ... globals idx "pairs"
+	lua_newtable(L);  // S: ... globals idx "pairs" table
+	lua_call(L, 1, 1); // calls, pairs {}: ... globals idx iterator_func
+	lua_settable(L, -3); //  globals[int] = function, S: ... globals
 }
 
 /*
@@ -138,9 +164,9 @@ static const char * m_persistent_globals[] = {
 	"dofile", "error", "gcinfo", "getfenv", "getmetatable", "io", "ipairs",
 	"load", "loadfile", "loadstring", "math", "module", "newproxy", "next",
 	"os", "package", "pairs", "pcall", "print", "rawequal",
-	"rawget", "rawset", "require", "select", "setfenv", "setmetatable",
+	"rawget", "rawset", "rawlen", "require", "select", "setfenv", "setmetatable",
 	"table", "tonumber", "tostring", "type", "unpack", "wl", "xpcall",
-	"string", "use", "_", "set_textdomain", "get_build_id", "coroutine.yield", 0
+	"string", "use", "_", "set_textdomain", "get_build_id", "coroutine.yield", nullptr
 };
 
 /**
@@ -151,7 +177,7 @@ uint32_t persist_object
 	(lua_State * L,
 	 Widelands::FileWrite & fw, Widelands::Map_Map_Object_Saver & mos)
 {
-	assert(lua_gettop(L) == 2); // table object
+	assert(lua_gettop(L) == 2); // S: globals_table object
 
 	// Save a reference to the object saver
 	lua_pushlightuserdata(L, &mos);
@@ -159,17 +185,30 @@ uint32_t persist_object
 
 	// Push objects that should not be touched while persisting into the empty
 	// table at stack position 1
-	uint32_t i = 0;
-	for (i = 0; m_persistent_globals[i]; i++)
-		m_add_object_to_not_persist(L, m_persistent_globals[i], i + 1);
+	uint32_t i = 1;
 
-	++i;
+	// First, the restore function for __persist.
+	lua_pushcfunction(L, &luna_unpersisting_closure);
+	lua_pushuint32(L, i++);
+	lua_settable(L, 1);
+
+	// Now the iterators functions.
 	m_add_iterator_function_to_not_persist(L, "pairs", i++);
 	m_add_iterator_function_to_not_persist(L, "ipairs", i++);
 
+	// And finally the globals.
+	for (int j = 0; m_persistent_globals[j]; ++j) {
+		m_add_object_to_not_persist(L, m_persistent_globals[j], i++);
+	}
+
+	// The next few lines make eris error messages much more useful, but make
+	// eris much slower too. Only enable if you need more debug informations.
+	// lua_pushboolean(L, true);
+	// eris_set_setting(L, "path", lua_gettop(L));
+	// lua_pop(L, 1);
 
 	size_t cpos = fw.GetPos();
-	pluto_persist(L, fw);
+	eris_dump(L, &LuaWriter, &fw);
 	uint32_t nwritten = fw.GetPos() - cpos;
 
 	lua_pop(L, 2); // pop the object and the table
@@ -181,30 +220,40 @@ uint32_t persist_object
 	return nwritten;
 }
 
-/**
- * Does all the unpersisting work. Returns the number of bytes
- * written
- */
-uint32_t unpersist_object
+void unpersist_object
 	(lua_State * L,
 	 Widelands::FileRead & fr, Widelands::Map_Map_Object_Loader & mol,
-	 uint32_t /* size */)
+	 uint32_t size)
 {
+	assert(lua_gettop(L) == 0); // S:
+
 	// Save the mol in the registry
 	lua_pushlightuserdata(L, &mol);
 	lua_setfield(L, LUA_REGISTRYINDEX, "mol");
 
 	// Push objects that should not be loaded
-	lua_newtable(L);
-	uint32_t i = 0;
-	for (i = 0; m_persistent_globals[i]; i++)
-		m_add_object_to_not_unpersist(L, m_persistent_globals[i], i + 1);
+	lua_newtable(L);  // S: table
+	uint32_t i = 1;
 
-	++i;
+	// Luna restore (for persistence).
+	lua_pushuint32(L, i++);
+	lua_pushcfunction(L, &luna_unpersisting_closure);
+	lua_settable(L, 1);
+
 	m_add_iterator_function_to_not_unpersist(L, "pairs", i++);
 	m_add_iterator_function_to_not_unpersist(L, "ipairs", i++);
 
-	pluto_unpersist(L, fr);
+	for (int j = 0; m_persistent_globals[j]; ++j) {
+		m_add_object_to_not_unpersist(L, m_persistent_globals[j], i++);
+	}
+
+	LuaReaderHelper helper;
+	helper.data_len = size;
+	helper.data.reset(new char[size]);
+	fr.Data(helper.data.get(), size);
+
+	eris_undump(L, &LuaReader, &helper);
+
 	lua_remove(L, -2); // remove the globals table
 
 	// Delete the entry in the registry
@@ -212,8 +261,6 @@ uint32_t unpersist_object
 	lua_setfield(L, LUA_REGISTRYINDEX, "mol");
 
 	assert(lua_gettop(L) == 1);
-
-	return 1;
 }
 
 /*

@@ -19,8 +19,6 @@
 
 #include "scripting/lua_game.h"
 
-#include <lua.hpp>
-
 #include "campvis.h"
 #include "economy/economy.h"
 #include "economy/flag.h"
@@ -1336,14 +1334,17 @@ static int L_report_result(lua_State * L) {
  *                            MODULE FUNCTIONS
  * ========================================================================
  */
-const static struct luaL_reg wlgame [] = {
+const static struct luaL_Reg wlgame [] = {
 	{"report_result", &L_report_result},
 	{0, 0}
 };
 
 void luaopen_wlgame(lua_State * L) {
-	luaL_register(L, "wl.game", wlgame);
-	lua_pop(L, 1); // pop the table
+	lua_getglobal(L, "wl");  // S: wl_table
+	lua_pushstring(L, "game"); // S: wl_table "game"
+	luaL_newlib(L, wlgame);  // S: wl_table "game" wl.game_table
+	lua_settable(L, -3); // S: wl_table
+	lua_pop(L, 1); // S:
 
 	register_class<L_Player>(L, "game", true);
 	add_parent<L_Player, LuaBases::L_PlayerBase>(L);

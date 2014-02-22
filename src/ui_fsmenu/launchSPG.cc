@@ -119,7 +119,7 @@ Fullscreen_Menu_LaunchSPG::Fullscreen_Menu_LaunchSPG
 
 
 	// Register win condition scripts
-	m_lua = create_LuaInterface();
+	m_lua = new LuaInterface();
 	m_lua->register_scripts(*g_fs, "win_conditions", "scripting/win_conditions");
 
 	ScriptContainer sc = m_lua->get_scripts_for("win_conditions");

@@ -26,7 +26,6 @@
 #include "logic/game.h"
 #include "logic/immovable.h"
 #include "logic/tribe.h"
-#include "scripting/coroutine_impl.h"
 #include "scripting/lua_editor.h"
 #include "scripting/lua_game.h"
 #include "scripting/lua_map.h"
@@ -192,7 +191,7 @@ int L_Game::launch_coroutine(lua_State * L) {
 		lua_pop(L, 1);
 	}
 
-	LuaCoroutine * cr = new LuaCoroutine_Impl(luaL_checkthread(L, 2));
+	LuaCoroutine * cr = new LuaCoroutine(luaL_checkthread(L, 2));
 	lua_pop(L, 2); // Remove coroutine and Game object from stack
 
 	get_game(L).enqueue_command(new Widelands::Cmd_LuaCoroutine(runtime, cr));
@@ -277,13 +276,14 @@ void L_Editor::__unpersist(lua_State * /* L */) {
  ==========================================================
  */
 
-const static struct luaL_reg wlroot [] = {
+const static struct luaL_Reg wlroot [] = {
 	{0, 0}
 };
 
 void luaopen_wlroot(lua_State * L, bool in_editor) {
-	luaL_register(L, "wl", wlroot);
-	lua_pop(L, 1); // pop the table
+	lua_getglobal(L, "wl");  // S: wl
+	luaL_setfuncs(L, wlroot, 0); // S: wl
+	lua_pop(L, 1);  // S:
 
 	if (in_editor) {
 		register_class<L_Editor>(L, "", true);

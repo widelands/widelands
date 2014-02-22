@@ -84,7 +84,7 @@ ProductionSite_Descr::ProductionSite_Descr
 		while (Section::Value const * const val = s->get_next_val())
 			try {
 				if (Ware_Index const idx = tribe().ware_index(val->get_name())) {
-					container_iterate_const(Ware_Types, inputs(), i)
+					container_iterate_const(BillOfMaterials, inputs(), i)
 						if (i.current->first == idx)
 							throw wexception("duplicated");
 					int32_t const value = val->get_int();
@@ -104,7 +104,7 @@ ProductionSite_Descr::ProductionSite_Descr
 		while (Section::Value const * const v = working_positions_s->get_next_val())
 			try {
 				if (Ware_Index const woi = tribe().worker_index(v->get_name())) {
-					container_iterate_const(Ware_Types, working_positions(), i)
+					container_iterate_const(BillOfMaterials, working_positions(), i)
 						if (i.current->first == woi)
 							throw wexception("duplicated");
 					m_working_positions.push_back(std::pair<Ware_Index, uint32_t>(woi, v->get_positive()));
@@ -365,8 +365,7 @@ void ProductionSite::init(Editor_Game_Base & egbase)
 {
 	Building::init(egbase);
 
-
-	const Ware_Types & inputs = descr().inputs();
+	const BillOfMaterials & inputs = descr().inputs();
 	m_input_queues.resize(inputs.size());
 	for (ware_range i(inputs); i; ++i)
 		m_input_queues[i.i] =
@@ -377,7 +376,7 @@ void ProductionSite::init(Editor_Game_Base & egbase)
 
 	//  Request missing workers.
 	Working_Position * wp = m_working_positions;
-	container_iterate_const(Ware_Types, descr().working_positions(), i) {
+	container_iterate_const(BillOfMaterials, descr().working_positions(), i) {
 		Ware_Index const worker_index = i.current->first;
 		for (uint32_t j = i.current->second; j; --j, ++wp)
 			if (Worker * const worker = wp->worker)
@@ -490,7 +489,7 @@ void ProductionSite::remove_worker(Worker & w)
 	molog("%s leaving\n", w.descname().c_str());
 	Working_Position * wp = m_working_positions;
 
-	container_iterate_const(Ware_Types, descr().working_positions(), i) {
+	container_iterate_const(BillOfMaterials, descr().working_positions(), i) {
 		Ware_Index const worker_index = i.current->first;
 		for (uint32_t j = i.current->second; j; --j, ++wp) {
 			Worker * const worker = wp->worker;

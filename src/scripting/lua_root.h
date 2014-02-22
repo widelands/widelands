@@ -20,8 +20,7 @@
 #ifndef LUA_ROOT_H
 #define LUA_ROOT_H
 
-#include <lua.hpp>
-
+#include "scripting/eris/lua.hpp"
 #include "scripting/lua_bases.h"
 #include "scripting/luna.h"
 
@@ -97,5 +96,3 @@ void luaopen_wlroot(lua_State *, bool in_editor);
 
 #endif
 };
-
-

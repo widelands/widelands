@@ -1,6 +1,5 @@
 use("aux", "lunit")
 use("aux", "coroutine")
-lunit.import "assertions"
 
 game = wl.Game()
 map = game.map

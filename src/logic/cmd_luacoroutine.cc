@@ -55,7 +55,7 @@ void Cmd_LuaCoroutine::execute (Game & game) {
 	}
 }
 
-#define CMD_LUACOROUTINE_VERSION 1
+#define CMD_LUACOROUTINE_VERSION 2
 void Cmd_LuaCoroutine::Read
 	(FileRead & fr, Editor_Game_Base & egbase, Map_Map_Object_Loader & mol)
 {

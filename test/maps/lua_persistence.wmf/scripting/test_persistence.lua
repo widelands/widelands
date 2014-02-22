@@ -5,18 +5,10 @@
 -- environment.
 
 use("aux", "lunit")
-lunit.import "assertions"
 
-
--- ====================
--- Test Data to persist
--- ====================
 use("aux", "set")
-game = wl.Game()
 
 function save_coroutine()
-   game = wl.Game()
-
    my_name = "SirVer"
    pi = 3.1415
    eight = 8
@@ -38,6 +30,7 @@ function save_coroutine()
       coroutine.yield("What cool is that?")
       coroutine.yield(a)
    end)
+
    objective = p:add_objective("lumber", "House", "Ship!")
    objective.done = true
 
@@ -120,6 +113,7 @@ function check_coroutine()
    assert_equal(2, myset.size)
    assert_true(myset:contains(map:get_field(10,10)))
    assert_true(myset:contains(map:get_field(10,11)))
+
    mapview = wl.ui.MapView()
    assert_equal(mapview.viewpoint_x, 10)
    assert_equal(mapview.viewpoint_y, 40)
@@ -138,5 +132,5 @@ end
 -- This starts the test routine, saves the game and exits.
 -- Loading the saved game will check that all objects are
 -- correctly unpersisted
-game:launch_coroutine(coroutine.create(check_coroutine))
-game:launch_coroutine(coroutine.create(save_coroutine))
+wl.Game():launch_coroutine(coroutine.create(check_coroutine))
+wl.Game():launch_coroutine(coroutine.create(save_coroutine))

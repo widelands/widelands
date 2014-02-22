@@ -20,10 +20,9 @@
 #ifndef LUA_GAME_H
 #define LUA_GAME_H
 
-#include <lua.hpp>
-
 #include "logic/building.h"
 #include "logic/message_id.h"
+#include "scripting/eris/lua.hpp"
 #include "scripting/lua_bases.h"
 #include "scripting/luna.h"
 
@@ -193,5 +192,3 @@ void luaopen_wlgame(lua_State *);
 
 #endif
 };
-
-

@@ -279,7 +279,7 @@ void DefaultAI::late_initialization ()
 				bld.get_ismine() ? BuildingObserver::MINE :
 				BuildingObserver::PRODUCTIONSITE;
 
-			container_iterate_const(Ware_Types, prod.inputs(), j)
+			container_iterate_const(BillOfMaterials, prod.inputs(), j)
 				bo.inputs.push_back(j.current->first.value());
 
 			container_iterate_const

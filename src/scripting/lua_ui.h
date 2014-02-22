@@ -20,8 +20,7 @@
 #ifndef LUA_UI_H
 #define LUA_UI_H
 
-#include <lua.hpp>
-
+#include "scripting/eris/lua.hpp"
 #include "scripting/luna.h"
 #include "ui_basic/button.h"
 #include "ui_basic/tabpanel.h"

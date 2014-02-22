@@ -20,9 +20,9 @@
 #ifndef FACTORY_H
 #define FACTORY_H
 
-#include <lua.hpp>
 
 #include "logic/widelands.h"
+#include "scripting/eris/lua.hpp"
 
 /*
  * Class to create the correct type for types shared between Editor and Game.
@@ -49,4 +49,3 @@ public:
 };
 
 #endif /* end of include guard: FACTORY_H */
-

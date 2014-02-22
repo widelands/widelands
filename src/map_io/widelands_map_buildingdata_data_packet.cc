@@ -876,7 +876,7 @@ void Map_Buildingdata_Data_Packet::read_productionsite
 			ProductionSite::Working_Position & wp_begin =
 				*productionsite.m_working_positions;
 			const ProductionSite_Descr & pr_descr = productionsite.descr();
-			const Ware_Types & working_positions = pr_descr.working_positions();
+			const BillOfMaterials & working_positions = pr_descr.working_positions();
 
 			uint16_t nr_worker_requests = fr.Unsigned16();
 			for (uint16_t i = nr_worker_requests; i; --i) {
@@ -892,7 +892,7 @@ void Map_Buildingdata_Data_Packet::read_productionsite
 				//  Find a working position that matches this request.
 				ProductionSite::Working_Position * wp = &wp_begin;
 				for
-					(wl_const_range<Ware_Types>
+					(wl_const_range<BillOfMaterials>
 					 j(working_positions);;
 					 ++j)
 				{
@@ -973,7 +973,7 @@ void Map_Buildingdata_Data_Packet::read_productionsite
 				const Worker_Descr & worker_descr = worker->descr();
 				ProductionSite::Working_Position * wp = &wp_begin;
 				for
-					(wl_const_range<Ware_Types> j(working_positions);;
+					(wl_const_range<BillOfMaterials> j(working_positions);;
 					 ++j)
 				{
 					if (j.empty())

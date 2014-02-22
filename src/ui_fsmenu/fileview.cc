@@ -33,8 +33,8 @@ namespace {
 bool read_text(const std::string& filename, std::string* title, std::string* content) {
 	if (boost::algorithm::ends_with(filename, ".lua")) {
 		try {
-			std::unique_ptr<LuaInterface> li(create_LuaInterface());
-			std::unique_ptr<LuaTable> t(li->run_script(*g_fs, filename, "texts"));
+			LuaInterface lua;
+			std::unique_ptr<LuaTable> t(lua.run_script(*g_fs, filename, "texts"));
 			*content = t->get_string("text");
 			*title = t->get_string("title");
 		} catch (LuaError & err) {

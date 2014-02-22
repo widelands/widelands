@@ -36,6 +36,7 @@ class WidelandsTestCase(unittest.TestCase):
             if os.path.exists(self.run_dir):
                 if not self.keep_output_around:
                     shutil.rmtree(self.run_dir)
+                    os.makedirs(self.run_dir)
             else:
                 os.makedirs(self.run_dir)
         self.widelands_returncode = 0
