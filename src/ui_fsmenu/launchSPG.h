@@ -50,11 +50,11 @@ struct LuaInterface;
  */
 struct Fullscreen_Menu_LaunchSPG : public Fullscreen_Menu_Base {
 	Fullscreen_Menu_LaunchSPG
-		(GameSettingsProvider *, GameController * = 0, bool autolaunch = false);
+		(GameSettingsProvider *, GameController * = nullptr, bool autolaunch = false);
 	~Fullscreen_Menu_LaunchSPG();
 
-	void start();
-	void think();
+	void start() override;
+	void think() override;
 
 	void refresh();
 

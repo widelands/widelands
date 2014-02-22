@@ -78,7 +78,7 @@ Radiogroup
  */
 Radiogroup::Radiogroup()
 {
-	m_buttons = 0;
+	m_buttons = nullptr;
 	m_highestid = -1;
 	m_state = -1;
 }

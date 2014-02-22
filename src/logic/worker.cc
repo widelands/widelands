@@ -861,7 +861,7 @@ bool Worker::run_plant(Game & game, State & state, const Action & action)
 	uint32_t const idx = game.logic_rand() % best_fitting.size();
 
 	Immovable & newimm = game.create_immovable
-		(pos, best_fitting[idx], is_tribe_specific[idx] ? &descr().tribe() : 0);
+		(pos, best_fitting[idx], is_tribe_specific[idx] ? &descr().tribe() : nullptr);
 	newimm.set_owner(get_owner());
 
 	if (action.iparam1 == Action::plantUnlessObject)
@@ -880,7 +880,7 @@ bool Worker::run_plant(Game & game, State & state, const Action & action)
 bool Worker::run_create_bob(Game & game, State & state, const Action &)
 {
 	game.create_bob
-		(get_position(), state.ivar2, state.svar1 == "world" ? 0 : &tribe());
+		(get_position(), state.ivar2, state.svar1 == "world" ? nullptr : &tribe());
 	++state.ivar1;
 	schedule_act(game, 10);
 	return true;
@@ -894,7 +894,7 @@ bool Worker::run_removeobject(Game & game, State & state, const Action &)
 {
 	if (Map_Object * const obj = state.objvar1.get(game)) {
 		obj->remove(game);
-		state.objvar1 = 0;
+		state.objvar1 = nullptr;
 	}
 
 	++state.ivar1;
@@ -1043,9 +1043,9 @@ bool Worker::run_construct(Game & game, State & state, const Action & /* action 
 Worker::Worker(const Worker_Descr & worker_descr)
 	:
 	Bob          (worker_descr),
-	m_economy    (0),
-	m_supply     (0),
-	m_transfer   (0),
+	m_economy    (nullptr),
+	m_supply     (nullptr),
+	m_transfer   (nullptr),
 	m_current_exp(0)
 {
 }
@@ -1130,7 +1130,7 @@ void Worker::set_location(PlayerImmovable * const location)
 		if (!is_shipping()) {
 			// Our location has been destroyed, we are now fugitives.
 			// Interrupt whatever we've been doing.
-			set_economy(0);
+			set_economy(nullptr);
 
 			Editor_Game_Base & egbase = owner().egbase();
 			if (upcast(Game, game, &egbase)) {
@@ -1193,7 +1193,7 @@ void Worker::cleanup(Editor_Game_Base & egbase)
 
 	if (m_supply) {
 		delete m_supply;
-		m_supply = 0;
+		m_supply = nullptr;
 	}
 
 	if (ware)
@@ -1208,7 +1208,7 @@ void Worker::cleanup(Editor_Game_Base & egbase)
 		reset_tasks(*game);
 
 	if (get_location(egbase))
-		set_location(0);
+		set_location(nullptr);
 
 	set_economy(nullptr);
 
@@ -1243,8 +1243,8 @@ WareInstance * Worker::fetch_carried_ware(Editor_Game_Base & game)
 	WareInstance * const ware = get_carried_ware(game);
 
 	if (ware) {
-		ware->set_location(game, 0);
-		m_carried_ware = 0;
+		ware->set_location(game, nullptr);
+		m_carried_ware = nullptr;
 	}
 
 	return ware;
@@ -1358,7 +1358,7 @@ void Worker::init_auto_task(Game & game) {
 			 location->get_type() == BUILDING)
 			return start_task_gowarehouse(game);
 
-		set_location(0);
+		set_location(nullptr);
 	}
 
 	molog("init_auto_task: become fugitive\n");
@@ -1375,7 +1375,7 @@ void Worker::init_auto_task(Game & game) {
 const Bob::Task Worker::taskTransfer = {
 	"transfer",
 	static_cast<Bob::Ptr>(&Worker::transfer_update),
-	0,
+	nullptr,
 	static_cast<Bob::Ptr>(&Worker::transfer_pop),
 	false
 };
@@ -1405,7 +1405,7 @@ void Worker::transfer_pop(Game & /* game */, State & /* state */)
 {
 	if (m_transfer) {
 		m_transfer->has_failed();
-		m_transfer = 0;
+		m_transfer = nullptr;
 	}
 }
 
@@ -1465,7 +1465,7 @@ void Worker::transfer_update(Game & game, State & /* state */) {
 				location = flag->get_building();
 				set_location(location);
 			} else
-				return set_location(0);
+				return set_location(nullptr);
 		}
 	}
 
@@ -1477,7 +1477,7 @@ void Worker::transfer_update(Game & game, State & /* state */) {
 	if (!nextstep) {
 		Transfer * const t = m_transfer;
 
-		m_transfer = 0;
+		m_transfer = nullptr;
 
 		if (success) {
 			pop_task(game);
@@ -1584,7 +1584,7 @@ void Worker::transfer_update(Game & game, State & /* state */) {
  */
 void Worker::cancel_task_transfer(Game & game)
 {
-	m_transfer = 0;
+	m_transfer = nullptr;
 	send_signal(game, "cancel");
 }
 
@@ -1595,7 +1595,7 @@ void Worker::cancel_task_transfer(Game & game)
 const Bob::Task Worker::taskShipping = {
 	"shipping",
 	static_cast<Bob::Ptr>(&Worker::shipping_update),
-	0,
+	nullptr,
 	static_cast<Bob::Ptr>(&Worker::shipping_pop),
 	true
 };
@@ -1640,7 +1640,7 @@ void Worker::shipping_pop(Game & game, State & /* state */)
 {
 	// Defense against unorderly cleanup via reset_tasks
 	if (!get_location(game)) {
-		set_economy(0);
+		set_economy(nullptr);
 	}
 }
 
@@ -1690,8 +1690,8 @@ void Worker::shipping_update(Game & game, State & state)
 const Bob::Task Worker::taskBuildingwork = {
 	"buildingwork",
 	static_cast<Bob::Ptr>(&Worker::buildingwork_update),
-	0,
-	0,
+	nullptr,
+	nullptr,
 	true
 };
 
@@ -1776,8 +1776,8 @@ bool Worker::is_evict_allowed()
 const Bob::Task Worker::taskReturn = {
 	"return",
 	static_cast<Bob::Ptr>(&Worker::return_update),
-	0,
-	0,
+	nullptr,
+	nullptr,
 	true
 };
 
@@ -1841,7 +1841,7 @@ void Worker::return_update(Game & game, State & state)
 				// It is no problem for builders since they won't return before
 				// dismantling is complete.
 				if (is_a(DismantleSite, location)) {
-					set_location(0);
+					set_location(nullptr);
 					return pop_task(game);
 				} else {
 					return
@@ -1880,7 +1880,7 @@ void Worker::return_update(Game & game, State & state)
 			 	 buffer,
 			 	 get_position()),
 				 m_serial);
-		set_location(0);
+		set_location(nullptr);
 		return pop_task(game);
 	}
 }
@@ -1897,7 +1897,7 @@ void Worker::return_update(Game & game, State & state)
 const Bob::Task Worker::taskProgram = {
 	"program",
 	static_cast<Bob::Ptr>(&Worker::program_update),
-	0,
+	nullptr,
 	static_cast<Bob::Ptr>(&Worker::program_pop),
 	false
 };
@@ -1945,7 +1945,7 @@ void Worker::program_update(Game & game, State & state)
 
 void Worker::program_pop(Game & game, State & state)
 {
-	set_program_objvar(game, state, 0);
+	set_program_objvar(game, state, nullptr);
 }
 
 void Worker::set_program_objvar(Game & game, State & state, Map_Object * obj)
@@ -2012,7 +2012,7 @@ void Worker::gowarehouse_update(Game & game, State & /* state */)
 
 	if (dynamic_cast<Warehouse const *>(location)) {
 		delete m_supply;
-		m_supply = 0;
+		m_supply = nullptr;
 
 		schedule_incorporate(game);
 		return;
@@ -2021,7 +2021,7 @@ void Worker::gowarehouse_update(Game & game, State & /* state */)
 	// If we got a transfer, use it
 	if (m_transfer) {
 		Transfer * const t = m_transfer;
-		m_transfer = 0;
+		m_transfer = nullptr;
 
 		molog("[gowarehouse]: Got transfer\n");
 
@@ -2057,18 +2057,18 @@ void Worker::gowarehouse_signalimmediate
 		// We are assigned a transfer, make sure our supply disappears immediately
 		// Otherwise, we might receive two transfers in a row.
 		delete m_supply;
-		m_supply = 0;
+		m_supply = nullptr;
 	}
 }
 
 void Worker::gowarehouse_pop(Game &, State &)
 {
 	delete m_supply;
-	m_supply = 0;
+	m_supply = nullptr;
 
 	if (m_transfer) {
 		m_transfer->has_failed();
-		m_transfer = 0;
+		m_transfer = nullptr;
 	}
 }
 
@@ -2076,16 +2076,16 @@ void Worker::gowarehouse_pop(Game &, State &)
 const Bob::Task Worker::taskDropoff = {
 	"dropoff",
 	static_cast<Bob::Ptr>(&Worker::dropoff_update),
-	0,
-	0,
+	nullptr,
+	nullptr,
 	true
 };
 
 const Bob::Task Worker::taskReleaserecruit = {
 	"releaserecruit",
 	static_cast<Bob::Ptr>(&Worker::releaserecruit_update),
-	0,
-	0,
+	nullptr,
+	nullptr,
 	true
 };
 
@@ -2193,8 +2193,8 @@ void Worker::releaserecruit_update(Game & game, State &)
 const Bob::Task Worker::taskFetchfromflag = {
 	"fetchfromflag",
 	static_cast<Bob::Ptr>(&Worker::fetchfromflag_update),
-	0,
-	0,
+	nullptr,
+	nullptr,
 	true
 };
 
@@ -2302,7 +2302,7 @@ void Worker::fetchfromflag_update(Game & game, State & state)
 const Bob::Task Worker::taskWaitforcapacity = {
 	"waitforcapacity",
 	static_cast<Bob::Ptr>(&Worker::waitforcapacity_update),
-	0,
+	nullptr,
 	static_cast<Bob::Ptr>(&Worker::waitforcapacity_pop),
 	true
 };
@@ -2380,7 +2380,7 @@ bool Worker::wakeup_flag_capacity(Game & game, Flag & flag)
 const Bob::Task Worker::taskLeavebuilding = {
 	"leavebuilding",
 	static_cast<Bob::Ptr>(&Worker::leavebuilding_update),
-	0,
+	nullptr,
 	static_cast<Bob::Ptr>(&Worker::leavebuilding_pop),
 	true
 };
@@ -2447,7 +2447,7 @@ void Worker::leavebuilding_update(Game & game, State & state)
 
 		if (!start_task_movepath(game, flagpos, 0, descr().get_right_walk_anims(does_carry_ware()))) {
 			molog("[leavebuilding]: outside of building, but failed to walk back to flag");
-			set_location(0);
+			set_location(nullptr);
 			return pop_task(game);
 		}
 		return;
@@ -2498,8 +2498,8 @@ bool Worker::wakeup_leave_building(Game & game, Building & building)
 const Bob::Task Worker::taskFugitive = {
 	"fugitive",
 	static_cast<Bob::Ptr>(&Worker::fugitive_update),
-	0,
-	0,
+	nullptr,
+	nullptr,
 	true
 };
 
@@ -2542,8 +2542,8 @@ void Worker::fugitive_update(Game & game, State & state)
 		if (dynamic_cast<Warehouse const *>(location))
 			return schedule_incorporate(game);
 
-		set_location(0);
-		location = 0;
+		set_location(nullptr);
+		location = nullptr;
 	}
 
 	// check whether we're on a flag and it's time to return home
@@ -2567,7 +2567,7 @@ void Worker::fugitive_update(Game & game, State & state)
 		 	 &flags, FindFlagWithPlayersWarehouse(*get_owner())))
 	{
 		int32_t bestdist = -1;
-		Flag *  best     =  0;
+		Flag *  best     =  nullptr;
 
 		molog("[fugitive]: found a flag connected to warehouse(s)\n");
 
@@ -2589,7 +2589,7 @@ void Worker::fugitive_update(Game & game, State & state)
 		if (best && bestdist > vision) {
 			uint32_t chance = maxdist - (bestdist - vision);
 			if (game.logic_rand() % maxdist >= chance)
-				best = 0;
+				best = nullptr;
 		}
 
 		if (best) {
@@ -2643,8 +2643,8 @@ void Worker::fugitive_update(Game & game, State & state)
 const Bob::Task Worker::taskGeologist = {
 	"geologist",
 	static_cast<Bob::Ptr>(&Worker::geologist_update),
-	0,
-	0,
+	nullptr,
+	nullptr,
 	true
 };
 
@@ -2791,8 +2791,8 @@ void Worker::geologist_update(Game & game, State & state)
 const Bob::Task Worker::taskScout = {
 	"scout",
 	static_cast<Bob::Ptr>(&Worker::scout_update),
-	0,
-	0,
+	nullptr,
+	nullptr,
 	true
 };
 
@@ -3051,7 +3051,7 @@ const BobProgramBase * Worker::Loader::get_program(const std::string & name)
 	if (compatibility == "fail") {
 		if (upcast(Game, game, &egbase()))
 			add_finish(boost::bind(&Worker::send_signal, &worker, boost::ref(*game), "fail"));
-		return 0;
+		return nullptr;
 	}
 
 	return worker.descr().get_program(name);
@@ -3094,7 +3094,7 @@ Map_Object::Loader * Worker::load
 		throw wexception(_("loading worker: %s"), e.what());
 	}
 
-	return 0; // Should not be reached
+	return nullptr; // Should not be reached
 }
 
 /**

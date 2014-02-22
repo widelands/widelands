@@ -89,7 +89,7 @@ public:
 	};
 
 	/// Handle keypresses
-	virtual bool handle_key(bool down, SDL_keysym code);
+	virtual bool handle_key(bool down, SDL_keysym code) override;
 
 private:
 	uint32_t                          m_vbutw;
@@ -153,7 +153,7 @@ public:
 	};
 
 	/// Handle keypresses
-	virtual bool handle_key(bool down, SDL_keysym code);
+	virtual bool handle_key(bool down, SDL_keysym code) override;
 
 private:
 	uint32_t                    m_vbutw;

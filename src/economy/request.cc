@@ -183,7 +183,7 @@ void Request::Read
 									throw wexception
 										("Request::Read: incompatible transfer type");
 								transfer->has_failed();
-								transfer = 0;
+								transfer = nullptr;
 							}
 						} else if (upcast(WareInstance, ware, obj)) {
 							transfer = ware->get_transfer();
@@ -193,7 +193,7 @@ void Request::Read
 									throw wexception
 										("Request::Read: incompatible transfer type");
 								transfer->has_failed();
-								transfer = 0;
+								transfer = nullptr;
 							}
 						} else
 							throw wexception
@@ -521,8 +521,8 @@ void Request::transfer_finish(Game & game, Transfer & t)
 	if (t.m_ware)
 		t.m_ware->destroy(game);
 
-	t.m_worker = 0;
-	t.m_ware = 0;
+	t.m_worker = nullptr;
+	t.m_ware = nullptr;
 
 	remove_transfer(find_transfer(t));
 
@@ -544,8 +544,8 @@ void Request::transfer_finish(Game & game, Transfer & t)
 void Request::transfer_fail(Game &, Transfer & t) {
 	bool const wasopen = is_open();
 
-	t.m_worker = 0;
-	t.m_ware = 0;
+	t.m_worker = nullptr;
+	t.m_ware = nullptr;
 
 	remove_transfer(find_transfer(t));
 

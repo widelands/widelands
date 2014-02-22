@@ -261,7 +261,7 @@ Tribe_Descr::Tribe_Descr
 						m_anim_frontier.push_back
 							(std::pair<std::string, uint32_t>
 							 	(style_name,
-							 	 g_anim.get(path, *s, 0)));
+							 	 g_anim.get(path, *s, nullptr)));
 					}
 				}
 				if (m_anim_frontier.empty())
@@ -282,7 +282,7 @@ Tribe_Descr::Tribe_Descr
 						m_anim_flag.push_back
 							(std::pair<std::string, uint32_t>
 							 	(style_name,
-							 	 g_anim.get(path, *s, 0)));
+							 	 g_anim.get(path, *s, nullptr)));
 					}
 				}
 				if (m_anim_flag.empty())

@@ -38,8 +38,8 @@ Battle::Descr g_Battle_Descr("battle", "Battle");
 Battle::Battle ()
 	:
 	Map_Object(&g_Battle_Descr),
-	m_first(0),
-	m_second(0),
+	m_first(nullptr),
+	m_second(nullptr),
 	m_creationtime(0),
 	m_readyflags(0),
 	m_damage(0),
@@ -88,12 +88,12 @@ void Battle::init (Editor_Game_Base & egbase)
 void Battle::cleanup (Editor_Game_Base & egbase)
 {
 	if (m_first) {
-		m_first ->setBattle(ref_cast<Game, Editor_Game_Base>(egbase), 0);
-		m_first  = 0;
+		m_first ->setBattle(ref_cast<Game, Editor_Game_Base>(egbase), nullptr);
+		m_first  = nullptr;
 	}
 	if (m_second) {
-		m_second->setBattle(ref_cast<Game, Editor_Game_Base>(egbase), 0);
-		m_second = 0;
+		m_second->setBattle(ref_cast<Game, Editor_Game_Base>(egbase), nullptr);
+		m_second = nullptr;
 	}
 
 	Map_Object::cleanup(egbase);

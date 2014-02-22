@@ -265,12 +265,12 @@ Fullscreen_Menu_Options::Fullscreen_Menu_Options
 			m_resolutions[i].xres  == opt.xres and
 			m_resolutions[i].yres  == opt.yres;
 		did_select_a_res |= selected;
-		m_reslist.add(buf, 0, nullptr, selected);
+		m_reslist.add(buf, nullptr, nullptr, selected);
 	}
 	if (not did_select_a_res) {
 		char buf[32];
 		sprintf(buf, "%ix%i", opt.xres, opt.yres);
-		m_reslist.add(buf, 0, nullptr, true);
+		m_reslist.add(buf, nullptr, nullptr, true);
 		uint32_t entry = m_resolutions.size();
 		m_resolutions.resize(entry + 1);
 		m_resolutions[entry].xres  = opt.xres;

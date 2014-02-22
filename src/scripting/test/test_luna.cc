@@ -45,7 +45,7 @@ class L_Class : public LunaClass
 	int prop;
 public:
 	LUNA_CLASS_HEAD(L_Class);
-	const char * get_modulename() {return "test";}
+	const char * get_modulename() override {return "test";}
 	L_Class() :x(123), prop(246) {}
 	virtual ~L_Class() {}
 	L_Class(lua_State * /* L */) :x(124), prop(248) {}
@@ -69,13 +69,13 @@ public:
 		prop = lua_tointeger(L, -1);
 		return 0;
 	}
-	virtual void __persist(lua_State * /* L */) {}
-	virtual void __unpersist(lua_State * /* L */) {}
+	virtual void __persist(lua_State * /* L */) override {}
+	virtual void __unpersist(lua_State * /* L */) override {}
 };
 const char L_Class::className[] = "Class";
 const MethodType<L_Class> L_Class::Methods[] = {
 	METHOD(L_Class, test),
-	{0, 0},
+	{nullptr, nullptr},
 };
 BEGIN_LUNA_PROPERTIES(L_Class)
 	PROP_RO(L_Class, propr),
@@ -94,13 +94,13 @@ public:
 		lua_pushuint32(L, y);
 		return 1;
 	}
-	virtual void __persist(lua_State * /* L */) {}
-	virtual void __unpersist(lua_State * /* L */) {}
+	virtual void __persist(lua_State * /* L */) override {}
+	virtual void __unpersist(lua_State * /* L */) override {}
 };
 const char L_SubClass::className[] = "SubClass";
 const MethodType<L_SubClass> L_SubClass::Methods[] = {
 	METHOD(L_SubClass, subtest),
-	{0, 0},
+	{nullptr, nullptr},
 };
 BEGIN_LUNA_PROPERTIES(L_SubClass)
 END_LUNA_PROPERTIES()
@@ -117,13 +117,13 @@ public:
 		lua_pushuint32(L, z);
 		return 1;
 	}
-	virtual void __persist(lua_State * /* L */) {}
-	virtual void __unpersist(lua_State * /* L */) {}
+	virtual void __persist(lua_State * /* L */) override {}
+	virtual void __unpersist(lua_State * /* L */) override {}
 };
 const char L_VirtualClass::className[] = "VirtualClass";
 const MethodType<L_VirtualClass> L_VirtualClass::Methods[] = {
 	METHOD(L_VirtualClass, virtualtest),
-	{0, 0},
+	{nullptr, nullptr},
 };
 BEGIN_LUNA_PROPERTIES(L_VirtualClass)
 END_LUNA_PROPERTIES()
@@ -151,24 +151,24 @@ public:
 		lua_pushuint32(L, z);
 		return 1;
 	}
-	virtual void __persist(lua_State * /* L */) {}
-	virtual void __unpersist(lua_State * /* L */) {}
+	virtual void __persist(lua_State * /* L */) override {}
+	virtual void __unpersist(lua_State * /* L */) override {}
 };
 const char L_MultiClass::className[] = "MultiClass";
 const MethodType<L_MultiClass> L_MultiClass::Methods[] = {
 	METHOD(L_MultiClass, virtualtest),
 	METHOD(L_Second, multitest),
-	{0, 0},
+	{nullptr, nullptr},
 };
 BEGIN_LUNA_PROPERTIES(L_MultiClass)
 	PROP_RO(L_MultiClass, second),
 END_LUNA_PROPERTIES()
 
 const static struct luaL_Reg wltest [] = {
-	{0, 0}
+	{nullptr, nullptr}
 };
 const static struct luaL_Reg wl [] = {
-	{0, 0}
+	{nullptr, nullptr}
 };
 
 int test_check_int(lua_State* L) {

@@ -428,7 +428,7 @@ LuaCoroutine * LuaGameInterface::read_coroutine
 	(Widelands::FileRead & fr, Widelands::Map_Map_Object_Loader & mol,
 	 uint32_t size)
 {
-	LuaCoroutine * rv = new LuaCoroutine(0);
+	LuaCoroutine * rv = new LuaCoroutine(nullptr);
 	rv->read(m_L, fr, mol, size);
 
 	return rv;

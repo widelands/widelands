@@ -82,11 +82,11 @@ const PropertyType<L_Panel> L_Panel::Properties[] = {
 	PROP_RW(L_Panel, position_y),
 	PROP_RW(L_Panel, width),
 	PROP_RW(L_Panel, height),
-	{0, 0, 0},
+	{nullptr, nullptr, nullptr},
 };
 const MethodType<L_Panel> L_Panel::Methods[] = {
 	METHOD(L_Panel, get_descendant_position),
-	{0, 0},
+	{nullptr, nullptr},
 };
 
 /*
@@ -335,11 +335,11 @@ const char L_Button::className[] = "Button";
 const MethodType<L_Button> L_Button::Methods[] = {
 	METHOD(L_Button, press),
 	METHOD(L_Button, click),
-	{0, 0},
+	{nullptr, nullptr},
 };
 const PropertyType<L_Button> L_Button::Properties[] = {
 	PROP_RO(L_Button, name),
-	{0, 0, 0},
+	{nullptr, nullptr, nullptr},
 };
 
 /*
@@ -396,12 +396,12 @@ Tab
 const char L_Tab::className[] = "Tab";
 const MethodType<L_Tab> L_Tab::Methods[] = {
 	METHOD(L_Tab, click),
-	{0, 0},
+	{nullptr, nullptr},
 };
 const PropertyType<L_Tab> L_Tab::Properties[] = {
 	PROP_RO(L_Tab, name),
 	PROP_RO(L_Tab, active),
-	{0, 0, 0},
+	{nullptr, nullptr, nullptr},
 };
 
 /*
@@ -454,11 +454,11 @@ Window
 const char L_Window::className[] = "Window";
 const MethodType<L_Window> L_Window::Methods[] = {
 	METHOD(L_Window, close),
-	{0, 0},
+	{nullptr, nullptr},
 };
 const PropertyType<L_Window> L_Window::Properties[] = {
 	PROP_RO(L_Window, name),
-	{0, 0, 0},
+	{nullptr, nullptr, nullptr},
 };
 
 /*
@@ -483,7 +483,7 @@ int L_Window::get_name(lua_State * L) {
 */
 int L_Window::close(lua_State * /* L */) {
 	delete m_panel;
-	m_panel = 0;
+	m_panel = nullptr;
 	return 0;
 }
 
@@ -508,7 +508,7 @@ const MethodType<L_MapView> L_MapView::Methods[] = {
 	METHOD(L_MapView, start_road_building),
 	METHOD(L_MapView, abort_road_building),
 	METHOD(L_MapView, close),
-	{0, 0},
+	{nullptr, nullptr},
 };
 const PropertyType<L_MapView> L_MapView::Properties[] = {
 	PROP_RW(L_MapView, viewpoint_x),
@@ -517,7 +517,7 @@ const PropertyType<L_MapView> L_MapView::Properties[] = {
 	PROP_RW(L_MapView, census),
 	PROP_RW(L_MapView, statistics),
 	PROP_RO(L_MapView, is_building_road),
-	{0, 0, 0},
+	{nullptr, nullptr, nullptr},
 };
 
 L_MapView::L_MapView(lua_State * L) :
@@ -750,7 +750,7 @@ static int L_get_user_input_allowed(lua_State * L) {
 const static struct luaL_Reg wlui [] = {
 	{"set_user_input_allowed", &L_set_user_input_allowed},
 	{"get_user_input_allowed", &L_get_user_input_allowed},
-	{0, 0}
+	{nullptr, nullptr}
 };
 
 void luaopen_wlui(lua_State * L) {

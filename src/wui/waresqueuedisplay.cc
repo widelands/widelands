@@ -46,9 +46,9 @@ UI::Panel(parent, x, y, 0, 28),
 m_igb(igb),
 m_building(building),
 m_queue(queue),
-m_priority_radiogroup(0),
-m_increase_max_fill(0),
-m_decrease_max_fill(0),
+m_priority_radiogroup(nullptr),
+m_increase_max_fill(nullptr),
+m_decrease_max_fill(nullptr),
 m_ware_index(queue->get_ware()),
 m_ware_type(Widelands::wwWARE),
 m_max_fill_indicator(g_gr->images().get(pic_max_fill_indicator)),
@@ -164,7 +164,7 @@ void WaresQueueDisplay::update_priority_buttons()
 {
 	if (m_cache_size <= 0 or m_show_only) {
 		delete m_priority_radiogroup;
-		m_priority_radiogroup = 0;
+		m_priority_radiogroup = nullptr;
 	}
 
 	Point pos = Point(m_cache_size * CellWidth + Border, 0);
@@ -219,8 +219,8 @@ void WaresQueueDisplay::update_priority_buttons()
 void WaresQueueDisplay::update_max_fill_buttons() {
 	delete m_increase_max_fill;
 	delete m_decrease_max_fill;
-	m_increase_max_fill = 0;
-	m_decrease_max_fill = 0;
+	m_increase_max_fill = nullptr;
+	m_decrease_max_fill = nullptr;
 
 	if (m_cache_size <= 0 or m_show_only)
 		return;

@@ -38,14 +38,14 @@ class GameFactory : public Factory {
 public:
 	virtual ~GameFactory() {}
 
-	virtual void push_player(lua_State * L, Widelands::Player_Number plr);
+	virtual void push_player(lua_State * L, Widelands::Player_Number plr) override;
 };
 
 class EditorFactory  : public Factory {
 public:
 	virtual ~EditorFactory() {}
 
-	virtual void push_player(lua_State * L, Widelands::Player_Number plr);
+	virtual void push_player(lua_State * L, Widelands::Player_Number plr) override;
 };
 
 #endif /* end of include guard: FACTORY_H */

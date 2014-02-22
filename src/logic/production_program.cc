@@ -285,7 +285,7 @@ ProductionProgram::ActReturn::Condition * create_economy_condition
 		throw game_data_error("economy: %s", e.what());
 	}
 
-	return 0; // will never be reached
+	return nullptr; // will never be reached
 }
 
 
@@ -303,7 +303,7 @@ ProductionProgram::ActReturn::Condition * create_site_condition
 		throw game_data_error("site: %s", e.what());
 	}
 
-	return 0; // will never be reached
+	return nullptr; // will never be reached
 }
 
 
@@ -321,7 +321,7 @@ ProductionProgram::ActReturn::Condition * create_workers_condition
 		throw game_data_error("workers: %s", e.what());
 	}
 
-	return 0; // will never be reached
+	return nullptr; // will never be reached
 }
 
 
@@ -346,7 +346,7 @@ ProductionProgram::ActReturn::create_condition
 		throw game_data_error(_("invalid condition: %s"), e.what());
 	}
 
-	return 0; // will never be reached
+	return nullptr; // will never be reached
 }
 
 
@@ -723,7 +723,7 @@ ProductionProgram::ActAnimate::ActAnimate
 			m_id = g_anim.get
 				(directory.c_str(),
 				 prof.get_safe_section(animation_name),
-				 0);
+				 nullptr);
 			descr.add_animation(animation_name, m_id);
 		}
 		if (not reached_end) { //  The next parameter is the duration.
@@ -1552,7 +1552,7 @@ bool ProductionProgram::ActConstruct::get_building_work
 
 	// First step: figure out which ware item to bring along
 	Buildcost remaining;
-	WaresQueue * wq = 0;
+	WaresQueue * wq = nullptr;
 
 	Immovable * construction = dynamic_cast<Immovable *>(state.objvar.get(game));
 	if (construction) {

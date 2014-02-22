@@ -157,7 +157,7 @@ m_selected_information(0)
 
 		hbox1->add(&cb, UI::Box::AlignLeft, false, true);
 	} else //  player nr p does not exist
-		m_cbs[p - 1] = 0;
+		m_cbs[p - 1] = nullptr;
 
 	m_box.add(hbox1, UI::Box::AlignTop, true);
 

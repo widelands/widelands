@@ -46,7 +46,7 @@ struct warning : public std::exception {
 	/// The target of the returned pointer remains valid during the lifetime of
 	/// the warning object.
 	virtual const char * title() const;
-	virtual const char * what() const throw ();
+	virtual const char * what() const throw () override;
 
 protected:
 	warning() {};

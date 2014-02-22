@@ -151,7 +151,7 @@ struct InputCallback {
 /// \todo Sensible use of exceptions (goes for whole game)
 /// \todo Default filenames for recording and playback
 struct WLApplication {
-	static WLApplication * get(int const argc = 0, char const * * argv = 0);
+	static WLApplication * get(int const argc = 0, char const * * argv = nullptr);
 	~WLApplication();
 
 	enum GameType {NONE, EDITOR, REPLAY, SCENARIO, LOADGAME, NETWORK, INTERNET};
@@ -165,7 +165,7 @@ struct WLApplication {
 
 	/// Get the state of the current KeyBoard Button
 	/// \warning This function doesn't check for dumbness
-	bool get_key_state(SDLKey const key) const {return SDL_GetKeyState(0)[key];}
+	bool get_key_state(SDLKey const key) const {return SDL_GetKeyState(nullptr)[key];}
 
 	//@{
 	void warp_mouse(Point);

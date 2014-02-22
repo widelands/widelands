@@ -111,7 +111,7 @@ d(new PlayerDescriptionGroupImpl)
 PlayerDescriptionGroup::~PlayerDescriptionGroup()
 {
 	delete d;
-	d = 0;
+	d = nullptr;
 }
 
 
@@ -184,7 +184,7 @@ void PlayerDescriptionGroup::refresh()
 			if (!m_tribenames[player.tribe].size()) {
 				// get translated tribesname
 				Profile prof
-					((tribepath + "/conf").c_str(), 0, "tribe_" + player.tribe);
+					((tribepath + "/conf").c_str(), nullptr, "tribe_" + player.tribe);
 				Section & global = prof.get_safe_section("tribe");
 				m_tribenames[player.tribe] = global.get_safe_string("name");
 			}

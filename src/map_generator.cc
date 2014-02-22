@@ -98,7 +98,7 @@ void MapGenerator::generate_bobs
 			(fc,
 			 bobKind->getImmovableBob
 			 	(static_cast<size_t>(rng.rand() / (MAX_ELEVATION / num))),
-			 0);
+			 nullptr);
 
 	if (set_moveable and (num = bobKind->getNumMoveableBobs()))
 		m_egbase.create_bob
@@ -107,7 +107,7 @@ void MapGenerator::generate_bobs
 			 	(bobKind->getMoveableBob
 			 	 	(static_cast<size_t>(rng.rand() / (MAX_ELEVATION / num)))
 			 	 .c_str()),
-			 0);
+			 nullptr);
 }
 
 #define set_resource_helper(rnd1, res)                                        \
@@ -411,7 +411,7 @@ uint32_t * MapGenerator::generate_random_value_map
 		throw;
 	}
 
-	return 0; // Should not be reached
+	return nullptr; // Should not be reached
 }
 
 

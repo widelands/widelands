@@ -49,7 +49,7 @@ public:
 		 Warehouse & wh, Widelands::WareWorker type, bool selectable);
 
 protected:
-	virtual void draw_ware(RenderTarget & dst, Widelands::Ware_Index ware);
+	virtual void draw_ware(RenderTarget & dst, Widelands::Ware_Index ware) override;
 
 private:
 	Warehouse & m_warehouse;

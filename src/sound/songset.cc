@@ -39,7 +39,7 @@ namespace {
 }
 
 /// Prepare infrastructure for reading song files from disk
-Songset::Songset() : m_m(0), m_rwops(0) {}
+Songset::Songset() : m_m(nullptr), m_rwops(nullptr) {}
 
 /// Close and delete all songs to avoid memory leaks.
 Songset::~Songset()
@@ -78,7 +78,7 @@ Mix_Music * Songset::get_song()
 	std::string filename;
 
 	if (g_sound_handler.get_disable_music() || m_songs.empty())
-		return 0;
+		return nullptr;
 
 	if (g_sound_handler.m_random_order)
 		filename = m_songs.at(g_sound_handler.m_rng.rand() % m_songs.size());
@@ -92,13 +92,13 @@ Mix_Music * Songset::get_song()
 	//first, close the previous song and remove it from memory
 	if (m_m) {
 		Mix_FreeMusic(m_m);
-		m_m = 0;
+		m_m = nullptr;
 	}
 
 	if (m_rwops) {
 		if (have_to_free_rw())
 			SDL_FreeRW(m_rwops);
-		m_rwops = 0;
+		m_rwops = nullptr;
 		m_fr.Close();
 	}
 
@@ -106,11 +106,11 @@ Mix_Music * Songset::get_song()
 	if (m_fr.TryOpen(*g_fs, filename.c_str())) {
 		if (!(m_rwops = SDL_RWFromMem(m_fr.Data(0), m_fr.GetSize()))) {
 			m_fr.Close();  // m_fr should be Open iff m_rwops != 0
-			return 0;
+			return nullptr;
 		}
 	}
 	else
-		return 0;
+		return nullptr;
 
 	if (m_rwops)
 		m_m = Mix_LoadMUS_RW(m_rwops);

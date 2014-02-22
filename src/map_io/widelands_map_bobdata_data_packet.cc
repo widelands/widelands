@@ -246,7 +246,7 @@ void Map_Bobdata_Data_Packet::Read
 										("objvar1 (%u): %s", objvar1_serial, e.what());
 								}
 							} else
-								state.objvar1 = 0;
+								state.objvar1 = nullptr;
 							state.svar1 = fr.CString();
 							if (packet_version < 3) {
 								int32_t const x = fr.Signed32();
@@ -285,7 +285,7 @@ void Map_Bobdata_Data_Packet::Read
 							uint32_t const pathsteps = fr.Unsigned16();
 							if (i < old_stacksize) {
 								delete state.path;
-								state.path = 0;
+								state.path = nullptr;
 							}
 							if (pathsteps) {
 								try {
@@ -311,7 +311,7 @@ void Map_Bobdata_Data_Packet::Read
 									if (!has_route) {
 										delete state.route;
 										// in case we get an exception further down
-										state.route = 0;
+										state.route = nullptr;
 									} else
 										state.route->init(0);
 								}
@@ -324,7 +324,7 @@ void Map_Bobdata_Data_Packet::Read
 									route->load_pointers(d, mol);
 									state.route = route;
 								} else
-									state.route = 0;
+									state.route = nullptr;
 							}
 
 							if (fr.Unsigned8()) {
@@ -339,7 +339,7 @@ void Map_Bobdata_Data_Packet::Read
 								else
 									throw;
 							} else
-								state.program = 0;
+								state.program = nullptr;
 
 						} catch (const _wexception & e) {
 							throw game_data_error
@@ -509,7 +509,7 @@ void Map_Bobdata_Data_Packet::read_worker_bob
 						("location (%u): %s", location_serial, e.what());
 				}
 			} else
-				worker.m_location = 0;
+				worker.m_location = nullptr;
 
 			if (uint32_t const carried_ware_serial = fr.Unsigned32()) {
 				try {
@@ -520,7 +520,7 @@ void Map_Bobdata_Data_Packet::read_worker_bob
 						("carried ware (%u): %s", carried_ware_serial, e.what());
 				}
 			} else
-				worker.m_carried_ware = 0;
+				worker.m_carried_ware = nullptr;
 
 			// Skip supply
 
@@ -536,7 +536,7 @@ void Map_Bobdata_Data_Packet::read_worker_bob
 					worker.m_current_exp = worker.get_needed_experience() - 1;
 			}
 
-			Economy * economy = 0;
+			Economy * economy = nullptr;
 			if (PlayerImmovable * const location = worker.m_location.get(egbase))
 				economy = location->get_economy();
 			worker.set_economy(economy);

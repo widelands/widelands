@@ -80,8 +80,8 @@ public:
 	virtual Worker_Descr::Worker_Type get_worker_type() const {
 		return descr().get_worker_type();
 	}
-	char const * type_name() const {return "worker";}
-	virtual Bob::Type get_bob_type() const {return Bob::WORKER;}
+	char const * type_name() const override {return "worker";}
+	virtual Bob::Type get_bob_type() const override {return Bob::WORKER;}
 
 	uint32_t get_animation(char const * const str) const {
 		return descr().get_animation(str);
@@ -128,8 +128,8 @@ public:
 	void schedule_incorporate(Game &);
 	void incorporate(Game &);
 
-	virtual void init(Editor_Game_Base &);
-	virtual void cleanup(Editor_Game_Base &);
+	virtual void init(Editor_Game_Base &) override;
+	virtual void cleanup(Editor_Game_Base &) override;
 
 	bool wakeup_flag_capacity(Game &, Flag &);
 	bool wakeup_leave_building(Game &, Building &);
@@ -155,7 +155,7 @@ public:
 	bool needs_experience() const {return get_needed_experience() != -1;}
 
 	// debug
-	virtual void log_general_info(const Editor_Game_Base &);
+	virtual void log_general_info(const Editor_Game_Base &) override;
 
 	// worker-specific tasks
 	void start_task_transfer(Game &, Transfer *);
@@ -192,8 +192,8 @@ public:
 protected:
 	virtual bool is_evict_allowed();
 	void draw_inner(const Editor_Game_Base &, RenderTarget &, const Point&) const;
-	virtual void draw(const Editor_Game_Base &, RenderTarget &, const Point&) const;
-	virtual void init_auto_task(Game &);
+	virtual void draw(const Editor_Game_Base &, RenderTarget &, const Point&) const override;
+	virtual void init_auto_task(Game &) override;
 
 	bool does_carry_ware() {return m_carried_ware.is_set();}
 
@@ -281,12 +281,12 @@ protected:
 		Loader();
 
 		virtual void load(FileRead &);
-		virtual void load_pointers();
-		virtual void load_finish();
+		virtual void load_pointers() override;
+		virtual void load_finish() override;
 
 	protected:
-		virtual const Task * get_task(const std::string & name);
-		virtual const BobProgramBase * get_program(const std::string & name);
+		virtual const Task * get_task(const std::string & name) override;
+		virtual const BobProgramBase * get_program(const std::string & name) override;
 
 	private:
 		uint32_t m_location;
@@ -297,7 +297,7 @@ protected:
 	virtual Loader * create_loader();
 
 public:
-	virtual void save(Editor_Game_Base &, Map_Map_Object_Saver &, FileWrite &);
+	virtual void save(Editor_Game_Base &, Map_Map_Object_Saver &, FileWrite &) override;
 	virtual void do_save
 		(Editor_Game_Base &, Map_Map_Object_Saver &, FileWrite &);
 

@@ -62,7 +62,7 @@ int32_t Editor_Place_Bob_Tool::handle_click_impl
 			if (mr.location().field->nodecaps() & descr.movecaps()) {
 				if (Bob * const bob = mr.location().field->get_first_bob())
 					bob->remove(egbase); //  There is already a bob. Remove it.
-				descr.create(egbase, 0, mr.location());
+				descr.create(egbase, nullptr, mr.location());
 			}
 			++i;
 		} while (mr.advance(map));
@@ -88,7 +88,7 @@ int32_t Editor_Place_Bob_Tool::handle_undo_impl
 				if (mr.location().field->nodecaps() & descr.movecaps()) {
 					if (Bob * const bob = mr.location().field->get_first_bob())
 						bob->remove(egbase); //  There is already a bob. Remove it.
-					descr.create(egbase, 0, mr.location());
+					descr.create(egbase, nullptr, mr.location());
 				}
 			} else if (Bob * const bob = mr.location().field->get_first_bob()) {
 				bob->remove(egbase);

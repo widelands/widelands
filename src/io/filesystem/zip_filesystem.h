@@ -36,41 +36,41 @@ public:
 	ZipFilesystem(const std::string &);
 	virtual ~ZipFilesystem();
 
-	virtual bool IsWritable() const;
+	virtual bool IsWritable() const override;
 
 	virtual int32_t FindFiles
 		(const std::string & path,
 		 const std::string & pattern,
 		 filenameset_t     * results,
-		 uint32_t            depth = 0);
+		 uint32_t            depth = 0) override;
 
-	virtual bool IsDirectory(const std::string & path);
-	virtual bool FileExists (const std::string & path);
+	virtual bool IsDirectory(const std::string & path) override;
+	virtual bool FileExists (const std::string & path) override;
 
-	virtual void * Load(const std::string & fname, size_t & length);
+	virtual void * Load(const std::string & fname, size_t & length) override;
 	virtual void * fastLoad
-		(const std::string & fname, size_t & length, bool & fast);
+		(const std::string & fname, size_t & length, bool & fast) override;
 
 	virtual void Write
-		(const std::string & fname, void const * data, int32_t length);
-	virtual void EnsureDirectoryExists(const std::string & dirname);
-	virtual void   MakeDirectory      (const std::string & dirname);
+		(const std::string & fname, void const * data, int32_t length) override;
+	virtual void EnsureDirectoryExists(const std::string & dirname) override;
+	virtual void   MakeDirectory      (const std::string & dirname) override;
 
 	virtual StreamRead  * OpenStreamRead
-		(const std::string & fname);
+		(const std::string & fname) override;
 	virtual StreamWrite * OpenStreamWrite
-		(const std::string & fname);
+		(const std::string & fname) override;
 
-	virtual FileSystem * MakeSubFileSystem(const std::string & dirname);
-	virtual FileSystem * CreateSubFileSystem(const std::string & dirname, Type);
-	virtual void Unlink(const std::string & filename);
-	virtual void Rename(const std::string &, const std::string &);
+	virtual FileSystem * MakeSubFileSystem(const std::string & dirname) override;
+	virtual FileSystem * CreateSubFileSystem(const std::string & dirname, Type) override;
+	virtual void Unlink(const std::string & filename) override;
+	virtual void Rename(const std::string &, const std::string &) override;
 
-	virtual unsigned long long DiskSpace();
+	virtual unsigned long long DiskSpace() override;
 
 	static FileSystem * CreateFromDirectory(const std::string & directory);
 
-	virtual std::string getBasename() {return m_zipfilename;};
+	virtual std::string getBasename() override {return m_zipfilename;};
 
 protected:
 	void m_OpenUnzip();
@@ -97,8 +97,8 @@ protected:
 	struct ZipStreamRead : StreamRead {
 		explicit ZipStreamRead(zipFile file, ZipFilesystem* zipfs);
 		virtual ~ZipStreamRead();
-		virtual size_t Data(void* data, size_t bufsize);
-		virtual bool EndOfFile() const;
+		virtual size_t Data(void* data, size_t bufsize) override;
+		virtual bool EndOfFile() const override;
 	private:
 		zipFile m_unzipfile;
 		ZipFilesystem* m_zipfs;
@@ -106,7 +106,7 @@ protected:
 	struct ZipStreamWrite : StreamWrite {
 		explicit ZipStreamWrite(zipFile file, ZipFilesystem* zipfs);
 		virtual ~ZipStreamWrite();
-		virtual void Data(const void* const data, size_t size);
+		virtual void Data(const void* const data, size_t size) override;
 	private:
 		zipFile m_zipfile;
 		ZipFilesystem* m_zipfs;

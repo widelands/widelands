@@ -59,7 +59,7 @@ class Trackable {
 				delete this;
 		}
 		void clear() {
-			m_ptr = 0;
+			m_ptr = nullptr;
 			if (!m_refcount)
 				delete this;
 		}
@@ -91,7 +91,7 @@ class BaseTrackPtr {
 	mutable Trackable::Tracker * m_tracker;
 
 protected:
-	BaseTrackPtr() : m_tracker(0) {}
+	BaseTrackPtr() : m_tracker(nullptr) {}
 	~BaseTrackPtr() {
 		if (m_tracker)
 			m_tracker->deref();
@@ -101,7 +101,7 @@ protected:
 			m_tracker = t->m_tracker;
 			m_tracker->addref();
 		} else
-			m_tracker = 0;
+			m_tracker = nullptr;
 	}
 	BaseTrackPtr(const BaseTrackPtr & o) {
 		m_tracker = o.m_tracker;
@@ -127,7 +127,7 @@ protected:
 			m_tracker = t->m_tracker;
 			m_tracker->addref();
 		} else
-			m_tracker = 0;
+			m_tracker = nullptr;
 	}
 
 	Trackable * get() const
@@ -137,10 +137,10 @@ protected:
 				return t;
 
 			m_tracker->deref();
-			m_tracker = 0;
+			m_tracker = nullptr;
 		}
 
-		return 0;
+		return nullptr;
 	}
 };
 

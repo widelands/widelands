@@ -329,7 +329,7 @@ PlayerCommand(t, p),
 path         (&pa),
 start        (pa.get_start()),
 nsteps       (pa.get_nsteps()),
-steps        (0)
+steps        (nullptr)
 {}
 
 Cmd_BuildRoad::Cmd_BuildRoad (StreamRead & des) :
@@ -339,7 +339,7 @@ PlayerCommand (0, des.Unsigned8())
 	nsteps = des.Unsigned16();
 
 	// we cannot completely deserialize the path here because we don't have a Map
-	path = 0;
+	path = nullptr;
 	steps = new char[nsteps];
 
 	for (Path::Step_Vector::size_type i = 0; i < nsteps; ++i)
@@ -355,7 +355,7 @@ Cmd_BuildRoad::~Cmd_BuildRoad ()
 
 void Cmd_BuildRoad::execute (Game & game)
 {
-	if (path == 0) {
+	if (path == nullptr) {
 		assert (steps);
 
 		path = new Path(start);
@@ -388,7 +388,7 @@ void Cmd_BuildRoad::Read
 			PlayerCommand::Read(fr, egbase, mol);
 			start  = fr.Coords32  (egbase.map().extent());
 			nsteps = fr.Unsigned16();
-			path = 0;
+			path = nullptr;
 			steps = new char[nsteps];
 			for (Path::Step_Vector::size_type i = 0; i < nsteps; ++i)
 			steps[i] = fr.Unsigned8();

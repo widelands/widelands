@@ -40,10 +40,10 @@ struct AreaWatcher : public Map_Object, private Player_Area<> {
 	friend class Player;
 	friend struct Map_Players_AreaWatchers_Data_Packet;
 	AreaWatcher(const Player_Area<>);
-	virtual int32_t get_type() const {return AREAWATCHER;}
-	char const * type_name() const {return "areawatcher";}
+	virtual int32_t get_type() const override {return AREAWATCHER;}
+	char const * type_name() const override {return "areawatcher";}
 	static AreaWatcher & create(Editor_Game_Base &, const Player_Area<>);
-	virtual void act(Game &, uint32_t data);
+	virtual void act(Game &, uint32_t data) override;
 };
 
 }

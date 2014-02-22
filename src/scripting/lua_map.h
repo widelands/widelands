@@ -50,7 +50,7 @@ namespace LuaMap {
  */
 class L_MapModuleClass : public LunaClass {
 	public:
-		const char * get_modulename() {return "map";}
+		const char * get_modulename() override {return "map";}
 };
 
 
@@ -65,8 +65,8 @@ public:
 		report_error(L, "Cannot instantiate a 'Map' directly!");
 	}
 
-	virtual void __persist(lua_State * L);
-	virtual void __unpersist(lua_State * L);
+	virtual void __persist(lua_State * L) override;
+	virtual void __unpersist(lua_State * L) override;
 
 	/*
 	 * Properties
@@ -112,8 +112,8 @@ public:
 		m_ptr = nullptr;
 	}
 
-	virtual void __persist(lua_State * L);
-	virtual void __unpersist(lua_State * L);
+	virtual void __persist(lua_State * L) override;
+	virtual void __unpersist(lua_State * L) override;
 
 	/*
 	 * attributes
@@ -569,8 +569,8 @@ public:
 	}
 	virtual ~L_Field() {}
 
-	virtual void __persist(lua_State * L);
-	virtual void __unpersist(lua_State * L);
+	virtual void __persist(lua_State * L) override;
+	virtual void __unpersist(lua_State * L) override;
 
 	/*
 	 * Properties
@@ -635,8 +635,8 @@ public:
 	}
 	virtual ~L_PlayerSlot() {}
 
-	virtual void __persist(lua_State * L);
-	virtual void __unpersist(lua_State * L);
+	virtual void __persist(lua_State * L) override;
+	virtual void __unpersist(lua_State * L) override;
 
 	/*
 	 * Properties

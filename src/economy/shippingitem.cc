@@ -122,7 +122,7 @@ void ShippingItem::update_destination(Game & game, PortDock & pd)
 	Worker * worker;
 	get(game, &ware, &worker);
 
-	PlayerImmovable * next = 0;
+	PlayerImmovable * next = nullptr;
 
 	if (ware)
 		next = ware->get_next_move_step(game);
@@ -158,7 +158,7 @@ void ShippingItem::remove(Editor_Game_Base & egbase)
 {
 	if (Map_Object * obj = m_object.get(egbase)) {
 		obj->remove(egbase);
-		m_object = 0;
+		m_object = nullptr;
 	}
 }
 

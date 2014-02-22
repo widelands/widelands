@@ -69,10 +69,10 @@ m_nrplayers      (0),
 m_scenario_types (NO_SCENARIO),
 m_width          (0),
 m_height         (0),
-m_world          (0),
-m_starting_pos   (0),
-m_fields         (0),
-m_overlay_manager(0),
+m_world          (nullptr),
+m_starting_pos   (nullptr),
+m_fields         (nullptr),
+m_overlay_manager(nullptr),
 m_pathfieldmgr   (new PathfieldManager)
 {
 	m_worldname[0] = '\0';
@@ -305,11 +305,11 @@ void Map::cleanup() {
 	m_width = m_height = 0;
 
 	free(m_fields);
-	m_fields = 0;
+	m_fields = nullptr;
 	free(m_starting_pos);
-	m_starting_pos = 0;
+	m_starting_pos = nullptr;
 	delete m_world;
-	m_world = 0;
+	m_world = nullptr;
 
 	m_scenario_tribes.clear();
 	m_scenario_names.clear();
@@ -544,7 +544,7 @@ Could happen multiple times in the map editor.
 void Map::set_nrplayers(Player_Number const nrplayers) {
 	if (!nrplayers) {
 		free(m_starting_pos);
-		m_starting_pos = 0;
+		m_starting_pos = nullptr;
 		m_nrplayers = 0;
 		return;
 	}
@@ -1164,7 +1164,7 @@ NodeCaps Map::_calc_nodecaps_pass1(FCoords const f, bool consider_mobs) {
 	//  restrictions
 	if (caps & MOVECAPS_WALK) {
 		//  4b) Flags must be at least 2 edges apart
-		if (consider_mobs && find_immovables(Area<FCoords>(f, 1), 0, FindImmovableType(Map_Object::FLAG)))
+		if (consider_mobs && find_immovables(Area<FCoords>(f, 1), nullptr, FindImmovableType(Map_Object::FLAG)))
 			return static_cast<NodeCaps>(caps);
 		caps |= BUILDCAPS_FLAG;
 	}
@@ -1211,9 +1211,9 @@ NodeCaps Map::_calc_nodecaps_pass2(FCoords const f, bool consider_mobs, NodeCaps
 
 	if (buildsize == BaseImmovable::BIG) {
 		if
-			(calc_buildsize(l_n(f),  false, 0, consider_mobs, initcaps) < BaseImmovable::BIG ||
-			 calc_buildsize(tl_n(f), false, 0, consider_mobs, initcaps) < BaseImmovable::BIG ||
-			 calc_buildsize(tr_n(f), false, 0, consider_mobs, initcaps) < BaseImmovable::BIG)
+			(calc_buildsize(l_n(f),  false, nullptr, consider_mobs, initcaps) < BaseImmovable::BIG ||
+			 calc_buildsize(tl_n(f), false, nullptr, consider_mobs, initcaps) < BaseImmovable::BIG ||
+			 calc_buildsize(tr_n(f), false, nullptr, consider_mobs, initcaps) < BaseImmovable::BIG)
 			buildsize = BaseImmovable::MEDIUM;
 	}
 

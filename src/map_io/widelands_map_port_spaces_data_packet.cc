@@ -37,7 +37,7 @@ void Map_Port_Spaces_Data_Packet::Read
 	(FileSystem & fs, Editor_Game_Base & egbase, bool, Map_Map_Object_Loader &)
 {
 	Profile prof;
-	prof.read("port_spaces", 0, fs);
+	prof.read("port_spaces", nullptr, fs);
 	Section & s1 = prof.get_safe_section("global");
 
 	Map & map = egbase.map();

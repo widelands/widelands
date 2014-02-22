@@ -65,8 +65,8 @@ public:
 		 bool = false);
 	~WaresQueueDisplay();
 
-	virtual void think();
-	virtual void draw(RenderTarget &);
+	virtual void think() override;
+	virtual void draw(RenderTarget &) override;
 
 private:
 	Interactive_GameBase  & m_igb;

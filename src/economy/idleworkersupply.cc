@@ -35,7 +35,7 @@ namespace Widelands {
 /**
  * Automatically register with the worker's economy.
  */
-IdleWorkerSupply::IdleWorkerSupply(Worker & w) : m_worker (w), m_economy(0)
+IdleWorkerSupply::IdleWorkerSupply(Worker & w) : m_worker (w), m_economy(nullptr)
 {
 	set_economy(w.get_economy());
 }
@@ -46,7 +46,7 @@ IdleWorkerSupply::IdleWorkerSupply(Worker & w) : m_worker (w), m_economy(0)
  */
 IdleWorkerSupply::~IdleWorkerSupply()
 {
-	set_economy(0);
+	set_economy(nullptr);
 }
 
 

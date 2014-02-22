@@ -66,7 +66,7 @@ struct Interactive_Base : public Map_View, public DebugConsole::Handler {
 	//  point of view for drawing
 	virtual Widelands::Player * get_player() const = 0;
 
-	void think();
+	void think() override;
 	virtual void postload();
 
 	const Widelands::Node_and_Triangle<> & get_sel_pos() const {
@@ -170,8 +170,8 @@ protected:
 	void mainview_move(int32_t x, int32_t y);
 	void minimap_warp(int32_t x, int32_t y);
 
-	virtual void draw_overlay(RenderTarget &);
-	bool handle_key(bool down, SDL_keysym);
+	virtual void draw_overlay(RenderTarget &) override;
+	bool handle_key(bool down, SDL_keysym) override;
 
 	void unset_sel_picture();
 	void set_sel_picture(const char * const);

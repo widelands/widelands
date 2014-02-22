@@ -31,19 +31,19 @@ namespace LuaRoot {
  */
 class L_RootModuleClass : public LunaClass {
 	public:
-		const char * get_modulename() {return "";}
+		const char * get_modulename() override {return "";}
 };
 
 class L_Game : public LuaBases::L_EditorGameBase {
 public:
 	LUNA_CLASS_HEAD(L_Game);
-	const char * get_modulename() {return "";}
+	const char * get_modulename() override {return "";}
 
 	L_Game() {}
 	L_Game(lua_State * L);
 
-	virtual void __persist(lua_State * L);
-	virtual void __unpersist(lua_State * L);
+	virtual void __persist(lua_State * L) override;
+	virtual void __unpersist(lua_State * L) override;
 
 	/*
 	 * Properties
@@ -70,14 +70,14 @@ public:
 class L_Editor : public LuaBases::L_EditorGameBase {
 public:
 	LUNA_CLASS_HEAD(L_Editor);
-	const char * get_modulename() {return "";}
+	const char * get_modulename() override {return "";}
 
 	L_Editor() {}
 	L_Editor(lua_State * L);
 	virtual ~L_Editor() {}
 
-	virtual void __persist(lua_State * L);
-	virtual void __unpersist(lua_State * L);
+	virtual void __persist(lua_State * L) override;
+	virtual void __unpersist(lua_State * L) override;
 
 	/*
 	 * Properties

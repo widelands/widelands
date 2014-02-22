@@ -47,7 +47,7 @@ struct DismantleSite_Descr : public Building_Descr {
 		 const std::string & directory, Profile &, Section & global_s,
 		 const Tribe_Descr & tribe);
 
-	virtual Building & create_object() const;
+	virtual Building & create_object() const override;
 };
 
 class DismantleSite : public Partially_Finished_Building {
@@ -63,23 +63,23 @@ public:
 		(const DismantleSite_Descr & descr, Editor_Game_Base &,
 		 Coords const, Player &, bool, Building::FormerBuildings & former_buildings);
 
-	char const * type_name() const {return "dismantlesite";}
-	virtual std::string get_statistics_string();
+	char const * type_name() const override {return "dismantlesite";}
+	virtual std::string get_statistics_string() override;
 
-	virtual bool burn_on_destroy();
-	virtual void init   (Editor_Game_Base &);
+	virtual bool burn_on_destroy() override;
+	virtual void init   (Editor_Game_Base &) override;
 
-	virtual bool get_building_work(Game &, Worker &, bool success);
+	virtual bool get_building_work(Game &, Worker &, bool success) override;
 
 	static void count_returned_wares(Building* building, std::map<Ware_Index, uint8_t> & res);
 
 protected:
-	virtual uint32_t build_step_time() const {return DISMANTLESITE_STEP_TIME;}
+	virtual uint32_t build_step_time() const override {return DISMANTLESITE_STEP_TIME;}
 
 	virtual void create_options_window
-		(Interactive_GameBase &, UI::Window * & registry);
+		(Interactive_GameBase &, UI::Window * & registry) override;
 
-	virtual void draw(const Editor_Game_Base &, RenderTarget &, const FCoords&, const Point&);
+	virtual void draw(const Editor_Game_Base &, RenderTarget &, const FCoords&, const Point&) override;
 };
 
 }

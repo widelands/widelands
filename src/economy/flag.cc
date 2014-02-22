@@ -46,13 +46,13 @@ Map_Object_Descr g_flag_descr("flag", "Flag");
 Flag::Flag() :
 PlayerImmovable(g_flag_descr),
 m_animstart(0),
-m_building(0),
+m_building(nullptr),
 m_ware_capacity(8),
 m_ware_filled(0),
 m_wares(new PendingWare[m_ware_capacity]),
-m_always_call_for_flag(0)
+m_always_call_for_flag(nullptr)
 {
-	for (uint32_t i = 0; i < 6; ++i) m_roads[i] = 0;
+	for (uint32_t i = 0; i < 6; ++i) m_roads[i] = nullptr;
 }
 
 /**
@@ -109,13 +109,13 @@ Flag::Flag
 	(Editor_Game_Base & egbase, Player & owning_player, Coords const coords)
 	:
 	PlayerImmovable       (g_flag_descr),
-	m_building            (0),
+	m_building            (nullptr),
 	m_ware_capacity       (8),
 	m_ware_filled         (0),
 	m_wares               (new PendingWare[m_ware_capacity]),
-	m_always_call_for_flag(0)
+	m_always_call_for_flag(nullptr)
 {
-	for (uint32_t i = 0; i < 6; ++i) m_roads[i] = 0;
+	for (uint32_t i = 0; i < 6; ++i) m_roads[i] = nullptr;
 
 	set_owner(&owning_player);
 
@@ -219,13 +219,13 @@ void Flag::detach_building(Editor_Game_Base & egbase)
 {
 	assert(m_building);
 
-	m_building->set_economy(0);
+	m_building->set_economy(nullptr);
 
 	const Map & map = egbase.map();
 	egbase.set_road
 		(map.get_fcoords(map.tl_n(m_position)), Road_SouthEast, Road_None);
 
-	m_building = 0;
+	m_building = nullptr;
 }
 
 /**
@@ -246,8 +246,8 @@ void Flag::detach_road(int32_t const dir)
 {
 	assert(m_roads[dir - 1]);
 
-	m_roads[dir - 1]->set_economy(0);
-	m_roads[dir - 1] = 0;
+	m_roads[dir - 1]->set_economy(nullptr);
+	m_roads[dir - 1] = nullptr;
 }
 
 /**
@@ -308,7 +308,7 @@ Road * Flag::get_road(Flag & flag)
 				 &road->get_flag(Road::FlagEnd)   == &flag)
 				return road;
 
-	return 0;
+	return nullptr;
 }
 
 
@@ -325,7 +325,7 @@ uint8_t Flag::nr_of_roads() const {
 bool Flag::is_dead_end() const {
 	if (get_building())
 		return false;
-	Flag const * first_other_flag = 0;
+	Flag const * first_other_flag = nullptr;
 	for (uint8_t road_id = 6; road_id; --road_id)
 		if (Road * const road = get_road(road_id)) {
 			Flag & start = road->get_flag(Road::FlagStart);
@@ -379,7 +379,7 @@ void Flag::add_ware(Editor_Game_Base & egbase, WareInstance & ware)
 	PendingWare & pi = m_wares[m_ware_filled++];
 	pi.ware     = &ware;
 	pi.pending  = false;
-	pi.nextstep = 0;
+	pi.nextstep = nullptr;
 	pi.priority = 0;
 
 	Transfer * trans = ware.get_transfer();
@@ -527,7 +527,7 @@ WareInstance * Flag::fetch_pending_ware(Game & game, PlayerImmovable & dest)
 	}
 
 	if (best_index < 0)
-		return 0;
+		return nullptr;
 
 	// move the other wares up the list and return this one
 	WareInstance * const ware = m_wares[best_index].ware;
@@ -536,7 +536,7 @@ WareInstance * Flag::fetch_pending_ware(Game & game, PlayerImmovable & dest)
 		(&m_wares[best_index], &m_wares[best_index + 1],
 		 sizeof(m_wares[0]) * (m_ware_filled - best_index));
 
-	ware->set_location(game, 0);
+	ware->set_location(game, nullptr);
 
 	// wake up capacity wait queue
 	wake_up_capacity_queue(game);
@@ -600,7 +600,7 @@ void Flag::remove_ware(Editor_Game_Base & egbase, WareInstance * const ware)
 void Flag::call_carrier
 	(Game & game, WareInstance & ware, PlayerImmovable * const nextstep)
 {
-	PendingWare * pi = 0;
+	PendingWare * pi = nullptr;
 	int32_t i = 0;
 
 	// Find the PendingWare entry
@@ -616,7 +616,7 @@ void Flag::call_carrier
 
 	// Deal with the non-moving case quickly
 	if (!nextstep) {
-		pi->nextstep = 0;
+		pi->nextstep = nullptr;
 		pi->pending = true;
 		return;
 	}
@@ -694,7 +694,7 @@ void Flag::update_wares(Game & game, Flag * const other)
 	for (int32_t i = 0; i < m_ware_filled; ++i)
 		m_wares[i].ware->update(game);
 
-	m_always_call_for_flag = 0;
+	m_always_call_for_flag = nullptr;
 }
 
 void Flag::init(Editor_Game_Base & egbase)
@@ -721,7 +721,7 @@ void Flag::cleanup(Editor_Game_Base & egbase)
 	while (m_ware_filled) {
 		WareInstance & ware = *m_wares[--m_ware_filled].ware;
 
-		ware.set_location(egbase, 0);
+		ware.set_location(egbase, nullptr);
 		ware.destroy     (egbase);
 	}
 

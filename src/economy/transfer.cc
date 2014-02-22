@@ -41,7 +41,7 @@ Transfer::Transfer(Game & game, Request & req, WareInstance & it) :
 	m_request(&req),
 	m_destination(&req.target()),
 	m_ware(&it),
-	m_worker(0)
+	m_worker(nullptr)
 {
 	m_ware->set_transfer(game, *this);
 }
@@ -50,7 +50,7 @@ Transfer::Transfer(Game & game, Request & req, Worker & w) :
 	m_game(game),
 	m_request(&req),
 	m_destination(&req.target()),
-	m_ware(0),
+	m_ware(nullptr),
 	m_worker(&w)
 {
 	m_worker->start_task_transfer(game, this);
@@ -62,9 +62,9 @@ Transfer::Transfer(Game & game, Request & req, Worker & w) :
  */
 Transfer::Transfer(Game & game, WareInstance & w) :
 	m_game(game),
-	m_request(0),
+	m_request(nullptr),
 	m_ware(&w),
-	m_worker(0)
+	m_worker(nullptr)
 {
 }
 
@@ -74,8 +74,8 @@ Transfer::Transfer(Game & game, WareInstance & w) :
  */
 Transfer::Transfer(Game & game, Worker & w) :
 	m_game(game),
-	m_request(0),
-	m_ware(0),
+	m_request(nullptr),
+	m_ware(nullptr),
 	m_worker(&w)
 {
 }
@@ -143,7 +143,7 @@ PlayerImmovable * Transfer::get_next_step
 	if (!location || !location->get_economy()) {
 		tlog("no location or economy -> fail\n");
 		success = false;
-		return 0;
+		return nullptr;
 	}
 
 	PlayerImmovable * destination =
@@ -151,13 +151,13 @@ PlayerImmovable * Transfer::get_next_step
 	if (!destination || destination->get_economy() != location->get_economy()) {
 		tlog("destination disappeared or economy mismatch -> fail\n");
 		success = false;
-		return 0;
+		return nullptr;
 	}
 
 	success = true;
 
 	if (location == destination)
-		return 0;
+		return nullptr;
 
 	Flag & locflag  = location->base_flag();
 	Flag & destflag = destination->base_flag();
@@ -170,7 +170,7 @@ PlayerImmovable * Transfer::get_next_step
 		tlog("destination appears to have become split from current location -> fail\n");
 		Economy::check_split(locflag, destflag);
 		success = false;
-		return 0;
+		return nullptr;
 	}
 
 	if (m_route.get_nrsteps() >= 1)
@@ -253,11 +253,11 @@ void Transfer::has_finished()
 		assert(destination);
 		if (m_worker) {
 			destination->receive_worker(m_game, *m_worker);
-			m_worker = 0;
+			m_worker = nullptr;
 		} else {
 			destination->receive_ware(m_game, m_ware->descr_index());
 			m_ware->destroy(m_game);
-			m_ware = 0;
+			m_ware = nullptr;
 		}
 
 		delete this;

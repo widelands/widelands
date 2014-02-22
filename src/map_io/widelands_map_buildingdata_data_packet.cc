@@ -132,7 +132,7 @@ void Map_Buildingdata_Data_Packet::Read
 										 leaver_serial, e.what());
 								}
 							else
-								*i.current = 0;
+								*i.current = nullptr;
 					}
 
 					building.m_leave_time = fr.Unsigned32();
@@ -146,7 +146,7 @@ void Map_Buildingdata_Data_Packet::Read
 								("leave allow item (%u): %s", leaver_serial, e.what());
 						}
 					else {
-						building.m_leave_allow = 0;
+						building.m_leave_allow = nullptr;
 					}
 					if (packet_version >= 3) {
 						// For former versions, the former buildings vector
@@ -313,7 +313,7 @@ void Map_Buildingdata_Data_Packet::read_partially_finished_building
 					 wwWORKER);
 				pfb.m_builder_request->Read(fr, game, mol);
 			} else
-				pfb.m_builder_request = 0;
+				pfb.m_builder_request = nullptr;
 
 			if (uint32_t const builder_serial = fr.Unsigned32()) {
 				try {
@@ -323,7 +323,7 @@ void Map_Buildingdata_Data_Packet::read_partially_finished_building
 						("builder (%u): %s", builder_serial, e.what());
 				}
 			} else
-				pfb.m_builder = 0;
+				pfb.m_builder = nullptr;
 
 			try {
 				uint16_t const size = fr.Unsigned16();
@@ -412,7 +412,7 @@ void Map_Buildingdata_Data_Packet::read_constructionsite_v1
 			 wwWORKER);
 		constructionsite.m_builder_request->Read(fr, game, mol);
 	} else
-		constructionsite.m_builder_request = 0;
+		constructionsite.m_builder_request = nullptr;
 
 	if (uint32_t const builder_serial = fr.Unsigned32()) {
 		try {
@@ -422,7 +422,7 @@ void Map_Buildingdata_Data_Packet::read_constructionsite_v1
 				("builder (%u): %s", builder_serial, e.what());
 		}
 	} else
-		constructionsite.m_builder = 0;
+		constructionsite.m_builder = nullptr;
 
 	try {
 		uint16_t const size = fr.Unsigned16();
@@ -1154,7 +1154,7 @@ void Map_Buildingdata_Data_Packet::read_trainingsite
 			read_productionsite(trainingsite, fr, game, mol);
 
 			delete trainingsite.m_soldier_request;
-			trainingsite.m_soldier_request = 0;
+			trainingsite.m_soldier_request = nullptr;
 			if (fr.Unsigned8()) {
 				trainingsite.m_soldier_request =
 					new Request

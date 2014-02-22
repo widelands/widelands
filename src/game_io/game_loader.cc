@@ -53,7 +53,7 @@ Game_Loader::~Game_Loader() {
  */
 int32_t Game_Loader::preload_game(Game_Preload_Data_Packet & mp) {
 	// Load elemental data block
-	mp.Read(m_fs, m_game, 0);
+	mp.Read(m_fs, m_game, nullptr);
 
 	return 0;
 }

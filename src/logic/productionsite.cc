@@ -418,15 +418,15 @@ void ProductionSite::cleanup(Editor_Game_Base & egbase)
 	for (uint32_t i = descr().nr_working_positions(); i;) {
 		--i;
 		delete m_working_positions[i].worker_request;
-		m_working_positions[i].worker_request = 0;
+		m_working_positions[i].worker_request = nullptr;
 		Worker * const w = m_working_positions[i].worker;
 
 		//  Ensure we do not re-request the worker when remove_worker is called.
-		m_working_positions[i].worker = 0;
+		m_working_positions[i].worker = nullptr;
 
 		// Actually remove the worker
 		if (egbase.objects().object_still_available(w))
-			w->set_location(0);
+			w->set_location(nullptr);
 	}
 
 	// Cleanup the wares queues
@@ -469,7 +469,7 @@ int ProductionSite::warp_worker
 			worker.start_task_idle(*game, 0, -1);
 		current->worker = &worker;
 		delete current->worker_request;
-		current->worker_request = 0;
+		current->worker_request = nullptr;
 		assigned = true;
 		break;
 	}
@@ -497,7 +497,7 @@ void ProductionSite::remove_worker(Worker & w)
 				// do not request the type of worker that is currently assigned - maybe a trained worker was
 				// evicted to make place for a level 0 worker.
 				// Therefore we again request the worker from the Working_Position of descr()
-				*wp = Working_Position(&request_worker(worker_index), 0);
+				*wp = Working_Position(&request_worker(worker_index), nullptr);
 				Building::remove_worker(w);
 				return;
 			}
@@ -550,7 +550,7 @@ void ProductionSite::request_worker_callback
 			if (wp->worker_request->get_index() == idx) {
 				// Place worker
 				delete &rq;
-				*wp = Working_Position(0, w);
+				*wp = Working_Position(nullptr, w);
 				worker_placed = true;
 			} else {
 				// Set new request for this slot
@@ -571,7 +571,7 @@ void ProductionSite::request_worker_callback
 				if (!wp->worker && !worker_placed)
 					if (wp->worker_request->get_index() == idx) {
 						delete wp->worker_request;
-						*wp = Working_Position(0, w);
+						*wp = Working_Position(nullptr, w);
 						worker_placed = true;
 						break;
 					}

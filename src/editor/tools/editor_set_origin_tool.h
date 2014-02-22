@@ -29,17 +29,17 @@ struct Editor_Set_Origin_Tool : public Editor_Tool {
 
 	int32_t handle_click_impl
 		(Widelands::Map & map, Widelands::Node_and_Triangle<> center,
-		 Editor_Interactive & eia, Editor_Action_Args & args);
+		 Editor_Interactive & eia, Editor_Action_Args & args) override;
 
 	int32_t handle_undo_impl
 		(Widelands::Map & map, Widelands::Node_and_Triangle<> center,
-		 Editor_Interactive & parent, Editor_Action_Args & args);
+		 Editor_Interactive & parent, Editor_Action_Args & args) override;
 
-	Editor_Action_Args format_args_impl(Editor_Interactive & parent);
+	Editor_Action_Args format_args_impl(Editor_Interactive & parent) override;
 
-	char const * get_sel_impl() const {return "pics/fsel.png";}
+	char const * get_sel_impl() const override {return "pics/fsel.png";}
 
-	bool has_size_one() const {return true;}
+	bool has_size_one() const override {return true;}
 };
 
 #endif

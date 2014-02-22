@@ -139,7 +139,7 @@ Interactive_Spectator::~Interactive_Spectator() {
  */
 Widelands::Player * Interactive_Spectator::get_player() const
 {
-	return 0;
+	return nullptr;
 }
 
 
@@ -237,7 +237,7 @@ void Interactive_Spectator::node_action() {
 		return;
 
 	//  everything else can bring up the temporary dialog
-	show_field_action(this, 0, &m_fieldaction);
+	show_field_action(this, nullptr, &m_fieldaction);
 }
 
 

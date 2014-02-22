@@ -500,7 +500,7 @@ void Editor_Interactive::select_tool
 		Widelands::Map & map = egbase().map();
 		//  A new tool has been selected. Remove all registered overlay callback
 		//  functions.
-		map.overlay_manager().register_overlay_callback_function(0, 0);
+		map.overlay_manager().register_overlay_callback_function(nullptr, nullptr);
 		map.recalc_whole_map();
 
 	}
@@ -579,7 +579,7 @@ void Editor_Interactive::change_world() {
 
 
 void Editor_Interactive::run_editor(const std::string & filename, const std::string& script_to_run) {
-	Widelands::Editor_Game_Base editor(0);
+	Widelands::Editor_Game_Base editor(nullptr);
 	Editor_Interactive eia(editor);
 	editor.set_ibase(&eia); // TODO get rid of this
 	{

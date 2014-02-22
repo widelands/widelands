@@ -148,7 +148,7 @@ const static struct luaL_Reg globals [] = {
 	{"use", &L_use},
 	{"get_build_id", &L_get_build_id},
 	{"_", &L__},
-	{0, 0}
+	{nullptr, nullptr}
 };
 
 void luaopen_globals(lua_State * L) {

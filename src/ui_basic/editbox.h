@@ -57,11 +57,11 @@ struct EditBox : public Panel {
 
 	void activate_history(bool activate) {m_history_active = activate;}
 
-	bool handle_mousepress(Uint8 btn, int32_t x, int32_t y);
-	bool handle_mouserelease(Uint8 btn, int32_t x, int32_t y);
-	bool handle_key(bool down, SDL_keysym);
+	bool handle_mousepress(Uint8 btn, int32_t x, int32_t y) override;
+	bool handle_mouserelease(Uint8 btn, int32_t x, int32_t y) override;
+	bool handle_key(bool down, SDL_keysym) override;
 
-	void draw(RenderTarget &);
+	void draw(RenderTarget &) override;
 
 private:
 	std::unique_ptr<EditBoxImpl> m;

@@ -46,7 +46,7 @@ void Players_Manager::cleanup()
 	const Player * const * const players_end = m_players + MAX_PLAYERS;
 	for (Player * * p = m_players; p < players_end; ++p) {
 		delete *p;
-		*p = 0;
+		*p = nullptr;
 	}
 	m_number_of_players = 0;
 }
@@ -60,7 +60,7 @@ void Players_Manager::remove_player(Player_Number plnum)
 	Player * & p = m_players[plnum - 1];
 	if (p) {
 		delete p;
-		p = 0;
+		p = nullptr;
 		if (plnum <= UserSettings::highestPlayernum()) {
 			m_number_of_players--;
 		}

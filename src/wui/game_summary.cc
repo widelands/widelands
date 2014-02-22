@@ -125,7 +125,7 @@ void GameSummaryScreen::fill_data()
 		= m_game.player_manager()->get_players_end_status();
 	bool local_in_game = false;
 	bool local_won = false;
-	Widelands::Player* single_won = NULL;
+	Widelands::Player* single_won = nullptr;
 	uint8_t team_won = 0;
 	Interactive_Player* ipl = m_game.get_ipl();
 

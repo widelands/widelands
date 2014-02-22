@@ -29,7 +29,7 @@
  * Worker_Descr and so on.
  */
 template <typename T> struct Descr_Maintainer {
-	Descr_Maintainer() : capacity(0), nitemsw(0), items(0) {}
+	Descr_Maintainer() : capacity(0), nitemsw(0), items(nullptr) {}
 	~Descr_Maintainer();
 
 	static typename T::Index invalid_index() {
@@ -59,7 +59,7 @@ template <typename T> struct Descr_Maintainer {
 	}
 
 	T * get(int32_t const idx) const {
-		return idx >= 0 and idx < static_cast<int32_t>(nitemsw) ? items[idx] : 0;
+		return idx >= 0 and idx < static_cast<int32_t>(nitemsw) ? items[idx] : nullptr;
 	}
 
 private:
@@ -93,7 +93,7 @@ T * Descr_Maintainer<T>::exists(char const * const name) const {
 	for (typename T::Index i = 0; i < nitemsw; ++i)
 		if (name == items[i]->name())
 			return items[i];
-	return 0;
+	return nullptr;
 }
 
 template<typename T> Descr_Maintainer<T>::~Descr_Maintainer() {
@@ -132,7 +132,7 @@ private Descr_Maintainer<T>
 			T_Index(static_cast<typename T_Index::value_t>(idx));
 	}
 	T * get(T_Index const idx) const {
-		return idx ? Descr_Maintainer<T>::get(idx.value()) : 0;
+		return idx ? Descr_Maintainer<T>::get(idx.value()) : nullptr;
 	}
 };
 

@@ -76,7 +76,7 @@ WarehouseSupply::~WarehouseSupply()
 			("WarehouseSupply::~WarehouseSupply: Warehouse %u still belongs to "
 			 "an economy",
 			 m_warehouse->serial());
-		set_economy(0);
+		set_economy(nullptr);
 	}
 
 	// We're removed from the Economy. Therefore, the wares can simply
@@ -287,7 +287,7 @@ Warehouse::Warehouse(const Warehouse_Descr & warehouse_descr) :
 	Building(warehouse_descr),
 	m_supply(new WarehouseSupply(this)),
 	m_next_military_act(0),
-	m_portdock(0)
+	m_portdock(nullptr)
 {
 	uint8_t nr_worker_types_without_cost =
 		warehouse_descr.tribe().worker_types_without_cost().size();
@@ -872,7 +872,7 @@ void Warehouse::incorporate_worker(Editor_Game_Base & egbase, Worker* w)
 		m_incorporated_workers[worker_index] = std::vector<Worker *>();
 	m_incorporated_workers[worker_index].push_back(w);
 
-	w->set_location(0); //  no longer in an economy
+	w->set_location(nullptr); //  no longer in an economy
 
 	if (upcast(Game, game, &egbase)) {
 		//  Bind the worker into this house, hide him on the map.
@@ -1080,7 +1080,7 @@ std::vector<uint32_t> Warehouse::calc_available_for_worker
  */
 void Warehouse::plan_workers(Game & game, Ware_Index index, uint32_t amount)
 {
-	PlannedWorkers * pw = 0;
+	PlannedWorkers * pw = nullptr;
 
 	container_iterate(std::vector<PlannedWorkers>, m_planned_workers, i) {
 		if (i.current->index == index) {
@@ -1225,7 +1225,7 @@ void Warehouse::aggressor(Soldier & enemy)
 	if
 		(game.map().find_bobs
 		 	(Area<FCoords>(map.get_fcoords(base_flag().get_position()), 2),
-		 	 0,
+		 	 nullptr,
 		 	 FindBobEnemySoldier(&owner())))
 		return;
 

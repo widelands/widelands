@@ -42,7 +42,7 @@ Map_Object_Descr g_portdock_descr("portdock", "Port Dock");
 
 PortDock::PortDock(Warehouse* wh) :
 	PlayerImmovable(g_portdock_descr),
-	m_fleet(0),
+	m_fleet(nullptr),
 	m_warehouse(wh),
 	m_need_ship(false),
 	m_expedition_ready(false)
@@ -121,7 +121,7 @@ PortDock * PortDock::get_dock(Flag & flag) const
 {
 	if (m_fleet)
 		return m_fleet->get_dock(flag);
-	return 0;
+	return nullptr;
 }
 
 /**

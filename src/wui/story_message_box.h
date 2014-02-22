@@ -30,7 +30,7 @@ struct Story_Message_Box : public UI::Window {
 		 const std::string &, const std::string &, const std::string &,
 		 int32_t gposx, int32_t gposy, uint32_t w, uint32_t h);
 
-	bool handle_mousepress(Uint8 btn, int32_t mx, int32_t my);
+	bool handle_mousepress(Uint8 btn, int32_t mx, int32_t my) override;
 
 private:
 	void clicked_ok();

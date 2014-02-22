@@ -604,7 +604,7 @@ void MilitarySite::remove_worker(Worker & w)
 	ProductionSite::remove_worker(w);
 
 	if (upcast(Soldier, soldier, &w))
-		popSoldierJob(soldier, 0, 0);
+		popSoldierJob(soldier, nullptr, nullptr);
 
 	update_soldier_request();
 }
@@ -761,7 +761,7 @@ void MilitarySite::aggressor(Soldier & enemy)
 	if
 		(map.find_bobs
 		 	(Area<FCoords>(map.get_fcoords(base_flag().get_position()), 2),
-		 	 0,
+		 	 nullptr,
 		 	 FindBobEnemySoldier(&owner())))
 		return;
 
@@ -793,7 +793,7 @@ bool MilitarySite::attack(Soldier & enemy)
 	Game & game = ref_cast<Game, Editor_Game_Base>(owner().egbase());
 
 	std::vector<Soldier *> present = presentSoldiers();
-	Soldier * defender = 0;
+	Soldier * defender = nullptr;
 
 	if (!present.empty()) {
 		// Find soldier with greatest hitpoints
@@ -1029,7 +1029,7 @@ Map_Object * MilitarySite::popSoldierJob
 			m_soldierjobs.erase(i.current);
 			return enemy;
 		}
-	return 0;
+	return nullptr;
 }
 
 

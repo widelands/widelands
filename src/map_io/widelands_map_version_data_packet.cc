@@ -42,7 +42,7 @@ void Map_Version_Data_Packet::Read
 		return;
 
 	Profile prof;
-	try {prof.read("version", 0, fs);} catch (...)
+	try {prof.read("version", nullptr, fs);} catch (...)
 		{
 			Map & map = egbase.map();
 			map.m_map_version.m_map_version_timestamp = 0;
@@ -122,7 +122,7 @@ void Map_Version_Data_Packet::Write
 	globs.set_string("map_creator_version", map.m_map_version.m_map_creator_version);
 	globs.set_int("map_version_major", map.m_map_version.m_map_version_major);
 	globs.set_int("map_version_minor", 1 + map.m_map_version.m_map_version_minor);
-	globs.set_int("map_version_timestamp", static_cast<uint32_t>(time(NULL)));
+	globs.set_int("map_version_timestamp", static_cast<uint32_t>(time(nullptr)));
 	globs.set_int("packet_version", CURRENT_PACKET_VERSION);
 	globs.set_int("packet_compatibility", CURRENT_PACKET_VERSION);
 

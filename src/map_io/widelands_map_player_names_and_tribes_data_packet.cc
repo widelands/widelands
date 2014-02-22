@@ -57,7 +57,7 @@ void Map_Player_Names_And_Tribes_Data_Packet::Pre_Read
 		return;
 
 	Profile prof;
-	prof.read("player_names", 0, fs);
+	prof.read("player_names", nullptr, fs);
 
 	try {
 		int32_t const packet_version =

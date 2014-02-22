@@ -33,13 +33,13 @@ public:
 
 	int32_t handle_click_impl
 		(Widelands::Map & map, Widelands::Node_and_Triangle<> center,
-		 Editor_Interactive & parent, Editor_Action_Args & args);
+		 Editor_Interactive & parent, Editor_Action_Args & args) override;
 
 	int32_t handle_undo_impl
 		(Widelands::Map & map, Widelands::Node_and_Triangle<> center,
-		 Editor_Interactive & parent, Editor_Action_Args & args);
+		 Editor_Interactive & parent, Editor_Action_Args & args) override;
 
-	char const * get_sel_impl() const {return FSEL_EUPS_FILENAME;}
+	char const * get_sel_impl() const override {return FSEL_EUPS_FILENAME;}
 };
 
 
@@ -50,13 +50,13 @@ public:
 
 	int32_t handle_click_impl
 		(Widelands::Map & map, Widelands::Node_and_Triangle<> center,
-		 Editor_Interactive & parent, Editor_Action_Args & args);
+		 Editor_Interactive & parent, Editor_Action_Args & args) override;
 
 	int32_t handle_undo_impl
 		(Widelands::Map & map, Widelands::Node_and_Triangle<> center,
-		 Editor_Interactive & parent, Editor_Action_Args & args);
+		 Editor_Interactive & parent, Editor_Action_Args & args) override;
 
-	char const * get_sel_impl() const {return FSEL_ESPS_FILENAME;}
+	char const * get_sel_impl() const override {return FSEL_ESPS_FILENAME;}
 };
 
 int32_t Editor_Tool_Set_Port_Space_Callback

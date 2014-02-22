@@ -35,10 +35,10 @@ void Cmd_LuaCoroutine::execute (Game & game) {
 		int rv = m_cr->resume(&sleeptime);
 		if (rv == LuaCoroutine::YIELDED) {
 			game.enqueue_command(new Widelands::Cmd_LuaCoroutine(sleeptime, m_cr));
-			m_cr = 0;  // Remove our ownership so we don't delete.
+			m_cr = nullptr;  // Remove our ownership so we don't delete.
 		} else if (rv == LuaCoroutine::DONE) {
 			delete m_cr;
-			m_cr = 0;
+			m_cr = nullptr;
 		}
 	} catch (LuaError & e) {
 		log("Error in Lua Coroutine\n");

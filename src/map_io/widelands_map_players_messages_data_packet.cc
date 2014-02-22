@@ -45,7 +45,7 @@ void Map_Players_Messages_Data_Packet::Read
 			char filename[FILENAME_SIZE];
 			snprintf(filename, sizeof(filename), FILENAME_TEMPLATE, p);
 			Profile prof;
-			try {prof.read(filename, 0, fs);} catch (...) {continue;}
+			try {prof.read(filename, nullptr, fs);} catch (...) {continue;}
 			prof.get_safe_section("global").get_positive
 				("packet_version", CURRENT_PACKET_VERSION);
 			MessageQueue & messages = player->messages();

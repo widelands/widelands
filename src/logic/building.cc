@@ -142,7 +142,7 @@ Building_Descr::Building_Descr
 			if (build_s->get_int("fps", -1) != -1)
 				throw wexception("fps defined for build animation!");
 			if (!is_animation_known("build"))
-				add_animation("build", g_anim.get(directory.c_str(), *build_s, 0));
+				add_animation("build", g_anim.get(directory.c_str(), *build_s, nullptr));
 		}
 
 		// Get costs
@@ -168,13 +168,13 @@ Building_Descr::Building_Descr
 	{ //  parse basic animation data
 		Section & idle_s = prof.get_safe_section("idle");
 		if (!is_animation_known("idle"))
-			add_animation("idle", g_anim.get(directory.c_str(), idle_s, 0));
+			add_animation("idle", g_anim.get(directory.c_str(), idle_s, nullptr));
 		if (Section * unoccupied = prof.get_section("unoccupied"))
 			if (!is_animation_known("unoccupied"))
-				add_animation("unoccupied", g_anim.get(directory.c_str(), *unoccupied, 0));
+				add_animation("unoccupied", g_anim.get(directory.c_str(), *unoccupied, nullptr));
 		if (Section * empty = prof.get_section("empty"))
 			if (!is_animation_known("empty"))
-				add_animation("empty", g_anim.get(directory.c_str(), *empty, 0));
+				add_animation("empty", g_anim.get(directory.c_str(), *empty, nullptr));
 	}
 
 	m_vision_range = global_s.get_int("vision_range");
@@ -269,8 +269,8 @@ Implementation
 
 Building::Building(const Building_Descr & building_descr) :
 PlayerImmovable(building_descr),
-m_optionswindow(0),
-m_flag         (0),
+m_optionswindow(nullptr),
+m_flag         (nullptr),
 m_anim(0),
 m_animstart(0),
 m_leave_time(0),
@@ -632,7 +632,7 @@ bool Building::get_building_work(Game &, Worker & worker, bool)
 bool Building::leave_check_and_wait(Game & game, Worker & w)
 {
 	if (&w == m_leave_allow.get(game)) {
-		m_leave_allow = 0;
+		m_leave_allow = nullptr;
 		return true;
 	}
 

@@ -90,7 +90,7 @@ public:
 	void select(uint32_t);
 	void move_selection(int32_t offset);
 	struct No_Selection : public std::exception {
-		char const * what() const throw () {
+		char const * what() const throw () override {
 			return "UI::Table<Entry>: No selection";
 		}
 	};
@@ -193,7 +193,7 @@ public:
 		 uint32_t End   = std::numeric_limits<uint32_t>::max());
 	void remove(uint32_t);
 
-	Entry_Record & add(void * entry = 0, bool select = false);
+	Entry_Record & add(void * entry = nullptr, bool select = false);
 
 	uint32_t size() const {return m_entry_records.size();}
 	void * operator[](uint32_t const i) const {
@@ -217,7 +217,7 @@ public:
 	void select(uint32_t);
 	void move_selection(int32_t offset);
 	struct No_Selection : public std::exception {
-		char const * what() const throw () {
+		char const * what() const throw () override {
 			return "UI::Table<void *>: No selection";
 		}
 	};
@@ -238,10 +238,10 @@ public:
 	uint32_t get_eff_w     () const {return get_w();}
 
 	// Drawing and event handling
-	void draw(RenderTarget &);
-	bool handle_mousepress  (Uint8 btn, int32_t x, int32_t y);
-	bool handle_mouserelease(Uint8 btn, int32_t x, int32_t y);
-	virtual bool handle_key(bool down, SDL_keysym code);
+	void draw(RenderTarget &) override;
+	bool handle_mousepress  (Uint8 btn, int32_t x, int32_t y) override;
+	bool handle_mouserelease(Uint8 btn, int32_t x, int32_t y) override;
+	virtual bool handle_key(bool down, SDL_keysym code) override;
 
 private:
 	bool default_compare_checkbox(uint32_t column, uint32_t a, uint32_t b);

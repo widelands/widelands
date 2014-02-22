@@ -72,10 +72,10 @@ Player
 */
 const char L_Player::className[] = "Player";
 const MethodType<L_Player> L_Player::Methods[] = {
-	{0, 0},
+	{nullptr, nullptr},
 };
 const PropertyType<L_Player> L_Player::Properties[] = {
-	{0, 0, 0},
+	{nullptr, nullptr, nullptr},
 };
 
 
@@ -86,7 +86,7 @@ const PropertyType<L_Player> L_Player::Properties[] = {
  */
 
 const static struct luaL_Reg wleditor [] = {
-	{0, 0}
+	{nullptr, nullptr}
 };
 
 void luaopen_wleditor(lua_State * const L) {

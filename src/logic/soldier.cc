@@ -788,7 +788,7 @@ private:
 Bob::Task const Soldier::taskAttack = {
 	"attack",
 	static_cast<Bob::Ptr>(&Soldier::attack_update),
-	0,
+	nullptr,
 	static_cast<Bob::Ptr>(&Soldier::attack_pop),
 	true
 };
@@ -832,7 +832,7 @@ void Soldier::attack_update(Game & game, State & state)
 			signal_handled();
 			if (state.objvar1.get(game)) {
 				molog("[attack] failed to reach enemy\n");
-				state.objvar1 = 0;
+				state.objvar1 = nullptr;
 			} else {
 				molog("[attack] unexpected fail\n");
 				return pop_task(game);
@@ -993,7 +993,7 @@ void Soldier::attack_update(Game & game, State & state)
 		// Injured soldiers will try to return to safe site at home.
 		if (state.ui32var3 > get_current_hitpoints() and defenders) {
 			state.coords = Coords::Null();
-			state.objvar1 = 0;
+			state.objvar1 = nullptr;
 		}
 		// The old militarysite gets replaced by a new one, so if "enemy" is not
 		// valid anymore, we either "conquered" the new building, or it was
@@ -1003,7 +1003,7 @@ void Soldier::attack_update(Game & game, State & state)
 			upcast(MilitarySite, newsite, newimm);
 			if (newsite and (&newsite->owner() == &owner())) {
 				if (upcast(SoldierControl, ctrl, newsite)) {
-					state.objvar1 = 0;
+					state.objvar1 = nullptr;
 					// We may also have our location destroyed in between
 					if
 						(ctrl->stationedSoldiers().size() < ctrl->soldierCapacity() and
@@ -1040,7 +1040,7 @@ void Soldier::attack_update(Game & game, State & state)
 				("[attack] failed to move towards building flag, cancel attack "
 				 "and return home!\n");
 			state.coords = Coords::Null();
-			state.objvar1 = 0;
+			state.objvar1 = nullptr;
 			state.ivar2 = 1;
 			return schedule_act(game, 10);
 		}
@@ -1071,7 +1071,7 @@ struct FindBobSoldierAttackingPlayer : public FindBob {
 		player(_player),
 		game(_game) {}
 
-	bool accept(Bob * const bob) const
+	bool accept(Bob * const bob) const override
 	{
 		if (upcast(Soldier, soldier, bob)) {
 			return
@@ -1101,7 +1101,7 @@ struct FindBobSoldierAttackingPlayer : public FindBob {
 Bob::Task const Soldier::taskDefense = {
 	"defense",
 	static_cast<Bob::Ptr>(&Soldier::defense_update),
-	0,
+	nullptr,
 	static_cast<Bob::Ptr>(&Soldier::defense_pop),
 	true
 };
@@ -1347,8 +1347,8 @@ void Soldier::defense_pop(Game & game, State &)
 Bob::Task const Soldier::taskMoveInBattle = {
 	"moveInBattle",
 	static_cast<Bob::Ptr>(&Soldier::move_in_battle_update),
-	0,
-	0,
+	nullptr,
+	nullptr,
 	true
 };
 
@@ -1430,7 +1430,7 @@ bool Soldier::stayHome()
 Bob::Task const Soldier::taskBattle = {
 	"battle",
 	static_cast<Bob::Ptr>(&Soldier::battle_update),
-	0,
+	nullptr,
 	static_cast<Bob::Ptr>(&Soldier::battle_pop),
 	true
 };
@@ -1627,7 +1627,7 @@ void Soldier::battle_pop(Game & game, State &)
 Bob::Task const Soldier::taskDie = {
 	"die",
 	static_cast<Bob::Ptr>(&Soldier::die_update),
-	0,
+	nullptr,
 	static_cast<Bob::Ptr>(&Soldier::die_pop),
 	true
 };
@@ -1638,7 +1638,7 @@ void Soldier::start_task_die(Game & game)
 	top_state().ivar1 = game.get_gametime() + 1000;
 
 	// Dead soldier is not owned by a location
-	set_location(0);
+	set_location(nullptr);
 
 	start_task_idle
 			(game,
@@ -1677,7 +1677,7 @@ void Soldier::die_pop(Game & game, State &)
  * taskDefense.
  */
 struct FindBobSoldierOnBattlefield : public FindBob {
-	bool accept(Bob * const bob) const
+	bool accept(Bob * const bob) const override
 	{
 		if (upcast(Soldier, soldier, bob))
 			return
@@ -1718,7 +1718,7 @@ bool Soldier::checkNodeBlocked
 		return false; // we can always walk home
 	}
 
-	Soldier * foundsoldier = 0;
+	Soldier * foundsoldier = nullptr;
 	bool foundbattle = false;
 	bool foundopponent = false;
 	bool multiplesoldiers = false;

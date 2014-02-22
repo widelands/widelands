@@ -47,7 +47,7 @@ void Map_Extradata_Data_Packet::Read
 		return;
 
 	Profile prof;
-	try {prof.read("extra_data", 0, fs);} catch (...) {return;}
+	try {prof.read("extra_data", nullptr, fs);} catch (...) {return;}
 
 	try {
 		int32_t const packet_version =

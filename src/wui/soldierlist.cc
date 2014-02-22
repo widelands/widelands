@@ -51,16 +51,16 @@ struct SoldierPanel : UI::Panel {
 
 	Widelands::Editor_Game_Base & egbase() const {return m_egbase;}
 
-	virtual void think();
-	virtual void draw(RenderTarget &);
+	virtual void think() override;
+	virtual void draw(RenderTarget &) override;
 
 	void set_mouseover(const SoldierFn & fn);
 	void set_click(const SoldierFn & fn);
 
 protected:
-	virtual void handle_mousein(bool inside);
-	virtual bool handle_mousemove(Uint8 state, int32_t x, int32_t y, int32_t xdiff, int32_t ydiff);
-	virtual bool handle_mousepress(Uint8 btn, int32_t x, int32_t y);
+	virtual void handle_mousein(bool inside) override;
+	virtual bool handle_mousemove(Uint8 state, int32_t x, int32_t y, int32_t xdiff, int32_t ydiff) override;
+	virtual bool handle_mousepress(Uint8 btn, int32_t x, int32_t y) override;
 
 private:
 	Point calc_pos(uint32_t row, uint32_t col) const;
@@ -184,7 +184,7 @@ void SoldierPanel::think()
 			if (it != soldierlist.end())
 				soldierlist.erase(it);
 			else
-				soldier = 0;
+				soldier = nullptr;
 		}
 
 		if (!soldier) {
@@ -319,13 +319,13 @@ const Soldier * SoldierPanel::find_soldier(int32_t x, int32_t y) const
 			return icon_it.current->soldier.get(egbase());
 	}
 
-	return 0;
+	return nullptr;
 }
 
 void SoldierPanel::handle_mousein(bool inside)
 {
 	if (!inside && m_mouseover_fn)
-		m_mouseover_fn(0);
+		m_mouseover_fn(nullptr);
 }
 
 bool SoldierPanel::handle_mousemove
@@ -368,7 +368,7 @@ private:
 	void mouseover(const Soldier * soldier);
 	void eject(const Soldier * soldier);
 	void set_soldier_preference(int32_t changed_to);
-	void think();
+	void think() override;
 
 	Interactive_GameBase & m_igb;
 	Widelands::Building & m_building;

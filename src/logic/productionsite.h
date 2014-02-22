@@ -60,7 +60,7 @@ struct ProductionSite_Descr : public Building_Descr {
 		 const Tribe_Descr &);
 	virtual ~ProductionSite_Descr();
 
-	virtual Building & create_object() const;
+	virtual Building & create_object() const override;
 
 	uint32_t nr_working_positions() const {
 		uint32_t result = 0;
@@ -129,13 +129,13 @@ public:
 	ProductionSite(const ProductionSite_Descr & descr);
 	virtual ~ProductionSite();
 
-	void log_general_info(const Editor_Game_Base &);
+	void log_general_info(const Editor_Game_Base &) override;
 
 	bool is_stopped() const {return m_is_stopped;}
 	void set_stopped(bool);
 
 	struct Working_Position {
-		Working_Position(Request * const wr = 0, Worker * const w = 0)
+		Working_Position(Request * const wr = nullptr, Worker * const w = nullptr)
 			: worker_request(wr), worker(w)
 		{}
 		Request * worker_request;
@@ -146,25 +146,25 @@ public:
 		return m_working_positions;
 	}
 
-	virtual std::string get_statistics_string();
+	virtual std::string get_statistics_string() override;
 	virtual bool has_workers(Building_Index targetSite, Game & game);
 	uint8_t get_statistics_percent() {return m_last_stat_percent;}
 	char const * result_string() const {return m_result_buffer;}
 
-	virtual WaresQueue & waresqueue(Ware_Index);
+	virtual WaresQueue & waresqueue(Ware_Index) override;
 
-	char const * type_name() const {return "productionsite";}
-	virtual void init(Editor_Game_Base &);
-	virtual void cleanup(Editor_Game_Base &);
-	virtual void act(Game &, uint32_t data);
+	char const * type_name() const override {return "productionsite";}
+	virtual void init(Editor_Game_Base &) override;
+	virtual void cleanup(Editor_Game_Base &) override;
+	virtual void act(Game &, uint32_t data) override;
 
-	virtual void remove_worker(Worker &);
+	virtual void remove_worker(Worker &) override;
 	int warp_worker(Editor_Game_Base &, const Worker_Descr & wd);
 
-	virtual bool fetch_from_flag(Game &);
-	virtual bool get_building_work(Game &, Worker &, bool success);
+	virtual bool fetch_from_flag(Game &) override;
+	virtual bool get_building_work(Game &, Worker &, bool success) override;
 
-	virtual void set_economy(Economy *);
+	virtual void set_economy(Economy *) override;
 
 	typedef std::vector<WaresQueue *> Input_Queues;
 	const Input_Queues & warequeues() const {return m_input_queues;}
@@ -176,7 +176,7 @@ public:
 
 protected:
 	virtual void create_options_window
-		(Interactive_GameBase &, UI::Window * & registry);
+		(Interactive_GameBase &, UI::Window * & registry) override;
 
 protected:
 	struct State {
@@ -194,7 +194,7 @@ protected:
 		/*@}*/
 
 		State() :
-			program(0),
+			program(nullptr),
 			ip(0),
 			phase(0),
 			flags(0),
@@ -212,7 +212,7 @@ protected:
 	virtual void find_and_start_next_program(Game &);
 
 	State & top_state() {assert(m_stack.size()); return *m_stack.rbegin();}
-	State * get_state() {return m_stack.size() ? &*m_stack.rbegin() : 0;}
+	State * get_state() {return m_stack.size() ? &*m_stack.rbegin() : nullptr;}
 	void program_act(Game &);
 
 	/// \param phase can be used to pass a value on to the next step in the

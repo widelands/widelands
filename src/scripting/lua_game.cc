@@ -97,7 +97,7 @@ const MethodType<L_Player> L_Player::Methods[] = {
 	METHOD(L_Player, get_suitability),
 	METHOD(L_Player, allow_workers),
 	METHOD(L_Player, switchplayer),
-	{0, 0},
+	{nullptr, nullptr},
 };
 const PropertyType<L_Player> L_Player::Properties[] = {
 	PROP_RO(L_Player, name),
@@ -109,7 +109,7 @@ const PropertyType<L_Player> L_Player::Properties[] = {
 	PROP_RO(L_Player, inbox),
 	PROP_RW(L_Player, team),
 	PROP_RW(L_Player, see_all),
-	{0, 0, 0},
+	{nullptr, nullptr, nullptr},
 };
 
 /*
@@ -582,7 +582,7 @@ int L_Player::add_objective(lua_State * L) {
 	Manager<Objective> & mom = map->mom();
 
 	std::string name = luaL_checkstring(L, 2);
-	if (mom[name] != 0)
+	if (mom[name] != nullptr)
 		return
 			report_error
 				(L, "An objective with the name '%s' already exists!", name.c_str()
@@ -973,7 +973,7 @@ const char L_Objective::className[] = "Objective";
 const MethodType<L_Objective> L_Objective::Methods[] = {
 	METHOD(L_Objective, remove),
 	METHOD(L_Objective, __eq),
-	{0, 0},
+	{nullptr, nullptr},
 };
 const PropertyType<L_Objective> L_Objective::Properties[] = {
 	PROP_RO(L_Objective, name),
@@ -981,7 +981,7 @@ const PropertyType<L_Objective> L_Objective::Properties[] = {
 	PROP_RW(L_Objective, body),
 	PROP_RW(L_Objective, visible),
 	PROP_RW(L_Objective, done),
-	{0, 0, 0},
+	{nullptr, nullptr, nullptr},
 };
 
 L_Objective::L_Objective(Widelands::Objective o) {
@@ -1138,7 +1138,7 @@ Message
 const char L_Message::className[] = "Message";
 const MethodType<L_Message> L_Message::Methods[] = {
 	METHOD(L_Message, __eq),
-	{0, 0},
+	{nullptr, nullptr},
 };
 const PropertyType<L_Message> L_Message::Properties[] = {
 	PROP_RO(L_Message, sender),
@@ -1148,7 +1148,7 @@ const PropertyType<L_Message> L_Message::Properties[] = {
 	PROP_RO(L_Message, duration),
 	PROP_RO(L_Message, field),
 	PROP_RW(L_Message, status),
-	{0, 0, 0},
+	{nullptr, nullptr, nullptr},
 };
 
 L_Message::L_Message(uint8_t plr, Message_Id id) {
@@ -1336,7 +1336,7 @@ static int L_report_result(lua_State * L) {
  */
 const static struct luaL_Reg wlgame [] = {
 	{"report_result", &L_report_result},
-	{0, 0}
+	{nullptr, nullptr}
 };
 
 void luaopen_wlgame(lua_State * L) {

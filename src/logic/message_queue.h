@@ -70,7 +70,7 @@ struct MessageQueue : boost::noncopyable, private std::map<Message_Id, Message *
 	Message const * operator[](const Message_Id& id) const {
 		assert_counts();
 		const_iterator const it = find(Message_Id(id));
-		return it != end() ? it->second : 0;
+		return it != end() ? it->second : nullptr;
 	}
 
 	/// \returns the number of messages with the given status.

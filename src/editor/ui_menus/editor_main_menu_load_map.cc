@@ -173,7 +173,7 @@ void Main_Menu_Load_Map::selected(uint32_t) {
 		// get translated worldsname
 		std::string world(map.get_world_name());
 		std::string worldpath("worlds/" + world);
-		Profile prof((worldpath + "/conf").c_str(), 0, "world_" + world);
+		Profile prof((worldpath + "/conf").c_str(), nullptr, "world_" + world);
 		Section & global = prof.get_safe_section("world");
 		world = global.get_safe_string("name");
 

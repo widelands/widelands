@@ -61,8 +61,8 @@ public:
 	WareInstance(Ware_Index, const WareDescr * const);
 	~WareInstance();
 
-	virtual int32_t get_type() const;
-	char const * type_name() const {return "ware";}
+	virtual int32_t get_type() const override;
+	char const * type_name() const override {return "ware";}
 
 	Map_Object * get_location(Editor_Game_Base & egbase) {
 		return m_location.get(egbase);
@@ -70,9 +70,9 @@ public:
 	Economy * get_economy() const {return m_economy;}
 	Ware_Index descr_index() const {return m_descr_index;}
 
-	void init(Editor_Game_Base &);
-	void cleanup(Editor_Game_Base &);
-	void act(Game &, uint32_t data);
+	void init(Editor_Game_Base &) override;
+	void cleanup(Editor_Game_Base &) override;
+	void act(Game &, uint32_t data) override;
 	void update(Game &);
 
 	void set_location(Editor_Game_Base &, Map_Object * loc);
@@ -89,7 +89,7 @@ public:
 	void cancel_transfer(Game &);
 	Transfer * get_transfer() const {return m_transfer;}
 
-	virtual void log_general_info(const Editor_Game_Base & egbase);
+	virtual void log_general_info(const Editor_Game_Base & egbase) override;
 
 private:
 	Object_Ptr        m_location;
@@ -106,8 +106,8 @@ protected:
 		Loader();
 
 		void load(FileRead &);
-		virtual void load_pointers();
-		virtual void load_finish();
+		virtual void load_pointers() override;
+		virtual void load_finish() override;
 
 	private:
 		uint32_t m_location;
@@ -116,9 +116,9 @@ protected:
 	};
 
 public:
-	virtual bool has_new_save_support() {return true;}
+	virtual bool has_new_save_support() override {return true;}
 
-	virtual void save(Editor_Game_Base &, Map_Map_Object_Saver &, FileWrite &);
+	virtual void save(Editor_Game_Base &, Map_Map_Object_Saver &, FileWrite &) override;
 	static Map_Object::Loader * load
 		(Editor_Game_Base &, Map_Map_Object_Loader &, FileRead &);
 };

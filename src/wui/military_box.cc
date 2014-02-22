@@ -39,8 +39,8 @@ MilitaryBox::MilitaryBox
 	m_pl(player),
 	m_map(&m_pl->egbase().map()),
 	m_allowed_change(false),
-	m_slider_retreat(0),
-	m_text_retreat(0)
+	m_slider_retreat(nullptr),
+	m_text_retreat(nullptr)
 {
 	init();
 }

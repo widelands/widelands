@@ -53,7 +53,7 @@ Table<void *>::Table
 	m_fontsize        (UI_FONT_SIZE_SMALL),
 	m_headerheight    (15),
 	m_lineheight      (g_fh->get_fontheight(m_fontname, m_fontsize)),
-	m_scrollbar       (0),
+	m_scrollbar       (nullptr),
 	m_scrollpos       (0),
 	m_selection       (no_selection_index()),
 	m_last_click_time (-10000),
@@ -94,7 +94,7 @@ void Table<void *>::add_column
 
 	{
 		Column c;
-		c.btn = 0;
+		c.btn = nullptr;
 		if (title.size()) {
 			c.btn =
 				new Button
@@ -157,7 +157,7 @@ void Table<void *>::set_column_title(uint8_t const col, const std::string & titl
 	} else if (title.empty()) { //  had title before, not now
 		if (column.btn) {
 			delete column.btn;
-			column.btn = 0;
+			column.btn = nullptr;
 		}
 	} else
 		column.btn->set_title(title);
@@ -204,7 +204,7 @@ Table<void *>::Entry_Record * Table<void *>::find
 		if ((*i.current)->entry() == entry)
 			return *i.current;
 
-	return 0;
+	return nullptr;
 }
 
 /**

@@ -46,7 +46,7 @@ struct WorkerProgram : public BobProgramBase {
 	WorkerProgram(const std::string & name) : m_name(name) {}
 	virtual ~WorkerProgram() {}
 
-	std::string get_name() const {return m_name;}
+	std::string get_name() const override {return m_name;}
 	typedef std::vector<Worker::Action> Actions;
 	Actions::size_type get_size() const {return m_actions.size();}
 	const Actions & actions() const {return m_actions;}

@@ -110,7 +110,7 @@ Worker_Descr::Worker_Descr
 		std::transform
 			(program_name.begin(), program_name.end(), program_name.begin(),
 			 tolower);
-		WorkerProgram * program = 0;
+		WorkerProgram * program = nullptr;
 
 		try {
 			if (m_programs.count(program_name))

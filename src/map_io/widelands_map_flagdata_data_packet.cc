@@ -116,7 +116,7 @@ void Map_Flagdata_Data_Packet::Read
 									(_("building (%u): %s"), building_serial, e.what());
 							}
 						else
-							flag.m_building = 0;
+							flag.m_building = nullptr;
 					}
 
 					//  Roads are set somewhere else.
@@ -152,7 +152,7 @@ void Map_Flagdata_Data_Packet::Read
 											 nextstep_serial, e.what());
 									}
 								} else
-									flag.m_wares[i].nextstep = 0;
+									flag.m_wares[i].nextstep = nullptr;
 							} catch (const _wexception & e) {
 								throw game_data_error
 									("ware #%u (%u): %s", i, ware_serial, e.what());
@@ -169,7 +169,7 @@ void Map_Flagdata_Data_Packet::Read
 									 always_call_serial, e.what());
 							}
 						else
-							flag.m_always_call_for_flag = 0;
+							flag.m_always_call_for_flag = nullptr;
 
 						//  workers waiting
 						uint16_t const nr_workers = fr.Unsigned16();
@@ -203,7 +203,7 @@ void Map_Flagdata_Data_Packet::Read
 								f.request->Read
 									(fr, ref_cast<Game, Editor_Game_Base>(egbase), mol);
 							} else {
-								f.request = 0;
+								f.request = nullptr;
 							}
 							f.program = fr.CString();
 							flag.m_flag_jobs.push_back(f);

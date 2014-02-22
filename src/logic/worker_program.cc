@@ -49,7 +49,7 @@ const WorkerProgram::ParseMap WorkerProgram::s_parsemap[] = {
 	{"playFX",            &WorkerProgram::parse_playFX},
 	{"construct",         &WorkerProgram::parse_construct},
 
-	{0, 0}
+	{nullptr, nullptr}
 };
 
 
@@ -67,7 +67,7 @@ void WorkerProgram::parse
 			char buf[32];
 
 			snprintf(buf, sizeof(buf), "%i", idx);
-			char const * const string = program_s.get_string(buf, 0);
+			char const * const string = program_s.get_string(buf, nullptr);
 			if (!string)
 				break;
 
@@ -356,7 +356,7 @@ void WorkerProgram::parse_findspace
 				{"big",    FindNodeSize::sizeBig},
 				{"mine",   FindNodeSize::sizeMine},
 				{"port",   FindNodeSize::sizePort},
-				{0, 0}
+				{nullptr, 0}
 			};
 
 			int32_t index;
@@ -450,7 +450,7 @@ void WorkerProgram::parse_animation
 			 (g_anim.get
 			  	(parser->directory.c_str(),
 			  	 parser->prof->get_safe_section(cmd[1].c_str()),
-			  	 0)));
+			  	 nullptr)));
 	}
 	act->iparam1 = descr->get_animation(cmd[1].c_str());
 

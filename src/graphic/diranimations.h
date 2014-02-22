@@ -42,7 +42,7 @@ struct DirAnimations {
 		 const std::string           & directory,
 		 Profile                     &,
 		 char                  const * sectnametempl,
-		 Section                     * defaults    = 0);
+		 Section                     * defaults    = nullptr);
 
 	uint32_t get_animation(Widelands::Direction const dir) const {
 		return m_animations[dir - 1];

@@ -28,8 +28,8 @@
 Overlay_Manager::Overlay_Manager() :
 m_are_graphics_loaded(false),
 m_showbuildhelp(false),
-m_callback(0),
-m_callback_data(0),
+m_callback(nullptr),
+m_callback_data(nullptr),
 m_callback_data_i(0)
 #ifndef NDEBUG
 //  No need to initialize (see comment for get_a_job_id) other than to shut up
@@ -115,7 +115,7 @@ uint8_t Overlay_Manager::get_overlays
  */
 void Overlay_Manager::reset() {
 	m_are_graphics_loaded = false;
-	m_callback = 0;
+	m_callback = nullptr;
 
 	const Registered_Overlays_Map * const overlays_end = m_overlays + 3;
 	for (Registered_Overlays_Map * it = m_overlays; it != overlays_end; ++it)

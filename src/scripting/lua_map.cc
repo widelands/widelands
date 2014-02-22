@@ -499,7 +499,7 @@ int do_set_soldiers
 		} else if (d > 0) {
 			for (; d; --d) {
 				Soldier& soldier = ref_cast<Soldier, Worker>
-					(soldier_descr.create(egbase, *owner, 0, building_position));
+					(soldier_descr.create(egbase, *owner, nullptr, building_position));
 				soldier.set_level
 					(sp.first.hp, sp.first.at, sp.first.de, sp.first.ev);
 				if (sc->incorporateSoldier(egbase, soldier)) {
@@ -799,13 +799,13 @@ const MethodType<L_Map> L_Map::Methods[] = {
 	METHOD(L_Map, place_immovable),
 	METHOD(L_Map, get_field),
 	METHOD(L_Map, recalculate),
-	{0, 0},
+	{nullptr, nullptr},
 };
 const PropertyType<L_Map> L_Map::Properties[] = {
 	PROP_RO(L_Map, width),
 	PROP_RO(L_Map, height),
 	PROP_RO(L_Map, player_slots),
-	{0, 0, 0},
+	{nullptr, nullptr, nullptr},
 };
 
 void L_Map::__persist(lua_State * /* L */) {
@@ -894,7 +894,7 @@ int L_Map::place_immovable(lua_State * const L) {
 
 	Editor_Game_Base & egbase = get_egbase(L);
 
-	BaseImmovable * m = 0;
+	BaseImmovable * m = nullptr;
 	if (from_where != "world") {
 		try {
 			const Widelands::Tribe_Descr & tribe =
@@ -919,7 +919,7 @@ int L_Map::place_immovable(lua_State * const L) {
 		if (imm_idx < 0)
 			return report_error(L, "Unknown immovable <%s>", objname);
 
-		m = &egbase.create_immovable(c->coords(), imm_idx, 0);
+		m = &egbase.create_immovable(c->coords(), imm_idx, nullptr);
 	}
 
 	return LuaMap::upcasted_immovable_to_lua(L, m);
@@ -979,7 +979,7 @@ const MethodType<L_MapObject> L_MapObject::Methods[] = {
 	METHOD(L_MapObject, remove),
 	METHOD(L_MapObject, __eq),
 	METHOD(L_MapObject, has_attribute),
-	{0, 0},
+	{nullptr, nullptr},
 };
 const PropertyType<L_MapObject> L_MapObject::Properties[] = {
 	PROP_RO(L_MapObject, __hash),
@@ -987,7 +987,7 @@ const PropertyType<L_MapObject> L_MapObject::Properties[] = {
 	PROP_RO(L_MapObject, type),
 	PROP_RO(L_MapObject, name),
 	PROP_RO(L_MapObject, descname),
-	{0, 0, 0},
+	{nullptr, nullptr, nullptr},
 };
 
 void L_MapObject::__persist(lua_State * L) {
@@ -1005,7 +1005,7 @@ void L_MapObject::__unpersist(lua_State* L) {
 	UNPERS_UINT32("file_index", idx);
 
 	if (!idx)
-		m_ptr = 0;
+		m_ptr = nullptr;
 	else {
 		Map_Map_Object_Loader& mol = *get_mol(L);
 		m_ptr = &mol.get<Map_Object>(idx);
@@ -1162,13 +1162,13 @@ BaseImmovable
 */
 const char L_BaseImmovable::className[] = "BaseImmovable";
 const MethodType<L_BaseImmovable> L_BaseImmovable::Methods[] = {
-	{0, 0},
+	{nullptr, nullptr},
 };
 const PropertyType<L_BaseImmovable> L_BaseImmovable::Properties[] = {
 	PROP_RO(L_BaseImmovable, size),
 	PROP_RO(L_BaseImmovable, name),
 	PROP_RO(L_BaseImmovable, fields),
-	{0, 0, 0},
+	{nullptr, nullptr, nullptr},
 };
 
 /*
@@ -1254,12 +1254,12 @@ PlayerImmovable
 */
 const char L_PlayerImmovable::className[] = "PlayerImmovable";
 const MethodType<L_PlayerImmovable> L_PlayerImmovable::Methods[] = {
-	{0, 0},
+	{nullptr, nullptr},
 };
 const PropertyType<L_PlayerImmovable> L_PlayerImmovable::Properties[] = {
 	PROP_RO(L_PlayerImmovable, owner),
 	PROP_RO(L_PlayerImmovable, debug_economy),
-	{0, 0, 0},
+	{nullptr, nullptr, nullptr},
 };
 
 /*
@@ -1311,10 +1311,10 @@ const char L_Flag::className[] = "Flag";
 const MethodType<L_Flag> L_Flag::Methods[] = {
 	METHOD(L_Flag, set_wares),
 	METHOD(L_Flag, get_wares),
-	{0, 0},
+	{nullptr, nullptr},
 };
 const PropertyType<L_Flag> L_Flag::Properties[] = {
-	{0, 0, 0},
+	{nullptr, nullptr, nullptr},
 };
 
 
@@ -1441,7 +1441,7 @@ const char L_Road::className[] = "Road";
 const MethodType<L_Road> L_Road::Methods[] = {
 	METHOD(L_Road, get_workers),
 	METHOD(L_Road, set_workers),
-	{0, 0},
+	{nullptr, nullptr},
 };
 const PropertyType<L_Road> L_Road::Properties[] = {
 	PROP_RO(L_Road, length),
@@ -1449,7 +1449,7 @@ const PropertyType<L_Road> L_Road::Properties[] = {
 	PROP_RO(L_Road, end_flag),
 	PROP_RO(L_Road, valid_workers),
 	PROP_RO(L_Road, road_type),
-	{0, 0, 0},
+	{nullptr, nullptr, nullptr},
 };
 
 
@@ -1582,10 +1582,10 @@ PortDock
 
 const char L_PortDock::className[] = "PortDock";
 const MethodType<L_PortDock> L_PortDock::Methods[] = {
-	{0, 0},
+	{nullptr, nullptr},
 };
 const PropertyType<L_PortDock> L_PortDock::Properties[] = {
-	{0, 0, 0},
+	{nullptr, nullptr, nullptr},
 };
 
 
@@ -1620,12 +1620,12 @@ Building
 */
 const char L_Building::className[] = "Building";
 const MethodType<L_Building> L_Building::Methods[] = {
-	{0, 0},
+	{nullptr, nullptr},
 };
 const PropertyType<L_Building> L_Building::Properties[] = {
 	PROP_RO(L_Building, building_type),
 	PROP_RO(L_Building, flag),
-	{0, 0, 0},
+	{nullptr, nullptr, nullptr},
 };
 
 /*
@@ -1686,11 +1686,11 @@ ConstructionSite
 */
 const char L_ConstructionSite::className[] = "ConstructionSite";
 const MethodType<L_ConstructionSite> L_ConstructionSite::Methods[] = {
-	{0, 0},
+	{nullptr, nullptr},
 };
 const PropertyType<L_ConstructionSite> L_ConstructionSite::Properties[] = {
 	PROP_RO(L_ConstructionSite, building),
-	{0, 0, 0},
+	{nullptr, nullptr, nullptr},
 };
 
 /*
@@ -1742,11 +1742,11 @@ const MethodType<L_Warehouse> L_Warehouse::Methods[] = {
 	METHOD(L_Warehouse, get_workers),
 	METHOD(L_Warehouse, set_soldiers),
 	METHOD(L_Warehouse, get_soldiers),
-	{0, 0},
+	{nullptr, nullptr},
 };
 const PropertyType<L_Warehouse> L_Warehouse::Properties[] = {
 	PROP_RO(L_Warehouse, portdock),
-	{0, 0, 0},
+	{nullptr, nullptr, nullptr},
 };
 
 /*
@@ -1854,12 +1854,12 @@ const MethodType<L_ProductionSite> L_ProductionSite::Methods[] = {
 	METHOD(L_ProductionSite, get_wares),
 	METHOD(L_ProductionSite, get_workers),
 	METHOD(L_ProductionSite, set_workers),
-	{0, 0},
+	{nullptr, nullptr},
 };
 const PropertyType<L_ProductionSite> L_ProductionSite::Properties[] = {
 	PROP_RO(L_ProductionSite, valid_workers),
 	PROP_RO(L_ProductionSite, valid_wares),
-	{0, 0, 0},
+	{nullptr, nullptr, nullptr},
 };
 
 /*
@@ -2001,11 +2001,11 @@ const char L_MilitarySite::className[] = "MilitarySite";
 const MethodType<L_MilitarySite> L_MilitarySite::Methods[] = {
 	METHOD(L_MilitarySite, get_soldiers),
 	METHOD(L_MilitarySite, set_soldiers),
-	{0, 0},
+	{nullptr, nullptr},
 };
 const PropertyType<L_MilitarySite> L_MilitarySite::Properties[] = {
 	PROP_RO(L_MilitarySite, max_soldiers),
-	{0, 0, 0},
+	{nullptr, nullptr, nullptr},
 };
 
 /*
@@ -2058,11 +2058,11 @@ const char L_TrainingSite::className[] = "TrainingSite";
 const MethodType<L_TrainingSite> L_TrainingSite::Methods[] = {
 	METHOD(L_TrainingSite, get_soldiers),
 	METHOD(L_TrainingSite, set_soldiers),
-	{0, 0},
+	{nullptr, nullptr},
 };
 const PropertyType<L_TrainingSite> L_TrainingSite::Properties[] = {
 	PROP_RO(L_TrainingSite, max_soldiers),
-	{0, 0, 0},
+	{nullptr, nullptr, nullptr},
 };
 
 /*
@@ -2115,10 +2115,10 @@ Bob
 const char L_Bob::className[] = "Bob";
 const MethodType<L_Bob> L_Bob::Methods[] = {
 	METHOD(L_Bob, has_caps),
-	{0, 0},
+	{nullptr, nullptr},
 };
 const PropertyType<L_Bob> L_Bob::Properties[] = {
-	{0, 0, 0},
+	{nullptr, nullptr, nullptr},
 };
 
 /*
@@ -2179,13 +2179,13 @@ const char L_Ship::className[] = "Ship";
 const MethodType<L_Ship> L_Ship::Methods[] = {
 	METHOD(L_Ship, get_wares),
 	METHOD(L_Ship, get_workers),
-	{0, 0},
+	{nullptr, nullptr},
 };
 const PropertyType<L_Ship> L_Ship::Properties[] = {
 	PROP_RO(L_Ship, debug_economy),
 	PROP_RO(L_Ship, last_portdock),
 	PROP_RO(L_Ship, destination),
-	{0, 0, 0},
+	{nullptr, nullptr, nullptr},
 };
 
 
@@ -2300,12 +2300,12 @@ Worker
 
 const char L_Worker::className[] = "Worker";
 const MethodType<L_Worker> L_Worker::Methods[] = {
-	{0, 0},
+	{nullptr, nullptr},
 };
 const PropertyType<L_Worker> L_Worker::Properties[] = {
 	PROP_RO(L_Worker, owner),
 	PROP_RO(L_Worker, location),
-	{0, 0, 0},
+	{nullptr, nullptr, nullptr},
 };
 
 
@@ -2375,14 +2375,14 @@ Soldier
 
 const char L_Soldier::className[] = "Soldier";
 const MethodType<L_Soldier> L_Soldier::Methods[] = {
-	{0, 0},
+	{nullptr, nullptr},
 };
 const PropertyType<L_Soldier> L_Soldier::Properties[] = {
 	PROP_RO(L_Soldier, attack_level),
 	PROP_RO(L_Soldier, defense_level),
 	PROP_RO(L_Soldier, hp_level),
 	PROP_RO(L_Soldier, evade_level),
-	{0, 0, 0},
+	{nullptr, nullptr, nullptr},
 };
 
 
@@ -2468,7 +2468,7 @@ const MethodType<L_Field> L_Field::Methods[] = {
 	METHOD(L_Field, __tostring),
 	METHOD(L_Field, region),
 	METHOD(L_Field, has_caps),
-	{0, 0},
+	{nullptr, nullptr},
 };
 const PropertyType<L_Field> L_Field::Properties[] = {
 	PROP_RO(L_Field, __hash),
@@ -2492,7 +2492,7 @@ const PropertyType<L_Field> L_Field::Properties[] = {
 	PROP_RW(L_Field, resource_amount),
 	PROP_RO(L_Field, claimers),
 	PROP_RO(L_Field, owner),
-	{0, 0, 0},
+	{nullptr, nullptr, nullptr},
 };
 
 
@@ -2993,13 +2993,13 @@ PlayerSlot
 */
 const char L_PlayerSlot::className[] = "PlayerSlot";
 const MethodType<L_PlayerSlot> L_PlayerSlot::Methods[] = {
-	{0, 0},
+	{nullptr, nullptr},
 };
 const PropertyType<L_PlayerSlot> L_PlayerSlot::Properties[] = {
 	PROP_RO(L_PlayerSlot, tribe_name),
 	PROP_RO(L_PlayerSlot, name),
 	PROP_RO(L_PlayerSlot, starting_field),
-	{0, 0, 0},
+	{nullptr, nullptr, nullptr},
 };
 
 void L_PlayerSlot::__persist(lua_State * L) {
@@ -3067,7 +3067,7 @@ int L_PlayerSlot::get_starting_field(lua_State * L) {
  */
 
 const static struct luaL_Reg wlmap [] = {
-	{0, 0}
+	{nullptr, nullptr}
 };
 
 void luaopen_wlmap(lua_State * L) {

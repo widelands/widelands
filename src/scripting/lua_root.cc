@@ -74,14 +74,14 @@ const char L_Game::className[] = "Game";
 const MethodType<L_Game> L_Game::Methods[] = {
 	METHOD(L_Game, launch_coroutine),
 	METHOD(L_Game, save),
-	{0, 0},
+	{nullptr, nullptr},
 };
 const PropertyType<L_Game> L_Game::Properties[] = {
 	PROP_RO(L_Game, time),
 	PROP_RW(L_Game, desired_speed),
 	PROP_RW(L_Game, allow_autosaving),
 	PROP_RW(L_Game, allow_saving),
-	{0, 0, 0},
+	{nullptr, nullptr, nullptr},
 };
 
 L_Game::L_Game(lua_State * /* L */) {
@@ -243,10 +243,10 @@ Editor
 
 const char L_Editor::className[] = "Editor";
 const MethodType<L_Editor> L_Editor::Methods[] = {
-	{0, 0},
+	{nullptr, nullptr},
 };
 const PropertyType<L_Editor> L_Editor::Properties[] = {
-	{0, 0, 0},
+	{nullptr, nullptr, nullptr},
 };
 
 L_Editor::L_Editor(lua_State * /* L */) {
@@ -277,7 +277,7 @@ void L_Editor::__unpersist(lua_State * /* L */) {
  */
 
 const static struct luaL_Reg wlroot [] = {
-	{0, 0}
+	{nullptr, nullptr}
 };
 
 void luaopen_wlroot(lua_State * L, bool in_editor) {

@@ -103,7 +103,7 @@ private:
 			}
 		}
 	protected:
-		std::string info_for_ware(Widelands::Ware_Index const ware) {
+		std::string info_for_ware(Widelands::Ware_Index const ware) override {
 			return
 				boost::lexical_cast<std::string>
 				(get_type() == Widelands::wwWORKER ?
@@ -134,7 +134,7 @@ private:
 			UI::Box * buttons = new UI::Box(this, 0, 0, UI::Box::Horizontal);
 			add(buttons, UI::Box::AlignLeft);
 
-			UI::Button * b = 0;
+			UI::Button * b = nullptr;
 
 #define ADD_WARE_BUTTON(callback, text, tooltip)                  \
 	b = new UI::Button                                    \
@@ -230,7 +230,7 @@ private:
 			UI::Box * buttons = new UI::Box(this, 0, 0, UI::Box::Horizontal);
 			add(buttons, UI::Box::AlignLeft);
 
-			UI::Button * b = 0;
+			UI::Button * b = nullptr;
 #define ADD_WORKER_BUTTON(callback, text, tooltip)                  \
 	b = new UI::Button                                      \
 		 (buttons, #callback,                                         \

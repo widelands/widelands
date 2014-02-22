@@ -53,10 +53,10 @@ public:
 	virtual ~RTImage() {}
 
 	// Implements Image.
-	virtual uint16_t width() const {return surface()->width();}
-	virtual uint16_t height() const {return surface()->height();}
-	virtual const string& hash() const {return hash_;}
-	virtual Surface* surface() const {
+	virtual uint16_t width() const override {return surface()->width();}
+	virtual uint16_t height() const override {return surface()->height();}
+	virtual const string& hash() const override {return hash_;}
+	virtual Surface* surface() const override {
 		Surface* surf = surface_cache_->get(hash_);
 		if (surf)
 			return surf;
@@ -93,7 +93,7 @@ public:
 		surface_cache_(surface_cache), image_cache_(image_cache), renderer_(renderer) {};
 	virtual ~Font_Handler1() {}
 
-	const Image* render(const string& text, uint16_t w = 0) {
+	const Image* render(const string& text, uint16_t w = 0) override {
 		const string hash = boost::lexical_cast<string>(w) + text;
 
 		if (image_cache_->has(hash))
@@ -116,6 +116,6 @@ IFont_Handler1 * create_fonthandler(Graphic* gr, FileSystem* fs) {
 		 (&gr->images(), &gr->surfaces(), RT::ttf_fontloader_from_filesystem(fs)));
 }
 
-IFont_Handler1 * g_fh1 = 0;
+IFont_Handler1 * g_fh1 = nullptr;
 
 } // namespace UI

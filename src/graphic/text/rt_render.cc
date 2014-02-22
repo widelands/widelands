@@ -91,7 +91,7 @@ struct Reference {
 class RefMap : public IRefMap {
 public:
 	RefMap(const vector<Reference>& refs) : m_refs(refs) {}
-	string query(int16_t x, int16_t y) {
+	string query(int16_t x, int16_t y) override {
 		// Should this linear algorithm proof to be too slow (doubtful), the
 		// RefMap could also be efficiently implemented using an R-Tree
 		foreach(const Reference& c, m_refs)
@@ -303,10 +303,10 @@ public:
 	TextNode(IFont& font, NodeStyle&, const string& txt);
 	virtual ~TextNode() {};
 
-	virtual uint16_t width() {return m_w;}
-	virtual uint16_t height() {return m_h + m_s.spacing;}
-	virtual uint16_t hotspot_y();
-	virtual const vector<Reference> get_references() {
+	virtual uint16_t width() override {return m_w;}
+	virtual uint16_t height() override {return m_h + m_s.spacing;}
+	virtual uint16_t hotspot_y() override;
+	virtual const vector<Reference> get_references() override {
 		vector<Reference> rv;
 		if (!m_s.reference.empty()) {
 			Reference r = {Rect(0, 0, m_w, m_h), m_s.reference};
@@ -315,7 +315,7 @@ public:
 		return rv;
 	}
 
-	virtual Surface* render(SurfaceCache* surface_cache);
+	virtual Surface* render(SurfaceCache* surface_cache) override;
 
 protected:
 	uint16_t m_w, m_h;
@@ -350,10 +350,10 @@ public:
 			m_w = w;
 		};
 	virtual ~FillingTextNode() {};
-	virtual Surface* render(SurfaceCache*);
+	virtual Surface* render(SurfaceCache*) override;
 
-	virtual bool is_expanding() {return m_expanding;}
-	virtual void set_w(uint16_t w) {m_w = w;}
+	virtual bool is_expanding() override {return m_expanding;}
+	virtual void set_w(uint16_t w) override {m_w = w;}
 
 private:
 	bool m_expanding;
@@ -377,7 +377,7 @@ public:
 	WordSpacerNode(IFont& font, NodeStyle& ns) : TextNode(font, ns, " ") {}
 	static void show_spaces(bool t) {m_show_spaces = t;}
 
-	virtual Surface* render(SurfaceCache* surface_cache) {
+	virtual Surface* render(SurfaceCache* surface_cache) override {
 		if (m_show_spaces) {
 			Surface* rv = Surface::create(m_w, m_h);
 			rv->fill_rect(Rect(0, 0, m_w, m_h), RGBAColor(0xff, 0, 0, 0xff));
@@ -385,7 +385,7 @@ public:
 		}
 		return TextNode::render(surface_cache);
 	}
-	virtual bool is_non_mandatory_space() {return true;}
+	virtual bool is_non_mandatory_space() override {return true;}
 
 private:
 	static bool m_show_spaces;
@@ -399,14 +399,14 @@ bool WordSpacerNode::m_show_spaces;
 class NewlineNode : public RenderNode {
 public:
 	NewlineNode(NodeStyle& ns) : RenderNode(ns) {}
-	virtual uint16_t height() {return 0;}
-	virtual uint16_t width() {return INFINITE_WIDTH; }
-	virtual uint16_t hotspot_y() {return 0;}
-	virtual Surface* render(SurfaceCache* /* surface_cache */) {
+	virtual uint16_t height() override {return 0;}
+	virtual uint16_t width() override {return INFINITE_WIDTH; }
+	virtual uint16_t hotspot_y() override {return 0;}
+	virtual Surface* render(SurfaceCache* /* surface_cache */) override {
 		assert(false);
 		throw RenderError("This should never be called. This is a bug, please submit a report.");
 	}
-	virtual bool is_non_mandatory_space() {return true;}
+	virtual bool is_non_mandatory_space() override {return true;}
 };
 
 /*
@@ -417,10 +417,10 @@ public:
 	SpaceNode(NodeStyle& ns, uint16_t w, uint16_t h = 0, bool expanding = false) :
 		RenderNode(ns), m_w(w), m_h(h), m_bg(nullptr), m_expanding(expanding) {}
 
-	virtual uint16_t height() {return m_h;}
-	virtual uint16_t width() {return m_w;}
-	virtual uint16_t hotspot_y() {return m_h;}
-	virtual Surface* render(SurfaceCache* /* surface_cache */) {
+	virtual uint16_t height() override {return m_h;}
+	virtual uint16_t width() override {return m_w;}
+	virtual uint16_t hotspot_y() override {return m_h;}
+	virtual Surface* render(SurfaceCache* /* surface_cache */) override {
 		Surface* rv = Surface::create(m_w, m_h);
 
 		// Draw background image (tiling)
@@ -437,8 +437,8 @@ public:
 		}
 		return rv;
 	}
-	virtual bool is_expanding() {return m_expanding;}
-	virtual void set_w(uint16_t w) {m_w = w;}
+	virtual bool is_expanding() override {return m_expanding;}
+	virtual void set_w(uint16_t w) override {m_w = w;}
 
 	void set_background(const Image* s) {
 		m_bg = s; m_h = s->height();
@@ -456,7 +456,7 @@ private:
 class SubTagRenderNode : public RenderNode {
 public:
 	SubTagRenderNode(NodeStyle& ns) : RenderNode(ns),
-		m_bg_clr(0, 0, 0), m_bg_clr_set(false), m_bg_img(0) {
+		m_bg_clr(0, 0, 0), m_bg_clr_set(false), m_bg_img(nullptr) {
 	}
 	virtual ~SubTagRenderNode() {
 		foreach(RenderNode* n, m_nodes_to_render) {
@@ -465,10 +465,10 @@ public:
 		m_nodes_to_render.clear();
 	}
 
-	virtual uint16_t width() {return m_w + m_margin.left + m_margin.right;}
-	virtual uint16_t height() {return m_h + m_margin.top + m_margin.bottom;}
-	virtual uint16_t hotspot_y() {return height();}
-	virtual Surface* render(SurfaceCache* surface_cache) {
+	virtual uint16_t width() override {return m_w + m_margin.left + m_margin.right;}
+	virtual uint16_t height() override {return m_h + m_margin.top + m_margin.bottom;}
+	virtual uint16_t hotspot_y() override {return height();}
+	virtual Surface* render(SurfaceCache* surface_cache) override {
 		Surface* rv = Surface::create(width(), height());
 		rv->fill_rect(Rect(0, 0, rv->width(), rv->height()), RGBAColor(255, 255, 255, 0));
 
@@ -512,7 +512,7 @@ public:
 
 		return rv;
 	}
-	virtual const vector<Reference> get_references() {return m_refs;}
+	virtual const vector<Reference> get_references() override {return m_refs;}
 	void set_dimensions(uint16_t inner_w, uint16_t inner_h, Borders margin) {
 		m_w = inner_w; m_h = inner_h; m_margin = margin;
 	}
@@ -542,10 +542,10 @@ public:
 	ImgRenderNode(NodeStyle& ns, const Image& image) : RenderNode(ns), m_image(image) {
 	}
 
-	virtual uint16_t width() {return m_image.width();}
-	virtual uint16_t height() {return m_image.height();}
-	virtual uint16_t hotspot_y() {return m_image.height();}
-	virtual Surface* render(SurfaceCache* surface_cache);
+	virtual uint16_t width() override {return m_image.width();}
+	virtual uint16_t height() override {return m_image.height();}
+	virtual uint16_t hotspot_y() override {return m_image.height();}
+	virtual Surface* render(SurfaceCache* surface_cache) override;
 
 private:
 	const Image& m_image;
@@ -659,7 +659,7 @@ public:
 	FontTagHandler(ITag& tag, FontCache& fc, NodeStyle ns, ImageCache* image_cache)
 		: TagHandler(tag, fc, ns, image_cache) {}
 
-	void enter() {
+	void enter() override {
 		const IAttrMap& a = m_tag.attrs();
 		if (a.has("color")) m_ns.font_color = a["color"].get_color();
 		if (a.has("size")) m_ns.font_size = a["size"].get_int();
@@ -678,7 +678,7 @@ public:
 		: TagHandler(tag, fc, ns, image_cache), m_indent(0) {
 	}
 
-	void enter() {
+	void enter() override {
 		const IAttrMap& a = m_tag.attrs();
 		if (a.has("indent")) m_indent = a["indent"].get_int();
 		if (a.has("align")) {
@@ -696,7 +696,7 @@ public:
 		if (a.has("spacing"))
 			m_ns.spacing = a["spacing"].get_int();
 	}
-	void emit(vector<RenderNode*>& nodes) {
+	void emit(vector<RenderNode*>& nodes) override {
 		if (m_indent) {
 			nodes.push_back(new SpaceNode(m_ns, m_indent));
 		}
@@ -715,11 +715,11 @@ public:
 		TagHandler(tag, fc, ns, image_cache), m_rn(nullptr) {
 	}
 
-	void enter() {
+	void enter() override {
 		const IAttrMap& a = m_tag.attrs();
 		m_rn = new ImgRenderNode(m_ns, *image_cache_->get(a["src"].get_string()));
 	}
-	void emit(vector<RenderNode*>& nodes) {
+	void emit(vector<RenderNode*>& nodes) override {
 		nodes.push_back(m_rn);
 	}
 
@@ -732,12 +732,12 @@ public:
 	VspaceTagHandler(ITag& tag, FontCache& fc, NodeStyle ns, ImageCache* image_cache) :
 		TagHandler(tag, fc, ns, image_cache), m_space(0) {}
 
-	void enter() {
+	void enter() override {
 		const IAttrMap& a = m_tag.attrs();
 
 		m_space = a["gap"].get_int();
 	}
-	void emit(vector<RenderNode*>& nodes) {
+	void emit(vector<RenderNode*>& nodes) override {
 		nodes.push_back(new SpaceNode(m_ns, 0, m_space));
 		nodes.push_back(new NewlineNode(m_ns));
 	}
@@ -751,7 +751,7 @@ public:
 	HspaceTagHandler(ITag& tag, FontCache& fc, NodeStyle ns, ImageCache* image_cache) :
 		TagHandler(tag, fc, ns, image_cache), m_bg(nullptr), m_space(0) {}
 
-	void enter() {
+	void enter() override {
 		const IAttrMap& a = m_tag.attrs();
 
 		if (a.has("gap"))
@@ -769,8 +769,8 @@ public:
 		}
 	}
 
-	void emit(vector<RenderNode*>& nodes) {
-		RenderNode* rn = 0;
+	void emit(vector<RenderNode*>& nodes) override {
+		RenderNode* rn = nullptr;
 		if (not m_fill_text.empty()) {
 			if (m_space < INFINITE_WIDTH)
 				rn = new FillingTextNode(m_fc.get_font(m_ns), m_ns, m_space, m_fill_text);
@@ -802,7 +802,7 @@ public:
 		TagHandler(tag, fc, ns, image_cache) {
 	}
 
-	void emit(vector<RenderNode*>& nodes) {
+	void emit(vector<RenderNode*>& nodes) override {
 		nodes.push_back(new NewlineNode(m_ns));
 	}
 };
@@ -821,7 +821,7 @@ public:
 	{
 	}
 
-	void enter() {
+	void enter() override {
 		Borders padding, margin;
 
 		handle_unique_attributes();
@@ -876,7 +876,7 @@ public:
 		m_rn->set_dimensions(m_w, layout.height(), margin);
 		m_rn->set_nodes_to_render(nodes_to_render);
 	}
-	void emit(vector<RenderNode*>& nodes) {
+	void emit(vector<RenderNode*>& nodes) override {
 		nodes.push_back(m_rn);
 	}
 
@@ -913,7 +913,7 @@ public:
 	}
 
 	// Handle attributes that are in rt, but not in sub.
-	virtual void handle_unique_attributes() {
+	virtual void handle_unique_attributes() override {
 		const IAttrMap& a = m_tag.attrs();
 		WordSpacerNode::show_spaces(a.has("db_show_spaces") ? a["db_show_spaces"].get_bool() : 0);
 	}
@@ -949,8 +949,8 @@ public:
 	Renderer(ImageCache* image_cache, SurfaceCache* surface_cache, IFontLoader* fl, IParser* p);
 	virtual ~Renderer();
 
-	virtual Surface* render(const string&, uint16_t, const TagSet&);
-	virtual IRefMap* make_reference_map(const std::string&, uint16_t, const TagSet&);
+	virtual Surface* render(const string&, uint16_t, const TagSet&) override;
+	virtual IRefMap* make_reference_map(const std::string&, uint16_t, const TagSet&) override;
 
 private:
 	RenderNode* layout_(const string& text, uint16_t width, const TagSet& allowed_tags);

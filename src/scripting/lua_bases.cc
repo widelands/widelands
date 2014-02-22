@@ -70,12 +70,12 @@ EditorGameBase
 
 const char L_EditorGameBase::className[] = "EditorGameBase";
 const MethodType<L_EditorGameBase> L_EditorGameBase::Methods[] = {
-	{0, 0},
+	{nullptr, nullptr},
 };
 const PropertyType<L_EditorGameBase> L_EditorGameBase::Properties[] = {
 	PROP_RO(L_EditorGameBase, map),
 	PROP_RO(L_EditorGameBase, players),
-	{0, 0, 0},
+	{nullptr, nullptr, nullptr},
 };
 
 
@@ -164,12 +164,12 @@ const MethodType<L_PlayerBase> L_PlayerBase::Methods[] = {
 	METHOD(L_PlayerBase, place_building),
 	METHOD(L_PlayerBase, place_flag),
 	METHOD(L_PlayerBase, place_road),
-	{0, 0},
+	{nullptr, nullptr},
 };
 const PropertyType<L_PlayerBase> L_PlayerBase::Properties[] = {
 	PROP_RO(L_PlayerBase, number),
 	PROP_RO(L_PlayerBase, tribe_name),
-	{0, 0, 0},
+	{nullptr, nullptr, nullptr},
 };
 
 void L_PlayerBase::__persist(lua_State * L) {
@@ -340,7 +340,7 @@ int L_PlayerBase::place_road(lua_State * L) {
 	if (optimal_path.get_nsteps() != path.get_nsteps())
 		return report_error(L, "Cannot build a road that crosses itself!");
 
-	Road * r = 0;
+	Road * r = nullptr;
 	if (force_road) {
 		r = &get(L, egbase).force_road(path);
 	} else {
@@ -402,7 +402,7 @@ int L_PlayerBase::place_building(lua_State * L) {
 		former_buildings.pop_back();
 	}
 
-	Building * b = 0;
+	Building * b = nullptr;
 	if (force) {
 		if (constructionsite) {
 			b = &get(L, get_egbase(L)).force_csite
@@ -557,7 +557,7 @@ Player & L_PlayerBase::get
 
 
 const static struct luaL_Reg wlbases [] = {
-	{0, 0}
+	{nullptr, nullptr}
 };
 
 void luaopen_wlbases(lua_State * const L) {

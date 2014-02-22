@@ -36,7 +36,7 @@ namespace Widelands {
 Bob::Task const Carrier::taskRoad = {
 	"road",
 	static_cast<Bob::Ptr>(&Carrier::road_update),
-	0,
+	nullptr,
 	static_cast<Bob::Ptr>(&Carrier::road_pop),
 	true
 };
@@ -142,8 +142,8 @@ void Carrier::road_pop(Game & game, State & /* state */)
 Bob::Task const Carrier::taskTransport = {
 	"transport",
 	static_cast<Bob::Ptr>(&Carrier::transport_update),
-	0,
-	0,
+	nullptr,
+	nullptr,
 	true
 };
 
@@ -258,7 +258,7 @@ void Carrier::deliver_to_building(Game & game, State & state)
 	} else {
 		//  tough luck, the building has disappeared
 		molog("[Carrier]: Building disappeared while in building.\n");
-		set_location(0);
+		set_location(nullptr);
 	}
 }
 
@@ -303,7 +303,7 @@ void Carrier::pickup_from_flag(Game & game, State & state)
  */
 void Carrier::drop_ware(Game & game, State & state)
 {
-	WareInstance * other = 0;
+	WareInstance * other = nullptr;
 	Road & road = ref_cast<Road, PlayerImmovable>(*get_location(game));
 	Flag & flag = road.get_flag(static_cast<Road::FlagId>(state.ivar1 ^ 1));
 
@@ -533,8 +533,8 @@ int32_t Carrier::find_closest_flag(Game & game)
 
 	endpath.starttrim(curidx);
 
-	map.calc_cost(startpath, &startcost, 0);
-	map.calc_cost(endpath,   &endcost,   0);
+	map.calc_cost(startpath, &startcost, nullptr);
+	map.calc_cost(endpath,   &endcost,   nullptr);
 
 	return endcost < startcost;
 }
