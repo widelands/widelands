@@ -240,7 +240,8 @@ typedef struct Info {
 /* Type names, used for error messages. */
 static const char *const kTypenames[] = {
   "nil", "boolean", "lightuserdata", "number", "string",
-  "table", "function", "userdata", "thread", "proto", "upval"
+  "table", "function", "userdata", "thread", "proto", "upval",
+  "deadkey", "permanent"
 };
 
 /* Setting names as used in eris.settings / eris_g|set_setting. Also, the
@@ -253,7 +254,7 @@ static const char *const kSettingWriteDebugInfo = "debug";
 static const char *const kSettingMaxComplexity = "maxrec";
 
 /* Header we prefix to persisted data for a quick check when unpersisting. */
-static const char *const kHeader = "ERIS";
+static char const kHeader[] = { 'E', 'R', 'I', 'S' };
 #define HEADER_LENGTH sizeof(kHeader)
 
 /* Floating point number used to check compatibility of loaded data. */
@@ -1353,7 +1354,7 @@ p_closure(Info *info) {                              /* perms reftbl ... func */
   switch (ttype(info->L->top - 1)) {
     case LUA_TLCF: /* light C function */
       /* We cannot persist these, they have to be handled via the permtable. */
-      eris_error(info, "Attempt to persist a light C function (%p)",
+      eris_error(info, "attempt to persist a light C function (%p)",
                  lua_tocfunction(info->L, -1));
       return; /* not reached */
     case LUA_TCCL: /* C closure */ {                  /* perms reftbl ... ccl */
@@ -1367,7 +1368,7 @@ p_closure(Info *info) {                              /* perms reftbl ... func */
       /* We can only persist these if the underlying C function is in the
        * permtable. So we try to persist it first as a light C function. If it
        * isn't in the permtable that'll cause an error (in the case above). */
-      lua_pushcclosure(info->L, lua_tocfunction(info->L, -1), 0);
+      lua_pushcfunction(info->L, lua_tocfunction(info->L, -1));
                                                 /* perms reftbl ... ccl cfunc */
       persist(info);                            /* perms reftbl ... ccl cfunc */
       lua_pop(info->L, 1);                            /* perms reftbl ... ccl */
@@ -1420,7 +1421,7 @@ p_closure(Info *info) {                              /* perms reftbl ... func */
       break;
     }
     default:
-      eris_error(info, "Attempt to persist unknown function type");
+      eris_error(info, "attempt to persist unknown function type");
       return; /* not reached */
   }
 }
@@ -1433,12 +1434,23 @@ u_closure(Info *info) {                                                /* ... */
   if (isCClosure) {
     lua_CFunction f;
 
+    /* Reserve reference for the closure to avoid light C function or its
+     * perm table key going first. */
+    const int reference = ++(info->refcount);
+
     /* nups is guaranteed to be >= 1, otherwise it'd be a light C function. */
-    eris_checkstack(info->L, nups);
+    eris_checkstack(info->L, nups < 2 ? 2 : nups);
 
     /* Read the C function from the permanents table. */
     unpersist(info);                                             /* ... cfunc */
+    if (!lua_iscfunction(info->L, -1)) {
+      eris_error(info, "bad C closure (C function expected, got %s)",
+                 kTypenames[lua_type(info->L, -1)]);
+    }
     f = lua_tocfunction(info->L, -1);
+    if (!f) {
+      eris_error(info, "bad C closure (C function expected, got null)");
+    }
     lua_pop(info->L, 1);                                               /* ... */
 
     /* Now this is a little roundabout, but we want to create the closure
@@ -1449,8 +1461,9 @@ u_closure(Info *info) {                                                /* ... */
     }
     lua_pushcclosure(info->L, f, nups);                            /* ... ccl */
 
-    /* Preregister closure for handling of cycles (upvalues). */
-    registerobject(info);
+    /* Create the entry in the reftable. */
+    lua_pushvalue(info->L, -1);                   /* perms reftbl ... ccl ccl */
+    lua_rawseti(info->L, REFTIDX, reference);         /* perms reftbl ... ccl */
 
     /* Unpersist actual upvalues. */
     pushpath(info, ".upvalues");
@@ -2109,9 +2122,8 @@ persist(Info *info) {                                 /* perms reftbl ... obj */
 static void
 u_permanent(Info *info) {                                 /* perms reftbl ... */
   const int type = READ_VALUE(uint8_t);
-  /* Reserve reference to avoid the key going first. This registers whatever
-   * else is on the stack in the reftable, but that shouldn't really matter. */
-  const int reference = registerobject(info);
+  /* Reserve reference to avoid the key going first. */
+  const int reference = ++(info->refcount);
   eris_checkstack(info->L, 1);
   unpersist(info);                                /* perms reftbl ... permkey */
   lua_gettable(info->L, PERMIDX);                    /* perms reftbl ... obj? */
@@ -2126,7 +2138,7 @@ u_permanent(Info *info) {                                 /* perms reftbl ... */
     eris_error(info, "bad permanent value (%s expected, got %s)",
       kTypenames[type], kTypenames[lua_type(info->L, -1)]);
   }                                                   /* perms reftbl ... obj */
-  /* Correct the entry in the reftable. */
+  /* Create the entry in the reftable. */
   lua_pushvalue(info->L, -1);                     /* perms reftbl ... obj obj */
   lua_rawseti(info->L, REFTIDX, reference);           /* perms reftbl ... obj */
 }
@@ -2284,11 +2296,21 @@ p_header(Info *info) {
 static void
 u_header(Info *info) {
   char header[HEADER_LENGTH];
+  uint8_t number_size;
   READ_RAW(header, HEADER_LENGTH);
   if (strncmp(kHeader, header, HEADER_LENGTH)) {
     luaL_error(info->L, "invalid data");
   }
-  if (READ_VALUE(uint8_t) != sizeof(lua_Number)) {
+  number_size = READ_VALUE(uint8_t);
+  if (number_size == 0) {
+    /* Old 64-bit versions of eris wrote '\0' and then three random bytes. */
+    /* We skip them here for backwards compatibility. */
+    char throw_away[3];
+    READ_RAW(throw_away, 3);
+
+    number_size = READ_VALUE(uint8_t);
+  }
+  if (number_size != sizeof(lua_Number)) {
     luaL_error(info->L, "incompatible floating point type");
   }
   /* In this case we really do want floating point equality. */

@@ -1,5 +1,5 @@
 /*
-** $Id: lgc.c,v 2.140 2013/03/16 21:10:18 roberto Exp $
+** $Id: lgc.c,v 2.140.1.2 2013/04/26 18:22:05 roberto Exp $
 ** Garbage Collector
 ** See Copyright Notice in lua.h
 */
@@ -497,7 +497,7 @@ static lu_mem traversestack (global_State *g, lua_State *th) {
   StkId o = th->stack;
   if (o == NULL)
     return 1;  /* stack not completely built yet */
-  for (; o < th->top; o++)
+  for (; o < th->top; o++)  /* mark live elements in the stack */
     markvalue(g, o);
   if (g->gcstate == GCSatomic) {  /* final traversal? */
     StkId lim = th->stack + th->stacksize;  /* real end of stack */
