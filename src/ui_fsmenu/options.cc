@@ -237,7 +237,6 @@ Fullscreen_Menu_Options::Fullscreen_Menu_Options
 	//  GRAPHIC_TODO: this shouldn't be here List all resolutions
 	// take a copy to not change real video info structure
 	SDL_PixelFormat fmt = *SDL_GetVideoInfo()->vfmt;
-
 	fmt.BitsPerPixel = 32;
 	for
 		(const SDL_Rect * const * modes = SDL_ListModes(&fmt, SDL_SWSURFACE | SDL_FULLSCREEN);
@@ -247,7 +246,7 @@ Fullscreen_Menu_Options::Fullscreen_Menu_Options
 		const SDL_Rect & mode = **modes;
 		if (800 <= mode.w and 600 <= mode.h)
 		{
-			const Resolution this_res = {mode.w, mode.h, fmt.BitsPerPixel};
+			const ScreenResolution this_res = {mode.w, mode.h};
 			if
 				(m_resolutions.empty()
 				 || this_res.xres != m_resolutions.rbegin()->xres
@@ -261,25 +260,21 @@ Fullscreen_Menu_Options::Fullscreen_Menu_Options
 	bool did_select_a_res = false;
 	for (uint32_t i = 0; i < m_resolutions.size(); ++i) {
 		char buf[32];
-		sprintf
-			(buf, _("%ix%i %i bit"), m_resolutions[i].xres,
-			 m_resolutions[i].yres, m_resolutions[i].depth);
+		sprintf(buf, "%ix%i", m_resolutions[i].xres, m_resolutions[i].yres);
 		const bool selected =
 			m_resolutions[i].xres  == opt.xres and
-			m_resolutions[i].yres  == opt.yres and
-			m_resolutions[i].depth == opt.depth;
+			m_resolutions[i].yres  == opt.yres;
 		did_select_a_res |= selected;
 		m_reslist.add(buf, 0, nullptr, selected);
 	}
 	if (not did_select_a_res) {
 		char buf[32];
-		sprintf(buf, "%ix%i %i bit", opt.xres, opt.yres, opt.depth);
+		sprintf(buf, "%ix%i", opt.xres, opt.yres);
 		m_reslist.add(buf, 0, nullptr, true);
 		uint32_t entry = m_resolutions.size();
 		m_resolutions.resize(entry + 1);
 		m_resolutions[entry].xres  = opt.xres;
 		m_resolutions[entry].yres  = opt.yres;
-		m_resolutions[entry].depth = opt.depth;
 	}
 
 	// Fill language list
@@ -358,7 +353,6 @@ Options_Ctrl::Options_Struct Fullscreen_Menu_Options::get_values() {
 	// Write all data from UI elements
 	os.xres                  = m_resolutions[res_index].xres;
 	os.yres                  = m_resolutions[res_index].yres;
-	os.depth                 = m_resolutions[res_index].depth;
 	os.inputgrab             = m_inputgrab.get_state();
 	os.fullscreen            = m_fullscreen.get_state();
 	os.single_watchwin       = m_single_watchwin.get_state();
@@ -631,8 +625,6 @@ Options_Ctrl::Options_Struct Options_Ctrl::options_struct() {
 		("xres",                XRES);
 	opt.yres                = m_opt_section.get_int
 		("yres",                YRES);
-	opt.depth               = m_opt_section.get_int
-		("depth",                 32);
 	opt.inputgrab           = m_opt_section.get_bool
 		("inputgrab",          false);
 	opt.fullscreen          = m_opt_section.get_bool
@@ -697,7 +689,6 @@ void Options_Ctrl::save_options() {
 		("snap_windows_only_when_overlapping",
 		 opt.snap_windows_only_when_overlapping);
 	m_opt_section.set_bool("dock_windows_to_edges", opt.dock_windows_to_edges);
-	m_opt_section.set_int ("depth",                 opt.depth);
 	m_opt_section.set_bool("disable_music",        !opt.music);
 	m_opt_section.set_bool("disable_fx",           !opt.fx);
 	m_opt_section.set_string("language",            opt.language);

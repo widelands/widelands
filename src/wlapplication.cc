@@ -1400,7 +1400,6 @@ void WLApplication::show_usage()
 			 " --fullscreen=[yes|no]\n"
 			 "                      Whether to use the whole display for the\n"
 			 "                      game screen.\n"
-			 " --depth=[16|32]      Color depth in number of bits per pixel.\n"
 			 " --xres=[...]         Width of the window in pixel.\n"
 			 " --yres=[...]         Height of the window in pixel.\n")
 		<<

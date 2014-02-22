@@ -39,7 +39,6 @@ public:
 	struct Options_Struct {
 		int32_t xres;
 		int32_t yres;
-		int32_t depth;
 		bool inputgrab;
 		bool fullscreen;
 		bool single_watchwin;
@@ -131,16 +130,14 @@ private:
 
 	void advanced_options();
 
-	/// A screen resolution in terms of width, height and pixel depth.
-	class Resolution {
+	class ScreenResolution {
 	public:
 		int32_t xres;
 		int32_t yres;
-		int32_t depth;
 	};
 
 	/// All supported screen resolutions.
-	std::vector<Resolution> m_resolutions;
+	std::vector<ScreenResolution> m_resolutions;
 };
 
 /**
