@@ -7,18 +7,18 @@ msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2013-09-15 17:41+0000\n"
-"PO-Revision-Date: 2010-06-06 21:38+0000\n"
-"Last-Translator: Alexander Maslov <Drakmail@gmail.com>\n"
+"PO-Revision-Date: 2013-11-30 10:54+0000\n"
+"Last-Translator: Александр <sa13690@yandex.ru>\n"
 "Language-Team: russian <ru@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-09-16 04:48+0000\n"
-"X-Generator: Launchpad (build 16761)\n"
+"X-Launchpad-Export-Date: 2013-12-01 05:15+0000\n"
+"X-Generator: Launchpad (build 16856)\n"
 
 #: ../../worlds/desert/terrainconf:35
 msgid "Beach"
-msgstr ""
+msgstr "Пляж"
 
 #: ../../worlds/desert/conf:71
 msgid "Beech"
@@ -74,23 +74,23 @@ msgstr "Пустыня"
 
 #: ../../worlds/desert/terrainconf:8
 msgid "Desert1"
-msgstr ""
+msgstr "Пустыня1"
 
 #: ../../worlds/desert/terrainconf:13
 msgid "Desert2"
-msgstr ""
+msgstr "Пустыня2"
 
 #: ../../worlds/desert/terrainconf:18
 msgid "Desert3"
-msgstr ""
+msgstr "Пустыня3"
 
 #: ../../worlds/desert/terrainconf:23
 msgid "Desert4"
-msgstr ""
+msgstr "Пустыня4"
 
 #: ../../worlds/desert/terrainconf:29
 msgid "Dry soil"
-msgstr ""
+msgstr "Сухая почва"
 
 #: ../../worlds/desert/conf:87
 msgid "Duck"
@@ -120,7 +120,7 @@ msgstr "Трава"
 
 #: ../../worlds/desert/terrainconf:57
 msgid "High mountain meadow"
-msgstr ""
+msgstr "Высокогорный луг"
 
 #: ../../worlds/desert/resconf:20
 msgid "Iron"
@@ -144,31 +144,31 @@ msgstr "Маленькая лиственница"
 
 #: ../../worlds/desert/terrainconf:96
 msgid "Lava"
-msgstr ""
+msgstr "Лава"
 
 #: ../../worlds/desert/terrainconf:46
 msgid "Meadow"
-msgstr ""
+msgstr "Луг"
 
 #: ../../worlds/desert/terrainconf:52
 msgid "Mountain meadow"
-msgstr ""
+msgstr "Горный луг"
 
 #: ../../worlds/desert/terrainconf:62
 msgid "Mountain1"
-msgstr ""
+msgstr "Гора1"
 
 #: ../../worlds/desert/terrainconf:68
 msgid "Mountain2"
-msgstr ""
+msgstr "Гора2"
 
 #: ../../worlds/desert/terrainconf:74
 msgid "Mountain3"
-msgstr ""
+msgstr "Гора3"
 
 #: ../../worlds/desert/terrainconf:80
 msgid "Mountain4"
-msgstr ""
+msgstr "Гора4"
 
 #: ../../worlds/desert/conf:21
 #: ../../worlds/desert/conf:22
@@ -258,7 +258,7 @@ msgstr "Скалы"
 
 #: ../../worlds/desert/terrainconf:40
 msgid "Steppe"
-msgstr ""
+msgstr "Степь"
 
 #: ../../worlds/desert/conf:45
 #: ../../worlds/desert/conf:46

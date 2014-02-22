@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2013-09-15 17:41+0000\n"
-"PO-Revision-Date: 2010-03-25 17:42+0000\n"
-"Last-Translator: SirVer <Unknown>\n"
+"PO-Revision-Date: 2013-10-17 14:04+0000\n"
+"Last-Translator: abdXelrhman <abdXelrhman@gmail.com>\n"
 "Language-Team: Arabic <ar@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-09-16 04:40+0000\n"
-"X-Generator: Launchpad (build 16761)\n"
+"X-Launchpad-Export-Date: 2013-10-18 05:13+0000\n"
+"X-Generator: Launchpad (build 16799)\n"
 
 #: ../../tribes/empire/meal/conf:1
 msgid ""
@@ -138,7 +138,7 @@ msgstr ""
 
 #: ../../tribes/empire/burner/conf:1
 msgid "Burns coal."
-msgstr ""
+msgstr "يحرق الفحم"
 
 #: ../../tribes/empire/conf:115
 msgid "Carpenter"
@@ -150,7 +150,7 @@ msgstr ""
 
 #: ../../tribes/empire/carrier/conf:1
 msgid "Carries items along your roads."
-msgstr ""
+msgstr "يسير حاملاً الاشياء"
 
 #: ../../tribes/empire/conf:149
 #: ../../tribes/empire/conf:212
@@ -666,7 +666,7 @@ msgstr ""
 
 #: ../../tribes/empire/armoursmithy/conf:31
 msgid "Produce helm"
-msgstr ""
+msgstr "يُنِتِج الخوذ"
 
 #: ../../tribes/empire/toolsmithy/conf:45
 msgid "Produce hunting spear"
@@ -718,7 +718,7 @@ msgstr ""
 
 #: ../../tribes/empire/armoursmith/conf:1
 msgid "Produces armour for the soldiers."
-msgstr ""
+msgstr "تُنِتِج الدروع للجنود."
 
 #: ../../tribes/empire/brewer/conf:1
 msgid "Produces beer or wine."
@@ -1347,11 +1347,11 @@ msgstr ""
 #: ../../tribes/empire/well/conf:20
 #: ../../tribes/empire/winery/conf:25
 msgid "Work"
-msgstr ""
+msgstr "العمل"
 
 #: ../../tribes/empire/builder/conf:1
 msgid "Works at construction sites to create a new building."
-msgstr ""
+msgstr "يعمل فى مواقع اﻹنشاءات لبناء مبانى جديده"
 
 #: ../../tribes/empire/shipwright/conf:1
 msgid "Works at the shipyard and constructs new ships."

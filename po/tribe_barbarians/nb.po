@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2013-09-15 17:41+0000\n"
-"PO-Revision-Date: 2013-08-14 18:46+0000\n"
+"PO-Revision-Date: 2013-12-31 13:47+0000\n"
 "Last-Translator: Hans Joachim Desserud <Unknown>\n"
 "Language-Team: Norwegian Bokmal <nb@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-09-16 04:39+0000\n"
-"X-Generator: Launchpad (build 16761)\n"
+"X-Launchpad-Export-Date: 2014-01-01 05:11+0000\n"
+"X-Generator: Launchpad (build 16877)\n"
 
 #: ../../tribes/barbarians/axefactory/help.lua:12
 #: ../../tribes/barbarians/warmill/help.lua:12
@@ -51,6 +51,8 @@ msgid ""
 "\"He who can grow two trees where normally grows only one exceeds the most "
 "important general!\""
 msgstr ""
+"«Den som kan gro to trær hvor det vanligvis gror et overgår den viktigste "
+"general!»"
 
 #: ../../tribes/barbarians/trainingscamp/help.lua:12
 msgid ""
@@ -81,6 +83,7 @@ msgstr ""
 msgid ""
 "\"No better friend you have in battle than the enemy's blow that misses.\""
 msgstr ""
+"«Ingen bedre venn finner du i strid enn en fiendes angrep som bommer.»"
 
 #: ../../tribes/barbarians/well/help.lua:12
 msgid ""
@@ -113,7 +116,7 @@ msgstr "\"Vi dyrker tak\""
 
 #: ../../tribes/barbarians/metalworks/help.lua:12
 msgid "\"We make it work!\""
-msgstr ""
+msgstr "«Vi får det til å virke!»"
 
 #: ../../tribes/barbarians/fishers_hut/help.lua:12
 msgid "\"What do you mean, my fish ain't fresh?!\""
@@ -126,7 +129,7 @@ msgstr "«Hva mener du med at fisken min ikke er fersk?!»"
 #: ../../tribes/barbarians/goldmine/help.lua:31
 #: ../../tribes/barbarians/oremine/help.lua:31
 msgid "%s always goes to the %s. It has no other use."
-msgstr ""
+msgstr "%s går alltid til %s. Den har ingen andre bruksområder."
 
 #: ../../tribes/barbarians/battlearena/help.lua:27
 #: ../../tribes/barbarians/battlearena/help.lua:28
@@ -171,7 +174,7 @@ msgstr "%s fra et vertshus"
 #: ../../tribes/barbarians/axefactory/help.lua:26
 #: ../../tribes/barbarians/lime_kiln/help.lua:26
 msgid "%s from the Coal mine or the Charcoal Burner's House"
-msgstr ""
+msgstr "%s fra en kullgruve eller kullbrenners hus"
 
 #: ../../tribes/barbarians/metalworks/help.lua:26
 msgid "%s from the Lumberjack's hut"
@@ -399,7 +402,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/gamekeepers_hut/help.lua:13
 msgid "Barbarian nursery rhyme"
-msgstr ""
+msgstr "Barneregle"
 
 #: ../../tribes/barbarians/conf:5
 msgid "Barbarians"
@@ -553,7 +556,7 @@ msgstr "Bronseøks"
 #: ../../tribes/barbarians/trainingscamp/help.lua:40
 #: ../../tribes/barbarians/well/help.lua:34
 msgid "Build Cost:"
-msgstr ""
+msgstr "Byggekostnad:"
 
 #: ../../tribes/barbarians/conf:126
 #: ../../tribes/barbarians/metalworks/help.lua:32
@@ -589,7 +592,7 @@ msgstr "Bygger"
 #: ../../tribes/barbarians/warmill/help.lua:33
 #: ../../tribes/barbarians/well/help.lua:31
 msgid "Building"
-msgstr ""
+msgstr "Bygning"
 
 #: ../../tribes/barbarians/conf:127
 msgid "Burner"
@@ -647,7 +650,7 @@ msgstr "Kullbrenners hus"
 
 #: ../../tribes/barbarians/trainingscamp/help.lua:13
 msgid "Chief Chat'Karuth in a speech to his army."
-msgstr ""
+msgstr "Høvding Chat'Karuth i en tale til hæren sin."
 
 #: ../../tribes/barbarians/coalmine/help.lua:53
 #: ../../tribes/barbarians/coalmine/help.lua:53
@@ -717,7 +720,7 @@ msgstr "Kull"
 
 #: ../../tribes/barbarians/warmill/help.lua:27
 msgid "Coal from the Coal mine or the Charcoal Burner's House"
-msgstr ""
+msgstr "Kull fra kullgruven eller kullbrenners hus"
 
 #: ../../tribes/barbarians/coalmine/help.lua:17
 #: ../../tribes/barbarians/conf:211
@@ -778,7 +781,7 @@ msgstr "Byggeplass"
 #: ../../tribes/barbarians/deeper_oremine/help.lua:37
 #: ../../tribes/barbarians/warmill/help.lua:42
 msgid "Cost cumulative:"
-msgstr ""
+msgstr "Samlet kostnad:"
 
 #: ../../tribes/barbarians/axefactory/help.lua:55
 #: ../../tribes/barbarians/bakery/help.lua:49
@@ -915,7 +918,7 @@ msgstr "Leter etter ressurser som kan utvinnes gjennom gruvedrift."
 
 #: ../../tribes/barbarians/conf:157
 msgid "Dismantle Site"
-msgstr ""
+msgstr "Demonteringssted"
 
 #: ../../tribes/barbarians/axefactory/help.lua:46
 #: ../../tribes/barbarians/bakery/help.lua:41
@@ -946,7 +949,7 @@ msgstr ""
 #: ../../tribes/barbarians/warmill/help.lua:48
 #: ../../tribes/barbarians/well/help.lua:36
 msgid "Dismantle yields:"
-msgstr ""
+msgstr "Demontering gir:"
 
 #: ../../tribes/barbarians/conf:225
 msgid "Donjon"
@@ -1037,7 +1040,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/conf:46
 msgid "Field harvested"
-msgstr ""
+msgstr "Høstet åker"
 
 #: ../../tribes/barbarians/conf:42
 msgid "Field medium"
@@ -1086,7 +1089,7 @@ msgstr "Fiskerhytte"
 
 #: ../../tribes/barbarians/fishers_hut/help.lua:17
 msgid "Fishes on the coast near the hut."
-msgstr ""
+msgstr "Fisker langs kysten nær hytten."
 
 #: ../../tribes/barbarians/conf:84
 #: ../../tribes/barbarians/fishers_hut/help.lua:45
@@ -1775,7 +1778,7 @@ msgstr "Plant hvete"
 
 #: ../../tribes/barbarians/farmer/conf:1
 msgid "Plants fields."
-msgstr ""
+msgstr "Planter åkre."
 
 #: ../../tribes/barbarians/ranger/conf:1
 msgid "Plants trees."
@@ -1965,7 +1968,7 @@ msgstr ""
 #: ../../tribes/barbarians/warmill/help.lua:16
 #: ../../tribes/barbarians/well/help.lua:16
 msgid "Purpose:"
-msgstr ""
+msgstr "Formål:"
 
 #: ../../tribes/barbarians/conf:181
 msgid "Quarry"
@@ -2170,6 +2173,7 @@ msgstr "Speiderhytte"
 msgid ""
 "Scouts like Scotty the scout scout unscouted area in a scouty fashion."
 msgstr ""
+"Speidere som speideren Scotty speider uspeide områder som en speider."
 
 #: ../../tribes/barbarians/conf:101
 #: ../../tribes/barbarians/farm/help.lua:46
@@ -2195,11 +2199,11 @@ msgstr "Skip"
 
 #: ../../tribes/barbarians/conf:61
 msgid "Ship construction site"
-msgstr ""
+msgstr "Byggeområde for skip"
 
 #: ../../tribes/barbarians/conf:142
 msgid "Shipwright"
-msgstr ""
+msgstr "Skipsbygger"
 
 #: ../../tribes/barbarians/conf:200
 msgid "Shipyard"
@@ -2214,7 +2218,7 @@ msgstr "Spade"
 #: ../../tribes/barbarians/battlearena/conf:36
 #: ../../tribes/barbarians/trainingscamp/conf:43
 msgid "Sleep"
-msgstr ""
+msgstr "Hvile"
 
 #: ../../tribes/barbarians/fernery/help.lua:13
 msgid "Slogan of the Guild of Ferners"
@@ -2309,7 +2313,7 @@ msgstr ""
 #: ../../tribes/barbarians/fishers_hut/help.lua:13
 #: ../../tribes/barbarians/quarry/help.lua:13
 msgid "Source needed"
-msgstr ""
+msgstr "Trenger kilde"
 
 #: ../../tribes/barbarians/axefactory/help.lua:32
 #: ../../tribes/barbarians/bakery/help.lua:34
@@ -2370,7 +2374,7 @@ msgstr "Kro"
 #: ../../tribes/barbarians/farm/help.lua:12
 #: ../../tribes/barbarians/quarry/help.lua:12
 msgid "Text needed"
-msgstr ""
+msgstr "Trenger tekst"
 
 #: ../../tribes/barbarians/axefactory/help.lua:36
 #: ../../tribes/barbarians/axefactory/help.lua:42
@@ -2705,7 +2709,7 @@ msgstr ""
 #: ../../tribes/barbarians/warehouse/help.lua:8
 #: ../../tribes/barbarians/weaving-mill/help.lua:8
 msgid "The help text of this building is under construction."
-msgstr ""
+msgstr "Hjelpeteksten for den bygningen er under utvikling."
 
 #: ../../tribes/barbarians/conf:6
 msgid "The mighty tribes of the east-lands!"
@@ -3295,7 +3299,7 @@ msgstr ""
 #: ../../tribes/barbarians/warmill/help.lua:56
 #: ../../tribes/barbarians/well/help.lua:40
 msgid "Workers"
-msgstr ""
+msgstr "Arbeidere"
 
 #: ../../tribes/barbarians/deep_coalmine/help.lua:54
 #: ../../tribes/barbarians/deep_goldmine/help.lua:50
@@ -3345,7 +3349,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/shipwright/conf:1
 msgid "Works at the shipyard and constructs new ships."
-msgstr ""
+msgstr "Jobber på skipsverftet og lager nye skip."
 
 #: ../../tribes/barbarians/chief-miner/conf:1
 #: ../../tribes/barbarians/master-miner/conf:1

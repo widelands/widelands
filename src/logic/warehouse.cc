@@ -21,6 +21,8 @@
 
 #include <algorithm>
 
+#include <boost/foreach.hpp>
+
 #include "container_iterate.h"
 #include "economy/economy.h"
 #include "economy/flag.h"
@@ -49,7 +51,23 @@
 
 namespace Widelands {
 
+namespace  {
+
 static const uint32_t WORKER_WITHOUT_COST_SPAWN_INTERVAL = 2500;
+
+// Goes through the list and removes all workers that are no longer in the
+// game.
+void remove_no_longer_existing_workers(Game& game, std::vector<Worker*>* workers) {
+	for (std::vector<Worker*>::iterator i = workers->begin(); i != workers->end(); ++i) {
+		if (!game.objects().object_still_available(*i)) {
+			workers->erase(i);
+			remove_no_longer_existing_workers(game, workers);
+			return;
+		}
+	}
+}
+
+}  // namespace
 
 WarehouseSupply::~WarehouseSupply()
 {
@@ -769,7 +787,6 @@ uint32_t Warehouse::count_workers
 	return sum;
 }
 
-
 /// Start a worker of a given type. The worker will
 /// be assigned a job by the caller.
 Worker & Warehouse::launch_worker
@@ -781,18 +798,14 @@ Worker & Warehouse::launch_worker
 
 			//  look if we got one of those in stock
 			if (m_incorporated_workers.count(ware)) {
-				WorkerList & incorporated_workers = m_incorporated_workers[ware];
+				// On cleanup, it could be that the worker was deleted under
+				// us, so we erase the pointer we had to it and create a new
+				// one.
+				remove_no_longer_existing_workers(game, &m_incorporated_workers[ware]);
+				WorkerList& incorporated_workers = m_incorporated_workers[ware];
 
 				container_iterate (WorkerList, incorporated_workers, i) {
-					Worker * worker = *i.current;
-					if (!game.objects().object_still_available(worker)) {
-						// On cleanup, it could be that the worker was deleted under
-						// us, so we erase the pointer we had to it and create a new
-						// one.
-						incorporated_workers.erase(i.current);
-						continue;
-					}
-
+					Worker* worker = *i.current;
 					--unincorporated;
 
 					if (req.check(*worker)) {

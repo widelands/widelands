@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2013-09-15 17:41+0000\n"
-"PO-Revision-Date: 2013-10-08 17:38+0000\n"
+"PO-Revision-Date: 2013-10-22 15:35+0000\n"
 "Last-Translator: GunChleoc <Unknown>\n"
 "Language-Team: Fòram na Gàidhlig http://www.foramnagaidhlig.net\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-10-09 05:12+0000\n"
-"X-Generator: Launchpad (build 16799)\n"
+"X-Launchpad-Export-Date: 2013-10-23 04:32+0000\n"
+"X-Generator: Launchpad (build 16810)\n"
 "Language: gd\n"
 
 #: ../../tribes/empire/meal/conf:1
@@ -23,10 +23,12 @@ msgid ""
 "A real meal is made in inns out of bread and fish/meat. It satisfies the "
 "needs of miners in deep mines."
 msgstr ""
+"Thèid fìor-mhias a dhèanamh ann an taighean-òil à aran is iasg/feòil. "
+"Coileanaidh i feumalachdan nam mèinnearan ann am mèinnean domhain."
 
 #: ../../tribes/empire/ship/conf:1
 msgid "A sea-worthy ship"
-msgstr ""
+msgstr "Long muir-acainneach"
 
 #: ../../tribes/empire/ration/conf:1
 msgid ""
@@ -34,55 +36,58 @@ msgid ""
 "the scout on his scouting trips. They are produced in a tavern out of fish "
 "or meat or bread."
 msgstr ""
+"Seo biadh beag a chumas na mèinnearan làidir is ag obair. Ithidh an "
+"rabhadair greimeagan air na tursan aige cuideachd. Saothraichidh tu "
+"greimeagan de èisg, feòil no aran ann an taigh-tàirn."
 
 #: ../../tribes/empire/conf:57
 msgid "Advanced Lance"
-msgstr ""
+msgstr "Lannsa adhartach"
 
 #: ../../tribes/empire/conf:218
 msgid "Arena"
-msgstr ""
+msgstr "Raon spòrs"
 
 #: ../../tribes/empire/conf:58
 msgid "Armour"
-msgstr ""
+msgstr "Armachd"
 
 #: ../../tribes/empire/conf:189
 msgid "Armour Smithy"
-msgstr ""
+msgstr "Ceàrdach armachd"
 
 #: ../../tribes/empire/conf:110
 msgid "Armoursmith"
-msgstr ""
+msgstr "Gobha armachd"
 
 #: ../../tribes/empire/conf:33
 msgid "Ashes"
-msgstr ""
+msgstr "Luaithre"
 
 #: ../../tribes/empire/conf:59
 msgid "Axe"
-msgstr ""
+msgstr "Tuagh"
 
 #: ../../tribes/empire/conf:111
 msgid "Baker"
-msgstr ""
+msgstr "Fuineadair"
 
 #: ../../tribes/empire/conf:179
 msgid "Bakery"
-msgstr ""
+msgstr "Taigh-fuine"
 
 #: ../../tribes/empire/baker/conf:1
 msgid "Bakes bread for workers."
-msgstr ""
+msgstr "Fuinidh e aran airson nan obraichean."
 
 #: ../../tribes/empire/conf:208
 msgid "Barracks"
-msgstr ""
+msgstr "Taighean-feachd"
 
 #: ../../tribes/empire/conf:155
 #: ../../tribes/empire/conf:209
 msgid "Barrier"
-msgstr ""
+msgstr "Taigh-faire"
 
 #: ../../tribes/empire/armour/conf:1
 msgid ""
@@ -90,120 +95,129 @@ msgid ""
 "used in the trainingscamp - together with food- to train soldiers from "
 "healthpoints level 1 to healthpoints level 2."
 msgstr ""
+"Seo armachd bhunasach aig saighdearan na h-Impireachd. Saothraichidh tu ann "
+"an ceàrdach armachd i is thèid a cleachdadh sa champa trèanaidh – le biadh – "
+"gus saighdearan a thrèanadh o phuingean-beatha leibheil 1 gu puingean-beatha "
+"leibheil 2."
 
 #: ../../tribes/empire/conf:61
 msgid "Basket"
-msgstr ""
+msgstr "Basgaid"
 
 #: ../../tribes/empire/conf:62
 msgid "Beer"
-msgstr ""
+msgstr "Leann"
 
 #: ../../tribes/empire/fish/conf:1
 msgid ""
 "Besides bread and meat, fish is also a foodstuff for the Empire. Fish are "
 "used in taverns, inns and training sites (arena, colosseum, trainingscamp)."
 msgstr ""
+"A bharrachd air aran is feòil, is na h-èisg biadh eile airson na h-"
+"Impireachd. Cleachdaidh na taighean-tàirn, taighean-òil is làraichean-"
+"trèanaidh (raointean spòrs, coileasaman is campaichean trèanaidh) iad."
 
 #: ../../tribes/empire/conf:63
 msgid "Bread"
-msgstr ""
+msgstr "Aran"
 
 #: ../../tribes/empire/conf:60
 msgid "Bread Paddle"
-msgstr ""
+msgstr "Crann-arain"
 
 #: ../../tribes/empire/donkeybreeder/conf:1
 msgid "Breeds cute and helpful donkeys"
-msgstr ""
+msgstr "Tàrmaichidh e asalan stampa cuideachail"
 
 #: ../../tribes/empire/pig-breeder/conf:1
 msgid "Breeds pigs."
-msgstr ""
+msgstr "Tàrmaichidh e mucan."
 
 #: ../../tribes/empire/conf:112
 msgid "Brewer"
-msgstr ""
+msgstr "Grùdair"
 
 #: ../../tribes/empire/conf:180
 msgid "Brewery"
-msgstr ""
+msgstr "Taigh-grùide"
 
 #: ../../tribes/empire/conf:113
 msgid "Builder"
-msgstr ""
+msgstr "Togalaiche"
 
 #: ../../tribes/empire/conf:114
 msgid "Burner"
-msgstr ""
+msgstr "Loisgeadair"
 
 #: ../../tribes/empire/burner/conf:1
 msgid "Burns coal."
-msgstr ""
+msgstr "Loisgidh e gual."
 
 #: ../../tribes/empire/conf:115
 msgid "Carpenter"
-msgstr ""
+msgstr "Saor"
 
 #: ../../tribes/empire/conf:103
 msgid "Carrier"
-msgstr ""
+msgstr "Giùlanair"
 
 #: ../../tribes/empire/carrier/conf:1
 msgid "Carries items along your roads."
-msgstr ""
+msgstr "Giùlainidh e rudan air na rathaidean agad."
 
 #: ../../tribes/empire/conf:149
 #: ../../tribes/empire/conf:212
 msgid "Castle"
-msgstr ""
+msgstr "Caisteal"
 
 #: ../../tribes/empire/conf:223
 #: ../../tribes/empire/scripting/sc01_castle_village.lua:10
 msgid "Castle village"
-msgstr ""
+msgstr "Baile caisteil"
 
 #: ../../tribes/empire/conf:64
 msgid "Chain-Armour"
-msgstr ""
+msgstr "Màilleach"
 
 #: ../../tribes/empire/conf:185
 msgid "Charcoal Burner"
-msgstr ""
+msgstr "Loisgeadair fiodha"
 
 #: ../../tribes/empire/conf:156
 msgid "Citadel"
-msgstr ""
+msgstr "Cathair"
 
 #: ../../tribes/empire/conf:65
 msgid "Cloth"
-msgstr ""
+msgstr "Clò"
 
 #: ../../tribes/empire/cloth/conf:1
 msgid ""
 "Cloth is needed to build several buildings. It is also consumed in the "
 "armour smithy."
 msgstr ""
+"Feumaidh tu clò gus caochladh thogalaichean a thogail. Thèid a chleachdadh "
+"ann an ceàrdach armachd cuideachd."
 
 #: ../../tribes/empire/conf:66
 msgid "Coal"
-msgstr ""
+msgstr "Gual"
 
 #: ../../tribes/empire/conf:199
 msgid "Coal Mine"
-msgstr ""
+msgstr "Mèinn guail"
 
 #: ../../tribes/empire/conf:217
 msgid "Colosseum"
-msgstr ""
+msgstr "Coileasam"
 
 #: ../../tribes/empire/shipyard/conf:27
 msgid "Constructing ship"
-msgstr ""
+msgstr "A' togail long"
 
 #: ../../tribes/empire/conf:143
 msgid "Construction Site"
-msgstr ""
+msgstr "Làrach-togail"
 
 #: ../../tribes/empire/stonemason/conf:1
 msgid "Cuts raw pieces of granite and marble out of laying stones."
@@ -211,157 +225,164 @@ msgstr "Gearraidh e pìosan de ghraineal is marbhal à chlachan."
 
 #: ../../tribes/empire/conf:198
 msgid "Deep Coal Mine"
-msgstr ""
+msgstr "Mèinn guail dhomhain"
 
 #: ../../tribes/empire/conf:202
 msgid "Deep Gold Mine"
-msgstr ""
+msgstr "Mèinn òir dhomhain"
 
 #: ../../tribes/empire/conf:200
 msgid "Deep Iron Ore Mine"
-msgstr ""
+msgstr "Mèinn cloich-iarainn dhomhain"
 
 #: ../../tribes/empire/conf:196
 msgid "Deep Marble Mine"
-msgstr ""
+msgstr "Mèinn marbhail dhomhain"
 
 #: ../../tribes/empire/soldier/conf:1
 msgid "Defend and Conquer!"
-msgstr ""
+msgstr "Dìon is ceannsaich!"
 
 #: ../../tribes/empire/conf:39
 msgid "Destroyed building"
-msgstr ""
+msgstr "Togalach air a mhilleadh"
 
 #: ../../tribes/empire/geologist/conf:1
 msgid "Discovers resources for mining."
-msgstr ""
+msgstr "Lorgaidh e stòrasan airson mèinneadh."
 
 #: ../../tribes/empire/conf:146
 msgid "Dismantle Site"
-msgstr "Thoir an togalach às a chèile"
+msgstr "'Ga thoirt às a chèile"
 
 #: ../../tribes/empire/conf:157
 msgid "Donjon"
-msgstr ""
+msgstr "Tùr-faire"
 
 #: ../../tribes/empire/conf:104
 msgid "Donkey"
-msgstr ""
+msgstr "Asal"
 
 #: ../../tribes/empire/conf:137
 msgid "Donkey Breeder"
-msgstr ""
+msgstr "Tàrmachair asalan"
 
 #: ../../tribes/empire/conf:190
 msgid "Donkeyfarm"
-msgstr ""
+msgstr "Tuathanas asalan"
 
 #: ../../tribes/empire/conf:5
 msgid "Empire"
-msgstr ""
+msgstr "An Impireachd"
 
 #: ../../tribes/empire/conf:194
 msgid "Farm"
-msgstr ""
+msgstr "Tuathanas"
 
 #: ../../tribes/empire/conf:116
 msgid "Farmer"
-msgstr ""
+msgstr "Tuathanach"
 
 #: ../../tribes/empire/lumberjack/conf:1
 msgid "Fells trees."
-msgstr ""
+msgstr "Leagaidh e craobhan."
 
 #: ../../tribes/empire/conf:38
 msgid "Field harvested"
-msgstr ""
+msgstr "Achadh air a bhuain"
 
 #: ../../tribes/empire/conf:34
 msgid "Field medium"
-msgstr ""
+msgstr "Achadh meadhanach"
 
 #: ../../tribes/empire/conf:37
 msgid "Field ripe"
-msgstr ""
+msgstr "Achadh abaich"
 
 #: ../../tribes/empire/conf:35
 msgid "Field small"
-msgstr ""
+msgstr "Achadh beag"
 
 #: ../../tribes/empire/conf:36
 msgid "Field tiny"
-msgstr ""
+msgstr "Achadh beag bìodach"
 
 #: ../../tribes/empire/conf:67
 msgid "Fire Tongs"
-msgstr ""
+msgstr "Clobha teine"
 
 #: ../../tribes/empire/fire_tongs/conf:1
 msgid ""
 "Fire tongs are tools of the smelter, who works in the smelting works. They "
 "are produced by the toolsmith."
 msgstr ""
+"'S e acainn a chleachdas an leaghadair a tha sa chlobha teine a "
+"dh'obraicheas ann an ceàrdach leaghadair. Thèid a saothrachadh le gobha "
+"acainnean."
 
 #: ../../tribes/empire/conf:68
 msgid "Fish"
-msgstr ""
+msgstr "Iasg"
 
 #: ../../tribes/empire/conf:117
 msgid "Fisher"
-msgstr ""
+msgstr "Iasgair"
 
 #: ../../tribes/empire/conf:172
 msgid "Fisher's House"
-msgstr ""
+msgstr "Taigh-iasgair"
 
 #: ../../tribes/empire/conf:69
 msgid "Fishing Rod"
-msgstr ""
+msgstr "Slat-iasgaich"
 
 #: ../../tribes/empire/fishing_rod/conf:1
 msgid ""
 "Fishing rods are needed by fishers, to catch fish. Produced by the toolsmith."
 msgstr ""
+"Feumaidh na h-iasgairean slatan-iasgaich gus iasgach. Nì thu an gobha "
+"acainnean iad."
 
 #: ../../tribes/empire/conf:70
 msgid "Flour"
-msgstr ""
+msgstr "Flùr"
 
 #: ../../tribes/empire/flour/conf:1
 msgid ""
 "Flour is produced by the mill out of wheat and is needed in the bakery to "
 "produce the tasty Empire bread."
 msgstr ""
+"Nì am muileann flùr à cruithneachd is tha an taigh-fuine feumach air gus "
+"aran blasta na h-Impireachd a dhèanamh."
 
 #: ../../tribes/empire/conf:118
 msgid "Forester"
-msgstr ""
+msgstr "Planntair-coille"
 
 #: ../../tribes/empire/conf:171
 msgid "Forester's House"
-msgstr ""
+msgstr "Taigh planntair-choille"
 
 #: ../../tribes/empire/conf:158
 #: ../../tribes/empire/conf:213
 msgid "Fortress"
-msgstr ""
+msgstr "Dùn"
 
 #: ../../tribes/empire/conf:119
 msgid "Geologist"
-msgstr ""
+msgstr "Clach-eòlaiche"
 
 #: ../../tribes/empire/fisher/conf:1
 msgid "Gets fish out of the sea."
-msgstr ""
+msgstr "Gheibh e èisg às a' mhuir."
 
 #: ../../tribes/empire/conf:71
 msgid "Gold"
-msgstr ""
+msgstr "Òr"
 
 #: ../../tribes/empire/conf:203
 msgid "Gold Mine"
-msgstr ""
+msgstr "Mèinn òir"
 
 #: ../../tribes/empire/gold/conf:1
 msgid ""
@@ -385,136 +406,143 @@ msgstr ""
 
 #: ../../tribes/empire/conf:73
 msgid "Grape"
-msgstr ""
+msgstr "Fìon-dhearc"
 
 #: ../../tribes/empire/vinefarmer/conf:1
 msgid "Grows vine."
-msgstr ""
+msgstr "Fàsaidh e fìonan."
 
 #: ../../tribes/empire/conf:150
 msgid "Guardhall"
-msgstr ""
+msgstr "Talla-faire"
 
 #: ../../tribes/empire/conf:151
 msgid "Guardhouse"
-msgstr ""
+msgstr "Bothan-faire"
 
 #: ../../tribes/empire/conf:74
 msgid "Hammer"
-msgstr ""
+msgstr "Òrd"
 
 #: ../../tribes/empire/vineyard/conf:25
 msgid "Harvest vine"
-msgstr ""
+msgstr "Buain fìonan"
 
 #: ../../tribes/empire/farm/conf:25
 msgid "Harvest wheat"
-msgstr ""
+msgstr "Buain cruithneachd"
 
 #: ../../tribes/empire/conf:163
 msgid "Headquarters"
-msgstr ""
+msgstr "Prìomh-àras"
 
 #: ../../tribes/empire/conf:222
 #: ../../tribes/empire/scripting/sc00_headquarters_medium.lua:10
 msgid "Headquarters medium"
-msgstr ""
+msgstr "Prìomh-àras meadhanach"
 
 #: ../../tribes/empire/conf:164
 msgid "Headquarters shipwreck"
-msgstr ""
+msgstr "Prìomh-àras luinge briste"
 
 #: ../../tribes/empire/conf:75
 msgid "Heavy Lance"
-msgstr ""
+msgstr "Lannsa throm"
 
 #: ../../tribes/empire/conf:76
 msgid "Helmet"
-msgstr ""
+msgstr "Clogaid"
 
 #: ../../tribes/empire/donkey/conf:1
 msgid "Helps to carry items at heavy used roads."
 msgstr ""
+"Cuidichidh e le giùlan nan nithean air rathaidean a tha 'gan cleachdadh gu "
+"tric."
 
 #: ../../tribes/empire/conf:152
 msgid "High Tower"
-msgstr ""
+msgstr "Tùr àrd"
 
 #: ../../tribes/empire/kitchen_tools/conf:1
 msgid ""
 "How can one create a ration or meal if there are no kitchen tools? They are "
 "produced in a toolsmithy and used in taverns and inns."
 msgstr ""
+"Ciamar a dhèanadh tu greimeag no mias às aonais acainnean cidsin? Nì gobha "
+"acainnean iad is thèid an cleachdadh ann an taighean-tàirn is taighean-"
+"seinnse."
 
 #: ../../tribes/empire/conf:120
 msgid "Hunter"
-msgstr ""
+msgstr "Sealgair"
 
 #: ../../tribes/empire/conf:173
 msgid "Hunter's House"
-msgstr ""
+msgstr "Taigh-sealgair"
 
 #: ../../tribes/empire/conf:77
 msgid "Hunting Spear"
-msgstr ""
+msgstr "Sleagh seilg"
 
 #: ../../tribes/empire/conf:183
 msgid "Inn"
-msgstr ""
+msgstr "Taigh-òil"
 
 #: ../../tribes/empire/conf:121
 msgid "Innkeeper"
-msgstr ""
+msgstr "Tàrnadaiche"
 
 #: ../../tribes/empire/conf:78
 msgid "Iron"
-msgstr ""
+msgstr "Iarann"
 
 #: ../../tribes/empire/conf:79
 msgid "Iron Ore"
-msgstr ""
+msgstr "Clach-iarainn"
 
 #: ../../tribes/empire/conf:201
 msgid "Iron Ore Mine"
-msgstr ""
+msgstr "Mèinn cloich-iarainn"
 
 #: ../../tribes/empire/ironore/conf:1
 msgid ""
 "Iron ores need to be smelted in the smelting works to give iron. Iron ores "
 "are produced in iron mines."
 msgstr ""
+"Feumaidh tu clach-iarainn a leaghadh ann an ceàrdach leaghadair gus iarann "
+"fhaighinn. Gheibh thu clach-iarainn à mèinnean iarainn."
 
 #: ../../tribes/empire/shepherd/conf:1
 msgid "Keeping sheep."
-msgstr ""
+msgstr "A' cumail caoraich."
 
 #: ../../tribes/empire/conf:80
 msgid "Kitchen Tools"
-msgstr ""
+msgstr "Acainnean cidsin"
 
 #: ../../tribes/empire/conf:81
 msgid "Lance"
-msgstr ""
+msgstr "Lannsa"
 
 #: ../../tribes/empire/conf:122
 msgid "Lumberjack"
-msgstr ""
+msgstr "Coilltear"
 
 #: ../../tribes/empire/conf:170
 msgid "Lumberjack's House"
-msgstr ""
+msgstr "Taigh coillteir"
 
 #: ../../tribes/empire/conf:83
 msgid "Marble"
-msgstr ""
+msgstr "Marbhal"
 
 #: ../../tribes/empire/conf:82
 msgid "Marble Column"
-msgstr ""
+msgstr "Colbh marbhail"
 
 #: ../../tribes/empire/conf:197
 msgid "Marble Mine"
-msgstr ""
+msgstr "Mèinn marbhail"
 
 #: ../../tribes/empire/marblecolumn/conf:1
 msgid ""
@@ -538,15 +566,15 @@ msgstr ""
 
 #: ../../tribes/empire/conf:123
 msgid "Master Miner"
-msgstr ""
+msgstr "Sàr-mhèinnear"
 
 #: ../../tribes/empire/conf:84
 msgid "Meal"
-msgstr ""
+msgstr "Mias"
 
 #: ../../tribes/empire/conf:85
 msgid "Meat"
-msgstr ""
+msgstr "Feòil"
 
 #: ../../tribes/empire/meat/conf:1
 msgid ""
@@ -555,344 +583,353 @@ msgid ""
 "colosseum, trainingscamp). There are two sources of meat: pork out of "
 "piggeries and the meat of wild game hunted by the hunters."
 msgstr ""
+"Tha tòrr chumhachd san fheòil. Thèid a cleachdadh sna taighean-tàirn is "
+"taighean-òil gus biadh ullachadh do na mèinnearan. Ithear seo sna làraichean-"
+"trèanaidh cuideachd (raointean spòrs, coileasaman is campaichean trèanaidh). "
+"Tha dà thùs feòla ann: feòil-muice à failean is sitheann a shealgas an "
+"sealgair."
 
 #: ../../tribes/empire/conf:178
 msgid "Mill"
-msgstr ""
+msgstr "Muileann"
 
 #: ../../tribes/empire/conf:124
 msgid "Miller"
-msgstr ""
+msgstr "Muillear"
 
 #: ../../tribes/empire/miller/conf:1
 msgid "Mills the wheat to produce flour."
-msgstr ""
+msgstr "Bleithidh seo a' chruithneachd gus flùr a shaothrachadh."
 
 #: ../../tribes/empire/marblemine/conf:26
 #: ../../tribes/empire/quarry/conf:22
 msgid "Mine marble"
-msgstr ""
+msgstr "Tochail marbhal"
 
 #: ../../tribes/empire/marblemine/conf:27
 #: ../../tribes/empire/quarry/conf:23
 msgid "Mine marble (only for compatibility with old savegames (build13))"
 msgstr ""
+"Tochail marbhal (airson co-chòrdalachd ri seann gheamaichean air an "
+"sàbhaladh (build13) a-mhàin)"
 
 #: ../../tribes/empire/marblemine/conf:28
 #: ../../tribes/empire/quarry/conf:20
 msgid "Mine stone"
-msgstr "Tochail clach"
+msgstr "Tochail clachan"
 
 #: ../../tribes/empire/marblemine/conf:29
 #: ../../tribes/empire/quarry/conf:21
 msgid "Mine stone (only for compatibility with old savegames (build13))"
 msgstr ""
-"Tochail clach (airson co-chòrdalachd ri seann gheamaichean air an sàbhaladh "
-"(build13) a-mhàin)"
+"Tochail clachan (airson co-chòrdalachd ri seann gheamaichean air an "
+"sàbhaladh (build13) a-mhàin)"
 
 #: ../../tribes/empire/conf:125
 msgid "Miner"
-msgstr ""
+msgstr "Mèinnear"
 
 #: ../../tribes/empire/scripting/sc01_castle_village.lua:119
 msgid "Not enough space"
-msgstr ""
+msgstr "Chan eil rum gu leòr ann"
 
 #: ../../tribes/empire/conf:210
 msgid "Outpost"
-msgstr ""
+msgstr "Gearastan"
 
 #: ../../tribes/empire/conf:86
 msgid "Pick"
-msgstr ""
+msgstr "Piocaid"
 
 #: ../../tribes/empire/conf:126
 msgid "Pig Breeder"
-msgstr ""
+msgstr "Tàrmachair mhucan"
 
 #: ../../tribes/empire/conf:193
 msgid "Piggery"
-msgstr ""
+msgstr "Fail"
 
 #: ../../tribes/empire/vineyard/conf:23
 msgid "Plant vine"
-msgstr ""
+msgstr "Cuir fìonan"
 
 #: ../../tribes/empire/farm/conf:23
 msgid "Plant wheat"
-msgstr ""
+msgstr "Cuir cruithneachd"
 
 #: ../../tribes/empire/farmer/conf:1
 msgid "Plants fields."
-msgstr ""
+msgstr "Cuiridh e achaidhean."
 
 #: ../../tribes/empire/forester/conf:1
 msgid "Plants trees."
-msgstr ""
+msgstr "Cuiridh e craobhan."
 
 #: ../../tribes/empire/conf:87
 msgid "Plate-Armour"
-msgstr ""
+msgstr "Lùireach mheatailt"
 
 #: ../../tribes/empire/conf:166
 msgid "Port"
-msgstr ""
+msgstr "Port"
 
 #: ../../tribes/empire/weaponsmithy/conf:35
 msgid "Produce advanced lance"
-msgstr ""
+msgstr "dèanamh lannsa adhartaich"
 
 #: ../../tribes/empire/armoursmithy/conf:32
 msgid "Produce armour"
-msgstr ""
+msgstr "dèanamh armachd"
 
 #: ../../tribes/empire/toolsmithy/conf:48
 msgid "Produce axe"
-msgstr ""
+msgstr "dèanamh tuaighe"
 
 #: ../../tribes/empire/toolsmithy/conf:37
 msgid "Produce bakingtray"
-msgstr ""
+msgstr "dèanamh crainn-arain"
 
 #: ../../tribes/empire/toolsmithy/conf:46
 msgid "Produce basket"
-msgstr ""
+msgstr "dèanamh basgaide"
 
 #: ../../tribes/empire/armoursmithy/conf:33
 msgid "Produce chain armour"
-msgstr ""
+msgstr "dèanamh màillich"
 
 #: ../../tribes/empire/toolsmithy/conf:38
 msgid "Produce fire tongs"
-msgstr ""
+msgstr "dèanamh clobha theine"
 
 #: ../../tribes/empire/toolsmithy/conf:39
 msgid "Produce fishing rod"
-msgstr ""
+msgstr "dèanamh slaite-iasgaich"
 
 #: ../../tribes/empire/toolsmithy/conf:40
 msgid "Produce hammer"
-msgstr ""
+msgstr "dèanamh ùird"
 
 #: ../../tribes/empire/weaponsmithy/conf:36
 msgid "Produce heavy lance"
-msgstr ""
+msgstr "dèanamh lannsa truime"
 
 #: ../../tribes/empire/armoursmithy/conf:31
 msgid "Produce helm"
-msgstr ""
+msgstr "dèanamh clogaide"
 
 #: ../../tribes/empire/toolsmithy/conf:45
 msgid "Produce hunting spear"
-msgstr ""
+msgstr "dèanamh slèigh seilg"
 
 #: ../../tribes/empire/toolsmithy/conf:41
 msgid "Produce kitchen tools"
-msgstr ""
+msgstr "dèanamh acainnean cidsin"
 
 #: ../../tribes/empire/weaponsmithy/conf:34
 msgid "Produce lance"
-msgstr ""
+msgstr "dèanamh lannsa"
 
 #: ../../tribes/empire/inn/conf:26
 msgid "Produce meal"
-msgstr ""
+msgstr "dèanamh mèis"
 
 #: ../../tribes/empire/toolsmithy/conf:42
 msgid "Produce pick"
-msgstr ""
+msgstr "dèanamh piocaide"
 
 #: ../../tribes/empire/armoursmithy/conf:34
 msgid "Produce plate armour"
-msgstr ""
+msgstr "dèanamh lùirich meatailt"
 
 #: ../../tribes/empire/inn/conf:25
 msgid "Produce ration"
-msgstr ""
+msgstr "dèanamh greimeige"
 
 #: ../../tribes/empire/toolsmithy/conf:47
 msgid "Produce saw"
-msgstr ""
+msgstr "dèanamh sàibh"
 
 #: ../../tribes/empire/toolsmithy/conf:43
 msgid "Produce scythe"
-msgstr ""
+msgstr "dèanamh fàil"
 
 #: ../../tribes/empire/toolsmithy/conf:44
 msgid "Produce shovel"
-msgstr ""
+msgstr "dèanamh sluasaide"
 
 #: ../../tribes/empire/weaponsmithy/conf:37
 msgid "Produce war lance"
-msgstr ""
+msgstr "dèanamh lannsa-cogaidh"
 
 #: ../../tribes/empire/weaponsmithy/conf:33
 msgid "Produce wood lance"
-msgstr ""
+msgstr "dèanamh lannsa fiodha"
 
 #: ../../tribes/empire/armoursmith/conf:1
 msgid "Produces armour for the soldiers."
-msgstr ""
+msgstr "Nì e armachd airson nan saighdearan."
 
 #: ../../tribes/empire/brewer/conf:1
 msgid "Produces beer or wine."
-msgstr ""
+msgstr "Nì e leann no fìon."
 
 #: ../../tribes/empire/weaver/conf:1
 msgid "Produces cloth for ships and soldiers."
-msgstr ""
+msgstr "Nì e clò airson longan is saighdearan."
 
 #: ../../tribes/empire/innkeeper/conf:1
 msgid "Produces food for miners."
-msgstr ""
+msgstr "Nì e biadh airson mèinnearan."
 
 #: ../../tribes/empire/toolsmith/conf:1
 msgid "Produces tools for the workers."
-msgstr ""
+msgstr "Nì e acainnean airson nan obraichean."
 
 #: ../../tribes/empire/weaponsmith/conf:1
 msgid "Produces weapons for the soldiers."
-msgstr ""
+msgstr "Nì e airm airson nan saighdearan."
 
 #: ../../tribes/empire/conf:169
 msgid "Quarry"
-msgstr ""
+msgstr "Coireall"
 
 #: ../../tribes/empire/conf:88
 msgid "Ration"
-msgstr ""
+msgstr "Greimeag"
 
 #: ../../tribes/empire/conf:40
 msgid "Resource indicator coal little"
-msgstr ""
+msgstr "Taisbeanair-stòrasan – beagan guail"
 
 #: ../../tribes/empire/conf:41
 msgid "Resource indicator coal much"
-msgstr ""
+msgstr "Taisbeanair-stòrasan – mòran guail"
 
 #: ../../tribes/empire/conf:42
 msgid "Resource indicator gold little"
-msgstr ""
+msgstr "Taisbeanair-stòrasan – beagan òir"
 
 #: ../../tribes/empire/conf:43
 msgid "Resource indicator gold much"
-msgstr ""
+msgstr "Taisbeanair-stòrasan – mòran òir"
 
 #: ../../tribes/empire/conf:44
 msgid "Resource indicator granite little"
-msgstr ""
+msgstr "Taisbeanair-stòrasan – beagan graineil"
 
 #: ../../tribes/empire/conf:45
 msgid "Resource indicator granite much"
-msgstr ""
+msgstr "Taisbeanair-stòrasan – mòran graineil"
 
 #: ../../tribes/empire/conf:46
 msgid "Resource indicator iron little"
-msgstr ""
+msgstr "Taisbeanair-stòrasan – beagan iarainn"
 
 #: ../../tribes/empire/conf:47
 msgid "Resource indicator iron much"
-msgstr ""
+msgstr "Taisbeanair-stòrasan – mòran iarainn"
 
 #: ../../tribes/empire/conf:48
 msgid "Resource indicator no resource"
-msgstr ""
+msgstr "Taisbeanair-stòrasan – gun stòras"
 
 #: ../../tribes/empire/conf:49
 msgid "Resource indicator water"
-msgstr ""
+msgstr "Taisbeanair-stòrasan – uisge"
 
 #: ../../tribes/empire/conf:89
 msgid "Saw"
-msgstr ""
+msgstr "Sàbh"
 
 #: ../../tribes/empire/conf:177
 msgid "Sawmill"
-msgstr ""
+msgstr "Muileann sàbhaidh"
 
 #: ../../tribes/empire/conf:136
 msgid "Scout"
-msgstr ""
+msgstr "Rabhadair"
 
 #: ../../tribes/empire/conf:175
 msgid "Scout's House"
-msgstr ""
+msgstr "Taigh-rabhadair"
 
 #: ../../tribes/empire/scout/conf:1
 msgid ""
 "Scouts like Scotty the scout scout unscouted area in a scouty fashion."
 msgstr ""
+"An rabhadair a rabhas mun aineol mar a bheachdaicheas am beachdadair air "
+"nach eil fios no fàth air."
 
 #: ../../tribes/empire/conf:90
 msgid "Scythe"
-msgstr ""
+msgstr "Fàl"
 
 #: ../../tribes/empire/conf:159
 #: ../../tribes/empire/conf:207
 msgid "Sentry"
-msgstr ""
+msgstr "Freiceadan"
 
 #: ../../tribes/empire/conf:191
 msgid "Sheepfarm"
-msgstr ""
+msgstr "Tuathanas chaorach"
 
 #: ../../tribes/empire/conf:127
 msgid "Shepherd"
-msgstr ""
+msgstr "Cìobair"
 
 #: ../../tribes/empire/conf:140
 msgid "Ship"
-msgstr ""
+msgstr "Long"
 
 #: ../../tribes/empire/conf:54
 msgid "Ship construction site"
-msgstr ""
+msgstr "Làrach-togail luinge"
 
 #: ../../tribes/empire/conf:128
 msgid "Shipwright"
-msgstr ""
+msgstr "Saor-luinge"
 
 #: ../../tribes/empire/conf:187
 msgid "Shipyard"
-msgstr ""
+msgstr "Cala"
 
 #: ../../tribes/empire/conf:91
 msgid "Shovel"
-msgstr ""
+msgstr "Sluasaid"
 
 #: ../../tribes/empire/arena/conf:29
 #: ../../tribes/empire/colosseum/conf:35
 #: ../../tribes/empire/trainingscamp/conf:46
 msgid "Sleep"
-msgstr ""
+msgstr "'Na chadal"
 
 #: ../../tribes/empire/conf:153
 msgid "Small Tower"
-msgstr ""
+msgstr "Tùr beag"
 
 #: ../../tribes/empire/smelting_works/conf:27
 msgid "Smelt gold"
-msgstr ""
+msgstr "Òr air a leaghadh"
 
 #: ../../tribes/empire/smelting_works/conf:26
 msgid "Smelt iron"
-msgstr ""
+msgstr "Iarann air a leaghadh"
 
 #: ../../tribes/empire/conf:129
 msgid "Smelter"
-msgstr ""
+msgstr "Leaghadair"
 
 #: ../../tribes/empire/conf:186
 msgid "Smelting Works"
-msgstr ""
+msgstr "Ceàrdach leaghadair"
 
 #: ../../tribes/empire/smelter/conf:1
 msgid "Smelts iron."
-msgstr ""
+msgstr "Leaghaidh e iarann."
 
 #: ../../tribes/empire/conf:107
 msgid "Soldier"
-msgstr ""
+msgstr "Saighdear"
 
 #: ../../tribes/empire/scripting/sc01_castle_village.lua:120
 msgid ""
@@ -900,6 +937,9 @@ msgid ""
 "weren't build. You are at an disadvantage with this; consider restarting \n"
 "this map with a fair starting condition."
 msgstr ""
+"Cha robh rum gu leòr ann airson cuid dhe na togalaichean tòiseachaidh agad \n"
+"is cha deach an togail. Cuiridh seo èis ort; saoil an tòisich thu \n"
+"air a' mhapa seo a-rithist le cumhan tòiseachaidh cothromach?"
 
 #: ../../tribes/empire/conf:130
 msgid "Stonemason"
@@ -923,29 +963,29 @@ msgstr ""
 
 #: ../../tribes/empire/conf:160
 msgid "Stronghold"
-msgstr ""
+msgstr "Daingean"
 
 #: ../../tribes/empire/conf:184
 msgid "Tavern"
-msgstr ""
+msgstr "Taigh-tàrn"
 
 #: ../../tribes/empire/hunter/conf:1
 msgid "The Hunter brings good meat to the colonists."
-msgstr ""
+msgstr "Bheir an sealgair feòil mhath dha na tuinichean."
 
 #: ../../tribes/empire/scythe/conf:1
 msgid ""
 "The Scythe is the tool of the farmers. It is produced by the toolsmith."
-msgstr ""
+msgstr "Tha tuathanaich feumach air an fhàl seo. Nì an gobha acainnean e."
 
 #: ../../tribes/empire/conf:4
 msgid "The Widelands Development Team"
-msgstr ""
+msgstr "An sgioba leasachaidh Widelands"
 
 #: ../../tribes/empire/axe/conf:1
 msgid ""
 "The axe is the tool for the lumberjack. It is produced by the toolsmith."
-msgstr ""
+msgstr "Tha coilltearan feumach air an tuagh seo. Nì an gobha acainnean e."
 
 #: ../../tribes/empire/bread/conf:1
 msgid ""
@@ -953,12 +993,18 @@ msgid ""
 "is used in taverns and inns to prepare rations and meals. Bread is also "
 "consumed in the training sites (arena, colosseum, trainingscamp)."
 msgstr ""
+"Nì fuineadairean na h-Ìmpireachd aran uabhasach blasta à flùr is uisge. "
+"Cleachdaich na taighean-tàirn is taighean-òil e gus greimeagan is miasan "
+"ullachadh. Ithear e ann an làraichean-trèanaidh (raointean spòrs, "
+"coileasaman is campaichean trèanaidh) cuideachd."
 
 #: ../../tribes/empire/bakingtray/conf:1
 msgid ""
 "The bread paddle is the tool of the baker, each baker needs its own. It is "
 "produced by the toolsmith."
 msgstr ""
+"Is acainn an fhuineadair a th' anns a' chrann-arain is bith feum aig gach "
+"fuineadair air fear aige fhèin. Thèid a shaothrachadh le gobha acainnean."
 
 #: ../../tribes/empire/chain_armour/conf:1
 msgid ""
@@ -966,6 +1012,10 @@ msgid ""
 "an armour smithy and used in a trainingscamp - together with food - to train "
 "soldiers from healthpoints level 2 to level 3."
 msgstr ""
+"'S e armachd mheadhanach aig saighdearan na h-Impireachd a th' anns a "
+"mhàilleach. Saothraichidh tu ann an ceàrdach armachd i is thèid a cleachdadh "
+"sa champa trèanaidh – le biadh – gus saighdearan a thrèanadh o phuingean-"
+"beatha leibheil 2 gu puingean-beatha leibheil 3."
 
 #: ../../tribes/empire/coal/conf:1
 msgid ""
@@ -973,6 +1023,9 @@ msgid ""
 "are usually fed with coal. It is mined in coal mines or produced by a "
 "charcoal burner out of trunks."
 msgstr ""
+"Thèid teintean aig ceàrdach leaghadair, ceàrdach armachd is ceàrdach arm na "
+"h-Impireachd a bhiadhadh le gual mar as trice. Tochlaidh thu gual à mèinn "
+"guail no nì thu i à stuic ann an sloc gual-fhiodha."
 
 #: ../../tribes/empire/hammer/conf:1
 msgid ""
@@ -980,6 +1033,9 @@ msgid ""
 "the armour- and weaponsmith. Make sure you always have some in reserve! It "
 "is produced by the toolsmith."
 msgstr ""
+"'S e acainn riatanach a th' anns an òrd. Feumaidh gach clach-eòlaiche, "
+"togalaiche, gobha armachd is gobha arm fear. Dèan cinnteach gu bheil cuid "
+"air fhàgail dhut an-còmhnaidh! Nì an gobha acainnean iad."
 
 #: ../../tribes/empire/helm/conf:1
 msgid ""
@@ -988,6 +1044,11 @@ msgid ""
 "soldiers. Helmets are also used in trainingscamps - together with food - to "
 "train soldiers from healthpoints level 0 to healthpoints level 1."
 msgstr ""
+"'S e acainn bunasach a th' anns a' chlogaid gus gaisgeach a dhìon. "
+"Saothraichidh tu ann an ceàrdach armachd i is thèid a cleachdadh le lannsa "
+"fiodha gus gaisgich òga uidheamachadh. Thèid clogaidean a chleachdadh sa "
+"champa trèanaidh cuideachd – le biadh – gus saighdearan a thrèanadh o "
+"phuingean-beatha leibheil 0 gu puingean-beatha leibheil 1."
 
 #: ../../tribes/empire/plate_armour/conf:1
 msgid ""
@@ -995,30 +1056,43 @@ msgid ""
 "It is produced in the armour smithy and used in the trainingscamp  - "
 "together with food - to train soldiers from healthpoints level 3 to level 4."
 msgstr ""
+"'S e an armachd as treasa aig saighdearan na h-Impireachd a th' anns an "
+"lùireach mheatailt. Saothraichidh tu ann an ceàrdach armachd i is thèid a "
+"cleachdadh sa champa trèanaidh – le biadh – gus saighdearan a thrèanadh o "
+"phuingean-beatha leibheil 3 gu puingean-beatha leibheil 4."
 
 #: ../../tribes/empire/shovel/conf:1
 msgid ""
 "The shovel is needed for proper handling of plants. Therefore the forester "
 "and the vinefarmer use it. It is produced by the toolsmith."
 msgstr ""
+"Feumaidh tu sluasaid gus lusan a làimhseachadh mar bu chòir. Mar sin, "
+"cleachdaidh am planntair-coille is an tuathanach-fìona tè. Thèid a "
+"saothrachadh le gobha acainnean."
 
 #: ../../tribes/empire/grape/conf:1
 msgid ""
 "These grapes are the basic for a tasty wine. They are harvested in a "
 "vineyard and processed in a winery."
 msgstr ""
+"Cha dèan thu fìon às aonais nam fìon-dhearcan blasta seo. Buainidh tu ann am "
+"fìon-lios iad is nì thu fìon dhiubh ann am fìon-lann."
 
 #: ../../tribes/empire/basket/conf:1
 msgid ""
 "This basket is needed by the vinefarmer for harvesting the grapes. It is "
 "produced by the toolsmith."
 msgstr ""
+"Feumaidh gach tuathanach-fìona basgaid gus na fìon-dhearcan a bhuain. Nì an "
+"gobha acainnean iad."
 
 #: ../../tribes/empire/beer/conf:1
 msgid ""
 "This beer is produced in a brewery out of wheat and water. It is consumed by "
 "miners in coal and iron ore mines."
 msgstr ""
+"Nì thu an leann seo ann an taigh-grùide à cruithneachd is uisge. Òlaidh na "
+"mèinnearan sna mèinnean guail is cloich-iarainn e."
 
 #: ../../tribes/empire/heavy_lance/conf:1
 msgid ""
@@ -1026,6 +1100,9 @@ msgid ""
 "in the weapon smithy and used in the trainingscamp - together with food - to "
 "train soldiers from attack level 2 to level 3."
 msgstr ""
+"Seo lannsa làidir le barr stàilinn is lann bheag. Saothraichidh tu ann an "
+"ceàrdach arm i is thèid a cleachdadh sa champa trèanaidh – le biadh – gus "
+"ionnsaigh nan saighdearan a thrèanadh o leibheil 2 gu leibheil 3."
 
 #: ../../tribes/empire/advanced_lance/conf:1
 msgid ""
@@ -1033,6 +1110,9 @@ msgid ""
 "and used in a trainingscamp - together with food - to train soldiers from "
 "attack level 1 to level 2."
 msgstr ""
+"Seo lannsa leasaichte le barr stàilinn. Saothraichidh tu ann an ceàrdach arm "
+"i is thèid a cleachdadh sa champa trèanaidh – le biadh – gus ionnsaigh nan "
+"saighdearan a thrèanadh o leibheil 1 gu leibheil 2."
 
 #: ../../tribes/empire/war_lance/conf:1
 msgid ""
@@ -1040,10 +1120,13 @@ msgid ""
 "warriors. It is used in the trainingscamp - together with food - to train "
 "soldiers from attack level 3 to level 4."
 msgstr ""
+"Seo an arm as fhearr is as geura a nì goibhnean arm na h-Impireachd airson "
+"nan gaisgeach. Thèid a chleachdadh sa champa trèanaidh – le biadh – gus "
+"ionnsaigh nan saighdearan a thrèanadh o leibheil 3 gu leibheil 4."
 
 #: ../../tribes/empire/conf:6
 msgid "This is the culture of the roman Empire."
-msgstr ""
+msgstr "Seo cultar na h-Impireachd Ròmanach."
 
 #: ../../tribes/empire/lance/conf:1
 msgid ""
@@ -1051,6 +1134,9 @@ msgid ""
 "a trainingscamp - together with food - to train soldiers from attack level 0 "
 "to attack level 1."
 msgstr ""
+"Tha spìc iarainn aig an lannsa seo. Saothraichidh tu ann an ceàrdach arm i "
+"is thèid a cleachdadh sa champa trèanaidh – le biadh – gus ionnsaigh nan "
+"saighdearan a thrèanadh o leibheil 0 gu leibheil 1."
 
 #: ../../tribes/empire/pick/conf:1
 msgid ""
@@ -1062,19 +1148,24 @@ msgstr ""
 
 #: ../../tribes/empire/saw/conf:1
 msgid "This saw is needed by the sawyer. It is produced by the toolsmith."
-msgstr ""
+msgstr "Tha sàbhadairean feumach air an t-sàbh seo. Nì an gobha acainnean e."
 
 #: ../../tribes/empire/hunting_spear/conf:1
 msgid ""
 "This spear is light enough to be thrown, but heavy enough to kill any animal "
 "in one blow. It is only used by the hunters."
 msgstr ""
+"Tha an t-sleagh seo aotrom gu leòr ach an tilg thu i, ach trom gu leòr ach "
+"am marbh thu beathach sam bith leatha le aon bhuille. Cha chleachd ach "
+"sealgairean i."
 
 #: ../../tribes/empire/wine/conf:1
 msgid ""
 "This tasty wine is consumed in marble and gold mines. It is produced in a "
 "winery."
 msgstr ""
+"Òlar am fìon blasta seo sna mèinnean marbhail is òir. Nì thu ann am fìon-"
+"lann e."
 
 #: ../../tribes/empire/wood_lance/conf:1
 msgid ""
@@ -1082,35 +1173,38 @@ msgid ""
 "produced in the weapon smithy. Together with a helmet it is the equipment to "
 "fit out young soldiers."
 msgstr ""
+"'S e an t-arm bunasach ann an siostam arm na h-Impireachd a th' anns an "
+"lannsa fiodha. Thèid a shaothrachadh ann an ceàrdach arm. Beiridh gach "
+"saighdear òr tè is clogaid."
 
 #: ../../tribes/empire/conf:131
 msgid "Toolsmith"
-msgstr ""
+msgstr "Gobha acainnean"
 
 #: ../../tribes/empire/conf:188
 msgid "Toolsmithy"
-msgstr ""
+msgstr "Ceàrdach acainnean"
 
 #: ../../tribes/empire/conf:154
 #: ../../tribes/empire/conf:211
 msgid "Tower"
-msgstr ""
+msgstr "Tùr"
 
 #: ../../tribes/empire/conf:132
 msgid "Trainer"
-msgstr ""
+msgstr "Trèanair"
 
 #: ../../tribes/empire/conf:219
 msgid "Trainingscamp"
-msgstr ""
+msgstr "Campa trèanaidh"
 
 #: ../../tribes/empire/trainer/conf:1
 msgid "Trains the soldiers."
-msgstr ""
+msgstr "Trèanaidh e na saighdearan."
 
 #: ../../tribes/empire/conf:93
 msgid "Trunk"
-msgstr ""
+msgstr "Stoc"
 
 #: ../../tribes/empire/trunk/conf:1
 msgid ""
@@ -1118,142 +1212,166 @@ msgid ""
 "fell the trees; foresters care for the supply of trees. Trunks are also used "
 "by the charcoal burner, the toolsmithy and the sawmill."
 msgstr ""
+"'S e stuth togail cudromach airson na h-Impireachd a th' anns na stuic. "
+"Thèid na craobhan a leagail le coilltearan is gabhaidh planntairean-coille "
+"cùram dhe na craobhan. Cleachdaich an loisgeadair fiodha, a' cheàrdach "
+"acainnean is am muileann sàbhaidh stuic cuideachd."
 
 #: ../../tribes/empire/trainingscamp/conf:47
 msgid "Upgrade soldier attack 0"
-msgstr ""
+msgstr "Ag àrdachadh ionnsaigh saighdeir o 0"
 
 #: ../../tribes/empire/trainingscamp/conf:48
 msgid ""
 "Upgrade soldier attack 0 (only for compatibility with old savegames "
 "(build13))"
 msgstr ""
+"Ag àrdachadh ionnsaigh saighdeir o 0 (airson co-chòrdalachd ri seann "
+"gheamaichean air an sàbhaladh (build13) a-mhàin)"
 
 #: ../../tribes/empire/trainingscamp/conf:49
 msgid "Upgrade soldier attack 1"
-msgstr ""
+msgstr "Ag àrdachadh ionnsaigh saighdeir o 1"
 
 #: ../../tribes/empire/trainingscamp/conf:50
 msgid ""
 "Upgrade soldier attack 1 (only for compatibility with old savegames "
 "(build13))"
 msgstr ""
+"Ag àrdachadh ionnsaigh saighdeir o 1 (airson co-chòrdalachd ri seann "
+"gheamaichean air an sàbhaladh (build13) a-mhàin)"
 
 #: ../../tribes/empire/trainingscamp/conf:51
 msgid "Upgrade soldier attack 2"
-msgstr ""
+msgstr "Ag àrdachadh ionnsaigh saighdeir o 2"
 
 #: ../../tribes/empire/trainingscamp/conf:52
 msgid ""
 "Upgrade soldier attack 2 (only for compatibility with old savegames "
 "(build13))"
 msgstr ""
+"Ag àrdachadh ionnsaigh saighdeir o 2 (airson co-chòrdalachd ri seann "
+"gheamaichean air an sàbhaladh (build13) a-mhàin)"
 
 #: ../../tribes/empire/trainingscamp/conf:53
 msgid "Upgrade soldier attack 3"
-msgstr ""
+msgstr "Ag àrdachadh ionnsaigh saighdeir o 3"
 
 #: ../../tribes/empire/trainingscamp/conf:54
 msgid ""
 "Upgrade soldier attack 3 (only for compatibility with old savegames "
 "(build13))"
 msgstr ""
+"Ag àrdachadh ionnsaigh saighdeir o 3 (airson co-chòrdalachd ri seann "
+"gheamaichean air an sàbhaladh (build13) a-mhàin)"
 
 #: ../../tribes/empire/arena/conf:30
 #: ../../tribes/empire/colosseum/conf:36
 msgid "Upgrade soldier evade 0"
-msgstr ""
+msgstr "Ag àrdachadh teàrnadh saighdeir o 0"
 
 #: ../../tribes/empire/arena/conf:31
 #: ../../tribes/empire/colosseum/conf:37
 msgid ""
 "Upgrade soldier evade 0 (only for compatibility with old savegames (build13))"
 msgstr ""
+"Ag àrdachadh teàrnadh saighdeir o 0 (airson co-chòrdalachd ri seann "
+"gheamaichean air an sàbhaladh (build13) a-mhàin)"
 
 #: ../../tribes/empire/colosseum/conf:38
 msgid "Upgrade soldier evade 1"
-msgstr ""
+msgstr "Ag àrdachadh teàrnadh saighdeir o 1"
 
 #: ../../tribes/empire/colosseum/conf:39
 msgid ""
 "Upgrade soldier evade 1 (only for compatibility with old savegames (build13))"
 msgstr ""
+"Ag àrdachadh teàrnadh saighdeir o 1 (airson co-chòrdalachd ri seann "
+"gheamaichean air an sàbhaladh (build13) a-mhàin)"
 
 #: ../../tribes/empire/trainingscamp/conf:55
 msgid "Upgrade soldier hitpoints 0"
-msgstr ""
+msgstr "Ag àrdachadh puingean-beatha saighdeir o 0"
 
 #: ../../tribes/empire/trainingscamp/conf:56
 msgid ""
 "Upgrade soldier hitpoints 0 (only for compatibility with old savegames "
 "(build13))"
 msgstr ""
+"Ag àrdachadh puingean-beatha saighdeir o 0 (airson co-chòrdalachd ri seann "
+"gheamaichean air an sàbhaladh (build13) a-mhàin)"
 
 #: ../../tribes/empire/trainingscamp/conf:57
 msgid "Upgrade soldier hitpoints 1"
-msgstr ""
+msgstr "Ag àrdachadh puingean-beatha saighdeir o 1"
 
 #: ../../tribes/empire/trainingscamp/conf:58
 msgid ""
 "Upgrade soldier hitpoints 1 (only for compatibility with old savegames "
 "(build13))"
 msgstr ""
+"Ag àrdachadh puingean-beatha saighdeir o 1 (airson co-chòrdalachd ri seann "
+"gheamaichean air an sàbhaladh (build13) a-mhàin)"
 
 #: ../../tribes/empire/trainingscamp/conf:59
 msgid "Upgrade soldier hitpoints 2"
-msgstr ""
+msgstr "Ag àrdachadh puingean-beatha saighdeir o 2"
 
 #: ../../tribes/empire/trainingscamp/conf:60
 msgid ""
 "Upgrade soldier hitpoints 2 (only for compatibility with old savegames "
 "(build13))"
 msgstr ""
+"Ag àrdachadh puingean-beatha saighdeir o 2 (airson co-chòrdalachd ri seann "
+"gheamaichean air an sàbhaladh (build13) a-mhàin)"
 
 #: ../../tribes/empire/trainingscamp/conf:61
 msgid "Upgrade soldier hitpoints 3"
-msgstr ""
+msgstr "Ag àrdachadh puingean-beatha saighdeir o 3"
 
 #: ../../tribes/empire/trainingscamp/conf:62
 msgid ""
 "Upgrade soldier hitpoints 3 (only for compatibility with old savegames "
 "(build13))"
 msgstr ""
+"Ag àrdachadh puingean-beatha saighdeir o 3 (airson co-chòrdalachd ri seann "
+"gheamaichean air an sàbhaladh (build13) a-mhàin)"
 
 #: ../../tribes/empire/conf:135
 msgid "Vine Farmer"
-msgstr ""
+msgstr "Tuathanach-fìona"
 
 #: ../../tribes/empire/conf:50
 msgid "Vine medium"
-msgstr ""
+msgstr "Fìonan meadhanach"
 
 #: ../../tribes/empire/conf:53
 msgid "Vine ripe"
-msgstr ""
+msgstr "Fìonan abaich"
 
 #: ../../tribes/empire/conf:51
 msgid "Vine small"
-msgstr ""
+msgstr "Fìonan beag"
 
 #: ../../tribes/empire/conf:52
 msgid "Vine tiny"
-msgstr ""
+msgstr "Fìonan beag bìodach"
 
 #: ../../tribes/empire/conf:181
 msgid "Vineyard"
-msgstr ""
+msgstr "Fìon-lios"
 
 #: ../../tribes/empire/conf:94
 msgid "War-Lance"
-msgstr ""
+msgstr "Lannsa-cogaidh"
 
 #: ../../tribes/empire/conf:165
 msgid "Warehouse"
-msgstr ""
+msgstr "Taigh-stòrais"
 
 #: ../../tribes/empire/conf:95
 msgid "Water"
-msgstr ""
+msgstr "Uisge"
 
 #: ../../tribes/empire/water/conf:1
 msgid ""
@@ -1261,36 +1379,41 @@ msgid ""
 "Also the donkeyfarm, the sheepfarm and the piggery need to be supplied with "
 "water."
 msgstr ""
+"Is bith-bhrìgh an t-uisge! Cleachdaidh an taigh-fuine is an taigh-grùide e. "
+"Tha an tuathanas asalan, an tuathanas chaorach is an fhail feumach air uisge "
+"cuideachd."
 
 #: ../../tribes/empire/conf:195
 msgid "Weapon Smithy"
-msgstr ""
+msgstr "Ceàrdach arm"
 
 #: ../../tribes/empire/iron/conf:1
 msgid ""
 "Weapons, armour and tools are made of iron. It is retrieved from iron ores "
 "in the smelting works."
 msgstr ""
+"Nì thu airm, armachd is acainnean de dh'iarainn. Gheibh tu iarainn à clach-"
+"iarainn ann an ceàrdach leaghadair."
 
 #: ../../tribes/empire/conf:133
 msgid "Weaponsmith"
-msgstr ""
+msgstr "Gobha arm"
 
 #: ../../tribes/empire/conf:134
 msgid "Weaver"
-msgstr ""
+msgstr "Figheadair"
 
 #: ../../tribes/empire/conf:192
 msgid "Weaving Mill"
-msgstr ""
+msgstr "Taigh nam beart"
 
 #: ../../tribes/empire/conf:174
 msgid "Well"
-msgstr ""
+msgstr "Tobar"
 
 #: ../../tribes/empire/conf:96
 msgid "Wheat"
-msgstr ""
+msgstr "Cruithneachd"
 
 #: ../../tribes/empire/wheat/conf:1
 msgid ""
@@ -1298,36 +1421,43 @@ msgid ""
 "mills and breweries. Also donkeyfarms, sheepfarms and piggeries need to be "
 "supplied with wheat."
 msgstr ""
+"Tha mhair thu beò gun chruithneachd. Saothraichidh na tuathanasan i is thèid "
+"a chleachdadh leis na muileannan is na taighean-grùide. Tha tuathanasan "
+"asalan, tuathanasan chaorach is failean feumach air cruithneachd cuideachd."
 
 #: ../../tribes/empire/conf:97
 msgid "Wine"
-msgstr ""
+msgstr "Fìon"
 
 #: ../../tribes/empire/conf:182
 msgid "Winery"
-msgstr ""
+msgstr "Fìon-lann"
 
 #: ../../tribes/empire/conf:98
 msgid "Wood"
-msgstr ""
+msgstr "Fiodh"
 
 #: ../../tribes/empire/conf:99
 msgid "Wood Lance"
-msgstr ""
+msgstr "Lannsa fiodha"
 
 #: ../../tribes/empire/wood/conf:1
 msgid ""
 "Wood is a basic building material of the Empire. It is also consumed in the "
 "weapon smithy."
 msgstr ""
+"'S e stuth togail bunasach aig an Impireachd a th' anns an fhiodh. Tha a' "
+"cheàrdach arm feumach air cuideachd."
 
 #: ../../tribes/empire/conf:100
 msgid "Wool"
-msgstr ""
+msgstr "Clòimh"
 
 #: ../../tribes/empire/wool/conf:1
 msgid "Wool is the hair of sheep. Weaving mills use it to make cloth."
 msgstr ""
+"'S e gaoisid nan caorach a th' anns a' chlòimh. Cleachdaidh taighean nam "
+"beart i gus clò a dhèanamh."
 
 #: ../../tribes/empire/armoursmithy/conf:35
 #: ../../tribes/empire/bakery/conf:24
@@ -1365,21 +1495,21 @@ msgstr ""
 #: ../../tribes/empire/well/conf:20
 #: ../../tribes/empire/winery/conf:25
 msgid "Work"
-msgstr ""
+msgstr "obair"
 
 #: ../../tribes/empire/builder/conf:1
 msgid "Works at construction sites to create a new building."
-msgstr ""
+msgstr "Obraichidh e aig làraichean-thogail gus togalach ur a chruthachadh."
 
 #: ../../tribes/empire/shipwright/conf:1
 msgid "Works at the shipyard and constructs new ships."
-msgstr ""
+msgstr "Obraichidh e aig a' chala is togaidh e longan ùra."
 
 #: ../../tribes/empire/master-miner/conf:1
 #: ../../tribes/empire/miner/conf:1
 msgid "Works deep in the mines to obtain coal, iron or gold."
-msgstr ""
+msgstr "Obraichidh e sìos sna mèinnean gus gual, iarrann no òr fhaighinn."
 
 #: ../../tribes/empire/carpenter/conf:1
 msgid "Works in the sawmill."
-msgstr ""
+msgstr "Obraichidh e sa mhuileann sàbhaidh."

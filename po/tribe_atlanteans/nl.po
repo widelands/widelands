@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: Widelands svn4575\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2013-09-15 17:41+0000\n"
-"PO-Revision-Date: 2013-09-17 10:30+0000\n"
+"PO-Revision-Date: 2014-02-05 09:57+0000\n"
 "Last-Translator: fk <Unknown>\n"
 "Language-Team: Dutch <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-09-18 04:43+0000\n"
-"X-Generator: Launchpad (build 16765)\n"
+"X-Launchpad-Export-Date: 2014-02-06 05:27+0000\n"
+"X-Generator: Launchpad (build 16916)\n"
 
 #: ../../tribes/atlanteans/golden_tabard/conf:1
 msgid ""
@@ -640,7 +640,7 @@ msgstr "Plant bomen."
 
 #: ../../tribes/atlanteans/conf:165
 msgid "Port"
-msgstr "Poort"
+msgstr "Haven"
 
 #: ../../tribes/atlanteans/armoursmithy/conf:30
 msgid "Produce advanced shield"

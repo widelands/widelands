@@ -20,6 +20,11 @@
 #ifndef WLAPPLICATION_H
 #define WLAPPLICATION_H
 
+//Workaround for bug http://sourceforge.net/p/mingw/bugs/2152/
+#ifdef __MINGW32__
+#define _USE_32BIT_TIME_T 1
+#endif
+
 #include <cstring>
 #include <map>
 #include <stdexcept>
