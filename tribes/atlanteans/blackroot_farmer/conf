@@ -20,7 +20,7 @@ shovel=1
 2=animation harvesting 10000
 3=object harvest
 4=animation gathering 2000
-5=createitem blackroot
+5=createware blackroot
 6=return
 
 [idle]

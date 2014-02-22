@@ -163,7 +163,7 @@ public:
 	virtual void draw(const Editor_Game_Base &, RenderTarget &, const FCoords&, const Point&);
 
 	void switch_program(Game & game, const std::string & programname);
-	bool construct_ware_item(Game & game, Ware_Index index);
+	bool construct_ware(Game & game, Ware_Index index);
 	bool construct_remaining_buildcost(Game & game, Buildcost * buildcost);
 
 	Tribe_Descr const * get_owner_tribe() const {

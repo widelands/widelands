@@ -1343,7 +1343,7 @@ bool DefaultAI::improve_roads (int32_t gametime)
 	// Remove flags of dead end roads, as long as no more wares are stored on them
 	container_iterate(std::list<EconomyObserver *>, economies, i)
 		container_iterate(std::list<Flag const *>, (*i.current)->flags, j)
-			if ((*j.current)->is_dead_end() && (*j.current)->current_items() == 0) {
+			if ((*j.current)->is_dead_end() && (*j.current)->current_wares() == 0) {
 				game().send_player_bulldoze(*const_cast<Flag *>((*j.current)));
 				j.current = (*i.current)->flags.erase(j.current);
 				return true;
@@ -1480,7 +1480,7 @@ bool DefaultAI::improve_transportation_ways (const Flag & flag)
 		FCoords f = game().map().get_fcoords(*(i.current));
 		if (upcast(Flag, other_flag, f.field->get_immovable())) {
 			// Check if building is dismantled, but don't waste precious wares
-			if (!other_flag->get_building() && other_flag->current_items() == 0) {
+			if (!other_flag->get_building() && other_flag->current_wares() == 0) {
 				game().send_player_bulldoze(*other_flag);
 				flags_to_be_removed.erase(i.current);
 				break;

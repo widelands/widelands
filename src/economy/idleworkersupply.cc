@@ -105,9 +105,9 @@ uint32_t IdleWorkerSupply::nr_supplies(const Game &, const Request & req) const
 	return 0;
 }
 
-WareInstance & IdleWorkerSupply::launch_item(Game &, const Request &)
+WareInstance & IdleWorkerSupply::launch_ware(Game &, const Request &)
 {
-	throw wexception("IdleWorkerSupply::launch_item() makes no sense.");
+	throw wexception("IdleWorkerSupply::launch_ware() makes no sense.");
 }
 
 

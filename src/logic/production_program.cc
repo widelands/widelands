@@ -917,8 +917,8 @@ void ProductionProgram::ActProduce::execute
 	(Game & game, ProductionSite & ps) const
 {
 	//ps.molog("  Produce\n");
-	assert(ps.m_produced_items.empty());
-	ps.m_produced_items = m_items;
+	assert(ps.m_produced_wares.empty());
+	ps.m_produced_wares = m_items;
 	ps.m_working_positions[0].worker->update_task_buildingwork(game);
 
 	const Tribe_Descr & tribe = ps.owner().tribe();
@@ -1579,10 +1579,10 @@ bool ProductionProgram::ActConstruct::get_building_work
 		return false;
 	}
 
-	// Second step: give item to worker
-	WareInstance * item = new WareInstance(wq->get_ware(), psite.tribe().get_ware_descr(wq->get_ware()));
-	item->init(game);
-	worker.set_carried_item(game, item);
+	// Second step: give ware to worker
+	WareInstance * ware = new WareInstance(wq->get_ware(), psite.tribe().get_ware_descr(wq->get_ware()));
+	ware->init(game);
+	worker.set_carried_ware(game, ware);
 	wq->set_filled(wq->get_filled() - 1);
 
 	// Third step: send worker on his merry way, giving the target object or coords

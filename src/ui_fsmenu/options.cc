@@ -451,24 +451,18 @@ Fullscreen_Menu_Advanced_Options::Fullscreen_Menu_Advanced_Options
 		 get_w() * 1313 / 10000, get_h() * 6933 / 10000,
 		 _("Distance for windows to snap to borders:"), UI::Align_VCenter),
 
-	m_remove_syncstreams (this,
-			Point(get_w() * 19 / 200, get_h() * 7220 / 10000)
-	),
+	m_remove_syncstreams (this, Point(get_w() * 19 / 200, get_h() * 7220 / 10000)),
 	m_label_remove_syncstreams
 		(this,
 		 get_w() * 1313 / 10000, get_h() * 37 / 50,
 		 _("Remove Syncstream dumps on startup"), UI::Align_VCenter),
 
-	m_opengl (this,
-			Point(get_w() * 19 / 200, get_h() * 7715 / 10000)
-		),
+	m_opengl (this, Point(get_w() * 19 / 200, get_h() * 7715 / 10000)),
 	m_label_opengl
 		(this,
 		 get_w() * 1313 / 10000, get_h() * 7865 / 10000,
 		 _("OpenGL rendering"), UI::Align_VCenter),
-	m_transparent_chat (this,
-			Point(get_w() * 19 / 200, get_h() * 8180 / 10000)
-		),
+	m_transparent_chat (this, Point(get_w() * 19 / 200, get_h() * 8180 / 10000)),
 	m_label_transparent_chat
 		(this,
 		 get_w() * 1313 / 10000, get_h() * 8330 / 10000,

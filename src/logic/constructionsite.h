@@ -97,7 +97,7 @@ protected:
 	virtual void draw(const Editor_Game_Base &, RenderTarget &, const FCoords&, const Point&);
 
 private:
-	int32_t  m_fetchfromflag;  // # of items to fetch from flag
+	int32_t  m_fetchfromflag;  // # of wares to fetch from flag
 
 	bool     m_builder_idle;   // used to determine whether the builder is idle
 	Player::Constructionsite_Information m_info; // asked for by player point of view for the gameview

@@ -76,7 +76,7 @@ private:
 		 Worker::Action                 *,
 		 Parser                         *,
 		 const std::vector<std::string> & cmd);
-	void parse_createitem
+	void parse_createware
 		(Worker_Descr                   *,
 		 Worker::Action                 *,
 		 Parser                         *,

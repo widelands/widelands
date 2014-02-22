@@ -34,7 +34,7 @@ namespace Widelands {
 
 class Economy;
 struct Fleet;
-struct PortDock;
+class PortDock;
 
 struct Ship_Descr : Bob::Descr {
 	Ship_Descr

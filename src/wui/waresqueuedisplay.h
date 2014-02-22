@@ -24,7 +24,7 @@
 
 #include <stdint.h>
 
-#include "logic/item_ware_descr.h"
+#include "logic/ware_descr.h"
 #include "logic/wareworker.h"
 #include "ui_basic/button.h"
 #include "ui_basic/panel.h"

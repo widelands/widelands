@@ -326,8 +326,8 @@ void Road::cleanup(Editor_Game_Base & egbase)
 	Economy::check_split(*m_flags[FlagStart], *m_flags[FlagEnd]);
 
 	if (upcast(Game, game, &egbase)) {
-		m_flags[FlagStart]->update_items(*game, m_flags[FlagEnd]);
-		m_flags[FlagEnd]->update_items(*game, m_flags[FlagStart]);
+		m_flags[FlagStart]->update_wares(*game, m_flags[FlagEnd]);
+		m_flags[FlagEnd]->update_wares(*game, m_flags[FlagStart]);
 	}
 
 	PlayerImmovable::cleanup(egbase);
@@ -583,13 +583,13 @@ void Road::postsplit(Game & game, Flag & flag)
 			  m_type == Road_Busy))
 			_request_carrier(*i.current);
 
-	//  Make sure items waiting on the original endpoint flags are dealt with.
-	m_flags[FlagStart]->update_items(game, &oldend);
-	oldend.update_items(game, m_flags[FlagStart]);
+	//  Make sure wares waiting on the original endpoint flags are dealt with.
+	m_flags[FlagStart]->update_wares(game, &oldend);
+	oldend.update_wares(game, m_flags[FlagStart]);
 }
 
 /**
- * Called by Flag code: an item should be picked up from the given flag.
+ * Called by Flag code: an ware should be picked up from the given flag.
  * \return true if a carrier has been sent on its way, false otherwise.
  */
 bool Road::notify_ware(Game & game, FlagId const flagid)

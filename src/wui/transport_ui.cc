@@ -21,10 +21,10 @@
 #include "graphic/font_handler.h"
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
-#include "logic/item_ware_descr.h"
 #include "logic/player.h"
 #include "logic/playercommand.h"
 #include "logic/tribe.h"
+#include "logic/ware_descr.h"
 #include "ui_basic/button.h"
 #include "ui_basic/tabpanel.h"
 #include "ui_basic/unique_window.h"
@@ -36,7 +36,7 @@
 using Widelands::Economy;
 using Widelands::Editor_Game_Base;
 using Widelands::Game;
-using Widelands::Item_Ware_Descr;
+using Widelands::WareDescr;
 using Widelands::Ware_Index;
 using Widelands::Worker_Descr;
 

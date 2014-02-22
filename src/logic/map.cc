@@ -674,7 +674,7 @@ void Map::find_reachable
 	queue.push_back(area);
 
 	while (queue.size()) {
-		// Pop the last item from the queue
+		// Pop the last ware from the queue
 		FCoords const cur = get_fcoords(*queue.rbegin());
 		queue.pop_back();
 		Pathfield & curpf = pathfields->fields[cur.field - m_fields];

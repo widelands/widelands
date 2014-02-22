@@ -89,7 +89,7 @@ Tribe_Descr::Tribe_Descr
 
 			PARSE_MAP_OBJECT_TYPES_BEGIN("ware")
 				m_wares.add
-					(new Item_Ware_Descr
+					(new WareDescr
 					 	(*this, _name, _descname, path, prof, global_s));
 			PARSE_MAP_OBJECT_TYPES_END;
 

@@ -60,7 +60,7 @@ struct WarehouseSupply : public Supply {
 
 	virtual void send_to_storage(Game &, Warehouse * wh);
 	virtual uint32_t nr_supplies(const Game &, const Request &) const;
-	virtual WareInstance & launch_item(Game &, const Request &);
+	virtual WareInstance & launch_ware(Game &, const Request &);
 	virtual Worker & launch_worker(Game &, const Request &);
 
 private:

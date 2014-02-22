@@ -57,7 +57,7 @@ struct IdleWareSupply : public Supply {
 	virtual void send_to_storage(Game &, Warehouse * wh);
 
 	virtual uint32_t nr_supplies(const Game &, const Request &) const;
-	virtual WareInstance & launch_item(Game &, const Request &);
+	virtual WareInstance & launch_ware(Game &, const Request &);
 	virtual Worker & launch_worker(Game &, const Request &);
 
 private:
@@ -145,12 +145,12 @@ uint32_t IdleWareSupply::nr_supplies(const Game &, const Request & req) const
 }
 
 /**
- * The item is already "launched", so we only need to return it.
+ * The ware is already "launched", so we only need to return it.
 */
-WareInstance & IdleWareSupply::launch_item(Game &, const Request & req) {
+WareInstance & IdleWareSupply::launch_ware(Game &, const Request & req) {
 	if (req.get_type() != wwWARE)
 		throw wexception
-			("IdleWareSupply::launch_item : called for non-item request");
+			("IdleWareSupply::launch_ware : called for non-ware request");
 	if (req.get_index() != m_ware.descr_index())
 		throw wexception
 			("IdleWareSupply: ware(%u) (type = %i) requested for %i",
@@ -180,7 +180,7 @@ void IdleWareSupply::send_to_storage(Game & game, Warehouse * wh)
 /*                     Ware Instance Implementation                      */
 /*************************************************************************/
 WareInstance::WareInstance
-	(Ware_Index const i, const Item_Ware_Descr * const ware_descr)
+	(Ware_Index const i, const WareDescr * const ware_descr)
 :
 Map_Object   (ware_descr),
 m_economy    (0),
@@ -211,7 +211,7 @@ void WareInstance::cleanup(Editor_Game_Base & egbase)
 {
 	// Unlink from our current location, if necessary
 	if (upcast(Flag, flag, m_location.get(egbase)))
-		flag->remove_item(egbase, this);
+		flag->remove_ware(egbase, this);
 
 	delete m_supply;
 	m_supply = 0;
@@ -419,7 +419,7 @@ void WareInstance::enter_building(Game & game, Building & building)
 			//    shipped across the sea, but a better, land-based route has been
 			//    found
 			if (upcast(Warehouse, warehouse, &building)) {
-				warehouse->do_launch_item(game, *this);
+				warehouse->do_launch_ware(game, *this);
 				return;
 			}
 
@@ -439,7 +439,7 @@ void WareInstance::enter_building(Game & game, Building & building)
 			t->has_failed();
 			cancel_moving();
 
-			if (upcast(Warehouse, warehouse, &building)) {
+			if (is_a(Warehouse, &building)) {
 				building.receive_ware(game, m_descr_index);
 				remove(game);
 			} else {
@@ -647,7 +647,7 @@ Map_Object::Loader * WareInstance::load
 			wareindex = Ware_Index::First();
 			kill = true;
 		}
-		const Item_Ware_Descr * descr = tribe->get_ware_descr(wareindex);
+		const WareDescr * descr = tribe->get_ware_descr(wareindex);
 
 		std::unique_ptr<Loader> loader(new Loader);
 		loader->init(egbase, mol, *new WareInstance(wareindex, descr));

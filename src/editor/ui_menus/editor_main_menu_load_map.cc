@@ -155,7 +155,7 @@ void Main_Menu_Load_Map::clicked_ok() {
 }
 
 /**
- * Called when a item is selected
+ * Called when a entry is selected
  */
 void Main_Menu_Load_Map::selected(uint32_t) {
 	const char * const name = m_ls->get_selected();
@@ -202,7 +202,7 @@ void Main_Menu_Load_Map::selected(uint32_t) {
 }
 
 /**
- * An Item has been doubleclicked
+ * An entry has been doubleclicked
  */
 void Main_Menu_Load_Map::double_clicked(uint32_t) {clicked_ok();}
 

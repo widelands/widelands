@@ -58,7 +58,7 @@ m_cache_max_fill(queue->get_max_fill()),
 m_total_height(0),
 m_show_only(show_only)
 {
-	const Widelands::Item_Ware_Descr & ware =
+	const Widelands::WareDescr & ware =
 		*queue->owner().tribe().get_ware_descr(m_queue->get_ware());
 	set_tooltip(ware.descname().c_str());
 
@@ -312,4 +312,3 @@ void WaresQueueDisplay::compute_max_fill_buttons_enabled_state()
 		if (m_increase_max_fill) m_increase_max_fill->set_enabled(m_cache_max_fill < m_queue->get_max_size());
 	}
 }
-

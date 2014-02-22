@@ -17,7 +17,7 @@
  *
  */
 
-#include "logic/item_ware_descr.h"
+#include "logic/ware_descr.h"
 
 #include "graphic/animation.h"
 #include "graphic/graphic.h"
@@ -26,7 +26,7 @@
 
 namespace Widelands {
 
-Item_Ware_Descr::Item_Ware_Descr
+WareDescr::WareDescr
 	(const Tribe_Descr & gtribe, char const * const _name,
 	 char const * const _descname,
 	 const std::string & directory, Profile & prof, Section & global_s)
@@ -50,7 +50,7 @@ Item_Ware_Descr::Item_Ware_Descr
 /**
  * Load all static graphics
  */
-void Item_Ware_Descr::load_graphics()
+void WareDescr::load_graphics()
 {
 	m_icon = g_gr->images().get(m_icon_fname);
 }

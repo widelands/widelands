@@ -11,7 +11,7 @@ carrier=1
 2=playFX ../../../sound/stonecutting/stonecutter 192
 3=animation hacking 10000
 4=object shrink
-5=createitem raw_stone
+5=createware raw_stone
 6=return
 
 [idle]

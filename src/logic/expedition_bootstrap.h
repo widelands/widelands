@@ -65,13 +65,13 @@ public:
 	// Returns the wares currently in stock.
 	std::vector<WaresQueue*> wares() const;
 
-	// Changes the economy for the items that are already in store.
+	// Changes the economy for the wares that are already in store.
 	void set_economy(Economy* economy);
 
 	// Returns the waresqueue for this ware.
 	WaresQueue& waresqueue(Ware_Index index) const;
 
-	// Delete all items we currently handle.
+	// Delete all wares we currently handle.
 	void cleanup(Editor_Game_Base& egbase);
 
 	// Save/Load this into a file. The actual data is stored in the buildingdata

@@ -20,6 +20,7 @@
 #ifndef DESCR_MAINTAINER_H
 #define DESCR_MAINTAINER_H
 
+#include <cstdlib>
 #include <limits>
 #include <stdexcept>
 
@@ -68,7 +69,7 @@ private:
 
 	void reserve(const typename T::Index n) {
 		T * * const new_items =
-			static_cast<T * *>(realloc(items, sizeof(T *) * n));
+			static_cast<T * *>(std::realloc(items, sizeof(T *) * n));
 		if (not new_items)
 			throw std::bad_alloc();
 		items = new_items;
@@ -98,7 +99,7 @@ T * Descr_Maintainer<T>::exists(char const * const name) const {
 template<typename T> Descr_Maintainer<T>::~Descr_Maintainer() {
 	for (typename T::Index i = 0; i < nitemsw; ++i)
 		delete items[i];
-	free(items);
+	std::free(items);
 }
 /// This template is used to have a typesafe maintainer for Bob_Descr,
 /// Worker_Descr and so on. This version uses boxed Index type for indexing.

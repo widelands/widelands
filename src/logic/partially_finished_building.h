@@ -77,7 +77,7 @@ protected:
 	bool     m_working;        // true if the builder is currently working
 	uint32_t m_work_steptime;  // time when next step is completed
 	uint32_t m_work_completed; // how many steps have we done so far?
-	uint32_t m_work_steps;     // how many steps (= items) until we're done?
+	uint32_t m_work_steps;     // how many steps (= wares) until we're done?
 	//Player::Constructionsite_Information * m_info; // asked for by player point of view for the gameview
 };
 

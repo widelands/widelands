@@ -91,13 +91,12 @@ private:
 	typedef std::vector<bool> selection_type;
 
 	/**
-	 * Update the anchored selection. When first mouse button is
-	 * pressed on a ware, it is stored in @ref m_selection_anchor.
-	 * Mouse moves trigger this function to select all wares items
-	 * in the rectangle between the anchor and the mouse position.
-	 * They are temporary stored in @ref m_in_selection.
-	 * Releasing the mouse button will performs the selection.
-	 * This allows selection of multiple wares by dragging.
+	 * Update the anchored selection. When first mouse button is pressed on a
+	 * ware, it is stored in @ref m_selection_anchor. Mouse moves trigger this
+	 * function to select all wares in the rectangle between the anchor and the
+	 * mouse position. They are temporary stored in @ref m_in_selection.
+	 * Releasing the mouse button will performs the selection. This allows
+	 * selection of multiple wares by dragging.
 	 */
 	void update_anchor_selection(int32_t x, int32_t y);
 

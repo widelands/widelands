@@ -671,7 +671,7 @@ void ProductionSite::program_act(Game & game)
 
 
 /**
- * Remember that we need to fetch an item from the flag.
+ * Remember that we need to fetch an ware from the flag.
  */
 bool ProductionSite::fetch_from_flag(Game & game)
 {
@@ -736,8 +736,8 @@ bool ProductionSite::get_building_work
 	}
 
 	// Default actions first
-	if (WareInstance * const item = worker.fetch_carried_item(game)) {
-		worker.start_task_dropoff(game, *item);
+	if (WareInstance * const ware = worker.fetch_carried_ware(game)) {
+		worker.start_task_dropoff(game, *ware);
 		return true;
 	}
 
@@ -747,26 +747,26 @@ bool ProductionSite::get_building_work
 		return true;
 	}
 
-	if (!m_produced_items.empty()) {
-		//  There is still a produced item waiting for delivery. Carry it out
+	if (!m_produced_wares.empty()) {
+		//  There is still a produced ware waiting for delivery. Carry it out
 		//  before continuing with the program.
 		std::pair<Ware_Index, uint8_t> & ware_type_with_count =
-			*m_produced_items.rbegin();
+			*m_produced_wares.rbegin();
 		{
 			Ware_Index const ware_index = ware_type_with_count.first;
-			const Item_Ware_Descr & item_ware_descr =
+			const WareDescr & ware_ware_descr =
 				*tribe().get_ware_descr(ware_type_with_count.first);
 			{
-				WareInstance & item =
-					*new WareInstance(ware_index, &item_ware_descr);
-				item.init(game);
-				worker.start_task_dropoff(game, item);
+				WareInstance & ware =
+					*new WareInstance(ware_index, &ware_ware_descr);
+				ware.init(game);
+				worker.start_task_dropoff(game, ware);
 			}
 			owner().ware_produced(ware_index); //  for statistics
 		}
 		assert(ware_type_with_count.second);
 		if (--ware_type_with_count.second == 0)
-			m_produced_items.pop_back();
+			m_produced_wares.pop_back();
 		return true;
 	}
 
@@ -800,10 +800,10 @@ bool ProductionSite::get_building_work
 		WaresQueue * queue = *iqueue;
 		if (queue->get_filled() > queue->get_max_fill()) {
 			queue->set_filled(queue->get_filled() - 1);
-			const Item_Ware_Descr & wd = *tribe().get_ware_descr(queue->get_ware());
-			WareInstance & item = *new WareInstance(queue->get_ware(), &wd);
-			item.init(game);
-			worker.start_task_dropoff(game, item);
+			const WareDescr & wd = *tribe().get_ware_descr(queue->get_ware());
+			WareInstance & ware = *new WareInstance(queue->get_ware(), &wd);
+			ware.init(game);
+			worker.start_task_dropoff(game, ware);
 			return true;
 		}
 	}

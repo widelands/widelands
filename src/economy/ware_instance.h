@@ -20,10 +20,10 @@
 #ifndef S__WARE_INSTANCE_H
 #define S__WARE_INSTANCE_H
 
-#include "logic/instances.h"
-#include "logic/item_ware_descr.h"
-#include "logic/widelands.h"
 #include "economy/transfer.h"
+#include "logic/instances.h"
+#include "logic/ware_descr.h"
+#include "logic/widelands.h"
 
 namespace Widelands {
 
@@ -55,10 +55,10 @@ struct Transfer;
 class WareInstance : public Map_Object {
 	friend struct Map_Waredata_Data_Packet;
 
-	MO_DESCR(Item_Ware_Descr);
+	MO_DESCR(WareDescr);
 
 public:
-	WareInstance(Ware_Index, const Item_Ware_Descr * const);
+	WareInstance(Ware_Index, const WareDescr * const);
 	~WareInstance();
 
 	virtual int32_t get_type() const;

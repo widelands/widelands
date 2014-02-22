@@ -42,28 +42,15 @@ namespace Widelands {
 /**
  * Wares can be stored in warehouses. They can be transferred across an
  * Economy. They can be traded.
- * Both items (lumber, stone, ...) and workers are considered wares.
- * Every ware has a unique name. Note that an item must not have the same
- * name as a worker.
- *
- * Item wares are defined on a per-world basis, workers are defined on a
- * per-tribe basis.
- * Since the life-times of world and tribe descriptions are a bit dodgy, the
- * master list of wares is kept by the Game class. The list is created just
- * before the game starts.
- *
- * Note that multiple tribes can define a worker with the same name. The
- * different "version" of a worker must perform the same job, but they can
- * look differently.
 */
-struct Item_Ware_Descr : public Map_Object_Descr {
+struct WareDescr : public Map_Object_Descr {
 	typedef Ware_Index::value_t Index;
-	Item_Ware_Descr
+	WareDescr
 		(const Tribe_Descr & tribe, char const * const name,
 		 char const * const descname, const std::string & directory,
 		 Profile &, Section & global_s);
 
-	virtual ~Item_Ware_Descr() {};
+	virtual ~WareDescr() {};
 
 	const Tribe_Descr & tribe() const {return m_tribe;}
 

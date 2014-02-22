@@ -80,23 +80,23 @@ struct Supply : public Trackable {
 	virtual void send_to_storage(Game &, Warehouse * wh) = 0;
 
 	/**
-	 * \return the number of items or workers that can be launched right
+	 * \return the number of wares or workers that can be launched right
 	 * now for the thing requested by the given request
 	 */
 	virtual uint32_t nr_supplies(const Game &, const Request &) const = 0;
 
 	/**
-	 * Prepare an item to satisfy the given request. Note that the caller
-	 * must assign a transfer to the launched item.
+	 * Prepare an ware to satisfy the given request. Note that the caller
+	 * must assign a transfer to the launched ware.
 	 *
-	 * \throw wexception if the request is not an item request or no such
-	 * item is available in the supply.
+	 * \throw wexception if the request is not an ware request or no such
+	 * ware is available in the supply.
 	 */
-	virtual WareInstance & launch_item(Game &, const Request &) = 0;
+	virtual WareInstance & launch_ware(Game &, const Request &) = 0;
 
 	/**
 	 * Prepare a worker to satisfy the given request. Note that the caller
-	 * must assign a transfer to the launched item.
+	 * must assign a transfer to the launched ware.
 	 *
 	 * \throw wexception if the request is not a worker request or no such
 	 * worker is available in the supply.

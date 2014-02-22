@@ -212,7 +212,7 @@ uint32_t WarehouseSupply::nr_supplies
 	//  Calculate how many wares can be sent out - it might be that we need them
 	// ourselves. E.g. for hiring new soldiers.
 	int32_t const x = m_wares.stock(req.get_index());
-	// only mark an item of that type as available, if the priority of the
+	// only mark an ware of that type as available, if the priority of the
 	// request + number of that wares in warehouse is > priority of request
 	// of *this* warehouse + 1 (+1 is important, as else the ware would directly
 	// be taken back to the warehouse as the request of the warehouse would be
@@ -227,14 +227,14 @@ uint32_t WarehouseSupply::nr_supplies
 }
 
 
-/// Launch a ware as item.
-WareInstance & WarehouseSupply::launch_item(Game & game, const Request & req) {
+/// Launch a ware.
+WareInstance & WarehouseSupply::launch_ware(Game & game, const Request & req) {
 	if (req.get_type() != wwWARE)
-		throw wexception("WarehouseSupply::launch_item: called for non-ware request");
+		throw wexception("WarehouseSupply::launch_ware: called for non-ware request");
 	if (!m_wares.stock(req.get_index()))
-		throw wexception("WarehouseSupply::launch_item: called for non-existing ware");
+		throw wexception("WarehouseSupply::launch_ware: called for non-existing ware");
 
-	return m_warehouse->launch_item(game, req.get_index());
+	return m_warehouse->launch_ware(game, req.get_index());
 }
 
 /// Launch a ware as worker.
@@ -742,7 +742,7 @@ void Warehouse::remove_workers(Ware_Index const id, uint32_t const count)
 
 
 
-/// Launch a carrier to fetch an item from our flag.
+/// Launch a carrier to fetch an ware from our flag.
 bool Warehouse::fetch_from_flag(Game & game)
 {
 	Ware_Index const carrierid = tribe().safe_worker_index("carrier");
@@ -848,7 +848,7 @@ void Warehouse::incorporate_worker(Editor_Game_Base & egbase, Worker* w)
 	assert(w != nullptr);
 	assert(w->get_owner() == &owner());
 
-	if (WareInstance* ware = w->fetch_carried_item(egbase))
+	if (WareInstance* ware = w->fetch_carried_ware(egbase))
 		incorporate_ware(egbase, ware);
 
 	Ware_Index worker_index = tribe().worker_index(w->name().c_str());
@@ -883,20 +883,20 @@ void Warehouse::incorporate_worker(Editor_Game_Base & egbase, Worker* w)
 
 /// Create an instance of a ware and make sure it gets
 /// carried out of the warehouse.
-WareInstance & Warehouse::launch_item(Game & game, Ware_Index const ware) {
-	// Create the item
-	WareInstance & item = *new WareInstance(ware, tribe().get_ware_descr(ware));
-	item.init(game);
-	do_launch_item(game, item);
+WareInstance & Warehouse::launch_ware(Game & game, Ware_Index const ware_index) {
+	// Create the ware
+	WareInstance & ware = *new WareInstance(ware_index, tribe().get_ware_descr(ware_index));
+	ware.init(game);
+	do_launch_ware(game, ware);
 
-	m_supply->remove_wares(ware, 1);
+	m_supply->remove_wares(ware_index, 1);
 
-	return item;
+	return ware;
 }
 
 
-/// Get a carrier to actually move this item out of the warehouse.
-void Warehouse::do_launch_item(Game & game, WareInstance & item)
+/// Get a carrier to actually move this ware out of the warehouse.
+void Warehouse::do_launch_ware(Game & game, WareInstance & ware)
 {
 	// Create a carrier
 	Ware_Index const carrierid = tribe().worker_index("carrier");
@@ -909,7 +909,7 @@ void Warehouse::do_launch_item(Game & game, WareInstance & item)
 		m_supply->remove_workers(carrierid, 1);
 
 	// Setup the carrier
-	worker.start_task_dropoff(game, item);
+	worker.start_task_dropoff(game, ware);
 }
 
 
@@ -1038,7 +1038,7 @@ uint32_t Warehouse::get_planned_workers(Game & /* game */, Ware_Index index) con
 
 /**
  * Calculate the supply of wares available to this warehouse in each of the
- * buildcost items for the given worker.
+ * buildcost wares for the given worker.
  *
  * This is the current stock plus any incoming transfers.
  */
@@ -1308,12 +1308,12 @@ void Warehouse::set_worker_policy
  */
 void Warehouse::check_remove_stock(Game & game)
 {
-	if (base_flag().current_items() < base_flag().total_capacity() / 2) {
+	if (base_flag().current_wares() < base_flag().total_capacity() / 2) {
 		for (Ware_Index ware = Ware_Index::First(); ware.value() < m_ware_policy.size(); ++ware) {
 			if (get_ware_policy(ware) != SP_Remove || !get_wares().stock(ware))
 				continue;
 
-			launch_item(game, ware);
+			launch_ware(game, ware);
 			break;
 		}
 	}

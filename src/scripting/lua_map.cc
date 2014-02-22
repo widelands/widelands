@@ -179,7 +179,7 @@ PARSERS(worker, Worker);
 
 WaresMap count_wares_on_flag_(Flag& f, const Tribe_Descr & tribe) {
 	WaresMap rv;
-	Flag::Wares current_wares = f.get_items();
+	Flag::Wares current_wares = f.get_wares();
 	container_iterate_const(Flag::Wares, current_wares, w) {
 		Ware_Index i = tribe.ware_index((*w.current)->descr().name());
 		if (!rv.count(i))
@@ -1337,33 +1337,33 @@ int L_Flag::set_wares(lua_State * L)
 	const Tribe_Descr & tribe = f->owner().tribe();
 
 	WaresMap setpoints = m_parse_set_wares_arguments(L, tribe);
-	WaresMap c_items = count_wares_on_flag_(*f, tribe);
+	WaresMap c_wares = count_wares_on_flag_(*f, tribe);
 
-	uint32_t nitems = 0;
-	container_iterate_const(WaresMap, c_items, c) {
+	uint32_t nwares = 0;
+	container_iterate_const(WaresMap, c_wares, c) {
 		// all wares currently on the flag without a setpoint should be removed
 		if (!setpoints.count(c->first))
 			setpoints.insert(Widelands::WareAmount(c->first, 0));
-		nitems += c->second;
+		nwares += c->second;
 	}
 
 	// The idea is to change as little as possible on this flag
 	container_iterate_const(WaresMap, setpoints, sp) {
 		uint32_t cur = 0;
-		WaresMap::iterator i = c_items.find(sp->first);
-		if (i != c_items.end())
+		WaresMap::iterator i = c_wares.find(sp->first);
+		if (i != c_wares.end())
 			cur = i->second;
 
 		int d = sp->second - cur;
-		nitems += d;
+		nwares += d;
 
-		if (f->total_capacity() < nitems)
+		if (f->total_capacity() < nwares)
 			return report_error(L, "Flag has no capacity left!");
 
 		if (d < 0) {
 			while (d) {
-				Flag::Wares current_items = f->get_items();
-				container_iterate_const(Flag::Wares, current_items, w) {
+				Flag::Wares current_wares = f->get_wares();
+				container_iterate_const(Flag::Wares, current_wares, w) {
 					if (tribe.ware_index((*w.current)->descr().name()) == sp->first) {
 						const_cast<WareInstance *>(*w.current)->remove(egbase);
 						++d;
@@ -1372,12 +1372,12 @@ int L_Flag::set_wares(lua_State * L)
 				}
 			}
 		} else if (d > 0) {
-			// add items
-			const Item_Ware_Descr & wd = *tribe.get_ware_descr(sp->first);
+			// add wares
+			const WareDescr & wd = *tribe.get_ware_descr(sp->first);
 			for (int32_t j = 0; j < d; j++) {
-				WareInstance & item = *new WareInstance(sp->first, &wd);
-				item.init(egbase);
-				f->add_item(egbase, item);
+				WareInstance & ware = *new WareInstance(sp->first, &wd);
+				ware.init(egbase);
+				f->add_ware(egbase, ware);
 			}
 		}
 
@@ -1392,11 +1392,11 @@ int L_Flag::get_wares(lua_State * L) {
 	bool return_number = false;
 	WaresSet wares_set = m_parse_get_wares_arguments(L, tribe, &return_number);
 
-	WaresMap items = count_wares_on_flag_(*get(L, get_egbase(L)), tribe);
+	WaresMap wares = count_wares_on_flag_(*get(L, get_egbase(L)), tribe);
 
 	if (wares_set.size() == tribe.get_nrwares().value()) { // Want all returned
 		wares_set.clear();
-		container_iterate_const(WaresMap, items, w)
+		container_iterate_const(WaresMap, wares, w)
 			wares_set.insert(w->first);
 	}
 
@@ -1405,8 +1405,8 @@ int L_Flag::get_wares(lua_State * L) {
 
 	container_iterate_const(WaresSet, wares_set, w) {
 		uint32_t count = 0;
-		if (items.count(*w))
-			count = items[*w];
+		if (wares.count(*w))
+			count = wares[*w];
 
 		if (return_number) {
 			lua_pushuint32(L, count);

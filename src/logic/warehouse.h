@@ -32,7 +32,7 @@ struct Profile;
 namespace Widelands {
 
 class Editor_Game_Base;
-struct PortDock;
+class PortDock;
 struct Request;
 struct Requirements;
 class Soldier;
@@ -66,7 +66,7 @@ private:
 
 
 class Warehouse : public Building, public Attackable, public SoldierControl {
-	friend struct PortDock;
+	friend class PortDock;
 	friend struct Map_Buildingdata_Data_Packet;
 
 	MO_DESCR(Warehouse_Descr);
@@ -94,7 +94,7 @@ public:
 		SP_Prefer = 1,
 
 		/**
-		 * If a ware has this stock policy, no new items of this ware will enter
+		 * If a ware has this stock policy, no more of this ware will enter
 		 * the warehouse.
 		 */
 		SP_DontStock = 2,
@@ -177,8 +177,8 @@ public:
 	// 'worker'.
 	void incorporate_worker(Editor_Game_Base&, Worker* worker);
 
-	WareInstance & launch_item(Game &, Ware_Index);
-	void do_launch_item(Game &, WareInstance &);
+	WareInstance & launch_ware(Game &, Ware_Index);
+	void do_launch_ware(Game &, WareInstance &);
 
 	// Adds the ware to our inventory. Takes ownership and might delete 'ware'.
 	void incorporate_ware(Editor_Game_Base&, WareInstance* ware);

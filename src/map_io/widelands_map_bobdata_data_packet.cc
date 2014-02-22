@@ -511,16 +511,16 @@ void Map_Bobdata_Data_Packet::read_worker_bob
 			} else
 				worker.m_location = 0;
 
-			if (uint32_t const carried_item_serial = fr.Unsigned32()) {
+			if (uint32_t const carried_ware_serial = fr.Unsigned32()) {
 				try {
-					worker.m_carried_item =
-						&mol.get<WareInstance>(carried_item_serial);
+					worker.m_carried_ware =
+						&mol.get<WareInstance>(carried_ware_serial);
 				} catch (const _wexception & e) {
 					throw game_data_error
-						("carried item (%u): %s", carried_item_serial, e.what());
+						("carried ware (%u): %s", carried_ware_serial, e.what());
 				}
 			} else
-				worker.m_carried_item = 0;
+				worker.m_carried_ware = 0;
 
 			// Skip supply
 
@@ -541,9 +541,9 @@ void Map_Bobdata_Data_Packet::read_worker_bob
 				economy = location->get_economy();
 			worker.set_economy(economy);
 			if
-				(WareInstance * const carried_item =
-				 	worker.m_carried_item.get(egbase))
-				carried_item->set_economy(economy);
+				(WareInstance * const carried_ware =
+				 	worker.m_carried_ware.get(egbase))
+				carried_ware->set_economy(economy);
 		} else
 			throw game_data_error
 				(_("unknown/unhandled version %u"), packet_version);

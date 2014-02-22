@@ -33,7 +33,7 @@
 
 namespace Widelands {
 
-struct Item_Ware_Descr;
+struct WareDescr;
 struct ProductionProgram;
 class Soldier;
 struct Request;
@@ -232,7 +232,7 @@ protected:
 protected:  // TrainingSite must have access to this stuff
 	Working_Position                   * m_working_positions;
 
-	int32_t m_fetchfromflag; ///< Number of items to fetch from flag
+	int32_t m_fetchfromflag; ///< Number of wares to fetch from flag
 
 	/// If a program has ended with the result Skipped, that program may not
 	/// start again until a certain time has passed. This is a map from program
@@ -248,7 +248,7 @@ protected:  // TrainingSite must have access to this stuff
 	int32_t      m_program_time; ///< timer time
 	int32_t      m_post_timer;    ///< Time to schedule after ends
 
-	ProductionProgram::ActProduce::Items m_produced_items;
+	ProductionProgram::ActProduce::Items m_produced_wares;
 	ProductionProgram::ActProduce::Items m_recruited_workers;
 	Input_Queues m_input_queues; ///< input queues for all inputs
 	std::vector<bool>        m_statistics;
@@ -261,7 +261,7 @@ protected:  // TrainingSite must have access to this stuff
 };
 
 /**
- * Describes, how many items of a certain ware can be stored in a house.
+ * Describes, how many wares of a certain ware can be stored in a house.
  *
  * This class will be extended to support ordering of certain wares directly or
  * releasing some wares out of a building

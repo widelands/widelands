@@ -58,7 +58,8 @@ class ExpeditionBootstrap;
  * However, we expect this to be such a rare case that it is not
  * implemented at the moment.
  */
-struct PortDock : PlayerImmovable {
+class PortDock : public PlayerImmovable {
+public:
 	PortDock(Warehouse* warehouse);
 	virtual ~PortDock();
 
@@ -133,7 +134,8 @@ private:
 
 	// saving and loading
 protected:
-	struct Loader : PlayerImmovable::Loader {
+	class Loader : public PlayerImmovable::Loader {
+	public:
 		Loader();
 
 		void load(FileRead &, uint8_t version);

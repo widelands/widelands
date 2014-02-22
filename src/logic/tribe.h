@@ -24,14 +24,14 @@
 #include <vector>
 
 #include "TribeBasicInfo.h"
-#include "logic/bob.h"
-#include "logic/building.h"
 #include "descr_maintainer.h"
 #include "graphic/animation.h"
-#include "logic/immovable.h"
 #include "io/filewrite.h"
-#include "logic/item_ware_descr.h"
+#include "logic/bob.h"
+#include "logic/building.h"
+#include "logic/immovable.h"
 #include "logic/military_data.h"
+#include "logic/ware_descr.h"
 #include "logic/worker.h"
 
 namespace Widelands {
@@ -41,7 +41,7 @@ class Worker_Descr;
 struct Building_Descr;
 class Editor_Game_Base;
 struct Event;
-struct Item_Ware_Descr;
+struct WareDescr;
 struct Resource_Descr;
 struct World;
 
@@ -91,7 +91,7 @@ struct Tribe_Descr : boost::noncopyable {
 	Ware_Index safe_ware_index(const char * const warename) const;
 	Ware_Index ware_index(const std::string & warename) const;
 	Ware_Index ware_index(char const * const warename) const;
-	Item_Ware_Descr const * get_ware_descr(const Ware_Index& index) const {
+	WareDescr const * get_ware_descr(const Ware_Index& index) const {
 		return m_wares.get(index);
 	}
 	void set_ware_type_has_demand_check(const Ware_Index& index) const {
@@ -245,7 +245,7 @@ private:
 
 	Indexed_Descr_Maintainer<Worker_Descr, Ware_Index>    m_workers;
 	Indexed_Descr_Maintainer<Building_Descr, Building_Index>  m_buildings;
-	Indexed_Descr_Maintainer<Item_Ware_Descr, Ware_Index> m_wares;
+	Indexed_Descr_Maintainer<WareDescr, Ware_Index> m_wares;
 	Descr_Maintainer<Immovable_Descr> m_immovables;  // The player immovables
 	Descr_Maintainer<Bob::Descr>      m_bobs;
 	std::string                       m_carrier2;

@@ -1273,13 +1273,13 @@ bool Immovable::construct_remaining_buildcost(Game & /* game */, Buildcost * bui
  *
  * If the immovable is not currently in construction mode, return \c false.
  */
-bool Immovable::construct_ware_item(Game & game, Ware_Index index)
+bool Immovable::construct_ware(Game & game, Ware_Index index)
 {
 	ActConstructionData * d = get_action_data<ActConstructionData>();
 	if (!d)
 		return false;
 
-	molog("construct_ware_item: index %u", index.value());
+	molog("construct_ware: index %u", index.value());
 
 	Buildcost::iterator it = d->delivered.find(index);
 	if (it != d->delivered.end())
@@ -1290,7 +1290,7 @@ bool Immovable::construct_ware_item(Game & game, Ware_Index index)
 	m_anim_construction_done = d->delivered.total();
 	m_animstart = game.get_gametime();
 
-	molog("construct_ware_item: total %u delivered: %u", index.value(), d->delivered[index]);
+	molog("construct_ware: total %u delivered: %u", index.value(), d->delivered[index]);
 
 	Buildcost remaining;
 	construct_remaining_buildcost(game, &remaining);
