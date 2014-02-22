@@ -91,7 +91,6 @@ void Map_Player_Names_And_Tribes_Data_Packet::Write
 		("packet_version", CURRENT_PACKET_VERSION);
 
 	const Map & map = egbase.map();
-	std::string name, tribe;
 	Player_Number const nr_players = map.get_nrplayers();
 	iterate_player_numbers(p, nr_players) {
 		char buffer[10];

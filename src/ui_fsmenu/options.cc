@@ -524,9 +524,8 @@ Fullscreen_Menu_Advanced_Options::Fullscreen_Menu_Advanced_Options
 
 	// Fill the font list.
 	{ // For use of string ui_font take a look at fullscreen_menu_base.cc
-		bool did_select_a_font = false;
 		bool cmpbool = !strcmp("serif", opt.ui_font.c_str());
-		did_select_a_font = cmpbool;
+		bool did_select_a_font = cmpbool;
 		m_ui_font_list.add
 			(_("DejaVuSerif (Default)"), "serif", nullptr, cmpbool);
 		cmpbool = !strcmp("sans", opt.ui_font.c_str());

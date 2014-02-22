@@ -105,9 +105,8 @@ UI::Button & MilitaryBox::add_button
 void MilitaryBox::update() {
 	Game & game = ref_cast<Game, Editor_Game_Base>(m_pl->egbase());
 
-	char buf[20];
-
 	if (m_pl->is_retreat_change_allowed()) {
+		char buf[20];
 		assert(m_slider_retreat);
 		assert(m_text_retreat);
 		/// Send change to player

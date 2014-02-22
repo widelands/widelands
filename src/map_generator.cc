@@ -458,7 +458,6 @@ Terrain_Index MapGenerator::figure_out_terrain
 	bool isDesert  = false;
 	bool isDesertOuter = false;
 	uint32_t landAreaIndex = 0;
-	MapGenAreaInfo::MapGenAreaType landType = MapGenAreaInfo::atLand;
 
 	uint32_t rand2 =
 		random2[c0.x + m_mapInfo.w * c0.y] / 3 +
@@ -559,7 +558,7 @@ Terrain_Index MapGenerator::figure_out_terrain
 
 	uint32_t const coast_h   = mapGenInfo.getLandCoastHeight();
 	if (h1 <= coast_h && h2 <= coast_h && h3 <= coast_h) { //  water or coast...
-		atp = landType;
+		atp = MapGenAreaInfo::atLand;
 		ttp = MapGenAreaInfo::ttLandCoast;
 
 		uint32_t const ocean_h   = mapGenInfo.getWaterOceanHeight();
