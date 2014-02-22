@@ -399,19 +399,14 @@ Fullscreen_Menu_Advanced_Options::Fullscreen_Menu_Advanced_Options
 		 _("Apply"), std::string(), true, false),
 
 // Spinboxes
-	m_sb_speed
-		(this,
-		 get_w() * 18 / 25, get_h() * 63 / 100, get_w() / 4, m_vbutw,
-		 opt.speed_of_new_game / 1000, 0, 100, _("x"),
-		 g_gr->images().get("pics/but1.png")),
 	m_sb_dis_panel
 		(this,
-		 get_w() * 18 / 25, get_h() * 6768 / 10000, get_w() / 4, m_vbutw,
+		 get_w() * 18 / 25, get_h() * 63 / 100, get_w() / 4, m_vbutw,
 		 opt.panel_snap_distance, 0, 100, _("px."),
 		 g_gr->images().get("pics/but1.png")),
 	m_sb_dis_border
 		(this,
-		 get_w() * 18 / 25, get_h() * 7235 / 10000, get_w() / 4, m_vbutw,
+		 get_w() * 18 / 25, get_h() * 6768 / 10000, get_w() / 4, m_vbutw,
 		 opt.border_snap_distance, 0, 100, _("px."),
 		 g_gr->images().get("pics/but1.png")),
 
@@ -447,34 +442,36 @@ Fullscreen_Menu_Advanced_Options::Fullscreen_Menu_Advanced_Options
 		 get_w() * 1313 / 10000, get_h() * 3 / 5,
 		 _("Do not zip widelands data files (maps, replays and savegames)."),
 		 UI::Align_VCenter),
-	m_label_speed
-		(this,
-		 get_w() * 1313 / 10000, get_h() * 6467 / 10000,
-		 _("Speed of a new game:"), UI::Align_VCenter),
 	m_label_snap_dis_panel
 		(this,
-		 get_w() * 1313 / 10000, get_h() * 6933 / 10000,
+		 get_w() * 1313 / 10000, get_h() * 6467 / 10000,
 		 _("Distance for windows to snap to other panels:"), UI::Align_VCenter),
 	m_label_snap_dis_border
 		(this,
-		 get_w() * 1313 / 10000, get_h() * 37 / 50,
+		 get_w() * 1313 / 10000, get_h() * 6933 / 10000,
 		 _("Distance for windows to snap to borders:"), UI::Align_VCenter),
 
-	m_remove_syncstreams (this, Point(get_w() * 19 / 200, get_h() * 7715 / 10000)),
+	m_remove_syncstreams (this,
+			Point(get_w() * 19 / 200, get_h() * 7220 / 10000)
+	),
 	m_label_remove_syncstreams
 		(this,
-		 get_w() * 1313 / 10000, get_h() * 7865 / 10000,
+		 get_w() * 1313 / 10000, get_h() * 37 / 50,
 		 _("Remove Syncstream dumps on startup"), UI::Align_VCenter),
 
-	m_opengl (this, Point(get_w() * 19 / 200, get_h() * 8180 / 10000)),
+	m_opengl (this,
+			Point(get_w() * 19 / 200, get_h() * 7715 / 10000)
+		),
 	m_label_opengl
 		(this,
-		 get_w() * 1313 / 10000, get_h() * 8330 / 10000,
+		 get_w() * 1313 / 10000, get_h() * 7865 / 10000,
 		 _("OpenGL rendering"), UI::Align_VCenter),
-	m_transparent_chat (this, Point(get_w() * 19 / 200, get_h() * 8645 / 10000)),
+	m_transparent_chat (this,
+			Point(get_w() * 19 / 200, get_h() * 8180 / 10000)
+		),
 	m_label_transparent_chat
 		(this,
-		 get_w() * 1313 / 10000, get_h() * 8795 / 10000,
+		 get_w() * 1313 / 10000, get_h() * 8330 / 10000,
 		 _("Show in game chat with transparent background"), UI::Align_VCenter),
 
 	os(opt)
@@ -498,7 +495,6 @@ Fullscreen_Menu_Advanced_Options::Fullscreen_Menu_Advanced_Options
 	m_message_sound        .set_state(opt.message_sound);
 	m_label_nozip          .set_textstyle(ts_small());
 	m_nozip                .set_state(opt.nozip);
-	m_label_speed          .set_textstyle(ts_small());
 	m_label_snap_dis_border.set_textstyle(ts_small());
 	m_label_snap_dis_panel .set_textstyle(ts_small());
 	m_label_remove_syncstreams.set_textstyle(ts_small());
@@ -507,11 +503,8 @@ Fullscreen_Menu_Advanced_Options::Fullscreen_Menu_Advanced_Options
 	m_opengl               .set_state(opt.opengl);
 	m_label_transparent_chat.set_textstyle(ts_small());
 	m_transparent_chat     .set_state(opt.transparent_chat);
-	m_sb_speed             .set_textstyle(ts_small());
 	m_sb_dis_border        .set_textstyle(ts_small());
 	m_sb_dis_panel         .set_textstyle(ts_small());
-
-	m_sb_speed.add_replacement(0, _("Pause"));
 
 	m_label_ui_font.set_textstyle(ts_small());
 	m_ui_font_list .set_font(ui_fn(), fs_small());
@@ -584,7 +577,6 @@ Options_Ctrl::Options_Struct Fullscreen_Menu_Advanced_Options::get_values() {
 	os.message_sound        = m_message_sound.get_state();
 	os.nozip                = m_nozip.get_state();
 	os.ui_font              = m_ui_font_list.get_selected();
-	os.speed_of_new_game    = m_sb_speed.getValue() * 1000;
 	os.panel_snap_distance  = m_sb_dis_panel.getValue();
 	os.border_snap_distance = m_sb_dis_border.getValue();
 	os.remove_syncstreams   = m_remove_syncstreams.get_state();
@@ -659,8 +651,6 @@ Options_Ctrl::Options_Struct Options_Ctrl::options_struct() {
 		("nozip",            false);
 	opt.ui_font               =  m_opt_section.get_string
 		("ui_font",     "serif");
-	opt.speed_of_new_game     =  m_opt_section.get_int
-		("speed_of_new_game", 1000);
 	opt.border_snap_distance  =  m_opt_section.get_int
 		("border_snap_distance", 0);
 	opt.panel_snap_distance   =  m_opt_section.get_int
@@ -698,7 +688,6 @@ void Options_Ctrl::save_options() {
 	m_opt_section.set_bool("sound_at_message",      opt.message_sound);
 	m_opt_section.set_bool("nozip",                 opt.nozip);
 	m_opt_section.set_string("ui_font",             opt.ui_font);
-	m_opt_section.set_int("speed_of_new_game",      opt.speed_of_new_game);
 	m_opt_section.set_int("border_snap_distance",   opt.border_snap_distance);
 	m_opt_section.set_int("panel_snap_distance",    opt.panel_snap_distance);
 

@@ -60,7 +60,6 @@ public:
 		bool message_sound;
 		bool nozip;
 		std::string ui_font;
-		int32_t speed_of_new_game;
 		int32_t border_snap_distance;
 		int32_t panel_snap_distance;
 	};
@@ -162,14 +161,14 @@ private:
 	uint32_t                    m_buth;
 
 	UI::Button     m_cancel, m_apply;
-	UI::SpinBox                 m_sb_speed, m_sb_dis_panel, m_sb_dis_border;
+	UI::SpinBox                 m_sb_dis_panel, m_sb_dis_border;
 	UI::Textarea                m_title;
 	UI::Listselect<std::string> m_ui_font_list;
 	UI::Textarea                m_label_ui_font;
 	UI::Checkbox                m_message_sound;
 	UI::Textarea                m_label_message_sound;
 	UI::Checkbox                m_nozip;
-	UI::Textarea                m_label_nozip, m_label_speed;
+	UI::Textarea                m_label_nozip;
 
 	UI::Textarea                m_label_snap_dis_panel, m_label_snap_dis_border;
 

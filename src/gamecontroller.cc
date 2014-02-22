@@ -64,9 +64,7 @@ SinglePlayerGameController::SinglePlayerGameController
 	m_useai           (useai),
 	m_lastframe       (WLApplication::get()->get_time()),
 	m_time            (m_game.get_gametime()),
-	m_speed
-		(g_options.pull_section("global").get_natural
-		 	("speed_of_new_game", 1000)),
+	m_speed(1000),
 	m_paused(false),
 	m_player_cmdserial(0),
 	m_local           (local)

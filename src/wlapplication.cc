@@ -866,7 +866,6 @@ bool WLApplication::init_settings() {
 	s.get_int("border_snap_distance");
 	s.get_int("maxfps");
 	s.get_int("panel_snap_distance");
-	s.get_int("speed_of_new_game");
 	s.get_int("autosave");
 	s.get_int("remove_replays");
 	s.get_bool("single_watchwin");
@@ -1388,10 +1387,7 @@ void WLApplication::show_usage()
 		<< _(" --dedicated=FILENAME Starts a dedicated server with FILENAME as map\n")
 		<<
 		_
-			(" --speed_of_new_game  The speed that the new game will run at\n"
-			 "                      when started, with factor 1000 (0 is pause,\n"
-			 "                      1000 is normal speed).\n"
-			 " --auto_roadbuild_mode=[yes|no]\n"
+			(" --auto_roadbuild_mode=[yes|no]\n"
 			 "                      Whether to enter roadbuilding mode\n"
 			 "                      automatically after placing a flag that is\n"
 			 "                      not connected to a road.\n"
