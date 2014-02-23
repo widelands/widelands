@@ -32,7 +32,7 @@ class Game;
 struct Map_Map_Object_Loader;
 struct Map_Map_Object_Saver;
 class Map_Object;
-struct PortDock;
+class PortDock;
 class WareInstance;
 class Worker;
 
@@ -41,23 +41,17 @@ class Worker;
  * encapsulated in this structure during shipping and the waiting time in the @ref PortDock.
  */
 struct ShippingItem {
-	friend struct PortDock;
-	friend struct Ship;
-
 	ShippingItem() {}
 	ShippingItem(WareInstance & ware);
 	ShippingItem(Worker & worker);
 
-	// Return the item that is shipped which might be either a ware or a worker.
-	// TODO(sirver): reference to pointer are super confusing to read at the
-	// calling site, rather pass a pointer to a pointer.
-	void get(Editor_Game_Base & game, WareInstance * & ware, Worker * & worker);
+	// Unboxes the item that is shipped which might be either a ware or a
+	// worker. It is safe to pass nullptr for 'ware' or 'worker' in case you are
+	// only interested in the ware if it is the one or the other.
+	void get(Editor_Game_Base& game, WareInstance** ware, Worker** worker) const;
 
 	void set_economy(Game &, Economy * e);
-	void set_location(Game &, Map_Object * obj);
-	void end_shipping(Game &);
 	PortDock * get_destination(Game &);
-	void fetch_destination(Game &, PortDock &);
 	void schedule_update(Game &, int32_t delay);
 
 	void remove(Editor_Game_Base &);
@@ -73,6 +67,18 @@ struct ShippingItem {
 	void save(Editor_Game_Base & egbase, Map_Map_Object_Saver & mos, FileWrite & fw);
 
 private:
+	friend class PortDock;
+	friend struct Ship;
+
+	// Called when a port is reached. The item will act again on its own.
+	void end_shipping(Game &);
+
+	// Sets the location of this shippingitem, this could be a ship, a portdock or a warehouse.
+	void set_location(Game&, Map_Object* obj);
+
+	// Updates m_destination_dock.
+	void update_destination(Game &, PortDock &);
+
 	Object_Ptr m_object;
 	OPtr<PortDock> m_destination_dock;
 };

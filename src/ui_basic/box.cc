@@ -43,7 +43,7 @@ Box::Box
 	m_max_y      (max_y ? max_y : g_gr->get_yres()),
 
 	m_scrolling(false),
-	m_scrollbar(0),
+	m_scrollbar(nullptr),
 	m_orientation(orientation),
 	m_mindesiredbreadth(0),
 	m_inner_spacing(inner_spacing)
@@ -185,7 +185,7 @@ void Box::layout()
 		m_scrollbar->set_pagesize(pagesize);
 	} else {
 		delete m_scrollbar;
-		m_scrollbar = 0;
+		m_scrollbar = nullptr;
 	}
 
 	// Second pass: Count number of infinite spaces

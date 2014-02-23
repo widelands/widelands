@@ -38,7 +38,7 @@ struct Icon : public Panel {
 	void setFrame(const RGBColor& color);
 	void setNoFrame();
 
-	virtual void draw(RenderTarget &);
+	virtual void draw(RenderTarget &) override;
 
 private:
 	const Image* m_pic;

@@ -28,7 +28,7 @@
 namespace Widelands {
 
 struct Cmd_LuaCoroutine : public GameLogicCommand {
-	Cmd_LuaCoroutine() : GameLogicCommand(0), m_cr(0) {} // For savegame loading
+	Cmd_LuaCoroutine() : GameLogicCommand(0), m_cr(nullptr) {} // For savegame loading
 	Cmd_LuaCoroutine(int32_t const _duetime, LuaCoroutine * const cr) :
 		GameLogicCommand(_duetime), m_cr(cr) {}
 
@@ -37,12 +37,12 @@ struct Cmd_LuaCoroutine : public GameLogicCommand {
 	}
 
 	// Write these commands to a file (for savegames)
-	void Write(FileWrite &, Editor_Game_Base &, Map_Map_Object_Saver  &);
-	void Read (FileRead  &, Editor_Game_Base &, Map_Map_Object_Loader &);
+	void Write(FileWrite &, Editor_Game_Base &, Map_Map_Object_Saver  &) override;
+	void Read (FileRead  &, Editor_Game_Base &, Map_Map_Object_Loader &) override;
 
-	virtual uint8_t id() const {return QUEUE_CMD_LUACOROUTINE;}
+	virtual uint8_t id() const override {return QUEUE_CMD_LUACOROUTINE;}
 
-	virtual void execute(Game &);
+	virtual void execute(Game &) override;
 
 private:
 	LuaCoroutine * m_cr;

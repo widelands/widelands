@@ -7,25 +7,25 @@ msgstr ""
 "Project-Id-Version: Widelands svn4888\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2013-09-15 17:41+0000\n"
-"PO-Revision-Date: 2012-03-31 09:12+0000\n"
-"Last-Translator: Marek Donar <markus7cz@gmail.com>\n"
+"PO-Revision-Date: 2014-02-01 20:00+0000\n"
+"Last-Translator: Jiří Locker <jiri.locker@gmail.com>\n"
 "Language-Team: Czech <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-09-16 04:36+0000\n"
-"X-Generator: Launchpad (build 16761)\n"
+"X-Launchpad-Export-Date: 2014-02-02 05:25+0000\n"
+"X-Generator: Launchpad (build 16916)\n"
 "X-Poedit-Country: CZECH REPUBLIC\n"
 "X-Poedit-Language: Czech\n"
 "X-Poedit-SourceCharset: utf-8\n"
 
 #: ../../txts/README.lua:73
 msgid "(CTRL+) 0-9: Remember and go to previously remembered locations"
-msgstr ""
+msgstr "(CTRL+) 0-9: Zapamatovat a jít na předchozí zapamatované lokace"
 
 #: ../../txts/README.lua:74
 msgid ",: goes to previous location"
-msgstr ""
+msgstr ",: jít na předchozí lokaci"
 
 #: ../../txts/README.lua:99
 msgid "- Detailed steps on how to trigger the bug, if possible."
@@ -72,7 +72,7 @@ msgstr ""
 
 #: ../../txts/README.lua:75
 msgid ".: goes to next location"
-msgstr ""
+msgstr ",: jít na následující lokaci"
 
 #: ../../txts/editor_readme:43
 msgid "1-0      Changes tools size"
@@ -135,11 +135,11 @@ msgstr "C        Přepíná zobrazení popisků"
 
 #: ../../txts/README.lua:67
 msgid "C: toggles census"
-msgstr ""
+msgstr "C: přepíná zobrazení popisků"
 
 #: ../../txts/README.lua:77
 msgid "CTRL+F10: quits the game immediately"
-msgstr ""
+msgstr "CTRL+F10: ukončí hru okamžitě"
 
 #: ../../txts/editor_readme:39
 msgid "CTRL+L   Load Map"
@@ -175,7 +175,7 @@ msgstr "Čeština"
 
 #: ../../txts/README.lua:83
 msgid "DELETE: archives the current message"
-msgstr ""
+msgstr "DELETE: archivuje zobrazenou zprávu"
 
 #: ../../txts/developers:193
 msgid "Dansk"
@@ -211,15 +211,15 @@ msgstr "F        Přepíná celoobrazovkový režim"
 
 #: ../../txts/README.lua:78
 msgid "F11: takes a screenshot"
-msgstr ""
+msgstr "F11: uloží snímek obrazovky"
 
 #: ../../txts/README.lua:76
 msgid "F6: shows the debug console (only in debug-builds)"
-msgstr ""
+msgstr "F6: zobrazí ladicí konzoli (pouze v testovacím sestavení)"
 
 #: ../../txts/README.lua:71
 msgid "F: toggles fullscreen (if supported by OS)"
-msgstr ""
+msgstr "F: přepíná celoobrazovkový režim (pokud umožňuje OS)"
 
 #: ../../txts/developers:206
 msgid "Finnish"
@@ -235,7 +235,7 @@ msgstr "Francouzština"
 
 #: ../../txts/README.lua:82
 msgid "G: jumps to location corresponding to current message"
-msgstr ""
+msgstr "G: přesune tě na místo souvisící s poslední zprávou"
 
 #: ../../txts/developers:219
 msgid "Galician"
@@ -282,7 +282,7 @@ msgstr ""
 
 #: ../../txts/README.lua:72
 msgid "Home: centers main mapview on starting location"
-msgstr ""
+msgstr "Home: vystředí mapu na počáteční pozici"
 
 #: ../../txts/developers:23
 #: ../../txts/developers:347
@@ -303,7 +303,7 @@ msgstr "I        Aktivuje informační nástroj"
 
 #: ../../txts/README.lua:69
 msgid "I: toggles stock inventory"
-msgstr ""
+msgstr "I: přepíná zobrazení zásob"
 
 #: ../../txts/README.lua:93
 msgid "If you encounter a bug, please report it to our bugtracker:"
@@ -397,7 +397,7 @@ msgstr "M        Přepíná náhledovou mapku"
 
 #: ../../txts/README.lua:65
 msgid "M: toggles minimap"
-msgstr ""
+msgstr "M: přepíná náhledovou mapku"
 
 #: ../../txts/tips/general_game.tip:34
 msgid ""
@@ -423,7 +423,7 @@ msgstr "Hudebníci"
 
 #: ../../txts/README.lua:66
 msgid "N: toggles messages ('news')"
-msgstr ""
+msgstr "N: přepíná seznam zpráv"
 
 #: ../../txts/developers:181
 msgid ""
@@ -445,7 +445,7 @@ msgstr "Nelinuxové distribuce"
 
 #: ../../txts/README.lua:70
 msgid "O: toggles objectives"
-msgstr ""
+msgstr "O: přepíná seznam úkolů"
 
 #: ../../txts/license:18
 msgid ""
@@ -492,15 +492,15 @@ msgstr "P        Přepíná nabídku hráče"
 
 #: ../../txts/README.lua:62
 msgid "PAGEDOWN: decreases gamespeed"
-msgstr ""
+msgstr "PAGEDOWN: sníží rychlost hry"
 
 #: ../../txts/README.lua:61
 msgid "PAGEUP: increases gamespeed"
-msgstr ""
+msgstr "PAGEUP: zvýší rychlost hry"
 
 #: ../../txts/README.lua:63
 msgid "PAUSE: pauses the game"
-msgstr ""
+msgstr "PAUSE: pozastaví hru"
 
 #: ../../txts/developers:281
 msgid "Packagers"
@@ -580,7 +580,7 @@ msgstr "Ruština"
 
 #: ../../txts/README.lua:68
 msgid "S: toggles statistics"
-msgstr ""
+msgstr "S: přepíná zobrazení statistik"
 
 #: ../../txts/editor_readme:45
 msgid "SHIFT    (Hold) Selects first alternative tool while pressed"
@@ -599,7 +599,7 @@ msgstr ""
 
 #: ../../txts/README.lua:64
 msgid "SPACE: toggles build-help"
-msgstr ""
+msgstr "Mezerník: přepíná nápovědu k výstavbě"
 
 #: ../../txts/developers:182
 msgid ""

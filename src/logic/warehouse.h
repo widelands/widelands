@@ -32,7 +32,7 @@ struct Profile;
 namespace Widelands {
 
 class Editor_Game_Base;
-struct PortDock;
+class PortDock;
 struct Request;
 struct Requirements;
 class Soldier;
@@ -52,9 +52,9 @@ struct Warehouse_Descr : public Building_Descr {
 		 const std::string & directory, Profile &, Section & global_s,
 		 const Tribe_Descr &);
 
-	virtual Building & create_object() const;
+	virtual Building & create_object() const override;
 
-	virtual uint32_t get_conquers() const {return m_conquers;}
+	virtual uint32_t get_conquers() const override {return m_conquers;}
 
 	uint32_t get_heal_per_second        () const {
 		return m_heal_per_second;
@@ -66,7 +66,7 @@ private:
 
 
 class Warehouse : public Building, public Attackable, public SoldierControl {
-	friend struct PortDock;
+	friend class PortDock;
 	friend struct Map_Buildingdata_Data_Packet;
 
 	MO_DESCR(Warehouse_Descr);
@@ -94,7 +94,7 @@ public:
 		SP_Prefer = 1,
 
 		/**
-		 * If a ware has this stock policy, no new items of this ware will enter
+		 * If a ware has this stock policy, no more of this ware will enter
 		 * the warehouse.
 		 */
 		SP_DontStock = 2,
@@ -109,9 +109,9 @@ public:
 	Warehouse(const Warehouse_Descr &);
 	virtual ~Warehouse();
 
-	void load_finish(Editor_Game_Base &);
+	void load_finish(Editor_Game_Base &) override;
 
-	char const * type_name() const {return "warehouse";}
+	char const * type_name() const override {return "warehouse";}
 
 	/// Called only when the oject is logically created in the simulation. If
 	/// called again, such as when the object is loaded from a savegame, it will
@@ -127,15 +127,15 @@ public:
 	/// * Conquers land if the the warehouse type is configured to do that.
 	/// * Sends a message to the player about the creation of this warehouse.
 	/// * Sets up @ref PortDock for ports
-	virtual void init(Editor_Game_Base &);
+	virtual void init(Editor_Game_Base &) override;
 
-	virtual void cleanup(Editor_Game_Base &);
+	virtual void cleanup(Editor_Game_Base &) override;
 
-	virtual void destroy(Editor_Game_Base &);
+	virtual void destroy(Editor_Game_Base &) override;
 
-	virtual void act(Game & game, uint32_t data);
+	virtual void act(Game & game, uint32_t data) override;
 
-	virtual void set_economy(Economy *);
+	virtual void set_economy(Economy *) override;
 
 	const WareList & get_wares() const;
 	const WareList & get_workers() const;
@@ -152,31 +152,36 @@ public:
 	void remove_workers(Ware_Index, uint32_t count);
 
 	/* SoldierControl implementation */
-	std::vector<Soldier *> presentSoldiers() const;
-	std::vector<Soldier *> stationedSoldiers() const {
+	std::vector<Soldier *> presentSoldiers() const override;
+	std::vector<Soldier *> stationedSoldiers() const override {
 		return presentSoldiers();
 	}
-	uint32_t minSoldierCapacity() const {return 0;}
-	uint32_t maxSoldierCapacity() const {return 4294967295U;}
-	uint32_t soldierCapacity() const {return maxSoldierCapacity();}
-	void setSoldierCapacity(uint32_t /* capacity */) {
+	uint32_t minSoldierCapacity() const override {return 0;}
+	uint32_t maxSoldierCapacity() const override {return 4294967295U;}
+	uint32_t soldierCapacity() const override {return maxSoldierCapacity();}
+	void setSoldierCapacity(uint32_t /* capacity */) override {
 		throw wexception("Not implemented for a Warehouse!");
 	}
-	void dropSoldier(Soldier &) {
+	void dropSoldier(Soldier &) override {
 		throw wexception("Not implemented for a Warehouse!");
 	}
-	int incorporateSoldier(Editor_Game_Base &, Soldier &);
-	int outcorporateSoldier(Editor_Game_Base &, Soldier &);
+	int outcorporateSoldier(Editor_Game_Base &, Soldier &) override;
+	int incorporateSoldier(Editor_Game_Base &, Soldier& soldier) override;
 
-	virtual bool fetch_from_flag(Game &);
+	virtual bool fetch_from_flag(Game &) override;
 
 	uint32_t count_workers(const Game &, Ware_Index, const Requirements &);
 	Worker & launch_worker(Game &, Ware_Index, const Requirements &);
-	void incorporate_worker(Editor_Game_Base &, Worker &);
 
-	WareInstance & launch_item(Game &, Ware_Index);
-	void do_launch_item(Game &, WareInstance &);
-	void incorporate_item(Editor_Game_Base &, WareInstance &);
+	// Adds the worker to the inventory. Takes ownership and might delete
+	// 'worker'.
+	void incorporate_worker(Editor_Game_Base&, Worker* worker);
+
+	WareInstance & launch_ware(Game &, Ware_Index);
+	void do_launch_ware(Game &, WareInstance &);
+
+	// Adds the ware to our inventory. Takes ownership and might delete 'ware'.
+	void incorporate_ware(Editor_Game_Base&, WareInstance* ware);
 
 	bool can_create_worker(Game &, Ware_Index) const;
 	void     create_worker(Game &, Ware_Index);
@@ -190,14 +195,14 @@ public:
 	void disable_spawn(uint8_t worker_types_without_cost_index);
 
 	// Begin Attackable implementation
-	virtual Player & owner() const {return Building::owner();}
-	virtual bool canAttack();
-	virtual void aggressor(Soldier &);
-	virtual bool attack   (Soldier &);
+	virtual Player & owner() const override {return Building::owner();}
+	virtual bool canAttack() override;
+	virtual void aggressor(Soldier &) override;
+	virtual bool attack   (Soldier &) override;
 	// End Attackable implementation
 
-	virtual void receive_ware(Game &, Ware_Index ware);
-	virtual void receive_worker(Game &, Worker & worker);
+	virtual void receive_ware(Game &, Ware_Index ware) override;
+	virtual void receive_worker(Game &, Worker & worker) override;
 
 	StockPolicy get_ware_policy(Ware_Index ware) const;
 	StockPolicy get_worker_policy(Ware_Index ware) const;
@@ -210,14 +215,14 @@ public:
 
 	// Returns the waresqueue of the expedition if this is a port. Will
 	// assert(false) otherwise.
-	virtual WaresQueue& waresqueue(Ware_Index);
+	virtual WaresQueue& waresqueue(Ware_Index) override;
 
-	virtual void log_general_info(const Editor_Game_Base &);
+	virtual void log_general_info(const Editor_Game_Base &) override;
 
 protected:
 	/// Create the warehouse information window.
 	virtual void create_options_window
-		(Interactive_GameBase &, UI::Window * & registry);
+		(Interactive_GameBase &, UI::Window * & registry) override;
 
 private:
 	void init_portdock(Editor_Game_Base & egbase);

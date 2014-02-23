@@ -360,12 +360,12 @@ Map_Object_Descr g_FakeAttackController_Descr
 struct FakeAttackController : public BaseImmovable {
 	FakeAttackController() : BaseImmovable(g_FakeAttackController_Descr) {}
 
-	virtual int32_t get_type() const {return BATTLE;}
-	virtual int32_t get_size() const {return SMALL;}
-	virtual bool get_passable() const {return true;}
-	virtual void draw (const Editor_Game_Base &, RenderTarget &, const FCoords&, const Point&)
+	virtual int32_t get_type() const override {return BATTLE;}
+	virtual int32_t get_size() const override {return SMALL;}
+	virtual bool get_passable() const override {return true;}
+	virtual void draw (const Editor_Game_Base &, RenderTarget &, const FCoords&, const Point&) override
 	{}
-	virtual PositionList get_positions (const Editor_Game_Base &) const
+	virtual PositionList get_positions (const Editor_Game_Base &) const override
 	{
 		// This violates what I had in mind for get_positions, but since this is
 		// attic code and get_positions was added long after this code was gone
@@ -409,7 +409,7 @@ struct FakeAttackController : public BaseImmovable {
 			}
 		}
 
-		virtual void load_finish() {
+		virtual void load_finish() override {
 			get_object()->remove(egbase());
 		}
 	};
@@ -442,12 +442,12 @@ Map_Object_Descr g_FakeBattle_Descr("battle", "Battle");
 struct FakeBattle : public BaseImmovable {
 	FakeBattle() : BaseImmovable(g_FakeBattle_Descr) {}
 
-	virtual int32_t get_type() const {return BATTLE;}
-	virtual int32_t get_size() const {return SMALL;}
-	virtual bool get_passable() const {return true;}
-	virtual void draw (const Editor_Game_Base &, RenderTarget &, const FCoords&, const Point&)
+	virtual int32_t get_type() const override {return BATTLE;}
+	virtual int32_t get_size() const override {return SMALL;}
+	virtual bool get_passable() const override {return true;}
+	virtual void draw (const Editor_Game_Base &, RenderTarget &, const FCoords&, const Point&) override
 	{}
-	virtual PositionList get_positions (const Editor_Game_Base &) const
+	virtual PositionList get_positions (const Editor_Game_Base &) const override
 	{
 		// This violates what I had in mind for get_positions, but since this is
 		// attic code and get_positions was added long after this code was gone
@@ -467,7 +467,7 @@ struct FakeBattle : public BaseImmovable {
 			fr.Unsigned32();
 		}
 
-		virtual void load_finish() {get_object()->remove(egbase());}
+		virtual void load_finish() override {get_object()->remove(egbase());}
 	};
 };
 

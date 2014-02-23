@@ -44,7 +44,7 @@ void Map_Allowed_Worker_Types_Data_Packet::Read
 	// our file is not there, there is nothing to be done.
 	Profile prof;
 	try {
-		prof.read("allowed_worker_types", 0, fs);
+		prof.read("allowed_worker_types", nullptr, fs);
 	} catch (...) {
 		return;
 	}

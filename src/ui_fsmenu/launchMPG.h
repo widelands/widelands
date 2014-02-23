@@ -54,7 +54,7 @@ struct Fullscreen_Menu_LaunchMPG : public Fullscreen_Menu_Base {
 
 	void setChatProvider(ChatProvider &);
 
-	void think();
+	void think() override;
 
 	void refresh();
 

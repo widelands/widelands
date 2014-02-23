@@ -57,7 +57,7 @@ public:
 		 const Tribe_Descr &);
 	virtual ~Worker_Descr();
 
-	virtual Bob & create_object() const;
+	virtual Bob & create_object() const override;
 
 	virtual void load_graphics();
 
@@ -109,7 +109,7 @@ public:
 		(Editor_Game_Base &, Player &, PlayerImmovable *, Coords) const;
 
 	typedef std::map<Worker_Descr const *, std::string> becomes_map_t;
-	virtual uint32_t movecaps() const;
+	virtual uint32_t movecaps() const override;
 
 	typedef std::map<std::string, WorkerProgram *> Programs;
 	const Programs & programs() const {return m_programs;}

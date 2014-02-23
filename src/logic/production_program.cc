@@ -66,7 +66,7 @@ void ProductionProgram::parse_ware_type_group
 	(char            * & parameters,
 	 Ware_Type_Group   & group,
 	 const Tribe_Descr & tribe,
-	 const Ware_Types  & inputs)
+	 const BillOfMaterials  & inputs)
 {
 	std::set<Ware_Index>::iterator last_insert_pos = group.first.end();
 	uint8_t count     = 1;
@@ -80,7 +80,7 @@ void ProductionProgram::parse_ware_type_group
 		char const terminator = *parameters;
 		*parameters = '\0';
 		Ware_Index const ware_index = tribe.safe_ware_index(ware);
-		for (wl_const_range<Ware_Types> i(inputs);; ++i)
+		for (wl_const_range<BillOfMaterials> i(inputs);; ++i)
 			if (i.empty())
 				throw game_data_error
 					(_
@@ -285,7 +285,7 @@ ProductionProgram::ActReturn::Condition * create_economy_condition
 		throw game_data_error("economy: %s", e.what());
 	}
 
-	return 0; // will never be reached
+	return nullptr; // will never be reached
 }
 
 
@@ -303,7 +303,7 @@ ProductionProgram::ActReturn::Condition * create_site_condition
 		throw game_data_error("site: %s", e.what());
 	}
 
-	return 0; // will never be reached
+	return nullptr; // will never be reached
 }
 
 
@@ -321,7 +321,7 @@ ProductionProgram::ActReturn::Condition * create_workers_condition
 		throw game_data_error("workers: %s", e.what());
 	}
 
-	return 0; // will never be reached
+	return nullptr; // will never be reached
 }
 
 
@@ -346,7 +346,7 @@ ProductionProgram::ActReturn::create_condition
 		throw game_data_error(_("invalid condition: %s"), e.what());
 	}
 
-	return 0; // will never be reached
+	return nullptr; // will never be reached
 }
 
 
@@ -723,7 +723,7 @@ ProductionProgram::ActAnimate::ActAnimate
 			m_id = g_anim.get
 				(directory.c_str(),
 				 prof.get_safe_section(animation_name),
-				 0);
+				 nullptr);
 			descr.add_animation(animation_name, m_id);
 		}
 		if (not reached_end) { //  The next parameter is the duration.
@@ -917,8 +917,8 @@ void ProductionProgram::ActProduce::execute
 	(Game & game, ProductionSite & ps) const
 {
 	//ps.molog("  Produce\n");
-	assert(ps.m_produced_items.empty());
-	ps.m_produced_items = m_items;
+	assert(ps.m_produced_wares.empty());
+	ps.m_produced_wares = m_items;
 	ps.m_working_positions[0].worker->update_task_buildingwork(game);
 
 	const Tribe_Descr & tribe = ps.owner().tribe();
@@ -1552,7 +1552,7 @@ bool ProductionProgram::ActConstruct::get_building_work
 
 	// First step: figure out which ware item to bring along
 	Buildcost remaining;
-	WaresQueue * wq = 0;
+	WaresQueue * wq = nullptr;
 
 	Immovable * construction = dynamic_cast<Immovable *>(state.objvar.get(game));
 	if (construction) {
@@ -1579,10 +1579,10 @@ bool ProductionProgram::ActConstruct::get_building_work
 		return false;
 	}
 
-	// Second step: give item to worker
-	WareInstance * item = new WareInstance(wq->get_ware(), psite.tribe().get_ware_descr(wq->get_ware()));
-	item->init(game);
-	worker.set_carried_item(game, item);
+	// Second step: give ware to worker
+	WareInstance * ware = new WareInstance(wq->get_ware(), psite.tribe().get_ware_descr(wq->get_ware()));
+	ware->init(game);
+	worker.set_carried_ware(game, ware);
 	wq->set_filled(wq->get_filled() - 1);
 
 	// Third step: send worker on his merry way, giving the target object or coords

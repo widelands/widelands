@@ -24,7 +24,7 @@
 
 #include <stdint.h>
 
-#include "logic/item_ware_descr.h"
+#include "logic/ware_descr.h"
 #include "logic/wareworker.h"
 #include "ui_basic/button.h"
 #include "ui_basic/panel.h"
@@ -65,8 +65,8 @@ public:
 		 bool = false);
 	~WaresQueueDisplay();
 
-	virtual void think();
-	virtual void draw(RenderTarget &);
+	virtual void think() override;
+	virtual void draw(RenderTarget &) override;
 
 private:
 	Interactive_GameBase  & m_igb;

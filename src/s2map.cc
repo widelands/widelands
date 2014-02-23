@@ -158,7 +158,7 @@ uint8_t * S2_Map_Loader::load_s2mf_section
 		 buffer[5] != 0x00)
 	{
 		cerr << "Section marker not found" << endl;
-		return 0;
+		return nullptr;
 	}
 
 	uint16_t const dw = fr.Unsigned16();
@@ -175,7 +175,7 @@ uint8_t * S2_Map_Loader::load_s2mf_section
 
 	if (dw < width || dh < height) {
 		cerr << "Section not big enough" << endl;
-		return 0;
+		return nullptr;
 	}
 
 	uint8_t * const section = static_cast<uint8_t *>(malloc(size));
@@ -248,9 +248,9 @@ void S2_Map_Loader::load_s2mf_header()
  */
 void S2_Map_Loader::load_s2mf(Widelands::Editor_Game_Base & egbase)
 {
-	uint8_t * section   = 0;
-	uint8_t * bobs      = 0;
-	uint8_t * buildings = 0;
+	uint8_t * section   = nullptr;
+	uint8_t * bobs      = nullptr;
+	uint8_t * buildings = nullptr;
 
 	uint8_t * pc;
 
@@ -291,7 +291,7 @@ void S2_Map_Loader::load_s2mf(Widelands::Editor_Game_Base & egbase)
 			for (Widelands::X_Coordinate x = 0; x < mapwidth; ++x, ++f, ++pc)
 				f->set_height(*pc);
 		free(section);
-		section = 0;
+		section = nullptr;
 
 
 		//  SWD-SECTION 2: Terrain 1
@@ -344,7 +344,7 @@ void S2_Map_Loader::load_s2mf(Widelands::Editor_Game_Base & egbase)
 				f->set_terrain_d(c);
 			}
 		free(section);
-		section = 0;
+		section = nullptr;
 
 
 		//  SWD-SECTION 3: Terrain 2
@@ -398,7 +398,7 @@ void S2_Map_Loader::load_s2mf(Widelands::Editor_Game_Base & egbase)
 				f->set_terrain_r(c);
 			}
 		free(section);
-		section = 0;
+		section = nullptr;
 
 
 		//  SWD-SECTION 4: Existing Roads
@@ -408,7 +408,7 @@ void S2_Map_Loader::load_s2mf(Widelands::Editor_Game_Base & egbase)
 		if (!section)
 			throw wexception("Section 4 (Existing Roads) not found");
 		free(section);
-		section = 0;
+		section = nullptr;
 
 
 		//  SWD-SECTION 5: Bobs
@@ -444,7 +444,7 @@ void S2_Map_Loader::load_s2mf(Widelands::Editor_Game_Base & egbase)
 			}
 		}
 		free(section);
-		section = 0;
+		section = nullptr;
 
 
 		//  SWD-SECTION 7: Animals
@@ -462,7 +462,7 @@ void S2_Map_Loader::load_s2mf(Widelands::Editor_Game_Base & egbase)
 		for (Widelands::Y_Coordinate y = 0; y < mapheight; ++y) {
 			uint32_t i = y * mapwidth;
 			for (Widelands::X_Coordinate x = 0; x < mapwidth; ++x, ++i) {
-				char const * bobname = 0;
+				char const * bobname = nullptr;
 
 				switch (section[i]) {
 				case 0: break;
@@ -492,7 +492,7 @@ void S2_Map_Loader::load_s2mf(Widelands::Editor_Game_Base & egbase)
 			}
 		}
 		free(section);
-		section = 0;
+		section = nullptr;
 
 
 		//  SWD-SECTION 8: Unknown
@@ -501,7 +501,7 @@ void S2_Map_Loader::load_s2mf(Widelands::Editor_Game_Base & egbase)
 		if (!section)
 			throw wexception("Section 8 (Unknown) not found");
 		free(section);
-		section = 0;
+		section = nullptr;
 
 
 		//  SWD-SECTION 9: Buildings
@@ -526,7 +526,7 @@ void S2_Map_Loader::load_s2mf(Widelands::Editor_Game_Base & egbase)
 		if (!section)
 			throw wexception("Section 10 (Unknown) not found");
 		free(section);
-		section = 0;
+		section = nullptr;
 
 
 		//  SWD-SECTION 11: Settlers2 Mapeditor tool position
@@ -537,7 +537,7 @@ void S2_Map_Loader::load_s2mf(Widelands::Editor_Game_Base & egbase)
 		if (!section)
 			throw wexception("Section 11 (Tool Position) not found");
 		free(section);
-		section = 0;
+		section = nullptr;
 
 
 		//  SWD-SECTION 12: Resources
@@ -585,7 +585,7 @@ void S2_Map_Loader::load_s2mf(Widelands::Editor_Game_Base & egbase)
 			}
 
 		free(section);
-		section = 0;
+		section = nullptr;
 
 
 		//  SWD-SECTION 13: Higlights and Shadows
@@ -596,7 +596,7 @@ void S2_Map_Loader::load_s2mf(Widelands::Editor_Game_Base & egbase)
 		if (!section)
 			throw wexception("Section 13 (Highlights and Shadows) not found");
 		free(section);
-		section = 0;
+		section = nullptr;
 
 
 		//  SWD-SECTION 14: Fieldcount
@@ -613,7 +613,7 @@ void S2_Map_Loader::load_s2mf(Widelands::Editor_Game_Base & egbase)
 		if (!section)
 			throw wexception("Section 14 (Island id) not found");
 		free(section);
-		section = 0;
+		section = nullptr;
 
 		fr.Close();
 
@@ -623,7 +623,7 @@ void S2_Map_Loader::load_s2mf(Widelands::Editor_Game_Base & egbase)
 		uint8_t c;
 		for (Widelands::Y_Coordinate y = 0; y < mapheight; ++y)
 			for (Widelands::X_Coordinate x = 0; x < mapwidth; ++x) {
-				char const * bobname = 0;
+				char const * bobname = nullptr;
 
 				Widelands::Coords const location(x, y);
 				Widelands::Map_Index const index =
@@ -645,7 +645,7 @@ void S2_Map_Loader::load_s2mf(Widelands::Editor_Game_Base & egbase)
 							m_map.world().get_immovable_index(bobname);
 						if (idx < 0)
 							throw wexception("Missing immovable type %s", bobname);
-						egbase.create_immovable(Widelands::Coords(x, y), idx, 0);
+						egbase.create_immovable(Widelands::Coords(x, y), idx, nullptr);
 						continue;
 					}
 				}
@@ -751,7 +751,7 @@ void S2_Map_Loader::load_s2mf(Widelands::Editor_Game_Base & egbase)
 					int32_t idx = m_map.world().get_immovable_index(bobname);
 					if (idx < 0)
 						throw wexception("Missing immovable type %s", bobname);
-					egbase.create_immovable(Widelands::Coords(x, y), idx, 0);
+					egbase.create_immovable(Widelands::Coords(x, y), idx, nullptr);
 				}
 			}
 

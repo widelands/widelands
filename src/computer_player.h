@@ -40,8 +40,8 @@ struct Computer_Player :
 
 	virtual void think () = 0;
 
-	virtual void receive(const Widelands::NoteImmovable &) {}
-	virtual void receive(const Widelands::NoteFieldPossession     &) {}
+	virtual void receive(const Widelands::NoteImmovable &) override {}
+	virtual void receive(const Widelands::NoteFieldPossession     &) override {}
 
 	Widelands::Game & game() const {return m_game;}
 	Widelands::Player_Number player_number() {return m_player_number;}

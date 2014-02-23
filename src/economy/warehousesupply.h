@@ -31,7 +31,7 @@ WarehouseSupply is the implementation of Supply that is used by Warehouses.
 It also manages the list of wares in the warehouse.
 */
 struct WarehouseSupply : public Supply {
-	WarehouseSupply(Warehouse * const wh) : m_economy(0), m_warehouse(wh) {}
+	WarehouseSupply(Warehouse * const wh) : m_economy(nullptr), m_warehouse(wh) {}
 	virtual ~WarehouseSupply();
 
 	void set_economy(Economy *);
@@ -53,15 +53,15 @@ struct WarehouseSupply : public Supply {
 	void remove_workers(Ware_Index, uint32_t count);
 
 	// Supply implementation
-	virtual PlayerImmovable * get_position(Game &);
-	virtual bool is_active() const;
-	virtual bool has_storage() const;
-	virtual void get_ware_type(WareWorker & type, Ware_Index & ware) const;
+	virtual PlayerImmovable * get_position(Game &) override;
+	virtual bool is_active() const override;
+	virtual bool has_storage() const override;
+	virtual void get_ware_type(WareWorker & type, Ware_Index & ware) const override;
 
-	virtual void send_to_storage(Game &, Warehouse * wh);
-	virtual uint32_t nr_supplies(const Game &, const Request &) const;
-	virtual WareInstance & launch_item(Game &, const Request &);
-	virtual Worker & launch_worker(Game &, const Request &);
+	virtual void send_to_storage(Game &, Warehouse * wh) override;
+	virtual uint32_t nr_supplies(const Game &, const Request &) const override;
+	virtual WareInstance & launch_ware(Game &, const Request &) override;
+	virtual Worker & launch_worker(Game &, const Request &) override;
 
 private:
 	Economy   * m_economy;

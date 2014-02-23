@@ -55,7 +55,7 @@ struct ShipWindow : UI::Window {
 	ShipWindow(Interactive_GameBase & igb, Ship & ship);
 	virtual ~ShipWindow();
 
-	virtual void think();
+	virtual void think() override;
 
 	UI::Button * make_button
 		(UI::Panel * parent,
@@ -205,7 +205,7 @@ ShipWindow::ShipWindow(Interactive_GameBase & igb, Ship & ship) :
 ShipWindow::~ShipWindow()
 {
 	assert(m_ship.m_window == this);
-	m_ship.m_window = 0;
+	m_ship.m_window = nullptr;
 }
 
 void ShipWindow::think()
@@ -224,7 +224,7 @@ void ShipWindow::think()
 		Widelands::ShippingItem item = m_ship.get_item(idx);
 		Widelands::WareInstance * ware;
 		Widelands::Worker * worker;
-		item.get(m_igbase.egbase(), ware, worker);
+		item.get(m_igbase.egbase(), &ware, &worker);
 
 		if (ware) {
 			m_display->add(false, ware->descr_index());

@@ -68,7 +68,7 @@ ProductionSite_Window::ProductionSite_Window
 
 	// Add workers tab if applicable
 	if (!productionsite().descr().nr_working_positions()) {
-		m_worker_table = 0;
+		m_worker_table = nullptr;
 	} else {
 		UI::Box * worker_box = new UI::Box
 			(get_tabs(),

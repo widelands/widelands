@@ -62,13 +62,13 @@ public:
 		bool fillspace = false);
 	void add_space(uint32_t space);
 	void add_inf_space();
-	bool is_snap_target() const {return true;}
+	bool is_snap_target() const override {return true;}
 
 	void set_min_desired_breadth(uint32_t min);
 
 protected:
-	virtual void layout();
-	virtual void update_desired_size();
+	virtual void layout() override;
+	virtual void update_desired_size() override;
 
 private:
 	void get_item_desired_size(uint32_t idx, uint32_t & depth, uint32_t & breadth);

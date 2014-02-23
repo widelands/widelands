@@ -38,9 +38,9 @@ class StreamRead;
  */
 struct Map_Bob_Data_Packet : public Map_Data_Packet {
 	void Read
-		(FileSystem &, Editor_Game_Base &, bool, Map_Map_Object_Loader &)
+		(FileSystem &, Editor_Game_Base &, bool, Map_Map_Object_Loader &) override
 	;
-	void Write(FileSystem &, Editor_Game_Base &, Map_Map_Object_Saver &)
+	void Write(FileSystem &, Editor_Game_Base &, Map_Map_Object_Saver &) override
 	;
 
 private:

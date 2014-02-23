@@ -45,16 +45,16 @@ struct NetHost : public GameController, private SyncCallback {
 	int16_t getLocalPlayerposition();
 
 	// GameController interface
-	void think();
-	void sendPlayerCommand(Widelands::PlayerCommand &);
-	int32_t getFrametime();
-	std::string getGameDescription();
+	void think() override;
+	void sendPlayerCommand(Widelands::PlayerCommand &) override;
+	int32_t getFrametime() override;
+	std::string getGameDescription() override;
 
-	uint32_t realSpeed();
-	uint32_t desiredSpeed();
-	void setDesiredSpeed(uint32_t speed);
-	bool isPaused();
-	void setPaused(bool paused);
+	uint32_t realSpeed() override;
+	uint32_t desiredSpeed() override;
+	void setDesiredSpeed(uint32_t speed) override;
+	bool isPaused() override;
+	void setPaused(bool paused) override;
 	// End GameController interface
 
 	// Pregame-related stuff
@@ -93,7 +93,7 @@ struct NetHost : public GameController, private SyncCallback {
 	void handle_dserver_command(std::string, std::string);
 	void dserver_send_maps_and_saves(Client &);
 
-	void report_result(uint8_t player, Widelands::PlayerEndResult result, const std::string & info);
+	void report_result(uint8_t player, Widelands::PlayerEndResult result, const std::string & info) override;
 
 	void forcePause() {
 		m_forced_pause = true;
@@ -117,7 +117,7 @@ private:
 		 const std::string & a = "", const std::string & b = "", const std::string & c = "");
 	void requestSyncReports();
 	void checkSyncReports();
-	void syncreport();
+	void syncreport() override;
 
 	void clearComputerPlayers();
 	void initComputerPlayer(Widelands::Player_Number p);

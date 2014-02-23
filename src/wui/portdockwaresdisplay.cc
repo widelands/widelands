@@ -40,7 +40,7 @@ namespace {
 struct PortDockWaresDisplay : AbstractWaresDisplay {
 	PortDockWaresDisplay(Panel * parent, uint32_t width, PortDock & pd, Widelands::WareWorker type);
 
-	virtual std::string info_for_ware(Widelands::Ware_Index ware);
+	virtual std::string info_for_ware(Widelands::Ware_Index ware) override;
 
 private:
 	PortDock & m_portdock;

@@ -52,10 +52,10 @@ public:
 	virtual ~FromDiskImage() {}
 
 	// Implements Image.
-	virtual uint16_t width() const {return w_; }
-	virtual uint16_t height() const {return h_;}
-	virtual const string& hash() const {return filename_;}
-	virtual Surface* surface() const {
+	virtual uint16_t width() const override {return w_; }
+	virtual uint16_t height() const override {return h_;}
+	virtual const string& hash() const override {return filename_;}
+	virtual Surface* surface() const override {
 		Surface* surf = surface_cache_->get(filename_);
 		if (surf)
 			return surf;
@@ -84,9 +84,9 @@ public:
 	virtual ~ImageCacheImpl();
 
 	// Implements ImageCache.
-	const Image* insert(const Image*);
-	bool has(const std::string& hash) const;
-	virtual const Image* get(const std::string& hash);
+	const Image* insert(const Image*) override;
+	bool has(const std::string& hash) const override;
+	virtual const Image* get(const std::string& hash) override;
 
 private:
 	typedef map<string, const Image*> ImageMap;

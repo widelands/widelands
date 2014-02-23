@@ -52,22 +52,22 @@ struct Interactive_Player : public Interactive_GameBase
 
 	~Interactive_Player();
 
-	void start();
+	void start() override;
 
 	void toggle_chat        ();
 
-	virtual bool can_see(Widelands::Player_Number) const;
-	virtual bool can_act(Widelands::Player_Number) const;
-	virtual Widelands::Player_Number player_number() const;
+	virtual bool can_see(Widelands::Player_Number) const override;
+	virtual bool can_act(Widelands::Player_Number) const override;
+	virtual Widelands::Player_Number player_number() const override;
 
-	virtual void node_action();
+	virtual void node_action() override;
 
-	bool handle_key(bool down, SDL_keysym);
+	bool handle_key(bool down, SDL_keysym) override;
 
 	Widelands::Player & player() const {
 		return game().player(m_player_number);
 	}
-	Widelands::Player * get_player() const {
+	Widelands::Player * get_player() const override {
 		assert(&game());
 		return game().get_player(m_player_number);
 	}
@@ -76,9 +76,9 @@ struct Interactive_Player : public Interactive_GameBase
 	void set_player_number(uint32_t plrn);
 
 	// For load
-	virtual void cleanup_for_load();
-	void think();
-	void postload();
+	virtual void cleanup_for_load() override;
+	void think() override;
+	void postload() override;
 
 	void set_flag_to_connect(Widelands::Coords const location) {
 		m_flag_to_connect = location;

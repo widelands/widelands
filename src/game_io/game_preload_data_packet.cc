@@ -51,7 +51,7 @@ void Game_Preload_Data_Packet::Read
 {
 	try {
 		Profile prof;
-		prof.read("preload", 0, fs);
+		prof.read("preload", nullptr, fs);
 		Section & s = prof.get_safe_section("global");
 		int32_t const packet_version = s.get_int("packet_version");
 

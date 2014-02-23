@@ -53,9 +53,9 @@ public:
 		: Command(_duetime), m_hash(hash)
 	{}
 
-	virtual uint8_t id() const {return QUEUE_CMD_REPLAYSYNCREAD;}
+	virtual uint8_t id() const override {return QUEUE_CMD_REPLAYSYNCREAD;}
 
-	void execute(Game & game)
+	void execute(Game & game) override
 	{
 		const md5_checksum myhash = game.get_sync_hash();
 
@@ -71,8 +71,6 @@ public:
 
 			// There has to be a better way to do this.
 			game.gameController()->setDesiredSpeed(0);
-		} else {
-			log("REPLAY: Sync checked successfully.\n");
 		}
 	}
 
@@ -143,10 +141,10 @@ ReplayReader::~ReplayReader()
 Command * ReplayReader::GetNextCommand(const uint32_t time)
 {
 	if (!m_cmdlog)
-		return 0;
+		return nullptr;
 
 	if (static_cast<int32_t>(m_replaytime - time) > 0)
-		return 0;
+		return nullptr;
 
 	try {
 		uint8_t pkt = m_cmdlog->Unsigned8();
@@ -176,8 +174,8 @@ Command * ReplayReader::GetNextCommand(const uint32_t time)
 			uint32_t endtime = m_cmdlog->Unsigned32();
 			log("REPLAY: End of replay (gametime: %u)\n", endtime);
 			delete m_cmdlog;
-			m_cmdlog = 0;
-			return 0;
+			m_cmdlog = nullptr;
+			return nullptr;
 		}
 
 		default:
@@ -186,10 +184,10 @@ Command * ReplayReader::GetNextCommand(const uint32_t time)
 	} catch (const _wexception & e) {
 		log("REPLAY: Caught exception %s\n", e.what());
 		delete m_cmdlog;
-		m_cmdlog = 0;
+		m_cmdlog = nullptr;
 	}
 
-	return 0;
+	return nullptr;
 }
 
 
@@ -198,7 +196,7 @@ Command * ReplayReader::GetNextCommand(const uint32_t time)
  */
 bool ReplayReader::EndOfReplay()
 {
-	return m_cmdlog == 0;
+	return m_cmdlog == nullptr;
 }
 
 
@@ -210,9 +208,9 @@ class Cmd_ReplaySyncWrite : public Command {
 public:
 	Cmd_ReplaySyncWrite(const uint32_t _duetime) : Command(_duetime) {}
 
-	virtual uint8_t id() const {return QUEUE_CMD_REPLAYSYNCWRITE;}
+	virtual uint8_t id() const override {return QUEUE_CMD_REPLAYSYNCWRITE;}
 
-	void execute(Game & game) {
+	void execute(Game & game) override {
 		if (ReplayWriter * const rw = game.get_replaywriter()) {
 			rw->SendSync (game.get_sync_hash());
 

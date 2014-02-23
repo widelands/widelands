@@ -2,20 +2,21 @@
 # Copyright (c) 2013 Rosetta Contributors and Canonical Ltd 2013
 # This file is distributed under the same license as the widelands package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2013.
-#
+# GunChleoc <fios@foramnagaidhlig.net>, 2013.
 msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2013-09-15 17:41+0000\n"
-"PO-Revision-Date: 2013-10-08 08:17+0000\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: Gaelic; Scottish <gd@li.org>\n"
+"PO-Revision-Date: 2013-12-13 05:07+0000\n"
+"Last-Translator: GunChleoc <Unknown>\n"
+"Language-Team: Fòram na Gàidhlig http://www.foramnagaidhlig.net\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-10-09 05:11+0000\n"
-"X-Generator: Launchpad (build 16799)\n"
+"X-Launchpad-Export-Date: 2013-12-14 05:10+0000\n"
+"X-Generator: Launchpad (build 16869)\n"
+"Language: gd\n"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:93
 msgid ""
@@ -228,55 +229,55 @@ msgstr ""
 
 #: ../../campaigns/emp02.wmf/elemental:9
 msgid "02 - An Outpost for Exile"
-msgstr ""
+msgstr "02 - Tuineachadh nam fògarrach"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:206
 msgid "7 days later..."
-msgstr ""
+msgstr "7 làithean às dèidh seo..."
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:211
 msgid "A Message"
-msgstr ""
+msgstr "Teachdaireachd"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:78
 msgid "A new island"
-msgstr ""
+msgstr "Eilean ùr"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:163
 msgid "Amalea comes in..."
-msgstr ""
+msgstr "Tha Amalea a' tighinn a-steach..."
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:223
 msgid "Amalea smiles"
-msgstr ""
+msgstr "Tha fiamh a' ghàire air Amalea"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:202
 msgid "As time is running by"
-msgstr ""
+msgstr "Tha an ùine a' dol seachad"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:18
 msgid "Build a quarry"
-msgstr ""
+msgstr "Tog coireall"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:42
 msgid "Build a stonemason and mining infrastructure"
-msgstr ""
+msgstr "Tog taigh clachair is bun-structar mèinnearachd"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:10
 msgid "Build up a wood economy"
-msgstr ""
+msgstr "Tog eaconamaidh fiodha"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:182
 msgid "Command for Attack"
-msgstr ""
+msgstr "Òrdugh ionnsaighe"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:130
 msgid "Dangerous shipparts"
-msgstr ""
+msgstr "Fuighill luinge chunnartach"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:66
 msgid "Destroy the barbarian tribe"
-msgstr ""
+msgstr "Mill an treubh borb"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:81
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:91
@@ -287,7 +288,7 @@ msgstr ""
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:185
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:214
 msgid "Diary of Lutius"
-msgstr ""
+msgstr "An leabhar-latha aig Lutius"
 
 #: ../../campaigns/emp02.wmf/elemental:11
 msgid ""
@@ -296,71 +297,76 @@ msgid ""
 "land on a green, mediterranean island, looking like paradise. Overjoyed, "
 "they set out to explore this new living space."
 msgstr ""
+"Chaidh an long a chàradh mu dheireadh thall is thug muinntir Lutius an cuan "
+"orra a-rithist an toir àite maith gus tòiseachadh as ùr. Thàinig iad air tìr "
+"beagan làithean às dèidh seo air eilean meadhanach uaine coltach ri pàrras. "
+"B' an air mhire a bha iad is tòisich iad air an àite-còmhnaidh ùr seo a "
+"rùrachadh."
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:161
 msgid "Food for the miners"
-msgstr ""
+msgstr "Biadh dha na mèinearran"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:151
 msgid "Further mountains"
-msgstr ""
+msgstr "Barrachd bheanntan"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:141
 msgid "Marble on the mountain"
-msgstr ""
+msgstr "Marbhal air a' bheinn"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:221
 msgid "Our new tavern"
-msgstr ""
+msgstr "An taigh-tàirn ùr againn"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:26
 msgid "Protect your colony"
-msgstr ""
+msgstr "Dìon do thuineachadh"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:58
 msgid "Protect your eastern frontier"
-msgstr ""
+msgstr "Dìon na crìochan agad gu ear"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:50
 msgid "Provide your miners with food"
-msgstr ""
+msgstr "Thoir biadh dha na mèinnearan agad"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:153
 msgid "Saledus is amazed"
-msgstr ""
+msgstr "Tha an t-iongnadh air Saledus"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:133
 msgid "Saledus looks unhappy"
-msgstr ""
+msgstr "Tha Saledus mì-thoilichte"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:143
 msgid "Saledus smiles"
-msgstr ""
+msgstr "Tha fiamh a' ghàire air Saledus"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:34
 msgid "Start mining marble"
-msgstr ""
+msgstr "Tòisich air marbhal a thochladh"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:120
 msgid "Stone for the colony"
-msgstr ""
+msgstr "Clachan snaidhte airson an tuineachaidh"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:171
 msgid "The Barbarians"
-msgstr ""
+msgstr "Na borbairean"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:88
 msgid "The green forests"
-msgstr ""
+msgstr "Na coilltean uaine"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:99
 msgid "The rocks"
-msgstr ""
+msgstr "Na creagan"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:194
 msgid "Victory"
-msgstr ""
+msgstr "Buaidh"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:110
 msgid "Wood for the colony"
-msgstr ""
+msgstr "Fiodh airson an tuineachaidh"

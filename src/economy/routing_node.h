@@ -75,7 +75,7 @@ struct RoutingNode {
 
 public:
 	RoutingNode() : mpf_cycle(0),
-		mpf_realcost(0), mpf_backlink(0), mpf_estimate(0) {}
+		mpf_realcost(0), mpf_backlink(nullptr), mpf_estimate(0) {}
 	virtual ~RoutingNode() {}
 
 	void reset_path_finding_cycle() {

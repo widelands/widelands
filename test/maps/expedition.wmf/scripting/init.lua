@@ -1,7 +1,6 @@
 use("aux", "lunit")
 use("aux", "coroutine")
 use("aux", "ui")
-lunit.import "assertions"
 
 -- This is a test case for bug 1234058: there is constant demand for trunks,
 -- so the expedition initially never got any.

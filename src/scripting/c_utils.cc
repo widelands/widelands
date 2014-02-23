@@ -107,9 +107,8 @@ int report_error(lua_State * L, const char * const fmt, ...) {
 	vsnprintf(buffer, sizeof(buffer), fmt, va);
 	va_end(va);
 
-
 	// Also create a traceback
-	lua_getfield(L, LUA_GLOBALSINDEX, "debug");
+	lua_getglobal(L, "debug");
 	if (!lua_istable(L, -1)) {
 		lua_pop(L, 1);
 		return 1;
@@ -127,4 +126,3 @@ int report_error(lua_State * L, const char * const fmt, ...) {
 
 	return 0;
 }
-

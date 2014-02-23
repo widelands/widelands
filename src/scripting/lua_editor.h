@@ -20,8 +20,7 @@
 #ifndef LUA_EDITOR_H
 #define LUA_EDITOR_H
 
-#include <lua.hpp>
-
+#include "scripting/eris/lua.hpp"
 #include "scripting/lua_bases.h"
 
 namespace LuaEditor {
@@ -30,7 +29,7 @@ class L_Player : public LuaBases::L_PlayerBase {
 public:
 	// Overwritten from L_PlayerBase, avoid ambiguity when deriving from
 	// L_GameModuleClass and L_PlayerBase
-	const char * get_modulename() {return "game";}
+	const char * get_modulename() override {return "game";}
 
 	LUNA_CLASS_HEAD(L_Player);
 

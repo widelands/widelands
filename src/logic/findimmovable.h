@@ -46,7 +46,7 @@ private:
 	template<typename T>
 	struct Capsule : public BaseCapsule {
 		Capsule(const T & _op) : op(_op) {}
-		bool accept(const BaseImmovable & imm) const {return op.accept(imm);}
+		bool accept(const BaseImmovable & imm) const override {return op.accept(imm);}
 
 		const T op;
 	};
@@ -60,7 +60,7 @@ public:
 	}
 	~FindImmovable() {
 		capsule->deref();
-		capsule = 0;
+		capsule = nullptr;
 	}
 	FindImmovable & operator= (const FindImmovable & o) {
 		capsule->deref();

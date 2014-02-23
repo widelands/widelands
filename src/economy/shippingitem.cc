@@ -38,20 +38,30 @@ ShippingItem::ShippingItem(Worker & worker) :
 {
 }
 
-void ShippingItem::get(Editor_Game_Base & game, WareInstance * & ware, Worker * & worker)
-{
-	Map_Object * obj = m_object.get(game);
-	if (obj) {
-		if (obj->get_type() == Map_Object::WARE) {
-			ware = dynamic_cast<WareInstance *>(obj);
-			worker = 0;
-		} else {
-			worker = dynamic_cast<Worker *>(obj);
-			ware = 0;
+void ShippingItem::get(Editor_Game_Base& game, WareInstance** ware, Worker** worker) const {
+	if (ware) {
+		*ware = nullptr;
+	}
+	if (worker) {
+		*worker = nullptr;
+	}
+
+	if (Map_Object* obj = m_object.get(game)) {
+		switch (obj->get_type()) {
+		case Map_Object::WARE:
+			if (ware) {
+				*ware = dynamic_cast<WareInstance*>(obj);
+			}
+			break;
+		case Map_Object::BOB:
+			if (worker) {
+				*worker = dynamic_cast<Worker*>(obj);
+			}
+			break;
+		default:
+			assert(false);  // never here or unknown map object being shipped.
+			break;
 		}
-	} else {
-		ware = 0;
-		worker = 0;
 	}
 }
 
@@ -59,7 +69,7 @@ void ShippingItem::set_economy(Game & game, Economy * e)
 {
 	WareInstance * ware;
 	Worker * worker;
-	get(game, ware, worker);
+	get(game, &ware, &worker);
 
 	if (ware)
 		ware->set_economy(e);
@@ -67,17 +77,17 @@ void ShippingItem::set_economy(Game & game, Economy * e)
 		worker->set_economy(e);
 }
 
-void ShippingItem::set_location(Game & game, Map_Object * obj)
-{
+void ShippingItem::set_location(Game& game, Map_Object* obj) {
 	WareInstance * ware;
 	Worker * worker;
-	get(game, ware, worker);
+	get(game, &ware, &worker);
 
 	if (ware) {
-		if (upcast(Building, building, obj))
+		if (upcast(Building, building, obj)) {
 			ware->enter_building(game, *building);
-		else
+		} else {
 			ware->set_location(game, obj);
+		}
 	}
 	if (worker) {
 		worker->set_location(dynamic_cast<PlayerImmovable *>(obj));
@@ -91,10 +101,12 @@ void ShippingItem::end_shipping(Game & game)
 {
 	WareInstance * ware;
 	Worker * worker;
-	get(game, ware, worker);
+	get(game, &ware, &worker);
 
-	if (ware)
+	if (ware) {
+		ware->update(game);
 		ware->schedule_act(game, 10);
+	}
 	if (worker)
 		worker->end_shipping(game);
 }
@@ -104,13 +116,13 @@ PortDock * ShippingItem::get_destination(Game & game)
 	return m_destination_dock.get(game);
 }
 
-void ShippingItem::fetch_destination(Game & game, PortDock & pd)
+void ShippingItem::update_destination(Game & game, PortDock & pd)
 {
 	WareInstance * ware;
 	Worker * worker;
-	get(game, ware, worker);
+	get(game, &ware, &worker);
 
-	PlayerImmovable * next = 0;
+	PlayerImmovable * next = nullptr;
 
 	if (ware)
 		next = ware->get_next_move_step(game);
@@ -129,7 +141,7 @@ void ShippingItem::schedule_update(Game & game, int32_t delay)
 {
 	WareInstance * ware;
 	Worker * worker;
-	get(game, ware, worker);
+	get(game, &ware, &worker);
 
 	if (ware) {
 		ware->schedule_act(game, delay);
@@ -146,7 +158,7 @@ void ShippingItem::remove(Editor_Game_Base & egbase)
 {
 	if (Map_Object * obj = m_object.get(egbase)) {
 		obj->remove(egbase);
-		m_object = 0;
+		m_object = nullptr;
 	}
 }
 

@@ -51,7 +51,7 @@ struct _wexception : public std::exception {
     * The target of the returned pointer remains valid during the lifetime of
 	 * the _wexception object.
 	 */
-	virtual const char * what() const throw ();
+	virtual const char * what() const throw () override;
 
 protected:
 	_wexception() {};

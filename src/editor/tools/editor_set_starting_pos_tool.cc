@@ -59,7 +59,7 @@ int32_t Editor_Tool_Set_Starting_Pos_Callback
 }
 
 Editor_Set_Starting_Pos_Tool::Editor_Set_Starting_Pos_Tool()
-	: Editor_Tool(*this, *this, false), m_current_sel_pic(0)
+	: Editor_Tool(*this, *this, false), m_current_sel_pic(nullptr)
 {
 	m_current_player = 0;
 	strcpy(fsel_picsname, FSEL_PIC_FILENAME);

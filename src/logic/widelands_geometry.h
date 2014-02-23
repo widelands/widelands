@@ -123,7 +123,7 @@ template <typename Area_type = Area<> > struct HollowArea : public Area_type {
 struct Field;
 
 struct FCoords : public Coords {
-	FCoords() : field(0) {}
+	FCoords() : field(nullptr) {}
 	FCoords(const Coords & nc, Field * const nf) : Coords(nc), field(nf)
 	{}
 
@@ -133,7 +133,7 @@ struct FCoords : public Coords {
 	 *
 	 * \note You really want to use \ref Map::get_fcoords instead.
 	 */
-	explicit FCoords(const Coords & nc) : Coords(nc), field(0) {}
+	explicit FCoords(const Coords & nc) : Coords(nc), field(nullptr) {}
 
 	Field * field;
 };

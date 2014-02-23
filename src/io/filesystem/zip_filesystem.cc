@@ -38,8 +38,8 @@
 ZipFilesystem::ZipFilesystem(const std::string & zipfile)
 :
 m_state      (STATE_IDLE),
-m_zipfile    (0),
-m_unzipfile  (0),
+m_zipfile    (nullptr),
+m_unzipfile  (nullptr),
 m_oldzip     (false),
 m_zipfilename(zipfile),
 m_basenamezip(FS_Filename(zipfile.c_str())),
@@ -102,7 +102,7 @@ int32_t ZipFilesystem::FindFiles
 	for (;;) {
 		unzGetCurrentFileInfo
 			(m_unzipfile, &file_info, filename_inzip, sizeof(filename_inzip),
-			 0, 0, 0, 0);
+			 nullptr, 0, nullptr, 0);
 
 		std::string complete_filename = strip_basename(filename_inzip);
 		std::string filename = FS_Filename(complete_filename.c_str());
@@ -149,7 +149,7 @@ bool ZipFilesystem::FileExists(const std::string & path) {
 	for (;;) {
 		unzGetCurrentFileInfo
 			(m_unzipfile, &file_info, filename_inzip, sizeof(filename_inzip),
-			 0, 0, 0, 0);
+			 nullptr, 0, nullptr, 0);
 
 		std::string complete_filename = strip_basename(filename_inzip);
 
@@ -179,7 +179,7 @@ bool ZipFilesystem::IsDirectory(const std::string & path) {
 
 	unzGetCurrentFileInfo
 		(m_unzipfile, &file_info, filename_inzip, sizeof(filename_inzip),
-		 0, 0, 0, 0);
+		 nullptr, 0, nullptr, 0);
 
 	return filename_inzip[strlen(filename_inzip) - 1] == '/';
 }
@@ -291,14 +291,14 @@ void ZipFilesystem::MakeDirectory(const std::string & dirname) {
 		 	(m_zipfile,
 			 complete_filename.c_str(),
 		 	 &zi,
-		 	 0, 0, 0, 0, 0 /* comment*/,
+		 	 nullptr, 0, nullptr, 0, nullptr /* comment*/,
 		 	 Z_DEFLATED,
 		 	 Z_BEST_COMPRESSION,
 		 	 0,
 		 	 -MAX_WBITS,
 		 	 DEF_MEM_LEVEL,
 		 	 Z_DEFAULT_STRATEGY,
-		 	 0,
+		 	 nullptr,
 		 	 0))
 	{
 	case ZIP_OK:
@@ -393,11 +393,11 @@ void ZipFilesystem::Write
 	switch
 		(zipOpenNewFileInZip3
 			(m_zipfile, complete_filename.c_str(), &zi,
-		 	 0, 0, 0, 0, 0 /* comment*/,
+		 	 nullptr, 0, nullptr, 0, nullptr /* comment*/,
 		 	 Z_DEFLATED,
 		 	 Z_BEST_COMPRESSION, 0,
 		 	 -MAX_WBITS, DEF_MEM_LEVEL, Z_DEFAULT_STRATEGY,
-		 	 0, 0))
+		 	 nullptr, 0))
 	{
 	case ZIP_OK:
 		break;
@@ -506,11 +506,11 @@ StreamWrite * ZipFilesystem::OpenStreamWrite(const std::string & fname) {
 	switch
 		(zipOpenNewFileInZip3
 			(m_zipfile, complete_filename.c_str(), &zi,
-		 	 0, 0, 0, 0, 0 /* comment*/,
+		 	 nullptr, 0, nullptr, 0, nullptr /* comment*/,
 		 	 Z_DEFLATED,
 		 	 Z_BEST_COMPRESSION, 0,
 		 	 -MAX_WBITS, DEF_MEM_LEVEL, Z_DEFAULT_STRATEGY,
-		 	 0, 0))
+		 	 nullptr, 0))
 	{
 	case ZIP_OK:
 		break;
@@ -527,7 +527,7 @@ StreamWrite * ZipFilesystem::OpenStreamWrite(const std::string & fname) {
  */
 void ZipFilesystem::m_Close() {
 	if (m_state == STATE_ZIPPING)
-		zipClose(m_zipfile, 0);
+		zipClose(m_zipfile, nullptr);
 	else if (m_state == STATE_UNZIPPPING)
 		unzClose(m_unzipfile);
 

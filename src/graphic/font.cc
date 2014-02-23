@@ -78,7 +78,7 @@ Font::Font(const std::string & name, int size)
 
 	for (unsigned int idx = 0; idx < sizeof(glyphs) / sizeof(glyphs[0]); ++idx) {
 		int miny, maxy;
-		if (TTF_GlyphMetrics(m_font, glyphs[idx], 0, 0, &miny, &maxy, 0) < 0)
+		if (TTF_GlyphMetrics(m_font, glyphs[idx], nullptr, nullptr, &miny, &maxy, nullptr) < 0)
 			continue; // error, e.g. glyph not found
 
 		if (miny < m_computed_typical_miny)
@@ -94,7 +94,7 @@ Font::Font(const std::string & name, int size)
 Font::~Font()
 {
 	TTF_CloseFont(m_font);
-	m_font = 0;
+	m_font = nullptr;
 }
 
 /**
@@ -197,7 +197,7 @@ void TextStyle::calc_bare_height_heuristic(const std::string & text, int32_t & m
 	while (pos < text.size()) {
 		uint16_t ch = Utf8::utf8_to_unicode(text, pos);
 		int32_t glyphminy, glyphmaxy;
-		TTF_GlyphMetrics(font->get_ttf_font(), ch, 0, 0, &glyphminy, &glyphmaxy, 0);
+		TTF_GlyphMetrics(font->get_ttf_font(), ch, nullptr, nullptr, &glyphminy, &glyphmaxy, nullptr);
 		miny = std::min(miny, glyphminy);
 		maxy = std::max(maxy, glyphmaxy);
 	}
@@ -214,7 +214,7 @@ Default fonts and styles
 
 Font * Font::ui_big()
 {
-	Font * font = 0;
+	Font * font = nullptr;
 	if (!font)
 		font = Font::get(UI_FONT_BIG);
 	return font;
@@ -222,7 +222,7 @@ Font * Font::ui_big()
 
 Font * Font::ui_small()
 {
-	Font * font = 0;
+	Font * font = nullptr;
 	if (!font)
 		font = Font::get(UI_FONT_SMALL);
 	return font;
@@ -230,7 +230,7 @@ Font * Font::ui_small()
 
 Font * Font::ui_ultrasmall()
 {
-	Font * font = 0;
+	Font * font = nullptr;
 	if (!font)
 		font = Font::get(UI_FONT_ULTRASMALL);
 	return font;

@@ -75,7 +75,7 @@ private:
  */
 struct TextStyle {
 	TextStyle() :
-		font(0),
+		font(nullptr),
 		fg(255, 255, 255),
 		bold(false),
 		italics(false),

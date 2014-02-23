@@ -1,12 +1,12 @@
 # Widelands PATH/TO/FILE.PO
-# Copyright (C) 2005-2013 Widelands Development Team
+# Copyright (C) 2005-2014 Widelands Development Team
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2013-09-15 17:41+0000\n"
+"POT-Creation-Date: 2014-02-22 15:38+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -61,7 +61,7 @@ msgstr ""
 #: ../../txts/README.lua:103
 msgid ""
 "- Which version of Widelands you are running (i.e. either the build number or\n"
-"the revision number if you are running a development version or a nightly build.)"
+"the revision number if you are running a development version or a daily build.)"
 msgstr ""
 
 #: ../../txts/README.lua:75
@@ -166,7 +166,7 @@ msgstr ""
 
 #: ../../txts/license:7
 msgid ""
-"Copyright 2002 - 2013 by the Widelands Development Team."
+"Copyright 2002 - 2014 by the Widelands Development Team."
 msgstr ""
 
 #: ../../txts/developers:186

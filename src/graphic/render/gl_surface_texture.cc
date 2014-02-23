@@ -68,7 +68,7 @@ GLSurfaceTexture::GLSurfaceTexture(int w, int h)
 	}
 	glTexImage2D
 		(GL_TEXTURE_2D, 0, GL_RGBA, m_tex_w, m_tex_h, 0, GL_RGBA,
-		 GL_UNSIGNED_BYTE, 0);
+		 GL_UNSIGNED_BYTE, nullptr);
 }
 
 /**
@@ -95,7 +95,7 @@ GLSurfaceTexture::GLSurfaceTexture(SDL_Surface * surface, bool intensity)
 		assert(converted);
 		SDL_SetAlpha(converted, 0, 0);
 		SDL_SetAlpha(surface, 0, 0);
-		SDL_BlitSurface(surface, 0, converted, 0);
+		SDL_BlitSurface(surface, nullptr, converted, nullptr);
 		SDL_FreeSurface(surface);
 		surface = converted;
 		bpp = surface->format->BytesPerPixel;

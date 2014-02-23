@@ -45,8 +45,8 @@ struct GameMessageMenu : public UI::UniqueWindow {
 	void show_new_message(Widelands::Message_Id, const Widelands::Message &);
 
 	enum Mode {Inbox, Archive};
-	void think();
-	virtual bool handle_key(bool down, SDL_keysym code);
+	void think() override;
+	virtual bool handle_key(bool down, SDL_keysym code) override;
 
 private:
 	enum Cols {ColSelect, ColStatus, ColTitle, ColTimeSent};

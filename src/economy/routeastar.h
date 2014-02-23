@@ -79,7 +79,7 @@ struct RouteAStar : BaseRouteAStar {
 
 	RouteAStar(Router & router, WareWorker type, const Estimator & est = Estimator());
 
-	void push(RoutingNode & node, int32_t cost = 0, RoutingNode * backlink = 0);
+	void push(RoutingNode & node, int32_t cost = 0, RoutingNode * backlink = nullptr);
 	RoutingNode * step();
 
 private:
@@ -123,7 +123,7 @@ template<typename Est_>
 RoutingNode * RouteAStar<Est_>::step()
 {
 	if (m_open.empty())
-		return 0;
+		return nullptr;
 
 	// Keep the neighbours vector around to avoid excessive amounts of memory
 	// allocations and frees.

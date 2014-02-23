@@ -55,36 +55,36 @@ public:
 		(const std::string & path,
 		 const std::string & pattern,
 		 filenameset_t     * results,
-		 uint32_t            depth = 0);
+		 uint32_t            depth = 0) override;
 
-	virtual bool IsWritable() const;
-	virtual bool            FileExists(const std::string & path);
-	virtual bool     IsDirectory      (const std::string & path);
-	virtual void EnsureDirectoryExists(const std::string & dirname);
-	virtual void   MakeDirectory      (const std::string & dirname);
+	virtual bool IsWritable() const override;
+	virtual bool            FileExists(const std::string & path) override;
+	virtual bool     IsDirectory      (const std::string & path) override;
+	virtual void EnsureDirectoryExists(const std::string & dirname) override;
+	virtual void   MakeDirectory      (const std::string & dirname) override;
 
-	virtual void * Load(const std::string & fname, size_t & length);
+	virtual void * Load(const std::string & fname, size_t & length) override;
 	virtual void * fastLoad
-		(const std::string & fname, size_t & length, bool & fast);
+		(const std::string & fname, size_t & length, bool & fast) override;
 	virtual void Write
-		(const std::string & fname, void const * data, int32_t length);
+		(const std::string & fname, void const * data, int32_t length) override;
 
-	virtual StreamRead  * OpenStreamRead (const std::string & fname);
-	virtual StreamWrite * OpenStreamWrite(const std::string & fname);
+	virtual StreamRead  * OpenStreamRead (const std::string & fname) override;
+	virtual StreamWrite * OpenStreamWrite(const std::string & fname) override;
 
-	virtual FileSystem * MakeSubFileSystem(const std::string & dirname);
-	virtual FileSystem * CreateSubFileSystem(const std::string & dirname, Type);
-	virtual void Unlink(const std::string & file);
-	virtual void Rename(const std::string &, const std::string &);
+	virtual FileSystem * MakeSubFileSystem(const std::string & dirname) override;
+	virtual FileSystem * CreateSubFileSystem(const std::string & dirname, Type) override;
+	virtual void Unlink(const std::string & file) override;
+	virtual void Rename(const std::string &, const std::string &) override;
 
-	virtual std::string getBasename() {return std::string();};
+	virtual std::string getBasename() override {return std::string();};
 
 	bool FindConflictingVersionFile(FileSystem &);
 	bool FindMatchingVersionFile(FileSystem &);
 
 	void PutRightVersionOnTop();
 
-	virtual unsigned long long DiskSpace();
+	virtual unsigned long long DiskSpace() override;
 
 private:
 	bool m_read_version_from_version_file(FileSystem &, std::string *);

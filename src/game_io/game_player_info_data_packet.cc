@@ -63,9 +63,9 @@ void Game_Player_Info_Data_Packet::Read
 						fr.Unsigned8();
 					char const * const tribe_name = fr.CString();
 					char const * const frontier_style_name =
-						packet_version < 7 ? 0 : fr.CString();
+						packet_version < 7 ? nullptr : fr.CString();
 					char const * const flag_style_name     =
-						packet_version < 7 ? 0 : fr.CString();
+						packet_version < 7 ? nullptr : fr.CString();
 
 					if (packet_version <= 12) { // Player colors used to be saved in this packet
 						for (uint32_t j = 0; j < 4; ++j) {

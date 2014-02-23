@@ -21,6 +21,8 @@
 
 #include <algorithm>
 
+#include <boost/foreach.hpp>
+
 #include "container_iterate.h"
 #include "economy/economy.h"
 #include "economy/flag.h"
@@ -49,7 +51,23 @@
 
 namespace Widelands {
 
+namespace  {
+
 static const uint32_t WORKER_WITHOUT_COST_SPAWN_INTERVAL = 2500;
+
+// Goes through the list and removes all workers that are no longer in the
+// game.
+void remove_no_longer_existing_workers(Game& game, std::vector<Worker*>* workers) {
+	for (std::vector<Worker*>::iterator i = workers->begin(); i != workers->end(); ++i) {
+		if (!game.objects().object_still_available(*i)) {
+			workers->erase(i);
+			remove_no_longer_existing_workers(game, workers);
+			return;
+		}
+	}
+}
+
+}  // namespace
 
 WarehouseSupply::~WarehouseSupply()
 {
@@ -58,7 +76,7 @@ WarehouseSupply::~WarehouseSupply()
 			("WarehouseSupply::~WarehouseSupply: Warehouse %u still belongs to "
 			 "an economy",
 			 m_warehouse->serial());
-		set_economy(0);
+		set_economy(nullptr);
 	}
 
 	// We're removed from the Economy. Therefore, the wares can simply
@@ -194,7 +212,7 @@ uint32_t WarehouseSupply::nr_supplies
 	//  Calculate how many wares can be sent out - it might be that we need them
 	// ourselves. E.g. for hiring new soldiers.
 	int32_t const x = m_wares.stock(req.get_index());
-	// only mark an item of that type as available, if the priority of the
+	// only mark an ware of that type as available, if the priority of the
 	// request + number of that wares in warehouse is > priority of request
 	// of *this* warehouse + 1 (+1 is important, as else the ware would directly
 	// be taken back to the warehouse as the request of the warehouse would be
@@ -209,14 +227,14 @@ uint32_t WarehouseSupply::nr_supplies
 }
 
 
-/// Launch a ware as item.
-WareInstance & WarehouseSupply::launch_item(Game & game, const Request & req) {
+/// Launch a ware.
+WareInstance & WarehouseSupply::launch_ware(Game & game, const Request & req) {
 	if (req.get_type() != wwWARE)
-		throw wexception("WarehouseSupply::launch_item: called for non-ware request");
+		throw wexception("WarehouseSupply::launch_ware: called for non-ware request");
 	if (!m_wares.stock(req.get_index()))
-		throw wexception("WarehouseSupply::launch_item: called for non-existing ware");
+		throw wexception("WarehouseSupply::launch_ware: called for non-existing ware");
 
-	return m_warehouse->launch_item(game, req.get_index());
+	return m_warehouse->launch_ware(game, req.get_index());
 }
 
 /// Launch a ware as worker.
@@ -269,7 +287,7 @@ Warehouse::Warehouse(const Warehouse_Descr & warehouse_descr) :
 	Building(warehouse_descr),
 	m_supply(new WarehouseSupply(this)),
 	m_next_military_act(0),
-	m_portdock(0)
+	m_portdock(nullptr)
 {
 	uint8_t nr_worker_types_without_cost =
 		warehouse_descr.tribe().worker_types_without_cost().size();
@@ -489,9 +507,8 @@ void Warehouse::init_portdock(Editor_Game_Base & egbase)
 
 	molog("Found %" PRIuS " fields for the dock\n", dock.size());
 
-	m_portdock = new PortDock;
+	m_portdock = new PortDock(this);
 	m_portdock->set_owner(get_owner());
-	m_portdock->set_warehouse(this);
 	m_portdock->set_economy(get_economy());
 	container_iterate_const(std::vector<Coords>, dock, it) {
 		m_portdock->add_position(*it.current);
@@ -504,52 +521,37 @@ void Warehouse::init_portdock(Editor_Game_Base & egbase)
 
 void Warehouse::destroy(Editor_Game_Base & egbase)
 {
-	Game & game = ref_cast<Game, Editor_Game_Base>(egbase);
-
-	const WareList & workers = get_workers();
-
-	// This will empty the stock and launch all workers
-	// including incorporated ones
-	for (Ware_Index id = Ware_Index::First(); id < workers.get_nrwareids(); ++id) {
-		const uint32_t stock = workers.stock(id);
-
-		for (uint32_t i = 0; i < stock; ++i) {
-			launch_worker(game, id, Requirements()).start_task_leavebuilding
-				(game, true);
-		}
-	}
-
 	Building::destroy(egbase);
 }
 
 /// Destroy the warehouse.
 void Warehouse::cleanup(Editor_Game_Base & egbase)
 {
-	if (m_portdock) {
+	if (egbase.objects().object_still_available(m_portdock)) {
 		m_portdock->remove(egbase);
 		m_portdock = nullptr;
 	}
+
+	// This will empty the stock and launch all workers including incorporated
+	// ones.
+	if (upcast(Game, game, &egbase)) {
+		const WareList& workers = get_workers();
+		for (Ware_Index id = Ware_Index::First(); id < workers.get_nrwareids(); ++id) {
+			const uint32_t stock = workers.stock(id);
+			for (uint32_t i = 0; i < stock; ++i) {
+				launch_worker(*game, id, Requirements()).start_task_leavebuilding(*game, true);
+			}
+			assert(!m_incorporated_workers.count(id) || m_incorporated_workers[id].empty());
+		}
+	}
+	m_incorporated_workers.clear();
 
 	while (!m_planned_workers.empty()) {
 		m_planned_workers.back().cleanup();
 		m_planned_workers.pop_back();
 	}
 
-	//  all cached workers are unbound and freed
-	container_iterate(IncorporatedWorkers, m_incorporated_workers, cpair) {
-		WorkerList & clist = cpair->second;
-		while (!clist.empty()) {
-			Worker * w = clist.back();
-			clist.pop_back();
-
-			if (upcast(Game, game, &egbase))
-				if (game->objects().object_still_available(w))
-					w->reset_tasks(*game);
-		}
-	}
-	m_incorporated_workers.clear();
-
-	Map & map = egbase.map();
+	Map& map = egbase.map();
 	if (const uint32_t conquer_radius = get_conquers())
 		egbase.unconquer_area
 			(Player_Area<Area<FCoords> >
@@ -740,7 +742,7 @@ void Warehouse::remove_workers(Ware_Index const id, uint32_t const count)
 
 
 
-/// Launch a carrier to fetch an item from our flag.
+/// Launch a carrier to fetch an ware from our flag.
 bool Warehouse::fetch_from_flag(Game & game)
 {
 	Ware_Index const carrierid = tribe().safe_worker_index("carrier");
@@ -785,7 +787,6 @@ uint32_t Warehouse::count_workers
 	return sum;
 }
 
-
 /// Start a worker of a given type. The worker will
 /// be assigned a job by the caller.
 Worker & Warehouse::launch_worker
@@ -797,11 +798,14 @@ Worker & Warehouse::launch_worker
 
 			//  look if we got one of those in stock
 			if (m_incorporated_workers.count(ware)) {
-				WorkerList & incorporated_workers = m_incorporated_workers[ware];
+				// On cleanup, it could be that the worker was deleted under
+				// us, so we erase the pointer we had to it and create a new
+				// one.
+				remove_no_longer_existing_workers(game, &m_incorporated_workers[ware]);
+				WorkerList& incorporated_workers = m_incorporated_workers[ware];
 
 				container_iterate (WorkerList, incorporated_workers, i) {
-					Worker * worker = *i.current;
-
+					Worker* worker = *i.current;
 					--unincorporated;
 
 					if (req.check(*worker)) {
@@ -839,18 +843,15 @@ Worker & Warehouse::launch_worker
 }
 
 
-/**
- * This is the opposite of launch_worker: destroy the worker and add the
- * appropriate ware to our warelist
- */
-void Warehouse::incorporate_worker(Editor_Game_Base & egbase, Worker & w)
+void Warehouse::incorporate_worker(Editor_Game_Base & egbase, Worker* w)
 {
-	assert(w.get_owner() == &owner());
+	assert(w != nullptr);
+	assert(w->get_owner() == &owner());
 
-	if (WareInstance * const item = w.fetch_carried_item(egbase))
-		incorporate_item(egbase, *item); //  rescue an item
+	if (WareInstance* ware = w->fetch_carried_ware(egbase))
+		incorporate_ware(egbase, ware);
 
-	Ware_Index worker_index = tribe().worker_index(w.name().c_str());
+	Ware_Index worker_index = tribe().worker_index(w->name().c_str());
 	m_supply->add_workers(worker_index, 1);
 
 	//  We remove carriers, but we keep other workers around.
@@ -861,41 +862,41 @@ void Warehouse::incorporate_worker(Editor_Game_Base & egbase, Worker & w)
 	//  FIXME When this is done, the get_incorporated_workers method above must
 	//  FIXME be reworked so that workers are recreated, and rescheduled for
 	//  FIXME incorporation.
-	if (dynamic_cast<Carrier const *>(&w)) {
-		w.remove(egbase);
+	if (upcast(Carrier, carrier, w)) {
+		carrier->remove(egbase);
 		return;
 	}
 
 	// Incorporate the worker
 	if (!m_incorporated_workers.count(worker_index))
 		m_incorporated_workers[worker_index] = std::vector<Worker *>();
-	m_incorporated_workers[worker_index].push_back(&w);
+	m_incorporated_workers[worker_index].push_back(w);
 
-	w.set_location(0); //  no longer in an economy
+	w->set_location(nullptr); //  no longer in an economy
 
 	if (upcast(Game, game, &egbase)) {
 		//  Bind the worker into this house, hide him on the map.
-		w.reset_tasks(*game);
-		w.start_task_idle(*game, 0, -1);
+		w->reset_tasks(*game);
+		w->start_task_idle(*game, 0, -1);
 	}
 }
 
 /// Create an instance of a ware and make sure it gets
 /// carried out of the warehouse.
-WareInstance & Warehouse::launch_item(Game & game, Ware_Index const ware) {
-	// Create the item
-	WareInstance & item = *new WareInstance(ware, tribe().get_ware_descr(ware));
-	item.init(game);
-	do_launch_item(game, item);
+WareInstance & Warehouse::launch_ware(Game & game, Ware_Index const ware_index) {
+	// Create the ware
+	WareInstance & ware = *new WareInstance(ware_index, tribe().get_ware_descr(ware_index));
+	ware.init(game);
+	do_launch_ware(game, ware);
 
-	m_supply->remove_wares(ware, 1);
+	m_supply->remove_wares(ware_index, 1);
 
-	return item;
+	return ware;
 }
 
 
-/// Get a carrier to actually move this item out of the warehouse.
-void Warehouse::do_launch_item(Game & game, WareInstance & item)
+/// Get a carrier to actually move this ware out of the warehouse.
+void Warehouse::do_launch_ware(Game & game, WareInstance & ware)
 {
 	// Create a carrier
 	Ware_Index const carrierid = tribe().worker_index("carrier");
@@ -908,15 +909,14 @@ void Warehouse::do_launch_item(Game & game, WareInstance & item)
 		m_supply->remove_workers(carrierid, 1);
 
 	// Setup the carrier
-	worker.start_task_dropoff(game, item);
+	worker.start_task_dropoff(game, ware);
 }
 
 
-/// Swallow the item, adding it to out inventory.
-void Warehouse::incorporate_item(Editor_Game_Base & egbase, WareInstance & item)
+void Warehouse::incorporate_ware(Editor_Game_Base & egbase, WareInstance* ware)
 {
-	m_supply->add_wares(item.descr_index(), 1);
-	return item.destroy(egbase);
+	m_supply->add_wares(ware->descr_index(), 1);
+	ware->destroy(egbase);
 }
 
 
@@ -1010,7 +1010,7 @@ void Warehouse::create_worker(Game & game, Ware_Index const worker) {
 			remove_workers(tribe().safe_worker_index(input), i.current->second);
 	}
 
-	incorporate_worker(game, w_desc.create(game, owner(), this, m_position));
+	incorporate_worker(game, &w_desc.create(game, owner(), this, m_position));
 
 	// Update PlannedWorkers::amount here if appropriate, because this function
 	// may have been called directly by the Economy.
@@ -1038,7 +1038,7 @@ uint32_t Warehouse::get_planned_workers(Game & /* game */, Ware_Index index) con
 
 /**
  * Calculate the supply of wares available to this warehouse in each of the
- * buildcost items for the given worker.
+ * buildcost wares for the given worker.
  *
  * This is the current stock plus any incoming transfers.
  */
@@ -1080,7 +1080,7 @@ std::vector<uint32_t> Warehouse::calc_available_for_worker
  */
 void Warehouse::plan_workers(Game & game, Ware_Index index, uint32_t amount)
 {
-	PlannedWorkers * pw = 0;
+	PlannedWorkers * pw = nullptr;
 
 	container_iterate(std::vector<PlannedWorkers>, m_planned_workers, i) {
 		if (i.current->index == index) {
@@ -1225,7 +1225,7 @@ void Warehouse::aggressor(Soldier & enemy)
 	if
 		(game.map().find_bobs
 		 	(Area<FCoords>(map.get_fcoords(base_flag().get_position()), 2),
-		 	 0,
+		 	 nullptr,
 		 	 FindBobEnemySoldier(&owner())))
 		return;
 
@@ -1308,12 +1308,12 @@ void Warehouse::set_worker_policy
  */
 void Warehouse::check_remove_stock(Game & game)
 {
-	if (base_flag().current_items() < base_flag().total_capacity() / 2) {
+	if (base_flag().current_wares() < base_flag().total_capacity() / 2) {
 		for (Ware_Index ware = Ware_Index::First(); ware.value() < m_ware_policy.size(); ++ware) {
 			if (get_ware_policy(ware) != SP_Remove || !get_wares().stock(ware))
 				continue;
 
-			launch_item(game, ware);
+			launch_ware(game, ware);
 			break;
 		}
 	}
@@ -1355,7 +1355,7 @@ std::vector<Soldier *> Warehouse::presentSoldiers() const
 	return rv;
 }
 int Warehouse::incorporateSoldier(Editor_Game_Base & egbase, Soldier & soldier) {
-	incorporate_worker(egbase, soldier);
+	incorporate_worker(egbase, &soldier);
 	return 0;
 }
 

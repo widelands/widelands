@@ -41,10 +41,10 @@ struct Carrier : public Worker {
 					 prof, global_s, _tribe)
 		{};
 
-		virtual Worker_Type get_worker_type() const {return CARRIER;}
+		virtual Worker_Type get_worker_type() const override {return CARRIER;}
 
 	protected:
-		virtual Bob & create_object() const {return *new Carrier(*this);}
+		virtual Bob & create_object() const override {return *new Carrier(*this);}
 	};
 
 
@@ -60,12 +60,12 @@ struct Carrier : public Worker {
 	void start_task_transport(Game &, int32_t fromflag);
 	bool start_task_walktoflag(Game &, int32_t flag, bool offset = false);
 
-	virtual void log_general_info(const Editor_Game_Base &);
+	virtual void log_general_info(const Editor_Game_Base &) override;
 
 private:
 	MO_DESCR(Descr);
 
-	void find_pending_item(Game &);
+	void find_pending_ware(Game &);
 	int32_t find_closest_flag(Game &);
 
 	// internal task stuff
@@ -78,7 +78,7 @@ private:
 
 	void deliver_to_building(Game &, State &);
 	void pickup_from_flag   (Game &, State &);
-	void drop_item          (Game &, State &);
+	void drop_ware          (Game &, State &);
 	void enter_building     (Game &, State &);
 	bool swap_or_wait       (Game &, State &);
 
@@ -95,17 +95,17 @@ protected:
 	public:
 		Loader();
 
-		virtual void load(FileRead &);
+		virtual void load(FileRead &) override;
 
 	protected:
-		virtual const Task * get_task(const std::string & name);
+		virtual const Task * get_task(const std::string & name) override;
 	};
 
-	virtual Loader * create_loader();
+	virtual Loader * create_loader() override;
 
 public:
 	virtual void do_save
-		(Editor_Game_Base &, Map_Map_Object_Saver &, FileWrite &);
+		(Editor_Game_Base &, Map_Map_Object_Saver &, FileWrite &) override;
 };
 
 }
