@@ -6,15 +6,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2013-09-15 17:41+0000\n"
+"POT-Creation-Date: 2014-02-22 15:38+0000\n"
 "PO-Revision-Date: 2013-10-24 16:59+0000\n"
 "Last-Translator: Miroslav Remák <Unknown>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-10-25 05:14+0000\n"
-"X-Generator: Launchpad (build 16810)\n"
+"X-Launchpad-Export-Date: 2014-02-23 05:31+0000\n"
+"X-Generator: Launchpad (build 16926)\n"
 
 #: ../../txts/README.lua:73
 msgid "(CTRL+) 0-9: Remember and go to previously remembered locations"
@@ -72,12 +72,9 @@ msgstr "- Akú mapu ste hrali, keď nastala chyba."
 msgid ""
 "- Which version of Widelands you are running (i.e. either the build number "
 "or\n"
-"the revision number if you are running a development version or a nightly "
+"the revision number if you are running a development version or a daily "
 "build.)"
 msgstr ""
-"- Akú verziu Widelands používate (buď číslo zostavenia, alebo číslo "
-"revízie,\n"
-"pokiaľ spúšťate vývojovú verziu alebo každonočné zostavenie.)"
 
 #: ../../txts/README.lua:75
 msgid ".: goes to next location"
@@ -178,8 +175,8 @@ msgid "Coders"
 msgstr "Programátori"
 
 #: ../../txts/license:7
-msgid "Copyright 2002 - 2013 by the Widelands Development Team."
-msgstr "Copyright 2002 - 2013 od vývojového tímu Widelands."
+msgid "Copyright 2002 - 2014 by the Widelands Development Team."
+msgstr ""
 
 #: ../../txts/developers:186
 msgid "Czech"

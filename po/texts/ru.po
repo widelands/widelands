@@ -6,15 +6,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2013-09-15 17:41+0000\n"
+"POT-Creation-Date: 2014-02-22 15:38+0000\n"
 "PO-Revision-Date: 2013-11-30 09:59+0000\n"
 "Last-Translator: Александр <sa13690@yandex.ru>\n"
 "Language-Team: Language <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-12-01 05:15+0000\n"
-"X-Generator: Launchpad (build 16856)\n"
+"X-Launchpad-Export-Date: 2014-02-23 05:31+0000\n"
+"X-Generator: Launchpad (build 16926)\n"
 "X-Poedit-Country: RUSSIAN FEDERATION\n"
 "X-Poedit-Language: Russian\n"
 
@@ -67,11 +67,9 @@ msgstr "- На какой карте вы играли, когда произо�
 msgid ""
 "- Which version of Widelands you are running (i.e. either the build number "
 "or\n"
-"the revision number if you are running a development version or a nightly "
+"the revision number if you are running a development version or a daily "
 "build.)"
 msgstr ""
-"- Какую версию Widelands вы запускали (например либо номер сборки, либо\n"
-"номер ревизии, если у вас разрабатываемая версия или тестовая сборка.)"
 
 #: ../../txts/README.lua:75
 msgid ".: goes to next location"
@@ -173,8 +171,8 @@ msgid "Coders"
 msgstr "Кодеры"
 
 #: ../../txts/license:7
-msgid "Copyright 2002 - 2013 by the Widelands Development Team."
-msgstr "Copyright 2002 - 2013 Команда разработчиков Widelands."
+msgid "Copyright 2002 - 2014 by the Widelands Development Team."
+msgstr ""
 
 #: ../../txts/developers:186
 msgid "Czech"
