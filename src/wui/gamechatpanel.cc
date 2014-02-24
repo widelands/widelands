@@ -71,8 +71,8 @@ void GameChatPanel::recalculate()
 		// Note: if many messages arrive simultaneously,
 		// the latest is a system message and some others
 		// are not, then this act wrong!
-		if (not msgs . back() . sender . empty())
-			// Alert me!
+		if (!msgs.back().sender.empty())
+			// The latest message is not a system message
 			play_new_chat_message();
 		chat_message_counter = msgs . size();
 
