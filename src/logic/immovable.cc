@@ -212,14 +212,12 @@ Immovable_Descr::Immovable_Descr
 		std::transform
 			(program_name.begin(), program_name.end(), program_name.begin(),
 			 tolower);
-		ImmovableProgram * program = nullptr;
 		try {
 			if (m_programs.count(program_name))
 				throw game_data_error(_("this program has already been declared"));
 			m_programs[program_name.c_str()] =
 				new ImmovableProgram(directory, prof, program_name, *this);
 		} catch (const std::exception & e) {
-			delete program;
 			throw game_data_error
 				(_("program %s: %s"), program_name.c_str(), e.what());
 		}
