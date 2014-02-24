@@ -7,13 +7,13 @@ msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2014-02-22 15:38+0000\n"
-"PO-Revision-Date: 2013-10-24 16:59+0000\n"
+"PO-Revision-Date: 2014-02-23 13:53+0000\n"
 "Last-Translator: Miroslav Remák <Unknown>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-02-23 05:31+0000\n"
+"X-Launchpad-Export-Date: 2014-02-24 05:23+0000\n"
 "X-Generator: Launchpad (build 16926)\n"
 
 #: ../../txts/README.lua:73
@@ -75,6 +75,8 @@ msgid ""
 "the revision number if you are running a development version or a daily "
 "build.)"
 msgstr ""
+"- Akú verziu hry používate (buď číslo zostavenia, alebo číslo revízie,\n"
+"pokiaľ spúšťate vývojovú verziu alebo každodenné zostavenie.)"
 
 #: ../../txts/README.lua:75
 msgid ".: goes to next location"
@@ -176,7 +178,7 @@ msgstr "Programátori"
 
 #: ../../txts/license:7
 msgid "Copyright 2002 - 2014 by the Widelands Development Team."
-msgstr ""
+msgstr "Copyright 2002 - 2014 od vývojového tímu hry Widelands."
 
 #: ../../txts/developers:186
 msgid "Czech"
