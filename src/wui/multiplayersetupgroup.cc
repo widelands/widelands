@@ -301,12 +301,11 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 					title = _("Computer");
 					pic += "novalue.png";
 				} else {
-					title = _("AI: ");
 					if (player_setting.random_ai) {
-						title += _("Random");
+						title = (boost::format(_("AI: %s")) % _("Random")).str();
 						pic += "ai_Random.png";
 					} else {
-						title += _(player_setting.ai);
+						title = (boost::format(_("AI: %s")) % _(player_setting.ai)).str();
 						pic += "ai_" + player_setting.ai + ".png";
 					}
 				}

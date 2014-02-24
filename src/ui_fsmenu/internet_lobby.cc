@@ -380,7 +380,7 @@ void Fullscreen_Menu_Internet_Lobby::clicked_joingame()
 				std::string warningheader(_("Connection timed out"));
 				std::string warning
 					(_
-						("Widelands has not been able to get the IP address of the server in time.\n"
+						("Widelands was unable to get the IP address of the server in time.\n"
 						 "There seems to be a network problem, either on your side or on the side\n"
 						 "of the server.\n"));
 				UI::WLMessageBox mmb(this, warningheader, warning, UI::WLMessageBox::OK, UI::Align_Left);
@@ -408,7 +408,7 @@ GCC_DIAG_ON("-Wold-style-cast")
 			InternetGaming::ref().set_game_done();
 			// Show a popup warning message
 			std::string warningheader(_("Connection problem"));
-			std::string warning(_("Widelands has not been able to connect to the host."));
+			std::string warning(_("Widelands was unable to connect to the host."));
 			UI::WLMessageBox mmb(this, warningheader, warning, UI::WLMessageBox::OK, UI::Align_Left);
 			mmb.run();
 		}

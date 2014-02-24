@@ -244,10 +244,10 @@ static const char * const pic_tab_buildhouse[] = {
 	"pics/menu_tab_buildport.png"
 };
 static const std::string tooltip_tab_build[] = {
-	_("Build small buildings"),
-	_("Build medium buildings"),
-	_("Build large buildings"),
-	_("Build port buildings")
+	_("Build small building"),
+	_("Build medium building"),
+	_("Build large building"),
+	_("Build port building")
 };
 static const std::string name_tab_build[] = {"small", "medium", "big", "port"};
 
@@ -408,7 +408,7 @@ void FieldActionWindow::add_buttons_auto()
 					(buildbox, "build_flag",
 					 pic_buildflag,
 					 &FieldActionWindow::act_buildflag,
-					 _("Put a flag"));
+					 _("Place a flag"));
 
 			if (can_act && dynamic_cast<const Widelands::Road *>(imm))
 				add_button
@@ -458,7 +458,7 @@ void FieldActionWindow::add_buttons_auto()
 
 	// Add tabs
 	if (buildbox && buildbox->get_nritems())
-		add_tab("roads", pic_tab_buildroad, buildbox, _("Build roads"));
+		add_tab("roads", pic_tab_buildroad, buildbox, _("Build road"));
 
 	add_tab("watch", pic_tab_watch, &watchbox, _("Watch"));
 

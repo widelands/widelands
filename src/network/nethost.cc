@@ -372,7 +372,7 @@ struct HostChatProvider : public ChatProvider {
 					  "/warn <name> <reason>  -  Warn the user <name> because of <reason><br>"
 					  "/kick <name> <reason>  -  Kick the user <name> because of <reason><br>"
 					  "/forcePause            -  Force the game to pause.<br>"
-					  "/endForcedPause        -  Puts game back to normal speed.");
+					  "/endForcedPause        -  Return game to normal speed.");
 				if (!h->isDedicated())
 					c.recipient = h->getLocalPlayername();
 			}
@@ -1211,11 +1211,11 @@ void NetHost::handle_dserver_command(std::string cmdarray, std::string sender)
 			c.msg =
 				_
 				("<br>Available host commands are:<br>"
-				 "help           - Shows this help<br>"
-				 "host         $ - Tries to run the host command $");
+				 "help   - Shows this help<br>"
+				 "host $ - Tries to run the host command $");
 		if (m_password.size() > 1) {
 			c.msg += "<br>";
-			c.msg += _("pwd          $ - Sends the password $ to the host");
+			c.msg += _("pwd $  - Sends the password $ to the host");
 		}
 		send(c);
 
@@ -1239,7 +1239,7 @@ void NetHost::handle_dserver_command(std::string cmdarray, std::string sender)
 			c.msg = _("Sorry! Saving was deactivated on this dedicated server!");
 			send(c);
 		} else if (!d->game) {
-			c.msg = _("Can not save, as long as no game is running!");
+			c.msg = _("Cannot save while there is no game running!");
 			send(c);
 		} else {
 			//try to save the game
@@ -1989,7 +1989,7 @@ std::string NetHost::getComputerPlayerName(uint8_t const playernum)
 	uint32_t suffix = playernum;
 	do {
 		char buf[200];
-		snprintf(buf, sizeof(buf), _("Computer%u"), ++suffix);
+		snprintf(buf, sizeof(buf), _("Computer %u"), ++suffix);
 		name = buf;
 	} while (haveUserName(name, playernum));
 	return name;

@@ -605,12 +605,8 @@ void Worker::informPlayer
 		(game,
 		 "mine",
 		 (boost::format(_("Out of %s")) % res_type).str(),
-		 std::string
-		 	(_
-		 	 ("The worker of this building cannot find any more resources "
-		 	 "of the following type: "))
-		 +
-		 res_type,
+		 (boost::format(_("The worker of this building cannot find any more resources "
+		 	 "of the following type: %s")) % res_type).str(),
 		 true,
 		 1800000, 0);
 }

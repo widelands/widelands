@@ -151,7 +151,7 @@ Fullscreen_Menu_Options::Fullscreen_Menu_Options
 	m_label_auto_roadbuild_mode
 		(this,
 		 get_w() * 1313 / 10000, get_h() * 6467 / 10000,
-		 _("Start roadbuilding after placing flag"), UI::Align_VCenter),
+		 _("Start building road after placing a flag"), UI::Align_VCenter),
 
 	m_show_workarea_preview
 		(this, Point(get_w() * 19 / 200, get_h() * 6767 / 10000)),
@@ -481,7 +481,7 @@ Fullscreen_Menu_Advanced_Options::Fullscreen_Menu_Advanced_Options
 	m_label_transparent_chat
 		(this,
 		 get_w() * 1313 / 10000, get_h() * 8795 / 10000,
-		 _("Show in game chat with transparent background"), UI::Align_VCenter),
+		 _("Show in-game chat with transparent background"), UI::Align_VCenter),
 
 	os(opt)
 {

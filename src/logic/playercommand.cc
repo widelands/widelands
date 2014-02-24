@@ -1921,7 +1921,7 @@ void Cmd_ChangeMilitaryConfig::Read
 				 or
 				 retreat > plr->tribe().get_military_data().get_max_retreat())
 				throw game_data_error
-					(_("retreat: value out of range. Received %1$u expected %2$u-%3$u"),
+					(_("retreat: value out of range. Received %1$u, but expected %2$u-%3$u"),
 					 retreat,
 					 plr->tribe().get_military_data().get_min_retreat(),
 					 plr->tribe().get_military_data().get_max_retreat());

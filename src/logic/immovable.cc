@@ -253,7 +253,7 @@ Immovable_Descr::Immovable_Descr
 					terrain_affinity_s->get_natural(terrain_type_name, 0);
 				if ((*it = value) != value)
 					throw game_data_error
-						(_("expected 0 .. 255 but found %u"), value);
+						(_("expected %1$s but found %2$u"), _("0 .. 255"), value);
 				if (terrain_affinity_s->get_next_val(terrain_type_name))
 					throw game_data_error(_("duplicated"));
 			} catch (const _wexception & e) {
@@ -268,7 +268,7 @@ Immovable_Descr::Immovable_Descr
 					uint32_t const value = v->get_natural();
 					if ((*it = value) != value)
 						throw game_data_error
-							(_("expected 0 .. 255 but found %u"), value);
+						(_("expected %1$s but found %2$u"), _("0 .. 255"), value);
 					if (terrain_affinity_s->get_next_val(v->get_name()))
 						throw game_data_error(_("duplicated"));
 				} catch (const _wexception & e) {
@@ -904,9 +904,7 @@ ImmovableProgram::ActTransform::ActTransform
 				long int const value = atoi(params[i].c_str());
 				if (value < 1 or 254 < value)
 					throw game_data_error
-						(_
-							("expected probability in range [1, 254] but found "
-							"\"%s\""),
+						(_("expected %1$s but found \"%2$s\""), _("probability in range [1, 254]"), 
 						 params[i].c_str());
 				probability = value;
 			} else {
@@ -1084,9 +1082,7 @@ ImmovableProgram::ActSeed::ActSeed(char * parameters, Immovable_Descr & descr)
 				long int const value = strtol(p, &endp, 0);
 				if (*endp or value < 1 or 254 < value)
 					throw game_data_error
-						(_
-						 	("expected probability in range [1, 254] but found "
-						 	 "\"%s\""),
+						(_("expected %1$s but found \"%2$s\""), _("probability in range [1, 254]"),
 						 p);
 				probability = value;
 			//  fallthrough

@@ -236,7 +236,7 @@ void Editor_Player_Menu::clicked_remove_last_player() {
 	m_remove_last_player.set_enabled(1 < nr_players);
 
 	update();
-	// SirVer TODO: Take steps when the player is referenced in some place. Not
+	// SirVer TODO: Take steps when the player is referenced someplace. Not
 	// SirVer TODO: currently possible in the editor though.
 }
 
@@ -290,7 +290,7 @@ called when a button is clicked
 //                 //         (&menu,
 //                 //          _("Error!"),
 //                 //          _
-//                 //                 ("Can not remove player. It is referenced in some place. Remove all"
+//                 //                 ("Cannot remove player. It is referenced in some place. Remove all"
 //                 //                  " buildings and bobs that depend on this player and try again."),
 //                 //          UI::WLMessageBox::OK);
 //                 // mmb.run();
@@ -321,7 +321,7 @@ void Editor_Player_Menu::player_tribe_clicked(uint8_t n) {
 			(&menu,
 			 _("Error!"),
 			 _
-			 	("Can not remove player. It is referenced in some place. Remove all"
+			 	("Cannot remove player. It is referenced someplace. Remove all"
 			 	 " buildings and bobs that depend on this player and try again."),
 			 UI::WLMessageBox::OK);
 		mmb.run();

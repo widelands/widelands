@@ -19,6 +19,7 @@
 
 #include "wlapplication.h"
 
+#include <boost/format.hpp>
 #include <cerrno>
 #ifndef _WIN32
 #include <csignal>
@@ -1075,7 +1076,7 @@ bool WLApplication::init_hardware() {
 
 void terminate (int) {
 	 log
-		  (_("Waited 5 seconds to close audio. Problems here so killing Widelands."
+		  (_("Waited 5 seconds to close audio. There are some problems here, so killing Widelands."
 			  " Update your sound driver and/or SDL to fix this problem\n"));
 #ifndef _WIN32
 	raise(SIGKILL);
@@ -1347,7 +1348,7 @@ void WLApplication::show_usage()
 			(" --<config-entry-name>=value overwrites any config file setting\n\n"
 			 " --logfile=FILENAME   Log output to file FILENAME instead of \n"
 			 "                      terminal output\n"
-			 " --datadir=DIRNAME    Use specified direction for the widelands\n"
+			 " --datadir=DIRNAME    Use specified directory for the widelands\n"
 			 "                      data files\n"
 			 " --homedir=DIRNAME    Use specified directory for widelands config\n"
 			 "                      files, savegames and replays\n")
@@ -1366,8 +1367,8 @@ void WLApplication::show_usage()
 			 " --remove_syncstreams=[true|false]\n"
 			 "                      Remove syncstream files on startup\n"
 			 " --remove_replays=[...]\n"
-			 "                      Remove replays after this amount of days.\n"
-			 "                      If this is 0 replays are not deleted.\n")
+			 "                      Remove replays after this number of days.\n"
+			 "                      If this is 0, replays are not deleted.\n")
 		<<
 		_
 			("Sound options:\n"
@@ -1616,14 +1617,16 @@ void WLApplication::mainmenu()
 			messagetitle = _("Unexpected error during the game");
 			message = e.what();
 			message +=
-				_
+
+		(boost::format(_
 					("\n\nPlease report this problem to help us improve Widelands. "
 					 "You will find related messages in the standard output "
-					 "(stdout.txt on Windows). You are using build ");
-			message += build_id() + "(" + build_type() + ")";
+					 "(stdout.txt on Windows). You are using build %1$s (%2$s). ")
+				) % build_id().c_str() % build_type().c_str()).str();
+
 			message +=
 				_
-					(". Please add this information to your report.\n\n"
+					("Please add this information to your report.\n\n"
 					 "Widelands attempts to create a savegame when errors occur "
 					 "during the game. It is often - though not always - possible "
 					 "to load it and continue playing.\n");

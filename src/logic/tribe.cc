@@ -130,7 +130,7 @@ Tribe_Descr::Tribe_Descr
 			PARSE_MAP_OBJECT_TYPES_END;
 			if (not safe_building_index("constructionsite"))
 				throw game_data_error
-					(_("constructionsite type \"constructionsite\" is missing"));
+					(_("construction site type \"constructionsite\" is missing"));
 
 			PARSE_MAP_OBJECT_TYPES_BEGIN("dismantlesite")
 				m_buildings.add
@@ -139,7 +139,7 @@ Tribe_Descr::Tribe_Descr
 			PARSE_MAP_OBJECT_TYPES_END;
 			if (not safe_building_index("dismantlesite"))
 				throw game_data_error
-					(_("dismantlesite type \"distmantlesite\" is missing"));
+					(_("dismantle site type \"distmantlesite\" is missing"));
 
 			PARSE_MAP_OBJECT_TYPES_BEGIN("warehouse")
 				m_buildings.add
@@ -166,7 +166,7 @@ Tribe_Descr::Tribe_Descr
 			path           = "global/militarysites/";
 			base_path_size = path.size();
 
-			PARSE_MAP_OBJECT_TYPES_BEGIN("global militarysite")
+			PARSE_MAP_OBJECT_TYPES_BEGIN("global military site")
 				m_buildings.add
 					(new MilitarySite_Descr
 					 	(_name, _descname, path, prof, global_s, *this));

@@ -219,7 +219,7 @@ void Map_Flagdata_Data_Packet::Read
 			throw game_data_error
 				(_("unknown/unhandled version %u"), packet_version);
 	} catch (const _wexception & e) {
-		throw game_data_error(_("flagdata: %s"), e.what());
+		throw game_data_error(_("flag data: %s"), e.what());
 	}
 }
 

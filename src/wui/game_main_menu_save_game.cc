@@ -245,7 +245,7 @@ static void dosave
 	if (!game.save_handler().save_game(game, complete_filename, &error)) {
 		std::string s =
 			_
-			("Game Saving Error!\nSaved Game-File may be corrupt!\n\n"
+			("Game Saving Error!\nSaved game file may be corrupt!\n\n"
 			 "Reason given:\n");
 		s += error;
 		UI::WLMessageBox mbox
@@ -262,11 +262,8 @@ struct SaveWarnMessageBox : public UI::WLMessageBox {
 		UI::WLMessageBox
 			(&parent,
 			 _("Save Game Error!!"),
-			 std::string(_("A File with the name "))
-			 +
-			 FileSystem::FS_Filename(filename.c_str())
-			 +
-			 _(" already exists. Overwrite?"),
+			(boost::format(_("A File with the name '%s' already exists. Overwrite?")) % 
+				FileSystem::FS_Filename(filename.c_str())).str(),
 			 YESNO),
 		m_filename(filename)
 	{}

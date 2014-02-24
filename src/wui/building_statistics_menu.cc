@@ -94,7 +94,7 @@ Building_Statistics_Menu::Building_Statistics_Menu
 	m_in_build_label
 		(this,
 		 LABEL_X, IN_BUILD_Y, LABEL_WIDTH, 24,
-		 _("In Build: "), UI::Align_CenterLeft),
+		 _("Being built: "), UI::Align_CenterLeft),
 	m_in_build
 		(this, VALUE_X, IN_BUILD_Y, 100, 24, UI::Align_CenterLeft),
 	m_unproductive_label

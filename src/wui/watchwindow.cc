@@ -114,7 +114,7 @@ WatchWindow::WatchWindow
 			 34, h - 34, 34, 34,
 			 g_gr->images().get("pics/but0.png"),
 			 g_gr->images().get("pics/menu_goto.png"),
-			 _("Center mainview on this"));
+			 _("Center the main view on this"));
 	gotobtn->sigclicked.connect(boost::bind(&WatchWindow::do_goto, this));
 
 	if (_single_window) {

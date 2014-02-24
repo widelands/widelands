@@ -1233,7 +1233,7 @@ void ProductionProgram::ActMine::execute
 		if (m_chance <= game.logic_rand() % 100) {
 			snprintf
 				(ps.m_result_buffer, sizeof(ps.m_result_buffer),
-				 _("No left resources found!"));
+				 _("Can't find any more resources!"));
 			return ps.program_end(game, Failed);
 		}
 	}
@@ -1254,10 +1254,10 @@ void ProductionProgram::ActMine::informPlayer
 	ps.send_message
 		(game,
 		 "mine",
-		 _("Main vein exhausted"),
+		 _("Main Vein Exhausted"),
 		 _
-		 ("This mines' main vein exhausted. Expect strongly diminished returns on investment. "
-		  "You should consider to expand, dismantle or destruct it."),
+		 ("This mine's main vein is exhausted. Expect strongly diminished returns on investment. "
+		  "You should consider expanding, dismantling or destroying it."),
 		 true,
 		 60 * 60 * 1000,
 		 0);
@@ -1315,7 +1315,7 @@ void ProductionProgram::ActCheck_Soldier::execute
 		if (it == soldiers_end) {
 			snprintf
 				(ps.m_result_buffer, sizeof(ps.m_result_buffer),
-				 _("No soldier for this training level found!"));
+				 _("No soldier found for this training level!"));
 			return ps.program_end(game, Skipped);
 		}
 		if        (attribute == atrHP)      {
@@ -1406,7 +1406,7 @@ void ProductionProgram::ActTrain::execute
 		if (it == soldiers_end) {
 			snprintf
 				(ps.m_result_buffer, sizeof(ps.m_result_buffer),
-				 _("No soldier for this training level found!"));
+				 _("No soldier found for this training level!"));
 			return ps.program_end(game, Skipped);
 		}
 		if        (attribute == atrHP)      {

@@ -246,7 +246,7 @@ void Map_Buildingdata_Data_Packet::Read
 			throw game_data_error
 				(_("unknown/unhandled version %u"), packet_version);
 	} catch (const _wexception & e) {
-		throw game_data_error(_("buildingdata: %s"), e.what());
+		throw game_data_error(_("building data: %s"), e.what());
 	}
 }
 
@@ -384,7 +384,7 @@ void Map_Buildingdata_Data_Packet::read_constructionsite
 			throw game_data_error
 				(_("unknown/unhandled version %u"), packet_version);
 	} catch (const _wexception & e) {
-		throw game_data_error(_("constructionsite: %s"), e.what());
+		throw game_data_error(_("construction site: %s"), e.what());
 	}
 }
 
@@ -464,7 +464,7 @@ void Map_Buildingdata_Data_Packet::read_dismantlesite
 			throw game_data_error
 				(_("unknown/unhandled version %u"), packet_version);
 	} catch (const _wexception & e) {
-		throw game_data_error(_("dismantlesite: %s"), e.what());
+		throw game_data_error(_("dismantle site: %s"), e.what());
 	}
 }
 
@@ -857,7 +857,7 @@ void Map_Buildingdata_Data_Packet::read_militarysite
 			militarysite.m_capacity = militarysite.maxSoldierCapacity();
 		}
 	} catch (const _wexception & e) {
-		throw game_data_error(_("militarysite: %s"), e.what());
+		throw game_data_error(_("military site: %s"), e.what());
 	}
 }
 
@@ -1232,7 +1232,7 @@ void Map_Buildingdata_Data_Packet::read_trainingsite
 			trainingsite.m_capacity = trainingsite.maxSoldierCapacity();
 		}
 	} catch (const _wexception & e) {
-		throw game_data_error(_("trainingsite: %s"), e.what());
+		throw game_data_error(_("training site: %s"), e.what());
 	}
 }
 

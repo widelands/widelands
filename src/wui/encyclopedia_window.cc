@@ -63,7 +63,7 @@ EncyclopediaWindow::EncyclopediaWindow
 		(&parent, "encyclopedia",
 		 &registry,
 		 WINDOW_WIDTH, WINDOW_HEIGHT,
-		 _("Tribe ware encyclopedia")),
+		 _("Tribal Ware Encyclopedia")),
 	wares            (this, 5, 5, WINDOW_WIDTH - 10, WINDOW_HEIGHT - 250),
 	prodSites        (this, 5, WINDOW_HEIGHT - 150, WINDOW_WIDTH - WARE_GROUPS_TABLE_WIDTH - 10, 145),
 	condTable

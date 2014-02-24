@@ -205,7 +205,7 @@ void Map_Roaddata_Data_Packet::Read
 			throw game_data_error
 				(_("unknown/unhandled version %u"), packet_version);
 	} catch (const _wexception & e) {
-		throw game_data_error(_("roaddata: %s"), e.what());
+		throw game_data_error(_("road data: %s"), e.what());
 	}
 }
 
