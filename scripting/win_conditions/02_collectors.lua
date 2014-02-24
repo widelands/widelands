@@ -13,7 +13,7 @@ use("aux", "win_condition_texts")
 local wc_name = _ "Collectors"
 local wc_version = 2
 local wc_desc = _ (
-	"You get points for precious wares in your warehouses, the player with " ..
+	"You get points for precious wares in your warehouses. The player with " ..
 	"the highest number of wares at the end of 4 hours wins the game."
 )
 local wc_points = _"Points"

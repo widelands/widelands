@@ -13,7 +13,7 @@ use("aux", "win_condition_texts")
 local wc_name = _ "Territorial Lord"
 local wc_version = 2
 local wc_desc = _ (
-	"Each player or team tries to obtain more than half of the maps' " ..
+	"Each player or team tries to obtain more than half of the map's " ..
 	"area. The winner will be the player or the team that is able to keep " ..
 	"that area for at least 20 minutes."
 )
@@ -154,8 +154,8 @@ return {
 			end
 			local msg1 = (_"%s owns more than half of the map's area."):format(candidate)
 			msg1 = msg1 .. "\n"
-			msg1 = msg1 .. (ngettext("You still got %i minute to prevent a victory.",
-						 "You still got %i minutes to prevent a victory.",
+			msg1 = msg1 .. (ngettext("You've still got %i minute to prevent a victory.",
+						 "You've still got %i minutes to prevent a victory.",
 						 remaining_time / 60))
 					:format(remaining_time / 60)
 
