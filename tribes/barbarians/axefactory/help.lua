@@ -21,7 +21,7 @@ return {
 	--Dependencies
 		rt(h2(_"Dependencies")) ..
 		rt(h3(_"Incoming:")) ..
-		dependencies({"tribes/barbarians/smelting_works/menu.png","tribes/barbarians/iron/menu.png","tribes/barbarians/axefactory/menu.png"},p(_"%s from the Smelting Works":format(_"Iron"))) ..
+		dependencies({"tribes/barbarians/smelting_works/menu.png","tribes/barbarians/iron/menu.png","tribes/barbarians/axefactory/menu.png"},p(_"%s from a Smelting Works":format(_"Iron"))) ..
 		dependencies({"tribes/barbarians/coalmine/menu.png;tribes/barbarians/burners_house/menu.png","tribes/barbarians/coal/menu.png","tribes/barbarians/axefactory/menu.png"}) ..
 		rt(p(_"%s from the Coal mine or the Charcoal Burner's House":format(_"Coal"))) ..
 		rt(h3(_"Outgoing:")) ..
@@ -31,7 +31,7 @@ return {
 		rt(h2(_"Building")) ..
 		text_line(_"Space required:",_"Medium plot","pics/medium.png") ..
 		text_line(_"Upgraded from:", _"Metalwork Shop","tribes/barbarians/metalworks/menu.png") ..
-		rt(h3(_"Upgrade Cost:")) ..
+		rt(h3(_"Upgrade cost:")) ..
 		image_line("tribes/barbarians/blackwood/menu.png",1,p("1 " .. _"Blackwood")) ..
 		image_line("tribes/barbarians/thatchreed/menu.png",1,p("1 " .. _"Thatch Reed")) ..
 		image_line("tribes/barbarians/raw_stone/menu.png",2,p("2 " .. _"Raw Stone")) ..

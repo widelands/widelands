@@ -22,8 +22,8 @@ return {
 	--Dependencies
 		rt(h2(_"Dependencies")) ..
 		rt(h3(_"Incoming:")) ..
-		dependencies({"tribes/barbarians/smelting_works/menu.png","tribes/barbarians/iron/menu.png","tribes/barbarians/metalworks/menu.png"},p(_"%s from the Smelting Works":format(_"Iron"))) ..
-		dependencies({"tribes/barbarians/lumberjacks_hut/menu.png","tribes/barbarians/trunk/menu.png","tribes/barbarians/metalworks/menu.png"},p(_"%s from the Lumberjack's hut":format(_"Trunk"))) ..
+		dependencies({"tribes/barbarians/smelting_works/menu.png","tribes/barbarians/iron/menu.png","tribes/barbarians/metalworks/menu.png"},p(_"%s from a Smelting Works":format(_"Iron"))) ..
+		dependencies({"tribes/barbarians/lumberjacks_hut/menu.png","tribes/barbarians/trunk/menu.png","tribes/barbarians/metalworks/menu.png"},p(_"%s from a Lumberjack's hut":format(_"Trunk"))) ..
 		rt(h3(_"Outgoing:")) ..
 		dependencies({"tribes/barbarians/metalworks/menu.png","tribes/barbarians/bakingtray/menu.png","tribes/barbarians/headquarters/menu.png","tribes/barbarians/baker/menu.png" },p(_"Baker")) ..
 		dependencies({"tribes/barbarians/metalworks/menu.png","tribes/barbarians/felling_axe/menu.png","tribes/barbarians/headquarters/menu.png","tribes/barbarians/lumberjack/menu.png" },p(_"Lumberjack")) ..
