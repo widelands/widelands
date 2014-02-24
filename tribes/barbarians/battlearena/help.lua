@@ -31,7 +31,7 @@ return {
 		rt(h2(_"Building")) ..
 		text_line(_"Space required:",_"Big plot","pics/big.png") ..
 		text_line(_"Upgraded from:", "n/a") ..
-		rt(h3(_"Build Cost:")) ..
+		rt(h3(_"Build cost:")) ..
 		help_building_line("barbarians", "gold", ngettext("%i Gold", "%i Gold", 4), 4) ..
 		help_building_line("barbarians", "thatchreed", ngettext("%i Thatch Reed", "%i Thatch Reeds", 3), 3) ..
 		help_building_line("barbarians", "grout", ngettext("%i Grout", "%i Grout", 6), 6) ..

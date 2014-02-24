@@ -13,7 +13,7 @@ return {
 		rt("text-align=right",p("font-size=10 font-style=italic",_[[Quote from an anonymous miner.]])) ..
 	--General Section
 		rt(h2(_"General")) ..
-		rt(p(_"A %s exploits all of the resource down to the deepest level.<br>But even after having done so, it will still have a %s chance of finding some more %s.":format(_"Deeper Iron Ore Mine","10%",_"Iron Ore"))) ..
+		rt(p(_"A %1$s exploits all of the resource down to the deepest level. But even after having done so, it will still have a %2$s chance of finding some more %3$s.":bformat(_"Deeper Iron Ore Mine","10%",_"Iron Ore"))) ..
 		rt(h3(_"Purpose:")) ..
 		image_line("tribes/barbarians/ironore/menu.png", 1, p(_"Dig %s out of the ground in mountain terrain.":format(_"Iron Ore"))) ..
 		text_line(_"Working radius:", "2") ..

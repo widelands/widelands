@@ -13,7 +13,7 @@ return {
 		rt("text-align=right",p("font-size=10 font-style=italic", _[[Slogan of the Guild of Ferners]])) ..
 	--General Section
 		rt(h2(_"General")) ..
-		text_line(_"Purpose:", _"The Fernery cultivates reed that serves two different purposes for the Barbarian tribe.<br>It is the traditional material for roofing, and it is woven into the extremely durable cloth that they use for their ship's sails.","tribes/barbarians/thatchreed/menu.png") ..
+		text_line(_"Purpose:", _"The Fernery cultivates reed that serves two different purposes for the Barbarian tribe.<br>It is the traditional material for roofing, and it is woven into the extremely durable cloth that they use for their ships' sails.","tribes/barbarians/thatchreed/menu.png") ..
 		text_line(_"Working radius:", "1") ..
 		text_line(_"Conquer range:", "n/a") ..
 		text_line(_"Vision range:", "4") ..
@@ -29,7 +29,7 @@ return {
 		rt(h2(_"Building")) ..
 		text_line(_"Space required:",_"Medium plot","pics/medium.png") ..
 		text_line(_"Upgraded from:", "n/a") ..
-		rt(h3(_"Build Cost:")) ..
+		rt(h3(_"Build cost:")) ..
 		help_building_line("barbarians", "raw_stone", ngettext("%i Raw Stone", "%i Raw Stones", 2), 2) ..
 		help_building_line("barbarians", "trunk", ngettext("%i Trunk", "%i Trunks", 5), 5) ..
 		rt(h3(_"Dismantle yields:")) ..

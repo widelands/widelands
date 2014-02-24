@@ -14,7 +14,7 @@ return {
 		)) ..
 	--General Section
 		rt(h2(_"General")) ..
-		rt(p(_"A %s exploits only %s of the resource.<br>From there on, it will only have a 5%% chance of finding %s.":format(_"Deep Coal Mine","2/3",_"Coal"))) ..
+		rt(p(_"A %1$s exploits only %2$s of the resource. From there on out, it will only have a 5%% chance of finding %3$s.":bformat(_"Deep Coal Mine","2/3",_"Coal"))) ..
 		rt(h3(_"Purpose:")) ..
 		image_line("tribes/barbarians/coal/menu.png", 1, p(_"Dig %s out of the ground in mountain terrain.":format(_"Coal"))) ..
 		text_line(_"Working radius:", "2") ..
@@ -56,5 +56,5 @@ return {
 		rt("text-align=right", p(_"%s to %s (%s EP)":format(_"Miner",_"Chief Miner","19") .. "<br>" .. _"%s to %s (%s EP)":format(_"Chief Miner",_"Master Miner","28"))) ..
 	--Production Section
 		rt(h2(_"Production")) ..
-		text_line(_"Performance:", _"If the food supply is steady, this mine can produce %s in %s on average.":format(_"Coal","19.5s"))
+		text_line(_"Performance:", _"If the food supply is steady, this mine can produce %1$s in %2$s on average.":bformat(_"Coal","19.5s"))
 }

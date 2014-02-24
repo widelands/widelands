@@ -9,7 +9,7 @@ return {
 	--Lore Section
 		rt(h2(_"Lore")) ..
 		rt("image=tribes/barbarians/axefactory/axefactory_i_00.png", p(
-			_[["A new Warriors Axe brings forth the best in its wielder – or the worst in its maker."]])) ..
+			_[["A new Warrior's Axe brings forth the best in its wielder – or the worst in its maker."]])) ..
 		rt("text-align=right",p("font-size=10 font-style=italic", _[[An old Barbarian proverb<br> meaning that you need to take some risks sometimes.]])) ..
 	--General Section
 		rt(h2(_"General")) ..
@@ -31,7 +31,7 @@ return {
 		rt(h2(_"Building")) ..
 		text_line(_"Space required:",_"Medium plot","pics/medium.png") ..
 		text_line(_"Upgraded from:", _"Metalwork Shop","tribes/barbarians/metalworks/menu.png") ..
-		rt(h3(_"Upgrade Cost:")) ..
+		rt(h3(_"Upgrade cost:")) ..
 		help_building_line("barbarians", "blackwood", ngettext("%i Blackwood", "%i Blackwood", 1), 1) ..
 		help_building_line("barbarians", "thatchreed", ngettext("%i Thatch Reed", "%i Thatch Reeds", 1), 1) ..
 		help_building_line("barbarians", "grout", ngettext("%i Grout", "%i Grout", 1), 1) ..
@@ -60,6 +60,6 @@ return {
 		rt("text-align=right", p(_"%s to %s (%s EP)":format(_"Blacksmith",_"Master Blacksmith","24"))) ..
 	--Production Section
 		rt(h2(_"Production")) ..
-		text_line(_"Performance:", _"If all needed wares are delivered in time, this building can produce %s in about %s on average.":format(_"each item","57s")) ..
+		text_line(_"Performance:", _"If all needed wares are delivered in time, this building can produce %1$s in about %2$s on average.":bformat(_"each item","57s")) ..
 		rt(p(_"All three weapons take the same time for making, but the required raw materials vary."))
 }

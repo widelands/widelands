@@ -28,7 +28,7 @@ return {
 		rt(h2(_"Building")) ..
 		text_line(_"Space required:",_"Big plot","pics/big.png") ..
 		text_line(_"Upgraded from:", "n/a") ..
-		rt(h3(_"Build Cost:")) ..
+		rt(h3(_"Build cost:")) ..
 		help_building_line("barbarians", "blackwood", ngettext("%i Blackwood", "%i Blackwood", 1), 1) ..
 		help_building_line("barbarians", "raw_stone", ngettext("%i Raw Stone", "%i Raw Stones", 2), 2) ..
 		help_building_line("barbarians", "trunk", ngettext("%i Trunk", "%i Trunks", 2), 2) ..
@@ -44,5 +44,5 @@ return {
 		text_line(_"Experience levels:","n/a") ..
 	--Production Section
 		rt(h2(_"Production")) ..
-		text_line(_"Performance:", _"If all needed wares are delivered in time, this building can produce %s in %s on average.":format(_"Ox","30s"))
+		text_line(_"Performance:", _"If all needed wares are delivered in time, this building can produce %1$s in %2$s on average.":bformat(_"an Ox","30s"))
 }

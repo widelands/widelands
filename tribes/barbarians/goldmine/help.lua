@@ -13,7 +13,7 @@ return {
 		rt("text-align=right",p("font-size=10 font-style=italic", _[[Excerpt from "Our Treasures Underground",<br> a traditional Barbarian song.]])) ..
 	--General Section
 		rt(h2(_"General")) ..
-		rt(p(_"A %s exploits only %s of the resource. <br> From there on, it will only have a 5%% chance of finding %s.":format(_"Gold Mine","1/3",_"Gold Ore"))) ..
+		rt(p(_"A %1$s exploits only %2$s of the resource. From there on out, it will only have a 5%% chance of finding %3$s.":bformat(_"Gold Mine","1/3",_"Gold Ore"))) ..
 		rt(h3(_"Purpose:")) ..
 		image_line("tribes/barbarians/goldstone/menu.png", 1, p(_"Dig %s out of the ground in mountain terrain.":format(_"Gold Ore"))) ..
 		text_line(_"Working radius:", "2") ..
@@ -33,7 +33,7 @@ return {
 		rt(h2(_"Building")) ..
 		text_line(_"Space required:",_"Mine plot","pics/mine.png") ..
 		text_line(_"Upgraded from:", "n/a") ..
-		rt(h3(_"Build Cost:")) ..
+		rt(h3(_"Build cost:")) ..
 		help_building_line("barbarians", "raw_stone", ngettext("%i Raw Stone", "%i Raw Stones", 2), 2) ..
 		help_building_line("barbarians", "trunk", ngettext("%i Trunk", "%i Trunks", 4), 4) ..
 		rt(h3(_"Dismantle yields:")) ..

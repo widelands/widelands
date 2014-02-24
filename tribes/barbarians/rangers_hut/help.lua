@@ -10,8 +10,8 @@ return {
 		rt(h2(_"Lore")) ..
 		rt("image=tribes/barbarians/rangers_hut/b_ranger_i_00.png", p(
 			--"Wer zwei Halme dort wachsen lässt, wo sonst nur einer wächst, der ist größer als der größte Feldherr!" – Friedrich der Große
-			_[["He who can grow two trees where normally grows only one exceeds the most important general!"]])) ..
-		rt("text-align=right",p("font-size=10 font-style=italic", _[[%s in a conversation with a %s]]:format("Chat'Karuth",_"Ranger"))) ..
+			_[["He who can grow two trees where normally only one will grow exceeds the most important general!"]])) ..
+		rt("text-align=right",p("font-size=10 font-style=italic", _[[Chat'Karuth in a conversation with a Ranger]])) ..
 	--General Section
 		rt(h2(_"General")) ..
 		text_line(_"Purpose:", _"Plant trees in the surrounding area.") ..
@@ -27,7 +27,7 @@ return {
 		rt(h2(_"Building")) ..
 		text_line(_"Space required:",_"Small plot","pics/small.png") ..
 		text_line(_"Upgraded from:", "n/a") ..
-		rt(h3(_"Build Cost:")) ..
+		rt(h3(_"Build cost:")) ..
 		help_building_line("barbarians", "trunk", ngettext("%i Trunk", "%i Trunks", 4), 4) ..
 		rt(h3(_"Dismantle yields:")) ..
 		help_building_line("barbarians", "trunk", ngettext("%i Trunk", "%i Trunks", 2), 2) ..

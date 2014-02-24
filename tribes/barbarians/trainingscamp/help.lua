@@ -9,11 +9,11 @@ return {
 	--Lore Section
 		rt(h2(_"Lore")) ..
 		rt("image=tribes/barbarians/trainingscamp/trainingscamp_i_00.png", p(
-			_[["He who is strong shall not forgive nor forget, but revenge injustice suffered - in the past and for all future."]])) ..
+			_[["He who is strong shall neither forgive nor forget, but revenge injustice suffered – in the past and for all future."]])) ..
 		rt("text-align=right",p("font-size=10 font-style=italic", _[[Chief Chat'Karuth in a speech to his army.]])) ..
 	--General Section
 		rt(h2(_"General")) ..
-		text_line(_"Purpose:", _"Trains soldiers in Attack up to level 4, and in Hitpoints up to level 2.<br>Equips the soldiers with all necessary weapons and armour parts.") ..
+		text_line(_"Purpose:", _"Trains soldiers in Attack up to level 4, and in Healthpoints up to level 2.<br>Equips the soldiers with all necessary weapons and armour parts.") ..
 		rt("_<p font-weight=bold font-decoration=underline font-size=12>Note: </p>_<p font-size=12>Barbarian soldiers cannot be trained in \"Defense\" and will remain at the level with which they came.<br><br></p>") ..
 		text_line(_"Working radius:", "n/a") ..
 		text_line(_"Conquer range:", "n/a") ..
@@ -37,7 +37,7 @@ return {
 		rt(h2(_"Building")) ..
 		text_line(_"Space required:",_"Big plot","pics/big.png") ..
 		text_line(_"Upgraded from:", "n/a") ..
-		rt(h3(_"Build Cost:")) ..
+		rt(h3(_"Build cost:")) ..
 		help_building_line("barbarians", "gold", ngettext("%i Gold", "%i Gold", 4), 4) ..
 		help_building_line("barbarians", "thatchreed", ngettext("%i Thatch Reed", "%i Thatch Reeds", 3), 3) ..
 		help_building_line("barbarians", "grout", ngettext("%i Grout", "%i Grout", 6), 6) ..

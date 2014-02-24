@@ -33,7 +33,7 @@ return {
 		rt(h2(_"Building")) ..
 		text_line(_"Space required:",_"Medium plot","pics/medium.png") ..
 		text_line(_"Upgraded from:", "n/a") ..
-		rt(h3(_"Build Cost:")) ..
+		rt(h3(_"Build cost:")) ..
 		help_building_line("barbarians", "blackwood", ngettext("%i Blackwood", "%i Blackwood", 2), 2) ..
 		help_building_line("barbarians", "thatchreed", ngettext("%i Thatch Reed", "%i Thatch Reeds", 2), 2) ..
 		help_building_line("barbarians", "raw_stone", ngettext("%i Raw Stone", "%i Raw Stones", 2), 2) ..
@@ -48,9 +48,9 @@ return {
 		rt(h2(_"Workers")) ..
 		rt(h3(_"Crew required:")) ..
 		image_line("tribes/barbarians/baker/menu.png", 1, p(_"Baker")) ..
-		text_line(_"Worker uses:", _"Baking Tray","tribes/barbarians/bakingtray/menu.png") ..
+		text_line(_"Worker uses:", _"Bread Paddle","tribes/barbarians/bakingtray/menu.png") ..
 		text_line(_"Experience levels:","n/a") ..
 	--Production Section
 		rt(h2(_"Production")) ..
-		text_line(_"Performance:", _"If all needed wares are delivered in time, this building can produce %s in %s on average.":format(_"Pitta Bread","30s"))
+		text_line(_"Performance:", _"If all needed wares are delivered in time, this building can produce %1$s in %2$s on average.":bformat(_"a Pitta Bread","30s"))
 }

@@ -1,4 +1,4 @@
-help=_Cuts raw pieces of granite out of laying stones.
+help=_Cuts raw pieces of granite out of rocks.
 program=cut
 
 [buildcost]

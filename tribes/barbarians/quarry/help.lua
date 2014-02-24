@@ -14,7 +14,7 @@ return {
 	--General Section
 		rt(h2(_"General")) ..
 		rt(h2(_"Purpose:")) ..
-		image_line("tribes/barbarians/raw_stone/menu.png",1,p(_"Carve %s out of stones standing near the hut.":format(_"Raw Stone"))) ..
+		image_line("tribes/barbarians/raw_stone/menu.png",1,p(_"Carve %s out of stones lying near the hut.":format(_"Raw Stone"))) ..
 		text_line(_"Working radius:", "6") ..
 		text_line(_"Conquer range:", "n/a") ..
 		text_line(_"Vision range:", "4") ..
@@ -30,7 +30,7 @@ return {
 		rt(h2(_"Building")) ..
 		text_line(_"Space required:",_"Small plot","pics/small.png") ..
 		text_line(_"Upgraded from:", "n/a") ..
-		rt(h3(_"Build Cost:")) ..
+		rt(h3(_"Build cost:")) ..
 		help_building_line("barbarians", "trunk", ngettext("%i Trunk", "%i Trunks", 4), 4) ..
 		rt(h3(_"Dismantle yields:")) ..
 		help_building_line("barbarians", "trunk", ngettext("%i Trunk", "%i Trunks", 2), 2) ..

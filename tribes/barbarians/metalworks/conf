@@ -36,7 +36,7 @@ is_basic=true
 
 [programs]
 produce_felling_axe=_Produce felling axe
-produce_bakingtray=_Produce bakingtray
+produce_bakingtray=_Produce Bread Paddle
 produce_fire_tongs=_Produce fire tongs
 produce_fishing_rod=_Produce fishing rod
 produce_hammer=_Produce hammer

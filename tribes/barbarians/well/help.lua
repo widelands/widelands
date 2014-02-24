@@ -10,7 +10,7 @@ return {
 		rt(h2(_"Lore")) ..
 		rt("image=tribes/barbarians/well/well_i_00.png", p(
 			_[["Oh how sweet is the source of life,<br> that comes down from the sky <br> and lets the earth drink."]])) ..
-		rt("text-align=right",p("font-size=10 font-style=italic", _[[Song written by Sigurd the Bard<br> when the first rain fell after the Great Drought in the 21st year of Chat'Karuth' reign.]])) ..
+		rt("text-align=right",p("font-size=10 font-style=italic", _[[Song written by Sigurd the Bard<br>when the first rain fell after the Great Drought in the 21st year of Chat'Karuth's reign.]])) ..
 	--General Section
 		rt(h2(_"General")) ..
 		text_line(_"Purpose:", _"Draw Water out of the deep.","tribes/barbarians/water/menu.png") ..
@@ -31,7 +31,7 @@ return {
 		rt(h2(_"Building")) ..
 		text_line(_"Space required:",_"Small plot","pics/small.png") ..
 		text_line(_"Upgraded from:", "n/a") ..
-		rt(h3(_"Build Cost:")) ..
+		rt(h3(_"Build cost:")) ..
 		help_building_line("barbarians", "trunk", ngettext("%i Trunk", "%i Trunks", 4), 4) ..
 
 		rt(h3(_"Dismantle yields:")) ..

@@ -1,4 +1,4 @@
-help=_Gets fish out of the sea.
+help=_Catches fish in the sea.
 program=fish
 
 [buildcost]
