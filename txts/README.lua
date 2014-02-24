@@ -38,16 +38,16 @@ information, see the file 'COPYING'.]]
 [[Status]]
    ) .. p(_
 [[Widelands is nearly feature complete and is much fun to play alone and even
-more in multiplayer with others. Still there is always more work to be done in
+more in multiplayer with others. Still, there is always more work to be done in
 all areas. If you are interested in contributing - be it by making graphics,
 fixing bugs or adding new features, translating the game into your language or
 creating new maps - get in touch on our homepage.]])
    .. h2(_
 [[General game control]]
    ) .. p(_
-[[To close an open window, right click it. To minimize/maximize a window, click
-on the titlebar of that window either with the middle mousebutton or with left
-mousebutton while holding down CTRL.]]
+[[To close an open window, right-click on it. To minimize/maximize a window, click
+on the title bar of that window either with the middle mouse button or with the left
+mouse button while holding down CTRL.]]
    ) .. p(_
 [[If you hold CTRL while building a road, flags will be placed automatically.
 If you hold CTRL while removing a road, all flags up to the first junction are
@@ -58,28 +58,28 @@ while clicking on the action button.]]
    ) .. h2(_
 [[Keyboard shortcuts (in-game)]]
    ) .. p(
-_"PAGEUP: increases gamespeed" .. "<br>"
-.. _"PAGEDOWN: decreases gamespeed" .. "<br>"
+_"PAGEUP: increases games peed" .. "<br>"
+.. _"PAGEDOWN: decreases games peed" .. "<br>"
 .. _"PAUSE: pauses the game" .. "<br>"
-.. _"SPACE: toggles build-help" .. "<br>"
+.. _"SPACE: toggles if building spaces are shown" .. "<br>"
 .. _"M: toggles minimap" .. "<br>"
 .. _"N: toggles messages ('news')" .. "<br>"
 .. _"C: toggles census" .. "<br>"
 .. _"S: toggles statistics" .. "<br>"
 .. _"I: toggles stock inventory" .. "<br>"
 .. _"O: toggles objectives" .. "<br>"
-.. _"F: toggles fullscreen (if supported by OS)" .. "<br>"
+.. _"F: toggles fullscreen (if supported by the OS)" .. "<br>"
 .. _"Home: centers main mapview on starting location" .. "<br>"
 .. _"(CTRL+) 0-9: Remember and go to previously remembered locations" .. "<br>"
-.. _",: goes to previous location" .. "<br>"
-.. _".: goes to next location" .. "<br>"
+.. _",: goes to the previous location" .. "<br>"
+.. _".: goes to the next location" .. "<br>"
 .. _"F6: shows the debug console (only in debug-builds)" .. "<br>"
 .. _"CTRL+F10: quits the game immediately" .. "<br>"
 .. _"F11: takes a screenshot"
    ) .. p(_
 [[In the message window, the following additional shortcuts are available:]]
    ) .. p(
-_ "G: jumps to location corresponding to current message" .. "<br>"
+_ "G: jumps to the location corresponding to the current message" .. "<br>"
 .. _"DELETE: archives the current message"
    ) .. h2(_
 [[Online Help]]
