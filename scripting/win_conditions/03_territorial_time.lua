@@ -13,7 +13,7 @@ use("aux", "win_condition_texts")
 local wc_name = _ "Territorial Time"
 local wc_version = 1
 local wc_desc = _ (
-	"Each player or team tries to obtain more than half of the map's " ..
+	"Each player or team tries to obtain more than half of the map’s " ..
 	"area. The winner will be the player or the team that is able to keep " ..
 	"that area for at least 20 minutes, or the one with the most territory " ..
 	"after 4 hours, whichever comes first."
@@ -196,14 +196,14 @@ return {
 
 		function _send_state(points)
 			set_textdomain("win_conditions")
-			local msg1 = (_"%s owns more than half of the map's area."):format(currentcandidate)
+			local msg1 = (_"%s owns more than half of the map’s area."):format(currentcandidate)
 			msg1 = msg1 .. "\n"
-			msg1 = msg1 .. (ngettext("You've still got %i minute to prevent a victory.",
-						 "You've still got %i minutes to prevent a victory.",
+			msg1 = msg1 .. (ngettext("You’ve still got %i minute to prevent a victory.",
+						 "You’ve still got %i minutes to prevent a victory.",
 						 remaining_time / 60))
 					:format(remaining_time / 60)
 
-			local msg2 = _"You own more than half of the map's area."
+			local msg2 = _"You own more than half of the map’s area."
 			msg2 = msg2 .. "\n"
 			msg2 = msg2 .. (ngettext("Keep it for %i more minute to win the game.",
 						 "Keep it for %i more minutes to win the game.",

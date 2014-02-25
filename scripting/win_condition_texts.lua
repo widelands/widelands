@@ -15,7 +15,7 @@ won_game_over = {
 
 lost_game_over = {
   title = _ "You lost",
-  body = _"You've lost this game!"
+  body = _"You’ve lost this game!"
 }
 
 game_status = {
