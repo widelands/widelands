@@ -9,8 +9,8 @@ return {
 	--Lore Section
 		rt(h2(_"Lore")) ..
 		rt("image=tribes/barbarians/well/well_i_00.png", p(
-			_[["Oh how sweet is the source of life,<br> that comes down from the sky <br> and lets the earth drink."]])) ..
-		rt("text-align=right",p("font-size=10 font-style=italic", _[[Song written by Sigurd the Bard<br>when the first rain fell after the Great Drought in the 21st year of Chat'Karuth's reign.]])) ..
+			_[[‘Oh how sweet is the source of life,<br> that comes down from the sky <br> and lets the earth drink.’]])) ..
+		rt("text-align=right",p("font-size=10 font-style=italic", _[[Song written by Sigurd the Bard<br>when the first rain fell after the Great Drought in the 21st year of Chat’Karuth’s reign.]])) ..
 	--General Section
 		rt(h2(_"General")) ..
 		text_line(_"Purpose:", _"Draw Water out of the deep.","tribes/barbarians/water/menu.png") ..

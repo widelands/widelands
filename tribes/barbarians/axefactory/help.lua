@@ -9,11 +9,11 @@ return {
 	--Lore Section
 		rt(h2(_"Lore")) ..
 		rt("image=tribes/barbarians/axefactory/axefactory_i_00.png", p(
-			_[["A new Warrior's Axe brings forth the best in its wielder – or the worst in its maker."]])) ..
+			_[[‘A new Warrior’s Axe brings forth the best in its wielder – or the worst in its maker.’]])) ..
 		rt("text-align=right",p("font-size=10 font-style=italic", _[[An old Barbarian proverb<br> meaning that you need to take some risks sometimes.]])) ..
 	--General Section
 		rt(h2(_"General")) ..
-		text_line(_"Purpose:", _"The Barbarian Axefactory is the intermediate production site in a series of three buildings. It is an upgrade from the Metalwork Shop but doesn't require additional qualification for the worker.") ..
+		text_line(_"Purpose:", _"The Barbarian Axefactory is the intermediate production site in a series of three buildings. It is an upgrade from the Metal Workshop but doesn’t require additional qualification for the worker.") ..
 		rt("image=tribes/barbarians/axe/menu.png;tribes/barbarians/sharpaxe/menu.png;tribes/barbarians/broadaxe/menu.png image-align=right",p(_"It can make Axes, Sharp Axes and Broad Axes.")) ..
 		text_line(_"Working radius:", "n/a") ..
 		text_line(_"Conquer range:", "n/a") ..
@@ -23,14 +23,14 @@ return {
 		rt(h3(_"Incoming:")) ..
 		dependencies({"tribes/barbarians/smelting_works/menu.png","tribes/barbarians/iron/menu.png","tribes/barbarians/axefactory/menu.png"},p(_"%s from the Smelting Works":format(_"Iron"))) ..
 		dependencies({"tribes/barbarians/coalmine/menu.png;tribes/barbarians/burners_house/menu.png","tribes/barbarians/coal/menu.png","tribes/barbarians/axefactory/menu.png"}) ..
-		rt(p(_"%s from the Coal mine or the Charcoal Burner's House":format(_"Coal"))) ..
+		rt(p(_"%s from the Coal mine or the Charcoal Burner’s House":format(_"Coal"))) ..
 		rt(h3(_"Outgoing:")) ..
 		dependencies({"tribes/barbarians/axefactory/menu.png","tribes/barbarians/axe/menu.png","tribes/barbarians/headquarters/menu.png","tribes/barbarians/soldier/menu.png"},p(_"Soldier")) ..
-		dependencies({"tribes/barbarians/axefactory/menu.png","tribes/barbarians/sharpaxe/menu.png;tribes/barbarians/broadaxe/menu.png","tribes/barbarians/trainingscamp/menu.png"},p(_"Trainingscamp")) ..
+		dependencies({"tribes/barbarians/axefactory/menu.png","tribes/barbarians/sharpaxe/menu.png;tribes/barbarians/broadaxe/menu.png","tribes/barbarians/trainingscamp/menu.png"},p(_"Training Camp")) ..
 	--Building Section
 		rt(h2(_"Building")) ..
 		text_line(_"Space required:",_"Medium plot","pics/medium.png") ..
-		text_line(_"Upgraded from:", _"Metalwork Shop","tribes/barbarians/metalworks/menu.png") ..
+		text_line(_"Upgraded from:", _"Metal Workshop","tribes/barbarians/metalworks/menu.png") ..
 		rt(h3(_"Upgrade cost:")) ..
 		help_building_line("barbarians", "blackwood", ngettext("%i Blackwood", "%i Blackwood", 1), 1) ..
 		help_building_line("barbarians", "thatchreed", ngettext("%i Thatch Reed", "%i Thatch Reeds", 1), 1) ..

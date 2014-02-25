@@ -9,7 +9,7 @@ return {
 	--Lore Section
 		rt(h2(_"Lore")) ..
 		rt("image=tribes/barbarians/micro-brewery/micro-brewery_i_00.png", p(
-			_[["Let the first one drive away the hunger, the second one put you at ease; when you have swallowed up your third one, it's time for the next shift!"]])) ..
+			_[[‘Let the first one drive away the hunger, the second one put you at ease; when you have swallowed up your third one, it’s time for the next shift!’]])) ..
 		rt("text-align=right",p("font-size=10 font-style=italic", _[[Widespread toast among Miners]])) ..
 	--General Section
 		rt(h2(_"General")) ..

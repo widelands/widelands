@@ -9,12 +9,12 @@ return {
 	--Lore Section
 		rt(h2(_"Lore")) ..
 		rt("image=tribes/barbarians/battlearena/battlearena_i_00.png", p(
-			_[["No better friend you have in battle than the enemy's blow that misses."]])) ..
+			_[[‘No better friend you have in battle than the enemy’s blow that misses.’]])) ..
 		rt("text-align=right",p("font-size=10 font-style=italic", _[[Said to originate from Neidhardt, the famous trainer.]])) ..
 	--General Section
 		rt(h2(_"General")) ..
 		text_line(_"Purpose:", _"Trains soldiers in Evade up to level 2.") ..
-		rt(p(_[["Evade" increases the soldier's chance not to be hit by the enemy and so to remain totally unaffected.]])) ..
+		rt(p(_[[‘Evade’ increases the soldier’s chance not to be hit by the enemy and so to remain totally unaffected.]])) ..
 		rt("_<p font-weight=bold font-decoration=underline font-size=12>Note: </p>_<p font-size=12>Barbarian soldiers cannot be trained in \"Defense\" and will remain at the level with which they came.<br><br></p>") ..
 		text_line(_"Working radius:", "n/a") ..
 		text_line(_"Conquer range:", "n/a") ..

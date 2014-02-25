@@ -9,7 +9,7 @@ return {
 	--Lore Section
 		rt(h2(_"Lore")) ..
 		rt("image=tribes/barbarians/warmill/warmill_i_00.png", p(
-			_[["A new Warrior's Axe brings forth the best in its wielder – or the worst in its maker."]])) ..
+			_[[‘A new Warrior’s Axe brings forth the best in its wielder – or the worst in its maker.’]])) ..
 		rt("text-align=right",p("font-size=10 font-style=italic", _[[An old Barbarian proverb<br> meaning that you need to take some risks sometimes.]])) ..
 	--General Section
 		rt(h2(_"General")) ..
@@ -24,11 +24,11 @@ return {
 		dependencies({"tribes/barbarians/smelting_works/menu.png","tribes/barbarians/iron/menu.png","tribes/barbarians/warmill/menu.png"},p(_"%s from the Smelting Works":format(_"Iron"))) ..
 		dependencies({"tribes/barbarians/smelting_works/menu.png","tribes/barbarians/gold/menu.png","tribes/barbarians/warmill/menu.png"},p(_"%s from the Smelting Works":format(_"Gold"))) ..
 		dependencies({"tribes/barbarians/coalmine/menu.png;tribes/barbarians/burners_house/menu.png","tribes/barbarians/coal/menu.png","tribes/barbarians/warmill/menu.png"}) ..
-		rt(p(_"Coal from the Coal mine or the Charcoal Burner's House")) ..
+		rt(p(_"Coal from the Coal mine or the Charcoal Burner’s House")) ..
 		rt(h3(_"Outgoing:")) ..
 		dependencies({"tribes/barbarians/warmill/menu.png","tribes/barbarians/axe/menu.png","tribes/barbarians/headquarters/menu.png","tribes/barbarians/soldier/menu.png"},p(_"Soldier")) ..
 		dependencies({"tribes/barbarians/warmill/menu.png","tribes/barbarians/sharpaxe/menu.png;tribes/barbarians/broadaxe/menu.png;tribes/barbarians/bronzeaxe/menu.png;tribes/barbarians/battleaxe/menu.png;tribes/barbarians/warriorsaxe/menu.png","tribes/barbarians/trainingscamp/menu.png"}) ..
-		rt(p(_"Trainingscamp")) ..
+		rt(p(_"Training Camp")) ..
 	--Building Section
 		rt(h2(_"Building")) ..
 		text_line(_"Space required:",_"Medium plot","pics/medium.png") ..

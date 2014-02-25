@@ -9,7 +9,7 @@ return {
 	--Lore Section
 		rt(h2(_"Lore")) ..
 		rt("image=tribes/barbarians/gamekeepers_hut/gamekeeper_i_00.png", p(
-			_[["He loves the animals and to breed them<br>as we love to cook and eat them."]])) ..
+			_[[‘He loves the animals and to breed them<br>as we love to cook and eat them.’]])) ..
 		rt("text-align=right",p("font-size=10 font-style=italic", _[[Barbarian nursery rhyme]])) ..
 	--General Section
 		rt(h2(_"General")) ..

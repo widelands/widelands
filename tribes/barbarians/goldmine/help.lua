@@ -9,8 +9,8 @@ return {
 	--Lore Section
 		rt(h2(_"Lore")) ..
 		rt("image=tribes/barbarians/goldmine/goldmine_i_00.png", p(
-			_[["Soft and supple.<br> And yet untouched by time and weather.<br> Rays of sun, wrought into eternity ..."]])) ..
-		rt("text-align=right",p("font-size=10 font-style=italic", _[[Excerpt from "Our Treasures Underground",<br> a traditional Barbarian song.]])) ..
+			_[[‘Soft and supple.<br> And yet untouched by time and weather.<br> Rays of sun, wrought into eternity ...’]])) ..
+		rt("text-align=right",p("font-size=10 font-style=italic", _[[Excerpt from ‘Our Treasures Underground’,<br> a traditional Barbarian song.]])) ..
 	--General Section
 		rt(h2(_"General")) ..
 		rt(p(_"A %1$s exploits only %2$s of the resource. From there on out, it will only have a 5%% chance of finding %3$s.":bformat(_"Gold Mine","1/3",_"Gold Ore"))) ..

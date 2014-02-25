@@ -10,8 +10,8 @@ return {
 		rt(h2(_"Lore")) ..
 		rt("image=tribes/barbarians/rangers_hut/b_ranger_i_00.png", p(
 			--"Wer zwei Halme dort wachsen lässt, wo sonst nur einer wächst, der ist größer als der größte Feldherr!" – Friedrich der Große
-			_[["He who can grow two trees where normally only one will grow exceeds the most important general!"]])) ..
-		rt("text-align=right",p("font-size=10 font-style=italic", _[[Chat'Karuth in a conversation with a Ranger]])) ..
+			_[[‘He who can grow two trees where normally only one will grow exceeds the most important general!’]])) ..
+		rt("text-align=right",p("font-size=10 font-style=italic", _[[Chat’Karuth in a conversation with a Ranger]])) ..
 	--General Section
 		rt(h2(_"General")) ..
 		text_line(_"Purpose:", _"Plant trees in the surrounding area.") ..
@@ -20,7 +20,7 @@ return {
 		text_line(_"Vision range:", "4") ..
 	--Dependencies
 		rt(h2(_"Dependencies")) ..
-		rt(p(_"The Ranger's Hut needs free space in the immediate vicinity to plant the trees.")) ..
+		rt(p(_"The Ranger’s Hut needs free space in the immediate vicinity to plant the trees.")) ..
 		text_line(_"Incoming:", "n/a") ..
 		text_line(_"Outgoing:","n/a") ..
 	--Building Section

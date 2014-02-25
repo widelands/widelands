@@ -9,8 +9,8 @@ return {
 	--Lore Section
 		rt(h2(_"Lore")) ..
 		rt("image=tribes/barbarians/granitemine/granitemine_i_00.png", p(
-			_[["I can handle tons of granite, man, but no more of your vain prattle."]])) ..
-		rt("text-align=right",p("font-size=10 font-style=italic", _[[This phrase was the reply Rimbert the miner – later known as Rimbert the loner – gave, when he was asked to remain seated on an emergency meeting at Stonford in the year of the great flood. <br> The same man had all the 244 granite blocks ready only a week later, and they still fortify the city's levee.]])) ..
+			_[[‘I can handle tons of granite, man, but no more of your vain prattle.’]])) ..
+		rt("text-align=right",p("font-size=10 font-style=italic", _[[This phrase was the reply Rimbert the miner – later known as Rimbert the loner – gave, when he was asked to remain seated on an emergency meeting at Stonford in the year of the great flood. <br> The same man had all the 244 granite blocks ready only a week later, and they still fortify the city’s levee.]])) ..
 	--General Section
 		rt(h2(_"General")) ..
 		rt(p(_"A %1$s exploits all of the resource down to the deepest level. But even after having done so, it will still have a %2$s chance of finding some more %3$s.":bformat(_"Granite Mine","5%",_"Raw Stone") .. _" It cannot be upgraded.")) ..

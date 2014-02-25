@@ -28,7 +28,7 @@ return {
 		dependencies({"tribes/barbarians/pittabread/menu.png","tribes/barbarians/inn/menu.png"},p(_"Inn")) ..
 		dependencies({"tribes/barbarians/pittabread/menu.png","tribes/barbarians/big_inn/menu.png"},p(_"Big Inn")) ..
 		dependencies({"tribes/barbarians/pittabread/menu.png","tribes/barbarians/battlearena/menu.png"},p(_"Battle Arena")) ..
-		dependencies({"tribes/barbarians/pittabread/menu.png","tribes/barbarians/trainingscamp/menu.png"},p(_"Trainingscamp")) ..
+		dependencies({"tribes/barbarians/pittabread/menu.png","tribes/barbarians/trainingscamp/menu.png"},p(_"Training Camp")) ..
 	--Building Section
 		rt(h2(_"Building")) ..
 		text_line(_"Space required:",_"Medium plot","pics/medium.png") ..
