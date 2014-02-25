@@ -21,7 +21,7 @@ obj_build_small_food_economy = {
    title=_"Build up a small food economy",
    number = 5,
    body = objective_text(_"Build up a small food economy", 
-_[[* Build up a basic food economy - a fisher's hut, a hunter's hut, a well, a farm and a bakery, to provide your people with food.]]),
+_[[* Build up a basic food economy – a fisher's hut, a hunter's hut, a well, a farm and a bakery, to provide your people with food.]]),
 }
 
 obj_build_cattlefarm = {
@@ -228,7 +228,7 @@ order_msg_3_explore_further = {
    posy=1,
    title=_"Further explorations",
    body= boldreth(
-_[[The first fortification Thron ordered has just been completed. At the moment he seeks to bring trust and belief to those who live inside the walls of our new habitat, that we named 'Ondun', which means 'those who wait' in the old tongue. But Thron is not yet satisfied - and I fully understand his fears: The forests are deep and the frontier to Al’thunran is near. I am sure that there are a thousand greater dangers out there than the unknown tracks.<br>To overlook more of the area around our hall we should explore further and set up more guards and scouts to observe the frontier and keep an eye on the raging wars on our doorsteps. THEN we will be prepared once trouble seeks to capture our woods.]])
+_[[The first fortification Thron ordered has just been completed. At the moment he seeks to bring trust and belief to those who live inside the walls of our new habitat, that we named 'Ondun', which means 'those who wait' in the old tongue. But Thron is not yet satisfied – and I fully understand his fears: The forests are deep and the frontier to Al’thunran is near. I am sure that there are a thousand greater dangers out there than the unknown tracks.<br>To overlook more of the area around our hall we should explore further and set up more guards and scouts to observe the frontier and keep an eye on the raging wars on our doorsteps. THEN we will be prepared once trouble seeks to capture our woods.]])
 .. new_objectives(obj_explore_further),
 }
 
@@ -244,14 +244,14 @@ story_note_2 = {
    posy=1,
    title=_"Mining economy completed",
    body= thron(
-_[[I just got informed, that our mining economy started its work. This news brought a smile to my face - even if the hardest part is still waiting to be done, now our smiths will give their best to further ease our lives.]]),
+_[[I just got informed, that our mining economy started its work. This news brought a smile to my face – even if the hardest part is still waiting to be done, now our smiths will give their best to further ease our lives.]]),
 }
 
 order_msg_5_build_a_fortress = {
    posy=1,
    title=_"Fortress needed",
    body= thron(
-_[[Boldreth and I just explored the area around the three mountains. One major strategic problem of that area seems to be, that there are two bigger passages - one north and one south to the middle mountain. Those passages are quite hard to control and so it seems to me, like we have only one chance to secure the mountains from enemy hands: We must build a fortress to the east of the mountains!]])
+_[[Boldreth and I just explored the area around the three mountains. One major strategic problem of that area seems to be, that there are two bigger passages – one north and one south to the middle mountain. Those passages are quite hard to control and so it seems to me, like we have only one chance to secure the mountains from enemy hands: We must build a fortress to the east of the mountains!]])
 .. new_objectives(obj_build_a_fortress),
 }
 
@@ -268,7 +268,7 @@ order_msg_6_build_enhanced_economy_and_training = {
    body= boldreth(
 _[[Our mining economy seems to work fine, that is already good news! Anyway there are still a lot of men and women waiting in our hall to get a task, so they can help our soldiers to prepare for the future fights.]] ..
 "<br>" ..
-_[[Our geologists found a lot more deposits of iron ore, coal and even gold. We should enhance our current mines as soon as our miners are more experienced. We should build up some more mines, a bigger food infrastructure to always supply our men with sufficient food and a further processing economy. But that's still not everything - most of our soldiers are quite young and neither have a good weapon nor are they well trained. We should build up trainingssites to prepare them for their future tasks.]])
+_[[Our geologists found a lot more deposits of iron ore, coal and even gold. We should enhance our current mines as soon as our miners are more experienced. We should build up some more mines, a bigger food infrastructure to always supply our men with sufficient food and a further processing economy. But that's still not everything – most of our soldiers are quite young and neither have a good weapon nor are they well trained. We should build up trainingssites to prepare them for their future tasks.]])
 .. new_objectives(obj_build_training_infrastructure),
 }
 
@@ -276,7 +276,7 @@ story_msg_7 = {
    posy=1,
    title=_"Another cold day",
    body= thron(_"Thron looks worried.",
-_[[My brothers and their soldiers are dead and left fire and destruction behind. In none of all the ruins could I find any man or woman of the normal folk and so I just may hope that they fled from this cruel battleground and started a better life somewhere else. Nothing is left from that beauty I remember, only ruins remain from the old capital. I am sorrowful but also relieved. I never hoped to ever see Al'thunran's old beauty again - it was only a few months ago that I wondered whether I would ever be able to set my feet in Al'thunran again. Now the old town is back in my hands and I will not hesitate to rebuild it with all the strength my people have. I can't wait to see it again in it's old beauty.]])
+_[[My brothers and their soldiers are dead and left fire and destruction behind. In none of all the ruins could I find any man or woman of the normal folk and so I just may hope that they fled from this cruel battleground and started a better life somewhere else. Nothing is left from that beauty I remember, only ruins remain from the old capital. I am sorrowful but also relieved. I never hoped to ever see Al'thunran's old beauty again – it was only a few months ago that I wondered whether I would ever be able to set my feet in Al'thunran again. Now the old town is back in my hands and I will not hesitate to rebuild it with all the strength my people have. I can't wait to see it again in it's old beauty.]])
   .. rt("<p font-size=10> <br></p>" ..
       h1(_"Victory") .. p(_
 [[You have completed the last mission of the barbarian tutorial campaign. You may continue playing if you wish, otherwise move on to the next campaign.]]

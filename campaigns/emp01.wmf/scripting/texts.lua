@@ -71,7 +71,7 @@ _[[* Build a quarry in the south to cut some stones and marble out of the rocks.
 diary_page_1 = {
    title =_ "A dark night",
    body=lutius(_"Diary of Lutius",
-   _[[What has become of our Empire? I really ask this question - why did my king forbid me from fighting against that monsterous barbarian tribe, who first acted as a peaceful friend and then attacked my army in the darkest night?<br> With an army of 150 men, I was assigned to patrol on our northern frontier, which lies near the Galdin Mountains in a great, beautiful and ancient forest. Soon, we met a barbarian tribe, which at first was friendly. A few of my men even traded with them and their kids came to us, to admire our clean and tidy uniforms and weapons.<br> But in our fifth night in that region, they attacked us with no reason. I lost dozens of good men, and found myself imprisoned and brought to their chieftain. He spat at me, mocked me and told me to leave this land forever. He did not want new land and did not want our land, but he told me that THIS forest was their land - and would stay theirs until the ghosts take the last man of his folk!<br> Three weeks later, I came back to Fremil to speak with our king. He was furious at the Barbarians, yet disallowed an attack of these tribes. He believed that our army was too weak to survive in a war against the barbarians.<br> Still, I saw no way that I could erase my shame - without fighting against the Barbarians. So I left Fremil by boat to find myself a new world, and a new life, somewhere in the south. Now I am sailing on the perl-gulf with my family, some of my friends and a few of my best warriors.]]),
+   _[[What has become of our Empire? I really ask this question – why did my king forbid me from fighting against that monsterous barbarian tribe, who first acted as a peaceful friend and then attacked my army in the darkest night?<br> With an army of 150 men, I was assigned to patrol on our northern frontier, which lies near the Galdin Mountains in a great, beautiful and ancient forest. Soon, we met a barbarian tribe, which at first was friendly. A few of my men even traded with them and their kids came to us, to admire our clean and tidy uniforms and weapons.<br> But in our fifth night in that region, they attacked us with no reason. I lost dozens of good men, and found myself imprisoned and brought to their chieftain. He spat at me, mocked me and told me to leave this land forever. He did not want new land and did not want our land, but he told me that THIS forest was their land – and would stay theirs until the ghosts take the last man of his folk!<br> Three weeks later, I came back to Fremil to speak with our king. He was furious at the Barbarians, yet disallowed an attack of these tribes. He believed that our army was too weak to survive in a war against the barbarians.<br> Still, I saw no way that I could erase my shame – without fighting against the Barbarians. So I left Fremil by boat to find myself a new world, and a new life, somewhere in the south. Now I am sailing on the perl-gulf with my family, some of my friends and a few of my best warriors.]]),
    w=500,
    posy=1,
 }
@@ -95,7 +95,7 @@ diary_page_3 = {
 saledus_1 = {
    title=_"A foreboding",
    body= saledus(_"Saledus looks around nervously...",
-   _[[Sire, I fear we are not safe in this foreign land. Who knows what terrible creatures live beyond this forest, in that mighty desert? What if these creatures enter the woods and await the time to attack us?<br> Well, perhaps my fear is misguided, but it can't be wrong to keep watch in the forests - so that we can be sure to see any potential enemies before they can see us.<br> We really should build a barracks in the eastern portion of the forest. Then one of us can keep watch in the darkness and keep us safe from these creatures.]])
+   _[[Sire, I fear we are not safe in this foreign land. Who knows what terrible creatures live beyond this forest, in that mighty desert? What if these creatures enter the woods and await the time to attack us?<br> Well, perhaps my fear is misguided, but it can't be wrong to keep watch in the forests – so that we can be sure to see any potential enemies before they can see us.<br> We really should build a barracks in the eastern portion of the forest. Then one of us can keep watch in the darkness and keep us safe from these creatures.]])
 .. new_objectives(obj_build_barracks),
    w=400,
 }
@@ -110,7 +110,7 @@ saledus_2 = {
 amalea_1 = {
    title=_"Young Amalea",
    body= amalea(_"Amalea smiles...",
-   _[[Hey Lutius, I just met Saledus outside.<br> He told me about the barracks. Well, I am not one of those girls who think we need more barracks - instead, we might concentrate on other things now.<br> It is absolutely clear that we need wood to repair our ship. So, I walked through the forest yesterday and found a nice place for a lumberjack's house, south of our provisional headquarters.]])
+   _[[Hey Lutius, I just met Saledus outside.<br> He told me about the barracks. Well, I am not one of those girls who think we need more barracks – instead, we might concentrate on other things now.<br> It is absolutely clear that we need wood to repair our ship. So, I walked through the forest yesterday and found a nice place for a lumberjack's house, south of our provisional headquarters.]])
 .. new_objectives(obj_build_lumberjack),
    w=400,
 }
@@ -118,7 +118,7 @@ amalea_1 = {
 amalea_2 = {
    title=_"Young Amalea",
    body= amalea(_"Amalea recommends...",
-   _[[Hey Lutius, I got the message that our first lumberjack started his work today. Perhaps it would be a good idea to wait until he cleans enough space for building up two further lumberjack's houses, so that we can harvest the trunks faster.<br> But unfortunately the trunks are useless for repairing our ship - we need refined lumber, like every ship and every bigger building needs, too. So we should build up a sawmill - as soon as we have enough space for this.]])
+   _[[Hey Lutius, I got the message that our first lumberjack started his work today. Perhaps it would be a good idea to wait until he cleans enough space for building up two further lumberjack's houses, so that we can harvest the trunks faster.<br> But unfortunately the trunks are useless for repairing our ship – we need refined lumber, like every ship and every bigger building needs, too. So we should build up a sawmill – as soon as we have enough space for this.]])
 .. new_objectives(obj_build_sawmill_and_lumberjacks),
    w=400,
 }

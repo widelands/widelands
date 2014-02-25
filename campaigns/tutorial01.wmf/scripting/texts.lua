@@ -94,12 +94,12 @@ lumberjack_message_02 = {
    body = rt(p(_
 [[First, I'll left-click on the symbol where I want the lumberjack's hut to be
 built. A window will appear where I can choose between buildings. Because I'll
-click a yellow house symbol - which means that its field can house medium and small
-buildings - I am presented with all the medium buildings that I can build. The
+click a yellow house symbol – which means that its field can house medium and small
+buildings – I am presented with all the medium buildings that I can build. The
 lumberjack's hut is a small building so I will go on to select the small buildings
 tab. Then I'll choose the lumberjack's hut.
-Click the "OK" button to watch me. I'll go really slow: I will click - then select
-the tab - and finally I'll choose the building.]]
+Click the "OK" button to watch me. I'll go really slow: I will click – then select
+the tab – and finally I'll choose the building.]]
     )
    )
 }
@@ -577,9 +577,9 @@ warfare_and_training_01 = {
    body = rt(p(_
 [[There we go. Take a look at the soldiers that are on their way into our
 trainings camp. They look different than normal workers: they have a health bar
-over their head that displays their remaining hitpoints and they have four
+over their head that displays their remaining health and they have four
 symbols which symbolize the individual soldier's current levels in the four
-different categories hitpoints, attack, defense and evade.]]
+different categories health, attack, defense and evade.]]
       ) .. p(_
 [[A soldier is created as any normal worker: a carrier grabs a tool in a
 warehouse as soon as a request for a certain profession is not fulfilled. The
@@ -588,22 +588,22 @@ level 0. To make the soldier better in any of the four categories, training is
 needed. Training happens in training sites like the trainings camp or the
 battle arena: soldiers go there (as our little fellows are currently doing),
 consume some wares and advance a level in one category. If a barbarian soldier
-is fully trained, he has level 3 hitpoints, level 5 attack, level 0 defense and
+is fully trained, he has level 3 health, level 5 attack, level 0 defense and
 level 2 evade. This is one fearsome warrior then! The individual statistics
 have the following meaning:]]
-      ) .. h2(_"Hitpoints:") .. p(_
-[[The total life of a soldier. A barbarian soldier starts with ~130 hitpoints,
-with each hitpoint level he gains 28 hitpoints.]]
+      ) .. h2(_"Health:") .. p(_
+[[The total life of a soldier. A barbarian soldier starts with ~130 health,
+with each health level he gains 28 health.]]
       ) .. h2(_"Attack:") .. p(_
 [[The amount of damage a soldier inflicts upon a successful attack on the
-enemy. A barbarian soldier with attack level 0 inflicts ~14 hitpoints damage
+enemy. A barbarian soldier with attack level 0 inflicts ~14 health damage
 when he succeeds to hit an enemy. For each attack level, he gains 7 damage.]]
       ) .. h2(_"Defense:") .. p(_
 [[Defense is the value that is subtracted from the attack value. The barbarians
 can not train in this skill and therefore have always defense level 0 which
-means that they always get 3 hitpoints subtracted from the damage inflicted. If
-an attacker with an attack value of 15 hitpoints hits a barbarian soldier, the
-barbarian would lose 15 - 3 = 12 hitpoints. The 3 hitpoints that are subtracted
+means that they always get 3 health subtracted from the damage inflicted. If
+an attacker with an attack value of 15 health hits a barbarian soldier, the
+barbarian would lose 15 - 3 = 12 health. The 3 health that are subtracted
 are because of the defense ability.]]
       ) .. h2(_"Evade:") .. p(_
 [[Evade is the chance that the soldier is able to dodge an attack. It is 25% for

@@ -96,7 +96,7 @@ obj_make_heavy_industry_and_mining = {
    number = 5,
    body = objective_text(_"Build industry and mines", _
 [[Iron ore, gold ore and coal are mined in the respective mines. The crystal mine
-is digging for crystal, quartz and diamond - all of them are rare materials and
+is digging for crystal, quartz and diamond – all of them are rare materials and
 very seldom found. While it searches for them, it produces a lot of stone.<br>
 The ores have to be smelted in smelting works before they can be used. The
 refined materials are then used in the weapon smithy, the armor smithy and the
@@ -114,7 +114,7 @@ obj_make_training_buildings = {
    number = 2,
    body = objective_text(_"Build training buildings to improve your soldiers", _
 [[As all other tribes, the Atlanteans are also able to train soldiers: the
-dungeon trains attack - the major attribute of the Atlanteans - and the
+dungeon trains attack – the major attribute of the Atlanteans – and the
 labyrinth trains evasion, health points and defense. The items produced by the
 industry are used to train better soldiers in the two training buildings.<br><br>
 - Build a dungeon and a labyrinth.<br>]])
@@ -155,9 +155,9 @@ initial_messages = {
       h1(_"Favored by the god") ..
       p(_
 [[On the hidden and lost island of Atlantis, a proud tribe settled since the
-world was very young. Ruled by the bloodline of King Ajanthul - the first human
-to be empowered by the sea god Lutas to breathe above the sea level - and the
-wise clerics, who provided the link to Lutas - they prospered and became
+world was very young. Ruled by the bloodline of King Ajanthul – the first human
+to be empowered by the sea god Lutas to breathe above the sea level – and the
+wise clerics, who provided the link to Lutas – they prospered and became
 civilized.]]
       ) .. p(_
 [[This story happens during the regency of King Askandor, the 43rd successor of
@@ -229,7 +229,7 @@ a sign from the fire god and we landed on its shore.]]
    .. "<br><br>" .. _
 [[We spent the last week building two watchtowers on the mountains close to
 our landing area; and, of course, a hall for us all. We have very talented
-constructors in our group - still, the buildings do not match the art we
+constructors in our group – still, the buildings do not match the art we
 had on Atlantis. I hope they will withstand the next rain. At least, the towers
 will warn us if a ship from Atlantis follows us and if the island is inhabited,
 we will see attackers a long time before they arrive.]]
@@ -303,7 +303,7 @@ thoughts on this.]]
    title = _ "Colionder is in thought",
    body = colionder(_
 [[Ahh, but I think this is impossible to change. The preparing and eating of
-food is something deeply ingrained in us Atlanteans - it is just a ceremony
+food is something deeply ingrained in us Atlanteans – it is just a ceremony
 that we need for our well being. So I guess we cannot take this away from
 the individuals completely. But we might find a compromise in between: For me,
 making bread is a troublesome task: grinding the blackroot and corn to flour
@@ -473,7 +473,7 @@ about this finding. The building is not of any kind I've ever seen. It is
 certainly not designed by any Atlantean architect I've ever heard about. The
 building is crude, the assemblage is sloppy. But the materials are very
 enduring: the wood used for it seemed to have been burned in a strange way
-before it was used as building material - it is hard as stone.<br><br>
+before it was used as building material – it is hard as stone.<br><br>
 The implications frighten me. Are there others on this island? Where are they
 then? They work with fire, are they praying to Satul too? Are they friends or
 foe? And why is the building burned down? Has this island seen war? Is a
@@ -582,7 +582,7 @@ scenario_won = {
       title = _ "Jundlina is relieved",
       body = jundlina(_"Jundlina", _
 [[Praise Satul! Ostur, the young ship builder did it. We have three ships -
-never have I seen sturdier ones - with enough room to carry all of us and some
+never have I seen sturdier ones – with enough room to carry all of us and some
 wares too. And this rescue came just in time: Lutas is about to swallow the rest
 of this island, the water rises faster by the hour. But we can make our escape
 now and start over in some country farther away... I expect a long journey, but

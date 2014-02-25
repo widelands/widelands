@@ -68,7 +68,7 @@ obj_build_Food_infrastructure = {
    title =_"Provide your miners with food",
    number = 1,
    body = objective_text(_"Provide your miners with food", 
-_[[* To produce some sustaining food for our miners, we could build up a tavern. To supply them with some good and strong drinks, we could build up a brewery and a winery.<br>Of course this means we will need more resources for preparing this food - like fish, meat or bread.<br>To provide these foodstuffs, you would have to build a fisher's house, a farm, a mill and a bakery.<br>Maybe you will also need a hunter's house, a piggery, a vineyard and some wells.<br>It's up to you what you want to build.<br>But remember - coal and iron ore mines need beer, marble and gold mines need wine and all mines need at least rations, which are produced out of bread OR meat OR fish.]]),
+_[[* To produce some sustaining food for our miners, we could build up a tavern. To supply them with some good and strong drinks, we could build up a brewery and a winery.<br>Of course this means we will need more resources for preparing this food – like fish, meat or bread.<br>To provide these foodstuffs, you would have to build a fisher's house, a farm, a mill and a bakery.<br>Maybe you will also need a hunter's house, a piggery, a vineyard and some wells.<br>It's up to you what you want to build.<br>But remember – coal and iron ore mines need beer, marble and gold mines need wine and all mines need at least rations, which are produced out of bread OR meat OR fish.]]),
 }
 
 obj_build_bigger_military_buildings = {
@@ -132,14 +132,14 @@ saledus_1 = {
    title =_ "Dangerous shipparts",
    posy = 1,
    body= saledus(_"Saledus looks unhappy",
-_[[Greetings Lutius, I don't want to start a panic, but I found something which gives me a sinking feeling in my stomach and spreads waves of fear in my heart. As I walked down to the southern shore I found the remains of another ship. I don't know whether these parts are all that is left of that ship. In any case, these parts do not seem to be old.<br> Perhaps the people aboard that ship were caught in the same storm which brought us to Malac' Mor - and were brought to this island.<br> I beg you to be cautious and to build some barracks or sentries around our colony.]])
+_[[Greetings Lutius, I don't want to start a panic, but I found something which gives me a sinking feeling in my stomach and spreads waves of fear in my heart. As I walked down to the southern shore I found the remains of another ship. I don't know whether these parts are all that is left of that ship. In any case, these parts do not seem to be old.<br> Perhaps the people aboard that ship were caught in the same storm which brought us to Malac' Mor – and were brought to this island.<br> I beg you to be cautious and to build some barracks or sentries around our colony.]])
 .. new_objectives(obj_build_military_buildings),
 }
 
 saledus_2 = {
    title =_ "Marble on the mountain",
    body= saledus(_"Saledus smiles",
-_[[Lutius, I've got good news for you:<br> As I walked to the east, I found a larger mountain.<br> I am not absolutely sure - a geologist should check if I am right - but I believe we could mine marble from some places on the mountain.<br> It would be a good source to bolster our supply of quality marble, beyond the meagre quantities available from the quarry. Perhaps you were right when you said that this island is like paradise.<br> Let us expand to that mountain and start mining marble.]])
+_[[Lutius, I've got good news for you:<br> As I walked to the east, I found a larger mountain.<br> I am not absolutely sure – a geologist should check if I am right – but I believe we could mine marble from some places on the mountain.<br> It would be a good source to bolster our supply of quality marble, beyond the meagre quantities available from the quarry. Perhaps you were right when you said that this island is like paradise.<br> Let us expand to that mountain and start mining marble.]])
 .. new_objectives(obj_build_marblemine),
 }
 
@@ -161,7 +161,7 @@ diary_page_8 = {
    title =_ "The Barbarians",
    posy=1, 
    body= lutius(_"Diary of Lutius",
-_[[By the Gods! This is absolutely terrible. It seems as if we stand close to a test - and it seems as if Saledus was right with his fear concerning the shipwreck he found.<br> Today, as I walked down to the eastern shore,<br> I got a shock. I caught sight of one of those hated, evil, barbarian tribes with whom we have had so many problems before.<br> At first, I was naive and hoped that they were peaceful, but as soon as one of them saw me they charged towards me and started attacking me with their throwing-spears. Thanks be to the Gods that<br> I was able to flee and hide myself, before retreating back to our colony under cover of darkness.<br> Anyway, we must build up stronger military buildings as soon as possible.]])
+_[[By the Gods! This is absolutely terrible. It seems as if we stand close to a test – and it seems as if Saledus was right with his fear concerning the shipwreck he found.<br> Today, as I walked down to the eastern shore,<br> I got a shock. I caught sight of one of those hated, evil, barbarian tribes with whom we have had so many problems before.<br> At first, I was naive and hoped that they were peaceful, but as soon as one of them saw me they charged towards me and started attacking me with their throwing-spears. Thanks be to the Gods that<br> I was able to flee and hide myself, before retreating back to our colony under cover of darkness.<br> Anyway, we must build up stronger military buildings as soon as possible.]])
 .. new_objectives(obj_build_bigger_military_buildings),
 }
 

@@ -17,7 +17,7 @@ start_lumberjack_01 = {
    title = _ "Lumberjack's hut",
    number = 2,
    body = objective_text(_"Build a lumberjack's hut", _
-"* Press SPACE to see where you can build.<br> The red house symbols show you where a small building - like a lumberjack's hut - may be built." .. "<br>" ..
+"* Press SPACE to see where you can build.<br> The red house symbols show you where a small building – like a lumberjack's hut – may be built." .. "<br>" ..
 _"* Build a lumberjack's hut at the red house symbol just right of your headquarters by clicking on it and selecting a lumberjack's hut." .. "<br>" ..
 _"* Build a road between your headquarters and the construction site of the lumberjack's hut.<br> When you place the lumberjack's hut, a flag is created for it. You need to connect it to another flag by building a road between them.<br> If you click on a flag and select to build a road, little symbols will appear around it to show you in which directions you can build it.<br> The colour of these symbols indicates how steep this part of the road will be. Green is for flat, yellow means steep and red stands for very steep. The steeper the road is, the harder it will be for your people to walk on it (and your wares will be transported more slowly).<br> You can click on any of the symbols to build the first part of the road there. New symbols will appear to show you where the next part of the road can go, and so on. However, you can also click farther away from the flag to build several steps at once. Click on the flag at the headquarters to finish the road."
    ),
@@ -28,7 +28,7 @@ start_lumberjack_01_01 = {
    title = _ "Lumberjack's hut",
    number = 1,
    body = objective_text(_"Build a lumberjack's hut", _
-"* Press SPACE to see where you can build.<br> The red house symbols show you where a small building - like a lumberjack's hut - may be built." .. "<br>" ..
+"* Press SPACE to see where you can build.<br> The red house symbols show you where a small building – like a lumberjack's hut – may be built." .. "<br>" ..
 _"* Build a lumberjack's hut at the red house symbol just right of your headquarters by clicking on it and selecting a lumberjack's hut."
    ),
 }
@@ -100,7 +100,7 @@ _[[None but the gods know how long we have to remain hidden here. The warriors h
 .. new_objectives(start_lumberjack_01_01)
 
 khantrukh_3 = khantrukh(_"The elder remarks...",
-_[[Obviously, it would be too exhausting for our people to walk all the way to the lumberjack's hut through the wilderness. We will have to build a road between our hall and the lumberjack's hut. It's not a hard guess that the men would appreciate a way as short and plain as possible - the wood will surely be heavy enough, nevertheless.]])
+_[[Obviously, it would be too exhausting for our people to walk all the way to the lumberjack's hut through the wilderness. We will have to build a road between our hall and the lumberjack's hut. It's not a hard guess that the men would appreciate a way as short and plain as possible – the wood will surely be heavy enough, nevertheless.]])
 .. new_objectives(start_lumberjack_01_02)
 
 khantrukh_4 = khantrukh(_"Khantrukh remembers...",
@@ -108,15 +108,15 @@ _[[There is an old saying:<br> 'A burden divided is easier to endure.'<br> A cro
 .. new_objectives(start_lumberjack_02_01)
 
 khantrukh_5 = khantrukh(_"The old man looks to the sky...",
-_[[The northern winds tell us that the coming winter will be a long and cruel one. One lumberjack's hut will not be enough to fit the needs of our people. More trees wait for our axes just south of our new crossroads - let us raise a second lumberjack's hut there!]])
+_[[The northern winds tell us that the coming winter will be a long and cruel one. One lumberjack's hut will not be enough to fit the needs of our people. More trees wait for our axes just south of our new crossroads – let us raise a second lumberjack's hut there!]])
 .. new_objectives(start_lumberjack_02_02)
 
 khantrukh_6 = khantrukh(_"Khantrukh nods...",
-_[[Of course, if we intended to build a bigger settlement, many more lumberjack's huts would be advisable, but this should suffice for now.<br> But never forget - these forests are our heritage, entrusted upon us by our ancestors. We must always respect and care for them. What we take, we must give back again.<br> So, in order to replace the trees we chop down, we should build a ranger's hut, preferably close to the lumberjack's hut.]])
+_[[Of course, if we intended to build a bigger settlement, many more lumberjack's huts would be advisable, but this should suffice for now.<br> But never forget – these forests are our heritage, entrusted upon us by our ancestors. We must always respect and care for them. What we take, we must give back again.<br> So, in order to replace the trees we chop down, we should build a ranger's hut, preferably close to the lumberjack's hut.]])
 .. new_objectives(start_ranger)
 
 khantrukh_7 = khantrukh(_"The elder speaks...",
-_[[I am well aware, chieftain, that neither you nor your warriors have the desire to stay in this forsaken place for long. But even so, our war to reconquer our home might take a long time and it would seem wise to make preparations.<br> I would advise that we obtain stones for the future - who knows what fortifications we might be forced to build very soon. And - like a gift of destiny - there are indeed great rocks just nearby...]])
+_[[I am well aware, chieftain, that neither you nor your warriors have the desire to stay in this forsaken place for long. But even so, our war to reconquer our home might take a long time and it would seem wise to make preparations.<br> I would advise that we obtain stones for the future – who knows what fortifications we might be forced to build very soon. And – like a gift of destiny – there are indeed great rocks just nearby...]])
 .. new_objectives(start_quarries)
 
 khantrukh_8 = khantrukh(_[[Very well done, chieftain. We now have all we need to face the winter and may prepare ourselves for the battles ahead.]])
@@ -145,12 +145,12 @@ field = grave,
 story_msg3 = {
   title=_ "The other day",
   msg = thron(_"Thron says thoughtfully...",
-_[[Some time ago, Boldreth came to me. His advice was to move to a place closer to home - to strike at the first sign of my brothers' forces wavering.<br> But I look over the forests and I can still see black smoke rising to the sky. I know - it is too early yet, and what he hopes for will not happen any time soon. He might still be right, but I fear the bloodshed that returning too fast would cause both on our and the other side...]])
+_[[Some time ago, Boldreth came to me. His advice was to move to a place closer to home – to strike at the first sign of my brothers' forces wavering.<br> But I look over the forests and I can still see black smoke rising to the sky. I know – it is too early yet, and what he hopes for will not happen any time soon. He might still be right, but I fear the bloodshed that returning too fast would cause both on our and the other side...]])
 }
 
 story_msg4 = {
 title =_ "The oath",
 msg = thron(_"Thron looks furious...",
-_[[Today, my warriors picked up an old man, wandering sick and wounded through the dark forest. We listened in horror when he told us of the atrocities taking place in Al'thunran.<br> I hereby renew my oath - I will stop this madness at any cost!]])
+_[[Today, my warriors picked up an old man, wandering sick and wounded through the dark forest. We listened in horror when he told us of the atrocities taking place in Al'thunran.<br> I hereby renew my oath – I will stop this madness at any cost!]])
 }
 

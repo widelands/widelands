@@ -14,7 +14,7 @@ function briefing_messages()
 -- Briefing message
 title = _"The story begins"
 msg = thron(_"Thron sighs...",
-_[[It's been months and we are still hiding where the forests are old and dark.<br> My warriors hunt at day and lie awake at night - listening to the sounds of the cruel slaughter echoing from afar amongst the ancient trees.]]) 
+_[[It's been months and we are still hiding where the forests are old and dark.<br> My warriors hunt at day and lie awake at night – listening to the sounds of the cruel slaughter echoing from afar amongst the ancient trees.]]) 
 show_story_box(title, msg)
 
 msg = 

@@ -87,7 +87,7 @@ briefing_2_found_ancient_castle = {
 [[By the Gods! One of our scouts found a mighty castle at the middle of the old
 plateau. The castle must be quite old and seems to be build in a foreign
 style. It's quite obvious, that this is not barbarian craft.<br>Let's hope
-Lanissa - the warlord holding command over that castle - still has not observed
+Lanissa – the warlord holding command over that castle – still has not observed
 us. Perhaps we have a chance to conquer that mighty building without a bigger
 fight!<br>However we really have to capture it. It will be our key for our
 reign over this island!]],
@@ -108,7 +108,7 @@ the light of day. The only important things at the moment are the left opposing
 troops. We observed enemy's positions from Erwyn north and eastwards of the
 castle. He is known to be a strong warlord and surely commands the strongest
 warriors. In the south we caught sight of some guarded food infrastructures of Jomo -
-a younger warlord - we should take care about that infrastructures and cut of
+a younger warlord – we should take care about that infrastructures and cut of
 the food supply.]], obj_defeat_erwyn, obj_defeat_jomo),
 }
 

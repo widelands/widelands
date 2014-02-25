@@ -38,8 +38,8 @@ mountain's flank to the east (on mountain terrain though, not mountain meadow).
 When you click at the new flag you can send geologists there. Because the flag
 is on mountains, the geologists will search for ores; otherwise, they will
 search for water. Then build a mine for both kinds of resource he will find,
-choosing the mine to be built appropriately:<br> Black - coal<br> Red - iron
-ore<br> Yellow - gold<br> Grey - granite<br> Mines may only be built on
+choosing the mine to be built appropriately:<br> Black – coal<br> Red – iron
+ore<br> Yellow – gold<br> Grey – granite<br> Mines may only be built on
 mountain terrain. Suitable places for mines are displayed as hammer and pick.]]
    )
 }
@@ -53,7 +53,7 @@ obj_basic_food = {
 while a gamekeeper prevents them from becoming extinct. The meat is then
 processed in a tavern into lunches for your miners.<br> This is only the
 first example of a ware which has to be refined before being used in a
-secondary building - others will follow.]]
+secondary building – others will follow.]]
    )
 }
 
@@ -62,7 +62,7 @@ obj_begin_farming = {
    title=_"Bake bread",
    number = 3,
    body=objective_text(_ "Build a well, a farm and a bakery", _
-[[Other ways to produce food - different kinds of food - are fishers and
+[[Other ways to produce food – different kinds of food – are fishers and
 hunters. The wheat of the farms has to be processed with water in a bakery
 before it becomes edible. You can obtain water by building a well at a spot
 where your geologists find a water source.]]
@@ -74,7 +74,7 @@ obj_refine_ores = {
    title=_"Refine your mined resources",
    number = 1,
    body= objective_text(_ "Build a smelting works", _
-[[The iron ore your miners bring up is not usable yet - it has to be melted
+[[The iron ore your miners bring up is not usable yet – it has to be melted
 into iron first.]]
    )
 }
@@ -93,11 +93,11 @@ button in the appearing window.<br> Workers gain experience by successful work.
 With enough experience they become more advanced workers, who are necessary to
 operate the enhanced buildings. Do not enhance a building before you have
 enough advanced workers to operate the advanced building! Such buildings
-usually have greater demands than the basic kind of that building - for
+usually have greater demands than the basic kind of that building – for
 instance, deep mines need snacks instead of rations. You will have to enhance
 your tavern to an inn in order to produce snacks out of pitta bread AND a
 second kind of food (meat or fish) AND beer. You may of course enhance all
-mines to deep mines instantly given you have the workers - bigger mines work a
+mines to deep mines instantly given you have the workers – bigger mines work a
 bit faster, smaller mines need cheaper food. It's up to you which strategy you
 prefer.]]
    )
@@ -108,8 +108,8 @@ obj_better_material_1 = {
    title=_"Build a wood hardener",
    number = 1,
    body= objective_text(_ "Build a wood hardener", _
-[[Bigger and better buildings - including all military ones - require better
-building materials. They cannot be built of simple trunks - the wood has to be
+[[Bigger and better buildings – including all military ones – require better
+building materials. They cannot be built of simple trunks – the wood has to be
 refined to blackwood by a wood hardener first. Always remember to build a wood
 hardener before you run out of blackwood, as without it you cannot expand.]]
    )
@@ -174,7 +174,7 @@ _[[Today my hunters brought men, women and little children who had hidden out in
 briefing_msg_3 = {
    title =_ "The story continues",
    body = thron(
-_[[Boldreth seems more and more torn as the days go by. The spirits of my fellows sink as the cold season approaches, and we are still living in no more than huts and barracks. I never intended to stay out here in the wilderness for so long - but I never thought my brothers would engage in this senseless battle for so long either.<br> Perhaps it's time to make ourselves feel a little more at ease here. Perhaps it's time to give those who still live and think united a new home, replacing what is now lost to us? Until we can return to the place we once called our home...]]
+_[[Boldreth seems more and more torn as the days go by. The spirits of my fellows sink as the cold season approaches, and we are still living in no more than huts and barracks. I never intended to stay out here in the wilderness for so long – but I never thought my brothers would engage in this senseless battle for so long either.<br> Perhaps it's time to make ourselves feel a little more at ease here. Perhaps it's time to give those who still live and think united a new home, replacing what is now lost to us? Until we can return to the place we once called our home...]]
    )
 }
 
@@ -201,7 +201,7 @@ order_msg_3 = {
 _[[While it is certainly no worthy task for a warrior, at least it is
 something to be done! Thron, what do you say about me taking a few of our most
 restless warriors and venturing somewhat closer to the great mountain of
-Kal'mavrath - maybe we will find some more big stones to please the old man?]]
+Kal'mavrath – maybe we will find some more big stones to please the old man?]]
       ) .. new_objectives(obj_claim_northeastern_rocks),
 }
 
@@ -249,8 +249,8 @@ order_msg_9_hunter = {
    title=_"Your loyal companion",
    body=boldreth(_"Boldreth nods...", _
 [[I have to hand it to you: you are right here, old man.<br> There seem to be
-quite many animals in the forests here - we might just hunt down more of them.
-And, of course, the people would cheer to a new tavern - hey, we might call it
+quite many animals in the forests here – we might just hunt down more of them.
+And, of course, the people would cheer to a new tavern – hey, we might call it
 'Thron's Pride' or so if you want!]]) .. new_objectives(obj_basic_food)
 }
 
@@ -258,7 +258,7 @@ order_msg_10_bread = {
    title=_"The advisor",
    body=khantrukh(_"The elder jumps into the air...", _
 [[Wisdom commands to seek variety.<br> North of the great mountain is a large
-plain - why don't we use the space Mother Nature gave us and build a farm? I
+plain – why don't we use the space Mother Nature gave us and build a farm? I
 sure would enjoy a freshly baked pitta bread for a change...]]) ..
    new_objectives(obj_begin_farming)
 }
@@ -328,7 +328,7 @@ order_msg_18_fernery = {
    title=_"The advisor", 
    body= khantrukh(_"Khantrukh steps in...", _
 [[Chieftain, this is a disgrace! It is well that we can produce grout for
-mighty fortifications and great buildings now - only this does not prevent our
+mighty fortifications and great buildings now – only this does not prevent our
 roofs from becoming leaky! Maybe the young ones like spending their nights in
 the rain, but I just can't find any sleep with these raindrops dripping on my
 face!<br> Now this is a problem we should do something about!]]) .. 
@@ -374,14 +374,14 @@ them and they will do their work on the roads loyally and reliably.]]) ..
 msg_story_1 = {
    title=_"One fullmoon night",
    body=thron(_"Thron speaks...", _
-[[One night, when the moon shone brightly, I climbed to the peak of Kal'mavrath.<br> When I gazed at the horizon, I still saw crimson lights flicker in the distance. It is incredible how much passion my brethren fight this war with. I fear the moment I see Al'thunran again - will there be anything but ashes and wasted ruins left of our once beautiful capital when we get there?]]
+[[One night, when the moon shone brightly, I climbed to the peak of Kal'mavrath.<br> When I gazed at the horizon, I still saw crimson lights flicker in the distance. It is incredible how much passion my brethren fight this war with. I fear the moment I see Al'thunran again – will there be anything but ashes and wasted ruins left of our once beautiful capital when we get there?]]
    )
 }
 
 msg_story_2 = {
     title= _"Another cold day",
     body=thron(_"Thron looks worried...", _
-[[The winter is upon us. Many of us are suffering from the cold, yet we must endure. The day we may return cannot be far anymore - it must not be far anymore.<br> I prayed it might get warmer again, as I prayed the war would finally come to an end.<br> So far, it seems that neither prayer was fulfilled.]]
+[[The winter is upon us. Many of us are suffering from the cold, yet we must endure. The day we may return cannot be far anymore – it must not be far anymore.<br> I prayed it might get warmer again, as I prayed the war would finally come to an end.<br> So far, it seems that neither prayer was fulfilled.]]
    )
 }
 
