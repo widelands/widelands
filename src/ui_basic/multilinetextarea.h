@@ -60,9 +60,9 @@ struct Multiline_Textarea : public Panel {
 	void set_color(RGBColor fg) {m_fcolor = fg;}
 
 	// Drawing and event handlers
-	void draw(RenderTarget &);
+	void draw(RenderTarget &) override;
 
-	bool handle_mousepress  (Uint8 btn, int32_t x, int32_t y);
+	bool handle_mousepress  (Uint8 btn, int32_t x, int32_t y) override;
 
 	const char *  get_font_name() {return m_fontname.c_str();}
 	int32_t       get_font_size() {return m_fontsize;}
@@ -81,7 +81,7 @@ private:
 	ScrollMode  m_scrollmode;
 
 protected:
-	virtual void layout();
+	virtual void layout() override;
 
 	Align        m_align;
 	std::string  m_fontname;

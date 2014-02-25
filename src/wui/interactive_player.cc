@@ -266,7 +266,7 @@ void Interactive_Player::think()
 					//  That is not allowed. Therefore we must delete the
 					//  fieldaction window before entering roadbuilding mode here.
 					delete m_fieldaction.window;
-					m_fieldaction.window = 0;
+					m_fieldaction.window = nullptr;
 					warp_mouse_to_node(m_flag_to_connect);
 					set_sel_pos
 						(Widelands::Node_and_Triangle<>
@@ -328,7 +328,7 @@ void Interactive_Player::postload()
 
 	// Close game-relevant UI windows (but keep main menu open)
 	delete m_fieldaction.window;
-	m_fieldaction.window = 0;
+	m_fieldaction.window = nullptr;
 
 	hide_minimap();
 }

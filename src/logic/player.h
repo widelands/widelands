@@ -134,7 +134,7 @@ public:
 
 	/// Per-player and per-field constructionsite information
 	struct Constructionsite_Information {
-		Constructionsite_Information() : becomes(0), was(0), totaltime(0), completedtime(0) {}
+		Constructionsite_Information() : becomes(nullptr), was(nullptr), totaltime(0), completedtime(0) {}
 		const Building_Descr * becomes; // Also works as a marker telling whether there is a construction site.
 		const Building_Descr * was; // only valid if "becomes" is an enhanced building.
 		uint32_t               totaltime;
@@ -167,7 +167,7 @@ public:
 			time_triangle_last_surveyed[1] = Never();
 
 			//  Initialized for debug purposes only.
-			map_object_descr[0] = map_object_descr[1] = map_object_descr[2] = 0;
+			map_object_descr[0] = map_object_descr[1] = map_object_descr[2] = nullptr;
 		}
 
 		/// Military influence is exerted by buildings with the help of soldiers.
@@ -492,7 +492,7 @@ public:
 
 	uint32_t findAttackSoldiers
 		(Flag                   &,
-		 std::vector<Soldier *> * soldiers = 0,
+		 std::vector<Soldier *> * soldiers = nullptr,
 		 uint32_t                 max = std::numeric_limits<uint32_t>::max());
 	void enemyflagaction
 		(Flag &, Player_Number attacker, uint32_t count, uint8_t retreat);
@@ -561,8 +561,8 @@ public:
 	void ware_consumed(Ware_Index, uint8_t);
 	void next_ware_production_period();
 
-	void receive(const NoteImmovable &);
-	void receive(const NoteFieldPossession     &);
+	void receive(const NoteImmovable &) override;
+	void receive(const NoteFieldPossession     &) override;
 	void receive(const NoteFieldTransformed     &);
 
 	void setAI(const std::string &);

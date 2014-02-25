@@ -56,7 +56,7 @@ struct Critter_BobProgram : public BobProgramBase {
 	Critter_BobProgram(const std::string & name) : m_name(name) {}
 	virtual ~Critter_BobProgram() {}
 
-	std::string get_name() const {return m_name;}
+	std::string get_name() const override {return m_name;}
 	int32_t get_size() const {return m_actions.size();}
 	const Critter_BobAction & operator[] (size_t const idx) const {
 		assert(idx < m_actions.size());

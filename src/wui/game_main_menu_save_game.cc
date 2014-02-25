@@ -171,8 +171,8 @@ void Game_Main_Menu_Save_Game::selected(uint32_t) {
 	uint32_t gametime = gpdp.get_gametime();
 	m_gametime.set_text(gametimestring(gametime));
 
-	char buf[200];
 	if (gpdp.get_number_of_players() > 0) {
+		char buf[200];
 		sprintf
 			(buf, "%i %s", gpdp.get_number_of_players(),
 			ngettext(_("player"), _("players"), gpdp.get_number_of_players()));
@@ -276,14 +276,14 @@ struct SaveWarnMessageBox : public UI::WLMessageBox {
 	}
 
 
-	void pressedYes()
+	void pressedYes() override
 	{
 		g_fs->Unlink(m_filename);
 		dosave(menu_save_game().igbase(), m_filename);
 		menu_save_game().die();
 	}
 
-	void pressedNo()
+	void pressedNo() override
 	{
 		die();
 	}
@@ -335,14 +335,14 @@ struct DeletionMessageBox : public UI::WLMessageBox {
 		m_filename(filename)
 	{}
 
-	void pressedYes()
+	void pressedYes() override
 	{
 		g_fs->Unlink(m_filename);
 		ref_cast<Game_Main_Menu_Save_Game, UI::Panel>(*get_parent()).fill_list();
 		die();
 	}
 
-	void pressedNo()
+	void pressedNo() override
 	{
 		die();
 	}

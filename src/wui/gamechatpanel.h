@@ -53,7 +53,7 @@ struct GameChatPanel :
 
 	void focusEdit();
 
-	void receive(const ChatMessage &);
+	void receive(const ChatMessage &) override;
 
 private:
 	void recalculate();

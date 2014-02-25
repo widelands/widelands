@@ -26,7 +26,7 @@ statistics menu. Good luck!]]
 ))
 
 smuggling_route_established_other_team = rt(p(_
-[[A new smuggling route from %s to %s has been established!. Every ware smuggled here
+[[A new smuggling route from %s to %s has been established! Every ware smuggled here
 is worth %i points.]]
 ))
 smuggling_route_established_sender = rt(p(_

@@ -103,7 +103,7 @@ UniqueWindow::~UniqueWindow()
 	if (m_registry) {
 		assert(m_registry->window == this);
 
-		m_registry->window = 0;
+		m_registry->window = nullptr;
 		m_registry->x = get_x();
 		m_registry->y = get_y();
 		m_registry->valid_pos = true;

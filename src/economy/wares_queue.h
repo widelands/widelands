@@ -28,17 +28,18 @@ namespace Widelands {
 class Economy;
 class Editor_Game_Base;
 class Game;
-struct Map_Map_Object_Loader;
+class Map_Map_Object_Loader;
 struct Map_Map_Object_Saver;
 class Player;
-struct Request;
+class Request;
 struct WaresQueue;
 class Worker;
 
 /**
  * This micro storage room can hold any number of items of a fixed ware.
  */
-struct WaresQueue {
+class WaresQueue {
+public:
 	typedef void (callback_t)
 		(Game &, WaresQueue *, Ware_Index ware, void * data);
 

@@ -161,7 +161,7 @@ int32_t RealFSImpl::FindFiles
 		buf = m_directory + '/' + pattern;
 		ofs = m_directory.length() + 1;
 	}
-	if (glob(buf.c_str(), 0, 0, &gl))
+	if (glob(buf.c_str(), 0, nullptr, &gl))
 		return 0;
 
 	count = gl.gl_pathc;
@@ -359,8 +359,8 @@ void RealFSImpl::MakeDirectory(const std::string & dirname) {
 void * RealFSImpl::Load(const std::string & fname, size_t & length) {
 	const std::string fullname = FS_CanonicalizeName(fname);
 
-	FILE * file = 0;
-	void * data = 0;
+	FILE * file = nullptr;
+	void * data = nullptr;
 
 	try {
 		//debug info
@@ -402,7 +402,7 @@ void * RealFSImpl::Load(const std::string & fname, size_t & length) {
 		static_cast<int8_t *>(data)[size] = 0;
 
 		fclose(file);
-		file = 0;
+		file = nullptr;
 
 		length = size;
 	} catch (...) {
@@ -424,7 +424,7 @@ void * RealFSImpl::fastLoad
 #else
 	const std::string fullname = FS_CanonicalizeName(fname);
 	int file = 0;
-	void * data = 0;
+	void * data = nullptr;
 
 #ifdef __APPLE__
 	file = open(fullname.c_str(), O_RDONLY);
@@ -436,7 +436,7 @@ void * RealFSImpl::fastLoad
 	length = lseek(file, 0, SEEK_END);
 	lseek(file, 0, SEEK_SET);
 
-	data = mmap(0, length, PROT_READ, MAP_PRIVATE, file, 0);
+	data = mmap(nullptr, length, PROT_READ, MAP_PRIVATE, file, 0);
 
 	//if mmap doesn't work for some strange reason try the old way
 GCC_DIAG_OFF("-Wold-style-cast")
@@ -514,11 +514,11 @@ struct RealFSStreamRead : public StreamRead {
 		fclose(m_file);
 	}
 
-	size_t Data(void * data, size_t const bufsize) {
+	size_t Data(void * data, size_t const bufsize) override {
 		return fread(data, 1, bufsize, m_file);
 	}
 
-	bool EndOfFile() const
+	bool EndOfFile() const override
 	{
 		return feof(m_file);
 	}
@@ -555,7 +555,7 @@ struct RealFSStreamWrite : public StreamWrite {
 
 	~RealFSStreamWrite() {fclose(m_file);}
 
-	void Data(const void * const data, const size_t size)
+	void Data(const void * const data, const size_t size) override
 	{
 		size_t ret = fwrite(data, 1, size, m_file);
 
@@ -563,7 +563,7 @@ struct RealFSStreamWrite : public StreamWrite {
 			throw wexception("Write to %s failed", m_filename.c_str());
 	}
 
-	void Flush()
+	void Flush() override
 	{
 		fflush(m_file);
 	}

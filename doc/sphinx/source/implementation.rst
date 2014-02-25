@@ -104,20 +104,18 @@ Persistence
 -----------
 
 When a savegame is created, the current environment of Lua is persisted. For
-this, I used a library called Pluto_ which is in the public domain. It was
-heavily modified to work with widelands, the ``FileRead`` and ``FileWrite``
-classes and with the Luna class concepts.
+this, I used a library called Eris_.  
 
-.. _Pluto: http://luaforge.net/projects/pluto/
+.. _Eris: https://github.com/fnuecke
  
 The global environment is persisted into the file map/globals.dump. Everything
 is persisted except of the Lua build-in functions and everything in the ``wl``
-table. Those are c-functions that can not be written out to disk portably.
-Everything else can be saved, that is also everything in the auxiliary scripts
-are saved to disk, so save games only depend on the API defined inside the
-``wl`` module.
+table and some of our own global functions. Those are c-functions that can not
+be written out to disk portably. Everything else can be saved, that is also
+everything in the auxiliary scripts are saved to disk, so save games only
+depend on the API defined inside the Widelands.
 
-Coroutines are persisted together with their ``Cmd_LuaCoroutine`` package. 
+Coroutines are persisted in their ``Cmd_LuaCoroutine`` package. 
 
 Luna classes have to implement two functions to be properly persistable:
 
@@ -130,9 +128,10 @@ Luna classes have to implement two functions to be properly persistable:
 ``__unpersist(lua_State *)``
    On loading, an instance of the user object is created via the default
    constructor. This function is then called with the table that was created
-   by ``__persist()`` on the top of the stack. The object is then expected to
-   recreate it's former state with this table. There are equivalent
-   unpersisting macros defined to help with this task (e.g. UNPERS_UINT32).
+   by ``__persist()`` as an upvalue (because it is inside a closure). The
+   object is then expected to recreate it's former state with this table.
+   There are equivalent unpersisting macros defined to help with this task
+   (e.g. UNPERS_UINT32).
 
 Widelands reassigns some serial number upon saving and restores them upon
 loading. Some Luna classes need this information (for example

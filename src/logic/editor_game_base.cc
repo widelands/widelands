@@ -34,12 +34,12 @@
 #include "logic/findimmovable.h"
 #include "logic/game.h"
 #include "logic/instances.h"
-#include "logic/item_ware_descr.h"
 #include "logic/mapregion.h"
 #include "logic/player.h"
 #include "logic/playersmanager.h"
 #include "logic/roadtype.h"
 #include "logic/tribe.h"
+#include "logic/ware_descr.h"
 #include "logic/worker.h"
 #include "logic/world.h"
 #include "rgbcolor.h"
@@ -64,12 +64,12 @@ Editor_Game_Base::Editor_Game_Base(LuaInterface * lua_interface) :
 m_gametime          (0),
 m_lua               (lua_interface),
 m_player_manager    (new Players_Manager(*this)),
-m_ibase             (0),
-m_map               (0),
+m_ibase             (nullptr),
+m_map               (nullptr),
 m_lasttrackserial   (0)
 {
 	if (not m_lua) // TODO SirVer: this is sooo ugly, I can't say
-		m_lua = create_LuaEditorInterface(this);
+		m_lua = new LuaEditorInterface(this);
 
 	g_sound_handler.m_egbase = this;
 
@@ -87,7 +87,7 @@ Editor_Game_Base::~Editor_Game_Base() {
 
 	if (g_gr) { // dedicated does not use the sound_handler
 		assert(this == g_sound_handler.m_egbase);
-		g_sound_handler.m_egbase = 0;
+		g_sound_handler.m_egbase = nullptr;
 	}
 }
 
@@ -177,7 +177,7 @@ const Tribe_Descr * Editor_Game_Base::get_tribe(const char * const tribe) const
 	container_iterate_const(Tribe_Vector, m_tribes, i)
 		if (not strcmp((*i.current)->name().c_str(), tribe))
 			return *i.current;
-	return 0;
+	return nullptr;
 }
 
 void Editor_Game_Base::inform_players_about_ownership
@@ -477,7 +477,7 @@ void * Editor_Game_Base::get_trackpointer(uint32_t const serial)
 	if (it != m_trackpointers.end())
 		return it->second;
 
-	return 0;
+	return nullptr;
 }
 
 

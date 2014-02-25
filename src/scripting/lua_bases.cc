@@ -19,8 +19,6 @@
 
 #include "scripting/lua_bases.h"
 
-#include <lua.hpp>
-
 #include "economy/economy.h"
 #include "logic/checkstep.h"
 #include "logic/player.h"
@@ -72,12 +70,12 @@ EditorGameBase
 
 const char L_EditorGameBase::className[] = "EditorGameBase";
 const MethodType<L_EditorGameBase> L_EditorGameBase::Methods[] = {
-	{0, 0},
+	{nullptr, nullptr},
 };
 const PropertyType<L_EditorGameBase> L_EditorGameBase::Properties[] = {
 	PROP_RO(L_EditorGameBase, map),
 	PROP_RO(L_EditorGameBase, players),
-	{0, 0, 0},
+	{nullptr, nullptr, nullptr},
 };
 
 
@@ -166,12 +164,12 @@ const MethodType<L_PlayerBase> L_PlayerBase::Methods[] = {
 	METHOD(L_PlayerBase, place_building),
 	METHOD(L_PlayerBase, place_flag),
 	METHOD(L_PlayerBase, place_road),
-	{0, 0},
+	{nullptr, nullptr},
 };
 const PropertyType<L_PlayerBase> L_PlayerBase::Properties[] = {
 	PROP_RO(L_PlayerBase, number),
 	PROP_RO(L_PlayerBase, tribe_name),
-	{0, 0, 0},
+	{nullptr, nullptr, nullptr},
 };
 
 void L_PlayerBase::__persist(lua_State * L) {
@@ -342,7 +340,7 @@ int L_PlayerBase::place_road(lua_State * L) {
 	if (optimal_path.get_nsteps() != path.get_nsteps())
 		return report_error(L, "Cannot build a road that crosses itself!");
 
-	Road * r = 0;
+	Road * r = nullptr;
 	if (force_road) {
 		r = &get(L, egbase).force_road(path);
 	} else {
@@ -404,7 +402,7 @@ int L_PlayerBase::place_building(lua_State * L) {
 		former_buildings.pop_back();
 	}
 
-	Building * b = 0;
+	Building * b = nullptr;
 	if (force) {
 		if (constructionsite) {
 			b = &get(L, get_egbase(L)).force_csite
@@ -558,13 +556,16 @@ Player & L_PlayerBase::get
  */
 
 
-const static struct luaL_reg wlbases [] = {
-	{0, 0}
+const static struct luaL_Reg wlbases [] = {
+	{nullptr, nullptr}
 };
 
 void luaopen_wlbases(lua_State * const L) {
-	luaL_register(L, "wl.bases", wlbases);
-	lua_pop(L, 1); // pop the table from the stack again
+	lua_getglobal(L, "wl");  // S: wl_table
+	lua_pushstring(L, "bases"); // S: wl_table "bases"
+	luaL_newlib(L, wlbases);  // S: wl_table "bases" wl.bases_table
+	lua_settable(L, -3); // S: wl_table
+	lua_pop(L, 1); // S:
 
 	register_class<L_EditorGameBase>(L, "bases");
 	register_class<L_PlayerBase>(L, "bases");

@@ -49,10 +49,10 @@ public:
 	virtual ~CacheImage() {}
 
 	// Implements Image.
-	virtual uint16_t width() const {return width_;}
-	virtual uint16_t height() const {return height_;}
-	virtual const string& hash() const {return hash_;}
-	virtual Surface* surface() const {
+	virtual uint16_t width() const override {return width_;}
+	virtual uint16_t height() const override {return height_;}
+	virtual const string& hash() const override {return hash_;}
+	virtual Surface* surface() const override {
 		Surface* rv = g_gr->surfaces().get(hash_);
 		if (rv)
 			return rv;
@@ -72,9 +72,9 @@ private:
 	const string hash_;
 };
 
-Panel * Panel::_modal       = 0;
-Panel * Panel::_g_mousegrab = 0;
-Panel * Panel::_g_mousein   = 0;
+Panel * Panel::_modal       = nullptr;
+Panel * Panel::_g_mousegrab = nullptr;
+Panel * Panel::_g_mousein   = nullptr;
 
 // The following variable can be set to false. If so, all mouse and keyboard
 // events are ignored and not passed on to any widget. This is only useful
@@ -91,7 +91,7 @@ Panel::Panel
 	 const int32_t nx, const int32_t ny, const uint32_t nw, const uint32_t nh,
 	 const std::string & tooltip_text)
 	:
-	_parent(nparent), _fchild(0), _lchild(0), _mousein(0), _focus(0),
+	_parent(nparent), _fchild(nullptr), _lchild(nullptr), _mousein(nullptr), _focus(nullptr),
 	_flags(pf_handle_mouse|pf_think|pf_visible),
 	_needdraw(false),
 	_x(nx), _y(ny), _w(nw), _h(nh),
@@ -104,14 +104,14 @@ Panel::Panel
 	assert(nparent != this);
 	if (_parent) {
 		_next = _parent->_fchild;
-		_prev = 0;
+		_prev = nullptr;
 		if (_next)
 			_next->_prev = this;
 		else
 			_parent->_lchild = this;
 		_parent->_fchild = this;
 	} else
-		_prev = _next = 0;
+		_prev = _next = nullptr;
 	update(0, 0, _w, _h);
 }
 
@@ -124,9 +124,9 @@ Panel::~Panel()
 
 	// Release pointers to this object
 	if (_g_mousegrab == this)
-		_g_mousegrab = 0;
+		_g_mousegrab = nullptr;
 	if (_g_mousein == this)
-		_g_mousein = 0;
+		_g_mousein = nullptr;
 
 	// Free children
 	free_children();
@@ -134,9 +134,9 @@ Panel::~Panel()
 	// Unlink
 	if (_parent) {
 		if (_parent->_mousein == this)
-			_parent->_mousein = 0;
+			_parent->_mousein = nullptr;
 		if (_parent->_focus == this)
-			_parent->_focus = 0;
+			_parent->_focus = nullptr;
 
 		if (_prev)
 			_prev->_next = _next;
@@ -168,7 +168,7 @@ int32_t Panel::run()
 	WLApplication * const app = WLApplication::get();
 	Panel * const prevmodal = _modal;
 	_modal = this;
-	_g_mousegrab = 0; // good ol' paranoia
+	_g_mousegrab = nullptr; // good ol' paranoia
 	app->set_mouse_lock(false); // more paranoia :-)
 
 	Panel * forefather = this;
@@ -454,7 +454,7 @@ void Panel::move_to_top()
 		_parent->_lchild = _prev;
 
 	// relink
-	_prev = 0;
+	_prev = nullptr;
 	_next = _parent->_fchild;
 	_parent->_fchild = this;
 	if (_next)
@@ -736,7 +736,7 @@ void Panel::grab_mouse(bool const grab)
 		_g_mousegrab = this;
 	} else {
 		assert(!_g_mousegrab || _g_mousegrab == this);
-		_g_mousegrab = 0;
+		_g_mousegrab = nullptr;
 	}
 }
 
@@ -752,7 +752,7 @@ void Panel::set_can_focus(bool const yes)
 		_flags &= ~pf_can_focus;
 
 		if (_parent && _parent->_focus == this)
-			_parent->_focus = 0;
+			_parent->_focus = nullptr;
 	}
 }
 
@@ -907,7 +907,7 @@ void Panel::do_draw(RenderTarget & dst)
 			(Point(_lborder, _tborder),
 				_w - (_lborder + _rborder), _h - (_tborder + _bborder));
 
-		if (dst.enter_window(innerwindow, 0, 0))
+		if (dst.enter_window(innerwindow, nullptr, nullptr))
 			do_draw_inner(dst);
 	}
 
@@ -1082,7 +1082,7 @@ bool Panel::get_key_state(const SDLKey key) const
 Panel * Panel::ui_trackmouse(int32_t & x, int32_t & y)
 {
 	Panel * mousein;
-	Panel * rcv = 0;
+	Panel * rcv = nullptr;
 
 	if (_g_mousegrab)
 		mousein = rcv = _g_mousegrab;
@@ -1102,7 +1102,7 @@ Panel * Panel::ui_trackmouse(int32_t & x, int32_t & y)
 		 0 <= y and y < static_cast<int32_t>(mousein->_h))
 		rcv = mousein;
 	else
-		mousein = 0;
+		mousein = nullptr;
 
 	if (mousein != _g_mousein) {
 		if (_g_mousein)

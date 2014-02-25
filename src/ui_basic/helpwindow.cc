@@ -191,16 +191,14 @@ LuaTextHelpWindow::LuaTextHelpWindow
 	UI::UniqueWindow(parent, "help_window", &reg, width, height, (_("Help: ") + caption).c_str()),
 	textarea(new Multiline_Textarea(this, 5, 5, width - 10, height -10, std::string(), Align_Left))
 {
-	LuaInterface * li = create_LuaInterface();
+	LuaInterface lua;
 
 	try {
-		std::unique_ptr<LuaTable> t = li->run_script(*g_fs, path_to_script, "help");
+		std::unique_ptr<LuaTable> t = lua.run_script(*g_fs, path_to_script, "help");
 		textarea->set_text(t->get_string("text"));
 	} catch (LuaError & err) {
 		textarea->set_text(err.what());
 	}
-
-	delete li;
 }
 
 LuaTextHelpWindow::~LuaTextHelpWindow()

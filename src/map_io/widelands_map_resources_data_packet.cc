@@ -118,10 +118,8 @@ void Map_Resources_Data_Packet::Write
 	fw.Unsigned16(nr_res);
 
 	//  write all resources names and their id's
-	std::map<std::string, uint8_t> smap;
 	for (int32_t i = 0; i < nr_res; ++i) {
 		const Resource_Descr & res = *world.get_resource(i);
-		smap[res.name().c_str()] = i;
 		fw.Unsigned16(i);
 		fw.CString(res.name().c_str());
 	}

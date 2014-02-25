@@ -10,7 +10,7 @@ hunting_bow=1
 1=walk object
 2=animation idle 1500                           # Play a hunting animation
 3=object remove
-4=createitem meat
+4=createware meat
 5=return
 
 [idle]

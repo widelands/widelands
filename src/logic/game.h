@@ -116,9 +116,9 @@ public:
 	// Returns the result of run().
 	bool run_load_game (std::string filename, const std::string& script_to_run);
 
-	virtual void postload();
+	virtual void postload() override;
 
-	void think();
+	void think() override;
 
 	ReplayWriter * get_replaywriter() {return m_replaywriter;}
 
@@ -130,7 +130,7 @@ public:
 	void end_dedicated_game();
 
 	void cleanup_for_load
-		(const bool flush_graphics = true, const bool flush_animations = true);
+		(const bool flush_graphics = true, const bool flush_animations = true) override;
 
 	// in-game logic
 	const Cmd_Queue & cmdqueue() const {return m_cmdqueue;}
@@ -212,7 +212,7 @@ private:
 			m_target        (target),
 			m_counter       (0),
 			m_next_diskspacecheck(0),
-			m_dump          (0),
+			m_dump          (nullptr),
 			m_syncstreamsave(false)
 		{}
 
@@ -224,9 +224,9 @@ private:
 		/// \ref m_syncstreamsave has been set.
 		void StartDump(const std::string & fname);
 
-		void Data(void const * data, size_t size);
+		void Data(void const * data, size_t size) override;
 
-		void Flush() {m_target.Flush();}
+		void Flush() override {m_target.Flush();}
 
 	public:
 		Game        &   m_game;

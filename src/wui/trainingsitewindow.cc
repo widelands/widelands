@@ -41,7 +41,7 @@ struct TrainingSite_Window : public ProductionSite_Window {
 	}
 
 protected:
-	virtual void create_capsbuttons(UI::Box * buttons);
+	virtual void create_capsbuttons(UI::Box * buttons) override;
 };
 
 /**

@@ -62,7 +62,7 @@ void Map_Ware_Data_Packet::Read
 				try {
 					mol.register_object<WareInstance>
 						(serial,
-						 *new WareInstance(Ware_Index::Null(), 0))
+						 *new WareInstance(Ware_Index::Null(), nullptr))
 						.init(egbase);
 				} catch (const _wexception & e) {
 					throw game_data_error(_("%u: %s"), serial, e.what());

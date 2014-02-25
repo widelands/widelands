@@ -28,7 +28,7 @@ namespace Widelands {
 struct FindBobAttribute : public FindBob {
 	FindBobAttribute(uint32_t const attrib) : m_attrib(attrib) {}
 
-	virtual bool accept(Bob *) const;
+	virtual bool accept(Bob *) const override;
 
 	uint32_t m_attrib;
 	virtual ~FindBobAttribute() {}  // make gcc shut up
@@ -41,13 +41,13 @@ struct FindBobAttribute : public FindBob {
 struct FindBobEnemySoldier : public FindBob {
 	FindBobEnemySoldier(Player * _player) : player(_player) {}
 
-	virtual bool accept(Bob *) const;
+	virtual bool accept(Bob *) const override;
 
 	Player * player;
 };
 
 struct FindBobShip : FindBob {
-	virtual bool accept(Bob * bob) const;
+	virtual bool accept(Bob * bob) const override;
 };
 
 

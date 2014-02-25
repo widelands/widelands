@@ -26,14 +26,14 @@
 #include <string>
 #include <vector>
 
+#include "logic/bill_of_materials.h"
 #include "logic/building.h"
 #include "logic/production_program.h"
 #include "logic/program_result.h"
-#include "logic/ware_types.h"
 
 namespace Widelands {
 
-struct Item_Ware_Descr;
+struct WareDescr;
 struct ProductionProgram;
 class Soldier;
 struct Request;
@@ -60,15 +60,15 @@ struct ProductionSite_Descr : public Building_Descr {
 		 const Tribe_Descr &);
 	virtual ~ProductionSite_Descr();
 
-	virtual Building & create_object() const;
+	virtual Building & create_object() const override;
 
 	uint32_t nr_working_positions() const {
 		uint32_t result = 0;
-		container_iterate_const(Ware_Types, working_positions(), i)
+		container_iterate_const(BillOfMaterials, working_positions(), i)
 			result += i.current->second;
 		return result;
 	}
-	const Ware_Types & working_positions() const {
+	const BillOfMaterials & working_positions() const {
 		return m_working_positions;
 	}
 	bool is_output_ware_type  (const Ware_Index& i) const {
@@ -77,7 +77,7 @@ struct ProductionSite_Descr : public Building_Descr {
 	bool is_output_worker_type(const Ware_Index& i) const {
 		return m_output_worker_types.count(i);
 	}
-	const Ware_Types & inputs() const {return m_inputs;}
+	const BillOfMaterials & inputs() const {return m_inputs;}
 	typedef std::set<Ware_Index>                       Output;
 	const Output   & output_ware_types  () const {return m_output_ware_types;}
 	const Output   & output_worker_types() const {return m_output_worker_types;}
@@ -89,8 +89,8 @@ struct ProductionSite_Descr : public Building_Descr {
 	const std::vector<std::string> & compatibility_working_positions(const std::string & workername) const;
 
 private:
-	Ware_Types m_working_positions;
-	Ware_Types m_inputs;
+	BillOfMaterials m_working_positions;
+	BillOfMaterials m_inputs;
 	Output   m_output_ware_types;
 	Output   m_output_worker_types;
 	Programs m_programs;
@@ -129,13 +129,13 @@ public:
 	ProductionSite(const ProductionSite_Descr & descr);
 	virtual ~ProductionSite();
 
-	void log_general_info(const Editor_Game_Base &);
+	void log_general_info(const Editor_Game_Base &) override;
 
 	bool is_stopped() const {return m_is_stopped;}
 	void set_stopped(bool);
 
 	struct Working_Position {
-		Working_Position(Request * const wr = 0, Worker * const w = 0)
+		Working_Position(Request * const wr = nullptr, Worker * const w = nullptr)
 			: worker_request(wr), worker(w)
 		{}
 		Request * worker_request;
@@ -146,25 +146,25 @@ public:
 		return m_working_positions;
 	}
 
-	virtual std::string get_statistics_string();
+	virtual std::string get_statistics_string() override;
 	virtual bool has_workers(Building_Index targetSite, Game & game);
 	uint8_t get_statistics_percent() {return m_last_stat_percent;}
 	char const * result_string() const {return m_result_buffer;}
 
-	virtual WaresQueue & waresqueue(Ware_Index);
+	virtual WaresQueue & waresqueue(Ware_Index) override;
 
-	char const * type_name() const {return "productionsite";}
-	virtual void init(Editor_Game_Base &);
-	virtual void cleanup(Editor_Game_Base &);
-	virtual void act(Game &, uint32_t data);
+	char const * type_name() const override {return "productionsite";}
+	virtual void init(Editor_Game_Base &) override;
+	virtual void cleanup(Editor_Game_Base &) override;
+	virtual void act(Game &, uint32_t data) override;
 
-	virtual void remove_worker(Worker &);
+	virtual void remove_worker(Worker &) override;
 	int warp_worker(Editor_Game_Base &, const Worker_Descr & wd);
 
-	virtual bool fetch_from_flag(Game &);
-	virtual bool get_building_work(Game &, Worker &, bool success);
+	virtual bool fetch_from_flag(Game &) override;
+	virtual bool get_building_work(Game &, Worker &, bool success) override;
 
-	virtual void set_economy(Economy *);
+	virtual void set_economy(Economy *) override;
 
 	typedef std::vector<WaresQueue *> Input_Queues;
 	const Input_Queues & warequeues() const {return m_input_queues;}
@@ -176,7 +176,7 @@ public:
 
 protected:
 	virtual void create_options_window
-		(Interactive_GameBase &, UI::Window * & registry);
+		(Interactive_GameBase &, UI::Window * & registry) override;
 
 protected:
 	struct State {
@@ -194,7 +194,7 @@ protected:
 		/*@}*/
 
 		State() :
-			program(0),
+			program(nullptr),
 			ip(0),
 			phase(0),
 			flags(0),
@@ -212,7 +212,7 @@ protected:
 	virtual void find_and_start_next_program(Game &);
 
 	State & top_state() {assert(m_stack.size()); return *m_stack.rbegin();}
-	State * get_state() {return m_stack.size() ? &*m_stack.rbegin() : 0;}
+	State * get_state() {return m_stack.size() ? &*m_stack.rbegin() : nullptr;}
 	void program_act(Game &);
 
 	/// \param phase can be used to pass a value on to the next step in the
@@ -232,7 +232,7 @@ protected:
 protected:  // TrainingSite must have access to this stuff
 	Working_Position                   * m_working_positions;
 
-	int32_t m_fetchfromflag; ///< Number of items to fetch from flag
+	int32_t m_fetchfromflag; ///< Number of wares to fetch from flag
 
 	/// If a program has ended with the result Skipped, that program may not
 	/// start again until a certain time has passed. This is a map from program
@@ -248,7 +248,7 @@ protected:  // TrainingSite must have access to this stuff
 	int32_t      m_program_time; ///< timer time
 	int32_t      m_post_timer;    ///< Time to schedule after ends
 
-	ProductionProgram::ActProduce::Items m_produced_items;
+	ProductionProgram::ActProduce::Items m_produced_wares;
 	ProductionProgram::ActProduce::Items m_recruited_workers;
 	Input_Queues m_input_queues; ///< input queues for all inputs
 	std::vector<bool>        m_statistics;
@@ -261,7 +261,7 @@ protected:  // TrainingSite must have access to this stuff
 };
 
 /**
- * Describes, how many items of a certain ware can be stored in a house.
+ * Describes, how many wares of a certain ware can be stored in a house.
  *
  * This class will be extended to support ordering of certain wares directly or
  * releasing some wares out of a building

@@ -39,8 +39,8 @@ struct Cmd_ExpireMessage : public Command {
 		: Command(t), player(p), message(m)
 	{}
 
-	void execute (Game & game);
-	virtual uint8_t id() const {return QUEUE_CMD_EXPIREMESSAGE;}
+	void execute (Game & game) override;
+	virtual uint8_t id() const override {return QUEUE_CMD_EXPIREMESSAGE;}
 
 private:
 	Player_Number player;

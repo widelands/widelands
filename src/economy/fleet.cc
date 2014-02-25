@@ -83,7 +83,7 @@ void Fleet::set_economy(Economy * e)
 		}
 #ifndef NDEBUG
 		else
-			assert(e == 0);
+			assert(e == nullptr);
 #endif
 
 		if (upcast(Game, game, &owner().egbase())) {
@@ -168,7 +168,7 @@ void Fleet::find_other_fleet(Editor_Game_Base & egbase)
 			}
 		}
 
-		for (Bob * bob = cur.field->get_first_bob(); bob != 0; bob = bob->get_next_bob()) {
+		for (Bob * bob = cur.field->get_first_bob(); bob != nullptr; bob = bob->get_next_bob()) {
 			if (bob->get_bob_type() != Bob::SHIP)
 				continue;
 
@@ -247,7 +247,7 @@ void Fleet::cleanup(Editor_Game_Base & egbase)
 		PortDock * pd = m_ports.back();
 		m_ports.pop_back();
 
-		pd->set_fleet(0);
+		pd->set_fleet(nullptr);
 		if (!m_ports.empty() && !m_ships.empty()) {
 			// This is required when, during end-of-game cleanup,
 			// the fleet gets removed before the ports
@@ -258,7 +258,7 @@ void Fleet::cleanup(Editor_Game_Base & egbase)
 	m_portpaths.clear();
 
 	while (!m_ships.empty()) {
-		m_ships.back()->set_fleet(0);
+		m_ships.back()->set_fleet(nullptr);
 		m_ships.pop_back();
 	}
 
@@ -358,7 +358,7 @@ void Fleet::add_ship(Ship * ship)
 	ship->set_fleet(this);
 	if (upcast(Game, game, &owner().egbase())) {
 		if (m_ports.empty())
-			ship->set_economy(*game, 0);
+			ship->set_economy(*game, nullptr);
 		else
 			ship->set_economy(*game, m_ports[0]->get_economy());
 	}
@@ -375,9 +375,9 @@ void Fleet::remove_ship(Editor_Game_Base & egbase, Ship * ship)
 		*it = m_ships.back();
 		m_ships.pop_back();
 	}
-	ship->set_fleet(0);
+	ship->set_fleet(nullptr);
 	if (upcast(Game, game, &egbase))
-		ship->set_economy(*game, 0);
+		ship->set_economy(*game, nullptr);
 
 	if (ship->get_destination(egbase)) {
 		update(egbase);
@@ -537,10 +537,10 @@ void Fleet::remove_port(Editor_Game_Base & egbase, PortDock * port)
 		*it = m_ports.back();
 		m_ports.pop_back();
 	}
-	port->set_fleet(0);
+	port->set_fleet(nullptr);
 
 	if (m_ports.empty()) {
-		set_economy(0);
+		set_economy(nullptr);
 	} else {
 		set_economy(m_ports[0]->get_economy());
 		if (!m_ships.empty())
@@ -563,7 +563,7 @@ PortDock * Fleet::get_dock(Flag & flag) const
 			return *portit.current;
 	}
 
-	return 0;
+	return nullptr;
 }
 
 /**
@@ -572,7 +572,7 @@ PortDock * Fleet::get_dock(Flag & flag) const
 PortDock * Fleet::get_arbitrary_dock() const
 {
 	if (m_ports.empty())
-		return 0;
+		return nullptr;
 	return m_ports[0];
 }
 

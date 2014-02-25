@@ -32,8 +32,8 @@ struct GameTips : public UI::IProgressVisualization {
 		(UI::ProgressWindow & progressWindow, const std::vector<std::string>&);
 	virtual ~GameTips();
 
-	virtual void update(bool repaint);
-	virtual void stop();
+	virtual void update(bool repaint) override;
+	virtual void stop() override;
 
 private:
 	struct Tip {

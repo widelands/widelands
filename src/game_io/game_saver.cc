@@ -46,19 +46,19 @@ void Game_Saver::save() {
 	m_fs.EnsureDirectoryExists("binary");
 
 	log("Game: Writing Preload Data ... ");
-	{Game_Preload_Data_Packet                    p; p.Write(m_fs, m_game, 0);}
+	{Game_Preload_Data_Packet                    p; p.Write(m_fs, m_game, nullptr);}
 	log("took %ums\n", timer.ms_since_last_query());
 
 	log("Game: Writing Game Class Data ... ");
-	{Game_Game_Class_Data_Packet                 p; p.Write(m_fs, m_game, 0);}
+	{Game_Game_Class_Data_Packet                 p; p.Write(m_fs, m_game, nullptr);}
 	log("took %ums\n", timer.ms_since_last_query());
 
 	log("Game: Writing Player Info ... ");
-	{Game_Player_Info_Data_Packet                p; p.Write(m_fs, m_game, 0);}
+	{Game_Player_Info_Data_Packet                p; p.Write(m_fs, m_game, nullptr);}
 	log("took %ums\n", timer.ms_since_last_query());
 
 	log("Game: Writing Map Data!\n");
-	Game_Map_Data_Packet                         M; M.Write(m_fs, m_game, 0);
+	Game_Map_Data_Packet                         M; M.Write(m_fs, m_game, nullptr);
 	log("Game: Writing Map Data took %ums\n", timer.ms_since_last_query());
 
 	Map_Map_Object_Saver * const mos = M.get_map_object_saver();

@@ -58,11 +58,11 @@ private:
 			(Map & map, const FCoords & start, const FCoords & end,
 			 int32_t const dir,
 			 StepId  const id)
-			const
+			const override
 		{
 			return op.allowed(map, start, end, dir, id);
 		}
-		bool reachabledest(Map & map, const FCoords & dest) const {
+		bool reachabledest(Map & map, const FCoords & dest) const override {
 			return op.reachabledest(map, dest);
 		}
 

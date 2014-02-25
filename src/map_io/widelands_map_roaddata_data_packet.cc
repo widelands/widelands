@@ -134,8 +134,8 @@ void Map_Roaddata_Data_Packet::Read
 							 count);
 
 					for (uint32_t i = 0; i < count; ++i) {
-						Carrier * carrier = 0;
-						Request * carrier_request = 0;
+						Carrier * carrier = nullptr;
+						Request * carrier_request = nullptr;
 
 
 						if (uint32_t const carrier_serial = fr.Unsigned32())
@@ -147,7 +147,7 @@ void Map_Roaddata_Data_Packet::Read
 									("carrier (%u): %s", carrier_serial, e.what());
 							}
 						else {
-							carrier = 0;
+							carrier = nullptr;
 							//log("No carrier in this slot");
 						}
 
@@ -164,7 +164,7 @@ void Map_Roaddata_Data_Packet::Read
 							 		 wwWORKER))
 							->Read(fr, ref_cast<Game, Editor_Game_Base>(egbase), mol);
 						} else {
-							carrier_request = 0;
+							carrier_request = nullptr;
 							//log("No request in this slot");
 						}
 						uint8_t const carrier_type =

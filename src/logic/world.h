@@ -322,7 +322,7 @@ struct World : boost::noncopyable {
 	}
 	Terrain_Descr const * get_ter(char const * const name) const {
 		int32_t const i = ters.get_index(name);
-		return i != -1 ? ters.get(i) : 0;
+		return i != -1 ? ters.get(i) : nullptr;
 	}
 	int32_t get_nr_terrains() const {return ters.get_nitems();}
 	int32_t get_bob(char const * const l) const {return bobs.get_index(l);}

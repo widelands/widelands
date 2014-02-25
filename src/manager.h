@@ -118,13 +118,13 @@ template<typename T> struct Manager {
 		container_iterate_const(container, items, i)
 			if (name == (*i.current)->name())
 				return *i.current;
-		return 0;
+		return nullptr;
 	}
 	T       * operator[](const std::string & name)       {
 		container_iterate_const(container, items, i)
 			if (name == (*i.current)->name())
 				return *i.current;
-		return 0;
+		return nullptr;
 	}
 
 private:

@@ -45,7 +45,7 @@ inline Tribe_Descr const * StreamRead::Tribe_allow_null
 		else
 			throw tribe_nonexistent(name);
 	else
-		return 0;
+		return nullptr;
 }
 
 inline const Immovable_Descr & StreamRead::Immovable_Type

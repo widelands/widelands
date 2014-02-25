@@ -33,7 +33,7 @@ void Map_Player_Position_Data_Packet::Read
 	(FileSystem & fs, Editor_Game_Base & egbase, bool, Map_Map_Object_Loader &)
 {
 	Profile prof;
-	prof.read("player_position", 0, fs);
+	prof.read("player_position", nullptr, fs);
 	Section & s = prof.get_safe_section("global");
 
 	try {

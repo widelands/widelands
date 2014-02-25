@@ -29,7 +29,7 @@ namespace Widelands {
 struct game_data_error : public _wexception {
 	explicit game_data_error(char const * fmt, ...) PRINTF_FORMAT(2, 3);
 
-	virtual char const * what() const throw () {return m_what.c_str();}
+	virtual char const * what() const throw () override {return m_what.c_str();}
 protected:
 	game_data_error() {};
 };

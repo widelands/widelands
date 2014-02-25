@@ -49,13 +49,13 @@ template <typename Base> struct basic_FileWrite : public Base {
 	struct Buffer_Overflow : public Exception {};
 
 	/// Set the buffer to empty.
-	basic_FileWrite (): data(0), filelength(0), maxsize(0), filepos(0) {}
+	basic_FileWrite (): data(nullptr), filelength(0), maxsize(0), filepos(0) {}
 
 	/// Clear any remaining allocated data.
 	~basic_FileWrite() {Clear();}
 
 	/// Clears the object's buffer.
-	void Clear() {free(data); data = 0; filelength = maxsize = 0; filepos = 0;}
+	void Clear() {free(data); data = nullptr; filelength = maxsize = 0; filepos = 0;}
 
 	/// Write the file out to disk. If successful, this clears the buffers.
 	/// Otherwise, an exception is thrown but the buffer remains intact (don't

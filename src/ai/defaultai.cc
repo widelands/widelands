@@ -60,8 +60,8 @@ DefaultAI::DefaultAI(Game & ggame, Player_Number const pid, uint8_t const t) :
 	type                         (t),
 	m_buildable_changed          (true),
 	m_mineable_changed           (true),
-	player                       (0),
-	tribe                        (0),
+	player                       (nullptr),
+	tribe                        (nullptr),
 	total_constructionsites      (0),
 	next_road_due                (2000),
 	next_stats_update_due        (30000),
@@ -99,7 +99,7 @@ DefaultAI::~DefaultAI()
  */
 void DefaultAI::think ()
 {
-	if (tribe == 0)
+	if (tribe == nullptr)
 		late_initialization ();
 
 	const int32_t gametime = game().get_gametime();
@@ -279,7 +279,7 @@ void DefaultAI::late_initialization ()
 				bld.get_ismine() ? BuildingObserver::MINE :
 				BuildingObserver::PRODUCTIONSITE;
 
-			container_iterate_const(Ware_Types, prod.inputs(), j)
+			container_iterate_const(BillOfMaterials, prod.inputs(), j)
 				bo.inputs.push_back(j.current->first.value());
 
 			container_iterate_const
@@ -484,7 +484,7 @@ void DefaultAI::update_buildable_field
 	Player_Number const pn = player->player_number();
 
 	field.unowned_land_nearby =
-		map.find_fields(Area<FCoords>(field.coords, range), 0, find_unowned);
+		map.find_fields(Area<FCoords>(field.coords, range), nullptr, find_unowned);
 
 	// collect information about resources in the area
 	std::vector<ImmovableFound> immovables;
@@ -1343,7 +1343,7 @@ bool DefaultAI::improve_roads (int32_t gametime)
 	// Remove flags of dead end roads, as long as no more wares are stored on them
 	container_iterate(std::list<EconomyObserver *>, economies, i)
 		container_iterate(std::list<Flag const *>, (*i.current)->flags, j)
-			if ((*j.current)->is_dead_end() && (*j.current)->current_items() == 0) {
+			if ((*j.current)->is_dead_end() && (*j.current)->current_wares() == 0) {
 				game().send_player_bulldoze(*const_cast<Flag *>((*j.current)));
 				j.current = (*i.current)->flags.erase(j.current);
 				return true;
@@ -1480,7 +1480,7 @@ bool DefaultAI::improve_transportation_ways (const Flag & flag)
 		FCoords f = game().map().get_fcoords(*(i.current));
 		if (upcast(Flag, other_flag, f.field->get_immovable())) {
 			// Check if building is dismantled, but don't waste precious wares
-			if (!other_flag->get_building() && other_flag->current_items() == 0) {
+			if (!other_flag->get_building() && other_flag->current_wares() == 0) {
 				game().send_player_bulldoze(*other_flag);
 				flags_to_be_removed.erase(i.current);
 				break;
@@ -1625,7 +1625,7 @@ bool DefaultAI::check_productionsites(int32_t gametime)
 		 and
 		 map.find_immovables
 		 	(Area<FCoords>(map.get_fcoords(site.site->get_position()), radius),
-		 	 0,
+		 	 nullptr,
 		 	 FindImmovableAttribute(Map_Object_Descr::get_attribute_id("tree")))
 		 ==
 		 0)
@@ -1652,7 +1652,7 @@ bool DefaultAI::check_productionsites(int32_t gametime)
 		 and
 		 map.find_immovables
 		 	(Area<FCoords>(map.get_fcoords(site.site->get_position()), radius),
-		 	 0,
+		 	 nullptr,
 		 	 FindImmovableAttribute(Map_Object_Descr::get_attribute_id("stone")))
 		 ==
 		 0)
@@ -1830,7 +1830,7 @@ bool DefaultAI::check_mines(int32_t const gametime)
 			if (until >= current) {
 				// add some randomness - just for the case if more than one
 				// enhancement is available (not in any tribe yet)
-				int32_t const prio = time(0) % 3 + 1;
+				int32_t const prio = time(nullptr) % 3 + 1;
 				if (prio > maxprio) {
 					maxprio = prio;
 					enbld = (*x.current);
@@ -1878,7 +1878,7 @@ bool DefaultAI::check_militarysites(int32_t gametime)
 	// look if there is any enemy land nearby
 	FindNodeUnowned find_unowned(player, game(), true);
 
-	if (map.find_fields(Area<FCoords>(f, vision), 0, find_unowned) == 0) {
+	if (map.find_fields(Area<FCoords>(f, vision), nullptr, find_unowned) == 0) {
 		// If no enemy in sight - decrease the number of stationed soldiers
 		// as long as it is > 1 - BUT take care that there is a warehouse in the
 		// same economy where the thrown out soldiers can go to.
@@ -2018,7 +2018,7 @@ int32_t DefaultAI::calculate_need_for_ps(BuildingObserver & bo, int32_t prio)
 	// some randomness to avoid that defaultAI is building always
 	// the same (always == another game but same map with
 	// defaultAI on same coords)
-	prio += time(0) % 3 - 1;
+	prio += time(nullptr) % 3 - 1;
 
 	// check if current economy can supply enough material for
 	// production.
@@ -2093,7 +2093,7 @@ EconomyObserver * DefaultAI::get_economy_observer(Economy & economy)
 /// \returns the building observer
 BuildingObserver & DefaultAI::get_building_observer(char const * const name)
 {
-	if (tribe == 0)
+	if (tribe == nullptr)
 		late_initialization();
 
 	for (uint32_t i = 0; i < buildings.size(); ++i)

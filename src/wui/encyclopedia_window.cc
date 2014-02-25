@@ -96,7 +96,7 @@ void EncyclopediaWindow::fillWares() {
 	std::vector<Ware> ware_vec;
 
 	for (Ware_Index i = Ware_Index::First(); i < nr_wares; ++i) {
-		Item_Ware_Descr const * ware = tribe.get_ware_descr(i);
+		WareDescr const * ware = tribe.get_ware_descr(i);
 		Ware w(i, ware);
 		ware_vec.push_back(w);
 	}
@@ -153,7 +153,7 @@ void EncyclopediaWindow::prodSiteSelected(uint32_t) {
 	//  FIXME This needs reworking. A program can indeed produce iron even if
 	//  FIXME the program name is not any of produce_iron, smelt_iron, prog_iron
 	//  FIXME or work. What matters is whether the program has a statement such
-	//  FIXME as "produce iron" or "createitem iron". The program name is not
+	//  FIXME as "produce iron" or "createware iron". The program name is not
 	//  FIXME supposed to have any meaning to the game logic except to uniquely
 	//  FIXME identify the program.
 	//  Only shows information from the first program that has a name indicating

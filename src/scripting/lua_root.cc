@@ -26,7 +26,6 @@
 #include "logic/game.h"
 #include "logic/immovable.h"
 #include "logic/tribe.h"
-#include "scripting/coroutine_impl.h"
 #include "scripting/lua_editor.h"
 #include "scripting/lua_game.h"
 #include "scripting/lua_map.h"
@@ -75,14 +74,14 @@ const char L_Game::className[] = "Game";
 const MethodType<L_Game> L_Game::Methods[] = {
 	METHOD(L_Game, launch_coroutine),
 	METHOD(L_Game, save),
-	{0, 0},
+	{nullptr, nullptr},
 };
 const PropertyType<L_Game> L_Game::Properties[] = {
 	PROP_RO(L_Game, time),
 	PROP_RW(L_Game, desired_speed),
 	PROP_RW(L_Game, allow_autosaving),
 	PROP_RW(L_Game, allow_saving),
-	{0, 0, 0},
+	{nullptr, nullptr, nullptr},
 };
 
 L_Game::L_Game(lua_State * /* L */) {
@@ -192,7 +191,7 @@ int L_Game::launch_coroutine(lua_State * L) {
 		lua_pop(L, 1);
 	}
 
-	LuaCoroutine * cr = new LuaCoroutine_Impl(luaL_checkthread(L, 2));
+	LuaCoroutine * cr = new LuaCoroutine(luaL_checkthread(L, 2));
 	lua_pop(L, 2); // Remove coroutine and Game object from stack
 
 	get_game(L).enqueue_command(new Widelands::Cmd_LuaCoroutine(runtime, cr));
@@ -244,10 +243,10 @@ Editor
 
 const char L_Editor::className[] = "Editor";
 const MethodType<L_Editor> L_Editor::Methods[] = {
-	{0, 0},
+	{nullptr, nullptr},
 };
 const PropertyType<L_Editor> L_Editor::Properties[] = {
-	{0, 0, 0},
+	{nullptr, nullptr, nullptr},
 };
 
 L_Editor::L_Editor(lua_State * /* L */) {
@@ -277,13 +276,14 @@ void L_Editor::__unpersist(lua_State * /* L */) {
  ==========================================================
  */
 
-const static struct luaL_reg wlroot [] = {
-	{0, 0}
+const static struct luaL_Reg wlroot [] = {
+	{nullptr, nullptr}
 };
 
 void luaopen_wlroot(lua_State * L, bool in_editor) {
-	luaL_register(L, "wl", wlroot);
-	lua_pop(L, 1); // pop the table
+	lua_getglobal(L, "wl");  // S: wl
+	luaL_setfuncs(L, wlroot, 0); // S: wl
+	lua_pop(L, 1);  // S:
 
 	if (in_editor) {
 		register_class<L_Editor>(L, "", true);

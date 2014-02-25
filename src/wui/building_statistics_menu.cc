@@ -390,7 +390,7 @@ void Building_Statistics_Menu::update() {
 			player.get_building_statistics(i);
 
 		//  walk all entries, add new ones if needed
-		UI::Table<uintptr_t const>::Entry_Record * te = 0;
+		UI::Table<uintptr_t const>::Entry_Record * te = nullptr;
 		const uint32_t table_size = m_table.size();
 		for (uint32_t l = 0; l < table_size; ++l) {
 			UI::Table<uintptr_t const>::Entry_Record & er = m_table.get_record(l);

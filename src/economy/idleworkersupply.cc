@@ -35,7 +35,7 @@ namespace Widelands {
 /**
  * Automatically register with the worker's economy.
  */
-IdleWorkerSupply::IdleWorkerSupply(Worker & w) : m_worker (w), m_economy(0)
+IdleWorkerSupply::IdleWorkerSupply(Worker & w) : m_worker (w), m_economy(nullptr)
 {
 	set_economy(w.get_economy());
 }
@@ -46,7 +46,7 @@ IdleWorkerSupply::IdleWorkerSupply(Worker & w) : m_worker (w), m_economy(0)
  */
 IdleWorkerSupply::~IdleWorkerSupply()
 {
-	set_economy(0);
+	set_economy(nullptr);
 }
 
 
@@ -105,9 +105,9 @@ uint32_t IdleWorkerSupply::nr_supplies(const Game &, const Request & req) const
 	return 0;
 }
 
-WareInstance & IdleWorkerSupply::launch_item(Game &, const Request &)
+WareInstance & IdleWorkerSupply::launch_ware(Game &, const Request &)
 {
-	throw wexception("IdleWorkerSupply::launch_item() makes no sense.");
+	throw wexception("IdleWorkerSupply::launch_ware() makes no sense.");
 }
 
 

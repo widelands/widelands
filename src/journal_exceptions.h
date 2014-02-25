@@ -41,7 +41,7 @@ struct Journalfile_error : public std::runtime_error {
 	explicit Journalfile_error(const std::string & filename);
 	virtual ~Journalfile_error() throw () {}
 
-	virtual char const * what() const throw () {return text.c_str();}
+	virtual char const * what() const throw () override {return text.c_str();}
 
 	std::string text;
 	std::string filename;

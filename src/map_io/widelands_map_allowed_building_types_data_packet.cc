@@ -41,10 +41,10 @@ void Map_Allowed_Building_Types_Data_Packet::Read
 
 	Profile prof;
 	try {
-		prof.read("allowed_building_types", 0, fs);
+		prof.read("allowed_building_types", nullptr, fs);
 	} catch (const _wexception &) {
 		try {
-			prof.read("allowed_buildings", 0, fs);
+			prof.read("allowed_buildings", nullptr, fs);
 		} catch (...) {
 			return;
 		}
@@ -74,7 +74,7 @@ void Map_Allowed_Building_Types_Data_Packet::Read
 					Section & s = prof.get_safe_section(buffer);
 
 					bool allowed;
-					while (const char * const name = s.get_next_bool(0, &allowed)) {
+					while (const char * const name = s.get_next_bool(nullptr, &allowed)) {
 						if (Building_Index const index = tribe.building_index(name))
 							player->allow_building_type(index, allowed);
 						else

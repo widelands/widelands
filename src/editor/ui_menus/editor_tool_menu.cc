@@ -130,7 +130,7 @@ void Editor_Tool_Menu::changed_to() {
 		break;
 	case 6:
 		current_tool_pointer     = &parent.tools.set_port_space;
-		current_registry_pointer = 0; // no need for a window
+		current_registry_pointer = nullptr; // no need for a window
 		break;
 	default:
 		assert(false);

@@ -61,7 +61,7 @@ struct Console : public ChatProvider, public Handler {
 		write("Unknown command: " + args[0]);
 	}
 
-	void send(const std::string & msg)
+	void send(const std::string & msg) override
 	{
 		std::vector<std::string> arg;
 		std::string::size_type pos = 0;
@@ -86,7 +86,7 @@ struct Console : public ChatProvider, public Handler {
 		it->second(arg);
 	}
 
-	const std::vector<ChatMessage> & getMessages() const
+	const std::vector<ChatMessage> & getMessages() const override
 	{
 		return messages;
 	}
@@ -95,7 +95,7 @@ struct Console : public ChatProvider, public Handler {
 	{
 		ChatMessage cm;
 
-		cm.time = time(0);
+		cm.time = time(nullptr);
 		cm.msg = msg;
 		messages.push_back(cm);
 

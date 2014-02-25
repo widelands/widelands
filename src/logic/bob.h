@@ -163,15 +163,15 @@ struct Bob : public Map_Object {
 	 * \see struct Bob for in-depth explanation
 	 */
 	struct State {
-		State(const Task * const the_task = 0) :
+		State(const Task * const the_task = nullptr) :
 			task    (the_task),
 			ivar1   (0),
 			ivar2   (0),
 			ivar3   (0),
 			coords  (Coords::Null()),
-			path    (0),
-			route   (0),
-			program (0)
+			path    (nullptr),
+			route   (nullptr),
+			program (nullptr)
 		{}
 
 		const Task           * task;
@@ -221,14 +221,14 @@ struct Bob : public Map_Object {
 	uint32_t get_current_anim() const {return m_anim;}
 	int32_t get_animstart() const {return m_animstart;}
 
-	virtual int32_t get_type() const {return BOB;}
-	virtual char const * type_name() const {return "bob";}
+	virtual int32_t get_type() const override {return BOB;}
+	virtual char const * type_name() const override {return "bob";}
 	virtual Type get_bob_type() const = 0;
 	const std::string & name() const {return descr().name();}
 
-	virtual void init(Editor_Game_Base &);
-	virtual void cleanup(Editor_Game_Base &);
-	virtual void act(Game &, uint32_t data);
+	virtual void init(Editor_Game_Base &) override;
+	virtual void cleanup(Editor_Game_Base &) override;
+	virtual void act(Game &, uint32_t data) override;
 	void schedule_destroy(Game &);
 	void schedule_act(Game &, uint32_t tdelta);
 	void skip_act();
@@ -253,7 +253,7 @@ struct Bob : public Map_Object {
 		(const Editor_Game_Base &, RenderTarget &, const Point&) const;
 
 	// For debug
-	virtual void log_general_info(const Editor_Game_Base &);
+	virtual void log_general_info(const Editor_Game_Base &) override;
 
 	// default tasks
 	void reset_tasks(Game &);
@@ -295,7 +295,7 @@ struct Bob : public Map_Object {
 
 	// higher level handling (task-based)
 	State & top_state() {assert(m_stack.size()); return *m_stack.rbegin();}
-	State * get_state() {return m_stack.size() ? &*m_stack.rbegin() : 0;}
+	State * get_state() {return m_stack.size() ? &*m_stack.rbegin() : nullptr;}
 
 
 	std::string get_signal() {return m_signal;}
@@ -388,8 +388,8 @@ protected:
 		Loader();
 
 		void load(FileRead &);
-		virtual void load_pointers();
-		virtual void load_finish();
+		virtual void load_pointers() override;
+		virtual void load_finish() override;
 
 	protected:
 		virtual const Task * get_task(const std::string & name);
@@ -405,9 +405,9 @@ protected:
 	};
 
 public:
-	virtual bool has_new_save_support() {return true;}
+	virtual bool has_new_save_support() override {return true;}
 
-	virtual void save(Editor_Game_Base &, Map_Map_Object_Saver &, FileWrite &);
+	virtual void save(Editor_Game_Base &, Map_Map_Object_Saver &, FileWrite &) override;
 	// Pure Bobs cannot be loaded
 };
 

@@ -134,7 +134,7 @@ void Route::save
 }
 
 /**
- * Insert this node as the very first item into the Route
+ * Insert this node as the very first entry into the Route
  */
 void Route::insert_as_first(RoutingNode * node) {
 	// we are sure that node is a Flag, since it is the only

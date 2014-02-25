@@ -477,9 +477,6 @@ if (NOT SDLGFX_FOUND)
   message(FATAL_ERROR "Required package SDL_gfx not found, please install and re-run cmake")
 endif (NOT SDLGFX_FOUND)
 
-find_package(Lua51 REQUIRED)
-include_directories(${LUA_INCLUDE_DIR})
-
 IF (WIN32)
   SET(GUI_TYPE WIN32)
 ENDIF (WIN32)

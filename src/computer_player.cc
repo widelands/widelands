@@ -32,12 +32,12 @@ struct EmptyAI : Computer_Player {
 	EmptyAI(Widelands::Game & g, const Widelands::Player_Number pid)
 	: Computer_Player(g, pid) {}
 
-	void think() {}
+	void think() override {}
 
 	struct EmptyAIImpl : Implementation {
 		EmptyAIImpl() {name = _("None");}
 		Computer_Player * instantiate
-			(Widelands::Game & g, Widelands::Player_Number const pid) const
+			(Widelands::Game & g, Widelands::Player_Number const pid) const override
 		{
 			return new EmptyAI(g, pid);
 		}

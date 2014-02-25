@@ -67,7 +67,7 @@ int32_t Editor_Place_Immovable_Tool::handle_click_impl
 			(not mr.location().field->get_immovable()
 			        and
 			        (mr.location().field->nodecaps() & Widelands::MOVECAPS_WALK))
-				egbase.create_immovable(mr.location(), *i, 0);
+				egbase.create_immovable(mr.location(), *i, nullptr);
 			++i;
 		} while (mr.advance(map));
 	}
@@ -96,7 +96,7 @@ int32_t Editor_Place_Immovable_Tool::handle_undo_impl
 			immovable->remove(egbase);
 		}
 		if (!i->empty())
-			egbase.create_immovable(mr.location(), *i, 0);
+			egbase.create_immovable(mr.location(), *i, nullptr);
 
 		++i;
 	} while (mr.advance(map));

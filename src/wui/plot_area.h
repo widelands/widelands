@@ -55,7 +55,7 @@ struct WUIPlot_Area : public UI::Panel {
 	WUIPlot_Area
 		(UI::Panel * parent, int32_t x, int32_t y, int32_t w, int32_t h);
 
-	virtual void draw(RenderTarget &);
+	virtual void draw(RenderTarget &) override;
 
 	void set_time(TIME id) {
 		m_time = id;
@@ -140,7 +140,7 @@ struct WUIPlot_Area_Slider : public UI::DiscreteSlider {
 	}
 
 protected:
-	void draw(RenderTarget & dst);
+	void draw(RenderTarget & dst) override;
 
 private:
 	WUIPlot_Area & m_plot_area;
@@ -157,7 +157,7 @@ public:
 	DifferentialPlot_Area
 		(UI::Panel * parent, int32_t x, int32_t y, int32_t w, int32_t h);
 
-	virtual void draw(RenderTarget &);
+	virtual void draw(RenderTarget &) override;
 
 	void register_negative_plot_data
 		(uint32_t id, const std::vector<uint32_t> * data);

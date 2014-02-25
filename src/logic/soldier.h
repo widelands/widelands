@@ -47,9 +47,9 @@ struct Soldier_Descr : public Worker_Descr {
 
 	// NOTE we have to explicitly return Worker_Descr::SOLDIER, as SOLDIER is
 	// NOTE as well defined in an enum in instances.h
-	virtual Worker_Type get_worker_type() const {return Worker_Descr::SOLDIER;}
+	virtual Worker_Type get_worker_type() const override {return Worker_Descr::SOLDIER;}
 
-	virtual void load_graphics();
+	virtual void load_graphics() override;
 
 	uint32_t get_max_hp_level          () const {return m_max_hp_level;}
 	uint32_t get_max_attack_level      () const {return m_max_attack_level;}
@@ -85,7 +85,7 @@ struct Soldier_Descr : public Worker_Descr {
 	uint32_t get_rand_anim(Game & game, const char * const name) const;
 
 protected:
-	virtual Bob & create_object() const;
+	virtual Bob & create_object() const override;
 
 	//  start values
 	uint32_t m_base_hp;
@@ -176,8 +176,8 @@ class Soldier : public Worker {
 public:
 	Soldier(const Soldier_Descr &);
 
-	virtual void init(Editor_Game_Base &);
-	virtual void cleanup(Editor_Game_Base &);
+	virtual void init(Editor_Game_Base &) override;
+	virtual void cleanup(Editor_Game_Base &) override;
 
 	void set_level
 		(uint32_t hp, uint32_t attack, uint32_t defense, uint32_t evade);
@@ -192,12 +192,12 @@ public:
 	uint32_t get_evade_level  () const {return m_evade_level;}
 
 	/// Automatically select a task.
-	void init_auto_task(Game &);
+	void init_auto_task(Game &) override;
 
 	Point calc_drawpos(const Editor_Game_Base &, Point) const;
 	/// Draw this soldier
 	virtual void draw
-		(const Editor_Game_Base &, RenderTarget &, const Point&) const;
+		(const Editor_Game_Base &, RenderTarget &, const Point&) const override;
 
 	static void calc_info_icon_size
 		(const Tribe_Descr &, uint32_t & w, uint32_t & h);
@@ -237,7 +237,7 @@ public:
 		return descr().get_evade_level_pic  (m_evade_level);
 	}
 
-	int32_t get_tattribute(uint32_t attr) const;
+	int32_t get_tattribute(uint32_t attr) const override;
 
 	/// Sets a random animation of desired type and start playing it.
 	void start_animation
@@ -247,13 +247,13 @@ public:
 	void heal (uint32_t);
 	void damage (uint32_t); /// Damage quantity of hit points
 
-	virtual void log_general_info(const Editor_Game_Base &);
+	virtual void log_general_info(const Editor_Game_Base &) override;
 
 	bool isOnBattlefield();
 	bool is_attacking_player(Game &, Player &);
 	Battle * getBattle();
 	bool canBeChallenged();
-	virtual bool checkNodeBlocked(Game &, const FCoords &, bool commit);
+	virtual bool checkNodeBlocked(Game &, const FCoords &, bool commit) override;
 
 	void setBattle(Game &, Battle *);
 
@@ -288,7 +288,7 @@ protected:
 	// May be this can be moved this to bob when finished
 	static Task const taskDie;
 
-	virtual bool is_evict_allowed();
+	virtual bool is_evict_allowed() override;
 
 private:
 	uint32_t m_hp_current;
@@ -319,21 +319,21 @@ protected:
 	public:
 		Loader();
 
-		virtual void load(FileRead &);
-		virtual void load_pointers();
+		virtual void load(FileRead &) override;
+		virtual void load_pointers() override;
 
 	protected:
-		virtual const Task * get_task(const std::string & name);
+		virtual const Task * get_task(const std::string & name) override;
 
 	private:
 		uint32_t m_battle;
 	};
 
-	virtual Loader * create_loader();
+	virtual Loader * create_loader() override;
 
 public:
 	virtual void do_save
-		(Editor_Game_Base &, Map_Map_Object_Saver &, FileWrite &);
+		(Editor_Game_Base &, Map_Map_Object_Saver &, FileWrite &) override;
 };
 
 }

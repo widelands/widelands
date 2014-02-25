@@ -76,9 +76,9 @@ Bob & Ship_Descr::create_object() const {
 
 Ship::Ship(const Ship_Descr & gdescr) :
 	Bob(gdescr),
-	m_window(0),
-	m_fleet(0),
-	m_economy(0),
+	m_window(nullptr),
+	m_fleet(nullptr),
+	m_economy(nullptr),
 	m_ship_state(TRANSPORT)
 {
 }
@@ -118,7 +118,7 @@ void Ship::init(Editor_Game_Base & egbase) {
  * fleet, if one is reachable.
  */
 void Ship::init_fleet(Editor_Game_Base & egbase) {
-	assert(get_owner() != 0);
+	assert(get_owner() != nullptr);
 	Fleet * fleet = new Fleet(*get_owner());
 	fleet->add_ship(this);
 	fleet->init(egbase);
@@ -171,8 +171,8 @@ void Ship::wakeup_neighbours(Game & game) {
 const Bob::Task Ship::taskShip = {
 	"ship",
 	static_cast<Bob::Ptr>(&Ship::ship_update),
-	0,
-	0,
+	nullptr,
+	nullptr,
 	true // unique task
 };
 
@@ -268,7 +268,7 @@ bool Ship::ship_update_transport(Game & game, Bob::State &) {
 	if (position.field->get_immovable() == dst) {
 		molog("ship_update: Arrived at dock %u\n", dst->serial());
 		m_lastdock = dst;
-		m_destination = 0;
+		m_destination = nullptr;
 		dst->ship_arrived(game, *this);
 		start_task_idle(game, descr().main_animation(), 250);
 		return true;
@@ -324,7 +324,7 @@ bool Ship::ship_update_transport(Game & game, Bob::State &) {
 			}
 		}
 
-		m_lastdock = 0;
+		m_lastdock = nullptr;
 	}
 
 	start_task_movetodock(game, *dst);
@@ -1046,7 +1046,7 @@ Map_Object::Loader * Ship::load
 		if (1 <= version && version <= SHIP_SAVEGAME_VERSION) {
 			std::string owner = fr.CString();
 			std::string name = fr.CString();
-			const Ship_Descr * descr = 0;
+			const Ship_Descr * descr = nullptr;
 
 			egbase.manually_load_tribe(owner);
 

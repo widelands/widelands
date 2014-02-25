@@ -50,15 +50,15 @@ struct IdleWareSupply : public Supply {
 	void set_economy(Economy *);
 
 	//  implementation of Supply
-	virtual PlayerImmovable * get_position(Game &);
-	virtual bool is_active() const;
-	virtual bool has_storage() const;
-	virtual void get_ware_type(WareWorker & type, Ware_Index & ware) const;
-	virtual void send_to_storage(Game &, Warehouse * wh);
+	virtual PlayerImmovable * get_position(Game &) override;
+	virtual bool is_active() const override;
+	virtual bool has_storage() const override;
+	virtual void get_ware_type(WareWorker & type, Ware_Index & ware) const override;
+	virtual void send_to_storage(Game &, Warehouse * wh) override;
 
-	virtual uint32_t nr_supplies(const Game &, const Request &) const;
-	virtual WareInstance & launch_item(Game &, const Request &);
-	virtual Worker & launch_worker(Game &, const Request &);
+	virtual uint32_t nr_supplies(const Game &, const Request &) const override;
+	virtual WareInstance & launch_ware(Game &, const Request &) override;
+	virtual Worker & launch_worker(Game &, const Request &) override;
 
 private:
 	WareInstance & m_ware;
@@ -69,7 +69,7 @@ private:
  * Initialize the Supply and update the economy.
 */
 IdleWareSupply::IdleWareSupply(WareInstance & ware) :
-	m_ware(ware), m_economy(0)
+	m_ware(ware), m_economy(nullptr)
 {
 	set_economy(ware.get_economy());
 }
@@ -79,7 +79,7 @@ IdleWareSupply::IdleWareSupply(WareInstance & ware) :
 */
 IdleWareSupply::~IdleWareSupply()
 {
-	set_economy(0);
+	set_economy(nullptr);
 }
 
 /**
@@ -115,7 +115,7 @@ PlayerImmovable * IdleWareSupply::get_position(Game & game)
 		return ship->get_fleet()->get_arbitrary_dock();
 	}
 
-	return 0;
+	return nullptr;
 }
 
 bool IdleWareSupply::is_active() const
@@ -145,12 +145,12 @@ uint32_t IdleWareSupply::nr_supplies(const Game &, const Request & req) const
 }
 
 /**
- * The item is already "launched", so we only need to return it.
+ * The ware is already "launched", so we only need to return it.
 */
-WareInstance & IdleWareSupply::launch_item(Game &, const Request & req) {
+WareInstance & IdleWareSupply::launch_ware(Game &, const Request & req) {
 	if (req.get_type() != wwWARE)
 		throw wexception
-			("IdleWareSupply::launch_item : called for non-item request");
+			("IdleWareSupply::launch_ware : called for non-ware request");
 	if (req.get_index() != m_ware.descr_index())
 		throw wexception
 			("IdleWareSupply: ware(%u) (type = %i) requested for %i",
@@ -180,13 +180,13 @@ void IdleWareSupply::send_to_storage(Game & game, Warehouse * wh)
 /*                     Ware Instance Implementation                      */
 /*************************************************************************/
 WareInstance::WareInstance
-	(Ware_Index const i, const Item_Ware_Descr * const ware_descr)
+	(Ware_Index const i, const WareDescr * const ware_descr)
 :
 Map_Object   (ware_descr),
-m_economy    (0),
+m_economy    (nullptr),
 m_descr_index(i),
-m_supply     (0),
-m_transfer   (0)
+m_supply     (nullptr),
+m_transfer   (nullptr)
 {}
 
 WareInstance::~WareInstance()
@@ -211,13 +211,13 @@ void WareInstance::cleanup(Editor_Game_Base & egbase)
 {
 	// Unlink from our current location, if necessary
 	if (upcast(Flag, flag, m_location.get(egbase)))
-		flag->remove_item(egbase, this);
+		flag->remove_ware(egbase, this);
 
 	delete m_supply;
-	m_supply = 0;
+	m_supply = nullptr;
 
 	cancel_moving();
-	set_location(egbase, 0);
+	set_location(egbase, nullptr);
 
 	Map_Object::cleanup(egbase);
 }
@@ -256,7 +256,7 @@ void WareInstance::set_location(Editor_Game_Base & egbase, Map_Object * const lo
 	m_location = location;
 
 	if (location) {
-		Economy * eco = 0;
+		Economy * eco = nullptr;
 
 		if (upcast(Flag const, flag, location))
 			eco = flag->get_economy();
@@ -276,7 +276,7 @@ void WareInstance::set_location(Editor_Game_Base & egbase, Map_Object * const lo
 			set_economy(eco);
 		}
 	} else {
-		set_economy(0);
+		set_economy(nullptr);
 	}
 }
 
@@ -327,7 +327,7 @@ void WareInstance::update(Game & game)
 			m_supply = new IdleWareSupply(*this);
 	} else {
 		delete m_supply;
-		m_supply = 0;
+		m_supply = nullptr;
 	}
 
 	// Deal with transfers
@@ -345,12 +345,12 @@ void WareInstance::update(Game & game)
 
 		if (!nextstep) {
 			if (upcast(Flag, flag, location))
-				flag->call_carrier(game, *this, 0);
+				flag->call_carrier(game, *this, nullptr);
 
 			Transfer * const t = m_transfer;
 
-			m_transfer = 0;
-			m_transfer_nextstep = 0;
+			m_transfer = nullptr;
+			m_transfer_nextstep = nullptr;
 
 			if (success) {
 				t->has_finished();
@@ -390,8 +390,8 @@ void WareInstance::enter_building(Game & game, Building & building)
 		if (m_transfer->get_destination(game) == &building) {
 			Transfer * t = m_transfer;
 
-			m_transfer = 0;
-			m_transfer_nextstep = 0;
+			m_transfer = nullptr;
+			m_transfer_nextstep = nullptr;
 
 			t->has_finished();
 			return;
@@ -419,7 +419,7 @@ void WareInstance::enter_building(Game & game, Building & building)
 			//    shipped across the sea, but a better, land-based route has been
 			//    found
 			if (upcast(Warehouse, warehouse, &building)) {
-				warehouse->do_launch_item(game, *this);
+				warehouse->do_launch_ware(game, *this);
 				return;
 			}
 
@@ -433,13 +433,13 @@ void WareInstance::enter_building(Game & game, Building & building)
 		} else {
 			Transfer * t = m_transfer;
 
-			m_transfer = 0;
-			m_transfer_nextstep = 0;
+			m_transfer = nullptr;
+			m_transfer_nextstep = nullptr;
 
 			t->has_failed();
 			cancel_moving();
 
-			if (upcast(Warehouse, warehouse, &building)) {
+			if (is_a(Warehouse, &building)) {
 				building.receive_ware(game, m_descr_index);
 				remove(game);
 			} else {
@@ -462,19 +462,19 @@ void WareInstance::enter_building(Game & game, Building & building)
  */
 void WareInstance::set_transfer(Game & game, Transfer & t)
 {
-	m_transfer_nextstep = 0;
+	m_transfer_nextstep = nullptr;
 
 	// Reset current transfer
 	if (m_transfer) {
 		m_transfer->has_failed();
-		m_transfer = 0;
+		m_transfer = nullptr;
 	}
 
 	// Set transfer state
 	m_transfer = &t;
 
 	delete m_supply;
-	m_supply = 0;
+	m_supply = nullptr;
 
 	// Schedule an update.
 	// Do not update immediately, because update() could try to reference
@@ -489,8 +489,8 @@ void WareInstance::set_transfer(Game & game, Transfer & t)
 */
 void WareInstance::cancel_transfer(Game & game)
 {
-	m_transfer = 0;
-	m_transfer_nextstep = 0;
+	m_transfer = nullptr;
+	m_transfer_nextstep = nullptr;
 
 	update(game);
 }
@@ -513,8 +513,8 @@ void WareInstance::cancel_moving()
 
 	if (m_transfer) {
 		m_transfer->has_failed();
-		m_transfer = 0;
-		m_transfer_nextstep = 0;
+		m_transfer = nullptr;
+		m_transfer_nextstep = nullptr;
 	}
 }
 
@@ -526,7 +526,7 @@ PlayerImmovable * WareInstance::get_next_move_step(Game & game)
 {
 	return
 		m_transfer ?
-		dynamic_cast<PlayerImmovable *>(m_transfer_nextstep.get(game)) : 0;
+		dynamic_cast<PlayerImmovable *>(m_transfer_nextstep.get(game)) : nullptr;
 }
 
 void WareInstance::log_general_info(const Editor_Game_Base & egbase)
@@ -647,7 +647,7 @@ Map_Object::Loader * WareInstance::load
 			wareindex = Ware_Index::First();
 			kill = true;
 		}
-		const Item_Ware_Descr * descr = tribe->get_ware_descr(wareindex);
+		const WareDescr * descr = tribe->get_ware_descr(wareindex);
 
 		std::unique_ptr<Loader> loader(new Loader);
 		loader->init(egbase, mol, *new WareInstance(wareindex, descr));
@@ -667,7 +667,7 @@ Map_Object::Loader * WareInstance::load
 		throw wexception("WareInstance: %s", e.what());
 	}
 
-	return 0; // Should never be reached
+	return nullptr; // Should never be reached
 }
 
 }

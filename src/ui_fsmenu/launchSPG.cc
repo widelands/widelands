@@ -119,7 +119,7 @@ Fullscreen_Menu_LaunchSPG::Fullscreen_Menu_LaunchSPG
 
 
 	// Register win condition scripts
-	m_lua = create_LuaInterface();
+	m_lua = new LuaInterface();
 	m_lua->register_scripts(*g_fs, "win_conditions", "scripting/win_conditions");
 
 	ScriptContainer sc = m_lua->get_scripts_for("win_conditions");
@@ -328,7 +328,7 @@ void Fullscreen_Menu_LaunchSPG::select_map()
 	if (!m_settings->canChangeMap())
 		return;
 
-	Fullscreen_Menu_MapSelect msm(m_settings, 0);
+	Fullscreen_Menu_MapSelect msm(m_settings, nullptr);
 	int code = msm.run();
 
 	if (code <= 0) {

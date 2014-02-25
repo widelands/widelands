@@ -32,7 +32,7 @@ class Game;
 struct Map_Map_Object_Loader;
 struct Map_Map_Object_Saver;
 class Map_Object;
-struct PortDock;
+class PortDock;
 class WareInstance;
 class Worker;
 
@@ -67,7 +67,7 @@ struct ShippingItem {
 	void save(Editor_Game_Base & egbase, Map_Map_Object_Saver & mos, FileWrite & fw);
 
 private:
-	friend struct PortDock;
+	friend class PortDock;
 	friend struct Ship;
 
 	// Called when a port is reached. The item will act again on its own.

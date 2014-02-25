@@ -60,7 +60,7 @@ d_chatmessages(0),
 root(new RealFSImpl("/"))
 {
 	char ts[42];
-	time_t currenttime = time(0);
+	time_t currenttime = time(nullptr);
 	strftime(ts, sizeof(ts), "%a %Y/%m/%d, %H:%M:%S", localtime(&currenttime));
 	d_start = ts;
 	d_ip = (boost::format("\\<%s\\>") % _("unknown")).str();
@@ -69,7 +69,7 @@ root(new RealFSImpl("/"))
 
 /// \returns the dedicated server logger, if it is not yet initialized, this is done before.
 DedicatedLog * DedicatedLog::get() {
-	if (logger == 0)
+	if (logger == nullptr)
 		logger = new DedicatedLog();
 	return logger;
 }
@@ -135,11 +135,11 @@ void DedicatedLog::set_server_ip(std::string ip) {
 void DedicatedLog::game_start(std::vector<std::string> clients, std::string mapname) {
 	GameStatistic * new_game = new GameStatistic;
 	new_game->mapname = mapname;
-	new_game->times.push_back(time(0));
+	new_game->times.push_back(time(nullptr));
 	new_game->clients = clients;
 	d_games.push_back(*new_game);
 	delete new_game;
-	new_game = 0;
+	new_game = nullptr;
 	info_update();
 }
 
@@ -148,7 +148,7 @@ void DedicatedLog::game_start(std::vector<std::string> clients, std::string mapn
 void DedicatedLog::game_end(std::vector<std::string> winners) {
 	assert(!d_games.empty());
 	d_games.back().winners = winners;
-	d_games.back().times.push_back(time(0));
+	d_games.back().times.push_back(time(nullptr));
 	info_update();
 }
 
@@ -217,7 +217,7 @@ void DedicatedLog::dlog(std::string msg) {
 
 	std::string temp("<tr><td class=\"time\">");
 	char ts[32];
-	time_t * t = new time_t(time(0));
+	time_t * t = new time_t(time(nullptr));
 	strftime(ts, sizeof(ts), "[%Y-%m-%d, %H:%M]", localtime(t));
 	delete t;
 	temp += ts;

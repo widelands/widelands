@@ -26,12 +26,10 @@
 #ifndef LUNA_IMPL_H
 #define LUNA_IMPL_H
 
-#include <lua.hpp>
-
 #include "scripting/c_utils.h"
+#include "scripting/eris/lua.hpp"
 
-// This is only needed in pluto.cc
-int luna_restore_object(lua_State * L);
+int luna_unpersisting_closure(lua_State * L);
 
 /**
  * Descriptions for the Properties/Methods that should be available to Lua
@@ -188,12 +186,17 @@ int m_method_dispatch(lua_State * const L) {
  * Deletes a given object, as soon as Lua wants to get rid of it
  */
 template <class T>
-int m_garbage_collect(lua_State * const L) {
-	T * * const obj = static_cast<T * *>(luaL_checkudata(L, -1, T::className));
+int m_garbage_collect(lua_State* const L) {
+	// This method is called in two cases - either the userdata that we store at
+	// key 0 in all of our objects is deleted or the table that represents our
+	// classes itself is deleted. If it is the table, the following check will
+	// return nullptr and we have nothing else today. In other cases, we have to
+	// delete our object.
+	T** const obj = static_cast<T**>(luaL_testudata(L, -1, T::className));
+	if (!obj)
+		return 0;
 
-	if (obj)
-		delete *obj;
-
+	delete *obj;
 	return 0;
 }
 
@@ -234,9 +237,10 @@ void m_add_instantiator_to_lua(lua_State * const L) {
 
 template <class T>
 int m_persist(lua_State * const L) {
+	assert(lua_gettop(L) == 1); // S: lightuserdata
 	T * * const obj = get_user_class<T>(L, 1);
 
-	lua_newtable(L);
+	lua_newtable(L);  // S: user_obj table
 
 	lua_pushstring(L, (*obj)->get_modulename());
 	lua_setfield(L, -2, "module");
@@ -244,7 +248,12 @@ int m_persist(lua_State * const L) {
 	lua_pushstring(L, T::className);
 	lua_setfield(L, -2, "class");
 
+	assert(lua_gettop(L) == 2); // S: user_obj table
 	(*obj)->__persist(L);
+	assert(lua_gettop(L) == 2); // S: user_obj table
+
+	lua_pushcclosure(L, &luna_unpersisting_closure, 1);
+	assert(lua_gettop(L) == 2); // S: user_obj closure
 
 	return 1;
 }
@@ -337,8 +346,9 @@ void m_extract_userdata_from_user_class(lua_State * const L, int narg) {
 	else
 		lua_rawget(L, narg - 1);
 
-	if (not lua_isuserdata(L, -1))
-		luaL_typerror(L, narg, T::className);
+	if (!lua_isuserdata(L, -1)) {
+		report_error(L, "Expected a userdata, but got something else.");
+	}
 }
 
 #endif
