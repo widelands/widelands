@@ -52,6 +52,7 @@ private:
 	uint32_t m_buth;
 	uint32_t m_lisw;
 	uint32_t m_fs;
+	uint32_t m_prev_clientlist_len;
 	std::string m_fn;
 	UI::Textarea title, m_clients, m_opengames;
 	UI::Textarea m_servername;

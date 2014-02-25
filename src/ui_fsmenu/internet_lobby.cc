@@ -43,6 +43,7 @@ Fullscreen_Menu_Internet_Lobby::Fullscreen_Menu_Internet_Lobby
 	m_buth (get_h() * 19 / 400),
 	m_lisw (get_w() * 623 / 1000),
 	m_fs   (fs_small()),
+	m_prev_clientlist_len(1000),
 	m_fn   (ui_fn()),
 
 // Text labels
@@ -294,6 +295,14 @@ void Fullscreen_Menu_Internet_Lobby::fillClientList(const std::vector<INet_Clien
 			default:
 				continue;
 		}
+	}
+
+	// If a new player joins the lobby, play a sound.
+	if (clients.size() != m_prev_clientlist_len)
+	{
+		if (clients.size() > m_prev_clientlist_len)
+			play_new_chat_member();
+		m_prev_clientlist_len = clients.size();
 	}
 }
 
