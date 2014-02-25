@@ -4,25 +4,30 @@
 welcome_msg = rt(
    h1(_"Welcome to Island Hopping") ..
    h2(_"Rules") ..
-   p(_
-[[Island Hopping is a traditional tournament in the Atlantean culture. The
-rules of the game are simple: you start with a headquarters on one island.
-When you finish a castle at the end of the first island, you are granted a
-second headquarters on a second island, which will contain all wares from your
-first headquarters.]]) .. p(_
-[[If you finish a castle at the target area on the second island, you will get
-a third headquarters on the third island. You must build and hold a castle at
-the center of the third island for 20 minutes to win the game.]]) .. p(_
-[[Whenever you finish an island, you get bonus wares depending how many players
-have finished the island before you. The earlier you finish, the less wares you
-get. See below for the details.]]) .. p(_
-[[The clue is that the first island only offers stones and wood, the second
-only meadows and resources. The economies you leave behind will continue to
-work for you, but you only reap the benefits when you reach a new island.]]
-) .. p(_
+   p(_(
+[[Island Hopping is a traditional tournament in Atlantean culture. ]] ..
+[[The rules of the game are simple: you start with a headquarters on an island. ]] ..
+[[When you finish a castle at the end of the first island, you are granted a ]] ..
+[[second headquarters on a second island, which will contain all wares from your ]] ..
+[[first headquarters.]]
+)) .. 
+ p(_(
+[[If you finish a castle in the target area on the second island, you will get ]] ..
+[[a third headquarters on the third island. You must build a castle at ]] ..
+[[the center of the third island and hold it for 20 minutes to win the game.]]
+)) ..
+ p(_(
+[[Whenever you finish an island, you will get bonus wares, depending on how many players ]] ..
+[[have finished the island before you. The earlier you finish, the fewer wares you will get. ]] ..
+[[See below for the details.]])) .. p(_(
+[[The clue is that the first island only provides stones and wood, the second ]] ..
+[[only meadows and resources. The economies you leave behind will continue to ]] ..
+[[work for you, but you will only reap the benefits at the moment you reach a new island.]])
+) ..
+p(_
 [[Finally, be careful not to waste your quartz and diamonds.]]
 ) ..
-h2(_"Finish rewards") ..
+h2(_"Finish Rewards") ..
 h3(_"First Island") ..
 h4(_"1st to finish") .. p(format_rewards(_finish_rewards[1][1])) ..
 h4(_"2nd to finish") .. p(format_rewards(_finish_rewards[1][2])) ..
