@@ -262,7 +262,7 @@ struct SaveWarnMessageBox : public UI::WLMessageBox {
 		UI::WLMessageBox
 			(&parent,
 			 _("Save Game Error!!"),
-			(boost::format(_("A File with the name '%s' already exists. Overwrite?")) % 
+			(boost::format(_("A File with the name ‘%s’ already exists. Overwrite?")) % 
 				FileSystem::FS_Filename(filename.c_str())).str(),
 			 YESNO),
 		m_filename(filename)

@@ -143,7 +143,7 @@ void NetworkGamingMessages::fill_map() {
 	ngmessages["SIMULATING_BEYOND_TIME"]  = _("Client simulates beyond the game time allowed by the host.");
 	ngmessages["CLIENT_SYNC_REP_TIMEOUT"] = _("Client did not submit sync report in time.");
 	ngmessages["GAME_ALREADY_STARTED"]    = _("The game has already started.");
-	ngmessages["NO_ACCESS_TO_PLAYER"]     = _("Client has no access to other player's settings.");
+	ngmessages["NO_ACCESS_TO_PLAYER"]     = _("Client has no access to other player’s settings.");
 	ngmessages["NO_ACCESS_TO_SERVER"]     = _("Client has no access to server settings.");
 	ngmessages["START_SENT_NOT_READY"]    = _("Client sent start command, although server is not yet ready.");
 	ngmessages["TIME_SENT_NOT_READY"]     = _("Client sent TIME command even though game is not running.");
@@ -159,7 +159,7 @@ void NetworkGamingMessages::fill_map() {
 	ngmessages["STARTED_SENDING_FILE"]    = _("Started to send file %1$s to %2$s!");
 	ngmessages["COMPLETED_FILE_TRANSFER"] = _("Completed transfer of file %1$s to %2$s");
 	ngmessages["SENDING_FILE_PART"]       = _("Sending part %1$s of file %2$s to %3$s");
-	ngmessages["PLAYER_DEFEATED"]         = _("The player \"%s\" was defeated and became a spectator.");
+	ngmessages["PLAYER_DEFEATED"]         = _("The player ‘%s’ was defeated and became a spectator.");
 	ngmessages["CLIENT_HUNG"]             = _("Client %1$s did not answer for more than %2$s.");
 	ngmessages["CLIENT_HUNG_AUTOKICK"]    =
 		_("Client %1$s will automatically be kicked, if no answer is received within %2$s.");

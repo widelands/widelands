@@ -1628,7 +1628,7 @@ void WLApplication::mainmenu()
 				_
 					("Please add this information to your report.\n\n"
 					 "Widelands attempts to create a savegame when errors occur "
-					 "during the game. It is often - though not always - possible "
+					 "during the game. It is often – though not always – possible "
 					 "to load it and continue playing.\n");
 		}
 #endif

@@ -1865,7 +1865,7 @@ void Worker::return_update(Game & game, State & state)
 		char buffer[2048];
 		snprintf
 			(buffer, sizeof(buffer),
-			 _ ("Your %s can't find a way home and will likely die."),
+			 _ ("Your %s can’t find a way home and will likely die."),
 			 descname().c_str());
 		owner().add_message
 			(game,

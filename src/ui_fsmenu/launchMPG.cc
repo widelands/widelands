@@ -291,7 +291,7 @@ void Fullscreen_Menu_LaunchMPG::win_condition_update() {
 	} else if (m_settings->settings().savegame) {
 		m_wincondition.set_title(_("Savegame"));
 		m_wincondition.set_tooltip
-			(_("The game is a saved game - the win condition was set before."));
+			(_("The game is a saved game – the win condition was set before."));
 	} else {
 		std::unique_ptr<LuaTable> t = m_lua->run_script
 			("win_conditions", m_settings->getWinCondition());
@@ -395,10 +395,10 @@ void Fullscreen_Menu_LaunchMPG::select_saved_game() {
 				(this, _("Saved game is directory"),
 				_
 				("WARNING:\n"
-					"The saved game you selected is a directory. This happens if you set the option \"nozip\" to "
+					"The saved game you selected is a directory. This happens if you set the option ‘nozip’ to "
 					"true or manually unzipped the saved game.\n"
 					"Widelands is not able to transfer directory structures to the clients, please select another "
-					"saved game or zip the directories' content."),
+					"saved game or zip the directories’ content."),
 				UI::WLMessageBox::OK);
 			warning.run();
 		}
@@ -484,7 +484,7 @@ void Fullscreen_Menu_LaunchMPG::refresh()
 			:
 			_("Spectator");
 		temp  = (format(_("At the moment you are %s\n\n")) % temp.c_str()).str();
-		temp += _("Click on the \"?\" in the top right corner to get help.");
+		temp += _("Click on the ‘?’ in the top right corner to get help.");
 		m_client_info.set_text(temp);
 	}
 
@@ -675,7 +675,7 @@ void Fullscreen_Menu_LaunchMPG::help_clicked() {
 	m_help->add_picture_li
 		(_
 		 ("The player with the color of the flag. If more than one client selected the same color, these "
-		  "share control over the player (\"shared kingdom mode\")."),
+		  "share control over the player (‘shared kingdom mode’)."),
 		 "pics/genstats_enable_plr_08.png");
 	m_help->add_picture_li
 		(_("Spectator mode, meaning you can see everything, but cannot control any player"),
@@ -686,7 +686,7 @@ void Fullscreen_Menu_LaunchMPG::help_clicked() {
 		 ("In the middle are the settings for the players. To start a game, each player must be one of the "
 		  "following:"));
 	m_help->add_picture_li
-		(_("Connected to one or more clients (see \"Client settings\")."), "pics/genstats_nrworkers.png");
+		(_("Connected to one or more clients (see ‘Client settings’)."), "pics/genstats_nrworkers.png");
 	m_help->add_picture_li
 		(_
 		 ("Connected to a computer player (the face in the picture as well as the mouse hover texts "
@@ -696,12 +696,12 @@ void Fullscreen_Menu_LaunchMPG::help_clicked() {
 	m_help->add_picture_li(_("Closed."), "pics/stop.png");
 	m_help->add_block
 		(_
-		 ("The latter three can only be set by the hosting client by left-clicking the \"type\" button of a "
+		 ("The latter three can only be set by the hosting client by left-clicking the ‘type’ button of a "
 		  "player. Hosting players can also set the initialization of each player (the set of buildings, "
 		  "wares and workers the player starts with) and the tribe and team for computer players"));
 	m_help->add_block
 		(_
-		 ("Every client connected to a player (the set \"role\" player) can set the tribe and the team "
+		 ("Every client connected to a player (the set ‘role’ player) can set the tribe and the team "
 		  "for that player"));
 	m_help->add_heading(_("Map details"));
 	m_help->add_paragraph

@@ -80,12 +80,12 @@ Fullscreen_Menu_LaunchSPG::Fullscreen_Menu_LaunchSPG
 	m_name
 		(this,
 		 get_w() * 1 / 25, get_h() * 53 / 200 - 15,
-		 _("Player's name"), UI::Align_Left),
+		 _("Player’s name"), UI::Align_Left),
 	m_type
 		(this,
 		 // (Element x) + (PlayerDescriptionGroup x)  + border
 		 ((get_w() * 16 / 25) * 35 / 125) + (get_w() / 25) + 2, get_h() * 53 / 200 - 15,
-		 _("Player's type"), UI::Align_Left),
+		 _("Player’s type"), UI::Align_Left),
 	m_team
 		(this,
 		 ((get_w() * 16 / 25) * 35 / 125) + (get_w() / 25) + 2, get_h() * 53 / 200,
@@ -93,7 +93,7 @@ Fullscreen_Menu_LaunchSPG::Fullscreen_Menu_LaunchSPG
 	m_tribe
 		(this,
 		 ((get_w() * 16 / 25) * 80 / 125) + (get_w() / 25) + 2, get_h() * 53 / 200 - 15,
-		 _("Player's tribe"), UI::Align_Left),
+		 _("Player’s tribe"), UI::Align_Left),
 	m_init
 		(this,
 		 ((get_w() * 16 / 25) * 55 / 125) + (get_w() / 25) + 2, get_h() * 53 / 200,

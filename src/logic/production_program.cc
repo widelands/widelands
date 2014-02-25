@@ -1233,7 +1233,7 @@ void ProductionProgram::ActMine::execute
 		if (m_chance <= game.logic_rand() % 100) {
 			snprintf
 				(ps.m_result_buffer, sizeof(ps.m_result_buffer),
-				 _("Can't find any more resources!"));
+				 _("Can’t find any more resources!"));
 			return ps.program_end(game, Failed);
 		}
 	}
@@ -1256,7 +1256,7 @@ void ProductionProgram::ActMine::informPlayer
 		 "mine",
 		 _("Main Vein Exhausted"),
 		 _
-		 ("This mine's main vein is exhausted. Expect strongly diminished returns on investment. "
+		 ("This mine’s main vein is exhausted. Expect strongly diminished returns on investment. "
 		  "You should consider expanding, dismantling or destroying it."),
 		 true,
 		 60 * 60 * 1000,
