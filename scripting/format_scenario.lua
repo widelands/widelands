@@ -33,7 +33,7 @@ function speech(img, clr, g_title, g_text)
    end
 
    -- Surround the text with translatable ","
-   text = (_ '"%s"'):format(text)
+   text = (_ '“%s”'):format(text)
 
    local s = ""
    if title then
