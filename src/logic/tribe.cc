@@ -166,7 +166,7 @@ Tribe_Descr::Tribe_Descr
 			path           = "global/militarysites/";
 			base_path_size = path.size();
 
-			PARSE_MAP_OBJECT_TYPES_BEGIN("global military site")
+			PARSE_MAP_OBJECT_TYPES_BEGIN("global militarysite")
 				m_buildings.add
 					(new MilitarySite_Descr
 					 	(_name, _descname, path, prof, global_s, *this));
