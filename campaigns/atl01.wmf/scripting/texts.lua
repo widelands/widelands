@@ -33,10 +33,10 @@ obj_ensure_build_wares_production = {
    number = 6,
    body = objective_text(_"Supply Building Wares", _
 [[Supply basic building material for your economy:]] .. "<br>" ..
-_[[• Build a quarry]] .. "<br>" ..
-_[[• Build two woodcutter’s houses]] .. "<br>" ..
-_[[• Build two forester’s houses]] .. "<br>" ..
-_[[• Build a sawmill]]
+[[• ]] .. _[[Build a quarry]] .. "<br>" ..
+[[• ]] .. _[[Build two woodcutter’s houses]] .. "<br>" ..
+[[• ]] .. _[[Build two forester’s houses]] .. "<br>" ..
+[[• ]] .. _[[Build a sawmill]]
    ),
 }
 
@@ -47,7 +47,7 @@ obj_expand = {
    body = objective_text(_"Expand and Explore", _(
 [[The island is huge and as long as we are not sure that we are alone here, we cannot relax. ]] ..
 [[Explore and conquer it, this is the only way to protect us from threats on the island and from Atlantis.]]) .. [[<br>]] ..
-_[[• Build military sites to expand your territory]]
+[[• ]] .. _[[Build military sites to expand your territory]]
    ),
 }
 
@@ -66,14 +66,14 @@ _([[The other two important food wares are smoked fish and smoked meat. ]] ..
 [[by breeding more. Make sure that there are always fish left, ]] ..
 [[otherwise the fish breeder won’t be able to breed new ones. ]] ..
 [[The smoking happens in a smokery, you will need at least two of those.]]) .. [[<br>]] ..
-_[[• Build a farm and a blackroot farm]] .. "<br>" ..
-_[[• Build a mill to make flour and blackroot flour]] .. "<br>" ..
-_[[• Build a well]] .. "<br>" ..
-_[[• Build a bakery to bake bread from flour, blackroot flour and water]] .. "<br>" ..
-_[[• Build a hunter’s house to get raw meat]] .. "<br>" ..
-_[[• Build a fisher’s house close to water to get raw fish]] .. "<br>" ..
-_[[• Build a fish breeder’s house close to the fisher to make sure the fish do not die out]] .. "<br>" ..
-_[[• Build two smokeries to smoke raw meat and fish]]
+[[• ]] .. _[[Build a farm and a blackroot farm]] .. "<br>" ..
+[[• ]] .. _[[Build a mill to make flour and blackroot flour]] .. "<br>" ..
+[[• ]] .. _[[Build a well]] .. "<br>" ..
+[[• ]] .. _[[Build a bakery to bake bread from flour, blackroot flour and water]] .. "<br>" ..
+[[• ]] .. _[[Build a hunter’s house to get raw meat]] .. "<br>" ..
+[[• ]] .. _[[Build a fisher’s house close to water to get raw fish]] .. "<br>" ..
+[[• ]] .. _[[Build a fish breeder’s house close to the fisher to make sure the fish do not die out]] .. "<br>" ..
+[[• ]] .. _[[Build two smokeries to smoke raw meat and fish]]
    )
 }
 
@@ -87,9 +87,9 @@ obj_spidercloth_production = {
 [[while tabards are the uniforms of soldiers. ]] ..
 [[The weaving-mill needs gold yarn and spideryarn as raw material. ]] ..
 [[Spideryarn is produced by the spider farm, while gold yarn is produced by the gold weaver out of gold.]]) .. "<br>" ..
-_[[• Build a weaving-mill]] .. "<br>" ..
-_[[• Build a spider farm]] .. "<br>" ..
-_[[• Build a goldweaver]]
+[[• ]] .. _[[Build a weaving-mill]] .. "<br>" ..
+[[• ]] .. _[[Build a spider farm]] .. "<br>" ..
+[[• ]] .. _[[Build a goldweaver]]
  )
 }
 
@@ -103,10 +103,10 @@ obj_make_heavy_industry_and_mining = {
 [[very rarely found. It will produce a lot of stone while searching for them.]]) .. "<br>" ..
 _([[The ores have to be smelted at a smelting works before they can be used. ]] ..
 [[The refined materials are then used in the weapon smithy, the armor smithy and the toolsmithy.]]) .. "<br>" ..
-_[[• Build a mine of each type. Make sure to send geologists to the mountain first.]] .. "<br>" ..
-_[[• Build a smelting works]] .. "<br>" ..
-_[[• Build an armor smithy and a weapon smithy]] .. "<br>" ..
-_[[• Build a toolsmithy]]
+[[• ]] .. _[[Build a mine of each type. Make sure to send geologists to the mountain first.]] .. "<br>" ..
+[[• ]] .. _[[Build a smelting works]] .. "<br>" ..
+[[• ]] .. _[[Build an armor smithy and a weapon smithy]] .. "<br>" ..
+[[• ]] .. _[[Build a toolsmithy]]
  )
 }
 
@@ -119,7 +119,7 @@ obj_make_training_buildings = {
 [[the dungeon trains attack – the major attribute of the Atlanteans – and the labyrinth trains ]] ..
 [[evasion, health and defense. The items produced by the industry are used to train better soldiers ]] ..
 [[in the two training buildings.]]) .. "<br>" ..
-_[[• Build a dungeon and a labyrinth]]
+[[• ]] .. _[[Build a dungeon and a labyrinth]]
  )
 }
 
@@ -131,8 +131,8 @@ obj_horsefarm_and_warehouse = {
 [[As your road network gets longer and more complicated, you should employ horses ]] ..
 [[to help out your carriers. Horses are bred at horse farms using water and corn. ]] ..
 [[A warehouse will also help to ensure that your transportation system does not collapse.]]) .. "<br>" ..
-_[[• Build a warehouse]] .. "<br>" ..
-_[[• Build a horse farm]])
+[[• ]] .. _[[Build a warehouse]] .. "<br>" ..
+[[• ]] .. _[[Build a horse farm]])
 }
 
 obj_build_ships = {
@@ -143,7 +143,7 @@ obj_build_ships = {
 [[There is a lake at the top of the island. ]] ..
 [[Build three ships in these waters and you might be able to rescue your people ]] ..
 [[before the island is swallowed completely by the ocean.]])  .. "<br>" ..
-_[[• Build a shipyard close to the lake to start building ships]]
+[[• ]] .. _[[Build a shipyard close to the lake to start building ships]]
    )
 }
 
