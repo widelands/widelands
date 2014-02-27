@@ -239,7 +239,7 @@ class Lua_GetText(object):
             output += '"%s"\n' % lines[-1]
             return output
 
-        for string in sorted(self.findings.keys()):
+        for string in sorted(self.findings.keys(),key=self.findings.get):
             occurences = self.findings[string]
             occurences.sort() # Sort by filename and lines
 
