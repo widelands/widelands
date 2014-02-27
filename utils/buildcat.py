@@ -161,9 +161,9 @@ def do_compile( potfile, srcfiles ):
     if not l.found_something_to_translate:
         return False
 
-    potfileobject = open(potfile, "w")
-    potfileobject.write(str(l))
-    potfileobject.close()
+    with open(potfile, "w") as potfileobject:
+        potfileobject.write(str(l))
+        potfileobject.close()
     return True
 
 
@@ -201,11 +201,11 @@ def do_find_iterative(prefix, basedir, srcmasks):
             os.path.isdir(os.path.normpath("%s/%s" % (basedir, d))) and
             not os.path.basename(d).startswith('.')
     )
-    for fileobject in directories:
+    for filename in directories:
         srcfiles = []
         for p in srcmasks:
-            srcfiles.append(p % { "name": fileobject })
-        name = prefix % { "name": fileobject }
+            srcfiles.append(p % { "name": filename })
+        name = prefix % { "name": filename }
         res.append((name, srcfiles))
 
     return res
@@ -343,4 +343,3 @@ if __name__ == "__main__":
     do_update_potfiles()
 
     print ""
-

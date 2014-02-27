@@ -239,19 +239,32 @@ class Lua_GetText(object):
             output += '"%s"\n' % lines[-1]
             return output
 
-        for string in sorted(self.findings.keys(),key=self.findings.get):
-            occurences = self.findings[string]
-            occurences.sort() # Sort by filename and lines
+        # Now output strings sorted by filename, line number. But each string
+        # must only be outputted exactly once.
+        all_items = []
+        for msgid in self.findings:
+            for entry in self.findings[msgid]:
+                filename, line = entry[:2]
+                all_items.append((filename, line, msgid))
+        all_items.sort()
 
+        considered_msgids = set()
+        for _, _, msgid in all_items:
+            if msgid in considered_msgids:
+                continue
+            considered_msgids.add(msgid)
+
+            occurences = self.findings[msgid]
+            occurences.sort() # Sort by filename and lines
             for occurence in occurences:
                 assert(len(occurence) == len(occurences[0]))
                 s += "#: %s:%i\n" % (occurence[0], occurence[1])
 
             if len(occurence) == 2:
-                s += _output_string("msgid", string)
+                s += _output_string("msgid", msgid)
                 s += 'msgstr ""\n\n'
             if len(occurence) == 3:
-                s += _output_string("msgid", string)
+                s += _output_string("msgid", msgid)
                 s += _output_string("msgid_plural", occurence[2])
                 s += 'msgstr[0] ""\n'
                 s += 'msgstr[1] ""\n\n'
