@@ -13,12 +13,12 @@ class Finding(object):
 
     __slots__ = ("filename", "lineno", "msgid", "msgid_plural", "translator_comment",)
 
-    def __init__(self, msgid, filename, lineno):
+    def __init__(self, msgid, filename, lineno, msgid_plural, translator_comment):
         self.filename = filename
         self.lineno = lineno
         self.msgid = msgid
-        self.msgid_plural = None
-        self.translator_comment = None
+        self.msgid_plural = msgid_plural
+        self.translator_comment = translator_comment
 
     def __lt__(self, other):
         me = (self.filename, self.lineno, self.msgid,
@@ -40,7 +40,7 @@ class ParsingNode(list):
 class LuaParser(object):
     def __init__(self):
         self.scanner = re.Scanner([
-            (r"\-\-", self._Tcomment),
+            (r"\-\-( TRANSLATORS)?", self._Tcomment),
             (r"\(", self._Tleft),
             (r"\)", self._Tright),
             (r"\.\.", self._Tconcat),
@@ -58,6 +58,7 @@ class LuaParser(object):
         self.current_string = ""
         self.result = ParsingNode()
         self.in_comment = False
+        self.translator_comment = ""
         self.current = self.result
 
     def parse(self, content):
@@ -88,18 +89,37 @@ class LuaParser(object):
             return l
 
         strings = []
+        translator_comment_lines = []
         def _find_translatable_strings(l):
             for i in range(len(l)):
+                if isinstance(l[i], list):
+                    _find_translatable_strings(l[i])
+                    continue
+
+                append_data = None
+                if l[i].type == "TRANSLATOR_COMMENT":
+                    translator_comment_lines.append(l[i].data[0])
+
                 if l[i].type == "_":
                     if l[i+1].type == "NODE":
-                        strings.append(l[i+1][0].data)
+                        msgid, line = l[i+1][0].data
                     else:
-                        strings.append(l[i+1].data)
+                        msgid, line = l[i+1].data
+                    append_data = (msgid, line, None, '\n'.join(translator_comment_lines))
+
                 if l[i].type == "ngettext":
                     assert l[i+1].type == "NODE"
                     assert len(l[i+1]) >= 4
-                    data = l[i+1][0].data + (l[i+1][2].data[0],)
-                    strings.append(data)
+                    msgid, line  = l[i+1][0].data
+                    msgid_plural = l[i+1][2].data[0]
+                    append_data = (msgid, line, msgid_plural, '\n'.join(translator_comment_lines))
+
+                if append_data:
+                    # Empty the list, but keep the reference the same, so that
+                    # all recursed methods still use the same object.
+                    while translator_comment_lines:
+                        translator_comment_lines.pop()
+                    strings.append(append_data)
             return l
 
         def _remove_empties(l):
@@ -113,12 +133,14 @@ class LuaParser(object):
         self.result = _recurse_lists(self.result, _remove_empties)
         self.result = _recurse_lists(self.result, _combine_concatenated_strings)
 
-        _recurse_lists(self.result, _find_translatable_strings)
+        _find_translatable_strings(self.result)
         return strings
 
     def _skip_token(self, scanner, token):
         if self.in_string:
             self.current_string += token
+        elif self.translator_comment:
+            self.translator_comment += token
 
     def _string_done(self):
         text = eval('str(""" %s """)' % self.current_string)[1:-1]
@@ -202,6 +224,9 @@ class LuaParser(object):
         self.current_line += 1
         self._skip_token(scanner, token)
         self.in_comment = False
+        if self.translator_comment:
+            self.current.append(Token("TRANSLATOR_COMMENT", (self.translator_comment.strip(),)))
+            self.translator_comment = ""
 
     def _Twhitespace(self, scanner, token):
         self._skip_token(scanner, token)
@@ -212,6 +237,8 @@ class LuaParser(object):
         elif self.in_string:
             self._skip_token(scanner, token)
         else:
+            if token.startswith('-- TRANSLATORS'):
+                self.translator_comment = "TRANSLATORS"
             self.in_comment = True
 
 
@@ -222,9 +249,7 @@ class Lua_GetText(object):
     def parse(self, contents, filename):
         items = LuaParser().parse(contents)
         for item in items:
-            finding = Finding(item[0], filename, item[1])
-            if len(item) == 3:
-                finding.msgid_plural = item[2]
+            finding = Finding(item[0], filename, item[1], item[2], item[3])
             self.findings[item[0]].append(finding)
 
     @property
@@ -233,7 +258,12 @@ class Lua_GetText(object):
 
     def merge(self, other_findings):
         for key in other_findings:
-            self.findings[key].extend(other_findings[key])
+            our_findings = self.findings[key]
+            for finding in other_findings[key]:
+                if isinstance(finding, Finding):
+                    our_findings.append(finding)
+                else:
+                    our_findings.append(Finding(key, finding[0], finding[1], None, None))
 
     def __str__(self):
         s = head
@@ -262,21 +292,25 @@ class Lua_GetText(object):
 
         considered_msgids = set()
         for finding in all_findings:
-            if msgid in considered_msgids:
+            if finding.msgid in considered_msgids:
                 continue
             considered_msgids.add(finding.msgid)
 
-            occurences = self.findings[msgid]
+            occurences = self.findings[finding.msgid]
             occurences.sort() # Sort by filename and lines
+            comments = sorted(set(f.translator_comment for f in occurences if f.translator_comment))
+            for comment in comments:
+                s += "#: %s\n" % (comment)
+
             for occurence in occurences:
                 s += "#: %s:%i\n" % (occurence.filename, occurence.lineno)
 
             if not occurence.msgid_plural:
-                s += _output_string("msgid", msgid)
+                s += _output_string("msgid", occurence.msgid)
                 s += 'msgstr ""\n\n'
             else:
-                s += _output_string("msgid", msgid)
-                s += _output_string("msgid_plural", occurence[2])
+                s += _output_string("msgid", occurence.msgid)
+                s += _output_string("msgid_plural", occurence.msgid_plural)
                 s += 'msgstr[0] ""\n'
                 s += 'msgstr[1] ""\n\n'
         return s

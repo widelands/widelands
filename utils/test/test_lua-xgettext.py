@@ -31,11 +31,15 @@ class _TestLua_GetText_SingleFile(unittest.TestCase):
         for item in self.items:
             msg_id, count, line = item[:3]
             msgid_plural = None
+            translator_comment = ""
             if len(item) == 4:
                 msgid_plural = item[3]
+            if len(item) == 5:
+                translator_comment = item[4]
             self.assertEqual(self.p.findings[msg_id][count].filename, self.filename)
             self.assertEqual(self.p.findings[msg_id][count].lineno, line)
             self.assertEqual(self.p.findings[msg_id][count].msgid_plural, msgid_plural)
+            self.assertEqual(self.p.findings[msg_id][count].translator_comment, translator_comment)
 
 
 ##################
@@ -263,6 +267,25 @@ class TestNgettextStuff(_TestLua_GetText_SingleFile):
 function a()
     local p = ngettext("car", "cars", item)
     end
+"""
+
+class TestTranslatorComment(_TestLua_GetText_SingleFile):
+    items = [
+        ("blub", 0, 3, None, """TRANSLATORS: This is "blub" 'test'"""),
+    ]
+    code = """
+-- TRANSLATORS: This is "blub" 'test'
+function a() return _ "blub" end
+"""
+
+class TestTranslatorCommentMultiline(_TestLua_GetText_SingleFile):
+    items = [
+        ("blub", 0, 4, None, """TRANSLATORS: This is "blub" 'test'\nTRANSLATORS: And this should be clear"""),
+    ]
+    code = """
+-- TRANSLATORS: This is "blub" 'test'
+-- TRANSLATORS: And this should be clear
+function a() return _ "blub" end
 """
 
 class TestRealWorldExample(_TestLua_GetText_SingleFile):
