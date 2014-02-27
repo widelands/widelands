@@ -112,6 +112,7 @@ XGETTEXT = find_exectuable("xgettext")
 
 # Options passed to common external programs
 XGETTEXTOPTS ="-k_ --from-code=UTF-8"
+XGETTEXTOPTS+=" -s -c\"* TRANSLATORS\""
 # escaped double quotes are necessary for windows, as it ignores single quotes
 XGETTEXTOPTS+=" --copyright-holder=\"Widelands Development Team\""
 XGETTEXTOPTS+=" --msgid-bugs-address=\"widelands-public@lists.sourceforge.net\""
@@ -172,7 +173,7 @@ def do_compile_src( potfile, srcfiles ):
     and write out the given potfile
     """
     # call xgettext and supply source filenames via stdin
-    gettext_input = subprocess.Popen(XGETTEXT + " %s -s --files-from=- --output=%s" % \
+    gettext_input = subprocess.Popen(XGETTEXT + " %s --files-from=- --output=%s" % \
             (XGETTEXTOPTS, potfile), shell=True, stdin=subprocess.PIPE).stdin
     try:
         for one_pattern in srcfiles:
