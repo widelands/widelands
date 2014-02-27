@@ -24,25 +24,18 @@ class _TestLua_GetText_SingleFile(unittest.TestCase):
     def run_test(self):
         self.p.parse(self.code, self.filename)
 
-        print self.p.findings
-
         # Make sure we didn't find anything more then expected
         nfindings = sum(len(self.p.findings[i]) for i in self.p.findings.keys())
         self.assertEqual(len(self.items), nfindings)
 
         for item in self.items:
-            if len(item) == 3:
-                msg_id, count, line = item
-                self.assertTrue(msg_id in self.p.findings, "'%s' not found!" % msg_id)
-                self.assertEqual(self.p.findings[msg_id][count],
-                                 (self.filename, line)
-                )
-            elif len(item) == 4:
-                msg_id, count, plural_id, line = item
-                self.assertTrue(msg_id in self.p.findings, "'%s' not found!" % msg_id)
-                self.assertEqual(self.p.findings[msg_id][count],
-                                 (self.filename, line, plural_id)
-                )
+            msg_id, count, line = item[:3]
+            msgid_plural = None
+            if len(item) == 4:
+                msgid_plural = item[3]
+            self.assertEqual(self.p.findings[msg_id][count].filename, self.filename)
+            self.assertEqual(self.p.findings[msg_id][count].lineno, line)
+            self.assertEqual(self.p.findings[msg_id][count].msgid_plural, msgid_plural)
 
 
 ##################
@@ -264,7 +257,7 @@ class TestVerySimpleMultilineString(_TestLua_GetText_SingleFile):
 
 class TestNgettextStuff(_TestLua_GetText_SingleFile):
     items = [
-        (),
+        ("car", 0, 3, "cars"),
     ]
     code = """
 function a()

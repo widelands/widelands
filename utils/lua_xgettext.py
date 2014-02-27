@@ -8,6 +8,26 @@ from confgettext import head
 
 Token = namedtuple('Token', ['type', 'data'])
 
+class Finding(object):
+    """One msgid found in the source."""
+
+    __slots__ = ("filename", "lineno", "msgid", "msgid_plural", "translator_comment",)
+
+    def __init__(self, msgid, filename, lineno):
+        self.filename = filename
+        self.lineno = lineno
+        self.msgid = msgid
+        self.msgid_plural = None
+        self.translator_comment = None
+
+    def __lt__(self, other):
+        me = (self.filename, self.lineno, self.msgid,
+                self.msgid_plural, self.translator_comment)
+        ot = (other.filename, other.lineno, other.msgid,
+                other.msgid_plural, other.translator_comment)
+        return me < ot
+
+
 class ParsingNode(list):
     def __init__(self, parent=None):
         self.parent = parent
@@ -202,16 +222,10 @@ class Lua_GetText(object):
     def parse(self, contents, filename):
         items = LuaParser().parse(contents)
         for item in items:
-            if len(item) == 2:
-                msg_id, line = item
-                self.findings[msg_id].append(
-                    (filename, line)
-                )
-            elif len(item) == 3:
-                msg_id, line, plural_id = item
-                self.findings[msg_id].append(
-                    (filename, line, plural_id)
-                )
+            finding = Finding(item[0], filename, item[1])
+            if len(item) == 3:
+                finding.msgid_plural = item[2]
+            self.findings[item[0]].append(finding)
 
     @property
     def found_something_to_translate(self):
@@ -241,29 +255,26 @@ class Lua_GetText(object):
 
         # Now output strings sorted by filename, line number. But each string
         # must only be outputted exactly once.
-        all_items = []
+        all_findings = []
         for msgid in self.findings:
-            for entry in self.findings[msgid]:
-                filename, line = entry[:2]
-                all_items.append((filename, line, msgid))
-        all_items.sort()
+            all_findings.extend(self.findings[msgid])
+        all_findings.sort()
 
         considered_msgids = set()
-        for _, _, msgid in all_items:
+        for finding in all_findings:
             if msgid in considered_msgids:
                 continue
-            considered_msgids.add(msgid)
+            considered_msgids.add(finding.msgid)
 
             occurences = self.findings[msgid]
             occurences.sort() # Sort by filename and lines
             for occurence in occurences:
-                assert(len(occurence) == len(occurences[0]))
-                s += "#: %s:%i\n" % (occurence[0], occurence[1])
+                s += "#: %s:%i\n" % (occurence.filename, occurence.lineno)
 
-            if len(occurence) == 2:
+            if not occurence.msgid_plural:
                 s += _output_string("msgid", msgid)
                 s += 'msgstr ""\n\n'
-            if len(occurence) == 3:
+            else:
                 s += _output_string("msgid", msgid)
                 s += _output_string("msgid_plural", occurence[2])
                 s += 'msgstr[0] ""\n'
