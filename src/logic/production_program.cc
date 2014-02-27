@@ -827,7 +827,7 @@ void ProductionProgram::ActConsume::execute
 
 	if (uint8_t const nr_missing_groups = l_groups.size()) {
 		const Tribe_Descr & tribe = ps.owner().tribe();
-		/** Translators: e.g. "Failed work because: water, wheat (2) are missing" */
+		/** TRANSLATORS: e.g. "Failed work because: water, wheat (2) are missing" */
 		std::string result_string =
 			(boost::format(_("Failed %s because:")) % ps.top_state().program->descname()).str();
 
@@ -850,7 +850,7 @@ void ProductionProgram::ActConsume::execute
 				uint8_t const count = i.current->second;
 				if (1 < count) {
 					// TODO this should be done with ngettext
-					/** Translators: e.g. "Failed work because: water, wheat (2) are missing" */
+					/** TRANSLATORS: e.g. "Failed work because: water, wheat (2) are missing" */
 					result_string =
 						(boost::format(_("%1$s (%2$i)")) % result_string
 						 % static_cast<unsigned int>(count))
@@ -862,7 +862,7 @@ void ProductionProgram::ActConsume::execute
 			result_string = (boost::format(_("%s and")) % result_string).str();
 		}
 		result_string =
-			/** Translators: e.g. "Failed work because: water, wheat (2) are missing" */
+			/** TRANSLATORS: e.g. "Failed work because: water, wheat (2) are missing" */
 			(boost::format(_("%1$s %2$s")) % result_string
 			 % ngettext(" is missing", " are missing", nr_missing_groups))
 			 .str();
