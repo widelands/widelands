@@ -172,7 +172,7 @@ def do_compile_src( potfile, srcfiles ):
     and write out the given potfile
     """
     # call xgettext and supply source filenames via stdin
-    gettext_input = subprocess.Popen(XGETTEXT + " %s --files-from=- --output=%s" % \
+    gettext_input = subprocess.Popen(XGETTEXT + " %s -s --files-from=- --output=%s" % \
             (XGETTEXTOPTS, potfile), shell=True, stdin=subprocess.PIPE).stdin
     try:
         for one_pattern in srcfiles:
