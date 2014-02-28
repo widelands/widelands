@@ -26,7 +26,7 @@
 #include "logic/widelands_fileread.h"
 #include "logic/widelands_filewrite.h"
 
-struct Section;
+class Section;
 
 namespace Widelands {
 

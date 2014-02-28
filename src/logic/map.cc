@@ -38,7 +38,7 @@
 #include "logic/player.h"
 #include "logic/soldier.h"
 #include "logic/tribe.h"
-#include "logic/worlddata.h"
+#include "logic/world/data.h"
 #include "map_generator.h"
 #include "map_io/widelands_map_loader.h"
 #include "s2map.h"
@@ -202,12 +202,12 @@ void Map::recalc_default_resources() {
 
 			//  this node
 			{
-				const Terrain_Descr & terr = w.terrain_descr(f.field->terrain_r());
+				const TerrainDescription & terr = w.terrain_descr(f.field->terrain_r());
 				++m[terr.get_default_resources()];
 				amount += terr.get_default_resources_amount();
 			}
 			{
-				const Terrain_Descr & terd = w.terrain_descr(f.field->terrain_d());
+				const TerrainDescription & terd = w.terrain_descr(f.field->terrain_d());
 				++m[terd.get_default_resources()];
 				amount += terd.get_default_resources_amount();
 			}
@@ -217,25 +217,25 @@ void Map::recalc_default_resources() {
 			//  top left neigbour
 			get_neighbour(f, WALK_NW, &f1);
 			{
-				const Terrain_Descr & terr = w.terrain_descr(f1.field->terrain_r());
+				const TerrainDescription & terr = w.terrain_descr(f1.field->terrain_r());
 				const int8_t resr =
 					terr.get_default_resources();
 				if
 					((terr.get_is() & TERRAIN_UNPASSABLE)
 					 and
-					 resr != Descr_Maintainer<Resource_Descr>::invalid_index())
+					 resr != Descr_Maintainer<ResourceDescription>::invalid_index())
 					m[resr] += 3;
 				else ++m[resr];
 				amount += terr.get_default_resources_amount();
 			}
 			{
-				const Terrain_Descr & terd = w.terrain_descr(f1.field->terrain_d());
+				const TerrainDescription & terd = w.terrain_descr(f1.field->terrain_d());
 				const int8_t resd =
 					terd.get_default_resources();
 				if
 					((terd.get_is() & TERRAIN_UNPASSABLE)
 					 and
-					 resd != Descr_Maintainer<Resource_Descr>::invalid_index())
+					 resd != Descr_Maintainer<ResourceDescription>::invalid_index())
 					m[resd] += 3;
 				else ++m[resd];
 				amount += terd.get_default_resources_amount();
@@ -244,13 +244,13 @@ void Map::recalc_default_resources() {
 			//  top right neigbour
 			get_neighbour(f, WALK_NE, &f1);
 			{
-				const Terrain_Descr & terd = w.terrain_descr(f1.field->terrain_d());
+				const TerrainDescription & terd = w.terrain_descr(f1.field->terrain_d());
 				const int8_t resd =
 					terd.get_default_resources();
 				if
 					((terd.get_is() & TERRAIN_UNPASSABLE)
 					 and
-					 resd != Descr_Maintainer<Resource_Descr>::invalid_index())
+					 resd != Descr_Maintainer<ResourceDescription>::invalid_index())
 					m[resd] += 3;
 				else ++m[resd];
 				amount += terd.get_default_resources_amount();
@@ -259,13 +259,13 @@ void Map::recalc_default_resources() {
 			//  left neighbour
 			get_neighbour(f, WALK_W, &f1);
 			{
-				const Terrain_Descr & terr = w.terrain_descr(f1.field->terrain_r());
+				const TerrainDescription & terr = w.terrain_descr(f1.field->terrain_r());
 				const int8_t resr =
 					terr.get_default_resources();
 				if
 					((terr.get_is() & TERRAIN_UNPASSABLE)
 					 and
-					 resr != Descr_Maintainer<Resource_Descr>::invalid_index())
+					 resr != Descr_Maintainer<ResourceDescription>::invalid_index())
 					m[resr] += 3;
 				else ++m[resr];
 				amount += terr.get_default_resources_amount();

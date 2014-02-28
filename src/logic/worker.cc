@@ -942,7 +942,7 @@ bool Worker::run_geologist_find(Game & game, State & state, const Action &)
 	if (imm && imm->get_size() > BaseImmovable::NONE) {
 		//NoLog("  Field is no longer empty\n");
 	} else if
-		(const Resource_Descr * const rdescr =
+		(const ResourceDescription * const rdescr =
 		 	world.get_resource(position.field->get_resources()))
 	{
 		// Geologist also sends a message notifying the player

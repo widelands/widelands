@@ -20,6 +20,7 @@
 #ifndef WORLDDATA_H
 #define WORLDDATA_H
 
+// NOCOM(#sirver): what is needed in here?
 #include <stdint.h>
 
 #ifndef PACK_VERSION

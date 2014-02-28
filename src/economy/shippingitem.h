@@ -29,7 +29,7 @@ namespace Widelands {
 
 class Economy;
 class Game;
-struct Map_Map_Object_Loader;
+class Map_Map_Object_Loader;
 struct Map_Map_Object_Saver;
 class Map_Object;
 class PortDock;

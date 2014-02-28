@@ -30,7 +30,7 @@ class FileSystem;
 namespace Widelands {
 
 class Editor_Game_Base;
-struct Map_Map_Object_Loader;
+class Map_Map_Object_Loader;
 
 /// Takes ownership of the filesystem that is passed to it.
 struct WL_Map_Loader : public Map_Loader {

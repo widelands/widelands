@@ -136,7 +136,7 @@ void MapGenerator::generate_resources
 	// TODO: Check how the editor handles this...
 
 	Terrain_Index const tix = fc.field->get_terrains().d;
-	const Terrain_Descr & terr = m_map.world().get_ter(tix);
+	const TerrainDescription & terr = m_map.world().get_ter(tix);
 	switch (terr.get_num_valid_resources()) {
 	case 1: {
 		uint32_t const rnd1 = random1[fc.x + m_mapInfo.w * fc.y];

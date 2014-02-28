@@ -28,8 +28,8 @@
 
 namespace Widelands {struct Map_Object_Descr;}
 
-struct Profile;
-struct Section;
+class Profile;
+class Section;
 
 /// Manages a set of 6 animations, one for each possible direction.
 struct DirAnimations {

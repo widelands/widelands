@@ -54,7 +54,7 @@ inline const Immovable_Descr & StreamRead::Immovable_Type
 	char const * const name = CString();
 	int32_t const index = world.get_immovable_index(name);
 	if (index == -1)
-		throw world_immovable_nonexistent(world.get_name(), name);
+		throw world_immovable_nonexistent(world.get_name().c_str(), name);
 	return *world.get_immovable_descr(index);
 }
 

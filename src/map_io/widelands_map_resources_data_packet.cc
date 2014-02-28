@@ -119,7 +119,7 @@ void Map_Resources_Data_Packet::Write
 
 	//  write all resources names and their id's
 	for (int32_t i = 0; i < nr_res; ++i) {
-		const Resource_Descr & res = *world.get_resource(i);
+		const ResourceDescription & res = *world.get_resource(i);
 		fw.Unsigned16(i);
 		fw.CString(res.name().c_str());
 	}

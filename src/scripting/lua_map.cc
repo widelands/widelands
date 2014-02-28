@@ -2701,7 +2701,7 @@ int L_Field::get_bobs(lua_State * L) {
 		valid name to these variables.
 */
 int L_Field::get_terr(lua_State * L) {
-	Terrain_Descr & td =
+	TerrainDescription & td =
 		get_egbase(L).map().world().terrain_descr
 			(fcoords(L).field->terrain_r());
 	lua_pushstring(L, td.name().c_str());
@@ -2723,7 +2723,7 @@ int L_Field::set_terr(lua_State * L) {
 }
 
 int L_Field::get_terd(lua_State * L) {
-	Terrain_Descr & td =
+	TerrainDescription & td =
 		get_egbase(L).map().world().terrain_descr
 			(fcoords(L).field->terrain_d());
 	lua_pushstring(L, td.name().c_str());

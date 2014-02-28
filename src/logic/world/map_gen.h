@@ -24,9 +24,15 @@
 #include <string>
 #include <vector>
 
-struct MapGenInfo;
+#include "logic/world/terrain_description.h"
+
+class Section;
+class Profile;
 
 namespace Widelands {
+
+class World;
+struct MapGenInfo;
 
 /// Holds world and area specific information for the map generator.
 /// Areas are: Water, Land, Wasteland and Mountains.

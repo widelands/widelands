@@ -19,6 +19,11 @@
 
 #include "logic/world/map_gen.h"
 
+#include "helper.h"
+#include "logic/game_data_error.h"
+#include "logic/world/world.h"
+#include "profile/profile.h"
+
 namespace Widelands {
 
 /*
@@ -106,7 +111,7 @@ void MapGenAreaInfo::readTerrains
 		throw game_data_error
 			("terrain info \"%s\" missing in section \"%s\" mapgenconf for world "
 			 "\"%s\"",
-			 value_name, s.get_name(), m_world->get_name());
+			 value_name, s.get_name(), m_world->get_name().c_str());
 	std::vector<std::string> strs;
 
 	split_string(strs, str);
@@ -117,7 +122,7 @@ void MapGenAreaInfo::readTerrains
 			throw game_data_error
 				("unknown terrain \"%s\" in section \"%s\" in mapgenconf for "
 				 "world \"%s\"",
-				 value_name, s.get_name(), m_world->get_name());
+				 value_name, s.get_name(), m_world->get_name().c_str());
 		list.push_back(tix);
 	}
 }

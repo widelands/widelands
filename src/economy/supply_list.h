@@ -26,7 +26,7 @@
 namespace Widelands {
 
 class Game;
-struct Request;
+class Request;
 struct Supply;
 
 /**

@@ -48,7 +48,7 @@ namespace Widelands {
 // Making it a struct doesn't add anything. struct is used interchangeably with
 // class all around the code
 
-struct Terrain_Descr;
+struct TerrainDescription;
 struct Bob;
 struct BaseImmovable;
 

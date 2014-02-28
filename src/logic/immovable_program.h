@@ -32,7 +32,7 @@
 #include "logic/buildcost.h"
 #include "logic/immovable.h"
 
-struct Profile;
+class Profile;
 
 namespace Widelands {
 

@@ -32,7 +32,7 @@ struct ChatProvider;
 struct GameController;
 struct GameSettingsProvider;
 struct PlayerDescriptionGroup;
-struct LuaInterface;
+class LuaInterface;
 
 /**
  * Fullscreen menu for setting map and mapsettings for single and multi player

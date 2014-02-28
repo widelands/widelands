@@ -30,7 +30,7 @@ namespace Widelands {
 
 class Editor_Game_Base;
 struct Map_Map_Object_Saver;
-struct Map_Map_Object_Loader;
+class Map_Map_Object_Loader;
 
 // Define here all the possible users
 #define SENDER_MAPOBJECT 0

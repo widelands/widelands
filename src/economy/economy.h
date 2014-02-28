@@ -42,7 +42,7 @@ class Soldier;
 class Warehouse;
 struct Flag;
 struct RSPairStruct;
-struct Request;
+class Request;
 struct Route;
 struct Router;
 struct Supply;

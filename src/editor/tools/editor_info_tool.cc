@@ -79,7 +79,7 @@ int32_t Editor_Info_Tool::handle_click_impl
 	buf += _("2) Terrain Info\n Name: ");
 	{
 		const Widelands::Field         & tf  = map[center.triangle];
-		const Widelands::Terrain_Descr & ter = world.terrain_descr
+		const Widelands::TerrainDescription & ter = world.terrain_descr
 		                                       (center.triangle.t == Widelands::TCoords<>::D ?
 		                                        tf.terrain_d() : tf.terrain_r());
 		buf += ter.descname();
@@ -130,7 +130,7 @@ int32_t Editor_Info_Tool::handle_click_impl
 	buf += _("\n Author: ");
 	buf += world.get_author();
 	buf += _("\n Descr: ");
-	buf += world.get_descr();
+	buf += world.get_description();
 
 	multiline_textarea->set_text(buf.c_str());
 

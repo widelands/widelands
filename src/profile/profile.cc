@@ -409,7 +409,7 @@ const Widelands::Immovable_Descr & Section::get_safe_Immovable_Type
 		else
 			throw wexception
 				("world %s does not define immovable type \"%s\"",
-				 world.get_name(), immname);
+				 world.get_name().c_str(), immname);
 	}
 }
 
@@ -1058,4 +1058,3 @@ void Profile::write
 
 	fw.Write(fs, filename);
 }
-

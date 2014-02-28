@@ -25,7 +25,7 @@
 #include "logic/instances.h"
 #include "logic/widelands_geometry.h"
 
-struct Profile;
+class Profile;
 
 namespace Widelands {
 

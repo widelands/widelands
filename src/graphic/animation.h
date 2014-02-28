@@ -29,8 +29,8 @@
 
 namespace Widelands {struct Map_Object_Descr;}
 
-struct Profile;
-struct Section;
+class Profile;
+class Section;
 
 struct AnimationData {
 	uint32_t frametime;

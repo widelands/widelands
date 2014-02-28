@@ -39,7 +39,7 @@
 namespace UI {class Window;}
 struct BuildingHints;
 class Interactive_GameBase;
-struct Profile;
+class Profile;
 class Image;
 
 namespace Widelands {
@@ -47,7 +47,7 @@ namespace Widelands {
 struct Flag;
 struct Message;
 struct Tribe_Descr;
-struct WaresQueue;
+class WaresQueue;
 
 class Building;
 

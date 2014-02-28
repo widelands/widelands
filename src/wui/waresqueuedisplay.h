@@ -39,7 +39,7 @@ struct Radiogroup;
 
 namespace Widelands {
 class Building;
-struct WaresQueue;
+class WaresQueue;
 }
 
 /**

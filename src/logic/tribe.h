@@ -36,14 +36,14 @@
 
 namespace Widelands {
 
+class Editor_Game_Base;
+class ResourceDescription;
 class Warehouse;
 class Worker_Descr;
+class World;
 struct Building_Descr;
-class Editor_Game_Base;
 struct Event;
 struct WareDescr;
-struct Resource_Descr;
-class World;
 
 /*
 Tribes
@@ -197,7 +197,7 @@ struct Tribe_Descr : boost::noncopyable {
 	uint32_t get_bob_vision_range() const {return m_bob_vision_range;}
 
 	uint32_t get_resource_indicator
-		(const Resource_Descr * const res, const uint32_t amount) const;
+		(const ResourceDescription * const res, const uint32_t amount) const;
 
 	void postload(Editor_Game_Base &);
 	void load_graphics();

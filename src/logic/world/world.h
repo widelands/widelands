@@ -22,152 +22,55 @@
 
 #include <memory>
 
-#include "logic/bob.h"
 #include "descr_maintainer.h"
+#include "logic/bob.h"
 #include "logic/immovable.h"
 #include "logic/widelands.h"
-#include "logic/worlddata.h"
+#include "logic/world/data.h"
+#include "logic/world/resource_description.h"
+#include "logic/world/terrain_description.h"
 
-struct Section;
+class Section;
 
 namespace Widelands {
 
+struct MapGenInfo;
 class Editor_Game_Base;
-
-#define WORLD_NAME_LEN 128
-#define WORLD_AUTHOR_LEN 128
-#define WORLD_DESCR_LEN 1024
-
-struct World_Descr_Header {
-	char name  [WORLD_NAME_LEN];
-	char author[WORLD_AUTHOR_LEN];
-	char descr [WORLD_DESCR_LEN];
-};
-
-struct Resource_Descr : boost::noncopyable {
-	typedef Resource_Index Index;
-	Resource_Descr() : m_is_detectable(true), m_max_amount(0) {}
-	~Resource_Descr() {}
-
-	void parse(Section &, const std::string &);
-
-	const std::string & name     () const {return m_name;}
-	const std::string & descname() const {return m_descname;}
-
-	bool is_detectable() const {return m_is_detectable;}
-	int32_t get_max_amount() const {return m_max_amount;}
-
-	const std::string & get_editor_pic(uint32_t amount) const;
-
-private:
-	struct Indicator {
-		std::string bobname;
-		int32_t         upperlimit;
-	};
-	struct Editor_Pic {
-		std::string picname;
-		int32_t     upperlimit;
-	};
-
-	bool                    m_is_detectable;
-	int32_t                 m_max_amount;
-	std::string             m_name;
-	std::string             m_descname;
-	std::vector<Editor_Pic> m_editor_pics;
-};
-
-// NOCOM(#sirver): rename to World::Terrain ?
-struct Terrain_Descr : boost::noncopyable {
-	typedef Terrain_Index Index;
-	Terrain_Descr
-		(char const * directory, Section *, Descr_Maintainer<Resource_Descr> *);
-	~Terrain_Descr();
-
-	void load_graphics();
-
-	uint32_t         get_texture() const {return m_texture;}
-	uint8_t        get_is     () const {return m_is;}
-	const std::string & name() const {return m_name;}
-	const std::string & descname() const {return m_descname;}
-	int32_t resource_value(const Resource_Index resource) const {
-		return
-			resource == get_default_resources() or is_resource_valid(resource) ?
-			(get_is() & TERRAIN_UNPASSABLE ? 8 : 1) : -1;
-	}
-
-	uint8_t get_num_valid_resources() const {
-		return m_nr_valid_resources;
-	}
-
-	Resource_Index get_valid_resource(uint8_t index) const {
-		return m_valid_resources[index];
-	}
-
-	bool is_resource_valid(const int32_t res) const {
-		for (int32_t i = 0; i < m_nr_valid_resources; ++i)
-			if (m_valid_resources[i] == res)
-				return true;
-		return false;
-	}
-	int8_t get_default_resources() const {return m_default_resources;}
-	int32_t get_default_resources_amount() const {
-		return m_default_amount;
-	}
-	int32_t dither_layer() const {return m_dither_layer;}
-
-private:
-	const std::string m_name;
-	const std::string m_descname;
-	std::string m_picnametempl;
-	uint32_t    m_frametime;
-	uint8_t   m_is;
-
-	int32_t m_dither_layer;
-
-	uint8_t         * m_valid_resources;
-	uint8_t           m_nr_valid_resources;
-	int8_t            m_default_resources;
-	int32_t           m_default_amount;
-	uint32_t          m_texture; //  renderer's texture
-};
 
 // This is the in memory descriptions of the world and provides access to
 // terrains, immovables and resources.
 class World : boost::noncopyable {
 public:
 	World(const std::string& name);
+	~World();
 
 	static bool exists_world(std::string);  ///  check if a world really exists
 	static void get_all_worlds(std::vector<std::string>&);
 
+	// Load the graphics data for this world.
 	void load_graphics();
 
-	const char* get_name() const {
-		return hd.name;
-	}
-	const char* get_author() const {
-		return hd.author;
-	}
-	const char* get_descr() const {
-		return hd.descr;
-	}
+	// Returns various metadata.
+	const std::string& get_name() const;
+	const std::string& get_author() const;
+	const std::string& get_description() const;
 
 	Terrain_Index index_of_terrain(char const* const name) const {
-		return ters.get_index(name);
+		return terrain_descriptions_.get_index(name);
 	}
-	Terrain_Descr& terrain_descr(Terrain_Index const i) const {
-		return *ters.get(i);
+	TerrainDescription& terrain_descr(Terrain_Index const i) const {
+		return *terrain_descriptions_.get(i);
 	}
-	const Terrain_Descr& get_ter(Terrain_Index const i) const {
-		assert(i < ters.get_nitems());
-		return *ters.get(i);
+	const TerrainDescription& get_ter(Terrain_Index const i) const {
+		assert(i < terrain_descriptions_.get_nitems());
+		return *terrain_descriptions_.get(i);
 	}
-	Terrain_Descr const* get_ter(char const* const name) const {
-		int32_t const i = ters.get_index(name);
-		return i != -1 ? ters.get(i) : nullptr;
+	TerrainDescription const* get_ter(char const* const name) const {
+		int32_t const i = terrain_descriptions_.get_index(name);
+		return i != -1 ? terrain_descriptions_.get(i) : nullptr;
 	}
 	int32_t get_nr_terrains() const {
-		return ters.get_nitems();
+		return terrain_descriptions_.get_nitems();
 	}
 	int32_t get_bob(char const* const l) const {
 		return bobs.get_index(l);
@@ -192,39 +95,41 @@ public:
 	}
 
 	int32_t get_resource(const char* const name) const {
-		return m_resources.get_index(name);
+		return resources_.get_index(name);
 	}
-	Resource_Descr const* get_resource(Resource_Index const res) const {
-		assert(res < m_resources.get_nitems());
-		return m_resources.get(res);
+	ResourceDescription const* get_resource(Resource_Index const res) const {
+		assert(res < resources_.get_nitems());
+		return resources_.get(res);
 	}
 	int32_t get_nr_resources() const {
-		return m_resources.get_nitems();
+		return resources_.get_nitems();
 	}
 	int32_t safe_resource_index(const char* const warename) const;
 	const std::string& basedir() const {
-		return m_basedir;
+		return basedir_;
 	}
 
 	MapGenInfo& getMapGenInfo();
 
 private:
-	std::string m_basedir;  //  base directory, where the main conf file resides
-	World_Descr_Header hd;
+	const std::string basedir_;  //  base directory, where the main conf file resides
+	std::string name_; // The name of this world.
+	std::string author_;  // The author of this world.
+	std::string description_; // The description of this world.
 
 	Descr_Maintainer<Bob::Descr> bobs;
 	Descr_Maintainer<Immovable_Descr> immovables;
-	Descr_Maintainer<Terrain_Descr> ters;
-	Descr_Maintainer<Resource_Descr> m_resources;
+	Descr_Maintainer<TerrainDescription> terrain_descriptions_;
+	Descr_Maintainer<ResourceDescription> resources_;
 
-	std::unique_ptr<MapGenInfo> m_mapGenInfo;
+	std::unique_ptr<MapGenInfo> mapGenInfo_;
 
 	void parse_root_conf(const std::string& name, Profile& root_conf);
 	void parse_resources();
 	void parse_terrains();
-	void parse_bobs(std::string& directory, Profile& root_conf);
+	void parse_bobs(const std::string& directory, Profile& root_conf);
 	void parse_mapgen();
 };
-}
+}  // namespace Widelands
 
 #endif

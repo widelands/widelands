@@ -469,7 +469,7 @@ Find the best matching indicator for the given amount.
 ==============
 */
 uint32_t Tribe_Descr::get_resource_indicator
-	(Resource_Descr const * const res, uint32_t const amount) const
+	(ResourceDescription const * const res, uint32_t const amount) const
 {
 	if (not res or not amount) {
 		int32_t idx = get_immovable_index("resi_none");

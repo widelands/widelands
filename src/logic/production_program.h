@@ -36,7 +36,7 @@
 #include "logic/tattribute.h"
 #include "logic/widelands.h"
 
-struct Profile;
+class Profile;
 
 namespace Widelands {
 

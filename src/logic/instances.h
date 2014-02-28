@@ -44,7 +44,7 @@ namespace Widelands {
 
 struct Path;
 class Player;
-struct Map_Map_Object_Loader;
+class Map_Map_Object_Loader;
 
 /**
  * Base class for descriptions of worker, files and so on. This must just
