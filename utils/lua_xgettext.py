@@ -3,6 +3,7 @@
 
 from collections import defaultdict, namedtuple
 import re
+import os
 
 from confgettext import head
 
@@ -303,7 +304,7 @@ class Lua_GetText(object):
                 s += "#: %s\n" % (comment)
 
             for occurence in occurences:
-                s += "#: %s:%i\n" % (occurence.filename, occurence.lineno)
+                s += "#: %s:%i\n" % (os.path.normpath(occurence.filename), occurence.lineno)
 
             if not occurence.msgid_plural:
                 s += _output_string("msgid", occurence.msgid)
