@@ -26,7 +26,7 @@
 #include "graphic/graphic.h"
 #include "i18n.h"
 #include "logic/map.h"
-#include "logic/world.h"
+#include "logic/world/world.h"
 #include "ui_basic/box.h"
 #include "ui_basic/button.h"
 #include "ui_basic/checkbox.h"

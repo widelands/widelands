@@ -28,7 +28,7 @@
 #include "i18n.h"
 #include "logic/map.h"
 #include "logic/widelands.h"
-#include "logic/world.h"
+#include "logic/world/world.h"
 #include "ui_basic/button.h"
 #include "wui/overlay_manager.h"
 

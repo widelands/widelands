@@ -32,7 +32,7 @@ struct Building_Descr;
 class Editor_Game_Base;
 struct Immovable_Descr;
 struct Tribe_Descr;
-struct World;
+class World;
 
 /// A StreamRead that can read Widelands-specific types. It has no extra data
 /// members. Therefore it is binary compatible with StreamRead, so any

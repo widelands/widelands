@@ -23,7 +23,7 @@
 #include "logic/game.h"
 #include "logic/game_data_error.h"
 #include "logic/map.h"
-#include "logic/world.h"
+#include "logic/world/world.h"
 #include "profile/profile.h"
 #include "scripting/scripting.h"
 #include "upcast.h"

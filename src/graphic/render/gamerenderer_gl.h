@@ -30,7 +30,7 @@
 namespace Widelands {
 struct Coords;
 struct FCoords;
-struct World;
+class World;
 }
 
 class GLSurface;

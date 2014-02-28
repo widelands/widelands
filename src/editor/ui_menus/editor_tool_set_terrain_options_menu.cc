@@ -31,7 +31,7 @@
 #include "graphic/texture.h"
 #include "i18n.h"
 #include "logic/map.h"
-#include "logic/world.h"
+#include "logic/world/world.h"
 #include "logic/worlddata.h"
 #include "ui_basic/button.h"
 #include "ui_basic/checkbox.h"

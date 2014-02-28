@@ -24,7 +24,7 @@
 #include "logic/map.h"
 #include "logic/player.h"
 #include "logic/tribe.h"
-#include "logic/world.h"
+#include "logic/world/world.h"
 #include "map_io/widelands_map_allowed_building_types_data_packet.h"
 #include "map_io/widelands_map_allowed_worker_types_data_packet.h"
 #include "map_io/widelands_map_bob_data_packet.h"

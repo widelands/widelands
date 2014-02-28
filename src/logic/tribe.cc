@@ -42,7 +42,7 @@
 #include "logic/warehouse.h"
 #include "logic/widelands_fileread.h"
 #include "logic/worker.h"
-#include "logic/world.h"
+#include "logic/world/world.h"
 #include "parse_map_object_types.h"
 #include "profile/profile.h"
 #include "scripting/scripting.h"

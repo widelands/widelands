@@ -41,7 +41,7 @@
 #include "logic/tribe.h"
 #include "logic/ware_descr.h"
 #include "logic/worker.h"
-#include "logic/world.h"
+#include "logic/world/world.h"
 #include "rgbcolor.h"
 #include "scripting/scripting.h"
 #include "sound/sound_handler.h"

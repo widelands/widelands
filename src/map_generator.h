@@ -20,7 +20,7 @@
 #ifndef MAP_GENERATOR_H
 #define MAP_GENERATOR_H
 
-#include "logic/world.h"
+#include "logic/world/world.h"
 
 // This is the first step of separating map generation from
 // map.

@@ -27,15 +27,15 @@
 #include <vector>
 
 #include "economy/itransport_cost_calculator.h"
-#include "logic/field.h"
 #include "interval.h"
-#include "manager.h"
+#include "logic/field.h"
 #include "logic/map_revision.h"
 #include "logic/notification.h"
 #include "logic/objective.h"
-#include "random.h"
 #include "logic/widelands_geometry.h"
-#include "logic/world.h"
+#include "logic/world/world.h"
+#include "manager.h"
+#include "random.h"
 
 struct Overlay_Manager;
 struct S2_Map_Loader;
@@ -47,7 +47,7 @@ struct MapGenerator;
 struct BaseImmovable;
 struct PathfieldManager;
 class Player;
-struct World;
+class World;
 class Map;
 class Map_Loader;
 #define WLMF_SUFFIX ".wmf"

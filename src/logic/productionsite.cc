@@ -37,7 +37,7 @@
 #include "logic/soldier.h"
 #include "logic/tribe.h"
 #include "logic/warelist.h"
-#include "logic/world.h"
+#include "logic/world/world.h"
 #include "profile/profile.h"
 #include "upcast.h"
 #include "wexception.h"

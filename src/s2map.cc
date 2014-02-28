@@ -35,7 +35,7 @@
 #include "logic/mapregion.h"
 #include "logic/message.h"
 #include "logic/player.h"
-#include "logic/world.h"
+#include "logic/world/world.h"
 #include "map_io/map_loader.h"
 #include "upcast.h"
 #include "wexception.h"

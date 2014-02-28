@@ -25,7 +25,7 @@
 #include "graphic/graphic.h"
 #include "logic/field.h"
 #include "logic/mapregion.h"
-#include "logic/world.h"
+#include "logic/world/world.h"
 #include "wui/overlay_manager.h"
 
 /**
@@ -133,5 +133,3 @@ Editor_Action_Args Editor_Set_Resources_Tool::format_args_impl(Editor_Interactiv
 	a.set_to = m_set_to;
 	return a;
 }
-
-

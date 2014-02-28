@@ -30,7 +30,7 @@
 #include "io/filesystem/layered_filesystem.h"
 #include "logic/building.h"
 #include "logic/editor_game_base.h"
-#include "logic/world.h"
+#include "logic/world/world.h"
 #include "map_io/map_loader.h"
 #include "map_io/widelands_map_loader.h"
 #include "profile/profile.h"

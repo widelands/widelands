@@ -29,7 +29,7 @@
 #include "i18n.h"
 #include "logic/editor_game_base.h"
 #include "logic/map.h"
-#include "logic/world.h"
+#include "logic/world/world.h"
 #include "map_generator.h"
 #include "profile/profile.h"
 #include "random.h"

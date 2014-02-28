@@ -28,7 +28,7 @@
 #include "logic/roadtype.h"
 #include "logic/widelands.h"
 #include "logic/widelands_geometry.h"
-#include "logic/world.h"
+#include "logic/world/world.h"
 
 namespace Widelands {
 
@@ -74,8 +74,10 @@ struct Field {
 	typedef uint8_t Height;
 	typedef uint8_t Resource_Amount;
 
-	struct Terrains         {Terrain_Index   d : 4, r : 4;};
-	static_assert(sizeof(Terrains) == 1, "assert(sizeof(Terrains) == 1) failed.");
+	struct Terrains {
+		Terrain_Index d, r;
+	};
+	static_assert(sizeof(Terrains) == 2, "assert(sizeof(Terrains) == 2) failed.");
 	struct Resources        {Resource_Index  d : 4, r : 4;};
 	static_assert(sizeof(Resources) == 1, "assert(sizeof(Resources) == 1) failed.");
 	struct Resource_Amounts {Resource_Amount d : 4, r : 4;};

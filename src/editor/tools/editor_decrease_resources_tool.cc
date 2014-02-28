@@ -26,7 +26,7 @@
 #include "logic/field.h"
 #include "logic/mapregion.h"
 #include "logic/widelands_geometry.h"
-#include "logic/world.h"
+#include "logic/world/world.h"
 #include "wui/overlay_manager.h"
 
 
@@ -100,6 +100,3 @@ Editor_Action_Args Editor_Decrease_Resources_Tool::format_args_impl(Editor_Inter
 	a.cur_res = m_cur_res;
 	return a;
 }
-
-
-
