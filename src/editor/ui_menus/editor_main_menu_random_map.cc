@@ -47,7 +47,6 @@ Main_Menu_New_Random_Map::Main_Menu_New_Random_Map
 		(&parent, "random_map_menu",
 		 (parent.get_w() - 260) / 2, (parent.get_h() - 450) / 2, 260, 490,
 		 _("New Random Map")),
-	m_currentworld(0)
 {
 	char buffer[250];
 	int32_t const offsx   =  5;
@@ -266,28 +265,6 @@ Main_Menu_New_Random_Map::Main_Menu_New_Random_Map
 
 	posy += height + spacing + spacing + spacing;
 
-
-
-	// ---------- Worlds ----------
-
-	Widelands::World::get_all_worlds(m_worlds);
-
-	assert(m_worlds.size());
-	while (strcmp(map.get_world_name(), m_worlds[m_currentworld].c_str()))
-		++m_currentworld;
-
-	m_world = new UI::Button
-		(this, "world",
-		 posx, posy, width, height,
-		 g_gr->images().get("pics/but1.png"),
-		 Widelands::World(m_worlds[m_currentworld].c_str()).get_name());
-	m_world->sigclicked.connect
-		(boost::bind(&Main_Menu_New_Random_Map::button_clicked, this, SWITCH_WORLD));
-
-	posy += height + spacing + spacing + spacing;
-
-
-
 	// ---------- Map ID String edit ----------
 
 	new UI::Textarea(this, posx + spacing + 20, posy, _("Map ID:"));
@@ -394,13 +371,6 @@ void Main_Menu_New_Random_Map::button_clicked(Main_Menu_New_Random_Map::ButtonID
 		if (m_landval > 0)
 			m_landval -= 5;
 		break;
-	case SWITCH_WORLD:
-		++ m_currentworld;
-		if (m_currentworld == m_worlds.size())
-			m_currentworld = 0;
-		m_world->set_title
-			(Widelands::World(m_worlds[m_currentworld].c_str()).get_name());
-		break;
 	case SWITCH_ISLAND_MODE:
 		break;
 	case WASTE_PLUS:
@@ -464,16 +434,13 @@ void Main_Menu_New_Random_Map::clicked_create_map() {
 	// Clean all the stuff up, so we can load
 	egbase.cleanup_for_load(true, false);
 
-	if (strcmp(map.get_world_name(), m_worlds[m_currentworld].c_str()))
-		eia.change_world();
-
+	// NOCOM(#sirver): kill change_world()
 	UniqueRandomMapInfo mapInfo;
 	set_map_info(mapInfo);
 
 	std::stringstream sstrm;
 	sstrm << "Random generated map\nRandom number = "
 		<< mapInfo.mapNumber << "\n"
-		<< "World = " << m_world->get_title() << "\n"
 		<< "Water = " << m_waterval << " %\n"
 		<< "Land = " << m_landval << " %\n"
 		<< "Wasteland = " << m_wastelandval << " %\n"
@@ -483,7 +450,7 @@ void Main_Menu_New_Random_Map::clicked_create_map() {
 	MapGenerator gen(map, mapInfo, egbase);
 	map.create_empty_map
 		(mapInfo.w, mapInfo.h,
-		 m_worlds[m_currentworld].c_str(), _("No Name"),
+		 "", _("No Name"),
 		 g_options.pull_section("global").get_string("realname", _("Unknown")),
 		 sstrm.str().c_str());
 	loader.step(_("Generating random map..."));
@@ -529,15 +496,6 @@ void Main_Menu_New_Random_Map::id_edit_box_changed()
 		m_res_amount = mapInfo.resource_amount;
 
 		m_res->set_title(m_res_amounts[m_res_amount].c_str());
-
-		// Get world
-
-		m_currentworld = 0;
-		while
-			(strcmp(mapInfo.worldName.c_str(), m_worlds[m_currentworld].c_str()))
-			++m_currentworld;
-		m_world->set_title
-			(Widelands::World(m_worlds[m_currentworld].c_str()).get_name());
 
 		// Update other values in UI as well
 		button_clicked(static_cast<ButtonID>(-1));
@@ -588,5 +546,4 @@ void Main_Menu_New_Random_Map::set_map_info
 	mapInfo.resource_amount = static_cast
 		<Widelands::UniqueRandomMapInfo::Resource_Amount>
 			(m_res_amount);
-	mapInfo.worldName = m_worlds[m_currentworld];
 }

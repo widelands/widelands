@@ -156,11 +156,7 @@ public:
 		{
 			//  Must be initialized because the rendering code is accessing it
 			//  even for triangles that the player does not see (it is the
-			//  darkening that actually hides the ground from the user). This is
-			//  important for worlds where the number of terrain types is not
-			//  maximal (16), so that an uninitialized terrain index could cause a
-			//  not found error in
-			//  Descr_Maintainer<TerrainDescription>::get(Terrain_Index).
+			//  darkening that actually hides the ground from the user).
 			terrains.d = terrains.r = 0;
 
 			time_triangle_last_surveyed[0] = Never();

@@ -99,7 +99,7 @@ Source: @CMAKE_CURRENT_SOURCE_DIR@\..\pics\*;       DestDir: {app}\pics\;      F
 Source: @CMAKE_CURRENT_SOURCE_DIR@\..\sound\*;      DestDir: {app}\sound\;     Flags: recursesubdirs ignoreversion; Tasks: ; Languages: ; Attribs: hidden; Components: " Sound"
 Source: @CMAKE_CURRENT_SOURCE_DIR@\..\tribes\*;     DestDir: {app}\tribes\;    Flags: recursesubdirs ignoreversion; Tasks: ; Languages: ; Attribs: hidden; Components: " Widelands"
 Source: @CMAKE_CURRENT_SOURCE_DIR@\..\txts\*;       DestDir: {app}\txts\;      Flags: recursesubdirs ignoreversion; Tasks: ; Languages: ; Attribs: hidden; Components: " Widelands"
-Source: @CMAKE_CURRENT_SOURCE_DIR@\..\worlds\*;     DestDir: {app}\worlds\;    Flags: recursesubdirs ignoreversion; Tasks: ; Languages: ; Attribs: hidden; Components: " Widelands"
+Source: @CMAKE_CURRENT_SOURCE_DIR@\..\world\*;     DestDir: {app}\world\;    Flags: recursesubdirs ignoreversion; Tasks: ; Languages: ; Attribs: hidden; Components: " Widelands"
 Source: @CMAKE_CURRENT_SOURCE_DIR@\..\global\*;     DestDir: {app}\global\;    Flags: recursesubdirs ignoreversion; Tasks: ; Languages: ; Attribs: hidden; Components: " Widelands"
 Source: @CMAKE_CURRENT_SOURCE_DIR@\..\scripting\*;  DestDir: {app}\scripting\; Flags: recursesubdirs ignoreversion; Tasks: ; Languages: ; Attribs: hidden; Components: " Widelands"
 Source: @CMAKE_CURRENT_BINARY_DIR@\@CMAKE_BUILD_TYPE@\widelands.exe;           DestDir: {app};            Flags: ignoreversion;                                                       Components: " Widelands"
@@ -137,7 +137,7 @@ Type: filesandordirs; Name: {app}\scripting\*
 Type: filesandordirs; Name: {app}\sound\*
 Type: filesandordirs; Name: {app}\tribes\*
 Type: filesandordirs; Name: {app}\txts\*
-Type: filesandordirs; Name: {app}\worlds\*
+Type: filesandordirs; Name: {app}\world\*
 
 [UninstallDelete]
 Type: files; Name: {app}\{#UrlName}

@@ -66,7 +66,6 @@ private:
 	UI::Textarea * m_width, * m_height, * m_land;
 	UI::Textarea * m_water, * m_mountains, * m_wasteland, * m_players;
 	UI::Button * m_res;
-	UI::Button * m_world;
 	UI::Checkbox * m_island_mode;
 	UI::Button * m_goButton;
 	int32_t m_w, m_h, m_landval, m_waterval, m_wastelandval;
@@ -74,7 +73,6 @@ private:
 	uint32_t m_mapNumber;
 	std::vector<std::string>::size_type m_currentworld;
 	uint32_t m_res_amount;
-	std::vector<std::string> m_worlds;
 	std::vector<std::string> m_res_amounts;
 
 	UI::EditBox * m_nrEditbox;

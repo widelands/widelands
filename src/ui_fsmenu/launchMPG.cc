@@ -637,17 +637,10 @@ void Fullscreen_Menu_LaunchMPG::load_map_info()
 	}
 	delete ml;
 
-	// get translated worldsname
-	std::string worldpath((format("worlds/%s") % map.get_world_name()).str());
-	Profile prof ((worldpath + "/conf").c_str(), nullptr, (format("world_%s") % map.get_world_name()).str());
-	Section & global = prof.get_safe_section("world");
-	std::string world(global.get_safe_string("name"));
-
 	std::string infotext;
 	infotext += _("Map informations:\n");
 	infotext += (format(_("* Size: %ux%u\n")) % map.get_width() % map.get_height()).str();
 	infotext += (format(_("* %i Players\n")) % m_nr_players).str();
-	infotext += (format(_("* World type: %s\n")) % world).str();
 	if (m_settings->settings().scenario)
 		infotext += (format(_("* Scenario mode selected\n"))).str();
 	infotext += "\n";

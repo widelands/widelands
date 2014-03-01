@@ -702,6 +702,7 @@ Texture * Graphic::get_maptexture_data(uint32_t id)
 /**
  * Sets the name of the current world and loads the fitting road and edge textures
  */
+// NOCOM(#sirver): remove this method. The world provides them.
 void Graphic::set_world(string worldname) {
 	char buf[255];
 

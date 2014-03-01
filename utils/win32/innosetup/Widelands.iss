@@ -100,7 +100,7 @@ Source: ..\..\..\pics\*;       DestDir: {app}\pics\;      Flags: recursesubdirs 
 Source: ..\..\..\sound\*;      DestDir: {app}\sound\;     Flags: recursesubdirs ignoreversion; Tasks: ; Languages: ; Attribs: hidden; Components: " Sound"
 Source: ..\..\..\tribes\*;     DestDir: {app}\tribes\;    Flags: recursesubdirs ignoreversion; Tasks: ; Languages: ; Attribs: hidden; Components: " Widelands"
 Source: ..\..\..\txts\*;       DestDir: {app}\txts\;      Flags: recursesubdirs ignoreversion; Tasks: ; Languages: ; Attribs: hidden; Components: " Widelands"
-Source: ..\..\..\worlds\*;     DestDir: {app}\worlds\;    Flags: recursesubdirs ignoreversion; Tasks: ; Languages: ; Attribs: hidden; Components: " Widelands"
+Source: ..\..\..\world\*;     DestDir: {app}\world\;    Flags: recursesubdirs ignoreversion; Tasks: ; Languages: ; Attribs: hidden; Components: " Widelands"
 Source: ..\..\..\global\*;     DestDir: {app}\global\;    Flags: recursesubdirs ignoreversion; Tasks: ; Languages: ; Attribs: hidden; Components: " Widelands"
 Source: ..\..\..\*.dll;                                  DestDir: {app};            Flags: ignoreversion;                                                       Components: " Widelands"
 Source: ..\..\..\widelands.exe;                          DestDir: {app};            Flags: ignoreversion;                                                       Components: " Widelands"
@@ -138,7 +138,7 @@ Type: filesandordirs; Name: {app}\scripting\*
 Type: filesandordirs; Name: {app}\sound\*
 Type: filesandordirs; Name: {app}\tribes\*
 Type: filesandordirs; Name: {app}\txts\*
-Type: filesandordirs; Name: {app}\worlds\*
+Type: filesandordirs; Name: {app}\world\*
 
 [UninstallDelete]
 Type: files; Name: {app}\{#UrlName}

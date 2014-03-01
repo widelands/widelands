@@ -30,7 +30,6 @@
 #include "io/filesystem/layered_filesystem.h"
 #include "logic/building.h"
 #include "logic/editor_game_base.h"
-#include "logic/world/world.h"
 #include "map_io/map_loader.h"
 #include "map_io/widelands_map_loader.h"
 #include "profile/profile.h"
@@ -83,13 +82,6 @@ Main_Menu_Load_Map::Main_Menu_Load_Map(Editor_Interactive & parent)
 	new UI::Textarea
 		(this, posx, posy, 70, 20, _("Size: "), UI::Align_CenterLeft);
 	m_size =
-		new UI::Textarea
-			(this, posx + 70, posy, 200, 20, "---", UI::Align_CenterLeft);
-	posy += 20 + spacing;
-
-	new UI::Textarea
-		(this, posx, posy, 70, 20, _("World: "), UI::Align_CenterLeft);
-	m_world =
 		new UI::Textarea
 			(this, posx + 70, posy, 200, 20, "---", UI::Align_CenterLeft);
 	posy += 20 + spacing;
@@ -170,20 +162,12 @@ void Main_Menu_Load_Map::selected(uint32_t) {
 			delete m_ml;
 		}
 
-		// get translated worldsname
-		std::string world(map.get_world_name());
-		std::string worldpath("worlds/" + world);
-		Profile prof((worldpath + "/conf").c_str(), nullptr, "world_" + world);
-		Section & global = prof.get_safe_section("world");
-		world = global.get_safe_string("name");
-
 		// Translate the map data
 		i18n::Textdomain td("maps");
 		m_name  ->set_text(_(map.get_name()));
 		m_author->set_text(map.get_author());
 		m_descr ->set_text
 			(_(map.get_description()) + (map.get_hint().empty() ? "" : (std::string("\n") + _(map.get_hint()))));
-		m_world ->set_text(world);
 
 		char buf[200];
 		sprintf(buf, "%i", map.get_nrplayers());
@@ -195,7 +179,6 @@ void Main_Menu_Load_Map::selected(uint32_t) {
 		m_name     ->set_text("");
 		m_author   ->set_text("");
 		m_descr    ->set_text("");
-		m_world    ->set_text("");
 		m_nrplayers->set_text("");
 		m_size     ->set_text("");
 	}

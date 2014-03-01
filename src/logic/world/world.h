@@ -45,7 +45,6 @@ public:
 	~World();
 
 	static bool exists_world(std::string);  ///  check if a world really exists
-	static void get_all_worlds(std::vector<std::string>&);
 
 	// Load the graphics data for this world.
 	void load_graphics();

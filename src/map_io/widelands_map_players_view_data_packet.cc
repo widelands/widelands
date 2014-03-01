@@ -305,10 +305,7 @@ void Map_Players_View_Data_Packet::Read
 						//  Must be initialized because the rendering code is
 						//  accessing it even for triangles that the player does not
 						//  see (it is the darkening that actually hides the ground
-						//  from the player). This is important for worlds where the
-						//  number of terrain types is not maximal (16), so that an
-						//  uninitialized terrain index could cause a not found error
-						//  in Descr_Maintainer<TerrainDescription>::get(Terrain_Index).
+						//  from the player).
 						Field::Terrains terrains; terrains.d = terrains.r = 0;
 
 						if (f_vision | bl_vision | br_vision)

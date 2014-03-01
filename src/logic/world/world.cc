@@ -41,8 +41,8 @@
 
 namespace Widelands {
 
-World::World(const std::string & name) :
-	basedir_("worlds/" + name + '/'),
+World::World() :
+	basedir_("world/"),
 	mapGenInfo_(new MapGenInfo())
 {
 	try {
@@ -303,24 +303,6 @@ bool World::exists_world(std::string worldname)
 			 std::unique_ptr<FileSystem>
 				(g_fs->MakeSubFileSystem("worlds/" + worldname)),
 			 "conf");
-}
-
-void World::get_all_worlds(std::vector<std::string> & result) {
-	result.clear();
-
-	//  get all worlds
-	filenameset_t worlds_;
-	g_fs->FindFiles("worlds", "*", &worlds_);
-	for
-		(filenameset_t::iterator pname = worlds_.begin();
-		 pname != worlds_.end();
-		 ++pname)
-	{
-		std::string world = *pname;
-		world.erase(0, 7); //  remove worlds/
-		if (World::exists_world(world.c_str()))
-			result.push_back(world);
-	}
 }
 
 int32_t World::safe_resource_index(const char * const resourcename) const {

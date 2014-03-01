@@ -49,7 +49,7 @@ MAINPOTS = [( "maps/maps", [
 
 
 # This defines the rules for iterative generation of catalogs. This allows
-# to automatically add new .pot files for newly created tribes, worlds, ...
+# to automatically add new .pot files for newly created directories.
 #
 # This is a list with structure:
 #       - target .pot file mask
@@ -339,4 +339,3 @@ if __name__ == "__main__":
     do_update_potfiles()
 
     print ""
-
