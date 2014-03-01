@@ -31,6 +31,7 @@
 #include "logic/world/terrain_description.h"
 
 class Section;
+class LuaInterface;
 
 namespace Widelands {
 
@@ -41,9 +42,10 @@ class Editor_Game_Base;
 // terrains, immovables and resources.
 class World : boost::noncopyable {
 public:
-	World(const std::string& name);
-	~World();
+	explicit World(LuaInterface*);
+	~World();  // Defined in .cc because all forward declarations are known then.
 
+	// NOCOM(#sirver): kill
 	static bool exists_world(std::string);  ///  check if a world really exists
 
 	// Load the graphics data for this world.
@@ -108,13 +110,10 @@ public:
 		return basedir_;
 	}
 
-	MapGenInfo& getMapGenInfo();
+	const MapGenInfo& getMapGenInfo() const;
 
 private:
 	const std::string basedir_;  //  base directory, where the main conf file resides
-	std::string name_; // The name of this world.
-	std::string author_;  // The author of this world.
-	std::string description_; // The description of this world.
 
 	Descr_Maintainer<Bob::Descr> bobs;
 	Descr_Maintainer<Immovable_Descr> immovables;
@@ -122,12 +121,6 @@ private:
 	Descr_Maintainer<ResourceDescription> resources_;
 
 	std::unique_ptr<MapGenInfo> mapGenInfo_;
-
-	void parse_root_conf(const std::string& name, Profile& root_conf);
-	void parse_resources();
-	void parse_terrains();
-	void parse_bobs(const std::string& directory, Profile& root_conf);
-	void parse_mapgen();
 };
 }  // namespace Widelands
 

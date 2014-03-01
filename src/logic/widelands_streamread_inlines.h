@@ -64,7 +64,7 @@ inline const Immovable_Descr & StreamRead::Immovable_Type
 	if (Tribe_Descr const * const tribe = Tribe_allow_null(egbase))
 		return Immovable_Type(*tribe);
 	else
-		return Immovable_Type(egbase.map().world());
+		return Immovable_Type(egbase.world());
 }
 
 inline const Building_Descr  & StreamRead::Building_Type

@@ -66,7 +66,7 @@ void GameRendererSDL::draw_terrain()
 		m_dst->get_surface()->fill_rect(m_dst->get_rect(), RGBAColor(0, 0, 0, 255));
 
 	const Map & map = m_egbase->map();
-	const World & world = map.world();
+	const World & world = m_egbase->world();
 	uint32_t const mapwidth = map.get_width();
 
 #define get_terrain_texture(ter) \

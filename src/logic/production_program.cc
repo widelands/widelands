@@ -1107,8 +1107,6 @@ void ProductionProgram::ActMine::execute
 {
 	Map & map = game.map();
 
-	//ps.molog("  Mine '%s'", map.world().get_resource(m_resource)->get_name());
-
 	//  select one of the nodes randomly
 	uint32_t totalres    = 0;
 	uint32_t totalchance = 0;

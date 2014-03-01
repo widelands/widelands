@@ -24,7 +24,7 @@ editor_pic=iron3.png 15
 editor_pic=iron4.png
 max_amount=20
 
-[granit]
+[granite]
 name=_ Granite
 editor_pic=granit1.png 5
 editor_pic=granit2.png 10

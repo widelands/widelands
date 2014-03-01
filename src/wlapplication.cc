@@ -382,7 +382,7 @@ void WLApplication::run()
 		Widelands::Game game;
 		try {
 			// disable sound completely
-			g_sound_handler.m_nosound = true;
+			g_sound_handler.nosound_ = true;
 
 			// setup some details of the dedicated server
 			Section & s = g_options.pull_section      ("global");
@@ -1172,7 +1172,7 @@ void WLApplication::handle_commandline_parameters()
 		m_commandline.erase("logfile");
 	}
 	if (m_commandline.count("nosound")) {
-		g_sound_handler.m_nosound = true;
+		g_sound_handler.nosound_ = true;
 		m_commandline.erase("nosound");
 	}
 	if (m_commandline.count("nozip")) {
@@ -1899,8 +1899,9 @@ struct SinglePlayerGameSettingsProvider : public GameSettingsProvider {
 		s.players[number].state = PlayerSettings::stateComputer;
 	}
 
-	virtual void setPlayerTribe(uint8_t const number, const std::string & tribe, bool const random_tribe) override
-	{
+	virtual void setPlayerTribe(uint8_t number,
+	                            const std::string& tribe,
+	                            bool random_tribe) override {
 		if (number >= s.players.size())
 			return;
 
@@ -1979,7 +1980,9 @@ struct SinglePlayerGameSettingsProvider : public GameSettingsProvider {
 
 	virtual std::string getWinCondition() override {return s.win_condition;}
 	virtual void setWinCondition(std::string wc) override {s.win_condition = wc;}
-	virtual void nextWinCondition() override {assert(false);} // not implemented - feel free to do so, if you need it.
+	virtual void nextWinCondition() override {
+		assert(false);
+	}  // not implemented - feel free to do so, if you need it.
 
 private:
 	GameSettings s;

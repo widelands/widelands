@@ -51,7 +51,7 @@ void Map_Bob_Data_Packet::ReadBob
 				throw game_data_error("world bob is not a critter!");
 
 			const Map   & map   = egbase.map();
-			const World & world = map.world();
+			const World & world = egbase.world();
 			int32_t const idx = world.get_bob(name);
 			if (idx == -1)
 				throw game_data_error
@@ -117,7 +117,7 @@ void Map_Bob_Data_Packet::Read
 	fr.Open(fs, "binary/bob");
 
 	Map & map = egbase.map();
-	map.recalc_whole_map(); //  for movecaps checks in ReadBob
+	map.recalc_whole_map(egbase.world()); //  for movecaps checks in ReadBob
 
 	try {
 		uint16_t const packet_version = fr.Unsigned16();

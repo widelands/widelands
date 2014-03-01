@@ -368,7 +368,7 @@ Map_Object::Loader * Critter_Bob::load
 
 			if (owner == "world") {
 				descr = dynamic_cast<const Critter_Bob_Descr *>
-					(egbase.map().world().get_bob_descr(name));
+					(egbase.world().get_bob_descr(name));
 			} else {
 				egbase.manually_load_tribe(owner);
 

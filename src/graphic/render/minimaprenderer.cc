@@ -66,7 +66,7 @@ inline uint32_t calc_minimap_color
 		pixelcolor =
 			g_gr->
 			get_maptexture_data
-				(egbase.map().world()
+				(egbase.world()
 				 .terrain_descr(f.field->terrain_d()).get_texture())
 			->get_minimap_color(f.field->get_brightness()) | format.Amask;
 	}

@@ -401,7 +401,7 @@ const Widelands::Immovable_Descr & Section::get_safe_Immovable_Type
 				 tribename,        immname);
 	} else {
 		const Widelands::World       & world    =
-			egbase.map().world();
+			egbase.world();
 		if
 			(Widelands::Immovable_Descr const * const result =
 			 world   .get_immovable_descr(world   .get_immovable_index(immname)))

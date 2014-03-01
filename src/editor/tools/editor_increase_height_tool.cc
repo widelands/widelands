@@ -25,36 +25,34 @@
 #include "logic/mapregion.h"
 
 /// Increases the heights by a value. Chages surrounding nodes if necessary.
-int32_t Editor_Increase_Height_Tool::handle_click_impl
-	(Widelands::Map & map,
-	Widelands::Node_and_Triangle<> center,
-	Editor_Interactive & /* parent */,
-	Editor_Action_Args & args)
-{
+int32_t Editor_Increase_Height_Tool::handle_click_impl(Widelands::Map& map,
+                                                       const Widelands::World& world,
+                                                       Widelands::Node_and_Triangle<> center,
+                                                       Editor_Interactive& /* parent */,
+                                                       Editor_Action_Args& args) {
 	if (args.origHights.empty()) {
-		Widelands::MapRegion<Widelands::Area<Widelands::FCoords> > mr
-		(map,
-		 Widelands::Area<Widelands::FCoords>
-		 (map.get_fcoords(center.node), args.sel_radius + MAX_FIELD_HEIGHT / MAX_FIELD_HEIGHT_DIFF + 1));
+		Widelands::MapRegion<Widelands::Area<Widelands::FCoords>> mr(
+		   map,
+		   Widelands::Area<Widelands::FCoords>(
+		      map.get_fcoords(center.node),
+		      args.sel_radius + MAX_FIELD_HEIGHT / MAX_FIELD_HEIGHT_DIFF + 1));
 		do {
 			args.origHights.push_back(mr.location().field->get_height());
 		} while (mr.advance(map));
 	}
 
-	return
-	    map.change_height
-	    (Widelands::Area<Widelands::FCoords>
-	     (map.get_fcoords(center.node), args.sel_radius),
-	     args.change_by);
+	return map.change_height(
+	   world,
+	   Widelands::Area<Widelands::FCoords>(map.get_fcoords(center.node), args.sel_radius),
+	   args.change_by);
 }
 
-int32_t Editor_Increase_Height_Tool::handle_undo_impl
-	(Widelands::Map & map,
-	Widelands::Node_and_Triangle<> center,
-	Editor_Interactive & parent,
-	Editor_Action_Args & args)
-{
-	return m_decrease_tool.handle_undo_impl(map, center, parent, args);
+int32_t Editor_Increase_Height_Tool::handle_undo_impl(Widelands::Map& map,
+                                                      const Widelands::World& world,
+                                                      Widelands::Node_and_Triangle<> center,
+                                                      Editor_Interactive& parent,
+                                                      Editor_Action_Args& args) {
+	return m_decrease_tool.handle_undo_impl(map, world, center, parent, args);
 }
 
 Editor_Action_Args Editor_Increase_Height_Tool::format_args_impl(Editor_Interactive & parent)

@@ -272,8 +272,7 @@ void GameRendererGL::prepare_terrain_base()
 
 void GameRendererGL::draw_terrain_base()
 {
-	const Map & map = m_egbase->map();
-	const World & world = map.world();
+	const World & world = m_egbase->world();
 
 	glMatrixMode(GL_TEXTURE);
 	glLoadIdentity();
@@ -339,7 +338,7 @@ void GameRendererGL::add_terrain_dither_triangle
 void GameRendererGL::collect_terrain_dither(bool onlyscan)
 {
 	const Map & map = m_egbase->map();
-	const World & world = map.world();
+	const World & world = m_egbase->world();
 
 	for (int32_t fy = m_minfy; fy <= m_maxfy; ++fy) {
 		for (int32_t fx = m_minfx; fx <= m_maxfx; ++fx) {
@@ -438,8 +437,7 @@ void GameRendererGL::prepare_terrain_dither()
 
 void GameRendererGL::draw_terrain_dither()
 {
-	const Map & map = m_egbase->map();
-	const World & world = map.world();
+	const World & world = m_egbase->world();
 
 	if (m_edge_vertices_size == 0)
 		return;
@@ -665,4 +663,3 @@ void GameRendererGL::draw_roads()
 	glDisableClientState(GL_TEXTURE_COORD_ARRAY);
 	glDisableClientState(GL_COLOR_ARRAY);
 }
-

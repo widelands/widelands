@@ -41,7 +41,7 @@ void Map_Terrain_Data_Packet::Read
 	fr.Open(fs, "binary/terrain");
 
 	Map & map = egbase.map();
-	World & world = map.world();
+	const World & world = egbase.world();
 
 	try {
 		uint16_t const packet_version = fr.Unsigned16();
@@ -92,7 +92,7 @@ void Map_Terrain_Data_Packet::Write
 	//  This is a bit more complicated saved so that the order of loading of the
 	//  terrains at run time does not matter. This is slow like hell.
 	const Map & map = egbase.map();
-	const World & world = map.world();
+	const World & world = egbase.world();
 	Terrain_Index const nr_terrains = world.get_nr_terrains();
 	fw.Unsigned16(nr_terrains);
 

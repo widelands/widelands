@@ -26,6 +26,7 @@
 #include "map_io/map_loader.h"
 
 class FileSystem;
+class LuaInterface;
 
 namespace Widelands {
 
@@ -38,7 +39,6 @@ struct WL_Map_Loader : public Map_Loader {
 	virtual ~WL_Map_Loader();
 
 	virtual int32_t preload_map(bool) override;
-	void load_world() override;
 	virtual int32_t load_map_complete(Editor_Game_Base &, bool) override;
 
 	Map_Map_Object_Loader * get_map_object_loader() {return m_mol;}

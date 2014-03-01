@@ -80,7 +80,7 @@ void BaseImmovable::set_position(Editor_Game_Base & egbase, Coords const c)
 	f.field->immovable = this;
 
 	if (get_size() >= SMALL)
-		map.recalc_for_field_area(Area<FCoords>(f, 2));
+		map.recalc_for_field_area(egbase.world(), Area<FCoords>(f, 2));
 }
 
 /**
@@ -99,7 +99,7 @@ void BaseImmovable::unset_position(Editor_Game_Base & egbase, Coords const c)
 	egbase.inform_players_about_immovable(f.field - &map[0], nullptr);
 
 	if (get_size() >= SMALL)
-		map.recalc_for_field_area(Area<FCoords>(f, 2));
+		map.recalc_for_field_area(egbase.world(), Area<FCoords>(f, 2));
 }
 
 
@@ -776,7 +776,7 @@ Map_Object::Loader * Immovable::load
 				} else
 					throw wexception(_("unknown tribe %s"), owner);
 			} else { //  world immovable
-				const World & world = egbase.map().world();
+				const World & world = egbase.world();
 				int32_t const idx = world.get_immovable_index(name);
 				if (idx == -1)
 					throw wexception

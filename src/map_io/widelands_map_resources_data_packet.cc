@@ -40,7 +40,7 @@ void Map_Resources_Data_Packet::Read
 	fr.Open(fs, "binary/resource");
 
 	Map   & map   = egbase.map();
-	World & world = map.world();
+	const World & world = egbase.world();
 
 	const uint16_t packet_version = fr.Unsigned16();
 	if (packet_version == CURRENT_PACKET_VERSION) {
@@ -113,7 +113,7 @@ void Map_Resources_Data_Packet::Write
 	// (saved like terrains)
 	// Write the number of resources
 	const Map   & map   = egbase.map  ();
-	const World & world = map   .world();
+	const World& world = egbase.world();
 	uint8_t const nr_res = world.get_nr_resources();
 	fw.Unsigned16(nr_res);
 

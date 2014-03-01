@@ -231,8 +231,6 @@ bool Game::run_splayer_scenario_direct(char const * const mapname, const std::st
 		loaderUI.set_background(background);
 	else
 		loaderUI.set_background(map().get_world_name());
-	loaderUI.step (_("Loading a world"));
-	maploader->load_world();
 
 	// We have to create the players here.
 	Player_Number const nr_players = map().get_nrplayers();
@@ -503,7 +501,7 @@ bool Game::run
 				(map().get_starting_pos(get_ipl()->player_number()));
 
 		// Prepare the map, set default textures
-		map().recalc_default_resources();
+		map().recalc_default_resources(world());
 
 		// Finally, set the scenario names and tribes to represent
 		// the correct names of the players
@@ -655,9 +653,9 @@ void Game::cleanup_for_load
 	m_state = gs_notrunning;
 
 	Editor_Game_Base::cleanup_for_load(flush_graphics, flush_animations);
-	container_iterate_const(std::vector<Tribe_Descr *>, m_tribes, i)
+	container_iterate_const(std::vector<Tribe_Descr *>, tribes_, i)
 		delete *i.current;
-	m_tribes.clear();
+	tribes_.clear();
 	cmdqueue().flush();
 
 	// Statistics

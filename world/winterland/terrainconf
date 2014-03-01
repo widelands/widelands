@@ -11,7 +11,7 @@ dither_layer=50
 
 [mountain1]
 name=_"Mountain1"
-resources=coal, iron, gold, granit
+resources=coal, iron, gold, granite
 is=mountain
 dither_layer=70
 
@@ -60,19 +60,19 @@ dither_layer=50
 
 [mountain2]
 name=_"Mountain2"
-resources=coal, iron, gold, granit
+resources=coal, iron, gold, granite
 is=mountain
 dither_layer=70
 
 [mountain3]
 name=_"Mountain3"
-resources=coal, iron, gold, granit
+resources=coal, iron, gold, granite
 is=mountain
 dither_layer=70
 
 [mountain4]
 name=_"Mountain4"
-resources=coal, iron, gold, granit
+resources=coal, iron, gold, granite
 is=mountain
 dither_layer=70
 

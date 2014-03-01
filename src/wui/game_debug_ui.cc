@@ -373,7 +373,7 @@ void FieldDebugWindow::think()
 		int startingAmount = m_coords.field->get_starting_res_amount();
 		snprintf
 		(buffer, sizeof(buffer), _("Resource: %s\n"),
-			m_map.get_world()->get_resource(ridx)->name().c_str());
+			egbase.world().get_resource(ridx)->name().c_str());
 
 		str += buffer;
 

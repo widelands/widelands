@@ -44,7 +44,6 @@ void Game_Map_Data_Packet::Read
 	m_wml = new WL_Map_Loader(*fs.MakeSubFileSystem("map"), &game.map());
 
 	m_wml->preload_map(true);
-	m_wml->load_world();
 
 	//  DONE, mapfs gets deleted by WidelandsMapLoader.
 

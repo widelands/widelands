@@ -29,13 +29,11 @@
 #include "ui_basic/window.h"
 
 /// Show a window with information about the pointed at node and triangle.
-int32_t Editor_Info_Tool::handle_click_impl
-	(Widelands::Map            &         map,
-	Widelands::Node_and_Triangle<> const center,
-	Editor_Interactive         &         parent,
-	Editor_Action_Args         &         /* args */)
-{
-	const Widelands::World & world = map.world();
+int32_t Editor_Info_Tool::handle_click_impl(Widelands::Map& map,
+                                            const Widelands::World& world,
+                                            Widelands::Node_and_Triangle<> const center,
+                                            Editor_Interactive& parent,
+                                            Editor_Action_Args& /* args */) {
 	UI::Window * const w =
 	    new UI::Window
 	(&parent, "field_information", 30, 30, 400, 200,
@@ -124,13 +122,6 @@ int32_t Editor_Info_Tool::handle_click_impl
 	(buf1, sizeof(buf1),
 	 _("\n Number of Players: %i\n"), map.get_nrplayers());
 	buf += buf1;
-
-	buf += _("5) World Info\n Name: ");
-	buf += world.get_name();
-	buf += _("\n Author: ");
-	buf += world.get_author();
-	buf += _("\n Descr: ");
-	buf += world.get_description();
 
 	multiline_textarea->set_text(buf.c_str());
 

@@ -40,10 +40,7 @@ struct Main_Menu_New_Map : public UI::Window {
 
 private:
 	UI::Textarea * m_width, * m_height;
-	UI::Button * m_world;
 	int32_t m_w, m_h;
-	std::vector<std::string>::size_type m_currentworld;
-	std::vector<std::string> m_worlds;
 
 	void button_clicked(int32_t);
 	void clicked_create_map();

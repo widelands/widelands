@@ -352,7 +352,7 @@ void Editor_Player_Menu::set_starting_pos_clicked(uint8_t n) {
 	//  selected.
 	map.overlay_manager().register_overlay_callback_function
 		(&Editor_Tool_Set_Starting_Pos_Callback, &map);
-	map.recalc_whole_map();
+	map.recalc_whole_map(menu.egbase().world());
 	update();
 }
 
@@ -439,6 +439,5 @@ void Editor_Player_Menu::make_infrastructure_clicked(uint8_t n) {
 		(&Editor_Make_Infrastructure_Tool_Callback,
 		 static_cast<void *>(&egbase),
 		 n);
-	map.recalc_whole_map();
+	map.recalc_whole_map(egbase.world());
 }
-

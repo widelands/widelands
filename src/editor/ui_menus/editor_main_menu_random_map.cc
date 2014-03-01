@@ -46,7 +46,7 @@ Main_Menu_New_Random_Map::Main_Menu_New_Random_Map
 	UI::Window
 		(&parent, "random_map_menu",
 		 (parent.get_w() - 260) / 2, (parent.get_h() - 450) / 2, 260, 490,
-		 _("New Random Map")),
+		 _("New Random Map"))
 {
 	char buffer[250];
 	int32_t const offsx   =  5;
@@ -448,18 +448,19 @@ void Main_Menu_New_Random_Map::clicked_create_map() {
 		<< "ID = " << m_idEditbox->text() << "\n";
 
 	MapGenerator gen(map, mapInfo, egbase);
-	map.create_empty_map
-		(mapInfo.w, mapInfo.h,
-		 "", _("No Name"),
-		 g_options.pull_section("global").get_string("realname", _("Unknown")),
-		 sstrm.str().c_str());
+	map.create_empty_map(egbase.world(),
+	                     mapInfo.w,
+	                     mapInfo.h,
+	                     _("No Name"),
+	                     g_options.pull_section("global").get_string("realname", _("Unknown")),
+	                     sstrm.str().c_str());
 	loader.step(_("Generating random map..."));
 	gen.create_random_map();
 
 	egbase.postload     ();
 	egbase.load_graphics(loader);
 
-	map.recalc_whole_map();
+	map.recalc_whole_map(egbase.world());
 
 	eia.set_need_save(true);
 	eia.need_complete_redraw();
@@ -474,7 +475,7 @@ void Main_Menu_New_Random_Map::id_edit_box_changed()
 
 	std::string str = m_idEditbox->text();
 
-	if (!UniqueRandomMapInfo::setFromIdString(mapInfo, str, m_worlds))
+	if (!UniqueRandomMapInfo::setFromIdString(mapInfo, str))
 		m_goButton->set_enabled(false);
 	else {
 		std::stringstream sstrm;

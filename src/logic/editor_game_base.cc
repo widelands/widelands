@@ -61,33 +61,31 @@ initialization
 ============
 */
 Editor_Game_Base::Editor_Game_Base(LuaInterface * lua_interface) :
-m_gametime          (0),
-m_lua               (lua_interface),
-m_player_manager    (new Players_Manager(*this)),
-m_ibase             (nullptr),
-m_map               (nullptr),
-m_lasttrackserial   (0)
+gametime_          (0),
+lua_               (lua_interface),
+player_manager_    (new Players_Manager(*this)),
+ibase_             (nullptr),
+map_               (nullptr),
+lasttrackserial_   (0)
 {
-	if (not m_lua) // TODO SirVer: this is sooo ugly, I can't say
-		m_lua = new LuaEditorInterface(this);
+	if (not lua_) // TODO SirVer: this is sooo ugly, I can't say
+		lua_.reset(new LuaEditorInterface(this));
 
-	g_sound_handler.m_egbase = this;
+	g_sound_handler.egbase_ = this;
 
 }
 
 
 Editor_Game_Base::~Editor_Game_Base() {
-	delete m_map;
-	delete m_player_manager.release();
+	delete map_;
+	delete player_manager_.release();
 
-	container_iterate_const(Tribe_Vector, m_tribes, i)
+	container_iterate_const(Tribe_Vector, tribes_, i)
 		delete *i.current;
 
-	delete m_lua;
-
 	if (g_gr) { // dedicated does not use the sound_handler
-		assert(this == g_sound_handler.m_egbase);
-		g_sound_handler.m_egbase = nullptr;
+		assert(this == g_sound_handler.egbase_);
+		g_sound_handler.egbase_ = nullptr;
 	}
 }
 
@@ -95,6 +93,15 @@ void Editor_Game_Base::think()
 {
 	//TODO: Get rid of this; replace by a function that just advances gametime
 	// by a given number of milliseconds
+}
+
+const World& Editor_Game_Base::world() const {
+	if (!world_) {
+		// Const casts are evil, but this is essentially lazy evaluation and the
+		// caller should really not modify this.
+		const_cast<Editor_Game_Base*>(this)->world_.reset(new World(lua_.get()));
+	}
+	return *world_;
 }
 
 void Editor_Game_Base::receive(const NoteImmovable & note)
@@ -109,11 +116,11 @@ void Editor_Game_Base::receive(const NoteFieldPossession & note)
 
 void Editor_Game_Base::receive(const NoteFieldTransformed & note)
 {
-	Widelands::Map_Index const i = note.fc.field - &(*m_map)[0];
+	Widelands::Map_Index const i = note.fc.field - &(*map_)[0];
 
-	iterate_players_existing(p, m_map->get_nrplayers(), *this, plr)
+	iterate_players_existing(p, map_->get_nrplayers(), *this, plr)
 		if (plr->vision(i) > 1) // player currently sees field?
-			plr->rediscover_node(*m_map, (*m_map)[0], note.fc);
+			plr->rediscover_node(*map_, (*map_)[0], note.fc);
 }
 
 Interactive_GameBase* Editor_Game_Base::get_igbase()
@@ -123,7 +130,7 @@ Interactive_GameBase* Editor_Game_Base::get_igbase()
 
 /// @see PlayerManager class
 void Editor_Game_Base::remove_player(Player_Number plnum) {
-	m_player_manager->remove_player(plnum);
+	player_manager_->remove_player(plnum);
 }
 
 /// @see PlayerManager class
@@ -135,7 +142,7 @@ Player * Editor_Game_Base::add_player
 	 TeamNumber                team)
 {
 	return
-		m_player_manager->add_player
+		player_manager_->add_player
 			(player_number, initialization_index, tribe,
 			name, team);
 }
@@ -144,29 +151,26 @@ Player * Editor_Game_Base::add_player
 const Tribe_Descr & Editor_Game_Base::manually_load_tribe
 	(const std::string & tribe)
 {
-	container_iterate_const(Tribe_Vector, m_tribes, i)
+	container_iterate_const(Tribe_Vector, tribes_, i)
 		if ((*i.current)->name() == tribe)
 			return **i.current;
 
-	if (not map().get_world())
-		map().load_world();
-	assert(map().get_world());
 	Tribe_Descr & result = *new Tribe_Descr(tribe, *this);
 	//resize the configuration of our wares if they won't fit in the current window (12 = info label size)
 	int number = (g_gr->get_yres() - 270) / (WARE_MENU_PIC_HEIGHT + WARE_MENU_PIC_PAD_Y + 12);
 	result.resize_ware_orders(number);
-	m_tribes.push_back(&result);
+	tribes_.push_back(&result);
 	return result;
 }
 
 Player* Editor_Game_Base::get_player(const int32_t n) const
 {
-	return m_player_manager->get_player(n);
+	return player_manager_->get_player(n);
 }
 
 Player& Editor_Game_Base::player(const int32_t n) const
 {
-	return m_player_manager->player(n);
+	return player_manager_->player(n);
 }
 
 
@@ -174,7 +178,7 @@ Player& Editor_Game_Base::player(const int32_t n) const
 /// Returns a tribe description from the internally loaded list
 const Tribe_Descr * Editor_Game_Base::get_tribe(const char * const tribe) const
 {
-	container_iterate_const(Tribe_Vector, m_tribes, i)
+	container_iterate_const(Tribe_Vector, tribes_, i)
 		if (not strcmp((*i.current)->name().c_str(), tribe))
 			return *i.current;
 	return nullptr;
@@ -207,19 +211,14 @@ void Editor_Game_Base::inform_players_about_immovable
  * to the Editor_Game_Base object.
  */
 void Editor_Game_Base::set_map(Map * const new_map) {
-	assert(new_map != m_map);
+	assert(new_map != map_);
 	assert(new_map);
 
-	delete m_map;
+	delete map_;
 
-	m_map = new_map;
+	map_ = new_map;
 
-	// if this map is already completely loaded, we better inform g_gr about the change of the world
-	// to (re)load the correct road textures.
-	if (g_gr && strcmp(m_map->get_world_name(), ""))
-		g_gr->set_world(m_map->get_world_name());
-
-	NoteReceiver<NoteFieldTransformed>::connect(*m_map);
+	NoteReceiver<NoteFieldTransformed>::connect(*map_);
 }
 
 
@@ -242,10 +241,10 @@ void Editor_Game_Base::postload()
 
 	// Postload tribes
 	id = 0;
-	while (id < m_tribes.size()) {
+	while (id < tribes_.size()) {
 		for (pid = 1; pid <= MAX_PLAYERS; ++pid)
 			if (const Player * const plr = get_player(pid))
-				if (&plr->tribe() == m_tribes[id])
+				if (&plr->tribe() == tribes_[id])
 					break;
 
 		if
@@ -254,11 +253,11 @@ void Editor_Game_Base::postload()
 			 not dynamic_cast<const Game *>(this))
 		{ // if this is editor, load the tribe anyways
 			// the tribe is used, postload it
-			m_tribes[id]->postload(*this);
+			tribes_[id]->postload(*this);
 			++id;
 		} else {
-			delete m_tribes[id]; // the tribe is no longer used, remove it
-			m_tribes.erase(m_tribes.begin() + id);
+			delete tribes_[id]; // the tribe is no longer used, remove it
+			tribes_.erase(tribes_.begin() + id);
 		}
 	}
 
@@ -276,10 +275,9 @@ void Editor_Game_Base::load_graphics(UI::ProgressWindow & loader_ui)
 	loader_ui.step(_("Loading world data"));
 	g_gr->flush_animations();
 
-	g_gr->set_world(m_map->get_world_name());
-	m_map->load_graphics(); // especially loads world data
+	g_gr->set_world(map_->get_world_name());
 
-	container_iterate_const(Tribe_Vector, m_tribes, i) {
+	container_iterate_const(Tribe_Vector, tribes_, i) {
 		loader_ui.stepf(_("Loading tribes"));
 		(*i.current)->load_graphics();
 	}
@@ -370,7 +368,7 @@ Bob & Editor_Game_Base::create_bob
 		(tribe ?
 		 tribe->get_bob_descr(idx)
 		 :
-		 m_map->get_world()->get_bob_descr(idx));
+		 world().get_bob_descr(idx));
 
 	return create_bob(c, descr, owner);
 }
@@ -382,7 +380,7 @@ Bob & Editor_Game_Base::create_bob
 	const Bob::Descr * descr =
 		tribe ?
 		tribe->get_bob_descr(name) :
-		m_map->get_world()->get_bob_descr(name);
+		world().get_bob_descr(name);
 
 	if (!descr)
 		throw wexception
@@ -409,7 +407,7 @@ Immovable & Editor_Game_Base::create_immovable
 		(tribe ?
 		 tribe->get_immovable_descr(idx)
 		 :
-		 m_map->world().get_immovable_descr(idx));
+		 world().get_immovable_descr(idx));
 	assert(&descr);
 	inform_players_about_immovable
 		(Map::get_index(c, map().get_width()), &descr);
@@ -423,7 +421,7 @@ Immovable & Editor_Game_Base::create_immovable
 		tribe ?
 		tribe->get_immovable_index(name.c_str())
 		:
-		m_map->get_world()->get_immovable_index(name.c_str());
+		world().get_immovable_index(name.c_str());
 	if (idx < 0)
 		throw wexception
 			("Editor_Game_Base::create_immovable(%i, %i): %s is not defined for "
@@ -454,13 +452,13 @@ Returns the serial number that can be used to retrieve or remove the pointer.
 */
 uint32_t Editor_Game_Base::add_trackpointer(void * const ptr)
 {
-	++m_lasttrackserial;
+	++lasttrackserial_;
 
-	if (!m_lasttrackserial)
+	if (!lasttrackserial_)
 		throw wexception("Dude, you play too long. Track serials exceeded.");
 
-	m_trackpointers[m_lasttrackserial] = ptr;
-	return m_lasttrackserial;
+	trackpointers_[lasttrackserial_] = ptr;
+	return lasttrackserial_;
 }
 
 
@@ -472,9 +470,9 @@ Returns 0 if the pointer has been removed.
 */
 void * Editor_Game_Base::get_trackpointer(uint32_t const serial)
 {
-	std::map<uint32_t, void *>::iterator it = m_trackpointers.find(serial);
+	std::map<uint32_t, void *>::iterator it = trackpointers_.find(serial);
 
-	if (it != m_trackpointers.end())
+	if (it != trackpointers_.end())
 		return it->second;
 
 	return nullptr;
@@ -489,7 +487,7 @@ using this serial number will return 0.
 */
 void Editor_Game_Base::remove_trackpointer(uint32_t serial)
 {
-	m_trackpointers.erase(serial);
+	trackpointers_.erase(serial);
 }
 
 /**
@@ -512,10 +510,10 @@ void Editor_Game_Base::cleanup_for_load
 			g_gr->flush_animations(); // flush all world animations
 	}
 
-	m_player_manager->cleanup();
+	player_manager_->cleanup();
 
-	if (m_map)
-		m_map->cleanup();
+	if (map_)
+		map_->cleanup();
 }
 
 
@@ -668,7 +666,7 @@ void Editor_Game_Base::conquer_area_no_building
 	//  This must reach one step beyond the conquered area to adjust the borders
 	//  of neighbour players.
 	++player_area.radius;
-	map().recalc_for_field_area(player_area);
+	map().recalc_for_field_area(world(), player_area);
 }
 
 
@@ -771,7 +769,7 @@ void Editor_Game_Base::do_conquer_area
 	//  This must reach one step beyond the conquered area to adjust the borders
 	//  of neighbour players.
 	++player_area.radius;
-	map().recalc_for_field_area(player_area);
+	map().recalc_for_field_area(world(), player_area);
 }
 
 /// Makes sure that buildings cannot exist outside their owner's territory.

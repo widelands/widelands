@@ -50,7 +50,7 @@ void MapGenerator::generate_bobs
 {
 	//  Figure out which bob area is due here...
 
-	MapGenInfo & mapGenInfo = m_map.world().getMapGenInfo();
+	const MapGenInfo & mapGenInfo = m_egbase.world().getMapGenInfo();
 
 	size_t num = mapGenInfo.getNumBobAreas();
 	size_t found = num;
@@ -103,27 +103,26 @@ void MapGenerator::generate_bobs
 	if (set_moveable and (num = bobKind->getNumMoveableBobs()))
 		m_egbase.create_bob
 			(fc,
-			 m_map.world().get_bob
+			 m_egbase.world().get_bob
 			 	(bobKind->getMoveableBob
 			 	 	(static_cast<size_t>(rng.rand() / (MAX_ELEVATION / num)))
 			 	 .c_str()),
 			 nullptr);
 }
 
-#define set_resource_helper(rnd1, res)                                        \
-   {                                                                          \
-      Resource_Index const res_idx = terr.get_valid_resource(res);            \
-      uint32_t const max_amount    =                                          \
-         m_map.world().get_resource(res_idx)->get_max_amount();                \
-      uint8_t res_val =                                                       \
-         static_cast<uint8_t>(rnd1 / (MAX_ELEVATION / max_amount));           \
-      res_val *= static_cast<uint8_t>(m_mapInfo.resource_amount) + 1;        \
-      res_val /= 3;                                                           \
-      if (Editor_Change_Resource_Tool_Callback(fc, &m_map, res_idx)) {        \
-         fc.field->set_resources(res_idx, res_val);                           \
-         fc.field->set_starting_res_amount(res_val);                          \
-      }                                                                       \
-   }                                                                          \
+// TODO(sirver): this should most certainly be a function.
+#define set_resource_helper(rnd1, res)                                                             \
+	{                                                                                               \
+		Resource_Index const res_idx = terr.get_valid_resource(res);                                 \
+		uint32_t const max_amount = m_egbase.world().get_resource(res_idx)->get_max_amount();        \
+		uint8_t res_val = static_cast<uint8_t>(rnd1 / (MAX_ELEVATION / max_amount));                 \
+		res_val *= static_cast<uint8_t>(m_mapInfo.resource_amount) + 1;                              \
+		res_val /= 3;                                                                                \
+		if (Editor_Change_Resource_Tool_Callback(fc, &callback_data, res_idx)) {                     \
+			fc.field->set_resources(res_idx, res_val);                                                \
+			fc.field->set_starting_res_amount(res_val);                                               \
+		}                                                                                            \
+	}
 
 void MapGenerator::generate_resources
 	(uint32_t            const * const random1,
@@ -135,8 +134,12 @@ void MapGenerator::generate_resources
 	// We'll take the "D" terrain at first...
 	// TODO: Check how the editor handles this...
 
+	EditorChangeResourceToolCallbackData callback_data = {
+		&m_egbase.map(),
+		&m_egbase.world()
+	};
 	Terrain_Index const tix = fc.field->get_terrains().d;
-	const TerrainDescription & terr = m_map.world().get_ter(tix);
+	const TerrainDescription & terr = m_egbase.world().get_ter(tix);
 	switch (terr.get_num_valid_resources()) {
 	case 1: {
 		uint32_t const rnd1 = random1[fc.x + m_mapInfo.w * fc.y];
@@ -199,7 +202,7 @@ uint8_t MapGenerator::make_node_elevation
 	(double                      const elevation,
 	 Coords                      const c)
 {
-	MapGenInfo & mapGenInfo = m_map.world().getMapGenInfo();
+	const MapGenInfo & mapGenInfo = m_egbase.world().getMapGenInfo();
 
 	int32_t const water_h  = mapGenInfo.getWaterShallowHeight();
 	int32_t const mount_h  = mapGenInfo.getMountainFootHeight();
@@ -448,7 +451,7 @@ Terrain_Index MapGenerator::figure_out_terrain
 	 RNG                       &       rng,
 	 MapGenAreaInfo::MapGenTerrainType & terrType)
 {
-	MapGenInfo & mapGenInfo = m_map.world().getMapGenInfo();
+	const MapGenInfo & mapGenInfo = m_egbase.world().getMapGenInfo();
 
 	uint32_t       numLandAreas      =
 		mapGenInfo.getNumAreas(MapGenAreaInfo::atLand);
@@ -635,7 +638,7 @@ void MapGenerator::create_random_map()
 	rng.seed(m_mapInfo.mapNumber);
 
 	//  get world generator info
-	MapGenInfo & mapGenInfo = m_map.world().getMapGenInfo();
+	const MapGenInfo & mapGenInfo = m_egbase.world().getMapGenInfo();
 
 	//  Create a "raw" random elevation matrix.
 	//  We will transform this into reasonable elevations and terrains later on.
@@ -739,7 +742,7 @@ void MapGenerator::create_random_map()
 	}
 
 	//  Aftermaths...
-	m_map.recalc_whole_map();
+	m_map.recalc_whole_map(m_egbase.world());
 
 	// Care about players and place their start positions
 	const std::string tribe = m_map.get_scenario_player_tribe(1);
@@ -953,8 +956,7 @@ Return value: true if the map-id-string was valid, false otherwise
 */
 
 bool UniqueRandomMapInfo::setFromIdString
-	(UniqueRandomMapInfo & mapInfo_out, const std::string & mapIdString,
-	 const std::vector<std::string> & worlds)
+	(UniqueRandomMapInfo & mapInfo_out, const std::string & mapIdString)
 {
 	//  check string
 
@@ -1041,12 +1043,6 @@ bool UniqueRandomMapInfo::setFromIdString
 	nameHash |= nums[15] << 5;
 	nameHash |= nums[16] << 10;
 	nameHash |= nums[17] << 15;
-
-	for (size_t idx = 0; idx<worlds.size(); idx++)
-		if (generateWorldNameHash(worlds[idx]) == nameHash) {
-			mapInfo_out.worldName = worlds[idx];
-			return true;
-		}
 
 	return false; // No valid world name found
 }

@@ -71,7 +71,6 @@ private:
 	int32_t m_w, m_h, m_landval, m_waterval, m_wastelandval;
 	uint8_t m_pn;
 	uint32_t m_mapNumber;
-	std::vector<std::string>::size_type m_currentworld;
 	uint32_t m_res_amount;
 	std::vector<std::string> m_res_amounts;
 

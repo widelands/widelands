@@ -238,7 +238,7 @@ void DefaultAI::late_initialization ()
 
 	// collect information about the different buildings our tribe can construct
 	Building_Index const nr_buildings = tribe->get_nrbuildings();
-	const World & world = game().map().world();
+	const World & world = game().world();
 	for (Building_Index i = Building_Index::First(); i < nr_buildings; ++i) {
 		const Building_Descr & bld = *tribe->get_building_descr(i);
 		const std::string & building_name = bld.name();
@@ -512,7 +512,7 @@ void DefaultAI::update_buildable_field
 		field.consumers_nearby.clear();
 		field.consumers_nearby.resize(wares.size());
 		std::vector<Coords> water_list;
-		FindNodeWater find_water;
+		FindNodeWater find_water(game().world());
 		map.find_fields(Area<FCoords>(field.coords, 4), &water_list, find_water);
 		field.water_nearby = water_list.size();
 

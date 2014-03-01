@@ -37,6 +37,7 @@
 #include "logic/player.h"
 #include "logic/world/world.h"
 #include "map_io/map_loader.h"
+#include "scripting/scripting.h"
 #include "upcast.h"
 #include "wexception.h"
 
@@ -100,16 +101,6 @@ int32_t S2_Map_Loader::preload_map(bool const scenario) {
 }
 
 /**
- * load predefined world of the S2Map
- */
-void S2_Map_Loader::load_world() {
-	assert(get_state() == STATE_PRELOADED);
-	m_map.load_world();
-	set_state(STATE_WORLD_LOADED);
-}
-
-
-/**
  * Completely loads the map, loads the
  * corresponding world, loads the graphics
  * and places all the objects. From now on
@@ -118,14 +109,10 @@ void S2_Map_Loader::load_world() {
 int32_t S2_Map_Loader::load_map_complete
 	(Widelands::Editor_Game_Base & egbase, bool)
 {
-	if (get_state() == STATE_PRELOADED)
-		load_world();
-	assert(get_state() == STATE_WORLD_LOADED);
-
 	m_map.set_size(m_map.m_width, m_map.m_height);
 	load_s2mf(egbase);
 
-	m_map.recalc_whole_map();
+	m_map.recalc_whole_map(egbase.world());
 
 	postload_fix_conversion(egbase);
 
@@ -271,7 +258,6 @@ void S2_Map_Loader::load_s2mf(Widelands::Editor_Game_Base & egbase)
 #endif
 
 		//  The header must already have been processed.
-		assert(m_map.m_world);
 		assert(m_map.m_fields);
 		Widelands::X_Coordinate const mapwidth  = m_map.get_width ();
 		Widelands::Y_Coordinate const mapheight = m_map.get_height();
@@ -483,7 +469,7 @@ void S2_Map_Loader::load_s2mf(Widelands::Editor_Game_Base & egbase)
 				}
 
 				if (bobname) {
-					int32_t const idx = m_map.world().get_bob(bobname);
+					int32_t const idx = egbase.world().get_bob(bobname);
 					if (idx < 0)
 						throw wexception("Missing bob type %s", bobname);
 					for (uint32_t z = 0; z < CRITTER_PER_DEFINITION; ++z)
@@ -565,13 +551,13 @@ void S2_Map_Loader::load_s2mf(Widelands::Editor_Game_Base & egbase)
 				case 0x40: res = "coal";   amount = c & 7; break;
 				case 0x48: res = "iron";   amount = c & 7; break;
 				case 0x50: res = "gold";   amount = c & 7; break;
-				case 0x59: res = "granit"; amount = c & 7; break;
+				case 0x59: res = "granite"; amount = c & 7; break;
 				default:   res = "";       amount = 0; break;
 				};
 
 				int32_t nres = 0;
 				if (*res) {
-					nres = m_map.world().get_resource(res);
+					nres = egbase.world().get_resource(res);
 					if (nres == -1)
 						throw wexception
 							("world does not define resource type %s, you can not "
@@ -642,7 +628,7 @@ void S2_Map_Loader::load_s2mf(Widelands::Editor_Game_Base & egbase)
 					}
 					if (bobname) {
 						int32_t const idx =
-							m_map.world().get_immovable_index(bobname);
+							egbase.world().get_immovable_index(bobname);
 						if (idx < 0)
 							throw wexception("Missing immovable type %s", bobname);
 						egbase.create_immovable(Widelands::Coords(x, y), idx, nullptr);
@@ -748,7 +734,7 @@ void S2_Map_Loader::load_s2mf(Widelands::Editor_Game_Base & egbase)
 				}
 
 				if (bobname) {
-					int32_t idx = m_map.world().get_immovable_index(bobname);
+					int32_t idx = egbase.world().get_immovable_index(bobname);
 					if (idx < 0)
 						throw wexception("Missing immovable type %s", bobname);
 					egbase.create_immovable(Widelands::Coords(x, y), idx, nullptr);
@@ -761,7 +747,8 @@ void S2_Map_Loader::load_s2mf(Widelands::Editor_Game_Base & egbase)
 		//  loading of Settlers 2 maps in the majority of cases, check all
 		//  starting positions and try to make it Widelands compatible, if its
 		//  size is too small.
-		m_map.recalc_whole_map(); //  to initialize buildcaps
+		const Widelands::World& world = egbase.world();
+		m_map.recalc_whole_map(world); //  to initialize buildcaps
 
 		const Widelands::Player_Number nr_players = m_map.get_nrplayers();
 		log("Checking starting position for all %u players:\n", nr_players);
@@ -778,7 +765,7 @@ void S2_Map_Loader::load_s2mf(Widelands::Editor_Game_Base & egbase)
 			}
 			Widelands::FCoords fpos = m_map.get_fcoords(starting_pos);
 
-			if (!(m_map.get_max_nodecaps(fpos) & Widelands::BUILDCAPS_BIG)) {
+			if (!(m_map.get_max_nodecaps(world, fpos) & Widelands::BUILDCAPS_BIG)) {
 				log("wrong size - trying to fix it: ");
 				bool fixed = false;
 
@@ -786,7 +773,7 @@ void S2_Map_Loader::load_s2mf(Widelands::Editor_Game_Base & egbase)
 					mr(m_map, Widelands::Area<Widelands::FCoords>(fpos, 3));
 				do {
 					if
-						(m_map.get_max_nodecaps(const_cast<Widelands::FCoords &>(mr.location()))
+						(m_map.get_max_nodecaps(world, const_cast<Widelands::FCoords &>(mr.location()))
 						 &
 						 Widelands::BUILDCAPS_BIG)
 					{
@@ -833,10 +820,12 @@ void S2_Map_Loader::postload_fix_conversion(Widelands::Editor_Game_Base & egbase
 	uint16_t num_failed = 0;
 	char buf[256];
 
+	const Widelands::World& world = egbase.world();
+
 	// Check if port spaces are valid
 	BOOST_FOREACH(const Widelands::Coords & c, ports) {
 		Widelands::FCoords fc = m_map.get_fcoords(c);
-		Widelands::NodeCaps nc = m_map.get_max_nodecaps(fc);
+		Widelands::NodeCaps nc = m_map.get_max_nodecaps(world, fc);
 		if
 			((nc & Widelands::BUILDCAPS_SIZEMASK) != Widelands::BUILDCAPS_BIG
 			 ||
@@ -850,7 +839,8 @@ void S2_Map_Loader::postload_fix_conversion(Widelands::Editor_Game_Base & egbase
 				mr(m_map, Widelands::Area<Widelands::FCoords>(fc, 3));
 			do {
 				// Check whether the maximum theoretical possible NodeCap of the field is big + port
-				Widelands::NodeCaps nc2 = m_map.get_max_nodecaps(const_cast<Widelands::FCoords &>(mr.location()));
+				Widelands::NodeCaps nc2 =
+				   m_map.get_max_nodecaps(world, const_cast<Widelands::FCoords&>(mr.location()));
 				if
 					((nc2 & Widelands::BUILDCAPS_SIZEMASK) == Widelands::BUILDCAPS_BIG
 					 &&

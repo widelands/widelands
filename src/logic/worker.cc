@@ -102,7 +102,7 @@ bool Worker::run_mine(Game & game, State & state, const Action & action)
 
 	//Make sure that the specified resource is available in this world
 	Resource_Index const res =
-		map.get_world()->get_resource(action.sparam1.c_str());
+		game.world().get_resource(action.sparam1.c_str());
 	if (static_cast<int8_t>(res) == -1) //  FIXME ARGH!!
 		throw game_data_error
 			(_
@@ -207,7 +207,7 @@ bool Worker::run_breed(Game & game, State & state, const Action & action)
 
 	//Make sure that the specified resource is available in this world
 	Resource_Index const res =
-		map.get_world()->get_resource(action.sparam1.c_str());
+		game.world().get_resource(action.sparam1.c_str());
 	if (static_cast<int8_t>(res) == -1) //  FIXME ARGH!!
 		throw game_data_error
 			(_
@@ -340,7 +340,7 @@ bool Worker::run_setbobdescription
 
 	state.ivar2 =
 		state.svar1 == "world" ?
-		game.map().world().get_bob(bob.c_str())
+		game.world().get_bob(bob.c_str())
 		:
 		descr ().tribe().get_bob(bob.c_str());
 
@@ -536,7 +536,7 @@ bool Worker::run_findspace(Game & game, State & state, const Action & action)
 {
 	std::vector<Coords> list;
 	Map & map = game.map();
-	World * const w = &map.world();
+	const World& world = game.world();
 
 	CheckStepDefault cstep(descr().movecaps());
 
@@ -548,10 +548,10 @@ bool Worker::run_findspace(Game & game, State & state, const Action & action)
 		if (action.iparam4)
 			functor.add
 				(FindNodeResourceBreedable
-				 	(w->get_resource(action.sparam1.c_str())));
+				 	(world.get_resource(action.sparam1.c_str())));
 		else
 			functor.add
-				(FindNodeResource(w->get_resource(action.sparam1.c_str())));
+				(FindNodeResource(world.get_resource(action.sparam1.c_str())));
 	}
 
 	if (action.iparam5 > -1)
@@ -594,7 +594,7 @@ void Worker::informPlayer
 		return;
 
 	// Translate the Resource name (if it is defined by the world)
-	const World & world = game.map().world();
+	const World & world = game.world();
 	int32_t residx = world.get_resource(res_type.c_str());
 	if (residx != -1)
 		res_type = world.get_resource(residx)->descname();
@@ -805,10 +805,10 @@ bool Worker::run_plant(Game & game, State & state, const Action & action)
 		if (list.size() == 1) {
 			state.svar1 = "world";
 			immovable = list[0];
-			state.ivar2 = map.world().get_immovable_index(immovable.c_str());
+			state.ivar2 = game.world().get_immovable_index(immovable.c_str());
 			if (state.ivar2 > 0) {
 				Immovable_Descr const * imm =
-					map.world().get_immovable_descr(state.ivar2);
+					game.world().get_immovable_descr(state.ivar2);
 				uint32_t suits = imm->terrain_suitability(fpos, map);
 				// Remove existing, if this immovable suits better
 				if (suits > terrain_suitability) {
@@ -937,7 +937,7 @@ bool Worker::run_geologist_find(Game & game, State & state, const Action &)
 	const Map & map = game.map();
 	const FCoords position = map.get_fcoords(get_position());
 	BaseImmovable const * const imm = position.field->get_immovable();
-	const World & world = map.world();
+	const World & world = game.world();
 
 	if (imm && imm->get_size() > BaseImmovable::NONE) {
 		//NoLog("  Field is no longer empty\n");
@@ -2676,7 +2676,7 @@ void Worker::geologist_update(Game & game, State & state)
 
 	//
 	Map & map = game.map();
-	const World & world = map.world();
+	const World & world = game.world();
 	Area<FCoords> owner_area
 		(map.get_fcoords
 		 	(ref_cast<Flag, PlayerImmovable>(*get_location(game)).get_position()),

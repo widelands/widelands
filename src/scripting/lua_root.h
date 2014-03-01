@@ -92,6 +92,40 @@ public:
 	 */
 };
 
+// NOCOM(#sirver): use this class
+class L_World : public L_RootModuleClass {
+public:
+	LUNA_CLASS_HEAD(L_World);
+	const char * get_modulename() override {return "";}
+
+	L_World() {}
+	L_World(lua_State * L);
+
+	virtual void __persist(lua_State * L) override;
+	virtual void __unpersist(lua_State * L) override;
+
+	/*
+	 * Properties
+	 */
+	int get_time(lua_State *);
+	int get_desired_speed(lua_State *);
+	int set_desired_speed(lua_State *);
+	int get_allow_autosaving(lua_State *);
+	int set_allow_autosaving(lua_State *);
+	int get_allow_saving(lua_State *);
+	int set_allow_saving(lua_State *);
+
+	/*
+	 * Lua methods
+	 */
+	int launch_coroutine(lua_State *);
+	int save(lua_State *);
+
+	/*
+	 * C methods
+	 */
+};
+
 void luaopen_wlroot(lua_State *, bool in_editor);
 
 #endif

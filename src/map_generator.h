@@ -66,8 +66,7 @@ struct UniqueRandomMapInfo {
 
 	//  other stuff
 	static bool setFromIdString
-		(UniqueRandomMapInfo & mapInfo_out, const std::string & mapIdString,
-		 const std::vector<std::string> & worlds);
+		(UniqueRandomMapInfo & mapInfo_out, const std::string & mapIdString);
 	static void generateIdString
 		(std::string & mapIdsString_out, const UniqueRandomMapInfo & mapInfo);
 

@@ -106,14 +106,6 @@ int32_t WL_Map_Loader::preload_map(bool const scenario) {
 	return 0;
 }
 
-
-void WL_Map_Loader::load_world() {
-	assert(get_state() == STATE_PRELOADED);
-	m_map.load_world();
-	set_state(STATE_WORLD_LOADED);
-}
-
-
 /*
  * Load the complete map and make sure that it runs without problems
  */
@@ -121,14 +113,6 @@ int32_t WL_Map_Loader::load_map_complete
 	(Editor_Game_Base & egbase, bool const scenario)
 {
 	ScopedTimer timer("WL_Map_Loader::load_map_complete() took %ums");
-
-	//  This is needed to ensure that world is loaded for multiplayer clients,
-	//  hosts do world loading while creating the game and the states are not
-	//  available outside this class to make a conditional load. If You know a
-	//  better way to fix this, DO IT! -- Alexia Death
-	if (get_state() == STATE_PRELOADED)
-		load_world();
-	assert(get_state() == STATE_WORLD_LOADED);
 
 	m_map.set_size(m_map.m_width, m_map.m_height);
 
@@ -334,7 +318,7 @@ int32_t WL_Map_Loader::load_map_complete
 			 "consider committing!\n",
 			 m_mol->get_nr_unloaded_objects());
 
-	m_map.recalc_whole_map();
+	m_map.recalc_whole_map(egbase.world());
 
 	set_state(STATE_LOADED);
 

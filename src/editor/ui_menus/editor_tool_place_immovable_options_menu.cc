@@ -48,7 +48,7 @@ m_pit     (pit),
 m_click_recursion_protect(false)
 {
 	int32_t const space  =  5;
-	const Widelands::World & world = parent.egbase().map().world();
+	const Widelands::World & world = parent.egbase().world();
 	const Immovable_Descr::Index nr_immovables = world.get_nr_immovables();
 	const uint32_t immovables_in_row = std::min
 		(static_cast<uint32_t>

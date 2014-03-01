@@ -43,8 +43,7 @@ Main_Menu_New_Map::Main_Menu_New_Map(Editor_Interactive & parent)
 	UI::Window
 		(&parent, "new_map_menu",
 		 (parent.get_w() - 140) / 2, (parent.get_h() - 150) / 2, 140, 150,
-		 _("New Map")),
-	m_currentworld(0)
+		 _("New Map"))
 {
 	char buffer[250];
 	int32_t const offsx   =  5;
@@ -150,16 +149,16 @@ void Main_Menu_New_Map::clicked_create_map() {
 	// Clean all the stuff up, so we can load
 	egbase.cleanup_for_load(true, false);
 
-	map.create_empty_map
-		(Widelands::MAP_DIMENSIONS[m_w], Widelands::MAP_DIMENSIONS[m_h],
-		 "", // NOCOM(#sirver): remove parameter
-		 _("No Name"),
-		 g_options.pull_section("global").get_string("realname", _("Unknown")));
+	map.create_empty_map(egbase.world(),
+	                     Widelands::MAP_DIMENSIONS[m_w],
+	                     Widelands::MAP_DIMENSIONS[m_h],
+	                     _("No Name"),
+	                     g_options.pull_section("global").get_string("realname", _("Unknown")));
 
 	egbase.postload     ();
 	egbase.load_graphics(loader);
 
-	map.recalc_whole_map();
+	map.recalc_whole_map(egbase.world());
 
 	eia.set_need_save(true);
 	eia.need_complete_redraw();

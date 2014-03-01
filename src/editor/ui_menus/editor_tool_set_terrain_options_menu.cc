@@ -48,7 +48,7 @@ Editor_Tool_Set_Terrain_Options_Menu:: Editor_Tool_Set_Terrain_Options_Menu
 	m_tool                  (tool),
 	m_select_recursion_protect(false)
 {
-	Widelands::World & world = parent.egbase().map().world();
+	const Widelands::World & world = parent.egbase().world();
 	Widelands::Terrain_Index const nr_terrains = world.get_nr_terrains();
 	const uint32_t terrains_in_row = static_cast<uint32_t>
 		(ceil(sqrt(static_cast<float>(nr_terrains))));
@@ -200,7 +200,7 @@ void Editor_Tool_Set_Terrain_Options_Menu::selected
 		std::string buf = _("Current:");
 		const Widelands::World & world =
 			ref_cast<Editor_Interactive, UI::Panel>(*get_parent())
-			.egbase().map().world();
+			.egbase().world();
 		uint32_t j = m_tool.get_nr_enabled();
 		for (Widelands::Terrain_Index i = 0; j; ++i)
 			if (m_tool.is_enabled(i)) {

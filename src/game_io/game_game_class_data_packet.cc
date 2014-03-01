@@ -38,7 +38,7 @@ void Game_Game_Class_Data_Packet::Read
 		uint16_t const packet_version = fr.Unsigned16();
 		if (packet_version <= CURRENT_PACKET_VERSION) {
 			fr.Signed16(); // This used to be game speed
-			game.m_gametime = fr.Unsigned32();
+			game.gametime_ = fr.Unsigned32();
 		} else
 			throw game_data_error
 				(_("unknown/unhandled version %u"), packet_version);
@@ -70,7 +70,7 @@ void Game_Game_Class_Data_Packet::Write
 
 	// EDITOR GAME CLASS
 	// Write gametime
-	fw.Unsigned32(game.m_gametime);
+	fw.Unsigned32(game.gametime_);
 
 	// We do not care for players, since they were set
 	// on game initialization to match Map::scenario_player_[names|tribes]

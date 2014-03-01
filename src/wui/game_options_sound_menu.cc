@@ -69,7 +69,7 @@ ingame_sound_volume
 	ingame_music.set_state(not g_sound_handler.get_disable_music());
 	ingame_sound.set_state(not g_sound_handler.get_disable_fx   ());
 
-	if (g_sound_handler.m_lock_audio_disabling) { //  disabling sound options
+	if (g_sound_handler.lock_audio_disabling_) { //  disabling sound options
 		ingame_music       .set_enabled(false);
 		ingame_sound       .set_enabled(false);
 		ingame_music_volume.set_enabled(false);

@@ -76,18 +76,18 @@ struct FindNodeUnowned {
 	{}
 };
 
-
 struct FindNodeWater {
-	bool accept(const Map & map, const FCoords & coord) const {
-		return
-			(map.world().terrain_descr(coord.field->terrain_d()).get_is()
-			 & TERRAIN_WATER)
-			||
-			(map.world().terrain_descr(coord.field->terrain_r()).get_is()
-			 & TERRAIN_WATER);
+	FindNodeWater(const World& world) : world_(world) {
 	}
-};
 
+	bool accept(const Map&, const FCoords& coord) const {
+		return (world_.terrain_descr(coord.field->terrain_d()).get_is() & TERRAIN_WATER) ||
+		       (world_.terrain_descr(coord.field->terrain_r()).get_is() & TERRAIN_WATER);
+	}
+
+private:
+	const World& world_;  // not owned.
+};
 
 struct FindNodeWithFlagOrRoad {
 	Economy * economy;

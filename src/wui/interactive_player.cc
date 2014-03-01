@@ -324,7 +324,7 @@ void Interactive_Player::postload()
 	m_toggle_buildhelp.set_perm_pressed(buildhelp());
 
 	// Recalc whole map for changed owner stuff
-	map.recalc_whole_map();
+	map.recalc_whole_map(egbase().world());
 
 	// Close game-relevant UI windows (but keep main menu open)
 	delete m_fieldaction.window;
@@ -511,4 +511,3 @@ void Interactive_Player::cmdSwitchPlayer(const std::vector<std::string> & args)
 			(*building_statistics_window)
 			.update();
 }
-

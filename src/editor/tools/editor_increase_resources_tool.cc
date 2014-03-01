@@ -29,14 +29,13 @@
 
 using Widelands::TCoords;
 
-int32_t Editor_Change_Resource_Tool_Callback
-	(TCoords<Widelands::FCoords> const c,
-	void            *           const data,
-	int32_t                     const curres)
-{
+int32_t Editor_Change_Resource_Tool_Callback(TCoords<Widelands::FCoords> const c,
+                                             void* const data,
+                                             int32_t const curres) {
 	assert(data);
-	Widelands::Map  &  map   = *static_cast<Widelands::Map *>(data);
-	Widelands::World & world = map.world();
+	const auto& callback_data = static_cast<EditorChangeResourceToolCallbackData*>(data);
+	Widelands::Map& map = *callback_data->map;
+	const Widelands::World& world = *callback_data->world;
 	Widelands::FCoords f(c, &map[c]);
 
 	Widelands::FCoords f1;
@@ -72,23 +71,21 @@ increase the resources of the current field by one if
 there is not already another resource there.
 ===========
 */
-int32_t Editor_Increase_Resources_Tool::handle_click_impl
-	(Widelands::Map           &           map,
-	Widelands::Node_and_Triangle<> const center,
-	Editor_Interactive         &         /* parent */,
-	Editor_Action_Args         &         args)
-{
-	const Widelands::World & world = map.world();
+int32_t
+Editor_Increase_Resources_Tool::handle_click_impl(Widelands::Map& map,
+                                                  const Widelands::World& world,
+                                                  Widelands::Node_and_Triangle<> const center,
+                                                  Editor_Interactive& /* parent */,
+                                                  Editor_Action_Args& args) {
 	Overlay_Manager & overlay_manager = map.overlay_manager();
 	Widelands::MapRegion<Widelands::Area<Widelands::FCoords> > mr
 		(map,
 			Widelands::Area<Widelands::FCoords>
 				(map.get_fcoords(center.node), args.sel_radius));
 	do {
-		int32_t res        = mr.location().field->get_resources();
-		int32_t amount     = mr.location().field->get_resources_amount();
-		int32_t max_amount =
-		    map.get_world()->get_resource(args.cur_res)->get_max_amount();
+		int32_t res = mr.location().field->get_resources();
+		int32_t amount = mr.location().field->get_resources_amount();
+		int32_t max_amount = world.get_resource(args.cur_res)->get_max_amount();
 
 		amount += args.change_by;
 		if (amount > max_amount)
@@ -97,10 +94,15 @@ int32_t Editor_Increase_Resources_Tool::handle_click_impl
 		args.orgResT.push_back(res);
 		args.orgRes.push_back(mr.location().field->get_resources_amount());
 
+		EditorChangeResourceToolCallbackData data = {
+			&map,
+			&world
+		};
+
 		if
 		((res == args.cur_res or not mr.location().field->get_resources_amount())
 		        and
-		        Editor_Change_Resource_Tool_Callback(mr.location(), &map, args.cur_res))
+		        Editor_Change_Resource_Tool_Callback(mr.location(), &data, args.cur_res))
 		{
 			//  Ok, we're doing something. First remove the current overlays.
 			const Image* pic =
@@ -119,20 +121,21 @@ int32_t Editor_Increase_Resources_Tool::handle_click_impl
 				pic = g_gr->images().get
 				        (world.get_resource(args.cur_res)->get_editor_pic(amount));
 				overlay_manager.register_overlay(mr.location(), pic, 4);
-				map.recalc_for_field_area
-				(Widelands::Area<Widelands::FCoords>(mr.location(), 0));
+				map.recalc_for_field_area(
+				   world, Widelands::Area<Widelands::FCoords>(mr.location(), 0));
 			}
 		}
 	} while (mr.advance(map));
 	return mr.radius();
 }
 
-int32_t Editor_Increase_Resources_Tool::handle_undo_impl
-	(Widelands::Map & map,
-	Widelands::Node_and_Triangle< Widelands::Coords > center,
-	Editor_Interactive & parent, Editor_Action_Args & args)
-{
-	return m_set_tool.handle_undo_impl(map, center, parent, args);
+int32_t Editor_Increase_Resources_Tool::handle_undo_impl(
+   Widelands::Map& map,
+   const Widelands::World& world,
+   Widelands::Node_and_Triangle<Widelands::Coords> center,
+   Editor_Interactive& parent,
+   Editor_Action_Args& args) {
+	return m_set_tool.handle_undo_impl(map, world, center, parent, args);
 }
 
 Editor_Action_Args Editor_Increase_Resources_Tool::format_args_impl(Editor_Interactive & parent)

@@ -142,7 +142,7 @@ void Editor_Tool_Menu::changed_to() {
 		// Set correct overlay
 		Widelands::Map & map = parent.egbase().map();
 		map.overlay_manager().register_overlay_callback_function(&Editor_Tool_Set_Port_Space_Callback, &map);
-		map.recalc_whole_map();
+		map.recalc_whole_map(parent.egbase().world());
 		update();
 	}
 

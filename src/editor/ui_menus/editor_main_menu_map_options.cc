@@ -72,11 +72,6 @@ Main_Menu_Map_Options::Main_Menu_Map_Options(Editor_Interactive & parent)
 	m_nrplayers =
 		new UI::Textarea(this, posx + ta->get_w() + spacing, posy - 2, "1");
 	posy += height + spacing;
-	ta = new UI::Textarea(this, posx, posy - 2, _("World:"));
-	m_world =
-		new UI::Textarea
-			(this, posx + ta->get_w() + spacing, posy - 2, "\"Greenland\"");
-	posy += height + spacing;
 	ta = new UI::Textarea(this, posx, posy - 2, _("Author:"));
 	m_author =
 		new UI::EditBox
@@ -125,7 +120,6 @@ void Main_Menu_Map_Options::update() {
 	m_name  ->setText(map.get_name());
 	sprintf(buf, "%i", map.get_nrplayers());
 	m_nrplayers->set_text(buf);
-	m_world ->set_text(map.world().get_name());
 	m_descr ->set_text(map.get_description());
 }
 

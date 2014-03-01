@@ -357,7 +357,7 @@ void Ship::ship_update_expedition(Game & game, Bob::State &) {
 				// Check whether the maximum theoretical possible NodeCap of the field is of the size big
 				// and whether it can theoretically be a port space
 				if
-					((map.get_max_nodecaps(fc) & BUILDCAPS_SIZEMASK) != BUILDCAPS_BIG
+					((map.get_max_nodecaps(game.world(), fc) & BUILDCAPS_SIZEMASK) != BUILDCAPS_BIG
 					 ||
 					 map.find_portdock(fc).empty())
 				{
