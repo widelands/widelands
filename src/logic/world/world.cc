@@ -28,17 +28,9 @@
 #include "log.h"
 #include "logic/game_data_error.h"
 #include "logic/world/map_gen.h"
+#include "scripting/lua_table.h"
 #include "scripting/scripting.h"
 #include "wexception.h"
-
-// NOCOM(#sirver): remove unnecessary stuff.
-// #include "i18n.h"
-// #include "logic/critter_bob.h"
-// #include "logic/widelands_fileread.h"
-// #include "logic/widelands_filewrite.h"
-// #include "logic/world/data.h"
-// #include "parse_map_object_types.h"
-// #include "profile/profile.h"
 
 namespace Widelands {
 
@@ -48,7 +40,13 @@ World::World(LuaInterface* lua) :
 {
 	assert(lua != nullptr);
 	// NOCOM(#sirver): I believe run_script can actually be outside of the interface.
-	lua->run_script(*g_fs, "world/init.lua", "_temp");
+	try {
+		lua->run_script(*g_fs, "world/init.lua", "_temp");
+	}
+	catch (const _wexception& e) {
+		log("Could not read world information: %s", e.what());
+		throw;
+	}
 	// NOCOM(#sirver): bring all of this back
 	// try {
 		// i18n::Textdomain textdomain("world");
@@ -117,10 +115,15 @@ const std::string& World::get_description() const {
 	return s;
 }
 
+void World::add_new_resource_type(const ResourceDescription& resource_description) {
+	resources_.add(resource_description);
+}
+
 //
 // down here: Private functions for loading
 //
 
+// NOCOM(#sirver): remove these
 /**
  * Read the <world-directory>/conf
  */
@@ -130,24 +133,6 @@ const std::string& World::get_description() const {
 	// name_ = s.get_string("name", name.c_str());
 	// author_ = s.get_string("author", s.get_safe_string("author"));
 	// description_ = s.get_safe_string("descr");
-// }
-
-// void World::parse_resources()
-// {
-	// char fname[256];
-
-	// snprintf(fname, sizeof(fname), "%s/resconf", basedir_.c_str());
-
-	// try {
-		// Profile prof(fname);
-		// while (Section * const section = prof.get_next_section(nullptr)) {
-			// ResourceDescription & descr = *new ResourceDescription();
-			// descr.parse(*section, basedir_);
-			// resources_.add(&descr);
-		// }
-	// } catch (const std::exception & e) {
-		// throw game_data_error("%s: %s", fname, e.what());
-	// }
 // }
 
 // void World::parse_terrains()
@@ -306,8 +291,7 @@ const std::string& World::get_description() const {
 /**
  * Check if the world data can actually be read
  */
-bool World::exists_world(std::string )
-{
+bool World::exists_world(std::string) {
 	// NOCOM(#sirver): kill method
 	return true;
 }

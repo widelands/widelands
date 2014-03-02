@@ -95,6 +95,10 @@ public:
 		return immovables.get(index);
 	}
 
+	// NOCOM(#sirver): all methods defined in .cc
+	// Add this new resource to the world description.
+	void add_new_resource_type(const ResourceDescription& resource_description);
+
 	int32_t get_resource(const char* const name) const {
 		return resources_.get_index(name);
 	}

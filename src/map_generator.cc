@@ -114,7 +114,7 @@ void MapGenerator::generate_bobs
 #define set_resource_helper(rnd1, res)                                                             \
 	{                                                                                               \
 		Resource_Index const res_idx = terr.get_valid_resource(res);                                 \
-		uint32_t const max_amount = m_egbase.world().get_resource(res_idx)->get_max_amount();        \
+		uint32_t const max_amount = m_egbase.world().get_resource(res_idx)->max_amount();            \
 		uint8_t res_val = static_cast<uint8_t>(rnd1 / (MAX_ELEVATION / max_amount));                 \
 		res_val *= static_cast<uint8_t>(m_mapInfo.resource_amount) + 1;                              \
 		res_val /= 3;                                                                                \

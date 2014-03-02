@@ -55,6 +55,7 @@
 #include "map_io/widelands_map_loader.h"
 #include "network/network.h"
 #include "profile/profile.h"
+#include "scripting/lua_table.h"
 #include "scripting/scripting.h"
 #include "sound/sound_handler.h"
 #include "timestring.h"
@@ -335,8 +336,8 @@ void Game::init_newgame
 		std::unique_ptr<LuaTable> table
 			(lua().run_script
 			 (*g_fs, "scripting/win_conditions/" + settings.win_condition + ".lua", "win_conditions"));
-		m_win_condition_displayname = table->get_string("name");
-		LuaCoroutine * cr = table->get_coroutine("func");
+		m_win_condition_displayname = table->get_string<std::string>("name");
+		LuaCoroutine * cr = table->get_coroutine<std::string>("func");
 		enqueue_command(new Cmd_LuaCoroutine(get_gametime() + 100, cr));
 	} else {
 		m_win_condition_displayname = _("Scenario");
@@ -1040,7 +1041,7 @@ void Game::sample_statistics()
 	std::unique_ptr<LuaTable> hook = lua().get_hook("custom_statistic");
 	if (hook) {
 		iterate_players_existing(p, nr_plrs, *this, plr) {
-			LuaCoroutine * cr = hook->get_coroutine("calculator");
+			LuaCoroutine * cr = hook->get_coroutine<std::string>("calculator");
 			cr->push_arg(plr);
 			cr->resume(&custom_statistic[p - 1]);
 			delete cr;

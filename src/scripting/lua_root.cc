@@ -26,9 +26,12 @@
 #include "logic/game.h"
 #include "logic/immovable.h"
 #include "logic/tribe.h"
+#include "logic/world/resource_description.h"
+#include "logic/world/world.h"
 #include "scripting/lua_editor.h"
 #include "scripting/lua_game.h"
 #include "scripting/lua_map.h"
+#include "scripting/lua_table.h"
 
 using namespace Widelands;
 
@@ -276,6 +279,110 @@ void L_Editor::__unpersist(lua_State * /* L */) {
  ==========================================================
  */
 
+
+/* RST
+World
+-----
+
+.. class:: World
+
+	This offers access to the objects in a the widelands world and allows to add
+	new objects.
+*/
+
+const char L_World::className[] = "World";
+const MethodType<L_World> L_World::Methods[] = {
+	METHOD(L_World, new_resource_type),
+	{0, 0},
+};
+const PropertyType<L_World> L_World::Properties[] = {
+	{0, 0, 0},
+};
+
+L_World::L_World(lua_State * /* L */) {
+	// Nothing to do.
+}
+
+void L_World::__persist(lua_State*) {
+	// Nothing to be done.
+}
+void L_World::__unpersist(lua_State*) {
+	// Nothing to be done.
+}
+
+/*
+ ==========================================================
+ PROPERTIES
+ ==========================================================
+ */
+
+/*
+ ==========================================================
+ LUA METHODS
+ ==========================================================
+ */
+
+/* RST
+	.. method:: new_resource_type(table)
+
+		Adds a new resource type that can be in the different maps. Takes a
+		single argument, a table with the descriptions for the resource type. It might contain
+		the following entries:
+
+		:type name: class:`string`
+		:arg name: The internal identifier.
+		:type descname: class:`string`
+		:arg descname: The string used when displaying this to the user. Usually
+			translated.
+		:type max_amount: class:`int`
+		:arg max_amount: The maximum amount that can be in one field.
+		:type detectable: class:`bool`
+		:arg detectable: If true, than this resource can be found by a geologist.
+		:type editor_pictures: class:`table`
+		:arg editor_pictures: Contains (int,string) pairs that define which
+			images should be used in the editor as overlays for the resource.
+
+		:returns: :const:`nil`
+*/
+int L_World::new_resource_type(lua_State* L) {
+	if (lua_gettop(L) != 2) {
+		report_error(L, "Takes only one argument.");
+	}
+
+	try {
+		LuaTable table(L);  // Will pop the table eventually.
+		std::vector<ResourceDescription::EditorPicture> editor_pictures;
+		{
+			std::unique_ptr<LuaTable> st = table.get_table<std::string>("editor_pictures");
+			const std::vector<int> keys = st->keys<int>();
+			for (int max_amount : keys) {
+				ResourceDescription::EditorPicture editor_picture = {
+				   st->get_string(max_amount), max_amount};
+				editor_pictures.push_back(editor_picture);
+			}
+		}
+
+		// Now add this resource type to the world description.
+		get_egbase(L).mutable_world()->add_new_resource_type(
+		   ResourceDescription(table.get_string<std::string>("name"),
+		                       table.get_string<std::string>("descname"),
+		                       table.get_bool<std::string>("detectable"),
+		                       table.get_int<std::string>("max_amount"),
+		                       editor_pictures));
+	} catch (LuaError& e) {
+		return report_error(L, "%s", e.what());
+	}
+
+	return 0;
+}
+
+/*
+ ==========================================================
+ C METHODS
+ ==========================================================
+ */
+
+
 const static struct luaL_Reg wlroot [] = {
 	{nullptr, nullptr}
 };
@@ -294,6 +401,7 @@ void luaopen_wlroot(lua_State * L, bool in_editor) {
 		add_parent<L_Game, LuaBases::L_EditorGameBase>(L);
 		lua_pop(L, 1); // Pop the meta table
 	}
+	register_class<L_World>(L, "", false);
 }
 
 };

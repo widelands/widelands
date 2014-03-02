@@ -2644,8 +2644,7 @@ int L_Field::set_resource_amount(lua_State * L) {
 	Field * field = fcoords(L).field;
 	int32_t res = field->get_resources();
 	int32_t amount = luaL_checkint32(L, -1);
-	int32_t max_amount = get_egbase(L).world().get_resource
-		(res)->get_max_amount();
+	int32_t max_amount = get_egbase(L).world().get_resource(res)->max_amount();
 
 	if (amount < 0 or amount > max_amount)
 		return

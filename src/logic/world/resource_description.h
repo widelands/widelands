@@ -27,47 +27,46 @@
 
 #include "logic/widelands.h"
 
-class Section;
-
 namespace Widelands {
 
 class ResourceDescription : boost::noncopyable {
 public:
+	struct EditorPicture {
+		std::string picname;
+		int upper_limit;
+	};
+
 	typedef Resource_Index Index;
-	ResourceDescription();
+	ResourceDescription(const std::string& name,
+	                    const std::string& descname,
+	                    bool detectable,
+	                    int max_amount,
+	                    const std::vector<EditorPicture>& editor_pictures);
 
 	// Returns the in engine name of this resource.
-	const std::string & name     () const;
+	const std::string& name() const;
 
 	// Returns the name of this resource for users. Usually translated.
-	const std::string & descname() const;
+	const std::string& descname() const;
 
 	// Returns if this resource is detectable by a geologist.
-	bool is_detectable() const;
+	bool detectable() const;
 
 	// Returns the maximum amount that can be in a field for this resource.
-	int32_t get_max_amount() const;
+	int32_t max_amount() const;
 
 	// Returns the path to the image that should be used in the editor to
 	// represent an 'amount' of this resource.
-	const std::string & get_editor_pic(uint32_t amount) const;
-
-	// Parses the description of this resource.
-	void parse(Section &, const std::string &);
+	const std::string& get_editor_pic(uint32_t amount) const;
 
 private:
-	struct Editor_Pic {
-		std::string picname;
-		int32_t     upperlimit;
-	};
-	bool                    is_detectable_;
-	int32_t                 max_amount_;
-	std::string             name_;
-	std::string             descname_;
-	std::vector<Editor_Pic> editor_pics_;
+	const std::string name_;
+	const std::string descname_;
+	const bool detectable_;
+	const int32_t max_amount_;
+	const std::vector<EditorPicture> editor_pictures_;
 };
 
 }  // namespace Widelands
-
 
 #endif /* end of include guard: RESOURCE_DESCRIPTION_H */

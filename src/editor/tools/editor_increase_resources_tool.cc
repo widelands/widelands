@@ -85,7 +85,7 @@ Editor_Increase_Resources_Tool::handle_click_impl(Widelands::Map& map,
 	do {
 		int32_t res = mr.location().field->get_resources();
 		int32_t amount = mr.location().field->get_resources_amount();
-		int32_t max_amount = world.get_resource(args.cur_res)->get_max_amount();
+		int32_t max_amount = world.get_resource(args.cur_res)->max_amount();
 
 		amount += args.change_by;
 		if (amount > max_amount)

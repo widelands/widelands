@@ -168,7 +168,12 @@ public:
 	Players_Manager* player_manager() {return player_manager_.get();}
 
 	Interactive_GameBase * get_igbase();
+
+	// Returns the world.
 	const World& world() const;
+
+	// Returns the world that can be modified. Prefer world() whenever possible.
+	World* mutable_world() ;
 
 private:
 	// FIXME -- SDL returns time as uint32. Why do I have int32 ? Please comment or change this to uint32.

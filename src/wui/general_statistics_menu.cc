@@ -27,6 +27,7 @@
 #include "logic/player.h"
 #include "logic/tribe.h"
 #include "logic/warelist.h"
+#include "scripting/lua_table.h"
 #include "scripting/scripting.h"
 #include "ui_basic/button.h"
 #include "ui_basic/checkbox.h"
@@ -73,8 +74,8 @@ m_selected_information(0)
 	std::unique_ptr<LuaTable> hook = game.lua().get_hook("custom_statistic");
 	std::string cs_name, cs_pic;
 	if (hook) {
-		cs_name = hook->get_string("name");
-		cs_pic = hook->get_string("pic");
+		cs_name = hook->get_string<std::string>("name");
+		cs_pic = hook->get_string<std::string>("pic");
 		m_ndatasets++;
 	}
 

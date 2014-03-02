@@ -96,12 +96,15 @@ void Editor_Game_Base::think()
 }
 
 const World& Editor_Game_Base::world() const {
+	// Const casts are evil, but this is essentially lazy evaluation and the
+	// caller should really not modify this.
+	return *const_cast<Editor_Game_Base*>(this)->mutable_world();
+}
+
+World* Editor_Game_Base::mutable_world() {
 	if (!world_) {
-		// Const casts are evil, but this is essentially lazy evaluation and the
-		// caller should really not modify this.
-		const_cast<Editor_Game_Base*>(this)->world_.reset(new World(lua_.get()));
+		world_.reset(new World(lua_.get()));
 	}
-	return *world_;
 }
 
 void Editor_Game_Base::receive(const NoteImmovable & note)

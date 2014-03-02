@@ -35,6 +35,7 @@
 #include "logic/tribe.h"
 #include "map_io/widelands_map_loader.h"
 #include "profile/profile.h"
+#include "scripting/lua_table.h"
 #include "scripting/scripting.h"
 #include "ui_basic/messagebox.h"
 #include "ui_basic/progresswindow.h"

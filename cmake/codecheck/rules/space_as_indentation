@@ -21,7 +21,8 @@ class EvalMatches( object ):
         errors = []
         for curline, l in enumerate(lines, 1):
             if self.STARTS_WITH_SPACES.match(l):
-                if l.rstrip().endswith(",") or l.rstrip().endswith("{"):
+                last_char = l.rstrip()[-1] if l.rstrip() else ""
+                if last_char in ",{)":
                     continue
                 errors.append( (fn, curline, error_msg))
         return errors

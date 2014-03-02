@@ -22,6 +22,7 @@
 #include "log.h"
 #include "logic/game.h"
 #include "logic/game_data_error.h"
+#include "scripting/lua_table.h"
 #include "scripting/scripting.h"
 
 namespace Widelands {

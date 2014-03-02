@@ -44,6 +44,7 @@
 #include "logic/warehouse.h"
 #include "logic/widelands_fileread.h"
 #include "logic/widelands_filewrite.h"
+#include "scripting/lua_table.h"
 #include "scripting/scripting.h"
 #include "sound/sound_handler.h"
 #include "upcast.h"
@@ -192,7 +193,7 @@ void Player::create_default_infrastructure() {
 				(*g_fs, "tribes/" + tribe().name() +
 				 "/scripting/" +  initialization.name + ".lua",
 				 "tribe_" + tribe().name())
-				->get_coroutine("func");
+				->get_coroutine<std::string>("func");
 			cr->push_arg(this);
 			game.enqueue_command(new Cmd_LuaCoroutine(game.get_gametime(), cr));
 
@@ -205,7 +206,7 @@ void Player::create_default_infrastructure() {
 					(*g_fs, "tribes/" + tribe().name() +
 					"/scripting/" + tribe().initialization(m_further_initializations.at(n)).name + ".lua",
 					 "tribe_" + tribe().name())
-					->get_coroutine("func");
+					->get_coroutine<std::string>("func");
 				ncr->push_arg(this);
 				ncr->push_arg(further_pos);
 				game.enqueue_command(new Cmd_LuaCoroutine(game.get_gametime(), ncr));

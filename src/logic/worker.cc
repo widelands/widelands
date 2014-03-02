@@ -946,7 +946,7 @@ bool Worker::run_geologist_find(Game & game, State & state, const Action &)
 		 	world.get_resource(position.field->get_resources()))
 	{
 		// Geologist also sends a message notifying the player
-		if (rdescr->is_detectable() && position.field->get_resources_amount()) {
+		if (rdescr->detectable() && position.field->get_resources_amount()) {
 			char message[1024];
 			snprintf
 				(message, sizeof(message),
@@ -975,7 +975,7 @@ bool Worker::run_geologist_find(Game & game, State & state, const Action &)
 			(position,
 			 t.get_resource_indicator
 			 	(rdescr,
-			 	 rdescr->is_detectable() ?
+			 	 rdescr->detectable() ?
 			 	 position.field->get_resources_amount() : 0),
 			 &t);
 	}

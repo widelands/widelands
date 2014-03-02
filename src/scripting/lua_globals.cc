@@ -24,6 +24,7 @@
 #include "io/filesystem/layered_filesystem.h"
 #include "logic/game.h"
 #include "scripting/c_utils.h"
+#include "scripting/lua_table.h"
 #include "scripting/scripting.h"
 
 

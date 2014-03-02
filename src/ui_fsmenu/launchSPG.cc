@@ -30,6 +30,7 @@
 #include "logic/player.h"
 #include "map_io/map_loader.h"
 #include "profile/profile.h"
+#include "scripting/lua_table.h"
 #include "scripting/scripting.h"
 #include "ui_fsmenu/loadgame.h"
 #include "ui_fsmenu/mapselect.h"
@@ -236,8 +237,8 @@ void Fullscreen_Menu_LaunchSPG::win_condition_update() {
 
 		try {
 
-			std::string name = t->get_string("name");
-			std::string descr = t->get_string("description");
+			std::string name = t->get_string<std::string>("name");
+			std::string descr = t->get_string<std::string>("description");
 
 			m_wincondition.set_title(name);
 			m_wincondition.set_tooltip(descr.c_str());

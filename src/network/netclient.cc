@@ -37,6 +37,7 @@
 #include "network/network_protocol.h"
 #include "network/network_system.h"
 #include "profile/profile.h"
+#include "scripting/lua_table.h"
 #include "scripting/scripting.h"
 #include "ui_basic/messagebox.h"
 #include "ui_basic/progresswindow.h"
@@ -917,7 +918,7 @@ void NetClient::handle_packet(RecvPacket & packet)
 				std::unique_ptr<LuaTable> t = lua.run_script
 					("tribe_" + info.name, name);
 				info.initializations.push_back
-					(TribeBasicInfo::Initialization(name, t->get_string("name")));
+					(TribeBasicInfo::Initialization(name, t->get_string<std::string>("name")));
 			}
 
 			d->settings.tribes.push_back(info);

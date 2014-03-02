@@ -44,7 +44,7 @@ int32_t Editor_Set_Resources_Tool::handle_click_impl(Widelands::Map& map,
 	do {
 		int32_t res        = mr.location().field->get_resources();
 		int32_t amount     = args.set_to;
-		int32_t max_amount = world.get_resource(args.cur_res)->get_max_amount();
+		int32_t max_amount = world.get_resource(args.cur_res)->max_amount();
 
 		if (amount < 0)
 			amount = 0;
@@ -97,7 +97,7 @@ Editor_Set_Resources_Tool::handle_undo_impl(Widelands::Map& map,
 	do {
 		int32_t res        = mr.location().field->get_resources();
 		int32_t amount     = *ir;
-		int32_t max_amount = world.get_resource(args.cur_res)->get_max_amount();
+		int32_t max_amount = world.get_resource(args.cur_res)->max_amount();
 
 		if (amount < 0)
 			amount = 0;

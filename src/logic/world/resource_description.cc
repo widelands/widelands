@@ -26,64 +26,74 @@
 
 namespace Widelands {
 
-ResourceDescription::ResourceDescription() : is_detectable_(true), max_amount_(0) {
+ResourceDescription::ResourceDescription(const std::string& name,
+                                         const std::string& descname,
+                                         bool detectable,
+                                         int max_amount,
+                                         const std::vector<EditorPicture>& editor_pictures)
+   : name_(name),
+     descname_(descname),
+     detectable_(detectable),
+     max_amount_(max_amount),
+     editor_pictures_(editor_pictures) {
 }
 
-void ResourceDescription::parse(Section & s, const std::string & basedir)
-{
-	name_ = s.get_name();
-	descname_ = s.get_string("name", s.get_name());
-	is_detectable_ = s.get_bool("detectable", true);
+// NOCOM(#sirver): remove
+// void ResourceDescription::parse(Section & s, const std::string & basedir)
+// {
+	// name_ = s.get_name();
+	// descname_ = s.get_string("name", s.get_name());
+	// detectable_ = s.get_bool("detectable", true);
 
-	max_amount_ = s.get_safe_int("max_amount");
-	while (Section::Value const * const v = s.get_next_val("editor_pic")) {
-		Editor_Pic i;
+	// max_amount_ = s.get_safe_int("max_amount");
+	// while (Section::Value const * const v = s.get_next_val("editor_pic")) {
+		// Editor_Pic i;
 
-		std::vector<std::string> const args(split_string(v->get_string(), " \t"));
-		if (args.size() != 1 and args.size() != 2) {
-			log
-				("Resource '%s' has bad editor_pic=%s\n",
-				 name_.c_str(), v->get_string());
-			continue;
-		}
+		// std::vector<std::string> const args(split_string(v->get_string(), " \t"));
+		// if (args.size() != 1 and args.size() != 2) {
+			// log
+				// ("Resource '%s' has bad editor_pic=%s\n",
+				 // name_.c_str(), v->get_string());
+			// continue;
+		// }
 
-		i.picname = basedir + "/pics/";
-		i.picname += args[0];
-		i.upperlimit = -1;
+		// i.picname = basedir + "/pics/";
+		// i.picname += args[0];
+		// i.upper_limit = -1;
 
-		if (args.size() >= 2) {
-			char * endp;
-			i.upperlimit = strtol(args[1].c_str(), &endp, 0);
+		// if (args.size() >= 2) {
+			// char * endp;
+			// i.upper_limit = strtol(args[1].c_str(), &endp, 0);
 
-			if (*endp) {
-				log
-					("Resource '%s' has bad editor_pic=%s\n",
-					 name_.c_str(), v->get_string());
-				continue;
-			}
-		}
+			// if (*endp) {
+				// log
+					// ("Resource '%s' has bad editor_pic=%s\n",
+					 // name_.c_str(), v->get_string());
+				// continue;
+			// }
+		// }
 
-		editor_pics_.push_back(i);
-	}
-	if (editor_pics_.empty())
-		throw game_data_error("resource '%s' has no editor_pic", name_.c_str());
-}
+		// editor_pictures_.push_back(i);
+	// }
+	// if (editor_pictures_.empty())
+		// throw game_data_error("resource '%s' has no editor_pic", name_.c_str());
+// }
 
 const std::string & ResourceDescription::get_editor_pic
 	(uint32_t const amount) const
 {
 	uint32_t bestmatch = 0;
 
-	assert(editor_pics_.size());
+	assert(editor_pictures_.size());
 
-	for (uint32_t i = 1; i < editor_pics_.size(); ++i) {
+	for (uint32_t i = 1; i < editor_pictures_.size(); ++i) {
 		const int32_t diff1 =
-			editor_pics_[bestmatch].upperlimit - static_cast<int32_t>(amount);
+			editor_pictures_[bestmatch].upper_limit - static_cast<int32_t>(amount);
 		const int32_t diff2 =
-			editor_pics_[i].upperlimit - static_cast<int32_t>(amount);
+			editor_pictures_[i].upper_limit - static_cast<int32_t>(amount);
 
 		// This is a catch-all for high amounts
-		if (editor_pics_[i].upperlimit < 0)
+		if (editor_pictures_[i].upper_limit < 0)
 		{
 			if (diff1 < 0) {
 				bestmatch = i;
@@ -96,7 +106,7 @@ const std::string & ResourceDescription::get_editor_pic
 		// This is lower than the actual amount
 		if (diff2 < 0)
 		{
-			if (editor_pics_[bestmatch].upperlimit < 0)
+			if (editor_pictures_[bestmatch].upper_limit < 0)
 				continue;
 
 			if (diff1 < diff2) {
@@ -109,7 +119,7 @@ const std::string & ResourceDescription::get_editor_pic
 
 		// This is higher than the actual amount
 		if
-			(editor_pics_[bestmatch].upperlimit < 0     ||
+			(editor_pictures_[bestmatch].upper_limit < 0     ||
 			 diff2                               < diff1 ||
 			 diff1                               < 0)
 		{
@@ -119,9 +129,9 @@ const std::string & ResourceDescription::get_editor_pic
 	}
 
 	//noLog("Resource(%s): Editor_Pic '%s' for amount = %u\n",
-	//name_.c_str(), editor_pics_[bestmatch].picname.c_str(), amount);
+	//name_.c_str(), editor_pictures_[bestmatch].picname.c_str(), amount);
 
-	return editor_pics_[bestmatch].picname;
+	return editor_pictures_[bestmatch].picname;
 }
 
 const std::string& ResourceDescription::name() const {
@@ -132,11 +142,11 @@ const std::string& ResourceDescription::descname() const {
 	return descname_;
 }
 
-bool ResourceDescription::is_detectable() const {
-	return is_detectable_;
+bool ResourceDescription::detectable() const {
+	return detectable_;
 }
 
-int32_t ResourceDescription::get_max_amount() const {
+int32_t ResourceDescription::max_amount() const {
 	return max_amount_;
 }
 

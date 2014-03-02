@@ -45,6 +45,7 @@
 #include "logic/world/world.h"
 #include "parse_map_object_types.h"
 #include "profile/profile.h"
+#include "scripting/lua_table.h"
 #include "scripting/scripting.h"
 #include "upcast.h"
 
@@ -307,7 +308,7 @@ Tribe_Descr::Tribe_Descr
 				m_initializations.resize(m_initializations.size() + 1);
 				Initialization & init = m_initializations.back();
 				init.    name = s->first;
-				init.descname = t->get_string("name");
+				init.descname = t->get_string<std::string>("name");
 
 				try {
 					for
@@ -399,7 +400,7 @@ bool Tribe_Descr::exists_tribe
 
 					info->initializations.push_back
 						(TribeBasicInfo::Initialization
-						 	(s->first, t->get_string("name")));
+						 	(s->first, t->get_string<std::string>("name")));
 				}
 			} catch (const _wexception & e) {
 				throw game_data_error
@@ -500,7 +501,7 @@ uint32_t Tribe_Descr::get_resource_indicator
 
 	int32_t bestmatch =
 		static_cast<int32_t>
-			((static_cast<float>(amount) / res->get_max_amount())
+			((static_cast<float>(amount) / res->max_amount())
 			 *
 			 num_indicators);
 	if (bestmatch > num_indicators)
@@ -508,8 +509,8 @@ uint32_t Tribe_Descr::get_resource_indicator
 			("Amount of %s is %i but max amount is %i",
 			 res->name().c_str(),
 			 amount,
-			 res->get_max_amount());
-	if (static_cast<int32_t>(amount) < res->get_max_amount())
+			 res->max_amount());
+	if (static_cast<int32_t>(amount) < res->max_amount())
 		bestmatch += 1; // Resi start with 1, not 0
 
 	snprintf

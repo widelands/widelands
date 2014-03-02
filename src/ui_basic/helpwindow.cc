@@ -28,6 +28,7 @@
 #include "i18n.h"
 #include "io/filesystem/layered_filesystem.h"
 #include "log.h"
+#include "scripting/lua_table.h"
 #include "scripting/scripting.h"
 #include "ui_basic/button.h"
 #include "ui_basic/window.h"
@@ -195,7 +196,7 @@ LuaTextHelpWindow::LuaTextHelpWindow
 
 	try {
 		std::unique_ptr<LuaTable> t = lua.run_script(*g_fs, path_to_script, "help");
-		textarea->set_text(t->get_string("text"));
+		textarea->set_text(t->get_string<std::string>("text"));
 	} catch (LuaError & err) {
 		textarea->set_text(err.what());
 	}
