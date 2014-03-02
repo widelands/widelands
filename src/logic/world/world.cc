@@ -115,26 +115,11 @@ const std::string& World::get_description() const {
 	return s;
 }
 
-void World::add_new_resource_type(const ResourceDescription& resource_description) {
+void World::add_new_resource_type(ResourceDescription* resource_description) {
 	resources_.add(resource_description);
 }
 
-//
-// down here: Private functions for loading
-//
-
 // NOCOM(#sirver): remove these
-/**
- * Read the <world-directory>/conf
- */
-// void World::parse_root_conf(const std::string & name, Profile & root_conf)
-// {
-	// Section& s = root_conf.get_safe_section("world");
-	// name_ = s.get_string("name", name.c_str());
-	// author_ = s.get_string("author", s.get_safe_string("author"));
-	// description_ = s.get_safe_string("descr");
-// }
-
 // void World::parse_terrains()
 // {
 	// char fname[256];

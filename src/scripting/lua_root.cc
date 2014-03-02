@@ -364,11 +364,11 @@ int L_World::new_resource_type(lua_State* L) {
 
 		// Now add this resource type to the world description.
 		get_egbase(L).mutable_world()->add_new_resource_type(
-		   ResourceDescription(table.get_string<std::string>("name"),
-		                       table.get_string<std::string>("descname"),
-		                       table.get_bool<std::string>("detectable"),
-		                       table.get_int<std::string>("max_amount"),
-		                       editor_pictures));
+		   new ResourceDescription(table.get_string<std::string>("name"),
+		                           table.get_string<std::string>("descname"),
+		                           table.get_bool<std::string>("detectable"),
+		                           table.get_int<std::string>("max_amount"),
+		                           editor_pictures));
 	} catch (LuaError& e) {
 		return report_error(L, "%s", e.what());
 	}
