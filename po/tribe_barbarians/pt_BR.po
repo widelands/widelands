@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-02-22 15:38+0000\n"
-"PO-Revision-Date: 2013-08-05 14:02+0000\n"
-"Last-Translator: JoãoPedro BrasãoToledo <soldgames@gmail.com>\n"
+"PO-Revision-Date: 2014-03-01 14:13+0000\n"
+"Last-Translator: daniel reis <danielreis40@yahoo.com.br>\n"
 "Language-Team: Brazilian Portuguese <pt_BR@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-02-23 05:34+0000\n"
-"X-Generator: Launchpad (build 16926)\n"
+"X-Launchpad-Export-Date: 2014-03-02 04:38+0000\n"
+"X-Generator: Launchpad (build 16948)\n"
 
 #: ../../tribes/barbarians/axefactory/help.lua:12
 #: ../../tribes/barbarians/warmill/help.lua:12
@@ -203,7 +203,7 @@ msgstr "%s da cabana do Lenhador."
 #: ../../tribes/barbarians/warmill/help.lua:24
 #: ../../tribes/barbarians/warmill/help.lua:25
 msgid "%s from the Smelting Works"
-msgstr ""
+msgstr "%s dos trabalhos de fundição"
 
 #: ../../tribes/barbarians/rangers_hut/help.lua:14
 msgid "%s in a conversation with a %s"
@@ -264,7 +264,7 @@ msgstr "%s ou melhor e"
 #: ../../tribes/barbarians/oremine/help.lua:49
 #: ../../tribes/barbarians/warmill/help.lua:62
 msgid "%s to %s (%s EP)"
-msgstr ""
+msgstr "%s de %s"
 
 #: ../../tribes/barbarians/deeper_coalmine/help.lua:17
 #: ../../tribes/barbarians/deeper_goldmine/help.lua:16
@@ -274,6 +274,8 @@ msgid ""
 "A %s exploits all of the resource down to the deepest level.<br>But even "
 "after having done so, it will still have a %s chance of finding some more %s."
 msgstr ""
+"Um %s explora todos os recursos até o nível mais profundo. <br>Mas mesmo "
+"depois disso, ainda há %s de chance de encontrar ainda mais %s."
 
 #: ../../tribes/barbarians/coalmine/help.lua:17
 #: ../../tribes/barbarians/goldmine/help.lua:16
@@ -297,6 +299,8 @@ msgstr ""
 #: ../../tribes/barbarians/fernery/help.lua:47
 msgid "A Fernery can produce a sheaf of Thatch Reed in about %s on average."
 msgstr ""
+"Um jardim de samambaias pode produzir um maço de palha de cana em cerca de "
+"%s em média."
 
 #: ../../tribes/barbarians/snack/conf:1
 msgid ""
@@ -403,7 +407,7 @@ msgstr "Ataque"
 
 #: ../../tribes/barbarians/trainingscamp/help.lua:25
 msgid "Attack Training:"
-msgstr ""
+msgstr "Treinamento de ataque"
 
 #: ../../tribes/barbarians/conf:72
 msgid "Axe"
@@ -421,7 +425,7 @@ msgstr "Fábrica de Machados"
 
 #: ../../tribes/barbarians/bakery/help.lua:16
 msgid "Bake Pitta Bread for Soldiers and Miners alike."
-msgstr ""
+msgstr "Assar pão árabe para os soldados e mineradores"
 
 #: ../../tribes/barbarians/bakery/help.lua:50
 #: ../../tribes/barbarians/conf:121
@@ -441,11 +445,11 @@ msgstr "Assa pães para os trabalhadores."
 
 #: ../../tribes/barbarians/bakery/help.lua:51
 msgid "Baking Tray"
-msgstr ""
+msgstr "Assadeira"
 
 #: ../../tribes/barbarians/gamekeepers_hut/help.lua:13
 msgid "Barbarian nursery rhyme"
-msgstr ""
+msgstr "Canção de ninar bárbara"
 
 #: ../../tribes/barbarians/conf:5
 msgid "Barbarians"
