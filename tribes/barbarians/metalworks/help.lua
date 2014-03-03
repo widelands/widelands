@@ -56,7 +56,7 @@ return {
 		help_building_line("barbarians", "grout", ngettext("%i Grout", "%i Grout", 1), 1) ..
 		help_building_line("barbarians", "raw_stone", ngettext("%i Raw Stone", "%i Raw Stones", 1), 1) ..
 		help_building_line("barbarians", "trunk", ngettext("%i Trunk", "%i Trunks", 1), 1) ..
-		text_line(_"Upgradeable to:",_"Axefactory","tribes/barbarians/axefactory/menu.png") ..
+		text_line(_"Upgradeable to:",_"Axfactory","tribes/barbarians/axefactory/menu.png") ..
 	--Workers Section
 		rt(h2(_"Workers")) ..
 		rt(h3(_"Crew required:")) ..

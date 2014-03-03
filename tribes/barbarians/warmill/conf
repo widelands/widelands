@@ -33,12 +33,12 @@ coal=8
 gold=8
 
 [programs]
-produce_axe=_Produce axe
-produce_sharpaxe=_Produce sharpaxe
-produce_broadaxe=_Produce broadaxe
-produce_bronzeaxe=_Produce bronzeaxe
-produce_battleaxe=_Produce battleaxe
-produce_warriorsaxe=_Produce warrior’s axe
+produce_axe=_Produce ax
+produce_sharpaxe=_Produce sharp ax
+produce_broadaxe=_Produce broad ax
+produce_bronzeaxe=_Produce bronze ax
+produce_battleaxe=_Produce battle ax
+produce_warriorsaxe=_Produce warrior’s ax
 work=_Work
 
 [produce_axe]

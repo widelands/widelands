@@ -26,7 +26,7 @@ return {
 		dependencies({"tribes/barbarians/soldier/untrained+evade.png","tribes/barbarians/trainingscamp/menu.png","tribes/barbarians/soldier/fulltrained.png"}) ..
 		rt(h3(_"Training Attack:")) ..
 		dependencies({"tribes/barbarians/axefactory/menu.png","tribes/barbarians/sharpaxe/menu.png;tribes/barbarians/broadaxe/menu.png","tribes/barbarians/trainingscamp/menu.png"}) ..
-		rt(p(_"Provided by the Axefactory")) ..
+		rt(p(_"Provided by the Axfactory")) ..
 		dependencies({"tribes/barbarians/warmill/menu.png","tribes/barbarians/sharpaxe/menu.png;tribes/barbarians/broadaxe/menu.png;tribes/barbarians/bronzeaxe/menu.png;tribes/barbarians/battleaxe/menu.png;tribes/barbarians/warriorsaxe/menu.png","tribes/barbarians/trainingscamp/menu.png"}) ..
 		rt(p(_"Provided by the War Mill")) ..
 		rt(h3(_"Training Health:")) ..

@@ -9,11 +9,11 @@ return {
 	--Lore Section
 		rt(h2(_"Lore")) ..
 		rt("image=tribes/barbarians/warmill/warmill_i_00.png", p(
-			_[[‘A new Warrior’s Axe brings forth the best in its wielder – or the worst in its maker.’]])) ..
+			_[[‘A new Warrior’s Ax brings forth the best in its wielder – or the worst in its maker.’]])) ..
 		rt("text-align=right",p("font-size=10 font-style=italic", _[[An old Barbarian proverb<br> meaning that you need to take some risks sometimes.]])) ..
 	--General Section
 		rt(h2(_"General")) ..
-		text_line(_"Purpose:", _"The Barbarian War Mill is their most advanced production site for weapons. As such it needs to be upgraded from an Axefactory.") ..
+		text_line(_"Purpose:", _"The Barbarian War Mill is their most advanced production site for weapons. As such it needs to be upgraded from an Axfactory.") ..
 		rt("image=tribes/barbarians/axe/menu.png;tribes/barbarians/sharpaxe/menu.png;tribes/barbarians/broadaxe/menu.png;tribes/barbarians/bronzeaxe/menu.png;tribes/barbarians/battleaxe/menu.png;tribes/barbarians/warriorsaxe/menu.png image-align=right",p("The War Mill produces all the axes that the Barbarians use for warfare.")) ..
 		text_line(_"Working radius:", "n/a") ..
 		text_line(_"Conquer range:", "n/a") ..
@@ -32,7 +32,7 @@ return {
 	--Building Section
 		rt(h2(_"Building")) ..
 		text_line(_"Space required:",_"Medium plot","pics/medium.png") ..
-		text_line(_"Upgraded from:", _"Axefactory","tribes/barbarians/axefactory/menu.png") ..
+		text_line(_"Upgraded from:", _"Axfactory","tribes/barbarians/axefactory/menu.png") ..
 		rt(h3(_"Upgrade cost:")) ..
 		help_building_line("barbarians", "blackwood", ngettext("%i Blackwood", "%i Blackwood", 1), 1) ..
 		help_building_line("barbarians", "thatchreed", ngettext("%i Thatch Reed", "%i Thatch Reeds", 1), 1) ..

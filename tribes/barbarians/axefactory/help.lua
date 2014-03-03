@@ -5,15 +5,15 @@ set_textdomain("tribe_barbarians")
 
 return {
 	text =
-		--rt(h1(_"The Barbarian Axefactory")) ..
+		--rt(h1(_"The Barbarian Axfactory")) ..
 	--Lore Section
 		rt(h2(_"Lore")) ..
 		rt("image=tribes/barbarians/axefactory/axefactory_i_00.png", p(
-			_[[‘A new Warrior’s Axe brings forth the best in its wielder – or the worst in its maker.’]])) ..
+			_[[‘A new Warrior’s Ax brings forth the best in its wielder – or the worst in its maker.’]])) ..
 		rt("text-align=right",p("font-size=10 font-style=italic", _[[An old Barbarian proverb<br> meaning that you need to take some risks sometimes.]])) ..
 	--General Section
 		rt(h2(_"General")) ..
-		text_line(_"Purpose:", _"The Barbarian Axefactory is the intermediate production site in a series of three buildings. It is an upgrade from the Metal Workshop but doesn’t require additional qualification for the worker.") ..
+		text_line(_"Purpose:", _"The Barbarian Axfactory is the intermediate production site in a series of three buildings. It is an upgrade from the Metal Workshop but doesn’t require additional qualification for the worker.") ..
 		rt("image=tribes/barbarians/axe/menu.png;tribes/barbarians/sharpaxe/menu.png;tribes/barbarians/broadaxe/menu.png image-align=right",p(_"It can make Axes, Sharp Axes and Broad Axes.")) ..
 		text_line(_"Working radius:", "n/a") ..
 		text_line(_"Conquer range:", "n/a") ..

@@ -578,7 +578,7 @@ warfare_and_training_01 = {
       ) .. p(_(
 [[A soldier is created like any normal worker: ]] ..
 [[a carrier grabs a tool in a warehouse as soon as a request for a certain profession is not fulfilled. ]] ..
-[[The tool to create a barbarian soldier is an axe. Newly created soldiers are of level 0. ]] ..
+[[The tool to create a barbarian soldier is an ax. Newly created soldiers are of level 0. ]] ..
 [[To make soldiers better in any of the four categories, training is needed.]])
       ) .. p(_(
 [[Training happens in training sites like the training camp or the battle arena: ]] ..
