@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: Widelands unofficial-bzr-launchpad-i18n-4955\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2013-09-15 17:41+0000\n"
-"PO-Revision-Date: 2013-10-07 08:56+0000\n"
-"Last-Translator: Tino <Unknown>\n"
+"PO-Revision-Date: 2014-02-06 11:06+0000\n"
+"Last-Translator: Nasenbaer <Unknown>\n"
 "Language-Team: German <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-10-08 05:11+0000\n"
-"X-Generator: Launchpad (build 16799)\n"
+"X-Launchpad-Export-Date: 2014-02-07 05:29+0000\n"
+"X-Generator: Launchpad (build 16916)\n"
 "X-Poedit-Country: GERMANY\n"
 "X-Poedit-Language: German\n"
 
@@ -90,7 +90,7 @@ msgid ""
 "\"He who is strong shall not forgive nor forget, but revenge injustice "
 "suffered - in the past and for all future.\""
 msgstr ""
-"\"Wer stark ist, wird nicht vergeben noch vergessen, aber erlittenes Unrecht "
+"\"Wer stark ist, wird weder vergeben noch vergessen, aber erlittenes Unrecht "
 "rächen - in der Vergangenheit und für alle Zukunft.\""
 
 #: ../../tribes/barbarians/granitemine/help.lua:12
@@ -156,7 +156,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/hunters_hut/help.lua:13
 msgid "\"The Art of Hunting\""
-msgstr "Die Kunst des Jagens"
+msgstr "\"Die Kunst des Jagens\""
 
 #: ../../tribes/barbarians/fernery/help.lua:12
 msgid "\"We grow roofs\""
@@ -461,7 +461,7 @@ msgstr "Axtmanufaktur"
 
 #: ../../tribes/barbarians/bakery/help.lua:16
 msgid "Bake Pitta Bread for Soldiers and Miners alike."
-msgstr "Backe Fladenbrot für Soldaten und Bergmänner gleichermaßen."
+msgstr "Backe Fladenbrot für Soldaten sowie Bergmänner."
 
 #: ../../tribes/barbarians/bakery/help.lua:50
 #: ../../tribes/barbarians/conf:121
@@ -786,13 +786,13 @@ msgstr "Kohle"
 
 #: ../../tribes/barbarians/warmill/help.lua:27
 msgid "Coal from the Coal mine or the Charcoal Burner's House"
-msgstr "Kohle aus  einer Kohlemine oder einer Köhlerei"
+msgstr "Kohle aus  einer Kohlenmine oder einer Köhlerei"
 
 #: ../../tribes/barbarians/coalmine/help.lua:17
 #: ../../tribes/barbarians/conf:211
 #: ../../tribes/barbarians/deep_coalmine/help.lua:38
 msgid "Coal mine"
-msgstr "Kohlemine"
+msgstr "Kohlenmine"
 
 #: ../../tribes/barbarians/axefactory/help.lua:19
 #: ../../tribes/barbarians/bakery/help.lua:18
@@ -889,7 +889,7 @@ msgstr "Schlägt Granitstücke aus herumliegenden Felsen."
 #: ../../tribes/barbarians/deep_coalmine/help.lua:17
 #: ../../tribes/barbarians/deeper_coalmine/help.lua:37
 msgid "Deep Coal Mine"
-msgstr "Tiefe Kohlemine"
+msgstr "Tiefe Kohlenmine"
 
 #: ../../tribes/barbarians/conf:216
 #: ../../tribes/barbarians/deep_goldmine/help.lua:16
@@ -909,7 +909,7 @@ msgstr "Tiefe Eisenmine"
 #: ../../tribes/barbarians/deep_coalmine/help.lua:48
 #: ../../tribes/barbarians/deeper_coalmine/help.lua:17
 msgid "Deeper Coal Mine"
-msgstr "Tiefste Kohlemine"
+msgstr "Tiefste Kohlenmine"
 
 #: ../../tribes/barbarians/conf:215
 #: ../../tribes/barbarians/deep_goldmine/help.lua:44
@@ -2274,7 +2274,7 @@ msgstr "Ressourcenanzeige für Wasser"
 
 #: ../../tribes/barbarians/battlearena/help.lua:13
 msgid "Said to originate from Neidhardt, the famous trainer."
-msgstr "Soll angeblich von Neidhardt, dem berühmten Trainer stammen."
+msgstr "Soll angeblich von Neidhardt, dem berühmten Trainer, stammen."
 
 #: ../../tribes/barbarians/conf:147
 msgid "Scout"
@@ -2772,9 +2772,9 @@ msgid ""
 "The Ranger needs %s to plant a tree, not counting the time he needs to reach "
 "the destination and go home again."
 msgstr ""
-"Der Förster benötigt %s um einen Baum zu pflanzen, die Zeit, die er benötigt "
-"um seinen Bestimmungsort zu erreichen und wieder heimzukehren, nich "
-"mitgerechnet"
+"Der Förster benötigt %s um einen Baum zu pflanzen, die Zeit die er benötigt "
+"um seinen Bestimmungsort zu erreichen und wieder heimzukehren nicht "
+"mitgerechnet."
 
 #: ../../tribes/barbarians/rangers_hut/help.lua:23
 msgid ""

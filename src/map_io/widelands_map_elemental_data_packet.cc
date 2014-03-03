@@ -35,7 +35,7 @@ namespace Widelands {
 void Map_Elemental_Data_Packet::Pre_Read(FileSystem & fs, Map * map)
 {
 	Profile prof;
-	prof.read("elemental", 0, fs);
+	prof.read("elemental", nullptr, fs);
 	Section & s = prof.get_safe_section("global");
 
 	try {

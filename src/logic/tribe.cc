@@ -89,7 +89,7 @@ Tribe_Descr::Tribe_Descr
 
 			PARSE_MAP_OBJECT_TYPES_BEGIN("ware")
 				m_wares.add
-					(new Item_Ware_Descr
+					(new WareDescr
 					 	(*this, _name, _descname, path, prof, global_s));
 			PARSE_MAP_OBJECT_TYPES_END;
 
@@ -261,7 +261,7 @@ Tribe_Descr::Tribe_Descr
 						m_anim_frontier.push_back
 							(std::pair<std::string, uint32_t>
 							 	(style_name,
-							 	 g_anim.get(path, *s, 0)));
+							 	 g_anim.get(path, *s, nullptr)));
 					}
 				}
 				if (m_anim_frontier.empty())
@@ -282,7 +282,7 @@ Tribe_Descr::Tribe_Descr
 						m_anim_flag.push_back
 							(std::pair<std::string, uint32_t>
 							 	(style_name,
-							 	 g_anim.get(path, *s, 0)));
+							 	 g_anim.get(path, *s, nullptr)));
 					}
 				}
 				if (m_anim_flag.empty())
@@ -298,7 +298,7 @@ Tribe_Descr::Tribe_Descr
 			}
 
 			// Read initializations -- all scripts are initializations currently
-			ScriptContainer & scripts =
+			const ScriptContainer& scripts =
 				egbase.lua().get_scripts_for("tribe_" + tribename);
 			container_iterate_const(ScriptContainer, scripts, s) {
 				std::unique_ptr<LuaTable> t =
@@ -376,7 +376,7 @@ bool Tribe_Descr::exists_tribe
 	buf            += name;
 	buf            += "/conf";
 
-	LuaInterface * lua = create_LuaInterface();
+	LuaInterface lua;
 	FileRead f;
 	if (f.TryOpen(*g_fs, buf.c_str())) {
 		if (info)
@@ -389,30 +389,25 @@ bool Tribe_Descr::exists_tribe
 				std::string path = "tribes/" + name + "/scripting";
 				if (g_fs->IsDirectory(path)) {
 					std::unique_ptr<FileSystem> sub_fs(g_fs->MakeSubFileSystem(path));
-					lua->register_scripts(*sub_fs, "tribe_" + name, "");
+					lua.register_scripts(*sub_fs, "tribe_" + name, "");
 				}
 
-				ScriptContainer & scripts = lua->get_scripts_for("tribe_" + name);
+				const ScriptContainer& scripts = lua.get_scripts_for("tribe_" + name);
 				container_iterate_const(ScriptContainer, scripts, s) {
 					std::unique_ptr<LuaTable> t =
-						lua->run_script("tribe_" + name, s->first);
+						lua.run_script("tribe_" + name, s->first);
 
 					info->initializations.push_back
 						(TribeBasicInfo::Initialization
 						 	(s->first, t->get_string("name")));
 				}
 			} catch (const _wexception & e) {
-				delete lua;
 				throw game_data_error
 					("reading basic info for tribe \"%1$s\": %2$s",
 					 name.c_str(), e.what());
 			}
-
-		delete lua;
 		return true;
 	}
-
-	delete lua;
 	return false;
 }
 

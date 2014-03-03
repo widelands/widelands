@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2013-09-15 17:41+0000\n"
-"PO-Revision-Date: 2012-11-02 16:04+0000\n"
-"Last-Translator: SirVer <Unknown>\n"
+"PO-Revision-Date: 2014-01-06 13:11+0000\n"
+"Last-Translator: Miroslav Remák <Unknown>\n"
 "Language-Team: Prometheus <mmatej@yahoo.com>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-09-16 04:39+0000\n"
-"X-Generator: Launchpad (build 16761)\n"
+"X-Launchpad-Export-Date: 2014-01-07 04:32+0000\n"
+"X-Generator: Launchpad (build 16877)\n"
 "X-Poedit-Country: Czech Republic\n"
 "X-Poedit-Language: czech\n"
 
@@ -24,6 +24,8 @@ msgid ""
 "\"A new Warriors Axe brings forth the best in its wielder – or the worst in "
 "its maker.\""
 msgstr ""
+"\"Nová bojovnícka sekera dokáže zručnosť svojho nositeľa - alebo babráctvo "
+"svojho tvorcu.\""
 
 #: ../../tribes/barbarians/hunters_hut/help.lua:12
 msgid ""
@@ -90,7 +92,7 @@ msgid ""
 "when you have swallowed up your third one, it's time for the next shift!\""
 msgstr ""
 "\"Nech prvý zaženie hlad, druhý ťa upokojí; keď prehltneš tretí, je čas na "
-"ďalšiu smenu!\""
+"ďalšiu zmenu!\""
 
 #: ../../tribes/barbarians/battlearena/help.lua:12
 msgid ""
@@ -102,8 +104,8 @@ msgid ""
 "\"Oh how sweet is the source of life,<br> that comes down from the sky <br> "
 "and lets the earth drink.\""
 msgstr ""
-"\"Och, aký príjemný je zdroj života,<br> ktorý zíde z neba <br> a dá zemi "
-"napiť.\""
+"\"Och, aký príjemný je zdroj života,<br> ktorý schádza z neba <br> a dáva "
+"zemi napiť.\""
 
 #: ../../tribes/barbarians/deep_goldmine/help.lua:12
 #: ../../tribes/barbarians/deeper_goldmine/help.lua:12
@@ -112,6 +114,8 @@ msgid ""
 "\"Soft and supple.<br> And yet untouched by time and weather.<br> Rays of "
 "sun, wrought into eternity ...\""
 msgstr ""
+"\"Mäkké a poddajné.<br> A predsa nedotknuté časom a počasím.<br> Slnečné "
+"lúče spracované na večnosť...\""
 
 #: ../../tribes/barbarians/lumberjacks_hut/help.lua:12
 msgid ""
@@ -191,7 +195,7 @@ msgstr "%s z hostinca"
 #: ../../tribes/barbarians/axefactory/help.lua:26
 #: ../../tribes/barbarians/lime_kiln/help.lua:26
 msgid "%s from the Coal mine or the Charcoal Burner's House"
-msgstr "%s z uhoľnej bane a uhliarne"
+msgstr "%s z uhoľnej bane alebo uhliarne"
 
 #: ../../tribes/barbarians/metalworks/help.lua:26
 msgid "%s from the Lumberjack's hut"
@@ -2379,7 +2383,7 @@ msgstr "Taví železo."
 #: ../../tribes/barbarians/deep_oremine/help.lua:25
 #: ../../tribes/barbarians/deep_oremine/help.lua:26
 msgid "Snack"
-msgstr "Olovrant"
+msgstr "Desiata"
 
 #: ../../tribes/barbarians/axefactory/help.lua:28
 #: ../../tribes/barbarians/conf:118
@@ -3393,7 +3397,7 @@ msgstr "Divá sviňa"
 #: ../../tribes/barbarians/conf:189
 #: ../../tribes/barbarians/lumberjacks_hut/help.lua:30
 msgid "Wood Hardener"
-msgstr "Lakovňa dreva"
+msgstr "Sušiareň dreva"
 
 #: ../../tribes/barbarians/axefactory/conf:35
 #: ../../tribes/barbarians/bakery/conf:26

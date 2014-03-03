@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2010 by the Widelands Development Team
+ * Copyright (C) 2006-2014 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -25,8 +25,8 @@ A ICON MOVEABLE PURE LOADONCALL DISCARDABLE "@CMAKE_CURRENT_SOURCE_DIR@/../utils
 // TO CHANGE VERSION INFORMATION, EDIT  OPTIONS BELOW...
 //
 1 VERSIONINFO
-FILEVERSION 0,17,0,1
-PRODUCTVERSION 0,17,0,1
+FILEVERSION 0,18,0,1
+PRODUCTVERSION 0,18,0,1
 FILETYPE VFT_APP
 {
   BLOCK "StringFileInfo"

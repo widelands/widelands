@@ -112,10 +112,10 @@ Bob & Bob::Descr::create
 
 Bob::Bob(const Bob::Descr & _descr) :
 Map_Object       (&_descr),
-m_owner          (0),
-m_position       (FCoords(Coords(0, 0), 0)), // not linked anywhere
-m_linknext       (0),
-m_linkpprev      (0),
+m_owner          (nullptr),
+m_position       (FCoords(Coords(0, 0), nullptr)), // not linked anywhere
+m_linknext       (nullptr),
+m_linkpprev      (nullptr),
 m_anim           (0),
 m_animstart      (0),
 m_walking        (IDLE),
@@ -166,10 +166,10 @@ void Bob::cleanup(Editor_Game_Base & egbase)
 	while (!m_stack.empty()) //  bobs in the editor do not have tasks
 		do_pop_task(ref_cast<Game, Editor_Game_Base>(egbase));
 
-	set_owner(0); // implicitly remove ourselves from owner's map
+	set_owner(nullptr); // implicitly remove ourselves from owner's map
 
 	if (m_position.field) {
-		m_position.field = 0;
+		m_position.field = nullptr;
 		*m_linkpprev = m_linknext;
 		if (m_linknext)
 			m_linknext->m_linkpprev = m_linkpprev;
@@ -333,7 +333,7 @@ Bob::State * Bob::get_state(const Task & task)
 			return &*it;
 	}
 
-	return 0;
+	return nullptr;
 }
 
 Bob::State const * Bob::get_state(const Task & task) const
@@ -347,7 +347,7 @@ Bob::State const * Bob::get_state(const Task & task) const
 			return &*it;
 	}
 
-	return 0;
+	return nullptr;
 }
 
 
@@ -417,8 +417,8 @@ void Bob::reset_tasks(Game & game)
 Bob::Task const Bob::taskIdle = {
 	"idle",
 	&Bob::idle_update,
-	0, // signal_immediate
-	0,
+	nullptr, // signal_immediate
+	nullptr,
 	true
 };
 
@@ -470,8 +470,8 @@ void Bob::idle_update(Game & game, State & state)
 Bob::Task const Bob::taskMovepath = {
 	"movepath",
 	&Bob::movepath_update,
-	0, // signal_immediate
-	0,
+	nullptr, // signal_immediate
+	nullptr,
 	true
 };
 
@@ -745,8 +745,8 @@ void Bob::movepath_update(Game & game, State & state)
 Bob::Task const Bob::taskMove = {
 	"move",
 	&Bob::move_update,
-	0,
-	0,
+	nullptr,
+	nullptr,
 	true
 };
 
@@ -826,7 +826,7 @@ Point Bob::calc_drawpos(const Editor_Game_Base & game, const Point pos) const
 		spos.y -= TRIANGLE_HEIGHT;
 		break;
 
-	case IDLE: start.field = 0; break;
+	case IDLE: start.field = nullptr; break;
 	default:
 		assert(false);
 		break;
@@ -956,7 +956,7 @@ void Bob::set_owner(Player * const player)
 
 	m_owner = player;
 
-	if (m_owner != 0 && m_position.field)
+	if (m_owner != nullptr && m_position.field)
 		m_owner->see_area(Area<FCoords>(get_position(), vision_range()));
 }
 
@@ -985,7 +985,7 @@ void Bob::set_position(Editor_Game_Base & egbase, const Coords & coords)
 		m_linknext->m_linkpprev = &m_linknext;
 	*m_linkpprev = this;
 
-	if (m_owner != 0) {
+	if (m_owner != nullptr) {
 		m_owner->see_area(Area<FCoords>(get_position(), vision_range()));
 
 		if (oldposition.field)

@@ -53,7 +53,7 @@ struct GameChatPanel :
 
 	void focusEdit();
 
-	void receive(const ChatMessage &);
+	void receive(const ChatMessage &) override;
 
 private:
 	void recalculate();
@@ -63,6 +63,7 @@ private:
 	ChatProvider & m_chat;
 	UI::Multiline_Textarea chatbox;
 	UI::EditBox editbox;
+	uint32_t chat_message_counter;
 };
 
 #endif

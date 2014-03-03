@@ -32,17 +32,17 @@ struct SinglePlayerGameController : public GameController {
 		(Widelands::Game &, bool useai, Widelands::Player_Number local);
 	~SinglePlayerGameController();
 
-	void think();
-	void sendPlayerCommand(Widelands::PlayerCommand &);
-	int32_t getFrametime();
-	std::string getGameDescription();
+	void think() override;
+	void sendPlayerCommand(Widelands::PlayerCommand &) override;
+	int32_t getFrametime() override;
+	std::string getGameDescription() override;
 
-	uint32_t realSpeed();
-	uint32_t desiredSpeed();
-	void setDesiredSpeed(uint32_t speed);
-	bool isPaused();
-	void setPaused(bool paused);
-	void report_result(uint8_t player, Widelands::PlayerEndResult result, const std::string & info);
+	uint32_t realSpeed() override;
+	uint32_t desiredSpeed() override;
+	void setDesiredSpeed(uint32_t speed) override;
+	bool isPaused() override;
+	void setPaused(bool paused) override;
+	void report_result(uint8_t player, Widelands::PlayerEndResult result, const std::string & info) override;
 
 private:
 	Widelands::Game & m_game;
@@ -64,9 +64,7 @@ SinglePlayerGameController::SinglePlayerGameController
 	m_useai           (useai),
 	m_lastframe       (WLApplication::get()->get_time()),
 	m_time            (m_game.get_gametime()),
-	m_speed
-		(g_options.pull_section("global").get_natural
-		 	("speed_of_new_game", 1000)),
+	m_speed(1000),
 	m_paused(false),
 	m_player_cmdserial(0),
 	m_local           (local)

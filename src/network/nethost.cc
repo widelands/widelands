@@ -65,18 +65,18 @@ using boost::format;
 
 
 struct HostGameSettingsProvider : public GameSettingsProvider {
-	HostGameSettingsProvider(NetHost * const _h) : h(_h), m_lua(0), m_cur_wincondition(0) {}
+	HostGameSettingsProvider(NetHost * const _h) : h(_h), m_lua(nullptr), m_cur_wincondition(0) {}
 	~HostGameSettingsProvider() {
 		delete m_lua;
-		m_lua = 0;
+		m_lua = nullptr;
 	}
 
-	virtual void setScenario(bool is_scenario) {h->setScenario(is_scenario);}
+	virtual void setScenario(bool is_scenario) override {h->setScenario(is_scenario);}
 
-	virtual const GameSettings & settings() {return h->settings();}
+	virtual const GameSettings & settings() override {return h->settings();}
 
-	virtual bool canChangeMap() {return true;}
-	virtual bool canChangePlayerState(uint8_t const number) {
+	virtual bool canChangeMap() override {return true;}
+	virtual bool canChangePlayerState(uint8_t const number) override {
 		if (settings().savegame)
 			return settings().players.at(number).state != PlayerSettings::stateClosed;
 		else if (settings().scenario)
@@ -90,15 +90,15 @@ struct HostGameSettingsProvider : public GameSettingsProvider {
 				settings().players.at(number).state == PlayerSettings::stateClosed;
 		return true;
 	}
-	virtual bool canChangePlayerTribe(uint8_t const number) {
+	virtual bool canChangePlayerTribe(uint8_t const number) override {
 		return canChangePlayerTeam(number);
 	}
-	virtual bool canChangePlayerInit(uint8_t const number) {
+	virtual bool canChangePlayerInit(uint8_t const number) override {
 		if (settings().scenario || settings().savegame)
 			return false;
 		return number < settings().players.size();
 	}
-	virtual bool canChangePlayerTeam(uint8_t number) {
+	virtual bool canChangePlayerTeam(uint8_t number) override {
 		if (settings().scenario || settings().savegame)
 			return false;
 		if (number >= settings().players.size())
@@ -109,25 +109,25 @@ struct HostGameSettingsProvider : public GameSettingsProvider {
 			settings().players.at(number).state == PlayerSettings::stateComputer;
 	}
 
-	virtual bool canLaunch() {return h->canLaunch();}
+	virtual bool canLaunch() override {return h->canLaunch();}
 
 	virtual void setMap
 		(const std::string &       mapname,
 		 const std::string &       mapfilename,
 		 uint32_t            const maxplayers,
-		 bool                const savegame = false)
+		 bool                const savegame = false) override
 	{
 		h->setMap(mapname, mapfilename, maxplayers, savegame);
 	}
 	virtual void setPlayerState
-		(uint8_t const number, PlayerSettings::State const state)
+		(uint8_t const number, PlayerSettings::State const state) override
 	{
 		if (number >= settings().players.size())
 			return;
 
 		h->setPlayerState(number, state);
 	}
-	virtual void nextPlayerState(uint8_t const number) {
+	virtual void nextPlayerState(uint8_t const number) override {
 		if (number > settings().players.size())
 			return;
 
@@ -212,7 +212,7 @@ struct HostGameSettingsProvider : public GameSettingsProvider {
 		h->setPlayerState(number, newstate, true);
 	}
 
-	virtual void setPlayerTribe(uint8_t const number, const std::string & tribe, bool const random_tribe)
+	virtual void setPlayerTribe(uint8_t const number, const std::string & tribe, bool const random_tribe) override
 	{
 		if (number >= h->settings().players.size())
 			return;
@@ -229,7 +229,7 @@ struct HostGameSettingsProvider : public GameSettingsProvider {
 			h->setPlayerTribe(number, tribe, random_tribe);
 	}
 
-	virtual void setPlayerTeam(uint8_t number, Widelands::TeamNumber team)
+	virtual void setPlayerTeam(uint8_t number, Widelands::TeamNumber team) override
 	{
 		if (number >= h->settings().players.size())
 			return;
@@ -240,61 +240,61 @@ struct HostGameSettingsProvider : public GameSettingsProvider {
 			h->setPlayerTeam(number, team);
 	}
 
-	virtual void setPlayerCloseable(uint8_t number, bool closeable) {
+	virtual void setPlayerCloseable(uint8_t number, bool closeable) override {
 		if (number >= h->settings().players.size())
 			return;
 		h->setPlayerCloseable(number, closeable);
 	}
 
-	virtual void setPlayerShared(uint8_t number, uint8_t shared) {
+	virtual void setPlayerShared(uint8_t number, uint8_t shared) override {
 		if (number >= h->settings().players.size())
 			return;
 		h->setPlayerShared(number, shared);
 	}
 
-	virtual void setPlayerInit(uint8_t const number, uint8_t const index) {
+	virtual void setPlayerInit(uint8_t const number, uint8_t const index) override {
 		if (number >= h->settings().players.size())
 			return;
 
 		h->setPlayerInit(number, index);
 	}
 
-	virtual void setPlayerAI(uint8_t number, const std::string & name, bool const random_ai = false) {
+	virtual void setPlayerAI(uint8_t number, const std::string & name, bool const random_ai = false) override {
 		h->setPlayerAI(number, name, random_ai);
 	}
 
-	virtual void setPlayerName(uint8_t const number, const std::string & name) {
+	virtual void setPlayerName(uint8_t const number, const std::string & name) override {
 		if (number >= h->settings().players.size())
 			return;
 		h->setPlayerName(number, name);
 	}
 
-	virtual void setPlayer(uint8_t const number, PlayerSettings const ps) {
+	virtual void setPlayer(uint8_t const number, PlayerSettings const ps) override {
 		if (number >= h->settings().players.size())
 			return;
 		h->setPlayer(number, ps);
 	}
 
-	virtual void setPlayerNumber(uint8_t const number) {
+	virtual void setPlayerNumber(uint8_t const number) override {
 		if
 			(number == UserSettings::none() or
 			 number < h->settings().players.size())
 			h->setPlayerNumber(number);
 	}
 
-	virtual std::string getWinCondition() {
+	virtual std::string getWinCondition() override {
 		return h->settings().win_condition;
 	}
 
-	virtual void setWinCondition(std::string wc) {
+	virtual void setWinCondition(std::string wc) override {
 		h->setWinCondition(wc);
 	}
 
-	virtual void nextWinCondition() {
+	virtual void nextWinCondition() override {
 		if (m_win_conditions.size() < 1) {
 			// Register win condition scripts
 			if (!m_lua)
-				m_lua = create_LuaInterface();
+				m_lua = new LuaInterface();
 			m_lua->register_scripts(*g_fs, "win_conditions", "scripting/win_conditions");
 
 			ScriptContainer sc = m_lua->get_scripts_for("win_conditions");
@@ -320,9 +320,9 @@ private:
 struct HostChatProvider : public ChatProvider {
 	HostChatProvider(NetHost * const _h) : h(_h), kickClient(0) {}
 
-	void send(const std::string & msg) {
+	void send(const std::string & msg) override {
 		ChatMessage c;
-		c.time = time(0);
+		c.time = time(nullptr);
 		c.playern = h->getLocalPlayerposition();
 		c.sender = h->getLocalPlayername();
 		c.msg = msg;
@@ -447,7 +447,6 @@ struct HostChatProvider : public ChatProvider {
 
 			// Acknowledge kick
 			else if (cmd == "ack_kick") {
-				std::string name;
 				if (arg1.empty())
 					c.msg = _("kick acknowledgement cancelled: No name given!");
 				else if (arg2.size())
@@ -499,7 +498,7 @@ struct HostChatProvider : public ChatProvider {
 		h->send(c);
 	}
 
-	const std::vector<ChatMessage> & getMessages() const {
+	const std::vector<ChatMessage> & getMessages() const override {
 		return messages;
 	}
 
@@ -592,10 +591,10 @@ struct NetHostImpl {
 		chat(h),
 		hp(h),
 		npsb(&hp),
-		promoter(0),
-		svsock(0),
-		sockset(0),
-		game(0),
+		promoter(nullptr),
+		svsock(nullptr),
+		sockset(nullptr),
+		game(nullptr),
 		pseudo_networktime(0),
 		last_heartbeat(0),
 		committed_networktime(0),
@@ -630,12 +629,12 @@ NetHost::NetHost (const std::string & playername, bool internet)
 
 	// create a listening socket
 	IPaddress myaddr;
-	SDLNet_ResolveHost (&myaddr, 0, WIDELANDS_PORT);
+	SDLNet_ResolveHost (&myaddr, nullptr, WIDELANDS_PORT);
 	d->svsock = SDLNet_TCP_Open(&myaddr);
 
 	d->sockset = SDLNet_AllocSocketSet(16);
 	d->promoter = new LAN_Game_Promoter();
-	d->game = 0;
+	d->game = nullptr;
 	d->pseudo_networktime = 0;
 	d->waiting = true;
 	d->networkspeed = 1000;
@@ -652,7 +651,7 @@ NetHost::NetHost (const std::string & playername, bool internet)
 	hostuser.position = UserSettings::none();
 	hostuser.ready = true;
 	d->settings.users.push_back(hostuser);
-	file = 0; //  Initialize as 0 pointer - unfortunately needed in struct.
+	file = nullptr; //  Initialize as 0 pointer - unfortunately needed in struct.
 }
 
 NetHost::~NetHost ()
@@ -667,7 +666,7 @@ NetHost::~NetHost ()
 	SDLNet_FreeSocketSet (d->sockset);
 
 	// close all open sockets
-	if (d->svsock != 0)
+	if (d->svsock != nullptr)
 		SDLNet_TCP_Close (d->svsock);
 
 	delete d->promoter;
@@ -813,7 +812,7 @@ void NetHost::run(bool const autorun)
 		// NOTE  loaderUI will stay uninitialized, if this is run as dedicated, so all called functions need
 		// NOTE  to check whether the pointer is valid.
 		std::unique_ptr<UI::ProgressWindow> loaderUI;
-		GameTips * tips = 0;
+		GameTips * tips = nullptr;
 		if (m_is_dedicated) {
 			log ("[Dedicated] Starting the game...\n");
 			d->game = &game;
@@ -921,7 +920,7 @@ void NetHost::run(bool const autorun)
 	} catch (...) {
 		WLApplication::emergency_save(game);
 		clearComputerPlayers();
-		d->game = 0;
+		d->game = nullptr;
 
 		while (!d->clients.empty()) {
 			disconnectClient(0, "SERVER_CRASHED");
@@ -929,7 +928,7 @@ void NetHost::run(bool const autorun)
 		}
 		throw;
 	}
-	d->game = 0;
+	d->game = nullptr;
 }
 
 void NetHost::think()
@@ -1179,7 +1178,7 @@ void NetHost::handle_dserver_command(std::string cmdarray, std::string sender)
 	assert(m_is_dedicated);
 
 	ChatMessage c;
-	c.time = time(0);
+	c.time = time(nullptr);
 	c.playern = -2;
 	c.sender = d->localplayername;
 	c.recipient = sender;
@@ -1345,7 +1344,7 @@ void NetHost::dserver_send_maps_and_saves(Client & client) {
 				// If we are here, the saved game is valid
 				std::unique_ptr<FileSystem> sg_fs(g_fs->MakeSubFileSystem(name));
 				Profile prof;
-				prof.read("map/elemental", 0, *sg_fs);
+				prof.read("map/elemental", nullptr, *sg_fs);
 				Section & s = prof.get_safe_section("global");
 
 				DedicatedMapInfos info;
@@ -1392,7 +1391,7 @@ void NetHost::sendSystemMessageCode
 
 	// Now add to our own chatbox
 	ChatMessage msg;
-	msg.time = time(0);
+	msg.time = time(nullptr);
 	msg.msg = NetworkGamingMessages::get_message(code, a, b, c);
 	msg.playern = UserSettings::none(); //  == System message
 	// c.sender remains empty to indicate a system message
@@ -1551,7 +1550,7 @@ void NetHost::setMap
 		// reset previously offered map / saved game
 		if (file) {
 			delete file;
-			file = 0;
+			file = nullptr;
 		}
 	}
 
@@ -2143,7 +2142,7 @@ void NetHost::welcomeClient (uint32_t const number, std::string & playername)
 	// If this is a dedicated server, inform the player
 	if (m_is_dedicated) {
 		ChatMessage c;
-		c.time = time(0);
+		c.time = time(nullptr);
 		c.playern = -2;
 		c.sender = d->localplayername;
 		// Send the message of the day if exists
@@ -2211,7 +2210,7 @@ void NetHost::recvClientTime(uint32_t const number, int32_t const time)
 
 void NetHost::checkHungClients()
 {
-	assert(d->game != 0);
+	assert(d->game != nullptr);
 
 	int nrready = 0;
 	int nrdelayed = 0;
@@ -2228,7 +2227,7 @@ void NetHost::checkHungClients()
 			// reset the hung_since time
 			d->clients.at(i).hung_since = 0;
 		} else {
-			assert(d->game != 0);
+			assert(d->game != nullptr);
 			++nrdelayed;
 			if
 				(delta
@@ -2244,9 +2243,9 @@ void NetHost::checkHungClients()
 					 i, d->settings.users.at(d->clients.at(i).usernum).name.c_str());
 				++nrhung;
 				if (d->clients.at(i).hung_since == 0) {
-					d->clients.at(i).hung_since = time(0);
+					d->clients.at(i).hung_since = time(nullptr);
 					d->clients.at(i).lastdelta = 0;
-				} else if (time_t deltanow = time(0) - d->clients.at(i).hung_since > 60) {
+				} else if (time_t deltanow = time(nullptr) - d->clients.at(i).hung_since > 60) {
 
 					// inform the other clients about the problem regulary
 					if (deltanow - d->clients.at(i).lastdelta > 30) {
@@ -2268,10 +2267,10 @@ void NetHost::checkHungClients()
 					// server does not automatically restart.
 					// 5 minutes for all other players to react before the dedicated server takes care
 					// about the situation itself
-					if ((d->clients.at(i).hung_since < (time(0) - 300)) && m_is_dedicated) {
+					if ((d->clients.at(i).hung_since < (time(nullptr) - 300)) && m_is_dedicated) {
 						disconnectClient(i, "CLIENT_TIMEOUTED");
 						// Try to save the game
-						std::string savename = (boost::format("save/client_hung_%i.wmf") % time(0)).str();;
+						std::string savename = (boost::format("save/client_hung_%i.wmf") % time(nullptr)).str();;
 						std::string * error = new std::string();
 						SaveHandler & sh = d->game->save_handler();
 						if (sh.save_game(*d->game, savename, error))
@@ -2470,11 +2469,11 @@ void NetHost::handle_network ()
 {
 	TCPsocket sock;
 
-	if (d->promoter != 0)
+	if (d->promoter != nullptr)
 		d->promoter->run ();
 
 	// Check for new connections.
-	while (d->svsock != 0 && (sock = SDLNet_TCP_Accept(d->svsock)) != 0) {
+	while (d->svsock != nullptr && (sock = SDLNet_TCP_Accept(d->svsock)) != nullptr) {
 		dedicatedlog("[Host]: Received a connection request\n");
 
 		SDLNet_TCP_AddSocket (d->sockset, sock);
@@ -2533,8 +2532,8 @@ void NetHost::handle_network ()
 
 	// If a pause was forced or if the players all pause, send a ping regularly
         // to keep the sockets up and running
-	if ((m_forced_pause || realSpeed() == 0) && (time(0) > (d->lastpauseping + 20))) {
-		d->lastpauseping = time(0);
+	if ((m_forced_pause || realSpeed() == 0) && (time(nullptr) > (d->lastpauseping + 20))) {
+		d->lastpauseping = time(nullptr);
 
 		SendPacket s;
 		s.Unsigned8(NETCMD_PING);
@@ -2582,7 +2581,7 @@ void NetHost::handle_packet(uint32_t const i, RecvPacket & r)
 			client.playernum = UserSettings::notConnected();
 			SDLNet_TCP_DelSocket (d->sockset, client.sock);
 			SDLNet_TCP_Close (client.sock);
-			client.sock = 0;
+			client.sock = nullptr;
 			return;
 		}
 
@@ -2616,7 +2615,8 @@ void NetHost::handle_packet(uint32_t const i, RecvPacket & r)
 			if (!client.dedicated_access)
 				throw DisconnectException("NO_ACCESS_TO_SERVER");
 
-			std::string name = r.String();
+			// We want to skip past the name, so read that but don't do anything with it
+			r.String();
 			std::string path = g_fs->FileSystem::fixCrossFile(r.String());
 			bool savegame    = r.Unsigned8() == 1;
 			bool scenario    = r.Unsigned8() == 1;
@@ -2633,7 +2633,7 @@ void NetHost::handle_packet(uint32_t const i, RecvPacket & r)
 						// Read the needed data from file "elemental" of the used map.
 						std::unique_ptr<FileSystem> sg_fs(g_fs->MakeSubFileSystem(path.c_str()));
 						Profile prof;
-						prof.read("map/elemental", 0, *sg_fs);
+						prof.read("map/elemental", nullptr, *sg_fs);
 						Section & s = prof.get_safe_section("global");
 						uint8_t nr_players = s.get_safe_int("nr_players");
 
@@ -2779,7 +2779,7 @@ void NetHost::handle_packet(uint32_t const i, RecvPacket & r)
 
 	case NETCMD_CHAT: {
 		ChatMessage c;
-		c.time = time(0);
+		c.time = time(nullptr);
 		c.playern = d->settings.users.at(client.usernum).position;
 		c.sender = d->settings.users.at(client.usernum).name;
 		c.msg = r.String();
@@ -2946,7 +2946,7 @@ void NetHost::disconnectClient
 
 		SDLNet_TCP_DelSocket (d->sockset, client.sock);
 		SDLNet_TCP_Close (client.sock);
-		client.sock = 0;
+		client.sock = nullptr;
 	}
 
 	if (d->game) {

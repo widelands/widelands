@@ -2,104 +2,105 @@
 # Copyright (c) 2013 Rosetta Contributors and Canonical Ltd 2013
 # This file is distributed under the same license as the widelands package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2013.
-#
+# GunChleoc <fios@foramnagaidhlig.net>, 2013.
 msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2013-09-15 17:41+0000\n"
-"PO-Revision-Date: 2013-10-08 08:18+0000\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: Gaelic; Scottish <gd@li.org>\n"
+"PO-Revision-Date: 2013-10-12 13:09+0000\n"
+"Last-Translator: GunChleoc <Unknown>\n"
+"Language-Team: Fòram na Gàidhlig http://www.foramnagaidhlig.net\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-10-09 05:12+0000\n"
+"X-Launchpad-Export-Date: 2013-10-13 05:15+0000\n"
 "X-Generator: Launchpad (build 16799)\n"
+"Language: gd\n"
 
 #: ../../worlds/greenland/conf:58
 msgid "Alder"
-msgstr ""
+msgstr "Feàrna"
 
 #: ../../worlds/greenland/conf:59
 msgid "Alder medium"
-msgstr ""
+msgstr "Feàrna mheadhanach"
 
 #: ../../worlds/greenland/conf:60
 msgid "Alder small"
-msgstr ""
+msgstr "Feàrna bheag"
 
 #: ../../worlds/greenland/conf:61
 msgid "Alder tiny"
-msgstr ""
+msgstr "Feàrna bheag bhìodach"
 
 #: ../../worlds/greenland/conf:46
 msgid "Aspen"
-msgstr ""
+msgstr "Critheann"
 
 #: ../../worlds/greenland/conf:47
 msgid "Aspen medium"
-msgstr ""
+msgstr "Critheann meadhanach"
 
 #: ../../worlds/greenland/conf:48
 msgid "Aspen small"
-msgstr ""
+msgstr "Critheann beag"
 
 #: ../../worlds/greenland/conf:49
 msgid "Aspen tiny"
-msgstr ""
+msgstr "Critheann beag bìodach"
 
 #: ../../worlds/greenland/conf:80
 msgid "Badger"
-msgstr ""
+msgstr "Broc"
 
 #: ../../worlds/greenland/terrainconf:79
 msgid "Barren steppe"
-msgstr ""
+msgstr "Steip sheasg"
 
 #: ../../worlds/greenland/terrainconf:31
 msgid "Beach"
-msgstr ""
+msgstr "Traigh"
 
 #: ../../worlds/greenland/conf:66
 msgid "Beech"
-msgstr ""
+msgstr "Faidhbhile"
 
 #: ../../worlds/greenland/conf:67
 msgid "Beech medium"
-msgstr ""
+msgstr "Faidhbhile mheadhanach"
 
 #: ../../worlds/greenland/conf:68
 msgid "Beech small"
-msgstr ""
+msgstr "Faidhbhile bheag"
 
 #: ../../worlds/greenland/conf:69
 msgid "Beech tiny"
-msgstr ""
+msgstr "Faidhbhile bheag bhìodach"
 
 #: ../../worlds/greenland/conf:62
 msgid "Birch"
-msgstr ""
+msgstr "Beith"
 
 #: ../../worlds/greenland/conf:63
 msgid "Birch medium"
-msgstr ""
+msgstr "Beith mheadhanach"
 
 #: ../../worlds/greenland/conf:64
 msgid "Birch small"
-msgstr ""
+msgstr "Beith bheag"
 
 #: ../../worlds/greenland/conf:65
 msgid "Birch tiny"
-msgstr ""
+msgstr "Beith bheag bhìodach"
 
 #: ../../worlds/greenland/conf:81
 msgid "Brownbear"
-msgstr ""
+msgstr "Mathan"
 
 #: ../../worlds/greenland/conf:82
 msgid "Bunny"
-msgstr ""
+msgstr "Coineanach"
 
 #: ../../worlds/greenland/conf:7
 #: ../../worlds/greenland/conf:8
@@ -107,158 +108,158 @@ msgstr ""
 #: ../../worlds/greenland/conf:10
 #: ../../worlds/greenland/conf:11
 msgid "Bush"
-msgstr ""
+msgstr "Preas"
 
 #: ../../worlds/greenland/conf:12
 #: ../../worlds/greenland/conf:13
 msgid "Cactus"
-msgstr ""
+msgstr "Cactas"
 
 #: ../../worlds/greenland/conf:83
 msgid "Chamois"
-msgstr ""
+msgstr "Gobhar-shamaidh"
 
 #: ../../worlds/greenland/resconf:4
 msgid "Coal"
-msgstr ""
+msgstr "Gual"
 
 #: ../../worlds/greenland/conf:14
 #: ../../worlds/greenland/conf:15
 #: ../../worlds/greenland/conf:16
 #: ../../worlds/greenland/conf:17
 msgid "Dead Tree"
-msgstr ""
+msgstr "Craobh mharbh"
 
 #: ../../worlds/greenland/conf:84
 msgid "Deer"
-msgstr ""
+msgstr "Fiadh"
 
 #: ../../worlds/greenland/conf:85
 msgid "Duck"
-msgstr ""
+msgstr "Tunnag"
 
 #: ../../worlds/greenland/conf:86
 msgid "Elk"
-msgstr ""
+msgstr "Lon"
 
 #: ../../worlds/greenland/conf:18
 msgid "Fallen Tree"
-msgstr ""
+msgstr "Craobh 'na laighe"
 
 #: ../../worlds/greenland/resconf:41
 msgid "Fish"
-msgstr ""
+msgstr "Iasg"
 
 #: ../../worlds/greenland/conf:87
 msgid "Fox"
-msgstr ""
+msgstr "Sionnach"
 
 #: ../../worlds/greenland/resconf:12
 msgid "Gold"
-msgstr ""
+msgstr "Òr"
 
 #: ../../worlds/greenland/resconf:28
 msgid "Granite"
-msgstr ""
+msgstr "Graineal"
 
 #: ../../worlds/greenland/conf:19
 #: ../../worlds/greenland/conf:20
 #: ../../worlds/greenland/conf:21
 msgid "Grass"
-msgstr ""
+msgstr "Feur"
 
 #: ../../worlds/greenland/conf:3
 msgid "Greenland"
-msgstr ""
+msgstr "Tìr uaine"
 
 #: ../../worlds/greenland/resconf:20
 msgid "Iron"
-msgstr ""
+msgstr "Iarann"
 
 #: ../../worlds/greenland/conf:70
 msgid "Larch"
-msgstr ""
+msgstr "Learag"
 
 #: ../../worlds/greenland/conf:71
 msgid "Larch medium"
-msgstr ""
+msgstr "Learag mheadhanach"
 
 #: ../../worlds/greenland/conf:72
 msgid "Larch small"
-msgstr ""
+msgstr "Learag bheag"
 
 #: ../../worlds/greenland/conf:73
 msgid "Larch tiny"
-msgstr ""
+msgstr "Learag bheag bhìodach"
 
 #: ../../worlds/greenland/terrainconf:91
 msgid "Lava"
-msgstr ""
+msgstr "Làbha"
 
 #: ../../worlds/greenland/conf:88
 msgid "Lynx"
-msgstr ""
+msgstr "Lincs"
 
 #: ../../worlds/greenland/conf:89
 msgid "Marten"
-msgstr ""
+msgstr "Taghan"
 
 #: ../../worlds/greenland/terrainconf:43
 msgid "Meadow1"
-msgstr ""
+msgstr "Faiche 1"
 
 #: ../../worlds/greenland/terrainconf:49
 msgid "Meadow2"
-msgstr ""
+msgstr "Faiche 2"
 
 #: ../../worlds/greenland/terrainconf:55
 msgid "Meadow3"
-msgstr ""
+msgstr "Faiche 3"
 
 #: ../../worlds/greenland/terrainconf:85
 msgid "Meadow4"
-msgstr ""
+msgstr "Faiche 5"
 
 #: ../../worlds/greenland/terrainconf:96
 msgid "Mountain meadow"
-msgstr ""
+msgstr "Cluain"
 
 #: ../../worlds/greenland/terrainconf:13
 msgid "Mountain1"
-msgstr ""
+msgstr "Beinn 1"
 
 #: ../../worlds/greenland/terrainconf:61
 msgid "Mountain2"
-msgstr ""
+msgstr "Beinn 2"
 
 #: ../../worlds/greenland/terrainconf:67
 msgid "Mountain3"
-msgstr ""
+msgstr "Beinn 3"
 
 #: ../../worlds/greenland/terrainconf:73
 msgid "Mountain4"
-msgstr ""
+msgstr "Beinn 4"
 
 #: ../../worlds/greenland/conf:22
 #: ../../worlds/greenland/conf:23
 msgid "Mushroom"
-msgstr ""
+msgstr "Balgan-buachair"
 
 #: ../../worlds/greenland/conf:50
 msgid "Oak"
-msgstr ""
+msgstr "Darach"
 
 #: ../../worlds/greenland/conf:51
 msgid "Oak medium"
-msgstr ""
+msgstr "Darach meadhanach"
 
 #: ../../worlds/greenland/conf:52
 msgid "Oak small"
-msgstr ""
+msgstr "Darach beag"
 
 #: ../../worlds/greenland/conf:53
 msgid "Oak tiny"
-msgstr ""
+msgstr "Darach beag bìodach"
 
 #: ../../worlds/greenland/conf:24
 #: ../../worlds/greenland/conf:25
@@ -267,57 +268,57 @@ msgstr ""
 #: ../../worlds/greenland/conf:28
 #: ../../worlds/greenland/conf:29
 msgid "Pebble"
-msgstr ""
+msgstr "Morghan"
 
 #: ../../worlds/greenland/conf:90
 msgid "Reindeer"
-msgstr ""
+msgstr "Fast"
 
 #: ../../worlds/greenland/conf:74
 msgid "Rowan"
-msgstr ""
+msgstr "Caorann"
 
 #: ../../worlds/greenland/conf:75
 msgid "Rowan medium"
-msgstr ""
+msgstr "Caorann meadhanach"
 
 #: ../../worlds/greenland/conf:76
 msgid "Rowan small"
-msgstr ""
+msgstr "Caorann beag"
 
 #: ../../worlds/greenland/conf:77
 msgid "Rowan tiny"
-msgstr ""
+msgstr "Caorann bìodach"
 
 #: ../../worlds/greenland/conf:91
 msgid "Sheep"
-msgstr ""
+msgstr "Caora"
 
 #: ../../worlds/greenland/conf:30
 #: ../../worlds/greenland/conf:31
 #: ../../worlds/greenland/conf:32
 msgid "Skeleton"
-msgstr ""
+msgstr "Cnàimhneach"
 
 #: ../../worlds/greenland/terrainconf:19
 msgid "Snow"
-msgstr ""
+msgstr "Sneachd"
 
 #: ../../worlds/greenland/conf:54
 msgid "Spruce"
-msgstr ""
+msgstr "Giuthas"
 
 #: ../../worlds/greenland/conf:55
 msgid "Spruce medium"
-msgstr ""
+msgstr "Giuthas meadhanach"
 
 #: ../../worlds/greenland/conf:56
 msgid "Spruce small"
-msgstr ""
+msgstr "Giuthas beag"
 
 #: ../../worlds/greenland/conf:57
 msgid "Spruce tiny"
-msgstr ""
+msgstr "Giuthas beag bìodach"
 
 #: ../../worlds/greenland/conf:33
 #: ../../worlds/greenland/conf:34
@@ -327,11 +328,11 @@ msgstr ""
 #: ../../worlds/greenland/conf:38
 #: ../../worlds/greenland/conf:39
 msgid "Standing Stones"
-msgstr ""
+msgstr "Tursachan"
 
 #: ../../worlds/greenland/terrainconf:7
 msgid "Steppe"
-msgstr ""
+msgstr "Steip"
 
 #: ../../worlds/greenland/conf:40
 #: ../../worlds/greenland/conf:41
@@ -340,29 +341,29 @@ msgstr ""
 #: ../../worlds/greenland/conf:44
 #: ../../worlds/greenland/conf:45
 msgid "Stones"
-msgstr ""
+msgstr "Clachan"
 
 #: ../../worlds/greenland/terrainconf:24
 msgid "Swamp"
-msgstr ""
+msgstr "Boglach"
 
 #: ../../worlds/greenland/conf:2
 msgid "The Widelands Development Team"
-msgstr ""
+msgstr "An sgioba leasachaidh Widelands"
 
 #: ../../worlds/greenland/conf:4
 msgid "These are the beauty and bountiful countries of the barbarians"
-msgstr ""
+msgstr "Seo dùthaich àlainn thorrach nan Tùsanach"
 
 #: ../../worlds/greenland/resconf:36
 #: ../../worlds/greenland/terrainconf:36
 msgid "Water"
-msgstr ""
+msgstr "Uisge"
 
 #: ../../worlds/greenland/conf:92
 msgid "Wisent"
-msgstr ""
+msgstr "Tarbh-allaidh"
 
 #: ../../worlds/greenland/conf:93
 msgid "Wolf"
-msgstr ""
+msgstr "Madadh-allaidh"

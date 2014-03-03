@@ -29,7 +29,7 @@
 #include "logic/battle.h"
 #include "logic/bob.h"
 #include "logic/building.h"
-#include "logic/item_ware_descr.h"
+#include "logic/ware_descr.h"
 #include "wexception.h"
 
 namespace Widelands {

@@ -13,7 +13,7 @@ felling_axe=1
 4=playFX ../../../sound/spoken/timber 192
 5=object fall
 6=animation idle 2000
-7=createitem trunk
+7=createware trunk
 8=return
 
 [hacking]

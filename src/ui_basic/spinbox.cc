@@ -151,7 +151,7 @@ SpinBox::SpinBox
 
 SpinBox::~SpinBox() {
 	delete sbi;
-	sbi = 0;
+	sbi = nullptr;
 }
 
 

@@ -60,14 +60,14 @@ struct AnimationManager {
 	uint32_t get
 		(const std::string & directory,
 		 Section           & s,
-		 char       const * picnametempl = 0)
+		 char       const * picnametempl = nullptr)
 	{
 		return get(directory.c_str(), s, picnametempl);
 	}
 	uint32_t get
 		(char       const * directory,
 		 Section          &,
-		 char       const * picnametempl = 0);
+		 char       const * picnametempl = nullptr);
 
 	// for use by the graphics subsystem
 	uint32_t get_nranimations() const;

@@ -43,8 +43,8 @@ void Flag::draw
 	dst.drawanim
 		(pos, owner().flag_anim(), game.get_gametime() - m_animstart, &owner());
 
-	const uint32_t item_filled = m_item_filled;
-	for (uint32_t i = 0; i < item_filled; ++i) { //  draw wares
+	const uint32_t ware_filled = m_ware_filled;
+	for (uint32_t i = 0; i < ware_filled; ++i) { //  draw wares
 		Point warepos = pos;
 		if (i < 8) {
 			warepos.x += ware_offsets[i].x;
@@ -53,7 +53,7 @@ void Flag::draw
 			warepos.y -= 6 + (i - 8) * 3;
 		dst.drawanim
 			(warepos,
-			 m_items[i].item->descr().get_animation("idle"),
+			 m_wares[i].ware->descr().get_animation("idle"),
 			 0,
 			 get_owner());
 	}

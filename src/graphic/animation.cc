@@ -254,7 +254,7 @@ void DirAnimations::parse
 
 	if
 		(char const * const string =
-		 defaults ? defaults->get_string("dirpics", 0) : 0)
+		 defaults ? defaults->get_string("dirpics", nullptr) : nullptr)
 	{
 		snprintf(dirpictempl, sizeof(dirpictempl), "%s", string);
 		repl = strstr(dirpictempl, "!!");

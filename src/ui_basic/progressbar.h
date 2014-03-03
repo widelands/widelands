@@ -51,7 +51,7 @@ public:
 	void set_total(uint32_t);
 
 protected:
-	virtual void draw(RenderTarget &);
+	virtual void draw(RenderTarget &) override;
 
 private:
 	uint32_t m_orientation;

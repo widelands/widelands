@@ -40,10 +40,10 @@ namespace Widelands {
 
 Map_Object_Descr g_portdock_descr("portdock", "Port Dock");
 
-PortDock::PortDock() :
+PortDock::PortDock(Warehouse* wh) :
 	PlayerImmovable(g_portdock_descr),
-	m_fleet(0),
-	m_warehouse(0),
+	m_fleet(nullptr),
+	m_warehouse(wh),
 	m_need_ship(false),
 	m_expedition_ready(false)
 {
@@ -68,14 +68,8 @@ void PortDock::add_position(Coords where)
 	m_dockpoints.push_back(where);
 }
 
-/**
- * Set the @ref Warehouse buddy of this dock. May only be called once.
- */
-void PortDock::set_warehouse(Warehouse * wh)
-{
-	assert(!m_warehouse);
-
-	m_warehouse = wh;
+Warehouse* PortDock::get_warehouse() const {
+	return m_warehouse;
 }
 
 /**
@@ -127,7 +121,7 @@ PortDock * PortDock::get_dock(Flag & flag) const
 {
 	if (m_fleet)
 		return m_fleet->get_dock(flag);
-	return 0;
+	return nullptr;
 }
 
 /**
@@ -193,8 +187,24 @@ void PortDock::init_fleet(Editor_Game_Base & egbase)
 
 void PortDock::cleanup(Editor_Game_Base & egbase)
 {
-	if (m_warehouse)
-		m_warehouse->m_portdock = 0;
+	if (egbase.objects().object_still_available(m_warehouse)) {
+		// Transfer all our wares into the warehouse.
+		if (upcast(Game, game, &egbase)) {
+			BOOST_FOREACH(ShippingItem & shipping_item, m_waiting) {
+				WareInstance* ware;
+				shipping_item.get(*game, &ware, nullptr);
+				if (ware) {
+					ware->cancel_moving();
+					m_warehouse->incorporate_ware(*game, ware);
+				} else {
+					shipping_item.set_location(*game, m_warehouse);
+					shipping_item.end_shipping(*game);
+				}
+			}
+		}
+		m_waiting.clear();
+		m_warehouse->m_portdock = nullptr;
+	}
 
 	if (upcast(Game, game, &egbase)) {
 		container_iterate(std::vector<ShippingItem>, m_waiting, it) {
@@ -276,12 +286,13 @@ void PortDock::update_shippingitem(Game & game, Worker & worker)
 
 void PortDock::_update_shippingitem(Game & game, std::vector<ShippingItem>::iterator it)
 {
-	it->fetch_destination(game, *this);
+	it->update_destination(game, *this);
 
 	PortDock * dst = it->get_destination(game);
 	assert(dst != this);
 
-	if (dst) {
+	// Destination might have vanished or be in another economy altogether.
+	if (dst && dst->get_economy() == get_economy()) {
 		set_need_ship(game, true);
 	} else {
 		it->set_location(game, m_warehouse);
@@ -345,7 +356,8 @@ void PortDock::ship_arrived(Game & game, Ship & ship)
 				// Destination is valid, so we load the item onto the ship
 				ship.add_item(game, m_waiting.back());
 			} else {
-				// Obviously the item has no valid destination anymore, so we just carry it back in the warehouse
+				// The item has no valid destination anymore, so we just carry it
+				// back in the warehouse
 				m_waiting.back().set_location(game, m_warehouse);
 				m_waiting.back().end_shipping(game);
 			}
@@ -384,7 +396,7 @@ uint32_t PortDock::count_waiting(WareWorker waretype, Ware_Index wareindex)
 	container_iterate(std::vector<ShippingItem>, m_waiting, it) {
 		WareInstance * ware;
 		Worker * worker;
-		it.current->get(owner().egbase(), ware, worker);
+		it.current->get(owner().egbase(), &ware, &worker);
 
 		if (waretype == wwWORKER) {
 			if (worker && worker->worker_index() == wareindex)
@@ -531,7 +543,7 @@ Map_Object::Loader * PortDock::load
 
 		uint8_t const version = fr.Unsigned8();
 		if (1 <= version && version <= PORTDOCK_SAVEGAME_VERSION) {
-			loader->init(egbase, mol, *new PortDock);
+			loader->init(egbase, mol, *new PortDock(nullptr));
 			loader->load(fr, version);
 		} else
 			throw game_data_error(_("unknown/unhandled version %u"), version);

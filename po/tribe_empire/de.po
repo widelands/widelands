@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: Widelands unofficial-bzr-launchpad-i18n-4955\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2013-09-15 17:41+0000\n"
-"PO-Revision-Date: 2013-09-01 12:18+0000\n"
+"PO-Revision-Date: 2014-01-19 16:03+0000\n"
 "Last-Translator: Nasenbaer <Unknown>\n"
 "Language-Team: German <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-09-16 04:40+0000\n"
-"X-Generator: Launchpad (build 16761)\n"
+"X-Launchpad-Export-Date: 2014-01-20 05:13+0000\n"
+"X-Generator: Launchpad (build 16901)\n"
 "X-Poedit-Country: GERMANY\n"
 "X-Poedit-Language: German\n"
 
@@ -24,7 +24,7 @@ msgid ""
 "needs of miners in deep mines."
 msgstr ""
 "Ein richtiges Mahl wird in Tavernen aus Brot und Fleisch/Fisch zubereitet. "
-"Es befriedigt die Bedürfnisse der Bergleute in tiefen Minen."
+"Die Bergleute in tiefen Minen werden damit versorgt."
 
 #: ../../tribes/empire/ship/conf:1
 msgid "A sea-worthy ship"
@@ -36,9 +36,9 @@ msgid ""
 "the scout on his scouting trips. They are produced in a tavern out of fish "
 "or meat or bread."
 msgstr ""
-"Ein kleiner Happen um die Bergleute stark und arbeitend zu halten. Rationen "
-"werden auch vom Kundschafter auf seinen Erkundungen verbraucht. Diese werden "
-"in Tavernen aus Brot, Fleisch oder Fisch zubereitet."
+"Ein kleiner Happen um die Bergleute stark und arbeitsfähig zu halten. "
+"Rationen werden auch vom Kundschafter auf seinen Erkundungstouren "
+"verbraucht. Diese werden in Tavernen aus Brot, Fleisch oder Fisch zubereitet."
 
 #: ../../tribes/empire/conf:57
 msgid "Advanced Lance"
@@ -95,9 +95,10 @@ msgid ""
 "used in the trainingscamp - together with food- to train soldiers from "
 "healthpoints level 1 to healthpoints level 2."
 msgstr ""
-"Grundrüstungen für imperiale Soldaten. Sie werden in der Rüstungsschmiede "
-"hergestellt und in Ausbildungsplätzen - zusammen mit Nahrung - verwendet um "
-"die Gesundheitsstufe von Soldaten von 1 auf 2 zu trainieren."
+"Grundrüstungen für Soldaten des Imperiums. Sie werden in der "
+"Rüstungsschmiede hergestellt und in Ausbildungsplätzen - zusammen mit "
+"Nahrung - verwendet, um die Gesundheitsstufe der Soldaten von 1 auf 2 zu "
+"trainieren."
 
 #: ../../tribes/empire/conf:61
 msgid "Basket"
@@ -112,7 +113,7 @@ msgid ""
 "Besides bread and meat, fish is also a foodstuff for the Empire. Fish are "
 "used in taverns, inns and training sites (arena, colosseum, trainingscamp)."
 msgstr ""
-"Neben Brot und Fleisch ist Fisch auch für das Imperium ein Nahrungsmittel. "
+"Neben Brot und Fleisch ist auch Fisch Nahrungsmittel für das Imperium . "
 "Fisch wird in Tavernen, Wirtshäuser und Trainingsanlagen (Arena, Kolosseum, "
 "Ausbildungslager) verbraucht."
 
@@ -122,7 +123,7 @@ msgstr "Brot"
 
 #: ../../tribes/empire/conf:60
 msgid "Bread Paddle"
-msgstr "Brotschaufel"
+msgstr "Brotschieber"
 
 #: ../../tribes/empire/donkeybreeder/conf:1
 msgid "Breeds cute and helpful donkeys"
@@ -134,7 +135,7 @@ msgstr "Züchtet Schweine."
 
 #: ../../tribes/empire/conf:112
 msgid "Brewer"
-msgstr "Brauer"
+msgstr "Braumeister"
 
 #: ../../tribes/empire/conf:180
 msgid "Brewery"
@@ -142,7 +143,7 @@ msgstr "Brauerei"
 
 #: ../../tribes/empire/conf:113
 msgid "Builder"
-msgstr "Baumeister"
+msgstr "Bauarbeiter"
 
 #: ../../tribes/empire/conf:114
 msgid "Burner"
@@ -154,7 +155,7 @@ msgstr "Brennt Kohle"
 
 #: ../../tribes/empire/conf:115
 msgid "Carpenter"
-msgstr "Schreiner"
+msgstr "Zimmermann"
 
 #: ../../tribes/empire/conf:103
 msgid "Carrier"
@@ -162,7 +163,7 @@ msgstr "Träger"
 
 #: ../../tribes/empire/carrier/conf:1
 msgid "Carries items along your roads."
-msgstr "Trägt Waren über deine Straßen."
+msgstr "Transportiert Waren auf deinen Straßen."
 
 #: ../../tribes/empire/conf:149
 #: ../../tribes/empire/conf:212
@@ -184,7 +185,7 @@ msgstr "Köhlerei"
 
 #: ../../tribes/empire/conf:156
 msgid "Citadel"
-msgstr "Zitadelle"
+msgstr "Festung"
 
 #: ../../tribes/empire/conf:65
 msgid "Cloth"
@@ -195,8 +196,8 @@ msgid ""
 "Cloth is needed to build several buildings. It is also consumed in the "
 "armour smithy."
 msgstr ""
-"Stoffe werden benötigt um verschiedene Gebäude zu bauen. Sie werden "
-"ebenfalls von Rüstungsschmieden benötigt."
+"Stoff wird benötigt, um verschiedene Gebäude zu bauen. Stoff wird ebenfalls "
+"von Rüstungsschmieden benötigt."
 
 #: ../../tribes/empire/conf:66
 msgid "Coal"
@@ -204,7 +205,7 @@ msgstr "Kohle"
 
 #: ../../tribes/empire/conf:199
 msgid "Coal Mine"
-msgstr "Kohlenmine"
+msgstr "Kohlemine"
 
 #: ../../tribes/empire/conf:217
 msgid "Colosseum"
@@ -212,7 +213,7 @@ msgstr "Kolosseum"
 
 #: ../../tribes/empire/shipyard/conf:27
 msgid "Constructing ship"
-msgstr "Ein Schiff erbauen"
+msgstr "Erbaue ein Schiff"
 
 #: ../../tribes/empire/conf:143
 msgid "Construction Site"
@@ -224,7 +225,7 @@ msgstr "Bricht grobe Granitblöcke und Marmor aus Felsen."
 
 #: ../../tribes/empire/conf:198
 msgid "Deep Coal Mine"
-msgstr "Tiefe Kohlenmine"
+msgstr "Tiefe Kohlemine"
 
 #: ../../tribes/empire/conf:202
 msgid "Deep Gold Mine"
@@ -248,7 +249,7 @@ msgstr "Zerstörtes Gebäude"
 
 #: ../../tribes/empire/geologist/conf:1
 msgid "Discovers resources for mining."
-msgstr "Sucht Ressourcen zum schürfen."
+msgstr "Sucht Ressourcen zum Schürfen."
 
 #: ../../tribes/empire/conf:146
 msgid "Dismantle Site"
@@ -292,7 +293,7 @@ msgstr "abgeerntetes Feld"
 
 #: ../../tribes/empire/conf:34
 msgid "Field medium"
-msgstr "ausgewachsenes Feld"
+msgstr "fast reifes Feld"
 
 #: ../../tribes/empire/conf:37
 msgid "Field ripe"
@@ -328,7 +329,7 @@ msgstr "Fischer"
 
 #: ../../tribes/empire/conf:172
 msgid "Fisher's House"
-msgstr "Fischerhaus"
+msgstr "Fischerhütte"
 
 #: ../../tribes/empire/conf:69
 msgid "Fishing Rod"
@@ -338,7 +339,7 @@ msgstr "Angel"
 msgid ""
 "Fishing rods are needed by fishers, to catch fish. Produced by the toolsmith."
 msgstr ""
-"Angeln werden vom Fischer benutzt, um Fische zu fangen. Sie werden vom "
+"Angeln werden vom Fischer benützt, um Fische zu fangen. Sie werden vom "
 "Werkzeugmacher hergestellt."
 
 #: ../../tribes/empire/conf:70
@@ -351,7 +352,7 @@ msgid ""
 "produce the tasty Empire bread."
 msgstr ""
 "Mehl wird von der Mühle aus Weizen hergestellt und wird von der Bäckerei "
-"benötigt um köstliches imperiales Brot herzustellen."
+"benötigt um köstliches Brot für das Imperium herzustellen."
 
 #: ../../tribes/empire/conf:118
 msgid "Forester"
@@ -359,7 +360,7 @@ msgstr "Förster"
 
 #: ../../tribes/empire/conf:171
 msgid "Forester's House"
-msgstr "Forsthaus"
+msgstr "Forsthütte"
 
 #: ../../tribes/empire/conf:158
 #: ../../tribes/empire/conf:213
@@ -438,7 +439,7 @@ msgstr "Hauptquartier"
 #: ../../tribes/empire/conf:222
 #: ../../tribes/empire/scripting/sc00_headquarters_medium.lua:10
 msgid "Headquarters medium"
-msgstr "normales Hauptquartier"
+msgstr "Mittlegroßes Hauptquartier"
 
 #: ../../tribes/empire/conf:164
 msgid "Headquarters shipwreck"
@@ -515,7 +516,7 @@ msgstr "Behalte Schafe."
 
 #: ../../tribes/empire/conf:80
 msgid "Kitchen Tools"
-msgstr "Küchengerät"
+msgstr "Küchengeräte"
 
 #: ../../tribes/empire/conf:81
 msgid "Lance"

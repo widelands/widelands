@@ -46,9 +46,9 @@ UI::Panel(parent, x, y, 0, 28),
 m_igb(igb),
 m_building(building),
 m_queue(queue),
-m_priority_radiogroup(0),
-m_increase_max_fill(0),
-m_decrease_max_fill(0),
+m_priority_radiogroup(nullptr),
+m_increase_max_fill(nullptr),
+m_decrease_max_fill(nullptr),
 m_ware_index(queue->get_ware()),
 m_ware_type(Widelands::wwWARE),
 m_max_fill_indicator(g_gr->images().get(pic_max_fill_indicator)),
@@ -58,7 +58,7 @@ m_cache_max_fill(queue->get_max_fill()),
 m_total_height(0),
 m_show_only(show_only)
 {
-	const Widelands::Item_Ware_Descr & ware =
+	const Widelands::WareDescr & ware =
 		*queue->owner().tribe().get_ware_descr(m_queue->get_ware());
 	set_tooltip(ware.descname().c_str());
 
@@ -164,7 +164,7 @@ void WaresQueueDisplay::update_priority_buttons()
 {
 	if (m_cache_size <= 0 or m_show_only) {
 		delete m_priority_radiogroup;
-		m_priority_radiogroup = 0;
+		m_priority_radiogroup = nullptr;
 	}
 
 	Point pos = Point(m_cache_size * CellWidth + Border, 0);
@@ -219,8 +219,8 @@ void WaresQueueDisplay::update_priority_buttons()
 void WaresQueueDisplay::update_max_fill_buttons() {
 	delete m_increase_max_fill;
 	delete m_decrease_max_fill;
-	m_increase_max_fill = 0;
-	m_decrease_max_fill = 0;
+	m_increase_max_fill = nullptr;
+	m_decrease_max_fill = nullptr;
 
 	if (m_cache_size <= 0 or m_show_only)
 		return;
@@ -312,4 +312,3 @@ void WaresQueueDisplay::compute_max_fill_buttons_enabled_state()
 		if (m_increase_max_fill) m_increase_max_fill->set_enabled(m_cache_max_fill < m_queue->get_max_size());
 	}
 }
-

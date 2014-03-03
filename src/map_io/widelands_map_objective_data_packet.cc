@@ -39,7 +39,7 @@ void Map_Objective_Data_Packet::Read
 		return;
 
 	Profile prof;
-	try {prof.read("objective", 0, fs);} catch (...) {return;}
+	try {prof.read("objective", nullptr, fs);} catch (...) {return;}
 	Map & map = egbase.map();
 	Manager<Objective> & mom = map.mom();
 
@@ -47,7 +47,7 @@ void Map_Objective_Data_Packet::Read
 		int32_t const packet_version =
 			prof.get_safe_section("global").get_safe_int("packet_version");
 		if (packet_version <= CURRENT_PACKET_VERSION) {
-			while (Section * const s = prof.get_next_section(0)) {
+			while (Section * const s = prof.get_next_section(nullptr)) {
 				char const * const         name = s->get_name();
 				try {
 					Objective & objective = *new Objective();

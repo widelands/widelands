@@ -83,13 +83,7 @@ void Cmd_Destroy_Map_Object::Write
 	GameLogicCommand::Write(fw, egbase, mos);
 
 	// Now serial
-	if (const Map_Object * const obj = egbase.objects().get_object(obj_serial)) {
-		// The object might have vanished
-		assert(mos.is_object_known(*obj));
-		fw.Unsigned32(mos.get_object_file_index(*obj));
-	} else
-		fw.Unsigned32(0);
-
+	fw.Unsigned32(mos.get_object_file_index_or_zero(egbase.objects().get_object(obj_serial)));
 }
 
 Cmd_Act::Cmd_Act(int32_t const t, Map_Object & o, int32_t const a) :
@@ -141,12 +135,7 @@ void Cmd_Act::Write
 	GameLogicCommand::Write(fw, egbase, mos);
 
 	// Now serial
-	if (Map_Object const * const obj = egbase.objects().get_object(obj_serial))
-	{ //  object might have disappeared
-		assert(mos.is_object_known(*obj));
-		fw.Unsigned32(mos.get_object_file_index(*obj));
-	} else
-		fw.Unsigned32(0);
+	fw.Unsigned32(mos.get_object_file_index_or_zero(egbase.objects().get_object(obj_serial)));
 
 	// And arg
 	fw.Unsigned32(arg);
@@ -210,7 +199,7 @@ std::vector<Serial> Object_Manager::all_object_serials_ordered () const {
 Map_Object * Object_Ptr::get(const Editor_Game_Base & egbase)
 {
 	if (!m_serial)
-		return 0;
+		return nullptr;
 	Map_Object * const obj = egbase.objects().get_object(m_serial);
 	if (!obj)
 		m_serial = 0;
@@ -222,7 +211,7 @@ Map_Object * Object_Ptr::get(const Editor_Game_Base & egbase)
 // that is pointed to.
 // That is, a 'const Object_Ptr' behaves like a 'Object_Ptr * const'.
 Map_Object * Object_Ptr::get(const Editor_Game_Base & egbase) const {
-	return m_serial ? egbase.objects().get_object(m_serial) : 0;
+	return m_serial ? egbase.objects().get_object(m_serial) : nullptr;
 }
 
 
@@ -345,7 +334,7 @@ Map_Object IMPLEMENTATION
  * Zero-initialize a map object
  */
 Map_Object::Map_Object(const Map_Object_Descr * const the_descr) :
-m_descr(the_descr), m_serial(0), m_logsink(0)
+m_descr(the_descr), m_serial(0), m_logsink(nullptr)
 {}
 
 

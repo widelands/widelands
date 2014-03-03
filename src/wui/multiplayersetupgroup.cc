@@ -44,8 +44,8 @@ struct MultiPlayerClientGroup : public UI::Box {
 		 UI::Font * font)
 		 :
 		 UI::Box(parent, 0, 0, UI::Box::Horizontal, w, h),
-		 type_icon(0),
-		 type(0),
+		 type_icon(nullptr),
+		 type(nullptr),
 		 s(settings),
 		 m_id(id),
 		 m_save(-2)
@@ -155,10 +155,10 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 		 std::map<std::string, std::string> & tn)
 		 :
 		 UI::Box(parent, 0, 0, UI::Box::Horizontal, w, h),
-		 player(0),
-		 type(0),
-		 tribe(0),
-		 init(0),
+		 player(nullptr),
+		 type(nullptr),
+		 tribe(nullptr),
+		 init(nullptr),
 		 s(settings),
 		 n(npsb),
 		 m_id(id),
@@ -325,7 +325,7 @@ struct MultiPlayerPlayerGroup : public UI::Box {
 				std::string tribepath("tribes/" + player_setting.tribe);
 				if (!m_tribenames[player_setting.tribe].size()) {
 					// get tribes name and picture
-					Profile prof((tribepath + "/conf").c_str(), 0, "tribe_" + player_setting.tribe);
+					Profile prof((tribepath + "/conf").c_str(), nullptr, "tribe_" + player_setting.tribe);
 					Section & global = prof.get_safe_section("tribe");
 					m_tribenames[player_setting.tribe] = global.get_safe_string("name");
 					m_tribepics[player_setting.tribe] =
@@ -421,7 +421,7 @@ m_fname(fname)
 	clientbox.set_scrolling(true);
 	c.resize(MAXCLIENTS);
 	for (uint32_t i = 0; i < c.size(); ++i) {
-		c.at(i) = 0;
+		c.at(i) = nullptr;
 	}
 
 	// Playerbox and labels

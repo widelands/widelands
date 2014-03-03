@@ -55,7 +55,7 @@ Sound_Handler g_sound_handler;
  * \sa Sound_Handler::init()
 */
 Sound_Handler::Sound_Handler():
-	m_egbase              (0),
+	m_egbase              (nullptr),
 	m_nosound             (false),
 	m_lock_audio_disabling(false),
 	m_disable_music       (false),
@@ -64,7 +64,7 @@ Sound_Handler::Sound_Handler():
 	m_fx_volume           (MIX_MAX_VOLUME),
 	m_random_order        (true),
 	m_current_songset     (""),
-	m_fx_lock             (0)
+	m_fx_lock             (nullptr)
 {}
 
 /// Housekeeping: unset hooks. Audio data will be freed automagically by the
@@ -78,7 +78,7 @@ Sound_Handler::~Sound_Handler()
 	if (m_fx_lock)
 	{
 		SDL_DestroyMutex(m_fx_lock);
-		m_fx_lock = 0;
+		m_fx_lock = nullptr;
 	}
 }
 
@@ -130,15 +130,15 @@ void Sound_Handler::init()
 		load_system_sounds();
 		Mix_VolumeMusic(m_music_volume); //  can not do this before InitSubSystem
 
-		if (m_fx_lock == 0)
+		if (m_fx_lock == nullptr)
 			m_fx_lock = SDL_CreateMutex();
 	}
 }
 
 void Sound_Handler::shutdown()
 {
-	Mix_ChannelFinished(0);
-	Mix_HookMusicFinished(0);
+	Mix_ChannelFinished(nullptr);
+	Mix_HookMusicFinished(nullptr);
 
 	int numtimesopened, frequency, channels;
 	Uint16 format;
@@ -159,7 +159,7 @@ void Sound_Handler::shutdown()
 	SDL_AudioDriverName(text, 20);
 	log("SDL_AUDIODRIVER %s\n", text);
 	delete[] text;
-	text = 0;
+	text = nullptr;
 
 	if (numtimesopened != 1) {
 		log (_("PROBLEM: sound device opened multiple times, trying to close"));
@@ -172,7 +172,7 @@ void Sound_Handler::shutdown()
 	if (m_fx_lock)
 	{
 		SDL_DestroyMutex(m_fx_lock);
-		m_fx_lock = 0;
+		m_fx_lock = nullptr;
 	}
 
 }
@@ -213,6 +213,8 @@ void Sound_Handler::load_system_sounds()
 	load_fx_if_needed("sound", "message", "sound/message");
 	load_fx_if_needed("sound/military", "under_attack", "sound/military/under_attack");
 	load_fx_if_needed("sound/military", "site_occupied", "sound/military/site_occupied");
+	load_fx_if_needed("sound", "message_chat", "sound/message_chat");
+	load_fx_if_needed("sound", "message_freshmen", "sound/message_freshmen");
 }
 
 /** Load a sound effect. One sound effect can consist of several audio files

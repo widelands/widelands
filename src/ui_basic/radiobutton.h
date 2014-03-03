@@ -41,7 +41,7 @@ struct Radiobutton : public Statebox {
 	Radiobutton * next_button() {return m_nextbtn;}
 
 private:
-	void clicked();
+	void clicked() override;
 
 	Radiobutton * m_nextbtn;
 	Radiogroup  & m_group;

@@ -43,6 +43,7 @@ Fullscreen_Menu_Internet_Lobby::Fullscreen_Menu_Internet_Lobby
 	m_buth (get_h() * 19 / 400),
 	m_lisw (get_w() * 623 / 1000),
 	m_fs   (fs_small()),
+	m_prev_clientlist_len(1000),
 	m_fn   (ui_fn()),
 
 // Text labels
@@ -295,6 +296,14 @@ void Fullscreen_Menu_Internet_Lobby::fillClientList(const std::vector<INet_Clien
 				continue;
 		}
 	}
+
+	// If a new player joins the lobby, play a sound.
+	if (clients.size() != m_prev_clientlist_len)
+	{
+		if (clients.size() > m_prev_clientlist_len)
+			play_new_chat_member();
+		m_prev_clientlist_len = clients.size();
+	}
 }
 
 
@@ -371,11 +380,11 @@ void Fullscreen_Menu_Internet_Lobby::clicked_joingame()
 	if (opengames.has_selection()) {
 		InternetGaming::ref().join_game(opengames.get_selected().name);
 
-		uint32_t const secs = time(0);
+		uint32_t const secs = time(nullptr);
 		while (InternetGaming::ref().ip().size() < 1) {
 			InternetGaming::ref().handle_metaserver_communication();
 			 // give some time for the answer + for a relogin, if a problem occurs.
-			if ((INTERNET_GAMING_TIMEOUT * 5 / 3) < time(0) - secs) {
+			if ((INTERNET_GAMING_TIMEOUT * 5 / 3) < time(nullptr) - secs) {
 				// Show a popup warning message
 				std::string warningheader(_("Connection timed out"));
 				std::string warning

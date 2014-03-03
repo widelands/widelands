@@ -69,7 +69,7 @@ struct WatchWindow : public UI::Window {
 	void toggle_buttons();
 
 protected:
-	virtual void think();
+	virtual void think() override;
 	void stop_tracking_by_drag(int32_t x, int32_t y);
 
 private:
@@ -86,7 +86,7 @@ private:
 };
 
 
-static WatchWindow * g_watch_window = 0;
+static WatchWindow * g_watch_window = nullptr;
 
 WatchWindow::WatchWindow
 	(Interactive_GameBase &       parent,
@@ -159,7 +159,7 @@ void WatchWindow::add_view(Widelands::Coords const coords) {
 		return;
 	WatchWindowView view;
 
-	view.tracking = 0;
+	view.tracking = nullptr;
 	view.view_point = calc_coords(coords);
 	last_visit = game().get_gametime();
 
@@ -220,7 +220,7 @@ void WatchWindow::show_view(bool) {
 }
 
 WatchWindow::~WatchWindow() {
-	g_watch_window = 0;
+	g_watch_window = nullptr;
 
 	//  If we are destructed because our parent is destructed, our parent may
 	//  not be an Interactive_GameBase any more (it may just be an UI::Panel).
@@ -260,7 +260,7 @@ void WatchWindow::think()
 		Interactive_Player* ipl = game().get_ipl();
 		if (ipl && 1 >= ipl->player().vision(map.get_index(bob->get_position(), map.get_width()))) {
 			// Not in sight
-			views[cur_index].tracking = 0;
+			views[cur_index].tracking = nullptr;
 		} else {
 			mapview.set_viewpoint
 				(pos - Point(mapview.get_w() / 2, mapview.get_h() / 2), false);
@@ -280,7 +280,7 @@ void WatchWindow::stop_tracking_by_drag(int32_t, int32_t) {
 	//Disable switching while dragging
 	if (mapview.is_dragging()) {
 		last_visit = game().get_gametime();
-		views[cur_index].tracking = 0;
+		views[cur_index].tracking = nullptr;
 	}
 }
 
@@ -294,7 +294,7 @@ void WatchWindow::do_follow()
 {
 	Widelands::Game & g = game();
 	if (views[cur_index].tracking.get(g)) {
-		views[cur_index].tracking = 0;
+		views[cur_index].tracking = nullptr;
 	} else {
 		//  Find the nearest bob. Other object types can not move and are
 		//  therefore not of interest.
@@ -320,7 +320,7 @@ void WatchWindow::do_follow()
 				break;
 		//  Find the bob closest to us
 		int32_t closest_dist = -1;
-		Widelands::Bob * closest = 0;
+		Widelands::Bob * closest = nullptr;
 		for (uint32_t i = 0; i < bobs.size(); ++i) {
 			Widelands::Bob * const bob = bobs[i];
 			Point p;

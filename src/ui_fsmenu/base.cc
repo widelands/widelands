@@ -52,7 +52,7 @@ struct Fullscreen_Menu_Base::Data {
  * Args: bgpic  name of the background picture
  */
 Fullscreen_Menu_Base::Fullscreen_Menu_Base(char const * const bgpic)
-	: UI::Panel(0, 0, 0, gr_x(), gr_y()),
+	: UI::Panel(nullptr, 0, 0, gr_x(), gr_y()),
 	d(new Data)
 {
 	// Load background graphics

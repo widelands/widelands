@@ -19,10 +19,13 @@
 
 #include "scripting/lua_globals.h"
 
+<<<<<<< TREE
 #include <boost/format.hpp>
 #include <libintl.h>
 #include <lua.hpp>
 
+=======
+>>>>>>> MERGE-SOURCE
 #include "build_info.h"
 #include "i18n.h"
 #include "logic/game.h"
@@ -237,18 +240,18 @@ static int L_get_build_id(lua_State * L) {
 	return 1;
 }
 
-const static struct luaL_reg globals [] = {
+const static struct luaL_Reg globals [] = {
 	{"set_textdomain", &L_set_textdomain},
 	{"use", &L_use},
 	{"get_build_id", &L_get_build_id},
 	{"_", &L__},
 	{"ngettext", &L_ngettext},
-	{0, 0}
+	{nullptr, nullptr}
 };
 
 void luaopen_globals(lua_State * L) {
-	lua_pushvalue(L, LUA_GLOBALSINDEX);
-	luaL_register(L, 0, globals);
+	lua_rawgeti(L, LUA_REGISTRYINDEX, LUA_RIDX_GLOBALS);
+	luaL_setfuncs(L, globals, 0);
 	lua_pop(L, 1);
 
 	// Also add in string.bformat to use boost::format instead, so that we get

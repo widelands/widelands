@@ -56,7 +56,7 @@
 namespace Widelands {
 
 Map_Saver::Map_Saver(FileSystem & fs, Editor_Game_Base & egbase)
-	: m_egbase(egbase), m_fs(fs), m_mos(0)
+	: m_egbase(egbase), m_fs(fs), m_mos(nullptr)
 {}
 
 

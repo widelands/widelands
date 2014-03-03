@@ -226,7 +226,7 @@ bool Fullscreen_Menu_MapSelect::is_scenario()
 MapData const * Fullscreen_Menu_MapSelect::get_map() const
 {
 	if (not m_table.has_selection())
-		return 0;
+		return nullptr;
 	return &m_maps_data[m_table.get_selected()];
 }
 
@@ -259,7 +259,7 @@ void Fullscreen_Menu_MapSelect::map_selected(uint32_t)
 		std::string world(map.world);
 		if (map.height) { // if height == 0 : dedicated server map info without local map
 			std::string worldpath("worlds/" + map.world);
-			Profile prof((worldpath + "/conf").c_str(), 0, "world_" + map.world);
+			Profile prof((worldpath + "/conf").c_str(), nullptr, "world_" + map.world);
 			Section & global = prof.get_safe_section("world");
 			world = global.get_safe_string("name");
 		}

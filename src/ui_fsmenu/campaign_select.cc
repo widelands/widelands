@@ -149,7 +149,7 @@ void Fullscreen_Menu_CampaignSelect::campaign_selected(uint32_t const i)
 		char cdif_descr[sizeof("campdiffdescr4294967296")];
 		char cdescription[sizeof("campdesc4294967296")];
 
-		Profile prof("campaigns/cconfig", 0, "maps");
+		Profile prof("campaigns/cconfig", nullptr, "maps");
 		Section & s = prof.get_safe_section("global");
 
 		// add I to basic section name
@@ -190,7 +190,7 @@ void Fullscreen_Menu_CampaignSelect::double_clicked(uint32_t)
 void Fullscreen_Menu_CampaignSelect::fill_list()
 {
 	// Read in the campaign config
-	Profile prof("campaigns/cconfig", 0, "maps");
+	Profile prof("campaigns/cconfig", nullptr, "maps");
 	Section & s = prof.get_safe_section("global");
 
 	// Read in campvis-file
@@ -378,7 +378,7 @@ void Fullscreen_Menu_CampaignMapSelect::double_clicked(uint32_t)
 void Fullscreen_Menu_CampaignMapSelect::fill_list()
 {
 	// read in the campaign config
-	Profile prof("campaigns/cconfig", 0, "maps");
+	Profile prof("campaigns/cconfig", nullptr, "maps");
 	Section & global_s = prof.get_safe_section("global");
 
 	// Read in campvis-file

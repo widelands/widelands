@@ -44,12 +44,12 @@ public:
 	}
 
 	// Implements Image.
-	virtual uint16_t width() const {return surf_->width();}
-	virtual uint16_t height() const {return surf_->height();}
+	virtual uint16_t width() const override {return surf_->width();}
+	virtual uint16_t height() const override {return surf_->height();}
 	// Note: hash will mostly be dummy values for this implementation. It should
 	// not wind up in ImageCache, otherwise the ownership question is not clear.
-	virtual const string& hash() const {return hash_;}
-	virtual Surface* surface() const {return surf_.get();}
+	virtual const string& hash() const override {return hash_;}
+	virtual Surface* surface() const override {return surf_.get();}
 
 private:
 	const string hash_;

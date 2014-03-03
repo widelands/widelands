@@ -97,7 +97,7 @@ struct CheckStep;
 Some very simple default predicates (more predicates below Map).
 */
 struct FindBobAlwaysTrue : public FindBob {
-	virtual bool accept(Bob *) const {return true;}
+	virtual bool accept(Bob *) const override {return true;}
 	virtual ~FindBobAlwaysTrue() {}  // make gcc shut up
 };
 
@@ -273,7 +273,7 @@ public:
 
 	uint32_t calc_distance(Coords, Coords) const;
 
-	int32_t calc_cost_estimate(Coords, Coords) const;
+	int32_t calc_cost_estimate(Coords, Coords) const override;
 	int32_t calc_cost_lowerbound(Coords, Coords) const;
 	int32_t calc_cost(int32_t slope) const;
 	int32_t calc_cost(Coords, int32_t dir) const;
@@ -428,7 +428,7 @@ private:
 	NodeCaps _calc_nodecaps_pass2(FCoords, bool consider_mobs = true, NodeCaps initcaps = CAPS_NONE);
 	void check_neighbour_heights(FCoords, uint32_t & radius);
 	int calc_buildsize
-		(const Widelands::FCoords& f, bool avoidnature, bool * ismine = 0,
+		(const Widelands::FCoords& f, bool avoidnature, bool * ismine = nullptr,
 		 bool consider_mobs = true, NodeCaps initcaps = CAPS_NONE);
 	bool is_cycle_connected
 		(const FCoords & start, uint32_t length, const WalkingDir * dirs);

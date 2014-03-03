@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: Widelands unofficial-git-6aa148a(svn4769+changes)\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2013-09-15 17:41+0000\n"
-"PO-Revision-Date: 2012-11-17 05:29+0000\n"
-"Last-Translator: Ivan Camilo Quintero Santacruz <Unknown>\n"
+"PO-Revision-Date: 2013-11-16 04:13+0000\n"
+"Last-Translator: Joseph Molina <joey_011092@hotmail.com>\n"
 "Language-Team: Spanish/Spain <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-09-16 04:34+0000\n"
-"X-Generator: Launchpad (build 16761)\n"
+"X-Launchpad-Export-Date: 2013-11-17 05:15+0000\n"
+"X-Generator: Launchpad (build 16831)\n"
 "X-Poedit-Country: SPAIN\n"
 "X-Poedit-Language: Spanish\n"
 "X-Poedit-SourceCharset: utf-8\n"
@@ -113,6 +113,8 @@ msgstr ""
 #: ../../maps/Ice wars.wmf/elemental:11
 msgid "After autumn is winter. Some things are frozen, but not the war."
 msgstr ""
+"Después del otoño llega el verano. Algunas cosas están congeladas, pero no "
+"la guerra."
 
 #: ../../maps/Kings and Queens.wmf/elemental:11
 msgid ""
@@ -210,6 +212,11 @@ msgid ""
 "along the river. Hint II: Snowmen mark additional water sources. Hint III: "
 "Each mountain contains only one resource."
 msgstr ""
+"Cada tribu está rodeada por cuatro poderosas montañas. ¿Quién será el "
+"primero en conquistarlas y reclamar los recursos para su tribu? Pista 1: El "
+"agua puede ser encontrada a lo largo del río. Pista 2: Los muñecos de nieve "
+"marcan fuentes de agua adicionales. Pista 3: Cada montaña contiene solo una "
+"fuente."
 
 #: ../../campaigns/cconfig:30
 msgid "Easy. Introduces the Barbarians"
@@ -229,7 +236,7 @@ msgstr "Imperio - Los meses de exilio"
 
 #: ../../maps/Fellowships.wmf/elemental:9
 msgid "Fellowships"
-msgstr ""
+msgstr "Embarcaciones amigas"
 
 #: ../../maps/Finlakes.wmf/elemental:9
 msgid "Finnish Lakes"
@@ -288,7 +295,7 @@ msgstr "Península Dorada"
 
 #: ../../maps/Ice wars.wmf/elemental:9
 msgid "Ice wars"
-msgstr ""
+msgstr "Guerras nevadas"
 
 #: ../../maps/Impact.wmf/elemental:7
 msgid "Impact"
@@ -395,6 +402,9 @@ msgid ""
 "the ways to encompass these large territories are long and meandering, so it "
 "is easy to err in the land of the foreign clans."
 msgstr ""
+"Es un placer colonizar este bello campo agrietado. Pero las formas de "
+"recorrer estas grandes tierras son inmensas y serpenteantes, así que es "
+"fácil extraviarse en la tierra de los clanes extranjeros."
 
 #: ../../maps/Kings and Queens.wmf/elemental:9
 msgid "Kings and Queens"

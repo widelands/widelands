@@ -21,42 +21,42 @@ player3 = egbase.players[3]
 -- =================================
 -- Tests for the core functionality
 -- =================================
-include "test_egbase"
+include "egbase"
 
-include "test_math_random"
-include "test_string_bformat"
-include "test_map"
-include "test_cplayer"
-include "test_cfield"
-include "test_cplr_access"
+include "math_random"
+include "string_bformat"
+include "map"
+include "cplayer"
+include "cfield"
+include "cplr_access"
 
-include "test_immovables"
+include "immovables"
 
 if not wl.editor then
-   include "test_game"
+   include "game"
 
-   include "test_gplayer"
-   include "test_gfield"
-   include "test_gplr_access"
+   include "gplayer"
+   include "gfield"
+   include "gplr_access"
 
-   include "test_objectives"
-   include "test_messages"
+   include "objectives"
+   include "messages"
 
    -- The functionality of UI scripting is identical but we only test it in game
    -- though as it is cumbersome to make those tests work also in the editor.
-   include "test_ui"
+   include "ui"
 else
-   include "test_editor"
-   include "test_eplr_access"
+   include "editor"
+   include "eplr_access"
 
-   include "test_efield"
+   include "efield"
 end
 
 -- ===========================
 -- Test for auxiliary scripts
 -- ===========================
-include "test_table"
-include "test_set"
+include "table"
+include "set"
 
 -- ============
 -- Test Runner

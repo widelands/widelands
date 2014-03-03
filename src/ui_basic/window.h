@@ -66,7 +66,7 @@ public:
 
 	void set_center_panel(Panel * panel);
 	void move_out_of_the_way();
-	virtual void move_inside_parent();
+	virtual void move_inside_parent() override;
 	void center_to_parent();
 	void warp_mouse_to_fastclick_panel();
 	void set_fastclick_panel(Panel * p) {m_fastclick_panel = p;}
@@ -74,25 +74,25 @@ public:
 	bool is_minimal() const {return _is_minimal;}
 	void restore ();
 	void minimize();
-	bool is_snap_target() const {return true;}
+	bool is_snap_target() const override {return true;}
 
 	// Drawing and event handlers
-	virtual void draw(RenderTarget &);
-	void draw_border(RenderTarget &);
+	virtual void draw(RenderTarget &) override;
+	void draw_border(RenderTarget &) override;
 
-	void think();
+	void think() override;
 
-	bool handle_mousepress  (Uint8 btn, int32_t mx, int32_t my);
-	bool handle_mouserelease(Uint8 btn, int32_t mx, int32_t my);
+	bool handle_mousepress  (Uint8 btn, int32_t mx, int32_t my) override;
+	bool handle_mouserelease(Uint8 btn, int32_t mx, int32_t my) override;
 	bool handle_mousemove
-		(Uint8 state, int32_t mx, int32_t my, int32_t xdiff, int32_t ydiff);
-	bool handle_alt_drag (int32_t mx, int32_t my);
-	bool handle_tooltip();
+		(Uint8 state, int32_t mx, int32_t my, int32_t xdiff, int32_t ydiff) override;
+	bool handle_alt_drag (int32_t mx, int32_t my) override;
+	bool handle_tooltip() override;
 
 protected:
-	virtual void die();
-	virtual void layout();
-	virtual void update_desired_size();
+	virtual void die() override;
+	virtual void layout() override;
+	virtual void update_desired_size() override;
 
 private:
 	bool _is_minimal;

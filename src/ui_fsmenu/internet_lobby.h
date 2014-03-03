@@ -39,7 +39,7 @@ struct Fullscreen_Menu_Internet_Lobby : public Fullscreen_Menu_Base {
 
 	Fullscreen_Menu_Internet_Lobby (const char *, const char *, bool);
 
-	virtual void think();
+	virtual void think() override;
 
 	/// \returns the maximum number of clients that may connect
 	int32_t get_maxclients() {
@@ -52,6 +52,7 @@ private:
 	uint32_t m_buth;
 	uint32_t m_lisw;
 	uint32_t m_fs;
+	uint32_t m_prev_clientlist_len;
 	std::string m_fn;
 	UI::Textarea title, m_clients, m_opengames;
 	UI::Textarea m_servername;

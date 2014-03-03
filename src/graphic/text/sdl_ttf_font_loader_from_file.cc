@@ -33,7 +33,7 @@ class SDLTTF_FontLoaderFromFile : public IFontLoader {
 public:
 	SDLTTF_FontLoaderFromFile(const string& dir);
 	virtual ~SDLTTF_FontLoaderFromFile();
-	virtual IFont * load(const string& name, int ptsize);
+	virtual IFont * load(const string& name, int ptsize) override;
 
 private:
 	const string dir_;

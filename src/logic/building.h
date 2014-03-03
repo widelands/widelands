@@ -28,10 +28,10 @@
 
 #include "ai/ai_hints.h"
 #include "io/filewrite.h"
+#include "logic/bill_of_materials.h"
 #include "logic/buildcost.h"
 #include "logic/immovable.h"
 #include "logic/soldier_counts.h"
-#include "logic/ware_types.h"
 #include "logic/wareworker.h"
 #include "logic/widelands.h"
 #include "workarea_info.h"
@@ -179,23 +179,23 @@ public:
 	Building(const Building_Descr &);
 	virtual ~Building();
 
-	void load_finish(Editor_Game_Base &);
+	void load_finish(Editor_Game_Base &) override;
 
 	const Tribe_Descr & tribe() const {return descr().tribe();}
 
-	virtual int32_t  get_type    () const;
-	char const * type_name() const {return "building";}
-	virtual int32_t  get_size    () const;
-	virtual bool get_passable() const;
+	virtual int32_t  get_type    () const override;
+	char const * type_name() const override {return "building";}
+	virtual int32_t  get_size    () const override;
+	virtual bool get_passable() const override;
 	virtual uint32_t get_ui_anim () const;
 
-	virtual Flag & base_flag();
+	virtual Flag & base_flag() override;
 	virtual uint32_t get_playercaps() const;
 
 	virtual Coords get_position() const {return m_position;}
-	virtual PositionList get_positions (const Editor_Game_Base &) const;
+	virtual PositionList get_positions (const Editor_Game_Base &) const override;
 
-	const std::string & name() const;
+	const std::string & name() const override;
 	const std::string & descname() const {return descr().descname();}
 
 	std::string info_string(const std::string & format);
@@ -205,7 +205,7 @@ public:
 	virtual WaresQueue & waresqueue(Ware_Index);
 
 	virtual bool burn_on_destroy();
-	virtual void destroy(Editor_Game_Base &);
+	virtual void destroy(Editor_Game_Base &) override;
 
 	void show_options(Interactive_GameBase &, bool avoid_fastclick = false, Point pos = Point(- 1, - 1));
 	void hide_options();
@@ -249,7 +249,7 @@ public:
 		return m_old_buildings;
 	}
 
-	virtual void log_general_info(const Editor_Game_Base &);
+	virtual void log_general_info(const Editor_Game_Base &) override;
 
 	//  Use on training sites only.
 	virtual void change_train_priority(uint32_t, int32_t) {};
@@ -260,8 +260,8 @@ public:
 		m_defeating_player = player_number;
 	}
 
-	void    add_worker(Worker &);
-	void remove_worker(Worker &);
+	void    add_worker(Worker &) override;
+	void remove_worker(Worker &) override;
 	mutable boost::signals2::signal<void ()> workers_changed;
 
 	void send_message
@@ -275,11 +275,11 @@ public:
 protected:
 	void start_animation(Editor_Game_Base &, uint32_t anim);
 
-	virtual void init(Editor_Game_Base &);
-	virtual void cleanup(Editor_Game_Base &);
-	virtual void act(Game &, uint32_t data);
+	virtual void init(Editor_Game_Base &) override;
+	virtual void cleanup(Editor_Game_Base &) override;
+	virtual void act(Game &, uint32_t data) override;
 
-	virtual void draw(const Editor_Game_Base &, RenderTarget &, const FCoords&, const Point&);
+	virtual void draw(const Editor_Game_Base &, RenderTarget &, const FCoords&, const Point&) override;
 	void draw_help(const Editor_Game_Base &, RenderTarget &, const FCoords&, const Point&);
 
 	virtual void create_options_window

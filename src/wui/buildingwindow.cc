@@ -63,10 +63,10 @@ Building_Window::Building_Window
 	m_registry = this;
 
 	m_capscache_player_number = 0;
-	m_capsbuttons = 0;
+	m_capsbuttons = nullptr;
 	m_capscache = 0;
 	m_caps_setup = false;
-	m_toggle_workarea = 0;
+	m_toggle_workarea = nullptr;
 
 	UI::Box * vbox = new UI::Box(this, 0, 0, UI::Box::Vertical);
 
@@ -100,7 +100,7 @@ Building_Window::~Building_Window()
 			(m_workarea_job_id);
 	if (m_helpwindow_registry.window)
 		delete m_helpwindow_registry.window;
-	m_registry = 0;
+	m_registry = nullptr;
 }
 
 namespace Widelands {struct Building_Descr;}

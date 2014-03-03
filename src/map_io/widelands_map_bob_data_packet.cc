@@ -66,7 +66,7 @@ void Map_Bob_Data_Packet::ReadBob
 					 descr.name().c_str(), coords.x, coords.y,
 					 map[coords].nodecaps() & (MOVECAPS_WALK | MOVECAPS_SWIM),
 					 descr.movecaps());
-			mol.register_object<Bob>(serial, descr.create(egbase, 0, coords));
+			mol.register_object<Bob>(serial, descr.create(egbase, nullptr, coords));
 		} else {
 			if (skip)
 				return; // We do no load player bobs when no scenario

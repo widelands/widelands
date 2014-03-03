@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2013-09-15 17:41+0000\n"
-"PO-Revision-Date: 2012-11-02 16:18+0000\n"
-"Last-Translator: SirVer <Unknown>\n"
+"PO-Revision-Date: 2013-12-02 20:00+0000\n"
+"Last-Translator: Hans Joachim Desserud <Unknown>\n"
 "Language-Team: Norwegian Bokmal <nb@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-09-16 04:50+0000\n"
-"X-Generator: Launchpad (build 16761)\n"
+"X-Launchpad-Export-Date: 2013-12-03 05:13+0000\n"
+"X-Generator: Launchpad (build 16856)\n"
 
 #: ../../maps/MP Scenarios/Smugglers.wmf/scripting/texts.lua:29
 msgid ""
@@ -23,6 +23,9 @@ msgid ""
 "smuggled here\n"
 "is worth %i points."
 msgstr ""
+"En ny smuglerrute fra %s til %s har blitt etablert. Hver vare som blir "
+"smuglet her\n"
+"er verdt %i poeng."
 
 #: ../../maps/MP Scenarios/Smugglers.wmf/scripting/texts.lua:17
 msgid "A receiving spot"
@@ -44,6 +47,8 @@ msgid ""
 "Game over! %s and %s have won the game! %s and %s only managed to\n"
 "acquire %i points."
 msgstr ""
+"Spillet er slutt! %s og %s har vunnet! %s og %s oppnådde\n"
+"bare %i poeng."
 
 #: ../../maps/MP Scenarios/Smugglers.wmf/scripting/texts.lua:20
 msgid ""
@@ -80,7 +85,7 @@ msgstr ""
 
 #: ../../maps/MP Scenarios/Smugglers.wmf/scripting/texts.lua:41
 msgid "The smuggling route worth %i from %s to %s has been broken!"
-msgstr ""
+msgstr "Smuglerruten verdt %i fra %s til %s har blitt brutt!"
 
 #: ../../maps/MP Scenarios/Smugglers.wmf/scripting/multiplayer_init.lua:119
 msgid "Wares smuggled"
@@ -91,6 +96,8 @@ msgid ""
 "You can see the number of wares traded at any time in the general\n"
 "statistics menu. Good luck!"
 msgstr ""
+"Du kan til en hver tid se antall varer som har blitt smuglet som en del\n"
+"av den generelle statistikken. Lykke til!"
 
 #: ../../maps/MP Scenarios/Smugglers.wmf/scripting/texts.lua:37
 msgid ""

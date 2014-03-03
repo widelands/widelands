@@ -64,13 +64,13 @@ void Map_Waredata_Data_Packet::Read
 				}
 				try {
 					WareInstance & ware = mol.get<WareInstance>(serial);
-					ware.m_economy = 0;
+					ware.m_economy = nullptr;
 					uint32_t     const location_serial = fr.Unsigned32();
 					uint32_t     const index           = fr.Unsigned32();
 					try {
 						Map_Object & location = mol.get<Map_Object>(location_serial);
-						const Tribe_Descr * tribe = 0;
-						Economy * economy = 0;
+						const Tribe_Descr * tribe = nullptr;
+						Economy * economy = nullptr;
 						std::string explanation;
 
 						if (upcast(PlayerImmovable, player_immovable, &location)) {
@@ -116,7 +116,7 @@ void Map_Waredata_Data_Packet::Read
 							}
 						else
 							ware.m_transfer_nextstep =
-								static_cast<PlayerImmovable *>(0);
+								static_cast<PlayerImmovable *>(nullptr);
 
 						//  Do some kind of init.
 						ware.set_location
@@ -137,7 +137,7 @@ void Map_Waredata_Data_Packet::Read
 				Serial const serial = fr.Unsigned32();
 				try {
 					WareInstance & ware = mol.get<WareInstance>(serial);
-					ware.m_economy = 0;
+					ware.m_economy = nullptr;
 					uint32_t     const location_serial = fr.Unsigned32();
 					char const * const type_name       = fr.CString   ();
 					try {
@@ -186,7 +186,7 @@ void Map_Waredata_Data_Packet::Read
 							}
 						else
 							ware.m_transfer_nextstep =
-								static_cast<PlayerImmovable *>(0);
+								static_cast<PlayerImmovable *>(nullptr);
 
 						//  Do some kind of init.
 						ware.set_location

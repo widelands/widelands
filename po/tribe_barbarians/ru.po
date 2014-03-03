@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2013-09-15 17:41+0000\n"
-"PO-Revision-Date: 2013-07-14 14:55+0000\n"
-"Last-Translator: Dmitry <pdn@hotbox.ru>\n"
+"PO-Revision-Date: 2013-11-30 11:03+0000\n"
+"Last-Translator: Александр <sa13690@yandex.ru>\n"
 "Language-Team: русский <ru@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-09-16 04:39+0000\n"
-"X-Generator: Launchpad (build 16761)\n"
+"X-Launchpad-Export-Date: 2013-12-01 05:15+0000\n"
+"X-Generator: Launchpad (build 16856)\n"
 "X-Poedit-Country: RUSSIAN FEDERATION\n"
 "X-Poedit-Language: Russian\n"
 
@@ -281,6 +281,8 @@ msgid ""
 "A %s exploits only %s of the resource. <br> From there on, it will only have "
 "a 5%% chance of finding %s."
 msgstr ""
+"%s использовал только %s ресурса.<br> С этого момента он будет получать "
+"только 5%% шанса найти %s."
 
 #: ../../tribes/barbarians/deep_coalmine/help.lua:17
 #: ../../tribes/barbarians/deep_goldmine/help.lua:16
@@ -289,10 +291,14 @@ msgid ""
 "A %s exploits only %s of the resource.<br>From there on, it will only have a "
 "5%% chance of finding %s."
 msgstr ""
+"%s использовал только %s ресурса.<br> С этого момента он будет получать "
+"только 5%% шанса найти %s."
 
 #: ../../tribes/barbarians/fernery/help.lua:47
 msgid "A Fernery can produce a sheaf of Thatch Reed in about %s on average."
 msgstr ""
+"Папоротниковые заросли могут производить сноп тростниковой соломы за %s в "
+"среднем."
 
 #: ../../tribes/barbarians/snack/conf:1
 msgid ""
@@ -379,6 +385,8 @@ msgid ""
 "An %s exploits only %s of the resource. <br> From there on, it will only "
 "have a 5%% chance of finding %s."
 msgstr ""
+"%s выработал только %s ресурса.<br> С этого момента он будет получать только "
+"5%% шанса найти %s."
 
 #: ../../tribes/barbarians/axefactory/help.lua:13
 #: ../../tribes/barbarians/warmill/help.lua:13
@@ -440,7 +448,7 @@ msgstr "Противень"
 
 #: ../../tribes/barbarians/gamekeepers_hut/help.lua:13
 msgid "Barbarian nursery rhyme"
-msgstr ""
+msgstr "Варварский детский стишок"
 
 #: ../../tribes/barbarians/conf:5
 msgid "Barbarians"
@@ -504,7 +512,7 @@ msgstr "Гостиница"
 #: ../../tribes/barbarians/farm/help.lua:31
 #: ../../tribes/barbarians/trainingscamp/help.lua:38
 msgid "Big plot"
-msgstr ""
+msgstr "Большая делянка"
 
 #: ../../tribes/barbarians/axefactory/help.lua:56
 #: ../../tribes/barbarians/axefactory/help.lua:60
@@ -1014,6 +1022,7 @@ msgstr "Отработка уклонения"
 msgid ""
 "Excerpt from \"Our Treasures Underground\",<br> a traditional Barbarian song."
 msgstr ""
+"Отрывок из \"Наши сокровища под землей\",<br> национальной Варварской песни."
 
 #: ../../tribes/barbarians/axefactory/help.lua:58
 #: ../../tribes/barbarians/bakery/help.lua:52
@@ -1347,11 +1356,11 @@ msgstr "Большая башня"
 
 #: ../../tribes/barbarians/trainingscamp/help.lua:61
 msgid "Hitpoints"
-msgstr ""
+msgstr "Здоровье"
 
 #: ../../tribes/barbarians/trainingscamp/help.lua:30
 msgid "Hitpoints Training:"
-msgstr ""
+msgstr "Тренировка здоровья:"
 
 #: ../../tribes/barbarians/kitchen_tools/conf:1
 msgid ""
@@ -1397,6 +1406,8 @@ msgid ""
 "If all needed wares are delivered in time, a %s can train one new soldier in "
 "%s and %s to the final level in %s on average."
 msgstr ""
+"Если все необходимые товары доставлены вовремя, %s может улучшить одного "
+"нового солдата в %s и %s до последнего уровня в среднем за %s."
 
 #: ../../tribes/barbarians/bakery/help.lua:55
 #: ../../tribes/barbarians/cattlefarm/help.lua:48
@@ -1482,6 +1493,8 @@ msgid ""
 "Inscription on the threshold of the now ruined Olde Forge at Harradsheim, "
 "the eldest known smithy."
 msgstr ""
+"Надпись на пороге ныне разрушенного Олде Форж в Харрадсхейме, старейшей "
+"известной кузницы."
 
 #: ../../tribes/barbarians/axefactory/help.lua:24
 #: ../../tribes/barbarians/conf:91
@@ -1681,7 +1694,7 @@ msgstr ""
 #: ../../tribes/barbarians/micro-brewery/help.lua:31
 #: ../../tribes/barbarians/warmill/help.lua:34
 msgid "Medium plot"
-msgstr ""
+msgstr "Средняя делянка"
 
 #: ../../tribes/barbarians/axefactory/help.lua:33
 #: ../../tribes/barbarians/conf:203
@@ -1706,7 +1719,7 @@ msgstr "Малая пивоварня"
 #: ../../tribes/barbarians/granitemine/help.lua:34
 #: ../../tribes/barbarians/oremine/help.lua:34
 msgid "Mine plot"
-msgstr ""
+msgstr "Участок с рудником"
 
 #: ../../tribes/barbarians/coalmine/help.lua:50
 #: ../../tribes/barbarians/coalmine/help.lua:53
@@ -2316,7 +2329,7 @@ msgstr "Малая башня"
 #: ../../tribes/barbarians/rangers_hut/help.lua:28
 #: ../../tribes/barbarians/well/help.lua:32
 msgid "Small plot"
-msgstr ""
+msgstr "Малая делянка"
 
 #: ../../tribes/barbarians/smelting_works/conf:30
 msgid "Smelt gold"

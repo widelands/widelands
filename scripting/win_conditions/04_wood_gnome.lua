@@ -156,6 +156,7 @@ return {
 	privmsg = won_game_over.title
 	privmsg = privmsg .. msg
 	points[#points][1]:send_message(won_game_over.body, privmsg)
-		wl.game.report_result(points[i][1], 1, make_extra_data(points[i][1], wc_name, wc_version, {score=points[#points][2]}))
+   wl.game.report_result(points[#points][1], 1,
+      make_extra_data(points[#points][1], wc_name, wc_version, {score=points[#points][2]}))
 end
 }

@@ -20,8 +20,8 @@ return {
 	--Dependencies
 		rt(h2(_"Dependencies")) ..
 		rt(h3(_"Incoming:")) ..
-		dependencies({"tribes/barbarians/well/menu.png","tribes/barbarians/water/menu.png","tribes/barbarians/micro-brewery/menu.png"},p(_"Water from the Well")) ..
-		dependencies({"tribes/barbarians/farm/menu.png","tribes/barbarians/wheat/menu.png","tribes/barbarians/micro-brewery/menu.png"},p(_"Wheat from the Farm")) ..
+		dependencies({"tribes/barbarians/well/menu.png","tribes/barbarians/water/menu.png","tribes/barbarians/micro-brewery/menu.png"},p(_"Water from a Well")) ..
+		dependencies({"tribes/barbarians/farm/menu.png","tribes/barbarians/wheat/menu.png","tribes/barbarians/micro-brewery/menu.png"},p(_"Wheat from a Farm")) ..
 		rt(h3(_"Outgoing:")) ..
 		dependencies({"tribes/barbarians/micro-brewery/menu.png","tribes/barbarians/beer/menu.png"},p(_"Beer")) ..
 		dependencies({"tribes/barbarians/beer/menu.png","tribes/barbarians/inn/menu.png"},p(_"Inn")) ..

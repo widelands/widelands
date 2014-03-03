@@ -80,10 +80,10 @@ Editor_Player_Menu::Editor_Player_Menu
 	m_posy = posy;
 
 	for (Widelands::Player_Number i = 0; i < MAX_PLAYERS; ++i) {
-		m_plr_names          [i] = 0;
-		m_plr_set_pos_buts   [i] = 0;
-		m_plr_set_tribes_buts[i] = 0;
-		m_plr_make_infrastructure_buts[i] = 0;
+		m_plr_names          [i] = nullptr;
+		m_plr_set_pos_buts   [i] = nullptr;
+		m_plr_set_tribes_buts[i] = nullptr;
+		m_plr_make_infrastructure_buts[i] = nullptr;
 	}
 	update();
 
@@ -126,9 +126,9 @@ void Editor_Player_Menu::update() {
 
 	//  Now remove all the unneeded stuff.
 	for (Widelands::Player_Number i = nr_players; i < MAX_PLAYERS; ++i) {
-		delete m_plr_names          [i]; m_plr_names          [i] = 0;
-		delete m_plr_set_pos_buts   [i]; m_plr_set_pos_buts   [i] = 0;
-		delete m_plr_set_tribes_buts[i]; m_plr_set_tribes_buts[i] = 0;
+		delete m_plr_names          [i]; m_plr_names          [i] = nullptr;
+		delete m_plr_set_pos_buts   [i]; m_plr_set_pos_buts   [i] = nullptr;
+		delete m_plr_set_tribes_buts[i]; m_plr_set_tribes_buts[i] = nullptr;
 	}
 	int32_t       posy    = m_posy;
 	int32_t const spacing =  5;

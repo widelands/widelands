@@ -20,7 +20,7 @@
 #ifndef ENCYCLOPEDIA_WINDOW_H
 #define ENCYCLOPEDIA_WINDOW_H
 
-#include "logic/item_ware_descr.h"
+#include "logic/ware_descr.h"
 #include "ui_basic/listselect.h"
 #include "ui_basic/multilinetextarea.h"
 #include "ui_basic/table.h"
@@ -28,7 +28,7 @@
 #include "ui_basic/window.h"
 
 namespace Widelands {
-struct Item_Ware_Descr;
+struct WareDescr;
 struct Tribe_Descr;
 };
 
@@ -38,13 +38,13 @@ struct EncyclopediaWindow : public UI::UniqueWindow {
 	EncyclopediaWindow(Interactive_Player &, UI::UniqueWindow::Registry &);
 private:
 	struct Ware {
-		Ware(Widelands::Ware_Index i, const Widelands::Item_Ware_Descr * descr)
+		Ware(Widelands::Ware_Index i, const Widelands::WareDescr * descr)
 			:
 			m_i(i),
 			m_descr(descr)
 			{}
 		Widelands::Ware_Index m_i;
-		const Widelands::Item_Ware_Descr * m_descr;
+		const Widelands::WareDescr * m_descr;
 
 		bool operator<(const Ware o) const {
 			return m_descr->descname() < o.m_descr->descname();
@@ -56,7 +56,7 @@ private:
 	UI::Listselect<Widelands::Building_Index> prodSites;
 	UI::Table     <uintptr_t>                 condTable;
 	UI::Multiline_Textarea    descrTxt;
-	Widelands::Item_Ware_Descr const * selectedWare;
+	Widelands::WareDescr const * selectedWare;
 	void fillWares();
 	void wareSelected(uint32_t);
 	void prodSiteSelected(uint32_t);

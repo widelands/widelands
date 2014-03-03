@@ -185,9 +185,9 @@ const MapGenBobKind * MapGenBobArea::getBobKind
 		case MapGenAreaInfo::ttWastelandOuter:
 			return m_WastelandOuterBobKind;
 		default:
-			return 0;
+			return nullptr;
 	};
-	return 0;
+	return nullptr;
 }
 
 void MapGenBobArea::parseSection (Section & s, MapGenInfo & mapGenInfo)
@@ -203,19 +203,19 @@ void MapGenBobArea::parseSection (Section & s, MapGenInfo & mapGenInfo)
 	std::string str;
 
 	str = s.get_safe_string("land_coast_bobs");
-	m_LandCoastBobKind      = str.size() ? mapGenInfo.getBobKind(str) : 0;
+	m_LandCoastBobKind      = str.size() ? mapGenInfo.getBobKind(str) : nullptr;
 
 	str = s.get_safe_string("land_inner_bobs");
-	m_LandInnerBobKind      = str.size() ? mapGenInfo.getBobKind(str) : 0;
+	m_LandInnerBobKind      = str.size() ? mapGenInfo.getBobKind(str) : nullptr;
 
 	str = s.get_safe_string("land_upper_bobs");
-	m_LandUpperBobKind      = str.size() ? mapGenInfo.getBobKind(str) : 0;
+	m_LandUpperBobKind      = str.size() ? mapGenInfo.getBobKind(str) : nullptr;
 
 	str = s.get_safe_string("wasteland_inner_bobs");
-	m_WastelandInnerBobKind = str.size() ? mapGenInfo.getBobKind(str) : 0;
+	m_WastelandInnerBobKind = str.size() ? mapGenInfo.getBobKind(str) : nullptr;
 
 	str = s.get_safe_string("wasteland_outer_bobs");
-	m_WastelandOuterBobKind = str.size() ? mapGenInfo.getBobKind(str) : 0;
+	m_WastelandOuterBobKind = str.size() ? mapGenInfo.getBobKind(str) : nullptr;
 }
 
 int MapGenAreaInfo::split_string
@@ -255,7 +255,6 @@ void MapGenAreaInfo::readTerrains
 void MapGenAreaInfo::parseSection
 	(World * const world, Section & s, MapGenAreaType const areaType)
 {
-	std::string res_str = s.get_string("resources", "");
 	m_weight = s.get_positive("weight", 1);
 	m_world = world;
 	switch (areaType) {
@@ -600,7 +599,7 @@ void World::parse_resources()
 
 	try {
 		Profile prof(fname);
-		while (Section * const section = prof.get_next_section(0)) {
+		while (Section * const section = prof.get_next_section(nullptr)) {
 			Resource_Descr & descr = *new Resource_Descr();
 			descr.parse(*section, m_basedir);
 			m_resources.add(&descr);
@@ -620,7 +619,7 @@ void World::parse_terrains()
 		Profile prof(fname);
 
 		for (Terrain_Index i = 0;; ++i) {
-			Section * const s = prof.get_next_section(0);
+			Section * const s = prof.get_next_section(nullptr);
 			if (not s)
 				break;
 			if (i == 0x10)
@@ -643,13 +642,13 @@ void World::parse_bobs(std::string & path, Profile & root_conf) {
 	PARSE_MAP_OBJECT_TYPES_BEGIN("immovable")
 		immovables.add
 			(new Immovable_Descr
-			 	(_name, _descname, path, prof, global_s, *this, 0));
+			 	(_name, _descname, path, prof, global_s, *this, nullptr));
 	PARSE_MAP_OBJECT_TYPES_END;
 
 	PARSE_MAP_OBJECT_TYPES_BEGIN("critter bob")
 		bobs      .add
 			(new Critter_Bob_Descr
-			 	(_name, _descname, path, prof, global_s, 0));
+			 	(_name, _descname, path, prof, global_s, nullptr));
 	PARSE_MAP_OBJECT_TYPES_END;
 }
 
@@ -827,7 +826,7 @@ m_name              (s->get_name()),
 m_descname          (s->get_string("name", s->get_name())),
 m_frametime         (FRAME_LENGTH),
 m_dither_layer   (0),
-m_valid_resources   (0),
+m_valid_resources   (nullptr),
 m_nr_valid_resources(0),
 m_default_resources (-1),
 m_default_amount    (0),
@@ -835,7 +834,7 @@ m_texture           (0)
 {
 
 	// Parse the default resource
-	if (const char * str = s->get_string("def_resources", 0)) {
+	if (const char * str = s->get_string("def_resources", nullptr)) {
 		std::istringstream str1(str);
 		std::string resource;
 		int32_t amount;
@@ -907,7 +906,7 @@ m_texture           (0)
 	// Determine template of the texture animation pictures
 	char fnametmpl[256];
 
-	if (const char * const texture = s->get_string("texture", 0))
+	if (const char * const texture = s->get_string("texture", nullptr))
 		snprintf(fnametmpl, sizeof(fnametmpl), "%s/%s", directory, texture);
 	else
 		snprintf
@@ -921,7 +920,7 @@ Terrain_Descr::~Terrain_Descr()
 {
 	delete[] m_valid_resources;
 	m_nr_valid_resources = 0;
-	m_valid_resources    = 0;
+	m_valid_resources    = nullptr;
 }
 
 

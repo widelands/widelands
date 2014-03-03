@@ -101,7 +101,7 @@ and a detailed description of the tribe economies in our online encyclopedia.]]
 [[- What you expected to happen when performing the steps and what actually happened.]]
    ) .. p(_
 [[- Which version of Widelands you are running (i.e. either the build number or
-the revision number if you are running a development version or a nightly build.)]]
+the revision number if you are running a development version or a daily build.)]]
    ) .. p(_
 [[- Please also include which operating system you are running Widelands on as
 some bugs can be platform specific.]]

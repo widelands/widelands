@@ -67,7 +67,7 @@ private:
 
 	const GLSurfaceTexture * get_dither_edge_texture(const Widelands::World & world);
 
-	void draw();
+	void draw() override;
 	void prepare_terrain_base();
 	void collect_terrain_base(bool onlyscan);
 	void count_terrain_base(Widelands::Terrain_Index ter);

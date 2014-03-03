@@ -107,7 +107,7 @@ public:
 
 	typedef boost::function<bool (Warehouse &)> WarehouseAcceptFn;
 	Warehouse * find_closest_warehouse
-		(Flag & start, WareWorker type = wwWORKER, Route * route = 0,
+		(Flag & start, WareWorker type = wwWORKER, Route * route = nullptr,
 		 uint32_t cost_cutoff = 0,
 		 const WarehouseAcceptFn & acceptfn = WarehouseAcceptFn());
 

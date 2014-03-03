@@ -3,7 +3,6 @@ function include(s)
 end
 
 use("aux", "lunit")
-lunit.import "assertions"
 
 -- ============
 -- Basic tests

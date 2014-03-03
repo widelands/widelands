@@ -84,7 +84,7 @@ ProductionSite_Descr::ProductionSite_Descr
 		while (Section::Value const * const val = s->get_next_val())
 			try {
 				if (Ware_Index const idx = tribe().ware_index(val->get_name())) {
-					container_iterate_const(Ware_Types, inputs(), i)
+					container_iterate_const(BillOfMaterials, inputs(), i)
 						if (i.current->first == idx)
 							throw wexception("duplicated");
 					int32_t const value = val->get_int();
@@ -104,7 +104,7 @@ ProductionSite_Descr::ProductionSite_Descr
 		while (Section::Value const * const v = working_positions_s->get_next_val())
 			try {
 				if (Ware_Index const woi = tribe().worker_index(v->get_name())) {
-					container_iterate_const(Ware_Types, working_positions(), i)
+					container_iterate_const(BillOfMaterials, working_positions(), i)
 						if (i.current->first == woi)
 							throw wexception("duplicated");
 					m_working_positions.push_back(std::pair<Ware_Index, uint32_t>(woi, v->get_positive()));
@@ -365,8 +365,7 @@ void ProductionSite::init(Editor_Game_Base & egbase)
 {
 	Building::init(egbase);
 
-
-	const Ware_Types & inputs = descr().inputs();
+	const BillOfMaterials & inputs = descr().inputs();
 	m_input_queues.resize(inputs.size());
 	for (ware_range i(inputs); i; ++i)
 		m_input_queues[i.i] =
@@ -377,7 +376,7 @@ void ProductionSite::init(Editor_Game_Base & egbase)
 
 	//  Request missing workers.
 	Working_Position * wp = m_working_positions;
-	container_iterate_const(Ware_Types, descr().working_positions(), i) {
+	container_iterate_const(BillOfMaterials, descr().working_positions(), i) {
 		Ware_Index const worker_index = i.current->first;
 		for (uint32_t j = i.current->second; j; --j, ++wp)
 			if (Worker * const worker = wp->worker)
@@ -419,15 +418,15 @@ void ProductionSite::cleanup(Editor_Game_Base & egbase)
 	for (uint32_t i = descr().nr_working_positions(); i;) {
 		--i;
 		delete m_working_positions[i].worker_request;
-		m_working_positions[i].worker_request = 0;
+		m_working_positions[i].worker_request = nullptr;
 		Worker * const w = m_working_positions[i].worker;
 
 		//  Ensure we do not re-request the worker when remove_worker is called.
-		m_working_positions[i].worker = 0;
+		m_working_positions[i].worker = nullptr;
 
 		// Actually remove the worker
 		if (egbase.objects().object_still_available(w))
-			w->set_location(0);
+			w->set_location(nullptr);
 	}
 
 	// Cleanup the wares queues
@@ -470,7 +469,7 @@ int ProductionSite::warp_worker
 			worker.start_task_idle(*game, 0, -1);
 		current->worker = &worker;
 		delete current->worker_request;
-		current->worker_request = 0;
+		current->worker_request = nullptr;
 		assigned = true;
 		break;
 	}
@@ -490,7 +489,7 @@ void ProductionSite::remove_worker(Worker & w)
 	molog("%s leaving\n", w.descname().c_str());
 	Working_Position * wp = m_working_positions;
 
-	container_iterate_const(Ware_Types, descr().working_positions(), i) {
+	container_iterate_const(BillOfMaterials, descr().working_positions(), i) {
 		Ware_Index const worker_index = i.current->first;
 		for (uint32_t j = i.current->second; j; --j, ++wp) {
 			Worker * const worker = wp->worker;
@@ -498,7 +497,7 @@ void ProductionSite::remove_worker(Worker & w)
 				// do not request the type of worker that is currently assigned - maybe a trained worker was
 				// evicted to make place for a level 0 worker.
 				// Therefore we again request the worker from the Working_Position of descr()
-				*wp = Working_Position(&request_worker(worker_index), 0);
+				*wp = Working_Position(&request_worker(worker_index), nullptr);
 				Building::remove_worker(w);
 				return;
 			}
@@ -551,7 +550,7 @@ void ProductionSite::request_worker_callback
 			if (wp->worker_request->get_index() == idx) {
 				// Place worker
 				delete &rq;
-				*wp = Working_Position(0, w);
+				*wp = Working_Position(nullptr, w);
 				worker_placed = true;
 			} else {
 				// Set new request for this slot
@@ -572,7 +571,7 @@ void ProductionSite::request_worker_callback
 				if (!wp->worker && !worker_placed)
 					if (wp->worker_request->get_index() == idx) {
 						delete wp->worker_request;
-						*wp = Working_Position(0, w);
+						*wp = Working_Position(nullptr, w);
 						worker_placed = true;
 						break;
 					}
@@ -672,7 +671,7 @@ void ProductionSite::program_act(Game & game)
 
 
 /**
- * Remember that we need to fetch an item from the flag.
+ * Remember that we need to fetch an ware from the flag.
  */
 bool ProductionSite::fetch_from_flag(Game & game)
 {
@@ -737,8 +736,8 @@ bool ProductionSite::get_building_work
 	}
 
 	// Default actions first
-	if (WareInstance * const item = worker.fetch_carried_item(game)) {
-		worker.start_task_dropoff(game, *item);
+	if (WareInstance * const ware = worker.fetch_carried_ware(game)) {
+		worker.start_task_dropoff(game, *ware);
 		return true;
 	}
 
@@ -748,26 +747,26 @@ bool ProductionSite::get_building_work
 		return true;
 	}
 
-	if (!m_produced_items.empty()) {
-		//  There is still a produced item waiting for delivery. Carry it out
+	if (!m_produced_wares.empty()) {
+		//  There is still a produced ware waiting for delivery. Carry it out
 		//  before continuing with the program.
 		std::pair<Ware_Index, uint8_t> & ware_type_with_count =
-			*m_produced_items.rbegin();
+			*m_produced_wares.rbegin();
 		{
 			Ware_Index const ware_index = ware_type_with_count.first;
-			const Item_Ware_Descr & item_ware_descr =
+			const WareDescr & ware_ware_descr =
 				*tribe().get_ware_descr(ware_type_with_count.first);
 			{
-				WareInstance & item =
-					*new WareInstance(ware_index, &item_ware_descr);
-				item.init(game);
-				worker.start_task_dropoff(game, item);
+				WareInstance & ware =
+					*new WareInstance(ware_index, &ware_ware_descr);
+				ware.init(game);
+				worker.start_task_dropoff(game, ware);
 			}
 			owner().ware_produced(ware_index); //  for statistics
 		}
 		assert(ware_type_with_count.second);
 		if (--ware_type_with_count.second == 0)
-			m_produced_items.pop_back();
+			m_produced_wares.pop_back();
 		return true;
 	}
 
@@ -801,10 +800,10 @@ bool ProductionSite::get_building_work
 		WaresQueue * queue = *iqueue;
 		if (queue->get_filled() > queue->get_max_fill()) {
 			queue->set_filled(queue->get_filled() - 1);
-			const Item_Ware_Descr & wd = *tribe().get_ware_descr(queue->get_ware());
-			WareInstance & item = *new WareInstance(queue->get_ware(), &wd);
-			item.init(game);
-			worker.start_task_dropoff(game, item);
+			const WareDescr & wd = *tribe().get_ware_descr(queue->get_ware());
+			WareInstance & ware = *new WareInstance(queue->get_ware(), &wd);
+			ware.init(game);
+			worker.start_task_dropoff(game, ware);
 			return true;
 		}
 	}

@@ -20,10 +20,10 @@
 #ifndef S__WARE_INSTANCE_H
 #define S__WARE_INSTANCE_H
 
-#include "logic/instances.h"
-#include "logic/item_ware_descr.h"
-#include "logic/widelands.h"
 #include "economy/transfer.h"
+#include "logic/instances.h"
+#include "logic/ware_descr.h"
+#include "logic/widelands.h"
 
 namespace Widelands {
 
@@ -55,59 +55,67 @@ struct Transfer;
 class WareInstance : public Map_Object {
 	friend struct Map_Waredata_Data_Packet;
 
-	MO_DESCR(Item_Ware_Descr);
+	MO_DESCR(WareDescr);
 
 public:
-	WareInstance(Ware_Index, const Item_Ware_Descr * const);
+	WareInstance(Ware_Index, const WareDescr* const);
 	~WareInstance();
 
-	virtual int32_t get_type() const;
-	char const * type_name() const {return "ware";}
+	virtual int32_t get_type() const override;
+	char const* type_name() const override {
+		return "ware";
+	}
 
-	Map_Object * get_location(Editor_Game_Base & egbase) {
+	Map_Object* get_location(Editor_Game_Base& egbase) {
 		return m_location.get(egbase);
 	}
-	Economy * get_economy() const {return m_economy;}
-	Ware_Index descr_index() const {return m_descr_index;}
+	Economy* get_economy() const {
+		return m_economy;
+	}
+	Ware_Index descr_index() const {
+		return m_descr_index;
+	}
 
-	void init(Editor_Game_Base &);
-	void cleanup(Editor_Game_Base &);
-	void act(Game &, uint32_t data);
-	void update(Game &);
+	void init(Editor_Game_Base&) override;
+	void cleanup(Editor_Game_Base&) override;
+	void act(Game&, uint32_t data) override;
+	void update(Game&);
 
-	void set_location(Editor_Game_Base &, Map_Object * loc);
-	void set_economy(Economy *);
+	void set_location(Editor_Game_Base&, Map_Object* loc);
+	void set_economy(Economy*);
 
-	void enter_building(Game &, Building & building);
+	void enter_building(Game&, Building& building);
 
 	bool is_moving() const;
 	void cancel_moving();
 
-	PlayerImmovable * get_next_move_step(Game &);
+	PlayerImmovable* get_next_move_step(Game&);
 
-	void set_transfer(Game &, Transfer &);
-	void cancel_transfer(Game &);
-	Transfer * get_transfer() const {return m_transfer;}
+	void set_transfer(Game&, Transfer&);
+	void cancel_transfer(Game&);
+	Transfer* get_transfer() const {
+		return m_transfer;
+	}
 
-	virtual void log_general_info(const Editor_Game_Base & egbase);
+	virtual void log_general_info(const Editor_Game_Base& egbase) override;
 
 private:
-	Object_Ptr        m_location;
-	Economy         * m_economy;
-	Ware_Index       m_descr_index;
+	Object_Ptr m_location;
+	Economy* m_economy;
+	Ware_Index m_descr_index;
 
-	IdleWareSupply  * m_supply;
-	Transfer       * m_transfer;
-	Object_Ptr        m_transfer_nextstep; ///< cached PlayerImmovable, can be 0
+	IdleWareSupply* m_supply;
+	Transfer* m_transfer;
+	Object_Ptr m_transfer_nextstep;  ///< cached PlayerImmovable, can be 0
 
 	// loading and saving stuff
 protected:
 	struct Loader : Map_Object::Loader {
 		Loader();
 
-		void load(FileRead &);
-		virtual void load_pointers();
-		virtual void load_finish();
+		void load(FileRead&);
+		virtual void load_pointers() override;
+		virtual void load_finish() override;
 
 	private:
 		uint32_t m_location;
@@ -116,14 +124,13 @@ protected:
 	};
 
 public:
-	virtual bool has_new_save_support() {return true;}
+	virtual bool has_new_save_support() override {
+		return true;
+	}
 
-	virtual void save(Editor_Game_Base &, Map_Map_Object_Saver &, FileWrite &);
-	static Map_Object::Loader * load
-		(Editor_Game_Base &, Map_Map_Object_Loader &, FileRead &);
+	virtual void save(Editor_Game_Base&, Map_Map_Object_Saver&, FileWrite&) override;
+	static Map_Object::Loader* load(Editor_Game_Base&, Map_Map_Object_Loader&, FileRead&);
 };
-
 }
-
 
 #endif

@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2013-09-15 17:41+0000\n"
-"PO-Revision-Date: 2012-11-02 16:24+0000\n"
-"Last-Translator: Szűcs Kornél Géza <sz.kornelgeza@gmail.com>\n"
+"PO-Revision-Date: 2014-01-08 17:53+0000\n"
+"Last-Translator: cn4ij <Unknown>\n"
 "Language-Team: Hungarian <hu@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-09-16 04:50+0000\n"
-"X-Generator: Launchpad (build 16761)\n"
+"X-Launchpad-Export-Date: 2014-01-09 04:39+0000\n"
+"X-Generator: Launchpad (build 16884)\n"
 
 #: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/multiplayer_init.lua:101
 msgid "%i %s<br>\n"
@@ -23,7 +23,7 @@ msgstr "%i %s<br>\n"
 
 #: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:51
 msgid "%s has been King of the Hill since %s!"
-msgstr "%s a Domb királya %s óta!"
+msgstr "%s már %se a Domb királya!"
 
 #: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:52
 msgid "%s has won the game. Congratulations!"
@@ -34,28 +34,28 @@ msgid ""
 "%s is now King of the Hill and will win the game in 20 minutes, if nobody "
 "takes over the hill until than."
 msgstr ""
-"%s a Domb királya és 20 percen belül megnyeri a játékot, ha addig valaki el "
-"nem foglalja a dombot."
+"%s immár a Domb királya, és 20 perc múlva megnyeri a játékot, hacsak addig "
+"valaki el nem foglalja a dombot."
 
 #: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:49
 msgid "%s lost control of the hill."
-msgstr "%s elvesztette az irányítást a domb felett."
+msgstr "%s elvesztette az uralmat a domb felett."
 
 #: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:38
 msgid "%s was the first to reach the Island number %i."
-msgstr "%s volt az első aki elérte a(z) %i szigetet."
+msgstr "%s érte el elsőként a %i. szigetet."
 
 #: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:41
 msgid "%s was the fourth to reach the Island number %i."
-msgstr "%s volt a negyedik aki elérte a(z) %i szigetet."
+msgstr "%s érte el negyedikként a %i. szigetet."
 
 #: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:39
 msgid "%s was the second to reach the Island number %i."
-msgstr "%s volt a második aki elérte a(z) %i szigetet."
+msgstr "%s érte el másodikként a %i. szigetet."
 
 #: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:40
 msgid "%s was the third to reach the Island number %i."
-msgstr "%s volt a harmadik aki elérte a(z) %i szigetet."
+msgstr "%s érte el harmadikként a %i. szigetet."
 
 #: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/first_island.lua:74
 msgid "10 minutes"
@@ -68,22 +68,22 @@ msgstr "15 perc"
 #: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:25
 #: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:30
 msgid "1st to finish"
-msgstr "1. a befejezéshez"
+msgstr "Az elsőként befejezőé"
 
 #: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:26
 #: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:31
 msgid "2nd to finish"
-msgstr "2. a befejezéshez"
+msgstr "A másodikként befejezőé"
 
 #: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:27
 #: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:32
 msgid "3rd to finish"
-msgstr "3. a befejezéshez"
+msgstr "A harmadikként befejezőé"
 
 #: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:28
 #: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:33
 msgid "4th to finish"
-msgstr "4. a befejezéshez"
+msgstr "A negyedikként befejezőé"
 
 #: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/first_island.lua:70
 msgid "5 minutes"
@@ -99,7 +99,7 @@ msgstr "Első sziget"
 
 #: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/multiplayer_init.lua:94
 msgid "Game Status"
-msgstr "Játék állapot"
+msgstr "A játék állása"
 
 #: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:13
 msgid ""
@@ -109,6 +109,9 @@ msgid ""
 "at\n"
 "the center of the third island for 20 minutes to win the game."
 msgstr ""
+"Ha befejezel egy várat a második sziget célhelyén, kapsz egy harmadik\n"
+"főhadiszállást a harmadik szigeten. A játék megnyeréséhez fel kell építened\n"
+"és 20 percig meg kell tartanod egy várat a harmadik sziget közepén."
 
 #: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:8
 msgid ""
@@ -119,6 +122,11 @@ msgid ""
 "your\n"
 "first headquarters."
 msgstr ""
+"A szigetugrás az atlantiszi kultúra egy hagyományos versenye. A játék\n"
+"szabályai egyszerűek: Egy szigeten kezdesz egy főhadiszállással. Ha\n"
+"befejezel egy várat az első sziget végén, akkor egy második szigeten\n"
+"kapsz egy második főhadiszállást, melybe minden áru átkerül az első\n"
+"főhadiszállásodból."
 
 #: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:6
 msgid "Rules"
@@ -134,19 +142,19 @@ msgid ""
 "only meadows and resources. The economies you leave behind will continue to\n"
 "work for you, but you only reap the benefits when you reach a new island."
 msgstr ""
-"A kulcs, hogy az első sziget csak követ és fát ajánl, a második\n"
-"csak legelőket és forrásokat. A gazdaságok, amiket hátrahagysz folytatják a "
-"\n"
-"munkát neked, de csak akkor tudod kihasználni az előnyöket, ha elérsz egy új "
+"A kulcs az, hogy az első sziget csak követ és fát nyújt, a második pedig\n"
+"csak legelőket és forrásokat. A gazdaságok, amiket hátrahagysz, folytatják "
+"a\n"
+"munkát, de termékeikhez csak akkor jutsz hozzá, amikor elérsz egy új "
 "szigetet."
 
 #: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:43
 msgid "The reward for this feat amounts to<br><br>%s"
-msgstr "A képességért járó jutalom összege<br><br>%s"
+msgstr "Jutalma:<br><br>%s"
 
 #: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:5
 msgid "Welcome to Island Hopping"
-msgstr "Üdvözlünk a Hopping-szigeten"
+msgstr "Üdvözlünk a szigetugráson!"
 
 #: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:16
 msgid ""
@@ -156,7 +164,8 @@ msgid ""
 "you\n"
 "get. See below for the details."
 msgstr ""
-"Amikor végzel egy szigettel, bónusz árukat kapsz attól függően, hogy hány "
-"játékos\n"
-"végzett ezen a szigeten elötted. Minél hamarabb végzel annál kevesebb árut\n"
-"kapsz. Lásd lejjebb a részleteket."
+"Amikor végzel egy szigettel, ráadás árukat is kapsz attól függően, hogy "
+"hány\n"
+"játékos fejezte be előtted a szigetet. Minél hamarabb végzel, annál "
+"kevesebb\n"
+"árut kapsz. Lásd alább a részleteket."

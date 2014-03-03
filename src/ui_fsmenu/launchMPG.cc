@@ -90,7 +90,7 @@ struct MapOrSaveSelectionWindow : public UI::Window {
 	}
 
 
-	void think() {
+	void think() override {
 		if (m_ctrl)
 			m_ctrl->think();
 	}
@@ -171,12 +171,12 @@ Fullscreen_Menu_LaunchMPG::Fullscreen_Menu_LaunchMPG
 
 	m_map_info(this, get_w() * 37 / 50, get_h() * 2 / 10, m_butw, get_h() * 23 / 80),
 	m_client_info(this, get_w() * 37 / 50, get_h() * 13 / 20, m_butw, get_h() * 5 / 20),
-	m_help(0),
+	m_help(nullptr),
 
 // Variables and objects used in the menu
 	m_settings     (settings),
 	m_ctrl         (ctrl),
-	m_chat         (0)
+	m_chat         (nullptr)
 {
 	m_change_map_or_save.sigclicked.connect
 		(boost::bind
@@ -201,7 +201,7 @@ Fullscreen_Menu_LaunchMPG::Fullscreen_Menu_LaunchMPG
 	m_change_map_or_save.set_font(font_small());
 	m_wincondition_type.set_textstyle(ts_small());
 
-	m_lua = create_LuaInterface();
+	m_lua = new LuaInterface();
 	m_lua->register_scripts(*g_fs, "win_conditions", "scripting/win_conditions");
 	win_condition_clicked();
 
@@ -380,7 +380,7 @@ void Fullscreen_Menu_LaunchMPG::select_saved_game() {
 		// Read the needed data from file "elemental" of the used map.
 		std::unique_ptr<FileSystem> l_fs(g_fs->MakeSubFileSystem(filename.c_str()));
 		Profile prof;
-		prof.read("map/elemental", 0, *l_fs);
+		prof.read("map/elemental", nullptr, *l_fs);
 		Section & s = prof.get_safe_section("global");
 
 		std::string mapname = s.get_safe_string("name");
@@ -543,7 +543,7 @@ void Fullscreen_Menu_LaunchMPG::load_previous_playerdata()
 {
 	std::unique_ptr<FileSystem> l_fs(g_fs->MakeSubFileSystem(m_settings->settings().mapfilename.c_str()));
 	Profile prof;
-	prof.read("map/player_names", 0, *l_fs);
+	prof.read("map/player_names", nullptr, *l_fs);
 	std::string strbuf;
 	std::string infotext = _("Saved players are:");
 	std::string player_save_name [MAX_PLAYERS];
@@ -592,7 +592,7 @@ void Fullscreen_Menu_LaunchMPG::load_previous_playerdata()
 		// get translated tribename
 		strbuf = "tribes/" + player_save_tribe[i - 1];
 		strbuf += "/conf";
-		Profile tribe(strbuf.c_str(), 0, "tribe_" + player_save_tribe[i - 1]);
+		Profile tribe(strbuf.c_str(), nullptr, "tribe_" + player_save_tribe[i - 1]);
 		Section & global = tribe.get_safe_section("tribe");
 		player_save_tribe[i - 1] = global.get_safe_string("name");
 		infotext += " (";
@@ -641,7 +641,7 @@ void Fullscreen_Menu_LaunchMPG::load_map_info()
 
 	// get translated worldsname
 	std::string worldpath((format("worlds/%s") % map.get_world_name()).str());
-	Profile prof ((worldpath + "/conf").c_str(), 0, (format("world_%s") % map.get_world_name()).str());
+	Profile prof ((worldpath + "/conf").c_str(), nullptr, (format("world_%s") % map.get_world_name()).str());
 	Section & global = prof.get_safe_section("world");
 	std::string world(global.get_safe_string("name"));
 

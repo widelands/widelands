@@ -35,9 +35,9 @@ public:
 	SDLTTF_Font(TTF_Font* ttf, const std::string& face, int ptsize);
 	virtual ~SDLTTF_Font();
 
-	void dimensions(const std::string&, int, uint16_t * w, uint16_t * h);
-	virtual const Surface& render(const std::string&, const RGBColor& clr, int, SurfaceCache*);
-	uint16_t ascent(int) const;
+	void dimensions(const std::string&, int, uint16_t * w, uint16_t * h) override;
+	virtual const Surface& render(const std::string&, const RGBColor& clr, int, SurfaceCache*) override;
+	uint16_t ascent(int) const override;
 
 private:
 	void m_set_style(int);

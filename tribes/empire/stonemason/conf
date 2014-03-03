@@ -12,7 +12,7 @@ carrier=1
 2=playFX ../../../sound/stonecutting/stonecutter 220
 3=animation hacking 10000
 4=object shrink
-5=createitem stone
+5=createware stone
 6=return
 
 [cut_marble]
@@ -21,7 +21,7 @@ carrier=1
 2=playFX ../../../sound/stonecutting/stonecutter 220
 3=animation hacking 10000
 4=object shrink
-5=createitem marble
+5=createware marble
 6=return
 
 [idle]
