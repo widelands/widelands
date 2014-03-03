@@ -1351,7 +1351,6 @@ void WLApplication::show_usage()
 #ifdef __linux__
 		<<	_("                      Default is ~/.widelands") << "\n"
 #endif
-<<<<<<< TREE
 		<<	_(" --record=FILENAME    Record all events to the given filename for\n"
 			  "                      later playback") << "\n"
 		<<	_(" --playback=FILENAME  Playback given filename (see --record)") << "\n\n"
@@ -1411,79 +1410,6 @@ void WLApplication::show_usage()
 			  "                      Only move a window to the edge of a panel\n"
 			  "                      if the window is overlapping with the\n"
 			  "                      panel.") << "\n\n";
-=======
-		<< _
-			(" --record=FILENAME    Record all events to the given filename for\n"
-			 "                      later playback\n"
-			 " --playback=FILENAME  Playback given filename (see --record)\n\n"
-			 " --coredump=[yes|no]  Generates a core dump on segfaults instead\n"
-			 "                      of using the SDL\n"
-			 " --language=[de_DE|sv_SE|...]\n"
-			 "                      The locale to use.\n"
-			 " --localedir=DIRNAME  Use DIRNAME as location for the locale\n"
-			 " --remove_syncstreams=[true|false]\n"
-			 "                      Remove syncstream files on startup\n"
-			 " --remove_replays=[...]\n"
-			 "                      Remove replays after this amount of days.\n"
-			 "                      If this is 0 replays are not deleted.\n")
-		<<
-		_
-			("Sound options:\n"
-			 " --nosound            Starts the game with sound disabled.\n"
-			 " --disable_fx         Disable sound effects.\n"
-			 " --disable_music      Disable music.\n"
-			 "\n"
-			 " --nozip              Do not save files as binary zip archives.\n"
-			 "\n"
-			 " --editor             Directly starts the Widelands editor.\n"
-			 "                      You can add a =FILENAME to directly load\n"
-			 "                      the map FILENAME in editor.\n"
-			 " --scenario=FILENAME  Directly starts the map FILENAME as scenario\n"
-			 "                      map.\n"
-			 " --loadgame=FILENAME  Directly loads the savegame FILENAME.\n")
-		<< _
-			(" --script=FILENAME    Run the given Lua script after initialization.\n"
-			 "                      Only valid with --scenario, --loadgame, or --editor.\n")
-		<< _(" --dedicated=FILENAME Starts a dedicated server with FILENAME as map\n")
-		<<
-		_
-			(" --auto_roadbuild_mode=[yes|no]\n"
-			 "                      Whether to enter roadbuilding mode\n"
-			 "                      automatically after placing a flag that is\n"
-			 "                      not connected to a road.\n"
-			 "\n"
-			 "Graphic options:\n"
-			 " --fullscreen=[yes|no]\n"
-			 "                      Whether to use the whole display for the\n"
-			 "                      game screen.\n"
-			 " --xres=[...]         Width of the window in pixel.\n"
-			 " --yres=[...]         Height of the window in pixel.\n")
-		<<
-		_
-			 (" --opengl=[0|1]\n"
-			 "                      Enables OpenGL rendering\n")
-		<<
-		_
-			("\n"
-			 "Options for the internal window manager:\n"
-			 " --border_snap_distance=[0 ...]\n"
-			 "                      Move a window to the edge of the screen\n"
-			 "                      when the edge of the window comes within\n"
-			 "                      this distance from the edge of the screen.\n"
-			 " --dock_windows_to_edges=[yes|no]\n"
-			 "                      Eliminate a window's border towards the\n"
-			 "                      edge of the screen when the edge of the\n"
-			 "                      window is next to the edge of the screen.\n"
-			 " --panel_snap_distance=[0 ...]\n"
-			 "                      Move a window to the edge of the panel when\n"
-			 "                      the edge of the window comes within this\n"
-			 "                      distance from the edge of the panel.\n"
-			 " --snap_windows_only_when_overlapping=[yes|no]\n"
-			 "                      Only move a window to the edge of a panel\n"
-			 "                      if the window is overlapping with the\n"
-			 "                      panel.\n"
-			 "\n");
->>>>>>> MERGE-SOURCE
 #ifndef NDEBUG
 #ifndef _WIN32
 	wout	<<	_(" --double             Start the game twice (for localhost network\n"

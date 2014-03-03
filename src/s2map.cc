@@ -23,6 +23,7 @@
 #include <iostream>
 
 #include <boost/foreach.hpp>
+#include <libintl.h>
 
 #include "constants.h"
 #include "i18n.h"

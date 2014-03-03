@@ -19,13 +19,10 @@
 
 #include "scripting/lua_globals.h"
 
-<<<<<<< TREE
 #include <boost/format.hpp>
 #include <libintl.h>
 #include <lua.hpp>
 
-=======
->>>>>>> MERGE-SOURCE
 #include "build_info.h"
 #include "i18n.h"
 #include "logic/game.h"
