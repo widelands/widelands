@@ -134,8 +134,8 @@ uint32_t AnimationManager::get
 		try {
 			if (endp == parameters or frame_number != value)
 				throw wexception
-					(_("expected %1$s but found \"%2$s\""),
-					 _("frame number"), parameters);
+					("expected %s but found \"%s\"",
+					 "frame number", parameters);
 			parameters = endp;
 			force_skip(parameters);
 			fx_name = std::string(directory) + "/" + std::string(parameters);

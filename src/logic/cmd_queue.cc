@@ -178,12 +178,12 @@ void GameLogicCommand::Read
 			int32_t const gametime = egbase.get_gametime();
 			if (duetime() < gametime)
 				throw game_data_error
-					(_("duetime (%1$i) < gametime (%2$i)"), duetime(), gametime);
+					("duetime (%i) < gametime (%i)", duetime(), gametime);
 		} else
 			throw game_data_error
-				(_("unknown/unhandled version %u"), packet_version);
+				("unknown/unhandled version %u", packet_version);
 	} catch (const _wexception & e) {
-		throw game_data_error(_("game logic: %s"), e.what());
+		throw game_data_error("game logic: %s", e.what());
 	}
 }
 

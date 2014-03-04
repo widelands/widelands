@@ -75,9 +75,9 @@ void Map_Allowed_Worker_Types_Data_Packet::Read
 			}
 		} else
 			throw game_data_error
-				(_("unknown/unhandled version %i"), packet_version);
+				("unknown/unhandled version %i", packet_version);
 	} catch (const _wexception & e) {
-		throw game_data_error(_("allowed worker types: %s"), e.what());
+		throw game_data_error("allowed worker types: %s", e.what());
 	}
 }
 

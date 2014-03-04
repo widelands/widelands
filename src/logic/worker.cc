@@ -3089,7 +3089,7 @@ Map_Object::Loader * Worker::load
 		loader->load(fr);
 		return loader.release();
 	} catch (const std::exception & e) {
-		throw wexception(_("loading worker: %s"), e.what());
+		throw wexception("loading worker: %s", e.what());
 	}
 
 	return nullptr; // Should not be reached

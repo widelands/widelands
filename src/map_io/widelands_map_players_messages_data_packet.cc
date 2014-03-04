@@ -85,38 +85,38 @@ void Map_Players_Messages_Data_Packet::Read
 					uint32_t const sent    = s->get_safe_int("sent");
 					if (sent < previous_message_sent)
 						throw game_data_error
-							(_
-							 	("messages are not ordered: sent at %1$u but previous "
-							 	 "message sent at %2$u"),
+							(
+							 "messages are not ordered: sent at %u but previous "
+							 "message sent at %u",
 							 sent, previous_message_sent);
 					if (gametime < sent)
 						throw game_data_error
-							(_
-							 	("message is sent in the future: sent at %1$u but "
-							 	 "gametime is only %2$u"),
+							(
+							 "message is sent in the future: sent at %u but "
+							 "gametime is only %u",
 							 sent, gametime);
 					uint32_t duration = Forever(); //  default duration
 					if (Section::Value const * const dv = s->get_val("duration")) {
 						duration = dv->get_positive();
 						if (duration == Forever())
 							throw game_data_error
-								(_
-								 	("the value %u is not allowed as duration; it is "
-								 	 "a special value meaning forever, which is the "
-								 	 "default; omit the duration key to make the "
-								 	 "message exist forever"),
+								(
+								 "the value %u is not allowed as duration; it is "
+								 "a special value meaning forever, which is the "
+								 "default; omit the duration key to make the "
+								 "message exist forever",
 								 Forever());
 						if (sent + duration < sent)
 							throw game_data_error
-								(_
-								 	("duration %1$u is too large; causes numeric "
-								 	 "overflow when added to sent time %2$u"),
+								(
+								 "duration %u is too large; causes numeric "
+								 "overflow when added to sent time %u",
 								 duration, sent);
 						if (sent + duration < gametime)
 							throw game_data_error
-								(_
-								 	("message should have expired at %1$u; sent at %2$u "
-								 	 "with duration %3$u but gametime is already %4$u"),
+								(
+								 "message should have expired at %u; sent at %u "
+								 "with duration %u but gametime is already %u",
 								 sent + duration, sent, duration, gametime);
 					}
 					Message::Status status = Message::Archived; //  default status
@@ -128,7 +128,7 @@ void Map_Players_Messages_Data_Packet::Read
 								status = Message::Read;
 							else
 								throw game_data_error
-									(_("expected %1$s but found \"%2$s\""),
+									("expected %s but found \"%s\"",
 									 "{new|read}", status_string);
 						} catch (const _wexception & e) {
 							throw game_data_error("status: %s", e.what());
@@ -158,12 +158,12 @@ void Map_Players_Messages_Data_Packet::Read
 					previous_message_sent = sent;
 				} catch (const _wexception & e) {
 					throw game_data_error
-						(_("\"%1$s\": %2$s"), s->get_name(), e.what());
+						("\"%s\": %s", s->get_name(), e.what());
 				}
 				prof.check_used();
 		} catch (const _wexception & e) {
 			throw game_data_error
-				(_("messages for player %1$u: %2$s"), p, e.what());
+				("messages for player %u: %s", p, e.what());
 		}
 }
 

@@ -68,9 +68,9 @@ void Cmd_Destroy_Map_Object::Read
 				obj_serial = 0;
 		} else
 			throw game_data_error
-				(_("unknown/unhandled version %u"), packet_version);
+				("unknown/unhandled version %u", packet_version);
 	} catch (const _wexception & e) {
-		throw game_data_error(_("destroy map object: %s"), e.what());
+		throw game_data_error("destroy map object: %s", e.what());
 	}
 }
 void Cmd_Destroy_Map_Object::Write
@@ -113,16 +113,16 @@ void Cmd_Act::Read
 					obj_serial = mol.get<Map_Object>(object_serial).serial();
 				} catch (const _wexception & e) {
 					throw game_data_error
-						(_("object %1$u: %2$s"), object_serial, e.what());
+						("object %u: %s", object_serial, e.what());
 				}
 			else
 				obj_serial = 0;
 			arg = fr.Unsigned32();
 		} else
 			throw game_data_error
-				(_("unknown/unhandled version %u"), packet_version);
+				("unknown/unhandled version %u", packet_version);
 	} catch (const _wexception & e) {
-		throw wexception(_("act: %s"), e.what());
+		throw wexception("act: %s", e.what());
 	}
 }
 void Cmd_Act::Write
@@ -481,7 +481,7 @@ void Map_Object::Loader::load(FileRead & fr)
 
 		uint8_t const version = fr.Unsigned8();
 		if (version != CURRENT_SAVEGAME_VERSION)
-			throw game_data_error(_("unknown/unhandled version %u"), version);
+			throw game_data_error("unknown/unhandled version %u", version);
 
 		Serial const serial = fr.Unsigned32();
 		try {

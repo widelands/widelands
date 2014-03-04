@@ -111,7 +111,7 @@ ReplayReader::ReplayReader(Game & game, const std::string & filename)
 			throw wexception
 				("Replay of version %u is known to have desync problems", version);
 		if (version != REPLAY_VERSION)
-			throw game_data_error(_("unknown/unhandled version %u"), version);
+			throw game_data_error("unknown/unhandled version %u", version);
 
 		game.rng().ReadState(*m_cmdlog);
 	}

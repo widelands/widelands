@@ -127,7 +127,7 @@ void Map_Waredata_Data_Packet::Read
 					}
 					mol.mark_object_as_loaded(ware);
 				} catch (const _wexception & e) {
-					throw game_data_error(_("item %1$u: %2$s"), serial, e.what());
+					throw game_data_error("item %u: %s", serial, e.what());
 				}
 			}
 		} else if
@@ -197,14 +197,14 @@ void Map_Waredata_Data_Packet::Read
 					}
 					mol.mark_object_as_loaded(ware);
 				} catch (const _wexception & e) {
-					throw game_data_error(_("item %1$u: %2$s"), serial, e.what());
+					throw game_data_error("item %u: %s", serial, e.what());
 				}
 			}
 		} else
 			throw game_data_error
-				(_("unknown/unhandled version %u"), packet_version);
+				("unknown/unhandled version %u", packet_version);
 	} catch (const _wexception & e) {
-		throw game_data_error(_("ware data: %s"), e.what());
+		throw game_data_error("ware data: %s", e.what());
 	}
 }
 

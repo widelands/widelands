@@ -146,6 +146,7 @@ Fullscreen_Menu_MapSelect::Fullscreen_Menu_MapSelect
 	m_ok.set_font(font_small());
 
 #define NR_PLAYERS_WIDTH 35
+	/** TRANSLATORS: Column title for number of players in map list */
 	m_table.add_column(NR_PLAYERS_WIDTH, _("#"), UI::Align_HCenter);
 	m_table.add_column
 		(m_table.get_w() - NR_PLAYERS_WIDTH, _("Map Name"), UI::Align_Left);

@@ -402,6 +402,7 @@ m_infotext(this, _("Click soldier to send away"))
 	// Note the extra character in the HP: string below to fix bug 724169
 	uint32_t maxtextwidth = std::max
 		(style.calc_bare_width(_("Click soldier to send away")),
+		 /** Translators: Health, Attack, Defense, Evade */
 		 style.calc_bare_width(_("HP: 8/8  AT: 8/8  DE: 8/8  EV: 8/8_")));
 	set_min_desired_breadth(maxtextwidth + 4);
 
@@ -484,6 +485,7 @@ void SoldierList::mouseover(const Soldier * soldier)
 	char buffer[5 * 30];
 	snprintf
 		(buffer, sizeof(buffer),
+		 /** Translators: Health, Attack, Defense, Evade */
 		 _("HP: %1$u/%2$u  AT: %3$u/%4$u  DE: %5$u/%6$u  EV: %7$u/%8$u"),
 		 hl, mhl, al, mal, dl, mdl, el, mel);
 	m_infotext.set_text(buffer);

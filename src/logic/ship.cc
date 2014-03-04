@@ -1061,9 +1061,9 @@ Map_Object::Loader * Ship::load
 			loader->init(egbase, mol, descr->create_object());
 			loader->load(fr, version);
 		} else
-			throw game_data_error(_("unknown/unhandled version %u"), version);
+			throw game_data_error("unknown/unhandled version %u", version);
 	} catch (const std::exception & e) {
-		throw wexception(_("loading ship: %s"), e.what());
+		throw wexception("loading ship: %s", e.what());
 	}
 
 	return loader.release();

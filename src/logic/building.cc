@@ -85,7 +85,7 @@ Building_Descr::Building_Descr
 			m_port = true;
 		} else
 			throw game_data_error
-				(_("expected %1$s but found \"%2$s\""),
+				("expected %s but found \"%s\"",
 				 "{\"small\"|\"medium\"|\"big\"|\"port\"|\"mine\"}", string);
 	} catch (const _wexception & e) {
 		throw game_data_error("size: %s", e.what());

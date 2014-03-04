@@ -213,7 +213,7 @@ inline static Map_Object_Data read_unseen_immovable
 			break;
 		}
 	} catch (const _wexception & e) {
-		throw game_data_error(_("unseen immovable: %s"), e.what());
+		throw game_data_error("unseen immovable: %s", e.what());
 	}
 	return m;
 }

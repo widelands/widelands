@@ -67,19 +67,19 @@ Soldier_Descr::Soldier_Descr
 		std::vector<std::string> list(split_string(attack, "-"));
 		if (list.size() != 2)
 			throw game_data_error
-				(_("expected %1$s but found \"%2$s\""), _("\"min-max\""), attack);
+				("expected %s but found \"%s\"", "\"min-max\"", attack);
 		container_iterate(std::vector<std::string>, list, i)
 			remove_spaces(*i.current);
 		char * endp;
 		m_min_attack = strtol(list[0].c_str(), &endp, 0);
 		if (*endp or 0 == m_min_attack)
 			throw game_data_error
-				(_("expected %1$s but found \"%2$s\""),
-				 _("positive integer"), list[0].c_str());
+				("expected %s but found \"%s\"",
+				 "positive integer", list[0].c_str());
 		m_max_attack = strtol(list[1].c_str(), &endp, 0);
 		if (*endp or m_max_attack < m_min_attack)
 			throw game_data_error
-				(_("expected positive integer >= %1$u but found \"%2$s\""),
+				("expected positive integer >= %u but found \"%s\"",
 				 m_min_attack, list[1].c_str());
 	} catch (const _wexception & e) {
 		throw game_data_error("attack: %s", e.what());
@@ -182,8 +182,8 @@ std::vector<std::string> Soldier_Descr::load_animations_from_string
 		list = split_string(anim_string, ",");
 		if (list.size() < 1)
 			throw game_data_error
-				(_("expected %1$s but found \"%2$s\""),
-				 _("\"anim_name[,another_anim,...]\""), anim_string);
+				("expected %s but found \"%s\"",
+				 "\"anim_name[,another_anim,...]\"", anim_string);
 
 		// Sanitation
 		container_iterate(std::vector<std::string>, list, i) {
@@ -1366,7 +1366,7 @@ void Soldier::start_task_move_in_battle(Game & game, CombatWalkingDir dir)
 			mapdir = WALK_E;
 			break;
 		default:
-			throw game_data_error(_("bad direction '%d'"), dir);
+			throw game_data_error("bad direction '%d'", dir);
 	}
 
 	Map & map = game.map();
