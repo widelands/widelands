@@ -601,10 +601,16 @@ void Worker::informPlayer
 	if (residx != -1)
 		res_type = world.get_resource(residx)->descname();
 
+	// NOTE mirroring the above ugly hack.
+	// Avoiding placeholders for the resouce names to avert grammar trouble in translations.
+	std::string out_of_message =_("Out of Resources");
+	if (res_type == "fish") out_of_message =_("Out of Fish");
+	else if (res_type == "stone") out_of_message =_("Out of Stone");
+
 	building.send_message
 		(game,
 		 "mine",
-		 (boost::format(_("Out of %s")) % res_type).str(),
+		 out_of_message,
 		 (boost::format(_("The worker of this building cannot find any more resources "
 		 	 "of the following type: %s")) % res_type).str(),
 		 true,
