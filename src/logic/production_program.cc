@@ -561,8 +561,8 @@ ProductionProgram::ActCall::ActCall
 			m_handling_methods[result_to_set_method_for - 1] = handling_method;
 			reached_end = not *parameters;
 			log
-				("read handling method for result %1$u: %2$u, parameters = \"%3$s\", "
-				 "reached_end = %4$u\n",
+				("read handling method for result %u: %u, parameters = \"%s\", "
+				 "reached_end = %u\n",
 				 result_to_set_method_for, handling_method,
 				 parameters, reached_end);
 		}
@@ -578,7 +578,7 @@ void ProductionProgram::ActCall::execute
 		static_cast<Program_Result>(ps.top_state().phase);
 
 	if (program_result == None) //  The program has not yet been called.
-		//ps.molog("%1$s  Call %2$s\n", ps.descname().c_str(),
+		//ps.molog("%s  Call %s\n", ps.descname().c_str(),
 		//         m_program->get_name().c_str());
 		return ps.program_start(game, m_program->name());
 
@@ -1308,7 +1308,7 @@ void ProductionProgram::ActCheck_Soldier::execute
 				 _("No soldier to train!"));
 		return ps.program_end(game, Skipped);
 	}
-	ps.molog("  Checking soldier (%1$u) level %2$d)\n", attribute, level);
+	ps.molog("  Checking soldier (%u) level %d)\n", attribute, level);
 
 	const std::vector<Soldier *>::const_iterator soldiers_end = soldiers.end();
 	for (std::vector<Soldier *>::const_iterator it = soldiers.begin();; ++it) {
@@ -1399,7 +1399,7 @@ void ProductionProgram::ActTrain::execute
 	std::vector<Soldier *>::const_iterator it = soldiers.begin();
 
 	ps.molog
-		("  Training soldier's %1$u (%2$d to %3$d)",
+		("  Training soldier's %u (%d to %d)",
 		 attribute, level, target_level);
 
 	for (;; ++it) {

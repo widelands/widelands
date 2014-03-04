@@ -85,7 +85,7 @@ void Map_Roaddata_Data_Packet::Read
 							road.m_flags[0] = &mol.get<Flag>(flag_0_serial);
 						} catch (const _wexception & e) {
 							throw game_data_error
-								("flag 0 (%1$u): %2$s", flag_0_serial, e.what());
+								("flag 0 (%u): %s", flag_0_serial, e.what());
 						}
 					}
 					{
@@ -94,7 +94,7 @@ void Map_Roaddata_Data_Packet::Read
 							road.m_flags[1] = &mol.get<Flag>(flag_1_serial);
 						} catch (const _wexception & e) {
 							throw game_data_error
-								("flag 1 (%1$u): %2$s", flag_1_serial, e.what());
+								("flag 1 (%u): %s", flag_1_serial, e.what());
 						}
 					}
 					road.m_flagidx[0] = fr.Unsigned32();
@@ -111,7 +111,7 @@ void Map_Roaddata_Data_Packet::Read
 							p.append(egbase.map(), fr.Direction8());
 						} catch (const _wexception & e) {
 							throw game_data_error
-								("step #%1$lu: %2$s",
+								("step #%lu: %s",
 								 static_cast<long unsigned int>(nr_steps - i),
 								 e.what());
 						}
@@ -144,7 +144,7 @@ void Map_Roaddata_Data_Packet::Read
 								carrier = &mol.get<Carrier>(carrier_serial);
 							} catch (const _wexception & e) {
 								throw game_data_error
-									("carrier (%1$u): %2$s", carrier_serial, e.what());
+									("carrier (%u): %s", carrier_serial, e.what());
 							}
 						else {
 							carrier = nullptr;
@@ -205,7 +205,7 @@ void Map_Roaddata_Data_Packet::Read
 			throw game_data_error
 				(_("unknown/unhandled version %u"), packet_version);
 	} catch (const _wexception & e) {
-		throw game_data_error(_("road data: %s"), e.what());
+		throw game_data_error(_("roaddata: %s"), e.what());
 	}
 }
 

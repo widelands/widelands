@@ -281,7 +281,7 @@ void FieldDebugWindow::think()
 	{
 		Widelands::Player_Number const owner = m_coords.field->get_owned_by();
 		snprintf
-			(buffer, sizeof(buffer), "(%1$i, %2$i)\nheight: %3$u\nowner: %4$u\n",
+			(buffer, sizeof(buffer), "(%i, %i)\nheight: %u\nowner: %u\n",
 			 m_coords.x, m_coords.y, m_coords.field->get_height(), owner);
 		str += buffer;
 		if (owner) {
@@ -324,7 +324,7 @@ void FieldDebugWindow::think()
 			if (time_last_surveyed != Widelands::Never()) {
 				snprintf
 					(buffer, sizeof(buffer),
-					 "  D triangle last surveyed at %1$u: amount %2$u\n",
+					 "  D triangle last surveyed at %u: amount %u\n",
 					 time_last_surveyed, player_field.resource_amounts.d);
 				str += buffer;
 			} else str += "  D triangle never surveyed\n";
@@ -335,7 +335,7 @@ void FieldDebugWindow::think()
 			if (time_last_surveyed != Widelands::Never()) {
 				snprintf
 					(buffer, sizeof(buffer),
-					 "  R triangle last surveyed at %1$u: amount %2$u\n",
+					 "  R triangle last surveyed at %u: amount %u\n",
 					 time_last_surveyed, player_field.resource_amounts.r);
 				str += buffer;
 			} else str += "  R triangle never surveyed\n";
@@ -351,9 +351,9 @@ void FieldDebugWindow::think()
 
 			snprintf
 				(buffer, sizeof(buffer),
-				 "  last seen at %1$u:\n"
-				 "    owner: %2$u\n"
-				 "    immovable animation:\n%3$s\n"
+				 "  last seen at %u:\n"
+				 "    owner: %u\n"
+				 "    immovable animation:\n%s\n"
 				 "      ",
 				 player_field.time_node_last_unseen,
 				 player_field.owner,
@@ -389,7 +389,7 @@ void FieldDebugWindow::think()
 	{
 		snprintf
 			(buffer, sizeof(buffer),
-			 "%1$s (%2$u)", imm->name().c_str(), imm->serial());
+			 "%s (%u)", imm->name().c_str(), imm->serial());
 		m_ui_immovable.set_title(buffer);
 		m_ui_immovable.set_enabled(true);
 	} else {
@@ -430,7 +430,7 @@ void FieldDebugWindow::think()
 	container_iterate_const(std::vector<Widelands::Bob *>, bobs, j) {
 		snprintf
 			(buffer, sizeof(buffer),
-			 "%1$s (%2$u)", (*j.current)->name().c_str(), (*j.current)->serial());
+			 "%s (%u)", (*j.current)->name().c_str(), (*j.current)->serial());
 		m_ui_bobs.add(buffer, (*j.current)->serial());
 	}
 }

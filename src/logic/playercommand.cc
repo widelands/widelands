@@ -1680,8 +1680,8 @@ void Cmd_EnemyFlagAction::execute (Game & game)
 
 	if (upcast(Flag, flag, game.objects().get_object(serial))) {
 		log
-			("Cmd_EnemyFlagAction::execute player(%1$u): flag->owner(%2$d) "
-			 "number=%3$u\n",
+			("Cmd_EnemyFlagAction::execute player(%u): flag->owner(%d) "
+			 "number=%u\n",
 			 player.player_number(), flag->owner().player_number(), number);
 
 		if (const Building * const building = flag->get_building()) {
@@ -1926,7 +1926,7 @@ void Cmd_SetStockPolicy::execute(Game & game)
 		{
 			if (&warehouse->owner() != plr) {
 				log
-					("Cmd_SetStockPolicy: sender %1$u, but warehouse owner %2$u\n",
+					("Cmd_SetStockPolicy: sender %u, but warehouse owner %u\n",
 					 sender(), warehouse->owner().player_number());
 				return;
 			}
@@ -1939,7 +1939,7 @@ void Cmd_SetStockPolicy::execute(Game & game)
 				break;
 			default:
 				log
-					("Cmd_SetStockPolicy: sender %1$u, bad policy %2$u\n",
+					("Cmd_SetStockPolicy: sender %u, bad policy %u\n",
 					 sender(), m_policy);
 				return;
 			}
@@ -1948,7 +1948,7 @@ void Cmd_SetStockPolicy::execute(Game & game)
 			if (m_isworker) {
 				if (!(m_ware < tribe.get_nrworkers())) {
 					log
-						("Cmd_SetStockPolicy: sender %1$u, worker %2$u out of bounds\n",
+						("Cmd_SetStockPolicy: sender %u, worker %u out of bounds\n",
 						 sender(), m_ware.value());
 					return;
 				}
@@ -1956,7 +1956,7 @@ void Cmd_SetStockPolicy::execute(Game & game)
 			} else {
 				if (!(m_ware < tribe.get_nrwares())) {
 					log
-						("Cmd_SetStockPolicy: sender %1$u, ware %2$u out of bounds\n",
+						("Cmd_SetStockPolicy: sender %u, ware %u out of bounds\n",
 						 sender(), m_ware.value());
 					return;
 				}

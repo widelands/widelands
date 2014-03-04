@@ -110,7 +110,7 @@ void Map_Flag_Data_Packet::Read
 							 	 fc));
 					} catch (const _wexception & e) {
 						throw game_data_error
-							("%1$u (at (%2$i, %3$i), owned by player %4$u): %5$s",
+							("%u (at (%i, %i), owned by player %u): %s",
 							 serial, fc.x, fc.y, owner, e.what());
 					}
 				}

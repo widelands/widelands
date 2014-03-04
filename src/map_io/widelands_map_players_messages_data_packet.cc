@@ -54,19 +54,19 @@ void Map_Players_Messages_Data_Packet::Read
 				MessageQueue::const_iterator const begin = messages.begin();
 				if (begin != messages.end()) {
 					log
-						("ERROR: The message queue for player %1$u contains a message "
+						("ERROR: The message queue for player %u contains a message "
 						 "before any messages have been loade into it. This is a bug "
 						 "in the savegame loading code. It created a new message and "
 						 "added it to the queue. This is only allowed during "
 						 "simulation, not at load. The following messge will be "
 						 "removed when the queue is reset:\n"
-						 "\tsender  : %2$s\n"
-						 "\ttitle   : %3$s\n"
-						 "\tsent    : %4$u\n"
-						 "\tduration: %5$u\n"
-						 "\tposition: (%6$i, %7$i)\n"
-						 "\tstatus  : %8$u\n"
-						 "\tbody    : %9$s\n",
+						 "\tsender  : %s\n"
+						 "\ttitle   : %s\n"
+						 "\tsent    : %u\n"
+						 "\tduration: %u\n"
+						 "\tposition: (%i, %i)\n"
+						 "\tstatus  : %u\n"
+						 "\tbody    : %s\n",
 						 p,
 						 begin->second->sender  ().c_str(),
 						 begin->second->title   ().c_str(),
@@ -192,12 +192,12 @@ void Map_Players_Messages_Data_Packet::Write
 				 static_cast<uint32_t>(egbase.get_gametime()))
 				log
 					("ERROR: Trying to save a message that should have expired:\n"
-					 "\tsent = %1$u, duration = %2$u, expiry = %3$u, gametime = %4$u\n"
-					 "\tsender = \"%5$s\"\n"
-					 "\ttitle: %6$s\n"
-					 "\tbody: %7$s\n"
-					 "\tposition: (%8$i, %9$i)\n"
-					 "\tstatus: %10$s\n",
+					 "\tsent = %u, duration = %u, expiry = %u, gametime = %u\n"
+					 "\tsender = \"%s\"\n"
+					 "\ttitle: %s\n"
+					 "\tbody: %s\n"
+					 "\tposition: (%i, %i)\n"
+					 "\tstatus: %s\n",
 					 message.sent(), message.duration(),
 					 message.sent() + message.duration(), egbase.get_gametime(),
 					 message.sender().c_str(), message.title().c_str(),

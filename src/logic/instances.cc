@@ -62,7 +62,7 @@ void Cmd_Destroy_Map_Object::Read
 				try {
 					obj_serial = mol.get<Map_Object>(serial).serial();
 				} catch (const _wexception & e) {
-					throw game_data_error("%1$u: %2$s", serial, e.what());
+					throw game_data_error("%u: %s", serial, e.what());
 				}
 			else
 				obj_serial = 0;
@@ -477,7 +477,7 @@ void Map_Object::Loader::load(FileRead & fr)
 		uint8_t const header = fr.Unsigned8();
 		if (header != header_Map_Object)
 			throw wexception
-				("header is %1$u, expected %2$u", header, header_Map_Object);
+				("header is %u, expected %u", header, header_Map_Object);
 
 		uint8_t const version = fr.Unsigned8();
 		if (version != CURRENT_SAVEGAME_VERSION)
@@ -487,7 +487,7 @@ void Map_Object::Loader::load(FileRead & fr)
 		try {
 			mol().register_object<Map_Object>(serial, *get_object());
 		} catch (const _wexception & e) {
-			throw wexception("%1$u: %2$s", serial, e.what());
+			throw wexception("%u: %s", serial, e.what());
 		}
 	} catch (const _wexception & e) {
 		throw wexception("map object: %s", e.what());

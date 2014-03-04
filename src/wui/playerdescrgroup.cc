@@ -60,7 +60,6 @@ d(new PlayerDescriptionGroupImpl)
 	int32_t xplrname = 0;
 	int32_t xplayertype = w * 35 / 125;
 	int32_t xplayerteam = w * 35 / 125;
-	//int32_t xplayerteam = w * 55 / 125;
 	int32_t xplayertribe = w * 80 / 125;
 	int32_t xplayerinit = w * 55 / 125;
 	d->plr_name = new UI::Textarea(this, xplrname, 0, xplayertype - xplrname, h);

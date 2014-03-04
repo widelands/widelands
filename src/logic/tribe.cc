@@ -96,7 +96,7 @@ Tribe_Descr::Tribe_Descr
 			// Read compatibility wares (removed wares existing in saved games from older builds
 			if (Section * const section = root_conf.get_section("compatibility_wares")) {
 				while (Section::Value const * const v = section->get_next_val()) {
-					log("Compatibility ware \"%1$s\"=\"%2$s\" loaded.\n", v->get_name(), v->get_string());
+					log("Compatibility ware \"%s\"=\"%s\" loaded.\n", v->get_name(), v->get_string());
 					m_compatibility_wares[v->get_name()] = v->get_string();
 				}
 			}
@@ -130,7 +130,7 @@ Tribe_Descr::Tribe_Descr
 			PARSE_MAP_OBJECT_TYPES_END;
 			if (not safe_building_index("constructionsite"))
 				throw game_data_error
-					(_("construction site type \"constructionsite\" is missing"));
+					(_("constructionsite type \"constructionsite\" is missing"));
 
 			PARSE_MAP_OBJECT_TYPES_BEGIN("dismantlesite")
 				m_buildings.add
@@ -139,7 +139,7 @@ Tribe_Descr::Tribe_Descr
 			PARSE_MAP_OBJECT_TYPES_END;
 			if (not safe_building_index("dismantlesite"))
 				throw game_data_error
-					(_("dismantle site type \"distmantlesite\" is missing"));
+					(_("dismantlesite type \"distmantlesite\" is missing"));
 
 			PARSE_MAP_OBJECT_TYPES_BEGIN("warehouse")
 				m_buildings.add
@@ -318,7 +318,7 @@ Tribe_Descr::Tribe_Descr
 								throw game_data_error("duplicated");
 				} catch (const _wexception & e) {
 					throw game_data_error
-						("Initializations: \"%1$s\": %2$s",
+						("Initializations: \"%s\": %s",
 						 init.name.c_str(), e.what());
 				}
 			}
@@ -403,7 +403,7 @@ bool Tribe_Descr::exists_tribe
 				}
 			} catch (const _wexception & e) {
 				throw game_data_error
-					("reading basic info for tribe \"%1$s\": %2$s",
+					("reading basic info for tribe \"%s\": %s",
 					 name.c_str(), e.what());
 			}
 		return true;
@@ -485,7 +485,7 @@ uint32_t Tribe_Descr::get_resource_indicator
 	int32_t i = 1;
 	int32_t num_indicators = 0;
 	for (;;) {
-		snprintf(buffer, sizeof(buffer), "resi_%1$s%2$i", res->name().c_str(), i);
+		snprintf(buffer, sizeof(buffer), "resi_%s%i", res->name().c_str(), i);
 		if (get_immovable_index(buffer) == -1)
 			break;
 		++i;
@@ -494,7 +494,7 @@ uint32_t Tribe_Descr::get_resource_indicator
 
 	if (not num_indicators)
 		throw game_data_error
-			("tribe %1$s does not declare a resource indicator for resource %2$s",
+			("tribe %s does not declare a resource indicator for resource %s",
 			 name().c_str(),
 			 res->name().c_str());
 
@@ -505,7 +505,7 @@ uint32_t Tribe_Descr::get_resource_indicator
 			 num_indicators);
 	if (bestmatch > num_indicators)
 		throw game_data_error
-			("Amount of %1$s is %2$i but max amount is %3$i",
+			("Amount of %s is %i but max amount is %i",
 			 res->name().c_str(),
 			 amount,
 			 res->get_max_amount());
@@ -513,9 +513,9 @@ uint32_t Tribe_Descr::get_resource_indicator
 		bestmatch += 1; // Resi start with 1, not 0
 
 	snprintf
-		(buffer, sizeof(buffer), "resi_%1$s%2$i", res->name().c_str(), bestmatch);
+		(buffer, sizeof(buffer), "resi_%s%i", res->name().c_str(), bestmatch);
 
-	// NoLog("Resource(%1$s): Indicator '%2$s' for amount = %3$u\n",
+	// NoLog("Resource(%s): Indicator '%s' for amount = %u\n",
 	//res->get_name(), buffer, amount);
 
 
@@ -531,15 +531,14 @@ Ware_Index Tribe_Descr::safe_ware_index(const std::string & warename) const {
 		return result;
 	else
 		// If this point is reached, the defined ware is neither defined as normal ware nor as a compatibility.
-		throw game_data_error
-			("tribe %1$s does not define ware type \"%2$s\"", name().c_str(), warename.c_str());
+		throw game_data_error("tribe %s does not define ware type \"%s\"", name().c_str(), warename.c_str());
 }
 Ware_Index Tribe_Descr::safe_ware_index(const char * const warename) const {
 	if (Ware_Index const result = ware_index(warename))
 		return result;
 	else
 		// If this point is reached, the defined ware is neither defined as normal ware nor as a compatibility.
-		throw game_data_error("tribe %1$s does not define ware type \"%2$s\"", name().c_str(), warename);
+		throw game_data_error("tribe %s does not define ware type \"%s\"", name().c_str(), warename);
 }
 
 Ware_Index Tribe_Descr::ware_index(const std::string & warename) const {
@@ -548,7 +547,7 @@ Ware_Index Tribe_Descr::ware_index(const std::string & warename) const {
 		// try to find the ware in compatibility wares std::map
 		std::map<std::string, std::string>::const_iterator it = m_compatibility_wares.find(warename);
 		if (m_compatibility_wares.find(warename) != m_compatibility_wares.end()) {
-			log ("ware %1$s found in compatibility map: %2$s!\n", warename.c_str(), it->second.c_str());
+			log ("ware %s found in compatibility map: %s!\n", warename.c_str(), it->second.c_str());
 			if (Ware_Index const result = m_wares.get_index(it->second))
 				return result;
 		}
@@ -561,7 +560,7 @@ Ware_Index Tribe_Descr::ware_index(char const * const warename) const {
 		// try to find the ware in compatibility wares std::map
 		std::map<std::string, std::string>::const_iterator it = m_compatibility_wares.find(warename);
 		if (m_compatibility_wares.find(warename) != m_compatibility_wares.end()) {
-			log ("ware %1$s found in compatibility map: %2$s!\n", warename, it->second.c_str());
+			log ("ware %s found in compatibility map: %s!\n", warename, it->second.c_str());
 			if (Ware_Index const result = m_wares.get_index(it->second))
 				return result;
 		}
@@ -579,7 +578,7 @@ Ware_Index Tribe_Descr::safe_worker_index(const std::string & workername) const
 		return result;
 	else
 		throw game_data_error
-			("tribe %1$s does not define worker type \"%2$s\"",
+			("tribe %s does not define worker type \"%s\"",
 			 name().c_str(), workername.c_str());
 }
 Ware_Index Tribe_Descr::safe_worker_index(const char * const workername) const {
@@ -587,7 +586,7 @@ Ware_Index Tribe_Descr::safe_worker_index(const char * const workername) const {
 		return result;
 	else
 		throw game_data_error
-			("tribe %1$s does not define worker type \"%2$s\"",
+			("tribe %s does not define worker type \"%s\"",
 			 name().c_str(), workername);
 }
 
@@ -601,7 +600,7 @@ Building_Index Tribe_Descr::safe_building_index
 
 	if (not result)
 		throw game_data_error
-			("tribe %1$s does not define building type \"%2$s\"",
+			("tribe %s does not define building type \"%s\"",
 			 name().c_str(), buildingname);
 	return result;
 }

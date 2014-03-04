@@ -148,14 +148,14 @@ void Map_Flagdata_Data_Packet::Read
 											&mol.get<PlayerImmovable>(nextstep_serial);
 									} catch (const _wexception & e) {
 										throw game_data_error
-											("next step (%1$u): %2$s",
+											("next step (%u): %s",
 											 nextstep_serial, e.what());
 									}
 								} else
 									flag.m_wares[i].nextstep = nullptr;
 							} catch (const _wexception & e) {
 								throw game_data_error
-									("ware #%1$u (%2$u): %3$s", i, ware_serial, e.what());
+									("ware #%u (%u): %s", i, ware_serial, e.what());
 							}
 						}
 
@@ -165,7 +165,7 @@ void Map_Flagdata_Data_Packet::Read
 									&mol.get<Flag>(always_call_serial);
 							} catch (const _wexception & e) {
 								throw game_data_error
-									("always_call (%1$u): %2$s",
+									("always_call (%u): %s",
 									 always_call_serial, e.what());
 							}
 						else
@@ -184,7 +184,7 @@ void Map_Flagdata_Data_Packet::Read
 									(&mol.get<Worker>(worker_serial));
 							} catch (const _wexception & e) {
 								throw game_data_error
-									("worker #%1$u (%2$u): %3$s", i, worker_serial, e.what());
+									("worker #%u (%u): %s", i, worker_serial, e.what());
 							}
 						}
 
@@ -219,7 +219,7 @@ void Map_Flagdata_Data_Packet::Read
 			throw game_data_error
 				(_("unknown/unhandled version %u"), packet_version);
 	} catch (const _wexception & e) {
-		throw game_data_error(_("flag data: %s"), e.what());
+		throw game_data_error(_("flagdata: %s"), e.what());
 	}
 }
 

@@ -198,7 +198,7 @@ std::vector<std::string> Soldier_Descr::load_animations_from_string
 				 g_anim.get (directory, anim_s, "idle_00.png"));
 		}
 	} catch (const _wexception & e) {
-		throw game_data_error("%1$s : %2$s", anim_name, e.what());
+		throw game_data_error("%s : %s", anim_name, e.what());
 	}
 
 	return list;
@@ -461,7 +461,7 @@ uint32_t Soldier::get_evade() const
 //  Unsignedness ensures that we can only heal, not hurt through this method.
 void Soldier::heal (const uint32_t hp) {
 	molog
-		("[soldier] healing (%1$d+)%2$d/%3$d\n", hp, m_hp_current, get_max_hitpoints());
+		("[soldier] healing (%d+)%d/%d\n", hp, m_hp_current, get_max_hitpoints());
 	assert(hp);
 	assert(m_hp_current <  get_max_hitpoints());
 	m_hp_current += std::min(hp, get_max_hitpoints() - m_hp_current);
@@ -476,7 +476,7 @@ void Soldier::damage (const uint32_t value)
 	assert (m_hp_current > 0);
 
 	molog
-		("[soldier] damage %1$d(-%2$d)/%3$d\n",
+		("[soldier] damage %d(-%d)/%d\n",
 		 m_hp_current, value, get_max_hitpoints());
 	if (m_hp_current < value)
 		m_hp_current = 0;
@@ -1371,7 +1371,7 @@ void Soldier::start_task_move_in_battle(Game & game, CombatWalkingDir dir)
 
 	Map & map = game.map();
 	int32_t const tdelta = (map.calc_cost(get_position(), mapdir)) / 2;
-	molog("[move_in_battle] dir: (%1$d) tdelta: (%2$d)\n", dir, tdelta);
+	molog("[move_in_battle] dir: (%d) tdelta: (%d)\n", dir, tdelta);
 	m_combat_walking   = dir;
 	m_combat_walkstart = game.get_gametime();
 	m_combat_walkend   = m_combat_walkstart + tdelta;
@@ -1447,7 +1447,7 @@ void Soldier::battle_update(Game & game, State &)
 {
 	std::string signal = get_signal();
 	molog
-		("[battle] update for player %1$u's soldier: signal = \"%2$s\"\n",
+		("[battle] update for player %u's soldier: signal = \"%s\"\n",
 		 owner().player_number(), signal.c_str());
 
 	if (signal.size()) {
@@ -1535,7 +1535,7 @@ void Soldier::battle_update(Game & game, State &)
 					 	 false, (dist + 3) / 4))
 				{
 					molog
-						("[battle] player %1$u's soldier started task_movepath to (%2$i,%3$i)\n",
+						("[battle] player %u's soldier started task_movepath to (%i,%i)\n",
 						 owner().player_number(), dest.x, dest.y);
 					return;
 				} else {
@@ -1546,10 +1546,10 @@ void Soldier::battle_update(Game & game, State &)
 					char buffer[2048];
 					snprintf
 						(buffer, sizeof(buffer),
-							"The game engine has encountered a logic error. The %1$s "
-							"#%2$u of player %3$u could not find a way from (%4$i, %5$i) "
-							"(with %6$s immovable) to the opponent (%7$s #%8$u of player "
-							"%9$u) at (%10$i, %11$i) (with %12$s immovable). The %13$s will now "
+							"The game engine has encountered a logic error. The %s "
+							"#%u of player %u could not find a way from (%i, %i) "
+							"(with %s immovable) to the opponent (%s #%u of player "
+							"%u) at (%i, %i) (with %s immovable). The %s will now "
 							"desert (but will not be executed). Strange things may "
 							"happen. No solution for this problem has been "
 							"implemented yet. (bug #536066) (The game has been "
@@ -1651,7 +1651,7 @@ void Soldier::die_update(Game & game, State & state)
 {
 	std::string signal = get_signal();
 	molog
-		("[die] update for player %1$u's soldier: signal = \"%2$s\"\n",
+		("[die] update for player %u's soldier: signal = \"%s\"\n",
 		 owner().player_number(), signal.c_str());
 
 	if (signal.size()) {
@@ -1811,10 +1811,10 @@ void Soldier::log_general_info(const Editor_Game_Base & egbase)
 	Worker::log_general_info(egbase);
 	molog("[Soldier]\n");
 	molog
-		("Levels: %1$d/%2$d/%3$d/%4$d\n",
+		("Levels: %d/%d/%d/%d\n",
 		 m_hp_level, m_attack_level, m_defense_level, m_evade_level);
-	molog ("HitPoints: %1$d/%2$d\n", m_hp_current, get_max_hitpoints());
-	molog ("Attack :  %1$d-%2$d\n", get_min_attack(), get_max_attack());
+	molog ("HitPoints: %d/%d\n", m_hp_current, get_max_hitpoints());
+	molog ("Attack :  %d-%d\n", get_min_attack(), get_max_attack());
 	molog ("Defense : %d%%\n", get_defense());
 	molog ("Evade:    %d%%\n", get_evade());
 	molog ("CombatWalkingDir:   %i\n", m_combat_walking);

@@ -74,7 +74,7 @@ Fullscreen_Menu_Options::Fullscreen_Menu_Options
 
 	m_sb_remove_replays
 		(this,
-		 get_w() * 6767 / 10000, get_h() * 8631 / 10000,  get_w() / 4, m_vbutw,
+		 get_w() * 6767 / 10000, get_h() * 8631 / 10000, get_w() / 4, m_vbutw,
 		 opt.remove_replays, 0, 365, _("days"),
 		 g_gr->images().get("pics/but1.png"), true),
 
@@ -260,9 +260,8 @@ Fullscreen_Menu_Options::Fullscreen_Menu_Options
 	bool did_select_a_res = false;
 	for (uint32_t i = 0; i < m_resolutions.size(); ++i) {
 		char buf[32];
-		sprintf
-			(buf, _("%1$ix%2$i %3$i bit"), m_resolutions[i].xres,
-			 m_resolutions[i].yres);
+		/** TRANSLATORS: Screen resolution, e.g. 800x600*/
+		sprintf(buf, _("%1$ix%2$i"), m_resolutions[i].xres, m_resolutions[i].yres);
 		const bool selected =
 			m_resolutions[i].xres  == opt.xres and
 			m_resolutions[i].yres  == opt.yres;
@@ -271,8 +270,9 @@ Fullscreen_Menu_Options::Fullscreen_Menu_Options
 	}
 	if (not did_select_a_res) {
 		char buf[32];
-		sprintf(buf, "%1$ix%2$i %3$i bit", opt.xres, opt.yres);
-		m_reslist.add(buf, 0, nullptr, true);
+		/** TRANSLATORS: Screen resolution, e.g. 800x600*/
+		sprintf(buf, "%1$ix%2$i", opt.xres, opt.yres);
+		m_reslist.add(buf, nullptr, nullptr, true);
 		uint32_t entry = m_resolutions.size();
 		m_resolutions.resize(entry + 1);
 		m_resolutions[entry].xres  = opt.xres;

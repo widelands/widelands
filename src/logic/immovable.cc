@@ -256,7 +256,7 @@ Immovable_Descr::Immovable_Descr
 					throw game_data_error(_("duplicated"));
 			} catch (const _wexception & e) {
 				throw game_data_error
-					("[terrain affinity] %1$s: %2$s", terrain_type_name, e.what());
+					("[terrain affinity] %s: %s", terrain_type_name, e.what());
 			}
 		}
 		if (owner_tribe) {
@@ -612,7 +612,7 @@ void Immovable::Loader::load(FileRead & fr, uint8_t const version)
 	} catch (const Map_Object_Descr::Animation_Nonexistent &) {
 		imm.m_anim = imm.descr().main_animation();
 		log
-			("Warning: Animation \"%1$s\" not found, using animation %2$s).\n",
+			("Warning: Animation \"%s\" not found, using animation %s).\n",
 			 animname, imm.descr().get_animation_name(imm.m_anim).c_str());
 	}
 	imm.m_animstart = fr.Signed32();
@@ -647,7 +647,7 @@ void Immovable::Loader::load(FileRead & fr, uint8_t const version)
 			// Note that in some cases, the immovable may end up broken despite
 			// the fixup, but there isn't really anything we can do against that.
 			log
-				("Warning: Immovable '%1$s', size of program '%2$s' seems to have "
+				("Warning: Immovable '%s', size of program '%s' seems to have "
 				 "changed.\n",
 				 imm.descr().name().c_str(), imm.m_program->name().c_str());
 			imm.m_program_ptr = 0;
@@ -762,7 +762,7 @@ Map_Object::Loader * Immovable::load
 							effective_name = compat[1];
 						} else
 							throw game_data_error
-								("bad compatibility_immovable code %1$s for %2$s",
+								("bad compatibility_immovable code %s for %s",
 								 compat[0].c_str(), name);
 					}
 
@@ -1284,7 +1284,7 @@ bool Immovable::construct_ware(Game & game, Ware_Index index)
 	m_anim_construction_done = d->delivered.total();
 	m_animstart = game.get_gametime();
 
-	molog("construct_ware: total %1$u delivered: %2$u", index.value(), d->delivered[index]);
+	molog("construct_ware: total %u delivered: %u", index.value(), d->delivered[index]);
 
 	Buildcost remaining;
 	construct_remaining_buildcost(game, &remaining);
@@ -1422,7 +1422,7 @@ void PlayerImmovable::cleanup(Editor_Game_Base & egbase)
 void PlayerImmovable::receive_ware(Game &, Ware_Index ware)
 {
 	throw wexception
-		("MO(%1$u): Received a ware(%2$u), do not know what to do with it",
+		("MO(%u): Received a ware(%u), do not know what to do with it",
 		 serial(), ware.value());
 }
 
@@ -1433,7 +1433,7 @@ void PlayerImmovable::receive_ware(Game &, Ware_Index ware)
 void PlayerImmovable::receive_worker(Game &, Worker & worker)
 {
 	throw wexception
-		("MO(%1$u): Received a worker(%2$u), do not know what to do with it",
+		("MO(%u): Received a worker(%u), do not know what to do with it",
 		 serial(), worker.serial());
 }
 
@@ -1471,7 +1471,7 @@ void PlayerImmovable::Loader::load(FileRead & fr)
 
 			if (!owner_number || owner_number > egbase().map().get_nrplayers())
 				throw game_data_error
-					("owner number is %1$u but there are only %2$u players",
+					("owner number is %u but there are only %u players",
 					 owner_number, egbase().map().get_nrplayers());
 
 			Player * owner = egbase().get_player(owner_number);

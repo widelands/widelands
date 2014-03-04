@@ -313,8 +313,8 @@ void Sound_Handler::load_one_fx
 		m_fxs[fx_name]->add_fx(m);
 	} else
 		log
-			("Sound_Handler: loading sound effect \"%1$s\" for FXset \"%2$s\" "
-			 "failed: %3$s\n",
+			("Sound_Handler: loading sound effect \"%s\" for FXset \"%s\" "
+			 "failed: %s\n",
 			 path, fx_name.c_str(), Mix_GetError());
 }
 

@@ -144,8 +144,8 @@ uint32_t AnimationManager::get
 				ad.sfx_cues.find(frame_number);
 			if (it != ad.sfx_cues.end())
 				throw wexception
-					("redefinition for frame %1$u to \"%2$s\" (previously defined to "
-					 "\"%3$s\")",
+					("redefinition for frame %u to \"%s\" (previously defined to "
+					 "\"%s\")",
 					 frame_number, parameters, it->second.c_str());
 		} catch (const _wexception & e) {
 			throw wexception("sfx: %s", e.what());

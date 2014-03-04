@@ -112,7 +112,7 @@ void Map_Waredata_Data_Packet::Read
 									&mol.get<PlayerImmovable>(nextstep_serial);
 							} catch (const _wexception & e) {
 								throw game_data_error
-									("nextstep %1$u: %2$s", nextstep_serial, e.what());
+									("nextstep %u: %s", nextstep_serial, e.what());
 							}
 						else
 							ware.m_transfer_nextstep =
@@ -123,7 +123,7 @@ void Map_Waredata_Data_Packet::Read
 							(ref_cast<Game, Editor_Game_Base>(egbase), &location);
 					} catch (const _wexception & e) {
 						throw game_data_error
-							("location %1$u: %2$s", location_serial, e.what());
+							("location %u: %s", location_serial, e.what());
 					}
 					mol.mark_object_as_loaded(ware);
 				} catch (const _wexception & e) {
@@ -182,7 +182,7 @@ void Map_Waredata_Data_Packet::Read
 									&mol.get<PlayerImmovable>(nextstep_serial);
 							} catch (const _wexception & e) {
 								throw game_data_error
-									("nextstep %1$u: %2$s", nextstep_serial, e.what());
+									("nextstep %u: %s", nextstep_serial, e.what());
 							}
 						else
 							ware.m_transfer_nextstep =
@@ -193,7 +193,7 @@ void Map_Waredata_Data_Packet::Read
 							(ref_cast<Game, Editor_Game_Base>(egbase), &location);
 					} catch (const _wexception & e) {
 						throw game_data_error
-							("location %1$u: %2$s", location_serial, e.what());
+							("location %u: %s", location_serial, e.what());
 					}
 					mol.mark_object_as_loaded(ware);
 				} catch (const _wexception & e) {

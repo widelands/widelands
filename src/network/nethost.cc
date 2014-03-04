@@ -349,7 +349,7 @@ struct HostChatProvider : public ChatProvider {
 			std::string cmd, arg1, arg2;
 			std::string temp = c.msg.substr(1); // cut off '/'
 			h->splitCommandArray(temp, cmd, arg1, arg2);
-			dedicatedlog("%1$s + \"%2$s\" + \"%3$s\"\n", cmd.c_str(), arg1.c_str(), arg2.c_str());
+			dedicatedlog("%s + \"%s\" + \"%s\"\n", cmd.c_str(), arg1.c_str(), arg2.c_str());
 
 			// let "/me" pass - handled by chat
 			if (cmd == "me") {
@@ -1040,9 +1040,7 @@ void NetHost::send(ChatMessage msg)
 				s.Unsigned8(1);
 				s.String(msg.recipient);
 				s.send(d->clients.at(clientnum).sock);
-				dedicatedlog
-					("[Host]: personal chat: from %1$s to %2$s\n",
-					 msg.sender.c_str(), msg.recipient.c_str());
+				dedicatedlog("[Host]: personal chat: from %s to %s\n", msg.sender.c_str(), msg.recipient.c_str());
 			} else {
 				std::string fail = "Failed to send message: Recipient \"";
 				fail += msg.recipient + "\" could not be found!";
@@ -1650,7 +1648,7 @@ void NetHost::setPlayerTribe(uint8_t const number, const std::string & tribe, bo
 			return;
 		}
 	log
-		("Player %1$u attempted to change to tribe %2$s; not a valid tribe\n",
+		("Player %u attempted to change to tribe %s; not a valid tribe\n",
 		 number, tribe.c_str());
 }
 
@@ -2239,7 +2237,7 @@ void NetHost::checkHungClients()
 				 1000)
 			{
 				log
-					("[Host]: Client %1$i (%2$s) hung\n",
+					("[Host]: Client %i (%s) hung\n",
 					 i, d->settings.users.at(d->clients.at(i).usernum).name.c_str());
 				++nrhung;
 				if (d->clients.at(i).hung_since == 0) {
@@ -2434,9 +2432,9 @@ void NetHost::checkSyncReports()
 
 		if (client.syncreport != d->syncreport) {
 			log
-				("[Host]: lost synchronization with client %1$u!\n"
-				 "I have:     %2$s\n"
-				 "Client has: %3$s\n",
+				("[Host]: lost synchronization with client %u!\n"
+				 "I have:     %s\n"
+				 "Client has: %s\n",
 				 i, d->syncreport.str().c_str(), client.syncreport.str().c_str());
 
 			d->game->save_syncstream(true);
@@ -2758,7 +2756,7 @@ void NetHost::handle_packet(uint32_t const i, RecvPacket & r)
 		int32_t time = r.Signed32();
 		Widelands::PlayerCommand & plcmd = *Widelands::PlayerCommand::deserialize(r);
 		log
-			("[Host]: Client %1$u (%2$u) sent player command %3$i for %4$i, time = %5$i\n",
+			("[Host]: Client %u (%u) sent player command %i for %i, time = %i\n",
 			 i, client.playernum, plcmd.id(), plcmd.sender(), time);
 		recvClientTime(i, time);
 		if (plcmd.sender() != client.playernum + 1)
@@ -2823,9 +2821,7 @@ void NetHost::handle_packet(uint32_t const i, RecvPacket & r)
 		uint32_t part = r.Unsigned32();
 		std::string x = r.String();
 		if (x != file->md5sum) {
-			dedicatedlog
-				("[Host]: File transfer checksum missmatch %1$s != %2$s\n",
-				 x.c_str(), file->md5sum.c_str());
+			dedicatedlog("[Host]: File transfer checksum missmatch %s != %s\n", x.c_str(), file->md5sum.c_str());
 			return; // Surely the file was changed, so we cancel here.
 		}
 		if (part >= file->parts.size())
@@ -2845,7 +2841,7 @@ void NetHost::handle_packet(uint32_t const i, RecvPacket & r)
 		if (part % 100 == 0)
 			sendSystemMessageCode
 				("SENDING_FILE_PART",
-				 (boost::format("%1$i/%2$i") % part % (file->parts.size() + 1)).str(),
+				 (boost::format("%i/%i") % part % (file->parts.size() + 1)).str(),
 				 file->filename, d->settings.users.at(client.usernum).name);
 		sendFilePart(client.sock, part);
 		break;
@@ -2874,7 +2870,7 @@ void NetHost::sendFilePart(TCPsocket csock, uint32_t part) {
 
 void NetHost::disconnectPlayerController(uint8_t const number, const std::string & name)
 {
-	dedicatedlog("[Host]: disconnectPlayerController(%1$u, %2$s)\n", number, name.c_str());
+	dedicatedlog("[Host]: disconnectPlayerController(%u, %s)\n", number, name.c_str());
 
 	for (uint32_t i = 0; i < d->settings.users.size(); ++i) {
 		if (d->settings.users.at(i).position == number) {
@@ -2931,7 +2927,7 @@ void NetHost::disconnectClient
 	} else
 		sendSystemMessageCode("UNKNOWN_LEFT_GAME", reason, arg);
 
-	dedicatedlog("[Host]: disconnectClient(%1$u, %2$s, %3$s)\n", number, reason.c_str(), arg.c_str());
+	dedicatedlog("[Host]: disconnectClient(%u, %s, %s)\n", number, reason.c_str(), arg.c_str());
 
 	if (client.sock) {
 		if (sendreason) {
@@ -3008,6 +3004,6 @@ void NetHost::report_result
 	}
 
 	dedicatedlog
-		("NetHost::report_result(%1$d, %2$u, %3$s)\n",
+		("NetHost::report_result(%d, %u, %s)\n",
 		 player->player_number(), static_cast<uint8_t>(result), info.c_str());
 }

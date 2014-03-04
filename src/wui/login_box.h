@@ -24,7 +24,6 @@
 #include "ui_basic/editbox.h"
 #include "ui_basic/multilinetextarea.h"
 #include "ui_basic/textarea.h"
-#include "ui_basic/multilinetextarea.h"
 #include "ui_basic/window.h"
 
 struct LoginBox : public UI::Window {

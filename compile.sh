@@ -58,37 +58,33 @@ var_updater=0 # 0 = false
     local_var_ready=0
     while [ $local_var_ready -eq 0 ]
     do
-var_build=1
-local_var_ready=1 
-#      echo " "
-#      echo "  Should Widelands be build in [r]elease or [d]ebug mode?"
-#      echo " "
-#      read local_var_choice
-#      echo " "
-#      case $local_var_choice in
-#        r) echo "  -> Release mode selected" ; var_build=1 ; local_var_ready=1 ;;
-#        d) echo "  -> Debug mode selected" ; var_build=0 ; local_var_ready=1 ;;
-#        *) echo "  -> Bad choice. Please try again!" ;;
-#      esac
+      echo " "
+      echo "  Should Widelands be build in [r]elease or [d]ebug mode?"
+      echo " "
+      read local_var_choice
+      echo " "
+      case $local_var_choice in
+        r) echo "  -> Release mode selected" ; var_build=1 ; local_var_ready=1 ;;
+        d) echo "  -> Debug mode selected" ; var_build=0 ; local_var_ready=1 ;;
+        *) echo "  -> Bad choice. Please try again!" ;;
+      esac
     done
     local_var_ready=0
-var_build_lang=0
-local_var_ready=1 
-#    if [ $var_build -eq 0 ] ; then
-#      while [ $local_var_ready -eq 0 ]
-#      do
-#        echo " "
-#        echo "  Should translations be build [y]/[n]?"
-#        echo " "
-#        read local_var_choice
-#        echo " "
-#        case $local_var_choice in
-#          y) echo "  -> Translations will be build" ; var_build_lang=1 ; local_var_ready=1 ;;
-#          n) echo "  -> Translations will not be build" ; var_build_lang=0 ; local_var_ready=1 ;;
-#          *) echo "  -> Bad choice. Please try again!" ;;
-#        esac
-#      done
-#    fi
+    if [ $var_build -eq 0 ] ; then
+      while [ $local_var_ready -eq 0 ]
+      do
+        echo " "
+        echo "  Should translations be build [y]/[n]?"
+        echo " "
+        read local_var_choice
+        echo " "
+        case $local_var_choice in
+          y) echo "  -> Translations will be build" ; var_build_lang=1 ; local_var_ready=1 ;;
+          n) echo "  -> Translations will not be build" ; var_build_lang=0 ; local_var_ready=1 ;;
+          *) echo "  -> Bad choice. Please try again!" ;;
+        esac
+      done
+    fi
     return 0
   }
 
@@ -158,9 +154,9 @@ local_var_ready=1
   update_script () {
     # First check if this is an bzr checkout at all - only in that case,
     # creation of a script makes any sense.
-#    if ! [ -f .bzr/branch-format ] ; then
+    if ! [ -f .bzr/branch-format ] ; then
       return 0
-#    fi
+    fi
     while :
     do
       echo " "

@@ -101,7 +101,7 @@ void Map_Buildingdata_Data_Packet::Read
 								building.descr().get_animation(animation_name);
 						} catch (const Map_Object_Descr::Animation_Nonexistent &) {
 							log
-								("WARNING: %1$s %2$s does not have animation \"%3$s\"; "
+								("WARNING: %s %s does not have animation \"%s\"; "
 								 "using animation \"idle\" instead\n",
 								 building.descr().tribe().name().c_str(),
 								 building.descname().c_str(),
@@ -126,7 +126,7 @@ void Map_Buildingdata_Data_Packet::Read
 									*i.current = &mol.get<Worker>(leaver_serial);
 								} catch (const _wexception & e) {
 									throw game_data_error
-										("leave queue item #%1$lu (%2$u): %3$s",
+										("leave queue item #%lu (%u): %s",
 										 static_cast<long int>
 										 	(i.current - leave_queue.begin()),
 										 leaver_serial, e.what());
@@ -143,7 +143,7 @@ void Map_Buildingdata_Data_Packet::Read
 								&mol.get<Map_Object>(leaver_serial);
 						} catch (const _wexception & e) {
 							throw game_data_error
-								("leave allow item (%1$u): %2$s", leaver_serial, e.what());
+								("leave allow item (%u): %s", leaver_serial, e.what());
 						}
 					else {
 						building.m_leave_allow = nullptr;
@@ -159,7 +159,7 @@ void Map_Buildingdata_Data_Packet::Read
 						// Only construction sites may have an empty list
 						if (building.m_old_buildings.empty() && !is_a(ConstructionSite, &building)) {
 							throw game_data_error
-								("Failed to read %1$s %2$u: No former buildings informations.\n"
+								("Failed to read %s %u: No former buildings informations.\n"
 								"Your savegame is corrupted", building.descr().descname().c_str(), building.serial());
 						}
 					}
@@ -167,7 +167,7 @@ void Map_Buildingdata_Data_Packet::Read
 						if (upcast(ProductionSite, productionsite, &building))
 							if (dynamic_cast<MilitarySite const *>(productionsite)) {
 								log
-									("WARNING: Found a stopped %1$s at (%2$i, %3$i) in the "
+									("WARNING: Found a stopped %s at (%i, %i) in the "
 									 "savegame. Militarysites are not stoppable. "
 									 "Ignoring.",
 									 building.descname().c_str(),
@@ -178,7 +178,7 @@ void Map_Buildingdata_Data_Packet::Read
 							}
 						else
 							log
-								("WARNING: Found a stopped %1$s at (%2$i, %3$i) in the "
+								("WARNING: Found a stopped %s at (%i, %i) in the "
 								 "savegame. Only productionsites are stoppable. "
 								 "Ignoring.",
 								 building.descname().c_str(),
@@ -246,7 +246,7 @@ void Map_Buildingdata_Data_Packet::Read
 			throw game_data_error
 				(_("unknown/unhandled version %u"), packet_version);
 	} catch (const _wexception & e) {
-		throw game_data_error(_("building data: %s"), e.what());
+		throw game_data_error(_("buildingdata: %s"), e.what());
 	}
 }
 
@@ -320,7 +320,7 @@ void Map_Buildingdata_Data_Packet::read_partially_finished_building
 					pfb.m_builder = &mol.get<Worker>(builder_serial);
 				} catch (const _wexception & e) {
 					throw game_data_error
-						("builder (%1$u): %2$s", builder_serial, e.what());
+						("builder (%u): %s", builder_serial, e.what());
 				}
 			} else
 				pfb.m_builder = nullptr;
@@ -384,7 +384,7 @@ void Map_Buildingdata_Data_Packet::read_constructionsite
 			throw game_data_error
 				(_("unknown/unhandled version %u"), packet_version);
 	} catch (const _wexception & e) {
-		throw game_data_error(_("construction site: %s"), e.what());
+		throw game_data_error(_("constructionsite: %s"), e.what());
 	}
 }
 
@@ -419,7 +419,7 @@ void Map_Buildingdata_Data_Packet::read_constructionsite_v1
 			constructionsite.m_builder = &mol.get<Worker>(builder_serial);
 		} catch (const _wexception & e) {
 			throw game_data_error
-				("builder (%1$u): %2$s", builder_serial, e.what());
+				("builder (%u): %s", builder_serial, e.what());
 		}
 	} else
 		constructionsite.m_builder = nullptr;
@@ -464,7 +464,7 @@ void Map_Buildingdata_Data_Packet::read_dismantlesite
 			throw game_data_error
 				(_("unknown/unhandled version %u"), packet_version);
 	} catch (const _wexception & e) {
-		throw game_data_error(_("dismantle site: %s"), e.what());
+		throw game_data_error(_("dismantlesite: %s"), e.what());
 	}
 }
 
@@ -563,7 +563,7 @@ void Map_Buildingdata_Data_Packet::read_warehouse
 						warehouse.m_incorporated_workers[worker_index].push_back(&worker);
 					} catch (const _wexception & e) {
 						throw game_data_error
-							("incorporated worker #%1$u (%2$u): %3$s",
+							("incorporated worker #%u (%u): %s",
 							 i, worker_serial, e.what());
 					}
 				}
@@ -578,16 +578,16 @@ void Map_Buildingdata_Data_Packet::read_warehouse
 					tribe.safe_worker_index("carrier");
 				if (not worker_index) {
 					log
-						("WARNING: %1$s %2$u has a next_spawn time for nonexistent "
-						 "worker type \"%3$s\" set to %4$u, ignoring\n",
+						("WARNING: %s %u has a next_spawn time for nonexistent "
+						 "worker type \"%s\" set to %u, ignoring\n",
 						 warehouse.descname().c_str(), warehouse.serial(),
 						 "carrier", next_spawn);
 				} else if
 					(tribe.get_worker_descr(worker_index)->buildcost().size())
 				{
 					log
-						("WARNING: %1$s %2$u has a next_spawn time for worker type "
-						 "\"%3$s\", that costs something to build, set to %4$u, "
+						("WARNING: %s %u has a next_spawn time for worker type "
+						 "\"%s\", that costs something to build, set to %u, "
 						 "ignoring\n",
 						 warehouse.descname().c_str(), warehouse.serial(),
 						 "carrier", next_spawn);
@@ -602,7 +602,7 @@ void Map_Buildingdata_Data_Packet::read_warehouse
 							{
 								warehouse.molog
 									("read_warehouse: "
-									 "m_next_worker_without_cost_spawn[%1$u] = %2$u\n",
+									 "m_next_worker_without_cost_spawn[%u] = %u\n",
 									 i, warehouse.m_next_worker_without_cost_spawn[i]);
 							}
 							assert
@@ -624,16 +624,16 @@ void Map_Buildingdata_Data_Packet::read_warehouse
 						tribe.safe_worker_index(worker_typename);
 					if (not worker_index) {
 						log
-							("WARNING: %1$s %2$u has a next_spawn time for nonexistent "
-							 "worker type \"%3$s\" set to %4$u, ignoring\n",
+							("WARNING: %s %u has a next_spawn time for nonexistent "
+							 "worker type \"%s\" set to %u, ignoring\n",
 							 warehouse.descname().c_str(), warehouse.serial(),
 							 worker_typename, next_spawn);
 						continue;
 					}
 					if (tribe.get_worker_descr(worker_index)->buildcost().size()) {
 						log
-							("WARNING: %1$s %2$u has a next_spawn time for worker type "
-							 "\"%3$s\", that costs something to build, set to %4$u, "
+							("WARNING: %s %u has a next_spawn time for worker type "
+							 "\"%s\", that costs something to build, set to %u, "
 							 "ignoring\n",
 							 warehouse.descname().c_str(), warehouse.serial(),
 							 worker_typename, next_spawn);
@@ -841,23 +841,23 @@ void Map_Buildingdata_Data_Packet::read_militarysite
 		//  yet and will be cleared before it is read.
 		if        (militarysite.m_capacity < militarysite.minSoldierCapacity()) {
 			log
-				("WARNING: militarysite %1$u of player %2$u at (%3$i, %4$i) has capacity "
-				 "set to %5$u but it must be at least %6$u. Changing to that value.\n",
+				("WARNING: militarysite %u of player %u at (%i, %i) has capacity "
+				 "set to %u but it must be at least %u. Changing to that value.\n",
 				 militarysite.serial(), militarysite.owner().player_number(),
 				 militarysite.get_position().x, militarysite.get_position().y,
 				 militarysite.m_capacity, militarysite.minSoldierCapacity());
 			militarysite.m_capacity = militarysite.minSoldierCapacity();
 		} else if (militarysite.maxSoldierCapacity() < militarysite.m_capacity) {
 			log
-				("WARNING: militarysite %1$u of player %2$u at (%3$i, %4$i) has capacity "
-				 "set to %5$u but it can be at most %6$u. Changing to that value.\n",
+				("WARNING: militarysite %u of player %u at (%i, %i) has capacity "
+				 "set to %u but it can be at most %u. Changing to that value.\n",
 				 militarysite.serial(), militarysite.owner().player_number(),
 				 militarysite.get_position().x, militarysite.get_position().y,
 				 militarysite.m_capacity, militarysite.maxSoldierCapacity());
 			militarysite.m_capacity = militarysite.maxSoldierCapacity();
 		}
 	} catch (const _wexception & e) {
-		throw game_data_error(_("military site: %s"), e.what());
+		throw game_data_error(_("militarysite: %s"), e.what());
 	}
 }
 
@@ -945,7 +945,7 @@ void Map_Buildingdata_Data_Packet::read_productionsite
 						const Tribe_Descr & tribe = worker->tribe();
 
 						log
-							("COMPAT(%1$s): replace '%2$s' (%3$u) by '%4$s' in '%5$s' (%6$u)\n",
+							("COMPAT(%s): replace '%s' (%u) by '%s' in '%s' (%u)\n",
 							 tribe.name().c_str(),
 							 worker->descr().name().c_str(), worker->serial(),
 							 compat[1].c_str(),
@@ -965,7 +965,7 @@ void Map_Buildingdata_Data_Packet::read_productionsite
 						mol.schedule_act(*worker);
 					} else
 						throw game_data_error
-							("unknown compat '%1$s' for working position '%2$s'",
+							("unknown compat '%s' for working position '%s'",
 							 compat[0].c_str(), worker->descr().name().c_str());
 				}
 
@@ -1046,7 +1046,7 @@ void Map_Buildingdata_Data_Packet::read_productionsite
 						program_name = compat[1];
 					} else
 						throw game_data_error
-							("Unknown compatibility code '%1$s' for program '%2$s'",
+							("Unknown compatibility code '%s' for program '%s'",
 							 compat[0].c_str(), program_name.c_str());
 				}
 
@@ -1130,7 +1130,7 @@ void Map_Buildingdata_Data_Packet::read_productionsite
 				(_("unknown/unhandled version %u"), packet_version);
 	} catch (const _wexception & e) {
 		throw game_data_error
-			("productionsite (%1$s): %2$s",
+			("productionsite (%s): %s",
 			 productionsite.descname().c_str(), e.what());
 	}
 }
@@ -1216,23 +1216,23 @@ void Map_Buildingdata_Data_Packet::read_trainingsite
 		//  yet and will be cleared before it is read.
 		if        (trainingsite.m_capacity < trainingsite.minSoldierCapacity()) {
 			log
-				("WARNING: trainingsite %1$u of player %2$u at (%3$i, %4$i) has capacity "
-				 "set to %5$u but it must be at least %6$u. Changing to that value.\n",
+				("WARNING: trainingsite %u of player %u at (%i, %i) has capacity "
+				 "set to %u but it must be at least %u. Changing to that value.\n",
 				 trainingsite.serial(), trainingsite.owner().player_number(),
 				 trainingsite.get_position().x, trainingsite.get_position().y,
 				 trainingsite.m_capacity, trainingsite.minSoldierCapacity());
 			trainingsite.m_capacity = trainingsite.minSoldierCapacity();
 		} else if (trainingsite.maxSoldierCapacity() < trainingsite.m_capacity) {
 			log
-				("WARNING: trainingsite %1$u of player %2$u at (%3$i, %4$i) has capacity "
-				 "set to %5$u but it can be at most %6$u. Changing to that value.\n",
+				("WARNING: trainingsite %u of player %u at (%i, %i) has capacity "
+				 "set to %u but it can be at most %u. Changing to that value.\n",
 				 trainingsite.serial(), trainingsite.owner().player_number(),
 				 trainingsite.get_position().x, trainingsite.get_position().y,
 				 trainingsite.m_capacity, trainingsite.maxSoldierCapacity());
 			trainingsite.m_capacity = trainingsite.maxSoldierCapacity();
 		}
 	} catch (const _wexception & e) {
-		throw game_data_error(_("training site: %s"), e.what());
+		throw game_data_error(_("trainingsite: %s"), e.what());
 	}
 }
 
