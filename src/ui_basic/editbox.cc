@@ -228,7 +228,6 @@ bool EditBox::handle_key(bool const down, SDL_keysym const code)
 			cancel();
 			return true;
 
-		case SDLK_KP_ENTER:
 		case SDLK_RETURN:
 			// Save history if active and text is not empty
 			if (m_history_active) {
