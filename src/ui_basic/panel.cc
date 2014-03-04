@@ -679,8 +679,32 @@ bool Panel::handle_mousemove(const Uint8, int32_t, int32_t, int32_t, int32_t)
  *
  * \return true if the event was processed, false otherwise
 */
-bool Panel::handle_key(bool, SDL_keysym)
+bool Panel::handle_key(bool down, SDL_keysym code)
 {
+	if (down) {
+		Panel * p = _focus->_next;
+		switch (code.sym) {
+
+			case SDLK_TAB:
+				while (p != _focus) {
+					if (p->get_can_focus()) {
+						p->focus();
+						p->update();
+						break;
+					}
+					if (p == _lchild) {
+							p = _fchild;
+					}
+					else {
+							p = p->_next;
+					}
+				}
+				return true;
+
+			default:
+				return false;
+		}
+	}
 	return false;
 }
 

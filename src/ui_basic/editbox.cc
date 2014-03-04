@@ -228,6 +228,10 @@ bool EditBox::handle_key(bool const down, SDL_keysym const code)
 			cancel();
 			return true;
 
+		case SDLK_TAB:
+			//let the panel handle the tab key
+			return false;
+
 		case SDLK_RETURN:
 			// Save history if active and text is not empty
 			if (m_history_active) {
@@ -393,7 +397,7 @@ bool EditBox::handle_key(bool const down, SDL_keysym const code)
 		}
 	}
 
-	return Panel::handle_key(down, code);
+	return false;
 }
 
 /**
