@@ -309,7 +309,7 @@ if (DEFINED MSVC)
 endif (DEFINED MSVC)
 
 IF (MINGW)
-  set (CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -Wl,--large-address-aware" CACHE STRING "Set by widelands CMakeLists.txt" FORCE)
+  set (CMAKE_EXE_LINKER_FLAGS "-Wl,--large-address-aware" CACHE STRING "Set by widelands CMakeLists.txt" FORCE)
   message (STATUS "Enabled large address awareness on mingw32")
 endif (MINGW)
 
