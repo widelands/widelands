@@ -364,20 +364,22 @@ struct HostChatProvider : public ChatProvider {
 
 			// Help
 			if (cmd == "help") {
-				c.msg = "<br>" + 
-					_("Available host commands are:") + "<br>" +
-					/** TRANSLATORS: Available host command */
-					_("/help  -  Shows this help") + "<br>" +
-					/** TRANSLATORS: Available host command */
-					_("/announce <msg>  -  Send a chatmessage as announcement (system chat)") + "<br>" +
-					/** TRANSLATORS: Available host command */
-					_("/warn <name> <reason>  -  Warn the user <name> because of <reason>") + "<br>" +
-					/** TRANSLATORS: Available host command */
-					_("/kick <name> <reason>  -  Kick the user <name> because of <reason>") + "<br>" +
-					/** TRANSLATORS: Available host command */
-					_("/forcePause            -  Force the game to pause.") + "<br>" +
-					/** TRANSLATORS: Available host command */
-					_("/endForcedPause        -  Return game to normal speed.");
+				c.msg =
+					(boost::format("<br>%s<br>%s<br>%s<br>%s<br>%s<br>%s<br>%s")
+						% _("Available host commands are:")
+						/** TRANSLATORS: Available host command */
+						% _("/help  -  Shows this help")
+						/** TRANSLATORS: Available host command */
+						% _("/announce <msg>  -  Send a chatmessage as announcement (system chat)")
+						/** TRANSLATORS: Available host command */
+						% _("/warn <name> <reason>  -  Warn the user <name> because of <reason>")
+						/** TRANSLATORS: Available host command */
+						% _("/kick <name> <reason>  -  Kick the user <name> because of <reason>")
+						/** TRANSLATORS: Available host command */
+						% _("/forcePause            -  Force the game to pause.")
+						/** TRANSLATORS: Available host command */
+						% _("/endForcedPause        -  Return game to normal speed.")
+					).str();
 				if (!h->isDedicated())
 					c.recipient = h->getLocalPlayername();
 			}
@@ -1203,21 +1205,25 @@ void NetHost::handle_dserver_command(std::string cmdarray, std::string sender)
 	// help
 	if (cmd == "help") {
 		if (d->game)
-			c.msg = "<br>" + 
-				_("Available host commands are:") + "<br>" +
-				/** TRANSLATORS: Available host command */
-				_("help   - Shows this help") + "<br>" +
-				/** TRANSLATORS: Available host command */
-				_("host $ - Tries to run the host command $") + "<br>" +
-				/** TRANSLATORS: Available host command */
-				_("save $ - Saves the current game state as $.wgf");
+			c.msg =
+				(boost::format("<br>%s<br>%s<br>%s<br>%s")
+					% _("Available host commands are:")
+					/** TRANSLATORS: Available host command */
+					% _("/help  -  Shows this help")
+					/** TRANSLATORS: Available host command */
+					% _("host $ - Tries to run the host command $")
+					/** TRANSLATORS: Available host command */
+					% _("save $ - Saves the current game state as $.wgf")
+				).str();
 		else
-			c.msg = "<br>" + 
-				_("Available host commands are:") + "<br>" +
-				/** TRANSLATORS: Available host command */
-				_("help   - Shows this help") + "<br>" +
-				/** TRANSLATORS: Available host command */
-				_("host $ - Tries to run the host command $");
+			c.msg =
+				(boost::format("<br>%s<br>%s<br>%s")
+					% _("Available host commands are:")
+					/** TRANSLATORS: Available host command */
+					% _("/help  -  Shows this help")
+					/** TRANSLATORS: Available host command */
+					% _("host $ - Tries to run the host command $")
+				).str();
 		if (m_password.size() > 1) {
 			c.msg += "<br>";
 			c.msg += _("pwd $  - Sends the password $ to the host");

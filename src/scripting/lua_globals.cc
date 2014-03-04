@@ -21,7 +21,6 @@
 
 #include <boost/format.hpp>
 #include <libintl.h>
-#include <lua.hpp>
 
 #include "build_info.h"
 #include "i18n.h"

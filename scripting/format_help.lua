@@ -19,7 +19,7 @@ function dependencies(images, text)
 	end
 
 	string = "image=" .. images[1]
-	for k,v in ipairs({unpack(images,2)}) do
+	for k,v in ipairs({table.unpack(images,2)}) do
 		string = string .. ";pics/arrow-right.png;" .. v
 	end
 

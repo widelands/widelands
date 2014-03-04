@@ -204,10 +204,9 @@ void EncyclopediaWindow::prodSiteSelected(uint32_t) {
 					UI::Table<uintptr_t>::Entry_Record & tableEntry =
 						condTable.add(0);
 					tableEntry.set_picture
-						(0, tribe.get_ware_descr(*ware_types.begin())->icon());
-					tableEntry.set_string (1, ware_type_names);
-					tableEntry.set_string (2, amount_string);
-					condTable.set_sort_column(1);
+						(0, tribe.get_ware_descr(*ware_types.begin())->icon(), ware_type_names);
+					tableEntry.set_string (1, amount_string);
+					condTable.set_sort_column(0);
 					condTable.sort();
 				}
 			}
