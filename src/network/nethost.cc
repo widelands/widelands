@@ -364,15 +364,20 @@ struct HostChatProvider : public ChatProvider {
 
 			// Help
 			if (cmd == "help") {
-				c.msg =
-					_
-					 ("<br>Available host commands are:<br>"
-					  "/help  -  Shows this help<br>"
-					  "/announce <msg>  -  Send a chatmessage as announcement (system chat)<br>"
-					  "/warn <name> <reason>  -  Warn the user <name> because of <reason><br>"
-					  "/kick <name> <reason>  -  Kick the user <name> because of <reason><br>"
-					  "/forcePause            -  Force the game to pause.<br>"
-					  "/endForcedPause        -  Return game to normal speed.");
+				c.msg = "<br>" + 
+					_("Available host commands are:") + "<br>" +
+					/** TRANSLATORS: Available host command */
+					_("/help  -  Shows this help") + "<br>" +
+					/** TRANSLATORS: Available host command */
+					_("/announce <msg>  -  Send a chatmessage as announcement (system chat)") + "<br>" +
+					/** TRANSLATORS: Available host command */
+					_("/warn <name> <reason>  -  Warn the user <name> because of <reason>") + "<br>" +
+					/** TRANSLATORS: Available host command */
+					_("/kick <name> <reason>  -  Kick the user <name> because of <reason>") + "<br>" +
+					/** TRANSLATORS: Available host command */
+					_("/forcePause            -  Force the game to pause.") + "<br>" +
+					/** TRANSLATORS: Available host command */
+					_("/endForcedPause        -  Return game to normal speed.");
 				if (!h->isDedicated())
 					c.recipient = h->getLocalPlayername();
 			}
@@ -1198,18 +1203,21 @@ void NetHost::handle_dserver_command(std::string cmdarray, std::string sender)
 	// help
 	if (cmd == "help") {
 		if (d->game)
-			c.msg =
-				_
-				("<br>Available host commands are:<br>"
-				 "help   - Shows this help<br>"
-				 "host $ - Tries to run the host command $<br>"
-				 "save $ - Saves the current game state as $.wgf");
+			c.msg = "<br>" + 
+				_("Available host commands are:") + "<br>" +
+				/** TRANSLATORS: Available host command */
+				_("help   - Shows this help") + "<br>" +
+				/** TRANSLATORS: Available host command */
+				_("host $ - Tries to run the host command $") + "<br>" +
+				/** TRANSLATORS: Available host command */
+				_("save $ - Saves the current game state as $.wgf");
 		else
-			c.msg =
-				_
-				("<br>Available host commands are:<br>"
-				 "help   - Shows this help<br>"
-				 "host $ - Tries to run the host command $");
+			c.msg = "<br>" + 
+				_("Available host commands are:") + "<br>" +
+				/** TRANSLATORS: Available host command */
+				_("help   - Shows this help") + "<br>" +
+				/** TRANSLATORS: Available host command */
+				_("host $ - Tries to run the host command $");
 		if (m_password.size() > 1) {
 			c.msg += "<br>";
 			c.msg += _("pwd $  - Sends the password $ to the host");
