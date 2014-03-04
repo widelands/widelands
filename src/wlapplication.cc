@@ -1982,7 +1982,7 @@ struct SinglePlayerGameSettingsProvider : public GameSettingsProvider {
 	virtual void setWinCondition(std::string wc) override {s.win_condition = wc;}
 	virtual void nextWinCondition() override // not implemented - feel free to do so, if you need it
 	{
-		assert(false)
+		assert(false);
 	}
 
 private:
