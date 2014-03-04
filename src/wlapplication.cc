@@ -1899,7 +1899,8 @@ struct SinglePlayerGameSettingsProvider : public GameSettingsProvider {
 		s.players[number].state = PlayerSettings::stateComputer;
 	}
 
-	virtual void setPlayerTribe(uint8_t const number, const std::string & tribe, bool const random_tribe) override
+	virtual void setPlayerTribe
+		(uint8_t const number, const std::string & tribe, bool const random_tribe) override
 	{
 		if (number >= s.players.size())
 			return;
@@ -1979,7 +1980,10 @@ struct SinglePlayerGameSettingsProvider : public GameSettingsProvider {
 
 	virtual std::string getWinCondition() override {return s.win_condition;}
 	virtual void setWinCondition(std::string wc) override {s.win_condition = wc;}
-	virtual void nextWinCondition() override {assert(false);} // not implemented - feel free to do so, if you need it.
+	virtual void nextWinCondition() override // not implemented - feel free to do so, if you need it
+	{
+		assert(false)
+	}
 
 private:
 	GameSettings s;

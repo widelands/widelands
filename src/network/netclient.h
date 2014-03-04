@@ -79,9 +79,11 @@ struct NetClient :
 		 uint32_t maxplayers,
 		 bool savegame = false) override;
 	virtual void setPlayerState    (uint8_t number, PlayerSettings::State state) override;
-	virtual void setPlayerAI       (uint8_t number, const std::string & ai, bool const random_ai = false) override;
+	virtual void setPlayerAI
+		(uint8_t number, const std::string & ai, bool const random_ai = false) override;
 	virtual void nextPlayerState   (uint8_t number) override;
-	virtual void setPlayerTribe   (uint8_t number, const std::string & tribe, bool const random_tribe = false) override;
+	virtual void setPlayerTribe
+		(uint8_t number, const std::string & tribe, bool const random_tribe = false) override;
 	virtual void setPlayerInit     (uint8_t number, uint8_t index) override;
 	virtual void setPlayerName     (uint8_t number, const std::string & name) override;
 	virtual void setPlayer         (uint8_t number, PlayerSettings ps) override;

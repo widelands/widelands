@@ -211,7 +211,8 @@ struct HostGameSettingsProvider : public GameSettingsProvider {
 		h->setPlayerState(number, newstate, true);
 	}
 
-	virtual void setPlayerTribe(uint8_t const number, const std::string & tribe, bool const random_tribe) override
+	virtual void setPlayerTribe
+		(uint8_t const number, const std::string & tribe, bool const random_tribe) override
 	{
 		if (number >= h->settings().players.size())
 			return;
