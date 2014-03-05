@@ -10,6 +10,7 @@ import subprocess
 import sys
 import tempfile
 import unittest
+import platform
 
 def out(string):
     sys.stdout.write(string)
@@ -75,6 +76,18 @@ class WidelandsTestCase(unittest.TestCase):
                 stdout_file.write(line)
                 stdout_file.flush()
             widelands.communicate()
+            if platform.system() == "Windows":
+                 win_stdout = self.path_to_widelands_binary.replace("widelands.exe","stdout.txt")
+                 win_stderr = self.path_to_widelands_binary.replace("widelands.exe","stderr.txt")
+                 with open(win_stdout,"r") as f:
+                     for line in f:
+                         stdout_file.write(line)
+                     stdout_file.flush()
+                 if (os.path.exists(win_stderr)):
+                     with open(win_stderr,"r") as f:
+                         for line in f:
+                             stdout_file.write(line)
+                         stdout_file.flush()
 
             self.widelands_returncode = widelands.returncode
         return stdout_filename
