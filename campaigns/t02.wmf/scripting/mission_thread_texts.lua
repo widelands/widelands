@@ -125,11 +125,11 @@ _([[You can obtain water by building a well upon a water source, ]] ..
 
 obj_better_material_3 = {
    name="mission fernery",
-   title=_"Build a fernery",
+   title=_"Build a reed yard",
    number = 1,
-   body= objective_text(_"Build a fernery", _(
+   body= objective_text(_"Build a reed yard", _(
 [[The third material necessary for improved buildings is thatch reed, used to cover roofs. ]] .. 
-[[Thatch reed is planted by a ferner around his building, the fernery.]]
+[[Thatch reed is planted by a gardener around his building, the reed yard.]]
    ))
 }
 
