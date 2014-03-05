@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2014-03-05 11:26+0000\n"
+"POT-Creation-Date: 2014-03-05 18:31+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -397,7 +397,7 @@ msgstr ""
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:253
 msgid ""
-"May Satul warm you, Jundlina! The most important things for building a settlement are the building materials. There are some trees here, so we should build housings for some woodcutters and of course also for foresters, so we will not run out of trees. Oh, and we mustn’t forget the sawmill, for most buildings can’t be made out of trunks alone. Stronger buildings also need stone, but there is plenty to the north-east of here; we just need to build a quarry, and my stonemasons will go to work promptly."
+"May Satul warm you, Jundlina! The most important things for building a settlement are the building materials. There are some trees here, so we should build housings for some woodcutters and of course also for foresters, so we will not run out of trees. Oh, and we mustn’t forget the sawmill, for most buildings can’t be made out of logs alone. Stronger buildings also need stone, but there is plenty to the north-east of here; we just need to build a quarry, and my stonemasons will go to work promptly."
 msgstr ""
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:263
@@ -695,7 +695,7 @@ msgstr ""
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:558
 msgid ""
-"Swift now, we need a house for Ostur next to the lake, and we need planks, trunks and spidercloth for the construction there. Forget about everything else, we need those wares on top of the mountain before our warehouses are all swallowed by the sea."
+"Swift now, we need a house for Ostur next to the lake, and we need planks, logs and spidercloth for the construction there. Forget about everything else, we need those wares on top of the mountain before our warehouses are all swallowed by the sea."
 msgstr ""
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:567

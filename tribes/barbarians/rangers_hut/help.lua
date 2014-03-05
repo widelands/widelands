@@ -28,9 +28,9 @@ return {
 		text_line(_"Space required:",_"Small plot","pics/small.png") ..
 		text_line(_"Upgraded from:", "n/a") ..
 		rt(h3(_"Build cost:")) ..
-		help_building_line("barbarians", "trunk", ngettext("%i Trunk", "%i Trunks", 4), 4) ..
+		help_building_line("barbarians", "trunk", ngettext("%i Log", "%i Logs", 4), 4) ..
 		rt(h3(_"Dismantle yields:")) ..
-		help_building_line("barbarians", "trunk", ngettext("%i Trunk", "%i Trunks", 2), 2) ..
+		help_building_line("barbarians", "trunk", ngettext("%i Log", "%i Logs", 2), 2) ..
 		text_line(_"Upgradeable to:","n/a") ..
 	--Workers Section
 		rt(h2(_"Workers")) ..

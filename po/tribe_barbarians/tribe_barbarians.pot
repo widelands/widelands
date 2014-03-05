@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2014-03-05 11:26+0000\n"
+"POT-Creation-Date: 2014-03-05 18:31+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -1085,9 +1085,9 @@ msgstr[1] ""
 #: ../../tribes/barbarians/well/help.lua:35
 #: ../../tribes/barbarians/well/help.lua:38
 msgid ""
-"%i Trunk"
+"%i Log"
 msgid_plural ""
-"%i Trunks"
+"%i Logs"
 msgstr[0] ""
 msgstr[1] ""
 
@@ -1792,7 +1792,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/blackwood/conf:1
 msgid ""
-"This fire-hardened wood is as hard as iron and it is used for several buildings. It is produced out of trunks in the wood hardener."
+"This fire-hardened wood is as hard as iron and it is used for several buildings. It is produced out of logs in the wood hardener."
 msgstr ""
 
 #: ../../tribes/barbarians/brewer/conf:1
@@ -1872,7 +1872,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/coal/conf:1
 msgid ""
-"The fires of the barbarians are usually fed with coal. It is produced in coal mines or out of trunks in a charcoal burner’s house. Consumers are several buildings: lime kiln, smelting works, axfactory, war mill, and helm smithy."
+"The fires of the barbarians are usually fed with coal. It is produced in coal mines or out of logs in a charcoal burner’s house. Consumers are several buildings: lime kiln, smelting works, axfactory, war mill, and helm smithy."
 msgstr ""
 
 #: ../../tribes/barbarians/coalmine/help.lua:12
@@ -2451,7 +2451,7 @@ msgstr ""
 #: ../../tribes/barbarians/lumberjacks_hut/help.lua:26
 #: ../../tribes/barbarians/metalworks/help.lua:26
 msgid ""
-"Trunk"
+"Log"
 msgstr ""
 
 #: ../../tribes/barbarians/conf:108
@@ -2515,9 +2515,8 @@ msgstr ""
 
 #: ../../tribes/barbarians/conf:131
 #: ../../tribes/barbarians/fernery/help.lua:42
-#: ../../tribes/barbarians/metalworks/help.lua:42
 msgid ""
-"Ferner"
+"Gardener"
 msgstr ""
 
 #: ../../tribes/barbarians/conf:132
@@ -2754,7 +2753,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/conf:191
 msgid ""
-"Fernery"
+"Reed Yard"
 msgstr ""
 
 #: ../../tribes/barbarians/conf:192
@@ -3028,22 +3027,22 @@ msgstr ""
 
 #: ../../tribes/barbarians/fernery/help.lua:13
 msgid ""
-"Slogan of the Guild of Ferners"
+"Slogan of the Guild of Gardeners"
 msgstr ""
 
 #: ../../tribes/barbarians/fernery/help.lua:16
 msgid ""
-"The Fernery cultivates reed that serves two different purposes for the Barbarian tribe.<br>It is the traditional material for roofing, and it is woven into the extremely durable cloth that they use for their ships’ sails."
+"The Reed Yard cultivates reed that serves two different purposes for the Barbarian tribe.<br>It is the traditional material for roofing, and it is woven into the extremely durable cloth that they use for their ships’ sails."
 msgstr ""
 
 #: ../../tribes/barbarians/fernery/help.lua:26
 msgid ""
-"The Fernery’s output will only go to construction sites that need it."
+"The Reed Yard’s output will only go to construction sites that need it."
 msgstr ""
 
 #: ../../tribes/barbarians/fernery/help.lua:47
 msgid ""
-"A Fernery can produce a sheaf of Thatch Reed in about %s on average."
+"A Reed Yard can produce a sheaf of Thatch Reed in about %s on average."
 msgstr ""
 
 #: ../../tribes/barbarians/fire_tongs/conf:1
@@ -3291,7 +3290,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/lumberjacks_hut/help.lua:17
 msgid ""
-"Fell trees in the surrounding area and process them into trunks."
+"Fell trees in the surrounding area and process them into logs."
 msgstr ""
 
 #: ../../tribes/barbarians/lumberjacks_hut/help.lua:23
@@ -3392,6 +3391,11 @@ msgstr ""
 #: ../../tribes/barbarians/metalworks/help.lua:26
 msgid ""
 "%s from the Lumberjack’s hut"
+msgstr ""
+
+#: ../../tribes/barbarians/metalworks/help.lua:42
+msgid ""
+"Ferner"
 msgstr ""
 
 #: ../../tribes/barbarians/metalworks/help.lua:46
@@ -3599,7 +3603,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/thatchreed/conf:1
 msgid ""
-"Thatch reed is produced in a fernery and used to make the roofs of buildings waterproof."
+"Thatch reed is produced in a reed yard and used to make the roofs of buildings waterproof."
 msgstr ""
 
 #: ../../tribes/barbarians/trainer/conf:1
@@ -3759,7 +3763,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/trunk/conf:1
 msgid ""
-"Trunks are a principal building material of the barbarians. The trees are felled by lumberjacks; rangers care for the supply of trees. Trunks are also used in the metal workshop to build basic tools, and in the charcoal burner’s house in the production of coal. The wood hardener refines trunks by hardening them in the fire which gives blackwood."
+"Logs are a principal building material of the barbarians. The trees are felled by lumberjacks; rangers care for the supply of trees. Logs are also used in the metal workshop to build basic tools, and in the charcoal burner’s house in the production of coal. The wood hardener refines logs by hardening them in the fire which gives blackwood."
 msgstr ""
 
 #: ../../tribes/barbarians/warhelmet/conf:1

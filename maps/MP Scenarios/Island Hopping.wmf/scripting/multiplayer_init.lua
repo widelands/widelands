@@ -113,7 +113,7 @@ end
 -- for the resources in _finish_rewards
 function getplural(count, resource)
    if  resource == "trunk" then
-      return ngettext("%s Trunk","%s Trunks",count):bformat(count)
+      return ngettext("%s Log","%s Logs",count):bformat(count)
    elseif  resource == "planks" then
       return ngettext("%s Plank","%s Planks",count):bformat(count)
    elseif  resource == "stone" then

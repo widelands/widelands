@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2014-03-05 11:26+0000\n"
+"POT-Creation-Date: 2014-03-05 18:31+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1706,11 +1706,11 @@ msgstr ""
 #: ../../src/s2map.cc:874
 #, c-format
 msgid ""
-"WARNING: %i invalid port buildspace could not be fixed and has been removed! "
-"Some islands might be unreachable now. Please consider fixing the map in the "
-"map editor."
+"WARNING: %i invalid port building space could not be fixed and has been "
+"removed! Some islands might be unreachable now. Please consider fixing the "
+"map in the map editor."
 msgid_plural ""
-"WARNING: %i invalid port buildspaces could not be fixed and have been "
+"WARNING: %i invalid port building spaces could not be fixed and have been "
 "removed! Some islands might be unreachable now. Please consider fixing the "
 "map in the map editor."
 msgstr[0] ""
@@ -2488,10 +2488,10 @@ msgstr ""
 msgid "1 day"
 msgstr ""
 
-#. * TRANSLATORS: Screen resolution, e.g. 800x600
+#. * TRANSLATORS: Screen resolution, e.g. 800 x 600
 #: ../../src/ui_fsmenu/options.cc:268
 #, c-format
-msgid "%1$ix%2$i"
+msgid "%1$i x %2$i"
 msgstr ""
 
 #: ../../src/ui_fsmenu/options.cc:288
@@ -3141,16 +3141,6 @@ msgstr ""
 
 #: ../../src/wui/game_debug_ui.cc:237
 msgid "Debug Field"
-msgstr ""
-
-#: ../../src/wui/game_debug_ui.cc:375
-#, c-format
-msgid "Resource: %s\n"
-msgstr ""
-
-#: ../../src/wui/game_debug_ui.cc:381
-#, c-format
-msgid "  Amount: %1$i/%2$i\n"
 msgstr ""
 
 #: ../../src/wui/game_main_menu.cc:50

@@ -105,7 +105,7 @@ obj_better_material_1 = {
    number = 1,
    body= objective_text(_ "Build a wood hardener", _(
 [[Bigger and better buildings – including all military ones – require better building materials. ]] .. 
-[[They cannot be built out of simple trunks – the wood has to be refined to blackwood by a wood hardener first. ]] .. 
+[[They cannot be built out of simple logs – the wood has to be refined to blackwood by a wood hardener first. ]] .. 
 [[Always remember to build a wood hardener before you run out of blackwood, as without it you cannot expand.]]
    ))
 }

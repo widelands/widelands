@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2014-03-05 11:26+0000\n"
+"POT-Creation-Date: 2014-03-05 18:31+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -250,12 +250,12 @@ msgstr ""
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:165
 msgid ""
-"Hey Lutius, I got the message that our first lumberjack has started his work today. Perhaps it would be a good idea to wait until he cleans enough space for constructing two more lumberjack’s houses, so that we can harvest the trunks faster."
+"Hey Lutius, I got the message that our first lumberjack has started his work today. Perhaps it would be a good idea to wait until he cleans enough space for constructing two more lumberjack’s houses, so that we can harvest the logs faster."
 msgstr ""
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:168
 msgid ""
-"But unfortunately the trunks are useless for repairing our ship – we need refined lumber, like every ship and every bigger building needs, too. So we should build a sawmill – as soon as we have enough space for this."
+"But unfortunately the logs are useless for repairing our ship – we need refined lumber, like every ship and every bigger building needs, too. So we should build a sawmill – as soon as we have enough space for this."
 msgstr ""
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:177
@@ -270,7 +270,7 @@ msgstr ""
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:179
 msgid ""
-"I noticed that the construction of the sawmill is complete, so we can begin to refine the trunks that the lumberjacks are harvesting into lumber."
+"I noticed that the construction of the sawmill is complete, so we can begin to refine the logs that the lumberjacks are harvesting into lumber."
 msgstr ""
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:181

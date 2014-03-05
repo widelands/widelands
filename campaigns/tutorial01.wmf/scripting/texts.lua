@@ -49,8 +49,8 @@ initial_message_02 = {
 [[The headquarters is a warehouse that stores wares, workers and soldiers. ]] ..
 [[Some wares are needed for building houses, others for making other wares. ]] ..
 [[Obviously, the wares in the headquarters will not last forever, so you must make sure to replace them. ]] ..
-[[The most important wares in the early game are the basic construction wares: trunks and raw stone. ]] ..
-[[Let’s make sure that we do not run out of trunks. ]] ..
+[[The most important wares in the early game are the basic construction wares: logs and raw stone. ]] ..
+[[Let’s make sure that we do not run out of logs. ]] ..
 [[For this, we need a lumberjack and a hut for him to stay in.]])
       ) .. p(_(
 [[We need to find a nice place for the lumberjack’s hut. ]] ..
@@ -161,7 +161,7 @@ lumberjack_message_07 = {
    pos = "topright",
    body = rt(p(_(
 [[Excellent. The lumberjack’s hut is done. ]] ..
-[[A lumberjack will now move in and start chopping down trees, so our trunks income is secured for now. ]] ..
+[[A lumberjack will now move in and start chopping down trees, so our logs income is secured for now. ]] ..
 [[Now on to the raw stone.]])
       )
    )

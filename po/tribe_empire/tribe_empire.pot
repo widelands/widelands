@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2014-03-05 11:26+0000\n"
+"POT-Creation-Date: 2014-03-05 18:31+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -517,7 +517,7 @@ msgstr ""
 
 #: ../../tribes/empire/coal/conf:1
 msgid ""
-"The fires of the Empire smelting works, armor smithies and weapon smithies are usually fed with coal. It is mined in coal mines or produced by a charcoal burner out of trunks."
+"The fires of the Empire smelting works, armor smithies and weapon smithies are usually fed with coal. It is mined in coal mines or produced by a charcoal burner out of logs."
 msgstr ""
 
 #: ../../tribes/empire/colosseum/conf:38
@@ -837,7 +837,7 @@ msgstr ""
 
 #: ../../tribes/empire/conf:93
 msgid ""
-"Trunk"
+"Log"
 msgstr ""
 
 #: ../../tribes/empire/conf:94
@@ -1819,7 +1819,7 @@ msgstr ""
 
 #: ../../tribes/empire/trunk/conf:1
 msgid ""
-"Trunks are an important building material for the Empire. The lumberjacks fell the trees; foresters care for the supply of trees. Trunks are also used by the charcoal burner, the toolsmithy and the sawmill."
+"Logs are an important building material for the Empire. The lumberjacks fell the trees; foresters care for the supply of trees. Logs are also used by the charcoal burner, the toolsmithy and the sawmill."
 msgstr ""
 
 #: ../../tribes/empire/vinefarmer/conf:1

@@ -33,13 +33,13 @@ return {
 		text_line(_"Upgraded from:",_"Deep Iron Ore Mine","tribes/barbarians/deep_oremine/menu.png") ..
 		rt(h3(_"Upgrade cost:")) ..
 		help_building_line("barbarians", "raw_stone", ngettext("%i Raw Stone", "%i Raw Stones", 2), 2) ..
-		help_building_line("barbarians", "trunk", ngettext("%i Trunk", "%i Trunks", 4), 4) ..
+		help_building_line("barbarians", "trunk", ngettext("%i Log", "%i Logs", 4), 4) ..
 		rt(h3(_"Cost cumulative:")) ..
 		help_building_line("barbarians", "raw_stone", ngettext("%i Raw Stone", "%i Raw Stones", 6), 6) ..
-		help_building_line("barbarians", "trunk", ngettext("%i Trunk", "%i Trunks", 12), 12) ..
+		help_building_line("barbarians", "trunk", ngettext("%i Log", "%i Logs", 12), 12) ..
 		rt(h3(_"Dismantle yields:")) ..
 		help_building_line("barbarians", "raw_stone", ngettext("%i Raw Stone", "%i Raw Stones", 3), 3) ..
-		help_building_line("barbarians", "trunk", ngettext("%i Trunk", "%i Trunks", 6), 6) ..
+		help_building_line("barbarians", "trunk", ngettext("%i Log", "%i Logs", 6), 6) ..
 		text_line(_"Upgradeable to:","n/a") ..
 	--Workers Section
 		rt(h2(_"Workers")) ..

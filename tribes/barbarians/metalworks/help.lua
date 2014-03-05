@@ -23,7 +23,7 @@ return {
 		rt(h2(_"Dependencies")) ..
 		rt(h3(_"Incoming:")) ..
 		dependencies({"tribes/barbarians/smelting_works/menu.png","tribes/barbarians/iron/menu.png","tribes/barbarians/metalworks/menu.png"},p(_"%s from the Smelting Works":format(_"Iron"))) ..
-		dependencies({"tribes/barbarians/lumberjacks_hut/menu.png","tribes/barbarians/trunk/menu.png","tribes/barbarians/metalworks/menu.png"},p(_"%s from the Lumberjack’s hut":format(_"Trunk"))) ..
+		dependencies({"tribes/barbarians/lumberjacks_hut/menu.png","tribes/barbarians/trunk/menu.png","tribes/barbarians/metalworks/menu.png"},p(_"%s from the Lumberjack’s hut":format(_"Log"))) ..
 		rt(h3(_"Outgoing:")) ..
 		dependencies({"tribes/barbarians/metalworks/menu.png","tribes/barbarians/bakingtray/menu.png","tribes/barbarians/headquarters/menu.png","tribes/barbarians/baker/menu.png" },p(_"Baker")) ..
 		dependencies({"tribes/barbarians/metalworks/menu.png","tribes/barbarians/felling_axe/menu.png","tribes/barbarians/headquarters/menu.png","tribes/barbarians/lumberjack/menu.png" },p(_"Lumberjack")) ..
@@ -49,13 +49,13 @@ return {
 		help_building_line("barbarians", "thatchreed", ngettext("%i Thatch Reed", "%i Thatch Reeds", 1), 1) ..
 		help_building_line("barbarians", "grout", ngettext("%i Grout", "%i Grout", 1), 1) ..
 		help_building_line("barbarians", "raw_stone", ngettext("%i Raw Stone", "%i Raw Stones", 2), 2) ..
-		help_building_line("barbarians", "trunk", ngettext("%i Trunk", "%i Trunks", 1), 1) ..
+		help_building_line("barbarians", "trunk", ngettext("%i Log", "%i Logs", 1), 1) ..
 		rt(h3(_"Dismantle yields:")) ..
 		help_building_line("barbarians", "blackwood", ngettext("%i Blackwood", "%i Blackwood", 1), 1) ..
 		help_building_line("barbarians", "thatchreed", ngettext("%i Thatch Reed", "%i Thatch Reeds", 1), 1) ..
 		help_building_line("barbarians", "grout", ngettext("%i Grout", "%i Grout", 1), 1) ..
 		help_building_line("barbarians", "raw_stone", ngettext("%i Raw Stone", "%i Raw Stones", 1), 1) ..
-		help_building_line("barbarians", "trunk", ngettext("%i Trunk", "%i Trunks", 1), 1) ..
+		help_building_line("barbarians", "trunk", ngettext("%i Log", "%i Logs", 1), 1) ..
 		text_line(_"Upgradeable to:",_"Axfactory","tribes/barbarians/axefactory/menu.png") ..
 	--Workers Section
 		rt(h2(_"Workers")) ..

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2014-03-05 11:26+0000\n"
+"POT-Creation-Date: 2014-03-05 18:31+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -467,7 +467,7 @@ msgstr ""
 
 #: ../../tribes/atlanteans/coal/conf:1
 msgid ""
-"The Atlantean fires in smelting works, armorsmithies and weaponsmithies are fed with coal. This coal is mined in coal mines or produced out of trunks by a charcoal burner."
+"The Atlantean fires in smelting works, armorsmithies and weaponsmithies are fed with coal. This coal is mined in coal mines or produced out of logs by a charcoal burner."
 msgstr ""
 
 #: ../../tribes/atlanteans/conf:4
@@ -812,7 +812,7 @@ msgstr ""
 
 #: ../../tribes/atlanteans/conf:100
 msgid ""
-"Trunk"
+"Log"
 msgstr ""
 
 #: ../../tribes/atlanteans/conf:101
@@ -1528,7 +1528,7 @@ msgstr ""
 
 #: ../../tribes/atlanteans/planks/conf:1
 msgid ""
-"Planks are an important building material of the Atlanteans. They are produced out of trunks by the sawmill. The weapon smithy and the shipyard also use planks to produce the different tridents and mighty ships."
+"Planks are an important building material of the Atlanteans. They are produced out of logs by the sawmill. The weapon smithy and the shipyard also use planks to produce the different tridents and mighty ships."
 msgstr ""
 
 #: ../../tribes/atlanteans/quartz/conf:1
@@ -1765,7 +1765,7 @@ msgstr ""
 
 #: ../../tribes/atlanteans/trunk/conf:1
 msgid ""
-"Trunks are the base for planks, which are used in nearly every building of the Atlanteans. Besides the sawmill, the charcoal burner, the toolsmithy and the smokery also need trunks for their work."
+"Logs are the base for planks, which are used in nearly every building of the Atlanteans. Besides the sawmill, the charcoal burner, the toolsmithy and the smokery also need logs for their work."
 msgstr ""
 
 #: ../../tribes/atlanteans/water/conf:1

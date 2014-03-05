@@ -254,7 +254,7 @@ first_briefing_messages = {
 [[The most important things for building a settlement are the building materials. ]] ..
 [[There are some trees here, so we should build housings for some woodcutters and of course also for foresters, ]] ..
 [[so we will not run out of trees. Oh, and we mustn’t forget the sawmill, ]] ..
-[[for most buildings can’t be made out of trunks alone. Stronger buildings also need stone, ]] ..
+[[for most buildings can’t be made out of logs alone. Stronger buildings also need stone, ]] ..
 [[but there is plenty to the north-east of here; ]] ..
 [[we just need to build a quarry, and my stonemasons will go to work promptly.]]
    )) .. new_objectives(obj_ensure_build_wares_production)
@@ -555,7 +555,7 @@ field_flooded_msg = {
    body = jundlina(p(_(
 [[Your red hair is a signal from the fire god. I will trust you and support your plan. ]] ..
 [[Our survival lies in your hands now, Ostur.]])) .. p(_(
-[[Swift now, we need a house for Ostur next to the lake, and we need planks, trunks and spidercloth ]] ..
+[[Swift now, we need a house for Ostur next to the lake, and we need planks, logs and spidercloth ]] ..
 [[for the construction there. Forget about everything else, ]] ..
 [[we need those wares on top of the mountain before our warehouses are all swallowed by the sea.]]
    ))) .. new_objectives(obj_build_ships)

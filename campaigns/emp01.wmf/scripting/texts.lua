@@ -164,8 +164,8 @@ amalea_2 = {
    body= amalea(_"Amalea recommends...",
    _([[Hey Lutius, I got the message that our first lumberjack has started his work today. ]] ..
 [[Perhaps it would be a good idea to wait until he cleans enough space for constructing two more lumberjack’s houses, ]] ..
-[[so that we can harvest the trunks faster.]]) .. "<br><br>" ..
-_([[But unfortunately the trunks are useless for repairing our ship – we need refined lumber, ]] ..
+[[so that we can harvest the logs faster.]]) .. "<br><br>" ..
+_([[But unfortunately the logs are useless for repairing our ship – we need refined lumber, ]] ..
 [[like every ship and every bigger building needs, too. ]] ..
 [[So we should build a sawmill – as soon as we have enough space for this.]]))
 .. new_objectives(obj_build_sawmill_and_lumberjacks),
@@ -177,7 +177,7 @@ amalea_3 = {
    body= amalea(_"Amalea comes in...",
    _([[Hi Lutius, I’ve got two important things to talk about... First the good news:]]) .. "<br><br>" ..
 _([[I noticed that the construction of the sawmill is complete, ]] ..
-[[so we can begin to refine the trunks that the lumberjacks are harvesting into lumber.]]) .. "<br><br>" ..
+[[so we can begin to refine the logs that the lumberjacks are harvesting into lumber.]]) .. "<br><br>" ..
 _([[But that’s just about the only positive thing I know to talk about. ]] ..
 [[The bad news is that our lumberjacks harvest at an incredible speed. ]] ..
 [[There are almost no trees left on this island.]]) .. "<br><br>" ..

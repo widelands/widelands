@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2014-03-05 11:26+0000\n"
+"POT-Creation-Date: 2014-03-05 18:31+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -693,7 +693,7 @@ msgstr ""
 
 #: ../../txts/tips/atlanteans.tip:6
 msgid ""
-"Always build a forester’s and a fish breeder’s house, so you will not run out of trunks or food."
+"Always build a forester’s and a fish breeder’s house, so you will not run out of logs or food."
 msgstr ""
 
 #: ../../txts/tips/barbarians.tip:6
@@ -704,7 +704,7 @@ msgstr ""
 
 #: ../../txts/tips/barbarians.tip:10
 msgid ""
-"Always build a ranger’s and a gamekeeper’s hut, so you will not run out of trunks or food."
+"Always build a ranger’s and a gamekeeper’s hut, so you will not run out of logs or food."
 msgstr ""
 
 #: ../../txts/tips/editor.tip:2
@@ -744,7 +744,7 @@ msgstr ""
 
 #: ../../txts/tips/empire.tip:10
 msgid ""
-"Always build a forester’s house so you will not run out of trunks."
+"Always build a forester’s house so you will not run out of logs."
 msgstr ""
 
 #: ../../txts/tips/general_game.tip:2

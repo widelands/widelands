@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2014-03-05 11:26+0000\n"
+"POT-Creation-Date: 2014-03-05 18:31+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -61,7 +61,7 @@ msgstr ""
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:47
 msgid ""
-"You will usually start the game with one headquarters. This is the big building with the blue flag in front of it. The headquarters is a warehouse that stores wares, workers and soldiers. Some wares are needed for building houses, others for making other wares. Obviously, the wares in the headquarters will not last forever, so you must make sure to replace them. The most important wares in the early game are the basic construction wares: trunks and raw stone. Let’s make sure that we do not run out of trunks. For this, we need a lumberjack and a hut for him to stay in."
+"You will usually start the game with one headquarters. This is the big building with the blue flag in front of it. The headquarters is a warehouse that stores wares, workers and soldiers. Some wares are needed for building houses, others for making other wares. Obviously, the wares in the headquarters will not last forever, so you must make sure to replace them. The most important wares in the early game are the basic construction wares: logs and raw stone. Let’s make sure that we do not run out of logs. For this, we need a lumberjack and a hut for him to stay in."
 msgstr ""
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:56
@@ -201,7 +201,7 @@ msgstr ""
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:163
 msgid ""
-"Excellent. The lumberjack’s hut is done. A lumberjack will now move in and start chopping down trees, so our trunks income is secured for now. Now on to the raw stone."
+"Excellent. The lumberjack’s hut is done. A lumberjack will now move in and start chopping down trees, so our logs income is secured for now. Now on to the raw stone."
 msgstr ""
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:171
