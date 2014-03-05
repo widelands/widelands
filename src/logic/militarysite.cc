@@ -60,7 +60,7 @@ m_heal_per_second    (0)
 	m_heal_per_second     = global_s.get_safe_int("heal_per_second");
 
 	if (m_conquer_radius > 0)
-		m_workarea_info[m_conquer_radius].insert(descname() + _(" conquer"));
+		m_workarea_info[m_conquer_radius].insert(descname() + " conquer");
 	m_prefers_heroes_at_start = global_s.get_safe_bool("prefer_heroes");
 	m_occupied_str = global_s.get_safe_string("occupied_string");
 	m_aggressor_str = global_s.get_safe_string("aggressor_string");
