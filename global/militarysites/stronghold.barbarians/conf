@@ -4,6 +4,12 @@ heal_per_second=110
 conquers=7
 buildable=no
 prefer_heroes=false
+occupied_string=
+aggressor_string=_Your Stronghold discovered an aggressor.
+attack_string=_Your Stronghold is under attack.
+defeated_enemy_string=_The enemy defeated your soldiers at the Stronghold
+defeated_you_string=_Your soldiers defeated the enemy at the Stronghold
+
 
 [idle]
 pics=../../../tribes/barbarians/stronghold/stronghold_i_??.png

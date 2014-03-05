@@ -59,9 +59,9 @@ void Map_Node_Ownership_Data_Packet::Read
 				map[i].set_owned_by(fr.Unsigned8());
 		} else
 			throw game_data_error
-				(_("unknown/unhandled version %u"), packet_version);
+				("unknown/unhandled version %u", packet_version);
 	} catch (const _wexception & e) {
-		throw game_data_error(_("ownership: %s"), e.what());
+		throw game_data_error("ownership: %s", e.what());
 	}
 }
 

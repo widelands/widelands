@@ -26,7 +26,8 @@ import confgettext
 MAINPOTS = [( "maps/maps", [
                 "../../maps/*/elemental",
                 "../../maps/*/*/elemental",
-                "../../campaigns/cconfig"
+                "../../campaigns/cconfig",
+                "../../campaigns/*/elemental"
             ] ),
             ( "texts/texts", ["../../txts/license",
                           "../../txts/*.lua",
@@ -63,9 +64,10 @@ MAINPOTS = [( "maps/maps", [
 # with the name of the instance.
 ITERATIVEPOTS = [
     ("scenario_%(name)s/scenario_%(name)s", "campaigns/",
-         ["../../campaigns/%(name)s/e*",
+         ["../../campaigns/%(name)s/extra_data",
           "../../campaigns/%(name)s/objective",
-          "../../campaigns/%(name)s/scripting/*.lua"
+          "../../campaigns/%(name)s/scripting/*.lua",
+          "../../scripting/format_scenario.lua"
          ]
     ),
     ("map_%(name)s/map_%(name)s", "maps/",
@@ -78,7 +80,8 @@ ITERATIVEPOTS = [
         ["../../tribes/%(name)s/conf",
          "../../tribes/%(name)s/*/conf",
          "../../tribes/%(name)s/scripting/*.lua",
-		 "../../tribes/%(name)s/*/help.lua"
+         "../../tribes/%(name)s/*/help.lua",
+         "../../global/militarysites/*/conf"
     ]
     ),
     ("world_%(name)s/world_%(name)s", "worlds/",
@@ -109,6 +112,7 @@ XGETTEXT = find_exectuable("xgettext")
 
 # Options passed to common external programs
 XGETTEXTOPTS ="-k_ --from-code=UTF-8"
+XGETTEXTOPTS+=" -F -c\"* TRANSLATORS\""
 # escaped double quotes are necessary for windows, as it ignores single quotes
 XGETTEXTOPTS+=" --copyright-holder=\"Widelands Development Team\""
 XGETTEXTOPTS+=" --msgid-bugs-address=\"widelands-public@lists.sourceforge.net\""
@@ -157,9 +161,9 @@ def do_compile( potfile, srcfiles ):
     if not l.found_something_to_translate:
         return False
 
-    file = open(potfile, "w")
-    file.write(str(l))
-    file.close()
+    with open(potfile, "w") as potfileobject:
+        potfileobject.write(str(l))
+        potfileobject.close()
     return True
 
 
@@ -197,11 +201,11 @@ def do_find_iterative(prefix, basedir, srcmasks):
             os.path.isdir(os.path.normpath("%s/%s" % (basedir, d))) and
             not os.path.basename(d).startswith('.')
     )
-    for file in directories:
+    for filename in directories:
         srcfiles = []
         for p in srcmasks:
-            srcfiles.append(p % { "name": file })
-        name = prefix % { "name": file }
+            srcfiles.append(p % { "name": filename })
+        name = prefix % { "name": filename }
         res.append((name, srcfiles))
 
     return res

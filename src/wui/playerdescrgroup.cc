@@ -19,6 +19,8 @@
 
 #include "wui/playerdescrgroup.h"
 
+#include <boost/format.hpp>
+
 #include "constants.h"
 #include "gamesettings.h"
 #include "graphic/graphic.h"
@@ -58,10 +60,10 @@ d(new PlayerDescriptionGroupImpl)
 	d->plnum = plnum;
 
 	int32_t xplrname = 0;
-	int32_t xplayertype = w * 28 / 125;
-	int32_t xplayerteam = w * 55 / 125;
-	int32_t xplayertribe = w * 60 / 125;
-	int32_t xplayerinit = w * 85 / 125;
+	int32_t xplayertype = w * 35 / 125;
+	int32_t xplayerteam = w * 35 / 125;
+	int32_t xplayertribe = w * 80 / 125;
+	int32_t xplayerinit = w * 55 / 125;
 	d->plr_name = new UI::Textarea(this, xplrname, 0, xplayertype - xplrname, h);
 	d->plr_name->set_textstyle(UI::TextStyle::makebold(font, UI_FONT_CLR_FG));
 	d->btnEnablePlayer = new UI::Checkbox(this, Point(xplayertype - 23, 0));
@@ -69,7 +71,7 @@ d(new PlayerDescriptionGroupImpl)
 		(boost::bind(&PlayerDescriptionGroup::enable_player, this, _1));
 	d->btnPlayerType = new UI::Button
 		(this, "player_type",
-		 xplayertype, 0, xplayerteam - xplayertype - 2, h,
+		 xplayertype, 0, xplayertribe - xplayertype - 2, h / 2,
 		 g_gr->images().get("pics/but1.png"),
 		 std::string(), std::string(),
 		 true, false);
@@ -78,7 +80,7 @@ d(new PlayerDescriptionGroupImpl)
 	d->btnPlayerType->set_font(font);
 	d->btnPlayerTeam = new UI::Button
 		(this, "player_team",
-		 xplayerteam, 0, xplayertribe - xplayerteam - 2, h,
+		 xplayerteam, h / 2, xplayerinit - xplayerteam - 2, h / 2,
 		 g_gr->images().get("pics/but1.png"),
 		 std::string(), std::string(),
 		 true, false);
@@ -87,7 +89,7 @@ d(new PlayerDescriptionGroupImpl)
 	d->btnPlayerTeam->set_font(font);
 	d->btnPlayerTribe = new UI::Button
 		(this, "player_tribe",
-		 xplayertribe, 0, xplayerinit - xplayertribe - 2, h,
+		 xplayertribe, 0, w - xplayertribe, h / 2,
 		 g_gr->images().get("pics/but1.png"),
 		 std::string(), std::string(),
 		 true, false);
@@ -96,7 +98,7 @@ d(new PlayerDescriptionGroupImpl)
 	d->btnPlayerTribe->set_font(font);
 	d->btnPlayerInit = new UI::Button
 		(this, "player_initialization",
-		 xplayerinit, 0, w - xplayerinit, h,
+		 xplayerinit, h / 2, w - xplayerinit, h / 2,
 		 g_gr->images().get("pics/but1.png"),
 		 std::string(), _("Initialization"),
 		 true, false);
@@ -169,11 +171,11 @@ void PlayerDescriptionGroup::refresh()
 				if (player.ai.empty())
 					title = _("Computer");
 				else {
-					title = _("AI: ");
 					if (player.random_ai) {
-						title += _("Random");
+						title += _("AI: Random");
 					} else {
-						title += _(player.ai);
+						/** TRANSLATORS %s = AI type, e.g. "Agressive" */
+						title += (boost::format(_("AI: %s")) % _(player.ai)).str();
 					}
 				}
 			} else { // PlayerSettings::stateHuman

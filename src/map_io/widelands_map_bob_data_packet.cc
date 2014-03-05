@@ -44,7 +44,7 @@ void Map_Bob_Data_Packet::ReadBob
 
 	try {
 		if (subtype != Bob::CRITTER && subtype != Bob::WORKER)
-			throw game_data_error(_("unknown bob type %u"), subtype);
+			throw game_data_error("unknown bob type %u", subtype);
 
 		if (not strcmp(owner, "world")) {
 			if (subtype != Bob::CRITTER)
@@ -98,7 +98,7 @@ void Map_Bob_Data_Packet::ReadBob
 							 owner, name);
 				}
 			} else
-				throw game_data_error(_("tribe \"%s\" does not exist"), owner);
+				throw game_data_error("tribe \"%s\" does not exist", owner);
 		}
 	} catch (const _wexception & e) {
 		throw game_data_error
@@ -132,9 +132,9 @@ void Map_Bob_Data_Packet::Read
 			}
 		else
 			throw game_data_error
-				(_("unknown/unhandled version %u"), packet_version);
+				("unknown/unhandled version %u", packet_version);
 	} catch (const _wexception & e) {
-		throw game_data_error(_("bobs: %s"), e.what());
+		throw game_data_error("bobs: %s", e.what());
 	}
 }
 

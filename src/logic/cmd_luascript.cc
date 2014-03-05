@@ -54,9 +54,9 @@ void Cmd_LuaScript::Read
 			m_script = fr.String();
 		} else
 			throw game_data_error
-				(_("unknown/unhandled version %u"), packet_version);
+				("unknown/unhandled version %u", packet_version);
 	} catch (const _wexception & e) {
-		throw game_data_error(_("lua: %s"), e.what());
+		throw game_data_error("lua: %s", e.what());
 	}
 }
 void Cmd_LuaScript::Write

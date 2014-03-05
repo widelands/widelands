@@ -138,11 +138,11 @@ ImmovableProgram::ImmovableProgram
 			action = new ActConstruction(v->get_string(), immovable, directory, prof);
 		else
 			throw game_data_error
-				(_("unknown command type \"%s\""), v->get_name());
+				("unknown command type \"%s\"", v->get_name());
 		m_actions.push_back(action);
 	}
 	if (m_actions.empty())
-		throw game_data_error(_("no actions"));
+		throw game_data_error("no actions");
 }
 
 
@@ -189,7 +189,7 @@ Immovable_Descr::Immovable_Descr
 				m_size = BaseImmovable::BIG;
 			else
 				throw game_data_error
-					(_("expected %s but found \"%s\""),
+					("expected %s but found \"%s\"",
 					 "{\"small\"|\"medium\"|\"big\"}", string);
 		} catch (const _wexception & e) {
 			throw game_data_error("size: %s", e.what());
@@ -201,7 +201,7 @@ Immovable_Descr::Immovable_Descr
 		uint32_t attrib = get_attribute_id(v->get_string());
 		if (attrib < Map_Object::HIGHEST_FIXED_ATTRIBUTE)
 			if (attrib != Map_Object::RESI)
-				throw game_data_error(_("bad attribute \"%s\""), v->get_string());
+				throw game_data_error("bad attribute \"%s\"", v->get_string());
 		add_attribute(attrib);
 	}
 
@@ -214,12 +214,12 @@ Immovable_Descr::Immovable_Descr
 			 tolower);
 		try {
 			if (m_programs.count(program_name))
-				throw game_data_error(_("this program has already been declared"));
+				throw game_data_error("this program has already been declared");
 			m_programs[program_name.c_str()] =
 				new ImmovableProgram(directory, prof, program_name, *this);
 		} catch (const std::exception & e) {
 			throw game_data_error
-				(_("program %s: %s"), program_name.c_str(), e.what());
+				("program %s: %s", program_name.c_str(), e.what());
 		}
 	}
 
@@ -251,9 +251,9 @@ Immovable_Descr::Immovable_Descr
 					terrain_affinity_s->get_natural(terrain_type_name, 0);
 				if ((*it = value) != value)
 					throw game_data_error
-						(_("expected 0 .. 255 but found %u"), value);
+						("expected %s but found %u", "0 .. 255", value);
 				if (terrain_affinity_s->get_next_val(terrain_type_name))
-					throw game_data_error(_("duplicated"));
+					throw game_data_error("duplicated");
 			} catch (const _wexception & e) {
 				throw game_data_error
 					("[terrain affinity] %s: %s", terrain_type_name, e.what());
@@ -266,12 +266,12 @@ Immovable_Descr::Immovable_Descr
 					uint32_t const value = v->get_natural();
 					if ((*it = value) != value)
 						throw game_data_error
-							(_("expected 0 .. 255 but found %u"), value);
+						("expected %s but found %u", "0 .. 255", value);
 					if (terrain_affinity_s->get_next_val(v->get_name()))
-						throw game_data_error(_("duplicated"));
+						throw game_data_error("duplicated");
 				} catch (const _wexception & e) {
 					throw game_data_error
-						(_("[terrain affinity] \"%s\" (not in current world): %s"),
+						("[terrain affinity] \"%s\" (not in current world): %s",
 						 v->get_name(), e.what());
 				}
 		}
@@ -307,7 +307,7 @@ ImmovableProgram const * Immovable_Descr::get_program
 
 	if (it == m_programs.end())
 		throw game_data_error
-			(_("immovable %s has no program \"%s\""),
+			("immovable %s has no program \"%s\"",
 			 name().c_str(), programname.c_str());
 
 	return it->second;
@@ -771,16 +771,16 @@ Map_Object::Loader * Immovable::load
 						imm = new Immovable(*tribe->get_immovable_descr(idx));
 					else
 						throw game_data_error
-							(_("tribe %s does not define immovable type \"%s\""),
+							("tribe %s does not define immovable type \"%s\"",
 							 owner, effective_name.c_str());
 				} else
-					throw wexception(_("unknown tribe %s"), owner);
+					throw wexception("unknown tribe %s", owner);
 			} else { //  world immovable
 				const World & world = egbase.world();
 				int32_t const idx = world.get_immovable_index(name);
 				if (idx == -1)
 					throw wexception
-						(_("world does not define immovable type \"%s\""), name);
+						("world does not define immovable type \"%s\"", name);
 
 				imm = new Immovable(*world.get_immovable_descr(idx));
 			}
@@ -788,9 +788,9 @@ Map_Object::Loader * Immovable::load
 			loader->init(egbase, mol, *imm);
 			loader->load(fr, version);
 		} else
-			throw game_data_error(_("unknown/unhandled version %u"), version);
+			throw game_data_error("unknown/unhandled version %u", version);
 	} catch (const std::exception & e) {
-		throw wexception(_("immovable type %s"), e.what());
+		throw wexception("immovable type %s", e.what());
 	}
 
 	return loader.release();
@@ -823,8 +823,8 @@ ImmovableProgram::ActAnimate::ActAnimate
 			long int const value = strtol(parameters, &endp, 0);
 			if (*endp or value <= 0)
 				throw game_data_error
-					(_("expected %s but found \"%s\""),
-					 _("duration in ms"), parameters);
+					("expected %s but found \"%s\"",
+					 "duration in ms", parameters);
 			m_duration = value;
 		} else
 			m_duration = 0; //  forever
@@ -863,7 +863,7 @@ ImmovableProgram::ActPlayFX::ActPlayFX
 			priority = value;
 			if (*endp or priority != value)
 				throw game_data_error
-					(_("expected %s but found \"%s\""), _("priority"), parameters);
+					("expected %s but found \"%s\"", "priority", parameters);
 		} else
 			priority = 127;
 
@@ -902,9 +902,7 @@ ImmovableProgram::ActTransform::ActTransform
 				long int const value = atoi(params[i].c_str());
 				if (value < 1 or 254 < value)
 					throw game_data_error
-						(_
-							("expected probability in range [1, 254] but found "
-							"\"%s\""),
+						("expected %s but found \"%s\"", "probability in range [1, 254]",
 						 params[i].c_str());
 				probability = value;
 			} else {
@@ -921,9 +919,9 @@ ImmovableProgram::ActTransform::ActTransform
 						tribe = true;
 					} else
 						throw game_data_error
-							(_
-								("unknown scope \"%s\" given for target type (must be "
-								 "\"world\" or \"tribe\")"),
+							(
+							 "unknown scope \"%s\" given for target type (must be "
+							 "\"world\" or \"tribe\")",
 							 parameters);
 
 					type_name = segments[1];
@@ -933,7 +931,7 @@ ImmovableProgram::ActTransform::ActTransform
 			}
 		}
 		if (type_name == descr.name())
-			throw game_data_error(_("illegal transformation to the same type"));
+			throw game_data_error("illegal transformation to the same type");
 	} catch (const _wexception & e) {
 		throw game_data_error("transform: %s", e.what());
 	}
@@ -974,15 +972,15 @@ ImmovableProgram::ActGrow::ActGrow
 				Tribe_Descr const * const owner_tribe = descr.get_owner_tribe();
 				if (not owner_tribe)
 					throw game_data_error
-						(_
-						 	("immovable type not in tribe but target type has scope "
-						 	 "(\"%s\")"),
+						(
+						 "immovable type not in tribe but target type has scope "
+						 "(\"%s\")",
 						 parameters);
 				else if (strcmp(parameters, "world"))
 					throw game_data_error
-						(_
-						 	("scope \"%s\" given for target type (must be "
-						 	 "\"world\")"),
+						(
+						 "scope \"%s\" given for target type (must be "
+						 "\"world\")",
 						 parameters);
 				tribe = false;
 				parameters = p;
@@ -1028,8 +1026,8 @@ ImmovableProgram::ActRemove::ActRemove(char * parameters, Immovable_Descr &)
 			long int const value = strtol(parameters, &endp, 0);
 			if (*endp or value < 1 or 254 < value)
 				throw game_data_error
-					(_("expected %s but found \"%s\""),
-					 _("probability in range [1, 254]"), parameters);
+					("expected %s but found \"%s\"",
+					 "probability in range [1, 254]", parameters);
 			probability = value;
 		} else
 			probability = 0;
@@ -1061,15 +1059,15 @@ ImmovableProgram::ActSeed::ActSeed(char * parameters, Immovable_Descr & descr)
 				Tribe_Descr const * const owner_tribe = descr.get_owner_tribe();
 				if (not owner_tribe)
 					throw game_data_error
-						(_
-						 	("immovable type not in tribe but target type has scope "
-						 	 "(\"%s\")"),
+						(
+						 "immovable type not in tribe but target type has scope "
+						 "(\"%s\")",
 						 parameters);
 				else if (strcmp(parameters, "world"))
 					throw game_data_error
-						(_
-						 	("scope \"%s\" given for target type (must be "
-						 	 "\"world\")"),
+						(
+						 "scope \"%s\" given for target type (must be "
+						 "\"world\")",
 						 parameters);
 				tribe = false;
 				parameters = p;
@@ -1082,9 +1080,7 @@ ImmovableProgram::ActSeed::ActSeed(char * parameters, Immovable_Descr & descr)
 				long int const value = strtol(p, &endp, 0);
 				if (*endp or value < 1 or 254 < value)
 					throw game_data_error
-						(_
-						 	("expected probability in range [1, 254] but found "
-						 	 "\"%s\""),
+						("expected %s but found \"%s\"", "probability in range [1, 254]",
 						 p);
 				probability = value;
 			//  fallthrough
@@ -1484,9 +1480,9 @@ void PlayerImmovable::Loader::load(FileRead & fr)
 
 			imm.m_owner = owner;
 		} else
-			throw game_data_error(_("unknown/unhandled version %u"), version);
+			throw game_data_error("unknown/unhandled version %u", version);
 	} catch (const std::exception & e) {
-		throw wexception(_("loading player immovable: %s"), e.what());
+		throw wexception("loading player immovable: %s", e.what());
 	}
 }
 

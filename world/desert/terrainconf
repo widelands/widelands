@@ -5,28 +5,28 @@
 ##### suggestions without having to worry about the localized name of terrain
 
 [desert1]
-name=_"Desert1"
+name=_"Desert 1"
 is=dry
 dither_layer=20
 
 [desert2]
-name=_"Desert2"
+name=_"Desert 2"
 is=dry
 dither_layer=20
 
 [desert3]
-name=_"Desert3"
+name=_"Desert 3"
 is=dry
 dither_layer=20
 
 [desert4]
-name=_"Desert4"
+name=_"Desert 4"
 def_resources=water 2
 is=green
 dither_layer=20
 
 [drysoil]
-name=_"Dry soil"
+name=_"Dry Soil"
 def_resources=water 4
 is=green
 dither_layer=30
@@ -49,36 +49,36 @@ is=green
 dither_layer=40
 
 [mountainmeadow]
-name=_"Mountain meadow"
+name=_"Mountain Meadow"
 is=green
 dither_layer=50
 
 [highmountainmeadow]
-name=_"High mountain meadow"
+name=_"High Mountain Meadow"
 is=green
 dither_layer=60
 
 [mountain1]
-name=_"Mountain1"
-resources=coal, iron, gold, granite
+name=_"Mountain 1"
+resources=coal, iron, gold, granit
 is=mountain
 dither_layer=70
 
 [mountain2]
-name=_"Mountain2"
-resources=coal, iron, gold, granite
+name=_"Mountain 2"
+resources=coal, iron, gold, granit
 is=mountain
 dither_layer=70
 
 [mountain3]
-name=_"Mountain3"
-resources=coal, iron, gold, granite
+name=_"Mountain 3"
+resources=coal, iron, gold, granit
 is=mountain
 dither_layer=70
 
 [mountain4]
-name=_"Mountain4"
-resources=coal, iron, gold, granite
+name=_"Mountain 4"
+resources=coal, iron, gold, granit
 is=mountain
 dither_layer=70
 

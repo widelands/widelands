@@ -81,12 +81,12 @@ void Map_Flagdata_Data_Packet::Read
 						{
 							if (mf != &flag)
 								throw game_data_error
-									(_("wrong flag (%u) at given position (%i, %i)"),
+									("wrong flag (%u) at given position (%i, %i)",
 									 mf->serial(),
 									 flag.m_position.x, flag.m_position.y);
 						} else
 							throw game_data_error
-								(_("no flag at given position (%i, %i)"),
+								("no flag at given position (%i, %i)",
 								 flag.m_position.x, flag.m_position.y);
 					}
 					flag.m_animstart = fr.Unsigned16();
@@ -105,15 +105,15 @@ void Map_Flagdata_Data_Packet::Read
 									mol.get<Building>(building_serial);
 								if (flag.m_building != &building)
 									throw game_data_error
-										(_
-										 	("has building %u at (%i, %i), which is not "
-										 	 "at the top left node"),
+										(
+									 	 "has building %u at (%i, %i), which is not "
+									 	 "at the top left node",
 										 building_serial,
 										 building.get_position().x,
 										 building.get_position().y);
 							} catch (const _wexception & e) {
 								throw game_data_error
-									(_("building (%u): %s"), building_serial, e.what());
+									("building (%u): %s", building_serial, e.what());
 							}
 						else
 							flag.m_building = nullptr;
@@ -212,14 +212,14 @@ void Map_Flagdata_Data_Packet::Read
 						mol.mark_object_as_loaded(flag);
 					}
 				} catch (const _wexception & e) {
-					throw game_data_error(_("%u: %s"), serial, e.what());
+					throw game_data_error("%u: %s", serial, e.what());
 				}
 			}
 		} else
 			throw game_data_error
-				(_("unknown/unhandled version %u"), packet_version);
+				("unknown/unhandled version %u", packet_version);
 	} catch (const _wexception & e) {
-		throw game_data_error(_("flagdata: %s"), e.what());
+		throw game_data_error("flagdata: %s", e.what());
 	}
 }
 

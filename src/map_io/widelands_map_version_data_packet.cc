@@ -70,9 +70,9 @@ void Map_Version_Data_Packet::Read
 			map.m_map_version.m_map_version_timestamp = ts;
 		} else
 			throw game_data_error
-				(_("unknown/unhandled version %u"), packet_version);
+				("unknown/unhandled version %u", packet_version);
 	} catch (const _wexception & e) {
-		throw game_data_error(_("version: %s"), e.what());
+		throw game_data_error("version: %s", e.what());
 	}
 }
 

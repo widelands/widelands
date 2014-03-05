@@ -69,13 +69,13 @@ Editor_Interactive::Editor_Interactive(Widelands::Editor_Game_Base & e) :
 	m_toggle_toolsize_menu
 	(INIT_BUTTON
 	 ("editor_menu_set_toolsize_menu", "toolsize",
-	  _("Toolsize"))),
+	  _("Tool Size"))),
 	m_toggle_minimap
 	(INIT_BUTTON
 	 ("menu_toggle_minimap", "minimap", _("Minimap"))),
 	m_toggle_buildhelp
 	(INIT_BUTTON
-	 ("menu_toggle_buildhelp", "buildhelp", _("Buildhelp"))),
+	 ("menu_toggle_buildhelp", "buildhelp", _("Show Building Spaces (on/off)"))),
 	m_toggle_player_menu
 	(INIT_BUTTON
 	 ("editor_menu_player_menu", "players", _("Players"))),
@@ -243,8 +243,8 @@ void Editor_Interactive::exit() {
 	if (m_need_save) {
 		UI::WLMessageBox mmb
 		(this,
-		 _("Map unsaved"),
-		 _("The Map is unsaved, do you really want to quit?"),
+		 _("Unsaved Map"),
+		 _("The Map has not been saved, do you really want to quit?"),
 		 UI::WLMessageBox::YESNO);
 		if (mmb.run() == 0)
 			return;

@@ -308,7 +308,7 @@ void Building_Window::create_capsbuttons(UI::Box * capsbuttons)
 				 0, 0, 34, 34,
 				 g_gr->images().get("pics/but4.png"),
 				 g_gr->images().get("pics/workarea123.png"),
-				 _("Hide workarea"));
+				 _("Hide work area"));
 			m_toggle_workarea->sigclicked.connect
 				(boost::bind(&Building_Window::toggle_workarea, boost::ref(*this)));
 
@@ -511,10 +511,10 @@ void Building_Window::configure_workarea_button()
 {
 	if (m_toggle_workarea) {
 		if (m_workarea_job_id) {
-			m_toggle_workarea->set_tooltip(_("Hide workarea"));
+			m_toggle_workarea->set_tooltip(_("Hide work area"));
 			m_toggle_workarea->set_perm_pressed(true);
 		} else {
-			m_toggle_workarea->set_tooltip(_("Show workarea"));
+			m_toggle_workarea->set_tooltip(_("Show work area"));
 			m_toggle_workarea->set_perm_pressed(false);
 		}
 	}

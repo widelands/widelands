@@ -1,4 +1,4 @@
-help=_Cuts raw pieces of granite and marble out of laying stones.
+help=_Cuts raw pieces of granite and marble out of rocks.
 program=cut_stone
 program=cut_marble
 

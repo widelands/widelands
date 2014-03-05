@@ -263,7 +263,7 @@ Warehouse_Descr::Warehouse_Descr
 {
 	m_heal_per_second = global_s.get_safe_int("heal_per_second");
 	if ((m_conquers = prof.get_safe_section("global").get_positive("conquers", 0)))
-		m_workarea_info[m_conquers].insert(descname() + _(" conquer"));
+		m_workarea_info[m_conquers].insert(descname() + " conquer");
 }
 
 /*

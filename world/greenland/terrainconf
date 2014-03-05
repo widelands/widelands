@@ -10,8 +10,8 @@ is=green
 dither_layer=20
 
 [berg1]
-name=_"Mountain1"
-resources=coal, iron, gold, granite
+name=_"Mountain 1"
+resources=coal, iron, gold, granit
 is=mountain
 dither_layer=60
 
@@ -40,49 +40,49 @@ fps=14
 dither_layer=0
 
 [wiese1]
-name=_"Meadow1"
+name=_"Meadow 1"
 def_resources=water 10
 is=green
 dither_layer=40
 
 [wiese2]
-name=_"Meadow2"
+name=_"Meadow 2"
 def_resources=water 10
 is=green
 dither_layer=40
 
 [wiese3]
-name=_"Meadow3"
+name=_"Meadow 3"
 def_resources=water 10
 is=green
 dither_layer=40
 
 [berg2]
-name=_"Mountain2"
-resources=coal, iron, gold, granite
+name=_"Mountain 2"
+resources=coal, iron, gold, granit
 is=mountain
 dither_layer=60
 
 [berg3]
-name=_"Mountain3"
-resources=coal, iron, gold, granite
+name=_"Mountain 3"
+resources=coal, iron, gold, granit
 is=mountain
 dither_layer=60
 
 [berg4]
-name=_"Mountain4"
-resources=coal, iron, gold, granite
+name=_"Mountain 4"
+resources=coal, iron, gold, granit
 is=mountain
 dither_layer=60
 
 [steppe_kahl]
-name=_"Barren steppe"
+name=_"Barren Steppe"
 def_resources=water 4
 is=green
 dither_layer=20
 
 [wiese4]
-name=_"Meadow4"
+name=_"Meadow 4"
 def_resources=water 10
 is=green
 dither_layer=40
@@ -93,6 +93,6 @@ is=acid
 dither_layer=80
 
 [bergwiese]
-name=_"Mountain meadow"
+name=_"Mountain Meadow"
 is=green
 dither_layer=50

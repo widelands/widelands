@@ -19,6 +19,8 @@
 
 #include "logic/worker.h"
 
+#include <boost/format.hpp>
+
 #include "economy/economy.h"
 #include "economy/flag.h"
 #include "economy/portdock.h"
@@ -599,16 +601,18 @@ void Worker::informPlayer
 	if (residx != -1)
 		res_type = world.get_resource(residx)->descname();
 
+	// NOTE mirroring the above ugly hack.
+	// Avoiding placeholders for the resouce names to avert grammar trouble in translations.
+	std::string out_of_message =_("Out of Resources");
+	if (res_type == "fish") out_of_message =_("Out of Fish");
+	else if (res_type == "stone") out_of_message =_("Out of Stone");
+
 	building.send_message
 		(game,
 		 "mine",
-		 _("Out of ") + res_type,
-		 std::string
-		 	(_
-		 	 ("The worker of this building cannot find any more resources "
-		 	 "of the following type: "))
-		 +
-		 res_type,
+		 out_of_message,
+		 (boost::format(_("The worker of this building cannot find any more resources "
+		 	 "of the following type: %s")) % res_type).str(),
 		 true,
 		 1800000, 0);
 }
@@ -1869,7 +1873,7 @@ void Worker::return_update(Game & game, State & state)
 		char buffer[2048];
 		snprintf
 			(buffer, sizeof(buffer),
-			 _ ("Your %s can't find a way home and will likely die."),
+			 _ ("Your %s can’t find a way home and will likely die."),
 			 descname().c_str());
 		owner().add_message
 			(game,
@@ -3091,7 +3095,7 @@ Map_Object::Loader * Worker::load
 		loader->load(fr);
 		return loader.release();
 	} catch (const std::exception & e) {
-		throw wexception(_("loading worker: %s"), e.what());
+		throw wexception("loading worker: %s", e.what());
 	}
 
 	return nullptr; // Should not be reached

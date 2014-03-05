@@ -491,8 +491,8 @@ bool Game::run
 					 _
 					 	("Widelands could not start the game, because player %u has "
 					 	 "no starting position.\n"
-					 	 "You can manually add a starting position with Widelands "
-					 	 "Editor, to fix this problem."),
+					 	 "You can manually add a starting position with the Widelands "
+					 	 "Editor to fix this problem."),
 					 p);
 			}
 		}

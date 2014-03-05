@@ -24,17 +24,22 @@ class _TestLua_GetText_SingleFile(unittest.TestCase):
     def run_test(self):
         self.p.parse(self.code, self.filename)
 
-        print self.p.findings
-
         # Make sure we didn't find anything more then expected
         nfindings = sum(len(self.p.findings[i]) for i in self.p.findings.keys())
         self.assertEqual(len(self.items), nfindings)
 
-        for entry, count, line in self.items:
-            self.assertTrue(entry in self.p.findings, "'%s' not found!" % entry)
-            self.assertEqual(self.p.findings[entry][count],
-                             (self.filename, line)
-            )
+        for item in self.items:
+            msg_id, count, line = item[:3]
+            msgid_plural = None
+            translator_comment = ""
+            if len(item) == 4:
+                msgid_plural = item[3]
+            if len(item) == 5:
+                translator_comment = item[4]
+            self.assertEqual(self.p.findings[msg_id][count].filename, self.filename)
+            self.assertEqual(self.p.findings[msg_id][count].lineno, line)
+            self.assertEqual(self.p.findings[msg_id][count].msgid_plural, msgid_plural)
+            self.assertEqual(self.p.findings[msg_id][count].translator_comment, translator_comment)
 
 
 ##################
@@ -155,7 +160,7 @@ class TestConcatStrings_MixQuotes1(_TestLua_GetText_SingleFile):
     '''
 class TestConcatStrings_Difficult(_TestLua_GetText_SingleFile):
     items = [
-        ("a lumberjack'ssecond linethird line.", 0, 3),
+        ("a lumberjack'ssecond linethird line.", 0, 4),
     ]
 
     code = '''
@@ -254,6 +259,35 @@ class TestVerySimpleMultilineString(_TestLua_GetText_SingleFile):
     ]
     code = """_ [[ "There is an old saying:<br> blah ]]"""
 
+class TestNgettextStuff(_TestLua_GetText_SingleFile):
+    items = [
+        ("car", 0, 3, "cars"),
+    ]
+    code = """
+function a()
+    local p = ngettext("car", "cars", item)
+    end
+"""
+
+class TestTranslatorComment(_TestLua_GetText_SingleFile):
+    items = [
+        ("blub", 0, 3, None, """TRANSLATORS: This is "blub" 'test'"""),
+    ]
+    code = """
+-- TRANSLATORS: This is "blub" 'test'
+function a() return _ "blub" end
+"""
+
+class TestTranslatorCommentMultiline(_TestLua_GetText_SingleFile):
+    items = [
+        ("blub", 0, 4, None, """TRANSLATORS: This is "blub" 'test'\nTRANSLATORS: And this should be clear"""),
+    ]
+    code = """
+-- TRANSLATORS: This is "blub" 'test'
+-- TRANSLATORS: And this should be clear
+function a() return _ "blub" end
+"""
+
 class TestRealWorldExample(_TestLua_GetText_SingleFile):
     items = [
      ("A young man approaches", 0, 2),
@@ -270,8 +304,30 @@ a much longer distance and maybe escape from Lutas' influence.
 },
 """
 
+class TestRealWorldExample1(_TestLua_GetText_SingleFile):
+    items = [
+        ("%s has been King of the Hill since %s!", 0, 1)
+    ]
+    code = """had_control_for = rt(p(_[[%s has been King of the Hill since %s!]]))"""
+
+class TestRealWorldExample2(_TestLua_GetText_SingleFile):
+    items = [
+        ("An old man says...", 0, 5),
+        (' "Hail, chieftain. I am Khantrukh and have seen many winters pass. Please allow me to aid you with my counsel through these darkened days." ', 0, 7)
+    ]
+    code = """
+-- Khantruth's texts
+-- Khantruth"s texts
+khantrukh_1="<rt><p font-size=24 font-face=DejaVuSerif font-weight=bold font-color=8080FF>" ..
+_"An old man says..." ..
+"</p></rt><rt image=map:khantrukh.png><p line-spacing=3 font-size=12>" ..
+_[[ "Hail, chieftain. I am Khantrukh and have seen many winters pass. Please allow me to aid you with my counsel through these darkened days." ]] ..
+"</p></rt>"
+"""
+
+
+
 if __name__ == '__main__':
    unittest.main()
-   # k = SomeTestClass()
-   # unittest.TextTestRunner().run(k)
-
+   k = SomeTestClass()
+   unittest.TextTestRunner().run(k)

@@ -43,25 +43,25 @@ GameMessageMenu::GameMessageMenu
 	(Interactive_Player & plr, UI::UniqueWindow::Registry & registry)
 	:
 	UI::UniqueWindow
-		(&plr, "messages", &registry, 370, 375, _("Message Menu: Inbox")),
+		(&plr, "messages", &registry, 580, 375, _("Message Menu: Inbox")),
 	message_body
 		(this,
-		 5, 150, 360, 220,
+		 5, 150, 570, 220,
 		 "", UI::Align_Left, 1),
 	mode(Inbox)
 {
-	list = new UI::Table<uintptr_t>(this, 5, 35, 360, 110);
+	list = new UI::Table<uintptr_t>(this, 5, 35, 570, 110);
 	list->selected.connect(boost::bind(&GameMessageMenu::selected, this, _1));
 	list->double_clicked.connect(boost::bind(&GameMessageMenu::double_clicked, this, _1));
-	list->add_column (50, _("Select"), UI::Align_HCenter, true);
-	list->add_column (50, _("Status"), UI::Align_HCenter);
-	list->add_column(136, _("Title"));
-	list->add_column(100, _("Received"));
+	list->add_column (60, _("Select"), UI::Align_HCenter, true);
+	list->add_column (60, _("Status"), UI::Align_HCenter);
+	list->add_column(330, _("Title"));
+	list->add_column(120, _("Time sent"));
 
 	UI::Button * clearselectionbtn =
 		new UI::Button
 			(this, "clear_selection",
-			 5, 5, 70, 25,
+			 5, 5, 140, 25,
 			 g_gr->images().get("pics/but0.png"),
 			 _("Clear"), _("Clear selection"));
 	clearselectionbtn->sigclicked.connect
@@ -70,7 +70,7 @@ GameMessageMenu::GameMessageMenu
 	UI::Button * invertselectionbtn =
 		new UI::Button
 			(this, "invert_selection",
-			 80, 5, 70, 25,
+			 150, 5, 140, 25,
 			 g_gr->images().get("pics/but0.png"),
 			 _("Invert"), _("Invert selection"));
 	invertselectionbtn->sigclicked.connect
@@ -79,7 +79,7 @@ GameMessageMenu::GameMessageMenu
 	m_archivebtn =
 		new UI::Button
 			(this, "archive_or_restore_selected_messages",
-			 155, 5, 25, 25,
+			 295, 5, 25, 25,
 			 g_gr->images().get("pics/but2.png"),
 			 g_gr->images().get("pics/message_archive.png"),
 			 _("Archive selected messages"));
@@ -89,7 +89,7 @@ GameMessageMenu::GameMessageMenu
 	m_togglemodebtn =
 		new UI::Button
 			(this, "toggle_between_inbox_or_archive",
-			 185, 5, 100, 25,
+			 325, 5, 190, 25,
 			 g_gr->images().get("pics/but2.png"),
 			 _("Show Archive"));
 	m_togglemodebtn->sigclicked.connect
@@ -98,7 +98,7 @@ GameMessageMenu::GameMessageMenu
 	m_centerviewbtn =
 		new UI::Button
 			(this, "center_main_mapview_on_location",
-			 340, 5, 25, 25,
+			 550, 5, 25, 25,
 			 g_gr->images().get("pics/but2.png"),
 			 g_gr->images().get("pics/menu_goto.png"),
 			 _("center main mapview on location"),

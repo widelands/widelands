@@ -23,6 +23,7 @@
 
 #include <boost/format.hpp>
 #include <boost/lexical_cast.hpp>
+#include <libintl.h>
 #ifndef _WIN32
 #include <unistd.h> // for usleep
 #endif
@@ -364,14 +365,21 @@ struct HostChatProvider : public ChatProvider {
 			// Help
 			if (cmd == "help") {
 				c.msg =
-					_
-					 ("<br>Available host commands are:<br>"
-					  "/help  -  Shows this help<br>"
-					  "/announce <msg>  -  Send a chatmessage as announcement (system chat)<br>"
-					  "/warn <name> <reason>  -  Warn the user <name> because of <reason><br>"
-					  "/kick <name> <reason>  -  Kick the user <name> because of <reason><br>"
-					  "/forcePause            -  Force the game to pause.<br>"
-					  "/endForcedPause        -  Puts game back to normal speed.");
+					(boost::format("<br>%s<br>%s<br>%s<br>%s<br>%s<br>%s<br>%s")
+						% _("Available host commands are:")
+						/** TRANSLATORS: Available host command */
+						% _("/help  -  Shows this help")
+						/** TRANSLATORS: Available host command */
+						% _("/announce <msg>  -  Send a chatmessage as announcement (system chat)")
+						/** TRANSLATORS: Available host command */
+						% _("/warn <name> <reason>  -  Warn the user <name> because of <reason>")
+						/** TRANSLATORS: Available host command */
+						% _("/kick <name> <reason>  -  Kick the user <name> because of <reason>")
+						/** TRANSLATORS: Available host command */
+						% _("/forcePause            -  Force the game to pause.")
+						/** TRANSLATORS: Available host command */
+						% _("/endForcedPause        -  Return game to normal speed.")
+					).str();
 				if (!h->isDedicated())
 					c.recipient = h->getLocalPlayername();
 			}
@@ -1198,20 +1206,27 @@ void NetHost::handle_dserver_command(std::string cmdarray, std::string sender)
 	if (cmd == "help") {
 		if (d->game)
 			c.msg =
-				_
-				("<br>Available host commands are:<br>"
-				 "help   - Shows this help<br>"
-				 "host $ - Tries to run the host command $<br>"
-				 "save $ - Saves the current game state as $.wgf");
+				(boost::format("<br>%s<br>%s<br>%s<br>%s")
+					% _("Available host commands are:")
+					/** TRANSLATORS: Available host command */
+					% _("/help  -  Shows this help")
+					/** TRANSLATORS: Available host command */
+					% _("host $ - Tries to run the host command $")
+					/** TRANSLATORS: Available host command */
+					% _("save $ - Saves the current game state as $.wgf")
+				).str();
 		else
 			c.msg =
-				_
-				("<br>Available host commands are:<br>"
-				 "help           - Shows this help<br>"
-				 "host         $ - Tries to run the host command $");
+				(boost::format("<br>%s<br>%s<br>%s")
+					% _("Available host commands are:")
+					/** TRANSLATORS: Available host command */
+					% _("/help  -  Shows this help")
+					/** TRANSLATORS: Available host command */
+					% _("host $ - Tries to run the host command $")
+				).str();
 		if (m_password.size() > 1) {
 			c.msg += "<br>";
-			c.msg += _("pwd          $ - Sends the password $ to the host");
+			c.msg += _("pwd $  - Sends the password $ to the host");
 		}
 		send(c);
 
@@ -1223,7 +1238,7 @@ void NetHost::handle_dserver_command(std::string cmdarray, std::string sender)
 			return;
 		}
 		std::string temp = arg1 + " " + arg2;
-		c.msg = (format(_("%s told me to run the command: \"%s\"")) % sender % temp).str();
+		c.msg = (format(_("%1$s told me to run the command: \"%2$s\"")) % sender % temp).str();
 		c.recipient = "";
 		send(c);
 		d->chat.send(temp);
@@ -1235,7 +1250,7 @@ void NetHost::handle_dserver_command(std::string cmdarray, std::string sender)
 			c.msg = _("Sorry! Saving was deactivated on this dedicated server!");
 			send(c);
 		} else if (!d->game) {
-			c.msg = _("Can not save, as long as no game is running!");
+			c.msg = _("Cannot save while there is no game running!");
 			send(c);
 		} else {
 			//try to save the game
@@ -1248,7 +1263,10 @@ void NetHost::handle_dserver_command(std::string cmdarray, std::string sender)
 			if (sh.save_game(*d->game, savename, error))
 				c.msg = _("Game successfully saved!");
 			else
-				c.msg = (format(_("Could not save the game to the file \"%s\"! (%s)")) % savename % error).str();
+				c.msg =
+					(format(_("Could not save the game to the file \"%1$s\"! (%2$s)"))
+					 % savename % error)
+					 .str();
 			send(c);
 			delete error;
 		}
@@ -1982,7 +2000,7 @@ std::string NetHost::getComputerPlayerName(uint8_t const playernum)
 	uint32_t suffix = playernum;
 	do {
 		char buf[200];
-		snprintf(buf, sizeof(buf), _("Computer%u"), ++suffix);
+		snprintf(buf, sizeof(buf), _("Computer %u"), ++suffix);
 		name = buf;
 	} while (haveUserName(name, playernum));
 	return name;
@@ -2056,7 +2074,7 @@ void NetHost::welcomeClient (uint32_t const number, std::string & playername)
 		do {
 			char buf[32];
 			snprintf(buf, sizeof(buf), "%u", i++);
-			effective_name = playername + buf;
+			effective_name = (boost::format(_("Player %s")) % buf).str();
 		} while (haveUserName(effective_name, client.usernum));
 	}
 
@@ -2244,7 +2262,8 @@ void NetHost::checkHungClients()
 					// inform the other clients about the problem regulary
 					if (deltanow - d->clients.at(i).lastdelta > 30) {
 						char buf[5];
-						snprintf(buf, sizeof(buf), "%li", deltanow);
+						//snprintf(buf, sizeof(buf), "%li", deltanow);
+						snprintf(buf, sizeof(buf), ngettext("%li second", "%li seconds", deltanow), deltanow);
 						sendSystemMessageCode
 							("CLIENT_HUNG", d->settings.users.at(d->clients.at(i).usernum).name, buf);
 						d->clients.at(i).lastdelta = deltanow;

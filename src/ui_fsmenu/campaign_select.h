@@ -53,7 +53,7 @@ private:
 	UI::Textarea                             label_campname;
 	UI::Textarea                             tacampname;
 	UI::Textarea                             label_difficulty;
-	UI::Textarea                             tadifficulty;
+	UI::Multiline_Textarea                   tadifficulty;
 	UI::Textarea                             label_campdescr;
 	UI::Multiline_Textarea                   tacampdescr;
 	UI::Button                               b_ok, back;

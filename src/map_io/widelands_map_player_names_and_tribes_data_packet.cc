@@ -75,9 +75,9 @@ void Map_Player_Names_And_Tribes_Data_Packet::Pre_Read
 			}
 		} else
 			throw game_data_error
-				(_("unknown/unhandled version %i"), packet_version);
+				("unknown/unhandled version %i", packet_version);
 	} catch (const _wexception & e) {
-		throw game_data_error(_("player names and tribes: %s"), e.what());
+		throw game_data_error("player names and tribes: %s", e.what());
 	}
 }
 

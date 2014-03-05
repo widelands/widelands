@@ -371,14 +371,15 @@ void FieldDebugWindow::think()
 		Widelands::Resource_Index ridx = m_coords.field->get_resources();
 		int ramount = m_coords.field->get_resources_amount();
 		int startingAmount = m_coords.field->get_starting_res_amount();
-		snprintf
-		(buffer, sizeof(buffer), _("Resource: %s\n"),
-			egbase.world().get_resource(ridx)->name().c_str());
+		snprintf(buffer,
+		         sizeof(buffer),
+		         "Resource: %s\n",
+		         ibase().egbase().world().get_resource(ridx)->name().c_str());
 
 		str += buffer;
 
 		snprintf
-		(buffer, sizeof(buffer), _("  Amount: %i/%i\n"), ramount, startingAmount);
+		(buffer, sizeof(buffer), "  Amount: %i/%i\n", ramount, startingAmount);
 		str += buffer;
 	}
 

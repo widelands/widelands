@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2013-09-15 19:41+0200\n"
-"PO-Revision-Date: 2013-10-26 07:06+0000\n"
+"PO-Revision-Date: 2013-10-08 17:37+0000\n"
 "Last-Translator: GunChleoc <Unknown>\n"
 "Language-Team: Fòram na Gàidhlig http://www.foramnagaidhlig.net\n"
 "MIME-Version: 1.0\n"
@@ -16,8 +16,8 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n==1 || n==11) ? 0 : (n==2 || n==12) ? 1 : "
 "(n > 2 && n < 20) ? 2 : 3;\n"
-"X-Launchpad-Export-Date: 2013-10-27 05:19+0000\n"
-"X-Generator: Launchpad (build 16810)\n"
+"X-Launchpad-Export-Date: 2013-10-09 05:12+0000\n"
+"X-Generator: Launchpad (build 16799)\n"
 "Language: gd\n"
 
 #: ../../src/computer_player.cc:38
@@ -26,7 +26,7 @@ msgstr "Chan eil gin"
 
 #: ../../src/s2map.cc:231
 msgid "Bluebyte Settlers II Map. No comment defined!"
-msgstr "Mapa Bluebyte Settlers II. Cha deach beachd a mhìneachadh!"
+msgstr ""
 
 #: ../../src/s2map.cc:874
 #, c-format
@@ -36,10 +36,6 @@ msgid ""
 "map in the map editor.\n"
 "\n"
 msgstr ""
-"RABHADH: Tha %i raointean-togail puirt mì-dhigheach ann nach gabh càradh is "
-"chaidh an toirt air falbh! Dh'fhaoidte nach gabh a h-uile eilean ruigsinn a-"
-"nis. An càraich thu am mapa san deasaiche?\n"
-"\n"
 
 #: ../../src/s2map.cc:886
 msgid "WARNING"
@@ -60,8 +56,6 @@ msgstr "Chaidh an geama a shàbhaladh"
 #: ../../src/wlapplication.cc:398
 msgid "ERROR: Could not connect to metaserver (reason above)!\n"
 msgstr ""
-"MEARACHD: Cha b' urrainn dhuinn ceangal ris a' mheata-fhrithealaiche "
-"(adhbhar gu h-àrd)!\n"
 
 #: ../../src/wlapplication.cc:426 ../../src/editor/editorinteractive.cc:171
 msgid "Unsupported format"
@@ -79,17 +73,12 @@ msgstr ""
 #: ../../src/wlapplication.cc:949 ../../src/wlapplication.cc:958
 msgid "could not find the path of the main executable"
 msgstr ""
-"cha b' urrainn dhuinn an t-slighe dhan phrìomh fhaidhle sho-ghnìomhaichte a "
-"lorg"
 
 #: ../../src/wlapplication.cc:1078
 msgid ""
 "Waited 5 seconds to close audio. Problems here so killing Widelands. Update "
 "your sound driver and/or SDL to fix this problem\n"
 msgstr ""
-"Air feitheamh fad 5 diogan ach an dùnadh an fhuaim. Tha duilgheadas ann a "
-"sheo is mar sin marbhaidh sinn Widelands. Ùraich an draibhear fuaime is/no "
-"SDL agad gus an duilgheadas seo a chàradh\n"
 
 #: ../../src/wlapplication.cc:1208
 msgid ""
@@ -97,14 +86,10 @@ msgid ""
 "Sorry, no double-instance debugging on _WIN32.\n"
 "\n"
 msgstr ""
-"\n"
-"Duilich ach chan eil dì-bhugachadh airson ionstansan dùblaichte ri làimh air "
-"_WIN32.\n"
-"\n"
 
 #: ../../src/wlapplication.cc:1211
 msgid "--double is disabled. This is not a debug build!"
-msgstr "Tha --double à comas Chan e togail dhì-bhugachaidh a th' ann!"
+msgstr ""
 
 #: ../../src/wlapplication.cc:1332
 msgid "This is Widelands-"
@@ -115,8 +100,6 @@ msgid ""
 "Usage: widelands <option0>=<value0> ... <optionN>=<valueN>\n"
 "\n"
 msgstr ""
-"Cleachdadh: widelands <roghainn0>=<luach0> ... <roghainnN>=<luachN>\n"
-"\n"
 
 #: ../../src/wlapplication.cc:1335
 msgid ""
@@ -137,23 +120,10 @@ msgid ""
 " --homedir=DIRNAME    Use specified directory for widelands config\n"
 "                      files, savegames and replays\n"
 msgstr ""
-" Sgrìobhaidh --<ainm-innteirt-config>=luach thairis air gach roghainn\n"
-" san fhaidhle config\n"
-"\n"
-" --logfile=AINM-FHAIDHLE   Sgrìobh às-chur an loga gun fhaidhle AINM-"
-"FHAIDHLE\n"
-"                           an àite às-chur an tèirmineil\n"
-" --datadir=AINM-PASGAIN    Cleachd am pasgan sònraichte airson nam "
-"faidhlichean\n"
-"                           dàta aig widelands\n"
-" --homedir=AINM-PASGAIN    Cleachd am pasgan sònraichte airson nam "
-"faidhlichean\n"
-"                           rèiteachaidh, geamannan air an sàbhaladh is\n"
-"                           ath-chluichean aig widelands\n"
 
 #: ../../src/wlapplication.cc:1347
 msgid "                      Default is ~/.widelands\n"
-msgstr "                      ~/.widelands gu tùsail\n"
+msgstr ""
 
 #: ../../src/wlapplication.cc:1350
 msgid ""
@@ -172,23 +142,6 @@ msgid ""
 "                      Remove replays after this amount of days.\n"
 "                      If this is 0 replays are not deleted.\n"
 msgstr ""
-" --record=AINM-FAIDHLE     Clàraich na h-uile tachartas dhan ainm-fhaidhle\n"
-"                           shònraichte gus ath-chluiche an uairsin\n"
-" --playback=AINM-FAIDHLE   Cluich an ainm-faidhle sònraichte (faic --"
-"record)\n"
-"\n"
-" --coredump=[yes|no]       Gin core dump le segfaults an aite an SDL\n"
-" --language=[gd_GB|de_DE|...]\n"
-"                           An sgeama ionadail ri chleachdadh.\n"
-" --localedir=AINM-PASGAIN  Cleachd AINM-PASGAIN 'na ionad airson an\n"
-"                           sgeama ionadail\n"
-" --remove_syncstreams=[true|false]\n"
-"                           Thoir air falbh na faidhlichean syncstream leis\n"
-"                           an tòiseachadh\n"
-" --remove_replays=[...]    Thoir air falbh na h-ath-chluichean às dèidh an\n"
-"                           àireimh de làithean seo.\n"
-"                           Cha tèid faidhlichean a sguabadh às mas e 0 a th' "
-"ann.\n"
 
 #: ../../src/wlapplication.cc:1365
 msgid ""
@@ -206,31 +159,11 @@ msgid ""
 "                      map.\n"
 " --loadgame=FILENAME  Directly loads the savegame FILENAME.\n"
 msgstr ""
-"Roghainnean fuaime:\n"
-" --nosound                 Tòisichish seo an geama leis an fuaim à comas.\n"
-" --disable_fx              Cuir èifeachdan fuaime à comas.\n"
-" --disable_music           Cuir an ceòl à comas.\n"
-"\n"
-" --nozip                   Na sàbhail faidhlichean nan tasglannan bìnearaidh "
-"zip.\n"
-"\n"
-" --editor                  Tòisichidh seo an deasaichee Widelands sa bhad.\n"
-"                           'S urrainn dhut =AINM-FAIDHLE a chur ris\n"
-"                           gus am mapa AINM-FAIDHLE a luchdadh sa bhad\n"
-"                           san deasaiche.\n"
-" --scenario=FILENAME       Tòisichidh seo am mapa AINM-FAIDHLE sa bhad\n"
-"                           mar mhapa cnàmh-sgeòil.\n"
-" --loadgame=FILENAME       Luchdaichidh seo an geama air a shàbhaladh AINM-"
-"FAIDHLE\n"
-"                           sa bhad.\n"
 
 #: ../../src/wlapplication.cc:1378
 msgid ""
 " --dedicated=FILENAME Starts a dedicated server with FILENAME as map\n"
 msgstr ""
-" --dedicated=FILENAME      Tòisichidh seo frithealaiche sònraichte le AINM-"
-"FAIDHLE\n"
-"                           mar mhapa\n"
 
 #: ../../src/wlapplication.cc:1381
 msgid ""
@@ -252,33 +185,12 @@ msgid ""
 " --xres=[...]         Width of the window in pixel.\n"
 " --yres=[...]         Height of the window in pixel.\n"
 msgstr ""
-" --speed_of_new_game       An luaths leis a ruitheas an geama ùr nuair a\n"
-"                           thòisicheas tu e, le factar 1000 (cuiridh 0 an\n"
-"                           geama 'na stad, is 1000 an luaths àbhaisteach).\n"
-" --auto_roadbuild_mode=[yes|no]\n"
-"                           Co-dhiù an tèid gus nach tèid do chur sa mhodh\n"
-"                           togail rathaidean gu fèin-obrachail nuair a "
-"bhios\n"
-"                           bratach air a chur ann nach eil ceangailte ri "
-"rathad.\n"
-" --write_HTML=[yes|no]\n"
-"                           Sgrìobh faidhlichean cobharach HTML airson dàta\n"
-"                           a' gheama air a pharsadh.\n"
-"\n"
-"Roghainnean grafaigeachd:\n"
-" --fullscreen=[yes|no]\n"
-"                           Co-dhiù an tèid gus nach tèid an sgrìn slàn a\n"
-"                           chleachdadh airson a' gheama.\n"
-" --depth=[16|32]           An doimhne dhathan ann an àireamh de bhiodan gach "
-"piogsail.\n"
-" --xres=[...]              Leud na h-uinneige ann am piogsailean.\n"
-" --yres=[...]              Àirde na h-uinneige ann am piogsailean.\n"
 
 #: ../../src/wlapplication.cc:1400
 msgid ""
 " --opengl=[0|1]\n"
 "                      Enables OpenGL rendering\n"
-msgstr " --opengl=[0|1]            Cuiridh seo reandaradh OpenGL an comas\n"
+msgstr ""
 
 #: ../../src/wlapplication.cc:1404
 msgid ""
@@ -302,23 +214,6 @@ msgid ""
 "                      panel.\n"
 "\n"
 msgstr ""
-"\n"
-"Roghainnean airson manaidsear nan uinneagan taobh a-staigh:\n"
-" --border_snap_distance=[0 ...]\n"
-"                           Gluais uinneag gu oir na sgrìn ma bhios i taobh\n"
-"                           a-staigh an astair seo o oir na sgrìn.\n"
-" --dock_windows_to_edges=[yes|no]\n"
-"                           Thoir oir na h-uinneige ri taobh oir na sgrìn "
-"air\n"
-"                           falbh nuair a bhios oir na h-uinneige ri oir na "
-"sgrìn.\n"
-" --panel_snap_distance=[0 ...]\n"
-"                           Gluais uinneag gu oir na panail ma bhios i taobh\n"
-"                           a-staigh an astair seo o oir na panail.\n"
-" --snap_windows_only_when_overlapping=[yes|no]\n"
-"                           Na gluais uinneag gu oir panail ma bhios i\n"
-"                           tar-chòmdaichte leis a' phanail.\n"
-"\n"
 
 #: ../../src/wlapplication.cc:1428
 msgid ""
@@ -326,19 +221,14 @@ msgid ""
 "                      testing)\n"
 "\n"
 msgstr ""
-" --double                  Tòisich an geama dà thuras (airson deuchainnean\n"
-"                           lìonraidh air localhost)\n"
-"\n"
 
 #: ../../src/wlapplication.cc:1432
 msgid " --verbose            Enable verbose debug messages\n"
 msgstr ""
-" --verbose                 Cuir teachdaireachdan dì-bhugachaidh briathrach "
-"an comas\n"
 
 #: ../../src/wlapplication.cc:1433
 msgid " --help               Show this help\n"
-msgstr " --help                    Seall a' chobhair seo\n"
+msgstr " --help               Seall a' chobhair seo\n"
 
 #: ../../src/wlapplication.cc:1437
 msgid ""
@@ -357,16 +247,13 @@ msgstr ""
 
 #: ../../src/wlapplication.cc:1525
 msgid "Fallback settings in effect"
-msgstr "Tha roghainnean èiginneach an comas"
+msgstr ""
 
 #: ../../src/wlapplication.cc:1527
 msgid ""
 "Your video settings could not be enabled, and fallback settings are in "
 "effect. Please check the graphics options!"
 msgstr ""
-"Cha b' urrainn dhuinn na roghainnean video agad a chur an comas is tha na "
-"roghainnean èiginneach 'gan cleachdadh. Bu chòir dhut sùil a thoirt air na "
-"roghainnean grafaigeachd!"
 
 #: ../../src/wlapplication.cc:1598
 msgid "Warning: "
@@ -378,7 +265,7 @@ msgstr "Mearachd le dàta a' gheama"
 
 #: ../../src/wlapplication.cc:1607
 msgid "Unexpected error during the game"
-msgstr "Mearachd air nach robh dùil rè a' gheama"
+msgstr ""
 
 #: ../../src/wlapplication.cc:1611
 msgid ""
@@ -388,11 +275,6 @@ msgid ""
 "related messages in the standard output (stdout.txt on Windows). You are "
 "using build "
 msgstr ""
-"\n"
-"\n"
-"Nach innis thu dhuinn mun duilgheadas seo ach an toir sinn piseach air "
-"Widelands? Chì thu teachdaireachdan co-cheangailte ris san às-chut "
-"stannardach (stdout.txt air Windows). Tha thu a' chleachdadh an togail "
 
 #: ../../src/wlapplication.cc:1617
 msgid ""
@@ -401,15 +283,10 @@ msgid ""
 "Widelands attempts to create a savegame when errors occur during the game. "
 "It is often - though not always - possible to load it and continue playing.\n"
 msgstr ""
-". Fech an cuir thu am fiosrachadh seo ris an aithris agad.\n"
-"\n"
-"Feuchaidh Widelands ris an geama a shàbhaladh nuair a thachras mearachd rè "
-"a' gheama. 'S urrainn dhut a luchdadh is leantainn air adhart leis a gheama "
-"mar as trice, ged nach obraich seo an-còmhnaidh.\n"
 
 #: ../../src/wlapplication.cc:1729
 msgid "The address of the game server is invalid"
-msgstr "Tha an seòladh aig frithealaiche a' gheama mì-dhligheach"
+msgstr ""
 
 #: ../../src/wlapplication.cc:1834 ../../src/network/nethost.cc:2050
 #: ../../src/wui/game_summary.cc:90
@@ -430,9 +307,6 @@ msgid ""
 "The end of the replay has been reached and the game has been paused. You may "
 "unpause the game and continue watching if you want to."
 msgstr ""
-"Ràinig sinn deireadh na h-ath-chluiche is chaidh an geama a chur 'na stad. "
-"'S urrainn dhut an geama a chur a' dol a-rithist is leantainn air adhart a' "
-"coimhead air ma thogras tu."
 
 #: ../../src/wlapplication.cc:2222 ../../src/logic/game.cc:375
 #: ../../src/logic/game.cc:414
@@ -441,19 +315,19 @@ msgstr "'Ga luchdadh..."
 
 #: ../../src/writeHTML.cc:42
 msgid "Requesters"
-msgstr "Tagraichean"
+msgstr ""
 
 #: ../../src/writeHTML.cc:57
 msgid "Providers"
-msgstr "Solaraichean"
+msgstr ""
 
 #: ../../src/writeHTML.cc:72
 msgid "Successors"
-msgstr "Iar-theachdaichean"
+msgstr ""
 
 #: ../../src/writeHTML.cc:87
 msgid "Predecessors"
-msgstr "Ro-theachdaichean"
+msgstr ""
 
 #: ../../src/writeHTML.cc:102
 msgid "Employers"
@@ -531,7 +405,7 @@ msgstr "Chan eil"
 
 #: ../../src/writeHTML.cc:373
 msgid "Is mine."
-msgstr "Seo mèinn."
+msgstr ""
 
 #: ../../src/writeHTML.cc:378
 msgid "Is big."
@@ -595,15 +469,13 @@ msgstr "Thèid e na"
 
 #: ../../src/writeHTML.cc:577
 msgid "Combat Properties"
-msgstr "Buadhan catha"
+msgstr ""
 
 #: ../../src/writeHTML.cc:584
 #, c-format
 msgid ""
 "Hitpoints is %u, plus %u for each level above 0 (maximum level is %u)."
 msgstr ""
-"%u puingean-beata is %u a bharrachd airson gach leibheil thar 0 (is %u an "
-"leibheil as àirde)."
 
 #: ../../src/writeHTML.cc:594
 #, c-format
@@ -611,45 +483,39 @@ msgid ""
 "Attack is between %u and %u, plus %u for each level above 0 (maximum level "
 "is %u)."
 msgstr ""
-"Ionnsaigh eadar %u is %u le %u a bharrachd airson gach leibheil thar 0 (is "
-"%u an leibheil as àirde)."
 
 #: ../../src/writeHTML.cc:604
 #, c-format
 msgid "Defense is %u, plus %u for each level above 0 (maximum level is %u)."
 msgstr ""
-"Dìon de %u is %u a bharrachd airson gach leibheil thar 0 (is %u an leibheil "
-"as àirde)."
 
 #: ../../src/writeHTML.cc:614
 #, c-format
 msgid "Evade is %u, plus %u for each level above 0 (maximum level is %u)."
 msgstr ""
-"Teàrnadh de %u is %u a bharrachd airson gach leibheil thar 0 (is %u an "
-"leibheil as àirde)."
 
 #: ../../src/writeHTML.cc:660 ../../src/writeHTML.cc:671
 #, c-format
 msgid "%s's creation"
-msgstr "Cruthachadh aig %s"
+msgstr ""
 
 #: ../../src/writeHTML.cc:682
 msgid "Spawns in warehouses."
-msgstr "Thèid a shìoladh ann an taighean-stòrais."
+msgstr ""
 
 #: ../../src/writeHTML.cc:691
 #, c-format
 msgid "Needs experience from working %u times to become"
-msgstr "Feumaidh e eòlas on a bhith ag obair %u tursan ach an tèid e na"
+msgstr ""
 
 #: ../../src/writeHTML.cc:699
 #, c-format
 msgid "%s's promotion"
-msgstr "Àrdachadh aig %s"
+msgstr ""
 
 #: ../../src/writeHTML.cc:710 ../../src/writeHTML.cc:855
 msgid "Programs"
-msgstr "Prògraman"
+msgstr ""
 
 #: ../../src/writeHTML.cc:764
 msgid "UNKNOWN"
@@ -672,21 +538,21 @@ msgstr "Cosnaiche aig %s"
 
 #: ../../src/writeHTML.cc:796
 msgid "Inputs"
-msgstr "Ion-chur"
+msgstr ""
 
 #: ../../src/writeHTML.cc:807
 #, c-format
 msgid "%s's input"
-msgstr "Ion-chur aig %s"
+msgstr ""
 
 #: ../../src/writeHTML.cc:819
 msgid "Output"
-msgstr "Às-chur"
+msgstr ""
 
 #: ../../src/writeHTML.cc:830 ../../src/writeHTML.cc:844
 #, c-format
 msgid "%s's output"
-msgstr "Às-chur aig %s"
+msgstr ""
 
 #: ../../src/writeHTML.cc:893 ../../src/writeHTML.cc:1037
 #: ../../src/writeHTML.cc:1100 ../../src/writeHTML.cc:1129
@@ -696,7 +562,7 @@ msgstr "Às-chur aig %s"
 #: ../../src/writeHTML.cc:1344 ../../src/writeHTML.cc:1369
 #: ../../src/writeHTML.cc:1394 ../../src/writeHTML.cc:1412
 msgid "Documentation for program command "
-msgstr "Mìneachadh air àithne a' phrògraim "
+msgstr ""
 
 #: ../../src/writeHTML.cc:1017
 msgid "workers of this site"
@@ -705,17 +571,17 @@ msgstr "luchd-obrach na làraich seo"
 #: ../../src/writeHTML.cc:1047
 #, c-format
 msgid "site's program %s"
-msgstr "prògram na làraich %s"
+msgstr ""
 
 #: ../../src/writeHTML.cc:1114
 #, c-format
 msgid "%s's program %s"
-msgstr "prògram aig %s: %s"
+msgstr ""
 
 #: ../../src/writeHTML.cc:1138 ../../src/writeHTML.cc:1179
 #, c-format
 msgid " %u.%03u s"
-msgstr " %u.%03u d"
+msgstr ""
 
 #: ../../src/writeHTML.cc:1452 ../../src/writeHTML.cc:1458
 msgid "Ware types"
@@ -781,43 +647,43 @@ msgstr "Seòrsaichean de bhathar"
 #: ../../src/map_io/widelands_map_waredata_data_packet.cc:206
 #, c-format
 msgid "unknown/unhandled version %u"
-msgstr "tionndadh %u neo-aithnichte/gun làimhseachadh"
+msgstr ""
 
 #: ../../src/economy/cmd_call_economy_balance.cc:88
 #, c-format
 msgid "call economy balance: %s"
-msgstr "gairm meidh an eaconamaidh: %s"
+msgstr ""
 
 #: ../../src/economy/economy_data_packet.cc:61
 #: ../../src/economy/economy_data_packet.cc:80
 #, c-format
 msgid "duplicated entry for %s"
-msgstr "innteart dùblaichte airson %s"
+msgstr ""
 
 #: ../../src/economy/economy_data_packet.cc:92
 #, c-format
 msgid "target quantities: %s"
-msgstr "uiread-amais: %s"
+msgstr ""
 
 #: ../../src/economy/economy_data_packet.cc:96
 #, c-format
 msgid "unknown version %u"
-msgstr "tionndadh neo-aithnichte %u"
+msgstr ""
 
 #: ../../src/economy/economy_data_packet.cc:99
 #, c-format
 msgid "economy: %s"
-msgstr "eaconamaidh: %s"
+msgstr ""
 
 #: ../../src/economy/fleet.cc:769 ../../src/economy/portdock.cc:621
 #, c-format
 msgid "loading portdock: %s"
-msgstr "a' luchdadh cala: %s"
+msgstr ""
 
 #: ../../src/economy/wares_queue.cc:289
 #, c-format
 msgid "waresqueue: %s"
-msgstr "ciutha nam bathar: %s"
+msgstr ""
 
 #: ../../src/editor/editorinteractive.cc:64
 msgid "Menu"
@@ -1020,36 +886,36 @@ msgstr "chan eil fhios"
 #: ../../src/logic/battle.cc:174
 #, c-format
 msgid "[battle] soldier %u lose battle\n"
-msgstr "[cath] ruaig air an t-saighdear %u\n"
+msgstr ""
 
 #: ../../src/logic/battle.cc:178
 #, c-format
 msgid "[battle] waking up winner %d\n"
-msgstr "[cath] a' dùsgadh a' bhuannaiche %d\n"
+msgstr ""
 
 #: ../../src/logic/bob.cc:88 ../../src/logic/immovable.cc:204
 #, c-format
 msgid "bad attribute \"%s\""
-msgstr "droch roghainn \"%s\""
+msgstr ""
 
 #: ../../src/logic/building.cc:540
 msgid "mine"
-msgstr "mèinn"
+msgstr ""
 
 #: ../../src/logic/building.cc:541
 #: ../../src/editor/tools/editor_info_tool.cc:60
 msgid "small"
-msgstr "beag"
+msgstr ""
 
 #: ../../src/logic/building.cc:542
 #: ../../src/editor/tools/editor_info_tool.cc:61
 msgid "medium"
-msgstr "meadhanach"
+msgstr ""
 
 #: ../../src/logic/building.cc:542
 #: ../../src/editor/tools/editor_info_tool.cc:62
 msgid "big"
-msgstr "mòr"
+msgstr ""
 
 #: ../../src/logic/cmd_calculate_statistics.cc:46
 #, c-format
@@ -1059,32 +925,32 @@ msgstr "foincsean àireamhachadh na stadastaireachd: %s"
 #: ../../src/logic/cmd_luacoroutine.cc:77
 #, c-format
 msgid "lua function: %s"
-msgstr "foincsean lua: %s"
+msgstr ""
 
 #: ../../src/logic/cmd_luascript.cc:58
 #, c-format
 msgid "lua: %s"
-msgstr "lua: %s"
+msgstr ""
 
 #: ../../src/logic/cmd_queue.cc:188
 #, c-format
 msgid "duetime (%i) < gametime (%i)"
-msgstr "ceann-ama (%i) < àm a' gheama (%i)"
+msgstr ""
 
 #: ../../src/logic/cmd_queue.cc:193
 #, c-format
 msgid "game logic: %s"
-msgstr "loidsig a' gheama: %s"
+msgstr ""
 
 #: ../../src/logic/critter_bob.cc:389
 #, c-format
 msgid "loading critter: %s"
-msgstr "a' luchdadh beathach: %s"
+msgstr ""
 
 #: ../../src/logic/dismantlesite.cc:100
 #, c-format
 msgid "%u%% dismantled"
-msgstr "%u%% dheth às a chèile"
+msgstr "%u%% air a thoirt às a chèile"
 
 #: ../../src/logic/editor_game_base.cc:283
 msgid "Loading tribes"
@@ -1140,15 +1006,11 @@ msgid ""
 "You can manually add a starting position with Widelands Editor, to fix this "
 "problem."
 msgstr ""
-"Cha b' urrainn do Widelands an geama a thòiseachadh oir chan eil ionad "
-"tòiseachaidh aig cluicheadair %u.\n"
-"'S urrainn dhut ionad tòiseachaidh a cur ris a làimh leis an deasaiche "
-"Widelands gus an duilgheadas seo a chàradh."
 
 #: ../../src/logic/immovable.cc:141 ../../src/logic/production_program.cc:1647
 #, c-format
 msgid "unknown command type \"%s\""
-msgstr "seòrsa àithne neo-aithnichte \"%s\""
+msgstr ""
 
 #: ../../src/logic/immovable.cc:145
 msgid "no actions"
@@ -1156,144 +1018,135 @@ msgstr "gun ghnìomh"
 
 #: ../../src/logic/immovable.cc:218
 msgid "this program has already been declared"
-msgstr "chaidh am prògram seo a ghairm mar-thà"
+msgstr ""
 
 #: ../../src/logic/immovable.cc:224
 #, c-format
 msgid "program %s: %s"
-msgstr "prògram %s: %s"
+msgstr ""
 
 #: ../../src/logic/immovable.cc:256 ../../src/logic/immovable.cc:271
 #, c-format
 msgid "expected 0 .. 255 but found %u"
-msgstr "an dùil air 0 .. 255 ach lorg sinn %u"
+msgstr ""
 
 #: ../../src/logic/immovable.cc:258 ../../src/logic/immovable.cc:273
 msgid "duplicated"
-msgstr "dùblachichte"
+msgstr ""
 
 #: ../../src/logic/immovable.cc:276
 #, c-format
 msgid "[terrain affinity] \"%s\" (not in current world): %s"
 msgstr ""
-"[comas cruth-tìre] \"%s\" (chan eil seo san t-saoghal làithreach): %s"
 
 #: ../../src/logic/immovable.cc:312
 #, c-format
 msgid "immovable %s has no program \"%s\""
-msgstr "chan eil am prògram seo aig an nì do-ghluasad %s: \"%s\""
+msgstr ""
 
 #: ../../src/logic/immovable.cc:776
 #, c-format
 msgid "tribe %s does not define immovable type \"%s\""
-msgstr "cha mhìnich an treubh %s an seòrsa do-ghluasad \"%s\""
+msgstr ""
 
 #: ../../src/logic/immovable.cc:779
 #, c-format
 msgid "unknown tribe %s"
-msgstr "treubh neo-aithnichte %s"
+msgstr ""
 
 #: ../../src/logic/immovable.cc:785
 #, c-format
 msgid "world does not define immovable type \"%s\""
-msgstr "cha mhìnich an saoghal an seòrsa do-ghluasad \"%s\""
+msgstr ""
 
 #: ../../src/logic/immovable.cc:795
 #, c-format
 msgid "immovable type %s"
-msgstr "seòrsa neo-ghluasad %s"
+msgstr ""
 
 #: ../../src/logic/immovable.cc:829 ../../src/logic/production_program.cc:662
 #: ../../src/logic/production_program.cc:736
 msgid "duration in ms"
-msgstr "faid ann am mille-dhiog"
+msgstr ""
 
 #: ../../src/logic/immovable.cc:868 ../../src/logic/production_program.cc:1438
 msgid "priority"
-msgstr "prìomhachas"
+msgstr ""
 
 #: ../../src/logic/immovable.cc:908 ../../src/logic/immovable.cc:1088
 #, c-format
 msgid "expected probability in range [1, 254] but found \"%s\""
-msgstr "an dùil air coltachd san rainse [1, 254] ach lorg sinn \"%s\""
+msgstr ""
 
 #: ../../src/logic/immovable.cc:927
 #, c-format
 msgid ""
 "unknown scope \"%s\" given for target type (must be \"world\" or \"tribe\")"
 msgstr ""
-"Chaidh sgòp neo-aithnichte \"%s\" a thoirt seachad airson an t-seòrsa-amais "
-"(is \"world\" no \"tribe\" a dh'fheumas a bhith ann)"
 
 #: ../../src/logic/immovable.cc:938
 msgid "illegal transformation to the same type"
-msgstr "cruth-atharrachadh mì-dhligheach dhan aon t-seòrsa"
+msgstr ""
 
 #: ../../src/logic/immovable.cc:980 ../../src/logic/immovable.cc:1067
 #, c-format
 msgid "immovable type not in tribe but target type has scope (\"%s\")"
 msgstr ""
-"chan eil an seòrsa do-ghluasad san treubh ach tha an sgòp (\"%s\") aig an "
-"seòrsa-amais"
 
 #: ../../src/logic/immovable.cc:986 ../../src/logic/immovable.cc:1073
 #, c-format
 msgid "scope \"%s\" given for target type (must be \"world\")"
 msgstr ""
-"Chaidh sgòp \"%s\" a thoirt seachad airson an t-seòrsa amais (is \"world\" a "
-"dh'fheumas a bhith ann)"
 
 #: ../../src/logic/immovable.cc:1034
 msgid "probability in range [1, 254]"
-msgstr "coltachd san rainse [1, 254]"
+msgstr ""
 
 #: ../../src/logic/immovable.cc:1491
 #, c-format
 msgid "loading player immovable: %s"
-msgstr "a' luchdadh nì do-ghluasad a' chluicheadair: %s"
+msgstr ""
 
 #: ../../src/logic/instances.cc:73
 #, c-format
 msgid "destroy map object: %s"
-msgstr "mill oibseact a' mhapa: %s"
+msgstr ""
 
 #: ../../src/logic/instances.cc:122
 #, c-format
 msgid "object %u: %s"
-msgstr "oibseact %u: %s"
+msgstr ""
 
 #: ../../src/logic/instances.cc:131
 #, c-format
 msgid "act: %s"
-msgstr "gnìomh: %s"
+msgstr ""
 
 #: ../../src/logic/map.cc:363
 msgid "Player 1"
-msgstr "Cluicheadair 1"
+msgstr ""
 
 #: ../../src/logic/military_data.cc:51 ../../src/logic/soldier.cc:70
 msgid "\"min-max\""
-msgstr "\"as lugha - as motha\""
+msgstr ""
 
 #: ../../src/logic/military_data.cc:59
 msgid "positive integer <= 100"
-msgstr "àireamh shlàn dheimhinneach <= 100"
+msgstr ""
 
 #: ../../src/logic/military_data.cc:63
 #, c-format
 msgid "expected positive integer >= %u <= 100 but found \"%s\""
 msgstr ""
-"an dùil air àireamh shlàn dheimhinneach >= %u <= 100 ach lorg sinn \"%s\""
 
 #: ../../src/logic/military_data.cc:75
 #, c-format
 msgid "expected positive integer >= %u <= %u but found \"%u\""
 msgstr ""
-"an dùil air àireamh shlàn dheimhinneach >= %u <= %u ach lorg sinn \"%u\""
 
 #: ../../src/logic/militarysite.cc:62 ../../src/logic/warehouse.cc:251
 msgid " conquer"
-msgstr " ceannsaich"
+msgstr ""
 
 #: ../../src/logic/militarysite.cc:119
 #, c-format
@@ -1325,7 +1178,7 @@ msgstr "Chuir an nàmhaid ruaig air na saighdearan agad aig %s."
 
 #: ../../src/logic/militarysite.cc:845
 msgid "Militarysite lost!"
-msgstr "Chaill thu togalach!"
+msgstr "Chaill thu ionad an airm!"
 
 #: ../../src/logic/militarysite.cc:899
 #, c-format
@@ -1334,12 +1187,12 @@ msgstr "Chuir na saighdearan agad ruaig air an nàmhaid aig %s."
 
 #: ../../src/logic/militarysite.cc:904
 msgid "Enemy at site defeated!"
-msgstr "Ghabh thu togalach!"
+msgstr "Chuir thu ruaig air an nàmhaid aig ionad!"
 
 #: ../../src/logic/militarysite.cc:949
 #, c-format
 msgid "Your %s discovered an aggressor.</p>"
-msgstr "Mhothaich an %s agad ionnsaighear.</p>"
+msgstr ""
 
 #: ../../src/logic/militarysite.cc:950
 #, c-format
@@ -1348,7 +1201,7 @@ msgstr "Thathar a' toirt ionnsaigh air %s agad.</p>"
 
 #: ../../src/logic/militarysite.cc:958
 msgid "You are under attack"
-msgstr "Fo ionnsaigh!"
+msgstr "Thathar a' toirt ionnsaigh ort"
 
 #: ../../src/logic/playercommand.cc:147
 #: ../../src/map_io/widelands_map_building_data_packet.cc:105
@@ -1359,17 +1212,17 @@ msgstr "chan eil an cluicheadair %u ann"
 #: ../../src/logic/playercommand.cc:153
 #, c-format
 msgid "player command: %s"
-msgstr "àithne a' chluicheadair: %s"
+msgstr ""
 
 #: ../../src/logic/playercommand.cc:195
 #, c-format
 msgid "player immovable %u: %s"
-msgstr "nì do-ghluasad a' chluicheadair %u: %s"
+msgstr ""
 
 #: ../../src/logic/playercommand.cc:201
 #, c-format
 msgid "bulldoze: %s"
-msgstr "mill: %s"
+msgstr ""
 
 #: ../../src/logic/playercommand.cc:255
 #, c-format
@@ -1389,7 +1242,7 @@ msgstr "tog rathad: %s"
 #: ../../src/logic/playercommand.cc:444
 #, c-format
 msgid "flag %u: %s"
-msgstr "bratach %u: %s"
+msgstr ""
 
 #: ../../src/logic/playercommand.cc:450
 #, c-format
@@ -1401,59 +1254,59 @@ msgstr "gnìomh a' bhrataich: %s"
 #: ../../src/map_io/widelands_map_buildingdata_data_packet.cc:242
 #, c-format
 msgid "building %u: %s"
-msgstr "togalach %u: %s"
+msgstr ""
 
 #: ../../src/logic/playercommand.cc:507 ../../src/logic/playercommand.cc:581
 #: ../../src/logic/playercommand.cc:625
 #, c-format
 msgid "start/stop building: %s"
-msgstr "tòisich air/sguir dhen togail: %s"
+msgstr ""
 
 #: ../../src/logic/playercommand.cc:686
 #, c-format
 msgid "enhance building: %s"
-msgstr "leasaich togalach: %s"
+msgstr ""
 
 #: ../../src/logic/playercommand.cc:1169 ../../src/logic/playercommand.cc:1674
 #: ../../src/logic/playercommand.cc:1752
 #, c-format
 msgid "site %u: %s"
-msgstr "làrach %u: %s"
+msgstr ""
 
 #: ../../src/logic/playercommand.cc:1179
 #, c-format
 msgid "set ware priority: %s"
-msgstr "suidhich prìomhachas a' bhathair: %s"
+msgstr ""
 
 #: ../../src/logic/playercommand.cc:1307
 #, c-format
 msgid "change target quantity: %s"
-msgstr "atharraich an t-uiread-amais: %s"
+msgstr ""
 
 #: ../../src/logic/playercommand.cc:1370
 #, c-format
 msgid "set ware target quantity: %s"
-msgstr "suidhich uiread-amais a' bhathair: %s"
+msgstr ""
 
 #: ../../src/logic/playercommand.cc:1492
 #, c-format
 msgid "set worker target quantity: %s"
-msgstr "suidhich uiread-amais nan obraichean: %s"
+msgstr ""
 
 #: ../../src/logic/playercommand.cc:1617
 #, c-format
 msgid "change training options: %s"
-msgstr "atharraich roghainnean an trèanaidh: %s"
+msgstr ""
 
 #: ../../src/logic/playercommand.cc:1681
 #, c-format
 msgid "soldier %u: %s"
-msgstr "saighdear %u: %s"
+msgstr ""
 
 #: ../../src/logic/playercommand.cc:1687
 #, c-format
 msgid "drop soldier: %s"
-msgstr "a' cur saighdear air falbh: %s"
+msgstr ""
 
 #: ../../src/logic/playercommand.cc:1759
 #, c-format
@@ -1464,22 +1317,21 @@ msgstr "atharraich an rum airson saighdearan: %s"
 #, c-format
 msgid "retreat: value out of range. Received %u expected %u-%u"
 msgstr ""
-"cùlachadh: luach a-mach às an rainse. Fhuaradh %u ach an dùil air %u-%u"
 
 #: ../../src/logic/playercommand.cc:1935
 #, c-format
 msgid "change military config: %s"
-msgstr "atharraich rèiteachadh an airm: %s"
+msgstr ""
 
 #: ../../src/logic/playercommand.cc:1974
 #, c-format
 msgid "(player %u): message id is null"
-msgstr "(cluicheadair %u): is null id na teachdaireachd"
+msgstr ""
 
 #: ../../src/logic/playercommand.cc:1979
 #, c-format
 msgid "player message: %s"
-msgstr "teachdaireachd a' chluicheadair: %s"
+msgstr ""
 
 #: ../../src/logic/production_program.cc:87
 #, c-format
@@ -1487,8 +1339,6 @@ msgid ""
 "%s is not declared as an input (\"%s=<count>\" was not found in the [inputs] "
 "section)"
 msgstr ""
-"cha deachd %s a ghairm mar ion-chur (cha deach \"%s=<count>\" a lorg san "
-"earrann [inputs])"
 
 #: ../../src/logic/production_program.cc:100
 #, c-format
@@ -1496,15 +1346,12 @@ msgid ""
 "wrong order of ware types within group: ware type %s appears after ware type "
 "%s (fix order!)"
 msgstr ""
-"chan eil òrdugh nan seòrsaichean bathair sa bhuidheann mar bu chòir: "
-"nochdaidh an seòrsa bathair %s aà dèidh an t-seòrsa bathair %s (càraich an t-"
-"òrdugh!)"
 
 #: ../../src/logic/production_program.cc:114
 #: ../../src/logic/production_program.cc:892
 #: ../../src/logic/production_program.cc:990
 msgid "count"
-msgstr "cunntadh"
+msgstr ""
 
 #: ../../src/logic/production_program.cc:119
 #, c-format
@@ -1512,85 +1359,81 @@ msgid ""
 "group count is %u but (total) input storage capacity of the specified ware "
 "type(s) is only %u, so the group can never be fulfilled by the site"
 msgstr ""
-"Is %u cunntadh a' bhuidhinn ach chan eil comas stòradh an ion-chuir (iomlan) "
-"airson an t-seòrsa/nan seòrsaichean bathair ach %u, mar sin chan urrainn "
-"dhan làrach am buidheann a choileanadh gu bhràth"
 
 #: ../../src/logic/production_program.cc:154
 msgid "not "
-msgstr "nach eil "
+msgstr ""
 
 #: ../../src/logic/production_program.cc:176
 #: ../../src/logic/production_program.cc:197
 msgid "economy needs "
-msgstr "an eaconamaidh feumach air "
+msgstr ""
 
 #: ../../src/logic/production_program.cc:226
 msgid "site has "
-msgstr "seo aig an làrach: "
+msgstr ""
 
 #: ../../src/logic/production_program.cc:252
 msgid "workers need experience"
-msgstr "eòlas a dhìth air na h-obraichean"
+msgstr ""
 
 #: ../../src/logic/production_program.cc:277
 msgid "ware type or worker type"
-msgstr "seòrsa bathair no obraiche"
+msgstr ""
 
 #: ../../src/logic/production_program.cc:346
 #, c-format
 msgid "invalid condition: %s"
-msgstr "cumha mhì-dhligheach: %s"
+msgstr ""
 
 #: ../../src/logic/production_program.cc:363
 #, c-format
 msgid "expected {\"failed\"|\"completed\"|\"skipped\"} but found \"%s\""
 msgstr ""
-"an dùil air {\"failed\"|\"completed\"|\"skipped\"} ach fhuair sinn \"%s\""
 
 #: ../../src/logic/production_program.cc:376
 msgid "expected \"and\" or end of input"
-msgstr "an dùil air \"and\" no deireadh an ion-chuir"
+msgstr ""
 
 #: ../../src/logic/production_program.cc:385
 msgid "expected condition at end of input"
-msgstr "an dùil air cumha aig deireadh an ion-chuir"
+msgstr ""
 
 #: ../../src/logic/production_program.cc:391
 msgid "expected \"or\" or end of input"
-msgstr "an dùil air \"or\" no deireadh an ion-chuir"
+msgstr ""
 
 #: ../../src/logic/production_program.cc:424
 #: ../../src/logic/production_program.cc:815
 msgid "failed"
-msgstr "Dh'fhàillig le"
+msgstr ""
 
 #: ../../src/logic/production_program.cc:425
 msgid "completed"
-msgstr "coileanta"
+msgstr ""
 
 #: ../../src/logic/production_program.cc:425
 msgid "skipped"
-msgstr "A' leigeil seachad"
+msgstr ""
 
 #: ../../src/logic/production_program.cc:431
 #: ../../src/logic/production_program.cc:839
 msgid " and "
-msgstr " is "
+msgstr ""
 
 #: ../../src/logic/production_program.cc:432
 #: ../../src/logic/production_program.cc:818
 msgid " because: "
-msgstr " air sgàth 's gu bheil "
+msgstr ""
 
 #: ../../src/logic/production_program.cc:443
 #: ../../src/wui/encyclopedia_window.cc:198
 msgid " or "
-msgstr " no "
+msgstr ""
 
 #: ../../src/logic/production_program.cc:444
 msgid " because not: "
-msgstr " air sgàth 's nach eil "
+msgstr ""
 
 #: ../../src/logic/production_program.cc:493
 #, c-format
@@ -1598,68 +1441,62 @@ msgid ""
 "the program \"%s\" has not (yet) been declared in %s (wrong declaration "
 "order?)"
 msgstr ""
-"cha deach am prògram \"%s\" a ghairm (fhathast) ann an %s (òrdugh ceàrr nan "
-"gairmean?)"
 
 #: ../../src/logic/production_program.cc:515
 #: ../../src/logic/production_program.cc:520
 #: ../../src/logic/production_program.cc:525
 #, c-format
 msgid "%s handling method already defined"
-msgstr "chaidh am modh làimhseachaidh %s a mhìneachadh mar-thà"
+msgstr ""
 
 #: ../../src/logic/production_program.cc:515
 msgid "failure"
-msgstr "fàilligeadh"
+msgstr ""
 
 #: ../../src/logic/production_program.cc:520
 msgid "completion"
-msgstr "coileanadh"
+msgstr ""
 
 #: ../../src/logic/production_program.cc:525
 msgid "skip"
-msgstr "leig seachad"
+msgstr ""
 
 #: ../../src/logic/production_program.cc:530
 msgid "{\"failure\"|\"completion\"|\"skip\"}"
-msgstr "{\"failure\"|\"completion\"|\"skip\"}"
+msgstr ""
 
 #: ../../src/logic/production_program.cc:544
 msgid "{\"fail\"|\"complete\"|\"skip\"|\"repeat\"}"
-msgstr "{\"fail\"|\"complete\"|\"skip\"|\"repeat\"}"
+msgstr ""
 
 #: ../../src/logic/production_program.cc:666
 #: ../../src/logic/production_program.cc:688
 #, c-format
 msgid "sleep: %s"
-msgstr "caidil: %s"
+msgstr ""
 
 #: ../../src/logic/production_program.cc:684
 #, c-format
 msgid "Unknown parameter \"%s\""
-msgstr "Paramadair neo-aithnichte \"%s\""
+msgstr ""
 
 #: ../../src/logic/production_program.cc:686
 msgid "No parameter given!"
-msgstr "Cha deach paramadair a thoirt seachad!"
+msgstr ""
 
 #: ../../src/logic/production_program.cc:719
 msgid "idle animation is default; calling is not allowed"
 msgstr ""
-"'S e bun-roghainn a th' anns a' bheòthachadh 'na thàmh; chan fhaod thu a "
-"ghairm"
 
 #: ../../src/logic/production_program.cc:768
 msgid "expected ware_type1[,ware_type2[,...]][:N] ..."
-msgstr "seòrsa_bathair1[,seòrsa_bathair1[,...]][:N] air a bheil dùil ..."
+msgstr ""
 
 #: ../../src/logic/production_program.cc:842
 msgid " is missing"
 msgid_plural " are missing"
-msgstr[0] " a dhìth"
-msgstr[1] " a dhìth"
-msgstr[2] " a dhìth"
-msgstr[3] " a dhìth"
+msgstr[0] ""
+msgstr[1] ""
 
 #: ../../src/logic/production_program.cc:907
 #: ../../src/logic/production_program.cc:1005
@@ -1668,46 +1505,65 @@ msgid ""
 "%s is not declared as an output (\"output=%s\" was not found in the [global] "
 "section)"
 msgstr ""
-"cha deachd %s a chur an cèill mar às-chur (cha deach \"output=%s\" a lorg "
-"san earrann [global])"
 
 #: ../../src/logic/production_program.cc:934
 #: ../../src/logic/production_program.cc:1030
 #, c-format
 msgid "%u "
-msgstr "%u "
+msgstr ""
 
 #: ../../src/logic/production_program.cc:941
 #: ../../src/logic/production_program.cc:1037
 msgid ", "
-msgstr ", "
+msgstr ""
 
 #: ../../src/logic/production_program.cc:944
 #, c-format
 msgid "Produced %s"
-msgstr "Chaidh %s a shaothrachadh"
+msgstr ""
 
 #: ../../src/logic/production_program.cc:1022
-msgid "Recruited "
-msgstr "Na chaidh a thrusadh: "
+msgid "Recruited %s"
+msgstr "%s air a thrusadh"
+
+#
+msgid "Provided by the Axefactory"
+msgstr "'Ga sholar leis an fhactaraidh thuaghan"
+
+#
+msgid "Provided by the War Mill"
+msgstr "'Ga sholar leis a' cheàrdach-cogaidh"
+
+#
+msgid "Provided by the Helmsmithy"
+msgstr "'Ga sholar leis a' cheàrdach chlogaidean"
+
+msgid "If all needed wares are delivered in time, "
+"a %1s can train one new soldier in %2s and %3s "
+"to the final level in %4s on average."
+msgstr "Ma thèid na h-uile bathar a lìbhrigeadh ri àm, "
+"bheir %1s %4s 'sa chuibheas gus %2s is %3s aig saighdear "
+"a thrèanadh gun leibheil dheireannach."
+
+
 
 #: ../../src/logic/production_program.cc:1069
 msgid "distance"
-msgstr "astar"
+msgstr ""
 
 #: ../../src/logic/production_program.cc:1080
 #: ../../src/logic/production_program.cc:1091
 msgid "percentage"
-msgstr "ceudad"
+msgstr ""
 
 #: ../../src/logic/production_program.cc:1208
 #, c-format
 msgid "No left resources found!"
-msgstr "Cha deach stòras air fhàgail a lorg!"
+msgstr ""
 
 #: ../../src/logic/production_program.cc:1229
 msgid "Main vein exhausted"
-msgstr "Stòras air a chaitheamh"
+msgstr ""
 
 #: ../../src/logic/production_program.cc:1231
 msgid ""
@@ -1721,58 +1577,57 @@ msgstr ""
 #: ../../src/logic/production_program.cc:1246
 #: ../../src/logic/production_program.cc:1327
 msgid "soldier type"
-msgstr "seòrsa saighdeir"
+msgstr ""
 
 #: ../../src/logic/production_program.cc:1259
 #, c-format
 msgid "expected {\"hp\"|\"attack\"|\"defense\"|\"evade\"} but found \"%s\""
 msgstr ""
-"an dùil air {\"hp\"|\"attack\"|\"defense\"|\"evade\"} ach fhuair sinn \"%s\""
 
 #: ../../src/logic/production_program.cc:1268
 #: ../../src/logic/production_program.cc:1348
 msgid "level"
-msgstr "leibheil"
+msgstr ""
 
 #: ../../src/logic/production_program.cc:1282
 #, c-format
 msgid "No soldier to train!"
-msgstr "Chan eil saighdear ri thrèanadh ann!"
+msgstr ""
 
 #: ../../src/logic/production_program.cc:1292
 #: ../../src/logic/production_program.cc:1382
 #, c-format
 msgid "No soldier for this training level found!"
-msgstr "Cha deach saighdear airson an leibheil de thrèanaidh seo a lorg!"
+msgstr ""
 
 #: ../../src/logic/production_program.cc:1358
 #, c-format
 msgid "expected level > %u but found \"%s\""
-msgstr "an dùil air leibheil > %u ach lorg sinn \"%s\""
+msgstr ""
 
 #: ../../src/logic/productionsite.cc:71
 msgid "this ware type has already been declared as an output"
-msgstr "chaidh an seòrsa bathair seo a ghairm mar às-chur mar-thà"
+msgstr ""
 
 #: ../../src/logic/productionsite.cc:75
 msgid "this worker type has already been declared as an output"
-msgstr "chaidh an seòrsa obraiche seo a ghairm mar às-chur mar-thà"
+msgstr ""
 
 #: ../../src/logic/productionsite.cc:245
 msgid "(not occupied)"
-msgstr "(falamh)"
+msgstr ""
 
 #: ../../src/logic/productionsite.cc:249
 msgid "Worker missing"
-msgstr "Tha obraiche a dhìth"
+msgstr ""
 
 #: ../../src/logic/productionsite.cc:249
 msgid "Workers missing"
-msgstr "Tha obraichean a dhìth"
+msgstr ""
 
 #: ../../src/logic/productionsite.cc:258
 msgid "(stopped)"
-msgstr "('na stad)"
+msgstr ""
 
 #: ../../src/logic/requirements.cc:233
 #, c-format
@@ -1780,41 +1635,39 @@ msgid ""
 "expected atrHP (%u), atrAttack (%u), atrDefense (%u), atrEvade (%u) or "
 "atrTotal (%u) but found unknown attribute value (%u)"
 msgstr ""
-"an dùil air atrHP (%u), atrAttack (%u), atrDefense (%u), atrEvade (%u) no "
-"atrTotal (%u) ach chaidh luach roghainne neo-aithnichte (%u) a lorg"
 
 #: ../../src/logic/ship.cc:423
 msgid "Port space found"
-msgstr "Chaidh raon airson port a lorg"
+msgstr ""
 
 #: ../../src/logic/ship.cc:424
 msgid "An expedition ship found a new port build space."
-msgstr "Lorg long triall raon ùr gus port a thogail."
+msgstr ""
 
 #: ../../src/logic/ship.cc:531
 msgid "Island surrounded"
-msgstr "Eilean air a chuairteachadh"
+msgstr ""
 
 #: ../../src/logic/ship.cc:532
 msgid "An expedition ship surrounded its island without any events."
-msgstr "Choilean long triall timcheall air eilean gun tachartas sam bith."
+msgstr ""
 
 #: ../../src/logic/ship.cc:584
 msgid "Coast reached"
-msgstr "Chaidh oirthir a ruigsinn"
+msgstr ""
 
 #: ../../src/logic/ship.cc:586
 msgid ""
 "An expedition ship reached a coast and is waiting for further commands."
-msgstr "Ràinig long triall oirthir is tha i a' feitheamh air òrduighean ùra."
+msgstr ""
 
 #: ../../src/logic/ship.cc:722
 msgid "Expedition ready"
-msgstr "Tha triall deiseil"
+msgstr ""
 
 #: ../../src/logic/ship.cc:723
 msgid "An expedition ship is waiting for your commands."
-msgstr "Tha long triall a' feitheamh air d' òrduighean."
+msgstr ""
 
 #: ../../src/logic/ship.cc:986
 #, c-format
@@ -1823,29 +1676,29 @@ msgstr "a' luchdadh long: %s"
 
 #: ../../src/logic/soldier.cc:78
 msgid "positive integer"
-msgstr "àireamh shlàn dheimhinneach"
+msgstr ""
 
 #: ../../src/logic/soldier.cc:82
 #, c-format
 msgid "expected positive integer >= %u but found \"%s\""
-msgstr "an dùil air àireamh shlàn dheimhinneach >= %u ach lorg sinn \"%s\""
+msgstr ""
 
 #: ../../src/logic/soldier.cc:186
 msgid "\"anim_name[,another_anim,...]\""
-msgstr "\"ainm_beòthachaidh[,beòthachadh_eile,...]\""
+msgstr ""
 
 #: ../../src/logic/soldier.cc:1369
 #, c-format
 msgid "bad direction '%d'"
-msgstr "comhair dona \"%d\""
+msgstr ""
 
 #: ../../src/logic/soldier.cc:1560 ../../src/logic/soldier.cc:1565
 msgid "no"
-msgstr "chan eil"
+msgstr ""
 
 #: ../../src/logic/soldier.cc:1572 ../../src/logic/soldier.cc:1581
 msgid "Logic error"
-msgstr "Mearachd an loidsig"
+msgstr ""
 
 #: ../../src/logic/tribe.cc:133
 msgid "constructionsite type \"constructionsite\" is missing"
@@ -1858,31 +1711,31 @@ msgstr "tha an seòrsa toirt às a chèile \"distmantlesite\" a dhìth"
 #: ../../src/logic/tribe.cc:259 ../../src/logic/tribe.cc:280
 #, c-format
 msgid "\"%s\" is duplicated"
-msgstr "tha \"%s\" dùblaichte"
+msgstr ""
 
 #: ../../src/logic/tribe.cc:268 ../../src/logic/tribe.cc:289
 msgid "none found"
-msgstr "cha deach gin a lorg"
+msgstr ""
 
 #: ../../src/logic/tribe.cc:270
 #, c-format
 msgid "frontier styles: %s"
-msgstr "stoidhlichean crìch: %s"
+msgstr ""
 
 #: ../../src/logic/tribe.cc:291
 #, c-format
 msgid "flag styles: %s"
-msgstr "stoidhlichean brataich: %s"
+msgstr ""
 
 #: ../../src/logic/tribe.cc:334
 #, c-format
 msgid "tribe %s: %s"
-msgstr "treubh %s: %s"
+msgstr ""
 
 #: ../../src/logic/warehouse.cc:464
 #, c-format
 msgid "A new %s was added to your economy."
-msgstr "Chaidh %s ùr a chur ris an eaconamaidh agad."
+msgstr ""
 
 #: ../../src/logic/worker.cc:109
 #, c-format
@@ -1890,44 +1743,37 @@ msgid ""
 "should mine resource %s, which does not exist in world; tribe is not "
 "compatible with world"
 msgstr ""
-"bu chòir dha stòras %s a thochladh nach eil air an t-saoghal seo; mar sin "
-"chan eil an treubh co-chòrdail ris an t-saoghal seo"
 
 #: ../../src/logic/worker.cc:214
 #, c-format
 msgid ""
 "should breed resource type %s, which does not exist in world; tribe is not "
-"compatible with world"
+"compatible with world" 
+
 msgstr ""
-"bu chòir dha stòras %s a thàrmachadh nach eil air an t-saoghal seo; mar sin "
-"chan eil an treubh co-chòrdail ris an t-saoghal seo"
 
 #: ../../src/logic/worker.cc:605
-msgid "Out of "
-msgstr "A dhìth: "
+msgid "Out of %s"
+msgstr "%s a dhìth"
 
 #: ../../src/logic/worker.cc:608
 msgid ""
 "The worker of this building cannot find any more resources of the following "
 "type: "
 msgstr ""
-"Chan urrainn dhan obraiche aig an togalach seo dad sam bith dhen stòras seo "
-"a lorg tuilleadh: "
 
 #: ../../src/logic/worker.cc:956
 msgid "A geologist found resources."
-msgstr "Tha clach-eòlaiche air stòras a lorg."
+msgstr ""
 
 #: ../../src/logic/worker.cc:1867
 #, c-format
 msgid "Your %s can't find a way home and will likely die."
 msgstr ""
-"Chan urrainn dhan %s agad slighe dhachaigh a lorg is feumaidh gum faigh e "
-"bàs."
 
 #: ../../src/logic/worker.cc:1874
 msgid "Worker got lost!"
-msgstr "Chaidh obraiche air chall!"
+msgstr ""
 
 #: ../../src/logic/worker.cc:3088
 #, c-format
@@ -1938,82 +1784,81 @@ msgstr "a' luchdadh obraiche: %s"
 #, c-format
 msgid "%s: too many terrain types, can not be more than 16"
 msgstr ""
-"%s: cus seòrsaichean cruth-tìre, chan fhaod barrachd air 16 a bhith ann"
 
 #: ../../src/map_io/widelands_map_allowed_building_types_data_packet.cc:95
 #, c-format
 msgid "allowed buildings: %s"
-msgstr "togalaichean ceadaichte: %s"
+msgstr ""
 
 #: ../../src/map_io/widelands_map_allowed_worker_types_data_packet.cc:81
 #, c-format
 msgid "allowed worker types: %s"
-msgstr "seòrsaichean obraiche ceadaichte: %s"
+msgstr ""
 
 #: ../../src/map_io/widelands_map_bob_data_packet.cc:47
 #, c-format
 msgid "unknown bob type %u"
-msgstr "seòrsa oibseict nàdair neo-aithnichte %u"
+msgstr ""
 
 #: ../../src/map_io/widelands_map_bob_data_packet.cc:101
 #, c-format
 msgid "tribe \"%s\" does not exist"
-msgstr "chan eil an treubh \"%s\" ann"
+msgstr ""
 
 #: ../../src/map_io/widelands_map_bob_data_packet.cc:138
 #, c-format
 msgid "bobs: %s"
-msgstr "oibseactan nàdair: %s"
+msgstr ""
 
 #: ../../src/map_io/widelands_map_bobdata_data_packet.cc:227
 #, c-format
 msgid "unknown task type \"%s\""
-msgstr "seòrsa saothair neo-aithnichte \"%s\""
+msgstr ""
 
 #: ../../src/map_io/widelands_map_bobdata_data_packet.cc:231
 #, c-format
 msgid "task %s is duplicated in stack"
-msgstr "tha an t-saothair %s dùblaichte air an stac"
+msgstr ""
 
 #: ../../src/map_io/widelands_map_bobdata_data_packet.cc:304
 #, c-format
 msgid "reading path: %s"
-msgstr "a' leughadh slighe: %s"
+msgstr ""
 
 #: ../../src/map_io/widelands_map_bobdata_data_packet.cc:367
 #, c-format
 msgid "bob %u: %s"
-msgstr "oibseact nàdair %u: %s"
+msgstr ""
 
 #: ../../src/map_io/widelands_map_bobdata_data_packet.cc:374
 #, c-format
 msgid "bobdata: %s"
-msgstr "dàta oibseict nàdair: %s"
+msgstr ""
 
 #: ../../src/map_io/widelands_map_bobdata_data_packet.cc:389
 #, c-format
 msgid "critter bob: %s"
-msgstr "oibseact beathaich: %s"
+msgstr ""
 
 #: ../../src/map_io/widelands_map_bobdata_data_packet.cc:484
 #, c-format
 msgid "soldier: %s"
-msgstr "saighdear: %s"
+msgstr ""
 
 #: ../../src/map_io/widelands_map_bobdata_data_packet.cc:500
 #, c-format
 msgid "carrier: %s"
-msgstr "giùlanair: %s"
+msgstr ""
 
 #: ../../src/map_io/widelands_map_building_data_packet.cc:113
 #, c-format
 msgid "buildings: %s"
-msgstr "togalaichean: %s"
+msgstr ""
 
 #: ../../src/map_io/widelands_map_buildingdata_data_packet.cc:249
 #, c-format
 msgid "buildingdata: %s"
-msgstr "dàta togail: %s"
+msgstr ""
 
 #: ../../src/map_io/widelands_map_buildingdata_data_packet.cc:339
 #: ../../src/map_io/widelands_map_buildingdata_data_packet.cc:440
@@ -2024,7 +1869,7 @@ msgstr "bathar: %s"
 #: ../../src/map_io/widelands_map_buildingdata_data_packet.cc:350
 #, c-format
 msgid "partially_constructed_buildings: %s"
-msgstr "togalaichean nach eil coileanta: %s"
+msgstr ""
 
 #: ../../src/map_io/widelands_map_buildingdata_data_packet.cc:387
 #, c-format
@@ -2042,166 +1887,156 @@ msgid ""
 "%s %u has a next_spawn time for worker type \"%s\" set to %u, but it was "
 "previously set to %u\n"
 msgstr ""
-"%s chaidh an ath-thuras sìolaidh aig %u airson an t-seòrsa obraiche \"%s\" a "
-"shuidheachadh air %u ach bha e air a shuidheachadh air %u mar-thà\n"
 
 #: ../../src/map_io/widelands_map_buildingdata_data_packet.cc:765
 #, c-format
 msgid "warehouse: %s"
-msgstr "taigh-stòrais: %s"
+msgstr ""
 
 #: ../../src/map_io/widelands_map_buildingdata_data_packet.cc:889
 #, c-format
 msgid "militarysite: %s"
-msgstr "làrach an airm: %s"
+msgstr ""
 
 #: ../../src/map_io/widelands_map_buildingdata_data_packet.cc:1046
 #, c-format
 msgid "program %s was skipped at time %u, but time is only %u"
 msgstr ""
-"ghearr am prògram  %s leum aig an àm %u ach chan eil an t-àm ach air %u"
 
 #: ../../src/map_io/widelands_map_buildingdata_data_packet.cc:1264
 #, c-format
 msgid "trainingsite: %s"
-msgstr "làrach trèanaidh: %s"
+msgstr ""
 
 #: ../../src/map_io/widelands_map_elemental_data_packet.cc:70
 #, c-format
 msgid "elemental data: %s"
-msgstr "dàta bunasach: %s"
+msgstr ""
 
 #: ../../src/map_io/widelands_map_exploration_data_packet.cc:94
 #, c-format
 msgid "seen: %s"
-msgstr "air fhaicinn: %s"
+msgstr ""
 
 #: ../../src/map_io/widelands_map_extradata_data_packet.cc:101
 #, c-format
 msgid "extradata: %s"
-msgstr "dàta a bharrachd: %s"
+msgstr ""
 
 #: ../../src/map_io/widelands_map_flag_data_packet.cc:66
 #, c-format
 msgid "the node is owned by player %u"
-msgstr "tha an nòd leis a' chluicheadair %u"
+msgstr ""
 
 #: ../../src/map_io/widelands_map_flag_data_packet.cc:80
 #, c-format
 msgid "is owned by player %u"
-msgstr "tha seo aig a' chluicheadair %u"
+msgstr ""
 
 #: ../../src/map_io/widelands_map_flag_data_packet.cc:89
 #, c-format
 msgid "has a flag (%u)"
-msgstr "tha bratach (%u) aige"
+msgstr ""
 
 #: ../../src/map_io/widelands_map_flag_data_packet.cc:92
 #, c-format
 msgid "neighbour node (%i, %i): %s"
-msgstr "nòd nàbaidh (%i, %i): %s"
+msgstr ""
 
 #: ../../src/map_io/widelands_map_flag_data_packet.cc:120
 #, c-format
 msgid "flags: %s"
-msgstr "brataich: %s"
+msgstr ""
 
 #: ../../src/map_io/widelands_map_flagdata_data_packet.cc:85
 #, c-format
 msgid "wrong flag (%u) at given position (%i, %i)"
-msgstr "bratach chearr (%u) air an ionad (%i, %i)"
+msgstr ""
 
 #: ../../src/map_io/widelands_map_flagdata_data_packet.cc:90
 #, c-format
 msgid "no flag at given position (%i, %i)"
-msgstr "gun bhratach air an ionad (%i, %i)"
+msgstr ""
 
 #: ../../src/map_io/widelands_map_flagdata_data_packet.cc:110
 #, c-format
 msgid "has building %u at (%i, %i), which is not at the top left node"
 msgstr ""
-"tha togalach %u aige air (%i, %i) nach eil aig an nòd air a bharr gu clì"
 
 #: ../../src/map_io/widelands_map_flagdata_data_packet.cc:117
 #, c-format
 msgid "building (%u): %s"
-msgstr "togalach (%u): %s"
+msgstr ""
 
 #: ../../src/map_io/widelands_map_flagdata_data_packet.cc:216
 #: ../../src/map_io/widelands_map_ware_data_packet.cc:69
 #, c-format
 msgid "%u: %s"
-msgstr "%u: %s"
+msgstr ""
 
 #: ../../src/map_io/widelands_map_flagdata_data_packet.cc:223
 #, c-format
 msgid "flagdata: %s"
-msgstr "dàta a' bhrataich: %s"
+msgstr ""
 
 #: ../../src/map_io/widelands_map_heights_data_packet.cc:53
 #, c-format
 msgid "heights: %s"
-msgstr "àirdean: %s"
+msgstr ""
 
 #: ../../src/map_io/widelands_map_loader.cc:85
 msgid "Invalid World"
-msgstr "Saoghal mì-dhligheach"
+msgstr ""
 
 #: ../../src/map_io/widelands_map_loader.cc:87
 #, c-format
 msgid "The world \"%s\" set by the map, does not exist on your filesystem."
 msgstr ""
-"Chaidh an saoghal \"%s\" a shuidheachadh leis a' mhapa, ach chan eil e san t-"
-"siostam-fhaidhlichean agad."
 
 #: ../../src/map_io/widelands_map_node_ownership_data_packet.cc:64
 #, c-format
 msgid "ownership: %s"
-msgstr "seilbheadaireachd: %s"
+msgstr ""
 
 #: ../../src/map_io/widelands_map_object_packet.cc:109
 #, c-format
 msgid "unknown object header %u"
-msgstr "bann-cinn neo-aithnichte an oibseict %u"
+msgstr ""
 
 #: ../../src/map_io/widelands_map_object_packet.cc:112
 #, c-format
 msgid "map objects: %s"
-msgstr "oibseactan a' mhapa: %s"
+msgstr ""
 
 #: ../../src/map_io/widelands_map_objective_data_packet.cc:66
 #, c-format
 msgid "%s: %s"
-msgstr "%s: %s"
+msgstr ""
 
 #: ../../src/map_io/widelands_map_objective_data_packet.cc:73
 #, c-format
 msgid "Objectives: %s"
-msgstr "Amasan: %s"
+msgstr ""
 
 #: ../../src/map_io/widelands_map_player_names_and_tribes_data_packet.cc:81
 #, c-format
 msgid "player names and tribes: %s"
-msgstr "ainmean is treubhan nan cluicheadairean: %s"
+msgstr ""
 
 #: ../../src/map_io/widelands_map_player_position_data_packet.cc:61
 #, c-format
 msgid "player positions: %s"
-msgstr "ionadan nan cluicheadairean: %s"
+msgstr ""
 
 #: ../../src/map_io/widelands_map_players_messages_data_packet.cc:89
 #, c-format
 msgid "messages are not ordered: sent at %u but previous message sent at %u"
 msgstr ""
-"chan eil òrdugh aig na teachdaireachdan: chaidh a cur aig %u ach chaidh an "
-"teachdaireachd roimhpe a chur aig %u"
 
 #: ../../src/map_io/widelands_map_players_messages_data_packet.cc:95
 #, c-format
 msgid "message is sent in the future: sent at %u but gametime is only %u"
 msgstr ""
-"chaidh an teachdaireachd a chur san àm ri teachd: chaidh a cur aig %u ach "
-"chan e àm a' gheama ach %u"
 
 #: ../../src/map_io/widelands_map_players_messages_data_packet.cc:104
 #, c-format
@@ -2210,17 +2045,12 @@ msgid ""
 "forever, which is the default; omit the duration key to make the message "
 "exist forever"
 msgstr ""
-"chan eil an luach %u ceadaichte mar fhaide; seo luach sònraichte a "
-"riochdaicheas \"gu bhràth\" is seo a' bhun-roghainn; na cuir iuchair faide "
-"ann is mairidh an teachdaireachd seo gu bràth"
 
 #: ../../src/map_io/widelands_map_players_messages_data_packet.cc:112
 #, c-format
 msgid ""
 "duration %u is too large; causes numeric overflow when added to sent time %u"
 msgstr ""
-"tha an fhaide %u ro fhada; adhbharaichidh i taosgadh àireamhail nuair a "
-"thèid a cur ri àm a' chuir %u"
 
 #: ../../src/map_io/widelands_map_players_messages_data_packet.cc:118
 #, c-format
@@ -2228,13 +2058,11 @@ msgid ""
 "message should have expired at %u; sent at %u with duration %u but gametime "
 "is already %u"
 msgstr ""
-"bu chòir an ùine air a bhith a' falbh air an teachdaireachd aig %u; chaidh a "
-"chur aig %u le faide de %u ach is %u àm a' gheama mar-thà"
 
 #: ../../src/map_io/widelands_map_players_messages_data_packet.cc:161
 #, c-format
 msgid "\"%s\": %s"
-msgstr "\"%s\": %s"
+msgstr ""
 
 #: ../../src/map_io/widelands_map_players_messages_data_packet.cc:166
 #, c-format
@@ -2244,21 +2072,21 @@ msgstr "teachdaireachdan airson cluicheadair %u: %s"
 #: ../../src/map_io/widelands_map_players_view_data_packet.cc:216
 #, c-format
 msgid "unseen immovable: %s"
-msgstr "nì do-ghluasad nach deach fhaicinn: %s"
+msgstr ""
 
 #: ../../src/map_io/widelands_map_port_spaces_data_packet.cc:63
 #, c-format
 msgid "port_spaces data: %s"
-msgstr "dàta raointean puirt: %s"
+msgstr ""
 
 #: ../../src/map_io/widelands_map_road_data_packet.cc:69
 #, c-format
 msgid "road: %s"
-msgstr "rathad: %s"
+msgstr ""
 
 #: ../../src/map_io/widelands_map_roaddata_data_packet.cc:129
 msgid "no carrier slot"
-msgstr "chan eil slot giùlanair ann"
+msgstr ""
 
 #: ../../src/map_io/widelands_map_roaddata_data_packet.cc:133
 #, c-format
@@ -2266,53 +2094,51 @@ msgid ""
 "expected 1 but found %u carrier slots in road saved with packet version 2 "
 "(old)"
 msgstr ""
-"an dùil air 1 ach chaidh %u slotan giùlanair a lorg san rathad a chaidh a "
-"shàbhaladh le (seann) tionndadh 2 a' phacaid"
 
 #: ../../src/map_io/widelands_map_roaddata_data_packet.cc:202
 #, c-format
 msgid "road %u: %s"
-msgstr "rathad %u: %s"
+msgstr ""
 
 #: ../../src/map_io/widelands_map_roaddata_data_packet.cc:209
 #, c-format
 msgid "roaddata: %s"
-msgstr "dàta an rathaid: %s"
+msgstr ""
 
 #: ../../src/map_io/widelands_map_terrain_data_packet.cc:80
 #, c-format
 msgid "terrain: %s"
-msgstr "cruth-tìre: %s"
+msgstr ""
 
 #: ../../src/map_io/widelands_map_version_data_packet.cc:76
 #, c-format
 msgid "version: %s"
-msgstr "tionndadh: %s"
+msgstr ""
 
 #: ../../src/map_io/widelands_map_ware_data_packet.cc:76
 #: ../../src/map_io/widelands_map_waredata_data_packet.cc:208
 #, c-format
 msgid "ware data: %s"
-msgstr "dàta a' bhathair: %s"
+msgstr ""
 
 #: ../../src/map_io/widelands_map_waredata_data_packet.cc:131
 #: ../../src/map_io/widelands_map_waredata_data_packet.cc:201
 #, c-format
 msgid "item %u: %s"
-msgstr "nì %u: %s"
+msgstr ""
 
 #: ../../src/network/internet_gaming.cc:116
 #: ../../src/ui_fsmenu/internet_lobby.cc:409
 msgid "Connection problem"
-msgstr "Duilgheadas leis a' cheangal"
+msgstr ""
 
 #: ../../src/network/internet_gaming.cc:116
 msgid "Widelands could not connect to the metaserver."
-msgstr "Cha b' urrainn dha Widelands ceangal ris a' mheata-fhrithealaiche."
+msgstr ""
 
 #: ../../src/network/internet_gaming.cc:122 ../../src/network/netclient.cc:102
 msgid "Could not establish connection to host"
-msgstr "Cha b' urrainn dhuinn ceangal a dhèanamh ris an òstair."
+msgstr ""
 
 #: ../../src/network/internet_gaming.cc:124
 msgid ""
@@ -2320,33 +2146,30 @@ msgid ""
 "Either there was no metaserver running at the supposed port or\n"
 "your network setup is broken."
 msgstr ""
-"Cha deach le Widelands ceangal a dhèanamh ris an t-seòladh shònraichte.\n"
-"Cha robh meata-fhrithealaiche a' ruith aig a' phort sin air neo\n"
-"tha rèiteachadh an lìonraidh agad briste."
 
 #: ../../src/network/internet_gaming.cc:171
 msgid "For hosting a game, please take a look at the notes at:"
-msgstr "Thoir sùil air na nòtaichean ud gus geama òstadh:"
+msgstr ""
 
 #: ../../src/network/internet_gaming.cc:302
 msgid "Something went wrong: "
-msgstr "Chaidh rudeigin cearr: "
+msgstr ""
 
 #: ../../src/network/internet_gaming.cc:392
 msgid "Successfully reconnected to the metaserver!"
-msgstr "Chaidh ceangal ris a' mheata-fhrithealaiche!"
+msgstr ""
 
 #: ../../src/network/internet_gaming.cc:399
 msgid "Mixed up"
-msgstr "Breisleach"
+msgstr ""
 
 #: ../../src/network/internet_gaming.cc:399
 msgid "The metaserver sent a strange ERROR during connection"
-msgstr "Chuir am meata-fhrithealaiche MEARACHD neònach rè a' cheangail"
+msgstr ""
 
 #: ../../src/network/internet_gaming.cc:410
 msgid "Unexpected packet"
-msgstr "Pacaid air nach robh dùil"
+msgstr ""
 
 #: ../../src/network/internet_gaming.cc:412
 #, c-format
@@ -2354,121 +2177,119 @@ msgid ""
 "Expected a LOGIN, RELOGIN or REJECTED packet from server, but received "
 "command %s. Maybe the metaserver is using a different protocol version ?"
 msgstr ""
-"An dùil air pacaid LOGIN, RELOGIN no REJECTED on fhrithealaiche, ach fhuair "
-"sinn an àithne %s. 'S dòcha gun chleachd am meata-fhrithealaiche tionndadh "
-"eile dhen phròtacal."
 
 #: ../../src/network/internet_gaming.cc:425
 #, c-format
 msgid ""
 "WARNING: Received a %s command although we are not in CONNECTING state."
 msgstr ""
-"RABHADH: Fhuair sinn àithne %s ged nach eil sinn san staid CONNECTING."
 
 #: ../../src/network/internet_gaming.cc:434
 #, c-format
-msgid "Server time offset is %i seconds."
-msgstr "Tha frith-àireamh ama an fhrithealaiche 'na %i diog(an)."
+msgid "Server time offset is %u second."
+msgid_plural "Server time offset is %u seconds."
+msgstr[0] "Tha frith-àireamh ama an fhrithealaiche na %u diog."
+msgstr[1] "Tha frith-àireamh ama an fhrithealaiche na %u dhiog."
+msgstr[2] "Tha frith-àireamh ama an fhrithealaiche na %u diogan."
+msgstr[3] "Tha frith-àireamh ama an fhrithealaiche na %u diog."
+
+#: ../../src/network/internet_gaming.cc:434
+#, c-format
+msgid "InternetGaming: Server time offset is %u second."
+msgid_plural "InternetGaming: Server time offset is %u seconds."
+msgstr[0] "Geama eadar-lìn: Tha frith-àireamh ama an fhrithealaiche na %u diog."
+msgstr[1] "Geama eadar-lìn: Tha frith-àireamh ama an fhrithealaiche na %u dhiog."
+msgstr[2] "Geama eadar-lìn: Tha frith-àireamh ama an fhrithealaiche na %u diogan."
+msgstr[3] "Geama eadar-lìn: Tha frith-àireamh ama an fhrithealaiche na %u diog."
+
 
 #: ../../src/network/internet_gaming.cc:454
 msgid "Invalid message type"
-msgstr "Seòrsa teachdaireachd mì-dhligheach"
+msgstr ""
 
 #: ../../src/network/internet_gaming.cc:454
 #, c-format
 msgid "Invalid chat message type \"%s\"."
-msgstr "Seòrsa teachdaireachd a' chabadaich mì-dhligheach \"%s\"."
+msgstr ""
 
 #: ../../src/network/internet_gaming.cc:535
 msgid "ERROR: "
-msgstr "MEARACHD: "
+msgstr ""
 
 #: ../../src/network/internet_gaming.cc:539
 msgid "Chat message could not be sent. "
-msgstr "Cha b' urrainn dhuinn teachdaireachd a' chabadaich a chur. "
+msgstr ""
 
 #: ../../src/network/internet_gaming.cc:560
 msgid "Received an unknown command from the metaserver: "
-msgstr "Fhuair sinn àithne neo-aithnichte on mheata-fhrithealaiche: "
+msgstr ""
 
 #: ../../src/network/internet_gaming.cc:692
 msgid "Message could not be sent: You are not connected to the metaserver!"
 msgstr ""
-"Cha b' urrainn dhuinn an teachdaireachd a chur: chan eil thu ceangailte ris "
-"a' mheata-fhrithealaiche!"
 
 #: ../../src/network/internet_gaming.cc:704
 msgid "Message could not be sent: Was this supposed to be a private message?"
 msgstr ""
-"Cha b' urrainn dhuinn an teachdaireachd a chur: am bu chòir dha a bhith na "
-"theachdaireachd phrìobhaideach?"
 
 #: ../../src/network/internet_gaming.cc:778
 msgid "Conversion error"
-msgstr "Mearachd leis an iompachadh"
+msgstr ""
 
 #: ../../src/network/internet_gaming.cc:779
 #, c-format
 msgid "Conversion from std::string to bool failed. String was \"%s\""
 msgstr ""
-"Cha deach leinn bool a dhèanamh de std::string. B' e \"%s\" an string."
 
 #: ../../src/network/internet_gaming_messages.cc:42
 #, c-format
 msgid "No user with the name %s is logged in!"
-msgstr "Chan eil cluicheadair air a logadh a-steach air a bheil %s!"
+msgstr ""
 
 #: ../../src/network/internet_gaming_messages.cc:43
 #: ../../src/network/nethost.cc:1260
 msgid "The sent password was incorrect!"
-msgstr "Chan eil am facal-faire a chaidh a chur mar bu chòir!"
+msgstr ""
 
 #: ../../src/network/internet_gaming_messages.cc:44
 msgid "The protocol version you are using is not supported!"
 msgstr ""
-"Cha chuir sinn taic ri tionndadh a' phròtacail a bhios tu a' chleachdadh!"
 
 #: ../../src/network/internet_gaming_messages.cc:45
 msgid "You are already logged in!"
-msgstr "Tha thu air logadh a-steach mar-thà!"
+msgstr ""
 
 #: ../../src/network/internet_gaming_messages.cc:48
 msgid ""
 "You got disconnected, as you sent a superuser command without superuser "
 "permission. This incident will be logged and reported to the administrator."
 msgstr ""
-"Chaidh an ceangal agad a bhriseadh on a chuir thu àithne superuser gun chead "
-"superuser. Thèid an tachartas seo a chur san loga is aithris dhan rianaire."
 
 #: ../../src/network/internet_gaming_messages.cc:50
 msgid "You got disconnected, as the metaserver is currently restarting."
 msgstr ""
-"Chaidh an ceangal agad a bhriseadh on a tha am meata-fhrithealaiche ag ath-"
-"thòiseachadh an-dràsta."
 
 #: ../../src/network/internet_gaming_messages.cc:52
 msgid "Connection was closed by the client normally."
-msgstr "Chaidh an ceangal a dhùnadh gu h-àbhaisteach leis a' chliant."
+msgstr ""
 
 #: ../../src/network/internet_gaming_messages.cc:53
 msgid "The connection to the metaserver was lost."
-msgstr "Chaidh an ceangal dhan mheata-fhrithealaiche air chall."
+msgstr ""
 
 #: ../../src/network/internet_gaming_messages.cc:54
 msgid "Metaserver did not answer"
-msgstr "Cha do fhreagair am meata-fhrithealaiche"
+msgstr ""
 
 #: ../../src/network/internet_gaming_messages.cc:55
 msgid "Your game is not connectable from the internet"
-msgstr "Cha ghabh ceangal ris a' gheama agad on eadar-lìon"
+msgstr ""
 
 #: ../../src/network/internet_gaming_messages.cc:57
 msgid ""
 "You got disconnected from the metaserver, as you did not answer a PING "
 "request in time."
 msgstr ""
-"Chaidh an ceangal agad ris a' mheata-fhrithealaiche a bhriseadh oir cha do "
-"fhreagair thu do dh'iarrtas PING ri àm."
 
 #: ../../src/network/internet_gaming_messages.cc:60
 msgid ""
@@ -2477,18 +2298,12 @@ msgid ""
 "http://wl.widelands.org/wiki/InternetGaming for setting up your internet "
 "connection for hosting a game online."
 msgstr ""
-"Cha deach leis a' mheata-fhrithealaiche ceangal ris a' gheama agad. "
-"Dh'fhaoidte nach gabh ceangal a dhèanamh ris on eadar-lìon! Thoir sùil air "
-"http://wl.widelands.org/wiki/InternetGaming mu mar a rèiticheas tu an "
-"ceangal dhan eadar-lìon agad gus geama òstadh air loidhne."
 
 #: ../../src/network/internet_gaming_messages.cc:64
 msgid ""
 "You tried to relogin, but the server has no more knowledge of your previous "
 "state."
 msgstr ""
-"Dh'fheuch thu ri ath-logadh a-steach, ach chan aithnich am frithealaiche an "
-"staid agad roimhpe."
 
 #: ../../src/network/netclient.cc:104
 msgid ""
@@ -2496,30 +2311,24 @@ msgid ""
 "Either no Widelands server was running at the supposed port or\n"
 "the server shut down as you tried to connect."
 msgstr ""
-"Cha deach le Widelands ceangal a dhèanamh ris an t-seòladh shònraichte.\n"
-"Cha robh frithealaiche Widelands a' ruith aig a' phort sin air neo\n"
-"chaidh am frithealaiche a dhùnadh sìos fhad 's a bha thu a' feuchainn ri "
-"ceangal."
 
 #: ../../src/network/netclient.cc:863
 msgid "/me 's file failed md5 checksumming."
-msgstr "Cha choilean am faidhle aig /me an àireamh dhearbhaidh md5."
+msgstr ""
 
 #: ../../src/network/netclient.cc:893
 msgid ""
 "/me checked the received file. Although md5 check summing succeeded, I can "
 "not handle the file."
 msgstr ""
-"Dhearbhaich /me am faidhle air a chur. Ged an do shoirbhich leis an àireamh "
-"dearbhaidh md5, chan urrainn dhomh am faidhle a làimhseachadh."
 
 #: ../../src/network/netclient.cc:1108
 msgid " An automatic savegame will be created."
-msgstr " Thèid an geama a shàbhaladh gu fèin-obrachail."
+msgstr ""
 
 #: ../../src/network/netclient.cc:1112
 msgid "Disconnected from Host"
-msgstr "Chaidh an ceangal dhan òstair a bhriseadh"
+msgstr ""
 
 #: ../../src/network/nethost.cc:368
 msgid ""
@@ -2530,92 +2339,78 @@ msgid ""
 "   -  Force the game to pause.<br>/endForcedPause        -  Puts game back "
 "to normal speed."
 msgstr ""
-"<br>Seo àitheantan an òstair a bhios ri làimh:<br>/help  -  seallaidh seo a' "
-"chobhair seo<br>/announce <msg>  -  Cuir teachdaireachd na cabadaich mar "
-"bhrath (cabadaich an t-siostaim)<br>/warn <name> <reason>  -  Thoir rabhadh "
-"dhan chleachdaiche <name> air sàilleibh <reason><br>/kick <name> <reason>  - "
-" Thoir a' bhròg dhan chluicheadair <name> air sàilleibh "
-"<reason><br>/forcePause            -  Thoir stad air a' "
-"gheama.<br>/endForcedPause        -  Aisigidh seo luaths àbhaisteach a' "
-"gheama."
 
 #: ../../src/network/nethost.cc:382
 msgid "Wrong use, should be: /announce <message>"
-msgstr "Na cleachd mar sin e, bu chòir dha bith: /announce <message>"
+msgstr ""
 
 #: ../../src/network/nethost.cc:395
 msgid "Wrong use, should be: /warn <name> <reason>"
-msgstr "Na cleachd mar sin e, bu chòir dha bith: /warn <name> <reason>"
+msgstr ""
 
 #: ../../src/network/nethost.cc:403
 msgid "Why would you warn yourself?"
-msgstr "Carson a bheireadh tu rabhadh dhut fhèin?"
+msgstr ""
 
 #: ../../src/network/nethost.cc:405
 msgid "Why would you want to warn the dedicated server?"
-msgstr "Carson a bheireadh tu rabhadh dhan fhrithealaiche shònraichte?"
+msgstr ""
 
 #: ../../src/network/nethost.cc:409 ../../src/network/nethost.cc:435
 #, c-format
 msgid "The client %s could not be found."
-msgstr "Cha deach an cliant %s a lorg."
+msgstr ""
 
 #: ../../src/network/nethost.cc:420
 msgid "Wrong use, should be: /kick <name> <reason>"
-msgstr "Na cleachd mar sin e, bu chòir dha bith: /kick <name> <reason>"
+msgstr ""
 
 #: ../../src/network/nethost.cc:431
 msgid "You can not kick yourself!"
-msgstr "Chan urrainn dhut a' bhròg a thoirt dhut fhèin!"
+msgstr ""
 
 #: ../../src/network/nethost.cc:433
 msgid "You can not kick the dedicated server"
-msgstr "Chan urrainn dhut a' bhròg a thoirt dhan fhrithealaiche shònaichte"
+msgstr ""
 
 #: ../../src/network/nethost.cc:438
 #, c-format
 msgid "Are you sure you want to kick %s?<br>"
 msgstr ""
-"A bheil thu cinnteach gu bheil thu airson a' bhròg a thoirt dha %s?<br>"
 
 #: ../../src/network/nethost.cc:439
 #, c-format
 msgid "The stated reason was: %s<br>"
-msgstr "Seo an t-adhbhar a chuireadh seachad: %s<br>"
+msgstr ""
 
 #: ../../src/network/nethost.cc:440
 #, c-format
 msgid "If yes, type: /ack_kick %s"
-msgstr "Ma tha, sgrìobh: /ack_kick %s"
+msgstr ""
 
 #: ../../src/network/nethost.cc:451
 msgid "kick acknowledgement cancelled: No name given!"
 msgstr ""
-"chaidh sgur de dhearbhadh a' bhròig: cha deach ainm a thoirt seachad!"
 
 #: ../../src/network/nethost.cc:453
 msgid "Wrong use, should be: /ack_kick <name>"
-msgstr "Na cleachd mar sin e, bu chòir dha bith: /ack_kick <name>"
+msgstr ""
 
 #: ../../src/network/nethost.cc:459
 msgid "kick acknowledgement cancelled: Wrong name given!"
 msgstr ""
-"chaidh sgur de dhearbhadh a' bhròig: cha deach an t-ainm ceart a thoirt "
-"seachad!"
 
 #: ../../src/network/nethost.cc:470
 msgid "Pause was already forced - game should be paused."
 msgstr ""
-"Chaidh toirt air a' gheama stad mar-thà is bu chòir e bhith 'na stad."
 
 #: ../../src/network/nethost.cc:482
 msgid "There is no forced pause - nothing to end."
-msgstr "Cha toir air a' gheama stad on nach eil dad ri stad ann."
+msgstr ""
 
 #: ../../src/network/nethost.cc:493
 msgid "Invalid command! Type /help for a list of commands."
 msgstr ""
-"Àithne mhì-dhligheach! Sgrìobh /help airson liosta dhe na h-àitheantan."
 
 #: ../../src/network/nethost.cc:733
 #, c-format
@@ -2623,8 +2418,6 @@ msgid ""
 "This is a dedicated server. Send \"@%s help\" to get a full list of "
 "available commands."
 msgstr ""
-"Seo frithealaiche sònraichte. Cuir \"@%s help\" airson liosta shlàn dhe na h-"
-"àitheantan a bhios ri làimh."
 
 #: ../../src/network/nethost.cc:1201
 msgid ""
@@ -2632,73 +2425,62 @@ msgid ""
 "Tries to run the host command $<br>save $ - Saves the current game state as "
 "$.wgf"
 msgstr ""
-"<br>Seo àitheantan an òstair a bhios ri làimh:<br>help   - Seallaidh seo a' "
-"chobhair seo<br>host $ - Feuchaidh seo ri àithne an òstair $ a ruith<br>save "
-"$ - Sàbhailidh seo staid a' gheama làithrich mar $.wgf"
 
 #: ../../src/network/nethost.cc:1208
 msgid ""
 "<br>Available host commands are:<br>help           - Shows this help<br>host "
 "        $ - Tries to run the host command $"
 msgstr ""
-"<br>Seo àitheantan an òstair a bhios ri làimh:<br>help           - Seallaidh "
-"seo a' chobhair seo<br>host         $ - Feuchaidh seo ri àithne an òstair $ "
-"a ruith"
 
 #: ../../src/network/nethost.cc:1213
 msgid "pwd          $ - Sends the password $ to the host"
-msgstr "pwd          $ - Cuiridh seo am facal-faire $ gun òstair"
+msgstr ""
 
 #: ../../src/network/nethost.cc:1220
 msgid ""
 "Access to host commands denied. To gain access, send the password with pwd "
 "command."
 msgstr ""
-"Chaidh inntrigeadh dha dh'àitheantan an òstair a dhiùltadh. Cuir am facal-"
-"faire leis an àithne pwd airson inntrigidh."
 
 #: ../../src/network/nethost.cc:1225
 #, c-format
 msgid "%s told me to run the command: \"%s\""
-msgstr "Thug %s orm an àithne seo a ruith: \"%s\""
+msgstr ""
 
 #: ../../src/network/nethost.cc:1234
 msgid "Sorry! Saving was deactivated on this dedicated server!"
 msgstr ""
-"Duilich! Chaidh sàbhaladh a chur à comas air an fhrithealaiche shònraichte "
-"seo!"
 
 #: ../../src/network/nethost.cc:1237
 msgid "Can not save, as long as no game is running!"
-msgstr "Chan urrainn dhomh sàbhaladh gun gheama 'ga ruith!"
+msgstr ""
 
 #: ../../src/network/nethost.cc:1248
 msgid "Game successfully saved!"
-msgstr "Chaidh an geama a shàbhaladh!"
+msgstr ""
 
 #: ../../src/network/nethost.cc:1250
 #, c-format
 msgid "Could not save the game to the file \"%s\"! (%s)"
 msgstr ""
-"Cha b' urrainn dhuinn an geama a shàbhaladh dhan fhaidhle \"%s\"! (%s)"
 
 #: ../../src/network/nethost.cc:1257
 msgid "This server is not password protected!"
-msgstr "Chan eil am frithealaiche seo 'ga dhìon le facal-faire!"
+msgstr ""
 
 #: ../../src/network/nethost.cc:1273
 msgid "The password was correct, access was granted!"
-msgstr "Bha am facal-faire mar bu chòir is fhuair thu inntrigeadh!"
+msgstr ""
 
 #: ../../src/network/nethost.cc:1279
 #, c-format
 msgid "Unknown dedicated server command \"%s\"!"
-msgstr "Àithne neo-aithnichte an fhrithealaiche shònraichte \"%s\"!"
+msgstr ""
 
 #: ../../src/network/nethost.cc:1984
 #, c-format
 msgid "Computer%u"
-msgstr "Coimpiutair %u"
+msgstr ""
 
 #: ../../src/network/nethost.cc:2147
 #, c-format
@@ -2706,204 +2488,189 @@ msgid ""
 "This server is password protected. You can send the password with: \"@%s pwd "
 "PASSWORD\""
 msgstr ""
-"Tha am frithealaiche seo 'ga dhìon le facal-faire. 'S urrainn dhut am facal-"
-"faire a chur le: \"@%s pwd PASSWORD\""
 
 #: ../../src/network/network_gaming_messages.cc:122
 msgid "Client has left the game."
-msgstr "Dh'fhàg an cliant an geama."
+msgstr ""
 
 #: ../../src/network/network_gaming_messages.cc:123
 msgid "Client crashed and performed an emergency save."
-msgstr "Thuislich an cliant is is chaidh sàbhaladh èiginneach a dhèanamh."
+msgstr ""
 
 #: ../../src/network/network_gaming_messages.cc:124
 msgid "Connection was lost."
-msgstr "Chaidh an ceangal a chall."
+msgstr ""
 
 #: ../../src/network/network_gaming_messages.cc:125
 msgid "Server has left the game."
-msgstr "Dh'fhàg am frithealaiche an geama."
+msgstr ""
 
 #: ../../src/network/network_gaming_messages.cc:126
 msgid "The game has started just after you tried to connect."
 msgstr ""
-"Thòisich a' gheama dìreach nuair a bha thu às dèidh feuchainn ri ceangal."
 
 #: ../../src/network/network_gaming_messages.cc:127
 msgid "Server has crashed and performed an emergency save."
 msgstr ""
-"Thuislich am frithealaiche is is chaidh sàbhaladh èiginneach a dhèanamh."
 
 #: ../../src/network/network_gaming_messages.cc:128
 msgid "Connection to client timeouted: no response for 10 minutes!"
 msgstr ""
-"Dh'fhalbh an ùine air a' cheangal dhan chliant: gun fhreagairt fa 10 "
-"mionaidean!"
 
 #: ../../src/network/network_gaming_messages.cc:129
 msgid "Client and host have become desynchronized."
-msgstr "Chaill an cliant is an òstair an sioncronachadh."
+msgstr ""
 
 #: ../../src/network/network_gaming_messages.cc:130
 #, c-format
 msgid "Kicked by the host: %s"
-msgstr "Thug an t-òstair a' bhròg do: %s"
+msgstr ""
 
 #: ../../src/network/network_gaming_messages.cc:131
 #, c-format
 msgid "Client sent malformed commands: %s"
-msgstr "Chuir an cliant àitheantan aig nach robh cruth mar bu chòir: %s"
+msgstr ""
 
 #: ../../src/network/network_gaming_messages.cc:132
 #, c-format
 msgid "Something went wrong: %s"
-msgstr "Chaidh rudeigin cearr: %s"
+msgstr ""
 
 #: ../../src/network/network_gaming_messages.cc:133
 #, c-format
 msgid "%s has left the game (%s)"
-msgstr "Dh'fhàg %s an geama (%s)"
+msgstr ""
 
 #: ../../src/network/network_gaming_messages.cc:134
 #, c-format
 msgid "Unknown user has left the game (%s)"
-msgstr "Dh'fhàg cleachdaiche neo-aithnichte an geama (%s)"
+msgstr ""
 
 #: ../../src/network/network_gaming_messages.cc:135
 msgid "Server sent a SYNCREQUEST even though no game is running."
-msgstr "Chuir am frithealaiche SYNCREQUEST ged nach eil geama 'ga ruith."
+msgstr ""
 
 #: ../../src/network/network_gaming_messages.cc:136
 msgid "Received a PLAYERCOMMAND even though no game is running."
-msgstr "Fhuaras PLAYERCOMMAND ged nach eil geama 'ga ruith."
+msgstr ""
 
 #: ../../src/network/network_gaming_messages.cc:137
 msgid "Unexpectedly received LAUNCH command from server."
-msgstr "Fhuaras àithne LAUNCH on fhrithealaiche air nach robh dùil."
+msgstr ""
 
 #: ../../src/network/network_gaming_messages.cc:138
 msgid "Server sent a player update for a player that does not exist."
 msgstr ""
-"Chuir am frithealaiche ùrachadh cluicheadair airson cluicheadair nach eil "
-"ann."
 
 #: ../../src/network/network_gaming_messages.cc:139
 msgid "Server sent an user update for a user that does not exist."
 msgstr ""
-"Chuir am frithealaiche ùrachadh cleachdaiche airson cleachdaiche nach eil "
-"ann."
 
 #: ../../src/network/network_gaming_messages.cc:140
 msgid "Server uses a different protocol version"
-msgstr "Tha am frithealaiche a' chleachdadh tionndadh eile dhen phròtacal"
+msgstr ""
 
 #: ../../src/network/network_gaming_messages.cc:141
 #, c-format
 msgid "Received command number %s, that is disallowed in this state."
-msgstr "Fhuaras an àithne àireamh %s nach eil ceadaichte san staid seo."
+msgstr ""
+
+#, c-format
+msgid "%1$i%% built"
+msgstr "%1$i%% air a thogail"
 
 #: ../../src/network/network_gaming_messages.cc:142
 msgid "Client reports time to host that is running backwards."
 msgstr ""
-"Tha an cliant ag aithris àm dhan òstair a tha a' ruith on dheireadh dhan "
-"toiseach."
 
 #: ../../src/network/network_gaming_messages.cc:143
 msgid "Client simulates beyond the game time allowed by the host."
 msgstr ""
-"Tha an cliant a' cumail a' dol thar àm a' gheama a cheadaich an òstair."
 
 #: ../../src/network/network_gaming_messages.cc:144
 msgid "Client did not submit sync report in time."
-msgstr "Cha do chuir an cliant aithris sioncronachaidh ann ri àm."
+msgstr ""
 
 #: ../../src/network/network_gaming_messages.cc:145
 msgid "The game has already started."
-msgstr "Chaidh an geama a thòiseachadh mar-thà."
+msgstr ""
 
 #: ../../src/network/network_gaming_messages.cc:146
 msgid "Client has no access to other player's settings."
 msgstr ""
-"Chan eil inntrigeadh aig a' chliant do roghainnean a' chluicheadair eile."
 
 #: ../../src/network/network_gaming_messages.cc:147
 msgid "Client has no access to server settings."
 msgstr ""
-"Chan eil inntrigeadh aig a' chliant do roghainnean an fhrithealaiche."
 
 #: ../../src/network/network_gaming_messages.cc:148
 msgid "Client sent start command, although server is not yet ready."
 msgstr ""
-"Chuir an cliant àithne tòiseachaidh ged nach eil am frithealaiche ullamh "
-"fhathast."
 
 #: ../../src/network/network_gaming_messages.cc:149
 msgid "Client sent TIME command even though game is not running."
-msgstr "Chuir an cliant àithne TIME ged nach eil an geama a' ruith."
+msgstr ""
 
 #: ../../src/network/network_gaming_messages.cc:150
 msgid "Client sent a playercommand for another player."
-msgstr "Chuir an cliant àithne cluicheadair airson cluicheadair eile."
+msgstr ""
 
 #: ../../src/network/network_gaming_messages.cc:151
 msgid "Client sent unexpected synchronization report."
-msgstr "Chuir an cliant aithris sioncronachaidh air nach robh dùil."
+msgstr ""
 
 #: ../../src/network/network_gaming_messages.cc:152
 msgid "Client requests file although none is available to send."
-msgstr "Tha an cliant ag iarraidh faidhle ged nach eil fear ri chur ann."
+msgstr ""
 
 #: ../../src/network/network_gaming_messages.cc:153
 msgid "Client requests file part that does not exist."
-msgstr "Tha an cliant ag iarraidh faidhle nach eil ann."
+msgstr ""
 
 #: ../../src/network/network_gaming_messages.cc:154
 #, c-format
 msgid "Host sent player %s to the lobby!"
-msgstr "Chuir an òstair an cluicheadair %s dhan lobaidh!"
+msgstr ""
 
 #: ../../src/network/network_gaming_messages.cc:155
 #, c-format
 msgid "WARNING: %s uses version: %s, while Host uses version: %s"
 msgstr ""
-"RABHADH: tha %s a' chleachdadh an tionndadh: %s fhad 's a tha an òstair a' "
-"chleachdadh an tionndadh: %s"
 
 #: ../../src/network/network_gaming_messages.cc:156
 #, c-format
 msgid "%s has joined the game"
-msgstr "Ghabh %s pàirt sa geama"
+msgstr ""
 
 #: ../../src/network/network_gaming_messages.cc:157
 #, c-format
 msgid "Game was saved as %s."
-msgstr "Chaidh an geama a shàbhaladh mar %s."
+msgstr ""
 
 #: ../../src/network/network_gaming_messages.cc:158
 #, c-format
 msgid "Started to send file %s to %s!"
-msgstr "Thòisich sinn a' cur an fhaidhle %s gu %s!"
+msgstr ""
 
 #: ../../src/network/network_gaming_messages.cc:159
 #, c-format
 msgid "Completed transfer of file %s to %s"
-msgstr "Tha sinn air an fhaidhle %s a chur gu %s"
+msgstr ""
 
 #: ../../src/network/network_gaming_messages.cc:160
 #, c-format
 msgid "Sending part %s of file %s to %s"
-msgstr "A' cur pàirt %s dhen fhaidhle %s gu %s"
+msgstr ""
 
 #: ../../src/network/network_gaming_messages.cc:161
 #, c-format
 msgid "The player \"%s\" was defeated and became spectator."
-msgstr "Chaidh ruaig a chur air cluicheadair \"%s\" is chaidh e 'na amharc."
+msgstr ""
 
 #: ../../src/network/network_gaming_messages.cc:162
 #, c-format
 msgid "Client %s did not answer for more than %s seconds."
-msgstr "Cha do fhreagair an cliant %s fad barrachd air %s diog(an)."
+msgstr ""
 
 #: ../../src/network/network_gaming_messages.cc:164
 #, c-format
@@ -2911,8 +2678,6 @@ msgid ""
 "Client %s will automatically be kicked, if no answer is received within %s "
 "seconds."
 msgstr ""
-"Gheibh an cliant %s a' bhròg gu fèin-obrachail mur fhuaras freagairt an "
-"ceann %s diog(an)."
 
 #: ../../src/scripting/lua_game.cc:444 ../../src/ui_basic/helpwindow.cc:83
 #: ../../src/ui_basic/messagebox.cc:92
@@ -2931,20 +2696,16 @@ msgstr "Ceart ma-thà"
 #: ../../src/scripting/lua_game.cc:1088
 #, c-format
 msgid " (achieved %s)"
-msgstr " (%s air a choileanadh)"
+msgstr ""
 
 #: ../../src/sound/sound_handler.cc:147
 #, c-format
 msgid "Sound_Handler closing times %i, freq %i, format %i, chan %i\n"
 msgstr ""
-"Làimhsichear fhuaimean: ùineachan dùnaidh %i, tricead %i, fòrmat %i, seanail "
-"%i\n"
 
 #: ../../src/sound/sound_handler.cc:165
 msgid "PROBLEM: sound device opened multiple times, trying to close"
 msgstr ""
-"DUILGHEADAS: chaidh an t-uidheam fuaime fhosgladh iomadh turas, a' feuchainn "
-"ris a dhùnadh"
 
 #: ../../src/ui_basic/helpwindow.cc:47 ../../src/ui_basic/helpwindow.cc:191
 msgid "Help: "
@@ -3067,7 +2828,7 @@ msgstr "Saoghal:"
 #: ../../src/ui_fsmenu/loadgame.cc:97 ../../src/ui_fsmenu/loadreplay.cc:81
 #: ../../src/ui_fsmenu/mapselect.cc:88
 msgid "Players:"
-msgstr "Cluichead.:"
+msgstr "Cluicheadairean:"
 
 #: ../../src/ui_fsmenu/editor_mapselect.cc:81
 #: ../../src/ui_fsmenu/mapselect.cc:94
@@ -3132,9 +2893,6 @@ msgid ""
 "There seems to be a network problem, either on your side or on the side\n"
 "of the server.\n"
 msgstr ""
-"Cha deach le Widelands an seòladh IP aig an fhrithealaiche fhaighinn ri àm.\n"
-"Dh'fhaoidte gu bheil duilgheadas lìonraidh air an taobh an fhrithealaiche\n"
-"no air an taobh agadsa.\n"
 
 #: ../../src/ui_fsmenu/internet_lobby.cc:410
 msgid "Widelands has not been able to connect to the host."
@@ -3212,7 +2970,7 @@ msgstr "Cha do thagh an t-òstair mapa no geama air a shàbhaladh fhathast."
 
 #: ../../src/ui_fsmenu/launchMPG.cc:288 ../../src/ui_fsmenu/launchSPG.cc:232
 msgid "Win condition is set through the scenario"
-msgstr "Chaidh cumha a' bhuannachd a shuidheachadh sa chnàmh-sgeul"
+msgstr ""
 
 #: ../../src/ui_fsmenu/launchMPG.cc:290
 #: ../../src/wui/multiplayersetupgroup.cc:358
@@ -3237,12 +2995,6 @@ msgid ""
 "Widelands is not able to transfer directory structures to the clients, "
 "please select another saved game or zip the directories content."
 msgstr ""
-"RABHADH:\n"
-"'S e pasgan a th' anns a' gheama air a shàbhaladh a thagh thu. Tachraidh seo "
-"ma shuidhicheas tu an roghainn \"nozip\" air \"true\" no ma dhì-dhùmhlaich "
-"thu an geama air a shàbhaladh a làimh.\n"
-"Chan urrainn do Widelands structaran pasgain a chur dha na cliantan, mar sin "
-"tagh geama air a shàbhaladh eile no dùmhlaich susbaint a' phasgain."
 
 #: ../../src/ui_fsmenu/launchMPG.cc:423 ../../src/ui_fsmenu/launchSPG.cc:258
 msgid "File not found"
@@ -3258,20 +3010,12 @@ msgid ""
 "Normally such a file should be send from the host to you, but perhaps the "
 "transfer was not yet finished!?!"
 msgstr ""
-"Dh'fheuch Widelands ri geama a thòiseachadh le faidhle nach deach a lorg san "
-"t-slighe shònraichte.\n"
-"Bu seo am faidhle: %s\n"
-"Nuair a thachras seo, dh'fhaoidte gun do thagh an òstair faidhle nach eil "
-"agadsa. Bu chòir dhan òstair faidhle mar sin a chur thugad ach dh'fhaoidte "
-"nach eil an tar-chur deiseil fhathast!?!"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:449
 msgid ""
 "The selected file can not be found. If it is not automatically transferred "
 "to you, please write the host about this problem."
 msgstr ""
-"Cha deach am faidhle a thagh thu a lorg. Mur tèid a chur thugad gu fèin-"
-"obrachail, feuch an sgrìobh thu dhan òstair mun duilgheadas seo."
 
 #: ../../src/ui_fsmenu/launchMPG.cc:481
 #: ../../src/wui/multiplayersetupgroup.cc:120
@@ -3292,73 +3036,73 @@ msgid ""
 "At the moment you are %s\n"
 "\n"
 msgstr ""
-"Tha thu 'nad %s an-dràsta\n"
-"\n"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:485
 msgid "Click on the \"?\" in the right top corner to get help."
-msgstr "Briog air an \"?\" san oisean clì gu h-àrd gus cobhair fhaighinn."
+msgstr ""
 
 #: ../../src/ui_fsmenu/launchMPG.cc:546
 msgid "Saved players are:"
-msgstr "Seo na cluicheadairean air an sàbhaladh:"
+msgstr ""
 
 #: ../../src/ui_fsmenu/launchMPG.cc:562
 #, c-format
 msgid "Player %u"
-msgstr "Cluicheadair %u"
+msgstr ""
 
 #: ../../src/ui_fsmenu/launchMPG.cc:566
 msgid "closed"
-msgstr "dùinte"
+msgstr ""
 
 #: ../../src/ui_fsmenu/launchMPG.cc:630
 msgid "There was an error!"
-msgstr "Thachair mearachd!"
+msgstr ""
 
 #: ../../src/ui_fsmenu/launchMPG.cc:630
 msgid "The map file seems to be invalid!"
-msgstr "Tha faidhle a' mhapa mì-dhligheach a-rèir coltais!"
+msgstr ""
 
 #: ../../src/ui_fsmenu/launchMPG.cc:647
 msgid "Map informations:\n"
-msgstr "Fiosrachadh a' mhapa:\n"
+msgstr ""
 
 #: ../../src/ui_fsmenu/launchMPG.cc:648
 #, c-format
 msgid "* Size: %ux%u\n"
-msgstr "* Meud: %ux%u\n"
+msgstr ""
 
 #: ../../src/ui_fsmenu/launchMPG.cc:649
 #, c-format
-msgid "* %i Players\n"
-msgstr "* %i Cluicheadairean\n"
+msgid "* %u Player\n"
+msgid_plural "* %u Players\n"
+msgstr[0] "* %u chluicheadair\n"
+msgstr[1] "* %u chluicheadair\n"
+msgstr[2] "* %u cluicheadairean\n"
+msgstr[3] "* %u cluicheadair\n"
+
 
 #: ../../src/ui_fsmenu/launchMPG.cc:650
 #, c-format
 msgid "* World type: %s\n"
-msgstr "* Seòrsa an t-saoghail: %s\n"
+msgstr ""
 
 #: ../../src/ui_fsmenu/launchMPG.cc:652
 msgid "* Scenario mode selected\n"
-msgstr "* Chaidh am modh cnàmh-sgeòil a thaghadh\n"
+msgstr ""
 
 #: ../../src/ui_fsmenu/launchMPG.cc:667
 msgid "You are in the multiplayer launch game menu."
-msgstr "Tha thu sa chlàr-taice gus geama ioma-chluicheadair a thòiseachadh."
+msgstr ""
 
 #: ../../src/ui_fsmenu/launchMPG.cc:668
 msgid "Client settings"
-msgstr "Roghainnean a' chliant"
+msgstr ""
 
 #: ../../src/ui_fsmenu/launchMPG.cc:671
 msgid ""
 "On the left side is a list of all clients including you. With the button in "
 "the rear of your nickname, you can set your role. Available roles are:"
 msgstr ""
-"Tha liosta dhe na cliantan uile air an taobh clì, a' ghabhail a-steach thu "
-"fhèin. 'S urrainn dhut do dhreuchd a shuidheachadh leis a' phutan às dèidh "
-"d' fhar-ainm. Seo na dreuchdan a tha ri làimh:"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:675
 msgid ""
@@ -3366,33 +3110,26 @@ msgid ""
 "same color, these share the control over the player (\"shared kingdom "
 "mode\")."
 msgstr ""
-"An cluicheadair aig a bheil bratach leis an dath seo. Ma thagh barrachd air "
-"aon chliant an t-aon dath, bidh smachd aca còmhla air a' chluicheadair "
-"(\"modh rìoghachd co-phàirteach\")."
 
 #: ../../src/ui_fsmenu/launchMPG.cc:679
 msgid ""
 "And spectator mode, meaning you can see everything, but can not control any "
 "player"
 msgstr ""
-"Is modh amhairc, 's e seo gum faic thu a h-uile rud ach eil smachd agad air "
-"cluicheadair"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:681
 msgid "Player settings"
-msgstr "Roghainnean a' chluicheadair"
+msgstr ""
 
 #: ../../src/ui_fsmenu/launchMPG.cc:684
 msgid ""
 "In the middle are the settings for the players. To start a game, each player "
 "must be one of the following:"
 msgstr ""
-"Tha roghainnean nan cluicheadairean sa mheadhan. Feumaidh gach cluicheadair "
-"a bhith 'na aon dhe na rudan seo gus geama a thòiseachadh:"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:687
 msgid "Connected to one or more clients (see \"Client settings\")."
-msgstr "Ceangailte ri cliant no dhà (seall air \"Roghainnean a' chliant\")."
+msgstr ""
 
 #: ../../src/ui_fsmenu/launchMPG.cc:690
 msgid ""
@@ -3400,19 +3137,14 @@ msgid ""
 "hover texts indicates the strength of the currently selected computer "
 "player)."
 msgstr ""
-"Ceangailte ri cluicheadair coimpiutair (innsidh an dà chuid an t-aodann san "
-"dealbh is an teacsa nuair a chumas tu an luchag os a chionn dè cho làidir 's "
-"a tha an cluicheadair coimpiutair a thagh thu an-dràsta)."
 
 #: ../../src/ui_fsmenu/launchMPG.cc:693
 msgid "Set as shared in starting position for another player."
 msgstr ""
-"Suidhich mar co-phàirteach ann an ionad-tòiseachaidh airson cluicheadair "
-"eile."
 
 #: ../../src/ui_fsmenu/launchMPG.cc:694
 msgid "Closed."
-msgstr "Dùinte."
+msgstr ""
 
 #: ../../src/ui_fsmenu/launchMPG.cc:697
 msgid ""
@@ -3421,25 +3153,16 @@ msgid ""
 "initializations of each player (the set of buildings, wares and workers the "
 "player starts with) and the tribe an team for computer players"
 msgstr ""
-"Cha ghabh an trì mu dheireadh dhiubh a shuidheachadh ach leis a' chliant a "
-"bhios 'na òstair 's esan a' briogadh leis a' phutan clì air putan \"seòrsa\" "
-"aig cluicheadair. 'S urrainn do chluicheadairean òstair an tòiseachadh aig "
-"gach cluicheadair (an seata de thogalaichean, bhathar is obraichean leis an "
-"tòisich an cluicheadair) agus treubh is sgioba nan cluicheadairean "
-"coimpiutair a rèiteachadh cuideachd"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:702
 msgid ""
 "Every client connected to a player (the set \"role\" player) can set the "
 "tribe and the team for that player"
 msgstr ""
-"'S urrainn do gach cliant a bhios ceangailte ri cluicheadair (an "
-"cluicheadair \"dreuchd\" a chaidh a shuidheachadh) treubh is sgioba a' "
-"chluicheadair sin a shuidheachadh"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:704
 msgid "Map informations"
-msgstr "Fiosrachadh a' mhapa"
+msgstr ""
 
 #: ../../src/ui_fsmenu/launchMPG.cc:707
 msgid ""
@@ -3448,14 +3171,10 @@ msgid ""
 "Further the host is able to set a specific win condition and finally can "
 "start the game as soon as all players are set up."
 msgstr ""
-"Chì thu fiosrachadh mun mhapa no geama air a shàbhaladh taobh deas. Leigidh "
-"putan ri taobh ainm a' mhapa leis an òstair atharrachadh gu fear eile. 'S "
-"urrainn dhan òstair cuideachd cumha a' bhuannachd a shuidheachadh is an "
-"geama a thòiseachadh nuair a bhios gach cluicheadair ullamh."
 
 #: ../../src/ui_fsmenu/launchSPG.cc:54
 msgid "Select map"
-msgstr "Tagh mapa"
+msgstr "Tagh am mapa"
 
 #: ../../src/ui_fsmenu/launchSPG.cc:75
 msgid "Launch Game"
@@ -3496,12 +3215,6 @@ msgid ""
 "you do not own. Normally such a file should be send from the host to you, "
 "but perhaps the transfer was not yet finished!?!"
 msgstr ""
-"Dh'fheuch Widelands ri geama a thòiseachadh le faidhle nach deach a lorg san "
-"t-slighe shònraichte.\n"
-"Bu seo am faidhle: %s\n"
-"Nuair a thachras seo ann an geama lìonraidh, dh'fhaoidte gun do thagh an "
-"òstair faidhle nach eil agadsa. Bu chòir dhan òstair faidhle mar sin a chur "
-"thugad ach dh'fhaoidte nach eil an tar-chur deiseil fhathast!?!"
 
 #: ../../src/ui_fsmenu/loadgame.cc:72 ../../src/ui_fsmenu/loadreplay.cc:55
 #: ../../src/wui/game_main_menu_save_game.cc:114
@@ -3515,11 +3228,11 @@ msgstr "Tagh geama air a shàbhaladh"
 #: ../../src/ui_fsmenu/loadgame.cc:87 ../../src/ui_fsmenu/loadreplay.cc:71
 #: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:57
 msgid "Map Name:"
-msgstr "Mapa:"
+msgstr "Ainm a' mhapa:"
 
 #: ../../src/ui_fsmenu/loadgame.cc:92 ../../src/ui_fsmenu/loadreplay.cc:76
 msgid "Gametime:"
-msgstr "Àm:"
+msgstr "Àm a' gheama:"
 
 #: ../../src/ui_fsmenu/loadgame.cc:105
 msgid "Minimap:"
@@ -3530,16 +3243,16 @@ msgid "Delete file"
 msgstr "Sguab às am faidhle"
 
 #: ../../src/ui_fsmenu/loadgame.cc:158 ../../src/ui_fsmenu/loadreplay.cc:139
-msgid "Do you really want to delete "
-msgstr "A bheil thu airson sguabadh às dha "
+msgid "Do you really want to delete %s?"
+msgstr "A bheil thu airson %s a sguabadh às?"
 
 #: ../../src/ui_fsmenu/loadgame.cc:215
 msgid "Savegame from dedicated server"
-msgstr "Geama air a shàbhaladh o fhrithealaiche sònraichte"
+msgstr ""
 
 #: ../../src/ui_fsmenu/loadgame.cc:216
 msgid "Unknown gametime"
-msgstr "Chan eil fios air àm a' gheama"
+msgstr ""
 
 #: ../../src/ui_fsmenu/loadreplay.cc:67
 msgid "Choose a replay"
@@ -3598,7 +3311,7 @@ msgstr "Luchdaich mapa mar chnàmh-sgeul: "
 
 #: ../../src/ui_fsmenu/mapselect.cc:149
 msgid "#"
-msgstr "Àir."
+msgstr ""
 
 #: ../../src/ui_fsmenu/mapselect.cc:151
 msgid "Map Name"
@@ -3634,7 +3347,7 @@ msgstr "Sgiobaidhean de 4"
 
 #: ../../src/ui_fsmenu/mapselect.cc:181
 msgid "Free for all"
-msgstr "An aghaidh càch a chèile"
+msgstr ""
 
 #: ../../src/ui_fsmenu/mapselect.cc:182
 msgid "Unbalanced"
@@ -3671,7 +3384,7 @@ msgstr "Seall còmhradh logaidh a-steach"
 #: ../../src/ui_fsmenu/multiplayer.cc:115
 #: ../../src/ui_fsmenu/netsetup_lan.cc:120 ../../src/wui/login_box.cc:74
 msgid "nobody"
-msgstr "gun_ainm"
+msgstr "gun ainm"
 
 #: ../../src/ui_fsmenu/netsetup_lan.cc:42
 msgid "Begin Network Game"
@@ -3726,7 +3439,7 @@ msgstr "Cuir an sàs"
 
 #: ../../src/ui_fsmenu/options.cc:72
 msgid "min."
-msgstr "m."
+msgstr ""
 
 #: ../../src/ui_fsmenu/options.cc:78
 msgid "days"
@@ -3742,7 +3455,7 @@ msgstr "Làn-sgrìn"
 
 #: ../../src/ui_fsmenu/options.cc:98
 msgid "Grab Input"
-msgstr "Glac an t-ion-chur"
+msgstr ""
 
 #: ../../src/ui_fsmenu/options.cc:104
 msgid "Enable Music"
@@ -3770,11 +3483,11 @@ msgstr "Roghainnean am broinn a' gheama"
 
 #: ../../src/ui_fsmenu/options.cc:148
 msgid "Use single Watchwindow Mode"
-msgstr "Cleachd modh uinneag cumail sùil air singilte"
+msgstr ""
 
 #: ../../src/ui_fsmenu/options.cc:154
 msgid "Start roadbuilding after placing flag"
-msgstr "Tòisich air rathad a thogail às dèidh bratach a thogail"
+msgstr "Tòisich air rathad a thogail às dèidh bratach a chur ann"
 
 #: ../../src/ui_fsmenu/options.cc:161
 msgid "Show buildings area preview"
@@ -3782,11 +3495,11 @@ msgstr "Ro-sheall an raon togail"
 
 #: ../../src/ui_fsmenu/options.cc:168
 msgid "Snap windows only when overlapping"
-msgstr "Na greimich uinneagan ach nuair a bhios iad a' tar-iadhadh"
+msgstr ""
 
 #: ../../src/ui_fsmenu/options.cc:174
 msgid "Dock windows to edges"
-msgstr "Docaich uinneagan ris na h-oirean"
+msgstr ""
 
 #: ../../src/ui_fsmenu/options.cc:179
 msgid "Save game automatically every"
@@ -3811,7 +3524,7 @@ msgstr "1 latha"
 #: ../../src/ui_fsmenu/options.cc:265
 #, c-format
 msgid "%ix%i %i bit"
-msgstr "%ix%i %i biod"
+msgstr ""
 
 #: ../../src/ui_fsmenu/options.cc:287
 msgid "Try system language"
@@ -3819,11 +3532,11 @@ msgstr "Feuch cànan an t-siostaim"
 
 #: ../../src/ui_fsmenu/options.cc:411
 msgid "x"
-msgstr "x"
+msgstr ""
 
 #: ../../src/ui_fsmenu/options.cc:416 ../../src/ui_fsmenu/options.cc:421
 msgid "px."
-msgstr "puing"
+msgstr ""
 
 #: ../../src/ui_fsmenu/options.cc:440
 msgid "Main menu font:"
@@ -3831,34 +3544,31 @@ msgstr "Cruth-clò a' phrìomh chlàir-taice:"
 
 #: ../../src/ui_fsmenu/options.cc:446
 msgid "Play a sound at message arrival."
-msgstr "Cluich fuaim nuair a thig teachdaireachd a-steach."
+msgstr ""
 
 #: ../../src/ui_fsmenu/options.cc:454
 msgid "Do not zip widelands data files (maps, replays and savegames)."
 msgstr ""
-"Na dùmhlaich faidhlichean dàta widelands (mapaichean, ath-chluichean is "
-"geamaichean air an sàbhaladh)."
 
 #: ../../src/ui_fsmenu/options.cc:459
 msgid "Speed of a new game:"
-msgstr "Luaths aig geama ùr:"
+msgstr ""
 
 #: ../../src/ui_fsmenu/options.cc:463
 msgid "Distance for windows to snap to other panels:"
-msgstr "Astar nan uinneagan a ghreimicheas ri panailean eile:"
+msgstr ""
 
 #: ../../src/ui_fsmenu/options.cc:467
 msgid "Distance for windows to snap to borders:"
-msgstr "Astar nan uinneagan a ghreimicheas ris na crìochan:"
+msgstr ""
 
 #: ../../src/ui_fsmenu/options.cc:473
 msgid "Remove Syncstream dumps on startup"
 msgstr ""
-"Thoir às-chur nan sruthan-sioncronachaidh air falbh leis an tòiseachadh"
 
 #: ../../src/ui_fsmenu/options.cc:479
 msgid "OpenGL rendering"
-msgstr "Reandaradh OpenGL"
+msgstr ""
 
 #: ../../src/ui_fsmenu/options.cc:484
 msgid "Show in game chat with transparent background"
@@ -3890,7 +3600,7 @@ msgstr "Luchdaich geama"
 
 #: ../../src/wui/actionconfirm.cc:223
 msgid "Destroy building?"
-msgstr "Am mill sinn an togalach?"
+msgstr "A bheil thu airson an togalach a mhilleadh?"
 
 #: ../../src/wui/actionconfirm.cc:224
 #, c-format
@@ -3899,7 +3609,7 @@ msgstr "A bheil thu airson a' %s seo a mhilleadh?"
 
 #: ../../src/wui/actionconfirm.cc:288
 msgid "Dismantle building?"
-msgstr "An toir sinn an togalach às a chèile?"
+msgstr "A bheil thu airson an togalach a thoirt às a chèile?"
 
 #: ../../src/wui/actionconfirm.cc:289
 #, c-format
@@ -3908,7 +3618,7 @@ msgstr "A bheil thu airson a' %s seo a thoirt às a chèile?"
 
 #: ../../src/wui/actionconfirm.cc:349
 msgid "Enhance building?"
-msgstr "An leasaich sinn an togalach?"
+msgstr "A bheil thu airson an togalach a leasachadh?"
 
 #: ../../src/wui/actionconfirm.cc:350
 #, c-format
@@ -3917,7 +3627,7 @@ msgstr "A bheil thu airson a' %s seo a leasachadh?"
 
 #: ../../src/wui/actionconfirm.cc:402 ../../src/wui/actionconfirm.cc:443
 msgid "Sink the ship?"
-msgstr "An cuir sinn an long fodha?"
+msgstr "A bheil thu airson an long a chur fodha?"
 
 #: ../../src/wui/actionconfirm.cc:402
 msgid "Do you really want to sink this ship?"
@@ -3925,7 +3635,7 @@ msgstr "A bheil thu airson an long seo a chur fodha?"
 
 #: ../../src/wui/actionconfirm.cc:443
 msgid "Do you really want to cancel the active expedition?"
-msgstr "A bheil thu airson sgur dhen triall gnìomhach?"
+msgstr ""
 
 #: ../../src/wui/attack_box.cc:167
 msgid "Soldiers:"
@@ -3949,11 +3659,11 @@ msgstr "Cùlachadh: Chan ann gu bràth tuilleadh!"
 
 #: ../../src/wui/attack_box.cc:232 ../../src/wui/military_box.cc:148
 msgid "Supported damage before retreat"
-msgstr "Dochann a dh'fhulaingeas mus nithear cùlachadh"
+msgstr ""
 
 #: ../../src/wui/attack_box.cc:234 ../../src/wui/military_box.cc:150
 msgid "Once injured"
-msgstr "Nuair a thèid a leònadh"
+msgstr ""
 
 #: ../../src/wui/building_statistics_menu.cc:77
 #: ../../src/wui/game_main_menu.cc:62
@@ -3966,7 +3676,7 @@ msgstr "Saothrachadh iomlan: "
 
 #: ../../src/wui/building_statistics_menu.cc:91
 msgid "Owned: "
-msgstr "Agadsa: "
+msgstr ""
 
 #: ../../src/wui/building_statistics_menu.cc:97
 msgid "In Build: "
@@ -3974,43 +3684,43 @@ msgstr "'Ga thogail: "
 
 #: ../../src/wui/building_statistics_menu.cc:103
 msgid "Jump to unproductive: "
-msgstr "Gearr leum gu fear neo-thorrach: "
+msgstr ""
 
 #: ../../src/wui/building_statistics_menu.cc:112
 msgid "Prod"
-msgstr "Saothr"
+msgstr ""
 
 #: ../../src/wui/building_statistics_menu.cc:113
 msgid "Owned"
-msgstr "Agad"
+msgstr ""
 
 #: ../../src/wui/building_statistics_menu.cc:114
 msgid "Build"
-msgstr "Tog"
+msgstr ""
 
 #: ../../src/wui/building_statistics_menu.cc:130
 #: ../../src/wui/building_statistics_menu.cc:152
 #: ../../src/wui/building_statistics_menu.cc:174
 msgid "Show previous"
-msgstr "Seall am fear roimhe"
+msgstr "Seall an tè roimhpe"
 
 #: ../../src/wui/building_statistics_menu.cc:141
 #: ../../src/wui/building_statistics_menu.cc:163
 #: ../../src/wui/building_statistics_menu.cc:185
 msgid "Show next"
-msgstr "Seall an t-ath fhear"
+msgstr "Seall an ath thè"
 
 #: ../../src/wui/buildingwindow.cc:181
 msgid "Cancel the expedition"
-msgstr "Sguir dhen triall"
+msgstr ""
 
 #: ../../src/wui/buildingwindow.cc:191
 msgid "Start an expedition"
-msgstr "Tòisich air triall"
+msgstr ""
 
 #: ../../src/wui/buildingwindow.cc:207 ../../src/wui/game_summary.cc:77
 msgid "Continue"
-msgstr "Lean air adhart"
+msgstr ""
 
 #: ../../src/wui/buildingwindow.cc:207
 msgid "Stop"
@@ -4035,7 +3745,7 @@ msgstr "Thoir às a chèile"
 
 #: ../../src/wui/buildingwindow.cc:279
 msgid "Returns:"
-msgstr "Toradh:"
+msgstr ""
 
 #: ../../src/wui/buildingwindow.cc:311 ../../src/wui/buildingwindow.cc:514
 msgid "Hide workarea"
@@ -4068,7 +3778,7 @@ msgstr "Leabhar-eòlais bathar na treubha"
 
 #: ../../src/wui/encyclopedia_window.cc:84
 msgid "Consumed ware type(s)"
-msgstr "Bathar air a bheil feum"
+msgstr "Seòrsa(ichean) de bhathar air a chaitheamh"
 
 #: ../../src/wui/encyclopedia_window.cc:85
 msgid "Quantity"
@@ -4112,7 +3822,7 @@ msgstr "Cuir clach-eòlaiche gus an làrach a rùrachadh"
 
 #: ../../src/wui/fieldaction.cc:411
 msgid "Put a flag"
-msgstr "Tog bratach"
+msgstr "Cuir bratach ann"
 
 #: ../../src/wui/fieldaction.cc:418
 msgid "Destroy a road"
@@ -4252,11 +3962,11 @@ msgstr "Mearachd le sàbhaladh a' gheama!!"
 #: ../../src/wui/game_main_menu_save_game.cc:265
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:385
 msgid "A File with the name "
-msgstr "Tha faidhle air a bheil "
+msgstr "Tha faidhle air a bheil an t-ainm "
 
 #: ../../src/wui/game_main_menu_save_game.cc:269
 msgid " already exists. Overwrite?"
-msgstr " ann. A bheil thu airson sgrìobhadh thairis air?"
+msgstr " ann mar-thà. A bheil thu airson sgrìobhadh thairis air?"
 
 #: ../../src/wui/game_main_menu_save_game.cc:330
 msgid "File deletion"
@@ -4271,7 +3981,7 @@ msgstr ""
 #: ../../src/wui/game_message_menu.cc:46
 #: ../../src/wui/game_message_menu.cc:373
 msgid "Message Menu: Inbox"
-msgstr "Do theachdaireachdan: Am bogsa a-steach"
+msgstr "Clàr-taice nan teachdaireachd: Am bogsa a-steach"
 
 #: ../../src/wui/game_message_menu.cc:56
 msgid "Select"
@@ -4287,7 +3997,7 @@ msgstr "Tiotal"
 
 #: ../../src/wui/game_message_menu.cc:59
 msgid "Time sent"
-msgstr "Chaidh a cur"
+msgstr "Chaidh a chur"
 
 #: ../../src/wui/game_message_menu.cc:66
 msgid "Clear"
@@ -4308,7 +4018,7 @@ msgstr "Ais-thionndaidh na thagh thu"
 #: ../../src/wui/game_message_menu.cc:85
 #: ../../src/wui/game_message_menu.cc:375
 msgid "Archive selected messages"
-msgstr "Cuir na teachdaireachdan a thagh thu san tasglann"
+msgstr "Cuir na teachdaireachdan a thagh thu ann an tasglann"
 
 #: ../../src/wui/game_message_menu.cc:94
 #: ../../src/wui/game_message_menu.cc:376
@@ -4321,7 +4031,7 @@ msgstr "meadhanaich sealladh a' mhapa air an ionad"
 
 #: ../../src/wui/game_message_menu.cc:366
 msgid "Message Menu: Archive"
-msgstr "Do theachdaireachdan: An tasglann"
+msgstr "Clàr-taice nan teachdaireachd: Tasglann"
 
 #: ../../src/wui/game_message_menu.cc:368
 msgid "Restore selected messages"
@@ -4333,7 +4043,7 @@ msgstr "Dhan bhogsa a-steach"
 
 #: ../../src/wui/game_objectives_menu.cc:44
 msgid "Objectives Menu"
-msgstr "Na h-amasan"
+msgstr "Clàr-taice nan amasan"
 
 #: ../../src/wui/game_objectives_menu.cc:66
 msgid "Claim Victory"
@@ -4453,27 +4163,27 @@ msgstr "Saothrachadh"
 
 #: ../../src/wui/general_statistics_menu.cc:212
 msgid "Casualties"
-msgstr "Air call"
+msgstr ""
 
 #: ../../src/wui/general_statistics_menu.cc:220
 msgid "Kills"
-msgstr "Air marbhadh"
+msgstr ""
 
 #: ../../src/wui/general_statistics_menu.cc:228
 msgid "Military buildings lost"
-msgstr "Togalaichean an airm air an call"
+msgstr ""
 
 #: ../../src/wui/general_statistics_menu.cc:236
 msgid "Military buildings defeated"
-msgstr "Togalaichean an airm air an ceannsachadh"
+msgstr ""
 
 #: ../../src/wui/general_statistics_menu.cc:244
 msgid "Civilian buildings lost"
-msgstr "Togalaichean sìobhalta air an call"
+msgstr ""
 
 #: ../../src/wui/general_statistics_menu.cc:252
 msgid "Military"
-msgstr "An airm"
+msgstr ""
 
 #: ../../src/wui/interactive_base.cc:316
 #, c-format
@@ -4522,7 +4232,7 @@ msgid "%u new message"
 msgid_plural "%u new messages"
 msgstr[0] "%u teachdaireachd ùr"
 msgstr[1] "%u theachdaireachd ùr"
-msgstr[2] "%u teachdaireachdan ùra"
+msgstr[2] "%u teachdaireachdan ùr"
 msgstr[3] "%u teachdaireachd ùr"
 
 #: ../../src/wui/interactive_spectator.cc:53
@@ -4554,35 +4264,34 @@ msgstr "Log a-steach le cunntas clàraichte"
 #: ../../src/wui/login_box.cc:58
 msgid "Automatically use this login information from now on."
 msgstr ""
-"Cuir am fiosrachadh logaidh a-steach seo gu fèin-obrachail o seo a-mach."
 
 #: ../../src/wui/login_box.cc:64
 msgid "Login"
-msgstr "Logadh a-steach"
+msgstr ""
 
 #: ../../src/wui/login_box.cc:86
 msgid "Empty Nickname"
-msgstr "Far-ainm falamh"
+msgstr ""
 
 #: ../../src/wui/login_box.cc:86
 msgid "Please enter a nickname!"
-msgstr "Cuir far-ainm a-steach!"
+msgstr ""
 
 #: ../../src/wui/login_box.cc:93
 msgid "Space in Nickname"
-msgstr "Beàrn san fhar-ainm"
+msgstr ""
 
 #: ../../src/wui/login_box.cc:94
 msgid "Sorry, but spaces are not allowed in nicknames!"
-msgstr "Duilich, ach chan eil beàrnan ceadaichte ann am far-ainm!"
+msgstr ""
 
 #: ../../src/wui/login_box.cc:101
 msgid "Empty Password"
-msgstr "Facal-faire falamh"
+msgstr ""
 
 #: ../../src/wui/login_box.cc:101
 msgid "Please enter your password!"
-msgstr "Cuir a-steach am facal-faire agad!"
+msgstr ""
 
 #: ../../src/wui/militarysitewindow.cc:59
 msgid "Soldiers"
@@ -4686,7 +4395,7 @@ msgstr "Obraiche"
 
 #: ../../src/wui/productionsitewindow.cc:80
 msgid "Exp"
-msgstr "Eòlas"
+msgstr "Èolas"
 
 #: ../../src/wui/productionsitewindow.cc:81
 msgid "Next Level"
@@ -4710,19 +4419,19 @@ msgstr "Long"
 
 #: ../../src/wui/shipwindow.cc:116
 msgid "Scout towards the north west"
-msgstr "Rùraich gu iar-thuath"
+msgstr ""
 
 #: ../../src/wui/shipwindow.cc:122
 msgid "Explore the island's coast clockwise"
-msgstr "Rùraich oirthir an eilein gu deiseil"
+msgstr ""
 
 #: ../../src/wui/shipwindow.cc:128
 msgid "Scout towards the north east"
-msgstr "Rùraich gu ear-thuath"
+msgstr ""
 
 #: ../../src/wui/shipwindow.cc:134
 msgid "Scout towards the west"
-msgstr "Rùraich gu siar"
+msgstr ""
 
 #: ../../src/wui/shipwindow.cc:140
 msgid "Construct a port at the current location"
@@ -4730,19 +4439,19 @@ msgstr "Tog port aig an ionad làithreach"
 
 #: ../../src/wui/shipwindow.cc:146
 msgid "Scout towards the east"
-msgstr "Rùraich gu ear"
+msgstr ""
 
 #: ../../src/wui/shipwindow.cc:152
 msgid "Scout towards the south west"
-msgstr "Rùraich gu iar-dheas"
+msgstr ""
 
 #: ../../src/wui/shipwindow.cc:158
 msgid "Explore the island's coast counter clockwise"
-msgstr "Rùraich oirthir an eilein gu tuathail"
+msgstr ""
 
 #: ../../src/wui/shipwindow.cc:164
 msgid "Scout towards the south east"
-msgstr "Rùraich gu ear-dheas"
+msgstr ""
 
 #: ../../src/wui/shipwindow.cc:176
 msgid "Go to ship"
@@ -4758,7 +4467,7 @@ msgstr "Cuir an long fodha"
 
 #: ../../src/wui/shipwindow.cc:193
 msgid "Cancel the Expedition"
-msgstr "Sguir dhen triall"
+msgstr ""
 
 #: ../../src/wui/soldiercapacitycontrol.cc:66
 msgid "Decrease capacity"
@@ -4855,11 +4564,11 @@ msgstr "Obraichean sa chala"
 
 #: ../../src/wui/warehousewindow.cc:229
 msgid "Expedition"
-msgstr "Triall"
+msgstr ""
 
 #: ../../src/wui/waresqueuedisplay.cc:184
 msgid "Highest priority"
-msgstr "Prìomhachas àrd"
+msgstr "Prìomhachas as àirde"
 
 #: ../../src/wui/waresqueuedisplay.cc:187
 msgid "Normal priority"
@@ -4867,7 +4576,7 @@ msgstr "Prìomhachas àbhaisteach"
 
 #: ../../src/wui/waresqueuedisplay.cc:190
 msgid "Lowest priority"
-msgstr "Prìomhachas ìosal"
+msgstr "Prìomhachas as ìsle"
 
 #: ../../src/wui/waresqueuedisplay.cc:236
 msgid "Decrease the number of wares you want to be stored here."
@@ -4897,30 +4606,26 @@ msgid ""
 " Height: %u\n"
 " Caps: "
 msgstr ""
-"1) Fiosrachadh an nòd\n"
-" Càraid-àireimh: (%i, %i)\n"
-" Àirde: %u\n"
-" Cuingeachaidhean: "
 
 #: ../../src/editor/tools/editor_info_tool.cc:65
 msgid " flag"
-msgstr " bratach"
+msgstr ""
 
 #: ../../src/editor/tools/editor_info_tool.cc:66
 msgid " mine"
-msgstr " mèinn"
+msgstr ""
 
 #: ../../src/editor/tools/editor_info_tool.cc:67
 msgid " port"
-msgstr " port"
+msgstr ""
 
 #: ../../src/editor/tools/editor_info_tool.cc:68
 msgid " walk"
-msgstr " coiseachd"
+msgstr ""
 
 #: ../../src/editor/tools/editor_info_tool.cc:69
 msgid " swim"
-msgstr " snàmh"
+msgstr ""
 
 #: ../../src/editor/tools/editor_info_tool.cc:73
 #, c-format
@@ -4930,18 +4635,12 @@ msgid ""
 " Has base immovable: %s\n"
 " Has bobs: %s\n"
 msgstr ""
-"\n"
-" Le %i\n"
-" Le bunait do-ghluasad: %s\n"
-" Le oibseactan nàdair: %s\n"
 
 #: ../../src/editor/tools/editor_info_tool.cc:79
 msgid ""
 "2) Terrain Info\n"
 " Name: "
 msgstr ""
-"2) Fiosrachadh a' chruth-tìre\n"
-" Ainm: "
 
 #: ../../src/editor/tools/editor_info_tool.cc:87
 #, c-format
@@ -4949,27 +4648,25 @@ msgid ""
 "\n"
 " Texture Number: %i\n"
 msgstr ""
-"\n"
-" Àireamh an innich: %i\n"
 
 #: ../../src/editor/tools/editor_info_tool.cc:91
 msgid "3) Resources Info\n"
-msgstr "3) Fiosrachadh an stòrais\n"
+msgstr ""
 
 #: ../../src/editor/tools/editor_info_tool.cc:98
 #: ../../src/editor/tools/editor_info_tool.cc:108
 #, c-format
 msgid " Resource name: %s\n"
-msgstr " Ainm an stòrais: %s\n"
+msgstr ""
 
 #: ../../src/editor/tools/editor_info_tool.cc:102
 #, c-format
 msgid " Resource amount: %i\n"
-msgstr " Uiread an stòrais: %i\n"
+msgstr ""
 
 #: ../../src/editor/tools/editor_info_tool.cc:108
 msgid "none"
-msgstr "chan eil stòras ann"
+msgstr ""
 
 #: ../../src/editor/tools/editor_info_tool.cc:114
 msgid ""
@@ -5086,8 +4783,6 @@ msgid ""
 "Set the position that will have the coordinates (0, 0). This will be the top-"
 "left corner of a generated minimap."
 msgstr ""
-"Suidhich an t-ionad aig am bi an càraid-àireimh (0, 0). 'S e seo a bhios an "
-"oisean clì gu h-àrd aig a' mheanbh-mhapa a thèid a ghintinn."
 
 #: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:64
 #: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:156
@@ -5095,7 +4790,7 @@ msgstr ""
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:431
 #, c-format
 msgid "Width: %u"
-msgstr "Leud: %u"
+msgstr ""
 
 #: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:85
 #: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:160
@@ -5103,99 +4798,99 @@ msgstr "Leud: %u"
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:435
 #, c-format
 msgid "Height: %u"
-msgstr "Àirde: %u"
+msgstr ""
 
 #: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:123
 msgid "Create Map"
-msgstr "Cruthaich mapa"
+msgstr ""
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:67
 msgid "Random Number:"
-msgstr "Àireamh air thuaiream:"
+msgstr ""
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:166
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:439
 #, c-format
 msgid "Water: %u %%"
-msgstr "Uisge: %u %%"
+msgstr ""
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:192
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:442
 #, c-format
 msgid "Land: %u %%"
-msgstr "Tìr: %u %%"
+msgstr ""
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:218
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:445
 #, c-format
 msgid "Wasteland: %u %%"
-msgstr "Fàsach: %u %%"
+msgstr ""
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:228
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:448
 #, c-format
 msgid "Mountains: %u %%"
-msgstr "Beanntan: %u %%"
+msgstr ""
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:244
 msgid "Island mode:"
-msgstr "Modh eileanan:"
+msgstr ""
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:251
 msgid "Resources:"
-msgstr "Stòrasan:"
+msgstr ""
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:254
 msgid "Low"
-msgstr "Ìosal"
+msgstr ""
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:256
 msgid "High"
-msgstr "Àrd"
+msgstr ""
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:293
 msgid "Map ID:"
-msgstr "ID a' mhapa:"
+msgstr ""
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:327
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:451
 #, c-format
 msgid "Players: %u"
-msgstr "Cluicheadairean: %u"
+msgstr ""
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:340
 msgid "Generate Map"
-msgstr "Gin mapa"
+msgstr ""
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:489
 msgid "Generating random map..."
-msgstr "A' gintinn mapa air thuaiream..."
+msgstr ""
 
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:146
 #: ../../src/editor/ui_menus/editor_main_menu_save_map_make_directory.cc:33
 msgid "Make Directory"
-msgstr "Cruthaich pasgan"
+msgstr ""
 
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:206
 msgid "unnamed"
-msgstr "gun ainm"
+msgstr ""
 
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:255
 msgid "directory"
-msgstr "pasgan"
+msgstr ""
 
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:259
 msgid "Not a map file"
-msgstr "Chan e faidhle mapa a th' ann"
+msgstr ""
 
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:387
 msgid " exists already. Overwrite?"
-msgstr " ann. A bheil thu airson sgrìobhadh thairis air?"
+msgstr ""
 
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:389
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:409
 msgid "Save Map Error!!"
-msgstr "Mearachd le sàbhaladh a' mhapa!!"
+msgstr ""
 
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:405
 msgid ""
@@ -5204,10 +4899,6 @@ msgid ""
 "\n"
 "Reason given:\n"
 msgstr ""
-"Mearachd le sàbhaladh a' mhapa!\n"
-"Dh'fhaoidte gu bheil faidhle a' mhapa coirbte!\n"
-"\n"
-"Adhbhar:\n"
 
 #: ../../src/editor/ui_menus/editor_main_menu_save_map_make_directory.cc:39
 msgid "Enter Directory Name: "
@@ -5242,52 +4933,49 @@ msgid ""
 "Can not remove player. It is referenced in some place. Remove all buildings "
 "and bobs that depend on this player and try again."
 msgstr ""
-"Cha ghabh an cluicheadair seo a thoirt air falbh on a tha iomradh dha àite "
-"air choireigin. Thoir na h-uile togalach is oibseact nàdair air falbh a tha "
-"an eisimeil a' chluicheadair seo is feuch ris a-rithist."
 
 #: ../../src/editor/ui_menus/editor_player_menu_allowed_buildings_menu.cc:57
 msgid "Allowed Buildings"
-msgstr "Togalaichean ceadaichte"
+msgstr ""
 
 #: ../../src/editor/ui_menus/editor_player_menu_allowed_buildings_menu.cc:62
 msgid "Allowed Buildings:"
-msgstr "Togalaichean ceadaichte:"
+msgstr ""
 
 #: ../../src/editor/ui_menus/editor_player_menu_allowed_buildings_menu.cc:68
 msgid "Forbidden Buildings:"
-msgstr "Togalaichean toirmisgte:"
+msgstr ""
 
 #: ../../src/editor/ui_menus/editor_player_menu_allowed_buildings_menu.cc:85
 msgid "Forbid"
-msgstr "Toirmisg"
+msgstr ""
 
 #: ../../src/editor/ui_menus/editor_player_menu_allowed_buildings_menu.cc:93
 msgid "<-"
-msgstr "<-"
+msgstr ""
 
 #: ../../src/editor/ui_menus/editor_player_menu_allowed_buildings_menu.cc:94
 msgid "Allow"
-msgstr "Ceadaich"
+msgstr ""
 
 #: ../../src/editor/ui_menus/editor_tool_change_height_options_menu.cc:39
 msgid "Height Tools Options"
-msgstr "Roghainnean nan innealan àirde"
+msgstr ""
 
 #: ../../src/editor/ui_menus/editor_tool_change_height_options_menu.cc:44
 #: ../../src/editor/ui_menus/editor_tool_change_resources_options_menu.cc:49
 msgid "In-/Decrease Value"
-msgstr "Meudaich/Lùghdaich an luach"
+msgstr ""
 
 #: ../../src/editor/ui_menus/editor_tool_change_height_options_menu.cc:80
 #: ../../src/editor/ui_menus/editor_tool_change_resources_options_menu.cc:80
 msgid "Set Value"
-msgstr "Suidhich an luach"
+msgstr ""
 
 #: ../../src/editor/ui_menus/editor_tool_change_resources_options_menu.cc:45
 #: ../../src/editor/ui_menus/editor_tool_menu.cc:70
 msgid "Resources"
-msgstr "Stòrasan"
+msgstr ""
 
 #: ../../src/editor/ui_menus/editor_tool_change_resources_options_menu.cc:99
 msgid "Current Selection"
@@ -5295,47 +4983,47 @@ msgstr "An taghadh làithreach"
 
 #: ../../src/editor/ui_menus/editor_tool_menu.cc:65
 msgid "Change height"
-msgstr "Atharraich an àirde"
+msgstr ""
 
 #: ../../src/editor/ui_menus/editor_tool_menu.cc:66
 msgid "Noise height"
-msgstr "Àirde air thuaiream"
+msgstr ""
 
 #: ../../src/editor/ui_menus/editor_tool_menu.cc:68
 msgid "Immovables"
-msgstr "Nithean do-ghluasad"
+msgstr ""
 
 #: ../../src/editor/ui_menus/editor_tool_menu.cc:69
 #: ../../src/editor/ui_menus/editor_tool_place_bob_options_menu.cc:45
 msgid "Bobs"
-msgstr "Oibseactan nàdair"
+msgstr ""
 
 #: ../../src/editor/ui_menus/editor_tool_menu.cc:71
 msgid "Set port space"
-msgstr "Suidhich raon puirt"
+msgstr ""
 
 #: ../../src/editor/ui_menus/editor_tool_noise_height_options_menu.cc:42
 msgid "Noise Height Options"
-msgstr "Roghainnean an àirde air thuaiream"
+msgstr ""
 
 #: ../../src/editor/ui_menus/editor_tool_noise_height_options_menu.cc:147
 #, c-format
 msgid "Minimum: %u"
-msgstr "As lugha: %u"
+msgstr ""
 
 #: ../../src/editor/ui_menus/editor_tool_noise_height_options_menu.cc:149
 #, c-format
 msgid "Maximum: %u"
-msgstr "As motha: %u"
+msgstr ""
 
 #: ../../src/editor/ui_menus/editor_tool_noise_height_options_menu.cc:154
 #, c-format
 msgid "Set value: %u"
-msgstr "Suidhich an luach: %u"
+msgstr ""
 
 #: ../../src/editor/ui_menus/editor_tool_place_immovable_options_menu.cc:45
 msgid "Immovable Bobs"
-msgstr "Oibseactan nàdair do-ghluasad"
+msgstr ""
 
 #: ../../src/editor/ui_menus/editor_tool_set_terrain_options_menu.cc:46
 msgid "Terrain Select"
@@ -5344,29 +5032,29 @@ msgstr "Tagh cruth-tìre"
 #: ../../src/editor/ui_menus/editor_tool_set_terrain_options_menu.cc:151
 #: ../../src/editor/ui_menus/editor_tool_set_terrain_options_menu.cc:200
 msgid "Current:"
-msgstr "Làithreach:"
+msgstr ""
 
 #: ../../src/editor/ui_menus/editor_toolsize_menu.cc:75
 #, c-format
 msgid "Current Size: %u"
-msgstr "Am meud làithreach: %u"
+msgstr ""
 
 #: ../../src/ai/defaultai.h:84
 msgid "Aggressive"
-msgstr "Ionnsaigheach"
+msgstr ""
 
 #: ../../src/ai/defaultai.h:93
 msgid "Normal"
-msgstr "Àbhaisteach"
+msgstr ""
 
 #: ../../src/ai/defaultai.h:102
 msgid "Defensive"
-msgstr "Dìonadach"
+msgstr ""
 
 #: ../../src/logic/map.h:168
 msgid "no description defined"
-msgstr "cha deach tuairisgeul a mhìneachadh"
+msgstr ""
 
 #: ../../src/logic/objective.h:42
 msgid "no descr"
-msgstr "gun tuairisgeul"
+msgstr ""

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2014-02-22 15:38+0000\n"
+"POT-Creation-Date: 2014-03-05 19:55+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -14,79 +14,19 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: ../../worlds/winterland/conf:45
+#: ../../worlds/winterland/conf:2
 msgid ""
-"Aspen"
+"The Widelands Development Team"
 msgstr ""
 
-#: ../../worlds/winterland/conf:46
+#: ../../worlds/winterland/conf:3
 msgid ""
-"Aspen medium"
+"Winterland"
 msgstr ""
 
-#: ../../worlds/winterland/conf:47
+#: ../../worlds/winterland/conf:4
 msgid ""
-"Aspen small"
-msgstr ""
-
-#: ../../worlds/winterland/conf:48
-msgid ""
-"Aspen tiny"
-msgstr ""
-
-#: ../../worlds/winterland/conf:79
-msgid ""
-"Badger"
-msgstr ""
-
-#: ../../worlds/winterland/terrainconf:80
-msgid ""
-"Beach"
-msgstr ""
-
-#: ../../worlds/winterland/conf:65
-msgid ""
-"Beech"
-msgstr ""
-
-#: ../../worlds/winterland/conf:66
-msgid ""
-"Beech medium"
-msgstr ""
-
-#: ../../worlds/winterland/conf:67
-msgid ""
-"Beech small"
-msgstr ""
-
-#: ../../worlds/winterland/conf:68
-msgid ""
-"Beech tiny"
-msgstr ""
-
-#: ../../worlds/winterland/conf:61
-msgid ""
-"Birch"
-msgstr ""
-
-#: ../../worlds/winterland/conf:62
-msgid ""
-"Birch medium"
-msgstr ""
-
-#: ../../worlds/winterland/conf:63
-msgid ""
-"Birch small"
-msgstr ""
-
-#: ../../worlds/winterland/conf:64
-msgid ""
-"Birch tiny"
-msgstr ""
-
-#: ../../worlds/winterland/conf:80
-msgid ""
-"Bunny"
+"These are the white, wide and frosty winterlands, in which the Northmen dwell."
 msgstr ""
 
 #: ../../worlds/winterland/conf:7
@@ -98,52 +38,12 @@ msgid ""
 "Bush"
 msgstr ""
 
-#: ../../worlds/winterland/resconf:4
-msgid ""
-"Coal"
-msgstr ""
-
 #: ../../worlds/winterland/conf:12
 #: ../../worlds/winterland/conf:13
 #: ../../worlds/winterland/conf:14
 #: ../../worlds/winterland/conf:15
 msgid ""
 "Dead Tree"
-msgstr ""
-
-#: ../../worlds/winterland/conf:81
-msgid ""
-"Deer"
-msgstr ""
-
-#: ../../worlds/winterland/conf:82
-msgid ""
-"Duck"
-msgstr ""
-
-#: ../../worlds/winterland/conf:83
-msgid ""
-"Elk"
-msgstr ""
-
-#: ../../worlds/winterland/resconf:41
-msgid ""
-"Fish"
-msgstr ""
-
-#: ../../worlds/winterland/conf:84
-msgid ""
-"Fox"
-msgstr ""
-
-#: ../../worlds/winterland/resconf:12
-msgid ""
-"Gold"
-msgstr ""
-
-#: ../../worlds/winterland/resconf:28
-msgid ""
-"Granite"
 msgstr ""
 
 #: ../../worlds/winterland/conf:16
@@ -153,125 +53,10 @@ msgid ""
 "Grass"
 msgstr ""
 
-#: ../../worlds/winterland/terrainconf:31
-msgid ""
-"Ice"
-msgstr ""
-
-#: ../../worlds/winterland/terrainconf:19
-msgid ""
-"Ice flows"
-msgstr ""
-
-#: ../../worlds/winterland/terrainconf:25
-msgid ""
-"Ice flows2"
-msgstr ""
-
-#: ../../worlds/winterland/resconf:20
-msgid ""
-"Iron"
-msgstr ""
-
-#: ../../worlds/winterland/conf:69
-msgid ""
-"Larch"
-msgstr ""
-
-#: ../../worlds/winterland/conf:70
-msgid ""
-"Larch medium"
-msgstr ""
-
-#: ../../worlds/winterland/conf:71
-msgid ""
-"Larch small"
-msgstr ""
-
-#: ../../worlds/winterland/conf:72
-msgid ""
-"Larch tiny"
-msgstr ""
-
-#: ../../worlds/winterland/terrainconf:91
-msgid ""
-"Lava"
-msgstr ""
-
-#: ../../worlds/winterland/conf:85
-msgid ""
-"Lynx"
-msgstr ""
-
-#: ../../worlds/winterland/conf:57
-msgid ""
-"Maple"
-msgstr ""
-
-#: ../../worlds/winterland/conf:58
-msgid ""
-"Maple medium"
-msgstr ""
-
-#: ../../worlds/winterland/conf:59
-msgid ""
-"Maple small"
-msgstr ""
-
-#: ../../worlds/winterland/conf:60
-msgid ""
-"Maple tiny"
-msgstr ""
-
-#: ../../worlds/winterland/conf:86
-msgid ""
-"Marten"
-msgstr ""
-
-#: ../../worlds/winterland/terrainconf:13
-msgid ""
-"Mountain1"
-msgstr ""
-
-#: ../../worlds/winterland/terrainconf:62
-msgid ""
-"Mountain2"
-msgstr ""
-
-#: ../../worlds/winterland/terrainconf:68
-msgid ""
-"Mountain3"
-msgstr ""
-
-#: ../../worlds/winterland/terrainconf:74
-msgid ""
-"Mountain4"
-msgstr ""
-
 #: ../../worlds/winterland/conf:19
 #: ../../worlds/winterland/conf:20
 msgid ""
 "Mushroom"
-msgstr ""
-
-#: ../../worlds/winterland/conf:49
-msgid ""
-"Oak"
-msgstr ""
-
-#: ../../worlds/winterland/conf:50
-msgid ""
-"Oak medium"
-msgstr ""
-
-#: ../../worlds/winterland/conf:51
-msgid ""
-"Oak small"
-msgstr ""
-
-#: ../../worlds/winterland/conf:52
-msgid ""
-"Oak tiny"
 msgstr ""
 
 #: ../../worlds/winterland/conf:21
@@ -284,36 +69,6 @@ msgid ""
 "Pebble"
 msgstr ""
 
-#: ../../worlds/winterland/conf:87
-msgid ""
-"Reindeer"
-msgstr ""
-
-#: ../../worlds/winterland/conf:73
-msgid ""
-"Rowan"
-msgstr ""
-
-#: ../../worlds/winterland/conf:74
-msgid ""
-"Rowan medium"
-msgstr ""
-
-#: ../../worlds/winterland/conf:75
-msgid ""
-"Rowan small"
-msgstr ""
-
-#: ../../worlds/winterland/conf:76
-msgid ""
-"Rowan tiny"
-msgstr ""
-
-#: ../../worlds/winterland/conf:88
-msgid ""
-"Sheep"
-msgstr ""
-
 #: ../../worlds/winterland/conf:27
 #: ../../worlds/winterland/conf:28
 #: ../../worlds/winterland/conf:29
@@ -321,34 +76,9 @@ msgid ""
 "Skeleton"
 msgstr ""
 
-#: ../../worlds/winterland/terrainconf:96
-msgid ""
-"Snow"
-msgstr ""
-
 #: ../../worlds/winterland/conf:30
 msgid ""
 "Snowman"
-msgstr ""
-
-#: ../../worlds/winterland/conf:53
-msgid ""
-"Spruce"
-msgstr ""
-
-#: ../../worlds/winterland/conf:54
-msgid ""
-"Spruce medium"
-msgstr ""
-
-#: ../../worlds/winterland/conf:55
-msgid ""
-"Spruce small"
-msgstr ""
-
-#: ../../worlds/winterland/conf:56
-msgid ""
-"Spruce tiny"
 msgstr ""
 
 #: ../../worlds/winterland/conf:31
@@ -372,55 +102,219 @@ msgid ""
 "Stones"
 msgstr ""
 
-#: ../../worlds/winterland/terrainconf:85
-msgid ""
-"Taiga"
-msgstr ""
-
-#: ../../worlds/winterland/conf:2
-msgid ""
-"The Widelands Development Team"
-msgstr ""
-
-#: ../../worlds/winterland/conf:4
-msgid ""
-"These are the white, wide and frosty winterlands, in which the Northmen dwell."
-msgstr ""
-
 #: ../../worlds/winterland/conf:44
 msgid ""
 "Track"
 msgstr ""
 
-#: ../../worlds/winterland/terrainconf:7
+#: ../../worlds/winterland/conf:45
 msgid ""
-"Tundra"
+"Aspen"
 msgstr ""
 
-#: ../../worlds/winterland/terrainconf:44
+#: ../../worlds/winterland/conf:46
 msgid ""
-"Tundra taiga"
+"Aspen (medium)"
 msgstr ""
 
-#: ../../worlds/winterland/terrainconf:50
+#: ../../worlds/winterland/conf:47
 msgid ""
-"Tundra2"
+"Aspen (small)"
 msgstr ""
 
-#: ../../worlds/winterland/terrainconf:56
+#: ../../worlds/winterland/conf:48
 msgid ""
-"Tundra3"
+"Aspen (tiny)"
 msgstr ""
 
-#: ../../worlds/winterland/resconf:36
-#: ../../worlds/winterland/terrainconf:37
+#: ../../worlds/winterland/conf:49
 msgid ""
-"Water"
+"Oak"
 msgstr ""
 
-#: ../../worlds/winterland/conf:3
+#: ../../worlds/winterland/conf:50
 msgid ""
-"Winterland"
+"Oak (medium)"
+msgstr ""
+
+#: ../../worlds/winterland/conf:51
+msgid ""
+"Oak (small)"
+msgstr ""
+
+#: ../../worlds/winterland/conf:52
+msgid ""
+"Oak (tiny)"
+msgstr ""
+
+#: ../../worlds/winterland/conf:53
+msgid ""
+"Spruce"
+msgstr ""
+
+#: ../../worlds/winterland/conf:54
+msgid ""
+"Spruce (medium)"
+msgstr ""
+
+#: ../../worlds/winterland/conf:55
+msgid ""
+"Spruce (small)"
+msgstr ""
+
+#: ../../worlds/winterland/conf:56
+msgid ""
+"Spruce (tiny)"
+msgstr ""
+
+#: ../../worlds/winterland/conf:57
+msgid ""
+"Maple"
+msgstr ""
+
+#: ../../worlds/winterland/conf:58
+msgid ""
+"Maple (medium)"
+msgstr ""
+
+#: ../../worlds/winterland/conf:59
+msgid ""
+"Maple (small)"
+msgstr ""
+
+#: ../../worlds/winterland/conf:60
+msgid ""
+"Maple (tiny)"
+msgstr ""
+
+#: ../../worlds/winterland/conf:61
+msgid ""
+"Birch"
+msgstr ""
+
+#: ../../worlds/winterland/conf:62
+msgid ""
+"Birch (medium)"
+msgstr ""
+
+#: ../../worlds/winterland/conf:63
+msgid ""
+"Birch (small)"
+msgstr ""
+
+#: ../../worlds/winterland/conf:64
+msgid ""
+"Birch (tiny)"
+msgstr ""
+
+#: ../../worlds/winterland/conf:65
+msgid ""
+"Beech"
+msgstr ""
+
+#: ../../worlds/winterland/conf:66
+msgid ""
+"Beech (medium)"
+msgstr ""
+
+#: ../../worlds/winterland/conf:67
+msgid ""
+"Beech (small)"
+msgstr ""
+
+#: ../../worlds/winterland/conf:68
+msgid ""
+"Beech (tiny)"
+msgstr ""
+
+#: ../../worlds/winterland/conf:69
+msgid ""
+"Larch"
+msgstr ""
+
+#: ../../worlds/winterland/conf:70
+msgid ""
+"Larch (medium)"
+msgstr ""
+
+#: ../../worlds/winterland/conf:71
+msgid ""
+"Larch (small)"
+msgstr ""
+
+#: ../../worlds/winterland/conf:72
+msgid ""
+"Larch (tiny)"
+msgstr ""
+
+#: ../../worlds/winterland/conf:73
+msgid ""
+"Rowan"
+msgstr ""
+
+#: ../../worlds/winterland/conf:74
+msgid ""
+"Rowan (medium)"
+msgstr ""
+
+#: ../../worlds/winterland/conf:75
+msgid ""
+"Rowan (small)"
+msgstr ""
+
+#: ../../worlds/winterland/conf:76
+msgid ""
+"Rowan (tiny)"
+msgstr ""
+
+#: ../../worlds/winterland/conf:79
+msgid ""
+"Badger"
+msgstr ""
+
+#: ../../worlds/winterland/conf:80
+msgid ""
+"Bunny"
+msgstr ""
+
+#: ../../worlds/winterland/conf:81
+msgid ""
+"Deer"
+msgstr ""
+
+#: ../../worlds/winterland/conf:82
+msgid ""
+"Duck"
+msgstr ""
+
+#: ../../worlds/winterland/conf:83
+msgid ""
+"Elk"
+msgstr ""
+
+#: ../../worlds/winterland/conf:84
+msgid ""
+"Fox"
+msgstr ""
+
+#: ../../worlds/winterland/conf:85
+msgid ""
+"Lynx"
+msgstr ""
+
+#: ../../worlds/winterland/conf:86
+msgid ""
+"Marten"
+msgstr ""
+
+#: ../../worlds/winterland/conf:87
+msgid ""
+"Reindeer"
+msgstr ""
+
+#: ../../worlds/winterland/conf:88
+msgid ""
+"Sheep"
 msgstr ""
 
 #: ../../worlds/winterland/conf:89
@@ -431,5 +325,111 @@ msgstr ""
 #: ../../worlds/winterland/conf:90
 msgid ""
 "Wolf"
+msgstr ""
+
+#: ../../worlds/winterland/resconf:4
+msgid ""
+"Coal"
+msgstr ""
+
+#: ../../worlds/winterland/resconf:12
+msgid ""
+"Gold"
+msgstr ""
+
+#: ../../worlds/winterland/resconf:20
+msgid ""
+"Iron"
+msgstr ""
+
+#: ../../worlds/winterland/resconf:28
+msgid ""
+"Granite"
+msgstr ""
+
+#: ../../worlds/winterland/resconf:36
+#: ../../worlds/winterland/terrainconf:37
+msgid ""
+"Water"
+msgstr ""
+
+#: ../../worlds/winterland/resconf:41
+msgid ""
+"Fish"
+msgstr ""
+
+#: ../../worlds/winterland/terrainconf:7
+msgid ""
+"Tundra"
+msgstr ""
+
+#: ../../worlds/winterland/terrainconf:13
+msgid ""
+"Mountain 1"
+msgstr ""
+
+#: ../../worlds/winterland/terrainconf:19
+msgid ""
+"Ice Floes"
+msgstr ""
+
+#: ../../worlds/winterland/terrainconf:25
+msgid ""
+"Ice Floes 2"
+msgstr ""
+
+#: ../../worlds/winterland/terrainconf:31
+msgid ""
+"Ice"
+msgstr ""
+
+#: ../../worlds/winterland/terrainconf:44
+msgid ""
+"Tundra Taiga"
+msgstr ""
+
+#: ../../worlds/winterland/terrainconf:50
+msgid ""
+"Tundra 2"
+msgstr ""
+
+#: ../../worlds/winterland/terrainconf:56
+msgid ""
+"Tundra 3"
+msgstr ""
+
+#: ../../worlds/winterland/terrainconf:62
+msgid ""
+"Mountain 2"
+msgstr ""
+
+#: ../../worlds/winterland/terrainconf:68
+msgid ""
+"Mountain 3"
+msgstr ""
+
+#: ../../worlds/winterland/terrainconf:74
+msgid ""
+"Mountain 4"
+msgstr ""
+
+#: ../../worlds/winterland/terrainconf:80
+msgid ""
+"Beach"
+msgstr ""
+
+#: ../../worlds/winterland/terrainconf:85
+msgid ""
+"Taiga"
+msgstr ""
+
+#: ../../worlds/winterland/terrainconf:91
+msgid ""
+"Lava"
+msgstr ""
+
+#: ../../worlds/winterland/terrainconf:96
+msgid ""
+"Snow"
 msgstr ""
 

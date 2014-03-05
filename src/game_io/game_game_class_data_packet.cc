@@ -41,9 +41,9 @@ void Game_Game_Class_Data_Packet::Read
 			game.gametime_ = fr.Unsigned32();
 		} else
 			throw game_data_error
-				(_("unknown/unhandled version %u"), packet_version);
+				("unknown/unhandled version %u", packet_version);
 	} catch (const _wexception & e) {
-		throw game_data_error(_("game_class: %s"), e.what());
+		throw game_data_error("game class: %s", e.what());
 	}
 }
 

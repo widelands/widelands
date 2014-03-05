@@ -54,7 +54,7 @@ void Game_Interactive_Player_Data_Packet::Read
 					if (game.get_player(player_number))
 						break;
 				if (player_number > max)
-					throw game_data_error(_("The game has no players!"));
+					throw game_data_error("The game has no players!");
 			}
 			int32_t       const x             = fr.Unsigned16();
 			int32_t       const y             = fr.Unsigned16();
@@ -76,9 +76,9 @@ void Game_Interactive_Player_Data_Packet::Read
 			}
 		} else
 			throw game_data_error
-				(_("unknown/unhandled version %u"), packet_version);
+				("unknown/unhandled version %u", packet_version);
 	} catch (const _wexception & e) {
-		throw game_data_error(_("interactive player: %s"), e.what());
+		throw game_data_error("interactive player: %s", e.what());
 	}
 }
 

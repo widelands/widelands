@@ -45,7 +45,7 @@ void Requirements::Read
 			*this = RequirementsStorage::read(fr, egbase, mol);
 		} else
 			throw game_data_error
-				(_("unknown/unhandled version %u"), packet_version);
+				("unknown/unhandled version %u", packet_version);
 	} catch (const _wexception & e) {
 		throw wexception("requirements: %s", e.what());
 	}
@@ -229,9 +229,9 @@ static Requirements readAttribute
 		 and
 		 at != atrTotal)
 		throw game_data_error
-			(_
-			 	("expected atrHP (%u), atrAttack (%u), atrDefense (%u), atrEvade "
-			 	 "(%u) or atrTotal (%u) but found unknown attribute value (%u)"),
+			(
+			 "expected atrHP (%u), atrAttack (%u), atrDefense (%u), atrEvade "
+			 "(%u) or atrTotal (%u) but found unknown attribute value (%u)",
 			 atrHP, atrAttack, atrDefense, atrEvade, atrTotal, at);
 	int32_t const min = fr.Signed32();
 	int32_t const max = fr.Signed32();

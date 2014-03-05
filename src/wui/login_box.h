@@ -22,6 +22,7 @@
 
 #include "ui_basic/checkbox.h"
 #include "ui_basic/editbox.h"
+#include "ui_basic/multilinetextarea.h"
 #include "ui_basic/textarea.h"
 #include "ui_basic/window.h"
 
@@ -46,7 +47,7 @@ private:
 	UI::Textarea * ta_password;
 	UI::Textarea * ta_register;
 	UI::Textarea * ta_auto_log;
-	UI::Textarea * pwd_warning;
+	UI::Multiline_Textarea * pwd_warning;
 };
 
 #endif

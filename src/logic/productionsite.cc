@@ -68,11 +68,11 @@ ProductionSite_Descr::ProductionSite_Descr
 		try {
 			if (Ware_Index idx = tribe().ware_index(op->get_string())) {
 				if (m_output_ware_types.count(idx))
-					throw wexception(_("this ware type has already been declared as an output"));
+					throw wexception("this ware type has already been declared as an output");
 				m_output_ware_types.insert(idx);
 			} else if ((idx = tribe().worker_index(op->get_string()))) {
 				if (m_output_worker_types.count(idx))
-					throw wexception(_("this worker type has already been declared as an output"));
+					throw wexception("this worker type has already been declared as an output");
 				m_output_worker_types.insert(idx);
 			} else
 				throw wexception("tribe does not define a ware or worker type with this name");
@@ -246,7 +246,7 @@ std::string ProductionSite::get_statistics_string()
 	} else if (uint32_t const nr_requests = nr_working_positions - nr_workers) {
 		return
 			(boost::format("<font color=%s>%s</font>") % UI_FONT_CLR_BAD_HEX %
-				ngettext(_("Worker missing"), _("Workers missing"), nr_requests))
+				ngettext("Worker missing", "Workers missing", nr_requests))
 			.str();
 	}
 

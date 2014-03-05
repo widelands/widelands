@@ -66,28 +66,28 @@ Main_Menu_Load_Map::Main_Menu_Load_Map(Editor_Interactive & parent)
 	posx = get_inner_w() / 2 + spacing;
 	posy += 20;
 	new UI::Textarea
-		(this, posx, posy, 150, 20, _("Name: "), UI::Align_CenterLeft);
+		(this, posx, posy, 150, 20, _("Name:"), UI::Align_CenterLeft);
 	m_name =
 		new UI::Textarea
 			(this, posx + 70, posy, 200, 20, "---", UI::Align_CenterLeft);
 	posy += 20 + spacing;
 
 	new UI::Textarea
-		(this, posx, posy, 150, 20, _("Author: "), UI::Align_CenterLeft);
+		(this, posx, posy, 150, 20, _("Author:"), UI::Align_CenterLeft);
 	m_author =
 		new UI::Textarea
 			(this, posx + 70, posy, 200, 20, "---", UI::Align_CenterLeft);
 	posy += 20 + spacing;
 
 	new UI::Textarea
-		(this, posx, posy, 70, 20, _("Size: "), UI::Align_CenterLeft);
+		(this, posx, posy, 70, 20, _("Size:"), UI::Align_CenterLeft);
 	m_size =
 		new UI::Textarea
 			(this, posx + 70, posy, 200, 20, "---", UI::Align_CenterLeft);
 	posy += 20 + spacing;
 
 	new UI::Textarea
-		(this, posx, posy, 70, 20, _("Players: "), UI::Align_CenterLeft);
+		(this, posx, posy, 70, 20, _("Players:"), UI::Align_CenterLeft);
 	m_nrplayers =
 		new UI::Textarea
 			(this, posx + 70, posy, 200, 20, "---", UI::Align_CenterLeft);
@@ -95,7 +95,7 @@ Main_Menu_Load_Map::Main_Menu_Load_Map(Editor_Interactive & parent)
 
 
 	new UI::Textarea
-		(this, posx, posy, 70, 20, _("Descr: "), UI::Align_CenterLeft);
+		(this, posx, posy, 70, 20, _("Descr:"), UI::Align_CenterLeft);
 	m_descr =
 		new UI::Multiline_Textarea
 			(this,

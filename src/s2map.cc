@@ -23,6 +23,7 @@
 #include <iostream>
 
 #include <boost/foreach.hpp>
+#include <libintl.h>
 
 #include "constants.h"
 #include "i18n.h"
@@ -858,12 +859,14 @@ void S2_Map_Loader::postload_fix_conversion(Widelands::Editor_Game_Base & egbase
 				log("Fixed!\n");
 		}
 	}
-	snprintf
-		(buf, sizeof(buf),
-		 _
-		  ("WARNING: %i invalid port buildspaces could not be fixed and have been removed! "
-		   "Some islands might be unreachable now. Please consider to fix the map in the map editor.\n\n"),
-		 num_failed);
+
+	sprintf(buf, "%i %s %s", num_failed,
+		ngettext("WARNING: %i invalid port building space could not be fixed and has been removed! "
+				"Some islands might be unreachable now. Please consider fixing the map in the map editor.",
+				"WARNING: %i invalid port building spaces could not be fixed and have been removed! "
+				"Some islands might be unreachable now. Please consider fixing the map in the map editor.",
+				num_failed),
+		"\n\n");
 	fputs(buf, stdout);
 
 	// If fixing failed and this is a game, inform the players about the problem

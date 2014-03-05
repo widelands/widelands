@@ -43,10 +43,10 @@ Window(&parent, "login_box", 0, 0, 500, 210, _("Metaserver login"))
 			 g_gr->images().get("pics/but2.png"), UI::Align_Left);
 
 	pwd_warning =
-		new UI::Textarea
-			(this, 250, 85,
+		new UI::Multiline_Textarea
+			(this, 10, 65, 505, 50,
 			 _("WARNING: Password will be shown and saved readable!"),
-			 UI::Align_Center);
+			 UI::Align_Left);
 
 	cb_register = new UI::Checkbox(this, Point(10, 110));
 	ta_register =

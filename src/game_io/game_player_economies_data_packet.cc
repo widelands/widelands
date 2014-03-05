@@ -59,7 +59,7 @@ void Game_Player_Economies_Data_Packet::Read
 								EconomyDataPacket d(flag->get_economy());
 								d.Read(fr);
 							} else {
-								throw game_data_error(_("there is no flag at the specified location"));
+								throw game_data_error("there is no flag at the specified location");
 							}
 						} else {
 							bool read_this_economy = false;
@@ -80,13 +80,13 @@ void Game_Player_Economies_Data_Packet::Read
 						}
 					}
 				} catch (const _wexception & e) {
-					throw game_data_error(_("player %u: %s"), p, e.what());
+					throw game_data_error("player %u: %s", p, e.what());
 				}
 		} else
 			throw game_data_error
-				(_("unknown/unhandled version %u"), packet_version);
+				("unknown/unhandled version %u", packet_version);
 	} catch (const _wexception & e) {
-		throw game_data_error(_("economies: %s"), e.what());
+		throw game_data_error("economies: %s", e.what());
 	}
 }
 

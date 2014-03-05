@@ -105,6 +105,7 @@ World* Editor_Game_Base::mutable_world() {
 	if (!world_) {
 		world_.reset(new World(lua_.get()));
 	}
+	return world_.get();
 }
 
 void Editor_Game_Base::receive(const NoteImmovable & note)

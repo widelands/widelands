@@ -66,17 +66,17 @@ Game_Main_Menu_Save_Game::Game_Main_Menu_Save_Game
 		 WINDOW_WIDTH, WINDOW_HEIGHT, _("Save Game")),
 	m_ls     (this, HSPACING, VSPACING,  LIST_WIDTH, LIST_HEIGHT),
 	m_name_label
-		(this, DESCRIPTION_X,  5, 0, 20, _("Map Name: "),  UI::Align_CenterLeft),
+		(this, DESCRIPTION_X,  5, 0, 20, _("Map Name:"),  UI::Align_CenterLeft),
 	m_mapname
 		(this, DESCRIPTION_X, 20, 0, 20, " ",              UI::Align_CenterLeft),
 	m_gametime_label
-		(this, DESCRIPTION_X, 45, 0, 20, _("Game Time: "), UI::Align_CenterLeft),
+		(this, DESCRIPTION_X, 45, 0, 20, _("Game Time:"), UI::Align_CenterLeft),
 	m_gametime
 		(this, DESCRIPTION_X, 60, 0, 20, " ",              UI::Align_CenterLeft),
 	m_players_label
 		(this, DESCRIPTION_X, 85, 0, 20, " ",              UI::Align_CenterLeft),
 	m_win_condition_label
-		(this, DESCRIPTION_X, 110, 0, 20, _("Win condition: "), UI::Align_CenterLeft),
+		(this, DESCRIPTION_X, 110, 0, 20, _("Win condition:"), UI::Align_CenterLeft),
 	m_win_condition
 		(this, DESCRIPTION_X, 125, 0, 20, " ",             UI::Align_CenterLeft),
 	m_curdir(SaveHandler::get_base_dir())
@@ -245,7 +245,7 @@ static void dosave
 	if (!game.save_handler().save_game(game, complete_filename, &error)) {
 		std::string s =
 			_
-			("Game Saving Error!\nSaved Game-File may be corrupt!\n\n"
+			("Game Saving Error!\nSaved game file may be corrupt!\n\n"
 			 "Reason given:\n");
 		s += error;
 		UI::WLMessageBox mbox
@@ -262,11 +262,8 @@ struct SaveWarnMessageBox : public UI::WLMessageBox {
 		UI::WLMessageBox
 			(&parent,
 			 _("Save Game Error!!"),
-			 std::string(_("A File with the name "))
-			 +
-			 FileSystem::FS_Filename(filename.c_str())
-			 +
-			 _(" already exists. Overwrite?"),
+			(boost::format(_("A File with the name ‘%s’ already exists. Overwrite?")) % 
+				FileSystem::FS_Filename(filename.c_str())).str(),
 			 YESNO),
 		m_filename(filename)
 	{}

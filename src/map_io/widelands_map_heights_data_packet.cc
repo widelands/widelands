@@ -47,9 +47,9 @@ void Map_Heights_Data_Packet::Read
 				map[i].set_height(fr.Unsigned8());
 		} else
 			throw game_data_error
-				(_("unknown/unhandled version %u"), packet_version);
+				("unknown/unhandled version %u", packet_version);
 	} catch (const _wexception & e) {
-		throw game_data_error(_("heights: %s"), e.what());
+		throw game_data_error("heights: %s", e.what());
 	}
 }
 

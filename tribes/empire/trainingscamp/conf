@@ -52,14 +52,14 @@ upgrade_soldier_attack_2=_Upgrade soldier attack 2
 upgrade_attack_2=_Upgrade soldier attack 2 (only for compatibility with old savegames (build13))
 upgrade_soldier_attack_3=_Upgrade soldier attack 3
 upgrade_attack_3=_Upgrade soldier attack 3 (only for compatibility with old savegames (build13))
-upgrade_soldier_hp_0=_Upgrade soldier hitpoints 0
-upgrade_hp_0=_Upgrade soldier hitpoints 0 (only for compatibility with old savegames (build13))
-upgrade_soldier_hp_1=_Upgrade soldier hitpoints 1
-upgrade_hp_1=_Upgrade soldier hitpoints 1 (only for compatibility with old savegames (build13))
-upgrade_soldier_hp_2=_Upgrade soldier hitpoints 2
-upgrade_hp_2=_Upgrade soldier hitpoints 2 (only for compatibility with old savegames (build13))
-upgrade_soldier_hp_3=_Upgrade soldier hitpoints 3
-upgrade_hp_3=_Upgrade soldier hitpoints 3 (only for compatibility with old savegames (build13))
+upgrade_soldier_hp_0=_Upgrade soldier health 0
+upgrade_hp_0=_Upgrade soldier health 0 (only for compatibility with old savegames (build13))
+upgrade_soldier_hp_1=_Upgrade soldier health 1
+upgrade_hp_1=_Upgrade soldier health 1 (only for compatibility with old savegames (build13))
+upgrade_soldier_hp_2=_Upgrade soldier health 2
+upgrade_hp_2=_Upgrade soldier health 2 (only for compatibility with old savegames (build13))
+upgrade_soldier_hp_3=_Upgrade soldier health 3
+upgrade_hp_3=_Upgrade soldier health 3 (only for compatibility with old savegames (build13))
 
 [sleep]
 sleep=5000

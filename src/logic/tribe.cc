@@ -131,7 +131,7 @@ Tribe_Descr::Tribe_Descr
 			PARSE_MAP_OBJECT_TYPES_END;
 			if (not safe_building_index("constructionsite"))
 				throw game_data_error
-					(_("constructionsite type \"constructionsite\" is missing"));
+					("constructionsite type \"constructionsite\" is missing");
 
 			PARSE_MAP_OBJECT_TYPES_BEGIN("dismantlesite")
 				m_buildings.add
@@ -140,7 +140,7 @@ Tribe_Descr::Tribe_Descr
 			PARSE_MAP_OBJECT_TYPES_END;
 			if (not safe_building_index("dismantlesite"))
 				throw game_data_error
-					(_("dismantlesite type \"distmantlesite\" is missing"));
+					("dismantlesite type \"distmantlesite\" is missing");
 
 			PARSE_MAP_OBJECT_TYPES_BEGIN("warehouse")
 				m_buildings.add
@@ -257,7 +257,7 @@ Tribe_Descr::Tribe_Descr
 						if (m_anim_frontier.empty())
 							throw Nonexistent();
 						frontier_style_index(style_name);
-						throw game_data_error(_("\"%s\" is duplicated"), style_name);
+						throw game_data_error("\"%s\" is duplicated", style_name);
 					} catch (Nonexistent) {
 						m_anim_frontier.push_back
 							(std::pair<std::string, uint32_t>
@@ -266,9 +266,9 @@ Tribe_Descr::Tribe_Descr
 					}
 				}
 				if (m_anim_frontier.empty())
-					throw game_data_error(_("none found"));
+					throw game_data_error("none found");
 			} catch (const _wexception & e) {
-				throw game_data_error(_("frontier styles: %s"), e.what());
+				throw game_data_error("frontier styles: %s", e.what());
 			}
 			try {
 				while (Section * const s = root_conf.get_next_section("flag"))
@@ -278,7 +278,7 @@ Tribe_Descr::Tribe_Descr
 						if (m_anim_flag.empty())
 							throw Nonexistent();
 						flag_style_index(style_name);
-						throw game_data_error(_("\"%s\" is duplicated"), style_name);
+						throw game_data_error("\"%s\" is duplicated", style_name);
 					} catch (Nonexistent) {
 						m_anim_flag.push_back
 							(std::pair<std::string, uint32_t>
@@ -287,9 +287,9 @@ Tribe_Descr::Tribe_Descr
 					}
 				}
 				if (m_anim_flag.empty())
-					throw game_data_error(_("none found"));
+					throw game_data_error("none found");
 			} catch (const _wexception & e) {
-				throw game_data_error(_("flag styles: %s"), e.what());
+				throw game_data_error("flag styles: %s", e.what());
 			}
 
 			// Register Lua scripts
@@ -332,7 +332,7 @@ Tribe_Descr::Tribe_Descr
 				m_compatibility_immovable[v->get_name()] = split_string(v->get_string(), " ");
 		}
 	} catch (const _wexception & e) {
-		throw game_data_error(_("tribe %s: %s"), tribename.c_str(), e.what());
+		throw game_data_error("tribe %s: %s", tribename.c_str(), e.what());
 	}
 }
 

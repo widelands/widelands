@@ -50,13 +50,13 @@ Fullscreen_Menu_MapSelect::Fullscreen_Menu_MapSelect
 // Text labels
 	m_title
 		(this,
-		 get_w() / 2, get_h() * 7 / 50,
+		 get_w() / 2, get_h() / 10,
 		 _("Choose a map"),
 		 UI::Align_HCenter),
 	m_label_load_map_as_scenario
 		(this,
 		 get_w() * 23 / 25, get_h() * 11 / 40,
-		 _("Load Map as scenario: "),
+		 _("Load Map as scenario"),
 		 UI::Align_Right),
 	m_label_name
 		(this,
@@ -138,6 +138,7 @@ Fullscreen_Menu_MapSelect::Fullscreen_Menu_MapSelect
 	m_ok.set_font(font_small());
 
 #define NR_PLAYERS_WIDTH 35
+	/** TRANSLATORS: Column title for number of players in map list */
 	m_table.add_column(NR_PLAYERS_WIDTH, _("#"), UI::Align_HCenter);
 	m_table.add_column
 		(m_table.get_w() - NR_PLAYERS_WIDTH, _("Map Name"), UI::Align_Left);
@@ -481,7 +482,7 @@ void Fullscreen_Menu_MapSelect::fill_list()
 				mapdata.name        = dmap.path.substr(5, dmap.path.size() - 1);
 				mapdata.author      = _("unknown");
 				mapdata.description =
-					_("This map file is not present on your filesystem. Data shown here was sent by the server.");
+					_("This map file is not present in your filesystem. The data shown here was sent by the server.");
 				mapdata.hint        = "";
 				mapdata.nrplayers   = dmap.players;
 				mapdata.width       = 1;

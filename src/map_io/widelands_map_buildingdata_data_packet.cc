@@ -239,14 +239,14 @@ void Map_Buildingdata_Data_Packet::Read
 
 					mol.mark_object_as_loaded(building);
 				} catch (const _wexception & e) {
-					throw game_data_error(_("building %u: %s"), serial, e.what());
+					throw game_data_error("building %u: %s", serial, e.what());
 				}
 			}
 		} else
 			throw game_data_error
-				(_("unknown/unhandled version %u"), packet_version);
+				("unknown/unhandled version %u", packet_version);
 	} catch (const _wexception & e) {
-		throw game_data_error(_("buildingdata: %s"), e.what());
+		throw game_data_error("buildingdata: %s", e.what());
 	}
 }
 
@@ -336,7 +336,7 @@ void Map_Buildingdata_Data_Packet::read_partially_finished_building
 					pfb.m_wares[i]->Read(fr, game, mol);
 				}
 			} catch (const _wexception & e) {
-				throw game_data_error(_("wares: %s"), e.what());
+				throw game_data_error("wares: %s", e.what());
 			}
 
 			pfb.m_working        = fr.Unsigned8 ();
@@ -345,9 +345,9 @@ void Map_Buildingdata_Data_Packet::read_partially_finished_building
 			pfb.m_work_steps     = fr.Unsigned32();
 		} else
 			throw game_data_error
-				(_("unknown/unhandled version %u"), packet_version);
+				("unknown/unhandled version %u", packet_version);
 	} catch (const _wexception & e) {
-		throw game_data_error(_("partially_constructed_buildings: %s"), e.what());
+		throw game_data_error("partially_constructed_buildings: %s", e.what());
 	}
 }
 
@@ -382,9 +382,9 @@ void Map_Buildingdata_Data_Packet::read_constructionsite
 			constructionsite.m_fetchfromflag  = fr.  Signed32();
 		} else
 			throw game_data_error
-				(_("unknown/unhandled version %u"), packet_version);
+				("unknown/unhandled version %u", packet_version);
 	} catch (const _wexception & e) {
-		throw game_data_error(_("constructionsite: %s"), e.what());
+		throw game_data_error("constructionsite: %s", e.what());
 	}
 }
 
@@ -437,7 +437,7 @@ void Map_Buildingdata_Data_Packet::read_constructionsite_v1
 			constructionsite.m_wares[i]->Read(fr, game, mol);
 		}
 	} catch (const _wexception & e) {
-		throw game_data_error(_("wares: %s"), e.what());
+		throw game_data_error("wares: %s", e.what());
 	}
 
 	constructionsite.m_fetchfromflag  = fr.  Signed32();
@@ -462,9 +462,9 @@ void Map_Buildingdata_Data_Packet::read_dismantlesite
 			// Nothing to do
 		} else
 			throw game_data_error
-				(_("unknown/unhandled version %u"), packet_version);
+				("unknown/unhandled version %u", packet_version);
 	} catch (const _wexception & e) {
-		throw game_data_error(_("dismantlesite: %s"), e.what());
+		throw game_data_error("dismantlesite: %s", e.what());
 	}
 }
 
@@ -554,7 +554,7 @@ void Map_Buildingdata_Data_Packet::read_warehouse
 							char const * const name = fr.CString();
 							if (name != worker.name())
 								throw game_data_error
-									(_("expected %s but found \"%s\""),
+									("expected %s but found \"%s\"",
 									 worker.name().c_str(), name);
 						}
 						Ware_Index worker_index = tribe.worker_index(worker.name().c_str());
@@ -647,10 +647,10 @@ void Map_Buildingdata_Data_Packet::read_warehouse
 								 !=
 								 static_cast<uint32_t>(Never()))
 								throw game_data_error
-									(_
-									 	("%s %u has a next_spawn time for worker type "
-									 	 "\"%s\" set to %u, but it was previously set "
-									 	 "to %u\n"),
+									(
+									 "%s %u has a next_spawn time for worker type "
+									 "\"%s\" set to %u, but it was previously set "
+									 "to %u\n",
 									 warehouse.descname().c_str(), warehouse.serial(),
 									 worker_typename, next_spawn,
 									 warehouse.m_next_worker_without_cost_spawn[i]);
@@ -731,9 +731,9 @@ void Map_Buildingdata_Data_Packet::read_warehouse
 			//log("Read warehouse stuff for %p\n", &warehouse);
 		} else
 			throw game_data_error
-				(_("unknown/unhandled version %u"), packet_version);
+				("unknown/unhandled version %u", packet_version);
 	} catch (const _wexception & e) {
-		throw game_data_error(_("warehouse: %s"), e.what());
+		throw game_data_error("warehouse: %s", e.what());
 	}
 }
 
@@ -828,7 +828,7 @@ void Map_Buildingdata_Data_Packet::read_militarysite
 
 		} else
 			throw game_data_error
-				(_("unknown/unhandled version %u"), packet_version);
+				("unknown/unhandled version %u", packet_version);
 
 		//  If the site's capacity is outside the allowed range (can happen if
 		//  the site's type's definition has changed), set the variable to the
@@ -857,7 +857,7 @@ void Map_Buildingdata_Data_Packet::read_militarysite
 			militarysite.m_capacity = militarysite.maxSoldierCapacity();
 		}
 	} catch (const _wexception & e) {
-		throw game_data_error(_("militarysite: %s"), e.what());
+		throw game_data_error("militarysite: %s", e.what());
 	}
 }
 
@@ -1013,9 +1013,9 @@ void Map_Buildingdata_Data_Packet::read_productionsite
 					uint32_t const skip_time = fr.Unsigned32();
 					if (gametime < skip_time)
 						throw game_data_error
-							(_
-							 	("program %s was skipped at time %u, but time is only "
-							 	 "%u"),
+							(
+							 "program %s was skipped at time %u, but time is only "
+							 "%u",
 							 program_name, skip_time, gametime);
 					productionsite.m_skipped_programs[program_name] = skip_time;
 				} else {
@@ -1127,7 +1127,7 @@ void Map_Buildingdata_Data_Packet::read_productionsite
 			}
 		} else
 			throw game_data_error
-				(_("unknown/unhandled version %u"), packet_version);
+				("unknown/unhandled version %u", packet_version);
 	} catch (const _wexception & e) {
 		throw game_data_error
 			("productionsite (%s): %s",
@@ -1203,7 +1203,7 @@ void Map_Buildingdata_Data_Packet::read_trainingsite
 			}
 		} else
 			throw game_data_error
-				(_("unknown/unhandled version %u"), trainingsite_packet_version);
+				("unknown/unhandled version %u", trainingsite_packet_version);
 
 		//  If the site's capacity is outside the allowed range (can happen if
 		//  the site's type's definition has changed), set the variable to the
@@ -1232,7 +1232,7 @@ void Map_Buildingdata_Data_Packet::read_trainingsite
 			trainingsite.m_capacity = trainingsite.maxSoldierCapacity();
 		}
 	} catch (const _wexception & e) {
-		throw game_data_error(_("trainingsite: %s"), e.what());
+		throw game_data_error("trainingsite: %s", e.what());
 	}
 }
 

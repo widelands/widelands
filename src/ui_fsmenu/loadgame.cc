@@ -21,6 +21,8 @@
 
 #include <cstdio>
 
+#include <boost/format.hpp>
+
 #include "game_io/game_loader.h"
 #include "game_io/game_preload_data_packet.h"
 #include "gamecontroller.h"
@@ -155,7 +157,7 @@ void Fullscreen_Menu_LoadGame::clicked_delete()
 	UI::WLMessageBox confirmationBox
 		(this,
 		 _("Delete file"),
-		 _("Do you really want to delete ") + fname + "?",
+		 (boost::format(_("Do you really want to delete %s?")) % fname).str(),
 		 UI::WLMessageBox::YESNO);
 	if (confirmationBox.run()) {
 		g_fs->Unlink(m_list.get_selected());

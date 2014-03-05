@@ -101,15 +101,15 @@ void Map_Building_Data_Packet::Read
 							if (g_gr) // but not on dedicated servers ;)
 								ibase.reference_player_tribe(p, &tribe);
 						} else
-							throw game_data_error(_("player %u does not exist"), p);
+							throw game_data_error("player %u does not exist", p);
 					}
 				}
 			}
 		} else
 			throw game_data_error
-				(_("unknown/unhandled version %u"), packet_version);
+				("unknown/unhandled version %u", packet_version);
 	} catch (const _wexception & e) {
-		throw game_data_error(_("buildings: %s"), e.what());
+		throw game_data_error("buildings: %s", e.what());
 	}
 }
 

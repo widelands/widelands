@@ -46,7 +46,7 @@ Editor_Tool_Change_Resources_Options_Menu
 	m_change_by_label
 		(this,
 		 hmargin(), vmargin(), get_inner_w() - 2 * hmargin(), BUTTON_HEIGHT,
-		 _("In-/Decrease Value"), UI::Align_BottomCenter),
+		 _("Increase/Decrease Value"), UI::Align_BottomCenter),
 	m_change_by_increase
 		(this, "incr_change_by",
 		 get_inner_w() - hmargin() - BUTTON_WIDTH,

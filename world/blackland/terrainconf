@@ -10,18 +10,18 @@ is=green
 dither_layer=20
 
 [mountain1]
-name=_"Mountain1"
-resources=coal, iron, gold, granite
+name=_"Mountain 1"
+resources=coal, iron, gold, granit
 is=mountain
 dither_layer=50
 
 [lava-stone1]
-name=_"Lava stone1"
+name=_"Lava Rocks 1"
 is=acid
 dither_layer=70
 
 [lava-stone2]
-name=_"Lava stone2"
+name=_"Lava Rocks 2"
 is=acid
 dither_layer=70
 
@@ -38,49 +38,49 @@ fps=14
 dither_layer=0
 
 [hardground1]
-name=_"Hardground1"
+name=_"Hard Ground 1"
 def_resources=water 10
 is=green
 dither_layer=30
 
 [hardground2]
-name=_"Hardground2"
+name=_"Hard Ground 2"
 def_resources=water 10
 is=green
 dither_layer=30
 
 [hardground3]
-name=_"Hardground3"
+name=_"Hard Ground 3"
 def_resources=water 10
 is=green
 dither_layer=30
 
 [mountain2]
-name=_"Mountain2"
-resources=coal, iron, gold, granite
+name=_"Mountain 2"
+resources=coal, iron, gold, granit
 is=mountain
 dither_layer=50
 
 [mountain3]
-name=_"Mountain3"
-resources=coal, iron, gold, granite
+name=_"Mountain 3"
+resources=coal, iron, gold, granit
 is=mountain
 dither_layer=50
 
 [mountain4]
-name=_"Mountain4"
-resources=coal, iron, gold, granite
+name=_"Mountain 4"
+resources=coal, iron, gold, granit
 is=mountain
 dither_layer=50
 
 [ashes2]
-name=_"Ashes2"
+name=_"Ashes 2"
 def_resources=water 4
 is=green
 dither_layer=20
 
 [hardground4]
-name=_"Hardground4"
+name=_"Hard Ground 4"
 def_resources=water 10
 is=green
 dither_layer=30
@@ -91,7 +91,7 @@ is=acid
 dither_layer=60
 
 [hardlava]
-name=_"Hard lava"
+name=_"Igneous Rocks"
 is=green
 dither_layer=40
 
