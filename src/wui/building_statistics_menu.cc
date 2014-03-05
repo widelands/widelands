@@ -84,23 +84,23 @@ Building_Statistics_Menu::Building_Statistics_Menu
 	m_total_productivity_label
 		(this,
 		 LABEL_X, TOTAL_PRODUCTIVITY_Y, LABEL_WIDTH, 24,
-		 _("Total Productivity: "), UI::Align_CenterLeft),
+		 _("Total Productivity:"), UI::Align_CenterLeft),
 	m_owned_label
 		(this,
 		 LABEL_X, OWNED_Y, LABEL_WIDTH, 24,
-		 _("Owned: "), UI::Align_CenterLeft),
+		 _("Owned:"), UI::Align_CenterLeft),
 	m_owned
 		(this, VALUE_X, OWNED_Y, 100, 24, UI::Align_CenterLeft),
 	m_in_build_label
 		(this,
 		 LABEL_X, IN_BUILD_Y, LABEL_WIDTH, 24,
-		 _("Being built: "), UI::Align_CenterLeft),
+		 _("Being built:"), UI::Align_CenterLeft),
 	m_in_build
 		(this, VALUE_X, IN_BUILD_Y, 100, 24, UI::Align_CenterLeft),
 	m_unproductive_label
 		(this,
 		 LABEL_X, UNPRODUCTIVE_Y, LABEL_WIDTH, 24,
-		 _("Jump to unproductive: "), UI::Align_CenterLeft),
+		 _("Jump to unproductive"), UI::Align_CenterLeft),
 	m_anim               (0),
 	m_lastupdate         (0),
 	m_last_building_index(0),

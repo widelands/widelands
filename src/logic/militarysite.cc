@@ -132,6 +132,8 @@ std::string MilitarySite::get_statistics_string()
 	} else {
 		snprintf
 			(buffer, sizeof(buffer),
+			/** TRANSLATORS: %1$u is the number of soldiers the plural refers to */
+			/** TRANSLATORS: %2$u are open soldier slots in the building */
 			 ngettext("%1$u(+%2$u) soldier", "%1$u(+%2$u) soldiers", total),
 			 present, total - present);
 	}

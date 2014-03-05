@@ -1389,8 +1389,7 @@ void WLApplication::show_usage()
 			  "                      game screen.") << "\n"
 		<<	_(" --xres=[...]         Width of the window in pixel.") << "\n"
 		<<	_(" --yres=[...]         Height of the window in pixel.") << "\n"
-		<<	_(" --opengl=[0|1]\n"
-			  "                      Enables OpenGL rendering") << "\n\n"
+		<<	_(" --opengl=[0|1]       Enables OpenGL rendering") << "\n\n"
 		<<	_("Options for the internal window manager:") << "\n"
 		<<	_(" --border_snap_distance=[0 ...]\n"
 			  "                      Move a window to the edge of the screen\n"
@@ -1577,8 +1576,7 @@ void WLApplication::mainmenu()
 				return;
 			}
 		} catch (const warning & e) {
-			messagetitle = _("Warning: ");
-			messagetitle += e.title();
+			messagetitle = (boost::format(_("Warning: %s")) % e.title()).str();
 			message = e.what();
 		} catch (const Widelands::game_data_error & e) {
 			messagetitle = _("Game data error");

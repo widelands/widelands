@@ -483,7 +483,7 @@ void Fullscreen_Menu_LaunchMPG::refresh()
 			(format(_("Player %i")) % (settings.playernum + 1)).str()
 			:
 			_("Spectator");
-		temp  = (format(_("At the moment you are %s\n\n")) % temp.c_str()).str();
+		temp  = (format(_("At the moment you are %s")) % temp.c_str()).str() + "\n\n";
 		temp += _("Click on the ‘?’ in the top right corner to get help.");
 		m_client_info.set_text(temp);
 	}
@@ -646,12 +646,12 @@ void Fullscreen_Menu_LaunchMPG::load_map_info()
 	std::string world(global.get_safe_string("name"));
 
 	std::string infotext;
-	infotext += _("Map details:\n");
-	infotext += (format(_("* Size: %1$ux%2$u\n")) % map.get_width() % map.get_height()).str();
-	infotext += (format(ngettext("* %u Player\n", "* %u Players\n", m_nr_players)) % m_nr_players).str();
-	infotext += (format(_("* World type: %s\n")) % world).str();
+	infotext += std::string(_("Map details:")) + "\n";
+	infotext += std::string("• ") + (format(_("Size: %1$u x %2$u")) % map.get_width() % map.get_height()).str() + "\n";
+	infotext += std::string("• ") + (format(ngettext("%u Player", "%u Players", m_nr_players)) % m_nr_players).str() + "\n";
+	infotext += std::string("• ") + (format(_("World: %s")) % world).str() + "\n";
 	if (m_settings->settings().scenario)
-		infotext += (format(_("* Scenario mode selected\n"))).str();
+		infotext += std::string("• ") + (format(_("Scenario mode selected"))).str() + "\n";
 	infotext += "\n";
 	infotext += map.get_description();
 	infotext += "\n";

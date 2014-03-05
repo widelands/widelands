@@ -19,6 +19,8 @@
 
 #include "wui/playerdescrgroup.h"
 
+#include <boost/format.hpp>
+
 #include "constants.h"
 #include "gamesettings.h"
 #include "graphic/graphic.h"
@@ -169,11 +171,11 @@ void PlayerDescriptionGroup::refresh()
 				if (player.ai.empty())
 					title = _("Computer");
 				else {
-					title = _("AI: ");
 					if (player.random_ai) {
-						title += _("Random");
+						title += _("AI: Random");
 					} else {
-						title += _(player.ai);
+						/** TRANSLATORS %s = AI type, e.g. "Agressive" */
+						title += (boost::format(_("AI: %s")) % _(player.ai)).str();
 					}
 				}
 			} else { // PlayerSettings::stateHuman

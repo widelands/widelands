@@ -542,7 +542,7 @@ void InternetGaming::handle_packet(RecvPacket & packet)
 			// Client received an ERROR message - seems something went wrong
 			std::string subcmd    (packet.String());
 			std::string reason (packet.String());
-			std::string message(_("ERROR: "));
+			std::string message = "";
 
 			if (subcmd == IGPCMD_CHAT) {
 				// Something went wrong with the chat message the user sent.
@@ -556,10 +556,11 @@ void InternetGaming::handle_packet(RecvPacket & packet)
 
 			else if (subcmd == IGPCMD_GAME_OPEN) {
 				// Something went wrong with the newly opened game
-				message += InternetGamingMessages::get_message(reason);
+				message = InternetGamingMessages::get_message(reason);
 				// we got our answer, so no need to wait anymore
 				waitcmd = "";
 			}
+			message = (boost::format(_("ERROR: %s")) % message).str();
 
 			// Finally send the error message as system chat to the client.
 			formatAndAddChat("", "", true, message);
@@ -567,7 +568,10 @@ void InternetGaming::handle_packet(RecvPacket & packet)
 
 		else
 			// Inform the client about the unknown command
-			formatAndAddChat("", "", true, _("Received an unknown command from the metaserver: ") + cmd);
+			formatAndAddChat(
+				"", "", true,
+				(boost::format(_("Received an unknown command from the metaserver: %s")) % cmd).str()
+			);
 
 	} catch (warning & e) {
 		formatAndAddChat("", "", true, e.what());
