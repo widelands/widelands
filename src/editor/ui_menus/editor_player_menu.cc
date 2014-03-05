@@ -19,6 +19,8 @@
 
 #include "editor/ui_menus/editor_player_menu.h"
 
+#include <boost/format.hpp>
+
 #include "editor/editorinteractive.h"
 #include "editor/tools/editor_set_starting_pos_tool.h"
 #include "graphic/graphic.h"
@@ -200,10 +202,12 @@ void Editor_Player_Menu::clicked_add_player() {
 	map.set_nrplayers(nr_players);
 	{ //  register new default name for this players
 		assert(nr_players <= 99); //  2 decimal digits
-		std::string name = _("Player ");
+		std::string number = "";
 		if (char const nr_players_10 = nr_players / 10)
-			name += '0' + nr_players_10;
-		name += '0' + nr_players % 10;
+			number += '0' + nr_players_10;
+		number += '0' + nr_players % 10;
+		/** TRANSLATORS: Default player name, e.g. Player 1 */
+		std::string name = (boost::format(_("Player %s")) % number).str();
 		map.set_scenario_player_name(nr_players, name);
 	}
 	map.set_scenario_player_tribe(nr_players, m_tribes[0]);
