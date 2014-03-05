@@ -3,27 +3,27 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2014-02-22 15:38+0000\n"
-"PO-Revision-Date: 2013-06-28 10:13+0000\n"
-"Last-Translator: trewe <Unknown>\n"
+"PO-Revision-Date: 2014-03-04 18:16+0000\n"
+"Last-Translator: Flávio J. Saraiva <flaviojs2005@gmail.com>\n"
 "Language-Team: Portuguese <pt@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-02-23 05:31+0000\n"
-"X-Generator: Launchpad (build 16926)\n"
+"X-Launchpad-Export-Date: 2014-03-05 05:29+0000\n"
+"X-Generator: Launchpad (build 16948)\n"
 "Language: pt\n"
 
 #: ../../txts/README.lua:73
 msgid "(CTRL+) 0-9: Remember and go to previously remembered locations"
-msgstr ""
+msgstr "(CTRL+) 0-9: Lembrar e ir para as localizações lembradas"
 
 #: ../../txts/README.lua:74
 msgid ",: goes to previous location"
-msgstr ""
+msgstr ",: vai para a localização anterior"
 
 #: ../../txts/README.lua:99
 msgid "- Detailed steps on how to trigger the bug, if possible."
-msgstr ""
+msgstr "- Passos detalhados para reproduzir o erro, se possível."
 
 #: ../../txts/README.lua:111
 msgid ""
@@ -31,6 +31,8 @@ msgid ""
 "helps\n"
 "demonstrate the issue, please include one or more screenshots."
 msgstr ""
+"- Se o erro é algo não estar a ser mostrado corretamente ou se ajudar a "
+"demonstrar, por favor inclua um ou mais screenshots."
 
 #: ../../txts/README.lua:114
 msgid ""
@@ -38,6 +40,9 @@ msgid ""
 "crashes where it can be hard to tell exactly what is triggering it), please\n"
 "include that too. For more information, see the section on Replays below."
 msgstr ""
+"- Se tens um jogo gravado ou replay que demonstre o erro (por exemplo "
+"crashes onde é difícil perceber a causa), também o inclui. Para mais "
+"informação veja a próxima secção sobre Replays."
 
 #: ../../txts/README.lua:106
 msgid ""
@@ -45,16 +50,20 @@ msgid ""
 "as\n"
 "some bugs can be platform specific."
 msgstr ""
+"- Inclui o sistema operativo em que está a correr Widelands pois alguns "
+"erros só ocorrem em certas plataformas."
 
 #: ../../txts/README.lua:101
 msgid ""
 "- What you expected to happen when performing the steps and what actually "
 "happened."
 msgstr ""
+"- O que esperavas que acontecesse ao executer os passos e o que realmente "
+"aconteceu."
 
 #: ../../txts/README.lua:109
 msgid "- Which map you were playing when the bug occurred."
-msgstr ""
+msgstr "- Que mapa estavas a jogar quando o erro ocorreu."
 
 #: ../../txts/README.lua:103
 msgid ""
@@ -63,14 +72,16 @@ msgid ""
 "the revision number if you are running a development version or a daily "
 "build.)"
 msgstr ""
+"- Que versão de Widelands estás a usar (i.e. ou o número de build ou o "
+"número da revisão se é uma versão de desenvolvimento ou um build diário.)"
 
 #: ../../txts/README.lua:75
 msgid ".: goes to next location"
-msgstr ""
+msgstr ".: vai para a próxima localização"
 
 #: ../../txts/editor_readme:43
 msgid "1-0      Changes tools size"
-msgstr "1-0      Altera o tamanho das ferrramentas"
+msgstr "1-0 Altera o tamanho das ferramentas"
 
 #: ../../txts/editor_readme:47
 msgid "ALT      (Hold) Selects second alternative tool while pressed"
@@ -137,11 +148,11 @@ msgstr "C        Liga/desliga os censos"
 
 #: ../../txts/README.lua:67
 msgid "C: toggles census"
-msgstr ""
+msgstr "C: Liga/desliga os censos"
 
 #: ../../txts/README.lua:77
 msgid "CTRL+F10: quits the game immediately"
-msgstr ""
+msgstr "CTRL+F10: sai do jogo imediatamente"
 
 #: ../../txts/editor_readme:39
 msgid "CTRL+L   Load Map"
@@ -169,7 +180,7 @@ msgstr "Programadores"
 
 #: ../../txts/license:7
 msgid "Copyright 2002 - 2014 by the Widelands Development Team."
-msgstr ""
+msgstr "Copyright 2002 - 2014 pela Equipa de Devolvimento de Widelands"
 
 #: ../../txts/developers:186
 msgid "Czech"
@@ -177,7 +188,7 @@ msgstr "Checo"
 
 #: ../../txts/README.lua:83
 msgid "DELETE: archives the current message"
-msgstr ""
+msgstr "DELETE: arquiva a mensagem atual"
 
 #: ../../txts/developers:193
 msgid "Dansk"
@@ -213,15 +224,16 @@ msgstr "F        Alterna o Ecrã completo"
 
 #: ../../txts/README.lua:78
 msgid "F11: takes a screenshot"
-msgstr ""
+msgstr "F11: Tira um screenshot"
 
 #: ../../txts/README.lua:76
 msgid "F6: shows the debug console (only in debug-builds)"
-msgstr ""
+msgstr "F6: mostra a consola de debug (só em builds de debug)"
 
 #: ../../txts/README.lua:71
 msgid "F: toggles fullscreen (if supported by OS)"
 msgstr ""
+"F: Liga/desliga ecrâ completo (se fôr suportado pelo sistema operativo)"
 
 #: ../../txts/developers:206
 msgid "Finnish"
@@ -237,7 +249,7 @@ msgstr "Francês"
 
 #: ../../txts/README.lua:82
 msgid "G: jumps to location corresponding to current message"
-msgstr ""
+msgstr "G: vai para a localização da mensagem atual"
 
 #: ../../txts/developers:219
 msgid "Galician"
@@ -288,7 +300,7 @@ msgstr ""
 
 #: ../../txts/README.lua:72
 msgid "Home: centers main mapview on starting location"
-msgstr ""
+msgstr "Home: centra a vista do mapa na localização inicial"
 
 #: ../../txts/developers:23
 #: ../../txts/developers:347
@@ -313,7 +325,7 @@ msgstr ""
 
 #: ../../txts/README.lua:93
 msgid "If you encounter a bug, please report it to our bugtracker:"
-msgstr ""
+msgstr "Se encontrares um erro, por favor reporta-o no nosso bugtracker:"
 
 #: ../../txts/README.lua:52
 msgid ""
@@ -322,6 +334,10 @@ msgid ""
 "are\n"
 "removed."
 msgstr ""
+"Se mantiveres CTRL pressionado ao controir uma estrada, as bandeiras são "
+"adicionadas automáticamente.\n"
+"Se mantiveres CTRL pressionado ao remover uma estrada, todas as bandeiras "
+"até à primeira junção são removidas."
 
 # File: ../../txts/tips/general_game.tip, line: 58
 #: ../../txts/tips/general_game.tip:58
@@ -339,6 +355,9 @@ msgid ""
 "Wiki\n"
 "and a detailed description of the tribe economies in our online encyclopedia."
 msgstr ""
+"Se precisares de documentação ou ajuda sobre Widelands ou Widelands Editor, "
+"visita a nossa página web. Podes encontrar ajuda online atualizada na Wiki e "
+"uma descrição detalhada das economias de cada tribo na enciclopédia online."
 
 #: ../../txts/README.lua:80
 msgid ""
@@ -353,6 +372,10 @@ msgid ""
 "economic infrastructure, explore the land around you and face rivaling\n"
 "tribes."
 msgstr ""
+"Neste jogo começas apenas com um pequeno pedaço de terra e alguns recursos. "
+"Usando estes recursos vais criar um império com milhares de habitantes. Para "
+"chegar a este objetivo vais ter de construir uma infraestrutura económica, "
+"explorar a terra à tua volta e lidar com tribos rivais."
 
 #: ../../txts/README.lua:18
 #: ../../txts/editor_readme:7
@@ -386,7 +409,7 @@ msgstr "Licença"
 
 #: ../../txts/license:4
 msgid "Licensing information for Widelands"
-msgstr ""
+msgstr "Informação de licença para Widelands"
 
 #: ../../txts/tips/editor.tip:10
 msgid ""
@@ -406,7 +429,7 @@ msgstr "M        Liga e desliga o mini-mapa"
 
 #: ../../txts/README.lua:65
 msgid "M: toggles minimap"
-msgstr ""
+msgstr "M: liga/desliga o minimapa"
 
 #
 # File: ../../txts/tips/general_game.tip, line: 34
@@ -435,7 +458,7 @@ msgstr "Músicos"
 
 #: ../../txts/README.lua:66
 msgid "N: toggles messages ('news')"
-msgstr ""
+msgstr "N: liga/desliga mensagens ('notícias')"
 
 #: ../../txts/developers:181
 msgid ""
@@ -461,7 +484,7 @@ msgstr "Distribuições não Unix"
 
 #: ../../txts/README.lua:70
 msgid "O: toggles objectives"
-msgstr ""
+msgstr "O: liga/desliga objetivos"
 
 #: ../../txts/license:18
 msgid ""
@@ -469,18 +492,24 @@ msgid ""
 "standalone binary package, or in the installation directory (like "
 "/usr/share/games/widelands)."
 msgstr ""
+"Em Linux o ficheiro COPYING está na raiz do código fonte, ou na raiz da "
+"package binária, ou no diretório de instalação (como "
+"/usr/share/games/widelands)."
 
 #: ../../txts/license:20
 msgid ""
 "On MacOS, you can find the file called COPYING in the archive you downloaded "
 "from the website."
 msgstr ""
+"Em MacOS o ficheiro COPYING está no arquivo que descarregaste do website."
 
 #: ../../txts/license:19
 msgid ""
 "On Windows, you can find the file called COPYING.txt in the installation "
 "folder and the Widelands Start menu entry provides a link to this file."
 msgstr ""
+"Em Windows o ficheiro COPYING.txt está no diretório de instalação e a "
+"entrada de Widelands no menu Iniciar  tem uma atalho para  este ficheiro."
 
 #: ../../txts/README.lua:85
 msgid "Online Help"
@@ -509,15 +538,15 @@ msgstr "P        Liga/desliga o Menu do Jogador"
 
 #: ../../txts/README.lua:62
 msgid "PAGEDOWN: decreases gamespeed"
-msgstr ""
+msgstr "PAGEDOWN: diminui a velocidade de jogo"
 
 #: ../../txts/README.lua:61
 msgid "PAGEUP: increases gamespeed"
-msgstr ""
+msgstr "PAGEUP: aumenta a velocidade de jogo"
 
 #: ../../txts/README.lua:63
 msgid "PAUSE: pauses the game"
-msgstr ""
+msgstr "PAUSE: pausa o jogo"
 
 #: ../../txts/developers:281
 msgid "Packagers"
@@ -607,7 +636,7 @@ msgstr "Russo"
 
 #: ../../txts/README.lua:68
 msgid "S: toggles statistics"
-msgstr ""
+msgstr "S: liga/desliga estatísticas"
 
 #: ../../txts/editor_readme:45
 msgid "SHIFT    (Hold) Selects first alternative tool while pressed"
