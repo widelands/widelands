@@ -554,7 +554,7 @@ void Map_Buildingdata_Data_Packet::read_warehouse
 							char const * const name = fr.CString();
 							if (name != worker.name())
 								throw game_data_error
-									("expected %1 but found \"%s\"",
+									("expected %s but found \"%s\"",
 									 worker.name().c_str(), name);
 						}
 						Ware_Index worker_index = tribe.worker_index(worker.name().c_str());
