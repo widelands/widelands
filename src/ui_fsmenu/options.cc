@@ -21,7 +21,6 @@
 
 #include <cstdio>
 #include <iostream>
-
 #include <libintl.h>
 
 #include "constants.h"
@@ -75,7 +74,9 @@ Fullscreen_Menu_Options::Fullscreen_Menu_Options
 	m_sb_remove_replays
 		(this,
 		 get_w() * 6767 / 10000, get_h() * 8631 / 10000, get_w() / 4, m_vbutw,
-		 opt.remove_replays, 0, 365, _("days"),
+		 /** TRANSLATORS: Options: Remove Replays older than: */
+		 /** TRANSLATORS: This will have a number added in front of it */
+		 opt.remove_replays, 0, 365, ngettext("day", "days", m_vbutw),
 		 g_gr->images().get("pics/but1.png"), true),
 
 // Title
@@ -195,8 +196,11 @@ Fullscreen_Menu_Options::Fullscreen_Menu_Options
 	m_apply.set_font(font_small());
 	m_cancel.set_font(font_small());
 
+	/** TRANSLATORS Options: Remove Replays older than: */
 	m_sb_autosave     .add_replacement(0, _("Off"));
+	/** TRANSLATORS Options: Remove Replays older than: */
 	m_sb_remove_replays.add_replacement(0, _("Never"));
+	/** TRANSLATORS Options: Remove Replays older than: */
 	m_sb_remove_replays.add_replacement(1, _("1 day"));
 
 	m_sb_maxfps       .set_font(ui_fn(), fs_small(), UI_FONT_CLR_FG);
