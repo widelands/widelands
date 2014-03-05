@@ -95,9 +95,9 @@ void Map_Extradata_Data_Packet::Read
 			}
 		} else
 			throw game_data_error
-				(_("unknown/unhandled version %u"), packet_version);
+				("unknown/unhandled version %u", packet_version);
 	} catch (const _wexception & e) {
-		throw game_data_error(_("extradata: %s"), e.what());
+		throw game_data_error("extradata: %s", e.what());
 	}
 }
 

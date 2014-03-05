@@ -85,7 +85,7 @@ int32_t WL_Map_Loader::preload_map(bool const scenario) {
 		throw warning
 			(_("Invalid World"),
 			 _
-			 	("The world \"%s\" set by the map, does not exist on your "
+			 	("The world \"%s\" set by the map does not exist on your "
 			 	 "filesystem."),
 			 m_map.get_world_name());
 

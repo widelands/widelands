@@ -83,9 +83,9 @@ void Cmd_Call_Economy_Balance::Read
 				m_timerid = 0;
 		} else
 			throw game_data_error
-				(_("unknown/unhandled version %u"), packet_version);
+				("unknown/unhandled version %u", packet_version);
 	} catch (const _wexception & e) {
-		throw wexception(_("call economy balance: %s"), e.what());
+		throw wexception("call economy balance: %s", e.what());
 	}
 }
 void Cmd_Call_Economy_Balance::Write

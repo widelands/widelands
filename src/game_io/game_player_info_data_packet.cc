@@ -51,7 +51,7 @@ void Game_Player_Info_Data_Packet::Read
 						packet_version < 7 ? fr.Signed32() : fr.Player_Number8();
 					if (plnum < 1 or MAX_PLAYERS < plnum)
 						throw game_data_error
-							(_("player number (%i) is out of range (1 .. %u)"),
+							("player number (%i) is out of range (1 .. %u)",
 							 plnum, MAX_PLAYERS);
 					Widelands::TeamNumber team = 0;
 					if (packet_version >= 9)
@@ -87,9 +87,9 @@ void Game_Player_Info_Data_Packet::Read
 								tribe.frontier_style_index(frontier_style_name) : 0;
 						} catch (Tribe_Descr::Nonexistent) {
 							log
-								("WARNING: player %u has frontier style index \"%s\", "
-								 "which does not exist in his tribe %s; will use "
-								 "default frontier style \"%s\" instead\n",
+								("WARNING: player %1$u has frontier style index \"%2$s\", "
+								 "which does not exist in his tribe %3$s; will use "
+								 "default frontier style \"%4$s\" instead\n",
 								 plnum, frontier_style_name, tribe.name().c_str(),
 								 tribe.frontier_style_name(0).c_str());
 						}
@@ -99,9 +99,9 @@ void Game_Player_Info_Data_Packet::Read
 								tribe.flag_style_index(flag_style_name) : 0;
 						} catch (Tribe_Descr::Nonexistent) {
 							log
-								("WARNING: player %u has flag style index \"%s\", "
-								 "which does not exist in his tribe %s; will use "
-								 "default flag style \"%s\" instead\n",
+								("WARNING: player %1$u has flag style index \"%2$s\", "
+								 "which does not exist in his tribe %3$s; will use "
+								 "default flag style \"%4$s\" instead\n",
 								 plnum, flag_style_name, tribe.name().c_str(),
 								 tribe.flag_style_name(0).c_str());
 						}
@@ -140,9 +140,9 @@ void Game_Player_Info_Data_Packet::Read
 				game.ReadStatistics(fr, 4);
 		} else
 			throw game_data_error
-				(_("unknown/unhandled version %u"), packet_version);
+				("unknown/unhandled version %u", packet_version);
 	} catch (const _wexception & e) {
-		throw game_data_error(_("player info: %s"), e.what());
+		throw game_data_error("player info: %s", e.what());
 	}
 }
 

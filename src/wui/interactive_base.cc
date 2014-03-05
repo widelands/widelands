@@ -312,8 +312,8 @@ static std::string speedString(uint32_t const speed)
 {
 	if (speed) {
 		char buffer[32];
-		snprintf
-			(buffer, sizeof(buffer), _("%u.%ux"), speed / 1000, speed / 100 % 10);
+		/** TRANSLATORS: Game speed, e.g. 2.5x */
+		snprintf(buffer, sizeof(buffer), _("%1$u.%2$ux"), speed / 1000, speed / 100 % 10);
 		return buffer;
 	}
 	return _("PAUSE");
@@ -336,7 +336,8 @@ void Interactive_Base::update_speedlabel()
 				char buffer[128];
 				snprintf
 					(buffer, sizeof(buffer),
-					 _("%s (%s)"),
+					 /** TRANSLATORS: actual_speed (desired_speed) */
+					 _("%1$s (%2$s)"),
 					 speedString(real).c_str(), speedString(desired).c_str());
 				m_label_speed.set_text(buffer);
 			}

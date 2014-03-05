@@ -89,9 +89,9 @@ void Map_Allowed_Building_Types_Data_Packet::Read
 			}
 		} else
 			throw game_data_error
-				(_("unknown/unhandled version %i"), packet_version);
+				("unknown/unhandled version %i", packet_version);
 	} catch (const _wexception & e) {
-		throw game_data_error(_("allowed buildings: %s"), e.what());
+		throw game_data_error("allowed buildings: %s", e.what());
 	}
 }
 

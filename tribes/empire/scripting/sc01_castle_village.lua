@@ -117,8 +117,8 @@ return {
       place_building_in_region(plr, "stonemasons_house", sf:region(11))
    end) then
       plr:send_message(_"Not enough space", _ 
-[[Some of your starting buildings didn't have enough room and 
-weren't build. You are at an disadvantage with this; consider restarting 
+[[Some of your starting buildings didn’t have enough room and 
+weren’t built. You are at a disadvantage with this; consider restarting 
 this map with a fair starting condition.]], {popup=true}
       )
    end

@@ -35,7 +35,7 @@ trunk=6
 spidercloth=4
 
 [programs]
-produce_bakingtray=_Produce bakingtray
+produce_bakingtray=_Produce bread paddle
 produce_bucket=_Produce bucket
 produce_fire_tongs=_Produce fire tongs
 produce_fishing_net=_Produce fishing net

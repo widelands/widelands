@@ -1,4 +1,4 @@
-help=_This spear is light enough to be thrown, but heavy enough to kill any animal in one blow. It is only used by the hunters. Produced in the metal works (but ceases to be produced by the building if it is enhanced to an axefactory and war mill).
+help=_This spear is light enough to be thrown, but heavy enough to kill any animal in one blow. It is only used by hunters. Produced in the metal works (but it ceases to be produced by the building if it is enhanced to an axfactory and war mill).
 
 [idle]
 pics=idle.png

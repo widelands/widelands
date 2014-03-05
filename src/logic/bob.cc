@@ -85,7 +85,7 @@ Bob::Descr::Descr
 		uint32_t const attrib = get_attribute_id(val->get_string());
 
 		if (attrib < Map_Object::HIGHEST_FIXED_ATTRIBUTE)
-			throw game_data_error(_("bad attribute \"%s\""), val->get_string());
+			throw game_data_error("bad attribute \"%s\"", val->get_string());
 
 		add_attribute(attrib);
 	}

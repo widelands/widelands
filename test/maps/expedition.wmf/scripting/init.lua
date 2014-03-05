@@ -175,7 +175,7 @@ function test_cancel_started_expedition_on_ship()
 
    -- Start a new expedition.
    start_expedition()
-   wait_for_message("Expedition ready")
+   wait_for_message("Expedition Ready")
    game.desired_speed = 10 * 1000
    sleep(10000)
 
@@ -206,7 +206,7 @@ function test_cancel_started_expedition_underway()
 
    -- Start a new expedition.
    start_expedition()
-   wait_for_message("Expedition ready")
+   wait_for_message("Expedition Ready")
    game.desired_speed = 10 * 1000
    sleep(10000)
 
@@ -236,13 +236,13 @@ function test_cancel_when_port_space_was_reached()
 
    -- Send expedition to port space.
    start_expedition()
-   wait_for_message("Expedition ready")
+   wait_for_message("Expedition Ready")
    assert_equal(1, p1:get_workers("builder"))
    sleep(500)
 
    click_on_ship(first_ship)
    assert_true(click_button("expccw"))
-   wait_for_message("Port space found")
+   wait_for_message("Port Space Found")
    sleep(500)
    assert_equal(1, p1:get_workers("builder"))
 
@@ -273,10 +273,10 @@ function test_transporting_works()
 
 
    start_expedition()
-   wait_for_message("Expedition ready")
+   wait_for_message("Expedition Ready")
    click_on_ship(first_ship)
    assert_true(click_button("expccw"))
-   wait_for_message("Port space found")
+   wait_for_message("Port Space Found")
    assert_true(click_button("buildport"))
    sleep(500)
    assert_equal(1, p1:get_workers("builder"))

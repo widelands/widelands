@@ -24,25 +24,25 @@
 [global]
 version = 6
 # Barbarians Introduction
-campname0=_"Barbarians - The second Empire"
+campname0=_"Barbarians – The Second Empire"
 campsect0=barbariantut
 campdiff0=1
 campdiffdescr0=_"Easy. Introduces the Barbarians"
-campdesc0=_"When Chat’Karuth died, he was an old man, father to three strong and ambitious sons and warlord to an army that could match any enemy willing to rise against the ancient forests. Though at the end of his glorious reign, Chat’Karuth left his eldest son, Thron, to succeed him as the tribe's warlord – a decision that left his two brothers unsatisfied. The old warlord knew that. As his father instructed him, Thron left the capital of Al’thunran, the home of the Throne Among the Trees and withdrew his forces to the high hills where he buried the corpse of his father. There he swore to the gods and his father's spirit that he’d return to re-established order. While his brothers raged in blind war against Thron and the few forces he left to secure the borders of Al’thunran, the young warlord seeks to reunite his ambitious brothers and force the tribes to march once again under a common banner."
+campdesc0=_"When Chat’Karuth died, he was an old man, father to three strong and ambitious sons, and warlord to an army that could match any enemy willing to rise against the ancient forests. Though at the end of his glorious reign, Chat’Karuth chose his eldest son, Thron, to succeed him as the tribe’s warlord – a decision that left his two brothers unsatisfied. The old warlord knew that. As his father instructed him, Thron left the capital of Al’thunran, the home of the Throne Among the Trees, and withdrew his forces to the high hills where he buried the corpse of his father. There he swore to the gods and his father’s spirit that he’d return to re-established order. While his brothers have raged blind war against Thron and the few forces he left to secure the borders of Al’thunran, the young warlord seeks to reunite his ambitious brothers and force the tribes to march once again under a common banner."
 campvisi0=1
 # Empire Introduction
-campname1=_"Empire - The Months of Exile"
+campname1=_"Empire – The Months of Exile"
 campsect1=empiretut
 campdiff1=1
 campdiffdescr1=_"Easy. Introduces the Empire"
-campdesc1=_"Six months ago, Lutius - a young general of the Empire - was sent with 150 soldiers to the frontier beyond the northern forests where Barbarian tribes were crossing onto land held by the Empire. His task was to defend the Empire's land. At first, everything was calm. He even talked to a few barbarian children and thought about a peaceful life - side by side with this archaic folk. He began to feel safer and his army began to drop their attention off the potential enemy. That was their undoing. One night in March his unprepared army was attacked by 100 barbarian footmen and was completely scattered. Only with his bare life he and a handful of his soldiers survived."
+campdesc1=_"Six months ago, Lutius – a young general of the Empire – was sent with 150 soldiers to the frontier beyond the northern forests where Barbarian tribes were crossing onto land held by the Empire. His task was to defend the Empire’s land. At first, everything was calm. He even talked to a few barbarian children and thought about a peaceful life – side by side with this archaic folk. He began to feel safer and his army began to drop their attention off the potential enemy. That was their undoing. One night in March his unprepared army was attacked by 100 barbarian footmen and was completely scattered. Only with his bare life he and a handful of his soldiers survived."
 campvisi1=0
 # Atlantean Introduction
-campname2=_"Atlanteans - The Run for the Fire"
+campname2=_"Atlanteans – The Run for the Fire"
 campsect2=atlanteans
 campdiff2=2
 campdiffdescr2=_"Challenging. Introduces the Atlanteans"
-campdesc2=_"When the God lost faith in the Atlanteans and drowned their island, one woman's struggle for justice and a second chance for her people would become the stuff of legends. Leading the remaining Atlanteans into a new future in a new part of the World, Jundlina became the most powerful human of her time, but at a high cost: her humanity and soul."
+campdesc2=_"When their God lost faith in the Atlanteans and drowned their island, one woman’s struggle for justice and a second chance for her people would become the stuff of legends. Leading the remaining Atlanteans into a new future in a new part of the World, Jundlina became the most powerful human of her time, but at a high cost: her humanity and soul."
 campvisi2=0
 cnewvisi2=empiretut01
 
@@ -61,29 +61,29 @@ cnewvisi2=empiretut01
 #####
 
 [barbariantut00]
-name=_"01 - Eyes in the Dark"
+name=_"01 – Eyes in the Dark"
 visible=1
 path="campaigns/t01.wmf"
 
 [barbariantut01]
-name=_"02 - A Place to call Home"
+name=_"02 – A Place to Call Home"
 visible=0
 path="campaigns/t02.wmf"
 
 [barbariantut02]
-name=_"03 - This Land is our Land"
+name=_"03 – This Land is Our Land"
 newvisi="campsect1"
 visible=0
 path="campaigns/t03.wmf"
 
 
 [empiretut00]
-name=_"01 - The Strands of Malac' Mor"
+name=_"01 – The Strands of Malac’ Mor"
 visible=1
 path="campaigns/emp01.wmf"
 
 [empiretut01]
-name=_"02 - An Outpost for Exile"
+name=_"02 – An Outpost for Exile"
 visible=0
 path="campaigns/emp02.wmf"
 
@@ -95,7 +95,7 @@ path="campaigns/dummy.wmf"
 
 
 [atlanteans00]
-name=_"01 - From Nemesis to Genesis"
+name=_"01 – From Nemesis to Genesis"
 visible=1
 path="campaigns/atl01.wmf"
 

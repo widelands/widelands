@@ -20,22 +20,21 @@ return {
 	--Dependencies
 		rt(h2(_"Dependencies")) ..
 		rt(h3(_"Incoming:")) ..
-		dependencies({"tribes/barbarians/farm/menu.png","tribes/barbarians/wheat/menu.png","tribes/barbarians/cattlefarm/menu.png"},p(_"Wheat from a Farm")) ..
-		dependencies({"tribes/barbarians/well/menu.png","tribes/barbarians/water/menu.png","tribes/barbarians/cattlefarm/menu.png"},p(_"Water from a Well")) ..
+		dependencies({"tribes/barbarians/farm/menu.png","tribes/barbarians/wheat/menu.png","tribes/barbarians/cattlefarm/menu.png"},p(_"Wheat from the Farm")) ..
+		dependencies({"tribes/barbarians/well/menu.png","tribes/barbarians/water/menu.png","tribes/barbarians/cattlefarm/menu.png"},p(_"Water from the Well")) ..
 		rt(h3(_"Outgoing:")) ..
 		dependencies({"tribes/barbarians/cattlefarm/menu.png","tribes/barbarians/ox/menu.png"},p(_"Ox")) ..
 	--Building Section
 		rt(h2(_"Building")) ..
 		text_line(_"Space required:",_"Big plot","pics/big.png") ..
 		text_line(_"Upgraded from:", "n/a") ..
-		rt(h3(_"Build Cost:")) ..
-		image_line("tribes/barbarians/blackwood/menu.png", 1, p("1 " .. _"Blackwood")) ..
-		image_line("tribes/barbarians/raw_stone/menu.png", 2, p("2 " .. _"Raw Stone")) ..
-		image_line("tribes/barbarians/trunk/menu.png", 2, p("2 " .. _"Trunk")) ..
+		rt(h3(_"Build cost:")) ..
+		help_building_line("barbarians", "blackwood", ngettext("%i Blackwood", "%i Blackwood", 1), 1) ..
+		help_building_line("barbarians", "raw_stone", ngettext("%i Raw Stone", "%i Raw Stones", 2), 2) ..
+		help_building_line("barbarians", "trunk", ngettext("%i Log", "%i Logs", 2), 2) ..
 		rt(h3(_"Dismantle yields:")) ..
-		image_line("tribes/barbarians/blackwood/menu.png", 1, p("1 " .. _"Blackwood")) ..
-		image_line("tribes/barbarians/raw_stone/menu.png", 1, p("1 " .. _"Raw Stone")) ..
-		image_line("tribes/barbarians/trunk/menu.png", 1, p("1 " .. _"Trunk")) ..
+		help_building_line("barbarians", "blackwood", ngettext("%i Blackwood", "%i Blackwood", 1), 1) ..
+		help_building_line("barbarians", "raw_stone", ngettext("%i Raw Stone", "%i Raw Stones", 1), 1) ..
 		text_line(_"Upgradeable to:","n/a") ..
 	--Workers Section
 		rt(h2(_"Workers")) ..
@@ -45,5 +44,5 @@ return {
 		text_line(_"Experience levels:","n/a") ..
 	--Production Section
 		rt(h2(_"Production")) ..
-		text_line(_"Performance:", _"If all needed wares are delivered in time, this building can produce %s in %s on average.":format(_"Ox","30s"))
+		text_line(_"Performance:", _"If all needed wares are delivered in time, this building can produce %1$s in %2$s on average.":bformat(_"an Ox","30s"))
 }

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2014-02-22 15:38+0000\n"
+"POT-Creation-Date: 2014-03-05 18:31+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -14,34 +14,19 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: ../../worlds/desert/terrainconf:35
+#: ../../worlds/desert/conf:2
 msgid ""
-"Beach"
+"The Widelands Development Team"
 msgstr ""
 
-#: ../../worlds/desert/conf:71
+#: ../../worlds/desert/conf:3
 msgid ""
-"Beech"
+"Desert"
 msgstr ""
 
-#: ../../worlds/desert/conf:72
+#: ../../worlds/desert/conf:4
 msgid ""
-"Beech medium"
-msgstr ""
-
-#: ../../worlds/desert/conf:73
-msgid ""
-"Beech small"
-msgstr ""
-
-#: ../../worlds/desert/conf:74
-msgid ""
-"Beech tiny"
-msgstr ""
-
-#: ../../worlds/desert/conf:85
-msgid ""
-"Bunny"
+"This is the wide and sandy country of the bedouins"
 msgstr ""
 
 #: ../../worlds/desert/conf:7
@@ -59,77 +44,12 @@ msgid ""
 "Cactus"
 msgstr ""
 
-#: ../../worlds/desert/resconf:4
-msgid ""
-"Coal"
-msgstr ""
-
 #: ../../worlds/desert/conf:14
 #: ../../worlds/desert/conf:15
 #: ../../worlds/desert/conf:16
 #: ../../worlds/desert/conf:17
 msgid ""
 "Dead Tree"
-msgstr ""
-
-#: ../../worlds/desert/conf:86
-msgid ""
-"Deer"
-msgstr ""
-
-#: ../../worlds/desert/conf:3
-msgid ""
-"Desert"
-msgstr ""
-
-#: ../../worlds/desert/terrainconf:8
-msgid ""
-"Desert1"
-msgstr ""
-
-#: ../../worlds/desert/terrainconf:13
-msgid ""
-"Desert2"
-msgstr ""
-
-#: ../../worlds/desert/terrainconf:18
-msgid ""
-"Desert3"
-msgstr ""
-
-#: ../../worlds/desert/terrainconf:23
-msgid ""
-"Desert4"
-msgstr ""
-
-#: ../../worlds/desert/terrainconf:29
-msgid ""
-"Dry soil"
-msgstr ""
-
-#: ../../worlds/desert/conf:87
-msgid ""
-"Duck"
-msgstr ""
-
-#: ../../worlds/desert/resconf:41
-msgid ""
-"Fish"
-msgstr ""
-
-#: ../../worlds/desert/conf:88
-msgid ""
-"Fox"
-msgstr ""
-
-#: ../../worlds/desert/resconf:12
-msgid ""
-"Gold"
-msgstr ""
-
-#: ../../worlds/desert/resconf:28
-msgid ""
-"Granite"
 msgstr ""
 
 #: ../../worlds/desert/conf:18
@@ -139,75 +59,62 @@ msgid ""
 "Grass"
 msgstr ""
 
-#: ../../worlds/desert/terrainconf:57
-msgid ""
-"High mountain meadow"
-msgstr ""
-
-#: ../../worlds/desert/resconf:20
-msgid ""
-"Iron"
-msgstr ""
-
-#: ../../worlds/desert/conf:75
-msgid ""
-"Larch"
-msgstr ""
-
-#: ../../worlds/desert/conf:76
-msgid ""
-"Larch medium"
-msgstr ""
-
-#: ../../worlds/desert/conf:77
-msgid ""
-"Larch small"
-msgstr ""
-
-#: ../../worlds/desert/conf:78
-msgid ""
-"Larch tiny"
-msgstr ""
-
-#: ../../worlds/desert/terrainconf:96
-msgid ""
-"Lava"
-msgstr ""
-
-#: ../../worlds/desert/terrainconf:46
-msgid ""
-"Meadow"
-msgstr ""
-
-#: ../../worlds/desert/terrainconf:52
-msgid ""
-"Mountain meadow"
-msgstr ""
-
-#: ../../worlds/desert/terrainconf:62
-msgid ""
-"Mountain1"
-msgstr ""
-
-#: ../../worlds/desert/terrainconf:68
-msgid ""
-"Mountain2"
-msgstr ""
-
-#: ../../worlds/desert/terrainconf:74
-msgid ""
-"Mountain3"
-msgstr ""
-
-#: ../../worlds/desert/terrainconf:80
-msgid ""
-"Mountain4"
-msgstr ""
-
 #: ../../worlds/desert/conf:21
 #: ../../worlds/desert/conf:22
 msgid ""
 "Mushroom"
+msgstr ""
+
+#: ../../worlds/desert/conf:23
+#: ../../worlds/desert/conf:24
+#: ../../worlds/desert/conf:25
+#: ../../worlds/desert/conf:26
+#: ../../worlds/desert/conf:27
+#: ../../worlds/desert/conf:28
+msgid ""
+"Pebble"
+msgstr ""
+
+#: ../../worlds/desert/conf:29
+#: ../../worlds/desert/conf:30
+#: ../../worlds/desert/conf:31
+#: ../../worlds/desert/conf:32
+#: ../../worlds/desert/conf:33
+msgid ""
+"Ruins"
+msgstr ""
+
+#: ../../worlds/desert/conf:34
+#: ../../worlds/desert/conf:35
+#: ../../worlds/desert/conf:36
+msgid ""
+"Skeleton"
+msgstr ""
+
+#: ../../worlds/desert/conf:37
+msgid ""
+"Shell"
+msgstr ""
+
+#: ../../worlds/desert/conf:38
+#: ../../worlds/desert/conf:39
+#: ../../worlds/desert/conf:40
+#: ../../worlds/desert/conf:41
+#: ../../worlds/desert/conf:42
+#: ../../worlds/desert/conf:43
+#: ../../worlds/desert/conf:44
+msgid ""
+"Standing Stones"
+msgstr ""
+
+#: ../../worlds/desert/conf:45
+#: ../../worlds/desert/conf:46
+#: ../../worlds/desert/conf:47
+#: ../../worlds/desert/conf:48
+#: ../../worlds/desert/conf:49
+#: ../../worlds/desert/conf:50
+msgid ""
+"Stones"
 msgstr ""
 
 #: ../../worlds/desert/conf:51
@@ -225,7 +132,7 @@ msgstr ""
 #: ../../worlds/desert/conf:64
 #: ../../worlds/desert/conf:68
 msgid ""
-"Palm medium"
+"Palm (medium)"
 msgstr ""
 
 #: ../../worlds/desert/conf:53
@@ -234,7 +141,7 @@ msgstr ""
 #: ../../worlds/desert/conf:65
 #: ../../worlds/desert/conf:69
 msgid ""
-"Palm small"
+"Palm (small)"
 msgstr ""
 
 #: ../../worlds/desert/conf:54
@@ -243,17 +150,47 @@ msgstr ""
 #: ../../worlds/desert/conf:66
 #: ../../worlds/desert/conf:70
 msgid ""
-"Palm tiny"
+"Palm (tiny)"
 msgstr ""
 
-#: ../../worlds/desert/conf:23
-#: ../../worlds/desert/conf:24
-#: ../../worlds/desert/conf:25
-#: ../../worlds/desert/conf:26
-#: ../../worlds/desert/conf:27
-#: ../../worlds/desert/conf:28
+#: ../../worlds/desert/conf:71
 msgid ""
-"Pebble"
+"Beech"
+msgstr ""
+
+#: ../../worlds/desert/conf:72
+msgid ""
+"Beech (medium)"
+msgstr ""
+
+#: ../../worlds/desert/conf:73
+msgid ""
+"Beech (small)"
+msgstr ""
+
+#: ../../worlds/desert/conf:74
+msgid ""
+"Beech (tiny)"
+msgstr ""
+
+#: ../../worlds/desert/conf:75
+msgid ""
+"Larch"
+msgstr ""
+
+#: ../../worlds/desert/conf:76
+msgid ""
+"Larch (medium)"
+msgstr ""
+
+#: ../../worlds/desert/conf:77
+msgid ""
+"Larch (small)"
+msgstr ""
+
+#: ../../worlds/desert/conf:78
+msgid ""
+"Larch (tiny)"
 msgstr ""
 
 #: ../../worlds/desert/conf:79
@@ -263,17 +200,37 @@ msgstr ""
 
 #: ../../worlds/desert/conf:80
 msgid ""
-"Rowan medium"
+"Rowan (medium)"
 msgstr ""
 
 #: ../../worlds/desert/conf:81
 msgid ""
-"Rowan small"
+"Rowan (small)"
 msgstr ""
 
 #: ../../worlds/desert/conf:82
 msgid ""
-"Rowan tiny"
+"Rowan (tiny)"
+msgstr ""
+
+#: ../../worlds/desert/conf:85
+msgid ""
+"Bunny"
+msgstr ""
+
+#: ../../worlds/desert/conf:86
+msgid ""
+"Deer"
+msgstr ""
+
+#: ../../worlds/desert/conf:87
+msgid ""
+"Duck"
+msgstr ""
+
+#: ../../worlds/desert/conf:88
+msgid ""
+"Fox"
 msgstr ""
 
 #: ../../worlds/desert/conf:89
@@ -281,52 +238,24 @@ msgid ""
 "Sheep"
 msgstr ""
 
-#: ../../worlds/desert/conf:37
+#: ../../worlds/desert/resconf:4
 msgid ""
-"Shell"
+"Coal"
 msgstr ""
 
-#: ../../worlds/desert/conf:34
-#: ../../worlds/desert/conf:35
-#: ../../worlds/desert/conf:36
+#: ../../worlds/desert/resconf:12
 msgid ""
-"Skeleton"
+"Gold"
 msgstr ""
 
-#: ../../worlds/desert/conf:38
-#: ../../worlds/desert/conf:39
-#: ../../worlds/desert/conf:40
-#: ../../worlds/desert/conf:41
-#: ../../worlds/desert/conf:42
-#: ../../worlds/desert/conf:43
-#: ../../worlds/desert/conf:44
+#: ../../worlds/desert/resconf:20
 msgid ""
-"Standing Stones"
+"Iron"
 msgstr ""
 
-#: ../../worlds/desert/terrainconf:40
+#: ../../worlds/desert/resconf:28
 msgid ""
-"Steppe"
-msgstr ""
-
-#: ../../worlds/desert/conf:45
-#: ../../worlds/desert/conf:46
-#: ../../worlds/desert/conf:47
-#: ../../worlds/desert/conf:48
-#: ../../worlds/desert/conf:49
-#: ../../worlds/desert/conf:50
-msgid ""
-"Stones"
-msgstr ""
-
-#: ../../worlds/desert/conf:2
-msgid ""
-"The Widelands Development Team"
-msgstr ""
-
-#: ../../worlds/desert/conf:4
-msgid ""
-"This is the wide and sandy country of the bedouins"
+"Granite"
 msgstr ""
 
 #: ../../worlds/desert/resconf:36
@@ -335,12 +264,83 @@ msgid ""
 "Water"
 msgstr ""
 
-#: ../../worlds/desert/conf:29
-#: ../../worlds/desert/conf:30
-#: ../../worlds/desert/conf:31
-#: ../../worlds/desert/conf:32
-#: ../../worlds/desert/conf:33
+#: ../../worlds/desert/resconf:41
 msgid ""
-"ruins"
+"Fish"
+msgstr ""
+
+#: ../../worlds/desert/terrainconf:8
+msgid ""
+"Desert 1"
+msgstr ""
+
+#: ../../worlds/desert/terrainconf:13
+msgid ""
+"Desert 2"
+msgstr ""
+
+#: ../../worlds/desert/terrainconf:18
+msgid ""
+"Desert 3"
+msgstr ""
+
+#: ../../worlds/desert/terrainconf:23
+msgid ""
+"Desert 4"
+msgstr ""
+
+#: ../../worlds/desert/terrainconf:29
+msgid ""
+"Dry Soil"
+msgstr ""
+
+#: ../../worlds/desert/terrainconf:35
+msgid ""
+"Beach"
+msgstr ""
+
+#: ../../worlds/desert/terrainconf:40
+msgid ""
+"Steppe"
+msgstr ""
+
+#: ../../worlds/desert/terrainconf:46
+msgid ""
+"Meadow"
+msgstr ""
+
+#: ../../worlds/desert/terrainconf:52
+msgid ""
+"Mountain Meadow"
+msgstr ""
+
+#: ../../worlds/desert/terrainconf:57
+msgid ""
+"High Mountain Meadow"
+msgstr ""
+
+#: ../../worlds/desert/terrainconf:62
+msgid ""
+"Mountain 1"
+msgstr ""
+
+#: ../../worlds/desert/terrainconf:68
+msgid ""
+"Mountain 2"
+msgstr ""
+
+#: ../../worlds/desert/terrainconf:74
+msgid ""
+"Mountain 3"
+msgstr ""
+
+#: ../../worlds/desert/terrainconf:80
+msgid ""
+"Mountain 4"
+msgstr ""
+
+#: ../../worlds/desert/terrainconf:96
+msgid ""
+"Lava"
 msgstr ""
 

@@ -24,6 +24,7 @@ player3 = egbase.players[3]
 include "egbase"
 
 include "math_random"
+include "string_bformat"
 include "map"
 include "cplayer"
 include "cfield"

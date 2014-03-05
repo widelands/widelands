@@ -119,13 +119,13 @@ m_toggle_minimap
 	 ("menu_toggle_minimap", "minimap", _("Minimap"))),
 m_toggle_buildhelp
 	(INIT_BTN_this
-	 ("menu_toggle_buildhelp", "buildhelp", _("Buildhelp"))),
+	 ("menu_toggle_buildhelp", "buildhelp", _("Show Building Spaces (on/off)"))),
 m_toggle_message_menu
 	(INIT_BTN
 	 ("menu_toggle_oldmessage_menu", "messages", _("Messages"))),
 m_toggle_help
 	(INIT_BTN
-	 ("menu_help", "help", _("Ware help")))
+	 ("menu_help", "help", _("Tribal Ware Encyclopedia")))
 
 {
 	m_toggle_chat.sigclicked.connect

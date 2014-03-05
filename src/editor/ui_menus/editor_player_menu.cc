@@ -19,6 +19,8 @@
 
 #include "editor/ui_menus/editor_player_menu.h"
 
+#include <boost/format.hpp>
+
 #include "editor/editorinteractive.h"
 #include "editor/tools/editor_set_starting_pos_tool.h"
 #include "graphic/graphic.h"
@@ -200,10 +202,12 @@ void Editor_Player_Menu::clicked_add_player() {
 	map.set_nrplayers(nr_players);
 	{ //  register new default name for this players
 		assert(nr_players <= 99); //  2 decimal digits
-		std::string name = _("Player ");
+		std::string number = "";
 		if (char const nr_players_10 = nr_players / 10)
-			name += '0' + nr_players_10;
-		name += '0' + nr_players % 10;
+			number += '0' + nr_players_10;
+		number += '0' + nr_players % 10;
+		/** TRANSLATORS: Default player name, e.g. Player 1 */
+		std::string name = (boost::format(_("Player %s")) % number).str();
 		map.set_scenario_player_name(nr_players, name);
 	}
 	map.set_scenario_player_tribe(nr_players, m_tribes[0]);
@@ -236,7 +240,7 @@ void Editor_Player_Menu::clicked_remove_last_player() {
 	m_remove_last_player.set_enabled(1 < nr_players);
 
 	update();
-	// SirVer TODO: Take steps when the player is referenced in some place. Not
+	// SirVer TODO: Take steps when the player is referenced someplace. Not
 	// SirVer TODO: currently possible in the editor though.
 }
 
@@ -290,7 +294,7 @@ called when a button is clicked
 //                 //         (&menu,
 //                 //          _("Error!"),
 //                 //          _
-//                 //                 ("Can not remove player. It is referenced in some place. Remove all"
+//                 //                 ("Cannot remove player. It is referenced in some place. Remove all"
 //                 //                  " buildings and bobs that depend on this player and try again."),
 //                 //          UI::WLMessageBox::OK);
 //                 // mmb.run();
@@ -321,7 +325,7 @@ void Editor_Player_Menu::player_tribe_clicked(uint8_t n) {
 			(&menu,
 			 _("Error!"),
 			 _
-			 	("Can not remove player. It is referenced in some place. Remove all"
+			 	("Cannot remove player. It is referenced someplace. Remove all"
 			 	 " buildings and bobs that depend on this player and try again."),
 			 UI::WLMessageBox::OK);
 		mmb.run();

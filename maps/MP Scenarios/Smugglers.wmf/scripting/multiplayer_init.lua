@@ -116,7 +116,7 @@ end
 function setup_statistics_hook()
 	if hooks == nil then hooks = {} end
 	hooks.custom_statistic = {
-      name = _ "Wares smuggled",
+      name = _ "Wares Smuggled",
       pic = "map:genstats_wares_smuggled.png",
       calculator = function(p)
          return points[p.team]
@@ -139,8 +139,7 @@ function initialize()
       end
    end
 
-
-   send_to_all(welcome_msg:format(points_to_win))
+   send_to_all(welcome_msg:format((ngettext("%i point", "%i points", points_to_win)):format(points_to_win)))
 
 
    for idx,descr in ipairs(route_descrs) do

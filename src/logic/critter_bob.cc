@@ -384,9 +384,9 @@ Map_Object::Loader * Critter_Bob::load
 			loader->init(egbase, mol, descr->create_object());
 			loader->load(fr);
 		} else
-			throw game_data_error(_("unknown/unhandled version %u"), version);
+			throw game_data_error("unknown/unhandled version %u", version);
 	} catch (const std::exception & e) {
-		throw wexception(_("loading critter: %s"), e.what());
+		throw wexception("loading critter: %s", e.what());
 	}
 
 	return loader.release();

@@ -21,7 +21,6 @@
 
 #include <cstdio>
 #include <iostream>
-
 #include <libintl.h>
 
 #include "constants.h"
@@ -75,7 +74,9 @@ Fullscreen_Menu_Options::Fullscreen_Menu_Options
 	m_sb_remove_replays
 		(this,
 		 get_w() * 6767 / 10000, get_h() * 8631 / 10000, get_w() / 4, m_vbutw,
-		 opt.remove_replays, 0, 365, _("days"),
+		 /** TRANSLATORS: Options: Remove Replays older than: */
+		 /** TRANSLATORS: This will have a number added in front of it */
+		 opt.remove_replays, 0, 365, ngettext("day", "days", m_vbutw),
 		 g_gr->images().get("pics/but1.png"), true),
 
 // Title
@@ -151,7 +152,7 @@ Fullscreen_Menu_Options::Fullscreen_Menu_Options
 	m_label_auto_roadbuild_mode
 		(this,
 		 get_w() * 1313 / 10000, get_h() * 6467 / 10000,
-		 _("Start roadbuilding after placing flag"), UI::Align_VCenter),
+		 _("Start building road after placing a flag"), UI::Align_VCenter),
 
 	m_show_workarea_preview
 		(this, Point(get_w() * 19 / 200, get_h() * 6767 / 10000)),
@@ -195,8 +196,11 @@ Fullscreen_Menu_Options::Fullscreen_Menu_Options
 	m_apply.set_font(font_small());
 	m_cancel.set_font(font_small());
 
+	/** TRANSLATORS Options: Remove Replays older than: */
 	m_sb_autosave     .add_replacement(0, _("Off"));
+	/** TRANSLATORS Options: Remove Replays older than: */
 	m_sb_remove_replays.add_replacement(0, _("Never"));
+	/** TRANSLATORS Options: Remove Replays older than: */
 	m_sb_remove_replays.add_replacement(1, _("1 day"));
 
 	m_sb_maxfps       .set_font(ui_fn(), fs_small(), UI_FONT_CLR_FG);
@@ -260,7 +264,8 @@ Fullscreen_Menu_Options::Fullscreen_Menu_Options
 	bool did_select_a_res = false;
 	for (uint32_t i = 0; i < m_resolutions.size(); ++i) {
 		char buf[32];
-		sprintf(buf, "%ix%i", m_resolutions[i].xres, m_resolutions[i].yres);
+		/** TRANSLATORS: Screen resolution, e.g. 800 x 600*/
+		sprintf(buf, _("%1$i x %2$i"), m_resolutions[i].xres, m_resolutions[i].yres);
 		const bool selected =
 			m_resolutions[i].xres  == opt.xres and
 			m_resolutions[i].yres  == opt.yres;
@@ -269,7 +274,8 @@ Fullscreen_Menu_Options::Fullscreen_Menu_Options
 	}
 	if (not did_select_a_res) {
 		char buf[32];
-		sprintf(buf, "%ix%i", opt.xres, opt.yres);
+		/** TRANSLATORS: Screen resolution, e.g. 800 x 600*/
+		sprintf(buf, "%1$i x %2$i", opt.xres, opt.yres);
 		m_reslist.add(buf, nullptr, nullptr, true);
 		uint32_t entry = m_resolutions.size();
 		m_resolutions.resize(entry + 1);
@@ -466,8 +472,7 @@ Fullscreen_Menu_Advanced_Options::Fullscreen_Menu_Advanced_Options
 	m_label_transparent_chat
 		(this,
 		 get_w() * 1313 / 10000, get_h() * 8330 / 10000,
-		 _("Show in game chat with transparent background"), UI::Align_VCenter),
-
+		 _("Show in-game chat with transparent background"), UI::Align_VCenter),
 	os(opt)
 {
 	m_cancel.sigclicked.connect

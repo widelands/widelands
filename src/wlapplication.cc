@@ -19,6 +19,7 @@
 
 #include "wlapplication.h"
 
+#include <boost/format.hpp>
 #include <cerrno>
 #ifndef _WIN32
 #include <csignal>
@@ -1073,7 +1074,7 @@ bool WLApplication::init_hardware() {
 
 void terminate (int) {
 	 log
-		  (_("Waited 5 seconds to close audio. Problems here so killing Widelands."
+		  (_("Waited 5 seconds to close audio. There are some problems here, so killing Widelands."
 			  " Update your sound driver and/or SDL to fix this problem\n"));
 #ifndef _WIN32
 	raise(SIGKILL);
@@ -1337,109 +1338,86 @@ void WLApplication::show_usage()
 
 	wout << _("This is Widelands-") << build_id() << '(' << build_type();
 	wout << ")\n\n";
-	wout << _("Usage: widelands <option0>=<value0> ... <optionN>=<valueN>\n\n");
-	wout << _("Options:\n\n");
+	wout << _("Usage: widelands <option0>=<value0> ... <optionN>=<valueN>") << "\n\n";
+	wout << _("Options:") << "\n\n";
 	wout
-		<<
-		_
-			(" --<config-entry-name>=value overwrites any config file setting\n\n"
-			 " --logfile=FILENAME   Log output to file FILENAME instead of \n"
-			 "                      terminal output\n"
-			 " --datadir=DIRNAME    Use specified direction for the widelands\n"
-			 "                      data files\n"
-			 " --homedir=DIRNAME    Use specified directory for widelands config\n"
-			 "                      files, savegames and replays\n")
+		<<	_(" --<config-entry-name>=value overwrites any config file setting") << "\n\n"
+		<<	_(" --logfile=FILENAME   Log output to file FILENAME instead of \n"
+			  "                      terminal output") << "\n"
+		<<	_(" --datadir=DIRNAME    Use specified directory for the widelands\n"
+			  "                      data files") << "\n"
+		<<	_(" --homedir=DIRNAME    Use specified directory for widelands config\n"
+			  "                      files, savegames and replays") << "\n"
 #ifdef __linux__
-		<< _("                      Default is ~/.widelands\n")
+		<<	_("                      Default is ~/.widelands") << "\n"
 #endif
-		<< _
-			(" --record=FILENAME    Record all events to the given filename for\n"
-			 "                      later playback\n"
-			 " --playback=FILENAME  Playback given filename (see --record)\n\n"
-			 " --coredump=[yes|no]  Generates a core dump on segfaults instead\n"
-			 "                      of using the SDL\n"
-			 " --language=[de_DE|sv_SE|...]\n"
-			 "                      The locale to use.\n"
-			 " --localedir=DIRNAME  Use DIRNAME as location for the locale\n"
-			 " --remove_syncstreams=[true|false]\n"
-			 "                      Remove syncstream files on startup\n"
-			 " --remove_replays=[...]\n"
-			 "                      Remove replays after this amount of days.\n"
-			 "                      If this is 0 replays are not deleted.\n")
-		<<
-		_
-			("Sound options:\n"
-			 " --nosound            Starts the game with sound disabled.\n"
-			 " --disable_fx         Disable sound effects.\n"
-			 " --disable_music      Disable music.\n"
-			 "\n"
-			 " --nozip              Do not save files as binary zip archives.\n"
-			 "\n"
-			 " --editor             Directly starts the Widelands editor.\n"
-			 "                      You can add a =FILENAME to directly load\n"
-			 "                      the map FILENAME in editor.\n"
-			 " --scenario=FILENAME  Directly starts the map FILENAME as scenario\n"
-			 "                      map.\n"
-			 " --loadgame=FILENAME  Directly loads the savegame FILENAME.\n")
-		<< _
-			(" --script=FILENAME    Run the given Lua script after initialization.\n"
-			 "                      Only valid with --scenario, --loadgame, or --editor.\n")
-		<< _(" --dedicated=FILENAME Starts a dedicated server with FILENAME as map\n")
-		<<
-		_
-			(" --auto_roadbuild_mode=[yes|no]\n"
-			 "                      Whether to enter roadbuilding mode\n"
-			 "                      automatically after placing a flag that is\n"
-			 "                      not connected to a road.\n"
-			 "\n"
-			 "Graphic options:\n"
-			 " --fullscreen=[yes|no]\n"
-			 "                      Whether to use the whole display for the\n"
-			 "                      game screen.\n"
-			 " --xres=[...]         Width of the window in pixel.\n"
-			 " --yres=[...]         Height of the window in pixel.\n")
-		<<
-		_
-			 (" --opengl=[0|1]\n"
-			 "                      Enables OpenGL rendering\n")
-		<<
-		_
-			("\n"
-			 "Options for the internal window manager:\n"
-			 " --border_snap_distance=[0 ...]\n"
-			 "                      Move a window to the edge of the screen\n"
-			 "                      when the edge of the window comes within\n"
-			 "                      this distance from the edge of the screen.\n"
-			 " --dock_windows_to_edges=[yes|no]\n"
-			 "                      Eliminate a window's border towards the\n"
-			 "                      edge of the screen when the edge of the\n"
-			 "                      window is next to the edge of the screen.\n"
-			 " --panel_snap_distance=[0 ...]\n"
-			 "                      Move a window to the edge of the panel when\n"
-			 "                      the edge of the window comes within this\n"
-			 "                      distance from the edge of the panel.\n"
-			 " --snap_windows_only_when_overlapping=[yes|no]\n"
-			 "                      Only move a window to the edge of a panel\n"
-			 "                      if the window is overlapping with the\n"
-			 "                      panel.\n"
-			 "\n");
+		<<	_(" --record=FILENAME    Record all events to the given filename for\n"
+			  "                      later playback") << "\n"
+		<<	_(" --playback=FILENAME  Playback given filename (see --record)") << "\n\n"
+		<<	_(" --coredump=[yes|no]  Generates a core dump on segfaults instead\n"
+			  "                      of using the SDL") << "\n"
+		<<	_(" --language=[de_DE|sv_SE|...]\n"
+			  "                      The locale to use.") << "\n"
+		<<	_(" --localedir=DIRNAME  Use DIRNAME as location for the locale") << "\n"
+		<<	_(" --remove_syncstreams=[true|false]\n"
+			  "                      Remove syncstream files on startup") << "\n"
+		<<	_(" --remove_replays=[...]\n"
+			  "                      Remove replays after this number of days.\n"
+			  "                      If this is 0, replays are not deleted.") << "\n\n"
+
+		<<	_("Sound options:") << "\n"
+		<<	_(" --nosound            Starts the game with sound disabled.") << "\n"
+		<<	_(" --disable_fx         Disable sound effects.") << "\n"
+		<<	_(" --disable_music      Disable music.") << "\n\n"
+		<<	_(" --nozip              Do not save files as binary zip archives.") << "\n\n"
+		<<	_(" --editor             Directly starts the Widelands editor.\n"
+			  "                      You can add a =FILENAME to directly load\n"
+			  "                      the map FILENAME in editor.") << "\n"
+		<<	_(" --scenario=FILENAME  Directly starts the map FILENAME as scenario\n"
+			  "                      map.") << "\n"
+		<<	_(" --loadgame=FILENAME  Directly loads the savegame FILENAME.") << "\n"
+		<<	_(" --script=FILENAME    Run the given Lua script after initialization.\n"
+			  "                      Only valid with --scenario, --loadgame, or --editor.") << "\n"
+		<<	_(" --dedicated=FILENAME Starts a dedicated server with FILENAME as map") << "\n"
+		<<	_(" --auto_roadbuild_mode=[yes|no]\n"
+			  "                      Whether to enter roadbuilding mode\n"
+			  "                      automatically after placing a flag that is\n"
+			  "                      not connected to a road.") << "\n\n"
+		<<	_("Graphic options:") << "\n"
+		<<	_(" --fullscreen=[yes|no]\n"
+			  "                      Whether to use the whole display for the\n"
+			  "                      game screen.") << "\n"
+		<<	_(" --xres=[...]         Width of the window in pixel.") << "\n"
+		<<	_(" --yres=[...]         Height of the window in pixel.") << "\n"
+		<<	_(" --opengl=[0|1]       Enables OpenGL rendering") << "\n\n"
+		<<	_("Options for the internal window manager:") << "\n"
+		<<	_(" --border_snap_distance=[0 ...]\n"
+			  "                      Move a window to the edge of the screen\n"
+			  "                      when the edge of the window comes within\n"
+			  "                      this distance from the edge of the screen.") << "\n"
+		<<	_(" --dock_windows_to_edges=[yes|no]\n"
+			  "                      Eliminate a window's border towards the\n"
+			  "                      edge of the screen when the edge of the\n"
+			  "                      window is next to the edge of the screen.") << "\n"
+		<<	_(" --panel_snap_distance=[0 ...]\n"
+			  "                      Move a window to the edge of the panel when\n"
+			  "                      the edge of the window comes within this\n"
+			  "                      distance from the edge of the panel.") << "\n"
+		<<	_(" --snap_windows_only_when_overlapping=[yes|no]\n"
+			  "                      Only move a window to the edge of a panel\n"
+			  "                      if the window is overlapping with the\n"
+			  "                      panel.") << "\n\n";
 #ifndef NDEBUG
 #ifndef _WIN32
-	wout
-		<<
-		_
-			(" --double             Start the game twice (for localhost network\n"
-			 "                      testing)\n\n");
+	wout	<<	_(" --double             Start the game twice (for localhost network\n"
+			  "                      testing)") << "\n\n";
 #endif
 #endif
-	wout << _(" --verbose            Enable verbose debug messages\n") << endl;
-	wout << _(" --help               Show this help\n") << endl;
-	wout
-		<<
-		_
-			("Bug reports? Suggestions? Check out the project website:\n"
+	wout	<<	_(" --verbose            Enable verbose debug messages") << "\n" << endl;
+	wout	<<	_(" --help               Show this help") << "\n" << endl;
+	wout	<<	_("Bug reports? Suggestions? Check out the project website:\n"
 			 "        https://launchpad.net/widelands\n\n"
-			 "Hope you enjoy this game!\n\n");
+			 "Hope you enjoy this game!") << "\n\n";
 }
 
 #ifndef NDEBUG
@@ -1598,8 +1576,7 @@ void WLApplication::mainmenu()
 				return;
 			}
 		} catch (const warning & e) {
-			messagetitle = _("Warning: ");
-			messagetitle += e.title();
+			messagetitle = (boost::format(_("Warning: %s")) % e.title()).str();
 			message = e.what();
 		} catch (const Widelands::game_data_error & e) {
 			messagetitle = _("Game data error");
@@ -1610,16 +1587,18 @@ void WLApplication::mainmenu()
 			messagetitle = _("Unexpected error during the game");
 			message = e.what();
 			message +=
-				_
+
+		(boost::format(_
 					("\n\nPlease report this problem to help us improve Widelands. "
 					 "You will find related messages in the standard output "
-					 "(stdout.txt on Windows). You are using build ");
-			message += build_id() + "(" + build_type() + ")";
+					 "(stdout.txt on Windows). You are using build %1$s (%2$s). ")
+				) % build_id().c_str() % build_type().c_str()).str();
+
 			message +=
 				_
-					(". Please add this information to your report.\n\n"
+					("Please add this information to your report.\n\n"
 					 "Widelands attempts to create a savegame when errors occur "
-					 "during the game. It is often - though not always - possible "
+					 "during the game. It is often – though not always – possible "
 					 "to load it and continue playing.\n");
 		}
 #endif
