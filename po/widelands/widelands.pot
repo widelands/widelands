@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2014-03-05 18:31+0000\n"
+"POT-Creation-Date: 2014-03-05 20:55+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -794,10 +794,6 @@ msgstr ""
 
 #: ../../src/logic/map.h:170
 msgid "no description defined"
-msgstr ""
-
-#: ../../src/logic/militarysite.cc:63 ../../src/logic/warehouse.cc:266
-msgid " conquer"
 msgstr ""
 
 #: ../../src/logic/militarysite.cc:130
