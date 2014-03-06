@@ -40,5 +40,5 @@ return {
 		text_line(_"Experience levels:","n/a") ..
 	--Production Section
 		rt(h2(_"Production")) ..
-		text_line(_"Performance:", _"The %1$s pauses %2$s before going to work again.":bformat(_"Gamekeeper","52.5s"))
+		text_line(_"Performance:", _"The gamekeeper pauses 52.5s before going to work again.")
 }
