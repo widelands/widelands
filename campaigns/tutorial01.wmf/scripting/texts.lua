@@ -13,12 +13,12 @@ use("aux", "formatting")
 -- =============
 scould_player = {
    title = _ "Nice And Easy Does It All the Time",
-   body = rt(p(_
+   body = rt(p(_(
 [[I am sorry, but will I have to tear this down again. ]] ..
 [[We might need the space here later on. ]] ..
 [[If I am too slow for you, you might want to play a real game and just find everything out for yourself. ]] ..
 [[Otherwise, please bear with me, I am not the youngest and quickest anymore.]]
-      )
+      ))
    )
 }
 
@@ -584,7 +584,7 @@ warfare_and_training_01 = {
 [[Training happens in training sites like the training camp or the battle arena: ]] ..
 [[soldiers go there (as our little fellows are currently doing), ]] ..
 [[consume some wares and advance a level in one category. If a barbarian soldier is fully trained, ]] ..
-[[he has level 3 health, level 5 attack, level 0 defense and level 2 evade. This is one fearsome warrior then!]] ..
+[[he has level 3 health, level 5 attack, level 0 defense and level 2 evade. This is one fearsome warrior then! ]] ..
 [[The individual statistics have the following meaning:]])
       ) .. h2(_"Health:") .. p(_(
 [[The total life of a soldier. A barbarian soldier starts with ~130 health points, ]] ..
