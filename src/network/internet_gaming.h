@@ -111,16 +111,16 @@ struct InternetGaming : public ChatProvider {
 
 
 	// ChatProvider: sends a message via the metaserver.
-	void send(const std::string &);
+	void send(const std::string &) override;
 
 	/// ChatProvider: adds the message to the message list and calls parent.
 	void receive(const ChatMessage & msg) {messages.push_back(msg); ChatProvider::send(msg);}
 
 	/// ChatProvider: returns the list of chatmessages.
-	const std::vector<ChatMessage> & getMessages() const {return messages;}
+	const std::vector<ChatMessage> & getMessages() const override {return messages;}
 
 	/// writes the ingame_system_chat messages to \arg msg and resets it afterwards
-	void getIngameSystemMessages(std::vector<ChatMessage> msg) {
+	void getIngameSystemMessages(std::vector<ChatMessage> & msg) {
 		msg = ingame_system_chat;
 		ingame_system_chat.clear();
 	}

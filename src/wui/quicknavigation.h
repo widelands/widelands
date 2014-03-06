@@ -1,6 +1,3 @@
-
-namespace Widelands {
-struct Map;}
 /*
  * Copyright (C) 2010 by the Widelands Development Team
  *
@@ -32,7 +29,7 @@ struct Map;}
 #include "point.h"
 
 namespace Widelands {
-struct Editor_Game_Base;
+class Editor_Game_Base;
 }
 
 /**

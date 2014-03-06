@@ -8,85 +8,29 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4530\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2013-09-15 17:41+0000\n"
+"POT-Creation-Date: 2014-03-05 19:55+0000\n"
 "PO-Revision-Date: 2010-06-06 22:34+0000\n"
 "Last-Translator: Nasenbaer <Unknown>\n"
 "Language-Team: Czech <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-09-16 04:47+0000\n"
-"X-Generator: Launchpad (build 16761)\n"
+"X-Launchpad-Export-Date: 2014-03-06 05:37+0000\n"
+"X-Generator: Launchpad (build 16948)\n"
 "X-Poedit-Country: CZECH REPUBLIC\n"
 "X-Poedit-Language: Czech\n"
 
-#: ../../worlds/blackland/terrainconf:7
-msgid "Ashes"
-msgstr ""
-
-#: ../../worlds/blackland/terrainconf:77
-msgid "Ashes2"
-msgstr ""
-
-#: ../../worlds/blackland/conf:45
-msgid "Aspen"
-msgstr "Osika"
-
-#: ../../worlds/blackland/conf:46
-msgid "Aspen medium"
-msgstr "Střední osika"
-
-#: ../../worlds/blackland/conf:47
-msgid "Aspen small"
-msgstr "Malá osika"
-
-#: ../../worlds/blackland/conf:48
-msgid "Aspen tiny"
-msgstr "Maličká osika"
-
-#: ../../worlds/blackland/terrainconf:29
-msgid "Beach"
-msgstr ""
-
-#: ../../worlds/blackland/conf:65
-msgid "Beech"
-msgstr "Buk"
-
-#: ../../worlds/blackland/conf:66
-msgid "Beech medium"
-msgstr "Střední buk"
-
-#: ../../worlds/blackland/conf:67
-msgid "Beech small"
-msgstr "Malý buk"
-
-#: ../../worlds/blackland/conf:68
-msgid "Beech tiny"
-msgstr "Maličký buk"
-
-#: ../../worlds/blackland/conf:61
-msgid "Birch"
-msgstr "Bříza"
-
-#: ../../worlds/blackland/conf:62
-msgid "Birch medium"
-msgstr "Střední bříza"
-
-#: ../../worlds/blackland/conf:63
-msgid "Birch small"
-msgstr "Malá bříza"
-
-#: ../../worlds/blackland/conf:64
-msgid "Birch tiny"
-msgstr "Maličká bříza"
+#: ../../worlds/blackland/conf:2
+msgid "The Widelands Development Team"
+msgstr "Vývojový tým Widelands"
 
 #: ../../worlds/blackland/conf:3
 msgid "Blackland"
 msgstr "Temné země"
 
-#: ../../worlds/blackland/conf:79
-msgid "Bunny"
-msgstr "Zajíc"
+#: ../../worlds/blackland/conf:4
+msgid "These are the grey, horrible and dangerous blacklands"
+msgstr "Toto jsou šeré, strašlivé a nebezpečné temné země."
 
 #: ../../worlds/blackland/conf:7
 #: ../../worlds/blackland/conf:8
@@ -101,10 +45,6 @@ msgstr "Keř"
 msgid "Cactus"
 msgstr "Kaktus"
 
-#: ../../worlds/blackland/resconf:4
-msgid "Coal"
-msgstr "Uhlí"
-
 #: ../../worlds/blackland/conf:14
 #: ../../worlds/blackland/conf:15
 #: ../../worlds/blackland/conf:16
@@ -112,140 +52,16 @@ msgstr "Uhlí"
 msgid "Dead Tree"
 msgstr "Uschlý strom"
 
-#: ../../worlds/blackland/conf:80
-msgid "Deer"
-msgstr "Jelen"
-
-#: ../../worlds/blackland/conf:81
-msgid "Duck"
-msgstr "Kachna"
-
-#: ../../worlds/blackland/resconf:41
-msgid "Fish"
-msgstr "Ryba"
-
-#: ../../worlds/blackland/conf:82
-msgid "Fox"
-msgstr "Liška"
-
-#: ../../worlds/blackland/resconf:12
-msgid "Gold"
-msgstr "Zlato"
-
-#: ../../worlds/blackland/resconf:28
-msgid "Granite"
-msgstr "Žula"
-
 #: ../../worlds/blackland/conf:18
 #: ../../worlds/blackland/conf:19
 #: ../../worlds/blackland/conf:20
 msgid "Grass"
 msgstr "Tráva"
 
-#: ../../worlds/blackland/terrainconf:94
-msgid "Hard lava"
-msgstr ""
-
-#: ../../worlds/blackland/terrainconf:41
-msgid "Hardground1"
-msgstr ""
-
-#: ../../worlds/blackland/terrainconf:47
-msgid "Hardground2"
-msgstr ""
-
-#: ../../worlds/blackland/terrainconf:53
-msgid "Hardground3"
-msgstr ""
-
-#: ../../worlds/blackland/terrainconf:83
-msgid "Hardground4"
-msgstr ""
-
-#: ../../worlds/blackland/resconf:20
-msgid "Iron"
-msgstr "Železo"
-
-#: ../../worlds/blackland/conf:69
-msgid "Larch"
-msgstr "Modřín"
-
-#: ../../worlds/blackland/conf:70
-msgid "Larch medium"
-msgstr "Střední modřín"
-
-#: ../../worlds/blackland/conf:71
-msgid "Larch small"
-msgstr "Malý modřín"
-
-#: ../../worlds/blackland/conf:72
-msgid "Larch tiny"
-msgstr "Maličký modřín"
-
-#: ../../worlds/blackland/terrainconf:89
-msgid "Lava"
-msgstr ""
-
-#: ../../worlds/blackland/terrainconf:19
-msgid "Lava stone1"
-msgstr ""
-
-#: ../../worlds/blackland/terrainconf:24
-msgid "Lava stone2"
-msgstr ""
-
-#: ../../worlds/blackland/conf:57
-msgid "Maple"
-msgstr "Javor"
-
-#: ../../worlds/blackland/conf:58
-msgid "Maple medium"
-msgstr "Střední javor"
-
-#: ../../worlds/blackland/conf:59
-msgid "Maple small"
-msgstr "Malý javor"
-
-#: ../../worlds/blackland/conf:60
-msgid "Maple tiny"
-msgstr "Maličký javor"
-
-#: ../../worlds/blackland/terrainconf:13
-msgid "Mountain1"
-msgstr ""
-
-#: ../../worlds/blackland/terrainconf:59
-msgid "Mountain2"
-msgstr ""
-
-#: ../../worlds/blackland/terrainconf:65
-msgid "Mountain3"
-msgstr ""
-
-#: ../../worlds/blackland/terrainconf:71
-msgid "Mountain4"
-msgstr ""
-
 #: ../../worlds/blackland/conf:21
 #: ../../worlds/blackland/conf:22
 msgid "Mushroom"
 msgstr "Houba"
-
-#: ../../worlds/blackland/conf:49
-msgid "Oak"
-msgstr "Dub"
-
-#: ../../worlds/blackland/conf:50
-msgid "Oak medium"
-msgstr "Střední dub"
-
-#: ../../worlds/blackland/conf:51
-msgid "Oak small"
-msgstr "Malý dub"
-
-#: ../../worlds/blackland/conf:52
-msgid "Oak tiny"
-msgstr "Maličký dub"
 
 #: ../../worlds/blackland/conf:23
 #: ../../worlds/blackland/conf:24
@@ -256,51 +72,11 @@ msgstr "Maličký dub"
 msgid "Pebble"
 msgstr "Oblázek"
 
-#: ../../worlds/blackland/conf:83
-msgid "Reindeer"
-msgstr "Sob"
-
-#: ../../worlds/blackland/conf:73
-msgid "Rowan"
-msgstr "Jeřáb"
-
-#: ../../worlds/blackland/conf:74
-msgid "Rowan medium"
-msgstr "Střední jeřáb"
-
-#: ../../worlds/blackland/conf:75
-msgid "Rowan small"
-msgstr "Malý jeřáb"
-
-#: ../../worlds/blackland/conf:76
-msgid "Rowan tiny"
-msgstr "Maličký jeřáb"
-
-#: ../../worlds/blackland/conf:84
-msgid "Sheep"
-msgstr "Ovce"
-
 #: ../../worlds/blackland/conf:29
 #: ../../worlds/blackland/conf:30
 #: ../../worlds/blackland/conf:31
 msgid "Skeleton"
 msgstr "Kostlivec"
-
-#: ../../worlds/blackland/conf:53
-msgid "Spruce"
-msgstr "Smrk"
-
-#: ../../worlds/blackland/conf:54
-msgid "Spruce medium"
-msgstr "Střední smrk"
-
-#: ../../worlds/blackland/conf:55
-msgid "Spruce small"
-msgstr "Malý smrk"
-
-#: ../../worlds/blackland/conf:56
-msgid "Spruce tiny"
-msgstr "Maličký smrk"
 
 #: ../../worlds/blackland/conf:32
 #: ../../worlds/blackland/conf:33
@@ -321,15 +97,239 @@ msgstr "Menhiry"
 msgid "Stones"
 msgstr "Kameny"
 
-#: ../../worlds/blackland/conf:2
-msgid "The Widelands Development Team"
-msgstr "Vývojový tým Widelands"
+#: ../../worlds/blackland/conf:45
+msgid "Aspen"
+msgstr "Osika"
 
-#: ../../worlds/blackland/conf:4
-msgid "These are the grey, horrible and dangerous blacklands"
-msgstr "Toto jsou šeré, strašlivé a nebezpečné temné země."
+#: ../../worlds/blackland/conf:46
+msgid "Aspen (medium)"
+msgstr ""
+
+#: ../../worlds/blackland/conf:47
+msgid "Aspen (small)"
+msgstr ""
+
+#: ../../worlds/blackland/conf:48
+msgid "Aspen (tiny)"
+msgstr ""
+
+#: ../../worlds/blackland/conf:49
+msgid "Oak"
+msgstr "Dub"
+
+#: ../../worlds/blackland/conf:50
+msgid "Oak (medium)"
+msgstr ""
+
+#: ../../worlds/blackland/conf:51
+msgid "Oak (small)"
+msgstr ""
+
+#: ../../worlds/blackland/conf:52
+msgid "Oak (tiny)"
+msgstr ""
+
+#: ../../worlds/blackland/conf:53
+msgid "Spruce"
+msgstr "Smrk"
+
+#: ../../worlds/blackland/conf:54
+msgid "Spruce (medium)"
+msgstr ""
+
+#: ../../worlds/blackland/conf:55
+msgid "Spruce (small)"
+msgstr ""
+
+#: ../../worlds/blackland/conf:56
+msgid "Spruce (tiny)"
+msgstr ""
+
+#: ../../worlds/blackland/conf:57
+msgid "Maple"
+msgstr "Javor"
+
+#: ../../worlds/blackland/conf:58
+msgid "Maple (medium)"
+msgstr ""
+
+#: ../../worlds/blackland/conf:59
+msgid "Maple (small)"
+msgstr ""
+
+#: ../../worlds/blackland/conf:60
+msgid "Maple (tiny)"
+msgstr ""
+
+#: ../../worlds/blackland/conf:61
+msgid "Birch"
+msgstr "Bříza"
+
+#: ../../worlds/blackland/conf:62
+msgid "Birch (medium)"
+msgstr ""
+
+#: ../../worlds/blackland/conf:63
+msgid "Birch (small)"
+msgstr ""
+
+#: ../../worlds/blackland/conf:64
+msgid "Birch (tiny)"
+msgstr ""
+
+#: ../../worlds/blackland/conf:65
+msgid "Beech"
+msgstr "Buk"
+
+#: ../../worlds/blackland/conf:66
+msgid "Beech (medium)"
+msgstr ""
+
+#: ../../worlds/blackland/conf:67
+msgid "Beech (small)"
+msgstr ""
+
+#: ../../worlds/blackland/conf:68
+msgid "Beech (tiny)"
+msgstr ""
+
+#: ../../worlds/blackland/conf:69
+msgid "Larch"
+msgstr "Modřín"
+
+#: ../../worlds/blackland/conf:70
+msgid "Larch (medium)"
+msgstr ""
+
+#: ../../worlds/blackland/conf:71
+msgid "Larch (small)"
+msgstr ""
+
+#: ../../worlds/blackland/conf:72
+msgid "Larch (tiny)"
+msgstr ""
+
+#: ../../worlds/blackland/conf:73
+msgid "Rowan"
+msgstr "Jeřáb"
+
+#: ../../worlds/blackland/conf:74
+msgid "Rowan (medium)"
+msgstr ""
+
+#: ../../worlds/blackland/conf:75
+msgid "Rowan (small)"
+msgstr ""
+
+#: ../../worlds/blackland/conf:76
+msgid "Rowan (tiny)"
+msgstr ""
+
+#: ../../worlds/blackland/conf:79
+msgid "Bunny"
+msgstr "Zajíc"
+
+#: ../../worlds/blackland/conf:80
+msgid "Deer"
+msgstr "Jelen"
+
+#: ../../worlds/blackland/conf:81
+msgid "Duck"
+msgstr "Kachna"
+
+#: ../../worlds/blackland/conf:82
+msgid "Fox"
+msgstr "Liška"
+
+#: ../../worlds/blackland/conf:83
+msgid "Reindeer"
+msgstr "Sob"
+
+#: ../../worlds/blackland/conf:84
+msgid "Sheep"
+msgstr "Ovce"
+
+#: ../../worlds/blackland/resconf:4
+msgid "Coal"
+msgstr "Uhlí"
+
+#: ../../worlds/blackland/resconf:12
+msgid "Gold"
+msgstr "Zlato"
+
+#: ../../worlds/blackland/resconf:20
+msgid "Iron"
+msgstr "Železo"
+
+#: ../../worlds/blackland/resconf:28
+msgid "Granite"
+msgstr "Žula"
 
 #: ../../worlds/blackland/resconf:36
 #: ../../worlds/blackland/terrainconf:34
 msgid "Water"
 msgstr "Voda"
+
+#: ../../worlds/blackland/resconf:41
+msgid "Fish"
+msgstr "Ryba"
+
+#: ../../worlds/blackland/terrainconf:7
+msgid "Ashes"
+msgstr ""
+
+#: ../../worlds/blackland/terrainconf:13
+msgid "Mountain 1"
+msgstr ""
+
+#: ../../worlds/blackland/terrainconf:19
+msgid "Lava Rocks 1"
+msgstr ""
+
+#: ../../worlds/blackland/terrainconf:24
+msgid "Lava Rocks 2"
+msgstr ""
+
+#: ../../worlds/blackland/terrainconf:29
+msgid "Beach"
+msgstr ""
+
+#: ../../worlds/blackland/terrainconf:41
+msgid "Hard Ground 1"
+msgstr ""
+
+#: ../../worlds/blackland/terrainconf:47
+msgid "Hard Ground 2"
+msgstr ""
+
+#: ../../worlds/blackland/terrainconf:53
+msgid "Hard Ground 3"
+msgstr ""
+
+#: ../../worlds/blackland/terrainconf:59
+msgid "Mountain 2"
+msgstr ""
+
+#: ../../worlds/blackland/terrainconf:65
+msgid "Mountain 3"
+msgstr ""
+
+#: ../../worlds/blackland/terrainconf:71
+msgid "Mountain 4"
+msgstr ""
+
+#: ../../worlds/blackland/terrainconf:77
+msgid "Ashes 2"
+msgstr ""
+
+#: ../../worlds/blackland/terrainconf:83
+msgid "Hard Ground 4"
+msgstr ""
+
+#: ../../worlds/blackland/terrainconf:89
+msgid "Lava"
+msgstr ""
+
+#: ../../worlds/blackland/terrainconf:94
+msgid "Igneous Rocks"
+msgstr ""

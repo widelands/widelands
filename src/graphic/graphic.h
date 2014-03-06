@@ -42,7 +42,7 @@ class Surface;
 class SurfaceCache;
 struct Road_Textures;
 struct SDL_Surface;
-struct StreamWrite;
+class StreamWrite;
 struct Texture;
 
 /// Stores the capabilities of opengl
@@ -91,11 +91,10 @@ public:
 
 	// Initialize or reinitialize the graphics system. Throws on error.
 	void initialize
-		(int32_t w, int32_t h, int32_t bpp, bool fullscreen, bool opengl);
+		(int32_t w, int32_t h, bool fullscreen, bool opengl);
 
 	int32_t get_xres();
 	int32_t get_yres();
-	int32_t get_bpp();
 	bool is_fullscreen();
 
 	RenderTarget * get_render_target();
@@ -133,7 +132,7 @@ public:
 	void set_world(std::string);
 	Surface& get_road_texture(int32_t roadtex);
 
-	const GraphicCaps& caps() const throw () {return m_caps;}
+	const GraphicCaps& caps() const {return m_caps;}
 
 	bool check_fallback_settings_in_effect();
 

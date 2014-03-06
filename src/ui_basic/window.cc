@@ -95,8 +95,8 @@ Window::Window
 			(g_gr->images().get("pics/win_bot.png")),
 		m_pic_background
 			(g_gr->images().get("pics/win_bg.png")),
-		m_center_panel(0),
-		m_fastclick_panel(0)
+		m_center_panel(nullptr),
+		m_fastclick_panel(nullptr)
 {
 	set_title(title);
 

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2004, 2006-2009, 2011-2012 by the Widelands Development Team
+ * Copyright (C) 2004, 2006-2009, 2011-2013 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -43,6 +43,7 @@ Fullscreen_Menu_Internet_Lobby::Fullscreen_Menu_Internet_Lobby
 	m_buth (get_h() * 19 / 400),
 	m_lisw (get_w() * 623 / 1000),
 	m_fs   (fs_small()),
+	m_prev_clientlist_len(1000),
 	m_fn   (ui_fn()),
 
 // Text labels
@@ -295,6 +296,14 @@ void Fullscreen_Menu_Internet_Lobby::fillClientList(const std::vector<INet_Clien
 				continue;
 		}
 	}
+
+	// If a new player joins the lobby, play a sound.
+	if (clients.size() != m_prev_clientlist_len)
+	{
+		if (clients.size() > m_prev_clientlist_len)
+			play_new_chat_member();
+		m_prev_clientlist_len = clients.size();
+	}
 }
 
 
@@ -319,6 +328,7 @@ void Fullscreen_Menu_Internet_Lobby::client_doubleclicked (uint32_t i)
 
 		temp += text;
 		chat.set_edit_text(temp);
+		chat.focus();
 	}
 }
 
@@ -370,16 +380,16 @@ void Fullscreen_Menu_Internet_Lobby::clicked_joingame()
 	if (opengames.has_selection()) {
 		InternetGaming::ref().join_game(opengames.get_selected().name);
 
-		uint32_t const secs = time(0);
+		uint32_t const secs = time(nullptr);
 		while (InternetGaming::ref().ip().size() < 1) {
 			InternetGaming::ref().handle_metaserver_communication();
 			 // give some time for the answer + for a relogin, if a problem occurs.
-			if ((INTERNET_GAMING_TIMEOUT * 5 / 3) < time(0) - secs) {
+			if ((INTERNET_GAMING_TIMEOUT * 5 / 3) < time(nullptr) - secs) {
 				// Show a popup warning message
 				std::string warningheader(_("Connection timed out"));
 				std::string warning
 					(_
-						("Widelands has not been able to get the IP address of the server in time.\n"
+						("Widelands was unable to get the IP address of the server in time.\n"
 						 "There seems to be a network problem, either on your side or on the side\n"
 						 "of the server.\n"));
 				UI::WLMessageBox mmb(this, warningheader, warning, UI::WLMessageBox::OK, UI::Align_Left);
@@ -407,7 +417,7 @@ GCC_DIAG_ON("-Wold-style-cast")
 			InternetGaming::ref().set_game_done();
 			// Show a popup warning message
 			std::string warningheader(_("Connection problem"));
-			std::string warning(_("Widelands has not been able to connect to the host."));
+			std::string warning(_("Widelands was unable to connect to the host."));
 			UI::WLMessageBox mmb(this, warningheader, warning, UI::WLMessageBox::OK, UI::Align_Left);
 			mmb.run();
 		}

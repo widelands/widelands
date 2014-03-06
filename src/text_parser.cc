@@ -101,7 +101,6 @@ void Text_Parser::parse
 		bool more_text_blocks = true;
 		while (more_text_blocks) {
 			std::string block_format;
-			std::string block_text;
 			Text_Block new_block;
 
 			std::vector<std::string> words;

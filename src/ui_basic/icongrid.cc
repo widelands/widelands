@@ -50,7 +50,7 @@ private:
 	Icon_Grid & m_icongrid;
 	const uint32_t _callback_argument_id;
 
-	void handle_mousein(bool inside) {
+	void handle_mousein(bool inside) override {
 		if (inside) {
 			m_icongrid.mousein(_callback_argument_id);
 		} else {

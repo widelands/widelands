@@ -157,7 +157,7 @@ class TrainingSite
 
 TrainingSite::TrainingSite(const TrainingSite_Descr & d) :
 ProductionSite   (d),
-m_soldier_request(0),
+m_soldier_request(nullptr),
 m_capacity       (descr().get_max_number_of_soldiers()),
 m_build_heroes    (false),
 m_result         (Failed)
@@ -165,7 +165,7 @@ m_result         (Failed)
 	// Initialize this in the constructor so that loading code may
 	// overwrite priorities.
 	calc_upgrades();
-	m_current_upgrade = 0;
+	m_current_upgrade = nullptr;
 	set_post_timer(6000);
 	training_failure_count.clear();
 	max_stall_val = training_state_multiplier * d.get_max_stall();
@@ -238,7 +238,7 @@ void TrainingSite::set_economy(Economy * e)
 void TrainingSite::cleanup(Editor_Game_Base & egbase)
 {
 	delete m_soldier_request;
-	m_soldier_request = 0;
+	m_soldier_request = nullptr;
 
 	ProductionSite::cleanup(egbase);
 }
@@ -327,7 +327,7 @@ void TrainingSite::update_soldier_request() {
 		m_soldier_request->set_count(m_capacity - m_soldiers.size());
 	} else if (m_soldiers.size() >= m_capacity) {
 		delete m_soldier_request;
-		m_soldier_request = 0;
+		m_soldier_request = nullptr;
 
 		while (m_soldiers.size() > m_capacity)
 			dropSoldier(**m_soldiers.rbegin());
@@ -395,10 +395,10 @@ std::vector<Soldier *> TrainingSite::stationedSoldiers() const
 	return m_soldiers;
 }
 
-uint32_t TrainingSite::minSoldierCapacity() const throw () {
+uint32_t TrainingSite::minSoldierCapacity() const {
 	return 0;
 }
-uint32_t TrainingSite::maxSoldierCapacity() const throw () {
+uint32_t TrainingSite::maxSoldierCapacity() const {
 	return descr().get_max_number_of_soldiers();
 }
 uint32_t TrainingSite::soldierCapacity() const
@@ -571,7 +571,7 @@ void TrainingSite::program_end(Game & game, Program_Result const result)
 			m_current_upgrade->failures++;
 			drop_stalled_soldiers(game);
 		}
-		m_current_upgrade = 0;
+		m_current_upgrade = nullptr;
 	}
 	trainingDone();
 }
@@ -675,7 +675,7 @@ TrainingSite::Upgrade * TrainingSite::get_upgrade(tAttribute const atr)
 		if (i.current->attribute == atr)
 			return &*i.current;
 
-	return 0;
+	return nullptr;
 }
 
 
@@ -770,7 +770,6 @@ void
 TrainingSite::trainingDone()
 {
 	TrainFailCount_t::iterator it;
-	log("TrainingSite::trainingDone() ");
 	for (it = training_failure_count.begin(); it != training_failure_count.end(); it++)
 	{
 		// If a soldier is present at this training level, deteoriate
@@ -782,9 +781,7 @@ TrainingSite::trainingDone()
 		else // If no soldier, let's become optimistic
 		if (0 < it->second.first)
 			it->second.first--;
-		log("%d.%d %3d || ", it->first.first, it->first.second, it->second.first);
 	}
-	log(" / %3d\n", max_stall_val);
 }
 
 }

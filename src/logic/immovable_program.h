@@ -64,7 +64,7 @@ struct ImmovableProgram {
 		ActAnimate
 			(char * parameters, Immovable_Descr &,
 			 const std::string & directory, Profile &);
-		virtual void execute(Game &, Immovable &) const;
+		virtual void execute(Game &, Immovable &) const override;
 		uint32_t animation() const {return m_id;}
 	private:
 		uint32_t m_id;
@@ -90,7 +90,7 @@ struct ImmovableProgram {
 	struct ActTransform : public Action {
 		ActTransform
 			(char * parameters, Immovable_Descr &);
-		virtual void execute(Game &, Immovable &) const;
+		virtual void execute(Game &, Immovable &) const override;
 	private:
 		std::string type_name;
 		bool        bob;
@@ -102,7 +102,7 @@ struct ImmovableProgram {
 	struct ActGrow : public Action {
 		ActGrow
 			(char * parameters, Immovable_Descr &);
-		virtual void execute(Game &, Immovable &) const;
+		virtual void execute(Game &, Immovable &) const override;
 	private:
 		std::string type_name;
 		bool        tribe;
@@ -110,14 +110,14 @@ struct ImmovableProgram {
 
 	struct ActRemove : public Action {
 		ActRemove(char * parameters, Immovable_Descr &);
-		virtual void execute(Game &, Immovable &) const;
+		virtual void execute(Game &, Immovable &) const override;
 	private:
 		uint8_t probability;
 	};
 
 	struct ActSeed : public Action {
 		ActSeed(char * parameters, Immovable_Descr &);
-		virtual void execute(Game &, Immovable &) const;
+		virtual void execute(Game &, Immovable &) const override;
 	private:
 		std::string type_name;
 		bool        tribe;
@@ -141,7 +141,7 @@ struct ImmovableProgram {
 	/// soundFX is actually played is determined by the sound handler.
 	struct ActPlayFX : public Action {
 		ActPlayFX(const std::string & directory, char * parameters, const Immovable_Descr &);
-		virtual void execute(Game &, Immovable &) const;
+		virtual void execute(Game &, Immovable &) const override;
 	private:
 		std::string name;
 		uint8_t     priority;
@@ -162,7 +162,7 @@ struct ImmovableProgram {
 	 */
 	struct ActConstruction : public Action {
 		ActConstruction(char * parameters, Immovable_Descr &, const std::string & directory, Profile &);
-		virtual void execute(Game &, Immovable &) const;
+		virtual void execute(Game &, Immovable &) const override;
 
 		Duration buildtime() const {return m_buildtime;}
 		Duration decaytime() const {return m_decaytime;}

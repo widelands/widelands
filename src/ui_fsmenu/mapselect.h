@@ -72,7 +72,7 @@ struct Fullscreen_Menu_MapSelect : public Fullscreen_Menu_Base {
 
 	bool is_scenario();
 	MapData const * get_map() const;
-	void think();
+	void think() override;
 
 private:
 	void ok();

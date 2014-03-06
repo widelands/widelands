@@ -30,8 +30,8 @@ struct RNG;
 
 namespace Widelands {
 
-struct Map;
-struct Editor_Game_Base;
+class Map;
+class Editor_Game_Base;
 
 /**
  * This helper class repesents the complete map initialization

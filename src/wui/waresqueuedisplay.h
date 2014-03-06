@@ -24,7 +24,8 @@
 
 #include <stdint.h>
 
-#include "logic/item_ware_descr.h"
+#include "logic/ware_descr.h"
+#include "logic/wareworker.h"
 #include "ui_basic/button.h"
 #include "ui_basic/panel.h"
 #include "ui_basic/radiobutton.h"
@@ -64,8 +65,8 @@ public:
 		 bool = false);
 	~WaresQueueDisplay();
 
-	virtual void think();
-	virtual void draw(RenderTarget &);
+	virtual void think() override;
+	virtual void draw(RenderTarget &) override;
 
 private:
 	Interactive_GameBase  & m_igb;
@@ -75,7 +76,7 @@ private:
 	UI::Button   * m_increase_max_fill;
 	UI::Button   * m_decrease_max_fill;
 	Widelands::Ware_Index   m_ware_index;
-	int32_t          m_ware_type;
+	Widelands::WareWorker m_ware_type;
 	const Image* m_icon;            //< Index to ware's picture
 	const Image* m_icon_grey;
 	const Image* m_max_fill_indicator;

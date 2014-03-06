@@ -40,10 +40,10 @@ struct md5_checksum;
 
 namespace Widelands {
 struct Command;
-struct Game;
+class Game;
 class PlayerCommand;
-struct StreamRead;
-struct StreamWrite;
+class StreamRead;
+class StreamWrite;
 
 /**
  * Read game replays from disk.
@@ -82,4 +82,3 @@ private:
 }
 
 #endif
-

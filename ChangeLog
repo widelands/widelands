@@ -1,4 +1,4 @@
-### Build 18 until now
+### Build 18-rc1
 - Added a preview for the costs of a building and the resources gained
   through the dismantling of a building.
 - Added a button to productionsites for evicting a worker.
@@ -244,8 +244,7 @@
 - Fixed bug #1204144: Cursor Key Navigation in table not complete
 - Fixed bug #1204171: Can't select ware in ware statistics window
 - Fixed bug #1204199: Buildings and building statistics have different color groups for productivity
-- Fixed bug #1204226: FTBFS on Ubuntu 13.04
-                      (use of deleted function ‘void std::unique_ptr<_Tp [], _Dp>::reset(_Up))
+- Fixed bug #1204226: FTBFS on Ubuntu 13.04 fixed.
 - Fixed bug #1204462: Suggestion: widelands-daily should not only include bzr revision,
                       but also date/time in the package name
 - Fixed bug #1204481: Militarysite initialization
@@ -291,6 +290,10 @@
 - Fixed bug #1219524: Empire bakery drops from 100% to 0% very quickly when no wares are available.
 - Fixed bug #1219526: Last received chat message never vanishes from main in game screen
 - Fixed bug #1220546: segfault on dismantle a building on ubuntu 12.04
+- Fixed bug #1228518: Chat announces defeat of all network players although only one is defeated
+- Fixed bug #1228529: Defeated player can see_all, but can only use fieled_action_window on prior seen fields
+- Fixed bug #1228592: Internet lobby chat is blocked once another UI part was used (one of the lists, etc.)
+- Fixed bug #1228596: Important system messages are not forwarded to ingame chat
 
 
 ### Build 17

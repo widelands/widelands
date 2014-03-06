@@ -25,7 +25,7 @@
 #include "logic/widelands.h"
 
 namespace Widelands {
-struct Game;
+class Game;
 class PlayerCommand;
 enum class PlayerEndResult: uint8_t;
 }

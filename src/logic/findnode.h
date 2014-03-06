@@ -27,7 +27,7 @@
 namespace Widelands {
 
 struct FCoords;
-struct Map;
+class Map;
 
 struct FindNode {
 private:
@@ -47,7 +47,7 @@ private:
 	template<typename T>
 	struct Capsule : public BaseCapsule {
 		Capsule(const T & _op) : op(_op) {}
-		bool accept(const Map & map, const FCoords & coord) const {
+		bool accept(const Map & map, const FCoords & coord) const override {
 			return op.accept(map, coord);
 		}
 
@@ -63,7 +63,7 @@ public:
 	}
 	~FindNode() {
 		capsule->deref();
-		capsule = 0;
+		capsule = nullptr;
 	}
 	FindNode & operator= (const FindNode & o) {
 		capsule->deref();

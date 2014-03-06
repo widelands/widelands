@@ -25,7 +25,7 @@
 #include "wui/interactive_gamebase.h"
 #include "ui_basic/button.h"
 
-namespace Widelands {struct Game;}
+namespace Widelands {class Game;}
 
 /**
  * This class shows a game for somebody who is only a spectator.
@@ -40,11 +40,11 @@ struct Interactive_Spectator : public Interactive_GameBase {
 
 	~Interactive_Spectator();
 
-	void start();
+	void start() override;
 
-	Widelands::Player * get_player() const throw ();
+	Widelands::Player * get_player() const override;
 
-	bool handle_key(bool down, SDL_keysym);
+	bool handle_key(bool down, SDL_keysym) override;
 
 private:
 	void toggle_chat();
@@ -52,10 +52,10 @@ private:
 	void toggle_statistics();
 	void exit_btn();
 	void save_btn();
-	virtual bool can_see(Widelands::Player_Number) const;
-	virtual bool can_act(Widelands::Player_Number) const;
-	virtual Widelands::Player_Number player_number() const;
-	virtual void node_action();
+	virtual bool can_see(Widelands::Player_Number) const override;
+	virtual bool can_act(Widelands::Player_Number) const override;
+	virtual Widelands::Player_Number player_number() const override;
+	virtual void node_action() override;
 
 private:
 	UI::Button m_toggle_chat;

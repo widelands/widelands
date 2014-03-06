@@ -22,6 +22,8 @@
 #include <algorithm>
 #include <cstdio>
 
+#include <boost/algorithm/string/predicate.hpp>
+
 #include "build_info.h"
 #include "economy/flag.h"
 #include "economy/road.h"
@@ -67,10 +69,10 @@ m_nrplayers      (0),
 m_scenario_types (NO_SCENARIO),
 m_width          (0),
 m_height         (0),
-m_world          (0),
-m_starting_pos   (0),
-m_fields         (0),
-m_overlay_manager(0),
+m_world          (nullptr),
+m_starting_pos   (nullptr),
+m_fields         (nullptr),
+m_overlay_manager(nullptr),
 m_pathfieldmgr   (new PathfieldManager)
 {
 	m_worldname[0] = '\0';
@@ -303,11 +305,11 @@ void Map::cleanup() {
 	m_width = m_height = 0;
 
 	free(m_fields);
-	m_fields = 0;
+	m_fields = nullptr;
 	free(m_starting_pos);
-	m_starting_pos = 0;
+	m_starting_pos = nullptr;
 	delete m_world;
-	m_world = 0;
+	m_world = nullptr;
 
 	m_scenario_tribes.clear();
 	m_scenario_names.clear();
@@ -542,7 +544,7 @@ Could happen multiple times in the map editor.
 void Map::set_nrplayers(Player_Number const nrplayers) {
 	if (!nrplayers) {
 		free(m_starting_pos);
-		m_starting_pos = 0;
+		m_starting_pos = nullptr;
 		m_nrplayers = 0;
 		return;
 	}
@@ -672,7 +674,7 @@ void Map::find_reachable
 	queue.push_back(area);
 
 	while (queue.size()) {
-		// Pop the last item from the queue
+		// Pop the last ware from the queue
 		FCoords const cur = get_fcoords(*queue.rbegin());
 		queue.pop_back();
 		Pathfield & curpf = pathfields->fields[cur.field - m_fields];
@@ -1162,7 +1164,7 @@ NodeCaps Map::_calc_nodecaps_pass1(FCoords const f, bool consider_mobs) {
 	//  restrictions
 	if (caps & MOVECAPS_WALK) {
 		//  4b) Flags must be at least 2 edges apart
-		if (consider_mobs && find_immovables(Area<FCoords>(f, 1), 0, FindImmovableType(Map_Object::FLAG)))
+		if (consider_mobs && find_immovables(Area<FCoords>(f, 1), nullptr, FindImmovableType(Map_Object::FLAG)))
 			return static_cast<NodeCaps>(caps);
 		caps |= BUILDCAPS_FLAG;
 	}
@@ -1209,9 +1211,9 @@ NodeCaps Map::_calc_nodecaps_pass2(FCoords const f, bool consider_mobs, NodeCaps
 
 	if (buildsize == BaseImmovable::BIG) {
 		if
-			(calc_buildsize(l_n(f),  false, 0, consider_mobs, initcaps) < BaseImmovable::BIG ||
-			 calc_buildsize(tl_n(f), false, 0, consider_mobs, initcaps) < BaseImmovable::BIG ||
-			 calc_buildsize(tr_n(f), false, 0, consider_mobs, initcaps) < BaseImmovable::BIG)
+			(calc_buildsize(l_n(f),  false, nullptr, consider_mobs, initcaps) < BaseImmovable::BIG ||
+			 calc_buildsize(tl_n(f), false, nullptr, consider_mobs, initcaps) < BaseImmovable::BIG ||
+			 calc_buildsize(tr_n(f), false, nullptr, consider_mobs, initcaps) < BaseImmovable::BIG)
 			buildsize = BaseImmovable::MEDIUM;
 	}
 
@@ -1686,16 +1688,10 @@ void Map::get_neighbour
 	}
 }
 
-/**
- * Returns the correct initialized loader for the given mapfile
-*/
-Map_Loader * Map::get_correct_loader(char const * const filename) {
-	Map_Loader * result = 0;
+Map_Loader * Map::get_correct_loader(const std::string& filename) {
+	Map_Loader * result = nullptr;
 
-	if
-		(!
-		 strcasecmp
-		 	(filename + (strlen(filename) - strlen(WLMF_SUFFIX)), WLMF_SUFFIX))
+	if (boost::algorithm::ends_with(filename, WLMF_SUFFIX)) {
 		try {
 			result = new WL_Map_Loader(*g_fs->MakeSubFileSystem(filename), this);
 		} catch (...) {
@@ -1703,16 +1699,13 @@ Map_Loader * Map::get_correct_loader(char const * const filename) {
 			//  format)
 			//  TODO: catchall hides real errors! Replace with more specific code
 		}
-	else if
-		(!
-		 strcasecmp
-		 	(filename + (strlen(filename) - strlen(S2MF_SUFFIX)), S2MF_SUFFIX)
-		 |
-		 !
-		 strcasecmp
-		 	(filename + (strlen(filename) - strlen(S2MF_SUFFIX2)), S2MF_SUFFIX2))
+	} else if
+		(boost::algorithm::ends_with(filename, S2MF_SUFFIX) ||
+		 boost::algorithm::ends_with(filename, S2MF_SUFFIX2))
+	{
 		//  It is a S2 Map file. Load it as such.
-		result = new S2_Map_Loader(filename, *this);
+		result = new S2_Map_Loader(filename.c_str(), *this);
+	}
 
 	return result;
 }

@@ -24,8 +24,8 @@
 #define Name "Widelands"
 #define VerName "Widelands Build18"
 #define VerNumber "0.18.0.1"
-#define Copyright "Widelands Development Team 2001-2013"
-#define SetupFileName "Widelands-Build16-win32"
+#define Copyright "Widelands Development Team 2001-2014"
+#define SetupFileName "Widelands-Build18-win32"
 
 ;General String
 #define Publisher "Widelands Development Team"
@@ -81,7 +81,7 @@ Name: slovak;    MessagesFile: compiler:Languages\Slovak.isl
 Name: russian;   MessagesFile: compiler:Languages\Russian.isl
 Name: hungarian; MessagesFile: compiler:Languages\Hungarian.isl
 Name: dutch;     MessagesFile: compiler:Languages\Dutch.isl
-Name: galician;  MessagesFile: compiler:Languages\Galician.isl
+Name: gaelic;    MessagesFile: compiler:Languages\ScottishGaelic.isl
 Name: hebrew;    MessagesFile: compiler:Languages\Hebrew.isl
 Name: russian;   MessagesFile: compiler:Languages\Russian.isl
 Name: spanish;   MessagesFile: compiler:Languages\Spanish.isl

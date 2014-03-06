@@ -41,7 +41,7 @@ SDLTTF_Font::SDLTTF_Font(TTF_Font * font, const string& face, int ptsize) :
 
 SDLTTF_Font::~SDLTTF_Font() {
 	TTF_CloseFont(font_);
-	font_ = 0;
+	font_ = nullptr;
 }
 
 void SDLTTF_Font::dimensions(const string& txt, int style, uint16_t * gw, uint16_t * gh) {
@@ -67,7 +67,7 @@ const Surface& SDLTTF_Font::render
 
 	m_set_style(style);
 
-	SDL_Surface * text_surface = 0;
+	SDL_Surface * text_surface = nullptr;
 
 	SDL_Color sdlclr = {clr.r, clr.g, clr.b, 0};
 	if (style & SHADOW) {
@@ -80,7 +80,7 @@ const Surface& SDLTTF_Font::render
 
 		SDL_Rect dstrct1 = {0, 0, 0, 0};
 		SDL_SetAlpha(shadow, 0, SDL_ALPHA_OPAQUE);
-		SDL_BlitSurface(shadow, 0, text_surface, &dstrct1);
+		SDL_BlitSurface(shadow, nullptr, text_surface, &dstrct1);
 
 		Uint32* spix = static_cast<Uint32*>(tsurf->pixels);
 		Uint32* dpix = static_cast<Uint32*>(text_surface->pixels);

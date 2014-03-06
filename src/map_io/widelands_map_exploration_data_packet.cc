@@ -37,7 +37,6 @@ void Map_Exploration_Data_Packet::Read
 	 Editor_Game_Base      &       egbase,
 	 bool                    const skip,
 	 Map_Map_Object_Loader &)
-throw (_wexception)
 {
 	if (skip)
 		return;
@@ -89,16 +88,15 @@ throw (_wexception)
 			}
 		else
 			throw game_data_error
-				(_("unknown/unhandled version %u"), packet_version);
+				("unknown/unhandled version %u", packet_version);
 	} catch (const _wexception & e) {
-		throw game_data_error(_("seen: %s"), e.what());
+		throw game_data_error("seen: %s", e.what());
 	}
 }
 
 
 void Map_Exploration_Data_Packet::Write
 	(FileSystem & fs, Editor_Game_Base & egbase, Map_Map_Object_Saver &)
-throw (_wexception)
 {
 	FileWrite fw;
 

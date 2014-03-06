@@ -34,7 +34,7 @@ namespace Widelands {
 
 class Economy;
 struct Fleet;
-struct PortDock;
+class PortDock;
 
 struct Ship_Descr : Bob::Descr {
 	Ship_Descr
@@ -42,13 +42,13 @@ struct Ship_Descr : Bob::Descr {
 		 const std::string & directory, Profile &, Section & global_s,
 		 const Tribe_Descr &);
 
-	virtual uint32_t movecaps() const throw ();
+	virtual uint32_t movecaps() const override;
 	const DirAnimations & get_sail_anims() const {return m_sail_anims;}
 
-	uint32_t get_capacity() const throw () {return m_capacity;}
-	uint32_t vision_range() const throw () {return m_vision_range;}
+	uint32_t get_capacity() const {return m_capacity;}
+	uint32_t vision_range() const {return m_vision_range;}
 
-	virtual Bob & create_object() const;
+	virtual Bob & create_object() const override;
 
 private:
 	DirAnimations m_sail_anims;
@@ -57,7 +57,9 @@ private:
 };
 
 /**
- * Ships belong to a player and to an economy.
+ * Ships belong to a player and to an economy. The usually are in a (unique)
+ * fleet for a player, but only if they are on standard duty. Exploration ships
+ * are an economy of their own and are not part of a Fleet.
  */
 struct Ship : Bob {
 	MO_DESCR(Ship_Descr);
@@ -65,28 +67,38 @@ struct Ship : Bob {
 	Ship(const Ship_Descr & descr);
 	virtual ~Ship();
 
-	Fleet * get_fleet() const {return m_fleet;}
-	PortDock * get_destination(Editor_Game_Base & egbase);
+	// Returns the fleet the ship is a part of.
+	Fleet * get_fleet() const;
 
-	virtual Type get_bob_type() const throw ();
+	// Returns the current destination or nullptr if there is no current
+	// destination.
+	PortDock* get_destination(Editor_Game_Base& egbase) const;
+
+	// Returns the last visited portdock of this ship or nullptr if there is none or
+	// the last visited was removed.
+	PortDock* get_lastdock(Editor_Game_Base& egbase) const;
+
+
+
+	virtual Type get_bob_type() const override;
 
 	Economy * get_economy() const {return m_economy;}
 	void set_economy(Game &, Economy * e);
 	void set_destination(Game &, PortDock &);
 
-	void init_auto_task(Game &);
+	void init_auto_task(Game &) override;
 
-	virtual void init(Editor_Game_Base &);
-	virtual void cleanup(Editor_Game_Base &);
+	virtual void init(Editor_Game_Base &) override;
+	virtual void cleanup(Editor_Game_Base &) override;
 
 	void start_task_ship(Game &);
 	void start_task_movetodock(Game &, PortDock &);
 	void start_task_expedition(Game &);
 
-	virtual void log_general_info(const Editor_Game_Base &);
+	virtual void log_general_info(const Editor_Game_Base &) override;
 
 	uint32_t get_capacity() const {return descr().get_capacity();}
-	virtual uint32_t vision_range() const throw () {return descr().vision_range();}
+	virtual uint32_t vision_range() const {return descr().vision_range();}
 	uint32_t get_nritems() const {return m_items.size();}
 	const ShippingItem & get_item(uint32_t idx) const {return m_items[idx];}
 
@@ -151,17 +163,15 @@ struct Ship : Bob {
 
 	/// \returns (in expedition mode only!) whether the next field in direction \arg dir is swimable
 	bool exp_dir_swimable(Direction dir) {
-		if (!state_is_expedition())
+		if (!m_expedition)
 			return false;
-		assert(m_expedition);
 		return m_expedition->swimable[dir - 1];
 	}
 
 	/// \returns whether the expedition ship is close to the coast
 	bool exp_close_to_coast() {
-		if (!state_is_expedition())
+		if (!m_expedition)
 			return false;
-		assert(m_expedition);
 		for (uint8_t dir = FIRST_DIRECTION; dir <= LAST_DIRECTION; ++dir)
 			if (!m_expedition->swimable[dir - 1])
 				return true;
@@ -170,9 +180,8 @@ struct Ship : Bob {
 
 	/// \returns (in expedition mode only!) the list of currently seen port build spaces
 	const std::list<Coords>* exp_port_spaces() {
-		if (!state_is_expedition())
+		if (!m_expedition)
 			return nullptr;
-		assert(m_expedition);
 		return m_expedition->seen_port_buildspaces.get();
 	}
 
@@ -220,6 +229,7 @@ private:
 		uint8_t direction;
 		Coords exploration_start;
 		bool clockwise;
+		std::unique_ptr<Economy> economy;
 	};
 	std::unique_ptr<Expedition> m_expedition;
 
@@ -228,11 +238,11 @@ protected:
 	struct Loader : Bob::Loader {
 		Loader();
 
-		virtual const Task * get_task(const std::string & name);
+		virtual const Task * get_task(const std::string & name) override;
 
 		void load(FileRead & fr, uint8_t version);
-		virtual void load_pointers();
-		virtual void load_finish();
+		virtual void load_pointers() override;
+		virtual void load_finish() override;
 
 	private:
 		uint32_t m_lastdock;
@@ -243,7 +253,7 @@ protected:
 	};
 
 public:
-	virtual void save(Editor_Game_Base &, Map_Map_Object_Saver &, FileWrite &);
+	virtual void save(Editor_Game_Base &, Map_Map_Object_Saver &, FileWrite &) override;
 
 	static Map_Object::Loader * load
 		(Editor_Game_Base &, Map_Map_Object_Loader &, FileRead &);

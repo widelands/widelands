@@ -159,7 +159,7 @@ Player::Player
 	m_civil_blds_defeated(0),
 	m_allow_retreat_change(false),
 	m_retreat_percentage  (50),
-	m_fields            (0),
+	m_fields            (nullptr),
 	m_allowed_worker_types  (tribe_descr.get_nrworkers  (), true),
 	m_allowed_building_types(tribe_descr.get_nrbuildings(), true),
 	m_ai(""),
@@ -408,7 +408,7 @@ Flag * Player::build_flag(Coords const c) {
 
 	if (buildcaps & BUILDCAPS_FLAG)
 		return new Flag(egbase(), *this, c);
-	return 0;
+	return nullptr;
 }
 
 
@@ -458,11 +458,11 @@ Road * Player::build_road(const Path & path) {
 						log
 							("%i: building road, immovable in the way, type=%d\n",
 							 player_number(), imm->get_type());
-						return 0;
+						return nullptr;
 					}
 				if (!(get_buildcaps(fc) & MOVECAPS_WALK)) {
 					log("%i: building road, unwalkable\n", player_number());
-					return 0;
+					return nullptr;
 				}
 			}
 			return &Road::create(egbase(), *start, *end, path);
@@ -471,7 +471,7 @@ Road * Player::build_road(const Path & path) {
 	} else
 		log("%i: building road, missed start flag\n", player_number());
 
-	return 0;
+	return nullptr;
 }
 
 
@@ -550,11 +550,11 @@ Building * Player::build
 
 	// Validate building type
 	if (not (idx and idx < tribe().get_nrbuildings()))
-		return 0;
+		return nullptr;
 	const Building_Descr & descr = *tribe().get_building_descr(idx);
 
 	if (!descr.is_buildable())
-		return 0;
+		return nullptr;
 
 
 	// Validate build position
@@ -564,12 +564,12 @@ Building * Player::build
 
 	if (descr.get_ismine()) {
 		if (!(buildcaps & BUILDCAPS_MINE))
-			return 0;
+			return nullptr;
 	} else {
 		if ((buildcaps & BUILDCAPS_SIZEMASK) < descr.get_size() - BaseImmovable::SMALL + 1)
-			return 0;
+			return nullptr;
 		if (descr.get_isport() && !(buildcaps & BUILDCAPS_PORT))
-			return 0;
+			return nullptr;
 	}
 
 	if (constructionsite)
@@ -820,7 +820,7 @@ void Player::remove_economy(Economy & economy) {
 		}
 }
 
-bool Player::has_economy(Economy & economy) const throw () {
+bool Player::has_economy(Economy & economy) const {
 	container_iterate_const(Economies, m_economies, i)
 		if (*i.current == &economy)
 			return true;
@@ -829,7 +829,6 @@ bool Player::has_economy(Economy & economy) const throw () {
 
 Player::Economies::size_type Player::get_economy_number
 	(Economy const * const economy) const
-throw ()
 {
 	Economies::const_iterator const
 		economies_end = m_economies.end(), economies_begin = m_economies.begin();
@@ -989,7 +988,6 @@ void Player::rediscover_node
 	(const Map              &       map,
 	 const Widelands::Field &       first_map_field,
 	 FCoords          const f)
-throw ()
 {
 
 	assert(0 <= f.x);
@@ -1055,16 +1053,16 @@ throw ()
 		{ //  map_object_descr[TCoords::None]
 
 			const Map_Object_Descr * map_object_descr;
-			field.constructionsite.becomes = 0;
+			field.constructionsite.becomes = nullptr;
 			if (const BaseImmovable * base_immovable = f.field->get_immovable()) {
 				map_object_descr = &base_immovable->descr();
 
 				if (Road::IsRoadDescr(map_object_descr))
-					map_object_descr = 0;
+					map_object_descr = nullptr;
 				else if (upcast(Building const, building, base_immovable)) {
 					if (building->get_position() != f)
 						// This is not the building's main position so we can not see it.
-						map_object_descr = 0;
+						map_object_descr = nullptr;
 					else {
 						if (upcast(ConstructionSite const, cs, building)) {
 							field.constructionsite = const_cast<ConstructionSite *>(cs)->get_info();
@@ -1072,7 +1070,7 @@ throw ()
 					}
 				}
 			} else
-				map_object_descr = 0;
+				map_object_descr = nullptr;
 			field.map_object_descr[TCoords<>::None] = map_object_descr;
 		}
 	}
@@ -1111,7 +1109,6 @@ void Player::see_node
 	 FCoords                  const f,
 	 Time                     const gametime,
 	 bool                     const forward)
-throw ()
 {
 	assert(0 <= f.x);
 	assert(f.x < map.get_width());
@@ -1143,7 +1140,6 @@ throw ()
 
 void Player::unsee_node
 	(Map_Index const i, Time const gametime, bool const forward)
-throw ()
 {
 	Field & field = m_fields[i];
 	if (field.vision <= 1) //  Already does not see this

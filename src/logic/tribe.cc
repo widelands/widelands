@@ -89,7 +89,7 @@ Tribe_Descr::Tribe_Descr
 
 			PARSE_MAP_OBJECT_TYPES_BEGIN("ware")
 				m_wares.add
-					(new Item_Ware_Descr
+					(new WareDescr
 					 	(*this, _name, _descname, path, prof, global_s));
 			PARSE_MAP_OBJECT_TYPES_END;
 
@@ -130,7 +130,7 @@ Tribe_Descr::Tribe_Descr
 			PARSE_MAP_OBJECT_TYPES_END;
 			if (not safe_building_index("constructionsite"))
 				throw game_data_error
-					(_("constructionsite type \"constructionsite\" is missing"));
+					("constructionsite type \"constructionsite\" is missing");
 
 			PARSE_MAP_OBJECT_TYPES_BEGIN("dismantlesite")
 				m_buildings.add
@@ -139,7 +139,7 @@ Tribe_Descr::Tribe_Descr
 			PARSE_MAP_OBJECT_TYPES_END;
 			if (not safe_building_index("dismantlesite"))
 				throw game_data_error
-					(_("dismantlesite type \"distmantlesite\" is missing"));
+					("dismantlesite type \"distmantlesite\" is missing");
 
 			PARSE_MAP_OBJECT_TYPES_BEGIN("warehouse")
 				m_buildings.add
@@ -256,18 +256,18 @@ Tribe_Descr::Tribe_Descr
 						if (m_anim_frontier.empty())
 							throw Nonexistent();
 						frontier_style_index(style_name);
-						throw game_data_error(_("\"%s\" is duplicated"), style_name);
+						throw game_data_error("\"%s\" is duplicated", style_name);
 					} catch (Nonexistent) {
 						m_anim_frontier.push_back
 							(std::pair<std::string, uint32_t>
 							 	(style_name,
-							 	 g_anim.get(path, *s, 0)));
+							 	 g_anim.get(path, *s, nullptr)));
 					}
 				}
 				if (m_anim_frontier.empty())
-					throw game_data_error(_("none found"));
+					throw game_data_error("none found");
 			} catch (const _wexception & e) {
-				throw game_data_error(_("frontier styles: %s"), e.what());
+				throw game_data_error("frontier styles: %s", e.what());
 			}
 			try {
 				while (Section * const s = root_conf.get_next_section("flag"))
@@ -277,28 +277,28 @@ Tribe_Descr::Tribe_Descr
 						if (m_anim_flag.empty())
 							throw Nonexistent();
 						flag_style_index(style_name);
-						throw game_data_error(_("\"%s\" is duplicated"), style_name);
+						throw game_data_error("\"%s\" is duplicated", style_name);
 					} catch (Nonexistent) {
 						m_anim_flag.push_back
 							(std::pair<std::string, uint32_t>
 							 	(style_name,
-							 	 g_anim.get(path, *s, 0)));
+							 	 g_anim.get(path, *s, nullptr)));
 					}
 				}
 				if (m_anim_flag.empty())
-					throw game_data_error(_("none found"));
+					throw game_data_error("none found");
 			} catch (const _wexception & e) {
-				throw game_data_error(_("flag styles: %s"), e.what());
+				throw game_data_error("flag styles: %s", e.what());
 			}
 
 			// Register Lua scripts
 			if (g_fs->IsDirectory(path + "scripting")) {
 				std::unique_ptr<FileSystem> sub_fs(g_fs->MakeSubFileSystem(path));
-				egbase.lua().register_scripts(*sub_fs, "tribe_" + tribename);
+				egbase.lua().register_scripts(*sub_fs, "tribe_" + tribename, "scripting");
 			}
 
 			// Read initializations -- all scripts are initializations currently
-			ScriptContainer & scripts =
+			const ScriptContainer& scripts =
 				egbase.lua().get_scripts_for("tribe_" + tribename);
 			container_iterate_const(ScriptContainer, scripts, s) {
 				std::unique_ptr<LuaTable> t =
@@ -331,21 +331,8 @@ Tribe_Descr::Tribe_Descr
 				m_compatibility_immovable[v->get_name()] = split_string(v->get_string(), " ");
 		}
 	} catch (const _wexception & e) {
-		throw game_data_error(_("tribe %s: %s"), tribename.c_str(), e.what());
+		throw game_data_error("tribe %s: %s", tribename.c_str(), e.what());
 	}
-#ifdef WRITE_GAME_DATA_AS_HTML
-	if (g_options.pull_section("global").get_bool("write_HTML", false)) {
-		m_ware_references     = new HTMLReferences[get_nrwares    ().value()];
-		m_worker_references   = new HTMLReferences[get_nrworkers  ().value()];
-		m_building_references = new HTMLReferences[get_nrbuildings().value()];
-		writeHTMLBuildings(path);
-		writeHTMLWorkers  (path);
-		writeHTMLWares    (path);
-		delete[] m_building_references;
-		delete[] m_worker_references;
-		delete[] m_ware_references;
-	}
-#endif
 }
 
 
@@ -389,7 +376,7 @@ bool Tribe_Descr::exists_tribe
 	buf            += name;
 	buf            += "/conf";
 
-	LuaInterface * lua = create_LuaInterface();
+	LuaInterface lua;
 	FileRead f;
 	if (f.TryOpen(*g_fs, buf.c_str())) {
 		if (info)
@@ -402,30 +389,25 @@ bool Tribe_Descr::exists_tribe
 				std::string path = "tribes/" + name + "/scripting";
 				if (g_fs->IsDirectory(path)) {
 					std::unique_ptr<FileSystem> sub_fs(g_fs->MakeSubFileSystem(path));
-					lua->register_scripts(*sub_fs, "tribe_" + name, "");
+					lua.register_scripts(*sub_fs, "tribe_" + name, "");
 				}
 
-				ScriptContainer & scripts = lua->get_scripts_for("tribe_" + name);
+				const ScriptContainer& scripts = lua.get_scripts_for("tribe_" + name);
 				container_iterate_const(ScriptContainer, scripts, s) {
 					std::unique_ptr<LuaTable> t =
-						lua->run_script("tribe_" + name, s->first);
+						lua.run_script("tribe_" + name, s->first);
 
 					info->initializations.push_back
 						(TribeBasicInfo::Initialization
 						 	(s->first, t->get_string("name")));
 				}
 			} catch (const _wexception & e) {
-				delete lua;
 				throw game_data_error
 					("reading basic info for tribe \"%s\": %s",
 					 name.c_str(), e.what());
 			}
-
-		delete lua;
 		return true;
 	}
-
-	delete lua;
 	return false;
 }
 

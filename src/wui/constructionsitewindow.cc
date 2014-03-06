@@ -38,7 +38,7 @@ struct ConstructionSite_Window : public Building_Window {
 		 Widelands::ConstructionSite &,
 		 UI::Window *                & registry);
 
-	virtual void think();
+	virtual void think() override;
 
 private:
 	UI::Progress_Bar * m_progress;

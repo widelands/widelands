@@ -38,20 +38,20 @@ struct Text_Block {
 	Text_Block(const Text_Block & src);
 
 	void set_font_size(int32_t const font_size) {m_font_size = font_size;}
-	int32_t get_font_size() const throw () {return m_font_size;}
+	int32_t get_font_size() const {return m_font_size;}
 
 	void set_font_color(const RGBColor & font_color) {m_font_color = font_color;}
-	RGBColor get_font_color() const throw () {return m_font_color;}
+	RGBColor get_font_color() const {return m_font_color;}
 
 	void set_font_weight(const std::string & font_weight) {
 		m_font_weight = font_weight;
 	}
-	const std::string & get_font_weight() const throw () {return m_font_weight;}
+	const std::string & get_font_weight() const {return m_font_weight;}
 
 	void set_font_style(const std::string & font_style) {
 		m_font_style = font_style;
 	}
-	const std::string & get_font_style() const throw () {return m_font_style;}
+	const std::string & get_font_style() const {return m_font_style;}
 
 	void set_font_decoration(const std::string & font_decoration) {
 		m_font_decoration = font_decoration;
@@ -59,7 +59,7 @@ struct Text_Block {
 	const std::string & get_font_decoration() const {return m_font_decoration;}
 
 	void set_font_face(const std::string & font_face) {m_font_face = font_face;}
-	const std::string & get_font_face() const throw () {return m_font_face;}
+	const std::string & get_font_face() const {return m_font_face;}
 
 	void set_line_spacing(int32_t const line_spacing) {
 		m_line_spacing = line_spacing;
@@ -75,7 +75,7 @@ struct Text_Block {
 		m_line_breaks = line_breaks;
 	}
 	const std::vector<std::vector<std::string>::size_type> & get_line_breaks
-		() const throw ()
+		() const
 	{
 		return m_line_breaks;
 	}
@@ -111,10 +111,10 @@ struct Richtext_Block {
 	const std::vector<std::string> & get_images() const {return m_images;}
 
 	void set_image_align(Align const image_align) {m_image_align = image_align;}
-	Align get_image_align() const throw () {return m_image_align;}
+	Align get_image_align() const {return m_image_align;}
 
 	void set_text_align(Align const text_align) {m_text_align = text_align;}
-	Align get_text_align() const throw () {return m_text_align;}
+	Align get_text_align() const {return m_text_align;}
 
 	void set_text_blocks(const std::vector<Text_Block> & text_blocks) {
 		m_text_blocks = text_blocks;

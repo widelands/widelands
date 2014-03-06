@@ -42,7 +42,7 @@ struct DirAnimations {
 		 const std::string           & directory,
 		 Profile                     &,
 		 char                  const * sectnametempl,
-		 Section                     * defaults    = 0);
+		 Section                     * defaults    = nullptr);
 
 	uint32_t get_animation(Widelands::Direction const dir) const {
 		return m_animations[dir - 1];
@@ -52,7 +52,7 @@ struct DirAnimations {
 		return DirAnimations(0); // Since real animation IDs are positive, this is safe
 	}
 
-	operator bool() const throw () {return m_animations[0];}
+	operator bool() const {return m_animations[0];}
 
 private:
 	uint32_t m_animations[6];

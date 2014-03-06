@@ -57,7 +57,7 @@ struct BaseImmovable;
 /// a field like it is represented in the game
 /// \todo This is all one evil hack :(
 struct Field {
-	friend struct Map;
+	friend class Map;
 	friend struct Bob;
 	friend struct BaseImmovable;
 
@@ -129,26 +129,26 @@ private:
 	Terrains terrains;
 
 public:
-	Height get_height() const throw () {return height;}
+	Height get_height() const {return height;}
 	NodeCaps nodecaps() const {return static_cast<NodeCaps>(caps);}
 	uint16_t get_caps()     const {return caps;}
 
-	Terrains      get_terrains() const throw () {return terrains;}
-	Terrain_Index terrain_d   () const throw () {return terrains.d;}
-	Terrain_Index terrain_r   () const throw () {return terrains.r;}
-	void          set_terrains(const Terrains & i) throw () {terrains = i;}
+	Terrains      get_terrains() const {return terrains;}
+	Terrain_Index terrain_d   () const {return terrains.d;}
+	Terrain_Index terrain_r   () const {return terrains.r;}
+	void          set_terrains(const Terrains & i) {terrains = i;}
 	void set_terrain
 		(const TCoords<FCoords>::TriangleIndex& t, Terrain_Index const i)
-		throw ()
+
 	{
 		if (t == TCoords<FCoords>::D) set_terrain_d(i);
 		else set_terrain_r(i);
 	}
-	void set_terrain_d(Terrain_Index const i) throw () {terrains.d = i;}
-	void set_terrain_r(Terrain_Index const i) throw () {terrains.r = i;}
+	void set_terrain_d(Terrain_Index const i) {terrains.d = i;}
+	void set_terrain_r(Terrain_Index const i) {terrains.r = i;}
 
-	Bob * get_first_bob() const throw () {return bobs;}
-	const BaseImmovable * get_immovable() const throw () {return immovable;}
+	Bob * get_first_bob() const {return bobs;}
+	const BaseImmovable * get_immovable() const {return immovable;}
 	BaseImmovable * get_immovable() {return immovable;}
 
 	void set_brightness
@@ -159,13 +159,13 @@ public:
 	 * Does not change the border bit of this or neighbouring fields. That must
 	 * be done separately.
 	 */
-	void set_owned_by(const Player_Number n) throw () {
+	void set_owned_by(const Player_Number n) {
 		assert(n <= MAX_PLAYERS);
 		owner_info_and_selections =
 			n | (owner_info_and_selections & ~Player_Number_Bitmask);
 	}
 
-	Player_Number get_owned_by() const throw () {
+	Player_Number get_owned_by() const {
 		assert
 			((owner_info_and_selections & Player_Number_Bitmask) <= MAX_PLAYERS);
 		return owner_info_and_selections & Player_Number_Bitmask;
@@ -179,13 +179,13 @@ public:
 	///
 	/// player_number must be in the range 1 .. Player_Number_Bitmask or the
 	/// behaviour is undefined.
-	bool is_interior(const Player_Number player_number) const throw () {
+	bool is_interior(const Player_Number player_number) const {
 		assert(0 < player_number);
 		assert    (player_number <= Player_Number_Bitmask);
 		return player_number == (owner_info_and_selections & Owner_Info_Bitmask);
 	}
 
-	void set_border(const bool b) throw () {
+	void set_border(const bool b) {
 		owner_info_and_selections =
 			(owner_info_and_selections & ~Border_Bitmask) | (b << Border_Bit);
 	}

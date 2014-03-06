@@ -21,7 +21,7 @@ scythe=1
 3=animation harvesting 10000
 4=object harvest
 5=animation gathering 4000
-6=createitem corn
+6=createware corn
 7=return
 
 [idle]

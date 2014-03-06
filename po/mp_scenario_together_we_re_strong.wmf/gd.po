@@ -1,0 +1,47 @@
+# Gaelic; Scottish translation for widelands
+# Copyright (c) 2013 Rosetta Contributors and Canonical Ltd 2013
+# This file is distributed under the same license as the widelands package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2013.
+# GunChleoc <fios@foramnagaidhlig.net>, 2013.
+msgid ""
+msgstr ""
+"Project-Id-Version: widelands\n"
+"Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
+"POT-Creation-Date: 2013-09-01 09:23+0000\n"
+"PO-Revision-Date: 2013-10-09 20:43+0000\n"
+"Last-Translator: GunChleoc <Unknown>\n"
+"Language-Team: Fòram na Gàidhlig http://www.foramnagaidhlig.net\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Launchpad-Export-Date: 2013-10-10 04:33+0000\n"
+"X-Generator: Launchpad (build 16799)\n"
+"Language: gd\n"
+
+#: ../../maps/MP Scenarios/Together we're strong.wmf/scripting/multiplayer_init.lua:224
+msgid "Congratulations!"
+msgstr "Meal do naidheachd!"
+
+#: ../../maps/MP Scenarios/Together we're strong.wmf/scripting/multiplayer_init.lua:212
+msgid "The player who defeats the other player wins the game"
+msgstr ""
+"Buanaichidh an cluicheadair a bheir buaidh air a' chluicheadair eile an geama"
+
+#: ../../maps/MP Scenarios/Together we're strong.wmf/scripting/multiplayer_init.lua:212
+msgid "Together we're strong"
+msgstr "Làidir còmhla"
+
+#: ../../maps/MP Scenarios/Together we're strong.wmf/scripting/multiplayer_init.lua:219
+msgid "You are defeated!"
+msgstr "Chaidh ruaig a chur ort!"
+
+#: ../../maps/MP Scenarios/Together we're strong.wmf/scripting/multiplayer_init.lua:220
+msgid ""
+"You have nothing to command left. If you want, you may continue as spectator."
+msgstr ""
+"Chan eil dad ri òrdachadh air fhàgail dhut. Faodaidh tu leantainn air adhart "
+"'nad amharc ma thogras tu."
+
+#: ../../maps/MP Scenarios/Together we're strong.wmf/scripting/multiplayer_init.lua:224
+msgid "You have won this game!"
+msgstr "Bhuannaich thu an geama seo!"

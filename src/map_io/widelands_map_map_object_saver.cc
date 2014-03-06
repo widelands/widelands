@@ -29,7 +29,7 @@
 #include "logic/battle.h"
 #include "logic/bob.h"
 #include "logic/building.h"
-#include "logic/item_ware_descr.h"
+#include "logic/ware_descr.h"
 #include "wexception.h"
 
 namespace Widelands {
@@ -90,7 +90,7 @@ bool Map_Map_Object_Saver::is_object_known(const Map_Object & obj) const
 	return it->second.registered;
 }
 
-bool Map_Map_Object_Saver::is_object_saved(const Map_Object & obj) throw ()
+bool Map_Map_Object_Saver::is_object_saved(const Map_Object & obj)
 {
 	return get_object_record(obj).saved;
 }

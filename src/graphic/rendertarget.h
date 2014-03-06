@@ -31,7 +31,7 @@
 class Surface;
 
 namespace Widelands {
-struct Player;
+class Player;
 };
 
 /**
@@ -72,12 +72,12 @@ public:
 		(Point                     dst,
 		 uint32_t                  animation,
 		 uint32_t                  time,
-		 Widelands::Player const * = 0);
+		 Widelands::Player const * = nullptr);
 
 	void drawstatic
 			(Point                     dst,
 			 uint32_t                  animation,
-			 Widelands::Player const * = 0);
+			 Widelands::Player const * = nullptr);
 
 	void drawanimrect
 		(Point                     dst,
@@ -93,7 +93,7 @@ public:
 	const Point & get_offset() const {return m_offset;}
 
 protected:
-	bool clip(Rect & r) const throw ();
+	bool clip(Rect & r) const;
 
 	void doblit(Point dst, const Image* src, Rect srcrc, Composite cm = CM_Normal);
 

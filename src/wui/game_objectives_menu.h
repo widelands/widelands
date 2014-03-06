@@ -27,7 +27,7 @@
 #include "ui_basic/unique_window.h"
 
 namespace Widelands {
-struct Game;
+class Game;
 struct Objective;
 }
 struct Interactive_Player;
@@ -35,7 +35,7 @@ struct Interactive_Player;
 ///  Shows the not already fulfilled objectives.
 struct GameObjectivesMenu : public UI::UniqueWindow {
 	GameObjectivesMenu(Interactive_Player &, UI::UniqueWindow::Registry &);
-	void think();
+	void think() override;
 
 private:
 	Interactive_Player & iplayer() const;

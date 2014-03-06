@@ -1,0 +1,242 @@
+# Gaelic; Scottish translation for widelands
+# Copyright (c) 2013 Rosetta Contributors and Canonical Ltd 2013
+# This file is distributed under the same license as the widelands package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2013.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: widelands\n"
+"Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
+"POT-Creation-Date: 2014-03-05 19:55+0000\n"
+"PO-Revision-Date: 2013-10-17 23:27+0000\n"
+"Last-Translator: GunChleoc <Unknown>\n"
+"Language-Team: Fòram na Gàidhlig http://www.foramnagaidhlig.net\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=4; plural=(n==1 || n==11) ? 0 : (n==2 || n==12) ? 1 : "
+"(n > 2 && n < 20) ? 2 : 3;\n"
+"X-Launchpad-Export-Date: 2014-03-06 05:39+0000\n"
+"X-Generator: Launchpad (build 16948)\n"
+"Language: gd\n"
+
+#: ../../scripting/win_condition_texts.lua:2
+msgid "Congratulations!"
+msgstr "Meal do naidheachd!"
+
+#: ../../scripting/win_condition_texts.lua:3
+msgid "You have won this game!"
+msgstr "Bhuannaich thu an geama seo!"
+
+#: ../../scripting/win_condition_texts.lua:7
+msgid "You are defeated!"
+msgstr "Chaidh ruaig a chur ort!"
+
+#: ../../scripting/win_condition_texts.lua:8
+msgid ""
+"You lost your last warehouse and are therefore defeated. You may continue as "
+"spectator if you want."
+msgstr ""
+"Chaill thu an taigh-stòrais mu dheireadh agad is chaidh ruaig a chur ort mar "
+"sin. Faodaidh tu leantainn air adhart mar amharc ma thogras tu."
+
+#: ../../scripting/win_condition_texts.lua:12
+msgid "You won"
+msgstr "Bhuannaich thu"
+
+#: ../../scripting/win_condition_texts.lua:13
+msgid "You are the winner!"
+msgstr "Bhuannaich thu!"
+
+#: ../../scripting/win_condition_texts.lua:17
+msgid "You lost"
+msgstr "Chaill thu"
+
+#: ../../scripting/win_condition_texts.lua:18
+msgid "You’ve lost this game!"
+msgstr ""
+
+#: ../../scripting/win_condition_texts.lua:22
+msgid "Status"
+msgstr "Staid"
+
+#: ../../scripting/win_condition_texts.lua:23
+msgid "Player overview:"
+msgstr "Foir-shealladh a' chluicheadair:"
+
+#: ../../scripting/win_conditions/00_endless_game.lua:12
+msgid "Endless Game"
+msgstr "Geama gun chrìch"
+
+#: ../../scripting/win_conditions/00_endless_game.lua:14
+msgid "This is an endless game without rules."
+msgstr "Seo geama gun chrìch is gun riaghailtean."
+
+#: ../../scripting/win_conditions/01_defeat_all.lua:12
+msgid "Autocrat"
+msgstr ""
+
+#: ../../scripting/win_conditions/01_defeat_all.lua:14
+msgid "The tribe or team that can defeat all others wins the game!"
+msgstr "Buannaichidh an treubh no sgioba a chuireas ruaig air càch!"
+
+#: ../../scripting/win_conditions/02_collectors.lua:13
+msgid "Collectors"
+msgstr ""
+
+#: ../../scripting/win_conditions/02_collectors.lua:16
+msgid ""
+"You get points for precious wares in your warehouses. The player with the "
+"highest number of wares at the end of 4 hours wins the game."
+msgstr ""
+
+#: ../../scripting/win_conditions/02_collectors.lua:19
+msgid "Points"
+msgstr ""
+
+#: ../../scripting/win_conditions/02_collectors.lua:95
+msgid "Status for %s"
+msgstr ""
+
+#: TRANSLATORS: For example: "gold (3 P) x 4 = 12 P", P meaning "Points"
+#: ../../scripting/win_conditions/02_collectors.lua:105
+msgid "  %1$s (%2$i P) x %3$i = %4$i P<br>"
+msgstr ""
+
+#: ../../scripting/win_conditions/02_collectors.lua:109
+msgid "Total: %i point"
+msgid_plural "Total: %i points"
+msgstr[0] ""
+msgstr[1] ""
+
+#: TRANSLATORS: Context: "The game will end in %s."
+#: ../../scripting/win_conditions/02_collectors.lua:121
+msgid "%1$ih%2$02im"
+msgstr ""
+
+#: ../../scripting/win_conditions/02_collectors.lua:123
+msgid "%i minute"
+msgid_plural "%i minutes"
+msgstr[0] ""
+msgstr[1] ""
+
+#: ../../scripting/win_conditions/02_collectors.lua:125
+msgid "The game will end in %s."
+msgstr "Thig an geama gu crìch an ceann %s."
+
+#: ../../scripting/win_conditions/03_territorial_lord.lua:13
+msgid "Territorial Lord"
+msgstr ""
+
+#: ../../scripting/win_conditions/03_territorial_lord.lua:16
+msgid ""
+"Each player or team tries to obtain more than half of the map’s area. The "
+"winner will be the player or the team that is able to keep that area for at "
+"least 20 minutes."
+msgstr ""
+
+#: ../../scripting/win_conditions/03_territorial_lord.lua:153
+#: ../../scripting/win_conditions/03_territorial_time.lua:23
+msgid "Team %i"
+msgstr "Sgioba %i"
+
+#: ../../scripting/win_conditions/03_territorial_lord.lua:155
+#: ../../scripting/win_conditions/03_territorial_time.lua:199
+msgid "%s owns more than half of the map’s area."
+msgstr ""
+
+#: ../../scripting/win_conditions/03_territorial_lord.lua:157
+#: ../../scripting/win_conditions/03_territorial_time.lua:201
+msgid "You’ve still got %i minute to prevent a victory."
+msgid_plural "You’ve still got %i minutes to prevent a victory."
+msgstr[0] ""
+msgstr[1] ""
+
+#: ../../scripting/win_conditions/03_territorial_lord.lua:162
+#: ../../scripting/win_conditions/03_territorial_time.lua:206
+msgid "You own more than half of the map’s area."
+msgstr ""
+
+#: ../../scripting/win_conditions/03_territorial_lord.lua:164
+#: ../../scripting/win_conditions/03_territorial_time.lua:208
+msgid "Keep it for %i more minute to win the game."
+msgid_plural "Keep it for %i more minutes to win the game."
+msgstr[0] ""
+msgstr[1] ""
+
+#: ../../scripting/win_conditions/03_territorial_time.lua:13
+msgid "Territorial Time"
+msgstr ""
+
+#: ../../scripting/win_conditions/03_territorial_time.lua:16
+msgid ""
+"Each player or team tries to obtain more than half of the map’s area. The "
+"winner will be the player or the team that is able to keep that area for at "
+"least 20 minutes, or the one with the most territory after 4 hours, "
+"whichever comes first."
+msgstr ""
+
+#: ../../scripting/win_conditions/03_territorial_time.lua:21
+msgid "%1$s has %2$3.0f%% of the land (%3$i of %4$i)."
+msgstr ""
+
+#: ../../scripting/win_conditions/03_territorial_time.lua:22
+msgid "%1$s had %2$3.0f%% of the land (%3$i of %4$i)."
+msgstr ""
+
+#: ../../scripting/win_conditions/03_territorial_time.lua:222
+msgid "Otherwise the game will end in %i minute."
+msgid_plural "Otherwise the game will end in %i minutes."
+msgstr[0] ""
+msgstr[1] ""
+
+#: ../../scripting/win_conditions/03_territorial_time.lua:227
+#: ../../scripting/win_conditions/04_wood_gnome.lua:83
+msgid "The game will end in %i minute."
+msgid_plural "The game will end in %i minutes."
+msgstr[0] ""
+msgstr[1] ""
+
+#: ../../scripting/win_conditions/04_wood_gnome.lua:13
+msgid "Wood Gnome"
+msgstr "Gille-dubh"
+
+#: ../../scripting/win_conditions/04_wood_gnome.lua:16
+msgid ""
+"As wood gnome you like big forests, so your task is to have more trees on\n"
+"your territory than any other player. The game will end after 4 hours of\n"
+"playing. The one with the most trees at that point will win the game."
+msgstr ""
+
+#: ../../scripting/win_conditions/04_wood_gnome.lua:19
+msgid "Trees owned"
+msgstr "Na craobhan a th' agad"
+
+#: ../../scripting/win_conditions/04_wood_gnome.lua:89
+#: ../../scripting/win_conditions/04_wood_gnome.lua:141
+#: ../../scripting/win_conditions/04_wood_gnome.lua:145
+msgid "%i tree"
+msgid_plural "%i trees"
+msgstr[0] ""
+msgstr[1] ""
+
+#: ../../scripting/win_conditions/04_wood_gnome.lua:91
+msgid "%1$s has %2$s at the moment."
+msgstr ""
+
+#: ../../scripting/win_conditions/04_wood_gnome.lua:142
+msgid "%1$s had %2$s."
+msgstr ""
+
+#: ../../scripting/win_conditions/04_wood_gnome.lua:147
+msgid "The winner is %1$s with %2$s."
+msgstr ""
+
+#: ../../scripting/win_conditions/05_endless_game_fogless.lua:12
+msgid "Endless Game (no fog)"
+msgstr "Geama gun chrìch (gun cheò)"
+
+#: ../../scripting/win_conditions/05_endless_game_fogless.lua:13
+msgid "This is an endless game without rules. Fog of war is disabled."
+msgstr ""
+"Seo geama gun chrìch is gun riaghailtean. Tha ceò a' chogaidh à comas."

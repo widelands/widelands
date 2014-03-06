@@ -58,23 +58,23 @@ struct Button : public NamedPanel {
 
 	void set_pic(const Image* pic);
 	void set_title(const std::string &);
-	const std::string & get_title() const throw () {return m_title;}
+	const std::string & get_title() const {return m_title;}
 
 	bool enabled() const {return m_enabled;}
 	void set_enabled(bool on);
 	void set_repeating(bool const on) {m_repeating = on;}
 	void set_draw_caret(bool draw_caret) {m_draw_caret = draw_caret;}
 	void set_font(Font * font) {m_font = font;}
-	bool is_snap_target() const {return true;}
+	bool is_snap_target() const override {return true;}
 
 	// Drawing and event handlers
-	void draw(RenderTarget &);
-	void think();
+	void draw(RenderTarget &) override;
+	void think() override;
 
-	void handle_mousein(bool inside);
-	bool handle_mousepress  (Uint8 btn, int32_t x, int32_t y);
-	bool handle_mouserelease(Uint8 btn, int32_t x, int32_t y);
-	bool handle_mousemove(Uint8, int32_t, int32_t, int32_t, int32_t);
+	void handle_mousein(bool inside) override;
+	bool handle_mousepress  (Uint8 btn, int32_t x, int32_t y) override;
+	bool handle_mouserelease(Uint8 btn, int32_t x, int32_t y) override;
+	bool handle_mousemove(Uint8, int32_t, int32_t, int32_t, int32_t) override;
 
 	// Set the permanently pressed state of the button
 	void set_perm_pressed(bool state);

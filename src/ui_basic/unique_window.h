@@ -48,7 +48,7 @@ struct UniqueWindow : public Window {
 		int32_t x, y;
 		bool valid_pos;
 
-		Registry() : window(0), x(0), y(0), valid_pos(false) {}
+		Registry() : window(nullptr), x(0), y(0), valid_pos(false) {}
 		~Registry();
 	};
 

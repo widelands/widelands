@@ -44,7 +44,6 @@ void Map_Waredata_Data_Packet::Read
 	 Editor_Game_Base      &       egbase,
 	 bool                    const skip,
 	 Map_Map_Object_Loader &       mol)
-throw (_wexception)
 {
 	if (skip)
 		return;
@@ -65,13 +64,13 @@ throw (_wexception)
 				}
 				try {
 					WareInstance & ware = mol.get<WareInstance>(serial);
-					ware.m_economy = 0;
+					ware.m_economy = nullptr;
 					uint32_t     const location_serial = fr.Unsigned32();
 					uint32_t     const index           = fr.Unsigned32();
 					try {
 						Map_Object & location = mol.get<Map_Object>(location_serial);
-						const Tribe_Descr * tribe = 0;
-						Economy * economy = 0;
+						const Tribe_Descr * tribe = nullptr;
+						Economy * economy = nullptr;
 						std::string explanation;
 
 						if (upcast(PlayerImmovable, player_immovable, &location)) {
@@ -117,7 +116,7 @@ throw (_wexception)
 							}
 						else
 							ware.m_transfer_nextstep =
-								static_cast<PlayerImmovable *>(0);
+								static_cast<PlayerImmovable *>(nullptr);
 
 						//  Do some kind of init.
 						ware.set_location
@@ -128,7 +127,7 @@ throw (_wexception)
 					}
 					mol.mark_object_as_loaded(ware);
 				} catch (const _wexception & e) {
-					throw game_data_error(_("item %u: %s"), serial, e.what());
+					throw game_data_error("item %u: %s", serial, e.what());
 				}
 			}
 		} else if
@@ -138,7 +137,7 @@ throw (_wexception)
 				Serial const serial = fr.Unsigned32();
 				try {
 					WareInstance & ware = mol.get<WareInstance>(serial);
-					ware.m_economy = 0;
+					ware.m_economy = nullptr;
 					uint32_t     const location_serial = fr.Unsigned32();
 					char const * const type_name       = fr.CString   ();
 					try {
@@ -187,7 +186,7 @@ throw (_wexception)
 							}
 						else
 							ware.m_transfer_nextstep =
-								static_cast<PlayerImmovable *>(0);
+								static_cast<PlayerImmovable *>(nullptr);
 
 						//  Do some kind of init.
 						ware.set_location
@@ -198,21 +197,20 @@ throw (_wexception)
 					}
 					mol.mark_object_as_loaded(ware);
 				} catch (const _wexception & e) {
-					throw game_data_error(_("item %u: %s"), serial, e.what());
+					throw game_data_error("item %u: %s", serial, e.what());
 				}
 			}
 		} else
 			throw game_data_error
-				(_("unknown/unhandled version %u"), packet_version);
+				("unknown/unhandled version %u", packet_version);
 	} catch (const _wexception & e) {
-		throw game_data_error(_("ware data: %s"), e.what());
+		throw game_data_error("ware data: %s", e.what());
 	}
 }
 
 
 void Map_Waredata_Data_Packet::Write
 	(FileSystem & /* fs */, Editor_Game_Base & /* egbase */, Map_Map_Object_Saver & /* mos */)
-throw (_wexception)
 {
 	throw wexception("Map_Waredata_Data_Packet::Write is obsolete");
 }

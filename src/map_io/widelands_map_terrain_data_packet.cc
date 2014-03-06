@@ -36,7 +36,6 @@ namespace Widelands {
 
 void Map_Terrain_Data_Packet::Read
 	(FileSystem & fs, Editor_Game_Base & egbase, bool, Map_Map_Object_Loader &)
-throw (_wexception)
 {
 	FileRead fr;
 	fr.Open(fs, "binary/terrain");
@@ -75,16 +74,15 @@ throw (_wexception)
 			}
 		} else
 			throw game_data_error
-				(_("unknown/unhandled version %u"), packet_version);
+				("unknown/unhandled version %u", packet_version);
 	} catch (const _wexception & e) {
-		throw game_data_error(_("terrain: %s"), e.what());
+		throw game_data_error("terrain: %s", e.what());
 	}
 }
 
 
 void Map_Terrain_Data_Packet::Write
 	(FileSystem & fs, Editor_Game_Base & egbase, Map_Map_Object_Saver &)
-throw (_wexception)
 {
 
 	FileWrite fw;

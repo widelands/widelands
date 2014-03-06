@@ -43,12 +43,11 @@
 #include "upcast.h"
 #include "wui/interactive_player.h"
 
-#define WINDOW_WIDTH  std::min(600, g_gr->get_xres() - 40)
+#define WINDOW_WIDTH  std::min(700, g_gr->get_xres() - 40)
 #define WINDOW_HEIGHT std::min(550, g_gr->get_yres() - 40)
 
-#define WARE_PICTURE_COLUMN_WIDTH 32
-#define QUANTITY_COLUMN_WIDTH 64
-#define WARE_GROUPS_TABLE_WIDTH (WINDOW_WIDTH * 2 / 3 - 5)
+#define QUANTITY_COLUMN_WIDTH 74
+#define WARE_GROUPS_TABLE_WIDTH (WINDOW_WIDTH * 1 / 2 - 5)
 
 using namespace Widelands;
 
@@ -64,22 +63,19 @@ EncyclopediaWindow::EncyclopediaWindow
 		(&parent, "encyclopedia",
 		 &registry,
 		 WINDOW_WIDTH, WINDOW_HEIGHT,
-		 _("Tribe ware encyclopedia")),
+		 _("Tribal Ware Encyclopedia")),
 	wares            (this, 5, 5, WINDOW_WIDTH - 10, WINDOW_HEIGHT - 250),
-	prodSites        (this, 5, WINDOW_HEIGHT - 150, WINDOW_WIDTH / 3 - 5, 140),
+	prodSites        (this, 5, WINDOW_HEIGHT - 150, WINDOW_WIDTH - WARE_GROUPS_TABLE_WIDTH - 10, 145),
 	condTable
 		(this,
-		 WINDOW_WIDTH / 3, WINDOW_HEIGHT - 150, WARE_GROUPS_TABLE_WIDTH, 140),
+		 WINDOW_WIDTH - WARE_GROUPS_TABLE_WIDTH - 5, WINDOW_HEIGHT - 150, WARE_GROUPS_TABLE_WIDTH, 145),
 	descrTxt         (this, 5, WINDOW_HEIGHT - 240, WINDOW_WIDTH - 10, 80, "")
 {
 	wares.selected.connect(boost::bind(&EncyclopediaWindow::wareSelected, this, _1));
 
 	prodSites.selected.connect(boost::bind(&EncyclopediaWindow::prodSiteSelected, this, _1));
-
-	condTable.add_column (WARE_PICTURE_COLUMN_WIDTH);
 	condTable.add_column
 		(WARE_GROUPS_TABLE_WIDTH
-		 - WARE_PICTURE_COLUMN_WIDTH
 		 - QUANTITY_COLUMN_WIDTH,
 		 _("Consumed ware type(s)"));
 	condTable.add_column (QUANTITY_COLUMN_WIDTH, _("Quantity"));
@@ -96,7 +92,7 @@ void EncyclopediaWindow::fillWares() {
 	std::vector<Ware> ware_vec;
 
 	for (Ware_Index i = Ware_Index::First(); i < nr_wares; ++i) {
-		Item_Ware_Descr const * ware = tribe.get_ware_descr(i);
+		WareDescr const * ware = tribe.get_ware_descr(i);
 		Ware w(i, ware);
 		ware_vec.push_back(w);
 	}
@@ -153,7 +149,7 @@ void EncyclopediaWindow::prodSiteSelected(uint32_t) {
 	//  FIXME This needs reworking. A program can indeed produce iron even if
 	//  FIXME the program name is not any of produce_iron, smelt_iron, prog_iron
 	//  FIXME or work. What matters is whether the program has a statement such
-	//  FIXME as "produce iron" or "createitem iron". The program name is not
+	//  FIXME as "produce iron" or "createware iron". The program name is not
 	//  FIXME supposed to have any meaning to the game logic except to uniquely
 	//  FIXME identify the program.
 	//  Only shows information from the first program that has a name indicating
@@ -195,6 +191,7 @@ void EncyclopediaWindow::prodSiteSelected(uint32_t) {
 							tribe.get_ware_descr(*k)->descname();
 						if (k.advance().empty())
 							break;
+						/** TRANSLATORS: List or wares, e.g. "Fish or Meat" */
 						ware_type_names += _(" or ");
 					}
 
@@ -208,10 +205,9 @@ void EncyclopediaWindow::prodSiteSelected(uint32_t) {
 					UI::Table<uintptr_t>::Entry_Record & tableEntry =
 						condTable.add(0);
 					tableEntry.set_picture
-						(0, tribe.get_ware_descr(*ware_types.begin())->icon());
-					tableEntry.set_string (1, ware_type_names);
-					tableEntry.set_string (2, amount_string);
-					condTable.set_sort_column(1);
+						(0, tribe.get_ware_descr(*ware_types.begin())->icon(), ware_type_names);
+					tableEntry.set_string (1, amount_string);
+					condTable.set_sort_column(0);
 					condTable.sort();
 				}
 			}

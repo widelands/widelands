@@ -66,10 +66,10 @@ private:
 
 		void set_view_pos(int32_t x, int32_t y);
 
-		void draw(RenderTarget &);
+		void draw(RenderTarget &) override;
 
-		bool handle_mousepress  (Uint8 btn, int32_t x, int32_t y);
-		bool handle_mouserelease(Uint8 btn, int32_t x, int32_t y);
+		bool handle_mousepress  (Uint8 btn, int32_t x, int32_t y) override;
+		bool handle_mouserelease(Uint8 btn, int32_t x, int32_t y) override;
 
 		void set_zoom(int32_t z);
 

@@ -10,19 +10,19 @@ is=green
 dither_layer=50
 
 [mountain1]
-name=_"Mountain1"
+name=_"Mountain 1"
 resources=coal, iron, gold, granit
 is=mountain
 dither_layer=70
 
 [ice_flows]
-name=_"Ice flows"
+name=_"Ice Floes"
 is=water
 fps=5
 dither_layer=10
 
 [ice_flows2]
-name=_"Ice flows2"
+name=_"Ice Floes 2"
 is=water
 fps=5
 dither_layer=20
@@ -41,37 +41,37 @@ fps=8
 dither_layer=0
 
 [tundra_taiga]
-name=_"Tundra taiga"
+name=_"Tundra Taiga"
 def_resources=water 10
 is=green
 dither_layer=50
 
 [tundra2]
-name=_"Tundra2"
+name=_"Tundra 2"
 def_resources=water 10
 is=green
 dither_layer=50
 
 [tundra3]
-name=_"Tundra3"
+name=_"Tundra 3"
 def_resources=water 10
 is=green
 dither_layer=50
 
 [mountain2]
-name=_"Mountain2"
+name=_"Mountain 2"
 resources=coal, iron, gold, granit
 is=mountain
 dither_layer=70
 
 [mountain3]
-name=_"Mountain3"
+name=_"Mountain 3"
 resources=coal, iron, gold, granit
 is=mountain
 dither_layer=70
 
 [mountain4]
-name=_"Mountain4"
+name=_"Mountain 4"
 resources=coal, iron, gold, granit
 is=mountain
 dither_layer=70

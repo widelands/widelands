@@ -58,12 +58,12 @@ Fullscreen_Menu_CampaignSelect::Fullscreen_Menu_CampaignSelect() :
 	label_difficulty
 		(this, get_w() *  3 /   5, get_h() * 17 / 40, _("Difficulty:")),
 	tadifficulty
-		(this, get_w() * 61 / 100, get_h() * 23 / 50, ""),
+		(this, get_w() * 61 / 100, get_h() * 23 / 50, get_w() * 9 / 25, get_h() * 3 / 50, ""),
 	label_campdescr
-		(this, get_w() *  3 /   5, get_h() * 51 / 100, _("Description:")),
+		(this, get_w() *  3 /   5, get_h() * 17 / 32, _("Description:")),
 	tacampdescr
 		(this,
-		 get_w() * 61 / 100, get_h() * 11 / 20, get_w() * 9 / 25, get_h() * 7 / 25,
+		 get_w() * 61 / 100, get_h() * 45 / 80, get_w() * 9 / 25, get_h() * 7 / 25,
 		 ""),
 
 // Buttons
@@ -149,7 +149,7 @@ void Fullscreen_Menu_CampaignSelect::campaign_selected(uint32_t const i)
 		char cdif_descr[sizeof("campdiffdescr4294967296")];
 		char cdescription[sizeof("campdesc4294967296")];
 
-		Profile prof("campaigns/cconfig", 0, "maps");
+		Profile prof("campaigns/cconfig", nullptr, "maps");
 		Section & s = prof.get_safe_section("global");
 
 		// add I to basic section name
@@ -190,7 +190,7 @@ void Fullscreen_Menu_CampaignSelect::double_clicked(uint32_t)
 void Fullscreen_Menu_CampaignSelect::fill_list()
 {
 	// Read in the campaign config
-	Profile prof("campaigns/cconfig", 0, "maps");
+	Profile prof("campaigns/cconfig", nullptr, "maps");
 	Section & s = prof.get_safe_section("global");
 
 	// Read in campvis-file
@@ -342,15 +342,6 @@ void Fullscreen_Menu_CampaignMapSelect::set_campaign(uint32_t const i) {
  */
 void Fullscreen_Menu_CampaignMapSelect::map_selected(uint32_t) {
 	campmapfile = m_list.get_selected();
-
-	// Load the maps textdomain to translate the strings from map
-	// Determine text domain
-	std::string tdname(campmapfile);
-	uint32_t i;
-	for (i = tdname.size(); i and tdname[i] != '/' and tdname[i] != '\\'; --i) {
-	}
-	tdname = "scenario_" + tdname.substr(i + 1);
-
 	Widelands::Map map;
 
 	std::unique_ptr<Widelands::Map_Loader> ml(map.get_correct_loader(campmapfile.c_str()));
@@ -362,7 +353,7 @@ void Fullscreen_Menu_CampaignMapSelect::map_selected(uint32_t) {
 	map.set_filename(campmapfile.c_str());
 	ml->preload_map(true);
 
-	i18n::Textdomain td(tdname);
+	i18n::Textdomain td("maps");
 	tamapname .set_text(_(map.get_name()));
 	taauthor  .set_text(map.get_author());
 	tamapdescr.set_text(_(map.get_description()));
@@ -387,7 +378,7 @@ void Fullscreen_Menu_CampaignMapSelect::double_clicked(uint32_t)
 void Fullscreen_Menu_CampaignMapSelect::fill_list()
 {
 	// read in the campaign config
-	Profile prof("campaigns/cconfig", 0, "maps");
+	Profile prof("campaigns/cconfig", nullptr, "maps");
 	Section & global_s = prof.get_safe_section("global");
 
 	// Read in campvis-file

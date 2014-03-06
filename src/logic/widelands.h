@@ -37,7 +37,7 @@ typedef uint8_t Tribe_Index;
 typedef uint16_t Military_Influence;
 
 typedef uint8_t  Player_Number; /// 5 bits used, so 0 .. 31
-inline Player_Number Neutral() throw () {return 0;}
+inline Player_Number Neutral() {return 0;}
 #define iterate_player_numbers(p, nr_players) \
    for (Widelands::Player_Number p = 1; p < nr_players + 1; ++p)
 
@@ -56,10 +56,10 @@ typedef uint8_t  Resource_Amount; /// 4 bits used, so 0 .. 15.
 typedef uint16_t Vision;
 
 typedef int32_t Time; // FIXME should be unsigned
-inline Time Never() throw () {return 0xffffffff;}
+inline Time Never() {return 0xffffffff;}
 
 typedef uint32_t Duration;
-inline Duration Forever() throw () {return 0xffffffff;}
+inline Duration Forever() {return 0xffffffff;}
 
 typedef uint32_t Serial; /// Serial number for Map_Object.
 
@@ -98,10 +98,10 @@ template <typename T> struct Index_ {
 	T operator++ () {return T(++i);}
 	T operator-- () {return T(--i);}
 
-	operator bool() const throw () {return operator!= (Null());}
+	operator bool() const {return operator!= (Null());}
 
 	/// Implicit conversion to size_t type for array indexing.
-	operator size_t() const throw () {return static_cast<size_t>(i);}
+	operator size_t() const {return static_cast<size_t>(i);}
 
 	// DO NOT REMOVE THE DECLARATION OF operator int32_t
 	// Rationale: If only operator bool() is present, the compiler may

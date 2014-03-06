@@ -2,7 +2,7 @@
 # to natural speakers, we changed its name to gold ore. The internal name was
 # kept to goldstone though to not break any older savegames.
 
-help=_Gold ore is mined in a goldmine. Smelted in a smelting works it becomes gold, which is used as a precious building material and to produce weapons and armours.
+help=_Gold ore is mined in a goldmine. Smelted in a smelting works, it turns into gold which is used as a precious building material and to produce weapons and armor.
 preciousness=2
 
 [idle]

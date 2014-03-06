@@ -47,9 +47,9 @@ WaresQueue::WaresQueue
 	m_max_fill        (_max_size),
 	m_filled          (0),
 	m_consume_interval(0),
-	m_request         (0),
-	m_callback_fn     (0),
-	m_callback_data   (0)
+	m_request         (nullptr),
+	m_callback_fn     (nullptr),
+	m_callback_data   (nullptr)
 {
 	if (m_ware)
 		update();
@@ -103,7 +103,7 @@ void WaresQueue::update() {
 	else
 	{
 		delete m_request;
-		m_request = 0;
+		m_request = nullptr;
 	}
 }
 
@@ -152,7 +152,7 @@ void WaresQueue::remove_from_economy(Economy & e)
 	if (m_ware) {
 		e.remove_wares(m_ware, m_filled);
 		if (m_request)
-			m_request->set_economy(0);
+			m_request->set_economy(nullptr);
 	}
 }
 
@@ -171,7 +171,7 @@ void WaresQueue::add_to_economy(Economy & e)
 /**
  * Change size of the queue.
  */
-void WaresQueue::set_max_size(const uint32_t size) throw ()
+void WaresQueue::set_max_size(const uint32_t size)
 {
 	uint32_t old_size = m_max_size;
 	m_max_size = size;
@@ -192,7 +192,7 @@ void WaresQueue::set_max_size(const uint32_t size) throw ()
  * but if there are more wares than that in the queue, they will not get
  * lost (the building should drop them).
  */
-void WaresQueue::set_max_fill(uint32_t size) throw ()
+void WaresQueue::set_max_fill(uint32_t size)
 {
 	if (size > m_max_size)
 		size = m_max_size;
@@ -205,7 +205,7 @@ void WaresQueue::set_max_fill(uint32_t size) throw ()
 /**
  * Change fill status of the queue.
  */
-void WaresQueue::set_filled(const uint32_t filled) throw () {
+void WaresQueue::set_filled(const uint32_t filled) {
 	if (m_owner.get_economy()) {
 		if (filled > m_filled)
 			m_owner.get_economy()->add_wares(m_ware, filled - m_filled);
@@ -224,7 +224,7 @@ void WaresQueue::set_filled(const uint32_t filled) throw () {
  *
  * This interval is merely a hint for the Supply/Request balancing code.
 */
-void WaresQueue::set_consume_interval(const uint32_t time) throw ()
+void WaresQueue::set_consume_interval(const uint32_t time)
 {
 	m_consume_interval = time;
 
@@ -277,16 +277,16 @@ void WaresQueue::Read(FileRead & fr, Game & game, Map_Map_Object_Loader & mol)
 						 wwWORKER);             //  FIXME
 				m_request->Read(fr, game, mol);      //  FIXME
 			} else
-				m_request = 0;
+				m_request = nullptr;
 
 			//  Now Economy stuff. We have to add our filled items to the economy.
 			if (m_owner.get_economy())
 				add_to_economy(*m_owner.get_economy());
 		} else
 			throw game_data_error
-				(_("unknown/unhandled version %u"), packet_version);
+				("unknown/unhandled version %u", packet_version);
 	} catch (const game_data_error & e) {
-		throw game_data_error(_("waresqueue: %s"), e.what());
+		throw game_data_error("waresqueue: %s", e.what());
 	}
 }
 

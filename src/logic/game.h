@@ -47,7 +47,7 @@ class MilitarySite;
 #define WLGF_SUFFIX ".wgf"
 #define WLGF_MAGIC      "WLgf"
 
-/** struct Game
+/** class Game
  *
  * This class manages the entire lifetime of a game session, from creating the
  * game and setting options, selecting maps to the actual playing phase and the
@@ -59,13 +59,14 @@ enum {
 	gs_ending
 };
 
-struct Player;
-struct Map_Loader;
+class Player;
+class Map_Loader;
 class PlayerCommand;
 class ReplayReader;
 class ReplayWriter;
 
-struct Game : Editor_Game_Base {
+class Game : public Editor_Game_Base {
+public:
 	struct General_Stats {
 		std::vector< uint32_t > land_size;
 		std::vector< uint32_t > nr_workers;
@@ -102,14 +103,22 @@ struct Game : Editor_Game_Base {
 	void save_syncstream(bool save);
 	void init_newgame (UI::ProgressWindow *, const GameSettings &);
 	void init_savegame(UI::ProgressWindow *, const GameSettings &);
-	bool run_splayer_scenario_direct(char const * mapname);
-	bool run_load_game (std::string filename);
 	enum Start_Game_Type {NewSPScenario, NewNonScenario, Loaded, NewMPScenario};
-	bool run(UI::ProgressWindow * loader_ui, Start_Game_Type, bool replay = false);
+	bool run(UI::ProgressWindow * loader_ui, Start_Game_Type, const std::string& script_to_run, bool replay);
 
-	virtual void postload();
+	// Run a single player scenario directly via --scenario on the cmdline. Will
+	// run the 'script_to_run' after any init scripts of the map.
+	// Returns the result of run().
+	bool run_splayer_scenario_direct(char const * mapname, const std::string& script_to_run);
 
-	void think();
+	// Run a single player loaded game directly via --loadgame on the cmdline. Will
+	// run the 'script_to_run' directly after the game was loaded.
+	// Returns the result of run().
+	bool run_load_game (std::string filename, const std::string& script_to_run);
+
+	virtual void postload() override;
+
+	void think() override;
 
 	ReplayWriter * get_replaywriter() {return m_replaywriter;}
 
@@ -121,7 +130,7 @@ struct Game : Editor_Game_Base {
 	void end_dedicated_game();
 
 	void cleanup_for_load
-		(const bool flush_graphics = true, const bool flush_animations = true);
+		(const bool flush_graphics = true, const bool flush_animations = true) override;
 
 	// in-game logic
 	const Cmd_Queue & cmdqueue() const {return m_cmdqueue;}
@@ -203,7 +212,7 @@ private:
 			m_target        (target),
 			m_counter       (0),
 			m_next_diskspacecheck(0),
-			m_dump          (0),
+			m_dump          (nullptr),
 			m_syncstreamsave(false)
 		{}
 
@@ -215,9 +224,9 @@ private:
 		/// \ref m_syncstreamsave has been set.
 		void StartDump(const std::string & fname);
 
-		void Data(void const * data, size_t size);
+		void Data(void const * data, size_t size) override;
 
-		void Flush() {m_target.Flush();}
+		void Flush() override {m_target.Flush();}
 
 	public:
 		Game        &   m_game;

@@ -73,7 +73,7 @@ namespace Widelands {
 Game::SyncWrapper::~SyncWrapper() {
 	if (m_dump) {
 		delete m_dump;
-		m_dump = 0;
+		m_dump = nullptr;
 
 		if (!m_syncstreamsave)
 			g_fs->Unlink(m_dumpfname);
@@ -105,7 +105,7 @@ void Game::SyncWrapper::Data(void const * const data, size_t const size) {
 		if (g_fs->DiskSpace() < MINIMUM_DISK_SPACE) {
 			log("Stop writing to syncstream file: disk is getting full.\n");
 			delete m_dump;
-			m_dump = 0;
+			m_dump = nullptr;
 		}
 	}
 
@@ -118,7 +118,7 @@ void Game::SyncWrapper::Data(void const * const data, size_t const size) {
 				 m_dumpfname.c_str());
 
 			delete m_dump;
-			m_dump = 0;
+			m_dump = nullptr;
 		}
 	}
 
@@ -128,14 +128,14 @@ void Game::SyncWrapper::Data(void const * const data, size_t const size) {
 
 
 Game::Game() :
-	Editor_Game_Base(create_LuaGameInterface(this)),
+	Editor_Game_Base(new LuaGameInterface(this)),
 	m_syncwrapper         (*this, m_synchash),
-	m_ctrl                (0),
+	m_ctrl                (nullptr),
 	m_writereplay         (true),
 	m_writesyncstream     (false),
 	m_state               (gs_notrunning),
 	m_cmdqueue            (*this),
-	m_replaywriter        (0),
+	m_replaywriter        (nullptr),
 	m_win_condition_displayname(_("Not set"))
 {
 	// Preload win_conditions as they are displayed in UI
@@ -214,13 +214,13 @@ void Game::save_syncstream(bool const save)
 }
 
 
-bool Game::run_splayer_scenario_direct(char const * const mapname) {
+bool Game::run_splayer_scenario_direct(char const * const mapname, const std::string& script_to_run) {
 	assert(!get_map());
 
 	set_map(new Map);
 
 	std::unique_ptr<Map_Loader> maploader(map().get_correct_loader(mapname));
-	if (not maploader.get())
+	if (!maploader)
 		throw wexception("could not load \"%s\"", mapname);
 	UI::ProgressWindow loaderUI;
 
@@ -257,13 +257,13 @@ bool Game::run_splayer_scenario_direct(char const * const mapname) {
 
 	set_game_controller(GameController::createSinglePlayer(*this, true, 1));
 	try {
-		bool const result = run(&loaderUI, NewSPScenario);
+		bool const result = run(&loaderUI, NewSPScenario, script_to_run, false);
 		delete m_ctrl;
-		m_ctrl = 0;
+		m_ctrl = nullptr;
 		return result;
 	} catch (...) {
 		delete m_ctrl;
-		m_ctrl = 0;
+		m_ctrl = nullptr;
 		throw;
 	}
 
@@ -351,7 +351,7 @@ void Game::init_newgame
  * Initialize the savegame based on the given settings.
  * At return the game is at the same state like a map loaded with Game::init()
  * Only difference is, that players are already initialized.
- * run(loaderUI, true) takes care about this difference.
+ * run() takes care about this difference.
  *
  * \note loaderUI can be nullptr, if this is run as dedicated server.
  */
@@ -380,13 +380,7 @@ void Game::init_savegame
 	}
 }
 
-
-/**
- * Load a game
- * Returns false if the user cancels the dialog. Otherwise returns the result
- * of running the game.
- */
-bool Game::run_load_game(std::string filename) {
+bool Game::run_load_game(std::string filename, const std::string& script_to_run) {
 	UI::ProgressWindow loaderUI;
 	std::vector<std::string> tipstext;
 	tipstext.push_back("general_game");
@@ -420,13 +414,13 @@ bool Game::run_load_game(std::string filename) {
 
 	set_game_controller(GameController::createSinglePlayer(*this, true, player_nr));
 	try {
-		bool const result = run(&loaderUI, Loaded);
+		bool const result = run(&loaderUI, Loaded, script_to_run, false);
 		delete m_ctrl;
-		m_ctrl = 0;
+		m_ctrl = nullptr;
 		return result;
 	} catch (...) {
 		delete m_ctrl;
-		m_ctrl = 0;
+		m_ctrl = nullptr;
 		throw;
 	}
 
@@ -445,7 +439,7 @@ void Game::postload()
 	Editor_Game_Base::postload();
 
 	if (g_gr) {
-		assert(get_ibase() != 0);
+		assert(get_ibase() != nullptr);
 		get_ibase()->postload();
 	} else
 		log("Note: Widelands runs without graphics, probably in dedicated server mode!\n");
@@ -473,7 +467,7 @@ void Game::postload()
  */
 bool Game::run
 	(UI::ProgressWindow * loader_ui, Start_Game_Type const start_game_type,
-	 bool replay)
+	 const std::string& script_to_run, bool replay)
 {
 	m_replay = replay;
 	postload();
@@ -498,8 +492,8 @@ bool Game::run
 					 _
 					 	("Widelands could not start the game, because player %u has "
 					 	 "no starting position.\n"
-					 	 "You can manually add a starting position with Widelands "
-					 	 "Editor, to fix this problem."),
+					 	 "You can manually add a starting position with the Widelands "
+					 	 "Editor to fix this problem."),
 					 p);
 			}
 		}
@@ -534,6 +528,12 @@ bool Game::run
 
 		// Queue first statistics calculation
 		enqueue_command(new Cmd_CalculateStatistics(get_gametime() + 1));
+	}
+
+	if (!script_to_run.empty() && (start_game_type == NewSPScenario || start_game_type == Loaded)) {
+		const std::string registered_script =
+			lua().register_script(*g_fs, "commandline", script_to_run);
+		enqueue_command(new Cmd_LuaScript(get_gametime() + 1, "commandline", registered_script));
 	}
 
 	if (m_writereplay || m_writesyncstream) {
@@ -584,7 +584,7 @@ bool Game::run
 
 		cleanup_objects();
 		delete get_ibase();
-		set_ibase(0);
+		set_ibase(nullptr);
 
 		g_anim.flush();
 		g_gr->flush_animations();
@@ -623,6 +623,10 @@ void Game::think()
 	m_ctrl->think();
 
 	if (m_state == gs_running) {
+		// TODO(sirver): This is not good. Here, it depends on the speed of the
+		// computer and the fps if and when the game is saved - this is very bad
+		// for scenarios and even worse for the regression suite (which relies on
+		// the timings of savings.
 		cmdqueue().run_queue(m_ctrl->getFrametime(), get_game_time_pointer());
 
 		if (g_gr) // not in dedicated server mode

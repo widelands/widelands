@@ -68,13 +68,13 @@ Editor_Interactive::Editor_Interactive(Widelands::Editor_Game_Base & e) :
 	m_toggle_toolsize_menu
 	(INIT_BUTTON
 	 ("editor_menu_set_toolsize_menu", "toolsize",
-	  _("Toolsize"))),
+	  _("Tool Size"))),
 	m_toggle_minimap
 	(INIT_BUTTON
 	 ("menu_toggle_minimap", "minimap", _("Minimap"))),
 	m_toggle_buildhelp
 	(INIT_BUTTON
-	 ("menu_toggle_buildhelp", "buildhelp", _("Buildhelp"))),
+	 ("menu_toggle_buildhelp", "buildhelp", _("Show Building Spaces (on/off)"))),
 	m_toggle_player_menu
 	(INIT_BUTTON
 	 ("editor_menu_player_menu", "players", _("Players"))),
@@ -249,8 +249,8 @@ void Editor_Interactive::exit() {
 	if (m_need_save) {
 		UI::WLMessageBox mmb
 		(this,
-		 _("Map unsaved"),
-		 _("The Map is unsaved, do you really want to quit?"),
+		 _("Unsaved Map"),
+		 _("The Map has not been saved, do you really want to quit?"),
 		 UI::WLMessageBox::YESNO);
 		if (mmb.run() == 0)
 			return;
@@ -500,7 +500,7 @@ void Editor_Interactive::select_tool
 		Widelands::Map & map = egbase().map();
 		//  A new tool has been selected. Remove all registered overlay callback
 		//  functions.
-		map.overlay_manager().register_overlay_callback_function(0, 0);
+		map.overlay_manager().register_overlay_callback_function(nullptr, nullptr);
 		map.recalc_whole_map();
 
 	}
@@ -578,12 +578,8 @@ void Editor_Interactive::change_world() {
 }
 
 
-/**
- * Public static method to create an instance of the editor
- * and run it. This takes care of all the setup and teardown.
- */
-void Editor_Interactive::run_editor(const std::string & filename) {
-	Widelands::Editor_Game_Base editor(0);
+void Editor_Interactive::run_editor(const std::string & filename, const std::string& script_to_run) {
+	Widelands::Editor_Game_Base editor(nullptr);
 	Editor_Interactive eia(editor);
 	editor.set_ibase(&eia); // TODO get rid of this
 	{
@@ -623,6 +619,10 @@ void Editor_Interactive::run_editor(const std::string & filename) {
 		eia.select_tool(eia.tools.increase_height, Editor_Tool::First);
 		editor.postload();
 		eia.start();
+
+		if (!script_to_run.empty()) {
+			eia.egbase().lua().run_script(*g_fs, script_to_run, "commandline");
+		}
 	}
 	eia.run();
 
@@ -631,4 +631,3 @@ void Editor_Interactive::run_editor(const std::string & filename) {
 	g_gr->flush_animations();
 	g_anim.flush();
 }
-

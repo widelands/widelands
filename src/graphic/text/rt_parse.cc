@@ -48,18 +48,18 @@ public:
 	Attr(string gname, string value) : m_name(gname), m_value(value) {};
 	virtual ~Attr() {};
 
-	virtual const string & name() const {return m_name;}
-	virtual long get_int() const;
-	virtual bool get_bool() const;
-	virtual string get_string() const;
-	virtual RGBColor get_color() const;
+	virtual const string & name() const override {return m_name;}
+	virtual long get_int() const override;
+	virtual bool get_bool() const override;
+	virtual string get_string() const override;
+	virtual RGBColor get_color() const override;
 
 private:
 	string m_name, m_value;
 };
 
 long Attr::get_int() const {
-	long rv = strtol(m_value.c_str(), 0, 10);
+	long rv = strtol(m_value.c_str(), nullptr, 10);
 	return rv;
 }
 string Attr::get_string() const {
@@ -74,7 +74,7 @@ RGBColor Attr::get_color() const {
 	if (m_value.size() != 6)
 		throw InvalidColor((format("Could not parse '%s' as a color.") % m_value).str());
 
-	uint32_t clrn = strtol(m_value.c_str(), 0, 16);
+	uint32_t clrn = strtol(m_value.c_str(), nullptr, 16);
 	return RGBColor((clrn >> 16) & 0xff, (clrn >> 8) & 0xff, clrn & 0xff);
 }
 
@@ -90,13 +90,13 @@ public:
 	void add_attribute(string name, Attr * a) {
 		m_attrs[name] = a;
 	}
-	const IAttr & operator[] (const std::string & s) const throw (AttributeNotFound) {
+	const IAttr & operator[] (const std::string & s) const override {
 		map<string, Attr*>::const_iterator i = m_attrs.find(s);
 		if (i == m_attrs.end())
 			throw AttributeNotFound(s);
 		return *(i->second);
 	}
-	bool has(const std::string & s) const {
+	bool has(const std::string & s) const override {
 		return m_attrs.count(s);
 	}
 
@@ -110,9 +110,9 @@ public:
 	Tag();
 	virtual ~Tag();
 
-	virtual const string & name() const {return m_name;}
-	virtual const AttrMap & attrs() const {return m_am;}
-	virtual const ChildList & childs() const {return m_childs;}
+	virtual const string & name() const override {return m_name;}
+	virtual const AttrMap & attrs() const override {return m_am;}
+	virtual const ChildList & childs() const override {return m_childs;}
 	void parse(TextStream & ts, TagConstraints & tcs, const TagSet &);
 
 private:
@@ -212,8 +212,8 @@ class Parser : public IParser {
 public:
 	Parser();
 	virtual ~Parser();
-	virtual ITag * parse(string text, const TagSet &);
-	virtual string remaining_text();
+	virtual ITag * parse(string text, const TagSet &) override;
+	virtual string remaining_text() override;
 
 private:
 	TagConstraints m_tcs;
@@ -221,7 +221,7 @@ private:
 };
 
 Parser::Parser() :
-	m_ts(0)
+	m_ts(nullptr)
 {
 	{ // rt tag
 		TagConstraint tc;
@@ -338,7 +338,7 @@ Parser::~Parser() {
 ITag * Parser::parse(string text, const TagSet & allowed_tags) {
 	if (m_ts) {
 		delete m_ts;
-		m_ts = 0;
+		m_ts = nullptr;
 	}
 	m_ts = new TextStream(text);
 

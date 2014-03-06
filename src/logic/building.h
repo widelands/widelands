@@ -27,14 +27,14 @@
 #include <boost/signals2.hpp>
 
 #include "ai/ai_hints.h"
+#include "io/filewrite.h"
+#include "logic/bill_of_materials.h"
 #include "logic/buildcost.h"
 #include "logic/immovable.h"
-#include "io/filewrite.h"
 #include "logic/soldier_counts.h"
-#include "logic/ware_types.h"
+#include "logic/wareworker.h"
 #include "logic/widelands.h"
 #include "workarea_info.h"
-#include "writeHTML.h"
 
 namespace UI {class Window;}
 struct BuildingHints;
@@ -75,29 +75,29 @@ struct Building_Descr : public Map_Object_Descr {
 	/**
 	 * The build cost for direct construction
 	 */
-	const Buildcost & buildcost() const throw () {return m_buildcost;}
+	const Buildcost & buildcost() const {return m_buildcost;}
 
 	/**
 	 * Returned wares for dismantling
 	 */
-	const Buildcost & returned_wares() const throw () {return m_return_dismantle;}
+	const Buildcost & returned_wares() const {return m_return_dismantle;}
 
 	/**
 	 * The build cost for enhancing a previous building
 	 */
-	const Buildcost & enhancement_cost() const throw () {return m_enhance_cost;}
+	const Buildcost & enhancement_cost() const {return m_enhance_cost;}
 
 	/**
 	 * The returned wares for a enhaced building
 	 */
-	const Buildcost & returned_wares_enhanced() const throw () {return m_return_enhanced;}
+	const Buildcost & returned_wares_enhanced() const {return m_return_enhanced;}
 	const Image* get_buildicon() const {return m_buildicon;}
-	int32_t get_size() const throw () {return m_size;}
+	int32_t get_size() const {return m_size;}
 	bool get_ismine() const {return m_mine;}
 	bool get_isport() const {return m_port;}
 	virtual uint32_t get_ui_anim() const {return get_animation("idle");}
 
-	const Enhancements & enhancements() const throw () {return m_enhancements;}
+	const Enhancements & enhancements() const {return m_enhancements;}
 	void add_enhancement(const Building_Index & i) {
 		assert(not m_enhancements.count(i));
 		m_enhancements.insert(i);
@@ -118,17 +118,14 @@ struct Building_Descr : public Map_Object_Descr {
 		 bool                   loading = false,
 		 FormerBuildings former_buildings = FormerBuildings())
 		const;
-#ifdef WRITE_GAME_DATA_AS_HTML
-	void writeHTML(::FileWrite &) const;
-#endif
 	virtual void load_graphics();
 
 	virtual uint32_t get_conquers() const;
-	virtual uint32_t vision_range() const throw ();
+	virtual uint32_t vision_range() const;
 	bool has_help_text() const {return m_helptext_script != "";}
 	std::string helptext_script() const {return m_helptext_script;}
 
-	const Tribe_Descr & tribe() const throw () {return m_tribe;}
+	const Tribe_Descr & tribe() const {return m_tribe;}
 	Workarea_Info m_workarea_info;
 
 	virtual int32_t suitability(const Map &, FCoords) const;
@@ -182,24 +179,24 @@ public:
 	Building(const Building_Descr &);
 	virtual ~Building();
 
-	void load_finish(Editor_Game_Base &);
+	void load_finish(Editor_Game_Base &) override;
 
-	const Tribe_Descr & tribe() const throw () {return descr().tribe();}
+	const Tribe_Descr & tribe() const {return descr().tribe();}
 
-	virtual int32_t  get_type    () const throw ();
-	char const * type_name() const throw () {return "building";}
-	virtual int32_t  get_size    () const throw ();
-	virtual bool get_passable() const throw ();
+	virtual int32_t  get_type    () const override;
+	char const * type_name() const override {return "building";}
+	virtual int32_t  get_size    () const override;
+	virtual bool get_passable() const override;
 	virtual uint32_t get_ui_anim () const;
 
-	virtual Flag & base_flag();
-	virtual uint32_t get_playercaps() const throw ();
+	virtual Flag & base_flag() override;
+	virtual uint32_t get_playercaps() const;
 
-	virtual Coords get_position() const throw () {return m_position;}
-	virtual PositionList get_positions (const Editor_Game_Base &) const throw ();
+	virtual Coords get_position() const {return m_position;}
+	virtual PositionList get_positions (const Editor_Game_Base &) const override;
 
-	const std::string & name() const throw ();
-	const std::string & descname() const throw () {return descr().descname();}
+	const std::string & name() const override;
+	const std::string & descname() const {return descr().descname();}
 
 	std::string info_string(const std::string & format);
 	virtual std::string get_statistics_string();
@@ -208,7 +205,7 @@ public:
 	virtual WaresQueue & waresqueue(Ware_Index);
 
 	virtual bool burn_on_destroy();
-	virtual void destroy(Editor_Game_Base &);
+	virtual void destroy(Editor_Game_Base &) override;
 
 	void show_options(Interactive_GameBase &, bool avoid_fastclick = false, Point pos = Point(- 1, - 1));
 	void hide_options();
@@ -219,21 +216,25 @@ public:
 
 	bool leave_check_and_wait(Game &, Worker &);
 	void leave_skip(Game &, Worker &);
-	uint32_t get_conquers() const throw () {return descr().get_conquers();}
-	virtual uint32_t vision_range() const throw () {
+	uint32_t get_conquers() const {return descr().get_conquers();}
+	virtual uint32_t vision_range() const {
 		return descr().vision_range();
 	}
 
-	int32_t get_base_priority() const {return m_priority;}
-	int32_t get_priority
-		(int32_t type, Ware_Index, bool adjust = true) const;
-	void set_priority(int32_t new_priority);
+
+	// Get/Set the priority for this waretype for this building. 'type' defines
+	// if this is for a worker or a ware, 'index' is the type of worker or ware.
+	// If 'adjust' is false, the three possible states HIGH_PRIORITY,
+	// DEFAULT_PRIORITY and LOW_PRIORITY are returned, otherwise numerical
+	// values adjusted to the preciousness of the ware in general are returned.
+	virtual int32_t get_priority
+		(WareWorker type, Ware_Index, bool adjust = true) const;
 	void set_priority(int32_t type, Ware_Index ware_index, int32_t new_priority);
 
 	void collect_priorities
 		(std::map<int32_t, std::map<Ware_Index, int32_t> > & p) const;
 
-	const std::set<Building_Index> & enhancements() const throw () {
+	const std::set<Building_Index> & enhancements() const {
 		return descr().enhancements();
 	}
 
@@ -248,7 +249,7 @@ public:
 		return m_old_buildings;
 	}
 
-	virtual void log_general_info(const Editor_Game_Base &);
+	virtual void log_general_info(const Editor_Game_Base &) override;
 
 	//  Use on training sites only.
 	virtual void change_train_priority(uint32_t, int32_t) {};
@@ -259,8 +260,8 @@ public:
 		m_defeating_player = player_number;
 	}
 
-	void    add_worker(Worker &);
-	void remove_worker(Worker &);
+	void    add_worker(Worker &) override;
+	void remove_worker(Worker &) override;
 	mutable boost::signals2::signal<void ()> workers_changed;
 
 	void send_message
@@ -274,11 +275,11 @@ public:
 protected:
 	void start_animation(Editor_Game_Base &, uint32_t anim);
 
-	virtual void init(Editor_Game_Base &);
-	virtual void cleanup(Editor_Game_Base &);
-	virtual void act(Game &, uint32_t data);
+	virtual void init(Editor_Game_Base &) override;
+	virtual void cleanup(Editor_Game_Base &) override;
+	virtual void act(Game &, uint32_t data) override;
 
-	virtual void draw(const Editor_Game_Base &, RenderTarget &, const FCoords&, const Point&);
+	virtual void draw(const Editor_Game_Base &, RenderTarget &, const FCoords&, const Point&) override;
 	void draw_help(const Editor_Game_Base &, RenderTarget &, const FCoords&, const Point&);
 
 	virtual void create_options_window

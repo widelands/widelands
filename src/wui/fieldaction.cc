@@ -177,7 +177,7 @@ public:
 		return ref_cast<Interactive_Base, UI::Panel>(*get_parent());
 	}
 
-	virtual void think();
+	virtual void think() override;
 
 	void init();
 	void add_buttons_auto();
@@ -244,10 +244,10 @@ static const char * const pic_tab_buildhouse[] = {
 	"pics/menu_tab_buildport.png"
 };
 static const std::string tooltip_tab_build[] = {
-	_("Build small buildings"),
-	_("Build medium buildings"),
-	_("Build large buildings"),
-	_("Build port buildings")
+	_("Build small building"),
+	_("Build medium building"),
+	_("Build large building"),
+	_("Build port building")
 };
 static const std::string name_tab_build[] = {"small", "medium", "big", "port"};
 
@@ -288,7 +288,7 @@ FieldActionWindow::FieldActionWindow
 	m_fastclick(true),
 	m_best_tab(0),
 	m_workarea_preview_job_id(Overlay_Manager::Job_Id::Null()),
-	m_attack_box(0)
+	m_attack_box(nullptr)
 {
 	ib->set_sel_freeze(true);
 
@@ -342,7 +342,7 @@ Add the buttons you normally get when clicking on a field.
 */
 void FieldActionWindow::add_buttons_auto()
 {
-	UI::Box * buildbox = 0;
+	UI::Box * buildbox = nullptr;
 	UI::Box & watchbox = *new UI::Box(&m_tabpanel, 0, 0, UI::Box::Horizontal);
 
 	// Add road-building actions
@@ -408,7 +408,7 @@ void FieldActionWindow::add_buttons_auto()
 					(buildbox, "build_flag",
 					 pic_buildflag,
 					 &FieldActionWindow::act_buildflag,
-					 _("Put a flag"));
+					 _("Place a flag"));
 
 			if (can_act && dynamic_cast<const Widelands::Road *>(imm))
 				add_button
@@ -454,11 +454,11 @@ void FieldActionWindow::add_buttons_auto()
 			 _("Debug window"));
 
 	MilitaryBox * militarybox =
-		m_plr ? new MilitaryBox(&m_tabpanel, m_plr, 0, 0) : 0;
+		m_plr ? new MilitaryBox(&m_tabpanel, m_plr, 0, 0) : nullptr;
 
 	// Add tabs
 	if (buildbox && buildbox->get_nritems())
-		add_tab("roads", pic_tab_buildroad, buildbox, _("Build roads"));
+		add_tab("roads", pic_tab_buildroad, buildbox, _("Build road"));
 
 	add_tab("watch", pic_tab_watch, &watchbox, _("Watch"));
 
@@ -512,8 +512,8 @@ void FieldActionWindow::add_buttons_build(int32_t buildcaps)
 {
 	if (not m_plr)
 		return;
-	BuildGrid * bbg_house[4] = {0, 0, 0, 0};
-	BuildGrid * bbg_mine = 0;
+	BuildGrid * bbg_house[4] = {nullptr, nullptr, nullptr, nullptr};
+	BuildGrid * bbg_mine = nullptr;
 
 	const Widelands::Tribe_Descr & tribe = m_plr->tribe();
 

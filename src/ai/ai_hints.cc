@@ -31,8 +31,8 @@ BuildingHints::~BuildingHints ()
 }
 
 BuildingHints::BuildingHints (Section * const section) :
-	renews_map_resource(0),
-	mines              (0),
+	renews_map_resource(nullptr),
+	mines              (nullptr),
 	basic              (section ? section->get_bool("is_basic")         : false),
 	build_material     (section ? section->get_bool("build_material")   : true),
 	trunkproducer      (section ? section->get_bool("trunkproducer")    : false),

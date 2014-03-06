@@ -29,7 +29,7 @@ public:
 	Exception(std::string msg) : std::exception(), m_msg(msg) {
 	}
 	virtual ~Exception() throw () {}
-	virtual const char* what() const throw () {return m_msg.c_str();}
+	virtual const char* what() const throw () override {return m_msg.c_str();}
 
 private:
 	std::string m_msg;
@@ -55,4 +55,3 @@ DEF_ERR(WidthTooSmall);
 };
 
 #endif /* end of include guard: RT_ERRORS_H */
-

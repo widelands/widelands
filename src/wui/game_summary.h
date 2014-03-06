@@ -20,8 +20,6 @@
 #ifndef GAME_SUMMARY_H
 #define GAME_SUMMARY_H
 
-#include <boost/signal.hpp>
-
 #include "ui_basic/box.h"
 #include "ui_basic/button.h"
 #include "ui_basic/multilinetextarea.h"
@@ -32,7 +30,7 @@
 class Interactive_GameBase;
 namespace Widelands
 {
-struct Game;
+class Game;
 }
 
 /// Shows an ingame summary window on game end
@@ -41,7 +39,7 @@ public:
 	GameSummaryScreen
 		(Interactive_GameBase * parent, UI::UniqueWindow::Registry * r);
 
-	bool handle_mousepress(Uint8 btn, int32_t mx, int32_t my);
+	bool handle_mousepress(Uint8 btn, int32_t mx, int32_t my) override;
 private:
 	void fill_data();
 	void stop_clicked();

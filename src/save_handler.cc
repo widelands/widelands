@@ -25,6 +25,7 @@
 #include "log.h"
 #include "logic/game.h"
 #include "profile/profile.h"
+#include "scoped_timer.h"
 #include "upcast.h"
 #include "wexception.h"
 #include "wlapplication.h"
@@ -160,6 +161,8 @@ bool SaveHandler::save_game
 	 const std::string &       complete_filename,
 	 std::string       * const error)
 {
+	ScopedTimer save_timer("SaveHandler::save_game() took %ums");
+
 	bool const binary =
 		!g_options.pull_section("global").get_bool("nozip", false);
 	// Make sure that the base directory exists

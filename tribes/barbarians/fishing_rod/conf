@@ -1,4 +1,4 @@
-help=_Fishing rods are needed by barbarian fishers for fishing. It is one of the basic tools produced in a metalwork shop (but ceases to be produced by the building if it is enhanced to an axefactory and war mill).
+help=_Fishing rods are needed by barbarian fishers for fishing. They are one of the basic tools produced in a metal workshop (but they cease to be produced by the building if it is enhanced to an axfactory and war mill).
 
 [idle]
 pics=idle.png

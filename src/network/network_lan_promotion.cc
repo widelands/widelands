@@ -104,7 +104,7 @@ GCC_DIAG_ON("-Wold-style-cast")
 	tv.tv_sec  = 0;
 	tv.tv_usec = 0;
 
-	return select(sock + 1, &fds, 0, 0, &tv) == 1;
+	return select(sock + 1, &fds, nullptr, nullptr, &tv) == 1;
 }
 
 ssize_t LAN_Base::recv
@@ -216,7 +216,7 @@ void LAN_Game_Promoter::set_map (char const * map)
 /*** class LAN_Game_Finder ***/
 
 LAN_Game_Finder::LAN_Game_Finder () :
-	callback(0)
+	callback(nullptr)
 {
 	bind (WIDELANDS_LAN_DISCOVERY_PORT);
 

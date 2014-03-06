@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008, 2011 by the Widelands Development Team
+ * Copyright (C) 2008, 2011, 2013 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -31,13 +31,17 @@ GameChatPanel::GameChatPanel
 	UI::Panel(parent, x, y, w, h),
 	m_chat   (chat),
 	chatbox  (this, 0, 0, w, h - 25, "", UI::Align_Left, 1),
-	editbox  (this, 0, h - 20, w,  20)
+	editbox  (this, 0, h - 20, w,  20),
+	chat_message_counter(0)
 {
 	chatbox.set_scrollmode(UI::Multiline_Textarea::ScrollLog);
 	editbox.ok.connect(boost::bind(&GameChatPanel::keyEnter, this));
 	editbox.cancel.connect(boost::bind(&GameChatPanel::keyEscape, this));
 	editbox.setAlign(UI::Align_Left);
 	editbox.activate_history(true);
+
+	set_handle_mouse(true);
+	set_can_focus(true);
 
 	connect(m_chat);
 	recalculate();
@@ -59,6 +63,20 @@ void GameChatPanel::recalculate()
 	str += "</rt>";
 
 	chatbox.set_text(str);
+
+	// If there are new messages, play a sound
+	if (msgs.size() > chat_message_counter)
+	{
+		// computer generated ones are ignored
+		// Note: if many messages arrive simultaneously,
+		// the latest is a system message and some others
+		// are not, then this act wrong!
+		if (!msgs.back().sender.empty())
+			// The latest message is not a system message
+			play_new_chat_message();
+		chat_message_counter = msgs . size();
+
+	}
 }
 
 /**

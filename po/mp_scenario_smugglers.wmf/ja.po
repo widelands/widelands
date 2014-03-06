@@ -1,0 +1,123 @@
+# Japanese translation for widelands
+# Copyright (c) 2013 Rosetta Contributors and Canonical Ltd 2013
+# This file is distributed under the same license as the widelands package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2013.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: widelands\n"
+"Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
+"POT-Creation-Date: 2014-03-05 19:55+0000\n"
+"PO-Revision-Date: 2013-10-07 19:28+0000\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: Japanese <ja@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Launchpad-Export-Date: 2014-03-06 05:39+0000\n"
+"X-Generator: Launchpad (build 16948)\n"
+
+#: ../../maps/MP Scenarios/Smugglers.wmf/scripting/multiplayer_init.lua:43
+#: ../../maps/MP Scenarios/Smugglers.wmf/scripting/smuggling.lua:94
+#: ../../maps/MP Scenarios/Smugglers.wmf/scripting/smuggling.lua:97
+#: ../../maps/MP Scenarios/Smugglers.wmf/scripting/smuggling.lua:100
+msgid "Game Status"
+msgstr ""
+
+#: ../../maps/MP Scenarios/Smugglers.wmf/scripting/multiplayer_init.lua:119
+msgid "Wares Smuggled"
+msgstr ""
+
+#: ../../maps/MP Scenarios/Smugglers.wmf/scripting/multiplayer_init.lua:142
+#: ../../maps/MP Scenarios/Smugglers.wmf/scripting/smuggling.lua:31
+#: ../../maps/MP Scenarios/Smugglers.wmf/scripting/smuggling.lua:53
+#: ../../maps/MP Scenarios/Smugglers.wmf/scripting/smuggling.lua:88
+msgid "%i point"
+msgid_plural "%i points"
+msgstr[0] ""
+msgstr[1] ""
+
+#: ../../maps/MP Scenarios/Smugglers.wmf/scripting/texts.lua:5
+msgid "Smugglers"
+msgstr ""
+
+#: ../../maps/MP Scenarios/Smugglers.wmf/scripting/texts.lua:6
+msgid "Rules"
+msgstr ""
+
+#: ../../maps/MP Scenarios/Smugglers.wmf/scripting/texts.lua:8
+msgid ""
+"Smugglers is a fun map for 4 players. You and your partner start diagonally "
+"from each other on a point symmetric island. There are plenty of smuggling "
+"tunnels on this island, each consisting of a receiving and a sending end. "
+msgstr ""
+
+#: ../../maps/MP Scenarios/Smugglers.wmf/scripting/texts.lua:11
+msgid ""
+"To establish a smuggling route, you need to build a warehouse on a "
+"sending/receiving spot while your team mate has to build one on the "
+"corresponding receiving/sending spot. A ware is then transported every 10 "
+"seconds. "
+msgstr ""
+
+#: TRANSLATORS: %s = "<number> points"
+#: ../../maps/MP Scenarios/Smugglers.wmf/scripting/texts.lua:15
+msgid ""
+"For harder to defend smuggling routes, you get 2 or 3 points per ware "
+"smuggled. The first team to collect %s wins."
+msgstr ""
+
+#: ../../maps/MP Scenarios/Smugglers.wmf/scripting/texts.lua:17
+msgid "A sending spot"
+msgstr ""
+
+#: ../../maps/MP Scenarios/Smugglers.wmf/scripting/texts.lua:18
+msgid "A receiving spot"
+msgstr ""
+
+#: ../../maps/MP Scenarios/Smugglers.wmf/scripting/texts.lua:21
+msgid ""
+"Remember that the map has rotational symmetry. For example, when you have "
+"found a spot to the top-left of your headquarters, the corresponding spot "
+"will be to the bottom-right of the headquarters of your team mate."
+msgstr ""
+
+#: ../../maps/MP Scenarios/Smugglers.wmf/scripting/texts.lua:25
+msgid ""
+"You can see the number of wares traded at any time in the general statistics "
+"menu. Good luck!"
+msgstr ""
+
+#: TRANSLATORS: the first 2 parameters are player names, the last parameter is "<number> points"
+#: ../../maps/MP Scenarios/Smugglers.wmf/scripting/texts.lua:30
+msgid ""
+"A new smuggling route from %1$s to %2$s has been established! Every ware "
+"they smuggle there is worth %3$s."
+msgstr ""
+
+#: TRANSLATORS: %s = "<number> points"
+#: ../../maps/MP Scenarios/Smugglers.wmf/scripting/texts.lua:35
+msgid ""
+"Your team has established a new smuggling route. You have the sending "
+"warehouse. Every ware smuggled here is worth %s."
+msgstr ""
+
+#: TRANSLATORS: %s = "<number> points"
+#: ../../maps/MP Scenarios/Smugglers.wmf/scripting/texts.lua:40
+msgid ""
+"Your team has established a new smuggling route. You have the receiving "
+"warehouse. Every ware smuggled here is worth %s."
+msgstr ""
+
+#: TRANSLATORS: the first parameter is "<number> points", the last 2 parameters are player names
+#: ../../maps/MP Scenarios/Smugglers.wmf/scripting/texts.lua:46
+msgid "The smuggling route worth %1$s from %2$s to %3$s has been broken!"
+msgstr ""
+
+#: TRANSLATORS: the first 4 parameters are player names, the last parameter is "<number> points"
+#: ../../maps/MP Scenarios/Smugglers.wmf/scripting/texts.lua:53
+msgid ""
+"Game over! %1$s and %2$s have won the game! %3$s and %4$s only managed to "
+"collect %5$s."
+msgstr ""

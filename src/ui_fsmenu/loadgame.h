@@ -34,10 +34,10 @@
 
 class IImageLoader;
 namespace Widelands {
-struct Editor_Game_Base;
-struct Game;
-struct Map;
-struct Map_Loader;
+class Editor_Game_Base;
+class Game;
+class Map;
+class Map_Loader;
 };
 class Image;
 class RenderTarget;
@@ -46,7 +46,8 @@ struct GameSettingsProvider;
 
 /// Select a Saved Game in Fullscreen Mode. It's a modal fullscreen menu.
 struct Fullscreen_Menu_LoadGame : public Fullscreen_Menu_Base {
-	Fullscreen_Menu_LoadGame(Widelands::Game &, GameSettingsProvider * gsp = 0, GameController * gc = 0);
+	Fullscreen_Menu_LoadGame
+		(Widelands::Game &, GameSettingsProvider * gsp = nullptr, GameController * gc = nullptr);
 
 	const std::string & filename() {return m_filename;}
 
@@ -55,9 +56,9 @@ struct Fullscreen_Menu_LoadGame : public Fullscreen_Menu_Base {
 	void map_selected  (uint32_t);
 	void double_clicked(uint32_t);
 	void fill_list     ();
-	void think();
+	void think() override;
 
-	bool handle_key(bool down, SDL_keysym code);
+	bool handle_key(bool down, SDL_keysym code) override;
 
 private:
 	void no_selection();

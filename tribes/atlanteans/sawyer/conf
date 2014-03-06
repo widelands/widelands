@@ -1,4 +1,4 @@
-help=_Saws the wood to produce planks.
+help=_Saws wood to produce planks.
 
 [buildcost]
 carrier=1

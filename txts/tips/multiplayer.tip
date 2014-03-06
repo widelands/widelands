@@ -1,11 +1,11 @@
 [Tip 1]
-text=_"You can use 'Page up' and 'Page down' keys to adjust your wished speed - the real speed is then democratically set."
+text=_"You can use the ’Page up’ and ‘Page down’ keys to adjust your desired speed – the real speed is then democratically set."
 sec=5
 
 [Tip 2]
-text=_"You can use '/me' at the beginning of a chatmessage: '/me is tired' will be printed as '-> Nickname is tired'."
+text=_"You can use ‘/me’ at the beginning of a chatmessage: ‘/me is tired’ will be printed as ‘-> Nickname is tired’."
 sec=5
 
 [Tip 3]
-text=_"Use '@name' at the beginning of a chat message to send it to only one player."
+text=_"Use ‘@name’ at the beginning of a chat message to send it to only one player."
 sec=5

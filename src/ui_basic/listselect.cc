@@ -262,7 +262,7 @@ void BaseListselect::set_scrollpos(const int32_t i)
  * index.
  */
 void BaseListselect::set_entry_color
-	(const uint32_t n, const RGBColor col) throw ()
+	(const uint32_t n, const RGBColor col)
 {
 	assert(n < m_entry_records.size());
 
@@ -296,7 +296,7 @@ void BaseListselect::select(const uint32_t i)
  * \return \c true if an item is select, or \c false if there is no current
  * selection
  */
-bool BaseListselect::has_selection() const throw ()
+bool BaseListselect::has_selection() const
 {
 	return m_selection != no_selection_index();
 }
@@ -308,7 +308,7 @@ bool BaseListselect::has_selection() const throw ()
  *
  * Throws an exception when no item is selected.
  */
-uint32_t BaseListselect::get_selected() const throw (No_Selection)
+uint32_t BaseListselect::get_selected() const
 {
 	if (m_selection == no_selection_index())
 		throw No_Selection();
@@ -321,7 +321,7 @@ uint32_t BaseListselect::get_selected() const throw (No_Selection)
  * Remove the currently selected item. Throws an exception when no
  * item is selected.
  */
-void BaseListselect::remove_selected() throw (No_Selection)
+void BaseListselect::remove_selected()
 {
 	if (m_selection == no_selection_index())
 		throw No_Selection();
@@ -330,12 +330,12 @@ void BaseListselect::remove_selected() throw (No_Selection)
 }
 
 
-uint32_t BaseListselect::get_lineheight() const throw ()
+uint32_t BaseListselect::get_lineheight() const
 {
 	return m_lineheight + 2;
 }
 
-uint32_t BaseListselect::get_eff_w() const throw ()
+uint32_t BaseListselect::get_eff_w() const
 {
 	return get_w();
 }

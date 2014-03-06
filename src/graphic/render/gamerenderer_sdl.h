@@ -30,7 +30,7 @@ struct Vertex;
  */
 class GameRendererSDL : public GameRenderer {
 protected:
-	void draw();
+	void draw() override;
 
 private:
 	void draw_terrain();

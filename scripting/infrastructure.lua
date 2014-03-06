@@ -13,18 +13,18 @@
 --    stuff in the way is removed. A sample usage:
 --
 --    .. code-block:: lua
---       
+--
 --       local game = wl.Game()
---       connected_road(game.players[1], game:get_field(20,20).immovable, "r,r|br,r|r,r")
+--       connected_road(game.players[1], game.map:get_field(20,20).immovable, "r,r|br,r|r,r")
 --
 --    This would create a road starting from the Flag standing at field(20,20)
 --    which must exist and goes from there 2 steps right (east), places a new
---    flag. Then it goes one step bottom-right and one step right, places the 
+--    flag. Then it goes one step bottom-right and one step right, places the
 --    next flag and then goes two steps right again and places the last flag.
---       
+--
 --    :arg plr: The player for which the road is created
 --    :type plr: :class:`wl.game.Player`
---    :arg sflag: The starting flag for this road. 
+--    :arg sflag: The starting flag for this road.
 --    :type sflag: :class:`wl.map.Flag`
 --    :arg descr: The description of this road. This are comma separated
 --       directions as those accepted by :meth:`wl.game.Player.place_road`. A
@@ -40,11 +40,11 @@ function connected_road(p, start, cmd, g_create_carriers)
    end
 
    moves = {}
-   for m in cmd:gmatch("%a+[,|]") do 
+   for m in cmd:gmatch("%a+[,|]") do
       moves[#moves+1] = m:sub(1,-2)
       if(m:sub(-1) == '|') then
          moves[#moves+1] = true -- Force the road
-         r = p:place_road(start, unpack(moves))
+         r = p:place_road(start, table.unpack(moves))
          start = r.end_flag
          if create_carriers then
             r:set_workers("carrier", 1)
@@ -71,7 +71,7 @@ end
 --
 --    :arg plr: The player for which the road is created
 --    :type plr: :class:`wl.game.Player`
---    :arg b1_descr: An array of tables. Each table must contain at 
+--    :arg b1_descr: An array of tables. Each table must contain at
 --       least the name of the building, and the x and y positions of the field
 --       where the building should be created. Optional entries are:
 --
@@ -79,7 +79,7 @@ end
 --          A table of (name,count) as expected by
 --          :meth:`wl.map.ProductionSite.set_wares`. This is valid for
 --          :class:`wl.map.ProductionSite` and :class:`wl.map.Warehouse` and
---          ignored otherwise. 
+--          ignored otherwise.
 --       soldiers
 --          A table of (soldier_descr,count) as expected by
 --          :meth:`wl.map.HasSoldiers.set_soldiers`.  If this is nil, the site
@@ -157,5 +157,3 @@ function place_building_in_region(
       building, plr.number)
    )
 end
-
-
