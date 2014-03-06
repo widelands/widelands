@@ -312,8 +312,7 @@ static std::string speedString(uint32_t const speed)
 {
 	if (speed) {
 		char buffer[32];
-		/** TRANSLATORS: Game speed, e.g. 2.5x */
-		snprintf(buffer, sizeof(buffer), _("%1$u.%2$ux"), speed / 1000, speed / 100 % 10);
+		snprintf(buffer, sizeof(buffer), ("%u.%ux"), speed / 1000, speed / 100 % 10);
 		return buffer;
 	}
 	return _("PAUSE");
