@@ -6,83 +6,27 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4866\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2013-09-15 17:41+0000\n"
+"POT-Creation-Date: 2014-03-05 19:55+0000\n"
 "PO-Revision-Date: 2013-11-23 12:30+0000\n"
 "Last-Translator: Emmanuel Andry <Unknown>\n"
 "Language-Team: Language <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-11-24 05:18+0000\n"
-"X-Generator: Launchpad (build 16831)\n"
+"X-Launchpad-Export-Date: 2014-03-06 05:37+0000\n"
+"X-Generator: Launchpad (build 16948)\n"
 
-#: ../../worlds/blackland/terrainconf:7
-msgid "Ashes"
-msgstr "Cendres"
-
-#: ../../worlds/blackland/terrainconf:77
-msgid "Ashes2"
-msgstr "Cendres2"
-
-#: ../../worlds/blackland/conf:45
-msgid "Aspen"
-msgstr "Peuplier"
-
-#: ../../worlds/blackland/conf:46
-msgid "Aspen medium"
-msgstr "Peuplier moyen"
-
-#: ../../worlds/blackland/conf:47
-msgid "Aspen small"
-msgstr "Petit peuplier"
-
-#: ../../worlds/blackland/conf:48
-msgid "Aspen tiny"
-msgstr "Peuplier minuscule"
-
-#: ../../worlds/blackland/terrainconf:29
-msgid "Beach"
-msgstr "Plage"
-
-#: ../../worlds/blackland/conf:65
-msgid "Beech"
-msgstr "Hêtre"
-
-#: ../../worlds/blackland/conf:66
-msgid "Beech medium"
-msgstr "Hêtre moyen"
-
-#: ../../worlds/blackland/conf:67
-msgid "Beech small"
-msgstr "Petit hêtre"
-
-#: ../../worlds/blackland/conf:68
-msgid "Beech tiny"
-msgstr "Hêtre minuscule"
-
-#: ../../worlds/blackland/conf:61
-msgid "Birch"
-msgstr "Bouleau"
-
-#: ../../worlds/blackland/conf:62
-msgid "Birch medium"
-msgstr "Bouleau moyen"
-
-#: ../../worlds/blackland/conf:63
-msgid "Birch small"
-msgstr "Petit bouleau"
-
-#: ../../worlds/blackland/conf:64
-msgid "Birch tiny"
-msgstr "Bouleau minuscule"
+#: ../../worlds/blackland/conf:2
+msgid "The Widelands Development Team"
+msgstr "L'équipe de développement de Widelands"
 
 #: ../../worlds/blackland/conf:3
 msgid "Blackland"
 msgstr "Les Contrées Ténébreuses"
 
-#: ../../worlds/blackland/conf:79
-msgid "Bunny"
-msgstr "Lapin"
+#: ../../worlds/blackland/conf:4
+msgid "These are the grey, horrible and dangerous blacklands"
+msgstr "Ceci sont les sombres, horribles et dangereuses Contrées Ténébreuses"
 
 #: ../../worlds/blackland/conf:7
 #: ../../worlds/blackland/conf:8
@@ -97,10 +41,6 @@ msgstr "Buisson"
 msgid "Cactus"
 msgstr "Cactus"
 
-#: ../../worlds/blackland/resconf:4
-msgid "Coal"
-msgstr "Charbon"
-
 #: ../../worlds/blackland/conf:14
 #: ../../worlds/blackland/conf:15
 #: ../../worlds/blackland/conf:16
@@ -108,140 +48,16 @@ msgstr "Charbon"
 msgid "Dead Tree"
 msgstr "Arbre mort"
 
-#: ../../worlds/blackland/conf:80
-msgid "Deer"
-msgstr "Cerf"
-
-#: ../../worlds/blackland/conf:81
-msgid "Duck"
-msgstr "Canard"
-
-#: ../../worlds/blackland/resconf:41
-msgid "Fish"
-msgstr "Poisson"
-
-#: ../../worlds/blackland/conf:82
-msgid "Fox"
-msgstr "Renard"
-
-#: ../../worlds/blackland/resconf:12
-msgid "Gold"
-msgstr "Or"
-
-#: ../../worlds/blackland/resconf:28
-msgid "Granite"
-msgstr "Granit"
-
 #: ../../worlds/blackland/conf:18
 #: ../../worlds/blackland/conf:19
 #: ../../worlds/blackland/conf:20
 msgid "Grass"
 msgstr "Herbe"
 
-#: ../../worlds/blackland/terrainconf:94
-msgid "Hard lava"
-msgstr "Lave durcie"
-
-#: ../../worlds/blackland/terrainconf:41
-msgid "Hardground1"
-msgstr "Sol dur1"
-
-#: ../../worlds/blackland/terrainconf:47
-msgid "Hardground2"
-msgstr "Sol dur2"
-
-#: ../../worlds/blackland/terrainconf:53
-msgid "Hardground3"
-msgstr "Sol dur3"
-
-#: ../../worlds/blackland/terrainconf:83
-msgid "Hardground4"
-msgstr "Sol dur4"
-
-#: ../../worlds/blackland/resconf:20
-msgid "Iron"
-msgstr "Fer"
-
-#: ../../worlds/blackland/conf:69
-msgid "Larch"
-msgstr "Mélèze"
-
-#: ../../worlds/blackland/conf:70
-msgid "Larch medium"
-msgstr "Mélèze moyen"
-
-#: ../../worlds/blackland/conf:71
-msgid "Larch small"
-msgstr "Petit mélèze"
-
-#: ../../worlds/blackland/conf:72
-msgid "Larch tiny"
-msgstr "Mélèze minuscule"
-
-#: ../../worlds/blackland/terrainconf:89
-msgid "Lava"
-msgstr "Lave"
-
-#: ../../worlds/blackland/terrainconf:19
-msgid "Lava stone1"
-msgstr "Pierre de lave1"
-
-#: ../../worlds/blackland/terrainconf:24
-msgid "Lava stone2"
-msgstr "Pierre de lave2"
-
-#: ../../worlds/blackland/conf:57
-msgid "Maple"
-msgstr "Érable"
-
-#: ../../worlds/blackland/conf:58
-msgid "Maple medium"
-msgstr "Érable moyen"
-
-#: ../../worlds/blackland/conf:59
-msgid "Maple small"
-msgstr "Petit érable"
-
-#: ../../worlds/blackland/conf:60
-msgid "Maple tiny"
-msgstr "Érable minuscule"
-
-#: ../../worlds/blackland/terrainconf:13
-msgid "Mountain1"
-msgstr "Montagne1"
-
-#: ../../worlds/blackland/terrainconf:59
-msgid "Mountain2"
-msgstr "Montagne2"
-
-#: ../../worlds/blackland/terrainconf:65
-msgid "Mountain3"
-msgstr "Montagne3"
-
-#: ../../worlds/blackland/terrainconf:71
-msgid "Mountain4"
-msgstr "Montagne4"
-
 #: ../../worlds/blackland/conf:21
 #: ../../worlds/blackland/conf:22
 msgid "Mushroom"
 msgstr "Champignon"
-
-#: ../../worlds/blackland/conf:49
-msgid "Oak"
-msgstr "Chêne"
-
-#: ../../worlds/blackland/conf:50
-msgid "Oak medium"
-msgstr "Chêne moyen"
-
-#: ../../worlds/blackland/conf:51
-msgid "Oak small"
-msgstr "Petit chêne"
-
-#: ../../worlds/blackland/conf:52
-msgid "Oak tiny"
-msgstr "Chêne minuscule"
 
 #: ../../worlds/blackland/conf:23
 #: ../../worlds/blackland/conf:24
@@ -252,51 +68,11 @@ msgstr "Chêne minuscule"
 msgid "Pebble"
 msgstr "Caillou"
 
-#: ../../worlds/blackland/conf:83
-msgid "Reindeer"
-msgstr "Renne"
-
-#: ../../worlds/blackland/conf:73
-msgid "Rowan"
-msgstr "Sorbier"
-
-#: ../../worlds/blackland/conf:74
-msgid "Rowan medium"
-msgstr "Sorbier moyen"
-
-#: ../../worlds/blackland/conf:75
-msgid "Rowan small"
-msgstr "Petit sorbier"
-
-#: ../../worlds/blackland/conf:76
-msgid "Rowan tiny"
-msgstr "Sorbier minuscule"
-
-#: ../../worlds/blackland/conf:84
-msgid "Sheep"
-msgstr "Mouton"
-
 #: ../../worlds/blackland/conf:29
 #: ../../worlds/blackland/conf:30
 #: ../../worlds/blackland/conf:31
 msgid "Skeleton"
 msgstr "Squelette"
-
-#: ../../worlds/blackland/conf:53
-msgid "Spruce"
-msgstr "Épicéa"
-
-#: ../../worlds/blackland/conf:54
-msgid "Spruce medium"
-msgstr "Épicéa moyen"
-
-#: ../../worlds/blackland/conf:55
-msgid "Spruce small"
-msgstr "Petit épicéa"
-
-#: ../../worlds/blackland/conf:56
-msgid "Spruce tiny"
-msgstr "Épicéa minuscule"
 
 #: ../../worlds/blackland/conf:32
 #: ../../worlds/blackland/conf:33
@@ -317,15 +93,239 @@ msgstr "Rochers"
 msgid "Stones"
 msgstr "Pierres"
 
-#: ../../worlds/blackland/conf:2
-msgid "The Widelands Development Team"
-msgstr "L'équipe de développement de Widelands"
+#: ../../worlds/blackland/conf:45
+msgid "Aspen"
+msgstr "Peuplier"
 
-#: ../../worlds/blackland/conf:4
-msgid "These are the grey, horrible and dangerous blacklands"
-msgstr "Ceci sont les sombres, horribles et dangereuses Contrées Ténébreuses"
+#: ../../worlds/blackland/conf:46
+msgid "Aspen (medium)"
+msgstr ""
+
+#: ../../worlds/blackland/conf:47
+msgid "Aspen (small)"
+msgstr ""
+
+#: ../../worlds/blackland/conf:48
+msgid "Aspen (tiny)"
+msgstr ""
+
+#: ../../worlds/blackland/conf:49
+msgid "Oak"
+msgstr "Chêne"
+
+#: ../../worlds/blackland/conf:50
+msgid "Oak (medium)"
+msgstr ""
+
+#: ../../worlds/blackland/conf:51
+msgid "Oak (small)"
+msgstr ""
+
+#: ../../worlds/blackland/conf:52
+msgid "Oak (tiny)"
+msgstr ""
+
+#: ../../worlds/blackland/conf:53
+msgid "Spruce"
+msgstr "Épicéa"
+
+#: ../../worlds/blackland/conf:54
+msgid "Spruce (medium)"
+msgstr ""
+
+#: ../../worlds/blackland/conf:55
+msgid "Spruce (small)"
+msgstr ""
+
+#: ../../worlds/blackland/conf:56
+msgid "Spruce (tiny)"
+msgstr ""
+
+#: ../../worlds/blackland/conf:57
+msgid "Maple"
+msgstr "Érable"
+
+#: ../../worlds/blackland/conf:58
+msgid "Maple (medium)"
+msgstr ""
+
+#: ../../worlds/blackland/conf:59
+msgid "Maple (small)"
+msgstr ""
+
+#: ../../worlds/blackland/conf:60
+msgid "Maple (tiny)"
+msgstr ""
+
+#: ../../worlds/blackland/conf:61
+msgid "Birch"
+msgstr "Bouleau"
+
+#: ../../worlds/blackland/conf:62
+msgid "Birch (medium)"
+msgstr ""
+
+#: ../../worlds/blackland/conf:63
+msgid "Birch (small)"
+msgstr ""
+
+#: ../../worlds/blackland/conf:64
+msgid "Birch (tiny)"
+msgstr ""
+
+#: ../../worlds/blackland/conf:65
+msgid "Beech"
+msgstr "Hêtre"
+
+#: ../../worlds/blackland/conf:66
+msgid "Beech (medium)"
+msgstr ""
+
+#: ../../worlds/blackland/conf:67
+msgid "Beech (small)"
+msgstr ""
+
+#: ../../worlds/blackland/conf:68
+msgid "Beech (tiny)"
+msgstr ""
+
+#: ../../worlds/blackland/conf:69
+msgid "Larch"
+msgstr "Mélèze"
+
+#: ../../worlds/blackland/conf:70
+msgid "Larch (medium)"
+msgstr ""
+
+#: ../../worlds/blackland/conf:71
+msgid "Larch (small)"
+msgstr ""
+
+#: ../../worlds/blackland/conf:72
+msgid "Larch (tiny)"
+msgstr ""
+
+#: ../../worlds/blackland/conf:73
+msgid "Rowan"
+msgstr "Sorbier"
+
+#: ../../worlds/blackland/conf:74
+msgid "Rowan (medium)"
+msgstr ""
+
+#: ../../worlds/blackland/conf:75
+msgid "Rowan (small)"
+msgstr ""
+
+#: ../../worlds/blackland/conf:76
+msgid "Rowan (tiny)"
+msgstr ""
+
+#: ../../worlds/blackland/conf:79
+msgid "Bunny"
+msgstr "Lapin"
+
+#: ../../worlds/blackland/conf:80
+msgid "Deer"
+msgstr "Cerf"
+
+#: ../../worlds/blackland/conf:81
+msgid "Duck"
+msgstr "Canard"
+
+#: ../../worlds/blackland/conf:82
+msgid "Fox"
+msgstr "Renard"
+
+#: ../../worlds/blackland/conf:83
+msgid "Reindeer"
+msgstr "Renne"
+
+#: ../../worlds/blackland/conf:84
+msgid "Sheep"
+msgstr "Mouton"
+
+#: ../../worlds/blackland/resconf:4
+msgid "Coal"
+msgstr "Charbon"
+
+#: ../../worlds/blackland/resconf:12
+msgid "Gold"
+msgstr "Or"
+
+#: ../../worlds/blackland/resconf:20
+msgid "Iron"
+msgstr "Fer"
+
+#: ../../worlds/blackland/resconf:28
+msgid "Granite"
+msgstr "Granit"
 
 #: ../../worlds/blackland/resconf:36
 #: ../../worlds/blackland/terrainconf:34
 msgid "Water"
 msgstr "Eau"
+
+#: ../../worlds/blackland/resconf:41
+msgid "Fish"
+msgstr "Poisson"
+
+#: ../../worlds/blackland/terrainconf:7
+msgid "Ashes"
+msgstr "Cendres"
+
+#: ../../worlds/blackland/terrainconf:13
+msgid "Mountain 1"
+msgstr ""
+
+#: ../../worlds/blackland/terrainconf:19
+msgid "Lava Rocks 1"
+msgstr ""
+
+#: ../../worlds/blackland/terrainconf:24
+msgid "Lava Rocks 2"
+msgstr ""
+
+#: ../../worlds/blackland/terrainconf:29
+msgid "Beach"
+msgstr "Plage"
+
+#: ../../worlds/blackland/terrainconf:41
+msgid "Hard Ground 1"
+msgstr ""
+
+#: ../../worlds/blackland/terrainconf:47
+msgid "Hard Ground 2"
+msgstr ""
+
+#: ../../worlds/blackland/terrainconf:53
+msgid "Hard Ground 3"
+msgstr ""
+
+#: ../../worlds/blackland/terrainconf:59
+msgid "Mountain 2"
+msgstr ""
+
+#: ../../worlds/blackland/terrainconf:65
+msgid "Mountain 3"
+msgstr ""
+
+#: ../../worlds/blackland/terrainconf:71
+msgid "Mountain 4"
+msgstr ""
+
+#: ../../worlds/blackland/terrainconf:77
+msgid "Ashes 2"
+msgstr ""
+
+#: ../../worlds/blackland/terrainconf:83
+msgid "Hard Ground 4"
+msgstr ""
+
+#: ../../worlds/blackland/terrainconf:89
+msgid "Lava"
+msgstr "Lave"
+
+#: ../../worlds/blackland/terrainconf:94
+msgid "Igneous Rocks"
+msgstr ""

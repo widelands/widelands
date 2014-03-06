@@ -7,198 +7,152 @@ msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2013-09-15 17:41+0000\n"
+"POT-Creation-Date: 2014-03-05 19:55+0000\n"
 "PO-Revision-Date: 2011-09-02 17:39+0000\n"
 "Last-Translator: Arve Eriksson <Unknown>\n"
 "Language-Team: Swedish <sv@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-09-16 04:49+0000\n"
-"X-Generator: Launchpad (build 16761)\n"
+"X-Launchpad-Export-Date: 2014-03-06 05:38+0000\n"
+"X-Generator: Launchpad (build 16948)\n"
 
-#: ../../maps/Plateau.wmf/scripting/texts.lua:33
-msgid ""
-"* Defeat Erwyn. He commands the strongest opposing soldiers left on this\n"
-"island."
+#: ../../maps/Plateau.wmf/scripting/texts.lua:27
+msgid "Capture the Ancient Castle"
 msgstr ""
-"* Besegra Erwyn. Han för befäl över de starkaste fientliga soldaterna som "
-"finns kvar på ön."
 
-#: ../../maps/Plateau.wmf/scripting/texts.lua:40
-msgid "* Defeat Jomo. He takes care about the soldiers food supply."
-msgstr "* Besegra Jomo. Han hanterar soldaternas livsmedelsförsörjning."
-
-#: ../../maps/Plateau.wmf/scripting/texts.lua:26
-msgid "* Defeat Lanissa and capture the ancient castle."
-msgstr "* Besegra Lanissa och erövra det uråldriga slottet."
-
-#: ../../maps/Plateau.wmf/scripting/texts.lua:54
-msgid "-- NEW OBJECTIVES --"
-msgstr "-- NYA MÅL --"
-
-#: ../../maps/Plateau.wmf/scripting/texts.lua:86
-msgid "An ancient castle"
-msgstr "Ett uråldrigt slott"
-
-#: ../../maps/Plateau.wmf/scripting/texts.lua:102
-msgid "Ancient castle captured"
-msgstr "Det uråldriga slottet erövrades"
-
-#: ../../maps/Plateau.wmf/scripting/texts.lua:116
-#: ../../maps/Plateau.wmf/scripting/texts.lua:126
-msgid "Another Briefing"
-msgstr "Ytterligare genomgång"
-
-#: ../../maps/Plateau.wmf/scripting/texts.lua:87
-msgid ""
-"By the Gods! One of our scouts found a mighty castle at the middle of the "
-"old\n"
-"plateau. The castle must be quite old and seems to be build in a foreign\n"
-"style. It's quite obvious, that this is not barbarian craft.<br>Let's hope\n"
-"Lanissa - the warlord holding command over that castle - still has not "
-"observed\n"
-"us. Perhaps we have a chance to conquer that mighty building without a "
-"bigger\n"
-"fight!<br>However we really have to capture it. It will be our key for our\n"
-"reign over this island!"
+#: ../../maps/Plateau.wmf/scripting/texts.lua:29
+msgid "Defeat Lanissa and capture the ancient castle."
 msgstr ""
-"Vid gudarna! En av våra spejare har hittat ett mäktigt slott  på mitten av "
-"den gamla\n"
-"platån. Slottet måste vara mycket gammalt och verkar bygga i en främmande\n"
-"stil. Det är uppenbart att detta inte är barbarernas hantverk. <br> Låt oss "
-"hoppas att\n"
-"Lanissa - krigsherren som för befäl över att slottet - fortfarande inte har "
-"iakttagit\n"
-"oss. Kanske har vi en chans att erövra den mäktiga byggnaden utan en stor\n"
-"kamp! <br> Men vi måste verkligen erövra den. Det kommer att vara nyckeln "
-"till att \n"
-"härska över denna ö!"
 
-#: ../../maps/Plateau.wmf/scripting/texts.lua:25
-msgid "Capture the ancient castle"
-msgstr "Erövra det uråldriga slottet"
-
-#: ../../maps/Plateau.wmf/scripting/texts.lua:143
-msgid ""
-"Congratulations! You mastered this scenario. You may play on if you like!"
-msgstr ""
-"Grattis! Du bemästrade detta scenario. Du kan spela vidare om du vill!"
-
-#: ../../maps/Plateau.wmf/scripting/texts.lua:31
+#: ../../maps/Plateau.wmf/scripting/texts.lua:34
 msgid "Defeat Erwyn"
 msgstr "Besegra Erwyn"
 
-#: ../../maps/Plateau.wmf/scripting/texts.lua:38
+#: ../../maps/Plateau.wmf/scripting/texts.lua:36
+msgid ""
+"Defeat Erwyn. He commands the strongest opposing military force left on this "
+"island."
+msgstr ""
+
+#: ../../maps/Plateau.wmf/scripting/texts.lua:40
 msgid "Defeat Jomo"
 msgstr "Besegra Jomo"
 
-#: ../../maps/Plateau.wmf/scripting/texts.lua:120
-msgid "Erwyn defeated"
-msgstr "Erwyn besgerad"
-
-#: ../../maps/Plateau.wmf/scripting/texts.lua:74
-msgid ""
-"Finally! Our first step to victory was just done! Last night, we landed on\n"
-"the forbidden island and defeated the few guards that sentineled the north\n"
-"western part of the island. I am quite sure, that none of the other "
-"warlords\n"
-"has detected us so far, so we should keep quiet and build up our\n"
-"infrastructure. Soon we will be strong enough to raid their positions."
+#: ../../maps/Plateau.wmf/scripting/texts.lua:42
+msgid "Defeat Jomo. He will take care of the soldiers’ food supply."
 msgstr ""
-"ntligen! Vi tog just vårt första steg mot segern! Igår kväll landade vi på\n"
-"det förbjudna ön och besegrade de få vakterna satta att vakta nordvästra\n"
-"delen av ön. Jag är ganska säker på att ingen av de andra krigsherrarna\n"
-"har upptäckt oss hittills, så vi bör vara diskreta och bygga upp vår\n"
-"infrastruktur. Snart kommer vi att vara starka nog för att göra räder mot \n"
-"deraspositioner."
 
-#: ../../maps/Plateau.wmf/scripting/texts.lua:141
-msgid ""
-"Finally! The complete island is ours. Now we just have to defend it better "
-"than\n"
-"the warlords did."
+#: ../../maps/Plateau.wmf/scripting/texts.lua:56
+msgid "New Objectives"
 msgstr ""
-"Äntligen! Hela ön är vår. Nu måste vi bara försvara den bättre än "
-"krigsherrarna gjorde."
 
-#: ../../maps/Plateau.wmf/scripting/texts.lua:69
+#: ../../maps/Plateau.wmf/scripting/texts.lua:71
 msgid "First Briefing"
 msgstr "Första genomgång"
 
-#: ../../maps/Plateau.wmf/scripting/texts.lua:121
-msgid ""
-"Great! Erwyn gave up, when he saw his last buildings burning down. One "
-"strong\n"
-"warlord less on this island!"
+#: ../../maps/Plateau.wmf/scripting/texts.lua:75
+msgid "The Forbidden Island"
 msgstr ""
-"Utmärkt! Erwyn gav upp när han såg  sin sista byggnad brinna ner. \n"
-"En stark krigsherre mindre på ön!"
 
-#: ../../maps/Plateau.wmf/scripting/texts.lua:131
+#: ../../maps/Plateau.wmf/scripting/texts.lua:76
 msgid ""
-"Great! Jomo gave up, when he saw his last buildings burning down. One "
-"warlord\n"
-"less on this island!"
+"Finally! We have just taken our first step towards victory! Last night, we "
+"landed on the forbidden island and defeated the few guards that were "
+"watching the north-western part of the island. I am quite sure that none of "
+"the other warlords has detected us so far, so we should keep quiet and build "
+"up our infrastructure. Soon we will be strong enough to raid their positions."
 msgstr ""
-"Utmärkt! Jomo gav upp när han såg  sin sista byggnad brinna ner. \n"
-"En stark krigsherre mindre på ön!"
 
-#: ../../maps/Plateau.wmf/scripting/texts.lua:130
-msgid "Jomo defeated"
-msgstr "Jomo besegrad"
-
-#: ../../maps/Plateau.wmf/scripting/texts.lua:136
-msgid "Last Briefing"
-msgstr "Sista genomgång"
-
-#: ../../maps/Plateau.wmf/scripting/texts.lua:82
-#: ../../maps/Plateau.wmf/scripting/texts.lua:98
+#: ../../maps/Plateau.wmf/scripting/texts.lua:84
+#: ../../maps/Plateau.wmf/scripting/texts.lua:99
 msgid "Second Briefing"
 msgstr "Andra genomgången"
 
-#: ../../maps/Plateau.wmf/scripting/texts.lua:73
-msgid "The forbidden island"
-msgstr "Den förbjudna ön"
+#: ../../maps/Plateau.wmf/scripting/texts.lua:88
+msgid "An Ancient Castle"
+msgstr ""
 
-#: ../../maps/Plateau.wmf/scripting/texts.lua:140
+#: ../../maps/Plateau.wmf/scripting/texts.lua:89
+msgid ""
+"By the Gods! One of our scouts has discovered a mighty castle at the center "
+"of the old plateau. The castle must be quite old and seems to have been "
+"built in a foreign style. It’s quite obvious that this is not barbarian "
+"craft."
+msgstr ""
+
+#: ../../maps/Plateau.wmf/scripting/texts.lua:92
+msgid ""
+"Let’s hope that Lanissa – the warlord holding sway over that castle – has "
+"not discovered our movements yet. Perhaps we have a chance of conquering "
+"that mighty building without a bigger fight! However, it is essential that "
+"we capture it. It will be the key to our reign over this island!"
+msgstr ""
+
+#: ../../maps/Plateau.wmf/scripting/texts.lua:103
+msgid "Ancient Castle Captured"
+msgstr ""
+
+#: ../../maps/Plateau.wmf/scripting/texts.lua:104
+msgid ""
+"Wonderful! Our troops have finally defeated Lanissa and her soldiers. The "
+"ancient castle is ours!"
+msgstr ""
+
+#: ../../maps/Plateau.wmf/scripting/texts.lua:105
+msgid ""
+"It is amazing how far one can see from the highest tower of the castle. We "
+"can watch the whole island. So now I wonder why Lanissa did not see us and "
+"thus did not prepare. Be that as it may, some things will never come to the "
+"light of day. The only important issue at the moment are the opposing troops "
+"still left. We have discovered enemy positions held by Erwyn to the north "
+"and east of the castle. He is known to be a strong warlord and surely "
+"commands the strongest warriors. In the south, we caught sight of some food "
+"infrastructures guarded by Jomo – a younger warlord – and we should take "
+"care of those infrastructures so we can take our cut of the food supply."
+msgstr ""
+
+#: ../../maps/Plateau.wmf/scripting/texts.lua:116
+#: ../../maps/Plateau.wmf/scripting/texts.lua:125
+msgid "Another Briefing"
+msgstr "Ytterligare genomgång"
+
+#: ../../maps/Plateau.wmf/scripting/texts.lua:120
+msgid "Erwyn Defeated"
+msgstr ""
+
+#: ../../maps/Plateau.wmf/scripting/texts.lua:121
+msgid ""
+"Great! Erwyn gave up when he saw his last buildings burning down. That’s one "
+"less strong warlord on this island!"
+msgstr ""
+
+#: ../../maps/Plateau.wmf/scripting/texts.lua:129
+msgid "Jomo Defeated"
+msgstr ""
+
+#: ../../maps/Plateau.wmf/scripting/texts.lua:130
+msgid ""
+"Great! Jomo gave up when he saw his last buildings burning down. That’s one "
+"less warlord on this island!"
+msgstr ""
+
+#: ../../maps/Plateau.wmf/scripting/texts.lua:134
+msgid "Last Briefing"
+msgstr "Sista genomgång"
+
+#: ../../maps/Plateau.wmf/scripting/texts.lua:138
 msgid "Victory!"
 msgstr "Seger!"
 
-#: ../../maps/Plateau.wmf/scripting/texts.lua:103
+#: ../../maps/Plateau.wmf/scripting/texts.lua:139
 msgid ""
-"Wonderful! Our troops finally defeated Lanissa and her soldiers. The "
-"ancient\n"
-"castle is ours!<br> It is amazing, how far one can see from the highest "
-"tower\n"
-"of the castle. We can watch the whole island. So now I wonder, why Lanissa "
-"has\n"
-"not seen us and thus did not prepare. But well, some things will never come "
-"to\n"
-"the light of day. The only important things at the moment are the left "
-"opposing\n"
-"troops. We observed enemy's positions from Erwyn north and eastwards of the\n"
-"castle. He is known to be a strong warlord and surely commands the "
-"strongest\n"
-"warriors. In the south we caught sight of some guarded food infrastructures "
-"of Jomo -\n"
-"a younger warlord - we should take care about that infrastructures and cut "
-"of\n"
-"the food supply."
+"Finally! The island is completely ours. Now we just have to defend it better "
+"than the warlords did."
 msgstr ""
-"Härligt! Våra trupper besegrade till sist Lanissa och hennes soldater. Det\n"
-"gamla slottet är vårt!<br> Det är fantastiskt vilken utsikt man har från "
-"det\n"
-"högsta tornet. Vi kan se ut över hela ön! Så, nu undrar jag varför Lanissa "
-"inte\n"
-"såg oss och därför inte gjorde sig beredd. Men, tja, vissa saker kommer "
-"helt\n"
-"enkelt inte i dagen. Det viktiga nu är de motståndsgrupper som finns kvar. "
-"Vi\n"
-"såg fiendens posteringar från Erwyn till norr och öster om slottet. Han är "
-"känd\n"
-"för att vara en stor krigarfurste, och har säkert de starkaste krigarna med "
-"sig.\n"
-"I söder såg vi någon befäst matinfrastruktur under Jomos befäl - en yngre\n"
-"krigarfurste. Vi borde ta hand om den infrastrukturen och slå ut "
-"mattillgången."
+
+#: ../../maps/Plateau.wmf/scripting/texts.lua:140
+msgid ""
+"Congratulations! You have mastered this scenario. You may play on if you "
+"like!"
+msgstr ""
