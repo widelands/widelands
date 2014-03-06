@@ -7,434 +7,422 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2014-02-22 15:38+0000\n"
+"POT-Creation-Date: 2014-03-05 19:55+0000\n"
 "PO-Revision-Date: 2010-08-30 22:57+0000\n"
 "Last-Translator: Adrián Chaves Fernández <adriyetichaves@gmail.com>\n"
 "Language-Team: Galician <kde-i18n-doc@kde.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-02-23 05:30+0000\n"
-"X-Generator: Launchpad (build 16926)\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Launchpad-Export-Date: 2014-03-06 05:29+0000\n"
+"X-Generator: Launchpad (build 16948)\n"
 "X-Poedit-Country: SPAIN\n"
 "X-Poedit-Language: Galician\n"
 "X-Poedit-SourceCharset: utf-8\n"
 
-#: ../../campaigns/t01.wmf/scripting/initial_messages.lua:27
-msgid ""
-" \"As father told me, there are times to fight and times to lie and wait, "
-"trying not to fall asleep or die before the right time comes. And so I do... "
-"wait.\" "
-msgstr ""
-" «Como me dixo meu pai, ás veces hai que loitar e ás veces hai que deitarse "
-"a agardar, tratando de non durmirse ou morrer antes de que chegue o momento. "
-"E iso é o que fago... agardar.» "
-
-#: ../../campaigns/t01.wmf/scripting/texts.lua:45
-msgid ""
-" \"Hail, chieftain. I am Khantrukh and have seen many winters pass. Please "
-"allow me to aid you with my counsel through these darkened days.\" "
-msgstr ""
-" «Saúdos, xefe. Son Khantrukh, e xa vivín moitos invernos. Permíteme "
-"axudarche co meu consello nestes días de escuridade.» "
-
-#: ../../campaigns/t01.wmf/scripting/texts.lua:89
-msgid ""
-" \"I am well aware, chieftain, that neither you nor your warriors have the "
-"desire to stay in this forsaken place for long. But even so, our war to "
-"reconquer our home might take a long time and it would seem wise to make "
-"preparations.<br> I would advise that we obtain stones for the future - who "
-"knows what fortifications we might be forced to build very soon. And - like "
-"a gift of destiny - there are indeed great rocks just nearby...\"<br><br>-- "
-"NEW OBJECTIVE --<br> "
-msgstr ""
-" «Xa sei que nin ti nin os guerreiros gustades de quedarvos neste lugar "
-"esquecido por moito tempo. Pero aínda así, a guerra para recuperar as nosas "
-"terras podería ser longa e estaría ben que nos preparásemos.<br /> "
-"Recomendaría que conseguísemos pedra para o futuro. Quen sabe que "
-"fortificacións necesitaremos construír dentro de pouco. E polos arredores "
-"hai unhas rochas enormes, parece que sexan un regalo divino.»<br /> <br /> "
-"NOVO OBXECTIVO<br /> "
-
-#: ../../campaigns/t01.wmf/scripting/texts.lua:105
-msgid ""
-" \"In another sleepless night, I went up to the hill and gazed to the north. "
-"The fires are still burning, satisfying their hunger upon my father's "
-"legacy.<br> They are a constant reminder why we have to hide here... and why "
-"we must return in the end!\" "
-msgstr ""
-" «Noutra noite en vela, subín á montaña e mirei para o norte. O lume "
-"continúa, alimentándose do legado de meu pai.<br /> As chamas son o "
-"recordatorio de por que nos agochamos aquí... e de por que antes ou despois "
-"teremos que regresar!» "
-
-#: ../../campaigns/t01.wmf/scripting/initial_messages.lua:11
-msgid ""
-" \"It's been months and we are still hiding where the forests are old and "
-"dark.<br> My warriors hunt at day and lie awake at night - listening to the "
-"sounds of the cruel slaughter echoing from afar amongst the ancient trees.\" "
-msgstr ""
-" «Levamos meses agochándonos na parte vella e escura dos bosques.<br /> Os "
-"meus guerreiros cazan polo día e mantéñense espertos pola noite escoitando o "
-"son da cruel matanza, cuxo eco chega dende alén das vellas árbores.» "
-
-#: ../../campaigns/t01.wmf/scripting/initial_messages.lua:22
-msgid ""
-" \"My father's bones rest peacefully in the grounds on which he once ended "
-"the senseless bloodspilling that has risen among us. It pains me that his "
-"peace only endured for one generation.<br> Boldreth, my loyal companion and "
-"friend is a source of peace and comfort to me in these dark times. He keeps "
-"my spirits high and those of my warriors awake, not to let greed or despair "
-"destroy the bonds between us as well.\" "
-msgstr ""
-" «O corpo de meu pai xace pacificamente na terra na que outrora puxera fin á "
-"violencia sen sentido que medrara entre nós. Dóeme que a súa paz durase tan "
-"só unha xeración.<br /> Boldreth, o meu leal compañeiro e amigo, é para min "
-"unha fonte de paz e tranquilidade nestes tempos escuros. Mantén alto o meu "
-"espírito e esperto o dos meus guerreiros, impedindo que a avaricia ou a "
-"desesperación destrúa tamén os nosos vínculos.» "
-
-#: ../../campaigns/t01.wmf/scripting/texts.lua:51
-msgid ""
-" \"None but the gods know how long we have to remain hidden here. The "
-"warriors hope we may march back gloriously any day now, but I strongly doubt "
-"that will happen soon. And the days are already getting shorter and "
-"colder...<br> We should prepare, in case we have to face the winter in these "
-"harsh lands. I believe to the east of our campsite are a few places where we "
-"could raise a lumberjack's hut.\"<br><br>-- NEW OBJECTIVES --<br> "
-msgstr ""
-" «Só os deuses saben canto tempo teremos que quedar aquí. Os guerreiros "
-"esperan que un destes días regresemos gloriosos, pero dubido moito que iso "
-"vaia acontecer tan pronto como esperan. E os días son cada vez máis curtos e "
-"fríos...<br /> Se imos facer fronte ao duro inverno nestas duras terras, "
-"teriamos que prepararnos. Coido que ao leste do noso campamento hai algúns "
-"lugares onde poderiamos construír unha cabana para un leñador.»<br /> <br /> "
-"NOVOS OBXECTIVOS<br /> "
-
-#: ../../campaigns/t01.wmf/scripting/texts.lua:60
-msgid ""
-" \"Obviously, it would be too exhausting for our people to walk all the way "
-"to the lumberjack's hut through the wilderness. We will have to build a road "
-"between our hall and the lumberjack's hut. It's not a hard guess that the "
-"men would appreciate a way as short and plain as possible - the wood will "
-"surely be heavy enough, nevertheless.\"<br><br>-- NEW OBJECTIVE --<br> "
-msgstr ""
-" «Obviamente, a xente cansaríase moito se tiver que ir e vir da cabana do "
-"leñador continuamente por estas terras salvaxes. Teremos que construír un "
-"camiño entre a nosa sala e a cabana do leñador. E non é difícil imaxinar que "
-"os homes apreciarán que o camiño sexa o máis directo e chan posible ─cargar "
-"a madeira custa o seu─.»<br /> <br /> NOVO OBXECTIVO<br /> "
-
-#: ../../campaigns/t01.wmf/scripting/texts.lua:81
-msgid ""
-" \"Of course, if we intended to build a bigger settlement, many more "
-"lumberjack's huts would be advisable, but this should suffice for now.<br> "
-"But never forget - these forests are our heritage, entrusted upon us by our "
-"ancestors. We must always respect and care for them. What we take, we must "
-"give back again.<br> So, in order to replace the trees we chop down, we "
-"should build a ranger's hut, preferably close to the lumberjack's "
-"hut.\"<br><br>-- NEW OBJECTIVE --<br> "
-msgstr ""
-" «Por suposto, se imos construír un gran asentamento sería recomendable "
-"contarmos con máis cabanas de leñador, pero con esta debería abondar de "
-"momento.<br /> O que si, nunca esquezas que estes bosques son o noso legado, "
-"o que os nosos antepasados deixaron ao noso coidado. E iso debemos facer, "
-"coidalo e respectalo. Debemos devolver aquilo que collamos.<br /> Así que "
-"deberíamos construír unha choza para un forestal, preferiblemente preto da "
-"cabana do leñador.»<br /> <br /> NOVO OBXECTIVO<br /> "
-
-#: ../../campaigns/t01.wmf/scripting/texts.lua:115
-msgid ""
-" \"Once again, I went up to my father's tomb, in a sacred grove at the foot "
-"of the great spire of Kal'mavrath. I just stood there and felt neither the "
-"hours pass nor the cold rain pouring down from a darkened sky...<br> Somehow "
-"it felt like a farewell. For the first time, I wondered what the future "
-"might hold for me...\" "
-msgstr ""
-" «Unha vez máis, subín á tumba de meu pai, nun arboredo sagrado, ao pe do "
-"gran chapitel de Kal'mavrath. Simplemente quedei alí, e non reparei nin no "
-"paso do tempo nin na fría chuvascada que caía do ceo escuro...<br /> Dalgún "
-"xeito pareceume unha despedida. Por vez primeira, pregunteime o que me "
-"depararía o futuro...» "
-
-#: ../../campaigns/t01.wmf/scripting/texts.lua:125
-msgid ""
-" \"Some time ago, Boldreth came to me. His advice was to move to a place "
-"closer to home - to strike at the first sign of my brothers' forces "
-"wavering.<br> But I look over the forests and I can still see black smoke "
-"rising to the sky. I know - it is too early yet, and what he hopes for will "
-"not happen any time soon. He might still be right, but I fear the bloodshed "
-"that returning too fast would cause both on our and the other side...\" "
-msgstr ""
-" «Hai algún tempo, Boldreth presentouse ante min. Aconselloume movernos a "
-"outro lugar máis preto das nosas terras, para atacar ao mínimo sinal de "
-"debilidade dos meus irmáns.<br /> Pero miro sobre as árbores e aínda hai "
-"fume levantándose polo horizonte. Aínda é demasiado pronto, queda moito para "
-"o momento que Boldreth agarda. Pode que teña razón aínda así, pero teño medo "
-"das mortes que regresar antes de tempo ocasionaría en ambos os dous "
-"bandos...» "
-
-#: ../../campaigns/t01.wmf/scripting/texts.lua:74
-msgid ""
-" \"The northern winds tell us that the coming winter will be a long and "
-"cruel one. One lumberjack's hut will not be enough to fit the needs of our "
-"people. More trees wait for our axes just south of our new crossroads - let "
-"us raise a second lumberjack's hut there!\"<br><br>-- NEW OBJECTIVE --<br> "
-msgstr ""
-" «Os ventos do norte avisan de que o inverno será longo e duro. Cunha soa "
-"cabana de leñador non teremos abondo para suplir as necesidades do noso "
-"pobo. Ao sur do novo cruce de camiños hai árbores agardando polos nosos "
-"machados, construamos alí unha nova cabana de leñador!»<br />  <br /> NOVO "
-"OBXECTIVO<br /> "
-
-#: ../../campaigns/t01.wmf/scripting/texts.lua:67
-msgid ""
-" \"There is an old saying:<br> 'A burden divided is easier to endure.'<br> A "
-"crossroads on the way between our headquarters and the lumberjack's hut "
-"would ease the work of our carriers.\"<br><br>-- NEW OBJECTIVE --<br> "
-msgstr ""
-" «Hai un vello refrán que di:<br /> “Unha carga dividida sopórtase "
-"mellor”.<br /> Un cruce de camiños no camiño entre o noso cuartel xeral e a "
-"cabana do leñador axilizaría o traballo dos transportadores.»<br /> <br /> "
-"NOVO OBXECTIVO<br> "
-
-#: ../../campaigns/t01.wmf/scripting/texts.lua:134
-msgid ""
-" \"Today, my warriors picked up an old man, wandering sick and wounded "
-"through the dark forest. We listened in horror when he told us of the "
-"atrocities taking place in Al'thunran.<br> I hereby renew my oath - I will "
-"stop this madness at any cost!\" "
-msgstr ""
-" «Hoxe, os meus guerreiros atraparon un vello, enfermo e malferido, "
-"camiñando polo escuro bosque. Escoitamos horrorizados as atrocidades que nos "
-"dixo se están cometendo en Al'thunran.<br /> Pola presente, renovo o meu "
-"xuramento: deterei esta loucura, custe o que custe!» "
-
-#: ../../campaigns/t01.wmf/scripting/texts.lua:94
-msgid ""
-" \"Very well done, chieftain. We now have all we need to face the winter and "
-"may prepare ourselves for the battles ahead.<br><br>--------------------- "
-"VICTORY! ----------------------<br><br> You may continue to play this map if "
-"you wish. Otherwise, move on to the next mission.\" "
-msgstr ""
-" «Moi bo traballo, xefe. Xa temos todo o necesario para facerlle fronte ao "
-"inverno e podemos prepararnos para a batalla que nos espera.<br /> <br /> "
-"VITORIA!<br /> <br /> Podes seguir xogando este mapa se queres. En caso "
-"contrario, pasa á seguinte misión.» "
-
-#: ../../campaigns/t01.wmf/scripting/initial_messages.lua:17
-msgid ""
-" \"We can see the raging flames that swallow Al'thunran from here, miles "
-"away.<br> The red lights flash in the darkness and dance to the rhythm of "
-"the wardrums that haunt me even in my nightmares.\" "
-msgstr ""
-" «Dende aquí vense as devastadoras chamas que acaban con Al'thunran, a "
-"quilómetros de aquí.<br /> As luces vermellas alumean na escuridade e bailan "
-"ao ritmo dos tambores de guerra que me perseguen ata nos pesadelos.» "
-
-#: ../../campaigns/t01.wmf/scripting/texts.lua:10
-#: ../../campaigns/t01.wmf/scripting/texts.lua:53
-msgid ""
-"* Build a lumberjack's hut at the red house symbol just right of your "
-"headquarters by clicking on it and selecting a lumberjack's hut.<br>"
-msgstr ""
-"* Constrúe unha cabana de leñador onde está o símbolo vermello dunha casa á "
-"dereita do teu cuartel principal premendo nel e escollendo a cabana do "
-"leñador.<br />"
-
-#: ../../campaigns/t01.wmf/scripting/texts.lua:27
-#: ../../campaigns/t01.wmf/scripting/texts.lua:82
-msgid "* Build a ranger's hut to the east of the first lumberjack's hut."
-msgstr ""
-"* Constrúe unha choza de forestal ao leste da primeira cabana de leñador."
-
-#: ../../campaigns/t01.wmf/scripting/texts.lua:11
-#: ../../campaigns/t01.wmf/scripting/texts.lua:61
-msgid ""
-"* Build a road between your headquarters and the construction site of the "
-"lumberjack's hut.<br> When you place the lumberjack's hut, a flag is created "
-"for it. You need to connect it to another flag by building a road between "
-"them.<br> If you click on a flag and select to build a road, little symbols "
-"will appear around it to show you in which directions you can build it.<br> "
-"The colour of these symbols indicates how steep this part of the road will "
-"be. Green is for flat, yellow means steep and red stands for very steep. The "
-"steeper the road is, the harder it will be for your people to walk on it "
-"(and your wares will be transported more slowly).<br> You can click on any "
-"of the symbols to build the first part of the road there. New symbols will "
-"appear to show you where the next part of the road can go, and so on. "
-"However, you can also click farther away from the flag to build several "
-"steps at once. Click on the flag at the headquarters to finish the road."
-msgstr ""
-"* Constrúe un camiño entre o cuartel principal e a obra da cabana do "
-"leñador.<br /> Ao situar a cabana do leñador, crearase unha bandeira para a "
-"mesma. Tes que conectala a outra bandeira mediante un camiño.<br /> Se "
-"premes nunha bandeira e escolles construír un camiño, apareceran ao redor "
-"dela pequenos símbolos indicando en que direccións podes construír o "
-"camiño.<br /> A cor dos símbolos indicará o pronunciada que será a pendente "
-"do camiño. O verde indica que será pouco pronunciada, o amarelo que será "
-"algo pronunciada e o vermello que será bastante pronunciada. Canto máis "
-"pronunciada sexa a pendente do camiño, máis lles custará ao teu pobo camiñar "
-"por el (es os materiais transportaranse máis a modo).<br /> Podes premer en "
-"calquera dos símbolos para construír ata el a primeira parte do camiño. "
-"Entón aparecerán novos símbolos para sinalar onde se pode construír a "
-"seguinte parte do camiño, e así ata que chegues a unha bandeira. Pero podes "
-"tamén premer nun lugar máis afastado da bandeira orixinal e crear varios "
-"tramos de camiño dunha vez.  Preme na bandeira do cuartel principal para "
-"rematar o camiño."
-
-#: ../../campaigns/t01.wmf/scripting/texts.lua:34
-#: ../../campaigns/t01.wmf/scripting/texts.lua:90
-msgid "* Build two quarries southwest of your headquarters."
-msgstr "* Constrúe dúas canteiras ao sudoeste do teu cuartel xeral."
-
-#: ../../campaigns/t01.wmf/scripting/texts.lua:19
-#: ../../campaigns/t01.wmf/scripting/texts.lua:68
-msgid ""
-"* Place a flag in the middle of the road.<br> There is a flag symbol in the "
-"middle of the way you just built. You create a flag there by clicking on the "
-"symbol and then choosing the flag button in the menu that opens up. This "
-"divides the way the wood is transported into two parts with one carrier "
-"each.<br> When many wares are being transported between two points, "
-"additional flags in between make them arrive at their destination faster, "
-"thus improving your infrastructure.<br>"
-msgstr ""
-"* Pon unha bandeira no medio do camiño.<br /> Hai un símbolo de bandeira no "
-"medio do camiño que acabas de construír. Podes crear unha bandeira premendo "
-"en dito símbolo e escollendo o botón da bandeira no menú que aparecerá. Isto "
-"divide o camiño polo que se transporta a madeira en dous, cada un cun "
-"transportador.<br /> Cando se transportan moitos materiais entre dous "
-"puntos, as bandeiras intermedias permitirán acelerar o proceso de "
-"transporte, mellorando así a infraestrutura.br />"
-
-#: ../../campaigns/t01.wmf/scripting/texts.lua:20
-#: ../../campaigns/t01.wmf/scripting/texts.lua:75
-msgid ""
-"* Place a lumberjack's hut just south of the flag you just placed on the "
-"road. Connect the flag you just raised with the flag of the new lumberjack's "
-"hut construction site afterwards.<br> Note that instead of building a road "
-"step by step, you may also click directly at its destination to build the "
-"entire road at once."
-msgstr ""
-"* Constrúe unha cabana de leñador xusto ao sur da bandeira que acabas de "
-"poñer no camiño. Logo conecta a bandeira do camiño coa da obra da nova "
-"cabana de leñador.<br /> Ten en conta que en vez de crear o camiño paso a "
-"paso podes premer directamente no destino para construír o camiño completo "
-"dunha soa vez."
-
-#: ../../campaigns/t01.wmf/scripting/texts.lua:9
-#: ../../campaigns/t01.wmf/scripting/texts.lua:52
-msgid ""
-"* Press SPACE to see where you can build.<br> The red house symbols show you "
-"where a small building - like a lumberjack's hut - may be built.<br>"
-msgstr ""
-"* Preme a [Espazo] para ver onde podes construír.<br /> Os símbolos de casas "
-"vermellas indican onde podes construír edificios pequenos ─como é o caso das "
-"cabanas de leñador─.<br />"
-
-#: ../../campaigns/t01.wmf/elemental:7
-msgid "01 - Eyes in the Dark"
+#: ../../campaigns/t01.wmf/scripting/initial_messages.lua:15
+msgid "The Story Begins"
 msgstr ""
 
-#: ../../campaigns/t01.wmf/scripting/texts.lua:43
-msgid "An old man says..."
-msgstr "Un anciñan di..."
-
-#: ../../campaigns/t01.wmf/scripting/texts.lua:111
-msgid "At the tomb"
-msgstr "No camposanto"
-
-#: ../../campaigns/t01.wmf/scripting/texts.lua:7
-msgid "Build a lumberjack's hut"
-msgstr "Constrúe unha cabana de leñador"
-
-#: ../../campaigns/t01.wmf/scripting/texts.lua:25
-msgid "Build a ranger's hut"
-msgstr "Constrúe unha choza de forestal"
-
-#: ../../campaigns/t01.wmf/scripting/texts.lua:17
-msgid "Build another lumberjack's hut"
-msgstr "Constrúe outra cabana de leñador"
-
-#: ../../campaigns/t01.wmf/scripting/texts.lua:32
-msgid "Build two quarries"
-msgstr "Constrúe dúas canteiras"
-
-#: ../../campaigns/t01.wmf/scripting/texts.lua:101
-msgid "In the night"
-msgstr "Na noite"
-
-#: ../../campaigns/t01.wmf/elemental:9
-msgid ""
-"In this tutorial the basic gameplay and control as well as basic production "
-"buildings of the Barbarians are introduced."
-msgstr ""
-
-#: ../../campaigns/t01.wmf/scripting/texts.lua:49
-msgid "Khantrukh continues..."
-msgstr "Khantrukh continua..."
-
-#: ../../campaigns/t01.wmf/scripting/texts.lua:79
-msgid "Khantrukh nods..."
-msgstr "Khantrukh asinte..."
-
-#: ../../campaigns/t01.wmf/scripting/texts.lua:65
-msgid "Khantrukh remembers..."
-msgstr "Khantrukh lembra..."
-
-#: ../../campaigns/t01.wmf/scripting/khantrukhs_talking.lua:58
-msgid "Mission Complete"
-msgstr "Misión completa"
-
-#: ../../campaigns/t01.wmf/scripting/khantrukhs_talking.lua:22
-msgid "Somebody comes up to you"
-msgstr "Aproxímaseche alguén"
-
-#: ../../campaigns/t01.wmf/scripting/khantrukhs_talking.lua:23
-#: ../../campaigns/t01.wmf/scripting/khantrukhs_talking.lua:29
-#: ../../campaigns/t01.wmf/scripting/khantrukhs_talking.lua:36
-#: ../../campaigns/t01.wmf/scripting/khantrukhs_talking.lua:37
-#: ../../campaigns/t01.wmf/scripting/khantrukhs_talking.lua:45
-#: ../../campaigns/t01.wmf/scripting/khantrukhs_talking.lua:52
-msgid "The advisor"
-msgstr "O conselleiro"
-
-#: ../../campaigns/t01.wmf/scripting/texts.lua:58
-msgid "The elder remarks..."
-msgstr "O vello di..."
-
-#: ../../campaigns/t01.wmf/scripting/texts.lua:87
-msgid "The elder speaks..."
-msgstr "O vello di..."
-
-#: ../../campaigns/t01.wmf/scripting/texts.lua:130
-msgid "The oath"
-msgstr "O xuramento"
-
-#: ../../campaigns/t01.wmf/scripting/texts.lua:72
-msgid "The old man looks to the sky..."
-msgstr "O ancián mira ó ceo..."
-
-#: ../../campaigns/t01.wmf/scripting/texts.lua:121
-msgid "The other day"
-msgstr "O outro día"
-
-#: ../../campaigns/t01.wmf/scripting/initial_messages.lua:7
-msgid "The story begins"
-msgstr "A lenda comeza"
-
-#: ../../campaigns/t01.wmf/scripting/texts.lua:132
-msgid "Thron looks furious..."
-msgstr "Thron semella anoxado..."
-
-#: ../../campaigns/t01.wmf/scripting/texts.lua:123
-msgid "Thron says thoughtfully..."
-msgstr "Thron di pensativo..."
-
-#: ../../campaigns/t01.wmf/scripting/initial_messages.lua:9
+#: ../../campaigns/t01.wmf/scripting/initial_messages.lua:16
 msgid "Thron sighs..."
 msgstr "Thron suspira..."
 
+#: ../../campaigns/t01.wmf/scripting/initial_messages.lua:17
+msgid ""
+"It’s been months, and we are still hiding where the forests are old and dark."
+msgstr ""
+
+#: ../../campaigns/t01.wmf/scripting/initial_messages.lua:18
+msgid ""
+"My warriors hunt at day and lie awake at night – listening to the sounds of "
+"the cruel slaughter echoing from afar amongst the ancient trees."
+msgstr ""
+
+#: ../../campaigns/t01.wmf/scripting/initial_messages.lua:23
+msgid ""
+"We can see the raging flames that swallow Al’thunran from here, miles away."
+msgstr ""
+
+#: ../../campaigns/t01.wmf/scripting/initial_messages.lua:24
+msgid ""
+"The red lights flash in the darkness and dance to the rhythm of the war "
+"drums that haunt me even in my nightmares."
+msgstr ""
+
+#: ../../campaigns/t01.wmf/scripting/initial_messages.lua:28
+msgid ""
+"My father’s bones rest peacefully in the ground on which he once ended the "
+"senseless spilling of blood that had arisen amongst us. It pains me that his "
+"peace only endured for one generation."
+msgstr ""
+
+#: ../../campaigns/t01.wmf/scripting/initial_messages.lua:29
+msgid ""
+"Boldreth, my loyal companion and friend is a source of peace and comfort to "
+"me in these dark times. He keeps my spirits high and those of my warriors "
+"awake, preventing greed or despair from destroying the bonds between us as "
+"well."
+msgstr ""
+
+#: ../../campaigns/t01.wmf/scripting/initial_messages.lua:33
+msgid ""
+"As father told me, there are times to fight and times to lie and wait, "
+"trying not to fall asleep or die before the right time comes. And so I do... "
+"wait."
+msgstr ""
+
+#: ../../campaigns/t01.wmf/scripting/khantrukhs_talking.lua:23
+msgid "Somebody Comes up to You"
+msgstr ""
+
+#: ../../campaigns/t01.wmf/scripting/khantrukhs_talking.lua:24
+#: ../../campaigns/t01.wmf/scripting/khantrukhs_talking.lua:31
+#: ../../campaigns/t01.wmf/scripting/khantrukhs_talking.lua:38
+#: ../../campaigns/t01.wmf/scripting/khantrukhs_talking.lua:39
+#: ../../campaigns/t01.wmf/scripting/khantrukhs_talking.lua:47
+#: ../../campaigns/t01.wmf/scripting/khantrukhs_talking.lua:54
+msgid "The Advisor"
+msgstr ""
+
+#: ../../campaigns/t01.wmf/scripting/khantrukhs_talking.lua:60
+msgid "Mission Complete"
+msgstr "Misión completa"
+
+#: ../../campaigns/t01.wmf/scripting/texts.lua:17
+#: ../../campaigns/t01.wmf/scripting/texts.lua:19
+#: ../../campaigns/t01.wmf/scripting/texts.lua:31
+#: ../../campaigns/t01.wmf/scripting/texts.lua:33
+msgid "Build a lumberjack’s hut"
+msgstr ""
+
+#: ../../campaigns/t01.wmf/scripting/texts.lua:20
+#: ../../campaigns/t01.wmf/scripting/texts.lua:34
+msgid ""
+"Press SPACE to see where you can build. The red house symbols show you where "
+"a small building – like a lumberjack’s hut – may be built."
+msgstr ""
+
+#: ../../campaigns/t01.wmf/scripting/texts.lua:21
+#: ../../campaigns/t01.wmf/scripting/texts.lua:35
+msgid ""
+"Build a lumberjack’s hut at the red house symbol just right of your "
+"headquarters by clicking on it and selecting a lumberjack’s hut."
+msgstr ""
+
+#: ../../campaigns/t01.wmf/scripting/texts.lua:22
+#: ../../campaigns/t01.wmf/scripting/texts.lua:44
+msgid ""
+"Build a road between your headquarters and the construction site of the "
+"lumberjack’s hut."
+msgstr ""
+
+#: ../../campaigns/t01.wmf/scripting/texts.lua:23
+#: ../../campaigns/t01.wmf/scripting/texts.lua:45
+msgid ""
+"When you place the lumberjack’s hut, a flag is created for it. You need to "
+"connect it to another flag by building a road between them. If you click on "
+"a flag and select to build a road, little symbols will appear around it to "
+"show you in which directions you can build it."
+msgstr ""
+
+#: ../../campaigns/t01.wmf/scripting/texts.lua:24
+#: ../../campaigns/t01.wmf/scripting/texts.lua:46
+msgid ""
+"The colors of these symbols indicate how steep this part of the road will "
+"be. Green is for flat, yellow means steep and red stands for very steep. The "
+"steeper the road is, the harder it will be for your people to walk on it "
+"(and your wares will be transported more slowly)."
+msgstr ""
+
+#: ../../campaigns/t01.wmf/scripting/texts.lua:41
+msgid "Build a road to the lumberjack’s hut"
+msgstr ""
+
+#: ../../campaigns/t01.wmf/scripting/texts.lua:43
+msgid "Road to the lumberjack’ hut"
+msgstr ""
+
+#: ../../campaigns/t01.wmf/scripting/texts.lua:47
+msgid ""
+"You can click on any of the symbols to build the first part of the road "
+"there. New symbols will appear to show you where the next part of the road "
+"can go, and so on. However, you can also click farther away from the flag to "
+"build several steps at once. Click on the flag at the headquarters to finish "
+"the road."
+msgstr ""
+
+#: ../../campaigns/t01.wmf/scripting/texts.lua:53
+#: ../../campaigns/t01.wmf/scripting/texts.lua:55
+#: ../../campaigns/t01.wmf/scripting/texts.lua:64
+#: ../../campaigns/t01.wmf/scripting/texts.lua:66
+#: ../../campaigns/t01.wmf/scripting/texts.lua:74
+#: ../../campaigns/t01.wmf/scripting/texts.lua:76
+msgid "Build a second lumberjack’s hut"
+msgstr ""
+
+#: ../../campaigns/t01.wmf/scripting/texts.lua:56
+#: ../../campaigns/t01.wmf/scripting/texts.lua:67
+msgid ""
+"Place a flag in the middle of the road. There is a flag symbol in the middle "
+"of the road you just built. You create a flag there by clicking on the "
+"symbol and then choosing the flag button in the menu that opens up. This "
+"will divide the road the wood is transported into two parts with one carrier "
+"each."
+msgstr ""
+
+#: ../../campaigns/t01.wmf/scripting/texts.lua:57
+#: ../../campaigns/t01.wmf/scripting/texts.lua:77
+msgid ""
+"Place a lumberjack’s hut just south of the flag you just placed on the road. "
+"Connect the flag you just raised with the flag of the new lumberjack’s hut "
+"construction site afterwards. Note that instead of building a road step by "
+"step, you may also click directly at its destination to build the entire "
+"road at once."
+msgstr ""
+
+#: ../../campaigns/t01.wmf/scripting/texts.lua:58
+#: ../../campaigns/t01.wmf/scripting/texts.lua:68
+msgid ""
+"When many wares are being transported between two points, additional flags "
+"in between make them arrive at their destination faster, thus improving your "
+"infrastructure."
+msgstr ""
+
+#: ../../campaigns/t01.wmf/scripting/texts.lua:83
+#: ../../campaigns/t01.wmf/scripting/texts.lua:85
+msgid "Build a ranger’s hut"
+msgstr ""
+
+#: ../../campaigns/t01.wmf/scripting/texts.lua:86
+msgid "Build a ranger’s hut to the east of the first lumberjack’s hut."
+msgstr ""
+
+#: ../../campaigns/t01.wmf/scripting/texts.lua:92
+#: ../../campaigns/t01.wmf/scripting/texts.lua:94
+msgid "Build two quarries"
+msgstr "Constrúe dúas canteiras"
+
+#: ../../campaigns/t01.wmf/scripting/texts.lua:95
+msgid "Build two quarries south-west of your headquarters."
+msgstr ""
+
 #: ../../campaigns/t01.wmf/scripting/texts.lua:103
-#: ../../campaigns/t01.wmf/scripting/texts.lua:113
-msgid "Thron speaks..."
-msgstr "Thron di..."
+msgid "An old man says..."
+msgstr "Un anciñan di..."
+
+#: ../../campaigns/t01.wmf/scripting/texts.lua:104
+msgid ""
+"Hail, chieftain. I am Khantrukh and have seen many winters pass. Please "
+"allow me to aid you with my counsel through these darkened days."
+msgstr ""
+
+#: ../../campaigns/t01.wmf/scripting/texts.lua:106
+msgid "Khantrukh continues..."
+msgstr "Khantrukh continua..."
+
+#: ../../campaigns/t01.wmf/scripting/texts.lua:107
+msgid ""
+"None but the gods know how long we have to remain hidden here. The warriors "
+"hope we may march back gloriously any day now, but I strongly doubt that "
+"will happen soon. And the days are already getting shorter and colder..."
+msgstr ""
+
+#: ../../campaigns/t01.wmf/scripting/texts.lua:108
+msgid ""
+"We should prepare, in case we have to face the winter in these harsh lands. "
+"I believe to the east of our campsite are a few places where we could raise "
+"a lumberjack’s hut."
+msgstr ""
+
+#: ../../campaigns/t01.wmf/scripting/texts.lua:111
+msgid "The elder remarks..."
+msgstr "O vello di..."
+
+#: ../../campaigns/t01.wmf/scripting/texts.lua:112
+msgid ""
+"Obviously, it would be too exhausting for our people to walk all the way to "
+"the lumberjack’s hut through the wilderness. We will have to build a road "
+"between our hall and the lumberjack’s hut. It’s not a hard guess that the "
+"men would appreciate a way as short and plain as possible – the wood will "
+"surely be heavy enough, nevertheless."
+msgstr ""
+
+#: ../../campaigns/t01.wmf/scripting/texts.lua:115
+msgid "Khantrukh remembers..."
+msgstr "Khantrukh lembra..."
+
+#: ../../campaigns/t01.wmf/scripting/texts.lua:116
+msgid "There is an old saying:"
+msgstr ""
+
+#: ../../campaigns/t01.wmf/scripting/texts.lua:117
+msgid "‘A burden divided is easier to endure.’"
+msgstr ""
+
+#: ../../campaigns/t01.wmf/scripting/texts.lua:118
+msgid ""
+"A crossroads on the road between our headquarters and the lumberjack’s hut "
+"would ease the work of our carriers."
+msgstr ""
+
+#: ../../campaigns/t01.wmf/scripting/texts.lua:121
+msgid "The old man looks to the sky..."
+msgstr "O ancián mira ó ceo..."
+
+#: ../../campaigns/t01.wmf/scripting/texts.lua:122
+msgid ""
+"The northern winds tell us that the coming winter will be a long and cruel "
+"one. One lumberjack’s hut will not be enough to serve the needs of our "
+"people. More trees await our axes just south of our new crossroads – let us "
+"raise a second lumberjack’s hut there!"
+msgstr ""
+
+#: ../../campaigns/t01.wmf/scripting/texts.lua:125
+msgid "Khantrukh nods..."
+msgstr "Khantrukh asinte..."
+
+#: ../../campaigns/t01.wmf/scripting/texts.lua:126
+msgid ""
+"Of course, if we intended to build a bigger settlement, many more "
+"lumberjack’s huts would be advisable, but this should suffice for now."
+msgstr ""
+
+#: ../../campaigns/t01.wmf/scripting/texts.lua:127
+msgid ""
+"But never forget – these forests are our heritage, entrusted upon us by our "
+"ancestors. We must always respect and care for them. What we take, we must "
+"give back again."
+msgstr ""
+
+#: ../../campaigns/t01.wmf/scripting/texts.lua:128
+msgid ""
+"So, in order to replace the trees we chop down, we should build a ranger’s "
+"hut, preferably close to the lumberjack’s hut."
+msgstr ""
+
+#: ../../campaigns/t01.wmf/scripting/texts.lua:131
+msgid "The elder speaks..."
+msgstr "O vello di..."
+
+#: ../../campaigns/t01.wmf/scripting/texts.lua:132
+msgid ""
+"I am well aware, chieftain, that neither you nor your warriors have the "
+"desire to stay in this forsaken place for long. But even so, our war to "
+"reconquer our home might take a long time and it would seem wise to make "
+"preparations."
+msgstr ""
+
+#: ../../campaigns/t01.wmf/scripting/texts.lua:133
+msgid ""
+"I would advise that we obtain stones for the future – who knows what "
+"fortifications we might be forced to build very soon. And – like a gift of "
+"destiny – there are indeed great rocks just nearby..."
+msgstr ""
+
+#: ../../campaigns/t01.wmf/scripting/texts.lua:136
+msgid ""
+"Very well done, chieftain. We now have all we need to face the winter and "
+"may prepare ourselves for the battles ahead."
+msgstr ""
+
+#: ../../campaigns/t01.wmf/scripting/texts.lua:137
+msgid "Victory"
+msgstr ""
+
+#: ../../campaigns/t01.wmf/scripting/texts.lua:138
+msgid ""
+"You may continue to play this map if you wish. Otherwise, move on to the "
+"next mission."
+msgstr ""
+
+#: ../../campaigns/t01.wmf/scripting/texts.lua:145
+msgid "In the Night"
+msgstr ""
+
+#: ../../campaigns/t01.wmf/scripting/texts.lua:146
+#: ../../campaigns/t01.wmf/scripting/texts.lua:154
+msgid "Thron says..."
+msgstr ""
+
+#: ../../campaigns/t01.wmf/scripting/texts.lua:147
+msgid ""
+"During another sleepless night, I went up to the hill and gazed towards the "
+"north. The fires are still burning, satisfying their hunger upon my father’s "
+"legacy."
+msgstr ""
+
+#: ../../campaigns/t01.wmf/scripting/texts.lua:148
+msgid ""
+"They are a constant reminder of why we have to hide here... and why we must "
+"return in the end!"
+msgstr ""
+
+#: ../../campaigns/t01.wmf/scripting/texts.lua:153
+msgid "At the Tomb"
+msgstr ""
+
+#: ../../campaigns/t01.wmf/scripting/texts.lua:155
+msgid ""
+"Once again, I went up to my father’s tomb, in a sacred grove at the foot of "
+"the great spire of Kal’mavrath. I just stood there and felt neither the "
+"hours pass nor the cold rain pouring down from the darkened sky..."
+msgstr ""
+
+#: ../../campaigns/t01.wmf/scripting/texts.lua:156
+msgid ""
+"Somehow, it felt like a farewell. For the first time, I wondered what the "
+"future might hold for me..."
+msgstr ""
+
+#: ../../campaigns/t01.wmf/scripting/texts.lua:161
+msgid "The Other Day"
+msgstr ""
+
+#: ../../campaigns/t01.wmf/scripting/texts.lua:162
+msgid "Thron says thoughtfully..."
+msgstr "Thron di pensativo..."
+
+#: ../../campaigns/t01.wmf/scripting/texts.lua:163
+msgid ""
+"Some time ago, Boldreth came to me. His advice was to move to a place closer "
+"to home – to strike at the first sign of my brothers’ forces wavering."
+msgstr ""
+
+#: ../../campaigns/t01.wmf/scripting/texts.lua:164
+msgid ""
+"But when I look over the forests I can still see black smoke rising to the "
+"sky. I know – it is too early yet, and what he hopes for will not happen any "
+"time soon. He might still be right, but I fear the bloodshed that returning "
+"too fast would cause both on our and the other side..."
+msgstr ""
+
+#: ../../campaigns/t01.wmf/scripting/texts.lua:168
+msgid "The Oath"
+msgstr ""
+
+#: ../../campaigns/t01.wmf/scripting/texts.lua:169
+msgid "Thron looks furious..."
+msgstr "Thron semella anoxado..."
+
+#: ../../campaigns/t01.wmf/scripting/texts.lua:170
+msgid ""
+"Today, my warriors picked up an old man, wandering sick and wounded through "
+"the dark forest. We listened in horror as he told us of the atrocities "
+"taking place in Al’thunran."
+msgstr ""
+
+#: ../../campaigns/t01.wmf/scripting/texts.lua:171
+msgid "I hereby renew my oath – I will stop this madness at any cost!"
+msgstr ""
+
+#: ../../scripting/format_scenario.lua:36
+msgid "“%s”"
+msgstr ""
+
+#: ../../scripting/format_scenario.lua:80
+msgid "New Objective"
+msgid_plural "New Objectives"
+msgstr[0] ""
+msgstr[1] ""

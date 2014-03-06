@@ -6,214 +6,347 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4556\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2014-02-22 15:38+0000\n"
+"POT-Creation-Date: 2014-03-05 19:55+0000\n"
 "PO-Revision-Date: 2013-09-17 10:28+0000\n"
 "Last-Translator: fk <Unknown>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-02-23 05:28+0000\n"
-"X-Generator: Launchpad (build 16926)\n"
+"X-Launchpad-Export-Date: 2014-03-06 05:27+0000\n"
+"X-Generator: Launchpad (build 16948)\n"
 
-#: ../../campaigns/cconfig:64
-msgid "01 - Eyes in the Dark"
-msgstr "01 - Ogen in het donker"
-
+#: ../../campaigns/atl01.wmf/elemental:9
 #: ../../campaigns/cconfig:98
-msgid "01 - From Nemesis to Genesis"
-msgstr "01 - Van Nemesis tot Genesis"
+msgid "01 – From Nemesis to Genesis"
+msgstr ""
 
-#: ../../campaigns/cconfig:81
-msgid "01 - The Strands of Malac' Mor"
-msgstr "01 - De stranden van Malac' Mor"
-
-#: ../../campaigns/cconfig:69
-msgid "02 - A Place to call Home"
-msgstr "02 - Een plaats om thuis te noemen"
-
-#: ../../campaigns/cconfig:86
-msgid "02 - An Outpost for Exile"
-msgstr "02 - Een voorpost van ballingschap"
-
-#: ../../campaigns/cconfig:74
-msgid "03 - This Land is our Land"
-msgstr "03 - Dit land is ons land"
-
-#: ../../maps/Long, long way.wmf/elemental:11
+#: ../../campaigns/atl01.wmf/elemental:11
 msgid ""
-">Where dat? A thousand miles from here.< [Porgy and Bess] You have to go "
-"long, long way to conquer all the islands. Good luck!"
+"After landing on a mysterious island close to Atlantis, the remaining "
+"Atlanteans struggle to make a new home for themselves."
 msgstr ""
-">Where dat? A thousand miles from here.< [Porgy and Bess] Je hebt een lange, "
-"lange weg te gaan om alle eilanden te veroveren. Succes!"
-
-#: ../../maps/Comet Island.wmf/elemental:9
-msgid ""
-"A few miles in front of Gerion Coast lies a small unnamed island. Until now, "
-"you have not seen any reason, to ship there, but yesterday a big fireball "
-"came from the sky and touched down in it's middle. Is this a sign of the "
-"Gods? You believe it is and you hope, that your tribe will find the treasure "
-"of this island, before other tribes will follow."
-msgstr ""
-"Enkele kilometers uit de kust van Gerion ligt een klein onbenoemd eiland. "
-"Tot nu zag je geen enkele reden om daar aan te leggen, maar gisteren daalde "
-"er een enorme vuurbal uit de hemel en landde midden op het eiland. Is het "
-"een teken van de Goden? Jij denkt van wel en hoopt dat je stam de schatten "
-"van dit eiland zal vinden voor andere stammen zullen volgen."
-
-#: ../../maps/Glacier Lake.wmf/elemental:9
-msgid ""
-"A long time your tribe dwelt on this beautiful and lonely glacier lake. No "
-"one disturbed you and the resources were enough for your whole tribe, but a "
-"few months ago another tribe came over the mountains and settled down. And "
-"you are sure, that there is only enough place for one tribe."
-msgstr ""
-"Een lange tijd verbleef je stam op dit prachtige en eenzame gletsjer meer. "
-"Niemand verstoorde je en er waren genoeg grondstoffen voor je hele stam, "
-"maar een paar maanden geleden is er een andere stam over de bergen gekomen "
-"en hier neergestreken. En je weet zeker dat er maar genoeg plaats is voor "
-"één stam."
-
-#: ../../maps/Two frontiers.wmf/elemental:9
-msgid "A multiplayer-battle-map on a small circle-shaped island."
-msgstr "Een strijdkaart voor meer spelers op een klein cirkelvormig eiland."
-
-#: ../../maps/Riverlands.wmf/elemental:9
-msgid ""
-"A mystical land, full of different landscapes, which are all crossed by a "
-"handful of big rivers."
-msgstr ""
-"Een mystiek land met een grote verscheidenheid aan landschappen dat door een "
-"handvol grote rivieren wordt doorkruist."
-
-#: ../../maps/MP Scenarios/Island Hopping.wmf/elemental:9
-msgid ""
-"A special tournament in atlantean culture is the so named \"Island "
-"Hopping\", where two or more groups try to reach the center island as fast "
-"as possible, to be the first building up a castle on the top of the center "
-"mountain."
-msgstr ""
-"Een speciaal toernooi in de Atlantische cultuur is het zogenaamde "
-"\"eilandhoppen\", waarbij twee of meer groepen zo snel mogelijk het centrale "
-"eiland proberen te bereiken, om daar als eerste een kasteel op de top van de "
-"centrale berg te bouwen."
-
-#: ../../maps/Impact.wmf/elemental:9
-msgid ""
-"After an impact of an asteroid and the following harsh winter, three isles "
-"are connected by ice and stone, setting an end to the peaceful coexistence "
-"of three tribes."
-msgstr ""
-"Na de inslag van een asteroide en de daaropvolgende strenge winter worden "
-"drie eilanden verbonden door ijs en steen, daarbij een eind makend aan het "
-"vreedzaam samenleven van drie stammen."
-
-#: ../../maps/Ice wars.wmf/elemental:11
-msgid "After autumn is winter. Some things are frozen, but not the war."
-msgstr ""
-"Op herfst volgt winter. Sommige dingen zijn bevroren, maar niet de oorlog."
-
-#: ../../maps/Kings and Queens.wmf/elemental:11
-msgid ""
-"An old legend tells that these seven kingdoms, that have flourished for ages "
-"in prosperity, will someday collapse into a devastating war. Has your latest "
-"betrayal been one too many and will the prophecy come true?"
-msgstr ""
-"Een oude legende verteld dat deze zeven koninkrijken, die voor eeuwen hebben "
-"gebloeid in overvloed, op een dag in een vernietigende oorlog zullen "
-"ineenstorten. Was jouw laatste verraad er één te veel en zal de profetie "
-"uitkomen?"
-
-#: ../../maps/The long way.wmf/elemental:9
-msgid ""
-"Another strange test by the Gods. To reach the other side, there seems to be "
-"no other way, than occupying the land of your enemies."
-msgstr ""
-"Een andere vreemde beproeving van de goden. Om de andere kant te bereiken, "
-"lijkt er geen andere weg dan het land van je vijanden te bezetten."
-
-#: ../../maps/The Thaw.wmf/elemental:11
-msgid ""
-"Another thaw set in. Three tribes were sheltering form severe winter among "
-"majestic mountains. During solstice they listened to the oracle and went on "
-"to war. The only survivor will sacrifice his enemies' treasures on the "
-"ancient altar, build there a splendid castle and gain goodwill and the "
-"respect of the Gods."
-msgstr ""
-"Een nieuwe dooi zet in. Drie stammen hebben tussen de majestueuze bergen "
-"gescholen voor de strenge winter. Tijdens de zonnewende hebben ze geluisterd "
-"naar het orakel, en zijn ze oorlog gaan voeren. De enige overlever zal de "
-"schatten van zijn vijand op het eeuwenoude altaar offeren, er een prachtig "
-"kasteel bouwen en de goede wil en het respect van de Goden verkrijgen."
-
-#: ../../campaigns/cconfig:41
-msgid "Atlanteans - The Run for the Fire"
-msgstr "Atlantiërs - De tocht naar het vuur"
-
-#: ../../maps/Atoll.wmf/elemental:9
-msgid "Atoll"
-msgstr "Atol"
 
 #: ../../campaigns/cconfig:27
-msgid "Barbarians - The second Empire"
-msgstr "Barbaren - Het tweede koninkrijk"
+msgid "Barbarians – The Second Empire"
+msgstr ""
 
-#: ../../maps/Calvisson.wmf/elemental:9
-msgid "Calvisson"
-msgstr "Calvisson"
+#: ../../campaigns/cconfig:30
+msgid "Easy. Introduces the Barbarians"
+msgstr "Gemakkelijk. Introduceert de Barbaren"
+
+#: ../../campaigns/cconfig:31
+msgid ""
+"When Chat’Karuth died, he was an old man, father to three strong and "
+"ambitious sons, and warlord to an army that could match any enemy willing to "
+"rise against the ancient forests. Though at the end of his glorious reign, "
+"Chat’Karuth chose his eldest son, Thron, to succeed him as the tribe’s "
+"warlord – a decision that left his two brothers unsatisfied. The old warlord "
+"knew that. As his father instructed him, Thron left the capital of "
+"Al’thunran, the home of the Throne Among the Trees, and withdrew his forces "
+"to the high hills where he buried the corpse of his father. There he swore "
+"to the gods and his father’s spirit that he’d return to re-established "
+"order. While his brothers have raged blind war against Thron and the few "
+"forces he left to secure the borders of Al’thunran, the young warlord seeks "
+"to reunite his ambitious brothers and force the tribes to march once again "
+"under a common banner."
+msgstr ""
+
+#: ../../campaigns/cconfig:34
+msgid "Empire – The Months of Exile"
+msgstr ""
+
+#: ../../campaigns/cconfig:37
+msgid "Easy. Introduces the Empire"
+msgstr "Gemakkelijk. Introduceert de Empiren"
+
+#: ../../campaigns/cconfig:38
+msgid ""
+"Six months ago, Lutius – a young general of the Empire – was sent with 150 "
+"soldiers to the frontier beyond the northern forests where Barbarian tribes "
+"were crossing onto land held by the Empire. His task was to defend the "
+"Empire’s land. At first, everything was calm. He even talked to a few "
+"barbarian children and thought about a peaceful life – side by side with "
+"this archaic folk. He began to feel safer and his army began to drop their "
+"attention off the potential enemy. That was their undoing. One night in "
+"March his unprepared army was attacked by 100 barbarian footmen and was "
+"completely scattered. Only with his bare life he and a handful of his "
+"soldiers survived."
+msgstr ""
+
+#: ../../campaigns/cconfig:41
+msgid "Atlanteans – The Run for the Fire"
+msgstr ""
 
 #: ../../campaigns/cconfig:44
 msgid "Challenging. Introduces the Atlanteans"
 msgstr "Uitdagend. Introduceert de Atlantiërs"
 
+#: ../../campaigns/cconfig:45
+msgid ""
+"When their God lost faith in the Atlanteans and drowned their island, one "
+"woman’s struggle for justice and a second chance for her people would become "
+"the stuff of legends. Leading the remaining Atlanteans into a new future in "
+"a new part of the World, Jundlina became the most powerful human of her "
+"time, but at a high cost: her humanity and soul."
+msgstr ""
+
+#: ../../campaigns/cconfig:64
+#: ../../campaigns/t01.wmf/elemental:7
+msgid "01 – Eyes in the Dark"
+msgstr ""
+
+#: ../../campaigns/cconfig:69
+#: ../../campaigns/t02.wmf/elemental:7
+msgid "02 – A Place to Call Home"
+msgstr ""
+
+#: ../../campaigns/cconfig:74
+#: ../../campaigns/t03.wmf/elemental:7
+msgid "03 – This Land is Our Land"
+msgstr ""
+
+#: ../../campaigns/cconfig:81
+#: ../../campaigns/emp01.wmf/elemental:7
+msgid "01 – The Strands of Malac’ Mor"
+msgstr ""
+
+#: ../../campaigns/cconfig:86
+#: ../../campaigns/emp02.wmf/elemental:9
+msgid "02 – An Outpost for Exile"
+msgstr ""
+
+#: ../../campaigns/cconfig:91
+#: ../../campaigns/cconfig:103
+#: ../../campaigns/dummy.wmf/elemental:7
+msgid "Not yet implemented"
+msgstr "Nog niet geïmplementeerd"
+
+#: ../../campaigns/dummy.wmf/elemental:9
+msgid "Sorry, this map is not yet implemented."
+msgstr ""
+
+#: ../../campaigns/emp01.wmf/elemental:9
+msgid ""
+"After losing an important battle against the barbarians which lead to the "
+"loss of a big part of the Empire’s territory, Lutius leaves Fremil to start "
+"a new life. But his destiny takes his ship into a heavy storm, which nearly "
+"destroys it. Only with a lot of luck he manages to beach his damaged ship on "
+"an unknown desert strand and save his people. For now."
+msgstr ""
+
+#: ../../campaigns/emp02.wmf/elemental:11
+msgid ""
+"Finally the ship was repaired, so Lutius and his people returned to the "
+"quest to find a good place for a new beginning. Only a few days later, they "
+"land on a green, Mediterranean island, looking like paradise. Overjoyed, "
+"they set out to explore this new living space."
+msgstr ""
+
+#: ../../campaigns/t01.wmf/elemental:9
+msgid ""
+"In this tutorial, the basic gameplay and control as well as basic production "
+"buildings of the Barbarians are introduced."
+msgstr ""
+
+#: ../../campaigns/t02.wmf/elemental:9
+msgid ""
+"In this scenario, the higher production buildings including mining and "
+"military expansions will be introduced."
+msgstr ""
+
+#: ../../campaigns/t03.wmf/elemental:9
+msgid ""
+"This tutorial explains the handling of military and training site buildings "
+"and will introduce fighting."
+msgstr ""
+
+#: ../../campaigns/tutorial01.wmf/elemental:7
+msgid "Tutorial 1"
+msgstr ""
+
+#: ../../campaigns/tutorial01.wmf/elemental:9
+msgid ""
+"Basic Tutorial – a map based on Winterwind’s tutorial 1 for the Barbarians"
+msgstr ""
+
+#: ../../maps/Atoll.wmf/elemental:9
+msgid "Atoll"
+msgstr "Atol"
+
+#: ../../maps/Atoll.wmf/elemental:11
+msgid "Who will be the real king of the big atoll?"
+msgstr ""
+
+#: ../../maps/Atoll.wmf/elemental:12
+msgid "Suggested Teams: (blue, yellow) vs. (red, green)"
+msgstr ""
+
+#: ../../maps/Calvisson.wmf/elemental:9
+msgid "Calvisson"
+msgstr "Calvisson"
+
+#: ../../maps/Calvisson.wmf/elemental:11
+msgid ""
+"It’s a pleasure to settle in the beauty of this fissured countryside. But "
+"the ways to encompass these large territories are long and meandering, so it "
+"is easy to err into the land of the foreign clans."
+msgstr ""
+
+#: ../../maps/Calvisson.wmf/elemental:12
+msgid ""
+"Suggested Teams: blue vs. red | yellow vs. green | (blue, yellow) vs. (red, "
+"green) | (blue, green) vs. (red, yellow)"
+msgstr ""
+
 #: ../../maps/Checkmate.wmf/elemental:7
 msgid "Checkmate"
 msgstr "Schaakmat"
 
-#: ../../maps/Fellowships.wmf/elemental:11
+#: ../../maps/Checkmate.wmf/elemental:9
 msgid ""
-"Coal is tough to find - learn to make it efficiently. Starting positions are "
-"similar, map should be fair. There is plenty of gold near the starting point "
-"- Do you see it?"
+"Whether just one of nature’s strangest features or the creation of a mad "
+"(and game-hungry) god, this weird battleground awaits two opponents for "
+"another confrontation."
 msgstr ""
-"Kolen zijn moeilijk te vinden - leer ze efficiënt te maken. Startposities "
-"zijn gelijk, kaart zou eerlijk moeten zijn. Er is enorm veel goud vlakbij "
-"het startpunt - Zie je het?"
 
 #: ../../maps/Comet Island.wmf/elemental:7
 msgid "Comet Island"
 msgstr "Komeet Eiland"
 
+#: ../../maps/Comet Island.wmf/elemental:9
+msgid ""
+"A few miles in front of Gerion Coast lies a small unnamed island. Until now, "
+"you have not seen any reason to sail there, but yesterday a big fireball "
+"came from the sky and touched down in its center. Is this a sign of the "
+"Gods? You believe it is and you hope that your tribe will find the treasure "
+"of this island before other tribes will follow."
+msgstr ""
+
 #: ../../maps/Crater.wmf/elemental:7
 msgid "Crater"
 msgstr "Krater"
 
+#: ../../maps/Crater.wmf/elemental:9
+msgid ""
+"Long after a meteor crashed into a couple of mountains, life blossoms in the "
+"crater. Two tribes are now fighting for the rich resources."
+msgstr ""
+"Lang nadat een meteoor in een paar bergen is geslagen, bloeit er leven in de "
+"krater. Twee stammen vechten nu voor de kostbare rijkdommen."
+
 #: ../../maps/Crossing the horizon.wmf/elemental:9
-msgid "Crossing the horizon"
-msgstr "Voorbij de horizon"
+msgid "Crossing the Horizon"
+msgstr ""
+
+#: ../../maps/Crossing the horizon.wmf/elemental:11
+msgid "Man your ship and sail to the horizon."
+msgstr "Beman je schip en zeil naar de horizon"
+
+#: ../../maps/Crossing the horizon.wmf/elemental:12
+#: ../../maps/Rendez-Vous.wmf/elemental:10
+msgid "Suggested Teams: all ok"
+msgstr "Aanbevolen teams: alles ok"
 
 #: ../../maps/Desert Tournament.wmf/elemental:7
 msgid "Desert Tournament"
 msgstr "Woestijntoernooi"
 
+#: ../../maps/Desert Tournament.wmf/elemental:9
+msgid ""
+"Four tribes struggle with their nearest neighbor to be the first to reach "
+"the mountain of gold that promises riches beyond belief. But can the two "
+"remaining ones share the resources wisely?"
+msgstr ""
+
+#: ../../maps/Desert Tournament.wmf/elemental:10
+#: ../../maps/Four Castles.wmf/elemental:10
+#: ../../maps/Swamp Monks.wmf/elemental:10
+msgid "Suggested Teams: (blue, red) vs. (yellow, green)"
+msgstr ""
+
 #: ../../maps/Dry Riverbed.wmf/elemental:7
 msgid "Dry Riverbed"
 msgstr "Droge rivierbedding"
 
-#: ../../maps/River Explorers.wmf/elemental:11
+#: ../../maps/Dry Riverbed.wmf/elemental:9
 msgid ""
-"Each player has a different obstacle to expansion, and there's always more "
-"than one way to overcome it. While the AI can be defeated here without "
-"building a single ship, players are advised to make ports and shipyards a "
-"priority - expeditions are universally useful and are often the fastest way "
-"to gold deposits."
+"It has been a long time since the last raindrop touched these grounds. Small "
+"wonder that there is not much water left in this dry riverbed. Everyone "
+"knows: soon there will be a war. A war about the last of the remaining water."
 msgstr ""
-"Elke speler heeft een ander obstakel voor uitbreiding, en er is altijd meer "
-"dan één manier om het te overwinnen. Hoewel de KI kan worden verslagen "
-"zonder een enkel schip te bouwen, wordt spelers aangeraden om van havens en "
-"scheepswerven een prioriteit te maken - expedities zijn universeel nuttig en "
-"zijn vaak de snelste weg naar goudvoorraden."
+
+#: ../../maps/Elven Forests.wmf/elemental:7
+msgid "Elven Forests"
+msgstr "Elvenbossen"
+
+#: ../../maps/Elven Forests.wmf/elemental:9
+msgid ""
+"The breath-taking beauty of these emerald lands has lured many tribes into "
+"an attempt to take them for themselves."
+msgstr ""
+
+#: ../../maps/Elven Forests.wmf/elemental:10
+msgid ""
+"Suggested Teams: (blue, red) vs. (yellow, green) | (blue, yellow) vs. (red, "
+"green)"
+msgstr ""
+
+#: ../../maps/Fellowships.wmf/elemental:9
+msgid "Fellowships"
+msgstr "Vriendschappen"
+
+#: ../../maps/Fellowships.wmf/elemental:11
+msgid ""
+"Coal is hard to find – learn to make it efficiently. Starting positions are "
+"similar, so the map should be fair. There is plenty of gold near the "
+"starting point – Do you see it?"
+msgstr ""
+
+#: ../../maps/Fellowships.wmf/elemental:12
+msgid ""
+"This map is best suited for two or three human players, with game speed "
+"somewhat above the normal value. The AI performed badly at the time of "
+"writing (2013)."
+msgstr ""
+
+#: ../../maps/Finlakes.wmf/elemental:9
+msgid "Finnish Lakes"
+msgstr "Finse meren"
+
+#: ../../maps/Finlakes.wmf/elemental:11
+msgid ""
+"These are the beautiful Finnish lands of lakes, rivers, ancient forests and "
+"mountains. It is up to you to find a way through these lands."
+msgstr ""
+
+#: ../../maps/Firegames.wmf/elemental:7
+msgid "Firegames"
+msgstr "Vuurspelen"
+
+#: ../../maps/Firegames.wmf/elemental:9
+msgid ""
+"Is this a test by the Gods or an evil plan by someone else, that you and "
+"your tribe woke up on this island among fire and lava? Until now it seems as "
+"if you are alone, but no-one knows what might happen if you met an opposing "
+"tribe?"
+msgstr ""
+
+#: ../../maps/Four Castles.wmf/elemental:7
+msgid "Four Castles"
+msgstr "Vier kastelen"
+
+#: ../../maps/Four Castles.wmf/elemental:9
+msgid ""
+"Well protected in their mighty fortresses, four power-hungry warlords are "
+"completing their schemes to dominate these lands..."
+msgstr ""
+"Goed beschermd in hun machtige kastelen, zijn vier op macht beluste "
+"krijgsheren hun plannen aan het voltooien om deze landen te domineren..."
+
+#: ../../maps/Four Mountains.wmf/elemental:7
+msgid "Four Mountains"
+msgstr "Vier Bergen"
 
 #: ../../maps/Four Mountains.wmf/elemental:9
 msgid ""
@@ -227,261 +360,177 @@ msgstr ""
 "worden gevonden langs de rivier. Hint II: Sneeuwmannen markeren extra "
 "waterbronnen. Hint III: Iedere berg bevat slechts één soort hulpbronnen."
 
-#: ../../campaigns/cconfig:30
-msgid "Easy. Introduces the Barbarians"
-msgstr "Gemakkelijk. Introduceert de Barbaren"
-
-#: ../../campaigns/cconfig:37
-msgid "Easy. Introduces the Empire"
-msgstr "Gemakkelijk. Introduceert de Empiren"
-
-#: ../../maps/Elven Forests.wmf/elemental:7
-msgid "Elven Forests"
-msgstr "Elvenbossen"
-
-#: ../../campaigns/cconfig:34
-msgid "Empire - The Months of Exile"
-msgstr "Empiren - De maanden van ballingschap"
-
-#: ../../maps/Fellowships.wmf/elemental:9
-msgid "Fellowships"
-msgstr "Vriendschappen"
-
-#: ../../maps/Finlakes.wmf/elemental:9
-msgid "Finnish Lakes"
-msgstr "Finse meren"
-
-#: ../../maps/Firegames.wmf/elemental:7
-msgid "Firegames"
-msgstr "Vuurspelen"
-
-#: ../../maps/Islands at war.wmf/elemental:11
+#: ../../maps/Four Mountains.wmf/elemental:10
 msgid ""
-"For centuries you've lived peacefully together with the other tribe on the "
-"neighboured island. This peace seems to end now - your neighbour begins to "
-"expand."
+"Suggested Teams: (blue, red) vs. (yellow, green) | (blue, green) vs. (red, "
+"yellow)"
 msgstr ""
-"Eeuwenlang hebben jullie vreedzaam samengeleefd met de andere stam op het "
-"naburige eiland. Deze vrede lijkt ten einde - je buurman begint uit te "
-"breiden."
-
-#: ../../maps/Sun of fire.wmf/elemental:11
-msgid ""
-"For hundreds of years this island was kept as sanctuary of the Gods. No "
-"human ever ventured to set a foot on it. But now, that a tribe was finally "
-"barefaced enough to settle on the coast of that island, a lot others "
-"followed afterwards."
-msgstr ""
-"Honderden jaren lang was dit eiland de rustplaats van de goden. Geen mens "
-"heeft ooit voet aan wal gezet. Tot een stam brutaal genoeg was om het voor "
-"zichzelf te willen claimen, velen volgden dit voorbeel."
-
-#: ../../maps/Four Castles.wmf/elemental:7
-msgid "Four Castles"
-msgstr "Vier kastelen"
-
-#: ../../maps/Four Mountains.wmf/elemental:7
-msgid "Four Mountains"
-msgstr "Vier Bergen"
-
-#: ../../maps/Desert Tournament.wmf/elemental:9
-msgid ""
-"Four tribes struggle with their nearest neighbour to be the first to reach "
-"the mountain of gold that promises riches beyond belief. But can the two "
-"remaining ones share the resources wisely?"
-msgstr ""
-"Vier stammen worstelen met de dichtstbijzijnde buur om de eerste te zijn die "
-"de berg met goud bereikt die rijkdommen belooft die ieders "
-"bevattingsvermogen te boven gaan. Maar kunnen de twee overblijvenden de "
-"hulpbronnen wijselijk delen?"
 
 #: ../../maps/Glacier Lake.wmf/elemental:7
 msgid "Glacier Lake"
 msgstr "Gletsjermeer"
 
+#: ../../maps/Glacier Lake.wmf/elemental:9
+msgid ""
+"A long time your tribe dwelt on this beautiful and lonely glacier lake. No "
+"one disturbed you and the resources were enough for your whole tribe, but a "
+"few months ago another tribe came over the mountains and settled down. And "
+"you are sure that there is only enough space for one tribe."
+msgstr ""
+
 #: ../../maps/Golden Peninsula.wmf/elemental:7
 msgid "Golden Peninsula"
 msgstr "Gouden schiereiland"
+
+#: ../../maps/Golden Peninsula.wmf/elemental:9
+msgid "Two empires race for the treasures of a legendary peninsula..."
+msgstr ""
+"Twee koninkrijken maken jacht op de schatten van een legendarisch "
+"schiereiland..."
 
 #: ../../maps/Ice wars.wmf/elemental:9
 msgid "Ice wars"
 msgstr "IJsoorlogen"
 
+#: ../../maps/Ice wars.wmf/elemental:11
+msgid "Autumn follows winter. Some things are frozen, but not the war."
+msgstr ""
+
+#: ../../maps/Ice wars.wmf/elemental:12
+#: ../../maps/Sun of fire.wmf/elemental:12
+msgid "Start positions are clockwise"
+msgstr "Beginposities zijn met de klok mee"
+
 #: ../../maps/Impact.wmf/elemental:7
 msgid "Impact"
 msgstr "Inslag"
 
-#: ../../maps/Volcanic Winter.wmf/elemental:11
+#: ../../maps/Impact.wmf/elemental:9
 msgid ""
-"In the middle of the summer a bunch of volcanic eruptions drew the winter "
-"in. Suddenly the sun seems to be gone and the only light and heat sources "
-"left are those, who enforced this dramatic change. Continents, oceans and "
-"seas are freezing, only the volcanic islands seem to be left as habitable "
-"land."
+"After an impact of an asteroid and the following harsh winter, three isles "
+"are connected by ice and stone, setting an end to the peaceful coexistence "
+"of three tribes."
 msgstr ""
-"In het midden van de zomer luidden een stel vulkaanuitbarstingen de winter "
-"in. Plotseling lijkt de zon te zijn verdwenen en de enige licht- en "
-"warmtebronnen die er nog zijn zijn die, die deze dramatische verandering "
-"hebben afgedwongen. Continenten, oceanen en zeeën zijn aan het bevriezen, "
-"alleen de vulkanische eilanden schijnen nog over te zijn als bewoonbaar land."
-
-#: ../../maps/Trident of Fire.wmf/elemental:11
-msgid ""
-"In the whereabouts of three major volcanos six lovely islands are inviting "
-"settlers to start a new life. Deserts and a quickly growing forest wait to "
-"be discovered. But only by becoming a naval power your tribe will be able to "
-"explore enough resources to compete with its opponents."
-msgstr ""
-"In de omgeving van drie grote vulkanen nodigen zes lieflijke eilanden "
-"kolonisten uit een nieuw leven te beginnen. Woestijnen en een snel groeiend "
-"bos wachten erop te worden ontdekt. Maar slechts door een zeemacht te worden "
-"zal jouw stam ertoe in staat zijn voldoende delfstoffen te ontdekken om met "
-"haar tegenstanders te kunnen wedijveren."
-
-#: ../../maps/The pass through the mountains.wmf/elemental:11
-msgid ""
-"In this mountainous area two princes have settled. Now they are expanding "
-"their territories unaware of the fact that they are not alone!"
-msgstr ""
-"In dit bergachtige gebied hebben twee prinsen zich gevestigd. Nu zijn ze aan "
-"het uitbreiden, onbewust van het feit dat ze niet alleen zijn!"
-
-#: ../../maps/Firegames.wmf/elemental:9
-msgid ""
-"Is this a test by the Gods or an evil plan by someone else, that you and "
-"your tribe woke up on this island among fire and lava? Until now it seems as "
-"if you are alone, but no-one knows, what might happen if you meet an "
-"opponent tribe?"
-msgstr ""
-"Is dit een test door de Goden of een kwaad plan van iemand anders, dat jij "
-"en je stam ontwaakten op dit eiland tussen vuur en lava? Tot nu lijkt het "
-"erop dat je alleen bent, maar niemand weet wat er kan gebeuren als je een "
-"vijandige stam tegenkomt."
-
-#: ../../maps/MP Scenarios/Island Hopping.wmf/elemental:7
-msgid "Island Hopping"
-msgstr "Eilandhoppen"
+"Na de inslag van een asteroide en de daaropvolgende strenge winter worden "
+"drie eilanden verbonden door ijs en steen, daarbij een eind makend aan het "
+"vreedzaam samenleven van drie stammen."
 
 #: ../../maps/Islands at war.wmf/elemental:9
-msgid "Islands at war"
-msgstr "Eilanden in oorlog"
-
-#: ../../maps/War of the Valleys.wmf/elemental:9
-msgid ""
-"It is said that even sun and moon must find their way between the spires of "
-"these mountains. HINT: Monoliths mark ore-spots. Don't bother sending "
-"Geologists elsewhere."
+msgid "Islands at War"
 msgstr ""
-"Er wordt gefluisterd dat zelfs de zon en de maan hun weg moeten zoeken "
-"tussen deze bergpieken. HINT: Monolieten markeren delfstoffen. Doe geen "
-"moeite om geologen elders te sturen."
 
-#: ../../maps/Swamp Monks.wmf/elemental:9
+#: ../../maps/Islands at war.wmf/elemental:11
 msgid ""
-"It is said, that the old war monks, living in the even older swamps are the "
-"key to the control of the whole island."
+"For centuries, you’ve lived peacefully side by side with the other tribe on "
+"the neighboring island. This peace seems to come to an end now – your "
+"neighbor has begun to expand."
 msgstr ""
-"Er word gefluisterd dat de oude monniken levend in het moeras de sleutel "
-"zijn naar de bezetting van het gehele eiland."
-
-#: ../../maps/Wisent Valley.wmf/elemental:11
-msgid ""
-"It seems as if this magical valley was inhabited by wisents since the "
-"beginning of days. When your tribe came to this place, you were sure that it "
-"offers enough space for a peaceful life. But can your tribe live in peace "
-"with your neighbours?"
-msgstr ""
-"Het lijkt er op alsof deze magische vallei sinds het begin der dagen bewoond "
-"werd door europese bizons. Toen je stam naar deze plek kwam, was je er zeker "
-"van dat ze genoeg ruimte bood voor een vredig leven, Maar kan je stam in "
-"vrede leven met je buren?"
-
-#: ../../maps/Swamp Island.wmf/elemental:11
-msgid ""
-"It smells like swamp, it looks like swamp and it is swamp. But it is the "
-"place you were born and you lived your whole life. If you don't want to lose "
-"it, defend it! "
-msgstr ""
-"Het ruikt als een moeras, het ziet er uit als een moeras en het is een "
-"moeras. Maar het is de plaats waar je geboren bent en waar je al je hele "
-"leven woont. Als je het niet wilt verliezen, verdedig het! "
-
-#: ../../maps/Dry Riverbed.wmf/elemental:9
-msgid ""
-"It was a long time ago, since the last raindrop touched these grounds. No "
-"wonder, that there is not much water left in this dry riverbed. Everyone "
-"knows: soon there will be a war. A war about the last of water."
-msgstr ""
-"Het was een tijd geleden, sinds de laatste regendruppel deze gronden had "
-"aangeraakt. Het is niet verwonderlijk, dat er niet veel water in dit droge "
-"rivierbed over is. Iedereen weet het: er zal snel een oorlog zijn. Een "
-"oorlog om het laatste water."
-
-#: ../../maps/Calvisson.wmf/elemental:11
-msgid ""
-"It's a pleasure to settle in the beauty of this fissured countryside. But "
-"the ways to encompass these large territories are long and meandering, so it "
-"is easy to err in the land of the foreign clans."
-msgstr ""
-"Het is een genoegen om in de schoonheid van dit doorkliefde landschap neer "
-"te strijken. Maar de wegen waarlangs deze uitgestrekte territoria kunnen "
-"worden omringd zijn lang en slingerend, dus het is gemakkelijk om per "
-"ongeluk in het land van de andere stammen te belanden."
 
 #: ../../maps/Kings and Queens.wmf/elemental:9
 msgid "Kings and Queens"
 msgstr "Koningen en Koninginnen"
 
+#: ../../maps/Kings and Queens.wmf/elemental:11
+msgid ""
+"An old legend tells that these seven kingdoms, that have flourished for ages "
+"in prosperity, will someday collapse into a devastating war. Has your latest "
+"betrayal been one too many, and will the prophecy come true?"
+msgstr ""
+
 #: ../../maps/Lake of tranquility.wmf/elemental:7
 msgid "Lake of Tranquility"
 msgstr "Meer van Rust"
+
+#: ../../maps/Lake of tranquility.wmf/elemental:9
+msgid ""
+"This lake, deep in the most ancient forests, has long been known for its "
+"beauty and idyllic peace. However, its sanctity has been disturbed now, as "
+"two hostile tribes have arrived at its shores..."
+msgstr ""
 
 #: ../../maps/Last Bastion.wmf/elemental:9
 msgid "Last Bastion"
 msgstr "Laatste Bastion"
 
-#: ../../maps/Crater.wmf/elemental:9
+#: ../../maps/Last Bastion.wmf/elemental:11
 msgid ""
-"Long after a meteor crashed into a couple of mountains, life blossoms in the "
-"crater. Two tribes are now fighting for the rich resources."
+"The whimsical Gods didn’t answer our prayers. Instead, the increasing "
+"sunlight heated up the Earth thousandfold and melted glaciers and people "
+"plunged into the deep. But now – high in the majestic mountains, on the last "
+"scrap of land – two surviving tribes are sheltering. Even though the Gods "
+"showed mercy and the climate thus turned cooler again, the water is still "
+"rising and rising. Onto the last secure place – the highest mountain range "
+"where the amount of gold and the space to live merely suffice for one tribe "
+"– only two opposite paths lead. But remember, be careful... this last living "
+"space is also a hard and small place to live. Don’t forget to take care of "
+"your timber supplies, you’ll need them."
 msgstr ""
-"Lang nadat een meteoor in een paar bergen is geslagen, bloeit er leven in de "
-"krater. Twee stammen vechten nu voor de kostbare rijkdommen."
 
 #: ../../maps/Long, long way.wmf/elemental:9
 msgid "Long, long way"
 msgstr "Lange, lange weg"
 
-#: ../../maps/Crossing the horizon.wmf/elemental:11
-msgid "Man your ship and sail to the horizon."
-msgstr "Beman je schip en zeil naar de horizon"
-
-#: ../../maps/Twinkling Waves.wmf/elemental:11
+#: ../../maps/Long, long way.wmf/elemental:11
 msgid ""
-"Many beautiful, green islands await the ones brave enough to pass the "
-"thousand waves, twinkling in the sun."
+">Where dat? A thousand miles from here.< [Porgy and Bess] You have to go a "
+"long, long way to conquer all the islands. Good luck!"
 msgstr ""
-"Vele prachtige groene eilanden wachten op de dapperen die de duizenden "
-"golven, die schitteren in de zon, durven te trotseren."
 
-#: ../../maps/Three Warriors.wmf/elemental:11
+#: ../../maps/Long, long way.wmf/elemental:12
 msgid ""
-"Mighty mountains divide this land into three fertile valleys. But a path "
-"connects the valleys and thus a fight seems inescapable! Hint: Water can be "
-"found around the lakes."
+"Suggested Teams: blue vs. red | yellow vs. green | (blue, yellow) vs. (red, "
+"green) | (blue, yellow, black) vs. (red, green, orange) | (blue, yellow, "
+"black, purple) vs. (red, green, orange, white)"
 msgstr ""
-"Grote bergen verdelen dit land in drie vruchtbare valleien. Maar een pad "
-"verbind de valleien waardoor een gevecht onontkoombaar lijkt! Hint: er kan "
-"water gevonden worden rond de meren."
+
+#: ../../maps/MP Scenarios/Island Hopping.wmf/elemental:7
+msgid "Island Hopping"
+msgstr "Eilandhoppen"
+
+#: ../../maps/MP Scenarios/Island Hopping.wmf/elemental:9
+msgid ""
+"A special tournament in Atlantean culture is the so-called ‘Island Hopping’, "
+"where two or more groups try to reach the center island as fast as possible, "
+"to be the first erecting a castle on the top of the central mountain."
+msgstr ""
+
+#: ../../maps/MP Scenarios/Smugglers.wmf/elemental:11
+msgid ""
+"Your well established smuggling routes suddenly got busy: Two other tribes "
+"have appeared and now a rivalry among smugglers has started: Which team will "
+"be the first to smuggle a certain number of wares? Teams are: Blue + Red vs. "
+"Yellow + Green."
+msgstr ""
 
 #: ../../maps/Mystical Maze.wmf/elemental:9
 msgid "Mystical Maze"
 msgstr "Mystiek Labyrint"
 
-#: ../../campaigns/cconfig:91
-#: ../../campaigns/cconfig:103
-msgid "Not yet implemented"
-msgstr "Nog niet geïmplementeerd"
+#: ../../maps/Mystical Maze.wmf/elemental:11
+msgid ""
+"There are two big questions in the air: Who created this unbelievably big "
+"maze, and what can be found inside?"
+msgstr ""
+
+#: ../../maps/Plateau.wmf/elemental:7
+msgid "The Green Plateau"
+msgstr "De Groene Hoogvlakte"
+
+#: ../../maps/Plateau.wmf/elemental:9
+msgid ""
+"You are standing on an island, crowned by mighty mountains which keep a "
+"wonderful and mighty treasure in their middle – The Green Plateau, which is "
+"hard to conquer but easy to lose. So, if you want it, be aware of the other "
+"clans."
+msgstr ""
+
+#: ../../maps/Plateau.wmf/elemental:10
+msgid "Suggested Teams: blue vs. yellow"
+msgstr ""
+
+#: ../../maps/Rendez-Vous.wmf/elemental:7
+msgid "Rendez-Vous"
+msgstr "Rendez-Vous"
 
 #: ../../maps/Rendez-Vous.wmf/elemental:9
 msgid ""
@@ -497,41 +546,67 @@ msgstr ""
 "midden is slechts ruimte voor één bolwerk. Water kan overal worden gevonden, "
 "dus er is geen reden om geologen er op uit te sturen."
 
-#: ../../maps/Rendez-Vous.wmf/elemental:7
-msgid "Rendez-Vous"
-msgstr "Rendez-Vous"
-
 #: ../../maps/River Explorers.wmf/elemental:9
 msgid "River Explorers"
 msgstr "Rivierverkenners"
+
+#: ../../maps/River Explorers.wmf/elemental:11
+msgid ""
+"Each player has a different obstacle to expansion, and there’s always more "
+"than one way to overcome it. While the AI can be defeated here without "
+"building a single ship, players are advised to make ports and shipyards a "
+"priority – expeditions are universally useful and are often the fastest way "
+"to gold deposits."
+msgstr ""
 
 #: ../../maps/Riverlands.wmf/elemental:7
 msgid "Riverlands"
 msgstr "Rivierenlanden"
 
-#: ../../campaigns/cconfig:38
+#: ../../maps/Riverlands.wmf/elemental:9
 msgid ""
-"Six months ago, Lutius - a young general of the Empire - was sent with 150 "
-"soldiers to the frontier beyond the northern forests where Barbarian tribes "
-"were crossing onto land held by the Empire. His task was to defend the "
-"Empire's land. At first, everything was calm. He even talked to a few "
-"barbarian children and thought about a peaceful life - side by side with "
-"this archaic folk. He began to feel safer and his army began to drop their "
-"attention off the potential enemy. That was their undoing. One night in "
-"March his unprepared army was attacked by 100 barbarian footmen and was "
-"completely scattered. Only with his bare life he and a handful of his "
-"soldiers survived."
+"A mystical land, full of different landscapes, which are all crossed by a "
+"handful of big rivers."
 msgstr ""
-"Zes maanden geleden werd, Lutius - een jonge generaal in het het Keizerrijk -"
-" met 150 soldaten gezonden naar de grens achter de noordelijke bossen waar "
-"de barbaarse stammen het land doorkruisten wat eigendom was van het "
-"Keizerrijk. Zijn taak was het Keizerrijk verdedigen.Op het eerste gezicht "
-"was alles kalm. Hij heeft zelfs een paar barbaarse kinderen gesproken en "
-"dacht na over een vredig leven - samen met het archaicische volk. Hij begon "
-"zich veiliger te voelen en zijn leger letten minder op de potentiële vijand. "
-"Dit werd hun ondergang. Op een nacht in maart werd zijn onvoorbereide leger "
-"aangevallen door 100 barbaarse voetknechten en werd volledig uiteengedreven. "
-"Alleen zijn ledige leven een handjevol soldaten hebben het overleefd."
+"Een mystiek land met een grote verscheidenheid aan landschappen dat door een "
+"handvol grote rivieren wordt doorkruist."
+
+#: ../../maps/Sun of fire.wmf/elemental:9
+msgid "The Ancient Sun of Fire"
+msgstr ""
+
+#: ../../maps/Sun of fire.wmf/elemental:11
+msgid ""
+"For hundreds of years, this island was kept as a sanctuary of the Gods. No "
+"human ever ventured to set a foot on it. But now that a tribe had finally "
+"been barefaced enough to settle on the coast of that island, a lot of others "
+"followed in its wake."
+msgstr ""
+
+#: ../../maps/Swamp Island.wmf/elemental:9
+msgid "Swamp Island"
+msgstr "Moeraseiland"
+
+#: ../../maps/Swamp Island.wmf/elemental:11
+msgid ""
+"It smells like swamp, it looks like swamp and it is a swamp. But it is the "
+"place you were born and where you’ve lived your whole life. If you don’t "
+"want to lose it, defend it!"
+msgstr ""
+
+#: ../../maps/Swamp Monks.wmf/elemental:7
+msgid "Swamp Monks"
+msgstr "Moerasmonniken"
+
+#: ../../maps/Swamp Monks.wmf/elemental:9
+msgid ""
+"It is said that the old war monks, living in the even older swamps, are the "
+"key to control over the whole island."
+msgstr ""
+
+#: ../../maps/The Far North.wmf/elemental:9
+msgid "The Far North"
+msgstr "Het Verre Noorden"
 
 #: ../../maps/The Far North.wmf/elemental:11
 msgid ""
@@ -560,396 +635,196 @@ msgstr ""
 "rijkdom in de weg staat. Maar velen zullen worden verscheurd door wolven of "
 "opgeslokt door het moeras... omgeven door vijandige stammen."
 
-#: ../../maps/Ice wars.wmf/elemental:12
-#: ../../maps/Sun of fire.wmf/elemental:12
-msgid "Start positions are clockwise"
-msgstr "Beginposities zijn met de klok mee"
-
-#: ../../maps/Desert Tournament.wmf/elemental:10
-#: ../../maps/Four Castles.wmf/elemental:10
-#: ../../maps/Swamp Monks.wmf/elemental:10
-msgid "Suggested Teams: (blue, red) vs (yellow, green)"
-msgstr "Teamsuggestie: (blauw, rood) tegen (geel, groen)"
-
-#: ../../maps/Four Mountains.wmf/elemental:10
-msgid ""
-"Suggested Teams: (blue, red) vs (yellow, green) or (blue, green) vs (red, "
-"yellow)"
-msgstr ""
-"Teamsuggestie: (blauw, rood) tegen (geel, groen) of (blauw, groen) tegen "
-"(rood, geel)"
-
-#: ../../maps/Elven Forests.wmf/elemental:10
-msgid ""
-"Suggested Teams: (blue, red) vs (yellow, green) or (blue, yellow) vs (red, "
-"green)"
-msgstr ""
-"Teamsuggestie: (blauw, rood) tegen (geel, groen) of (blauw, geel) tegen "
-"(rood, groen)"
-
-#: ../../maps/Atoll.wmf/elemental:12
-msgid "Suggested Teams: (blue, yellow) vs (red, green)"
-msgstr "Teamsuggestie: (blauw, geel) tegen (rood, groen)"
-
-#: ../../maps/Crossing the horizon.wmf/elemental:12
-msgid "Suggested Teams: all ok"
-msgstr "Aanbevolen teams: alles ok"
-
-#: ../../maps/Rendez-Vous.wmf/elemental:10
-msgid "Suggested Teams: all ok."
-msgstr "Voorgestelde Teams: alles ok."
-
-#: ../../maps/Calvisson.wmf/elemental:12
-msgid ""
-"Suggested Teams: blue vs red, yellow vs green, (blue, yellow) vs (red, "
-"green), (blue, green) vs (red, yellow)"
-msgstr ""
-"Voorgestelde teams: blauw vs rood, geel vs groen, (blauw, geel) vs (rood, "
-"groen), (blauw, groen) vs (rood, geel)"
-
-#: ../../maps/Long, long way.wmf/elemental:12
-msgid ""
-"Suggested Teams: blue vs red, yellow vs green, (blue, yellow) vs (red, "
-"green), (blue, yellow, black) vs (red, green, orange), (blue, yellow, black, "
-"purple) vs (red, green, orange, white)"
-msgstr ""
-"Aanbevolen teams: blauw vs rood, geel vs groen, (blauw, geel) vs (red, "
-"green), (blauw, geel, zwart) vs (rood, groen, oranje), (blauw, geel, zwart, "
-"paars) vs (rood, groen, oranje, wit)"
-
-#: ../../maps/Plateau.wmf/elemental:10
-msgid "Suggested positions: blue vs yellow"
-msgstr "Aanbevolen posities: blauw vs geel"
-
-#: ../../maps/The Nile.wmf/elemental:12
-msgid ""
-"Suggested teams: blue vs red, yellow vs green, (blue, yellow) vs (red, "
-"green), (green, orange, white) vs (yellow, black, purple), (blue, orange, "
-"green) vs (red, yellow, black), (blue, green, orange, white) vs (red, "
-"yellow, black, purple)"
-msgstr ""
-"Aanbevolen teams: blauw vs rood, geel vs groen, (blauw, geel) vs (rood, "
-"groen), (groen, oranje, wit) vs (geel, zwart, paars), (blauw, oranje, groen) "
-"vs (rood, geel, zwart), (blauw, groen, oranje, wit) vs (rood, geel, zwart, "
-"paars)"
-
-#: ../../maps/Trident of Fire.wmf/elemental:12
-msgid ""
-"Suggested teams: red vs green, (blue, yellow) vs (green, orange), (blue, "
-"black) vs (green, red), (blue, black, yellow) vs (green, red, orange)"
-msgstr ""
-"Aanbevolen teams: rood vs groen, (blauw, geel) vs (groen, oranje), (blauw, "
-"zwart) vs (groen ,rood), (blauw, zwart, geel) vs (groen, rood, oranje)"
-
-#: ../../maps/Swamp Island.wmf/elemental:9
-msgid "Swamp Island"
-msgstr "Moeraseiland"
-
-#: ../../maps/Swamp Monks.wmf/elemental:7
-msgid "Swamp Monks"
-msgstr "Moerasmonniken"
-
-#: ../../maps/The Far North.wmf/elemental:9
-msgid "The Far North"
-msgstr "Het Verre Noorden"
-
-#: ../../maps/Plateau.wmf/elemental:7
-msgid "The Green Plateau"
-msgstr "De Groene Hoogvlakte"
-
 #: ../../maps/The Nile.wmf/elemental:9
 msgid "The Nile"
 msgstr "De Nijl"
+
+#: ../../maps/The Nile.wmf/elemental:11
+msgid ""
+"The river has always provided food and communication. This time, eight "
+"empires will fight for control over this land."
+msgstr ""
+
+#: ../../maps/The Nile.wmf/elemental:12
+msgid ""
+"Suggested Teams: blue vs. red | yellow vs. green | (blue, yellow) vs. (red, "
+"green) | (green, orange, white) vs. (yellow, black, purple) | (blue, orange, "
+"green) vs. (red, yellow, black) | (blue, green, orange, white) vs. (red, "
+"yellow, black, purple)"
+msgstr ""
 
 #: ../../maps/The Oasis Triangle.wmf/elemental:7
 msgid "The Oasis Triangle"
 msgstr "De Oase Driehoek"
 
+#: ../../maps/The Oasis Triangle.wmf/elemental:9
+msgid ""
+"There is something mystical like a gray atmosphere around these three oases, "
+"which no one has found out about yet. Perhaps you will be the one, but be "
+"aware of the others who are searching too!"
+msgstr ""
+
 #: ../../maps/The Thaw.wmf/elemental:9
 msgid "The Thaw"
 msgstr "De Dooi"
 
-#: ../../maps/Sun of fire.wmf/elemental:9
-msgid "The ancient sun of fire"
-msgstr "De oude vuurzon"
+#: ../../maps/The Thaw.wmf/elemental:11
+msgid ""
+"Another thaw set in. Three tribes were sheltering form severe winter among "
+"majestic mountains. At the time of the solstice they listened to the oracle "
+"and went to war. The only survivor will sacrifice his enemies’ treasures on "
+"the ancient altar, build there a splendid castle and gain the goodwill and "
+"respect of the Gods."
+msgstr ""
 
 #: ../../maps/The big lake.wmf/elemental:7
-msgid "The big lake"
-msgstr "Het grote meer"
-
-#: ../../maps/Elven Forests.wmf/elemental:9
-msgid ""
-"The breath-taking beauty of these emerald lands has lured many tribes into "
-"an attempt of taking them for themselves."
+msgid "The Big Lake"
 msgstr ""
-"De adembenemende schoonheid van deze smaragden landen heeft vele stammen "
-"verleidt tot een poging deze toe te eigenen."
-
-#: ../../maps/Together we're strong.wmf/elemental:11
-msgid ""
-"The four mighty harbours of the Craw Islands were trading their goods among "
-"each others for ages. All of them needed resources, they could not produce "
-"on their own territory and provided resources that the other could not "
-"produce in exchange. Based on these trades a very friendly commerce was "
-"common between the four harbours and the people living on the Craw Islands - "
-"just until lately two of the harbours united to an exclusive trade alliance, "
-"forcing the other two to do the same. Suddenly it seems it is only a matter "
-"of time, until the first fights between the harbours will shake the peaceful "
-"life that lasted so long..."
-msgstr ""
-"De vier machtige havens van de Craw Eilanden verhandelden hun goederen met "
-"elkaar voor eeuwen. Elk van hen had grondstoffen nodig, die zij niet op hun "
-"eigen territorium konden maken en verschafte in ruil grondstoffen die de "
-"ander niet kon maken. Gebaseerd op deze handel was een zeer "
-"vriendschappelijke commercie gebruikelijk tussen de vier havens en de mensen "
-"die op de Craw Eilanden woonden - totdat onlangs twee van de havens zich "
-"verenigden in een exclusieve alliantie, wat de andere twee ertoe dwong "
-"hetzelfde te doen. Plotseling lijkt het alsof het slechts een kwestie is van "
-"tijd, totdat de eerste gevechten tussen de havens het vreedzame leven dat "
-"zolang had geduurd zullen opschudden..."
-
-#: ../../maps/The long way.wmf/elemental:7
-msgid "The long way"
-msgstr "De lange weg"
-
-#: ../../maps/The pass through the mountains.wmf/elemental:9
-msgid "The pass through the mountains"
-msgstr "De pas door de bergen"
-
-#: ../../maps/The Nile.wmf/elemental:11
-msgid ""
-"The river always provides food and communication. This time eight empires "
-"will fight for the control over this land."
-msgstr ""
-"De rivier verschaft altijd voedsel en communicatie. Ditmaal zullen acht "
-"imperia vechten voor de macht over dit land."
-
-#: ../../maps/Mystical Maze.wmf/elemental:11
-msgid ""
-"There are two big questions around: Who created this unbelievably big maze "
-"and what can be found inside?"
-msgstr ""
-"Er rijzen twee grote vragen op: Wie heeft dit ongelooflijk grote doolhof "
-"gemaakt en wat kan er binnen gevonden worden?"
-
-#: ../../maps/The Oasis Triangle.wmf/elemental:9
-msgid ""
-"There is something mystical, like a grey atmosphere, around these three "
-"oases, which no one found out about yet. Perhaps you will be the one, but be "
-"aware of the others, who are searching too!"
-msgstr ""
-"Er is iets mystieks, zoals een grijze sfeer rond deze oases, waar nog "
-"niemand iets over heeft ontdekt. Misschien ben jij degene? Maar pas op voor "
-"de anderen die er ook naar aan het zoeken zijn!"
-
-#: ../../maps/Finlakes.wmf/elemental:11
-msgid ""
-"These are the beautiful Finnish lands, which are of lakes, rivers, ancient "
-"forests and mountains. It is up to you, to find a way through these lands."
-msgstr ""
-"Dit is het mooie Finse landschap, dat bestaat uit meren, rivieren, oude "
-"bossen en bergen. Het is aan jou om een weg te vinden door dit land."
 
 #: ../../maps/The big lake.wmf/elemental:9
 msgid ""
-"This island once came out of the deepest grounds of the sea. In those days, "
-"fire rose out of the salty seawater and brought ash, stones and earth to "
-"daylight. And the fire came nearer and nearer to the sun, while the mountain "
-"grew and grew. Until one day, when the whole firemountain exploded. Nowadays "
-"only this ring is left from that mighty firemountain. Do you think, that it "
-"is big enough for more than one tribe?"
+"This island once appeared out of the deepest depths of the sea. In those "
+"days, fire rose out of the salty seawater and brought ash, stones and soil "
+"to light. And the fire came nearer and nearer to the sun, while the mountain "
+"grew and grew. Until one day, when the whole fire mountain exploded. "
+"Nowadays only this ring is left from that mighty fire mountain. Do you think "
+"that it is big enough for more than one tribe?"
 msgstr ""
-"Dit eiland steeg ooit op uit de zeebodem. In die dagen rees het vuur uit het "
-"zoute zeewater en bracht as, steen en aarde aan het oppervlak. En het vuur "
-"steeg hoger en hoger naar de zon, terwijl de berg groeide en groeide. Tot op "
-"een dag de hele berg ontplofte. Nu is er slechts nog deze ring over van die "
-"machtige vuurberg. Wat denk je? Is het groot genoeg voor meer dan één stam?"
 
-#: ../../maps/Lake of tranquility.wmf/elemental:9
-msgid ""
-"This lake, deep in the most ancient forests, has long been known for its "
-"beauty and idyllic peace. Yet, its sanctity has been disturbed now, as two "
-"hostile tribes arrive at its shores..."
+#: ../../maps/The long way.wmf/elemental:7
+msgid "The Long Way"
 msgstr ""
-"Dit meer, diep in de oudste oerbossen, is lang bekend om zijn schoonheid en "
-"idyllische rust. Toch is zijn rust nu verstoord, als er twee stammen "
-"aankomen aan zijn oevers..."
 
-#: ../../maps/Fellowships.wmf/elemental:12
+#: ../../maps/The long way.wmf/elemental:9
 msgid ""
-"This map is best suited for two or three human players, with game speed "
-"somewhat above the normal value. AI performs badly at the time of writing "
-"(2013)."
+"Another strange test by the Gods. To reach the other side, there seems to be "
+"no other way but to occupy the land of your enemies."
 msgstr ""
-"Deze map is het geschiktst voor twee of drie menselijke spelers, met "
-"spelsnelheid iets boven de normale waarde. AI presteert slecht op het moment "
-"van schrijven (2013)."
+
+#: ../../maps/The pass through the mountains.wmf/elemental:9
+msgid "The Pass Through the Mountains"
+msgstr ""
+
+#: ../../maps/The pass through the mountains.wmf/elemental:11
+msgid ""
+"In this mountainous area two princes have settled. Now they are expanding "
+"their territories, unaware of the fact that they are not alone!"
+msgstr ""
 
 #: ../../maps/Three Warriors.wmf/elemental:9
 msgid "Three Warriors"
 msgstr "Drie Strijders"
 
+#: ../../maps/Three Warriors.wmf/elemental:11
+msgid ""
+"Mighty mountains divide this land into three fertile valleys. But a path "
+"connects the valleys and thus a fight seems inescapable! Hint: Water can be "
+"found around the lakes."
+msgstr ""
+"Grote bergen verdelen dit land in drie vruchtbare valleien. Maar een pad "
+"verbind de valleien waardoor een gevecht onontkoombaar lijkt! Hint: er kan "
+"water gevonden worden rond de meren."
+
 #: ../../maps/Together we're strong.wmf/elemental:9
-msgid "Together we're strong"
-msgstr "Samen staan we sterk"
+msgid "Together We’re Strong"
+msgstr ""
+
+#: ../../maps/Together we're strong.wmf/elemental:11
+msgid ""
+"The four mighty harbors of the Craw Islands have been trading their goods "
+"among each other for ages. All of them needed resources that they could not "
+"produce in their own territory and in exchange provided other resources to "
+"those that could not produce them. Based on these trades, a very friendly "
+"commerce was common between the four harbors and the people living on the "
+"Craw Islands – until recently, when two of the harbors united to form an "
+"exclusive trade alliance, forcing the other two to do the same. Suddenly, it "
+"seems only a matter of time before the first fights between the harbors will "
+"shatter the peaceful life that has lasted for so long..."
+msgstr ""
 
 #: ../../maps/Trident of Fire.wmf/elemental:9
 msgid "Trident of Fire"
 msgstr "Vuurdrietand"
 
+#: ../../maps/Trident of Fire.wmf/elemental:11
+msgid ""
+"In the vicinity of three major volcanoes, six lovely islands are inviting "
+"settlers to start a new life. Deserts and a quickly growing forest wait to "
+"be discovered. But only by becoming a naval power will your tribe be able to "
+"explore enough resources to compete with its opponents."
+msgstr ""
+
+#: ../../maps/Trident of Fire.wmf/elemental:12
+msgid ""
+"Suggested teams: red vs. green | (blue, yellow) vs. (green, orange) | (blue, "
+"black) vs. (green, red) | (blue, black, yellow) vs. (green, red, orange)"
+msgstr ""
+
 #: ../../maps/Twin Lagoons.wmf/elemental:9
 msgid "Twin Lagoons"
 msgstr "Tweelinglagunes"
+
+#: ../../maps/Twin Lagoons.wmf/elemental:11
+msgid ""
+"When the wind swelled up and the first dunes were formed on these abandoned "
+"twin lagoons, nobody could have expected that two tribes that are "
+"desperately searching for more resources to support their endlessly ongoing "
+"wars would end up in this forgotten place at the same time and for the same "
+"well-known reason. Defend your transport lines or use ships to bypass the "
+"opponent. Then remove all enemy activity."
+msgstr ""
 
 #: ../../maps/Twinkling Waves.wmf/elemental:9
 msgid "Twinkling Waves"
 msgstr "Schitterende Golven"
 
+#: ../../maps/Twinkling Waves.wmf/elemental:11
+msgid ""
+"Many beautiful, green islands await the ones brave enough to pass the "
+"thousand waves, twinkling in the sun."
+msgstr ""
+"Vele prachtige groene eilanden wachten op de dapperen die de duizenden "
+"golven, die schitteren in de zon, durven te trotseren."
+
 #: ../../maps/Two frontiers.wmf/elemental:7
 msgid "Two Frontiers"
 msgstr "Twee Grenzen"
 
-#: ../../maps/Golden Peninsula.wmf/elemental:9
-msgid "Two empires race for the treasures of a legendary peninsula..."
+#: ../../maps/Two frontiers.wmf/elemental:9
+msgid "A multiplayer battle map on a small circle-shaped island."
 msgstr ""
-"Twee koninkrijken maken jacht op de schatten van een legendarisch "
-"schiereiland..."
 
 #: ../../maps/Volcanic Winter.wmf/elemental:9
 msgid "Volcanic Winter"
 msgstr "Vulkanische Winter"
 
+#: ../../maps/Volcanic Winter.wmf/elemental:11
+msgid ""
+"In the middle of summer, a series of volcanic eruptions drew the winter in. "
+"Suddenly, the sun seemed to be gone and the only light and heat sources left "
+"were those that enforced this dramatic change. Continents, oceans and seas "
+"are frozen now, only the volcanic islands seem to be left as habitable land."
+msgstr ""
+
 #: ../../maps/War of the Valleys.wmf/elemental:7
 msgid "War of the Valleys"
 msgstr "Oorlog der Valleien"
 
-#: ../../maps/Four Castles.wmf/elemental:9
+#: ../../maps/War of the Valleys.wmf/elemental:9
 msgid ""
-"Well protected in their mighty fortresses, four power-hungry warlords are "
-"completing their schemes to dominate these lands..."
+"It is said that even the sun and moon must find their way between the spires "
+"of these mountains. HINT: Monoliths mark ore-spots. Don’t bother sending "
+"geologists anywhere else."
 msgstr ""
-"Goed beschermd in hun machtige kastelen, zijn vier op macht beluste "
-"krijgsheren hun plannen aan het voltooien om deze landen te domineren..."
-
-#: ../../campaigns/cconfig:31
-msgid ""
-"When Chat’Karuth died, he was an old man, father to three strong and "
-"ambitious sons and warlord to an army that could match any enemy willing to "
-"rise against the ancient forests. Though at the end of his glorious reign, "
-"Chat’Karuth left his eldest son, Thron, to succeed him as the tribe's "
-"warlord – a decision that left his two brothers unsatisfied. The old warlord "
-"knew that. As his father instructed him, Thron left the capital of "
-"Al’thunran, the home of the Throne Among the Trees and withdrew his forces "
-"to the high hills where he buried the corpse of his father. There he swore "
-"to the gods and his father's spirit that he’d return to re-established "
-"order. While his brothers raged in blind war against Thron and the few "
-"forces he left to secure the borders of Al’thunran, the young warlord seeks "
-"to reunite his ambitious brothers and force the tribes to march once again "
-"under a common banner."
-msgstr ""
-"Toen Chat’Karuth stierf was hij een oude man, vader van drie sterke "
-"ambitieuze zonen en krijgsheer van een een leger dat elke vijand aan kon die "
-"opstand wilde bieden tegen de oeroude bossen. Aan het einde van zijn "
-"glorieuze heerschapij, liet Chat’Karuth zijn oudste zoon, Thron, hem als "
-"opvolger van de stam - een besluit dat zijn andere twee broers ontevreden "
-"achterliet. De oude krijgsheer wist dat. Terwijl zijn vader hem "
-"introduceerde verliet Thron de hoofdstad van Al’thunran, het huis van Thron "
-"tussen de bomen en trok zijn leger terug naar de hoge heuvels waar hij "
-"samenkwam met zijn ambitieuze broers en de legers van de stam om nogmaals "
-"samen marcheren onder gelijke vaandels."
-
-#: ../../campaigns/cconfig:45
-msgid ""
-"When the God lost faith in the Atlanteans and drowned their island, one "
-"woman's struggle for justice and a second chance for her people would become "
-"the stuff of legends. Leading the remaining Atlanteans into a new future in "
-"a new part of the World, Jundlina became the most powerful human of her "
-"time, but at a high cost: her humanity and soul."
-msgstr ""
-"Toen de God het vertrouwen verloor in de Atlantiërs en hun eiland verdronk, "
-"vocht een vrouw voor rechtvaardigheid en een tweede kans voor haar volk en "
-"zou legendarisch worden. De overige Atlantiërs leidend naar een nieuwe "
-"toekomst in een nieuw deel van de wereld, werd Jundlina de meest machtige "
-"persoon van haar tijd, maar tegen een hoge prijs: haar menselijkheid en ziel."
-
-#: ../../maps/Twin Lagoons.wmf/elemental:11
-msgid ""
-"When the wind swelled up and the first dunes were formed on these abandoned "
-"twin lagoons nobody could have expected that two tribes that are desperately "
-"searching for more resources to support their endlessly ongoing wars would "
-"end up in this forgotten place at the same time and for the same well-known "
-"reason. Defend your transport lines or use ships to bypass the opponent. "
-"Then remove all enemy activity."
-msgstr ""
-"Toen de wind aanzwol en de eerste duinen werden gevormd op deze afgelegen "
-"tweelinglagunes had niemand kunnen verwachten dat twee stammen die wanhopig "
-"op zoek zijn naar meer delfstoffen om hun eindeloos doorgaande oorlogen te "
-"ondersteunen terecht zouden komen op deze vergeten plek op hetzelfde moment "
-"en om dezelfde bekende reden. Verdedig je transportroutes of gebruik schepen "
-"om de vijand te omzeilen. Verwijder daarna iedere vijandige activiteit."
-
-#: ../../maps/Checkmate.wmf/elemental:9
-msgid ""
-"Whether just one of nature's strangest features or the creation of a mad "
-"(and game-hungry) god, this weird battleground awaits two opponents for "
-"another confrontation."
-msgstr ""
-"Ofwel één van natuur's vreemdste verschijnselen, ofwel de creatie van een "
-"waanzinnige (en speelzieke) god, wacht dit strijdperk op twee opponenten "
-"voor alweer een confrontatie."
-
-#: ../../maps/Last Bastion.wmf/elemental:11
-msgid ""
-"Whimsical Gods didn't answer our prayers. Instead the thousand fold hotter "
-"Sun heated up the Earth and melted glaciers and people plunged into the "
-"deep. But now - high in the majestic mountains, on the last scrap of land - "
-"two surviving tribes are sheltering. Even though the Gods showed mercy and "
-"the climate thus turned cooler again the water is still rising and rising. "
-"Onto the last secure place - the highest mountain range where the amount of "
-"gold and the space to live merely suffice for one tribe - only two opposite "
-"paths lead. But remember, be careful... this last living space is also a "
-"hard and small place to live. Don't forget to take care about your timber "
-"supplies, you'll need them."
-msgstr ""
-"Guitige Goden verhoorden onze gebeden niet. Integendeel: de duizendmaal "
-"hetere Zon verwarmdde de aarde en smolt de gletsjers en gooide mensen in het "
-"diepe. Maar nu - hoog in de majestueuze bergen, op het laatste strookje land "
-"- hebben twee stammen onderdak gevonden. Hoewel de Goden genade toonden en "
-"het klimaat dus afkoelde, is het water alweer aan het stijgen en stijgen. "
-"Naar de laatste veilige plek - de hoogste bergketen waar de goudvoorraad en "
-"de leefruimte net genoeg is voor één stam - leiden slechts twee "
-"tegengestelde paden. Maar onthoud: wees voorzichtig... deze laatste "
-"leefruimte is ook een zware en kleinge plek om te leven. Vergeet niet op je "
-"houtvoorraad te letten; je zult hem nodig hebben."
-
-#: ../../maps/Atoll.wmf/elemental:11
-msgid "Who will be the real King of the big atoll?"
-msgstr "Wie zal de echte Koning zijn van het grote atol?"
 
 #: ../../maps/Wisent Valley.wmf/elemental:9
 msgid "Wisent Valley"
 msgstr "Wisentenvallei"
 
-#: ../../maps/Plateau.wmf/elemental:9
+#: ../../maps/Wisent Valley.wmf/elemental:11
 msgid ""
-"You are standing on an island, crowned by mighty mountains, which keep a "
-"wonderful and mighty treasure in their middle - The Green Plateau, which is "
-"hard to get, but easy to lose, so if you want it, be aware of the other "
-"clans."
+"It seems as if this magical valley has been inhabited by wisents since the "
+"beginning of days. When your tribe came to this place, you were sure that it "
+"offered enough space for a peaceful life. But can your tribe live in peace "
+"with your neighbors?"
 msgstr ""
-"Je staat op een eiland, gekroond met machtige bergen die een schitterende en "
-"rijke schat in hun midden bewaren - De Groene Hoogvlakte, die hard te "
-"verkrijgen, maar makkelijk te verliezen is, dus als je het wilt, moet je de "
-"andere clans in de gaten houden."
-
-#: ../../maps/MP Scenarios/Smugglers.wmf/elemental:11
-msgid ""
-"Your well established smuggling routes suddenly got busy: Two other tribes "
-"appeared and now a rivalry under smugglers has been started: Which team will "
-"be the first to smuggle a certain number of wares? Teams are: Blue + Red vs "
-"Yellow + Green."
-msgstr ""
-"Jouw goed verankerde smokkelroutes krijgen het plotseling druk: Twee andere "
-"stammen zijn verschenen en er is nu een rivaliteit onder smokkelaars "
-"begonnen: Welk team zal de eerste zijn om een bepaald aantal goederen te "
-"smokkelen? Teams zijn: Blauw + Rood vs Geel + Groen."
