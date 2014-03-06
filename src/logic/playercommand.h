@@ -132,7 +132,8 @@ private:
 };
 
 struct Cmd_BuildRoad:public PlayerCommand {
-	Cmd_BuildRoad() : PlayerCommand(), path(nullptr), start(), nsteps(0), steps(nullptr) {} // For savegame loading
+	Cmd_BuildRoad() :
+		PlayerCommand(), path(nullptr), start(), nsteps(0), steps(nullptr) {} // For savegame loading
 	Cmd_BuildRoad (int32_t, int32_t, Path &);
 	Cmd_BuildRoad (StreamRead &);
 
