@@ -332,13 +332,14 @@ void Interactive_Base::update_speedlabel()
 				m_label_speed.set_text
 					(real == 1000 ? std::string() : speedString(real));
 			else {
-				char buffer[128];
-				snprintf
-					(buffer, sizeof(buffer),
-					 /** TRANSLATORS: actual_speed (desired_speed) */
-					 _("%1$s (%2$s)"),
-					 speedString(real).c_str(), speedString(desired).c_str());
-				m_label_speed.set_text(buffer);
+				m_label_speed.set_text(
+					(format
+						 /** TRANSLATORS: actual_speed (desired_speed) */
+						(_("%1$s (%2$s)"))
+						% speedString(real).c_str()
+						% speedString(desired).c_str()
+					).str().c_str()
+				);
 			}
 		} else
 			m_label_speed.set_text(_("NO GAME CONTROLLER"));
