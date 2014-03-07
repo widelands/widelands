@@ -1557,14 +1557,12 @@ void Soldier::battle_update(Game & game, State &)
 						 descname().c_str(), serial(), owner().player_number(),
 						 get_position().x, get_position().y,
 						 immovable_position ?
-						/** TRANSLATORS this is followed by 'immovable' in the source string */
-						 immovable_position->descr().descname().c_str() : _("no"),
+						 immovable_position->descr().descname().c_str() : ("no"),
 						 opponent.descname().c_str(), opponent.serial(),
 						 opponent.owner().player_number(),
 						 dest.x, dest.y,
 						 immovable_dest ?
-						/** TRANSLATORS this is followed by 'immovable' in the source string */
-						 immovable_dest->descr().descname().c_str() : _("no"),
+						 immovable_dest->descr().descname().c_str() : ("no"),
 						 descname().c_str());
 					owner().add_message
 						(game,
