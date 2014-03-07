@@ -174,7 +174,7 @@ void PlayerDescriptionGroup::refresh()
 					if (player.random_ai) {
 						title += _("AI: Random");
 					} else {
-						/** TRANSLATORS %s = AI type, e.g. "Agressive" */
+						/** TRANSLATORS %s = AI type, e.g. 'Agressive' */
 						title += (boost::format(_("AI: %s")) % _(player.ai)).str();
 					}
 				}
