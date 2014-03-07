@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4804\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2014-03-05 20:55+0100\n"
+"POT-Creation-Date: 2014-03-06 22:20+0100\n"
 "PO-Revision-Date: 2014-03-02 09:51+0000\n"
 "Last-Translator: Wesmania <ikk_pl@yahoo.co.uk>\n"
 "Language-Team: Language <widelands-public@lists.sourceforge.net>\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2014-03-06 05:36+0000\n"
+"X-Launchpad-Export-Date: 2014-03-07 05:39+0000\n"
 "X-Generator: Launchpad (build 16948)\n"
 
 #: ../../src/ai/defaultai.h:84
@@ -557,7 +557,7 @@ msgstr "Liczba graczy"
 
 #. * TRANSLATORS: Default player name, e.g. Player 1
 #: ../../src/editor/ui_menus/editor_player_menu.cc:210
-#: ../../src/network/nethost.cc:2077
+#: ../../src/network/nethost.cc:2078
 #, c-format
 msgid "Player %s"
 msgstr ""
@@ -771,7 +771,7 @@ msgid "Loading map"
 msgstr "Wczytywanie mapy"
 
 #: ../../src/logic/game.cc:375 ../../src/logic/game.cc:408
-#: ../../src/wlapplication.cc:2204
+#: ../../src/wlapplication.cc:2208
 msgid "Loading..."
 msgstr "Wczytywanie..."
 
@@ -1250,7 +1250,7 @@ msgid "There is no user with the name %s logged in!"
 msgstr ""
 
 #: ../../src/network/internet_gaming_messages.cc:43
-#: ../../src/network/nethost.cc:1279
+#: ../../src/network/nethost.cc:1280
 msgid "The sent password was incorrect!"
 msgstr "Podane hasło jest nieprawidłowe!"
 
@@ -1322,8 +1322,8 @@ msgstr ""
 "Albo żaden serwer nie jest uruchomiony na domniemanym\n"
 "porcie, albo serwer został wyłączony, kiedy probowano się połączyć."
 
-#: ../../src/network/netclient.cc:196 ../../src/network/nethost.cc:846
-#: ../../src/wlapplication.cc:2011
+#: ../../src/network/netclient.cc:196 ../../src/network/nethost.cc:847
+#: ../../src/wlapplication.cc:2015
 msgid "Preparing game"
 msgstr "Przygotowywanie gry"
 
@@ -1347,115 +1347,115 @@ msgstr " Gra zostanie zapisana automatycznie."
 msgid "Disconnected from Host"
 msgstr "Rozłączony z hostem"
 
-#: ../../src/network/nethost.cc:369 ../../src/network/nethost.cc:1210
-#: ../../src/network/nethost.cc:1221
+#: ../../src/network/nethost.cc:370 ../../src/network/nethost.cc:1211
+#: ../../src/network/nethost.cc:1222
 msgid "Available host commands are:"
 msgstr ""
 
 #. * TRANSLATORS: Available host command
-#: ../../src/network/nethost.cc:371 ../../src/network/nethost.cc:1212
-#: ../../src/network/nethost.cc:1223
+#: ../../src/network/nethost.cc:372 ../../src/network/nethost.cc:1213
+#: ../../src/network/nethost.cc:1224
 msgid "/help  -  Shows this help"
 msgstr ""
 
 #. * TRANSLATORS: Available host command
-#: ../../src/network/nethost.cc:373
+#: ../../src/network/nethost.cc:374
 msgid "/announce <msg>  -  Send a chatmessage as announcement (system chat)"
 msgstr ""
 
 #. * TRANSLATORS: Available host command
-#: ../../src/network/nethost.cc:375
+#: ../../src/network/nethost.cc:376
 msgid "/warn <name> <reason>  -  Warn the user <name> because of <reason>"
 msgstr ""
 
 #. * TRANSLATORS: Available host command
-#: ../../src/network/nethost.cc:377
+#: ../../src/network/nethost.cc:378
 msgid "/kick <name> <reason>  -  Kick the user <name> because of <reason>"
 msgstr ""
 
 #. * TRANSLATORS: Available host command
-#: ../../src/network/nethost.cc:379
+#: ../../src/network/nethost.cc:380
 msgid "/forcePause            -  Force the game to pause."
 msgstr ""
 
 #. * TRANSLATORS: Available host command
-#: ../../src/network/nethost.cc:381
+#: ../../src/network/nethost.cc:382
 msgid "/endForcedPause        -  Return game to normal speed."
 msgstr ""
 
-#: ../../src/network/nethost.cc:390
+#: ../../src/network/nethost.cc:391
 msgid "Wrong use, should be: /announce <message>"
 msgstr "Błędne użycie. Powinno być: /announce <wiadomość>"
 
-#: ../../src/network/nethost.cc:403
+#: ../../src/network/nethost.cc:404
 msgid "Wrong use, should be: /warn <name> <reason>"
 msgstr "Błędne użycie, powinno być: /warn <imię> <powód>"
 
-#: ../../src/network/nethost.cc:411
+#: ../../src/network/nethost.cc:412
 msgid "Why would you warn yourself?"
 msgstr "Dlaczego miałbyś ostrzegać samego siebie?"
 
-#: ../../src/network/nethost.cc:413
+#: ../../src/network/nethost.cc:414
 msgid "Why would you want to warn the dedicated server?"
 msgstr "Dlaczego miałbyś ostrzegać server dedykowany?"
 
-#: ../../src/network/nethost.cc:417 ../../src/network/nethost.cc:443
+#: ../../src/network/nethost.cc:418 ../../src/network/nethost.cc:444
 #, c-format
 msgid "The client %s could not be found."
 msgstr "Nie mogę znaleźć klienta %s."
 
-#: ../../src/network/nethost.cc:428
+#: ../../src/network/nethost.cc:429
 msgid "Wrong use, should be: /kick <name> <reason>"
 msgstr "Błędne użycie, powinno być: /kick <imię> <powód>"
 
-#: ../../src/network/nethost.cc:439
+#: ../../src/network/nethost.cc:440
 msgid "You can not kick yourself!"
 msgstr "Nie możesz wyrzucić siebie!"
 
-#: ../../src/network/nethost.cc:441
+#: ../../src/network/nethost.cc:442
 msgid "You can not kick the dedicated server"
 msgstr "Serwer dedykowany nie może być wyrzucony"
 
-#: ../../src/network/nethost.cc:446
+#: ../../src/network/nethost.cc:447
 #, c-format
 msgid "Are you sure you want to kick %s?<br>"
 msgstr "Czy na pewno wyrzucić %s?<br>"
 
-#: ../../src/network/nethost.cc:447
+#: ../../src/network/nethost.cc:448
 #, c-format
 msgid "The stated reason was: %s<br>"
 msgstr "Podano powód: %s<br>"
 
-#: ../../src/network/nethost.cc:448
+#: ../../src/network/nethost.cc:449
 #, c-format
 msgid "If yes, type: /ack_kick %s"
 msgstr "Jeśli tak, wpisz /ack_kick %s"
 
-#: ../../src/network/nethost.cc:458
+#: ../../src/network/nethost.cc:459
 msgid "kick acknowledgement cancelled: No name given!"
 msgstr "Potwierdzenie wyrzucenia anulowane: Brak podanej nazwy!"
 
-#: ../../src/network/nethost.cc:460
+#: ../../src/network/nethost.cc:461
 msgid "Wrong use, should be: /ack_kick <name>"
 msgstr "Błędne użycie, powinno być: /ack_kick <imię>"
 
-#: ../../src/network/nethost.cc:466
+#: ../../src/network/nethost.cc:467
 msgid "kick acknowledgement cancelled: Wrong name given!"
 msgstr "Potwierdzenie wyrzucenia anulowane: Podano złą nazwę!"
 
-#: ../../src/network/nethost.cc:477
+#: ../../src/network/nethost.cc:478
 msgid "Pause was already forced - game should be paused."
 msgstr "Pauza została wymuszona wcześniej - gra powinna być już wstrzymana."
 
-#: ../../src/network/nethost.cc:489
+#: ../../src/network/nethost.cc:490
 msgid "There is no forced pause - nothing to end."
 msgstr "Brak wymuszonej pauzy - nie ma nic do zakończenia."
 
-#: ../../src/network/nethost.cc:500
+#: ../../src/network/nethost.cc:501
 msgid "Invalid command! Type /help for a list of commands."
 msgstr "Błędna komenda. Wpisz /help aby wyświetlić listę komend."
 
-#: ../../src/network/nethost.cc:740
+#: ../../src/network/nethost.cc:741
 #, c-format
 msgid ""
 "This is a dedicated server. Send \"@%s help\" to get a full list of "
@@ -1464,20 +1464,20 @@ msgstr ""
 "Serwer dedykowany. Wyślij \"@%s help\", by uzyskać listę dostępnych poleceń."
 
 #. * TRANSLATORS: Available host command
-#: ../../src/network/nethost.cc:1214 ../../src/network/nethost.cc:1225
+#: ../../src/network/nethost.cc:1215 ../../src/network/nethost.cc:1226
 msgid "host $ - Tries to run the host command $"
 msgstr ""
 
 #. * TRANSLATORS: Available host command
-#: ../../src/network/nethost.cc:1216
+#: ../../src/network/nethost.cc:1217
 msgid "save $ - Saves the current game state as $.wgf"
 msgstr ""
 
-#: ../../src/network/nethost.cc:1229
+#: ../../src/network/nethost.cc:1230
 msgid "pwd $  - Sends the password $ to the host"
 msgstr ""
 
-#: ../../src/network/nethost.cc:1236
+#: ../../src/network/nethost.cc:1237
 msgid ""
 "Access to host commands denied. To gain access, send the password with pwd "
 "command."
@@ -1485,53 +1485,53 @@ msgstr ""
 "Dostęp do komend hosta zabroniony. By zyskać dostęp, wyślij hasło za pomocą "
 "komendy pwd."
 
-#: ../../src/network/nethost.cc:1241
+#: ../../src/network/nethost.cc:1242
 #, c-format
 msgid "%1$s told me to run the command: \"%2$s\""
 msgstr ""
 
-#: ../../src/network/nethost.cc:1250
+#: ../../src/network/nethost.cc:1251
 msgid "Sorry! Saving was deactivated on this dedicated server!"
 msgstr ""
 "Mozliwość zapisu na tym dedykowanym serwerze została wyłączona, przykro mi!"
 
-#: ../../src/network/nethost.cc:1253
+#: ../../src/network/nethost.cc:1254
 msgid "Cannot save while there is no game running!"
 msgstr ""
 
-#: ../../src/network/nethost.cc:1264
+#: ../../src/network/nethost.cc:1265
 msgid "Game successfully saved!"
 msgstr "Gra zapisana!"
 
-#: ../../src/network/nethost.cc:1267
+#: ../../src/network/nethost.cc:1268
 #, c-format
 msgid "Could not save the game to the file \"%1$s\"! (%2$s)"
 msgstr ""
 
-#: ../../src/network/nethost.cc:1276
+#: ../../src/network/nethost.cc:1277
 msgid "This server is not password protected!"
 msgstr "Ten serwer nie jest chroniony hasłem!"
 
-#: ../../src/network/nethost.cc:1292
+#: ../../src/network/nethost.cc:1293
 msgid "The password was correct, access was granted!"
 msgstr "Hasło poprawne, dostęp przyznany!"
 
-#: ../../src/network/nethost.cc:1298
+#: ../../src/network/nethost.cc:1299
 #, c-format
 msgid "Unknown dedicated server command \"%s\"!"
 msgstr "Nieznana komenda serwera \"%s\"!"
 
-#: ../../src/network/nethost.cc:2003
+#: ../../src/network/nethost.cc:2004
 #, c-format
 msgid "Computer %u"
 msgstr ""
 
-#: ../../src/network/nethost.cc:2069 ../../src/wlapplication.cc:1816
+#: ../../src/network/nethost.cc:2070 ../../src/wlapplication.cc:1816
 #: ../../src/wui/game_summary.cc:90
 msgid "Player"
 msgstr "Gracz"
 
-#: ../../src/network/nethost.cc:2166
+#: ../../src/network/nethost.cc:2167
 #, c-format
 msgid ""
 "This server is password protected. You can send the password with: \"@%s pwd "
@@ -1540,7 +1540,7 @@ msgstr ""
 "Ten serwer jest chroniony hasłem. Hasło można wysłać, korzystając z komendy: "
 "\"@%s pwd HASŁO\""
 
-#: ../../src/network/nethost.cc:2266
+#: ../../src/network/nethost.cc:2267
 #, c-format
 msgid "%li second"
 msgid_plural "%li seconds"
@@ -2880,11 +2880,11 @@ msgstr ""
 msgid "The address of the game server is invalid"
 msgstr "Adres serwera jest niepoprawny"
 
-#: ../../src/wlapplication.cc:2119
+#: ../../src/wlapplication.cc:2123
 msgid "End of replay"
 msgstr "Koniec powtórki"
 
-#: ../../src/wlapplication.cc:2121
+#: ../../src/wlapplication.cc:2125
 msgid ""
 "The end of the replay has been reached and the game has been paused. You may "
 "unpause the game and continue watching if you want to."

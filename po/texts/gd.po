@@ -2,19 +2,19 @@
 # Copyright (c) 2013 Rosetta Contributors and Canonical Ltd 2013
 # This file is distributed under the same license as the widelands package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2013.
-# GunChleoc <fios@foramnagaidhlig.net>, 2013.
+# GunChleoc <fios@foramnagaidhlig.net>, 2013, 2014.
 msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2014-03-05 19:55+0000\n"
-"PO-Revision-Date: 2013-10-25 10:52+0000\n"
+"POT-Creation-Date: 2014-03-06 21:20+0000\n"
+"PO-Revision-Date: 2014-03-06 11:07+0000\n"
 "Last-Translator: GunChleoc <Unknown>\n"
 "Language-Team: Fòram na Gàidhlig http://www.foramnagaidhlig.net\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-03-06 05:29+0000\n"
+"X-Launchpad-Export-Date: 2014-03-07 05:33+0000\n"
 "X-Generator: Launchpad (build 16948)\n"
 "Language: gd\n"
 
@@ -54,6 +54,10 @@ msgid ""
 "economic infrastructure, explore the land around you and face rivaling\n"
 "tribes."
 msgstr ""
+"Tòisichidh tu le cnap tìre beag le beagan stòrais sa gheama seo. 'S urrainn "
+"dhut impireachd le mìltean dhe shaoranaich a chruthachadh leotha. Feumaidh "
+"tu bun-structar an eaconamaidh a stèidheachadh, an tìr timcheall ort a "
+"rùrachadh is strì an aghaidh threubhan eile gus an t-amas seo a choileanadh."
 
 #: ../../txts/README.lua:31
 msgid "Check out the Widelands project homepage:"
@@ -64,6 +68,8 @@ msgid ""
 "Widelands is licensed under the GNU General Public License (GPL). For more\n"
 "information, see the file ‘COPYING’."
 msgstr ""
+"Tha Widelands fo cheadachas GNU General Public License (GPL). Thoir sùil air "
+"an fhaidhle \"COPYING\" airson barrachd fiosrachaidh."
 
 #: ../../txts/README.lua:38
 msgid "Status"
@@ -80,6 +86,13 @@ msgid ""
 "or\n"
 "creating new maps – get in touch on our homepage."
 msgstr ""
+"Tha sinn air cha mhòr na h-uile feart a tha fainear dhuinn airson Widelands "
+"a chruthachadh is tha e tlachdmhor ri chluiche nad aonar no le daoine eile "
+"sa mhodh ioma-chluicheadair. Tha an-còmhnaidh barrachd obrach ri dèanamh co-"
+"dhiù sna h-uile roinn. Ma tha ùidh agad ann an cur ris – ge b' e an dèan thu "
+"grafaigeachd, an càraich thu bugaichean, an cuir thu feartan ùra ris, an "
+"eadar-theangaich thu dhan chànan agad fhèin e no an cruthaich thu mapaichean "
+"ùra – dèan conaltradh rinn air an làrach-lìn againn."
 
 #: ../../txts/README.lua:46
 msgid "General game control"
@@ -93,6 +106,10 @@ msgid ""
 "the left\n"
 "mouse button while holding down CTRL."
 msgstr ""
+"Dèan briogadh deas air uinneag gus a dùnadh. Gus uinneag fhìor-"
+"lùghdachadh/làn-mheudachadh, briog air bàr-tiotail na h-uinneige ud le putan "
+"meadhanach na luchaige no leis a' phutan chlì fhad 's a tha thu a' cumail "
+"CTRL sìos."
 
 #: ../../txts/README.lua:52
 msgid ""
@@ -121,11 +138,11 @@ msgstr "Ath-ghoiridean meur-chlàir (am broinn a' gheama)"
 
 #: ../../txts/README.lua:61
 msgid "PAGEUP: increases games peed"
-msgstr ""
+msgstr "PAGEDOWN: dèan an geama nas maille"
 
 #: ../../txts/README.lua:62
 msgid "PAGEDOWN: decreases games peed"
-msgstr ""
+msgstr "PAGEUP: dèan an geama nas luaithe"
 
 #: ../../txts/README.lua:63
 msgid "PAUSE: pauses the game"
@@ -133,7 +150,7 @@ msgstr "PAUSE: cuir an geama 'na stad"
 
 #: ../../txts/README.lua:64
 msgid "SPACE: toggles if building spaces are shown"
-msgstr ""
+msgstr "SPACE: toglaich an tèid ionadan togail a nochdadh"
 
 #: ../../txts/README.lua:65
 msgid "M: toggles minimap"
@@ -141,7 +158,7 @@ msgstr "M: toglaich am meanbh-mhapa"
 
 #: ../../txts/README.lua:66
 msgid "N: toggles messages (‘news’)"
-msgstr ""
+msgstr "N: toglaich na teachdaireachdan (\"naidheachdan\")"
 
 #: ../../txts/README.lua:67
 msgid "C: toggles census"
@@ -149,7 +166,7 @@ msgstr "C: toglaich an cunntas-sluaigh"
 
 #: ../../txts/README.lua:68
 msgid "S: toggles statistics"
-msgstr "S: toglaich an stadaitsearachd"
+msgstr "S: toglaich an stadastaireachd"
 
 #: ../../txts/README.lua:69
 msgid "I: toggles stock inventory"
@@ -161,7 +178,7 @@ msgstr "O: toglaich na h-amasan"
 
 #: ../../txts/README.lua:71
 msgid "F: toggles fullscreen (if supported by the OS)"
-msgstr ""
+msgstr "F: toglaich làn-sgrìn (ma chuireas an siostam-obrachaidh taic ris)"
 
 #: ../../txts/README.lua:72
 msgid "Home: centers main mapview on starting location"
@@ -175,11 +192,11 @@ msgstr ""
 
 #: ../../txts/README.lua:74
 msgid ",: goes to the previous location"
-msgstr ""
+msgstr ",: rach dhan ionad roimhe"
 
 #: ../../txts/README.lua:75
 msgid ".: goes to the next location"
-msgstr ""
+msgstr ".: rach dhan ath-ionad"
 
 #: ../../txts/README.lua:76
 msgid "F6: shows the debug console (only in debug-builds)"
@@ -204,6 +221,7 @@ msgstr ""
 #: ../../txts/README.lua:82
 msgid "G: jumps to the location corresponding to the current message"
 msgstr ""
+"G: gearr leum dhan ionad co-cheangailte ris an teachdaireachd làithreach"
 
 #: ../../txts/README.lua:83
 msgid "DELETE: archives the current message"
@@ -259,6 +277,9 @@ msgid ""
 "the revision number if you are running a development version or a daily "
 "build.)"
 msgstr ""
+"- An tionndadh de Widelands a th' agad ('s e seo àireamh an togail no an "
+"lèirmheis nuair a bhios tu a' ruith tionndadh leasachaidh no togail "
+"làitheil.)"
 
 #: ../../txts/README.lua:106
 msgid ""
@@ -329,6 +350,14 @@ msgid ""
 "a\n"
 "different version of the game."
 msgstr ""
+"Leis an roghainn \"Coimhead air ath-chluiche\" sa phrìomh clàr-taice, thèid "
+"geama a chluich thu roimhe ath-thogail ach an coimhead thu air. Thoir an "
+"aire co-dhiù gum faod atharraichean beaga air faidhlichean dàta a' gheama no "
+"air an fhaidhle so-ghnìomhaichte Widelands adhbharachadh nach eil ath-"
+"chluiche co-chòrdail tuilleadh is gun caill i an \"sioncronachadh\". Tha seo "
+"coltach ris na duilgheadasan leis an t-sioncronachadh ann an geama lìonraidh "
+"nuair a bhios tionndadh dhen gheama eadar-dhealaichte aig aon dhe na "
+"cluicheadairean"
 
 #: ../../txts/README.lua:133
 msgid ""
@@ -338,6 +367,11 @@ msgid ""
 "~/.widelands/replays directory on Linux and Mac OS X. On Windows,\n"
 "they are in the ‘replays’ subdirectory of your Widelands installation."
 msgstr ""
+"'S e uidheamachd glè fheumail gus bugaichean ann an loidsig a' gheama a lorg "
+"a th' anns na h-ath-chluichean, mar sin bidh iad feumail ma cheanglas tu ri "
+"aithris air buga iad. Thèid na h-ath-chluichean a shàbhaladh sa phasgan "
+"~/.widelands/replays air Linux is Mac OS X. Air Windows, bidh iad ann am "
+"pasgan \"replays\" fon phasgan stàlaidh Widelands agad."
 
 #: ../../txts/developers:1
 msgid "Development"
@@ -537,16 +571,25 @@ msgid ""
 "progress and as the Editor becomes better and better, this text will also "
 "get longer and more complete."
 msgstr ""
+"Tha an deasaiche seo airson cluicheadairean a bu toil leotha na mapaichean "
+"aca fhèin a chruthachadh gus an cleachdadh le Widelands.<br>Tha mòran "
+"prògramachaidh againn ri dhèanamh fhathast air an deasaiche is nuair a bheir "
+"sinn piseach air, nì sinn an teacsa seo nas fhaide is nas coileanta "
+"cuideachd."
 
 #: ../../txts/editor_readme:12
 msgid "Please have a look at our enduser manuals on our wiki pages at:"
 msgstr ""
+"Thoir sùil air leabhraichean-mìneachaidh a' chleachdaiche sna duilleagan "
+"uicidh againn air:"
 
 #: ../../txts/editor_readme:14
 msgid ""
 "Those pages might be more complete and up to date than this file, and you "
 "will also find a short tutorial about building a map there."
 msgstr ""
+"'S math dh'fhaoidte gum bi na duilleagan sin nas coileanta is nas ùire na am "
+"faidhle seo. Tha oideachadh ghoirid air mar a nì thu mapa ann cuideachd."
 
 #: ../../txts/editor_readme:18
 msgid "Keyboard shortcuts"
@@ -554,7 +597,7 @@ msgstr "Ath-ghoiridean meur-chlàir"
 
 #: ../../txts/editor_readme:21
 msgid "SPACE    Toggles if building spaces are shown"
-msgstr ""
+msgstr "SPACE:   Toglaich an tèid ionadan togail a nochdadh"
 
 #: ../../txts/editor_readme:23
 msgid "C        Toggles census on/off"
@@ -598,7 +641,7 @@ msgstr "CTRL+S   Sàbhail am mapa"
 
 #: ../../txts/editor_readme:43
 msgid "1-0      Changes tool size"
-msgstr ""
+msgstr "1-0      Atharraich meud nan innealan"
 
 #: ../../txts/editor_readme:45
 msgid "SHIFT    (Hold) Selects first alternative tool while pressed"
@@ -620,7 +663,7 @@ msgstr "Fiosrachadh ceadachais airson Widelands"
 
 #: ../../txts/license:7
 msgid "Copyright 2002 - 2014 by the Widelands Development Team."
-msgstr ""
+msgstr "Còir-lethbhreac 2002 - 2014 leis an sgioba leasachaidh Widelands."
 
 #: ../../txts/license:9
 msgid ""
@@ -654,6 +697,7 @@ msgstr ""
 msgid ""
 "We are also shipping the GPL as a text document with Widelands itself."
 msgstr ""
+"Lìbhrigidh sinn faidhle teacsa sa bheil an GPL le Widelands fhèin cuideachd."
 
 #: ../../txts/license:18
 msgid ""
@@ -670,6 +714,9 @@ msgid ""
 "On Windows, you can find the file called COPYING.txt in the installation "
 "folder, and the Widelands Start menu entry provides a link to this file."
 msgstr ""
+"Air Windows, lorgaidh tu am faidhle air a bheil COPYING.txt sa phasgan "
+"stàlaidh is bheir an t-innteart aig Widelands sa chlàr-taice tòiseachaidh "
+"ceangal dhan fhaidhle seo dhut."
 
 #: ../../txts/license:20
 msgid ""
@@ -686,6 +733,11 @@ msgid ""
 "questions or general support) or https://launchpad.net/widelands "
 "(Bugtracker, Translations)."
 msgstr ""
+"Gheibh thu an geama seo mar a tha e is gun bharantas sam bith. Gheibh thu "
+"barrachd fiosrachaidh is taice uainn air http://wl.widelands.org (làrach-"
+"lìn, uicidh, bòrd-brath airson cheistean no taice coitcheann) no "
+"https://launchpad.net/widelands (tracaiche nam bugaichean, eadar-"
+"theangachaidhean)."
 
 #: ../../txts/tips/atlanteans.tip:2
 #: ../../txts/tips/barbarians.tip:2
@@ -703,6 +755,8 @@ msgid ""
 "Always build a forester’s and a fish breeder’s house, so you will not run "
 "out of logs or food."
 msgstr ""
+"Tog bothan maoir-choille is geamair an-còmhnaidh ach nach ruith stuic no "
+"biadh ort."
 
 #: ../../txts/tips/barbarians.tip:6
 #: ../../txts/tips/empire.tip:6
@@ -718,12 +772,16 @@ msgid ""
 "Always build a ranger’s and a gamekeeper’s hut, so you will not run out of "
 "logs or food."
 msgstr ""
+"Tog taigh planntair-coille is tàrmachair iasg an-còmhnaidh ach nach ruith "
+"stuic no biadh ort."
 
 #: ../../txts/tips/editor.tip:2
 msgid ""
 "You can find general help for the editor as well as a short tutorial on our "
 "wiki at www.widelands.org"
 msgstr ""
+"Gheibh thu cobhair choitcheann airson an deasaiche cho math ri oideachadh "
+"goirid san uicidh againn air www.widelands.org"
 
 #: ../../txts/tips/editor.tip:6
 msgid ""
@@ -741,6 +799,8 @@ msgid ""
 "Just like with natural objects (bobs), you can also select multiple animals "
 "or ground textures with CTRL + mouse click."
 msgstr ""
+"Mar as urrainn dhut le oibseactan nàdair, 's urrainn dhut iomadh beathach no "
+"inneach làir a thaghadh le CTRL + briogadh."
 
 #: ../../txts/tips/editor.tip:14
 msgid ""
@@ -748,11 +808,16 @@ msgid ""
 "most cases the complete opposite of the normal tool (for example deletion of "
 "an object instead of placing one)."
 msgstr ""
+"Bidh an dàrna inneal dàrnach air fhad 's a chumas tu SHIFT sìos. Mar as "
+"trice, 's e an dearbh caochladh aig an inneal àbhaisteach a th' ann (mar "
+"eisimpleir, sguabaidh tu oibseact às seach a bhith ga chur ris)."
 
 #: ../../txts/tips/editor.tip:18
 msgid ""
 "Holding down ALT switches the second alternative tool on (if it exists)."
 msgstr ""
+"Ma chumas tu ALT sìos, nì seo suids dhan inneal dàrnach eile (ma tha seo "
+"ann)."
 
 #: ../../txts/tips/editor.tip:22
 msgid ""
@@ -767,10 +832,12 @@ msgid ""
 "SPACE key behaves like in normal game. It switches if building spaces are "
 "shown on or off."
 msgstr ""
+"Nì an iuchair SPACE na nì e ann an geama àbhaisteach. Nochdaidh no "
+"falaichidh e na h-ionadan togail."
 
 #: ../../txts/tips/empire.tip:10
 msgid "Always build a forester’s house so you will not run out of logs."
-msgstr ""
+msgstr "Tog taigh planntair-coille an-còmhnaidh ach nach ruith na stuic ort."
 
 #: ../../txts/tips/general_game.tip:2
 msgid ""
@@ -790,10 +857,12 @@ msgid ""
 "Your territory can be expanded by building various military buildings – "
 "Sentry, Fortress, Barracks, etc."
 msgstr ""
+"'S urrainn dhut barrachd tìr a ghabhail ma thogas tu togalaichean an airm a "
+"leithid freiceadanan, dùin, taighean-feachd agus msaa."
 
 #: ../../txts/tips/general_game.tip:14
 msgid "Miners will work only if supplied with food."
-msgstr ""
+msgstr "Cha dèan na mèinnearan obair ach ma gheibh iad biadh."
 
 #: ../../txts/tips/general_game.tip:18
 msgid ""
@@ -808,18 +877,25 @@ msgid ""
 "Any further questions? Our FAQ, the wiki and of course our community forums "
 "can be found at www.widelands.org."
 msgstr ""
+"A bheil ceist sam bith eile agad? Thoir sùil air na CÀBHA, an uicidh is am "
+"bòrd-brath air www.widelands.org."
 
 #: ../../txts/tips/general_game.tip:26
 msgid ""
 "Use the priority buttons in building windows to adjust delivery of a "
 "specific ware."
 msgstr ""
+"Cleachd putanan a' phrìomhachais ann an uinneag togalaich gus gleus a chur "
+"air lìbhrigeadh bathair shònraichte."
 
 #: ../../txts/tips/general_game.tip:30
 msgid ""
 "Use the ‘configure economy’ menu to adjust the target quantity of wares. It "
 "can be accessed via the flag menu."
 msgstr ""
+"Cleachd an clàr-taice \"Rèitich an eaconamaidh\" gus gleus a chur air uiread "
+"nam bathar a tha thu ag amas. Gheibh thu inntrigeadh dha le clàr-taice na "
+"brataich."
 
 #: ../../txts/tips/general_game.tip:34
 msgid ""
@@ -827,12 +903,19 @@ msgid ""
 "messages window, then use ‘G’ for Go To, and the Delete key to archive "
 "messages."
 msgstr ""
+"Stiùirich na teachdaireachdan agad nas èifeachdaiche: brùth air \"N\" airson "
+"naidheachdan gus uinneag nan teachdaireachdan inntrigeadh is an uairsin "
+"cleachd \"G\" airson dol gu teachdaireachd is an iuchair DEL gus "
+"teachdaireachdan a chur dhan tasglann."
 
 #: ../../txts/tips/general_game.tip:38
 msgid ""
 "Use the ‘,’ (comma) and ‘.’ (period) keys to go back and forth between "
 "recently visited places in the world."
 msgstr ""
+"Cleachd na h-iuchraichean \",\" (cromag) is \".\" (puing) gus leum a "
+"ghearradh eadar na h-ionadan air an t-saoghail air an do thadhail thu o "
+"chionn ghoirid."
 
 #: ../../txts/tips/general_game.tip:42
 msgid ""
@@ -846,12 +929,16 @@ msgid ""
 "Pressing and holding the ALT GR key lets you drag the window below the mouse "
 "pointer."
 msgstr ""
+"'S urrainn dhut an uinneag fo thomhaire na luchaige a shlaodadh 's tu a' "
+"brùthadh is a' cumail sìos an iuchair ALT GR."
 
 #: ../../txts/tips/general_game.tip:50
 msgid ""
 "Removing a road while holding Ctrl lets you remove all flags up to the first "
 "junction."
 msgstr ""
+"'S urrainn dhut gach bratach gun chiad ghobhal a thoirt air falbh 's tu a' "
+"cumail sìos CTRL fhad 's a bhios tu a' toirt rathad air falbh."
 
 #: ../../txts/tips/general_game.tip:54
 msgid ""
@@ -889,17 +976,24 @@ msgid ""
 "You can use the ’Page up’ and ‘Page down’ keys to adjust your desired speed "
 "– the real speed is then democratically set."
 msgstr ""
+"'S urrainn dhut na h-iuchraichean \"Page up\" is \"Page down\" a chleachdadh "
+"gus gleus a chur air luaths a gheama  – thèid an luaths da-rìribh a "
+"shuidheachadh gu deamocratach an uairsin."
 
 #: ../../txts/tips/multiplayer.tip:6
 msgid ""
 "You can use ‘/me’ at the beginning of a chatmessage: ‘/me is tired’ will be "
 "printed as ‘-> Nickname is tired’."
 msgstr ""
+"'S urrainn dhut /me a chleachdadh aig toiseach teachdaireachd a' chabadaich. "
+"Thèid \"/me is tired\" a shealltainn mar \"-> far-ainm is tired\"."
 
 #: ../../txts/tips/multiplayer.tip:10
 msgid ""
 "Use ‘@name’ at the beginning of a chat message to send it to only one player."
 msgstr ""
+"Cleachd \"@name\" aig toiseach teachdaireachd na cabadaich gus a cur gu aon "
+"chluicheadair a-mhàin."
 
 #: ../../txts/tips/singleplayer.tip:2
 msgid ""

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2014-03-05 19:55+0000\n"
+"POT-Creation-Date: 2014-03-06 21:20+0000\n"
 "PO-Revision-Date: 2014-03-01 14:13+0000\n"
 "Last-Translator: daniel reis <danielreis40@yahoo.com.br>\n"
 "Language-Team: Brazilian Portuguese <pt_BR@li.org>\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Launchpad-Export-Date: 2014-03-06 05:32+0000\n"
+"X-Launchpad-Export-Date: 2014-03-07 05:36+0000\n"
 "X-Generator: Launchpad (build 16948)\n"
 
 #: ../../global/militarysites/barracks.empire/conf:8
@@ -2331,14 +2331,12 @@ msgstr ""
 
 #: ../../tribes/barbarians/conf:132
 #: ../../tribes/barbarians/fishers_hut/help.lua:44
-#: ../../tribes/barbarians/fishers_hut/help.lua:49
 #: ../../tribes/barbarians/metalworks/help.lua:31
 msgid "Fisher"
 msgstr "Pescador"
 
 #: ../../tribes/barbarians/conf:133
 #: ../../tribes/barbarians/gamekeepers_hut/help.lua:38
-#: ../../tribes/barbarians/gamekeepers_hut/help.lua:43
 msgid "Gamekeeper"
 msgstr "Guarda de caça"
 
@@ -2354,7 +2352,6 @@ msgstr "Ferraria de Elmos"
 
 #: ../../tribes/barbarians/conf:136
 #: ../../tribes/barbarians/hunters_hut/help.lua:46
-#: ../../tribes/barbarians/hunters_hut/help.lua:51
 #: ../../tribes/barbarians/metalworks/help.lua:36
 msgid "Hunter"
 msgstr "Caçador"
@@ -2393,7 +2390,6 @@ msgstr "Fundidor"
 #: ../../tribes/barbarians/conf:144
 #: ../../tribes/barbarians/metalworks/help.lua:39
 #: ../../tribes/barbarians/quarry/help.lua:41
-#: ../../tribes/barbarians/quarry/help.lua:46
 msgid "Stonemason"
 msgstr "Pedreiro"
 
@@ -2828,9 +2824,7 @@ msgid "Small plot"
 msgstr ""
 
 #: ../../tribes/barbarians/fishers_hut/help.lua:49
-#: ../../tribes/barbarians/gamekeepers_hut/help.lua:43
-#: ../../tribes/barbarians/hunters_hut/help.lua:51
-msgid "The %1$s pauses %2$s before going to work again."
+msgid "The fisher pauses 18s before going to work again."
 msgstr ""
 
 #: ../../tribes/barbarians/fishing_rod/conf:1
@@ -2864,6 +2858,10 @@ msgstr "Canção de ninar bárbara"
 #: ../../tribes/barbarians/gamekeepers_hut/help.lua:16
 msgid "Releases animals into the wild to steady the meat production."
 msgstr "Libera animais na natureza para estabilizar a produção de carne."
+
+#: ../../tribes/barbarians/gamekeepers_hut/help.lua:43
+msgid "The gamekeeper pauses 52.5s before going to work again."
+msgstr ""
 
 #: ../../tribes/barbarians/geologist/conf:1
 msgid "Discovers resources for mining."
@@ -2966,6 +2964,10 @@ msgstr "Caça animais para produzir carne."
 
 #: ../../tribes/barbarians/hunters_hut/help.lua:23
 msgid "The Hunter’s Hut needs animals in the vicinity to hunt."
+msgstr ""
+
+#: ../../tribes/barbarians/hunters_hut/help.lua:51
+msgid "The hunter pauses 35s before going to work again."
 msgstr ""
 
 #: ../../tribes/barbarians/hunting_spear/conf:1
@@ -3216,7 +3218,7 @@ msgid "The Quarry needs stones in the vicinity."
 msgstr ""
 
 #: ../../tribes/barbarians/quarry/help.lua:46
-msgid "The %s pauses %s before going to work again."
+msgid "The stonemason pauses 25s before going to work again."
 msgstr ""
 
 #: ../../tribes/barbarians/ranger/conf:1

@@ -2,289 +2,289 @@
 # Copyright (c) 2013 Rosetta Contributors and Canonical Ltd 2013
 # This file is distributed under the same license as the widelands package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2013.
-# GunChleoc <fios@foramnagaidhlig.net>, 2013.
+# GunChleoc <fios@foramnagaidhlig.net>, 2013, 2014.
 msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2014-03-05 19:55+0000\n"
-"PO-Revision-Date: 2013-10-22 15:32+0000\n"
+"POT-Creation-Date: 2014-03-06 21:20+0000\n"
+"PO-Revision-Date: 2014-03-06 11:08+0000\n"
 "Last-Translator: GunChleoc <Unknown>\n"
 "Language-Team: Fòram na Gàidhlig http://www.foramnagaidhlig.net\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-03-06 05:30+0000\n"
+"X-Launchpad-Export-Date: 2014-03-07 05:34+0000\n"
 "X-Generator: Launchpad (build 16948)\n"
 "Language: gd\n"
 
 #: ../../global/militarysites/barracks.empire/conf:8
 msgid "Your Barracks discovered an aggressor."
-msgstr ""
+msgstr "Mhothaich na taighean-feachd agad ionnsaighear."
 
 #: ../../global/militarysites/barracks.empire/conf:9
 msgid "Your Barracks is under attack."
-msgstr ""
+msgstr "Tha na taighean-feachd agad fo ionnsaigh."
 
 #: ../../global/militarysites/barracks.empire/conf:10
 msgid "The enemy defeated your soldiers at the Barracks"
-msgstr ""
+msgstr "Chuir an nàmhaid ruaig air na saighdearan agad aig taighean-feachd."
 
 #: ../../global/militarysites/barracks.empire/conf:11
 msgid "Your soldiers defeated the enemy at the Barracks"
-msgstr ""
+msgstr "Chuir na saighdearan agad ruaig air an nàmhaid aig taighean-feachd."
 
 #: ../../global/militarysites/barrier.barbarians/conf:8
 #: ../../global/militarysites/barrier.empire/conf:8
 msgid "Your Barrier discovered an aggressor."
-msgstr ""
+msgstr "Mhothaich an taigh-faire agad ionnsaighear."
 
 #: ../../global/militarysites/barrier.barbarians/conf:9
 #: ../../global/militarysites/barrier.empire/conf:9
 msgid "Your Barrier is under attack."
-msgstr ""
+msgstr "Tha an taigh-faire agad fo ionnsaigh."
 
 #: ../../global/militarysites/barrier.barbarians/conf:10
 #: ../../global/militarysites/barrier.empire/conf:10
 msgid "The enemy defeated your soldiers at the Barrier"
-msgstr ""
+msgstr "Chuir an nàmhaid ruaig air na saighdearan agad aig taigh-faire."
 
 #: ../../global/militarysites/barrier.barbarians/conf:11
 #: ../../global/militarysites/barrier.empire/conf:11
 msgid "Your soldiers defeated the enemy at the Barrier"
-msgstr ""
+msgstr "Chuir na saighdearan agad ruaig air an nàmhaid aig taigh-faire."
 
 #: ../../global/militarysites/castle.atlanteans/conf:8
 #: ../../global/militarysites/castle.empire/conf:8
 #: ../../tribes/atlanteans/castle/conf:7
 msgid "Your Castle discovered an aggressor."
-msgstr ""
+msgstr "Mhothaich an caisteal agad ionnsaighear."
 
 #: ../../global/militarysites/castle.atlanteans/conf:9
 #: ../../global/militarysites/castle.empire/conf:9
 #: ../../tribes/atlanteans/castle/conf:8
 msgid "Your Castle is under attack."
-msgstr ""
+msgstr "Tha an caisteal agad fo ionnsaigh."
 
 #: ../../global/militarysites/castle.atlanteans/conf:10
 #: ../../global/militarysites/castle.empire/conf:10
 #: ../../tribes/atlanteans/castle/conf:9
 msgid "The enemy defeated your soldiers at the Castle"
-msgstr ""
+msgstr "Chuir an nàmhaid ruaig air na saighdearan agad aig caisteal."
 
 #: ../../global/militarysites/castle.atlanteans/conf:11
 #: ../../global/militarysites/castle.empire/conf:11
 #: ../../tribes/atlanteans/castle/conf:10
 msgid "Your soldiers defeated the enemy at the Castle"
-msgstr ""
+msgstr "Chuir na saighdearan agad ruaig air an nàmhaid aig caisteal."
 
 #: ../../global/militarysites/citadel.barbarians/conf:8
 msgid "Your Citadel discovered an aggressor."
-msgstr ""
+msgstr "Mhothaich a' chathair agad ionnsaighear."
 
 #: ../../global/militarysites/citadel.barbarians/conf:9
 msgid "Your Citadel is under attack."
-msgstr ""
+msgstr "Tha a' chathair agad fo ionnsaigh."
 
 #: ../../global/militarysites/citadel.barbarians/conf:10
 msgid "The enemy defeated your soldiers at the Citadel"
-msgstr ""
+msgstr "Chuir an nàmhaid ruaig air na saighdearan agad aig cathair."
 
 #: ../../global/militarysites/citadel.barbarians/conf:11
 msgid "Your soldiers defeated the enemy at the Citadel"
-msgstr ""
+msgstr "Chuir na saighdearan agad ruaig air an nàmhaid aig cathair."
 
 #: ../../global/militarysites/donjon.barbarians/conf:9
 msgid "Your Donjon discovered an aggressor."
-msgstr ""
+msgstr "Mhothaich an tùr-faire agad ionnsaighear."
 
 #: ../../global/militarysites/donjon.barbarians/conf:10
 msgid "Your Donjon is under attack."
-msgstr ""
+msgstr "Tha an tùr-faire agad fo ionnsaigh."
 
 #: ../../global/militarysites/donjon.barbarians/conf:11
 msgid "The enemy defeated your soldiers at the Donjon"
-msgstr ""
+msgstr "Chuir an nàmhaid ruaig air na saighdearan agad aig tùr-faire."
 
 #: ../../global/militarysites/donjon.barbarians/conf:12
 msgid "Your soldiers defeated the enemy at the Donjon"
-msgstr ""
+msgstr "Chuir na saighdearan agad ruaig air an nàmhaid aig tùr-faire."
 
 #: ../../global/militarysites/fortress.barbarians/conf:8
 #: ../../global/militarysites/fortress.empire/conf:8
 msgid "Your Fortress discovered an aggressor."
-msgstr ""
+msgstr "Mhothaich an dùn agad ionnsaighear."
 
 #: ../../global/militarysites/fortress.barbarians/conf:9
 #: ../../global/militarysites/fortress.empire/conf:9
 msgid "Your Fortress is under attack."
-msgstr ""
+msgstr "Tha an dùn agad fo ionnsaigh."
 
 #: ../../global/militarysites/fortress.barbarians/conf:10
 #: ../../global/militarysites/fortress.empire/conf:10
 msgid "The enemy defeated your soldiers at the Fortress"
-msgstr ""
+msgstr "Chuir an nàmhaid ruaig air na saighdearan agad aig dùn."
 
 #: ../../global/militarysites/fortress.barbarians/conf:11
 #: ../../global/militarysites/fortress.empire/conf:11
 msgid "Your soldiers defeated the enemy at the Fortress"
-msgstr ""
+msgstr "Chuir na saighdearan agad ruaig air an nàmhaid aig dùn."
 
 #: ../../global/militarysites/guardhall.atlanteans/conf:8
 #: ../../tribes/atlanteans/guardhall/conf:7
 msgid "Your Guardhall discovered an aggressor."
-msgstr ""
+msgstr "Mhothaich an talla-faire agad ionnsaighear."
 
 #: ../../global/militarysites/guardhall.atlanteans/conf:9
 #: ../../tribes/atlanteans/guardhall/conf:8
 msgid "Your Guardhall is under attack."
-msgstr ""
+msgstr "Tha an talla-faire agad fo ionnsaigh."
 
 #: ../../global/militarysites/guardhall.atlanteans/conf:10
 #: ../../tribes/atlanteans/guardhall/conf:9
 msgid "The enemy defeated your soldiers at the Guardhall"
-msgstr ""
+msgstr "Chuir an nàmhaid ruaig air na saighdearan agad aig talla-faire."
 
 #: ../../global/militarysites/guardhall.atlanteans/conf:11
 #: ../../tribes/atlanteans/guardhall/conf:10
 msgid "Your soldiers defeated the enemy at the Guardhall"
-msgstr ""
+msgstr "Chuir na saighdearan agad ruaig air an nàmhaid aig talla-faire."
 
 #: ../../global/militarysites/guardhouse.atlanteans/conf:8
 #: ../../tribes/atlanteans/guardhouse/conf:7
 msgid "Your Guardhouse discovered an aggressor."
-msgstr ""
+msgstr "Mhothaich am bothan-faire agad ionnsaighear."
 
 #: ../../global/militarysites/guardhouse.atlanteans/conf:9
 #: ../../tribes/atlanteans/guardhouse/conf:8
 msgid "Your Guardhouse is under attack."
-msgstr ""
+msgstr "Tha am bothan-faire agad fo ionnsaigh."
 
 #: ../../global/militarysites/guardhouse.atlanteans/conf:10
 #: ../../tribes/atlanteans/guardhouse/conf:9
 msgid "The enemy defeated your soldiers at the Guardhouse"
-msgstr ""
+msgstr "Chuir an nàmhaid ruaig air na saighdearan agad aig bothan-faire."
 
 #: ../../global/militarysites/guardhouse.atlanteans/conf:11
 #: ../../tribes/atlanteans/guardhouse/conf:10
 msgid "Your soldiers defeated the enemy at the Guardhouse"
-msgstr ""
+msgstr "Chuir na saighdearan agad ruaig air an nàmhaid aig bothan-faire."
 
 #: ../../global/militarysites/high_tower.atlanteans/conf:9
 #: ../../tribes/atlanteans/high_tower/conf:10
 msgid "Your High Tower discovered an aggressor."
-msgstr ""
+msgstr "Mhothaich an tùr àrd agad ionnsaighear."
 
 #: ../../global/militarysites/high_tower.atlanteans/conf:10
 #: ../../tribes/atlanteans/high_tower/conf:11
 msgid "Your High Tower is under attack."
-msgstr ""
+msgstr "Tha an tùr àrd agad fo ionnsaigh."
 
 #: ../../global/militarysites/high_tower.atlanteans/conf:11
 #: ../../tribes/atlanteans/high_tower/conf:12
 msgid "The enemy defeated your soldiers at the High Tower"
-msgstr ""
+msgstr "Chuir an nàmhaid ruaig air na saighdearan agad aig tùr àrd."
 
 #: ../../global/militarysites/high_tower.atlanteans/conf:12
 #: ../../tribes/atlanteans/high_tower/conf:13
 msgid "Your soldiers defeated the enemy at the High Tower"
-msgstr ""
+msgstr "Chuir na saighdearan agad ruaig air an nàmhaid aig tùr àrd."
 
 #: ../../global/militarysites/outpost.empire/conf:8
 msgid "Your Outpost discovered an aggressor."
-msgstr ""
+msgstr "Mhothaich an gearastan agad ionnsaighear."
 
 #: ../../global/militarysites/outpost.empire/conf:9
 msgid "Your Outpost is under attack."
-msgstr ""
+msgstr "Tha an gearastan agad fo ionnsaigh."
 
 #: ../../global/militarysites/outpost.empire/conf:10
 msgid "The enemy defeated your soldiers at the Outpost"
-msgstr ""
+msgstr "Chuir an nàmhaid ruaig air na saighdearan agad aig gearastan."
 
 #: ../../global/militarysites/outpost.empire/conf:11
 msgid "Your soldiers defeated the enemy at the Outpost"
-msgstr ""
+msgstr "Chuir na saighdearan agad ruaig air an nàmhaid aig gearastan."
 
 #: ../../global/militarysites/sentry.barbarians/conf:8
 #: ../../global/militarysites/sentry.empire/conf:8
 msgid "Your Sentry discovered an aggressor."
-msgstr ""
+msgstr "Mhothaich am freiceadan agad ionnsaighear."
 
 #: ../../global/militarysites/sentry.barbarians/conf:9
 #: ../../global/militarysites/sentry.empire/conf:9
 msgid "Your Sentry is under attack."
-msgstr ""
+msgstr "Tha am freiceadan agad fo ionnsaigh."
 
 #: ../../global/militarysites/sentry.barbarians/conf:10
 #: ../../global/militarysites/sentry.empire/conf:10
 msgid "The enemy defeated your soldiers at the Sentry"
-msgstr ""
+msgstr "Chuir an nàmhaid ruaig air na saighdearan agad aig freiceadan."
 
 #: ../../global/militarysites/sentry.barbarians/conf:11
 #: ../../global/militarysites/sentry.empire/conf:11
 msgid "Your soldiers defeated the enemy at the Sentry"
-msgstr ""
+msgstr "Chuir na saighdearan agad ruaig air an nàmhaid aig freiceadan."
 
 #: ../../global/militarysites/small_tower.atlanteans/conf:9
 #: ../../tribes/atlanteans/small_tower/conf:8
 msgid "Your Small Tower discovered an aggressor."
-msgstr ""
+msgstr "Mhothaich an tùr beag agad ionnsaighear."
 
 #: ../../global/militarysites/small_tower.atlanteans/conf:10
 #: ../../tribes/atlanteans/small_tower/conf:9
 msgid "Your Small Tower is under attack."
-msgstr ""
+msgstr "Tha an tùr beag agad fo ionnsaigh."
 
 #: ../../global/militarysites/small_tower.atlanteans/conf:11
 #: ../../tribes/atlanteans/small_tower/conf:10
 msgid "The enemy defeated your soldiers at the Small Tower"
-msgstr ""
+msgstr "Chuir an nàmhaid ruaig air na saighdearan agad aig tùr beag."
 
 #: ../../global/militarysites/small_tower.atlanteans/conf:12
 #: ../../tribes/atlanteans/small_tower/conf:11
 msgid "Your soldiers defeated the enemy at the Small Tower"
-msgstr ""
+msgstr "Chuir na saighdearan agad ruaig air an nàmhaid aig tùr beag."
 
 #: ../../global/militarysites/stronghold.barbarians/conf:8
 msgid "Your Stronghold discovered an aggressor."
-msgstr ""
+msgstr "Mhothaich an daingean agad ionnsaighear."
 
 #: ../../global/militarysites/stronghold.barbarians/conf:9
 msgid "Your Stronghold is under attack."
-msgstr ""
+msgstr "Tha an daingean agad fo ionnsaigh."
 
 #: ../../global/militarysites/stronghold.barbarians/conf:10
 msgid "The enemy defeated your soldiers at the Stronghold"
-msgstr ""
+msgstr "Chuir an nàmhaid ruaig air na saighdearan agad aig daingean."
 
 #: ../../global/militarysites/stronghold.barbarians/conf:11
 msgid "Your soldiers defeated the enemy at the Stronghold"
-msgstr ""
+msgstr "Chuir na saighdearan agad ruaig air an nàmhaid aig daingean."
 
 #: ../../global/militarysites/tower.atlanteans/conf:9
 #: ../../global/militarysites/tower.empire/conf:9
 #: ../../tribes/atlanteans/tower/conf:9
 msgid "Your Tower discovered an aggressor."
-msgstr ""
+msgstr "Mhothaich an tùr agad ionnsaighear."
 
 #: ../../global/militarysites/tower.atlanteans/conf:10
 #: ../../global/militarysites/tower.empire/conf:10
 #: ../../tribes/atlanteans/tower/conf:10
 msgid "Your Tower is under attack."
-msgstr ""
+msgstr "Tha an tùr agad fo ionnsaigh."
 
 #: ../../global/militarysites/tower.atlanteans/conf:11
 #: ../../global/militarysites/tower.empire/conf:11
 #: ../../tribes/atlanteans/tower/conf:11
 msgid "The enemy defeated your soldiers at the Tower"
-msgstr ""
+msgstr "Chuir an nàmhaid ruaig air na saighdearan agad aig tùr."
 
 #: ../../global/militarysites/tower.atlanteans/conf:12
 #: ../../global/militarysites/tower.empire/conf:12
 #: ../../tribes/atlanteans/tower/conf:12
 msgid "Your soldiers defeated the enemy at the Tower"
-msgstr ""
+msgstr "Chuir na saighdearan agad ruaig air an nàmhaid aig tùr."
 
 #: ../../tribes/atlanteans/advanced_shield/conf:1
 msgid ""
@@ -292,10 +292,14 @@ msgid ""
 "are produced in the armor smithy and used in the labyrinth – together with "
 "food – to train soldiers from Defense level 1 to level 2."
 msgstr ""
+"Cleachdaidh na saighdearan as fhearr aig na h-Atlantaich na sgiathan "
+"adhartach seo. Saothraichidh tu ann an ceàrdach arm iad is thèid an "
+"cleachdadh sa chuartan – le biadh – gus dìon nan saighdearan a thrèanadh o "
+"leibheil 1 gu leibheil 2."
 
 #: ../../tribes/atlanteans/armoursmith/conf:1
 msgid "Produces armor for the soldiers."
-msgstr ""
+msgstr "Nì e armachd airson nan saighdearan."
 
 #: ../../tribes/atlanteans/armoursmithy/conf:28
 msgid "Produce steel shield"
@@ -359,6 +363,8 @@ msgid ""
 "The bread paddle is the tool of the baker, each baker needs one. It is "
 "produced by the toolsmith."
 msgstr ""
+"Is acainn an fhuineadair a th' anns a' chrann-arain is bith feum aig gach "
+"fuineadair air fear aige fhèin. Thèid a shaothrachadh le gobha acainnean."
 
 #: ../../tribes/atlanteans/blackroot/conf:1
 msgid ""
@@ -366,6 +372,9 @@ msgid ""
 "processed in mills. The Atlanteans like their strong taste and use their "
 "flour for making bread."
 msgstr ""
+"Saothraichidh tu freumhagan ann an tuathanasan fhreumhagan is bheir thu dhan "
+"mhuileann iad an uairsin. Is toil leis na h-Atlantaich am blas làidir is "
+"cleachdaidh iad am min gus aran a dhèanamh."
 
 #: ../../tribes/atlanteans/blackroot_farm/conf:22
 msgid "Plant blackroot"
@@ -401,10 +410,12 @@ msgstr ""
 #: ../../tribes/atlanteans/bucket/conf:1
 msgid "Big buckets for the fish breeder – produced by the toolsmith."
 msgstr ""
+"Peilichean mòra airson an tàrmachair iasg a thèid an saothrachadh leis a' "
+"ghobha acainnean."
 
 #: ../../tribes/atlanteans/builder/conf:1
 msgid "Works at construction sites to raise new buildings."
-msgstr ""
+msgstr "Obraichidh e aig làraichean-thogail gus togalach ur a thogail."
 
 #: ../../tribes/atlanteans/burner/conf:1
 msgid "Burns coal."
@@ -416,7 +427,7 @@ msgstr "Giùlainidh e rudan air na rathaidean agad."
 
 #: ../../tribes/atlanteans/castle/conf:6
 msgid "Your soldiers have occupied your Castle"
-msgstr ""
+msgstr "Ghabh na saighdearan agad còmhnaidh sa chaisteal agad."
 
 #: ../../tribes/atlanteans/coal/conf:1
 msgid ""
@@ -424,6 +435,9 @@ msgid ""
 "fed with coal. This coal is mined in coal mines or produced out of logs by a "
 "charcoal burner."
 msgstr ""
+"Thèid teintean nan Atlantach ann an ceàrdaichean leaghadair, armachd is arm "
+"a bhiadhadh le gual. Gheibh thu gual à mèinn guail no nì thu de dh'fhiodh e "
+"ann an sloc gual-fhiodha."
 
 #: ../../tribes/atlanteans/conf:4
 msgid "The Widelands Development Team"
@@ -446,23 +460,23 @@ msgstr "Luaithre"
 
 #: ../../tribes/atlanteans/conf:34
 msgid "Blackroot Field"
-msgstr ""
+msgstr "Achadh fhreumhagan"
 
 #: ../../tribes/atlanteans/conf:35
 msgid "Blackroot Field (harvested)"
-msgstr ""
+msgstr "Achadh fhreumhagan (air a bhuain)"
 
 #: ../../tribes/atlanteans/conf:36
 msgid "Blackroot Field (medium)"
-msgstr ""
+msgstr "Achadh fhreumhagan (meadhanach)"
 
 #: ../../tribes/atlanteans/conf:37
 msgid "Blackroot Field (small)"
-msgstr ""
+msgstr "Achadh fhreumhagan (beag)"
 
 #: ../../tribes/atlanteans/conf:38
 msgid "Blackroot Field (tiny)"
-msgstr ""
+msgstr "Achadh fhreumhagan (beag bìodach)"
 
 #: ../../tribes/atlanteans/conf:39
 msgid "Cornfield"
@@ -470,67 +484,67 @@ msgstr "Achadh coirce"
 
 #: ../../tribes/atlanteans/conf:40
 msgid "Cornfield (harvested)"
-msgstr ""
+msgstr "Achadh coirce (air a bhuain)"
 
 #: ../../tribes/atlanteans/conf:41
 msgid "Cornfield (medium)"
-msgstr ""
+msgstr "Achadh coirce (meadhanach)"
 
 #: ../../tribes/atlanteans/conf:42
 msgid "Cornfield (small)"
-msgstr ""
+msgstr "Achadh coirce (beag)"
 
 #: ../../tribes/atlanteans/conf:43
 msgid "Cornfield (tiny)"
-msgstr ""
+msgstr "Achadh coirce (beag bìodach)"
 
 #: ../../tribes/atlanteans/conf:44
 msgid "Destroyed Building"
-msgstr ""
+msgstr "Togalach air a mhilleadh"
 
 #: ../../tribes/atlanteans/conf:45
 msgid "Resource indicator: Coal (little)"
-msgstr ""
+msgstr "Taisbeanair-stòrasan – beagan guail"
 
 #: ../../tribes/atlanteans/conf:46
 msgid "Resource indicator: Coal (much)"
-msgstr ""
+msgstr "Taisbeanair-stòrasan – mòran guail"
 
 #: ../../tribes/atlanteans/conf:47
 msgid "Resource indicator: Gold (little)"
-msgstr ""
+msgstr "Taisbeanair-stòrasan – beagan òir"
 
 #: ../../tribes/atlanteans/conf:48
 msgid "Resource indicator: Gold (much)"
-msgstr ""
+msgstr "Taisbeanair-stòrasan – mòran òir"
 
 #: ../../tribes/atlanteans/conf:49
 msgid "Resource indicator: Granite (little)"
-msgstr ""
+msgstr "Taisbeanair-stòrasan – beagan graineil"
 
 #: ../../tribes/atlanteans/conf:50
 msgid "Resource indicator: Granite (much)"
-msgstr ""
+msgstr "Taisbeanair-stòrasan – mòran graineil"
 
 #: ../../tribes/atlanteans/conf:51
 msgid "Resource indicator: Iron (little)"
-msgstr ""
+msgstr "Taisbeanair-stòrasan – beagan iarainn"
 
 #: ../../tribes/atlanteans/conf:52
 msgid "Resource indicator: Iron (much)"
-msgstr ""
+msgstr "Taisbeanair-stòrasan – mòran iarainn"
 
 #: ../../tribes/atlanteans/conf:53
 msgid "Resource indicator: No resource"
-msgstr ""
+msgstr "Taisbeanair-stòrasan – gun stòras"
 
 #: ../../tribes/atlanteans/conf:54
 msgid "Resource indicator: Water"
-msgstr ""
+msgstr "Taisbeanair-stòrasan – uisge"
 
 #: ../../tribes/atlanteans/conf:55
 msgid "Ship Construction Site"
-msgstr ""
+msgstr "Làrach-togail luinge"
 
 #: ../../tribes/atlanteans/conf:58
 msgid "Advanced Shield"
@@ -630,7 +644,7 @@ msgstr "Iarann"
 
 #: ../../tribes/atlanteans/conf:82
 msgid "Light Trident"
-msgstr ""
+msgstr "Muirgheadh aotrom"
 
 #: ../../tribes/atlanteans/conf:83
 msgid "Long Trident"
@@ -654,7 +668,7 @@ msgstr "Piocaid"
 
 #: ../../tribes/atlanteans/conf:88
 msgid "Planks"
-msgstr "Bùird"
+msgstr "Maide"
 
 #: ../../tribes/atlanteans/conf:89
 msgid "Saw"
@@ -670,11 +684,11 @@ msgstr "Sluasaid"
 
 #: ../../tribes/atlanteans/conf:92
 msgid "Smoked Fish"
-msgstr ""
+msgstr "Iasg-rèiste"
 
 #: ../../tribes/atlanteans/conf:93
 msgid "Smoked Meat"
-msgstr ""
+msgstr "Feòil-rèiste"
 
 #: ../../tribes/atlanteans/conf:94
 msgid "Spidercloth"
@@ -702,7 +716,7 @@ msgstr "Lèine"
 
 #: ../../tribes/atlanteans/conf:100
 msgid "Log"
-msgstr ""
+msgstr "Fiodh"
 
 #: ../../tribes/atlanteans/conf:101
 msgid "Water"
@@ -722,7 +736,7 @@ msgstr "Saighdear"
 
 #: ../../tribes/atlanteans/conf:111
 msgid "Armorsmith"
-msgstr ""
+msgstr "Gobha armachd"
 
 #: ../../tribes/atlanteans/conf:112
 msgid "Baker"
@@ -730,7 +744,7 @@ msgstr "Fuineadair"
 
 #: ../../tribes/atlanteans/conf:113
 msgid "Blackroot Farmer"
-msgstr ""
+msgstr "Tuathanach fhreumhagan"
 
 #: ../../tribes/atlanteans/conf:114
 msgid "Builder"
@@ -790,7 +804,7 @@ msgstr "Toitear"
 
 #: ../../tribes/atlanteans/conf:128
 msgid "Spider Breeder"
-msgstr ""
+msgstr "Tàrmachair dhamhan"
 
 #: ../../tribes/atlanteans/conf:129
 msgid "Stonecutter"
@@ -899,11 +913,11 @@ msgstr "Coireall"
 
 #: ../../tribes/atlanteans/conf:169
 msgid "Woodcutter’s House"
-msgstr ""
+msgstr "Taigh buaineadair-fhiodha"
 
 #: ../../tribes/atlanteans/conf:170
 msgid "Forester’s House"
-msgstr ""
+msgstr "Taigh planntair-choille"
 
 #: ../../tribes/atlanteans/conf:171
 msgid "Goldweaver"
@@ -911,15 +925,15 @@ msgstr "Figheadair-òir"
 
 #: ../../tribes/atlanteans/conf:172
 msgid "Fisher’s House"
-msgstr ""
+msgstr "Taigh-iasgair"
 
 #: ../../tribes/atlanteans/conf:173
 msgid "Fish Breeder’s House"
-msgstr ""
+msgstr "Taigh tàrmachair iasg"
 
 #: ../../tribes/atlanteans/conf:174
 msgid "Hunter’s House"
-msgstr ""
+msgstr "Taigh-sealgair"
 
 #: ../../tribes/atlanteans/conf:175
 msgid "Well"
@@ -927,7 +941,7 @@ msgstr "Tobar"
 
 #: ../../tribes/atlanteans/conf:176
 msgid "Scout’s House"
-msgstr ""
+msgstr "Taigh-rabhadair"
 
 #: ../../tribes/atlanteans/conf:177
 msgid "Sawmill"
@@ -951,7 +965,7 @@ msgstr "Taigh-fuine"
 
 #: ../../tribes/atlanteans/conf:182
 msgid "Charcoal Burner’s House"
-msgstr ""
+msgstr "Sloc gual-fhiodha"
 
 #: ../../tribes/atlanteans/conf:183
 msgid "Smelting Works"
@@ -967,7 +981,7 @@ msgstr "Ceàrdach arm"
 
 #: ../../tribes/atlanteans/conf:186
 msgid "Armor Smithy"
-msgstr ""
+msgstr "Ceàrdach armachd"
 
 #: ../../tribes/atlanteans/conf:187
 msgid "Horse Farm"
@@ -975,7 +989,7 @@ msgstr "Tuathanas each"
 
 #: ../../tribes/atlanteans/conf:188
 msgid "Spider Farm"
-msgstr ""
+msgstr "Tuathanas dhamhan"
 
 #: ../../tribes/atlanteans/conf:189
 msgid "Weaving-Mill"
@@ -1035,6 +1049,9 @@ msgid ""
 "baker needs for a good bread. Also horse and spider farms need to be "
 "provided with corn."
 msgstr ""
+"Tha gach fuineadair nan Atlantach feumach air a' min-coirce a nì thu às a' "
+"choirce seo ann am muileann ach an dèan e aran math. Feumaidh na tuathanasan "
+"each is dhamhan coirce cuideachd."
 
 #: ../../tribes/atlanteans/cornflour/conf:1
 msgid ""
@@ -1070,6 +1087,9 @@ msgid ""
 "weapon smithy. It is used in a dungeon – together with food – to train "
 "soldiers from attack level 2 to level 3."
 msgstr ""
+"'S e aon dhe na muirgheadhan as fhearr a nì ceàrdach arm nan Atlantach a th' "
+"anns a mhuirgheadh dhùbailte. Thèid a cleachdadh san toll-dubh – le biadh – "
+"gus ionnsaigh nan saighdearan a thrèanadh o leibheil 2 gu leibheil 3."
 
 #: ../../tribes/atlanteans/dungeon/conf:39
 #: ../../tribes/atlanteans/labyrinth/conf:45
@@ -1151,6 +1171,9 @@ msgid ""
 "smoked in a smokery before being delivered to mines, training sites and "
 "scouts."
 msgstr ""
+"'S e aon dhe na stòrasan bìdh as motha aig na h-Atlantaich a th' anns na h-"
+"èisg. Feumaidh tu an toiteadh ann an taigh-toitidh mus lìbhrig thu dha na "
+"mèinnean, làraichean-trèanaidh is rabhadairean iad."
 
 #: ../../tribes/atlanteans/fish_breeder/conf:1
 msgid "Breeds fish."
@@ -1179,6 +1202,9 @@ msgid ""
 "in the smelting works. Gold is used by the armor smithy, the weapon smithy "
 "and the goldweaver."
 msgstr ""
+"'S e stuth luachmhor a th' anns an òr. Gheibh thu à clach-òir e ann an "
+"ceàrdach leaghadair. Cleachdaidh an ceàrdach armachd, an ceàrdach arm is am "
+"figheadair-òir e."
 
 #: ../../tribes/atlanteans/golden_tabard/conf:1
 msgid ""
@@ -1186,11 +1212,16 @@ msgid ""
 "They are used in the labyrinth – together with food – to train soldiers from "
 "health level 0 to level 1."
 msgstr ""
+"Nì thu lèine òir de shnàth òir ann an taigh nam beart. Thèid a cleachdadh sa "
+"champa trèanaidh – le biadh – gus saighdearan a thrèanadh o slàinte leibheil "
+"0 gu slàinte leibheil 1."
 
 #: ../../tribes/atlanteans/goldore/conf:1
 msgid ""
 "Gold ore is mined in gold mines and processed to gold in smelting works."
 msgstr ""
+"Tochlaidh tu clachan-òir ann am mèinnean òir is nì thu òr dhiubh ann an "
+"ceàrdach leaghadair."
 
 #: ../../tribes/atlanteans/goldyarn/conf:1
 msgid ""
@@ -1202,11 +1233,11 @@ msgstr ""
 
 #: ../../tribes/atlanteans/guardhall/conf:6
 msgid "Your soldiers have occupied your Guardhall"
-msgstr ""
+msgstr "Ghabh na saighdearan agad còmhnaidh san talla-fhaire agad."
 
 #: ../../tribes/atlanteans/guardhouse/conf:6
 msgid "Your soldiers have occupied your Guardhouse"
-msgstr ""
+msgstr "Ghabh na saighdearan agad còmhnaidh sa bhothan-fhaire agad."
 
 #: ../../tribes/atlanteans/hammer/conf:1
 msgid ""
@@ -1214,6 +1245,9 @@ msgid ""
 "weaponsmiths and armorsmiths. Make sure you always got some in reserve! It "
 "is produced by the toolsmith."
 msgstr ""
+"'S e acainn riatanach a th' anns an òrd. Feumaidh gach clach-eòlaiche, "
+"togalaiche, gobha armachd is gobha arm fear. Dèan cinnteach gu bheil cuid "
+"air fhàgail dhut an-còmhnaidh! Nì an gobha acainnean iad."
 
 #: ../../tribes/atlanteans/heavy_double_trident/conf:1
 msgid ""
@@ -1222,22 +1256,30 @@ msgid ""
 "used in the dungeon – together with food – to train soldiers from attack "
 "level 3 to level 4."
 msgstr ""
+"Seo an t-arm as cunnartaiche aig arm nan Atlantach. Chan fhaod ach fìor-"
+"ghaisgich a cleachdadh. Saothraichidh tu ann an ceàrdach arm i is thèid a "
+"cleachdadh  san toll-dubh – le biadh – gus an ionnsaigh nan saighdearan a "
+"thrèanadh o leibheil 3 gu leibheil 4."
 
 #: ../../tribes/atlanteans/high_tower/conf:9
 msgid "Your soldiers have occupied your High Tower"
-msgstr ""
+msgstr "Ghabh na saighdearan agad còmhnaidh san tùr àrd agad."
 
 #: ../../tribes/atlanteans/hook_pole/conf:1
 msgid ""
 "This hook pole is used by the smoker to suspend all the meat and fish from "
 "the top of the smokery. It is created by the toolsmith."
 msgstr ""
+"Cleachdaidh an toitear an crann-greimiche seo gus feòil is èisg a chrochadh "
+"gu h-àrd san taigh-toitidh. Nì an gobha acainnean fear."
 
 #: ../../tribes/atlanteans/horse/conf:1
 msgid ""
 "Horses help to carry items at heavily used roads. They are reared in a horse "
 "farm."
 msgstr ""
+"Cuidichidh eich le giùlan nan nithean air rathaidean a tha 'gan cleachdadh "
+"gu tric. Togaidh tu ann an tuathanas each iad."
 
 #: ../../tribes/atlanteans/horsebreeder/conf:1
 msgid "Breeds the strong atlantean horses"
@@ -1259,12 +1301,16 @@ msgid ""
 "Iron is made out of iron ore in the smelting works. It is used in the "
 "toolsmithy, armor smithy and weapon smithy."
 msgstr ""
+"Gheibh thu iarainn o chlach-iarainn ann an ceàrdach leaghadair. Cleachdaidh "
+"tu ann an ceàrdach acainnean, ceàrdach armachd is ceàrdach arm e."
 
 #: ../../tribes/atlanteans/ironore/conf:1
 msgid ""
 "Iron ore is mined in iron mines. It is smelted in a smelting works to "
 "retrieve the iron."
 msgstr ""
+"Tochlaidh tu clach-iarainn ann am mèinnean iarainn. Bheir seo iarainn dhut "
+"ma leaghas tu i ann an ceàrdach leaghadair."
 
 #: ../../tribes/atlanteans/labyrinth/conf:46
 msgid "Upgrade soldier defense 0"
@@ -1292,13 +1338,15 @@ msgstr ""
 
 #: ../../tribes/atlanteans/labyrinth/conf:50
 msgid "Upgrade soldier health 0"
-msgstr ""
+msgstr "Ag àrdachadh slàinte saighdeir o 0"
 
 #: ../../tribes/atlanteans/labyrinth/conf:51
 msgid ""
 "Upgrade soldier health 0 (only for compatibility with old savegames "
 "(build13))"
 msgstr ""
+"Ag àrdachadh slàinte saighdeir o 0 (airson co-chòrdalachd ri seann "
+"gheamaichean air an sàbhaladh (build13) a-mhàin)"
 
 #: ../../tribes/atlanteans/labyrinth/conf:52
 msgid "Upgrade soldier evade 0"
@@ -1328,6 +1376,9 @@ msgid ""
 "it makes up the equipment of young soldiers. Light tridents are produced in "
 "the weapon smithy as are all other tridents."
 msgstr ""
+"Seo arm bunasach nan saighdearan Atlantach. Le lèine, 's e acainn bunasach "
+"nan saighdearan òga a th' ann. Saothraichidh tu muirgheadhan aotrom ann an "
+"ceàrdach arm mar a shaothraicheas tu gach muirgheadh eile."
 
 #: ../../tribes/atlanteans/long_trident/conf:1
 msgid ""
@@ -1335,6 +1386,10 @@ msgid ""
 "produced in the weapon smithy and used in the dungeon – together with food – "
 "to train soldiers from attack level 0 to level 1."
 msgstr ""
+"'S e a' chiad mhuirgheadh a thèid a chleachdadh gus saighdearan a thrèanadh "
+"th' anns a mhuirgheadh fhada. Saothraichidh tu ann an ceàrdach arm i is "
+"thèid a cleachdadh san toll-dubh – le biadh – gus ionnsaigh nan saighdearan "
+"a thrèanadh o leibheil 0 gu leibheil 1."
 
 #: ../../tribes/atlanteans/meat/conf:1
 msgid ""
@@ -1342,12 +1397,18 @@ msgid ""
 "taken by the hunter and has to be smoked in a smokery before being delivered "
 "to mines and training sites (dungeon and labyrinth)."
 msgstr ""
+"Cleachdaidh na h-Atlantaich feòil mar stòras bìdh. Gheibh thu i o shitheann "
+"a shealgas an sealgair is feumaidh tu a toiteadh ann an taigh-toitidh mus "
+"lìbhrig thu dha na mèinnean is làraichean-trèanaidh (tuill-dhubha is "
+"cuartanan) i."
 
 #: ../../tribes/atlanteans/milking_tongs/conf:1
 msgid ""
 "Milking tongs are used by the spider breeder to milk the spiders. They are "
 "produced by the toolsmith."
 msgstr ""
+"Cleachdaidh an tàrmachair dhamhan clobha bleoghainn gus na damhain a "
+"bhleoghainn. Saothraichidh an gobha acainnean fear."
 
 #: ../../tribes/atlanteans/mill/conf:26
 msgid "Produce cornflour"
@@ -1383,12 +1444,18 @@ msgid ""
 "produced out of logs by the sawmill. The weapon smithy and the shipyard also "
 "use planks to produce the different tridents and mighty ships."
 msgstr ""
+"'S e stuth togail cudromach do na h-Atlantaich a th' anns na maidean. Thèid "
+"an dèanamh de fhiodhan leis a' mhuileann shàbhaidh. Cleachdaidh an ceàrdach "
+"arm is an cala maidean cuideachd gus muirgheadhan is longan cumhachdach a "
+"thogail."
 
 #: ../../tribes/atlanteans/quartz/conf:1
 msgid ""
 "These transparent quartz’ are used to build some exclusive buildings. They "
 "are produced in a crystal mine."
 msgstr ""
+"Cleachdaidh tu an èiteag shoilleir seo gus togalaichean uasail a thogail. "
+"Saothraichidh tu ann am mèinn criostail i."
 
 #: ../../tribes/atlanteans/saw/conf:1
 msgid ""
@@ -1400,12 +1467,14 @@ msgstr ""
 
 #: ../../tribes/atlanteans/sawyer/conf:1
 msgid "Saws wood to produce planks."
-msgstr ""
+msgstr "Sàbhaidh e fiodh gus maidean a shaothrachadh."
 
 #: ../../tribes/atlanteans/scout/conf:1
 msgid ""
 "Scouts like Scotty the scout scouting unscouted areas in a scouty fashion."
 msgstr ""
+"An rabhadair a rabhas mun aineol mar a bheachdaicheas am beachdadair air "
+"nach eil fios no fàth air."
 
 #: ../../tribes/atlanteans/scripting/sc00_headquarters_medium.lua:10
 msgid "Headquarters medium"
@@ -1425,6 +1494,9 @@ msgid ""
 "weren’t built. You are at a disadvantage with this; consider restarting\n"
 "this map with a fair starting condition."
 msgstr ""
+"Cha robh rum gu leòr ann airson cuid dhe na togalaichean tòiseachaidh agad \n"
+"is cha deach an togail. Cuiridh seo èis ort; saoil an tòisich thu \n"
+"air a' mhapa seo a-rithist le cumhan tòiseachaidh cothromach?"
 
 #: ../../tribes/atlanteans/scythe/conf:1
 msgid ""
@@ -1448,10 +1520,13 @@ msgid ""
 "Shovels are needed for the proper handling of plants. Therefore the forester "
 "and the blackroot farmer are using them. They are produced by the toolsmith."
 msgstr ""
+"Feumaidh tu sluasaid gus lusan a làimhseachadh mar bu chòir. Mar sin, "
+"cleachdaidh am planntair-coille is an tuathanach fhreumhagan tè. Thèid a "
+"saothrachadh le gobha acainnean."
 
 #: ../../tribes/atlanteans/small_tower/conf:7
 msgid "Your soldiers have occupied your Small Tower"
-msgstr ""
+msgstr "Ghabh na saighdearan agad còmhnaidh san tùr bheag agad."
 
 #: ../../tribes/atlanteans/smelter/conf:1
 msgid "Smelts iron."
@@ -1518,12 +1593,17 @@ msgid ""
 "This yarn is produced by spiders, which are bred by spider farms. It is "
 "processed into spidercloth in a weaving-mill."
 msgstr ""
+"Saothraichidh damhain a thogas tu ann an tuathanasan dhamhan an snàth seo. "
+"Nì thu clò damhain às ann an taigh nam beart."
 
 #: ../../tribes/atlanteans/steel_shield/conf:1
 msgid ""
 "This steel shield is produced in the armor smithy and used in the labyrinth "
 "– together with food – to train soldiers from defense level 0 to level 1."
 msgstr ""
+"Saothraichidh tu an sgiath stàilinn seo ann an ceàrdach arm is thèid a "
+"cleachdadh sa chuartan – le biadh – gus dìon nan saighdearan a thrèanadh o "
+"leibheil 0 gu leibheil 1."
 
 #: ../../tribes/atlanteans/steel_trident/conf:1
 msgid ""
@@ -1540,10 +1620,12 @@ msgid ""
 "Stone is a basic building ware of the Atlanteans. It is produced in a quarry "
 "or a crystal mine."
 msgstr ""
+"'S e bathar togail bunasach aig na h-Atlantaich a th' anns na clachan "
+"snaidhte. Thèid an saothrachadh ann an coirill no ann am mèinnean criostail."
 
 #: ../../tribes/atlanteans/stonecutter/conf:1
 msgid "Cuts raw pieces of granite out of rocks."
-msgstr ""
+msgstr "Gearraidh e pìosan de ghraineal à chlachan."
 
 #: ../../tribes/atlanteans/tabard/conf:1
 msgid ""
@@ -1559,7 +1641,7 @@ msgstr "Nì e acainnean airson nan obraichean."
 
 #: ../../tribes/atlanteans/toolsmithy/conf:38
 msgid "Produce bread paddle"
-msgstr ""
+msgstr "Dèan crann-arain"
 
 #: ../../tribes/atlanteans/toolsmithy/conf:39
 msgid "Produce bucket"
@@ -1607,7 +1689,7 @@ msgstr "dèanamh sluasaide"
 
 #: ../../tribes/atlanteans/tower/conf:8
 msgid "Your soldiers have occupied your Tower"
-msgstr ""
+msgstr "Ghabh na saighdearan agad còmhnaidh san tùr agad."
 
 #: ../../tribes/atlanteans/trainer/conf:1
 msgid "Trains the soldiers."
@@ -1619,12 +1701,18 @@ msgid ""
 "Atlanteans. Besides the sawmill, the charcoal burner, the toolsmithy and the "
 "smokery also need logs for their work."
 msgstr ""
+"Nì thu maidean de dh'fhiodh is thèid an cleachdadh airson cha mhòr gach "
+"togalach nan Atlantach. A bharrachd air a' mhuileann-sàbhaidh, feumaidh an "
+"sloc gual-fhiodha, a' cheàrdach acainnean is an taigh-toitidh fiodhan airson "
+"an cuid obrach."
 
 #: ../../tribes/atlanteans/water/conf:1
 msgid ""
 "Water is the essence of life! It is used in the bakery and the horse and "
 "spider farms."
 msgstr ""
+"Is bith-bhrìgh an t-uisge! Cleachdaidh an taigh-fuine, an tuathanas each is "
+"an tuathanas dhamhan e."
 
 #: ../../tribes/atlanteans/weaponsmith/conf:1
 msgid "Produces weapons for the soldiers."

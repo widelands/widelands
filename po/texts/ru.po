@@ -6,14 +6,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2014-03-05 19:55+0000\n"
-"PO-Revision-Date: 2013-11-30 09:59+0000\n"
-"Last-Translator: Александр <sa13690@yandex.ru>\n"
+"POT-Creation-Date: 2014-03-06 21:20+0000\n"
+"PO-Revision-Date: 2014-03-06 23:52+0000\n"
+"Last-Translator: Lex <teh.f4ll3n@gmail.com>\n"
 "Language-Team: Language <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-03-06 05:29+0000\n"
+"X-Launchpad-Export-Date: 2014-03-07 05:33+0000\n"
 "X-Generator: Launchpad (build 16948)\n"
 "X-Poedit-Country: RUSSIAN FEDERATION\n"
 "X-Poedit-Language: Russian\n"
@@ -96,9 +96,9 @@ msgid ""
 "are\n"
 "removed."
 msgstr ""
-"Если удерживать CTRL при строительстве дороги, флаги будут расставлены \n"
+"Если удерживать CTRL при строительстве дороги, флаги будут расставлены\n"
 "автоматически.\n"
-"Если удерживать CTRL при удалении дороги, все флаги до первого перекрестка \n"
+"Если удерживать CTRL при удалении дороги, все флаги до первого перекрестка\n"
 "будут удалены."
 
 #: ../../txts/README.lua:56
@@ -137,7 +137,7 @@ msgstr ""
 
 #: ../../txts/README.lua:67
 msgid "C: toggles census"
-msgstr "C: вывести список населения"
+msgstr "C: показать список населения"
 
 #: ../../txts/README.lua:68
 msgid "S: toggles statistics"
@@ -149,11 +149,11 @@ msgstr "I: показать содержимое складов"
 
 #: ../../txts/README.lua:70
 msgid "O: toggles objectives"
-msgstr ""
+msgstr "O: показать задания"
 
 #: ../../txts/README.lua:71
 msgid "F: toggles fullscreen (if supported by the OS)"
-msgstr ""
+msgstr "F: полноэкранный режим (если поддерживается ОС)"
 
 #: ../../txts/README.lua:72
 msgid "Home: centers main mapview on starting location"
@@ -165,11 +165,11 @@ msgstr "(CTRL+) 0-9: Запоминание и переход к ранее за
 
 #: ../../txts/README.lua:74
 msgid ",: goes to the previous location"
-msgstr ""
+msgstr ",: предыдущая локация"
 
 #: ../../txts/README.lua:75
 msgid ".: goes to the next location"
-msgstr ""
+msgstr ".: следующая локация"
 
 #: ../../txts/README.lua:76
 msgid "F6: shows the debug console (only in debug-builds)"

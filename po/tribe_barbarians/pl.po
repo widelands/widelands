@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4804\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2014-03-05 19:55+0000\n"
+"POT-Creation-Date: 2014-03-06 21:20+0000\n"
 "PO-Revision-Date: 2012-12-30 11:55+0000\n"
 "Last-Translator: Wesmania <ikk_pl@yahoo.co.uk>\n"
 "Language-Team: Language <widelands-public@lists.sourceforge.net>\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2014-03-06 05:32+0000\n"
+"X-Launchpad-Export-Date: 2014-03-07 05:35+0000\n"
 "X-Generator: Launchpad (build 16948)\n"
 
 #: ../../global/militarysites/barracks.empire/conf:8
@@ -2336,14 +2336,12 @@ msgstr ""
 
 #: ../../tribes/barbarians/conf:132
 #: ../../tribes/barbarians/fishers_hut/help.lua:44
-#: ../../tribes/barbarians/fishers_hut/help.lua:49
 #: ../../tribes/barbarians/metalworks/help.lua:31
 msgid "Fisher"
 msgstr "Rybak"
 
 #: ../../tribes/barbarians/conf:133
 #: ../../tribes/barbarians/gamekeepers_hut/help.lua:38
-#: ../../tribes/barbarians/gamekeepers_hut/help.lua:43
 msgid "Gamekeeper"
 msgstr "Gajowy"
 
@@ -2359,7 +2357,6 @@ msgstr "Płatnerz"
 
 #: ../../tribes/barbarians/conf:136
 #: ../../tribes/barbarians/hunters_hut/help.lua:46
-#: ../../tribes/barbarians/hunters_hut/help.lua:51
 #: ../../tribes/barbarians/metalworks/help.lua:36
 msgid "Hunter"
 msgstr "Myśliwy"
@@ -2398,7 +2395,6 @@ msgstr "Hutnik"
 #: ../../tribes/barbarians/conf:144
 #: ../../tribes/barbarians/metalworks/help.lua:39
 #: ../../tribes/barbarians/quarry/help.lua:41
-#: ../../tribes/barbarians/quarry/help.lua:46
 msgid "Stonemason"
 msgstr "Kamieniarz"
 
@@ -2832,9 +2828,7 @@ msgid "Small plot"
 msgstr "Małe pole"
 
 #: ../../tribes/barbarians/fishers_hut/help.lua:49
-#: ../../tribes/barbarians/gamekeepers_hut/help.lua:43
-#: ../../tribes/barbarians/hunters_hut/help.lua:51
-msgid "The %1$s pauses %2$s before going to work again."
+msgid "The fisher pauses 18s before going to work again."
 msgstr ""
 
 #: ../../tribes/barbarians/fishing_rod/conf:1
@@ -2866,6 +2860,10 @@ msgstr "Barbarzyńska rymowanka"
 #: ../../tribes/barbarians/gamekeepers_hut/help.lua:16
 msgid "Releases animals into the wild to steady the meat production."
 msgstr "Wypuszcza zwierzęta w dzicz, aby podtrzymać produkcję mięsa."
+
+#: ../../tribes/barbarians/gamekeepers_hut/help.lua:43
+msgid "The gamekeeper pauses 52.5s before going to work again."
+msgstr ""
 
 #: ../../tribes/barbarians/geologist/conf:1
 msgid "Discovers resources for mining."
@@ -2968,6 +2966,10 @@ msgstr "Poluje na zwierzęta dla pozyskania mięsa."
 
 #: ../../tribes/barbarians/hunters_hut/help.lua:23
 msgid "The Hunter’s Hut needs animals in the vicinity to hunt."
+msgstr ""
+
+#: ../../tribes/barbarians/hunters_hut/help.lua:51
+msgid "The hunter pauses 35s before going to work again."
 msgstr ""
 
 #: ../../tribes/barbarians/hunting_spear/conf:1
@@ -3227,8 +3229,8 @@ msgid "The Quarry needs stones in the vicinity."
 msgstr "Kamieniołom potrzebuje w pobliżu kamieni."
 
 #: ../../tribes/barbarians/quarry/help.lua:46
-msgid "The %s pauses %s before going to work again."
-msgstr "%s czeka %s zanim znów zacznie pracować."
+msgid "The stonemason pauses 25s before going to work again."
+msgstr ""
 
 #: ../../tribes/barbarians/ranger/conf:1
 msgid "Plants trees."

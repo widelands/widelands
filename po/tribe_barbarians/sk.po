@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2014-03-05 19:55+0000\n"
+"POT-Creation-Date: 2014-03-06 21:20+0000\n"
 "PO-Revision-Date: 2014-02-08 17:03+0000\n"
 "Last-Translator: Miroslav Remák <Unknown>\n"
 "Language-Team: Prometheus <mmatej@yahoo.com>\n"
@@ -14,7 +14,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 1 : (n>=2 && n<=4) ? 2 : 0;\n"
-"X-Launchpad-Export-Date: 2014-03-06 05:32+0000\n"
+"X-Launchpad-Export-Date: 2014-03-07 05:36+0000\n"
 "X-Generator: Launchpad (build 16948)\n"
 "X-Poedit-Country: Czech Republic\n"
 "X-Poedit-Language: czech\n"
@@ -2333,14 +2333,12 @@ msgstr ""
 
 #: ../../tribes/barbarians/conf:132
 #: ../../tribes/barbarians/fishers_hut/help.lua:44
-#: ../../tribes/barbarians/fishers_hut/help.lua:49
 #: ../../tribes/barbarians/metalworks/help.lua:31
 msgid "Fisher"
 msgstr "Rybár"
 
 #: ../../tribes/barbarians/conf:133
 #: ../../tribes/barbarians/gamekeepers_hut/help.lua:38
-#: ../../tribes/barbarians/gamekeepers_hut/help.lua:43
 msgid "Gamekeeper"
 msgstr "Hájnik"
 
@@ -2356,7 +2354,6 @@ msgstr "Kováč heliem"
 
 #: ../../tribes/barbarians/conf:136
 #: ../../tribes/barbarians/hunters_hut/help.lua:46
-#: ../../tribes/barbarians/hunters_hut/help.lua:51
 #: ../../tribes/barbarians/metalworks/help.lua:36
 msgid "Hunter"
 msgstr "Lovec"
@@ -2395,7 +2392,6 @@ msgstr "Tavič"
 #: ../../tribes/barbarians/conf:144
 #: ../../tribes/barbarians/metalworks/help.lua:39
 #: ../../tribes/barbarians/quarry/help.lua:41
-#: ../../tribes/barbarians/quarry/help.lua:46
 msgid "Stonemason"
 msgstr "Kamenár"
 
@@ -2829,9 +2825,7 @@ msgid "Small plot"
 msgstr "Malá parcela"
 
 #: ../../tribes/barbarians/fishers_hut/help.lua:49
-#: ../../tribes/barbarians/gamekeepers_hut/help.lua:43
-#: ../../tribes/barbarians/hunters_hut/help.lua:51
-msgid "The %1$s pauses %2$s before going to work again."
+msgid "The fisher pauses 18s before going to work again."
 msgstr ""
 
 #: ../../tribes/barbarians/fishing_rod/conf:1
@@ -2865,6 +2859,10 @@ msgstr "Barbarská detská riekanka"
 #: ../../tribes/barbarians/gamekeepers_hut/help.lua:16
 msgid "Releases animals into the wild to steady the meat production."
 msgstr "Vypúšťa zvieratá do divočiny, aby upevnil produkciu mäsa."
+
+#: ../../tribes/barbarians/gamekeepers_hut/help.lua:43
+msgid "The gamekeeper pauses 52.5s before going to work again."
+msgstr ""
 
 #: ../../tribes/barbarians/geologist/conf:1
 msgid "Discovers resources for mining."
@@ -2967,6 +2965,10 @@ msgstr "Loviť zvieratá pre mäso."
 
 #: ../../tribes/barbarians/hunters_hut/help.lua:23
 msgid "The Hunter’s Hut needs animals in the vicinity to hunt."
+msgstr ""
+
+#: ../../tribes/barbarians/hunters_hut/help.lua:51
+msgid "The hunter pauses 35s before going to work again."
 msgstr ""
 
 #: ../../tribes/barbarians/hunting_spear/conf:1
@@ -3226,8 +3228,8 @@ msgid "The Quarry needs stones in the vicinity."
 msgstr "Kameňolom potrebuje v blízkosti kamene."
 
 #: ../../tribes/barbarians/quarry/help.lua:46
-msgid "The %s pauses %s before going to work again."
-msgstr "%s sa pozastaví na %s, predtým než začne opäť pracovať."
+msgid "The stonemason pauses 25s before going to work again."
+msgstr ""
 
 #: ../../tribes/barbarians/ranger/conf:1
 msgid "Plants trees."
