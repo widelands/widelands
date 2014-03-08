@@ -750,7 +750,7 @@ void FieldActionWindow::act_ripflag()
 			if (building->get_playercaps() & Building::PCap_Bulldoze) {
 				if (get_key_state(SDLK_LCTRL) or get_key_state(SDLK_RCTRL)) {
 					ref_cast<Game, Editor_Game_Base>(egbase).send_player_bulldoze
-						(*flag);
+						(*flag, get_key_state(SDLK_LCTRL) or get_key_state(SDLK_RCTRL));
 				}
 				else {
 					show_bulldoze_confirm
