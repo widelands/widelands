@@ -137,7 +137,9 @@ Game_Main_Menu_Save_Game::Game_Main_Menu_Save_Game
 
 		char buf[200];
 		uint8_t player_nr = parent.game().player_manager()->get_number_of_players();
-		sprintf(buf, "%i %s", player_nr, ngettext(_("player"), _("players"),  player_nr));
+		// TODO: This should be ngettext(" %i player" etc. with boost::format, but it refuses to work
+		/** TRANSLATORS: This is preceded by a number */
+		sprintf(buf, "%i %s", player_nr, ngettext("player", "players",  player_nr));
 		m_players_label.set_text(buf);
 		m_win_condition.set_text(parent.game().get_win_condition_displayname());
 	}
@@ -175,7 +177,9 @@ void Game_Main_Menu_Save_Game::selected(uint32_t) {
 		char buf[200];
 		sprintf
 			(buf, "%i %s", gpdp.get_number_of_players(),
-			ngettext(_("player"), _("players"), gpdp.get_number_of_players()));
+			// TODO: This should be ngettext(" %i player" etc. with boost::format, but it refuses to work
+			/** TRANSLATORS: This is preceded by a number */
+			ngettext("player", "players", gpdp.get_number_of_players()));
 			m_players_label.set_text(buf);
 	} else {
 		// Keep label empty
