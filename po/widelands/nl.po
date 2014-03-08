@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: Widelands svn4575\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2014-03-06 22:20+0100\n"
-"PO-Revision-Date: 2014-03-06 16:04+0000\n"
+"PO-Revision-Date: 2014-03-07 12:42+0000\n"
 "Last-Translator: fk <Unknown>\n"
 "Language-Team: Dutch <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-03-07 05:37+0000\n"
+"X-Launchpad-Export-Date: 2014-03-08 05:30+0000\n"
 "X-Generator: Launchpad (build 16948)\n"
 "X-Poedit-Country: NETHERLANDS\n"
 "X-Poedit-Language: Dutch\n"
@@ -2072,12 +2072,20 @@ msgid ""
 "Normally, such a file should be sent from the host to you, but perhaps the "
 "transfer was not yet finished!?!"
 msgstr ""
+"Widelands probeerde een spel te starten met een bestand dat niet kon worden "
+"gevonden in het opgegeven pad.\n"
+"Het bestand was: %s\n"
+"Als dit gebeurt, dan kan het zijn dat de host een spel heeft gekozen dat jij "
+"niet bezit. Normaal gesproken zou zo'n bestand van de host naar jou moeten "
+"worden verzonden, maar mogelijk is de overdracht nog niet voltooid!?!"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:451
 msgid ""
 "The selected file can not be found. If it is not automatically transferred "
 "to you, please write to the host about this problem."
 msgstr ""
+"Het gekozen bestand kan niet worden gevonden. Als het niet automatisch naar "
+"jou wordt overgegebracht, scrhijf dan a.u.b. naar de host over dit probleem."
 
 #: ../../src/ui_fsmenu/launchMPG.cc:483
 #: ../../src/wui/multiplayersetupgroup.cc:120
@@ -2218,16 +2226,23 @@ msgid ""
 "of each player (the set of buildings, wares and workers the player starts "
 "with) and the tribe and team for computer players"
 msgstr ""
+"De laatste drie kunnen alleen worden gekozen door de hosting cliënt met "
+"links klikken op de 'type' knop van een speler. Het hosten van spelers kan "
+"ook de initialisatie van iedere speler instellen (de verzameling gebouwen, "
+"waren en werkers waarmee de speler begint) en de stam en het team voor "
+"computerspelers."
 
 #: ../../src/ui_fsmenu/launchMPG.cc:704
 msgid ""
 "Every client connected to a player (the set ‘role’ player) can set the tribe "
 "and the team for that player"
 msgstr ""
+"Iedere cliënt verbonden met een speler (de ingestelde 'rol' speler) kan de "
+"stam en het team instellen voor die speler."
 
 #: ../../src/ui_fsmenu/launchMPG.cc:706
 msgid "Map details"
-msgstr ""
+msgstr "Kaartdetails"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:709
 msgid ""
@@ -2236,6 +2251,10 @@ msgid ""
 "map. Furthermore, the host is able to set a specific win condition, and "
 "finally can start the game as soon as all players are set up."
 msgstr ""
+"Je kunt informatie over het gekozen spel of bewaard spel zien aan de "
+"rechterzijde. De host kan met een knop naast de naam van de kaart een andere "
+"kaart instellen. Verder kan de host een specifieke winvoorwaarde instellen, "
+"en kan tenslotte het spel starten zodra alle spelers zijn ingesteld."
 
 #: ../../src/ui_fsmenu/launchSPG.cc:54
 msgid "Select map"
@@ -2247,11 +2266,11 @@ msgstr "lanceer spel"
 
 #: ../../src/ui_fsmenu/launchSPG.cc:83
 msgid "Player’s name"
-msgstr ""
+msgstr "Naam van speler"
 
 #: ../../src/ui_fsmenu/launchSPG.cc:88
 msgid "Player’s type"
-msgstr ""
+msgstr "Type speler"
 
 #: ../../src/ui_fsmenu/launchSPG.cc:92 ../../src/wui/game_summary.cc:91
 #: ../../src/wui/multiplayersetupgroup.cc:461
@@ -2280,6 +2299,13 @@ msgid ""
 "you do not own. Normally, such a file should be sent from the host to you, "
 "but perhaps the transfer was not yet finished!?!"
 msgstr ""
+"Widelands probeerde een spel te starten met een bestand dat niet kon worden "
+"gevonden in het opgegeven pad.\n"
+"Het bestand was: %s\n"
+"Als dit gebeurt tijdens een netwerkspel, dan kan het zijn dat de host een "
+"spel heeft gekozen dat jij niet bezit. Normaal gesproken zou zo'n bestand "
+"van de host naar jou moeten worden verzonden, maar mogelijk is de overdracht "
+"nog niet voltooid!?!"
 
 #: ../../src/ui_fsmenu/loadgame.cc:74 ../../src/ui_fsmenu/loadreplay.cc:57
 #: ../../src/wui/game_main_menu_save_game.cc:114

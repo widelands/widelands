@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-03-06 21:20+0000\n"
-"PO-Revision-Date: 2013-07-18 20:31+0000\n"
+"PO-Revision-Date: 2014-03-07 21:31+0000\n"
 "Last-Translator: Hans Joachim Desserud <Unknown>\n"
 "Language-Team: Norwegian Bokmal <nb@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-03-07 05:42+0000\n"
+"X-Launchpad-Export-Date: 2014-03-08 05:30+0000\n"
 "X-Generator: Launchpad (build 16948)\n"
 
 #: ../../scripting/win_condition_texts.lua:2
@@ -52,7 +52,7 @@ msgstr "Du tapte"
 
 #: ../../scripting/win_condition_texts.lua:18
 msgid "You’ve lost this game!"
-msgstr ""
+msgstr "Du har tapt dette spillet!"
 
 #: ../../scripting/win_condition_texts.lua:22
 msgid "Status"
@@ -87,6 +87,8 @@ msgid ""
 "You get points for precious wares in your warehouses. The player with the "
 "highest number of wares at the end of 4 hours wins the game."
 msgstr ""
+"Du får poeng for verdifulle varer i varehusene dine. Spilleren med flest "
+"varer etter 4 timer vinner spillet."
 
 #: ../../scripting/win_conditions/02_collectors.lua:19
 msgid "Points"
@@ -94,18 +96,18 @@ msgstr "Poeng"
 
 #: ../../scripting/win_conditions/02_collectors.lua:95
 msgid "Status for %s"
-msgstr ""
+msgstr "Status for %s"
 
 #: TRANSLATORS: For example: "gold (3 P) x 4 = 12 P", P meaning "Points"
 #: ../../scripting/win_conditions/02_collectors.lua:105
 msgid "  %1$s (%2$i P) x %3$i = %4$i P<br>"
-msgstr ""
+msgstr "  %1$s (%2$i P) x %3$i = %4$i P<br>"
 
 #: ../../scripting/win_conditions/02_collectors.lua:109
 msgid "Total: %i point"
 msgid_plural "Total: %i points"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Totalt: %i poeng"
+msgstr[1] "Totalt: %i poeng"
 
 #: TRANSLATORS: Context: "The game will end in %s."
 #: ../../scripting/win_conditions/02_collectors.lua:121
@@ -115,8 +117,8 @@ msgstr ""
 #: ../../scripting/win_conditions/02_collectors.lua:123
 msgid "%i minute"
 msgid_plural "%i minutes"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%i minutt"
+msgstr[1] "%i minutter"
 
 #: ../../scripting/win_conditions/02_collectors.lua:125
 msgid "The game will end in %s."
@@ -132,6 +134,9 @@ msgid ""
 "winner will be the player or the team that is able to keep that area for at "
 "least 20 minutes."
 msgstr ""
+"Hver spiller eller lag forsøker å erobre mer enn halvparten av landområdene "
+"på kartet. Vinneren er den spilleren eller laget som klarer å holde på det "
+"området i mer enn 20 minutter."
 
 #: ../../scripting/win_conditions/03_territorial_lord.lua:153
 #: ../../scripting/win_conditions/03_territorial_time.lua:23
@@ -141,26 +146,28 @@ msgstr "Lag %i"
 #: ../../scripting/win_conditions/03_territorial_lord.lua:155
 #: ../../scripting/win_conditions/03_territorial_time.lua:199
 msgid "%s owns more than half of the map’s area."
-msgstr ""
+msgstr "%s eier mer enn halve kartet."
 
 #: ../../scripting/win_conditions/03_territorial_lord.lua:157
 #: ../../scripting/win_conditions/03_territorial_time.lua:201
 msgid "You’ve still got %i minute to prevent a victory."
 msgid_plural "You’ve still got %i minutes to prevent a victory."
 msgstr[0] ""
+"Du har fortsatt %i minutt på deg til å hindre at noen andre vinner."
 msgstr[1] ""
+"Du har fortsatt %i minutter på deg til å hindre at noen andre vinner."
 
 #: ../../scripting/win_conditions/03_territorial_lord.lua:162
 #: ../../scripting/win_conditions/03_territorial_time.lua:206
 msgid "You own more than half of the map’s area."
-msgstr ""
+msgstr "Du eier mer enn halve kartet."
 
 #: ../../scripting/win_conditions/03_territorial_lord.lua:164
 #: ../../scripting/win_conditions/03_territorial_time.lua:208
 msgid "Keep it for %i more minute to win the game."
 msgid_plural "Keep it for %i more minutes to win the game."
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Behold overtaket i %i minutt til for å vinne."
+msgstr[1] "Behold overtaket i %i minutter til for å vinne."
 
 #: ../../scripting/win_conditions/03_territorial_time.lua:13
 msgid "Territorial Time"
@@ -173,6 +180,10 @@ msgid ""
 "least 20 minutes, or the one with the most territory after 4 hours, "
 "whichever comes first."
 msgstr ""
+"Hver spiller eller lag forsøker å erobre mer enn halvparten av landområdene "
+"på kartet. Vinneren er den spilleren eller laget som klarer å holde på det "
+"området i mer enn 20 minutter eller den med størst område etter fire timer, "
+"avhengig av hvem som kommer først."
 
 #: ../../scripting/win_conditions/03_territorial_time.lua:21
 msgid "%1$s has %2$3.0f%% of the land (%3$i of %4$i)."
@@ -185,15 +196,15 @@ msgstr ""
 #: ../../scripting/win_conditions/03_territorial_time.lua:222
 msgid "Otherwise the game will end in %i minute."
 msgid_plural "Otherwise the game will end in %i minutes."
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Ellers er spillet over om %i minutt."
+msgstr[1] "Ellers er spillet over om %i minutter."
 
 #: ../../scripting/win_conditions/03_territorial_time.lua:227
 #: ../../scripting/win_conditions/04_wood_gnome.lua:83
 msgid "The game will end in %i minute."
 msgid_plural "The game will end in %i minutes."
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Spillet er over om %i minutt."
+msgstr[1] "Spillet er over om %i minutter."
 
 #: ../../scripting/win_conditions/04_wood_gnome.lua:13
 msgid "Wood Gnome"
@@ -205,6 +216,9 @@ msgid ""
 "your territory than any other player. The game will end after 4 hours of\n"
 "playing. The one with the most trees at that point will win the game."
 msgstr ""
+"Som skogsgnom liker du store skoger, målet er å få så mange trær som mulig\n"
+"innenfor sitt eget område.\n"
+"Vinneren blir den spilleren som har området med flest trær etter 4 timer."
 
 #: ../../scripting/win_conditions/04_wood_gnome.lua:19
 msgid "Trees owned"
@@ -215,20 +229,20 @@ msgstr "Trær eid"
 #: ../../scripting/win_conditions/04_wood_gnome.lua:145
 msgid "%i tree"
 msgid_plural "%i trees"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%i tre"
+msgstr[1] "%i trær"
 
 #: ../../scripting/win_conditions/04_wood_gnome.lua:91
 msgid "%1$s has %2$s at the moment."
-msgstr ""
+msgstr "%1$s har %2$s akkurat nå."
 
 #: ../../scripting/win_conditions/04_wood_gnome.lua:142
 msgid "%1$s had %2$s."
-msgstr ""
+msgstr "%1$s hadde %2$s."
 
 #: ../../scripting/win_conditions/04_wood_gnome.lua:147
 msgid "The winner is %1$s with %2$s."
-msgstr ""
+msgstr "Vinneren er %1$s med %2$s."
 
 #: ../../scripting/win_conditions/05_endless_game_fogless.lua:12
 msgid "Endless Game (no fog)"

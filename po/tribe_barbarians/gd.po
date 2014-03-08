@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-03-06 21:20+0000\n"
-"PO-Revision-Date: 2014-03-06 11:08+0000\n"
-"Last-Translator: GunChleoc <Unknown>\n"
+"PO-Revision-Date: 2014-03-08 00:16+0000\n"
+"Last-Translator: Dan O'Huiginn <daniel@ohuiginn.net>\n"
 "Language-Team: Fòram na Gàidhlig http://www.foramnagaidhlig.net\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n==1 || n==11) ? 0 : (n==2 || n==12) ? 1 : "
 "(n > 2 && n < 20) ? 2 : 3;\n"
-"X-Launchpad-Export-Date: 2014-03-07 05:35+0000\n"
+"X-Launchpad-Export-Date: 2014-03-08 05:29+0000\n"
 "X-Generator: Launchpad (build 16948)\n"
 "Language: gd\n"
 
@@ -2908,6 +2908,8 @@ msgstr "Roinn bheag"
 #: ../../tribes/barbarians/fishers_hut/help.lua:49
 msgid "The fisher pauses 18s before going to work again."
 msgstr ""
+"Gabhaidh an t-iasgair fois fad 18 diogan mus tòisich e air an obair a-"
+"rithist."
 
 #: ../../tribes/barbarians/fishing_rod/conf:1
 msgid ""
@@ -2949,6 +2951,7 @@ msgstr ""
 #: ../../tribes/barbarians/gamekeepers_hut/help.lua:43
 msgid "The gamekeeper pauses 52.5s before going to work again."
 msgstr ""
+"Gabhaidh an geamair fois fad 52.5 diog mus tòisich e air an obair a-rithist."
 
 #: ../../tribes/barbarians/geologist/conf:1
 msgid "Discovers resources for mining."
@@ -3083,6 +3086,7 @@ msgstr ""
 #: ../../tribes/barbarians/hunters_hut/help.lua:51
 msgid "The hunter pauses 35s before going to work again."
 msgstr ""
+"Gabhaidh an sealgair fois fad 35 diogan mus tòisich e air an obair a-rithist."
 
 #: ../../tribes/barbarians/hunting_spear/conf:1
 msgid ""
@@ -3397,6 +3401,7 @@ msgstr "Tha an coireall feumail air clach am fagas."
 #: ../../tribes/barbarians/quarry/help.lua:46
 msgid "The stonemason pauses 25s before going to work again."
 msgstr ""
+"Gabhaidh an clachair fois fad 25 diogan mus tòisich e air an obair a-rithist."
 
 #: ../../tribes/barbarians/ranger/conf:1
 msgid "Plants trees."
@@ -3879,3 +3884,6 @@ msgstr ""
 "Tha mhair thu beò gun chruithneachd. Saothraichidh na tuathanasan i is thèid "
 "a chleachdadh leis na taighean-fuine, na taighean-grùide beag is na taighean-"
 "grùide. Tha tuathanasan crodh feumach air cruithneachd cuideachd."
+
+#~ msgid "The %s pauses %s before going to work again."
+#~ msgstr "Gabhaidh an %s fois fad %s mus tòisich e air an obair a-rithist."

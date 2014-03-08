@@ -7,13 +7,13 @@ msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2014-03-06 21:20+0000\n"
-"PO-Revision-Date: 2014-03-06 23:39+0000\n"
+"PO-Revision-Date: 2014-03-07 20:24+0000\n"
 "Last-Translator: Lex <teh.f4ll3n@gmail.com>\n"
 "Language-Team: russian <ru@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-03-07 05:41+0000\n"
+"X-Launchpad-Export-Date: 2014-03-08 05:30+0000\n"
 "X-Generator: Launchpad (build 16948)\n"
 
 #: ../../worlds/desert/conf:2
@@ -232,23 +232,23 @@ msgstr "Рыба"
 
 #: ../../worlds/desert/terrainconf:8
 msgid "Desert 1"
-msgstr ""
+msgstr "Пустыня 1"
 
 #: ../../worlds/desert/terrainconf:13
 msgid "Desert 2"
-msgstr ""
+msgstr "Пустыня 2"
 
 #: ../../worlds/desert/terrainconf:18
 msgid "Desert 3"
-msgstr ""
+msgstr "Пустыня 3"
 
 #: ../../worlds/desert/terrainconf:23
 msgid "Desert 4"
-msgstr ""
+msgstr "Пустыня 4"
 
 #: ../../worlds/desert/terrainconf:29
 msgid "Dry Soil"
-msgstr ""
+msgstr "Сухая Почва"
 
 #: ../../worlds/desert/terrainconf:35
 msgid "Beach"
@@ -264,27 +264,27 @@ msgstr "Луг"
 
 #: ../../worlds/desert/terrainconf:52
 msgid "Mountain Meadow"
-msgstr ""
+msgstr "Горный Луг"
 
 #: ../../worlds/desert/terrainconf:57
 msgid "High Mountain Meadow"
-msgstr ""
+msgstr "Высокогорный Луг"
 
 #: ../../worlds/desert/terrainconf:62
 msgid "Mountain 1"
-msgstr ""
+msgstr "Гора 1"
 
 #: ../../worlds/desert/terrainconf:68
 msgid "Mountain 2"
-msgstr ""
+msgstr "Гора 2"
 
 #: ../../worlds/desert/terrainconf:74
 msgid "Mountain 3"
-msgstr ""
+msgstr "Гора 3"
 
 #: ../../worlds/desert/terrainconf:80
 msgid "Mountain 4"
-msgstr ""
+msgstr "Гора 4"
 
 #: ../../worlds/desert/terrainconf:96
 msgid "Lava"

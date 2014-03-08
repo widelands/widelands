@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-03-06 21:20+0000\n"
-"PO-Revision-Date: 2013-12-02 20:00+0000\n"
+"PO-Revision-Date: 2014-03-07 22:08+0000\n"
 "Last-Translator: Hans Joachim Desserud <Unknown>\n"
 "Language-Team: Norwegian Bokmal <nb@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-03-07 05:43+0000\n"
+"X-Launchpad-Export-Date: 2014-03-08 05:30+0000\n"
 "X-Generator: Launchpad (build 16948)\n"
 
 #: ../../maps/MP Scenarios/Smugglers.wmf/scripting/multiplayer_init.lua:43
@@ -27,7 +27,7 @@ msgstr "Spillstatus"
 
 #: ../../maps/MP Scenarios/Smugglers.wmf/scripting/multiplayer_init.lua:119
 msgid "Wares Smuggled"
-msgstr ""
+msgstr "Varer smuglet"
 
 #: ../../maps/MP Scenarios/Smugglers.wmf/scripting/multiplayer_init.lua:142
 #: ../../maps/MP Scenarios/Smugglers.wmf/scripting/smuggling.lua:31
@@ -35,8 +35,8 @@ msgstr ""
 #: ../../maps/MP Scenarios/Smugglers.wmf/scripting/smuggling.lua:88
 msgid "%i point"
 msgid_plural "%i points"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%i poeng"
+msgstr[1] "%i poeng"
 
 #: ../../maps/MP Scenarios/Smugglers.wmf/scripting/texts.lua:5
 msgid "Smugglers"
@@ -88,6 +88,8 @@ msgid ""
 "You can see the number of wares traded at any time in the general statistics "
 "menu. Good luck!"
 msgstr ""
+"Du kan til en hver tid se antall varer som har blitt smuglet som en del av "
+"den generelle statistikken. Lykke til!"
 
 #: TRANSLATORS: the first 2 parameters are player names, the last parameter is "<number> points"
 #: ../../maps/MP Scenarios/Smugglers.wmf/scripting/texts.lua:30
@@ -95,6 +97,8 @@ msgid ""
 "A new smuggling route from %1$s to %2$s has been established! Every ware "
 "they smuggle there is worth %3$s."
 msgstr ""
+"En ny smuglerrute fra %1$s til %2$s har blitt etablert! Hver vare de smugler "
+"her er verdt %3$s."
 
 #: TRANSLATORS: %s = "<number> points"
 #: ../../maps/MP Scenarios/Smugglers.wmf/scripting/texts.lua:35
@@ -113,7 +117,7 @@ msgstr ""
 #: TRANSLATORS: the first parameter is "<number> points", the last 2 parameters are player names
 #: ../../maps/MP Scenarios/Smugglers.wmf/scripting/texts.lua:46
 msgid "The smuggling route worth %1$s from %2$s to %3$s has been broken!"
-msgstr ""
+msgstr "Smuglerruten verdt %1$s fra %2$s til %3$s har blitt brutt!"
 
 #: TRANSLATORS: the first 4 parameters are player names, the last parameter is "<number> points"
 #: ../../maps/MP Scenarios/Smugglers.wmf/scripting/texts.lua:53
@@ -121,3 +125,4 @@ msgid ""
 "Game over! %1$s and %2$s have won the game! %3$s and %4$s only managed to "
 "collect %5$s."
 msgstr ""
+"Spillet er slutt! %1$s og %2$s har vunnet! %3$s og %4$s oppnådde bare %5$s."

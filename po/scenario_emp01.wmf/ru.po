@@ -7,15 +7,15 @@ msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2014-03-06 21:20+0000\n"
-"PO-Revision-Date: 2013-11-22 08:02+0000\n"
-"Last-Translator: Александр <sa13690@yandex.ru>\n"
+"PO-Revision-Date: 2014-03-07 23:13+0000\n"
+"Last-Translator: Lex <teh.f4ll3n@gmail.com>\n"
 "Language-Team: Language <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2014-03-07 05:32+0000\n"
+"X-Launchpad-Export-Date: 2014-03-08 05:29+0000\n"
 "X-Generator: Launchpad (build 16948)\n"
 "X-Poedit-Country: RUSSIAN FEDERATION\n"
 "X-Poedit-Language: Russian\n"
@@ -26,81 +26,91 @@ msgstr "Построить казармы"
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:30
 msgid "Barracks"
-msgstr ""
+msgstr "Казарма"
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:31
 msgid ""
 "Build a barracks at the red house symbol on the east side of the forests, to "
 "the right of your provisional headquarters."
 msgstr ""
+"Постройте казарму на значке красного дома с восточной стороны лесов, справа "
+"от Вашего временного штаба."
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:36
 msgid "Build a lumberjack’s house"
-msgstr ""
+msgstr "Постройте домик дровосека"
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:38
 msgid "Lumberjack’s House"
-msgstr ""
+msgstr "Домик дровосека"
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:39
 msgid ""
 "Build a lumberjack’s house at the red house symbol, south of your "
 "provisional headquarters."
 msgstr ""
+"Постройте домик дровосека на значке красного дома, к югу от Вашего "
+"временного склада."
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:40
 msgid ""
 "Cutting down enough trees for more buildings will take a while. You can "
 "speed the game up by using PAGE UP and slow it down again with PAGE DOWN."
 msgstr ""
+"Заготовка брёвен в достаточном количестве для дополнительных зданий занимает "
+"много времени. Вы можете ускорить игру, нажав PAGE UP, и вернуться к прежней "
+"скорости, нажав PAGE DOWN."
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:46
 msgid "Build 2 lumberjack’s houses and a sawmill"
-msgstr ""
+msgstr "Постройте 2 домика дровосека и лесопилку"
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:48
 msgid "Two Lumberjack’s Houses and a Sawmill"
-msgstr ""
+msgstr "Два домика дровосека и лесопилка"
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:49
 msgid ""
 "Build two more lumberjack’s houses and a sawmill as soon as there is enough "
 "space for them."
 msgstr ""
+"Постройте ещё два домика дровосека и лесопилку, как только у вас появится "
+"для них место."
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:54
 msgid "Build a forester’s house"
-msgstr ""
+msgstr "Постройте домик лесника"
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:56
 msgid "Forester’s House"
-msgstr ""
+msgstr "Домик лесника"
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:57
 msgid ""
 "Build a forester’s house to preserve the wood resources of this island."
 msgstr ""
+"Постройте домик лесника, чтобы сохранить древесные ресурсы этого острова."
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:62
 msgid "Build a quarry"
-msgstr "Построить каменоломню"
+msgstr "Постройте каменоломню"
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:64
 msgid "Quarry"
-msgstr ""
+msgstr "Каменоломня"
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:65
 msgid ""
 "Build a quarry in the south to cut some stones and marble out of the rocks."
-msgstr ""
+msgstr "Постройте каменоломню к югу и добудьте немного камней и мрамора."
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:66
 msgid "These might be used for future buildings."
-msgstr ""
+msgstr "Эти ресурсы могут быть использованы для последующих зданий."
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:75
 msgid "A Dark Night"
-msgstr ""
+msgstr "Тёмная ночь"
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:76
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:101
@@ -114,6 +124,9 @@ msgid ""
 "forbid me from fighting against that monstrous barbarian tribe, who first "
 "acted as a peaceful friend and then attacked my army in the darkest night?"
 msgstr ""
+"Во что превратилась наша империя? Я хочу знать - почему мой король запретил "
+"мне сражаться с этим ужасным племенем варваров, которые поначалу "
+"притворялись мирными союзниками, а потом напали на мою армию во мгле ночи?"
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:80
 msgid ""
@@ -123,6 +136,11 @@ msgid ""
 "of my men even traded with them and their kids came to us, to admire our "
 "clean and tidy uniforms and weapons."
 msgstr ""
+"Моей армии в 150 копий поручили охранять наш серегный рубеж, пролегающий в "
+"обширном, прекрасном и древнем лесу близ Галдинских гор. Вскоре мы "
+"повстречали племя варваров, поначалу оказавшимися мирными. Некоторые из моих "
+"людей даже обменивались с ними товарами, а их дети прибегали в наш лагерь "
+"поглазеть на нашу чистую одежду и блестящее оружее."
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:84
 msgid ""

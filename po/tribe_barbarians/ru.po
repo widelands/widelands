@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2014-03-06 21:20+0000\n"
-"PO-Revision-Date: 2013-11-30 11:03+0000\n"
+"PO-Revision-Date: 2014-03-08 00:30+0000\n"
 "Last-Translator: Александр <sa13690@yandex.ru>\n"
 "Language-Team: русский <ru@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -15,222 +15,222 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2014-03-07 05:35+0000\n"
+"X-Launchpad-Export-Date: 2014-03-08 05:29+0000\n"
 "X-Generator: Launchpad (build 16948)\n"
 "X-Poedit-Country: RUSSIAN FEDERATION\n"
 "X-Poedit-Language: Russian\n"
 
 #: ../../global/militarysites/barracks.empire/conf:8
 msgid "Your Barracks discovered an aggressor."
-msgstr ""
+msgstr "Ваши бараки обнаружили врага."
 
 #: ../../global/militarysites/barracks.empire/conf:9
 msgid "Your Barracks is under attack."
-msgstr ""
+msgstr "Ваши бараки атакованы."
 
 #: ../../global/militarysites/barracks.empire/conf:10
 msgid "The enemy defeated your soldiers at the Barracks"
-msgstr ""
+msgstr "Враг одолел ваших солдат вблизи бараков."
 
 #: ../../global/militarysites/barracks.empire/conf:11
 msgid "Your soldiers defeated the enemy at the Barracks"
-msgstr ""
+msgstr "Ваши солдаты одолели врага вблизи бараков."
 
 #: ../../global/militarysites/barrier.barbarians/conf:8
 #: ../../global/militarysites/barrier.empire/conf:8
 #: ../../tribes/barbarians/barrier/conf:7
 msgid "Your Barrier discovered an aggressor."
-msgstr ""
+msgstr "Ваш форпост обнаружил врага."
 
 #: ../../global/militarysites/barrier.barbarians/conf:9
 #: ../../global/militarysites/barrier.empire/conf:9
 #: ../../tribes/barbarians/barrier/conf:8
 msgid "Your Barrier is under attack."
-msgstr ""
+msgstr "Ваш форпост атакован."
 
 #: ../../global/militarysites/barrier.barbarians/conf:10
 #: ../../global/militarysites/barrier.empire/conf:10
 #: ../../tribes/barbarians/barrier/conf:9
 msgid "The enemy defeated your soldiers at the Barrier"
-msgstr ""
+msgstr "Враг одолел ваших солдат вблизи форпоста."
 
 #: ../../global/militarysites/barrier.barbarians/conf:11
 #: ../../global/militarysites/barrier.empire/conf:11
 #: ../../tribes/barbarians/barrier/conf:10
 msgid "Your soldiers defeated the enemy at the Barrier"
-msgstr ""
+msgstr "Ваши солдаты одолели врага вблизи форпоста."
 
 #: ../../global/militarysites/castle.atlanteans/conf:8
 #: ../../global/militarysites/castle.empire/conf:8
 msgid "Your Castle discovered an aggressor."
-msgstr ""
+msgstr "Ваш замок обнаружил врага."
 
 #: ../../global/militarysites/castle.atlanteans/conf:9
 #: ../../global/militarysites/castle.empire/conf:9
 msgid "Your Castle is under attack."
-msgstr ""
+msgstr "Ваш замок атакован"
 
 #: ../../global/militarysites/castle.atlanteans/conf:10
 #: ../../global/militarysites/castle.empire/conf:10
 msgid "The enemy defeated your soldiers at the Castle"
-msgstr ""
+msgstr "Враг одолел ваших солдат вблизи замка."
 
 #: ../../global/militarysites/castle.atlanteans/conf:11
 #: ../../global/militarysites/castle.empire/conf:11
 msgid "Your soldiers defeated the enemy at the Castle"
-msgstr ""
+msgstr "Ваши солдаты одолели врага вблизи замка."
 
 #: ../../global/militarysites/citadel.barbarians/conf:8
 #: ../../tribes/barbarians/citadel/conf:9
 msgid "Your Citadel discovered an aggressor."
-msgstr ""
+msgstr "Ваша цитадель обнаружила врага."
 
 #: ../../global/militarysites/citadel.barbarians/conf:9
 #: ../../tribes/barbarians/citadel/conf:10
 msgid "Your Citadel is under attack."
-msgstr ""
+msgstr "Ваша цитадель атакована."
 
 #: ../../global/militarysites/citadel.barbarians/conf:10
 #: ../../tribes/barbarians/citadel/conf:11
 msgid "The enemy defeated your soldiers at the Citadel"
-msgstr ""
+msgstr "Враг одолел ваших солдат вблизи цитадели."
 
 #: ../../global/militarysites/citadel.barbarians/conf:11
 #: ../../tribes/barbarians/citadel/conf:12
 msgid "Your soldiers defeated the enemy at the Citadel"
-msgstr ""
+msgstr "Ваши солдаты одолели врага вблизи цитадели."
 
 #: ../../global/militarysites/donjon.barbarians/conf:9
 #: ../../tribes/barbarians/donjon/conf:8
 msgid "Your Donjon discovered an aggressor."
-msgstr ""
+msgstr "Ваш донжон обнаружил врага."
 
 #: ../../global/militarysites/donjon.barbarians/conf:10
 #: ../../tribes/barbarians/donjon/conf:9
 msgid "Your Donjon is under attack."
-msgstr ""
+msgstr "Ваш донжон атакован."
 
 #: ../../global/militarysites/donjon.barbarians/conf:11
 #: ../../tribes/barbarians/donjon/conf:10
 msgid "The enemy defeated your soldiers at the Donjon"
-msgstr ""
+msgstr "Враг одолел ваших солдат вблизи донжона."
 
 #: ../../global/militarysites/donjon.barbarians/conf:12
 #: ../../tribes/barbarians/donjon/conf:11
 msgid "Your soldiers defeated the enemy at the Donjon"
-msgstr ""
+msgstr "Ваши солдаты одолели врага вблизи донжона."
 
 #: ../../global/militarysites/fortress.barbarians/conf:8
 #: ../../global/militarysites/fortress.empire/conf:8
 #: ../../tribes/barbarians/fortress/conf:8
 msgid "Your Fortress discovered an aggressor."
-msgstr ""
+msgstr "Ваша крепость обнаружила врага."
 
 #: ../../global/militarysites/fortress.barbarians/conf:9
 #: ../../global/militarysites/fortress.empire/conf:9
 #: ../../tribes/barbarians/fortress/conf:9
 msgid "Your Fortress is under attack."
-msgstr ""
+msgstr "Ваша крепость атакована."
 
 #: ../../global/militarysites/fortress.barbarians/conf:10
 #: ../../global/militarysites/fortress.empire/conf:10
 #: ../../tribes/barbarians/fortress/conf:10
 msgid "The enemy defeated your soldiers at the Fortress"
-msgstr ""
+msgstr "Враг одолел ваших солдат вблизи крепости."
 
 #: ../../global/militarysites/fortress.barbarians/conf:11
 #: ../../global/militarysites/fortress.empire/conf:11
 #: ../../tribes/barbarians/fortress/conf:11
 msgid "Your soldiers defeated the enemy at the Fortress"
-msgstr ""
+msgstr "Ваши солдаты одолели врага вблизи крепости."
 
 #: ../../global/militarysites/guardhall.atlanteans/conf:8
 msgid "Your Guardhall discovered an aggressor."
-msgstr ""
+msgstr "Ваш форт обнаружил врага."
 
 #: ../../global/militarysites/guardhall.atlanteans/conf:9
 msgid "Your Guardhall is under attack."
-msgstr ""
+msgstr "Ваш форт атакован."
 
 #: ../../global/militarysites/guardhall.atlanteans/conf:10
 msgid "The enemy defeated your soldiers at the Guardhall"
-msgstr ""
+msgstr "Враг одолел ваших солдат вблизи форта."
 
 #: ../../global/militarysites/guardhall.atlanteans/conf:11
 msgid "Your soldiers defeated the enemy at the Guardhall"
-msgstr ""
+msgstr "Ваши солдаты одолели врага вблизи форта."
 
 #: ../../global/militarysites/guardhouse.atlanteans/conf:8
 msgid "Your Guardhouse discovered an aggressor."
-msgstr ""
+msgstr "Ваша караульная обнаружила врага."
 
 #: ../../global/militarysites/guardhouse.atlanteans/conf:9
 msgid "Your Guardhouse is under attack."
-msgstr ""
+msgstr "Ваша караульная атакована."
 
 #: ../../global/militarysites/guardhouse.atlanteans/conf:10
 msgid "The enemy defeated your soldiers at the Guardhouse"
-msgstr ""
+msgstr "Враг одолел ваших солдат вблизи караульной."
 
 #: ../../global/militarysites/guardhouse.atlanteans/conf:11
 msgid "Your soldiers defeated the enemy at the Guardhouse"
-msgstr ""
+msgstr "Ваши солдаты одолели врага вблизи караульной."
 
 #: ../../global/militarysites/high_tower.atlanteans/conf:9
 msgid "Your High Tower discovered an aggressor."
-msgstr ""
+msgstr "Ваша дозорная башня обнаружила врага."
 
 #: ../../global/militarysites/high_tower.atlanteans/conf:10
 msgid "Your High Tower is under attack."
-msgstr ""
+msgstr "Ваша дозорная башня атакована."
 
 #: ../../global/militarysites/high_tower.atlanteans/conf:11
 msgid "The enemy defeated your soldiers at the High Tower"
-msgstr ""
+msgstr "Враг одолел ваших солдат вблизи дозорной башни."
 
 #: ../../global/militarysites/high_tower.atlanteans/conf:12
 msgid "Your soldiers defeated the enemy at the High Tower"
-msgstr ""
+msgstr "Ваши солдаты одолели врага вблизи дозорной башни."
 
 #: ../../global/militarysites/outpost.empire/conf:8
 msgid "Your Outpost discovered an aggressor."
-msgstr ""
+msgstr "Ваша застава обнаружила врага."
 
 #: ../../global/militarysites/outpost.empire/conf:9
 msgid "Your Outpost is under attack."
-msgstr ""
+msgstr "Ваша застава атакована."
 
 #: ../../global/militarysites/outpost.empire/conf:10
 msgid "The enemy defeated your soldiers at the Outpost"
-msgstr ""
+msgstr "Враг одолел ваших солдат вблизи заставы."
 
 #: ../../global/militarysites/outpost.empire/conf:11
 msgid "Your soldiers defeated the enemy at the Outpost"
-msgstr ""
+msgstr "Ваши солдаты одолели врага вблизи заставы."
 
 #: ../../global/militarysites/sentry.barbarians/conf:8
 #: ../../global/militarysites/sentry.empire/conf:8
 #: ../../tribes/barbarians/sentry/conf:7
 msgid "Your Sentry discovered an aggressor."
-msgstr ""
+msgstr "Ваша караульная обнаружила врага."
 
 #: ../../global/militarysites/sentry.barbarians/conf:9
 #: ../../global/militarysites/sentry.empire/conf:9
 #: ../../tribes/barbarians/sentry/conf:8
 msgid "Your Sentry is under attack."
-msgstr ""
+msgstr "Ваша караульная атакована."
 
 #: ../../global/militarysites/sentry.barbarians/conf:10
 #: ../../global/militarysites/sentry.empire/conf:10
 #: ../../tribes/barbarians/sentry/conf:9
 msgid "The enemy defeated your soldiers at the Sentry"
-msgstr ""
+msgstr "Враг одолел ваших солдат вблизи караульной."
 
 #: ../../global/militarysites/sentry.barbarians/conf:11
 #: ../../global/militarysites/sentry.empire/conf:11
 #: ../../tribes/barbarians/sentry/conf:10
 msgid "Your soldiers defeated the enemy at the Sentry"
-msgstr ""
+msgstr "Ваши солдаты одолели врага вблизи караульной."
 
 #: ../../global/militarysites/small_tower.atlanteans/conf:9
 msgid "Your Small Tower discovered an aggressor."
@@ -1051,7 +1051,7 @@ msgstr "Общая стоимость:"
 #: ../../tribes/barbarians/warmill/help.lua:48
 #: ../../tribes/barbarians/well/help.lua:37
 msgid "Dismantle yields:"
-msgstr "Отдача демонтажа:"
+msgstr "Демонтаж вернёт:"
 
 #: ../../tribes/barbarians/axefactory/help.lua:52
 #: ../../tribes/barbarians/bakery/help.lua:46
@@ -1800,7 +1800,7 @@ msgstr "Угольная шахта"
 #: ../../tribes/barbarians/goldmine/help.lua:18
 #: ../../tribes/barbarians/oremine/help.lua:18
 msgid "Dig %s out of the ground in mountain terrain."
-msgstr "Добывает %s в горах."
+msgstr "В этом здании добывается %s."
 
 #: ../../tribes/barbarians/coalmine/help.lua:26
 #: ../../tribes/barbarians/goldmine/help.lua:25
@@ -3635,3 +3635,6 @@ msgid ""
 msgstr ""
 "Пшеница важна для выживания. Она выращивается на ферме и используется в "
 "пекарнях, пивоварнях и микро-пивоварнях. Для ранчо также нужна пшеница."
+
+#~ msgid "The %s pauses %s before going to work again."
+#~ msgstr "%s приостановило %s прежде чем продолжить работу."

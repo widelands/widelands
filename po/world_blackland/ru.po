@@ -7,13 +7,13 @@ msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2014-03-06 21:20+0000\n"
-"PO-Revision-Date: 2013-11-30 10:51+0000\n"
-"Last-Translator: Александр <sa13690@yandex.ru>\n"
+"PO-Revision-Date: 2014-03-07 18:57+0000\n"
+"Last-Translator: Lex <teh.f4ll3n@gmail.com>\n"
 "Language-Team: russian <en@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-03-07 05:41+0000\n"
+"X-Launchpad-Export-Date: 2014-03-08 05:30+0000\n"
 "X-Generator: Launchpad (build 16948)\n"
 
 #: ../../worlds/blackland/conf:2
@@ -99,15 +99,15 @@ msgstr "Осина"
 
 #: ../../worlds/blackland/conf:46
 msgid "Aspen (medium)"
-msgstr ""
+msgstr "Осина (средняя)"
 
 #: ../../worlds/blackland/conf:47
 msgid "Aspen (small)"
-msgstr ""
+msgstr "Осина (малая)"
 
 #: ../../worlds/blackland/conf:48
 msgid "Aspen (tiny)"
-msgstr ""
+msgstr "Осина (крохотная)"
 
 #: ../../worlds/blackland/conf:49
 msgid "Oak"
@@ -115,15 +115,15 @@ msgstr "Дуб"
 
 #: ../../worlds/blackland/conf:50
 msgid "Oak (medium)"
-msgstr ""
+msgstr "Дуб (средний)"
 
 #: ../../worlds/blackland/conf:51
 msgid "Oak (small)"
-msgstr ""
+msgstr "Дуб (малый)"
 
 #: ../../worlds/blackland/conf:52
 msgid "Oak (tiny)"
-msgstr ""
+msgstr "Дуб (крохотный)"
 
 #: ../../worlds/blackland/conf:53
 msgid "Spruce"
@@ -131,15 +131,15 @@ msgstr "Ель"
 
 #: ../../worlds/blackland/conf:54
 msgid "Spruce (medium)"
-msgstr ""
+msgstr "Ель (средняя)"
 
 #: ../../worlds/blackland/conf:55
 msgid "Spruce (small)"
-msgstr ""
+msgstr "Ель (малая)"
 
 #: ../../worlds/blackland/conf:56
 msgid "Spruce (tiny)"
-msgstr ""
+msgstr "Ель (крохотная)"
 
 #: ../../worlds/blackland/conf:57
 msgid "Maple"
@@ -147,15 +147,15 @@ msgstr "Клён"
 
 #: ../../worlds/blackland/conf:58
 msgid "Maple (medium)"
-msgstr ""
+msgstr "Клён (средний)"
 
 #: ../../worlds/blackland/conf:59
 msgid "Maple (small)"
-msgstr ""
+msgstr "Клён (малый)"
 
 #: ../../worlds/blackland/conf:60
 msgid "Maple (tiny)"
-msgstr ""
+msgstr "Клён (крохотный)"
 
 #: ../../worlds/blackland/conf:61
 msgid "Birch"
@@ -163,15 +163,15 @@ msgstr "Береза"
 
 #: ../../worlds/blackland/conf:62
 msgid "Birch (medium)"
-msgstr ""
+msgstr "Берёза (средняя)"
 
 #: ../../worlds/blackland/conf:63
 msgid "Birch (small)"
-msgstr ""
+msgstr "Берёза (малая)"
 
 #: ../../worlds/blackland/conf:64
 msgid "Birch (tiny)"
-msgstr ""
+msgstr "Берёза (крохотная)"
 
 #: ../../worlds/blackland/conf:65
 msgid "Beech"
@@ -179,15 +179,15 @@ msgstr "Бук"
 
 #: ../../worlds/blackland/conf:66
 msgid "Beech (medium)"
-msgstr ""
+msgstr "Бук (средний)"
 
 #: ../../worlds/blackland/conf:67
 msgid "Beech (small)"
-msgstr ""
+msgstr "Бук (малый)"
 
 #: ../../worlds/blackland/conf:68
 msgid "Beech (tiny)"
-msgstr ""
+msgstr "Бук (крохотный)"
 
 #: ../../worlds/blackland/conf:69
 msgid "Larch"
@@ -195,15 +195,15 @@ msgstr "Лиственница"
 
 #: ../../worlds/blackland/conf:70
 msgid "Larch (medium)"
-msgstr ""
+msgstr "Лиственница (средняя)"
 
 #: ../../worlds/blackland/conf:71
 msgid "Larch (small)"
-msgstr ""
+msgstr "Лиственница (малая)"
 
 #: ../../worlds/blackland/conf:72
 msgid "Larch (tiny)"
-msgstr ""
+msgstr "Лиственница (крохотная)"
 
 #: ../../worlds/blackland/conf:73
 msgid "Rowan"
@@ -211,15 +211,15 @@ msgstr "Рябина"
 
 #: ../../worlds/blackland/conf:74
 msgid "Rowan (medium)"
-msgstr ""
+msgstr "Рябина (средняя)"
 
 #: ../../worlds/blackland/conf:75
 msgid "Rowan (small)"
-msgstr ""
+msgstr "Рябина (малая)"
 
 #: ../../worlds/blackland/conf:76
 msgid "Rowan (tiny)"
-msgstr ""
+msgstr "Рябина (крохотная)"
 
 #: ../../worlds/blackland/conf:79
 msgid "Bunny"
@@ -276,15 +276,15 @@ msgstr "Пепелище"
 
 #: ../../worlds/blackland/terrainconf:13
 msgid "Mountain 1"
-msgstr ""
+msgstr "Гора 1"
 
 #: ../../worlds/blackland/terrainconf:19
 msgid "Lava Rocks 1"
-msgstr ""
+msgstr "Вулканическая Порода 1"
 
 #: ../../worlds/blackland/terrainconf:24
 msgid "Lava Rocks 2"
-msgstr ""
+msgstr "Вулканическая Порода 2"
 
 #: ../../worlds/blackland/terrainconf:29
 msgid "Beach"
@@ -292,35 +292,35 @@ msgstr "Пляж"
 
 #: ../../worlds/blackland/terrainconf:41
 msgid "Hard Ground 1"
-msgstr ""
+msgstr "Твёрдая земля 1"
 
 #: ../../worlds/blackland/terrainconf:47
 msgid "Hard Ground 2"
-msgstr ""
+msgstr "Твёрдая земля 2"
 
 #: ../../worlds/blackland/terrainconf:53
 msgid "Hard Ground 3"
-msgstr ""
+msgstr "Твёрдая земля 3"
 
 #: ../../worlds/blackland/terrainconf:59
 msgid "Mountain 2"
-msgstr ""
+msgstr "Гора 2"
 
 #: ../../worlds/blackland/terrainconf:65
 msgid "Mountain 3"
-msgstr ""
+msgstr "Гора 3"
 
 #: ../../worlds/blackland/terrainconf:71
 msgid "Mountain 4"
-msgstr ""
+msgstr "Гора 4"
 
 #: ../../worlds/blackland/terrainconf:77
 msgid "Ashes 2"
-msgstr ""
+msgstr "Пепелище 2"
 
 #: ../../worlds/blackland/terrainconf:83
 msgid "Hard Ground 4"
-msgstr ""
+msgstr "Твёрдая земля 4"
 
 #: ../../worlds/blackland/terrainconf:89
 msgid "Lava"
@@ -328,4 +328,4 @@ msgstr "Лава"
 
 #: ../../worlds/blackland/terrainconf:94
 msgid "Igneous Rocks"
-msgstr ""
+msgstr "Магматическая порода"
