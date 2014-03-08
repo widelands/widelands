@@ -58,8 +58,8 @@ while clicking on the action button.]]
    ) .. h2(_
 [[Keyboard shortcuts (in-game)]]
    ) .. p(
-_"PAGEUP: increases games peed" .. "<br>"
-.. _"PAGEDOWN: decreases games peed" .. "<br>"
+_"PAGEUP: increases game speed" .. "<br>"
+.. _"PAGEDOWN: decreases game speed" .. "<br>"
 .. _"PAUSE: pauses the game" .. "<br>"
 .. _"SPACE: toggles if building spaces are shown" .. "<br>"
 .. _"M: toggles minimap" .. "<br>"

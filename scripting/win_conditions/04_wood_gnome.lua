@@ -12,10 +12,10 @@ use("aux", "win_condition_texts")
 
 local wc_name = _ "Wood Gnome"
 local wc_version = 2
-local wc_desc = _
-[[As wood gnome you like big forests, so your task is to have more trees on
-your territory than any other player. The game will end after 4 hours of
-playing. The one with the most trees at that point will win the game.]]
+local wc_desc = _(
+[[As wood gnome you like big forests, so your task is to have more trees on ]] ..
+[[your territory than any other player. The game will end after 4 hours of ]] ..
+[[playing. The one with the most trees at that point will win the game.]])
 local wc_trees_owned = _"Trees owned"
 return {
 	name = wc_name,
