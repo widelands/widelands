@@ -169,7 +169,7 @@ _([[I beg you to be cautious and to build some barracks or sentries around our c
 saledus_2 = {
    title =_ "Marble on the Mountain",
    body= saledus(_"Saledus smiles",
-_([[Lutius, I’ve got good news for you:]] ..
+_([[Lutius, I’ve got good news for you: ]] ..
 [[As I walked to the east, I found a larger mountain.]] ..
 [[I am not absolutely sure – a geologist should check if I am right]] ..
 [[ – but I believe we could mine marble from some places on the mountain.]]) .. "<br><br>" ..

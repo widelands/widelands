@@ -275,9 +275,8 @@ _([[There seem to be quite a lot of animals in the forests here – we might jus
 order_msg_10_bread = {
    title=_"The Advisor",
    body=khantrukh(_"The elder jumps into the air...", 
-_([[Wisdom commands to seek variety.
-
-North of the great mountain is a large plain – why don’t we use the space Mother Nature gave us and build a farm? ]] .. 
+_([[Wisdom commands to seek variety.]]) .. "<br><br>" ..
+_([[North of the great mountain is a large plain – why don’t we use the space Mother Nature gave us and build a farm? ]] .. 
 [[I sure would enjoy a freshly baked pitta bread for a change...]])
    ) .. new_objectives(obj_begin_farming)
 }
