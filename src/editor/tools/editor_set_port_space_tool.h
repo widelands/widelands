@@ -68,6 +68,6 @@ public:
 };
 
 int32_t Editor_Tool_Set_Port_Space_Callback
-	(Widelands::TCoords<Widelands::FCoords>, void *, int32_t);
+	(const Widelands::TCoords<Widelands::FCoords>& c, Widelands::Map& map);
 
 #endif

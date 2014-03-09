@@ -274,20 +274,17 @@ void GameRendererGL::prepare_terrain_base()
 
 void GameRendererGL::draw_terrain_base()
 {
-	log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 	const World & world = m_egbase->world();
 
 	glMatrixMode(GL_TEXTURE);
 	glLoadIdentity();
 
-	log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 	glVertexPointer(2, GL_FLOAT, sizeof(basevertex), &m_patch_vertices[0].x);
 	glTexCoordPointer(2, GL_FLOAT, sizeof(basevertex), &m_patch_vertices[0].tcx);
 	glColorPointer(4, GL_UNSIGNED_BYTE, sizeof(basevertex), &m_patch_vertices[0].color);
 	glEnableClientState(GL_VERTEX_ARRAY);
 	glEnableClientState(GL_TEXTURE_COORD_ARRAY);
 	glEnableClientState(GL_COLOR_ARRAY);
-	log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 
 	glColor3f(1.0, 1.0, 1.0);
 	glDisable(GL_BLEND);
@@ -296,12 +293,10 @@ void GameRendererGL::draw_terrain_base()
 		if (!m_terrain_freq[ter])
 			continue;
 
-	log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 	log("#sirver ter: %u\n", ter);
 		const Texture & texture =
 				*g_gr->get_maptexture_data
 					(world.terrain_descr(ter).get_texture());
-	log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 		glBindTexture(GL_TEXTURE_2D, texture.getTexture());
 		glDrawRangeElements
 			(GL_TRIANGLES,
@@ -309,14 +304,10 @@ void GameRendererGL::draw_terrain_base()
 			 3 * m_terrain_freq[ter], GL_UNSIGNED_SHORT,
 			 &m_patch_indices[3 * m_terrain_freq_cum[ter]]);
 	}
-	log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 
 	glDisableClientState(GL_VERTEX_ARRAY);
-	log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 	glDisableClientState(GL_TEXTURE_COORD_ARRAY);
-	log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 	glDisableClientState(GL_COLOR_ARRAY);
-	log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 }
 
 void GameRendererGL::add_terrain_dither_triangle

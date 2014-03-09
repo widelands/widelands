@@ -30,14 +30,13 @@
 /**
  * Callback function to calculate correct overlays
  */
-int32_t Editor_Make_Infrastructure_Tool_Callback
-	(Widelands::TCoords<Widelands::FCoords> const c,
-	void                    *                    data,
-	int32_t                                const player)
+int32_t
+Editor_Make_Infrastructure_Tool_Callback
+	(const Widelands::TCoords<Widelands::FCoords>& c,
+	 Widelands::Editor_Game_Base& egbase,
+	 int32_t const player)
 {
-	return
-	    static_cast<Widelands::Editor_Game_Base const *>(data)->player(player)
-	    .get_buildcaps(c);
+	return egbase.player(player).get_buildcaps(c);
 }
 
 

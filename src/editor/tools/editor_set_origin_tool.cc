@@ -30,7 +30,6 @@ int32_t Editor_Set_Origin_Tool::handle_click_impl(Widelands::Map& map,
                                                   Editor_Interactive& eia,
                                                   Editor_Action_Args& /* args */) {
 	map.set_origin(center.node);
-	map.overlay_manager().reset();
 	eia.register_overlays();
 	eia.set_rel_viewpoint
 	(Point
@@ -50,7 +49,6 @@ Editor_Set_Origin_Tool::handle_undo_impl(Widelands::Map& map,
 		(map.get_width()  - center.node.x,
 		 map.get_height() - center.node.y);
 	map.set_origin(nc);
-	map.overlay_manager().reset();
 	parent.register_overlays();
 	parent.set_rel_viewpoint
 	(Point

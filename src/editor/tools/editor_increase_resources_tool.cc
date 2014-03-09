@@ -29,54 +29,32 @@
 
 using Widelands::TCoords;
 
-int32_t Editor_Change_Resource_Tool_Callback(TCoords<Widelands::FCoords> const c,
-                                             void* const data,
-                                             int32_t const curres) {
-	log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
-	assert(data);
-	log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
-	const auto& callback_data = static_cast<EditorChangeResourceToolCallbackData*>(data);
-	log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
-	Widelands::Map& map = *callback_data->map;
-	log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
-	const Widelands::World& world = *callback_data->world;
-	log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
+int32_t Editor_Change_Resource_Tool_Callback
+	(const TCoords<Widelands::FCoords>& c, Widelands::Map& map, const Widelands::World& world, int32_t const curres)
+{
 	Widelands::FCoords f(c, &map[c]);
 
-	log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 	Widelands::FCoords f1;
 	int32_t count = 0;
 
-	log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 	//  this field
 	count += world.terrain_descr(f.field->terrain_r()).resource_value(curres);
 	count += world.terrain_descr(f.field->terrain_d()).resource_value(curres);
 
-	log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
-
 	//  If one of the neighbours is unpassable, count its resource stronger.
 	//  top left neigbour
-	log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 	map.get_neighbour(f, Widelands::WALK_NW, &f1);
-	log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 	count += world.terrain_descr(f1.field->terrain_r()).resource_value(curres);
-	log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 	count += world.terrain_descr(f1.field->terrain_d()).resource_value(curres);
-	log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 
 	//  top right neigbour
-	log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 	map.get_neighbour(f, Widelands::WALK_NE, &f1);
-	log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 	count += world.terrain_descr(f1.field->terrain_d()).resource_value(curres);
 
 	//  left neighbour
-	log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 	map.get_neighbour(f, Widelands::WALK_W, &f1);
-	log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 	count += world.terrain_descr(f1.field->terrain_r()).resource_value(curres);
 
-	log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 	return count <= 3 ? 0 : f.field->nodecaps();
 }
 
@@ -111,15 +89,10 @@ Editor_Increase_Resources_Tool::handle_click_impl(Widelands::Map& map,
 		args.orgResT.push_back(res);
 		args.orgRes.push_back(mr.location().field->get_resources_amount());
 
-		EditorChangeResourceToolCallbackData data = {
-			&map,
-			&world
-		};
-
 		if
 		((res == args.cur_res or not mr.location().field->get_resources_amount())
 		        and
-		        Editor_Change_Resource_Tool_Callback(mr.location(), &data, args.cur_res))
+		        Editor_Change_Resource_Tool_Callback(mr.location(), map, world, args.cur_res))
 		{
 			//  Ok, we're doing something. First remove the current overlays.
 			const Image* pic =

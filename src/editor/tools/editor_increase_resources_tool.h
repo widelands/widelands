@@ -72,13 +72,9 @@ private:
 	Widelands::Resource_Index m_cur_res;
 };
 
-struct EditorChangeResourceToolCallbackData {
-	Widelands::Map* map;
-	const Widelands::World* world;
-};
-
-// NOCOM(#sirver): this hack is needed because the overlay manager does not use boost::bind.
-int32_t
-Editor_Change_Resource_Tool_Callback(Widelands::TCoords<Widelands::FCoords>, void*, int32_t);
+int32_t Editor_Change_Resource_Tool_Callback(const Widelands::TCoords<Widelands::FCoords>& c,
+                                             Widelands::Map& map,
+                                             const Widelands::World& world,
+                                             int32_t const curres);
 
 #endif

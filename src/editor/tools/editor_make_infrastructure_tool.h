@@ -50,6 +50,7 @@ private:
 };
 
 int32_t Editor_Make_Infrastructure_Tool_Callback
-	(Widelands::TCoords<Widelands::FCoords>, void *, int32_t);
+	(const Widelands::TCoords<Widelands::FCoords>& c,
+	 Widelands::Editor_Game_Base& egbase, int32_t const player);
 
 #endif

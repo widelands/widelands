@@ -31,10 +31,8 @@ using namespace Widelands;
 
 /// static callback function for overlay calculation
 int32_t Editor_Tool_Set_Port_Space_Callback
-	(Widelands::TCoords<Widelands::FCoords> const c, void * const data, int32_t)
+	(const Widelands::TCoords<Widelands::FCoords>& c, Map& map)
 {
-	assert(data);
-	const Map & map = *static_cast<Map const *>(data);
 	NodeCaps const caps = c.field->nodecaps();
 	FCoords f = map.get_fcoords(*c.field);
 	if ((caps & BUILDCAPS_SIZEMASK) == BUILDCAPS_BIG) {
@@ -73,7 +71,7 @@ int32_t Editor_Set_Port_Space_Tool::handle_click_impl(Map& map,
 		(map, Widelands::Area<Widelands::FCoords>(map.get_fcoords(center.node), args.sel_radius));
 	do {
 		//  check if field is valid
-		if (Editor_Tool_Set_Port_Space_Callback(mr.location(), &map, 0)) {
+		if (Editor_Tool_Set_Port_Space_Callback(mr.location(), map)) {
 			map.set_port_space(mr.location(), true);
 			Area<FCoords> a(mr.location(), 0);
 			map.recalc_for_field_area(world, a);
@@ -108,7 +106,7 @@ int32_t Editor_Unset_Port_Space_Tool::handle_click_impl(Map& map,
 		(map, Widelands::Area<Widelands::FCoords>(map.get_fcoords(center.node), args.sel_radius));
 	do {
 		//  check if field is valid
-		if (Editor_Tool_Set_Port_Space_Callback(mr.location(), &map, 0)) {
+		if (Editor_Tool_Set_Port_Space_Callback(mr.location(), map)) {
 			map.set_port_space(mr.location(), false);
 			Area<FCoords> a(mr.location(), 0);
 			map.recalc_for_field_area(world, a);
