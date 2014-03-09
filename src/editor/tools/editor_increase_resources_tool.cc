@@ -32,34 +32,51 @@ using Widelands::TCoords;
 int32_t Editor_Change_Resource_Tool_Callback(TCoords<Widelands::FCoords> const c,
                                              void* const data,
                                              int32_t const curres) {
+	log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 	assert(data);
+	log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 	const auto& callback_data = static_cast<EditorChangeResourceToolCallbackData*>(data);
+	log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 	Widelands::Map& map = *callback_data->map;
+	log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 	const Widelands::World& world = *callback_data->world;
+	log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 	Widelands::FCoords f(c, &map[c]);
 
+	log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 	Widelands::FCoords f1;
 	int32_t count = 0;
 
+	log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 	//  this field
 	count += world.terrain_descr(f.field->terrain_r()).resource_value(curres);
 	count += world.terrain_descr(f.field->terrain_d()).resource_value(curres);
 
+	log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 
 	//  If one of the neighbours is unpassable, count its resource stronger.
 	//  top left neigbour
+	log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 	map.get_neighbour(f, Widelands::WALK_NW, &f1);
+	log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 	count += world.terrain_descr(f1.field->terrain_r()).resource_value(curres);
+	log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 	count += world.terrain_descr(f1.field->terrain_d()).resource_value(curres);
+	log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 
 	//  top right neigbour
+	log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 	map.get_neighbour(f, Widelands::WALK_NE, &f1);
+	log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 	count += world.terrain_descr(f1.field->terrain_d()).resource_value(curres);
 
 	//  left neighbour
+	log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 	map.get_neighbour(f, Widelands::WALK_W, &f1);
+	log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 	count += world.terrain_descr(f1.field->terrain_r()).resource_value(curres);
 
+	log("#sirver ALIVE %s:%i\n", __FILE__, __LINE__);
 	return count <= 3 ? 0 : f.field->nodecaps();
 }
 
