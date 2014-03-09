@@ -43,5 +43,5 @@ return {
 		text_line(_"Experience levels:","n/a") ..
 	--Production Section
 		rt(h2(_"Production")) ..
-		text_line(_"Performance:", _"The %s pauses %s before going to work again.":format(_"Stonemason","25s"))
+		text_line(_"Performance:", _"The stonemason pauses 25s before going to work again.")
 }

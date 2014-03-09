@@ -6,96 +6,595 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2013-09-15 17:41+0000\n"
+"POT-Creation-Date: 2014-03-05 19:55+0000\n"
 "PO-Revision-Date: 2013-12-31 13:57+0000\n"
 "Last-Translator: cn4ij <Unknown>\n"
 "Language-Team: Language <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-01-01 05:11+0000\n"
-"X-Generator: Launchpad (build 16877)\n"
+"X-Launchpad-Export-Date: 2014-03-06 05:33+0000\n"
+"X-Generator: Launchpad (build 16948)\n"
 
-#: ../../tribes/empire/meal/conf:1
-msgid ""
-"A real meal is made in inns out of bread and fish/meat. It satisfies the "
-"needs of miners in deep mines."
+#: ../../global/militarysites/barracks.empire/conf:8
+#: ../../tribes/empire/barracks/conf:8
+msgid "Your Barracks discovered an aggressor."
 msgstr ""
-"Egy jó ebéd egy fogadóban készül kenyérből, illetve halból vagy húsból. Ez "
-"kielégíti a mély bányák dolgozóinak igényét."
 
-#: ../../tribes/empire/ship/conf:1
-msgid "A sea-worthy ship"
-msgstr "Hajózásra alkalmas hajó"
-
-#: ../../tribes/empire/ration/conf:1
-msgid ""
-"A small bite to keep miners strong and working. Rations are also consumed by "
-"the scout on his scouting trips. They are produced in a tavern out of fish "
-"or meat or bread."
+#: ../../global/militarysites/barracks.empire/conf:9
+#: ../../tribes/empire/barracks/conf:9
+msgid "Your Barracks is under attack."
 msgstr ""
-"Pár falat, ami erőt ad a bányászoknak a további munkához. A felderítő is "
-"fogyasztja útjai során. A harapnivaló kocsmában készül halból, húsból vagy "
-"kenyérből."
 
-#: ../../tribes/empire/conf:57
-msgid "Advanced Lance"
-msgstr "Továbbfejlesztett lándzsa"
+#: ../../global/militarysites/barracks.empire/conf:10
+#: ../../tribes/empire/barracks/conf:10
+msgid "The enemy defeated your soldiers at the Barracks"
+msgstr ""
 
-#: ../../tribes/empire/conf:218
-msgid "Arena"
-msgstr "Aréna"
+#: ../../global/militarysites/barracks.empire/conf:11
+#: ../../tribes/empire/barracks/conf:11
+msgid "Your soldiers defeated the enemy at the Barracks"
+msgstr ""
 
-#: ../../tribes/empire/conf:58
-msgid "Armour"
-msgstr "Vértezet"
+#: ../../global/militarysites/barrier.barbarians/conf:8
+#: ../../global/militarysites/barrier.empire/conf:8
+#: ../../tribes/empire/barrier/conf:8
+msgid "Your Barrier discovered an aggressor."
+msgstr ""
 
-#: ../../tribes/empire/conf:189
-msgid "Armour Smithy"
-msgstr "Páncélkovácsműhely"
+#: ../../global/militarysites/barrier.barbarians/conf:9
+#: ../../global/militarysites/barrier.empire/conf:9
+#: ../../tribes/empire/barrier/conf:9
+msgid "Your Barrier is under attack."
+msgstr ""
 
-#: ../../tribes/empire/conf:110
-msgid "Armoursmith"
-msgstr "Páncélkovács"
+#: ../../global/militarysites/barrier.barbarians/conf:10
+#: ../../global/militarysites/barrier.empire/conf:10
+#: ../../tribes/empire/barrier/conf:10
+msgid "The enemy defeated your soldiers at the Barrier"
+msgstr ""
 
-#: ../../tribes/empire/conf:33
-msgid "Ashes"
-msgstr "Hamu"
+#: ../../global/militarysites/barrier.barbarians/conf:11
+#: ../../global/militarysites/barrier.empire/conf:11
+#: ../../tribes/empire/barrier/conf:11
+msgid "Your soldiers defeated the enemy at the Barrier"
+msgstr ""
 
-#: ../../tribes/empire/conf:59
-msgid "Axe"
-msgstr "Fejsze"
+#: ../../global/militarysites/castle.atlanteans/conf:8
+#: ../../global/militarysites/castle.empire/conf:8
+#: ../../tribes/empire/castle/conf:9
+msgid "Your Castle discovered an aggressor."
+msgstr ""
 
-#: ../../tribes/empire/conf:111
-msgid "Baker"
-msgstr "Pék"
+#: ../../global/militarysites/castle.atlanteans/conf:9
+#: ../../global/militarysites/castle.empire/conf:9
+#: ../../tribes/empire/castle/conf:10
+msgid "Your Castle is under attack."
+msgstr ""
 
-#: ../../tribes/empire/conf:179
-msgid "Bakery"
-msgstr "Pékség"
+#: ../../global/militarysites/castle.atlanteans/conf:10
+#: ../../global/militarysites/castle.empire/conf:10
+#: ../../tribes/empire/castle/conf:11
+msgid "The enemy defeated your soldiers at the Castle"
+msgstr ""
+
+#: ../../global/militarysites/castle.atlanteans/conf:11
+#: ../../global/militarysites/castle.empire/conf:11
+#: ../../tribes/empire/castle/conf:12
+msgid "Your soldiers defeated the enemy at the Castle"
+msgstr ""
+
+#: ../../global/militarysites/citadel.barbarians/conf:8
+msgid "Your Citadel discovered an aggressor."
+msgstr ""
+
+#: ../../global/militarysites/citadel.barbarians/conf:9
+msgid "Your Citadel is under attack."
+msgstr ""
+
+#: ../../global/militarysites/citadel.barbarians/conf:10
+msgid "The enemy defeated your soldiers at the Citadel"
+msgstr ""
+
+#: ../../global/militarysites/citadel.barbarians/conf:11
+msgid "Your soldiers defeated the enemy at the Citadel"
+msgstr ""
+
+#: ../../global/militarysites/donjon.barbarians/conf:9
+msgid "Your Donjon discovered an aggressor."
+msgstr ""
+
+#: ../../global/militarysites/donjon.barbarians/conf:10
+msgid "Your Donjon is under attack."
+msgstr ""
+
+#: ../../global/militarysites/donjon.barbarians/conf:11
+msgid "The enemy defeated your soldiers at the Donjon"
+msgstr ""
+
+#: ../../global/militarysites/donjon.barbarians/conf:12
+msgid "Your soldiers defeated the enemy at the Donjon"
+msgstr ""
+
+#: ../../global/militarysites/fortress.barbarians/conf:8
+#: ../../global/militarysites/fortress.empire/conf:8
+#: ../../tribes/empire/fortress/conf:8
+msgid "Your Fortress discovered an aggressor."
+msgstr ""
+
+#: ../../global/militarysites/fortress.barbarians/conf:9
+#: ../../global/militarysites/fortress.empire/conf:9
+#: ../../tribes/empire/fortress/conf:9
+msgid "Your Fortress is under attack."
+msgstr ""
+
+#: ../../global/militarysites/fortress.barbarians/conf:10
+#: ../../global/militarysites/fortress.empire/conf:10
+#: ../../tribes/empire/fortress/conf:10
+msgid "The enemy defeated your soldiers at the Fortress"
+msgstr ""
+
+#: ../../global/militarysites/fortress.barbarians/conf:11
+#: ../../global/militarysites/fortress.empire/conf:11
+#: ../../tribes/empire/fortress/conf:11
+msgid "Your soldiers defeated the enemy at the Fortress"
+msgstr ""
+
+#: ../../global/militarysites/guardhall.atlanteans/conf:8
+msgid "Your Guardhall discovered an aggressor."
+msgstr ""
+
+#: ../../global/militarysites/guardhall.atlanteans/conf:9
+msgid "Your Guardhall is under attack."
+msgstr ""
+
+#: ../../global/militarysites/guardhall.atlanteans/conf:10
+msgid "The enemy defeated your soldiers at the Guardhall"
+msgstr ""
+
+#: ../../global/militarysites/guardhall.atlanteans/conf:11
+msgid "Your soldiers defeated the enemy at the Guardhall"
+msgstr ""
+
+#: ../../global/militarysites/guardhouse.atlanteans/conf:8
+msgid "Your Guardhouse discovered an aggressor."
+msgstr ""
+
+#: ../../global/militarysites/guardhouse.atlanteans/conf:9
+msgid "Your Guardhouse is under attack."
+msgstr ""
+
+#: ../../global/militarysites/guardhouse.atlanteans/conf:10
+msgid "The enemy defeated your soldiers at the Guardhouse"
+msgstr ""
+
+#: ../../global/militarysites/guardhouse.atlanteans/conf:11
+msgid "Your soldiers defeated the enemy at the Guardhouse"
+msgstr ""
+
+#: ../../global/militarysites/high_tower.atlanteans/conf:9
+msgid "Your High Tower discovered an aggressor."
+msgstr ""
+
+#: ../../global/militarysites/high_tower.atlanteans/conf:10
+msgid "Your High Tower is under attack."
+msgstr ""
+
+#: ../../global/militarysites/high_tower.atlanteans/conf:11
+msgid "The enemy defeated your soldiers at the High Tower"
+msgstr ""
+
+#: ../../global/militarysites/high_tower.atlanteans/conf:12
+msgid "Your soldiers defeated the enemy at the High Tower"
+msgstr ""
+
+#: ../../global/militarysites/outpost.empire/conf:8
+#: ../../tribes/empire/outpost/conf:8
+msgid "Your Outpost discovered an aggressor."
+msgstr ""
+
+#: ../../global/militarysites/outpost.empire/conf:9
+#: ../../tribes/empire/outpost/conf:9
+msgid "Your Outpost is under attack."
+msgstr ""
+
+#: ../../global/militarysites/outpost.empire/conf:10
+#: ../../tribes/empire/outpost/conf:10
+msgid "The enemy defeated your soldiers at the Outpost"
+msgstr ""
+
+#: ../../global/militarysites/outpost.empire/conf:11
+#: ../../tribes/empire/outpost/conf:11
+msgid "Your soldiers defeated the enemy at the Outpost"
+msgstr ""
+
+#: ../../global/militarysites/sentry.barbarians/conf:8
+#: ../../global/militarysites/sentry.empire/conf:8
+#: ../../tribes/empire/sentry/conf:8
+msgid "Your Sentry discovered an aggressor."
+msgstr ""
+
+#: ../../global/militarysites/sentry.barbarians/conf:9
+#: ../../global/militarysites/sentry.empire/conf:9
+#: ../../tribes/empire/sentry/conf:9
+msgid "Your Sentry is under attack."
+msgstr ""
+
+#: ../../global/militarysites/sentry.barbarians/conf:10
+#: ../../global/militarysites/sentry.empire/conf:10
+#: ../../tribes/empire/sentry/conf:10
+msgid "The enemy defeated your soldiers at the Sentry"
+msgstr ""
+
+#: ../../global/militarysites/sentry.barbarians/conf:11
+#: ../../global/militarysites/sentry.empire/conf:11
+#: ../../tribes/empire/sentry/conf:11
+msgid "Your soldiers defeated the enemy at the Sentry"
+msgstr ""
+
+#: ../../global/militarysites/small_tower.atlanteans/conf:9
+msgid "Your Small Tower discovered an aggressor."
+msgstr ""
+
+#: ../../global/militarysites/small_tower.atlanteans/conf:10
+msgid "Your Small Tower is under attack."
+msgstr ""
+
+#: ../../global/militarysites/small_tower.atlanteans/conf:11
+msgid "The enemy defeated your soldiers at the Small Tower"
+msgstr ""
+
+#: ../../global/militarysites/small_tower.atlanteans/conf:12
+msgid "Your soldiers defeated the enemy at the Small Tower"
+msgstr ""
+
+#: ../../global/militarysites/stronghold.barbarians/conf:8
+msgid "Your Stronghold discovered an aggressor."
+msgstr ""
+
+#: ../../global/militarysites/stronghold.barbarians/conf:9
+msgid "Your Stronghold is under attack."
+msgstr ""
+
+#: ../../global/militarysites/stronghold.barbarians/conf:10
+msgid "The enemy defeated your soldiers at the Stronghold"
+msgstr ""
+
+#: ../../global/militarysites/stronghold.barbarians/conf:11
+msgid "Your soldiers defeated the enemy at the Stronghold"
+msgstr ""
+
+#: ../../global/militarysites/tower.atlanteans/conf:9
+#: ../../global/militarysites/tower.empire/conf:9
+#: ../../tribes/empire/tower/conf:8
+msgid "Your Tower discovered an aggressor."
+msgstr ""
+
+#: ../../global/militarysites/tower.atlanteans/conf:10
+#: ../../global/militarysites/tower.empire/conf:10
+#: ../../tribes/empire/tower/conf:9
+msgid "Your Tower is under attack."
+msgstr ""
+
+#: ../../global/militarysites/tower.atlanteans/conf:11
+#: ../../global/militarysites/tower.empire/conf:11
+#: ../../tribes/empire/tower/conf:10
+msgid "The enemy defeated your soldiers at the Tower"
+msgstr ""
+
+#: ../../global/militarysites/tower.atlanteans/conf:12
+#: ../../global/militarysites/tower.empire/conf:12
+#: ../../tribes/empire/tower/conf:11
+msgid "Your soldiers defeated the enemy at the Tower"
+msgstr ""
+
+#: ../../tribes/empire/advanced_lance/conf:1
+msgid ""
+"This is an advanced lance with a steel tip. It is produced in a weapon "
+"smithy and used in a training camp – together with food – to train soldiers "
+"from attack level 1 to level 2."
+msgstr ""
+
+#: ../../tribes/empire/arena/conf:29
+#: ../../tribes/empire/colosseum/conf:35
+#: ../../tribes/empire/trainingscamp/conf:46
+msgid "Sleep"
+msgstr "Felfüggesztve"
+
+#: ../../tribes/empire/arena/conf:30
+#: ../../tribes/empire/colosseum/conf:36
+msgid "Upgrade soldier evade 0"
+msgstr "Katona kitérésének fejlesztése 0"
+
+#: ../../tribes/empire/arena/conf:31
+#: ../../tribes/empire/colosseum/conf:37
+msgid ""
+"Upgrade soldier evade 0 (only for compatibility with old savegames (build13))"
+msgstr ""
+"Katona kitérésének fejlesztése 0 (csak kompatibilitási okokból, a régi "
+"mentések miatt (build13))"
+
+#: ../../tribes/empire/armour/conf:1
+msgid ""
+"Basic armor for Empire soldiers. It is produced in the armor smithy and used "
+"in the training camp – together with food – to train soldiers from health "
+"level 1 to level 2."
+msgstr ""
+
+#: ../../tribes/empire/armoursmith/conf:1
+msgid "Produces armor for the soldiers."
+msgstr ""
+
+#: ../../tribes/empire/armoursmithy/conf:31
+msgid "Produce helm"
+msgstr "a sisakkészítés"
+
+#: ../../tribes/empire/armoursmithy/conf:32
+msgid "Produce armor"
+msgstr ""
+
+#: ../../tribes/empire/armoursmithy/conf:33
+msgid "Produce chain armor"
+msgstr ""
+
+#: ../../tribes/empire/armoursmithy/conf:34
+msgid "Produce plate armor"
+msgstr ""
+
+#: ../../tribes/empire/armoursmithy/conf:35
+#: ../../tribes/empire/bakery/conf:24
+#: ../../tribes/empire/brewery/conf:24
+#: ../../tribes/empire/burners_house/conf:24
+#: ../../tribes/empire/coalmine/conf:25
+#: ../../tribes/empire/deep_coalmine/conf:26
+#: ../../tribes/empire/deep_goldmine/conf:26
+#: ../../tribes/empire/deep_marblemine/conf:27
+#: ../../tribes/empire/deep_oremine/conf:26
+#: ../../tribes/empire/donkeyfarm/conf:25
+#: ../../tribes/empire/farm/conf:27
+#: ../../tribes/empire/fishers_house/conf:20
+#: ../../tribes/empire/foresters_house/conf:20
+#: ../../tribes/empire/goldmine/conf:26
+#: ../../tribes/empire/hunters_house/conf:19
+#: ../../tribes/empire/inn/conf:27
+#: ../../tribes/empire/lumberjacks_house/conf:20
+#: ../../tribes/empire/marblemine/conf:30
+#: ../../tribes/empire/mill/conf:24
+#: ../../tribes/empire/oremine/conf:26
+#: ../../tribes/empire/piggery/conf:25
+#: ../../tribes/empire/quarry/conf:24
+#: ../../tribes/empire/sawmill/conf:26
+#: ../../tribes/empire/scouts_house/conf:20
+#: ../../tribes/empire/sheepfarm/conf:24
+#: ../../tribes/empire/shipyard/conf:28
+#: ../../tribes/empire/smelting_works/conf:28
+#: ../../tribes/empire/stonemasons_house/conf:24
+#: ../../tribes/empire/tavern/conf:27
+#: ../../tribes/empire/toolsmithy/conf:49
+#: ../../tribes/empire/vineyard/conf:27
+#: ../../tribes/empire/weaponsmithy/conf:38
+#: ../../tribes/empire/weaving-mill/conf:20
+#: ../../tribes/empire/well/conf:20
+#: ../../tribes/empire/winery/conf:25
+msgid "Work"
+msgstr "a munka"
+
+#: ../../tribes/empire/axe/conf:1
+msgid ""
+"The ax is the tool for the lumberjack. It is produced by the toolsmith."
+msgstr ""
 
 #: ../../tribes/empire/baker/conf:1
 msgid "Bakes bread for workers."
 msgstr "Kenyeret süt a munkásoknak."
 
-#: ../../tribes/empire/conf:208
-msgid "Barracks"
-msgstr "Laktanya"
-
-#: ../../tribes/empire/conf:155
-#: ../../tribes/empire/conf:209
-msgid "Barrier"
-msgstr "Határőrház"
-
-#: ../../tribes/empire/armour/conf:1
+#: ../../tribes/empire/bakingtray/conf:1
 msgid ""
-"Basic armour for Empire soldiers. It is produced in the armour smithy and "
-"used in the trainingscamp - together with food- to train soldiers from "
-"healthpoints level 1 to healthpoints level 2."
+"The bread paddle is the tool of the baker, each baker needs one. It is "
+"produced by the toolsmith."
 msgstr ""
-"Alapszintű vértezet a Birodalom katonáinak. A páncélkovácsműhelyben készül, "
-"és a kiképzőtáborban – élelemmel együtt – a katonák életerejét fejlesztik "
-"vele 1.-ről 2. szintre."
+
+#: ../../tribes/empire/barracks/conf:7
+msgid "Your soldiers have occupied your Barracks"
+msgstr ""
+
+#: ../../tribes/empire/barrier/conf:7
+msgid "Your soldiers have occupied your Barrier"
+msgstr ""
+
+#: ../../tribes/empire/basket/conf:1
+msgid ""
+"This basket is needed by the vinefarmer for harvesting the grapes. It is "
+"produced by the toolsmith."
+msgstr ""
+"Ezt a puttonyt a szőlősgazda használja, ebbe szüreteli a szőlőt. A "
+"szerszámkovács készíti."
+
+#: ../../tribes/empire/beer/conf:1
+msgid ""
+"This beer is produced in a brewery out of wheat and water. It is consumed by "
+"miners in coal and iron ore mines."
+msgstr ""
+"Ezt a sört búzából és vízből készítik a sörfőzdében. A szén- és vasércbányák "
+"munkásai fogyasztják."
+
+#: ../../tribes/empire/bread/conf:1
+msgid ""
+"The bakers of the Empire make really tasty bread out of flour and water. It "
+"is used in taverns and inns to prepare rations and meals. Bread is also "
+"consumed at the training sites (arena, colosseum, training camp)."
+msgstr ""
+
+#: ../../tribes/empire/brewer/conf:1
+msgid "Produces beer or wine."
+msgstr "Sört vagy bort készít."
+
+#: ../../tribes/empire/builder/conf:1
+msgid "Works at construction sites to raise new buildings."
+msgstr ""
+
+#: ../../tribes/empire/burner/conf:1
+msgid "Burns coal."
+msgstr "Faszenet készít."
+
+#: ../../tribes/empire/carpenter/conf:1
+msgid "Works in the sawmill."
+msgstr "A fűrészmalomban dolgozik."
+
+#: ../../tribes/empire/carrier/conf:1
+msgid "Carries items along your roads."
+msgstr "Árut szállít a csomópontok között."
+
+#: ../../tribes/empire/castle/conf:8
+msgid "Your soldiers have occupied your Castle"
+msgstr ""
+
+#: ../../tribes/empire/chain_armour/conf:1
+msgid ""
+"The chain armor is a medium armor for Empire soldiers. It is produced in an "
+"armor smithy and used in a training camp – together with food – to train "
+"soldiers from health level 2 to level 3."
+msgstr ""
+
+#: ../../tribes/empire/cloth/conf:1
+msgid ""
+"Cloth is needed to build several buildings. It is also consumed in the armor "
+"smithy."
+msgstr ""
+
+#: ../../tribes/empire/coal/conf:1
+msgid ""
+"The fires of the Empire smelting works, armor smithies and weapon smithies "
+"are usually fed with coal. It is mined in coal mines or produced by a "
+"charcoal burner out of logs."
+msgstr ""
+
+#: ../../tribes/empire/colosseum/conf:38
+msgid "Upgrade soldier evade 1"
+msgstr "Katona kitérésének fejlesztése 1"
+
+#: ../../tribes/empire/colosseum/conf:39
+msgid ""
+"Upgrade soldier evade 1 (only for compatibility with old savegames (build13))"
+msgstr ""
+"Katona kitérésének fejlesztése 1 (csak kompatibilitási okokból, a régi "
+"mentések miatt (build13))"
+
+#: ../../tribes/empire/conf:4
+msgid "The Widelands Development Team"
+msgstr "A Widelands fejlesztőcsapata"
+
+#: ../../tribes/empire/conf:5
+msgid "Empire"
+msgstr "Birodalom"
+
+#: ../../tribes/empire/conf:6
+msgid "This is the culture of the Roman Empire."
+msgstr ""
+
+#: ../../tribes/empire/conf:33
+msgid "Ashes"
+msgstr "Hamu"
+
+#: ../../tribes/empire/conf:34
+msgid "Field (medium)"
+msgstr ""
+
+#: ../../tribes/empire/conf:35
+msgid "Field (small)"
+msgstr ""
+
+#: ../../tribes/empire/conf:36
+msgid "Field (tiny)"
+msgstr ""
+
+#: ../../tribes/empire/conf:37
+msgid "Field (ripe)"
+msgstr ""
+
+#: ../../tribes/empire/conf:38
+msgid "Field (harvested)"
+msgstr ""
+
+#: ../../tribes/empire/conf:39
+msgid "Destroyed Building"
+msgstr ""
+
+#: ../../tribes/empire/conf:40
+msgid "Resource indicator: Coal (little)"
+msgstr ""
+
+#: ../../tribes/empire/conf:41
+msgid "Resource indicator: Coal (much)"
+msgstr ""
+
+#: ../../tribes/empire/conf:42
+msgid "Resource indicator: Gold (little)"
+msgstr ""
+
+#: ../../tribes/empire/conf:43
+msgid "Resource indicator: Gold (much)"
+msgstr ""
+
+#: ../../tribes/empire/conf:44
+msgid "Resource indicator: Granite (little)"
+msgstr ""
+
+#: ../../tribes/empire/conf:45
+msgid "Resource indicator: Granite (much)"
+msgstr ""
+
+#: ../../tribes/empire/conf:46
+msgid "Resource indicator: Iron (little)"
+msgstr ""
+
+#: ../../tribes/empire/conf:47
+msgid "Resource indicator: Iron (much)"
+msgstr ""
+
+#: ../../tribes/empire/conf:48
+msgid "Resource indicator: No resource"
+msgstr ""
+
+#: ../../tribes/empire/conf:49
+msgid "Resource indicator: Water"
+msgstr ""
+
+#: ../../tribes/empire/conf:50
+msgid "Vine (medium)"
+msgstr ""
+
+#: ../../tribes/empire/conf:51
+msgid "Vine (small)"
+msgstr ""
+
+#: ../../tribes/empire/conf:52
+msgid "Vine (tiny)"
+msgstr ""
+
+#: ../../tribes/empire/conf:53
+msgid "Vine (ripe)"
+msgstr ""
+
+#: ../../tribes/empire/conf:54
+msgid "Ship Construction Site"
+msgstr ""
+
+#: ../../tribes/empire/conf:57
+msgid "Advanced Lance"
+msgstr "Továbbfejlesztett lándzsa"
+
+#: ../../tribes/empire/conf:58
+msgid "Armor"
+msgstr ""
+
+#: ../../tribes/empire/conf:59
+msgid "Ax"
+msgstr ""
+
+#: ../../tribes/empire/conf:60
+msgid "Bread Paddle"
+msgstr "Sütőlapát"
 
 #: ../../tribes/empire/conf:61
 msgid "Basket"
@@ -105,339 +604,53 @@ msgstr "Puttony"
 msgid "Beer"
 msgstr "Sör"
 
-#: ../../tribes/empire/fish/conf:1
-msgid ""
-"Besides bread and meat, fish is also a foodstuff for the Empire. Fish are "
-"used in taverns, inns and training sites (arena, colosseum, trainingscamp)."
-msgstr ""
-"A kenyér és a hús mellett a hal is a Birodalom egyik élelmiszere. A halat "
-"kocsmákban, fogadókban és kiképzőhelyeken (aréna, kolosszeum, kiképzőtábor) "
-"használják fel."
-
 #: ../../tribes/empire/conf:63
 msgid "Bread"
 msgstr "Kenyér"
 
-#: ../../tribes/empire/conf:60
-msgid "Bread Paddle"
-msgstr "Sütőlapát"
-
-#: ../../tribes/empire/donkeybreeder/conf:1
-msgid "Breeds cute and helpful donkeys"
-msgstr "Bájos és szolgálatkész szamarakat tenyészt."
-
-#: ../../tribes/empire/pig-breeder/conf:1
-msgid "Breeds pigs."
-msgstr "Sertéseket tenyészt."
-
-#: ../../tribes/empire/conf:112
-msgid "Brewer"
-msgstr "Sörfőző"
-
-#: ../../tribes/empire/conf:180
-msgid "Brewery"
-msgstr "Sörfőzde"
-
-#: ../../tribes/empire/conf:113
-msgid "Builder"
-msgstr "Építész"
-
-#: ../../tribes/empire/conf:114
-msgid "Burner"
-msgstr "Faszénégető"
-
-#: ../../tribes/empire/burner/conf:1
-msgid "Burns coal."
-msgstr "Faszenet készít."
-
-#: ../../tribes/empire/conf:115
-msgid "Carpenter"
-msgstr "Fűrészmunkás"
-
-#: ../../tribes/empire/conf:103
-msgid "Carrier"
-msgstr "Hordár"
-
-#: ../../tribes/empire/carrier/conf:1
-msgid "Carries items along your roads."
-msgstr "Árut szállít a csomópontok között."
-
-#: ../../tribes/empire/conf:149
-#: ../../tribes/empire/conf:212
-msgid "Castle"
-msgstr "Kastély"
-
-#: ../../tribes/empire/conf:223
-#: ../../tribes/empire/scripting/sc01_castle_village.lua:10
-msgid "Castle village"
-msgstr "Kastély körüli falu"
-
 #: ../../tribes/empire/conf:64
-msgid "Chain-Armour"
-msgstr "Láncing"
-
-#: ../../tribes/empire/conf:185
-msgid "Charcoal Burner"
-msgstr "Faszénégetőház"
-
-#: ../../tribes/empire/conf:156
-msgid "Citadel"
-msgstr "Fellegvár"
+msgid "Chain Armor"
+msgstr ""
 
 #: ../../tribes/empire/conf:65
 msgid "Cloth"
 msgstr "Szövet"
 
-#: ../../tribes/empire/cloth/conf:1
-msgid ""
-"Cloth is needed to build several buildings. It is also consumed in the "
-"armour smithy."
-msgstr ""
-"A szövet számos épülethez szükséges, illetve a páncélkovácsműhelyben is "
-"felhasználják."
-
 #: ../../tribes/empire/conf:66
 msgid "Coal"
 msgstr "Szén"
-
-#: ../../tribes/empire/conf:199
-msgid "Coal Mine"
-msgstr "Szénbánya"
-
-#: ../../tribes/empire/conf:217
-msgid "Colosseum"
-msgstr "Kolosszeum"
-
-#: ../../tribes/empire/shipyard/conf:27
-msgid "Constructing ship"
-msgstr "Építőhajó"
-
-#: ../../tribes/empire/conf:143
-msgid "Construction Site"
-msgstr "Építési terület"
-
-#: ../../tribes/empire/stonemason/conf:1
-msgid "Cuts raw pieces of granite and marble out of laying stones."
-msgstr "Nyers gránit- és márványdarabokat vág ki a kövekből."
-
-#: ../../tribes/empire/conf:198
-msgid "Deep Coal Mine"
-msgstr "Mély szénbánya"
-
-#: ../../tribes/empire/conf:202
-msgid "Deep Gold Mine"
-msgstr "Mély aranybánya"
-
-#: ../../tribes/empire/conf:200
-msgid "Deep Iron Ore Mine"
-msgstr "Mély vasércbánya"
-
-#: ../../tribes/empire/conf:196
-msgid "Deep Marble Mine"
-msgstr "Mély márványbánya"
-
-#: ../../tribes/empire/soldier/conf:1
-msgid "Defend and Conquer!"
-msgstr "Védekezz és hódíts!"
-
-#: ../../tribes/empire/conf:39
-msgid "Destroyed building"
-msgstr "Lerombolt épület"
-
-#: ../../tribes/empire/geologist/conf:1
-msgid "Discovers resources for mining."
-msgstr "Ásványok után kutat."
-
-#: ../../tribes/empire/conf:146
-msgid "Dismantle Site"
-msgstr "Bontási terület"
-
-#: ../../tribes/empire/conf:157
-msgid "Donjon"
-msgstr "Torony"
-
-#: ../../tribes/empire/conf:104
-msgid "Donkey"
-msgstr "Szamár"
-
-#: ../../tribes/empire/conf:137
-msgid "Donkey Breeder"
-msgstr "Szamártenyésztő"
-
-#: ../../tribes/empire/conf:190
-msgid "Donkeyfarm"
-msgstr "Szamárfarm"
-
-#: ../../tribes/empire/conf:5
-msgid "Empire"
-msgstr "Birodalom"
-
-#: ../../tribes/empire/conf:194
-msgid "Farm"
-msgstr "Tanya"
-
-#: ../../tribes/empire/conf:116
-msgid "Farmer"
-msgstr "Földműves"
-
-#: ../../tribes/empire/lumberjack/conf:1
-msgid "Fells trees."
-msgstr "Kivágja a fákat."
-
-#: ../../tribes/empire/conf:38
-msgid "Field harvested"
-msgstr "Learatott szántóföld"
-
-#: ../../tribes/empire/conf:34
-msgid "Field medium"
-msgstr "Közepes szántóföld"
-
-#: ../../tribes/empire/conf:37
-msgid "Field ripe"
-msgstr "Aratásra kész szántóföld"
-
-#: ../../tribes/empire/conf:35
-msgid "Field small"
-msgstr "Kis szántóföld"
-
-#: ../../tribes/empire/conf:36
-msgid "Field tiny"
-msgstr "Apró szántóföld"
 
 #: ../../tribes/empire/conf:67
 msgid "Fire Tongs"
 msgstr "Tűzifogó"
 
-#: ../../tribes/empire/fire_tongs/conf:1
-msgid ""
-"Fire tongs are tools of the smelter, who works in the smelting works. They "
-"are produced by the toolsmith."
-msgstr ""
-"A tűzifogó a kohász eszköze, aki a kohóban dolgozik. A szerszámkovács "
-"készíti."
-
 #: ../../tribes/empire/conf:68
 msgid "Fish"
 msgstr "Hal"
-
-#: ../../tribes/empire/conf:117
-msgid "Fisher"
-msgstr "Halász"
-
-#: ../../tribes/empire/conf:172
-msgid "Fisher's House"
-msgstr "Halászház"
 
 #: ../../tribes/empire/conf:69
 msgid "Fishing Rod"
 msgstr "Horgászbot"
 
-#: ../../tribes/empire/fishing_rod/conf:1
-msgid ""
-"Fishing rods are needed by fishers, to catch fish. Produced by the toolsmith."
-msgstr ""
-"A horgászbotra a halászoknak van szüksége a halfogáshoz. A szerszámkovács "
-"készíti."
-
 #: ../../tribes/empire/conf:70
 msgid "Flour"
 msgstr "Liszt"
-
-#: ../../tribes/empire/flour/conf:1
-msgid ""
-"Flour is produced by the mill out of wheat and is needed in the bakery to "
-"produce the tasty Empire bread."
-msgstr ""
-"A liszt a malomban készül búzából, és az ízletes birodalmi kenyeret sütik "
-"belőle a pékségben."
-
-#: ../../tribes/empire/conf:118
-msgid "Forester"
-msgstr "Erdész"
-
-#: ../../tribes/empire/conf:171
-msgid "Forester's House"
-msgstr "Erdészház"
-
-#: ../../tribes/empire/conf:158
-#: ../../tribes/empire/conf:213
-msgid "Fortress"
-msgstr "Erőd"
-
-#: ../../tribes/empire/conf:119
-msgid "Geologist"
-msgstr "Geológus"
-
-#: ../../tribes/empire/fisher/conf:1
-msgid "Gets fish out of the sea."
-msgstr "Halat fog a tengerből."
 
 #: ../../tribes/empire/conf:71
 msgid "Gold"
 msgstr "Arany"
 
-#: ../../tribes/empire/conf:203
-msgid "Gold Mine"
-msgstr "Aranybánya"
-
-#: ../../tribes/empire/gold/conf:1
-msgid ""
-"Gold is the most valuable of all metals; armour and weapons are garnished "
-"with it. It is produced in the smelting works out of goldstone and processed "
-"in the armour smithy and the weapon smithy."
-msgstr ""
-"Az arany a legértékesebb fém, páncélzatot és fegyvereket díszítenek vele. "
-"Aranyércből nyerik ki a kohóban, és a páncél-, ill. a fegyverkovácsműhelyben "
-"dolgozzák fel."
-
 #: ../../tribes/empire/conf:72
-msgid "Goldstone"
-msgstr "Aranyérc"
-
-#: ../../tribes/empire/goldstone/conf:1
-msgid "Goldstones are mined in goldmines and processed in smelting works."
-msgstr "Az aranyércet aranybányákban termelik ki, és kohókban dolgozzák fel."
+msgid "Gold Ore"
+msgstr ""
 
 #: ../../tribes/empire/conf:73
 msgid "Grape"
 msgstr "Szőlő"
 
-#: ../../tribes/empire/vinefarmer/conf:1
-msgid "Grows vine."
-msgstr "Szőlőt termel."
-
-#: ../../tribes/empire/conf:150
-msgid "Guardhall"
-msgstr "Őrterem"
-
-#: ../../tribes/empire/conf:151
-msgid "Guardhouse"
-msgstr "Őrház"
-
 #: ../../tribes/empire/conf:74
 msgid "Hammer"
 msgstr "Kalapács"
-
-#: ../../tribes/empire/vineyard/conf:25
-msgid "Harvest vine"
-msgstr "a szőlőszüretelés"
-
-#: ../../tribes/empire/farm/conf:25
-msgid "Harvest wheat"
-msgstr "Búza betakarítása"
-
-#: ../../tribes/empire/conf:163
-msgid "Headquarters"
-msgstr "Főhadiszállás"
-
-#: ../../tribes/empire/conf:222
-#: ../../tribes/empire/scripting/sc00_headquarters_medium.lua:10
-msgid "Headquarters medium"
-msgstr "Közepes főhadiszállás"
-
-#: ../../tribes/empire/conf:164
-msgid "Headquarters shipwreck"
-msgstr "Hajótörött-főhadiszállás"
 
 #: ../../tribes/empire/conf:75
 msgid "Heavy Lance"
@@ -447,13 +660,612 @@ msgstr "Nehéz lándzsa"
 msgid "Helmet"
 msgstr "Sisak"
 
-#: ../../tribes/empire/donkey/conf:1
-msgid "Helps to carry items at heavy used roads."
-msgstr "Segít a nagy forgalmú utakon a szállításban."
+#: ../../tribes/empire/conf:77
+msgid "Hunting Spear"
+msgstr "Vadászlándzsa"
+
+#: ../../tribes/empire/conf:78
+msgid "Iron"
+msgstr "Vas"
+
+#: ../../tribes/empire/conf:79
+msgid "Iron Ore"
+msgstr "Vasérc"
+
+#: ../../tribes/empire/conf:80
+msgid "Kitchen Tools"
+msgstr "Konyhai eszközök"
+
+#: ../../tribes/empire/conf:81
+msgid "Lance"
+msgstr "Lándzsa"
+
+#: ../../tribes/empire/conf:82
+msgid "Marble Column"
+msgstr "Márványoszlop"
+
+#: ../../tribes/empire/conf:83
+msgid "Marble"
+msgstr "Márvány"
+
+#: ../../tribes/empire/conf:84
+msgid "Meal"
+msgstr "Ebéd"
+
+#: ../../tribes/empire/conf:85
+msgid "Meat"
+msgstr "Hús"
+
+#: ../../tribes/empire/conf:86
+msgid "Pick"
+msgstr "Csákány"
+
+#: ../../tribes/empire/conf:87
+msgid "Plate Armor"
+msgstr ""
+
+#: ../../tribes/empire/conf:88
+msgid "Ration"
+msgstr "Harapnivaló"
+
+#: ../../tribes/empire/conf:89
+msgid "Saw"
+msgstr "Fűrész"
+
+#: ../../tribes/empire/conf:90
+msgid "Scythe"
+msgstr "Kasza"
+
+#: ../../tribes/empire/conf:91
+msgid "Shovel"
+msgstr "Lapát"
+
+#: ../../tribes/empire/conf:92
+msgid "Stones"
+msgstr "Kő"
+
+#: ../../tribes/empire/conf:93
+msgid "Log"
+msgstr ""
+
+#: ../../tribes/empire/conf:94
+msgid "War-Lance"
+msgstr "Harci lándzsa"
+
+#: ../../tribes/empire/conf:95
+msgid "Water"
+msgstr "Víz"
+
+#: ../../tribes/empire/conf:96
+msgid "Wheat"
+msgstr "Búza"
+
+#: ../../tribes/empire/conf:97
+msgid "Wine"
+msgstr "Bor"
+
+#: ../../tribes/empire/conf:98
+msgid "Wood"
+msgstr "Fűrészáru"
+
+#: ../../tribes/empire/conf:99
+msgid "Wood Lance"
+msgstr "Falándzsa"
+
+#: ../../tribes/empire/conf:100
+msgid "Wool"
+msgstr "Gyapjú"
+
+#: ../../tribes/empire/conf:103
+msgid "Carrier"
+msgstr "Hordár"
+
+#: ../../tribes/empire/conf:104
+msgid "Donkey"
+msgstr "Szamár"
+
+#: ../../tribes/empire/conf:107
+msgid "Soldier"
+msgstr "Katona"
+
+#: ../../tribes/empire/conf:110
+msgid "Armorsmith"
+msgstr ""
+
+#: ../../tribes/empire/conf:111
+msgid "Baker"
+msgstr "Pék"
+
+#: ../../tribes/empire/conf:112
+msgid "Brewer"
+msgstr "Sörfőző"
+
+#: ../../tribes/empire/conf:113
+msgid "Builder"
+msgstr "Építész"
+
+#: ../../tribes/empire/conf:114
+msgid "Burner"
+msgstr "Faszénégető"
+
+#: ../../tribes/empire/conf:115
+msgid "Carpenter"
+msgstr "Fűrészmunkás"
+
+#: ../../tribes/empire/conf:116
+msgid "Farmer"
+msgstr "Földműves"
+
+#: ../../tribes/empire/conf:117
+msgid "Fisher"
+msgstr "Halász"
+
+#: ../../tribes/empire/conf:118
+msgid "Forester"
+msgstr "Erdész"
+
+#: ../../tribes/empire/conf:119
+msgid "Geologist"
+msgstr "Geológus"
+
+#: ../../tribes/empire/conf:120
+msgid "Hunter"
+msgstr "Vadász"
+
+#: ../../tribes/empire/conf:121
+msgid "Innkeeper"
+msgstr "Kocsmáros"
+
+#: ../../tribes/empire/conf:122
+msgid "Lumberjack"
+msgstr "Favágó"
+
+#: ../../tribes/empire/conf:123
+msgid "Master Miner"
+msgstr "Mesterbányász"
+
+#: ../../tribes/empire/conf:124
+msgid "Miller"
+msgstr "Molnár"
+
+#: ../../tribes/empire/conf:125
+msgid "Miner"
+msgstr "Bányász"
+
+#: ../../tribes/empire/conf:126
+msgid "Pig Breeder"
+msgstr "Sertéstenyésztő"
+
+#: ../../tribes/empire/conf:127
+msgid "Shepherd"
+msgstr "Juhász"
+
+#: ../../tribes/empire/conf:128
+msgid "Shipwright"
+msgstr "Hajóács"
+
+#: ../../tribes/empire/conf:129
+msgid "Smelter"
+msgstr "Kohász"
+
+#: ../../tribes/empire/conf:130
+msgid "Stonemason"
+msgstr "Kőfaragó"
+
+#: ../../tribes/empire/conf:131
+msgid "Toolsmith"
+msgstr "Szerszámkovács"
+
+#: ../../tribes/empire/conf:132
+msgid "Trainer"
+msgstr "Kiképző"
+
+#: ../../tribes/empire/conf:133
+msgid "Weaponsmith"
+msgstr "Fegyverkovács"
+
+#: ../../tribes/empire/conf:134
+msgid "Weaver"
+msgstr "Takács"
+
+#: ../../tribes/empire/conf:135
+msgid "Vine Farmer"
+msgstr "Szőlősgazda"
+
+#: ../../tribes/empire/conf:136
+msgid "Scout"
+msgstr "Felderítő"
+
+#: ../../tribes/empire/conf:137
+msgid "Donkey Breeder"
+msgstr "Szamártenyésztő"
+
+#: ../../tribes/empire/conf:140
+msgid "Ship"
+msgstr "Hajó"
+
+#: ../../tribes/empire/conf:143
+msgid "Construction Site"
+msgstr "Építési terület"
+
+#: ../../tribes/empire/conf:146
+msgid "Dismantle Site"
+msgstr "Bontási terület"
+
+#: ../../tribes/empire/conf:149
+#: ../../tribes/empire/conf:212
+msgid "Castle"
+msgstr "Kastély"
+
+#: ../../tribes/empire/conf:150
+msgid "Guardhall"
+msgstr "Őrterem"
+
+#: ../../tribes/empire/conf:151
+msgid "Guardhouse"
+msgstr "Őrház"
 
 #: ../../tribes/empire/conf:152
 msgid "High Tower"
 msgstr "Magas torony"
+
+#: ../../tribes/empire/conf:153
+msgid "Small Tower"
+msgstr "Kis torony"
+
+#: ../../tribes/empire/conf:154
+#: ../../tribes/empire/conf:211
+msgid "Tower"
+msgstr "Torony"
+
+#: ../../tribes/empire/conf:155
+#: ../../tribes/empire/conf:209
+msgid "Barrier"
+msgstr "Határőrház"
+
+#: ../../tribes/empire/conf:156
+msgid "Citadel"
+msgstr "Fellegvár"
+
+#: ../../tribes/empire/conf:157
+msgid "Donjon"
+msgstr "Torony"
+
+#: ../../tribes/empire/conf:158
+#: ../../tribes/empire/conf:213
+msgid "Fortress"
+msgstr "Erőd"
+
+#: ../../tribes/empire/conf:159
+#: ../../tribes/empire/conf:207
+msgid "Sentry"
+msgstr "Őrház"
+
+#: ../../tribes/empire/conf:160
+msgid "Stronghold"
+msgstr "Erőd"
+
+#: ../../tribes/empire/conf:163
+msgid "Headquarters"
+msgstr "Főhadiszállás"
+
+#: ../../tribes/empire/conf:164
+msgid "Headquarters Shipwreck"
+msgstr ""
+
+#: ../../tribes/empire/conf:165
+msgid "Warehouse"
+msgstr "Raktár"
+
+#: ../../tribes/empire/conf:166
+msgid "Port"
+msgstr "Kapu"
+
+#: ../../tribes/empire/conf:169
+msgid "Quarry"
+msgstr "Kőfejtő"
+
+#: ../../tribes/empire/conf:170
+msgid "Lumberjack’s House"
+msgstr ""
+
+#: ../../tribes/empire/conf:171
+msgid "Forester’s House"
+msgstr ""
+
+#: ../../tribes/empire/conf:172
+msgid "Fisher’s House"
+msgstr ""
+
+#: ../../tribes/empire/conf:173
+msgid "Hunter’s House"
+msgstr ""
+
+#: ../../tribes/empire/conf:174
+msgid "Well"
+msgstr "Kút"
+
+#: ../../tribes/empire/conf:175
+msgid "Scout’s House"
+msgstr ""
+
+#: ../../tribes/empire/conf:176
+msgid "Stonemason’s House"
+msgstr ""
+
+#: ../../tribes/empire/conf:177
+msgid "Sawmill"
+msgstr "Fűrészmalom"
+
+#: ../../tribes/empire/conf:178
+msgid "Mill"
+msgstr "Malom"
+
+#: ../../tribes/empire/conf:179
+msgid "Bakery"
+msgstr "Pékség"
+
+#: ../../tribes/empire/conf:180
+msgid "Brewery"
+msgstr "Sörfőzde"
+
+#: ../../tribes/empire/conf:181
+msgid "Vineyard"
+msgstr "Szőlőskert"
+
+#: ../../tribes/empire/conf:182
+msgid "Winery"
+msgstr "Borászat"
+
+#: ../../tribes/empire/conf:183
+msgid "Inn"
+msgstr "Fogadó"
+
+#: ../../tribes/empire/conf:184
+msgid "Tavern"
+msgstr "Kocsma"
+
+#: ../../tribes/empire/conf:185
+msgid "Charcoal Burner"
+msgstr "Faszénégetőház"
+
+#: ../../tribes/empire/conf:186
+msgid "Smelting Works"
+msgstr "Kohó"
+
+#: ../../tribes/empire/conf:187
+msgid "Shipyard"
+msgstr "Hajógyár"
+
+#: ../../tribes/empire/conf:188
+msgid "Toolsmithy"
+msgstr "Szerszámkovácsműhely"
+
+#: ../../tribes/empire/conf:189
+msgid "Armor Smithy"
+msgstr ""
+
+#: ../../tribes/empire/conf:190
+msgid "Donkey Farm"
+msgstr ""
+
+#: ../../tribes/empire/conf:191
+msgid "Sheep Farm"
+msgstr ""
+
+#: ../../tribes/empire/conf:192
+msgid "Weaving Mill"
+msgstr "Szövöde"
+
+#: ../../tribes/empire/conf:193
+msgid "Piggery"
+msgstr "Sertéstelep"
+
+#: ../../tribes/empire/conf:194
+msgid "Farm"
+msgstr "Tanya"
+
+#: ../../tribes/empire/conf:195
+msgid "Weapon Smithy"
+msgstr "Fegyverkovácsműhely"
+
+#: ../../tribes/empire/conf:196
+msgid "Deep Marble Mine"
+msgstr "Mély márványbánya"
+
+#: ../../tribes/empire/conf:197
+msgid "Marble Mine"
+msgstr "Márványbánya"
+
+#: ../../tribes/empire/conf:198
+msgid "Deep Coal Mine"
+msgstr "Mély szénbánya"
+
+#: ../../tribes/empire/conf:199
+msgid "Coal Mine"
+msgstr "Szénbánya"
+
+#: ../../tribes/empire/conf:200
+msgid "Deep Iron Ore Mine"
+msgstr "Mély vasércbánya"
+
+#: ../../tribes/empire/conf:201
+msgid "Iron Ore Mine"
+msgstr "Vasércbánya"
+
+#: ../../tribes/empire/conf:202
+msgid "Deep Gold Mine"
+msgstr "Mély aranybánya"
+
+#: ../../tribes/empire/conf:203
+msgid "Gold Mine"
+msgstr "Aranybánya"
+
+#: ../../tribes/empire/conf:208
+msgid "Barracks"
+msgstr "Laktanya"
+
+#: ../../tribes/empire/conf:210
+msgid "Outpost"
+msgstr "Előőrs"
+
+#: ../../tribes/empire/conf:217
+msgid "Colosseum"
+msgstr "Kolosszeum"
+
+#: ../../tribes/empire/conf:218
+msgid "Arena"
+msgstr "Aréna"
+
+#: ../../tribes/empire/conf:219
+msgid "Training Camp"
+msgstr ""
+
+#: ../../tribes/empire/conf:222
+msgid "Headquarters Medium"
+msgstr ""
+
+#: ../../tribes/empire/conf:223
+msgid "Castle Village"
+msgstr ""
+
+#: ../../tribes/empire/donkey/conf:1
+msgid "Helps to carry items along busy roads."
+msgstr ""
+
+#: ../../tribes/empire/donkeybreeder/conf:1
+msgid "Breeds cute and helpful donkeys"
+msgstr "Bájos és szolgálatkész szamarakat tenyészt."
+
+#: ../../tribes/empire/farm/conf:23
+msgid "Plant wheat"
+msgstr "a búzavetés"
+
+#: ../../tribes/empire/farm/conf:25
+msgid "Harvest wheat"
+msgstr "Búza betakarítása"
+
+#: ../../tribes/empire/farmer/conf:1
+msgid "Plants fields."
+msgstr "Mezőn dolgozik."
+
+#: ../../tribes/empire/fire_tongs/conf:1
+msgid ""
+"Fire tongs are tools of the smelter, who works in the smelting works. They "
+"are produced by the toolsmith."
+msgstr ""
+"A tűzifogó a kohász eszköze, aki a kohóban dolgozik. A szerszámkovács "
+"készíti."
+
+#: ../../tribes/empire/fish/conf:1
+msgid ""
+"Besides bread and meat, fish is also a foodstuff for the Empire. Fish are "
+"used in taverns, inns and training sites (arena, colosseum, training camp)."
+msgstr ""
+
+#: ../../tribes/empire/fisher/conf:1
+msgid "Catches fish in the sea."
+msgstr ""
+
+#: ../../tribes/empire/fishing_rod/conf:1
+msgid ""
+"Fishing rods are needed by fishers, to catch fish. Produced by the toolsmith."
+msgstr ""
+"A horgászbotra a halászoknak van szüksége a halfogáshoz. A szerszámkovács "
+"készíti."
+
+#: ../../tribes/empire/flour/conf:1
+msgid ""
+"Flour is produced by the mill out of wheat and is needed in the bakery to "
+"produce the tasty Empire bread."
+msgstr ""
+"A liszt a malomban készül búzából, és az ízletes birodalmi kenyeret sütik "
+"belőle a pékségben."
+
+#: ../../tribes/empire/forester/conf:1
+msgid "Plants trees."
+msgstr "Fákat ültet."
+
+#: ../../tribes/empire/fortress/conf:7
+msgid "Your soldiers have occupied your Fortress"
+msgstr ""
+
+#: ../../tribes/empire/geologist/conf:1
+msgid "Discovers resources for mining."
+msgstr "Ásványok után kutat."
+
+#: ../../tribes/empire/gold/conf:1
+msgid ""
+"Gold is the most valuable of all metals; armor and weapons are embellished "
+"with it. It is produced in the smelting works out of gold ore and processed "
+"in the armor smithy and the weapon smithy."
+msgstr ""
+
+#: ../../tribes/empire/goldstone/conf:1
+msgid "Gold Ore is mined in goldmines and processed at the smelting works."
+msgstr ""
+
+#: ../../tribes/empire/grape/conf:1
+msgid ""
+"These grapes are the base for a tasty wine. They are harvested in a vineyard "
+"and processed in a winery."
+msgstr ""
+
+#: ../../tribes/empire/hammer/conf:1
+msgid ""
+"The hammer is an essential tool. It is needed by the geologist, the builder, "
+"the armor and the weapon smith. Make sure you always have some in reserve! "
+"It is produced by the toolsmith."
+msgstr ""
+
+#: ../../tribes/empire/heavy_lance/conf:1
+msgid ""
+"This is a strong lance with a steel-tip and a little blade. It is produced "
+"in the weapon smithy and used in the training camp – together with food – "
+"train soldiers from attack level 2 to level 3."
+msgstr ""
+
+#: ../../tribes/empire/helm/conf:1
+msgid ""
+"The helmet is the basic defense of a warrior. It is produced in an armor "
+"smithy. In combination with a wood lance, it is the equipment to fit out "
+"young soldiers. Helmets are also used in training camps – together with food "
+"– to train soldiers from health level 0 to level 1."
+msgstr ""
+
+#: ../../tribes/empire/hunter/conf:1
+msgid "The Hunter brings good meat to the colonists."
+msgstr "A vadász jó hússal látja el a hódítókat."
+
+#: ../../tribes/empire/hunting_spear/conf:1
+msgid ""
+"This spear is light enough to be thrown, but heavy enough to kill any animal "
+"in one blow. It is only used by hunters."
+msgstr ""
+
+#: ../../tribes/empire/inn/conf:25
+msgid "Produce ration"
+msgstr "a harapnivaló-készítés"
+
+#: ../../tribes/empire/inn/conf:26
+msgid "Produce meal"
+msgstr "az ebédkészítés"
+
+#: ../../tribes/empire/innkeeper/conf:1
+msgid "Produces food for miners."
+msgstr "Ételt készít a bányászok számára."
+
+#: ../../tribes/empire/iron/conf:1
+msgid ""
+"Weapons, armor and tools are made of iron. It is extracted from iron ore in "
+"the smelting works."
+msgstr ""
+
+#: ../../tribes/empire/ironore/conf:1
+msgid ""
+"Iron ore needs to be smelted in the smelting works to yield iron. Iron ore "
+"is produced in iron mines."
+msgstr ""
 
 #: ../../tribes/empire/kitchen_tools/conf:1
 msgid ""
@@ -464,132 +1276,30 @@ msgstr ""
 "eszközök? A szerszámkovácsműhelyben állítanak elő ilyeneket, és a "
 "kocsmákban, fogadókban használják őket."
 
-#: ../../tribes/empire/conf:120
-msgid "Hunter"
-msgstr "Vadász"
-
-#: ../../tribes/empire/conf:173
-msgid "Hunter's House"
-msgstr "Vadászház"
-
-#: ../../tribes/empire/conf:77
-msgid "Hunting Spear"
-msgstr "Vadászlándzsa"
-
-#: ../../tribes/empire/conf:183
-msgid "Inn"
-msgstr "Fogadó"
-
-#: ../../tribes/empire/conf:121
-msgid "Innkeeper"
-msgstr "Kocsmáros"
-
-#: ../../tribes/empire/conf:78
-msgid "Iron"
-msgstr "Vas"
-
-#: ../../tribes/empire/conf:79
-msgid "Iron Ore"
-msgstr "Vasérc"
-
-#: ../../tribes/empire/conf:201
-msgid "Iron Ore Mine"
-msgstr "Vasércbánya"
-
-#: ../../tribes/empire/ironore/conf:1
+#: ../../tribes/empire/lance/conf:1
 msgid ""
-"Iron ores need to be smelted in the smelting works to give iron. Iron ores "
-"are produced in iron mines."
+"This lance has an iron spike. It is produced in a weapon smithy and used in "
+"a training camp – together with food – to train soldiers from attack level 0 "
+"to attack level 1."
 msgstr ""
-"A vasércből, amit vasércbányákban termelnek ki, a vasat kohókban lehet "
-"kinyerni."
 
-#: ../../tribes/empire/shepherd/conf:1
-msgid "Keeping sheep."
-msgstr "Birkákat tart."
-
-#: ../../tribes/empire/conf:80
-msgid "Kitchen Tools"
-msgstr "Konyhai eszközök"
-
-#: ../../tribes/empire/conf:81
-msgid "Lance"
-msgstr "Lándzsa"
-
-#: ../../tribes/empire/conf:122
-msgid "Lumberjack"
-msgstr "Favágó"
-
-#: ../../tribes/empire/conf:170
-msgid "Lumberjack's House"
-msgstr "Favágóház"
-
-#: ../../tribes/empire/conf:83
-msgid "Marble"
-msgstr "Márvány"
-
-#: ../../tribes/empire/conf:82
-msgid "Marble Column"
-msgstr "Márványoszlop"
-
-#: ../../tribes/empire/conf:197
-msgid "Marble Mine"
-msgstr "Márványbánya"
-
-#: ../../tribes/empire/marblecolumn/conf:1
-msgid ""
-"Marble columns present the high culture of the Empire, so they are needed "
-"for nearly every bigger building. They are produced out of marble in a "
-"stonemason's house."
-msgstr ""
-"A márványoszlopok a Birodalom fejlett kultúráját mutatják, így szinte minden "
-"nagyobb épülethez felhasználják őket. Márványból készülnek a kőfaragóházban."
+#: ../../tribes/empire/lumberjack/conf:1
+msgid "Fells trees."
+msgstr "Kivágja a fákat."
 
 #: ../../tribes/empire/marble/conf:1
 msgid ""
-"Marble is the beautiful stone, which is cut out of the mountains or produced "
-"in a quarry. Marble is used as building material and gets formed into marble "
-"columns in the stonemason's house."
+"Marble is the beautiful stone which is cut out of the mountains or produced "
+"in a quarry. Marble is used as building material and gets chiselled into "
+"marble columns in the stonemason’s house."
 msgstr ""
-"A márvány gyönyörű kő, amit hegyekből vájnak ki vagy kőfejtőben termelnek "
-"ki. A márványt építőanyagként használják, a kőfaragóházban pedig oszlopot is "
-"formálnak belőle."
 
-#: ../../tribes/empire/conf:123
-msgid "Master Miner"
-msgstr "Mesterbányász"
-
-#: ../../tribes/empire/conf:84
-msgid "Meal"
-msgstr "Ebéd"
-
-#: ../../tribes/empire/conf:85
-msgid "Meat"
-msgstr "Hús"
-
-#: ../../tribes/empire/meat/conf:1
+#: ../../tribes/empire/marblecolumn/conf:1
 msgid ""
-"Meat contains a lot of energy. It is used in the inns and taverns to prepare "
-"lunch for the miners and is consumed in the training sites (arena, "
-"colosseum, trainingscamp). There are two sources of meat: pork out of "
-"piggeries and the meat of wild game hunted by the hunters."
+"Marble columns represent the high culture of the Empire, so they are needed "
+"for nearly every larger building. They are produced out of marble at a "
+"stonemason’s house."
 msgstr ""
-"A húsban nagyon sok energia van. A bányászoknak készítenek belőle ételt a "
-"kocsmákban és a fogadókban, valamint a kiképzőhelyeken (aréna, kolosszeum, "
-"kiképzőtábor) fogyasztják. Két forrása van: a disznók húsa a sertéstelepről, "
-"illetve a vadászok által elejtett vadak húsa."
-
-#: ../../tribes/empire/conf:178
-msgid "Mill"
-msgstr "Malom"
-
-#: ../../tribes/empire/conf:124
-msgid "Miller"
-msgstr "Molnár"
-
-#: ../../tribes/empire/miller/conf:1
-msgid "Mills the wheat to produce flour."
-msgstr "Lisztté őrli a búzát."
 
 #: ../../tribes/empire/marblemine/conf:26
 #: ../../tribes/empire/quarry/conf:22
@@ -614,77 +1324,157 @@ msgid "Mine stone (only for compatibility with old savegames (build13))"
 msgstr ""
 "a kőbányászat (csak kompatibilitási okokból, a régi mentések miatt (build13))"
 
-#: ../../tribes/empire/conf:125
-msgid "Miner"
-msgstr "Bányász"
+#: ../../tribes/empire/master-miner/conf:1
+#: ../../tribes/empire/miner/conf:1
+msgid "Works deep in the mines to obtain coal, iron or gold."
+msgstr "A bányák mélyén dolgozik, hogy szenet, vasat és aranyat szerezzen."
+
+#: ../../tribes/empire/meal/conf:1
+msgid ""
+"A real meal is made in inns out of bread and fish/meat. It satisfies the "
+"needs of miners in deep mines."
+msgstr ""
+"Egy jó ebéd egy fogadóban készül kenyérből, illetve halból vagy húsból. Ez "
+"kielégíti a mély bányák dolgozóinak igényét."
+
+#: ../../tribes/empire/meat/conf:1
+msgid ""
+"Meat contains a lot of energy. It is used in the inns and taverns to prepare "
+"lunch for the miners and is consumed at the training sites (arena, "
+"colosseum, training camp). There are two sources of meat: pork from "
+"piggeries and the meat of wild game hunted by the hunters."
+msgstr ""
+
+#: ../../tribes/empire/miller/conf:1
+msgid "Mills the wheat to produce flour."
+msgstr "Lisztté őrli a búzát."
+
+#: ../../tribes/empire/outpost/conf:7
+msgid "Your soldiers have occupied your Outpost"
+msgstr ""
+
+#: ../../tribes/empire/pick/conf:1
+msgid ""
+"This pick is used by the stonemasons and the miners. It is produced by the "
+"toolsmith."
+msgstr ""
+"Ezt a csákányt a kőfaragók és a bányászok használják. A szerszámkovács "
+"készíti."
+
+#: ../../tribes/empire/pig-breeder/conf:1
+msgid "Breeds pigs."
+msgstr "Sertéseket tenyészt."
+
+#: ../../tribes/empire/plate_armour/conf:1
+msgid ""
+"The plate armor is the strongest armor an Empire soldier can have. It is "
+"produced in the armor smithy and used in the training camp – together with "
+"food – to train soldiers from health level 3 to level 4."
+msgstr ""
+
+#: ../../tribes/empire/ration/conf:1
+msgid ""
+"A small bite to keep miners strong and working. Rations are also consumed by "
+"the scout on his scouting trips. They are produced in a tavern out of fish "
+"or meat or bread."
+msgstr ""
+"Pár falat, ami erőt ad a bányászoknak a további munkához. A felderítő is "
+"fogyasztja útjai során. A harapnivaló kocsmában készül halból, húsból vagy "
+"kenyérből."
+
+#: ../../tribes/empire/saw/conf:1
+msgid "This saw is needed by the sawyer. It is produced by the toolsmith."
+msgstr ""
+"Erre a fűrészre a fűrészmunkásnak van szüksége. A szerszámkovács készíti."
+
+#: ../../tribes/empire/scout/conf:1
+msgid ""
+"Scouts like Scotty the scout scouting unscouted areas in a scouty fashion."
+msgstr ""
+
+#: ../../tribes/empire/scripting/sc00_headquarters_medium.lua:10
+msgid "Headquarters medium"
+msgstr "Közepes főhadiszállás"
+
+#: ../../tribes/empire/scripting/sc01_castle_village.lua:10
+msgid "Castle village"
+msgstr "Kastély körüli falu"
 
 #: ../../tribes/empire/scripting/sc01_castle_village.lua:119
 msgid "Not enough space"
 msgstr "Nincs elég hely"
 
-#: ../../tribes/empire/conf:210
-msgid "Outpost"
-msgstr "Előőrs"
+#: ../../tribes/empire/scripting/sc01_castle_village.lua:120
+msgid ""
+"Some of your starting buildings didn’t have enough room and \n"
+"weren’t built. You are at a disadvantage with this; consider restarting \n"
+"this map with a fair starting condition."
+msgstr ""
 
-#: ../../tribes/empire/conf:86
-msgid "Pick"
-msgstr "Csákány"
+#: ../../tribes/empire/scythe/conf:1
+msgid ""
+"The Scythe is the tool of the farmer. It is produced by the toolsmith."
+msgstr ""
 
-#: ../../tribes/empire/conf:126
-msgid "Pig Breeder"
-msgstr "Sertéstenyésztő"
+#: ../../tribes/empire/sentry/conf:7
+msgid "Your soldiers have occupied your Sentry"
+msgstr ""
 
-#: ../../tribes/empire/conf:193
-msgid "Piggery"
-msgstr "Sertéstelep"
+#: ../../tribes/empire/shepherd/conf:1
+msgid "Keeping sheep."
+msgstr "Birkákat tart."
 
-#: ../../tribes/empire/vineyard/conf:23
-msgid "Plant vine"
-msgstr "a szőlőültetés"
+#: ../../tribes/empire/ship/conf:1
+msgid "A sea-worthy ship"
+msgstr "Hajózásra alkalmas hajó"
 
-#: ../../tribes/empire/farm/conf:23
-msgid "Plant wheat"
-msgstr "a búzavetés"
+#: ../../tribes/empire/shipwright/conf:1
+msgid "Works at the shipyard and constructs new ships."
+msgstr "A hajógyárban dolgozik, új hajókat épít."
 
-#: ../../tribes/empire/farmer/conf:1
-msgid "Plants fields."
-msgstr "Mezőn dolgozik."
+#: ../../tribes/empire/shipyard/conf:27
+msgid "Constructing ship"
+msgstr "Építőhajó"
 
-#: ../../tribes/empire/forester/conf:1
-msgid "Plants trees."
-msgstr "Fákat ültet."
+#: ../../tribes/empire/shovel/conf:1
+msgid ""
+"The shovel is needed for the proper handling of plants. Therefore the "
+"forester and the vinefarmer use it. It is produced by the toolsmith."
+msgstr ""
 
-#: ../../tribes/empire/conf:87
-msgid "Plate-Armour"
-msgstr "Lemezpáncél"
+#: ../../tribes/empire/smelter/conf:1
+msgid "Smelts iron."
+msgstr "Vasat olvaszt"
 
-#: ../../tribes/empire/conf:166
-msgid "Port"
-msgstr "Kapu"
+#: ../../tribes/empire/smelting_works/conf:26
+msgid "Smelt iron"
+msgstr "a vaskohászat"
 
-#: ../../tribes/empire/weaponsmithy/conf:35
-msgid "Produce advanced lance"
-msgstr "a továbbfejlesztett lándzsa készítése"
+#: ../../tribes/empire/smelting_works/conf:27
+msgid "Smelt gold"
+msgstr "az aranykohászat"
 
-#: ../../tribes/empire/armoursmithy/conf:32
-msgid "Produce armour"
-msgstr "a vértezetkészítés"
+#: ../../tribes/empire/soldier/conf:1
+msgid "Defend and Conquer!"
+msgstr "Védekezz és hódíts!"
 
-#: ../../tribes/empire/toolsmithy/conf:48
-msgid "Produce axe"
-msgstr "a fejszekészítés"
+#: ../../tribes/empire/stone/conf:1
+msgid ""
+"Stones are a basic building material of the Empire. They are produced in "
+"quarries and marble mines."
+msgstr ""
+
+#: ../../tribes/empire/stonemason/conf:1
+msgid "Cuts raw pieces of granite and marble out of rocks."
+msgstr ""
+
+#: ../../tribes/empire/toolsmith/conf:1
+msgid "Produces tools for the workers."
+msgstr "Szerszámokat készít a munkásoknak."
 
 #: ../../tribes/empire/toolsmithy/conf:37
-msgid "Produce bakingtray"
-msgstr "a sütőlapát-készítés"
-
-#: ../../tribes/empire/toolsmithy/conf:46
-msgid "Produce basket"
-msgstr "a puttonykészítés"
-
-#: ../../tribes/empire/armoursmithy/conf:33
-msgid "Produce chain armour"
-msgstr "a láncingkészítés"
+msgid "Produce bread paddle"
+msgstr ""
 
 #: ../../tribes/empire/toolsmithy/conf:38
 msgid "Produce fire tongs"
@@ -698,45 +1488,13 @@ msgstr "a horgászbotkészítés"
 msgid "Produce hammer"
 msgstr "a kalapácskészítés"
 
-#: ../../tribes/empire/weaponsmithy/conf:36
-msgid "Produce heavy lance"
-msgstr "a nehézlándzsa-készítés"
-
-#: ../../tribes/empire/armoursmithy/conf:31
-msgid "Produce helm"
-msgstr "a sisakkészítés"
-
-#: ../../tribes/empire/toolsmithy/conf:45
-msgid "Produce hunting spear"
-msgstr "a vadászlándzsa-készítés"
-
 #: ../../tribes/empire/toolsmithy/conf:41
 msgid "Produce kitchen tools"
 msgstr "a konyhai eszközök készítése"
 
-#: ../../tribes/empire/weaponsmithy/conf:34
-msgid "Produce lance"
-msgstr "a lándzsakészítés"
-
-#: ../../tribes/empire/inn/conf:26
-msgid "Produce meal"
-msgstr "az ebédkészítés"
-
 #: ../../tribes/empire/toolsmithy/conf:42
 msgid "Produce pick"
 msgstr "a csákánykészítés"
-
-#: ../../tribes/empire/armoursmithy/conf:34
-msgid "Produce plate armour"
-msgstr "a lemezpáncél-készítés"
-
-#: ../../tribes/empire/inn/conf:25
-msgid "Produce ration"
-msgstr "a harapnivaló-készítés"
-
-#: ../../tribes/empire/toolsmithy/conf:47
-msgid "Produce saw"
-msgstr "a fűrészkészítés"
 
 #: ../../tribes/empire/toolsmithy/conf:43
 msgid "Produce scythe"
@@ -746,461 +1504,29 @@ msgstr "a kaszakészítés"
 msgid "Produce shovel"
 msgstr "a lapátkészítés"
 
-#: ../../tribes/empire/weaponsmithy/conf:37
-msgid "Produce war lance"
-msgstr "a harcilándzsa-készítés"
+#: ../../tribes/empire/toolsmithy/conf:45
+msgid "Produce hunting spear"
+msgstr "a vadászlándzsa-készítés"
 
-#: ../../tribes/empire/weaponsmithy/conf:33
-msgid "Produce wood lance"
-msgstr "a falándzsakészítés"
+#: ../../tribes/empire/toolsmithy/conf:46
+msgid "Produce basket"
+msgstr "a puttonykészítés"
 
-#: ../../tribes/empire/armoursmith/conf:1
-msgid "Produces armour for the soldiers."
-msgstr "Páncélt készít a katonák számára."
+#: ../../tribes/empire/toolsmithy/conf:47
+msgid "Produce saw"
+msgstr "a fűrészkészítés"
 
-#: ../../tribes/empire/brewer/conf:1
-msgid "Produces beer or wine."
-msgstr "Sört vagy bort készít."
-
-#: ../../tribes/empire/weaver/conf:1
-msgid "Produces cloth for ships and soldiers."
-msgstr "Szövetet készít a hajóvitorlákhoz és a katonáknak."
-
-#: ../../tribes/empire/innkeeper/conf:1
-msgid "Produces food for miners."
-msgstr "Ételt készít a bányászok számára."
-
-#: ../../tribes/empire/toolsmith/conf:1
-msgid "Produces tools for the workers."
-msgstr "Szerszámokat készít a munkásoknak."
-
-#: ../../tribes/empire/weaponsmith/conf:1
-msgid "Produces weapons for the soldiers."
-msgstr "Fegyvereket készít a katonáknak."
-
-#: ../../tribes/empire/conf:169
-msgid "Quarry"
-msgstr "Kőfejtő"
-
-#: ../../tribes/empire/conf:88
-msgid "Ration"
-msgstr "Harapnivaló"
-
-#: ../../tribes/empire/conf:40
-msgid "Resource indicator coal little"
-msgstr "Kevés szén forrásjelzője"
-
-#: ../../tribes/empire/conf:41
-msgid "Resource indicator coal much"
-msgstr "Sok szén forrásjelzője"
-
-#: ../../tribes/empire/conf:42
-msgid "Resource indicator gold little"
-msgstr "Kevés arany forrásjelzője"
-
-#: ../../tribes/empire/conf:43
-msgid "Resource indicator gold much"
-msgstr "Sok arany forrásjelzője"
-
-#: ../../tribes/empire/conf:44
-msgid "Resource indicator granite little"
-msgstr "Kevés gránit forrásjelzője"
-
-#: ../../tribes/empire/conf:45
-msgid "Resource indicator granite much"
-msgstr "Sok gránit forrásjelzője"
-
-#: ../../tribes/empire/conf:46
-msgid "Resource indicator iron little"
-msgstr "Kevés vas forrásjelzője"
-
-#: ../../tribes/empire/conf:47
-msgid "Resource indicator iron much"
-msgstr "Sok vas forrásjelzője"
-
-#: ../../tribes/empire/conf:48
-msgid "Resource indicator no resource"
-msgstr "Semmi nyersanyag forrásjelzője"
-
-#: ../../tribes/empire/conf:49
-msgid "Resource indicator water"
-msgstr "Víz forrásjelzője"
-
-#: ../../tribes/empire/conf:89
-msgid "Saw"
-msgstr "Fűrész"
-
-#: ../../tribes/empire/conf:177
-msgid "Sawmill"
-msgstr "Fűrészmalom"
-
-#: ../../tribes/empire/conf:136
-msgid "Scout"
-msgstr "Felderítő"
-
-#: ../../tribes/empire/conf:175
-msgid "Scout's House"
-msgstr "Felderítő háza"
-
-#: ../../tribes/empire/scout/conf:1
-msgid ""
-"Scouts like Scotty the scout scout unscouted area in a scouty fashion."
+#: ../../tribes/empire/toolsmithy/conf:48
+msgid "Produce ax"
 msgstr ""
-"A felderítők, mint Feri, a felderítő, felderítenek felderítetlen területet "
-"felderítőruhában."
 
-#: ../../tribes/empire/conf:90
-msgid "Scythe"
-msgstr "Kasza"
-
-#: ../../tribes/empire/conf:159
-#: ../../tribes/empire/conf:207
-msgid "Sentry"
-msgstr "Őrház"
-
-#: ../../tribes/empire/conf:191
-msgid "Sheepfarm"
-msgstr "Juhtelep"
-
-#: ../../tribes/empire/conf:127
-msgid "Shepherd"
-msgstr "Juhász"
-
-#: ../../tribes/empire/conf:140
-msgid "Ship"
-msgstr "Hajó"
-
-#: ../../tribes/empire/conf:54
-msgid "Ship construction site"
-msgstr "Hajókészítő"
-
-#: ../../tribes/empire/conf:128
-msgid "Shipwright"
-msgstr "Hajóács"
-
-#: ../../tribes/empire/conf:187
-msgid "Shipyard"
-msgstr "Hajógyár"
-
-#: ../../tribes/empire/conf:91
-msgid "Shovel"
-msgstr "Lapát"
-
-#: ../../tribes/empire/arena/conf:29
-#: ../../tribes/empire/colosseum/conf:35
-#: ../../tribes/empire/trainingscamp/conf:46
-msgid "Sleep"
-msgstr "Felfüggesztve"
-
-#: ../../tribes/empire/conf:153
-msgid "Small Tower"
-msgstr "Kis torony"
-
-#: ../../tribes/empire/smelting_works/conf:27
-msgid "Smelt gold"
-msgstr "az aranykohászat"
-
-#: ../../tribes/empire/smelting_works/conf:26
-msgid "Smelt iron"
-msgstr "a vaskohászat"
-
-#: ../../tribes/empire/conf:129
-msgid "Smelter"
-msgstr "Kohász"
-
-#: ../../tribes/empire/conf:186
-msgid "Smelting Works"
-msgstr "Kohó"
-
-#: ../../tribes/empire/smelter/conf:1
-msgid "Smelts iron."
-msgstr "Vasat olvaszt"
-
-#: ../../tribes/empire/conf:107
-msgid "Soldier"
-msgstr "Katona"
-
-#: ../../tribes/empire/scripting/sc01_castle_village.lua:120
-msgid ""
-"Some of your starting buildings didn't have enough room and \n"
-"weren't build. You are at an disadvantage with this; consider restarting \n"
-"this map with a fair starting condition."
+#: ../../tribes/empire/tower/conf:7
+msgid "Your soldiers have occupied your Tower"
 msgstr ""
-"Néhány kezdő épületed nem fért el és \n"
-"ezért nem lettek megépítve. Emiatt hátrányba kerültél, fontold meg \n"
-"a pálya újrakezdését az egyenlő esélyek érdekében."
-
-#: ../../tribes/empire/conf:130
-msgid "Stonemason"
-msgstr "Kőfaragó"
-
-#: ../../tribes/empire/conf:176
-msgid "Stonemason's House"
-msgstr "Kőfaragóház"
-
-#: ../../tribes/empire/conf:92
-msgid "Stones"
-msgstr "Kő"
-
-#: ../../tribes/empire/stone/conf:1
-msgid ""
-"Stones are a basic building material of the Empire. It is produced in "
-"quarries and marble mines."
-msgstr ""
-"A kő a Birodalom egyik alapvető építőanyaga. Kőfejtőkben és márványbányákban "
-"termelik ki."
-
-#: ../../tribes/empire/conf:160
-msgid "Stronghold"
-msgstr "Erőd"
-
-#: ../../tribes/empire/conf:184
-msgid "Tavern"
-msgstr "Kocsma"
-
-#: ../../tribes/empire/hunter/conf:1
-msgid "The Hunter brings good meat to the colonists."
-msgstr "A vadász jó hússal látja el a hódítókat."
-
-#: ../../tribes/empire/scythe/conf:1
-msgid ""
-"The Scythe is the tool of the farmers. It is produced by the toolsmith."
-msgstr "A kasza a földművesek eszköze. A szerszámkovács készíti."
-
-#: ../../tribes/empire/conf:4
-msgid "The Widelands Development Team"
-msgstr "A Widelands fejlesztőcsapata"
-
-#: ../../tribes/empire/axe/conf:1
-msgid ""
-"The axe is the tool for the lumberjack. It is produced by the toolsmith."
-msgstr "A fejsze a favágó eszköze. A szerszámkovács készíti."
-
-#: ../../tribes/empire/bread/conf:1
-msgid ""
-"The bakers of the Empire make really tasty bread out of flour and water. It "
-"is used in taverns and inns to prepare rations and meals. Bread is also "
-"consumed in the training sites (arena, colosseum, trainingscamp)."
-msgstr ""
-"A Birodalom pékjei igazán ízletes kenyeret sütnek lisztből és vízből. A "
-"kocsmákban és a fogadókban használják fel harapnivaló és ebéd készítéséhez. "
-"A kiképzőhelyeken (aréna, kolosszeum, kiképzőtábor) szintén fogyasztanak "
-"kenyeret."
-
-#: ../../tribes/empire/bakingtray/conf:1
-msgid ""
-"The bread paddle is the tool of the baker, each baker needs its own. It is "
-"produced by the toolsmith."
-msgstr ""
-"A sütőlapát a pék eszköze, minden péknek sajátja van. A szerszámkovács "
-"készíti."
-
-#: ../../tribes/empire/chain_armour/conf:1
-msgid ""
-"The chain-armour is a medium armour for Empire soldiers. It is produced in "
-"an armour smithy and used in a trainingscamp - together with food - to train "
-"soldiers from healthpoints level 2 to level 3."
-msgstr ""
-"A láncing egy közepes erősségű vértezet a Birodalom katonaságában. A "
-"páncélkovácsműhelyben készül, és a kiképzőtáborban – élelemmel együtt – a "
-"katonák életerejét fejlesztik vele 2.-ról 3. szintre."
-
-#: ../../tribes/empire/coal/conf:1
-msgid ""
-"The fires of the Empire smelting works, armour smithies and weapon smithies "
-"are usually fed with coal. It is mined in coal mines or produced by a "
-"charcoal burner out of trunks."
-msgstr ""
-"A Birodalom kohóinak, páncél- és fegyverkovácsműhelyeinek tüzeit általában "
-"szén táplálja. Ezt szénbányákban termelik ki, vagy farönkből készítik a "
-"faszénégetőházban."
-
-#: ../../tribes/empire/hammer/conf:1
-msgid ""
-"The hammer is an essential tool. It is needed by the geologist, the builder, "
-"the armour- and weaponsmith. Make sure you always have some in reserve! It "
-"is produced by the toolsmith."
-msgstr ""
-"A kalapács igen fontos eszköz. Használja a geológus, az építész, a páncél- "
-"és a fegyverkovács. Mindig legyen belőle néhány tartalék! A szerszámkovács "
-"készíti."
-
-#: ../../tribes/empire/helm/conf:1
-msgid ""
-"The helmet is the basic defense of a warrior. It is produced in an armour "
-"smithy. Together with a wood lance it is the equipment to fit out young "
-"soldiers. Helmets are also used in trainingscamps - together with food - to "
-"train soldiers from healthpoints level 0 to healthpoints level 1."
-msgstr ""
-"A sisak a harcos alapvető védelmét látja el. A páncélkovácsműhelyben készül. "
-"A falándzsával együtt ez adja az újoncok felszerelését. A sisakot a "
-"kiképzőtáborban is használják – élelemmel együtt – a katonák életerejének 0.-"
-"ról 1. szintre fejlesztéséhez."
-
-#: ../../tribes/empire/plate_armour/conf:1
-msgid ""
-"The plate armour is the strongest armour existing for the Empire soldiers. "
-"It is produced in the armour smithy and used in the trainingscamp  - "
-"together with food - to train soldiers from healthpoints level 3 to level 4."
-msgstr ""
-"A lemezpáncél a Birodalom katonaságában a létező legerősebb vértezet. A "
-"páncélkovácsműhelyben készül, és a kiképzőhelyeken – élelemmel együtt – a "
-"katonák életerejét fejlesztik vele 3.-ról 4. szintre."
-
-#: ../../tribes/empire/shovel/conf:1
-msgid ""
-"The shovel is needed for proper handling of plants. Therefore the forester "
-"and the vinefarmer use it. It is produced by the toolsmith."
-msgstr ""
-"A lapát a növények megfelelő gondozásához szükséges. Így az erdész és a "
-"szőlősgazda használja. A szerszámkovács készíti."
-
-#: ../../tribes/empire/grape/conf:1
-msgid ""
-"These grapes are the basic for a tasty wine. They are harvested in a "
-"vineyard and processed in a winery."
-msgstr ""
-"Ez a szőlő az ízletes bor alapja. A szőlőskertben szüretelik, és a "
-"borászatban dolgozzák fel."
-
-#: ../../tribes/empire/basket/conf:1
-msgid ""
-"This basket is needed by the vinefarmer for harvesting the grapes. It is "
-"produced by the toolsmith."
-msgstr ""
-"Ezt a puttonyt a szőlősgazda használja, ebbe szüreteli a szőlőt. A "
-"szerszámkovács készíti."
-
-#: ../../tribes/empire/beer/conf:1
-msgid ""
-"This beer is produced in a brewery out of wheat and water. It is consumed by "
-"miners in coal and iron ore mines."
-msgstr ""
-"Ezt a sört búzából és vízből készítik a sörfőzdében. A szén- és vasércbányák "
-"munkásai fogyasztják."
-
-#: ../../tribes/empire/heavy_lance/conf:1
-msgid ""
-"This is a strong lance with a steel-tip and a little blade. It is produced "
-"in the weapon smithy and used in the trainingscamp - together with food - to "
-"train soldiers from attack level 2 to level 3."
-msgstr ""
-"Ez egy erős lándzsa acélheggyel és egy rövid pengével. A "
-"fegyverkovácsműhelyben készül, és a kiképzőtáborban – élelemmel együtt – a "
-"katonák támadását fejlesztik vele 2.-ról 3. szintre."
-
-#: ../../tribes/empire/advanced_lance/conf:1
-msgid ""
-"This is an advanced lance, with steel tip. It is produced in a weapon smithy "
-"and used in a trainingscamp - together with food - to train soldiers from "
-"attack level 1 to level 2."
-msgstr ""
-"Ez egy továbbfejlesztett lándzsa, acélheggyel. A fegyverkovácsműhelyben "
-"készül, és a kiképzőtáborban – élelemmel együtt – a katonák támadását "
-"fejlesztik vele 1.-ről 2. szintre."
-
-#: ../../tribes/empire/war_lance/conf:1
-msgid ""
-"This is the best and sharpest weapon the Empire weaponsmith creates for the "
-"warriors. It is used in the trainingscamp - together with food - to train "
-"soldiers from attack level 3 to level 4."
-msgstr ""
-"Ez a legjobb és legélesebb fegyver, amit a Birodalom fegyverkovácsai a "
-"harcosoknak készítenek. A kiképzőtáborban – élelemmel együtt – a katonák "
-"támadását fejlesztik vele 3.-ról 4. szintre."
-
-#: ../../tribes/empire/conf:6
-msgid "This is the culture of the roman Empire."
-msgstr "A dicsőséges Római Birodalom."
-
-#: ../../tribes/empire/lance/conf:1
-msgid ""
-"This lance has an iron spike. It is produced in a weapon smithy and used in "
-"a trainingscamp - together with food - to train soldiers from attack level 0 "
-"to attack level 1."
-msgstr ""
-"Ennek a lándzsának vasból van a hegye. A fegyverkovácsműhelyben készül, és a "
-"kiképzőtáborban – élelemmel együtt – a katonák támadását fejlesztik vele 0.-"
-"ról 1. szintre."
-
-#: ../../tribes/empire/pick/conf:1
-msgid ""
-"This pick is used by the stonemasons and the miners. It is produced by the "
-"toolsmith."
-msgstr ""
-"Ezt a csákányt a kőfaragók és a bányászok használják. A szerszámkovács "
-"készíti."
-
-#: ../../tribes/empire/saw/conf:1
-msgid "This saw is needed by the sawyer. It is produced by the toolsmith."
-msgstr ""
-"Erre a fűrészre a fűrészmunkásnak van szüksége. A szerszámkovács készíti."
-
-#: ../../tribes/empire/hunting_spear/conf:1
-msgid ""
-"This spear is light enough to be thrown, but heavy enough to kill any animal "
-"in one blow. It is only used by the hunters."
-msgstr ""
-"Ez a lándzsa elég könnyű, hogy eldobják, de elég nehéz, hogy el lehessen "
-"vele ejteni egy állatot. Csak a vadászok használják."
-
-#: ../../tribes/empire/wine/conf:1
-msgid ""
-"This tasty wine is consumed in marble and gold mines. It is produced in a "
-"winery."
-msgstr ""
-"Ezt az ízletes bort márvány- és aranybányákban fogyasztják. A borászatban "
-"állítják elő."
-
-#: ../../tribes/empire/wood_lance/conf:1
-msgid ""
-"This wooden lance is the basic weapon in the Empire military system. It is "
-"produced in the weapon smithy. Together with a helmet it is the equipment to "
-"fit out young soldiers."
-msgstr ""
-"Ez a falándzsa az alapvető fegyver a Birodalom katonai rendszerében. A "
-"fegyverkovácsműhelyben készül. A sisakkal együtt ez adja az újoncok "
-"felszerelését."
-
-#: ../../tribes/empire/conf:131
-msgid "Toolsmith"
-msgstr "Szerszámkovács"
-
-#: ../../tribes/empire/conf:188
-msgid "Toolsmithy"
-msgstr "Szerszámkovácsműhely"
-
-#: ../../tribes/empire/conf:154
-#: ../../tribes/empire/conf:211
-msgid "Tower"
-msgstr "Torony"
-
-#: ../../tribes/empire/conf:132
-msgid "Trainer"
-msgstr "Kiképző"
-
-#: ../../tribes/empire/conf:219
-msgid "Trainingscamp"
-msgstr "Kiképzőtábor"
 
 #: ../../tribes/empire/trainer/conf:1
 msgid "Trains the soldiers."
 msgstr "Katonákat képez."
-
-#: ../../tribes/empire/conf:93
-msgid "Trunk"
-msgstr "Farönk"
-
-#: ../../tribes/empire/trunk/conf:1
-msgid ""
-"Trunks are one important building material of the Empire. The lumberjacks "
-"fell the trees; foresters care for the supply of trees. Trunks are also used "
-"by the charcoal burner, the toolsmithy and the sawmill."
-msgstr ""
-"A farönk a Birodalom egyik fontos építőanyaga. A favágók kivágják a fákat, "
-"az erdészek pedig gondoskodnak az utánpótlásukról. Farönköt a "
-"faszénégetőházban, a szerszámkovácsműhelyben és a fűrészmalomban is "
-"felhasználnak."
 
 #: ../../tribes/empire/trainingscamp/conf:47
 msgid "Upgrade soldier attack 0"
@@ -1250,249 +1576,134 @@ msgstr ""
 "Katona támadásának fejlesztése 3 (csak kompatibilitási okokból, a régi "
 "mentések miatt (build13))"
 
-#: ../../tribes/empire/arena/conf:30
-#: ../../tribes/empire/colosseum/conf:36
-msgid "Upgrade soldier evade 0"
-msgstr "Katona kitérésének fejlesztése 0"
-
-#: ../../tribes/empire/arena/conf:31
-#: ../../tribes/empire/colosseum/conf:37
-msgid ""
-"Upgrade soldier evade 0 (only for compatibility with old savegames (build13))"
-msgstr ""
-"Katona kitérésének fejlesztése 0 (csak kompatibilitási okokból, a régi "
-"mentések miatt (build13))"
-
-#: ../../tribes/empire/colosseum/conf:38
-msgid "Upgrade soldier evade 1"
-msgstr "Katona kitérésének fejlesztése 1"
-
-#: ../../tribes/empire/colosseum/conf:39
-msgid ""
-"Upgrade soldier evade 1 (only for compatibility with old savegames (build13))"
-msgstr ""
-"Katona kitérésének fejlesztése 1 (csak kompatibilitási okokból, a régi "
-"mentések miatt (build13))"
-
 #: ../../tribes/empire/trainingscamp/conf:55
-msgid "Upgrade soldier hitpoints 0"
-msgstr "Katona életerejének fejlesztése 0"
+msgid "Upgrade soldier health 0"
+msgstr ""
 
 #: ../../tribes/empire/trainingscamp/conf:56
 msgid ""
-"Upgrade soldier hitpoints 0 (only for compatibility with old savegames "
+"Upgrade soldier health 0 (only for compatibility with old savegames "
 "(build13))"
 msgstr ""
-"Katona életerejének fejlesztése 0 (csak kompatibilitási okokból, a régi "
-"mentések miatt (build13))"
 
 #: ../../tribes/empire/trainingscamp/conf:57
-msgid "Upgrade soldier hitpoints 1"
-msgstr "Katona életerejének fejlesztése 1"
+msgid "Upgrade soldier health 1"
+msgstr ""
 
 #: ../../tribes/empire/trainingscamp/conf:58
 msgid ""
-"Upgrade soldier hitpoints 1 (only for compatibility with old savegames "
+"Upgrade soldier health 1 (only for compatibility with old savegames "
 "(build13))"
 msgstr ""
-"Katona életerejének fejlesztése 1 (csak kompatibilitási okokból, a régi "
-"mentések miatt (build13))"
 
 #: ../../tribes/empire/trainingscamp/conf:59
-msgid "Upgrade soldier hitpoints 2"
-msgstr "Katona életerejének fejlesztése 2"
+msgid "Upgrade soldier health 2"
+msgstr ""
 
 #: ../../tribes/empire/trainingscamp/conf:60
 msgid ""
-"Upgrade soldier hitpoints 2 (only for compatibility with old savegames "
+"Upgrade soldier health 2 (only for compatibility with old savegames "
 "(build13))"
 msgstr ""
-"Katona életerejének fejlesztése 2 (csak kompatibilitási okokból, a régi "
-"mentések miatt (build13))"
 
 #: ../../tribes/empire/trainingscamp/conf:61
-msgid "Upgrade soldier hitpoints 3"
-msgstr "Katona támadásának fejlesztése 3"
+msgid "Upgrade soldier health 3"
+msgstr ""
 
 #: ../../tribes/empire/trainingscamp/conf:62
 msgid ""
-"Upgrade soldier hitpoints 3 (only for compatibility with old savegames "
+"Upgrade soldier health 3 (only for compatibility with old savegames "
 "(build13))"
 msgstr ""
-"Katona támadásának fejlesztése 3 (csak kompatibilitási okokból, a régi "
-"mentések miatt (build13))"
 
-#: ../../tribes/empire/conf:135
-msgid "Vine Farmer"
-msgstr "Szőlősgazda"
+#: ../../tribes/empire/trunk/conf:1
+msgid ""
+"Logs are an important building material for the Empire. The lumberjacks fell "
+"the trees; foresters care for the supply of trees. Logs are also used by the "
+"charcoal burner, the toolsmithy and the sawmill."
+msgstr ""
 
-#: ../../tribes/empire/conf:50
-msgid "Vine medium"
-msgstr "Közepes szőlő"
+#: ../../tribes/empire/vinefarmer/conf:1
+msgid "Grows vine."
+msgstr "Szőlőt termel."
 
-#: ../../tribes/empire/conf:53
-msgid "Vine ripe"
-msgstr "Érett szőlő"
+#: ../../tribes/empire/vineyard/conf:23
+msgid "Plant vine"
+msgstr "a szőlőültetés"
 
-#: ../../tribes/empire/conf:51
-msgid "Vine small"
-msgstr "Kis szőlő"
+#: ../../tribes/empire/vineyard/conf:25
+msgid "Harvest vine"
+msgstr "a szőlőszüretelés"
 
-#: ../../tribes/empire/conf:52
-msgid "Vine tiny"
-msgstr "Apró szőlő"
-
-#: ../../tribes/empire/conf:181
-msgid "Vineyard"
-msgstr "Szőlőskert"
-
-#: ../../tribes/empire/conf:94
-msgid "War-Lance"
-msgstr "Harci lándzsa"
-
-#: ../../tribes/empire/conf:165
-msgid "Warehouse"
-msgstr "Raktár"
-
-#: ../../tribes/empire/conf:95
-msgid "Water"
-msgstr "Víz"
+#: ../../tribes/empire/war_lance/conf:1
+msgid ""
+"This is the best and sharpest weapon the Empire weaponsmith creates for the "
+"warriors. It is used in the training camp – together with food – to train "
+"soldiers from attack level 3 to level 4."
+msgstr ""
 
 #: ../../tribes/empire/water/conf:1
 msgid ""
-"Water is the essence for life! It is used in the bakery and the brewery. "
-"Also the donkeyfarm, the sheepfarm and the piggery need to be supplied with "
+"Water is the essence of life! It is used in the bakery and the brewery. The "
+"donkey farm, the sheep farm and the piggery also need to be supplied with "
 "water."
 msgstr ""
-"A víz az élet alapja! Felhasználják a pékségben és a sörfőzdében. A "
-"szamárfarmot, a juh- és a sertéstelepet is el kell látni vízzel."
 
-#: ../../tribes/empire/conf:195
-msgid "Weapon Smithy"
-msgstr "Fegyverkovácsműhely"
+#: ../../tribes/empire/weaponsmith/conf:1
+msgid "Produces weapons for the soldiers."
+msgstr "Fegyvereket készít a katonáknak."
 
-#: ../../tribes/empire/iron/conf:1
-msgid ""
-"Weapons, armour and tools are made of iron. It is retrieved from iron ores "
-"in the smelting works."
-msgstr ""
-"Fegyverek, vértezetek és szerszámok készülnek vasból. A kohóban nyerik ki "
-"vasércből."
+#: ../../tribes/empire/weaponsmithy/conf:33
+msgid "Produce wood lance"
+msgstr "a falándzsakészítés"
 
-#: ../../tribes/empire/conf:133
-msgid "Weaponsmith"
-msgstr "Fegyverkovács"
+#: ../../tribes/empire/weaponsmithy/conf:34
+msgid "Produce lance"
+msgstr "a lándzsakészítés"
 
-#: ../../tribes/empire/conf:134
-msgid "Weaver"
-msgstr "Takács"
+#: ../../tribes/empire/weaponsmithy/conf:35
+msgid "Produce advanced lance"
+msgstr "a továbbfejlesztett lándzsa készítése"
 
-#: ../../tribes/empire/conf:192
-msgid "Weaving Mill"
-msgstr "Szövöde"
+#: ../../tribes/empire/weaponsmithy/conf:36
+msgid "Produce heavy lance"
+msgstr "a nehézlándzsa-készítés"
 
-#: ../../tribes/empire/conf:174
-msgid "Well"
-msgstr "Kút"
+#: ../../tribes/empire/weaponsmithy/conf:37
+msgid "Produce war lance"
+msgstr "a harcilándzsa-készítés"
 
-#: ../../tribes/empire/conf:96
-msgid "Wheat"
-msgstr "Búza"
+#: ../../tribes/empire/weaver/conf:1
+msgid "Produces cloth for ships and soldiers."
+msgstr "Szövetet készít a hajóvitorlákhoz és a katonáknak."
 
 #: ../../tribes/empire/wheat/conf:1
 msgid ""
-"Wheat is essential for surviving. It is produced in farms and consumed by "
-"mills and breweries. Also donkeyfarms, sheepfarms and piggeries need to be "
+"Wheat is essential for surviving. It is produced by farms and used by mills "
+"and breweries. Donkey farms, sheep farms and piggeries also need to be "
 "supplied with wheat."
 msgstr ""
-"A búza nélkülözhetetlen a túléléshez. Tanyán termelik, és malmok, illetve "
-"sörfőzdék használják fel. A szamárfarmokat, juh- és sertéstelepeket szintén "
-"el kell látni búzával."
 
-#: ../../tribes/empire/conf:97
-msgid "Wine"
-msgstr "Bor"
-
-#: ../../tribes/empire/conf:182
-msgid "Winery"
-msgstr "Borászat"
-
-#: ../../tribes/empire/conf:98
-msgid "Wood"
-msgstr "Fűrészáru"
-
-#: ../../tribes/empire/conf:99
-msgid "Wood Lance"
-msgstr "Falándzsa"
+#: ../../tribes/empire/wine/conf:1
+msgid ""
+"This tasty wine is drunk by the miners working the marble and gold mines. It "
+"is produced in a winery."
+msgstr ""
 
 #: ../../tribes/empire/wood/conf:1
 msgid ""
-"Wood is a basic building material of the Empire. It is also consumed in the "
+"Wood is a basic building material of the Empire. It is also used by the "
 "weapon smithy."
 msgstr ""
-"A fűrészáru a Birodalom egyik alapvető építőanyaga. A fegyverkovácsműhelyben "
-"is felhasználják."
 
-#: ../../tribes/empire/conf:100
-msgid "Wool"
-msgstr "Gyapjú"
+#: ../../tribes/empire/wood_lance/conf:1
+msgid ""
+"This wooden lance is the basic weapon in the Empire military system. It is "
+"produced in the weapon smithy. In combination with a helmet, it is the "
+"equipment to fit out young soldiers."
+msgstr ""
 
 #: ../../tribes/empire/wool/conf:1
 msgid "Wool is the hair of sheep. Weaving mills use it to make cloth."
 msgstr ""
 "A gyapjú a birkák szőre. A szövödék használják fel szövet készítéséhez."
-
-#: ../../tribes/empire/armoursmithy/conf:35
-#: ../../tribes/empire/bakery/conf:24
-#: ../../tribes/empire/brewery/conf:24
-#: ../../tribes/empire/burners_house/conf:24
-#: ../../tribes/empire/coalmine/conf:25
-#: ../../tribes/empire/deep_coalmine/conf:26
-#: ../../tribes/empire/deep_goldmine/conf:26
-#: ../../tribes/empire/deep_marblemine/conf:27
-#: ../../tribes/empire/deep_oremine/conf:26
-#: ../../tribes/empire/donkeyfarm/conf:25
-#: ../../tribes/empire/farm/conf:27
-#: ../../tribes/empire/fishers_house/conf:20
-#: ../../tribes/empire/foresters_house/conf:20
-#: ../../tribes/empire/goldmine/conf:26
-#: ../../tribes/empire/hunters_house/conf:19
-#: ../../tribes/empire/inn/conf:27
-#: ../../tribes/empire/lumberjacks_house/conf:20
-#: ../../tribes/empire/marblemine/conf:30
-#: ../../tribes/empire/mill/conf:24
-#: ../../tribes/empire/oremine/conf:26
-#: ../../tribes/empire/piggery/conf:25
-#: ../../tribes/empire/quarry/conf:24
-#: ../../tribes/empire/sawmill/conf:26
-#: ../../tribes/empire/scouts_house/conf:20
-#: ../../tribes/empire/sheepfarm/conf:24
-#: ../../tribes/empire/shipyard/conf:28
-#: ../../tribes/empire/smelting_works/conf:28
-#: ../../tribes/empire/stonemasons_house/conf:24
-#: ../../tribes/empire/tavern/conf:27
-#: ../../tribes/empire/toolsmithy/conf:49
-#: ../../tribes/empire/vineyard/conf:27
-#: ../../tribes/empire/weaponsmithy/conf:38
-#: ../../tribes/empire/weaving-mill/conf:20
-#: ../../tribes/empire/well/conf:20
-#: ../../tribes/empire/winery/conf:25
-msgid "Work"
-msgstr "a munka"
-
-#: ../../tribes/empire/builder/conf:1
-msgid "Works at construction sites to create a new building."
-msgstr "Építési területeken dolgozik, új épületeket emel."
-
-#: ../../tribes/empire/shipwright/conf:1
-msgid "Works at the shipyard and constructs new ships."
-msgstr "A hajógyárban dolgozik, új hajókat épít."
-
-#: ../../tribes/empire/master-miner/conf:1
-#: ../../tribes/empire/miner/conf:1
-msgid "Works deep in the mines to obtain coal, iron or gold."
-msgstr "A bányák mélyén dolgozik, hogy szenet, vasat és aranyat szerezzen."
-
-#: ../../tribes/empire/carpenter/conf:1
-msgid "Works in the sawmill."
-msgstr "A fűrészmalomban dolgozik."

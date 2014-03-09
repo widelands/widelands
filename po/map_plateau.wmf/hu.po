@@ -7,196 +7,152 @@ msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2013-09-15 17:41+0000\n"
+"POT-Creation-Date: 2014-03-05 19:55+0000\n"
 "PO-Revision-Date: 2014-01-09 20:28+0000\n"
 "Last-Translator: cn4ij <Unknown>\n"
 "Language-Team: Hungarian <hu@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-01-10 04:32+0000\n"
-"X-Generator: Launchpad (build 16884)\n"
+"X-Launchpad-Export-Date: 2014-03-06 05:38+0000\n"
+"X-Generator: Launchpad (build 16948)\n"
 
-#: ../../maps/Plateau.wmf/scripting/texts.lua:33
-msgid ""
-"* Defeat Erwyn. He commands the strongest opposing soldiers left on this\n"
-"island."
+#: ../../maps/Plateau.wmf/scripting/texts.lua:27
+msgid "Capture the Ancient Castle"
 msgstr ""
-"* Győzd le Erwynt. Ő vezeti a szigeten megmaradt legerősebb\n"
-"ellenálló katonákat."
 
-#: ../../maps/Plateau.wmf/scripting/texts.lua:40
-msgid "* Defeat Jomo. He takes care about the soldiers food supply."
-msgstr "* Győzd le Jomót. Ő gondoskodik a katonák élelemellátásáról."
-
-#: ../../maps/Plateau.wmf/scripting/texts.lua:26
-msgid "* Defeat Lanissa and capture the ancient castle."
-msgstr "* Győzd le Lanissát, és foglald el az ősi várat."
-
-#: ../../maps/Plateau.wmf/scripting/texts.lua:54
-msgid "-- NEW OBJECTIVES --"
-msgstr "-- ÚJ CÉLKITŰZÉSEK --"
-
-#: ../../maps/Plateau.wmf/scripting/texts.lua:86
-msgid "An ancient castle"
-msgstr "Egy ősi vár"
-
-#: ../../maps/Plateau.wmf/scripting/texts.lua:102
-msgid "Ancient castle captured"
-msgstr "Elfoglaltad az ősi várat"
-
-#: ../../maps/Plateau.wmf/scripting/texts.lua:116
-#: ../../maps/Plateau.wmf/scripting/texts.lua:126
-msgid "Another Briefing"
-msgstr "Újabb eligazítás"
-
-#: ../../maps/Plateau.wmf/scripting/texts.lua:87
-msgid ""
-"By the Gods! One of our scouts found a mighty castle at the middle of the "
-"old\n"
-"plateau. The castle must be quite old and seems to be build in a foreign\n"
-"style. It's quite obvious, that this is not barbarian craft.<br>Let's hope\n"
-"Lanissa - the warlord holding command over that castle - still has not "
-"observed\n"
-"us. Perhaps we have a chance to conquer that mighty building without a "
-"bigger\n"
-"fight!<br>However we really have to capture it. It will be our key for our\n"
-"reign over this island!"
+#: ../../maps/Plateau.wmf/scripting/texts.lua:29
+msgid "Defeat Lanissa and capture the ancient castle."
 msgstr ""
-"Te jó ég! Egyik felderítőnk egy hatalmas várat fedezett fel a vén fennsík\n"
-"közepén. A vár bizonnyal igen régi, és idegen stílusban épülhetett.\n"
-"Nyilvánvalónak tűnik, hogy nem barbár kezek munkája.<br>Bízzunk benne,\n"
-"hogy Lanissa – a várat a kezén tartó hadvezér – még nem látott meg minket.\n"
-"Talán van esélyünk rá, hogy e hatalmas építményt nagyobb harc nélkül\n"
-"elfoglaljuk!<br>Kell is az a vár. Kulcsfontosságú ahhoz, hogy uraljuk a "
-"szigetet!"
 
-#: ../../maps/Plateau.wmf/scripting/texts.lua:25
-msgid "Capture the ancient castle"
-msgstr "Foglald el az ősi várat"
-
-#: ../../maps/Plateau.wmf/scripting/texts.lua:143
-msgid ""
-"Congratulations! You mastered this scenario. You may play on if you like!"
-msgstr ""
-"Gratulálunk! Beteljesítetted a forgatókönyvet. Ha szeretnél, játszhatsz még "
-"tovább."
-
-#: ../../maps/Plateau.wmf/scripting/texts.lua:31
+#: ../../maps/Plateau.wmf/scripting/texts.lua:34
 msgid "Defeat Erwyn"
 msgstr "Győzd le Erwynt"
 
-#: ../../maps/Plateau.wmf/scripting/texts.lua:38
+#: ../../maps/Plateau.wmf/scripting/texts.lua:36
+msgid ""
+"Defeat Erwyn. He commands the strongest opposing military force left on this "
+"island."
+msgstr ""
+
+#: ../../maps/Plateau.wmf/scripting/texts.lua:40
 msgid "Defeat Jomo"
 msgstr "Győzd le Jomót"
 
-#: ../../maps/Plateau.wmf/scripting/texts.lua:120
-msgid "Erwyn defeated"
-msgstr "Legyőzted Erwynt"
-
-#: ../../maps/Plateau.wmf/scripting/texts.lua:74
-msgid ""
-"Finally! Our first step to victory was just done! Last night, we landed on\n"
-"the forbidden island and defeated the few guards that sentineled the north\n"
-"western part of the island. I am quite sure, that none of the other "
-"warlords\n"
-"has detected us so far, so we should keep quiet and build up our\n"
-"infrastructure. Soon we will be strong enough to raid their positions."
+#: ../../maps/Plateau.wmf/scripting/texts.lua:42
+msgid "Defeat Jomo. He will take care of the soldiers’ food supply."
 msgstr ""
-"Végre! Megtettük első lépésünket a győzelem felé! Tegnap éjjel kikötöttünk\n"
-"a tiltott szigeten, és levertük azt a pár őrt, akik a sziget északnyugati "
-"részét\n"
-"figyelték. Biztosra veszem, hogy még egyik hadúr sem tud rólunk, szóval\n"
-"maradjunk csendben, úgy építsük ki gazdaságunkat. Hamarosan elég erősek\n"
-"leszünk, hogy rajtuküssünk."
 
-#: ../../maps/Plateau.wmf/scripting/texts.lua:141
-msgid ""
-"Finally! The complete island is ours. Now we just have to defend it better "
-"than\n"
-"the warlords did."
+#: ../../maps/Plateau.wmf/scripting/texts.lua:56
+msgid "New Objectives"
 msgstr ""
-"Végre! Az egész sziget a miénk. Most már csak jobban meg kell védenünk, "
-"mint\n"
-"a korábbi hadurak."
 
-#: ../../maps/Plateau.wmf/scripting/texts.lua:69
+#: ../../maps/Plateau.wmf/scripting/texts.lua:71
 msgid "First Briefing"
 msgstr "Első eligazítás"
 
-#: ../../maps/Plateau.wmf/scripting/texts.lua:121
-msgid ""
-"Great! Erwyn gave up, when he saw his last buildings burning down. One "
-"strong\n"
-"warlord less on this island!"
+#: ../../maps/Plateau.wmf/scripting/texts.lua:75
+msgid "The Forbidden Island"
 msgstr ""
-"Nagyszerű! Erwyn feladta, amint látta az utolsó épületeit hamuvá válni. Egy "
-"erős\n"
-"hadúrral kevesebb ezen a szigeten!"
 
-#: ../../maps/Plateau.wmf/scripting/texts.lua:131
+#: ../../maps/Plateau.wmf/scripting/texts.lua:76
 msgid ""
-"Great! Jomo gave up, when he saw his last buildings burning down. One "
-"warlord\n"
-"less on this island!"
+"Finally! We have just taken our first step towards victory! Last night, we "
+"landed on the forbidden island and defeated the few guards that were "
+"watching the north-western part of the island. I am quite sure that none of "
+"the other warlords has detected us so far, so we should keep quiet and build "
+"up our infrastructure. Soon we will be strong enough to raid their positions."
 msgstr ""
-"Nagyszerű! Jomo feladta, amint látta az utolsó épületeit hamuvá válni. Egy\n"
-"hadúrral kevesebb ezen a szigeten!"
 
-#: ../../maps/Plateau.wmf/scripting/texts.lua:130
-msgid "Jomo defeated"
-msgstr "Legyőzted Jomót"
-
-#: ../../maps/Plateau.wmf/scripting/texts.lua:136
-msgid "Last Briefing"
-msgstr "Utolsó eligazítás"
-
-#: ../../maps/Plateau.wmf/scripting/texts.lua:82
-#: ../../maps/Plateau.wmf/scripting/texts.lua:98
+#: ../../maps/Plateau.wmf/scripting/texts.lua:84
+#: ../../maps/Plateau.wmf/scripting/texts.lua:99
 msgid "Second Briefing"
 msgstr "Második eligazítás"
 
-#: ../../maps/Plateau.wmf/scripting/texts.lua:73
-msgid "The forbidden island"
-msgstr "A tiltott sziget"
+#: ../../maps/Plateau.wmf/scripting/texts.lua:88
+msgid "An Ancient Castle"
+msgstr ""
 
-#: ../../maps/Plateau.wmf/scripting/texts.lua:140
+#: ../../maps/Plateau.wmf/scripting/texts.lua:89
+msgid ""
+"By the Gods! One of our scouts has discovered a mighty castle at the center "
+"of the old plateau. The castle must be quite old and seems to have been "
+"built in a foreign style. It’s quite obvious that this is not barbarian "
+"craft."
+msgstr ""
+
+#: ../../maps/Plateau.wmf/scripting/texts.lua:92
+msgid ""
+"Let’s hope that Lanissa – the warlord holding sway over that castle – has "
+"not discovered our movements yet. Perhaps we have a chance of conquering "
+"that mighty building without a bigger fight! However, it is essential that "
+"we capture it. It will be the key to our reign over this island!"
+msgstr ""
+
+#: ../../maps/Plateau.wmf/scripting/texts.lua:103
+msgid "Ancient Castle Captured"
+msgstr ""
+
+#: ../../maps/Plateau.wmf/scripting/texts.lua:104
+msgid ""
+"Wonderful! Our troops have finally defeated Lanissa and her soldiers. The "
+"ancient castle is ours!"
+msgstr ""
+
+#: ../../maps/Plateau.wmf/scripting/texts.lua:105
+msgid ""
+"It is amazing how far one can see from the highest tower of the castle. We "
+"can watch the whole island. So now I wonder why Lanissa did not see us and "
+"thus did not prepare. Be that as it may, some things will never come to the "
+"light of day. The only important issue at the moment are the opposing troops "
+"still left. We have discovered enemy positions held by Erwyn to the north "
+"and east of the castle. He is known to be a strong warlord and surely "
+"commands the strongest warriors. In the south, we caught sight of some food "
+"infrastructures guarded by Jomo – a younger warlord – and we should take "
+"care of those infrastructures so we can take our cut of the food supply."
+msgstr ""
+
+#: ../../maps/Plateau.wmf/scripting/texts.lua:116
+#: ../../maps/Plateau.wmf/scripting/texts.lua:125
+msgid "Another Briefing"
+msgstr "Újabb eligazítás"
+
+#: ../../maps/Plateau.wmf/scripting/texts.lua:120
+msgid "Erwyn Defeated"
+msgstr ""
+
+#: ../../maps/Plateau.wmf/scripting/texts.lua:121
+msgid ""
+"Great! Erwyn gave up when he saw his last buildings burning down. That’s one "
+"less strong warlord on this island!"
+msgstr ""
+
+#: ../../maps/Plateau.wmf/scripting/texts.lua:129
+msgid "Jomo Defeated"
+msgstr ""
+
+#: ../../maps/Plateau.wmf/scripting/texts.lua:130
+msgid ""
+"Great! Jomo gave up when he saw his last buildings burning down. That’s one "
+"less warlord on this island!"
+msgstr ""
+
+#: ../../maps/Plateau.wmf/scripting/texts.lua:134
+msgid "Last Briefing"
+msgstr "Utolsó eligazítás"
+
+#: ../../maps/Plateau.wmf/scripting/texts.lua:138
 msgid "Victory!"
 msgstr "Győzelem!"
 
-#: ../../maps/Plateau.wmf/scripting/texts.lua:103
+#: ../../maps/Plateau.wmf/scripting/texts.lua:139
 msgid ""
-"Wonderful! Our troops finally defeated Lanissa and her soldiers. The "
-"ancient\n"
-"castle is ours!<br> It is amazing, how far one can see from the highest "
-"tower\n"
-"of the castle. We can watch the whole island. So now I wonder, why Lanissa "
-"has\n"
-"not seen us and thus did not prepare. But well, some things will never come "
-"to\n"
-"the light of day. The only important things at the moment are the left "
-"opposing\n"
-"troops. We observed enemy's positions from Erwyn north and eastwards of the\n"
-"castle. He is known to be a strong warlord and surely commands the "
-"strongest\n"
-"warriors. In the south we caught sight of some guarded food infrastructures "
-"of Jomo -\n"
-"a younger warlord - we should take care about that infrastructures and cut "
-"of\n"
-"the food supply."
+"Finally! The island is completely ours. Now we just have to defend it better "
+"than the warlords did."
 msgstr ""
-"Csodás! Csapataink végül legyőzték Lanissát és katonáit. Az ősi vár a "
-"miénk!\n"
-"<br> Lenyűgöző, milyen messzire ellátni a vár legmagasabb tornyából. "
-"Szemmel\n"
-"tarthatjuk az egész szigetet. Úgyhogy nem is értem, miért nem látott minket\n"
-"Lanissa, és miért nem készült fel. De hát vannak dolgok, amikre sosem derül "
-"fény.\n"
-"Pillanatnyilag csak a többi ellenálló csapat a fontos. Erwyn ellenséges "
-"állomáshelyeit\n"
-"figyeltük meg a vártól északra és keletre. Erős hadúrnak ismerik, és "
-"biztosan övéi a\n"
-"legerősebb harcosok. Délre Jomo – egy ifjabb hadúr – néhány őrzött "
-"élelemgazdasági\n"
-"épületét fedeztük fel. Foglalkoznunk kell ezekkel is, el kell vágnunk az\n"
-"élelem-utánpótlást."
+
+#: ../../maps/Plateau.wmf/scripting/texts.lua:140
+msgid ""
+"Congratulations! You have mastered this scenario. You may play on if you "
+"like!"
+msgstr ""

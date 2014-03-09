@@ -31,7 +31,7 @@
 namespace Widelands {
 
 namespace {
-const int SCRIPTING_DATA_PACKET_VERSION=1;
+const int SCRIPTING_DATA_PACKET_VERSION = 1;
 }  // namespace
 /*
  * ========================================================================
@@ -53,9 +53,10 @@ void Map_Scripting_Data_Packet::Read
 	// wise this makes no sense.
 	upcast(Game, g, &egbase);
 	Widelands::FileRead fr;
-	if (g and fr.TryOpen(fs, "scripting/globals.dump")) {
-		const uint32_t	sentinel = fr.Unsigned32();
-		const uint32_t	packet_version = fr.Unsigned32();
+	if (g and fr.TryOpen(fs, "scripting/globals.dump"))
+	{
+		const uint32_t sentinel = fr.Unsigned32();
+		const uint32_t packet_version = fr.Unsigned32();
 		if (sentinel != 0xDEADBEEF && packet_version != SCRIPTING_DATA_PACKET_VERSION) {
 			throw game_data_error(
 			   "This savegame is from an older version of Widelands and can not be loaded any more.");

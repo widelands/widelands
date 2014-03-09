@@ -309,7 +309,7 @@ if (DEFINED MSVC)
 endif (DEFINED MSVC)
 
 IF (MINGW)
-  set (CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -Wl,--large-address-aware" CACHE STRING "Set by widelands CMakeLists.txt" FORCE)
+  set (CMAKE_EXE_LINKER_FLAGS "-Wl,--large-address-aware" CACHE STRING "Set by widelands CMakeLists.txt" FORCE)
   message (STATUS "Enabled large address awareness on mingw32")
 endif (MINGW)
 
@@ -326,7 +326,10 @@ endif (DEFINED WL_3RDPARTY_DIR)
 
 # on BSD this must be explicitly linked
 if (CMAKE_SYSTEM_NAME MATCHES "FreeBSD" OR CMAKE_SYSTEM_NAME MATCHES "OpenBSD")
-  find_library(EXECINFO_LIBRARY NAMES execinfo)
+  # Not needed on Debian GNU/kFreeBSD..
+  if (NOT CMAKE_SYSTEM_NAME MATCHES "kFreeBSD")
+    find_library(EXECINFO_LIBRARY NAMES execinfo)
+  endif (NOT CMAKE_SYSTEM_NAME MATCHES "kFreeBSD")
 endif (CMAKE_SYSTEM_NAME MATCHES "FreeBSD" OR CMAKE_SYSTEM_NAME MATCHES "OpenBSD")
 
 
@@ -436,8 +439,10 @@ if (MINIZIP_FOUND)
 endif (MINIZIP_FOUND)
 
 if (APPLE OR WIN32 OR CMAKE_SYSTEM_NAME MATCHES "FreeBSD")
-  find_package(intl REQUIRED)
-  include_directories(${INTL_INCLUDE_DIR})
+  if (NOT CMAKE_SYSTEM_NAME MATCHES "kFreeBSD")
+    find_package(intl REQUIRED)
+    include_directories(${INTL_INCLUDE_DIR})
+    endif (NOT CMAKE_SYSTEM_NAME MATCHES "kFreeBSD")
 endif (APPLE OR WIN32 OR CMAKE_SYSTEM_NAME MATCHES "FreeBSD")
 
 # Gettext is required, but it does not provide GETTEXT_INCLUDE_DIR or
