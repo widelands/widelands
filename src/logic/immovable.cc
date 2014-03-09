@@ -540,7 +540,9 @@ void Immovable::draw_construction
 	if (game.get_ibase()->get_display_flags() & Interactive_Base::dfShowStatistics) {
 		unsigned int percent = (100 * done / total);
 		m_construct_string =
-			(boost::format("<font color=%1$s>%2$i%% built</font>") % UI_FONT_CLR_DARK_HEX % percent).str();
+			(boost::format("<font color=%s>%s</font>")
+			 % UI_FONT_CLR_DARK_HEX % (boost::format(_("%i%% built")) % percent).str())
+			 .str();
 		m_construct_string = as_uifont(m_construct_string);
 		dst.blit(pos - Point(0, 48), UI::g_fh1->render(m_construct_string), CM_Normal, UI::Align_Center);
 	}
