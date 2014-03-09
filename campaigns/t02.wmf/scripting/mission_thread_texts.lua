@@ -135,9 +135,9 @@ obj_better_material_3 = {
 
 obj_build_cattlefarm = {
    name = "mission cattlefarm", 
-   title = _ "Build a cattlefarm",
+   title = _ "Build a cattle farm",
    number = 1,
-   body = objective_text(_"Build a cattlefarm", _(
+   body = objective_text(_"Build a cattle farm", _(
 [[When roads are under heavy load for a long time, one carrier is usually not enough to transport goods swiftly. ]] .. 
 [[Traffic jams are the consequence. Such roads therefore employ a second carrier: ]] .. 
 [[An ox that helps to carry the wares. This doubles the transport capacity.]]) .. "<br><br>" ..
