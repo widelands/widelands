@@ -66,13 +66,10 @@ using boost::format;
 
 // This function is the callback for recalculation of field overlays
 int32_t Int_Player_overlay_callback_function
-	(Widelands::TCoords<Widelands::FCoords> const c, void * const data, int32_t)
+	(Widelands::TCoords<Widelands::FCoords> const c, Interactive_Player& iap)
 {
-	assert(data);
-	assert(static_cast<Interactive_Player const *>(data)->get_player());
-	return
-		static_cast<const Interactive_Player *>(data)->get_player()->
-		get_buildcaps(c);
+	assert(iap.get_player());
+	return iap.get_player()->get_buildcaps(c);
 }
 
 Interactive_Player::Interactive_Player
@@ -313,7 +310,7 @@ void Interactive_Player::postload()
 	Overlay_Manager & overlay_manager = map.overlay_manager();
 	overlay_manager.show_buildhelp(false);
 	overlay_manager.register_overlay_callback_function
-			(&Int_Player_overlay_callback_function, static_cast<void *>(this));
+			(boost::bind(&Int_Player_overlay_callback_function, _1, boost::ref(*this)));
 
 	// Connect buildhelp button to reflect build help state. Needs to be
 	// done here rather than in the constructor as the map is not present then.
@@ -511,4 +508,3 @@ void Interactive_Player::cmdSwitchPlayer(const std::vector<std::string> & args)
 			(*building_statistics_window)
 			.update();
 }
-

@@ -72,7 +72,6 @@ m_height         (0),
 m_world          (nullptr),
 m_starting_pos   (nullptr),
 m_fields         (nullptr),
-m_overlay_manager(nullptr),
 m_pathfieldmgr   (new PathfieldManager)
 {
 	m_worldname[0] = '\0';
@@ -82,7 +81,6 @@ m_pathfieldmgr   (new PathfieldManager)
 Map::~Map()
 {
 	cleanup();
-	delete m_overlay_manager;
 }
 
 void Map::recalc_border(const FCoords fc) {
@@ -320,9 +318,7 @@ void Map::cleanup() {
 	m_hint = std::string();
 	m_background = std::string();
 
-	if (m_overlay_manager)
-		m_overlay_manager->reset();
-
+	m_overlay_manager.reset();
 	mom().remove_all();
 
 	//  Remove all extra data. Pay attention here, maybe some freeing would be
@@ -442,6 +438,8 @@ void Map::set_origin(Coords const new_origin) {
 		new_port_spaces.insert(temp);
 	}
 	m_port_spaces = new_port_spaces;
+
+	m_overlay_manager.reset(new Overlay_Manager());
 }
 
 
@@ -464,8 +462,7 @@ void Map::set_size(const uint32_t w, const uint32_t h)
 
 	m_pathfieldmgr->setSize(w * h);
 
-	if (not m_overlay_manager)
-		m_overlay_manager = new Overlay_Manager();
+	m_overlay_manager.reset(new Overlay_Manager());
 }
 
 /*

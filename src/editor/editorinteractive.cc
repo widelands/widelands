@@ -500,7 +500,7 @@ void Editor_Interactive::select_tool
 		Widelands::Map & map = egbase().map();
 		//  A new tool has been selected. Remove all registered overlay callback
 		//  functions.
-		map.overlay_manager().register_overlay_callback_function(nullptr, nullptr);
+		map.overlay_manager().remove_overlay_callback_function();
 		map.recalc_whole_map();
 
 	}

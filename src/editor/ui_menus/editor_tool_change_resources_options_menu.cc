@@ -213,8 +213,8 @@ void Editor_Tool_Change_Resources_Options_Menu::selected() {
 
 	Widelands::Map & map = ref_cast<Editor_Interactive, UI::Panel>(*get_parent())
 		.egbase().map();
-	map.overlay_manager().register_overlay_callback_function
-		(&Editor_Change_Resource_Tool_Callback, static_cast<void *>(&map), n);
+	map.overlay_manager().register_overlay_callback_function(
+	   boost::bind(&Editor_Change_Resource_Tool_Callback, _1, boost::ref(map), n));
 	map.recalc_whole_map();
 	select_correct_tool();
 

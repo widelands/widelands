@@ -152,8 +152,8 @@ public:
 	Map ();
 	virtual ~Map();
 
-	Overlay_Manager * get_overlay_manager()       {return m_overlay_manager;}
-	Overlay_Manager * get_overlay_manager() const {return m_overlay_manager;}
+	Overlay_Manager * get_overlay_manager()       {return m_overlay_manager.get();}
+	Overlay_Manager * get_overlay_manager() const {return m_overlay_manager.get();}
 	const Overlay_Manager & overlay_manager() const {return *m_overlay_manager;}
 	Overlay_Manager       & overlay_manager()       {return *m_overlay_manager;}
 
@@ -396,7 +396,7 @@ private:
 
 	Field     * m_fields;
 
-	Overlay_Manager * m_overlay_manager;
+	std::unique_ptr<Overlay_Manager> m_overlay_manager;
 
 	std::unique_ptr<PathfieldManager> m_pathfieldmgr;
 	std::vector<std::string> m_scenario_tribes;
