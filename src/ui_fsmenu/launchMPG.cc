@@ -49,6 +49,7 @@ struct MapOrSaveSelectionWindow : public UI::Window {
 		(UI::Panel * parent, GameController * gc, uint32_t w, uint32_t h,
 		 UI::Font * font)
 	:
+	/** TRANSLATORS: Dialog box title for selecting between map or saved game for new multiplayer game */
 	Window(parent, "selection_window", 0, 0, w, h, _("Please select")),
 	m_ctrl(gc)
 	{

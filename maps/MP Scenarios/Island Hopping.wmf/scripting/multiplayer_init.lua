@@ -129,6 +129,7 @@ function getplural(count, resource)
    elseif  resource == "goldore" then
       return ngettext("%s Gold Ore","%s Gold Ore",count):bformat(count)
    else
+      -- TRANSLATORS: number + resource name, e.g. '1 stone'
       return (_"%1$i %2$s"):bformat(count, resource)
    end
 end
