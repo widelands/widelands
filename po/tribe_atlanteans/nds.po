@@ -2,20 +2,21 @@
 # Copyright (c) 2012 Rosetta Contributors and Canonical Ltd 2012
 # This file is distributed under the same license as the widelands package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2012.
-#
+# GunChleoc <fios@foramnagaidhlig.net>, 2014.
 msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-03-06 21:20+0000\n"
-"PO-Revision-Date: 2013-01-01 14:15+0000\n"
-"Last-Translator: Nasenbaer <Unknown>\n"
-"Language-Team: Low German <nds@li.org>\n"
+"PO-Revision-Date: 2014-03-08 07:27+0000\n"
+"Last-Translator: GunChleoc <Unknown>\n"
+"Language-Team: Widelands fixxer upper\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-03-07 05:34+0000\n"
+"X-Launchpad-Export-Date: 2014-03-09 05:38+0000\n"
 "X-Generator: Launchpad (build 16948)\n"
+"Language: nds\n"
 
 #: ../../global/militarysites/barracks.empire/conf:8
 msgid "Your Barracks discovered an aggressor."
@@ -416,7 +417,7 @@ msgstr ""
 
 #: ../../tribes/atlanteans/conf:4
 msgid "The Widelands Development Team"
-msgstr ""
+msgstr "de Widelands Endwigglungs Rott"
 
 #: ../../tribes/atlanteans/conf:5
 msgid "Atlanteans"
@@ -458,19 +459,19 @@ msgstr "Mais Acker"
 
 #: ../../tribes/atlanteans/conf:40
 msgid "Cornfield (harvested)"
-msgstr ""
+msgstr "Stoppelacker"
 
 #: ../../tribes/atlanteans/conf:41
 msgid "Cornfield (medium)"
-msgstr ""
+msgstr "Mais Acker (middle)"
 
 #: ../../tribes/atlanteans/conf:42
 msgid "Cornfield (small)"
-msgstr ""
+msgstr "Mais Acker (lütt)"
 
 #: ../../tribes/atlanteans/conf:43
 msgid "Cornfield (tiny)"
-msgstr ""
+msgstr "Mais Acker (lüürlütt)"
 
 #: ../../tribes/atlanteans/conf:44
 msgid "Destroyed Building"
@@ -518,7 +519,7 @@ msgstr ""
 
 #: ../../tribes/atlanteans/conf:55
 msgid "Ship Construction Site"
-msgstr ""
+msgstr "Schipp Baustee"
 
 #: ../../tribes/atlanteans/conf:58
 msgid "Advanced Shield"
@@ -614,7 +615,7 @@ msgstr ""
 
 #: ../../tribes/atlanteans/conf:81
 msgid "Iron"
-msgstr ""
+msgstr "Iesen"
 
 #: ../../tribes/atlanteans/conf:82
 msgid "Light Trident"
@@ -702,7 +703,7 @@ msgstr "Dreger"
 
 #: ../../tribes/atlanteans/conf:105
 msgid "Horse"
-msgstr ""
+msgstr "Peerd"
 
 #: ../../tribes/atlanteans/conf:108
 msgid "Soldier"
@@ -710,7 +711,7 @@ msgstr ""
 
 #: ../../tribes/atlanteans/conf:111
 msgid "Armorsmith"
-msgstr ""
+msgstr "Rüstsmidt"
 
 #: ../../tribes/atlanteans/conf:112
 msgid "Baker"
@@ -726,7 +727,7 @@ msgstr "Bulüüd"
 
 #: ../../tribes/atlanteans/conf:115
 msgid "Burner"
-msgstr ""
+msgstr "Brenner"
 
 #: ../../tribes/atlanteans/conf:116
 msgid "Shipwright"
@@ -758,7 +759,7 @@ msgstr ""
 
 #: ../../tribes/atlanteans/conf:123
 msgid "Miller"
-msgstr ""
+msgstr "Miller"
 
 #: ../../tribes/atlanteans/conf:124
 msgid "Miner"
@@ -778,7 +779,7 @@ msgstr "Rökerer"
 
 #: ../../tribes/atlanteans/conf:128
 msgid "Spider Breeder"
-msgstr ""
+msgstr "Speentüchter"
 
 #: ../../tribes/atlanteans/conf:129
 msgid "Stonecutter"
@@ -858,7 +859,7 @@ msgstr ""
 #: ../../tribes/atlanteans/conf:157
 #: ../../tribes/atlanteans/conf:204
 msgid "Castle"
-msgstr ""
+msgstr "Slott"
 
 #: ../../tribes/atlanteans/conf:159
 msgid "Outpost"
@@ -867,7 +868,7 @@ msgstr ""
 #: ../../tribes/atlanteans/conf:160
 #: ../../tribes/atlanteans/conf:203
 msgid "Tower"
-msgstr ""
+msgstr "Toorn"
 
 #: ../../tribes/atlanteans/conf:163
 msgid "Headquarters"
@@ -887,7 +888,7 @@ msgstr ""
 
 #: ../../tribes/atlanteans/conf:169
 msgid "Woodcutter’s House"
-msgstr ""
+msgstr "Boomümleggers Huus"
 
 #: ../../tribes/atlanteans/conf:170
 msgid "Forester’s House"
@@ -899,11 +900,11 @@ msgstr ""
 
 #: ../../tribes/atlanteans/conf:172
 msgid "Fisher’s House"
-msgstr ""
+msgstr "Fischers Huus"
 
 #: ../../tribes/atlanteans/conf:173
 msgid "Fish Breeder’s House"
-msgstr ""
+msgstr "Fischtüchters Huus"
 
 #: ../../tribes/atlanteans/conf:174
 msgid "Hunter’s House"
@@ -911,7 +912,7 @@ msgstr ""
 
 #: ../../tribes/atlanteans/conf:175
 msgid "Well"
-msgstr ""
+msgstr "Born"
 
 #: ../../tribes/atlanteans/conf:176
 msgid "Scout’s House"
@@ -955,7 +956,7 @@ msgstr ""
 
 #: ../../tribes/atlanteans/conf:186
 msgid "Armor Smithy"
-msgstr ""
+msgstr "Rüstsmeed"
 
 #: ../../tribes/atlanteans/conf:187
 msgid "Horse Farm"
@@ -963,7 +964,7 @@ msgstr ""
 
 #: ../../tribes/atlanteans/conf:188
 msgid "Spider Farm"
-msgstr ""
+msgstr "Speen Hoff"
 
 #: ../../tribes/atlanteans/conf:189
 msgid "Weaving-Mill"
@@ -971,7 +972,7 @@ msgstr ""
 
 #: ../../tribes/atlanteans/conf:190
 msgid "Farm"
-msgstr ""
+msgstr "Bueree"
 
 #: ../../tribes/atlanteans/conf:191
 msgid "Blackroot Farm"
@@ -1015,7 +1016,7 @@ msgstr ""
 
 #: ../../tribes/atlanteans/conf:209
 msgid "Labyrinth"
-msgstr ""
+msgstr "Biestergoorn"
 
 #: ../../tribes/atlanteans/corn/conf:1
 msgid ""

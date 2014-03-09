@@ -2,22 +2,23 @@
 # Copyright (c) 2010 Rosetta Contributors and Canonical Ltd 2010
 # This file is distributed under the same license as the widelands package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010.
-#
+# GunChleoc <fios@foramnagaidhlig.net>, 2014.
 msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-03-06 21:20+0000\n"
-"PO-Revision-Date: 2010-08-30 23:37+0000\n"
-"Last-Translator: Nasenbaer <Unknown>\n"
-"Language-Team: Ukrainian <uk@li.org>\n"
+"PO-Revision-Date: 2014-03-08 20:01+0000\n"
+"Last-Translator: GunChleoc <Unknown>\n"
+"Language-Team: Widelands fixxer upper\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2014-03-07 05:32+0000\n"
+"X-Launchpad-Export-Date: 2014-03-09 05:38+0000\n"
 "X-Generator: Launchpad (build 16948)\n"
+"Language: uk\n"
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:28
 msgid "Build a barracks"
@@ -160,12 +161,17 @@ msgid ""
 "know how many hours have passed since the waves rose higher than our boat, "
 "but still it would be suicide to go outside."
 msgstr ""
+"Схоже, плавання по затоках, було нашою помилкою. Природа повстала проти нас "
+"і ми попали в сильний шторм. Я навіть не уявляю скільки пройшло часу з тих "
+"пір, коли хвилі стали вище корабля, та виходити на зовні, все ще самогубство."
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:106
 msgid ""
 "Our ship is badly damaged and is taking in more and more water. We can thank "
 "the Gods if we survive this black night with our lives."
 msgstr ""
+"Наш корабель дуже пошкоджено, вода все прибуває. Я буду дякувати Богам, якщо "
+"ми виживемо в цю темну ніч."
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:113
 msgid "Survivor"
@@ -173,7 +179,7 @@ msgstr ""
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:115
 msgid "Finally, the Gods were with us!"
-msgstr ""
+msgstr "Нарешті, Боги з нами!"
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:116
 msgid ""
@@ -181,6 +187,9 @@ msgid ""
 "growing at the shore. But that is about as good as it gets. The truth is: "
 "when I woke up this morning, I saw nothing but sand around us."
 msgstr ""
+"Ми висадились на невідомому березі та найшли спокійне місце під пальмами. Та "
+"це здається красивим лиш на перший погляд. Насправді: коли я прокинувся "
+"сьогодні вранці, то не побачив нічого, крім піску навколо нас."
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:119
 msgid ""
@@ -188,6 +197,9 @@ msgid ""
 "this far-away sandy desert. I fear we won’t find the help we need to get our "
 "ship repaired in good time."
 msgstr ""
+"Здається ми опинились серед одних лиш пальм, що ростуть в цій далекій "
+"піщаній пустелі. Я боюсь, ми не знайдемо тут допомоги, нам потрібно "
+"відремонтувати наш корабель, доки є час."
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:126
 msgid "A Foreboding"
@@ -203,6 +215,9 @@ msgid ""
 "creatures live beyond this forest, in that mighty desert? What if these "
 "creatures enter the woods and await the time to attack us?"
 msgstr ""
+"Ваша високість, я боюсь, що ми в небезпеці на цьому острові. Хто знає, які "
+"страшні істоти живуть за межами цього лісу, в цій великій пустелі? Що "
+"робити, якщо ці істоти затаїлись десь і чекають моменту щоб напасти на нас?"
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:131
 msgid ""
@@ -210,6 +225,9 @@ msgid ""
 "the forests – so that we can be sure to see any potential enemies before "
 "they can see us."
 msgstr ""
+"Ну можливо хвилювання ці помилкові, та все одно потрібно караулити в лісі - "
+"так щоб ми були впевнені, що будь який ворог буде виявлений до того як "
+"нападе на нас."
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:133
 msgid ""
@@ -217,6 +235,8 @@ msgid ""
 "one of us can keep watch in the darkness and keep us safe from these "
 "creatures."
 msgstr ""
+"Нам потрібно будувати казарми в східній частині лісу. Ніхто з нас не може "
+"караулити в темряві, та забезпечити захист від цих істот."
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:141
 msgid "Safe For Now"
@@ -231,12 +251,16 @@ msgid ""
 "Sire, I saw that the construction of the barracks was completed, so I have "
 "assigned one of my best soldiers to it to keep watch on the desert."
 msgstr ""
+"Пане, будівництво казарми завершено і я відправив одного з кращих солдат, "
+"стежити за пустелею."
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:145
 msgid ""
 "This is a good step forward. Now we can feel a bit safer and can look "
 "forward to repairing our ship."
 msgstr ""
+"Це гарний крок, тепер ми в більшій безпеці і можемо спокійно відремонтувати "
+"корабель."
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:150
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:163
@@ -276,6 +300,10 @@ msgid ""
 "for constructing two more lumberjack’s houses, so that we can harvest the "
 "logs faster."
 msgstr ""
+"Агов, Лютиус! я отримав повідомлення, що наш перший лісоруб почав сьогодні "
+"роботу. Можливо це буде гарною ідеєю, зачекати поки він розчистить трошки "
+"місця, достатього для розміщення двох Хатинок Лісоруба, і ми зможемо "
+"заготовити колоди швидше."
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:168
 msgid ""
@@ -283,6 +311,9 @@ msgid ""
 "refined lumber, like every ship and every bigger building needs, too. So we "
 "should build a sawmill – as soon as we have enough space for this."
 msgstr ""
+"Та на жаль, колоди не підходять для ремонту нашого корабля - нам потрібні "
+"доски, як для корабля, так і для всіх великих будівель. Нам потрібно "
+"побудувати лісопилку - як тільки в нас з'явиться достатньо місця для цього"
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:177
 msgid "Amalea comes in..."
@@ -292,13 +323,15 @@ msgstr ""
 msgid ""
 "Hi Lutius, I’ve got two important things to talk about... First the good "
 "news:"
-msgstr ""
+msgstr "Привіт Лютиус, в мене два важливих новини для тебе... Перша, гарна:"
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:179
 msgid ""
 "I noticed that the construction of the sawmill is complete, so we can begin "
 "to refine the logs that the lumberjacks are harvesting into lumber."
 msgstr ""
+"я побачив, що будівництво лісопилки завершено і ми можемо почати обробку "
+"колод, які принесли лісоруби."
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:181
 msgid ""
@@ -306,6 +339,9 @@ msgid ""
 "news is that our lumberjacks harvest at an incredible speed. There are "
 "almost no trees left on this island."
 msgstr ""
+"На цьому хороше закінчується. Погана новина, полягає в тому, що наші "
+"лісоруби працюють з неймовірною швидкістю і на цьому острові практично не "
+"залишилось лісу."
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:184
 msgid ""
@@ -313,10 +349,14 @@ msgid ""
 "the desert and shade on the hot days, and they are the home of so many "
 "gentle animals. We shouldn’t leave this island a complete desert."
 msgstr ""
+"Лютиус, ці дерева є єдиним захистом від піщаних бурь, надають тінь в жаркі "
+"дні, а також на них проживає безліч тварин. Ми не можемо допустити, щоб цей "
+"острів перетворивсь на пустелю."
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:187
 msgid "Lutius, I beg you: find someone who takes care of planting new trees."
 msgstr ""
+"Лютиус, я прошу тебе: найди когось хто б зайнявся вирощуванням нових дерев."
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:193
 msgid "Thinking About the Future"
@@ -332,12 +372,18 @@ msgid ""
 "south shore of this land. Perhaps we could cut out some useful hard stones "
 "and beautiful marble."
 msgstr ""
+"Агов, мій старий добрий друже. Я тут подумав про скелі, на південному березі "
+"цього острова. Може нам варто розбити невелику кількість валунів та "
+"декоративного мармуру."
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:197
 msgid ""
 "The repair of our ship will take a few weeks, anyway, and the resources we "
 "harvest now might be the base of strong and big buildings in another land."
 msgstr ""
+"Ремонт нашого корабля займе декілька тижнів. В будь якому випадку, добуті "
+"ресурси можуть стати в нагоді при будівництві великих будівель на іншому "
+"острові."
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:204
 msgid "A Step Forward"
@@ -353,10 +399,12 @@ msgid ""
 "south began its work today and will soon provide us with stones and "
 "beautiful marble."
 msgstr ""
+"Агов, Лютиус, сьогодні ми трошки ближче до нашого нового замку. Каменоломня "
+"вже працює і скоро забезпечить нас будівельним каменем та мармуром."
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:208
 msgid "Now we truly can look forward to settling down on another island."
-msgstr ""
+msgstr "Тепер ми можемо обдумати переселення на інший острів."
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:213
 msgid "Mission Complete"
@@ -368,16 +416,20 @@ msgid ""
 "my people are loading everything onto our newly repaired ship, hoping it "
 "will serve us better than last time."
 msgstr ""
+"Мені сьогодні повідомили, що корабель відновлено. Робочі вже завантажують на "
+"нього припаси. Маю надію, що він прослужить нам краще, ніж перший раз."
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:218
 msgid ""
 "Tonight will be our last night on this island. Tomorrow morning we will "
 "leave, searching for a new place for our exile."
 msgstr ""
+"Сьогодні в нас остання ночівля на цьому острові, завтра раненько відпливаємо "
+"на пошуки нового місця для проживання."
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:220
 msgid "I still wonder if we will ever see Fremil again."
-msgstr ""
+msgstr "Чи побачу я колись Фремил?"
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:221
 msgid "Victory"
@@ -388,6 +440,8 @@ msgid ""
 "You have completed this mission. You may continue playing if you wish, "
 "otherwise move on to the next mission."
 msgstr ""
+"Ви впорались із завданням. Тепер, якщо бажаєте, можете просто пограти, або ж "
+"переходьте до наступного завдання."
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:228
 msgid "Safe Peninsula"

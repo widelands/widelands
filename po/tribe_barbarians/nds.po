@@ -2,21 +2,22 @@
 # Copyright (c) 2012 Rosetta Contributors and Canonical Ltd 2012
 # This file is distributed under the same license as the widelands package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2012.
-#
+# GunChleoc <fios@foramnagaidhlig.net>, 2014.
 msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-03-06 21:20+0000\n"
-"PO-Revision-Date: 2013-01-01 14:20+0000\n"
-"Last-Translator: Nasenbaer <Unknown>\n"
-"Language-Team: Low German <nds@li.org>\n"
+"PO-Revision-Date: 2014-03-08 07:28+0000\n"
+"Last-Translator: GunChleoc <Unknown>\n"
+"Language-Team: Widelands fixxer upper\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-03-07 05:35+0000\n"
+"X-Launchpad-Export-Date: 2014-03-09 05:38+0000\n"
 "X-Generator: Launchpad (build 16948)\n"
+"Language: nds\n"
 
 #: ../../global/militarysites/barracks.empire/conf:8
 msgid "Your Barracks discovered an aggressor."
@@ -587,7 +588,7 @@ msgstr ""
 #: ../../tribes/barbarians/warmill/help.lua:22
 #: ../../tribes/barbarians/well/help.lua:21
 msgid "Dependencies"
-msgstr ""
+msgstr "Afhangigkeiten"
 
 #: ../../tribes/barbarians/axefactory/help.lua:23
 #: ../../tribes/barbarians/bakery/help.lua:22
@@ -630,7 +631,7 @@ msgstr ""
 #: ../../tribes/barbarians/metalworks/help.lua:25
 #: ../../tribes/barbarians/warmill/help.lua:24
 msgid "Iron"
-msgstr ""
+msgstr "Iesen"
 
 #: ../../tribes/barbarians/axefactory/help.lua:26
 #: ../../tribes/barbarians/lime_kiln/help.lua:26
@@ -1460,7 +1461,7 @@ msgstr ""
 #: ../../tribes/barbarians/conf:121
 #: ../../tribes/barbarians/metalworks/help.lua:28
 msgid "Baker"
-msgstr ""
+msgstr "Baker"
 
 #: ../../tribes/barbarians/bakery/help.lua:51
 #: ../../tribes/barbarians/conf:73
@@ -1992,7 +1993,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/conf:4
 msgid "The Widelands Development Team"
-msgstr ""
+msgstr "de Widelands Endwigglungs Rott"
 
 #: ../../tribes/barbarians/conf:5
 msgid "Barbarians"
@@ -2032,19 +2033,19 @@ msgstr ""
 
 #: ../../tribes/barbarians/conf:47
 msgid "Reed (medium)"
-msgstr ""
+msgstr "Reet (middel)"
 
 #: ../../tribes/barbarians/conf:48
 msgid "Reed (small)"
-msgstr ""
+msgstr "Reet (lütt)"
 
 #: ../../tribes/barbarians/conf:49
 msgid "Reed (tiny)"
-msgstr ""
+msgstr "Reet (lüürlütt)"
 
 #: ../../tribes/barbarians/conf:50
 msgid "Reed (ripe)"
-msgstr ""
+msgstr "Reet (riep)"
 
 #: ../../tribes/barbarians/conf:51
 msgid "Resource indicator: Coal (little)"
@@ -2206,7 +2207,7 @@ msgstr "Köken Warktüüg"
 
 #: ../../tribes/barbarians/conf:94
 msgid "Mask"
-msgstr ""
+msgstr "Mask"
 
 #: ../../tribes/barbarians/conf:95
 #: ../../tribes/barbarians/deeper_coalmine/help.lua:26
@@ -2302,7 +2303,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/conf:127
 msgid "Burner"
-msgstr ""
+msgstr "Brenner"
 
 #: ../../tribes/barbarians/conf:130
 #: ../../tribes/barbarians/farm/help.lua:45
@@ -2389,7 +2390,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/conf:151
 msgid "Ship"
-msgstr ""
+msgstr "Schipp"
 
 #: ../../tribes/barbarians/conf:154
 #: ../../tribes/barbarians/fernery/help.lua:25
@@ -2407,7 +2408,7 @@ msgstr ""
 #: ../../tribes/barbarians/conf:160
 #: ../../tribes/barbarians/conf:169
 msgid "Castle"
-msgstr ""
+msgstr "Slott"
 
 #: ../../tribes/barbarians/conf:161
 msgid "Guardhall"
@@ -2472,7 +2473,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/conf:182
 msgid "Lumberjack’s Hut"
-msgstr ""
+msgstr "Boomschlegers Kaat"
 
 #: ../../tribes/barbarians/conf:183
 msgid "Ranger’s Hut"
@@ -2480,7 +2481,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/conf:184
 msgid "Fisher’s Hut"
-msgstr ""
+msgstr "Fischers Kaat"
 
 #: ../../tribes/barbarians/conf:185
 msgid "Hunter’s Hut"
@@ -2548,7 +2549,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/conf:206
 msgid "Farm"
-msgstr ""
+msgstr "Bueree"
 
 #: ../../tribes/barbarians/conf:208
 #: ../../tribes/barbarians/granitemine/help.lua:16
@@ -3128,7 +3129,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/metalworks/help.lua:26
 msgid "%s from the Lumberjack’s hut"
-msgstr ""
+msgstr "%s vun de Boomschlegers Kaat"
 
 #: ../../tribes/barbarians/metalworks/help.lua:42
 msgid "Ferner"
@@ -3484,7 +3485,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/trainingscamp/help.lua:63
 msgid "Attack"
-msgstr ""
+msgstr "Angreep"
 
 #: ../../tribes/barbarians/trainingscamp/help.lua:63
 msgid "Health"

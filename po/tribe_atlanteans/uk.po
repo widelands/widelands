@@ -2,20 +2,21 @@
 # Copyright (c) 2010 Rosetta Contributors and Canonical Ltd 2010
 # This file is distributed under the same license as the widelands package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010.
-#
+# GunChleoc <fios@foramnagaidhlig.net>, 2014.
 msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-03-06 21:20+0000\n"
-"PO-Revision-Date: 2010-08-30 23:36+0000\n"
-"Last-Translator: Nasenbaer <Unknown>\n"
-"Language-Team: Ukrainian <uk@li.org>\n"
+"PO-Revision-Date: 2014-03-08 20:02+0000\n"
+"Last-Translator: GunChleoc <Unknown>\n"
+"Language-Team: Widelands fixxer upper\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-03-07 05:34+0000\n"
+"X-Launchpad-Export-Date: 2014-03-09 05:38+0000\n"
 "X-Generator: Launchpad (build 16948)\n"
+"Language: uk\n"
 
 #: ../../global/militarysites/barracks.empire/conf:8
 msgid "Your Barracks discovered an aggressor."
@@ -294,7 +295,7 @@ msgstr ""
 
 #: ../../tribes/atlanteans/armoursmith/conf:1
 msgid "Produces armor for the soldiers."
-msgstr ""
+msgstr "Виготовляє броню для солдат"
 
 #: ../../tribes/atlanteans/armoursmithy/conf:28
 msgid "Produce steel shield"
@@ -392,11 +393,11 @@ msgstr ""
 
 #: ../../tribes/atlanteans/bucket/conf:1
 msgid "Big buckets for the fish breeder – produced by the toolsmith."
-msgstr ""
+msgstr "Великі відра, для Заводчика риби - виготовляється в Кузні."
 
 #: ../../tribes/atlanteans/builder/conf:1
 msgid "Works at construction sites to raise new buildings."
-msgstr ""
+msgstr "Працюють на будмайданчиках, будують нові будівлі."
 
 #: ../../tribes/atlanteans/burner/conf:1
 msgid "Burns coal."
@@ -437,23 +438,23 @@ msgstr "Попелище"
 
 #: ../../tribes/atlanteans/conf:34
 msgid "Blackroot Field"
-msgstr ""
+msgstr "Грядка чорного коріння"
 
 #: ../../tribes/atlanteans/conf:35
 msgid "Blackroot Field (harvested)"
-msgstr ""
+msgstr "Грядка чорного коріння прибрана"
 
 #: ../../tribes/atlanteans/conf:36
 msgid "Blackroot Field (medium)"
-msgstr ""
+msgstr "Середня грядка чорного коріння"
 
 #: ../../tribes/atlanteans/conf:37
 msgid "Blackroot Field (small)"
-msgstr ""
+msgstr "Мала грядка чорного коріння"
 
 #: ../../tribes/atlanteans/conf:38
 msgid "Blackroot Field (tiny)"
-msgstr ""
+msgstr "Крихітна грядка чорного коріння"
 
 #: ../../tribes/atlanteans/conf:39
 msgid "Cornfield"
@@ -461,67 +462,67 @@ msgstr "Кукурудзяне поле"
 
 #: ../../tribes/atlanteans/conf:40
 msgid "Cornfield (harvested)"
-msgstr ""
+msgstr "Кукурудзяне поле прибрано"
 
 #: ../../tribes/atlanteans/conf:41
 msgid "Cornfield (medium)"
-msgstr ""
+msgstr "Середнє кукурудзяне поле"
 
 #: ../../tribes/atlanteans/conf:42
 msgid "Cornfield (small)"
-msgstr ""
+msgstr "Мале кукурудзяне поле"
 
 #: ../../tribes/atlanteans/conf:43
 msgid "Cornfield (tiny)"
-msgstr ""
+msgstr "Крихітне кукурудзяне поле"
 
 #: ../../tribes/atlanteans/conf:44
 msgid "Destroyed Building"
-msgstr ""
+msgstr "Зруйнована будівля."
 
 #: ../../tribes/atlanteans/conf:45
 msgid "Resource indicator: Coal (little)"
-msgstr ""
+msgstr "Індикатор ресурсів: мало вугілля"
 
 #: ../../tribes/atlanteans/conf:46
 msgid "Resource indicator: Coal (much)"
-msgstr ""
+msgstr "Індикатор ресурсів: багато вугілля"
 
 #: ../../tribes/atlanteans/conf:47
 msgid "Resource indicator: Gold (little)"
-msgstr ""
+msgstr "Індикатор ресурсів: мало золота"
 
 #: ../../tribes/atlanteans/conf:48
 msgid "Resource indicator: Gold (much)"
-msgstr ""
+msgstr "Індикатор ресурсів: багато золота"
 
 #: ../../tribes/atlanteans/conf:49
 msgid "Resource indicator: Granite (little)"
-msgstr ""
+msgstr "Індикатор ресурсів: мало граніту"
 
 #: ../../tribes/atlanteans/conf:50
 msgid "Resource indicator: Granite (much)"
-msgstr ""
+msgstr "Індикатор ресурсів: багато граніту"
 
 #: ../../tribes/atlanteans/conf:51
 msgid "Resource indicator: Iron (little)"
-msgstr ""
+msgstr "Індикатор ресурсів: мало заліза"
 
 #: ../../tribes/atlanteans/conf:52
 msgid "Resource indicator: Iron (much)"
-msgstr ""
+msgstr "Індикатор ресурсів: багато заліза"
 
 #: ../../tribes/atlanteans/conf:53
 msgid "Resource indicator: No resource"
-msgstr ""
+msgstr "Індикатор ресурсів: пусто"
 
 #: ../../tribes/atlanteans/conf:54
 msgid "Resource indicator: Water"
-msgstr ""
+msgstr "Індикатор ресурсів: вода"
 
 #: ../../tribes/atlanteans/conf:55
 msgid "Ship Construction Site"
-msgstr ""
+msgstr "Будівельний майданчик"
 
 #: ../../tribes/atlanteans/conf:58
 msgid "Advanced Shield"
@@ -621,7 +622,7 @@ msgstr "Залізо"
 
 #: ../../tribes/atlanteans/conf:82
 msgid "Light Trident"
-msgstr ""
+msgstr "Легкий тризуб"
 
 #: ../../tribes/atlanteans/conf:83
 msgid "Long Trident"
@@ -661,11 +662,11 @@ msgstr "Лопата"
 
 #: ../../tribes/atlanteans/conf:92
 msgid "Smoked Fish"
-msgstr ""
+msgstr "Копчена риба"
 
 #: ../../tribes/atlanteans/conf:93
 msgid "Smoked Meat"
-msgstr ""
+msgstr "Копчене м'ясо"
 
 #: ../../tribes/atlanteans/conf:94
 msgid "Spidercloth"
@@ -713,7 +714,7 @@ msgstr "Солдат"
 
 #: ../../tribes/atlanteans/conf:111
 msgid "Armorsmith"
-msgstr ""
+msgstr "Цех обладунків"
 
 #: ../../tribes/atlanteans/conf:112
 msgid "Baker"
@@ -721,7 +722,7 @@ msgstr "Пекар"
 
 #: ../../tribes/atlanteans/conf:113
 msgid "Blackroot Farmer"
-msgstr ""
+msgstr "Фермер"
 
 #: ../../tribes/atlanteans/conf:114
 msgid "Builder"
@@ -781,7 +782,7 @@ msgstr "Коптильник"
 
 #: ../../tribes/atlanteans/conf:128
 msgid "Spider Breeder"
-msgstr ""
+msgstr "Заводчик павуків"
 
 #: ../../tribes/atlanteans/conf:129
 msgid "Stonecutter"
@@ -817,7 +818,7 @@ msgstr "Заводчик коней"
 
 #: ../../tribes/atlanteans/conf:139
 msgid "Ship"
-msgstr ""
+msgstr "корабель"
 
 #: ../../tribes/atlanteans/conf:142
 msgid "Construction Site"
@@ -890,11 +891,11 @@ msgstr "Кар’єр"
 
 #: ../../tribes/atlanteans/conf:169
 msgid "Woodcutter’s House"
-msgstr ""
+msgstr "Будиночок лісоруба"
 
 #: ../../tribes/atlanteans/conf:170
 msgid "Forester’s House"
-msgstr ""
+msgstr "Будиночок лісника"
 
 #: ../../tribes/atlanteans/conf:171
 msgid "Goldweaver"
@@ -902,15 +903,15 @@ msgstr "Ткач золота"
 
 #: ../../tribes/atlanteans/conf:172
 msgid "Fisher’s House"
-msgstr ""
+msgstr "Будиночок рибака"
 
 #: ../../tribes/atlanteans/conf:173
 msgid "Fish Breeder’s House"
-msgstr ""
+msgstr "Будиночок заводчика риби"
 
 #: ../../tribes/atlanteans/conf:174
 msgid "Hunter’s House"
-msgstr ""
+msgstr "Будиночок мисливця"
 
 #: ../../tribes/atlanteans/conf:175
 msgid "Well"
@@ -918,7 +919,7 @@ msgstr "Криниця"
 
 #: ../../tribes/atlanteans/conf:176
 msgid "Scout’s House"
-msgstr ""
+msgstr "Будиночок розвідника"
 
 #: ../../tribes/atlanteans/conf:177
 msgid "Sawmill"
@@ -942,7 +943,7 @@ msgstr "Пекарня"
 
 #: ../../tribes/atlanteans/conf:182
 msgid "Charcoal Burner’s House"
-msgstr ""
+msgstr "Будиночок випалювача углю"
 
 #: ../../tribes/atlanteans/conf:183
 msgid "Smelting Works"
@@ -958,7 +959,7 @@ msgstr "Зброярня"
 
 #: ../../tribes/atlanteans/conf:186
 msgid "Armor Smithy"
-msgstr ""
+msgstr "Цех обладунків"
 
 #: ../../tribes/atlanteans/conf:187
 msgid "Horse Farm"
@@ -966,7 +967,7 @@ msgstr "Ферма коней"
 
 #: ../../tribes/atlanteans/conf:188
 msgid "Spider Farm"
-msgstr ""
+msgstr "Паукова ферма"
 
 #: ../../tribes/atlanteans/conf:189
 msgid "Weaving-Mill"
@@ -1327,6 +1328,8 @@ msgid ""
 "Milking tongs are used by the spider breeder to milk the spiders. They are "
 "produced by the toolsmith."
 msgstr ""
+"Щіпці для доїння використовує заводчик павуків, щоб доїти пауків. "
+"Виробляються в кузні."
 
 #: ../../tribes/atlanteans/mill/conf:26
 msgid "Produce cornflour"
@@ -1373,12 +1376,12 @@ msgstr ""
 
 #: ../../tribes/atlanteans/sawyer/conf:1
 msgid "Saws wood to produce planks."
-msgstr ""
+msgstr "Розпилює деревину для вигитовлення досок."
 
 #: ../../tribes/atlanteans/scout/conf:1
 msgid ""
 "Scouts like Scotty the scout scouting unscouted areas in a scouty fashion."
-msgstr ""
+msgstr "Розвідник, розвідує невідому місцевість, відкриває нові землі."
 
 #: ../../tribes/atlanteans/scripting/sc00_headquarters_medium.lua:10
 msgid "Headquarters medium"
@@ -1421,6 +1424,8 @@ msgid ""
 "Shovels are needed for the proper handling of plants. Therefore the forester "
 "and the blackroot farmer are using them. They are produced by the toolsmith."
 msgstr ""
+"Лопати потрібні, для догляду за рослинами. Використовують: лісник, фермер, "
+"вирощувач чорного коріння. Виготовляються в кузні."
 
 #: ../../tribes/atlanteans/small_tower/conf:7
 msgid "Your soldiers have occupied your Small Tower"

@@ -2,20 +2,21 @@
 # Copyright (c) 2012 Rosetta Contributors and Canonical Ltd 2012
 # This file is distributed under the same license as the widelands package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2012.
-#
+# GunChleoc <fios@foramnagaidhlig.net>, 2014.
 msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-03-06 21:20+0000\n"
-"PO-Revision-Date: 2013-01-01 14:20+0000\n"
-"Last-Translator: Nasenbaer <Unknown>\n"
-"Language-Team: Low German <nds@li.org>\n"
+"PO-Revision-Date: 2014-03-08 07:29+0000\n"
+"Last-Translator: GunChleoc <Unknown>\n"
+"Language-Team: Widelands fixxer upper\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-03-07 05:36+0000\n"
+"X-Launchpad-Export-Date: 2014-03-09 05:39+0000\n"
 "X-Generator: Launchpad (build 16948)\n"
+"Language: nds\n"
 
 #: ../../global/militarysites/barracks.empire/conf:8
 #: ../../tribes/empire/barracks/conf:8
@@ -475,7 +476,7 @@ msgstr ""
 
 #: ../../tribes/empire/conf:4
 msgid "The Widelands Development Team"
-msgstr ""
+msgstr "de Widelands Endwigglungs Rott"
 
 #: ../../tribes/empire/conf:5
 msgid "Empire"
@@ -579,7 +580,7 @@ msgstr ""
 
 #: ../../tribes/empire/conf:58
 msgid "Armor"
-msgstr ""
+msgstr "Rüstung"
 
 #: ../../tribes/empire/conf:59
 msgid "Ax"
@@ -631,7 +632,7 @@ msgstr ""
 
 #: ../../tribes/empire/conf:71
 msgid "Gold"
-msgstr ""
+msgstr "Gold"
 
 #: ../../tribes/empire/conf:72
 msgid "Gold Ore"
@@ -659,7 +660,7 @@ msgstr "Jachtspeet"
 
 #: ../../tribes/empire/conf:78
 msgid "Iron"
-msgstr ""
+msgstr "Iesen"
 
 #: ../../tribes/empire/conf:79
 msgid "Iron Ore"
@@ -727,7 +728,7 @@ msgstr ""
 
 #: ../../tribes/empire/conf:95
 msgid "Water"
-msgstr ""
+msgstr "Water"
 
 #: ../../tribes/empire/conf:96
 msgid "Wheat"
@@ -763,7 +764,7 @@ msgstr ""
 
 #: ../../tribes/empire/conf:110
 msgid "Armorsmith"
-msgstr ""
+msgstr "Rüstsmidt"
 
 #: ../../tribes/empire/conf:111
 msgid "Baker"
@@ -819,7 +820,7 @@ msgstr ""
 
 #: ../../tribes/empire/conf:124
 msgid "Miller"
-msgstr ""
+msgstr "Miller"
 
 #: ../../tribes/empire/conf:125
 msgid "Miner"
@@ -875,7 +876,7 @@ msgstr ""
 
 #: ../../tribes/empire/conf:140
 msgid "Ship"
-msgstr ""
+msgstr "Schipp"
 
 #: ../../tribes/empire/conf:143
 msgid "Construction Site"
@@ -888,7 +889,7 @@ msgstr ""
 #: ../../tribes/empire/conf:149
 #: ../../tribes/empire/conf:212
 msgid "Castle"
-msgstr ""
+msgstr "Slott"
 
 #: ../../tribes/empire/conf:150
 msgid "Guardhall"
@@ -960,7 +961,7 @@ msgstr ""
 
 #: ../../tribes/empire/conf:170
 msgid "Lumberjack’s House"
-msgstr ""
+msgstr "Boomschlegers Huus"
 
 #: ../../tribes/empire/conf:171
 msgid "Forester’s House"
@@ -968,7 +969,7 @@ msgstr ""
 
 #: ../../tribes/empire/conf:172
 msgid "Fisher’s House"
-msgstr ""
+msgstr "Fischers Huus"
 
 #: ../../tribes/empire/conf:173
 msgid "Hunter’s House"
@@ -976,7 +977,7 @@ msgstr ""
 
 #: ../../tribes/empire/conf:174
 msgid "Well"
-msgstr ""
+msgstr "Born"
 
 #: ../../tribes/empire/conf:175
 msgid "Scout’s House"
@@ -1036,7 +1037,7 @@ msgstr ""
 
 #: ../../tribes/empire/conf:189
 msgid "Armor Smithy"
-msgstr ""
+msgstr "Rüstsmeed"
 
 #: ../../tribes/empire/conf:190
 msgid "Donkey Farm"
@@ -1056,7 +1057,7 @@ msgstr ""
 
 #: ../../tribes/empire/conf:194
 msgid "Farm"
-msgstr ""
+msgstr "Bueree"
 
 #: ../../tribes/empire/conf:195
 msgid "Weapon Smithy"

@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: Widelands svn4575\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2014-03-06 22:20+0100\n"
-"PO-Revision-Date: 2014-03-07 12:42+0000\n"
+"PO-Revision-Date: 2014-03-08 08:17+0000\n"
 "Last-Translator: fk <Unknown>\n"
 "Language-Team: Dutch <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-03-08 05:30+0000\n"
+"X-Launchpad-Export-Date: 2014-03-09 05:39+0000\n"
 "X-Generator: Launchpad (build 16948)\n"
 "X-Poedit-Country: NETHERLANDS\n"
 "X-Poedit-Language: Dutch\n"
@@ -980,13 +980,13 @@ msgstr "%s geproduceerd"
 #: ../../src/logic/production_program.cc:1066
 #, c-format
 msgid "Recruited %s?"
-msgstr ""
+msgstr "Gerecruteerd %s?"
 
 #. * TRANSLATORS: %1$s = name, %2$s = production program, %3$s = resource
 #: ../../src/logic/production_program.cc:1123
 #, c-format
 msgid "%1$s %2$s mine %3$s"
-msgstr ""
+msgstr "%1$s %2$s mijn %3$s"
 
 #: ../../src/logic/production_program.cc:1236
 #, c-format
@@ -2279,7 +2279,7 @@ msgstr "Team"
 
 #: ../../src/ui_fsmenu/launchSPG.cc:96
 msgid "Player’s tribe"
-msgstr ""
+msgstr "Speler's stam"
 
 #: ../../src/ui_fsmenu/launchSPG.cc:100
 msgid "Start type"
@@ -2355,7 +2355,7 @@ msgstr "Alleen spelen"
 
 #: ../../src/ui_fsmenu/main.cc:50
 msgid "Multiplayer"
-msgstr ""
+msgstr "Multiplayer"
 
 #: ../../src/ui_fsmenu/main.cc:55
 msgid "Watch Replay"
@@ -2389,7 +2389,7 @@ msgstr "Gelicenseerd onder de GNU General Public License V2.0"
 
 #: ../../src/ui_fsmenu/mapselect.cc:59
 msgid "Load Map as scenario"
-msgstr ""
+msgstr "Laad kaart als scenario"
 
 #. * TRANSLATORS: Column title for number of players in map list
 #: ../../src/ui_fsmenu/mapselect.cc:150
@@ -2445,6 +2445,8 @@ msgid ""
 "This map file is not present in your filesystem. The data shown here was "
 "sent by the server."
 msgstr ""
+"Deze kaart is niet in uw bestandssysteem aanwezig. De getoonde gegevens zijn "
+"afkomstig van de server."
 
 #: ../../src/ui_fsmenu/multiplayer.cc:41
 msgid "Choose game type"
@@ -2572,7 +2574,7 @@ msgstr "Gebruik een enkel detailscherm"
 
 #: ../../src/ui_fsmenu/options.cc:155
 msgid "Start building road after placing a flag"
-msgstr ""
+msgstr "Start met wegenaanleg na het plaatsen van een vlag"
 
 #: ../../src/ui_fsmenu/options.cc:162
 msgid "Show buildings area preview"
@@ -2655,7 +2657,7 @@ msgstr "OpenGL weergave"
 
 #: ../../src/ui_fsmenu/options.cc:475
 msgid "Show in-game chat with transparent background"
-msgstr ""
+msgstr "Toon chat tijdens het spel met doorzichtige achtergrond"
 
 #: ../../src/ui_fsmenu/options.cc:516
 msgid "DejaVuSerif (Default)"
@@ -2690,6 +2692,9 @@ msgid ""
 "Waited 5 seconds to close audio. There are some problems here, so killing "
 "Widelands. Update your sound driver and/or SDL to fix this problem\n"
 msgstr ""
+"5 seconden gewacht op het sluiten van de audio. Er zijn problemen dus we "
+"sluiten Widelands. Update je geluidsdrivers en/of SDL om het probleem op te "
+"lossen.\n"
 
 #: ../../src/wlapplication.cc:1207
 msgid ""
@@ -2711,7 +2716,7 @@ msgstr "Dit is Widelands-"
 
 #: ../../src/wlapplication.cc:1341
 msgid "Usage: widelands <option0>=<value0> ... <optionN>=<valueN>"
-msgstr ""
+msgstr "Gebruik: widelands <optie0>=<waarde0> ... <optieN>=<waardeN>"
 
 #: ../../src/wlapplication.cc:1342
 msgid "Options:"
@@ -2720,60 +2725,81 @@ msgstr "Opties:"
 #: ../../src/wlapplication.cc:1344
 msgid " --<config-entry-name>=value overwrites any config file setting"
 msgstr ""
+" --<config-entry-name>=waarde overschrijft een instelling uit het "
+"configuratiebestand"
 
 #: ../../src/wlapplication.cc:1345
 msgid ""
 " --logfile=FILENAME   Log output to file FILENAME instead of \n"
 "                      terminal output"
 msgstr ""
+" --logfile=BESTANDSNAAM log uitvoer naar bestand BESTANDSNAAM in plaats van "
+"\n"
+"                      scherm uitvoer"
 
 #: ../../src/wlapplication.cc:1347
 msgid ""
 " --datadir=DIRNAME    Use specified directory for the widelands\n"
 "                      data files"
 msgstr ""
+" --datadir=DIRNAAM Gebruik gespecificeerde directory voor Widelands\n"
+"                      databestanden"
 
 #: ../../src/wlapplication.cc:1349
 msgid ""
 " --homedir=DIRNAME    Use specified directory for widelands config\n"
 "                      files, savegames and replays"
 msgstr ""
+" --homedir=DIRNAAM Gebruik gespecificeerde directory voor Widelands \n"
+"                      configuratiebestanden, opgeslagen spellen en "
+"herhalingen"
 
 #: ../../src/wlapplication.cc:1352
 msgid "                      Default is ~/.widelands"
-msgstr ""
+msgstr "                      Standaard is ~/.widelands"
 
 #: ../../src/wlapplication.cc:1354
 msgid ""
 " --record=FILENAME    Record all events to the given filename for\n"
 "                      later playback"
 msgstr ""
+" --record=BESTANDSNAAM Sla alle gebeurtenissen op onder de gegeven "
+"bestandsnaam om\n"
+"                      later af te spelen"
 
 #: ../../src/wlapplication.cc:1356
 msgid " --playback=FILENAME  Playback given filename (see --record)"
 msgstr ""
+" --playback=BESTANDSNAAM Speelt de gegeven bestandsnaam af (zie --record)"
 
 #: ../../src/wlapplication.cc:1357
 msgid ""
 " --coredump=[yes|no]  Generates a core dump on segfaults instead\n"
 "                      of using the SDL"
 msgstr ""
+" --coredump=[yes|no] Genereert een core dump bij segmentatiefouten in plaats "
+"van\n"
+"                      gebruik te maken van SDL"
 
 #: ../../src/wlapplication.cc:1359
 msgid ""
 " --language=[de_DE|sv_SE|...]\n"
 "                      The locale to use."
 msgstr ""
+" --language=[de_DE|sv_SE|...]\n"
+"                      Deze lokale gebruiken."
 
 #: ../../src/wlapplication.cc:1361
 msgid " --localedir=DIRNAME  Use DIRNAME as location for the locale"
-msgstr ""
+msgstr " --localedir=DIRNAAM Gebruik DIRNAAM als locatie voor de lokale"
 
 #: ../../src/wlapplication.cc:1362
 msgid ""
 " --remove_syncstreams=[true|false]\n"
 "                      Remove syncstream files on startup"
 msgstr ""
+" --remove_syncstreams=[true|false]\n"
+"                      Verwijder syncstream bestanden bij het opstarten"
 
 #: ../../src/wlapplication.cc:1364
 msgid ""
@@ -2781,26 +2807,29 @@ msgid ""
 "                      Remove replays after this number of days.\n"
 "                      If this is 0, replays are not deleted."
 msgstr ""
+" --remove_replays=[...]\n"
+"                      Verwijder herhalingen na dit aantal dagen.\n"
+"                      Als dit 0 is worden de herhalingen niet verwijderd."
 
 #: ../../src/wlapplication.cc:1368
 msgid "Sound options:"
-msgstr ""
+msgstr "Geluidsopties:"
 
 #: ../../src/wlapplication.cc:1369
 msgid " --nosound            Starts the game with sound disabled."
-msgstr ""
+msgstr " --nosound Start het spel zonder geluid."
 
 #: ../../src/wlapplication.cc:1370
 msgid " --disable_fx         Disable sound effects."
-msgstr ""
+msgstr " --disable_fx Schakel geluidseffecten uit."
 
 #: ../../src/wlapplication.cc:1371
 msgid " --disable_music      Disable music."
-msgstr ""
+msgstr " --disable_music Schakel muziek uit."
 
 #: ../../src/wlapplication.cc:1372
 msgid " --nozip              Do not save files as binary zip archives."
-msgstr ""
+msgstr " --nozip Sla bestanden niet op als binaire zip archieven."
 
 #: ../../src/wlapplication.cc:1373
 msgid ""
@@ -2808,26 +2837,33 @@ msgid ""
 "                      You can add a =FILENAME to directly load\n"
 "                      the map FILENAME in editor."
 msgstr ""
+" --editor Start meteen de Widelands editor.\n"
+"                      Je kunt =BESTANDNAAM toevoegen om direct\n"
+"                      de kaart BESTANDNAAM in de editor te laden."
 
 #: ../../src/wlapplication.cc:1376
 msgid ""
 " --scenario=FILENAME  Directly starts the map FILENAME as scenario\n"
 "                      map."
 msgstr ""
+" --scenario=BESTANDNAAM  Start meteen de map BESTANDNAAM als scenario\n"
+"                      kaart."
 
 #: ../../src/wlapplication.cc:1378
 msgid " --loadgame=FILENAME  Directly loads the savegame FILENAME."
-msgstr ""
+msgstr " --loadgame=BESTANDNAAM Laad meteen het opgeslagen spel BESTANDNAAM."
 
 #: ../../src/wlapplication.cc:1379
 msgid ""
 " --script=FILENAME    Run the given Lua script after initialization.\n"
 "                      Only valid with --scenario, --loadgame, or --editor."
 msgstr ""
+" --script=BESTANDSNAAM Start het opgegeven script na initialisatie.\n"
+"                      Alleen geldig met --scenario, --loadgame of --editor."
 
 #: ../../src/wlapplication.cc:1381
 msgid " --dedicated=FILENAME Starts a dedicated server with FILENAME as map"
-msgstr ""
+msgstr " --dedicated=FILENAME Begint een vaste server met FILENAME als map"
 
 #: ../../src/wlapplication.cc:1382
 msgid ""
@@ -2836,10 +2872,14 @@ msgid ""
 "                      automatically after placing a flag that is\n"
 "                      not connected to a road."
 msgstr ""
+" --auto_roadbuild_mode=[yes|no]\n"
+"                      Of automatisch naar wegenbouw modus omgeschakeld\n"
+"                      moet worden nadat een vlag is geplaatst die niet is \n"
+"                      verbonden met een weg."
 
 #: ../../src/wlapplication.cc:1386
 msgid "Graphic options:"
-msgstr ""
+msgstr "Grafische opties:"
 
 #: ../../src/wlapplication.cc:1387
 msgid ""
@@ -2847,22 +2887,25 @@ msgid ""
 "                      Whether to use the whole display for the\n"
 "                      game screen."
 msgstr ""
+" --fullscreen=[yes|no]\n"
+"                      Of het hele beeld gebruikt moet worden\n"
+"                      voor het spelscherm."
 
 #: ../../src/wlapplication.cc:1390
 msgid " --xres=[...]         Width of the window in pixel."
-msgstr ""
+msgstr " --xres=[...]         Breedte van het scherm in pixels."
 
 #: ../../src/wlapplication.cc:1391
 msgid " --yres=[...]         Height of the window in pixel."
-msgstr ""
+msgstr " --yres=[...]         Hoogte van het scherm in pixels."
 
 #: ../../src/wlapplication.cc:1392
 msgid " --opengl=[0|1]       Enables OpenGL rendering"
-msgstr ""
+msgstr " --opengl=[0|1]                      Zet OpenGL rendering aan"
 
 #: ../../src/wlapplication.cc:1393
 msgid "Options for the internal window manager:"
-msgstr ""
+msgstr "Opties voor de interne vensterbeheerder:"
 
 #: ../../src/wlapplication.cc:1394
 msgid ""
@@ -2871,6 +2914,10 @@ msgid ""
 "                      when the edge of the window comes within\n"
 "                      this distance from the edge of the screen."
 msgstr ""
+" --border_snap_distance=[0 ...]\n"
+"                      Verplaats een venster naar de rand van het scherm\n"
+"                      als de rand van het scherm binnen deze afstand van\n"
+"                      de rand van het scherm komt."
 
 #: ../../src/wlapplication.cc:1398
 msgid ""
@@ -2879,6 +2926,10 @@ msgid ""
 "                      edge of the screen when the edge of the\n"
 "                      window is next to the edge of the screen."
 msgstr ""
+" --dock_windows_to_edges=[yes|no]\n"
+"                      Verwijder de rand van een venster aan de kant van\n"
+"                      de rand van het scherm als de rand van het venster\n"
+"                      naast de rand van het scherm is."
 
 #: ../../src/wlapplication.cc:1402
 msgid ""
@@ -2887,6 +2938,10 @@ msgid ""
 "                      the edge of the window comes within this\n"
 "                      distance from the edge of the panel."
 msgstr ""
+" --panel_snap_distance=[0 ...]\n"
+"                      Verplaats een venster naar de rand van het paneel als\n"
+"                      de rand van het venster binnen deze afstand van de\n"
+"                      rand van het paneel komt."
 
 #: ../../src/wlapplication.cc:1406
 msgid ""
@@ -2895,20 +2950,26 @@ msgid ""
 "                      if the window is overlapping with the\n"
 "                      panel."
 msgstr ""
+" --snap_windows_only_when_overlapping=[yes|no]\n"
+"                      Verplaats alleen een venster naar de rand\n"
+"                      van een paneel als het venster het paneel\n"
+"                      overlapt."
 
 #: ../../src/wlapplication.cc:1412
 msgid ""
 " --double             Start the game twice (for localhost network\n"
 "                      testing)"
 msgstr ""
+" --double       Start het spel tweemaal (voor netwerktests op de\n"
+"                  locale computer)"
 
 #: ../../src/wlapplication.cc:1416
 msgid " --verbose            Enable verbose debug messages"
-msgstr ""
+msgstr " --verbose            Activeer uitgebreide debug-berichten"
 
 #: ../../src/wlapplication.cc:1417
 msgid " --help               Show this help"
-msgstr ""
+msgstr " --help Toon deze hulp"
 
 #: ../../src/wlapplication.cc:1418
 msgid ""
@@ -2917,6 +2978,10 @@ msgid ""
 "\n"
 "Hope you enjoy this game!"
 msgstr ""
+"Bug meldingen? Suggesties? Bekijk de website van het project:\n"
+"        https://launchpad.net/widelands\n"
+"\n"
+"Hopelijk vind je dit spel leuk!"
 
 #: ../../src/wlapplication.cc:1506
 msgid "Fallback settings in effect"
@@ -2952,6 +3017,12 @@ msgid ""
 "related messages in the standard output (stdout.txt on Windows). You are "
 "using build %1$s (%2$s). "
 msgstr ""
+"\n"
+"\n"
+"Rapporteer a.u.b. dit probleem om ons te helpen Widelands te verbeteren. Je "
+"kunt\n"
+"gerelateerde berichten vinden op de standaarduitvoer (stdout.txt onder\n"
+"Windows). Je gebruikt build %1$s (%2$s). "
 
 #: ../../src/wlapplication.cc:1599
 msgid ""
@@ -2960,6 +3031,11 @@ msgid ""
 "Widelands attempts to create a savegame when errors occur during the game. "
 "It is often – though not always – possible to load it and continue playing.\n"
 msgstr ""
+"Voeg deze informatie a.u.b. toe aan je rapport.\n"
+"\n"
+"Widelands probeert een savegame (bewaard spel) te creëren als er een fout "
+"optreedt tijdens het spel. Vaak -helaas niet altijd- is het mogelijk om deze "
+"te laden en verder te spelen.\n"
 
 #: ../../src/wlapplication.cc:1711
 msgid "The address of the game server is invalid"
@@ -3158,7 +3234,7 @@ msgstr "Bouwmaterialen"
 #: ../../src/wui/encyclopedia_window.cc:66
 #: ../../src/wui/interactive_player.cc:128
 msgid "Tribal Ware Encyclopedia"
-msgstr ""
+msgstr "Stam goederen encyclopedie"
 
 #: ../../src/wui/encyclopedia_window.cc:80
 msgid "Consumed ware type(s)"
@@ -3755,8 +3831,8 @@ msgstr "spel"
 #: ../../src/wui/productionsitewindow.cc:107
 msgid "Worker"
 msgid_plural "Workers"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Werker"
+msgstr[1] "Werkers"
 
 #: ../../src/wui/productionsitewindow.cc:82
 msgid "Exp"
@@ -3788,7 +3864,7 @@ msgstr "Verken naar het noordwesten"
 
 #: ../../src/wui/shipwindow.cc:122
 msgid "Explore the island’s coast clockwise"
-msgstr ""
+msgstr "Verken de kust van het eiland met de klok mee"
 
 #: ../../src/wui/shipwindow.cc:128
 msgid "Scout towards the north east"
@@ -3812,7 +3888,7 @@ msgstr "Verken naar het zuidwesten"
 
 #: ../../src/wui/shipwindow.cc:158
 msgid "Explore the island’s coast counter clockwise"
-msgstr ""
+msgstr "Verken de kust van het eiland tegen de klok in"
 
 #: ../../src/wui/shipwindow.cc:164
 msgid "Scout towards the south east"
@@ -3854,7 +3930,7 @@ msgstr "Klik op een solaat om hem weg te sturen"
 #. * TRANSLATORS: Health, Attack, Defense, Evade
 #: ../../src/wui/soldierlist.cc:406
 msgid "HP: 8/8  AT: 8/8  DE: 8/8  EV: 8/8_"
-msgstr ""
+msgstr "HP: 8/8 AT: 8/8 DE: 8/8 EV: 8/8_"
 
 #: ../../src/wui/soldierlist.cc:414
 msgid "Prefer Rookies"
@@ -3868,7 +3944,7 @@ msgstr "Prefereer Helden"
 #: ../../src/wui/soldierlist.cc:489
 #, c-format
 msgid "HP: %1$u/%2$u  AT: %3$u/%4$u  DE: %5$u/%6$u  EV: %7$u/%8$u"
-msgstr ""
+msgstr "HP: %1$u/%2$u AT: %3$u/%4$u DE: %5$u/%6$u EV: %7$u/%8$u"
 
 #: ../../src/wui/stock_menu.cc:51
 msgid "Wares (total)"
@@ -3972,4 +4048,4 @@ msgstr "Volg"
 
 #: ../../src/wui/watchwindow.cc:117
 msgid "Center the main view on this"
-msgstr ""
+msgstr "Beeld centreren"

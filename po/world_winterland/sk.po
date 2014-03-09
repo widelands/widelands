@@ -1,26 +1,25 @@
 # Widelands po/sk_SK/worlds/winterland.po
 # Copyright (C) 2008 Widelands Development Team
 # FIRST AUTHOR <EMAIL@ADDRESS.TLD>, YEAR.
-#
+# Miroslav Remák <Unknown>, 2014.
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2014-03-06 21:20+0000\n"
-"PO-Revision-Date: 2013-09-13 16:55+0000\n"
+"PO-Revision-Date: 2014-03-08 07:28+0000\n"
 "Last-Translator: Miroslav Remák <Unknown>\n"
-"Language-Team: Prometheus <mmatej@yahoo.com>\n"
+"Language-Team: Slovak <sk@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-03-07 05:42+0000\n"
+"X-Launchpad-Export-Date: 2014-03-09 05:39+0000\n"
 "X-Generator: Launchpad (build 16948)\n"
-"X-Poedit-Country: CZECH REPUBLIC\n"
-"X-Poedit-Language: Czech\n"
+"Language: sk\n"
 
 #: ../../worlds/winterland/conf:2
 msgid "The Widelands Development Team"
-msgstr "Vývojový tím Widelands"
+msgstr "Vývojový tím hry Widelands"
 
 #: ../../worlds/winterland/conf:3
 msgid "Winterland"
@@ -107,15 +106,15 @@ msgstr "Osika"
 
 #: ../../worlds/winterland/conf:46
 msgid "Aspen (medium)"
-msgstr ""
+msgstr "Osika (stredná)"
 
 #: ../../worlds/winterland/conf:47
 msgid "Aspen (small)"
-msgstr ""
+msgstr "Osika (malá)"
 
 #: ../../worlds/winterland/conf:48
 msgid "Aspen (tiny)"
-msgstr ""
+msgstr "Osika (maličká)"
 
 #: ../../worlds/winterland/conf:49
 msgid "Oak"
@@ -123,15 +122,15 @@ msgstr "Dub"
 
 #: ../../worlds/winterland/conf:50
 msgid "Oak (medium)"
-msgstr ""
+msgstr "Dub (stredný)"
 
 #: ../../worlds/winterland/conf:51
 msgid "Oak (small)"
-msgstr ""
+msgstr "Dub (malý)"
 
 #: ../../worlds/winterland/conf:52
 msgid "Oak (tiny)"
-msgstr ""
+msgstr "Dub (maličký)"
 
 #: ../../worlds/winterland/conf:53
 msgid "Spruce"
@@ -139,15 +138,15 @@ msgstr "Smrek"
 
 #: ../../worlds/winterland/conf:54
 msgid "Spruce (medium)"
-msgstr ""
+msgstr "Smrek (stredný)"
 
 #: ../../worlds/winterland/conf:55
 msgid "Spruce (small)"
-msgstr ""
+msgstr "Smrek (malý)"
 
 #: ../../worlds/winterland/conf:56
 msgid "Spruce (tiny)"
-msgstr ""
+msgstr "Smrek (maličký)"
 
 #: ../../worlds/winterland/conf:57
 msgid "Maple"
@@ -155,15 +154,15 @@ msgstr "Javor"
 
 #: ../../worlds/winterland/conf:58
 msgid "Maple (medium)"
-msgstr ""
+msgstr "Javor (stredný)"
 
 #: ../../worlds/winterland/conf:59
 msgid "Maple (small)"
-msgstr ""
+msgstr "Javor (malý)"
 
 #: ../../worlds/winterland/conf:60
 msgid "Maple (tiny)"
-msgstr ""
+msgstr "Javor (maličký)"
 
 #: ../../worlds/winterland/conf:61
 msgid "Birch"
@@ -171,15 +170,15 @@ msgstr "Breza"
 
 #: ../../worlds/winterland/conf:62
 msgid "Birch (medium)"
-msgstr ""
+msgstr "Breza (stredná)"
 
 #: ../../worlds/winterland/conf:63
 msgid "Birch (small)"
-msgstr ""
+msgstr "Breza (malá)"
 
 #: ../../worlds/winterland/conf:64
 msgid "Birch (tiny)"
-msgstr ""
+msgstr "Breza (maličká)"
 
 #: ../../worlds/winterland/conf:65
 msgid "Beech"
@@ -187,47 +186,47 @@ msgstr "Buk"
 
 #: ../../worlds/winterland/conf:66
 msgid "Beech (medium)"
-msgstr ""
+msgstr "Buk (stredný)"
 
 #: ../../worlds/winterland/conf:67
 msgid "Beech (small)"
-msgstr ""
+msgstr "Buk (malý)"
 
 #: ../../worlds/winterland/conf:68
 msgid "Beech (tiny)"
-msgstr ""
+msgstr "Buk (maličký)"
 
 #: ../../worlds/winterland/conf:69
 msgid "Larch"
-msgstr "Červený smrek"
+msgstr "Smrekovec"
 
 #: ../../worlds/winterland/conf:70
 msgid "Larch (medium)"
-msgstr ""
+msgstr "Smrekovec (stredný)"
 
 #: ../../worlds/winterland/conf:71
 msgid "Larch (small)"
-msgstr ""
+msgstr "Smrekovec (malý)"
 
 #: ../../worlds/winterland/conf:72
 msgid "Larch (tiny)"
-msgstr ""
+msgstr "Smrekovec (maličký)"
 
 #: ../../worlds/winterland/conf:73
 msgid "Rowan"
-msgstr "Blahovičník"
+msgstr "Jarabina"
 
 #: ../../worlds/winterland/conf:74
 msgid "Rowan (medium)"
-msgstr ""
+msgstr "Jarabina (stredná)"
 
 #: ../../worlds/winterland/conf:75
 msgid "Rowan (small)"
-msgstr ""
+msgstr "Jarabina (malá)"
 
 #: ../../worlds/winterland/conf:76
 msgid "Rowan (tiny)"
-msgstr ""
+msgstr "Jarabina (maličká)"
 
 #: ../../worlds/winterland/conf:79
 msgid "Badger"
@@ -235,7 +234,7 @@ msgstr "Jazvec"
 
 #: ../../worlds/winterland/conf:80
 msgid "Bunny"
-msgstr "Zajac"
+msgstr "Králik"
 
 #: ../../worlds/winterland/conf:81
 msgid "Deer"
@@ -308,15 +307,15 @@ msgstr "Tundra"
 
 #: ../../worlds/winterland/terrainconf:13
 msgid "Mountain 1"
-msgstr ""
+msgstr "Hora 1"
 
 #: ../../worlds/winterland/terrainconf:19
 msgid "Ice Floes"
-msgstr ""
+msgstr "Ľadové kryhy"
 
 #: ../../worlds/winterland/terrainconf:25
 msgid "Ice Floes 2"
-msgstr ""
+msgstr "Ľadové kryhy 2"
 
 #: ../../worlds/winterland/terrainconf:31
 msgid "Ice"
@@ -324,27 +323,27 @@ msgstr "Ľad"
 
 #: ../../worlds/winterland/terrainconf:44
 msgid "Tundra Taiga"
-msgstr ""
+msgstr "Tundra-tajga"
 
 #: ../../worlds/winterland/terrainconf:50
 msgid "Tundra 2"
-msgstr ""
+msgstr "Tundra 2"
 
 #: ../../worlds/winterland/terrainconf:56
 msgid "Tundra 3"
-msgstr ""
+msgstr "Tundra 3"
 
 #: ../../worlds/winterland/terrainconf:62
 msgid "Mountain 2"
-msgstr ""
+msgstr "Hora 2"
 
 #: ../../worlds/winterland/terrainconf:68
 msgid "Mountain 3"
-msgstr ""
+msgstr "Hora 3"
 
 #: ../../worlds/winterland/terrainconf:74
 msgid "Mountain 4"
-msgstr ""
+msgstr "Hora 4"
 
 #: ../../worlds/winterland/terrainconf:80
 msgid "Beach"

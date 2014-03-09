@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-03-06 22:20+0100\n"
-"PO-Revision-Date: 2014-03-08 00:19+0000\n"
+"PO-Revision-Date: 2014-03-08 07:11+0000\n"
 "Last-Translator: GunChleoc <Unknown>\n"
 "Language-Team: Fòram na Gàidhlig http://www.foramnagaidhlig.net\n"
 "MIME-Version: 1.0\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n==1 || n==11) ? 0 : (n==2 || n==12) ? 1 : "
 "(n > 2 && n < 20) ? 2 : 3;\n"
-"X-Launchpad-Export-Date: 2014-03-08 05:30+0000\n"
+"X-Launchpad-Export-Date: 2014-03-09 05:39+0000\n"
 "X-Generator: Launchpad (build 16948)\n"
 "Language: gd\n"
 
@@ -199,7 +199,7 @@ msgstr " snàmh"
 #: ../../src/editor/tools/editor_info_tool.cc:83
 #, c-format
 msgid "Caps:%s"
-msgstr ""
+msgstr "Seòrsaichean:%s"
 
 #: ../../src/editor/tools/editor_info_tool.cc:86
 #, c-format
@@ -743,7 +743,7 @@ msgstr "%1$i%% air a thogail"
 #: ../../src/logic/dismantlesite.cc:100
 #, c-format
 msgid "%u%% dismantled"
-msgstr "%u%% air a thoirt às a chèile"
+msgstr "%u%% dheth às a chèile"
 
 #: ../../src/logic/editor_game_base.cc:283
 msgid "Loading tribes"
@@ -839,15 +839,15 @@ msgstr[3] "%1$u(+%2$u) saighdear"
 
 #: ../../src/logic/militarysite.cc:848
 msgid "Militarysite lost!"
-msgstr "Chaill thu ionad an airm!"
+msgstr "Chaill thu togalach!"
 
 #: ../../src/logic/militarysite.cc:902
 msgid "Enemy at site defeated!"
-msgstr "Chuir thu ruaig air an nàmhaid aig ionad!"
+msgstr "Ghabh thu togalach!"
 
 #: ../../src/logic/militarysite.cc:948
 msgid "You are under attack"
-msgstr "Thathar a' toirt ionnsaigh ort"
+msgstr "Fo ionnsaigh!"
 
 #: ../../src/logic/objective.h:42
 msgid "no descr"
@@ -870,7 +870,7 @@ msgstr ""
 #: ../../src/logic/production_program.cc:155
 #, c-format
 msgid "not %s"
-msgstr ""
+msgstr "nach eil %s"
 
 #. * TRANSLATORS: e.g. "economy needs water" Context: "and/or (not) economy needs %s"
 #. * TRANSLATORS: e.g. "economy needs worker" Context: "and/or (not) economy needs %s"
@@ -878,7 +878,7 @@ msgstr ""
 #: ../../src/logic/production_program.cc:200
 #, c-format
 msgid "economy needs %s"
-msgstr ""
+msgstr "an t-eaconamaidh feumach air %s"
 
 #. * TRANSLATORS: Adds a ware to list of wares in "Failed/Skipped ..." messages.
 #. * TRANSLATORS: e.g. "Failed work because: water, wheat (2) are missing"
@@ -887,27 +887,27 @@ msgstr ""
 #: ../../src/logic/production_program.cc:866
 #, c-format
 msgid "%1$s %2$s"
-msgstr ""
+msgstr "%1$s %2$s"
 
 #. * TRANSLATORS: Separator for list of wares in "Failed/Skipped ..." messages.
 #: ../../src/logic/production_program.cc:236
 #: ../../src/logic/production_program.cc:847
 #, c-format
 msgid "%s,"
-msgstr ""
+msgstr "%s,"
 
 #. * TRANSLATORS: e.g. "Failed work because: water, wheat (2) are missing"
 #: ../../src/logic/production_program.cc:241
 #: ../../src/logic/production_program.cc:855
 #, c-format
 msgid "%1$s (%2$i)"
-msgstr ""
+msgstr "%1$s (%2$i)"
 
 #. * TRANSLATORS: %s is a list of wares
 #: ../../src/logic/production_program.cc:244
 #, c-format
 msgid "site has%s"
-msgstr ""
+msgstr "%s aig an ionad"
 
 #: ../../src/logic/production_program.cc:260
 msgid "workers need experience"
@@ -917,54 +917,54 @@ msgstr "eòlas a dhìth air na h-obraichean"
 #: ../../src/logic/production_program.cc:427
 #, c-format
 msgid "Failed %s"
-msgstr ""
+msgstr "Dh'fhàillig le %s"
 
 #. * TRANSLATORS: "Completed %s because (not): %s {and/or %s}"
 #: ../../src/logic/production_program.cc:429
 #, c-format
 msgid "Completed %s"
-msgstr ""
+msgstr "Tha %s coileanta"
 
 #. * TRANSLATORS: "Skipped %s because (not): %s {and/or %s}"
 #: ../../src/logic/production_program.cc:431
 #, c-format
 msgid "Skipped %s"
-msgstr ""
+msgstr "Chaidh %s a leigeil seachad"
 
 #. * TRANSLATORS: "Failed/Completed/Skipped %s because: %s {and %s}"
 #: ../../src/logic/production_program.cc:447
 #, c-format
 msgid "%s and "
-msgstr ""
+msgstr "%s agus "
 
 #. * TRANSLATORS: "Failed/Completed/Skipped %s because: %s {and %s}"
 #: ../../src/logic/production_program.cc:451
 #, c-format
 msgid "%1$s because: %2$s"
-msgstr ""
+msgstr "%1$s air sgàth 's gu bheil %2$s"
 
 #. * TRANSLATORS: "Failed/Completed/Skipped %s because not: %s {or %s}"
 #: ../../src/logic/production_program.cc:464
 #, c-format
 msgid "%s or "
-msgstr ""
+msgstr "%s no "
 
 #. * TRANSLATORS: "Failed/Completed/Skipped %s because not: %s {or %s}"
 #: ../../src/logic/production_program.cc:468
 #, c-format
 msgid "%1$s because not: %2$s"
-msgstr ""
+msgstr "%1$s air sgàth 's nach eil %2$s"
 
 #. * TRANSLATORS: e.g. "Failed work because: water, wheat (2) are missing"
 #: ../../src/logic/production_program.cc:832
 #, c-format
 msgid "Failed %s because:"
-msgstr ""
+msgstr "Dh'fhàillig le %s air sgàth 's"
 
 #: ../../src/logic/production_program.cc:862
 #, c-format
 msgid "%s and"
-msgstr ""
+msgstr "%s agus"
 
 #: ../../src/logic/production_program.cc:867
 msgid " is missing"
@@ -993,13 +993,13 @@ msgstr "Chaidh %s a shaothrachadh"
 #: ../../src/logic/production_program.cc:1066
 #, c-format
 msgid "Recruited %s?"
-msgstr ""
+msgstr "Chaidh %s a thrusadh"
 
 #. * TRANSLATORS: %1$s = name, %2$s = production program, %3$s = resource
 #: ../../src/logic/production_program.cc:1123
 #, c-format
 msgid "%1$s %2$s mine %3$s"
-msgstr ""
+msgstr "%1$s %2$s – tochladh %3$s"
 
 #: ../../src/logic/production_program.cc:1236
 #, c-format
@@ -2334,7 +2334,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/launchSPG.cc:54
 msgid "Select map"
-msgstr "Tagh am mapa"
+msgstr "Tagh mapa"
 
 #: ../../src/ui_fsmenu/launchSPG.cc:75
 msgid "Launch Game"
@@ -2393,7 +2393,7 @@ msgstr "Tagh geama air a shàbhaladh"
 
 #: ../../src/ui_fsmenu/loadgame.cc:94 ../../src/ui_fsmenu/loadreplay.cc:78
 msgid "Gametime:"
-msgstr "Àm a' gheama:"
+msgstr "Àm:"
 
 #: ../../src/ui_fsmenu/loadgame.cc:107
 msgid "Minimap:"
@@ -2542,7 +2542,7 @@ msgstr "Seall còmhradh logaidh a-steach"
 #: ../../src/ui_fsmenu/multiplayer.cc:115
 #: ../../src/ui_fsmenu/netsetup_lan.cc:120 ../../src/wui/login_box.cc:74
 msgid "nobody"
-msgstr "gun ainm"
+msgstr "gun_ainm"
 
 #: ../../src/ui_fsmenu/netsetup_lan.cc:42
 msgid "Begin Network Game"
@@ -3159,7 +3159,7 @@ msgstr ""
 
 #: ../../src/wui/actionconfirm.cc:223
 msgid "Destroy building?"
-msgstr "A bheil thu airson an togalach a mhilleadh?"
+msgstr "Am mill sinn an togalach?"
 
 #: ../../src/wui/actionconfirm.cc:224
 #, c-format
@@ -3168,7 +3168,7 @@ msgstr "A bheil thu airson a' %s seo a mhilleadh?"
 
 #: ../../src/wui/actionconfirm.cc:288
 msgid "Dismantle building?"
-msgstr "A bheil thu airson an togalach a thoirt às a chèile?"
+msgstr "An toir sinn an togalach às a chèile?"
 
 #: ../../src/wui/actionconfirm.cc:289
 #, c-format
@@ -3177,7 +3177,7 @@ msgstr "A bheil thu airson a' %s seo a thoirt às a chèile?"
 
 #: ../../src/wui/actionconfirm.cc:349
 msgid "Enhance building?"
-msgstr "A bheil thu airson an togalach a leasachadh?"
+msgstr "An leasaich sinn an togalach?"
 
 #: ../../src/wui/actionconfirm.cc:350
 #, c-format
@@ -3190,7 +3190,7 @@ msgstr "A bheil thu airson an long seo a chur fodha?"
 
 #: ../../src/wui/actionconfirm.cc:402 ../../src/wui/actionconfirm.cc:443
 msgid "Sink the ship?"
-msgstr "A bheil thu airson an long a chur fodha?"
+msgstr "An cuir sinn an long fodha?"
 
 #: ../../src/wui/actionconfirm.cc:443
 msgid "Do you really want to cancel the active expedition?"
@@ -3265,13 +3265,13 @@ msgstr "Tog"
 #: ../../src/wui/building_statistics_menu.cc:152
 #: ../../src/wui/building_statistics_menu.cc:174
 msgid "Show previous"
-msgstr "Seall an tè roimhpe"
+msgstr "Seall am fear roimhe"
 
 #: ../../src/wui/building_statistics_menu.cc:141
 #: ../../src/wui/building_statistics_menu.cc:163
 #: ../../src/wui/building_statistics_menu.cc:185
 msgid "Show next"
-msgstr "Seall an ath thè"
+msgstr "Seall an t-ath fhear"
 
 #: ../../src/wui/buildingwindow.cc:181
 msgid "Cancel the expedition"
@@ -3342,7 +3342,7 @@ msgstr "Leabhar-eòlais bathar na treubha"
 
 #: ../../src/wui/encyclopedia_window.cc:80
 msgid "Consumed ware type(s)"
-msgstr "Seòrsa(ichean) de bhathar air a chaitheamh"
+msgstr "Bathar air a bheil feum"
 
 #: ../../src/wui/encyclopedia_window.cc:81
 msgid "Quantity"
@@ -3522,7 +3522,7 @@ msgstr ""
 #: ../../src/wui/game_message_menu.cc:46
 #: ../../src/wui/game_message_menu.cc:373
 msgid "Message Menu: Inbox"
-msgstr "Clàr-taice nan teachdaireachd: Am bogsa a-steach"
+msgstr "Do theachdaireachdan: Am bogsa a-steach"
 
 #: ../../src/wui/game_message_menu.cc:56
 msgid "Select"
@@ -3538,7 +3538,7 @@ msgstr "Tiotal"
 
 #: ../../src/wui/game_message_menu.cc:59
 msgid "Time sent"
-msgstr "Chaidh a chur"
+msgstr "Chaidh a cur"
 
 #: ../../src/wui/game_message_menu.cc:66
 msgid "Clear"
@@ -3559,7 +3559,7 @@ msgstr "Ais-thionndaidh na thagh thu"
 #: ../../src/wui/game_message_menu.cc:85
 #: ../../src/wui/game_message_menu.cc:375
 msgid "Archive selected messages"
-msgstr "Cuir na teachdaireachdan a thagh thu ann an tasglann"
+msgstr "Cuir na teachdaireachdan a thagh thu san tasglann"
 
 #: ../../src/wui/game_message_menu.cc:94
 #: ../../src/wui/game_message_menu.cc:376
@@ -3572,7 +3572,7 @@ msgstr "meadhanaich sealladh a' mhapa air an ionad"
 
 #: ../../src/wui/game_message_menu.cc:366
 msgid "Message Menu: Archive"
-msgstr "Clàr-taice nan teachdaireachd: Tasglann"
+msgstr "Do theachdaireachdan: An tasglann"
 
 #: ../../src/wui/game_message_menu.cc:368
 msgid "Restore selected messages"
@@ -3584,7 +3584,7 @@ msgstr "Dhan bhogsa a-steach"
 
 #: ../../src/wui/game_objectives_menu.cc:44
 msgid "Objectives Menu"
-msgstr "Clàr-taice nan amasan"
+msgstr "Na h-amasan"
 
 #: ../../src/wui/game_objectives_menu.cc:66
 msgid "Claim Victory"
@@ -3776,7 +3776,7 @@ msgid "%u new message"
 msgid_plural "%u new messages"
 msgstr[0] "%u teachdaireachd ùr"
 msgstr[1] "%u theachdaireachd ùr"
-msgstr[2] "%u teachdaireachdan ùr"
+msgstr[2] "%u teachdaireachdan ùra"
 msgstr[3] "%u teachdaireachd ùr"
 
 #: ../../src/wui/interactive_spectator.cc:53
@@ -3946,7 +3946,7 @@ msgstr[3] "Obraiche"
 
 #: ../../src/wui/productionsitewindow.cc:82
 msgid "Exp"
-msgstr "Èolas"
+msgstr "Eòlas"
 
 #: ../../src/wui/productionsitewindow.cc:83
 msgid "Next Level"
@@ -4135,7 +4135,7 @@ msgstr "Triall"
 
 #: ../../src/wui/waresqueuedisplay.cc:184
 msgid "Highest priority"
-msgstr "Prìomhachas as àirde"
+msgstr "Prìomhachas àrd"
 
 #: ../../src/wui/waresqueuedisplay.cc:187
 msgid "Normal priority"
@@ -4143,7 +4143,7 @@ msgstr "Prìomhachas àbhaisteach"
 
 #: ../../src/wui/waresqueuedisplay.cc:190
 msgid "Lowest priority"
-msgstr "Prìomhachas as ìsle"
+msgstr "Prìomhachas ìosal"
 
 #: ../../src/wui/waresqueuedisplay.cc:236
 msgid "Decrease the number of wares you want to be stored here."

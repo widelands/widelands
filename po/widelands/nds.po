@@ -2,25 +2,26 @@
 # Copyright (c) 2012 Rosetta Contributors and Canonical Ltd 2012
 # This file is distributed under the same license as the widelands package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2012.
-#
+# GunChleoc <fios@foramnagaidhlig.net>, 2014.
 msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-03-06 22:20+0100\n"
-"PO-Revision-Date: 2014-01-06 07:55+0000\n"
-"Last-Translator: Tino <Unknown>\n"
-"Language-Team: Low German <nds@li.org>\n"
+"PO-Revision-Date: 2014-03-08 07:30+0000\n"
+"Last-Translator: GunChleoc <Unknown>\n"
+"Language-Team: Widelands fixxer upper\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-03-07 05:39+0000\n"
+"X-Launchpad-Export-Date: 2014-03-09 05:39+0000\n"
 "X-Generator: Launchpad (build 16948)\n"
+"Language: nds\n"
 
 #: ../../src/ai/defaultai.h:84
 msgid "Aggressive"
-msgstr "angreepsch"
+msgstr "Angreepsch"
 
 #: ../../src/ai/defaultai.h:93
 msgid "Normal"
@@ -136,7 +137,7 @@ msgstr ""
 
 #: ../../src/editor/tools/editor_info_tool.cc:52
 msgid "Node:"
-msgstr ""
+msgstr "Knütt:"
 
 #: ../../src/editor/tools/editor_info_tool.cc:54
 #, c-format
@@ -155,17 +156,17 @@ msgstr ""
 #. * TRANSLATORS: This is part of a list, e.g. Caps: medium flag walk
 #: ../../src/editor/tools/editor_info_tool.cc:65
 msgid " small"
-msgstr ""
+msgstr " lütt"
 
 #. * TRANSLATORS: This is part of a list, e.g. Caps: medium flag walk
 #: ../../src/editor/tools/editor_info_tool.cc:67
 msgid " medium"
-msgstr ""
+msgstr " middel"
 
 #. * TRANSLATORS: This is part of a list, e.g. Caps: medium flag walk
 #: ../../src/editor/tools/editor_info_tool.cc:69
 msgid " big"
-msgstr ""
+msgstr " groot"
 
 #. * TRANSLATORS: This is part of a list, e.g. Caps: medium flag walk
 #: ../../src/editor/tools/editor_info_tool.cc:73
@@ -220,14 +221,14 @@ msgstr ""
 
 #: ../../src/editor/tools/editor_info_tool.cc:96
 msgid "Terrain:"
-msgstr ""
+msgstr "Landschap:"
 
 #: ../../src/editor/tools/editor_info_tool.cc:103
 #: ../../src/editor/tools/editor_info_tool.cc:125
 #: ../../src/editor/tools/editor_info_tool.cc:137
 #, c-format
 msgid "Name: %s"
-msgstr ""
+msgstr "Naam: %s"
 
 #: ../../src/editor/tools/editor_info_tool.cc:104
 #, c-format
@@ -255,7 +256,7 @@ msgstr ""
 
 #: ../../src/editor/tools/editor_info_tool.cc:124
 msgid "Map:"
-msgstr ""
+msgstr "Koort:"
 
 #: ../../src/editor/tools/editor_info_tool.cc:126
 #, c-format
@@ -424,7 +425,7 @@ msgstr ""
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:431
 #, c-format
 msgid "Width: %u"
-msgstr ""
+msgstr "Breed: %u"
 
 #: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:123
 msgid "Create Map"
@@ -543,7 +544,7 @@ msgstr "Speeler Instellungen"
 
 #: ../../src/editor/ui_menus/editor_player_menu.cc:50
 msgid "Add player"
-msgstr ""
+msgstr "Speler tofögen"
 
 #: ../../src/editor/ui_menus/editor_player_menu.cc:57
 msgid "Remove last player"
@@ -558,7 +559,7 @@ msgstr "Tall vun Speelers"
 #: ../../src/network/nethost.cc:2078
 #, c-format
 msgid "Player %s"
-msgstr ""
+msgstr "Speeler %s"
 
 #: ../../src/editor/ui_menus/editor_player_menu.cc:326
 msgid "Error!"
@@ -602,7 +603,7 @@ msgstr ""
 #: ../../src/editor/ui_menus/editor_tool_change_height_options_menu.cc:80
 #: ../../src/editor/ui_menus/editor_tool_change_resources_options_menu.cc:80
 msgid "Set Value"
-msgstr ""
+msgstr "Weert fastleggen"
 
 #: ../../src/editor/ui_menus/editor_tool_change_resources_options_menu.cc:45
 #: ../../src/editor/ui_menus/editor_tool_menu.cc:70
@@ -624,7 +625,7 @@ msgstr ""
 #: ../../src/editor/ui_menus/editor_tool_menu.cc:67
 #: ../../src/wui/minimap.cc:153
 msgid "Terrain"
-msgstr ""
+msgstr "Landschap"
 
 #: ../../src/editor/ui_menus/editor_tool_menu.cc:68
 msgid "Immovables"
@@ -669,12 +670,12 @@ msgstr ""
 #: ../../src/editor/ui_menus/editor_tool_set_terrain_options_menu.cc:151
 #: ../../src/editor/ui_menus/editor_tool_set_terrain_options_menu.cc:200
 msgid "Current:"
-msgstr ""
+msgstr "Aktuell:"
 
 #: ../../src/editor/ui_menus/editor_toolsize_menu.cc:75
 #, c-format
 msgid "Current Size: %u"
-msgstr ""
+msgstr "Aktuell Grött: %u"
 
 #: ../../src/game_io/game_preload_data_packet.cc:72
 msgid "Endless Game"
@@ -736,7 +737,7 @@ msgstr ""
 
 #: ../../src/logic/game.cc:139
 msgid "Not set"
-msgstr ""
+msgstr "Nich fastleggt"
 
 #: ../../src/logic/game.cc:227
 msgid "Preloading a map"
@@ -996,7 +997,7 @@ msgstr ""
 #: ../../src/logic/production_program.cc:1408
 #, c-format
 msgid "No soldier found for this training level!"
-msgstr ""
+msgstr "Keen Suldaat för de School Klass gefunde!"
 
 #: ../../src/logic/productionsite.cc:245
 msgid "(not occupied)"
@@ -1075,7 +1076,7 @@ msgstr ""
 
 #: ../../src/logic/worker.cc:606
 msgid "Out of Resources"
-msgstr ""
+msgstr "Keen Ressourcen mehr na"
 
 #: ../../src/logic/worker.cc:607
 msgid "Out of Fish"
@@ -1492,7 +1493,7 @@ msgstr ""
 #: ../../src/network/nethost.cc:2004
 #, c-format
 msgid "Computer %u"
-msgstr ""
+msgstr "Reekner %u"
 
 #: ../../src/network/nethost.cc:2070 ../../src/wlapplication.cc:1816
 #: ../../src/wui/game_summary.cc:90
@@ -1898,7 +1899,7 @@ msgstr ""
 #: ../../src/ui_fsmenu/launchMPG.cc:65 ../../src/ui_fsmenu/launchMPG.cc:166
 #: ../../src/ui_fsmenu/netsetup_lan.cc:126 ../../src/wui/minimap.cc:145
 msgid "Map"
-msgstr ""
+msgstr "Koort"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:65
 msgid "Select a map"
@@ -1906,11 +1907,11 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/launchMPG.cc:75
 msgid "Saved game"
-msgstr ""
+msgstr "Sekert Speel"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:75
 msgid "Select a saved game"
-msgstr ""
+msgstr "Sekert Speel kören"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:85
 msgid "Cancel selection"
@@ -1922,7 +1923,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/launchMPG.cc:127 ../../src/ui_fsmenu/launchSPG.cc:69
 msgid "Start game"
-msgstr ""
+msgstr "Speel starten"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:143
 msgid "Show the help window"
@@ -1938,7 +1939,7 @@ msgstr "Brukers"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:170 ../../src/ui_fsmenu/launchSPG.cc:104
 msgid "Type of game"
-msgstr ""
+msgstr "De Speeltyp"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:216 ../../src/ui_fsmenu/launchSPG.cc:286
 msgid "(no map)"
@@ -1955,7 +1956,7 @@ msgstr ""
 #: ../../src/ui_fsmenu/launchMPG.cc:292
 #: ../../src/wui/multiplayersetupgroup.cc:357
 msgid "Savegame"
-msgstr ""
+msgstr "Sekert Speel"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:294
 msgid "The game is a saved game – the win condition was set before."
@@ -2024,7 +2025,7 @@ msgstr ""
 #: ../../src/ui_fsmenu/launchMPG.cc:564
 #, c-format
 msgid "Player %u"
-msgstr ""
+msgstr "Speeler %u"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:568
 msgid "closed"
@@ -2045,7 +2046,7 @@ msgstr ""
 #: ../../src/ui_fsmenu/launchMPG.cc:650
 #, c-format
 msgid "Size: %1$u x %2$u"
-msgstr ""
+msgstr "Grött: %1$u x %2$u"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:651
 #, c-format
@@ -2234,7 +2235,7 @@ msgstr "Eenspeeler"
 
 #: ../../src/ui_fsmenu/main.cc:50
 msgid "Multiplayer"
-msgstr ""
+msgstr "Moerspeeler"
 
 #: ../../src/ui_fsmenu/main.cc:55
 msgid "Watch Replay"
@@ -2256,7 +2257,7 @@ msgstr "Speel ennen"
 
 #: ../../src/ui_fsmenu/main.cc:86
 msgid "Version "
-msgstr ""
+msgstr "Verschoon "
 
 #: ../../src/ui_fsmenu/main.cc:91
 msgid "by the Widelands Development Team"
@@ -2486,13 +2487,13 @@ msgstr ""
 #. * TRANSLATORS Options: Remove Replays older than:
 #: ../../src/ui_fsmenu/options.cc:204
 msgid "1 day"
-msgstr ""
+msgstr "1 dag"
 
 #. * TRANSLATORS: Screen resolution, e.g. 800 x 600
 #: ../../src/ui_fsmenu/options.cc:268
 #, c-format
 msgid "%1$i x %2$i"
-msgstr ""
+msgstr "%1$i x %2$i"
 
 #: ../../src/ui_fsmenu/options.cc:288
 msgid "Try system language"
@@ -2532,7 +2533,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/options.cc:475
 msgid "Show in-game chat with transparent background"
-msgstr ""
+msgstr "Schriev de Schnack in Speel ahn Böhn"
 
 #: ../../src/ui_fsmenu/options.cc:516
 msgid "DejaVuSerif (Default)"
@@ -3024,7 +3025,7 @@ msgstr "Help"
 
 #: ../../src/wui/buildingwindow.cc:517
 msgid "Show work area"
-msgstr ""
+msgstr "Wies Arbeidsgegend"
 
 #: ../../src/wui/constructionsitewindow.cc:75
 #: ../../src/wui/dismantlesitewindow.cc:69
@@ -3051,19 +3052,19 @@ msgstr ""
 
 #: ../../src/wui/fieldaction.cc:247
 msgid "Build small building"
-msgstr ""
+msgstr "Boe en lütt huus"
 
 #: ../../src/wui/fieldaction.cc:248
 msgid "Build medium building"
-msgstr ""
+msgstr "Boe en middel groot huus"
 
 #: ../../src/wui/fieldaction.cc:249
 msgid "Build large building"
-msgstr ""
+msgstr "Boe en groot huus"
 
 #: ../../src/wui/fieldaction.cc:250
 msgid "Build port building"
-msgstr ""
+msgstr "Boe en Haven"
 
 #: ../../src/wui/fieldaction.cc:282
 msgid "Action"
@@ -3172,7 +3173,7 @@ msgstr "Speel sekern"
 
 #: ../../src/wui/game_main_menu_save_game.cc:73
 msgid "Game Time:"
-msgstr ""
+msgstr "Speeltied:"
 
 #: ../../src/wui/game_main_menu_save_game.cc:79
 msgid "Win condition:"
@@ -3340,11 +3341,11 @@ msgstr ""
 
 #: ../../src/wui/game_summary.cc:157
 msgid "Lost"
-msgstr ""
+msgstr "Verloren"
 
 #: ../../src/wui/game_summary.cc:160
 msgid "Won"
-msgstr ""
+msgstr "Wunnen"
 
 #: ../../src/wui/game_summary.cc:168
 msgid "Resigned"
@@ -3356,12 +3357,12 @@ msgstr ""
 
 #: ../../src/wui/game_summary.cc:182
 msgid "You lost."
-msgstr ""
+msgstr "Du hest verloren."
 
 #: ../../src/wui/game_summary.cc:187
 #, c-format
 msgid "%s won!"
-msgstr ""
+msgstr "%s hett wunnen!"
 
 #: ../../src/wui/game_summary.cc:191
 msgid "Team %|1$u| won!"
@@ -3426,7 +3427,7 @@ msgstr "Militörisch"
 #: ../../src/wui/interactive_base.cc:316
 #, c-format
 msgid "%1$u.%2$ux"
-msgstr ""
+msgstr "%1$u.%2$ux"
 
 #: ../../src/wui/interactive_base.cc:319
 msgid "PAUSE"
@@ -3436,7 +3437,7 @@ msgstr ""
 #: ../../src/wui/interactive_base.cc:340
 #, c-format
 msgid "%1$s (%2$s)"
-msgstr ""
+msgstr "%1$s (%2$s)"
 
 #: ../../src/wui/interactive_base.cc:345
 msgid "NO GAME CONTROLLER"
@@ -3518,11 +3519,11 @@ msgstr ""
 
 #: ../../src/wui/login_box.cc:101
 msgid "Empty Password"
-msgstr ""
+msgstr "Passwoort fehlt"
 
 #: ../../src/wui/login_box.cc:101
 msgid "Please enter your password!"
-msgstr ""
+msgstr "Giff bitte Dien Passwoort in!"
 
 #: ../../src/wui/militarysitewindow.cc:59
 msgid "Soldiers"
@@ -3599,7 +3600,7 @@ msgstr "Volk"
 #: ../../src/wui/multiplayersetupgroup.cc:457
 #: ../../src/wui/playerdescrgroup.cc:103
 msgid "Initialization"
-msgstr ""
+msgstr "Torechtmaken"
 
 #: ../../src/wui/playerdescrgroup.cc:175
 msgid "AI: Random"
@@ -3822,7 +3823,7 @@ msgstr ""
 
 #: ../../src/wui/waresqueuedisplay.cc:187
 msgid "Normal priority"
-msgstr ""
+msgstr "Normaal Prioriteet"
 
 #: ../../src/wui/waresqueuedisplay.cc:190
 msgid "Lowest priority"

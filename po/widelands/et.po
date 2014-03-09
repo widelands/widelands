@@ -2,21 +2,22 @@
 # Copyright (c) 2010 Rosetta Contributors and Canonical Ltd 2010
 # This file is distributed under the same license as the widelands package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010.
-#
+# GunChleoc <fios@foramnagaidhlig.net>, 2014.
 msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-03-06 22:20+0100\n"
-"PO-Revision-Date: 2012-03-09 02:29+0000\n"
-"Last-Translator: Nasenbaer <Unknown>\n"
-"Language-Team: Estonian <et@li.org>\n"
+"PO-Revision-Date: 2014-03-08 07:20+0000\n"
+"Last-Translator: GunChleoc <Unknown>\n"
+"Language-Team: Widelands fixxer upper\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-03-07 05:38+0000\n"
+"X-Launchpad-Export-Date: 2014-03-09 05:39+0000\n"
 "X-Generator: Launchpad (build 16948)\n"
+"Language: et\n"
 
 #: ../../src/ai/defaultai.h:84
 msgid "Aggressive"
@@ -36,7 +37,7 @@ msgstr "Mitte ükski"
 
 #: ../../src/editor/editorinteractive.cc:64
 msgid "Menu"
-msgstr ""
+msgstr "Menüü"
 
 #: ../../src/editor/editorinteractive.cc:67
 #: ../../src/editor/ui_menus/editor_tool_menu.cc:46
@@ -148,27 +149,27 @@ msgstr ""
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:435
 #, c-format
 msgid "Height: %u"
-msgstr ""
+msgstr "Kõrgus: %u"
 
 #. * TRANSLATORS: This is part of a list, e.g. Caps: medium flag walk
 #: ../../src/editor/tools/editor_info_tool.cc:65
 msgid " small"
-msgstr ""
+msgstr " väike"
 
 #. * TRANSLATORS: This is part of a list, e.g. Caps: medium flag walk
 #: ../../src/editor/tools/editor_info_tool.cc:67
 msgid " medium"
-msgstr ""
+msgstr " keskmine"
 
 #. * TRANSLATORS: This is part of a list, e.g. Caps: medium flag walk
 #: ../../src/editor/tools/editor_info_tool.cc:69
 msgid " big"
-msgstr ""
+msgstr " suur"
 
 #. * TRANSLATORS: This is part of a list, e.g. Caps: medium flag walk
 #: ../../src/editor/tools/editor_info_tool.cc:73
 msgid " flag"
-msgstr ""
+msgstr " lipp"
 
 #. * TRANSLATORS: This is part of a list, e.g. Caps: flag mine walk
 #: ../../src/editor/tools/editor_info_tool.cc:75
@@ -178,7 +179,7 @@ msgstr ""
 #. * TRANSLATORS: This is part of a list, e.g. Caps: big flag port walk
 #: ../../src/editor/tools/editor_info_tool.cc:77
 msgid " port"
-msgstr ""
+msgstr " port"
 
 #. * TRANSLATORS: This is part of a list, e.g. Caps: medium flag walk
 #: ../../src/editor/tools/editor_info_tool.cc:79
@@ -218,14 +219,14 @@ msgstr ""
 
 #: ../../src/editor/tools/editor_info_tool.cc:96
 msgid "Terrain:"
-msgstr ""
+msgstr "Maastik:"
 
 #: ../../src/editor/tools/editor_info_tool.cc:103
 #: ../../src/editor/tools/editor_info_tool.cc:125
 #: ../../src/editor/tools/editor_info_tool.cc:137
 #, c-format
 msgid "Name: %s"
-msgstr ""
+msgstr "Nimi: %s"
 
 #: ../../src/editor/tools/editor_info_tool.cc:104
 #, c-format
@@ -258,18 +259,18 @@ msgstr ""
 #: ../../src/editor/tools/editor_info_tool.cc:126
 #, c-format
 msgid "Size: %1$ix%2$i"
-msgstr ""
+msgstr "Suurus: %1$ix%2$i"
 
 #: ../../src/editor/tools/editor_info_tool.cc:129
 #, c-format
 msgid "Players: %i"
-msgstr ""
+msgstr "Mängijad: %i"
 
 #: ../../src/editor/tools/editor_info_tool.cc:132
 #: ../../src/editor/tools/editor_info_tool.cc:138
 #, c-format
 msgid "Author: %s"
-msgstr ""
+msgstr "Autor: %s"
 
 #: ../../src/editor/tools/editor_info_tool.cc:133
 #: ../../src/editor/tools/editor_info_tool.cc:139
@@ -333,7 +334,7 @@ msgstr ""
 #: ../../src/ui_fsmenu/editor_mapselect.cc:56
 #: ../../src/ui_fsmenu/mapselect.cc:64
 msgid "Name:"
-msgstr ""
+msgstr "Nimi:"
 
 #: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:77
 #: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:80
@@ -342,7 +343,7 @@ msgstr ""
 #: ../../src/ui_fsmenu/editor_mapselect.cc:61
 #: ../../src/ui_fsmenu/mapselect.cc:70
 msgid "Author:"
-msgstr ""
+msgstr "Autor:"
 
 #: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:84
 #: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:66
@@ -350,7 +351,7 @@ msgstr ""
 #: ../../src/ui_fsmenu/editor_mapselect.cc:66
 #: ../../src/ui_fsmenu/mapselect.cc:76
 msgid "Size:"
-msgstr ""
+msgstr "Suurus:"
 
 #: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:98
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:109
@@ -400,7 +401,7 @@ msgstr ""
 #: ../../src/ui_fsmenu/loadgame.cc:89 ../../src/ui_fsmenu/loadreplay.cc:73
 #: ../../src/wui/game_main_menu_save_game.cc:69
 msgid "Map Name:"
-msgstr ""
+msgstr "Kaardi nimi:"
 
 #: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:71
 msgid "Nr Players:"
@@ -422,7 +423,7 @@ msgstr ""
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:431
 #, c-format
 msgid "Width: %u"
-msgstr ""
+msgstr "Laius: %u"
 
 #: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:123
 msgid "Create Map"
@@ -481,7 +482,7 @@ msgstr ""
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:451
 #, c-format
 msgid "Players: %u"
-msgstr ""
+msgstr "Mängijad: %u"
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:340
 msgid "Generate Map"
@@ -506,7 +507,7 @@ msgstr ""
 
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:255
 msgid "directory"
-msgstr ""
+msgstr "kataloog"
 
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:259
 msgid "Not a map file"
@@ -541,7 +542,7 @@ msgstr "Pleieri valikud"
 
 #: ../../src/editor/ui_menus/editor_player_menu.cc:50
 msgid "Add player"
-msgstr ""
+msgstr "Lisa mängija"
 
 #: ../../src/editor/ui_menus/editor_player_menu.cc:57
 msgid "Remove last player"
@@ -549,18 +550,18 @@ msgstr ""
 
 #: ../../src/editor/ui_menus/editor_player_menu.cc:72
 msgid "Number of Players"
-msgstr ""
+msgstr "Mängijate arv"
 
 #. * TRANSLATORS: Default player name, e.g. Player 1
 #: ../../src/editor/ui_menus/editor_player_menu.cc:210
 #: ../../src/network/nethost.cc:2078
 #, c-format
 msgid "Player %s"
-msgstr ""
+msgstr "Mängija %s"
 
 #: ../../src/editor/ui_menus/editor_player_menu.cc:326
 msgid "Error!"
-msgstr ""
+msgstr "Viga!"
 
 #: ../../src/editor/ui_menus/editor_player_menu.cc:328
 msgid ""
@@ -600,7 +601,7 @@ msgstr ""
 #: ../../src/editor/ui_menus/editor_tool_change_height_options_menu.cc:80
 #: ../../src/editor/ui_menus/editor_tool_change_resources_options_menu.cc:80
 msgid "Set Value"
-msgstr ""
+msgstr "Väärtuse määramine"
 
 #: ../../src/editor/ui_menus/editor_tool_change_resources_options_menu.cc:45
 #: ../../src/editor/ui_menus/editor_tool_menu.cc:70
@@ -622,7 +623,7 @@ msgstr ""
 #: ../../src/editor/ui_menus/editor_tool_menu.cc:67
 #: ../../src/wui/minimap.cc:153
 msgid "Terrain"
-msgstr ""
+msgstr "Maastik"
 
 #: ../../src/editor/ui_menus/editor_tool_menu.cc:68
 msgid "Immovables"
@@ -683,7 +684,7 @@ msgstr ""
 #: ../../src/ui_fsmenu/launchMPG.cc:288 ../../src/ui_fsmenu/launchSPG.cc:232
 #: ../../src/wui/multiplayersetupgroup.cc:355
 msgid "Scenario"
-msgstr ""
+msgstr "Stsenaarium"
 
 #: ../../src/io/dedicated_log.cc:66 ../../src/network/internet_gaming.cc:809
 #: ../../src/ui_fsmenu/mapselect.cc:504 ../../src/ui_fsmenu/mapselect.cc:508
@@ -1073,7 +1074,7 @@ msgstr ""
 
 #: ../../src/logic/worker.cc:606
 msgid "Out of Resources"
-msgstr ""
+msgstr "Ressursse napib"
 
 #: ../../src/logic/worker.cc:607
 msgid "Out of Fish"
@@ -1115,7 +1116,7 @@ msgstr ""
 #: ../../src/network/internet_gaming.cc:117
 #: ../../src/ui_fsmenu/internet_lobby.cc:419
 msgid "Connection problem"
-msgstr ""
+msgstr "Ühendumisprobleem"
 
 #: ../../src/network/internet_gaming.cc:117
 msgid "Widelands could not connect to the metaserver."
@@ -1138,7 +1139,7 @@ msgstr ""
 
 #: ../../src/network/internet_gaming.cc:303
 msgid "Something went wrong: "
-msgstr ""
+msgstr "Midagi läks nihu: "
 
 #: ../../src/network/internet_gaming.cc:393
 msgid "Successfully reconnected to the metaserver!"
@@ -1556,7 +1557,7 @@ msgstr ""
 #: ../../src/network/network_gaming_messages.cc:132
 #, c-format
 msgid "Something went wrong: %s"
-msgstr ""
+msgstr "Midagi läks nihu: %s"
 
 #: ../../src/network/network_gaming_messages.cc:133
 #, c-format
@@ -1716,7 +1717,7 @@ msgstr[1] ""
 
 #: ../../src/s2map.cc:889
 msgid "WARNING"
-msgstr ""
+msgstr "HOIATUS"
 
 #: ../../src/save_handler.cc:76
 msgid "Saving game..."
@@ -1724,11 +1725,11 @@ msgstr ""
 
 #: ../../src/save_handler.cc:95
 msgid "Saving failed!"
-msgstr ""
+msgstr "Salvestamine nurjus!"
 
 #: ../../src/save_handler.cc:114
 msgid "Game saved"
-msgstr ""
+msgstr "Mäng on salvestatud"
 
 #: ../../src/scripting/lua_game.cc:1089
 #, c-format
@@ -1738,7 +1739,7 @@ msgstr ""
 #: ../../src/ui_basic/helpwindow.cc:47 ../../src/ui_basic/helpwindow.cc:191
 #, c-format
 msgid "Help: %s"
-msgstr ""
+msgstr "Abi: %s"
 
 #: ../../src/ui_basic/messagebox.cc:99
 msgid "Yes"
@@ -1774,16 +1775,16 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/campaign_select.cc:55
 msgid "Campaign:"
-msgstr ""
+msgstr "Kampaania:"
 
 #: ../../src/ui_fsmenu/campaign_select.cc:59
 msgid "Difficulty:"
-msgstr ""
+msgstr "Raskusaste:"
 
 #: ../../src/ui_fsmenu/campaign_select.cc:63
 #: ../../src/ui_fsmenu/campaign_select.cc:271
 msgid "Description:"
-msgstr ""
+msgstr "Kirjeldus:"
 
 #: ../../src/ui_fsmenu/campaign_select.cc:79
 #: ../../src/ui_fsmenu/campaign_select.cc:286 ../../src/ui_fsmenu/editor.cc:53
@@ -1868,7 +1869,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/internet_lobby.cc:158
 msgid "Game"
-msgstr ""
+msgstr "Mäng"
 
 #: ../../src/ui_fsmenu/internet_lobby.cc:389
 msgid "Connection timed out"
@@ -1891,7 +1892,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/launchMPG.cc:52
 msgid "Please select"
-msgstr ""
+msgstr "Palun vali"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:65 ../../src/ui_fsmenu/launchMPG.cc:166
 #: ../../src/ui_fsmenu/netsetup_lan.cc:126 ../../src/wui/minimap.cc:145
@@ -1920,7 +1921,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/launchMPG.cc:127 ../../src/ui_fsmenu/launchSPG.cc:69
 msgid "Start game"
-msgstr ""
+msgstr "Alusta mängu"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:143
 msgid "Show the help window"
@@ -1932,7 +1933,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/launchMPG.cc:158
 msgid "Clients"
-msgstr ""
+msgstr "Kliendid"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:170 ../../src/ui_fsmenu/launchSPG.cc:104
 msgid "Type of game"
@@ -1974,7 +1975,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/launchMPG.cc:425 ../../src/ui_fsmenu/launchSPG.cc:260
 msgid "File not found"
-msgstr ""
+msgstr "Faili ei leitud"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:427
 #, c-format
@@ -1998,13 +1999,13 @@ msgstr ""
 #: ../../src/wui/multiplayersetupgroup.cc:286
 #, c-format
 msgid "Player %i"
-msgstr ""
+msgstr "Mängija %i"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:485
 #: ../../src/wui/multiplayersetupgroup.cc:122
 #, c-format
 msgid "Spectator"
-msgstr ""
+msgstr "Pealtvaataja"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:486
 #, c-format
@@ -2022,7 +2023,7 @@ msgstr ""
 #: ../../src/ui_fsmenu/launchMPG.cc:564
 #, c-format
 msgid "Player %u"
-msgstr ""
+msgstr "Mängija %u"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:568
 msgid "closed"
@@ -2034,7 +2035,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/launchMPG.cc:632
 msgid "There was an error!"
-msgstr ""
+msgstr "Esines viga!"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:649
 msgid "Map details:"
@@ -2043,7 +2044,7 @@ msgstr ""
 #: ../../src/ui_fsmenu/launchMPG.cc:650
 #, c-format
 msgid "Size: %1$u x %2$u"
-msgstr ""
+msgstr "Suurus: %1$u x %2$u"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:651
 #, c-format
@@ -2088,7 +2089,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/launchMPG.cc:683
 msgid "Player settings"
-msgstr ""
+msgstr "Mängija seadistused"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:686
 msgid ""
@@ -2159,7 +2160,7 @@ msgstr ""
 #: ../../src/ui_fsmenu/launchSPG.cc:92 ../../src/wui/game_summary.cc:91
 #: ../../src/wui/multiplayersetupgroup.cc:461
 msgid "Team"
-msgstr ""
+msgstr "Meeskond"
 
 #: ../../src/ui_fsmenu/launchSPG.cc:96
 msgid "Player’s tribe"
@@ -2167,7 +2168,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/launchSPG.cc:100
 msgid "Start type"
-msgstr ""
+msgstr "Alguse tüüp"
 
 #: ../../src/ui_fsmenu/launchSPG.cc:160
 msgid "Switch to position"
@@ -2228,7 +2229,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/main.cc:45
 msgid "Single Player"
-msgstr ""
+msgstr "Üksikmängija"
 
 #: ../../src/ui_fsmenu/main.cc:50
 msgid "Multiplayer"
@@ -2246,7 +2247,7 @@ msgstr "Valikud"
 
 #: ../../src/ui_fsmenu/main.cc:75 ../../src/wui/game_options_menu.cc:62
 msgid "License"
-msgstr ""
+msgstr "Litsents"
 
 #: ../../src/ui_fsmenu/main.cc:80 ../../src/wui/game_options_menu.cc:93
 msgid "Exit Game"
@@ -2254,7 +2255,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/main.cc:86
 msgid "Version "
-msgstr ""
+msgstr "Versioon "
 
 #: ../../src/ui_fsmenu/main.cc:91
 msgid "by the Widelands Development Team"
@@ -2275,7 +2276,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/mapselect.cc:152
 msgid "Map Name"
-msgstr ""
+msgstr "Kaardi nimi"
 
 #: ../../src/ui_fsmenu/mapselect.cc:167
 msgid "Show all maps"
@@ -2315,7 +2316,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/mapselect.cc:281
 msgid "(directory)"
-msgstr ""
+msgstr "(kataloog)"
 
 #: ../../src/ui_fsmenu/mapselect.cc:506
 msgid ""
@@ -2354,7 +2355,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/netsetup_lan.cc:50
 msgid "Your nickname:"
-msgstr ""
+msgstr "Sinu hüüdnimi:"
 
 #: ../../src/ui_fsmenu/netsetup_lan.cc:54
 msgid "Host to connect:"
@@ -2393,7 +2394,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/options.cc:60 ../../src/ui_fsmenu/options.cc:405
 msgid "Apply"
-msgstr ""
+msgstr "Rakenda"
 
 #: ../../src/ui_fsmenu/options.cc:71
 msgid "min."
@@ -2437,7 +2438,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/options.cc:131
 msgid "Language"
-msgstr ""
+msgstr "Keel"
 
 #: ../../src/ui_fsmenu/options.cc:142
 msgid "In-game Options"
@@ -2457,7 +2458,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/options.cc:169
 msgid "Snap windows only when overlapping"
-msgstr ""
+msgstr "Aknaid haaratakse ainult siis, kui nad kattuvad"
 
 #: ../../src/ui_fsmenu/options.cc:175
 msgid "Dock windows to edges"
@@ -2490,7 +2491,7 @@ msgstr ""
 #: ../../src/ui_fsmenu/options.cc:268
 #, c-format
 msgid "%1$i x %2$i"
-msgstr ""
+msgstr "%1$i x %2$i"
 
 #: ../../src/ui_fsmenu/options.cc:288
 msgid "Try system language"
@@ -2542,7 +2543,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/singleplayer.cc:47
 msgid "New Game"
-msgstr ""
+msgstr "Uus mäng"
 
 #: ../../src/ui_fsmenu/singleplayer.cc:52
 msgid "Campaigns"
@@ -2583,11 +2584,11 @@ msgstr ""
 
 #: ../../src/wlapplication.cc:1341
 msgid "Usage: widelands <option0>=<value0> ... <optionN>=<valueN>"
-msgstr ""
+msgstr "Kasutus: widelands <valik0>=<väärtus0> ... <valikN>=<väärtusN>"
 
 #: ../../src/wlapplication.cc:1342
 msgid "Options:"
-msgstr ""
+msgstr "Valikud:"
 
 #: ../../src/wlapplication.cc:1344
 msgid " --<config-entry-name>=value overwrites any config file setting"
@@ -2803,7 +2804,7 @@ msgstr ""
 #: ../../src/wlapplication.cc:1579
 #, c-format
 msgid "Warning: %s"
-msgstr ""
+msgstr "Hoiatus: %s"
 
 #: ../../src/wlapplication.cc:1582
 msgid "Game data error"
@@ -3173,7 +3174,7 @@ msgstr ""
 #: ../../src/wui/game_main_menu_save_game.cc:140
 #: ../../src/wui/game_main_menu_save_game.cc:178
 msgid "player"
-msgstr ""
+msgstr "mängija"
 
 #: ../../src/wui/game_main_menu_save_game.cc:140
 #: ../../src/wui/game_main_menu_save_game.cc:178

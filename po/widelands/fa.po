@@ -2,21 +2,22 @@
 # Copyright (c) 2010 Rosetta Contributors and Canonical Ltd 2010
 # This file is distributed under the same license as the widelands package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010.
-#
+# GunChleoc <fios@foramnagaidhlig.net>, 2014.
 msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-03-06 22:20+0100\n"
-"PO-Revision-Date: 2012-03-09 02:47+0000\n"
-"Last-Translator: Nasenbaer <Unknown>\n"
-"Language-Team: Persian <fa@li.org>\n"
+"PO-Revision-Date: 2014-03-08 07:21+0000\n"
+"Last-Translator: GunChleoc <Unknown>\n"
+"Language-Team: Widelands fixxer upper\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Launchpad-Export-Date: 2014-03-07 05:39+0000\n"
+"X-Launchpad-Export-Date: 2014-03-09 05:39+0000\n"
 "X-Generator: Launchpad (build 16948)\n"
+"Language: fa\n"
 
 #: ../../src/ai/defaultai.h:84
 msgid "Aggressive"
@@ -153,22 +154,22 @@ msgstr ""
 #. * TRANSLATORS: This is part of a list, e.g. Caps: medium flag walk
 #: ../../src/editor/tools/editor_info_tool.cc:65
 msgid " small"
-msgstr ""
+msgstr " کوچک"
 
 #. * TRANSLATORS: This is part of a list, e.g. Caps: medium flag walk
 #: ../../src/editor/tools/editor_info_tool.cc:67
 msgid " medium"
-msgstr ""
+msgstr " متوسط"
 
 #. * TRANSLATORS: This is part of a list, e.g. Caps: medium flag walk
 #: ../../src/editor/tools/editor_info_tool.cc:69
 msgid " big"
-msgstr ""
+msgstr " بزرگ"
 
 #. * TRANSLATORS: This is part of a list, e.g. Caps: medium flag walk
 #: ../../src/editor/tools/editor_info_tool.cc:73
 msgid " flag"
-msgstr ""
+msgstr " پرچم"
 
 #. * TRANSLATORS: This is part of a list, e.g. Caps: flag mine walk
 #: ../../src/editor/tools/editor_info_tool.cc:75
@@ -178,7 +179,7 @@ msgstr ""
 #. * TRANSLATORS: This is part of a list, e.g. Caps: big flag port walk
 #: ../../src/editor/tools/editor_info_tool.cc:77
 msgid " port"
-msgstr ""
+msgstr " درگاه"
 
 #. * TRANSLATORS: This is part of a list, e.g. Caps: medium flag walk
 #: ../../src/editor/tools/editor_info_tool.cc:79
@@ -225,7 +226,7 @@ msgstr ""
 #: ../../src/editor/tools/editor_info_tool.cc:137
 #, c-format
 msgid "Name: %s"
-msgstr ""
+msgstr "نام: %s"
 
 #: ../../src/editor/tools/editor_info_tool.cc:104
 #, c-format
@@ -235,7 +236,7 @@ msgstr ""
 #: ../../src/editor/tools/editor_info_tool.cc:107
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:251
 msgid "Resources:"
-msgstr ""
+msgstr "منابع‌:"
 
 #: ../../src/editor/tools/editor_info_tool.cc:114
 #, c-format
@@ -253,7 +254,7 @@ msgstr ""
 
 #: ../../src/editor/tools/editor_info_tool.cc:124
 msgid "Map:"
-msgstr ""
+msgstr "نقشه:"
 
 #: ../../src/editor/tools/editor_info_tool.cc:126
 #, c-format
@@ -269,7 +270,7 @@ msgstr ""
 #: ../../src/editor/tools/editor_info_tool.cc:138
 #, c-format
 msgid "Author: %s"
-msgstr ""
+msgstr "نویسنده: %s"
 
 #: ../../src/editor/tools/editor_info_tool.cc:133
 #: ../../src/editor/tools/editor_info_tool.cc:139
@@ -284,12 +285,12 @@ msgstr ""
 #: ../../src/ui_fsmenu/editor_mapselect.cc:71
 #: ../../src/ui_fsmenu/mapselect.cc:82
 msgid "World:"
-msgstr ""
+msgstr "جهان:"
 
 #: ../../src/editor/ui_menus/editor_main_menu.cc:51
 #: ../../src/wui/game_main_menu.cc:42
 msgid "Main Menu"
-msgstr ""
+msgstr "منوی اصلی"
 
 #: ../../src/editor/ui_menus/editor_main_menu.cc:56
 #: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:46
@@ -333,7 +334,7 @@ msgstr ""
 #: ../../src/ui_fsmenu/editor_mapselect.cc:56
 #: ../../src/ui_fsmenu/mapselect.cc:64
 msgid "Name:"
-msgstr ""
+msgstr "نام:"
 
 #: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:77
 #: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:80
@@ -342,7 +343,7 @@ msgstr ""
 #: ../../src/ui_fsmenu/editor_mapselect.cc:61
 #: ../../src/ui_fsmenu/mapselect.cc:70
 msgid "Author:"
-msgstr ""
+msgstr "مؤلف:"
 
 #: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:84
 #: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:66
@@ -350,7 +351,7 @@ msgstr ""
 #: ../../src/ui_fsmenu/editor_mapselect.cc:66
 #: ../../src/ui_fsmenu/mapselect.cc:76
 msgid "Size:"
-msgstr ""
+msgstr "اندازه:"
 
 #: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:98
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:109
@@ -358,7 +359,7 @@ msgstr ""
 #: ../../src/ui_fsmenu/loadgame.cc:99 ../../src/ui_fsmenu/loadreplay.cc:83
 #: ../../src/ui_fsmenu/mapselect.cc:88
 msgid "Players:"
-msgstr ""
+msgstr "بازیکنان:"
 
 #: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:106
 #: ../../src/ui_fsmenu/editor_mapselect.cc:81
@@ -422,7 +423,7 @@ msgstr ""
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:431
 #, c-format
 msgid "Width: %u"
-msgstr ""
+msgstr "عرض: %u"
 
 #: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:123
 msgid "Create Map"
@@ -481,7 +482,7 @@ msgstr ""
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:451
 #, c-format
 msgid "Players: %u"
-msgstr ""
+msgstr "بازیکنان: %u"
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:340
 msgid "Generate Map"
@@ -541,7 +542,7 @@ msgstr ""
 
 #: ../../src/editor/ui_menus/editor_player_menu.cc:50
 msgid "Add player"
-msgstr ""
+msgstr "افزودن بازیکن"
 
 #: ../../src/editor/ui_menus/editor_player_menu.cc:57
 msgid "Remove last player"
@@ -549,14 +550,14 @@ msgstr ""
 
 #: ../../src/editor/ui_menus/editor_player_menu.cc:72
 msgid "Number of Players"
-msgstr ""
+msgstr "تعداد بازیکن‌ها"
 
 #. * TRANSLATORS: Default player name, e.g. Player 1
 #: ../../src/editor/ui_menus/editor_player_menu.cc:210
 #: ../../src/network/nethost.cc:2078
 #, c-format
 msgid "Player %s"
-msgstr ""
+msgstr "بازیکن %s"
 
 #: ../../src/editor/ui_menus/editor_player_menu.cc:326
 msgid "Error!"
@@ -600,16 +601,16 @@ msgstr ""
 #: ../../src/editor/ui_menus/editor_tool_change_height_options_menu.cc:80
 #: ../../src/editor/ui_menus/editor_tool_change_resources_options_menu.cc:80
 msgid "Set Value"
-msgstr ""
+msgstr "تنظیم مقدار"
 
 #: ../../src/editor/ui_menus/editor_tool_change_resources_options_menu.cc:45
 #: ../../src/editor/ui_menus/editor_tool_menu.cc:70
 msgid "Resources"
-msgstr ""
+msgstr "منابع"
 
 #: ../../src/editor/ui_menus/editor_tool_change_resources_options_menu.cc:99
 msgid "Current Selection"
-msgstr ""
+msgstr "انتخاب فعلی"
 
 #: ../../src/editor/ui_menus/editor_tool_menu.cc:65
 msgid "Change height"
@@ -683,7 +684,7 @@ msgstr ""
 #: ../../src/ui_fsmenu/launchMPG.cc:288 ../../src/ui_fsmenu/launchSPG.cc:232
 #: ../../src/wui/multiplayersetupgroup.cc:355
 msgid "Scenario"
-msgstr ""
+msgstr "سناریو"
 
 #: ../../src/io/dedicated_log.cc:66 ../../src/network/internet_gaming.cc:809
 #: ../../src/ui_fsmenu/mapselect.cc:504 ../../src/ui_fsmenu/mapselect.cc:508
@@ -700,11 +701,11 @@ msgstr "کوچک"
 
 #: ../../src/logic/building.cc:541
 msgid "big"
-msgstr ""
+msgstr "بزرگ"
 
 #: ../../src/logic/building.cc:541
 msgid "medium"
-msgstr ""
+msgstr "متوسط"
 
 #: ../../src/logic/building.cc:544
 msgid "Mine"
@@ -716,7 +717,7 @@ msgstr "کوچک"
 
 #: ../../src/logic/building.cc:546
 msgid "Big"
-msgstr ""
+msgstr "بزرگ"
 
 #: ../../src/logic/constructionsite.cc:92
 #, c-format
@@ -1008,7 +1009,7 @@ msgstr[1] ""
 
 #: ../../src/logic/productionsite.cc:258
 msgid "(stopped)"
-msgstr ""
+msgstr "(متوقف شد)"
 
 #: ../../src/logic/ship.cc:459
 msgid "Port Space Found"
@@ -1138,7 +1139,7 @@ msgstr ""
 
 #: ../../src/network/internet_gaming.cc:303
 msgid "Something went wrong: "
-msgstr ""
+msgstr "یک جایی یک اشتباهی پیش آمد: "
 
 #: ../../src/network/internet_gaming.cc:393
 msgid "Successfully reconnected to the metaserver!"
@@ -1199,7 +1200,7 @@ msgstr ""
 #: ../../src/network/internet_gaming.cc:563
 #, c-format
 msgid "ERROR: %s"
-msgstr ""
+msgstr "خطا: %s"
 
 #: ../../src/network/internet_gaming.cc:573
 #, c-format
@@ -1239,7 +1240,7 @@ msgstr ""
 
 #: ../../src/network/internet_gaming_messages.cc:45
 msgid "You are already logged in!"
-msgstr ""
+msgstr "شما قبلا وارد شده اید!"
 
 #: ../../src/network/internet_gaming_messages.cc:48
 msgid ""
@@ -1556,7 +1557,7 @@ msgstr ""
 #: ../../src/network/network_gaming_messages.cc:132
 #, c-format
 msgid "Something went wrong: %s"
-msgstr ""
+msgstr "یک جایی یک اشتباهی پیش آمد: %s"
 
 #: ../../src/network/network_gaming_messages.cc:133
 #, c-format
@@ -1716,7 +1717,7 @@ msgstr[1] ""
 
 #: ../../src/s2map.cc:889
 msgid "WARNING"
-msgstr ""
+msgstr "هشدار"
 
 #: ../../src/save_handler.cc:76
 msgid "Saving game..."
@@ -1783,7 +1784,7 @@ msgstr ""
 #: ../../src/ui_fsmenu/campaign_select.cc:63
 #: ../../src/ui_fsmenu/campaign_select.cc:271
 msgid "Description:"
-msgstr ""
+msgstr "شرح:"
 
 #: ../../src/ui_fsmenu/campaign_select.cc:79
 #: ../../src/ui_fsmenu/campaign_select.cc:286 ../../src/ui_fsmenu/editor.cc:53
@@ -1868,7 +1869,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/internet_lobby.cc:158
 msgid "Game"
-msgstr ""
+msgstr "بازی"
 
 #: ../../src/ui_fsmenu/internet_lobby.cc:389
 msgid "Connection timed out"
@@ -1998,7 +1999,7 @@ msgstr ""
 #: ../../src/wui/multiplayersetupgroup.cc:286
 #, c-format
 msgid "Player %i"
-msgstr ""
+msgstr "بازیکن %i"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:485
 #: ../../src/wui/multiplayersetupgroup.cc:122
@@ -2022,7 +2023,7 @@ msgstr ""
 #: ../../src/ui_fsmenu/launchMPG.cc:564
 #, c-format
 msgid "Player %u"
-msgstr ""
+msgstr "بازیکن %u"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:568
 msgid "closed"
@@ -2034,7 +2035,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/launchMPG.cc:632
 msgid "There was an error!"
-msgstr ""
+msgstr "خطایی رخ داد!"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:649
 msgid "Map details:"
@@ -2088,7 +2089,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/launchMPG.cc:683
 msgid "Player settings"
-msgstr ""
+msgstr "تنظیمات پخش‌کننده‌"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:686
 msgid ""
@@ -2208,7 +2209,7 @@ msgstr ""
 #: ../../src/ui_fsmenu/loadgame.cc:160 ../../src/ui_fsmenu/loadreplay.cc:141
 #, c-format
 msgid "Do you really want to delete %s?"
-msgstr ""
+msgstr "واقعاً می‌خواهید %s را حذف کنید؟"
 
 #: ../../src/ui_fsmenu/loadgame.cc:217
 msgid "Savegame from dedicated server"
@@ -2250,11 +2251,11 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/main.cc:80 ../../src/wui/game_options_menu.cc:93
 msgid "Exit Game"
-msgstr ""
+msgstr "خروج از بازی"
 
 #: ../../src/ui_fsmenu/main.cc:86
 msgid "Version "
-msgstr ""
+msgstr "نسخه "
 
 #: ../../src/ui_fsmenu/main.cc:91
 msgid "by the Widelands Development Team"
@@ -2325,7 +2326,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/multiplayer.cc:41
 msgid "Choose game type"
-msgstr ""
+msgstr "انتخاب نوع بازی‌"
 
 #: ../../src/ui_fsmenu/multiplayer.cc:48
 msgid "Internet game"
@@ -2354,7 +2355,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/netsetup_lan.cc:50
 msgid "Your nickname:"
-msgstr ""
+msgstr "لقب شما:"
 
 #: ../../src/ui_fsmenu/netsetup_lan.cc:54
 msgid "Host to connect:"
@@ -2370,7 +2371,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/netsetup_lan.cc:125
 msgid "Host"
-msgstr ""
+msgstr "میزبان"
 
 #: ../../src/ui_fsmenu/netsetup_lan.cc:127
 msgid "State"
@@ -2389,7 +2390,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/options.cc:50 ../../src/ui_fsmenu/options.cc:424
 msgid "Advanced Options"
-msgstr ""
+msgstr "گزینه‌های پیشرفته"
 
 #: ../../src/ui_fsmenu/options.cc:60 ../../src/ui_fsmenu/options.cc:405
 msgid "Apply"
@@ -2409,7 +2410,7 @@ msgstr[1] ""
 
 #: ../../src/ui_fsmenu/options.cc:86
 msgid "General Options"
-msgstr ""
+msgstr "گزینه‌های عمومی"
 
 #: ../../src/ui_fsmenu/options.cc:93
 msgid "Fullscreen"
@@ -2425,7 +2426,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/options.cc:111
 msgid "Enable Sound"
-msgstr ""
+msgstr "به کار انداختن صدا"
 
 #: ../../src/ui_fsmenu/options.cc:116
 msgid "Maximum FPS:"
@@ -2437,7 +2438,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/options.cc:131
 msgid "Language"
-msgstr ""
+msgstr "زبان"
 
 #: ../../src/ui_fsmenu/options.cc:142
 msgid "In-game Options"
@@ -2457,7 +2458,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/options.cc:169
 msgid "Snap windows only when overlapping"
-msgstr ""
+msgstr "پرش پنجره‌ها فقط هنگام هم‌پوشانی‌"
 
 #: ../../src/ui_fsmenu/options.cc:175
 msgid "Dock windows to edges"
@@ -2550,7 +2551,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/singleplayer.cc:57
 msgid "Load Game"
-msgstr ""
+msgstr "بار کردن بازی"
 
 #: ../../src/wlapplication.cc:399
 msgid "ERROR: Could not connect to metaserver (reason above)!\n"
@@ -2587,7 +2588,7 @@ msgstr ""
 
 #: ../../src/wlapplication.cc:1342
 msgid "Options:"
-msgstr ""
+msgstr "گزینه‌ها:"
 
 #: ../../src/wlapplication.cc:1344
 msgid " --<config-entry-name>=value overwrites any config file setting"
@@ -2656,7 +2657,7 @@ msgstr ""
 
 #: ../../src/wlapplication.cc:1368
 msgid "Sound options:"
-msgstr ""
+msgstr "گزینه‌های صدا:"
 
 #: ../../src/wlapplication.cc:1369
 msgid " --nosound            Starts the game with sound disabled."
@@ -2988,7 +2989,7 @@ msgstr ""
 
 #: ../../src/wui/buildingwindow.cc:261
 msgid "Destroy"
-msgstr ""
+msgstr "تخریب"
 
 #: ../../src/wui/buildingwindow.cc:279
 msgid "Dismantle"
@@ -3034,7 +3035,7 @@ msgstr ""
 
 #: ../../src/wui/encyclopedia_window.cc:81
 msgid "Quantity"
-msgstr ""
+msgstr "کیفیت"
 
 #. * TRANSLATORS: List or wares, e.g. "Fish or Meat"
 #: ../../src/wui/encyclopedia_window.cc:195
@@ -3173,12 +3174,12 @@ msgstr ""
 #: ../../src/wui/game_main_menu_save_game.cc:140
 #: ../../src/wui/game_main_menu_save_game.cc:178
 msgid "player"
-msgstr ""
+msgstr "بازیکن"
 
 #: ../../src/wui/game_main_menu_save_game.cc:140
 #: ../../src/wui/game_main_menu_save_game.cc:178
 msgid "players"
-msgstr ""
+msgstr "بازیکنان"
 
 #: ../../src/wui/game_main_menu_save_game.cc:248
 msgid ""
@@ -3229,7 +3230,7 @@ msgstr "واضح"
 
 #: ../../src/wui/game_message_menu.cc:66
 msgid "Clear selection"
-msgstr ""
+msgstr "پاک کردن گزینش"
 
 #: ../../src/wui/game_message_menu.cc:75
 msgid "Invert"
@@ -3288,7 +3289,7 @@ msgstr ""
 #: ../../src/wui/game_options_menu.cc:76
 #: ../../src/wui/game_options_sound_menu.cc:29
 msgid "Sound Options"
-msgstr ""
+msgstr "گزینه‌های صدا"
 
 #: ../../src/wui/game_options_sound_menu.cc:34
 msgid "Ingame Music"
@@ -3308,15 +3309,15 @@ msgstr ""
 
 #: ../../src/wui/game_summary.cc:44
 msgid "Game over"
-msgstr ""
+msgstr "بازی تمام شد"
 
 #: ../../src/wui/game_summary.cc:60
 msgid "Elapsed time:"
-msgstr ""
+msgstr "زمان سپری‌شده"
 
 #: ../../src/wui/game_summary.cc:77
 msgid "Continue playing"
-msgstr ""
+msgstr "ادامه‌ی بازی"
 
 #: ../../src/wui/game_summary.cc:83
 msgid "Quit"
@@ -3361,7 +3362,7 @@ msgstr ""
 
 #: ../../src/wui/game_summary.cc:245
 msgid "Score"
-msgstr ""
+msgstr "امتیاز"
 
 #: ../../src/wui/game_summary.cc:254
 msgid "Player info"
@@ -3378,7 +3379,7 @@ msgstr ""
 
 #: ../../src/wui/general_statistics_menu.cc:188 ../../src/wui/minimap.cc:177
 msgid "Buildings"
-msgstr ""
+msgstr "ساختمان‌ها"
 
 #: ../../src/wui/general_statistics_menu.cc:196
 #: ../../src/wui/productionsitewindow.cc:68 ../../src/wui/transport_ui.cc:61
@@ -3388,7 +3389,7 @@ msgstr ""
 
 #: ../../src/wui/general_statistics_menu.cc:204
 msgid "Productivity"
-msgstr ""
+msgstr "فراورش"
 
 #: ../../src/wui/general_statistics_menu.cc:212
 msgid "Casualties"
@@ -3470,7 +3471,7 @@ msgstr ""
 
 #: ../../src/wui/login_box.cc:33
 msgid "Nickname:"
-msgstr ""
+msgstr "لقب:"
 
 #: ../../src/wui/login_box.cc:39
 msgid "Password:"
@@ -3561,16 +3562,16 @@ msgstr ""
 #: ../../src/wui/multiplayersetupgroup.cc:319
 #: ../../src/wui/playerdescrgroup.cc:194
 msgid "Random"
-msgstr ""
+msgstr "تصادفی"
 
 #: ../../src/wui/multiplayersetupgroup.cc:313
 #: ../../src/wui/playerdescrgroup.cc:182
 msgid "Human"
-msgstr ""
+msgstr "انسان"
 
 #: ../../src/wui/multiplayersetupgroup.cc:409
 msgid "Client name"
-msgstr ""
+msgstr "نام کارگیر"
 
 #: ../../src/wui/multiplayersetupgroup.cc:417
 msgid "Role"
@@ -3766,7 +3767,7 @@ msgstr ""
 
 #: ../../src/wui/transport_ui.cc:152 ../../src/wui/transport_ui.cc:248
 msgid "Reset to default"
-msgstr ""
+msgstr "‌بازگرداندن به پیش‌‌فرض"
 
 #: ../../src/wui/ware_statistics_menu.cc:177
 msgid "Production"
