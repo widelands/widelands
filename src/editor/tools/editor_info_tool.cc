@@ -19,8 +19,9 @@
 
 #include "editor/tools/editor_info_tool.h"
 
-#include <boost/format.hpp>
 #include <cstdio>
+
+#include <boost/format.hpp>
 
 #include "editor/editorinteractive.h"
 #include "i18n.h"
@@ -51,10 +52,10 @@ int32_t Editor_Info_Tool::handle_click_impl
 	char buf1[1024];
 	std::string buf = _("Node:");
 	buf += "\n";
-	buf += std::string("• ") + (boost::format(_("Coordinates: (%1$i, %2$i)")) % center.node.x % center.node.y).str() + "\n";
+	buf += std::string("• ") + (boost::format(_("Coordinates: (%1$i, %2$i)"))
+					 % center.node.x % center.node.y).str() + "\n";
 
 	buf += std::string("• ");
-	snprintf(buf1, sizeof(buf1), _("Height: %u"),f.get_height());
 	buf += buf1;
 	buf += std::string("\n");
 
@@ -83,7 +84,7 @@ int32_t Editor_Info_Tool::handle_click_impl
 	buf += std::string("• ") + (boost::format(_("Caps:%s")) % temp).str() + "\n";
 
 	buf += std::string("• ");
-	snprintf(buf1, sizeof(buf1), _("Owned by %i"),f.get_owned_by());
+	snprintf(buf1, sizeof(buf1), _("Owned by %i"), f.get_owned_by());
 	buf += std::string(buf1) + "\n";
 
 	temp = f.get_immovable() ? _("Has base immovable") : _("No base immovable");
@@ -123,7 +124,8 @@ int32_t Editor_Info_Tool::handle_click_impl
 	// *** Map info
 	buf += std::string("\n") + _("Map:") + "\n";
 	buf += std::string("• ") + (boost::format(_("Name: %s")) % map.get_name()).str() + "\n";
-	buf += std::string("• ") + (boost::format(_("Size: %1$ix%2$i")) % map.get_width() % map.get_height()).str() + "\n";
+	buf += std::string("• ") + (boost::format(_("Size: %1$ix%2$i"))
+					 % map.get_width() % map.get_height()).str() + "\n";
 
 	buf += std::string("• ");
 	snprintf(buf1, sizeof(buf1), _("Players: %i"), map.get_nrplayers());

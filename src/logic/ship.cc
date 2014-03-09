@@ -565,8 +565,10 @@ void Ship::ship_update_idle(Game & game, Bob::State & state) {
 						// Check whether the island was completely surrounded
 						if (get_position() == m_expedition->exploration_start) {
 							std::string msg_head = _("Island Circumnavigated");
-							std::string msg_body = _("An expedition ship sailed around its island without any events.");
-							send_message(game, "exp_island", msg_head, msg_body, "ship_explore_island_cw.png");
+							std::string msg_body = _("An expedition ship sailed around its"
+										 " island without any events.");
+							send_message(game, "exp_island", msg_head, msg_body,
+								"ship_explore_island_cw.png");
 							m_ship_state = EXP_WAITING;
 							return start_task_idle(game, descr().main_animation(), 1500);
 						}

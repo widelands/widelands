@@ -138,7 +138,8 @@ void NetworkGamingMessages::fill_map() {
 	ngmessages["PLAYER_UPDATE_FOR_N_E_P"] = _("Server sent a player update for a player that does not exist.");
 	ngmessages["USER_UPDATE_FOR_N_E_U"]   = _("Server sent a user update for a user that does not exist.");
 	ngmessages["DIFFERENT_PROTOCOL_VERS"] = _("Server uses a different protocol version");
-	ngmessages["PROTOCOL_EXCEPTION"]      = _("Received command number %s, which is not allowed in this state.");
+	ngmessages["PROTOCOL_EXCEPTION"]      = _("Received command number %s,"
+						  " which is not allowed in this state.");
 	ngmessages["BACKWARTS_RUNNING_TIME"]  = _("Client reports time to host that is running backwards.");
 	ngmessages["SIMULATING_BEYOND_TIME"]  = _("Client simulates beyond the game time allowed by the host.");
 	ngmessages["CLIENT_SYNC_REP_TIMEOUT"] = _("Client did not submit sync report in time.");

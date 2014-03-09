@@ -395,10 +395,11 @@ void Fullscreen_Menu_LaunchMPG::select_saved_game() {
 				(this, _("Saved game is directory"),
 				_
 				("WARNING:\n"
-					"The saved game you selected is a directory. This happens if you set the option ‘nozip’ to "
+					"The saved game you selected is a directory."
+					" This happens if you set the option ‘nozip’ to "
 					"true or manually unzipped the saved game.\n"
-					"Widelands is not able to transfer directory structures to the clients, please select another "
-					"saved game or zip the directories’ content."),
+					"Widelands is not able to transfer directory structures to the clients,"
+					" please select another saved game or zip the directories’ content."),
 				UI::WLMessageBox::OK);
 			warning.run();
 		}
@@ -647,8 +648,10 @@ void Fullscreen_Menu_LaunchMPG::load_map_info()
 
 	std::string infotext;
 	infotext += std::string(_("Map details:")) + "\n";
-	infotext += std::string("• ") + (format(_("Size: %1$u x %2$u")) % map.get_width() % map.get_height()).str() + "\n";
-	infotext += std::string("• ") + (format(ngettext("%u Player", "%u Players", m_nr_players)) % m_nr_players).str() + "\n";
+	infotext += std::string("• ") + (format(_("Size: %1$u x %2$u"))
+					 % map.get_width() % map.get_height()).str() + "\n";
+	infotext += std::string("• ") + (format(ngettext("%u Player", "%u Players", m_nr_players))
+					 % m_nr_players).str() + "\n";
 	infotext += std::string("• ") + (format(_("World: %s")) % world).str() + "\n";
 	if (m_settings->settings().scenario)
 		infotext += std::string("• ") + (format(_("Scenario mode selected"))).str() + "\n";
