@@ -21,6 +21,7 @@
 
 #include <cstdio>
 #include <iostream>
+
 #include <libintl.h>
 
 #include "constants.h"
@@ -31,6 +32,56 @@
 #include "save_handler.h"
 #include "sound/sound_handler.h"
 #include "wlapplication.h"
+
+namespace  {
+
+struct LanguageEntry {
+	LanguageEntry(const std::string& init_abbreviation, const std::string& init_descname) :
+		abbreviation(init_abbreviation),
+		descname(init_descname) {}
+
+	bool operator<(const LanguageEntry& other) const {
+		return descname < other.descname;
+	}
+
+	std::string abbreviation;
+	std::string descname;
+};
+
+void add_languages_to_list(UI::Listselect<std::string>* list, const std::string& language) {
+
+	filenameset_t files;
+	Section* s = &g_options.pull_section("global");
+	g_fs->FindFiles(s->get_string("localedir", INSTALL_LOCALEDIR), "*", &files);
+	Profile ln("txts/languages");
+	s = &ln.pull_section("languages");
+	bool own_selected = "" == language || "en" == language;
+
+	// Add translation directories to the list
+	std::vector<LanguageEntry> entries;
+	for (const std::string& filename : files) {
+		char const* const path = filename.c_str();
+		if (!strcmp(FileSystem::FS_Filename(path), ".") ||
+		    !strcmp(FileSystem::FS_Filename(path), "..") || !g_fs->IsDirectory(path)) {
+			continue;
+		}
+
+		char const* const abbreviation = FileSystem::FS_Filename(path);
+		entries.emplace_back(abbreviation, s->get_string(abbreviation, abbreviation));
+		own_selected |= abbreviation == language;
+	}
+	// Add currently used language manually
+	if (!own_selected) {
+		entries.emplace_back(language, s->get_string(language.c_str(), language.c_str()));
+	}
+	std::sort(entries.begin(), entries.end());
+
+	for (const LanguageEntry& entry : entries) {
+		list->add(entry.descname.c_str(), entry.abbreviation, nullptr, entry.abbreviation == language);
+	}
+}
+
+}  // namespace
 
 Fullscreen_Menu_Options::Fullscreen_Menu_Options
 		(Options_Ctrl::Options_Struct opt)
@@ -292,38 +343,7 @@ Fullscreen_Menu_Options::Fullscreen_Menu_Options
 		("English", "en",
 		 nullptr, "en" == opt.language);
 
-	filenameset_t files;
-	Section * s = &g_options.pull_section("global");
-	g_fs->FindFiles(s->get_string("localedir", INSTALL_LOCALEDIR), "*", &files);
-	Profile ln("txts/languages");
-	s = &ln.pull_section("languages");
-	bool own_selected = "" == opt.language || "en" == opt.language;
-
-	// Add translation directories to the list
-	for
-		(filenameset_t::iterator pname = files.begin();
-		 pname != files.end();
-		 ++pname)
-	{
-		char const * const path = pname->c_str();
-
-		if
-			(!strcmp(FileSystem::FS_Filename(path), ".") ||
-			 !strcmp(FileSystem::FS_Filename(path), "..") ||
-			 !g_fs->IsDirectory(path))
-			continue;
-
-		char const * const abbrev = FileSystem::FS_Filename(path);
-		m_language_list.add
-			(s->get_string(abbrev, abbrev), abbrev,
-			 nullptr, abbrev == opt.language);
-		own_selected |= abbrev == opt.language;
-	}
-	// Add currently used language manually
-	if (!own_selected)
-		m_language_list.add
-			(s->get_string(opt.language.c_str(), opt.language.c_str()),
-			 opt.language, nullptr, true);
+	add_languages_to_list(&m_language_list, opt.language);
 }
 
 void Fullscreen_Menu_Options::advanced_options() {
