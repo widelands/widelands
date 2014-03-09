@@ -157,7 +157,7 @@ citadel.barbarians=_Citadel
 donjon.barbarians=_Donjon
 fortress.barbarians=_Fortress
 sentry.barbarians=_Sentry
-stronghold.barbarians=_Stronghold
+stronghold.barbarians=Stronghold
 
 [warehouse types]
 headquarters=_Headquarters

@@ -3,11 +3,11 @@ max_soldiers=3
 heal_per_second=110
 conquers=7
 prefer_heroes=false
-occupied_string=_Your soldiers have occupied your Stronghold
-aggressor_string=_Your Stronghold discovered an aggressor.
-attack_string=_Your Stronghold is under attack.
-defeated_enemy_string=_The enemy defeated your soldiers at the Stronghold
-defeated_you_string=_Your soldiers defeated the enemy at the Stronghold
+occupied_string=Your soldiers have occupied your Stronghold
+aggressor_string=Your Stronghold discovered an aggressor.
+attack_string=Your Stronghold is under attack.
+defeated_enemy_string=The enemy defeated your soldiers at the Stronghold
+defeated_you_string=Your soldiers defeated the enemy at the Stronghold
 
 
 # Stronghold was removed from buildable buildings after Build15 and should be removed after Build18

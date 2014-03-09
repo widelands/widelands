@@ -135,9 +135,9 @@ obj_better_material_3 = {
 
 obj_build_cattlefarm = {
    name = "mission cattlefarm", 
-   title = _ "Build a cattlefarm",
+   title = _ "Build a cattle farm",
    number = 1,
-   body = objective_text(_"Build a cattlefarm", _(
+   body = objective_text(_"Build a cattle farm", _(
 [[When roads are under heavy load for a long time, one carrier is usually not enough to transport goods swiftly. ]] .. 
 [[Traffic jams are the consequence. Such roads therefore employ a second carrier: ]] .. 
 [[An ox that helps to carry the wares. This doubles the transport capacity.]]) .. "<br><br>" ..
@@ -275,9 +275,8 @@ _([[There seem to be quite a lot of animals in the forests here – we might jus
 order_msg_10_bread = {
    title=_"The Advisor",
    body=khantrukh(_"The elder jumps into the air...", 
-_([[Wisdom commands to seek variety.
-
-North of the great mountain is a large plain – why don’t we use the space Mother Nature gave us and build a farm? ]] .. 
+_([[Wisdom commands to seek variety.]]) .. "<br><br>" ..
+_([[North of the great mountain is a large plain – why don’t we use the space Mother Nature gave us and build a farm? ]] .. 
 [[I sure would enjoy a freshly baked pitta bread for a change...]])
    ) .. new_objectives(obj_begin_farming)
 }

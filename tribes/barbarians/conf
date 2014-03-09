@@ -219,7 +219,7 @@ goldmine=_Gold Mine
 [militarysite types]
 barrier=_Barrier
 sentry=_Sentry
-stronghold=_Stronghold
+stronghold=Stronghold
 citadel=_Citadel
 fortress=_Fortress
 donjon=_Donjon
