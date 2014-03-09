@@ -32,8 +32,8 @@
 #include "logic/map_revision.h"
 #include "logic/notification.h"
 #include "logic/objective.h"
+#include "logic/walkingdir.h"
 #include "logic/widelands_geometry.h"
-#include "logic/world/world.h"
 #include "manager.h"
 #include "random.h"
 
@@ -44,13 +44,15 @@ struct S2_Map_Loader;
 
 namespace Widelands {
 
-struct MapGenerator;
-struct BaseImmovable;
-struct PathfieldManager;
-class Player;
-class World;
 class Map;
 class Map_Loader;
+class Player;
+class World;
+struct BaseImmovable;
+struct MapGenerator;
+struct PathfieldManager;
+
+
 #define WLMF_SUFFIX ".wmf"
 #define S2MF_SUFFIX ".swd"
 #define S2MF_SUFFIX2 ".wld"

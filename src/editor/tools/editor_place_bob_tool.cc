@@ -24,6 +24,7 @@
 #include "logic/editor_game_base.h"
 #include "logic/field.h"
 #include "logic/mapregion.h"
+#include "logic/world/world.h"
 
 using Widelands::Bob;
 

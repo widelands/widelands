@@ -26,6 +26,7 @@
 
 #include "descr_maintainer.h"
 #include "logic/widelands.h"
+#include "logic/world/data.h"
 #include "logic/world/resource_description.h"
 
 class Section;
@@ -35,7 +36,18 @@ namespace Widelands {
 struct TerrainDescription : boost::noncopyable {
 	typedef Terrain_Index Index;
 
-	TerrainDescription(const std::string& directory, Section*, Descr_Maintainer<ResourceDescription>*);
+	// TODO(sirver): this should not take a picnametempl, but a list of paths.
+	TerrainDescription(
+			const std::string& name,
+			const std::string &descname,
+			TerrainType type,
+			const std::string& picnametempl,
+			int fps,
+			int32_t dither_layer,
+			std::vector<uint8_t> valid_resources,
+			uint8_t default_resource,
+			int32_t default_amount);
+
 	~TerrainDescription();
 
 	// Loads all graphics related to this Terrain from disk.
@@ -51,16 +63,12 @@ struct TerrainDescription : boost::noncopyable {
 	uint32_t get_texture() const;
 
 	// Returns the type of terrain this is (water, walkable, and so on).
-	// // NOCOM(#sirver): terrible name
-	uint8_t get_is() const;
+	// // NOCOM(#sirver): inline TerrainType here
+	TerrainType get_is() const;
 
 	// Returns the value of the resource in this field.
 	// NOCOM(#sirver): find out what this does.
 	int32_t resource_value(const Resource_Index resource) const;
-
-	// Returns the number of valid resources that can be found in this terrain.
-	// NOCOM(#sirver): replace these three methods with one returning a vector.
-	uint8_t get_num_valid_resources() const;
 
 	// Returns the valid resource with the given index.
 	Resource_Index get_valid_resource(uint8_t index) const;
@@ -70,10 +78,10 @@ struct TerrainDescription : boost::noncopyable {
 
 	// Returns the resource index that can by default always be found in this
 	// terrain.
-	int8_t get_default_resources() const;
+	int8_t get_default_resource() const;
 
 	// Returns the default amount of resources you can find in this terrain.
-	int32_t get_default_resources_amount() const;
+	int32_t get_default_resource_amount() const;
 
 	// Returns the dither layer, i.e. the information in which zlayer this
 	// texture should be drawn.
@@ -82,16 +90,16 @@ struct TerrainDescription : boost::noncopyable {
 private:
 	const std::string name_;
 	const std::string descname_;
+	TerrainType is_;
+	const std::vector<uint8_t> valid_resources_;
+	int8_t default_resource_index_;
+	int32_t default_resource_amount_;
 	std::string picnametempl_;
 	uint32_t frametime_;
-	uint8_t is_;
 	int32_t dither_layer_;
-	uint8_t* valid_resources_;
-	uint8_t nr_valid_resources_;
-	int8_t default_resources_;
-	int32_t default_amount_;
 	uint32_t texture_;  //  renderer's texture
 };
+
 }  // namespace Widelands
 
 #endif /* end of include guard: TERRAIN_DESCRIPTION_H */

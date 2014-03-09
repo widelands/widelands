@@ -250,7 +250,7 @@ static int L_include(lua_State * L) {
 		LuaInterface * lua = static_cast<LuaInterface *>(lua_touserdata(L, -1));
 		lua_pop(L, 1); // pop this userdata
 
-		lua->run_script(*g_fs, script, "_temp");
+		lua->run_script(*g_fs, script);
 	} catch (LuaError & e) {
 		report_error(L, "%s", e.what());
 	}

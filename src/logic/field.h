@@ -28,7 +28,6 @@
 #include "logic/roadtype.h"
 #include "logic/widelands.h"
 #include "logic/widelands_geometry.h"
-#include "logic/world/world.h"
 
 namespace Widelands {
 

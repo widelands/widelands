@@ -84,7 +84,7 @@ Editor_Tool_Set_Terrain_Options_Menu:: Editor_Tool_Set_Terrain_Options_Menu
 	Point pos(hmargin(), vmargin());
 	for (size_t checkfor = 0; checkfor < 6; ++checkfor) {
 		for (Widelands::Terrain_Index i  = 0; i < nr_terrains; ++i) {
-			const uint8_t ter_is = world.get_ter(i).get_is();
+			const TerrainType ter_is = world.get_ter(i).get_is();
 			if (ter_is != check[checkfor])
 				continue;
 

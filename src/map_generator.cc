@@ -24,6 +24,7 @@
 #include "logic/editor_game_base.h"
 #include "logic/findnode.h"
 #include "logic/map.h"
+#include "logic/world/world.h"
 
 #define AVG_ELEVATION   (0x80000000)
 #define MAX_ELEVATION   (0xffffffff)
@@ -134,57 +135,58 @@ void MapGenerator::generate_resources
 	// We'll take the "D" terrain at first...
 	// TODO: Check how the editor handles this...
 
-	EditorChangeResourceToolCallbackData callback_data = {
-		&m_egbase.map(),
-		&m_egbase.world()
-	};
-	Terrain_Index const tix = fc.field->get_terrains().d;
-	const TerrainDescription & terr = m_egbase.world().get_ter(tix);
-	switch (terr.get_num_valid_resources()) {
-	case 1: {
-		uint32_t const rnd1 = random1[fc.x + m_mapInfo.w * fc.y];
-		set_resource_helper(rnd1, 0);
-		break;
-	}
-	case 2: {
-		uint32_t const rnd1 = random1[fc.x + m_mapInfo.w * fc.y];
-		uint32_t const rnd2 = random2[fc.x + m_mapInfo.w * fc.y];
-		if (rnd1 > rnd2) {
-			set_resource_helper(rnd1, 0)
-		} else
-			set_resource_helper(rnd2, 1);
-		break;
-	}
-	case 3: {
-		uint32_t const rnd1 = random1[fc.x + m_mapInfo.w * fc.y];
-		uint32_t const rnd2 = random2[fc.x + m_mapInfo.w * fc.y];
-		uint32_t const rnd3 = random3[fc.x + m_mapInfo.w * fc.y];
-		if        (rnd1 > rnd2 && rnd1 > rnd3) {
-			set_resource_helper(rnd1, 0);
-		} else if (rnd2 > rnd1 && rnd2 > rnd3) {
-			set_resource_helper(rnd2, 1);
-		} else
-			set_resource_helper(rnd3, 2);
-		break;
-	}
-	case 4: {
-		uint32_t const rnd1 = random1[fc.x + m_mapInfo.w * fc.y];
-		uint32_t const rnd2 = random2[fc.x + m_mapInfo.w * fc.y];
-		uint32_t const rnd3 = random3[fc.x + m_mapInfo.w * fc.y];
-		uint32_t const rnd4 = random4[fc.x + m_mapInfo.w * fc.y];
-		if        (rnd1 > rnd2 && rnd1 > rnd3 && rnd1 > rnd4) {
-			set_resource_helper(rnd1, 0);
-		} else if (rnd2 > rnd1 && rnd2 > rnd3 && rnd2 > rnd4) {
-			set_resource_helper(rnd2, 1);
-		} else if (rnd3 > rnd1 && rnd3 > rnd2 && rnd3 > rnd4) {
-			set_resource_helper(rnd3, 2);
-		} else
-			set_resource_helper(rnd4, 3);
-		break;
-	}
-	default:
-		break; // currently mountains have the maximum of allowed resources, which is 4
-	}
+	// NOCOM(#sirver): broke this. Seems horrible.
+	// EditorChangeResourceToolCallbackData callback_data = {
+		// &m_egbase.map(),
+		// &m_egbase.world()
+	// };
+	// Terrain_Index const tix = fc.field->get_terrains().d;
+	// const TerrainDescription & terr = m_egbase.world().get_ter(tix);
+	// switch (terr.get_num_valid_resources()) {
+	// case 1: {
+		// uint32_t const rnd1 = random1[fc.x + m_mapInfo.w * fc.y];
+		// set_resource_helper(rnd1, 0);
+		// break;
+	// }
+	// case 2: {
+		// uint32_t const rnd1 = random1[fc.x + m_mapInfo.w * fc.y];
+		// uint32_t const rnd2 = random2[fc.x + m_mapInfo.w * fc.y];
+		// if (rnd1 > rnd2) {
+			// set_resource_helper(rnd1, 0)
+		// } else
+			// set_resource_helper(rnd2, 1);
+		// break;
+	// }
+	// case 3: {
+		// uint32_t const rnd1 = random1[fc.x + m_mapInfo.w * fc.y];
+		// uint32_t const rnd2 = random2[fc.x + m_mapInfo.w * fc.y];
+		// uint32_t const rnd3 = random3[fc.x + m_mapInfo.w * fc.y];
+		// if        (rnd1 > rnd2 && rnd1 > rnd3) {
+			// set_resource_helper(rnd1, 0);
+		// } else if (rnd2 > rnd1 && rnd2 > rnd3) {
+			// set_resource_helper(rnd2, 1);
+		// } else
+			// set_resource_helper(rnd3, 2);
+		// break;
+	// }
+	// case 4: {
+		// uint32_t const rnd1 = random1[fc.x + m_mapInfo.w * fc.y];
+		// uint32_t const rnd2 = random2[fc.x + m_mapInfo.w * fc.y];
+		// uint32_t const rnd3 = random3[fc.x + m_mapInfo.w * fc.y];
+		// uint32_t const rnd4 = random4[fc.x + m_mapInfo.w * fc.y];
+		// if        (rnd1 > rnd2 && rnd1 > rnd3 && rnd1 > rnd4) {
+			// set_resource_helper(rnd1, 0);
+		// } else if (rnd2 > rnd1 && rnd2 > rnd3 && rnd2 > rnd4) {
+			// set_resource_helper(rnd2, 1);
+		// } else if (rnd3 > rnd1 && rnd3 > rnd2 && rnd3 > rnd4) {
+			// set_resource_helper(rnd3, 2);
+		// } else
+			// set_resource_helper(rnd4, 3);
+		// break;
+	// }
+	// default:
+		// break; // currently mountains have the maximum of allowed resources, which is 4
+	// }
 }
 
 /// Translates a random value into a map node height. This method is used

@@ -39,6 +39,7 @@
 #include "logic/soldier.h"
 #include "logic/tribe.h"
 #include "logic/world/data.h"
+#include "logic/world/world.h"
 #include "map_generator.h"
 #include "map_io/widelands_map_loader.h"
 #include "s2map.h"
@@ -200,13 +201,13 @@ void Map::recalc_default_resources(const World& world) {
 			//  this node
 			{
 				const TerrainDescription & terr = world.terrain_descr(f.field->terrain_r());
-				++m[terr.get_default_resources()];
-				amount += terr.get_default_resources_amount();
+				++m[terr.get_default_resource()];
+				amount += terr.get_default_resource_amount();
 			}
 			{
 				const TerrainDescription & terd = world.terrain_descr(f.field->terrain_d());
-				++m[terd.get_default_resources()];
-				amount += terd.get_default_resources_amount();
+				++m[terd.get_default_resource()];
+				amount += terd.get_default_resource_amount();
 			}
 
 			//  If one of the neighbours is unpassable, count its resource
@@ -216,26 +217,26 @@ void Map::recalc_default_resources(const World& world) {
 			{
 				const TerrainDescription & terr = world.terrain_descr(f1.field->terrain_r());
 				const int8_t resr =
-					terr.get_default_resources();
+					terr.get_default_resource();
 				if
 					((terr.get_is() & TERRAIN_UNPASSABLE)
 					 and
 					 resr != Descr_Maintainer<ResourceDescription>::invalid_index())
 					m[resr] += 3;
 				else ++m[resr];
-				amount += terr.get_default_resources_amount();
+				amount += terr.get_default_resource_amount();
 			}
 			{
 				const TerrainDescription & terd = world.terrain_descr(f1.field->terrain_d());
 				const int8_t resd =
-					terd.get_default_resources();
+					terd.get_default_resource();
 				if
 					((terd.get_is() & TERRAIN_UNPASSABLE)
 					 and
 					 resd != Descr_Maintainer<ResourceDescription>::invalid_index())
 					m[resd] += 3;
 				else ++m[resd];
-				amount += terd.get_default_resources_amount();
+				amount += terd.get_default_resource_amount();
 			}
 
 			//  top right neigbour
@@ -243,14 +244,14 @@ void Map::recalc_default_resources(const World& world) {
 			{
 				const TerrainDescription & terd = world.terrain_descr(f1.field->terrain_d());
 				const int8_t resd =
-					terd.get_default_resources();
+					terd.get_default_resource();
 				if
 					((terd.get_is() & TERRAIN_UNPASSABLE)
 					 and
 					 resd != Descr_Maintainer<ResourceDescription>::invalid_index())
 					m[resd] += 3;
 				else ++m[resd];
-				amount += terd.get_default_resources_amount();
+				amount += terd.get_default_resource_amount();
 			}
 
 			//  left neighbour
@@ -258,14 +259,14 @@ void Map::recalc_default_resources(const World& world) {
 			{
 				const TerrainDescription & terr = world.terrain_descr(f1.field->terrain_r());
 				const int8_t resr =
-					terr.get_default_resources();
+					terr.get_default_resource();
 				if
 					((terr.get_is() & TERRAIN_UNPASSABLE)
 					 and
 					 resr != Descr_Maintainer<ResourceDescription>::invalid_index())
 					m[resr] += 3;
 				else ++m[resr];
-				amount += terr.get_default_resources_amount();
+				amount += terr.get_default_resource_amount();
 			}
 
 			int32_t lv  = 0;
@@ -1054,17 +1055,17 @@ NodeCaps Map::_calc_nodecaps_pass1(const World& world, FCoords const f, bool con
 	const FCoords tl = tl_n(f);
 	const FCoords  l =  l_n(f);
 
-	uint8_t const tr_d_terrain_is =
+	const TerrainType tr_d_terrain_is =
 		world.terrain_descr(tr.field->terrain_d()).get_is();
-	uint8_t const tl_r_terrain_is =
+	const TerrainType tl_r_terrain_is =
 		world.terrain_descr(tl.field->terrain_r()).get_is();
-	uint8_t const tl_d_terrain_is =
+	const TerrainType tl_d_terrain_is =
 		world.terrain_descr(tl.field->terrain_d()).get_is();
-	uint8_t const  l_r_terrain_is =
+	const TerrainType  l_r_terrain_is =
 		world.terrain_descr (l.field->terrain_r()).get_is();
-	uint8_t const  f_d_terrain_is =
+	const TerrainType  f_d_terrain_is =
 		world.terrain_descr (f.field->terrain_d()).get_is();
-	uint8_t const  f_r_terrain_is =
+	const TerrainType  f_r_terrain_is =
 		world.terrain_descr (f.field->terrain_r()).get_is();
 
 	//  1b) Collect some information about the neighbours
@@ -1279,7 +1280,7 @@ int Map::calc_buildsize
 	const FCoords tl = tl_n(f);
 	const FCoords  l =  l_n(f);
 
-	uint8_t terrains[6] = {
+	const TerrainType terrains[6] = {
 		world.terrain_descr(tr.field->terrain_d()).get_is(),
 		world.terrain_descr(tl.field->terrain_r()).get_is(),
 		world.terrain_descr(tl.field->terrain_d()).get_is(),

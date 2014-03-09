@@ -28,6 +28,7 @@
 #include "graphic/texture.h"
 #include "logic/editor_game_base.h"
 #include "logic/player.h"
+#include "logic/world/world.h"
 #include "wui/mapviewpixelconstants.h"
 #include "wui/mapviewpixelfunctions.h"
 #include "wui/overlay_manager.h"
@@ -48,9 +49,10 @@ GameRendererGL::~GameRendererGL()
 {
 }
 
-const GLSurfaceTexture * GameRendererGL::get_dither_edge_texture(const Widelands::World & world)
+const GLSurfaceTexture * GameRendererGL::get_dither_edge_texture()
 {
-	const std::string fname = world.basedir() + "/pics/edge.png";
+	// NOCOM(#sirver): this could mean trouble too
+	const std::string fname = "world/pics/edge.png";
 	const std::string cachename = std::string("gltex#") + fname;
 
 	if (Surface* surface = g_gr->surfaces().get(cachename))
@@ -437,8 +439,6 @@ void GameRendererGL::prepare_terrain_dither()
 
 void GameRendererGL::draw_terrain_dither()
 {
-	const World & world = m_egbase->world();
-
 	if (m_edge_vertices_size == 0)
 		return;
 
@@ -453,7 +453,7 @@ void GameRendererGL::draw_terrain_dither()
 	glClientActiveTextureARB(GL_TEXTURE1_ARB);
 	glTexCoordPointer(2, GL_FLOAT, sizeof(dithervertex), &m_edge_vertices[0].edgex);
 	glEnableClientState(GL_TEXTURE_COORD_ARRAY);
-	GLuint edge = get_dither_edge_texture(world)->get_gl_texture();
+	GLuint edge = get_dither_edge_texture()->get_gl_texture();
 	glBindTexture(GL_TEXTURE_2D, edge);
 	glEnable(GL_TEXTURE_2D);
 	glTexEnvi(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_COMBINE_ARB);
@@ -475,7 +475,7 @@ void GameRendererGL::draw_terrain_dither()
 
 		const Texture & texture =
 				*g_gr->get_maptexture_data
-					(world.terrain_descr(ter).get_texture());
+					(m_egbase->world().terrain_descr(ter).get_texture());
 		glBindTexture(GL_TEXTURE_2D, texture.getTexture());
 		glDrawArrays
 			(GL_TRIANGLES,

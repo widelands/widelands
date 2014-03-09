@@ -46,6 +46,7 @@
 #include "logic/tribe.h"
 #include "logic/warehouse.h"
 #include "logic/worker_program.h"
+#include "logic/world/world.h"
 #include "map_io/widelands_map_map_object_loader.h"
 #include "map_io/widelands_map_map_object_saver.h"
 #include "profile/profile.h"
@@ -952,12 +953,14 @@ bool Worker::run_geologist_find(Game & game, State & state, const Action &)
 		// Geologist also sends a message notifying the player
 		if (rdescr->detectable() && position.field->get_resources_amount()) {
 			char message[1024];
-			snprintf
-				(message, sizeof(message),
-				 "<rt image=%sresources/%s_1f.png>"
-				 "<p font-size=14 font-face=DejaVuSerif>%s</p></rt>",
-				 world.basedir().c_str(), rdescr->name().c_str(),
-				 _("A geologist found resources."));
+			// TODO(sirver): this is very wrong: It assumes a directory layout
+			// that might not be around forever.
+			snprintf(message,
+			         sizeof(message),
+			         "<rt image=world/resources/%s_1f.png>"
+			         "<p font-size=14 font-face=DejaVuSerif>%s</p></rt>",
+			         rdescr->name().c_str(),
+			         _("A geologist found resources."));
 
 			//  We should add a message to the player's message queue - but only,
 			//  if there is not already a similar one in list.

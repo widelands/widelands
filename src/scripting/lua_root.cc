@@ -19,6 +19,8 @@
 
 #include "scripting/lua_root.h"
 
+#include <boost/format.hpp>
+
 #include "gamecontroller.h"
 #include "log.h"
 #include "logic/cmd_luacoroutine.h"
@@ -26,7 +28,9 @@
 #include "logic/game.h"
 #include "logic/immovable.h"
 #include "logic/tribe.h"
+#include "logic/world/data.h"
 #include "logic/world/resource_description.h"
+#include "logic/world/terrain_description.h"
 #include "logic/world/world.h"
 #include "scripting/lua_editor.h"
 #include "scripting/lua_game.h"
@@ -36,6 +40,36 @@
 using namespace Widelands;
 
 namespace LuaRoot {
+
+namespace  {
+
+// Parse a terrain type from the giving string.
+TerrainType TerrainTypeFromString(const std::string& type) {
+	if (type == "green") {
+		return TERRAIN_GREEN;
+	}
+	if (type == "dry") {
+		return TERRAIN_DRY;
+	}
+	if (type == "water") {
+		return static_cast<TerrainType>(TERRAIN_WATER | TERRAIN_DRY | TERRAIN_UNPASSABLE);
+	}
+	if (type == "acid") {
+		return static_cast<TerrainType>(TERRAIN_ACID | TERRAIN_DRY | TERRAIN_UNPASSABLE);
+	}
+	if (type == "mountain") {
+		return static_cast<TerrainType>(TERRAIN_DRY | TERRAIN_MOUNTAIN);
+	}
+	if (type == "dead") {
+		return static_cast<TerrainType>(TERRAIN_DRY | TERRAIN_UNPASSABLE | TERRAIN_ACID);
+	}
+	if (type == "unpassable") {
+		return static_cast<TerrainType>(TERRAIN_DRY | TERRAIN_UNPASSABLE);
+	}
+	throw LuaError((boost::format("invalid terrain type '%s'") % type).str());
+}
+
+}  // namespace
 
 /* RST
 :mod:`wl`
@@ -293,6 +327,7 @@ World
 const char L_World::className[] = "World";
 const MethodType<L_World> L_World::Methods[] = {
 	METHOD(L_World, new_resource_type),
+	METHOD(L_World, new_terrain_type),
 	{0, 0},
 };
 const PropertyType<L_World> L_World::Properties[] = {
@@ -375,6 +410,58 @@ int L_World::new_resource_type(lua_State* L) {
 
 	return 0;
 }
+
+/* RST
+	.. method:: new_terrain_type(table)
+
+		Adds a new terrain type that can be used in maps. Takes a single
+		argument, a table with the descriptions for the terrain type. It might
+		contain the following entries:
+
+		:type name: class:`string`
+		:arg name: The internal identifier.
+		:type descname: class:`string`
+		:arg descname: The string used when displaying this to the user. Usually
+			translated.
+		// NOCOM(#sirver): document all of them
+
+		:returns: :const:`nil`
+*/
+int L_World::new_terrain_type(lua_State * L) {
+	if (lua_gettop(L) != 2) {
+		report_error(L, "Takes only one argument.");
+	}
+	Editor_Game_Base& egbase = get_egbase(L);
+	const World& world = egbase.world();
+
+	try {
+		LuaTable table(L);  // Will pop the table eventually.
+
+		std::vector<uint8_t> valid_resources;
+		for (const std::string& resource :
+		     table.get_table<std::string>("valid_resources")->array_entries<std::string>()) {
+			valid_resources.push_back(world.safe_resource_index(resource.c_str()));
+		}
+
+		// Now add this resource type to the world description.
+		get_egbase(L).mutable_world()->add_new_terrain_type(new TerrainDescription(
+		   table.get_string<std::string>("name"),
+		   table.get_string<std::string>("descname"),
+		   TerrainTypeFromString(table.get_string<std::string>("is")),
+		   table.get_string<std::string>("textures"),
+		   table.get_int<std::string>("fps"),
+		   table.get_int<std::string>("dither_layer"),
+		   valid_resources,
+		   world.get_resource(table.get_string<std::string>("default_resource").c_str()),
+		   table.get_int<std::string>("default_resource_amount")));
+	}
+	catch (LuaError& e) {
+		return report_error(L, "%s", e.what());
+	}
+
+	return 0;
+}
+
 
 /*
  ==========================================================

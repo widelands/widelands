@@ -22,6 +22,7 @@
 
 #include "logic/immovable.h"
 #include "logic/widelands_streamread.h"
+#include "logic/world/world.h"
 
 namespace Widelands {
 

@@ -78,10 +78,8 @@ void Game_Preload_Data_Packet::Read
 					m_win_condition = _("Scenario");
 				} else {
 					try {
-						std::unique_ptr<LuaTable> table(
-						   game.lua().run_script(*g_fs,
-						                         "scripting/win_conditions/" + m_win_condition + ".lua",
-						                         "win_conditions"));
+						std::unique_ptr<LuaTable> table(game.lua().run_script(
+						   *g_fs, "scripting/win_conditions/" + m_win_condition + ".lua"));
 						m_win_condition = table->get_string<std::string>("name");
 					} catch (...) {
 						// Catch silently, the win_condition value will be used

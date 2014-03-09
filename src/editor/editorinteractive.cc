@@ -33,6 +33,7 @@
 #include "logic/map.h"
 #include "logic/player.h"
 #include "logic/tribe.h"
+#include "logic/world/world.h"
 #include "map_io/widelands_map_loader.h"
 #include "profile/profile.h"
 #include "scripting/lua_table.h"
@@ -607,7 +608,7 @@ void Editor_Interactive::run_editor(const std::string & filename, const std::str
 		eia.start();
 
 		if (!script_to_run.empty()) {
-			eia.egbase().lua().run_script(*g_fs, script_to_run, "commandline");
+			eia.egbase().lua().run_script(*g_fs, script_to_run);
 		}
 	}
 	eia.run();

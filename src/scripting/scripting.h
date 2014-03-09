@@ -66,9 +66,8 @@ public:
 	// Interpret the given string, will throw 'LuaError' on any error.
 	void interpret_string(const std::string&);
 
-	std::unique_ptr<LuaTable> run_script(std::string, std::string);
-	std::unique_ptr<LuaTable> run_script
-			(FileSystem &, std::string, std::string);
+	std::unique_ptr<LuaTable> run_script(const std::string& ns, const std::string& script);
+	std::unique_ptr<LuaTable> run_script(FileSystem&, const std::string& script);
 
 	std::unique_ptr<LuaTable> get_hook(std::string name);
 

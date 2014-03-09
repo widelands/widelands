@@ -24,6 +24,7 @@
 #include "logic/field.h"
 #include "logic/map.h"
 #include "logic/player.h"
+#include "logic/world/world.h"
 #include "wui/overlay_manager.h"
 
 

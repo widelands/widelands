@@ -28,25 +28,16 @@
 #include "log.h"
 #include "logic/game_data_error.h"
 #include "logic/world/map_gen.h"
-#include "scripting/lua_table.h"
-#include "scripting/scripting.h"
 #include "wexception.h"
 
 namespace Widelands {
 
-World::World(LuaInterface* lua) :
-	basedir_("world/"),
+World::World() :
 	mapGenInfo_(new MapGenInfo())
 {
-	assert(lua != nullptr);
-	// NOCOM(#sirver): I believe run_script can actually be outside of the interface.
-	try {
-		lua->run_script(*g_fs, "world/init.lua", "_temp");
-	}
-	catch (const _wexception& e) {
-		log("Could not read world information: %s", e.what());
-		throw;
-	}
+}
+
+// World::ParseConfiguaration(LuaInterface* lua) {
 	// NOCOM(#sirver): bring all of this back
 	// try {
 		// i18n::Textdomain textdomain("world");
@@ -79,7 +70,7 @@ World::World(LuaInterface* lua) :
 	// } catch (const std::exception & e) {
 		// throw game_data_error("world %s: %s", name.c_str(), e.what());
 	// }
-}
+// }
 
 World::~World() {
 }
@@ -91,8 +82,8 @@ void World::load_graphics()
 	g_gr->flush_maptextures();
 
 	// Load terrain graphics
-	for (i = 0; i < terrain_descriptions_.get_nitems(); ++i)
-		terrain_descriptions_.get(i)->load_graphics();
+	for (i = 0; i < terrains_.get_nitems(); ++i)
+		terrains_.get(i)->load_graphics();
 
 	// TODO: load more graphics
 }
@@ -119,6 +110,10 @@ void World::add_new_resource_type(ResourceDescription* resource_description) {
 	resources_.add(resource_description);
 }
 
+void World::add_new_terrain_type(TerrainDescription* terrain_description) {
+	terrains_.add(terrain_description);
+}
+
 // NOCOM(#sirver): remove these
 // void World::parse_terrains()
 // {
@@ -137,7 +132,7 @@ void World::add_new_resource_type(ResourceDescription* resource_description) {
 				// throw game_data_error
 					// (_("%s: too many terrain types, can not be more than 16"),
 					 // fname);
-			// terrain_descriptions_.add(new TerrainDescription(basedir_.c_str(), s, &resources_));
+			// terrains_.add(new TerrainDescription(basedir_.c_str(), s, &resources_));
 		// }
 
 		// prof.check_used();

@@ -103,6 +103,23 @@ void setup_for_editor_and_game(lua_State* L, Widelands::Editor_Game_Base * g) {
 	lua_setfield(L, LUA_REGISTRYINDEX, "egbase");
 }
 
+// Runs the 'content' as a lua script identified by 'identifier' in 'L'.
+std::unique_ptr<LuaTable > run_string_as_script(lua_State* L, const std::string& identifier, const std::string& content) {
+	log("Running script %s\n", identifier.c_str());
+	check_return_value_for_errors(
+	   L,
+	   luaL_loadbuffer(L, content.c_str(), content.size(), identifier.c_str()) ||
+	      lua_pcall(L, 0, 1, 0));
+
+	if (lua_isnil(L, -1)) {
+		lua_pop(L, 1);    // No return value from script
+		lua_newtable(L);  // Push an empty table
+	}
+	if (not lua_istable(L, -1))
+		throw LuaError("Script did not return a table!");
+	return std::unique_ptr<LuaTable>(new LuaTable(L));
+}
+
 }  // namespace
 
 
@@ -158,17 +175,18 @@ std::string LuaInterface::register_script
 {
 		size_t length;
 		void * input_data = fs.Load(path, length);
-
-		std::string data(static_cast<char *>(input_data));
+		const std::string data(static_cast<char *>(input_data));
 		std::string name = path.substr(0, path.size() - 4); // strips '.lua'
 
 		// make sure the input_data is freed
 		free(input_data);
 
-		size_t pos = name.find_last_of("/\\");
-		if (pos != std::string::npos)  name = name.substr(pos + 1);
+	   const size_t pos = name.find_last_of("/\\");
+	   if (pos != std::string::npos) {
+		   name = name.substr(pos + 1);
+	   }
 
-		log("Registering script: (%s,%s)\n", ns.c_str(), name.c_str());
+	   log("Registering script: (%s,%s)\n", ns.c_str(), name.c_str());
 		m_scripts[ns][name] = data;
 
 		return name;
@@ -200,44 +218,27 @@ void LuaInterface::interpret_string(const std::string& cmd) {
 	check_return_value_for_errors(m_L, rv);
 }
 
-std::unique_ptr<LuaTable>
-LuaInterface::run_script(FileSystem& fs, std::string path, std::string ns) {
-	bool delete_ns = false;
-	if (not m_scripts.count(ns))
-		delete_ns = true;
+std::unique_ptr<LuaTable> LuaInterface::run_script(FileSystem& fs, const std::string& path) {
+	try {
+		size_t length;
+		void* input_data = fs.Load(path, length);
+		const std::string data(static_cast<char*>(input_data));
+		// make sure the input_data is freed
+		free(input_data);
 
-	const std::string name = register_script(fs, ns, path);
-
-	std::unique_ptr<LuaTable> rv = run_script(ns, name);
-
-	if (delete_ns)
-		m_scripts.erase(ns);
-	else
-		m_scripts[ns].erase(name);
-
-	return rv;
+		return run_string_as_script(m_L, path, data);
+	}
+	catch (File_error& e) {
+		throw LuaError(e.what());
+	}
 }
 
-std::unique_ptr<LuaTable> LuaInterface::run_script(std::string ns, std::string name) {
-	if
-		((m_scripts.find(ns) == m_scripts.end()) ||
-		 (m_scripts[ns].find(name) == m_scripts[ns].end()))
+std::unique_ptr<LuaTable> LuaInterface::run_script(const std::string& ns, const std::string& name) {
+	if (!m_scripts.count(ns) || !m_scripts[ns].count(name)) {
 		throw LuaScriptNotExistingError(ns, name);
-
-	const std::string & s = m_scripts[ns][name];
-
-	check_return_value_for_errors
-		(m_L, luaL_loadbuffer(m_L, s.c_str(), s.size(), (ns + ":" + name).c_str()) ||
-		 lua_pcall(m_L, 0, 1, 0)
-	);
-
-	if (lua_isnil(m_L, -1)) {
-		lua_pop(m_L, 1); // No return value from script
-		lua_newtable(m_L); // Push an empty table
 	}
-	if (not lua_istable(m_L, -1))
-		throw LuaError("Script did not return a table!");
-	return std::unique_ptr<LuaTable>(new LuaTable(m_L));
+
+	return run_string_as_script(m_L, ns + ":" + name, m_scripts[ns][name]);
 }
 
 /*

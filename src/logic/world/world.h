@@ -42,7 +42,7 @@ class Editor_Game_Base;
 // terrains, immovables and resources.
 class World : boost::noncopyable {
 public:
-	explicit World(LuaInterface*);
+	World();
 	~World();  // Defined in .cc because all forward declarations are known then.
 
 	// NOCOM(#sirver): kill
@@ -57,21 +57,21 @@ public:
 	const std::string& get_description() const;
 
 	Terrain_Index index_of_terrain(char const* const name) const {
-		return terrain_descriptions_.get_index(name);
+		return terrains_.get_index(name);
 	}
 	TerrainDescription& terrain_descr(Terrain_Index const i) const {
-		return *terrain_descriptions_.get(i);
+		return *terrains_.get(i);
 	}
 	const TerrainDescription& get_ter(Terrain_Index const i) const {
-		assert(i < terrain_descriptions_.get_nitems());
-		return *terrain_descriptions_.get(i);
+		assert(i < terrains_.get_nitems());
+		return *terrains_.get(i);
 	}
 	TerrainDescription const* get_ter(char const* const name) const {
-		int32_t const i = terrain_descriptions_.get_index(name);
-		return i != -1 ? terrain_descriptions_.get(i) : nullptr;
+		int32_t const i = terrains_.get_index(name);
+		return i != -1 ? terrains_.get(i) : nullptr;
 	}
 	int32_t get_nr_terrains() const {
-		return terrain_descriptions_.get_nitems();
+		return terrains_.get_nitems();
 	}
 	int32_t get_bob(char const* const l) const {
 		return bobs.get_index(l);
@@ -99,6 +99,9 @@ public:
 	// Add this new resource to the world description. Transfers ownership.
 	void add_new_resource_type(ResourceDescription* resource_description);
 
+	// Add this new terrain to the world description. Transfers ownership.
+	void add_new_terrain_type(TerrainDescription* terrain_description);
+
 	int32_t get_resource(const char* const name) const {
 		return resources_.get_index(name);
 	}
@@ -110,18 +113,13 @@ public:
 		return resources_.get_nitems();
 	}
 	int32_t safe_resource_index(const char* const warename) const;
-	const std::string& basedir() const {
-		return basedir_;
-	}
 
 	const MapGenInfo& getMapGenInfo() const;
 
 private:
-	const std::string basedir_;  //  base directory, where the main conf file resides
-
 	Descr_Maintainer<Bob::Descr> bobs;
 	Descr_Maintainer<Immovable_Descr> immovables;
-	Descr_Maintainer<TerrainDescription> terrain_descriptions_;
+	Descr_Maintainer<TerrainDescription> terrains_;
 	Descr_Maintainer<ResourceDescription> resources_;
 
 	std::unique_ptr<MapGenInfo> mapGenInfo_;

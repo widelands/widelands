@@ -333,9 +333,8 @@ void Game::init_newgame
 
 	// Check for win_conditions
 	if (!settings.scenario) {
-		std::unique_ptr<LuaTable> table
-			(lua().run_script
-			 (*g_fs, "scripting/win_conditions/" + settings.win_condition + ".lua", "win_conditions"));
+		std::unique_ptr<LuaTable> table(
+		   lua().run_script(*g_fs, "scripting/win_conditions/" + settings.win_condition + ".lua"));
 		m_win_condition_displayname = table->get_string<std::string>("name");
 		LuaCoroutine * cr = table->get_coroutine<std::string>("func");
 		enqueue_command(new Cmd_LuaCoroutine(get_gametime() + 100, cr));

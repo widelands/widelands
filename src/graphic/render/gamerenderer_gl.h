@@ -65,7 +65,7 @@ private:
 		uint32_t pad[1];
 	};
 
-	const GLSurfaceTexture * get_dither_edge_texture(const Widelands::World & world);
+	const GLSurfaceTexture * get_dither_edge_texture();
 
 	void draw() override;
 	void prepare_terrain_base();

@@ -33,6 +33,7 @@
 #include "log.h"
 #include "logic/player.h"
 #include "logic/tribe.h"
+#include "logic/world/world.h"
 #include "wexception.h"
 
 #define TRUE_WORDS 4

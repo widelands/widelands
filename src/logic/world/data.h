@@ -41,14 +41,13 @@
 
 #define WLWF_VERSION PACK_VERSION(1, 0)
 
-
-#define TERRAIN_DRY        1
-// #define TERRAIN_GREEN      1
-#define TERRAIN_WATER      2
-#define TERRAIN_ACID       4
-#define TERRAIN_MOUNTAIN   8
-// fine TERRAIN_DEAD       5
-#define TERRAIN_UNPASSABLE 16
-
+enum TerrainType {
+	TERRAIN_GREEN = 0,
+	TERRAIN_DRY = 1,
+	TERRAIN_WATER =  2,
+	TERRAIN_ACID = 4,
+	TERRAIN_MOUNTAIN = 8,
+	TERRAIN_UNPASSABLE = 16,
+};
 
 #endif

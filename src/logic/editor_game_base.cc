@@ -43,6 +43,7 @@
 #include "logic/worker.h"
 #include "logic/world/world.h"
 #include "rgbcolor.h"
+#include "scripting/lua_table.h"
 #include "scripting/scripting.h"
 #include "sound/sound_handler.h"
 #include "ui_basic/progresswindow.h"
@@ -103,7 +104,18 @@ const World& Editor_Game_Base::world() const {
 
 World* Editor_Game_Base::mutable_world() {
 	if (!world_) {
-		world_.reset(new World(lua_.get()));
+		// Lazy initialization of World. We need to create the pointer to the
+		// world immediately though, because the lua scripts need to have access
+		// to world through this method already.
+		world_.reset(new World());
+
+		try {
+			lua_->run_script(*g_fs, "world/init.lua");
+		}
+		catch (const _wexception& e) {
+			log("Could not read world information: %s", e.what());
+			throw;
+		}
 	}
 	return world_.get();
 }

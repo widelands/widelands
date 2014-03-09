@@ -42,6 +42,7 @@
 #include "logic/widelands_fileread.h"
 #include "logic/widelands_filewrite.h"
 #include "logic/worker.h"
+#include "logic/world/world.h"
 #include "profile/profile.h"
 #include "sound/sound_handler.h"
 #include "text_layout.h"

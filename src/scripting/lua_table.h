@@ -62,6 +62,24 @@ public:
 		return keys;
 	}
 
+	// Returns all integer entries starting at 1 till nil is found. All entries
+	// must be of the given type.
+	template <typename ValueType> std::vector<ValueType> array_entries() {
+		std::vector<ValueType> values;
+		int index = 1;
+		while (true) {
+			lua_rawgeti(m_L, m_index, index);
+			if (lua_isnil(m_L, -1)) {
+				lua_pop(m_L, 1);
+				break;
+			}
+			values.emplace_back(get_value<ValueType>());
+			lua_pop(m_L, 1);
+			++index;
+		}
+		return values;
+	}
+
 	// Returns the corresponding value with the given key.
 	template <typename KeyType> std::string get_string(const KeyType& s) {
 		get_existing_table_value<KeyType>(s);
