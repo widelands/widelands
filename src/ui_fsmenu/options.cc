@@ -21,12 +21,12 @@
 
 #include <cstdio>
 #include <iostream>
-#include <libintl.h>
 
 #include "constants.h"
 #include "graphic/graphic.h"
 #include "i18n.h"
 #include "io/filesystem/layered_filesystem.h"
+#include "libintl.h"
 #include "profile/profile.h"
 #include "save_handler.h"
 #include "sound/sound_handler.h"

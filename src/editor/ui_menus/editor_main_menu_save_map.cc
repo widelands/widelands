@@ -383,8 +383,8 @@ bool Main_Menu_Save_Map::save_map(std::string filename, bool binary) {
 	//  Check if file exists. If so, show a warning.
 	if (g_fs->FileExists(complete_filename)) {
 		std::string s =
-			(boost::format(_("A File with the name ‘%s’ already exists. Overwrite?")) % 
-				FileSystem::FS_Filename(filename.c_str())).str();
+			(boost::format(_("A File with the name ‘%s’ already exists. Overwrite?"))
+				% FileSystem::FS_Filename(filename.c_str())).str();
 		UI::WLMessageBox mbox
 			(&eia(), _("Error Saving Map!!"), s, UI::WLMessageBox::YESNO);
 		if (not mbox.run())
