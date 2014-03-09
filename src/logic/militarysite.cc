@@ -93,11 +93,6 @@ m_didconquer  (false),
 m_capacity    (ms_descr.get_max_number_of_soldiers()),
 m_nexthealtime(0),
 m_soldier_preference(ms_descr.m_prefers_heroes_at_start ? kPrefersHeroes : kPrefersRookies),
-m_occupied_str(ms_descr.m_occupied_str),
-m_aggressor_str(ms_descr.m_aggressor_str),
-m_attack_str(ms_descr.m_attack_str),
-m_defeated_enemy_str(ms_descr.m_defeated_enemy_str),
-m_defeated_you_str(ms_descr.m_defeated_you_str),
 m_soldier_upgrade_try(false),
 m_doing_upgrade_request(false)
 {
@@ -250,7 +245,7 @@ int MilitarySite::incorporateSoldier(Editor_Game_Base & egbase, Soldier & s)
 				(*game,
 				 "site_occupied",
 				 descname(),
-				 m_occupied_str,
+				 descr().m_occupied_str,
 				 true);
 		}
 	}
@@ -846,7 +841,7 @@ bool MilitarySite::attack(Soldier & enemy)
 				(game,
 				 "site_lost",
 				 _("Militarysite lost!"),
-				 m_defeated_enemy_str,
+				 descr().m_defeated_enemy_str,
 				 false);
 		}
 
@@ -900,7 +895,7 @@ bool MilitarySite::attack(Soldier & enemy)
 			(game,
 			 "site_defeated",
 			 _("Enemy at site defeated!"),
-			 newsite->m_defeated_you_str,
+			 newsite->descr().m_defeated_you_str,
 			 true);
 
 		return false;
@@ -946,7 +941,7 @@ void MilitarySite::informPlayer(Game & game, bool const discovered)
 		(game,
 		 "under_attack",
 		 _("You are under attack"),
-		 discovered ? m_aggressor_str : m_attack_str,
+		 discovered ? descr().m_aggressor_str : descr().m_attack_str,
 		 false,
 		 60 * 1000, 5);
 }
