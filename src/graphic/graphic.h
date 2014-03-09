@@ -129,7 +129,6 @@ public:
 	Texture * get_maptexture_data(uint32_t id);
 	AnimationGfx * get_animation(uint32_t);
 
-	void set_world(std::string);
 	Surface& get_road_texture(int32_t roadtex);
 
 	const GraphicCaps& caps() const {return m_caps;}

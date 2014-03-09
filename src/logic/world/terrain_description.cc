@@ -50,14 +50,19 @@ TerrainDescription::TerrainDescription(const std::string& name,
      picnametempl_(picnametempl),
      frametime_(fps > 0 ? 1000 / fps : FRAME_LENGTH),
      dither_layer_(dither_layer),
-	  texture_(0) {
-   }
+     texture_(0) {
+	texture_ = g_gr->get_maptexture(picnametempl_, frametime_);
+
+	if (default_resource_amount > 0 && !is_resource_valid(default_resource)) {
+		throw game_data_error("Default resource is not in valid resources.\n");
+	}
+}
 
 TerrainDescription::~TerrainDescription() {
 }
 
 void TerrainDescription::load_graphics() {
-	texture_ = g_gr->get_maptexture(picnametempl_, frametime_);
+	// NOCOM(#sirver): kill method
 }
 
 uint32_t TerrainDescription::get_texture() const {
@@ -77,9 +82,7 @@ const std::string& TerrainDescription::descname() const {
 }
 
 int32_t TerrainDescription::resource_value(const Resource_Index resource) const {
-	return resource == get_default_resource() or is_resource_valid(resource) ?
-	          (get_is() & TERRAIN_UNPASSABLE ? 8 : 1) :
-	          -1;
+	return is_resource_valid(resource) ? (get_is() & TERRAIN_UNPASSABLE ? 8 : 1) : -1;
 }
 
 Resource_Index TerrainDescription::get_valid_resource(uint8_t index) const {

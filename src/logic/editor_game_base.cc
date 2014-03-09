@@ -291,8 +291,6 @@ void Editor_Game_Base::load_graphics(UI::ProgressWindow & loader_ui)
 	loader_ui.step(_("Loading world data"));
 	g_gr->flush_animations();
 
-	g_gr->set_world(map_->get_world_name());
-
 	container_iterate_const(Tribe_Vector, tribes_, i) {
 		loader_ui.stepf(_("Loading tribes"));
 		(*i.current)->load_graphics();

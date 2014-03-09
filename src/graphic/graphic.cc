@@ -595,6 +595,10 @@ void Graphic::load_animations() {
 	assert(m_animations.empty());
 
 	m_animations.reserve(g_anim.get_nranimations());
+
+	// NOCOM(#sirver): this must now be handled based on textures under the road or so.
+	pic_road_normal_.reset(image_loader_->load("world/greenland_pics/roadt_normal.png"));
+	pic_road_busy_.reset(image_loader_->load("world/greenland_pics/roadt_busy.png"));
 }
 
 void Graphic::ensure_animation_loaded(uint32_t anim) {
@@ -692,25 +696,9 @@ AnimationGfx * Graphic::get_animation(uint32_t anim)
 Texture * Graphic::get_maptexture_data(uint32_t id)
 {
 	--id; // ID 1 is at m_maptextures[0]
-	if (id < m_maptextures.size())
-		return m_maptextures[id];
-	else
-		return nullptr;
-}
 
-
-/**
- * Sets the name of the current world and loads the fitting road and edge textures
- */
-// NOCOM(#sirver): remove this method. The world provides them.
-void Graphic::set_world(string worldname) {
-	char buf[255];
-
-	// Load the road textures
-	snprintf(buf, sizeof(buf), "worlds/%s/pics/roadt_normal.png", worldname.c_str());
-	pic_road_normal_.reset(image_loader_->load(buf));
-	snprintf(buf, sizeof(buf), "worlds/%s/pics/roadt_busy.png", worldname.c_str());
-	pic_road_busy_.reset(image_loader_->load(buf));
+	assert(id < m_maptextures.size());
+	return m_maptextures[id];
 }
 
 /**

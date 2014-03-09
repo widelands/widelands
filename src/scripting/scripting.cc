@@ -105,7 +105,6 @@ void setup_for_editor_and_game(lua_State* L, Widelands::Editor_Game_Base * g) {
 
 // Runs the 'content' as a lua script identified by 'identifier' in 'L'.
 std::unique_ptr<LuaTable > run_string_as_script(lua_State* L, const std::string& identifier, const std::string& content) {
-	log("Running script %s\n", identifier.c_str());
 	check_return_value_for_errors(
 	   L,
 	   luaL_loadbuffer(L, content.c_str(), content.size(), identifier.c_str()) ||
