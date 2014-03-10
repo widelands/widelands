@@ -2,21 +2,22 @@
 # Copyright (c) 2012 Rosetta Contributors and Canonical Ltd 2012
 # This file is distributed under the same license as the widelands package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2012.
-#
+# GunChleoc <fios@foramnagaidhlig.net>, 2014.
 msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-03-06 21:20+0000\n"
-"PO-Revision-Date: 2012-11-17 03:37+0000\n"
-"Last-Translator: Ivan Camilo Quintero Santacruz <Unknown>\n"
-"Language-Team: Esperanto <eo@li.org>\n"
+"PO-Revision-Date: 2014-03-09 07:55+0000\n"
+"Last-Translator: GunChleoc <Unknown>\n"
+"Language-Team: Widelands fixxer upper\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-03-07 05:42+0000\n"
+"X-Launchpad-Export-Date: 2014-03-10 05:32+0000\n"
 "X-Generator: Launchpad (build 16948)\n"
+"Language: eo\n"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:15
 msgid "Nice And Easy Does It All the Time"
@@ -336,6 +337,9 @@ msgid ""
 "medium houses and big houses. But not every field can hold everything. The "
 "build space symbols ease recognition:"
 msgstr ""
+"Vi eblas konstrui kvar aferojn ĉe la kampoj en Widelands: Flagoj, etaj "
+"domoj, mezaj domoj kaj grandaj domoj. Sed ne ĉiu kampo subtenas ĉiajn "
+"konstruaĵojn. La helpo pri konstruado faciligas la esploradon:"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:233
 msgid "Everything can be built on the green house symbol."
@@ -569,6 +573,8 @@ msgid ""
 "Archive all messages that you currently have in your inbox, including this "
 "one."
 msgstr ""
+"Arkivu ĉiujn mesaĝojn, eĉ ĉi tiun, kiu nun vi havas en vian\n"
+"enirkeston."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:381
 msgid "Archive all messages in your inbox"
@@ -620,7 +626,7 @@ msgstr "Fermu la fenestron de mesaĝoj"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:408
 msgid "Close the Messages Window"
-msgstr ""
+msgstr "Fermu la fenestron de mesaĝoj"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:409
 msgid ""
@@ -628,10 +634,12 @@ msgid ""
 "windows can also be toggled with the buttons at the very bottom of the "
 "screen."
 msgstr ""
+"Ĉiu fenestro en Widelands estas fermebla per dekstra klakado sur ĝi. Kelkaj "
+"fenestroj ankaŭ estas aktivataj de la butonoj el la suba parto de la ekrano."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:412
 msgid "Close the messages window now by right-clicking into it."
-msgstr ""
+msgstr "Fermu la fenestron de mesaĝoj nun per dekstra klakado sur ĝi."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:422
 msgid ""
@@ -643,7 +651,7 @@ msgstr ""
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:431
 msgid "Message Arrived!"
-msgstr ""
+msgstr "Masaĝo alvenis!"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:433
 msgid ""
@@ -651,10 +659,13 @@ msgid ""
 "screen has changed appearance? You can burn this quarry down now as it is no "
 "longer of any use and just blocking space."
 msgstr ""
+"Oni sendis mesaĝon al vi. Ĉu vi vidas kiel la butono en la suba parto de la "
+"ekrano ŝanĝis ĝian aspekton? Vi povas detrui nun ĉi tiun ŝtonminon ĉar ĝi "
+"estas ne plu uzebla kaj nur okupas spacon."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:436
 msgid "To do that, click on the quarry and select the destroy button."
-msgstr ""
+msgstr "Por fari tion, klaku sur la ŝtonmino kaj elektu la butonon detrui."
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:441
 msgid "Expanding Your Territory!"
@@ -1043,7 +1054,7 @@ msgstr "Venku la malamikan tribon"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:657
 msgid "Defeat Your Enemy"
-msgstr ""
+msgstr "Venku vian malamikon"
 
 #: ../../campaigns/tutorial01.wmf/scripting/texts.lua:658
 msgid "Defeat the nearby enemy."

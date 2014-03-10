@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-03-06 22:20+0100\n"
-"PO-Revision-Date: 2014-03-08 13:19+0000\n"
+"PO-Revision-Date: 2014-03-09 18:43+0000\n"
 "Last-Translator: Hans Joachim Desserud <Unknown>\n"
 "Language-Team: Norwegian Bokmal <nb@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-03-09 05:39+0000\n"
+"X-Launchpad-Export-Date: 2014-03-10 05:32+0000\n"
 "X-Generator: Launchpad (build 16948)\n"
 
 #: ../../src/ai/defaultai.h:84
@@ -57,7 +57,7 @@ msgstr "Minikart"
 #: ../../src/editor/editorinteractive.cc:77
 #: ../../src/wui/interactive_player.cc:122
 msgid "Show Building Spaces (on/off)"
-msgstr ""
+msgstr "Viser byggehjelp (på/av)"
 
 #: ../../src/editor/editorinteractive.cc:80
 #: ../../src/ui_fsmenu/launchMPG.cc:162
@@ -111,7 +111,7 @@ msgstr "Ulagret kart"
 
 #: ../../src/editor/editorinteractive.cc:253
 msgid "The Map has not been saved, do you really want to quit?"
-msgstr ""
+msgstr "Kartet har ikke lagret. Vil du virkelig avslutte?"
 
 #: ../../src/editor/editorinteractive.cc:597
 #: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:179
@@ -132,7 +132,7 @@ msgstr "Ukjent"
 
 #: ../../src/editor/tools/editor_info_tool.cc:43
 msgid "Field Information"
-msgstr ""
+msgstr "Feltinformasjon"
 
 #: ../../src/editor/tools/editor_info_tool.cc:52
 msgid "Node:"
@@ -155,17 +155,17 @@ msgstr "Høyde: %u"
 #. * TRANSLATORS: This is part of a list, e.g. Caps: medium flag walk
 #: ../../src/editor/tools/editor_info_tool.cc:65
 msgid " small"
-msgstr ""
+msgstr " liten"
 
 #. * TRANSLATORS: This is part of a list, e.g. Caps: medium flag walk
 #: ../../src/editor/tools/editor_info_tool.cc:67
 msgid " medium"
-msgstr ""
+msgstr " mellomstor"
 
 #. * TRANSLATORS: This is part of a list, e.g. Caps: medium flag walk
 #: ../../src/editor/tools/editor_info_tool.cc:69
 msgid " big"
-msgstr ""
+msgstr " stor"
 
 #. * TRANSLATORS: This is part of a list, e.g. Caps: medium flag walk
 #: ../../src/editor/tools/editor_info_tool.cc:73
@@ -242,12 +242,12 @@ msgstr "Ressurser:"
 #: ../../src/editor/tools/editor_info_tool.cc:114
 #, c-format
 msgid "Resource name: %s"
-msgstr ""
+msgstr "Navn på ressurs: %s"
 
 #: ../../src/editor/tools/editor_info_tool.cc:116
 #, c-format
 msgid "Resource amount: %i"
-msgstr ""
+msgstr "Mengde av ressurs: %i"
 
 #: ../../src/editor/tools/editor_info_tool.cc:120
 msgid "No resources"
@@ -534,6 +534,10 @@ msgid ""
 "\n"
 "Reason given:\n"
 msgstr ""
+"Feil ved lagring av kart!\n"
+"Lagret kartfil kan være ødelagt!\n"
+"\n"
+"Oppgitt grunn:\n"
 
 #: ../../src/editor/ui_menus/editor_main_menu_save_map_make_directory.cc:39
 msgid "Enter Directory Name: "
@@ -571,6 +575,8 @@ msgid ""
 "Cannot remove player. It is referenced someplace. Remove all buildings and "
 "bobs that depend on this player and try again."
 msgstr ""
+"Kan ikke fjerne spiller. Spilleren er fortsatt referert til et sted. Fjern "
+"alle bygninger og objekter som tilhører denne spilleren og prøv på nytt."
 
 #: ../../src/editor/ui_menus/editor_player_menu_allowed_buildings_menu.cc:57
 msgid "Allowed Buildings"
@@ -599,7 +605,7 @@ msgstr "Høyde Verktøy valg"
 #: ../../src/editor/ui_menus/editor_tool_change_height_options_menu.cc:44
 #: ../../src/editor/ui_menus/editor_tool_change_resources_options_menu.cc:49
 msgid "Increase/Decrease Value"
-msgstr ""
+msgstr "Øk/Senk verdi"
 
 #: ../../src/editor/ui_menus/editor_tool_change_height_options_menu.cc:80
 #: ../../src/editor/ui_menus/editor_tool_change_resources_options_menu.cc:80
@@ -639,7 +645,7 @@ msgstr "Objekter"
 
 #: ../../src/editor/ui_menus/editor_tool_menu.cc:71
 msgid "Set port space"
-msgstr ""
+msgstr "Lag havneområde"
 
 #: ../../src/editor/ui_menus/editor_tool_noise_height_options_menu.cc:42
 msgid "Noise Height Options"
@@ -725,7 +731,7 @@ msgstr "Stor"
 #: ../../src/logic/constructionsite.cc:92
 #, c-format
 msgid "%1$i%% built"
-msgstr ""
+msgstr "%1$i%% bygget"
 
 #: ../../src/logic/dismantlesite.cc:100
 #, c-format
@@ -791,6 +797,9 @@ msgid ""
 "You can manually add a starting position with the Widelands Editor to fix "
 "this problem."
 msgstr ""
+"Widelands kunne ikke starte spillet, fordi det ikke er noen startposisjon "
+"for spiller %u.\n"
+"Du kan legge til en startposisjon i editoren manuelt for å fikse dette."
 
 #: ../../src/logic/map.cc:365
 msgid "Player 1"
@@ -848,7 +857,7 @@ msgstr ""
 #: ../../src/logic/production_program.cc:155
 #, c-format
 msgid "not %s"
-msgstr ""
+msgstr "ikke %s"
 
 #. * TRANSLATORS: e.g. "economy needs water" Context: "and/or (not) economy needs %s"
 #. * TRANSLATORS: e.g. "economy needs worker" Context: "and/or (not) economy needs %s"
@@ -856,7 +865,7 @@ msgstr ""
 #: ../../src/logic/production_program.cc:200
 #, c-format
 msgid "economy needs %s"
-msgstr ""
+msgstr "økonomi trenger %s"
 
 #. * TRANSLATORS: Adds a ware to list of wares in "Failed/Skipped ..." messages.
 #. * TRANSLATORS: e.g. "Failed work because: water, wheat (2) are missing"
@@ -865,7 +874,7 @@ msgstr ""
 #: ../../src/logic/production_program.cc:866
 #, c-format
 msgid "%1$s %2$s"
-msgstr ""
+msgstr "%1$s %2$s"
 
 #. * TRANSLATORS: Separator for list of wares in "Failed/Skipped ..." messages.
 #: ../../src/logic/production_program.cc:236
@@ -879,13 +888,13 @@ msgstr ""
 #: ../../src/logic/production_program.cc:855
 #, c-format
 msgid "%1$s (%2$i)"
-msgstr ""
+msgstr "%1$s (%2$i)"
 
 #. * TRANSLATORS: %s is a list of wares
 #: ../../src/logic/production_program.cc:244
 #, c-format
 msgid "site has%s"
-msgstr ""
+msgstr "sted har%s"
 
 #: ../../src/logic/production_program.cc:260
 msgid "workers need experience"
@@ -895,13 +904,13 @@ msgstr "arbeidere trenger erfaring"
 #: ../../src/logic/production_program.cc:427
 #, c-format
 msgid "Failed %s"
-msgstr ""
+msgstr "Mislykket %s"
 
 #. * TRANSLATORS: "Completed %s because (not): %s {and/or %s}"
 #: ../../src/logic/production_program.cc:429
 #, c-format
 msgid "Completed %s"
-msgstr ""
+msgstr "Fullførte %s"
 
 #. * TRANSLATORS: "Skipped %s because (not): %s {and/or %s}"
 #: ../../src/logic/production_program.cc:431
@@ -919,7 +928,7 @@ msgstr "%s og "
 #: ../../src/logic/production_program.cc:451
 #, c-format
 msgid "%1$s because: %2$s"
-msgstr ""
+msgstr "%1$s fordi: %2$s"
 
 #. * TRANSLATORS: "Failed/Completed/Skipped %s because not: %s {or %s}"
 #: ../../src/logic/production_program.cc:464
@@ -931,18 +940,18 @@ msgstr "%s eller "
 #: ../../src/logic/production_program.cc:468
 #, c-format
 msgid "%1$s because not: %2$s"
-msgstr ""
+msgstr "%1$s fordi ikke: %2$s"
 
 #. * TRANSLATORS: e.g. "Failed work because: water, wheat (2) are missing"
 #: ../../src/logic/production_program.cc:832
 #, c-format
 msgid "Failed %s because:"
-msgstr ""
+msgstr "Mislykket %s fordi:"
 
 #: ../../src/logic/production_program.cc:862
 #, c-format
 msgid "%s and"
-msgstr ""
+msgstr "%s og"
 
 #: ../../src/logic/production_program.cc:867
 msgid " is missing"
@@ -969,18 +978,18 @@ msgstr "Produserte %s"
 #: ../../src/logic/production_program.cc:1066
 #, c-format
 msgid "Recruited %s?"
-msgstr ""
+msgstr "Rekruttert %s?"
 
 #. * TRANSLATORS: %1$s = name, %2$s = production program, %3$s = resource
 #: ../../src/logic/production_program.cc:1123
 #, c-format
 msgid "%1$s %2$s mine %3$s"
-msgstr ""
+msgstr "%1$s %2$s graver %3$s"
 
 #: ../../src/logic/production_program.cc:1236
 #, c-format
 msgid "Can’t find any more resources!"
-msgstr ""
+msgstr "Kan ikke finne flere ressurser!"
 
 #: ../../src/logic/production_program.cc:1257
 msgid "Main Vein Exhausted"
@@ -1054,7 +1063,7 @@ msgstr "Et ekspedisjonsskip avventer dine ordre."
 #. * TRANSLATORS this is followed by "immovable" in the source string
 #: ../../src/logic/soldier.cc:1561 ../../src/logic/soldier.cc:1567
 msgid "no"
-msgstr ""
+msgstr "ingen"
 
 #: ../../src/logic/soldier.cc:1574 ../../src/logic/soldier.cc:1583
 msgid "Logic error"
@@ -1083,15 +1092,15 @@ msgstr ""
 
 #: ../../src/logic/worker.cc:606
 msgid "Out of Resources"
-msgstr ""
+msgstr "Tom for ressurser"
 
 #: ../../src/logic/worker.cc:607
 msgid "Out of Fish"
-msgstr ""
+msgstr "Tom for fisk"
 
 #: ../../src/logic/worker.cc:608
 msgid "Out of Stone"
-msgstr ""
+msgstr "Tom for stein"
 
 #: ../../src/logic/worker.cc:614
 #, c-format
@@ -1099,6 +1108,7 @@ msgid ""
 "The worker of this building cannot find any more resources of the following "
 "type: %s"
 msgstr ""
+"Arbeideren i denne bygningen kan ikke finne mer av følgende ressurs: %s"
 
 #: ../../src/logic/worker.cc:960
 msgid "A geologist found resources."
@@ -1666,7 +1676,7 @@ msgstr "Klient sendte uventet synkroniseringsrapport."
 
 #: ../../src/network/network_gaming_messages.cc:152
 msgid "Client requests file although none is available to send."
-msgstr ""
+msgstr "Klient etterspør en fil selv om ingen har mulighet til å sende."
 
 #: ../../src/network/network_gaming_messages.cc:153
 msgid "Client requests file part that does not exist."
@@ -1695,22 +1705,22 @@ msgstr "Spillet ble lagret som %s."
 #: ../../src/network/network_gaming_messages.cc:159
 #, c-format
 msgid "Started to send file %1$s to %2$s!"
-msgstr ""
+msgstr "Startet overføring av fil %1$s til %2$s!"
 
 #: ../../src/network/network_gaming_messages.cc:160
 #, c-format
 msgid "Completed transfer of file %1$s to %2$s"
-msgstr ""
+msgstr "Fullførte overføring av fil %1$s til %2$s"
 
 #: ../../src/network/network_gaming_messages.cc:161
 #, c-format
 msgid "Sending part %1$s of file %2$s to %3$s"
-msgstr ""
+msgstr "Sender del %1$s av fil %2$s til %3$s"
 
 #: ../../src/network/network_gaming_messages.cc:162
 #, c-format
 msgid "The player ‘%s’ was defeated and became a spectator."
-msgstr ""
+msgstr "Spilleren «%s» ble beseiret og ble en tilskuer."
 
 #: ../../src/network/network_gaming_messages.cc:163
 #, c-format
@@ -1760,12 +1770,12 @@ msgstr "Spill lagret"
 #: ../../src/scripting/lua_game.cc:1089
 #, c-format
 msgid "%1$s (achieved %2$s)"
-msgstr ""
+msgstr "%1$s (oppnådd %2$s)"
 
 #: ../../src/ui_basic/helpwindow.cc:47 ../../src/ui_basic/helpwindow.cc:191
 #, c-format
 msgid "Help: %s"
-msgstr ""
+msgstr "Hjelp: %s"
 
 #: ../../src/ui_basic/messagebox.cc:99
 msgid "Yes"
@@ -1907,10 +1917,13 @@ msgid ""
 "There seems to be a network problem, either on your side or on the side\n"
 "of the server.\n"
 msgstr ""
+"Widelands klarte ikke finne IP-adressen til tjeneren i tide.\n"
+"Det ser ut til å være et nettverksproblem, enten på din siden eller\n"
+"med tjeneren.\n"
 
 #: ../../src/ui_fsmenu/internet_lobby.cc:420
 msgid "Widelands was unable to connect to the host."
-msgstr ""
+msgstr "Widelands kunne ikke koble til vert."
 
 #: ../../src/ui_fsmenu/intro.cc:32
 msgid "Press ESC or click to continue ..."
@@ -2019,6 +2032,8 @@ msgid ""
 "The selected file can not be found. If it is not automatically transferred "
 "to you, please write to the host about this problem."
 msgstr ""
+"Kunne ikke finne den valgte filen. Hvis den ikke blir automatisk oversendt "
+"til deg, vennligst informer verten om problemet."
 
 #: ../../src/ui_fsmenu/launchMPG.cc:483
 #: ../../src/wui/multiplayersetupgroup.cc:120
@@ -2036,11 +2051,11 @@ msgstr "Tilskuer"
 #: ../../src/ui_fsmenu/launchMPG.cc:486
 #, c-format
 msgid "At the moment you are %s"
-msgstr ""
+msgstr "Akkurat nå er du %s"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:487
 msgid "Click on the ‘?’ in the top right corner to get help."
-msgstr ""
+msgstr "Trykk på «?» i det øverste høyre hjørnet for å få hjelp."
 
 #: ../../src/ui_fsmenu/launchMPG.cc:548
 msgid "Saved players are:"
@@ -2065,24 +2080,24 @@ msgstr "Det var en feil!"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:649
 msgid "Map details:"
-msgstr ""
+msgstr "Kart detaljer:"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:650
 #, c-format
 msgid "Size: %1$u x %2$u"
-msgstr ""
+msgstr "Størrelse: %1$u x %2$u"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:651
 #, c-format
 msgid "%u Player"
 msgid_plural "%u Players"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%u Spiller"
+msgstr[1] "%u Spillere"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:652
 #, c-format
 msgid "World: %s"
-msgstr ""
+msgstr "Verden: %s"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:654
 msgid "Scenario mode selected"
@@ -2237,7 +2252,7 @@ msgstr "Slett fil"
 #: ../../src/ui_fsmenu/loadgame.cc:160 ../../src/ui_fsmenu/loadreplay.cc:141
 #, c-format
 msgid "Do you really want to delete %s?"
-msgstr ""
+msgstr "Vil du virkelig %s?"
 
 #: ../../src/ui_fsmenu/loadgame.cc:217
 msgid "Savegame from dedicated server"
@@ -2261,7 +2276,7 @@ msgstr "Enspiller"
 
 #: ../../src/ui_fsmenu/main.cc:50
 msgid "Multiplayer"
-msgstr ""
+msgstr "Flerspiller"
 
 #: ../../src/ui_fsmenu/main.cc:55
 msgid "Watch Replay"
@@ -2351,6 +2366,8 @@ msgid ""
 "This map file is not present in your filesystem. The data shown here was "
 "sent by the server."
 msgstr ""
+"Denne kartfilen finnes ikke i filsystemet ditt. Informasjonen som er vist "
+"her ble sendt av tjeneren."
 
 #: ../../src/ui_fsmenu/multiplayer.cc:41
 msgid "Choose game type"
@@ -2433,8 +2450,8 @@ msgstr "min."
 #: ../../src/ui_fsmenu/options.cc:79
 msgid "day"
 msgid_plural "days"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "dag"
+msgstr[1] "dager"
 
 #: ../../src/ui_fsmenu/options.cc:86
 msgid "General Options"
@@ -2595,6 +2612,9 @@ msgid ""
 "Waited 5 seconds to close audio. There are some problems here, so killing "
 "Widelands. Update your sound driver and/or SDL to fix this problem\n"
 msgstr ""
+"Ventet 5 sekunder på å avslutte lyden. Det er noen problemer her, så "
+"Widelands blir drept. Oppdater lyddriveren din og/eller SDL for å løse "
+"problemet\n"
 
 #: ../../src/wlapplication.cc:1207
 msgid ""
@@ -2602,6 +2622,9 @@ msgid ""
 "Sorry, no double-instance debugging on _WIN32.\n"
 "\n"
 msgstr ""
+"\n"
+"Beklager, ingen feilsøking med to instanser på _WIN32.\n"
+"\n"
 
 #: ../../src/wlapplication.cc:1210
 msgid "--double is disabled. This is not a debug build!"
@@ -2628,12 +2651,16 @@ msgid ""
 " --logfile=FILENAME   Log output to file FILENAME instead of \n"
 "                      terminal output"
 msgstr ""
+" --logfile=FILNAVN   Logger utdata til FILNAVN istedenfor\n"
+"                      terminal-utdata"
 
 #: ../../src/wlapplication.cc:1347
 msgid ""
 " --datadir=DIRNAME    Use specified directory for the widelands\n"
 "                      data files"
 msgstr ""
+" --datadir=MAPPE   bruker oppgitt mappe for Widelands\n"
+"                      datafiler"
 
 #: ../../src/wlapplication.cc:1349
 msgid ""
@@ -2666,10 +2693,12 @@ msgid ""
 " --language=[de_DE|sv_SE|...]\n"
 "                      The locale to use."
 msgstr ""
+" --language=[de_DE|sv_SE|...]\n"
+"                      Hvilken lokale som skal benyttes."
 
 #: ../../src/wlapplication.cc:1361
 msgid " --localedir=DIRNAME  Use DIRNAME as location for the locale"
-msgstr ""
+msgstr " --localedir=MAPPE  Bruk MAPPE som plassering for lokale"
 
 #: ../../src/wlapplication.cc:1362
 msgid ""
@@ -2719,7 +2748,7 @@ msgstr ""
 
 #: ../../src/wlapplication.cc:1378
 msgid " --loadgame=FILENAME  Directly loads the savegame FILENAME."
-msgstr ""
+msgstr " --loadgame=FILNAVN  Laster det lagrede spillet FILNAVN direkte."
 
 #: ../../src/wlapplication.cc:1379
 msgid ""
@@ -2729,7 +2758,7 @@ msgstr ""
 
 #: ../../src/wlapplication.cc:1381
 msgid " --dedicated=FILENAME Starts a dedicated server with FILENAME as map"
-msgstr ""
+msgstr " --dedicated=FILNAVN Starter en dedikert tjener med FILNAVN som kart"
 
 #: ../../src/wlapplication.cc:1382
 msgid ""
@@ -2806,7 +2835,7 @@ msgstr ""
 
 #: ../../src/wlapplication.cc:1416
 msgid " --verbose            Enable verbose debug messages"
-msgstr ""
+msgstr " --verbose            Slå på utdypende feilsøkingsmeldinger"
 
 #: ../../src/wlapplication.cc:1417
 msgid " --help               Show this help"
@@ -2819,6 +2848,10 @@ msgid ""
 "\n"
 "Hope you enjoy this game!"
 msgstr ""
+"Feilrapporter? Forslag til forbedringer? Sjekk ut prosjektets hjemmeside:\n"
+"        https://launchpad.net/widelands\n"
+"\n"
+"Vi håper du liker Widelands!"
 
 #: ../../src/wlapplication.cc:1506
 msgid "Fallback settings in effect"
@@ -2852,6 +2885,11 @@ msgid ""
 "related messages in the standard output (stdout.txt on Windows). You are "
 "using build %1$s (%2$s). "
 msgstr ""
+"\n"
+"\n"
+"Vennligst rapporter dette problemet og hjelp oss å forbedre Widelands. Du "
+"kan finne relaterte meldinger i standard utdata (stdout.txt på Windows). Du "
+"bruker bygg %1$s (%2$s). "
 
 #: ../../src/wlapplication.cc:1599
 msgid ""
@@ -2860,6 +2898,10 @@ msgid ""
 "Widelands attempts to create a savegame when errors occur during the game. "
 "It is often – though not always – possible to load it and continue playing.\n"
 msgstr ""
+"Vennligst legg ved denne informasjonen til rapporten din.\n"
+"\n"
+"Widelands prøver å lagre spillet når feil oppstår under spilling. Det er "
+"ofte – men ikke alltid – mulig å laste det og fortsette å spille.\n"
 
 #: ../../src/wlapplication.cc:1711
 msgid "The address of the game server is invalid"
@@ -2951,19 +2993,19 @@ msgstr "Bygningsstatistikk"
 
 #: ../../src/wui/building_statistics_menu.cc:87
 msgid "Total Productivity:"
-msgstr ""
+msgstr "Total produktivitet:"
 
 #: ../../src/wui/building_statistics_menu.cc:91
 msgid "Owned:"
-msgstr ""
+msgstr "Eid:"
 
 #: ../../src/wui/building_statistics_menu.cc:97
 msgid "Being built:"
-msgstr ""
+msgstr "Bygges:"
 
 #: ../../src/wui/building_statistics_menu.cc:103
 msgid "Jump to unproductive"
-msgstr ""
+msgstr "Hopp til uproduktiv"
 
 #: ../../src/wui/building_statistics_menu.cc:111
 msgid "Size"
@@ -3032,7 +3074,7 @@ msgstr "Gjenvinner:"
 
 #: ../../src/wui/buildingwindow.cc:311 ../../src/wui/buildingwindow.cc:514
 msgid "Hide work area"
-msgstr ""
+msgstr "Skjul arbeidsområde"
 
 #: ../../src/wui/buildingwindow.cc:326
 msgid "Debug"
@@ -3048,7 +3090,7 @@ msgstr "Hjelp"
 
 #: ../../src/wui/buildingwindow.cc:517
 msgid "Show work area"
-msgstr ""
+msgstr "Vis arbeidsområde"
 
 #: ../../src/wui/constructionsitewindow.cc:75
 #: ../../src/wui/dismantlesitewindow.cc:69
@@ -3111,7 +3153,7 @@ msgstr "Send geolog for å utforske området"
 
 #: ../../src/wui/fieldaction.cc:411
 msgid "Place a flag"
-msgstr ""
+msgstr "Plant et flagg"
 
 #: ../../src/wui/fieldaction.cc:418
 msgid "Destroy a road"
@@ -3155,7 +3197,7 @@ msgstr "Bygg gruver"
 
 #: ../../src/wui/fieldaction.cc:602
 msgid "Build flag"
-msgstr ""
+msgstr "Plant flagg"
 
 #: ../../src/wui/fieldaction.cc:606
 msgid "Cancel road"
@@ -3219,6 +3261,10 @@ msgid ""
 "\n"
 "Reason given:\n"
 msgstr ""
+"Feil ved lagring av spill!\n"
+"Lagret spill kan være ødelagt!\n"
+"\n"
+"Oppgitt grunn:\n"
 
 #: ../../src/wui/game_main_menu_save_game.cc:252
 #: ../../src/wui/game_main_menu_save_game.cc:264
@@ -3810,7 +3856,7 @@ msgstr "Forbruk"
 
 #: ../../src/wui/ware_statistics_menu.cc:199
 msgid "Economy Health"
-msgstr ""
+msgstr "Økonomihelse"
 
 #: ../../src/wui/warehousewindow.cc:138
 msgid "Normal policy"

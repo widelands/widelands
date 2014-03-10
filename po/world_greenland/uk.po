@@ -2,20 +2,21 @@
 # Copyright (c) 2010 Rosetta Contributors and Canonical Ltd 2010
 # This file is distributed under the same license as the widelands package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010.
-#
+# GunChleoc <fios@foramnagaidhlig.net>, 2014.
 msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-03-06 21:20+0000\n"
-"PO-Revision-Date: 2010-08-30 23:25+0000\n"
-"Last-Translator: Sergiy Gavrylov <sergiovana@bigmir.net>\n"
-"Language-Team: Ukrainian <uk@li.org>\n"
+"PO-Revision-Date: 2014-03-09 07:54+0000\n"
+"Last-Translator: GunChleoc <Unknown>\n"
+"Language-Team: Widelands fixxer upper\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-03-07 05:41+0000\n"
+"X-Launchpad-Export-Date: 2014-03-10 05:32+0000\n"
 "X-Generator: Launchpad (build 16948)\n"
+"Language: uk\n"
 
 #: ../../worlds/greenland/conf:2
 msgid "The Widelands Development Team"
@@ -104,15 +105,15 @@ msgstr "Осика"
 
 #: ../../worlds/greenland/conf:47
 msgid "Aspen (medium)"
-msgstr ""
+msgstr "Середня осика"
 
 #: ../../worlds/greenland/conf:48
 msgid "Aspen (small)"
-msgstr ""
+msgstr "Мала осика"
 
 #: ../../worlds/greenland/conf:49
 msgid "Aspen (tiny)"
-msgstr ""
+msgstr "Крихітна осика"
 
 #: ../../worlds/greenland/conf:50
 msgid "Oak"
@@ -120,15 +121,15 @@ msgstr "Дуб"
 
 #: ../../worlds/greenland/conf:51
 msgid "Oak (medium)"
-msgstr ""
+msgstr "Середній дуб"
 
 #: ../../worlds/greenland/conf:52
 msgid "Oak (small)"
-msgstr ""
+msgstr "Малий дуб"
 
 #: ../../worlds/greenland/conf:53
 msgid "Oak (tiny)"
-msgstr ""
+msgstr "Крихітний дуб"
 
 #: ../../worlds/greenland/conf:54
 msgid "Spruce"
@@ -136,15 +137,15 @@ msgstr "Ялина"
 
 #: ../../worlds/greenland/conf:55
 msgid "Spruce (medium)"
-msgstr ""
+msgstr "Середня ялина"
 
 #: ../../worlds/greenland/conf:56
 msgid "Spruce (small)"
-msgstr ""
+msgstr "Мала ялина"
 
 #: ../../worlds/greenland/conf:57
 msgid "Spruce (tiny)"
-msgstr ""
+msgstr "Крихітна ялина"
 
 #: ../../worlds/greenland/conf:58
 msgid "Alder"
@@ -152,15 +153,15 @@ msgstr "Вільха"
 
 #: ../../worlds/greenland/conf:59
 msgid "Alder (medium)"
-msgstr ""
+msgstr "Середня вільха"
 
 #: ../../worlds/greenland/conf:60
 msgid "Alder (small)"
-msgstr ""
+msgstr "мала вільха"
 
 #: ../../worlds/greenland/conf:61
 msgid "Alder (tiny)"
-msgstr ""
+msgstr "Крихітна вільха"
 
 #: ../../worlds/greenland/conf:62
 msgid "Birch"
@@ -168,15 +169,15 @@ msgstr "Береза"
 
 #: ../../worlds/greenland/conf:63
 msgid "Birch (medium)"
-msgstr ""
+msgstr "Середня береза"
 
 #: ../../worlds/greenland/conf:64
 msgid "Birch (small)"
-msgstr ""
+msgstr "Мала береза"
 
 #: ../../worlds/greenland/conf:65
 msgid "Birch (tiny)"
-msgstr ""
+msgstr "Крихітна береза"
 
 #: ../../worlds/greenland/conf:66
 msgid "Beech"
@@ -184,15 +185,15 @@ msgstr "Бук"
 
 #: ../../worlds/greenland/conf:67
 msgid "Beech (medium)"
-msgstr ""
+msgstr "Середній бук"
 
 #: ../../worlds/greenland/conf:68
 msgid "Beech (small)"
-msgstr ""
+msgstr "Малий бук"
 
 #: ../../worlds/greenland/conf:69
 msgid "Beech (tiny)"
-msgstr ""
+msgstr "Крихітний бук"
 
 #: ../../worlds/greenland/conf:70
 msgid "Larch"
@@ -200,15 +201,15 @@ msgstr "Листвениця"
 
 #: ../../worlds/greenland/conf:71
 msgid "Larch (medium)"
-msgstr ""
+msgstr "Середня листвениця"
 
 #: ../../worlds/greenland/conf:72
 msgid "Larch (small)"
-msgstr ""
+msgstr "Мала листвениця"
 
 #: ../../worlds/greenland/conf:73
 msgid "Larch (tiny)"
-msgstr ""
+msgstr "Крихітна листвениця"
 
 #: ../../worlds/greenland/conf:74
 msgid "Rowan"
@@ -216,15 +217,15 @@ msgstr "Горобина"
 
 #: ../../worlds/greenland/conf:75
 msgid "Rowan (medium)"
-msgstr ""
+msgstr "Середня горобина"
 
 #: ../../worlds/greenland/conf:76
 msgid "Rowan (small)"
-msgstr ""
+msgstr "Мала горобина"
 
 #: ../../worlds/greenland/conf:77
 msgid "Rowan (tiny)"
-msgstr ""
+msgstr "Крихітна горобина"
 
 #: ../../worlds/greenland/conf:80
 msgid "Badger"
@@ -232,7 +233,7 @@ msgstr "Борсук"
 
 #: ../../worlds/greenland/conf:81
 msgid "Brown Bear"
-msgstr ""
+msgstr "Бурий ведмідь"
 
 #: ../../worlds/greenland/conf:82
 msgid "Bunny"
@@ -317,7 +318,7 @@ msgstr ""
 
 #: ../../worlds/greenland/terrainconf:19
 msgid "Snow"
-msgstr ""
+msgstr "Сніг"
 
 #: ../../worlds/greenland/terrainconf:24
 msgid "Swamp"

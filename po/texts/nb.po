@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-03-06 21:20+0000\n"
-"PO-Revision-Date: 2013-11-24 13:56+0000\n"
+"PO-Revision-Date: 2014-03-09 19:14+0000\n"
 "Last-Translator: Hans Joachim Desserud <Unknown>\n"
 "Language-Team: Norwegian Bokmal <nb@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-03-07 05:33+0000\n"
+"X-Launchpad-Export-Date: 2014-03-10 05:32+0000\n"
 "X-Generator: Launchpad (build 16948)\n"
 
 #: ../../txts/README.lua:7
@@ -120,7 +120,7 @@ msgstr "PAUSE: pauser spillet"
 
 #: ../../txts/README.lua:64
 msgid "SPACE: toggles if building spaces are shown"
-msgstr ""
+msgstr "MELLOMROM: Viser/skjuler byggehjelp"
 
 #: ../../txts/README.lua:65
 msgid "M: toggles minimap"
@@ -128,7 +128,7 @@ msgstr "M: viser/skjuler minikart"
 
 #: ../../txts/README.lua:66
 msgid "N: toggles messages (‘news’)"
-msgstr ""
+msgstr "N: viser/skjuler meldinger (nyheter)"
 
 #: ../../txts/README.lua:67
 msgid "C: toggles census"
@@ -148,7 +148,7 @@ msgstr "O: viser/skjuler mål"
 
 #: ../../txts/README.lua:71
 msgid "F: toggles fullscreen (if supported by the OS)"
-msgstr ""
+msgstr "F: bytter til/fra fullskjerm (hvis støttet av OS)"
 
 #: ../../txts/README.lua:72
 msgid "Home: centers main mapview on starting location"
@@ -234,6 +234,8 @@ msgid ""
 "the revision number if you are running a development version or a daily "
 "build.)"
 msgstr ""
+"- Hvilken versjon av Widelands du kjører (dvs. enten byggnummeret eller\n"
+"revisjonsnummeret hvis du kjører en utviklingsversjon eller et daglig bygg.)"
 
 #: ../../txts/README.lua:106
 msgid ""

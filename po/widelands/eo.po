@@ -2,21 +2,22 @@
 # Copyright (c) 2010 Rosetta Contributors and Canonical Ltd 2010
 # This file is distributed under the same license as the widelands package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010.
-#
+# GunChleoc <fios@foramnagaidhlig.net>, 2014.
 msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-03-06 22:20+0100\n"
-"PO-Revision-Date: 2013-10-26 09:14+0000\n"
-"Last-Translator: LaPingvino <ikojba@gmail.com>\n"
-"Language-Team: Esperanto <eo@li.org>\n"
+"PO-Revision-Date: 2014-03-09 07:57+0000\n"
+"Last-Translator: GunChleoc <Unknown>\n"
+"Language-Team: Widelands fixxer upper\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-03-07 05:38+0000\n"
+"X-Launchpad-Export-Date: 2014-03-10 05:32+0000\n"
 "X-Generator: Launchpad (build 16948)\n"
+"Language: eo\n"
 
 #: ../../src/ai/defaultai.h:84
 msgid "Aggressive"
@@ -41,7 +42,7 @@ msgstr "Menuo"
 #: ../../src/editor/editorinteractive.cc:67
 #: ../../src/editor/ui_menus/editor_tool_menu.cc:46
 msgid "Tools"
-msgstr ""
+msgstr "Iloj"
 
 #: ../../src/editor/editorinteractive.cc:71
 #: ../../src/editor/ui_menus/editor_toolsize_menu.cc:41
@@ -62,15 +63,15 @@ msgstr ""
 #: ../../src/editor/editorinteractive.cc:80
 #: ../../src/ui_fsmenu/launchMPG.cc:162
 msgid "Players"
-msgstr ""
+msgstr "Ludantoj"
 
 #: ../../src/editor/editorinteractive.cc:83
 msgid "Undo"
-msgstr ""
+msgstr "Malfari"
 
 #: ../../src/editor/editorinteractive.cc:86
 msgid "Redo"
-msgstr ""
+msgstr "Refari"
 
 #: ../../src/editor/editorinteractive.cc:171 ../../src/wlapplication.cc:427
 msgid "Unsupported format"
@@ -119,7 +120,7 @@ msgstr ""
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:182
 #: ../../src/logic/map.h:168
 msgid "No Name"
-msgstr ""
+msgstr "Neniu nomo"
 
 #: ../../src/editor/editorinteractive.cc:599
 #: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:180
@@ -132,11 +133,11 @@ msgstr ""
 
 #: ../../src/editor/tools/editor_info_tool.cc:43
 msgid "Field Information"
-msgstr ""
+msgstr "Kampa informo"
 
 #: ../../src/editor/tools/editor_info_tool.cc:52
 msgid "Node:"
-msgstr ""
+msgstr "Nodo:"
 
 #: ../../src/editor/tools/editor_info_tool.cc:54
 #, c-format
@@ -227,7 +228,7 @@ msgstr ""
 #: ../../src/editor/tools/editor_info_tool.cc:137
 #, c-format
 msgid "Name: %s"
-msgstr ""
+msgstr "Nomo: %s"
 
 #: ../../src/editor/tools/editor_info_tool.cc:104
 #, c-format
@@ -237,7 +238,7 @@ msgstr ""
 #: ../../src/editor/tools/editor_info_tool.cc:107
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:251
 msgid "Resources:"
-msgstr ""
+msgstr "Risurcoj:"
 
 #: ../../src/editor/tools/editor_info_tool.cc:114
 #, c-format
@@ -255,7 +256,7 @@ msgstr ""
 
 #: ../../src/editor/tools/editor_info_tool.cc:124
 msgid "Map:"
-msgstr ""
+msgstr "Mapo:"
 
 #: ../../src/editor/tools/editor_info_tool.cc:126
 #, c-format
@@ -265,13 +266,13 @@ msgstr ""
 #: ../../src/editor/tools/editor_info_tool.cc:129
 #, c-format
 msgid "Players: %i"
-msgstr ""
+msgstr "Ludantoj: %i"
 
 #: ../../src/editor/tools/editor_info_tool.cc:132
 #: ../../src/editor/tools/editor_info_tool.cc:138
 #, c-format
 msgid "Author: %s"
-msgstr ""
+msgstr "Aŭtoro: %s"
 
 #: ../../src/editor/tools/editor_info_tool.cc:133
 #: ../../src/editor/tools/editor_info_tool.cc:139
@@ -286,12 +287,12 @@ msgstr ""
 #: ../../src/ui_fsmenu/editor_mapselect.cc:71
 #: ../../src/ui_fsmenu/mapselect.cc:82
 msgid "World:"
-msgstr ""
+msgstr "Mondo:"
 
 #: ../../src/editor/ui_menus/editor_main_menu.cc:51
 #: ../../src/wui/game_main_menu.cc:42
 msgid "Main Menu"
-msgstr ""
+msgstr "Ĉefa menuo"
 
 #: ../../src/editor/ui_menus/editor_main_menu.cc:56
 #: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:46
@@ -360,7 +361,7 @@ msgstr ""
 #: ../../src/ui_fsmenu/loadgame.cc:99 ../../src/ui_fsmenu/loadreplay.cc:83
 #: ../../src/ui_fsmenu/mapselect.cc:88
 msgid "Players:"
-msgstr ""
+msgstr "Ludantoj:"
 
 #: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:106
 #: ../../src/ui_fsmenu/editor_mapselect.cc:81
@@ -424,7 +425,7 @@ msgstr ""
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:431
 #, c-format
 msgid "Width: %u"
-msgstr ""
+msgstr "Larĝo: %u"
 
 #: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:123
 msgid "Create Map"
@@ -483,7 +484,7 @@ msgstr ""
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:451
 #, c-format
 msgid "Players: %u"
-msgstr ""
+msgstr "Ludantoj: %u"
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:340
 msgid "Generate Map"
@@ -508,7 +509,7 @@ msgstr ""
 
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:255
 msgid "directory"
-msgstr ""
+msgstr "dosierujo"
 
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:259
 msgid "Not a map file"
@@ -551,18 +552,18 @@ msgstr ""
 
 #: ../../src/editor/ui_menus/editor_player_menu.cc:72
 msgid "Number of Players"
-msgstr ""
+msgstr "Nombro da ludantoj"
 
 #. * TRANSLATORS: Default player name, e.g. Player 1
 #: ../../src/editor/ui_menus/editor_player_menu.cc:210
 #: ../../src/network/nethost.cc:2078
 #, c-format
 msgid "Player %s"
-msgstr ""
+msgstr "Ludanto %s"
 
 #: ../../src/editor/ui_menus/editor_player_menu.cc:326
 msgid "Error!"
-msgstr ""
+msgstr "Eraro!"
 
 #: ../../src/editor/ui_menus/editor_player_menu.cc:328
 msgid ""
@@ -607,7 +608,7 @@ msgstr ""
 #: ../../src/editor/ui_menus/editor_tool_change_resources_options_menu.cc:45
 #: ../../src/editor/ui_menus/editor_tool_menu.cc:70
 msgid "Resources"
-msgstr ""
+msgstr "Risurcoj"
 
 #: ../../src/editor/ui_menus/editor_tool_change_resources_options_menu.cc:99
 msgid "Current Selection"
@@ -646,12 +647,12 @@ msgstr ""
 #: ../../src/editor/ui_menus/editor_tool_noise_height_options_menu.cc:147
 #, c-format
 msgid "Minimum: %u"
-msgstr ""
+msgstr "Minimumo: %u"
 
 #: ../../src/editor/ui_menus/editor_tool_noise_height_options_menu.cc:149
 #, c-format
 msgid "Maximum: %u"
-msgstr ""
+msgstr "Maksimumo: %u"
 
 #: ../../src/editor/ui_menus/editor_tool_noise_height_options_menu.cc:154
 #, c-format
@@ -678,14 +679,14 @@ msgstr ""
 
 #: ../../src/game_io/game_preload_data_packet.cc:72
 msgid "Endless Game"
-msgstr ""
+msgstr "Senfina ludo"
 
 #: ../../src/game_io/game_preload_data_packet.cc:77
 #: ../../src/logic/game.cc:248 ../../src/logic/game.cc:344
 #: ../../src/ui_fsmenu/launchMPG.cc:288 ../../src/ui_fsmenu/launchSPG.cc:232
 #: ../../src/wui/multiplayersetupgroup.cc:355
 msgid "Scenario"
-msgstr ""
+msgstr "Scenaro"
 
 #: ../../src/io/dedicated_log.cc:66 ../../src/network/internet_gaming.cc:809
 #: ../../src/ui_fsmenu/mapselect.cc:504 ../../src/ui_fsmenu/mapselect.cc:508
@@ -736,7 +737,7 @@ msgstr ""
 
 #: ../../src/logic/game.cc:139
 msgid "Not set"
-msgstr ""
+msgstr "Neagordita"
 
 #: ../../src/logic/game.cc:227
 msgid "Preloading a map"
@@ -792,7 +793,7 @@ msgstr ""
 
 #: ../../src/logic/map.cc:365
 msgid "Player 1"
-msgstr ""
+msgstr "Ludanto 1"
 
 #: ../../src/logic/map.h:170
 msgid "no description defined"
@@ -1140,7 +1141,7 @@ msgstr ""
 
 #: ../../src/network/internet_gaming.cc:303
 msgid "Something went wrong: "
-msgstr ""
+msgstr "Io fuŝis: "
 
 #: ../../src/network/internet_gaming.cc:393
 msgid "Successfully reconnected to the metaserver!"
@@ -1201,7 +1202,7 @@ msgstr ""
 #: ../../src/network/internet_gaming.cc:563
 #, c-format
 msgid "ERROR: %s"
-msgstr ""
+msgstr "ERARO: %s"
 
 #: ../../src/network/internet_gaming.cc:573
 #, c-format
@@ -1492,7 +1493,7 @@ msgstr ""
 #: ../../src/network/nethost.cc:2004
 #, c-format
 msgid "Computer %u"
-msgstr ""
+msgstr "Komputilo %u"
 
 #: ../../src/network/nethost.cc:2070 ../../src/wlapplication.cc:1816
 #: ../../src/wui/game_summary.cc:90
@@ -1523,7 +1524,7 @@ msgstr ""
 
 #: ../../src/network/network_gaming_messages.cc:124
 msgid "Connection was lost."
-msgstr ""
+msgstr "Konekto perdiĝis."
 
 #: ../../src/network/network_gaming_messages.cc:125
 msgid "Server has left the game."
@@ -1558,7 +1559,7 @@ msgstr ""
 #: ../../src/network/network_gaming_messages.cc:132
 #, c-format
 msgid "Something went wrong: %s"
-msgstr ""
+msgstr "Io fuŝis: %s"
 
 #: ../../src/network/network_gaming_messages.cc:133
 #, c-format
@@ -1870,7 +1871,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/internet_lobby.cc:158
 msgid "Game"
-msgstr ""
+msgstr "Ludo"
 
 #: ../../src/ui_fsmenu/internet_lobby.cc:389
 msgid "Connection timed out"
@@ -1898,7 +1899,7 @@ msgstr ""
 #: ../../src/ui_fsmenu/launchMPG.cc:65 ../../src/ui_fsmenu/launchMPG.cc:166
 #: ../../src/ui_fsmenu/netsetup_lan.cc:126 ../../src/wui/minimap.cc:145
 msgid "Map"
-msgstr ""
+msgstr "Mapo"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:65
 msgid "Select a map"
@@ -1914,7 +1915,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/launchMPG.cc:85
 msgid "Cancel selection"
-msgstr ""
+msgstr "Rezigni elektaĵon"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:122
 msgid "Change map or saved game"
@@ -2000,13 +2001,13 @@ msgstr ""
 #: ../../src/wui/multiplayersetupgroup.cc:286
 #, c-format
 msgid "Player %i"
-msgstr ""
+msgstr "Ludanto %i"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:485
 #: ../../src/wui/multiplayersetupgroup.cc:122
 #, c-format
 msgid "Spectator"
-msgstr ""
+msgstr "Spektanto"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:486
 #, c-format
@@ -2024,7 +2025,7 @@ msgstr ""
 #: ../../src/ui_fsmenu/launchMPG.cc:564
 #, c-format
 msgid "Player %u"
-msgstr ""
+msgstr "Ludanto %u"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:568
 msgid "closed"
@@ -2036,7 +2037,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/launchMPG.cc:632
 msgid "There was an error!"
-msgstr ""
+msgstr "Estis eraro!"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:649
 msgid "Map details:"
@@ -2144,7 +2145,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/launchSPG.cc:54
 msgid "Select map"
-msgstr ""
+msgstr "Elekti mapon"
 
 #: ../../src/ui_fsmenu/launchSPG.cc:75
 msgid "Launch Game"
@@ -2161,7 +2162,7 @@ msgstr ""
 #: ../../src/ui_fsmenu/launchSPG.cc:92 ../../src/wui/game_summary.cc:91
 #: ../../src/wui/multiplayersetupgroup.cc:461
 msgid "Team"
-msgstr ""
+msgstr "Teamo"
 
 #: ../../src/ui_fsmenu/launchSPG.cc:96
 msgid "Player’s tribe"
@@ -2205,7 +2206,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/loadgame.cc:159 ../../src/ui_fsmenu/loadreplay.cc:140
 msgid "Delete file"
-msgstr ""
+msgstr "Forigu dosieron"
 
 #: ../../src/ui_fsmenu/loadgame.cc:160 ../../src/ui_fsmenu/loadreplay.cc:141
 #, c-format
@@ -2256,7 +2257,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/main.cc:86
 msgid "Version "
-msgstr ""
+msgstr "Versio "
 
 #: ../../src/ui_fsmenu/main.cc:91
 msgid "by the Widelands Development Team"
@@ -2317,7 +2318,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/mapselect.cc:281
 msgid "(directory)"
-msgstr ""
+msgstr "(dosierujo)"
 
 #: ../../src/ui_fsmenu/mapselect.cc:506
 msgid ""
@@ -2439,7 +2440,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/options.cc:131
 msgid "Language"
-msgstr ""
+msgstr "Lingvo"
 
 #: ../../src/ui_fsmenu/options.cc:142
 msgid "In-game Options"
@@ -2459,7 +2460,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/options.cc:169
 msgid "Snap windows only when overlapping"
-msgstr ""
+msgstr "Kunkapti fenestrojn nur se unu ŝoviĝas super alia"
 
 #: ../../src/ui_fsmenu/options.cc:175
 msgid "Dock windows to edges"
@@ -2486,13 +2487,13 @@ msgstr ""
 #. * TRANSLATORS Options: Remove Replays older than:
 #: ../../src/ui_fsmenu/options.cc:204
 msgid "1 day"
-msgstr ""
+msgstr "1 tago"
 
 #. * TRANSLATORS: Screen resolution, e.g. 800 x 600
 #: ../../src/ui_fsmenu/options.cc:268
 #, c-format
 msgid "%1$i x %2$i"
-msgstr ""
+msgstr "%1$i x %2$i"
 
 #: ../../src/ui_fsmenu/options.cc:288
 msgid "Try system language"
@@ -2544,7 +2545,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/singleplayer.cc:47
 msgid "New Game"
-msgstr ""
+msgstr "Nova ludo"
 
 #: ../../src/ui_fsmenu/singleplayer.cc:52
 msgid "Campaigns"
@@ -2590,33 +2591,43 @@ msgstr ""
 
 #: ../../src/wlapplication.cc:1342
 msgid "Options:"
-msgstr ""
+msgstr "Opcioj:"
 
 #: ../../src/wlapplication.cc:1344
 msgid " --<config-entry-name>=value overwrites any config file setting"
 msgstr ""
+" --<config-entry-name>=valoro anstataûigas ĉiun konfigurdatenaran "
+"konfiguraĵon"
 
 #: ../../src/wlapplication.cc:1345
 msgid ""
 " --logfile=FILENAME   Log output to file FILENAME instead of \n"
 "                      terminal output"
 msgstr ""
+" --logfile=DATENARO-NOMO protokolu eligon al datenaro DATENARNOMO anstataû \n"
+"                      terminaleligado"
 
 #: ../../src/wlapplication.cc:1347
 msgid ""
 " --datadir=DIRNAME    Use specified directory for the widelands\n"
 "                      data files"
 msgstr ""
+" --datadir=DATENARUJO-NOMO uzu precizigitan datenarujon por la \"larĝaj-"
+"teroj\"(widelands)-\n"
+"                      datenoj- datenaroj"
 
 #: ../../src/wlapplication.cc:1349
 msgid ""
 " --homedir=DIRNAME    Use specified directory for widelands config\n"
 "                      files, savegames and replays"
 msgstr ""
+" --homedir=DATENARUJO-NOMO uzu precizigitan datenarujon por la \"larĝaj-"
+"teroj\"(widelands)-\n"
+"                      konfigurdatenaroj, storitaj maĉoj kaj ripetadoj"
 
 #: ../../src/wlapplication.cc:1352
 msgid "                      Default is ~/.widelands"
-msgstr ""
+msgstr "                      defaûlte estas ~/.widelands"
 
 #: ../../src/wlapplication.cc:1354
 msgid ""
@@ -2792,6 +2803,10 @@ msgid ""
 "\n"
 "Hope you enjoy this game!"
 msgstr ""
+"Ĉu cimraportoj? Sugestoj? Rigardu la retejon pri la projekto:\n"
+"        https://launchpad.net/widelands\n"
+"\n"
+"Ni esperas ke al vi ŝatus ĉi tiun ludon!"
 
 #: ../../src/wlapplication.cc:1506
 msgid "Fallback settings in effect"
@@ -2806,7 +2821,7 @@ msgstr ""
 #: ../../src/wlapplication.cc:1579
 #, c-format
 msgid "Warning: %s"
-msgstr ""
+msgstr "Averto: %s"
 
 #: ../../src/wlapplication.cc:1582
 msgid "Game data error"
@@ -3176,12 +3191,12 @@ msgstr ""
 #: ../../src/wui/game_main_menu_save_game.cc:140
 #: ../../src/wui/game_main_menu_save_game.cc:178
 msgid "player"
-msgstr ""
+msgstr "ludanto"
 
 #: ../../src/wui/game_main_menu_save_game.cc:140
 #: ../../src/wui/game_main_menu_save_game.cc:178
 msgid "players"
-msgstr ""
+msgstr "ludantoj"
 
 #: ../../src/wui/game_main_menu_save_game.cc:248
 msgid ""
@@ -3236,11 +3251,11 @@ msgstr ""
 
 #: ../../src/wui/game_message_menu.cc:75
 msgid "Invert"
-msgstr ""
+msgstr "Inversigi"
 
 #: ../../src/wui/game_message_menu.cc:75
 msgid "Invert selection"
-msgstr ""
+msgstr "Inversigi la elekton"
 
 #: ../../src/wui/game_message_menu.cc:85
 #: ../../src/wui/game_message_menu.cc:375
@@ -3286,7 +3301,7 @@ msgstr ""
 
 #: ../../src/wui/game_options_menu.cc:69
 msgid "Authors"
-msgstr ""
+msgstr "Aŭtoroj"
 
 #: ../../src/wui/game_options_menu.cc:76
 #: ../../src/wui/game_options_sound_menu.cc:29
@@ -3315,11 +3330,11 @@ msgstr ""
 
 #: ../../src/wui/game_summary.cc:60
 msgid "Elapsed time:"
-msgstr ""
+msgstr "Pasinta tempo:"
 
 #: ../../src/wui/game_summary.cc:77
 msgid "Continue playing"
-msgstr ""
+msgstr "Daŭrigi ludadon"
 
 #: ../../src/wui/game_summary.cc:83
 msgid "Quit"
@@ -3351,7 +3366,7 @@ msgstr ""
 
 #: ../../src/wui/game_summary.cc:182
 msgid "You lost."
-msgstr ""
+msgstr "Vi malvenkis."
 
 #: ../../src/wui/game_summary.cc:187
 #, c-format
@@ -3421,7 +3436,7 @@ msgstr ""
 #: ../../src/wui/interactive_base.cc:316
 #, c-format
 msgid "%1$u.%2$ux"
-msgstr ""
+msgstr "%1$u.%2$ux"
 
 #: ../../src/wui/interactive_base.cc:319
 msgid "PAUSE"
@@ -3431,7 +3446,7 @@ msgstr ""
 #: ../../src/wui/interactive_base.cc:340
 #, c-format
 msgid "%1$s (%2$s)"
-msgstr ""
+msgstr "%1$s (%2$s)"
 
 #: ../../src/wui/interactive_base.cc:345
 msgid "NO GAME CONTROLLER"
@@ -3445,7 +3460,7 @@ msgstr ""
 #: ../../src/wui/interactive_player.cc:113
 #: ../../src/wui/interactive_spectator.cc:59
 msgid "Statistics"
-msgstr ""
+msgstr "Statistikoj"
 
 #: ../../src/wui/interactive_player.cc:116
 msgid "Objectives"
@@ -3454,7 +3469,7 @@ msgstr ""
 #: ../../src/wui/interactive_player.cc:125
 #: ../../src/wui/interactive_player.cc:288
 msgid "Messages"
-msgstr ""
+msgstr "Mesaĝoj"
 
 #: ../../src/wui/interactive_player.cc:296
 #, c-format
@@ -3473,11 +3488,11 @@ msgstr ""
 
 #: ../../src/wui/login_box.cc:33
 msgid "Nickname:"
-msgstr ""
+msgstr "Kromnomo:"
 
 #: ../../src/wui/login_box.cc:39
 msgid "Password:"
-msgstr ""
+msgstr "Pasvorto:"
 
 #: ../../src/wui/login_box.cc:48
 msgid "WARNING: Password will be shown and saved readable!"
@@ -3517,7 +3532,7 @@ msgstr ""
 
 #: ../../src/wui/login_box.cc:101
 msgid "Please enter your password!"
-msgstr ""
+msgstr "Bonvole enigu vian pasvorton!"
 
 #: ../../src/wui/militarysitewindow.cc:59
 msgid "Soldiers"
@@ -3529,7 +3544,7 @@ msgstr ""
 
 #: ../../src/wui/minimap.cc:165
 msgid "Flags"
-msgstr ""
+msgstr "Flagoj"
 
 #: ../../src/wui/minimap.cc:171
 msgid "Roads"
@@ -3550,7 +3565,7 @@ msgstr ""
 #: ../../src/wui/multiplayersetupgroup.cc:301
 #: ../../src/wui/playerdescrgroup.cc:172
 msgid "Computer"
-msgstr ""
+msgstr "Komputilo"
 
 #. * TRANSLATORS %s = AI type, e.g. "Agressive"
 #: ../../src/wui/multiplayersetupgroup.cc:305

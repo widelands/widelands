@@ -2,20 +2,21 @@
 # Copyright (c) 2010 Rosetta Contributors and Canonical Ltd 2010
 # This file is distributed under the same license as the widelands package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010.
-#
+# GunChleoc <fios@foramnagaidhlig.net>, 2014.
 msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-03-06 21:20+0000\n"
-"PO-Revision-Date: 2010-08-30 23:42+0000\n"
-"Last-Translator: Nasenbaer <Unknown>\n"
-"Language-Team: Ukrainian <uk@li.org>\n"
+"PO-Revision-Date: 2014-03-09 07:54+0000\n"
+"Last-Translator: GunChleoc <Unknown>\n"
+"Language-Team: Widelands fixxer upper\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-03-07 05:42+0000\n"
+"X-Launchpad-Export-Date: 2014-03-10 05:32+0000\n"
 "X-Generator: Launchpad (build 16948)\n"
+"Language: uk\n"
 
 #: ../../worlds/winterland/conf:2
 msgid "The Widelands Development Team"
@@ -105,15 +106,15 @@ msgstr "Осика"
 
 #: ../../worlds/winterland/conf:46
 msgid "Aspen (medium)"
-msgstr ""
+msgstr "Середня осика"
 
 #: ../../worlds/winterland/conf:47
 msgid "Aspen (small)"
-msgstr ""
+msgstr "Мала осика"
 
 #: ../../worlds/winterland/conf:48
 msgid "Aspen (tiny)"
-msgstr ""
+msgstr "Крихітна осика"
 
 #: ../../worlds/winterland/conf:49
 msgid "Oak"
@@ -121,15 +122,15 @@ msgstr "Дуб"
 
 #: ../../worlds/winterland/conf:50
 msgid "Oak (medium)"
-msgstr ""
+msgstr "Середній дуб"
 
 #: ../../worlds/winterland/conf:51
 msgid "Oak (small)"
-msgstr ""
+msgstr "Малий дуб"
 
 #: ../../worlds/winterland/conf:52
 msgid "Oak (tiny)"
-msgstr ""
+msgstr "Крихітний дуб"
 
 #: ../../worlds/winterland/conf:53
 msgid "Spruce"
@@ -137,15 +138,15 @@ msgstr "Ялина"
 
 #: ../../worlds/winterland/conf:54
 msgid "Spruce (medium)"
-msgstr ""
+msgstr "Середня ялина"
 
 #: ../../worlds/winterland/conf:55
 msgid "Spruce (small)"
-msgstr ""
+msgstr "Мала ялина"
 
 #: ../../worlds/winterland/conf:56
 msgid "Spruce (tiny)"
-msgstr ""
+msgstr "Крихітна ялина"
 
 #: ../../worlds/winterland/conf:57
 msgid "Maple"
@@ -153,15 +154,15 @@ msgstr "Клен"
 
 #: ../../worlds/winterland/conf:58
 msgid "Maple (medium)"
-msgstr ""
+msgstr "Середній клен"
 
 #: ../../worlds/winterland/conf:59
 msgid "Maple (small)"
-msgstr ""
+msgstr "Малий клен"
 
 #: ../../worlds/winterland/conf:60
 msgid "Maple (tiny)"
-msgstr ""
+msgstr "Крихітний клен"
 
 #: ../../worlds/winterland/conf:61
 msgid "Birch"
@@ -169,15 +170,15 @@ msgstr "Береза"
 
 #: ../../worlds/winterland/conf:62
 msgid "Birch (medium)"
-msgstr ""
+msgstr "Середня береза"
 
 #: ../../worlds/winterland/conf:63
 msgid "Birch (small)"
-msgstr ""
+msgstr "Мала береза"
 
 #: ../../worlds/winterland/conf:64
 msgid "Birch (tiny)"
-msgstr ""
+msgstr "Крихітна береза"
 
 #: ../../worlds/winterland/conf:65
 msgid "Beech"
@@ -185,15 +186,15 @@ msgstr "Бук"
 
 #: ../../worlds/winterland/conf:66
 msgid "Beech (medium)"
-msgstr ""
+msgstr "Середній бук"
 
 #: ../../worlds/winterland/conf:67
 msgid "Beech (small)"
-msgstr ""
+msgstr "Малий бук"
 
 #: ../../worlds/winterland/conf:68
 msgid "Beech (tiny)"
-msgstr ""
+msgstr "Крихітний бук"
 
 #: ../../worlds/winterland/conf:69
 msgid "Larch"
@@ -201,15 +202,15 @@ msgstr "Листвениця"
 
 #: ../../worlds/winterland/conf:70
 msgid "Larch (medium)"
-msgstr ""
+msgstr "Середня листвениця"
 
 #: ../../worlds/winterland/conf:71
 msgid "Larch (small)"
-msgstr ""
+msgstr "Мала листвениця"
 
 #: ../../worlds/winterland/conf:72
 msgid "Larch (tiny)"
-msgstr ""
+msgstr "Крихітна листвениця"
 
 #: ../../worlds/winterland/conf:73
 msgid "Rowan"
@@ -217,15 +218,15 @@ msgstr "Горобина"
 
 #: ../../worlds/winterland/conf:74
 msgid "Rowan (medium)"
-msgstr ""
+msgstr "Середня горобина"
 
 #: ../../worlds/winterland/conf:75
 msgid "Rowan (small)"
-msgstr ""
+msgstr "Мала горобина"
 
 #: ../../worlds/winterland/conf:76
 msgid "Rowan (tiny)"
-msgstr ""
+msgstr "Крихітна горобина"
 
 #: ../../worlds/winterland/conf:79
 msgid "Badger"

@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-03-06 21:20+0000\n"
-"PO-Revision-Date: 2014-03-08 07:13+0000\n"
+"PO-Revision-Date: 2014-03-09 15:52+0000\n"
 "Last-Translator: GunChleoc <Unknown>\n"
 "Language-Team: Fòram na Gàidhlig http://www.foramnagaidhlig.net\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-03-09 05:39+0000\n"
+"X-Launchpad-Export-Date: 2014-03-10 05:32+0000\n"
 "X-Generator: Launchpad (build 16948)\n"
 "Language: gd\n"
 
@@ -40,11 +40,11 @@ msgstr ""
 
 #: ../../maps/Plateau.wmf/scripting/texts.lua:40
 msgid "Defeat Jomo"
-msgstr "Cuir ruaig air Jomo"
+msgstr "Cuir ruaig air Iòmo"
 
 #: ../../maps/Plateau.wmf/scripting/texts.lua:42
 msgid "Defeat Jomo. He will take care of the soldiers’ food supply."
-msgstr "Cuir ruaig air Erwyn. Bheir e biadh dha na saighdearan."
+msgstr "Cuir ruaig air Iòmo. Bheir e biadh dha na saighdearan."
 
 #: ../../maps/Plateau.wmf/scripting/texts.lua:56
 msgid "New Objectives"
@@ -66,6 +66,13 @@ msgid ""
 "the other warlords has detected us so far, so we should keep quiet and build "
 "up our infrastructure. Soon we will be strong enough to raid their positions."
 msgstr ""
+"Mu dheireadh thall! Tha sinn air a' chiad cheum a ghabhail ach am "
+"faigheamaid buannachd! Chaidh sinn air tìr san eilean toirmisgte a-raoir "
+"agus chuir sinn ruaig air na bha ann de fhreiceadain air ceann iar-thuath an "
+"eilein. Tha mi reusanta cinnteach nach do mhothaich na tighearnan-cogaidh "
+"oirnn fhathast is mar sin bu chòir dhuinn cumail gu socair agus am bun-"
+"structar againn a thogail. Chan fhada gus am bi sinn làidir gu leòr gus "
+"creach a thogail bhuapa."
 
 #: ../../maps/Plateau.wmf/scripting/texts.lua:84
 #: ../../maps/Plateau.wmf/scripting/texts.lua:99
@@ -83,6 +90,10 @@ msgid ""
 "built in a foreign style. It’s quite obvious that this is not barbarian "
 "craft."
 msgstr ""
+"Air na diathan fhèin! Lorg fear dhe na rabhadairean againn caisteal mòr ann "
+"am meadhan an t-seann àrd-chlàir. Feumaidh gu bheil an caisteal sean dha-"
+"rìribh 's tha coltais na stoidhle cèine air. Tha e follaiseach nach e ceàrd "
+"nan tùsanach a thog e."
 
 #: ../../maps/Plateau.wmf/scripting/texts.lua:92
 msgid ""
@@ -91,6 +102,10 @@ msgid ""
 "that mighty building without a bigger fight! However, it is essential that "
 "we capture it. It will be the key to our reign over this island!"
 msgstr ""
+"Tha mi 'n dòchas nach do mhothaich Lanasa – an tighearna-cogaidh a chumas "
+"smachd air a' chaisteal ud – air ar gluasadan fhathast. Dh'fhaodte gun tèid "
+"leinn an togalach mòr ud a ghabhail gun strì ro mhòr! Co-dhiù no co-dheth, "
+"tha e riatanach gun gabh sinn e. Seo na bheir smachd air an eilean dhuinn!"
 
 #: ../../maps/Plateau.wmf/scripting/texts.lua:103
 msgid "Ancient Castle Captured"
@@ -101,6 +116,8 @@ msgid ""
 "Wonderful! Our troops have finally defeated Lanissa and her soldiers. The "
 "ancient castle is ours!"
 msgstr ""
+"Mìorbhaileach! Chuir am feachd againn ruaig air Lanasa 's a cuid "
+"shaighdearan. 'S ann againne a tha an caisteal àrsaidh a-nis!"
 
 #: ../../maps/Plateau.wmf/scripting/texts.lua:105
 msgid ""
@@ -114,6 +131,15 @@ msgid ""
 "infrastructures guarded by Jomo – a younger warlord – and we should take "
 "care of those infrastructures so we can take our cut of the food supply."
 msgstr ""
+"Nach iongantach dè cho fad 's farsaing a chì sinn on tùr as àirde aig a' "
+"chaisteal seo. 'S urrainn dhuinn sùil a chumail air an eilean air fad. Saoil "
+"carson nach fhaca Lanasa gun robh sinn a' tighinn 's nach do rinn i "
+"ullachadh. Co-dhiù no co-dheth, chan fhaigh sinn seo a-mach a-nis. Na tha "
+"cudromach a-nis, 's e na naimhdean a tha rim fàgail fhathast. Lorg sinn "
+"ionadan aig Erwyn gu tuath 's gu h-ear air a' chaisteal. Tha e cliùiteach "
+"mar thighearna-cogaidh làidir agus 's ann aigesan a tha na saighdearan as "
+"treasa gun teagamh. Chunnaic sinn bun-structaran 'gan dìon le Iòmo – sin "
+"tighearna-cogaidh òg – gu deas agus bu chòir dhuinn an gabhail a chum bìdh."
 
 #: ../../maps/Plateau.wmf/scripting/texts.lua:116
 #: ../../maps/Plateau.wmf/scripting/texts.lua:125
@@ -129,16 +155,20 @@ msgid ""
 "Great! Erwyn gave up when he saw his last buildings burning down. That’s one "
 "less strong warlord on this island!"
 msgstr ""
+"Taghta! Ghèill Erwyn nuair a chunnaic e na togalaichean mu dheireadh aire "
+"'nan teine. Fhuair sinn cuidhteas de thighearna-cogaidh làidir eile!"
 
 #: ../../maps/Plateau.wmf/scripting/texts.lua:129
 msgid "Jomo Defeated"
-msgstr "Chuir thu ruaig air Jomo"
+msgstr "Chuir thu ruaig air Iòmo"
 
 #: ../../maps/Plateau.wmf/scripting/texts.lua:130
 msgid ""
 "Great! Jomo gave up when he saw his last buildings burning down. That’s one "
 "less warlord on this island!"
 msgstr ""
+"Taghta! Ghèill Iòmo nuair a chunnaic e na togalaichean mu dheireadh aire "
+"'nan teine. Fhuair sinn cuidhteas de thighearna-cogaidh eile!"
 
 #: ../../maps/Plateau.wmf/scripting/texts.lua:134
 msgid "Last Briefing"

@@ -2,22 +2,23 @@
 # Copyright (c) 2010 Rosetta Contributors and Canonical Ltd 2010
 # This file is distributed under the same license as the widelands package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010.
-#
+# GunChleoc <fios@foramnagaidhlig.net>, 2014.
 msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-03-06 22:20+0100\n"
-"PO-Revision-Date: 2013-01-03 00:12+0000\n"
-"Last-Translator: Nasenbaer <Unknown>\n"
-"Language-Team: Ukrainian <uk@li.org>\n"
+"PO-Revision-Date: 2014-03-09 07:54+0000\n"
+"Last-Translator: GunChleoc <Unknown>\n"
+"Language-Team: Widelands fixxer upper\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2014-03-07 05:40+0000\n"
+"X-Launchpad-Export-Date: 2014-03-10 05:32+0000\n"
 "X-Generator: Launchpad (build 16948)\n"
+"Language: uk\n"
 
 #: ../../src/ai/defaultai.h:84
 msgid "Aggressive"
@@ -47,7 +48,7 @@ msgstr "Сервіс"
 #: ../../src/editor/editorinteractive.cc:71
 #: ../../src/editor/ui_menus/editor_toolsize_menu.cc:41
 msgid "Tool Size"
-msgstr ""
+msgstr "Розмір інструментів"
 
 #: ../../src/editor/editorinteractive.cc:74
 #: ../../src/wui/interactive_player.cc:119
@@ -112,7 +113,7 @@ msgstr ""
 
 #: ../../src/editor/editorinteractive.cc:253
 msgid "The Map has not been saved, do you really want to quit?"
-msgstr ""
+msgstr "Мапа не збережена, Ви впевнені, що хочете вийти?"
 
 #: ../../src/editor/editorinteractive.cc:597
 #: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:179
@@ -137,7 +138,7 @@ msgstr "Інфо про поле"
 
 #: ../../src/editor/tools/editor_info_tool.cc:52
 msgid "Node:"
-msgstr ""
+msgstr "Вузол:"
 
 #: ../../src/editor/tools/editor_info_tool.cc:54
 #, c-format
@@ -221,19 +222,19 @@ msgstr ""
 
 #: ../../src/editor/tools/editor_info_tool.cc:96
 msgid "Terrain:"
-msgstr ""
+msgstr "Місцевість:"
 
 #: ../../src/editor/tools/editor_info_tool.cc:103
 #: ../../src/editor/tools/editor_info_tool.cc:125
 #: ../../src/editor/tools/editor_info_tool.cc:137
 #, c-format
 msgid "Name: %s"
-msgstr ""
+msgstr "Назва: %s"
 
 #: ../../src/editor/tools/editor_info_tool.cc:104
 #, c-format
 msgid "Texture Number: %i"
-msgstr ""
+msgstr "Номер текстури: %i"
 
 #: ../../src/editor/tools/editor_info_tool.cc:107
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:251
@@ -261,24 +262,24 @@ msgstr ""
 #: ../../src/editor/tools/editor_info_tool.cc:126
 #, c-format
 msgid "Size: %1$ix%2$i"
-msgstr ""
+msgstr "Розмір: %1$ix%2$i"
 
 #: ../../src/editor/tools/editor_info_tool.cc:129
 #, c-format
 msgid "Players: %i"
-msgstr ""
+msgstr "Гравці: %i"
 
 #: ../../src/editor/tools/editor_info_tool.cc:132
 #: ../../src/editor/tools/editor_info_tool.cc:138
 #, c-format
 msgid "Author: %s"
-msgstr ""
+msgstr "Автор: %s"
 
 #: ../../src/editor/tools/editor_info_tool.cc:133
 #: ../../src/editor/tools/editor_info_tool.cc:139
 #, c-format
 msgid "Descr: %s"
-msgstr ""
+msgstr "Опис: %s"
 
 #: ../../src/editor/tools/editor_info_tool.cc:136
 #: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:91
@@ -533,6 +534,10 @@ msgid ""
 "\n"
 "Reason given:\n"
 msgstr ""
+"Помилка збереження мапи!\n"
+"Збережена мапа може бути пошкодженою\n"
+"\n"
+"Причина:\n"
 
 #: ../../src/editor/ui_menus/editor_main_menu_save_map_make_directory.cc:39
 msgid "Enter Directory Name: "
@@ -559,7 +564,7 @@ msgstr "Кількість гравців"
 #: ../../src/network/nethost.cc:2078
 #, c-format
 msgid "Player %s"
-msgstr ""
+msgstr "Гравець %s"
 
 #: ../../src/editor/ui_menus/editor_player_menu.cc:326
 msgid "Error!"
@@ -598,7 +603,7 @@ msgstr ""
 #: ../../src/editor/ui_menus/editor_tool_change_height_options_menu.cc:44
 #: ../../src/editor/ui_menus/editor_tool_change_resources_options_menu.cc:49
 msgid "Increase/Decrease Value"
-msgstr ""
+msgstr "Більше/Менше"
 
 #: ../../src/editor/ui_menus/editor_tool_change_height_options_menu.cc:80
 #: ../../src/editor/ui_menus/editor_tool_change_resources_options_menu.cc:80
@@ -675,11 +680,11 @@ msgstr "Поточний:"
 #: ../../src/editor/ui_menus/editor_toolsize_menu.cc:75
 #, c-format
 msgid "Current Size: %u"
-msgstr ""
+msgstr "Поточний розмір: %u"
 
 #: ../../src/game_io/game_preload_data_packet.cc:72
 msgid "Endless Game"
-msgstr ""
+msgstr "Безкінечна гра"
 
 #: ../../src/game_io/game_preload_data_packet.cc:77
 #: ../../src/logic/game.cc:248 ../../src/logic/game.cc:344
@@ -790,6 +795,8 @@ msgid ""
 "You can manually add a starting position with the Widelands Editor to fix "
 "this problem."
 msgstr ""
+"Неможливо розпочати грау, тому, в гравця %u відсутня стартова позиція.\n"
+"Ви можете додати стартову позицію в редакторв Widelands."
 
 #: ../../src/logic/map.cc:365
 msgid "Player 1"
@@ -1083,7 +1090,7 @@ msgstr ""
 
 #: ../../src/logic/worker.cc:606
 msgid "Out of Resources"
-msgstr ""
+msgstr "Вичерпано ресурси"
 
 #: ../../src/logic/worker.cc:607
 msgid "Out of Fish"
@@ -1098,7 +1105,7 @@ msgstr ""
 msgid ""
 "The worker of this building cannot find any more resources of the following "
 "type: %s"
-msgstr ""
+msgstr "Робітник цієї будівлі більше не може знайти ресурсів: %s"
 
 #: ../../src/logic/worker.cc:960
 msgid "A geologist found resources."
@@ -1120,7 +1127,7 @@ msgstr "Невірний світ"
 #: ../../src/map_io/widelands_map_loader.cc:88
 #, c-format
 msgid "The world \"%s\" set by the map does not exist on your filesystem."
-msgstr ""
+msgstr "Карта світу \"%s\" не існує."
 
 #: ../../src/network/internet_gaming.cc:117
 #: ../../src/ui_fsmenu/internet_lobby.cc:419
@@ -1200,7 +1207,7 @@ msgstr ""
 
 #: ../../src/network/internet_gaming.cc:464
 msgid "Invalid message type"
-msgstr ""
+msgstr "Неправильний тип повідомлення"
 
 #: ../../src/network/internet_gaming.cc:549
 msgid "Chat message could not be sent. "
@@ -1209,7 +1216,7 @@ msgstr ""
 #: ../../src/network/internet_gaming.cc:563
 #, c-format
 msgid "ERROR: %s"
-msgstr ""
+msgstr "ПОМИЛКА: %s"
 
 #: ../../src/network/internet_gaming.cc:573
 #, c-format
@@ -1226,7 +1233,7 @@ msgstr ""
 
 #: ../../src/network/internet_gaming.cc:792
 msgid "Conversion error"
-msgstr ""
+msgstr "Помилка перетворення"
 
 #: ../../src/network/internet_gaming.cc:793
 #, c-format
@@ -1249,7 +1256,7 @@ msgstr ""
 
 #: ../../src/network/internet_gaming_messages.cc:45
 msgid "You are already logged in!"
-msgstr ""
+msgstr "Ви вже увійшли до облікового запису!"
 
 #: ../../src/network/internet_gaming_messages.cc:48
 msgid ""
@@ -1503,7 +1510,7 @@ msgstr ""
 #: ../../src/network/nethost.cc:2004
 #, c-format
 msgid "Computer %u"
-msgstr ""
+msgstr "Комп'ютер %u"
 
 #: ../../src/network/nethost.cc:2070 ../../src/wlapplication.cc:1816
 #: ../../src/wui/game_summary.cc:90
@@ -1570,12 +1577,12 @@ msgstr ""
 #: ../../src/network/network_gaming_messages.cc:132
 #, c-format
 msgid "Something went wrong: %s"
-msgstr ""
+msgstr "Щось не так: %s"
 
 #: ../../src/network/network_gaming_messages.cc:133
 #, c-format
 msgid "%1$s has left the game (%2$s)"
-msgstr ""
+msgstr "%1$s покинув гру (%2$s)"
 
 #: ../../src/network/network_gaming_messages.cc:134
 #, c-format
@@ -1669,7 +1676,7 @@ msgstr ""
 #: ../../src/network/network_gaming_messages.cc:156
 #, c-format
 msgid "WARNING: %1$s uses version: %2$s, while Host uses version: %3$s"
-msgstr ""
+msgstr "Увага: %1$s ваша версія: %2$s, хост використовує версію: %3$s"
 
 #: ../../src/network/network_gaming_messages.cc:157
 #, c-format
@@ -1684,12 +1691,12 @@ msgstr ""
 #: ../../src/network/network_gaming_messages.cc:159
 #, c-format
 msgid "Started to send file %1$s to %2$s!"
-msgstr ""
+msgstr "Почато передачу файла %1$s для %2$s!"
 
 #: ../../src/network/network_gaming_messages.cc:160
 #, c-format
 msgid "Completed transfer of file %1$s to %2$s"
-msgstr ""
+msgstr "Передачу файлу %1$s для %2$s завершено"
 
 #: ../../src/network/network_gaming_messages.cc:161
 #, c-format
@@ -1754,7 +1761,7 @@ msgstr ""
 #: ../../src/ui_basic/helpwindow.cc:47 ../../src/ui_basic/helpwindow.cc:191
 #, c-format
 msgid "Help: %s"
-msgstr ""
+msgstr "Довідка: %s"
 
 #: ../../src/ui_basic/messagebox.cc:99
 msgid "Yes"
@@ -1823,7 +1830,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/campaign_select.cc:171
 msgid "[Invalid entry]"
-msgstr ""
+msgstr "[Некоректний елемент]"
 
 #: ../../src/ui_fsmenu/campaign_select.cc:265
 #: ../../src/ui_fsmenu/editor_mapselect.cc:52
@@ -1899,7 +1906,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/internet_lobby.cc:420
 msgid "Widelands was unable to connect to the host."
-msgstr ""
+msgstr "Widelands не вдалось підключитись до хосту."
 
 #: ../../src/ui_fsmenu/intro.cc:32
 msgid "Press ESC or click to continue ..."
@@ -1907,7 +1914,7 @@ msgstr "Натисніть ESC, або кляцніть мишкою для пр
 
 #: ../../src/ui_fsmenu/launchMPG.cc:52
 msgid "Please select"
-msgstr ""
+msgstr "Будь ласка, виберіть"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:65 ../../src/ui_fsmenu/launchMPG.cc:166
 #: ../../src/ui_fsmenu/netsetup_lan.cc:126 ../../src/wui/minimap.cc:145
@@ -1924,7 +1931,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/launchMPG.cc:75
 msgid "Select a saved game"
-msgstr ""
+msgstr "Вибір збереженої гри"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:85
 msgid "Cancel selection"
@@ -1952,7 +1959,7 @@ msgstr "Клієнти"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:170 ../../src/ui_fsmenu/launchSPG.cc:104
 msgid "Type of game"
-msgstr ""
+msgstr "Тип гри"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:216 ../../src/ui_fsmenu/launchSPG.cc:286
 msgid "(no map)"
@@ -2038,7 +2045,7 @@ msgstr ""
 #: ../../src/ui_fsmenu/launchMPG.cc:564
 #, c-format
 msgid "Player %u"
-msgstr ""
+msgstr "Гравець %u"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:568
 msgid "closed"
@@ -2050,7 +2057,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/launchMPG.cc:632
 msgid "There was an error!"
-msgstr ""
+msgstr "Виникла помилка!"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:649
 msgid "Map details:"
@@ -2059,7 +2066,7 @@ msgstr ""
 #: ../../src/ui_fsmenu/launchMPG.cc:650
 #, c-format
 msgid "Size: %1$u x %2$u"
-msgstr ""
+msgstr "Розмір: %1$u x %2$u"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:651
 #, c-format
@@ -2104,7 +2111,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/launchMPG.cc:683
 msgid "Player settings"
-msgstr ""
+msgstr "Параметри програвача"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:686
 msgid ""
@@ -2166,11 +2173,11 @@ msgstr "Запустити гру"
 
 #: ../../src/ui_fsmenu/launchSPG.cc:83
 msgid "Player’s name"
-msgstr ""
+msgstr "Ім'я гравця"
 
 #: ../../src/ui_fsmenu/launchSPG.cc:88
 msgid "Player’s type"
-msgstr ""
+msgstr "Тип гравця"
 
 #: ../../src/ui_fsmenu/launchSPG.cc:92 ../../src/wui/game_summary.cc:91
 #: ../../src/wui/multiplayersetupgroup.cc:461
@@ -2179,11 +2186,11 @@ msgstr "Команда"
 
 #: ../../src/ui_fsmenu/launchSPG.cc:96
 msgid "Player’s tribe"
-msgstr ""
+msgstr "Плем'я гравця"
 
 #: ../../src/ui_fsmenu/launchSPG.cc:100
 msgid "Start type"
-msgstr ""
+msgstr "Тип початку"
 
 #: ../../src/ui_fsmenu/launchSPG.cc:160
 msgid "Switch to position"
@@ -2248,7 +2255,7 @@ msgstr "Один гравець"
 
 #: ../../src/ui_fsmenu/main.cc:50
 msgid "Multiplayer"
-msgstr ""
+msgstr "Декілька гравців"
 
 #: ../../src/ui_fsmenu/main.cc:55
 msgid "Watch Replay"
@@ -2282,7 +2289,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/mapselect.cc:59
 msgid "Load Map as scenario"
-msgstr ""
+msgstr "Завантажити мапу як сценарій"
 
 #. * TRANSLATORS: Column title for number of players in map list
 #: ../../src/ui_fsmenu/mapselect.cc:150
@@ -2465,7 +2472,7 @@ msgstr "Використовувати віконний режим"
 
 #: ../../src/ui_fsmenu/options.cc:155
 msgid "Start building road after placing a flag"
-msgstr ""
+msgstr "Будувати дорогу після розміщення прапорця"
 
 #: ../../src/ui_fsmenu/options.cc:162
 msgid "Show buildings area preview"
@@ -2506,7 +2513,7 @@ msgstr ""
 #: ../../src/ui_fsmenu/options.cc:268
 #, c-format
 msgid "%1$i x %2$i"
-msgstr ""
+msgstr "%1$i x %2$i"
 
 #: ../../src/ui_fsmenu/options.cc:288
 msgid "Try system language"
@@ -2599,69 +2606,87 @@ msgstr "Це Widelands -"
 
 #: ../../src/wlapplication.cc:1341
 msgid "Usage: widelands <option0>=<value0> ... <optionN>=<valueN>"
-msgstr ""
+msgstr "Використання: widelands <опція0>=<значення0> ... <опціяN>=<значеняN>"
 
 #: ../../src/wlapplication.cc:1342
 msgid "Options:"
-msgstr ""
+msgstr "Опції:"
 
 #: ../../src/wlapplication.cc:1344
 msgid " --<config-entry-name>=value overwrites any config file setting"
 msgstr ""
+" --<назва-параметру-налаштування>=значення переписує вказаний параметр в "
+"налаштуваннях"
 
 #: ../../src/wlapplication.cc:1345
 msgid ""
 " --logfile=FILENAME   Log output to file FILENAME instead of \n"
 "                      terminal output"
 msgstr ""
+" --logfile=ІМ'Я_ФАЙЛУ запис логу до вказаного файлу із\n"
+"                      виводу термінала"
 
 #: ../../src/wlapplication.cc:1347
 msgid ""
 " --datadir=DIRNAME    Use specified directory for the widelands\n"
 "                      data files"
 msgstr ""
+" ----datadir=ІМ'Я_ПАПКИ використовувати вказану папку для файлів даних,\n"
+"                      гри widelands"
 
 #: ../../src/wlapplication.cc:1349
 msgid ""
 " --homedir=DIRNAME    Use specified directory for widelands config\n"
 "                      files, savegames and replays"
 msgstr ""
+" --homedir=ІМ'Я_ПАПКИ  використовувати вказану папку для файлів "
+"налаштування\n"
+"                      збурежень, та повторів"
 
 #: ../../src/wlapplication.cc:1352
 msgid "                      Default is ~/.widelands"
-msgstr ""
+msgstr "                      За замовчуванням ~/.widelands"
 
 #: ../../src/wlapplication.cc:1354
 msgid ""
 " --record=FILENAME    Record all events to the given filename for\n"
 "                      later playback"
 msgstr ""
+" --record=ІМ'Я_ФАЙЛУ запис всіх дій до вказаного файлу для\n"
+"                      подальшого перегляду"
 
 #: ../../src/wlapplication.cc:1356
 msgid " --playback=FILENAME  Playback given filename (see --record)"
-msgstr ""
+msgstr " --playback=ІМ'Я_ФАЙЛУ Перегляд вказаного фпйлу (див.--record)"
 
 #: ../../src/wlapplication.cc:1357
 msgid ""
 " --coredump=[yes|no]  Generates a core dump on segfaults instead\n"
 "                      of using the SDL"
 msgstr ""
+" --coredump=[yes|no] збирати дамп ядра при помилках сегментації\n"
+"                      використанням SDL"
 
 #: ../../src/wlapplication.cc:1359
 msgid ""
 " --language=[de_DE|sv_SE|...]\n"
 "                      The locale to use."
 msgstr ""
+" --language=[de_DE|uk_UA|...]\n"
+"                      Використовувана локалізація"
 
 #: ../../src/wlapplication.cc:1361
 msgid " --localedir=DIRNAME  Use DIRNAME as location for the locale"
 msgstr ""
+" --localedir=ІМ'Я_ПАПКИ Використовувати вказану папка з файлами перекладу"
 
 #: ../../src/wlapplication.cc:1362
 msgid ""
 " --remove_syncstreams=[true|false]\n"
 "                      Remove syncstream files on startup"
 msgstr ""
+" --remove_syncstreams=[true|false]\n"
+"                      Видалити файли синхронізації при старті"
 
 #: ../../src/wlapplication.cc:1364
 msgid ""
@@ -2669,26 +2694,29 @@ msgid ""
 "                      Remove replays after this number of days.\n"
 "                      If this is 0, replays are not deleted."
 msgstr ""
+" --remove_replays=[...]\n"
+"                      Видалити повтори через вказану кількість днів.\n"
+"                      Якщо тут 0, то повтори не видаляються"
 
 #: ../../src/wlapplication.cc:1368
 msgid "Sound options:"
-msgstr ""
+msgstr "Параметри звуку:"
 
 #: ../../src/wlapplication.cc:1369
 msgid " --nosound            Starts the game with sound disabled."
-msgstr ""
+msgstr " --nosound            Запуск гри без звуку."
 
 #: ../../src/wlapplication.cc:1370
 msgid " --disable_fx         Disable sound effects."
-msgstr ""
+msgstr " --disable_fx         Вимкнути звукові ефекти."
 
 #: ../../src/wlapplication.cc:1371
 msgid " --disable_music      Disable music."
-msgstr ""
+msgstr " --disable_music      Вимкнути музику."
 
 #: ../../src/wlapplication.cc:1372
 msgid " --nozip              Do not save files as binary zip archives."
-msgstr ""
+msgstr " --nozip              Не зберігати файли в zip архівах."
 
 #: ../../src/wlapplication.cc:1373
 msgid ""
@@ -2696,16 +2724,19 @@ msgid ""
 "                      You can add a =FILENAME to directly load\n"
 "                      the map FILENAME in editor."
 msgstr ""
+" --editor             Запустити редактор Widelands.\n"
+"                      Ви можете додати =ІМ'Я_ФАЙЛУ для відкриття\n"
+"                      файлу ІМ'Я_ФАЙЛУ в редакторі."
 
 #: ../../src/wlapplication.cc:1376
 msgid ""
 " --scenario=FILENAME  Directly starts the map FILENAME as scenario\n"
 "                      map."
-msgstr ""
+msgstr " --scenario=ІМ'Я_ФАЙЛУ  Запустити гру на карті ІМ'Я_ФАЙЛУ"
 
 #: ../../src/wlapplication.cc:1378
 msgid " --loadgame=FILENAME  Directly loads the savegame FILENAME."
-msgstr ""
+msgstr " --loadgame=ІМ'Я_ФАЙЛУ  Завантажити збереження гри ІМ'Я_ФАЙЛУ."
 
 #: ../../src/wlapplication.cc:1379
 msgid ""
@@ -2750,7 +2781,7 @@ msgstr ""
 
 #: ../../src/wlapplication.cc:1393
 msgid "Options for the internal window manager:"
-msgstr ""
+msgstr "Параметри внутрішнього менеджера вікна:"
 
 #: ../../src/wlapplication.cc:1394
 msgid ""
@@ -2759,6 +2790,10 @@ msgid ""
 "                      when the edge of the window comes within\n"
 "                      this distance from the edge of the screen."
 msgstr ""
+" --border_snap_distance=[0 ...]\n"
+"                      Рухати вікно до межі екрану поки\n"
+"                      край вікна не буде на заданій \n"
+"                      відстані від краю екрана."
 
 #: ../../src/wlapplication.cc:1398
 msgid ""
@@ -2767,6 +2802,10 @@ msgid ""
 "                      edge of the screen when the edge of the\n"
 "                      window is next to the edge of the screen."
 msgstr ""
+" --dock_windows_to_edges=[yes|no]\n"
+"                      Прибрати рамку вікна з тієї\n"
+"                      сторони якою вікно торкається\n"
+"                      краю екрана."
 
 #: ../../src/wlapplication.cc:1402
 msgid ""
@@ -2775,6 +2814,10 @@ msgid ""
 "                      the edge of the window comes within this\n"
 "                      distance from the edge of the panel."
 msgstr ""
+" --panel_snap_distance=[0 ...]\n"
+"                      Рухати вікно до краю панелі, поки\n"
+"                      край вікна не буде на заданій\n"
+"                      відстані від краю панелі."
 
 #: ../../src/wlapplication.cc:1406
 msgid ""
@@ -2783,20 +2826,26 @@ msgid ""
 "                      if the window is overlapping with the\n"
 "                      panel."
 msgstr ""
+" --snap_windows_only_when_overlapping=[yes|no]\n"
+"                      Рухати вікно до краю панелі лише\n"
+"                      коли воно перекриває(-ться)\n"
+"                      панель(-лю)."
 
 #: ../../src/wlapplication.cc:1412
 msgid ""
 " --double             Start the game twice (for localhost network\n"
 "                      testing)"
 msgstr ""
+" --double             Запустити дві копії гри (для тестування\n"
+"                      локальної мережі)"
 
 #: ../../src/wlapplication.cc:1416
 msgid " --verbose            Enable verbose debug messages"
-msgstr ""
+msgstr " --verbose            Ввімкнути дедальні повідомлення налагодження"
 
 #: ../../src/wlapplication.cc:1417
 msgid " --help               Show this help"
-msgstr ""
+msgstr " --help               Показати цю довідку"
 
 #: ../../src/wlapplication.cc:1418
 msgid ""
@@ -2805,6 +2854,10 @@ msgid ""
 "\n"
 "Hope you enjoy this game!"
 msgstr ""
+"Маєте повідомлення пр помилки? Пропозиції? Заходьте на сайт:\n"
+"        https://launchpad.net/widelands\n"
+"\n"
+"Маємо надію що гра вам сподобається!"
 
 #: ../../src/wlapplication.cc:1506
 msgid "Fallback settings in effect"
@@ -2819,7 +2872,7 @@ msgstr ""
 #: ../../src/wlapplication.cc:1579
 #, c-format
 msgid "Warning: %s"
-msgstr ""
+msgstr "Попередження: %s"
 
 #: ../../src/wlapplication.cc:1582
 msgid "Game data error"
@@ -2838,6 +2891,11 @@ msgid ""
 "related messages in the standard output (stdout.txt on Windows). You are "
 "using build %1$s (%2$s). "
 msgstr ""
+"\n"
+"\n"
+"Будь ласка повідомте пр цю проблему, це допоможе нам покращити Widelands. "
+"Повідомлення яке стосується даної помилки Ви знайдете в стандартному виводі "
+"(stdout.txt в Windows). Ви використовуєте збірку %1$s (%2$s). "
 
 #: ../../src/wlapplication.cc:1599
 msgid ""
@@ -2846,6 +2904,11 @@ msgid ""
 "Widelands attempts to create a savegame when errors occur during the game. "
 "It is often – though not always – possible to load it and continue playing.\n"
 msgstr ""
+"Будь ласка, додайте цю інформацію до звіту.\n"
+"\n"
+"Widelands намагається створити збереження, при вимкненні помилки під час "
+"гри. В більшості випадків, хоча не завжди, можна завантажити його і "
+"продовжити гру\n"
 
 #: ../../src/wlapplication.cc:1711
 msgid "The address of the game server is invalid"
@@ -2937,11 +3000,11 @@ msgstr "Статистика будівель"
 
 #: ../../src/wui/building_statistics_menu.cc:87
 msgid "Total Productivity:"
-msgstr ""
+msgstr "Загальна продуктивність:"
 
 #: ../../src/wui/building_statistics_menu.cc:91
 msgid "Owned:"
-msgstr ""
+msgstr "Зайнято:"
 
 #: ../../src/wui/building_statistics_menu.cc:97
 msgid "Being built:"
@@ -2949,7 +3012,7 @@ msgstr ""
 
 #: ../../src/wui/building_statistics_menu.cc:103
 msgid "Jump to unproductive"
-msgstr ""
+msgstr "Перейти до безробітного"
 
 #: ../../src/wui/building_statistics_menu.cc:111
 msgid "Size"
@@ -3018,7 +3081,7 @@ msgstr ""
 
 #: ../../src/wui/buildingwindow.cc:311 ../../src/wui/buildingwindow.cc:514
 msgid "Hide work area"
-msgstr ""
+msgstr "Приховати робочу область"
 
 #: ../../src/wui/buildingwindow.cc:326
 msgid "Debug"
@@ -3034,7 +3097,7 @@ msgstr "Допомога"
 
 #: ../../src/wui/buildingwindow.cc:517
 msgid "Show work area"
-msgstr ""
+msgstr "Показати робочу область"
 
 #: ../../src/wui/constructionsitewindow.cc:75
 #: ../../src/wui/dismantlesitewindow.cc:69
@@ -3044,7 +3107,7 @@ msgstr ""
 #: ../../src/wui/encyclopedia_window.cc:66
 #: ../../src/wui/interactive_player.cc:128
 msgid "Tribal Ware Encyclopedia"
-msgstr ""
+msgstr "Енциклопедія товарів поселенців"
 
 #: ../../src/wui/encyclopedia_window.cc:80
 msgid "Consumed ware type(s)"
@@ -3182,7 +3245,7 @@ msgstr "Зберегти гру"
 
 #: ../../src/wui/game_main_menu_save_game.cc:73
 msgid "Game Time:"
-msgstr ""
+msgstr "Час гри:"
 
 #: ../../src/wui/game_main_menu_save_game.cc:79
 msgid "Win condition:"
@@ -3205,6 +3268,10 @@ msgid ""
 "\n"
 "Reason given:\n"
 msgstr ""
+"Помилка збереження гри!\n"
+"Файл збереження мое бути пошкодженим!\n"
+"\n"
+"Причина:\n"
 
 #: ../../src/wui/game_main_menu_save_game.cc:252
 #: ../../src/wui/game_main_menu_save_game.cc:264
@@ -3239,7 +3306,7 @@ msgstr "Заголовок"
 
 #: ../../src/wui/game_message_menu.cc:59
 msgid "Time sent"
-msgstr ""
+msgstr "Час надсилання"
 
 #: ../../src/wui/game_message_menu.cc:66
 msgid "Clear"
@@ -3334,7 +3401,7 @@ msgstr ""
 
 #: ../../src/wui/game_summary.cc:77
 msgid "Continue playing"
-msgstr ""
+msgstr "Продовжити гру"
 
 #: ../../src/wui/game_summary.cc:83
 msgid "Quit"
@@ -3346,7 +3413,7 @@ msgstr ""
 
 #: ../../src/wui/game_summary.cc:93
 msgid "Time"
-msgstr ""
+msgstr "Час"
 
 #: ../../src/wui/game_summary.cc:157
 msgid "Lost"
@@ -3366,7 +3433,7 @@ msgstr ""
 
 #: ../../src/wui/game_summary.cc:182
 msgid "You lost."
-msgstr ""
+msgstr "Ви програли."
 
 #: ../../src/wui/game_summary.cc:187
 #, c-format
@@ -3436,7 +3503,7 @@ msgstr "Військо"
 #: ../../src/wui/interactive_base.cc:316
 #, c-format
 msgid "%1$u.%2$ux"
-msgstr ""
+msgstr "%1$u.%2$ux"
 
 #: ../../src/wui/interactive_base.cc:319
 msgid "PAUSE"
@@ -3446,7 +3513,7 @@ msgstr "ПАУЗА"
 #: ../../src/wui/interactive_base.cc:340
 #, c-format
 msgid "%1$s (%2$s)"
-msgstr ""
+msgstr "%1$s (%2$s)"
 
 #: ../../src/wui/interactive_base.cc:345
 msgid "NO GAME CONTROLLER"
@@ -3630,7 +3697,7 @@ msgstr ""
 
 #: ../../src/wui/plot_area.cc:279
 msgid "game"
-msgstr ""
+msgstr "гра"
 
 #: ../../src/wui/productionsitewindow.cc:81
 #: ../../src/wui/productionsitewindow.cc:107
@@ -3661,7 +3728,7 @@ msgstr "(вільно)"
 
 #: ../../src/wui/shipwindow.cc:91
 msgid "Ship"
-msgstr ""
+msgstr "Корабель"
 
 #: ../../src/wui/shipwindow.cc:116
 msgid "Scout towards the north west"
@@ -3853,4 +3920,4 @@ msgstr "Сліувати"
 
 #: ../../src/wui/watchwindow.cc:117
 msgid "Center the main view on this"
-msgstr ""
+msgstr "Центрувати екран тут"
