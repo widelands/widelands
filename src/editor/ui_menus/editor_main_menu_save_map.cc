@@ -387,7 +387,7 @@ bool Main_Menu_Save_Map::save_map(std::string filename, bool binary) {
 			(boost::format(_("A file with the name ‘%s’ already exists. Overwrite?"))
 				% FileSystem::FS_Filename(filename.c_str())).str();
 		UI::WLMessageBox mbox
-			(&eia(), _("Error Saving Map!!"), s, UI::WLMessageBox::YESNO);
+			(&eia(), _("Error Saving Map!"), s, UI::WLMessageBox::YESNO);
 		if (not mbox.run())
 			return false;
 
@@ -407,7 +407,7 @@ bool Main_Menu_Save_Map::save_map(std::string filename, bool binary) {
 			 "given:\n");
 		s += e.what();
 		UI::WLMessageBox  mbox
-			(&eia(), _("Error Saving Map!!"), s, UI::WLMessageBox::OK);
+			(&eia(), _("Error Saving Map!"), s, UI::WLMessageBox::OK);
 		mbox.run();
 	}
 	die();
