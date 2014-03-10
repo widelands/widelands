@@ -71,8 +71,7 @@ obj_build_Food_infrastructure = {
    body = objective_text(_"Food For Your Miners", 
 [[• ]] .. _([[To produce some sustaining food for our miners, we could build up a tavern. ]] ..
 [[To supply them with some good and strong drinks, we could build up a brewery and a winery.]]) .. "<br>" ..
-[[• ]] .. _([[Of course this means we will need more resources for preparing this food – like fish, meat or bread.]] .. 
-[[To provide these foodstuffs, you would have to build a fisher’s house, a farm, a mill and a bakery.]]) .. "<br>" ..
+[[• ]] .. _([[Of course this means we will need more resources for preparing this food – like fish, meat or bread. To provide these foodstuffs, you would have to build a fisher’s house, a farm, a mill and a bakery.]]) .. "<br>" ..
 [[• ]] .. _[[Maybe you will also need a hunter’s house, a piggery, a vineyard and some wells.]] .. "<br><br>" ..
 [[→ ]] .. _([[It’s up to you what you want to build. But remember – coal and iron ore mines need beer, ]] ..
 [[marble and gold mines need wine and all mines need at least rations, which are produced out of bread OR meat OR fish.]])),
@@ -234,8 +233,7 @@ diary_page_10 = {
    posy=1,
    body= lutius(
 _([[Today is a proud day. We have fought for our new home and risen victorious.]]) .. "<br><br>" ..
-_([[There are still a few barbarians hiding on our island, but I am sure that we will find them soon.]] ..
-[[Every barbarian who doesn’t attack us will be put in a boat with the other peaceful ones, and sent back to their country.]]))
+_([[There are still a few barbarians hiding on our island, but I am sure that we will find them soon. Every barbarian who doesn’t attack us will be put in a boat with the other peaceful ones, and sent back to their country.]]))
 ..  objective_text(_"Victory", 
    _[[You have established a working economy, trained new soldiers and driven the barbarians from the island.]]
 ),
