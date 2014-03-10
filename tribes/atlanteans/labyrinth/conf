@@ -43,16 +43,11 @@ max_level=1
 
 [programs]
 sleep=_Sleep
-upgrade_soldier_defense_0=_Upgrade soldier defense 0
-upgrade_defense_0=_Upgrade soldier defense 0 (only for compatibility with old savegames (build13))
-upgrade_soldier_defense_1=_Upgrade soldier defense 1
-upgrade_defense_1=_Upgrade soldier defense 1 (only for compatibility with old savegames (build13))
-upgrade_soldier_hp_0=_Upgrade soldier health 0
-upgrade_hp_0=_Upgrade soldier health 0 (only for compatibility with old savegames (build13))
-upgrade_soldier_evade_0=_Upgrade soldier evade 0
-upgrade_evade_0=_Upgrade soldier evade 0 (only for compatibility with old savegames (build13))
-upgrade_soldier_evade_1=_Upgrade soldier evade 1
-upgrade_evade_1=_Upgrade soldier evade 1 (only for compatibility with old savegames (build13))
+upgrade_soldier_defense_0=_Upgrade soldier defense from level 0 to level 1
+upgrade_soldier_defense_1=_Upgrade soldier defense from level 1 to level 2
+upgrade_soldier_hp_0=_Upgrade soldier health from level 0 to level 1
+upgrade_soldier_evade_0=_Upgrade soldier evade from level 0 to level 1
+upgrade_soldier_evade_1=_Upgrade soldier evade from level 1 to level 2
 
 [sleep]
 sleep=5000

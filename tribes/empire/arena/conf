@@ -27,8 +27,7 @@ max_level=0
 
 [programs]
 sleep=_Sleep
-upgrade_soldier_evade_0=_Upgrade soldier evade 0
-upgrade_evade_0=_Upgrade soldier evade 0 (only for compatibility with old savegames (build13))
+upgrade_soldier_evade_0=_Upgrade soldier evade from level 0 to level 1
 
 [sleep]
 sleep=5000

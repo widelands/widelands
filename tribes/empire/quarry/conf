@@ -18,9 +18,7 @@ stoneproducer=true
 
 [programs]
 mine_stone=_Mine stone
-stone=_Mine stone (only for compatibility with old savegames (build13))
 mine_marble=_Mine marble
-marble=_Mine marble (only for compatibility with old savegames (build13))
 work=_Work
 
 [mine_stone]

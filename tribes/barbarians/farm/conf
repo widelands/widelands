@@ -19,9 +19,7 @@ farmer=1
 
 [programs]
 plant_wheat=_Plant wheat
-plant=Plant wheat (only for compatibility with old savegames (build13))
 harvest_wheat=_Harvest wheat
-harvest=Harvest wheat (only for compatibility with old savegames (build13))
 work=_Work
 
 [plant_wheat]

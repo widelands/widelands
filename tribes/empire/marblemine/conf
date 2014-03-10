@@ -24,9 +24,7 @@ wine=6
 
 [programs]
 mine_marble=_Mine marble
-prog_marble=_Mine marble (only for compatibility with old savegames (build13))
 mine_stone=_Mine stone
-prog_stone=_Mine stone (only for compatibility with old savegames (build13))
 work=_Work
 
 [mine_marble]
