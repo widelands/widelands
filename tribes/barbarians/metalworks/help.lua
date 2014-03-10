@@ -39,7 +39,7 @@ return {
 		dependencies({"tribes/barbarians/metalworks/menu.png","tribes/barbarians/pick/menu.png","tribes/barbarians/headquarters/menu.png","tribes/barbarians/stonemason/menu.png" },p(_"Stonemason")) ..
 		dependencies({"tribes/barbarians/metalworks/menu.png","tribes/barbarians/scythe/menu.png","tribes/barbarians/headquarters/menu.png","tribes/barbarians/farmer/menu.png" },p(_"Farmer")) ..
 		dependencies({"tribes/barbarians/metalworks/menu.png","tribes/barbarians/shovel/menu.png","tribes/barbarians/headquarters/menu.png","tribes/barbarians/ranger/menu.png" },p(_"Ranger")) ..
-		dependencies({"tribes/barbarians/metalworks/menu.png","tribes/barbarians/shovel/menu.png","tribes/barbarians/headquarters/menu.png","tribes/barbarians/ferner/menu.png" },p(_"Ferner")) ..
+		dependencies({"tribes/barbarians/metalworks/menu.png","tribes/barbarians/shovel/menu.png","tribes/barbarians/headquarters/menu.png","tribes/barbarians/ferner/menu.png" },p(_"Gardener")) ..
 	--Building Section
 		rt(h2(_"Building")) ..
 		text_line(_"Space required:",_"Medium plot","pics/medium.png") ..
