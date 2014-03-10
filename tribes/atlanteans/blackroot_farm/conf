@@ -27,15 +27,7 @@ work=_Work
 sleep=20000
 worker=plant
 
-[plant]
-sleep=20000
-worker=plant
-
 [harvest_blackroot]
-sleep=5000
-worker=harvest
-
-[harvest]
 sleep=5000
 worker=harvest
 

@@ -13,7 +13,7 @@ return {
 		rt("text-align=right",p("font-size=10 font-style=italic", _[[Chief Chat’Karuth in a speech to his army.]])) ..
 	--General Section
 		rt(h2(_"General")) ..
-		text_line(_"Purpose:", _"Trains soldiers in Attack up to level 4, and in Health up to level 2.<br>Equips the soldiers with all necessary weapons and armor parts.") ..
+		text_line(_"Purpose:", _"Trains soldiers in Attack up to level 5, and in Health up to level 3.<br>Equips the soldiers with all necessary weapons and armor parts.") ..
 		rt("<p font-weight=bold font-decoration=underline font-size=12>" .. _"Note:" .. "</p><p font-size=12>" ..
 		   _"Barbarian soldiers cannot be trained in ‘Defense’ and will remain at their initial level."
 		   .. "<br><br></p>") ..

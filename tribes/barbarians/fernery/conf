@@ -32,15 +32,7 @@ harvestflax=replace harvest_reed
 sleep=18000  #orig sleep=20000 but ferner animation was increased by 2sec
 worker=plantreed
 
-[plantreed]
-sleep=18000  #orig sleep=20000 but ferner animation was increased by 2sec
-worker=plantreed
-
 [harvest_reed]
-sleep=5000
-worker=harvestreed
-
-[harvestreed]
 sleep=5000
 worker=harvestreed
 

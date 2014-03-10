@@ -53,21 +53,7 @@ check_soldier=soldier attack 0
 consume=bread smoked_fish,smoked_meat long_trident
 train=soldier attack 0 1
 
-[upgrade_attack_0]
-check_soldier=soldier attack 0
-sleep=30000
-check_soldier=soldier attack 0
-consume=bread smoked_fish,smoked_meat long_trident
-train=soldier attack 0 1
-
 [upgrade_soldier_attack_1]
-check_soldier=soldier attack 1
-sleep=30000
-check_soldier=soldier attack 1
-consume=bread smoked_fish,smoked_meat steel_trident
-train=soldier attack 1 2
-
-[upgrade_attack_1]
 check_soldier=soldier attack 1
 sleep=30000
 check_soldier=soldier attack 1
@@ -81,21 +67,7 @@ check_soldier=soldier attack 2
 consume=bread smoked_fish,smoked_meat double_trident
 train=soldier attack 2 3
 
-[upgrade_attack_2]
-check_soldier=soldier attack 2
-sleep=30000
-check_soldier=soldier attack 2
-consume=bread smoked_fish,smoked_meat double_trident
-train=soldier attack 2 3
-
 [upgrade_soldier_attack_3]
-check_soldier=soldier attack 3
-sleep=30000
-check_soldier=soldier attack 3
-consume=bread smoked_fish,smoked_meat heavy_double_trident
-train=soldier attack 3 4
-
-[upgrade_attack_3]
 check_soldier=soldier attack 3
 sleep=30000
 check_soldier=soldier attack 3

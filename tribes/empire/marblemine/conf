@@ -37,27 +37,7 @@ animate=working 20000
 mine=granit 2 50 5
 produce=marble stone
 
-[prog_marble]
-sleep=20000
-consume=wine ration
-animate=working 20000
-mine=granit 2 50 5
-produce=marble:2
-animate=working 20000
-mine=granit 2 50 5
-produce=marble stone
-
 [mine_stone]
-sleep=20000
-consume=ration wine
-animate=working 20000
-mine=granit 2 50 5
-produce=stone marble
-animate=working 20000
-mine=granit 2 50 5
-produce=stone:2
-
-[prog_stone]
 sleep=20000
 consume=ration wine
 animate=working 20000

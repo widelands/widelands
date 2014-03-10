@@ -28,15 +28,7 @@ work=_Work
 sleep=14000  #orig 20000
 worker=plant
 
-[plant]
-sleep=14000  #orig 20000
-worker=plant
-
 [harvest_wheat]
-sleep=4000  #orig 5000
-worker=harvest
-
-[harvest]
 sleep=4000  #orig 5000
 worker=harvest
 

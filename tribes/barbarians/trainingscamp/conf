@@ -61,21 +61,7 @@ check_soldier=soldier attack 0 # Because the soldier can be expulsed by the play
 consume=sharpaxe fish,meat pittabread
 train=soldier attack 0 1
 
-[upgrade_attack_0]
-check_soldier=soldier attack 0 # Fails when aren't any soldier of level 0 attack
-sleep=30000
-check_soldier=soldier attack 0 # Because the soldier can be expulsed by the player
-consume=sharpaxe fish,meat pittabread
-train=soldier attack 0 1
-
 [upgrade_soldier_attack_1]
-check_soldier=soldier attack 1
-sleep=30000
-check_soldier=soldier attack 1
-consume=broadaxe fish,meat pittabread
-train=soldier attack 1 2
-
-[upgrade_attack_1]
 check_soldier=soldier attack 1
 sleep=30000
 check_soldier=soldier attack 1
@@ -89,21 +75,7 @@ check_soldier=soldier attack 2
 consume=bronzeaxe fish,meat pittabread
 train=soldier attack 2 3
 
-[upgrade_attack_2]
-check_soldier=soldier attack 2
-sleep=30000
-check_soldier=soldier attack 2
-consume=bronzeaxe fish,meat pittabread
-train=soldier attack 2 3
-
 [upgrade_soldier_attack_3]
-check_soldier=soldier attack 3
-sleep=30000
-check_soldier=soldier attack 3
-consume=battleaxe fish,meat:2 pittabread
-train=soldier attack 3 4
-
-[upgrade_attack_3]
 check_soldier=soldier attack 3
 sleep=30000
 check_soldier=soldier attack 3
@@ -117,21 +89,7 @@ check_soldier=soldier attack 4
 consume=warriorsaxe fish,meat pittabread:2
 train=soldier attack 4 5
 
-[upgrade_attack_4]
-check_soldier=soldier attack 4
-sleep=30000
-check_soldier=soldier attack 4
-consume=warriorsaxe fish,meat pittabread:2
-train=soldier attack 4 5
-
 [upgrade_soldier_hp_0]
-check_soldier=soldier hp 0
-sleep=30000
-check_soldier=soldier hp 0
-consume=helm fish,meat,pittabread
-train=soldier hp 0 1
-
-[upgrade_hp_0]
 check_soldier=soldier hp 0
 sleep=30000
 check_soldier=soldier hp 0
@@ -145,21 +103,7 @@ check_soldier=soldier hp 1
 consume=mask fish,meat pittabread
 train=soldier hp 1 2
 
-[upgrade_hp_1]
-check_soldier=soldier hp 1
-sleep=30000
-check_soldier=soldier hp 1
-consume=mask fish,meat pittabread
-train=soldier hp 1 2
-
 [upgrade_soldier_hp_2]
-check_soldier=soldier hp 2
-sleep=30000
-check_soldier=soldier hp 2
-consume=warhelmet fish,meat:2 pittabread
-train=soldier hp 2 3
-
-[upgrade_hp_2]
 check_soldier=soldier hp 2
 sleep=30000
 check_soldier=soldier hp 2

@@ -28,15 +28,7 @@ work=_Work
 sleep=20000
 worker=plantvine
 
-[plantvine]
-sleep=20000
-worker=plantvine
-
 [harvest_vine]
-sleep=5000
-worker=harvestvine
-
-[harvestvine]
 sleep=5000
 worker=harvestvine
 
