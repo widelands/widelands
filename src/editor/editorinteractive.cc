@@ -250,7 +250,7 @@ void Editor_Interactive::exit() {
 		UI::WLMessageBox mmb
 		(this,
 		 _("Unsaved Map"),
-		 _("The Map has not been saved, do you really want to quit?"),
+		 _("The map has not been saved, do you really want to quit?"),
 		 UI::WLMessageBox::YESNO);
 		if (mmb.run() == 0)
 			return;
