@@ -478,19 +478,12 @@ void WLApplication::run()
 
 /**
  * Get an event from the SDL queue, just like SDL_PollEvent.
- * Perform the meat of playback/record stuff when needed.
- *
- * Throttle is a hack to stop record files from getting extremely huge.
- * If it is set to true, we will idle loop if we can't get an SDL_Event
- * returned immediately if we're recording. If there is no user input,
- * the actual mainloop will be throttled to 100fps.
  *
  * \param ev the retrieved event will be put here
- * \param throttle Limit recording to 100fps max (not the event loop itself!)
  *
  * \return true if an event was returned inside ev, false otherwise
  */
-bool WLApplication::poll_event(SDL_Event & ev, bool const throttle) {
+bool WLApplication::poll_event(SDL_Event & ev) {
 	bool haveevent = false;
 
 
@@ -557,7 +550,6 @@ restart:
  */
 void WLApplication::handle_input(InputCallback const * cb)
 {
-	bool gotevents = false;
 	SDL_Event ev; //  Valgrind says:
 	// Conditional jump or move depends on uninitialised value(s)
 	// at 0x407EEDA: (within /usr/lib/libSDL-1.2.so.0.11.0)
@@ -572,14 +564,11 @@ void WLApplication::handle_input(InputCallback const * cb)
 	// by 0x81427A6: main (main.cc:39)
 
 	// We need to empty the SDL message queue always, even in playback mode
-	// Note the even in playback mode part. Is this still needed?
+	// FIXME (REVIEW): Note the even in playback mode part. Is this still needed?
 	// And what about the stacktrace above?
 
 	// Usual event queue
-	while (poll_event(ev, !gotevents)) {
-
-		gotevents = true;
-
+	while (poll_event(ev)) {
 		switch (ev.type) {
 		case SDL_KEYDOWN:
 		case SDL_KEYUP:

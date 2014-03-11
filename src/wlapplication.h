@@ -232,7 +232,7 @@ struct WLApplication {
 protected:
 	WLApplication(int argc, char const * const * argv);
 
-	bool poll_event(SDL_Event &, bool throttle);
+	bool poll_event(SDL_Event &);
 
 	bool init_settings();
 	void init_language();
