@@ -337,7 +337,7 @@ spidercloth_messages = {
       title = _"A Man Comes to Jundlina",
       body = opol(p(_(
 [[May Satul warm you, Jundlina. ]] ..
-[[My Name is Opol, and I am the highest weaver of the guild abandoning Atlantis and Lutas with you. ]] ..
+[[My name is Opol, and I am the highest weaver of the guild abandoning Atlantis and Lutas with you. ]] ..
 [[I come with sad news indeed: we have no more spidercloth. Not a single piece is to be found in our warehouses. ]] ..
 [[Could you not help the weavers’ guild by arranging the building of a weaving-mill and a spider farm? ]] ..
 [[The spiders deliver the finest silk and we will produce the finest spidercloth from it.]])) .. p(_(
