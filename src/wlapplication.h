@@ -38,7 +38,6 @@
 
 
 namespace Widelands {class Game;}
-struct Journal;
 
 ///Thrown if a commandline parameter is faulty
 struct Parameter_error : public std::runtime_error {
@@ -271,8 +270,6 @@ protected:
 	std::string m_logfile;
 
 	GameType m_game_type;
-	///the event recorder object
-	Journal * journal;
 
 	///True if left and right mouse button should be swapped
 	bool  m_mouse_swapped;

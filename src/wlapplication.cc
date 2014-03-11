@@ -48,7 +48,6 @@
 #include "io/dedicated_log.h"
 #include "io/filesystem/disk_filesystem.h"
 #include "io/filesystem/layered_filesystem.h"
-#include "journal.h"
 #include "log.h"
 #include "logic/game.h"
 #include "logic/game_data_error.h"
@@ -248,7 +247,6 @@ WLApplication * WLApplication::get(int const argc, char const * * argv) {
 WLApplication::WLApplication(int const argc, char const * const * const argv) :
 m_commandline          (std::map<std::string, std::string>()),
 m_game_type            (NONE),
-journal                (nullptr),
 m_mouse_swapped        (false),
 m_faking_middle_mouse_button(false),
 m_mouse_position       (0, 0),
@@ -491,78 +489,50 @@ void WLApplication::run()
  * \param throttle Limit recording to 100fps max (not the event loop itself!)
  *
  * \return true if an event was returned inside ev, false otherwise
- *
- * \todo Catch Journalfile_error
  */
 bool WLApplication::poll_event(SDL_Event & ev, bool const throttle) {
 	bool haveevent = false;
 
+
+//FIXME (REVIEW): Can this be removed now? There was a line saying goto restart
+//around the part with lastthrottle. (Though I don't see how it would be called
+//when the lastthrottle variable would always be reinitialized there...?)
 restart:
-	//inject synthesized events into the event queue when playing back
-	if (journal->is_playingback()) {
-		try {
-			haveevent = journal->read_event(ev);
-		} catch (const Journalfile_error & e) {
-			// An error might occur here when playing back a file that
-			// was not finalized due to a crash etc.
-			// Since playbacks are intended precisely for debugging such
-			// crashes, we must ignore the error and continue.
-			log("JOURNAL: read error, continue without playback: %s\n", e.what());
-			journal->stop_playback();
-		}
-	} else {
-		haveevent = SDL_PollEvent(&ev);
 
-		if (haveevent) {
-			// We edit mouse motion events in here, so that
-			// differences caused by GrabInput or mouse speed
-			// settings are invisible to the rest of the code
-			switch (ev.type) {
-			case SDL_MOUSEMOTION:
-				ev.motion.xrel += m_mouse_compensate_warp.x;
-				ev.motion.yrel += m_mouse_compensate_warp.y;
-				m_mouse_compensate_warp = Point(0, 0);
+    haveevent = SDL_PollEvent(&ev);
 
-				if (m_mouse_locked) {
-					warp_mouse(m_mouse_position);
+    if (haveevent) {
+        // We edit mouse motion events in here, so that
+        // differences caused by GrabInput or mouse speed
+        // settings are invisible to the rest of the code
+        switch (ev.type) {
+        case SDL_MOUSEMOTION:
+            ev.motion.xrel += m_mouse_compensate_warp.x;
+            ev.motion.yrel += m_mouse_compensate_warp.y;
+            m_mouse_compensate_warp = Point(0, 0);
 
-					ev.motion.x = m_mouse_position.x;
-					ev.motion.y = m_mouse_position.y;
-				}
+            if (m_mouse_locked) {
+                warp_mouse(m_mouse_position);
 
-				break;
-			case SDL_USEREVENT:
-				if (ev.user.code == CHANGE_MUSIC)
-					g_sound_handler.change_music();
+                ev.motion.x = m_mouse_position.x;
+                ev.motion.y = m_mouse_position.y;
+            }
 
-				break;
-			case SDL_VIDEOEXPOSE:
-				//log ("SDL Video Window expose event: %i\n", ev.expose.type);
-				g_gr->update_fullscreen();
-				break;
-			default:;
-			}
-		}
-	}
+            break;
+        case SDL_USEREVENT:
+            if (ev.user.code == CHANGE_MUSIC)
+                g_sound_handler.change_music();
 
-	// log all events into the journal file
-	if (journal->is_recording()) {
-		if (haveevent)
-			journal->record_event(ev);
-		else if (throttle && journal->is_playingback()) {
-			// Implement the throttle to avoid very quick inner mainloops when
-			// recoding a session
-			static int32_t lastthrottle = 0;
-			int32_t const time = SDL_GetTicks();
+			break;
+        case SDL_VIDEOEXPOSE:
+            //log ("SDL Video Window expose event: %i\n", ev.expose.type);
+            g_gr->update_fullscreen();
+            break;
+        default:;
+        }
+    }
 
-			if (time - lastthrottle < 10)
-				goto restart;
-
-			lastthrottle = time;
-		}
-
-		journal->set_idle_mark();
-	} else if (haveevent) {
+	if (haveevent) {
 		//  Eliminate any unhandled events to make sure that record and playback
 		//  are _really_ the same. Yes I know, it's overly paranoid but hey...
 		switch (ev.type) {
@@ -602,35 +572,13 @@ void WLApplication::handle_input(InputCallback const * cb)
 	// by 0x81427A6: main (main.cc:39)
 
 	// We need to empty the SDL message queue always, even in playback mode
-	// In playback mode, only F10 for premature exiting works
-	if (journal->is_playingback()) {
-		while (SDL_PollEvent(&ev)) {
-			switch (ev.type) {
-			case SDL_KEYDOWN:
-				// get out of here quickly, overriding playback;
-				// since this is the only key event that works, we don't guard
-				// it by requiring Ctrl to be pressed.
-				if (ev.key.keysym.sym == SDLK_F10)
-					m_should_die = true;
-				break;
-			case SDL_QUIT:
-				m_should_die = true;
-				break;
-			default:;
-			}
-		}
-	}
+	// Note the even in playback mode part. Is this still needed?
+	// And what about the stacktrace above?
 
 	// Usual event queue
 	while (poll_event(ev, !gotevents)) {
 
 		gotevents = true;
-
-		// CAREFUL: Record files do not save the entire SDL_Event structure.
-		// Therefore, playbacks are incomplete. When you change the following
-		// code so that it uses previously unused fields in SDL_Event,
-		// please also take a look at Journal::read_event and
-		// Journal::record_event
 
 		switch (ev.type) {
 		case SDL_KEYDOWN:
@@ -747,9 +695,6 @@ void WLApplication::_handle_mousebutton
 int32_t WLApplication::get_time() {
 	uint32_t time = SDL_GetTicks();
 
-	//  might change the time when playing back!
-	journal->timestamp_handler(time);
-
 	return time;
 }
 
@@ -758,21 +703,19 @@ int32_t WLApplication::get_time() {
 /// SDL_WarpMouse() *will* create a mousemotion event, which we do not want. As
 /// a workaround, we store the delta in m_mouse_compensate_warp and use that to
 /// eliminate the motion event in poll_event()
-/// \todo Should this method have to care about playback at all???
+//FIXME (REVIEW): should more of this docstring be updated?
 ///
 /// \param position The new mouse position
 void WLApplication::warp_mouse(const Point position)
 {
 	m_mouse_position = position;
 
-	if (not journal->is_playingback()) { //  don't warp anything during playback
-		Point cur_position;
-		SDL_GetMouseState(&cur_position.x, &cur_position.y);
-		if (cur_position != position) {
-			m_mouse_compensate_warp += cur_position - position;
-			SDL_WarpMouse(position.x, position.y);
-		}
-	}
+    Point cur_position;
+    SDL_GetMouseState(&cur_position.x, &cur_position.y);
+    if (cur_position != position) {
+        m_mouse_compensate_warp += cur_position - position;
+        SDL_WarpMouse(position.x, position.y);
+    }
 }
 
 /**
@@ -786,9 +729,6 @@ void WLApplication::warp_mouse(const Point position)
  */
 void WLApplication::set_input_grab(bool grab)
 {
-	if (journal->is_playingback())
-		return; // ignore in playback mode
-
 	if (grab) {
 		SDL_WM_GrabInput(SDL_GRAB_ON);
 	} else {
@@ -841,10 +781,6 @@ void WLApplication::refresh_graphics()
  * parameters sensible default values
  */
 bool WLApplication::init_settings() {
-
-	//create a journal so that handle_commandline_parameters can open the
-	//journal files
-	journal = new Journal();
 
 	//read in the configuration file
 	g_options.read("config", "global");
@@ -927,10 +863,6 @@ void WLApplication::shutdown_settings()
 	} catch (...)                      {
 		log("WARNING: could not save configuration");
 	}
-
-	assert(journal);
-	delete journal;
-	journal = nullptr;
 }
 
 /**
@@ -1280,34 +1212,6 @@ void WLApplication::handle_commandline_parameters()
 		m_commandline.erase("script");
 	}
 
-	// TODO(sirver): this framework has not been useful in a long time. Kill it.
-	if (m_commandline.count("record")) {
-		if (m_commandline["record"].empty())
-			throw Parameter_error("ERROR: --record needs a filename!");
-
-		try {
-			journal->start_recording(m_commandline["record"]);
-		} catch (Journalfile_error & e) {
-			wout << "Journal file error: " << e.what() << endl;
-		}
-
-		m_commandline.erase("record");
-	}
-
-	if (m_commandline.count("playback")) {
-		if (m_commandline["playback"].empty())
-			throw Parameter_error("ERROR: --playback needs a filename!");
-
-		try {
-			journal->start_playback(m_commandline["playback"]);
-		}
-		catch (Journalfile_error & e) {
-			wout << "Journal file error: " << e.what() << endl;
-		}
-
-		m_commandline.erase("playback");
-	}
-
 	//If it hasn't been handled yet it's probably an attempt to
 	//override a conffile setting
 	//With typos, this will create invalid config settings. They
@@ -1351,9 +1255,7 @@ void WLApplication::show_usage()
 #ifdef __linux__
 		<< _("                      Default is ~/.widelands") << "\n"
 #endif
-		<< _(" --record=FILENAME    Record all events to the given filename for\n"
-			  "                      later playback") << "\n"
-		<< _(" --playback=FILENAME  Playback given filename (see --record)") << "\n\n"
+		<< "\n"
 		<< _(" --coredump=[yes|no]  Generates a core dump on segfaults instead\n"
 			  "                      of using the SDL") << "\n"
 		<< _(" --language=[de_DE|sv_SE|...]\n"
