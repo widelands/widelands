@@ -492,38 +492,38 @@ bool WLApplication::poll_event(SDL_Event & ev) {
 //when the lastthrottle variable would always be reinitialized there...?)
 restart:
 
-    haveevent = SDL_PollEvent(&ev);
+	haveevent = SDL_PollEvent(&ev);
 
-    if (haveevent) {
-        // We edit mouse motion events in here, so that
+	if (haveevent) {
+	// We edit mouse motion events in here, so that
         // differences caused by GrabInput or mouse speed
         // settings are invisible to the rest of the code
-        switch (ev.type) {
-        case SDL_MOUSEMOTION:
-            ev.motion.xrel += m_mouse_compensate_warp.x;
-            ev.motion.yrel += m_mouse_compensate_warp.y;
-            m_mouse_compensate_warp = Point(0, 0);
+	switch (ev.type) {
+	case SDL_MOUSEMOTION:
+		ev.motion.xrel += m_mouse_compensate_warp.x;
+		ev.motion.yrel += m_mouse_compensate_warp.y;
+		m_mouse_compensate_warp = Point(0, 0);
 
-            if (m_mouse_locked) {
-                warp_mouse(m_mouse_position);
+		if (m_mouse_locked) {
+			warp_mouse(m_mouse_position);
 
-                ev.motion.x = m_mouse_position.x;
-                ev.motion.y = m_mouse_position.y;
-            }
+			ev.motion.x = m_mouse_position.x;
+			ev.motion.y = m_mouse_position.y;
+		}
 
-            break;
-        case SDL_USEREVENT:
-            if (ev.user.code == CHANGE_MUSIC)
-                g_sound_handler.change_music();
+		break;
+		case SDL_USEREVENT:
+			if (ev.user.code == CHANGE_MUSIC)
+				g_sound_handler.change_music();
 
 			break;
-        case SDL_VIDEOEXPOSE:
-            //log ("SDL Video Window expose event: %i\n", ev.expose.type);
-            g_gr->update_fullscreen();
-            break;
-        default:;
-        }
-    }
+		case SDL_VIDEOEXPOSE:
+			//log ("SDL Video Window expose event: %i\n", ev.expose.type);
+			g_gr->update_fullscreen();
+			break;
+		default:;
+		}
+	}
 
 	if (haveevent) {
 		//  Eliminate any unhandled events to make sure that record and playback
@@ -699,12 +699,12 @@ void WLApplication::warp_mouse(const Point position)
 {
 	m_mouse_position = position;
 
-    Point cur_position;
-    SDL_GetMouseState(&cur_position.x, &cur_position.y);
-    if (cur_position != position) {
-        m_mouse_compensate_warp += cur_position - position;
-        SDL_WarpMouse(position.x, position.y);
-    }
+	Point cur_position;
+	SDL_GetMouseState(&cur_position.x, &cur_position.y);
+	if (cur_position != position) {
+		m_mouse_compensate_warp += cur_position - position;
+		SDL_WarpMouse(position.x, position.y);
+	}
 }
 
 /**
