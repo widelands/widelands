@@ -17,9 +17,7 @@ ferner=1
 
 [programs]
 plant_reed=_Plant reed
-plantreed=Plant reed (only for compatibility with savegames (build13))
 harvest_reed=_Harvest reed
-harvestreed=Harvest reed (only for compatibility with old savegames (build13))
 work=_Work
 
 [compatibility_programs]
@@ -34,15 +32,7 @@ harvestflax=replace harvest_reed
 sleep=18000  #orig sleep=20000 but ferner animation was increased by 2sec
 worker=plantreed
 
-[plantreed]
-sleep=18000  #orig sleep=20000 but ferner animation was increased by 2sec
-worker=plantreed
-
 [harvest_reed]
-sleep=5000
-worker=harvestreed
-
-[harvestreed]
 sleep=5000
 worker=harvestreed
 

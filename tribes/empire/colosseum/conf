@@ -33,10 +33,8 @@ max_level=1
 
 [programs]
 sleep=_Sleep
-upgrade_soldier_evade_0=_Upgrade soldier evade 0
-upgrade_evade_0=_Upgrade soldier evade 0 (only for compatibility with old savegames (build13))
-upgrade_soldier_evade_1=_Upgrade soldier evade 1
-upgrade_evade_1=_Upgrade soldier evade 1 (only for compatibility with old savegames (build13))
+upgrade_soldier_evade_0=_Upgrade soldier evade from level 0 to level 1
+upgrade_soldier_evade_1=_Upgrade soldier evade from level 1 to level 2
 
 [sleep]
 sleep=5000
@@ -49,21 +47,7 @@ check_soldier=soldier evade 0 # Because the soldier can be expulsed by the playe
 consume=bread:2 fish,meat
 train=soldier evade 0 1
 
-[upgrade_evade_0]
-check_soldier=soldier evade 0 # Fails when aren't any soldier of level 0 evade
-sleep=30000
-check_soldier=soldier evade 0 # Because the soldier can be expulsed by the player
-consume=bread:2 fish,meat
-train=soldier evade 0 1
-
 [upgrade_soldier_evade_1]
-check_soldier=soldier evade 1 # Fails when aren't any soldier of level 1 evade
-sleep=30000
-check_soldier=soldier evade 1 # Because the soldier can be expulsed by the player
-consume=bread:2 fish,meat:2
-train=soldier evade 1 2
-
-[upgrade_evade_1]
 check_soldier=soldier evade 1 # Fails when aren't any soldier of level 1 evade
 sleep=30000
 check_soldier=soldier evade 1 # Because the soldier can be expulsed by the player
