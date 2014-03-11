@@ -483,21 +483,14 @@ void WLApplication::run()
  *
  * \return true if an event was returned inside ev, false otherwise
  */
-bool WLApplication::poll_event(SDL_Event & ev) {
-	bool haveevent = false;
+bool WLApplication::poll_event(SDL_Event& ev) {
+	if (!SDL_PollEvent(&ev)) {
+		return false;
+	}
 
-
-//FIXME (REVIEW): Can this be removed now? There was a line saying goto restart
-//around the part with lastthrottle. (Though I don't see how it would be called
-//when the lastthrottle variable would always be reinitialized there...?)
-restart:
-
-	haveevent = SDL_PollEvent(&ev);
-
-	if (haveevent) {
 	// We edit mouse motion events in here, so that
-        // differences caused by GrabInput or mouse speed
-        // settings are invisible to the rest of the code
+	// differences caused by GrabInput or mouse speed
+	// settings are invisible to the rest of the code
 	switch (ev.type) {
 	case SDL_MOUSEMOTION:
 		ev.motion.xrel += m_mouse_compensate_warp.x;
@@ -510,64 +503,27 @@ restart:
 			ev.motion.x = m_mouse_position.x;
 			ev.motion.y = m_mouse_position.y;
 		}
-
 		break;
-		case SDL_USEREVENT:
-			if (ev.user.code == CHANGE_MUSIC)
-				g_sound_handler.change_music();
 
-			break;
-		case SDL_VIDEOEXPOSE:
-			//log ("SDL Video Window expose event: %i\n", ev.expose.type);
-			g_gr->update_fullscreen();
-			break;
-		default:;
-		}
+	case SDL_USEREVENT:
+		if (ev.user.code == CHANGE_MUSIC)
+			g_sound_handler.change_music();
+		break;
+
+	case SDL_VIDEOEXPOSE:
+		// log ("SDL Video Window expose event: %i\n", ev.expose.type);
+		g_gr->update_fullscreen();
+		break;
 	}
-
-	if (haveevent) {
-		//  Eliminate any unhandled events to make sure that record and playback
-		//  are _really_ the same. Yes I know, it's overly paranoid but hey...
-		switch (ev.type) {
-		case SDL_KEYDOWN:
-		case SDL_KEYUP:
-		case SDL_MOUSEBUTTONDOWN:
-		case SDL_MOUSEBUTTONUP:
-		case SDL_MOUSEMOTION:
-		case SDL_QUIT:
-			break;
-		default:
-			goto restart;
-		}
-	}
-
-	return haveevent;
+	return true;
 }
-
 
 /**
  * Pump the event queue, get packets from the network, etc...
  */
 void WLApplication::handle_input(InputCallback const * cb)
 {
-	SDL_Event ev; //  Valgrind says:
-	// Conditional jump or move depends on uninitialised value(s)
-	// at 0x407EEDA: (within /usr/lib/libSDL-1.2.so.0.11.0)
-	// by 0x407F78F: (within /usr/lib/libSDL-1.2.so.0.11.0)
-	// by 0x404FB12: SDL_PumpEvents (in /usr/lib/libSDL-1.2.so.0.11.0)
-	// by 0x404FFC3: SDL_PollEvent (in /usr/lib/libSDL-1.2.so.0.11.0)
-	// by 0x8252545: WLApplication::poll_event(SDL_Event*, bool)
-	//     (wlapplication.cc:309)
-	// by 0x8252EB6: WLApplication::handle_input(InputCallback const*)
-	// (wlapplication.cc:459) by 0x828B56E: UI::Panel::run() (ui_panel.cc:148)
-	// by 0x8252FAB: WLApplication::run() (wlapplication.cc:212)
-	// by 0x81427A6: main (main.cc:39)
-
-	// We need to empty the SDL message queue always, even in playback mode
-	// FIXME (REVIEW): Note the even in playback mode part. Is this still needed?
-	// And what about the stacktrace above?
-
-	// Usual event queue
+	SDL_Event ev;
 	while (poll_event(ev)) {
 		switch (ev.type) {
 		case SDL_KEYDOWN:
@@ -692,7 +648,6 @@ int32_t WLApplication::get_time() {
 /// SDL_WarpMouse() *will* create a mousemotion event, which we do not want. As
 /// a workaround, we store the delta in m_mouse_compensate_warp and use that to
 /// eliminate the motion event in poll_event()
-//FIXME (REVIEW): should more of this docstring be updated?
 ///
 /// \param position The new mouse position
 void WLApplication::warp_mouse(const Point position)
