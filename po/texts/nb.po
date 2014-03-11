@@ -2,20 +2,21 @@
 # Copyright (c) 2010 Rosetta Contributors and Canonical Ltd 2010
 # This file is distributed under the same license as the widelands package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010.
-#
+# GunChleoc <fios@foramnagaidhlig.net>, 2014.
 msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-03-06 21:20+0000\n"
-"PO-Revision-Date: 2014-03-09 19:14+0000\n"
-"Last-Translator: Hans Joachim Desserud <Unknown>\n"
-"Language-Team: Norwegian Bokmal <nb@li.org>\n"
+"PO-Revision-Date: 2014-03-10 08:50+0000\n"
+"Last-Translator: GunChleoc <Unknown>\n"
+"Language-Team: Widelands fixxer upper\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-03-10 05:32+0000\n"
+"X-Launchpad-Export-Date: 2014-03-11 05:29+0000\n"
 "X-Generator: Launchpad (build 16948)\n"
+"Language: nb\n"
 
 #: ../../txts/README.lua:7
 msgid "README"
@@ -48,6 +49,10 @@ msgid ""
 "economic infrastructure, explore the land around you and face rivaling\n"
 "tribes."
 msgstr ""
+"I dette spillet starter du med et lite landområde og bare noen få ressurser. "
+"Ved hjelp av disse vil du skape et imperium med flere tusen innbyggere. På "
+"veien mot dette målet, vil du etablere en stabil økonomi, utforske landet "
+"rundt deg og møte rivaliserende stammer."
 
 #: ../../txts/README.lua:31
 msgid "Check out the Widelands project homepage:"
@@ -517,6 +522,8 @@ msgid ""
 "Those pages might be more complete and up to date than this file, and you "
 "will also find a short tutorial about building a map there."
 msgstr ""
+"De sidene kan være mer komplette og mer oppdaterte enn denne filen. I "
+"tillegg kan du finne en kort innføring i hvordan du kan lage ditt eget kart."
 
 #: ../../txts/editor_readme:18
 msgid "Keyboard shortcuts"
@@ -568,7 +575,7 @@ msgstr "Ctrl+S   Lagre kart"
 
 #: ../../txts/editor_readme:43
 msgid "1-0      Changes tool size"
-msgstr ""
+msgstr "1-0 Endrer verktøystørrelse"
 
 #: ../../txts/editor_readme:45
 msgid "SHIFT    (Hold) Selects first alternative tool while pressed"
@@ -695,6 +702,8 @@ msgid ""
 "Just like with natural objects (bobs), you can also select multiple animals "
 "or ground textures with CTRL + mouse click."
 msgstr ""
+"Som med naturlige objekter, kan du også velge flere dyr eller bakketeksturer "
+"med CTRL + klikk."
 
 #: ../../txts/tips/editor.tip:14
 msgid ""
@@ -702,11 +711,16 @@ msgid ""
 "most cases the complete opposite of the normal tool (for example deletion of "
 "an object instead of placing one)."
 msgstr ""
+"Ved å holde nede SHIFT bytter du til en alternativ form av verktøyet. Den "
+"alternative formen er vanligvis for motsatt bruk av verktøyet (for eksempel "
+"slette et objekt istedenfor å legge til et)."
 
 #: ../../txts/tips/editor.tip:18
 msgid ""
 "Holding down ALT switches the second alternative tool on (if it exists)."
 msgstr ""
+"Ved å holde ned ALT bytter du til en alternativ form av verktøyet (hvis det "
+"finnes)."
 
 #: ../../txts/tips/editor.tip:22
 msgid ""
@@ -746,7 +760,7 @@ msgstr ""
 
 #: ../../txts/tips/general_game.tip:14
 msgid "Miners will work only if supplied with food."
-msgstr ""
+msgstr "Gruvearbeidere vil kun jobbe hvis de blir forsynt med mat."
 
 #: ../../txts/tips/general_game.tip:18
 msgid ""
@@ -796,7 +810,7 @@ msgstr ""
 msgid ""
 "Pressing and holding the ALT GR key lets you drag the window below the mouse "
 "pointer."
-msgstr ""
+msgstr "Hvis du holder nede Alt Gr kan du dra vinduet under musepekeren."
 
 #: ../../txts/tips/general_game.tip:50
 msgid ""

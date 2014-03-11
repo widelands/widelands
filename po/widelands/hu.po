@@ -1,21 +1,22 @@
 # Widelands po/hu_HU/widelands.po
 # Copyright (C) 2008 Widelands Development Team
 # FIRST AUTHOR <EMAIL@ADDRESS.TLD>, YEAR.
-#
+# GunChleoc <fios@foramnagaidhlig.net>, 2014.
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2014-03-06 22:20+0100\n"
-"PO-Revision-Date: 2014-01-27 10:52+0000\n"
-"Last-Translator: cn4ij <Unknown>\n"
-"Language-Team: Language <widelands-public@lists.sourceforge.net>\n"
+"PO-Revision-Date: 2014-03-10 08:49+0000\n"
+"Last-Translator: GunChleoc <Unknown>\n"
+"Language-Team: Widelands fixxer upper\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-03-07 05:38+0000\n"
+"X-Launchpad-Export-Date: 2014-03-11 05:30+0000\n"
 "X-Generator: Launchpad (build 16948)\n"
+"Language: hu\n"
 
 #: ../../src/ai/defaultai.h:84
 msgid "Aggressive"
@@ -154,17 +155,17 @@ msgstr "Magasság: %u"
 #. * TRANSLATORS: This is part of a list, e.g. Caps: medium flag walk
 #: ../../src/editor/tools/editor_info_tool.cc:65
 msgid " small"
-msgstr ""
+msgstr " kicsi"
 
 #. * TRANSLATORS: This is part of a list, e.g. Caps: medium flag walk
 #: ../../src/editor/tools/editor_info_tool.cc:67
 msgid " medium"
-msgstr ""
+msgstr " közepes"
 
 #. * TRANSLATORS: This is part of a list, e.g. Caps: medium flag walk
 #: ../../src/editor/tools/editor_info_tool.cc:69
 msgid " big"
-msgstr ""
+msgstr " nagy"
 
 #. * TRANSLATORS: This is part of a list, e.g. Caps: medium flag walk
 #: ../../src/editor/tools/editor_info_tool.cc:73
@@ -219,14 +220,14 @@ msgstr ""
 
 #: ../../src/editor/tools/editor_info_tool.cc:96
 msgid "Terrain:"
-msgstr ""
+msgstr "Terep:"
 
 #: ../../src/editor/tools/editor_info_tool.cc:103
 #: ../../src/editor/tools/editor_info_tool.cc:125
 #: ../../src/editor/tools/editor_info_tool.cc:137
 #, c-format
 msgid "Name: %s"
-msgstr ""
+msgstr "Név: %s"
 
 #: ../../src/editor/tools/editor_info_tool.cc:104
 #, c-format
@@ -254,29 +255,29 @@ msgstr ""
 
 #: ../../src/editor/tools/editor_info_tool.cc:124
 msgid "Map:"
-msgstr ""
+msgstr "Térkép:"
 
 #: ../../src/editor/tools/editor_info_tool.cc:126
 #, c-format
 msgid "Size: %1$ix%2$i"
-msgstr ""
+msgstr "Méret: %1$ix%2$i"
 
 #: ../../src/editor/tools/editor_info_tool.cc:129
 #, c-format
 msgid "Players: %i"
-msgstr ""
+msgstr "Játékosok: %i"
 
 #: ../../src/editor/tools/editor_info_tool.cc:132
 #: ../../src/editor/tools/editor_info_tool.cc:138
 #, c-format
 msgid "Author: %s"
-msgstr ""
+msgstr "Szerző: %s"
 
 #: ../../src/editor/tools/editor_info_tool.cc:133
 #: ../../src/editor/tools/editor_info_tool.cc:139
 #, c-format
 msgid "Descr: %s"
-msgstr ""
+msgstr "Leírás: %s"
 
 #: ../../src/editor/tools/editor_info_tool.cc:136
 #: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:91
@@ -509,7 +510,7 @@ msgstr "névtelen"
 
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:255
 msgid "directory"
-msgstr ""
+msgstr "mappa"
 
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:259
 msgid "Not a map file"
@@ -559,7 +560,7 @@ msgstr "Játékosok száma:"
 #: ../../src/network/nethost.cc:2078
 #, c-format
 msgid "Player %s"
-msgstr ""
+msgstr "%s játékos"
 
 #: ../../src/editor/ui_menus/editor_player_menu.cc:326
 msgid "Error!"
@@ -608,7 +609,7 @@ msgstr "Érték beállítása"
 #: ../../src/editor/ui_menus/editor_tool_change_resources_options_menu.cc:45
 #: ../../src/editor/ui_menus/editor_tool_menu.cc:70
 msgid "Resources"
-msgstr ""
+msgstr "Erőforrások"
 
 #: ../../src/editor/ui_menus/editor_tool_change_resources_options_menu.cc:99
 msgid "Current Selection"
@@ -679,7 +680,7 @@ msgstr "Jelenlegi méret: %u"
 
 #: ../../src/game_io/game_preload_data_packet.cc:72
 msgid "Endless Game"
-msgstr ""
+msgstr "Végtelen játék"
 
 #: ../../src/game_io/game_preload_data_packet.cc:77
 #: ../../src/logic/game.cc:248 ../../src/logic/game.cc:344
@@ -737,7 +738,7 @@ msgstr "Törzsek betöltése"
 
 #: ../../src/logic/game.cc:139
 msgid "Not set"
-msgstr ""
+msgstr "Nincs beállítva"
 
 #: ../../src/logic/game.cc:227
 msgid "Preloading a map"
@@ -790,6 +791,10 @@ msgid ""
 "You can manually add a starting position with the Widelands Editor to fix "
 "this problem."
 msgstr ""
+"A Widelands nem tudja elindítani a játékot, mert a %u játékosnak nincs kezdő "
+"helye.\n"
+"A hiba javításához kézzel kell kijelölnöd a kezdő pozíciót ennek a "
+"játékosnak a szerkesztőben."
 
 #: ../../src/logic/map.cc:365
 msgid "Player 1"
@@ -1082,7 +1087,7 @@ msgstr ""
 
 #: ../../src/logic/worker.cc:606
 msgid "Out of Resources"
-msgstr ""
+msgstr "Nincs elég erőforrás"
 
 #: ../../src/logic/worker.cc:607
 msgid "Out of Fish"
@@ -1208,7 +1213,7 @@ msgstr "Az üzenet nem lett elküldve. "
 #: ../../src/network/internet_gaming.cc:563
 #, c-format
 msgid "ERROR: %s"
-msgstr ""
+msgstr "HIBA: %s"
 
 #: ../../src/network/internet_gaming.cc:573
 #, c-format
@@ -1419,7 +1424,7 @@ msgstr ""
 
 #: ../../src/network/nethost.cc:461
 msgid "Wrong use, should be: /ack_kick <name>"
-msgstr ""
+msgstr "Helytelen használat; helyes: /ack_kick <név>"
 
 #: ../../src/network/nethost.cc:467
 msgid "kick acknowledgement cancelled: Wrong name given!"
@@ -1568,7 +1573,7 @@ msgstr ""
 #: ../../src/network/network_gaming_messages.cc:132
 #, c-format
 msgid "Something went wrong: %s"
-msgstr ""
+msgstr "Valami hiba történt: %s"
 
 #: ../../src/network/network_gaming_messages.cc:133
 #, c-format
@@ -1754,7 +1759,7 @@ msgstr ""
 #: ../../src/ui_basic/helpwindow.cc:47 ../../src/ui_basic/helpwindow.cc:191
 #, c-format
 msgid "Help: %s"
-msgstr ""
+msgstr "Súgó: %s"
 
 #: ../../src/ui_basic/messagebox.cc:99
 msgid "Yes"
@@ -2038,7 +2043,7 @@ msgstr "Mentett játékosok:"
 #: ../../src/ui_fsmenu/launchMPG.cc:564
 #, c-format
 msgid "Player %u"
-msgstr ""
+msgstr "%u játékos"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:568
 msgid "closed"
@@ -2059,7 +2064,7 @@ msgstr ""
 #: ../../src/ui_fsmenu/launchMPG.cc:650
 #, c-format
 msgid "Size: %1$u x %2$u"
-msgstr ""
+msgstr "Méret: %1$u x %2$u"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:651
 #, c-format
@@ -2215,7 +2220,7 @@ msgstr "Játékidő:"
 
 #: ../../src/ui_fsmenu/loadgame.cc:107
 msgid "Minimap:"
-msgstr ""
+msgstr "Térkép:"
 
 #: ../../src/ui_fsmenu/loadgame.cc:159 ../../src/ui_fsmenu/loadreplay.cc:140
 msgid "Delete file"
@@ -2248,7 +2253,7 @@ msgstr "Egyjátékos mód"
 
 #: ../../src/ui_fsmenu/main.cc:50
 msgid "Multiplayer"
-msgstr ""
+msgstr "Több játékos"
 
 #: ../../src/ui_fsmenu/main.cc:55
 msgid "Watch Replay"
@@ -2374,7 +2379,7 @@ msgstr "Saját becenév:"
 
 #: ../../src/ui_fsmenu/netsetup_lan.cc:54
 msgid "Host to connect:"
-msgstr ""
+msgstr "Kapcsolat gépneve:"
 
 #: ../../src/ui_fsmenu/netsetup_lan.cc:66
 msgid "Host a new game"
@@ -2506,7 +2511,7 @@ msgstr "1 nap"
 #: ../../src/ui_fsmenu/options.cc:268
 #, c-format
 msgid "%1$i x %2$i"
-msgstr ""
+msgstr "%1$i x %2$i"
 
 #: ../../src/ui_fsmenu/options.cc:288
 msgid "Try system language"
@@ -2606,65 +2611,81 @@ msgstr ""
 
 #: ../../src/wlapplication.cc:1342
 msgid "Options:"
-msgstr ""
+msgstr "Beállítások:"
 
 #: ../../src/wlapplication.cc:1344
 msgid " --<config-entry-name>=value overwrites any config file setting"
 msgstr ""
+" --<beállítás-neve>=érték felülbírálja bármelyik beállítást a beállítási "
+"fájlból"
 
 #: ../../src/wlapplication.cc:1345
 msgid ""
 " --logfile=FILENAME   Log output to file FILENAME instead of \n"
 "                      terminal output"
 msgstr ""
+" --logfile=FÁJLNÉV A naplót fájlba mentse a szabványos kimenet helyett"
 
 #: ../../src/wlapplication.cc:1347
 msgid ""
 " --datadir=DIRNAME    Use specified directory for the widelands\n"
 "                      data files"
 msgstr ""
+" --datadir=KÖNYVTÁRNÉV A megadott könyvtárban találhatóak a Widelands"
 
 #: ../../src/wlapplication.cc:1349
 msgid ""
 " --homedir=DIRNAME    Use specified directory for widelands config\n"
 "                      files, savegames and replays"
 msgstr ""
+" --homedir=KÖNYVTÁRNÉV A megadott könyvtár használata Widelands beállítási\n"
+"                        fájlok, mentett játékok és visszajátszások "
+"tárolására."
 
 #: ../../src/wlapplication.cc:1352
 msgid "                      Default is ~/.widelands"
-msgstr ""
+msgstr "                      ~/.widelands az alapértelmezett"
 
 #: ../../src/wlapplication.cc:1354
 msgid ""
 " --record=FILENAME    Record all events to the given filename for\n"
 "                      later playback"
 msgstr ""
+" --record=FÁJLNÉV        Rögzít minden eseményt a megadott fájlba későbbi\\"
+"n\n"
+"                        visszajátszásra"
 
 #: ../../src/wlapplication.cc:1356
 msgid " --playback=FILENAME  Playback given filename (see --record)"
-msgstr ""
+msgstr " --playback=FÁJLNÉV      Lejátssza a megadott fájlt (lásd --record)"
 
 #: ../../src/wlapplication.cc:1357
 msgid ""
 " --coredump=[yes|no]  Generates a core dump on segfaults instead\n"
 "                      of using the SDL"
 msgstr ""
+" --coredump=[yes|no]     Létrehozzon-e a core dump-ot szegmens hiba esetén\n"
+"                     az SDL használata helyett"
 
 #: ../../src/wlapplication.cc:1359
 msgid ""
 " --language=[de_DE|sv_SE|...]\n"
 "                      The locale to use."
 msgstr ""
+" --language=[de_DE|hu_HU]\n"
+"                        Lokalizáció beállítása."
 
 #: ../../src/wlapplication.cc:1361
 msgid " --localedir=DIRNAME  Use DIRNAME as location for the locale"
-msgstr ""
+msgstr " --localedir=KÖNYVTÁRNÉV Honosítás betöltése a megadott könyvtárból."
 
 #: ../../src/wlapplication.cc:1362
 msgid ""
 " --remove_syncstreams=[true|false]\n"
 "                      Remove syncstream files on startup"
 msgstr ""
+" --remove_syncstreams=[true|false]\n"
+"                        A syncstream fáűjlok eltávolítása indításkor."
 
 #: ../../src/wlapplication.cc:1364
 msgid ""
@@ -2672,26 +2693,32 @@ msgid ""
 "                      Remove replays after this number of days.\n"
 "                      If this is 0, replays are not deleted."
 msgstr ""
+" --remove_replays=[...]\n"
+"                        Visszajátszások eltávolítása a megadott számú nap "
+"leteltével.\n"
+"                        Ha ez a szám 0 a visszajátszások nem kerülnek "
+"törlésre."
 
 #: ../../src/wlapplication.cc:1368
 msgid "Sound options:"
-msgstr ""
+msgstr "Hang opciók:"
 
 #: ../../src/wlapplication.cc:1369
 msgid " --nosound            Starts the game with sound disabled."
-msgstr ""
+msgstr " --nosound            Hang nélkül indítja a játékot."
 
 #: ../../src/wlapplication.cc:1370
 msgid " --disable_fx         Disable sound effects."
-msgstr ""
+msgstr " --disable_fx         Hangeffektek kikapcsolása."
 
 #: ../../src/wlapplication.cc:1371
 msgid " --disable_music      Disable music."
-msgstr ""
+msgstr " --disable_music      Zene kikapcsolása."
 
 #: ../../src/wlapplication.cc:1372
 msgid " --nozip              Do not save files as binary zip archives."
 msgstr ""
+" --nozip              A mentéseket ne tömörített zip formátumban tárolja."
 
 #: ../../src/wlapplication.cc:1373
 msgid ""
@@ -2699,16 +2726,21 @@ msgid ""
 "                      You can add a =FILENAME to directly load\n"
 "                      the map FILENAME in editor."
 msgstr ""
+" --editor             Egyből a Widelands pályaszerkesztőt indítsa el.\n"
+"                      Hozzáírva a =FILENAME szöveget betölti a\n"
+"                      FILENAME néven mentett térképet a szerkesztőbe."
 
 #: ../../src/wlapplication.cc:1376
 msgid ""
 " --scenario=FILENAME  Directly starts the map FILENAME as scenario\n"
 "                      map."
 msgstr ""
+" --scenario=FILENAME  Közvetlenül a FILENAME térképet indítja scenarioként."
 
 #: ../../src/wlapplication.cc:1378
 msgid " --loadgame=FILENAME  Directly loads the savegame FILENAME."
 msgstr ""
+" --loadgame=FILENAME  Közvetlenül betölti a FILENAME néven mentett állást."
 
 #: ../../src/wlapplication.cc:1379
 msgid ""
@@ -2753,7 +2785,7 @@ msgstr ""
 
 #: ../../src/wlapplication.cc:1393
 msgid "Options for the internal window manager:"
-msgstr ""
+msgstr "Options for the internal window manager:"
 
 #: ../../src/wlapplication.cc:1394
 msgid ""
@@ -2762,6 +2794,10 @@ msgid ""
 "                      when the edge of the window comes within\n"
 "                      this distance from the edge of the screen."
 msgstr ""
+" --border_snap_distance=[0 ...]\n"
+"                      Az ablak ragadjon a képernyő széléhez,\n"
+"                      ha az ablak széle ilyen távolságon belülre\n"
+"                      kerül a képernyő széléhez képest."
 
 #: ../../src/wlapplication.cc:1398
 msgid ""
@@ -2770,6 +2806,9 @@ msgid ""
 "                      edge of the screen when the edge of the\n"
 "                      window is next to the edge of the screen."
 msgstr ""
+" --dock_windows_to_edges=[yes|no]\n"
+"                      Az ablak képernyő széléhez illeszkedő felének\n"
+"                      eltűntetése, ha az ablak a képernyő szélén van."
 
 #: ../../src/wlapplication.cc:1402
 msgid ""
@@ -2778,6 +2817,10 @@ msgid ""
 "                      the edge of the window comes within this\n"
 "                      distance from the edge of the panel."
 msgstr ""
+" --panel_snap_distance=[0 ...]\n"
+"                      Az ablak ragadjon a panel széléhez,\n"
+"                      ha az ablak széle ilyen távolságon belülre\n"
+"                      kerül a panel széléhez képest."
 
 #: ../../src/wlapplication.cc:1406
 msgid ""
@@ -2786,20 +2829,25 @@ msgid ""
 "                      if the window is overlapping with the\n"
 "                      panel."
 msgstr ""
+" --snap_windows_only_when_overlapping=[yes|no]\n"
+"                      Csak akkor mozgasson egy ablakot a panel széléhez\n"
+"                      ha az ablak túlnyúl a panelen."
 
 #: ../../src/wlapplication.cc:1412
 msgid ""
 " --double             Start the game twice (for localhost network\n"
 "                      testing)"
 msgstr ""
+" --double             A játék indítása kétszer (helyi hálózat\n"
+"                      teszteléséhez)"
 
 #: ../../src/wlapplication.cc:1416
 msgid " --verbose            Enable verbose debug messages"
-msgstr ""
+msgstr " --verbose            Bővebb hibakeresési üzenetek."
 
 #: ../../src/wlapplication.cc:1417
 msgid " --help               Show this help"
-msgstr ""
+msgstr " --help               Megjeleníti ezt a segítséget"
 
 #: ../../src/wlapplication.cc:1418
 msgid ""
@@ -2808,6 +2856,10 @@ msgid ""
 "\n"
 "Hope you enjoy this game!"
 msgstr ""
+"Hibabejelentések? Javaslatok? Nézd meg a projekt weblapját:\n"
+"        https://launchpad.net/widelands\n"
+"\n"
+"Reméljük, hogy tetszett a játék!"
 
 #: ../../src/wlapplication.cc:1506
 msgid "Fallback settings in effect"
@@ -2822,7 +2874,7 @@ msgstr ""
 #: ../../src/wlapplication.cc:1579
 #, c-format
 msgid "Warning: %s"
-msgstr ""
+msgstr "Figyelmeztetés: %s"
 
 #: ../../src/wlapplication.cc:1582
 msgid "Game data error"
@@ -2841,6 +2893,11 @@ msgid ""
 "related messages in the standard output (stdout.txt on Windows). You are "
 "using build %1$s (%2$s). "
 msgstr ""
+"\n"
+"\n"
+"Kérlek jelentsd be ezt a hibát ezzel segítsd a Widelands fejlesztését. A "
+"hibával kapcoslatos üzeneteket megtalálod a standard kimeneten (stdout.txt "
+"Windowson). Te ezt a verziót használod: %1$s (%2$s). "
 
 #: ../../src/wlapplication.cc:1599
 msgid ""
@@ -2849,6 +2906,10 @@ msgid ""
 "Widelands attempts to create a savegame when errors occur during the game. "
 "It is often – though not always – possible to load it and continue playing.\n"
 msgstr ""
+"Kérlek add hozzá ezt is a bejelentéshez.\n"
+"\n"
+"Widelands megpróbálja lementeni a játékot mikor hiba történik. Gyakran - de "
+"nem mindig - be lehet tölteni ezt a mentést és folytatni  játékot.\n"
 
 #: ../../src/wlapplication.cc:1711
 msgid "The address of the game server is invalid"
@@ -3185,7 +3246,7 @@ msgstr "Játék mentése"
 
 #: ../../src/wui/game_main_menu_save_game.cc:73
 msgid "Game Time:"
-msgstr ""
+msgstr "Játékidő:"
 
 #: ../../src/wui/game_main_menu_save_game.cc:79
 msgid "Win condition:"
@@ -3329,7 +3390,7 @@ msgstr "Hanghatások hangereje"
 
 #: ../../src/wui/game_summary.cc:44
 msgid "Game over"
-msgstr ""
+msgstr "Vége a játéknak"
 
 #: ../../src/wui/game_summary.cc:60
 msgid "Elapsed time:"
@@ -3337,7 +3398,7 @@ msgstr ""
 
 #: ../../src/wui/game_summary.cc:77
 msgid "Continue playing"
-msgstr ""
+msgstr "Játék folytatása"
 
 #: ../../src/wui/game_summary.cc:83
 msgid "Quit"
@@ -3349,7 +3410,7 @@ msgstr ""
 
 #: ../../src/wui/game_summary.cc:93
 msgid "Time"
-msgstr ""
+msgstr "Idő"
 
 #: ../../src/wui/game_summary.cc:157
 msgid "Lost"
@@ -3365,11 +3426,11 @@ msgstr ""
 
 #: ../../src/wui/game_summary.cc:180
 msgid "You won!"
-msgstr ""
+msgstr "Nyertél!"
 
 #: ../../src/wui/game_summary.cc:182
 msgid "You lost."
-msgstr ""
+msgstr "Vesztettél."
 
 #: ../../src/wui/game_summary.cc:187
 #, c-format
@@ -3439,7 +3500,7 @@ msgstr "Haderő"
 #: ../../src/wui/interactive_base.cc:316
 #, c-format
 msgid "%1$u.%2$ux"
-msgstr ""
+msgstr "%1$u.%2$ux"
 
 #: ../../src/wui/interactive_base.cc:319
 msgid "PAUSE"
@@ -3449,7 +3510,7 @@ msgstr "SZÜNET"
 #: ../../src/wui/interactive_base.cc:340
 #, c-format
 msgid "%1$s (%2$s)"
-msgstr ""
+msgstr "%1$s (%2$s)"
 
 #: ../../src/wui/interactive_base.cc:345
 msgid "NO GAME CONTROLLER"

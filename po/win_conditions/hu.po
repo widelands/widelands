@@ -2,21 +2,22 @@
 # Copyright (c) 2010 Rosetta Contributors and Canonical Ltd 2010
 # This file is distributed under the same license as the widelands package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010.
-#
+# GunChleoc <fios@foramnagaidhlig.net>, 2014.
 msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-03-06 21:20+0000\n"
-"PO-Revision-Date: 2014-01-13 15:00+0000\n"
-"Last-Translator: cn4ij <Unknown>\n"
-"Language-Team: Hungarian <hu@li.org>\n"
+"PO-Revision-Date: 2014-03-10 08:49+0000\n"
+"Last-Translator: GunChleoc <Unknown>\n"
+"Language-Team: Widelands fixxer upper\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-03-07 05:42+0000\n"
+"X-Launchpad-Export-Date: 2014-03-11 05:30+0000\n"
 "X-Generator: Launchpad (build 16948)\n"
+"Language: hu\n"
 
 #: ../../scripting/win_condition_texts.lua:2
 msgid "Congratulations!"
@@ -52,7 +53,7 @@ msgstr "Vesztettél"
 
 #: ../../scripting/win_condition_texts.lua:18
 msgid "You’ve lost this game!"
-msgstr ""
+msgstr "Elvesztetted a játékot!"
 
 #: ../../scripting/win_condition_texts.lua:22
 msgid "Status"
@@ -88,6 +89,8 @@ msgid ""
 "You get points for precious wares in your warehouses. The player with the "
 "highest number of wares at the end of 4 hours wins the game."
 msgstr ""
+"Pontokat kapsz raktáraid értékes áruiért. A győztes az a játékos, akinek 4 "
+"óra elteltével a legtöbb pontja van."
 
 #: ../../scripting/win_conditions/02_collectors.lua:19
 msgid "Points"
@@ -95,7 +98,7 @@ msgstr "Pontok"
 
 #: ../../scripting/win_conditions/02_collectors.lua:95
 msgid "Status for %s"
-msgstr ""
+msgstr "%s állása"
 
 #: TRANSLATORS: For example: "gold (3 P) x 4 = 12 P", P meaning "Points"
 #: ../../scripting/win_conditions/02_collectors.lua:105
@@ -133,6 +136,9 @@ msgid ""
 "winner will be the player or the team that is able to keep that area for at "
 "least 20 minutes."
 msgstr ""
+"Minden játékos vagy csapat igyekszik a térképnek több mint a felét "
+"megszerezni. A nyertes az a játékos vagy csapat, amelyik ezt a területet "
+"legalább 20 percig megtartja."
 
 #: ../../scripting/win_conditions/03_territorial_lord.lua:153
 #: ../../scripting/win_conditions/03_territorial_time.lua:23
@@ -142,7 +148,7 @@ msgstr "%i. csapat"
 #: ../../scripting/win_conditions/03_territorial_lord.lua:155
 #: ../../scripting/win_conditions/03_territorial_time.lua:199
 msgid "%s owns more than half of the map’s area."
-msgstr ""
+msgstr "%s több mint a térkép felét birtokolja."
 
 #: ../../scripting/win_conditions/03_territorial_lord.lua:157
 #: ../../scripting/win_conditions/03_territorial_time.lua:201
@@ -154,7 +160,7 @@ msgstr[1] ""
 #: ../../scripting/win_conditions/03_territorial_lord.lua:162
 #: ../../scripting/win_conditions/03_territorial_time.lua:206
 msgid "You own more than half of the map’s area."
-msgstr ""
+msgstr "Te uralod a játékterület több mint felét."
 
 #: ../../scripting/win_conditions/03_territorial_lord.lua:164
 #: ../../scripting/win_conditions/03_territorial_time.lua:208
@@ -174,6 +180,10 @@ msgid ""
 "least 20 minutes, or the one with the most territory after 4 hours, "
 "whichever comes first."
 msgstr ""
+"Minden játékos vagy csapat igyekszik a térképnek több mint a felét "
+"megszerezni. A nyertes az a játékos vagy csapat, amelyik ezt a területet "
+"legalább 20 percig megtartja; vagy az, amelyiknek 4 óra elteltével a "
+"legnagyobb területe van – amelyik előbb bekövetkezik."
 
 #: ../../scripting/win_conditions/03_territorial_time.lua:21
 msgid "%1$s has %2$3.0f%% of the land (%3$i of %4$i)."
@@ -206,6 +216,10 @@ msgid ""
 "your territory than any other player. The game will end after 4 hours of\n"
 "playing. The one with the most trees at that point will win the game."
 msgstr ""
+"Erdei manóként szereted a nagy erdőket, így az a dolgod, hogy\n"
+"felségterületeden több fa legyen, mint bármelyik másik játékosén. A\n"
+"játszma 4 óráig tart. Akinek akkor a legtöbb lábonálló fája van,\n"
+"az nyeri a játékot."
 
 #: ../../scripting/win_conditions/04_wood_gnome.lua:19
 msgid "Trees owned"

@@ -2,21 +2,22 @@
 # Copyright (c) 2010 Rosetta Contributors and Canonical Ltd 2010
 # This file is distributed under the same license as the widelands package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010.
-#
+# GunChleoc <fios@foramnagaidhlig.net>, 2014.
 msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-03-06 21:20+0000\n"
-"PO-Revision-Date: 2013-12-31 13:47+0000\n"
-"Last-Translator: Hans Joachim Desserud <Unknown>\n"
-"Language-Team: Norwegian Bokmal <nb@li.org>\n"
+"PO-Revision-Date: 2014-03-10 08:50+0000\n"
+"Last-Translator: GunChleoc <Unknown>\n"
+"Language-Team: Widelands fixxer upper\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-03-07 05:35+0000\n"
+"X-Launchpad-Export-Date: 2014-03-11 05:30+0000\n"
 "X-Generator: Launchpad (build 16948)\n"
+"Language: nb\n"
 
 #: ../../global/militarysites/barracks.empire/conf:8
 msgid "Your Barracks discovered an aggressor."
@@ -291,21 +292,23 @@ msgid ""
 "The Ax is the basic weapon of the barbarians. All young soldiers are "
 "equipped with it."
 msgstr ""
+"Øksen er det grunnleggende våpnet for barbarene. Alle unge soldater blir "
+"utstyrt med en hver."
 
 #: ../../tribes/barbarians/axefactory/conf:32
 #: ../../tribes/barbarians/warmill/conf:36
 msgid "Produce ax"
-msgstr ""
+msgstr "Produser øks"
 
 #: ../../tribes/barbarians/axefactory/conf:33
 #: ../../tribes/barbarians/warmill/conf:37
 msgid "Produce sharp ax"
-msgstr ""
+msgstr "Produser skarpøks"
 
 #: ../../tribes/barbarians/axefactory/conf:34
 #: ../../tribes/barbarians/warmill/conf:38
 msgid "Produce broad ax"
-msgstr ""
+msgstr "Produser bredøks"
 
 #: ../../tribes/barbarians/axefactory/conf:35
 #: ../../tribes/barbarians/bakery/conf:26
@@ -616,7 +619,7 @@ msgstr "Avhengigheter"
 #: ../../tribes/barbarians/warmill/help.lua:23
 #: ../../tribes/barbarians/well/help.lua:22
 msgid "Incoming:"
-msgstr ""
+msgstr "Innkommende:"
 
 #: ../../tribes/barbarians/axefactory/help.lua:24
 #: ../../tribes/barbarians/metalworks/help.lua:25
@@ -635,7 +638,7 @@ msgstr "Jern"
 #: ../../tribes/barbarians/axefactory/help.lua:26
 #: ../../tribes/barbarians/lime_kiln/help.lua:26
 msgid "%s from the Coal mine or the Charcoal Burner’s House"
-msgstr ""
+msgstr "%s fra en kullgruve eller kullbrenners hus"
 
 #: ../../tribes/barbarians/axefactory/help.lua:26
 #: ../../tribes/barbarians/coalmine/help.lua:17
@@ -682,7 +685,7 @@ msgstr "Kull"
 #: ../../tribes/barbarians/warmill/help.lua:28
 #: ../../tribes/barbarians/well/help.lua:23
 msgid "Outgoing:"
-msgstr ""
+msgstr "Utgående:"
 
 #: ../../tribes/barbarians/axefactory/help.lua:28
 #: ../../tribes/barbarians/conf:118
@@ -698,7 +701,7 @@ msgstr "Soldat"
 #: ../../tribes/barbarians/trainingscamp/help.lua:63
 #: ../../tribes/barbarians/warmill/help.lua:31
 msgid "Training Camp"
-msgstr ""
+msgstr "Treningsleir"
 
 #: ../../tribes/barbarians/axefactory/help.lua:31
 #: ../../tribes/barbarians/bakery/help.lua:33
@@ -776,7 +779,7 @@ msgstr ""
 #: ../../tribes/barbarians/conf:203
 #: ../../tribes/barbarians/lumberjacks_hut/help.lua:29
 msgid "Metal Workshop"
-msgstr ""
+msgstr "Metallverk"
 
 #: ../../tribes/barbarians/axefactory/help.lua:33
 #: ../../tribes/barbarians/bakery/help.lua:35
@@ -1345,7 +1348,7 @@ msgstr ""
 #: ../../tribes/barbarians/warmill/help.lua:65
 #: ../../tribes/barbarians/well/help.lua:48
 msgid "Performance:"
-msgstr ""
+msgstr "Ytelse:"
 
 #: ../../tribes/barbarians/axefactory/help.lua:63
 #: ../../tribes/barbarians/metalworks/help.lua:70
@@ -1456,7 +1459,7 @@ msgstr "Stridsplass"
 #: ../../tribes/barbarians/trainingscamp/help.lua:42
 #: ../../tribes/barbarians/well/help.lua:34
 msgid "Build cost:"
-msgstr ""
+msgstr "Byggekostnad:"
 
 #: ../../tribes/barbarians/bakery/help.lua:50
 #: ../../tribes/barbarians/conf:121
@@ -1547,6 +1550,7 @@ msgstr ""
 msgid ""
 "‘No better friend you have in battle than the enemy’s blow that misses.’"
 msgstr ""
+"«Ingen bedre venn finner du i strid enn en fiendes angrep som bommer.»"
 
 #: ../../tribes/barbarians/battlearena/help.lua:13
 msgid "Said to originate from Neidhardt, the famous trainer."
@@ -1714,7 +1718,7 @@ msgstr "Bærer ting langs veiene."
 
 #: ../../tribes/barbarians/cattlebreeder/conf:1
 msgid "Breeds the strong oxen that help with transporting wares."
-msgstr ""
+msgstr "Aler opp sterke okser som hjelper til med transport av varer."
 
 #: ../../tribes/barbarians/cattlefarm/help.lua:16
 msgid "Breed Oxen for adding them to the transportation system."
@@ -1847,14 +1851,14 @@ msgstr ""
 #: ../../tribes/barbarians/metalworks/help.lua:59
 #: ../../tribes/barbarians/warmill/help.lua:35
 msgid "Axfactory"
-msgstr ""
+msgstr "Øksefabrikk"
 
 #: ../../tribes/barbarians/coalmine/help.lua:33
 #: ../../tribes/barbarians/conf:207
 #: ../../tribes/barbarians/deep_coalmine/help.lua:32
 #: ../../tribes/barbarians/deeper_coalmine/help.lua:31
 msgid "Helm Smithy"
-msgstr ""
+msgstr "Hjelmsmie"
 
 #: ../../tribes/barbarians/coalmine/help.lua:34
 #: ../../tribes/barbarians/conf:199
@@ -2021,15 +2025,15 @@ msgstr "Ødelagt bygning"
 
 #: ../../tribes/barbarians/conf:42
 msgid "Field (medium)"
-msgstr ""
+msgstr "Mellomstor åker"
 
 #: ../../tribes/barbarians/conf:43
 msgid "Field (small)"
-msgstr ""
+msgstr "Liten åker"
 
 #: ../../tribes/barbarians/conf:44
 msgid "Field (tiny)"
-msgstr ""
+msgstr "Veldig liten åker"
 
 #: ../../tribes/barbarians/conf:45
 msgid "Field (ripe)"
@@ -2037,7 +2041,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/conf:46
 msgid "Field (harvested)"
-msgstr ""
+msgstr "Høstet åker"
 
 #: ../../tribes/barbarians/conf:47
 msgid "Reed (medium)"
@@ -2057,47 +2061,47 @@ msgstr ""
 
 #: ../../tribes/barbarians/conf:51
 msgid "Resource indicator: Coal (little)"
-msgstr ""
+msgstr "Ressursindikator kull lite"
 
 #: ../../tribes/barbarians/conf:52
 msgid "Resource indicator: Coal (much)"
-msgstr ""
+msgstr "Ressursindikator kull mye"
 
 #: ../../tribes/barbarians/conf:53
 msgid "Resource indicator: Gold (little)"
-msgstr ""
+msgstr "Ressursindikator gull lite"
 
 #: ../../tribes/barbarians/conf:54
 msgid "Resource indicator: Gold (much)"
-msgstr ""
+msgstr "Ressursindikator gull mye"
 
 #: ../../tribes/barbarians/conf:55
 msgid "Resource indicator: Granite (little)"
-msgstr ""
+msgstr "Ressursindikator granitt lite"
 
 #: ../../tribes/barbarians/conf:56
 msgid "Resource indicator: Granite (much)"
-msgstr ""
+msgstr "Ressursindikator granitt mye"
 
 #: ../../tribes/barbarians/conf:57
 msgid "Resource indicator: Iron (little)"
-msgstr ""
+msgstr "Ressursindikator jern lite"
 
 #: ../../tribes/barbarians/conf:58
 msgid "Resource indicator: Iron (much)"
-msgstr ""
+msgstr "Ressursindikator jern mye"
 
 #: ../../tribes/barbarians/conf:59
 msgid "Resource indicator: No resource"
-msgstr ""
+msgstr "Ressursindikator ingen ressurs"
 
 #: ../../tribes/barbarians/conf:60
 msgid "Resource indicator: Water"
-msgstr ""
+msgstr "Ressursindikator vann"
 
 #: ../../tribes/barbarians/conf:61
 msgid "Ship Construction Site"
-msgstr ""
+msgstr "Byggeområde for skip"
 
 #: ../../tribes/barbarians/conf:64
 msgid "Deer"
@@ -2105,7 +2109,7 @@ msgstr "Hjort"
 
 #: ../../tribes/barbarians/conf:65
 msgid "Wild Boar"
-msgstr ""
+msgstr "Villsvin"
 
 #: ../../tribes/barbarians/conf:72
 msgid "Ax"
@@ -2113,7 +2117,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/conf:74
 msgid "Battle Ax"
-msgstr ""
+msgstr "Stridsøks"
 
 #: ../../tribes/barbarians/conf:75
 #: ../../tribes/barbarians/micro-brewery/help.lua:26
@@ -2127,11 +2131,11 @@ msgstr "Herdet tre"
 
 #: ../../tribes/barbarians/conf:77
 msgid "Broad Ax"
-msgstr ""
+msgstr "Bredøks"
 
 #: ../../tribes/barbarians/conf:78
 msgid "Bronze Ax"
-msgstr ""
+msgstr "Bronseøks"
 
 #: ../../tribes/barbarians/conf:79
 msgid "Cloth"
@@ -2241,7 +2245,7 @@ msgstr "Ljå"
 
 #: ../../tribes/barbarians/conf:102
 msgid "Sharp Ax"
-msgstr ""
+msgstr "Skarp øks"
 
 #: ../../tribes/barbarians/conf:103
 #: ../../tribes/barbarians/fernery/help.lua:43
@@ -2272,11 +2276,11 @@ msgstr ""
 
 #: ../../tribes/barbarians/conf:108
 msgid "War Helm"
-msgstr ""
+msgstr "Krigshjelm"
 
 #: ../../tribes/barbarians/conf:109
 msgid "Warrior’s Ax"
-msgstr ""
+msgstr "Krigerøks"
 
 #: ../../tribes/barbarians/conf:110
 #: ../../tribes/barbarians/well/help.lua:24
@@ -2481,23 +2485,23 @@ msgstr "Steinbrudd"
 
 #: ../../tribes/barbarians/conf:182
 msgid "Lumberjack’s Hut"
-msgstr ""
+msgstr "Tømmerhuggers hytte"
 
 #: ../../tribes/barbarians/conf:183
 msgid "Ranger’s Hut"
-msgstr ""
+msgstr "Skogvokterhytte"
 
 #: ../../tribes/barbarians/conf:184
 msgid "Fisher’s Hut"
-msgstr ""
+msgstr "Fiskerhytte"
 
 #: ../../tribes/barbarians/conf:185
 msgid "Hunter’s Hut"
-msgstr ""
+msgstr "Jegerhytte"
 
 #: ../../tribes/barbarians/conf:186
 msgid "Gamekeeper’s Hut"
-msgstr ""
+msgstr "Viltforvalters hytte"
 
 #: ../../tribes/barbarians/conf:187
 msgid "Well"
@@ -2505,7 +2509,7 @@ msgstr "Brønn"
 
 #: ../../tribes/barbarians/conf:188
 msgid "Scout’s Hut"
-msgstr ""
+msgstr "Speiderhytte"
 
 #: ../../tribes/barbarians/conf:189
 #: ../../tribes/barbarians/lumberjacks_hut/help.lua:30
@@ -2538,7 +2542,7 @@ msgstr "Mikrobryggeri"
 #: ../../tribes/barbarians/conf:198
 #: ../../tribes/barbarians/lumberjacks_hut/help.lua:28
 msgid "Charcoal Burner’s House"
-msgstr ""
+msgstr "Kullbrenners hus"
 
 #: ../../tribes/barbarians/conf:200
 msgid "Shipyard"
@@ -2572,7 +2576,7 @@ msgstr "Dypere kullgruve"
 
 #: ../../tribes/barbarians/conf:211
 msgid "Coal Mine"
-msgstr ""
+msgstr "Kullgruve"
 
 #: ../../tribes/barbarians/conf:212
 #: ../../tribes/barbarians/deep_oremine/help.lua:44
@@ -2626,7 +2630,7 @@ msgstr "Borgtårn"
 
 #: ../../tribes/barbarians/conf:232
 msgid "Headquarters Medium"
-msgstr ""
+msgstr "Mellomstort hovedkvarter"
 
 #: ../../tribes/barbarians/conf:233
 msgid "Citadel Village"
@@ -2753,7 +2757,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/fernery/help.lua:12
 msgid "‘We grow roofs’"
-msgstr ""
+msgstr "«Vi dyrker tak»"
 
 #: ../../tribes/barbarians/fernery/help.lua:13
 msgid "Slogan of the Guild of Gardeners"
@@ -2796,7 +2800,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/fishers_hut/help.lua:12
 msgid "‘What do you mean, my fish ain’t fresh?!’"
-msgstr ""
+msgstr "«Hva mener du med at fisken min ikke er fersk?!»"
 
 #: ../../tribes/barbarians/fishers_hut/help.lua:17
 msgid "Fishes on the coast near the hut."
@@ -2935,7 +2939,7 @@ msgstr "Produser maske"
 
 #: ../../tribes/barbarians/helmsmithy/conf:33
 msgid "Produce warhelm"
-msgstr ""
+msgstr "Produser krigshjelm"
 
 #: ../../tribes/barbarians/hunter/conf:1
 msgid "The Hunter brings good meat to the colonists."
@@ -2949,7 +2953,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/hunters_hut/help.lua:13
 msgid "‘The Art of Hunting’"
-msgstr ""
+msgstr "«Kunsten å jakte»"
 
 #: ../../tribes/barbarians/hunters_hut/help.lua:17
 msgid "Hunt animals to produce meat."
@@ -2987,6 +2991,8 @@ msgid ""
 "Iron ore is mined in iron mines. It delivers iron when smelted in a smelting "
 "works."
 msgstr ""
+"Jernmalm blir gravd ut i jerngruvene. Den blir så smeltet om til jern i "
+"smelteverket."
 
 #: ../../tribes/barbarians/kitchen_tools/conf:1
 msgid ""
@@ -3002,7 +3008,7 @@ msgstr "Brenner kalk i kalkovnen"
 
 #: ../../tribes/barbarians/lime_kiln/help.lua:12
 msgid "‘Forming new stone from old with fire and water.’"
-msgstr ""
+msgstr "«Former ny stein av gammel med ild og vann.»"
 
 #: ../../tribes/barbarians/lime_kiln/help.lua:13
 msgid ""
@@ -3118,7 +3124,7 @@ msgstr "Produser jaktspyd"
 
 #: ../../tribes/barbarians/metalworks/help.lua:12
 msgid "‘We make it work!’"
-msgstr ""
+msgstr "«Vi får det til å virke!»"
 
 #: ../../tribes/barbarians/metalworks/help.lua:13
 msgid ""
@@ -3221,6 +3227,8 @@ msgid ""
 "‘He who can grow two trees where normally only one will grow exceeds the "
 "most important general!’"
 msgstr ""
+"«Den som kan gro to trær hvor det vanligvis gror et overgår den viktigste "
+"general!»"
 
 #: ../../tribes/barbarians/rangers_hut/help.lua:14
 msgid "Chat’Karuth in a conversation with a Ranger"
@@ -3261,6 +3269,7 @@ msgstr ""
 msgid ""
 "Scouts like Scotty the scout scouting unscouted areas in a scouty fashion."
 msgstr ""
+"Speidere som speideren Scotty speider uspeide områder som en speider."
 
 #: ../../tribes/barbarians/scripting/sc00_headquarters_medium.lua:10
 msgid "Headquarters medium"
@@ -3465,7 +3474,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/trainingscamp/help.lua:13
 msgid "Chief Chat’Karuth in a speech to his army."
-msgstr ""
+msgstr "Høvding Chat'Karuth i en tale til hæren sin."
 
 #: ../../tribes/barbarians/trainingscamp/help.lua:16
 msgid ""
@@ -3539,15 +3548,15 @@ msgstr ""
 
 #: ../../tribes/barbarians/warmill/conf:39
 msgid "Produce bronze ax"
-msgstr ""
+msgstr "Produser bronseøks"
 
 #: ../../tribes/barbarians/warmill/conf:40
 msgid "Produce battle ax"
-msgstr ""
+msgstr "Produser stridsøks"
 
 #: ../../tribes/barbarians/warmill/conf:41
 msgid "Produce warrior’s ax"
-msgstr ""
+msgstr "Produser krigerøks"
 
 #: ../../tribes/barbarians/warmill/help.lua:16
 msgid ""
@@ -3557,7 +3566,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/warmill/help.lua:27
 msgid "Coal from the Coal mine or the Charcoal Burner’s House"
-msgstr ""
+msgstr "Kull fra kullgruven eller kullbrenners hus"
 
 #: ../../tribes/barbarians/warmill/help.lua:66
 msgid ""

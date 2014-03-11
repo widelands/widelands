@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: Widelands svn4575\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2014-03-06 21:20+0000\n"
-"PO-Revision-Date: 2014-03-09 12:32+0000\n"
-"Last-Translator: Dan O'Huiginn <daniel@ohuiginn.net>\n"
+"PO-Revision-Date: 2014-03-10 16:09+0000\n"
+"Last-Translator: REAL NAME <Unknown>\n"
 "Language-Team: Dutch <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-03-10 05:32+0000\n"
+"X-Launchpad-Export-Date: 2014-03-11 05:30+0000\n"
 "X-Generator: Launchpad (build 16948)\n"
 
 #: ../../global/militarysites/barracks.empire/conf:8
@@ -1315,6 +1315,8 @@ msgid ""
 "If all needed wares are delivered in time, this building can produce %1$s in "
 "about %2$s on average."
 msgstr ""
+"Als alle benodigde goederen op tijd worden geleverd, dan kan dit gebouw %1$s "
+"maken in gemiddeld ongeveer %2$s."
 
 #: ../../tribes/barbarians/axefactory/help.lua:63
 #: ../../tribes/barbarians/bakery/help.lua:55
@@ -1786,7 +1788,7 @@ msgstr ""
 #: ../../tribes/barbarians/coalmine/help.lua:17
 #: ../../tribes/barbarians/deep_coalmine/help.lua:38
 msgid "Coal mine"
-msgstr ""
+msgstr "Kolenmijn"
 
 #: ../../tribes/barbarians/coalmine/help.lua:19
 #: ../../tribes/barbarians/deep_coalmine/help.lua:19
@@ -2004,6 +2006,8 @@ msgstr "Meestermijnwerker"
 msgid ""
 "If the food supply is steady, this mine can produce %1$s in %2$s on average."
 msgstr ""
+"Als de aanvoer van voedsel stabiel is, dan kan deze mijn %1$s leveren in "
+"gemiddeld %2$s."
 
 #: ../../tribes/barbarians/conf:4
 msgid "The Widelands Development Team"
@@ -2578,7 +2582,7 @@ msgstr "Diepere kolenmijn"
 
 #: ../../tribes/barbarians/conf:211
 msgid "Coal Mine"
-msgstr ""
+msgstr "Kolenmijn"
 
 #: ../../tribes/barbarians/conf:212
 #: ../../tribes/barbarians/deep_oremine/help.lua:44
@@ -2632,11 +2636,11 @@ msgstr "Verdedigingstoren"
 
 #: ../../tribes/barbarians/conf:232
 msgid "Headquarters Medium"
-msgstr ""
+msgstr "Gemiddeld hoofdkwartier"
 
 #: ../../tribes/barbarians/conf:233
 msgid "Citadel Village"
-msgstr ""
+msgstr "Citadeldorp"
 
 #: ../../tribes/barbarians/deep_coalmine/help.lua:54
 #: ../../tribes/barbarians/deep_goldmine/help.lua:50

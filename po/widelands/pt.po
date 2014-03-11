@@ -3,14 +3,14 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2014-03-06 22:20+0100\n"
-"PO-Revision-Date: 2014-03-01 00:42+0000\n"
-"Last-Translator: daniel reis <danielreis40@yahoo.com.br>\n"
+"PO-Revision-Date: 2014-03-11 01:29+0000\n"
+"Last-Translator: Flávio J. Saraiva <flaviojs2005@gmail.com>\n"
 "Language-Team: Portuguese <pt@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-03-07 05:39+0000\n"
+"X-Launchpad-Export-Date: 2014-03-11 05:30+0000\n"
 "X-Generator: Launchpad (build 16948)\n"
 "Language: pt\n"
 
@@ -46,7 +46,7 @@ msgstr "Ferramentas"
 #: ../../src/editor/editorinteractive.cc:71
 #: ../../src/editor/ui_menus/editor_toolsize_menu.cc:41
 msgid "Tool Size"
-msgstr ""
+msgstr "Tamanho da Ferramenta"
 
 #: ../../src/editor/editorinteractive.cc:74
 #: ../../src/wui/interactive_player.cc:119
@@ -57,7 +57,7 @@ msgstr "Mini-mapa"
 #: ../../src/editor/editorinteractive.cc:77
 #: ../../src/wui/interactive_player.cc:122
 msgid "Show Building Spaces (on/off)"
-msgstr ""
+msgstr "Mostrar espaços de construção (ligar/desligar)"
 
 #: ../../src/editor/editorinteractive.cc:80
 #: ../../src/ui_fsmenu/launchMPG.cc:162
@@ -117,11 +117,11 @@ msgstr "Carregando gráficos..."
 
 #: ../../src/editor/editorinteractive.cc:252
 msgid "Unsaved Map"
-msgstr ""
+msgstr "Mapa Não Gravado"
 
 #: ../../src/editor/editorinteractive.cc:253
 msgid "The Map has not been saved, do you really want to quit?"
-msgstr ""
+msgstr "O mapa ainda não foi gravado, tem a certeza que quer sair?"
 
 #: ../../src/editor/editorinteractive.cc:597
 #: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:179
@@ -129,7 +129,7 @@ msgstr ""
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:182
 #: ../../src/logic/map.h:168
 msgid "No Name"
-msgstr "Sem nome"
+msgstr "Sem Nome"
 
 #: ../../src/editor/editorinteractive.cc:599
 #: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:180
@@ -142,16 +142,16 @@ msgstr "Desconhecido"
 
 #: ../../src/editor/tools/editor_info_tool.cc:43
 msgid "Field Information"
-msgstr "Informação sobre o campo"
+msgstr "Informação da Célula"
 
 #: ../../src/editor/tools/editor_info_tool.cc:52
 msgid "Node:"
-msgstr ""
+msgstr "Nó:"
 
 #: ../../src/editor/tools/editor_info_tool.cc:54
 #, c-format
 msgid "Coordinates: (%1$i, %2$i)"
-msgstr ""
+msgstr "Coordenadas: (%1$i, %2$i)"
 
 #: ../../src/editor/tools/editor_info_tool.cc:57
 #: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:85
@@ -165,17 +165,17 @@ msgstr "Altura: %u"
 #. * TRANSLATORS: This is part of a list, e.g. Caps: medium flag walk
 #: ../../src/editor/tools/editor_info_tool.cc:65
 msgid " small"
-msgstr ""
+msgstr " pequeno"
 
 #. * TRANSLATORS: This is part of a list, e.g. Caps: medium flag walk
 #: ../../src/editor/tools/editor_info_tool.cc:67
 msgid " medium"
-msgstr ""
+msgstr " médio"
 
 #. * TRANSLATORS: This is part of a list, e.g. Caps: medium flag walk
 #: ../../src/editor/tools/editor_info_tool.cc:69
 msgid " big"
-msgstr ""
+msgstr " grande"
 
 #. * TRANSLATORS: This is part of a list, e.g. Caps: medium flag walk
 #: ../../src/editor/tools/editor_info_tool.cc:73
@@ -190,7 +190,7 @@ msgstr " mina"
 #. * TRANSLATORS: This is part of a list, e.g. Caps: big flag port walk
 #: ../../src/editor/tools/editor_info_tool.cc:77
 msgid " port"
-msgstr " porta"
+msgstr " porto"
 
 #. * TRANSLATORS: This is part of a list, e.g. Caps: medium flag walk
 #: ../../src/editor/tools/editor_info_tool.cc:79
@@ -205,44 +205,44 @@ msgstr " nadar"
 #: ../../src/editor/tools/editor_info_tool.cc:83
 #, c-format
 msgid "Caps:%s"
-msgstr ""
+msgstr "Capacidades:%s"
 
 #: ../../src/editor/tools/editor_info_tool.cc:86
 #, c-format
 msgid "Owned by %i"
-msgstr ""
+msgstr "Pertence a %i"
 
 #: ../../src/editor/tools/editor_info_tool.cc:89
 msgid "Has base immovable"
-msgstr ""
+msgstr "Tem base imóvel"
 
 #: ../../src/editor/tools/editor_info_tool.cc:89
 msgid "No base immovable"
-msgstr ""
+msgstr "Sem base imóvel"
 
 #: ../../src/editor/tools/editor_info_tool.cc:92
 msgid "Has bobs"
-msgstr ""
+msgstr "Tem objetos bob"
 
 #: ../../src/editor/tools/editor_info_tool.cc:92
 msgid "No bobs"
-msgstr ""
+msgstr "Sem objetos bob"
 
 #: ../../src/editor/tools/editor_info_tool.cc:96
 msgid "Terrain:"
-msgstr ""
+msgstr "Terreno:"
 
 #: ../../src/editor/tools/editor_info_tool.cc:103
 #: ../../src/editor/tools/editor_info_tool.cc:125
 #: ../../src/editor/tools/editor_info_tool.cc:137
 #, c-format
 msgid "Name: %s"
-msgstr ""
+msgstr "Nome: %s"
 
 #: ../../src/editor/tools/editor_info_tool.cc:104
 #, c-format
 msgid "Texture Number: %i"
-msgstr ""
+msgstr "Número da Textura: %i"
 
 #: ../../src/editor/tools/editor_info_tool.cc:107
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:251
@@ -252,42 +252,42 @@ msgstr "Recursos:"
 #: ../../src/editor/tools/editor_info_tool.cc:114
 #, c-format
 msgid "Resource name: %s"
-msgstr ""
+msgstr "Nome do recurso: %s"
 
 #: ../../src/editor/tools/editor_info_tool.cc:116
 #, c-format
 msgid "Resource amount: %i"
-msgstr ""
+msgstr "Quantidade do recurso: %i"
 
 #: ../../src/editor/tools/editor_info_tool.cc:120
 msgid "No resources"
-msgstr ""
+msgstr "Sem recursos"
 
 #: ../../src/editor/tools/editor_info_tool.cc:124
 msgid "Map:"
-msgstr ""
+msgstr "Mapa:"
 
 #: ../../src/editor/tools/editor_info_tool.cc:126
 #, c-format
 msgid "Size: %1$ix%2$i"
-msgstr ""
+msgstr "Tamanho: %1$ix%2$i"
 
 #: ../../src/editor/tools/editor_info_tool.cc:129
 #, c-format
 msgid "Players: %i"
-msgstr ""
+msgstr "Jogadores: %i"
 
 #: ../../src/editor/tools/editor_info_tool.cc:132
 #: ../../src/editor/tools/editor_info_tool.cc:138
 #, c-format
 msgid "Author: %s"
-msgstr ""
+msgstr "Autor: %s"
 
 #: ../../src/editor/tools/editor_info_tool.cc:133
 #: ../../src/editor/tools/editor_info_tool.cc:139
 #, c-format
 msgid "Descr: %s"
-msgstr ""
+msgstr "Descrição: %s"
 
 #: ../../src/editor/tools/editor_info_tool.cc:136
 #: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:91
@@ -301,24 +301,24 @@ msgstr "Mundo:"
 #: ../../src/editor/ui_menus/editor_main_menu.cc:51
 #: ../../src/wui/game_main_menu.cc:42
 msgid "Main Menu"
-msgstr "Menu principal"
+msgstr "Menu Principal"
 
 #: ../../src/editor/ui_menus/editor_main_menu.cc:56
 #: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:46
 #: ../../src/ui_fsmenu/editor.cc:43
 msgid "New Map"
-msgstr "Novo mapa"
+msgstr "Novo Mapa"
 
 #: ../../src/editor/ui_menus/editor_main_menu.cc:61
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:49
 msgid "New Random Map"
-msgstr "Novo Mapa aleatório"
+msgstr "Novo Mapa Aleatório"
 
 #: ../../src/editor/ui_menus/editor_main_menu.cc:66
 #: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:52
 #: ../../src/ui_fsmenu/editor.cc:48
 msgid "Load Map"
-msgstr "Carregar um mapa"
+msgstr "Carregar Mapa"
 
 #: ../../src/editor/ui_menus/editor_main_menu.cc:71
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:54
@@ -328,7 +328,7 @@ msgstr "Guardar Mapa"
 #: ../../src/editor/ui_menus/editor_main_menu.cc:76
 #: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:48
 msgid "Map Options"
-msgstr "Opções de mapa"
+msgstr "Opções do Mapa"
 
 #: ../../src/editor/ui_menus/editor_main_menu.cc:81
 #: ../../src/ui_fsmenu/main.cc:70
@@ -337,7 +337,7 @@ msgstr "Leia-me"
 
 #: ../../src/editor/ui_menus/editor_main_menu.cc:86
 msgid "Exit Editor"
-msgstr "Sair do editor"
+msgstr "Sair do Editor"
 
 #: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:70
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:81
@@ -376,7 +376,7 @@ msgstr "Jogadores:"
 #: ../../src/ui_fsmenu/editor_mapselect.cc:81
 #: ../../src/ui_fsmenu/mapselect.cc:94
 msgid "Descr:"
-msgstr "Descr:"
+msgstr "Descrição:"
 
 #: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:121
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:132
@@ -390,7 +390,7 @@ msgstr "Descr:"
 #: ../../src/ui_fsmenu/mapselect.cc:110
 #: ../../src/wui/game_main_menu_save_game.cc:96
 msgid "OK"
-msgstr "OK"
+msgstr "Aceitar"
 
 #: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:130
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:139
@@ -412,11 +412,11 @@ msgstr "pai"
 #: ../../src/ui_fsmenu/loadgame.cc:89 ../../src/ui_fsmenu/loadreplay.cc:73
 #: ../../src/wui/game_main_menu_save_game.cc:69
 msgid "Map Name:"
-msgstr "Nome do mapa:"
+msgstr "Nome do Mapa:"
 
 #: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:71
 msgid "Nr Players:"
-msgstr "Nº de jogadores:"
+msgstr "Número de Jogadores:"
 
 #: ../../src/editor/ui_menus/editor_main_menu_map_options.cc:102
 msgid "Set origin"
@@ -476,16 +476,16 @@ msgstr "Modo Ilha:"
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:254
 msgid "Low"
-msgstr "Baixo"
+msgstr "Poucos"
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:255
 #: ../../src/logic/building.cc:546
 msgid "Medium"
-msgstr "Médio"
+msgstr "Médios"
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:256
 msgid "High"
-msgstr "Elevado"
+msgstr "Muitos"
 
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:293
 msgid "Map ID:"
@@ -507,7 +507,7 @@ msgstr "Gerando mapa aleatório ..."
 
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:116
 msgid "Descr: "
-msgstr "Descr: "
+msgstr "Descrição: "
 
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:146
 #: ../../src/editor/ui_menus/editor_main_menu_save_map_make_directory.cc:33
@@ -520,22 +520,22 @@ msgstr "sem nome"
 
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:255
 msgid "directory"
-msgstr ""
+msgstr "diretório"
 
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:259
 msgid "Not a map file"
-msgstr ""
+msgstr "Não é um mapa"
 
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:386
 #: ../../src/wui/game_main_menu_save_game.cc:265
 #, c-format
 msgid "A File with the name ‘%s’ already exists. Overwrite?"
-msgstr ""
+msgstr "Já existe um ficheiro com o nome ‘%s’. Substituir?"
 
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:389
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:409
 msgid "Error Saving Map!!"
-msgstr ""
+msgstr "Erro a Guardar Mapa!!"
 
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:405
 msgid ""
@@ -544,14 +544,18 @@ msgid ""
 "\n"
 "Reason given:\n"
 msgstr ""
+"Erro a Guardar Mapa!\n"
+"O ficheiro pode estar corrupto!\n"
+"\n"
+"Causa:\n"
 
 #: ../../src/editor/ui_menus/editor_main_menu_save_map_make_directory.cc:39
 msgid "Enter Directory Name: "
-msgstr "Digita o nome do directório: "
+msgstr "Nome do directório: "
 
 #: ../../src/editor/ui_menus/editor_player_menu.cc:44
 msgid "Player Options"
-msgstr "Opções de jogador"
+msgstr "Opções de Jogador"
 
 #: ../../src/editor/ui_menus/editor_player_menu.cc:50
 msgid "Add player"
@@ -570,7 +574,7 @@ msgstr "Número de Jogadores"
 #: ../../src/network/nethost.cc:2078
 #, c-format
 msgid "Player %s"
-msgstr ""
+msgstr "Jogador %s"
 
 #: ../../src/editor/ui_menus/editor_player_menu.cc:326
 msgid "Error!"
@@ -581,6 +585,9 @@ msgid ""
 "Cannot remove player. It is referenced someplace. Remove all buildings and "
 "bobs that depend on this player and try again."
 msgstr ""
+"Não é possível remover o jogador. Está a ser referenciado em algum lado. "
+"Remove todos os edifícios e objetos bob que dependem deste jogador e tenta "
+"outra vez."
 
 #: ../../src/editor/ui_menus/editor_player_menu_allowed_buildings_menu.cc:57
 msgid "Allowed Buildings"
@@ -609,25 +616,25 @@ msgstr "Opções das Ferramentas de Elevação"
 #: ../../src/editor/ui_menus/editor_tool_change_height_options_menu.cc:44
 #: ../../src/editor/ui_menus/editor_tool_change_resources_options_menu.cc:49
 msgid "Increase/Decrease Value"
-msgstr ""
+msgstr "Aumentar/Diminuir"
 
 #: ../../src/editor/ui_menus/editor_tool_change_height_options_menu.cc:80
 #: ../../src/editor/ui_menus/editor_tool_change_resources_options_menu.cc:80
 msgid "Set Value"
-msgstr "Define valor"
+msgstr "Nivelar"
 
 #: ../../src/editor/ui_menus/editor_tool_change_resources_options_menu.cc:45
 #: ../../src/editor/ui_menus/editor_tool_menu.cc:70
 msgid "Resources"
-msgstr ""
+msgstr "Recursos"
 
 #: ../../src/editor/ui_menus/editor_tool_change_resources_options_menu.cc:99
 msgid "Current Selection"
-msgstr "Selecção actual"
+msgstr "Seleção Atual"
 
 #: ../../src/editor/ui_menus/editor_tool_menu.cc:65
 msgid "Change height"
-msgstr "Mudar a elevação"
+msgstr "Mudar elevação"
 
 #: ../../src/editor/ui_menus/editor_tool_menu.cc:66
 msgid "Noise height"
@@ -640,12 +647,12 @@ msgstr "Terreno"
 
 #: ../../src/editor/ui_menus/editor_tool_menu.cc:68
 msgid "Immovables"
-msgstr ""
+msgstr "Objetos Imóveis"
 
 #: ../../src/editor/ui_menus/editor_tool_menu.cc:69
 #: ../../src/editor/ui_menus/editor_tool_place_bob_options_menu.cc:45
 msgid "Bobs"
-msgstr ""
+msgstr "Objetos Bob"
 
 #
 # File: ../../src/editor/ui_menus/editor_tool_menu.cc, line: 73
@@ -656,7 +663,7 @@ msgstr "Definir local para o porto"
 
 #: ../../src/editor/ui_menus/editor_tool_noise_height_options_menu.cc:42
 msgid "Noise Height Options"
-msgstr "Opções do Nivel de Ruido"
+msgstr "Elevação com Ruído"
 
 #: ../../src/editor/ui_menus/editor_tool_noise_height_options_menu.cc:147
 #, c-format
@@ -675,16 +682,16 @@ msgstr "Define valor: %u"
 
 #: ../../src/editor/ui_menus/editor_tool_place_immovable_options_menu.cc:45
 msgid "Immovable Bobs"
-msgstr ""
+msgstr "Objectos Imóveis"
 
 #: ../../src/editor/ui_menus/editor_tool_set_terrain_options_menu.cc:46
 msgid "Terrain Select"
-msgstr "Terreno selecionado"
+msgstr "Seleção de Terreno"
 
 #: ../../src/editor/ui_menus/editor_tool_set_terrain_options_menu.cc:151
 #: ../../src/editor/ui_menus/editor_tool_set_terrain_options_menu.cc:200
 msgid "Current:"
-msgstr "Actual:"
+msgstr "Selecionado:"
 
 #: ../../src/editor/ui_menus/editor_toolsize_menu.cc:75
 #, c-format
@@ -693,7 +700,7 @@ msgstr "Tamanho actual: %u"
 
 #: ../../src/game_io/game_preload_data_packet.cc:72
 msgid "Endless Game"
-msgstr "Jogo infinito"
+msgstr "Jogo Infinito"
 
 #: ../../src/game_io/game_preload_data_packet.cc:77
 #: ../../src/logic/game.cc:248 ../../src/logic/game.cc:344

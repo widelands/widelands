@@ -7,13 +7,13 @@ msgstr ""
 "Project-Id-Version: Widelands svn4556\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2014-03-06 21:20+0000\n"
-"PO-Revision-Date: 2014-03-08 09:31+0000\n"
+"PO-Revision-Date: 2014-03-10 15:11+0000\n"
 "Last-Translator: fk <Unknown>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-03-09 05:38+0000\n"
+"X-Launchpad-Export-Date: 2014-03-11 05:29+0000\n"
 "X-Generator: Launchpad (build 16948)\n"
 
 #: ../../campaigns/atl01.wmf/elemental:9
@@ -195,27 +195,35 @@ msgid ""
 "In this tutorial, the basic gameplay and control as well as basic production "
 "buildings of the Barbarians are introduced."
 msgstr ""
+"In deze tutorial worden de zowel de basis van het spelen en bedienen "
+"geïntroduceerd als de productiegebouwen van de Barbaren."
 
 #: ../../campaigns/t02.wmf/elemental:9
 msgid ""
 "In this scenario, the higher production buildings including mining and "
 "military expansions will be introduced."
 msgstr ""
+"In dit scenario worden de hogere productiegebouwen, inclusief mijnbouw en "
+"militaire uitbreidingen, geïntroduceerd."
 
 #: ../../campaigns/t03.wmf/elemental:9
 msgid ""
 "This tutorial explains the handling of military and training site buildings "
 "and will introduce fighting."
 msgstr ""
+"Deze tutorial legt uit hoe je met militaire- en trainingsgebouwen kunt "
+"omgaan en zal het vechten introduceren."
 
 #: ../../campaigns/tutorial01.wmf/elemental:7
 msgid "Tutorial 1"
-msgstr ""
+msgstr "Tutorial 1"
 
 #: ../../campaigns/tutorial01.wmf/elemental:9
 msgid ""
 "Basic Tutorial – a map based on Winterwind’s tutorial 1 for the Barbarians"
 msgstr ""
+"Basis Tutorial - een kaart gebaseerd op Winterwind's tutorial 1 voor de "
+"Barbaren"
 
 #: ../../maps/Atoll.wmf/elemental:9
 msgid "Atoll"
@@ -651,10 +659,14 @@ msgid ""
 "hard to conquer but easy to lose. So, if you want it, be aware of the other "
 "clans."
 msgstr ""
+"Je staat op een eiland, gekroond met machtige bergen die een schitterende en "
+"rijke schat in hun midden bewaren - De Groene Hoogvlakte, die moeilijk te "
+"verkrijgen, maar makkelijk te verliezen is. Dus, als je het wilt, moet je de "
+"andere clans in de gaten houden."
 
 #: ../../maps/Plateau.wmf/elemental:10
 msgid "Suggested Teams: blue vs. yellow"
-msgstr ""
+msgstr "Aanbevolen teams: blauw vs geel"
 
 #: ../../maps/Rendez-Vous.wmf/elemental:7
 msgid "Rendez-Vous"
@@ -686,6 +698,11 @@ msgid ""
 "priority – expeditions are universally useful and are often the fastest way "
 "to gold deposits."
 msgstr ""
+"Elke speler heeft een ander obstakel voor uitbreiding, en er is altijd meer "
+"dan één manier om het te overwinnen. Hoewel de AI kan worden verslagen "
+"zonder een enkel schip te bouwen, wordt spelers aangeraden om van havens en "
+"scheepswerven een prioriteit te maken - expedities zijn universeel nuttig en "
+"zijn vaak de snelste weg naar goudvoorraden."
 
 #: ../../maps/Riverlands.wmf/elemental:7
 msgid "Riverlands"
@@ -701,7 +718,7 @@ msgstr ""
 
 #: ../../maps/Sun of fire.wmf/elemental:9
 msgid "The Ancient Sun of Fire"
-msgstr ""
+msgstr "De Oude Vuurzon"
 
 #: ../../maps/Sun of fire.wmf/elemental:11
 msgid ""
@@ -710,6 +727,10 @@ msgid ""
 "been barefaced enough to settle on the coast of that island, a lot of others "
 "followed in its wake."
 msgstr ""
+"Honderden jaren lang was dit eiland de rustplaats van de goden. Geen mens "
+"heeft het ooit gewaagd een voet aan wal te zetten. Maar nu eindelijk een "
+"stam brutaal genoeg was om zich op de kust te vestigen, volgden velen in "
+"zijn voetsporen."
 
 #: ../../maps/Swamp Island.wmf/elemental:9
 msgid "Swamp Island"
@@ -721,6 +742,9 @@ msgid ""
 "place you were born and where you’ve lived your whole life. If you don’t "
 "want to lose it, defend it!"
 msgstr ""
+"Het ruikt als een moeras, het ziet er uit als een moeras en het is een "
+"moeras. Maar het is de plaats waar je geboren bent en waar je al je hele "
+"leven woont. Als je het niet wilt verliezen, verdedig het!"
 
 #: ../../maps/Swamp Monks.wmf/elemental:7
 msgid "Swamp Monks"
@@ -731,6 +755,8 @@ msgid ""
 "It is said that the old war monks, living in the even older swamps, are the "
 "key to control over the whole island."
 msgstr ""
+"Er word gefluisterd dat de oude monniken, levend in het nog oudere moeras, "
+"de sleutel zijn naar de bezetting van het gehele eiland."
 
 #: ../../maps/The Far North.wmf/elemental:9
 msgid "The Far North"
@@ -772,6 +798,8 @@ msgid ""
 "The river has always provided food and communication. This time, eight "
 "empires will fight for control over this land."
 msgstr ""
+"De rivier heeft altijd voedsel en communicatie verschaft. Ditmaal zullen "
+"acht imperia vechten voor de macht over dit land."
 
 #: ../../maps/The Nile.wmf/elemental:12
 msgid ""
@@ -780,6 +808,10 @@ msgid ""
 "green) vs. (red, yellow, black) | (blue, green, orange, white) vs. (red, "
 "yellow, black, purple)"
 msgstr ""
+"Aanbevolen teams: blauw vs rood, geel vs groen, (blauw, geel) vs (rood, "
+"groen), (groen, oranje, wit) vs (geel, zwart, paars), (blauw, oranje, groen) "
+"vs (rood, geel, zwart), (blauw, groen, oranje, wit) vs (rood, geel, zwart, "
+"paars)"
 
 #: ../../maps/The Oasis Triangle.wmf/elemental:7
 msgid "The Oasis Triangle"
@@ -791,6 +823,9 @@ msgid ""
 "which no one has found out about yet. Perhaps you will be the one, but be "
 "aware of the others who are searching too!"
 msgstr ""
+"Er is iets mystieks zoals een grijze sfeer rond deze oases, waar nog niemand "
+"iets over heeft ontdekt. Misschien ben jij degene, maar pas op voor de "
+"anderen die er ook naar aan het zoeken zijn!"
 
 #: ../../maps/The Thaw.wmf/elemental:9
 msgid "The Thaw"
@@ -804,10 +839,15 @@ msgid ""
 "the ancient altar, build there a splendid castle and gain the goodwill and "
 "respect of the Gods."
 msgstr ""
+"Een nieuwe dooi zet in. Drie stammen hebben tussen de majestueuze bergen "
+"gescholen voor de strenge winter. Tijdens de zonnewende hebben ze geluisterd "
+"naar het orakel, en zijn ze oorlog gaan voeren. De enige overlevende zal de "
+"schatten van zijn vijand op het eeuwenoude altaar offeren, er een prachtig "
+"kasteel bouwen en de goede wil en het respect van de Goden verkrijgen."
 
 #: ../../maps/The big lake.wmf/elemental:7
 msgid "The Big Lake"
-msgstr ""
+msgstr "Het Grote Meer"
 
 #: ../../maps/The big lake.wmf/elemental:9
 msgid ""
@@ -818,26 +858,37 @@ msgid ""
 "Nowadays only this ring is left from that mighty fire mountain. Do you think "
 "that it is big enough for more than one tribe?"
 msgstr ""
+"Dit eiland steeg ooit op uit de diepste lagen van de zee. In die dagen rees "
+"het vuur uit het zoute zeewater en bracht as, steen en aarde aan het "
+"oppervlak. En het vuur steeg hoger en hoger naar de zon, terwijl de berg "
+"groeide en groeide. Tot op een dag de hele vuurberg ontplofte. Nu is er "
+"slechts nog deze ring over van die machtige vuurberg. Denk je dat het groot "
+"genoeg is voor meer dan één stam?"
 
 #: ../../maps/The long way.wmf/elemental:7
 msgid "The Long Way"
-msgstr ""
+msgstr "De lange weg"
 
 #: ../../maps/The long way.wmf/elemental:9
 msgid ""
 "Another strange test by the Gods. To reach the other side, there seems to be "
 "no other way but to occupy the land of your enemies."
 msgstr ""
+"Een andere vreemde beproeving door de goden. Om de andere kant te bereiken, "
+"lijkt er geen andere weg te zijn behalve het bezetten van het land van je "
+"vijanden."
 
 #: ../../maps/The pass through the mountains.wmf/elemental:9
 msgid "The Pass Through the Mountains"
-msgstr ""
+msgstr "De Pas door de Bergen"
 
 #: ../../maps/The pass through the mountains.wmf/elemental:11
 msgid ""
 "In this mountainous area two princes have settled. Now they are expanding "
 "their territories, unaware of the fact that they are not alone!"
 msgstr ""
+"In dit bergachtige gebied hebben twee prinsen zich gevestigd. Nu zijn ze aan "
+"het uitbreiden, onbewust van het feit dat ze niet alleen zijn!"
 
 #: ../../maps/Three Warriors.wmf/elemental:9
 msgid "Three Warriors"
@@ -855,7 +906,7 @@ msgstr ""
 
 #: ../../maps/Together we're strong.wmf/elemental:9
 msgid "Together We’re Strong"
-msgstr ""
+msgstr "Samen staan we sterk"
 
 #: ../../maps/Together we're strong.wmf/elemental:11
 msgid ""
@@ -869,6 +920,16 @@ msgid ""
 "seems only a matter of time before the first fights between the harbors will "
 "shatter the peaceful life that has lasted for so long..."
 msgstr ""
+"De vier machtige havens van de Craw Eilanden verhandelden hun goederen met "
+"elkaar voor eeuwen. Ieder van hen had grondstoffen nodig, die zij niet op "
+"hun eigen territorium konden maken en verschafte in ruil grondstoffen die de "
+"ander niet kon maken. Gebaseerd op deze handel was een zeer "
+"vriendschappelijke commercie gebruikelijk tussen de vier havens en de mensen "
+"die op de Craw Eilanden woonden - totdat onlangs twee van de havens zich "
+"verenigden in een exclusieve alliantie, wat de andere twee ertoe dwong "
+"hetzelfde te doen. Plotseling lijkt het alsof het slechts een kwestie is van "
+"tijd, totdat de eerste gevechten tussen de havens het vreedzame leven dat "
+"zolang had geduurd zullen verbrijzelen..."
 
 #: ../../maps/Trident of Fire.wmf/elemental:9
 msgid "Trident of Fire"
@@ -881,12 +942,19 @@ msgid ""
 "be discovered. But only by becoming a naval power will your tribe be able to "
 "explore enough resources to compete with its opponents."
 msgstr ""
+"In de omgeving van drie grote vulkanen nodigen zes lieflijke eilanden "
+"kolonisten uit een nieuw leven te beginnen. Woestijnen en een snel groeiend "
+"bos wachten erop te worden ontdekt. Maar slechts door een zeemacht te worden "
+"zal jouw stam ertoe in staat zijn voldoende delfstoffen te ontdekken om met "
+"haar tegenstanders te kunnen wedijveren."
 
 #: ../../maps/Trident of Fire.wmf/elemental:12
 msgid ""
 "Suggested teams: red vs. green | (blue, yellow) vs. (green, orange) | (blue, "
 "black) vs. (green, red) | (blue, black, yellow) vs. (green, red, orange)"
 msgstr ""
+"Aanbevolen teams: rood vs groen, (blauw, geel) vs (groen, oranje), (blauw, "
+"zwart) vs (groen ,rood), (blauw, zwart, geel) vs (groen, rood, oranje)"
 
 #: ../../maps/Twin Lagoons.wmf/elemental:9
 msgid "Twin Lagoons"
@@ -901,6 +969,12 @@ msgid ""
 "well-known reason. Defend your transport lines or use ships to bypass the "
 "opponent. Then remove all enemy activity."
 msgstr ""
+"Toen de wind aanzwol en de eerste duinen werden gevormd op deze afgelegen "
+"tweelinglagunes, had niemand kunnen verwachten dat twee stammen die wanhopig "
+"op zoek zijn naar meer delfstoffen om hun eindeloos doorgaande oorlogen te "
+"ondersteunen terecht zouden komen op deze vergeten plek op hetzelfde moment "
+"en om dezelfde bekende reden. Verdedig je transportroutes of gebruik schepen "
+"om de vijand te omzeilen. Verwijder daarna iedere vijandige activiteit."
 
 #: ../../maps/Twinkling Waves.wmf/elemental:9
 msgid "Twinkling Waves"
@@ -921,6 +995,7 @@ msgstr "Twee Grenzen"
 #: ../../maps/Two frontiers.wmf/elemental:9
 msgid "A multiplayer battle map on a small circle-shaped island."
 msgstr ""
+"Een strijdkaart voor meerdere spelers op een klein cirkelvormig eiland."
 
 #: ../../maps/Volcanic Winter.wmf/elemental:9
 msgid "Volcanic Winter"
@@ -933,6 +1008,11 @@ msgid ""
 "were those that enforced this dramatic change. Continents, oceans and seas "
 "are frozen now, only the volcanic islands seem to be left as habitable land."
 msgstr ""
+"In het midden van de zomer luidden een stel vulkaanuitbarstingen de winter "
+"in. Plotseling lijkt de zon te zijn verdwenen en de enige licht- en "
+"warmtebronnen die er nog zijn zijn die, die deze dramatische verandering "
+"hebben afgedwongen. Continenten, oceanen en zeeën zijn nu bevroren, alleen "
+"de vulkanische eilanden schijnen nog over te zijn als bewoonbaar land."
 
 #: ../../maps/War of the Valleys.wmf/elemental:7
 msgid "War of the Valleys"
@@ -944,6 +1024,9 @@ msgid ""
 "of these mountains. HINT: Monoliths mark ore-spots. Don’t bother sending "
 "geologists anywhere else."
 msgstr ""
+"Er wordt gefluisterd dat zelfs de zon en de maan hun weg moeten zoeken "
+"tussen deze bergpieken. HINT: Monolieten markeren delfstoffen. Doe geen "
+"moeite om geologen elders te sturen."
 
 #: ../../maps/Wisent Valley.wmf/elemental:9
 msgid "Wisent Valley"
@@ -956,3 +1039,7 @@ msgid ""
 "offered enough space for a peaceful life. But can your tribe live in peace "
 "with your neighbors?"
 msgstr ""
+"Het lijkt er op alsof deze magische vallei sinds het begin der dagen bewoond "
+"werd door wisenten. Toen je stam naar deze plek kwam, was je er zeker van "
+"dat ze genoeg ruimte bood voor een vredig leven, Maar kan je stam in vrede "
+"leven met je buren?"

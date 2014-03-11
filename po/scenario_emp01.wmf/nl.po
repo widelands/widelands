@@ -1,22 +1,23 @@
 # Widelands po/nl_NL/campaigns/emp01.wmf.po
 # Copyright (C) 2008 Widelands Development Team
 # FIRST AUTHOR <EMAIL@ADDRESS.TLD>, YEAR.
-#
+# GunChleoc <fios@foramnagaidhlig.net>, 2014.
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4556\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2014-03-06 21:20+0000\n"
-"PO-Revision-Date: 2010-11-19 10:23+0000\n"
-"Last-Translator: Foppe Benedictus <Unknown>\n"
-"Language-Team: Dutch <LL@li.org>\n"
+"PO-Revision-Date: 2014-03-10 08:51+0000\n"
+"Last-Translator: GunChleoc <Unknown>\n"
+"Language-Team: Widelands fixxer upper\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-03-07 05:32+0000\n"
+"X-Launchpad-Export-Date: 2014-03-11 05:29+0000\n"
 "X-Generator: Launchpad (build 16948)\n"
 "X-Poedit-Country: NETHERLANDS\n"
+"Language: nl\n"
 "X-Poedit-Language: Dutch\n"
 "X-Poedit-SearchPath-0: campaigns\n"
 "X-Poedit-Basepath: ../../pot/\n"
@@ -34,10 +35,12 @@ msgid ""
 "Build a barracks at the red house symbol on the east side of the forests, to "
 "the right of your provisional headquarters."
 msgstr ""
+"Bouw barakken bij het rode huis symbool aan de oost kant van het bos, rechts "
+"van het voorlopige hoofdkwartier."
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:36
 msgid "Build a lumberjack’s house"
-msgstr ""
+msgstr "Bouw een houthakkershut"
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:38
 msgid "Lumberjack’s House"
@@ -48,30 +51,36 @@ msgid ""
 "Build a lumberjack’s house at the red house symbol, south of your "
 "provisional headquarters."
 msgstr ""
+"Bouw een houthakkershuis op het rode huis symbool ten zuiden van het "
+"voorlopige hoofdkwartier."
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:40
 msgid ""
 "Cutting down enough trees for more buildings will take a while. You can "
 "speed the game up by using PAGE UP and slow it down again with PAGE DOWN."
 msgstr ""
+"Het zal een tijdje duren voordat we genoeg bomen omgehakt hebben. Het spel "
+"kan versneld worden met PAGE UP en vertraagd met PAGE DOWN."
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:46
 msgid "Build 2 lumberjack’s houses and a sawmill"
-msgstr ""
+msgstr "Bouw twee houthakkershutten en een houtzagerij"
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:48
 msgid "Two Lumberjack’s Houses and a Sawmill"
-msgstr ""
+msgstr "Bouw twee houthakkershutten en een houtzagerij"
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:49
 msgid ""
 "Build two more lumberjack’s houses and a sawmill as soon as there is enough "
 "space for them."
 msgstr ""
+"Bouw nog twee houthakkershuizen en een houtzagerij zodra er voldoende ruimte "
+"voor is."
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:54
 msgid "Build a forester’s house"
-msgstr ""
+msgstr "Bouw een boswachtershuis"
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:56
 msgid "Forester’s House"
@@ -81,6 +90,7 @@ msgstr ""
 msgid ""
 "Build a forester’s house to preserve the wood resources of this island."
 msgstr ""
+"Bouw een boswachterhuis om de houtbronnen van het eiland te beschermen."
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:62
 msgid "Build a quarry"
@@ -94,14 +104,16 @@ msgstr ""
 msgid ""
 "Build a quarry in the south to cut some stones and marble out of the rocks."
 msgstr ""
+"Bouw een steengroeve in het zuiden om steen en marmer uit de rotsen te "
+"houwen."
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:66
 msgid "These might be used for future buildings."
-msgstr ""
+msgstr "Dit zou nuttig kunnen zijn voor latere gebouwen."
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:75
 msgid "A Dark Night"
-msgstr ""
+msgstr "Een donkere nacht"
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:76
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:101
@@ -115,6 +127,10 @@ msgid ""
 "forbid me from fighting against that monstrous barbarian tribe, who first "
 "acted as a peaceful friend and then attacked my army in the darkest night?"
 msgstr ""
+"Wat is er geworden van ons Empirenrijk? Ik stel met recht deze vraag: waarom "
+"weerhield mijn koning mij ervan te vechten tegen die monsterlijke "
+"barbarenstam die zich eerst voordeed als een vredelievende vriend en daarna "
+"mijn leger in de donkerste nacht aanviel."
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:80
 msgid ""
@@ -124,6 +140,12 @@ msgid ""
 "of my men even traded with them and their kids came to us, to admire our "
 "clean and tidy uniforms and weapons."
 msgstr ""
+"Ik had, met een leger van 150 man, de taak toegewezen gekregen om de "
+"noordelijke kant van ons grensgebied te patrouilleren, gelegen bij de Galdin "
+"bergen in een groot, prachtig en zeer oud bos. Al snel kwamen we een "
+"barbarenstam tegen, die in eerste instantie vriendelijk was. Sommige van "
+"mijn mannen handelden zelfs met ze en hun kinderen kwamen bij ons om onze "
+"schone en nette uniformen en wapens te bewonderen."
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:84
 msgid ""
@@ -134,6 +156,12 @@ msgid ""
 "forest was their land – and it would stay theirs until the ghosts took the "
 "last man of his folk!"
 msgstr ""
+"Maar in onze vijfde nacht in die regio, vielen ze ons zonder reden aan. Ik "
+"verloor tientallen goede mannen, werd gevangen genomen en uiteindelijk naar "
+"hun stamhoofd gebracht. Hij spuugde naar mij, maakte me belachelijk en droeg "
+"mij op om dit land voor altijd te verlaten. Hij wilde geen nieuw land en "
+"niet ons land, maar hij zei me dat DIT bos hun land was en zou blijven tot "
+"de geesten de laatste man van zijn volk meenamen!"
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:89
 msgid ""
@@ -142,6 +170,10 @@ msgid ""
 "believed that our army was too weak to survive in a war against the "
 "barbarians."
 msgstr ""
+"Drie weken later kwam ik terug in Fremil om te praten met onze koning. Hij "
+"was razend op de barbaren, maar toch stond hij niet toe om een van de "
+"stammen aan te vallen. Hij geloofde dat ons leger te zwak was om een oorlog "
+"met de barbaren te kunnen weerstaan."
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:92
 msgid ""
@@ -150,10 +182,15 @@ msgid ""
 "life for myself, somewhere in the south. Now I am sailing on the perl-gulf "
 "with my family, some of my friends and a few of my best warriors."
 msgstr ""
+"Ik zag geen kans om mijn schuldgevoel kwijt te raken - zonder tegen de "
+"barbaren te vechten. Dus verliet ik Fremil met een boot om een nieuwe wereld "
+"te vinden en een nieuw leven voor mezelf ergens in het zuiden. En nu zeil ik "
+"over de Perlgolf met mijn familie, sommige van mijn vrienden en enkele van "
+"mijn beste strijders."
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:100
 msgid "The Rough Sea"
-msgstr ""
+msgstr "De ruige zee"
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:102
 msgid ""
@@ -162,12 +199,18 @@ msgid ""
 "know how many hours have passed since the waves rose higher than our boat, "
 "but still it would be suicide to go outside."
 msgstr ""
+"Het lijkt alsof het bevaren van de Perlgolf één van onze grootste fouten "
+"was. De natuur was tegen ons en dreef ons in een duistere, woeste storm. Ik "
+"weet echt niet hoeveel uren waren verstreken sinds de golven hoger werden "
+"dan onze boot, maar niettemin zou het zelfmoord zijn om naar buiten te gaan."
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:106
 msgid ""
 "Our ship is badly damaged and is taking in more and more water. We can thank "
 "the Gods if we survive this black night with our lives."
 msgstr ""
+"Ons schip is zwaar beschadigd en schept meer en meer water. We mogen de "
+"goden danken als we deze donkere nacht levend doorkomen zijn."
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:113
 msgid "Survivor"
@@ -175,7 +218,7 @@ msgstr "Overlevende"
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:115
 msgid "Finally, the Gods were with us!"
-msgstr ""
+msgstr "Eindelijk waren de goden aan onze zijde!"
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:116
 msgid ""
@@ -183,6 +226,10 @@ msgid ""
 "growing at the shore. But that is about as good as it gets. The truth is: "
 "when I woke up this morning, I saw nothing but sand around us."
 msgstr ""
+"We landden op een onbekende kust en vonden vredige rust onder de palmbomen "
+"die aan de kust groeiden. Maar dat is zo'n beetje al het goede nieuws. De "
+"waarheid is: Toen ik vanmorgen wakker werd, zag ik niets dan zand om ons "
+"heen."
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:119
 msgid ""
@@ -190,10 +237,13 @@ msgid ""
 "this far-away sandy desert. I fear we won’t find the help we need to get our "
 "ship repaired in good time."
 msgstr ""
+"Het lijkt er echt op dat we geland zijn onder de enige bestaande palmbomen "
+"in deze verre zandige woestijn. Ik vrees dat we niet de hulp gaan vinden om "
+"ons schip op tijd gerepareerd te krijgen."
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:126
 msgid "A Foreboding"
-msgstr ""
+msgstr "Een voorgevoel"
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:127
 msgid "Saledus looks around nervously..."
@@ -205,6 +255,10 @@ msgid ""
 "creatures live beyond this forest, in that mighty desert? What if these "
 "creatures enter the woods and await the time to attack us?"
 msgstr ""
+"Sire, ik vrees dat we niet veilig zijn in dit exotische land. Wie weet wat "
+"voor verschrikkelijke wezens er voorbij dit bos leven, in die grootse "
+"woestijn? Wat als deze schepsels de bossen betreden en de tijd afwachten om "
+"ons aan te vallen?"
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:131
 msgid ""
@@ -212,6 +266,9 @@ msgid ""
 "the forests – so that we can be sure to see any potential enemies before "
 "they can see us."
 msgstr ""
+"Goed, misschien is mijn angst misplaatst, maar het kan niet slecht zijn om "
+"wacht te houden in het bos - zodat we er zeker van zijn mogelijke vijanden "
+"te zien voordat ze ons zien."
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:133
 msgid ""
@@ -219,10 +276,12 @@ msgid ""
 "one of us can keep watch in the darkness and keep us safe from these "
 "creatures."
 msgstr ""
+"We moeten echt barakken bouwen in het oostelijke deel van het bos. Dan kan "
+"één van ons wacht houden in de duisternis en ons beschermen voor deze wezens."
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:141
 msgid "Safe For Now"
-msgstr ""
+msgstr "Veilig voor het moment"
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:142
 msgid "Saledus speaks with a sigh of relief..."
@@ -233,12 +292,16 @@ msgid ""
 "Sire, I saw that the construction of the barracks was completed, so I have "
 "assigned one of my best soldiers to it to keep watch on the desert."
 msgstr ""
+"Sire, ik zag dat de bouw van de barak gereed is, dus ik heb er een van mijn "
+"beste soldaten heen gestuurd om de woestijn in de gaten te houden."
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:145
 msgid ""
 "This is a good step forward. Now we can feel a bit safer and can look "
 "forward to repairing our ship."
 msgstr ""
+"Dit is een goede stap vooruit. Nu kunnen we ons iets veiliger voelen en ons "
+"richten op het repareren van ons schip."
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:150
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:163
@@ -252,13 +315,16 @@ msgstr "Amalea glimlacht..."
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:152
 msgid "Hey Lutius, I just met Saledus outside."
-msgstr ""
+msgstr "Hallo Lutius, ik ontmoette net Saledus."
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:153
 msgid ""
 "He told me about the barracks. Well, I am not one of those girls who think "
 "we need more barracks – instead, we might concentrate on other things now."
 msgstr ""
+"Hij vertelde me over de barakken. Nu ben ik niet een van de meiden die denk "
+"dat we meer barakken nodig hebben, ik denk dat we ons nu op andere dingen "
+"moeten concentreren."
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:155
 msgid ""
@@ -266,6 +332,9 @@ msgid ""
 "through the forest yesterday and found a nice place for a lumberjack’s "
 "house, south of our provisional headquarters."
 msgstr ""
+"Het is duidelijk dat we hout nodig hebben om ons schip te repareren. Dus "
+"wandelde ik door het bos en vond een mooie plaats voor een houthakkershuis "
+"ten zuiden van ons voorlopige hoofdkwartier."
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:164
 msgid "Amalea recommends..."
@@ -278,6 +347,10 @@ msgid ""
 "for constructing two more lumberjack’s houses, so that we can harvest the "
 "logs faster."
 msgstr ""
+"Hé Lutius, ik hoorde het bericht dat onze houthakker vandaag met zijn werk "
+"begonnen is. Misschien is het een goed idee om te wachten tot hij genoeg "
+"ruimte heeft vrijgemaakt voor nog twee houthakkershuizen, zodat we de "
+"boomstammen sneller kunnen verzamelen."
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:168
 msgid ""
@@ -285,6 +358,10 @@ msgid ""
 "refined lumber, like every ship and every bigger building needs, too. So we "
 "should build a sawmill – as soon as we have enough space for this."
 msgstr ""
+"Maar helaas zijn boomstammen onbruikbaar om ons schip te repareren - we "
+"hebben hebben bewerkt hout nodig, net als elk schip en elk groter gebouw. "
+"Dus moeten we een houtzagerij bouwen - zodra we er voldoende ruimte voor "
+"hebben."
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:177
 msgid "Amalea comes in..."
@@ -295,12 +372,16 @@ msgid ""
 "Hi Lutius, I’ve got two important things to talk about... First the good "
 "news:"
 msgstr ""
+"Hoi Lutius, ik heb twee belangrijke dingen om het over te hebben... Eerst "
+"het goede nieuws:"
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:179
 msgid ""
 "I noticed that the construction of the sawmill is complete, so we can begin "
 "to refine the logs that the lumberjacks are harvesting into lumber."
 msgstr ""
+"Ik zag dat de bouw van de houtzagerij voltooid is, dus we kunnen beginnen de "
+"stammen die de houthakkers hebben geoogst te verwerken tot planken."
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:181
 msgid ""
@@ -308,6 +389,9 @@ msgid ""
 "news is that our lumberjacks harvest at an incredible speed. There are "
 "almost no trees left on this island."
 msgstr ""
+"Maar dat is het bijna het enige goede waar ik het over kan hebben. Het "
+"slechte nieuws is dat de houthakkers op een ongelooflijke snelheid "
+"houthakken. Er zijn bijna geen bomen meer over op dit eiland."
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:184
 msgid ""
@@ -315,14 +399,20 @@ msgid ""
 "the desert and shade on the hot days, and they are the home of so many "
 "gentle animals. We shouldn’t leave this island a complete desert."
 msgstr ""
+"Lutius, deze bomen voorzien ons van bescherming tegen de zandstormen van de "
+"woestijn, schaduw op hete dagen en ze zijn het huis van zo veel zachtaardige "
+"dieren. We zouden dit eiland niet achter moeten laten als een complete "
+"woestijn."
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:187
 msgid "Lutius, I beg you: find someone who takes care of planting new trees."
 msgstr ""
+"Lutius, ik smeek je: zoek iemand die de taak op zich neemt nieuwe bomen te "
+"planten."
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:193
 msgid "Thinking About the Future"
-msgstr ""
+msgstr "Denkend aan de toekomst"
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:194
 msgid "Saledus notes..."
@@ -334,16 +424,22 @@ msgid ""
 "south shore of this land. Perhaps we could cut out some useful hard stones "
 "and beautiful marble."
 msgstr ""
+"Hé mijn goede oude vriend. Ik dacht net aan de stenen die op de zuidkust van "
+"dit land staan. Misschien zouden we wat bruikbare harde stenen en mooi "
+"marmer eruit kunnen hakken."
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:197
 msgid ""
 "The repair of our ship will take a few weeks, anyway, and the resources we "
 "harvest now might be the base of strong and big buildings in another land."
 msgstr ""
+"De reparatie van ons schip zal hoe dan ook een paar weken duren, en de "
+"grondstoffen die we nu verzamelen kunnen de basis zijn van sterke en grote "
+"gebouwen in een ander land."
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:204
 msgid "A Step Forward"
-msgstr ""
+msgstr "Een stap voorwaarts"
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:205
 msgid "Saledus looks promising..."
@@ -355,10 +451,14 @@ msgid ""
 "south began its work today and will soon provide us with stones and "
 "beautiful marble."
 msgstr ""
+"Hé Lutius, vandaag zijn we een stuk dichter bij ons eerste kasteel gekomen. "
+"De steengroeve in het zuiden is vandaag begonnen en zal ons spoedig van "
+"stenen en prachtig marmer voorzien."
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:208
 msgid "Now we truly can look forward to settling down on another island."
 msgstr ""
+"Nu kunnen we echt vooruitkijken naar het vestigen op een ander eiland."
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:213
 msgid "Mission Complete"
@@ -370,26 +470,33 @@ msgid ""
 "my people are loading everything onto our newly repaired ship, hoping it "
 "will serve us better than last time."
 msgstr ""
+"Ik kreeg vandaag het bericht dat ons schip helemaal gerepareerd is. Op dit "
+"moment zijn mijn mensen alles aan het inladen op het gerepareerde schip, "
+"hopende dat het ons beter beschermd dan de vorige keer."
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:218
 msgid ""
 "Tonight will be our last night on this island. Tomorrow morning we will "
 "leave, searching for a new place for our exile."
 msgstr ""
+"Deze nacht zal onze laatste zijn op dit eiland. Morgenochtend vertrekken we, "
+"op zoek naar een nieuwe plaats voor ons ballingschap."
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:220
 msgid "I still wonder if we will ever see Fremil again."
-msgstr ""
+msgstr "Ik vraag me nog steeds af of we Fremil ooit weer zullen zien"
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:221
 msgid "Victory"
-msgstr ""
+msgstr "Overwinning"
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:222
 msgid ""
 "You have completed this mission. You may continue playing if you wish, "
 "otherwise move on to the next mission."
 msgstr ""
+"Je hebt de missie voltooid. Je kunt nu verder spelen als je wilt of anders "
+"verdergaan met de volgende missie."
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:228
 msgid "Safe Peninsula"
@@ -403,6 +510,8 @@ msgstr "Saledus spreekt:"
 msgid ""
 "You have made this peninsula a very secure place. It is time to move on!"
 msgstr ""
+"Je hebt van dit schiereiland een veilige plaats gemaakt. Het is tijd om "
+"verder te gaan!"
 
 #: ../../scripting/format_scenario.lua:36
 msgid "“%s”"
