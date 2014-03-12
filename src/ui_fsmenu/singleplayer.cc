@@ -37,7 +37,7 @@ Fullscreen_Menu_Base("singleplmenu.jpg"),
 	title
 		(this,
 		 get_w() / 2, get_h() * 3 / 40,
-		 _("Single Player Menu"), UI::Align_HCenter),
+		 _("Single Player"), UI::Align_HCenter),
 
 // Buttons
 	new_game
