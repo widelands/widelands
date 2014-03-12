@@ -29,13 +29,6 @@ hotspot=10 38
 fps=5
 playercolor=true
 
-[compatibility_immovable]
-# For compatibility with build15 and earlier
-flax0s=replace reed0s
-flax0t=replace reed0t
-flax0=replace reed0
-flax1=replace reed1
-
 [immovable types]
 ashes=_Ashes
 destroyed_building=_Destroyed building
@@ -63,10 +56,6 @@ shipconstruction=_Ship Construction Site
 [critter bob types]
 deer=_Deer
 wildboar=_Wild Boar
-
-[compatibility_wares]
-# for compatibility with build15 and earlier
-flax=thatchreed
 
 [ware types]
 axe=_Ax
