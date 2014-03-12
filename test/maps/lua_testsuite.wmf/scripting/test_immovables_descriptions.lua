@@ -32,12 +32,6 @@ function test_descr:test_enhanced()
 end
 
 
-function test_descr:test_global()
-   assert_equal(false, egbase:get_building_description("barbarians","headquarters").global)
-  -- TODO find a building that is global
-end
-
-
 function test_descr:test_ismine()
    assert_equal(false, egbase:get_building_description("barbarians","headquarters").ismine)
    assert_equal(true, egbase:get_building_description("barbarians","oremine").ismine)
@@ -58,30 +52,30 @@ function test_descr:test_size()
 end
 
 
-function test_descr:test_totalbuildcost()
-   assert_equal(2, egbase:get_building_description("barbarians","sentry").totalbuildcost)
-   assert_equal(20, egbase:get_building_description("barbarians","fortress").totalbuildcost)
-   assert_equal(0, egbase:get_building_description("barbarians","citadel").totalbuildcost)
+function test_descr:test_build_cost()
+   assert_equal(2, egbase:get_building_description("barbarians","sentry").build_cost)
+   assert_equal(20, egbase:get_building_description("barbarians","fortress").build_cost)
+   assert_equal(0, egbase:get_building_description("barbarians","citadel").build_cost)
 end
 
 
-function test_descr:test_totalreturnedwares()
-   assert_equal(1, egbase:get_building_description("barbarians","sentry").totalreturnedwares)
-   assert_equal(9, egbase:get_building_description("barbarians","fortress").totalreturnedwares)
-   assert_equal(0, egbase:get_building_description("barbarians","citadel").totalreturnedwares)
+function test_descr:test_returned_wares()
+   assert_equal(1, egbase:get_building_description("barbarians","sentry").returned_wares)
+   assert_equal(9, egbase:get_building_description("barbarians","fortress").returned_wares)
+   assert_equal(0, egbase:get_building_description("barbarians","citadel").returned_wares)
 end
 
 
-function test_descr:test_totalenhancementcost()
-   assert_equal(0, egbase:get_building_description("barbarians","sentry").totalenhancementcost)
-   assert_equal(20, egbase:get_building_description("barbarians","citadel").totalenhancementcost)
+function test_descr:test_enhancement_cost()
+   assert_equal(0, egbase:get_building_description("barbarians","sentry").enhancement_cost)
+   assert_equal(20, egbase:get_building_description("barbarians","citadel").enhancement_cost)
 end
 
 
-function test_descr:test_totalreturnedwaresenhanced()
-   assert_equal(0, egbase:get_building_description("barbarians","sentry").totalreturnedwaresenhanced)
-   assert_equal(0, egbase:get_building_description("barbarians","fortress").totalreturnedwaresenhanced)
-   assert_equal(10, egbase:get_building_description("barbarians","citadel").totalreturnedwaresenhanced)
+function test_descr:test_returned_wares_enhanced()
+   assert_equal(0, egbase:get_building_description("barbarians","sentry").returned_wares_enhanced)
+   assert_equal(0, egbase:get_building_description("barbarians","fortress").returned_wares_enhanced)
+   assert_equal(10, egbase:get_building_description("barbarians","citadel").returned_wares_enhanced)
 end
 
 

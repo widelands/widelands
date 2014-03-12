@@ -1000,10 +1000,6 @@ const PropertyType<L_BuildingDescription> L_BuildingDescription::Properties[] = 
 	PROP_RO(L_BuildingDescription, buildable),
 	PROP_RO(L_BuildingDescription, destructible),
 	PROP_RO(L_BuildingDescription, enhanced),
-	// TODO(GunChleoc): I do not think global is useful, it is more an
-	// implementation detail and mostly confusing for scripters. I'd say kill
-	// it.
-	PROP_RO(L_BuildingDescription, global),
 	// TODO(GunChleoc): I rather have a type similar to Building.building_type.
 	// In fact, Building.building_type can be killed after thatn and be replaced
 	// through building.description.building_type. I am not sure if I like
@@ -1020,14 +1016,11 @@ const PropertyType<L_BuildingDescription> L_BuildingDescription::Properties[] = 
 
 	// TODO(GunChleoc): not a fan off summing them up directly. All of the
 	// methods return a mapping from ware type to number. I think the scripter
-	// can sum them up if need be. Also, I think there should be some _
-	// separating the words, I think the Lua API uses them throughout. I fixed
-	// build_cost as a template for you (did not fix the tests though), can you
-	// try doing the others?
+	// can sum them up if need be.
 	PROP_RO(L_BuildingDescription, build_cost),
-	PROP_RO(L_BuildingDescription, totalreturnedwares),
-	PROP_RO(L_BuildingDescription, totalenhancementcost),
-	PROP_RO(L_BuildingDescription, totalreturnedwaresenhanced),
+	PROP_RO(L_BuildingDescription, returned_wares),
+	PROP_RO(L_BuildingDescription, enhancement_cost),
+	PROP_RO(L_BuildingDescription, returned_wares_enhanced),
 	{0, 0, 0},
 };
 
@@ -1042,7 +1035,9 @@ void L_BuildingDescription::__unpersist(lua_State * /* L */) {
  ==========================================================
  */
 /* RST
-	// TODO(GunChleoc): all of these need documentation.
+	.. attribute:: buildable
+
+			(RO) true if the building can be built.
 */
 int L_BuildingDescription::get_buildable(lua_State * L) {
 	assert(buildingdescr_!=nullptr);
@@ -1050,60 +1045,104 @@ int L_BuildingDescription::get_buildable(lua_State * L) {
 	return 1;
 }
 
+/* RST
+	.. attribute:: destructible
+
+			(RO) true if the building is destructible.
+*/
 int L_BuildingDescription::get_destructible(lua_State * L) {
 	assert(buildingdescr_!=nullptr);
 	lua_pushboolean(L, buildingdescr_->is_destructible());
 	return 1;
 }
 
+/* RST
+	.. attribute:: enhanced
+
+			(RO) true if the building is an enhanced from another building.
+*/
 int L_BuildingDescription::get_enhanced(lua_State * L) {
 	assert(buildingdescr_!=nullptr);
 	lua_pushboolean(L, buildingdescr_->is_enhanced());
 	return 1;
 }
 
-int L_BuildingDescription::get_global(lua_State * L) {
-	assert(buildingdescr_!=nullptr);
-	lua_pushboolean(L, buildingdescr_->global());
-	return 1;
-}
+/* RST
+	.. attribute:: ismine
 
+			(RO) true if the building is a mine.
+*/
 int L_BuildingDescription::get_ismine(lua_State * L) {
 	assert(buildingdescr_!=nullptr);
 	lua_pushboolean(L, buildingdescr_->get_ismine());
 	return 1;
 }
 
+/* RST
+	.. attribute:: isport
+
+			(RO) true if the building is a port.
+*/
 int L_BuildingDescription::get_isport(lua_State * L) {
 	assert(buildingdescr_!=nullptr);
 	lua_pushboolean(L, buildingdescr_->get_isport());
 	return 1;
 }
 
+/* RST
+	.. attribute:: size
+
+	Returns the size of a building:
+	1 = small
+	2 = medium
+	3 = big
+
+			(RO) the size of the building as an int.
+*/
 int L_BuildingDescription::get_size(lua_State * L) {
 	assert(buildingdescr_ != nullptr);
 	lua_pushinteger(L, buildingdescr_->get_size());
 	return 1;
 }
 
+/* RST
+	.. attribute:: build_cost
+
+			(RO) the total build cost for the building.
+*/
 int L_BuildingDescription::get_build_cost(lua_State * L) {
 	assert(buildingdescr_ != nullptr);
 	return wares_map_to_lua(L, buildingdescr_->buildcost(), buildingdescr_->tribe());
 }
 
-int L_BuildingDescription::get_totalreturnedwares(lua_State * L) {
+/* RST
+	.. attribute:: returned_wares
+
+			(RO) the total wares returned upon dismantling.
+*/
+int L_BuildingDescription::get_returned_wares(lua_State * L) {
 	assert(buildingdescr_!=nullptr);
 	lua_pushinteger(L, buildingdescr_->returned_wares().total());
 	return 1;
 }
 
-int L_BuildingDescription::get_totalenhancementcost(lua_State * L) {
+/* RST
+	.. attribute:: enhancement_cost
+
+			(RO) the total cost for enhancing to this building type.
+*/
+int L_BuildingDescription::get_enhancement_cost(lua_State * L) {
 	assert(buildingdescr_!=nullptr);
 	lua_pushinteger(L, buildingdescr_->enhancement_cost().total());
 	return 1;
 }
 
-int L_BuildingDescription::get_totalreturnedwaresenhanced(lua_State * L) {
+/* RST
+	.. attribute:: returned_wares_enhanced
+
+			(RO) the total wares returned upon dismantling an enhanced building.
+*/
+int L_BuildingDescription::get_returned_wares_enhanced(lua_State * L) {
 	assert(buildingdescr_!=nullptr);
 	lua_pushinteger(L, buildingdescr_->returned_wares_enhanced().total());
 	return 1;
@@ -1117,18 +1156,6 @@ int L_BuildingDescription::get_totalreturnedwaresenhanced(lua_State * L) {
  */
 
 
-/* RST
-	// TODO(GunChleoc): remember to delete this if you do not need it anymore.
-	.. method:: recalculate()
-
-		This map recalculates the whole map state: height of fields, buildcaps
-		and so on. You only need to call this function if you changed
-		Field.raw_height in any way.
-*/
-//int L_Map::recalculate(lua_State * L) {
-//	get_egbase(L).map().recalc_whole_map();
-//	return 0;
-//}
 
 /*
  ==========================================================

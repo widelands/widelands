@@ -110,14 +110,13 @@ public:
 	int get_buildable(lua_State *);
 	int get_destructible(lua_State *);
 	int get_enhanced(lua_State *);
-	int get_global(lua_State *);
 	int get_ismine(lua_State *);
 	int get_isport(lua_State *);
 	int get_size(lua_State *);
 	int get_build_cost(lua_State *);
-	int get_totalreturnedwares(lua_State *);
-	int get_totalenhancementcost(lua_State *);
-	int get_totalreturnedwaresenhanced(lua_State *);
+	int get_returned_wares(lua_State *);
+	int get_enhancement_cost(lua_State *);
+	int get_returned_wares_enhanced(lua_State *);
 
 	/*
 	 * Lua methods

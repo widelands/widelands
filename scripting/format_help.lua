@@ -94,22 +94,22 @@ end
 --    :returns: "Space required" header followed by size description text and image.
 --
 function building_size_string(tribename, buildingname)
-  -- TODO(GunChleoc): local building_descr = wl.Game():get_building_description(tribename,buildingname) macht das
-  -- einfacher zu lesen
-  if(wl.Game():get_building_description(tribename,buildingname).ismine) then
+
+  local building_descr = wl.Game():get_building_description(tribename,buildingname)
+
+  if(building_descr.ismine) then
 	return text_line(_"Space required:",_"Mine plot","pics/mine.png")
-  elseif(wl.Game():get_building_description(tribename,buildingname).isport) then
+  elseif(building_descr.isport) then
 	return text_line(_"Space required:",_"Port plot","pics/port.png")
   else
-	size = wl.Game():get_building_description(tribename,buildingname).size
-	if (size == 1) then
+	if (building_descr.size == 1) then
  		return text_line(_"Space required:",_"Small plot","pics/small.png")
-	elseif (size == 2) then
+	elseif (building_descr.size == 2) then
   		return text_line(_"Space required:",_"Medium plot","pics/medium.png")
-	elseif (size == 3) then
+	elseif (building_descr.size == 3) then
 		return text_line(_"Space required:",_"Big plot","pics/big.png")
 	else
-		return p(_"Space required:" .. _"n/a")
+		return p(_"Space required:" .. _"Unknown")
 	end
   end
 end
