@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2014-03-06 21:20+0000\n"
+"POT-Creation-Date: 2014-03-12 21:37+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -231,12 +231,12 @@ msgstr ""
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:128
 msgid ""
-"Build a warehouse and a horsefarm"
+"Build a warehouse and a horse farm"
 msgstr ""
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:130
 msgid ""
-"Warehouse and Horsefarm"
+"Warehouse and Horse Farm"
 msgstr ""
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:131
@@ -407,7 +407,7 @@ msgstr ""
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:265
 msgid ""
-"May Satul warm you, Jundlina! I agree with what Loftomor proposes. "
+"May Satul warm you, Jundlina! I agree with what Loftomor proposes. We need a good supply of building materials for we have to expand our territory swiftly. I will not feel safe on this island as long as we have not seen all its shores it. I brought plenty of good men from Atlantis. The military might is available. We only need some housing to live in."
 msgstr ""
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:276
@@ -500,7 +500,7 @@ msgstr ""
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:339
 msgid ""
-"May Satul warm you, Jundlina. My Name is Opol, and I am the highest weaver of the guild abandoning Atlantis and Lutas with you. I come with sad news indeed: we have no more spidercloth. Not a single piece is to be found in our warehouses. Could you not help the weavers’ guild by arranging the building of a weaving-mill and a spider farm? The spiders deliver the finest silk and we will produce the finest spidercloth from it."
+"May Satul warm you, Jundlina. My name is Opol, and I am the highest weaver of the guild abandoning Atlantis and Lutas with you. I come with sad news indeed: we have no more spidercloth. Not a single piece is to be found in our warehouses. Could you not help the weavers’ guild by arranging the building of a weaving-mill and a spider farm? The spiders deliver the finest silk and we will produce the finest spidercloth from it."
 msgstr ""
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:344
