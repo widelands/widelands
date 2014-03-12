@@ -60,8 +60,7 @@ obj_build_mining_infrastructure = {
    title =_"Build a stonemason and mining infrastructure",
    number = 7,
    body = objective_text(_"Stonemason and Mining Infrastructure", 
-[[• ]] .. _[[Build a stonemason and then a complete mining and production infrastructure 
-(coal mine and / or charcoal burner, iron ore mine, toolsmithy, weapon smithy, armor smithy and smelting works).]]),
+[[• ]] .. _[[Build a stonemason and then a complete mining and production infrastructure (coal mine and / or charcoal burner, iron ore mine, toolsmithy, weapon smithy, armor smithy and smelting works).]]),
 }
 
 obj_build_Food_infrastructure = {
