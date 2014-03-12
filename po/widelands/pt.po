@@ -10,8 +10,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-03-11 05:30+0000\n"
-"X-Generator: Launchpad (build 16948)\n"
+"X-Launchpad-Export-Date: 2014-03-12 04:33+0000\n"
+"X-Generator: Launchpad (build 16963)\n"
 "Language: pt\n"
 
 #: ../../src/wui/building_statistics_menu.cc:114

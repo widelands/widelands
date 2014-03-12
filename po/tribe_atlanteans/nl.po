@@ -1,288 +1,289 @@
 # Widelands po/nl_NL/tribes/atlanteans.po
 # Copyright (C) 2005-2008 Widelands Development Team
 # FIRST AUTHOR <EMAIL@ADDRESS.TLD>, YEAR.
-#
+# GunChleoc <fios@foramnagaidhlig.net>, 2014.
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4575\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2014-03-06 21:20+0000\n"
-"PO-Revision-Date: 2014-03-10 16:01+0000\n"
+"PO-Revision-Date: 2014-03-11 18:23+0000\n"
 "Last-Translator: fk <Unknown>\n"
-"Language-Team: Dutch <widelands-public@lists.sourceforge.net>\n"
+"Language-Team: Widelands fixxer upper\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-03-11 05:29+0000\n"
-"X-Generator: Launchpad (build 16948)\n"
+"X-Launchpad-Export-Date: 2014-03-12 04:32+0000\n"
+"X-Generator: Launchpad (build 16963)\n"
+"Language: nl\n"
 
 #: ../../global/militarysites/barracks.empire/conf:8
 msgid "Your Barracks discovered an aggressor."
-msgstr ""
+msgstr "Jouw Barakken hebben een aanvaller ontdekt."
 
 #: ../../global/militarysites/barracks.empire/conf:9
 msgid "Your Barracks is under attack."
-msgstr ""
+msgstr "Jouw Barakken worden aangevallen."
 
 #: ../../global/militarysites/barracks.empire/conf:10
 msgid "The enemy defeated your soldiers at the Barracks"
-msgstr ""
+msgstr "De vijand heeft jouw soldaten bij de Barakken verslagen"
 
 #: ../../global/militarysites/barracks.empire/conf:11
 msgid "Your soldiers defeated the enemy at the Barracks"
-msgstr ""
+msgstr "Jouw soldaten versloegen de vijand bij de Barakken"
 
 #: ../../global/militarysites/barrier.barbarians/conf:8
 #: ../../global/militarysites/barrier.empire/conf:8
 msgid "Your Barrier discovered an aggressor."
-msgstr ""
+msgstr "Jouw Barrière heeft een aanvaller ontdekt."
 
 #: ../../global/militarysites/barrier.barbarians/conf:9
 #: ../../global/militarysites/barrier.empire/conf:9
 msgid "Your Barrier is under attack."
-msgstr ""
+msgstr "Jouw Barrière wordt aangevallen."
 
 #: ../../global/militarysites/barrier.barbarians/conf:10
 #: ../../global/militarysites/barrier.empire/conf:10
 msgid "The enemy defeated your soldiers at the Barrier"
-msgstr ""
+msgstr "De vijand heeft jouw soldaten bij de Barrière verslagen"
 
 #: ../../global/militarysites/barrier.barbarians/conf:11
 #: ../../global/militarysites/barrier.empire/conf:11
 msgid "Your soldiers defeated the enemy at the Barrier"
-msgstr ""
+msgstr "Jouw soldaten hebben de vijand bij de Barrière verslagen"
 
 #: ../../global/militarysites/castle.atlanteans/conf:8
 #: ../../global/militarysites/castle.empire/conf:8
 #: ../../tribes/atlanteans/castle/conf:7
 msgid "Your Castle discovered an aggressor."
-msgstr ""
+msgstr "Jouw Kasteel heeft een aanvaller ontdekt."
 
 #: ../../global/militarysites/castle.atlanteans/conf:9
 #: ../../global/militarysites/castle.empire/conf:9
 #: ../../tribes/atlanteans/castle/conf:8
 msgid "Your Castle is under attack."
-msgstr ""
+msgstr "Jouw Kasteel wordt aangevallen."
 
 #: ../../global/militarysites/castle.atlanteans/conf:10
 #: ../../global/militarysites/castle.empire/conf:10
 #: ../../tribes/atlanteans/castle/conf:9
 msgid "The enemy defeated your soldiers at the Castle"
-msgstr ""
+msgstr "De vijand heeft jouw soldaten bij het Kasteel verslagen"
 
 #: ../../global/militarysites/castle.atlanteans/conf:11
 #: ../../global/militarysites/castle.empire/conf:11
 #: ../../tribes/atlanteans/castle/conf:10
 msgid "Your soldiers defeated the enemy at the Castle"
-msgstr ""
+msgstr "Jouw soldaten hebben de vijand bij het Kasteel verslagen"
 
 #: ../../global/militarysites/citadel.barbarians/conf:8
 msgid "Your Citadel discovered an aggressor."
-msgstr ""
+msgstr "Je Citadel heeft een aanvaller ontdekt."
 
 #: ../../global/militarysites/citadel.barbarians/conf:9
 msgid "Your Citadel is under attack."
-msgstr ""
+msgstr "Je Citadel wordt aangevallen."
 
 #: ../../global/militarysites/citadel.barbarians/conf:10
 msgid "The enemy defeated your soldiers at the Citadel"
-msgstr ""
+msgstr "De vijand heeft jouw soldaten bij de Citadel verslagen"
 
 #: ../../global/militarysites/citadel.barbarians/conf:11
 msgid "Your soldiers defeated the enemy at the Citadel"
-msgstr ""
+msgstr "Jouw soldaten hebben de vijand bij de Citadel verslagen"
 
 #: ../../global/militarysites/donjon.barbarians/conf:9
 msgid "Your Donjon discovered an aggressor."
-msgstr ""
+msgstr "Je Verdedigingstoren heeft een aanvaller ontdekt."
 
 #: ../../global/militarysites/donjon.barbarians/conf:10
 msgid "Your Donjon is under attack."
-msgstr ""
+msgstr "Je Verdedigingstoren wordt aangevallen."
 
 #: ../../global/militarysites/donjon.barbarians/conf:11
 msgid "The enemy defeated your soldiers at the Donjon"
-msgstr ""
+msgstr "De vijand heeft jouw soldaten bij de Verdedigingstoren verslagen"
 
 #: ../../global/militarysites/donjon.barbarians/conf:12
 msgid "Your soldiers defeated the enemy at the Donjon"
-msgstr ""
+msgstr "Jouw soldaten hebben de vijand bij de Verdedigingstoren verslagen"
 
 #: ../../global/militarysites/fortress.barbarians/conf:8
 #: ../../global/militarysites/fortress.empire/conf:8
 msgid "Your Fortress discovered an aggressor."
-msgstr ""
+msgstr "Je Vesting heeft een aanvaller ontdekt."
 
 #: ../../global/militarysites/fortress.barbarians/conf:9
 #: ../../global/militarysites/fortress.empire/conf:9
 msgid "Your Fortress is under attack."
-msgstr ""
+msgstr "Je Vesting wordt aangevallen."
 
 #: ../../global/militarysites/fortress.barbarians/conf:10
 #: ../../global/militarysites/fortress.empire/conf:10
 msgid "The enemy defeated your soldiers at the Fortress"
-msgstr ""
+msgstr "De vijand heeft jouw soldaten bij de Vesting verslagen"
 
 #: ../../global/militarysites/fortress.barbarians/conf:11
 #: ../../global/militarysites/fortress.empire/conf:11
 msgid "Your soldiers defeated the enemy at the Fortress"
-msgstr ""
+msgstr "Jouw soldaten hebben de vijand bij de Vesting verslagen"
 
 #: ../../global/militarysites/guardhall.atlanteans/conf:8
 #: ../../tribes/atlanteans/guardhall/conf:7
 msgid "Your Guardhall discovered an aggressor."
-msgstr ""
+msgstr "Je Wachthal heeft een aanvaller ontdekt."
 
 #: ../../global/militarysites/guardhall.atlanteans/conf:9
 #: ../../tribes/atlanteans/guardhall/conf:8
 msgid "Your Guardhall is under attack."
-msgstr ""
+msgstr "Je Wachthal wordt aangevallen."
 
 #: ../../global/militarysites/guardhall.atlanteans/conf:10
 #: ../../tribes/atlanteans/guardhall/conf:9
 msgid "The enemy defeated your soldiers at the Guardhall"
-msgstr ""
+msgstr "De vijand heeft jouw soldaten bij de Wachthal verslagen"
 
 #: ../../global/militarysites/guardhall.atlanteans/conf:11
 #: ../../tribes/atlanteans/guardhall/conf:10
 msgid "Your soldiers defeated the enemy at the Guardhall"
-msgstr ""
+msgstr "Jouw soldaten hebben de vijand bij de Wachthal verslagen"
 
 #: ../../global/militarysites/guardhouse.atlanteans/conf:8
 #: ../../tribes/atlanteans/guardhouse/conf:7
 msgid "Your Guardhouse discovered an aggressor."
-msgstr ""
+msgstr "Je Wachthuis heeft een aanvaller ontdekt."
 
 #: ../../global/militarysites/guardhouse.atlanteans/conf:9
 #: ../../tribes/atlanteans/guardhouse/conf:8
 msgid "Your Guardhouse is under attack."
-msgstr ""
+msgstr "Je Wachthuis wordt aangevallen."
 
 #: ../../global/militarysites/guardhouse.atlanteans/conf:10
 #: ../../tribes/atlanteans/guardhouse/conf:9
 msgid "The enemy defeated your soldiers at the Guardhouse"
-msgstr ""
+msgstr "De vijand heeft jouw soldaten bij het Wachthuis verslagen"
 
 #: ../../global/militarysites/guardhouse.atlanteans/conf:11
 #: ../../tribes/atlanteans/guardhouse/conf:10
 msgid "Your soldiers defeated the enemy at the Guardhouse"
-msgstr ""
+msgstr "Jouw soldaten hebben de vijand bij het Wachthuis verslagen"
 
 #: ../../global/militarysites/high_tower.atlanteans/conf:9
 #: ../../tribes/atlanteans/high_tower/conf:10
 msgid "Your High Tower discovered an aggressor."
-msgstr ""
+msgstr "Je Hoge toren heeft een aanvaller ontdekt."
 
 #: ../../global/militarysites/high_tower.atlanteans/conf:10
 #: ../../tribes/atlanteans/high_tower/conf:11
 msgid "Your High Tower is under attack."
-msgstr ""
+msgstr "Je Hoge toren wordt aangevallen."
 
 #: ../../global/militarysites/high_tower.atlanteans/conf:11
 #: ../../tribes/atlanteans/high_tower/conf:12
 msgid "The enemy defeated your soldiers at the High Tower"
-msgstr ""
+msgstr "De vijand heeft jouw soldaten bij de Hoge toren verslagen"
 
 #: ../../global/militarysites/high_tower.atlanteans/conf:12
 #: ../../tribes/atlanteans/high_tower/conf:13
 msgid "Your soldiers defeated the enemy at the High Tower"
-msgstr ""
+msgstr "Jouw soldaten hebben de vijand bij de Hoge toren verslagen"
 
 #: ../../global/militarysites/outpost.empire/conf:8
 msgid "Your Outpost discovered an aggressor."
-msgstr ""
+msgstr "Je Voorpost heeft een aanvaller ontdekt."
 
 #: ../../global/militarysites/outpost.empire/conf:9
 msgid "Your Outpost is under attack."
-msgstr ""
+msgstr "Je Voorpost wordt aangevallen."
 
 #: ../../global/militarysites/outpost.empire/conf:10
 msgid "The enemy defeated your soldiers at the Outpost"
-msgstr ""
+msgstr "De vijand heeft jouw soldaten bij de Voorpost verslagen"
 
 #: ../../global/militarysites/outpost.empire/conf:11
 msgid "Your soldiers defeated the enemy at the Outpost"
-msgstr ""
+msgstr "Jouw soldaten hebben de vijand bij de Voorpost verslagen"
 
 #: ../../global/militarysites/sentry.barbarians/conf:8
 #: ../../global/militarysites/sentry.empire/conf:8
 msgid "Your Sentry discovered an aggressor."
-msgstr ""
+msgstr "Je Wachtpost heeft een aanvaller ontdekt."
 
 #: ../../global/militarysites/sentry.barbarians/conf:9
 #: ../../global/militarysites/sentry.empire/conf:9
 msgid "Your Sentry is under attack."
-msgstr ""
+msgstr "Je Wachtpost wordt aangevallen."
 
 #: ../../global/militarysites/sentry.barbarians/conf:10
 #: ../../global/militarysites/sentry.empire/conf:10
 msgid "The enemy defeated your soldiers at the Sentry"
-msgstr ""
+msgstr "De vijand heeft jouw soldaten bij de Wachtpost verslagen"
 
 #: ../../global/militarysites/sentry.barbarians/conf:11
 #: ../../global/militarysites/sentry.empire/conf:11
 msgid "Your soldiers defeated the enemy at the Sentry"
-msgstr ""
+msgstr "Jouw soldaten hebben de vijand bij de Wachtpost verslagen"
 
 #: ../../global/militarysites/small_tower.atlanteans/conf:9
 #: ../../tribes/atlanteans/small_tower/conf:8
 msgid "Your Small Tower discovered an aggressor."
-msgstr ""
+msgstr "Je Kleine toren heeft een aanvaller ontdekt."
 
 #: ../../global/militarysites/small_tower.atlanteans/conf:10
 #: ../../tribes/atlanteans/small_tower/conf:9
 msgid "Your Small Tower is under attack."
-msgstr ""
+msgstr "Je Kleine toren wordt aangevallen."
 
 #: ../../global/militarysites/small_tower.atlanteans/conf:11
 #: ../../tribes/atlanteans/small_tower/conf:10
 msgid "The enemy defeated your soldiers at the Small Tower"
-msgstr ""
+msgstr "De vijand heeft jouw soldaten bij de Kleine toren verslagen"
 
 #: ../../global/militarysites/small_tower.atlanteans/conf:12
 #: ../../tribes/atlanteans/small_tower/conf:11
 msgid "Your soldiers defeated the enemy at the Small Tower"
-msgstr ""
+msgstr "Jouw soldaten hebben de vijand bij de Kleine toren verslagen"
 
 #: ../../global/militarysites/stronghold.barbarians/conf:8
 msgid "Your Stronghold discovered an aggressor."
-msgstr ""
+msgstr "Je Burcht heeft een aanvaller ontdekt."
 
 #: ../../global/militarysites/stronghold.barbarians/conf:9
 msgid "Your Stronghold is under attack."
-msgstr ""
+msgstr "Je Burcht wordt aangevallen."
 
 #: ../../global/militarysites/stronghold.barbarians/conf:10
 msgid "The enemy defeated your soldiers at the Stronghold"
-msgstr ""
+msgstr "De vijand heeft jouw soldaten bij de Burcht verslagen"
 
 #: ../../global/militarysites/stronghold.barbarians/conf:11
 msgid "Your soldiers defeated the enemy at the Stronghold"
-msgstr ""
+msgstr "Jouw soldaten hebben de vijand bij de Burcht verslagen"
 
 #: ../../global/militarysites/tower.atlanteans/conf:9
 #: ../../global/militarysites/tower.empire/conf:9
 #: ../../tribes/atlanteans/tower/conf:9
 msgid "Your Tower discovered an aggressor."
-msgstr ""
+msgstr "Je Toren heeft een aanvaller ontdekt."
 
 #: ../../global/militarysites/tower.atlanteans/conf:10
 #: ../../global/militarysites/tower.empire/conf:10
 #: ../../tribes/atlanteans/tower/conf:10
 msgid "Your Tower is under attack."
-msgstr ""
+msgstr "Je Toren wordt aangevallen."
 
 #: ../../global/militarysites/tower.atlanteans/conf:11
 #: ../../global/militarysites/tower.empire/conf:11
 #: ../../tribes/atlanteans/tower/conf:11
 msgid "The enemy defeated your soldiers at the Tower"
-msgstr ""
+msgstr "De vijand heeft jouw soldaten bij de Toren verslagen"
 
 #: ../../global/militarysites/tower.atlanteans/conf:12
 #: ../../global/militarysites/tower.empire/conf:12
 #: ../../tribes/atlanteans/tower/conf:12
 msgid "Your soldiers defeated the enemy at the Tower"
-msgstr ""
+msgstr "Jouw soldaten hebben de vijand bij de Toren verslagen"
 
 #: ../../tribes/atlanteans/advanced_shield/conf:1
 msgid ""
@@ -422,7 +423,7 @@ msgstr "Draagt voorwerpen over je wegen."
 
 #: ../../tribes/atlanteans/castle/conf:6
 msgid "Your soldiers have occupied your Castle"
-msgstr ""
+msgstr "Je soldaten hebben jouw Kasteel bezet"
 
 #: ../../tribes/atlanteans/coal/conf:1
 msgid ""
@@ -1196,9 +1197,9 @@ msgid ""
 "in the smelting works. Gold is used by the armor smithy, the weapon smithy "
 "and the goldweaver."
 msgstr ""
-"Goud is één van de kostbaarste materialen. Het wordt uit gouderts in de "
-"hoogoven gewonnen. Goud wordt gebruikt door de harnassmederij, de "
-"wapensmederij en de goudwever."
+"Goud is één van de kostbaarste materialen. Het wordt gewonnen uit gouderts "
+"in de hoogoven. Goud wordt gebruikt door de harnassmederij, de wapensmederij "
+"en de goudwever."
 
 #: ../../tribes/atlanteans/golden_tabard/conf:1
 msgid ""
@@ -1226,11 +1227,11 @@ msgstr ""
 
 #: ../../tribes/atlanteans/guardhall/conf:6
 msgid "Your soldiers have occupied your Guardhall"
-msgstr ""
+msgstr "Je soldaten hebben jouw Wachthal bezet"
 
 #: ../../tribes/atlanteans/guardhouse/conf:6
 msgid "Your soldiers have occupied your Guardhouse"
-msgstr ""
+msgstr "Je soldaten hebben jouw Wachthuis bezet"
 
 #: ../../tribes/atlanteans/hammer/conf:1
 msgid ""
@@ -1249,22 +1250,30 @@ msgid ""
 "used in the dungeon – together with food – to train soldiers from attack "
 "level 3 to level 4."
 msgstr ""
+"Dit is het meest gevaarlijke wapen van de Atlantische militairen. Enkel de "
+"beste soldaten mogen het gebruiken. Het wordt geproduceerd in de "
+"wapensmederij en wordt gebruikt in het kerker, samen met voedsel, om "
+"soldaten te trainen van aanvalsniveau 3 naar niveau 4."
 
 #: ../../tribes/atlanteans/high_tower/conf:9
 msgid "Your soldiers have occupied your High Tower"
-msgstr ""
+msgstr "Je soldaten hebben jouw Hoge toren bezet"
 
 #: ../../tribes/atlanteans/hook_pole/conf:1
 msgid ""
 "This hook pole is used by the smoker to suspend all the meat and fish from "
 "the top of the smokery. It is created by the toolsmith."
 msgstr ""
+"Deze pookhaak wordt door de poker gebruikt om al het vlees en de vis in de "
+"top van de rokerij op te hangen. Hij wordt gemaakt door de werktuigsmid."
 
 #: ../../tribes/atlanteans/horse/conf:1
 msgid ""
 "Horses help to carry items at heavily used roads. They are reared in a horse "
 "farm."
 msgstr ""
+"Paarden helpen om goederen te vervoeren over de veelgebruikte wegen. Ze "
+"worden gefokt in de paardenboerderij."
 
 #: ../../tribes/atlanteans/horsebreeder/conf:1
 msgid "Breeds the strong atlantean horses"
@@ -1286,12 +1295,16 @@ msgid ""
 "Iron is made out of iron ore in the smelting works. It is used in the "
 "toolsmithy, armor smithy and weapon smithy."
 msgstr ""
+"IJzer wordt gemaakt van ijzererts in de hoogoven. Het wordt gebruikt in de "
+"werktuigsmederij, de harnassmederij en de wapensmederij."
 
 #: ../../tribes/atlanteans/ironore/conf:1
 msgid ""
 "Iron ore is mined in iron mines. It is smelted in a smelting works to "
 "retrieve the iron."
 msgstr ""
+"IJzererst wordt gedolven in de ijzerertsmijnen. Het wordt gesmolten in een "
+"hoogoven om ijzer te verkrijgen."
 
 #: ../../tribes/atlanteans/labyrinth/conf:46
 msgid "Upgrade soldier defense 0"
@@ -1319,13 +1332,15 @@ msgstr ""
 
 #: ../../tribes/atlanteans/labyrinth/conf:50
 msgid "Upgrade soldier health 0"
-msgstr ""
+msgstr "Opwaarderen soldatenlevenspunten 0"
 
 #: ../../tribes/atlanteans/labyrinth/conf:51
 msgid ""
 "Upgrade soldier health 0 (only for compatibility with old savegames "
 "(build13))"
 msgstr ""
+"Opwaarderen soldatenlevenspunten 0 (alleen voor compatibiliteit met oude "
+"opgeslagen spellen (build 13))"
 
 #: ../../tribes/atlanteans/labyrinth/conf:52
 msgid "Upgrade soldier evade 0"
@@ -1355,6 +1370,9 @@ msgid ""
 "it makes up the equipment of young soldiers. Light tridents are produced in "
 "the weapon smithy as are all other tridents."
 msgstr ""
+"Dit is het basiswapen voor de Atlantische soldaten. Samen met een tabberd is "
+"dit de uitrusting voor jonge soldaten. Lichte drietanden worden geproduceerd "
+"in de wapensmederij, net als de andere drietanden."
 
 #: ../../tribes/atlanteans/long_trident/conf:1
 msgid ""
@@ -1362,6 +1380,9 @@ msgid ""
 "produced in the weapon smithy and used in the dungeon – together with food – "
 "to train soldiers from attack level 0 to level 1."
 msgstr ""
+"De lange drietand is de eerste drietand om jonge soldaten mee te trainen. "
+"Het wordt geproduceerd in de wapensmederij en wordt gebruikt in het kerker, "
+"samen met voedsel, om soldaten te trainen van aanvalsniveau 0 naar niveau 1."
 
 #: ../../tribes/atlanteans/meat/conf:1
 msgid ""
@@ -1369,12 +1390,18 @@ msgid ""
 "taken by the hunter and has to be smoked in a smokery before being delivered "
 "to mines and training sites (dungeon and labyrinth)."
 msgstr ""
+"Vlees is een voedselbron van de Atlantiërs. Het wild dat door de jager "
+"meegenomen wordt, levert dit op en het moet gerookt worden in de rokerij "
+"voordat het aan de mijnen en trainingsplekken (kerker en labyrint) geleverd "
+"kan worden."
 
 #: ../../tribes/atlanteans/milking_tongs/conf:1
 msgid ""
 "Milking tongs are used by the spider breeder to milk the spiders. They are "
 "produced by the toolsmith."
 msgstr ""
+"Melktangen worden gebruikt door de spinnenkweker om de spinnen te melken. Ze "
+"worden gemaakt door de werktuigsmid."
 
 #: ../../tribes/atlanteans/mill/conf:26
 msgid "Produce cornflour"
@@ -1409,12 +1436,18 @@ msgid ""
 "produced out of logs by the sawmill. The weapon smithy and the shipyard also "
 "use planks to produce the different tridents and mighty ships."
 msgstr ""
+"Planken zijn een belangrijk bouwmateriaal van de Atlantiërs. Ze worden van "
+"boomstammen gemaakt door de houtzagerij. De wapensmederij en de scheepswerf "
+"gebruiken ook planken om de verschillende drietanden en grootse schepen te "
+"maken."
 
 #: ../../tribes/atlanteans/quartz/conf:1
 msgid ""
 "These transparent quartz’ are used to build some exclusive buildings. They "
 "are produced in a crystal mine."
 msgstr ""
+"Deze doorzichtige kwartsen worden gebruikt om een paar exclusieve gebouwen "
+"te maken. Ze worden geproduceerd in een kristalmijn."
 
 #: ../../tribes/atlanteans/saw/conf:1
 msgid ""
@@ -1426,12 +1459,14 @@ msgstr ""
 
 #: ../../tribes/atlanteans/sawyer/conf:1
 msgid "Saws wood to produce planks."
-msgstr ""
+msgstr "Zaagt het hout om planken te produceren."
 
 #: ../../tribes/atlanteans/scout/conf:1
 msgid ""
 "Scouts like Scotty the scout scouting unscouted areas in a scouty fashion."
 msgstr ""
+"Verkenners als Ken de Verkenner verkennen niet verkend gebied op een "
+"verkennersmanier."
 
 #: ../../tribes/atlanteans/scripting/sc00_headquarters_medium.lua:10
 msgid "Headquarters medium"
@@ -1451,6 +1486,9 @@ msgid ""
 "weren’t built. You are at a disadvantage with this; consider restarting\n"
 "this map with a fair starting condition."
 msgstr ""
+"Enkele van je start gebouwen hebben niet genoeg ruimte en zijn niet gebouwd. "
+"hiervan kunt je hinder ondervinden en het is mischien beter opnieuw te \n"
+"beginnen met deze kaart voor gelijkwaardige omstandigheden."
 
 #: ../../tribes/atlanteans/scythe/conf:1
 msgid ""
@@ -1476,10 +1514,13 @@ msgid ""
 "Shovels are needed for the proper handling of plants. Therefore the forester "
 "and the blackroot farmer are using them. They are produced by the toolsmith."
 msgstr ""
+"Schoppen zijn nodig om goed met planten om te gaan. Daarom maken de "
+"boswachter en de helmkruidkweker er gebruik van. Ze worden gemaakt door de "
+"werktuigsmid."
 
 #: ../../tribes/atlanteans/small_tower/conf:7
 msgid "Your soldiers have occupied your Small Tower"
-msgstr ""
+msgstr "Je soldaten hebben jouw Kleine toren bezet"
 
 #: ../../tribes/atlanteans/smelter/conf:1
 msgid "Smelts iron."
@@ -1545,12 +1586,17 @@ msgid ""
 "This yarn is produced by spiders, which are bred by spider farms. It is "
 "processed into spidercloth in a weaving-mill."
 msgstr ""
+"Dit garen wordt geproduceerd door spinnen, die gefokt worden op "
+"spinnenboerderijen, Het wordt verwerkt tot spinnendoek in de weverij."
 
 #: ../../tribes/atlanteans/steel_shield/conf:1
 msgid ""
 "This steel shield is produced in the armor smithy and used in the labyrinth "
 "– together with food – to train soldiers from defense level 0 to level 1."
 msgstr ""
+"Dit stalen schild wordt gemaakt in de harnassmederij en wordt in het "
+"labyrint gebruikt - samen met voedsel - om soldaten van Verdedigingsniveau 0 "
+"naar niveau 1 te trainen."
 
 #: ../../tribes/atlanteans/steel_trident/conf:1
 msgid ""
@@ -1567,10 +1613,12 @@ msgid ""
 "Stone is a basic building ware of the Atlanteans. It is produced in a quarry "
 "or a crystal mine."
 msgstr ""
+"Steen is een basis bouwmateriaal van de Atlantiërs. Hij wordt geproduceerd "
+"in een steengroeve of een kristalmijn."
 
 #: ../../tribes/atlanteans/stonecutter/conf:1
 msgid "Cuts raw pieces of granite out of rocks."
-msgstr ""
+msgstr "Hakt ruwe stukken graniet uit liggende stenen."
 
 #: ../../tribes/atlanteans/tabard/conf:1
 msgid ""
@@ -1586,7 +1634,7 @@ msgstr "Produceert gereedschap voor de werkers."
 
 #: ../../tribes/atlanteans/toolsmithy/conf:38
 msgid "Produce bread paddle"
-msgstr ""
+msgstr "Maak broodschep"
 
 #: ../../tribes/atlanteans/toolsmithy/conf:39
 msgid "Produce bucket"
@@ -1634,7 +1682,7 @@ msgstr "Maak schep"
 
 #: ../../tribes/atlanteans/tower/conf:8
 msgid "Your soldiers have occupied your Tower"
-msgstr ""
+msgstr "Je soldaten hebben jouw Toren bezet"
 
 #: ../../tribes/atlanteans/trainer/conf:1
 msgid "Trains the soldiers."
@@ -1646,12 +1694,17 @@ msgid ""
 "Atlanteans. Besides the sawmill, the charcoal burner, the toolsmithy and the "
 "smokery also need logs for their work."
 msgstr ""
+"Boomstammen zijn de basis voor planken, die voor bijna ieder gebouw van de "
+"Atlantiërs gebruikt worden. Naast de houtzagerij gebruiken ook de "
+"houtskoolbrander, de werktuigmederij en de rokerij voor hun werk."
 
 #: ../../tribes/atlanteans/water/conf:1
 msgid ""
 "Water is the essence of life! It is used in the bakery and the horse and "
 "spider farms."
 msgstr ""
+"Water is de levensbron! Het wordt gebruikt in de bakkerij en de paarden- en "
+"spinnenboerderij."
 
 #: ../../tribes/atlanteans/weaponsmith/conf:1
 msgid "Produces weapons for the soldiers."

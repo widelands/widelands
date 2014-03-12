@@ -1,24 +1,22 @@
-# Widelands po/it_IT/tribes/barbarians.po
+# Widelands po/it_IT/tribes/empire.po
 # Copyright (C) 2005-2009 Widelands Development Team
 # Gabriel Rota <gabriel.rota@gmail.com>, 2009.
-#
+# GunChleoc <fios@foramnagaidhlig.net>, 2014.
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4530\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2014-03-06 21:20+0000\n"
-"PO-Revision-Date: 2014-03-07 20:36+0000\n"
-"Last-Translator: Dan O'Huiginn <daniel@ohuiginn.net>\n"
-"Language-Team: Italiano <widelands-public@lists.sourceforge.net>\n"
+"PO-Revision-Date: 2014-03-11 23:13+0000\n"
+"Last-Translator: GunChleoc <Unknown>\n"
+"Language-Team: Widelands fixxer upper\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-03-08 05:29+0000\n"
-"X-Generator: Launchpad (build 16948)\n"
-"X-Poedit-Country: ITALY\n"
-"X-Poedit-Language: Italian\n"
-"X-Poedit-SourceCharset: utf-8\n"
+"X-Launchpad-Export-Date: 2014-03-12 04:33+0000\n"
+"X-Generator: Launchpad (build 16963)\n"
+"Language: it\n"
 
 #: ../../global/militarysites/barracks.empire/conf:8
 msgid "Your Barracks discovered an aggressor."
@@ -297,7 +295,7 @@ msgstr ""
 #: ../../tribes/barbarians/axefactory/conf:32
 #: ../../tribes/barbarians/warmill/conf:36
 msgid "Produce ax"
-msgstr ""
+msgstr "Produzione ascia"
 
 #: ../../tribes/barbarians/axefactory/conf:33
 #: ../../tribes/barbarians/warmill/conf:37
@@ -702,7 +700,7 @@ msgstr "Soldato"
 #: ../../tribes/barbarians/trainingscamp/help.lua:63
 #: ../../tribes/barbarians/warmill/help.lua:31
 msgid "Training Camp"
-msgstr ""
+msgstr "Campo di addestramento"
 
 #: ../../tribes/barbarians/axefactory/help.lua:31
 #: ../../tribes/barbarians/bakery/help.lua:33
@@ -1544,7 +1542,7 @@ msgstr "Avanza la ritirata del soldato 1"
 msgid ""
 "Upgrade soldier evade 1 (only for compatibility with old savegames (build13))"
 msgstr ""
-"Avanza la ritirata del soldato 1 (solo per compatibilità con i vecchi "
+"Avanzamento ritirata del soldato 1 (solo per compatibilità con i vecchi "
 "salvataggi (build13))"
 
 #: ../../tribes/barbarians/battlearena/help.lua:12
@@ -1661,7 +1659,7 @@ msgstr ""
 #: ../../tribes/barbarians/inn/conf:27
 #: ../../tribes/barbarians/tavern/conf:28
 msgid "Produce ration"
-msgstr "Produzione razione"
+msgstr "Produce una razione"
 
 #: ../../tribes/barbarians/big_inn/conf:28
 #: ../../tribes/barbarians/inn/conf:28
@@ -1670,7 +1668,7 @@ msgstr "Produzione spuntino"
 
 #: ../../tribes/barbarians/big_inn/conf:29
 msgid "Produce meal"
-msgstr "Produzione pasto"
+msgstr "Produce un pasto"
 
 #: ../../tribes/barbarians/blacksmith/conf:1
 #: ../../tribes/barbarians/master-blacksmith/conf:1
@@ -1707,7 +1705,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/builder/conf:1
 msgid "Works at construction sites to raise new buildings."
-msgstr ""
+msgstr "Lavori nei cantieri per creare un nuovo edificio."
 
 #: ../../tribes/barbarians/burner/conf:1
 msgid "Burns coal."
@@ -2003,7 +2001,7 @@ msgstr "Capo minatore"
 #: ../../tribes/barbarians/granitemine/help.lua:49
 #: ../../tribes/barbarians/oremine/help.lua:49
 msgid "Master Miner"
-msgstr "Mastro minatore"
+msgstr "Mastro Minatore"
 
 #: ../../tribes/barbarians/coalmine/help.lua:56
 #: ../../tribes/barbarians/deep_coalmine/help.lua:59
@@ -2014,7 +2012,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/conf:4
 msgid "The Widelands Development Team"
-msgstr "Il Gruppo di Sviluppo di Widelands"
+msgstr "Gruppo di Sviluppo di Widelands"
 
 #: ../../tribes/barbarians/conf:5
 msgid "Barbarians"
@@ -2034,23 +2032,23 @@ msgstr "Edificio distrutto"
 
 #: ../../tribes/barbarians/conf:42
 msgid "Field (medium)"
-msgstr ""
+msgstr "Campo medio"
 
 #: ../../tribes/barbarians/conf:43
 msgid "Field (small)"
-msgstr ""
+msgstr "Campo piccolo"
 
 #: ../../tribes/barbarians/conf:44
 msgid "Field (tiny)"
-msgstr ""
+msgstr "Campo minuscolo"
 
 #: ../../tribes/barbarians/conf:45
 msgid "Field (ripe)"
-msgstr ""
+msgstr "Campo maturo"
 
 #: ../../tribes/barbarians/conf:46
 msgid "Field (harvested)"
-msgstr ""
+msgstr "Campo di granoturco"
 
 #: ../../tribes/barbarians/conf:47
 msgid "Reed (medium)"
@@ -2070,47 +2068,47 @@ msgstr ""
 
 #: ../../tribes/barbarians/conf:51
 msgid "Resource indicator: Coal (little)"
-msgstr ""
+msgstr "L'indicatore di risorse segna poco carbone"
 
 #: ../../tribes/barbarians/conf:52
 msgid "Resource indicator: Coal (much)"
-msgstr ""
+msgstr "L'indicatore di risorse segna tanto carbone"
 
 #: ../../tribes/barbarians/conf:53
 msgid "Resource indicator: Gold (little)"
-msgstr ""
+msgstr "L'indicatore di risorse segna poco oro"
 
 #: ../../tribes/barbarians/conf:54
 msgid "Resource indicator: Gold (much)"
-msgstr ""
+msgstr "L'indicatore di risorse segna tanto oro"
 
 #: ../../tribes/barbarians/conf:55
 msgid "Resource indicator: Granite (little)"
-msgstr ""
+msgstr "L'indicatore di risorse segna poco granito"
 
 #: ../../tribes/barbarians/conf:56
 msgid "Resource indicator: Granite (much)"
-msgstr ""
+msgstr "L'indicatore di risorse segna molto granito"
 
 #: ../../tribes/barbarians/conf:57
 msgid "Resource indicator: Iron (little)"
-msgstr ""
+msgstr "L'indicatore di risorse segna poco ferro"
 
 #: ../../tribes/barbarians/conf:58
 msgid "Resource indicator: Iron (much)"
-msgstr ""
+msgstr "L'indicatore di risorse segna tanto ferro"
 
 #: ../../tribes/barbarians/conf:59
 msgid "Resource indicator: No resource"
-msgstr ""
+msgstr "L'indicatore di risorse segna nessuna risorsa"
 
 #: ../../tribes/barbarians/conf:60
 msgid "Resource indicator: Water"
-msgstr ""
+msgstr "L'indicatore di risorse segna acqua"
 
 #: ../../tribes/barbarians/conf:61
 msgid "Ship Construction Site"
-msgstr ""
+msgstr "Sito di costruzione navi"
 
 #: ../../tribes/barbarians/conf:64
 msgid "Deer"
@@ -2157,7 +2155,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/conf:82
 msgid "Fire Tongs"
-msgstr "Pinze per il fuoco"
+msgstr "Molle per il fuoco"
 
 #: ../../tribes/barbarians/conf:84
 #: ../../tribes/barbarians/fishers_hut/help.lua:45
@@ -2186,7 +2184,7 @@ msgstr "Oro"
 #: ../../tribes/barbarians/goldmine/help.lua:31
 #: ../../tribes/barbarians/goldmine/help.lua:52
 msgid "Gold Ore"
-msgstr "Pepita d'oro"
+msgstr "Le pietre d'oro"
 
 #: ../../tribes/barbarians/conf:87
 #: ../../tribes/barbarians/lime_kiln/help.lua:30
@@ -2196,12 +2194,12 @@ msgstr "Calce"
 
 #: ../../tribes/barbarians/conf:89
 msgid "Helmet"
-msgstr "Elmo"
+msgstr "Elmetto"
 
 #: ../../tribes/barbarians/conf:90
 #: ../../tribes/barbarians/hunters_hut/help.lua:47
 msgid "Hunting Spear"
-msgstr "Lancia da caccia"
+msgstr "Lancia da Caccia"
 
 #: ../../tribes/barbarians/conf:92
 #: ../../tribes/barbarians/deep_oremine/help.lua:16
@@ -2220,11 +2218,11 @@ msgstr "Lancia da caccia"
 #: ../../tribes/barbarians/oremine/help.lua:31
 #: ../../tribes/barbarians/oremine/help.lua:52
 msgid "Iron Ore"
-msgstr "Ferro grezzo"
+msgstr "Minerale di ferro"
 
 #: ../../tribes/barbarians/conf:93
 msgid "Kitchen Tools"
-msgstr "Strumenti da cucina"
+msgstr "Strumenti da Cucina"
 
 #: ../../tribes/barbarians/conf:94
 msgid "Mask"
@@ -2260,7 +2258,7 @@ msgstr ""
 #: ../../tribes/barbarians/fernery/help.lua:43
 #: ../../tribes/barbarians/rangers_hut/help.lua:39
 msgid "Shovel"
-msgstr "Vanga"
+msgstr "Pala"
 
 #: ../../tribes/barbarians/conf:104
 #: ../../tribes/barbarians/deep_coalmine/help.lua:26
@@ -2304,7 +2302,7 @@ msgstr "Grano"
 #: ../../tribes/barbarians/conf:114
 #: ../../tribes/barbarians/well/help.lua:43
 msgid "Carrier"
-msgstr "Trasportatore"
+msgstr "Portatore"
 
 #: ../../tribes/barbarians/conf:124
 #: ../../tribes/barbarians/micro-brewery/help.lua:50
@@ -2330,7 +2328,7 @@ msgstr "Bruciatore"
 #: ../../tribes/barbarians/farm/help.lua:45
 #: ../../tribes/barbarians/metalworks/help.lua:40
 msgid "Farmer"
-msgstr "Contadino"
+msgstr "Coltivatore"
 
 #: ../../tribes/barbarians/conf:131
 #: ../../tribes/barbarians/fernery/help.lua:42
@@ -2437,7 +2435,7 @@ msgstr "Guardia ingresso"
 
 #: ../../tribes/barbarians/conf:162
 msgid "Guardhouse"
-msgstr "Posto di guardia"
+msgstr "Guardiola"
 
 #: ../../tribes/barbarians/conf:163
 msgid "High Tower"
@@ -2455,7 +2453,7 @@ msgstr "Torre"
 #: ../../tribes/barbarians/conf:166
 #: ../../tribes/barbarians/conf:221
 msgid "Sentry"
-msgstr "Posto di guardia"
+msgstr "Guardiola"
 
 #: ../../tribes/barbarians/conf:167
 msgid "Barracks"
@@ -2585,7 +2583,7 @@ msgstr "Miniera di carbone molto profonda"
 
 #: ../../tribes/barbarians/conf:211
 msgid "Coal Mine"
-msgstr ""
+msgstr "Miniera di carbone"
 
 #: ../../tribes/barbarians/conf:212
 #: ../../tribes/barbarians/deep_oremine/help.lua:44
@@ -2617,7 +2615,7 @@ msgstr "Miniera d'oro molto profonda"
 #: ../../tribes/barbarians/deeper_goldmine/help.lua:33
 #: ../../tribes/barbarians/goldmine/help.lua:42
 msgid "Deep Gold Mine"
-msgstr "Miniera d'oro profonda"
+msgstr "Profonda miniera d'oro"
 
 #: ../../tribes/barbarians/conf:217
 #: ../../tribes/barbarians/deep_goldmine/help.lua:34
@@ -2639,7 +2637,7 @@ msgstr "Dongione"
 
 #: ../../tribes/barbarians/conf:232
 msgid "Headquarters Medium"
-msgstr ""
+msgstr "Quartier generale medio"
 
 #: ../../tribes/barbarians/conf:233
 msgid "Citadel Village"
@@ -2729,11 +2727,11 @@ msgstr ""
 
 #: ../../tribes/barbarians/farm/conf:21
 msgid "Plant wheat"
-msgstr "Pianta il grano"
+msgstr "Pianta di grano"
 
 #: ../../tribes/barbarians/farm/conf:23
 msgid "Harvest wheat"
-msgstr "Miete il grano"
+msgstr "Raccolto di grano"
 
 #: ../../tribes/barbarians/farm/help.lua:16
 msgid "Sow and harvest wheat."
@@ -2873,7 +2871,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/geologist/conf:1
 msgid "Discovers resources for mining."
-msgstr "Scopre le risorse del sottosuolo."
+msgstr "Scopre le risorse per le miniere."
 
 #: ../../tribes/barbarians/gold/conf:1
 msgid ""
@@ -3296,6 +3294,8 @@ msgstr ""
 msgid ""
 "Scouts like Scotty the scout scouting unscouted areas in a scouty fashion."
 msgstr ""
+"Esploratori come Scotty l'esploratore esplorano le aree non esplorate alla "
+"maniera degli esploratori."
 
 #: ../../tribes/barbarians/scripting/sc00_headquarters_medium.lua:10
 msgid "Headquarters medium"
@@ -3307,7 +3307,7 @@ msgstr "Roccaforte del villaggio"
 
 #: ../../tribes/barbarians/scripting/sc01_citadel_village.lua:94
 msgid "Not enough space"
-msgstr "Spazio Insufficente"
+msgstr "Non c'è abbastanza spazio"
 
 #: ../../tribes/barbarians/scripting/sc01_citadel_village.lua:95
 msgid ""
@@ -3315,6 +3315,10 @@ msgid ""
 "weren’t built. You are at a disadvantage with this; consider restarting \n"
 "this map with a fair starting condition."
 msgstr ""
+"Alcuni dei tuoi edifici iniziali non hanno sufficiente spazio e \n"
+"non sono stati costruiti. Sei stato svantaggiato; considera di ricominciare "
+"\n"
+"questa mappa con una corretta condizione di partenza."
 
 #: ../../tribes/barbarians/scythe/conf:1
 msgid ""
@@ -3356,15 +3360,15 @@ msgstr ""
 
 #: ../../tribes/barbarians/smelter/conf:1
 msgid "Smelts iron."
-msgstr "Fonde il ferro."
+msgstr "Odore di ferro."
 
 #: ../../tribes/barbarians/smelting_works/conf:29
 msgid "Smelt iron"
-msgstr "Fusione del ferro"
+msgstr "Fondere ferro."
 
 #: ../../tribes/barbarians/smelting_works/conf:30
 msgid "Smelt gold"
-msgstr "Fusione dell'oro"
+msgstr "Fondere oro"
 
 #: ../../tribes/barbarians/snack/conf:1
 msgid ""

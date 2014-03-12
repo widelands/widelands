@@ -1,27 +1,28 @@
 # Widelands po/sk_SK/campaigns/t01.wmf.po
 # Copyright (C) 2008 Widelands Development Team
 # FIRST AUTHOR <EMAIL@ADDRESS.TLD>, YEAR.
-#
+# GunChleoc <fios@foramnagaidhlig.net>, 2014.
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2014-03-06 21:20+0000\n"
-"PO-Revision-Date: 2014-02-21 16:22+0000\n"
-"Last-Translator: Miroslav Remák <Unknown>\n"
-"Language-Team: Prometheus <mmatej@yahoo.com>\n"
+"PO-Revision-Date: 2014-03-11 10:14+0000\n"
+"Last-Translator: GunChleoc <Unknown>\n"
+"Language-Team: Widelands fixxer upper\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 1 : (n>=2 && n<=4) ? 2 : 0;\n"
-"X-Launchpad-Export-Date: 2014-03-07 05:32+0000\n"
-"X-Generator: Launchpad (build 16948)\n"
+"X-Launchpad-Export-Date: 2014-03-12 04:32+0000\n"
+"X-Generator: Launchpad (build 16963)\n"
 "X-Poedit-Country: czech republic\n"
+"Language: sk\n"
 "X-Poedit-Language: czech\n"
 
 #: ../../campaigns/t01.wmf/scripting/initial_messages.lua:15
 msgid "The Story Begins"
-msgstr ""
+msgstr "Príbeh sa začína"
 
 #: ../../campaigns/t01.wmf/scripting/initial_messages.lua:16
 msgid "Thron sighs..."
@@ -30,24 +31,28 @@ msgstr "Thron vzdychá..."
 #: ../../campaigns/t01.wmf/scripting/initial_messages.lua:17
 msgid ""
 "It’s been months, and we are still hiding where the forests are old and dark."
-msgstr ""
+msgstr "Prešli mesiace a stále sa skrývame tam, kde sú lesy staré a temné."
 
 #: ../../campaigns/t01.wmf/scripting/initial_messages.lua:18
 msgid ""
 "My warriors hunt at day and lie awake at night – listening to the sounds of "
 "the cruel slaughter echoing from afar amongst the ancient trees."
 msgstr ""
+"Moji bojovníci cez deň lovia a v noci bdejú, počúvajúc zvuky krutého "
+"krviprelievania, ktoré sa zďaleka ozývajú medzi prastarými lesmi."
 
 #: ../../campaigns/t01.wmf/scripting/initial_messages.lua:23
 msgid ""
 "We can see the raging flames that swallow Al’thunran from here, miles away."
-msgstr ""
+msgstr "Stadiaľ, míle ďaleko, vidno zúrivé plamene, ktoré hltajú Al'thunran."
 
 #: ../../campaigns/t01.wmf/scripting/initial_messages.lua:24
 msgid ""
 "The red lights flash in the darkness and dance to the rhythm of the war "
 "drums that haunt me even in my nightmares."
 msgstr ""
+"Červené svetlá iskria v tme a tancujú do rytmu vojnových bubnov, ktoré ma "
+"prenasledujú i v mojich nočných morách."
 
 #: ../../campaigns/t01.wmf/scripting/initial_messages.lua:28
 msgid ""
@@ -55,6 +60,9 @@ msgid ""
 "senseless spilling of blood that had arisen amongst us. It pains me that his "
 "peace only endured for one generation."
 msgstr ""
+"Kosti môjho otca pokojne odpočívajú v zemi, na ktorej raz ukončil to "
+"nezmyselné krviprelievanie, ktoré sa medzi nami prehnalo. Bolí ma, že tento "
+"mier vydržal len jednu generáciu."
 
 #: ../../campaigns/t01.wmf/scripting/initial_messages.lua:29
 msgid ""
@@ -63,6 +71,10 @@ msgid ""
 "awake, preventing greed or despair from destroying the bonds between us as "
 "well."
 msgstr ""
+"Boldreth, môj verný spoločník a priateľ, je pre mňa zdrojom pokoja a útechy "
+"v týchto temných časoch. Udržiava ma v dobrej nálade, vojakov v ostražitosti "
+"a taktiež nedovolí chamtivosti alebo zúfalstvu zničiť putá, ktoré nás "
+"spájajú."
 
 #: ../../campaigns/t01.wmf/scripting/initial_messages.lua:33
 msgid ""
@@ -70,10 +82,13 @@ msgid ""
 "trying not to fall asleep or die before the right time comes. And so I do... "
 "wait."
 msgstr ""
+"Ako mi otec povedal, sú chvíle, kedy treba bojovať, a chvíle, kedy treba "
+"ležať a čakať, pokúšajúc sa nezaspať a neumrieť, skôr ako príde pravý čas. A "
+"tak... čakám."
 
 #: ../../campaigns/t01.wmf/scripting/khantrukhs_talking.lua:23
 msgid "Somebody Comes up to You"
-msgstr ""
+msgstr "Niekto sa k vám blíži"
 
 #: ../../campaigns/t01.wmf/scripting/khantrukhs_talking.lua:24
 #: ../../campaigns/t01.wmf/scripting/khantrukhs_talking.lua:31
@@ -82,7 +97,7 @@ msgstr ""
 #: ../../campaigns/t01.wmf/scripting/khantrukhs_talking.lua:47
 #: ../../campaigns/t01.wmf/scripting/khantrukhs_talking.lua:54
 msgid "The Advisor"
-msgstr ""
+msgstr "Radca"
 
 #: ../../campaigns/t01.wmf/scripting/khantrukhs_talking.lua:60
 msgid "Mission Complete"
@@ -93,7 +108,7 @@ msgstr "Misia splnená."
 #: ../../campaigns/t01.wmf/scripting/texts.lua:31
 #: ../../campaigns/t01.wmf/scripting/texts.lua:33
 msgid "Build a lumberjack’s hut"
-msgstr ""
+msgstr "Postavte drevorubačskú chatrč"
 
 #: ../../campaigns/t01.wmf/scripting/texts.lua:20
 #: ../../campaigns/t01.wmf/scripting/texts.lua:34
@@ -101,6 +116,8 @@ msgid ""
 "Press SPACE to see where you can build. The red house symbols show you where "
 "a small building – like a lumberjack’s hut – may be built."
 msgstr ""
+"Stlačte MEDZERNÍK, aby ste videli, kde možno stavať.<br> Symboly červeného "
+"domu značia, kde je možné postaviť malé budovy ako drevorubačská chatrč."
 
 #: ../../campaigns/t01.wmf/scripting/texts.lua:21
 #: ../../campaigns/t01.wmf/scripting/texts.lua:35
@@ -108,13 +125,15 @@ msgid ""
 "Build a lumberjack’s hut at the red house symbol just right of your "
 "headquarters by clicking on it and selecting a lumberjack’s hut."
 msgstr ""
+"Postavte drevorubačskú chatrč na symbole červeného domu napravo od základne "
+"kliknutím naň a výberom drevorubačskej chatrče."
 
 #: ../../campaigns/t01.wmf/scripting/texts.lua:22
 #: ../../campaigns/t01.wmf/scripting/texts.lua:44
 msgid ""
 "Build a road between your headquarters and the construction site of the "
 "lumberjack’s hut."
-msgstr ""
+msgstr "Postavte cestu medzi základňou a staveniskom drevorubačskej chatrče."
 
 #: ../../campaigns/t01.wmf/scripting/texts.lua:23
 #: ../../campaigns/t01.wmf/scripting/texts.lua:45
@@ -124,6 +143,10 @@ msgid ""
 "a flag and select to build a road, little symbols will appear around it to "
 "show you in which directions you can build it."
 msgstr ""
+"Keď umiestnite drevorubačskú chatrč, vytvorí sa pre ňu vlajka. Potrebujete "
+"ju spojiť s inou vlajkou postavením cesty medzi nimi. Ak kliknete na vlajku "
+"a zvolíte postavenie cesty, zobrazia sa okolo nej malé symboly, ktoré "
+"ukazujú, v akých smeroch cestu možno stavať."
 
 #: ../../campaigns/t01.wmf/scripting/texts.lua:24
 #: ../../campaigns/t01.wmf/scripting/texts.lua:46
@@ -133,6 +156,9 @@ msgid ""
 "steeper the road is, the harder it will be for your people to walk on it "
 "(and your wares will be transported more slowly)."
 msgstr ""
+"Farba týchto symbolov udáva, aká strmá bude táto časť cesty. Zelená značí "
+"rovnú, žltá strmú a červená veľmi strmú. Čím strmšia je cesta, tým ťažšie je "
+"pre vašich ľudí po nej chodiť (a transport vášho tovaru sa spomalí)."
 
 #: ../../campaigns/t01.wmf/scripting/texts.lua:41
 msgid "Build a road to the lumberjack’s hut"
@@ -150,6 +176,10 @@ msgid ""
 "build several steps at once. Click on the flag at the headquarters to finish "
 "the road."
 msgstr ""
+"Aby ste tu postavili prvú časť cesty, môžete kliknúť na hocijaký symbol. "
+"Potom sa objavia nové symboly, ktoré vám ukážu, kam môže viesť ďalšia časť "
+"cesty a tak ďalej. Možno však kliknúť aj ďalej od vlajky, aby sa vykonalo "
+"viacero krokov naraz. Na dokončenie cesty kliknite na vlajku pri základni."
 
 #: ../../campaigns/t01.wmf/scripting/texts.lua:53
 #: ../../campaigns/t01.wmf/scripting/texts.lua:55
@@ -158,7 +188,7 @@ msgstr ""
 #: ../../campaigns/t01.wmf/scripting/texts.lua:74
 #: ../../campaigns/t01.wmf/scripting/texts.lua:76
 msgid "Build a second lumberjack’s hut"
-msgstr ""
+msgstr "Postavte ďalšiu drevorubačskú chatrč"
 
 #: ../../campaigns/t01.wmf/scripting/texts.lua:56
 #: ../../campaigns/t01.wmf/scripting/texts.lua:67
@@ -169,6 +199,11 @@ msgid ""
 "will divide the road the wood is transported into two parts with one carrier "
 "each."
 msgstr ""
+"Umiestnite vlajku uprostred cesty. Uprostred cesty, ktorú ste práve "
+"postavili, je symbol vlajky. Vlajku tam vytvoríte, ak kliknete na tento "
+"symbol a následne vyberiete tlačidlo s vlajkou v menu, ktoré sa otvorí. "
+"Takto sa rozdelí cesta, ktorou sa prenáša drevo, na dve časti, každá s "
+"jedným nosičom."
 
 #: ../../campaigns/t01.wmf/scripting/texts.lua:57
 #: ../../campaigns/t01.wmf/scripting/texts.lua:77
@@ -179,6 +214,10 @@ msgid ""
 "step, you may also click directly at its destination to build the entire "
 "road at once."
 msgstr ""
+"Postavte drevorubačskú chatrč južne od vlajky, ktorú ste práve umiestnili na "
+"ceste. Potom spojte vlajku, ktorú ste práve vztýčili, s vlajkou pri "
+"stavenisku drevorubačskej chatrče. Všimnite si, že namiesto stavania cesty "
+"krok za krokom ju možno postaviť celú naraz kliknutím priamo na jej cieľ."
 
 #: ../../campaigns/t01.wmf/scripting/texts.lua:58
 #: ../../campaigns/t01.wmf/scripting/texts.lua:68
@@ -187,15 +226,17 @@ msgid ""
 "in between make them arrive at their destination faster, thus improving your "
 "infrastructure."
 msgstr ""
+"Ak sa medzi dvoma bodmi prenáša veľa tovarov, ďalšie vlajky uprostred im "
+"umožnia prísť na miesto rýchlejšie, teda sa zdokonalí vaša infraštruktúra."
 
 #: ../../campaigns/t01.wmf/scripting/texts.lua:83
 #: ../../campaigns/t01.wmf/scripting/texts.lua:85
 msgid "Build a ranger’s hut"
-msgstr ""
+msgstr "Postavte lesnícku chatrč"
 
 #: ../../campaigns/t01.wmf/scripting/texts.lua:86
 msgid "Build a ranger’s hut to the east of the first lumberjack’s hut."
-msgstr ""
+msgstr "Postavte lesnícku chatrč na východ od prvej drevorubačskej chatrče."
 
 #: ../../campaigns/t01.wmf/scripting/texts.lua:92
 #: ../../campaigns/t01.wmf/scripting/texts.lua:94
@@ -204,7 +245,7 @@ msgstr "Postavte dva kameňolomy"
 
 #: ../../campaigns/t01.wmf/scripting/texts.lua:95
 msgid "Build two quarries south-west of your headquarters."
-msgstr ""
+msgstr "Postavte dva kameňolomy juhozápadne od základne."
 
 #: ../../campaigns/t01.wmf/scripting/texts.lua:103
 msgid "An old man says..."
@@ -215,6 +256,8 @@ msgid ""
 "Hail, chieftain. I am Khantrukh and have seen many winters pass. Please "
 "allow me to aid you with my counsel through these darkened days."
 msgstr ""
+"Buďte pozdravený, náčelník. Som Khantrukh a prežil som veľa zím. Prosím, "
+"dovoľte mi poradiť vám v týchto temných časoch."
 
 #: ../../campaigns/t01.wmf/scripting/texts.lua:106
 msgid "Khantrukh continues..."
@@ -226,6 +269,9 @@ msgid ""
 "hope we may march back gloriously any day now, but I strongly doubt that "
 "will happen soon. And the days are already getting shorter and colder..."
 msgstr ""
+"Nikto okrem bohov nevie, ako dlho sa tu musíme skrývať. Vojaci dúfajú, že by "
+"sme sa kedykoľvek mohli slávnostne vrátiť, ale ja silno pochybujem, že sa to "
+"čoskoro stane. A dni sa už skracujú a ochladzujú..."
 
 #: ../../campaigns/t01.wmf/scripting/texts.lua:108
 msgid ""
@@ -233,6 +279,9 @@ msgid ""
 "I believe to the east of our campsite are a few places where we could raise "
 "a lumberjack’s hut."
 msgstr ""
+"Mali by sme sa pripraviť v prípade, že budeme musieť čeliť zime v tejto "
+"neľútostnej krajine. Verím, že východne od nášho tábora je pár miest, kde by "
+"sme mohli postaviť drevorubačskú chatrč."
 
 #: ../../campaigns/t01.wmf/scripting/texts.lua:111
 msgid "The elder remarks..."
@@ -246,6 +295,10 @@ msgid ""
 "men would appreciate a way as short and plain as possible – the wood will "
 "surely be heavy enough, nevertheless."
 msgstr ""
+"Očividne by bolo pre ľudí vyčerpávajúce chodiť celú cestu k drevorubačskej "
+"chatrči cez divočinu. Budeme musieť postaviť cestu medzi našou halou a "
+"drevorubačskou chatrčou. Je pravdepodobné, že by ľudia ocenili čo najkratšiu "
+"a najrovnejšiu cestu - drevo bude určite dosť ťažké aj tak."
 
 #: ../../campaigns/t01.wmf/scripting/texts.lua:115
 msgid "Khantrukh remembers..."
@@ -253,17 +306,19 @@ msgstr "Khantrukh si spomína..."
 
 #: ../../campaigns/t01.wmf/scripting/texts.lua:116
 msgid "There is an old saying:"
-msgstr ""
+msgstr "Existuje staré príslovie:"
 
 #: ../../campaigns/t01.wmf/scripting/texts.lua:117
 msgid "‘A burden divided is easier to endure.’"
-msgstr ""
+msgstr "'Rozdelené bremeno sa dá ľahšie zniesť.'"
 
 #: ../../campaigns/t01.wmf/scripting/texts.lua:118
 msgid ""
 "A crossroads on the road between our headquarters and the lumberjack’s hut "
 "would ease the work of our carriers."
 msgstr ""
+"Križovatka na ceste medzi základňou a drevorubačskou chatrčou by uľahčila "
+"prácu nosičov."
 
 #: ../../campaigns/t01.wmf/scripting/texts.lua:121
 msgid "The old man looks to the sky..."
@@ -276,6 +331,10 @@ msgid ""
 "people. More trees await our axes just south of our new crossroads – let us "
 "raise a second lumberjack’s hut there!"
 msgstr ""
+"Vetry zo severu nám hovoria, že prichádzajúca zima bude dlhá a krutá. Jedna "
+"drevorubačská chatrč nevystačí pre potreby našich ľudí. Na juh od našej "
+"novej križovatky čaká na naše sekery viac stromov - postavme tam druhú "
+"drevorubačskú chatrč!"
 
 #: ../../campaigns/t01.wmf/scripting/texts.lua:125
 msgid "Khantrukh nods..."
@@ -286,6 +345,9 @@ msgid ""
 "Of course, if we intended to build a bigger settlement, many more "
 "lumberjack’s huts would be advisable, but this should suffice for now."
 msgstr ""
+"Samozrejme, ak by sme mali v pláne postaviť väčšiu osadu, bolo by vhodné "
+"postaviť oveľa viac drevorubačských chatrčí, ale tieto by mali zatiaľ "
+"postačiť."
 
 #: ../../campaigns/t01.wmf/scripting/texts.lua:127
 msgid ""
@@ -293,12 +355,17 @@ msgid ""
 "ancestors. We must always respect and care for them. What we take, we must "
 "give back again."
 msgstr ""
+"Ale nezabúdajte - tieto lesy sú naše dedičstvo, ktoré nám zverili naši "
+"predkovia. Vždy si ich musíme ctiť a starať sa o ne. Čo zoberieme, musíme "
+"opäť vrátiť."
 
 #: ../../campaigns/t01.wmf/scripting/texts.lua:128
 msgid ""
 "So, in order to replace the trees we chop down, we should build a ranger’s "
 "hut, preferably close to the lumberjack’s hut."
 msgstr ""
+"Aby sme nahradili stromy, ktoré zvaľujeme, mali by sme postaviť lesnícku "
+"chatrč, radšej blízko drevorubačskej chatrče."
 
 #: ../../campaigns/t01.wmf/scripting/texts.lua:131
 msgid "The elder speaks..."
@@ -311,6 +378,10 @@ msgid ""
 "reconquer our home might take a long time and it would seem wise to make "
 "preparations."
 msgstr ""
+"Dobre si uvedomujem, náčelník, že ani vy, ani vaši bojovníci si neželajú "
+"zostať na tomto opustenom mieste na dlho. A predsa by mohla naša vojna s "
+"cieľom opätovne získať našu domovinu trvať dlhý čas a bolo by múdre urobiť "
+"prípravy."
 
 #: ../../campaigns/t01.wmf/scripting/texts.lua:133
 msgid ""
@@ -318,31 +389,35 @@ msgid ""
 "fortifications we might be forced to build very soon. And – like a gift of "
 "destiny – there are indeed great rocks just nearby..."
 msgstr ""
+"Pre budúcnosť by som navrhoval zaobstarať kamene - kto vie, aké pevnosti "
+"budeme musieť čoskoro postaviť? A ako dar osudu sú v blízkosti veľké skaly..."
 
 #: ../../campaigns/t01.wmf/scripting/texts.lua:136
 msgid ""
 "Very well done, chieftain. We now have all we need to face the winter and "
 "may prepare ourselves for the battles ahead."
 msgstr ""
+"Dobre vykonané, náčelník. Teraz sme pripravení čeliť zime a môžeme sa "
+"pripraviť na bitky, ktoré nás čakajú."
 
 #: ../../campaigns/t01.wmf/scripting/texts.lua:137
 msgid "Victory"
-msgstr ""
+msgstr "Víťazstvo"
 
 #: ../../campaigns/t01.wmf/scripting/texts.lua:138
 msgid ""
 "You may continue to play this map if you wish. Otherwise, move on to the "
 "next mission."
-msgstr ""
+msgstr "Ak chcete, môžete pokračovať v hre. Inak prejdite k ďalšej misii."
 
 #: ../../campaigns/t01.wmf/scripting/texts.lua:145
 msgid "In the Night"
-msgstr ""
+msgstr "V noci"
 
 #: ../../campaigns/t01.wmf/scripting/texts.lua:146
 #: ../../campaigns/t01.wmf/scripting/texts.lua:154
 msgid "Thron says..."
-msgstr ""
+msgstr "Thron hovorí..."
 
 #: ../../campaigns/t01.wmf/scripting/texts.lua:147
 msgid ""
@@ -350,16 +425,20 @@ msgid ""
 "north. The fires are still burning, satisfying their hunger upon my father’s "
 "legacy."
 msgstr ""
+"Počas ďalšej nespavej noci som sa vybral na kopec a uprene hľadel na sever. "
+"Ohne stále horia, utišujúc svoj hlad na dedičstve môjho otca."
 
 #: ../../campaigns/t01.wmf/scripting/texts.lua:148
 msgid ""
 "They are a constant reminder of why we have to hide here... and why we must "
 "return in the end!"
 msgstr ""
+"Stále nám pripomínajú, prečo sa tu musíme skrývať... a prečo sa nakoniec "
+"musíme vrátiť!"
 
 #: ../../campaigns/t01.wmf/scripting/texts.lua:153
 msgid "At the Tomb"
-msgstr ""
+msgstr "V hrobke"
 
 #: ../../campaigns/t01.wmf/scripting/texts.lua:155
 msgid ""
@@ -367,16 +446,21 @@ msgid ""
 "the great spire of Kal’mavrath. I just stood there and felt neither the "
 "hours pass nor the cold rain pouring down from the darkened sky..."
 msgstr ""
+"Opäť som sa vybral k hrobke môjho otca v posvätnom háji na úpätí veľkej veže "
+"v Kal'mavrath. Len som tam stál a necítil ani ubiehať čas, ani studený dážď, "
+"ktorý sa lial zo zatemnenej oblohy..."
 
 #: ../../campaigns/t01.wmf/scripting/texts.lua:156
 msgid ""
 "Somehow, it felt like a farewell. For the first time, I wondered what the "
 "future might hold for me..."
 msgstr ""
+"Akosi sa mi to zdalo ako rozlúčka. Po prvý raz som bol zvedavý, čo mi "
+"budúcnosť prinesie..."
 
 #: ../../campaigns/t01.wmf/scripting/texts.lua:161
 msgid "The Other Day"
-msgstr ""
+msgstr "Ďalší deň"
 
 #: ../../campaigns/t01.wmf/scripting/texts.lua:162
 msgid "Thron says thoughtfully..."
@@ -387,6 +471,9 @@ msgid ""
 "Some time ago, Boldreth came to me. His advice was to move to a place closer "
 "to home – to strike at the first sign of my brothers’ forces wavering."
 msgstr ""
+"Pred nedávnom ku mne prišiel Boldreth. Jeho radou bolo, aby sme sa presunuli "
+"na miesto bližšie od domova a zasiahli pri prvých známkach váhania vojsk "
+"mojich bratov."
 
 #: ../../campaigns/t01.wmf/scripting/texts.lua:164
 msgid ""
@@ -395,10 +482,14 @@ msgid ""
 "time soon. He might still be right, but I fear the bloodshed that returning "
 "too fast would cause both on our and the other side..."
 msgstr ""
+"Ale prezrúc si lesy vidím stále čierny dym stúpajúci do neba. Viem, že je "
+"ešte príliš skoro a to, v čo dúfa, tak skoro nenastane. Mohol by mať aj tak "
+"pravdu, ale obávam sa krviprelievania na našej i druhej strane, ktoré by "
+"rýchly návrat spôsobil..."
 
 #: ../../campaigns/t01.wmf/scripting/texts.lua:168
 msgid "The Oath"
-msgstr ""
+msgstr "Sľub"
 
 #: ../../campaigns/t01.wmf/scripting/texts.lua:169
 msgid "Thron looks furious..."
@@ -410,10 +501,13 @@ msgid ""
 "the dark forest. We listened in horror as he told us of the atrocities "
 "taking place in Al’thunran."
 msgstr ""
+"Dnes moji bojovníci vyzdvihli starého muža, ktorý putoval temným lesom chorý "
+"a ranený. Zhrozili sme sa, keď nám povedal o zverstvách, ktoré sa dejú v "
+"Al'thunran."
 
 #: ../../campaigns/t01.wmf/scripting/texts.lua:171
 msgid "I hereby renew my oath – I will stop this madness at any cost!"
-msgstr ""
+msgstr "Týmto obnovujem svoj sľub - zastavím toto šialenstvo za každú cenu!"
 
 #: ../../scripting/format_scenario.lua:36
 msgid "“%s”"

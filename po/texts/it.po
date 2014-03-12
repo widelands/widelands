@@ -1,22 +1,23 @@
 # Widelands po/it_IT/texts.po
 # Copyright (C) 2005-2009 Widelands Development Team
-#
 # FIRST AUTHOR <gabriel.rota@gmail.com>, 2009.
 # Gabriel Rota <gabriel.rota@gmail.com>, 2009.
+# GunChleoc <fios@foramnagaidhlig.net>, 2014.
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4530\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2014-03-06 21:20+0000\n"
-"PO-Revision-Date: 2014-02-27 11:28+0000\n"
-"Last-Translator: Guybrush88 <Unknown>\n"
-"Language-Team: Italiano <widelands-public@lists.sourceforge.net>\n"
+"PO-Revision-Date: 2014-03-11 23:12+0000\n"
+"Last-Translator: GunChleoc <Unknown>\n"
+"Language-Team: Widelands fixxer upper\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-03-07 05:33+0000\n"
-"X-Generator: Launchpad (build 16948)\n"
+"X-Launchpad-Export-Date: 2014-03-12 04:32+0000\n"
+"X-Generator: Launchpad (build 16963)\n"
 "X-Poedit-Country: ITALY\n"
+"Language: it\n"
 "X-Poedit-Language: Italian\n"
 "X-Poedit-SourceCharset: utf-8\n"
 
@@ -58,6 +59,12 @@ msgid ""
 "economic infrastructure, explore the land around you and face rivaling\n"
 "tribes."
 msgstr ""
+"In questa partita, cominci con un piccolo appezzamento di terra con solo "
+"poche\n"
+"risorse. Utilizzandole, creerai un impero con diverse migliaia di abitanti.\n"
+"Lungo la strada verso questo obbiettivo, dovrai creare un'infrastruttura "
+"economica,\n"
+"esplorare il terreno intorno a te e fronteggiare tribù rivali."
 
 #: ../../txts/README.lua:31
 msgid "Check out the Widelands project homepage:"
@@ -68,6 +75,9 @@ msgid ""
 "Widelands is licensed under the GNU General Public License (GPL). For more\n"
 "information, see the file ‘COPYING’."
 msgstr ""
+"Widelands è rilasciato sotto la licenza GNU General Public License (GPL). "
+"Per maggiori\n"
+"informazioni, dai un'occhiata al file 'COPYING'"
 
 #: ../../txts/README.lua:38
 msgid "Status"
@@ -84,6 +94,13 @@ msgid ""
 "or\n"
 "creating new maps – get in touch on our homepage."
 msgstr ""
+"Widelands è quasi compleato ed molto divertente giocare da solo, ed ancora\n"
+"di più in multiplayer con gli altri. Rimane sempre comunque del lavoro da "
+"fare in\n"
+"tutti i settori. Se sei interessato a contribuire - ideando grafica,\n"
+"risolvendo bug o aggiungendo nuove funzionalità, traducendo il gioco nella "
+"tua lingua o\n"
+"creando nuove mappe - mettiti in contatto consultando la nostra homepage."
 
 #: ../../txts/README.lua:46
 msgid "General game control"
@@ -97,6 +114,11 @@ msgid ""
 "the left\n"
 "mouse button while holding down CTRL."
 msgstr ""
+"Per chiudere una finestra aperta, cliccaci sopra con il tasto destro. Per "
+"minimizzare/massimizzare una finestra,clicca\n"
+"sulla barra del titolo della finestra o con il tasto centrale del mouse o "
+"con il tasto\n"
+"sinistro del mouse + CTRL."
 
 #: ../../txts/README.lua:52
 msgid ""
@@ -126,11 +148,11 @@ msgstr "Scorciatoie da tastiera (durante il gioco)"
 
 #: ../../txts/README.lua:61
 msgid "PAGEUP: increases games peed"
-msgstr ""
+msgstr "PAGINA SU: aumenta la velocità di gioco"
 
 #: ../../txts/README.lua:62
 msgid "PAGEDOWN: decreases games peed"
-msgstr ""
+msgstr "PAGINA GIU': diminuisci la velocità di gioco"
 
 #: ../../txts/README.lua:63
 msgid "PAUSE: pauses the game"
@@ -146,7 +168,7 @@ msgstr "M: attiva/disattiva minimappa"
 
 #: ../../txts/README.lua:66
 msgid "N: toggles messages (‘news’)"
-msgstr ""
+msgstr "N: attiva/disattiva messaggi ('notizie')"
 
 #: ../../txts/README.lua:67
 msgid "C: toggles census"
@@ -167,6 +189,7 @@ msgstr "O: attiva/disattiva obbiettivi"
 #: ../../txts/README.lua:71
 msgid "F: toggles fullscreen (if supported by the OS)"
 msgstr ""
+"F: attiva/disattiva schermo intero (se supportato dal sistema operativo)"
 
 #: ../../txts/README.lua:72
 msgid "Home: centers main mapview on starting location"
@@ -179,11 +202,11 @@ msgstr ""
 
 #: ../../txts/README.lua:74
 msgid ",: goes to the previous location"
-msgstr ""
+msgstr ",: vai alla posizione precedente"
 
 #: ../../txts/README.lua:75
 msgid ".: goes to the next location"
-msgstr ""
+msgstr ".: vai alla posizione seguente"
 
 #: ../../txts/README.lua:76
 msgid "F6: shows the debug console (only in debug-builds)"
@@ -206,7 +229,7 @@ msgstr ""
 
 #: ../../txts/README.lua:82
 msgid "G: jumps to the location corresponding to the current message"
-msgstr ""
+msgstr "G: vai alla posizione collegata al messaggio corrente"
 
 #: ../../txts/README.lua:83
 msgid "DELETE: archives the current message"
@@ -331,6 +354,17 @@ msgid ""
 "a\n"
 "different version of the game."
 msgstr ""
+"Usando l'opzione Guarda Replay del menu principale, verrà ricostruita in "
+"maniera precisa\n"
+"e mostrata una partita giocata precedentemente. Nota, comunque, che ogni "
+"piccola\n"
+"modifica ai file del gioco o all'eseguibile di Widelands potrebbe rendere il "
+"replay\n"
+"incompatibile, mandandolo 'fuori sincronia'. Ciò è simile a quanto accade "
+"alle partite in rete\n"
+"quando soffrono di problemi di desincronizzazione se uno dei giocatori "
+"possiede\n"
+"una versione di gioco differente."
 
 #: ../../txts/README.lua:133
 msgid ""
@@ -340,6 +374,13 @@ msgid ""
 "~/.widelands/replays directory on Linux and Mac OS X. On Windows,\n"
 "they are in the ‘replays’ subdirectory of your Widelands installation."
 msgstr ""
+"I replay sono molto utili per individuare bug nella logica del gioco, "
+"quindi\n"
+"possono essere utili come allegato ai bug report. I file di replay sono "
+"salvati\n"
+"nella directory ~/.widelands/replays (su Linux e Mac OS X). Su Windows,\n"
+"sono nella sottodirectory 'replay' nel percorso di installazione di "
+"Widelands."
 
 #: ../../txts/developers:1
 msgid "Development"
@@ -539,16 +580,24 @@ msgid ""
 "progress and as the Editor becomes better and better, this text will also "
 "get longer and more complete."
 msgstr ""
+"Questo Editor è inteso per i giocatori che vorrebbero disegnare le proprie "
+"mappe da usare con Widelands.<br>Come puoi vedere, questo Editor è "
+"fortemente sotto sviluppo e può essere migliorato e migliorerà se questo "
+"testo diventerà più lungo e più completo."
 
 #: ../../txts/editor_readme:12
 msgid "Please have a look at our enduser manuals on our wiki pages at:"
 msgstr ""
+"Guarda nel nostro manuale per l'utente finale e nelle nostre pagine wiki a:"
 
 #: ../../txts/editor_readme:14
 msgid ""
 "Those pages might be more complete and up to date than this file, and you "
 "will also find a short tutorial about building a map there."
 msgstr ""
+"Queste pagine possono essere più complete ed aggiornate di questo file. E "
+"là, in futuro, si potrà trovare un breve tutorial su come costruire una "
+"mappa."
 
 #: ../../txts/editor_readme:18
 msgid "Keyboard shortcuts"

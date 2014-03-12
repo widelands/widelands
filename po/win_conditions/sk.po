@@ -2,21 +2,22 @@
 # Copyright (c) 2010 Rosetta Contributors and Canonical Ltd 2010
 # This file is distributed under the same license as the widelands package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010.
-#
+# GunChleoc <fios@foramnagaidhlig.net>, 2014.
 msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-03-06 21:20+0000\n"
-"PO-Revision-Date: 2013-09-20 00:11+0000\n"
-"Last-Translator: Miroslav Remák <Unknown>\n"
-"Language-Team: Slovak <sk@li.org>\n"
+"PO-Revision-Date: 2014-03-11 10:17+0000\n"
+"Last-Translator: GunChleoc <Unknown>\n"
+"Language-Team: Widelands fixxer upper\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 1 : (n>=2 && n<=4) ? 2 : 0;\n"
-"X-Launchpad-Export-Date: 2014-03-07 05:43+0000\n"
-"X-Generator: Launchpad (build 16948)\n"
+"X-Launchpad-Export-Date: 2014-03-12 04:34+0000\n"
+"X-Generator: Launchpad (build 16963)\n"
+"Language: sk\n"
 
 #: ../../scripting/win_condition_texts.lua:2
 msgid "Congratulations!"
@@ -52,7 +53,7 @@ msgstr "Prehrali ste"
 
 #: ../../scripting/win_condition_texts.lua:18
 msgid "You’ve lost this game!"
-msgstr ""
+msgstr "Prehrali ste túto hru!"
 
 #: ../../scripting/win_condition_texts.lua:22
 msgid "Status"
@@ -87,6 +88,8 @@ msgid ""
 "You get points for precious wares in your warehouses. The player with the "
 "highest number of wares at the end of 4 hours wins the game."
 msgstr ""
+"Dostávate body za cenné výrobky vo svojich skladoch, hráč s najväčším počtom "
+"výrobkov na konci 4 hodín vyhráva hru."
 
 #: ../../scripting/win_conditions/02_collectors.lua:19
 msgid "Points"
@@ -132,6 +135,9 @@ msgid ""
 "winner will be the player or the team that is able to keep that area for at "
 "least 20 minutes."
 msgstr ""
+"Každý hráč alebo tím sa pokúša získať viac než polovicu územia mapy. Víťazom "
+"sa stane ten hráč alebo tím, ktorý si dokáže udržať toto územie na dobu "
+"aspoň 20 minút."
 
 #: ../../scripting/win_conditions/03_territorial_lord.lua:153
 #: ../../scripting/win_conditions/03_territorial_time.lua:23
@@ -141,7 +147,7 @@ msgstr "Tím %i"
 #: ../../scripting/win_conditions/03_territorial_lord.lua:155
 #: ../../scripting/win_conditions/03_territorial_time.lua:199
 msgid "%s owns more than half of the map’s area."
-msgstr ""
+msgstr "%s vlastní viac než polovicu mapy."
 
 #: ../../scripting/win_conditions/03_territorial_lord.lua:157
 #: ../../scripting/win_conditions/03_territorial_time.lua:201
@@ -153,7 +159,7 @@ msgstr[1] ""
 #: ../../scripting/win_conditions/03_territorial_lord.lua:162
 #: ../../scripting/win_conditions/03_territorial_time.lua:206
 msgid "You own more than half of the map’s area."
-msgstr ""
+msgstr "Vlastníte viac než polovicu územia mapy."
 
 #: ../../scripting/win_conditions/03_territorial_lord.lua:164
 #: ../../scripting/win_conditions/03_territorial_time.lua:208
@@ -173,6 +179,9 @@ msgid ""
 "least 20 minutes, or the one with the most territory after 4 hours, "
 "whichever comes first."
 msgstr ""
+"Každý hráč alebo tím sa snaží získať viac ako polovicu územia na mape. Vyhrá "
+"ten hráč alebo tím, ktorý dokáže obrániť túto oblasť po dobu aspoň 20 minút, "
+"alebo ten, ktorý bude po 4 hodinách vlastniť najviac územia."
 
 #: ../../scripting/win_conditions/03_territorial_time.lua:21
 msgid "%1$s has %2$3.0f%% of the land (%3$i of %4$i)."
@@ -205,6 +214,9 @@ msgid ""
 "your territory than any other player. The game will end after 4 hours of\n"
 "playing. The one with the most trees at that point will win the game."
 msgstr ""
+"Ako lesný škriatok obľubujete veľké lesy, takže vašou úlohou je mať viac\n"
+"stromov na svojom území ako ostatní hráči. Hra skončí po 4 hodinách\n"
+"hrania. Hráč s najväčším počtom stromov vyhráva hru."
 
 #: ../../scripting/win_conditions/04_wood_gnome.lua:19
 msgid "Trees owned"
@@ -220,7 +232,7 @@ msgstr[1] ""
 
 #: ../../scripting/win_conditions/04_wood_gnome.lua:91
 msgid "%1$s has %2$s at the moment."
-msgstr ""
+msgstr "%1$s má momentálne %2$s."
 
 #: ../../scripting/win_conditions/04_wood_gnome.lua:142
 msgid "%1$s had %2$s."

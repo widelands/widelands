@@ -1,21 +1,22 @@
 # Widelands po/nl_NL/texts.po
 # Copyright (C) 2008 Widelands Development Team
-#
 # FIRST AUTHOR <EMAIL@ADDRESS.TLD>, YEAR., 2009.
+# GunChleoc <fios@foramnagaidhlig.net>, 2014.
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4575\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2014-03-06 21:20+0000\n"
-"PO-Revision-Date: 2013-09-24 10:55+0000\n"
-"Last-Translator: fk <Unknown>\n"
-"Language-Team: Dutch <widelands-public@lists.sourceforge.net>\n"
+"PO-Revision-Date: 2014-03-11 09:58+0000\n"
+"Last-Translator: GunChleoc <Unknown>\n"
+"Language-Team: Widelands fixxer upper\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-03-07 05:33+0000\n"
-"X-Generator: Launchpad (build 16948)\n"
+"X-Launchpad-Export-Date: 2014-03-12 04:32+0000\n"
+"X-Generator: Launchpad (build 16963)\n"
 "X-Poedit-Country: Netherlands\n"
+"Language: nl\n"
 "X-Poedit-Language: Dutch\n"
 
 #: ../../txts/README.lua:7
@@ -54,6 +55,11 @@ msgid ""
 "economic infrastructure, explore the land around you and face rivaling\n"
 "tribes."
 msgstr ""
+"Je begint in dit spel op een klein stuk land met slechts enige\n"
+"voorraden. Door deze te benutten zul je een imperium creëren met\n"
+"vele duizenden inwoners. Op jouw weg naar dit doel moet je een\n"
+"efficiënte infrastructuur neerzetten, het land om je heen verkennen\n"
+"en rivaliserende stammen het hoofd bieden."
 
 #: ../../txts/README.lua:31
 msgid "Check out the Widelands project homepage:"
@@ -64,6 +70,8 @@ msgid ""
 "Widelands is licensed under the GNU General Public License (GPL). For more\n"
 "information, see the file ‘COPYING’."
 msgstr ""
+"Widelands is gelicenseerd onder de GNU General Public License (GPL). Zie "
+"voor meer informatie het bestand 'COPYING\"."
 
 #: ../../txts/README.lua:38
 msgid "Status"
@@ -80,6 +88,11 @@ msgid ""
 "or\n"
 "creating new maps – get in touch on our homepage."
 msgstr ""
+"Widelands is bijna af en is erg leuk om alleen te spelen en zelfs nog leuker "
+"samen met anderen. Toch is er nog altijd meer werk dat moet worden verricht "
+"op alle gebieden. Als je wilt bijdragen - zij het tekenen, verhelpen van "
+"fouten of toevoegen van nieuwe functionaliteit,  vertalen naar je eigen taal "
+"of het bouwen van kaarten - bereik ons via de webpagina."
 
 #: ../../txts/README.lua:46
 msgid "General game control"
@@ -93,6 +106,9 @@ msgid ""
 "the left\n"
 "mouse button while holding down CTRL."
 msgstr ""
+"Om een geopend venster te sluiten, klik er rechts op. Om een venster te mini-"
+"/maximaliseren, klik op de titelbalk van dat venster met òf de middelste "
+"muisknop òf met de linker muisknop terwijl CTRL wordt ingedrukt."
 
 #: ../../txts/README.lua:52
 msgid ""
@@ -120,11 +136,11 @@ msgstr "Sneltoetsen (tijdens het spel)"
 
 #: ../../txts/README.lua:61
 msgid "PAGEUP: increases games peed"
-msgstr ""
+msgstr "PAGEUP: verhoogt spelsnelheid"
 
 #: ../../txts/README.lua:62
 msgid "PAGEDOWN: decreases games peed"
-msgstr ""
+msgstr "PAGEDOWN: verlaagt spelsnelheid"
 
 #: ../../txts/README.lua:63
 msgid "PAUSE: pauses the game"
@@ -140,7 +156,7 @@ msgstr "M: schakelt minikaart aan/uit"
 
 #: ../../txts/README.lua:66
 msgid "N: toggles messages (‘news’)"
-msgstr ""
+msgstr "N: schakelt berichten aan/uit ('nieuws')"
 
 #: ../../txts/README.lua:67
 msgid "C: toggles census"
@@ -160,7 +176,7 @@ msgstr "O: schakelt doelen aan/uit"
 
 #: ../../txts/README.lua:71
 msgid "F: toggles fullscreen (if supported by the OS)"
-msgstr ""
+msgstr "F: schakelt volledig scherm aan/uit (indien ondersteund door het OS)"
 
 #: ../../txts/README.lua:72
 msgid "Home: centers main mapview on starting location"
@@ -172,11 +188,11 @@ msgstr "(CTRL+) 0-9: Onthouden en naar vorige opgeslagen locatie gaan"
 
 #: ../../txts/README.lua:74
 msgid ",: goes to the previous location"
-msgstr ""
+msgstr ",: ga naar vorige locatie"
 
 #: ../../txts/README.lua:75
 msgid ".: goes to the next location"
-msgstr ""
+msgstr ".: ga naar volgende locatie"
 
 #: ../../txts/README.lua:76
 msgid "F6: shows the debug console (only in debug-builds)"
@@ -198,7 +214,7 @@ msgstr ""
 
 #: ../../txts/README.lua:82
 msgid "G: jumps to the location corresponding to the current message"
-msgstr ""
+msgstr "G: springt naar locatie die overeenkomt met het huidige bericht"
 
 #: ../../txts/README.lua:83
 msgid "DELETE: archives the current message"
@@ -326,6 +342,16 @@ msgid ""
 "a\n"
 "different version of the game."
 msgstr ""
+"Door gebruik te maken van de Bekijk Herhalingen optie in het hoofdmenu, zal\n"
+"een eerder gespeeld spel exact gereconstrueerd worden zodat je het kunt\n"
+"bekijken. Merk echter op dat zelfs de kleinste wijzigingen in de "
+"spelgegevens-\n"
+"bestanden of het Widelands programma ertoe kunnen leiden dat een herhaling\n"
+"incompatibel wordt en 'out of sync' loopt. Dit is overeenkomstig aan hoe "
+"spelen\n"
+"over een netwerk onder desynchronisatie te lijden hebben als één van de "
+"spelers\n"
+"een andere versie heeft van het spel."
 
 #: ../../txts/README.lua:133
 msgid ""
@@ -335,6 +361,12 @@ msgid ""
 "~/.widelands/replays directory on Linux and Mac OS X. On Windows,\n"
 "they are in the ‘replays’ subdirectory of your Widelands installation."
 msgstr ""
+"Herhalingen zijn een erg bruikbaar middel om fouten in het spel te vinden, "
+"zij\n"
+"kunnen dus nuttig zijn als bijlagen bij foutrapporten. De bestanden van\n"
+"herhalingen worden opgeslagen in de ~/.widelands/replays directorie onder\n"
+"Linux en MAC OS X. Onder Windows staan ze in de 'replays' subdirectorie\n"
+"van je Widelands installatie."
 
 #: ../../txts/developers:1
 msgid "Development"
@@ -534,16 +566,23 @@ msgid ""
 "progress and as the Editor becomes better and better, this text will also "
 "get longer and more complete."
 msgstr ""
+"Deze Editor is bedoeld voor spelers die graag hun eigen kaarten zouden "
+"ontwerpen om te gebruiken in Widelands.<br>Zoals je kunt zien, is deze "
+"editor nog een stevig werk in uitvoering en als de Editor beter en beter "
+"wordt, zal deze tekst ook langer en completer worden."
 
 #: ../../txts/editor_readme:12
 msgid "Please have a look at our enduser manuals on our wiki pages at:"
 msgstr ""
+"Kijk alsjeblieft naar onze gebruikershandleidingen in onze wiki-pagina's op:"
 
 #: ../../txts/editor_readme:14
 msgid ""
 "Those pages might be more complete and up to date than this file, and you "
 "will also find a short tutorial about building a map there."
 msgstr ""
+"Die pagina's kunnen completer en actueler zijn dan dit bestand. Bovendien "
+"kun je daar een korte handleiding vinden voor het creëren van een kaart."
 
 #: ../../txts/editor_readme:18
 msgid "Keyboard shortcuts"

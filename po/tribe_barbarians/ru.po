@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2014-03-06 21:20+0000\n"
-"PO-Revision-Date: 2014-03-10 13:29+0000\n"
+"PO-Revision-Date: 2014-03-11 16:36+0000\n"
 "Last-Translator: Lex <teh.f4ll3n@gmail.com>\n"
 "Language-Team: русский <ru@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -15,8 +15,8 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2014-03-11 05:30+0000\n"
-"X-Generator: Launchpad (build 16948)\n"
+"X-Launchpad-Export-Date: 2014-03-12 04:33+0000\n"
+"X-Generator: Launchpad (build 16963)\n"
 "Language: ru_RU\n"
 
 #: ../../global/militarysites/barracks.empire/conf:8
@@ -67,7 +67,7 @@ msgstr "Ваш замок обнаружил врага."
 #: ../../global/militarysites/castle.atlanteans/conf:9
 #: ../../global/militarysites/castle.empire/conf:9
 msgid "Your Castle is under attack."
-msgstr "Ваш замок атакован"
+msgstr "Ваш замок атакован."
 
 #: ../../global/militarysites/castle.atlanteans/conf:10
 #: ../../global/militarysites/castle.empire/conf:10
@@ -297,17 +297,17 @@ msgstr ""
 #: ../../tribes/barbarians/axefactory/conf:32
 #: ../../tribes/barbarians/warmill/conf:36
 msgid "Produce ax"
-msgstr "Изготовить топор"
+msgstr "изготовить топор"
 
 #: ../../tribes/barbarians/axefactory/conf:33
 #: ../../tribes/barbarians/warmill/conf:37
 msgid "Produce sharp ax"
-msgstr "Изготовить острый топор"
+msgstr "изготовить острый топор"
 
 #: ../../tribes/barbarians/axefactory/conf:34
 #: ../../tribes/barbarians/warmill/conf:38
 msgid "Produce broad ax"
-msgstr "Изготовить секиру"
+msgstr "изготовить секиру"
 
 #: ../../tribes/barbarians/axefactory/conf:35
 #: ../../tribes/barbarians/bakery/conf:26
@@ -1682,16 +1682,16 @@ msgstr ""
 #: ../../tribes/barbarians/inn/conf:27
 #: ../../tribes/barbarians/tavern/conf:28
 msgid "Produce ration"
-msgstr "Приготовить паёк"
+msgstr "приготовить паёк"
 
 #: ../../tribes/barbarians/big_inn/conf:28
 #: ../../tribes/barbarians/inn/conf:28
 msgid "Produce snack"
-msgstr "Приготовить закуску"
+msgstr "приготовить закуску"
 
 #: ../../tribes/barbarians/big_inn/conf:29
 msgid "Produce meal"
-msgstr "Приготовить обед"
+msgstr "приготовить обед"
 
 #: ../../tribes/barbarians/blacksmith/conf:1
 #: ../../tribes/barbarians/master-blacksmith/conf:1
@@ -2668,7 +2668,7 @@ msgstr "Донжон"
 
 #: ../../tribes/barbarians/conf:232
 msgid "Headquarters Medium"
-msgstr "Средний штаб"
+msgstr "Обычный штаб"
 
 #: ../../tribes/barbarians/conf:233
 msgid "Citadel Village"
@@ -2762,11 +2762,11 @@ msgstr "Ваши солдаты заняли ваш донжон"
 
 #: ../../tribes/barbarians/farm/conf:21
 msgid "Plant wheat"
-msgstr "Посадить пшеницу"
+msgstr "посадить пшеницу"
 
 #: ../../tribes/barbarians/farm/conf:23
 msgid "Harvest wheat"
-msgstr "Собрать урожай пшеницы"
+msgstr "собрать урожай пшеницы"
 
 #: ../../tribes/barbarians/farm/help.lua:16
 msgid "Sow and harvest wheat."
@@ -2796,11 +2796,11 @@ msgstr "Выращивает тростник."
 
 #: ../../tribes/barbarians/fernery/conf:19
 msgid "Plant reed"
-msgstr "Посадить тростник"
+msgstr "посадить тростник"
 
 #: ../../tribes/barbarians/fernery/conf:21
 msgid "Harvest reed"
-msgstr "Собрать урожай тростника"
+msgstr "собрать урожай тростника"
 
 #: ../../tribes/barbarians/fernery/help.lua:12
 msgid "‘We grow roofs’"
@@ -2934,7 +2934,7 @@ msgid ""
 "is used as a precious building material and to produce different axes (in "
 "the war mill) and different parts of armor (in the helm smithy)."
 msgstr ""
-"Золото самое ценное из всех металлов; только самые важные вещи украшаются "
+"Золото - самый ценный из всех металлов; только самые важные вещи украшаются "
 "им. Его получают путём выплавления из золотой руды. Золото используется в "
 "качестве стройматериала и при производстве топоров и шлемов (на военной "
 "фабрике и в шлемной мастерской)."
@@ -2993,7 +2993,7 @@ msgid ""
 "mill)."
 msgstr ""
 "Молоток - важный инструмен. Он нужен и геологу, и строителю, и кузнецу. Вам "
-"всегда следует держать их про запас! Это один из основных инструментов "
+"всегда следует держать немного про запас! Это один из основных инструментов "
 "изготавливаемых в кузнице (производстро прекращается, если кузницу улучшить "
 "до фабрики топоров или военной фабрики)."
 
@@ -3013,15 +3013,15 @@ msgstr "Производит шлемы для солдат."
 
 #: ../../tribes/barbarians/helmsmithy/conf:31
 msgid "Produce helm"
-msgstr "сделать шлем"
+msgstr "изготовить шлем"
 
 #: ../../tribes/barbarians/helmsmithy/conf:32
 msgid "Produce mask"
-msgstr "сделать защитную маску"
+msgstr "изготовить защитную маску"
 
 #: ../../tribes/barbarians/helmsmithy/conf:33
 msgid "Produce warhelm"
-msgstr "Боевой шлем"
+msgstr "изготовить боевой шлем"
 
 #: ../../tribes/barbarians/hunter/conf:1
 msgid "The Hunter brings good meat to the colonists."
@@ -3197,47 +3197,47 @@ msgstr ""
 
 #: ../../tribes/barbarians/metalworks/conf:38
 msgid "Produce felling ax"
-msgstr "Изготовить топор дровосека"
+msgstr "изготовить топор дровосека"
 
 #: ../../tribes/barbarians/metalworks/conf:39
 msgid "Produce bread paddle"
-msgstr "Изготовить лопату для выпечки"
+msgstr "изготовить лопату для выпечки"
 
 #: ../../tribes/barbarians/metalworks/conf:40
 msgid "Produce fire tongs"
-msgstr "сделать щипцы"
+msgstr "изготовить щипцы"
 
 #: ../../tribes/barbarians/metalworks/conf:41
 msgid "Produce fishing rod"
-msgstr "сделать удочку"
+msgstr "изготовить удочку"
 
 #: ../../tribes/barbarians/metalworks/conf:42
 msgid "Produce hammer"
-msgstr "сделать молоток"
+msgstr "изготовить молоток"
 
 #: ../../tribes/barbarians/metalworks/conf:43
 msgid "Produce kitchen tools"
-msgstr "сделать кухонную утварь"
+msgstr "изготовить кухонную утварь"
 
 #: ../../tribes/barbarians/metalworks/conf:44
 msgid "Produce pick"
-msgstr "сделать кирку"
+msgstr "изготовить кирку"
 
 #: ../../tribes/barbarians/metalworks/conf:45
 msgid "Produce scythe"
-msgstr "сделать косу"
+msgstr "изготовить косу"
 
 #: ../../tribes/barbarians/metalworks/conf:46
 msgid "Produce shovel"
-msgstr "сделать лопату"
+msgstr "изготовить лопату"
 
 #: ../../tribes/barbarians/metalworks/conf:47
 msgid "Produce hunting spear"
-msgstr "сделать копьё охотника"
+msgstr "изготовить копьё охотника"
 
 #: ../../tribes/barbarians/metalworks/help.lua:12
 msgid "‘We make it work!’"
-msgstr "'Сработало!'"
+msgstr "'Мы заставляем железо работать!'"
 
 #: ../../tribes/barbarians/metalworks/help.lua:13
 msgid ""
@@ -3261,8 +3261,8 @@ msgid ""
 "It can make Bread Paddles, Felling Axes, Fire Tongs, Fishing Rods, Hammers, "
 "Hunting Spears, Kitchen Tools, Picks, Scythes and Shovels."
 msgstr ""
-"Делает лотки для хлеба, топоры лесорубов, клещи кузнеца, удочки, молоты, "
-"охотничьи копья, кухонную утварь, кирки, косы и лопаты."
+"Производит лопаты для выпечки, топоры дровосека, клещи, удочки, молотки, "
+"копья охотника, кухонную утварь, кирки, косы и лопаты."
 
 #: ../../tribes/barbarians/metalworks/help.lua:26
 msgid "%s from the Lumberjack’s hut"
@@ -3317,7 +3317,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/ox/conf:1
 msgid "Helps with carrying items on heavily used roads."
-msgstr "Помогает перевозить товары по дорогом с сильным движением"
+msgstr "Помогает перевозить товары по дорогам с сильным движением."
 
 #: ../../tribes/barbarians/pick/conf:1
 msgid ""
@@ -3394,9 +3394,9 @@ msgid ""
 "rations on his scouting trips. Rations are produced in a tavern, an inn or a "
 "big inn out of fish or meat or pitta bread."
 msgstr ""
-"Закуска нужна для поддержки шахтеров сильными и работоспособными. Скаутам "
-"также необходима закуска в своих разведывательных походах. Закуска готовится "
-"в таверне, на постоялом дворе или в гостинице из рыбы или мяса или хлеба."
+"Паёк нужен для поддержания шахтеров сильными и работоспособными. Разведчикам "
+"также необходимы пайки в своих походах. Пайки готовятся в таверне, на "
+"постоялом дворе или в гостинице из рыбы, мяса или лепёшек."
 
 #: ../../tribes/barbarians/raw_stone/conf:1
 msgid ""
@@ -3419,7 +3419,7 @@ msgstr "Обычный штаб"
 
 #: ../../tribes/barbarians/scripting/sc01_citadel_village.lua:10
 msgid "Citadel village"
-msgstr "Посёлок у цитадели"
+msgstr "Укреплённа деревня"
 
 #: ../../tribes/barbarians/scripting/sc01_citadel_village.lua:94
 msgid "Not enough space"
@@ -3465,7 +3465,7 @@ msgstr "Годный для плавания корабль"
 
 #: ../../tribes/barbarians/shipwright/conf:1
 msgid "Works at the shipyard and constructs new ships."
-msgstr "Работает на верфи и строит новые суда"
+msgstr "Работает на верфи и строит новые суда."
 
 #: ../../tribes/barbarians/shipyard/conf:27
 msgid "Constructing ship"
@@ -3498,8 +3498,8 @@ msgid ""
 "A bigger morsel than the ration to provide miners in deep mines. It is "
 "produced in an inn or a big inn out of fish/meat, pitta bread and beer."
 msgstr ""
-"Огромная закуска, питание для шахтеров в глубоких шахтах. Производится в "
-"трактире или большом трактире из рыбы/мяса, хлеба и пива."
+"Закуска - питание для шахтеров в глубоких шахтах. Производится в трактире "
+"или большом трактире из рыбы/мяса, лепёшек и пива."
 
 #: ../../tribes/barbarians/soldier/conf:1
 msgid "Defend and Conquer!"
@@ -3507,7 +3507,7 @@ msgstr "Защищать и завоёвывать!"
 
 #: ../../tribes/barbarians/stonemason/conf:1
 msgid "Cuts raw pieces of granite out of rocks."
-msgstr "Вырезает Камень из валунов."
+msgstr "Вырезает камень из валунов."
 
 #: ../../tribes/barbarians/strongbeer/conf:1
 msgid ""
@@ -3598,40 +3598,40 @@ msgstr ""
 #: ../../tribes/barbarians/trainingscamp/conf:54
 msgid "Upgrade soldier health 0"
 msgstr ""
-"Улучшить здоровье 0 (только для совместимости со старыми сохранениями "
-"(build13))"
+"Увеличить здоровье солдата 0 (только для совместимости со старыми "
+"сохранениями (build13))"
 
 #: ../../tribes/barbarians/trainingscamp/conf:55
 msgid ""
 "Upgrade soldier health 0 (only for compatibility with old savegames "
 "(build13))"
 msgstr ""
-"Улучшить здоровье 0 (только для совместимости со старыми сохранениями "
-"(build13))"
+"Увеличить здоровье солдата 0 (только для совместимости со старыми "
+"сохранениями (build13))"
 
 #: ../../tribes/barbarians/trainingscamp/conf:56
 msgid "Upgrade soldier health 1"
-msgstr "Улучшить здоровье 1"
+msgstr "Увеличить здоровье солдата 1"
 
 #: ../../tribes/barbarians/trainingscamp/conf:57
 msgid ""
 "Upgrade soldier health 1 (only for compatibility with old savegames "
 "(build13))"
 msgstr ""
-"Улучшить здоровье 1 (только для совместимости со старыми сохранениями "
-"(build13))"
+"Увеличить здоровье солдата 1 (только для совместимости со старыми "
+"сохранениями (build13))"
 
 #: ../../tribes/barbarians/trainingscamp/conf:58
 msgid "Upgrade soldier health 2"
-msgstr "Улучшить здоровье 2"
+msgstr "Увеличить здоровье солдата 2"
 
 #: ../../tribes/barbarians/trainingscamp/conf:59
 msgid ""
 "Upgrade soldier health 2 (only for compatibility with old savegames "
 "(build13))"
 msgstr ""
-"Улучшить здоровье 2 (только для совместимости со старыми сохранениями "
-"(build13))"
+"Увеличить здоровье солдата 2 (только для совместимости со старыми "
+"сохранениями (build13))"
 
 #: ../../tribes/barbarians/trainingscamp/help.lua:12
 msgid ""
@@ -3679,7 +3679,7 @@ msgstr "Поставляется с военной фабрики"
 
 #: ../../tribes/barbarians/trainingscamp/help.lua:32
 msgid "Training Health:"
-msgstr "Тренировка здоровья:"
+msgstr "Увеличение здоровья:"
 
 #: ../../tribes/barbarians/trainingscamp/help.lua:34
 msgid "Provided by the Helm Smithy"

@@ -7,304 +7,306 @@ msgstr ""
 "Project-Id-Version: Widelands svn4575\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2014-03-06 21:20+0000\n"
-"PO-Revision-Date: 2014-03-10 16:09+0000\n"
-"Last-Translator: REAL NAME <Unknown>\n"
+"PO-Revision-Date: 2014-03-11 18:12+0000\n"
+"Last-Translator: fk <Unknown>\n"
 "Language-Team: Dutch <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-03-11 05:30+0000\n"
-"X-Generator: Launchpad (build 16948)\n"
+"X-Launchpad-Export-Date: 2014-03-12 04:33+0000\n"
+"X-Generator: Launchpad (build 16963)\n"
 
 #: ../../global/militarysites/barracks.empire/conf:8
 msgid "Your Barracks discovered an aggressor."
-msgstr ""
+msgstr "Jouw Barakken hebben een aanvaller ontdekt."
 
 #: ../../global/militarysites/barracks.empire/conf:9
 msgid "Your Barracks is under attack."
-msgstr ""
+msgstr "Jouw Barakken worden aangevallen."
 
 #: ../../global/militarysites/barracks.empire/conf:10
 msgid "The enemy defeated your soldiers at the Barracks"
-msgstr ""
+msgstr "De vijand heeft jouw soldaten bij de Barakken verslagen"
 
 #: ../../global/militarysites/barracks.empire/conf:11
 msgid "Your soldiers defeated the enemy at the Barracks"
-msgstr ""
+msgstr "Jouw soldaten versloegen de vijand bij de Barakken"
 
 #: ../../global/militarysites/barrier.barbarians/conf:8
 #: ../../global/militarysites/barrier.empire/conf:8
 #: ../../tribes/barbarians/barrier/conf:7
 msgid "Your Barrier discovered an aggressor."
-msgstr ""
+msgstr "Jouw Barrière heeft een aanvaller ontdekt."
 
 #: ../../global/militarysites/barrier.barbarians/conf:9
 #: ../../global/militarysites/barrier.empire/conf:9
 #: ../../tribes/barbarians/barrier/conf:8
 msgid "Your Barrier is under attack."
-msgstr ""
+msgstr "Jouw Barrière wordt aangevallen."
 
 #: ../../global/militarysites/barrier.barbarians/conf:10
 #: ../../global/militarysites/barrier.empire/conf:10
 #: ../../tribes/barbarians/barrier/conf:9
 msgid "The enemy defeated your soldiers at the Barrier"
-msgstr ""
+msgstr "De vijand heeft jouw soldaten bij de Barrière verslagen"
 
 #: ../../global/militarysites/barrier.barbarians/conf:11
 #: ../../global/militarysites/barrier.empire/conf:11
 #: ../../tribes/barbarians/barrier/conf:10
 msgid "Your soldiers defeated the enemy at the Barrier"
-msgstr ""
+msgstr "Jouw soldaten hebben de vijand bij de Barrière verslagen"
 
 #: ../../global/militarysites/castle.atlanteans/conf:8
 #: ../../global/militarysites/castle.empire/conf:8
 msgid "Your Castle discovered an aggressor."
-msgstr ""
+msgstr "Jouw Kasteel heeft een aanvaller ontdekt."
 
 #: ../../global/militarysites/castle.atlanteans/conf:9
 #: ../../global/militarysites/castle.empire/conf:9
 msgid "Your Castle is under attack."
-msgstr ""
+msgstr "Jouw Kasteel wordt aangevallen."
 
 #: ../../global/militarysites/castle.atlanteans/conf:10
 #: ../../global/militarysites/castle.empire/conf:10
 msgid "The enemy defeated your soldiers at the Castle"
-msgstr ""
+msgstr "De vijand heeft jouw soldaten bij het Kasteel verslagen"
 
 #: ../../global/militarysites/castle.atlanteans/conf:11
 #: ../../global/militarysites/castle.empire/conf:11
 msgid "Your soldiers defeated the enemy at the Castle"
-msgstr ""
+msgstr "Jouw soldaten hebben de vijand bij het Kasteel verslagen"
 
 #: ../../global/militarysites/citadel.barbarians/conf:8
 #: ../../tribes/barbarians/citadel/conf:9
 msgid "Your Citadel discovered an aggressor."
-msgstr ""
+msgstr "Je Citadel heeft een aanvaller ontdekt."
 
 #: ../../global/militarysites/citadel.barbarians/conf:9
 #: ../../tribes/barbarians/citadel/conf:10
 msgid "Your Citadel is under attack."
-msgstr ""
+msgstr "Je Citadel wordt aangevallen."
 
 #: ../../global/militarysites/citadel.barbarians/conf:10
 #: ../../tribes/barbarians/citadel/conf:11
 msgid "The enemy defeated your soldiers at the Citadel"
-msgstr ""
+msgstr "De vijand heeft jouw soldaten bij de Citadel verslagen"
 
 #: ../../global/militarysites/citadel.barbarians/conf:11
 #: ../../tribes/barbarians/citadel/conf:12
 msgid "Your soldiers defeated the enemy at the Citadel"
-msgstr ""
+msgstr "Jouw soldaten hebben de vijand bij de Citadel verslagen"
 
 #: ../../global/militarysites/donjon.barbarians/conf:9
 #: ../../tribes/barbarians/donjon/conf:8
 msgid "Your Donjon discovered an aggressor."
-msgstr ""
+msgstr "Je Verdedigingstoren heeft een aanvaller ontdekt."
 
 #: ../../global/militarysites/donjon.barbarians/conf:10
 #: ../../tribes/barbarians/donjon/conf:9
 msgid "Your Donjon is under attack."
-msgstr ""
+msgstr "Je Verdedigingstoren wordt aangevallen."
 
 #: ../../global/militarysites/donjon.barbarians/conf:11
 #: ../../tribes/barbarians/donjon/conf:10
 msgid "The enemy defeated your soldiers at the Donjon"
-msgstr ""
+msgstr "De vijand heeft jouw soldaten bij de Verdedigingstoren verslagen"
 
 #: ../../global/militarysites/donjon.barbarians/conf:12
 #: ../../tribes/barbarians/donjon/conf:11
 msgid "Your soldiers defeated the enemy at the Donjon"
-msgstr ""
+msgstr "Jouw soldaten hebben de vijand bij de Verdedigingstoren verslagen"
 
 #: ../../global/militarysites/fortress.barbarians/conf:8
 #: ../../global/militarysites/fortress.empire/conf:8
 #: ../../tribes/barbarians/fortress/conf:8
 msgid "Your Fortress discovered an aggressor."
-msgstr ""
+msgstr "Je Vesting heeft een aanvaller ontdekt."
 
 #: ../../global/militarysites/fortress.barbarians/conf:9
 #: ../../global/militarysites/fortress.empire/conf:9
 #: ../../tribes/barbarians/fortress/conf:9
 msgid "Your Fortress is under attack."
-msgstr ""
+msgstr "Je Vesting wordt aangevallen."
 
 #: ../../global/militarysites/fortress.barbarians/conf:10
 #: ../../global/militarysites/fortress.empire/conf:10
 #: ../../tribes/barbarians/fortress/conf:10
 msgid "The enemy defeated your soldiers at the Fortress"
-msgstr ""
+msgstr "De vijand heeft jouw soldaten bij de Vesting verslagen"
 
 #: ../../global/militarysites/fortress.barbarians/conf:11
 #: ../../global/militarysites/fortress.empire/conf:11
 #: ../../tribes/barbarians/fortress/conf:11
 msgid "Your soldiers defeated the enemy at the Fortress"
-msgstr ""
+msgstr "Jouw soldaten hebben de vijand bij de Vesting verslagen"
 
 #: ../../global/militarysites/guardhall.atlanteans/conf:8
 msgid "Your Guardhall discovered an aggressor."
-msgstr ""
+msgstr "Je Wachthal heeft een aanvaller ontdekt."
 
 #: ../../global/militarysites/guardhall.atlanteans/conf:9
 msgid "Your Guardhall is under attack."
-msgstr ""
+msgstr "Je Wachthal wordt aangevallen."
 
 #: ../../global/militarysites/guardhall.atlanteans/conf:10
 msgid "The enemy defeated your soldiers at the Guardhall"
-msgstr ""
+msgstr "De vijand heeft jouw soldaten bij de Wachthal verslagen"
 
 #: ../../global/militarysites/guardhall.atlanteans/conf:11
 msgid "Your soldiers defeated the enemy at the Guardhall"
-msgstr ""
+msgstr "Jouw soldaten hebben de vijand bij de Wachthal verslagen"
 
 #: ../../global/militarysites/guardhouse.atlanteans/conf:8
 msgid "Your Guardhouse discovered an aggressor."
-msgstr ""
+msgstr "Je Wachthuis heeft een aanvaller ontdekt."
 
 #: ../../global/militarysites/guardhouse.atlanteans/conf:9
 msgid "Your Guardhouse is under attack."
-msgstr ""
+msgstr "Je Wachthuis wordt aangevallen."
 
 #: ../../global/militarysites/guardhouse.atlanteans/conf:10
 msgid "The enemy defeated your soldiers at the Guardhouse"
-msgstr ""
+msgstr "De vijand heeft jouw soldaten bij het Wachthuis verslagen"
 
 #: ../../global/militarysites/guardhouse.atlanteans/conf:11
 msgid "Your soldiers defeated the enemy at the Guardhouse"
-msgstr ""
+msgstr "Jouw soldaten hebben de vijand bij het Wachthuis verslagen"
 
 #: ../../global/militarysites/high_tower.atlanteans/conf:9
 msgid "Your High Tower discovered an aggressor."
-msgstr ""
+msgstr "Je Hoge toren heeft een aanvaller ontdekt."
 
 #: ../../global/militarysites/high_tower.atlanteans/conf:10
 msgid "Your High Tower is under attack."
-msgstr ""
+msgstr "Je Hoge toren wordt aangevallen."
 
 #: ../../global/militarysites/high_tower.atlanteans/conf:11
 msgid "The enemy defeated your soldiers at the High Tower"
-msgstr ""
+msgstr "De vijand heeft jouw soldaten bij de Hoge toren verslagen"
 
 #: ../../global/militarysites/high_tower.atlanteans/conf:12
 msgid "Your soldiers defeated the enemy at the High Tower"
-msgstr ""
+msgstr "Jouw soldaten hebben de vijand bij de Hoge toren verslagen"
 
 #: ../../global/militarysites/outpost.empire/conf:8
 msgid "Your Outpost discovered an aggressor."
-msgstr ""
+msgstr "Je Voorpost heeft een aanvaller ontdekt."
 
 #: ../../global/militarysites/outpost.empire/conf:9
 msgid "Your Outpost is under attack."
-msgstr ""
+msgstr "Je Voorpost wordt aangevallen."
 
 #: ../../global/militarysites/outpost.empire/conf:10
 msgid "The enemy defeated your soldiers at the Outpost"
-msgstr ""
+msgstr "De vijand heeft jouw soldaten bij de Voorpost verslagen"
 
 #: ../../global/militarysites/outpost.empire/conf:11
 msgid "Your soldiers defeated the enemy at the Outpost"
-msgstr ""
+msgstr "Jouw soldaten hebben de vijand bij de Voorpost verslagen"
 
 #: ../../global/militarysites/sentry.barbarians/conf:8
 #: ../../global/militarysites/sentry.empire/conf:8
 #: ../../tribes/barbarians/sentry/conf:7
 msgid "Your Sentry discovered an aggressor."
-msgstr ""
+msgstr "Je Wachtpost heeft een aanvaller ontdekt."
 
 #: ../../global/militarysites/sentry.barbarians/conf:9
 #: ../../global/militarysites/sentry.empire/conf:9
 #: ../../tribes/barbarians/sentry/conf:8
 msgid "Your Sentry is under attack."
-msgstr ""
+msgstr "Je Wachtpost wordt aangevallen."
 
 #: ../../global/militarysites/sentry.barbarians/conf:10
 #: ../../global/militarysites/sentry.empire/conf:10
 #: ../../tribes/barbarians/sentry/conf:9
 msgid "The enemy defeated your soldiers at the Sentry"
-msgstr ""
+msgstr "De vijand heeft jouw soldaten bij de Wachtpost verslagen"
 
 #: ../../global/militarysites/sentry.barbarians/conf:11
 #: ../../global/militarysites/sentry.empire/conf:11
 #: ../../tribes/barbarians/sentry/conf:10
 msgid "Your soldiers defeated the enemy at the Sentry"
-msgstr ""
+msgstr "Jouw soldaten hebben de vijand bij de Wachtpost verslagen"
 
 #: ../../global/militarysites/small_tower.atlanteans/conf:9
 msgid "Your Small Tower discovered an aggressor."
-msgstr ""
+msgstr "Je Kleine toren heeft een aanvaller ontdekt."
 
 #: ../../global/militarysites/small_tower.atlanteans/conf:10
 msgid "Your Small Tower is under attack."
-msgstr ""
+msgstr "Je Kleine toren wordt aangevallen."
 
 #: ../../global/militarysites/small_tower.atlanteans/conf:11
 msgid "The enemy defeated your soldiers at the Small Tower"
-msgstr ""
+msgstr "De vijand heeft jouw soldaten bij de Kleine toren verslagen"
 
 #: ../../global/militarysites/small_tower.atlanteans/conf:12
 msgid "Your soldiers defeated the enemy at the Small Tower"
-msgstr ""
+msgstr "Jouw soldaten hebben de vijand bij de Kleine toren verslagen"
 
 #: ../../global/militarysites/stronghold.barbarians/conf:8
 #: ../../tribes/barbarians/stronghold/conf:7
 msgid "Your Stronghold discovered an aggressor."
-msgstr ""
+msgstr "Je Burcht heeft een aanvaller ontdekt."
 
 #: ../../global/militarysites/stronghold.barbarians/conf:9
 #: ../../tribes/barbarians/stronghold/conf:8
 msgid "Your Stronghold is under attack."
-msgstr ""
+msgstr "Je Burcht wordt aangevallen."
 
 #: ../../global/militarysites/stronghold.barbarians/conf:10
 #: ../../tribes/barbarians/stronghold/conf:9
 msgid "The enemy defeated your soldiers at the Stronghold"
-msgstr ""
+msgstr "De vijand heeft jouw soldaten bij de Burcht verslagen"
 
 #: ../../global/militarysites/stronghold.barbarians/conf:11
 #: ../../tribes/barbarians/stronghold/conf:10
 msgid "Your soldiers defeated the enemy at the Stronghold"
-msgstr ""
+msgstr "Jouw soldaten hebben de vijand bij de Burcht verslagen"
 
 #: ../../global/militarysites/tower.atlanteans/conf:9
 #: ../../global/militarysites/tower.empire/conf:9
 msgid "Your Tower discovered an aggressor."
-msgstr ""
+msgstr "Je Toren heeft een aanvaller ontdekt."
 
 #: ../../global/militarysites/tower.atlanteans/conf:10
 #: ../../global/militarysites/tower.empire/conf:10
 msgid "Your Tower is under attack."
-msgstr ""
+msgstr "Je Toren wordt aangevallen."
 
 #: ../../global/militarysites/tower.atlanteans/conf:11
 #: ../../global/militarysites/tower.empire/conf:11
 msgid "The enemy defeated your soldiers at the Tower"
-msgstr ""
+msgstr "De vijand heeft jouw soldaten bij de Toren verslagen"
 
 #: ../../global/militarysites/tower.atlanteans/conf:12
 #: ../../global/militarysites/tower.empire/conf:12
 msgid "Your soldiers defeated the enemy at the Tower"
-msgstr ""
+msgstr "Jouw soldaten hebben de vijand bij de Toren verslagen"
 
 #: ../../tribes/barbarians/axe/conf:1
 msgid ""
 "The Ax is the basic weapon of the barbarians. All young soldiers are "
 "equipped with it."
 msgstr ""
+"De Bijl is het standaardwapen van de barbaren. Alle nieuwe soldaten zijn "
+"ermee uitgerust."
 
 #: ../../tribes/barbarians/axefactory/conf:32
 #: ../../tribes/barbarians/warmill/conf:36
 msgid "Produce ax"
-msgstr ""
+msgstr "Maak bijl"
 
 #: ../../tribes/barbarians/axefactory/conf:33
 #: ../../tribes/barbarians/warmill/conf:37
 msgid "Produce sharp ax"
-msgstr ""
+msgstr "Maak scherpe bijl"
 
 #: ../../tribes/barbarians/axefactory/conf:34
 #: ../../tribes/barbarians/warmill/conf:38
 msgid "Produce broad ax"
-msgstr ""
+msgstr "Maak brede bijl"
 
 #: ../../tribes/barbarians/axefactory/conf:35
 #: ../../tribes/barbarians/bakery/conf:26
@@ -383,6 +385,8 @@ msgid ""
 "‘A new Warrior’s Ax brings forth the best in its wielder – or the worst in "
 "its maker.’"
 msgstr ""
+"'Een nieuwe Oorlogsbijl haalt het beste uit zijn drager - of het slechtste "
+"uit zijn maker.'"
 
 #: ../../tribes/barbarians/axefactory/help.lua:13
 #: ../../tribes/barbarians/warmill/help.lua:13
@@ -460,6 +464,9 @@ msgid ""
 "three buildings. It is an upgrade from the Metal Workshop but doesn’t "
 "require additional qualification for the worker."
 msgstr ""
+"De Barbaarse Bijlenfabriek is de middelste productieruimte in een reeks van "
+"drie gebouwen. Het is een uitbreiding op de Metaalbewerkerij maar vereist "
+"geen extra kwalificaties voor de werker."
 
 #: ../../tribes/barbarians/axefactory/help.lua:17
 msgid "It can make Axes, Sharp Axes and Broad Axes."
@@ -635,7 +642,7 @@ msgstr "IJzer"
 #: ../../tribes/barbarians/axefactory/help.lua:26
 #: ../../tribes/barbarians/lime_kiln/help.lua:26
 msgid "%s from the Coal mine or the Charcoal Burner’s House"
-msgstr ""
+msgstr "%s van de Kolenmijn of het Houtskoolbrandershuis"
 
 #: ../../tribes/barbarians/axefactory/help.lua:26
 #: ../../tribes/barbarians/coalmine/help.lua:17
@@ -698,7 +705,7 @@ msgstr "Soldaat"
 #: ../../tribes/barbarians/trainingscamp/help.lua:63
 #: ../../tribes/barbarians/warmill/help.lua:31
 msgid "Training Camp"
-msgstr ""
+msgstr "Trainingskamp"
 
 #: ../../tribes/barbarians/axefactory/help.lua:31
 #: ../../tribes/barbarians/bakery/help.lua:33
@@ -776,7 +783,7 @@ msgstr "Benodigde ruimte:"
 #: ../../tribes/barbarians/conf:203
 #: ../../tribes/barbarians/lumberjacks_hut/help.lua:29
 msgid "Metal Workshop"
-msgstr ""
+msgstr "Metaalbewerkerij"
 
 #: ../../tribes/barbarians/axefactory/help.lua:33
 #: ../../tribes/barbarians/bakery/help.lua:35
@@ -840,8 +847,8 @@ msgstr "Opwaarderingskosten:"
 #: ../../tribes/barbarians/warmill/help.lua:49
 msgid "%i Blackwood"
 msgid_plural "%i Blackwood"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%i Rozenhout"
+msgstr[1] "%i Rozenhout"
 
 #: ../../tribes/barbarians/axefactory/help.lua:36
 #: ../../tribes/barbarians/axefactory/help.lua:42
@@ -861,8 +868,8 @@ msgstr[1] ""
 #: ../../tribes/barbarians/warmill/help.lua:50
 msgid "%i Thatch Reed"
 msgid_plural "%i Thatch Reeds"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%i Dakriet"
+msgstr[1] "%i Dakriet"
 
 #: ../../tribes/barbarians/axefactory/help.lua:37
 #: ../../tribes/barbarians/axefactory/help.lua:43
@@ -878,8 +885,8 @@ msgstr[1] ""
 #: ../../tribes/barbarians/warmill/help.lua:51
 msgid "%i Grout"
 msgid_plural "%i Grout"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%i Specie"
+msgstr[1] "%i Specie"
 
 #: ../../tribes/barbarians/axefactory/help.lua:38
 #: ../../tribes/barbarians/axefactory/help.lua:44
@@ -937,8 +944,8 @@ msgstr[1] ""
 #: ../../tribes/barbarians/warmill/help.lua:52
 msgid "%i Raw Stone"
 msgid_plural "%i Raw Stones"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%s Ruwe steen"
+msgstr[1] "%s Ruwe stenen"
 
 #: ../../tribes/barbarians/axefactory/help.lua:39
 #: ../../tribes/barbarians/axefactory/help.lua:45
@@ -1005,8 +1012,8 @@ msgstr[1] ""
 #: ../../tribes/barbarians/well/help.lua:38
 msgid "%i Log"
 msgid_plural "%i Logs"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%i Boomstam"
+msgstr[1] "%i Boomstammen"
 
 #: ../../tribes/barbarians/axefactory/help.lua:40
 #: ../../tribes/barbarians/deep_coalmine/help.lua:42
@@ -1458,7 +1465,7 @@ msgstr "Arena"
 #: ../../tribes/barbarians/trainingscamp/help.lua:42
 #: ../../tribes/barbarians/well/help.lua:34
 msgid "Build cost:"
-msgstr ""
+msgstr "Bouwkosten:"
 
 #: ../../tribes/barbarians/bakery/help.lua:50
 #: ../../tribes/barbarians/conf:121
@@ -1477,10 +1484,12 @@ msgid ""
 "If all needed wares are delivered in time, this building can produce %1$s in "
 "%2$s on average."
 msgstr ""
+"Als alle benodigde goederen op tijd worden geleverd, dan kan dit gebouw %1$s "
+"maken in gemiddeld %2$s."
 
 #: ../../tribes/barbarians/bakery/help.lua:55
 msgid "a Pitta Bread"
-msgstr ""
+msgstr "een Pitabrood"
 
 #: ../../tribes/barbarians/bakingtray/conf:1
 msgid ""
@@ -1489,10 +1498,14 @@ msgid ""
 "produced by the building if the metal works is enhanced to an axfactory and "
 "war mill)."
 msgstr ""
+"De broodschep is het gereedschap van de bakker en elke bakker heeft er één "
+"nodig. Hij wordt gemaakt in de metaalbewerkerij, zoals alle andere "
+"werktuigen (maar het wordt er niet meer geproduceerd als de metaalbewerkerij "
+"uitgebouwd wordt naar een bijlen- of oorlogsfabriek)."
 
 #: ../../tribes/barbarians/barrier/conf:6
 msgid "Your soldiers have occupied your Barrier"
-msgstr ""
+msgstr "Je soldaten hebben jouw Barrière bezet"
 
 #: ../../tribes/barbarians/barrier/help.lua:8
 #: ../../tribes/barbarians/big_inn/help.lua:8
@@ -1549,6 +1562,7 @@ msgstr ""
 msgid ""
 "‘No better friend you have in battle than the enemy’s blow that misses.’"
 msgstr ""
+"'Er is geen betere vriend in de strijd dan de slag van de vijand die mist.'"
 
 #: ../../tribes/barbarians/battlearena/help.lua:13
 msgid "Said to originate from Neidhardt, the famous trainer."
@@ -1563,6 +1577,8 @@ msgid ""
 "‘Evade’ increases the soldier’s chance not to be hit by the enemy and so to "
 "remain totally unaffected."
 msgstr ""
+"'Ontwijken' verhoogt de kans van de soldaat om niet te worden geraakt door "
+"de vijand en zo geheel onaangetast te blijven."
 
 #: ../../tribes/barbarians/battlearena/help.lua:26
 msgid "Evade Training:"
@@ -1615,8 +1631,8 @@ msgstr "Groot grondvlak"
 #: ../../tribes/barbarians/trainingscamp/help.lua:49
 msgid "%i Gold"
 msgid_plural "%i Gold"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%i Goud"
+msgstr[1] "%i Goud"
 
 #: ../../tribes/barbarians/battlearena/help.lua:50
 #: ../../tribes/barbarians/conf:145
@@ -1627,7 +1643,7 @@ msgstr "Trainer"
 #: ../../tribes/barbarians/battlearena/help.lua:55
 #: ../../tribes/barbarians/trainingscamp/help.lua:63
 msgid "%1$im%2$is"
-msgstr ""
+msgstr "%1$im%2$is"
 
 #: ../../tribes/barbarians/battlearena/help.lua:55
 msgid "Evade"
@@ -1638,6 +1654,8 @@ msgid ""
 "If all needed wares are delivered in time, a %1$s can train %2$s for one "
 "soldier from 0 to the highest level in %3$s on average."
 msgstr ""
+"Als alle benodigde goederen op tijd worden geleverd, dan kan een %1$s %2$s "
+"trainen voor één soldaat van 0 naar het hoogste niveau in gemiddeld %3$s."
 
 #: ../../tribes/barbarians/battleaxe/conf:1
 msgid ""
@@ -1646,6 +1664,10 @@ msgid ""
 "weapon. It is used – together with food – in the training camp to train "
 "soldiers from attack level 3 to 4."
 msgstr ""
+"Dit is een gevaarlijk wapen dat door de barbaren geproduceerd kan worden. "
+"Het wordt gemaakt in de bijlenfabriek. Alleen getrainde krijgers kunnen zo'n "
+"wapen hanteren. Het wordt (samen met voedsel) gebruikt in het trainingskamp "
+"om soldaten van aanvalsniveau 3 naar 4 te trainen."
 
 #: ../../tribes/barbarians/beer/conf:1
 msgid ""
@@ -1680,6 +1702,8 @@ msgid ""
 "This fire-hardened wood is as hard as iron and it is used for several "
 "buildings. It is produced out of logs in the wood hardener."
 msgstr ""
+"Dit in het vuur geharde hout is zo hard als ijzer en wordt voor diverse "
+"gebouwen gebruikt. Het wordt gemaakt van boomstammen in de houtverharder."
 
 #: ../../tribes/barbarians/brewer/conf:1
 #: ../../tribes/barbarians/master-brewer/conf:1
@@ -1695,6 +1719,10 @@ msgid ""
 "the training camp – together with food – to train warriors with a "
 "fundamental fighting knowledge (from attack level 1 to attack level 2)."
 msgstr ""
+"De brede bijl wordt geproduceerd in de bijlenfabriek en de oorlogsfabriek. "
+"Hij wordt gebruikt in het trainingskamp, samen met voedsel, om krijgers met "
+"een fundamentele gevechtskennis (van aanvalsniveau 1 naar aanvalsniveau 2) "
+"te trainen."
 
 #: ../../tribes/barbarians/bronzeaxe/conf:1
 msgid ""
@@ -1702,10 +1730,14 @@ msgid ""
 "warriors can use it. It is produced at the war mill and used in the training "
 "camp (it trains – together with food – from attack level 2 to level 3)."
 msgstr ""
+"De bronzen bijl wordt gezien als een lastig te hanteren wapen. Enkel "
+"vaardige krijgers kunnen het gebruiken. Het wordt geproduceerd in de "
+"oorlogsfabriek en gebruikt in het trainingskamp (dit traint, samen met "
+"voedsel, van aanvalsniveau 2 naar niveau 3)."
 
 #: ../../tribes/barbarians/builder/conf:1
 msgid "Works at construction sites to raise new buildings."
-msgstr ""
+msgstr "Werkt op bouwplaatsen om nieuwe gebouwen op te richten."
 
 #: ../../tribes/barbarians/burner/conf:1
 msgid "Burns coal."
@@ -1735,7 +1767,7 @@ msgstr "Veefokker"
 
 #: ../../tribes/barbarians/cattlefarm/help.lua:47
 msgid "an Ox"
-msgstr ""
+msgstr "een Os"
 
 #: ../../tribes/barbarians/chief-miner/conf:1
 #: ../../tribes/barbarians/master-miner/conf:1
@@ -1745,7 +1777,7 @@ msgstr "Werkt diep in de mijnen om kolen, ijzer of goud te delven."
 
 #: ../../tribes/barbarians/citadel/conf:8
 msgid "Your soldiers have occupied your Citadel"
-msgstr ""
+msgstr "Je soldaten hebben jouw Citadel bezet."
 
 #: ../../tribes/barbarians/cloth/conf:2
 msgid ""
@@ -1855,14 +1887,14 @@ msgstr "%s van een Grote Herberg"
 #: ../../tribes/barbarians/metalworks/help.lua:59
 #: ../../tribes/barbarians/warmill/help.lua:35
 msgid "Axfactory"
-msgstr ""
+msgstr "Bijlenfabriek"
 
 #: ../../tribes/barbarians/coalmine/help.lua:33
 #: ../../tribes/barbarians/conf:207
 #: ../../tribes/barbarians/deep_coalmine/help.lua:32
 #: ../../tribes/barbarians/deeper_coalmine/help.lua:31
 msgid "Helm Smithy"
-msgstr ""
+msgstr "Helmsmederij"
 
 #: ../../tribes/barbarians/coalmine/help.lua:34
 #: ../../tribes/barbarians/conf:199
@@ -2067,47 +2099,47 @@ msgstr ""
 
 #: ../../tribes/barbarians/conf:51
 msgid "Resource indicator: Coal (little)"
-msgstr ""
+msgstr "Bronindicator: Kolen (weinig)"
 
 #: ../../tribes/barbarians/conf:52
 msgid "Resource indicator: Coal (much)"
-msgstr ""
+msgstr "Bronindicator: Kolen (veel)"
 
 #: ../../tribes/barbarians/conf:53
 msgid "Resource indicator: Gold (little)"
-msgstr ""
+msgstr "Bronindicator: Goud (weinig)"
 
 #: ../../tribes/barbarians/conf:54
 msgid "Resource indicator: Gold (much)"
-msgstr ""
+msgstr "Bronindicator: Goud (veel)"
 
 #: ../../tribes/barbarians/conf:55
 msgid "Resource indicator: Granite (little)"
-msgstr ""
+msgstr "Bronindicator: Graniet (weinig)"
 
 #: ../../tribes/barbarians/conf:56
 msgid "Resource indicator: Granite (much)"
-msgstr ""
+msgstr "Bronindicator: Graniet (veel)"
 
 #: ../../tribes/barbarians/conf:57
 msgid "Resource indicator: Iron (little)"
-msgstr ""
+msgstr "Bronindicator: IJzer (weinig)"
 
 #: ../../tribes/barbarians/conf:58
 msgid "Resource indicator: Iron (much)"
-msgstr ""
+msgstr "Bronindicator: IJzer (veel)"
 
 #: ../../tribes/barbarians/conf:59
 msgid "Resource indicator: No resource"
-msgstr ""
+msgstr "Bronindicator: Geen grondstof"
 
 #: ../../tribes/barbarians/conf:60
 msgid "Resource indicator: Water"
-msgstr ""
+msgstr "Bronindicator: Water"
 
 #: ../../tribes/barbarians/conf:61
 msgid "Ship Construction Site"
-msgstr ""
+msgstr "Droogdok"
 
 #: ../../tribes/barbarians/conf:64
 msgid "Deer"
@@ -2119,11 +2151,11 @@ msgstr ""
 
 #: ../../tribes/barbarians/conf:72
 msgid "Ax"
-msgstr ""
+msgstr "Bijl"
 
 #: ../../tribes/barbarians/conf:74
 msgid "Battle Ax"
-msgstr ""
+msgstr "Slagbijl"
 
 #: ../../tribes/barbarians/conf:75
 #: ../../tribes/barbarians/micro-brewery/help.lua:26
@@ -2137,11 +2169,11 @@ msgstr "Rozenhout"
 
 #: ../../tribes/barbarians/conf:77
 msgid "Broad Ax"
-msgstr ""
+msgstr "Brede bijl"
 
 #: ../../tribes/barbarians/conf:78
 msgid "Bronze Ax"
-msgstr ""
+msgstr "Bronzen bijl"
 
 #: ../../tribes/barbarians/conf:79
 msgid "Cloth"
@@ -2150,7 +2182,7 @@ msgstr "Doek"
 #: ../../tribes/barbarians/conf:81
 #: ../../tribes/barbarians/lumberjacks_hut/help.lua:44
 msgid "Felling Ax"
-msgstr ""
+msgstr "Kapbijl"
 
 #: ../../tribes/barbarians/conf:82
 msgid "Fire Tongs"
@@ -2251,7 +2283,7 @@ msgstr "Zeis"
 
 #: ../../tribes/barbarians/conf:102
 msgid "Sharp Ax"
-msgstr ""
+msgstr "Scherpe bijl"
 
 #: ../../tribes/barbarians/conf:103
 #: ../../tribes/barbarians/fernery/help.lua:43
@@ -2278,15 +2310,15 @@ msgstr "Dakriet"
 #: ../../tribes/barbarians/lumberjacks_hut/help.lua:26
 #: ../../tribes/barbarians/metalworks/help.lua:26
 msgid "Log"
-msgstr ""
+msgstr "Boomstam"
 
 #: ../../tribes/barbarians/conf:108
 msgid "War Helm"
-msgstr ""
+msgstr "Oorlogshelm"
 
 #: ../../tribes/barbarians/conf:109
 msgid "Warrior’s Ax"
-msgstr ""
+msgstr "Oorlogsbijl"
 
 #: ../../tribes/barbarians/conf:110
 #: ../../tribes/barbarians/well/help.lua:24
@@ -2332,7 +2364,7 @@ msgstr "Boer"
 #: ../../tribes/barbarians/conf:131
 #: ../../tribes/barbarians/fernery/help.lua:42
 msgid "Gardener"
-msgstr ""
+msgstr "Rietkweker"
 
 #: ../../tribes/barbarians/conf:132
 #: ../../tribes/barbarians/fishers_hut/help.lua:44
@@ -2491,23 +2523,23 @@ msgstr "Steengroeve"
 
 #: ../../tribes/barbarians/conf:182
 msgid "Lumberjack’s Hut"
-msgstr ""
+msgstr "Houthakkershut"
 
 #: ../../tribes/barbarians/conf:183
 msgid "Ranger’s Hut"
-msgstr ""
+msgstr "Boswachtershut"
 
 #: ../../tribes/barbarians/conf:184
 msgid "Fisher’s Hut"
-msgstr ""
+msgstr "Vissershut"
 
 #: ../../tribes/barbarians/conf:185
 msgid "Hunter’s Hut"
-msgstr ""
+msgstr "Jachthut"
 
 #: ../../tribes/barbarians/conf:186
 msgid "Gamekeeper’s Hut"
-msgstr ""
+msgstr "Jachtopzichtershut"
 
 #: ../../tribes/barbarians/conf:187
 msgid "Well"
@@ -2515,7 +2547,7 @@ msgstr "Put"
 
 #: ../../tribes/barbarians/conf:188
 msgid "Scout’s Hut"
-msgstr ""
+msgstr "Verkennershut"
 
 #: ../../tribes/barbarians/conf:189
 #: ../../tribes/barbarians/lumberjacks_hut/help.lua:30
@@ -2524,7 +2556,7 @@ msgstr "Houtverharder"
 
 #: ../../tribes/barbarians/conf:191
 msgid "Reed Yard"
-msgstr ""
+msgstr "Rietkwekerij"
 
 #: ../../tribes/barbarians/conf:192
 #: ../../tribes/barbarians/farm/help.lua:25
@@ -2548,7 +2580,7 @@ msgstr "Kleine brouwerij"
 #: ../../tribes/barbarians/conf:198
 #: ../../tribes/barbarians/lumberjacks_hut/help.lua:28
 msgid "Charcoal Burner’s House"
-msgstr ""
+msgstr "Houtskoolbrandershuis"
 
 #: ../../tribes/barbarians/conf:200
 msgid "Shipyard"
@@ -2722,7 +2754,7 @@ msgstr "%s of beter en"
 
 #: ../../tribes/barbarians/donjon/conf:7
 msgid "Your soldiers have occupied your Donjon"
-msgstr ""
+msgstr "Je soldaten hebben jouw Verdedigingstoren bezet"
 
 #: ../../tribes/barbarians/farm/conf:21
 msgid "Plant wheat"
@@ -2841,7 +2873,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/fortress/conf:7
 msgid "Your soldiers have occupied your Fortress"
-msgstr ""
+msgstr "Je soldaten hebben jouw Vesting bezet"
 
 #: ../../tribes/barbarians/gamekeeper/conf:1
 msgid ""
@@ -2947,7 +2979,7 @@ msgstr "Maak masker"
 
 #: ../../tribes/barbarians/helmsmithy/conf:33
 msgid "Produce warhelm"
-msgstr ""
+msgstr "Maak oorlogshelm"
 
 #: ../../tribes/barbarians/hunter/conf:1
 msgid "The Hunter brings good meat to the colonists."
@@ -3092,11 +3124,11 @@ msgstr ""
 
 #: ../../tribes/barbarians/metalworks/conf:38
 msgid "Produce felling ax"
-msgstr ""
+msgstr "Maak kapbijl"
 
 #: ../../tribes/barbarians/metalworks/conf:39
 msgid "Produce bread paddle"
-msgstr ""
+msgstr "Maak broodschep"
 
 #: ../../tribes/barbarians/metalworks/conf:40
 msgid "Produce fire tongs"

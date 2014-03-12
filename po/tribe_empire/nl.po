@@ -1,292 +1,293 @@
 # Widelands po/nl_NL/tribes/empire.po
 # Copyright (C) 2008 Widelands Development Team
 # FIRST AUTHOR <EMAIL@ADDRESS.TLD>, YEAR.
-#
+# GunChleoc <fios@foramnagaidhlig.net>, 2014.
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4575\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2014-03-06 21:20+0000\n"
-"PO-Revision-Date: 2013-10-18 12:22+0000\n"
+"PO-Revision-Date: 2014-03-11 18:27+0000\n"
 "Last-Translator: fk <Unknown>\n"
-"Language-Team: Dutch <widelands-public@lists.sourceforge.net>\n"
+"Language-Team: Widelands fixxer upper\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-03-07 05:36+0000\n"
-"X-Generator: Launchpad (build 16948)\n"
+"X-Launchpad-Export-Date: 2014-03-12 04:33+0000\n"
+"X-Generator: Launchpad (build 16963)\n"
+"Language: nl\n"
 
 #: ../../global/militarysites/barracks.empire/conf:8
 #: ../../tribes/empire/barracks/conf:8
 msgid "Your Barracks discovered an aggressor."
-msgstr ""
+msgstr "Jouw Barakken hebben een aanvaller ontdekt."
 
 #: ../../global/militarysites/barracks.empire/conf:9
 #: ../../tribes/empire/barracks/conf:9
 msgid "Your Barracks is under attack."
-msgstr ""
+msgstr "Jouw Barakken worden aangevallen."
 
 #: ../../global/militarysites/barracks.empire/conf:10
 #: ../../tribes/empire/barracks/conf:10
 msgid "The enemy defeated your soldiers at the Barracks"
-msgstr ""
+msgstr "De vijand heeft jouw soldaten bij de Barakken verslagen"
 
 #: ../../global/militarysites/barracks.empire/conf:11
 #: ../../tribes/empire/barracks/conf:11
 msgid "Your soldiers defeated the enemy at the Barracks"
-msgstr ""
+msgstr "Jouw soldaten versloegen de vijand bij de Barakken"
 
 #: ../../global/militarysites/barrier.barbarians/conf:8
 #: ../../global/militarysites/barrier.empire/conf:8
 #: ../../tribes/empire/barrier/conf:8
 msgid "Your Barrier discovered an aggressor."
-msgstr ""
+msgstr "Jouw Barrière heeft een aanvaller ontdekt."
 
 #: ../../global/militarysites/barrier.barbarians/conf:9
 #: ../../global/militarysites/barrier.empire/conf:9
 #: ../../tribes/empire/barrier/conf:9
 msgid "Your Barrier is under attack."
-msgstr ""
+msgstr "Jouw Barrière wordt aangevallen."
 
 #: ../../global/militarysites/barrier.barbarians/conf:10
 #: ../../global/militarysites/barrier.empire/conf:10
 #: ../../tribes/empire/barrier/conf:10
 msgid "The enemy defeated your soldiers at the Barrier"
-msgstr ""
+msgstr "De vijand heeft jouw soldaten bij de Barrière verslagen"
 
 #: ../../global/militarysites/barrier.barbarians/conf:11
 #: ../../global/militarysites/barrier.empire/conf:11
 #: ../../tribes/empire/barrier/conf:11
 msgid "Your soldiers defeated the enemy at the Barrier"
-msgstr ""
+msgstr "Jouw soldaten hebben de vijand bij de Barrière verslagen"
 
 #: ../../global/militarysites/castle.atlanteans/conf:8
 #: ../../global/militarysites/castle.empire/conf:8
 #: ../../tribes/empire/castle/conf:9
 msgid "Your Castle discovered an aggressor."
-msgstr ""
+msgstr "Jouw Kasteel heeft een aanvaller ontdekt."
 
 #: ../../global/militarysites/castle.atlanteans/conf:9
 #: ../../global/militarysites/castle.empire/conf:9
 #: ../../tribes/empire/castle/conf:10
 msgid "Your Castle is under attack."
-msgstr ""
+msgstr "Jouw Kasteel wordt aangevallen."
 
 #: ../../global/militarysites/castle.atlanteans/conf:10
 #: ../../global/militarysites/castle.empire/conf:10
 #: ../../tribes/empire/castle/conf:11
 msgid "The enemy defeated your soldiers at the Castle"
-msgstr ""
+msgstr "De vijand heeft jouw soldaten bij het Kasteel verslagen"
 
 #: ../../global/militarysites/castle.atlanteans/conf:11
 #: ../../global/militarysites/castle.empire/conf:11
 #: ../../tribes/empire/castle/conf:12
 msgid "Your soldiers defeated the enemy at the Castle"
-msgstr ""
+msgstr "Jouw soldaten hebben de vijand bij het Kasteel verslagen"
 
 #: ../../global/militarysites/citadel.barbarians/conf:8
 msgid "Your Citadel discovered an aggressor."
-msgstr ""
+msgstr "Je Citadel heeft een aanvaller ontdekt."
 
 #: ../../global/militarysites/citadel.barbarians/conf:9
 msgid "Your Citadel is under attack."
-msgstr ""
+msgstr "Je Citadel wordt aangevallen."
 
 #: ../../global/militarysites/citadel.barbarians/conf:10
 msgid "The enemy defeated your soldiers at the Citadel"
-msgstr ""
+msgstr "De vijand heeft jouw soldaten bij de Citadel verslagen"
 
 #: ../../global/militarysites/citadel.barbarians/conf:11
 msgid "Your soldiers defeated the enemy at the Citadel"
-msgstr ""
+msgstr "Jouw soldaten hebben de vijand bij de Citadel verslagen"
 
 #: ../../global/militarysites/donjon.barbarians/conf:9
 msgid "Your Donjon discovered an aggressor."
-msgstr ""
+msgstr "Je Verdedigingstoren heeft een aanvaller ontdekt."
 
 #: ../../global/militarysites/donjon.barbarians/conf:10
 msgid "Your Donjon is under attack."
-msgstr ""
+msgstr "Je Verdedigingstoren wordt aangevallen."
 
 #: ../../global/militarysites/donjon.barbarians/conf:11
 msgid "The enemy defeated your soldiers at the Donjon"
-msgstr ""
+msgstr "De vijand heeft jouw soldaten bij de Verdedigingstoren verslagen"
 
 #: ../../global/militarysites/donjon.barbarians/conf:12
 msgid "Your soldiers defeated the enemy at the Donjon"
-msgstr ""
+msgstr "Jouw soldaten hebben de vijand bij de Verdedigingstoren verslagen"
 
 #: ../../global/militarysites/fortress.barbarians/conf:8
 #: ../../global/militarysites/fortress.empire/conf:8
 #: ../../tribes/empire/fortress/conf:8
 msgid "Your Fortress discovered an aggressor."
-msgstr ""
+msgstr "Je Vesting heeft een aanvaller ontdekt."
 
 #: ../../global/militarysites/fortress.barbarians/conf:9
 #: ../../global/militarysites/fortress.empire/conf:9
 #: ../../tribes/empire/fortress/conf:9
 msgid "Your Fortress is under attack."
-msgstr ""
+msgstr "Je Vesting wordt aangevallen."
 
 #: ../../global/militarysites/fortress.barbarians/conf:10
 #: ../../global/militarysites/fortress.empire/conf:10
 #: ../../tribes/empire/fortress/conf:10
 msgid "The enemy defeated your soldiers at the Fortress"
-msgstr ""
+msgstr "De vijand heeft jouw soldaten bij de Vesting verslagen"
 
 #: ../../global/militarysites/fortress.barbarians/conf:11
 #: ../../global/militarysites/fortress.empire/conf:11
 #: ../../tribes/empire/fortress/conf:11
 msgid "Your soldiers defeated the enemy at the Fortress"
-msgstr ""
+msgstr "Jouw soldaten hebben de vijand bij de Vesting verslagen"
 
 #: ../../global/militarysites/guardhall.atlanteans/conf:8
 msgid "Your Guardhall discovered an aggressor."
-msgstr ""
+msgstr "Je Wachthal heeft een aanvaller ontdekt."
 
 #: ../../global/militarysites/guardhall.atlanteans/conf:9
 msgid "Your Guardhall is under attack."
-msgstr ""
+msgstr "Je Wachthal wordt aangevallen."
 
 #: ../../global/militarysites/guardhall.atlanteans/conf:10
 msgid "The enemy defeated your soldiers at the Guardhall"
-msgstr ""
+msgstr "De vijand heeft jouw soldaten bij de Wachthal verslagen"
 
 #: ../../global/militarysites/guardhall.atlanteans/conf:11
 msgid "Your soldiers defeated the enemy at the Guardhall"
-msgstr ""
+msgstr "Jouw soldaten hebben de vijand bij de Wachthal verslagen"
 
 #: ../../global/militarysites/guardhouse.atlanteans/conf:8
 msgid "Your Guardhouse discovered an aggressor."
-msgstr ""
+msgstr "Je Wachthuis heeft een aanvaller ontdekt."
 
 #: ../../global/militarysites/guardhouse.atlanteans/conf:9
 msgid "Your Guardhouse is under attack."
-msgstr ""
+msgstr "Je Wachthuis wordt aangevallen."
 
 #: ../../global/militarysites/guardhouse.atlanteans/conf:10
 msgid "The enemy defeated your soldiers at the Guardhouse"
-msgstr ""
+msgstr "De vijand heeft jouw soldaten bij het Wachthuis verslagen"
 
 #: ../../global/militarysites/guardhouse.atlanteans/conf:11
 msgid "Your soldiers defeated the enemy at the Guardhouse"
-msgstr ""
+msgstr "Jouw soldaten hebben de vijand bij het Wachthuis verslagen"
 
 #: ../../global/militarysites/high_tower.atlanteans/conf:9
 msgid "Your High Tower discovered an aggressor."
-msgstr ""
+msgstr "Je Hoge toren heeft een aanvaller ontdekt."
 
 #: ../../global/militarysites/high_tower.atlanteans/conf:10
 msgid "Your High Tower is under attack."
-msgstr ""
+msgstr "Je Hoge toren wordt aangevallen."
 
 #: ../../global/militarysites/high_tower.atlanteans/conf:11
 msgid "The enemy defeated your soldiers at the High Tower"
-msgstr ""
+msgstr "De vijand heeft jouw soldaten bij de Hoge toren verslagen"
 
 #: ../../global/militarysites/high_tower.atlanteans/conf:12
 msgid "Your soldiers defeated the enemy at the High Tower"
-msgstr ""
+msgstr "Jouw soldaten hebben de vijand bij de Hoge toren verslagen"
 
 #: ../../global/militarysites/outpost.empire/conf:8
 #: ../../tribes/empire/outpost/conf:8
 msgid "Your Outpost discovered an aggressor."
-msgstr ""
+msgstr "Je Voorpost heeft een aanvaller ontdekt."
 
 #: ../../global/militarysites/outpost.empire/conf:9
 #: ../../tribes/empire/outpost/conf:9
 msgid "Your Outpost is under attack."
-msgstr ""
+msgstr "Je Voorpost wordt aangevallen."
 
 #: ../../global/militarysites/outpost.empire/conf:10
 #: ../../tribes/empire/outpost/conf:10
 msgid "The enemy defeated your soldiers at the Outpost"
-msgstr ""
+msgstr "De vijand heeft jouw soldaten bij de Voorpost verslagen"
 
 #: ../../global/militarysites/outpost.empire/conf:11
 #: ../../tribes/empire/outpost/conf:11
 msgid "Your soldiers defeated the enemy at the Outpost"
-msgstr ""
+msgstr "Jouw soldaten hebben de vijand bij de Voorpost verslagen"
 
 #: ../../global/militarysites/sentry.barbarians/conf:8
 #: ../../global/militarysites/sentry.empire/conf:8
 #: ../../tribes/empire/sentry/conf:8
 msgid "Your Sentry discovered an aggressor."
-msgstr ""
+msgstr "Je Wachtpost heeft een aanvaller ontdekt."
 
 #: ../../global/militarysites/sentry.barbarians/conf:9
 #: ../../global/militarysites/sentry.empire/conf:9
 #: ../../tribes/empire/sentry/conf:9
 msgid "Your Sentry is under attack."
-msgstr ""
+msgstr "Je Wachtpost wordt aangevallen."
 
 #: ../../global/militarysites/sentry.barbarians/conf:10
 #: ../../global/militarysites/sentry.empire/conf:10
 #: ../../tribes/empire/sentry/conf:10
 msgid "The enemy defeated your soldiers at the Sentry"
-msgstr ""
+msgstr "De vijand heeft jouw soldaten bij de Wachtpost verslagen"
 
 #: ../../global/militarysites/sentry.barbarians/conf:11
 #: ../../global/militarysites/sentry.empire/conf:11
 #: ../../tribes/empire/sentry/conf:11
 msgid "Your soldiers defeated the enemy at the Sentry"
-msgstr ""
+msgstr "Jouw soldaten hebben de vijand bij de Wachtpost verslagen"
 
 #: ../../global/militarysites/small_tower.atlanteans/conf:9
 msgid "Your Small Tower discovered an aggressor."
-msgstr ""
+msgstr "Je Kleine toren heeft een aanvaller ontdekt."
 
 #: ../../global/militarysites/small_tower.atlanteans/conf:10
 msgid "Your Small Tower is under attack."
-msgstr ""
+msgstr "Je Kleine toren wordt aangevallen."
 
 #: ../../global/militarysites/small_tower.atlanteans/conf:11
 msgid "The enemy defeated your soldiers at the Small Tower"
-msgstr ""
+msgstr "De vijand heeft jouw soldaten bij de Kleine toren verslagen"
 
 #: ../../global/militarysites/small_tower.atlanteans/conf:12
 msgid "Your soldiers defeated the enemy at the Small Tower"
-msgstr ""
+msgstr "Jouw soldaten hebben de vijand bij de Kleine toren verslagen"
 
 #: ../../global/militarysites/stronghold.barbarians/conf:8
 msgid "Your Stronghold discovered an aggressor."
-msgstr ""
+msgstr "Je Burcht heeft een aanvaller ontdekt."
 
 #: ../../global/militarysites/stronghold.barbarians/conf:9
 msgid "Your Stronghold is under attack."
-msgstr ""
+msgstr "Je Burcht wordt aangevallen."
 
 #: ../../global/militarysites/stronghold.barbarians/conf:10
 msgid "The enemy defeated your soldiers at the Stronghold"
-msgstr ""
+msgstr "De vijand heeft jouw soldaten bij de Burcht verslagen"
 
 #: ../../global/militarysites/stronghold.barbarians/conf:11
 msgid "Your soldiers defeated the enemy at the Stronghold"
-msgstr ""
+msgstr "Jouw soldaten hebben de vijand bij de Burcht verslagen"
 
 #: ../../global/militarysites/tower.atlanteans/conf:9
 #: ../../global/militarysites/tower.empire/conf:9
 #: ../../tribes/empire/tower/conf:8
 msgid "Your Tower discovered an aggressor."
-msgstr ""
+msgstr "Je Toren heeft een aanvaller ontdekt."
 
 #: ../../global/militarysites/tower.atlanteans/conf:10
 #: ../../global/militarysites/tower.empire/conf:10
 #: ../../tribes/empire/tower/conf:9
 msgid "Your Tower is under attack."
-msgstr ""
+msgstr "Je Toren wordt aangevallen."
 
 #: ../../global/militarysites/tower.atlanteans/conf:11
 #: ../../global/militarysites/tower.empire/conf:11
 #: ../../tribes/empire/tower/conf:10
 msgid "The enemy defeated your soldiers at the Tower"
-msgstr ""
+msgstr "De vijand heeft jouw soldaten bij de Toren verslagen"
 
 #: ../../global/militarysites/tower.atlanteans/conf:12
 #: ../../global/militarysites/tower.empire/conf:12
 #: ../../tribes/empire/tower/conf:11
 msgid "Your soldiers defeated the enemy at the Tower"
-msgstr ""
+msgstr "Jouw soldaten hebben de vijand bij de Toren verslagen"
 
 #: ../../tribes/empire/advanced_lance/conf:1
 msgid ""
@@ -323,7 +324,7 @@ msgstr ""
 
 #: ../../tribes/empire/armoursmith/conf:1
 msgid "Produces armor for the soldiers."
-msgstr ""
+msgstr "Produceert harnassen voor de soldaten."
 
 #: ../../tribes/empire/armoursmithy/conf:31
 msgid "Produce helm"
@@ -339,7 +340,7 @@ msgstr ""
 
 #: ../../tribes/empire/armoursmithy/conf:34
 msgid "Produce plate armor"
-msgstr ""
+msgstr "Maak pantser"
 
 #: ../../tribes/empire/armoursmithy/conf:35
 #: ../../tribes/empire/bakery/conf:24
@@ -383,6 +384,8 @@ msgstr "Werk"
 msgid ""
 "The ax is the tool for the lumberjack. It is produced by the toolsmith."
 msgstr ""
+"De bijl is het gereedschap van de houthakkers. Wordt gemaakt door de "
+"werktuigsmid."
 
 #: ../../tribes/empire/baker/conf:1
 msgid "Bakes bread for workers."
@@ -393,14 +396,16 @@ msgid ""
 "The bread paddle is the tool of the baker, each baker needs one. It is "
 "produced by the toolsmith."
 msgstr ""
+"De broodschep is het gereedschap van de bakker, elke bakker heeft er een "
+"nodig. Het wordt geproduceerd door de werktuigsmid."
 
 #: ../../tribes/empire/barracks/conf:7
 msgid "Your soldiers have occupied your Barracks"
-msgstr ""
+msgstr "Je soldaten hebben jouw Barakken bezet"
 
 #: ../../tribes/empire/barrier/conf:7
 msgid "Your soldiers have occupied your Barrier"
-msgstr ""
+msgstr "Je soldaten hebben jouw Barrière bezet"
 
 #: ../../tribes/empire/basket/conf:1
 msgid ""
@@ -424,6 +429,10 @@ msgid ""
 "is used in taverns and inns to prepare rations and meals. Bread is also "
 "consumed at the training sites (arena, colosseum, training camp)."
 msgstr ""
+"De bakkers van het imperium maken smakelijk brood uit meel en water. Het "
+"wordt gebruikt in kroegen en herbergen om porties en maaltijden te maken. "
+"Brood wordt ook gebruikt in de trainingsgebouwen (arena, colosseum, "
+"trainingskamp)."
 
 #: ../../tribes/empire/brewer/conf:1
 msgid "Produces beer or wine."
@@ -431,7 +440,7 @@ msgstr "Maakt bier of wijn."
 
 #: ../../tribes/empire/builder/conf:1
 msgid "Works at construction sites to raise new buildings."
-msgstr ""
+msgstr "Werkt op bouwplaatsen om nieuwe gebouwen op te richten."
 
 #: ../../tribes/empire/burner/conf:1
 msgid "Burns coal."
@@ -447,7 +456,7 @@ msgstr "Draagt voorwerpen over je wegen."
 
 #: ../../tribes/empire/castle/conf:8
 msgid "Your soldiers have occupied your Castle"
-msgstr ""
+msgstr "Je soldaten hebben jouw Kasteel bezet"
 
 #: ../../tribes/empire/chain_armour/conf:1
 msgid ""
@@ -461,6 +470,8 @@ msgid ""
 "Cloth is needed to build several buildings. It is also consumed in the armor "
 "smithy."
 msgstr ""
+"Doek is nodig voor verschillende gebouwen. Het wordt ook gebruikt in de "
+"harnassmederij."
 
 #: ../../tribes/empire/coal/conf:1
 msgid ""
@@ -468,6 +479,9 @@ msgid ""
 "are usually fed with coal. It is mined in coal mines or produced by a "
 "charcoal burner out of logs."
 msgstr ""
+"De vuren van de imperialistische hoogovens, harnas- en wapensmederijen "
+"worden gevoed met kolen. Ze worden gedolven in kolenmijnen of geproduceerd "
+"door een houtskoolbrander uit boomstammen."
 
 #: ../../tribes/empire/colosseum/conf:38
 msgid "Upgrade soldier evade 1"
@@ -490,7 +504,7 @@ msgstr "Imperium"
 
 #: ../../tribes/empire/conf:6
 msgid "This is the culture of the Roman Empire."
-msgstr ""
+msgstr "Dit is de cultuur van het Romeinse rijk"
 
 #: ../../tribes/empire/conf:33
 msgid "Ashes"
@@ -498,87 +512,87 @@ msgstr "As"
 
 #: ../../tribes/empire/conf:34
 msgid "Field (medium)"
-msgstr ""
+msgstr "Groeiend veld"
 
 #: ../../tribes/empire/conf:35
 msgid "Field (small)"
-msgstr ""
+msgstr "Jong veld"
 
 #: ../../tribes/empire/conf:36
 msgid "Field (tiny)"
-msgstr ""
+msgstr "Klein veld"
 
 #: ../../tribes/empire/conf:37
 msgid "Field (ripe)"
-msgstr ""
+msgstr "Rijp veld"
 
 #: ../../tribes/empire/conf:38
 msgid "Field (harvested)"
-msgstr ""
+msgstr "Geoogst veld"
 
 #: ../../tribes/empire/conf:39
 msgid "Destroyed Building"
-msgstr ""
+msgstr "Vernietigd gebouw"
 
 #: ../../tribes/empire/conf:40
 msgid "Resource indicator: Coal (little)"
-msgstr ""
+msgstr "Bronindicator weinig kool"
 
 #: ../../tribes/empire/conf:41
 msgid "Resource indicator: Coal (much)"
-msgstr ""
+msgstr "Bronindicator veel kool"
 
 #: ../../tribes/empire/conf:42
 msgid "Resource indicator: Gold (little)"
-msgstr ""
+msgstr "Bronindicator weinig goud"
 
 #: ../../tribes/empire/conf:43
 msgid "Resource indicator: Gold (much)"
-msgstr ""
+msgstr "Bronindicator veel goud"
 
 #: ../../tribes/empire/conf:44
 msgid "Resource indicator: Granite (little)"
-msgstr ""
+msgstr "Bronindicator weinig graniet"
 
 #: ../../tribes/empire/conf:45
 msgid "Resource indicator: Granite (much)"
-msgstr ""
+msgstr "Bronindicator veel graniet"
 
 #: ../../tribes/empire/conf:46
 msgid "Resource indicator: Iron (little)"
-msgstr ""
+msgstr "Bronindicator weinig ijzer"
 
 #: ../../tribes/empire/conf:47
 msgid "Resource indicator: Iron (much)"
-msgstr ""
+msgstr "Bronindicator veel ijzer"
 
 #: ../../tribes/empire/conf:48
 msgid "Resource indicator: No resource"
-msgstr ""
+msgstr "Bronindicator geen grondstof"
 
 #: ../../tribes/empire/conf:49
 msgid "Resource indicator: Water"
-msgstr ""
+msgstr "Bronindicator water"
 
 #: ../../tribes/empire/conf:50
 msgid "Vine (medium)"
-msgstr ""
+msgstr "Groeiende wijnrank"
 
 #: ../../tribes/empire/conf:51
 msgid "Vine (small)"
-msgstr ""
+msgstr "Jonge wijnrank"
 
 #: ../../tribes/empire/conf:52
 msgid "Vine (tiny)"
-msgstr ""
+msgstr "Kleine wijnrank"
 
 #: ../../tribes/empire/conf:53
 msgid "Vine (ripe)"
-msgstr ""
+msgstr "Rijpe wijnrank"
 
 #: ../../tribes/empire/conf:54
 msgid "Ship Construction Site"
-msgstr ""
+msgstr "Droogdok"
 
 #: ../../tribes/empire/conf:57
 msgid "Advanced Lance"
@@ -586,11 +600,11 @@ msgstr "Verbeterde Lans"
 
 #: ../../tribes/empire/conf:58
 msgid "Armor"
-msgstr ""
+msgstr "Harnas"
 
 #: ../../tribes/empire/conf:59
 msgid "Ax"
-msgstr ""
+msgstr "Bijl"
 
 #: ../../tribes/empire/conf:60
 msgid "Bread Paddle"
@@ -610,7 +624,7 @@ msgstr "Brood"
 
 #: ../../tribes/empire/conf:64
 msgid "Chain Armor"
-msgstr ""
+msgstr "Maliënkolder"
 
 #: ../../tribes/empire/conf:65
 msgid "Cloth"
@@ -642,7 +656,7 @@ msgstr "Goud"
 
 #: ../../tribes/empire/conf:72
 msgid "Gold Ore"
-msgstr ""
+msgstr "Gouderts"
 
 #: ../../tribes/empire/conf:73
 msgid "Grape"
@@ -702,7 +716,7 @@ msgstr "Pikhouweel"
 
 #: ../../tribes/empire/conf:87
 msgid "Plate Armor"
-msgstr ""
+msgstr "Pantser"
 
 #: ../../tribes/empire/conf:88
 msgid "Ration"
@@ -726,7 +740,7 @@ msgstr "Stenen"
 
 #: ../../tribes/empire/conf:93
 msgid "Log"
-msgstr ""
+msgstr "Boomstam"
 
 #: ../../tribes/empire/conf:94
 msgid "War-Lance"
@@ -770,7 +784,7 @@ msgstr "Soldaat"
 
 #: ../../tribes/empire/conf:110
 msgid "Armorsmith"
-msgstr ""
+msgstr "Harnassmid"
 
 #: ../../tribes/empire/conf:111
 msgid "Baker"
@@ -951,7 +965,7 @@ msgstr "Hoofdkwartier"
 
 #: ../../tribes/empire/conf:164
 msgid "Headquarters Shipwreck"
-msgstr ""
+msgstr "Hoofdkwartier scheepswrak"
 
 #: ../../tribes/empire/conf:165
 msgid "Warehouse"
@@ -967,19 +981,19 @@ msgstr "Steengroeve"
 
 #: ../../tribes/empire/conf:170
 msgid "Lumberjack’s House"
-msgstr ""
+msgstr "Houthakkershuis"
 
 #: ../../tribes/empire/conf:171
 msgid "Forester’s House"
-msgstr ""
+msgstr "Boswachtershuis"
 
 #: ../../tribes/empire/conf:172
 msgid "Fisher’s House"
-msgstr ""
+msgstr "Vissershuis"
 
 #: ../../tribes/empire/conf:173
 msgid "Hunter’s House"
-msgstr ""
+msgstr "Jachthuis"
 
 #: ../../tribes/empire/conf:174
 msgid "Well"
@@ -987,11 +1001,11 @@ msgstr "Put"
 
 #: ../../tribes/empire/conf:175
 msgid "Scout’s House"
-msgstr ""
+msgstr "Verkennershuis"
 
 #: ../../tribes/empire/conf:176
 msgid "Stonemason’s House"
-msgstr ""
+msgstr "Steenhouwershuis"
 
 #: ../../tribes/empire/conf:177
 msgid "Sawmill"
@@ -1043,15 +1057,15 @@ msgstr "Werktuigsmederij"
 
 #: ../../tribes/empire/conf:189
 msgid "Armor Smithy"
-msgstr ""
+msgstr "Harnassmederij"
 
 #: ../../tribes/empire/conf:190
 msgid "Donkey Farm"
-msgstr ""
+msgstr "Ezelboerderij"
 
 #: ../../tribes/empire/conf:191
 msgid "Sheep Farm"
-msgstr ""
+msgstr "Schapenboerderij"
 
 #: ../../tribes/empire/conf:192
 msgid "Weaving Mill"
@@ -1119,19 +1133,19 @@ msgstr "Arena"
 
 #: ../../tribes/empire/conf:219
 msgid "Training Camp"
-msgstr ""
+msgstr "Trainingskamp"
 
 #: ../../tribes/empire/conf:222
 msgid "Headquarters Medium"
-msgstr ""
+msgstr "Standaard hoofdkwartier"
 
 #: ../../tribes/empire/conf:223
 msgid "Castle Village"
-msgstr ""
+msgstr "Kasteeldorp"
 
 #: ../../tribes/empire/donkey/conf:1
 msgid "Helps to carry items along busy roads."
-msgstr ""
+msgstr "Helpt items te sjouwen op veel gebruikte wegen."
 
 #: ../../tribes/empire/donkeybreeder/conf:1
 msgid "Breeds cute and helpful donkeys"
@@ -1162,6 +1176,9 @@ msgid ""
 "Besides bread and meat, fish is also a foodstuff for the Empire. Fish are "
 "used in taverns, inns and training sites (arena, colosseum, training camp)."
 msgstr ""
+"Naast brood en vlees is ook vis een voedingsmiddel voor het imperium. Vis "
+"wordt gebruikt in kroegen, herbergen en trainingsgebouwen (arena, colosseum, "
+"trainingskamp)."
 
 #: ../../tribes/empire/fisher/conf:1
 msgid "Catches fish in the sea."
@@ -1188,7 +1205,7 @@ msgstr "Plant bomen."
 
 #: ../../tribes/empire/fortress/conf:7
 msgid "Your soldiers have occupied your Fortress"
-msgstr ""
+msgstr "Je soldaten hebben jouw Vesting bezet"
 
 #: ../../tribes/empire/geologist/conf:1
 msgid "Discovers resources for mining."
@@ -1200,6 +1217,9 @@ msgid ""
 "with it. It is produced in the smelting works out of gold ore and processed "
 "in the armor smithy and the weapon smithy."
 msgstr ""
+"Goud is het waardevolst van alle metalen; harnassen en wapens worden ermee "
+"versierd. Het wordt geproduceerd in de hoogoven uit goudsteen en verwerkt in "
+"de harnas- en wapensmederij."
 
 #: ../../tribes/empire/goldstone/conf:1
 msgid "Gold Ore is mined in goldmines and processed at the smelting works."
@@ -1210,6 +1230,8 @@ msgid ""
 "These grapes are the base for a tasty wine. They are harvested in a vineyard "
 "and processed in a winery."
 msgstr ""
+"Deze druiven zijn de basis voor een lekkere wijn. Ze worden geoogst in een "
+"wijngaard en verwerkt in een wijnmakerij."
 
 #: ../../tribes/empire/hammer/conf:1
 msgid ""
@@ -1217,6 +1239,9 @@ msgid ""
 "the armor and the weapon smith. Make sure you always have some in reserve! "
 "It is produced by the toolsmith."
 msgstr ""
+"De hamer is een essentiaal werktuig. Het wordt gebruikt door de geoloog, de "
+"bouwvakker, de harnas- en wapensmid. Zorg er voor dat er altijd een paar op "
+"voorraad liggen! Het wordt geproduceerd door de werktuigsmid."
 
 #: ../../tribes/empire/heavy_lance/conf:1
 msgid ""
@@ -1224,6 +1249,9 @@ msgid ""
 "in the weapon smithy and used in the training camp – together with food – "
 "train soldiers from attack level 2 to level 3."
 msgstr ""
+"Dit is een sterke lans met een stalen punt en een klein lemmet. Hij wordt "
+"gemaakt in de wapensmederij en het wordt gebruikt in het trainingskamp - "
+"samen met voedsel - om soldaten van aanvalsniveau 2 naar niveau 3 te trainen."
 
 #: ../../tribes/empire/helm/conf:1
 msgid ""
@@ -1242,6 +1270,8 @@ msgid ""
 "This spear is light enough to be thrown, but heavy enough to kill any animal "
 "in one blow. It is only used by hunters."
 msgstr ""
+"Deze speer is licht genoeg om te werpen, maar zwaar genoeg om elk dier in "
+"één klap te doden. Hij wordt alleen gebruikt door de jagers."
 
 #: ../../tribes/empire/inn/conf:25
 msgid "Produce ration"
@@ -1260,12 +1290,16 @@ msgid ""
 "Weapons, armor and tools are made of iron. It is extracted from iron ore in "
 "the smelting works."
 msgstr ""
+"Wapens, harnassen en gereedschap worden van ijzer gemaakt. Dit wordt in de "
+"hoogovens uit ijzererts verkregen."
 
 #: ../../tribes/empire/ironore/conf:1
 msgid ""
 "Iron ore needs to be smelted in the smelting works to yield iron. Iron ore "
 "is produced in iron mines."
 msgstr ""
+"IJzererts moet omgesmolten worden in de hoogoven tot ijzer. IJzererts wordt "
+"gedolven in de ijzerertsmijnen."
 
 #: ../../tribes/empire/kitchen_tools/conf:1
 msgid ""
@@ -1281,6 +1315,9 @@ msgid ""
 "a training camp – together with food – to train soldiers from attack level 0 "
 "to attack level 1."
 msgstr ""
+"Deze lans heeft een ijzeren punt. Hij wordt gemaakt bij de wapensmid en "
+"wordt gebruikt in een trainingskamp - samen met voedsel - om soldaten van "
+"aanvalsniveau 0 naar aanvalsniveau 1 te trainen."
 
 #: ../../tribes/empire/lumberjack/conf:1
 msgid "Fells trees."
@@ -1292,6 +1329,9 @@ msgid ""
 "in a quarry. Marble is used as building material and gets chiselled into "
 "marble columns in the stonemason’s house."
 msgstr ""
+"Marmer is een prachtige steen, die uit de bergen wordt gehouwen of in een "
+"steengroeve wordt geproduceerd. Marmer wordt gebruikt als bouwmateriaal en "
+"wordt in marmeren pilaren gehouwen bij de steenhouwer."
 
 #: ../../tribes/empire/marblecolumn/conf:1
 msgid ""
@@ -1299,6 +1339,9 @@ msgid ""
 "for nearly every larger building. They are produced out of marble at a "
 "stonemason’s house."
 msgstr ""
+"Marmerzuilen zijn symbolisch voor de hoge Empirische cultuur, dus worden ze "
+"gebruikt in bijna ieder groot gebouw. Ze worden geproduceerd uit marmer bij "
+"een steenhouwer."
 
 #: ../../tribes/empire/marblemine/conf:26
 #: ../../tribes/empire/quarry/conf:22
@@ -1344,6 +1387,11 @@ msgid ""
 "colosseum, training camp). There are two sources of meat: pork from "
 "piggeries and the meat of wild game hunted by the hunters."
 msgstr ""
+"Vlees bevat veel energie. Het wordt gebruikt in de kroegen en herbergen om "
+"een lunch voor de mijnwerkers te bereiden en wordt gegeten in de "
+"trainingsgebouwen (arena, colosseum, trainingskamp). Er zijn twee bronnen "
+"voor vlees: varkens van de varkensfokkerij en het vlees van wild dat "
+"geschoten wordt door de jagers."
 
 #: ../../tribes/empire/miller/conf:1
 msgid "Mills the wheat to produce flour."
@@ -1351,7 +1399,7 @@ msgstr "Maalt het graan om meel te produceren."
 
 #: ../../tribes/empire/outpost/conf:7
 msgid "Your soldiers have occupied your Outpost"
-msgstr ""
+msgstr "Je soldaten hebben jouw Voorpost bezet"
 
 #: ../../tribes/empire/pick/conf:1
 msgid ""
@@ -1391,6 +1439,8 @@ msgstr ""
 msgid ""
 "Scouts like Scotty the scout scouting unscouted areas in a scouty fashion."
 msgstr ""
+"Verkenners als Ken de Verkenner verkennen niet verkend gebied op een "
+"verkennersmanier."
 
 #: ../../tribes/empire/scripting/sc00_headquarters_medium.lua:10
 msgid "Headquarters medium"
@@ -1410,15 +1460,20 @@ msgid ""
 "weren’t built. You are at a disadvantage with this; consider restarting \n"
 "this map with a fair starting condition."
 msgstr ""
+"Sommige van de begingebouwen hadden niet genoeg ruimte en werden\n"
+"niet gebouwd. U heeft een nadeel hierdoor; overweeg om deze kaart te \n"
+"herstarten met eerlijke begininstellingen."
 
 #: ../../tribes/empire/scythe/conf:1
 msgid ""
 "The Scythe is the tool of the farmer. It is produced by the toolsmith."
 msgstr ""
+"De zeis is het gereedschap van de boeren. Het wordt gemaakt door de "
+"werktuigsmid."
 
 #: ../../tribes/empire/sentry/conf:7
 msgid "Your soldiers have occupied your Sentry"
-msgstr ""
+msgstr "Je soldaten hebben jouw Wachtpost bezet"
 
 #: ../../tribes/empire/shepherd/conf:1
 msgid "Keeping sheep."
@@ -1441,6 +1496,9 @@ msgid ""
 "The shovel is needed for the proper handling of plants. Therefore the "
 "forester and the vinefarmer use it. It is produced by the toolsmith."
 msgstr ""
+"De schep is nodig om goed met planten te kunnen werken. Daarom maken de "
+"boswachter en de wijnboer er gebruik van. Hij wordt gemaakt door de "
+"werktuigsmid."
 
 #: ../../tribes/empire/smelter/conf:1
 msgid "Smelts iron."
@@ -1463,10 +1521,12 @@ msgid ""
 "Stones are a basic building material of the Empire. They are produced in "
 "quarries and marble mines."
 msgstr ""
+"Stenen zijn een basis bouwmateriaal van het imperium. Ze worden gewonnen in "
+"steengroeves en marmermijnen."
 
 #: ../../tribes/empire/stonemason/conf:1
 msgid "Cuts raw pieces of granite and marble out of rocks."
-msgstr ""
+msgstr "Hakt ruwe stukken graniet en marmer uit rondliggende stenen."
 
 #: ../../tribes/empire/toolsmith/conf:1
 msgid "Produces tools for the workers."
@@ -1474,7 +1534,7 @@ msgstr "Produceert gereedschap voor de werkers."
 
 #: ../../tribes/empire/toolsmithy/conf:37
 msgid "Produce bread paddle"
-msgstr ""
+msgstr "Maak broodschep"
 
 #: ../../tribes/empire/toolsmithy/conf:38
 msgid "Produce fire tongs"
@@ -1518,11 +1578,11 @@ msgstr "Maak zaag"
 
 #: ../../tribes/empire/toolsmithy/conf:48
 msgid "Produce ax"
-msgstr ""
+msgstr "Maak bijl"
 
 #: ../../tribes/empire/tower/conf:7
 msgid "Your soldiers have occupied your Tower"
-msgstr ""
+msgstr "Je soldaten hebben jouw Toren bezet"
 
 #: ../../tribes/empire/trainer/conf:1
 msgid "Trains the soldiers."
@@ -1578,13 +1638,15 @@ msgstr ""
 
 #: ../../tribes/empire/trainingscamp/conf:55
 msgid "Upgrade soldier health 0"
-msgstr ""
+msgstr "Opwaarderen soldatenlevenspunten 0"
 
 #: ../../tribes/empire/trainingscamp/conf:56
 msgid ""
 "Upgrade soldier health 0 (only for compatibility with old savegames "
 "(build13))"
 msgstr ""
+"Opwaarderen soldatenlevenspunten 0 (alleen voor compatibiliteit met oude "
+"opgeslagen spellen (build 13))"
 
 #: ../../tribes/empire/trainingscamp/conf:57
 msgid "Upgrade soldier health 1"
@@ -1622,6 +1684,10 @@ msgid ""
 "the trees; foresters care for the supply of trees. Logs are also used by the "
 "charcoal burner, the toolsmithy and the sawmill."
 msgstr ""
+"Boomstammen zijn een belangrijk bouwmateriaal voor het imperium. De "
+"houthakkers hakken de bomen om; boswachters zorgen voor de aanplant van "
+"bomen. Boomstammen worden ook gebruikt in het houtskoolbrandershuis, de "
+"werktuigsmederij en de houtzagerij."
 
 #: ../../tribes/empire/vinefarmer/conf:1
 msgid "Grows vine."
@@ -1641,6 +1707,9 @@ msgid ""
 "warriors. It is used in the training camp – together with food – to train "
 "soldiers from attack level 3 to level 4."
 msgstr ""
+"Dit is het beste en scherpste wapen dat  door de imperialistische wapensmid "
+"wordt gemaakt voor de krijgers. Hij wordt gebruikt in het trainingskamp - "
+"samen met voedsel - om soldaten te trainen van aanvalsniveau 3 naar niveau 4."
 
 #: ../../tribes/empire/water/conf:1
 msgid ""
@@ -1648,6 +1717,9 @@ msgid ""
 "donkey farm, the sheep farm and the piggery also need to be supplied with "
 "water."
 msgstr ""
+"Water is de bron van het leven! Het wordt gebruikt in de bakkerij en de "
+"brouwerij. Ook de ezel-, schapen- en varkensboerderij moeten voorzien worden "
+"van water."
 
 #: ../../tribes/empire/weaponsmith/conf:1
 msgid "Produces weapons for the soldiers."
@@ -1683,18 +1755,25 @@ msgid ""
 "and breweries. Donkey farms, sheep farms and piggeries also need to be "
 "supplied with wheat."
 msgstr ""
+"Tarwe is essentieel om te overleven. Het wordt geproduceerd in boerderijen "
+"en wordt gebruikt in molens en brouwerijen. Ook ezelboerderijen, "
+"schapenboerderijen en varkensboerderijen moeten voorzien worden van tarwe."
 
 #: ../../tribes/empire/wine/conf:1
 msgid ""
 "This tasty wine is drunk by the miners working the marble and gold mines. It "
 "is produced in a winery."
 msgstr ""
+"Deze smakelijke wijn wordt genuttigd in marmer- en goudmijnen. Hij wordt "
+"gemaakt in een wijnmakerij."
 
 #: ../../tribes/empire/wood/conf:1
 msgid ""
 "Wood is a basic building material of the Empire. It is also used by the "
 "weapon smithy."
 msgstr ""
+"Hout is het basis bouwmateriaal van het imperium. Het wordt ook gebruikt "
+"door de wapensmid."
 
 #: ../../tribes/empire/wood_lance/conf:1
 msgid ""
@@ -1702,6 +1781,9 @@ msgid ""
 "produced in the weapon smithy. In combination with a helmet, it is the "
 "equipment to fit out young soldiers."
 msgstr ""
+"Deze houten lans is het basiswapen in het imperialistische militaire "
+"systeem. Hij wordt geproduceerd in de wapensmederij. Samen met een helm "
+"vormt dit de uitusting voor nieuwe soldaten."
 
 #: ../../tribes/empire/wool/conf:1
 msgid "Wool is the hair of sheep. Weaving mills use it to make cloth."

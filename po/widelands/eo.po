@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-03-06 22:20+0100\n"
-"PO-Revision-Date: 2014-03-09 07:57+0000\n"
-"Last-Translator: GunChleoc <Unknown>\n"
+"PO-Revision-Date: 2014-03-11 21:20+0000\n"
+"Last-Translator: Fenris Wolf <fenris.kcf@googlemail.com>\n"
 "Language-Team: Widelands fixxer upper\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-03-10 05:32+0000\n"
-"X-Generator: Launchpad (build 16948)\n"
+"X-Launchpad-Export-Date: 2014-03-12 04:33+0000\n"
+"X-Generator: Launchpad (build 16963)\n"
 "Language: eo\n"
 
 #: ../../src/ai/defaultai.h:84
@@ -47,18 +47,18 @@ msgstr "Iloj"
 #: ../../src/editor/editorinteractive.cc:71
 #: ../../src/editor/ui_menus/editor_toolsize_menu.cc:41
 msgid "Tool Size"
-msgstr ""
+msgstr "Ila grando"
 
 #: ../../src/editor/editorinteractive.cc:74
 #: ../../src/wui/interactive_player.cc:119
 #: ../../src/wui/interactive_spectator.cc:61
 msgid "Minimap"
-msgstr ""
+msgstr "Malgrandega mapo"
 
 #: ../../src/editor/editorinteractive.cc:77
 #: ../../src/wui/interactive_player.cc:122
 msgid "Show Building Spaces (on/off)"
-msgstr ""
+msgstr "Montri konstruad-spacojn (ŝaltita/malŝaltita)"
 
 #: ../../src/editor/editorinteractive.cc:80
 #: ../../src/ui_fsmenu/launchMPG.cc:162
@@ -90,29 +90,29 @@ msgstr ""
 #: ../../src/editor/editorinteractive.cc:606
 #, c-format
 msgid "Loading tribe: %s"
-msgstr ""
+msgstr "Ŝarganta la tribon: %s"
 
 #: ../../src/editor/editorinteractive.cc:196
 msgid "Creating players"
-msgstr ""
+msgstr "Kreanta ludantojn"
 
 #: ../../src/editor/editorinteractive.cc:203
 #: ../../src/logic/editor_game_base.cc:276
 msgid "Loading world data"
-msgstr ""
+msgstr "Ŝarganta mund-datumojn"
 
 #: ../../src/editor/editorinteractive.cc:206
 #: ../../src/editor/editorinteractive.cc:610
 msgid "Loading graphics..."
-msgstr ""
+msgstr "Ŝarganta grafikon"
 
 #: ../../src/editor/editorinteractive.cc:252
 msgid "Unsaved Map"
-msgstr ""
+msgstr "Nekonservata mapo"
 
 #: ../../src/editor/editorinteractive.cc:253
 msgid "The Map has not been saved, do you really want to quit?"
-msgstr ""
+msgstr "La mapo ne estis konservita; ĉu vi vere volas eliri?"
 
 #: ../../src/editor/editorinteractive.cc:597
 #: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:179
@@ -120,7 +120,7 @@ msgstr ""
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:182
 #: ../../src/logic/map.h:168
 msgid "No Name"
-msgstr "Neniu nomo"
+msgstr "Nenia nomo"
 
 #: ../../src/editor/editorinteractive.cc:599
 #: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:180
@@ -129,7 +129,7 @@ msgstr "Neniu nomo"
 #: ../../src/ui_fsmenu/loadreplay.cc:199
 #: ../../src/ui_fsmenu/netsetup_lan.cc:198 ../../src/wui/game_summary.cc:171
 msgid "Unknown"
-msgstr ""
+msgstr "Nekonata"
 
 #: ../../src/editor/tools/editor_info_tool.cc:43
 msgid "Field Information"
@@ -142,7 +142,7 @@ msgstr "Nodo:"
 #: ../../src/editor/tools/editor_info_tool.cc:54
 #, c-format
 msgid "Coordinates: (%1$i, %2$i)"
-msgstr ""
+msgstr "Koordinatoj: (%1$i, %2$i)"
 
 #: ../../src/editor/tools/editor_info_tool.cc:57
 #: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:85
@@ -151,22 +151,22 @@ msgstr ""
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:435
 #, c-format
 msgid "Height: %u"
-msgstr ""
+msgstr "Alto: %u"
 
 #. * TRANSLATORS: This is part of a list, e.g. Caps: medium flag walk
 #: ../../src/editor/tools/editor_info_tool.cc:65
 msgid " small"
-msgstr ""
+msgstr " malgranda"
 
 #. * TRANSLATORS: This is part of a list, e.g. Caps: medium flag walk
 #: ../../src/editor/tools/editor_info_tool.cc:67
 msgid " medium"
-msgstr ""
+msgstr " mezgranda"
 
 #. * TRANSLATORS: This is part of a list, e.g. Caps: medium flag walk
 #: ../../src/editor/tools/editor_info_tool.cc:69
 msgid " big"
-msgstr ""
+msgstr " granda"
 
 #. * TRANSLATORS: This is part of a list, e.g. Caps: medium flag walk
 #: ../../src/editor/tools/editor_info_tool.cc:73
