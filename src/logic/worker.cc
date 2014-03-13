@@ -3033,8 +3033,6 @@ const Bob::Task * Worker::Loader::get_task(const std::string & name)
 const BobProgramBase * Worker::Loader::get_program(const std::string & name)
 {
 	Worker & worker = get<Worker>();
-//FIXME (REVIEW): Have to admit I'm not 100% how the old code worked. (I don't see how the result would be "fail")
-//But it seems it would look up the compatibility program, and then return the result of the get() below either way...
 	return worker.descr().get_program(name);
 }
 

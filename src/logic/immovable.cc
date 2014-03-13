@@ -742,26 +742,23 @@ Map_Object::Loader * Immovable::load
 		uint8_t const version = fr.Unsigned8();
 		if (1 <= version and version <= IMMOVABLE_SAVEGAME_VERSION) {
 
-			char const * const owner = fr.CString ();
-			char const * const name  = fr.CString ();
+			const std::string owner_name = fr.CString();
+			const std::string name = fr.CString();
 			Immovable * imm = nullptr;
 
-			if (strcmp(owner, "world")) { //  It is a tribe immovable.
-				egbase.manually_load_tribe(owner);
+			if (owner_name != "world") { //  It is a tribe immovable.
+				egbase.manually_load_tribe(owner_name);
 
-				if (Tribe_Descr const * const tribe = egbase.get_tribe(owner)) {
-//FIXME (REVIEW): I tried to skip this variable, but name didn't seem to have all the methods like this do :/
-					std::string effective_name = name;
-
-					int32_t const idx = tribe->get_immovable_index(effective_name);
+				if (Tribe_Descr const * const tribe = egbase.get_tribe(owner_name)) {
+					int32_t const idx = tribe->get_immovable_index(name);
 					if (idx != -1)
 						imm = new Immovable(*tribe->get_immovable_descr(idx));
 					else
 						throw game_data_error
 							("tribe %s does not define immovable type \"%s\"",
-							 owner, effective_name.c_str());
+							 owner_name.c_str(), name.c_str());
 				} else
-					throw wexception("unknown tribe %s", owner);
+					throw wexception("unknown tribe %s", owner_name.c_str());
 			} else { //  world immovable
 				const World & world = egbase.map().world();
 				int32_t const idx = world.get_immovable_index(name);
