@@ -761,10 +761,10 @@ Map_Object::Loader * Immovable::load
 					throw wexception("unknown tribe %s", owner_name.c_str());
 			} else { //  world immovable
 				const World & world = egbase.map().world();
-				int32_t const idx = world.get_immovable_index(name);
+				int32_t const idx = world.get_immovable_index(name.c_str());
 				if (idx == -1)
 					throw wexception
-						("world does not define immovable type \"%s\"", name);
+						("world does not define immovable type \"%s\"", name.c_str());
 
 				imm = new Immovable(*world.get_immovable_descr(idx));
 			}

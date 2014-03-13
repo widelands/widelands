@@ -636,6 +636,7 @@ Map_Object::Loader * WareInstance::load
 		if (!tribe)
 			throw wexception("unknown tribe '%s'", tribename.c_str());
 
+		Ware_Index wareindex = tribe->ware_index(warename);
 		const WareDescr * descr = tribe->get_ware_descr(wareindex);
 
 		std::unique_ptr<Loader> loader(new Loader);
