@@ -6,15 +6,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2014-03-06 21:20+0000\n"
+"POT-Creation-Date: 2014-03-12 21:37+0000\n"
 "PO-Revision-Date: 2014-03-10 08:49+0000\n"
 "Last-Translator: GunChleoc <Unknown>\n"
 "Language-Team: Widelands fixxer upper\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-03-11 05:29+0000\n"
-"X-Generator: Launchpad (build 16948)\n"
+"X-Launchpad-Export-Date: 2014-03-13 05:29+0000\n"
+"X-Generator: Launchpad (build 16963)\n"
 "Language: hu\n"
 
 #: ../../txts/README.lua:7
@@ -133,22 +133,24 @@ msgid "Keyboard shortcuts (in-game)"
 msgstr "Billentyűparancsok (játék közben)"
 
 #: ../../txts/README.lua:61
-msgid "PAGEUP: increases games peed"
-msgstr "PAGEUP: növeli a játéksebességet"
+msgid "PAGEUP: increases game speed"
+msgstr ""
 
 #: ../../txts/README.lua:62
-msgid "PAGEDOWN: decreases games peed"
-msgstr "PAGEDOWN: csökkenti a játéksebességet"
+msgid "PAGEDOWN: decreases game speed"
+msgstr ""
 
 #: ../../txts/README.lua:63
 msgid "PAUSE: pauses the game"
 msgstr "PAUSE: megállítja a játékot"
 
 #: ../../txts/README.lua:64
+#: ../../txts/editor_readme:21
 msgid "SPACE: toggles if building spaces are shown"
 msgstr ""
 
 #: ../../txts/README.lua:65
+#: ../../txts/editor_readme:31
 msgid "M: toggles minimap"
 msgstr "M: megjeleníti/elrejti a kistérképet"
 
@@ -157,6 +159,7 @@ msgid "N: toggles messages (‘news’)"
 msgstr "N: megjeleníti/elrejti az üzeneteket"
 
 #: ../../txts/README.lua:67
+#: ../../txts/editor_readme:23
 msgid "C: toggles census"
 msgstr "C: megjeleníti/elrejti az épületek nevét"
 
@@ -585,61 +588,49 @@ msgstr ""
 msgid "Keyboard shortcuts"
 msgstr "Billentyűparancsok"
 
-#: ../../txts/editor_readme:21
-msgid "SPACE    Toggles if building spaces are shown"
+#: ../../txts/editor_readme:25
+msgid "E: toggles event menu"
 msgstr ""
 
-#: ../../txts/editor_readme:23
-msgid "C        Toggles census on/off"
-msgstr "C               Épületek nevének megjelenítése"
-
-#: ../../txts/editor_readme:25
-msgid "E        Toggles event menu"
-msgstr "E           Események beállításai"
-
 #: ../../txts/editor_readme:27
-msgid "F        Toggles fullscreen"
-msgstr "F Teljes képernyőre vált"
+msgid "F: toggles fullscreen"
+msgstr ""
 
 #: ../../txts/editor_readme:29
-msgid "H        Toggles main menu"
-msgstr "H           Főmenü megjelenítése"
-
-#: ../../txts/editor_readme:31
-msgid "M        Toggles minimap"
-msgstr "M           Térkép megjelenítése"
+msgid "H: toggles main menu"
+msgstr ""
 
 #: ../../txts/editor_readme:33
-msgid "P        Toggles player menu"
-msgstr "P           Megjeleníti a játékosbeállítási ablakot"
+msgid "P: toggles player menu"
+msgstr ""
 
 #: ../../txts/editor_readme:35
-msgid "T        Toggles tools menu"
-msgstr "T           Szerszámok megjelenítése"
+msgid "T: toggles tools menu"
+msgstr ""
 
 #: ../../txts/editor_readme:37
-msgid "I        Activates information tool"
-msgstr "I Bekapcsolja az információs eszközt"
+msgid "I: activates information tool"
+msgstr ""
 
 #: ../../txts/editor_readme:39
-msgid "CTRL+L   Load Map"
-msgstr "CTRL+L   Térkép betöltése"
+msgid "CTRL+L: load Map"
+msgstr ""
 
 #: ../../txts/editor_readme:41
-msgid "CTRL+S   Save Map"
-msgstr "CTRL+S   Térkép mentése"
+msgid "CTRL+S: save Map"
+msgstr ""
 
 #: ../../txts/editor_readme:43
-msgid "1-0      Changes tool size"
-msgstr "0–9      Megváltoztatja az eszközök méretét"
+msgid "1-0: changes tool size"
+msgstr ""
 
 #: ../../txts/editor_readme:45
-msgid "SHIFT    (Hold) Selects first alternative tool while pressed"
-msgstr "SHIFT (nyomva tartva)   Átvált az első alternatív eszközre"
+msgid "SHIFT (Hold): selects first alternative tool while pressed"
+msgstr ""
 
 #: ../../txts/editor_readme:47
-msgid "ALT      (Hold) Selects second alternative tool while pressed"
-msgstr "ALT (nyomva tartva)       Átvált a második alternatív eszközre"
+msgid "ALT (Hold): Selects second alternative tool while pressed"
+msgstr ""
 
 #: ../../txts/license:1
 msgid "License"

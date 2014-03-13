@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2014-03-06 21:20+0000\n"
+"POT-Creation-Date: 2014-03-12 21:37+0000\n"
 "PO-Revision-Date: 2014-03-08 11:04+0000\n"
 "Last-Translator: Lex <teh.f4ll3n@gmail.com>\n"
 "Language-Team: Russian <ru@li.org>\n"
@@ -16,8 +16,8 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2014-03-09 05:39+0000\n"
-"X-Generator: Launchpad (build 16948)\n"
+"X-Launchpad-Export-Date: 2014-03-13 05:38+0000\n"
+"X-Generator: Launchpad (build 16963)\n"
 
 #: ../../scripting/win_condition_texts.lua:2
 msgid "Congratulations!"
@@ -79,11 +79,11 @@ msgstr "Тиран"
 msgid "The tribe or team that can defeat all others wins the game!"
 msgstr "Выигрывает команда или племя разгромившие всех остальных."
 
-#: ../../scripting/win_conditions/02_collectors.lua:13
+#: ../../scripting/win_conditions/02_collectors.lua:14
 msgid "Collectors"
 msgstr "Коллекционер"
 
-#: ../../scripting/win_conditions/02_collectors.lua:16
+#: ../../scripting/win_conditions/02_collectors.lua:17
 msgid ""
 "You get points for precious wares in your warehouses. The player with the "
 "highest number of wares at the end of 4 hours wins the game."
@@ -91,39 +91,39 @@ msgstr ""
 "Вы получаете очки за ценные товары, находящиеся на ваших складах. Игрок, "
 "набравший большее количество очков по прошествии 4 часов, побеждает."
 
-#: ../../scripting/win_conditions/02_collectors.lua:19
+#: ../../scripting/win_conditions/02_collectors.lua:20
 msgid "Points"
 msgstr "Очки"
 
-#: ../../scripting/win_conditions/02_collectors.lua:95
+#: ../../scripting/win_conditions/02_collectors.lua:96
 msgid "Status for %s"
 msgstr "Статус %s"
 
-#: TRANSLATORS: For example: "gold (3 P) x 4 = 12 P", P meaning "Points"
-#: ../../scripting/win_conditions/02_collectors.lua:105
-msgid "  %1$s (%2$i P) x %3$i = %4$i P<br>"
+#: TRANSLATORS: For example: 'gold (3 P) x 4 = 12 P", P meaning "Points'
+#: ../../scripting/win_conditions/02_collectors.lua:106
+msgid "  %1$s (%2$i P) x %3$i = %4$i P"
 msgstr ""
 
-#: ../../scripting/win_conditions/02_collectors.lua:109
+#: ../../scripting/win_conditions/02_collectors.lua:110
 msgid "Total: %i point"
 msgid_plural "Total: %i points"
 msgstr[0] "Всего: %i очко"
 msgstr[1] "Всего: %i очка"
 msgstr[2] "Всего очков: %i"
 
-#: TRANSLATORS: Context: "The game will end in %s."
-#: ../../scripting/win_conditions/02_collectors.lua:121
+#: TRANSLATORS: Context: 'The game will end in %s.'
+#: ../../scripting/win_conditions/02_collectors.lua:123
 msgid "%1$ih%2$02im"
 msgstr ""
 
-#: ../../scripting/win_conditions/02_collectors.lua:123
+#: ../../scripting/win_conditions/02_collectors.lua:125
 msgid "%i minute"
 msgid_plural "%i minutes"
 msgstr[0] "%i минута"
 msgstr[1] "%i минуты"
 msgstr[2] "%i минут"
 
-#: ../../scripting/win_conditions/02_collectors.lua:125
+#: ../../scripting/win_conditions/02_collectors.lua:127
 msgid "The game will end in %s."
 msgstr "Игра закончится через %s."
 
@@ -213,16 +213,10 @@ msgstr "Лесной гном"
 
 #: ../../scripting/win_conditions/04_wood_gnome.lua:16
 msgid ""
-"As wood gnome you like big forests, so your task is to have more trees on\n"
-"your territory than any other player. The game will end after 4 hours of\n"
+"As wood gnome you like big forests, so your task is to have more trees on "
+"your territory than any other player. The game will end after 4 hours of "
 "playing. The one with the most trees at that point will win the game."
 msgstr ""
-"Будучи лесным гномом Вам нравятся большие леса, так что вам нужно варастить "
-"больше\n"
-"деревьев на своей территории чем у других игроков. Игра окончится через 4 "
-"часа. \n"
-"Игрок, вырастивший большее количество деревьев на момент окончания, "
-"побеждает."
 
 #: ../../scripting/win_conditions/04_wood_gnome.lua:19
 msgid "Trees owned"

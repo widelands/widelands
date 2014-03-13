@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2014-03-06 21:20+0000\n"
+"POT-Creation-Date: 2014-03-12 21:37+0000\n"
 "PO-Revision-Date: 2014-03-06 11:08+0000\n"
 "Last-Translator: GunChleoc <Unknown>\n"
 "Language-Team: Fòram na Gàidhlig http://www.foramnagaidhlig.net\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-03-07 05:34+0000\n"
-"X-Generator: Launchpad (build 16948)\n"
+"X-Launchpad-Export-Date: 2014-03-13 05:30+0000\n"
+"X-Generator: Launchpad (build 16963)\n"
 "Language: gd\n"
 
 #: ../../global/militarysites/barracks.empire/conf:8
@@ -246,22 +246,6 @@ msgstr "Chuir an nàmhaid ruaig air na saighdearan agad aig tùr beag."
 msgid "Your soldiers defeated the enemy at the Small Tower"
 msgstr "Chuir na saighdearan agad ruaig air an nàmhaid aig tùr beag."
 
-#: ../../global/militarysites/stronghold.barbarians/conf:8
-msgid "Your Stronghold discovered an aggressor."
-msgstr "Mhothaich an daingean agad ionnsaighear."
-
-#: ../../global/militarysites/stronghold.barbarians/conf:9
-msgid "Your Stronghold is under attack."
-msgstr "Tha an daingean agad fo ionnsaigh."
-
-#: ../../global/militarysites/stronghold.barbarians/conf:10
-msgid "The enemy defeated your soldiers at the Stronghold"
-msgstr "Chuir an nàmhaid ruaig air na saighdearan agad aig daingean."
-
-#: ../../global/militarysites/stronghold.barbarians/conf:11
-msgid "Your soldiers defeated the enemy at the Stronghold"
-msgstr "Chuir na saighdearan agad ruaig air an nàmhaid aig daingean."
-
 #: ../../global/militarysites/tower.atlanteans/conf:9
 #: ../../global/militarysites/tower.empire/conf:9
 #: ../../tribes/atlanteans/tower/conf:9
@@ -306,30 +290,16 @@ msgid "Produce steel shield"
 msgstr "dèanamh sgèithe stàilinn"
 
 #: ../../tribes/atlanteans/armoursmithy/conf:29
-msgid ""
-"Produce steel shield (only for compatibility with old savegames (build13))"
-msgstr ""
-"dèanamh sgèithe stàilinn (airson co-chòrdalachd ri seann gheamaichean air an "
-"sàbhaladh (build13) a-mhàin)"
-
-#: ../../tribes/atlanteans/armoursmithy/conf:30
 msgid "Produce advanced shield"
 msgstr "dèanamh sgèithe adhartaich"
 
-#: ../../tribes/atlanteans/armoursmithy/conf:31
-msgid ""
-"Produce advanced shield (only for compatibility with old savegames (build13))"
-msgstr ""
-"dèanamh sgèithe adhartaich (airson co-chòrdalachd ri seann gheamaichean air "
-"an sàbhaladh (build13) a-mhàin)"
-
-#: ../../tribes/atlanteans/armoursmithy/conf:32
+#: ../../tribes/atlanteans/armoursmithy/conf:30
 #: ../../tribes/atlanteans/bakery/conf:25
-#: ../../tribes/atlanteans/blackroot_farm/conf:26
+#: ../../tribes/atlanteans/blackroot_farm/conf:24
 #: ../../tribes/atlanteans/burners_house/conf:23
 #: ../../tribes/atlanteans/coalmine/conf:25
 #: ../../tribes/atlanteans/crystalmine/conf:30
-#: ../../tribes/atlanteans/farm/conf:28
+#: ../../tribes/atlanteans/farm/conf:26
 #: ../../tribes/atlanteans/fish_breeders_house/conf:20
 #: ../../tribes/atlanteans/fishers_house/conf:19
 #: ../../tribes/atlanteans/foresters_house/conf:20
@@ -380,7 +350,7 @@ msgstr ""
 msgid "Plant blackroot"
 msgstr "Cuir freumhagan"
 
-#: ../../tribes/atlanteans/blackroot_farm/conf:24
+#: ../../tribes/atlanteans/blackroot_farm/conf:23
 msgid "Harvest blackroot"
 msgstr "Buain freumhagan"
 
@@ -851,7 +821,7 @@ msgid "Dismantle Site"
 msgstr "'Ga thoirt às a chèile"
 
 #: ../../tribes/atlanteans/conf:148
-#: ../../tribes/atlanteans/conf:156
+#: ../../tribes/atlanteans/conf:155
 msgid "Barrier"
 msgstr "Taigh-faire"
 
@@ -864,182 +834,178 @@ msgid "Donjon"
 msgstr "Tùr-faire"
 
 #: ../../tribes/atlanteans/conf:151
-#: ../../tribes/atlanteans/conf:158
+#: ../../tribes/atlanteans/conf:157
 msgid "Fortress"
 msgstr "Dùn"
 
 #: ../../tribes/atlanteans/conf:152
-#: ../../tribes/atlanteans/conf:154
+#: ../../tribes/atlanteans/conf:153
 msgid "Sentry"
 msgstr "Freiceadan"
 
-#: ../../tribes/atlanteans/conf:153
-msgid "Stronghold"
-msgstr "Daingean"
-
-#: ../../tribes/atlanteans/conf:155
+#: ../../tribes/atlanteans/conf:154
 msgid "Barracks"
 msgstr "Taighean-feachd"
 
-#: ../../tribes/atlanteans/conf:157
-#: ../../tribes/atlanteans/conf:204
+#: ../../tribes/atlanteans/conf:156
+#: ../../tribes/atlanteans/conf:203
 msgid "Castle"
 msgstr "Caisteal"
 
-#: ../../tribes/atlanteans/conf:159
+#: ../../tribes/atlanteans/conf:158
 msgid "Outpost"
 msgstr "Gearastan"
 
-#: ../../tribes/atlanteans/conf:160
-#: ../../tribes/atlanteans/conf:203
+#: ../../tribes/atlanteans/conf:159
+#: ../../tribes/atlanteans/conf:202
 msgid "Tower"
 msgstr "Tùr"
 
-#: ../../tribes/atlanteans/conf:163
+#: ../../tribes/atlanteans/conf:162
 msgid "Headquarters"
 msgstr "Prìomh-àras"
 
-#: ../../tribes/atlanteans/conf:164
+#: ../../tribes/atlanteans/conf:163
 msgid "Warehouse"
 msgstr "Taigh-stòrais"
 
-#: ../../tribes/atlanteans/conf:165
+#: ../../tribes/atlanteans/conf:164
 msgid "Port"
 msgstr "Port"
 
-#: ../../tribes/atlanteans/conf:168
+#: ../../tribes/atlanteans/conf:167
 msgid "Quarry"
 msgstr "Coireall"
 
-#: ../../tribes/atlanteans/conf:169
+#: ../../tribes/atlanteans/conf:168
 msgid "Woodcutter’s House"
 msgstr "Taigh buaineadair-fhiodha"
 
-#: ../../tribes/atlanteans/conf:170
+#: ../../tribes/atlanteans/conf:169
 msgid "Forester’s House"
 msgstr "Taigh planntair-choille"
 
-#: ../../tribes/atlanteans/conf:171
+#: ../../tribes/atlanteans/conf:170
 msgid "Goldweaver"
 msgstr "Figheadair-òir"
 
-#: ../../tribes/atlanteans/conf:172
+#: ../../tribes/atlanteans/conf:171
 msgid "Fisher’s House"
 msgstr "Taigh-iasgair"
 
-#: ../../tribes/atlanteans/conf:173
+#: ../../tribes/atlanteans/conf:172
 msgid "Fish Breeder’s House"
 msgstr "Taigh tàrmachair iasg"
 
-#: ../../tribes/atlanteans/conf:174
+#: ../../tribes/atlanteans/conf:173
 msgid "Hunter’s House"
 msgstr "Taigh-sealgair"
 
-#: ../../tribes/atlanteans/conf:175
+#: ../../tribes/atlanteans/conf:174
 msgid "Well"
 msgstr "Tobar"
 
-#: ../../tribes/atlanteans/conf:176
+#: ../../tribes/atlanteans/conf:175
 msgid "Scout’s House"
 msgstr "Taigh-rabhadair"
 
-#: ../../tribes/atlanteans/conf:177
+#: ../../tribes/atlanteans/conf:176
 msgid "Sawmill"
 msgstr "Muileann sàbhaidh"
 
-#: ../../tribes/atlanteans/conf:178
+#: ../../tribes/atlanteans/conf:177
 msgid "Smokery"
 msgstr "Taigh-toitidh"
 
-#: ../../tribes/atlanteans/conf:179
+#: ../../tribes/atlanteans/conf:178
 msgid "Mill"
 msgstr "Muileann"
 
-#: ../../tribes/atlanteans/conf:180
+#: ../../tribes/atlanteans/conf:179
 msgid "Shipyard"
 msgstr "Cala"
 
-#: ../../tribes/atlanteans/conf:181
+#: ../../tribes/atlanteans/conf:180
 msgid "Bakery"
 msgstr "Taigh-fuine"
 
-#: ../../tribes/atlanteans/conf:182
+#: ../../tribes/atlanteans/conf:181
 msgid "Charcoal Burner’s House"
 msgstr "Sloc gual-fhiodha"
 
-#: ../../tribes/atlanteans/conf:183
+#: ../../tribes/atlanteans/conf:182
 msgid "Smelting Works"
 msgstr "Ceàrdach leaghadair"
 
-#: ../../tribes/atlanteans/conf:184
+#: ../../tribes/atlanteans/conf:183
 msgid "Toolsmithy"
 msgstr "Ceàrdach acainnean"
 
-#: ../../tribes/atlanteans/conf:185
+#: ../../tribes/atlanteans/conf:184
 msgid "Weapon Smithy"
 msgstr "Ceàrdach arm"
 
-#: ../../tribes/atlanteans/conf:186
+#: ../../tribes/atlanteans/conf:185
 msgid "Armor Smithy"
 msgstr "Ceàrdach armachd"
 
-#: ../../tribes/atlanteans/conf:187
+#: ../../tribes/atlanteans/conf:186
 msgid "Horse Farm"
 msgstr "Tuathanas each"
 
-#: ../../tribes/atlanteans/conf:188
+#: ../../tribes/atlanteans/conf:187
 msgid "Spider Farm"
 msgstr "Tuathanas dhamhan"
 
-#: ../../tribes/atlanteans/conf:189
+#: ../../tribes/atlanteans/conf:188
 msgid "Weaving-Mill"
 msgstr "Taigh nam beart"
 
-#: ../../tribes/atlanteans/conf:190
+#: ../../tribes/atlanteans/conf:189
 msgid "Farm"
 msgstr "Tuathanas"
 
-#: ../../tribes/atlanteans/conf:191
+#: ../../tribes/atlanteans/conf:190
 msgid "Blackroot Farm"
 msgstr "Tuathanas fhreumhagan"
 
-#: ../../tribes/atlanteans/conf:192
+#: ../../tribes/atlanteans/conf:191
 msgid "Crystal Mine"
 msgstr "Mèinn criostail"
 
-#: ../../tribes/atlanteans/conf:193
+#: ../../tribes/atlanteans/conf:192
 msgid "Coal Mine"
 msgstr "Mèinn guail"
 
-#: ../../tribes/atlanteans/conf:194
+#: ../../tribes/atlanteans/conf:193
 msgid "Iron Mine"
 msgstr "Mèinn iarainn"
 
-#: ../../tribes/atlanteans/conf:195
+#: ../../tribes/atlanteans/conf:194
 msgid "Gold Mine"
 msgstr "Mèinn òir"
 
-#: ../../tribes/atlanteans/conf:199
+#: ../../tribes/atlanteans/conf:198
 msgid "Guardhouse"
 msgstr "Bothan-faire"
 
-#: ../../tribes/atlanteans/conf:200
+#: ../../tribes/atlanteans/conf:199
 msgid "Guardhall"
 msgstr "Talla-faire"
 
-#: ../../tribes/atlanteans/conf:201
+#: ../../tribes/atlanteans/conf:200
 msgid "High Tower"
 msgstr "Tùr àrd"
 
-#: ../../tribes/atlanteans/conf:202
+#: ../../tribes/atlanteans/conf:201
 msgid "Small Tower"
 msgstr "Tùr beag"
 
-#: ../../tribes/atlanteans/conf:208
+#: ../../tribes/atlanteans/conf:207
 msgid "Dungeon"
 msgstr "Toll-dubh"
 
-#: ../../tribes/atlanteans/conf:209
+#: ../../tribes/atlanteans/conf:208
 msgid "Labyrinth"
 msgstr "Cuartan"
 
@@ -1097,58 +1063,26 @@ msgid "Sleep"
 msgstr "'Na chadal"
 
 #: ../../tribes/atlanteans/dungeon/conf:40
-msgid "Upgrade soldier attack 0"
-msgstr "Ag àrdachadh ionnsaigh saighdeir o 0"
+msgid "Upgrade soldier attack from level 0 to level 1"
+msgstr ""
 
 #: ../../tribes/atlanteans/dungeon/conf:41
-msgid ""
-"Upgrade soldier attack 0 (only for compatibility with old savegames "
-"(build13))"
+msgid "Upgrade soldier attack from level 1 to level 2"
 msgstr ""
-"Ag àrdachadh ionnsaigh saighdeir o 0 (airson co-chòrdalachd ri seann "
-"gheamaichean air an sàbhaladh (build13) a-mhàin)"
 
 #: ../../tribes/atlanteans/dungeon/conf:42
-msgid "Upgrade soldier attack 1"
-msgstr "Ag àrdachadh ionnsaigh saighdeir o 1"
+msgid "Upgrade soldier attack from level 2 to level 3"
+msgstr ""
 
 #: ../../tribes/atlanteans/dungeon/conf:43
-msgid ""
-"Upgrade soldier attack 1 (only for compatibility with old savegames "
-"(build13))"
+msgid "Upgrade soldier attack from level 3 to level 4"
 msgstr ""
-"Ag àrdachadh ionnsaigh saighdeir o 1 (airson co-chòrdalachd ri seann "
-"gheamaichean air an sàbhaladh (build13) a-mhàin)"
-
-#: ../../tribes/atlanteans/dungeon/conf:44
-msgid "Upgrade soldier attack 2"
-msgstr "Ag àrdachadh ionnsaigh saighdeir o 2"
-
-#: ../../tribes/atlanteans/dungeon/conf:45
-msgid ""
-"Upgrade soldier attack 2 (only for compatibility with old savegames "
-"(build13))"
-msgstr ""
-"Ag àrdachadh ionnsaigh saighdeir o 2 (airson co-chòrdalachd ri seann "
-"gheamaichean air an sàbhaladh (build13) a-mhàin)"
-
-#: ../../tribes/atlanteans/dungeon/conf:46
-msgid "Upgrade soldier attack 3"
-msgstr "Ag àrdachadh ionnsaigh saighdeir o 3"
-
-#: ../../tribes/atlanteans/dungeon/conf:47
-msgid ""
-"Upgrade soldier attack 3 (only for compatibility with old savegames "
-"(build13))"
-msgstr ""
-"Ag àrdachadh ionnsaigh saighdeir o 3 (airson co-chòrdalachd ri seann "
-"gheamaichean air an sàbhaladh (build13) a-mhàin)"
 
 #: ../../tribes/atlanteans/farm/conf:24
 msgid "Plant corn"
 msgstr "Cuir coirce"
 
-#: ../../tribes/atlanteans/farm/conf:26
+#: ../../tribes/atlanteans/farm/conf:25
 msgid "Harvest corn"
 msgstr "Buain coirce"
 
@@ -1218,10 +1152,10 @@ msgstr ""
 
 #: ../../tribes/atlanteans/goldore/conf:1
 msgid ""
-"Gold ore is mined in gold mines and processed to gold in smelting works."
+"Gold ore is mined in a goldmine. Smelted in a smelting works, it turns into "
+"gold which is used as a precious building material and to produce weapons "
+"and armor."
 msgstr ""
-"Tochlaidh tu clachan-òir ann am mèinnean òir is nì thu òr dhiubh ann an "
-"ceàrdach leaghadair."
 
 #: ../../tribes/atlanteans/goldyarn/conf:1
 msgid ""
@@ -1313,62 +1247,24 @@ msgstr ""
 "ma leaghas tu i ann an ceàrdach leaghadair."
 
 #: ../../tribes/atlanteans/labyrinth/conf:46
-msgid "Upgrade soldier defense 0"
-msgstr "Ag àrdachadh dìon saighdeir o 0"
+msgid "Upgrade soldier defense from level 0 to level 1"
+msgstr ""
 
 #: ../../tribes/atlanteans/labyrinth/conf:47
-msgid ""
-"Upgrade soldier defense 0 (only for compatibility with old savegames "
-"(build13))"
+msgid "Upgrade soldier defense from level 1 to level 2"
 msgstr ""
-"Ag àrdachadh dìon saighdeir o 0 (airson co-chòrdalachd ri seann gheamaichean "
-"air an sàbhaladh (build13) a-mhàin)"
 
 #: ../../tribes/atlanteans/labyrinth/conf:48
-msgid "Upgrade soldier defense 1"
-msgstr "Ag àrdachadh dìon saighdeir o 1"
+msgid "Upgrade soldier health from level 0 to level 1"
+msgstr ""
 
 #: ../../tribes/atlanteans/labyrinth/conf:49
-msgid ""
-"Upgrade soldier defense 1 (only for compatibility with old savegames "
-"(build13))"
+msgid "Upgrade soldier evade from level 0 to level 1"
 msgstr ""
-"Ag àrdachadh dìon saighdeir o 1 (airson co-chòrdalachd ri seann gheamaichean "
-"air an sàbhaladh (build13) a-mhàin)"
 
 #: ../../tribes/atlanteans/labyrinth/conf:50
-msgid "Upgrade soldier health 0"
-msgstr "Ag àrdachadh slàinte saighdeir o 0"
-
-#: ../../tribes/atlanteans/labyrinth/conf:51
-msgid ""
-"Upgrade soldier health 0 (only for compatibility with old savegames "
-"(build13))"
+msgid "Upgrade soldier evade from level 1 to level 2"
 msgstr ""
-"Ag àrdachadh slàinte saighdeir o 0 (airson co-chòrdalachd ri seann "
-"gheamaichean air an sàbhaladh (build13) a-mhàin)"
-
-#: ../../tribes/atlanteans/labyrinth/conf:52
-msgid "Upgrade soldier evade 0"
-msgstr "Ag àrdachadh teàrnadh saighdeir o 0"
-
-#: ../../tribes/atlanteans/labyrinth/conf:53
-msgid ""
-"Upgrade soldier evade 0 (only for compatibility with old savegames (build13))"
-msgstr ""
-"Ag àrdachadh teàrnadh saighdeir o 0 (airson co-chòrdalachd ri seann "
-"gheamaichean air an sàbhaladh (build13) a-mhàin)"
-
-#: ../../tribes/atlanteans/labyrinth/conf:54
-msgid "Upgrade soldier evade 1"
-msgstr "Ag àrdachadh teàrnadh saighdeir o 1"
-
-#: ../../tribes/atlanteans/labyrinth/conf:55
-msgid ""
-"Upgrade soldier evade 1 (only for compatibility with old savegames (build13))"
-msgstr ""
-"Ag àrdachadh teàrnadh saighdeir o 1 (airson co-chòrdalachd ri seann "
-"gheamaichean air an sàbhaladh (build13) a-mhàin)"
 
 #: ../../tribes/atlanteans/light_trident/conf:1
 msgid ""
@@ -1490,13 +1386,10 @@ msgstr "Chan eil rum gu leòr ann"
 
 #: ../../tribes/atlanteans/scripting/sc01_castle_village.lua:102
 msgid ""
-"Some of your starting buildings didn’t have enough room and\n"
-"weren’t built. You are at a disadvantage with this; consider restarting\n"
-"this map with a fair starting condition."
+"Some of your starting buildings didn’t have enough room and weren’t built. "
+"You are at a disadvantage with this; consider restarting this map with a "
+"fair starting condition."
 msgstr ""
-"Cha robh rum gu leòr ann airson cuid dhe na togalaichean tòiseachaidh agad \n"
-"is cha deach an togail. Cuiridh seo èis ort; saoil an tòisich thu \n"
-"air a' mhapa seo a-rithist le cumhan tòiseachaidh cothromach?"
 
 #: ../../tribes/atlanteans/scythe/conf:1
 msgid ""

@@ -2,21 +2,22 @@
 # Copyright (C) 2008 Widelands Development Team
 # Pekka Järvinen <pekka.jarvinen@gmail.com>, 2007.
 # Sini Ruohomaa <sini.ruohomaa@iki.fi>, 2009.
-#
+# GunChleoc <fios@foramnagaidhlig.net>, 2014.
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4208\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2014-03-06 21:20+0000\n"
-"PO-Revision-Date: 2013-09-25 08:54+0000\n"
-"Last-Translator: Teppo Mäenpää <Unknown>\n"
-"Language-Team: Finnish <widelands-public@lists.sourceforge.net>\n"
+"POT-Creation-Date: 2014-03-12 21:37+0000\n"
+"PO-Revision-Date: 2014-03-12 12:46+0000\n"
+"Last-Translator: GunChleoc <Unknown>\n"
+"Language-Team: Widelands fixxer upper\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-03-07 05:36+0000\n"
-"X-Generator: Launchpad (build 16948)\n"
+"X-Launchpad-Export-Date: 2014-03-13 05:32+0000\n"
+"X-Generator: Launchpad (build 16963)\n"
 "X-Poedit-Country: FINLAND\n"
+"Language: fi\n"
 "X-Poedit-Language: Finnish\n"
 "X-Poedit-SourceCharset: utf-8\n"
 
@@ -252,22 +253,6 @@ msgstr ""
 msgid "Your soldiers defeated the enemy at the Small Tower"
 msgstr ""
 
-#: ../../global/militarysites/stronghold.barbarians/conf:8
-msgid "Your Stronghold discovered an aggressor."
-msgstr ""
-
-#: ../../global/militarysites/stronghold.barbarians/conf:9
-msgid "Your Stronghold is under attack."
-msgstr ""
-
-#: ../../global/militarysites/stronghold.barbarians/conf:10
-msgid "The enemy defeated your soldiers at the Stronghold"
-msgstr ""
-
-#: ../../global/militarysites/stronghold.barbarians/conf:11
-msgid "Your soldiers defeated the enemy at the Stronghold"
-msgstr ""
-
 #: ../../global/militarysites/tower.atlanteans/conf:9
 #: ../../global/militarysites/tower.empire/conf:9
 #: ../../tribes/empire/tower/conf:8
@@ -307,16 +292,8 @@ msgstr "Lepää"
 
 #: ../../tribes/empire/arena/conf:30
 #: ../../tribes/empire/colosseum/conf:36
-msgid "Upgrade soldier evade 0"
-msgstr "Paranna sotilaan välttökykyä (0)"
-
-#: ../../tribes/empire/arena/conf:31
-#: ../../tribes/empire/colosseum/conf:37
-msgid ""
-"Upgrade soldier evade 0 (only for compatibility with old savegames (build13))"
+msgid "Upgrade soldier evade from level 0 to level 1"
 msgstr ""
-"Paranna sotilaan välttökykyä (0) (vain tallennustiedostojen taaksepäin "
-"yhteensopivuuden varalta (build13))"
 
 #: ../../tribes/empire/armour/conf:1
 msgid ""
@@ -327,7 +304,7 @@ msgstr ""
 
 #: ../../tribes/empire/armoursmith/conf:1
 msgid "Produces armor for the soldiers."
-msgstr ""
+msgstr "Tuottaa haarniskoja sotilaille."
 
 #: ../../tribes/empire/armoursmithy/conf:31
 msgid "Produce helm"
@@ -335,15 +312,15 @@ msgstr "Valmista kypärä"
 
 #: ../../tribes/empire/armoursmithy/conf:32
 msgid "Produce armor"
-msgstr ""
+msgstr "Valmista haarniska"
 
 #: ../../tribes/empire/armoursmithy/conf:33
 msgid "Produce chain armor"
-msgstr ""
+msgstr "Valmista ketjupanssari"
 
 #: ../../tribes/empire/armoursmithy/conf:34
 msgid "Produce plate armor"
-msgstr ""
+msgstr "Valmista levyhaarniska"
 
 #: ../../tribes/empire/armoursmithy/conf:35
 #: ../../tribes/empire/bakery/conf:24
@@ -355,18 +332,18 @@ msgstr ""
 #: ../../tribes/empire/deep_marblemine/conf:27
 #: ../../tribes/empire/deep_oremine/conf:26
 #: ../../tribes/empire/donkeyfarm/conf:25
-#: ../../tribes/empire/farm/conf:27
+#: ../../tribes/empire/farm/conf:25
 #: ../../tribes/empire/fishers_house/conf:20
 #: ../../tribes/empire/foresters_house/conf:20
 #: ../../tribes/empire/goldmine/conf:26
 #: ../../tribes/empire/hunters_house/conf:19
 #: ../../tribes/empire/inn/conf:27
 #: ../../tribes/empire/lumberjacks_house/conf:20
-#: ../../tribes/empire/marblemine/conf:30
+#: ../../tribes/empire/marblemine/conf:28
 #: ../../tribes/empire/mill/conf:24
 #: ../../tribes/empire/oremine/conf:26
 #: ../../tribes/empire/piggery/conf:25
-#: ../../tribes/empire/quarry/conf:24
+#: ../../tribes/empire/quarry/conf:22
 #: ../../tribes/empire/sawmill/conf:26
 #: ../../tribes/empire/scouts_house/conf:20
 #: ../../tribes/empire/sheepfarm/conf:24
@@ -375,7 +352,7 @@ msgstr ""
 #: ../../tribes/empire/stonemasons_house/conf:24
 #: ../../tribes/empire/tavern/conf:27
 #: ../../tribes/empire/toolsmithy/conf:49
-#: ../../tribes/empire/vineyard/conf:27
+#: ../../tribes/empire/vineyard/conf:25
 #: ../../tribes/empire/weaponsmithy/conf:38
 #: ../../tribes/empire/weaving-mill/conf:20
 #: ../../tribes/empire/well/conf:20
@@ -386,7 +363,7 @@ msgstr "Työskentelee"
 #: ../../tribes/empire/axe/conf:1
 msgid ""
 "The ax is the tool for the lumberjack. It is produced by the toolsmith."
-msgstr ""
+msgstr "Kirves on puunhakkaajan työväline. Työkaluseppä valmistaa sen."
 
 #: ../../tribes/empire/baker/conf:1
 msgid "Bakes bread for workers."
@@ -431,7 +408,7 @@ msgstr "Valmistaa olutta tai viiniä."
 
 #: ../../tribes/empire/builder/conf:1
 msgid "Works at construction sites to raise new buildings."
-msgstr ""
+msgstr "Työskentelee rakennuspaikoilla pystyttääkseen uuden rakennuksen."
 
 #: ../../tribes/empire/burner/conf:1
 msgid "Burns coal."
@@ -461,6 +438,8 @@ msgid ""
 "Cloth is needed to build several buildings. It is also consumed in the armor "
 "smithy."
 msgstr ""
+"Kangasta tarvitaan useiden rakennusten rakentamiseen. Sitä käytetään myös "
+"haarniskasepällä."
 
 #: ../../tribes/empire/coal/conf:1
 msgid ""
@@ -469,16 +448,9 @@ msgid ""
 "charcoal burner out of logs."
 msgstr ""
 
-#: ../../tribes/empire/colosseum/conf:38
-msgid "Upgrade soldier evade 1"
-msgstr "Paranna sotilaan välttökykyä (1)"
-
-#: ../../tribes/empire/colosseum/conf:39
-msgid ""
-"Upgrade soldier evade 1 (only for compatibility with old savegames (build13))"
+#: ../../tribes/empire/colosseum/conf:37
+msgid "Upgrade soldier evade from level 1 to level 2"
 msgstr ""
-"Paranna sotilaan välttökykyä (1) (vain tallennustiedostojen taaksepäin "
-"yhteensopivuuden varalta (build13))"
 
 #: ../../tribes/empire/conf:4
 msgid "The Widelands Development Team"
@@ -490,7 +462,7 @@ msgstr "Keisarikunta"
 
 #: ../../tribes/empire/conf:6
 msgid "This is the culture of the Roman Empire."
-msgstr ""
+msgstr "Tämä on Rooman keisarikunnan kansa ja kulttuuri."
 
 #: ../../tribes/empire/conf:33
 msgid "Ashes"
@@ -498,87 +470,87 @@ msgstr "Tuhkaa"
 
 #: ../../tribes/empire/conf:34
 msgid "Field (medium)"
-msgstr ""
+msgstr "Pelto keskikokoinen"
 
 #: ../../tribes/empire/conf:35
 msgid "Field (small)"
-msgstr ""
+msgstr "Pelto pieni"
 
 #: ../../tribes/empire/conf:36
 msgid "Field (tiny)"
-msgstr ""
+msgstr "Pelto hyvin pieni"
 
 #: ../../tribes/empire/conf:37
 msgid "Field (ripe)"
-msgstr ""
+msgstr "Pelto kypsä"
 
 #: ../../tribes/empire/conf:38
 msgid "Field (harvested)"
-msgstr ""
+msgstr "Pelto korjattu"
 
 #: ../../tribes/empire/conf:39
 msgid "Destroyed Building"
-msgstr ""
+msgstr "Tuhoutunut rakennus"
 
 #: ../../tribes/empire/conf:40
 msgid "Resource indicator: Coal (little)"
-msgstr ""
+msgstr "Resurssimerkki hiili vähän"
 
 #: ../../tribes/empire/conf:41
 msgid "Resource indicator: Coal (much)"
-msgstr ""
+msgstr "Resurssimerkki hiili paljon"
 
 #: ../../tribes/empire/conf:42
 msgid "Resource indicator: Gold (little)"
-msgstr ""
+msgstr "Resurssimerkki kulta vähän"
 
 #: ../../tribes/empire/conf:43
 msgid "Resource indicator: Gold (much)"
-msgstr ""
+msgstr "Resurssimerkki kulta paljon"
 
 #: ../../tribes/empire/conf:44
 msgid "Resource indicator: Granite (little)"
-msgstr ""
+msgstr "Resurssimittari graniitti loppumassa"
 
 #: ../../tribes/empire/conf:45
 msgid "Resource indicator: Granite (much)"
-msgstr ""
+msgstr "Resurssimittari graniittia tarpeeksi"
 
 #: ../../tribes/empire/conf:46
 msgid "Resource indicator: Iron (little)"
-msgstr ""
+msgstr "Resurssimerkki rauta vähän"
 
 #: ../../tribes/empire/conf:47
 msgid "Resource indicator: Iron (much)"
-msgstr ""
+msgstr "Resurssimerkki rauta paljon"
 
 #: ../../tribes/empire/conf:48
 msgid "Resource indicator: No resource"
-msgstr ""
+msgstr "Resurssimerkki ei mitään"
 
 #: ../../tribes/empire/conf:49
 msgid "Resource indicator: Water"
-msgstr ""
+msgstr "Resurssimerkki vettä"
 
 #: ../../tribes/empire/conf:50
 msgid "Vine (medium)"
-msgstr ""
+msgstr "Viiniköynnös, keskikokoinen"
 
 #: ../../tribes/empire/conf:51
 msgid "Vine (small)"
-msgstr ""
+msgstr "Viiniköynnös, pieni"
 
 #: ../../tribes/empire/conf:52
 msgid "Vine (tiny)"
-msgstr ""
+msgstr "Viiniköynnös, hyvin pieni"
 
 #: ../../tribes/empire/conf:53
 msgid "Vine (ripe)"
-msgstr ""
+msgstr "Viiniköynnös, kypsä"
 
 #: ../../tribes/empire/conf:54
 msgid "Ship Construction Site"
-msgstr ""
+msgstr "Telakka-alue"
 
 #: ../../tribes/empire/conf:57
 msgid "Advanced Lance"
@@ -586,7 +558,7 @@ msgstr "Vahvistettu keihäs"
 
 #: ../../tribes/empire/conf:58
 msgid "Armor"
-msgstr ""
+msgstr "Haarniska"
 
 #: ../../tribes/empire/conf:59
 msgid "Ax"
@@ -610,7 +582,7 @@ msgstr "Leipä"
 
 #: ../../tribes/empire/conf:64
 msgid "Chain Armor"
-msgstr ""
+msgstr "Ketjupanssari"
 
 #: ../../tribes/empire/conf:65
 msgid "Cloth"
@@ -642,7 +614,7 @@ msgstr "Kulta"
 
 #: ../../tribes/empire/conf:72
 msgid "Gold Ore"
-msgstr ""
+msgstr "Kultamalmi"
 
 #: ../../tribes/empire/conf:73
 msgid "Grape"
@@ -703,7 +675,7 @@ msgstr "Hakku"
 
 #: ../../tribes/empire/conf:87
 msgid "Plate Armor"
-msgstr ""
+msgstr "Levyhaarniska"
 
 #: ../../tribes/empire/conf:88
 msgid "Ration"
@@ -771,7 +743,7 @@ msgstr "Sotilas"
 
 #: ../../tribes/empire/conf:110
 msgid "Armorsmith"
-msgstr ""
+msgstr "Haarniskaseppä"
 
 #: ../../tribes/empire/conf:111
 msgid "Baker"
@@ -894,7 +866,7 @@ msgid "Dismantle Site"
 msgstr "Purkutyömaa"
 
 #: ../../tribes/empire/conf:149
-#: ../../tribes/empire/conf:212
+#: ../../tribes/empire/conf:211
 msgid "Castle"
 msgstr "Linna"
 
@@ -915,12 +887,12 @@ msgid "Small Tower"
 msgstr "Pieni torni"
 
 #: ../../tribes/empire/conf:154
-#: ../../tribes/empire/conf:211
+#: ../../tribes/empire/conf:210
 msgid "Tower"
 msgstr "Torni"
 
 #: ../../tribes/empire/conf:155
-#: ../../tribes/empire/conf:209
+#: ../../tribes/empire/conf:208
 msgid "Barrier"
 msgstr "Rajalinnake"
 
@@ -933,207 +905,203 @@ msgid "Donjon"
 msgstr "Keskustorni"
 
 #: ../../tribes/empire/conf:158
-#: ../../tribes/empire/conf:213
+#: ../../tribes/empire/conf:212
 msgid "Fortress"
 msgstr "Linnoitus"
 
 #: ../../tribes/empire/conf:159
-#: ../../tribes/empire/conf:207
+#: ../../tribes/empire/conf:206
 msgid "Sentry"
 msgstr "Vartiopaikka"
 
-#: ../../tribes/empire/conf:160
-msgid "Stronghold"
-msgstr "Linnake"
-
-#: ../../tribes/empire/conf:163
+#: ../../tribes/empire/conf:162
 msgid "Headquarters"
 msgstr "Päämaja"
 
-#: ../../tribes/empire/conf:164
+#: ../../tribes/empire/conf:163
 msgid "Headquarters Shipwreck"
-msgstr ""
+msgstr "Päämaja-haaksirikko"
 
-#: ../../tribes/empire/conf:165
+#: ../../tribes/empire/conf:164
 msgid "Warehouse"
 msgstr "Varasto"
 
-#: ../../tribes/empire/conf:166
+#: ../../tribes/empire/conf:165
 msgid "Port"
 msgstr "Satama"
 
-#: ../../tribes/empire/conf:169
+#: ../../tribes/empire/conf:168
 msgid "Quarry"
 msgstr "Kivilouhos"
 
-#: ../../tribes/empire/conf:170
+#: ../../tribes/empire/conf:169
 msgid "Lumberjack’s House"
-msgstr ""
+msgstr "Puunhakkaajan mökki"
 
-#: ../../tribes/empire/conf:171
+#: ../../tribes/empire/conf:170
 msgid "Forester’s House"
 msgstr ""
 
-#: ../../tribes/empire/conf:172
+#: ../../tribes/empire/conf:171
 msgid "Fisher’s House"
 msgstr ""
 
-#: ../../tribes/empire/conf:173
+#: ../../tribes/empire/conf:172
 msgid "Hunter’s House"
 msgstr ""
 
-#: ../../tribes/empire/conf:174
+#: ../../tribes/empire/conf:173
 msgid "Well"
 msgstr "Kaivo"
 
-#: ../../tribes/empire/conf:175
+#: ../../tribes/empire/conf:174
 msgid "Scout’s House"
-msgstr ""
+msgstr "Tiedustelijan talo"
+
+#: ../../tribes/empire/conf:175
+msgid "Stonemason’s House"
+msgstr "Kivenhakkaajan mökki"
 
 #: ../../tribes/empire/conf:176
-msgid "Stonemason’s House"
-msgstr ""
-
-#: ../../tribes/empire/conf:177
 msgid "Sawmill"
 msgstr "Saha"
 
-#: ../../tribes/empire/conf:178
+#: ../../tribes/empire/conf:177
 msgid "Mill"
 msgstr "Mylly"
 
-#: ../../tribes/empire/conf:179
+#: ../../tribes/empire/conf:178
 msgid "Bakery"
 msgstr "Leipomo"
 
-#: ../../tribes/empire/conf:180
+#: ../../tribes/empire/conf:179
 msgid "Brewery"
 msgstr "Panimo"
 
-#: ../../tribes/empire/conf:181
+#: ../../tribes/empire/conf:180
 msgid "Vineyard"
 msgstr "Viinitarha"
 
 # TODO: Winery is actually a vineyard too, too easy to misunderstand.
-#: ../../tribes/empire/conf:182
+#: ../../tribes/empire/conf:181
 msgid "Winery"
 msgstr "Viinikellari"
 
-#: ../../tribes/empire/conf:183
+#: ../../tribes/empire/conf:182
 msgid "Inn"
 msgstr "Majatalo"
 
-#: ../../tribes/empire/conf:184
+#: ../../tribes/empire/conf:183
 msgid "Tavern"
 msgstr "Krouvi"
 
-#: ../../tribes/empire/conf:185
+#: ../../tribes/empire/conf:184
 msgid "Charcoal Burner"
 msgstr "Hiilenpolttamo"
 
-#: ../../tribes/empire/conf:186
+#: ../../tribes/empire/conf:185
 msgid "Smelting Works"
 msgstr "Sulattamo"
 
-#: ../../tribes/empire/conf:187
+#: ../../tribes/empire/conf:186
 msgid "Shipyard"
 msgstr "Laivatelakka"
 
-#: ../../tribes/empire/conf:188
+#: ../../tribes/empire/conf:187
 msgid "Toolsmithy"
 msgstr "Työkaluseppä"
 
-#: ../../tribes/empire/conf:189
+#: ../../tribes/empire/conf:188
 msgid "Armor Smithy"
-msgstr ""
+msgstr "Kilpipaja"
+
+#: ../../tribes/empire/conf:189
+msgid "Donkey Farm"
+msgstr "Aasifarmi"
 
 #: ../../tribes/empire/conf:190
-msgid "Donkey Farm"
-msgstr ""
+msgid "Sheep Farm"
+msgstr "Lammastila"
 
 #: ../../tribes/empire/conf:191
-msgid "Sheep Farm"
-msgstr ""
-
-#: ../../tribes/empire/conf:192
 msgid "Weaving Mill"
 msgstr "Kutomo"
 
-#: ../../tribes/empire/conf:193
+#: ../../tribes/empire/conf:192
 msgid "Piggery"
 msgstr "Sikala"
 
-#: ../../tribes/empire/conf:194
+#: ../../tribes/empire/conf:193
 msgid "Farm"
 msgstr "Maatila"
 
-#: ../../tribes/empire/conf:195
+#: ../../tribes/empire/conf:194
 msgid "Weapon Smithy"
 msgstr "Asepaja"
 
-#: ../../tribes/empire/conf:196
+#: ../../tribes/empire/conf:195
 msgid "Deep Marble Mine"
 msgstr "Syvä marmorikaivos"
 
-#: ../../tribes/empire/conf:197
+#: ../../tribes/empire/conf:196
 msgid "Marble Mine"
 msgstr "Marmorikaivos"
 
-#: ../../tribes/empire/conf:198
+#: ../../tribes/empire/conf:197
 msgid "Deep Coal Mine"
 msgstr "Syvä hiilikaivos"
 
-#: ../../tribes/empire/conf:199
+#: ../../tribes/empire/conf:198
 msgid "Coal Mine"
 msgstr "Hiilikaivos"
 
-#: ../../tribes/empire/conf:200
+#: ../../tribes/empire/conf:199
 msgid "Deep Iron Ore Mine"
 msgstr "Syvä rautakaivos"
 
-#: ../../tribes/empire/conf:201
+#: ../../tribes/empire/conf:200
 msgid "Iron Ore Mine"
 msgstr "Rautakaivos"
 
-#: ../../tribes/empire/conf:202
+#: ../../tribes/empire/conf:201
 msgid "Deep Gold Mine"
 msgstr "Syvä kultakaivos"
 
-#: ../../tribes/empire/conf:203
+#: ../../tribes/empire/conf:202
 msgid "Gold Mine"
 msgstr "Kultakaivos"
 
-#: ../../tribes/empire/conf:208
+#: ../../tribes/empire/conf:207
 msgid "Barracks"
 msgstr "Parakki"
 
-#: ../../tribes/empire/conf:210
+#: ../../tribes/empire/conf:209
 msgid "Outpost"
 msgstr "Etuvartioasema"
 
-#: ../../tribes/empire/conf:217
+#: ../../tribes/empire/conf:216
 msgid "Colosseum"
 msgstr "Colosseum"
 
-#: ../../tribes/empire/conf:218
+#: ../../tribes/empire/conf:217
 msgid "Arena"
 msgstr "Areena"
 
-#: ../../tribes/empire/conf:219
+#: ../../tribes/empire/conf:218
 msgid "Training Camp"
-msgstr ""
+msgstr "Harjoitteluleiri"
+
+#: ../../tribes/empire/conf:221
+msgid "Headquarters Medium"
+msgstr "Keskikokoinen päämaja"
 
 #: ../../tribes/empire/conf:222
-msgid "Headquarters Medium"
-msgstr ""
-
-#: ../../tribes/empire/conf:223
 msgid "Castle Village"
-msgstr ""
+msgstr "Linnakylä"
 
 #: ../../tribes/empire/donkey/conf:1
 msgid "Helps to carry items along busy roads."
-msgstr ""
+msgstr "Auttaa tavaroiden kuljettamisessa teillä."
 
 #: ../../tribes/empire/donkeybreeder/conf:1
 msgid "Breeds cute and helpful donkeys"
@@ -1143,7 +1111,7 @@ msgstr "Kasvattaa söpöjä ja avuliaita aaseja"
 msgid "Plant wheat"
 msgstr "Kylvää vehnää"
 
-#: ../../tribes/empire/farm/conf:25
+#: ../../tribes/empire/farm/conf:24
 msgid "Harvest wheat"
 msgstr "Korjaa vehnää"
 
@@ -1162,6 +1130,9 @@ msgid ""
 "Besides bread and meat, fish is also a foodstuff for the Empire. Fish are "
 "used in taverns, inns and training sites (arena, colosseum, training camp)."
 msgstr ""
+"Leivän ja lihan lisäksi Keisarikunnassa syödään myös kalaa. Kalaa käytetään "
+"majataloissa, krouveissa ja harjoittelupaikoilla (areena, colosseum, "
+"harjoitteluleiri)."
 
 #: ../../tribes/empire/fisher/conf:1
 msgid "Catches fish in the sea."
@@ -1201,7 +1172,10 @@ msgid ""
 msgstr ""
 
 #: ../../tribes/empire/goldstone/conf:1
-msgid "Gold Ore is mined in goldmines and processed at the smelting works."
+msgid ""
+"Gold ore is mined in a goldmine. Smelted in a smelting works, it turns into "
+"gold which is used as a precious building material and to produce weapons "
+"and armor."
 msgstr ""
 
 #: ../../tribes/empire/grape/conf:1
@@ -1241,6 +1215,9 @@ msgid ""
 "This spear is light enough to be thrown, but heavy enough to kill any animal "
 "in one blow. It is only used by hunters."
 msgstr ""
+"Tämä keihäs on riittävän kevyt heitettäväksi, mutta riittävän raskas "
+"tappamaan minkä tahansa eläimen yhdellä iskulla. Vain metsästäjät käyttävät "
+"sitä."
 
 #: ../../tribes/empire/inn/conf:25
 msgid "Produce ration"
@@ -1265,6 +1242,8 @@ msgid ""
 "Iron ore needs to be smelted in the smelting works to yield iron. Iron ore "
 "is produced in iron mines."
 msgstr ""
+"Rautamalmi pitää sulattaa sulattamossa, että siitä saadaan rautaa. "
+"Rautamalmia louhitaan rautakaivoksissa."
 
 #: ../../tribes/empire/kitchen_tools/conf:1
 msgid ""
@@ -1300,28 +1279,14 @@ msgid ""
 msgstr ""
 
 #: ../../tribes/empire/marblemine/conf:26
-#: ../../tribes/empire/quarry/conf:22
+#: ../../tribes/empire/quarry/conf:21
 msgid "Mine marble"
 msgstr "Louhii marmoria"
 
 #: ../../tribes/empire/marblemine/conf:27
-#: ../../tribes/empire/quarry/conf:23
-msgid "Mine marble (only for compatibility with old savegames (build13))"
-msgstr ""
-"Louhi marmoria (vain tallennustiedostojen taaksepäin yhteensopivuuden "
-"varalta (build13))"
-
-#: ../../tribes/empire/marblemine/conf:28
 #: ../../tribes/empire/quarry/conf:20
 msgid "Mine stone"
 msgstr "Louhii kiveä"
-
-#: ../../tribes/empire/marblemine/conf:29
-#: ../../tribes/empire/quarry/conf:21
-msgid "Mine stone (only for compatibility with old savegames (build13))"
-msgstr ""
-"Louhi kiveä (vain tallennustiedostojen taaksepäin yhteensopivuuden varalta "
-"(build13))"
 
 #: ../../tribes/empire/master-miner/conf:1
 #: ../../tribes/empire/miner/conf:1
@@ -1390,6 +1355,8 @@ msgstr ""
 msgid ""
 "Scouts like Scotty the scout scouting unscouted areas in a scouty fashion."
 msgstr ""
+"Tiedustelija kuten Teemu Tiedustelija tiedustelee tiedostelemattomia alueita "
+"tiedustelun malliin."
 
 #: ../../tribes/empire/scripting/sc00_headquarters_medium.lua:10
 msgid "Headquarters medium"
@@ -1405,15 +1372,16 @@ msgstr "Ei ole tarpeeksi tilaa"
 
 #: ../../tribes/empire/scripting/sc01_castle_village.lua:120
 msgid ""
-"Some of your starting buildings didn’t have enough room and \n"
-"weren’t built. You are at a disadvantage with this; consider restarting \n"
-"this map with a fair starting condition."
+"Some of your starting buildings didn’t have enough room and weren’t built. "
+"You are at a disadvantage with this; consider restarting this map with a "
+"fair starting condition."
 msgstr ""
 
 #: ../../tribes/empire/scythe/conf:1
 msgid ""
 "The Scythe is the tool of the farmer. It is produced by the toolsmith."
 msgstr ""
+"Viikate on maanviljelijän työkalu. Työkaluseppä valmistaa viikatteet."
 
 #: ../../tribes/empire/sentry/conf:7
 msgid "Your soldiers have occupied your Sentry"
@@ -1429,7 +1397,7 @@ msgstr "Merikelpoinen alus"
 
 #: ../../tribes/empire/shipwright/conf:1
 msgid "Works at the shipyard and constructs new ships."
-msgstr ""
+msgstr "Työskentelee telakalla, rakentaa uusia aluksia."
 
 #: ../../tribes/empire/shipyard/conf:27
 msgid "Constructing ship"
@@ -1465,7 +1433,7 @@ msgstr ""
 
 #: ../../tribes/empire/stonemason/conf:1
 msgid "Cuts raw pieces of granite and marble out of rocks."
-msgstr ""
+msgstr "Leikkaa raakagraniittia ja -marmoria rakennuskiviksi"
 
 #: ../../tribes/empire/toolsmith/conf:1
 msgid "Produces tools for the workers."
@@ -1517,7 +1485,7 @@ msgstr "Valmista saha"
 
 #: ../../tribes/empire/toolsmithy/conf:48
 msgid "Produce ax"
-msgstr ""
+msgstr "Valmista kirves"
 
 #: ../../tribes/empire/tower/conf:7
 msgid "Your soldiers have occupied your Tower"
@@ -1528,91 +1496,35 @@ msgid "Trains the soldiers."
 msgstr "Kouluttaa sotilaita."
 
 #: ../../tribes/empire/trainingscamp/conf:47
-msgid "Upgrade soldier attack 0"
-msgstr "Paranna sotilaan hyökkäystä (0)"
+msgid "Upgrade soldier attack from level 0 to level 1"
+msgstr ""
 
 #: ../../tribes/empire/trainingscamp/conf:48
-msgid ""
-"Upgrade soldier attack 0 (only for compatibility with old savegames "
-"(build13))"
+msgid "Upgrade soldier attack from level 1 to level 2"
 msgstr ""
-"Paranna sotilaan hyökkäystä (0) (vain tallennustiedostojen taaksepäin "
-"yhteensopivuuden varalta (build13))"
 
 #: ../../tribes/empire/trainingscamp/conf:49
-msgid "Upgrade soldier attack 1"
-msgstr "Paranna sotilaan hyökkäystä (1)"
+msgid "Upgrade soldier attack from level 2 to level 3"
+msgstr ""
 
 #: ../../tribes/empire/trainingscamp/conf:50
-msgid ""
-"Upgrade soldier attack 1 (only for compatibility with old savegames "
-"(build13))"
+msgid "Upgrade soldier attack from level 3 to level 4"
 msgstr ""
-"Paranna sotilaan hyökkäystä (1) (vain tallennustiedostojen taaksepäin "
-"yhteensopivuuden varalta (build13))"
 
 #: ../../tribes/empire/trainingscamp/conf:51
-msgid "Upgrade soldier attack 2"
-msgstr "Paranna sotilaan hyökkäystä (2)"
+msgid "Upgrade soldier health from level 0 to level 1"
+msgstr ""
 
 #: ../../tribes/empire/trainingscamp/conf:52
-msgid ""
-"Upgrade soldier attack 2 (only for compatibility with old savegames "
-"(build13))"
+msgid "Upgrade soldier health from level 1 to level 2"
 msgstr ""
-"Paranna sotilaan hyökkäystä (2) (vain tallennustiedostojen taaksepäin "
-"yhteensopivuuden varalta (build13))"
 
 #: ../../tribes/empire/trainingscamp/conf:53
-msgid "Upgrade soldier attack 3"
-msgstr "Paranna sotilaan hyökkäystä (3)"
+msgid "Upgrade soldier health from level 2 to level 3"
+msgstr ""
 
 #: ../../tribes/empire/trainingscamp/conf:54
-msgid ""
-"Upgrade soldier attack 3 (only for compatibility with old savegames "
-"(build13))"
-msgstr ""
-"Paranna sotilaan hyökkäystä (3) (vain tallennustiedostojen taaksepäin "
-"yhteensopivuuden varalta (build13))"
-
-#: ../../tribes/empire/trainingscamp/conf:55
-msgid "Upgrade soldier health 0"
-msgstr ""
-
-#: ../../tribes/empire/trainingscamp/conf:56
-msgid ""
-"Upgrade soldier health 0 (only for compatibility with old savegames "
-"(build13))"
-msgstr ""
-
-#: ../../tribes/empire/trainingscamp/conf:57
-msgid "Upgrade soldier health 1"
-msgstr ""
-
-#: ../../tribes/empire/trainingscamp/conf:58
-msgid ""
-"Upgrade soldier health 1 (only for compatibility with old savegames "
-"(build13))"
-msgstr ""
-
-#: ../../tribes/empire/trainingscamp/conf:59
-msgid "Upgrade soldier health 2"
-msgstr ""
-
-#: ../../tribes/empire/trainingscamp/conf:60
-msgid ""
-"Upgrade soldier health 2 (only for compatibility with old savegames "
-"(build13))"
-msgstr ""
-
-#: ../../tribes/empire/trainingscamp/conf:61
-msgid "Upgrade soldier health 3"
-msgstr ""
-
-#: ../../tribes/empire/trainingscamp/conf:62
-msgid ""
-"Upgrade soldier health 3 (only for compatibility with old savegames "
-"(build13))"
+msgid "Upgrade soldier health from level 3 to level 4"
 msgstr ""
 
 #: ../../tribes/empire/trunk/conf:1
@@ -1630,7 +1542,7 @@ msgstr "Kasvattaa viinirypäleitä."
 msgid "Plant vine"
 msgstr "Istuttaa viiniköynnöstä"
 
-#: ../../tribes/empire/vineyard/conf:25
+#: ../../tribes/empire/vineyard/conf:24
 msgid "Harvest vine"
 msgstr "Korjaa viinirypäleitä"
 

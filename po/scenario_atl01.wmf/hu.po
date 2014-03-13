@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2014-03-06 21:20+0000\n"
+"POT-Creation-Date: 2014-03-12 21:37+0000\n"
 "PO-Revision-Date: 2014-03-09 20:17+0000\n"
 "Last-Translator: GunChleoc <Unknown>\n"
 "Language-Team: Widelands fixxer upper\n"
@@ -15,8 +15,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-03-10 05:32+0000\n"
-"X-Generator: Launchpad (build 16948)\n"
+"X-Launchpad-Export-Date: 2014-03-13 05:28+0000\n"
+"X-Generator: Launchpad (build 16963)\n"
 "Language: hu\n"
 
 #: ../../campaigns/atl01.wmf/scripting/init.lua:75
@@ -262,11 +262,11 @@ msgid "Build a dungeon and a labyrinth"
 msgstr "Építs egy kazamatát és egy labirintust."
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:128
-msgid "Build a warehouse and a horsefarm"
-msgstr "Építs egy raktárat és egy lovardát"
+msgid "Build a warehouse and a horse farm"
+msgstr ""
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:130
-msgid "Warehouse and Horsefarm"
+msgid "Warehouse and Horse Farm"
 msgstr ""
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:131
@@ -546,9 +546,13 @@ msgid "Sidolus Speaks"
 msgstr "Sidolus szól"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:265
-msgid "May Satul warm you, Jundlina! I agree with what Loftomor proposes. "
+msgid ""
+"May Satul warm you, Jundlina! I agree with what Loftomor proposes. We need a "
+"good supply of building materials for we have to expand our territory "
+"swiftly. I will not feel safe on this island as long as we have not seen all "
+"its shores it. I brought plenty of good men from Atlantis. The military "
+"might is available. We only need some housing to live in."
 msgstr ""
-"Satul melegítsen, Jundlina! Egyetértek Loftomorral abban, amit javasol. "
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:276
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:327
@@ -678,19 +682,13 @@ msgstr "Egy férfi keresi fel Jundlinát"
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:339
 msgid ""
-"May Satul warm you, Jundlina. My Name is Opol, and I am the highest weaver "
+"May Satul warm you, Jundlina. My name is Opol, and I am the highest weaver "
 "of the guild abandoning Atlantis and Lutas with you. I come with sad news "
 "indeed: we have no more spidercloth. Not a single piece is to be found in "
 "our warehouses. Could you not help the weavers’ guild by arranging the "
 "building of a weaving-mill and a spider farm? The spiders deliver the finest "
 "silk and we will produce the finest spidercloth from it."
 msgstr ""
-"Satul melegítsen, Jundlina. Opol vagyok, a legnagyobb szövő a céhben, "
-"amelyik elhagyta veled Atlantiszt és Lutast. Ígazán rossz hírt kellett "
-"hoznom: nincs több pókszövetünk. Egy darabot sem találni raktárainkban. Nem "
-"tudnál segíteni a szövőcéhnek, hogy épüljön egy szövöde és egy póktenyészet? "
-"A pókok a legfinomabb selymet termelik, mi pedig a legfinomabb pókszövetet "
-"készítjük belőle."
 
 #: ../../campaigns/atl01.wmf/scripting/texts.lua:344
 msgid ""

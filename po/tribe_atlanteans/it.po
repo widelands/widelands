@@ -6,14 +6,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4530\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2014-03-06 21:20+0000\n"
+"POT-Creation-Date: 2014-03-12 21:37+0000\n"
 "PO-Revision-Date: 2014-03-11 23:12+0000\n"
 "Last-Translator: GunChleoc <Unknown>\n"
 "Language-Team: Widelands fixxer upper\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-03-12 04:32+0000\n"
+"X-Launchpad-Export-Date: 2014-03-13 05:30+0000\n"
 "X-Generator: Launchpad (build 16963)\n"
 "X-Poedit-Country: ITALY\n"
 "Language: it\n"
@@ -248,22 +248,6 @@ msgstr ""
 msgid "Your soldiers defeated the enemy at the Small Tower"
 msgstr ""
 
-#: ../../global/militarysites/stronghold.barbarians/conf:8
-msgid "Your Stronghold discovered an aggressor."
-msgstr ""
-
-#: ../../global/militarysites/stronghold.barbarians/conf:9
-msgid "Your Stronghold is under attack."
-msgstr ""
-
-#: ../../global/militarysites/stronghold.barbarians/conf:10
-msgid "The enemy defeated your soldiers at the Stronghold"
-msgstr ""
-
-#: ../../global/militarysites/stronghold.barbarians/conf:11
-msgid "Your soldiers defeated the enemy at the Stronghold"
-msgstr ""
-
 #: ../../global/militarysites/tower.atlanteans/conf:9
 #: ../../global/militarysites/tower.empire/conf:9
 #: ../../tribes/atlanteans/tower/conf:9
@@ -307,30 +291,16 @@ msgid "Produce steel shield"
 msgstr "Produzione scudi d'acciaio"
 
 #: ../../tribes/atlanteans/armoursmithy/conf:29
-msgid ""
-"Produce steel shield (only for compatibility with old savegames (build13))"
-msgstr ""
-"Produzione scudi d'acciaio (solo per compatibilità con i vecchi salvataggi "
-"(build13))"
-
-#: ../../tribes/atlanteans/armoursmithy/conf:30
 msgid "Produce advanced shield"
 msgstr "Produzione scudi avanzati"
 
-#: ../../tribes/atlanteans/armoursmithy/conf:31
-msgid ""
-"Produce advanced shield (only for compatibility with old savegames (build13))"
-msgstr ""
-"Produce scudi avanzati (solo per compatibilità con i vecchi salvataggi "
-"(build13))"
-
-#: ../../tribes/atlanteans/armoursmithy/conf:32
+#: ../../tribes/atlanteans/armoursmithy/conf:30
 #: ../../tribes/atlanteans/bakery/conf:25
-#: ../../tribes/atlanteans/blackroot_farm/conf:26
+#: ../../tribes/atlanteans/blackroot_farm/conf:24
 #: ../../tribes/atlanteans/burners_house/conf:23
 #: ../../tribes/atlanteans/coalmine/conf:25
 #: ../../tribes/atlanteans/crystalmine/conf:30
-#: ../../tribes/atlanteans/farm/conf:28
+#: ../../tribes/atlanteans/farm/conf:26
 #: ../../tribes/atlanteans/fish_breeders_house/conf:20
 #: ../../tribes/atlanteans/fishers_house/conf:19
 #: ../../tribes/atlanteans/foresters_house/conf:20
@@ -381,7 +351,7 @@ msgstr ""
 msgid "Plant blackroot"
 msgstr "Radici nere"
 
-#: ../../tribes/atlanteans/blackroot_farm/conf:24
+#: ../../tribes/atlanteans/blackroot_farm/conf:23
 msgid "Harvest blackroot"
 msgstr "Raccolta di radici nere"
 
@@ -851,7 +821,7 @@ msgid "Dismantle Site"
 msgstr "Smantella il sito"
 
 #: ../../tribes/atlanteans/conf:148
-#: ../../tribes/atlanteans/conf:156
+#: ../../tribes/atlanteans/conf:155
 msgid "Barrier"
 msgstr "Fortino"
 
@@ -864,182 +834,178 @@ msgid "Donjon"
 msgstr "Dongione"
 
 #: ../../tribes/atlanteans/conf:151
-#: ../../tribes/atlanteans/conf:158
+#: ../../tribes/atlanteans/conf:157
 msgid "Fortress"
 msgstr "Fortezza"
 
 #: ../../tribes/atlanteans/conf:152
-#: ../../tribes/atlanteans/conf:154
+#: ../../tribes/atlanteans/conf:153
 msgid "Sentry"
 msgstr "Guardiola"
 
-#: ../../tribes/atlanteans/conf:153
-msgid "Stronghold"
-msgstr "Roccaforte"
-
-#: ../../tribes/atlanteans/conf:155
+#: ../../tribes/atlanteans/conf:154
 msgid "Barracks"
 msgstr "Caserma"
 
-#: ../../tribes/atlanteans/conf:157
-#: ../../tribes/atlanteans/conf:204
+#: ../../tribes/atlanteans/conf:156
+#: ../../tribes/atlanteans/conf:203
 msgid "Castle"
 msgstr "Castello"
 
-#: ../../tribes/atlanteans/conf:159
+#: ../../tribes/atlanteans/conf:158
 msgid "Outpost"
 msgstr "Avamposto"
 
-#: ../../tribes/atlanteans/conf:160
-#: ../../tribes/atlanteans/conf:203
+#: ../../tribes/atlanteans/conf:159
+#: ../../tribes/atlanteans/conf:202
 msgid "Tower"
 msgstr "Torre"
 
-#: ../../tribes/atlanteans/conf:163
+#: ../../tribes/atlanteans/conf:162
 msgid "Headquarters"
 msgstr "Quartier generale"
 
-#: ../../tribes/atlanteans/conf:164
+#: ../../tribes/atlanteans/conf:163
 msgid "Warehouse"
 msgstr "Magazzino"
 
-#: ../../tribes/atlanteans/conf:165
+#: ../../tribes/atlanteans/conf:164
 msgid "Port"
 msgstr "Porto"
 
-#: ../../tribes/atlanteans/conf:168
+#: ../../tribes/atlanteans/conf:167
 msgid "Quarry"
 msgstr "Cava"
 
-#: ../../tribes/atlanteans/conf:169
+#: ../../tribes/atlanteans/conf:168
 msgid "Woodcutter’s House"
 msgstr "Casa del taglialegna"
 
-#: ../../tribes/atlanteans/conf:170
+#: ../../tribes/atlanteans/conf:169
 msgid "Forester’s House"
 msgstr "Casa della guardia forestale"
 
-#: ../../tribes/atlanteans/conf:171
+#: ../../tribes/atlanteans/conf:170
 msgid "Goldweaver"
 msgstr "Tessitore d'oro"
 
-#: ../../tribes/atlanteans/conf:172
+#: ../../tribes/atlanteans/conf:171
 msgid "Fisher’s House"
 msgstr "Casa del pescatore"
 
-#: ../../tribes/atlanteans/conf:173
+#: ../../tribes/atlanteans/conf:172
 msgid "Fish Breeder’s House"
 msgstr "Casa dell'allevatore di pesci"
 
-#: ../../tribes/atlanteans/conf:174
+#: ../../tribes/atlanteans/conf:173
 msgid "Hunter’s House"
 msgstr "Casa del Cacciatore"
 
-#: ../../tribes/atlanteans/conf:175
+#: ../../tribes/atlanteans/conf:174
 msgid "Well"
 msgstr "Pozzo"
 
-#: ../../tribes/atlanteans/conf:176
+#: ../../tribes/atlanteans/conf:175
 msgid "Scout’s House"
 msgstr "Casa dell'esploratore"
 
-#: ../../tribes/atlanteans/conf:177
+#: ../../tribes/atlanteans/conf:176
 msgid "Sawmill"
 msgstr "Segheria"
 
-#: ../../tribes/atlanteans/conf:178
+#: ../../tribes/atlanteans/conf:177
 msgid "Smokery"
 msgstr "Casa dell'affumicatore"
 
-#: ../../tribes/atlanteans/conf:179
+#: ../../tribes/atlanteans/conf:178
 msgid "Mill"
 msgstr "Mulino"
 
-#: ../../tribes/atlanteans/conf:180
+#: ../../tribes/atlanteans/conf:179
 msgid "Shipyard"
 msgstr "Cantiere navale"
 
-#: ../../tribes/atlanteans/conf:181
+#: ../../tribes/atlanteans/conf:180
 msgid "Bakery"
 msgstr "Forno"
 
-#: ../../tribes/atlanteans/conf:182
+#: ../../tribes/atlanteans/conf:181
 msgid "Charcoal Burner’s House"
 msgstr "Casa del carbonaio"
 
-#: ../../tribes/atlanteans/conf:183
+#: ../../tribes/atlanteans/conf:182
 msgid "Smelting Works"
 msgstr "Fonderia"
 
-#: ../../tribes/atlanteans/conf:184
+#: ../../tribes/atlanteans/conf:183
 msgid "Toolsmithy"
 msgstr "Fucina di strumenti"
 
-#: ../../tribes/atlanteans/conf:185
+#: ../../tribes/atlanteans/conf:184
 msgid "Weapon Smithy"
 msgstr "Armaiolo"
 
-#: ../../tribes/atlanteans/conf:186
+#: ../../tribes/atlanteans/conf:185
 msgid "Armor Smithy"
 msgstr "Fucina di armature"
 
-#: ../../tribes/atlanteans/conf:187
+#: ../../tribes/atlanteans/conf:186
 msgid "Horse Farm"
 msgstr "Maneggio"
 
-#: ../../tribes/atlanteans/conf:188
+#: ../../tribes/atlanteans/conf:187
 msgid "Spider Farm"
 msgstr "Allevamento dei ragni"
 
-#: ../../tribes/atlanteans/conf:189
+#: ../../tribes/atlanteans/conf:188
 msgid "Weaving-Mill"
 msgstr "Mulino di tessitura"
 
-#: ../../tribes/atlanteans/conf:190
+#: ../../tribes/atlanteans/conf:189
 msgid "Farm"
 msgstr "Fattoria"
 
-#: ../../tribes/atlanteans/conf:191
+#: ../../tribes/atlanteans/conf:190
 msgid "Blackroot Farm"
 msgstr "Fattoria di radici nere"
 
-#: ../../tribes/atlanteans/conf:192
+#: ../../tribes/atlanteans/conf:191
 msgid "Crystal Mine"
 msgstr "Miniera di cristallo"
 
-#: ../../tribes/atlanteans/conf:193
+#: ../../tribes/atlanteans/conf:192
 msgid "Coal Mine"
 msgstr "Miniera di carbone"
 
-#: ../../tribes/atlanteans/conf:194
+#: ../../tribes/atlanteans/conf:193
 msgid "Iron Mine"
 msgstr "Miniera di ferro"
 
-#: ../../tribes/atlanteans/conf:195
+#: ../../tribes/atlanteans/conf:194
 msgid "Gold Mine"
 msgstr "Miniera d'oro"
 
-#: ../../tribes/atlanteans/conf:199
+#: ../../tribes/atlanteans/conf:198
 msgid "Guardhouse"
 msgstr "Guardiola"
 
-#: ../../tribes/atlanteans/conf:200
+#: ../../tribes/atlanteans/conf:199
 msgid "Guardhall"
 msgstr "Sala di guardia"
 
-#: ../../tribes/atlanteans/conf:201
+#: ../../tribes/atlanteans/conf:200
 msgid "High Tower"
 msgstr "Torre alta"
 
-#: ../../tribes/atlanteans/conf:202
+#: ../../tribes/atlanteans/conf:201
 msgid "Small Tower"
 msgstr "Torre piccola"
 
-#: ../../tribes/atlanteans/conf:208
+#: ../../tribes/atlanteans/conf:207
 msgid "Dungeon"
 msgstr "Segrete"
 
-#: ../../tribes/atlanteans/conf:209
+#: ../../tribes/atlanteans/conf:208
 msgid "Labyrinth"
 msgstr "Labirinto"
 
@@ -1097,58 +1063,26 @@ msgid "Sleep"
 msgstr "Dormire"
 
 #: ../../tribes/atlanteans/dungeon/conf:40
-msgid "Upgrade soldier attack 0"
-msgstr "Avanza l'attacco del soldato 0"
+msgid "Upgrade soldier attack from level 0 to level 1"
+msgstr ""
 
 #: ../../tribes/atlanteans/dungeon/conf:41
-msgid ""
-"Upgrade soldier attack 0 (only for compatibility with old savegames "
-"(build13))"
+msgid "Upgrade soldier attack from level 1 to level 2"
 msgstr ""
-"Avanza l'attacco del soldato 0 (solo per compatibilità con i vecchi "
-"salvataggi (build13))"
 
 #: ../../tribes/atlanteans/dungeon/conf:42
-msgid "Upgrade soldier attack 1"
-msgstr "Avanza l'attacco del soldato 1"
+msgid "Upgrade soldier attack from level 2 to level 3"
+msgstr ""
 
 #: ../../tribes/atlanteans/dungeon/conf:43
-msgid ""
-"Upgrade soldier attack 1 (only for compatibility with old savegames "
-"(build13))"
+msgid "Upgrade soldier attack from level 3 to level 4"
 msgstr ""
-"Avanza l'attacco del soldato 1 (solo per compatibilità con i vecchi "
-"salvataggi (build13))"
-
-#: ../../tribes/atlanteans/dungeon/conf:44
-msgid "Upgrade soldier attack 2"
-msgstr "Avanza l'attacco del soldato 2"
-
-#: ../../tribes/atlanteans/dungeon/conf:45
-msgid ""
-"Upgrade soldier attack 2 (only for compatibility with old savegames "
-"(build13))"
-msgstr ""
-"Avanza l'attacco del soldato 2 (solo per compatibilità con i vecchi "
-"salvataggi (build13))"
-
-#: ../../tribes/atlanteans/dungeon/conf:46
-msgid "Upgrade soldier attack 3"
-msgstr "Avanza l'attacco del soldato 3"
-
-#: ../../tribes/atlanteans/dungeon/conf:47
-msgid ""
-"Upgrade soldier attack 3 (only for compatibility with old savegames "
-"(build13))"
-msgstr ""
-"Avanza l'attacco del soldato 3 (solo per compatibilità con i vecchi "
-"salvataggi (build13))"
 
 #: ../../tribes/atlanteans/farm/conf:24
 msgid "Plant corn"
 msgstr "Pianta di mais"
 
-#: ../../tribes/atlanteans/farm/conf:26
+#: ../../tribes/atlanteans/farm/conf:25
 msgid "Harvest corn"
 msgstr "Raccolto di mais"
 
@@ -1213,7 +1147,9 @@ msgstr ""
 
 #: ../../tribes/atlanteans/goldore/conf:1
 msgid ""
-"Gold ore is mined in gold mines and processed to gold in smelting works."
+"Gold ore is mined in a goldmine. Smelted in a smelting works, it turns into "
+"gold which is used as a precious building material and to produce weapons "
+"and armor."
 msgstr ""
 
 #: ../../tribes/atlanteans/goldyarn/conf:1
@@ -1305,60 +1241,24 @@ msgstr ""
 "ottenere ferro."
 
 #: ../../tribes/atlanteans/labyrinth/conf:46
-msgid "Upgrade soldier defense 0"
-msgstr "Avanza la difesa del soldato 0"
+msgid "Upgrade soldier defense from level 0 to level 1"
+msgstr ""
 
 #: ../../tribes/atlanteans/labyrinth/conf:47
-msgid ""
-"Upgrade soldier defense 0 (only for compatibility with old savegames "
-"(build13))"
+msgid "Upgrade soldier defense from level 1 to level 2"
 msgstr ""
-"Avanza la difesa del soldato 0 (solo per compatibilità con i vecchi "
-"salvataggi (build13))"
 
 #: ../../tribes/atlanteans/labyrinth/conf:48
-msgid "Upgrade soldier defense 1"
-msgstr "Avanza la difesa del soldato 0"
+msgid "Upgrade soldier health from level 0 to level 1"
+msgstr ""
 
 #: ../../tribes/atlanteans/labyrinth/conf:49
-msgid ""
-"Upgrade soldier defense 1 (only for compatibility with old savegames "
-"(build13))"
+msgid "Upgrade soldier evade from level 0 to level 1"
 msgstr ""
-"Avanza la difesa del soldato 1 (solo per compatibilità con i vecchi "
-"salvataggi (build13))"
 
 #: ../../tribes/atlanteans/labyrinth/conf:50
-msgid "Upgrade soldier health 0"
+msgid "Upgrade soldier evade from level 1 to level 2"
 msgstr ""
-
-#: ../../tribes/atlanteans/labyrinth/conf:51
-msgid ""
-"Upgrade soldier health 0 (only for compatibility with old savegames "
-"(build13))"
-msgstr ""
-
-#: ../../tribes/atlanteans/labyrinth/conf:52
-msgid "Upgrade soldier evade 0"
-msgstr "Avanza la ritirata del soldato 0"
-
-#: ../../tribes/atlanteans/labyrinth/conf:53
-msgid ""
-"Upgrade soldier evade 0 (only for compatibility with old savegames (build13))"
-msgstr ""
-"Avanza la ritirata del soldato 0 (solo per compatibilità con i vecchi "
-"salvataggi (build13))"
-
-#: ../../tribes/atlanteans/labyrinth/conf:54
-msgid "Upgrade soldier evade 1"
-msgstr "Avanza la ritirata del soldato 1"
-
-#: ../../tribes/atlanteans/labyrinth/conf:55
-msgid ""
-"Upgrade soldier evade 1 (only for compatibility with old savegames (build13))"
-msgstr ""
-"Avanza la ritirata del soldato 1 (solo per compatibilità con i vecchi "
-"salvataggi (build13))"
 
 #: ../../tribes/atlanteans/light_trident/conf:1
 msgid ""
@@ -1479,15 +1379,10 @@ msgstr "Non c'è abbastanza spazio"
 
 #: ../../tribes/atlanteans/scripting/sc01_castle_village.lua:102
 msgid ""
-"Some of your starting buildings didn’t have enough room and\n"
-"weren’t built. You are at a disadvantage with this; consider restarting\n"
-"this map with a fair starting condition."
+"Some of your starting buildings didn’t have enough room and weren’t built. "
+"You are at a disadvantage with this; consider restarting this map with a "
+"fair starting condition."
 msgstr ""
-"Non vi era abbastanza spazio per costruire alcuni dei tuoi edifici di "
-"partenza e\n"
-"pertanto non sono stati costruiti. In tal modo sei in svantaggio: valuta di "
-"ricominciare\n"
-"questa mappa con una situazione di partenza più equa."
 
 #: ../../tribes/atlanteans/scythe/conf:1
 msgid ""

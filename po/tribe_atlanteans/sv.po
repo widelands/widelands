@@ -6,15 +6,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2014-03-06 21:20+0000\n"
+"POT-Creation-Date: 2014-03-12 21:37+0000\n"
 "PO-Revision-Date: 2012-04-22 06:46+0000\n"
 "Last-Translator: Patrick H. <dajgtre@gmail.com>\n"
 "Language-Team: Language <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-03-07 05:34+0000\n"
-"X-Generator: Launchpad (build 16948)\n"
+"X-Launchpad-Export-Date: 2014-03-13 05:30+0000\n"
+"X-Generator: Launchpad (build 16963)\n"
 
 #: ../../global/militarysites/barracks.empire/conf:8
 msgid "Your Barracks discovered an aggressor."
@@ -244,22 +244,6 @@ msgstr ""
 msgid "Your soldiers defeated the enemy at the Small Tower"
 msgstr ""
 
-#: ../../global/militarysites/stronghold.barbarians/conf:8
-msgid "Your Stronghold discovered an aggressor."
-msgstr ""
-
-#: ../../global/militarysites/stronghold.barbarians/conf:9
-msgid "Your Stronghold is under attack."
-msgstr ""
-
-#: ../../global/militarysites/stronghold.barbarians/conf:10
-msgid "The enemy defeated your soldiers at the Stronghold"
-msgstr ""
-
-#: ../../global/militarysites/stronghold.barbarians/conf:11
-msgid "Your soldiers defeated the enemy at the Stronghold"
-msgstr ""
-
 #: ../../global/militarysites/tower.atlanteans/conf:9
 #: ../../global/militarysites/tower.empire/conf:9
 #: ../../tribes/atlanteans/tower/conf:9
@@ -300,30 +284,16 @@ msgid "Produce steel shield"
 msgstr "Framställ stålsköld"
 
 #: ../../tribes/atlanteans/armoursmithy/conf:29
-msgid ""
-"Produce steel shield (only for compatibility with old savegames (build13))"
-msgstr ""
-"Framställ stålsköld (endast för kompatibilitet med gamla sparade spel "
-"(build13))"
-
-#: ../../tribes/atlanteans/armoursmithy/conf:30
 msgid "Produce advanced shield"
 msgstr "Framställ avancerad sköld"
 
-#: ../../tribes/atlanteans/armoursmithy/conf:31
-msgid ""
-"Produce advanced shield (only for compatibility with old savegames (build13))"
-msgstr ""
-"Framställ avancerad sköld (endast för kompatibilitet med gamla sparade spel "
-"(build13))"
-
-#: ../../tribes/atlanteans/armoursmithy/conf:32
+#: ../../tribes/atlanteans/armoursmithy/conf:30
 #: ../../tribes/atlanteans/bakery/conf:25
-#: ../../tribes/atlanteans/blackroot_farm/conf:26
+#: ../../tribes/atlanteans/blackroot_farm/conf:24
 #: ../../tribes/atlanteans/burners_house/conf:23
 #: ../../tribes/atlanteans/coalmine/conf:25
 #: ../../tribes/atlanteans/crystalmine/conf:30
-#: ../../tribes/atlanteans/farm/conf:28
+#: ../../tribes/atlanteans/farm/conf:26
 #: ../../tribes/atlanteans/fish_breeders_house/conf:20
 #: ../../tribes/atlanteans/fishers_house/conf:19
 #: ../../tribes/atlanteans/foresters_house/conf:20
@@ -369,7 +339,7 @@ msgstr ""
 msgid "Plant blackroot"
 msgstr "Plantera svartrot"
 
-#: ../../tribes/atlanteans/blackroot_farm/conf:24
+#: ../../tribes/atlanteans/blackroot_farm/conf:23
 msgid "Harvest blackroot"
 msgstr "Skörda svartrot"
 
@@ -834,7 +804,7 @@ msgid "Dismantle Site"
 msgstr ""
 
 #: ../../tribes/atlanteans/conf:148
-#: ../../tribes/atlanteans/conf:156
+#: ../../tribes/atlanteans/conf:155
 msgid "Barrier"
 msgstr "Barriär"
 
@@ -847,182 +817,178 @@ msgid "Donjon"
 msgstr "Kärntorn"
 
 #: ../../tribes/atlanteans/conf:151
-#: ../../tribes/atlanteans/conf:158
+#: ../../tribes/atlanteans/conf:157
 msgid "Fortress"
 msgstr "Borg"
 
 #: ../../tribes/atlanteans/conf:152
-#: ../../tribes/atlanteans/conf:154
+#: ../../tribes/atlanteans/conf:153
 msgid "Sentry"
 msgstr "Vaktpost"
 
-#: ../../tribes/atlanteans/conf:153
-msgid "Stronghold"
-msgstr "Litet fort"
-
-#: ../../tribes/atlanteans/conf:155
+#: ../../tribes/atlanteans/conf:154
 msgid "Barracks"
 msgstr "Barracker"
 
-#: ../../tribes/atlanteans/conf:157
-#: ../../tribes/atlanteans/conf:204
+#: ../../tribes/atlanteans/conf:156
+#: ../../tribes/atlanteans/conf:203
 msgid "Castle"
 msgstr "Slott"
 
-#: ../../tribes/atlanteans/conf:159
+#: ../../tribes/atlanteans/conf:158
 msgid "Outpost"
 msgstr "Utpost"
 
-#: ../../tribes/atlanteans/conf:160
-#: ../../tribes/atlanteans/conf:203
+#: ../../tribes/atlanteans/conf:159
+#: ../../tribes/atlanteans/conf:202
 msgid "Tower"
 msgstr "Torn"
 
-#: ../../tribes/atlanteans/conf:163
+#: ../../tribes/atlanteans/conf:162
 msgid "Headquarters"
 msgstr "Huvudkvarter"
 
-#: ../../tribes/atlanteans/conf:164
+#: ../../tribes/atlanteans/conf:163
 msgid "Warehouse"
 msgstr "Härbre"
 
-#: ../../tribes/atlanteans/conf:165
+#: ../../tribes/atlanteans/conf:164
 msgid "Port"
 msgstr ""
 
-#: ../../tribes/atlanteans/conf:168
+#: ../../tribes/atlanteans/conf:167
 msgid "Quarry"
 msgstr "Stenbrott"
 
-#: ../../tribes/atlanteans/conf:169
+#: ../../tribes/atlanteans/conf:168
 msgid "Woodcutter’s House"
 msgstr ""
 
-#: ../../tribes/atlanteans/conf:170
+#: ../../tribes/atlanteans/conf:169
 msgid "Forester’s House"
 msgstr ""
 
-#: ../../tribes/atlanteans/conf:171
+#: ../../tribes/atlanteans/conf:170
 msgid "Goldweaver"
 msgstr "Guldvävare"
 
-#: ../../tribes/atlanteans/conf:172
+#: ../../tribes/atlanteans/conf:171
 msgid "Fisher’s House"
 msgstr ""
 
-#: ../../tribes/atlanteans/conf:173
+#: ../../tribes/atlanteans/conf:172
 msgid "Fish Breeder’s House"
 msgstr ""
 
-#: ../../tribes/atlanteans/conf:174
+#: ../../tribes/atlanteans/conf:173
 msgid "Hunter’s House"
 msgstr ""
 
-#: ../../tribes/atlanteans/conf:175
+#: ../../tribes/atlanteans/conf:174
 msgid "Well"
 msgstr "Brunn"
 
-#: ../../tribes/atlanteans/conf:176
+#: ../../tribes/atlanteans/conf:175
 msgid "Scout’s House"
 msgstr ""
 
-#: ../../tribes/atlanteans/conf:177
+#: ../../tribes/atlanteans/conf:176
 msgid "Sawmill"
 msgstr "Sågverk"
 
-#: ../../tribes/atlanteans/conf:178
+#: ../../tribes/atlanteans/conf:177
 msgid "Smokery"
 msgstr "Rökeri"
 
-#: ../../tribes/atlanteans/conf:179
+#: ../../tribes/atlanteans/conf:178
 msgid "Mill"
 msgstr "Mölla"
 
-#: ../../tribes/atlanteans/conf:180
+#: ../../tribes/atlanteans/conf:179
 msgid "Shipyard"
 msgstr "Skeppsvarv"
 
-#: ../../tribes/atlanteans/conf:181
+#: ../../tribes/atlanteans/conf:180
 msgid "Bakery"
 msgstr "Bageri"
 
-#: ../../tribes/atlanteans/conf:182
+#: ../../tribes/atlanteans/conf:181
 msgid "Charcoal Burner’s House"
 msgstr ""
 
-#: ../../tribes/atlanteans/conf:183
+#: ../../tribes/atlanteans/conf:182
 msgid "Smelting Works"
 msgstr "Smältverk"
 
-#: ../../tribes/atlanteans/conf:184
+#: ../../tribes/atlanteans/conf:183
 msgid "Toolsmithy"
 msgstr "Verktygssmedja"
 
-#: ../../tribes/atlanteans/conf:185
+#: ../../tribes/atlanteans/conf:184
 msgid "Weapon Smithy"
 msgstr "Vapensmedja"
 
-#: ../../tribes/atlanteans/conf:186
+#: ../../tribes/atlanteans/conf:185
 msgid "Armor Smithy"
 msgstr ""
 
-#: ../../tribes/atlanteans/conf:187
+#: ../../tribes/atlanteans/conf:186
 msgid "Horse Farm"
 msgstr "Hästfarm"
 
-#: ../../tribes/atlanteans/conf:188
+#: ../../tribes/atlanteans/conf:187
 msgid "Spider Farm"
 msgstr ""
 
-#: ../../tribes/atlanteans/conf:189
+#: ../../tribes/atlanteans/conf:188
 msgid "Weaving-Mill"
 msgstr "Väveri"
 
-#: ../../tribes/atlanteans/conf:190
+#: ../../tribes/atlanteans/conf:189
 msgid "Farm"
 msgstr "Jordbruk"
 
-#: ../../tribes/atlanteans/conf:191
+#: ../../tribes/atlanteans/conf:190
 msgid "Blackroot Farm"
 msgstr "Svartrotsodling"
 
-#: ../../tribes/atlanteans/conf:192
+#: ../../tribes/atlanteans/conf:191
 msgid "Crystal Mine"
 msgstr "Kristallgruva"
 
-#: ../../tribes/atlanteans/conf:193
+#: ../../tribes/atlanteans/conf:192
 msgid "Coal Mine"
 msgstr "Kolgruva"
 
-#: ../../tribes/atlanteans/conf:194
+#: ../../tribes/atlanteans/conf:193
 msgid "Iron Mine"
 msgstr "Järngruva"
 
-#: ../../tribes/atlanteans/conf:195
+#: ../../tribes/atlanteans/conf:194
 msgid "Gold Mine"
 msgstr "Guldgruva"
 
-#: ../../tribes/atlanteans/conf:199
+#: ../../tribes/atlanteans/conf:198
 msgid "Guardhouse"
 msgstr "Vakthus"
 
-#: ../../tribes/atlanteans/conf:200
+#: ../../tribes/atlanteans/conf:199
 msgid "Guardhall"
 msgstr "Vaktpost"
 
-#: ../../tribes/atlanteans/conf:201
+#: ../../tribes/atlanteans/conf:200
 msgid "High Tower"
 msgstr "Högt torn"
 
-#: ../../tribes/atlanteans/conf:202
+#: ../../tribes/atlanteans/conf:201
 msgid "Small Tower"
 msgstr "Litet torn"
 
-#: ../../tribes/atlanteans/conf:208
+#: ../../tribes/atlanteans/conf:207
 msgid "Dungeon"
 msgstr "Fängelsehåla"
 
-#: ../../tribes/atlanteans/conf:209
+#: ../../tribes/atlanteans/conf:208
 msgid "Labyrinth"
 msgstr "Labyrint"
 
@@ -1074,58 +1040,26 @@ msgid "Sleep"
 msgstr "Vila"
 
 #: ../../tribes/atlanteans/dungeon/conf:40
-msgid "Upgrade soldier attack 0"
-msgstr "Uppgradera soldatattack 0"
+msgid "Upgrade soldier attack from level 0 to level 1"
+msgstr ""
 
 #: ../../tribes/atlanteans/dungeon/conf:41
-msgid ""
-"Upgrade soldier attack 0 (only for compatibility with old savegames "
-"(build13))"
+msgid "Upgrade soldier attack from level 1 to level 2"
 msgstr ""
-"Uppgradera soldatattack 0 (endast för kompatibilitet med gamla sparade spel "
-"(build13))"
 
 #: ../../tribes/atlanteans/dungeon/conf:42
-msgid "Upgrade soldier attack 1"
-msgstr "Uppgradera soldatattack 1"
+msgid "Upgrade soldier attack from level 2 to level 3"
+msgstr ""
 
 #: ../../tribes/atlanteans/dungeon/conf:43
-msgid ""
-"Upgrade soldier attack 1 (only for compatibility with old savegames "
-"(build13))"
+msgid "Upgrade soldier attack from level 3 to level 4"
 msgstr ""
-"Uppgradera soldatattack 1 (endast för kompatibilitet med gamla sparade spel "
-"(build13))"
-
-#: ../../tribes/atlanteans/dungeon/conf:44
-msgid "Upgrade soldier attack 2"
-msgstr "Uppgradera soldatattack 2"
-
-#: ../../tribes/atlanteans/dungeon/conf:45
-msgid ""
-"Upgrade soldier attack 2 (only for compatibility with old savegames "
-"(build13))"
-msgstr ""
-"Uppgradera soldatattack 2 (endast för kompatibilitet med gamla sparade spel "
-"(build13))"
-
-#: ../../tribes/atlanteans/dungeon/conf:46
-msgid "Upgrade soldier attack 3"
-msgstr "Uppgradera soldatattack 3"
-
-#: ../../tribes/atlanteans/dungeon/conf:47
-msgid ""
-"Upgrade soldier attack 3 (only for compatibility with old savegames "
-"(build13))"
-msgstr ""
-"Uppgradera soldatattack 3 (endast för kompatibilitet med gamla sparade spel "
-"(build13))"
 
 #: ../../tribes/atlanteans/farm/conf:24
 msgid "Plant corn"
 msgstr "Plantera majs"
 
-#: ../../tribes/atlanteans/farm/conf:26
+#: ../../tribes/atlanteans/farm/conf:25
 msgid "Harvest corn"
 msgstr "Skörda majs"
 
@@ -1184,7 +1118,9 @@ msgstr ""
 
 #: ../../tribes/atlanteans/goldore/conf:1
 msgid ""
-"Gold ore is mined in gold mines and processed to gold in smelting works."
+"Gold ore is mined in a goldmine. Smelted in a smelting works, it turns into "
+"gold which is used as a precious building material and to produce weapons "
+"and armor."
 msgstr ""
 
 #: ../../tribes/atlanteans/goldyarn/conf:1
@@ -1262,60 +1198,24 @@ msgid ""
 msgstr ""
 
 #: ../../tribes/atlanteans/labyrinth/conf:46
-msgid "Upgrade soldier defense 0"
-msgstr "Uppgradera soldatförsvar 0"
+msgid "Upgrade soldier defense from level 0 to level 1"
+msgstr ""
 
 #: ../../tribes/atlanteans/labyrinth/conf:47
-msgid ""
-"Upgrade soldier defense 0 (only for compatibility with old savegames "
-"(build13))"
+msgid "Upgrade soldier defense from level 1 to level 2"
 msgstr ""
-"Uppgradera soldatförsvar 0 (endast för kompatibilitet med gamla sparade spel "
-"(build13))"
 
 #: ../../tribes/atlanteans/labyrinth/conf:48
-msgid "Upgrade soldier defense 1"
-msgstr "Uppgradera soldatförsvar 1"
+msgid "Upgrade soldier health from level 0 to level 1"
+msgstr ""
 
 #: ../../tribes/atlanteans/labyrinth/conf:49
-msgid ""
-"Upgrade soldier defense 1 (only for compatibility with old savegames "
-"(build13))"
+msgid "Upgrade soldier evade from level 0 to level 1"
 msgstr ""
-"Uppgradera soldatförsvar 1 (endast för kompatibilitet med gamla sparade spel "
-"(build13))"
 
 #: ../../tribes/atlanteans/labyrinth/conf:50
-msgid "Upgrade soldier health 0"
+msgid "Upgrade soldier evade from level 1 to level 2"
 msgstr ""
-
-#: ../../tribes/atlanteans/labyrinth/conf:51
-msgid ""
-"Upgrade soldier health 0 (only for compatibility with old savegames "
-"(build13))"
-msgstr ""
-
-#: ../../tribes/atlanteans/labyrinth/conf:52
-msgid "Upgrade soldier evade 0"
-msgstr "Uppgradera undvik 0 för soldat"
-
-#: ../../tribes/atlanteans/labyrinth/conf:53
-msgid ""
-"Upgrade soldier evade 0 (only for compatibility with old savegames (build13))"
-msgstr ""
-"Uppgradera undvik 0 för soldat  (endast för kompatibilitet med gamla sparade "
-"spel (build13))"
-
-#: ../../tribes/atlanteans/labyrinth/conf:54
-msgid "Upgrade soldier evade 1"
-msgstr "Uppgradera undvik 1 för soldat"
-
-#: ../../tribes/atlanteans/labyrinth/conf:55
-msgid ""
-"Upgrade soldier evade 1 (only for compatibility with old savegames (build13))"
-msgstr ""
-"Uppgradera undvik 1 för soldat  (endast för kompatibilitet med gamla sparade "
-"spel (build13))"
 
 #: ../../tribes/atlanteans/light_trident/conf:1
 msgid ""
@@ -1413,9 +1313,9 @@ msgstr "Inte tillräckligt med plats"
 
 #: ../../tribes/atlanteans/scripting/sc01_castle_village.lua:102
 msgid ""
-"Some of your starting buildings didn’t have enough room and\n"
-"weren’t built. You are at a disadvantage with this; consider restarting\n"
-"this map with a fair starting condition."
+"Some of your starting buildings didn’t have enough room and weren’t built. "
+"You are at a disadvantage with this; consider restarting this map with a "
+"fair starting condition."
 msgstr ""
 
 #: ../../tribes/atlanteans/scythe/conf:1

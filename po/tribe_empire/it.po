@@ -6,115 +6,115 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4530\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2014-03-06 21:20+0000\n"
-"PO-Revision-Date: 2013-09-17 12:01+0000\n"
-"Last-Translator: Angelo Locritani <Unknown>\n"
+"POT-Creation-Date: 2014-03-12 21:37+0000\n"
+"PO-Revision-Date: 2014-03-12 10:21+0000\n"
+"Last-Translator: Guybrush88 <Unknown>\n"
 "Language-Team: Italiano <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-03-07 05:36+0000\n"
-"X-Generator: Launchpad (build 16948)\n"
+"X-Launchpad-Export-Date: 2014-03-13 05:32+0000\n"
+"X-Generator: Launchpad (build 16963)\n"
 
 #: ../../global/militarysites/barracks.empire/conf:8
 #: ../../tribes/empire/barracks/conf:8
 msgid "Your Barracks discovered an aggressor."
-msgstr ""
+msgstr "La tua caserma ha scoperto un aggressore."
 
 #: ../../global/militarysites/barracks.empire/conf:9
 #: ../../tribes/empire/barracks/conf:9
 msgid "Your Barracks is under attack."
-msgstr ""
+msgstr "La tua caserma è sotto attacco."
 
 #: ../../global/militarysites/barracks.empire/conf:10
 #: ../../tribes/empire/barracks/conf:10
 msgid "The enemy defeated your soldiers at the Barracks"
-msgstr ""
+msgstr "I nemici hanno sconfitto i tuoi soldati nella caserma"
 
 #: ../../global/militarysites/barracks.empire/conf:11
 #: ../../tribes/empire/barracks/conf:11
 msgid "Your soldiers defeated the enemy at the Barracks"
-msgstr ""
+msgstr "I tuoi soldati hanno sconfitto i nemici nella caserma"
 
 #: ../../global/militarysites/barrier.barbarians/conf:8
 #: ../../global/militarysites/barrier.empire/conf:8
 #: ../../tribes/empire/barrier/conf:8
 msgid "Your Barrier discovered an aggressor."
-msgstr ""
+msgstr "La tua barriera ha scoperto un aggressore."
 
 #: ../../global/militarysites/barrier.barbarians/conf:9
 #: ../../global/militarysites/barrier.empire/conf:9
 #: ../../tribes/empire/barrier/conf:9
 msgid "Your Barrier is under attack."
-msgstr ""
+msgstr "La tua barriera è sotto attacco"
 
 #: ../../global/militarysites/barrier.barbarians/conf:10
 #: ../../global/militarysites/barrier.empire/conf:10
 #: ../../tribes/empire/barrier/conf:10
 msgid "The enemy defeated your soldiers at the Barrier"
-msgstr ""
+msgstr "I nemici hanno sconfitto i tuoi soldati nella barriera"
 
 #: ../../global/militarysites/barrier.barbarians/conf:11
 #: ../../global/militarysites/barrier.empire/conf:11
 #: ../../tribes/empire/barrier/conf:11
 msgid "Your soldiers defeated the enemy at the Barrier"
-msgstr ""
+msgstr "I tuoi soldati hanno sconfitto i nemici nella barriera"
 
 #: ../../global/militarysites/castle.atlanteans/conf:8
 #: ../../global/militarysites/castle.empire/conf:8
 #: ../../tribes/empire/castle/conf:9
 msgid "Your Castle discovered an aggressor."
-msgstr ""
+msgstr "Il tuo castello ha scoperto un aggressore."
 
 #: ../../global/militarysites/castle.atlanteans/conf:9
 #: ../../global/militarysites/castle.empire/conf:9
 #: ../../tribes/empire/castle/conf:10
 msgid "Your Castle is under attack."
-msgstr ""
+msgstr "Il tuo castello è sotto attacco."
 
 #: ../../global/militarysites/castle.atlanteans/conf:10
 #: ../../global/militarysites/castle.empire/conf:10
 #: ../../tribes/empire/castle/conf:11
 msgid "The enemy defeated your soldiers at the Castle"
-msgstr ""
+msgstr "I nemici hanno sconfitto i tuoi soldati nel castello"
 
 #: ../../global/militarysites/castle.atlanteans/conf:11
 #: ../../global/militarysites/castle.empire/conf:11
 #: ../../tribes/empire/castle/conf:12
 msgid "Your soldiers defeated the enemy at the Castle"
-msgstr ""
+msgstr "I tuoi soldati hanno sconfitto i nemici nel castello"
 
 #: ../../global/militarysites/citadel.barbarians/conf:8
 msgid "Your Citadel discovered an aggressor."
-msgstr ""
+msgstr "La tua roccaforte ha scoperto un aggressore."
 
 #: ../../global/militarysites/citadel.barbarians/conf:9
 msgid "Your Citadel is under attack."
-msgstr ""
+msgstr "La tua roccaforte è sotto attacco."
 
 #: ../../global/militarysites/citadel.barbarians/conf:10
 msgid "The enemy defeated your soldiers at the Citadel"
-msgstr ""
+msgstr "I nemici hanno sconfitto i tuoi soldati nella roccaforte"
 
 #: ../../global/militarysites/citadel.barbarians/conf:11
 msgid "Your soldiers defeated the enemy at the Citadel"
-msgstr ""
+msgstr "I tuoi soldati hanno sconfitto i nemici nella roccaforte"
 
 #: ../../global/militarysites/donjon.barbarians/conf:9
 msgid "Your Donjon discovered an aggressor."
-msgstr ""
+msgstr "Il tuo donjon ha scoperto un aggressore."
 
 #: ../../global/militarysites/donjon.barbarians/conf:10
 msgid "Your Donjon is under attack."
-msgstr ""
+msgstr "Il tuo donjon è sotto attacco."
 
 #: ../../global/militarysites/donjon.barbarians/conf:11
 msgid "The enemy defeated your soldiers at the Donjon"
-msgstr ""
+msgstr "I nemici hanno sconfitto i tuoi soldati nel donjon"
 
 #: ../../global/militarysites/donjon.barbarians/conf:12
 msgid "Your soldiers defeated the enemy at the Donjon"
-msgstr ""
+msgstr "I tuoi soldati hanno sconfitto i nemici nel donjon"
 
 #: ../../global/militarysites/fortress.barbarians/conf:8
 #: ../../global/militarysites/fortress.empire/conf:8
@@ -248,22 +248,6 @@ msgstr ""
 msgid "Your soldiers defeated the enemy at the Small Tower"
 msgstr ""
 
-#: ../../global/militarysites/stronghold.barbarians/conf:8
-msgid "Your Stronghold discovered an aggressor."
-msgstr ""
-
-#: ../../global/militarysites/stronghold.barbarians/conf:9
-msgid "Your Stronghold is under attack."
-msgstr ""
-
-#: ../../global/militarysites/stronghold.barbarians/conf:10
-msgid "The enemy defeated your soldiers at the Stronghold"
-msgstr ""
-
-#: ../../global/militarysites/stronghold.barbarians/conf:11
-msgid "Your soldiers defeated the enemy at the Stronghold"
-msgstr ""
-
 #: ../../global/militarysites/tower.atlanteans/conf:9
 #: ../../global/militarysites/tower.empire/conf:9
 #: ../../tribes/empire/tower/conf:8
@@ -303,16 +287,8 @@ msgstr "Dormire"
 
 #: ../../tribes/empire/arena/conf:30
 #: ../../tribes/empire/colosseum/conf:36
-msgid "Upgrade soldier evade 0"
-msgstr "Avanza la ritirata del soldato 0"
-
-#: ../../tribes/empire/arena/conf:31
-#: ../../tribes/empire/colosseum/conf:37
-msgid ""
-"Upgrade soldier evade 0 (only for compatibility with old savegames (build13))"
+msgid "Upgrade soldier evade from level 0 to level 1"
 msgstr ""
-"Avanza la ritirata del soldato 0 (solo per compatibilità con i vecchi "
-"salvataggi (build13))"
 
 #: ../../tribes/empire/armour/conf:1
 msgid ""
@@ -351,18 +327,18 @@ msgstr ""
 #: ../../tribes/empire/deep_marblemine/conf:27
 #: ../../tribes/empire/deep_oremine/conf:26
 #: ../../tribes/empire/donkeyfarm/conf:25
-#: ../../tribes/empire/farm/conf:27
+#: ../../tribes/empire/farm/conf:25
 #: ../../tribes/empire/fishers_house/conf:20
 #: ../../tribes/empire/foresters_house/conf:20
 #: ../../tribes/empire/goldmine/conf:26
 #: ../../tribes/empire/hunters_house/conf:19
 #: ../../tribes/empire/inn/conf:27
 #: ../../tribes/empire/lumberjacks_house/conf:20
-#: ../../tribes/empire/marblemine/conf:30
+#: ../../tribes/empire/marblemine/conf:28
 #: ../../tribes/empire/mill/conf:24
 #: ../../tribes/empire/oremine/conf:26
 #: ../../tribes/empire/piggery/conf:25
-#: ../../tribes/empire/quarry/conf:24
+#: ../../tribes/empire/quarry/conf:22
 #: ../../tribes/empire/sawmill/conf:26
 #: ../../tribes/empire/scouts_house/conf:20
 #: ../../tribes/empire/sheepfarm/conf:24
@@ -371,7 +347,7 @@ msgstr ""
 #: ../../tribes/empire/stonemasons_house/conf:24
 #: ../../tribes/empire/tavern/conf:27
 #: ../../tribes/empire/toolsmithy/conf:49
-#: ../../tribes/empire/vineyard/conf:27
+#: ../../tribes/empire/vineyard/conf:25
 #: ../../tribes/empire/weaponsmithy/conf:38
 #: ../../tribes/empire/weaving-mill/conf:20
 #: ../../tribes/empire/well/conf:20
@@ -469,16 +445,9 @@ msgid ""
 "charcoal burner out of logs."
 msgstr ""
 
-#: ../../tribes/empire/colosseum/conf:38
-msgid "Upgrade soldier evade 1"
-msgstr "Avanza la ritirata del soldato 1"
-
-#: ../../tribes/empire/colosseum/conf:39
-msgid ""
-"Upgrade soldier evade 1 (only for compatibility with old savegames (build13))"
+#: ../../tribes/empire/colosseum/conf:37
+msgid "Upgrade soldier evade from level 1 to level 2"
 msgstr ""
-"Avanzamento ritirata del soldato 1 (solo per compatibilità con i vecchi "
-"salvataggi (build13))"
 
 #: ../../tribes/empire/conf:4
 msgid "The Widelands Development Team"
@@ -893,7 +862,7 @@ msgid "Dismantle Site"
 msgstr "Smantella il sito"
 
 #: ../../tribes/empire/conf:149
-#: ../../tribes/empire/conf:212
+#: ../../tribes/empire/conf:211
 msgid "Castle"
 msgstr "Castello"
 
@@ -914,12 +883,12 @@ msgid "Small Tower"
 msgstr "Torre piccola"
 
 #: ../../tribes/empire/conf:154
-#: ../../tribes/empire/conf:211
+#: ../../tribes/empire/conf:210
 msgid "Tower"
 msgstr "Torre"
 
 #: ../../tribes/empire/conf:155
-#: ../../tribes/empire/conf:209
+#: ../../tribes/empire/conf:208
 msgid "Barrier"
 msgstr "Fortino"
 
@@ -932,200 +901,196 @@ msgid "Donjon"
 msgstr "Dongione"
 
 #: ../../tribes/empire/conf:158
-#: ../../tribes/empire/conf:213
+#: ../../tribes/empire/conf:212
 msgid "Fortress"
 msgstr "Fortezza"
 
 #: ../../tribes/empire/conf:159
-#: ../../tribes/empire/conf:207
+#: ../../tribes/empire/conf:206
 msgid "Sentry"
 msgstr "Guardiola"
 
-#: ../../tribes/empire/conf:160
-msgid "Stronghold"
-msgstr "Roccaforte"
-
-#: ../../tribes/empire/conf:163
+#: ../../tribes/empire/conf:162
 msgid "Headquarters"
 msgstr "Quartier generale"
 
-#: ../../tribes/empire/conf:164
+#: ../../tribes/empire/conf:163
 msgid "Headquarters Shipwreck"
 msgstr ""
 
-#: ../../tribes/empire/conf:165
+#: ../../tribes/empire/conf:164
 msgid "Warehouse"
 msgstr "Magazzino"
 
-#: ../../tribes/empire/conf:166
+#: ../../tribes/empire/conf:165
 msgid "Port"
 msgstr "Porto"
 
-#: ../../tribes/empire/conf:169
+#: ../../tribes/empire/conf:168
 msgid "Quarry"
 msgstr "Cava"
 
-#: ../../tribes/empire/conf:170
+#: ../../tribes/empire/conf:169
 msgid "Lumberjack’s House"
 msgstr ""
 
-#: ../../tribes/empire/conf:171
+#: ../../tribes/empire/conf:170
 msgid "Forester’s House"
 msgstr ""
 
-#: ../../tribes/empire/conf:172
+#: ../../tribes/empire/conf:171
 msgid "Fisher’s House"
 msgstr ""
 
-#: ../../tribes/empire/conf:173
+#: ../../tribes/empire/conf:172
 msgid "Hunter’s House"
 msgstr ""
 
-#: ../../tribes/empire/conf:174
+#: ../../tribes/empire/conf:173
 msgid "Well"
 msgstr "Pozzo"
 
-#: ../../tribes/empire/conf:175
+#: ../../tribes/empire/conf:174
 msgid "Scout’s House"
 msgstr ""
 
-#: ../../tribes/empire/conf:176
+#: ../../tribes/empire/conf:175
 msgid "Stonemason’s House"
 msgstr ""
 
-#: ../../tribes/empire/conf:177
+#: ../../tribes/empire/conf:176
 msgid "Sawmill"
 msgstr "Segheria"
 
-#: ../../tribes/empire/conf:178
+#: ../../tribes/empire/conf:177
 msgid "Mill"
 msgstr "Mulino"
 
-#: ../../tribes/empire/conf:179
+#: ../../tribes/empire/conf:178
 msgid "Bakery"
 msgstr "Forno"
 
-#: ../../tribes/empire/conf:180
+#: ../../tribes/empire/conf:179
 msgid "Brewery"
 msgstr "Birreria"
 
-#: ../../tribes/empire/conf:181
+#: ../../tribes/empire/conf:180
 msgid "Vineyard"
 msgstr "Vigna"
 
-#: ../../tribes/empire/conf:182
+#: ../../tribes/empire/conf:181
 msgid "Winery"
 msgstr "Azienda vinicola"
 
-#: ../../tribes/empire/conf:183
+#: ../../tribes/empire/conf:182
 msgid "Inn"
 msgstr "Locanda"
 
-#: ../../tribes/empire/conf:184
+#: ../../tribes/empire/conf:183
 msgid "Tavern"
 msgstr "Taverna"
 
-#: ../../tribes/empire/conf:185
+#: ../../tribes/empire/conf:184
 msgid "Charcoal Burner"
 msgstr "Carbonaio"
 
-#: ../../tribes/empire/conf:186
+#: ../../tribes/empire/conf:185
 msgid "Smelting Works"
 msgstr "Fonderia"
 
-#: ../../tribes/empire/conf:187
+#: ../../tribes/empire/conf:186
 msgid "Shipyard"
 msgstr "Cantiere navale"
 
-#: ../../tribes/empire/conf:188
+#: ../../tribes/empire/conf:187
 msgid "Toolsmithy"
 msgstr "Fucina di strumenti"
 
-#: ../../tribes/empire/conf:189
+#: ../../tribes/empire/conf:188
 msgid "Armor Smithy"
 msgstr ""
 
-#: ../../tribes/empire/conf:190
+#: ../../tribes/empire/conf:189
 msgid "Donkey Farm"
 msgstr ""
 
-#: ../../tribes/empire/conf:191
+#: ../../tribes/empire/conf:190
 msgid "Sheep Farm"
 msgstr ""
 
-#: ../../tribes/empire/conf:192
+#: ../../tribes/empire/conf:191
 msgid "Weaving Mill"
 msgstr "Mulino di tessitura"
 
-#: ../../tribes/empire/conf:193
+#: ../../tribes/empire/conf:192
 msgid "Piggery"
 msgstr "Porcilaia"
 
-#: ../../tribes/empire/conf:194
+#: ../../tribes/empire/conf:193
 msgid "Farm"
 msgstr "Fattoria"
 
-#: ../../tribes/empire/conf:195
+#: ../../tribes/empire/conf:194
 msgid "Weapon Smithy"
 msgstr "Armaiolo"
 
-#: ../../tribes/empire/conf:196
+#: ../../tribes/empire/conf:195
 msgid "Deep Marble Mine"
 msgstr "Miniera di marmo profonda"
 
-#: ../../tribes/empire/conf:197
+#: ../../tribes/empire/conf:196
 msgid "Marble Mine"
 msgstr "Miniera di marmo"
 
-#: ../../tribes/empire/conf:198
+#: ../../tribes/empire/conf:197
 msgid "Deep Coal Mine"
 msgstr "Miniera di carbone profonda"
 
-#: ../../tribes/empire/conf:199
+#: ../../tribes/empire/conf:198
 msgid "Coal Mine"
 msgstr "Miniera di carbone"
 
-#: ../../tribes/empire/conf:200
+#: ../../tribes/empire/conf:199
 msgid "Deep Iron Ore Mine"
 msgstr "Miniera di ferro profonda"
 
-#: ../../tribes/empire/conf:201
+#: ../../tribes/empire/conf:200
 msgid "Iron Ore Mine"
 msgstr "Miniera di ferro"
 
-#: ../../tribes/empire/conf:202
+#: ../../tribes/empire/conf:201
 msgid "Deep Gold Mine"
 msgstr "Profonda miniera d'oro"
 
-#: ../../tribes/empire/conf:203
+#: ../../tribes/empire/conf:202
 msgid "Gold Mine"
 msgstr "Miniera d'oro"
 
-#: ../../tribes/empire/conf:208
+#: ../../tribes/empire/conf:207
 msgid "Barracks"
 msgstr "Caserma"
 
-#: ../../tribes/empire/conf:210
+#: ../../tribes/empire/conf:209
 msgid "Outpost"
 msgstr "Avamposto"
 
-#: ../../tribes/empire/conf:217
+#: ../../tribes/empire/conf:216
 msgid "Colosseum"
 msgstr "Colosseo"
 
-#: ../../tribes/empire/conf:218
+#: ../../tribes/empire/conf:217
 msgid "Arena"
 msgstr "Arena"
 
-#: ../../tribes/empire/conf:219
+#: ../../tribes/empire/conf:218
 msgid "Training Camp"
 msgstr ""
 
-#: ../../tribes/empire/conf:222
+#: ../../tribes/empire/conf:221
 msgid "Headquarters Medium"
 msgstr ""
 
-#: ../../tribes/empire/conf:223
+#: ../../tribes/empire/conf:222
 msgid "Castle Village"
 msgstr ""
 
@@ -1141,7 +1106,7 @@ msgstr "Alleva carini ed utilissimi asini"
 msgid "Plant wheat"
 msgstr "Pianta di grano"
 
-#: ../../tribes/empire/farm/conf:25
+#: ../../tribes/empire/farm/conf:24
 msgid "Harvest wheat"
 msgstr "Raccolto di grano"
 
@@ -1202,7 +1167,10 @@ msgid ""
 msgstr ""
 
 #: ../../tribes/empire/goldstone/conf:1
-msgid "Gold Ore is mined in goldmines and processed at the smelting works."
+msgid ""
+"Gold ore is mined in a goldmine. Smelted in a smelting works, it turns into "
+"gold which is used as a precious building material and to produce weapons "
+"and armor."
 msgstr ""
 
 #: ../../tribes/empire/grape/conf:1
@@ -1302,26 +1270,14 @@ msgid ""
 msgstr ""
 
 #: ../../tribes/empire/marblemine/conf:26
-#: ../../tribes/empire/quarry/conf:22
+#: ../../tribes/empire/quarry/conf:21
 msgid "Mine marble"
 msgstr "Miniera di marmo"
 
 #: ../../tribes/empire/marblemine/conf:27
-#: ../../tribes/empire/quarry/conf:23
-msgid "Mine marble (only for compatibility with old savegames (build13))"
-msgstr ""
-"Miniera di marmo (solo per compatibilità con i vecchi salvataggi (build13))"
-
-#: ../../tribes/empire/marblemine/conf:28
 #: ../../tribes/empire/quarry/conf:20
 msgid "Mine stone"
 msgstr "Miniera di pietra"
-
-#: ../../tribes/empire/marblemine/conf:29
-#: ../../tribes/empire/quarry/conf:21
-msgid "Mine stone (only for compatibility with old savegames (build13))"
-msgstr ""
-"Miniera di pietra (solo per compatibilità con i vecchi salvataggi (build13))"
 
 #: ../../tribes/empire/master-miner/conf:1
 #: ../../tribes/empire/miner/conf:1
@@ -1405,9 +1361,9 @@ msgstr "Non c'è abbastanza spazio"
 
 #: ../../tribes/empire/scripting/sc01_castle_village.lua:120
 msgid ""
-"Some of your starting buildings didn’t have enough room and \n"
-"weren’t built. You are at a disadvantage with this; consider restarting \n"
-"this map with a fair starting condition."
+"Some of your starting buildings didn’t have enough room and weren’t built. "
+"You are at a disadvantage with this; consider restarting this map with a "
+"fair starting condition."
 msgstr ""
 
 #: ../../tribes/empire/scythe/conf:1
@@ -1528,91 +1484,35 @@ msgid "Trains the soldiers."
 msgstr "Allena i soldati."
 
 #: ../../tribes/empire/trainingscamp/conf:47
-msgid "Upgrade soldier attack 0"
-msgstr "Avanza l'attacco del soldato 0"
+msgid "Upgrade soldier attack from level 0 to level 1"
+msgstr ""
 
 #: ../../tribes/empire/trainingscamp/conf:48
-msgid ""
-"Upgrade soldier attack 0 (only for compatibility with old savegames "
-"(build13))"
+msgid "Upgrade soldier attack from level 1 to level 2"
 msgstr ""
-"Avanza l'attacco del soldato 0 (solo per compatibilità con i vecchi "
-"salvataggi (build13))"
 
 #: ../../tribes/empire/trainingscamp/conf:49
-msgid "Upgrade soldier attack 1"
-msgstr "Avanza l'attacco del soldato 1"
+msgid "Upgrade soldier attack from level 2 to level 3"
+msgstr ""
 
 #: ../../tribes/empire/trainingscamp/conf:50
-msgid ""
-"Upgrade soldier attack 1 (only for compatibility with old savegames "
-"(build13))"
+msgid "Upgrade soldier attack from level 3 to level 4"
 msgstr ""
-"Avanza l'attacco del soldato 1 (solo per compatibilità con i vecchi "
-"salvataggi (build13))"
 
 #: ../../tribes/empire/trainingscamp/conf:51
-msgid "Upgrade soldier attack 2"
-msgstr "Avanza l'attacco del soldato 2"
+msgid "Upgrade soldier health from level 0 to level 1"
+msgstr ""
 
 #: ../../tribes/empire/trainingscamp/conf:52
-msgid ""
-"Upgrade soldier attack 2 (only for compatibility with old savegames "
-"(build13))"
+msgid "Upgrade soldier health from level 1 to level 2"
 msgstr ""
-"Avanza l'attacco del soldato 2 (solo per compatibilità con i vecchi "
-"salvataggi (build13))"
 
 #: ../../tribes/empire/trainingscamp/conf:53
-msgid "Upgrade soldier attack 3"
-msgstr "Avanza l'attacco del soldato 3"
+msgid "Upgrade soldier health from level 2 to level 3"
+msgstr ""
 
 #: ../../tribes/empire/trainingscamp/conf:54
-msgid ""
-"Upgrade soldier attack 3 (only for compatibility with old savegames "
-"(build13))"
-msgstr ""
-"Avanza l'attacco del soldato 3 (solo per compatibilità con i vecchi "
-"salvataggi (build13))"
-
-#: ../../tribes/empire/trainingscamp/conf:55
-msgid "Upgrade soldier health 0"
-msgstr ""
-
-#: ../../tribes/empire/trainingscamp/conf:56
-msgid ""
-"Upgrade soldier health 0 (only for compatibility with old savegames "
-"(build13))"
-msgstr ""
-
-#: ../../tribes/empire/trainingscamp/conf:57
-msgid "Upgrade soldier health 1"
-msgstr ""
-
-#: ../../tribes/empire/trainingscamp/conf:58
-msgid ""
-"Upgrade soldier health 1 (only for compatibility with old savegames "
-"(build13))"
-msgstr ""
-
-#: ../../tribes/empire/trainingscamp/conf:59
-msgid "Upgrade soldier health 2"
-msgstr ""
-
-#: ../../tribes/empire/trainingscamp/conf:60
-msgid ""
-"Upgrade soldier health 2 (only for compatibility with old savegames "
-"(build13))"
-msgstr ""
-
-#: ../../tribes/empire/trainingscamp/conf:61
-msgid "Upgrade soldier health 3"
-msgstr ""
-
-#: ../../tribes/empire/trainingscamp/conf:62
-msgid ""
-"Upgrade soldier health 3 (only for compatibility with old savegames "
-"(build13))"
+msgid "Upgrade soldier health from level 3 to level 4"
 msgstr ""
 
 #: ../../tribes/empire/trunk/conf:1
@@ -1630,7 +1530,7 @@ msgstr "Cresci vigna."
 msgid "Plant vine"
 msgstr "Pianta vigna"
 
-#: ../../tribes/empire/vineyard/conf:25
+#: ../../tribes/empire/vineyard/conf:24
 msgid "Harvest vine"
 msgstr "Raccolto vino"
 

@@ -1,21 +1,22 @@
 # Widelands po/cs_CZ/tribes/atlanteans.po
 # Copyright (C) 2009 Widelands Development Team
 # Markus7cz <markus7cz@gmail.com>, 2008.
-#
+# GunChleoc <fios@foramnagaidhlig.net>, 2014.
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4888\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2014-03-06 21:20+0000\n"
-"PO-Revision-Date: 2014-01-02 20:12+0000\n"
-"Last-Translator: Jiří Locker <jiri.locker@gmail.com>\n"
-"Language-Team: Czech <widelands-public@lists.sourceforge.net>\n"
+"POT-Creation-Date: 2014-03-12 21:37+0000\n"
+"PO-Revision-Date: 2014-03-13 01:31+0000\n"
+"Last-Translator: GunChleoc <Unknown>\n"
+"Language-Team: Widelands fixxer upper\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-03-07 05:33+0000\n"
-"X-Generator: Launchpad (build 16948)\n"
+"X-Launchpad-Export-Date: 2014-03-13 05:29+0000\n"
+"X-Generator: Launchpad (build 16963)\n"
 "X-Poedit-Country: CZECH REPUBLIC\n"
+"Language: cs\n"
 "X-Poedit-Language: Czech\n"
 "X-Poedit-SourceCharset: utf-8\n"
 
@@ -247,22 +248,6 @@ msgstr ""
 msgid "Your soldiers defeated the enemy at the Small Tower"
 msgstr ""
 
-#: ../../global/militarysites/stronghold.barbarians/conf:8
-msgid "Your Stronghold discovered an aggressor."
-msgstr ""
-
-#: ../../global/militarysites/stronghold.barbarians/conf:9
-msgid "Your Stronghold is under attack."
-msgstr ""
-
-#: ../../global/militarysites/stronghold.barbarians/conf:10
-msgid "The enemy defeated your soldiers at the Stronghold"
-msgstr ""
-
-#: ../../global/militarysites/stronghold.barbarians/conf:11
-msgid "Your soldiers defeated the enemy at the Stronghold"
-msgstr ""
-
 #: ../../global/militarysites/tower.atlanteans/conf:9
 #: ../../global/militarysites/tower.empire/conf:9
 #: ../../tribes/atlanteans/tower/conf:9
@@ -293,40 +278,29 @@ msgid ""
 "are produced in the armor smithy and used in the labyrinth – together with "
 "food – to train soldiers from Defense level 1 to level 2."
 msgstr ""
+"Tyto vylepšené štíty používají nejlepší atlantidští vojáci. Vyrábějí se v "
+"platnéřství a používají se v kobkách - společně s jídlem - k výcviků vojáků "
+"(zlepšení obrany z úrovně 1 na úroveň 2)."
 
 #: ../../tribes/atlanteans/armoursmith/conf:1
 msgid "Produces armor for the soldiers."
-msgstr ""
+msgstr "Vyrábí zbroj pro vojáky."
 
 #: ../../tribes/atlanteans/armoursmithy/conf:28
 msgid "Produce steel shield"
 msgstr "Vyrobit ocelový štít"
 
 #: ../../tribes/atlanteans/armoursmithy/conf:29
-msgid ""
-"Produce steel shield (only for compatibility with old savegames (build13))"
-msgstr ""
-"Vyrobit ocelový štít (pouze pro kompatibilitu se starými uloženými hrami "
-"(build 13))"
-
-#: ../../tribes/atlanteans/armoursmithy/conf:30
 msgid "Produce advanced shield"
 msgstr "Vyrobit vylepšený štít"
 
-#: ../../tribes/atlanteans/armoursmithy/conf:31
-msgid ""
-"Produce advanced shield (only for compatibility with old savegames (build13))"
-msgstr ""
-"Vyrobit vylepšený štít (pouze pro kompatibilitu se starými uloženými hrami "
-"(build 13))"
-
-#: ../../tribes/atlanteans/armoursmithy/conf:32
+#: ../../tribes/atlanteans/armoursmithy/conf:30
 #: ../../tribes/atlanteans/bakery/conf:25
-#: ../../tribes/atlanteans/blackroot_farm/conf:26
+#: ../../tribes/atlanteans/blackroot_farm/conf:24
 #: ../../tribes/atlanteans/burners_house/conf:23
 #: ../../tribes/atlanteans/coalmine/conf:25
 #: ../../tribes/atlanteans/crystalmine/conf:30
-#: ../../tribes/atlanteans/farm/conf:28
+#: ../../tribes/atlanteans/farm/conf:26
 #: ../../tribes/atlanteans/fish_breeders_house/conf:20
 #: ../../tribes/atlanteans/fishers_house/conf:19
 #: ../../tribes/atlanteans/foresters_house/conf:20
@@ -360,6 +334,8 @@ msgid ""
 "The bread paddle is the tool of the baker, each baker needs one. It is "
 "produced by the toolsmith."
 msgstr ""
+"Sázecí lopata je nářadí pekaře a každý pekař potřebuje svoji. Vyrábí se v "
+"dílně."
 
 #: ../../tribes/atlanteans/blackroot/conf:1
 msgid ""
@@ -367,12 +343,15 @@ msgid ""
 "processed in mills. The Atlanteans like their strong taste and use their "
 "flour for making bread."
 msgstr ""
+"Rozrazil je speciální druh koření pěstovaný v pěstírně koření a zpracovaný "
+"ve mlýně. Atlantiďané mají rádi jeho silnou chuť a používají jej drcený jako "
+"přísadu při přípravě chleba."
 
 #: ../../tribes/atlanteans/blackroot_farm/conf:22
 msgid "Plant blackroot"
 msgstr "Zasít rozrazil"
 
-#: ../../tribes/atlanteans/blackroot_farm/conf:24
+#: ../../tribes/atlanteans/blackroot_farm/conf:23
 msgid "Harvest blackroot"
 msgstr "Sklidit rozrazil"
 
@@ -400,11 +379,11 @@ msgstr ""
 
 #: ../../tribes/atlanteans/bucket/conf:1
 msgid "Big buckets for the fish breeder – produced by the toolsmith."
-msgstr ""
+msgstr "Velké kýble pro porybného - vyrábí se v dílně."
 
 #: ../../tribes/atlanteans/builder/conf:1
 msgid "Works at construction sites to raise new buildings."
-msgstr ""
+msgstr "Pracuje na stavbách a staví nové budovy."
 
 #: ../../tribes/atlanteans/burner/conf:1
 msgid "Burns coal."
@@ -446,23 +425,23 @@ msgstr "Popel"
 
 #: ../../tribes/atlanteans/conf:34
 msgid "Blackroot Field"
-msgstr ""
+msgstr "Pole rozrazilu"
 
 #: ../../tribes/atlanteans/conf:35
 msgid "Blackroot Field (harvested)"
-msgstr ""
+msgstr "Sklizené pole rozrazilu"
 
 #: ../../tribes/atlanteans/conf:36
 msgid "Blackroot Field (medium)"
-msgstr ""
+msgstr "Střední pole rozrazilu"
 
 #: ../../tribes/atlanteans/conf:37
 msgid "Blackroot Field (small)"
-msgstr ""
+msgstr "Malé pole rozrazilu"
 
 #: ../../tribes/atlanteans/conf:38
 msgid "Blackroot Field (tiny)"
-msgstr ""
+msgstr "Maličké pole rozrazilu"
 
 #: ../../tribes/atlanteans/conf:39
 msgid "Cornfield"
@@ -470,67 +449,67 @@ msgstr "Kukuřičné pole"
 
 #: ../../tribes/atlanteans/conf:40
 msgid "Cornfield (harvested)"
-msgstr ""
+msgstr "Sklizené kukuřičné pole"
 
 #: ../../tribes/atlanteans/conf:41
 msgid "Cornfield (medium)"
-msgstr ""
+msgstr "Střední kukuřičné pole"
 
 #: ../../tribes/atlanteans/conf:42
 msgid "Cornfield (small)"
-msgstr ""
+msgstr "Malé kukuřičné pole"
 
 #: ../../tribes/atlanteans/conf:43
 msgid "Cornfield (tiny)"
-msgstr ""
+msgstr "Maličké kukuřičné pole"
 
 #: ../../tribes/atlanteans/conf:44
 msgid "Destroyed Building"
-msgstr ""
+msgstr "Zničená budova"
 
 #: ../../tribes/atlanteans/conf:45
 msgid "Resource indicator: Coal (little)"
-msgstr ""
+msgstr "Ukazatel zdroje málo uhlí"
 
 #: ../../tribes/atlanteans/conf:46
 msgid "Resource indicator: Coal (much)"
-msgstr ""
+msgstr "Ukazatel zdroje hodně uhlí"
 
 #: ../../tribes/atlanteans/conf:47
 msgid "Resource indicator: Gold (little)"
-msgstr ""
+msgstr "Ukazatel zdroje málo zlata"
 
 #: ../../tribes/atlanteans/conf:48
 msgid "Resource indicator: Gold (much)"
-msgstr ""
+msgstr "Ukazatel zdroje hodně zlata"
 
 #: ../../tribes/atlanteans/conf:49
 msgid "Resource indicator: Granite (little)"
-msgstr ""
+msgstr "Surovinový ukazatel nedostatku pšenice"
 
 #: ../../tribes/atlanteans/conf:50
 msgid "Resource indicator: Granite (much)"
-msgstr ""
+msgstr "Surovinový ukazatel přebytku pšenice"
 
 #: ../../tribes/atlanteans/conf:51
 msgid "Resource indicator: Iron (little)"
-msgstr ""
+msgstr "Ukazatel zdroje málo železa"
 
 #: ../../tribes/atlanteans/conf:52
 msgid "Resource indicator: Iron (much)"
-msgstr ""
+msgstr "Ukazatel zdroje hodně železa"
 
 #: ../../tribes/atlanteans/conf:53
 msgid "Resource indicator: No resource"
-msgstr ""
+msgstr "Ukazatel zdroje žádný zdroj"
 
 #: ../../tribes/atlanteans/conf:54
 msgid "Resource indicator: Water"
-msgstr ""
+msgstr "Ukazatel zdroje voda"
 
 #: ../../tribes/atlanteans/conf:55
 msgid "Ship Construction Site"
-msgstr ""
+msgstr "Rozestavěná loď"
 
 #: ../../tribes/atlanteans/conf:58
 msgid "Advanced Shield"
@@ -630,7 +609,7 @@ msgstr "Železo"
 
 #: ../../tribes/atlanteans/conf:82
 msgid "Light Trident"
-msgstr ""
+msgstr "Lehký trojzubec"
 
 #: ../../tribes/atlanteans/conf:83
 msgid "Long Trident"
@@ -670,11 +649,11 @@ msgstr "Lopata"
 
 #: ../../tribes/atlanteans/conf:92
 msgid "Smoked Fish"
-msgstr ""
+msgstr "Uzená ryba"
 
 #: ../../tribes/atlanteans/conf:93
 msgid "Smoked Meat"
-msgstr ""
+msgstr "Uzené maso"
 
 #: ../../tribes/atlanteans/conf:94
 msgid "Spidercloth"
@@ -722,7 +701,7 @@ msgstr "Voják"
 
 #: ../../tribes/atlanteans/conf:111
 msgid "Armorsmith"
-msgstr ""
+msgstr "Platnéř"
 
 #: ../../tribes/atlanteans/conf:112
 msgid "Baker"
@@ -730,7 +709,7 @@ msgstr "Pekař"
 
 #: ../../tribes/atlanteans/conf:113
 msgid "Blackroot Farmer"
-msgstr ""
+msgstr "Pěstitel koření"
 
 #: ../../tribes/atlanteans/conf:114
 msgid "Builder"
@@ -790,7 +769,7 @@ msgstr "Uzenář"
 
 #: ../../tribes/atlanteans/conf:128
 msgid "Spider Breeder"
-msgstr ""
+msgstr "Chovatel pavouků"
 
 #: ../../tribes/atlanteans/conf:129
 msgid "Stonecutter"
@@ -837,7 +816,7 @@ msgid "Dismantle Site"
 msgstr "Rozebrat stavbu"
 
 #: ../../tribes/atlanteans/conf:148
-#: ../../tribes/atlanteans/conf:156
+#: ../../tribes/atlanteans/conf:155
 msgid "Barrier"
 msgstr "Hradba"
 
@@ -850,182 +829,178 @@ msgid "Donjon"
 msgstr "Donjon"
 
 #: ../../tribes/atlanteans/conf:151
-#: ../../tribes/atlanteans/conf:158
+#: ../../tribes/atlanteans/conf:157
 msgid "Fortress"
 msgstr "Pevnost"
 
 #: ../../tribes/atlanteans/conf:152
-#: ../../tribes/atlanteans/conf:154
+#: ../../tribes/atlanteans/conf:153
 msgid "Sentry"
 msgstr "Hláska"
 
-#: ../../tribes/atlanteans/conf:153
-msgid "Stronghold"
-msgstr "Opevnění"
-
-#: ../../tribes/atlanteans/conf:155
+#: ../../tribes/atlanteans/conf:154
 msgid "Barracks"
 msgstr "Kasárna"
 
-#: ../../tribes/atlanteans/conf:157
-#: ../../tribes/atlanteans/conf:204
+#: ../../tribes/atlanteans/conf:156
+#: ../../tribes/atlanteans/conf:203
 msgid "Castle"
 msgstr "Hrad"
 
-#: ../../tribes/atlanteans/conf:159
+#: ../../tribes/atlanteans/conf:158
 msgid "Outpost"
 msgstr "Hláska"
 
-#: ../../tribes/atlanteans/conf:160
-#: ../../tribes/atlanteans/conf:203
+#: ../../tribes/atlanteans/conf:159
+#: ../../tribes/atlanteans/conf:202
 msgid "Tower"
 msgstr "Věž"
 
-#: ../../tribes/atlanteans/conf:163
+#: ../../tribes/atlanteans/conf:162
 msgid "Headquarters"
 msgstr "Velitelství"
 
-#: ../../tribes/atlanteans/conf:164
+#: ../../tribes/atlanteans/conf:163
 msgid "Warehouse"
 msgstr "Sklad"
 
-#: ../../tribes/atlanteans/conf:165
+#: ../../tribes/atlanteans/conf:164
 msgid "Port"
 msgstr "Přístav"
 
-#: ../../tribes/atlanteans/conf:168
+#: ../../tribes/atlanteans/conf:167
 msgid "Quarry"
 msgstr "Lom"
 
-#: ../../tribes/atlanteans/conf:169
+#: ../../tribes/atlanteans/conf:168
 msgid "Woodcutter’s House"
-msgstr ""
+msgstr "Domek dřevorubce"
+
+#: ../../tribes/atlanteans/conf:169
+msgid "Forester’s House"
+msgstr "Domek lesníka"
 
 #: ../../tribes/atlanteans/conf:170
-msgid "Forester’s House"
-msgstr ""
-
-#: ../../tribes/atlanteans/conf:171
 msgid "Goldweaver"
 msgstr "Tkadlec zlata"
 
-#: ../../tribes/atlanteans/conf:172
+#: ../../tribes/atlanteans/conf:171
 msgid "Fisher’s House"
-msgstr ""
+msgstr "Domek rybáře"
+
+#: ../../tribes/atlanteans/conf:172
+msgid "Fish Breeder’s House"
+msgstr "Domek porybného"
 
 #: ../../tribes/atlanteans/conf:173
-msgid "Fish Breeder’s House"
-msgstr ""
+msgid "Hunter’s House"
+msgstr "Domek lovce"
 
 #: ../../tribes/atlanteans/conf:174
-msgid "Hunter’s House"
-msgstr ""
-
-#: ../../tribes/atlanteans/conf:175
 msgid "Well"
 msgstr "Studna"
 
-#: ../../tribes/atlanteans/conf:176
+#: ../../tribes/atlanteans/conf:175
 msgid "Scout’s House"
-msgstr ""
+msgstr "Domek zvěda"
 
-#: ../../tribes/atlanteans/conf:177
+#: ../../tribes/atlanteans/conf:176
 msgid "Sawmill"
 msgstr "Pila"
 
-#: ../../tribes/atlanteans/conf:178
+#: ../../tribes/atlanteans/conf:177
 msgid "Smokery"
 msgstr "Udírna"
 
-#: ../../tribes/atlanteans/conf:179
+#: ../../tribes/atlanteans/conf:178
 msgid "Mill"
 msgstr "Mlýn"
 
-#: ../../tribes/atlanteans/conf:180
+#: ../../tribes/atlanteans/conf:179
 msgid "Shipyard"
 msgstr "Loděnice"
 
-#: ../../tribes/atlanteans/conf:181
+#: ../../tribes/atlanteans/conf:180
 msgid "Bakery"
 msgstr "Pekárna"
 
-#: ../../tribes/atlanteans/conf:182
+#: ../../tribes/atlanteans/conf:181
 msgid "Charcoal Burner’s House"
-msgstr ""
+msgstr "Domek uhlíře"
 
-#: ../../tribes/atlanteans/conf:183
+#: ../../tribes/atlanteans/conf:182
 msgid "Smelting Works"
 msgstr "Slévárna"
 
-#: ../../tribes/atlanteans/conf:184
+#: ../../tribes/atlanteans/conf:183
 msgid "Toolsmithy"
 msgstr "Dílna"
 
-#: ../../tribes/atlanteans/conf:185
+#: ../../tribes/atlanteans/conf:184
 msgid "Weapon Smithy"
 msgstr "Zbrojířství"
 
-#: ../../tribes/atlanteans/conf:186
+#: ../../tribes/atlanteans/conf:185
 msgid "Armor Smithy"
-msgstr ""
+msgstr "Platnéřství"
 
-#: ../../tribes/atlanteans/conf:187
+#: ../../tribes/atlanteans/conf:186
 msgid "Horse Farm"
 msgstr "Stáje"
 
-#: ../../tribes/atlanteans/conf:188
+#: ../../tribes/atlanteans/conf:187
 msgid "Spider Farm"
-msgstr ""
+msgstr "Pavoučí farma"
 
-#: ../../tribes/atlanteans/conf:189
+#: ../../tribes/atlanteans/conf:188
 msgid "Weaving-Mill"
 msgstr "Tkalcovna"
 
-#: ../../tribes/atlanteans/conf:190
+#: ../../tribes/atlanteans/conf:189
 msgid "Farm"
 msgstr "Statek"
 
-#: ../../tribes/atlanteans/conf:191
+#: ../../tribes/atlanteans/conf:190
 msgid "Blackroot Farm"
 msgstr "Pěstírna koření"
 
-#: ../../tribes/atlanteans/conf:192
+#: ../../tribes/atlanteans/conf:191
 msgid "Crystal Mine"
 msgstr "Krystalový důl"
 
-#: ../../tribes/atlanteans/conf:193
+#: ../../tribes/atlanteans/conf:192
 msgid "Coal Mine"
 msgstr "Uhelný důl"
 
-#: ../../tribes/atlanteans/conf:194
+#: ../../tribes/atlanteans/conf:193
 msgid "Iron Mine"
 msgstr "Železnorudný důl"
 
-#: ../../tribes/atlanteans/conf:195
+#: ../../tribes/atlanteans/conf:194
 msgid "Gold Mine"
 msgstr "Zlatý důl"
 
-#: ../../tribes/atlanteans/conf:199
+#: ../../tribes/atlanteans/conf:198
 msgid "Guardhouse"
 msgstr "Strážnice"
 
-#: ../../tribes/atlanteans/conf:200
+#: ../../tribes/atlanteans/conf:199
 msgid "Guardhall"
 msgstr "Velká strážnice"
 
-#: ../../tribes/atlanteans/conf:201
+#: ../../tribes/atlanteans/conf:200
 msgid "High Tower"
 msgstr "Vysoká věž"
 
-#: ../../tribes/atlanteans/conf:202
+#: ../../tribes/atlanteans/conf:201
 msgid "Small Tower"
 msgstr "Malá věž"
 
-#: ../../tribes/atlanteans/conf:208
+#: ../../tribes/atlanteans/conf:207
 msgid "Dungeon"
 msgstr "Kobky"
 
-#: ../../tribes/atlanteans/conf:209
+#: ../../tribes/atlanteans/conf:208
 msgid "Labyrinth"
 msgstr "Labyrint"
 
@@ -1035,6 +1010,9 @@ msgid ""
 "baker needs for a good bread. Also horse and spider farms need to be "
 "provided with corn."
 msgstr ""
+"Kukuřice se zpracovává ve mlýně na kukuřičnou mouku, kterou potřebuje každý "
+"atlantidský pekař k přípravě chleba. Kukuřici potřebují také stáje a pavoučí "
+"farmy."
 
 #: ../../tribes/atlanteans/cornflour/conf:1
 msgid ""
@@ -1070,6 +1048,9 @@ msgid ""
 "weapon smithy. It is used in a dungeon – together with food – to train "
 "soldiers from attack level 2 to level 3."
 msgstr ""
+"Dvojitý trojzubec je jedním z nejlepších trojzubců vyráběných v "
+"atlantidských zbrojířstvích. Používá se v kobkách - společně s jídlem - k "
+"výcviků vojáků (zlepšení útoku z úrovně 2 na úroveň 3)."
 
 #: ../../tribes/atlanteans/dungeon/conf:39
 #: ../../tribes/atlanteans/labyrinth/conf:45
@@ -1077,58 +1058,26 @@ msgid "Sleep"
 msgstr "Vyčkat"
 
 #: ../../tribes/atlanteans/dungeon/conf:40
-msgid "Upgrade soldier attack 0"
-msgstr "Vylepšit vojákův útok 0"
+msgid "Upgrade soldier attack from level 0 to level 1"
+msgstr ""
 
 #: ../../tribes/atlanteans/dungeon/conf:41
-msgid ""
-"Upgrade soldier attack 0 (only for compatibility with old savegames "
-"(build13))"
+msgid "Upgrade soldier attack from level 1 to level 2"
 msgstr ""
-"Vylepšit vojákův útok 0 (pouze pro kompatibilitu se starými uloženými hrami "
-"(build 13))"
 
 #: ../../tribes/atlanteans/dungeon/conf:42
-msgid "Upgrade soldier attack 1"
-msgstr "Vylepšit vojákův útok 1"
+msgid "Upgrade soldier attack from level 2 to level 3"
+msgstr ""
 
 #: ../../tribes/atlanteans/dungeon/conf:43
-msgid ""
-"Upgrade soldier attack 1 (only for compatibility with old savegames "
-"(build13))"
+msgid "Upgrade soldier attack from level 3 to level 4"
 msgstr ""
-"Vylepšit vojákův útok 1 (pouze pro kompatibilitu se starými uloženými hrami "
-"(build 13))"
-
-#: ../../tribes/atlanteans/dungeon/conf:44
-msgid "Upgrade soldier attack 2"
-msgstr "Vylepšit vojákův útok 2"
-
-#: ../../tribes/atlanteans/dungeon/conf:45
-msgid ""
-"Upgrade soldier attack 2 (only for compatibility with old savegames "
-"(build13))"
-msgstr ""
-"Vylepšit vojákův útok 2 (pouze pro kompatibilitu se starými uloženými hrami "
-"(build 13))"
-
-#: ../../tribes/atlanteans/dungeon/conf:46
-msgid "Upgrade soldier attack 3"
-msgstr "Vylepšit vojákův útok 3"
-
-#: ../../tribes/atlanteans/dungeon/conf:47
-msgid ""
-"Upgrade soldier attack 3 (only for compatibility with old savegames "
-"(build13))"
-msgstr ""
-"Vylepšit vojákův útok 3 (pouze pro kompatibilitu se starými uloženými hrami "
-"(build 13))"
 
 #: ../../tribes/atlanteans/farm/conf:24
 msgid "Plant corn"
 msgstr "Sází kukuřici."
 
-#: ../../tribes/atlanteans/farm/conf:26
+#: ../../tribes/atlanteans/farm/conf:25
 msgid "Harvest corn"
 msgstr "Sklízí kukuřici"
 
@@ -1149,6 +1098,8 @@ msgid ""
 "smoked in a smokery before being delivered to mines, training sites and "
 "scouts."
 msgstr ""
+"Ryby jsou nejrozšířenější zdroj potravy pro Atlantiďany. Musí být vyuzeny v "
+"udírně a poté dopraveny do dolů, výcvikových táborů a zvědům."
 
 #: ../../tribes/atlanteans/fish_breeder/conf:1
 msgid "Breeds fish."
@@ -1176,6 +1127,8 @@ msgid ""
 "in the smelting works. Gold is used by the armor smithy, the weapon smithy "
 "and the goldweaver."
 msgstr ""
+"Zlato je jedním z nejvzácnějších materiálů. Vyrábí se ve slévárně ze zlaté "
+"rudy. Zlato se používá v platnéřství, zbrojířství a tkalcovně zlata."
 
 #: ../../tribes/atlanteans/golden_tabard/conf:1
 msgid ""
@@ -1186,7 +1139,9 @@ msgstr ""
 
 #: ../../tribes/atlanteans/goldore/conf:1
 msgid ""
-"Gold ore is mined in gold mines and processed to gold in smelting works."
+"Gold ore is mined in a goldmine. Smelted in a smelting works, it turns into "
+"gold which is used as a precious building material and to produce weapons "
+"and armor."
 msgstr ""
 
 #: ../../tribes/atlanteans/goldyarn/conf:1
@@ -1211,6 +1166,9 @@ msgid ""
 "weaponsmiths and armorsmiths. Make sure you always got some in reserve! It "
 "is produced by the toolsmith."
 msgstr ""
+"Kladivo je naprosto nezbytný nástroj. Používají jej geologové, stavaři, "
+"zbrojíři a platnéři. Dej si pozor, ať jich máš vždy aspoň pár rezervních! "
+"Vyrábí se v dílně."
 
 #: ../../tribes/atlanteans/heavy_double_trident/conf:1
 msgid ""
@@ -1219,6 +1177,10 @@ msgid ""
 "used in the dungeon – together with food – to train soldiers from attack "
 "level 3 to level 4."
 msgstr ""
+"Toto je nejnebezpečnější zbraň atlantidské armády. Boj s touto zbraní "
+"ovládají pouze ti nejlepší vojáci. Vyrábí se ve zbrojířství a používá se v "
+"kobkách - společně s jídlem - k výcviků vojáků (zlepšení útoku z úrovně 3 na "
+"úroveň 4)."
 
 #: ../../tribes/atlanteans/high_tower/conf:9
 msgid "Your soldiers have occupied your High Tower"
@@ -1229,12 +1191,16 @@ msgid ""
 "This hook pole is used by the smoker to suspend all the meat and fish from "
 "the top of the smokery. It is created by the toolsmith."
 msgstr ""
+"Tuto tyč s háky používají uzenáři k zavěšení masa a ryb do udírny. Jako "
+"většina nástrojů se tato tyč se vyrábí v dílně."
 
 #: ../../tribes/atlanteans/horse/conf:1
 msgid ""
 "Horses help to carry items at heavily used roads. They are reared in a horse "
 "farm."
 msgstr ""
+"Koně pomáhají přepravovat náklad po často využívaných cestách. Jsou chováni "
+"ve stájích."
 
 #: ../../tribes/atlanteans/horsebreeder/conf:1
 msgid "Breeds the strong atlantean horses"
@@ -1254,68 +1220,35 @@ msgid ""
 "Iron is made out of iron ore in the smelting works. It is used in the "
 "toolsmithy, armor smithy and weapon smithy."
 msgstr ""
+"Železo se vyrábí ve slévárně z železné rudy. Používá se v dílně, platnéřství "
+"a zbrojířství."
 
 #: ../../tribes/atlanteans/ironore/conf:1
 msgid ""
 "Iron ore is mined in iron mines. It is smelted in a smelting works to "
 "retrieve the iron."
 msgstr ""
+"Železná ruda se těží v železném dole. Ve slévárně je zpracována na železo."
 
 #: ../../tribes/atlanteans/labyrinth/conf:46
-msgid "Upgrade soldier defense 0"
-msgstr "Vylepšit vojákovu obranu 0"
+msgid "Upgrade soldier defense from level 0 to level 1"
+msgstr ""
 
 #: ../../tribes/atlanteans/labyrinth/conf:47
-msgid ""
-"Upgrade soldier defense 0 (only for compatibility with old savegames "
-"(build13))"
+msgid "Upgrade soldier defense from level 1 to level 2"
 msgstr ""
-"Vylepšit vojákovu obranu 0 (pouze pro kompatibilitu se starými uloženými "
-"hrami (build 13))"
 
 #: ../../tribes/atlanteans/labyrinth/conf:48
-msgid "Upgrade soldier defense 1"
-msgstr "Vylepšit vojákovu obranu 1"
+msgid "Upgrade soldier health from level 0 to level 1"
+msgstr ""
 
 #: ../../tribes/atlanteans/labyrinth/conf:49
-msgid ""
-"Upgrade soldier defense 1 (only for compatibility with old savegames "
-"(build13))"
+msgid "Upgrade soldier evade from level 0 to level 1"
 msgstr ""
-"Vylepšit vojákovu obranu 1 (pouze pro kompatibilitu se starými uloženými "
-"hrami (build 13))"
 
 #: ../../tribes/atlanteans/labyrinth/conf:50
-msgid "Upgrade soldier health 0"
+msgid "Upgrade soldier evade from level 1 to level 2"
 msgstr ""
-
-#: ../../tribes/atlanteans/labyrinth/conf:51
-msgid ""
-"Upgrade soldier health 0 (only for compatibility with old savegames "
-"(build13))"
-msgstr ""
-
-#: ../../tribes/atlanteans/labyrinth/conf:52
-msgid "Upgrade soldier evade 0"
-msgstr "Vylepšit vojákovu obratnost 0"
-
-#: ../../tribes/atlanteans/labyrinth/conf:53
-msgid ""
-"Upgrade soldier evade 0 (only for compatibility with old savegames (build13))"
-msgstr ""
-"Vylepšit vojákovu obratnost 0 (pouze pro kompatibilitu se starými uloženými "
-"hrami (build 13))"
-
-#: ../../tribes/atlanteans/labyrinth/conf:54
-msgid "Upgrade soldier evade 1"
-msgstr "Vylepšit vojákovu obratnost 1"
-
-#: ../../tribes/atlanteans/labyrinth/conf:55
-msgid ""
-"Upgrade soldier evade 1 (only for compatibility with old savegames (build13))"
-msgstr ""
-"Vylepšit vojákovu obratnost 1 (pouze pro kompatibilitu se starými uloženými "
-"hrami (build 13))"
 
 #: ../../tribes/atlanteans/light_trident/conf:1
 msgid ""
@@ -1323,6 +1256,9 @@ msgid ""
 "it makes up the equipment of young soldiers. Light tridents are produced in "
 "the weapon smithy as are all other tridents."
 msgstr ""
+"Toto je základní zbraň atlantidských vojáků. Společně s tabardem jsou "
+"základním vybavením pro mladé vojáky. Lehké trojzubce se vyrábí ve "
+"zbrojířství, stejně jako všechny ostatní trojzubce."
 
 #: ../../tribes/atlanteans/long_trident/conf:1
 msgid ""
@@ -1330,6 +1266,9 @@ msgid ""
 "produced in the weapon smithy and used in the dungeon – together with food – "
 "to train soldiers from attack level 0 to level 1."
 msgstr ""
+"Dlouhý trojzubec je první trojzubec využívaný pro tréning vojáků. Vyrábí se "
+"ve zbrojířství a používá se v kobkách - společně s jídlem - k výcviků vojáků "
+"(zlepšení útoku z úrovně 0 na úroveň 1)."
 
 #: ../../tribes/atlanteans/meat/conf:1
 msgid ""
@@ -1337,12 +1276,17 @@ msgid ""
 "taken by the hunter and has to be smoked in a smokery before being delivered "
 "to mines and training sites (dungeon and labyrinth)."
 msgstr ""
+"Maso je jedním ze zdrojů potravy Atlantiďanů. Získává je lovec z ulovené "
+"zvěře. Nejdříve musí být vyuzeno v udírně a poté je dopraveno do dolů a "
+"výcvikových táborů (kobky a labyrynty)."
 
 #: ../../tribes/atlanteans/milking_tongs/conf:1
 msgid ""
 "Milking tongs are used by the spider breeder to milk the spiders. They are "
 "produced by the toolsmith."
 msgstr ""
+"Pavoučí kleště používá chovatel pavouků na získávání pavoučích vláken. "
+"Vyrábí se v dílně."
 
 #: ../../tribes/atlanteans/mill/conf:26
 msgid "Produce cornflour"
@@ -1382,6 +1326,8 @@ msgid ""
 "These transparent quartz’ are used to build some exclusive buildings. They "
 "are produced in a crystal mine."
 msgstr ""
+"Průsvitný křemen je potřeba při stavbě exkluzivních budov. Těží se v "
+"krystalovém dole."
 
 #: ../../tribes/atlanteans/saw/conf:1
 msgid ""
@@ -1391,12 +1337,12 @@ msgstr "Pilu potřebují dřevorubec a nástrojář. Vyrábí se v dílně."
 
 #: ../../tribes/atlanteans/sawyer/conf:1
 msgid "Saws wood to produce planks."
-msgstr ""
+msgstr "Pracuje se dřevem a opracovává kmeny na prkna."
 
 #: ../../tribes/atlanteans/scout/conf:1
 msgid ""
 "Scouts like Scotty the scout scouting unscouted areas in a scouty fashion."
-msgstr ""
+msgstr "Zvědové jako zvěd Zdenda zvídavě zkoumají neprozkoumanou krajinu."
 
 #: ../../tribes/atlanteans/scripting/sc00_headquarters_medium.lua:10
 msgid "Headquarters medium"
@@ -1412,9 +1358,9 @@ msgstr "Není dost místa"
 
 #: ../../tribes/atlanteans/scripting/sc01_castle_village.lua:102
 msgid ""
-"Some of your starting buildings didn’t have enough room and\n"
-"weren’t built. You are at a disadvantage with this; consider restarting\n"
-"this map with a fair starting condition."
+"Some of your starting buildings didn’t have enough room and weren’t built. "
+"You are at a disadvantage with this; consider restarting this map with a "
+"fair starting condition."
 msgstr ""
 
 #: ../../tribes/atlanteans/scythe/conf:1
@@ -1439,6 +1385,8 @@ msgid ""
 "Shovels are needed for the proper handling of plants. Therefore the forester "
 "and the blackroot farmer are using them. They are produced by the toolsmith."
 msgstr ""
+"Lopata se používá pro obdělávání rostlin, takže ji používají lesník a "
+"pěstitel koření. Vyrábí se v dílně."
 
 #: ../../tribes/atlanteans/small_tower/conf:7
 msgid "Your soldiers have occupied your Small Tower"
@@ -1509,12 +1457,16 @@ msgid ""
 "This yarn is produced by spiders, which are bred by spider farms. It is "
 "processed into spidercloth in a weaving-mill."
 msgstr ""
+"Tato vlákna produkují pavouci chovaní na pavoučích farmách. V tkalcovně se z "
+"vláken tká pavoučí látka."
 
 #: ../../tribes/atlanteans/steel_shield/conf:1
 msgid ""
 "This steel shield is produced in the armor smithy and used in the labyrinth "
 "– together with food – to train soldiers from defense level 0 to level 1."
 msgstr ""
+"Tento ocelový štít se vyrábí v platnéřství a používá se v kobkách - společně "
+"s jídlem - k výcviků vojáků (zlepšení obrany z úrovně 0 na úroveň 1)."
 
 #: ../../tribes/atlanteans/steel_trident/conf:1
 msgid ""
@@ -1530,10 +1482,12 @@ msgid ""
 "Stone is a basic building ware of the Atlanteans. It is produced in a quarry "
 "or a crystal mine."
 msgstr ""
+"Kámen je pro Atlantiďany jedním ze základních stavebních materiálů. Těží se "
+"v lomu nebo krystalovém dole."
 
 #: ../../tribes/atlanteans/stonecutter/conf:1
 msgid "Cuts raw pieces of granite out of rocks."
-msgstr ""
+msgstr "Vyrábí surové kusy žuly z kamení."
 
 #: ../../tribes/atlanteans/tabard/conf:1
 msgid ""
@@ -1615,6 +1569,8 @@ msgid ""
 "Water is the essence of life! It is used in the bakery and the horse and "
 "spider farms."
 msgstr ""
+"Voda je základní životní nutnost! je zapotřebí v pekárně, ve stájích a na "
+"pavoučí farmě."
 
 #: ../../tribes/atlanteans/weaponsmith/conf:1
 msgid "Produces weapons for the soldiers."
@@ -1659,3 +1615,110 @@ msgstr "Vyrobit zlatý tabard"
 #: ../../tribes/atlanteans/woodcutter/conf:1
 msgid "Fells trees."
 msgstr "Kácí stromy."
+
+#~ msgid ""
+#~ "Produce steel shield (only for compatibility with old savegames (build13))"
+#~ msgstr ""
+#~ "Vyrobit ocelový štít (pouze pro kompatibilitu se starými uloženými hrami "
+#~ "(build 13))"
+
+#~ msgid ""
+#~ "Produce advanced shield (only for compatibility with old savegames (build13))"
+#~ msgstr ""
+#~ "Vyrobit vylepšený štít (pouze pro kompatibilitu se starými uloženými hrami "
+#~ "(build 13))"
+
+#~ msgid "Stronghold"
+#~ msgstr "Opevnění"
+
+#~ msgid "Upgrade soldier attack 0"
+#~ msgstr "Vylepšit vojákův útok 0"
+
+#~ msgid ""
+#~ "Upgrade soldier attack 0 (only for compatibility with old savegames "
+#~ "(build13))"
+#~ msgstr ""
+#~ "Vylepšit vojákův útok 0 (pouze pro kompatibilitu se starými uloženými hrami "
+#~ "(build 13))"
+
+#~ msgid "Upgrade soldier attack 1"
+#~ msgstr "Vylepšit vojákův útok 1"
+
+#~ msgid ""
+#~ "Upgrade soldier attack 1 (only for compatibility with old savegames "
+#~ "(build13))"
+#~ msgstr ""
+#~ "Vylepšit vojákův útok 1 (pouze pro kompatibilitu se starými uloženými hrami "
+#~ "(build 13))"
+
+#~ msgid "Upgrade soldier attack 2"
+#~ msgstr "Vylepšit vojákův útok 2"
+
+#~ msgid ""
+#~ "Upgrade soldier attack 2 (only for compatibility with old savegames "
+#~ "(build13))"
+#~ msgstr ""
+#~ "Vylepšit vojákův útok 2 (pouze pro kompatibilitu se starými uloženými hrami "
+#~ "(build 13))"
+
+#~ msgid "Upgrade soldier attack 3"
+#~ msgstr "Vylepšit vojákův útok 3"
+
+#~ msgid ""
+#~ "Upgrade soldier attack 3 (only for compatibility with old savegames "
+#~ "(build13))"
+#~ msgstr ""
+#~ "Vylepšit vojákův útok 3 (pouze pro kompatibilitu se starými uloženými hrami "
+#~ "(build 13))"
+
+#~ msgid ""
+#~ "Gold ore is mined in gold mines and processed to gold in smelting works."
+#~ msgstr ""
+#~ "Zlatá ruda se těží ve zlatém dole a ve slévárně je zpracována na zlato."
+
+#~ msgid "Upgrade soldier defense 0"
+#~ msgstr "Vylepšit vojákovu obranu 0"
+
+#~ msgid ""
+#~ "Upgrade soldier defense 0 (only for compatibility with old savegames "
+#~ "(build13))"
+#~ msgstr ""
+#~ "Vylepšit vojákovu obranu 0 (pouze pro kompatibilitu se starými uloženými "
+#~ "hrami (build 13))"
+
+#~ msgid "Upgrade soldier defense 1"
+#~ msgstr "Vylepšit vojákovu obranu 1"
+
+#~ msgid ""
+#~ "Upgrade soldier defense 1 (only for compatibility with old savegames "
+#~ "(build13))"
+#~ msgstr ""
+#~ "Vylepšit vojákovu obranu 1 (pouze pro kompatibilitu se starými uloženými "
+#~ "hrami (build 13))"
+
+#~ msgid "Upgrade soldier evade 0"
+#~ msgstr "Vylepšit vojákovu obratnost 0"
+
+#~ msgid ""
+#~ "Upgrade soldier evade 0 (only for compatibility with old savegames (build13))"
+#~ msgstr ""
+#~ "Vylepšit vojákovu obratnost 0 (pouze pro kompatibilitu se starými uloženými "
+#~ "hrami (build 13))"
+
+#~ msgid "Upgrade soldier evade 1"
+#~ msgstr "Vylepšit vojákovu obratnost 1"
+
+#~ msgid ""
+#~ "Upgrade soldier evade 1 (only for compatibility with old savegames (build13))"
+#~ msgstr ""
+#~ "Vylepšit vojákovu obratnost 1 (pouze pro kompatibilitu se starými uloženými "
+#~ "hrami (build 13))"
+
+#~ msgid ""
+#~ "Some of your starting buildings didn’t have enough room and\n"
+#~ "weren’t built. You are at a disadvantage with this; consider restarting\n"
+#~ "this map with a fair starting condition."
+#~ msgstr ""
+#~ "Nebylo dost místa na umístění některých počátečních budov, které proto\n"
+#~ "nebyly postaveny. To znamená, že jsi nyní v nevýhodě; zvaž restartování\n"
+#~ "této mapy s férovými startovními podmínkami."

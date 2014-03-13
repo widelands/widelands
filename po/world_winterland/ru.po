@@ -6,15 +6,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2014-03-06 21:20+0000\n"
+"POT-Creation-Date: 2014-03-12 21:37+0000\n"
 "PO-Revision-Date: 2010-06-06 22:42+0000\n"
 "Last-Translator: Nasenbaer <Unknown>\n"
 "Language-Team: russian <en@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-03-07 05:42+0000\n"
-"X-Generator: Launchpad (build 16948)\n"
+"X-Launchpad-Export-Date: 2014-03-13 05:38+0000\n"
+"X-Generator: Launchpad (build 16963)\n"
 
 #: ../../worlds/winterland/conf:2
 msgid "The Widelands Development Team"
@@ -99,179 +99,179 @@ msgstr "Камни"
 msgid "Track"
 msgstr "Дорожка"
 
-#: ../../worlds/winterland/conf:45
-msgid "Aspen"
-msgstr "Осина"
-
 #: ../../worlds/winterland/conf:46
-msgid "Aspen (medium)"
-msgstr ""
-
-#: ../../worlds/winterland/conf:47
-msgid "Aspen (small)"
+msgid "Aspen (Old)"
 msgstr ""
 
 #: ../../worlds/winterland/conf:48
-msgid "Aspen (tiny)"
+msgid "Aspen (Mature)"
 msgstr ""
-
-#: ../../worlds/winterland/conf:49
-msgid "Oak"
-msgstr "Дуб"
 
 #: ../../worlds/winterland/conf:50
-msgid "Oak (medium)"
-msgstr ""
-
-#: ../../worlds/winterland/conf:51
-msgid "Oak (small)"
+msgid "Aspen (Pole)"
 msgstr ""
 
 #: ../../worlds/winterland/conf:52
-msgid "Oak (tiny)"
+msgid "Aspen (Sapling)"
 msgstr ""
 
 #: ../../worlds/winterland/conf:53
-msgid "Spruce"
-msgstr "Ель"
+msgid "Oak (Old)"
+msgstr ""
 
 #: ../../worlds/winterland/conf:54
-msgid "Spruce (medium)"
+msgid "Oak (Mature)"
 msgstr ""
 
 #: ../../worlds/winterland/conf:55
-msgid "Spruce (small)"
+msgid "Oak (Pole)"
 msgstr ""
 
 #: ../../worlds/winterland/conf:56
-msgid "Spruce (tiny)"
+msgid "Oak (Sapling)"
 msgstr ""
 
 #: ../../worlds/winterland/conf:57
-msgid "Maple"
-msgstr "Клён"
+msgid "Spruce (Old)"
+msgstr ""
 
 #: ../../worlds/winterland/conf:58
-msgid "Maple (medium)"
+msgid "Spruce (Mature)"
 msgstr ""
 
 #: ../../worlds/winterland/conf:59
-msgid "Maple (small)"
+msgid "Spruce (Pole)"
 msgstr ""
 
 #: ../../worlds/winterland/conf:60
-msgid "Maple (tiny)"
+msgid "Spruce (Sapling)"
 msgstr ""
 
 #: ../../worlds/winterland/conf:61
-msgid "Birch"
-msgstr "Береза"
+msgid "Maple (Old)"
+msgstr ""
 
 #: ../../worlds/winterland/conf:62
-msgid "Birch (medium)"
+msgid "Maple (Mature)"
 msgstr ""
 
 #: ../../worlds/winterland/conf:63
-msgid "Birch (small)"
+msgid "Maple (Pole)"
 msgstr ""
 
 #: ../../worlds/winterland/conf:64
-msgid "Birch (tiny)"
+msgid "Maple (Sapling)"
 msgstr ""
 
 #: ../../worlds/winterland/conf:65
-msgid "Beech"
-msgstr "Бук"
+msgid "Birch (Old)"
+msgstr ""
 
 #: ../../worlds/winterland/conf:66
-msgid "Beech (medium)"
+msgid "Birch (Mature)"
 msgstr ""
 
 #: ../../worlds/winterland/conf:67
-msgid "Beech (small)"
+msgid "Birch (Pole)"
 msgstr ""
 
 #: ../../worlds/winterland/conf:68
-msgid "Beech (tiny)"
+msgid "Birch (Sapling)"
 msgstr ""
 
 #: ../../worlds/winterland/conf:69
-msgid "Larch"
-msgstr "Лиственница"
+msgid "Beech (Old)"
+msgstr ""
 
 #: ../../worlds/winterland/conf:70
-msgid "Larch (medium)"
+msgid "Beech (Mature)"
 msgstr ""
 
 #: ../../worlds/winterland/conf:71
-msgid "Larch (small)"
+msgid "Beech (Pole)"
 msgstr ""
 
 #: ../../worlds/winterland/conf:72
-msgid "Larch (tiny)"
+msgid "Beech (Sapling)"
 msgstr ""
 
 #: ../../worlds/winterland/conf:73
-msgid "Rowan"
-msgstr "Рябина"
+msgid "Larch (Old)"
+msgstr ""
 
 #: ../../worlds/winterland/conf:74
-msgid "Rowan (medium)"
+msgid "Larch (Mature)"
 msgstr ""
 
 #: ../../worlds/winterland/conf:75
-msgid "Rowan (small)"
+msgid "Larch (Pole)"
 msgstr ""
 
 #: ../../worlds/winterland/conf:76
-msgid "Rowan (tiny)"
+msgid "Larch (Sapling)"
+msgstr ""
+
+#: ../../worlds/winterland/conf:77
+msgid "Rowan (Old)"
+msgstr ""
+
+#: ../../worlds/winterland/conf:78
+msgid "Rowan (Mature)"
 msgstr ""
 
 #: ../../worlds/winterland/conf:79
+msgid "Rowan (Pole)"
+msgstr ""
+
+#: ../../worlds/winterland/conf:80
+msgid "Rowan (Sapling)"
+msgstr ""
+
+#: ../../worlds/winterland/conf:83
 msgid "Badger"
 msgstr "Барсук"
 
-#: ../../worlds/winterland/conf:80
+#: ../../worlds/winterland/conf:84
 msgid "Bunny"
 msgstr "Кролик"
 
-#: ../../worlds/winterland/conf:81
+#: ../../worlds/winterland/conf:85
 msgid "Deer"
 msgstr "Олень"
 
-#: ../../worlds/winterland/conf:82
+#: ../../worlds/winterland/conf:86
 msgid "Duck"
 msgstr "Утка"
 
-#: ../../worlds/winterland/conf:83
+#: ../../worlds/winterland/conf:87
 msgid "Elk"
 msgstr "Лось"
 
-#: ../../worlds/winterland/conf:84
+#: ../../worlds/winterland/conf:88
 msgid "Fox"
 msgstr "Лиса"
 
-#: ../../worlds/winterland/conf:85
+#: ../../worlds/winterland/conf:89
 msgid "Lynx"
 msgstr "Рысь"
 
-#: ../../worlds/winterland/conf:86
+#: ../../worlds/winterland/conf:90
 msgid "Marten"
 msgstr "Куница"
 
-#: ../../worlds/winterland/conf:87
+#: ../../worlds/winterland/conf:91
 msgid "Reindeer"
 msgstr "Северный олень"
 
-#: ../../worlds/winterland/conf:88
+#: ../../worlds/winterland/conf:92
 msgid "Sheep"
 msgstr "Овца"
 
-#: ../../worlds/winterland/conf:89
+#: ../../worlds/winterland/conf:93
 msgid "Wisent"
 msgstr "Зубр"
 
-#: ../../worlds/winterland/conf:90
+#: ../../worlds/winterland/conf:94
 msgid "Wolf"
 msgstr "Волк"
 

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2014-03-06 21:20+0000\n"
+"POT-Creation-Date: 2014-03-12 21:37+0000\n"
 "PO-Revision-Date: 2014-03-08 15:24+0000\n"
 "Last-Translator: GunChleoc <Unknown>\n"
 "Language-Team: Fòram na Gàidhlig http://www.foramnagaidhlig.net\n"
@@ -16,8 +16,8 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n==1 || n==11) ? 0 : (n==2 || n==12) ? 1 : "
 "(n > 2 && n < 20) ? 2 : 3;\n"
-"X-Launchpad-Export-Date: 2014-03-09 05:39+0000\n"
-"X-Generator: Launchpad (build 16948)\n"
+"X-Launchpad-Export-Date: 2014-03-13 05:38+0000\n"
+"X-Generator: Launchpad (build 16963)\n"
 "Language: gd\n"
 
 #: ../../scripting/win_condition_texts.lua:2
@@ -80,11 +80,11 @@ msgstr "Fèin-fhlaitheach"
 msgid "The tribe or team that can defeat all others wins the game!"
 msgstr "Buannaichidh an treubh no sgioba a chuireas ruaig air càch!"
 
-#: ../../scripting/win_conditions/02_collectors.lua:13
+#: ../../scripting/win_conditions/02_collectors.lua:14
 msgid "Collectors"
 msgstr "Cruinnichean"
 
-#: ../../scripting/win_conditions/02_collectors.lua:16
+#: ../../scripting/win_conditions/02_collectors.lua:17
 msgid ""
 "You get points for precious wares in your warehouses. The player with the "
 "highest number of wares at the end of 4 hours wins the game."
@@ -93,20 +93,20 @@ msgstr ""
 "Buannaichidh an cluicheadair aig a bheil barrachd bhathar na aig càch an "
 "ceann 4 uairean."
 
-#: ../../scripting/win_conditions/02_collectors.lua:19
+#: ../../scripting/win_conditions/02_collectors.lua:20
 msgid "Points"
 msgstr "Puingean"
 
-#: ../../scripting/win_conditions/02_collectors.lua:95
+#: ../../scripting/win_conditions/02_collectors.lua:96
 msgid "Status for %s"
 msgstr "An staid airson %s"
 
-#: TRANSLATORS: For example: "gold (3 P) x 4 = 12 P", P meaning "Points"
-#: ../../scripting/win_conditions/02_collectors.lua:105
-msgid "  %1$s (%2$i P) x %3$i = %4$i P<br>"
-msgstr "  %1$s (%2$i P) x %3$i = %4$i P<br>"
+#: TRANSLATORS: For example: 'gold (3 P) x 4 = 12 P", P meaning "Points'
+#: ../../scripting/win_conditions/02_collectors.lua:106
+msgid "  %1$s (%2$i P) x %3$i = %4$i P"
+msgstr ""
 
-#: ../../scripting/win_conditions/02_collectors.lua:109
+#: ../../scripting/win_conditions/02_collectors.lua:110
 msgid "Total: %i point"
 msgid_plural "Total: %i points"
 msgstr[0] "Iomlan: %i phuing"
@@ -114,12 +114,12 @@ msgstr[1] "Iomlan: %i phuing"
 msgstr[2] "Iomlan: %i puingean"
 msgstr[3] "Iomlan: %i puing"
 
-#: TRANSLATORS: Context: "The game will end in %s."
-#: ../../scripting/win_conditions/02_collectors.lua:121
+#: TRANSLATORS: Context: 'The game will end in %s.'
+#: ../../scripting/win_conditions/02_collectors.lua:123
 msgid "%1$ih%2$02im"
 msgstr "%1$i uair(ean) 's  %2$02i mionaid(ean)"
 
-#: ../../scripting/win_conditions/02_collectors.lua:123
+#: ../../scripting/win_conditions/02_collectors.lua:125
 msgid "%i minute"
 msgid_plural "%i minutes"
 msgstr[0] "%i mhionaid"
@@ -127,7 +127,7 @@ msgstr[1] "%i mhionaid"
 msgstr[2] "%i mionaidean"
 msgstr[3] "%i mionaid"
 
-#: ../../scripting/win_conditions/02_collectors.lua:125
+#: ../../scripting/win_conditions/02_collectors.lua:127
 msgid "The game will end in %s."
 msgstr "Thig an geama gu crìch an ceann %s."
 
@@ -225,14 +225,10 @@ msgstr "Gille-dubh"
 
 #: ../../scripting/win_conditions/04_wood_gnome.lua:16
 msgid ""
-"As wood gnome you like big forests, so your task is to have more trees on\n"
-"your territory than any other player. The game will end after 4 hours of\n"
+"As wood gnome you like big forests, so your task is to have more trees on "
+"your territory than any other player. The game will end after 4 hours of "
 "playing. The one with the most trees at that point will win the game."
 msgstr ""
-"On a tha thu nad ghille-dubh, tha thu measail air coilltean mòra. Mar sin, "
-"is an t-amas agad gum bi barrachd chraobhan air an tìr agad na air tìr càch. "
-"Thig an geama gu crìch an ceann 4 uairean. Buannaichidh an cluicheadair aig "
-"a bheil barrachd chraobhan na aig càch aig an deireadh."
 
 #: ../../scripting/win_conditions/04_wood_gnome.lua:19
 msgid "Trees owned"

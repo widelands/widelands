@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2014-03-06 21:20+0000\n"
+"POT-Creation-Date: 2014-03-12 21:37+0000\n"
 "PO-Revision-Date: 2014-03-06 11:08+0000\n"
 "Last-Translator: GunChleoc <Unknown>\n"
 "Language-Team: Fòram na Gàidhlig http://www.foramnagaidhlig.net\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-03-07 05:36+0000\n"
-"X-Generator: Launchpad (build 16948)\n"
+"X-Launchpad-Export-Date: 2014-03-13 05:32+0000\n"
+"X-Generator: Launchpad (build 16963)\n"
 "Language: gd\n"
 
 #: ../../global/militarysites/barracks.empire/conf:8
@@ -250,22 +250,6 @@ msgstr "Chuir an nàmhaid ruaig air na saighdearan agad aig tùr beag."
 msgid "Your soldiers defeated the enemy at the Small Tower"
 msgstr "Chuir na saighdearan agad ruaig air an nàmhaid aig tùr beag."
 
-#: ../../global/militarysites/stronghold.barbarians/conf:8
-msgid "Your Stronghold discovered an aggressor."
-msgstr "Mhothaich an daingean agad ionnsaighear."
-
-#: ../../global/militarysites/stronghold.barbarians/conf:9
-msgid "Your Stronghold is under attack."
-msgstr "Tha an daingean agad fo ionnsaigh."
-
-#: ../../global/militarysites/stronghold.barbarians/conf:10
-msgid "The enemy defeated your soldiers at the Stronghold"
-msgstr "Chuir an nàmhaid ruaig air na saighdearan agad aig daingean."
-
-#: ../../global/militarysites/stronghold.barbarians/conf:11
-msgid "Your soldiers defeated the enemy at the Stronghold"
-msgstr "Chuir na saighdearan agad ruaig air an nàmhaid aig daingean."
-
 #: ../../global/militarysites/tower.atlanteans/conf:9
 #: ../../global/militarysites/tower.empire/conf:9
 #: ../../tribes/empire/tower/conf:8
@@ -308,16 +292,8 @@ msgstr "'Na chadal"
 
 #: ../../tribes/empire/arena/conf:30
 #: ../../tribes/empire/colosseum/conf:36
-msgid "Upgrade soldier evade 0"
-msgstr "Ag àrdachadh teàrnadh saighdeir o 0"
-
-#: ../../tribes/empire/arena/conf:31
-#: ../../tribes/empire/colosseum/conf:37
-msgid ""
-"Upgrade soldier evade 0 (only for compatibility with old savegames (build13))"
+msgid "Upgrade soldier evade from level 0 to level 1"
 msgstr ""
-"Ag àrdachadh teàrnadh saighdeir o 0 (airson co-chòrdalachd ri seann "
-"gheamaichean air an sàbhaladh (build13) a-mhàin)"
 
 #: ../../tribes/empire/armour/conf:1
 msgid ""
@@ -359,18 +335,18 @@ msgstr "dèanamh lùirich meatailt"
 #: ../../tribes/empire/deep_marblemine/conf:27
 #: ../../tribes/empire/deep_oremine/conf:26
 #: ../../tribes/empire/donkeyfarm/conf:25
-#: ../../tribes/empire/farm/conf:27
+#: ../../tribes/empire/farm/conf:25
 #: ../../tribes/empire/fishers_house/conf:20
 #: ../../tribes/empire/foresters_house/conf:20
 #: ../../tribes/empire/goldmine/conf:26
 #: ../../tribes/empire/hunters_house/conf:19
 #: ../../tribes/empire/inn/conf:27
 #: ../../tribes/empire/lumberjacks_house/conf:20
-#: ../../tribes/empire/marblemine/conf:30
+#: ../../tribes/empire/marblemine/conf:28
 #: ../../tribes/empire/mill/conf:24
 #: ../../tribes/empire/oremine/conf:26
 #: ../../tribes/empire/piggery/conf:25
-#: ../../tribes/empire/quarry/conf:24
+#: ../../tribes/empire/quarry/conf:22
 #: ../../tribes/empire/sawmill/conf:26
 #: ../../tribes/empire/scouts_house/conf:20
 #: ../../tribes/empire/sheepfarm/conf:24
@@ -379,7 +355,7 @@ msgstr "dèanamh lùirich meatailt"
 #: ../../tribes/empire/stonemasons_house/conf:24
 #: ../../tribes/empire/tavern/conf:27
 #: ../../tribes/empire/toolsmithy/conf:49
-#: ../../tribes/empire/vineyard/conf:27
+#: ../../tribes/empire/vineyard/conf:25
 #: ../../tribes/empire/weaponsmithy/conf:38
 #: ../../tribes/empire/weaving-mill/conf:20
 #: ../../tribes/empire/well/conf:20
@@ -492,16 +468,9 @@ msgstr ""
 "h-Impireachd a bhiadhadh le gual mar as trice. Tochlaidh thu gual à mèinn "
 "guail no nì thu de dh'fhiodh e ann an sloc gual-fhiodha."
 
-#: ../../tribes/empire/colosseum/conf:38
-msgid "Upgrade soldier evade 1"
-msgstr "Ag àrdachadh teàrnadh saighdeir o 1"
-
-#: ../../tribes/empire/colosseum/conf:39
-msgid ""
-"Upgrade soldier evade 1 (only for compatibility with old savegames (build13))"
+#: ../../tribes/empire/colosseum/conf:37
+msgid "Upgrade soldier evade from level 1 to level 2"
 msgstr ""
-"Ag àrdachadh teàrnadh saighdeir o 1 (airson co-chòrdalachd ri seann "
-"gheamaichean air an sàbhaladh (build13) a-mhàin)"
 
 #: ../../tribes/empire/conf:4
 msgid "The Widelands Development Team"
@@ -916,7 +885,7 @@ msgid "Dismantle Site"
 msgstr "'Ga thoirt às a chèile"
 
 #: ../../tribes/empire/conf:149
-#: ../../tribes/empire/conf:212
+#: ../../tribes/empire/conf:211
 msgid "Castle"
 msgstr "Caisteal"
 
@@ -937,12 +906,12 @@ msgid "Small Tower"
 msgstr "Tùr beag"
 
 #: ../../tribes/empire/conf:154
-#: ../../tribes/empire/conf:211
+#: ../../tribes/empire/conf:210
 msgid "Tower"
 msgstr "Tùr"
 
 #: ../../tribes/empire/conf:155
-#: ../../tribes/empire/conf:209
+#: ../../tribes/empire/conf:208
 msgid "Barrier"
 msgstr "Taigh-faire"
 
@@ -955,200 +924,196 @@ msgid "Donjon"
 msgstr "Tùr-faire"
 
 #: ../../tribes/empire/conf:158
-#: ../../tribes/empire/conf:213
+#: ../../tribes/empire/conf:212
 msgid "Fortress"
 msgstr "Dùn"
 
 #: ../../tribes/empire/conf:159
-#: ../../tribes/empire/conf:207
+#: ../../tribes/empire/conf:206
 msgid "Sentry"
 msgstr "Freiceadan"
 
-#: ../../tribes/empire/conf:160
-msgid "Stronghold"
-msgstr "Daingean"
-
-#: ../../tribes/empire/conf:163
+#: ../../tribes/empire/conf:162
 msgid "Headquarters"
 msgstr "Prìomh-àras"
 
-#: ../../tribes/empire/conf:164
+#: ../../tribes/empire/conf:163
 msgid "Headquarters Shipwreck"
 msgstr "Long briste 'na phrìomh-àras"
 
-#: ../../tribes/empire/conf:165
+#: ../../tribes/empire/conf:164
 msgid "Warehouse"
 msgstr "Taigh-stòrais"
 
-#: ../../tribes/empire/conf:166
+#: ../../tribes/empire/conf:165
 msgid "Port"
 msgstr "Port"
 
-#: ../../tribes/empire/conf:169
+#: ../../tribes/empire/conf:168
 msgid "Quarry"
 msgstr "Coireall"
 
-#: ../../tribes/empire/conf:170
+#: ../../tribes/empire/conf:169
 msgid "Lumberjack’s House"
 msgstr "Taigh coillteir"
 
-#: ../../tribes/empire/conf:171
+#: ../../tribes/empire/conf:170
 msgid "Forester’s House"
 msgstr "Taigh planntair-choille"
 
-#: ../../tribes/empire/conf:172
+#: ../../tribes/empire/conf:171
 msgid "Fisher’s House"
 msgstr "Taigh-iasgair"
 
-#: ../../tribes/empire/conf:173
+#: ../../tribes/empire/conf:172
 msgid "Hunter’s House"
 msgstr "Taigh-sealgair"
 
-#: ../../tribes/empire/conf:174
+#: ../../tribes/empire/conf:173
 msgid "Well"
 msgstr "Tobar"
 
-#: ../../tribes/empire/conf:175
+#: ../../tribes/empire/conf:174
 msgid "Scout’s House"
 msgstr "Taigh-rabhadair"
 
-#: ../../tribes/empire/conf:176
+#: ../../tribes/empire/conf:175
 msgid "Stonemason’s House"
 msgstr "Taigh clachair"
 
-#: ../../tribes/empire/conf:177
+#: ../../tribes/empire/conf:176
 msgid "Sawmill"
 msgstr "Muileann sàbhaidh"
 
-#: ../../tribes/empire/conf:178
+#: ../../tribes/empire/conf:177
 msgid "Mill"
 msgstr "Muileann"
 
-#: ../../tribes/empire/conf:179
+#: ../../tribes/empire/conf:178
 msgid "Bakery"
 msgstr "Taigh-fuine"
 
-#: ../../tribes/empire/conf:180
+#: ../../tribes/empire/conf:179
 msgid "Brewery"
 msgstr "Taigh-grùide"
 
-#: ../../tribes/empire/conf:181
+#: ../../tribes/empire/conf:180
 msgid "Vineyard"
 msgstr "Fìon-lios"
 
-#: ../../tribes/empire/conf:182
+#: ../../tribes/empire/conf:181
 msgid "Winery"
 msgstr "Fìon-lann"
 
-#: ../../tribes/empire/conf:183
+#: ../../tribes/empire/conf:182
 msgid "Inn"
 msgstr "Taigh-òil"
 
-#: ../../tribes/empire/conf:184
+#: ../../tribes/empire/conf:183
 msgid "Tavern"
 msgstr "Taigh-tàrn"
 
-#: ../../tribes/empire/conf:185
+#: ../../tribes/empire/conf:184
 msgid "Charcoal Burner"
 msgstr "Loisgeadair fiodha"
 
-#: ../../tribes/empire/conf:186
+#: ../../tribes/empire/conf:185
 msgid "Smelting Works"
 msgstr "Ceàrdach leaghadair"
 
-#: ../../tribes/empire/conf:187
+#: ../../tribes/empire/conf:186
 msgid "Shipyard"
 msgstr "Cala"
 
-#: ../../tribes/empire/conf:188
+#: ../../tribes/empire/conf:187
 msgid "Toolsmithy"
 msgstr "Ceàrdach acainnean"
 
-#: ../../tribes/empire/conf:189
+#: ../../tribes/empire/conf:188
 msgid "Armor Smithy"
 msgstr "Ceàrdach armachd"
 
-#: ../../tribes/empire/conf:190
+#: ../../tribes/empire/conf:189
 msgid "Donkey Farm"
 msgstr "Tuathanas asalan"
 
-#: ../../tribes/empire/conf:191
+#: ../../tribes/empire/conf:190
 msgid "Sheep Farm"
 msgstr "Tuathanas chaorach"
 
-#: ../../tribes/empire/conf:192
+#: ../../tribes/empire/conf:191
 msgid "Weaving Mill"
 msgstr "Taigh nam beart"
 
-#: ../../tribes/empire/conf:193
+#: ../../tribes/empire/conf:192
 msgid "Piggery"
 msgstr "Fail"
 
-#: ../../tribes/empire/conf:194
+#: ../../tribes/empire/conf:193
 msgid "Farm"
 msgstr "Tuathanas"
 
-#: ../../tribes/empire/conf:195
+#: ../../tribes/empire/conf:194
 msgid "Weapon Smithy"
 msgstr "Ceàrdach arm"
 
-#: ../../tribes/empire/conf:196
+#: ../../tribes/empire/conf:195
 msgid "Deep Marble Mine"
 msgstr "Mèinn marmoir dhomhain"
 
-#: ../../tribes/empire/conf:197
+#: ../../tribes/empire/conf:196
 msgid "Marble Mine"
 msgstr "Mèinn marmoir"
 
-#: ../../tribes/empire/conf:198
+#: ../../tribes/empire/conf:197
 msgid "Deep Coal Mine"
 msgstr "Mèinn guail dhomhain"
 
-#: ../../tribes/empire/conf:199
+#: ../../tribes/empire/conf:198
 msgid "Coal Mine"
 msgstr "Mèinn guail"
 
-#: ../../tribes/empire/conf:200
+#: ../../tribes/empire/conf:199
 msgid "Deep Iron Ore Mine"
 msgstr "Mèinn cloich-iarainn dhomhain"
 
-#: ../../tribes/empire/conf:201
+#: ../../tribes/empire/conf:200
 msgid "Iron Ore Mine"
 msgstr "Mèinn cloich-iarainn"
 
-#: ../../tribes/empire/conf:202
+#: ../../tribes/empire/conf:201
 msgid "Deep Gold Mine"
 msgstr "Mèinn òir dhomhain"
 
-#: ../../tribes/empire/conf:203
+#: ../../tribes/empire/conf:202
 msgid "Gold Mine"
 msgstr "Mèinn òir"
 
-#: ../../tribes/empire/conf:208
+#: ../../tribes/empire/conf:207
 msgid "Barracks"
 msgstr "Taighean-feachd"
 
-#: ../../tribes/empire/conf:210
+#: ../../tribes/empire/conf:209
 msgid "Outpost"
 msgstr "Gearastan"
 
-#: ../../tribes/empire/conf:217
+#: ../../tribes/empire/conf:216
 msgid "Colosseum"
 msgstr "Coileasam"
 
-#: ../../tribes/empire/conf:218
+#: ../../tribes/empire/conf:217
 msgid "Arena"
 msgstr "Raon spòrs"
 
-#: ../../tribes/empire/conf:219
+#: ../../tribes/empire/conf:218
 msgid "Training Camp"
 msgstr "Campa trèanaidh"
 
-#: ../../tribes/empire/conf:222
+#: ../../tribes/empire/conf:221
 msgid "Headquarters Medium"
 msgstr "Prìomh-àras meadhanach"
 
-#: ../../tribes/empire/conf:223
+#: ../../tribes/empire/conf:222
 msgid "Castle Village"
 msgstr "Baile caisteil"
 
@@ -1164,7 +1129,7 @@ msgstr "Tàrmaichidh e asalan stampa cuideachail"
 msgid "Plant wheat"
 msgstr "Cuir cruithneachd"
 
-#: ../../tribes/empire/farm/conf:25
+#: ../../tribes/empire/farm/conf:24
 msgid "Harvest wheat"
 msgstr "Buain cruithneachd"
 
@@ -1232,10 +1197,11 @@ msgstr ""
 "ann an ceàrdach armachd is ann an ceàrdach arm."
 
 #: ../../tribes/empire/goldstone/conf:1
-msgid "Gold Ore is mined in goldmines and processed at the smelting works."
+msgid ""
+"Gold ore is mined in a goldmine. Smelted in a smelting works, it turns into "
+"gold which is used as a precious building material and to produce weapons "
+"and armor."
 msgstr ""
-"Tochlaidh tu clachan-òir ann am mèinnean òir is nì thu òr dhiubh ann an "
-"ceàrdach leaghadair."
 
 #: ../../tribes/empire/grape/conf:1
 msgid ""
@@ -1363,28 +1329,14 @@ msgstr ""
 "marmor ann an taigh clachair."
 
 #: ../../tribes/empire/marblemine/conf:26
-#: ../../tribes/empire/quarry/conf:22
+#: ../../tribes/empire/quarry/conf:21
 msgid "Mine marble"
 msgstr "Tochail marmor"
 
 #: ../../tribes/empire/marblemine/conf:27
-#: ../../tribes/empire/quarry/conf:23
-msgid "Mine marble (only for compatibility with old savegames (build13))"
-msgstr ""
-"Tochail marmor (airson co-chòrdalachd ri seann gheamaichean air an sàbhaladh "
-"(build13) a-mhàin)"
-
-#: ../../tribes/empire/marblemine/conf:28
 #: ../../tribes/empire/quarry/conf:20
 msgid "Mine stone"
 msgstr "Tochail clachan"
-
-#: ../../tribes/empire/marblemine/conf:29
-#: ../../tribes/empire/quarry/conf:21
-msgid "Mine stone (only for compatibility with old savegames (build13))"
-msgstr ""
-"Tochail clachan (airson co-chòrdalachd ri seann gheamaichean air an "
-"sàbhaladh (build13) a-mhàin)"
 
 #: ../../tribes/empire/master-miner/conf:1
 #: ../../tribes/empire/miner/conf:1
@@ -1478,13 +1430,10 @@ msgstr "Chan eil rum gu leòr ann"
 
 #: ../../tribes/empire/scripting/sc01_castle_village.lua:120
 msgid ""
-"Some of your starting buildings didn’t have enough room and \n"
-"weren’t built. You are at a disadvantage with this; consider restarting \n"
-"this map with a fair starting condition."
+"Some of your starting buildings didn’t have enough room and weren’t built. "
+"You are at a disadvantage with this; consider restarting this map with a "
+"fair starting condition."
 msgstr ""
-"Cha robh rum gu leòr ann airson cuid dhe na togalaichean tòiseachaidh agad \n"
-"is cha deach an togail. Cuiridh seo èis ort; saoil an tòisich thu \n"
-"air a' mhapa seo a-rithist le cumhan tòiseachaidh cothromach?"
 
 #: ../../tribes/empire/scythe/conf:1
 msgid ""
@@ -1609,100 +1558,36 @@ msgid "Trains the soldiers."
 msgstr "Trèanaidh e na saighdearan."
 
 #: ../../tribes/empire/trainingscamp/conf:47
-msgid "Upgrade soldier attack 0"
-msgstr "Ag àrdachadh ionnsaigh saighdeir o 0"
+msgid "Upgrade soldier attack from level 0 to level 1"
+msgstr ""
 
 #: ../../tribes/empire/trainingscamp/conf:48
-msgid ""
-"Upgrade soldier attack 0 (only for compatibility with old savegames "
-"(build13))"
+msgid "Upgrade soldier attack from level 1 to level 2"
 msgstr ""
-"Ag àrdachadh ionnsaigh saighdeir o 0 (airson co-chòrdalachd ri seann "
-"gheamaichean air an sàbhaladh (build13) a-mhàin)"
 
 #: ../../tribes/empire/trainingscamp/conf:49
-msgid "Upgrade soldier attack 1"
-msgstr "Ag àrdachadh ionnsaigh saighdeir o 1"
+msgid "Upgrade soldier attack from level 2 to level 3"
+msgstr ""
 
 #: ../../tribes/empire/trainingscamp/conf:50
-msgid ""
-"Upgrade soldier attack 1 (only for compatibility with old savegames "
-"(build13))"
+msgid "Upgrade soldier attack from level 3 to level 4"
 msgstr ""
-"Ag àrdachadh ionnsaigh saighdeir o 1 (airson co-chòrdalachd ri seann "
-"gheamaichean air an sàbhaladh (build13) a-mhàin)"
 
 #: ../../tribes/empire/trainingscamp/conf:51
-msgid "Upgrade soldier attack 2"
-msgstr "Ag àrdachadh ionnsaigh saighdeir o 2"
+msgid "Upgrade soldier health from level 0 to level 1"
+msgstr ""
 
 #: ../../tribes/empire/trainingscamp/conf:52
-msgid ""
-"Upgrade soldier attack 2 (only for compatibility with old savegames "
-"(build13))"
+msgid "Upgrade soldier health from level 1 to level 2"
 msgstr ""
-"Ag àrdachadh ionnsaigh saighdeir o 2 (airson co-chòrdalachd ri seann "
-"gheamaichean air an sàbhaladh (build13) a-mhàin)"
 
 #: ../../tribes/empire/trainingscamp/conf:53
-msgid "Upgrade soldier attack 3"
-msgstr "Ag àrdachadh ionnsaigh saighdeir o 3"
+msgid "Upgrade soldier health from level 2 to level 3"
+msgstr ""
 
 #: ../../tribes/empire/trainingscamp/conf:54
-msgid ""
-"Upgrade soldier attack 3 (only for compatibility with old savegames "
-"(build13))"
+msgid "Upgrade soldier health from level 3 to level 4"
 msgstr ""
-"Ag àrdachadh ionnsaigh saighdeir o 3 (airson co-chòrdalachd ri seann "
-"gheamaichean air an sàbhaladh (build13) a-mhàin)"
-
-#: ../../tribes/empire/trainingscamp/conf:55
-msgid "Upgrade soldier health 0"
-msgstr "Ag àrdachadh slàinte saighdeir o 0"
-
-#: ../../tribes/empire/trainingscamp/conf:56
-msgid ""
-"Upgrade soldier health 0 (only for compatibility with old savegames "
-"(build13))"
-msgstr ""
-"Ag àrdachadh slàinte saighdeir o 0 (airson co-chòrdalachd ri seann "
-"gheamaichean air an sàbhaladh (build13) a-mhàin)"
-
-#: ../../tribes/empire/trainingscamp/conf:57
-msgid "Upgrade soldier health 1"
-msgstr "Ag àrdachadh slàinte saighdeir o 1"
-
-#: ../../tribes/empire/trainingscamp/conf:58
-msgid ""
-"Upgrade soldier health 1 (only for compatibility with old savegames "
-"(build13))"
-msgstr ""
-"Ag àrdachadh slàinte saighdeir o 1 (airson co-chòrdalachd ri seann "
-"gheamaichean air an sàbhaladh (build13) a-mhàin)"
-
-#: ../../tribes/empire/trainingscamp/conf:59
-msgid "Upgrade soldier health 2"
-msgstr "Ag àrdachadh slàinte saighdeir o 2"
-
-#: ../../tribes/empire/trainingscamp/conf:60
-msgid ""
-"Upgrade soldier health 2 (only for compatibility with old savegames "
-"(build13))"
-msgstr ""
-"Ag àrdachadh slàinte saighdeir o 2 (airson co-chòrdalachd ri seann "
-"gheamaichean air an sàbhaladh (build13) a-mhàin)"
-
-#: ../../tribes/empire/trainingscamp/conf:61
-msgid "Upgrade soldier health 3"
-msgstr "Ag àrdachadh slàinte saighdeir o 3"
-
-#: ../../tribes/empire/trainingscamp/conf:62
-msgid ""
-"Upgrade soldier health 3 (only for compatibility with old savegames "
-"(build13))"
-msgstr ""
-"Ag àrdachadh slàinte saighdeir o 3 (airson co-chòrdalachd ri seann "
-"gheamaichean air an sàbhaladh (build13) a-mhàin)"
 
 #: ../../tribes/empire/trunk/conf:1
 msgid ""
@@ -1723,7 +1608,7 @@ msgstr "Fàsaidh e fìonan."
 msgid "Plant vine"
 msgstr "Cuir fìonan"
 
-#: ../../tribes/empire/vineyard/conf:25
+#: ../../tribes/empire/vineyard/conf:24
 msgid "Harvest vine"
 msgstr "Buain fìonan"
 

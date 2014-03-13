@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
-"POT-Creation-Date: 2014-03-06 21:20+0000\n"
+"POT-Creation-Date: 2014-03-12 21:37+0000\n"
 "PO-Revision-Date: 2014-03-11 10:17+0000\n"
 "Last-Translator: GunChleoc <Unknown>\n"
 "Language-Team: Widelands fixxer upper\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 1 : (n>=2 && n<=4) ? 2 : 0;\n"
-"X-Launchpad-Export-Date: 2014-03-12 04:34+0000\n"
+"X-Launchpad-Export-Date: 2014-03-13 05:38+0000\n"
 "X-Generator: Launchpad (build 16963)\n"
 "Language: sk\n"
 
@@ -79,11 +79,11 @@ msgstr "Samovládca"
 msgid "The tribe or team that can defeat all others wins the game!"
 msgstr "Kmeň alebo tím, ktorý dokáže poraziť ostatných, vyhráva hru!"
 
-#: ../../scripting/win_conditions/02_collectors.lua:13
+#: ../../scripting/win_conditions/02_collectors.lua:14
 msgid "Collectors"
 msgstr "Zberatelia"
 
-#: ../../scripting/win_conditions/02_collectors.lua:16
+#: ../../scripting/win_conditions/02_collectors.lua:17
 msgid ""
 "You get points for precious wares in your warehouses. The player with the "
 "highest number of wares at the end of 4 hours wins the game."
@@ -91,37 +91,37 @@ msgstr ""
 "Dostávate body za cenné výrobky vo svojich skladoch, hráč s najväčším počtom "
 "výrobkov na konci 4 hodín vyhráva hru."
 
-#: ../../scripting/win_conditions/02_collectors.lua:19
+#: ../../scripting/win_conditions/02_collectors.lua:20
 msgid "Points"
 msgstr "Body"
 
-#: ../../scripting/win_conditions/02_collectors.lua:95
+#: ../../scripting/win_conditions/02_collectors.lua:96
 msgid "Status for %s"
 msgstr ""
 
-#: TRANSLATORS: For example: "gold (3 P) x 4 = 12 P", P meaning "Points"
-#: ../../scripting/win_conditions/02_collectors.lua:105
-msgid "  %1$s (%2$i P) x %3$i = %4$i P<br>"
+#: TRANSLATORS: For example: 'gold (3 P) x 4 = 12 P", P meaning "Points'
+#: ../../scripting/win_conditions/02_collectors.lua:106
+msgid "  %1$s (%2$i P) x %3$i = %4$i P"
 msgstr ""
 
-#: ../../scripting/win_conditions/02_collectors.lua:109
+#: ../../scripting/win_conditions/02_collectors.lua:110
 msgid "Total: %i point"
 msgid_plural "Total: %i points"
 msgstr[0] ""
 msgstr[1] ""
 
-#: TRANSLATORS: Context: "The game will end in %s."
-#: ../../scripting/win_conditions/02_collectors.lua:121
+#: TRANSLATORS: Context: 'The game will end in %s.'
+#: ../../scripting/win_conditions/02_collectors.lua:123
 msgid "%1$ih%2$02im"
 msgstr ""
 
-#: ../../scripting/win_conditions/02_collectors.lua:123
+#: ../../scripting/win_conditions/02_collectors.lua:125
 msgid "%i minute"
 msgid_plural "%i minutes"
 msgstr[0] ""
 msgstr[1] ""
 
-#: ../../scripting/win_conditions/02_collectors.lua:125
+#: ../../scripting/win_conditions/02_collectors.lua:127
 msgid "The game will end in %s."
 msgstr "Hra skončí za %s."
 
@@ -210,13 +210,10 @@ msgstr "Lesný škriatok"
 
 #: ../../scripting/win_conditions/04_wood_gnome.lua:16
 msgid ""
-"As wood gnome you like big forests, so your task is to have more trees on\n"
-"your territory than any other player. The game will end after 4 hours of\n"
+"As wood gnome you like big forests, so your task is to have more trees on "
+"your territory than any other player. The game will end after 4 hours of "
 "playing. The one with the most trees at that point will win the game."
 msgstr ""
-"Ako lesný škriatok obľubujete veľké lesy, takže vašou úlohou je mať viac\n"
-"stromov na svojom území ako ostatní hráči. Hra skončí po 4 hodinách\n"
-"hrania. Hráč s najväčším počtom stromov vyhráva hru."
 
 #: ../../scripting/win_conditions/04_wood_gnome.lua:19
 msgid "Trees owned"
