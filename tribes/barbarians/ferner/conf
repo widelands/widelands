@@ -2,11 +2,6 @@ help=_Grows thatch reed.
 program=plantreed
 program=harvestreed
 
-[compatibility_program]
-# For compatibility with build15 and earlier
-plantflax=fail
-harvestflax=fail
-
 [buildcost]
 carrier=1
 shovel=1

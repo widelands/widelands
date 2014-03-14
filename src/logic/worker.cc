@@ -1336,19 +1336,6 @@ Ware_Index Worker::level(Game & game) {
 }
 
 /**
- * Change this worker into a different type.
- *
- * \warning Using this function is very dangerous. The only reason it exists
- * is to fix certain savegame compatibility issues.
- */
-void Worker::flash(const std::string & newname)
-{
-	log("WARNING: Flashing worker of type %s to %s\n", name().c_str(), newname.c_str());
-
-	m_descr = tribe().get_worker_descr(tribe().safe_worker_index(newname));
-}
-
-/**
  * Set a fallback task.
  */
 void Worker::init_auto_task(Game & game) {
@@ -3046,14 +3033,6 @@ const Bob::Task * Worker::Loader::get_task(const std::string & name)
 const BobProgramBase * Worker::Loader::get_program(const std::string & name)
 {
 	Worker & worker = get<Worker>();
-	const std::string & compatibility = worker.descr().compatibility_program(name);
-
-	if (compatibility == "fail") {
-		if (upcast(Game, game, &egbase()))
-			add_finish(boost::bind(&Worker::send_signal, &worker, boost::ref(*game), "fail"));
-		return nullptr;
-	}
-
 	return worker.descr().get_program(name);
 }
 

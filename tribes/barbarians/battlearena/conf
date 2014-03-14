@@ -19,9 +19,6 @@ thatchreed=1
 [working positions]
 trainer=1
 
-[compatibility working positions]
-carrier=replace trainer
-
 [inputs]
 pittabread=10
 fish=6
