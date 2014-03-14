@@ -22,8 +22,6 @@
 #include <cstdio>
 #include <iostream>
 
-#include <libintl.h>
-
 #include "constants.h"
 #include "graphic/graphic.h"
 #include "i18n.h"
