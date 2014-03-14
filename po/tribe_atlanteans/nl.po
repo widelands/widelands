@@ -7,13 +7,13 @@ msgstr ""
 "Project-Id-Version: Widelands svn4575\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2014-03-12 21:37+0000\n"
-"PO-Revision-Date: 2014-03-12 21:32+0000\n"
-"Last-Translator: GunChleoc <Unknown>\n"
+"PO-Revision-Date: 2014-03-13 09:27+0000\n"
+"Last-Translator: fk <Unknown>\n"
 "Language-Team: Widelands fixxer upper\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-03-13 05:30+0000\n"
+"X-Launchpad-Export-Date: 2014-03-14 05:34+0000\n"
 "X-Generator: Launchpad (build 16963)\n"
 "Language: nl\n"
 
@@ -1060,19 +1060,19 @@ msgstr "Rust"
 
 #: ../../tribes/atlanteans/dungeon/conf:40
 msgid "Upgrade soldier attack from level 0 to level 1"
-msgstr ""
+msgstr "Opwaarderen soldatenaanval van niveau 0 naar niveau 1"
 
 #: ../../tribes/atlanteans/dungeon/conf:41
 msgid "Upgrade soldier attack from level 1 to level 2"
-msgstr ""
+msgstr "Opwaarderen soldatenaanval van niveau 1 naar niveau 2"
 
 #: ../../tribes/atlanteans/dungeon/conf:42
 msgid "Upgrade soldier attack from level 2 to level 3"
-msgstr ""
+msgstr "Opwaarderen soldatenaanval van niveau 2 naar niveau 3"
 
 #: ../../tribes/atlanteans/dungeon/conf:43
 msgid "Upgrade soldier attack from level 3 to level 4"
-msgstr ""
+msgstr "Opwaarderen soldatenaanval van niveau 3 naar niveau 4"
 
 #: ../../tribes/atlanteans/farm/conf:24
 msgid "Plant corn"
@@ -1151,6 +1151,9 @@ msgid ""
 "gold which is used as a precious building material and to produce weapons "
 "and armor."
 msgstr ""
+"Gouderts wordt gewonnen in een goudmijn. Als het wordt gesmolten in een "
+"hoogoven dan verandert het in goud dat wordt gebruikt als een kostbaar "
+"bouwmateriaal en om wapens van te maken."
 
 #: ../../tribes/atlanteans/goldyarn/conf:1
 msgid ""
@@ -1243,23 +1246,23 @@ msgstr ""
 
 #: ../../tribes/atlanteans/labyrinth/conf:46
 msgid "Upgrade soldier defense from level 0 to level 1"
-msgstr ""
+msgstr "Opwaarderen soldatenverdediging van niveau 0 naar niveau 1"
 
 #: ../../tribes/atlanteans/labyrinth/conf:47
 msgid "Upgrade soldier defense from level 1 to level 2"
-msgstr ""
+msgstr "Opwaarderen soldatenverdediging van niveau 1 naar niveau 2"
 
 #: ../../tribes/atlanteans/labyrinth/conf:48
 msgid "Upgrade soldier health from level 0 to level 1"
-msgstr ""
+msgstr "Opwaarderen soldaten levenspunten van niveau 0 naar niveau 1"
 
 #: ../../tribes/atlanteans/labyrinth/conf:49
 msgid "Upgrade soldier evade from level 0 to level 1"
-msgstr ""
+msgstr "Opwaarderen soldaat ontwijken van niveau 0 naar niveau 1"
 
 #: ../../tribes/atlanteans/labyrinth/conf:50
 msgid "Upgrade soldier evade from level 1 to level 2"
-msgstr ""
+msgstr "Opwaarderen soldaat ontwijken van niveau 1 naar niveau 2"
 
 #: ../../tribes/atlanteans/light_trident/conf:1
 msgid ""
@@ -1383,6 +1386,9 @@ msgid ""
 "You are at a disadvantage with this; consider restarting this map with a "
 "fair starting condition."
 msgstr ""
+"Er was onvoldoende ruimte voor enkele van je startgebouwen en deze zijn niet "
+"gebouwd. Dit stelt je op een achterstand; overweeg om deze kaart opnieuw te "
+"beginnen met een eerlijke startpositie."
 
 #: ../../tribes/atlanteans/scythe/conf:1
 msgid ""

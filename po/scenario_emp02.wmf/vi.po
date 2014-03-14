@@ -2,21 +2,22 @@
 # Copyright (c) 2010 Rosetta Contributors and Canonical Ltd 2010
 # This file is distributed under the same license as the widelands package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010.
-#
+# GunChleoc <fios@foramnagaidhlig.net>, 2014.
 msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-03-12 21:37+0000\n"
-"PO-Revision-Date: 2010-11-05 05:11+0000\n"
-"Last-Translator: Nasenbaer <Unknown>\n"
-"Language-Team: Vietnamese <vi@li.org>\n"
+"PO-Revision-Date: 2014-03-13 14:11+0000\n"
+"Last-Translator: GunChleoc <Unknown>\n"
+"Language-Team: Widelands fixxer upper\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Launchpad-Export-Date: 2014-03-13 05:28+0000\n"
+"X-Launchpad-Export-Date: 2014-03-14 05:33+0000\n"
 "X-Generator: Launchpad (build 16963)\n"
+"Language: vi\n"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:28
 msgid "Build up a wood economy"
@@ -48,11 +49,11 @@ msgstr "Bảo vệ thuộc địa của bạn"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:46
 msgid "Protect Your Colony"
-msgstr ""
+msgstr "Bảo vệ thuộc địa của bạn"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:47
 msgid "Build some barracks and sentries around the colony."
-msgstr ""
+msgstr "Dựng một số trại lính và chòi canh trên lãnh thổ thuộc địa."
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:52
 msgid "Start mining marble"
@@ -64,7 +65,7 @@ msgstr ""
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:55
 msgid "Expand to the east, to start mining marble from the mountain."
-msgstr ""
+msgstr "Mở rộng sang phía đông, để bắt đầu khai thác đá cẩm thạch trên núi."
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:60
 msgid "Build a stonemason and mining infrastructure"
@@ -122,17 +123,19 @@ msgstr "Bảo vệ phòng tuyến phía đông của bạn"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:83
 msgid "Protect Your Eastern Frontier"
-msgstr ""
+msgstr "Bảo vệ phòng tuyến phía đông của bạn"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:84
 msgid ""
 "Build up stronger military buildings, such as an outpost, a barrier or a "
 "tower, on the eastern frontier."
 msgstr ""
+"Dựng các trạm quân đội mạnh hơn, như trạm tiền tiêu, trạm gác, tháp canh ở "
+"tiền tuyến phía đông."
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:86
 msgid "To watch deep inside the enemy territory, build a tower."
-msgstr ""
+msgstr "Để quan sát sâu vào trong lãnh thổ địch, hãy dựng một tháp canh."
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:91
 msgid "Destroy the barbarian tribe"
@@ -140,13 +143,15 @@ msgstr "Tiêu diệt bộ lạc mọi rợ"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:93
 msgid "Destroy the Barbarian Tribe"
-msgstr ""
+msgstr "Tiêu diệt bộ lạc mọi rợ"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:94
 msgid ""
 "As soon as you have enough soldiers, attack and completely destroy the "
 "barbarian buildings."
 msgstr ""
+"Ngay khi có đủ quân lính, hãy tấn công và phá hủy hoàn toàn nhà của quân mọi "
+"rợ."
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:95
 msgid ""
@@ -154,10 +159,12 @@ msgid ""
 "headquarters stood before), to avoid new settlements of other tribes in that "
 "region."
 msgstr ""
+"Cuối cùng, dựng một pháo đài trên bán đảo (gần chỗ tổng hành dinh của quân "
+"mọi rợ trước đó), để ngăn sự định cư của các bộ lạc khác trong vùng."
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:103
 msgid "A New Island"
-msgstr ""
+msgstr "Một hòn đảo mới"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:105
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:116
@@ -187,7 +194,7 @@ msgstr ""
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:114
 msgid "The Green Forests"
-msgstr ""
+msgstr "Rừng xanh"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:117
 msgid ""
@@ -211,7 +218,7 @@ msgstr ""
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:127
 msgid "The Rocks"
-msgstr ""
+msgstr "Đá núi"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:130
 msgid ""
@@ -228,23 +235,28 @@ msgstr ""
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:138
 msgid "Wood for the Colony"
-msgstr ""
+msgstr "Gỗ dành cho thuộc địa"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:141
 msgid ""
 "Good news! Today our wood economy was completed. Now we can be sure that we "
 "will have enough wood for our future building projects."
 msgstr ""
+"Có tin tốt lành! Hôm nay việc kinh doanh gỗ của chúng ta đã hoàn thành. Bây "
+"giờ chúng ta chắc chắn sẽ có đủ gỗ phục vụ cho mục đích xây dựng trong tương "
+"lai."
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:146
 msgid "Stone for the Colony"
-msgstr ""
+msgstr "Đá dành cho thuộc địa"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:149
 msgid ""
 "Great! Today the building of the quarry was completed. Now we will get "
 "enough stone to construct larger buildings."
 msgstr ""
+"Tuyệt vời! Hôm nay việc xây dựng mỏ đá đã hoàn thành. Bây giờ chúng ta đã có "
+"đủ đá để xây những công trình lớn hơn."
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:153
 msgid "Dangerous Ship Parts"
@@ -277,7 +289,7 @@ msgstr ""
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:168
 msgid "Marble on the Mountain"
-msgstr ""
+msgstr "Đá cẩm thạch trên núi"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:169
 msgid "Saledus smiles"
@@ -303,7 +315,7 @@ msgstr ""
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:182
 msgid "Further Mountains"
-msgstr ""
+msgstr "Những ngọn núi phía xa"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:183
 msgid "Saledus is amazed"
@@ -331,7 +343,7 @@ msgstr ""
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:195
 msgid "Food for the Miners"
-msgstr ""
+msgstr "Thức ăn cho những người thợ mỏ"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:196
 msgid "Amalea comes in..."
@@ -390,7 +402,7 @@ msgstr ""
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:222
 msgid "Command to Attack"
-msgstr ""
+msgstr "Hiệu lệnh tấn công"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:225
 msgid ""
@@ -398,6 +410,9 @@ msgid ""
 "infrastructure is getting better and better. Now we should think about "
 "preparing ourselves for battle."
 msgstr ""
+"Rất tốt. Doanh trại lớn đầu tiên đã được hoàn thành và cơ sở hạ tầng khai "
+"thác mỏ dần được cải thiện. Bây giờ chúng ta nên nghĩ đến việc chuẩn bị sẵn "
+"sàng cho trận chiến."
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:231
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:236
@@ -424,7 +439,7 @@ msgstr ""
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:242
 msgid "As Time is Running By"
-msgstr ""
+msgstr "Thời gian trôi đi,"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:245
 msgid "7 days later..."
@@ -456,7 +471,7 @@ msgstr ""
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:262
 msgid "Our New Tavern"
-msgstr ""
+msgstr "Quán rượu mới của chúng ta"
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:263
 msgid "Amalea smiles"
@@ -467,12 +482,16 @@ msgid ""
 "Greetings, my friend, I just visited our new tavern ‘At the palms’. The beer "
 "they serve is really tasty. You really should have a drink there, too."
 msgstr ""
+"Xin chào, người anh em, tôi vừa qua thăm quán rượu mới 'Cây cọ' của chúng "
+"ta. Bia ở đó ngon tuyệt. Anh cũng nên uống ở đó đi."
 
 #: ../../campaigns/emp02.wmf/scripting/texts.lua:266
 msgid ""
 "It is good to see that we have now got a warmer and more familiar "
 "environment on our island. Thank you, Lutius."
 msgstr ""
+"Thật tuyệt khi thấy được chúng ta đã có không khí nồng nhiệt và thân thiện "
+"trên hòn đảo này. Cám ơn, Lutius."
 
 #: ../../scripting/format_scenario.lua:36
 msgid "“%s”"

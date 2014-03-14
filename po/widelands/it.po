@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: Widelands svn4530\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2014-03-12 22:37+0100\n"
-"PO-Revision-Date: 2014-03-12 17:42+0000\n"
+"PO-Revision-Date: 2014-03-13 11:28+0000\n"
 "Last-Translator: Guybrush88 <Unknown>\n"
 "Language-Team: Widelands fixxer upper\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-03-13 05:34+0000\n"
+"X-Launchpad-Export-Date: 2014-03-14 05:35+0000\n"
 "X-Generator: Launchpad (build 16963)\n"
 "X-Poedit-Country: ITALY\n"
 "Language: it\n"
@@ -114,7 +114,7 @@ msgstr "Mappa non salvata"
 
 #: ../../src/editor/editorinteractive.cc:253
 msgid "The map has not been saved, do you really want to quit?"
-msgstr ""
+msgstr "La mappa non è stata salvata, vuoi davvero uscire?"
 
 #: ../../src/editor/editorinteractive.cc:597
 #: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:179
@@ -523,12 +523,12 @@ msgstr "Non un file di mappa"
 #: ../../src/wui/game_main_menu_save_game.cc:268
 #, c-format
 msgid "A file with the name ‘%s’ already exists. Overwrite?"
-msgstr ""
+msgstr "Un file con il nome '%s' esiste già. Sovrascrivere?"
 
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:390
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:410
 msgid "Error Saving Map!"
-msgstr ""
+msgstr "Errore durante il salvataggio della mappa!"
 
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:406
 msgid ""
@@ -735,7 +735,7 @@ msgstr "Grande"
 #: ../../src/logic/constructionsite.cc:92 ../../src/logic/immovable.cc:544
 #, c-format
 msgid "%i%% built"
-msgstr ""
+msgstr "%i%% costruito"
 
 #: ../../src/logic/dismantlesite.cc:100
 #, c-format
@@ -992,7 +992,7 @@ msgstr "Prodotto %s"
 #: ../../src/logic/production_program.cc:1074
 #, c-format
 msgid "Recruited %s"
-msgstr ""
+msgstr "Reclutato %s"
 
 #. * TRANSLATORS: %1$s = production site name, %2$s = production program name, %3$s = resource
 #: ../../src/logic/production_program.cc:1131
@@ -1109,7 +1109,7 @@ msgstr ""
 #: ../../src/logic/worker.cc:610
 #, c-format
 msgid "Out of %s"
-msgstr ""
+msgstr "Di %s"
 
 #: ../../src/logic/worker.cc:611
 #, c-format
@@ -1443,12 +1443,12 @@ msgstr "Non puoi allontanare il server dedicato"
 #: ../../src/network/nethost.cc:447
 #, c-format
 msgid "Are you sure you want to kick %s?"
-msgstr ""
+msgstr "Sei sicuro di voler cacciare %s?"
 
 #: ../../src/network/nethost.cc:448
 #, c-format
 msgid "The stated reason was: %s"
-msgstr ""
+msgstr "La ragione dichiarata è stata: %s"
 
 #: ../../src/network/nethost.cc:449
 #, c-format
@@ -1522,7 +1522,7 @@ msgstr ""
 
 #: ../../src/network/nethost.cc:1254
 msgid "Cannot save while there is no game running!"
-msgstr ""
+msgstr "Non è possibile salvare quando non c'è nessuna partita in corso!"
 
 #: ../../src/network/nethost.cc:1265
 msgid "Game successfully saved!"
@@ -3101,7 +3101,7 @@ msgstr "Produttività totale:"
 
 #: ../../src/wui/building_statistics_menu.cc:91
 msgid "Owned:"
-msgstr ""
+msgstr "Posseduto:"
 
 #: ../../src/wui/building_statistics_menu.cc:97
 msgid "Being built:"
@@ -3353,15 +3353,15 @@ msgstr "Condizione di vittoria:"
 #, c-format
 msgid "%i player"
 msgid_plural "%i players"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%i giocatore"
+msgstr[1] "%i giocatori"
 
 #. * TRANSLATORS: This is preceded by a number
 #: ../../src/wui/game_main_menu_save_game.cc:181
 msgid "player"
 msgid_plural "players"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "giocatore"
+msgstr[1] "giocatori"
 
 #: ../../src/wui/game_main_menu_save_game.cc:251
 msgid ""
@@ -3378,7 +3378,7 @@ msgstr ""
 #: ../../src/wui/game_main_menu_save_game.cc:255
 #: ../../src/wui/game_main_menu_save_game.cc:267
 msgid "Save Game Error!"
-msgstr ""
+msgstr "Errore del salvataggio della partita!"
 
 #: ../../src/wui/game_main_menu_save_game.cc:330
 msgid "File deletion"
@@ -3392,7 +3392,7 @@ msgstr "Sicuro di voler eliminare il documento %s?"
 #: ../../src/wui/game_message_menu.cc:46
 #: ../../src/wui/game_message_menu.cc:373
 msgid "Messages: Inbox"
-msgstr ""
+msgstr "Messaggi: in arrivo"
 
 #: ../../src/wui/game_message_menu.cc:56
 msgid "Select"
@@ -3442,7 +3442,7 @@ msgstr "centra la mappa principale sul luogo"
 
 #: ../../src/wui/game_message_menu.cc:366
 msgid "Messages: Archive"
-msgstr ""
+msgstr "Messaggi: archivio"
 
 #: ../../src/wui/game_message_menu.cc:368
 msgid "Restore selected messages"

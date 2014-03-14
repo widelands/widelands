@@ -7,13 +7,13 @@ msgstr ""
 "Project-Id-Version: Widelands svn4575\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2014-03-12 21:37+0000\n"
-"PO-Revision-Date: 2014-03-11 18:27+0000\n"
+"PO-Revision-Date: 2014-03-13 11:18+0000\n"
 "Last-Translator: fk <Unknown>\n"
 "Language-Team: Widelands fixxer upper\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-03-13 05:32+0000\n"
+"X-Launchpad-Export-Date: 2014-03-14 05:34+0000\n"
 "X-Generator: Launchpad (build 16963)\n"
 "Language: nl\n"
 
@@ -279,6 +279,9 @@ msgid ""
 "smithy and used in a training camp – together with food – to train soldiers "
 "from attack level 1 to level 2."
 msgstr ""
+"Dit is een verbeterde lans, met stalen punt. Hij wordt geproduceerd in een "
+"wapensmederij en gebruikt in een trainingskamp - samen met voedsel - om "
+"soldaten van aanvalsniveau 1 naar niveau 2 te trainen."
 
 #: ../../tribes/empire/arena/conf:29
 #: ../../tribes/empire/colosseum/conf:35
@@ -289,7 +292,7 @@ msgstr "Rust"
 #: ../../tribes/empire/arena/conf:30
 #: ../../tribes/empire/colosseum/conf:36
 msgid "Upgrade soldier evade from level 0 to level 1"
-msgstr ""
+msgstr "Opwaarderen soldaat ontwijken van niveau 0 naar niveau 1"
 
 #: ../../tribes/empire/armour/conf:1
 msgid ""
@@ -297,6 +300,9 @@ msgid ""
 "in the training camp – together with food – to train soldiers from health "
 "level 1 to level 2."
 msgstr ""
+"Standaard harnas voor imperialistische soldaten. Hij wordt gemaakt in de "
+"harnassmederij en wordt gebruikt in het trainingskamp - samen met voedsel - "
+"om soldaten te trainen van levenspuntenniveau 1 naar 2."
 
 #: ../../tribes/empire/armoursmith/conf:1
 msgid "Produces armor for the soldiers."
@@ -308,11 +314,11 @@ msgstr "Maak helm"
 
 #: ../../tribes/empire/armoursmithy/conf:32
 msgid "Produce armor"
-msgstr ""
+msgstr "Maak harnas"
 
 #: ../../tribes/empire/armoursmithy/conf:33
 msgid "Produce chain armor"
-msgstr ""
+msgstr "Maak maliënkolder"
 
 #: ../../tribes/empire/armoursmithy/conf:34
 msgid "Produce plate armor"
@@ -440,6 +446,10 @@ msgid ""
 "armor smithy and used in a training camp – together with food – to train "
 "soldiers from health level 2 to level 3."
 msgstr ""
+"De maliënkolder is een middelsterk harnas voor imperialistische soldaten. "
+"Hij wordt gemaakt in de harnassmederij en wordt gebruikt in het "
+"trainingskamp - samen met voedsel - om soldaten te trainen van "
+"levenspuntenniveau 2 naar 3."
 
 #: ../../tribes/empire/cloth/conf:1
 msgid ""
@@ -461,7 +471,7 @@ msgstr ""
 
 #: ../../tribes/empire/colosseum/conf:37
 msgid "Upgrade soldier evade from level 1 to level 2"
-msgstr ""
+msgstr "Opwaarderen soldaat ontwijken van niveau 1 naar niveau 2"
 
 #: ../../tribes/empire/conf:4
 msgid "The Widelands Development Team"
@@ -1147,7 +1157,7 @@ msgstr ""
 
 #: ../../tribes/empire/fisher/conf:1
 msgid "Catches fish in the sea."
-msgstr ""
+msgstr "Vangt vis uit de zee."
 
 #: ../../tribes/empire/fishing_rod/conf:1
 msgid ""
@@ -1192,6 +1202,9 @@ msgid ""
 "gold which is used as a precious building material and to produce weapons "
 "and armor."
 msgstr ""
+"Gouderts wordt gewonnen in een goudmijn. Als het wordt gesmolten in een "
+"hoogoven dan verandert het in goud dat wordt gebruikt als een kostbaar "
+"bouwmateriaal en om wapens van te maken."
 
 #: ../../tribes/empire/grape/conf:1
 msgid ""
@@ -1228,6 +1241,10 @@ msgid ""
 "young soldiers. Helmets are also used in training camps – together with food "
 "– to train soldiers from health level 0 to level 1."
 msgstr ""
+"De helm is de basisverdediging van een soldaat. Hij wordt gemaakt in een "
+"harnassmederij. Samen met een houten lans vormt hij de uitrusting voor "
+"nieuwe soldaten. Helmen worden ook gebruikt in trainingskampen, samen met "
+"voedsel, om soldaten te trainen van levenspuntenniveau 0 naar niveau 1."
 
 #: ../../tribes/empire/hunter/conf:1
 msgid "The Hunter brings good meat to the colonists."
@@ -1373,6 +1390,10 @@ msgid ""
 "produced in the armor smithy and used in the training camp – together with "
 "food – to train soldiers from health level 3 to level 4."
 msgstr ""
+"Het pantser is het sterkste harnas voor de imperialistische soldaten. Hij "
+"wordt geproduceerd in de harnassmederij en wordt gebruikt in het "
+"trainingskamp - samen met voedsel - om soldaten te trainen van "
+"levenspuntenniveau 3 naar niveau 4."
 
 #: ../../tribes/empire/ration/conf:1
 msgid ""
@@ -1414,6 +1435,9 @@ msgid ""
 "You are at a disadvantage with this; consider restarting this map with a "
 "fair starting condition."
 msgstr ""
+"Er was onvoldoende ruimte voor enkele van je startgebouwen en deze zijn niet "
+"gebouwd. Dit stelt je op een achterstand; overweeg om deze kaart opnieuw te "
+"beginnen met een eerlijke startpositie."
 
 #: ../../tribes/empire/scythe/conf:1
 msgid ""
@@ -1541,35 +1565,35 @@ msgstr "Traint de soldaten."
 
 #: ../../tribes/empire/trainingscamp/conf:47
 msgid "Upgrade soldier attack from level 0 to level 1"
-msgstr ""
+msgstr "Opwaarderen soldatenaanval van niveau 0 naar niveau 1"
 
 #: ../../tribes/empire/trainingscamp/conf:48
 msgid "Upgrade soldier attack from level 1 to level 2"
-msgstr ""
+msgstr "Opwaarderen soldatenaanval van niveau 1 naar niveau 2"
 
 #: ../../tribes/empire/trainingscamp/conf:49
 msgid "Upgrade soldier attack from level 2 to level 3"
-msgstr ""
+msgstr "Opwaarderen soldatenaanval van niveau 2 naar niveau 3"
 
 #: ../../tribes/empire/trainingscamp/conf:50
 msgid "Upgrade soldier attack from level 3 to level 4"
-msgstr ""
+msgstr "Opwaarderen soldatenaanval van niveau 3 naar niveau 4"
 
 #: ../../tribes/empire/trainingscamp/conf:51
 msgid "Upgrade soldier health from level 0 to level 1"
-msgstr ""
+msgstr "Opwaarderen soldaten levenspunten van niveau 0 naar niveau 1"
 
 #: ../../tribes/empire/trainingscamp/conf:52
 msgid "Upgrade soldier health from level 1 to level 2"
-msgstr ""
+msgstr "Opwaarderen soldaten levenspunten van niveau 1 naar niveau 2"
 
 #: ../../tribes/empire/trainingscamp/conf:53
 msgid "Upgrade soldier health from level 2 to level 3"
-msgstr ""
+msgstr "Opwaarderen soldaten levenspunten van niveau 2 naar niveau 3"
 
 #: ../../tribes/empire/trainingscamp/conf:54
 msgid "Upgrade soldier health from level 3 to level 4"
-msgstr ""
+msgstr "Opwaarderen soldaten levenspunten van niveau 3 naar niveau 4"
 
 #: ../../tribes/empire/trunk/conf:1
 msgid ""

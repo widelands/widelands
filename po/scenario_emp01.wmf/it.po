@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: Widelands svn4435\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2014-03-12 21:37+0000\n"
-"PO-Revision-Date: 2014-03-11 23:10+0000\n"
-"Last-Translator: GunChleoc <Unknown>\n"
+"PO-Revision-Date: 2014-03-13 12:51+0000\n"
+"Last-Translator: Guybrush88 <Unknown>\n"
 "Language-Team: Widelands fixxer upper\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-03-13 05:28+0000\n"
+"X-Launchpad-Export-Date: 2014-03-14 05:33+0000\n"
 "X-Generator: Launchpad (build 16963)\n"
 "X-Poedit-Country: ITALY\n"
 "Language: it\n"
@@ -28,7 +28,7 @@ msgstr "Costruisci una caserma"
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:30
 msgid "Barracks"
-msgstr ""
+msgstr "Caserma"
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:31
 msgid ""
@@ -44,7 +44,7 @@ msgstr "Costruisci una falegnameria"
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:38
 msgid "Lumberjack’s House"
-msgstr ""
+msgstr "Casa del taglialegna"
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:39
 msgid ""
@@ -85,7 +85,7 @@ msgstr "Costruisci una casa della forestale"
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:56
 msgid "Forester’s House"
-msgstr ""
+msgstr "Casa della guardia forestale"
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:57
 msgid ""
@@ -100,7 +100,7 @@ msgstr "Costruisci una cava"
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:64
 msgid "Quarry"
-msgstr ""
+msgstr "Cava"
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:65
 msgid ""
@@ -518,10 +518,10 @@ msgstr ""
 
 #: ../../scripting/format_scenario.lua:36
 msgid "“%s”"
-msgstr ""
+msgstr "“%s”"
 
 #: ../../scripting/format_scenario.lua:80
 msgid "New Objective"
 msgid_plural "New Objectives"
-msgstr[0] ""
-msgstr[1] "Nuovi Obiettivi"
+msgstr[0] "Nuovo obiettivo"
+msgstr[1] "Nuovi obiettivi"

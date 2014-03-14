@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2014-03-12 21:37+0000\n"
-"PO-Revision-Date: 2014-03-11 16:36+0000\n"
+"PO-Revision-Date: 2014-03-13 13:23+0000\n"
 "Last-Translator: Lex <teh.f4ll3n@gmail.com>\n"
 "Language-Team: русский <ru@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2014-03-13 05:32+0000\n"
+"X-Launchpad-Export-Date: 2014-03-14 05:34+0000\n"
 "X-Generator: Launchpad (build 16963)\n"
 "Language: ru_RU\n"
 
@@ -1516,11 +1516,11 @@ msgstr "Сон"
 
 #: ../../tribes/barbarians/battlearena/conf:37
 msgid "Upgrade soldier evade from level 0 to level 1"
-msgstr ""
+msgstr "Увеличить навык уклонения с 0 до 1"
 
 #: ../../tribes/barbarians/battlearena/conf:38
 msgid "Upgrade soldier evade from level 1 to level 2"
-msgstr ""
+msgstr "Увеличить навык уклонения с 1 до 2"
 
 #: ../../tribes/barbarians/battlearena/help.lua:12
 msgid ""
@@ -2271,7 +2271,7 @@ msgstr "Бревно"
 
 #: ../../tribes/barbarians/conf:108
 msgid "Warhelm"
-msgstr ""
+msgstr "Боевой шлем"
 
 #: ../../tribes/barbarians/conf:109
 msgid "Warrior’s Ax"
@@ -3381,6 +3381,9 @@ msgid ""
 "You are at a disadvantage with this; consider restarting this map with a "
 "fair starting condition."
 msgstr ""
+"Не хватило места для постройки некоторых ваших стартовых сданий. Вы "
+"находитесь в невыгодном положении; можете начать карту заново, чтобы "
+"стартовать на более равных условиях."
 
 #: ../../tribes/barbarians/scythe/conf:1
 msgid ""
@@ -3478,35 +3481,35 @@ msgstr "Обучает солдат."
 
 #: ../../tribes/barbarians/trainingscamp/conf:44
 msgid "Upgrade soldier attack from level 0 to level 1"
-msgstr ""
+msgstr "Увеличить силу солдата с 0 до 1"
 
 #: ../../tribes/barbarians/trainingscamp/conf:45
 msgid "Upgrade soldier attack from level 1 to level 2"
-msgstr ""
+msgstr "Увеличить силу солдата с 1 до 2"
 
 #: ../../tribes/barbarians/trainingscamp/conf:46
 msgid "Upgrade soldier attack from level 2 to level 3"
-msgstr ""
+msgstr "Увеличить силу солдата с 2 до 3"
 
 #: ../../tribes/barbarians/trainingscamp/conf:47
 msgid "Upgrade soldier attack from level 3 to level 4"
-msgstr ""
+msgstr "Увеличить силу солдата с 3 до 4"
 
 #: ../../tribes/barbarians/trainingscamp/conf:48
 msgid "Upgrade soldier attack from level 4 to level 5"
-msgstr ""
+msgstr "Увеличить силу солдата с 4 до 5"
 
 #: ../../tribes/barbarians/trainingscamp/conf:49
 msgid "Upgrade soldier health from level 0 to level 1"
-msgstr ""
+msgstr "Увеличить здоровье солдата с 0 до 1"
 
 #: ../../tribes/barbarians/trainingscamp/conf:50
 msgid "Upgrade soldier health from level 1 to level 2"
-msgstr ""
+msgstr "Увеличить здоровье солдата с 1 до 2"
 
 #: ../../tribes/barbarians/trainingscamp/conf:51
 msgid "Upgrade soldier health from level 2 to level 3"
-msgstr ""
+msgstr "Увеличить здоровье солдата с 2 до 3"
 
 #: ../../tribes/barbarians/trainingscamp/help.lua:12
 msgid ""

@@ -14,7 +14,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2014-03-13 05:33+0000\n"
+"X-Launchpad-Export-Date: 2014-03-14 05:34+0000\n"
 "X-Generator: Launchpad (build 16963)\n"
 "X-Poedit-Country: CZECH REPUBLIC\n"
 "Language: cs\n"
@@ -3948,45 +3948,3 @@ msgstr "Následovat"
 #: ../../src/wui/watchwindow.cc:117
 msgid "Center the main view on this"
 msgstr "Vycentrovat hlavní pohled"
-
-#~ msgid "The Map has not been saved, do you really want to quit?"
-#~ msgstr "Mapa není uložena, opravdu chceš skončit?"
-
-#~ msgid "no"
-#~ msgstr "ne"
-
-#~ msgid ""
-#~ "The worker of this building cannot find any more resources of the following "
-#~ "type: %s"
-#~ msgstr ""
-#~ "Pracovník této budovy nemůže nalézt žádné další zdroje následujícího typu: %s"
-
-#~ msgid "Are you sure you want to kick %s?<br>"
-#~ msgstr "Jsi si jistý, že chceš vyhodit %s?<br>"
-
-#~ msgid "The stated reason was: %s<br>"
-#~ msgstr "Uvedený důvod byl %s<br>"
-
-#~ msgid "Single Player Menu"
-#~ msgstr "Menu jednoho hráče"
-
-#~ msgid "Chat Menu"
-#~ msgstr "Chat menu"
-
-#~ msgid "players"
-#~ msgstr "hráči"
-
-#~ msgid "Save Game Error!!"
-#~ msgstr "Chyba při ukládání hry!!"
-
-#~ msgid "Message Menu: Inbox"
-#~ msgstr "Nabídka zpráv: došlá pošta"
-
-#~ msgid "Message Menu: Archive"
-#~ msgstr "Nabídka zpráv: Archiv"
-
-#~ msgid "Objectives Menu"
-#~ msgstr "Nabídka úkolů"
-
-#~ msgid "%1$u.%2$ux"
-#~ msgstr "%1$u.%2$ux"

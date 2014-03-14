@@ -2,20 +2,21 @@
 # Copyright (c) 2010 Rosetta Contributors and Canonical Ltd 2010
 # This file is distributed under the same license as the widelands package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010.
-#
+# GunChleoc <fios@foramnagaidhlig.net>, 2014.
 msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-03-12 21:37+0000\n"
-"PO-Revision-Date: 2013-08-05 14:08+0000\n"
-"Last-Translator: JoãoPedro BrasãoToledo <soldgames@gmail.com>\n"
-"Language-Team: Brazilian Portuguese <pt_BR@li.org>\n"
+"PO-Revision-Date: 2014-03-13 14:10+0000\n"
+"Last-Translator: GunChleoc <Unknown>\n"
+"Language-Team: Widelands fixxer upper\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-03-13 05:29+0000\n"
+"X-Launchpad-Export-Date: 2014-03-14 05:34+0000\n"
 "X-Generator: Launchpad (build 16963)\n"
+"Language: pt_BR\n"
 
 #: ../../txts/README.lua:7
 msgid "README"
@@ -500,16 +501,23 @@ msgid ""
 "progress and as the Editor becomes better and better, this text will also "
 "get longer and more complete."
 msgstr ""
+"O Editor se destina aos jogadores que quiserem desenhar os seus próprios "
+"mapas para serem usados com o Widelands.<br>Como está vendo, este Editor é "
+"trabalho duro e à medida que o Editor for ficando melhor também este texto "
+"irá ser mais longo e completo."
 
 #: ../../txts/editor_readme:12
 msgid "Please have a look at our enduser manuals on our wiki pages at:"
-msgstr ""
+msgstr "Por favor consulte o manual do utilizador na nossa página Wiki em:"
 
 #: ../../txts/editor_readme:14
 msgid ""
 "Those pages might be more complete and up to date than this file, and you "
 "will also find a short tutorial about building a map there."
 msgstr ""
+"Essas páginas poderão estar mais completas e actualizadas do que este "
+"arquivo. E lá você poderá encontrar um breve tutorial sobre como construir "
+"um mapa."
 
 #: ../../txts/editor_readme:18
 msgid "Keyboard shortcuts"
@@ -603,6 +611,8 @@ msgstr ""
 msgid ""
 "We are also shipping the GPL as a text document with Widelands itself."
 msgstr ""
+"Nós também estamos enviando o GPL como documento de texto com o próprio "
+"Widelands"
 
 #: ../../txts/license:18
 msgid ""
@@ -619,6 +629,9 @@ msgid ""
 "On Windows, you can find the file called COPYING.txt in the installation "
 "folder, and the Widelands Start menu entry provides a link to this file."
 msgstr ""
+"No Windows, você pode achar o arquivo \"COPYING.txt\" na pasta onde foi "
+"instalado o jogo e na pasta do Widelands no menu iniciar  tem um link para o "
+"arquivo."
 
 #: ../../txts/license:20
 msgid ""
@@ -635,6 +648,10 @@ msgid ""
 "questions or general support) or https://launchpad.net/widelands "
 "(Bugtracker, Translations)."
 msgstr ""
+"Este jogo vem como está e sem garantia. Para mais informações e apoio que "
+"você pode encontrar-nos no http://wl.widelands.org (Site, Wiki, Forum para "
+"questões ou de apoio geral) ou https://launchpad.net/widelands "
+"(\"Bugtracker\", Traduções)."
 
 #: ../../txts/tips/atlanteans.tip:2
 #: ../../txts/tips/barbarians.tip:2
@@ -672,6 +689,8 @@ msgid ""
 "You can find general help for the editor as well as a short tutorial on our "
 "wiki at www.widelands.org"
 msgstr ""
+"Você pode encontrar ajuda geral para o Editor bem como um breve tutorial em "
+"nossa Wiki do www.widelands.org"
 
 #: ../../txts/tips/editor.tip:6
 msgid ""
@@ -688,6 +707,8 @@ msgid ""
 "Just like with natural objects (bobs), you can also select multiple animals "
 "or ground textures with CTRL + mouse click."
 msgstr ""
+"Tal como nos objectos da natureza (bobs), vooê também pode seleccionar "
+"múltiplos animais ou texturas de terreno usando CTRL + Clique-do-rato"
 
 #: ../../txts/tips/editor.tip:14
 msgid ""
@@ -695,11 +716,15 @@ msgid ""
 "most cases the complete opposite of the normal tool (for example deletion of "
 "an object instead of placing one)."
 msgstr ""
+"Pressionando SHITF muda para a primeira ferramenta alternativa. Essa "
+"ferramenta na maioria dos casos é o oposto completo da ferramenta normal. "
+"(Por exemplo a deletação de um objeto ao invés de colocá-lo)"
 
 #: ../../txts/tips/editor.tip:18
 msgid ""
 "Holding down ALT switches the second alternative tool on (if it exists)."
 msgstr ""
+"Pressionando ALT, muda para a segunda ferramenta alternativa (caso exista)."
 
 #: ../../txts/tips/editor.tip:22
 msgid ""
@@ -739,10 +764,12 @@ msgid ""
 "Your territory can be expanded by building various military buildings – "
 "Sentry, Fortress, Barracks, etc."
 msgstr ""
+"Seu território pode ser expandido construindo várias constrções militares - "
+"Sentinela, Fortaleza, Barracas, etc."
 
 #: ../../txts/tips/general_game.tip:14
 msgid "Miners will work only if supplied with food."
-msgstr ""
+msgstr "Mineradores vão apenas trabalhar se supridos de comida"
 
 #: ../../txts/tips/general_game.tip:18
 msgid ""
@@ -757,18 +784,24 @@ msgid ""
 "Any further questions? Our FAQ, the wiki and of course our community forums "
 "can be found at www.widelands.org."
 msgstr ""
+"Dúvidas? Nosso FAQs, o wiki e, claro, fóruns de nossa comunidade podem ser "
+"encontradas em www.widelands.org."
 
 #: ../../txts/tips/general_game.tip:26
 msgid ""
 "Use the priority buttons in building windows to adjust delivery of a "
 "specific ware."
 msgstr ""
+"Use os botões de prioridade na janela do edifício para ajustar a entrega de "
+"um produto específico."
 
 #: ../../txts/tips/general_game.tip:30
 msgid ""
 "Use the ‘configure economy’ menu to adjust the target quantity of wares. It "
 "can be accessed via the flag menu."
 msgstr ""
+"Use o menu 'configure a economia' para ajustar a quantidade alvo de "
+"mercadorias. Ele pode ser acessado através do menu de bandeira."
 
 #: ../../txts/tips/general_game.tip:34
 msgid ""
@@ -776,12 +809,17 @@ msgid ""
 "messages window, then use ‘G’ for Go To, and the Delete key to archive "
 "messages."
 msgstr ""
+"Gerencie suas mensagens de forma mais eficiente: aperte 'N' para Notícias "
+"para acessar a janela de mensagens, entao aperte 'G' para Ir Para e a tecla "
+"'Delete' para arquivar mensagens."
 
 #: ../../txts/tips/general_game.tip:38
 msgid ""
 "Use the ‘,’ (comma) and ‘.’ (period) keys to go back and forth between "
 "recently visited places in the world."
 msgstr ""
+"Use as teclas ',' (virgula) e '.' (ponto) para ir e voltar entre os lugares "
+"visitados recentemente no mundo."
 
 #: ../../txts/tips/general_game.tip:42
 msgid ""
@@ -795,12 +833,16 @@ msgid ""
 "Pressing and holding the ALT GR key lets you drag the window below the mouse "
 "pointer."
 msgstr ""
+"Pressionar e segurar a tecla ALT GR permite que você arraste a janela abaixo "
+"do ponteiro do mouse."
 
 #: ../../txts/tips/general_game.tip:50
 msgid ""
 "Removing a road while holding Ctrl lets you remove all flags up to the first "
 "junction."
 msgstr ""
+"Remover uma estrada segurando Ctrl faz com que você remova todas as "
+"bandeiras até a primeira junção."
 
 #: ../../txts/tips/general_game.tip:54
 msgid ""
@@ -839,17 +881,23 @@ msgid ""
 "You can use the ’Page up’ and ‘Page down’ keys to adjust your desired speed "
 "– the real speed is then democratically set."
 msgstr ""
+"Você pode usar 'Page Up e \"Page Down\" para ajudar a velocidade desejada - "
+"a velocidade real está já colocada democraticamente."
 
 #: ../../txts/tips/multiplayer.tip:6
 msgid ""
 "You can use ‘/me’ at the beginning of a chatmessage: ‘/me is tired’ will be "
 "printed as ‘-> Nickname is tired’."
 msgstr ""
+"Você pode usar '/me' no começo de uma mensagem no chat: '/me está cansado' "
+"será dito como '-> Nickname está cansado."
 
 #: ../../txts/tips/multiplayer.tip:10
 msgid ""
 "Use ‘@name’ at the beginning of a chat message to send it to only one player."
 msgstr ""
+"Use \"@nome\" no começo de uma mensagem no chat para enviá-la apenas pra um "
+"jogador."
 
 #: ../../txts/tips/singleplayer.tip:2
 msgid ""

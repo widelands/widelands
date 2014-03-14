@@ -7,18 +7,18 @@ msgstr ""
 "Project-Id-Version: Widelands svn4530\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2014-03-12 21:37+0000\n"
-"PO-Revision-Date: 2013-09-24 11:47+0000\n"
-"Last-Translator: Angelo Locritani <Unknown>\n"
+"PO-Revision-Date: 2014-03-13 12:55+0000\n"
+"Last-Translator: Guybrush88 <Unknown>\n"
 "Language-Team: Italian <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-03-13 05:37+0000\n"
+"X-Launchpad-Export-Date: 2014-03-14 05:35+0000\n"
 "X-Generator: Launchpad (build 16963)\n"
 
 #: ../../worlds/desert/conf:2
 msgid "The Widelands Development Team"
-msgstr "Il Gruppo di Sviluppo di Widelands"
+msgstr "Il team di sviluppo di Widelands"
 
 #: ../../worlds/desert/conf:3
 msgid "Desert"
@@ -74,7 +74,7 @@ msgstr "Ciottolo"
 #: ../../worlds/desert/conf:32
 #: ../../worlds/desert/conf:33
 msgid "Ruins"
-msgstr ""
+msgstr "Rovine"
 
 #: ../../worlds/desert/conf:34
 #: ../../worlds/desert/conf:35
@@ -232,23 +232,23 @@ msgstr "Pesce"
 
 #: ../../worlds/desert/terrainconf:8
 msgid "Desert 1"
-msgstr ""
+msgstr "Deserto 1"
 
 #: ../../worlds/desert/terrainconf:13
 msgid "Desert 2"
-msgstr ""
+msgstr "Deserto 2"
 
 #: ../../worlds/desert/terrainconf:18
 msgid "Desert 3"
-msgstr ""
+msgstr "Deserto 3"
 
 #: ../../worlds/desert/terrainconf:23
 msgid "Desert 4"
-msgstr ""
+msgstr "Deserto 4"
 
 #: ../../worlds/desert/terrainconf:29
 msgid "Dry Soil"
-msgstr ""
+msgstr "Terreno essiccato"
 
 #: ../../worlds/desert/terrainconf:35
 msgid "Beach"
@@ -272,19 +272,19 @@ msgstr ""
 
 #: ../../worlds/desert/terrainconf:62
 msgid "Mountain 1"
-msgstr ""
+msgstr "Montagna 1"
 
 #: ../../worlds/desert/terrainconf:68
 msgid "Mountain 2"
-msgstr ""
+msgstr "Montagna 2"
 
 #: ../../worlds/desert/terrainconf:74
 msgid "Mountain 3"
-msgstr ""
+msgstr "Montagna 3"
 
 #: ../../worlds/desert/terrainconf:80
 msgid "Mountain 4"
-msgstr ""
+msgstr "Montagna 4"
 
 #: ../../worlds/desert/terrainconf:96
 msgid "Lava"

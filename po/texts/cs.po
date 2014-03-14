@@ -13,7 +13,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-03-13 05:29+0000\n"
+"X-Launchpad-Export-Date: 2014-03-14 05:34+0000\n"
 "X-Generator: Launchpad (build 16963)\n"
 "X-Poedit-Country: CZECH REPUBLIC\n"
 "Language: cs\n"
@@ -867,48 +867,3 @@ msgid ""
 msgstr ""
 "Je hra proti soupeřům řízeným počítačem nudná? Přijď na www.widelands.org a "
 "potkej se s ostatními hráči při online hře."
-
-#~ msgid "PAGEUP: increases games peed"
-#~ msgstr "PAGEUP: zvýší rychlost hry"
-
-#~ msgid "PAGEDOWN: decreases games peed"
-#~ msgstr "PAGEDOWN: sníží rychlost hry"
-
-#~ msgid "C        Toggles census on/off"
-#~ msgstr "C        Přepíná zobrazení popisků"
-
-#~ msgid "E        Toggles event menu"
-#~ msgstr "E        Přepíná nabídku událostí"
-
-#~ msgid "F        Toggles fullscreen"
-#~ msgstr "F        Přepíná celoobrazovkový režim"
-
-#~ msgid "H        Toggles main menu"
-#~ msgstr "H        Přepíná hlavní nabídku"
-
-#~ msgid "M        Toggles minimap"
-#~ msgstr "M        Přepíná náhledovou mapku"
-
-#~ msgid "P        Toggles player menu"
-#~ msgstr "P        Přepíná nabídku hráče"
-
-#~ msgid "T        Toggles tools menu"
-#~ msgstr "T        Přepíná nabídku nástrojů"
-
-#~ msgid "I        Activates information tool"
-#~ msgstr "I        Aktivuje informační nástroj"
-
-#~ msgid "CTRL+L   Load Map"
-#~ msgstr "CTRL+L   Otevřít mapu"
-
-#~ msgid "CTRL+S   Save Map"
-#~ msgstr "CTRL+S   Uložit mapu"
-
-#~ msgid "1-0      Changes tool size"
-#~ msgstr "1-0 Mění velikost nástroje"
-
-#~ msgid "SHIFT    (Hold) Selects first alternative tool while pressed"
-#~ msgstr "Shift    Při podržení vybere první alternativní nástroj"
-
-#~ msgid "ALT      (Hold) Selects second alternative tool while pressed"
-#~ msgstr "Alt      Při podržení vybere druhý alternativní nástroj"

@@ -7,13 +7,13 @@ msgstr ""
 "Project-Id-Version: Widelands svn4530\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2014-03-12 21:37+0000\n"
-"PO-Revision-Date: 2014-03-11 23:12+0000\n"
-"Last-Translator: GunChleoc <Unknown>\n"
+"PO-Revision-Date: 2014-03-13 17:02+0000\n"
+"Last-Translator: Guybrush88 <Unknown>\n"
 "Language-Team: Widelands fixxer upper\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-03-13 05:30+0000\n"
+"X-Launchpad-Export-Date: 2014-03-14 05:34+0000\n"
 "X-Generator: Launchpad (build 16963)\n"
 "X-Poedit-Country: ITALY\n"
 "Language: it\n"
@@ -22,115 +22,115 @@ msgstr ""
 
 #: ../../global/militarysites/barracks.empire/conf:8
 msgid "Your Barracks discovered an aggressor."
-msgstr ""
+msgstr "La tua caserma ha scoperto un aggressore."
 
 #: ../../global/militarysites/barracks.empire/conf:9
 msgid "Your Barracks is under attack."
-msgstr ""
+msgstr "La tua caserma è sotto attacco."
 
 #: ../../global/militarysites/barracks.empire/conf:10
 msgid "The enemy defeated your soldiers at the Barracks"
-msgstr ""
+msgstr "I nemici hanno sconfitto i tuoi soldati nella caserma"
 
 #: ../../global/militarysites/barracks.empire/conf:11
 msgid "Your soldiers defeated the enemy at the Barracks"
-msgstr ""
+msgstr "I tuoi soldati hanno sconfitto i nemici nella caserma"
 
 #: ../../global/militarysites/barrier.barbarians/conf:8
 #: ../../global/militarysites/barrier.empire/conf:8
 msgid "Your Barrier discovered an aggressor."
-msgstr ""
+msgstr "La tua barriera ha scoperto un aggressore."
 
 #: ../../global/militarysites/barrier.barbarians/conf:9
 #: ../../global/militarysites/barrier.empire/conf:9
 msgid "Your Barrier is under attack."
-msgstr ""
+msgstr "La tua barriera è sotto attacco"
 
 #: ../../global/militarysites/barrier.barbarians/conf:10
 #: ../../global/militarysites/barrier.empire/conf:10
 msgid "The enemy defeated your soldiers at the Barrier"
-msgstr ""
+msgstr "I nemici hanno sconfitto i tuoi soldati nella barriera"
 
 #: ../../global/militarysites/barrier.barbarians/conf:11
 #: ../../global/militarysites/barrier.empire/conf:11
 msgid "Your soldiers defeated the enemy at the Barrier"
-msgstr ""
+msgstr "I tuoi soldati hanno sconfitto i nemici nella barriera"
 
 #: ../../global/militarysites/castle.atlanteans/conf:8
 #: ../../global/militarysites/castle.empire/conf:8
 #: ../../tribes/atlanteans/castle/conf:7
 msgid "Your Castle discovered an aggressor."
-msgstr ""
+msgstr "Il tuo castello ha scoperto un aggressore."
 
 #: ../../global/militarysites/castle.atlanteans/conf:9
 #: ../../global/militarysites/castle.empire/conf:9
 #: ../../tribes/atlanteans/castle/conf:8
 msgid "Your Castle is under attack."
-msgstr ""
+msgstr "Il tuo castello è sotto attacco."
 
 #: ../../global/militarysites/castle.atlanteans/conf:10
 #: ../../global/militarysites/castle.empire/conf:10
 #: ../../tribes/atlanteans/castle/conf:9
 msgid "The enemy defeated your soldiers at the Castle"
-msgstr ""
+msgstr "I nemici hanno sconfitto i tuoi soldati nel castello"
 
 #: ../../global/militarysites/castle.atlanteans/conf:11
 #: ../../global/militarysites/castle.empire/conf:11
 #: ../../tribes/atlanteans/castle/conf:10
 msgid "Your soldiers defeated the enemy at the Castle"
-msgstr ""
+msgstr "I tuoi soldati hanno sconfitto i nemici nel castello"
 
 #: ../../global/militarysites/citadel.barbarians/conf:8
 msgid "Your Citadel discovered an aggressor."
-msgstr ""
+msgstr "La tua roccaforte ha scoperto un aggressore."
 
 #: ../../global/militarysites/citadel.barbarians/conf:9
 msgid "Your Citadel is under attack."
-msgstr ""
+msgstr "La tua roccaforte è sotto attacco."
 
 #: ../../global/militarysites/citadel.barbarians/conf:10
 msgid "The enemy defeated your soldiers at the Citadel"
-msgstr ""
+msgstr "I nemici hanno sconfitto i tuoi soldati nella roccaforte"
 
 #: ../../global/militarysites/citadel.barbarians/conf:11
 msgid "Your soldiers defeated the enemy at the Citadel"
-msgstr ""
+msgstr "I tuoi soldati hanno sconfitto i nemici nella roccaforte"
 
 #: ../../global/militarysites/donjon.barbarians/conf:9
 msgid "Your Donjon discovered an aggressor."
-msgstr ""
+msgstr "Il tuo dongione ha scoperto un aggressore."
 
 #: ../../global/militarysites/donjon.barbarians/conf:10
 msgid "Your Donjon is under attack."
-msgstr ""
+msgstr "Il tuo dongione è sotto attacco."
 
 #: ../../global/militarysites/donjon.barbarians/conf:11
 msgid "The enemy defeated your soldiers at the Donjon"
-msgstr ""
+msgstr "I nemici hanno sconfitto i tuoi soldati nel dongione"
 
 #: ../../global/militarysites/donjon.barbarians/conf:12
 msgid "Your soldiers defeated the enemy at the Donjon"
-msgstr ""
+msgstr "I tuoi soldati hanno sconfitto i nemici nel dongione"
 
 #: ../../global/militarysites/fortress.barbarians/conf:8
 #: ../../global/militarysites/fortress.empire/conf:8
 msgid "Your Fortress discovered an aggressor."
-msgstr ""
+msgstr "La tua fortezza ha scoperto un aggressore."
 
 #: ../../global/militarysites/fortress.barbarians/conf:9
 #: ../../global/militarysites/fortress.empire/conf:9
 msgid "Your Fortress is under attack."
-msgstr ""
+msgstr "La tua fortezza è sotto attacco."
 
 #: ../../global/militarysites/fortress.barbarians/conf:10
 #: ../../global/militarysites/fortress.empire/conf:10
 msgid "The enemy defeated your soldiers at the Fortress"
-msgstr ""
+msgstr "I nemici hanno sconfitto i tuoi soldati nella fortezza"
 
 #: ../../global/militarysites/fortress.barbarians/conf:11
 #: ../../global/militarysites/fortress.empire/conf:11
 msgid "Your soldiers defeated the enemy at the Fortress"
-msgstr ""
+msgstr "I tuoi soldati hanno sconfitto i nemici nella fortezza"
 
 #: ../../global/militarysites/guardhall.atlanteans/conf:8
 #: ../../tribes/atlanteans/guardhall/conf:7
@@ -155,122 +155,122 @@ msgstr ""
 #: ../../global/militarysites/guardhouse.atlanteans/conf:8
 #: ../../tribes/atlanteans/guardhouse/conf:7
 msgid "Your Guardhouse discovered an aggressor."
-msgstr ""
+msgstr "Il tuo corpo di guardia ha scoperto un aggressore."
 
 #: ../../global/militarysites/guardhouse.atlanteans/conf:9
 #: ../../tribes/atlanteans/guardhouse/conf:8
 msgid "Your Guardhouse is under attack."
-msgstr ""
+msgstr "Il tuo corpo di guardia è sotto attacco."
 
 #: ../../global/militarysites/guardhouse.atlanteans/conf:10
 #: ../../tribes/atlanteans/guardhouse/conf:9
 msgid "The enemy defeated your soldiers at the Guardhouse"
-msgstr ""
+msgstr "I nemici hanno sconfitto i tuoi soldati nel corpo di guardia"
 
 #: ../../global/militarysites/guardhouse.atlanteans/conf:11
 #: ../../tribes/atlanteans/guardhouse/conf:10
 msgid "Your soldiers defeated the enemy at the Guardhouse"
-msgstr ""
+msgstr "I tuoi soldati hanno sconfitto i nemici nel corpo di guardia"
 
 #: ../../global/militarysites/high_tower.atlanteans/conf:9
 #: ../../tribes/atlanteans/high_tower/conf:10
 msgid "Your High Tower discovered an aggressor."
-msgstr ""
+msgstr "La tua torre alta ha scoperto un aggressore."
 
 #: ../../global/militarysites/high_tower.atlanteans/conf:10
 #: ../../tribes/atlanteans/high_tower/conf:11
 msgid "Your High Tower is under attack."
-msgstr ""
+msgstr "La tua torre alta è sotto attacco"
 
 #: ../../global/militarysites/high_tower.atlanteans/conf:11
 #: ../../tribes/atlanteans/high_tower/conf:12
 msgid "The enemy defeated your soldiers at the High Tower"
-msgstr ""
+msgstr "I nemici hanno sconfitto i tuoi soldati nella torre alta"
 
 #: ../../global/militarysites/high_tower.atlanteans/conf:12
 #: ../../tribes/atlanteans/high_tower/conf:13
 msgid "Your soldiers defeated the enemy at the High Tower"
-msgstr ""
+msgstr "I tuoi soldati hanno sconfitto i nemici nella torre alta"
 
 #: ../../global/militarysites/outpost.empire/conf:8
 msgid "Your Outpost discovered an aggressor."
-msgstr ""
+msgstr "Il tuo avamposto ha scoperto un aggressore."
 
 #: ../../global/militarysites/outpost.empire/conf:9
 msgid "Your Outpost is under attack."
-msgstr ""
+msgstr "Il tuo avamposto è sotto attacco."
 
 #: ../../global/militarysites/outpost.empire/conf:10
 msgid "The enemy defeated your soldiers at the Outpost"
-msgstr ""
+msgstr "I nemici hanno sconfitto i tuoi soldati nell'avamposto"
 
 #: ../../global/militarysites/outpost.empire/conf:11
 msgid "Your soldiers defeated the enemy at the Outpost"
-msgstr ""
+msgstr "I tuoi soldati hanno sconfitto i nemici nell'avamposto."
 
 #: ../../global/militarysites/sentry.barbarians/conf:8
 #: ../../global/militarysites/sentry.empire/conf:8
 msgid "Your Sentry discovered an aggressor."
-msgstr ""
+msgstr "Il tuo casotto ha scoperto un aggressore."
 
 #: ../../global/militarysites/sentry.barbarians/conf:9
 #: ../../global/militarysites/sentry.empire/conf:9
 msgid "Your Sentry is under attack."
-msgstr ""
+msgstr "Il tuo casotto è sotto attacco."
 
 #: ../../global/militarysites/sentry.barbarians/conf:10
 #: ../../global/militarysites/sentry.empire/conf:10
 msgid "The enemy defeated your soldiers at the Sentry"
-msgstr ""
+msgstr "I nemici hanno sconfitto i tuoi soldati nel casotto"
 
 #: ../../global/militarysites/sentry.barbarians/conf:11
 #: ../../global/militarysites/sentry.empire/conf:11
 msgid "Your soldiers defeated the enemy at the Sentry"
-msgstr ""
+msgstr "I tuoi soldati hanno sconfitto i nemici nel casotto"
 
 #: ../../global/militarysites/small_tower.atlanteans/conf:9
 #: ../../tribes/atlanteans/small_tower/conf:8
 msgid "Your Small Tower discovered an aggressor."
-msgstr ""
+msgstr "La tua torre piccola ha scoperto un aggressore."
 
 #: ../../global/militarysites/small_tower.atlanteans/conf:10
 #: ../../tribes/atlanteans/small_tower/conf:9
 msgid "Your Small Tower is under attack."
-msgstr ""
+msgstr "La tua torre piccola è sotto attacco."
 
 #: ../../global/militarysites/small_tower.atlanteans/conf:11
 #: ../../tribes/atlanteans/small_tower/conf:10
 msgid "The enemy defeated your soldiers at the Small Tower"
-msgstr ""
+msgstr "I nemici hanno sconfitto i tuoi soldati nella torre piccola"
 
 #: ../../global/militarysites/small_tower.atlanteans/conf:12
 #: ../../tribes/atlanteans/small_tower/conf:11
 msgid "Your soldiers defeated the enemy at the Small Tower"
-msgstr ""
+msgstr "I tuoi soldati hanno sconfitto i nemici nella torre piccola"
 
 #: ../../global/militarysites/tower.atlanteans/conf:9
 #: ../../global/militarysites/tower.empire/conf:9
 #: ../../tribes/atlanteans/tower/conf:9
 msgid "Your Tower discovered an aggressor."
-msgstr ""
+msgstr "La tua torre ha scoperto un aggressore."
 
 #: ../../global/militarysites/tower.atlanteans/conf:10
 #: ../../global/militarysites/tower.empire/conf:10
 #: ../../tribes/atlanteans/tower/conf:10
 msgid "Your Tower is under attack."
-msgstr ""
+msgstr "La tua torre è sotto attacco."
 
 #: ../../global/militarysites/tower.atlanteans/conf:11
 #: ../../global/militarysites/tower.empire/conf:11
 #: ../../tribes/atlanteans/tower/conf:11
 msgid "The enemy defeated your soldiers at the Tower"
-msgstr ""
+msgstr "I nemici hanno sconfitto i tuoi soldati nella torre"
 
 #: ../../global/militarysites/tower.atlanteans/conf:12
 #: ../../global/militarysites/tower.empire/conf:12
 #: ../../tribes/atlanteans/tower/conf:12
 msgid "Your soldiers defeated the enemy at the Tower"
-msgstr ""
+msgstr "I tuoi soldati hanno sconfitto i nemici nella torre"
 
 #: ../../tribes/atlanteans/advanced_shield/conf:1
 msgid ""
@@ -396,7 +396,7 @@ msgstr "Porta gli oggetti lungo le strade."
 
 #: ../../tribes/atlanteans/castle/conf:6
 msgid "Your soldiers have occupied your Castle"
-msgstr ""
+msgstr "I tuoi soldati hanno occupato il tuo castello"
 
 #: ../../tribes/atlanteans/coal/conf:1
 msgid ""
@@ -470,23 +470,23 @@ msgstr "Campo di mais minuscolo"
 
 #: ../../tribes/atlanteans/conf:44
 msgid "Destroyed Building"
-msgstr "Costruzione distrutta"
+msgstr "Edificio distrutto"
 
 #: ../../tribes/atlanteans/conf:45
 msgid "Resource indicator: Coal (little)"
-msgstr "L'indicatore di risorse segna poco carbone"
+msgstr "Indicatore della risorsa: carbone (poco)"
 
 #: ../../tribes/atlanteans/conf:46
 msgid "Resource indicator: Coal (much)"
-msgstr "L'indicatore di risorse segna tanto carbone"
+msgstr "Indicatore della risorsa: carbone (molto)"
 
 #: ../../tribes/atlanteans/conf:47
 msgid "Resource indicator: Gold (little)"
-msgstr "L'indicatore di risorse segna poco oro"
+msgstr "Indicatore della risorsa: oro (poco)"
 
 #: ../../tribes/atlanteans/conf:48
 msgid "Resource indicator: Gold (much)"
-msgstr "L'indicatore di risorse segna tanto oro"
+msgstr "Indicatore della risorsa: oro (molto)"
 
 #: ../../tribes/atlanteans/conf:49
 msgid "Resource indicator: Granite (little)"
@@ -654,7 +654,7 @@ msgstr "Pala"
 
 #: ../../tribes/atlanteans/conf:92
 msgid "Smoked Fish"
-msgstr ""
+msgstr "Pesce affumicato"
 
 #: ../../tribes/atlanteans/conf:93
 msgid "Smoked Meat"
@@ -686,15 +686,15 @@ msgstr "Tabarro"
 
 #: ../../tribes/atlanteans/conf:100
 msgid "Log"
-msgstr ""
+msgstr "Tronco"
 
 #: ../../tribes/atlanteans/conf:101
 msgid "Water"
-msgstr "acqua"
+msgstr "Acqua"
 
 #: ../../tribes/atlanteans/conf:104
 msgid "Carrier"
-msgstr "Portatore"
+msgstr "Trasportatore"
 
 #: ../../tribes/atlanteans/conf:105
 msgid "Horse"
@@ -899,7 +899,7 @@ msgstr "Casa dell'allevatore di pesci"
 
 #: ../../tribes/atlanteans/conf:173
 msgid "Hunter’s House"
-msgstr "Casa del Cacciatore"
+msgstr "Casa del cacciatore"
 
 #: ../../tribes/atlanteans/conf:174
 msgid "Well"
@@ -1064,19 +1064,19 @@ msgstr "Dormire"
 
 #: ../../tribes/atlanteans/dungeon/conf:40
 msgid "Upgrade soldier attack from level 0 to level 1"
-msgstr ""
+msgstr "Avanza l'attacco del soldato dal livello 0 al livello 1"
 
 #: ../../tribes/atlanteans/dungeon/conf:41
 msgid "Upgrade soldier attack from level 1 to level 2"
-msgstr ""
+msgstr "Avanza l'attacco del soldato dal livello 1 al livello 2"
 
 #: ../../tribes/atlanteans/dungeon/conf:42
 msgid "Upgrade soldier attack from level 2 to level 3"
-msgstr ""
+msgstr "Avanza l'attacco del soldato dal livello 2 al livello 3"
 
 #: ../../tribes/atlanteans/dungeon/conf:43
 msgid "Upgrade soldier attack from level 3 to level 4"
-msgstr ""
+msgstr "Avanza l'attacco del soldato dal livello 3 al livello 4"
 
 #: ../../tribes/atlanteans/farm/conf:24
 msgid "Plant corn"
@@ -1192,7 +1192,7 @@ msgstr ""
 
 #: ../../tribes/atlanteans/high_tower/conf:9
 msgid "Your soldiers have occupied your High Tower"
-msgstr ""
+msgstr "I tuoi soldati hanno occupato la tua torre alta"
 
 #: ../../tribes/atlanteans/hook_pole/conf:1
 msgid ""
@@ -1242,23 +1242,23 @@ msgstr ""
 
 #: ../../tribes/atlanteans/labyrinth/conf:46
 msgid "Upgrade soldier defense from level 0 to level 1"
-msgstr ""
+msgstr "Avanza la difesa del soldato dal livello 0 al livello 1"
 
 #: ../../tribes/atlanteans/labyrinth/conf:47
 msgid "Upgrade soldier defense from level 1 to level 2"
-msgstr ""
+msgstr "Avanza la difesa del soldato dal livello 1 al livello 2"
 
 #: ../../tribes/atlanteans/labyrinth/conf:48
 msgid "Upgrade soldier health from level 0 to level 1"
-msgstr ""
+msgstr "Avanza la salute del soldato dal livello 0 al livello 1"
 
 #: ../../tribes/atlanteans/labyrinth/conf:49
 msgid "Upgrade soldier evade from level 0 to level 1"
-msgstr ""
+msgstr "Avanza l'evasione del soldato dal livello 0 al livello 1"
 
 #: ../../tribes/atlanteans/labyrinth/conf:50
 msgid "Upgrade soldier evade from level 1 to level 2"
-msgstr ""
+msgstr "Avanza l'evasione del soldato dal livello 1 al livello 2"
 
 #: ../../tribes/atlanteans/light_trident/conf:1
 msgid ""
@@ -1575,7 +1575,7 @@ msgstr "Produzione vanga"
 
 #: ../../tribes/atlanteans/tower/conf:8
 msgid "Your soldiers have occupied your Tower"
-msgstr ""
+msgstr "I tuoi soldati hanno occupato la tua torre"
 
 #: ../../tribes/atlanteans/trainer/conf:1
 msgid "Trains the soldiers."

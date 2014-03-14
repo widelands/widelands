@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: Widelands svn4575\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2014-03-12 21:37+0000\n"
-"PO-Revision-Date: 2014-03-12 22:05+0000\n"
+"PO-Revision-Date: 2014-03-13 11:05+0000\n"
 "Last-Translator: fk <Unknown>\n"
 "Language-Team: Dutch <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-03-13 05:31+0000\n"
+"X-Launchpad-Export-Date: 2014-03-14 05:34+0000\n"
 "X-Generator: Launchpad (build 16963)\n"
 
 #: ../../global/militarysites/barracks.empire/conf:8
@@ -2032,39 +2032,39 @@ msgstr "Vernietigd gebouw"
 
 #: ../../tribes/barbarians/conf:42
 msgid "Field (medium)"
-msgstr ""
+msgstr "Veld (middel)"
 
 #: ../../tribes/barbarians/conf:43
 msgid "Field (small)"
-msgstr ""
+msgstr "Veld (klein)"
 
 #: ../../tribes/barbarians/conf:44
 msgid "Field (tiny)"
-msgstr ""
+msgstr "Veld (mini)"
 
 #: ../../tribes/barbarians/conf:45
 msgid "Field (ripe)"
-msgstr ""
+msgstr "Veld (rijp)"
 
 #: ../../tribes/barbarians/conf:46
 msgid "Field (harvested)"
-msgstr ""
+msgstr "Veld (geoogst)"
 
 #: ../../tribes/barbarians/conf:47
 msgid "Reed (medium)"
-msgstr ""
+msgstr "Riet (middel)"
 
 #: ../../tribes/barbarians/conf:48
 msgid "Reed (small)"
-msgstr ""
+msgstr "Riet (klein)"
 
 #: ../../tribes/barbarians/conf:49
 msgid "Reed (tiny)"
-msgstr ""
+msgstr "Riet (mini)"
 
 #: ../../tribes/barbarians/conf:50
 msgid "Reed (ripe)"
-msgstr ""
+msgstr "Riet (rijp)"
 
 #: ../../tribes/barbarians/conf:51
 msgid "Resource indicator: Coal (little)"
@@ -2819,14 +2819,17 @@ msgid ""
 "It is used in the taverns, inns and big inns and at the training sites "
 "(training camp and battle arena)."
 msgstr ""
+"Naast pitabrood en vlees, is vis ook voedsel voor de barbaren. Het wordt "
+"gebruikt in kroegen, herbergen en grote herbergen en in de trainingsgebouwen "
+"(trainingskamp en arena)."
 
 #: ../../tribes/barbarians/fisher/conf:1
 msgid "Catches fish in the sea."
-msgstr ""
+msgstr "Vangt vis uit de zee."
 
 #: ../../tribes/barbarians/fishers_hut/help.lua:12
 msgid "‘What do you mean, my fish ain’t fresh?!’"
-msgstr ""
+msgstr "'Hoe bedoel je, dat mijn vis niet vers is?!'"
 
 #: ../../tribes/barbarians/fishers_hut/help.lua:17
 msgid "Fishes on the coast near the hut."
@@ -2834,7 +2837,7 @@ msgstr "Vist langs de kust nabij de hut."
 
 #: ../../tribes/barbarians/fishers_hut/help.lua:23
 msgid "The Fisher’s Hut needs water full of fish in the vicinity."
-msgstr ""
+msgstr "De Vissershut heeft visrijk water nodig in de omgeving."
 
 #: ../../tribes/barbarians/fishers_hut/help.lua:34
 #: ../../tribes/barbarians/gamekeepers_hut/help.lua:26
@@ -2848,7 +2851,7 @@ msgstr "Klein Grondvlak"
 
 #: ../../tribes/barbarians/fishers_hut/help.lua:49
 msgid "The fisher pauses 18s before going to work again."
-msgstr ""
+msgstr "De visser pauzeert18s voordat hij verder gaat met werken."
 
 #: ../../tribes/barbarians/fishing_rod/conf:1
 msgid ""
@@ -2856,6 +2859,10 @@ msgid ""
 "the basic tools produced in a metal workshop (but they cease to be produced "
 "by the building if it is enhanced to an axfactory and war mill)."
 msgstr ""
+"Vishengels worden door de barbaarse vissers gebruikt om te vissen. Het is "
+"één van de basiswerktuigen die gemaakt wordt in een metaalbewerkerij (maar "
+"niet meer wordt gemaakt, als het gebouw wordt uitgebreid naar een "
+"bijlenfabriek en een oorlogsfabriek)."
 
 #: ../../tribes/barbarians/fortress/conf:7
 msgid "Your soldiers have occupied your Fortress"
@@ -2873,6 +2880,8 @@ msgstr ""
 msgid ""
 "‘He loves the animals and to breed them<br>as we love to cook and eat them.’"
 msgstr ""
+"'Hij houdt van de dieren en van het fokken<br>wij lusten hen graag na het "
+"werk van onze kokken.'"
 
 #: ../../tribes/barbarians/gamekeepers_hut/help.lua:13
 msgid "Barbarian nursery rhyme"
@@ -2884,7 +2893,7 @@ msgstr "Zet dieren uit in het wild om het vleesaanbod gelijkmatig te maken."
 
 #: ../../tribes/barbarians/gamekeepers_hut/help.lua:43
 msgid "The gamekeeper pauses 52.5s before going to work again."
-msgstr ""
+msgstr "De jachtopzichter pauzeert 52,5s voordat hij weer aan het werk gaat."
 
 #: ../../tribes/barbarians/geologist/conf:1
 msgid "Discovers resources for mining."
@@ -2897,6 +2906,11 @@ msgid ""
 "is used as a precious building material and to produce different axes (in "
 "the war mill) and different parts of armor (in the helm smithy)."
 msgstr ""
+"Goud is het waardevolst van alle metalen; alleen erg belangrijke voorwerpen "
+"worden er mee versierd. Het wordt uit gouderts gehaald in een hoogoven. Het "
+"wordt als kostbaar bouwmateriaal gebruikt en het wordt gebruikt om "
+"verschillende bijlen (in de oorlogsfabriek) en verschillende harnassen (in "
+"de helmsmederij) te maken."
 
 #: ../../tribes/barbarians/goldstone/conf:5
 msgid ""
@@ -2904,11 +2918,15 @@ msgid ""
 "gold which is used as a precious building material and to produce weapons "
 "and armor."
 msgstr ""
+"Gouderts wordt gewonnen in een goudmijn. Als het wordt gesmolten in een "
+"hoogoven dan verandert het in goud dat wordt gebruikt als een kostbaar "
+"bouwmateriaal en om wapens van te maken."
 
 #: ../../tribes/barbarians/granitemine/help.lua:12
 msgid ""
 "‘I can handle tons of granite, man, but no more of your vain prattle.’"
 msgstr ""
+"'Ik kan tonnen graniet aan, man, maar niet nog meer van jouw loze geblaat.'"
 
 #: ../../tribes/barbarians/granitemine/help.lua:13
 msgid ""
@@ -2918,10 +2936,15 @@ msgid ""
 "granite blocks ready only a week later, and they still fortify the city’s "
 "levee."
 msgstr ""
+"Dit citaat was het antwoord dat Rimbert de mijnwerker - later bekend als "
+"Rimbert de eenzame - gaf, toen hem werd gevraagd te blijven zitten tijdens "
+"een noodbijeenkomst in Stonford in het jaar van de grote overstroming. <br> "
+"Dezelfde man had slechts een week later alle 244 granietblokken gereed, die "
+"nog steeds de dijken van de stad verstevigen."
 
 #: ../../tribes/barbarians/granitemine/help.lua:16
 msgid " It cannot be upgraded."
-msgstr ""
+msgstr " Hij kan niet worden opgewaardeerd."
 
 #: ../../tribes/barbarians/granitemine/help.lua:18
 msgid "Carve %s out of the rock in mountain terrain."
@@ -2943,6 +2966,11 @@ msgid ""
 "to be produced by the building if it is enhanced to an axfactory and war "
 "mill)."
 msgstr ""
+"De hamer is en essentieel werktuig. Hij wordt gebruikt door de geoloog, de "
+"bouwvakker, de smid en de helmsmid. Zorg dat je er altijd een paar in "
+"reserve hebt! Het is een van de de basale werktuigen die bij de "
+"metaalbewerkerij wordt gemaakt (maar niet meer door dit gebouw wordt gemaakt "
+"als het wordt verbeterd tot een bijlenfabriek en een oorlogsfabriek)."
 
 #: ../../tribes/barbarians/helm/conf:1
 msgid ""
@@ -2950,6 +2978,9 @@ msgid ""
 "smithy and used in the training camp – together with food – to train "
 "soldiers from health level 0 to level 1."
 msgstr ""
+"De helm is de basisverdediging voor krijgers. Het wordt geproduceerd in de "
+"helmsmederij en wordt gebruikt in het trainingskamp, samen met voedsel, om "
+"soldaten te trainen van levenspuntenniveau 0 naar niveau 1."
 
 #: ../../tribes/barbarians/helmsmith/conf:1
 msgid "Smelts helmets for soldiers."
@@ -2976,10 +3007,12 @@ msgid ""
 "‘As silent as a panther,<br> as deft as a weasel,<br> as swift as an "
 "arrow,<br> as deadly as a viper.’"
 msgstr ""
+"'Zo stil als een panter,<br> zo vaardig als een wezel,<br> zo snel als een "
+"pijl,<br> zo dodelijk als een adder.'"
 
 #: ../../tribes/barbarians/hunters_hut/help.lua:13
 msgid "‘The Art of Hunting’"
-msgstr ""
+msgstr "'De Kunst van het Jagen'"
 
 #: ../../tribes/barbarians/hunters_hut/help.lua:17
 msgid "Hunt animals to produce meat."
@@ -2987,11 +3020,11 @@ msgstr "Jagen op dieren om vlees te leveren."
 
 #: ../../tribes/barbarians/hunters_hut/help.lua:23
 msgid "The Hunter’s Hut needs animals in the vicinity to hunt."
-msgstr ""
+msgstr "De Jachthut heeft dieren nodig in de omgeving om op te jagen."
 
 #: ../../tribes/barbarians/hunters_hut/help.lua:51
 msgid "The hunter pauses 35s before going to work again."
-msgstr ""
+msgstr "De jager rust 35s voordat hij weer gaat werken"
 
 #: ../../tribes/barbarians/hunting_spear/conf:1
 msgid ""
@@ -3000,6 +3033,11 @@ msgid ""
 "ceases to be produced by the building if it is enhanced to an axfactory and "
 "war mill)."
 msgstr ""
+"Deze speer is licht genoeg om gegooid te worden, maar zwaar genoeg om elk "
+"dier in één klap te doden. Hij wordt alleen door de jagers gebruikt. Hij "
+"wordt geproduceerd in de metaalbewerkerij (maar wordt niet meer door dit "
+"gebouw gemaakt als het wordt verbeterd tot een bijlenfabriek en een "
+"oorlogsfabriek)."
 
 #: ../../tribes/barbarians/innkeeper/conf:1
 msgid "Produces food for miners."
@@ -3011,12 +3049,17 @@ msgid ""
 "produce weapons and tools in the metal workshop, axfactory, war mill and in "
 "the helm smithy."
 msgstr ""
+"IJzer wordt gewonnen uit ijzererts in de hoogoven. Het wordt gebruikt om "
+"wapen en werktuig mee te maken in de metaalbewerkerij, bijlenfabriek, "
+"oorlogsfabriek en helmsmederij."
 
 #: ../../tribes/barbarians/ironore/conf:1
 msgid ""
 "Iron ore is mined in iron mines. It delivers iron when smelted in a smelting "
 "works."
 msgstr ""
+"IJzererts wordt gedolven in de ijzerertsmijnen. Gesmolten in een hoogoven "
+"wordt het ijzer."
 
 #: ../../tribes/barbarians/kitchen_tools/conf:1
 msgid ""
@@ -3025,6 +3068,10 @@ msgid ""
 "to be produced by the building if it is enhanced to an axfactory and war "
 "mill)."
 msgstr ""
+"Hoe kan iemand een maaltijd, hapje of een portie maken, als er geen "
+"keukengerei is? Zorg ervoor om een metaalbewerkerij te hebben om dit soort "
+"basiswerktuigen te kunnen maken (maar het zal niet meer worden gemaakt als "
+"het gebouw verbeterd wordt naar een bijlenfabriek en een oorlogsfabriek)."
 
 #: ../../tribes/barbarians/lime-burner/conf:1
 msgid "Burns lime in the lime kiln."
@@ -3032,19 +3079,23 @@ msgstr "Brandt kalk in de kalkoven."
 
 #: ../../tribes/barbarians/lime_kiln/help.lua:12
 msgid "‘Forming new stone from old with fire and water.’"
-msgstr ""
+msgstr "'Nieuwe stenen vormen uit oude met vuur en water.'"
 
 #: ../../tribes/barbarians/lime_kiln/help.lua:13
 msgid ""
 "Ragnald the Child’s answer to the question, what he’s doing in the dirt. His "
 "‘new stone’ now is an important building material."
 msgstr ""
+"Het antwoord van Ragnald het Kind op de vraag, wat hij uitvoert in het vuil. "
+"Zijn 'nieuwe steen' is nu een belangrijk bouwmateriaal."
 
 #: ../../tribes/barbarians/lime_kiln/help.lua:16
 msgid ""
 "The Lime Kiln processes Raw Stones to make ‘Grout’, a substance that "
 "solidifies and so reinforces masonry."
 msgstr ""
+"De kalkoven verwerkt ruwe steen tot 'specie', een substantie die uithardt en "
+"zodoende metselwerk verstevigt."
 
 #: ../../tribes/barbarians/lime_kiln/help.lua:24
 msgid "Raw Stone from the Granite Mine or Quarry"
@@ -3055,6 +3106,9 @@ msgid ""
 "The Lime Kiln’s output will only go to construction sites that need it. "
 "Those are predominantly houses that work with fire, and some military sites."
 msgstr ""
+"De productie van de kalkoven zal alleen naar bouwplaatsen gaan die het nodig "
+"hebben. Dat zijn voornamelijk gebouwen die met vuur werken, en een aantal "
+"militaire gebouwen."
 
 #: ../../tribes/barbarians/lumberjack/conf:1
 msgid "Fells trees."
@@ -3066,18 +3120,22 @@ msgid ""
 "soldier. Take 50 and you’re a hero. Take 20 and soon you will be a honorable "
 "lumberjack.’"
 msgstr ""
+"Gebruik 200 slagen om een boom te vellen en je bent een baby. Gebruik er 100 "
+"en je bent een soldaat. Gebruik er 50 en je bent een held. Gebruik er 20 en "
+"je zult spoedig een eerwaardige houthakker zijn."
 
 #: ../../tribes/barbarians/lumberjacks_hut/help.lua:13
 msgid "Krumta, carpenter of Chat’Karuth"
-msgstr ""
+msgstr "Krumta, timmerman van Chat'Karuth"
 
 #: ../../tribes/barbarians/lumberjacks_hut/help.lua:17
 msgid "Fell trees in the surrounding area and process them into logs."
-msgstr ""
+msgstr "Vel bomen in het omliggende gebied en verwerk ze tot boomstammen."
 
 #: ../../tribes/barbarians/lumberjacks_hut/help.lua:23
 msgid "The Lumberjack’s Hut needs trees in the immediate vicinity to fell."
 msgstr ""
+"The houthakkershut heeft bomen nodig in de directe omgeving om te vellen."
 
 #: ../../tribes/barbarians/lumberjacks_hut/help.lua:48
 msgid ""
@@ -3093,12 +3151,18 @@ msgid ""
 "and used in the training camp – together with food – to train soldiers from "
 "health level 2 to level 3."
 msgstr ""
+"Dit is de geavanceerdste Barbaarse verdediging. Hij wordt gemaakt in de "
+"helmsmederij en wordt gebruikt in het trainingskamp, samen met voedsel, om "
+"soldaten te trainen van levenspuntenniveau 2 naar niveau 3."
 
 #: ../../tribes/barbarians/meal/conf:1
 msgid ""
 "A meal is made out of pitta bread, strong beer and fish/meat in a big inn. "
 "This substantial food is exactly what workers in a deeper mine need."
 msgstr ""
+"Een maaltijd wordt gemaakt van pitabrood, sterk bier en vis/vlees in een "
+"grote herberg. Dit degelijke voedsel is precies wat de arbeiders in een "
+"diepere mijn nodig hebben."
 
 #: ../../tribes/barbarians/meat/conf:1
 msgid ""
@@ -3107,6 +3171,10 @@ msgid ""
 "miners. It is also consumed in the training sites (training camp and battle "
 "arena)."
 msgstr ""
+"Vlees bevat veel energie. Het wordt gemaakt door de jagers en gebruikt in de "
+"kroegen, hergbergen en grote herbergen om porties, hapjes en maaltijden voor "
+"de mijnwerkers te maken. Het wordt ook genuttigd in de trainingsgebouwen "
+"(trainingskamp en arena)."
 
 #: ../../tribes/barbarians/metalworks/conf:38
 msgid "Produce felling ax"
@@ -3150,7 +3218,7 @@ msgstr "Maak jachtspeer"
 
 #: ../../tribes/barbarians/metalworks/help.lua:12
 msgid "‘We make it work!’"
-msgstr ""
+msgstr "'Wij laten het werken!'"
 
 #: ../../tribes/barbarians/metalworks/help.lua:13
 msgid ""
@@ -3166,6 +3234,9 @@ msgid ""
 "three buildings and creates all the tools that Barbarians need. The others "
 "are for weapons."
 msgstr ""
+"De Barbaarse metaalbewerkerij is de eerste productieruimte in een reeks van "
+"drie gebouwen die alle gereedschappen maken die de Barbaren nodig hebben. De "
+"anderen zijn voor wapens."
 
 #: ../../tribes/barbarians/metalworks/help.lua:18
 msgid ""
@@ -3177,7 +3248,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/metalworks/help.lua:26
 msgid "%s from the Lumberjack’s hut"
-msgstr ""
+msgstr "%s van de Houthakkershut"
 
 #: ../../tribes/barbarians/metalworks/help.lua:46
 msgid "n/a"
@@ -3188,6 +3259,8 @@ msgid ""
 "‘Let the first one drive away the hunger, the second one put you at ease; "
 "when you have swallowed up your third one, it’s time for the next shift!’"
 msgstr ""
+"'Laat de eerste de honger verdrijven, de tweede je tevreden stellen; zodra "
+"je de derde hebt verslonden, is het tijd voor de volgende ronde!'"
 
 #: ../../tribes/barbarians/micro-brewery/help.lua:13
 msgid "Widespread toast among Miners"
@@ -3217,10 +3290,12 @@ msgid ""
 "An %1$s exploits only %2$s of the resource. From there on out, it will only "
 "have a 5%% chance of finding %3$s."
 msgstr ""
+"Een %1$s benut slechts %2$s van de bron. Daarna heeft het nog maar een kans "
+"van 5%% op het vinden van %3$s."
 
 #: ../../tribes/barbarians/ox/conf:1
 msgid "Helps with carrying items on heavily used roads."
-msgstr ""
+msgstr "Helpt om goederen te vervoeren over drukke wegen."
 
 #: ../../tribes/barbarians/pick/conf:1
 msgid ""
@@ -3228,6 +3303,9 @@ msgid ""
 "metal workshop (but it ceases to be produced by the building if it is "
 "enhanced to an axfactory and war mill)."
 msgstr ""
+"Deze pikhouweel wordt gebruikt door de steenhouwers en de mijnwerkers. Hij "
+"wordt gemaakt in de metaalbewerkerij (maar wordt niet meer door dit gebouw "
+"gemaakt als het wordt verbeterd tot een bijlenfabriek en een oorlogsfabriek)."
 
 #: ../../tribes/barbarians/pittabread/conf:1
 msgid ""
@@ -3236,10 +3314,15 @@ msgid ""
 "used in the taverns, inns and big inns to prepare rations, snacks and meals. "
 "It is also consumed at training sites (training camp and battle arena)."
 msgstr ""
+"De Barbaarse bakkers zijn het beste in het bereiden van dit platte en "
+"smaakvolle pitabrood. Het wordt volgens geheim recept gemaakt uit meel en "
+"water. Pitabrood wordt gebruikt in de kroegen, herbergen en grote herbergen "
+"om porties, hapjes en maaltijden mee te maken. Het wordt ook gegeten in "
+"trainingsgebouwen (trainingskamp en arena)."
 
 #: ../../tribes/barbarians/quarry/help.lua:17
 msgid "Carve %s out of stones lying near the hut."
-msgstr ""
+msgstr "Hak %s uit stenen die zich dichtbij de hut bevinden."
 
 #: ../../tribes/barbarians/quarry/help.lua:23
 msgid "The Quarry needs stones in the vicinity."
@@ -3247,7 +3330,7 @@ msgstr "De Steengroeve heeft stenen nodig in de omgeving."
 
 #: ../../tribes/barbarians/quarry/help.lua:46
 msgid "The stonemason pauses 25s before going to work again."
-msgstr ""
+msgstr "De steenhouwer pauzeert 25s voordat hij weer gaat werken."
 
 #: ../../tribes/barbarians/ranger/conf:1
 msgid "Plants trees."
@@ -3258,10 +3341,12 @@ msgid ""
 "‘He who can grow two trees where normally only one will grow exceeds the "
 "most important general!’"
 msgstr ""
+"Hij die twee bomen kan doen groeien waar er normaal slechts één groeit "
+"overtreft de hoogste generaal!"
 
 #: ../../tribes/barbarians/rangers_hut/help.lua:14
 msgid "Chat’Karuth in a conversation with a Ranger"
-msgstr ""
+msgstr "Chat'Karuth in gesprek met een boswachter"
 
 #: ../../tribes/barbarians/rangers_hut/help.lua:17
 msgid "Plant trees in the surrounding area."
@@ -3272,6 +3357,8 @@ msgid ""
 "The Ranger’s Hut needs free space in the immediate vicinity to plant the "
 "trees."
 msgstr ""
+"De boswachtershut heeft vrije ruimte nodig in de directe omgeving om de "
+"bomen te planten."
 
 #: ../../tribes/barbarians/rangers_hut/help.lua:43
 msgid ""
@@ -3304,6 +3391,8 @@ msgstr ""
 msgid ""
 "Scouts like Scotty the scout scouting unscouted areas in a scouty fashion."
 msgstr ""
+"Verkenners als Ken de Verkenner verkennen niet verkend gebied op een "
+"verkennersmanier."
 
 #: ../../tribes/barbarians/scripting/sc00_headquarters_medium.lua:10
 msgid "Headquarters medium"
@@ -3323,6 +3412,9 @@ msgid ""
 "You are at a disadvantage with this; consider restarting this map with a "
 "fair starting condition."
 msgstr ""
+"Er was onvoldoende ruimte voor enkele van je startgebouwen en deze zijn niet "
+"gebouwd. Dit stelt je op een achterstand; overweeg om deze kaart opnieuw te "
+"beginnen met een eerlijke startpositie."
 
 #: ../../tribes/barbarians/scythe/conf:1
 msgid ""
@@ -3330,10 +3422,13 @@ msgid ""
 "(but it ceases to be produced by the building if it is enhanced to an "
 "axfactory and war mill)."
 msgstr ""
+"De zeis is een werktuig van de boeren. Hij wordt gemaakt in de "
+"metaalbewerkerij (maar wordt niet meer gemaakt door het gebouw als het "
+"verbeterd wordt naar een bijlenfabriek en een oorlogsfabriek)."
 
 #: ../../tribes/barbarians/sentry/conf:6
 msgid "Your soldiers have occupied your Sentry"
-msgstr ""
+msgstr "Je soldaten hebben jouw Wachtpost bezet"
 
 #: ../../tribes/barbarians/sharpaxe/conf:1
 msgid ""
@@ -3342,6 +3437,11 @@ msgid ""
 "war mills. In training camps, it is used – together with food – to train "
 "soldiers from attack level 0 to level 1."
 msgstr ""
+"Jonge soldaten zijn er trots op om te leren vechten met dit machtige wapen. "
+"Hij is zwaarder en scherper dan een normale bijl. Hij wordt gemaakt in "
+"bijlenfabrieken en oorlogsfabrieken. In trainingskampen, wordt het - samen "
+"met voedsel - gebruikt om soldaten van aanvalsniveau 0 naar niveau 1 te "
+"trainen."
 
 #: ../../tribes/barbarians/ship/conf:1
 msgid "A sea-worthy ship"
@@ -3362,6 +3462,10 @@ msgid ""
 "ceases to be produced by the building if it is enhanced to an axfactory and "
 "war mill)."
 msgstr ""
+"De schop is nodig om planten goed te behandelen. Daarom gebruiken de "
+"rietkweker en de boswachter hem. Hij wordt gemaakt in de metaalbewerkerij "
+"(maar wordt niet meer door dit gebouw gemaakt als het wordt verbeterd tot "
+"een bijlenfabriek en een oorlogsfabriek)."
 
 #: ../../tribes/barbarians/smelter/conf:1
 msgid "Smelts iron."
@@ -3390,7 +3494,7 @@ msgstr "Verdedig en Verover!"
 
 #: ../../tribes/barbarians/stonemason/conf:1
 msgid "Cuts raw pieces of granite out of rocks."
-msgstr ""
+msgstr "Hakt ruwe stukken graniet uit liggende stenen."
 
 #: ../../tribes/barbarians/strongbeer/conf:1
 msgid ""
@@ -3399,12 +3503,18 @@ msgid ""
 "the soldiers’ evade level from 0 to 1 to 2. Strong beer is also used in big "
 "inns to prepare meals."
 msgstr ""
+"Alleen dit bier wordt geaccepteerd door de krijgers in de arena. Sommigen "
+"zeggen dat de gehele kracht van de Barbaren in dit bier zit. Het helpt om "
+"het ontwijkniveau van de soldaten te trainen van niveau 0 naar 1 naar 2. "
+"Sterk bier wordt ook gebruikt in de grote herbergen om maaltijden te maken."
 
 #: ../../tribes/barbarians/thatchreed/conf:1
 msgid ""
 "Thatch reed is produced in a reed yard and used to make the roofs of "
 "buildings waterproof."
 msgstr ""
+"Dakriet wordt gemaakt in een rietkwekerij en wordt gebruikt om de daken van "
+"gebouwen waterdicht te maken."
 
 #: ../../tribes/barbarians/trainer/conf:1
 msgid "Trains the soldiers."
@@ -3412,85 +3522,91 @@ msgstr "Traint de soldaten."
 
 #: ../../tribes/barbarians/trainingscamp/conf:44
 msgid "Upgrade soldier attack from level 0 to level 1"
-msgstr ""
+msgstr "Opwaarderen soldatenaanval van niveau 0 naar niveau 1"
 
 #: ../../tribes/barbarians/trainingscamp/conf:45
 msgid "Upgrade soldier attack from level 1 to level 2"
-msgstr ""
+msgstr "Opwaarderen soldatenaanval van niveau 1 naar niveau 2"
 
 #: ../../tribes/barbarians/trainingscamp/conf:46
 msgid "Upgrade soldier attack from level 2 to level 3"
-msgstr ""
+msgstr "Opwaarderen soldatenaanval van niveau 2 naar niveau 3"
 
 #: ../../tribes/barbarians/trainingscamp/conf:47
 msgid "Upgrade soldier attack from level 3 to level 4"
-msgstr ""
+msgstr "Opwaarderen soldatenaanval van niveau 3 naar niveau 4"
 
 #: ../../tribes/barbarians/trainingscamp/conf:48
 msgid "Upgrade soldier attack from level 4 to level 5"
-msgstr ""
+msgstr "Opwaarderen soldatenaanval van niveau 4 naar niveau 5"
 
 #: ../../tribes/barbarians/trainingscamp/conf:49
 msgid "Upgrade soldier health from level 0 to level 1"
-msgstr ""
+msgstr "Opwaarderen soldaten levenspunten van niveau 0 naar niveau 1"
 
 #: ../../tribes/barbarians/trainingscamp/conf:50
 msgid "Upgrade soldier health from level 1 to level 2"
-msgstr ""
+msgstr "Opwaarderen soldaten levenspunten van niveau 1 naar niveau 2"
 
 #: ../../tribes/barbarians/trainingscamp/conf:51
 msgid "Upgrade soldier health from level 2 to level 3"
-msgstr ""
+msgstr "Opwaarderen soldaten levenspunten van niveau 2 naar niveau 3"
 
 #: ../../tribes/barbarians/trainingscamp/help.lua:12
 msgid ""
 "‘He who is strong shall neither forgive nor forget, but revenge injustice "
 "suffered – in the past and for all future.’"
 msgstr ""
+"Hij die sterk is zal vergeven noch vergeten, maar geleden onrecht wreken - "
+"in het verleden en vooral in de toekomst."
 
 #: ../../tribes/barbarians/trainingscamp/help.lua:13
 msgid "Chief Chat’Karuth in a speech to his army."
-msgstr ""
+msgstr "Bevelhebber Chat'Karuth in een toespraak tot zijn leger."
 
 #: ../../tribes/barbarians/trainingscamp/help.lua:16
 msgid ""
 "Trains soldiers in Attack up to level 5, and in Health up to level "
 "3.<br>Equips the soldiers with all necessary weapons and armor parts."
 msgstr ""
+"Traint soldaten in Aanval tot niveau 5, en in Levenspunten tot niveau "
+"3.<br>Rust soldaten uit met alle noodzakelijke wapens en helmen."
 
 #: ../../tribes/barbarians/trainingscamp/help.lua:17
 msgid "Note:"
-msgstr ""
+msgstr "Opmerking:"
 
 #: ../../tribes/barbarians/trainingscamp/help.lua:18
 msgid ""
 "Barbarian soldiers cannot be trained in ‘Defense’ and will remain at their "
 "initial level."
 msgstr ""
+"Barbaarse soldaten kunnen niet worden getraind op 'verdediging' en zullen op "
+"hun eerste niveau blijven."
 
 #: ../../tribes/barbarians/trainingscamp/help.lua:27
 msgid "Training Attack:"
-msgstr ""
+msgstr "Aanval trainen:"
 
 #: ../../tribes/barbarians/trainingscamp/help.lua:29
 msgid "Provided by the Axfactory"
-msgstr ""
+msgstr "Geleverd door de bijlenfabriek"
 
 #: ../../tribes/barbarians/trainingscamp/help.lua:31
 msgid "Provided by the War Mill"
-msgstr ""
+msgstr "Geleverd door de oorlogsfabriek"
 
 #: ../../tribes/barbarians/trainingscamp/help.lua:32
 msgid "Training Health:"
-msgstr ""
+msgstr "Levensputen trainen:"
 
 #: ../../tribes/barbarians/trainingscamp/help.lua:34
 msgid "Provided by the Helm Smithy"
-msgstr ""
+msgstr "Geleverd door de helmsmederij"
 
 #: ../../tribes/barbarians/trainingscamp/help.lua:35
 msgid "Training Both"
-msgstr ""
+msgstr "Beide trainen"
 
 #: ../../tribes/barbarians/trainingscamp/help.lua:63
 msgid "Attack"
@@ -3498,13 +3614,16 @@ msgstr "Aanvalskracht"
 
 #: ../../tribes/barbarians/trainingscamp/help.lua:63
 msgid "Health"
-msgstr ""
+msgstr "Levenspunten"
 
 #: ../../tribes/barbarians/trainingscamp/help.lua:63
 msgid ""
 "If all needed wares are delivered in time, a Training Camp can train one new "
 "soldier in %1$s and %2$s to the final level in %3$s on average."
 msgstr ""
+"Als alle benodigde goederen op tijd worden geleverd, dan kan een "
+"trainingskamp een nieuwe soldaat trainen op %1$s en %2$s naar het hoogste "
+"niveau in gemiddeld %3$s."
 
 #: ../../tribes/barbarians/trunk/conf:1
 msgid ""
@@ -3514,6 +3633,12 @@ msgid ""
 "burner’s house in the production of coal. The wood hardener refines logs by "
 "hardening them in the fire which gives blackwood."
 msgstr ""
+"Boomstammen zijn een belangrijk bouwmateriaal voor de Barbaren. De bomen "
+"worden geveld door houthakkers; boswachters zorgen voor de aanvoer van "
+"bomen. Boomstammen worden ook gebruikt in de metaalbewerkerij om "
+"basiswerktuigen te maken en in het houtskoolbrandershuis voor de productie "
+"van kolen. De houtverharder versterkt het hout met vuur, wat rozenhout "
+"oplevert."
 
 #: ../../tribes/barbarians/warhelmet/conf:1
 msgid ""
@@ -3521,28 +3646,34 @@ msgid ""
 "helm smithy and used in a training camp – together with food – to train "
 "soldiers from health level 1 to level 2."
 msgstr ""
+"Een oorlogshelm is een verbeterde bescherming voor Barbaarse krijgers. Hij "
+"wordt geproduceerd in de helmsmederij en wordt gebruikt in het "
+"trainingskamp, samen met voedsel, om soldaten te trainen van "
+"levenspuntenniveau 1 naar niveau 2."
 
 #: ../../tribes/barbarians/warmill/conf:39
 msgid "Produce bronze ax"
-msgstr ""
+msgstr "Maak bronzen bijl"
 
 #: ../../tribes/barbarians/warmill/conf:40
 msgid "Produce battle ax"
-msgstr ""
+msgstr "Maak slagbijl"
 
 #: ../../tribes/barbarians/warmill/conf:41
 msgid "Produce warrior’s ax"
-msgstr ""
+msgstr "Maak oorlogsbijl"
 
 #: ../../tribes/barbarians/warmill/help.lua:16
 msgid ""
 "The Barbarian War Mill is their most advanced production site for weapons. "
 "As such it needs to be upgraded from an Axfactory."
 msgstr ""
+"De Barbaarse oorlogsfabriek is de geavanceerdste productieruimte voor "
+"wapens. Zodoende is het nodig om hiervoor een bijlenfabriek te verbeteren."
 
 #: ../../tribes/barbarians/warmill/help.lua:27
 msgid "Coal from the Coal mine or the Charcoal Burner’s House"
-msgstr ""
+msgstr "Kolen van de kolenmijn of het houtskoolbrandershuis"
 
 #: ../../tribes/barbarians/warmill/help.lua:66
 msgid ""
@@ -3560,6 +3691,10 @@ msgid ""
 "produced in a war mill and used – together with food – in a training camp to "
 "train soldiers from attack level 4 to level 5."
 msgstr ""
+"De oorlogsbijl is het gevaarlijkst van alle Barbaarse wapens. Slechts enkele "
+"soldaten kunnen deze grote en krachtige bijlen hanteren. Hij wordt gemaakt "
+"in een oorlogsfabriek en wordt - samen met voedsel - in een trainingskamp "
+"gebruikt om soldaten van aanvalsniveau 4 naar niveau 5 te trainen."
 
 #: ../../tribes/barbarians/water/conf:1
 msgid ""
@@ -3567,6 +3702,9 @@ msgid ""
 "and the brewery. The lime kiln and the cattle farm also need to be supplied "
 "with water."
 msgstr ""
+"Water is de bron van leven! Het wordt gebruikt in de bakkerij, de kleine "
+"brouwerij en de brouwerij. Ook de kalkoven en de veeboerderij moeten "
+"voorzien worden van water."
 
 #: ../../tribes/barbarians/weaver/conf:1
 msgid "Produces cloth for ships and soldiers."
@@ -3577,12 +3715,16 @@ msgid ""
 "‘Oh how sweet is the source of life,<br> that comes down from the sky <br> "
 "and lets the earth drink.’"
 msgstr ""
+"'Oh, hoe zoet is de bron van leven,<br> die omlaagkomt vanuit de hemel <br> "
+"en de aarde laat drinken.'"
 
 #: ../../tribes/barbarians/well/help.lua:13
 msgid ""
 "Song written by Sigurd the Bard<br>when the first rain fell after the Great "
 "Drought in the 21st year of Chat’Karuth’s reign."
 msgstr ""
+"Lied geschreven door Sigurd de Bard<br> toen de eerste regen viel na de "
+"Grote Droogte in het 21ste jaar van Chat'Karuth' heerschappij."
 
 #: ../../tribes/barbarians/well/help.lua:16
 msgid "Draw Water out of the deep."
