@@ -6,16 +6,22 @@ return {
    func = function(building_description)
       set_textdomain("tribe_barbarians")
 
+      -- TODO(GunChleoc): SirVer says: This is just an example usage. Remove again please.
+      for ware, count in pairs(building_description.build_cost) do
+         print("### ", ware, count)
+      end
+      print(("Needs %d trunks."):format(building_description.build_cost["trunk"]))
+
       -- TODO(GunChleoc): the building_description is now passed into this
       -- function. I suggest adding methods to get to the image and menu
       -- picture into the description (they are in the c++ class as well). Then, we can get rid of hardcoding everything in here.
 		--rt(h1(_"The Barbarian Lumberjack's Hut")) ..
 	--Lore Section
-		return 
+		return
 	-- code/testing example for reading building_descr rt(h2("XXX TODO TEST" .. tostring(wl.Game():get_building_description("barbarians","lumberjacks_hut").buildable))) ..
 	building_help_lore_string("barbarians", "lumberjacks_hut",_[["Take 200 hits to fell a tree and you're a baby. Take 100 and you're a soldier. Take 50 and you're a hero. Take 20 and soon you will be a honorable lumberjack."]],_[[Krumta, carpenter of Chat'Karuth]]) ..
 	--General Section
-		building_help_general_string("barbarians", "trunk", 
+		building_help_general_string("barbarians", "trunk",
 			_"Fell trees in the surrounding area and process them into trunks.", "10", "--", "4") ..
 
 	--Dependencies
