@@ -5,10 +5,10 @@ conquers=7
 buildable=no
 prefer_heroes=false
 occupied_string=
-aggressor_string=_Your Outpost discovered an aggressor.
-attack_string=_Your Outpost is under attack.
-defeated_enemy_string=_The enemy defeated your soldiers at the Outpost
-defeated_you_string=_Your soldiers defeated the enemy at the Outpost
+aggressor_string=_Your outpost discovered an aggressor.
+attack_string=_Your outpost is under attack.
+defeated_enemy_string=_The enemy defeated your soldiers at the outpost.
+defeated_you_string=_Your soldiers defeated the enemy at the outpost.
 
 
 [idle]

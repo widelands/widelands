@@ -3,11 +3,11 @@ max_soldiers=12
 heal_per_second=200
 conquers=12
 prefer_heroes=true
-occupied_string=_Your soldiers have occupied your Castle
-aggressor_string=_Your Castle discovered an aggressor.
-attack_string=_Your Castle is under attack.
-defeated_enemy_string=_The enemy defeated your soldiers at the Castle
-defeated_you_string=_Your soldiers defeated the enemy at the Castle
+occupied_string=_Your soldiers have occupied your castle.
+aggressor_string=_Your castle discovered an aggressor.
+attack_string=_Your castle is under attack.
+defeated_enemy_string=_The enemy defeated your soldiers at the castle.
+defeated_you_string=_Your soldiers defeated the enemy at the castle.
 
 [buildcost]
 planks=4
