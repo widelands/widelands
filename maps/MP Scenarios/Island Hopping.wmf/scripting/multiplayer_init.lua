@@ -203,7 +203,7 @@ function place_headquarters()
             light_trident = 5,
          },
          workers = {
-            armoursmith = 1,
+            armorsmith = 1,
             blackroot_farmer = 1,
             builder = 10,
             burner = 1,

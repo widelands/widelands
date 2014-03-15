@@ -10,9 +10,9 @@ carrier2=donkey
 icon=pics/icon.png
 # Wares and workers positions in wares window. Columns are separated by ;,
 # Entries in the columns separated by ,
-wares_order=stone, log, wood, wool,cloth;   fish,meat, water, wheat, flour, bread, beer, grape, wine, ration, meal;  marble, marblecolumn, coal, ironore, iron, goldore, gold;    pick, axe, saw, shovel, hammer, fishing_rod, hunting_spear, scythe, bread_paddle, basket, kitchen_tools, fire_tongs;   wood_lance, lance, advanced_lance, heavy_lance, war_lance, helm, armour, chain_armour, plate_armour
+wares_order=stone, log, wood, wool,cloth;   fish,meat, water, wheat, flour, bread, beer, grape, wine, ration, meal;  marble, marblecolumn, coal, ironore, iron, goldore, gold;    pick, axe, saw, shovel, hammer, fishing_rod, hunting_spear, scythe, bread_paddle, basket, kitchen_tools, fire_tongs;   wood_lance, lance, advanced_lance, heavy_lance, war_lance, helm, armor, chain_armor, plate_armor
 
-workers_order=carrier, donkey, donkeybreeder;   stonemason, carpenter, lumberjack, forester, builder, shepherd, weaver, shipwright; fisher, hunter, farmer, miller, baker, brewer, pig-breeder, vinefarmer, innkeeper; geologist, miner, master-miner, burner, smelter; toolsmith; soldier, trainer, weaponsmith, armoursmith, scout
+workers_order=carrier, donkey, donkeybreeder;   stonemason, carpenter, lumberjack, forester, builder, shepherd, weaver, shipwright; fisher, hunter, farmer, miller, baker, brewer, pig-breeder, vinefarmer, innkeeper; geologist, miner, master-miner, burner, smelter; toolsmith; soldier, trainer, weaponsmith, armorsmith, scout
 
 # No idea for the frontier. Maybe some javelins?
 [frontier]
@@ -55,13 +55,13 @@ shipconstruction=_Ship Construction Site
 
 [ware types]
 advanced_lance=_Advanced Lance
-armour=_Armor
+armor=_Armor
 axe=_Ax
 bread_paddle=_Bread Paddle
 basket=_Basket
 beer=_Beer
 bread=_Bread
-chain_armour=_Chain Armor
+chain_armor=_Chain Armor
 cloth=_Cloth
 coal=_Coal
 fire_tongs=_Fire Tongs
@@ -84,7 +84,7 @@ marble=_Marble
 meal=_Meal
 meat=_Meat
 pick=_Pick
-plate_armour=_Plate Armor
+plate_armor=_Plate Armor
 ration=_Ration
 saw=_Saw
 scythe=_Scythe
@@ -107,7 +107,7 @@ donkey=_Donkey
 soldier=_Soldier
 
 [worker types]
-armoursmith=_Armorsmith
+armorsmith=_Armorsmith
 baker=_Baker
 brewer=_Brewer
 builder=_Builder
@@ -185,7 +185,7 @@ burners_house=_Charcoal Burner
 smelting_works=_Smelting Works
 shipyard=_Shipyard
 toolsmithy=_Toolsmithy
-armoursmithy=_Armor Smithy
+armorsmithy=_Armor Smithy
 donkeyfarm=_Donkey Farm
 sheepfarm=_Sheep Farm
 weaving-mill=_Weaving Mill

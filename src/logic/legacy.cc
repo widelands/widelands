@@ -103,13 +103,13 @@ static char const * const barbarian_worker_types[] = {
 };
 static char const * const empire_ware_types[] = {
 	"advanced_lance",
-	"armour",
+	"armor",
 	"axe",
 	"bread_paddle",
 	"basket",
 	"beer",
 	"bread",
-	"chain_armour",
+	"chain_armor",
 	"cloth",
 	"coal",
 	"fire_tongs",
@@ -132,7 +132,7 @@ static char const * const empire_ware_types[] = {
 	"meal",
 	"meat",
 	"pick",
-	"plate_armour",
+	"plate_armor",
 	"ration",
 	"saw",
 	"scythe",
@@ -148,7 +148,7 @@ static char const * const empire_ware_types[] = {
 	"wool",
 };
 static char const * const empire_worker_types[] = {
-	"armoursmith",
+	"armorsmith",
 	"baker",
 	"brewer",
 	"builder",
@@ -222,7 +222,7 @@ static char const * const atlantean_ware_types[] = {
 	"water"
 };
 static char const * const atlantean_worker_types[] = {
-	"armoursmith",
+	"armorsmith",
 	"baker",
 	"blackroot_farmer",
 	"builder",

@@ -84,7 +84,7 @@ return {
          wares = {bread = 4, smoked_fish = 3, smoked_meat = 3}
       })
 
-      place_building_in_region(plr, "armoursmithy", sf:region(11), {
+      place_building_in_region(plr, "armorsmithy", sf:region(11), {
          wares = { coal=4, gold =4 }
       })
       place_building_in_region(plr, "toolsmithy", sf:region(11), {

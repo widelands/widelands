@@ -1,8 +1,8 @@
 size=medium
 output=helm
-output=armour
-output=chain_armour
-output=plate_armour
+output=armor
+output=chain_armor
+output=plate_armor
 
 [aihints]
 build_material=false
@@ -19,7 +19,7 @@ marble=1
 marblecolumn=2
 
 [working positions]
-armoursmith=1
+armorsmith=1
 
 [inputs]
 iron=8
@@ -29,9 +29,9 @@ cloth=8
 
 [programs]
 produce_helm=_Produce helm
-produce_armour=_Produce armor
-produce_chain_armour=_Produce chain armor
-produce_plate_armour=_Produce plate armor
+produce_armor=_Produce armor
+produce_chain_armor=_Produce chain armor
+produce_plate_armor=_Produce plate armor
 work=_Work
 
 [produce_helm]
@@ -41,32 +41,32 @@ sleep=32000
 animate=working 35000
 produce=helm
 
-[produce_armour]
-return=skipped unless economy needs armour
+[produce_armor]
+return=skipped unless economy needs armor
 consume=iron coal cloth
 sleep=32000
 animate=working 45000
-produce=armour
+produce=armor
 
-[produce_chain_armour]
-return=skipped unless economy needs chain_armour
+[produce_chain_armor]
+return=skipped unless economy needs chain_armor
 consume=iron:2 coal cloth
 sleep=32000
 animate=working 45000
-produce=chain_armour
+produce=chain_armor
 
-[produce_plate_armour]
-return=skipped unless economy needs plate_armour
+[produce_plate_armor]
+return=skipped unless economy needs plate_armor
 consume=iron:2 coal:2 cloth gold
 sleep=32000
 animate=working 45000
-produce=plate_armour
+produce=plate_armor
 
 [work]
 call=produce_helm
-call=produce_armour
-call=produce_chain_armour
-call=produce_plate_armour
+call=produce_armor
+call=produce_chain_armor
+call=produce_plate_armor
 sleep=20000
 return=skipped
 

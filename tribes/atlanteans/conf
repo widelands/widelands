@@ -12,7 +12,7 @@ icon=pics/icon.png
 # Entries in the columns separated by ,
 wares_order=stone, log, planks, spideryarn, spidercloth; fish, smoked_fish, meat, smoked_meat, water, corn, cornflour, blackroot, blackrootflour, bread; quartz, diamond, coal, ironore, iron, goldore, gold; pick, saw, shovel, hammer, milking_tongs, fishing_net, bucket, hunting_bow, hook_pole, scythe, bread_paddle, fire_tongs; light_trident, long_trident, steel_trident, double_trident, heavy_double_trident,steel_shield, advanced_shield, tabard, goldyarn, golden_tabard
 
-workers_order=carrier, horse, horsebreeder; stonecutter, woodcutter, sawyer, forester, builder, spiderbreeder, weaver, shipwright; fisher, fish_breeder, hunter, smoker, farmer, blackroot_farmer, miller, baker; geologist, miner, burner, smelter; toolsmith; soldier, trainer, weaponsmith, armoursmith, scout
+workers_order=carrier, horse, horsebreeder; stonecutter, woodcutter, sawyer, forester, builder, spiderbreeder, weaver, shipwright; fisher, fish_breeder, hunter, smoker, farmer, blackroot_farmer, miller, baker; geologist, miner, burner, smelter; toolsmith; soldier, trainer, weaponsmith, armorsmith, scout
 
 # Some blue fires would be fine, but just an idea
 [frontier]
@@ -108,7 +108,7 @@ horse=_Horse
 soldier=_Soldier
 
 [worker types]
-armoursmith=_Armorsmith
+armorsmith=_Armorsmith
 baker=_Baker
 blackroot_farmer=_Blackroot Farmer
 builder=_Builder
@@ -182,7 +182,7 @@ burners_house=_Charcoal Burner’s House
 smelting_works=_Smelting Works
 toolsmithy=_Toolsmithy
 weaponsmithy=_Weapon Smithy
-armoursmithy=_Armor Smithy
+armorsmithy=_Armor Smithy
 horsefarm=_Horse Farm
 spiderfarm=_Spider Farm
 weaving-mill=_Weaving-Mill

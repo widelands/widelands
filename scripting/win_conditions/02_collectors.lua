@@ -57,13 +57,13 @@ local point_table = {
 		heavy_lance = 7,
 		war_lance = 8,
 		helm = 2,
-		armour = 3,
-		chain_armour = 4,
-		plate_armour = 8,
+		armor = 3,
+		chain_armor = 4,
+		plate_armor = 8,
 	},
 	empire_order = {
 		"gold", "wood_lance", "lance", "advanced_lance", "heavy_lance",
-		"war_lance", "helm", "armour", "chain_armour", "plate_armour"
+		"war_lance", "helm", "armor", "chain_armor", "plate_armor"
 	},
 
 	atlanteans = {

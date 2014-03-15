@@ -87,7 +87,7 @@ return {
          },
       })
 
-      place_building_in_region(plr, "armoursmithy", sf:region(11), {
+      place_building_in_region(plr, "armorsmithy", sf:region(11), {
          wares = {
                gold = 4,
                coal = 8,

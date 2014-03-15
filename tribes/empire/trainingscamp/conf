@@ -30,9 +30,9 @@ advanced_lance=2
 heavy_lance=2
 war_lance=2
 helm=2
-armour=2
-chain_armour=2
-plate_armour=2
+armor=2
+chain_armor=2
+plate_armor=2
 
 [soldier attack]
 min_level=0
@@ -96,21 +96,21 @@ train=soldier hp 0 1
 check_soldier=soldier hp 1
 sleep=30000
 check_soldier=soldier hp 1
-consume=armour bread fish,meat
+consume=armor bread fish,meat
 train=soldier hp 1 2
 
 [upgrade_soldier_hp_2]
 check_soldier=soldier hp 2
 sleep=30000
 check_soldier=soldier hp 2
-consume=chain_armour bread:2 fish,meat:2
+consume=chain_armor bread:2 fish,meat:2
 train=soldier hp 2 3
 
 [upgrade_soldier_hp_3]
 check_soldier=soldier hp 3
 sleep=30000
 check_soldier=soldier hp 3
-consume=plate_armour bread:2 fish,meat:2
+consume=plate_armor bread:2 fish,meat:2
 train=soldier hp 3 4
 
 [idle]

@@ -203,7 +203,7 @@ function init_AI_player(player, f_hq, f_port, f_vineyard, f_shipyard, tribename)
 				 wool = 2,
 			   },
 			   workers = {
-				 armoursmith = 1,
+				 armorsmith = 1,
 				 brewer = 1,
 				 builder = 10,
 				 burner = 1,
@@ -273,7 +273,7 @@ function init_AI_player(player, f_hq, f_port, f_vineyard, f_shipyard, tribename)
 			 light_trident = 5,
 		   },
 		   workers = {
-			 armoursmith = 1,
+			 armorsmith = 1,
 			 blackroot_farmer = 1,
 			 builder = 10,
 			 burner = 1,

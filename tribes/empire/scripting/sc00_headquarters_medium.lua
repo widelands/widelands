@@ -57,7 +57,7 @@ return {
          wool = 2,
       },
       workers = {
-         armoursmith = 1,
+         armorsmith = 1,
          brewer = 1,
          builder = 10,
          burner = 1,
