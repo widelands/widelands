@@ -22,7 +22,7 @@ smelter=1
 
 [inputs]
 ironore=8
-goldstone=8
+goldore=8
 coal=8
 
 [programs]
@@ -39,7 +39,7 @@ produce=iron
 
 [smelt_gold]
 return=skipped unless economy needs gold
-consume=coal goldstone
+consume=coal goldore
 sleep=32000
 animate=working 35000
 produce=gold

@@ -1,5 +1,5 @@
 size=mine
-output=goldstone
+output=goldore
 enhancement=deep_goldmine
 
 [buildcost]
@@ -26,16 +26,16 @@ wine=6
 work=_Work
 
 [work]
-return=skipped unless economy needs goldstone or not economy needs ration
-return=skipped unless economy needs goldstone or not economy needs wine
+return=skipped unless economy needs goldore or not economy needs ration
+return=skipped unless economy needs goldore or not economy needs wine
 sleep=45000
 consume=ration wine
 animate=working 20000
 mine=gold 2 50 5
-produce=goldstone
+produce=goldore
 animate=working 20000
 mine=gold 2 50 5
-produce=goldstone
+produce=goldore
 
 [idle]
 pics=goldmine_i_??.png

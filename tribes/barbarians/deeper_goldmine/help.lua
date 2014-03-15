@@ -15,7 +15,7 @@ return {
 		rt(h2(_"General")) ..
 		rt(p(_"A %1$s exploits all of the resource down to the deepest level. But even after having done so, it will still have a %2$s chance of finding some more %3$s.":bformat(_"Deeper Gold Mine","10%",_"Gold Ore"))) ..
 		rt(h3(_"Purpose:")) ..
-		image_line("tribes/barbarians/goldstone/menu.png", 1, p(_"Dig %s out of the ground in mountain terrain.":format(_"Gold Ore"))) ..
+		image_line("tribes/barbarians/goldore/menu.png", 1, p(_"Dig %s out of the ground in mountain terrain.":format(_"Gold Ore"))) ..
 		text_line(_"Working radius:", "2") ..
 		text_line(_"Conquer range:", "n/a") ..
 		text_line(_"Vision range:", "4") ..
@@ -24,8 +24,8 @@ return {
 		rt(h3(_"Incoming:")) ..
 		dependencies({"tribes/barbarians/big_inn/menu.png","tribes/barbarians/meal/menu.png","tribes/barbarians/deeper_goldmine/menu.png"}, p(_"%s from a Big Inn":format(_"Meal"))) ..
 		rt(h3(_"Outgoing:")) ..
-		dependencies({"tribes/barbarians/resi_gold2/resi_00.png","tribes/barbarians/deeper_goldmine/menu.png","tribes/barbarians/goldstone/menu.png"}, p(_"Gold Ore")) ..
-		dependencies({"tribes/barbarians/goldstone/menu.png","tribes/barbarians/smelting_works/menu.png"}, p(_"Smelting Works")) ..
+		dependencies({"tribes/barbarians/resi_gold2/resi_00.png","tribes/barbarians/deeper_goldmine/menu.png","tribes/barbarians/goldore/menu.png"}, p(_"Gold Ore")) ..
+		dependencies({"tribes/barbarians/goldore/menu.png","tribes/barbarians/smelting_works/menu.png"}, p(_"Smelting Works")) ..
 		rt(p(_"%s always goes to the %s. It has no other use.":format(_"Gold Ore",_"Smelting Works"))) ..
 	--Building Section
 		rt(h2(_"Building")) ..
