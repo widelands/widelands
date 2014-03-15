@@ -187,7 +187,7 @@ function place_headquarters()
             smoked_fish = 6,
             smoked_meat = 6,
             water = 12,
-            bakingtray = 2,
+            bread_paddle = 2,
             bucket = 2,
             fire_tongs = 2,
             fishing_net = 4,

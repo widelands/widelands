@@ -64,7 +64,7 @@ function place_headquarters()
       prefilled_buildings(player, { "headquarters", sf.x, sf.y,
          wares = {
             axe = 5,
-            bakingtray = 2,
+            bread_paddle = 2,
             blackwood = 32,
             cloth = 5,
             coal = 12,

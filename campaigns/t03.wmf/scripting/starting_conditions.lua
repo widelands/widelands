@@ -15,7 +15,7 @@ p1:allow_buildings{
 hq = p1:place_building("headquarters", wl.Game().map:get_field(52, 33), false, true)
 hq:set_wares{
    axe=1,
-   bakingtray=2,
+   bread_paddle=2,
    blackwood=32,
    coal=12,
    felling_axe=5,

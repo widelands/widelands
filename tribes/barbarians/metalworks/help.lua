@@ -14,7 +14,7 @@ return {
 	--General Section
 		rt(h2(_"General")) ..
 		text_line(_"Purpose:", _"The Barbarian Metal Workshop is the basic production site in a series of three buildings and creates all the tools that Barbarians need. The others are for weapons.") ..
-		rt("image=tribes/barbarians/bakingtray/menu.png;tribes/barbarians/felling_axe/menu.png;tribes/barbarians/fire_tongs/menu.png;tribes/barbarians/fishing_rod/menu.png;tribes/barbarians/hammer/menu.png;tribes/barbarians/hunting_spear/menu.png;tribes/barbarians/kitchen_tools/menu.png;tribes/barbarians/pick/menu.png;tribes/barbarians/scythe/menu.png;tribes/barbarians/shovel/menu.png image-align=right",p("")) ..
+		rt("image=tribes/barbarians/bread_paddle/menu.png;tribes/barbarians/felling_axe/menu.png;tribes/barbarians/fire_tongs/menu.png;tribes/barbarians/fishing_rod/menu.png;tribes/barbarians/hammer/menu.png;tribes/barbarians/hunting_spear/menu.png;tribes/barbarians/kitchen_tools/menu.png;tribes/barbarians/pick/menu.png;tribes/barbarians/scythe/menu.png;tribes/barbarians/shovel/menu.png image-align=right",p("")) ..
 		rt(p(_"It can make Bread Paddles, Felling Axes, Fire Tongs, Fishing Rods, Hammers, Hunting Spears, Kitchen Tools, Picks, Scythes and Shovels.")) ..
 		text_line(_"Working radius:", "n/a") ..
 		text_line(_"Conquer range:", "n/a") ..
@@ -25,7 +25,7 @@ return {
 		dependencies({"tribes/barbarians/smelting_works/menu.png","tribes/barbarians/iron/menu.png","tribes/barbarians/metalworks/menu.png"},p(_"%s from the Smelting Works":format(_"Iron"))) ..
 		dependencies({"tribes/barbarians/lumberjacks_hut/menu.png","tribes/barbarians/trunk/menu.png","tribes/barbarians/metalworks/menu.png"},p(_"%s from the Lumberjack’s hut":format(_"Log"))) ..
 		rt(h3(_"Outgoing:")) ..
-		dependencies({"tribes/barbarians/metalworks/menu.png","tribes/barbarians/bakingtray/menu.png","tribes/barbarians/headquarters/menu.png","tribes/barbarians/baker/menu.png" },p(_"Baker")) ..
+		dependencies({"tribes/barbarians/metalworks/menu.png","tribes/barbarians/bread_paddle/menu.png","tribes/barbarians/headquarters/menu.png","tribes/barbarians/baker/menu.png" },p(_"Baker")) ..
 		dependencies({"tribes/barbarians/metalworks/menu.png","tribes/barbarians/felling_axe/menu.png","tribes/barbarians/headquarters/menu.png","tribes/barbarians/lumberjack/menu.png" },p(_"Lumberjack")) ..
 		dependencies({"tribes/barbarians/metalworks/menu.png","tribes/barbarians/fire_tongs/menu.png","tribes/barbarians/headquarters/menu.png","tribes/barbarians/smelter/menu.png" },p(_"Smelter")) ..
 		dependencies({"tribes/barbarians/metalworks/menu.png","tribes/barbarians/fishing_rod/menu.png","tribes/barbarians/headquarters/menu.png","tribes/barbarians/fisher/menu.png" },p(_"Fisher")) ..

@@ -1,7 +1,7 @@
 help=_Bakes bread for workers.
 
 [buildcost]
-bakingtray=1
+bread_paddle=1
 carrier=1
 
 [idle]

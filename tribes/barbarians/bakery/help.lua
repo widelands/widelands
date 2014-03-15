@@ -48,7 +48,7 @@ return {
 		rt(h2(_"Workers")) ..
 		rt(h3(_"Crew required:")) ..
 		image_line("tribes/barbarians/baker/menu.png", 1, p(_"Baker")) ..
-		text_line(_"Worker uses:", _"Bread Paddle","tribes/barbarians/bakingtray/menu.png") ..
+		text_line(_"Worker uses:", _"Bread Paddle","tribes/barbarians/bread_paddle/menu.png") ..
 		text_line(_"Experience levels:","n/a") ..
 	--Production Section
 		rt(h2(_"Production")) ..

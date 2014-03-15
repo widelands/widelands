@@ -32,7 +32,7 @@ namespace Legacy {
 //  <= 3.
 static char const * const barbarian_ware_types[] = {
 	"axe",
-	"bakingtray",
+	"bread_paddle",
 	"battleaxe",
 	"beer",
 	"blackwood",
@@ -105,7 +105,7 @@ static char const * const empire_ware_types[] = {
 	"advanced_lance",
 	"armour",
 	"axe",
-	"bakingtray",
+	"bread_paddle",
 	"basket",
 	"beer",
 	"bread",
@@ -177,7 +177,7 @@ static char const * const empire_worker_types[] = {
 };
 static char const * const atlantean_ware_types[] = {
 	"advanced_shield",
-	"bakingtray",
+	"bread_paddle",
 	"blackroot",
 	"blackrootflour",
 	"bread",
