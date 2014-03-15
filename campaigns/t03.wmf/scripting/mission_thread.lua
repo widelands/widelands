@@ -153,7 +153,7 @@ function mining_and_trainingsites()
       "warmill",
       "helmsmithy",
       "battlearena",
-      "trainingscamp",
+      "trainingcamp",
       "inn",
       "big_inn",
       "deep_coalmine",
@@ -173,7 +173,7 @@ function mining_and_trainingsites()
 end
 
 function check_trainingssite_obj(o)
-   while not check_for_buildings(p1, {trainingscamp = 1, battlearena = 1}) do
+   while not check_for_buildings(p1, {trainingcamp = 1, battlearena = 1}) do
       sleep(6523)
    end
    o.done = true

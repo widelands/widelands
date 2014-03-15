@@ -79,7 +79,7 @@ return {
          },
       })
 
-      place_building_in_region(plr, "trainingscamp", sf:region(11), {
+      place_building_in_region(plr, "trainingcamp", sf:region(11), {
          wares = {
             fish = 2,
             meat = 2,

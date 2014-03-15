@@ -25,7 +25,7 @@ return {
 		rt(h2(_"Outgoing:")) ..
 		dependencies({"tribes/barbarians/fishers_hut/menu.png","tribes/barbarians/fish/menu.png"},p(_"Fish")) ..
 		dependencies({"tribes/barbarians/fish/menu.png","tribes/barbarians/battlearena/menu.png"},p(_"Battle Arena")) ..
-		dependencies({"tribes/barbarians/fish/menu.png","tribes/barbarians/trainingscamp/menu.png"},p(_"Training Camp")) ..
+		dependencies({"tribes/barbarians/fish/menu.png","tribes/barbarians/trainingcamp/menu.png"},p(_"Training Camp")) ..
 		dependencies({"tribes/barbarians/fish/menu.png","tribes/barbarians/tavern/menu.png"},p(_"Tavern")) ..
 		dependencies({"tribes/barbarians/fish/menu.png","tribes/barbarians/inn/menu.png"},p(_"Inn")) ..
 		dependencies({"tribes/barbarians/fish/menu.png","tribes/barbarians/big_inn/menu.png"},p(_"Big Inn")) ..

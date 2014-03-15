@@ -26,7 +26,7 @@ return {
 		rt(p(_"%s from the Coal mine or the Charcoal Burner’s House":format(_"Coal"))) ..
 		rt(h3(_"Outgoing:")) ..
 		dependencies({"tribes/barbarians/axefactory/menu.png","tribes/barbarians/axe/menu.png","tribes/barbarians/headquarters/menu.png","tribes/barbarians/soldier/menu.png"},p(_"Soldier")) ..
-		dependencies({"tribes/barbarians/axefactory/menu.png","tribes/barbarians/sharpaxe/menu.png;tribes/barbarians/broadaxe/menu.png","tribes/barbarians/trainingscamp/menu.png"},p(_"Training Camp")) ..
+		dependencies({"tribes/barbarians/axefactory/menu.png","tribes/barbarians/sharpaxe/menu.png;tribes/barbarians/broadaxe/menu.png","tribes/barbarians/trainingcamp/menu.png"},p(_"Training Camp")) ..
 	--Building Section
 		rt(h2(_"Building")) ..
 		text_line(_"Space required:",_"Medium plot","pics/medium.png") ..

@@ -215,7 +215,7 @@ fortress=_Fortress
 [trainingsite types]
 colosseum=_Colosseum
 arena=_Arena
-trainingscamp=_Training Camp
+trainingcamp=_Training Camp
 
 [initializations]
 headquarters_medium=_Headquarters Medium

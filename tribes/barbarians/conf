@@ -214,7 +214,7 @@ donjon=_Donjon
 
 [trainingsite types]
 battlearena=_Battle Arena
-trainingscamp=_Training Camp
+trainingcamp=_Training Camp
 
 [initializations]
 headquarters_medium=_Headquarters Medium

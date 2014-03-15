@@ -15,7 +15,7 @@ trainingsite_tests = lunit.TestCase("MilitarySite Tests")
 function trainingsite_tests:setup()
    self.f1 = map:get_field(10,10)
 
-   self.camp = player1:place_building("trainingscamp", self.f1)
+   self.camp = player1:place_building("trainingcamp", self.f1)
 end
 function trainingsite_tests:teardown()
    pcall(function()
@@ -24,7 +24,7 @@ function trainingsite_tests:teardown()
 end
 
 function trainingsite_tests:test_name()
-   assert_equal("trainingscamp", self.camp.name)
+   assert_equal("trainingcamp", self.camp.name)
 end
 function trainingsite_tests:test_type()
    assert_equal("trainingsite", self.camp.type)

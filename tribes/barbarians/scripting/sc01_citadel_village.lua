@@ -73,7 +73,7 @@ return {
          }
       })
 
-      place_building_in_region(plr, "trainingscamp", sf:region(12))
+      place_building_in_region(plr, "trainingcamp", sf:region(12))
 
       place_building_in_region(plr, "helmsmithy", sf:region(12), {
          wares = { iron = 4, gold = 4 }
