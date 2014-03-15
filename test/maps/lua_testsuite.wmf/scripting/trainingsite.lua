@@ -94,7 +94,7 @@ function trainingsite_tests:test_valid_wares()
    assert_equal(2, self.camp.valid_wares.warriorsaxe)
    assert_equal(2, self.camp.valid_wares.helm)
    assert_equal(2, self.camp.valid_wares.mask)
-   assert_equal(2, self.camp.valid_wares.warhelmet)
+   assert_equal(2, self.camp.valid_wares.warhelm)
    assert_equal(nil, self.camp.valid_wares.water)
 end
 function trainingsite_tests:test_valid_wares_correct_length()

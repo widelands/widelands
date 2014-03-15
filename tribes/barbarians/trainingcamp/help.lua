@@ -30,7 +30,7 @@ return {
 		dependencies({"tribes/barbarians/warmill/menu.png","tribes/barbarians/sharpaxe/menu.png;tribes/barbarians/broadaxe/menu.png;tribes/barbarians/bronzeaxe/menu.png;tribes/barbarians/battleaxe/menu.png;tribes/barbarians/warriorsaxe/menu.png","tribes/barbarians/trainingcamp/menu.png"}) ..
 		rt(p(_"Provided by the War Mill")) ..
 		rt(h3(_"Training Health:")) ..
-		dependencies({"tribes/barbarians/helmsmithy/menu.png","tribes/barbarians/helm/menu.png;tribes/barbarians/mask/menu.png;tribes/barbarians/warhelmet/menu.png","tribes/barbarians/trainingcamp/menu.png"}) ..
+		dependencies({"tribes/barbarians/helmsmithy/menu.png","tribes/barbarians/helm/menu.png;tribes/barbarians/mask/menu.png;tribes/barbarians/warhelm/menu.png","tribes/barbarians/trainingcamp/menu.png"}) ..
 		rt(p(_"Provided by the Helm Smithy")) ..
 		rt(h3(_"Training Both")) ..
 		image_line("tribes/barbarians/pittabread/menu.png",1,p(_"%s and":format(_"Pitta Bread"))) ..

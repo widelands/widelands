@@ -29,7 +29,7 @@ battleaxe=2
 warriorsaxe=2
 helm=2
 mask=2
-warhelmet=2
+warhelm=2
 
 [soldier attack]
 min_level=0
@@ -107,7 +107,7 @@ train=soldier hp 1 2
 check_soldier=soldier hp 2
 sleep=30000
 check_soldier=soldier hp 2
-consume=warhelmet fish,meat:2 pittabread
+consume=warhelm fish,meat:2 pittabread
 train=soldier hp 2 3
 
 [build]

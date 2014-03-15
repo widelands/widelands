@@ -1,7 +1,7 @@
 size=big
 output=helm
 output=mask
-output=warhelmet
+output=warhelm
 
 [aihints]
 build_material=false
@@ -30,7 +30,7 @@ coal=8
 [programs]
 produce_helm=_Produce helm
 produce_mask=_Produce mask
-produce_warhelmet=_Produce warhelm
+produce_warhelm=_Produce warhelm
 work=_Work
 
 [produce_helm]
@@ -47,17 +47,17 @@ sleep=32000
 animate=working 45000
 produce=mask
 
-[produce_warhelmet]
-return=skipped unless economy needs warhelmet
+[produce_warhelm]
+return=skipped unless economy needs warhelm
 consume=coal gold iron:2
 sleep=32000
 animate=working 55000
-produce=warhelmet
+produce=warhelm
 
 [work]
 call=produce_helm
 call=produce_mask
-call=produce_warhelmet
+call=produce_warhelm
 sleep=20000
 return=skipped
 

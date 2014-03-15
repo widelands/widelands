@@ -67,7 +67,7 @@ static char const * const barbarian_ware_types[] = {
 	"strongbeer",
 	"thatchreed",
 	"log",
-	"warhelmet",
+	"warhelm",
 	"warriorsaxe",
 	"water",
 	"wheat"
