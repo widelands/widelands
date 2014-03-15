@@ -38,7 +38,7 @@ hq:set_wares{
    shovel=4,
    snack=3,
    thatchreed=24,
-   trunk=80,
+   log=80,
 }
 hq:set_workers{
    blacksmith=2,

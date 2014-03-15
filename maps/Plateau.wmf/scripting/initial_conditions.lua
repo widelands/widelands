@@ -27,7 +27,7 @@ prefilled_buildings(p1, { "headquarters_interim", 65, 6,
       shovel = 4,
       snack = 3,
       thatchreed = 24,
-      trunk = 80,
+      log = 80,
    },
    workers = {
       carrier = 40,
@@ -54,7 +54,7 @@ p2:forbid_buildings("all")
 p2:allow_buildings{ "lumberjacks_hut" }
 
 prefilled_buildings(p2,
-   { "warehouse", 45, 40, wares = {trunk = 20,}, workers = {
+   { "warehouse", 45, 40, wares = {log = 20,}, workers = {
       carrier = 40,
       builder = 2,
       lumberjack = 10,
@@ -153,7 +153,7 @@ p3:allow_buildings{
 
 prefilled_buildings(p3, 
    { "warehouse", 6, 44, wares = {
-         trunk = 200,
+         log = 200,
          kitchen_tools = 4,
          pick = 14,
          raw_stone = 40,

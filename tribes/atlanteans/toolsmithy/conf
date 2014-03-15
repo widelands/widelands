@@ -13,7 +13,7 @@ output=scythe
 output=shovel
 
 [buildcost]
-trunk=1
+log=1
 stone=2
 planks=2
 spidercloth=1
@@ -31,7 +31,7 @@ toolsmith=1
 
 [inputs]
 iron=6
-trunk=6
+log=6
 spidercloth=4
 
 [programs]
@@ -51,21 +51,21 @@ work=_Work
 
 [produce_bread_paddle]
 return=skipped unless economy needs bread_paddle
-consume=iron trunk
+consume=iron log
 sleep=32000
 animate=working 35000
 produce=bread_paddle
 
 [produce_bucket]
 return=skipped unless economy needs bucket
-consume=iron trunk
+consume=iron log
 sleep=32000
 animate=working 35000
 produce=bucket
 
 [produce_fire_tongs]
 return=skipped unless economy needs fire_tongs
-consume=iron trunk
+consume=iron log
 sleep=32000
 animate=working 35000
 produce=fire_tongs
@@ -79,56 +79,56 @@ produce=fishing_net
 
 [produce_hammer]
 return=skipped unless economy needs hammer
-consume=iron trunk
+consume=iron log
 sleep=32000
 animate=working 35000
 produce=hammer
 
 [produce_hook_pole]
 return=skipped unless economy needs hook_pole
-consume=iron trunk
+consume=iron log
 sleep=32000
 animate=working 35000
 produce=hook_pole
 
 [produce_hunting_bow]
 return=skipped unless economy needs hunting_bow
-consume=trunk spidercloth
+consume=log spidercloth
 sleep=32000
 animate=working 35000
 produce=hunting_bow
 
 [produce_milking_tongs]
 return=skipped unless economy needs milking_tongs
-consume=iron trunk
+consume=iron log
 sleep=32000
 animate=working 35000
 produce=milking_tongs
 
 [produce_pick]
 return=skipped unless economy needs pick
-consume=iron trunk
+consume=iron log
 sleep=32000
 animate=working 35000
 produce=pick
 
 [produce_saw]
 return=skipped unless economy needs saw
-consume=iron trunk
+consume=iron log
 sleep=32000
 animate=working 35000
 produce=saw
 
 [produce_scythe]
 return=skipped unless economy needs scythe
-consume=iron trunk
+consume=iron log
 sleep=32000
 animate=working 35000
 produce=scythe
 
 [produce_shovel]
 return=skipped unless economy needs shovel
-consume=iron trunk
+consume=iron log
 sleep=32000
 animate=working 35000
 produce=shovel

@@ -5,12 +5,12 @@ output=cloth
 build_material=false
 
 [buildcost]
-trunk=5
+log=5
 raw_stone=2
 thatchreed=2
 
 [return_on_dismantle]
-trunk=2
+log=2
 raw_stone=2
 
 [working positions]

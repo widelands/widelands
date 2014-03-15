@@ -38,19 +38,19 @@ return {
 		help_building_line("barbarians", "thatchreed", ngettext("%i Thatch Reed", "%i Thatch Reeds", 1), 1) ..
 		help_building_line("barbarians", "grout", ngettext("%i Grout", "%i Grout", 1), 1) ..
 		help_building_line("barbarians", "raw_stone", ngettext("%i Raw Stone", "%i Raw Stones", 2), 2) ..
-		help_building_line("barbarians", "trunk", ngettext("%i Log", "%i Logs", 1), 1) ..
+		help_building_line("barbarians", "log", ngettext("%i Log", "%i Logs", 1), 1) ..
 		rt(h3(_"Cost cumulative:")) ..
 		help_building_line("barbarians", "blackwood", ngettext("%i Blackwood", "%i Blackwood", 3), 3) ..
 		help_building_line("barbarians", "thatchreed", ngettext("%i Thatch Reed", "%i Thatch Reeds", 3), 3) ..
 		help_building_line("barbarians", "grout", ngettext("%i Grout", "%i Grout", 3), 3) ..
 		help_building_line("barbarians", "raw_stone", ngettext("%i Raw Stone", "%i Raw Stones", 6), 6) ..
-		help_building_line("barbarians", "trunk", ngettext("%i Log", "%i Logs", 3), 3) ..
+		help_building_line("barbarians", "log", ngettext("%i Log", "%i Logs", 3), 3) ..
 		rt(h3(_"Dismantle yields:")) ..
 		help_building_line("barbarians", "blackwood", ngettext("%i Blackwood", "%i Blackwood", 2), 2) ..
 		help_building_line("barbarians", "thatchreed", ngettext("%i Thatch Reed", "%i Thatch Reeds", 2), 2) ..
 		help_building_line("barbarians", "grout", ngettext("%i Grout", "%i Grout", 2), 2) ..
 		help_building_line("barbarians", "raw_stone", ngettext("%i Raw Stone", "%i Raw Stones", 3), 3) ..
-		help_building_line("barbarians", "trunk", ngettext("%i Log", "%i Logs", 2), 2) ..
+		help_building_line("barbarians", "log", ngettext("%i Log", "%i Logs", 2), 2) ..
 		text_line(_"Upgradeable to:","n/a") ..
 	--Workers Section
 		rt(h2(_"Workers")) ..

@@ -3,7 +3,7 @@ soldier_capacity=12
 trainer_patience=12
 
 [buildcost]
-trunk=2
+log=2
 stone=5
 wood=4
 marble=5

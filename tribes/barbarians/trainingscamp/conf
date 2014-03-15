@@ -3,14 +3,14 @@ soldier_capacity=12
 trainer_patience=5
 
 [buildcost]
-trunk=6
+log=6
 raw_stone=4
 grout=6
 gold=4
 thatchreed=3
 
 [return_on_dismantle]
-trunk=3
+log=3
 raw_stone=2
 grout=2
 gold=2

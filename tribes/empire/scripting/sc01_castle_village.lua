@@ -47,7 +47,7 @@ return {
             scythe = 5,
             shovel = 6,
             stone = 40,
-            trunk = 29,
+            log = 29,
             water = 12,
             wheat = 4,
             wine = 8,
@@ -110,7 +110,7 @@ return {
 
       place_building_in_region(plr, "sawmill", sf:region(11), {
          wares = {
-            trunk = 1,
+            log = 1,
          }
       })
 

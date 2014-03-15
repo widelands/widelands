@@ -2,12 +2,12 @@ size=medium
 output=flour
 
 [buildcost]
-trunk=3
+log=3
 stone=3
 marble=1
 
 [return_on_dismantle]
-trunk=1
+log=1
 stone=2
 marble=1
 

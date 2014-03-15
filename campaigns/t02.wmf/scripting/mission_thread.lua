@@ -376,7 +376,7 @@ function reveal_village()
       {"lumberjacks_hut", 54, 24},
       {"rangers_hut", 57, 24},
       {"rangers_hut", 55, 25},
-      {"hardener", 54, 26, wares = {trunk = 8}},
+      {"hardener", 54, 26, wares = {log = 8}},
       {"warehouse", 53, 28},
       {"inn", 55, 28, wares = {pittabread = 4, meat = 4}},
       {"tavern", 57, 28, wares = {pittabread=4, meat = 4}},

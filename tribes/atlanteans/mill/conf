@@ -3,12 +3,12 @@ output=cornflour
 output=blackrootflour
 
 [buildcost]
-trunk=3
+log=3
 stone=3
 planks=2
 
 [return_on_dismantle]
-trunk=1
+log=1
 stone=2
 planks=1
 

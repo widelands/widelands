@@ -4,12 +4,12 @@ output=blackroot
 [buildcost]
 planks=3
 stone=2
-trunk=4
+log=4
 
 [return_on_dismantle]
 planks=1
 stone=2
-trunk=1
+log=1
 
 [aihints]
 space_consumer=true

@@ -89,7 +89,7 @@ function place_headquarters()
             shovel = 4,
             snack = 3,
             thatchreed = 24,
-            trunk = 80,
+            log = 80,
          },
          workers = {
             blacksmith = 2,

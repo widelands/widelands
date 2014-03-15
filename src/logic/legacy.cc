@@ -66,7 +66,7 @@ static char const * const barbarian_ware_types[] = {
 	"snack",
 	"strongbeer",
 	"thatchreed",
-	"trunk",
+	"log",
 	"warhelmet",
 	"warriorsaxe",
 	"water",
@@ -138,7 +138,7 @@ static char const * const empire_ware_types[] = {
 	"scythe",
 	"shovel",
 	"stone",
-	"trunk",
+	"log",
 	"war_lance",
 	"water",
 	"wheat",
@@ -218,7 +218,7 @@ static char const * const atlantean_ware_types[] = {
 	"steel_trident",
 	"stone",
 	"tabard",
-	"trunk",
+	"log",
 	"water"
 };
 static char const * const atlantean_worker_types[] = {

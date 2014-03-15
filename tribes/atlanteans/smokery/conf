@@ -1,11 +1,11 @@
-#help: Will smoke food unless the economy has less trunks than the target quantity and at least the target quantity of the smoked food.
+#help: Will smoke food unless the economy has less logs than the target quantity and at least the target quantity of the smoked food.
 
 size=medium
 output=smoked_meat
 output=smoked_fish
 
 [buildcost]
-trunk=1
+log=1
 stone=4
 planks=1
 spidercloth=1
@@ -22,7 +22,7 @@ smoker=1
 [inputs]
 fish=4
 meat=4
-trunk=8
+log=8
 
 [programs]
 smoke_meat=_Smoke meat
@@ -30,15 +30,15 @@ smoke_fish=_Smoke fish
 work=_Work
 
 [smoke_meat]
-return=skipped unless economy needs smoked_meat or not economy needs trunk
-consume=meat:2 trunk
+return=skipped unless economy needs smoked_meat or not economy needs log
+consume=meat:2 log
 sleep=30000
 animate=working 30000
 produce=smoked_meat:2
 
 [smoke_fish]
-return=skipped unless economy needs smoked_fish or not economy needs trunk
-consume=fish:2 trunk
+return=skipped unless economy needs smoked_fish or not economy needs log
+consume=fish:2 log
 sleep=30000
 animate=working 30000
 produce=smoked_fish:2

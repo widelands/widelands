@@ -28,7 +28,7 @@ return {
             quartz = 9,
             stone = 50,
             spideryarn = 9,
-            trunk = 13,
+            log = 13,
             goldyarn = 6,
             planks = 45,
             spidercloth = 5,
@@ -88,14 +88,14 @@ return {
          wares = { coal=4, gold =4 }
       })
       place_building_in_region(plr, "toolsmithy", sf:region(11), {
-         wares = { trunk = 6 }
+         wares = { log = 6 }
       })
       place_building_in_region(plr, "weaponsmithy", sf:region(11), {
          wares = { coal = 8, iron = 8 }
       })
 
       place_building_in_region(plr, "sawmill", sf:region(11), {
-         wares = { trunk = 1 }
+         wares = { log = 1 }
       })
    end) then
       plr:send_message(_"Not enough space", _(

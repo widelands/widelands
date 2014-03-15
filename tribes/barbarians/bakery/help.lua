@@ -37,12 +37,12 @@ return {
 		help_building_line("barbarians", "blackwood", ngettext("%i Blackwood", "%i Blackwood", 2), 2) ..
 		help_building_line("barbarians", "thatchreed", ngettext("%i Thatch Reed", "%i Thatch Reeds", 2), 2) ..
 		help_building_line("barbarians", "raw_stone", ngettext("%i Raw Stone", "%i Raw Stones", 2), 2) ..
-		help_building_line("barbarians", "trunk", ngettext("%i Log", "%i Logs", 2), 2) ..
+		help_building_line("barbarians", "log", ngettext("%i Log", "%i Logs", 2), 2) ..
 		rt(h3(_"Dismantle yields:")) ..
 		help_building_line("barbarians", "blackwood", ngettext("%i Blackwood", "%i Blackwood", 1), 1) ..
 		help_building_line("barbarians", "thatchreed", ngettext("%i Thatch Reed", "%i Thatch Reeds", 1), 1) ..
 		help_building_line("barbarians", "raw_stone", ngettext("%i Raw Stone", "%i Raw Stones", 1), 1) ..
-		help_building_line("barbarians", "trunk", ngettext("%i Log", "%i Logs", 1), 1) ..
+		help_building_line("barbarians", "log", ngettext("%i Log", "%i Logs", 1), 1) ..
 		text_line(_"Upgradeable to:","n/a") ..
 	--Workers Section
 		rt(h2(_"Workers")) ..

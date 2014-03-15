@@ -6,14 +6,14 @@ output=gold
 build_material=false
 
 [buildcost]
-trunk=3
+log=3
 blackwood=1
 raw_stone=1
 grout=1
 thatchreed=2
 
 [return_on_dismantle]
-trunk=1
+log=1
 blackwood=1
 raw_stone=1
 

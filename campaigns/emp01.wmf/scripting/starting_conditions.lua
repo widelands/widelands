@@ -35,7 +35,7 @@ hq:set_wares{
    scythe = 5,
    shovel = 6,
    stone = 40,
-   trunk = 30,
+   log = 30,
    water = 12,
    wheat = 4,
    wine = 8,

@@ -12,7 +12,7 @@ enhanced_building=yes
 build_material=false
 
 [enhancement_cost]
-trunk=1
+log=1
 blackwood=1
 raw_stone=2
 grout=1

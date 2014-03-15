@@ -236,7 +236,7 @@ function build_eastern_trainings_area(citadel_field)
             builder = 1
          },
          wares = {
-            trunk = 40,
+            log = 40,
             blackwood = 40,
             cloth = 10,
             gold = 10,

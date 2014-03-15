@@ -14,7 +14,7 @@ return {
 	--General Section
 		rt(h2(_"General")) ..
 		rt(h3(_"Purpose:")) ..
-		image_line("tribes/barbarians/trunk/menu.png",1,p(_"Fell trees in the surrounding area and process them into logs.")) ..
+		image_line("tribes/barbarians/log/menu.png",1,p(_"Fell trees in the surrounding area and process them into logs.")) ..
 		text_line(_"Working radius:", "10") ..
 		text_line(_"Conquer range:", "n/a") ..
 		text_line(_"Vision range:", "4") ..
@@ -23,19 +23,19 @@ return {
 		rt(p(_"The Lumberjack’s Hut needs trees in the immediate vicinity to fell.")) ..
 		text_line(_"Incoming:", "n/a") ..
 		rt(h3(_"Outgoing:")) ..
-		dependencies({"tribes/barbarians/lumberjacks_hut/menu.png","tribes/barbarians/trunk/menu.png"},p(_"Log")) ..
-		dependencies({"tribes/barbarians/trunk/menu.png","tribes/barbarians/constructionsite/menu.png"},p(_"Construction Site")) ..
-		dependencies({"tribes/barbarians/trunk/menu.png","tribes/barbarians/burners_house/menu.png"},p(_"Charcoal Burner’s House")) ..
-		dependencies({"tribes/barbarians/trunk/menu.png","tribes/barbarians/metalworks/menu.png"},p(_"Metal Workshop")) ..
-		dependencies({"tribes/barbarians/trunk/menu.png","tribes/barbarians/hardener/menu.png"},p(_"Wood Hardener")) ..
+		dependencies({"tribes/barbarians/lumberjacks_hut/menu.png","tribes/barbarians/log/menu.png"},p(_"Log")) ..
+		dependencies({"tribes/barbarians/log/menu.png","tribes/barbarians/constructionsite/menu.png"},p(_"Construction Site")) ..
+		dependencies({"tribes/barbarians/log/menu.png","tribes/barbarians/burners_house/menu.png"},p(_"Charcoal Burner’s House")) ..
+		dependencies({"tribes/barbarians/log/menu.png","tribes/barbarians/metalworks/menu.png"},p(_"Metal Workshop")) ..
+		dependencies({"tribes/barbarians/log/menu.png","tribes/barbarians/hardener/menu.png"},p(_"Wood Hardener")) ..
 	--Building Section
 		rt(h2(_"Building")) ..
 		text_line(_"Space required:",_"Small plot","pics/small.png") ..
 		text_line(_"Upgraded from:", "n/a") ..
 		rt(h3(_"Build cost:")) ..
-		help_building_line("barbarians", "trunk", ngettext("%i Log", "%i Logs", 3), 3) ..
+		help_building_line("barbarians", "log", ngettext("%i Log", "%i Logs", 3), 3) ..
 		rt(h3(_"Dismantle yields:")) ..
-		help_building_line("barbarians", "trunk", ngettext("%i Log", "%i Logs", 2), 2) ..
+		help_building_line("barbarians", "log", ngettext("%i Log", "%i Logs", 2), 2) ..
 		text_line(_"Upgradeable to:","n/a") ..
 	--Workers Section
 		rt(h2(_"Workers")) ..

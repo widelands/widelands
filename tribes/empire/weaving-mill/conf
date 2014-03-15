@@ -2,12 +2,12 @@ size=big
 output=cloth
 
 [buildcost]
-trunk=3
+log=3
 stone=4
 marble=1
 
 [return_on_dismantle]
-trunk=1
+log=1
 stone=3
 
 [working positions]

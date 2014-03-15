@@ -8,7 +8,7 @@ output=plate_armour
 build_material=false
 
 [buildcost]
-trunk=2
+log=2
 stone=2
 marble=2
 marblecolumn=3

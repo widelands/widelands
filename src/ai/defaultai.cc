@@ -261,7 +261,7 @@ void DefaultAI::late_initialization ()
 
 		bo.is_buildable           = bld.is_buildable();
 
-		bo.need_trees             = bh.is_trunkproducer();
+		bo.need_trees             = bh.is_logproducer();
 		bo.need_stones            = bh.is_stoneproducer();
 		bo.need_water             = bh.get_needs_water();
 		bo.recruitment            = bh.for_recruitment();
@@ -717,7 +717,7 @@ void DefaultAI::update_productionsite_stats(int32_t const gametime) {
  * constructs the most needed building
  *
  * The need for a productionsite or a mine is calculated by the need for
- * their produced wares. The need for trunkproducers (like lumberjack's huts),
+ * their produced wares. The need for logproducers (like lumberjack's huts),
  * stoneproducers (like quarries) and resource refreshing buildings (like
  * forester's houses, gamekeeper's huts or fishbreeder houses) are calculated
  * separately as these buildings should have another priority (on one hand they
@@ -903,12 +903,12 @@ bool DefaultAI::construct_building (int32_t) // (int32_t gametime)
 							prio *= 4; // even more for the absolute basics
 					}
 				} else if (bo.production_hint >= 0) {
-					// production hint (f.e. associate forester with trunks)
+					// production hint (f.e. associate forester with logs)
 
 					// Calculate the need for this building
 					int16_t inout = wares.at(bo.production_hint).consumers;
 					if
-						(tribe->safe_ware_index("trunk").value()
+						(tribe->safe_ware_index("log").value()
 						 ==
 						 bo.production_hint)
 						inout += total_constructionsites / 4;

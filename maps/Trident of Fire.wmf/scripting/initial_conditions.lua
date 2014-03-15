@@ -6,7 +6,7 @@ function init_human_player(player, f_hq, tribename)
 			prefilled_buildings(player, 
 			{"headquarters_interim", f_hq.x, f_hq.y, 
 				wares = {
-					 trunk = 3,
+					 log = 3,
 				},
 				workers = {
 					 blacksmith = 1,
@@ -36,7 +36,7 @@ function init_human_player(player, f_hq, tribename)
 	if tribename == "empire" then
 		prefilled_buildings(player, { "headquarters_shipwreck", f_hq.x, f_hq.y,
 		wares = {
-			trunk = 2,
+			log = 2,
 			wood = 3,
 		},
 		workers = {
@@ -69,7 +69,7 @@ function init_human_player(player, f_hq, tribename)
 	if tribename == "atlanteans" then
 	    prefilled_buildings(player, { "headquarters", f_hq.x, f_hq.y,
 		    wares = {
-				trunk = 2,
+				log = 2,
 				planks = 2,
 				spidercloth = 1
 			},
@@ -131,7 +131,7 @@ function init_AI_player(player, f_hq, f_port, f_vineyard, f_shipyard, tribename)
 				  shovel = 4,
 				  snack = 3,
 				  thatchreed = 24,
-				  trunk = 150,
+				  log = 150,
 			   },
 			   workers = {
 				  carrier = 40,
@@ -154,7 +154,7 @@ function init_AI_player(player, f_hq, f_port, f_vineyard, f_shipyard, tribename)
 			{ "shipyard", f_shipyard.x, f_shipyard.y, wares = {
 				  blackwood = 10,
 				  cloth = 4,
-				  trunk = 2,
+				  log = 2,
 			   },
 		 }
 		)
@@ -195,7 +195,7 @@ function init_AI_player(player, f_hq, f_port, f_vineyard, f_shipyard, tribename)
 				 scythe = 5,
 				 shovel = 6,
 				 stone = 50,
-				 trunk = 40,
+				 log = 40,
 				 water = 12,
 				 wheat = 4,
 				 wine = 8,
@@ -223,7 +223,7 @@ function init_AI_player(player, f_hq, f_port, f_vineyard, f_shipyard, tribename)
 			{ "shipyard", f_shipyard.x, f_shipyard.y, 
 			   wares = {
 				 cloth = 4,
-				 trunk = 2,
+				 log = 2,
 				 wood = 10,
 			   }
 		   },
@@ -240,7 +240,7 @@ function init_AI_player(player, f_hq, f_port, f_vineyard, f_shipyard, tribename)
 			 quartz = 9,
 			 stone = 50,
 			 spideryarn = 9,
-			 trunk = 100,
+			 log = 100,
 			 coal = 12,
 			 gold = 4,
 			 goldyarn = 6,
@@ -294,7 +294,7 @@ function init_AI_player(player, f_hq, f_port, f_vineyard, f_shipyard, tribename)
 		   { "shipyard", f_shipyard.x, f_shipyard.y, wares = {
 			  planks = 10,
 			  spidercloth = 4,
-			  trunk = 2,
+			  log = 2,
 		   }}
 		)
 	end	

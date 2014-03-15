@@ -169,10 +169,10 @@ function productionsite_tests:test_set_wares_array_arg()
 end
 function productionsite_tests:test_set_wares_illegal_name()
    assert_error("illegal ware", function()
-      self.inn:set_wares{meat = 2, trunk=1}
+      self.inn:set_wares{meat = 2, log=1}
    end)
    assert_error("illegal ware", function()
-      self.inn:set_wares("trunk",1)
+      self.inn:set_wares("log",1)
    end)
 end
 function productionsite_tests:test_set_wares_nonexistant_name()
@@ -209,7 +209,7 @@ function productionsite_tests:test_get_wares_all_arg()
    assert_equal(0, rv.beer)
    assert_equal(3, rv.fish)
    assert_equal(2, rv.strongbeer)
-   assert_equal(nil, rv.trunk)
+   assert_equal(nil, rv.log)
 end
 function productionsite_tests:test_get_wares_string_arg()
    self.inn:set_wares{fish=3, strongbeer=2}
@@ -218,13 +218,13 @@ function productionsite_tests:test_get_wares_string_arg()
    assert_equal(0, self.inn:get_wares("beer"))
    assert_equal(3, self.inn:get_wares("fish"))
    assert_equal(2, self.inn:get_wares("strongbeer"))
-   assert_equal(0, self.inn:get_wares("trunk"))
+   assert_equal(0, self.inn:get_wares("log"))
 end
 function productionsite_tests:test_get_wares_non_storable_wares()
    self.inn:set_wares{fish=3, strongbeer=2}
-   local rv = self.inn:get_wares{"meat", "trunk", "fish"}
+   local rv = self.inn:get_wares{"meat", "log", "fish"}
    assert_equal(0, rv.meat)
-   assert_equal(0, rv.trunk)
+   assert_equal(0, rv.log)
    assert_equal(3, rv.fish)
    assert_equal(nil, rv.strongbeer)
 end

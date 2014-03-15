@@ -45,7 +45,7 @@ return {
             shovel = 4,
             snack = 3,
             thatchreed = 24,
-            trunk = 79,
+            log = 79,
          },
          workers = {
             brewer = 1,
@@ -85,7 +85,7 @@ return {
          wares = { coal = 8 },
       })
       place_building_in_region(plr, "hardener", sf:region(12), {
-         wares = { trunk = 1 },
+         wares = { log = 1 },
       })
       place_building_in_region(plr, "lime_kiln", sf:region(12), {
          wares = { raw_stone = 6, coal = 3 },

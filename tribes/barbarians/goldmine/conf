@@ -3,11 +3,11 @@ output=goldstone
 enhancement=deep_goldmine
 
 [buildcost]
-trunk=4
+log=4
 raw_stone=2
 
 [return_on_dismantle]
-trunk=2
+log=2
 raw_stone=1
 
 [working positions]

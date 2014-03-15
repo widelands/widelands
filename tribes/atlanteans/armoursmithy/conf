@@ -6,7 +6,7 @@ output=steel_shield
 build_material=false
 
 [buildcost]
-trunk=2
+log=2
 stone=2
 planks=2
 quartz=1

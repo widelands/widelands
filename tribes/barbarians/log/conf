@@ -8,5 +8,5 @@ default_target_quantity=40
 # they come from.
 
 [idle]
-pics=trunk_idle.png
+pics=idle.png
 hotspot=6 7
