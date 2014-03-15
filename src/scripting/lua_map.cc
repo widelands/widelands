@@ -20,7 +20,6 @@
 #include "scripting/lua_map.h"
 
 #include <boost/foreach.hpp>
-#include <lua.hpp>
 
 #include "container_iterate.h"
 #include "economy/wares_queue.h"
@@ -36,6 +35,7 @@
 #include "logic/warelist.h"
 #include "logic/widelands_geometry.h"
 #include "scripting/c_utils.h"
+#include "scripting/eris/lua.hpp"
 #include "scripting/lua_game.h"
 #include "wui/mapviewpixelfunctions.h"
 
@@ -1001,6 +1001,7 @@ const PropertyType<L_BuildingDescription> L_BuildingDescription::Properties[] = 
 	// It could be beneficial to add a "base directory" (e.g.
 	// tribes/barbarians/lumberjacks_hut) or something in there too, but only do
 	// this if you need it for the help files.
+	PROP_RO(L_BuildingDescription, name),
 	PROP_RO(L_BuildingDescription, buildable),
 	PROP_RO(L_BuildingDescription, destructible),
 	PROP_RO(L_BuildingDescription, enhanced),
@@ -1017,10 +1018,9 @@ const PropertyType<L_BuildingDescription> L_BuildingDescription::Properties[] = 
 	// In fact, as soon as all descriptions are wrapped (also for other
 	// immovables besides buildings) we should get rid of BaseImmovable.size.
 	PROP_RO(L_BuildingDescription, size),
+	// TODO this should return 4 for lumberjacks_hut, but I get 0
+	PROP_RO(L_BuildingDescription, vision_range),
 
-	// TODO(GunChleoc): not a fan off summing them up directly. All of the
-	// methods return a mapping from ware type to number. I think the scripter
-	// can sum them up if need be.
 	PROP_RO(L_BuildingDescription, build_cost),
 	PROP_RO(L_BuildingDescription, returned_wares),
 	PROP_RO(L_BuildingDescription, enhancement_cost),
@@ -1039,12 +1039,24 @@ void L_BuildingDescription::__unpersist(lua_State * /* L */) {
  ==========================================================
  */
 /* RST
+	.. attribute:: name
+
+			(RO) returns name of the building as a string.
+*/
+int L_BuildingDescription::get_name(lua_State * L) {
+	assert(buildingdescr_ != nullptr);
+	lua_pushstring(L, buildingdescr_->descname());
+	return 1;
+}
+
+
+/* RST
 	.. attribute:: buildable
 
 			(RO) true if the building can be built.
 */
 int L_BuildingDescription::get_buildable(lua_State * L) {
-	assert(buildingdescr_!=nullptr);
+	assert(buildingdescr_ != nullptr);
 	lua_pushboolean(L, buildingdescr_->is_buildable());
 	return 1;
 }
@@ -1055,7 +1067,7 @@ int L_BuildingDescription::get_buildable(lua_State * L) {
 			(RO) true if the building is destructible.
 */
 int L_BuildingDescription::get_destructible(lua_State * L) {
-	assert(buildingdescr_!=nullptr);
+	assert(buildingdescr_ != nullptr);
 	lua_pushboolean(L, buildingdescr_->is_destructible());
 	return 1;
 }
@@ -1066,7 +1078,7 @@ int L_BuildingDescription::get_destructible(lua_State * L) {
 			(RO) true if the building is an enhanced from another building.
 */
 int L_BuildingDescription::get_enhanced(lua_State * L) {
-	assert(buildingdescr_!=nullptr);
+	assert(buildingdescr_ != nullptr);
 	lua_pushboolean(L, buildingdescr_->is_enhanced());
 	return 1;
 }
@@ -1077,7 +1089,7 @@ int L_BuildingDescription::get_enhanced(lua_State * L) {
 			(RO) true if the building is a mine.
 */
 int L_BuildingDescription::get_ismine(lua_State * L) {
-	assert(buildingdescr_!=nullptr);
+	assert(buildingdescr_ != nullptr);
 	lua_pushboolean(L, buildingdescr_->get_ismine());
 	return 1;
 }
@@ -1088,7 +1100,7 @@ int L_BuildingDescription::get_ismine(lua_State * L) {
 			(RO) true if the building is a port.
 */
 int L_BuildingDescription::get_isport(lua_State * L) {
-	assert(buildingdescr_!=nullptr);
+	assert(buildingdescr_ != nullptr);
 	lua_pushboolean(L, buildingdescr_->get_isport());
 	return 1;
 }
@@ -1109,10 +1121,22 @@ int L_BuildingDescription::get_size(lua_State * L) {
 	return 1;
 }
 
+
+/* RST
+	.. attribute:: vision range
+
+			(RO) the vision range of the building as an int.
+*/
+int L_BuildingDescription::get_vision_range(lua_State * L) {
+	assert(buildingdescr_ != nullptr);
+	lua_pushinteger(L, buildingdescr_->vision_range());
+	return 1;
+}
+
 /* RST
 	.. attribute:: build_cost
 
-			(RO) the total build cost for the building.
+			(RO) a list of ware build cost for the building.
 */
 int L_BuildingDescription::get_build_cost(lua_State * L) {
 	assert(buildingdescr_ != nullptr);
@@ -1122,33 +1146,112 @@ int L_BuildingDescription::get_build_cost(lua_State * L) {
 /* RST
 	.. attribute:: returned_wares
 
-			(RO) the total wares returned upon dismantling.
+			(RO) a list of wares returned upon dismantling.
 */
 int L_BuildingDescription::get_returned_wares(lua_State * L) {
-	assert(buildingdescr_!=nullptr);
-	lua_pushinteger(L, buildingdescr_->returned_wares().total());
-	return 1;
+	assert(buildingdescr_ != nullptr);
+	return wares_map_to_lua(L, buildingdescr_->returned_wares(), buildingdescr_->tribe());
 }
 
 /* RST
 	.. attribute:: enhancement_cost
 
-			(RO) the total cost for enhancing to this building type.
+			(RO) a list of ware cost for enhancing to this building type.
 */
 int L_BuildingDescription::get_enhancement_cost(lua_State * L) {
-	assert(buildingdescr_!=nullptr);
-	lua_pushinteger(L, buildingdescr_->enhancement_cost().total());
-	return 1;
+	assert(buildingdescr_ != nullptr);
+	return wares_map_to_lua(L, buildingdescr_->enhancement_cost(), buildingdescr_->tribe());
 }
 
 /* RST
 	.. attribute:: returned_wares_enhanced
 
-			(RO) the total wares returned upon dismantling an enhanced building.
+			(RO) a list of wares returned upon dismantling an enhanced building.
 */
 int L_BuildingDescription::get_returned_wares_enhanced(lua_State * L) {
-	assert(buildingdescr_!=nullptr);
-	lua_pushinteger(L, buildingdescr_->returned_wares_enhanced().total());
+	assert(buildingdescr_ != nullptr);
+	return wares_map_to_lua(L, buildingdescr_->returned_wares_enhanced(), buildingdescr_->tribe());
+}
+
+
+/* RST
+WareDescription
+---
+
+Properties of wares read from the conf files available for Lua
+
+TODO
+*/
+
+const char L_WareDescription::className[] = "WareDescription";
+const MethodType<L_WareDescription> L_WareDescription::Methods[] = {
+	{nullptr, nullptr},
+};
+const PropertyType<L_WareDescription> L_WareDescription::Properties[] = {
+	PROP_RO(L_WareDescription, name),
+	{nullptr, nullptr, nullptr},
+};
+
+void L_WareDescription::__persist(lua_State * /* L */) {
+}
+void L_WareDescription::__unpersist(lua_State * /* L */) {
+}
+
+/*
+ ==========================================================
+ PROPERTIES
+ ==========================================================
+ */
+/* RST
+TODO we need an ngettext version of the name
+	.. attribute:: name
+
+			(RO) a string with the ware's localized name
+*/
+
+int L_WareDescription::get_name(lua_State * L) {
+	assert(waredescr_ != nullptr);
+	lua_pushstring(L, waredescr_->descname());
+	return 1;
+}
+
+
+
+/* RST
+WorkerDescription
+---
+
+Properties of workers read from the conf files available for Lua
+
+TODO
+*/
+const char L_WorkerDescription::className[] = "WorkerDescription";
+const MethodType<L_WorkerDescription> L_WorkerDescription::Methods[] = {
+	{nullptr, nullptr},
+};
+const PropertyType<L_WorkerDescription> L_WorkerDescription::Properties[] = {
+	PROP_RO(L_WorkerDescription, name),
+	{nullptr, nullptr, nullptr},
+};
+
+void L_WorkerDescription::__persist(lua_State * /* L */) {
+}
+void L_WorkerDescription::__unpersist(lua_State * /* L */) {
+}
+
+/*
+ ==========================================================
+ PROPERTIES
+ ==========================================================
+ */
+/* RST
+	.. attribute:: name
+
+			(RO) a string with the worker's localized name
+*/
+int L_WorkerDescription::get_name(lua_State * L) {
+	assert(workerdescr_ != nullptr);
+	lua_pushstring(L, workerdescr_->descname());
 	return 1;
 }
 
@@ -3284,6 +3387,8 @@ void luaopen_wlmap(lua_State * L) {
 
 	register_class<L_Map>(L, "map");
 	register_class<L_BuildingDescription>(L, "map");
+//	register_class<L_WareDescription>(L, "map");
+	register_class<L_WorkerDescription>(L, "map");
 	register_class<L_Field>(L, "map");
 	register_class<L_PlayerSlot>(L, "map");
 	register_class<L_MapObject>(L, "map");

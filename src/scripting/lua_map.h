@@ -41,7 +41,10 @@
 namespace Widelands {
 	struct Soldier_Descr;
 	struct Building_Descr;
+	struct Ware_Descr;
+	struct Worker_Descr;
 	struct Bob;
+
 }
 
 namespace LuaMap {
@@ -103,18 +106,20 @@ public:
 		report_error(L, "Cannot instantiate a 'BuildingDescription' directly!");
 	}
 
-	virtual void __persist(lua_State * L);
-	virtual void __unpersist(lua_State * L);
+	virtual void __persist(lua_State * L) override;
+	virtual void __unpersist(lua_State * L) override;
 
 	/*
 	 * Properties
 	 */
+	int get_name(lua_State *);	
 	int get_buildable(lua_State *);
 	int get_destructible(lua_State *);
 	int get_enhanced(lua_State *);
 	int get_ismine(lua_State *);
 	int get_isport(lua_State *);
 	int get_size(lua_State *);
+	int get_vision_range(lua_State *);
 	int get_build_cost(lua_State *);
 	int get_returned_wares(lua_State *);
 	int get_enhancement_cost(lua_State *);
@@ -130,6 +135,75 @@ public:
 
 private:
 	const Widelands::Building_Descr * const buildingdescr_;
+};
+
+
+
+class L_WareDescription : public L_MapModuleClass {
+public:
+	LUNA_CLASS_HEAD(L_WareDescription);
+
+	virtual ~L_WareDescription() {}
+
+	L_WareDescription() : waredescr_(nullptr) {}
+	L_WareDescription(const Widelands::Ware_Descr* const waredescr)
+		: waredescr_(waredescr) {}
+	L_WareDescription(lua_State* L) : waredescr_(nullptr) {
+		report_error(L, "Cannot instantiate a 'WareDescription' directly!");
+	}
+
+	virtual void __persist(lua_State * L) override;
+	virtual void __unpersist(lua_State * L) override;
+
+	/*
+	 * Properties
+	 */
+	int get_name(lua_State *);
+
+	/*
+	 * Lua methods
+	 */
+
+	/*
+	 * C methods
+	 */
+
+private:
+	const Widelands::Ware_Descr * const waredescr_;
+};
+
+
+class L_WorkerDescription : public L_MapModuleClass {
+public:
+	LUNA_CLASS_HEAD(L_WorkerDescription);
+
+	virtual ~L_WorkerDescription() {}
+
+	L_WorkerDescription() : workerdescr_(nullptr) {}
+	L_WorkerDescription(const Widelands::Worker_Descr* const workerdescr)
+		: workerdescr_(workerdescr) {}
+	L_WorkerDescription(lua_State* L) : workerdescr_(nullptr) {
+		report_error(L, "Cannot instantiate a 'WorkerDescription' directly!");
+	}
+
+	virtual void __persist(lua_State * L) override;
+	virtual void __unpersist(lua_State * L) override;
+
+	/*
+	 * Properties
+	 */
+	int get_name(lua_State *);
+
+	/*
+	 * Lua methods
+	 */
+
+	/*
+	 * C methods
+	 */
+
+private:
+	const Widelands::Worker_Descr * const workerdescr_;
 };
 
 

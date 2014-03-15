@@ -1,10 +1,11 @@
 -- RST
 -- format_help.lua
 -- ---------------
---
+
 -- Functions used in the ingame help windows for formatting the text and pictures.
 
 -- RST
+-- TODO remove this once everything works
 -- .. function:: dependencies(images[, text = nil])
 --
 --    Creates a dependencies line of any length.
@@ -13,17 +14,43 @@
 --    :arg text: comment of the image.
 --    :returns: a row of pictures connected by arrows.
 --
-function dependencies(images, text)
+function dependencies_old(images, text)
 	if not text then
 		text = ""
 	end
 
 	string = "image=" .. images[1]
-	for k,v in ipairs({table.unpack(images,2)}) do
+	for k,v in ipairs({unpack(images,2)}) do
 		string = string .. ";pics/arrow-right.png;" .. v
 	end
 
 	return rt(string, text)
+end
+
+--
+-- Functions used in the ingame help windows for formatting the text and pictures.
+
+-- RST
+-- .. function:: dependencies(tribename, items[, text = nil])
+--
+--    Creates a dependencies line of any length.
+--
+--    :arg tribename: name of the tribe.
+--    :arg items: wares and/or buildings in the correct order from left to right as table (set in {}).
+--    :arg text: comment of the image.
+--    :returns: a row of pictures connected by arrows.
+--
+function dependencies(tribename, items, text)
+	if not text then
+		text = ""
+	end
+
+	string = "image=tribes/" .. tribename .. "/" .. items[1]  .. "/menu.png"
+	for k,v in ipairs({unpack(items,2)}) do
+		string = string .. ";pics/arrow-right.png;" ..  "tribes/" .. tribename .. "/" .. v  .. "/menu.png"
+	end
+
+	return rt(string, p(text))
 end
 
 
@@ -96,12 +123,16 @@ end
 --    :arg vision_range: The vision range of the building
 --    :returns: rt of the formatted text
 --
-function building_help_general_string(tribename, resourcename, purpose, working_radius, conquer_range, vision_range)
-	return rt(h2(_"General")) .. rt(h3(_"Purpose:")) ..
-	image_line("tribes/" .. tribename .. "/" .. resourcename  .. "/menu.png", 1, p(purpose)) ..
-	text_line(_"Working radius:", working_radius) ..
-	text_line(_"Conquer range:", conquer_range) ..
-	text_line(_"Vision range:", vision_range)
+function building_help_general_string(tribename, building_description, resourcename, info, purpose, working_radius, conquer_range)
+	if (info) then local info = rt(p(info)) else local info ="" end
+	return rt(h2(_"General")) ..
+		info ..
+		rt(h3(_"Purpose:")) ..
+		image_line("tribes/" .. tribename .. "/" .. resourcename  .. "/menu.png", 1, p(purpose)) ..
+		text_line(_"Working radius:", working_radius) ..
+		text_line(_"Conquer range:", conquer_range) ..
+		-- TODO vision range is buggy - returns 0 instead of 4 for lumberjacks_hut, for example
+		text_line(_"Vision range:", building_description.vision_range)
 end
 
 
@@ -119,114 +150,50 @@ end
 function building_help_lore_string(tribename, buildingname, flavourtext, author)
 	local result = rt(h2(_"Lore")) ..
 		rt("image=tribes/" .. tribename .. "/" .. buildingname  .. "/" .. buildingname .. "_i_00.png", p(flavourtext))
-	if author then
-		result = result .. rt("text-align=right",p("font-size=10 font-style=italic", author))
-	end
-	return result
-end
-
--- .. help_building_line(tribe, material, material_str, number)
---
---    Creates an image_line with a number formatted string.
---
---    :arg tribe: name of tribe in the file system.
---    :arg material: name of material in the file system.
---    :arg material_str: containing number placeholder + name of material fetched with ngettext previously.
---    :arg number: the number used for ngettext in material_str
---    :returns: image_line.
---
-function help_building_line(tribe, material, material_str, number)
-	local image = "tribes/" .. tribe .. "/" .. material .. "/menu.png"
-	if number <=6 then
-		return image_line(image,number,p(material_str:format(number)))
-   end
-   if number <=12 then
-      return image_line(image,6,p(material_str:format(number))) .. image_line(image, number-6)
-   else
-      return image_line(image,6,p(material_str:format(number))) .. image_line(image, 6) .. image_line(image, number-12)
-   end
-end
-
-
--- RST
--- .. function:: building_help_collecting_list(tribename, building_resource)
---
---    Formats the list of resources a building collects for the help window
---
---    :arg tribename: tribename, e.g. "barbarians".
---    :arg building_resource: an array of arrays with building and resource names,
---                            e.g. {{"constructionsite", "trunk"},{"burners_house", "trunk"}}
---    :returns: an rt string describing a list of collected resources, or an empty string if building_resource == {}
---
-function building_help_collecting_list(tribename, building_resource)
-
-	if (table.getn(building_resource) == 0) then return "" end
-
-	local result =rt(h3(_"Collects:"));
-	for i,line in ipairs({unpack(building_resource,1)}) do
-		result = result ..
-
-			dependencies({"tribes/" .. tribename .. "/" .. line[1]  .. "/menu.png",
-			"tribes/" .. tribename .. "/" .. line[2]  .. "/menu.png"},
-			p(line[2])) -- todo get localised name from tribe's main conf!
-	end
+		if author then
+			result = result .. rt("text-align=right",p("font-size=10 font-style=italic", author))
+		end
 	return result
 end
 
 
 -- RST
--- .. function:: building_help_incoming_list(tribename, building_resource)
+-- .. function:: building_help_depencencies_ware(tribename, items, ware)
 --
---    Formats the list of incoming resources for a building for the help window
+--    Formats a chain of ware dependencies for the help window
 --
 --    :arg tribename: e.g. "barbarians".
---    :arg building_resource: an array of arrays with building and resource names,
---                            e.g. {{"constructionsite", "trunk"},{"burners_house", "trunk"}}
---    :returns: an rt string describing a list of incoming resources, or an empty string if building_resource == {}
+--    :arg items: an array with ware and building names,
+--                            e.g. {"constructionsite", "trunk"}
+--    :arg ware: the ware to use as a title.
+--    :returns: an rt string with images describing a chain of ware/building dependencies
 --
-function building_help_incoming_list(tribename, building_resource)
-
-	if (table.getn(building_resource) == 0) then return "" end
-
-	local result =rt(h3(_"Consumes:"));
-	for i,line in ipairs({unpack(building_resource,1)}) do
-		result = result ..
-
-			dependencies({"tribes/" .. tribename .. "/" .. line[1]  .. "/menu.png",
-			"tribes/" .. tribename .. "/" .. line[2]  .. "/menu.png"},
-			p(line[2])) -- todo get localised name from tribe's main conf!
-	end
-	return result
+function building_help_depencencies_ware(tribename, items, ware)
+	local ware_descr = wl.Game():get_ware_description(tribename, ware)
+	return dependencies(tribename, items, ware_descr.name)		
 end
 
 
 -- RST
--- .. function:: building_help_outgoing_list(tribename, building_resource)
+-- .. function:: building_help_depencencies_building(tribename, items, building)
 --
---    Formats the list of outgoing resources for a building for the help window
+--    Formats a chain of ware dependencies for the help window
 --
 --    :arg tribename: e.g. "barbarians".
---    :arg building_resource: an array of arrays with building and resource names,
---                            e.g. {{"constructionsite", "trunk"},{"burners_house", "trunk"}}
---    :returns: an rt string describing a list of outgoing resources, or an empty string if building_resource == {}
+--    :arg items: an array with ware and building names,
+--                            e.g. {"constructionsite", "trunk"}
+--    :arg building: the building to use as a title.
+--    :returns: an rt string with images describing a chain of ware/building dependencies
 --
-function building_help_outgoing_list(tribename, building_resource)
-
-	if (table.getn(building_resource) == 0) then return "" end
-
-	local result =rt(h3(_"Produces:"));
-	for i,line in ipairs({unpack(building_resource,1)}) do
-		result = result ..
-
-			dependencies({"tribes/" .. tribename .. "/" .. line[2]  .. "/menu.png",
-			"tribes/" .. tribename .. "/" .. line[1]  .. "/menu.png"},
-			p(line[1])) -- todo get localised name from tribe's main conf!
-	end
-	return result
+function building_help_depencencies_building(tribename, items, buildingname)
+	local building_descr = wl.Game():get_building_description(tribename,buildingname)
+	return dependencies(tribename, items, building_descr.name)		
 end
 
 
+
 -- RST
+-- TODO this function is obsolete
 -- .. function building_help_size_string(tribename, buildingname)
 --
 --    Creates a text_line that describes the building's size in a help text.
@@ -261,24 +228,90 @@ end
 --
 -- TODO: Causes panic in image_line if resource does not exist
 --
--- .. function:: building_help_cost_list(tribename, resource_amount)
+-- .. function:: building_help_building_section(tribename, building_description)
 --
---    Formats a list of resource costs
+--    Formats the "Building" section in the building help: Upgrading info, costs and spaqce required
 --
 --    :arg tribename: e.g. "barbarians".
---    :arg resource_amount: an array of arrays with resource names and the amoutn of each resource,
---                            e.g. {{"trunk", 2},{"raw_stone", 1}}
---    :returns: an rt string describing a list of resource costs
+--    :arg building_description: The building description we get from C++
+--    :returns: an rt string describing the building section
 --
-function building_help_cost_list(tribename, resource_amount)
+function building_help_building_section(tribename, building_description)
 
-	local result =""
-	for i,line in ipairs({unpack(resource_amount,1)}) do
-		result = result ..
-			image_line("tribes/" .. tribename .. "/" .. line[1]  .. "/menu.png",
-				line[2], p(line[2] .. " ".. line[1]))
-			-- todo get localised name from tribe's main conf, and add ngettext!
+	local result = rt(h2(_"Building"))
+
+	if(building_description.ismine) then
+		result = result .. text_line(_"Space required:",_"Mine plot","pics/mine.png")
+	elseif(building_description.isport) then
+		result = result .. text_line(_"Space required:",_"Port plot","pics/port.png")
+	else
+		if (building_description.size == 1) then
+			result = result .. text_line(_"Space required:",_"Small plot","pics/small.png")
+		elseif (building_description.size == 2) then
+			result = result .. text_line(_"Space required:",_"Medium plot","pics/medium.png")
+		elseif (building_description.size == 3) then
+			result = result .. text_line(_"Space required:",_"Big plot","pics/big.png")
+		else
+			result = result .. p(_"Space required:" .. _"Unknown")
+		end
 	end
+
+	if (building_description.enhanced) then
+		-- todo get the building this was upgraded from
+		result = result .. text_line(_"Upgraded from:", "TODO!!!")
+
+		result = result .. rt(h3(_"Upgrade Cost:"))
+
+		for ware, count in pairs(building_description.enhancement_cost) do
+		local ware_descr = wl.Game():get_ware_description(tribename,ware)
+			result = result .. 
+				image_line("tribes/" .. tribename .. "/" .. ware  .. "/menu.png",
+					count, p(count .. " ".. ware_descr.name))
+		end
+-- TODO this does not work - needs the build cost of the building this was enhanced from
+		result = result .. rt(h3(_"Cost Cumulative:"))
+
+		for ware, count in pairs(building_description.build_cost) do
+			local ware_descr = wl.Game():get_ware_description(tribename,ware)
+			local amount = building_description.build_cost[ware] + building_description.enhancement_cost[ware]
+			result = result .. 
+				image_line("tribes/" .. tribename .. "/" .. ware  .. "/menu.png",
+					amount, p(amount .. " ".. ware_descr.name))
+		end
+
+		result = result .. rt(h3(_"Dismantle yields:"))
+
+		for ware, count in pairs(building_description.returned_wares_enhanced) do
+			local ware_descr = wl.Game():get_ware_description(tribename,ware)
+			result = result .. 
+				image_line("tribes/" .. tribename .. "/" .. ware  .. "/menu.png",
+					count, p(count .. " ".. ware_descr.name))
+		end
+
+
+	else
+		result = result .. rt(h3(_"Build Cost:"))
+
+		for ware, count in pairs(building_description.build_cost) do
+			local ware_descr = wl.Game():get_ware_description(tribename,ware)
+			result = result .. 
+				image_line("tribes/" .. tribename .. "/" .. ware  .. "/menu.png",
+					count, p(count .. " ".. ware_descr.name))
+		end
+
+		result = result .. rt(h3(_"Dismantle yields:"))
+
+		for ware, count in pairs(building_description.returned_wares) do
+			local ware_descr = wl.Game():get_ware_description(tribename,ware)
+			result = result .. 
+				image_line("tribes/" .. tribename .. "/" .. ware  .. "/menu.png",
+					count, p(count .. " ".. ware_descr.name))
+		end
+	end
+
+	-- TODO get this from C++
+	text_line(_"Upgradeable to:","TODO")
+
 	return result
 end
 
@@ -294,7 +327,8 @@ end
 --    :returns: image_line for the worker
 --
 function building_help_crew_string(tribename, workername)
-	return image_line("tribes/" .. tribename .. "/" .. workername  .. "/menu.png", 1, p(workername))
+	local worker_descr = wl.Game():get_worker_description(tribename,workername)
+	return image_line("tribes/" .. tribename .. "/" .. workername  .. "/menu.png", 1, p(worker_descr.name))
 	-- todo get localised name from tribe's main conf, and add ngettext!
 end
 
@@ -307,7 +341,11 @@ end
 --    :arg toolname: e.g. "felling_axe".
 --    :returns: text_line for the tool
 --
-function building_help_tool_string(tribename, toolname)
-	return text_line(_"Worker uses:", toolname, "tribes/" .. tribename .. "/" .. toolname  .. "/menu.png")
+function building_help_tool_string(tribename, toolname, no_of_workers)
+	local ware_descr = wl.Game():get_ware_description(tribename,toolname)
+	return text_line("Worker uses:", -- todo ngettext("Worker uses:","Workers use:",no_of_workers)
+		ware_descr.name, "tribes/" .. tribename .. "/" .. toolname  .. "/menu.png")
 	-- todo get localised name from tribe's main conf, and add ngettext!
 end
+
+
