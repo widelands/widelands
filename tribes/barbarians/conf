@@ -12,7 +12,7 @@ icon=pics/icon.png
 # Entries in the columns separated by ,
 wares_order= raw_stone,trunk, blackwood, grout, thatchreed, cloth; fish, meat, water, wheat, pittabread, beer, strongbeer, ration, snack, meal; coal, ironore, iron, goldstone, gold; pick, felling_axe, shovel, hammer, fishing_rod, hunting_spear, scythe, bakingtray, kitchen_tools, fire_tongs; axe, sharpaxe, broadaxe, bronzeaxe, battleaxe, warriorsaxe, helm , mask , warhelmet
 
-workers_order=carrier, ox, cattlebreeder; stonemason, lumberjack, ranger, builder, lime-burner, ferner, weaver, shipwright; fisher , hunter , gamekeeper, farmer, baker, brewer, master-brewer, innkeeper; geologist,miner, chief-miner, master-miner, burner, smelter; blacksmith, master-blacksmith; soldier, trainer, helmsmith, scout
+workers_order=carrier, ox, cattlebreeder; stonemason, lumberjack, ranger, builder, lime-burner, gardener, weaver, shipwright; fisher , hunter , gamekeeper, farmer, baker, brewer, master-brewer, innkeeper; geologist,miner, chief-miner, master-miner, burner, smelter; blacksmith, master-blacksmith; soldier, trainer, helmsmith, scout
 
 
 [frontier]
@@ -117,7 +117,7 @@ burner=_Burner
 master-miner=_Master Miner
 chief-miner=_Chief Miner
 farmer=_Farmer
-ferner=_Gardener
+gardener=_Gardener
 fisher=_Fisher
 gamekeeper=_Gamekeeper
 geologist=_Geologist
@@ -177,7 +177,7 @@ well=_Well
 scouts_hut=_Scout’s Hut
 hardener=_Wood Hardener
 lime_kiln=_Lime Kiln
-fernery=_Reed Yard
+reed_yard=_Reed Yard
 bakery=_Bakery
 brewery=_Brewery
 micro-brewery=_Micro Brewery

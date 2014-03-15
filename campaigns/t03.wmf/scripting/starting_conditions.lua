@@ -8,7 +8,7 @@ p1:allow_buildings{
    "rangers_hut",
    "hardener",
    "lime_kiln",
-   "fernery",
+   "reed_yard",
    "sentry",
 }
 
@@ -45,7 +45,7 @@ hq:set_workers{
    brewer=1,
    builder=10,
    burner=1,
-   ferner=1,
+   gardener=1,
    fisher=2,
    geologist=4,
    ["lime-burner"]=1,

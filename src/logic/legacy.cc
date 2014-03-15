@@ -81,7 +81,7 @@ static char const * const barbarian_worker_types[] = {
 	"carrier",
 	"chief-miner",
 	"farmer",
-	"ferner",
+	"gardener",
 	"fisher",
 	"gamekeeper",
 	"geologist",

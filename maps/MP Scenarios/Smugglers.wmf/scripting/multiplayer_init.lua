@@ -97,7 +97,7 @@ function place_headquarters()
             builder = 10,
             burner = 1,
             carrier = 40,
-            ferner = 1,
+            gardener = 1,
             geologist = 4,
             ["lime-burner"] = 1,
             lumberjack = 3,

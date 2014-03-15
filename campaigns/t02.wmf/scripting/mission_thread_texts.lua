@@ -124,7 +124,7 @@ _([[You can obtain water by building a well upon a water source, ]] ..
 }
 
 obj_better_material_3 = {
-   name="mission fernery",
+   name="mission reed_yard",
    title=_"Build a reed yard",
    number = 1,
    body= objective_text(_"Build a reed yard", _(
@@ -346,7 +346,7 @@ _([[Still, it would not hurt to accumulate some grout for our further campaign; 
    ) .. new_objectives(obj_better_material_2)
 }
 
-order_msg_18_fernery = {
+order_msg_18_reed_yard = {
    title=_"The Advisor", 
    body= khantrukh(_"Khantrukh steps in...", 
 _([[Chieftain, this is a disgrace! ]] .. 

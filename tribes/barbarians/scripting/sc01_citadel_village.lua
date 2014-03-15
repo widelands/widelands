@@ -52,7 +52,7 @@ return {
             builder = 10,
             burner = 1,
             carrier = 38,
-            ferner = 1,
+            gardener = 1,
             geologist = 4,
             lumberjack = 2,
             miner = 4,

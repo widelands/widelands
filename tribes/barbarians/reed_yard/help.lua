@@ -8,7 +8,7 @@ return {
 		--rt(h1(_"The Barbarian Reed Yard")) ..
 	--Lore Section
 		rt(h2(_"Lore")) ..
-		rt("image=tribes/barbarians/fernery/fernery_i_00.png", p(
+		rt("image=tribes/barbarians/reed_yard/reed_yard_i_00.png", p(
 			_[[‘We grow roofs’]])) ..
 		rt("text-align=right",p("font-size=10 font-style=italic", _[[Slogan of the Guild of Gardeners]])) ..
 	--General Section
@@ -21,7 +21,7 @@ return {
 		rt(h2(_"Dependencies")) ..
 		text_line(_"Incoming:","n/a") ..
 		rt(h3(_"Outgoing:")) ..
-		dependencies({"tribes/barbarians/fernery/menu.png","tribes/barbarians/thatchreed/menu.png"},p(_"Thatch Reed")) ..
+		dependencies({"tribes/barbarians/reed_yard/menu.png","tribes/barbarians/thatchreed/menu.png"},p(_"Thatch Reed")) ..
 		dependencies({"tribes/barbarians/thatchreed/menu.png","tribes/barbarians/constructionsite/menu.png"},p(_"Construction Site")) ..
 		rt(p(_"The Reed Yard’s output will only go to construction sites that need it.")) ..
 		dependencies({"tribes/barbarians/thatchreed/menu.png","tribes/barbarians/weaving-mill/menu.png"},p(_"Weaving-Mill")) ..
@@ -39,7 +39,7 @@ return {
 	--Workers Section
 		rt(h2(_"Workers")) ..
 		rt(h3(_"Crew required:")) ..
-		image_line("tribes/barbarians/ferner/menu.png", 1, p(_"Gardener")) ..
+		image_line("tribes/barbarians/gardener/menu.png", 1, p(_"Gardener")) ..
 		text_line(_"Worker uses:", _"Shovel","tribes/barbarians/shovel/menu.png") ..
 		text_line(_"Experience levels:","n/a") ..
 	--Production Section
