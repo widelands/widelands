@@ -7,13 +7,13 @@ msgstr ""
 "Project-Id-Version: Widelands unofficial-bzr-launchpad-i18n-4955\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2014-03-12 21:37+0000\n"
-"PO-Revision-Date: 2014-03-14 02:08+0000\n"
-"Last-Translator: Mirian Margiani <mirian.margiani@gmail.com>\n"
+"PO-Revision-Date: 2014-03-14 07:26+0000\n"
+"Last-Translator: wl-zocker <Unknown>\n"
 "Language-Team: German <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-03-14 05:34+0000\n"
+"X-Launchpad-Export-Date: 2014-03-15 05:39+0000\n"
 "X-Generator: Launchpad (build 16963)\n"
 "X-Poedit-Country: GERMANY\n"
 "Language: de\n"
@@ -152,11 +152,11 @@ msgstr "Tastaturbefehle (im Spiel)"
 
 #: ../../txts/README.lua:61
 msgid "PAGEUP: increases game speed"
-msgstr ""
+msgstr "Bild-auf: erhöht die Spielgeschwindigkeit"
 
 #: ../../txts/README.lua:62
 msgid "PAGEDOWN: decreases game speed"
-msgstr ""
+msgstr "Bild-ab: erniedrigt die Spielgeschwindigkeit"
 
 #: ../../txts/README.lua:63
 msgid "PAUSE: pauses the game"
@@ -623,7 +623,7 @@ msgstr ""
 
 #: ../../txts/editor_readme:27
 msgid "F: toggles fullscreen"
-msgstr ""
+msgstr "F: schaltet den Vollbildmodus an/aus"
 
 #: ../../txts/editor_readme:29
 msgid "H: toggles main menu"
@@ -639,27 +639,31 @@ msgstr ""
 
 #: ../../txts/editor_readme:37
 msgid "I: activates information tool"
-msgstr ""
+msgstr "I: aktiviert das Informationswerkzeug"
 
 #: ../../txts/editor_readme:39
 msgid "CTRL+L: load Map"
-msgstr ""
+msgstr "Strg+L: lade eine Karte"
 
 #: ../../txts/editor_readme:41
 msgid "CTRL+S: save Map"
-msgstr ""
+msgstr "Strg+S: speichere die Karte"
 
 #: ../../txts/editor_readme:43
 msgid "1-0: changes tool size"
-msgstr ""
+msgstr "1-0: ändert die Werkzeuggröße"
 
 #: ../../txts/editor_readme:45
 msgid "SHIFT (Hold): selects first alternative tool while pressed"
 msgstr ""
+"Shift (halten): wählt das erste alternative Werkzeug, wenn sie gedrückt "
+"gehalten wird"
 
 #: ../../txts/editor_readme:47
 msgid "ALT (Hold): Selects second alternative tool while pressed"
 msgstr ""
+"Alt (halten): wählt das zweite alternative Werkzeug, wenn sie gedrückt "
+"gehalten wird"
 
 #: ../../txts/license:1
 msgid "License"
@@ -1006,51 +1010,3 @@ msgid ""
 msgstr ""
 "Unsere Computerspieler sind zu langweilig? Besuche unsere Webseite unter "
 "www.widelands.org und spiele mit anderen Spielern online."
-
-#~ msgid "PAGEUP: increases games peed"
-#~ msgstr "Bild➚: Erhöht die Spielgeschwindigkeit"
-
-#~ msgid "PAGEDOWN: decreases games peed"
-#~ msgstr "Bild➘: Verringert die Spielgeschwindigkeit"
-
-#~ msgid "SPACE    Toggles if building spaces are shown"
-#~ msgstr "LEERTASTE Zeigt/Versteckt die Bauhilfe"
-
-#~ msgid "C        Toggles census on/off"
-#~ msgstr "C        Schaltet die Namen an/aus"
-
-#~ msgid "E        Toggles event menu"
-#~ msgstr "E        Zeigt das Ereignismenü"
-
-#~ msgid "F        Toggles fullscreen"
-#~ msgstr "F        Schaltet den Vollbildmodus an/aus"
-
-#~ msgid "H        Toggles main menu"
-#~ msgstr "H        Zeigt das Hauptmenü"
-
-#~ msgid "M        Toggles minimap"
-#~ msgstr "M        Zeigt die Minikarte"
-
-#~ msgid "P        Toggles player menu"
-#~ msgstr "P        Zeigt das Spielermenü"
-
-#~ msgid "T        Toggles tools menu"
-#~ msgstr "T        Zeigt das Werkzeugmenü"
-
-#~ msgid "I        Activates information tool"
-#~ msgstr "I        Aktiviert das Informations-Werkzeug"
-
-#~ msgid "CTRL+L   Load Map"
-#~ msgstr "CTRL+L   Karte laden"
-
-#~ msgid "CTRL+S   Save Map"
-#~ msgstr "CTRL+S   Karte speichern"
-
-#~ msgid "1-0      Changes tool size"
-#~ msgstr "1-0      Ändert die Werkzeuggröße"
-
-#~ msgid "SHIFT    (Hold) Selects first alternative tool while pressed"
-#~ msgstr "SHIFT    (gehalten) Wählt das erste alternative Werkzeug aus"
-
-#~ msgid "ALT      (Hold) Selects second alternative tool while pressed"
-#~ msgstr "ALT      (gedrückt halten) Wählt das zweite alternative Werkzeug aus"

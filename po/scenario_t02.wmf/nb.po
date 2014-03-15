@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-03-12 21:37+0000\n"
-"PO-Revision-Date: 2014-03-09 11:46+0000\n"
-"Last-Translator: GunChleoc <Unknown>\n"
+"PO-Revision-Date: 2014-03-14 23:00+0000\n"
+"Last-Translator: Hans Joachim Desserud <Unknown>\n"
 "Language-Team: Norwegian Bokmal <nb@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-03-13 05:29+0000\n"
+"X-Launchpad-Export-Date: 2014-03-15 05:39+0000\n"
 "X-Generator: Launchpad (build 16963)\n"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:23
@@ -52,19 +52,19 @@ msgstr ""
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:40
 msgid "Black – coal"
-msgstr ""
+msgstr "Svart – kull"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:41
 msgid "Red – iron ore"
-msgstr ""
+msgstr "Rød – jernmalm"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:42
 msgid "Yellow – gold"
-msgstr ""
+msgstr "Gul – gull"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:43
 msgid "Grey – granite"
-msgstr ""
+msgstr "Grå – granitt"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:44
 msgid ""
@@ -82,7 +82,7 @@ msgstr ""
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:53
 msgid "In order to work, your miners need food."
-msgstr ""
+msgstr "Gruvearbeiderne trenger mat for å jobbe."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:54
 msgid ""
@@ -233,11 +233,11 @@ msgstr ""
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:165
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:179
 msgid "The Story Continues"
-msgstr ""
+msgstr "Historien fortsetter"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:154
 msgid "Thron is shaking his head..."
-msgstr ""
+msgstr "Thron rister på hodet..."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:155
 msgid ""
@@ -322,11 +322,11 @@ msgstr ""
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:350
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:362
 msgid "The Advisor"
-msgstr ""
+msgstr "Rådgiveren"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:205
 msgid "Khantrukh joins in ..."
-msgstr ""
+msgstr "Khantrukh slutter seg til..."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:206
 msgid ""
@@ -353,7 +353,7 @@ msgstr "Khantrukh mumler..."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:227
 msgid "Old man? Disrespectful youth!"
-msgstr ""
+msgstr "Gamle mann? Respektløse ungdom!"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:233
 msgid "Khantrukh nods satisfied..."
@@ -361,7 +361,7 @@ msgstr "Khantrukh nikker tilfreds..."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:234
 msgid "At last! These rocks should last for a while."
-msgstr ""
+msgstr "Endelig! Disse steinene burde vare en stund."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:240
 msgid "Boldreth exclaims..."
@@ -463,7 +463,7 @@ msgstr ""
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:301
 msgid "A Beautiful Morning"
-msgstr ""
+msgstr "En vakker morgen"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:302
 msgid "Thron recognizes..."
@@ -624,7 +624,7 @@ msgstr ""
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:394
 msgid "One Full Moon Night"
-msgstr ""
+msgstr "En fullmånenatt"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:395
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:416
@@ -647,7 +647,7 @@ msgstr ""
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:405
 msgid "Another Cold Day"
-msgstr ""
+msgstr "Nok en kald dag"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:406
 msgid "Thron looks worried..."
@@ -672,17 +672,19 @@ msgstr ""
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:415
 msgid "A friendly village has joined us!"
-msgstr ""
+msgstr "En vennligsinnet landsby har sluttet seg til oss!"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:417
 msgid ""
 "We have found a village with friendly and productive people, impressed by "
 "our wealth, technology and strength."
 msgstr ""
+"Vi har funnet en landsby med vennlige og arbeidsomme folk, som ble imponert "
+"over våre ressurser, teknologi og styrke."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:418
 msgid "They have decided to join us!"
-msgstr ""
+msgstr "De har bestemt seg for å slutte seg til oss!"
 
 #: ../../scripting/format_scenario.lua:36
 msgid "“%s”"
@@ -691,5 +693,5 @@ msgstr "«%s»"
 #: ../../scripting/format_scenario.lua:80
 msgid "New Objective"
 msgid_plural "New Objectives"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Nytt mål"
+msgstr[1] "Nye mål"

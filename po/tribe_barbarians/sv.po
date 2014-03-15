@@ -1,22 +1,23 @@
 # Widelands po/sv_SE/tribes/barbarians.po
 # Copyright (C) 2008 Widelands Development Team
 # Daniel Nylander <po@danielnylander.se>, 2005.
-#
+# GunChleoc <fios@foramnagaidhlig.net>, 2014.
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2014-03-12 21:37+0000\n"
-"PO-Revision-Date: 2012-04-22 16:03+0000\n"
-"Last-Translator: Patrick H. <dajgtre@gmail.com>\n"
-"Language-Team: Language <widelands-public@lists.sourceforge.net>\n"
+"PO-Revision-Date: 2014-03-15 03:20+0000\n"
+"Last-Translator: GunChleoc <Unknown>\n"
+"Language-Team: Widelands fixxer upper\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-03-13 05:32+0000\n"
+"X-Launchpad-Export-Date: 2014-03-15 05:40+0000\n"
 "X-Generator: Launchpad (build 16963)\n"
 "X-Poedit-Country: swe\n"
+"Language: sv\n"
 "X-Poedit-Language: swe\n"
 
 #: ../../global/militarysites/barracks.empire/conf:8
@@ -272,21 +273,22 @@ msgid ""
 "The Ax is the basic weapon of the barbarians. All young soldiers are "
 "equipped with it."
 msgstr ""
+"Yxan är ett basvapen för barbarerna. Alla unga soldater utrustas med den."
 
 #: ../../tribes/barbarians/axefactory/conf:32
 #: ../../tribes/barbarians/warmill/conf:36
 msgid "Produce ax"
-msgstr ""
+msgstr "Producera yxa"
 
 #: ../../tribes/barbarians/axefactory/conf:33
 #: ../../tribes/barbarians/warmill/conf:37
 msgid "Produce sharp ax"
-msgstr ""
+msgstr "Producera skarpyxa"
 
 #: ../../tribes/barbarians/axefactory/conf:34
 #: ../../tribes/barbarians/warmill/conf:38
 msgid "Produce broad ax"
-msgstr ""
+msgstr "Producera bredyxa"
 
 #: ../../tribes/barbarians/axefactory/conf:35
 #: ../../tribes/barbarians/bakery/conf:26
@@ -678,7 +680,7 @@ msgstr "Soldat"
 #: ../../tribes/barbarians/hunters_hut/help.lua:28
 #: ../../tribes/barbarians/warmill/help.lua:31
 msgid "Training Camp"
-msgstr ""
+msgstr "Träningsläger"
 
 #: ../../tribes/barbarians/axefactory/help.lua:31
 #: ../../tribes/barbarians/bakery/help.lua:33
@@ -756,7 +758,7 @@ msgstr ""
 #: ../../tribes/barbarians/conf:203
 #: ../../tribes/barbarians/lumberjacks_hut/help.lua:29
 msgid "Metal Workshop"
-msgstr ""
+msgstr "Verktygssmedja"
 
 #: ../../tribes/barbarians/axefactory/help.lua:33
 #: ../../tribes/barbarians/bakery/help.lua:35
@@ -1606,6 +1608,10 @@ msgid ""
 "weapon. It is used – together with food – in the training camp to train "
 "soldiers from attack level 3 to 4."
 msgstr ""
+"Det här är ett farligt vapen som barbarerna kan tillverka. Det tillverkas i "
+"yxfabriken. Bara tränade krigare kan hantera ett sådant vapen. Det används "
+"(tillsammans med mat) i träningslägret för att träna soldater från "
+"attacknivå 3 till 4."
 
 #: ../../tribes/barbarians/beer/conf:1
 msgid ""
@@ -1654,6 +1660,9 @@ msgid ""
 "the training camp – together with food – to train warriors with a "
 "fundamental fighting knowledge (from attack level 1 to attack level 2)."
 msgstr ""
+"Bredyxan produceras i yxfabriken och krigskvarnen. Den används i "
+"träningslägret - tillsammans med mat - till att träna krigare till att uppnå "
+"en grundläggande stridskunskap (från attacknivå 1 till 2)."
 
 #: ../../tribes/barbarians/bronzeaxe/conf:1
 msgid ""
@@ -1661,10 +1670,13 @@ msgid ""
 "warriors can use it. It is produced at the war mill and used in the training "
 "camp (it trains – together with food – from attack level 2 to level 3)."
 msgstr ""
+"Bronsyxan anses vara ett svårhanterligt vapen. Bara skickliga krigare kan "
+"använda den. Den produceras i krigskvarnen och används i träningslägret "
+"(tränar - tillsammans med mat - från attacknivå 2 till 3)."
 
 #: ../../tribes/barbarians/builder/conf:1
 msgid "Works at construction sites to raise new buildings."
-msgstr ""
+msgstr "Arbetar på byggnadsplatser för att resa nya byggnader."
 
 #: ../../tribes/barbarians/burner/conf:1
 msgid "Burns coal."
@@ -1676,7 +1688,7 @@ msgstr "Bär saker längst vägarna."
 
 #: ../../tribes/barbarians/cattlebreeder/conf:1
 msgid "Breeds the strong oxen that help with transporting wares."
-msgstr ""
+msgstr "Föder upp de starka oxar som hjälper till att transportera varor."
 
 #: ../../tribes/barbarians/cattlefarm/help.lua:16
 msgid "Breed Oxen for adding them to the transportation system."
@@ -1809,14 +1821,14 @@ msgstr ""
 #: ../../tribes/barbarians/metalworks/help.lua:59
 #: ../../tribes/barbarians/warmill/help.lua:35
 msgid "Axfactory"
-msgstr ""
+msgstr "Yxfabrik"
 
 #: ../../tribes/barbarians/coalmine/help.lua:34
 #: ../../tribes/barbarians/conf:207
 #: ../../tribes/barbarians/deep_coalmine/help.lua:33
 #: ../../tribes/barbarians/deeper_coalmine/help.lua:32
 msgid "Helm Smithy"
-msgstr ""
+msgstr "Hjälmsmedja"
 
 #: ../../tribes/barbarians/coalmine/help.lua:35
 #: ../../tribes/barbarians/conf:199
@@ -1983,83 +1995,83 @@ msgstr "Byggnadsruin"
 
 #: ../../tribes/barbarians/conf:42
 msgid "Field (medium)"
-msgstr ""
+msgstr "Vetefält, mellan"
 
 #: ../../tribes/barbarians/conf:43
 msgid "Field (small)"
-msgstr ""
+msgstr "Vetefält, litet"
 
 #: ../../tribes/barbarians/conf:44
 msgid "Field (tiny)"
-msgstr ""
+msgstr "Vetefält, nysått"
 
 #: ../../tribes/barbarians/conf:45
 msgid "Field (ripe)"
-msgstr ""
+msgstr "Vetefält, moget"
 
 #: ../../tribes/barbarians/conf:46
 msgid "Field (harvested)"
-msgstr ""
+msgstr "Vetefält, skördat"
 
 #: ../../tribes/barbarians/conf:47
 msgid "Reed (medium)"
-msgstr ""
+msgstr "Vassfält, mellan"
 
 #: ../../tribes/barbarians/conf:48
 msgid "Reed (small)"
-msgstr ""
+msgstr "Vassfält, litet"
 
 #: ../../tribes/barbarians/conf:49
 msgid "Reed (tiny)"
-msgstr ""
+msgstr "Vassfält, nyplanterat"
 
 #: ../../tribes/barbarians/conf:50
 msgid "Reed (ripe)"
-msgstr ""
+msgstr "Vassfält, moget"
 
 #: ../../tribes/barbarians/conf:51
 msgid "Resource indicator: Coal (little)"
-msgstr ""
+msgstr "Resursindikator kol lite"
 
 #: ../../tribes/barbarians/conf:52
 msgid "Resource indicator: Coal (much)"
-msgstr ""
+msgstr "Resursindikator kol mycket"
 
 #: ../../tribes/barbarians/conf:53
 msgid "Resource indicator: Gold (little)"
-msgstr ""
+msgstr "Resursindikator guld lite"
 
 #: ../../tribes/barbarians/conf:54
 msgid "Resource indicator: Gold (much)"
-msgstr ""
+msgstr "Resursindikator guld mycket"
 
 #: ../../tribes/barbarians/conf:55
 msgid "Resource indicator: Granite (little)"
-msgstr ""
+msgstr "Resursindikator granit lite"
 
 #: ../../tribes/barbarians/conf:56
 msgid "Resource indicator: Granite (much)"
-msgstr ""
+msgstr "Resursindikator granit hög"
 
 #: ../../tribes/barbarians/conf:57
 msgid "Resource indicator: Iron (little)"
-msgstr ""
+msgstr "Resursindikator järn lite"
 
 #: ../../tribes/barbarians/conf:58
 msgid "Resource indicator: Iron (much)"
-msgstr ""
+msgstr "Resursindikator järn mycket"
 
 #: ../../tribes/barbarians/conf:59
 msgid "Resource indicator: No resource"
-msgstr ""
+msgstr "Resursindikator ingenting"
 
 #: ../../tribes/barbarians/conf:60
 msgid "Resource indicator: Water"
-msgstr ""
+msgstr "Resursindikator vatten"
 
 #: ../../tribes/barbarians/conf:61
 msgid "Ship Construction Site"
-msgstr ""
+msgstr "Byggplats för skepp"
 
 #: ../../tribes/barbarians/conf:64
 msgid "Deer"
@@ -2067,7 +2079,7 @@ msgstr "Hjort"
 
 #: ../../tribes/barbarians/conf:65
 msgid "Wild Boar"
-msgstr ""
+msgstr "Vildsvin"
 
 #: ../../tribes/barbarians/conf:72
 msgid "Ax"
@@ -2075,7 +2087,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/conf:74
 msgid "Battle Ax"
-msgstr ""
+msgstr "Stridsyxa"
 
 #: ../../tribes/barbarians/conf:75
 #: ../../tribes/barbarians/micro-brewery/help.lua:26
@@ -2089,11 +2101,11 @@ msgstr "Härdat trä"
 
 #: ../../tribes/barbarians/conf:77
 msgid "Broad Ax"
-msgstr ""
+msgstr "Bredyxa"
 
 #: ../../tribes/barbarians/conf:78
 msgid "Bronze Ax"
-msgstr ""
+msgstr "Bronsyxa"
 
 #: ../../tribes/barbarians/conf:79
 msgid "Cloth"
@@ -2102,7 +2114,7 @@ msgstr "Tyg"
 #: ../../tribes/barbarians/conf:81
 #: ../../tribes/barbarians/lumberjacks_hut/help.lua:44
 msgid "Felling Ax"
-msgstr ""
+msgstr "Avverkningsyxa"
 
 #: ../../tribes/barbarians/conf:82
 msgid "Fire Tongs"
@@ -2203,7 +2215,7 @@ msgstr "Lie"
 
 #: ../../tribes/barbarians/conf:102
 msgid "Sharp Ax"
-msgstr ""
+msgstr "Skarpyxa"
 
 #: ../../tribes/barbarians/conf:103
 #: ../../tribes/barbarians/fernery/help.lua:43
@@ -2238,7 +2250,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/conf:109
 msgid "Warrior’s Ax"
-msgstr ""
+msgstr "Krigaryxa"
 
 #: ../../tribes/barbarians/conf:110
 #: ../../tribes/barbarians/well/help.lua:24
@@ -2338,7 +2350,7 @@ msgstr "Skogvaktare"
 
 #: ../../tribes/barbarians/conf:142
 msgid "Shipwright"
-msgstr ""
+msgstr "Skeppsbyggare"
 
 #: ../../tribes/barbarians/conf:143
 #: ../../tribes/barbarians/metalworks/help.lua:30
@@ -2444,23 +2456,23 @@ msgstr "Stenbrott"
 
 #: ../../tribes/barbarians/conf:182
 msgid "Lumberjack’s Hut"
-msgstr ""
+msgstr "Skogshuggarkoja"
 
 #: ../../tribes/barbarians/conf:183
 msgid "Ranger’s Hut"
-msgstr ""
+msgstr "Skogvaktarkoja"
 
 #: ../../tribes/barbarians/conf:184
 msgid "Fisher’s Hut"
-msgstr ""
+msgstr "Fiskarkoja"
 
 #: ../../tribes/barbarians/conf:185
 msgid "Hunter’s Hut"
-msgstr ""
+msgstr "Jägarkoja"
 
 #: ../../tribes/barbarians/conf:186
 msgid "Gamekeeper’s Hut"
-msgstr ""
+msgstr "Viltvårdarkoja"
 
 #: ../../tribes/barbarians/conf:187
 msgid "Well"
@@ -2468,7 +2480,7 @@ msgstr "Brunn"
 
 #: ../../tribes/barbarians/conf:188
 msgid "Scout’s Hut"
-msgstr ""
+msgstr "Spejarkoja"
 
 #: ../../tribes/barbarians/conf:189
 #: ../../tribes/barbarians/lumberjacks_hut/help.lua:30
@@ -2501,11 +2513,11 @@ msgstr "Bryggstuga"
 #: ../../tribes/barbarians/conf:198
 #: ../../tribes/barbarians/lumberjacks_hut/help.lua:28
 msgid "Charcoal Burner’s House"
-msgstr ""
+msgstr "Kolarbostad"
 
 #: ../../tribes/barbarians/conf:200
 msgid "Shipyard"
-msgstr ""
+msgstr "Skeppsvarv"
 
 #: ../../tribes/barbarians/conf:204
 #: ../../tribes/barbarians/farm/help.lua:28
@@ -2535,7 +2547,7 @@ msgstr "Djupare kolgruva"
 
 #: ../../tribes/barbarians/conf:211
 msgid "Coal Mine"
-msgstr ""
+msgstr "Kolgruva"
 
 #: ../../tribes/barbarians/conf:212
 #: ../../tribes/barbarians/deep_oremine/help.lua:44
@@ -2585,11 +2597,11 @@ msgstr "Kärntorn"
 
 #: ../../tribes/barbarians/conf:231
 msgid "Headquarters Medium"
-msgstr ""
+msgstr "Högkvarter mellan"
 
 #: ../../tribes/barbarians/conf:232
 msgid "Citadel Village"
-msgstr ""
+msgstr "Citadellby"
 
 #: ../../tribes/barbarians/deep_coalmine/help.lua:55
 #: ../../tribes/barbarians/deep_goldmine/help.lua:50
@@ -2697,6 +2709,9 @@ msgid ""
 "produced in the metal workshop (but it ceases to be produced by the building "
 "if it is enhanced to an axfactory and war mill)."
 msgstr ""
+"Avverkningsyxan är skogshuggarens verktyg för att fälla trän. Den tillverkas "
+"i metallverkverkstaden (tillverkningen upphör i byggnaden om den uppgraderas "
+"till en yxfabrik eller krigskvarn)."
 
 #: ../../tribes/barbarians/ferner/conf:1
 msgid "Grows thatch reed."
@@ -2741,6 +2756,9 @@ msgid ""
 "Produced by the metal works (but they cease to be produced by the building "
 "if it is enhanced to an axfactory and war mill)."
 msgstr ""
+"Smidestång är verktyg för smältaren, som arbetar i smälteriet. Produceras i "
+"metallverken (men slutar produceras i byggnaden om den uppgraderas till en "
+"yxfabrik och krigskvarn)."
 
 #: ../../tribes/barbarians/fish/conf:1
 msgid ""
@@ -2748,6 +2766,9 @@ msgid ""
 "It is used in the taverns, inns and big inns and at the training sites "
 "(training camp and battle arena)."
 msgstr ""
+"Förutom pitta-bröd och kött är också fisk näring för barbarerna. De används "
+"i tavernorna, värdshusen, och de stora värdshusen och i "
+"träningsanläggningarna (träningsläger och kamparena)."
 
 #: ../../tribes/barbarians/fisher/conf:1
 msgid "Catches fish in the sea."
@@ -2785,6 +2806,9 @@ msgid ""
 "the basic tools produced in a metal workshop (but they cease to be produced "
 "by the building if it is enhanced to an axfactory and war mill)."
 msgstr ""
+"Metspön behövs av barbarfiskarna för deras fiske. Det är en av basverktygen "
+"som produceras i en metallverksverkstad (men slutar produceras i byggnaden "
+"om den uppgraderas till en yxfabrik eller krigskvarn)."
 
 #: ../../tribes/barbarians/fortress/conf:7
 msgid "Your soldiers have occupied your Fortress"
@@ -2824,6 +2848,10 @@ msgid ""
 "is used as a precious building material and to produce different axes (in "
 "the war mill) and different parts of armor (in the helm smithy)."
 msgstr ""
+"Guld är den mest värdefulla metallen; bara väldigt viktiga saker pyntas med "
+"den. Den framställs ur guldmalm i ett smälteri. Den används som ett dyrbart "
+"byggnadsmaterial och för att producera olika yxor (i krigskvarnen) och olika "
+"rustningar (i hjälmsmedjan)."
 
 #: ../../tribes/barbarians/goldstone/conf:5
 msgid ""
@@ -2831,6 +2859,9 @@ msgid ""
 "gold which is used as a precious building material and to produce weapons "
 "and armor."
 msgstr ""
+"Guldmalm utvinns i en guldgruva. Smält i ett smälteri blir det guld, som "
+"används som ett dyrbart byggnadsmaterial och för att framställa vapen och "
+"rustningar."
 
 #: ../../tribes/barbarians/granitemine/help.lua:12
 msgid ""
@@ -2870,6 +2901,10 @@ msgid ""
 "to be produced by the building if it is enhanced to an axfactory and war "
 "mill)."
 msgstr ""
+"Hammaren är ett livsviktigt verktyg. Det behövs av geologen, byggaren, "
+"svartsmeden och hjälmsmeden. Se till att alltid ha några i reserv! Det är "
+"ett av basverktygen som tillverkas i metallverkverkstaden (tillverkningen "
+"upphör i byggnaden om den uppgraderas till yxfabrik och krigskvarn)."
 
 #: ../../tribes/barbarians/helm/conf:1
 msgid ""
@@ -2892,7 +2927,7 @@ msgstr "Producera mask"
 
 #: ../../tribes/barbarians/helmsmithy/conf:33
 msgid "Produce warhelm"
-msgstr ""
+msgstr "Producera stridshjälm"
 
 #: ../../tribes/barbarians/hunter/conf:1
 msgid "The Hunter brings good meat to the colonists."
@@ -2914,7 +2949,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/hunters_hut/help.lua:23
 msgid "The Hunter’s Hut needs animals in the vicinity to hunt."
-msgstr ""
+msgstr "Jägarkojan behöver djur i närheten för att kunna jaga"
 
 #: ../../tribes/barbarians/hunters_hut/help.lua:51
 msgid "The hunter pauses 35s before going to work again."
@@ -2927,6 +2962,10 @@ msgid ""
 "ceases to be produced by the building if it is enhanced to an axfactory and "
 "war mill)."
 msgstr ""
+"Det här spjutet är tillräckligt lätt för att kastas, men tungt nog för att "
+"döda ett djur i ett slag. Det används bara av jägarna. Tillverkas i "
+"metallverkstaden (tillverkningen upphör i byggnaden om den uppgraderas till "
+"en yxfabrik och krigskvarn)."
 
 #: ../../tribes/barbarians/innkeeper/conf:1
 msgid "Produces food for miners."
@@ -2938,12 +2977,17 @@ msgid ""
 "produce weapons and tools in the metal workshop, axfactory, war mill and in "
 "the helm smithy."
 msgstr ""
+"Järn framställs ur järnmalmer i smälteriet. Det används för att producera "
+"vapen och verktyg i metallverkverkstaden, yxfabriken, krigskvarnen, och i "
+"hjämsmedjan."
 
 #: ../../tribes/barbarians/ironore/conf:1
 msgid ""
 "Iron ore is mined in iron mines. It delivers iron when smelted in a smelting "
 "works."
 msgstr ""
+"Hjärnmalm utvinns i järngruvor. De levererar hjärn när de smälts i ett "
+"smälteri."
 
 #: ../../tribes/barbarians/kitchen_tools/conf:1
 msgid ""
@@ -2952,6 +2996,10 @@ msgid ""
 "to be produced by the building if it is enhanced to an axfactory and war "
 "mill)."
 msgstr ""
+"Hur kan man skapa en måltid, en munsbit eller ranson, om det inte finns "
+"några köksredskap? Se till att ha ett metallverk för att producera detta "
+"basverktyg (tillverkningen upphör i byggnaden om den uppgraderas till en "
+"yxfabrik och krigskvarn)."
 
 #: ../../tribes/barbarians/lime-burner/conf:1
 msgid "Burns lime in the lime kiln."
@@ -3024,6 +3072,9 @@ msgid ""
 "A meal is made out of pitta bread, strong beer and fish/meat in a big inn. "
 "This substantial food is exactly what workers in a deeper mine need."
 msgstr ""
+"Ett mål framställs av pitta-bröd, starköl, och fisk/kött i ett stort "
+"värdshus. Den här rika måltiden är precis vad gruvarna i en djupare gruva "
+"behöver."
 
 #: ../../tribes/barbarians/meat/conf:1
 msgid ""
@@ -3032,10 +3083,14 @@ msgid ""
 "miners. It is also consumed in the training sites (training camp and battle "
 "arena)."
 msgstr ""
+"Kött innehåller mycket energi. Det framställs av jägarna och används i "
+"tavernorna, värdshusen och de stora värdshusen för att tillreda ransoner, "
+"munsbitar och mål för gruvarbetarna. Det används också i "
+"träningsanläggningarna (träningsläger och kamparena)."
 
 #: ../../tribes/barbarians/metalworks/conf:38
 msgid "Produce felling ax"
-msgstr ""
+msgstr "Producera avverkningsyxa"
 
 #: ../../tribes/barbarians/metalworks/conf:39
 msgid "Produce bread paddle"
@@ -3136,7 +3191,7 @@ msgstr ""
 
 #: ../../tribes/barbarians/ox/conf:1
 msgid "Helps with carrying items on heavily used roads."
-msgstr ""
+msgstr "Hjälper till att bära saker på tungt trafikerade vägar."
 
 #: ../../tribes/barbarians/pick/conf:1
 msgid ""
@@ -3144,6 +3199,9 @@ msgid ""
 "metal workshop (but it ceases to be produced by the building if it is "
 "enhanced to an axfactory and war mill)."
 msgstr ""
+"Den här piken används av stenmurarna och gruvarbetarna. Den tillverkas i "
+"metallverkstaden (tillverkningen upphör i byggnaden om den uppgraderas till "
+"en yxfabrik och krigskvarn)."
 
 #: ../../tribes/barbarians/pittabread/conf:1
 msgid ""
@@ -3152,6 +3210,11 @@ msgid ""
 "used in the taverns, inns and big inns to prepare rations, snacks and meals. "
 "It is also consumed at training sites (training camp and battle arena)."
 msgstr ""
+"Barbarbagarna är bäst på att framställa detta platta och välsmakande pitta-"
+"bröd. Det framställs ur vete och vatten efter ett hemligt recept. Pitta-bröd "
+"används i tavernor, värdshus och stora värdshus för att tillreda ransoner, "
+"munsbitar och mål. Det används också i träningsanläggningar (trängsläger och "
+"kamparena)."
 
 #: ../../tribes/barbarians/quarry/help.lua:17
 msgid "Carve %s out of stones lying near the hut."
@@ -3218,6 +3281,8 @@ msgstr ""
 msgid ""
 "Scouts like Scotty the scout scouting unscouted areas in a scouty fashion."
 msgstr ""
+"Spejare som Scotty Spejare spejar ut outforskade områden på ett spejande "
+"sätt."
 
 #: ../../tribes/barbarians/scripting/sc00_headquarters_medium.lua:10
 msgid "Headquarters medium"
@@ -3237,6 +3302,9 @@ msgid ""
 "You are at a disadvantage with this; consider restarting this map with a "
 "fair starting condition."
 msgstr ""
+"Några av dina startbyggnader hade inte tillräckligt med plats och byggdes "
+"inte. Du har en nackdel p.g.a detta; fundera över att starta om kartan med "
+"rättvisa startförhållanden."
 
 #: ../../tribes/barbarians/scythe/conf:1
 msgid ""
@@ -3244,6 +3312,8 @@ msgid ""
 "(but it ceases to be produced by the building if it is enhanced to an "
 "axfactory and war mill)."
 msgstr ""
+"Lien är bondens verktyg. Den produceras i metallverkverkstaden (men slutar "
+"produceras i byggnaden om den uppgraderas till en yxfabrik och krigskvarn)."
 
 #: ../../tribes/barbarians/sentry/conf:6
 msgid "Your soldiers have occupied your Sentry"
@@ -3256,14 +3326,18 @@ msgid ""
 "war mills. In training camps, it is used – together with food – to train "
 "soldiers from attack level 0 to level 1."
 msgstr ""
+"Unga krigare är stolta över att få lära sig kämpa med detta kraftfulla "
+"vapen. Den är tyngre och vassare än den vanliga yxan. Den tillverkas i "
+"yxfabriker och krigskvarnar. I träningsläger används den - tillsammans med "
+"mat - för att träna soldater från attack nivå 0 till nivå 1."
 
 #: ../../tribes/barbarians/ship/conf:1
 msgid "A sea-worthy ship"
-msgstr ""
+msgstr "Ett sjödugligt skepp"
 
 #: ../../tribes/barbarians/shipwright/conf:1
 msgid "Works at the shipyard and constructs new ships."
-msgstr ""
+msgstr "Arbetar i varvet och bygger nya skepp."
 
 #: ../../tribes/barbarians/shipyard/conf:27
 msgid "Constructing ship"
@@ -3304,7 +3378,7 @@ msgstr "Försvara och erövra!"
 
 #: ../../tribes/barbarians/stonemason/conf:1
 msgid "Cuts raw pieces of granite out of rocks."
-msgstr ""
+msgstr "Skär ut bitar av granit ur liggande stenar."
 
 #: ../../tribes/barbarians/strongbeer/conf:1
 msgid ""
@@ -3313,6 +3387,9 @@ msgid ""
 "the soldiers’ evade level from 0 to 1 to 2. Strong beer is also used in big "
 "inns to prepare meals."
 msgstr ""
+"Bara detta öl godkänns av krigarna i kamparenan. Vissa menar att barbarernas "
+"hela kraft stammar ur ölet. Det hjälper till med att träna soldaternas "
+"undviksnivå från 0 till 1 och 2."
 
 #: ../../tribes/barbarians/thatchreed/conf:1
 msgid ""
@@ -3438,15 +3515,15 @@ msgstr ""
 
 #: ../../tribes/barbarians/warmill/conf:39
 msgid "Produce bronze ax"
-msgstr ""
+msgstr "Producera bronsyxa"
 
 #: ../../tribes/barbarians/warmill/conf:40
 msgid "Produce battle ax"
-msgstr ""
+msgstr "Producera stridsyxa"
 
 #: ../../tribes/barbarians/warmill/conf:41
 msgid "Produce warrior’s ax"
-msgstr ""
+msgstr "Producera krigaryxa"
 
 #: ../../tribes/barbarians/warmill/help.lua:16
 msgid ""
@@ -3471,6 +3548,10 @@ msgid ""
 "produced in a war mill and used – together with food – in a training camp to "
 "train soldiers from attack level 4 to level 5."
 msgstr ""
+"Krigarens yxa är det farligaste av alla barbarers vapen. Bara några få "
+"krigare lyckas någonsin hantera dessa enorma och kraftfulla yxor. Den "
+"produceras i en krigskvarn och används - tillsammans med mat - i ett "
+"träningsläger för att träna soldater från attacknivå 4 till 5."
 
 #: ../../tribes/barbarians/water/conf:1
 msgid ""
@@ -3478,6 +3559,9 @@ msgid ""
 "and the brewery. The lime kiln and the cattle farm also need to be supplied "
 "with water."
 msgstr ""
+"Vatten är livsviktigt! Det används i bageriet, mikrobryggeriet och "
+"bryggeriet. Även kalkbrännaren och boskapsfarmen behöver tillgång till "
+"vatten."
 
 #: ../../tribes/barbarians/weaver/conf:1
 msgid "Produces cloth for ships and soldiers."

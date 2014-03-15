@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: Widelands svn4804\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2014-03-12 21:37+0000\n"
-"PO-Revision-Date: 2014-03-12 12:35+0000\n"
+"PO-Revision-Date: 2014-03-15 03:13+0000\n"
 "Last-Translator: GunChleoc <Unknown>\n"
 "Language-Team: Widelands fixxer upper\n"
 "MIME-Version: 1.0\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2;\n"
-"X-Launchpad-Export-Date: 2014-03-13 05:29+0000\n"
+"X-Launchpad-Export-Date: 2014-03-15 05:39+0000\n"
 "X-Generator: Launchpad (build 16963)\n"
 "Language: pl\n"
 
@@ -527,7 +527,7 @@ msgstr "Starzec podskakuje..."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:278
 msgid "Wisdom commands to seek variety."
-msgstr ""
+msgstr "Mądrość każe szukać różnorodności."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:279
 msgid ""
@@ -535,6 +535,9 @@ msgid ""
 "Mother Nature gave us and build a farm? I sure would enjoy a freshly baked "
 "pitta bread for a change..."
 msgstr ""
+"Na północ od wielkiej góry znajduje się wielka równina - może użyjemy tej "
+"przestrzeni, jaką dała nam Matka Natura i zbudujemy farmę? Ja dla odmiany z "
+"przyjemnością zasmakowałbym świeżo upieczonego chleba..."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:286
 msgid "Boldreth cheers up..."

@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-03-12 22:37+0100\n"
-"PO-Revision-Date: 2014-03-08 07:11+0000\n"
+"PO-Revision-Date: 2014-03-14 15:00+0000\n"
 "Last-Translator: GunChleoc <Unknown>\n"
 "Language-Team: Fòram na Gàidhlig http://www.foramnagaidhlig.net\n"
 "MIME-Version: 1.0\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n==1 || n==11) ? 0 : (n==2 || n==12) ? 1 : "
 "(n > 2 && n < 20) ? 2 : 3;\n"
-"X-Launchpad-Export-Date: 2014-03-13 05:34+0000\n"
+"X-Launchpad-Export-Date: 2014-03-15 05:41+0000\n"
 "X-Generator: Launchpad (build 16963)\n"
 "Language: gd\n"
 
@@ -114,6 +114,8 @@ msgstr "Mapa gun sàbhaladh"
 #: ../../src/editor/editorinteractive.cc:253
 msgid "The map has not been saved, do you really want to quit?"
 msgstr ""
+"Cha deach am mapa a shàbhaladh, a bheil thu cinnteach gu bheil thu airson "
+"fàgail?"
 
 #: ../../src/editor/editorinteractive.cc:597
 #: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:179
@@ -523,11 +525,13 @@ msgstr "Chan e faidhle mapa a th' ann"
 #, c-format
 msgid "A file with the name ‘%s’ already exists. Overwrite?"
 msgstr ""
+"Tha faidhle air a bheil \"%s\" ann mar-thà. A bheil thu airson sgrìobhadh "
+"thairis air?"
 
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:390
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:410
 msgid "Error Saving Map!"
-msgstr ""
+msgstr "Mearachd le sàbhaladh a' mhapa!"
 
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:406
 msgid ""
@@ -734,7 +738,7 @@ msgstr "Mòr"
 #: ../../src/logic/constructionsite.cc:92 ../../src/logic/immovable.cc:544
 #, c-format
 msgid "%i%% built"
-msgstr ""
+msgstr "%i%% air a thogail"
 
 #: ../../src/logic/dismantlesite.cc:100
 #, c-format
@@ -997,7 +1001,7 @@ msgstr "Chaidh %s a shaothrachadh"
 #: ../../src/logic/production_program.cc:1074
 #, c-format
 msgid "Recruited %s"
-msgstr ""
+msgstr "Chaidh %s a thrusadh"
 
 #. * TRANSLATORS: %1$s = production site name, %2$s = production program name, %3$s = resource
 #: ../../src/logic/production_program.cc:1131
@@ -1113,12 +1117,13 @@ msgstr ""
 #: ../../src/logic/worker.cc:610
 #, c-format
 msgid "Out of %s"
-msgstr ""
+msgstr "Chan eil %s ann tuilleadh"
 
 #: ../../src/logic/worker.cc:611
 #, c-format
 msgid "The worker of this building cannot find any more %s."
 msgstr ""
+"Chan urrainn dhan obraiche aig an togalach seo %s sam bith a lorg tuilleadh."
 
 #: ../../src/logic/worker.cc:956
 msgid "A geologist found resources."
@@ -1468,12 +1473,12 @@ msgstr "Chan urrainn dhut a' bhròg a thoirt dhan fhrithealaiche shònaichte"
 #: ../../src/network/nethost.cc:447
 #, c-format
 msgid "Are you sure you want to kick %s?"
-msgstr ""
+msgstr "A bheil thu cinnteach gu bheil thu airson a' bhròg a thoirt dha %s?"
 
 #: ../../src/network/nethost.cc:448
 #, c-format
 msgid "The stated reason was: %s"
-msgstr ""
+msgstr "Seo an t-adhbhar a chuireadh seachad: %s"
 
 #: ../../src/network/nethost.cc:449
 #, c-format
@@ -3458,15 +3463,19 @@ msgstr "Cumha na buaidhe:"
 #, c-format
 msgid "%i player"
 msgid_plural "%i players"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%i chluicheadair"
+msgstr[1] "%i chluicheadair"
+msgstr[2] "%i cluicheadairean"
+msgstr[3] "%i cluicheadair"
 
 #. * TRANSLATORS: This is preceded by a number
 #: ../../src/wui/game_main_menu_save_game.cc:181
 msgid "player"
 msgid_plural "players"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "chluicheadair"
+msgstr[1] "chluicheadair"
+msgstr[2] "cluicheadairean"
+msgstr[3] "cluicheadair"
 
 #: ../../src/wui/game_main_menu_save_game.cc:251
 msgid ""
@@ -3483,7 +3492,7 @@ msgstr ""
 #: ../../src/wui/game_main_menu_save_game.cc:255
 #: ../../src/wui/game_main_menu_save_game.cc:267
 msgid "Save Game Error!"
-msgstr ""
+msgstr "Mearachd le sàbhaladh a' gheama!"
 
 #: ../../src/wui/game_main_menu_save_game.cc:330
 msgid "File deletion"
@@ -3498,7 +3507,7 @@ msgstr ""
 #: ../../src/wui/game_message_menu.cc:46
 #: ../../src/wui/game_message_menu.cc:373
 msgid "Messages: Inbox"
-msgstr ""
+msgstr "Teachdaireachdan: Am bogsa a-steach"
 
 #: ../../src/wui/game_message_menu.cc:56
 msgid "Select"
@@ -3548,7 +3557,7 @@ msgstr "meadhanaich sealladh a' mhapa air an ionad"
 
 #: ../../src/wui/game_message_menu.cc:366
 msgid "Messages: Archive"
-msgstr ""
+msgstr "Teachdaireachdan: Tasglann"
 
 #: ../../src/wui/game_message_menu.cc:368
 msgid "Restore selected messages"

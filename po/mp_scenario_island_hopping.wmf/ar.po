@@ -2,22 +2,23 @@
 # Copyright (c) 2013 Rosetta Contributors and Canonical Ltd 2013
 # This file is distributed under the same license as the widelands package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2013.
-#
+# GunChleoc <fios@foramnagaidhlig.net>, 2014.
 msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-03-12 21:37+0000\n"
-"PO-Revision-Date: 2013-10-17 09:53+0000\n"
-"Last-Translator: abdXelrhman <abdXelrhman@gmail.com>\n"
-"Language-Team: Arabic <ar@li.org>\n"
+"PO-Revision-Date: 2014-03-15 03:23+0000\n"
+"Last-Translator: GunChleoc <Unknown>\n"
+"Language-Team: Widelands fixxer upper\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n % 100 >= "
 "3 && n % 100 <= 10 ? 3 : n % 100 >= 11 && n % 100 <= 99 ? 4 : 5;\n"
-"X-Launchpad-Export-Date: 2014-03-13 05:39+0000\n"
+"X-Launchpad-Export-Date: 2014-03-15 05:42+0000\n"
 "X-Generator: Launchpad (build 16963)\n"
+"Language: ar\n"
 
 #: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/first_island.lua:70
 msgid "5 minutes"
@@ -111,6 +112,9 @@ msgid ""
 "a third headquarters on the third island. You must build a castle at the "
 "center of the third island and hold it for 20 minutes to win the game."
 msgstr ""
+"إذا انهيت بناء قلعه فى المركز المُحدد فى الجزيره الثانيه، تحصل على مقر رئيسى "
+"ثالث على الجزيره الثالثه. يجب عليك بناء واﻹحتفاظ بقلعه فى مركز الجزيره "
+"الثالثه لـ 20 دقيقه لتربح اللعبه"
 
 #: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:20
 msgid ""
@@ -118,6 +122,10 @@ msgid ""
 "many players have finished the island before you. The earlier you finish, "
 "the fewer wares you will get. See below for the details."
 msgstr ""
+"عند إنتهائك من احدى الجزر فستحصل على سلع إضافيه كهديه، قيمه وعدد هذه السلع "
+"يعتمد على عدد اللاعبين الاخرين الذين انهو هذه الجزيره قبلك. هذا يعنى انه "
+"كلما انهيت فى وقت مُتأخر كلما حصلت على سلع اقل. يمكنك رؤيه التالى لمزيد من "
+"التفاصيل."
 
 #: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:23
 msgid ""
@@ -126,6 +134,9 @@ msgid ""
 "work for you, but you will only reap the benefits at the moment you reach a "
 "new island."
 msgstr ""
+"الدليل هو ان الجزيره الاولى ليس بها موارد سوى الحجاره والخشب، بينما الثانيه "
+"ليس بها سوى مروج خضراء وموارد. السيوله التى تركتها ورائك ستستمر فى صنع "
+"الفوائد! ولكنك لن تحصد تلك الفوائد الا عند وصولك لجزيره جديده."
 
 #: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:28
 msgid "Finally, be careful not to waste your quartz and diamonds."
@@ -133,7 +144,7 @@ msgstr ""
 
 #: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:30
 msgid "Finish Rewards"
-msgstr ""
+msgstr "الجوائز"
 
 #: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:31
 msgid "First Island"
@@ -165,19 +176,19 @@ msgstr "الجزيره الثانيه"
 
 #: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:45
 msgid "%1$s was the first to reach Island number %2$i."
-msgstr ""
+msgstr "%1$s هو اول من وصل الى الجزيره رقم %2$i."
 
 #: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:46
 msgid "%1$s was the second to reach Island number %2$i."
-msgstr ""
+msgstr "%1$s هو ثانى من وصل الى الجزيره رقم %2$i."
 
 #: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:47
 msgid "%1$s was the third to reach Island number %2$i."
-msgstr ""
+msgstr "%1$s هو ثالث من وصل الى الجزيره رقم %2$i."
 
 #: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:48
 msgid "%1$s was the fourth to reach Island number %2$i."
-msgstr ""
+msgstr "%1$s هو رابع من وصل الى الجزيره رقم %2$i."
 
 #: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:50
 msgid "The reward for this feat amounts to:"
@@ -188,6 +199,8 @@ msgid ""
 "%s is now King of the Hill and will win the game in 20 minutes, if nobody "
 "takes over the hill before then."
 msgstr ""
+"%s هو ملك التل الجديد وسيربح اللعبه خلال 20 دقيقه، ولكن فقط إذا لم يستولى "
+"احدهم على التل حتى إنتهاء الـ 20 دقيقه"
 
 #: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:56
 msgid "%s lost control of the hill."
@@ -195,7 +208,7 @@ msgstr "فقد %s السيطره على التل."
 
 #: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:58
 msgid "%1$s has been King of the Hill for %2$s!"
-msgstr ""
+msgstr "%1$s كان ملك التل منذ %2$s!"
 
 #: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:59
 msgid "%s has won the game. Congratulations!"

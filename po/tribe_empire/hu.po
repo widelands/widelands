@@ -7,13 +7,13 @@ msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2014-03-12 21:37+0000\n"
-"PO-Revision-Date: 2014-03-10 08:52+0000\n"
+"PO-Revision-Date: 2014-03-14 18:59+0000\n"
 "Last-Translator: cn4ij <Unknown>\n"
 "Language-Team: Language <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-03-13 05:32+0000\n"
+"X-Launchpad-Export-Date: 2014-03-15 05:41+0000\n"
 "X-Generator: Launchpad (build 16963)\n"
 
 #: ../../global/militarysites/barracks.empire/conf:8
@@ -52,13 +52,13 @@ msgstr "Megtámadták a határőrházadat."
 #: ../../global/militarysites/barrier.empire/conf:10
 #: ../../tribes/empire/barrier/conf:10
 msgid "The enemy defeated your soldiers at the Barrier"
-msgstr "Az ellenség elfoglalta a határőrházadat."
+msgstr "Az ellenség elfoglalta a határőrházadat"
 
 #: ../../global/militarysites/barrier.barbarians/conf:11
 #: ../../global/militarysites/barrier.empire/conf:11
 #: ../../tribes/empire/barrier/conf:11
 msgid "Your soldiers defeated the enemy at the Barrier"
-msgstr "Katonáid elfoglalták az ellenség határőrházát."
+msgstr "Katonáid elfoglalták az ellenség határőrházát"
 
 #: ../../global/militarysites/castle.atlanteans/conf:8
 #: ../../global/militarysites/castle.empire/conf:8
@@ -76,13 +76,13 @@ msgstr "Megtámadták a váradat."
 #: ../../global/militarysites/castle.empire/conf:10
 #: ../../tribes/empire/castle/conf:11
 msgid "The enemy defeated your soldiers at the Castle"
-msgstr "Az ellenség bevette a váradat."
+msgstr "Az ellenség bevette a váradat"
 
 #: ../../global/militarysites/castle.atlanteans/conf:11
 #: ../../global/militarysites/castle.empire/conf:11
 #: ../../tribes/empire/castle/conf:12
 msgid "Your soldiers defeated the enemy at the Castle"
-msgstr "Katonáid bevették az ellenség várát."
+msgstr "Katonáid bevették az ellenség várát"
 
 #: ../../global/militarysites/citadel.barbarians/conf:8
 msgid "Your Citadel discovered an aggressor."
@@ -224,13 +224,13 @@ msgstr "Megtámadták az őrházadat."
 #: ../../global/militarysites/sentry.empire/conf:10
 #: ../../tribes/empire/sentry/conf:10
 msgid "The enemy defeated your soldiers at the Sentry"
-msgstr "Az ellenség elfoglalta az őrházadat."
+msgstr "Az ellenség elfoglalta az őrházadat"
 
 #: ../../global/militarysites/sentry.barbarians/conf:11
 #: ../../global/militarysites/sentry.empire/conf:11
 #: ../../tribes/empire/sentry/conf:11
 msgid "Your soldiers defeated the enemy at the Sentry"
-msgstr "Katonáid elfoglalták az ellenség őrházát."
+msgstr "Katonáid elfoglalták az ellenség őrházát"
 
 #: ../../global/militarysites/small_tower.atlanteans/conf:9
 msgid "Your Small Tower discovered an aggressor."
@@ -291,7 +291,7 @@ msgstr "Felfüggesztve"
 #: ../../tribes/empire/arena/conf:30
 #: ../../tribes/empire/colosseum/conf:36
 msgid "Upgrade soldier evade from level 0 to level 1"
-msgstr ""
+msgstr "Katona kitérésének fejlesztése 0.-ról 1. szintre"
 
 #: ../../tribes/empire/armour/conf:1
 msgid ""
@@ -380,11 +380,11 @@ msgstr ""
 
 #: ../../tribes/empire/barracks/conf:7
 msgid "Your soldiers have occupied your Barracks"
-msgstr ""
+msgstr "Katonáid elfoglalták őrhelyeiket a laktanyában."
 
 #: ../../tribes/empire/barrier/conf:7
 msgid "Your soldiers have occupied your Barrier"
-msgstr ""
+msgstr "Katonáid elfoglalták őrhelyeiket a határőrházban."
 
 #: ../../tribes/empire/basket/conf:1
 msgid ""
@@ -435,7 +435,7 @@ msgstr "Árut szállít a csomópontok között."
 
 #: ../../tribes/empire/castle/conf:8
 msgid "Your soldiers have occupied your Castle"
-msgstr ""
+msgstr "Katonáid elfoglalták őrhelyeiket a várban"
 
 #: ../../tribes/empire/chain_armour/conf:1
 msgid ""
@@ -461,10 +461,13 @@ msgid ""
 "are usually fed with coal. It is mined in coal mines or produced by a "
 "charcoal burner out of logs."
 msgstr ""
+"A Birodalom kohóinak, páncél- és fegyverkovácsműhelyeinek tüzeit általában "
+"szén táplálja. Ezt szénbányákban termelik ki, vagy farönkből készítik a "
+"faszénégetőházban."
 
 #: ../../tribes/empire/colosseum/conf:37
 msgid "Upgrade soldier evade from level 1 to level 2"
-msgstr ""
+msgstr "Katona kitérésének fejlesztése 1.-ről 2. szintre"
 
 #: ../../tribes/empire/conf:4
 msgid "The Widelands Development Team"
@@ -576,7 +579,7 @@ msgstr "Páncél"
 
 #: ../../tribes/empire/conf:59
 msgid "Ax"
-msgstr ""
+msgstr "Fejsze"
 
 #: ../../tribes/empire/conf:60
 msgid "Bread Paddle"
@@ -712,7 +715,7 @@ msgstr "Kő"
 
 #: ../../tribes/empire/conf:93
 msgid "Log"
-msgstr ""
+msgstr "Farönk"
 
 #: ../../tribes/empire/conf:94
 msgid "War-Lance"
@@ -881,7 +884,7 @@ msgstr "Bontási terület"
 #: ../../tribes/empire/conf:149
 #: ../../tribes/empire/conf:211
 msgid "Castle"
-msgstr "Kastély"
+msgstr "Vár"
 
 #: ../../tribes/empire/conf:150
 msgid "Guardhall"
@@ -1109,7 +1112,7 @@ msgstr "Közepes főhadiszállás"
 
 #: ../../tribes/empire/conf:222
 msgid "Castle Village"
-msgstr "Kastély körüli falu"
+msgstr "Vár körüli falu"
 
 #: ../../tribes/empire/donkey/conf:1
 msgid "Helps to carry items along busy roads."
@@ -1150,7 +1153,7 @@ msgstr ""
 
 #: ../../tribes/empire/fisher/conf:1
 msgid "Catches fish in the sea."
-msgstr ""
+msgstr "Halat fog a tengerből."
 
 #: ../../tribes/empire/fishing_rod/conf:1
 msgid ""
@@ -1173,7 +1176,7 @@ msgstr "Fákat ültet."
 
 #: ../../tribes/empire/fortress/conf:7
 msgid "Your soldiers have occupied your Fortress"
-msgstr ""
+msgstr "Katonáid elfoglalták őrhelyeiket az erődben"
 
 #: ../../tribes/empire/geologist/conf:1
 msgid "Discovers resources for mining."
@@ -1195,6 +1198,9 @@ msgid ""
 "gold which is used as a precious building material and to produce weapons "
 "and armor."
 msgstr ""
+"Az aranyércet aranybányában termelik ki. A kohóban kinyerik belőle az "
+"aranyat, amit értékes építőanyagként, illetve fegyverek és páncélok "
+"készítéséhez használnak."
 
 #: ../../tribes/empire/grape/conf:1
 msgid ""
@@ -1359,7 +1365,7 @@ msgstr "Lisztté őrli a búzát."
 
 #: ../../tribes/empire/outpost/conf:7
 msgid "Your soldiers have occupied your Outpost"
-msgstr ""
+msgstr "Katonáid elfoglalták őrhelyeiket az előőrsben"
 
 #: ../../tribes/empire/pick/conf:1
 msgid ""
@@ -1411,7 +1417,7 @@ msgstr "Közepes főhadiszállás"
 
 #: ../../tribes/empire/scripting/sc01_castle_village.lua:10
 msgid "Castle village"
-msgstr "Kastély körüli falu"
+msgstr "Vár körüli falu"
 
 #: ../../tribes/empire/scripting/sc01_castle_village.lua:119
 msgid "Not enough space"
@@ -1423,6 +1429,9 @@ msgid ""
 "You are at a disadvantage with this; consider restarting this map with a "
 "fair starting condition."
 msgstr ""
+"Néhány kezdőépületed nem fért el, és ezért nem lettek megépítve. Emiatt "
+"hátrányba kerültél; fontold meg a pálya újrakezdését az egyenlő esélyek "
+"érdekében."
 
 #: ../../tribes/empire/scythe/conf:1
 msgid ""
@@ -1431,7 +1440,7 @@ msgstr "A kasza a földművesek eszköze. A szerszámkovács készíti."
 
 #: ../../tribes/empire/sentry/conf:7
 msgid "Your soldiers have occupied your Sentry"
-msgstr ""
+msgstr "Katonáid elfoglalták őrhelyeiket az őrházban"
 
 #: ../../tribes/empire/shepherd/conf:1
 msgid "Keeping sheep."
@@ -1491,7 +1500,7 @@ msgstr "Szerszámokat készít a munkásoknak."
 
 #: ../../tribes/empire/toolsmithy/conf:37
 msgid "Produce bread paddle"
-msgstr ""
+msgstr "a sütőlapát-készítés"
 
 #: ../../tribes/empire/toolsmithy/conf:38
 msgid "Produce fire tongs"
@@ -1539,7 +1548,7 @@ msgstr "a fejszekészítés"
 
 #: ../../tribes/empire/tower/conf:7
 msgid "Your soldiers have occupied your Tower"
-msgstr ""
+msgstr "Katonáid elfoglalták őrhelyeiket a toronyban"
 
 #: ../../tribes/empire/trainer/conf:1
 msgid "Trains the soldiers."
@@ -1547,35 +1556,35 @@ msgstr "Katonákat képez."
 
 #: ../../tribes/empire/trainingscamp/conf:47
 msgid "Upgrade soldier attack from level 0 to level 1"
-msgstr ""
+msgstr "Katona támadásának fejlesztése 0.-ról 1. szintre"
 
 #: ../../tribes/empire/trainingscamp/conf:48
 msgid "Upgrade soldier attack from level 1 to level 2"
-msgstr ""
+msgstr "Katona támadásának fejlesztése 1.-ről 2. szintre"
 
 #: ../../tribes/empire/trainingscamp/conf:49
 msgid "Upgrade soldier attack from level 2 to level 3"
-msgstr ""
+msgstr "Katona támadásának fejlesztése 2.-ról 3. szintre"
 
 #: ../../tribes/empire/trainingscamp/conf:50
 msgid "Upgrade soldier attack from level 3 to level 4"
-msgstr ""
+msgstr "Katona támadásának fejlesztése 3.-ról 4. szintre"
 
 #: ../../tribes/empire/trainingscamp/conf:51
 msgid "Upgrade soldier health from level 0 to level 1"
-msgstr ""
+msgstr "Katona életerejének fejlesztése 0.-ról 1. szintre"
 
 #: ../../tribes/empire/trainingscamp/conf:52
 msgid "Upgrade soldier health from level 1 to level 2"
-msgstr ""
+msgstr "Katona életerejének fejlesztése 1.-ről 2. szintre"
 
 #: ../../tribes/empire/trainingscamp/conf:53
 msgid "Upgrade soldier health from level 2 to level 3"
-msgstr ""
+msgstr "Katona életerejének fejlesztése 2.-ról 3. szintre"
 
 #: ../../tribes/empire/trainingscamp/conf:54
 msgid "Upgrade soldier health from level 3 to level 4"
-msgstr ""
+msgstr "Katona életerejének fejlesztése 3.-ról 4. szintre"
 
 #: ../../tribes/empire/trunk/conf:1
 msgid ""
@@ -1583,6 +1592,10 @@ msgid ""
 "the trees; foresters care for the supply of trees. Logs are also used by the "
 "charcoal burner, the toolsmithy and the sawmill."
 msgstr ""
+"A farönk a Birodalom egyik fontos építőanyaga. A favágók kivágják a fákat, "
+"az erdészek pedig gondoskodnak az utánpótlásukról. Farönköt a "
+"faszénégetőházban, a szerszámkovácsműhelyben és a fűrészmalomban is "
+"felhasználnak."
 
 #: ../../tribes/empire/vinefarmer/conf:1
 msgid "Grows vine."

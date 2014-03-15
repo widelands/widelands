@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-03-12 21:37+0000\n"
-"PO-Revision-Date: 2014-03-07 21:42+0000\n"
+"PO-Revision-Date: 2014-03-14 22:21+0000\n"
 "Last-Translator: Hans Joachim Desserud <Unknown>\n"
 "Language-Team: Norwegian Bokmal <nb@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-03-13 05:37+0000\n"
+"X-Launchpad-Export-Date: 2014-03-15 05:41+0000\n"
 "X-Generator: Launchpad (build 16963)\n"
 
 #: ../../worlds/greenland/conf:2
@@ -100,131 +100,131 @@ msgstr "Steiner"
 
 #: ../../worlds/greenland/conf:47
 msgid "Aspen (Old)"
-msgstr ""
+msgstr "Osp (gammel)"
 
 #: ../../worlds/greenland/conf:49
 msgid "Aspen (Mature)"
-msgstr ""
+msgstr "Osp (fullvoksen)"
 
 #: ../../worlds/greenland/conf:51
 msgid "Aspen (Pole)"
-msgstr ""
+msgstr "Osp (ung)"
 
 #: ../../worlds/greenland/conf:53
 msgid "Aspen (Sapling)"
-msgstr ""
+msgstr "Aspen (spire)"
 
 #: ../../worlds/greenland/conf:54
 msgid "Oak (Old)"
-msgstr ""
+msgstr "Eik (gammel)"
 
 #: ../../worlds/greenland/conf:55
 msgid "Oak (Mature)"
-msgstr ""
+msgstr "Eik (fullvoksen)"
 
 #: ../../worlds/greenland/conf:56
 msgid "Oak (Pole)"
-msgstr ""
+msgstr "Eik (ung)"
 
 #: ../../worlds/greenland/conf:57
 msgid "Oak (Sapling)"
-msgstr ""
+msgstr "Eik (spire)"
 
 #: ../../worlds/greenland/conf:58
 msgid "Spruce (Old)"
-msgstr ""
+msgstr "Gran (gammel)"
 
 #: ../../worlds/greenland/conf:59
 msgid "Spruce (Mature)"
-msgstr ""
+msgstr "Gran (fullvoksen)"
 
 #: ../../worlds/greenland/conf:60
 msgid "Spruce (Pole)"
-msgstr ""
+msgstr "Gran (ung)"
 
 #: ../../worlds/greenland/conf:61
 msgid "Spruce (Sapling)"
-msgstr ""
+msgstr "Gran (spire)"
 
 #: ../../worlds/greenland/conf:62
 msgid "Alder (Old)"
-msgstr ""
+msgstr "Or (gammel)"
 
 #: ../../worlds/greenland/conf:63
 msgid "Alder (Mature)"
-msgstr ""
+msgstr "Or (fullvoksen)"
 
 #: ../../worlds/greenland/conf:64
 msgid "Alder (Pole)"
-msgstr ""
+msgstr "Or (ung)"
 
 #: ../../worlds/greenland/conf:65
 msgid "Alder (Sapling)"
-msgstr ""
+msgstr "Or (spire)"
 
 #: ../../worlds/greenland/conf:66
 msgid "Birch (Old)"
-msgstr ""
+msgstr "Bjørk (gammel)"
 
 #: ../../worlds/greenland/conf:67
 msgid "Birch (Mature)"
-msgstr ""
+msgstr "Bjørk (fullvoksen)"
 
 #: ../../worlds/greenland/conf:68
 msgid "Birch (Pole)"
-msgstr ""
+msgstr "Bjørk (ung)"
 
 #: ../../worlds/greenland/conf:69
 msgid "Birch (Sapling)"
-msgstr ""
+msgstr "Bjørk (spire)"
 
 #: ../../worlds/greenland/conf:70
 msgid "Beech (Old)"
-msgstr ""
+msgstr "Bøk (gammel)"
 
 #: ../../worlds/greenland/conf:71
 msgid "Beech (Mature)"
-msgstr ""
+msgstr "Bøk (fullvoksen)"
 
 #: ../../worlds/greenland/conf:72
 msgid "Beech (Pole)"
-msgstr ""
+msgstr "Bøk (ung)"
 
 #: ../../worlds/greenland/conf:73
 msgid "Beech (Sapling)"
-msgstr ""
+msgstr "Bøk (spire)"
 
 #: ../../worlds/greenland/conf:74
 msgid "Larch (Old)"
-msgstr ""
+msgstr "Lerk (gammel)"
 
 #: ../../worlds/greenland/conf:75
 msgid "Larch (Mature)"
-msgstr ""
+msgstr "Lerk (fullvoksen)"
 
 #: ../../worlds/greenland/conf:76
 msgid "Larch (Pole)"
-msgstr ""
+msgstr "Lerk (ung)"
 
 #: ../../worlds/greenland/conf:77
 msgid "Larch (Sapling)"
-msgstr ""
+msgstr "Lerk (spire)"
 
 #: ../../worlds/greenland/conf:78
 msgid "Rowan (Old)"
-msgstr ""
+msgstr "Rogn (gammel)"
 
 #: ../../worlds/greenland/conf:79
 msgid "Rowan (Mature)"
-msgstr ""
+msgstr "Rogn (fullvoksen)"
 
 #: ../../worlds/greenland/conf:80
 msgid "Rowan (Pole)"
-msgstr ""
+msgstr "Rogn (ung)"
 
 #: ../../worlds/greenland/conf:81
 msgid "Rowan (Sapling)"
-msgstr ""
+msgstr "Rogn (spire)"
 
 #: ../../worlds/greenland/conf:84
 msgid "Badger"

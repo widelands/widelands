@@ -7,24 +7,24 @@ msgstr ""
 "Project-Id-Version: Widelands unofficial-bzr-launchpad-i18n-4955\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2014-03-12 21:37+0000\n"
-"PO-Revision-Date: 2014-03-14 02:03+0000\n"
-"Last-Translator: Mirian Margiani <mirian.margiani@gmail.com>\n"
+"PO-Revision-Date: 2014-03-14 12:00+0000\n"
+"Last-Translator: LAZA <Unknown>\n"
 "Language-Team: German <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-03-14 05:34+0000\n"
+"X-Launchpad-Export-Date: 2014-03-15 05:39+0000\n"
 "X-Generator: Launchpad (build 16963)\n"
 "Language: de\n"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:23
 msgid "Expand north-east and build a quarry"
-msgstr "Stoße nach Nordosten vor und baue einen Steinbruch"
+msgstr "Stoße nach Nordosten vor und baue einen Steinbruch."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:25
 msgid "Expand north-east to the stones"
-msgstr "Expandiere nordöstlich zu den Steinen"
+msgstr "Expandiere nordöstlich zu den Steinen."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:26
 msgid ""
@@ -273,7 +273,7 @@ msgstr ""
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:138
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:140
 msgid "Build a cattle farm"
-msgstr ""
+msgstr "Baue eine Rinderzucht"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:141
 msgid ""
@@ -562,6 +562,10 @@ msgid ""
 "Mother Nature gave us and build a farm? I sure would enjoy a freshly baked "
 "pitta bread for a change..."
 msgstr ""
+"Nördlich des großen Berges befindet sich eine weite Ebene - warum nutzen wir "
+"nicht den Platz, den Mutter Natur uns gab, und bauen einen Bauernhof? Ich "
+"hätte nichts dagegen, zur Abwechslung frisch gebackenes Fladenbrot zu "
+"genießen ..."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:286
 msgid "Boldreth cheers up..."
@@ -892,20 +896,3 @@ msgid "New Objective"
 msgid_plural "New Objectives"
 msgstr[0] "Neues Ziel"
 msgstr[1] "Neue Ziele"
-
-#~ msgid "Build a cattlefarm"
-#~ msgstr "Errichte eine Rinderzucht"
-
-#~ msgid ""
-#~ "Wisdom commands to seek variety.\n"
-#~ "\n"
-#~ "North of the great mountain is a large plain – why don’t we use the space "
-#~ "Mother Nature gave us and build a farm? I sure would enjoy a freshly baked "
-#~ "pitta bread for a change..."
-#~ msgstr ""
-#~ "Die Weisheit lehrt, die Vielfalt zu suchen.\n"
-#~ "\n"
-#~ "Nördlich des großen Berges liegt eine weite Ebene – warum nutzen wir nicht "
-#~ "den Platz, den uns Mutter Natur gab und errichten dort einen Bauernhof? Ich "
-#~ "würde ein frisch gebackenes Fladenbrot zur Abwechslung jedenfalls willkommen "
-#~ "heißen..."

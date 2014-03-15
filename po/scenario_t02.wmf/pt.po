@@ -4,14 +4,14 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2014-03-12 21:37+0000\n"
-"PO-Revision-Date: 2014-03-11 10:06+0000\n"
+"PO-Revision-Date: 2014-03-15 03:01+0000\n"
 "Last-Translator: GunChleoc <Unknown>\n"
 "Language-Team: Widelands fixxer upper\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-03-13 05:29+0000\n"
+"X-Launchpad-Export-Date: 2014-03-15 05:39+0000\n"
 "X-Generator: Launchpad (build 16963)\n"
 "Language: pt\n"
 
@@ -545,7 +545,7 @@ msgstr "O ancião salta para o ar ..."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:278
 msgid "Wisdom commands to seek variety."
-msgstr ""
+msgstr "A sabedoria diz que devemos procurar pela variedade."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:279
 msgid ""
@@ -553,6 +553,9 @@ msgid ""
 "Mother Nature gave us and build a farm? I sure would enjoy a freshly baked "
 "pitta bread for a change..."
 msgstr ""
+"A Norte da Grande Montanha existe uma planície! Porque não usas essa criação "
+"da Mãe Natureza para construir ai uma Quinta de cereais ? Para variar, já "
+"não comia uma sandes de pão pita acabado de cozer a muito tempo..."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:286
 msgid "Boldreth cheers up..."

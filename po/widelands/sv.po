@@ -1,17 +1,19 @@
+# GunChleoc <fios@foramnagaidhlig.net>, 2014.
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4688\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2014-03-12 22:37+0100\n"
-"PO-Revision-Date: 2013-09-30 15:41+0000\n"
-"Last-Translator: karlrune <karlrune@gmail.com>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
+"PO-Revision-Date: 2014-03-15 03:22+0000\n"
+"Last-Translator: GunChleoc <Unknown>\n"
+"Language-Team: Widelands fixxer upper\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-03-13 05:36+0000\n"
+"X-Launchpad-Export-Date: 2014-03-15 05:41+0000\n"
 "X-Generator: Launchpad (build 16963)\n"
+"Language: sv\n"
 
 #: ../../src/ai/defaultai.h:84
 msgid "Aggressive"
@@ -41,7 +43,7 @@ msgstr "Verktyg"
 #: ../../src/editor/editorinteractive.cc:71
 #: ../../src/editor/ui_menus/editor_toolsize_menu.cc:41
 msgid "Tool Size"
-msgstr ""
+msgstr "Verktygsstorlek"
 
 #: ../../src/editor/editorinteractive.cc:74
 #: ../../src/wui/interactive_player.cc:116
@@ -105,7 +107,7 @@ msgstr ""
 
 #: ../../src/editor/editorinteractive.cc:253
 msgid "The map has not been saved, do you really want to quit?"
-msgstr ""
+msgstr "Kartann är ändrad, vill du verkligen avsluta?"
 
 #: ../../src/editor/editorinteractive.cc:597
 #: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:179
@@ -212,12 +214,12 @@ msgstr ""
 #: ../../src/editor/tools/editor_info_tool.cc:139
 #, c-format
 msgid "Name: %s"
-msgstr ""
+msgstr "Namn: %s"
 
 #: ../../src/editor/tools/editor_info_tool.cc:105
 #, c-format
 msgid "Texture Number: %i"
-msgstr ""
+msgstr "Texturnummer: %i"
 
 #: ../../src/editor/tools/editor_info_tool.cc:108
 #: ../../src/editor/ui_menus/editor_main_menu_random_map.cc:251
@@ -227,7 +229,7 @@ msgstr "Resurser:"
 #: ../../src/editor/tools/editor_info_tool.cc:115
 #, c-format
 msgid "Resource name: %s"
-msgstr ""
+msgstr "Resursnamn: %s"
 
 #: ../../src/editor/tools/editor_info_tool.cc:117
 #, c-format
@@ -250,19 +252,19 @@ msgstr ""
 #: ../../src/editor/tools/editor_info_tool.cc:131
 #, c-format
 msgid "Players: %i"
-msgstr ""
+msgstr "Spelare: %i"
 
 #: ../../src/editor/tools/editor_info_tool.cc:134
 #: ../../src/editor/tools/editor_info_tool.cc:140
 #, c-format
 msgid "Author: %s"
-msgstr ""
+msgstr "Upphovsman: %s"
 
 #: ../../src/editor/tools/editor_info_tool.cc:135
 #: ../../src/editor/tools/editor_info_tool.cc:141
 #, c-format
 msgid "Descr: %s"
-msgstr ""
+msgstr "Beskr: %s"
 
 #: ../../src/editor/tools/editor_info_tool.cc:138
 #: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:91
@@ -504,7 +506,7 @@ msgstr "ej namngiven"
 
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:255
 msgid "directory"
-msgstr ""
+msgstr "katalog"
 
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:259
 msgid "Not a map file"
@@ -528,6 +530,10 @@ msgid ""
 "\n"
 "Reason given:\n"
 msgstr ""
+"Fel vid sparande av karta!\n"
+"Sparfilen kan vara korrupt!\n"
+"\n"
+"Anledning:\n"
 
 #: ../../src/editor/ui_menus/editor_main_menu_save_map_make_directory.cc:39
 msgid "Enter Directory Name: "
@@ -554,7 +560,7 @@ msgstr "Antal spelare"
 #: ../../src/network/nethost.cc:2078
 #, c-format
 msgid "Player %s"
-msgstr ""
+msgstr "Spelare %s"
 
 #: ../../src/editor/ui_menus/editor_player_menu.cc:326
 msgid "Error!"
@@ -565,6 +571,8 @@ msgid ""
 "Cannot remove player. It is referenced someplace. Remove all buildings and "
 "bobs that depend on this player and try again."
 msgstr ""
+"Kan inte ta bort spelare. Det hänvisas till någonstans. Ta bort alla "
+"byggnader och grunkor som är kopplade till spelaren och försök igen."
 
 #: ../../src/editor/ui_menus/editor_player_menu_allowed_buildings_menu.cc:57
 msgid "Allowed Buildings"
@@ -593,7 +601,7 @@ msgstr "Höjdverktygs Alternativ"
 #: ../../src/editor/ui_menus/editor_tool_change_height_options_menu.cc:44
 #: ../../src/editor/ui_menus/editor_tool_change_resources_options_menu.cc:49
 msgid "Increase/Decrease Value"
-msgstr ""
+msgstr "Öka/minska värde"
 
 #: ../../src/editor/ui_menus/editor_tool_change_height_options_menu.cc:80
 #: ../../src/editor/ui_menus/editor_tool_change_resources_options_menu.cc:80
@@ -603,7 +611,7 @@ msgstr "Sätt värde"
 #: ../../src/editor/ui_menus/editor_tool_change_resources_options_menu.cc:45
 #: ../../src/editor/ui_menus/editor_tool_menu.cc:70
 msgid "Resources"
-msgstr ""
+msgstr "Resurser"
 
 #: ../../src/editor/ui_menus/editor_tool_change_resources_options_menu.cc:99
 msgid "Current Selection"
@@ -785,6 +793,10 @@ msgid ""
 "You can manually add a starting position with the Widelands Editor to fix "
 "this problem."
 msgstr ""
+"Widelands kunde inte starta spelet eftersom spelare %u ej har någon "
+"startposition\n"
+"Du kan lägga till en startposition för hand med kartredigeraren för att lösa "
+"detta problem."
 
 #: ../../src/logic/map.cc:361
 msgid "Player 1"
@@ -987,13 +999,16 @@ msgstr ""
 
 #: ../../src/logic/production_program.cc:1265
 msgid "Main Vein Exhausted"
-msgstr ""
+msgstr "Huvudvenen är tömd"
 
 #: ../../src/logic/production_program.cc:1267
 msgid ""
 "This mine’s main vein is exhausted. Expect strongly diminished returns on "
 "investment. You should consider expanding, dismantling or destroying it."
 msgstr ""
+"Den här gruvans huvudven är tömd. Förvänta dig kraftigt minskad återbäring "
+"på investering. Du borde överväga att uppgradera, nedmontera eller förstöra "
+"gruvan."
 
 #: ../../src/logic/production_program.cc:1316
 #, c-format
@@ -1004,7 +1019,7 @@ msgstr ""
 #: ../../src/logic/production_program.cc:1416
 #, c-format
 msgid "No soldier found for this training level!"
-msgstr ""
+msgstr "Inga soldater hittades för denna träningsnivå!"
 
 #: ../../src/logic/productionsite.cc:245
 msgid "(not occupied)"
@@ -1097,7 +1112,7 @@ msgstr "En geolog hittade resurser."
 #: ../../src/logic/worker.cc:1872
 #, c-format
 msgid "Your %s can’t find a way home and will likely die."
-msgstr ""
+msgstr "Dina %s kan inte finna en väg hem och kommer troligen att dö."
 
 #: ../../src/logic/worker.cc:1879
 msgid "Worker got lost!"
@@ -1111,6 +1126,7 @@ msgstr "Ogiltig värld"
 #, c-format
 msgid "The world \"%s\" set by the map does not exist on your filesystem."
 msgstr ""
+"Världen \"%s\" som satts av kartan, existerar inte på ditt filsystem."
 
 #: ../../src/network/internet_gaming.cc:117
 #: ../../src/ui_fsmenu/internet_lobby.cc:419
@@ -1197,17 +1213,17 @@ msgstr ""
 
 #: ../../src/network/internet_gaming.cc:549
 msgid "Chat message could not be sent. "
-msgstr ""
+msgstr "Meddelande kunde inte skickas. "
 
 #: ../../src/network/internet_gaming.cc:563
 #, c-format
 msgid "ERROR: %s"
-msgstr ""
+msgstr "FEL: %s"
 
 #: ../../src/network/internet_gaming.cc:573
 #, c-format
 msgid "Received an unknown command from the metaserver: %s"
-msgstr ""
+msgstr "Mottog okänt kommando från metaserver: %s"
 
 #: ../../src/network/internet_gaming.cc:706
 msgid "Message could not be sent: You are not connected to the metaserver!"
@@ -1328,38 +1344,40 @@ msgstr ""
 #: ../../src/network/nethost.cc:370 ../../src/network/nethost.cc:1211
 #: ../../src/network/nethost.cc:1222
 msgid "Available host commands are:"
-msgstr ""
+msgstr "Tillgängliga värdkommandon är:"
 
 #. * TRANSLATORS: Available host command
 #: ../../src/network/nethost.cc:372 ../../src/network/nethost.cc:1213
 #: ../../src/network/nethost.cc:1224
 msgid "/help  -  Shows this help"
-msgstr ""
+msgstr "/help - Visar denna hjälp"
 
 #. * TRANSLATORS: Available host command
 #: ../../src/network/nethost.cc:374
 msgid "/announce <msg>  -  Send a chatmessage as announcement (system chat)"
 msgstr ""
+"/announce <medd> - Skicka ett chattmeddelande som en kungörelse (systemchatt)"
 
 #. * TRANSLATORS: Available host command
 #: ../../src/network/nethost.cc:376
 msgid "/warn <name> <reason>  -  Warn the user <name> because of <reason>"
-msgstr ""
+msgstr "/warn <namn> <anledning> - Varna användaren <namn> pga. <anledning>"
 
 #. * TRANSLATORS: Available host command
 #: ../../src/network/nethost.cc:378
 msgid "/kick <name> <reason>  -  Kick the user <name> because of <reason>"
 msgstr ""
+"kick <namn> <anledning> - Sparka ut användaren <namn> pga. <anledning>"
 
 #. * TRANSLATORS: Available host command
 #: ../../src/network/nethost.cc:380
 msgid "/forcePause            -  Force the game to pause."
-msgstr ""
+msgstr "/forcePause - Tvinga spelet att pausas."
 
 #. * TRANSLATORS: Available host command
 #: ../../src/network/nethost.cc:382
 msgid "/endForcedPause        -  Return game to normal speed."
-msgstr ""
+msgstr "/endForcedPause - Sätter tillbaka spelet i normal hastighet."
 
 #: ../../src/network/nethost.cc:391
 msgid "Wrong use, should be: /announce <message>"
@@ -1397,12 +1415,12 @@ msgstr "Du kan inte sparka ut den dedikerade servern"
 #: ../../src/network/nethost.cc:447
 #, c-format
 msgid "Are you sure you want to kick %s?"
-msgstr ""
+msgstr "Är du säker på att du vill sparka ut %s?"
 
 #: ../../src/network/nethost.cc:448
 #, c-format
 msgid "The stated reason was: %s"
-msgstr ""
+msgstr "Den givna anledningen var: %s"
 
 #: ../../src/network/nethost.cc:449
 #, c-format
@@ -1443,16 +1461,16 @@ msgstr ""
 #. * TRANSLATORS: Available host command
 #: ../../src/network/nethost.cc:1215 ../../src/network/nethost.cc:1226
 msgid "host $ - Tries to run the host command $"
-msgstr ""
+msgstr "host $ - Försöker köra värdkommandot $"
 
 #. * TRANSLATORS: Available host command
 #: ../../src/network/nethost.cc:1217
 msgid "save $ - Saves the current game state as $.wgf"
-msgstr ""
+msgstr "save $ - Spara aktuellt speltillstånd som $.wgf"
 
 #: ../../src/network/nethost.cc:1230
 msgid "pwd $  - Sends the password $ to the host"
-msgstr ""
+msgstr "pwd $ - Skickar lösenordet $ till värden"
 
 #: ../../src/network/nethost.cc:1237
 msgid ""
@@ -1465,7 +1483,7 @@ msgstr ""
 #: ../../src/network/nethost.cc:1242
 #, c-format
 msgid "%1$s told me to run the command: \"%2$s\""
-msgstr ""
+msgstr "%1$s sa till mig att köra kommando: \"%2$s\""
 
 #: ../../src/network/nethost.cc:1251
 msgid "Sorry! Saving was deactivated on this dedicated server!"
@@ -1482,7 +1500,7 @@ msgstr "Spelet sparades med lyckat resultat!"
 #: ../../src/network/nethost.cc:1268
 #, c-format
 msgid "Could not save the game to the file \"%1$s\"! (%2$s)"
-msgstr ""
+msgstr "Kunde inte spara spelet till filen \"%1$s\"! (%2$s)"
 
 #: ../../src/network/nethost.cc:1277
 msgid "This server is not password protected!"
@@ -1500,7 +1518,7 @@ msgstr "Okänt kommando för dedikerad server \"%s\"!"
 #: ../../src/network/nethost.cc:2004
 #, c-format
 msgid "Computer %u"
-msgstr ""
+msgstr "Dator %u"
 
 #: ../../src/network/nethost.cc:2070 ../../src/wlapplication.cc:1666
 #: ../../src/wui/game_summary.cc:90
@@ -1568,12 +1586,12 @@ msgstr ""
 #: ../../src/network/network_gaming_messages.cc:132
 #, c-format
 msgid "Something went wrong: %s"
-msgstr ""
+msgstr "Något gick fel: %s"
 
 #: ../../src/network/network_gaming_messages.cc:133
 #, c-format
 msgid "%1$s has left the game (%2$s)"
-msgstr ""
+msgstr "%1$s har lämnat spelet (%2$s)"
 
 #: ../../src/network/network_gaming_messages.cc:134
 #, c-format
@@ -1599,6 +1617,7 @@ msgstr "Servern skickade en spelaruppdatering för en spelare som ej finns."
 #: ../../src/network/network_gaming_messages.cc:139
 msgid "Server sent a user update for a user that does not exist."
 msgstr ""
+"Servern skickade en användaruppdatering för en användare som ej finns."
 
 #: ../../src/network/network_gaming_messages.cc:140
 msgid "Server uses a different protocol version"
@@ -1627,7 +1646,7 @@ msgstr "Spelet har redan börjat."
 
 #: ../../src/network/network_gaming_messages.cc:147
 msgid "Client has no access to other player’s settings."
-msgstr ""
+msgstr "Klienten har inte åtkomst till andra spelares inställningar."
 
 #: ../../src/network/network_gaming_messages.cc:148
 msgid "Client has no access to server settings."
@@ -1666,6 +1685,7 @@ msgstr "Värden flyttade spelare %s till väntrummet!"
 #, c-format
 msgid "WARNING: %1$s uses version: %2$s, while Host uses version: %3$s"
 msgstr ""
+"VARNING: %1$s använder version: %2$s, men värden använder version: %3$s"
 
 #: ../../src/network/network_gaming_messages.cc:158
 #, c-format
@@ -1680,12 +1700,12 @@ msgstr ""
 #: ../../src/network/network_gaming_messages.cc:160
 #, c-format
 msgid "Started to send file %1$s to %2$s!"
-msgstr ""
+msgstr "Påbörjade överföring av fil %1$s till %2$s!"
 
 #: ../../src/network/network_gaming_messages.cc:161
 #, c-format
 msgid "Completed transfer of file %1$s to %2$s"
-msgstr ""
+msgstr "Avslutade överföring av fil %1$s till %2$s"
 
 #: ../../src/network/network_gaming_messages.cc:162
 #, c-format
@@ -1736,11 +1756,11 @@ msgstr ""
 
 #: ../../src/save_handler.cc:95
 msgid "Saving failed!"
-msgstr ""
+msgstr "Misslyckades spara!"
 
 #: ../../src/save_handler.cc:114
 msgid "Game saved"
-msgstr ""
+msgstr "Spel sparat"
 
 #: ../../src/scripting/lua_game.cc:1089
 #, c-format
@@ -1750,7 +1770,7 @@ msgstr ""
 #: ../../src/ui_basic/helpwindow.cc:47 ../../src/ui_basic/helpwindow.cc:192
 #, c-format
 msgid "Help: %s"
-msgstr ""
+msgstr "Hjälp: %s"
 
 #: ../../src/ui_basic/messagebox.cc:99
 msgid "Yes"
@@ -1880,7 +1900,7 @@ msgstr "Poäng"
 
 #: ../../src/ui_fsmenu/internet_lobby.cc:158
 msgid "Game"
-msgstr ""
+msgstr "Spel"
 
 #: ../../src/ui_fsmenu/internet_lobby.cc:389
 msgid "Connection timed out"
@@ -1895,7 +1915,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/internet_lobby.cc:420
 msgid "Widelands was unable to connect to the host."
-msgstr ""
+msgstr "Widelands kunde ej ansluta till värden."
 
 #: ../../src/ui_fsmenu/intro.cc:32
 msgid "Press ESC or click to continue ..."
@@ -1949,7 +1969,7 @@ msgstr "Klienter"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:171 ../../src/ui_fsmenu/launchSPG.cc:104
 msgid "Type of game"
-msgstr ""
+msgstr "Spelets typ"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:217 ../../src/ui_fsmenu/launchSPG.cc:286
 msgid "(no map)"
@@ -1970,7 +1990,7 @@ msgstr "Sparat spel"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:295
 msgid "The game is a saved game – the win condition was set before."
-msgstr ""
+msgstr "Spelet är ett sparat spel - vinstvillkoret valdes förut."
 
 #: ../../src/ui_fsmenu/launchMPG.cc:396
 msgid "Saved game is directory"
@@ -1984,6 +2004,11 @@ msgid ""
 "Widelands is not able to transfer directory structures to the clients, "
 "please select another saved game or zip the directories’ content."
 msgstr ""
+"VARNING:\n"
+"Det markerade sparade spelet är en katalog. Det här händer om du anger "
+"väljaren \"nozip\" till sant eller manuellt packade upp det sparade spelet.\n"
+"Widelands kan inte överföra katalogstrukturer till klienterna; välj ett "
+"annat sparat spel eller zippa kataloginnehållet."
 
 #: ../../src/ui_fsmenu/launchMPG.cc:427 ../../src/ui_fsmenu/launchSPG.cc:260
 msgid "File not found"
@@ -2022,11 +2047,11 @@ msgstr "Åskådare"
 #: ../../src/ui_fsmenu/launchMPG.cc:488
 #, c-format
 msgid "At the moment you are %s"
-msgstr ""
+msgstr "Du är för tillfället %s"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:489
 msgid "Click on the ‘?’ in the top right corner to get help."
-msgstr ""
+msgstr "Klicka på \"?\" i det övre högra hörnet för att få hjälp."
 
 #: ../../src/ui_fsmenu/launchMPG.cc:550
 msgid "Saved players are:"
@@ -2035,7 +2060,7 @@ msgstr "Sparade spelare:"
 #: ../../src/ui_fsmenu/launchMPG.cc:566
 #, c-format
 msgid "Player %u"
-msgstr ""
+msgstr "Spelare %u"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:570
 msgid "closed"
@@ -2068,11 +2093,11 @@ msgstr[1] ""
 #: ../../src/ui_fsmenu/launchMPG.cc:656
 #, c-format
 msgid "World: %s"
-msgstr ""
+msgstr "Värld: %s"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:658
 msgid "Scenario mode selected"
-msgstr ""
+msgstr "Scenarioläge valt"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:673
 msgid "You are in the multiplayer launch game menu."
@@ -2093,11 +2118,14 @@ msgid ""
 "The player with the color of the flag. If more than one client selected the "
 "same color, these share control over the player (‘shared kingdom mode’)."
 msgstr ""
+"Spelaren med flaggans färg. Om fler än en spelare valde samma färg delar "
+"dessa kontroll över spelaren (läget \"delat kungadöme\")."
 
 #: ../../src/ui_fsmenu/launchMPG.cc:685
 msgid ""
 "Spectator mode, meaning you can see everything, but cannot control any player"
 msgstr ""
+"Slutligen åskådarläge, då du kan se allt, men inte kontrollera någon spelare."
 
 #: ../../src/ui_fsmenu/launchMPG.cc:687
 msgid "Player settings"
@@ -2113,13 +2141,15 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/launchMPG.cc:693
 msgid "Connected to one or more clients (see ‘Client settings’)."
-msgstr ""
+msgstr "Ansluten till en eller flera klienter (se \"Klientinställningar\")."
 
 #: ../../src/ui_fsmenu/launchMPG.cc:696
 msgid ""
 "Connected to a computer player (the face in the picture as well as the mouse "
 "hover texts indicate the strength of the currently selected computer player)."
 msgstr ""
+"Ansluten till en datorspelare (ansiktet i bilden liksom texten som syns när "
+"muspekaren förs över den visar den valda datorspelarens styrka)."
 
 #: ../../src/ui_fsmenu/launchMPG.cc:699
 msgid "Set as shared in starting position for another player."
@@ -2142,6 +2172,8 @@ msgid ""
 "Every client connected to a player (the set ‘role’ player) can set the tribe "
 "and the team for that player"
 msgstr ""
+"Varje klient ansluten till en spelare (med rollen \"spelare\") kan välja "
+"stam och lag för den spelaren"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:710
 msgid "Map details"
@@ -2154,6 +2186,10 @@ msgid ""
 "map. Furthermore, the host is able to set a specific win condition, and "
 "finally can start the game as soon as all players are set up."
 msgstr ""
+"På höger sida finns information om den valda kartan eller det valda sparade "
+"spelet. En knapp till höger om kartans namn låter värden byta karta. Värden "
+"kan även välja vinstvillkor och slutligen starta spelet när alla spelare är "
+"redo."
 
 #: ../../src/ui_fsmenu/launchSPG.cc:54
 msgid "Select map"
@@ -2165,11 +2201,11 @@ msgstr "Starta spel"
 
 #: ../../src/ui_fsmenu/launchSPG.cc:83
 msgid "Player’s name"
-msgstr ""
+msgstr "Spelarnamn"
 
 #: ../../src/ui_fsmenu/launchSPG.cc:88
 msgid "Player’s type"
-msgstr ""
+msgstr "Spelarslag"
 
 #: ../../src/ui_fsmenu/launchSPG.cc:92 ../../src/wui/game_summary.cc:91
 #: ../../src/wui/multiplayersetupgroup.cc:461
@@ -2178,7 +2214,7 @@ msgstr "Lag"
 
 #: ../../src/ui_fsmenu/launchSPG.cc:96
 msgid "Player’s tribe"
-msgstr ""
+msgstr "Spelarstam"
 
 #: ../../src/ui_fsmenu/launchSPG.cc:100
 msgid "Start type"
@@ -2223,7 +2259,7 @@ msgstr "Ta bort fil"
 #: ../../src/ui_fsmenu/loadgame.cc:160 ../../src/ui_fsmenu/loadreplay.cc:141
 #, c-format
 msgid "Do you really want to delete %s?"
-msgstr ""
+msgstr "Vill du verkligen ta bort %s?"
 
 #: ../../src/ui_fsmenu/loadgame.cc:217
 msgid "Savegame from dedicated server"
@@ -2247,7 +2283,7 @@ msgstr "En spelare"
 
 #: ../../src/ui_fsmenu/main.cc:50
 msgid "Multiplayer"
-msgstr ""
+msgstr "Flera spelare"
 
 #: ../../src/ui_fsmenu/main.cc:55
 msgid "Watch Replay"
@@ -2281,7 +2317,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/mapselect.cc:59
 msgid "Load Map as scenario"
-msgstr ""
+msgstr "Ladda karta som scenario"
 
 #. * TRANSLATORS: Column title for number of players in map list
 #: ../../src/ui_fsmenu/mapselect.cc:150
@@ -2337,6 +2373,8 @@ msgid ""
 "This map file is not present in your filesystem. The data shown here was "
 "sent by the server."
 msgstr ""
+"Den här kartfilen finns inte i ditt filsystem. Data som visas här skickades "
+"från servern."
 
 #: ../../src/ui_fsmenu/multiplayer.cc:41
 msgid "Choose game type"
@@ -2464,7 +2502,7 @@ msgstr "Använd ett enda Se-fönster"
 
 #: ../../src/ui_fsmenu/options.cc:207
 msgid "Start building road after placing a flag"
-msgstr ""
+msgstr "Börja vägbygge efter placering av flagga"
 
 #: ../../src/ui_fsmenu/options.cc:214
 msgid "Show buildings area preview"
@@ -2505,7 +2543,7 @@ msgstr ""
 #: ../../src/ui_fsmenu/options.cc:320
 #, c-format
 msgid "%1$i x %2$i"
-msgstr ""
+msgstr "%1$i x %2$i"
 
 #: ../../src/ui_fsmenu/options.cc:340
 msgid "Try system language"
@@ -2545,7 +2583,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/options.cc:496
 msgid "Show in-game chat with transparent background"
-msgstr ""
+msgstr "Visa spelchatt med genomskinlig bakgrund"
 
 #: ../../src/ui_fsmenu/options.cc:537
 msgid "DejaVuSerif (Default)"
@@ -2597,59 +2635,73 @@ msgstr "Detta är Widelands-"
 
 #: ../../src/wlapplication.cc:1189
 msgid "Usage: widelands <option0>=<value0> ... <optionN>=<valueN>"
-msgstr ""
+msgstr "Användning: widelands <val0>=<värde0> ... <valN>=<värdeN>"
 
 #: ../../src/wlapplication.cc:1190
 msgid "Options:"
-msgstr ""
+msgstr "Inställningar:"
 
 #: ../../src/wlapplication.cc:1192
 msgid " --<config-entry-name>=value overwrites any config file setting"
 msgstr ""
+" --<config-entry-name>=value skriver över inställningar i "
+"konfigurationsfilerna"
 
 #: ../../src/wlapplication.cc:1193
 msgid ""
 " --logfile=FILENAME   Log output to file FILENAME instead of \n"
 "                      terminal output"
 msgstr ""
+" --logfile=FILNAMN    Spara loggens utdata till filen FILNAMN\n"
+"                      istället för terminalutdatan"
 
 #: ../../src/wlapplication.cc:1195
 msgid ""
 " --datadir=DIRNAME    Use specified directory for the widelands\n"
 "                      data files"
 msgstr ""
+" --datadir=KATALOG    Använd den givna riktningen för widelands\n"
+"                      datafiler"
 
 #: ../../src/wlapplication.cc:1197
 msgid ""
 " --homedir=DIRNAME    Use specified directory for widelands config\n"
 "                      files, savegames and replays"
 msgstr ""
+" --homedir=KATALOG    Använd den givna katalogen för widelands\n"
+"                      konfigurationsfiler, sparade spel, och repriser"
 
 #: ../../src/wlapplication.cc:1200
 msgid "                      Default is ~/.widelands"
-msgstr ""
+msgstr "                      Standardalternativet är ~/.widelands"
 
 #: ../../src/wlapplication.cc:1203
 msgid ""
 " --coredump=[yes|no]  Generates a core dump on segfaults instead\n"
 "                      of using the SDL"
 msgstr ""
+" --coredump=[yes|no]  Genererar en kärndump vid segmenterings-\n"
+"                      fel istället för att använda SDL"
 
 #: ../../src/wlapplication.cc:1205
 msgid ""
 " --language=[de_DE|sv_SE|...]\n"
 "                      The locale to use."
 msgstr ""
+" --language=[de_DE|sv_SE|...]\n"
+"                      Ställ in språk."
 
 #: ../../src/wlapplication.cc:1207
 msgid " --localedir=DIRNAME  Use DIRNAME as location for the locale"
-msgstr ""
+msgstr " --localedir=KATALOG  Använd KATALOG som plats för språk"
 
 #: ../../src/wlapplication.cc:1208
 msgid ""
 " --remove_syncstreams=[true|false]\n"
 "                      Remove syncstream files on startup"
 msgstr ""
+" --remove_syncstreams=[true|false]\n"
+"                      Ta bort syncstream-filer vid programstart"
 
 #: ../../src/wlapplication.cc:1210
 msgid ""
@@ -2657,26 +2709,29 @@ msgid ""
 "                      Remove replays after this number of days.\n"
 "                      If this is 0, replays are not deleted."
 msgstr ""
+" --remove_replays=[...]\n"
+"                      Ta bort repriser efter givet antal dagar. Om det\n"
+"                      anges till 0 raderas aldrig repriser."
 
 #: ../../src/wlapplication.cc:1214
 msgid "Sound options:"
-msgstr ""
+msgstr "Ljudalternativ:"
 
 #: ../../src/wlapplication.cc:1215
 msgid " --nosound            Starts the game with sound disabled."
-msgstr ""
+msgstr " --nosound            Startar spelet med ljud avstängt."
 
 #: ../../src/wlapplication.cc:1216
 msgid " --disable_fx         Disable sound effects."
-msgstr ""
+msgstr " --disable_fx         Stäng av ljudeffekter."
 
 #: ../../src/wlapplication.cc:1217
 msgid " --disable_music      Disable music."
-msgstr ""
+msgstr " --disable_music      Stäng av musik."
 
 #: ../../src/wlapplication.cc:1218
 msgid " --nozip              Do not save files as binary zip archives."
-msgstr ""
+msgstr " --nozip              Spara inte spel som binära zip-arkiv."
 
 #: ../../src/wlapplication.cc:1219
 msgid ""
@@ -2684,16 +2739,19 @@ msgid ""
 "                      You can add a =FILENAME to directly load\n"
 "                      the map FILENAME in editor."
 msgstr ""
+" --editor             Starta direkt i Widelands redigerare.\n"
+"                      Lägg till =FILENAME för att direkt läsa in\n"
+"                      kartan FILENAME i redigeraren."
 
 #: ../../src/wlapplication.cc:1222
 msgid ""
 " --scenario=FILENAME  Directly starts the map FILENAME as scenario\n"
 "                      map."
-msgstr ""
+msgstr " --scenario=FILENAME  Starta direkt FILENAME som scenariokarta."
 
 #: ../../src/wlapplication.cc:1224
 msgid " --loadgame=FILENAME  Directly loads the savegame FILENAME."
-msgstr ""
+msgstr " --loadgame=FILENAME  Starta direkt det sparade spelet FILENAME."
 
 #: ../../src/wlapplication.cc:1225
 msgid ""
@@ -2738,7 +2796,7 @@ msgstr ""
 
 #: ../../src/wlapplication.cc:1239
 msgid "Options for the internal window manager:"
-msgstr ""
+msgstr "Alternativ för den interna fönsterhanteraren:"
 
 #: ../../src/wlapplication.cc:1240
 msgid ""
@@ -2747,6 +2805,10 @@ msgid ""
 "                      when the edge of the window comes within\n"
 "                      this distance from the edge of the screen."
 msgstr ""
+" --border_snap_distance=[0 ...]\n"
+"                      Flytta ett fönster till skärmkanten när \n"
+"                      fönsterkanten kommer inom detta avstånd\n"
+"                      från skärmkanten."
 
 #: ../../src/wlapplication.cc:1244
 msgid ""
@@ -2755,6 +2817,9 @@ msgid ""
 "                      edge of the screen when the edge of the\n"
 "                      window is next to the edge of the screen."
 msgstr ""
+" --dock_windows_to_edges=[yes|no]\n"
+"                      Eliminera ett fönsters kant mot skärmkanten\n"
+"                      när fönsterkanten är intill skärmkanten."
 
 #: ../../src/wlapplication.cc:1248
 msgid ""
@@ -2763,6 +2828,10 @@ msgid ""
 "                      the edge of the window comes within this\n"
 "                      distance from the edge of the panel."
 msgstr ""
+" --panel_snap_distance=[0 ...]\n"
+"                      Flytta fönster till panelkanten när\n"
+"                      fönsterkanten kommer inom det här\n"
+"                      avståndet från panelkanten."
 
 #: ../../src/wlapplication.cc:1252
 msgid ""
@@ -2771,20 +2840,24 @@ msgid ""
 "                      if the window is overlapping with the\n"
 "                      panel."
 msgstr ""
+" --snap_windows_only_when_overlapping=[yes|no]\n"
+"                      Flytta endast fönster till panelkanten om \n"
+"                      fönstret överlappar panelen."
 
 #: ../../src/wlapplication.cc:1259
 msgid ""
 " --double             Start the game twice (for localhost network\n"
 "                      testing)"
 msgstr ""
+" --double             Starta spelet två gånger (för lokal nätverkstestning)"
 
 #: ../../src/wlapplication.cc:1264
 msgid " --verbose            Enable verbose debug messages"
-msgstr ""
+msgstr " --verbose            Aktivera utförliga meddelanden för felsökning"
 
 #: ../../src/wlapplication.cc:1266
 msgid " --help               Show this help"
-msgstr ""
+msgstr " --help               Visa denna hjälp"
 
 #: ../../src/wlapplication.cc:1268
 msgid ""
@@ -2793,6 +2866,10 @@ msgid ""
 "\n"
 "Hope you enjoy this game!"
 msgstr ""
+"Buggrapporter? Förslag? Gå in på projektets hemsida:\n"
+"        https://launchpad.net/widelands\n"
+"\n"
+"Hoppas du gillar spelet!"
 
 #: ../../src/wlapplication.cc:1356
 msgid "Fallback settings in effect"
@@ -2807,7 +2884,7 @@ msgstr ""
 #: ../../src/wlapplication.cc:1429
 #, c-format
 msgid "Warning: %s"
-msgstr ""
+msgstr "Varning: %s"
 
 #: ../../src/wlapplication.cc:1432
 msgid "Game data error"
@@ -2834,6 +2911,10 @@ msgid ""
 "Widelands attempts to create a savegame when errors occur during the game. "
 "It is often – though not always – possible to load it and continue playing.\n"
 msgstr ""
+"Var vänlig lägg till denna information till din rapport.\n"
+"\n"
+"Widelands försöker skapa ett sparat spel när fel inträffar under spelet. Det "
+"är oftast - men inte alltid - möjlift att läsa in det och fortsätta spela.\n"
 
 #: ../../src/wlapplication.cc:1561
 msgid "The address of the game server is invalid"
@@ -2925,11 +3006,11 @@ msgstr "Byggnadsstatistik"
 
 #: ../../src/wui/building_statistics_menu.cc:87
 msgid "Total Productivity:"
-msgstr ""
+msgstr "Total produktivitet:"
 
 #: ../../src/wui/building_statistics_menu.cc:91
 msgid "Owned:"
-msgstr ""
+msgstr "Äger:"
 
 #: ../../src/wui/building_statistics_menu.cc:97
 msgid "Being built:"
@@ -2937,7 +3018,7 @@ msgstr ""
 
 #: ../../src/wui/building_statistics_menu.cc:103
 msgid "Jump to unproductive"
-msgstr ""
+msgstr "Hoppa till improduktiv"
 
 #: ../../src/wui/building_statistics_menu.cc:111
 msgid "Size"
@@ -3006,7 +3087,7 @@ msgstr ""
 
 #: ../../src/wui/buildingwindow.cc:311 ../../src/wui/buildingwindow.cc:514
 msgid "Hide work area"
-msgstr ""
+msgstr "Göm arbetsområde"
 
 #: ../../src/wui/buildingwindow.cc:326
 msgid "Debug"
@@ -3022,7 +3103,7 @@ msgstr "Hjälp"
 
 #: ../../src/wui/buildingwindow.cc:517
 msgid "Show work area"
-msgstr ""
+msgstr "Visa arbetsområde"
 
 #: ../../src/wui/constructionsitewindow.cc:75
 #: ../../src/wui/dismantlesitewindow.cc:69
@@ -3032,7 +3113,7 @@ msgstr ""
 #: ../../src/wui/encyclopedia_window.cc:66
 #: ../../src/wui/interactive_player.cc:125
 msgid "Tribal Ware Encyclopedia"
-msgstr ""
+msgstr "Stams varuhjälp"
 
 #: ../../src/wui/encyclopedia_window.cc:80
 msgid "Consumed ware type(s)"
@@ -3171,7 +3252,7 @@ msgstr "Spara spel"
 
 #: ../../src/wui/game_main_menu_save_game.cc:73
 msgid "Game Time:"
-msgstr ""
+msgstr "Speltid:"
 
 #: ../../src/wui/game_main_menu_save_game.cc:79
 msgid "Win condition:"
@@ -3198,11 +3279,15 @@ msgid ""
 "\n"
 "Reason given:\n"
 msgstr ""
+"Fel vid sparning av spel!\n"
+"Sparfilen kan vara korrupt!\n"
+"\n"
+"Anledning:\n"
 
 #: ../../src/wui/game_main_menu_save_game.cc:255
 #: ../../src/wui/game_main_menu_save_game.cc:267
 msgid "Save Game Error!"
-msgstr ""
+msgstr "Fel vid sparning av spel!"
 
 #: ../../src/wui/game_main_menu_save_game.cc:330
 msgid "File deletion"
@@ -3324,11 +3409,11 @@ msgstr ""
 
 #: ../../src/wui/game_summary.cc:60
 msgid "Elapsed time:"
-msgstr ""
+msgstr "Förfluten tid:"
 
 #: ../../src/wui/game_summary.cc:77
 msgid "Continue playing"
-msgstr ""
+msgstr "Fortsätt spela"
 
 #: ../../src/wui/game_summary.cc:83
 msgid "Quit"
@@ -3434,7 +3519,7 @@ msgstr "PAUSA"
 #: ../../src/wui/interactive_base.cc:338
 #, c-format
 msgid "%1$s (%2$s)"
-msgstr ""
+msgstr "%1$s (%2$s)"
 
 #: ../../src/wui/interactive_base.cc:345
 msgid "NO GAME CONTROLLER"
@@ -3831,4 +3916,4 @@ msgstr "Följ"
 
 #: ../../src/wui/watchwindow.cc:117
 msgid "Center the main view on this"
-msgstr ""
+msgstr "Centrera huvudanblicken på detta"

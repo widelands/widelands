@@ -2,22 +2,23 @@
 # Copyright (c) 2013 Rosetta Contributors and Canonical Ltd 2013
 # This file is distributed under the same license as the widelands package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2013.
-#
+# GunChleoc <fios@foramnagaidhlig.net>, 2014.
 msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-03-12 21:37+0000\n"
-"PO-Revision-Date: 2013-10-16 12:28+0000\n"
-"Last-Translator: abdXelrhman <abdXelrhman@gmail.com>\n"
-"Language-Team: Arabic <ar@li.org>\n"
+"PO-Revision-Date: 2014-03-15 03:24+0000\n"
+"Last-Translator: GunChleoc <Unknown>\n"
+"Language-Team: Widelands fixxer upper\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n % 100 >= "
 "3 && n % 100 <= 10 ? 3 : n % 100 >= 11 && n % 100 <= 99 ? 4 : 5;\n"
-"X-Launchpad-Export-Date: 2014-03-13 05:39+0000\n"
+"X-Launchpad-Export-Date: 2014-03-15 05:42+0000\n"
 "X-Generator: Launchpad (build 16963)\n"
+"Language: ar\n"
 
 #: ../../maps/MP Scenarios/Smugglers.wmf/scripting/multiplayer_init.lua:43
 #: ../../maps/MP Scenarios/Smugglers.wmf/scripting/smuggling.lua:94
@@ -28,7 +29,7 @@ msgstr "حاله اللعبه"
 
 #: ../../maps/MP Scenarios/Smugglers.wmf/scripting/multiplayer_init.lua:119
 msgid "Wares Smuggled"
-msgstr ""
+msgstr "هُرِبَت السلع بنجاح"
 
 #: ../../maps/MP Scenarios/Smugglers.wmf/scripting/multiplayer_init.lua:142
 #: ../../maps/MP Scenarios/Smugglers.wmf/scripting/smuggling.lua:31
@@ -53,6 +54,10 @@ msgid ""
 "from each other on a point symmetric island. There are plenty of smuggling "
 "tunnels on this island, each consisting of a receiving and a sending end. "
 msgstr ""
+"المهربون هى خريطه مرحه للغايه مناسبه لـ 4 لاعبين. انت وزميلك فى الفريق "
+"ستبدأون فى بُقع مُنحرفه نحو بعضها البعض على جزيره متماثله المراكز. يوجد "
+"العديد من انفاق التهريب فى هذه الخريطه كلها تتألف من اطراف للإستقبال وآخرى "
+"للإرسال. "
 
 #: ../../maps/MP Scenarios/Smugglers.wmf/scripting/texts.lua:11
 msgid ""
@@ -61,6 +66,8 @@ msgid ""
 "corresponding receiving/sending spot. A ware is then transported every 10 "
 "seconds. "
 msgstr ""
+"ﻹنشاء مسار تهريب عليك بناء مستودع على احدى بُقع اﻹرسال/اﻹستقبال بينما يبنى "
+"زميلك فى الفريق مستودع آخر على نقطه اﻹرسال/اﻹستقبال المقابله. "
 
 #: TRANSLATORS: %s = '<number> points'
 #: ../../maps/MP Scenarios/Smugglers.wmf/scripting/texts.lua:15
@@ -68,6 +75,8 @@ msgid ""
 "For harder to defend smuggling routes, you get 2 or 3 points per ware "
 "smuggled. The first team to collect %s wins."
 msgstr ""
+"بعدها ستُنقَل سلعه كل 10 ثوانى. كل سلعه مُهربه يحصل صاحبها على نقطتين او "
+"ثلاث نقاط. اول فريق يُحرز %i نقطه يفوز."
 
 #: ../../maps/MP Scenarios/Smugglers.wmf/scripting/texts.lua:17
 msgid "A sending spot"
@@ -83,12 +92,17 @@ msgid ""
 "found a spot to the top-left of your headquarters, the corresponding spot "
 "will be to the bottom-right of the headquarters of your team mate."
 msgstr ""
+"تذكر جيداً ان الخريطه دارت بشكل تناظرى بمعنى انه مثلاً البُقعه التى كانت عند "
+"اعلى يسار مقرك الرئيسى سيتغير موقعها لتصبح فى البُقعه المقابله لها وهو عند "
+"اسفل يمين المقر الرئيسى لزميلك فى الفريق."
 
 #: ../../maps/MP Scenarios/Smugglers.wmf/scripting/texts.lua:25
 msgid ""
 "You can see the number of wares traded at any time in the general statistics "
 "menu. Good luck!"
 msgstr ""
+"يمكنك رؤيه عدد السلع المتداوله فى اى وقت من خلال قائمه اﻹحصائيات العامه. "
+"حظاً موفقاً!"
 
 #: TRANSLATORS: the first 2 parameters are player names, the last parameter is '<number> points'
 #: ../../maps/MP Scenarios/Smugglers.wmf/scripting/texts.lua:30

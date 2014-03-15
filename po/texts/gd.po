@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-03-12 21:37+0000\n"
-"PO-Revision-Date: 2014-03-06 11:07+0000\n"
+"PO-Revision-Date: 2014-03-14 15:26+0000\n"
 "Last-Translator: GunChleoc <Unknown>\n"
 "Language-Team: Fòram na Gàidhlig http://www.foramnagaidhlig.net\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-03-13 05:29+0000\n"
+"X-Launchpad-Export-Date: 2014-03-15 05:39+0000\n"
 "X-Generator: Launchpad (build 16963)\n"
 "Language: gd\n"
 
@@ -138,11 +138,11 @@ msgstr "Ath-ghoiridean meur-chlàir (am broinn a' gheama)"
 
 #: ../../txts/README.lua:61
 msgid "PAGEUP: increases game speed"
-msgstr ""
+msgstr "PAGEUP: dèan an geama nas luaithe"
 
 #: ../../txts/README.lua:62
 msgid "PAGEDOWN: decreases game speed"
-msgstr ""
+msgstr "PAGEDOWN: dèan an geama nas maille"
 
 #: ../../txts/README.lua:63
 msgid "PAUSE: pauses the game"
@@ -600,47 +600,49 @@ msgstr "Ath-ghoiridean meur-chlàir"
 
 #: ../../txts/editor_readme:25
 msgid "E: toggles event menu"
-msgstr ""
+msgstr "E: Toglaich clàr-taice nan tachartasan"
 
 #: ../../txts/editor_readme:27
 msgid "F: toggles fullscreen"
-msgstr ""
+msgstr "F: Toglaich làn-sgrìn"
 
 #: ../../txts/editor_readme:29
 msgid "H: toggles main menu"
-msgstr ""
+msgstr "H: Toglaich am prìomh chlàr-taice"
 
 #: ../../txts/editor_readme:33
 msgid "P: toggles player menu"
-msgstr ""
+msgstr "P: Toglaich clàr-taice a' chluicheadair"
 
 #: ../../txts/editor_readme:35
 msgid "T: toggles tools menu"
-msgstr ""
+msgstr "T: Toglaich clàr-taice nan inneal"
 
 #: ../../txts/editor_readme:37
 msgid "I: activates information tool"
-msgstr ""
+msgstr "I: Gnìomhaich an t-inneal fiosrachaidh"
 
 #: ../../txts/editor_readme:39
 msgid "CTRL+L: load Map"
-msgstr ""
+msgstr "CTRL+L: Luchdaich mapa"
 
 #: ../../txts/editor_readme:41
 msgid "CTRL+S: save Map"
-msgstr ""
+msgstr "CTRL+S: Sàbhail am mapa"
 
 #: ../../txts/editor_readme:43
 msgid "1-0: changes tool size"
-msgstr ""
+msgstr "1-0: Atharraich meud nan innealan"
 
 #: ../../txts/editor_readme:45
 msgid "SHIFT (Hold): selects first alternative tool while pressed"
 msgstr ""
+"SHIFT (Cum sìos): Tagh an dàrna inneal dàrnach fhad 's a thèid a chumail sìos"
 
 #: ../../txts/editor_readme:47
 msgid "ALT (Hold): Selects second alternative tool while pressed"
 msgstr ""
+"ALT (Cum sìos): Tagh inneal dàrnach eile fhad 's a thèid a chumail sìos"
 
 #: ../../txts/license:1
 msgid "License"

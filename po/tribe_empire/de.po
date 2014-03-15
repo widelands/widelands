@@ -7,13 +7,13 @@ msgstr ""
 "Project-Id-Version: Widelands unofficial-bzr-launchpad-i18n-4955\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2014-03-12 21:37+0000\n"
-"PO-Revision-Date: 2014-03-13 22:51+0000\n"
+"PO-Revision-Date: 2014-03-14 12:28+0000\n"
 "Last-Translator: wl-zocker <Unknown>\n"
 "Language-Team: German <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-03-14 05:34+0000\n"
+"X-Launchpad-Export-Date: 2014-03-15 05:41+0000\n"
 "X-Generator: Launchpad (build 16963)\n"
 "X-Poedit-Country: GERMANY\n"
 "Language: de\n"
@@ -303,8 +303,8 @@ msgid ""
 "level 1 to level 2."
 msgstr ""
 "Grundrüstungen für Soldaten des Imperiums. Sie werden in der "
-"Rüstungsschmiede hergestellt und in Ausbildungsplätzen – zusammen mit "
-"Nahrung – verwendet, um die Gesundheitsstufe der Soldaten von 1 auf 2 zu "
+"Rüstungsschmiede hergestellt und im Ausbildungslager – zusammen mit Nahrung "
+"– verwendet, um die Lebenspunkte der Soldaten von Stufe 1 auf 2 zu "
 "trainieren."
 
 #: ../../tribes/empire/armoursmith/conf:1
@@ -450,8 +450,8 @@ msgid ""
 "soldiers from health level 2 to level 3."
 msgstr ""
 "Die Kettenrüstung ist die mittlere Rüstung des imperialen Soldaten. Sie wird "
-"in Waffenschmieden hergestellt und in Ausbildungsplätzen – zusammen mit "
-"Nahrung – benötigt um die Gesundheitsstufe von Soldaten von 2 auf 3 zu "
+"in Waffenschmieden hergestellt und im Ausbildungslager – zusammen mit "
+"Nahrung – benötigt, um die Lebenspunkte von Soldaten von Stufe 2 auf 3 zu "
 "trainieren."
 
 #: ../../tribes/empire/cloth/conf:1
@@ -1248,8 +1248,8 @@ msgstr ""
 "Der Helm ist die Grundverteidigung eines Kriegers. Er wird in "
 "Rüstungsschmieden hergestellt. Zusammen mit einer hölzernernen Lanze ist er "
 "die Grundausrüstung für junge Soldaten. Helme werden auch in "
-"Ausbildungsplätzen – zusammen mit Nahrung – benötigt um die Gesundheitsstufe "
-"von Soldaten von 0 auf 1 zu trainieren."
+"Ausbildungslagern – zusammen mit Nahrung – benötigt, um die Lebenspunkte von "
+"Soldaten von STufe 0 auf 1 zu trainieren."
 
 #: ../../tribes/empire/hunter/conf:1
 msgid "The Hunter brings good meat to the colonists."
@@ -1396,10 +1396,10 @@ msgid ""
 "produced in the armor smithy and used in the training camp – together with "
 "food – to train soldiers from health level 3 to level 4."
 msgstr ""
-"Die Plattenrüstung ist die stärkste Rüstung die für imperiale Soldaten "
+"Die Plattenrüstung ist die stärkste Rüstung, die für imperiale Soldaten "
 "existiert. Sie wird in Rüstungsschmieden hergestellt und in "
-"Ausbildungsplätzen – zusammen mit Nahrung – benötigt um die Gesundheitsstufe "
-"von Soldaten von 3 auf 4 zu trainieren."
+"Ausbildungslagern – zusammen mit Nahrung – benötigt, um die Lebenspunkte von "
+"Soldaten von Stufe 3 auf 4 zu trainieren."
 
 #: ../../tribes/empire/ration/conf:1
 msgid ""
@@ -1587,19 +1587,19 @@ msgstr "Verbessert Angriff des Soldaten von Stufe 3 auf 4"
 
 #: ../../tribes/empire/trainingscamp/conf:51
 msgid "Upgrade soldier health from level 0 to level 1"
-msgstr ""
+msgstr "Verbessert die Lebenspunkte des Soldaten von Stufe 0 auf 1"
 
 #: ../../tribes/empire/trainingscamp/conf:52
 msgid "Upgrade soldier health from level 1 to level 2"
-msgstr ""
+msgstr "Verbessert die Lebenspunkte des Soldaten von Stufe 1 auf 2"
 
 #: ../../tribes/empire/trainingscamp/conf:53
 msgid "Upgrade soldier health from level 2 to level 3"
-msgstr ""
+msgstr "Verbessert die Lebenspunkte des Soldaten von Stufe 2 auf 3"
 
 #: ../../tribes/empire/trainingscamp/conf:54
 msgid "Upgrade soldier health from level 3 to level 4"
-msgstr ""
+msgstr "Verbessert die Lebenspunkte des Soldaten von Stufe 3 auf 4"
 
 #: ../../tribes/empire/trunk/conf:1
 msgid ""

@@ -3,20 +3,21 @@
 # This file is distributed under the same license as the widelands package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2011.
 # popo <popo49_abdo@hotmail.com>, 2013.
+# GunChleoc <fios@foramnagaidhlig.net>, 2014.
 msgid ""
 msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-03-12 22:37+0100\n"
-"PO-Revision-Date: 2013-10-05 18:06+0000\n"
-"Last-Translator: abdXelrhman <abdXelrhman@gmail.com>\n"
-"Language-Team: Arabic <ar@li.org>\n"
+"PO-Revision-Date: 2014-03-15 03:25+0000\n"
+"Last-Translator: GunChleoc <Unknown>\n"
+"Language-Team: Widelands fixxer upper\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n % 100 >= "
 "3 && n % 100 <= 10 ? 3 : n % 100 >= 11 && n % 100 <= 99 ? 4 : 5;\n"
-"X-Launchpad-Export-Date: 2014-03-13 05:33+0000\n"
+"X-Launchpad-Export-Date: 2014-03-15 05:41+0000\n"
 "X-Generator: Launchpad (build 16963)\n"
 "Language: ar\n"
 
@@ -89,7 +90,7 @@ msgstr "وايد لاند غير قادرة على فتح الملف \"%s\". ي�
 #: ../../src/editor/editorinteractive.cc:606
 #, c-format
 msgid "Loading tribe: %s"
-msgstr ""
+msgstr "يُحمل القبائل: %s"
 
 #: ../../src/editor/editorinteractive.cc:196
 msgid "Creating players"
@@ -111,7 +112,7 @@ msgstr ""
 
 #: ../../src/editor/editorinteractive.cc:253
 msgid "The map has not been saved, do you really want to quit?"
-msgstr ""
+msgstr "هذه الخريطه لم تُحفظ بعد ، اترغب حقاً بالخروج؟"
 
 #: ../../src/editor/editorinteractive.cc:597
 #: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:179
@@ -1195,7 +1196,7 @@ msgstr "فشل إرسال الرساله. "
 #: ../../src/network/internet_gaming.cc:563
 #, c-format
 msgid "ERROR: %s"
-msgstr ""
+msgstr "خطأ: %s"
 
 #: ../../src/network/internet_gaming.cc:573
 #, c-format
@@ -1535,7 +1536,7 @@ msgstr ""
 
 #: ../../src/network/network_gaming_messages.cc:128
 msgid "Connection to client timed out: no response for 10 minutes!"
-msgstr ""
+msgstr "إنتهت مُهله اﻹتصال بالعميل: لا إستجابه لـ 10 دقائق"
 
 #: ../../src/network/network_gaming_messages.cc:129
 msgid "Client and host have become desynchronized."
@@ -1559,7 +1560,7 @@ msgstr ""
 #: ../../src/network/network_gaming_messages.cc:133
 #, c-format
 msgid "%1$s has left the game (%2$s)"
-msgstr ""
+msgstr "لقد خرج %1$s من اللعبه (%2$s)"
 
 #: ../../src/network/network_gaming_messages.cc:134
 #, c-format
@@ -1736,7 +1737,7 @@ msgstr ""
 #: ../../src/ui_basic/helpwindow.cc:47 ../../src/ui_basic/helpwindow.cc:192
 #, c-format
 msgid "Help: %s"
-msgstr ""
+msgstr "مساعدة: %s"
 
 #: ../../src/ui_basic/messagebox.cc:99
 msgid "Yes"
@@ -1881,7 +1882,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/internet_lobby.cc:420
 msgid "Widelands was unable to connect to the host."
-msgstr ""
+msgstr "تعذر على وايد لاندس اﻹتصال بالمضيف"
 
 #: ../../src/ui_fsmenu/intro.cc:32
 msgid "Press ESC or click to continue ..."
@@ -1997,7 +1998,7 @@ msgstr ""
 #: ../../src/wui/multiplayersetupgroup.cc:286
 #, c-format
 msgid "Player %i"
-msgstr ""
+msgstr "اللاعب %i"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:487
 #: ../../src/wui/multiplayersetupgroup.cc:122
@@ -2012,7 +2013,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/launchMPG.cc:489
 msgid "Click on the ‘?’ in the top right corner to get help."
-msgstr ""
+msgstr "إضغط على رمز الـ \"?\" فى اقصى اعلى اليمين للحصول على المساعده"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:550
 msgid "Saved players are:"
@@ -2021,7 +2022,7 @@ msgstr ""
 #: ../../src/ui_fsmenu/launchMPG.cc:566
 #, c-format
 msgid "Player %u"
-msgstr ""
+msgstr "اللاعب %u"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:570
 msgid "closed"
@@ -2054,7 +2055,7 @@ msgstr[1] ""
 #: ../../src/ui_fsmenu/launchMPG.cc:656
 #, c-format
 msgid "World: %s"
-msgstr ""
+msgstr "العالم: %s"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:658
 msgid "Scenario mode selected"
@@ -2084,6 +2085,8 @@ msgstr ""
 msgid ""
 "Spectator mode, meaning you can see everything, but cannot control any player"
 msgstr ""
+"وبالنسبه لوضع المشاهدين،فهو وضع يسمح لك بمشاهده كل ما يحدث فى اى مكان بدون "
+"إمكانيه المشاركه او التحكم فى اى شيء"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:687
 msgid "Player settings"
@@ -2149,11 +2152,11 @@ msgstr "أطلق اللعبه"
 
 #: ../../src/ui_fsmenu/launchSPG.cc:83
 msgid "Player’s name"
-msgstr ""
+msgstr "إسم اللاعب"
 
 #: ../../src/ui_fsmenu/launchSPG.cc:88
 msgid "Player’s type"
-msgstr ""
+msgstr "نوع اللاعب"
 
 #: ../../src/ui_fsmenu/launchSPG.cc:92 ../../src/wui/game_summary.cc:91
 #: ../../src/wui/multiplayersetupgroup.cc:461
@@ -2162,11 +2165,11 @@ msgstr "الفريق"
 
 #: ../../src/ui_fsmenu/launchSPG.cc:96
 msgid "Player’s tribe"
-msgstr ""
+msgstr "قبيله اللاعب"
 
 #: ../../src/ui_fsmenu/launchSPG.cc:100
 msgid "Start type"
-msgstr ""
+msgstr "نوع البداية"
 
 #: ../../src/ui_fsmenu/launchSPG.cc:160
 msgid "Switch to position"
@@ -2582,7 +2585,7 @@ msgstr ""
 
 #: ../../src/wlapplication.cc:1190
 msgid "Options:"
-msgstr ""
+msgstr "إعدادات:"
 
 #: ../../src/wlapplication.cc:1192
 msgid " --<config-entry-name>=value overwrites any config file setting"
@@ -2774,6 +2777,11 @@ msgid ""
 "\n"
 "Hope you enjoy this game!"
 msgstr ""
+"اترغب بالإبلاغ عن علل؟او تقديم إقتراحات؟تفضل بزياره موقعنا على الشبكه "
+"العنكبوتيه\n"
+"        https://launchpad.net/widelands\n"
+"\n"
+"نتمنى لك لعباً ممتعاً"
 
 #: ../../src/wlapplication.cc:1356
 msgid "Fallback settings in effect"
@@ -2788,7 +2796,7 @@ msgstr ""
 #: ../../src/wlapplication.cc:1429
 #, c-format
 msgid "Warning: %s"
-msgstr ""
+msgstr "تحذير: %s"
 
 #: ../../src/wlapplication.cc:1432
 msgid "Game data error"
@@ -2997,7 +3005,7 @@ msgstr ""
 
 #: ../../src/wui/buildingwindow.cc:355
 msgid "Help"
-msgstr ""
+msgstr "مساعدة"
 
 #: ../../src/wui/buildingwindow.cc:517
 msgid "Show work area"

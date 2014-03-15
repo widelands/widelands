@@ -7,13 +7,13 @@ msgstr ""
 "Project-Id-Version: Widelands unofficial-bzr-launchpad-i18n-4955\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2014-03-12 21:37+0000\n"
-"PO-Revision-Date: 2014-03-14 01:57+0000\n"
-"Last-Translator: Mirian Margiani <mirian.margiani@gmail.com>\n"
+"PO-Revision-Date: 2014-03-14 12:22+0000\n"
+"Last-Translator: wl-zocker <Unknown>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-03-14 05:34+0000\n"
+"X-Launchpad-Export-Date: 2014-03-15 05:40+0000\n"
 "X-Generator: Launchpad (build 16963)\n"
 "Language: de\n"
 "X-Poedit-Language: German\n"
@@ -143,12 +143,12 @@ msgstr "Deine Wächterhalle wird angegriffen."
 #: ../../global/militarysites/guardhall.atlanteans/conf:10
 #: ../../tribes/atlanteans/guardhall/conf:9
 msgid "The enemy defeated your soldiers at the Guardhall"
-msgstr "Der Feind hat deine Soldaten an der Wächterhalle besiegt."
+msgstr "Der Feind hat deine Soldaten an der Wächterhalle besiegt"
 
 #: ../../global/militarysites/guardhall.atlanteans/conf:11
 #: ../../tribes/atlanteans/guardhall/conf:10
 msgid "Your soldiers defeated the enemy at the Guardhall"
-msgstr "Deine Soldaten haben den Feind an der Wächterhalle besiegt."
+msgstr "Deine Soldaten haben den Feind an der Wächterhalle besiegt"
 
 #: ../../global/militarysites/guardhouse.atlanteans/conf:8
 #: ../../tribes/atlanteans/guardhouse/conf:7
@@ -163,12 +163,12 @@ msgstr "Dein Wachhaus wird angegriffen."
 #: ../../global/militarysites/guardhouse.atlanteans/conf:10
 #: ../../tribes/atlanteans/guardhouse/conf:9
 msgid "The enemy defeated your soldiers at the Guardhouse"
-msgstr "Der Feind hat deine Soldaten am Wachhaus besiegt."
+msgstr "Der Feind hat deine Soldaten am Wachhaus besiegt"
 
 #: ../../global/militarysites/guardhouse.atlanteans/conf:11
 #: ../../tribes/atlanteans/guardhouse/conf:10
 msgid "Your soldiers defeated the enemy at the Guardhouse"
-msgstr "Deine Soldaten haben den Feind am Wachhaus besiegt."
+msgstr "Deine Soldaten haben den Feind am Wachhaus besiegt"
 
 #: ../../global/militarysites/high_tower.atlanteans/conf:9
 #: ../../tribes/atlanteans/high_tower/conf:10
@@ -183,12 +183,12 @@ msgstr "Dein Bergfried wird angegriffen."
 #: ../../global/militarysites/high_tower.atlanteans/conf:11
 #: ../../tribes/atlanteans/high_tower/conf:12
 msgid "The enemy defeated your soldiers at the High Tower"
-msgstr "Der Feind hat deine Soldaten am Bergfried besiegt."
+msgstr "Der Feind hat deine Soldaten am Bergfried besiegt"
 
 #: ../../global/militarysites/high_tower.atlanteans/conf:12
 #: ../../tribes/atlanteans/high_tower/conf:13
 msgid "Your soldiers defeated the enemy at the High Tower"
-msgstr "Deine Soldaten haben den Feind am Bergfried besiegt."
+msgstr "Deine Soldaten haben den Feind am Bergfried besiegt"
 
 #: ../../global/militarysites/outpost.empire/conf:8
 msgid "Your Outpost discovered an aggressor."
@@ -200,11 +200,11 @@ msgstr "Dein Außenposten wird angegriffen."
 
 #: ../../global/militarysites/outpost.empire/conf:10
 msgid "The enemy defeated your soldiers at the Outpost"
-msgstr "Der Feind hat deine Soldaten am Außenposten besiegt."
+msgstr "Der Feind hat deine Soldaten am Außenposten besiegt"
 
 #: ../../global/militarysites/outpost.empire/conf:11
 msgid "Your soldiers defeated the enemy at the Outpost"
-msgstr "Deine Soldaten haben den Feind am Außenposten besiegt."
+msgstr "Deine Soldaten haben den Feind am Außenposten besiegt"
 
 #: ../../global/militarysites/sentry.barbarians/conf:8
 #: ../../global/militarysites/sentry.empire/conf:8
@@ -219,12 +219,12 @@ msgstr "Dein Wachposten wird angegriffen."
 #: ../../global/militarysites/sentry.barbarians/conf:10
 #: ../../global/militarysites/sentry.empire/conf:10
 msgid "The enemy defeated your soldiers at the Sentry"
-msgstr "Der Feind hat deine Soldaten am Wachposten besiegt."
+msgstr "Der Feind hat deine Soldaten am Wachposten besiegt"
 
 #: ../../global/militarysites/sentry.barbarians/conf:11
 #: ../../global/militarysites/sentry.empire/conf:11
 msgid "Your soldiers defeated the enemy at the Sentry"
-msgstr "Deine Soldaten haben den Feind am Wachposten besiegt."
+msgstr "Deine Soldaten haben den Feind am Wachposten besiegt"
 
 #: ../../global/militarysites/small_tower.atlanteans/conf:9
 #: ../../tribes/atlanteans/small_tower/conf:8
@@ -239,12 +239,12 @@ msgstr "Dein Spähturm wird angegriffen."
 #: ../../global/militarysites/small_tower.atlanteans/conf:11
 #: ../../tribes/atlanteans/small_tower/conf:10
 msgid "The enemy defeated your soldiers at the Small Tower"
-msgstr "Der Feind hat deine Soldaten am Spähturm besiegt."
+msgstr "Der Feind hat deine Soldaten am Spähturm besiegt"
 
 #: ../../global/militarysites/small_tower.atlanteans/conf:12
 #: ../../tribes/atlanteans/small_tower/conf:11
 msgid "Your soldiers defeated the enemy at the Small Tower"
-msgstr "Deine Soldaten haben den Feind am Spähturm besiegt."
+msgstr "Deine Soldaten haben den Feind am Spähturm besiegt"
 
 #: ../../global/militarysites/tower.atlanteans/conf:9
 #: ../../global/militarysites/tower.empire/conf:9
@@ -262,13 +262,13 @@ msgstr "Dein Turm wird angegriffen."
 #: ../../global/militarysites/tower.empire/conf:11
 #: ../../tribes/atlanteans/tower/conf:11
 msgid "The enemy defeated your soldiers at the Tower"
-msgstr "Der Feind hat deine Soldaten am Wachturm besiegt."
+msgstr "Der Feind hat deine Soldaten am Turm besiegt"
 
 #: ../../global/militarysites/tower.atlanteans/conf:12
 #: ../../global/militarysites/tower.empire/conf:12
 #: ../../tribes/atlanteans/tower/conf:12
 msgid "Your soldiers defeated the enemy at the Tower"
-msgstr "Deine Soldaten haben den Feind am Wachturm besiegt."
+msgstr "Deine Soldaten haben den Feind am Turm besiegt"
 
 #: ../../tribes/atlanteans/advanced_shield/conf:1
 msgid ""
@@ -276,14 +276,14 @@ msgid ""
 "are produced in the armor smithy and used in the labyrinth – together with "
 "food – to train soldiers from Defense level 1 to level 2."
 msgstr ""
-"Diese verbesserten Schilde werden von den besten Soldaten der Atlanter "
-"benutzt. Sie werden in der Rüstungsschmiede hergestellt und im Labyrinth - "
-"zusammen mit Nahrung - verwendet, um Soldaten von der  Verteidigungsstufe 1 "
-"auf 2 zu trainieren."
+"Der verbesserten Schilde werden von den besten Soldaten der Atlanter "
+"verwendet. Sie werden in der Rüstungsschmiede hergestellt und im Labyrinth – "
+"zusammen mit Nahrung – verwendet um Soldaten von der Verteidungsstufe 1 auf "
+"2 zu trainieren."
 
 #: ../../tribes/atlanteans/armoursmith/conf:1
 msgid "Produces armor for the soldiers."
-msgstr "Produziert Rüstungen für Soldaten."
+msgstr "Schmiedet Rüstungen für Soldaten."
 
 #: ../../tribes/atlanteans/armoursmithy/conf:28
 msgid "Produce steel shield"
@@ -333,8 +333,8 @@ msgid ""
 "The bread paddle is the tool of the baker, each baker needs one. It is "
 "produced by the toolsmith."
 msgstr ""
-"Der Brotschieber ist das Werkzeug der Bäcker, jeder Bäcker benötigt einen. "
-"Er wird vom Werkzeugmacher hergestellt."
+"Der Brotschieber ist das Werkzeug der Bäcker, jeder Bäcker benötigt eine "
+"eigene. Sie wird vom Werkzeugschmied hergestellt."
 
 #: ../../tribes/atlanteans/blackroot/conf:1
 msgid ""
@@ -378,7 +378,7 @@ msgstr ""
 
 #: ../../tribes/atlanteans/bucket/conf:1
 msgid "Big buckets for the fish breeder – produced by the toolsmith."
-msgstr "Große Eimer für den Fischzüchter - produziert vom Werkzeugschmied."
+msgstr "Große Eimer für den Fischzüchter – produziert vom Werkzeugmacher."
 
 #: ../../tribes/atlanteans/builder/conf:1
 msgid "Works at construction sites to raise new buildings."
@@ -394,7 +394,7 @@ msgstr "Trägt Waren über deine Straßen."
 
 #: ../../tribes/atlanteans/castle/conf:6
 msgid "Your soldiers have occupied your Castle"
-msgstr "Deine Soldaten haben deine Burg besetzt."
+msgstr "Deine Soldaten haben deine Burg besetzt"
 
 #: ../../tribes/atlanteans/coal/conf:1
 msgid ""
@@ -402,9 +402,9 @@ msgid ""
 "fed with coal. This coal is mined in coal mines or produced out of logs by a "
 "charcoal burner."
 msgstr ""
-"Die atlantischen Feuer in Hochöfen, Rüstungsschmieden und Waffenschmieden "
-"werden mit Kohle unterhalten. Diese Kohle wird in Kohleminen abgebaut oder "
-"vom Köhler aus Stämmen produziert."
+"Die atlantischen Feuer in Gießereien, Rüstungsschmieden und Waffenschmieden "
+"werden mit Kohle geheizt. Diese Kohle wird in Kohleminen abgebaut oder in "
+"Köhlereien aus Stämmen hergestellt."
 
 #: ../../tribes/atlanteans/conf:4
 msgid "The Widelands Development Team"
@@ -488,11 +488,11 @@ msgstr "Ressourcenanzeige: Gold (viel)"
 
 #: ../../tribes/atlanteans/conf:49
 msgid "Resource indicator: Granite (little)"
-msgstr "Ressourcenanzeige: Kristall (wenig)"
+msgstr "Ressourcenanzeige: Granit (wenig)"
 
 #: ../../tribes/atlanteans/conf:50
 msgid "Resource indicator: Granite (much)"
-msgstr "Ressourcenanzeige: Kristall (viel)"
+msgstr "Ressourcenanzeige: Granit (viel)"
 
 #: ../../tribes/atlanteans/conf:51
 msgid "Resource indicator: Iron (little)"
@@ -1013,8 +1013,8 @@ msgid ""
 "baker needs for a good bread. Also horse and spider farms need to be "
 "provided with corn."
 msgstr ""
-"Dieser Mais wird in der Mühle zu feinem Mehl, das jeder atlantische Bäcker "
-"für ein gutes Brot braucht, weiterverarbeitet. Auch Pferdezuchten und "
+"Dieser Mais wird in der Mühle zu Maismehl weiterverarbeitet, welches jeder "
+"atlantischer Bäcker für gutes Brot benötigt. Auch Pferdehöfe und "
 "Spinnenfarmen müssen mit Mais beliefert werden."
 
 #: ../../tribes/atlanteans/cornflour/conf:1
@@ -1051,9 +1051,9 @@ msgid ""
 "weapon smithy. It is used in a dungeon – together with food – to train "
 "soldiers from attack level 2 to level 3."
 msgstr ""
-"Der Doppel-Dreizack ist einer der besten Dreizacke, die von der atlantischen "
-"Waffenschmiede produziert werden. Er wird im Verlies - zusammen mit Nahrung -"
-" verwendet, um Soldaten vom Angriffsstufe 2 auf 3 zu trainieren."
+"Der Doppeldreizack ist einer der besten Dreizacke der Atlanter, produziert "
+"vom atlantischen Waffenschmied. Er wird in einem Verlies – zusammen mit "
+"Nahrung – verwendet um Soldaten von der Angriffsstufe 2 auf 3 zu trainieren."
 
 #: ../../tribes/atlanteans/dungeon/conf:39
 #: ../../tribes/atlanteans/labyrinth/conf:45
@@ -1102,9 +1102,9 @@ msgid ""
 "smoked in a smokery before being delivered to mines, training sites and "
 "scouts."
 msgstr ""
-"Fisch ist eine der größten Nahrungsressourcen der Atlanter. Er muss in einer "
-"Räucherei geräuchert werden, bevor er zu Minen, Trainingsgebäuden und "
-"Erkundern geliefert wird."
+"Fisch ist einer der Hauptnahrungsquellen der Atlanter. Er muss in einer "
+"Räucherei geräuchert werden, bevor er zu den Minen, Ausbildungsplätzen und "
+"Kundschaftern gebracht wird."
 
 #: ../../tribes/atlanteans/fish_breeder/conf:1
 msgid "Breeds fish."
@@ -1133,9 +1133,9 @@ msgid ""
 "in the smelting works. Gold is used by the armor smithy, the weapon smithy "
 "and the goldweaver."
 msgstr ""
-"Gold ist eines der wertvollsten Materialien. Es wird aus Golderz in den "
-"Hochöfen gewonnen. Gold wird von der Rüstungsschmiede, der Waffenschmiede "
-"und dem Goldweber verwendet."
+"Gold ist einer der wertvollsten Materialien. Es wird in der Gießerei aus "
+"Golderz hergestellt. Gold wird vom Rüstungsschmied, Waffenschmied und "
+"Goldweber verwendet."
 
 #: ../../tribes/atlanteans/golden_tabard/conf:1
 msgid ""
@@ -1144,8 +1144,8 @@ msgid ""
 "health level 0 to level 1."
 msgstr ""
 "Der goldene Wappenrock wird in der atlantischen Weberei aus Goldgarn "
-"hergestellt. Er wird im Trainingslager – zusammen mit Nahrung – benutzt um "
-"Soldaten von der Gesundheitsstufe 0 auf 1 zu trainieren."
+"hergestellt. Er wird im Trainingslager – zusammen mit Nahrung – benutzt, um "
+"die Lebenspunkte der Soldaten von der Stufe 0 auf 1 zu trainieren."
 
 #: ../../tribes/atlanteans/goldore/conf:1
 msgid ""
@@ -1153,6 +1153,9 @@ msgid ""
 "gold which is used as a precious building material and to produce weapons "
 "and armor."
 msgstr ""
+"Golderz wird in Goldminen abgebaut. Im Hochofen wird es zu Gold verhüttet, "
+"welches für einige grosse Gebäude und zur Herstellung von Waffen und "
+"Rüstungen benötigt wird."
 
 #: ../../tribes/atlanteans/goldyarn/conf:1
 msgid ""
@@ -1176,9 +1179,10 @@ msgid ""
 "weaponsmiths and armorsmiths. Make sure you always got some in reserve! It "
 "is produced by the toolsmith."
 msgstr ""
-"Der Hamme ist ein unverzichtbares Werkzeug. Er wird von Geologen, "
-"Bauarbeitern, Waffen- und Rüstungsschmieden gebraucht. Sorge dafür, dass du "
-"immer einige in Reserve hast! Er wird vom Werkzeugmacher produziert."
+"Der Hammer ist ein grundlegendes Werkzeug. Er wird von Geologen, "
+"Bauarbeitern, sowie von den Waffen- und Rüstungsschmieden benötigt. Stelle "
+"sicher, dass du immer ein paar Hämmer auf Reserve hast. Der Hammer wird vom "
+"Werkzeugmacher hergestellt."
 
 #: ../../tribes/atlanteans/heavy_double_trident/conf:1
 msgid ""
@@ -1187,10 +1191,10 @@ msgid ""
 "used in the dungeon – together with food – to train soldiers from attack "
 "level 3 to level 4."
 msgstr ""
-"Dies ist die gefährllichste Waffe des atlantischen Militärs. Nur die "
-"allerbesten Soldaten dürfen sie verwenden. Sie wird in der Waffenschmiede "
-"hergestellt und im Verlies - zusammen mit Nahrung - verwendet, um Soldaten "
-"von der Angriffsstufe 3 auf 4 zu trainieren."
+"Das ist die gefährlichste Waffe des atlantischen Militärs. Nur die besten "
+"Soldaten mögen sie verwenden. Sie wird in der Waffenschmiede hergestellt und "
+"im Verlies – zusammen mit Nahrung – verwendet um die Angriffsstufe von "
+"Soldaten von 3 auf 4 zu trainieren."
 
 #: ../../tribes/atlanteans/high_tower/conf:9
 msgid "Your soldiers have occupied your High Tower"
@@ -1210,8 +1214,8 @@ msgid ""
 "Horses help to carry items at heavily used roads. They are reared in a horse "
 "farm."
 msgstr ""
-"Pferde helfen dabei, Gegenstände auf viel benutzten Straßen zu tragen. Sie "
-"werden in einer Pferdezucht gezüchtet."
+"Pferde helfen Waren auf viel benützten Straßen zu transportieren. Sie werden "
+"in einem Pferdehof gezüchtet."
 
 #: ../../tribes/atlanteans/horsebreeder/conf:1
 msgid "Breeds the strong atlantean horses"
@@ -1233,16 +1237,16 @@ msgid ""
 "Iron is made out of iron ore in the smelting works. It is used in the "
 "toolsmithy, armor smithy and weapon smithy."
 msgstr ""
-"Eisen wird aus Eisenerz in Hochöfen gewonnen. Es wird vom Werkzeugmacher, "
-"von der Rüstungsschmiede und von der Waffenschmiede benutzt."
+"Eisen wird in Gießereien aus Eisenerz hergestellt. Es wird in der "
+"Werkzeugschmied, Rüstungsschmied und Waffenschmied verwendet."
 
 #: ../../tribes/atlanteans/ironore/conf:1
 msgid ""
 "Iron ore is mined in iron mines. It is smelted in a smelting works to "
 "retrieve the iron."
 msgstr ""
-"Eisenerz wird in Eisenminen abgebaut. Es wird in Hochöfen geschmolzen, um "
-"das Eisen zu gewinnen."
+"Eisenerz wird in Eisenminen abgebaut. Sie werden in Gießereien geschmolzen "
+"um Eisen zu erhalten."
 
 #: ../../tribes/atlanteans/labyrinth/conf:46
 msgid "Upgrade soldier defense from level 0 to level 1"
@@ -1254,7 +1258,7 @@ msgstr "Verbessert Verteidigung des Soldaten von Stufe 1 auf 2"
 
 #: ../../tribes/atlanteans/labyrinth/conf:48
 msgid "Upgrade soldier health from level 0 to level 1"
-msgstr ""
+msgstr "Verbessert die Lebenspunkte des Soldaten von 0 auf 1"
 
 #: ../../tribes/atlanteans/labyrinth/conf:49
 msgid "Upgrade soldier evade from level 0 to level 1"
@@ -1270,9 +1274,10 @@ msgid ""
 "it makes up the equipment of young soldiers. Light tridents are produced in "
 "the weapon smithy as are all other tridents."
 msgstr ""
-"Dies ist die Basiswaffe von atlantischen Soldaten. Zusammen mit einem "
-"Wappenrock bildet er die Ausrüstung junger Soldaten. Leichte Dreizacke "
-"werden wie alle anderen Dreizacke auch in der Waffenschmiede produziert."
+"Dies ist die Grundwaffe der atlantischen Soldaten. Zusammen mit dem "
+"Wappanrock sind sie die Grundausrüstung für junge Soldaten. Leichte "
+"Dreizacke werden, wie alle anderen Dreizacke, in der Waffenschmiede "
+"hergestellt."
 
 #: ../../tribes/atlanteans/long_trident/conf:1
 msgid ""
@@ -1280,9 +1285,9 @@ msgid ""
 "produced in the weapon smithy and used in the dungeon – together with food – "
 "to train soldiers from attack level 0 to level 1."
 msgstr ""
-"Der lange Dreizack ist der erste Dreizack beim Training der Soldaten. Er "
-"wird in der Waffenschmiede produziert und im Verlies - zusammen mit Nahrung -"
-" verwendet, um Soldaten von der Angriffsstufe 0 auf 1 zu trainieren."
+"Der lange Dreizack ist der erste Dreizack im Training der Soldaten. Er wird "
+"in der Waffenschmiede hergestellt und im Verlies – zusammen mit Nahrung – "
+"verwendet um Soldaten von der Angriffsstufe 0 auf 1 zu trainieren."
 
 #: ../../tribes/atlanteans/meat/conf:1
 msgid ""
@@ -1299,8 +1304,8 @@ msgid ""
 "Milking tongs are used by the spider breeder to milk the spiders. They are "
 "produced by the toolsmith."
 msgstr ""
-"Melkzangen werden vom Spinnenzüchter verwendet, um die Spinnen zu melken. "
-"Sie werden vom Werkzeugmacher produziert."
+"Die Melkzange wird vom Spinnenzüchter zum Melken der Spinnen verwendet. Sie "
+"wird vom Werkzeugmacher hergestellt."
 
 #: ../../tribes/atlanteans/mill/conf:26
 msgid "Produce cornflour"
@@ -1336,17 +1341,16 @@ msgid ""
 "use planks to produce the different tridents and mighty ships."
 msgstr ""
 "Bretter sind ein wichtiges Baumaterial der Atlanter. Sie werden in der "
-"Sägemühle aus Stämmen produziert. Der Werkzeugmacher und die Werft verwenden "
-"ebenfalls Bretter, um die verschiedenen Dreizacke und große Schiffe "
-"herzustellen."
+"Sägemühle aus Stämmen hergestellt. Der Waffenschmied sowie die Werft "
+"benötigen sie für Dreizacke und mächtige Schiffe."
 
 #: ../../tribes/atlanteans/quartz/conf:1
 msgid ""
 "These transparent quartz’ are used to build some exclusive buildings. They "
 "are produced in a crystal mine."
 msgstr ""
-"Diese durchsichtigen Bergkristalle werden verwendet, um einige ausgewählte "
-"Gebäude zu bauen. Sie werden in einer Kristallmine gefördert."
+"Dieser durchsichtige Quarz wird beim Bau einiger besonderer Gebäude "
+"verwendet. Er wird in der Kristallmine abgebaut."
 
 #: ../../tribes/atlanteans/saw/conf:1
 msgid ""
@@ -1358,7 +1362,7 @@ msgstr ""
 
 #: ../../tribes/atlanteans/sawyer/conf:1
 msgid "Saws wood to produce planks."
-msgstr "Sägt Stämme, um Bretter zu produzieren."
+msgstr "Sägt Holz um Bretter herzustellen."
 
 #: ../../tribes/atlanteans/scout/conf:1
 msgid ""
@@ -1413,9 +1417,9 @@ msgid ""
 "Shovels are needed for the proper handling of plants. Therefore the forester "
 "and the blackroot farmer are using them. They are produced by the toolsmith."
 msgstr ""
-"Schaufeln werden für den richtigen Umgang mit Pflanzen gebraucht. Daher "
-"verwenden der Förster und der Schwarzwurzel-Bauer sie. Sie werden vom "
-"Werkzeugmacher produziert."
+"Schaufeln werden zum richtigen Umgang mit Pflanzen gebraucht. Daher "
+"verwenden sie die Förster und Schwarzwurzelbauern. Sie werden vom "
+"Werkzeugmacher hergestellt."
 
 #: ../../tribes/atlanteans/small_tower/conf:7
 msgid "Your soldiers have occupied your Small Tower"
@@ -1486,17 +1490,17 @@ msgid ""
 "This yarn is produced by spiders, which are bred by spider farms. It is "
 "processed into spidercloth in a weaving-mill."
 msgstr ""
-"Dieses Garn wird von Spinnen produziert, die in Spinnenfarmen gezüchtet "
-"werden. Es wird in der Weberei zu Spinnenstoff weiterverarbeitet."
+"Dieses Garn wird von Spinnen hergestellt, welche in Spinnenfarmen gezüchtet "
+"werden. Es wird in Webereien zu Spinnenstoffen weiterverarbeitet."
 
 #: ../../tribes/atlanteans/steel_shield/conf:1
 msgid ""
 "This steel shield is produced in the armor smithy and used in the labyrinth "
 "– together with food – to train soldiers from defense level 0 to level 1."
 msgstr ""
-"Dieser Stahlschild wird in der Rüstungsschmiede produziert und wird im "
-"Labyrinth - zusammen mit Nahrung - verwendet, um Soldaten von der "
-"Verteidigungsstufe 0 auf 1 zu trainieren."
+"Dieser Stahlschild wird in der Rüstungsschmiede hergestellt und im Labyrinth "
+"– zusammen mit Nahrung – verwendet um die Verteidigungsstufe von Soldaten "
+"von 0 auf 1 zu trainieren."
 
 #: ../../tribes/atlanteans/steel_trident/conf:1
 msgid ""
@@ -1513,8 +1517,8 @@ msgid ""
 "Stone is a basic building ware of the Atlanteans. It is produced in a quarry "
 "or a crystal mine."
 msgstr ""
-"Stein ist ein grundlegendes Baumaterial der Atlanter. Er wird in einem "
-"Steinbruch oder einer Kristallmine produziert."
+"Stein ist eines der Grundbaumaterialien der Atlanter. Er wird in einem "
+"Steinbruch oder in einer Kristallmine hergestellt."
 
 #: ../../tribes/atlanteans/stonecutter/conf:1
 msgid "Cuts raw pieces of granite out of rocks."
@@ -1582,7 +1586,7 @@ msgstr "Schmiedet eine Schaufel"
 
 #: ../../tribes/atlanteans/tower/conf:8
 msgid "Your soldiers have occupied your Tower"
-msgstr "Deine Soldaten haben deinen Wachturm besetzt."
+msgstr "Deine Soldaten haben deinen Turm besetzt."
 
 #: ../../tribes/atlanteans/trainer/conf:1
 msgid "Trains the soldiers."
@@ -1603,8 +1607,8 @@ msgid ""
 "Water is the essence of life! It is used in the bakery and the horse and "
 "spider farms."
 msgstr ""
-"Wasser ist der Grundstoff des Lebens! Es wird in der Bäckerei, der "
-"Pferdezucht und der Spinnenfarm verwendet."
+"Wasser ist Leben! Es wird in der Bäckerei, der Pferdezucht und der "
+"Spinnenfarm verwendet."
 
 #: ../../tribes/atlanteans/weaponsmith/conf:1
 msgid "Produces weapons for the soldiers."
@@ -1649,134 +1653,3 @@ msgstr "Webt einen goldenen Wappenrock"
 #: ../../tribes/atlanteans/woodcutter/conf:1
 msgid "Fells trees."
 msgstr "Fällt Bäume."
-
-#~ msgid "Your Stronghold discovered an aggressor."
-#~ msgstr "Deine Bastion hat einen Angreifer entdeckt."
-
-#~ msgid "Your Stronghold is under attack."
-#~ msgstr "Deine Bastion wird angegriffen."
-
-#~ msgid "The enemy defeated your soldiers at the Stronghold"
-#~ msgstr "Der Feind hat deine Soldaten an der Bastion besiegt"
-
-#~ msgid "Your soldiers defeated the enemy at the Stronghold"
-#~ msgstr "Deine Soldaten haben den Feind an der Bastion besiegt"
-
-#~ msgid ""
-#~ "Produce steel shield (only for compatibility with old savegames (build13))"
-#~ msgstr ""
-#~ "Schmiedet einen Stahlschild (nur für Abwärtskompatiblität mit "
-#~ "Speicherständen (build13))"
-
-#~ msgid ""
-#~ "Produce advanced shield (only for compatibility with old savegames (build13))"
-#~ msgstr ""
-#~ "Herstellung von verbessertem Schild (nur für Abwärtskompatiblität mit "
-#~ "Speicherständen von build13)"
-
-#~ msgid "Stronghold"
-#~ msgstr "Bastion"
-
-#~ msgid "Upgrade soldier attack 0"
-#~ msgstr "Verbessert Angriff des Soldaten 0"
-
-#~ msgid ""
-#~ "Upgrade soldier attack 0 (only for compatibility with old savegames "
-#~ "(build13))"
-#~ msgstr ""
-#~ "Verbessert Angriff des Soldaten 0 (nur für Abwärtskompatiblität mit "
-#~ "Speicherständen (build13))"
-
-#~ msgid "Upgrade soldier attack 1"
-#~ msgstr "Verbessert Angriff des Soldaten 1"
-
-#~ msgid ""
-#~ "Upgrade soldier attack 1 (only for compatibility with old savegames "
-#~ "(build13))"
-#~ msgstr ""
-#~ "Verbessert Angriff des Soldaten 1 (nur für Abwärtskompatiblität mit "
-#~ "Speicherständen (build13))"
-
-#~ msgid "Upgrade soldier attack 2"
-#~ msgstr "Verbessert Angriff des Soldaten 2"
-
-#~ msgid ""
-#~ "Upgrade soldier attack 2 (only for compatibility with old savegames "
-#~ "(build13))"
-#~ msgstr ""
-#~ "Verbessert Angriff des Soldaten 2 (nur für Abwärtskompatiblität mit "
-#~ "Speicherständen (build13))"
-
-#~ msgid "Upgrade soldier attack 3"
-#~ msgstr "Verbessert Angriff des Soldaten 3"
-
-#~ msgid ""
-#~ "Upgrade soldier attack 3 (only for compatibility with old savegames "
-#~ "(build13))"
-#~ msgstr ""
-#~ "Verbessert Angriff des Soldaten 3 (nur für Abwärtskompatiblität mit "
-#~ "Speicherständen (build13))"
-
-#~ msgid ""
-#~ "Gold ore is mined in gold mines and processed to gold in smelting works."
-#~ msgstr ""
-#~ "Golderz wird in Goldminen abgebaut und in Gießereien zu Gold "
-#~ "weiterverarbeitet."
-
-#~ msgid "Upgrade soldier defense 0"
-#~ msgstr "Verbessert Verteidigung des Soldaten 0"
-
-#~ msgid ""
-#~ "Upgrade soldier defense 0 (only for compatibility with old savegames "
-#~ "(build13))"
-#~ msgstr ""
-#~ "Verbessert Verteidigung des Soldaten 0 (nur für Abwärtskompatiblität mit "
-#~ "Speicherständen (build13))"
-
-#~ msgid "Upgrade soldier defense 1"
-#~ msgstr "Verbessert Verteidigung des Soldaten 1"
-
-#~ msgid ""
-#~ "Upgrade soldier defense 1 (only for compatibility with old savegames "
-#~ "(build13))"
-#~ msgstr ""
-#~ "Verbessert Verteidigung des Soldaten 1 (nur für Abwärtskompatiblität mit "
-#~ "Speicherständen (build13))"
-
-#~ msgid "Upgrade soldier health 0"
-#~ msgstr "Verbessert die Gesundheitsstufe des Soldaten 0"
-
-#~ msgid ""
-#~ "Upgrade soldier health 0 (only for compatibility with old savegames "
-#~ "(build13))"
-#~ msgstr ""
-#~ "Verbessert die Gesundheitsstufe des Soldaten 0 (nur für Abwärtskompatiblität "
-#~ "mit Speicherständen (build13))"
-
-#~ msgid "Upgrade soldier evade 0"
-#~ msgstr "Verbessert Ausweichen des Soldaten 0"
-
-#~ msgid ""
-#~ "Upgrade soldier evade 0 (only for compatibility with old savegames (build13))"
-#~ msgstr ""
-#~ "Verbessert Ausweichen des Soldaten 0 (nur für Abwärtskompatiblität mit "
-#~ "Speicherständen (build13))"
-
-#~ msgid "Upgrade soldier evade 1"
-#~ msgstr "Verbessert Ausweichen des Soldaten 1"
-
-#~ msgid ""
-#~ "Upgrade soldier evade 1 (only for compatibility with old savegames (build13))"
-#~ msgstr ""
-#~ "Verbessert Ausweichen des Soldaten 1 (nur für Abwärtskompatiblität mit "
-#~ "Speicherständen (build13))"
-
-#~ msgid ""
-#~ "Some of your starting buildings didn’t have enough room and\n"
-#~ "weren’t built. You are at a disadvantage with this; consider restarting\n"
-#~ "this map with a fair starting condition."
-#~ msgstr ""
-#~ "Für einige deiner Startgebäude war nicht genügend Platz und\n"
-#~ "sie wurden daher nicht gebaut. Dadurch bist du im Nachteil; überlege,\n"
-#~ "ob du diese Karte nicht unter gerechten Startbedingungen nochmals starten "
-#~ "möchtest."

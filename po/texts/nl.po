@@ -7,13 +7,13 @@ msgstr ""
 "Project-Id-Version: Widelands svn4575\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2014-03-12 21:37+0000\n"
-"PO-Revision-Date: 2014-03-11 09:58+0000\n"
-"Last-Translator: GunChleoc <Unknown>\n"
+"PO-Revision-Date: 2014-03-14 21:30+0000\n"
+"Last-Translator: fk <Unknown>\n"
 "Language-Team: Widelands fixxer upper\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-03-13 05:29+0000\n"
+"X-Launchpad-Export-Date: 2014-03-15 05:39+0000\n"
 "X-Generator: Launchpad (build 16963)\n"
 "X-Poedit-Country: Netherlands\n"
 "Language: nl\n"
@@ -136,11 +136,11 @@ msgstr "Sneltoetsen (tijdens het spel)"
 
 #: ../../txts/README.lua:61
 msgid "PAGEUP: increases game speed"
-msgstr ""
+msgstr "PAGEUP: verhoogt spelsnelheid"
 
 #: ../../txts/README.lua:62
 msgid "PAGEDOWN: decreases game speed"
-msgstr ""
+msgstr "PAGEDOWN: verlaagt spelsnelheid"
 
 #: ../../txts/README.lua:63
 msgid "PAUSE: pauses the game"
@@ -149,7 +149,7 @@ msgstr "PAUSE: pauzeert het spel"
 #: ../../txts/README.lua:64
 #: ../../txts/editor_readme:21
 msgid "SPACE: toggles if building spaces are shown"
-msgstr ""
+msgstr "SPATIEBALK: Schakelt bouwhulp aan/uit"
 
 #: ../../txts/README.lua:65
 #: ../../txts/editor_readme:31
@@ -274,6 +274,10 @@ msgid ""
 "the revision number if you are running a development version or a daily "
 "build.)"
 msgstr ""
+"- Welke versie van Widelands je draait (de Build-versie van een officiële "
+"versie of\n"
+"het revisienummer indien je een ontwikkelingsversie of een nightly build "
+"draait.)"
 
 #: ../../txts/README.lua:106
 msgid ""
@@ -593,47 +597,51 @@ msgstr "Sneltoetsen"
 
 #: ../../txts/editor_readme:25
 msgid "E: toggles event menu"
-msgstr ""
+msgstr "E: Schakelt gebeurtenissenmenu aan/uit"
 
 #: ../../txts/editor_readme:27
 msgid "F: toggles fullscreen"
-msgstr ""
+msgstr "F: Schakelt volledig scherm aan/uit"
 
 #: ../../txts/editor_readme:29
 msgid "H: toggles main menu"
-msgstr ""
+msgstr "H: Schakelt hoofdmenu aan/uit"
 
 #: ../../txts/editor_readme:33
 msgid "P: toggles player menu"
-msgstr ""
+msgstr "P: Schakelt spelersmenu aan/uit"
 
 #: ../../txts/editor_readme:35
 msgid "T: toggles tools menu"
-msgstr ""
+msgstr "T: Schakels gereedschapsmenu aan/uit"
 
 #: ../../txts/editor_readme:37
 msgid "I: activates information tool"
-msgstr ""
+msgstr "I: Activeert informatiegereedschap"
 
 #: ../../txts/editor_readme:39
 msgid "CTRL+L: load Map"
-msgstr ""
+msgstr "CTRL+L: kaart laden"
 
 #: ../../txts/editor_readme:41
 msgid "CTRL+S: save Map"
-msgstr ""
+msgstr "CTRL+S: kaart opslaan"
 
 #: ../../txts/editor_readme:43
 msgid "1-0: changes tool size"
-msgstr ""
+msgstr "1-0: past gereedschapsgrootte  aan"
 
 #: ../../txts/editor_readme:45
 msgid "SHIFT (Hold): selects first alternative tool while pressed"
 msgstr ""
+"SHIFT (Vasthouden): selecteert eerste alternatieve gereedschap, zolang "
+"ingedrukt"
 
 #: ../../txts/editor_readme:47
 msgid "ALT (Hold): Selects second alternative tool while pressed"
 msgstr ""
+"ALT (Vasthouden): selecteert tweede alternatieve gereedschap, zolang "
+"ingedrukt"
 
 #: ../../txts/license:1
 msgid "License"
@@ -645,7 +653,7 @@ msgstr "Licentiegegevens voor Widelands"
 
 #: ../../txts/license:7
 msgid "Copyright 2002 - 2014 by the Widelands Development Team."
-msgstr ""
+msgstr "Copyright 2002 - 2014 door het Widelands Ontwikkelingsteam."
 
 #: ../../txts/license:9
 msgid ""
@@ -678,7 +686,7 @@ msgstr ""
 #: ../../txts/license:16
 msgid ""
 "We are also shipping the GPL as a text document with Widelands itself."
-msgstr ""
+msgstr "We leveren de GPL ook mee als tekstdocument met Widelands."
 
 #: ../../txts/license:18
 msgid ""
@@ -695,6 +703,9 @@ msgid ""
 "On Windows, you can find the file called COPYING.txt in the installation "
 "folder, and the Widelands Start menu entry provides a link to this file."
 msgstr ""
+"Onder Windows kun je het bestand genaamd COPYING.txt in de installatie-"
+"directorie vinden, en onder Widelands in het Start menu staat een koppeling "
+"naar dit bestand."
 
 #: ../../txts/license:20
 msgid ""
@@ -711,6 +722,10 @@ msgid ""
 "questions or general support) or https://launchpad.net/widelands "
 "(Bugtracker, Translations)."
 msgstr ""
+"Dit spel wordt geleverd zoals het is en zonder garantie. Voor verdere "
+"informatie en ondersteuning kun je ons vinden op  http://wl.widelands.org "
+"(Website, WIki, Forum voor vragen of algemene ondersteuning) of "
+"https://launchpad.net/widelands (Bugtracker, Translations)."
 
 #: ../../txts/tips/atlanteans.tip:2
 #: ../../txts/tips/barbarians.tip:2
@@ -727,6 +742,8 @@ msgid ""
 "Always build a forester’s and a fish breeder’s house, so you will not run "
 "out of logs or food."
 msgstr ""
+"Bouw altijd een boswachters- en viskwekershuis, zodat je altijd bent "
+"voorzien van boomstammen en voedsel."
 
 #: ../../txts/tips/barbarians.tip:6
 #: ../../txts/tips/empire.tip:6
@@ -742,12 +759,16 @@ msgid ""
 "Always build a ranger’s and a gamekeeper’s hut, so you will not run out of "
 "logs or food."
 msgstr ""
+"Bouw altijd een boswachters- en jachtopzichtershut, zodat je altijd bent "
+"voorzien van boomstammen en voedsel."
 
 #: ../../txts/tips/editor.tip:2
 msgid ""
 "You can find general help for the editor as well as a short tutorial on our "
 "wiki at www.widelands.org"
 msgstr ""
+"Je kunt algemene hulp en een korte handleiding vinden in onze wiki op "
+"www.widelands.org"
 
 #: ../../txts/tips/editor.tip:6
 msgid ""
@@ -764,6 +785,8 @@ msgid ""
 "Just like with natural objects (bobs), you can also select multiple animals "
 "or ground textures with CTRL + mouse click."
 msgstr ""
+"Net als met natuurlijke objecten (bobs), kun je ook meerdere dieren- of "
+"bodemtypen selecteren met CTRL + muisklik."
 
 #: ../../txts/tips/editor.tip:14
 msgid ""
@@ -771,11 +794,17 @@ msgid ""
 "most cases the complete opposite of the normal tool (for example deletion of "
 "an object instead of placing one)."
 msgstr ""
+"SHIFT ingedrukt houden schakelt het eerste alternatieve gereedschap aan. Dit "
+"gereedschap is in de meeste gevallen het compleet tegenovergestelde van het "
+"normale gereedschap (bijvoorbeeld het verwijderen van een object in plaats "
+"van het plaatsen ervan)."
 
 #: ../../txts/tips/editor.tip:18
 msgid ""
 "Holding down ALT switches the second alternative tool on (if it exists)."
 msgstr ""
+"ALT ingedrukt houden zet het tweede alternatieve gereedschap aan (als dit "
+"bestaat)."
 
 #: ../../txts/tips/editor.tip:22
 msgid ""
@@ -790,10 +819,14 @@ msgid ""
 "SPACE key behaves like in normal game. It switches if building spaces are "
 "shown on or off."
 msgstr ""
+"SPATIEBALK werkt net als tijdens het normale spel. Het zet de bouwhulp aan "
+"of uit."
 
 #: ../../txts/tips/empire.tip:10
 msgid "Always build a forester’s house so you will not run out of logs."
 msgstr ""
+"Bouw altijd een boswachtershuis, zodat je altijd bent voorzien van "
+"boomstammen."
 
 #: ../../txts/tips/general_game.tip:2
 msgid ""
@@ -815,10 +848,12 @@ msgid ""
 "Your territory can be expanded by building various military buildings – "
 "Sentry, Fortress, Barracks, etc."
 msgstr ""
+"Je territorium kan worden uitgebreid door verscheidene militaire gebouwen te "
+"bouwen - wachthuis, vesting, barakken enz."
 
 #: ../../txts/tips/general_game.tip:14
 msgid "Miners will work only if supplied with food."
-msgstr ""
+msgstr "Mijnwerkers werken niet zonder voedsel."
 
 #: ../../txts/tips/general_game.tip:18
 msgid ""
@@ -833,18 +868,24 @@ msgid ""
 "Any further questions? Our FAQ, the wiki and of course our community forums "
 "can be found at www.widelands.org."
 msgstr ""
+"Nog meer vragen? Onze veelgestelde vragen (FAQ's), de wiki en uiteraard onze "
+"gemeenschapsfora zijn te vinden op www.widelands.org."
 
 #: ../../txts/tips/general_game.tip:26
 msgid ""
 "Use the priority buttons in building windows to adjust delivery of a "
 "specific ware."
 msgstr ""
+"Gebruik de prioriteitsknoppen in het gebouwvenster om de levering van "
+"specifieke goederen aan te passen."
 
 #: ../../txts/tips/general_game.tip:30
 msgid ""
 "Use the ‘configure economy’ menu to adjust the target quantity of wares. It "
 "can be accessed via the flag menu."
 msgstr ""
+"Gebruik het 'configureer economie' menu om de gewenste hoeveelheid van "
+"goederen aan te passen. Het is bereikbaar via het vlagmenu."
 
 #: ../../txts/tips/general_game.tip:34
 msgid ""
@@ -852,12 +893,17 @@ msgid ""
 "messages window, then use ‘G’ for Go To, and the Delete key to archive "
 "messages."
 msgstr ""
+"Beheer je berichten efficiënter: druk 'N' van Nieuws om het berichtenvenster "
+"te bekijken, daarna 'G' van Ga Naar en de Deletetoets om berichten te "
+"archiveren."
 
 #: ../../txts/tips/general_game.tip:38
 msgid ""
 "Use the ‘,’ (comma) and ‘.’ (period) keys to go back and forth between "
 "recently visited places in the world."
 msgstr ""
+"Gebruik de ',' (komma) en '.' (punt) toetsen om voor- en achteruit te gaan "
+"in de recent bezochte plaatsen in de wereld."
 
 #: ../../txts/tips/general_game.tip:42
 msgid ""
@@ -871,12 +917,16 @@ msgid ""
 "Pressing and holding the ALT GR key lets you drag the window below the mouse "
 "pointer."
 msgstr ""
+"Met indrukken en vasthouden van de ALT GR toets kun je een venster verslepen "
+"onder de muis pointer."
 
 #: ../../txts/tips/general_game.tip:50
 msgid ""
 "Removing a road while holding Ctrl lets you remove all flags up to the first "
 "junction."
 msgstr ""
+"Het verwijderen van een weg tot de eerstvolgende kruising kan je doen door "
+"Ctrl ingedrukt te houden."
 
 #: ../../txts/tips/general_game.tip:54
 msgid ""
@@ -914,17 +964,23 @@ msgid ""
 "You can use the ’Page up’ and ‘Page down’ keys to adjust your desired speed "
 "– the real speed is then democratically set."
 msgstr ""
+"Je kan de 'Page up' en 'Page down' toetsen gebruiken om je gewenste snelheid "
+"aan te passen - De echte snelheid wordt daarna democratisch bepaald."
 
 #: ../../txts/tips/multiplayer.tip:6
 msgid ""
 "You can use ‘/me’ at the beginning of a chatmessage: ‘/me is tired’ will be "
 "printed as ‘-> Nickname is tired’."
 msgstr ""
+"Je kunt '/me' gebruiken aan het begin van een chatbericht. '/me is moe' zal "
+"worden weergegeven als '-> nickname is moe'."
 
 #: ../../txts/tips/multiplayer.tip:10
 msgid ""
 "Use ‘@name’ at the beginning of a chat message to send it to only one player."
 msgstr ""
+"Gebruik '@name' aan  het begin van een bericht om het naar één speler te "
+"sturen."
 
 #: ../../txts/tips/singleplayer.tip:2
 msgid ""

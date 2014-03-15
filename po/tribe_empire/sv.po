@@ -1,21 +1,22 @@
 # Widelands po/sv_SE/tribes/empire.po
 # Copyright (C) 2008 Widelands Development Team
 # Daniel Nylander <po@danielnylander.se>, 2005.
-#
+# GunChleoc <fios@foramnagaidhlig.net>, 2014.
 msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2014-03-12 21:37+0000\n"
-"PO-Revision-Date: 2012-04-22 16:00+0000\n"
-"Last-Translator: Patrick H. <dajgtre@gmail.com>\n"
-"Language-Team: Language <widelands-public@lists.sourceforge.net>\n"
+"PO-Revision-Date: 2014-03-15 03:20+0000\n"
+"Last-Translator: GunChleoc <Unknown>\n"
+"Language-Team: Widelands fixxer upper\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-03-13 05:33+0000\n"
+"X-Launchpad-Export-Date: 2014-03-15 05:41+0000\n"
 "X-Generator: Launchpad (build 16963)\n"
 "X-Poedit-Country: swe\n"
+"Language: sv\n"
 "X-Poedit-Language: swe\n"
 
 #: ../../global/militarysites/barracks.empire/conf:8
@@ -301,7 +302,7 @@ msgstr ""
 
 #: ../../tribes/empire/armoursmith/conf:1
 msgid "Produces armor for the soldiers."
-msgstr ""
+msgstr "Framställer rustningar till soldaterna."
 
 #: ../../tribes/empire/armoursmithy/conf:31
 msgid "Produce helm"
@@ -409,7 +410,7 @@ msgstr "Tillverkar öl eller vin."
 
 #: ../../tribes/empire/builder/conf:1
 msgid "Works at construction sites to raise new buildings."
-msgstr ""
+msgstr "Arbetar på byggnadsplatser för att resa nya byggnader."
 
 #: ../../tribes/empire/burner/conf:1
 msgid "Burns coal."
@@ -469,23 +470,23 @@ msgstr "Aska"
 
 #: ../../tribes/empire/conf:34
 msgid "Field (medium)"
-msgstr ""
+msgstr "Vetefält, mellan"
 
 #: ../../tribes/empire/conf:35
 msgid "Field (small)"
-msgstr ""
+msgstr "Vetefält, litet"
 
 #: ../../tribes/empire/conf:36
 msgid "Field (tiny)"
-msgstr ""
+msgstr "Vetefält, nysått"
 
 #: ../../tribes/empire/conf:37
 msgid "Field (ripe)"
-msgstr ""
+msgstr "Vetefält, moget"
 
 #: ../../tribes/empire/conf:38
 msgid "Field (harvested)"
-msgstr ""
+msgstr "Vetefält, skördat"
 
 #: ../../tribes/empire/conf:39
 msgid "Destroyed Building"
@@ -493,43 +494,43 @@ msgstr ""
 
 #: ../../tribes/empire/conf:40
 msgid "Resource indicator: Coal (little)"
-msgstr ""
+msgstr "Resursindikator kol lite"
 
 #: ../../tribes/empire/conf:41
 msgid "Resource indicator: Coal (much)"
-msgstr ""
+msgstr "Resursindikator kol mycket"
 
 #: ../../tribes/empire/conf:42
 msgid "Resource indicator: Gold (little)"
-msgstr ""
+msgstr "Resursindikator guld lite"
 
 #: ../../tribes/empire/conf:43
 msgid "Resource indicator: Gold (much)"
-msgstr ""
+msgstr "Resursindikator guld mycket"
 
 #: ../../tribes/empire/conf:44
 msgid "Resource indicator: Granite (little)"
-msgstr ""
+msgstr "Resursindikator granit lite"
 
 #: ../../tribes/empire/conf:45
 msgid "Resource indicator: Granite (much)"
-msgstr ""
+msgstr "Resursindikator granit hög"
 
 #: ../../tribes/empire/conf:46
 msgid "Resource indicator: Iron (little)"
-msgstr ""
+msgstr "Resursindikator järn lite"
 
 #: ../../tribes/empire/conf:47
 msgid "Resource indicator: Iron (much)"
-msgstr ""
+msgstr "Resursindikator järn mycket"
 
 #: ../../tribes/empire/conf:48
 msgid "Resource indicator: No resource"
-msgstr ""
+msgstr "Resursindikator ingenting"
 
 #: ../../tribes/empire/conf:49
 msgid "Resource indicator: Water"
-msgstr ""
+msgstr "Resursindikator vatten"
 
 #: ../../tribes/empire/conf:50
 msgid "Vine (medium)"
@@ -549,7 +550,7 @@ msgstr ""
 
 #: ../../tribes/empire/conf:54
 msgid "Ship Construction Site"
-msgstr ""
+msgstr "Byggplats för skepp"
 
 #: ../../tribes/empire/conf:57
 msgid "Advanced Lance"
@@ -613,7 +614,7 @@ msgstr "Guld"
 
 #: ../../tribes/empire/conf:72
 msgid "Gold Ore"
-msgstr ""
+msgstr "Guldmalm"
 
 #: ../../tribes/empire/conf:73
 msgid "Grape"
@@ -741,7 +742,7 @@ msgstr "Krigare"
 
 #: ../../tribes/empire/conf:110
 msgid "Armorsmith"
-msgstr ""
+msgstr "Rustningssmed"
 
 #: ../../tribes/empire/conf:111
 msgid "Baker"
@@ -938,15 +939,15 @@ msgstr ""
 
 #: ../../tribes/empire/conf:170
 msgid "Forester’s House"
-msgstr ""
+msgstr "Skogvaktarboställe"
 
 #: ../../tribes/empire/conf:171
 msgid "Fisher’s House"
-msgstr ""
+msgstr "Fiskestuga"
 
 #: ../../tribes/empire/conf:172
 msgid "Hunter’s House"
-msgstr ""
+msgstr "Jägarstuga"
 
 #: ../../tribes/empire/conf:173
 msgid "Well"
@@ -954,7 +955,7 @@ msgstr "Brunn"
 
 #: ../../tribes/empire/conf:174
 msgid "Scout’s House"
-msgstr ""
+msgstr "Spejarhytta"
 
 #: ../../tribes/empire/conf:175
 msgid "Stonemason’s House"
@@ -1010,7 +1011,7 @@ msgstr "Verktygssmedja"
 
 #: ../../tribes/empire/conf:188
 msgid "Armor Smithy"
-msgstr ""
+msgstr "Rustningssmedja"
 
 #: ../../tribes/empire/conf:189
 msgid "Donkey Farm"
@@ -1086,19 +1087,19 @@ msgstr "Arena"
 
 #: ../../tribes/empire/conf:218
 msgid "Training Camp"
-msgstr ""
+msgstr "Träningsläger"
 
 #: ../../tribes/empire/conf:221
 msgid "Headquarters Medium"
-msgstr ""
+msgstr "Huvudkvarter medium"
 
 #: ../../tribes/empire/conf:222
 msgid "Castle Village"
-msgstr ""
+msgstr "Slottsby"
 
 #: ../../tribes/empire/donkey/conf:1
 msgid "Helps to carry items along busy roads."
-msgstr ""
+msgstr "Hjälper till att bära saker på tungt trafikerade vägar."
 
 #: ../../tribes/empire/donkeybreeder/conf:1
 msgid "Breeds cute and helpful donkeys"
@@ -1174,6 +1175,9 @@ msgid ""
 "gold which is used as a precious building material and to produce weapons "
 "and armor."
 msgstr ""
+"Guldmalm utvinns i en guldgruva. Smält i ett smälteri blir det guld, som "
+"används som ett dyrbart byggnadsmaterial och för att framställa vapen och "
+"rustningar."
 
 #: ../../tribes/empire/grape/conf:1
 msgid ""
@@ -1215,11 +1219,11 @@ msgstr ""
 
 #: ../../tribes/empire/inn/conf:25
 msgid "Produce ration"
-msgstr ""
+msgstr "Producera ranson"
 
 #: ../../tribes/empire/inn/conf:26
 msgid "Produce meal"
-msgstr ""
+msgstr "Producera måltid"
 
 #: ../../tribes/empire/innkeeper/conf:1
 msgid "Produces food for miners."
@@ -1346,6 +1350,8 @@ msgstr "Denna såg behövs av sågaren. Den tillverkas av verktygssmeden."
 msgid ""
 "Scouts like Scotty the scout scouting unscouted areas in a scouty fashion."
 msgstr ""
+"Spejare som Scotty Spejare spejar ut outforskade områden på ett spejande "
+"sätt."
 
 #: ../../tribes/empire/scripting/sc00_headquarters_medium.lua:10
 msgid "Headquarters medium"
@@ -1365,11 +1371,14 @@ msgid ""
 "You are at a disadvantage with this; consider restarting this map with a "
 "fair starting condition."
 msgstr ""
+"Några av dina startbyggnader hade inte tillräckligt med plats och byggdes "
+"inte. Du har en nackdel p.g.a detta; fundera över att starta om kartan med "
+"rättvisa startförhållanden."
 
 #: ../../tribes/empire/scythe/conf:1
 msgid ""
 "The Scythe is the tool of the farmer. It is produced by the toolsmith."
-msgstr ""
+msgstr "Lien är bondens redskap. Den tillverkas hos verktygssmeden."
 
 #: ../../tribes/empire/sentry/conf:7
 msgid "Your soldiers have occupied your Sentry"

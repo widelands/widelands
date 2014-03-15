@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: Widelands svn4575\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2014-03-12 21:37+0000\n"
-"PO-Revision-Date: 2014-03-11 09:56+0000\n"
-"Last-Translator: GunChleoc <Unknown>\n"
+"PO-Revision-Date: 2014-03-14 14:44+0000\n"
+"Last-Translator: fk <Unknown>\n"
 "Language-Team: Widelands fixxer upper\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-03-13 05:29+0000\n"
+"X-Launchpad-Export-Date: 2014-03-15 05:39+0000\n"
 "X-Generator: Launchpad (build 16963)\n"
 "X-Poedit-Country: Netherlands\n"
 "Language: nl\n"
@@ -259,7 +259,7 @@ msgstr ""
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:128
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:130
 msgid "Build a reed yard"
-msgstr ""
+msgstr "Bouw een rietkwekerij"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:131
 msgid ""
@@ -274,7 +274,7 @@ msgstr ""
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:138
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:140
 msgid "Build a cattle farm"
-msgstr ""
+msgstr "Bouw een veeboerderij"
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:141
 msgid ""
@@ -546,7 +546,7 @@ msgstr "De ouderling springt in de lucht..."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:278
 msgid "Wisdom commands to seek variety."
-msgstr ""
+msgstr "Wijsheid gebied ons te diversificeren."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:279
 msgid ""
@@ -554,6 +554,9 @@ msgid ""
 "Mother Nature gave us and build a farm? I sure would enjoy a freshly baked "
 "pitta bread for a change..."
 msgstr ""
+"Ten noorden van de grote berg ligt een uitgestrekte vlakte - waarom "
+"gebruiken we de ruimte van moeder natuur niet voor een boerderij? Een vers "
+"pitabroodje zou niet slecht zijn ter afwisseling..."
 
 #: ../../campaigns/t02.wmf/scripting/mission_thread_texts.lua:286
 msgid "Boldreth cheers up..."
@@ -871,10 +874,10 @@ msgstr "Ze hebben besloten zicht bij ons aan te sluiten!"
 
 #: ../../scripting/format_scenario.lua:36
 msgid "“%s”"
-msgstr ""
+msgstr "\"%s\""
 
 #: ../../scripting/format_scenario.lua:80
 msgid "New Objective"
 msgid_plural "New Objectives"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Nieuwe opdracht"
+msgstr[1] "Nieuwe opdrachten"

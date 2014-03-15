@@ -8,13 +8,13 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-03-12 21:37+0000\n"
-"PO-Revision-Date: 2014-03-06 11:08+0000\n"
+"PO-Revision-Date: 2014-03-14 14:58+0000\n"
 "Last-Translator: GunChleoc <Unknown>\n"
 "Language-Team: Fòram na Gàidhlig http://www.foramnagaidhlig.net\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-03-13 05:32+0000\n"
+"X-Launchpad-Export-Date: 2014-03-15 05:41+0000\n"
 "X-Generator: Launchpad (build 16963)\n"
 "Language: gd\n"
 
@@ -293,7 +293,7 @@ msgstr "'Na chadal"
 #: ../../tribes/empire/arena/conf:30
 #: ../../tribes/empire/colosseum/conf:36
 msgid "Upgrade soldier evade from level 0 to level 1"
-msgstr ""
+msgstr "àrdachadh teàrnadh saighdeir o leibheil 0 gu leibheil 1"
 
 #: ../../tribes/empire/armour/conf:1
 msgid ""
@@ -470,7 +470,7 @@ msgstr ""
 
 #: ../../tribes/empire/colosseum/conf:37
 msgid "Upgrade soldier evade from level 1 to level 2"
-msgstr ""
+msgstr "àrdachadh teàrnadh saighdeir o leibheil 1 gu leibheil 2"
 
 #: ../../tribes/empire/conf:4
 msgid "The Widelands Development Team"
@@ -1202,6 +1202,9 @@ msgid ""
 "gold which is used as a precious building material and to produce weapons "
 "and armor."
 msgstr ""
+"Tochlaidh tu clach-òir ann am mèinn òir. Thèid e na òr ma leaghas tu ann an "
+"ceàrdach leaghadair e is thèid a chleachdadh mas stuth togail uasal is gus "
+"airm is armachd a shaothrachadh."
 
 #: ../../tribes/empire/grape/conf:1
 msgid ""
@@ -1434,6 +1437,9 @@ msgid ""
 "You are at a disadvantage with this; consider restarting this map with a "
 "fair starting condition."
 msgstr ""
+"Cha robh rum gu leòr ann airson cuid dhe na togalaichean tòiseachaidh agad "
+"is cha deach an togail. Cuiridh seo èis ort; saoil an tòisich thu air a' "
+"mhapa seo a-rithist le cumhan tòiseachaidh cothromach?"
 
 #: ../../tribes/empire/scythe/conf:1
 msgid ""
@@ -1559,35 +1565,35 @@ msgstr "Trèanaidh e na saighdearan."
 
 #: ../../tribes/empire/trainingscamp/conf:47
 msgid "Upgrade soldier attack from level 0 to level 1"
-msgstr ""
+msgstr "àrdachadh ionnsaigh saighdeir o leibheil 0 gu leibheil 1"
 
 #: ../../tribes/empire/trainingscamp/conf:48
 msgid "Upgrade soldier attack from level 1 to level 2"
-msgstr ""
+msgstr "àrdachadh ionnsaigh saighdeir o leibheil 1 gu leibheil 2"
 
 #: ../../tribes/empire/trainingscamp/conf:49
 msgid "Upgrade soldier attack from level 2 to level 3"
-msgstr ""
+msgstr "àrdachadh ionnsaigh saighdeir o leibheil 2 gu leibheil 3"
 
 #: ../../tribes/empire/trainingscamp/conf:50
 msgid "Upgrade soldier attack from level 3 to level 4"
-msgstr ""
+msgstr "àrdachadh ionnsaigh saighdeir o leibheil 3 gu leibheil 4"
 
 #: ../../tribes/empire/trainingscamp/conf:51
 msgid "Upgrade soldier health from level 0 to level 1"
-msgstr ""
+msgstr "àrdachadh slàinte saighdeir o leibheil 0 gu leibheil 1"
 
 #: ../../tribes/empire/trainingscamp/conf:52
 msgid "Upgrade soldier health from level 1 to level 2"
-msgstr ""
+msgstr "àrdachadh slàinte saighdeir o leibheil 1 gu leibheil 2"
 
 #: ../../tribes/empire/trainingscamp/conf:53
 msgid "Upgrade soldier health from level 2 to level 3"
-msgstr ""
+msgstr "àrdachadh slàinte saighdeir o leibheil 2 gu leibheil 3"
 
 #: ../../tribes/empire/trainingscamp/conf:54
 msgid "Upgrade soldier health from level 3 to level 4"
-msgstr ""
+msgstr "àrdachadh slàinte saighdeir o leibheil 3 gu leibheil 4"
 
 #: ../../tribes/empire/trunk/conf:1
 msgid ""

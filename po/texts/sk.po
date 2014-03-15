@@ -13,13 +13,13 @@ msgstr ""
 "Project-Id-Version: Widelands svn4322\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2014-03-12 21:37+0000\n"
-"PO-Revision-Date: 2014-03-08 06:24+0000\n"
+"PO-Revision-Date: 2014-03-15 02:31+0000\n"
 "Last-Translator: Miroslav Remák <Unknown>\n"
 "Language-Team: Slovak <sk@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2014-03-13 05:29+0000\n"
+"X-Launchpad-Export-Date: 2014-03-15 05:40+0000\n"
 "X-Generator: Launchpad (build 16963)\n"
 "Language: sk\n"
 
@@ -143,11 +143,11 @@ msgstr "Klávesové skratky (počas hry)"
 
 #: ../../txts/README.lua:61
 msgid "PAGEUP: increases game speed"
-msgstr ""
+msgstr "PAGEUP: zvýši rýchlosť hry"
 
 #: ../../txts/README.lua:62
 msgid "PAGEDOWN: decreases game speed"
-msgstr ""
+msgstr "PAGEDOWN: zníži rýchlosť hry"
 
 #: ../../txts/README.lua:63
 msgid "PAUSE: pauses the game"
@@ -594,47 +594,49 @@ msgstr "Klávesové skratky"
 
 #: ../../txts/editor_readme:25
 msgid "E: toggles event menu"
-msgstr ""
+msgstr "E: prepne menu udalostí"
 
 #: ../../txts/editor_readme:27
 msgid "F: toggles fullscreen"
-msgstr ""
+msgstr "F: prepne režim celej obrazovky"
 
 #: ../../txts/editor_readme:29
 msgid "H: toggles main menu"
-msgstr ""
+msgstr "H: prepne hlavné menu"
 
 #: ../../txts/editor_readme:33
 msgid "P: toggles player menu"
-msgstr ""
+msgstr "P: prepne menu hráčov"
 
 #: ../../txts/editor_readme:35
 msgid "T: toggles tools menu"
-msgstr ""
+msgstr "T: prepne menu nástrojov"
 
 #: ../../txts/editor_readme:37
 msgid "I: activates information tool"
-msgstr ""
+msgstr "I: aktivuje informačný nástroj"
 
 #: ../../txts/editor_readme:39
 msgid "CTRL+L: load Map"
-msgstr ""
+msgstr "CTRL+L: načítať mapu"
 
 #: ../../txts/editor_readme:41
 msgid "CTRL+S: save Map"
-msgstr ""
+msgstr "CTRL+S: uložiť mapu"
 
 #: ../../txts/editor_readme:43
 msgid "1-0: changes tool size"
-msgstr ""
+msgstr "1-0: menia veľkosť nástroja"
 
 #: ../../txts/editor_readme:45
 msgid "SHIFT (Hold): selects first alternative tool while pressed"
 msgstr ""
+"SHIFT (Podržať): kým je stlačený, vybratý je prvý alternatívny nástroj"
 
 #: ../../txts/editor_readme:47
 msgid "ALT (Hold): Selects second alternative tool while pressed"
 msgstr ""
+"ALT (Podržať): kým je stlačený, vybratý je druhý alternatívny nástroj"
 
 #: ../../txts/license:1
 msgid "License"

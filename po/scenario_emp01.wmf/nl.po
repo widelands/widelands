@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: Widelands svn4556\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
 "POT-Creation-Date: 2014-03-12 21:37+0000\n"
-"PO-Revision-Date: 2014-03-10 08:51+0000\n"
-"Last-Translator: GunChleoc <Unknown>\n"
+"PO-Revision-Date: 2014-03-14 14:23+0000\n"
+"Last-Translator: fk <Unknown>\n"
 "Language-Team: Widelands fixxer upper\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-03-13 05:28+0000\n"
+"X-Launchpad-Export-Date: 2014-03-15 05:39+0000\n"
 "X-Generator: Launchpad (build 16963)\n"
 "X-Poedit-Country: NETHERLANDS\n"
 "Language: nl\n"
@@ -28,7 +28,7 @@ msgstr "Bouw een barak"
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:30
 msgid "Barracks"
-msgstr ""
+msgstr "Barakken"
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:31
 msgid ""
@@ -44,7 +44,7 @@ msgstr "Bouw een houthakkershut"
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:38
 msgid "Lumberjack’s House"
-msgstr ""
+msgstr "Houthakkershuis"
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:39
 msgid ""
@@ -84,7 +84,7 @@ msgstr "Bouw een boswachtershuis"
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:56
 msgid "Forester’s House"
-msgstr ""
+msgstr "Boswachtershuis"
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:57
 msgid ""
@@ -98,7 +98,7 @@ msgstr "Bouw een steengroeve"
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:64
 msgid "Quarry"
-msgstr ""
+msgstr "Steengroeve"
 
 #: ../../campaigns/emp01.wmf/scripting/texts.lua:65
 msgid ""
@@ -515,10 +515,10 @@ msgstr ""
 
 #: ../../scripting/format_scenario.lua:36
 msgid "“%s”"
-msgstr ""
+msgstr "\"%s\""
 
 #: ../../scripting/format_scenario.lua:80
 msgid "New Objective"
 msgid_plural "New Objectives"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Nieuwe opdracht"
+msgstr[1] "Nieuwe opdrachten"

@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-03-12 21:37+0000\n"
-"PO-Revision-Date: 2014-03-08 15:24+0000\n"
+"PO-Revision-Date: 2014-03-14 07:24+0000\n"
 "Last-Translator: GunChleoc <Unknown>\n"
 "Language-Team: Fòram na Gàidhlig http://www.foramnagaidhlig.net\n"
 "MIME-Version: 1.0\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n==1 || n==11) ? 0 : (n==2 || n==12) ? 1 : "
 "(n > 2 && n < 20) ? 2 : 3;\n"
-"X-Launchpad-Export-Date: 2014-03-13 05:38+0000\n"
+"X-Launchpad-Export-Date: 2014-03-15 05:41+0000\n"
 "X-Generator: Launchpad (build 16963)\n"
 "Language: gd\n"
 
@@ -104,7 +104,7 @@ msgstr "An staid airson %s"
 #: TRANSLATORS: For example: 'gold (3 P) x 4 = 12 P", P meaning "Points'
 #: ../../scripting/win_conditions/02_collectors.lua:106
 msgid "  %1$s (%2$i P) x %3$i = %4$i P"
-msgstr ""
+msgstr "  %1$s (%2$i P) x %3$i = %4$i P"
 
 #: ../../scripting/win_conditions/02_collectors.lua:110
 msgid "Total: %i point"
@@ -229,6 +229,10 @@ msgid ""
 "your territory than any other player. The game will end after 4 hours of "
 "playing. The one with the most trees at that point will win the game."
 msgstr ""
+"On a tha thu nad ghille-dubh, tha thu measail air coilltean mòra. Mar sin, "
+"is an t-amas agad gum bi barrachd chraobhan air an tìr agad na air tìr càch. "
+"Thig an geama gu crìch an ceann 4 uairean. Buannaichidh an cluicheadair aig "
+"a bheil barrachd chraobhan na aig càch aig an deireadh."
 
 #: ../../scripting/win_conditions/04_wood_gnome.lua:19
 msgid "Trees owned"

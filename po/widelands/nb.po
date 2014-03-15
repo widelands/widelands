@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-03-12 22:37+0100\n"
-"PO-Revision-Date: 2014-03-09 18:43+0000\n"
+"PO-Revision-Date: 2014-03-14 22:44+0000\n"
 "Last-Translator: Hans Joachim Desserud <Unknown>\n"
 "Language-Team: Norwegian Bokmal <nb@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Launchpad-Export-Date: 2014-03-13 05:35+0000\n"
+"X-Launchpad-Export-Date: 2014-03-15 05:41+0000\n"
 "X-Generator: Launchpad (build 16963)\n"
 
 #: ../../src/ai/defaultai.h:84
@@ -111,7 +111,7 @@ msgstr "Ulagret kart"
 
 #: ../../src/editor/editorinteractive.cc:253
 msgid "The map has not been saved, do you really want to quit?"
-msgstr ""
+msgstr "Kartet har ikke blitt lagret, vil du virkelig avslutte?"
 
 #: ../../src/editor/editorinteractive.cc:597
 #: ../../src/editor/ui_menus/editor_main_menu_new_map.cc:179
@@ -268,7 +268,7 @@ msgstr ""
 #: ../../src/editor/tools/editor_info_tool.cc:141
 #, c-format
 msgid "Descr: %s"
-msgstr ""
+msgstr "Beskr: %s"
 
 #: ../../src/editor/tools/editor_info_tool.cc:138
 #: ../../src/editor/ui_menus/editor_main_menu_load_map.cc:91
@@ -520,12 +520,12 @@ msgstr "Ikke en kartfil"
 #: ../../src/wui/game_main_menu_save_game.cc:268
 #, c-format
 msgid "A file with the name ‘%s’ already exists. Overwrite?"
-msgstr ""
+msgstr "En fil med navnet «%s» finnes allerede. Overskrive?"
 
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:390
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:410
 msgid "Error Saving Map!"
-msgstr ""
+msgstr "Feil ved lagring av kart!"
 
 #: ../../src/editor/ui_menus/editor_main_menu_save_map.cc:406
 msgid ""
@@ -731,7 +731,7 @@ msgstr "Stor"
 #: ../../src/logic/constructionsite.cc:92 ../../src/logic/immovable.cc:544
 #, c-format
 msgid "%i%% built"
-msgstr ""
+msgstr "%i%% bygd"
 
 #: ../../src/logic/dismantlesite.cc:100
 #, c-format
@@ -986,7 +986,7 @@ msgstr "Produserte %s"
 #: ../../src/logic/production_program.cc:1074
 #, c-format
 msgid "Recruited %s"
-msgstr ""
+msgstr "Rekruttert %s"
 
 #. * TRANSLATORS: %1$s = production site name, %2$s = production program name, %3$s = resource
 #: ../../src/logic/production_program.cc:1131
@@ -1096,7 +1096,7 @@ msgstr ""
 #: ../../src/logic/worker.cc:610
 #, c-format
 msgid "Out of %s"
-msgstr ""
+msgstr "Tom for %s"
 
 #: ../../src/logic/worker.cc:611
 #, c-format
@@ -2168,7 +2168,7 @@ msgstr ""
 
 #: ../../src/ui_fsmenu/launchMPG.cc:710
 msgid "Map details"
-msgstr ""
+msgstr "Kartdetaljer"
 
 #: ../../src/ui_fsmenu/launchMPG.cc:713
 msgid ""
@@ -2188,11 +2188,11 @@ msgstr "Start spill"
 
 #: ../../src/ui_fsmenu/launchSPG.cc:83
 msgid "Player’s name"
-msgstr ""
+msgstr "Spillers navn"
 
 #: ../../src/ui_fsmenu/launchSPG.cc:88
 msgid "Player’s type"
-msgstr ""
+msgstr "Spillers type"
 
 #: ../../src/ui_fsmenu/launchSPG.cc:92 ../../src/wui/game_summary.cc:91
 #: ../../src/wui/multiplayersetupgroup.cc:461
@@ -2201,7 +2201,7 @@ msgstr "Lag"
 
 #: ../../src/ui_fsmenu/launchSPG.cc:96
 msgid "Player’s tribe"
-msgstr ""
+msgstr "Spillers stamme"
 
 #: ../../src/ui_fsmenu/launchSPG.cc:100
 msgid "Start type"
@@ -3229,15 +3229,15 @@ msgstr ""
 #, c-format
 msgid "%i player"
 msgid_plural "%i players"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%i spiller"
+msgstr[1] "%i spillere"
 
 #. * TRANSLATORS: This is preceded by a number
 #: ../../src/wui/game_main_menu_save_game.cc:181
 msgid "player"
 msgid_plural "players"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "spiller"
+msgstr[1] "spillere"
 
 #: ../../src/wui/game_main_menu_save_game.cc:251
 msgid ""
@@ -3254,7 +3254,7 @@ msgstr ""
 #: ../../src/wui/game_main_menu_save_game.cc:255
 #: ../../src/wui/game_main_menu_save_game.cc:267
 msgid "Save Game Error!"
-msgstr ""
+msgstr "Feil ved lagring av spill!"
 
 #: ../../src/wui/game_main_menu_save_game.cc:330
 msgid "File deletion"
@@ -3268,7 +3268,7 @@ msgstr "Vil du virkelig slette filen %s?"
 #: ../../src/wui/game_message_menu.cc:46
 #: ../../src/wui/game_message_menu.cc:373
 msgid "Messages: Inbox"
-msgstr ""
+msgstr "Meldinger: Innboks"
 
 #: ../../src/wui/game_message_menu.cc:56
 msgid "Select"
@@ -3318,7 +3318,7 @@ msgstr ""
 
 #: ../../src/wui/game_message_menu.cc:366
 msgid "Messages: Archive"
-msgstr ""
+msgstr "Meldinger: Arkiv"
 
 #: ../../src/wui/game_message_menu.cc:368
 msgid "Restore selected messages"

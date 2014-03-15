@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: widelands\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2014-03-12 21:37+0000\n"
-"PO-Revision-Date: 2014-03-08 00:16+0000\n"
-"Last-Translator: Dan O'Huiginn <daniel@ohuiginn.net>\n"
+"PO-Revision-Date: 2014-03-14 14:54+0000\n"
+"Last-Translator: GunChleoc <Unknown>\n"
 "Language-Team: Fòram na Gàidhlig http://www.foramnagaidhlig.net\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n==1 || n==11) ? 0 : (n==2 || n==12) ? 1 : "
 "(n > 2 && n < 20) ? 2 : 3;\n"
-"X-Launchpad-Export-Date: 2014-03-13 05:31+0000\n"
+"X-Launchpad-Export-Date: 2014-03-15 05:40+0000\n"
 "X-Generator: Launchpad (build 16963)\n"
 "Language: gd\n"
 
@@ -1527,11 +1527,11 @@ msgstr "'Na chadal"
 
 #: ../../tribes/barbarians/battlearena/conf:37
 msgid "Upgrade soldier evade from level 0 to level 1"
-msgstr ""
+msgstr "àrdachadh teàrnadh saighdeir o leibheil 0 gu leibheil 1"
 
 #: ../../tribes/barbarians/battlearena/conf:38
 msgid "Upgrade soldier evade from level 1 to level 2"
-msgstr ""
+msgstr "àrdachadh teàrnadh saighdeir o leibheil 1 gu leibheil 2"
 
 #: ../../tribes/barbarians/battlearena/help.lua:12
 msgid ""
@@ -1632,6 +1632,9 @@ msgid ""
 "If all needed wares are delivered in time, a Battle Arena can train %1$s for "
 "one soldier from 0 to the highest level in %2$s on average."
 msgstr ""
+"Ma thèid a h-uile bathar air a bheul feum a lìbhrigeadh ri àm, trèanaidh "
+"raon catha %1$s aig saighdeir o 0 gun leibheil as àirde an ceann %2$s sa "
+"chuibheas."
 
 #: ../../tribes/barbarians/battleaxe/conf:1
 msgid ""
@@ -1783,6 +1786,10 @@ msgid ""
 "Wood may serve for a household fire and to keep you warm, but when it comes "
 "to working with iron or gold, there is no way around coal."
 msgstr ""
+"Dh'ionnsaich na Tùsanaich o chionn linntean mar a thochlar sna bràigheachan "
+"an tòir an stuith dhuibh a bhiadhas na fùirneisean aca.<br>\n"
+"Bidh fiodh math gu leòr gus do thaigh a chumail blàth, ach a thaobh obrach "
+"le iarann no òr, cha dèan ach gual a' chùis."
 
 #: ../../tribes/barbarians/coalmine/help.lua:18
 #: ../../tribes/barbarians/deep_coalmine/help.lua:18
@@ -2293,7 +2300,7 @@ msgstr "Fiodh"
 
 #: ../../tribes/barbarians/conf:108
 msgid "Warhelm"
-msgstr ""
+msgstr "Clogaid cogaidh"
 
 #: ../../tribes/barbarians/conf:109
 msgid "Warrior’s Ax"
@@ -3433,6 +3440,9 @@ msgid ""
 "You are at a disadvantage with this; consider restarting this map with a "
 "fair starting condition."
 msgstr ""
+"Cha robh rum gu leòr ann airson cuid dhe na togalaichean tòiseachaidh agad "
+"is cha deach an togail. Cuiridh seo èis ort; saoil an tòisich thu air a' "
+"mhapa seo a-rithist le cumhan tòiseachaidh cothromach?"
 
 #: ../../tribes/barbarians/scythe/conf:1
 msgid ""
@@ -3480,6 +3490,10 @@ msgid ""
 "ceases to be produced by the building if it is enhanced to an axfactory and "
 "war mill)."
 msgstr ""
+"Feumaidh tu sluasaid gus lusan a làimhseachadh mar bu chòir. Mar sin, "
+"cleachdaidh an gàirnealair is am maoir-coille tè. Thèid a saothrachadh ann "
+"an ceàrdach meatailt (ach cha saothraich an togalach e tuilleadh nuair a "
+"thèid a leasachadh gu factaraidh thuaghan is ceàrdach-cogaidh)."
 
 #: ../../tribes/barbarians/smelter/conf:1
 msgid "Smelts iron."
@@ -3536,35 +3550,35 @@ msgstr "Trèanaidh e na saighdearan."
 
 #: ../../tribes/barbarians/trainingscamp/conf:44
 msgid "Upgrade soldier attack from level 0 to level 1"
-msgstr ""
+msgstr "àrdachadh ionnsaigh saighdeir o leibheil 0 gu leibheil 1"
 
 #: ../../tribes/barbarians/trainingscamp/conf:45
 msgid "Upgrade soldier attack from level 1 to level 2"
-msgstr ""
+msgstr "àrdachadh ionnsaigh saighdeir o leibheil 1 gu leibheil 2"
 
 #: ../../tribes/barbarians/trainingscamp/conf:46
 msgid "Upgrade soldier attack from level 2 to level 3"
-msgstr ""
+msgstr "àrdachadh ionnsaigh saighdeir o leibheil 2 gu leibheil 3"
 
 #: ../../tribes/barbarians/trainingscamp/conf:47
 msgid "Upgrade soldier attack from level 3 to level 4"
-msgstr ""
+msgstr "àrdachadh ionnsaigh saighdeir o leibheil 3 gu leibheil 4"
 
 #: ../../tribes/barbarians/trainingscamp/conf:48
 msgid "Upgrade soldier attack from level 4 to level 5"
-msgstr ""
+msgstr "àrdachadh ionnsaigh saighdeir o leibheil 4 gu leibheil 5"
 
 #: ../../tribes/barbarians/trainingscamp/conf:49
 msgid "Upgrade soldier health from level 0 to level 1"
-msgstr ""
+msgstr "àrdachadh slàinte saighdeir o leibheil 0 gu leibheil 1"
 
 #: ../../tribes/barbarians/trainingscamp/conf:50
 msgid "Upgrade soldier health from level 1 to level 2"
-msgstr ""
+msgstr "àrdachadh slàinte saighdeir o leibheil 1 gu leibheil 2"
 
 #: ../../tribes/barbarians/trainingscamp/conf:51
 msgid "Upgrade soldier health from level 2 to level 3"
-msgstr ""
+msgstr "àrdachadh slàinte saighdeir o leibheil 2 gu leibheil 3"
 
 #: ../../tribes/barbarians/trainingscamp/help.lua:12
 msgid ""
@@ -3583,6 +3597,9 @@ msgid ""
 "Trains soldiers in Attack up to level 5, and in Health up to level "
 "3.<br>Equips the soldiers with all necessary weapons and armor parts."
 msgstr ""
+"Trèanaichidh e ionnsaigh nan saighdearan gu ruige leibheil 5 is an slàinte "
+"gu ruige leibheil 3.<br>Bheir e a h-uile arm is armachd a bhios a dhìth dha "
+"na saighdearan."
 
 #: ../../tribes/barbarians/trainingscamp/help.lua:17
 msgid "Note:"
@@ -3633,6 +3650,9 @@ msgid ""
 "If all needed wares are delivered in time, a Training Camp can train one new "
 "soldier in %1$s and %2$s to the final level in %3$s on average."
 msgstr ""
+"Ma thèid a h-uile bathar air a bheil feum a lìbhrigeadh ri àm, trèanaidh "
+"campa trèanaidh saighdear ùr ann an %1$s is %2$s gun leibheil as àirde an "
+"ceann %3$s sa chuibheas."
 
 #: ../../tribes/barbarians/trunk/conf:1
 msgid ""
