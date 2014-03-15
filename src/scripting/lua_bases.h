@@ -20,8 +20,7 @@
 #ifndef LUA_BASES_H
 #define LUA_BASES_H
 
-#include <lua.hpp>
-
+#include "scripting/eris/lua.hpp"
 #include "scripting/luna.h"
 
 namespace LuaBases {
@@ -31,7 +30,7 @@ namespace LuaBases {
  */
 class L_BasesModuleClass : public LunaClass {
 	public:
-		const char * get_modulename() {return "bases";}
+		const char * get_modulename() override {return "bases";}
 };
 
 
@@ -45,8 +44,8 @@ public:
 	}
 	virtual ~L_EditorGameBase() {}
 
-	virtual void __persist(lua_State * L);
-	virtual void __unpersist(lua_State * L);
+	virtual void __persist(lua_State * L) override;
+	virtual void __unpersist(lua_State * L) override;
 
 	/*
 	 * Properties
@@ -82,8 +81,8 @@ public:
 	}
 	virtual ~L_PlayerBase() {}
 
-	virtual void __persist(lua_State * L);
-	virtual void __unpersist(lua_State * L);
+	virtual void __persist(lua_State * L) override;
+	virtual void __unpersist(lua_State * L) override;
 
 	/*
 	 * Properties
@@ -99,8 +98,10 @@ public:
 	int place_flag(lua_State * L);
 	int place_road(lua_State * L);
 	int place_building(lua_State * L);
+	int place_bob(lua_State* L);
 	int conquer(lua_State * L);
 	int get_workers(lua_State* L);
+	int get_wares(lua_State* L);
 
 	/*
 	 * C methods

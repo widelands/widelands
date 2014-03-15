@@ -30,12 +30,8 @@
 using Widelands::TCoords;
 
 int32_t Editor_Change_Resource_Tool_Callback
-	(TCoords<Widelands::FCoords> const c,
-	void            *           const data,
-	int32_t                     const curres)
+	(const TCoords<Widelands::FCoords>& c, Widelands::Map& map, int32_t const curres)
 {
-	assert(data);
-	Widelands::Map  &  map   = *static_cast<Widelands::Map *>(data);
 	Widelands::World & world = map.world();
 	Widelands::FCoords f(c, &map[c]);
 
@@ -100,7 +96,7 @@ int32_t Editor_Increase_Resources_Tool::handle_click_impl
 		if
 		((res == args.cur_res or not mr.location().field->get_resources_amount())
 		        and
-		        Editor_Change_Resource_Tool_Callback(mr.location(), &map, args.cur_res))
+		        Editor_Change_Resource_Tool_Callback(mr.location(), map, args.cur_res))
 		{
 			//  Ok, we're doing something. First remove the current overlays.
 			const Image* pic =

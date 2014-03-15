@@ -108,9 +108,9 @@ void Request::Read
 	(FileRead & fr, Game & game, Map_Map_Object_Loader & mol)
 {
 	try {
-		bool fudged_type = false;
 		uint16_t const version = fr.Unsigned16();
 		if (2 <= version and version <= REQUEST_VERSION) {
+			bool fudged_type = false;
 			const Tribe_Descr & tribe = m_target.owner().tribe();
 			if (version <= 3) {
 				//  Unfortunately, old versions wrote the index. The best thing
@@ -183,7 +183,7 @@ void Request::Read
 									throw wexception
 										("Request::Read: incompatible transfer type");
 								transfer->has_failed();
-								transfer = 0;
+								transfer = nullptr;
 							}
 						} else if (upcast(WareInstance, ware, obj)) {
 							transfer = ware->get_transfer();
@@ -193,7 +193,7 @@ void Request::Read
 									throw wexception
 										("Request::Read: incompatible transfer type");
 								transfer->has_failed();
-								transfer = 0;
+								transfer = nullptr;
 							}
 						} else
 							throw wexception
@@ -238,7 +238,7 @@ void Request::Read
 			if (!is_open() && m_economy)
 				m_economy->remove_request(*this);
 		} else
-			throw game_data_error(_("unknown/unhandled version %u"), version);
+			throw game_data_error("unknown/unhandled version %u", version);
 	} catch (const _wexception & e) {
 		throw wexception("request: %s", e.what());
 	}
@@ -273,9 +273,9 @@ void Request::Write
 	fw.Unsigned16(m_transfers.size()); //  Write number of current transfers.
 	for (uint32_t i = 0; i < m_transfers.size(); ++i) {
 		Transfer & trans = *m_transfers[i];
-		if (trans.m_item) { //  write ware/worker
-			assert(mos.is_object_known(*trans.m_item));
-			fw.Unsigned32(mos.get_object_file_index(*trans.m_item));
+		if (trans.m_ware) { //  write ware/worker
+			assert(mos.is_object_known(*trans.m_ware));
+			fw.Unsigned32(mos.get_object_file_index(*trans.m_ware));
 		} else if (trans.m_worker) {
 			assert(mos.is_object_known(*trans.m_worker));
 			fw.Unsigned32(mos.get_object_file_index(*trans.m_worker));
@@ -293,7 +293,7 @@ Flag & Request::target_flag() const
 }
 
 /**
- * Return the point in time at which we want the item of the given number to
+ * Return the point in time at which we want the ware of the given number to
  * be delivered. nr is in the range [0..m_count[
 */
 int32_t Request::get_base_required_time
@@ -457,7 +457,7 @@ void Request::set_count(uint32_t const count)
 }
 
 /**
- * Change the time at which the first item to be delivered is needed.
+ * Change the time at which the first ware to be delivered is needed.
  * Default is the gametime of the Request creation.
 */
 void Request::set_required_time(int32_t const time)
@@ -466,7 +466,7 @@ void Request::set_required_time(int32_t const time)
 }
 
 /**
- * Change the time between desired delivery of items.
+ * Change the time between desired delivery of wares.
 */
 void Request::set_required_interval(int32_t const interval)
 {
@@ -495,13 +495,13 @@ void Request::start_transfer(Game & game, Supply & supp)
 		ss.Unsigned32(s.serial());
 		t = new Transfer(game, *this, s);
 	} else {
-		//  Begin the transfer of an item. The item itself is passive.
-		//  launch_item() ensures the WareInstance is transported out of the
+		//  Begin the transfer of an ware. The ware itself is passive.
+		//  launch_ware() ensures the WareInstance is transported out of the
 		//  warehouse. Once it's on the flag, the flag code will decide what to
 		//  do with it.
-		WareInstance & item = supp.launch_item(game, *this);
-		ss.Unsigned32(item.serial());
-		t = new Transfer(game, *this, item);
+		WareInstance & ware = supp.launch_ware(game, *this);
+		ss.Unsigned32(ware.serial());
+		t = new Transfer(game, *this, ware);
 	}
 
 	m_transfers.push_back(t);
@@ -518,11 +518,11 @@ void Request::transfer_finish(Game & game, Transfer & t)
 {
 	Worker * const w = t.m_worker;
 
-	if (t.m_item)
-		t.m_item->destroy(game);
+	if (t.m_ware)
+		t.m_ware->destroy(game);
 
-	t.m_worker = 0;
-	t.m_item = 0;
+	t.m_worker = nullptr;
+	t.m_ware = nullptr;
 
 	remove_transfer(find_transfer(t));
 
@@ -537,15 +537,15 @@ void Request::transfer_finish(Game & game, Transfer & t)
 
 /**
  * Callback from ware/worker code that the scheduled transfer has failed.
- * The calling code has already dealt with the worker/item.
+ * The calling code has already dealt with the worker/ware.
  *
  * Re-open the request.
 */
 void Request::transfer_fail(Game &, Transfer & t) {
 	bool const wasopen = is_open();
 
-	t.m_worker = 0;
-	t.m_item = 0;
+	t.m_worker = nullptr;
+	t.m_ware = nullptr;
 
 	remove_transfer(find_transfer(t));
 
@@ -564,7 +564,7 @@ void Request::cancel_transfer(uint32_t const idx)
 
 /**
  * Remove and free the transfer with the given index.
- * This does not update the Transfer's worker or item, and it does not update
+ * This does not update the Transfer's worker or ware, and it does not update
  * whether the Request is registered with the Economy.
  */
 void Request::remove_transfer(uint32_t const idx)

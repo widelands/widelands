@@ -73,7 +73,7 @@ namespace Widelands {
 Game::SyncWrapper::~SyncWrapper() {
 	if (m_dump) {
 		delete m_dump;
-		m_dump = 0;
+		m_dump = nullptr;
 
 		if (!m_syncstreamsave)
 			g_fs->Unlink(m_dumpfname);
@@ -105,7 +105,7 @@ void Game::SyncWrapper::Data(void const * const data, size_t const size) {
 		if (g_fs->DiskSpace() < MINIMUM_DISK_SPACE) {
 			log("Stop writing to syncstream file: disk is getting full.\n");
 			delete m_dump;
-			m_dump = 0;
+			m_dump = nullptr;
 		}
 	}
 
@@ -118,7 +118,7 @@ void Game::SyncWrapper::Data(void const * const data, size_t const size) {
 				 m_dumpfname.c_str());
 
 			delete m_dump;
-			m_dump = 0;
+			m_dump = nullptr;
 		}
 	}
 
@@ -128,14 +128,14 @@ void Game::SyncWrapper::Data(void const * const data, size_t const size) {
 
 
 Game::Game() :
-	Editor_Game_Base(create_LuaGameInterface(this)),
+	Editor_Game_Base(new LuaGameInterface(this)),
 	m_syncwrapper         (*this, m_synchash),
-	m_ctrl                (0),
+	m_ctrl                (nullptr),
 	m_writereplay         (true),
 	m_writesyncstream     (false),
 	m_state               (gs_notrunning),
 	m_cmdqueue            (*this),
-	m_replaywriter        (0),
+	m_replaywriter        (nullptr),
 	m_win_condition_displayname(_("Not set"))
 {
 	// Preload win_conditions as they are displayed in UI
@@ -259,11 +259,11 @@ bool Game::run_splayer_scenario_direct(char const * const mapname, const std::st
 	try {
 		bool const result = run(&loaderUI, NewSPScenario, script_to_run, false);
 		delete m_ctrl;
-		m_ctrl = 0;
+		m_ctrl = nullptr;
 		return result;
 	} catch (...) {
 		delete m_ctrl;
-		m_ctrl = 0;
+		m_ctrl = nullptr;
 		throw;
 	}
 
@@ -416,11 +416,11 @@ bool Game::run_load_game(std::string filename, const std::string& script_to_run)
 	try {
 		bool const result = run(&loaderUI, Loaded, script_to_run, false);
 		delete m_ctrl;
-		m_ctrl = 0;
+		m_ctrl = nullptr;
 		return result;
 	} catch (...) {
 		delete m_ctrl;
-		m_ctrl = 0;
+		m_ctrl = nullptr;
 		throw;
 	}
 
@@ -439,7 +439,7 @@ void Game::postload()
 	Editor_Game_Base::postload();
 
 	if (g_gr) {
-		assert(get_ibase() != 0);
+		assert(get_ibase() != nullptr);
 		get_ibase()->postload();
 	} else
 		log("Note: Widelands runs without graphics, probably in dedicated server mode!\n");
@@ -492,8 +492,8 @@ bool Game::run
 					 _
 					 	("Widelands could not start the game, because player %u has "
 					 	 "no starting position.\n"
-					 	 "You can manually add a starting position with Widelands "
-					 	 "Editor, to fix this problem."),
+					 	 "You can manually add a starting position with the Widelands "
+					 	 "Editor to fix this problem."),
 					 p);
 			}
 		}
@@ -584,7 +584,7 @@ bool Game::run
 
 		cleanup_objects();
 		delete get_ibase();
-		set_ibase(0);
+		set_ibase(nullptr);
 
 		g_anim.flush();
 		g_gr->flush_animations();

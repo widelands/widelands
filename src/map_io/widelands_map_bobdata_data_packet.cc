@@ -224,11 +224,11 @@ void Map_Bobdata_Data_Packet::Read
 									continue; // Skip task
 								else
 									throw game_data_error
-										(_("unknown task type \"%s\""), taskname);
+										("unknown task type \"%s\"", taskname);
 
 								if (task->unique and bob.get_state(*task))
 									throw game_data_error
-										(_("task %s is duplicated in stack"),
+										("task %s is duplicated in stack",
 										 task->name);
 								state.task = task;
 							}
@@ -246,7 +246,7 @@ void Map_Bobdata_Data_Packet::Read
 										("objvar1 (%u): %s", objvar1_serial, e.what());
 								}
 							} else
-								state.objvar1 = 0;
+								state.objvar1 = nullptr;
 							state.svar1 = fr.CString();
 							if (packet_version < 3) {
 								int32_t const x = fr.Signed32();
@@ -285,7 +285,7 @@ void Map_Bobdata_Data_Packet::Read
 							uint32_t const pathsteps = fr.Unsigned16();
 							if (i < old_stacksize) {
 								delete state.path;
-								state.path = 0;
+								state.path = nullptr;
 							}
 							if (pathsteps) {
 								try {
@@ -301,7 +301,7 @@ void Map_Bobdata_Data_Packet::Read
 										}
 								} catch (const _wexception & e) {
 									throw game_data_error
-										(_("reading path: %s"), e.what());
+										("reading path: %s", e.what());
 								}
 							}
 
@@ -311,7 +311,7 @@ void Map_Bobdata_Data_Packet::Read
 									if (!has_route) {
 										delete state.route;
 										// in case we get an exception further down
-										state.route = 0;
+										state.route = nullptr;
 									} else
 										state.route->init(0);
 								}
@@ -324,7 +324,7 @@ void Map_Bobdata_Data_Packet::Read
 									route->load_pointers(d, mol);
 									state.route = route;
 								} else
-									state.route = 0;
+									state.route = nullptr;
 							}
 
 							if (fr.Unsigned8()) {
@@ -339,7 +339,7 @@ void Map_Bobdata_Data_Packet::Read
 								else
 									throw;
 							} else
-								state.program = 0;
+								state.program = nullptr;
 
 						} catch (const _wexception & e) {
 							throw game_data_error
@@ -364,14 +364,14 @@ void Map_Bobdata_Data_Packet::Read
 
 					mol.mark_object_as_loaded(bob);
 				} catch (const _wexception & e) {
-					throw game_data_error(_("bob %u: %s"), serial, e.what());
+					throw game_data_error("bob %u: %s", serial, e.what());
 				}
 			}
 		} else
 			throw game_data_error
-				(_("unknown/unhandled version %u"), packet_version);
+				("unknown/unhandled version %u", packet_version);
 	} catch (const _wexception & e) {
-		throw game_data_error(_("bobdata: %s"), e.what());
+		throw game_data_error("bobdata: %s", e.what());
 	}
 }
 
@@ -384,9 +384,9 @@ void Map_Bobdata_Data_Packet::read_critter_bob
 			// No data for critter bob currently
 		} else
 			throw game_data_error
-				(_("unknown/unhandled version %u"), packet_version);
+				("unknown/unhandled version %u", packet_version);
 	} catch (const _wexception & e) {
-		throw game_data_error(_("critter bob: %s"), e.what());
+		throw game_data_error("critter bob: %s", e.what());
 	}
 }
 
@@ -478,10 +478,10 @@ void Map_Bobdata_Data_Packet::read_worker_bob
 						}
 					} else
 						throw game_data_error
-							(_("unknown/unhandled version %u"),
+							("unknown/unhandled version %u",
 							 soldier_worker_bob_packet_version);
 				} catch (const _wexception & e) {
-					throw game_data_error(_("soldier: %s"), e.what());
+					throw game_data_error("soldier: %s", e.what());
 				}
 			} else if (upcast(Carrier, carrier, &worker)) {
 				try {
@@ -494,10 +494,10 @@ void Map_Bobdata_Data_Packet::read_worker_bob
 						carrier->m_promised_pickup_to = fr.Signed32();
 					else
 						throw game_data_error
-							(_("unknown/unhandled version %u"),
+							("unknown/unhandled version %u",
 							 carrier_worker_bob_packet_version);
 				} catch (const _wexception & e) {
-					throw game_data_error(_("carrier: %s"), e.what());
+					throw game_data_error("carrier: %s", e.what());
 				}
 			}
 
@@ -509,18 +509,18 @@ void Map_Bobdata_Data_Packet::read_worker_bob
 						("location (%u): %s", location_serial, e.what());
 				}
 			} else
-				worker.m_location = 0;
+				worker.m_location = nullptr;
 
-			if (uint32_t const carried_item_serial = fr.Unsigned32()) {
+			if (uint32_t const carried_ware_serial = fr.Unsigned32()) {
 				try {
-					worker.m_carried_item =
-						&mol.get<WareInstance>(carried_item_serial);
+					worker.m_carried_ware =
+						&mol.get<WareInstance>(carried_ware_serial);
 				} catch (const _wexception & e) {
 					throw game_data_error
-						("carried item (%u): %s", carried_item_serial, e.what());
+						("carried ware (%u): %s", carried_ware_serial, e.what());
 				}
 			} else
-				worker.m_carried_item = 0;
+				worker.m_carried_ware = nullptr;
 
 			// Skip supply
 
@@ -536,17 +536,17 @@ void Map_Bobdata_Data_Packet::read_worker_bob
 					worker.m_current_exp = worker.get_needed_experience() - 1;
 			}
 
-			Economy * economy = 0;
+			Economy * economy = nullptr;
 			if (PlayerImmovable * const location = worker.m_location.get(egbase))
 				economy = location->get_economy();
 			worker.set_economy(economy);
 			if
-				(WareInstance * const carried_item =
-				 	worker.m_carried_item.get(egbase))
-				carried_item->set_economy(economy);
+				(WareInstance * const carried_ware =
+				 	worker.m_carried_ware.get(egbase))
+				carried_ware->set_economy(economy);
 		} else
 			throw game_data_error
-				(_("unknown/unhandled version %u"), packet_version);
+				("unknown/unhandled version %u", packet_version);
 	} catch (const _wexception & e) {
 		throw game_data_error
 			("worker %p (%u): %s", &worker, worker.serial(), e.what());

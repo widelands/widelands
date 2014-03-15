@@ -49,7 +49,7 @@ protected:
 		 int32_t x_gap, int32_t y_gap, int32_t bar_size);
 
 public:
-	bool is_snap_target() const {return true;}
+	bool is_snap_target() const override {return true;}
 
 	int32_t get_value() const {return m_value;}
 	int32_t get_max_value() const {return m_max_value;}
@@ -63,7 +63,7 @@ public:
 
 
 protected:
-	void layout();
+	void layout() override;
 	void calc_cursor_pos();
 
 	//  drawing
@@ -74,8 +74,8 @@ protected:
 		(RenderTarget &, int32_t x, int32_t y, int32_t w, int32_t h);
 
 	//  mouse events
-	bool handle_mouserelease(Uint8 btn, int32_t, int32_t);
-	void handle_mousein(bool inside);
+	bool handle_mouserelease(Uint8 btn, int32_t, int32_t) override;
+	void handle_mousein(bool inside) override;
 	void cursor_moved(int32_t pointer, int32_t x, int32_t y);
 	void cursor_pressed(int32_t pointer);
 	void bar_pressed(int32_t pointer, int32_t ofs);
@@ -137,10 +137,10 @@ struct HorizontalSlider : public Slider {
 	{}
 
 protected:
-	void draw(RenderTarget & dst);
-	bool handle_mousemove (Uint8 btn, int32_t x, int32_t y, int32_t, int32_t);
-	bool handle_mousepress(Uint8 btn, int32_t x, int32_t y);
-	void layout();
+	void draw(RenderTarget & dst) override;
+	bool handle_mousemove (Uint8 btn, int32_t x, int32_t y, int32_t, int32_t) override;
+	bool handle_mousepress(Uint8 btn, int32_t x, int32_t y) override;
+	void layout() override;
 };
 
 
@@ -172,10 +172,10 @@ struct VerticalSlider : public Slider {
 	{}
 
 protected:
-	void draw(RenderTarget & dst);
-	bool handle_mousemove (Uint8 btn, int32_t x, int32_t y, int32_t, int32_t);
-	bool handle_mousepress(Uint8 btn, int32_t x, int32_t y);
-	void layout();
+	void draw(RenderTarget & dst) override;
+	bool handle_mousemove (Uint8 btn, int32_t x, int32_t y, int32_t, int32_t) override;
+	bool handle_mousepress(Uint8 btn, int32_t x, int32_t y) override;
+	void layout() override;
 };
 
 /**
@@ -199,8 +199,8 @@ struct DiscreteSlider : public Panel {
 	boost::signals2::signal<void (int32_t)> changedto;
 
 protected:
-	virtual void draw(RenderTarget & dst);
-	virtual void layout();
+	virtual void draw(RenderTarget & dst) override;
+	virtual void layout() override;
 
 	HorizontalSlider slider;
 

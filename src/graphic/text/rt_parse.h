@@ -63,9 +63,9 @@ public:
 };
 
 struct Child {
-	Child() : tag(0), text() {}
+	Child() : tag(nullptr), text() {}
 	Child(ITag * t) : tag(t) {}
-	Child(std::string t) : tag(0), text(t) {}
+	Child(std::string t) : tag(nullptr), text(t) {}
 	~Child() {
 		if (tag) delete tag;
 	}

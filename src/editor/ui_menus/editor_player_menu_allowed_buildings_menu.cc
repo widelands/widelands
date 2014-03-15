@@ -90,7 +90,7 @@ Editor_Player_Menu_Allowed_Buildings_Menu
 		 m_forbid_button.get_y() + middle_button_height + vspacing,
 		 middle_button_width, middle_button_height,
 		 g_gr->images().get("pics/but1.png"),
-		 _("<-"),
+		 ("<-"),
 		 _("Allow"),
 		 false)
 {

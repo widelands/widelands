@@ -20,12 +20,12 @@
 #ifndef C_UTILS_H
 #define C_UTILS_H
 
-#include <lua.hpp>
 
-#include "scripting/factory.h"
 #include "logic/game.h"
 #include "map_io/widelands_map_map_object_loader.h"
 #include "map_io/widelands_map_map_object_saver.h"
+#include "scripting/eris/lua.hpp"
+#include "scripting/factory.h"
 
 Factory & get_factory(lua_State *);
 Widelands::Game & get_game(lua_State *);

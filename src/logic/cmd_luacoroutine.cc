@@ -35,10 +35,10 @@ void Cmd_LuaCoroutine::execute (Game & game) {
 		const uint32_t sleeptime = m_cr->pop_uint32();
 		if (rv == LuaCoroutine::YIELDED) {
 			game.enqueue_command(new Widelands::Cmd_LuaCoroutine(sleeptime, m_cr));
-			m_cr = 0;  // Remove our ownership so we don't delete.
+			m_cr = nullptr;  // Remove our ownership so we don't delete.
 		} else if (rv == LuaCoroutine::DONE) {
 			delete m_cr;
-			m_cr = 0;
+			m_cr = nullptr;
 		}
 	} catch (LuaError & e) {
 		log("Error in Lua Coroutine\n");
@@ -55,7 +55,7 @@ void Cmd_LuaCoroutine::execute (Game & game) {
 	}
 }
 
-#define CMD_LUACOROUTINE_VERSION 1
+#define CMD_LUACOROUTINE_VERSION 2
 void Cmd_LuaCoroutine::Read
 	(FileRead & fr, Editor_Game_Base & egbase, Map_Map_Object_Loader & mol)
 {
@@ -72,9 +72,9 @@ void Cmd_LuaCoroutine::Read
 			m_cr = lgi->read_coroutine(fr, mol, fr.Unsigned32());
 		} else
 			throw game_data_error
-				(_("unknown/unhandled version %u"), packet_version);
+				("unknown/unhandled version %u", packet_version);
 	} catch (const _wexception & e) {
-		throw game_data_error(_("lua function: %s"), e.what());
+		throw game_data_error("lua function: %s", e.what());
 	}
 }
 void Cmd_LuaCoroutine::Write

@@ -62,17 +62,17 @@ void Map_Ware_Data_Packet::Read
 				try {
 					mol.register_object<WareInstance>
 						(serial,
-						 *new WareInstance(Ware_Index::Null(), 0))
+						 *new WareInstance(Ware_Index::Null(), nullptr))
 						.init(egbase);
 				} catch (const _wexception & e) {
-					throw game_data_error(_("%u: %s"), serial, e.what());
+					throw game_data_error("%1$u: %2$s", serial, e.what());
 				}
 			}
 		} else
 			throw game_data_error
-				(_("unknown/unhandled version %u"), packet_version);
+				("unknown/unhandled version %u", packet_version);
 	} catch (const _wexception & e) {
-		throw game_data_error(_("ware data: %s"), e.what());
+		throw game_data_error("ware data: %s", e.what());
 	}
 }
 

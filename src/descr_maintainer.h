@@ -20,6 +20,7 @@
 #ifndef DESCR_MAINTAINER_H
 #define DESCR_MAINTAINER_H
 
+#include <cstdlib>
 #include <limits>
 #include <stdexcept>
 
@@ -28,7 +29,7 @@
  * Worker_Descr and so on.
  */
 template <typename T> struct Descr_Maintainer {
-	Descr_Maintainer() : capacity(0), nitemsw(0), items(0) {}
+	Descr_Maintainer() : capacity(0), nitemsw(0), items(nullptr) {}
 	~Descr_Maintainer();
 
 	static typename T::Index invalid_index() {
@@ -58,7 +59,7 @@ template <typename T> struct Descr_Maintainer {
 	}
 
 	T * get(int32_t const idx) const {
-		return idx >= 0 and idx < static_cast<int32_t>(nitemsw) ? items[idx] : 0;
+		return idx >= 0 and idx < static_cast<int32_t>(nitemsw) ? items[idx] : nullptr;
 	}
 
 private:
@@ -68,7 +69,7 @@ private:
 
 	void reserve(const typename T::Index n) {
 		T * * const new_items =
-			static_cast<T * *>(realloc(items, sizeof(T *) * n));
+			static_cast<T * *>(std::realloc(items, sizeof(T *) * n));
 		if (not new_items)
 			throw std::bad_alloc();
 		items = new_items;
@@ -92,13 +93,13 @@ T * Descr_Maintainer<T>::exists(char const * const name) const {
 	for (typename T::Index i = 0; i < nitemsw; ++i)
 		if (name == items[i]->name())
 			return items[i];
-	return 0;
+	return nullptr;
 }
 
 template<typename T> Descr_Maintainer<T>::~Descr_Maintainer() {
 	for (typename T::Index i = 0; i < nitemsw; ++i)
 		delete items[i];
-	free(items);
+	std::free(items);
 }
 /// This template is used to have a typesafe maintainer for Bob_Descr,
 /// Worker_Descr and so on. This version uses boxed Index type for indexing.
@@ -131,7 +132,7 @@ private Descr_Maintainer<T>
 			T_Index(static_cast<typename T_Index::value_t>(idx));
 	}
 	T * get(T_Index const idx) const {
-		return idx ? Descr_Maintainer<T>::get(idx.value()) : 0;
+		return idx ? Descr_Maintainer<T>::get(idx.value()) : nullptr;
 	}
 };
 

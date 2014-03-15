@@ -1,4 +1,4 @@
-help=_How can one create a meal, snack or ration, if there are no kitchen tools? Be sure to have a metalworks to produce this basic tool (but ceases to be produced by the building if it is enhanced to an axefactory and war mill).
+help=_How can one create a meal, snack or ration, if there are no kitchen tools? Be sure to have a metal workshop to produce this basic tool (but it ceases to be produced by the building if it is enhanced to an axfactory and war mill).
 
 [idle]
 pics=idle.png

@@ -96,7 +96,7 @@ int main(int argc, char * argv[])
 	}
 #endif
 
-	WLApplication * g_app = 0;
+	WLApplication * g_app = nullptr;
 	try {
 		g_app = WLApplication::get(argc, const_cast<char const * *>(argv));
 		//TODO: handle exceptions from the constructor

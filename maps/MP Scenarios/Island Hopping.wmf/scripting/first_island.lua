@@ -22,7 +22,7 @@ function run_island(plr, island_idx)
 
    local rewards = _finish_rewards[island_idx][rank]
    send_to_all(rt(
-      p(msgs_finished_island[rank]:format(plr.name, island_idx + 1)) ..
+      p(msgs_finished_island[rank]:bformat(plr.name, island_idx + 1)) ..
       p(finished_island_continues:format(format_rewards(rewards)))
    ))
 
@@ -67,15 +67,15 @@ function watch_hill()
 
          local claimed_for = (game.time - started_claiming) / 1000
          if 5*60 < claimed_for and send_msg == 0 then
-            send_to_all(had_control_for:format(claiming_player.name, _"5 minutes"))
+            send_to_all(had_control_for:bformat(claiming_player.name, _"5 minutes"))
             send_msg = send_msg + 1
          end
          if 10*60 < claimed_for and send_msg == 1 then
-            send_to_all(had_control_for:format(claiming_player.name, _"10 minutes"))
+            send_to_all(had_control_for:bformat(claiming_player.name, _"10 minutes"))
             send_msg = send_msg + 1
          end
          if 15*60 < claimed_for and send_msg == 2 then
-            send_to_all(had_control_for:format(claiming_player.name, _"15 minutes"))
+            send_to_all(had_control_for:bformat(claiming_player.name, _"15 minutes"))
             send_msg = send_msg + 1
          end
          if 20*60 < claimed_for and send_msg == 3 then

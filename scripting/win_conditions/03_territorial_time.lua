@@ -13,11 +13,15 @@ use("aux", "win_condition_texts")
 local wc_name = _ "Territorial Time"
 local wc_version = 1
 local wc_desc = _ (
-	"Each player or team tries to obtain more than half of the maps' " ..
+	"Each player or team tries to obtain more than half of the map’s " ..
 	"area. The winner will be the player or the team that is able to keep " ..
-	"that area for at least 20 minutes or the one with the most territory " ..
+	"that area for at least 20 minutes, or the one with the most territory " ..
 	"after 4 hours, whichever comes first."
 )
+local wc_has_territory = _"%1$s has %2$3.0f%% of the land (%3$i of %4$i)."
+local wc_had_territory = _"%1$s had %2$3.0f%% of the land (%3$i of %4$i)."
+local team_str = _"Team %i"
+
 return {
 	name = wc_name,
 	description = wc_desc,
@@ -135,15 +139,15 @@ return {
 				if teampoints[t] > ( #fields / 2 ) then
 					-- this team owns more than half of the map's area
 					foundcandidate = true
-					if candidateisteam == true and currentcandidate == game_status_territoral_lord.team:format(t) then
+					if candidateisteam == true and currentcandidate == team_str:format(t) then
 						remaining_time = remaining_time - 30
 					else
-						currentcandidate = game_status_territoral_lord.team:format(t)
+						currentcandidate = team_str:format(t)
 						candidateisteam = true
 						remaining_time = 20 * 60 -- 20 minutes
 					end
 				end
-				points[#points + 1] = { game_status_territoral_lord.team:format(t), teampoints[t] }
+				points[#points + 1] = { team_str:format(t), teampoints[t] }
 			end
 			if not foundcandidate then
 				remaining_time = 10
@@ -170,39 +174,61 @@ return {
 			local msg = ""
 			for i=1,#points do
 				msg = msg .. "\n"
-				msg = msg ..
-								game_status_territoral_lord_time.land:format(
-										points[i][1],
-										has_had,
-										_percent(points[i][2], #fields),
-										points[i][2],
-										#fields)
+				if (has_had == "has") then
+					msg = msg ..
+						(wc_has_territory):bformat(
+							points[i][1],
+							_percent(points[i][2], #fields),
+							points[i][2],
+							#fields)
+				else
+					msg = msg ..
+						(wc_had_territory):bformat(
+							points[i][1],
+							_percent(points[i][2], #fields),
+							points[i][2],
+							#fields)
+				end
+
 			end
 			return msg
 		end
 
 		function _send_state(points)
-			local msg1 = game_status_territoral_lord.other1:format(currentcandidate)
+			set_textdomain("win_conditions")
+			local msg1 = (_"%s owns more than half of the map’s area."):format(currentcandidate)
 			msg1 = msg1 .. "\n"
-			msg1 = msg1 .. game_status_territoral_lord.other2:format(remaining_time / 60)
+			msg1 = msg1 .. (ngettext("You’ve still got %i minute to prevent a victory.",
+						 "You’ve still got %i minutes to prevent a victory.",
+						 remaining_time / 60))
+					:format(remaining_time / 60)
 
-			local msg2 = game_status_territoral_lord.player1
+			local msg2 = _"You own more than half of the map’s area."
 			msg2 = msg2 .. "\n"
-			msg2 = msg2 .. game_status_territoral_lord.player2:format(remaining_time / 60)
-
+			msg2 = msg2 .. (ngettext("Keep it for %i more minute to win the game.",
+						 "Keep it for %i more minutes to win the game.",
+						 remaining_time / 60))
+					:format(remaining_time / 60)
 
 			for idx, p in ipairs(plrs) do
 				local msg = ""
 				if remaining_time < remaining_max_time and _maxpoints(points) > ( #fields / 2 ) then
-					if candidateisteam and currentcandidate == game_status_territoral_lord.team:format(p.team)
+					if candidateisteam and currentcandidate == team_str:format(p.team)
 						or not candidateisteam and currentcandidate == p.name then
 						msg = msg .. msg2 .. "\n\n"
 					else
 						msg = msg .. msg1 .. "\n\n"
 					end
-					msg = msg .. game_status_territoral_lord_time.end_in_or:format(remaining_max_time/60)
+					msg = msg .. (ngettext("Otherwise the game will end in %i minute.",
+							       "Otherwise the game will end in %i minutes.",
+							       remaining_max_time / 60))
+						:format(remaining_max_time / 60)
 				else
-					msg = msg .. game_status_territoral_lord_time.end_in:format(remaining_max_time/60)
+					msg = msg .. (ngettext("The game will end in %i minute.",
+							       "The game will end in %i minutes.",
+							       remaining_max_time / 60))
+						:format(remaining_max_time / 60)
+
 				end
 				msg = msg .. "\n\n"
 				msg = msg .. game_status.body
@@ -256,7 +282,7 @@ return {
 			local lostmsg = lost_game_over.body
 			lostmsg = lostmsg .. "\n\n" .. game_status.body
 			for i=1,#points do
-				if points[i][1] == game_status_territoral_lord.team:format(p.team) or points[i][1] == p.name then
+				if points[i][1] == team_str:format(p.team) or points[i][1] == p.name then
 					if points[i][2] >= maxpoints then
 						p:send_message(won_game_over.title, wonmsg .. _status(points, "had"))
 						wl.game.report_result(p, 1, make_extra_data(p, wc_name, wc_version, {score=_landsizes[p.number]}))

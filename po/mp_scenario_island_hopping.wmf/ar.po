@@ -1,0 +1,201 @@
+# Arabic translation for widelands
+# Copyright (c) 2013 Rosetta Contributors and Canonical Ltd 2013
+# This file is distributed under the same license as the widelands package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2013.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: widelands\n"
+"Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
+"POT-Creation-Date: 2014-03-05 19:55+0000\n"
+"PO-Revision-Date: 2013-10-17 09:53+0000\n"
+"Last-Translator: abdXelrhman <abdXelrhman@gmail.com>\n"
+"Language-Team: Arabic <ar@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n % 100 >= "
+"3 && n % 100 <= 10 ? 3 : n % 100 >= 11 && n % 100 <= 99 ? 4 : 5;\n"
+"X-Launchpad-Export-Date: 2014-03-06 05:39+0000\n"
+"X-Generator: Launchpad (build 16948)\n"
+
+#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/first_island.lua:70
+msgid "5 minutes"
+msgstr "5 دقائق"
+
+#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/first_island.lua:74
+msgid "10 minutes"
+msgstr "10 دقائق"
+
+#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/first_island.lua:78
+msgid "15 minutes"
+msgstr "15 دقيقه"
+
+#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/multiplayer_init.lua:98
+msgid "Game Status"
+msgstr "حاله اللعبه"
+
+#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/multiplayer_init.lua:116
+msgid "%s Log"
+msgid_plural "%s Logs"
+msgstr[0] ""
+msgstr[1] ""
+
+#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/multiplayer_init.lua:118
+msgid "%s Plank"
+msgid_plural "%s Planks"
+msgstr[0] ""
+msgstr[1] ""
+
+#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/multiplayer_init.lua:120
+msgid "%s Stone"
+msgid_plural "%s Stones"
+msgstr[0] ""
+msgstr[1] ""
+
+#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/multiplayer_init.lua:122
+msgid "%s Spidercloth"
+msgid_plural "%s Spidercloths"
+msgstr[0] ""
+msgstr[1] ""
+
+#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/multiplayer_init.lua:124
+msgid "%s Corn"
+msgid_plural "%s Corn"
+msgstr[0] ""
+msgstr[1] ""
+
+#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/multiplayer_init.lua:126
+msgid "%s Coal"
+msgid_plural "%s Coal"
+msgstr[0] ""
+msgstr[1] ""
+
+#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/multiplayer_init.lua:128
+msgid "%s Iron Ore"
+msgid_plural "%s Iron Ore"
+msgstr[0] ""
+msgstr[1] ""
+
+#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/multiplayer_init.lua:130
+msgid "%s Gold Ore"
+msgid_plural "%s Gold Ore"
+msgstr[0] ""
+msgstr[1] ""
+
+#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/multiplayer_init.lua:132
+msgid "%1$i %2$s"
+msgstr ""
+
+#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:5
+msgid "Welcome to Island Hopping"
+msgstr "مرحباً بك فى حُلم الجزيره"
+
+#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:6
+msgid "Rules"
+msgstr "القواعد"
+
+#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:8
+msgid ""
+"Island Hopping is a traditional tournament in Atlantean culture. The rules "
+"of the game are simple: you start with a headquarters on an island. When you "
+"finish a castle at the end of the first island, you are granted a second "
+"headquarters on a second island, which will contain all wares from your "
+"first headquarters."
+msgstr ""
+
+#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:15
+msgid ""
+"If you finish a castle in the target area on the second island, you will get "
+"a third headquarters on the third island. You must build a castle at the "
+"center of the third island and hold it for 20 minutes to win the game."
+msgstr ""
+
+#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:20
+msgid ""
+"Whenever you finish an island, you will get bonus wares, depending on how "
+"many players have finished the island before you. The earlier you finish, "
+"the fewer wares you will get. See below for the details."
+msgstr ""
+
+#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:23
+msgid ""
+"The clue is that the first island only provides stones and wood, the second "
+"only meadows and resources. The economies you leave behind will continue to "
+"work for you, but you will only reap the benefits at the moment you reach a "
+"new island."
+msgstr ""
+
+#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:28
+msgid "Finally, be careful not to waste your quartz and diamonds."
+msgstr ""
+
+#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:30
+msgid "Finish Rewards"
+msgstr ""
+
+#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:31
+msgid "First Island"
+msgstr "الجزيره الاولى"
+
+#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:32
+#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:37
+msgid "1st to finish"
+msgstr "اول من انهى السباق"
+
+#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:33
+#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:38
+msgid "2nd to finish"
+msgstr "ثانى من انهى السباق"
+
+#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:34
+#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:39
+msgid "3rd to finish"
+msgstr "ثالث من انهى السباق"
+
+#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:35
+#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:40
+msgid "4th to finish"
+msgstr "رابع من انهى السباق"
+
+#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:36
+msgid "Second Island"
+msgstr "الجزيره الثانيه"
+
+#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:45
+msgid "%1$s was the first to reach Island number %2$i."
+msgstr ""
+
+#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:46
+msgid "%1$s was the second to reach Island number %2$i."
+msgstr ""
+
+#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:47
+msgid "%1$s was the third to reach Island number %2$i."
+msgstr ""
+
+#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:48
+msgid "%1$s was the fourth to reach Island number %2$i."
+msgstr ""
+
+#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:50
+msgid "The reward for this feat amounts to:"
+msgstr ""
+
+#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:53
+msgid ""
+"%s is now King of the Hill and will win the game in 20 minutes, if nobody "
+"takes over the hill before then."
+msgstr ""
+
+#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:56
+msgid "%s lost control of the hill."
+msgstr "فقد %s السيطره على التل."
+
+#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:58
+msgid "%1$s has been King of the Hill for %2$s!"
+msgstr ""
+
+#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/texts.lua:59
+msgid "%s has won the game. Congratulations!"
+msgstr "ربح %s اللعبه. تهانينا!"

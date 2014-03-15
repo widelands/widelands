@@ -233,7 +233,7 @@ Warehouse * Economy::find_closest_warehouse
 	 const Economy::WarehouseAcceptFn & acceptfn)
 {
 	if (!warehouses().size())
-		return 0;
+		return nullptr;
 
 	// A-star with zero estimator = Dijkstra
 	RouteAStar<ZeroEstimator> astar(*m_router, type);
@@ -243,7 +243,7 @@ Warehouse * Economy::find_closest_warehouse
 		if
 			(cost_cutoff && current->mpf_realcost >
 			 static_cast<int32_t>(cost_cutoff))
-			return 0;
+			return nullptr;
 
 		Flag & flag = current->base_flag();
 		if (upcast(Warehouse, warehouse, flag.get_building())) {
@@ -255,7 +255,7 @@ Warehouse * Economy::find_closest_warehouse
 		}
 	}
 
-	return 0;
+	return nullptr;
 }
 
 
@@ -265,7 +265,7 @@ Warehouse * Economy::find_closest_warehouse
 */
 void Economy::add_flag(Flag & flag)
 {
-	assert(flag.get_economy() == 0);
+	assert(flag.get_economy() == nullptr);
 
 	m_flags.push_back(&flag);
 	flag.set_economy(this);
@@ -294,7 +294,7 @@ void Economy::remove_flag(Flag & flag)
 */
 void Economy::_remove_flag(Flag & flag)
 {
-	flag.set_economy(0);
+	flag.set_economy(nullptr);
 
 	// fast remove
 	container_iterate(Flags, m_flags, i)
@@ -624,8 +624,8 @@ Supply * Economy::_find_best_supply
 	assert(req.is_open());
 
 	Route buf_route0, buf_route1;
-	Supply * best_supply = 0;
-	Route  * best_route  = 0;
+	Supply * best_supply = nullptr;
+	Route  * best_route  = nullptr;
 	int32_t  best_cost   = -1;
 	Flag & target_flag = req.target_flag();
 
@@ -661,7 +661,7 @@ Supply * Economy::_find_best_supply
 	}
 
 	if (!best_route)
-		return 0;
+		return nullptr;
 
 	cost = best_cost;
 	return best_supply;
@@ -993,7 +993,7 @@ void Economy::_handle_active_supplies(Game & game)
 			continue;
 
 		Warehouse * wh = find_closest_warehouse
-			(supply.get_position(game)->base_flag(), type, 0, 0,
+			(supply.get_position(game)->base_flag(), type, nullptr, 0,
 			 (!haveprefer && !havenormal)
 			 ?
 			 WarehouseAcceptFn()

@@ -11,9 +11,8 @@ SOURCE_DIR=$1
 REVISION=`bzr revno $SOURCE_DIR`
 DESTINATION="WidelandsRelease"
 TYPE="Release"
-if [[ -f $SOURCE_DIR/VERSION ]]; then
-   echo "VERSION file found. But this is not yet implemented :(."
-   exit 1
+if [[ -f $SOURCE_DIR/WL_RELEASE ]]; then
+   WLVERSION="$(cat $SOURCE_DIR/WL_RELEASE)"
 else
    WLVERSION="r$REVISION"
 fi
@@ -32,6 +31,9 @@ function MakeDMG {
    find $DESTINATION -name ".?*" -exec rm -v {} \;
    UP=$(dirname $DESTINATION)
 
+   echo "Copying COPYING"
+   cp $SOURCE_DIR/COPYING  $DESTINATION/COPYING.txt
+
    echo "Creating DMG ..."
    hdiutil create -fs HFS+ -volname "Widelands $WLVERSION" -srcfolder "$DESTINATION" "$UP/widelands_64bit_$WLVERSION.dmg" 
 }
@@ -48,17 +50,19 @@ function MakeAppPackage {
    cp $SOURCE_DIR/pics/widelands.icns $DESTINATION/Widelands.app/Contents/Resources/widelands.icns
    ln -s /Applications $DESTINATION/Applications
 
-   echo "{
-      CFBundleName = widelands;
-      CFBundleDisplayName = Widelands;
-      CFBundleIdentifier = "org.widelands.wl";
-      CFBundleVersion = $WLVERSION;
-      "CFBundleInfoDictionaryVersion" = "6.0";
-      CFBundlePackageType = APPL;
-      CFBundleSignature = wdld;
-      CFBundleExecutable = widelands;
-      CFBundleIconFile = "widelands.icns";
-   }" > $DESTINATION/Widelands.app/Contents/Info.plist 
+   cat > $DESTINATION/Widelands.app/Contents/Info.plist << EOF
+{
+   CFBundleName = widelands;
+   CFBundleDisplayName = Widelands;
+   CFBundleIdentifier = "org.widelands.wl";
+   CFBundleVersion = "$WLVERSION";
+   CFBundleInfoDictionaryVersion = "6.0";
+   CFBundlePackageType = APPL;
+   CFBundleSignature = wdld;
+   CFBundleExecutable = widelands;
+   CFBundleIconFile = "widelands.icns";
+}
+EOF
 
    echo "Copying data files ..."
    rsync -Ca $SOURCE_DIR/ $DESTINATION/Widelands.app/Contents/MacOS/ \

@@ -1,4 +1,4 @@
-help=_Gets fish out of the sea.
+help=_Catches fish in the sea.
 program=fish
 
 [buildcost]
@@ -12,7 +12,7 @@ fishing_rod=1
 3=mine fish 1
 4=animation fishing 3000 # Play a fishing animation
 5=playFX ../../../sound/fisher/fisher_pull_net 192
-6=createitem fish
+6=createware fish
 7=return
 
 [idle]

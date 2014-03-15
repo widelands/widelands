@@ -28,29 +28,29 @@ return {
 		dependencies({"tribes/barbarians/pittabread/menu.png","tribes/barbarians/inn/menu.png"},p(_"Inn")) ..
 		dependencies({"tribes/barbarians/pittabread/menu.png","tribes/barbarians/big_inn/menu.png"},p(_"Big Inn")) ..
 		dependencies({"tribes/barbarians/pittabread/menu.png","tribes/barbarians/battlearena/menu.png"},p(_"Battle Arena")) ..
-		dependencies({"tribes/barbarians/pittabread/menu.png","tribes/barbarians/trainingscamp/menu.png"},p(_"Trainingscamp")) ..
+		dependencies({"tribes/barbarians/pittabread/menu.png","tribes/barbarians/trainingscamp/menu.png"},p(_"Training Camp")) ..
 	--Building Section
 		rt(h2(_"Building")) ..
-		building_size_string("barbarians", "bakery") ..
+		text_line(_"Space required:",_"Medium plot","pics/medium.png") ..
 		text_line(_"Upgraded from:", "n/a") ..
-		rt(h3(_"Build Cost:")) ..
-		image_line("tribes/barbarians/blackwood/menu.png", 2, p("2 " .. _"Blackwood")) ..
-		image_line("tribes/barbarians/raw_stone/menu.png", 2, p("2 " .. _"Raw Stone")) ..
-		image_line("tribes/barbarians/thatchreed/menu.png", 2, p("2 " .. _"Thatch Reed")) ..
-		image_line("tribes/barbarians/trunk/menu.png", 2, p("2 " .. _"Trunk")) ..
+		rt(h3(_"Build cost:")) ..
+		help_building_line("barbarians", "blackwood", ngettext("%i Blackwood", "%i Blackwood", 2), 2) ..
+		help_building_line("barbarians", "thatchreed", ngettext("%i Thatch Reed", "%i Thatch Reeds", 2), 2) ..
+		help_building_line("barbarians", "raw_stone", ngettext("%i Raw Stone", "%i Raw Stones", 2), 2) ..
+		help_building_line("barbarians", "trunk", ngettext("%i Log", "%i Logs", 2), 2) ..
 		rt(h3(_"Dismantle yields:")) ..
-		image_line("tribes/barbarians/blackwood/menu.png", 1, p("1 " .. _"Blackwood")) ..
-		image_line("tribes/barbarians/raw_stone/menu.png", 1, p("1 " .. _"Raw Stone")) ..
-		image_line("tribes/barbarians/thatchreed/menu.png", 1, p("1 " .. _"Thatch Reed")) ..
-		image_line("tribes/barbarians/trunk/menu.png", 1, p("1 " .. _"Trunk")) ..
+		help_building_line("barbarians", "blackwood", ngettext("%i Blackwood", "%i Blackwood", 1), 1) ..
+		help_building_line("barbarians", "thatchreed", ngettext("%i Thatch Reed", "%i Thatch Reeds", 1), 1) ..
+		help_building_line("barbarians", "raw_stone", ngettext("%i Raw Stone", "%i Raw Stones", 1), 1) ..
+		help_building_line("barbarians", "trunk", ngettext("%i Log", "%i Logs", 1), 1) ..
 		text_line(_"Upgradeable to:","n/a") ..
 	--Workers Section
 		rt(h2(_"Workers")) ..
 		rt(h3(_"Crew required:")) ..
 		image_line("tribes/barbarians/baker/menu.png", 1, p(_"Baker")) ..
-		text_line(_"Worker uses:", _"Baking Tray","tribes/barbarians/bakingtray/menu.png") ..
+		text_line(_"Worker uses:", _"Bread Paddle","tribes/barbarians/bakingtray/menu.png") ..
 		text_line(_"Experience levels:","n/a") ..
 	--Production Section
 		rt(h2(_"Production")) ..
-		text_line(_"Performance:", _"If all needed wares are delivered in time, this building can produce %s in %s on average.":format(_"Pitta Bread","30s"))
+		text_line(_"Performance:", _"If all needed wares are delivered in time, this building can produce %1$s in %2$s on average.":bformat(_"a Pitta Bread","30s"))
 }

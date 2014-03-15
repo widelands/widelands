@@ -32,7 +32,7 @@ struct Map_Map_Object_Saver;
 class Worker;
 
 /**
- * Whenever an item or worker is transferred to fulfill a Request,
+ * Whenever an ware or worker is transferred to fulfill a Request,
  * a Transfer is allocated to describe this transfer.
  *
  * Transfers are always created and destroyed by a Request instance.
@@ -79,8 +79,8 @@ private:
 	Game & m_game;
 	Request * m_request;
 	OPtr<PlayerImmovable> m_destination;
-	WareInstance * m_item;    ///< non-null if ware is an item
-	Worker * m_worker;  ///< non-null if ware is a worker
+	WareInstance * m_ware;    ///< non-null iff this is transferring a ware
+	Worker * m_worker;  ///< non-null iff this is transferring a worker
 	Route m_route;
 };
 

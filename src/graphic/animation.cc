@@ -134,8 +134,8 @@ uint32_t AnimationManager::get
 		try {
 			if (endp == parameters or frame_number != value)
 				throw wexception
-					(_("expected %s but found \"%s\""),
-					 _("frame number"), parameters);
+					("expected %s but found \"%s\"",
+					 "frame number", parameters);
 			parameters = endp;
 			force_skip(parameters);
 			fx_name = std::string(directory) + "/" + std::string(parameters);
@@ -254,7 +254,7 @@ void DirAnimations::parse
 
 	if
 		(char const * const string =
-		 defaults ? defaults->get_string("dirpics", 0) : 0)
+		 defaults ? defaults->get_string("dirpics", nullptr) : nullptr)
 	{
 		snprintf(dirpictempl, sizeof(dirpictempl), "%s", string);
 		repl = strstr(dirpictempl, "!!");

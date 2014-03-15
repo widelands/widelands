@@ -276,11 +276,9 @@ public:
 		Map_Object            * m_object;
 
 	protected:
-		Loader() : m_egbase(0), m_mol(0), m_object(0) {}
+		Loader() : m_egbase(nullptr), m_mol(nullptr), m_object(nullptr) {}
 
 	public:
-		typedef boost::function<void ()> FinishFn;
-
 		virtual ~Loader() {}
 
 		void init
@@ -298,17 +296,12 @@ public:
 			return ref_cast<T, Map_Object>(*m_object);
 		}
 
-		void add_finish(const FinishFn & fini);
-
 	protected:
 		void load(FileRead &);
 
 	public:
 		virtual void load_pointers();
 		virtual void load_finish();
-
-	private:
-		std::vector<FinishFn> m_finish;
 	};
 
 	/// This is just a fail-safe guard for the time until we fully transition
@@ -361,6 +354,8 @@ struct Object_Manager : boost::noncopyable {
 	void remove(Map_Object &);
 
 	bool object_still_available(const Map_Object * const t) const {
+		if (!t)
+			return false;
 		objmap_t::const_iterator it = m_objects.begin();
 		while (it != m_objects.end()) {
 			if (it->second == t)
@@ -449,12 +444,12 @@ private:
 struct Cmd_Destroy_Map_Object : public GameLogicCommand {
 	Cmd_Destroy_Map_Object() : GameLogicCommand(0), obj_serial(0) {} ///< For savegame loading
 	Cmd_Destroy_Map_Object (int32_t t, Map_Object &);
-	virtual void execute (Game &);
+	virtual void execute (Game &) override;
 
-	void Write(FileWrite &, Editor_Game_Base &, Map_Map_Object_Saver  &);
-	void Read (FileRead  &, Editor_Game_Base &, Map_Map_Object_Loader &);
+	void Write(FileWrite &, Editor_Game_Base &, Map_Map_Object_Saver  &) override;
+	void Read (FileRead  &, Editor_Game_Base &, Map_Map_Object_Loader &) override;
 
-	virtual uint8_t id() const {return QUEUE_CMD_DESTROY_MAPOBJECT;}
+	virtual uint8_t id() const override {return QUEUE_CMD_DESTROY_MAPOBJECT;}
 
 private:
 	Serial obj_serial;
@@ -464,12 +459,12 @@ struct Cmd_Act : public GameLogicCommand {
 	Cmd_Act() : GameLogicCommand(0), obj_serial(0), arg(0) {} ///< For savegame loading
 	Cmd_Act (int32_t t, Map_Object &, int32_t a);
 
-	virtual void execute (Game &);
+	virtual void execute (Game &) override;
 
-	void Write(FileWrite &, Editor_Game_Base &, Map_Map_Object_Saver  &);
-	void Read (FileRead  &, Editor_Game_Base &, Map_Map_Object_Loader &);
+	void Write(FileWrite &, Editor_Game_Base &, Map_Map_Object_Saver  &) override;
+	void Read (FileRead  &, Editor_Game_Base &, Map_Map_Object_Loader &) override;
 
-	virtual uint8_t id() const {return QUEUE_CMD_ACT;}
+	virtual uint8_t id() const override {return QUEUE_CMD_ACT;}
 
 private:
 	Serial obj_serial;

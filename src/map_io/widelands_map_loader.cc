@@ -61,7 +61,7 @@
 namespace Widelands {
 
 WL_Map_Loader::WL_Map_Loader(FileSystem & fs, Map * const m)
-	: Map_Loader("", *m), m_fs(fs), m_mol(0)
+	: Map_Loader("", *m), m_fs(fs), m_mol(nullptr)
 {}
 
 
@@ -85,7 +85,7 @@ int32_t WL_Map_Loader::preload_map(bool const scenario) {
 		throw warning
 			(_("Invalid World"),
 			 _
-			 	("The world \"%s\" set by the map, does not exist on your "
+			 	("The world \"%s\" set by the map does not exist on your "
 			 	 "filesystem."),
 			 m_map.get_world_name());
 

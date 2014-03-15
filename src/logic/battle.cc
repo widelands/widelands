@@ -38,8 +38,8 @@ Battle::Descr g_Battle_Descr("battle", "Battle");
 Battle::Battle ()
 	:
 	Map_Object(&g_Battle_Descr),
-	m_first(0),
-	m_second(0),
+	m_first(nullptr),
+	m_second(nullptr),
 	m_creationtime(0),
 	m_readyflags(0),
 	m_damage(0),
@@ -88,12 +88,12 @@ void Battle::init (Editor_Game_Base & egbase)
 void Battle::cleanup (Editor_Game_Base & egbase)
 {
 	if (m_first) {
-		m_first ->setBattle(ref_cast<Game, Editor_Game_Base>(egbase), 0);
-		m_first  = 0;
+		m_first ->setBattle(ref_cast<Game, Editor_Game_Base>(egbase), nullptr);
+		m_first  = nullptr;
 	}
 	if (m_second) {
-		m_second->setBattle(ref_cast<Game, Editor_Game_Base>(egbase), 0);
-		m_second = 0;
+		m_second->setBattle(ref_cast<Game, Editor_Game_Base>(egbase), nullptr);
+		m_second = nullptr;
 	}
 
 	Map_Object::cleanup(egbase);
@@ -170,11 +170,11 @@ void Battle::getBattleWork(Game & game, Soldier & soldier)
 	}
 
 	if (soldier.get_current_hitpoints() < 1) {
-		molog(_("[battle] soldier %u lose battle\n"), soldier.serial());
+		molog("[battle] soldier %u lost the battle\n", soldier.serial());
 		soldier          . owner().count_casualty();
 		opponent(soldier)->owner().count_kill    ();
 		soldier.start_task_die(game);
-		molog(_("[battle] waking up winner %d\n"), opponent(soldier)->serial());
+		molog("[battle] waking up winner %d\n", opponent(soldier)->serial());
 		opponent(soldier)->send_signal(game, "wakeup");
 		return schedule_destroy(game);
 	}
@@ -404,7 +404,7 @@ Map_Object::Loader * Battle::load
 			loader->init(egbase, mol, *new Battle);
 			loader->load(fr, version);
 		} else
-			throw game_data_error(_("unknown/unhandled version %u"), version);
+			throw game_data_error("unknown/unhandled version %u", version);
 	} catch (const std::exception & e) {
 		throw wexception("Loading Battle: %s", e.what());
 	}

@@ -62,7 +62,7 @@ public:
 	uint32_t get_pagesize() const {return m_pagesize;}
 	uint32_t get_scrollpos() const {return m_pos;}
 
-	bool handle_mousepress  (Uint8 btn, int32_t x, int32_t y);
+	bool handle_mousepress  (Uint8 btn, int32_t x, int32_t y) override;
 
 	void set_force_draw(bool const t) {m_force_draw = t;}
 
@@ -76,12 +76,12 @@ private:
 
 	void draw_button(RenderTarget &, Area, Rect);
 	void draw_area  (RenderTarget &, Area, Rect);
-	void draw(RenderTarget &);
-	void think();
+	void draw(RenderTarget &) override;
+	void think() override;
 
-	bool handle_mouserelease(Uint8 btn, int32_t x, int32_t y);
+	bool handle_mouserelease(Uint8 btn, int32_t x, int32_t y) override;
 	bool handle_mousemove
-		(Uint8 state, int32_t mx, int32_t my, int32_t xdiff, int32_t ydiff);
+		(Uint8 state, int32_t mx, int32_t my, int32_t xdiff, int32_t ydiff) override;
 
 private:
 	bool m_horizontal;

@@ -14,7 +14,7 @@ return {
 	--General Section
 		rt(h2(_"General")) ..
 		rt(h2(_"Purpose:")) ..
-		image_line("tribes/barbarians/raw_stone/menu.png",1,p(_"Carve %s out of stones standing near the hut.":format(_"Raw Stone"))) ..
+		image_line("tribes/barbarians/raw_stone/menu.png",1,p(_"Carve %s out of stones lying near the hut.":format(_"Raw Stone"))) ..
 		text_line(_"Working radius:", "6") ..
 		text_line(_"Conquer range:", "n/a") ..
 		text_line(_"Vision range:", "4") ..
@@ -30,10 +30,10 @@ return {
 		rt(h2(_"Building")) ..
 		building_size_string("barbarians", "goldmine") ..
 		text_line(_"Upgraded from:", "n/a") ..
-		rt(h3(_"Build Cost:")) ..
-		image_line("tribes/barbarians/trunk/menu.png", 4, p("4 " .. _"Trunk")) ..
+		rt(h3(_"Build cost:")) ..
+		help_building_line("barbarians", "trunk", ngettext("%i Log", "%i Logs", 4), 4) ..
 		rt(h3(_"Dismantle yields:")) ..
-		image_line("tribes/barbarians/trunk/menu.png", 2, p("2 " .. _"Trunk")) ..
+		help_building_line("barbarians", "trunk", ngettext("%i Log", "%i Logs", 2), 2) ..
 		text_line(_"Upgradeable to:","n/a") ..
 	--Workers Section
 		rt(h2(_"Workers")) ..
@@ -43,5 +43,5 @@ return {
 		text_line(_"Experience levels:","n/a") ..
 	--Production Section
 		rt(h2(_"Production")) ..
-		text_line(_"Performance:", _"The %s pauses %s before going to work again.":format(_"Stonemason","25s"))
+		text_line(_"Performance:", _"The stonemason pauses 25s before going to work again.")
 }

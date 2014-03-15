@@ -21,10 +21,10 @@
 #include "graphic/font_handler.h"
 #include "graphic/graphic.h"
 #include "graphic/rendertarget.h"
-#include "logic/item_ware_descr.h"
 #include "logic/player.h"
 #include "logic/playercommand.h"
 #include "logic/tribe.h"
+#include "logic/ware_descr.h"
 #include "ui_basic/button.h"
 #include "ui_basic/tabpanel.h"
 #include "ui_basic/unique_window.h"
@@ -36,7 +36,7 @@
 using Widelands::Economy;
 using Widelands::Editor_Game_Base;
 using Widelands::Game;
-using Widelands::Item_Ware_Descr;
+using Widelands::WareDescr;
 using Widelands::Ware_Index;
 using Widelands::Worker_Descr;
 
@@ -103,7 +103,7 @@ private:
 			}
 		}
 	protected:
-		std::string info_for_ware(Widelands::Ware_Index const ware) {
+		std::string info_for_ware(Widelands::Ware_Index const ware) override {
 			return
 				boost::lexical_cast<std::string>
 				(get_type() == Widelands::wwWORKER ?
@@ -134,7 +134,7 @@ private:
 			UI::Box * buttons = new UI::Box(this, 0, 0, UI::Box::Horizontal);
 			add(buttons, UI::Box::AlignLeft);
 
-			UI::Button * b = 0;
+			UI::Button * b = nullptr;
 
 #define ADD_WARE_BUTTON(callback, text, tooltip)                  \
 	b = new UI::Button                                    \
@@ -230,7 +230,7 @@ private:
 			UI::Box * buttons = new UI::Box(this, 0, 0, UI::Box::Horizontal);
 			add(buttons, UI::Box::AlignLeft);
 
-			UI::Button * b = 0;
+			UI::Button * b = nullptr;
 #define ADD_WORKER_BUTTON(callback, text, tooltip)                  \
 	b = new UI::Button                                      \
 		 (buttons, #callback,                                         \

@@ -37,7 +37,7 @@ class SDLTTF_FontLoaderFromFilesystem : public IFontLoader {
 public:
 	SDLTTF_FontLoaderFromFilesystem(FileSystem* fs);
 	virtual ~SDLTTF_FontLoaderFromFilesystem();
-	virtual IFont * load(const string& name, int ptsize);
+	virtual IFont * load(const string& name, int ptsize) override;
 
 private:
 	FileSystem* fs_;

@@ -43,7 +43,7 @@ struct Fullscreen_Menu_NetSetupLAN : public Fullscreen_Menu_Base {
 
 	Fullscreen_Menu_NetSetupLAN ();
 
-	virtual void think();
+	virtual void think() override;
 
 	/**
 	 * \param[out] addr filled in with the IP address of the chosen server

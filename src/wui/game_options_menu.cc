@@ -31,7 +31,6 @@
 #include "wui/game_main_menu_save_game.h"
 #include "wui/game_options_sound_menu.h"
 
-
 GameOptionsMenu::GameOptionsMenu
 	(Interactive_GameBase                         & gb,
 	 UI::UniqueWindow::Registry                   & registry,
@@ -39,7 +38,7 @@ GameOptionsMenu::GameOptionsMenu
 :
 	UI::UniqueWindow
 		(&gb, "options", &registry,
-		 102,
+		 145,
 		 vmargin()
 		 + 4 * (20 + vspacing()) + 2 * vgap() +
 		 35 + vspacing() + 35 +

@@ -36,7 +36,7 @@
 namespace UI {struct ProgressWindow;}
 struct Fullscreen_Menu_LaunchGame;
 struct Interactive_Base;
-struct LuaInterface;
+class LuaInterface;
 
 namespace Widelands {
 
@@ -110,11 +110,11 @@ public:
 	Building & warp_dismantlesite
 		(Coords, Player_Number, bool loading = false,
 		Building::FormerBuildings former_buildings = Building::FormerBuildings());
-	Bob & create_bob(Coords, const Bob::Descr &, Player * owner = 0);
+	Bob & create_bob(Coords, const Bob::Descr &, Player * owner = nullptr);
 	Bob & create_bob
-		(Coords, Bob::Descr::Index, Tribe_Descr const * const = 0, Player * owner = 0);
+		(Coords, Bob::Descr::Index, Tribe_Descr const * const = nullptr, Player * owner = nullptr);
 	Bob & create_bob
-		(Coords, const std::string & name, Tribe_Descr const * const = 0, Player * owner = 0);
+		(Coords, const std::string & name, Tribe_Descr const * const = nullptr, Player * owner = nullptr);
 	Immovable & create_immovable(Coords, uint32_t idx, Tribe_Descr const *);
 	Immovable & create_immovable
 		(Coords, const std::string & name, Tribe_Descr const *);
@@ -149,9 +149,9 @@ public:
 	void   conquer_area            (Player_Area<Area<FCoords> >);
 	void   conquer_area_no_building(Player_Area<Area<FCoords> > const);
 
-	void receive(const NoteImmovable &);
-	void receive(const NoteFieldPossession     &);
-	void receive(const NoteFieldTransformed    &);
+	void receive(const NoteImmovable &) override;
+	void receive(const NoteFieldPossession     &) override;
+	void receive(const NoteFieldTransformed    &) override;
 
 	void cleanup_objects() {
 		objects().cleanup(*this);

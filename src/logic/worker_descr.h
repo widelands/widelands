@@ -57,7 +57,7 @@ public:
 		 const Tribe_Descr &);
 	virtual ~Worker_Descr();
 
-	virtual Bob & create_object() const;
+	virtual Bob & create_object() const override;
 
 	virtual void load_graphics();
 
@@ -109,12 +109,10 @@ public:
 		(Editor_Game_Base &, Player &, PlayerImmovable *, Coords) const;
 
 	typedef std::map<Worker_Descr const *, std::string> becomes_map_t;
-	virtual uint32_t movecaps() const;
+	virtual uint32_t movecaps() const override;
 
 	typedef std::map<std::string, WorkerProgram *> Programs;
 	const Programs & programs() const {return m_programs;}
-
-	const std::string & compatibility_program(const std::string & programname) const;
 
 protected:
 
@@ -139,14 +137,6 @@ protected:
 	 */
 	Ware_Index  m_becomes;
 	Programs    m_programs;
-
-	/**
-	 * Compatibility hints for loading save games of older versions.
-	 *
-	 * Maps program name to a string that is to be interpreted by the
-	 * game loading logic.
-	 */
-	std::map<std::string, std::string> m_compatibility_programs;
 };
 
 }

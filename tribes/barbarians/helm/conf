@@ -1,4 +1,4 @@
-help=_A helmet is basic tool to protect warriors. It is produced in the helmsmithy and used in the trainingscamp - together with food -  to train soldiers from healthpoints level 0 to healphpoints level 1.
+help=_A helmet is a basic tool to protect warriors. It is produced in the helm smithy and used in the training camp – together with food – to train soldiers from health level 0 to level 1.
 preciousness=1
 
 [idle]

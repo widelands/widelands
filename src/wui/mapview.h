@@ -67,13 +67,13 @@ struct Map_View : public UI::Panel {
 	bool is_dragging() const {return m_dragging;}
 
 	// Drawing
-	void draw(RenderTarget &);
+	void draw(RenderTarget &) override;
 
 	// Event handling
-	bool handle_mousepress  (Uint8 btn, int32_t x, int32_t y);
-	bool handle_mouserelease(Uint8 btn, int32_t x, int32_t y);
+	bool handle_mousepress  (Uint8 btn, int32_t x, int32_t y) override;
+	bool handle_mouserelease(Uint8 btn, int32_t x, int32_t y) override;
 	bool handle_mousemove
-		(Uint8 state, int32_t x, int32_t y, int32_t xdiff, int32_t ydiff);
+		(Uint8 state, int32_t x, int32_t y, int32_t xdiff, int32_t ydiff) override;
 
 	void track_sel(Point m);
 	void need_complete_redraw() {m_complete_redraw_needed = true;}

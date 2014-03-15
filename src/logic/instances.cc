@@ -68,9 +68,9 @@ void Cmd_Destroy_Map_Object::Read
 				obj_serial = 0;
 		} else
 			throw game_data_error
-				(_("unknown/unhandled version %u"), packet_version);
+				("unknown/unhandled version %u", packet_version);
 	} catch (const _wexception & e) {
-		throw game_data_error(_("destroy map object: %s"), e.what());
+		throw game_data_error("destroy map object: %s", e.what());
 	}
 }
 void Cmd_Destroy_Map_Object::Write
@@ -113,16 +113,16 @@ void Cmd_Act::Read
 					obj_serial = mol.get<Map_Object>(object_serial).serial();
 				} catch (const _wexception & e) {
 					throw game_data_error
-						(_("object %u: %s"), object_serial, e.what());
+						("object %u: %s", object_serial, e.what());
 				}
 			else
 				obj_serial = 0;
 			arg = fr.Unsigned32();
 		} else
 			throw game_data_error
-				(_("unknown/unhandled version %u"), packet_version);
+				("unknown/unhandled version %u", packet_version);
 	} catch (const _wexception & e) {
-		throw wexception(_("act: %s"), e.what());
+		throw wexception("act: %s", e.what());
 	}
 }
 void Cmd_Act::Write
@@ -199,7 +199,7 @@ std::vector<Serial> Object_Manager::all_object_serials_ordered () const {
 Map_Object * Object_Ptr::get(const Editor_Game_Base & egbase)
 {
 	if (!m_serial)
-		return 0;
+		return nullptr;
 	Map_Object * const obj = egbase.objects().get_object(m_serial);
 	if (!obj)
 		m_serial = 0;
@@ -211,7 +211,7 @@ Map_Object * Object_Ptr::get(const Editor_Game_Base & egbase)
 // that is pointed to.
 // That is, a 'const Object_Ptr' behaves like a 'Object_Ptr * const'.
 Map_Object * Object_Ptr::get(const Editor_Game_Base & egbase) const {
-	return m_serial ? egbase.objects().get_object(m_serial) : 0;
+	return m_serial ? egbase.objects().get_object(m_serial) : nullptr;
 }
 
 
@@ -334,7 +334,7 @@ Map_Object IMPLEMENTATION
  * Zero-initialize a map object
  */
 Map_Object::Map_Object(const Map_Object_Descr * const the_descr) :
-m_descr(the_descr), m_serial(0), m_logsink(0)
+m_descr(the_descr), m_serial(0), m_logsink(nullptr)
 {}
 
 
@@ -481,7 +481,7 @@ void Map_Object::Loader::load(FileRead & fr)
 
 		uint8_t const version = fr.Unsigned8();
 		if (version != CURRENT_SAVEGAME_VERSION)
-			throw game_data_error(_("unknown/unhandled version %u"), version);
+			throw game_data_error("unknown/unhandled version %u", version);
 
 		Serial const serial = fr.Unsigned32();
 		try {
@@ -518,26 +518,7 @@ void Map_Object::Loader::load_pointers() {}
  */
 void Map_Object::Loader::load_finish()
 {
-	while (!m_finish.empty()) {
-		m_finish.back()();
-		m_finish.pop_back();
-	}
 }
-
-/**
- * Register a callback function that will automatically be run at
- * \ref load_finish time.
- *
- * This is useful for registering save game compatibility fixups that need
- * to be run after everything else has loaded.
- *
- * Callbacks are run in LIFO order.
- */
-void Map_Object::Loader::add_finish(const FinishFn & fini)
-{
-	m_finish.push_back(fini);
-}
-
 
 /**
  * Save the Map_Object to the given file.

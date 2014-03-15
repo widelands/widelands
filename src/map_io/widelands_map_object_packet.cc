@@ -58,7 +58,7 @@ void Map_Object_Packet::Read
 		const uint8_t packet_version = fr.Unsigned8();
 		if (packet_version != CURRENT_PACKET_VERSION)
 			throw game_data_error
-				(_("unknown/unhandled version %u"), packet_version);
+				("unknown/unhandled version %u", packet_version);
 
 		// Initial loading stage
 		for (;;)
@@ -106,10 +106,10 @@ void Map_Object_Packet::Read
 				break;
 
 			default:
-				throw game_data_error(_("unknown object header %u"), header);
+				throw game_data_error("unknown object header %u", header);
 			}
 	} catch (const std::exception & e) {
-		throw game_data_error(_("map objects: %s"), e.what());
+		throw game_data_error("map objects: %s", e.what());
 	}
 }
 

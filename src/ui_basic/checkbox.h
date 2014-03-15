@@ -38,7 +38,7 @@ struct Statebox : public Panel {
 	Statebox
 		(Panel * parent,
 		 Point,
-		 const Image* pic                  = 0,
+		 const Image* pic                  = nullptr,
 		 const std::string & tooltip_text = std::string());
 	~Statebox();
 
@@ -57,12 +57,12 @@ struct Statebox : public Panel {
 	}
 
 	// Drawing and event handlers
-	void draw(RenderTarget &);
+	void draw(RenderTarget &) override;
 
-	void handle_mousein(bool inside);
-	bool handle_mousepress  (Uint8 btn, int32_t x, int32_t y);
-	bool handle_mouserelease(Uint8 btn, int32_t x, int32_t y);
-	bool handle_mousemove(Uint8, int32_t, int32_t, int32_t, int32_t);
+	void handle_mousein(bool inside) override;
+	bool handle_mousepress  (Uint8 btn, int32_t x, int32_t y) override;
+	bool handle_mouserelease(Uint8 btn, int32_t x, int32_t y) override;
+	bool handle_mousemove(Uint8, int32_t, int32_t, int32_t, int32_t) override;
 
 private:
 	virtual void clicked() = 0;
@@ -94,13 +94,13 @@ struct Checkbox : public Statebox {
 	Checkbox
 		(Panel             * const parent,
 		 Point               const p,
-		 const Image* pic        = 0,
+		 const Image* pic        = nullptr,
 		 const std::string &       tooltip_text = std::string())
 		: Statebox(parent, p, pic, tooltip_text)
 	{}
 
 private:
-	void clicked();
+	void clicked() override;
 };
 
 }

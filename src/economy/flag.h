@@ -55,31 +55,31 @@ struct Flag : public PlayerImmovable, public RoutingNode {
 	friend class Economy;
 	friend struct Router;
 	friend class FlagQueue;
-	friend struct Map_Ware_Data_Packet;     // has to look at pending items
-	friend struct Map_Waredata_Data_Packet; // has to look at pending items
+	friend struct Map_Ware_Data_Packet;     // has to look at pending wares
+	friend struct Map_Waredata_Data_Packet; // has to look at pending wares
 	friend struct Map_Flagdata_Data_Packet; // has to read/write this to a file
 
 	Flag(); /// empty flag for savegame loading
 	Flag(Editor_Game_Base &, Player & owner, Coords); /// create a new flag
 	virtual ~Flag();
 
-	void load_finish(Editor_Game_Base &);
-	virtual void destroy(Editor_Game_Base &);
+	void load_finish(Editor_Game_Base &) override;
+	virtual void destroy(Editor_Game_Base &) override;
 
-	virtual int32_t  get_type    () const;
-	char const * type_name() const {return "flag";}
-	virtual int32_t  get_size    () const;
-	virtual bool get_passable() const;
-	const std::string & name() const;
+	virtual int32_t  get_type    () const override;
+	char const * type_name() const override {return "flag";}
+	virtual int32_t  get_size    () const override;
+	virtual bool get_passable() const override;
+	const std::string & name() const override;
 
-	virtual Flag & base_flag();
+	virtual Flag & base_flag() override;
 
-	const Coords & get_position() const {return m_position;}
-	virtual PositionList get_positions (const Editor_Game_Base &) const;
-	void get_neighbours(WareWorker type, RoutingNodeNeighbours &);
-	int32_t get_waitcost() const {return m_item_filled;}
+	const Coords & get_position() const override {return m_position;}
+	virtual PositionList get_positions (const Editor_Game_Base &) const override;
+	void get_neighbours(WareWorker type, RoutingNodeNeighbours &) override;
+	int32_t get_waitcost() const {return m_ware_filled;}
 
-	virtual void set_economy(Economy *);
+	virtual void set_economy(Economy *) override;
 
 	Building * get_building() const {return m_building;}
 	void attach_building(Editor_Game_Base &, Building &);
@@ -100,31 +100,31 @@ struct Flag : public PlayerImmovable, public RoutingNode {
 	bool is_dead_end() const;
 
 	bool has_capacity() const;
-	uint32_t total_capacity() {return m_item_capacity;}
-	uint32_t current_items() const {return m_item_filled;}
+	uint32_t total_capacity() {return m_ware_capacity;}
+	uint32_t current_wares() const {return m_ware_filled;}
 	void wait_for_capacity(Game &, Worker &);
 	void skip_wait_for_capacity(Game &, Worker &);
-	void add_item(Editor_Game_Base &, WareInstance &);
-	bool has_pending_item(Game &, Flag & destflag);
+	void add_ware(Editor_Game_Base &, WareInstance &);
+	bool has_pending_ware(Game &, Flag & destflag);
 	bool ack_pickup(Game &, Flag & destflag);
 	bool cancel_pickup(Game &, Flag & destflag);
-	WareInstance * fetch_pending_item(Game &, PlayerImmovable & dest);
-	Wares get_items();
+	WareInstance * fetch_pending_ware(Game &, PlayerImmovable & dest);
+	Wares get_wares();
 
 	void call_carrier(Game &, WareInstance &, PlayerImmovable * nextstep);
-	void update_items(Game &, Flag * other);
+	void update_wares(Game &, Flag * other);
 
-	void remove_item(Editor_Game_Base &, WareInstance * const);
+	void remove_ware(Editor_Game_Base &, WareInstance * const);
 
 	void add_flag_job(Game &, Ware_Index workerware, const std::string & programname);
 
-	virtual void log_general_info(const Editor_Game_Base &);
+	virtual void log_general_info(const Editor_Game_Base &) override;
 
 protected:
-	virtual void init(Editor_Game_Base &);
-	virtual void cleanup(Editor_Game_Base &);
+	virtual void init(Editor_Game_Base &) override;
+	virtual void cleanup(Editor_Game_Base &) override;
 
-	virtual void draw(const Editor_Game_Base &, RenderTarget &, const FCoords&, const Point&);
+	virtual void draw(const Editor_Game_Base &, RenderTarget &, const FCoords&, const Point&) override;
 
 	void wake_up_capacity_queue(Game &);
 
@@ -133,11 +133,11 @@ protected:
 	void set_flag_position(Coords coords);
 
 private:
-	struct PendingItem {
-		WareInstance    * item;     ///< the item itself
-		bool              pending;  ///< if the item is pending
-		int32_t           priority;  ///< carrier prefers the item with highest priority
-		OPtr<PlayerImmovable> nextstep; ///< next step that this item is sent to
+	struct PendingWare {
+		WareInstance    * ware;     ///< the ware itself
+		bool              pending;  ///< if the ware is pending
+		int32_t           priority;  ///< carrier prefers the ware with highest priority
+		OPtr<PlayerImmovable> nextstep; ///< next step that this ware is sent to
 	};
 
 	struct FlagJob {
@@ -151,9 +151,9 @@ private:
 	Building    * m_building; ///< attached building (replaces road WALK_NW)
 	Road        * m_roads[6]; ///< WALK_xx - 1 as index
 
-	int32_t      m_item_capacity; ///< size of m_items array
-	int32_t      m_item_filled; ///< number of items currently on the flag
-	PendingItem * m_items;    ///< items currently on the flag
+	int32_t      m_ware_capacity; ///< size of m_wares array
+	int32_t      m_ware_filled; ///< number of wares currently on the flag
+	PendingWare * m_wares;    ///< wares currently on the flag
 
 	/// call_carrier() will always call a carrier when the destination is
 	/// the given flag

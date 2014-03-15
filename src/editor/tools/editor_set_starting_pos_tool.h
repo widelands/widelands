@@ -36,13 +36,13 @@ struct Editor_Set_Starting_Pos_Tool : public Editor_Tool {
 
 	int32_t handle_click_impl
 		(Widelands::Map &, Widelands::Node_and_Triangle<>,
-		 Editor_Interactive &, Editor_Action_Args &);
-	char const * get_sel_impl() const
+		 Editor_Interactive &, Editor_Action_Args &) override;
+	char const * get_sel_impl() const override
 		{return m_current_sel_pic;}
 
 	Widelands::Player_Number get_current_player() const;
 	void set_current_player(int32_t);
-	bool has_size_one() const {return true;}
+	bool has_size_one() const override {return true;}
 
 private:
 	char fsel_picsname[sizeof(FSEL_PIC_FILENAME)];
@@ -50,6 +50,6 @@ private:
 };
 
 int32_t Editor_Tool_Set_Starting_Pos_Callback
-	(Widelands::TCoords<Widelands::FCoords>, void *, int32_t);
+	(const Widelands::TCoords<Widelands::FCoords>& c, Widelands::Map& map);
 
 #endif

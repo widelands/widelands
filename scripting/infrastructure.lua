@@ -44,7 +44,7 @@ function connected_road(p, start, cmd, g_create_carriers)
       moves[#moves+1] = m:sub(1,-2)
       if(m:sub(-1) == '|') then
          moves[#moves+1] = true -- Force the road
-         r = p:place_road(start, unpack(moves))
+         r = p:place_road(start, table.unpack(moves))
          start = r.end_flag
          if create_carriers then
             r:set_workers("carrier", 1)

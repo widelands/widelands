@@ -37,8 +37,8 @@ struct Building_Statistics_Menu : public UI::UniqueWindow {
 	Building_Statistics_Menu
 		(Interactive_Player &, UI::UniqueWindow::Registry &);
 
-	void think();
-	void draw(RenderTarget &);
+	void think() override;
+	void draw(RenderTarget &) override;
 	void update();
 
 private:

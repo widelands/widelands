@@ -58,34 +58,34 @@ class ExpeditionBootstrap;
  * However, we expect this to be such a rare case that it is not
  * implemented at the moment.
  */
-struct PortDock : PlayerImmovable {
-	PortDock();
+class PortDock : public PlayerImmovable {
+public:
+	PortDock(Warehouse* warehouse);
 	virtual ~PortDock();
 
 	void add_position(Widelands::Coords where);
-	void set_warehouse(Warehouse * wh);
-	Warehouse * get_warehouse() const {return m_warehouse;}
+	Warehouse * get_warehouse() const;
 
 	Fleet * get_fleet() const {return m_fleet;}
 	PortDock * get_dock(Flag & flag) const;
 	bool get_need_ship() const {return m_need_ship || m_expedition_ready;}
 
-	virtual void set_economy(Economy *);
+	virtual void set_economy(Economy *) override;
 
-	virtual int32_t get_size() const;
-	virtual bool get_passable() const;
-	virtual int32_t get_type() const;
-	virtual char const * type_name() const;
+	virtual int32_t get_size() const override;
+	virtual bool get_passable() const override;
+	virtual int32_t get_type() const override;
+	virtual char const * type_name() const override;
 
-	virtual Flag & base_flag();
+	virtual Flag & base_flag() override;
 	virtual PositionList get_positions
-		(const Editor_Game_Base &) const;
+		(const Editor_Game_Base &) const override;
 	virtual void draw
-		(const Editor_Game_Base &, RenderTarget &, const FCoords&, const Point&);
-	virtual const std::string & name() const;
+		(const Editor_Game_Base &, RenderTarget &, const FCoords&, const Point&) override;
+	virtual const std::string & name() const override;
 
-	virtual void init(Editor_Game_Base &);
-	virtual void cleanup(Editor_Game_Base &);
+	virtual void init(Editor_Game_Base &) override;
+	virtual void cleanup(Editor_Game_Base &) override;
 
 	void add_neighbours(std::vector<RoutingNodeNeighbour> & neighbours);
 
@@ -97,7 +97,7 @@ struct PortDock : PlayerImmovable {
 
 	void ship_arrived(Game &, Ship &);
 
-	virtual void log_general_info(const Editor_Game_Base &);
+	virtual void log_general_info(const Editor_Game_Base &) override;
 
 	uint32_t count_waiting(WareWorker waretype, Ware_Index wareindex);
 
@@ -134,12 +134,13 @@ private:
 
 	// saving and loading
 protected:
-	struct Loader : PlayerImmovable::Loader {
+	class Loader : public PlayerImmovable::Loader {
+	public:
 		Loader();
 
 		void load(FileRead &, uint8_t version);
-		virtual void load_pointers();
-		virtual void load_finish();
+		virtual void load_pointers() override;
+		virtual void load_finish() override;
 
 	private:
 		uint32_t m_warehouse;
@@ -147,8 +148,8 @@ protected:
 	};
 
 public:
-	virtual bool has_new_save_support() {return true;}
-	virtual void save(Editor_Game_Base &, Map_Map_Object_Saver &, FileWrite &);
+	virtual bool has_new_save_support() override {return true;}
+	virtual void save(Editor_Game_Base &, Map_Map_Object_Saver &, FileWrite &) override;
 
 	static Map_Object::Loader * load
 		(Editor_Game_Base &, Map_Map_Object_Loader &, FileRead &);

@@ -54,9 +54,9 @@ public:
 		 bool horizontal = false);
 
 	bool handle_mousemove
-		(uint8_t state, int32_t x, int32_t y, int32_t xdiff, int32_t ydiff);
-	bool handle_mousepress(uint8_t btn, int32_t x, int32_t y);
-	bool handle_mouserelease(Uint8 btn, int32_t x, int32_t y);
+		(uint8_t state, int32_t x, int32_t y, int32_t xdiff, int32_t ydiff) override;
+	bool handle_mousepress(uint8_t btn, int32_t x, int32_t y) override;
+	bool handle_mouserelease(Uint8 btn, int32_t x, int32_t y) override;
 
 	// Wares may be selected (highlighted)
 	void select_ware(Widelands::Ware_Index);
@@ -72,7 +72,7 @@ public:
 	Widelands::WareWorker get_type() const {return m_type;}
 
 protected:
-	virtual void layout();
+	virtual void layout() override;
 
 	virtual std::string info_for_ware(Widelands::Ware_Index) = 0;
 
@@ -81,7 +81,7 @@ protected:
 	const Widelands::Tribe_Descr::WaresOrder & icons_order() const;
 	const Widelands::Tribe_Descr::WaresOrderCoords & icons_order_coords() const;
 	virtual Point ware_position(Widelands::Ware_Index) const;
-	virtual void draw(RenderTarget &);
+	virtual void draw(RenderTarget &) override;
 	virtual void draw_ware
 		(RenderTarget &,
 		 Widelands::Ware_Index);
@@ -91,13 +91,12 @@ private:
 	typedef std::vector<bool> selection_type;
 
 	/**
-	 * Update the anchored selection. When first mouse button is
-	 * pressed on a ware, it is stored in @ref m_selection_anchor.
-	 * Mouse moves trigger this function to select all wares items
-	 * in the rectangle between the anchor and the mouse position.
-	 * They are temporary stored in @ref m_in_selection.
-	 * Releasing the mouse button will performs the selection.
-	 * This allows selection of multiple wares by dragging.
+	 * Update the anchored selection. When first mouse button is pressed on a
+	 * ware, it is stored in @ref m_selection_anchor. Mouse moves trigger this
+	 * function to select all wares in the rectangle between the anchor and the
+	 * mouse position. They are temporary stored in @ref m_in_selection.
+	 * Releasing the mouse button will performs the selection. This allows
+	 * selection of multiple wares by dragging.
 	 */
 	void update_anchor_selection(int32_t x, int32_t y);
 
@@ -139,7 +138,7 @@ public:
 	void remove_all_warelists();
 
 protected:
-	virtual std::string info_for_ware(Widelands::Ware_Index);
+	virtual std::string info_for_ware(Widelands::Ware_Index) override;
 
 private:
 	typedef std::vector<const Widelands::WareList *> vector_type;

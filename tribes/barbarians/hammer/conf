@@ -1,4 +1,4 @@
-help=_The hammer is an essential tool. It is needed by the geologist, the builder, the blacksmith and the helmsmith. Make sure you always have some in reserve! It is one of the basic tools produced at the metalwork shop, (but ceases to be produced by the building if it is enhanced to an axefactory and war mill).
+help=_The hammer is an essential tool. It is needed by the geologist, the builder, the blacksmith and the helmsmith. Make sure you always have some in reserve! It is one of the basic tools produced at the metal workshop, (but it ceases to be produced by the building if it is enhanced to an axfactory and war mill).
 preciousness=1
 
 [idle]

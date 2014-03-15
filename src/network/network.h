@@ -47,9 +47,9 @@ struct SyncCallback {
 struct Cmd_NetCheckSync : public Widelands::Command {
 	Cmd_NetCheckSync (int32_t dt, SyncCallback *);
 
-	virtual void execute (Widelands::Game &);
+	virtual void execute (Widelands::Game &) override;
 
-	virtual uint8_t id() const {return QUEUE_CMD_NETCHECKSYNC;}
+	virtual uint8_t id() const override {return QUEUE_CMD_NETCHECKSYNC;}
 
 private:
 	SyncCallback * m_callback;
@@ -98,7 +98,7 @@ struct SendPacket : public Widelands::StreamWrite {
 	void send (TCPsocket);
 	void reset ();
 
-	void Data(void const * data, size_t size);
+	void Data(void const * data, size_t size) override;
 
 private:
 	std::vector<uint8_t> buffer;
@@ -112,8 +112,8 @@ struct RecvPacket : public Widelands::StreamRead {
 public:
 	RecvPacket(Deserializer &);
 
-	size_t Data(void * data, size_t bufsize);
-	bool EndOfFile() const;
+	size_t Data(void * data, size_t bufsize) override;
+	bool EndOfFile() const override;
 
 private:
 	std::vector<uint8_t> buffer;
@@ -166,7 +166,7 @@ struct DisconnectException : public std::exception {
 	 PRINTF_FORMAT(2, 3);
 	virtual ~DisconnectException() throw ();
 
-	virtual const char * what() const throw ();
+	virtual const char * what() const throw () override;
 
 private:
 	std::string m_what;
@@ -182,7 +182,7 @@ struct ProtocolException : public std::exception {
 
 	/// do NOT use!!! This exception shall only return the command number of the received message
 	/// via \ref ProtocolException:number()
-	virtual const char * what() const throw () {assert(false); return "dummy";}
+	virtual const char * what() const throw () override {assert(false); return "dummy";}
 
 	/// \returns the command number of the received message
 	virtual int          number() const {return m_what;}

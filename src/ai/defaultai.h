@@ -68,10 +68,10 @@ struct Flag;
 struct DefaultAI : Computer_Player {
 	DefaultAI(Widelands::Game &, const Widelands::Player_Number, uint8_t);
 	~DefaultAI();
-	virtual void think ();
+	virtual void think () override;
 
-	virtual void receive(const Widelands::NoteImmovable &);
-	virtual void receive(const Widelands::NoteFieldPossession     &);
+	virtual void receive(const Widelands::NoteImmovable &) override;
+	virtual void receive(const Widelands::NoteFieldPossession     &) override;
 
 	enum {
 		AGGRESSIVE = 2,
@@ -83,7 +83,7 @@ struct DefaultAI : Computer_Player {
 	struct AggressiveImpl : public Computer_Player::Implementation {
 		AggressiveImpl() {name = _("Aggressive");}
 		Computer_Player * instantiate
-			(Widelands::Game & game, Widelands::Player_Number const p) const
+			(Widelands::Game & game, Widelands::Player_Number const p) const override
 		{
 			return new DefaultAI(game, p, AGGRESSIVE);
 		}
@@ -92,7 +92,7 @@ struct DefaultAI : Computer_Player {
 	struct NormalImpl : public Computer_Player::Implementation {
 		NormalImpl() {name = _("Normal");}
 		Computer_Player * instantiate
-			(Widelands::Game & game, Widelands::Player_Number const p) const
+			(Widelands::Game & game, Widelands::Player_Number const p) const override
 		{
 			return new DefaultAI(game, p, NORMAL);
 		}
@@ -101,7 +101,7 @@ struct DefaultAI : Computer_Player {
 	struct DefensiveImpl : public Computer_Player::Implementation {
 		DefensiveImpl() {name = _("Defensive");}
 		Computer_Player * instantiate
-			(Widelands::Game & game, Widelands::Player_Number const p) const
+			(Widelands::Game & game, Widelands::Player_Number const p) const override
 		{
 			return new DefaultAI(game, p, DEFENSIVE);
 		}

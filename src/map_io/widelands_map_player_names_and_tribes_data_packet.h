@@ -34,9 +34,9 @@ struct Map_Player_Names_And_Tribes_Data_Packet : public Map_Data_Packet {
 	virtual ~Map_Player_Names_And_Tribes_Data_Packet();
 
 	virtual void Read
-		(FileSystem &, Editor_Game_Base &, bool, Map_Map_Object_Loader &)
+		(FileSystem &, Editor_Game_Base &, bool, Map_Map_Object_Loader &) override
 	;
-	void Write(FileSystem &, Editor_Game_Base &, Map_Map_Object_Saver &)
+	void Write(FileSystem &, Editor_Game_Base &, Map_Map_Object_Saver &) override
 	;
 
 	void Pre_Read(FileSystem &, Map *, bool skip);

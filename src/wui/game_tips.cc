@@ -65,9 +65,9 @@ void GameTips::load_tips(std::string name)
 	std::string filename = "txts/tips/" + name + ".tip";
 	try {
 		Profile prof(filename.c_str());
-		while (Section * const s = prof.get_next_section(0)) {
+		while (Section * const s = prof.get_next_section(nullptr)) {
 			char const * const text = s->get_string("text");
-			if (0 == text)
+			if (nullptr == text)
 				continue;
 
 			Tip tip;

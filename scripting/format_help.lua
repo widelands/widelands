@@ -19,7 +19,7 @@ function dependencies(images, text)
 	end
 
 	string = "image=" .. images[1]
-	for k,v in ipairs({unpack(images,2)}) do
+	for k,v in ipairs({table.unpack(images,2)}) do
 		string = string .. ";pics/arrow-right.png;" .. v
 	end
 
@@ -119,10 +119,32 @@ end
 function building_help_lore_string(tribename, buildingname, flavourtext, author)
 	local result = rt(h2(_"Lore")) ..
 		rt("image=tribes/" .. tribename .. "/" .. buildingname  .. "/" .. buildingname .. "_i_00.png", p(flavourtext))
-		if author then
-			result = result .. rt("text-align=right",p("font-size=10 font-style=italic", author))
-		end
+	if author then
+		result = result .. rt("text-align=right",p("font-size=10 font-style=italic", author))
+	end
 	return result
+end
+
+-- .. help_building_line(tribe, material, material_str, number)
+--
+--    Creates an image_line with a number formatted string.
+--
+--    :arg tribe: name of tribe in the file system.
+--    :arg material: name of material in the file system.
+--    :arg material_str: containing number placeholder + name of material fetched with ngettext previously.
+--    :arg number: the number used for ngettext in material_str
+--    :returns: image_line.
+--
+function help_building_line(tribe, material, material_str, number)
+	local image = "tribes/" .. tribe .. "/" .. material .. "/menu.png"
+	if number <=6 then
+		return image_line(image,number,p(material_str:format(number)))
+   end
+   if number <=12 then
+      return image_line(image,6,p(material_str:format(number))) .. image_line(image, number-6)
+   else
+      return image_line(image,6,p(material_str:format(number))) .. image_line(image, 6) .. image_line(image, number-12)
+   end
 end
 
 
@@ -142,7 +164,7 @@ function building_help_collecting_list(tribename, building_resource)
 
 	local result =rt(h3(_"Collects:"));
 	for i,line in ipairs({unpack(building_resource,1)}) do
-		result = result .. 
+		result = result ..
 
 			dependencies({"tribes/" .. tribename .. "/" .. line[1]  .. "/menu.png",
 			"tribes/" .. tribename .. "/" .. line[2]  .. "/menu.png"},
@@ -168,7 +190,7 @@ function building_help_incoming_list(tribename, building_resource)
 
 	local result =rt(h3(_"Consumes:"));
 	for i,line in ipairs({unpack(building_resource,1)}) do
-		result = result .. 
+		result = result ..
 
 			dependencies({"tribes/" .. tribename .. "/" .. line[1]  .. "/menu.png",
 			"tribes/" .. tribename .. "/" .. line[2]  .. "/menu.png"},
@@ -194,7 +216,7 @@ function building_help_outgoing_list(tribename, building_resource)
 
 	local result =rt(h3(_"Produces:"));
 	for i,line in ipairs({unpack(building_resource,1)}) do
-		result = result .. 
+		result = result ..
 
 			dependencies({"tribes/" .. tribename .. "/" .. line[2]  .. "/menu.png",
 			"tribes/" .. tribename .. "/" .. line[1]  .. "/menu.png"},
@@ -252,7 +274,7 @@ function building_help_cost_list(tribename, resource_amount)
 
 	local result =""
 	for i,line in ipairs({unpack(resource_amount,1)}) do
-		result = result .. 
+		result = result ..
 			image_line("tribes/" .. tribename .. "/" .. line[1]  .. "/menu.png",
 				line[2], p(line[2] .. " ".. line[1]))
 			-- todo get localised name from tribe's main conf, and add ngettext!
@@ -289,4 +311,3 @@ function building_help_tool_string(tribename, toolname)
 	return text_line(_"Worker uses:", toolname, "tribes/" .. tribename .. "/" .. toolname  .. "/menu.png")
 	-- todo get localised name from tribe's main conf, and add ngettext!
 end
-

@@ -50,7 +50,7 @@ template<typename Base> struct basic_FileRead : public Base {
 	struct File_Boundary_Exceeded : public Base::_data_error {
 		File_Boundary_Exceeded() : Base::_data_error("end of file") {}
 	};
-	basic_FileRead () : data(0), length(0), m_fast(0) {}; /// Create the object with nothing to read.
+	basic_FileRead () : data(nullptr), length(0), m_fast(0) {}; /// Create the object with nothing to read.
 	~basic_FileRead() {if (data) Close();} /// Close the file if open.
 
 	/// Loads a file into memory. Reserves one additional byte which is zeroed,
@@ -87,7 +87,7 @@ template<typename Base> struct basic_FileRead : public Base {
 		} else {
 			free(data);
 		}
-		data = 0;
+		data = nullptr;
 	}
 
 	size_t GetSize() const {return length;}
@@ -146,7 +146,7 @@ template<typename Base> struct basic_FileRead : public Base {
 
 	char * ReadLine() {
 		if (EndOfFile())
-			return 0;
+			return nullptr;
 		char * result = data + filepos;
 		for (; data[filepos] and data[filepos] != '\n'; ++filepos)
 			if (data[filepos] == '\r') {

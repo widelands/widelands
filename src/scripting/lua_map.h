@@ -22,24 +22,26 @@
 
 #include <set>
 
-#include <lua.hpp>
-
 #include "economy/flag.h"
+#include "economy/portdock.h"
 #include "economy/road.h"
 #include "logic/constructionsite.h"
 #include "logic/game.h"
 #include "logic/militarysite.h"
 #include "logic/productionsite.h"
+#include "logic/ship.h"
 #include "logic/soldier.h"
 #include "logic/trainingsite.h"
 #include "logic/warehouse.h"
 #include "logic/worker.h"
+#include "scripting/eris/lua.hpp"
 #include "scripting/luna.h"
 
 
 namespace Widelands {
 	struct Soldier_Descr;
 	struct Building_Descr;
+	struct Bob;
 }
 
 namespace LuaMap {
@@ -49,7 +51,7 @@ namespace LuaMap {
  */
 class L_MapModuleClass : public LunaClass {
 	public:
-		const char * get_modulename() {return "map";}
+		const char * get_modulename() override {return "map";}
 };
 
 
@@ -64,8 +66,8 @@ public:
 		report_error(L, "Cannot instantiate a 'Map' directly!");
 	}
 
-	virtual void __persist(lua_State * L);
-	virtual void __unpersist(lua_State * L);
+	virtual void __persist(lua_State * L) override;
+	virtual void __unpersist(lua_State * L) override;
 
 	/*
 	 * Properties
@@ -138,27 +140,24 @@ Widelands:: klass * get(lua_State * L, Widelands::Editor_Game_Base & egbase) { \
 }
 
 class L_MapObject : public L_MapModuleClass {
-	Widelands::Object_Ptr * m_ptr;
+	Widelands::Object_Ptr m_ptr;
 
 public:
 	LUNA_CLASS_HEAD(L_MapObject);
 
-	L_MapObject() : m_ptr(0) {}
+	L_MapObject() : m_ptr(nullptr) {}
 	L_MapObject(Widelands::Map_Object & mo) {
-		m_ptr = new Widelands::Object_Ptr(&mo);
+		m_ptr = &mo;
 	}
-	L_MapObject(lua_State * L) : m_ptr(0) {
+	L_MapObject(lua_State * L) : m_ptr(nullptr) {
 		report_error(L, "Cannot instantiate a '%s' directly!", className);
 	}
 	virtual ~L_MapObject() {
-		if (m_ptr) {
-			delete m_ptr;
-			m_ptr = 0;
-		}
+		m_ptr = nullptr;
 	}
 
-	virtual void __persist(lua_State * L);
-	virtual void __unpersist(lua_State * L);
+	virtual void __persist(lua_State * L) override;
+	virtual void __unpersist(lua_State * L) override;
 
 	/*
 	 * attributes
@@ -224,6 +223,7 @@ public:
 	 * Properties
 	 */
 	int get_owner(lua_State * L);
+	int get_debug_economy(lua_State* L);
 
 	/*
 	 * Lua Methods
@@ -233,8 +233,30 @@ public:
 	 * C Methods
 	 */
 	CASTED_GET(PlayerImmovable);
+};
 
-protected:
+class L_PortDock : public L_PlayerImmovable {
+public:
+	LUNA_CLASS_HEAD(L_PortDock);
+
+	L_PortDock() {}
+	L_PortDock(Widelands::PortDock & mo) : L_PlayerImmovable(mo) {
+	}
+	L_PortDock(lua_State * L) : L_PlayerImmovable(L) {}
+	virtual ~L_PortDock() {}
+
+	/*
+	 * Properties
+	 */
+
+	/*
+	 * Lua methods
+	 */
+
+	/*
+	 * C methods
+	 */
+	CASTED_GET(PortDock);
 };
 
 class L_Building : public L_PlayerImmovable {
@@ -250,7 +272,8 @@ public:
 	/*
 	 * Properties
 	 */
-	int get_building_type(lua_State * L);
+	int get_building_type(lua_State* L);
+	int get_flag(lua_State* L);
 
 	/*
 	 * Lua Methods
@@ -262,89 +285,7 @@ public:
 	CASTED_GET(Building);
 };
 
-struct L_HasWares {
-	virtual ~L_HasWares() {}
-
-	virtual int set_wares(lua_State * L) = 0;
-	virtual int get_wares(lua_State * L) = 0;
-
-	typedef std::set<Widelands::Ware_Index> WaresSet;
-	typedef std::map<Widelands::Ware_Index, uint32_t> WaresMap;
-	typedef std::pair<Widelands::Ware_Index, uint32_t> WareAmount;
-
-protected:
-	WaresSet m_parse_get_wares_arguments
-		(lua_State *, const Widelands::Tribe_Descr &, bool *);
-	WaresMap m_parse_set_wares_arguments
-		(lua_State *, const Widelands::Tribe_Descr &);
-};
-struct L_HasWorkers {
-	virtual ~L_HasWorkers() {}
-
-	virtual int set_workers(lua_State * L) = 0;
-	virtual int get_workers(lua_State * L) = 0;
-
-	typedef std::set<Widelands::Ware_Index> WorkersSet;
-	typedef std::map<Widelands::Ware_Index, uint32_t> WorkersMap;
-	typedef std::pair<Widelands::Ware_Index, uint32_t> WorkerAmount;
-
-protected:
-	WorkersSet m_parse_get_workers_arguments
-		(lua_State *, const Widelands::Tribe_Descr &, bool *);
-	WorkersMap m_parse_set_workers_arguments
-		(lua_State *, const Widelands::Tribe_Descr &);
-};
-
-struct L_HasSoldiers {
-	struct SoldierDescr {
-		SoldierDescr(uint8_t ghp, uint8_t gat, uint8_t gde, uint8_t gev) :
-			hp(ghp), at(gat), de(gde), ev(gev) {}
-		SoldierDescr() : hp(0), at(0), de(0), ev(0) {}
-
-		uint8_t hp;
-		uint8_t at;
-		uint8_t de;
-		uint8_t ev;
-
-		bool operator< (const SoldierDescr & ot) const {
-			bool hp_eq = hp == ot.hp;
-			bool at_eq = at == ot.at;
-			bool de_eq = de == ot.de;
-			if (hp_eq && at_eq && de_eq)
-				return ev < ot.ev;
-			if (hp_eq && at_eq)
-				return de < ot.de;
-			if (hp_eq)
-				return at < ot.at;
-			return hp < ot.hp;
-		}
-		bool operator== (const SoldierDescr & ot) const {
-			if (hp == ot.hp and at == ot.at and de == ot.de and ev == ot.ev)
-				return true;
-			return false;
-		}
-	};
-
-	virtual ~L_HasSoldiers() {}
-
-	virtual int set_soldiers(lua_State * L) = 0;
-	virtual int get_soldiers(lua_State * L) = 0;
-
-	typedef std::vector<Widelands::Soldier *> SoldiersList;
-	typedef std::map<SoldierDescr, uint32_t> SoldiersMap;
-	typedef std::pair<SoldierDescr, uint32_t> SoldierAmount;
-
-protected:
-	int m_handle_get_soldiers
-		(lua_State *, const Widelands::Soldier_Descr &, const SoldiersList &);
-	SoldiersMap m_parse_set_soldiers_arguments
-		(lua_State *, const Widelands::Soldier_Descr &);
-	int m_get_soldier_levels
-		(lua_State *, int, const Widelands::Soldier_Descr &, SoldierDescr &);
-};
-
-
-class L_Flag : public L_PlayerImmovable, public L_HasWares {
+class L_Flag : public L_PlayerImmovable {
 public:
 	LUNA_CLASS_HEAD(L_Flag);
 
@@ -370,36 +311,7 @@ public:
 	CASTED_GET(Flag);
 };
 
-// Small helper class that contains the commonalities between L_Road and
-// L_ProductionSite in relation to Worker employment.
-struct _WorkerEmployer : public L_HasWorkers {
-	virtual int get_workers(lua_State * L);
-	virtual int set_workers(lua_State * L);
-
-	int get_valid_workers(lua_State * L);
-
-	virtual Widelands::PlayerImmovable * get
-		(lua_State *, Widelands::Editor_Game_Base &) = 0;
-
-protected:
-	virtual WorkersMap _valid_workers(Widelands::PlayerImmovable &) = 0;
-	virtual int _new_worker
-		(Widelands::PlayerImmovable &, Widelands::Editor_Game_Base &, const Widelands::Worker_Descr *) = 0;
-};
-
-struct _SoldierEmployer : public L_HasSoldiers {
-	virtual int get_soldiers(lua_State * L);
-	virtual int set_soldiers(lua_State * L);
-
-	int get_max_soldiers(lua_State * L);
-
-	virtual Widelands::Building * get
-		(lua_State *, Widelands::Editor_Game_Base &) = 0;
-	virtual Widelands::SoldierControl * get_sc
-		(lua_State *, Widelands::Editor_Game_Base &) = 0;
-};
-
-class L_Road : public L_PlayerImmovable, public _WorkerEmployer {
+class L_Road : public L_PlayerImmovable {
 public:
 	LUNA_CLASS_HEAD(L_Road);
 
@@ -412,24 +324,25 @@ public:
 	/*
 	 * Properties
 	 */
-	int get_length(lua_State * L);
-	int get_start_flag(lua_State * L);
 	int get_end_flag(lua_State * L);
+	int get_length(lua_State * L);
 	int get_road_type(lua_State * L);
+	int get_start_flag(lua_State * L);
+	int get_valid_workers(lua_State * L);
 
 	/*
 	 * Lua Methods
 	 */
+	int get_workers(lua_State* L);
+	int set_workers(lua_State* L);
 
 	/*
 	 * C Methods
 	 */
 	CASTED_GET(Road);
-protected:
-	virtual WorkersMap _valid_workers(Widelands::PlayerImmovable &);
-	virtual int _new_worker
-		(Widelands::PlayerImmovable &,
-		 Widelands::Editor_Game_Base &, const Widelands::Worker_Descr *);
+	static int create_new_worker
+			(Widelands::PlayerImmovable &,
+			 Widelands::Editor_Game_Base &, const Widelands::Worker_Descr *);
 };
 
 
@@ -460,8 +373,7 @@ public:
 };
 
 
-class L_Warehouse : public L_Building,
-	public L_HasWares, public L_HasWorkers, public _SoldierEmployer
+class L_Warehouse : public L_Building
 {
 public:
 	LUNA_CLASS_HEAD(L_Warehouse);
@@ -475,29 +387,26 @@ public:
 	/*
 	 * Properties
 	 */
+	int get_portdock(lua_State* L);
 
 	/*
 	 * Lua Methods
 	 */
-	int set_wares(lua_State *);
-	int get_wares(lua_State *);
-	int set_workers(lua_State *);
-	int get_workers(lua_State *);
+	int get_wares(lua_State*);
+	int get_workers(lua_State*);
+	int set_wares(lua_State*);
+	int set_workers(lua_State*);
+	int set_soldiers(lua_State*);
+	int get_soldiers(lua_State*);
 
 	/*
 	 * C Methods
 	 */
 	CASTED_GET(Warehouse);
-	Widelands::SoldierControl * get_sc
-		(lua_State * L, Widelands::Editor_Game_Base & g)
-	{
-		return get(L, g);
-	}
 };
 
 
-class L_ProductionSite : public L_Building,
-	public _WorkerEmployer, public L_HasWares {
+class L_ProductionSite : public L_Building {
 public:
 	LUNA_CLASS_HEAD(L_ProductionSite);
 
@@ -511,26 +420,26 @@ public:
 	 * Properties
 	 */
 	int get_valid_wares(lua_State * L);
+	int get_valid_workers(lua_State* L);
 
 	/*
 	 * Lua Methods
 	 */
-	int set_wares(lua_State * L);
 	int get_wares(lua_State * L);
+	int get_workers(lua_State* L);
+	int set_wares(lua_State * L);
+	int set_workers(lua_State* L);
 
 	/*
 	 * C Methods
 	 */
 	CASTED_GET(ProductionSite);
-
-protected:
-	virtual WorkersMap _valid_workers(Widelands::PlayerImmovable &);
-	virtual int _new_worker
+	static int create_new_worker
 		(Widelands::PlayerImmovable &, Widelands::Editor_Game_Base &,
 		 const Widelands::Worker_Descr *);
 };
 
-class L_MilitarySite : public L_Building, public _SoldierEmployer {
+class L_MilitarySite : public L_Building {
 public:
 	LUNA_CLASS_HEAD(L_MilitarySite);
 
@@ -543,24 +452,22 @@ public:
 	/*
 	 * Properties
 	 */
+	int get_max_soldiers(lua_State*);
 
 	/*
 	 * Lua Methods
 	 */
+	int set_soldiers(lua_State*);
+	int get_soldiers(lua_State*);
 
 	/*
 	 * C Methods
 	 */
 	CASTED_GET(MilitarySite);
-	Widelands::SoldierControl * get_sc
-		(lua_State * L, Widelands::Editor_Game_Base & g)
-	{
-		return get(L, g);
-	}
 };
 
 
-class L_TrainingSite : public L_ProductionSite, public _SoldierEmployer {
+class L_TrainingSite : public L_ProductionSite {
 public:
 	LUNA_CLASS_HEAD(L_TrainingSite);
 
@@ -573,17 +480,18 @@ public:
 	/*
 	 * Properties
 	 */
+	int get_max_soldiers(lua_State*);
 
 	/*
 	 * Lua Methods
 	 */
+	int set_soldiers(lua_State*);
+	int get_soldiers(lua_State*);
 
 	/*
 	 * C Methods
 	 */
 	CASTED_GET(TrainingSite);
-	Widelands::SoldierControl * get_sc
-		(lua_State * L, Widelands::Editor_Game_Base & g) {return get(L, g);}
 };
 
 class L_Bob : public L_MapObject {
@@ -661,6 +569,34 @@ public:
 	 */
 	CASTED_GET(Soldier);
 };
+
+class L_Ship : public L_Bob {
+public:
+	LUNA_CLASS_HEAD(L_Ship);
+
+	L_Ship() {}
+	L_Ship(Widelands::Ship& s) : L_Bob(s) {}
+	L_Ship(lua_State* L) : L_Bob(L) {}
+	virtual ~L_Ship() {}
+
+	/*
+	 * Properties
+	 */
+	int get_debug_economy(lua_State * L);
+	int get_last_portdock(lua_State* L);
+	int get_destination(lua_State* L);
+
+	/*
+	 * Lua methods
+	 */
+	int get_wares(lua_State* L);
+	int get_workers(lua_State* L);
+
+	/*
+	 * C methods
+	 */
+	CASTED_GET(Ship);
+};
 #undef CASTED_GET
 
 class L_Field : public L_MapModuleClass {
@@ -677,8 +613,8 @@ public:
 	}
 	virtual ~L_Field() {}
 
-	virtual void __persist(lua_State * L);
-	virtual void __unpersist(lua_State * L);
+	virtual void __persist(lua_State * L) override;
+	virtual void __unpersist(lua_State * L) override;
 
 	/*
 	 * Properties
@@ -743,8 +679,8 @@ public:
 	}
 	virtual ~L_PlayerSlot() {}
 
-	virtual void __persist(lua_State * L);
-	virtual void __unpersist(lua_State * L);
+	virtual void __persist(lua_State * L) override;
+	virtual void __unpersist(lua_State * L) override;
 
 	/*
 	 * Properties
@@ -763,10 +699,10 @@ public:
 };
 
 int upcasted_immovable_to_lua(lua_State * L, Widelands::BaseImmovable * bi);
+int upcasted_bob_to_lua(lua_State * L, Widelands::Bob * mo);
 
 void luaopen_wlmap(lua_State *);
 
-
-};
+}  // namespace LuaMap
 
 #endif

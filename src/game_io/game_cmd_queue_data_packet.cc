@@ -81,9 +81,9 @@ void Game_Cmd_Queue_Data_Packet::Read
 			}
 		} else
 			throw game_data_error
-				(_("unknown/unhandled version %u"), packet_version);
+				("unknown/unhandled version %u", packet_version);
 	} catch (const _wexception & e) {
-		throw game_data_error(_("command queue: %s"), e.what());
+		throw game_data_error("command queue: %s", e.what());
 	}
 }
 

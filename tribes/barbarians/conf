@@ -29,56 +29,45 @@ hotspot=10 38
 fps=5
 playercolor=true
 
-[compatibility_immovable]
-# For compatibility with build15 and earlier
-flax0s=replace reed0s
-flax0t=replace reed0t
-flax0=replace reed0
-flax1=replace reed1
-
 [immovable types]
 ashes=_Ashes
 destroyed_building=_Destroyed building
-field0=_Field medium
-field0s=_Field small
-field0t=_Field tiny
-field1=_Field ripe
-field2=_Field harvested
-reed0=_Reed medium
-reed0s=_Reed small
-reed0t=_Reed tiny
-reed1=_Reed ripe
-resi_coal1=_Resource indicator coal little
-resi_coal2=_Resource indicator coal much
-resi_gold1=_Resource indicator gold little
-resi_gold2=_Resource indicator gold much
-resi_granit1=_Resource indicator granite little
-resi_granit2=_Resource indicator granite much
-resi_iron1=_Resource indicator iron little
-resi_iron2=_Resource indicator iron much
-resi_none=_Resource indicator no resource
-resi_water1=_Resource indicator water
-shipconstruction=_Ship construction site
+field0=_Field (medium)
+field0s=_Field (small)
+field0t=_Field (tiny)
+field1=_Field (ripe)
+field2=_Field (harvested)
+reed0=_Reed (medium)
+reed0s=_Reed (small)
+reed0t=_Reed (tiny)
+reed1=_Reed (ripe)
+resi_coal1=_Resource indicator: Coal (little)
+resi_coal2=_Resource indicator: Coal (much)
+resi_gold1=_Resource indicator: Gold (little)
+resi_gold2=_Resource indicator: Gold (much)
+resi_granit1=_Resource indicator: Granite (little)
+resi_granit2=_Resource indicator: Granite (much)
+resi_iron1=_Resource indicator: Iron (little)
+resi_iron2=_Resource indicator: Iron (much)
+resi_none=_Resource indicator: No resource
+resi_water1=_Resource indicator: Water
+shipconstruction=_Ship Construction Site
 
 [critter bob types]
 deer=_Deer
-wildboar=_Wildboar
-
-[compatibility_wares]
-# for compatibility with build15 and earlier
-flax=thatchreed
+wildboar=_Wild Boar
 
 [ware types]
-axe=_Axe
+axe=_Ax
 bakingtray=_Bread Paddle
-battleaxe=_Battle Axe
+battleaxe=_Battle Ax
 beer=_Beer
 blackwood=_Blackwood
-broadaxe=_Broad Axe
-bronzeaxe=_Bronze Axe
+broadaxe=_Broad Ax
+bronzeaxe=_Bronze Ax
 cloth=_Cloth
 coal=_Coal
-felling_axe=_Felling Axe
+felling_axe=_Felling Ax
 fire_tongs=_Fire Tongs
 fish=_Fish
 fishing_rod=_Fishing Rod
@@ -99,14 +88,14 @@ pittabread=_Pitta Bread
 ration=_Ration
 raw_stone=_Raw Stone
 scythe=_Scythe
-sharpaxe=_Sharp Axe
+sharpaxe=_Sharp Ax
 shovel=_Shovel
 snack=_Snack
 strongbeer=_Strong Beer
 thatchreed=_Thatch Reed
-trunk=_Trunk
-warhelmet=_War Helmet
-warriorsaxe=_Warriors Axe
+trunk=_Log
+warhelmet=_Warhelm
+warriorsaxe=_Warrior’s Ax
 water=_Water
 wheat=_Wheat
 
@@ -128,7 +117,7 @@ burner=_Burner
 master-miner=_Master Miner
 chief-miner=_Chief Miner
 farmer=_Farmer
-ferner=_Ferner
+ferner=_Gardener
 fisher=_Fisher
 gamekeeper=_Gamekeeper
 geologist=_Geologist
@@ -179,36 +168,36 @@ port=_Port
 
 [productionsite types]
 quarry=_Quarry
-lumberjacks_hut=_Lumberjack's Hut
-rangers_hut=_Ranger's Hut
-fishers_hut=_Fisher's Hut
-hunters_hut=_Hunter's Hut
-gamekeepers_hut=_Gamekeeper's Hut
+lumberjacks_hut=_Lumberjack’s Hut
+rangers_hut=_Ranger’s Hut
+fishers_hut=_Fisher’s Hut
+hunters_hut=_Hunter’s Hut
+gamekeepers_hut=_Gamekeeper’s Hut
 well=_Well
-scouts_hut=_"Scout's Hut"
+scouts_hut=_Scout’s Hut
 hardener=_Wood Hardener
 lime_kiln=_Lime Kiln
-fernery=_Fernery
+fernery=_Reed Yard
 bakery=_Bakery
 brewery=_Brewery
 micro-brewery=_Micro Brewery
 big_inn=_Big Inn
 inn=_Inn
 tavern=_Tavern
-burners_house=_Charcoal Burner's House
+burners_house=_Charcoal Burner’s House
 smelting_works=_Smelting Works
 shipyard=_Shipyard
 warmill=_War Mill
-axefactory=_Axefactory
-metalworks=_Metalwork Shop
+axefactory=_Axfactory
+metalworks=_Metal Workshop
 cattlefarm=_Cattle Farm
 weaving-mill=_Weaving-Mill
 farm=_Farm
-helmsmithy=_Helmsmithy
+helmsmithy=_Helm Smithy
 granitemine=_Granite Mine
 deeper_coalmine=_Deeper Coal Mine
 deep_coalmine=_Deep Coal Mine
-coalmine=_Coal mine
+coalmine=_Coal Mine
 deeper_oremine=_Deeper Iron Ore Mine
 deep_oremine=_Deep Iron Ore Mine
 oremine=_Iron Ore Mine
@@ -219,18 +208,17 @@ goldmine=_Gold Mine
 [militarysite types]
 barrier=_Barrier
 sentry=_Sentry
-stronghold=_Stronghold
 citadel=_Citadel
 fortress=_Fortress
 donjon=_Donjon
 
 [trainingsite types]
 battlearena=_Battle Arena
-trainingscamp=_Trainingscamp
+trainingscamp=_Training Camp
 
 [initializations]
-headquarters_medium=_Headquarters medium
-castle_village=_Citadel village
+headquarters_medium=_Headquarters Medium
+castle_village=_Citadel Village
 
 [military_data]
 retreat_interval=0-80

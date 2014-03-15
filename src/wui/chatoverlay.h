@@ -37,8 +37,8 @@ struct ChatOverlay : public UI::Panel {
 
 	void setChatProvider(ChatProvider &);
 	void setLogProvider(Widelands::NoteSender<LogMessage> &);
-	virtual void draw(RenderTarget &);
-	virtual void think();
+	virtual void draw(RenderTarget &) override;
+	virtual void think() override;
 
 private:
 	struct Impl;

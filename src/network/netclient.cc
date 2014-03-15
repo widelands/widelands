@@ -97,7 +97,7 @@ NetClient::NetClient
 : d(new NetClientImpl), m_internet(internet), m_dedicated_access(false), m_dedicated_temp_scenario(false)
 {
 	d->sock = SDLNet_TCP_Open(svaddr);
-	if (d->sock == 0)
+	if (d->sock == nullptr)
 		throw warning
 			(_("Could not establish connection to host"),
 			 _
@@ -112,27 +112,26 @@ NetClient::NetClient
 	d->settings.playernum = UserSettings::notConnected();
 	d->settings.usernum = -2;
 	d->localplayername = playername;
-	d->modal = 0;
-	d->game = 0;
+	d->modal = nullptr;
+	d->game = nullptr;
 	d->realspeed = 0;
 	d->desiredspeed = 1000;
-	file = 0;
+	file = nullptr;
 
 	// Temporarily register win condition scripts to get the default
-	LuaInterface * lua = create_LuaInterface();
-	lua->register_scripts(*g_fs, "win_conditions", "scripting/win_conditions");
-	ScriptContainer sc = lua->get_scripts_for("win_conditions");
+	LuaInterface lua;
+	lua.register_scripts(*g_fs, "win_conditions", "scripting/win_conditions");
+	ScriptContainer sc = lua.get_scripts_for("win_conditions");
 	std::vector<std::string> win_conditions;
 	container_iterate_const(ScriptContainer, sc, wc)
 		win_conditions.push_back(wc->first);
 	assert(win_conditions.size());
 	d->settings.win_condition = win_conditions[0];
-	delete lua;
 }
 
 NetClient::~NetClient ()
 {
-	if (d->sock != 0)
+	if (d->sock != nullptr)
 		disconnect("CLIENT_LEFT_GAME", "", true, false);
 
 	SDLNet_FreeSocketSet (d->sockset);
@@ -158,7 +157,7 @@ void NetClient::run ()
 		lgm.setChatProvider(*this);
 		d->modal = &lgm;
 		int32_t code = lgm.run();
-		d->modal = 0;
+		d->modal = nullptr;
 		if (code == 1) { // Only possible if server is dedicated - client pressed "start game" button
 			SendPacket subs;
 			subs.Unsigned8(NETCMD_LAUNCH);
@@ -167,7 +166,7 @@ void NetClient::run ()
 			// Reopen the menu - perhaps the start is denied or other problems occur
 			d->modal = &lgm;
 			code = lgm.run();
-			d->modal = 0;
+			d->modal = nullptr;
 		}
 		if (code <= 0) {
 			// if this is an internet game, tell the metaserver that client is back in the lobby.
@@ -231,12 +230,12 @@ void NetClient::run ()
 		// if this is an internet game, tell the metaserver that the game is done.
 		if (m_internet)
 			InternetGaming::ref().set_game_done();
-		d->modal = 0;
-		d->game = 0;
+		d->modal = nullptr;
+		d->game = nullptr;
 	} catch (...) {
-		d->modal = 0;
+		d->modal = nullptr;
 		WLApplication::emergency_save(game);
-		d->game = 0;
+		d->game = nullptr;
 		disconnect("CLIENT_CRASHED");
 		throw;
 	}
@@ -906,16 +905,16 @@ void NetClient::handle_packet(RecvPacket & packet)
 			info.name = packet.String();
 
 			// Get initializations (we have to do this locally, for translations)
-			LuaInterface * lua = create_LuaInterface();
+			LuaInterface lua;
 			std::string path = "tribes/" + info.name;
 			if (g_fs->IsDirectory(path)) {
 				std::unique_ptr<FileSystem> sub_fs(g_fs->MakeSubFileSystem(path));
-				lua->register_scripts(*sub_fs, "tribe_" + info.name, "scripting");
+				lua.register_scripts(*sub_fs, "tribe_" + info.name, "scripting");
 			}
 
 			for (uint8_t j = packet.Unsigned8(); j; --j) {
 				std::string const name = packet.String();
-				std::unique_ptr<LuaTable> t = lua->run_script
+				std::unique_ptr<LuaTable> t = lua.run_script
 					("tribe_" + info.name, name);
 				info.initializations.push_back
 					(TribeBasicInfo::Initialization(name, t->get_string("name")));
@@ -1000,7 +999,7 @@ void NetClient::handle_packet(RecvPacket & packet)
 	}
 	case NETCMD_CHAT: {
 		ChatMessage c;
-		c.time = time(0);
+		c.time = time(nullptr);
 		c.playern = packet.Signed16();
 		c.sender = packet.String();
 		c.msg = packet.String();
@@ -1012,7 +1011,7 @@ void NetClient::handle_packet(RecvPacket & packet)
 	}
 	case NETCMD_SYSTEM_MESSAGE_CODE: {
 		ChatMessage c;
-		c.time = time(0);
+		c.time = time(nullptr);
 		std::string code = packet.String();
 		std::string arg1 = packet.String();
 		std::string arg2 = packet.String();
@@ -1050,7 +1049,7 @@ void NetClient::handle_network ()
 	if (m_internet)
 		InternetGaming::ref().handle_metaserver_communication();
 	try {
-		while (d->sock != 0 && SDLNet_CheckSockets(d->sockset, 0) > 0) {
+		while (d->sock != nullptr && SDLNet_CheckSockets(d->sockset, 0) > 0) {
 			// Perform only one read operation, then process all packets
 			// from this read. This ensures that we process DISCONNECT
 			// packets that are followed immediately by connection close.
@@ -1093,7 +1092,7 @@ void NetClient::disconnect
 
 		SDLNet_TCP_DelSocket (d->sockset, d->sock);
 		SDLNet_TCP_Close (d->sock);
-		d->sock = 0;
+		d->sock = nullptr;
 	}
 
 	bool const trysave = showmsg && d->game;
@@ -1121,6 +1120,6 @@ void NetClient::disconnect
 
 	if (d->modal) {
 		d->modal->end_modal(0);
-		d->modal = 0;
+		d->modal = nullptr;
 	}
 }

@@ -47,9 +47,9 @@ WaresQueue::WaresQueue
 	m_max_fill        (_max_size),
 	m_filled          (0),
 	m_consume_interval(0),
-	m_request         (0),
-	m_callback_fn     (0),
-	m_callback_data   (0)
+	m_request         (nullptr),
+	m_callback_fn     (nullptr),
+	m_callback_data   (nullptr)
 {
 	if (m_ware)
 		update();
@@ -103,7 +103,7 @@ void WaresQueue::update() {
 	else
 	{
 		delete m_request;
-		m_request = 0;
+		m_request = nullptr;
 	}
 }
 
@@ -152,7 +152,7 @@ void WaresQueue::remove_from_economy(Economy & e)
 	if (m_ware) {
 		e.remove_wares(m_ware, m_filled);
 		if (m_request)
-			m_request->set_economy(0);
+			m_request->set_economy(nullptr);
 	}
 }
 
@@ -277,16 +277,16 @@ void WaresQueue::Read(FileRead & fr, Game & game, Map_Map_Object_Loader & mol)
 						 wwWORKER);             //  FIXME
 				m_request->Read(fr, game, mol);      //  FIXME
 			} else
-				m_request = 0;
+				m_request = nullptr;
 
 			//  Now Economy stuff. We have to add our filled items to the economy.
 			if (m_owner.get_economy())
 				add_to_economy(*m_owner.get_economy());
 		} else
 			throw game_data_error
-				(_("unknown/unhandled version %u"), packet_version);
+				("unknown/unhandled version %u", packet_version);
 	} catch (const game_data_error & e) {
-		throw game_data_error(_("waresqueue: %s"), e.what());
+		throw game_data_error("waresqueue: %s", e.what());
 	}
 }
 

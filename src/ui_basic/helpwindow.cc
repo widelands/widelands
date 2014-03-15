@@ -45,7 +45,7 @@ HelpWindow::HelpWindow
 	 uint32_t fontsize,
 	 uint32_t width, uint32_t height)
 	:
-	Window(parent, "help_window", 0, 0, 20, 20, (_("Help: ") + caption).c_str()),
+	Window(parent, "help_window", 0, 0, 20, 20, (boost::format(_("Help: %s")) % caption).str().c_str()),
 	textarea(new Multiline_Textarea(this, 5, 5, 30, 30, std::string(), Align_Left)),
 	m_h1((format("%u") % (fontsize < 12 ? 18 : fontsize * 3 / 2)).str()),
 	m_h2((format("%u") % (fontsize < 12 ? 12 : fontsize)).str()),
@@ -192,24 +192,15 @@ LuaTextHelpWindow::LuaTextHelpWindow
 	UI::UniqueWindow(parent, "help_window", &reg, width, height, (_("Help: ") + building_description.descname()).c_str()),
 	textarea(new Multiline_Textarea(this, 5, 5, width - 10, height -10, std::string(), Align_Left))
 {
-	// TODO(GunChleoc): just for your fyi, the solution we came up here is not
-	// ideal. It leaks the global game state to the help script which can modify
-	// it at will - i.e. if it uses a global variable with the same name as
-	// anyone already defined in the global state we will silently overwrite it.
-	// Not good :). There is no real good solution to this problem though.
-	// However, I think the problem is much bettered if we instead of returning
-	// a table with a string from the .lua script, we return a table with a
-	// method and run it here (with some parameters). Then the help scripts can
-	// have at least local variables.
 	try {
-		std::unique_ptr<LuaTable> t
-			(lua->run_script(*g_fs, building_description.helptext_script(), "help"));
+		std::unique_ptr<LuaTable> t(
+		   lua->run_script(*g_fs, building_description.helptext_script(), "help"));
 		std::unique_ptr<LuaCoroutine> cr(t->get_coroutine("func"));
 		cr->push_arg(&building_description);
 		cr->resume();
 		const std::string help_text = cr->pop_string();
 		textarea->set_text(help_text);
-	} catch (LuaError & err) {
+	} catch (LuaError& err) {
 		textarea->set_text(err.what());
 	}
 }

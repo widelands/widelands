@@ -337,7 +337,7 @@ extern unzFile ZEXPORT unzOpen2
 	int32_t err = UNZ_OK;
 
 	if (unz_copyright[0] != ' ')
-		return 0;
+		return nullptr;
 
 	if (not pzlib_filefunc_def)
 		fill_fopen_filefunc(&us.z_filefunc);
@@ -350,7 +350,7 @@ extern unzFile ZEXPORT unzOpen2
 		 path,
 		 ZLIB_FILEFUNC_MODE_READ | ZLIB_FILEFUNC_MODE_EXISTING);
 	if (not us.filestream)
-		return 0;
+		return nullptr;
 
 	central_pos = unzlocal_SearchCentralDir(&us.z_filefunc, us.filestream);
 	if (central_pos == 0)
@@ -430,13 +430,13 @@ extern unzFile ZEXPORT unzOpen2
 
 	if (err != UNZ_OK) {
 		ZCLOSE(us.z_filefunc, us.filestream);
-		return 0;
+		return nullptr;
 	}
 
 	us.byte_before_the_zipfile =
 		central_pos - (us.offset_central_dir + us.size_central_dir);
 	us.central_pos             = central_pos;
-	us.pfile_in_zip_read       = 0;
+	us.pfile_in_zip_read       = nullptr;
 	us.encrypted               = 0;
 
 
@@ -449,7 +449,7 @@ extern unzFile ZEXPORT unzOpen2
 
 extern unzFile ZEXPORT unzOpen (char const * path)
 {
-	return unzOpen2(path, 0);
+	return unzOpen2(path, nullptr);
 }
 
 /*
@@ -726,7 +726,7 @@ extern int32_t ZEXPORT unzGetCurrentFileInfo
 {
 	return
 		unzlocal_GetCurrentFileInfoInternal
-			(file, pfile_info, 0,
+			(file, pfile_info, nullptr,
 			 szFileName, fileNameBufferSize,
 			 extraField, extraFieldBufferSize,
 			 szComment,  commentBufferSize);
@@ -747,7 +747,7 @@ extern int32_t ZEXPORT unzGoToFirstFile (unzFile file)
 	err =
 		unzlocal_GetCurrentFileInfoInternal
 			(file, &s->cur_file_info, &s->cur_file_info_internal,
-			 0, 0, 0, 0, 0, 0);
+			 nullptr, 0, nullptr, 0, nullptr, 0);
 	s->current_file_ok = (err == UNZ_OK);
 	return err;
 }
@@ -779,7 +779,7 @@ extern int32_t ZEXPORT unzGoToNextFile (unzFile file)
 	err =
 		unzlocal_GetCurrentFileInfoInternal
 			(file, &s->cur_file_info, &s->cur_file_info_internal,
-			 0, 0, 0, 0, 0, 0);
+			 nullptr, 0, nullptr, 0, nullptr, 0);
 	s->current_file_ok = (err == UNZ_OK);
 	return err;
 }
@@ -1004,10 +1004,10 @@ extern int32_t ZEXPORT unzOpenCurrentFile3
 	pfile_in_zip_read_info->stream.total_out = 0;
 
 	if (s->cur_file_info.compression_method == Z_DEFLATED and not raw) {
-		pfile_in_zip_read_info->stream.zalloc   = 0;
-		pfile_in_zip_read_info->stream.zfree    = 0;
-		pfile_in_zip_read_info->stream.opaque   = 0;
-		pfile_in_zip_read_info->stream.next_in  = 0;
+		pfile_in_zip_read_info->stream.zalloc   = nullptr;
+		pfile_in_zip_read_info->stream.zfree    = nullptr;
+		pfile_in_zip_read_info->stream.opaque   = nullptr;
+		pfile_in_zip_read_info->stream.next_in  = nullptr;
 		pfile_in_zip_read_info->stream.avail_in = 0;
 
 		err = inflateInit2(&pfile_in_zip_read_info->stream, -MAX_WBITS);
@@ -1041,7 +1041,7 @@ extern int32_t ZEXPORT unzOpenCurrentFile3
 
 extern int32_t ZEXPORT unzOpenCurrentFile (unzFile file)
 {
-	return unzOpenCurrentFile3(file, 0, 0, 0, 0);
+	return unzOpenCurrentFile3(file, nullptr, nullptr, 0, nullptr);
 }
 
 /*
@@ -1245,14 +1245,14 @@ extern int32_t ZEXPORT unzCloseCurrentFile (unzFile file)
 
 
 	free(pfile_in_zip_read_info->read_buffer);
-	pfile_in_zip_read_info->read_buffer = 0;
+	pfile_in_zip_read_info->read_buffer = nullptr;
 	if (pfile_in_zip_read_info->stream_initialized)
 		inflateEnd(&pfile_in_zip_read_info->stream);
 
 	pfile_in_zip_read_info->stream_initialized = 0;
 	free(pfile_in_zip_read_info);
 
-	s->pfile_in_zip_read = 0;
+	s->pfile_in_zip_read = nullptr;
 
 	return err;
 }
@@ -1370,7 +1370,7 @@ local linkedlist_datablock_internal * allocate_new_datablock()
 		static_cast<linkedlist_datablock_internal *>
 			(malloc(sizeof(linkedlist_datablock_internal)));
 	if (ldi) {
-		ldi->next_datablock       = 0;
+		ldi->next_datablock       = nullptr;
 		ldi->filled_in_this_block = 0;
 		ldi->avail_in_this_block  = SIZEDATA_INDATABLOCK;
 	}
@@ -1388,7 +1388,7 @@ local void free_datablock(linkedlist_datablock_internal * ldi)
 
 local void init_linkedlist(linkedlist_data * const ll)
 {
-	ll->first_block = ll->last_block = 0;
+	ll->first_block = ll->last_block = nullptr;
 }
 
 /* IS NOT USED
@@ -1712,7 +1712,7 @@ extern zipFile ZEXPORT zipOpen2
 		 ZLIB_FILEFUNC_MODE_EXISTING);
 
 	if (not ziinit.filestream)
-		return 0;
+		return nullptr;
 	ziinit.begin_pos = ZTELL(ziinit.z_filefunc, ziinit.filestream);
 	ziinit.in_opened_file_inzip = 0;
 	ziinit.ci.stream_initialized = 0;
@@ -1725,7 +1725,7 @@ extern zipFile ZEXPORT zipOpen2
 		static_cast<zip_internal *>(malloc(sizeof(zip_internal)));
 	if (not zi) {
 		ZCLOSE(ziinit.z_filefunc, ziinit.filestream);
-		return 0;
+		return nullptr;
 	}
 
 	//  now we add file in a zipfile
@@ -1844,7 +1844,7 @@ extern zipFile ZEXPORT zipOpen2
 		if (err != ZIP_OK) {
 			ZCLOSE(ziinit.z_filefunc, ziinit.filestream);
 			free(zi);
-			return 0;
+			return nullptr;
 		}
 
 		byte_before_the_zipfile =
@@ -1901,7 +1901,7 @@ extern zipFile ZEXPORT zipOpen2
 
 	if (err != ZIP_OK) {
 		free(zi);
-		return 0;
+		return nullptr;
 	} else {
 		*zi = ziinit;
 		return static_cast<zipFile>(zi);
@@ -1911,7 +1911,7 @@ extern zipFile ZEXPORT zipOpen2
 extern zipFile ZEXPORT zipOpen
 	(char const * const pathname, int32_t const append)
 {
-	return zipOpen2(pathname, append, 0, 0);
+	return zipOpen2(pathname, append, nullptr, nullptr);
 }
 
 extern int32_t ZEXPORT zipOpenNewFileInZip3
@@ -2177,9 +2177,9 @@ extern int32_t ZEXPORT zipOpenNewFileInZip3
 	zi->ci.stream.total_out = 0;
 
 	if (err == ZIP_OK && zi->ci.method == Z_DEFLATED && !zi->ci.raw) {
-		zi->ci.stream.zalloc = static_cast<alloc_func>(0);
-		zi->ci.stream.zfree  = static_cast<free_func> (0);
-		zi->ci.stream.opaque = static_cast<voidpf>    (0);
+		zi->ci.stream.zalloc = static_cast<alloc_func>(nullptr);
+		zi->ci.stream.zfree  = static_cast<free_func> (nullptr);
+		zi->ci.stream.opaque = static_cast<voidpf>    (nullptr);
 
 		if (windowBits > 0)
 			windowBits = -windowBits;
@@ -2557,12 +2557,12 @@ voidpf ZCALLBACK fopen_file_func
 	 char const * const filename,
 	 int32_t      const mode)
 {
-	FILE * file = 0;
+	FILE * file = nullptr;
 	char const * const mode_fopen =
 		(mode & ZLIB_FILEFUNC_MODE_READWRITEFILTER) == ZLIB_FILEFUNC_MODE_READ
 		?                                    "rb"  :
 		mode & ZLIB_FILEFUNC_MODE_EXISTING ? "r+b" :
-		mode & ZLIB_FILEFUNC_MODE_CREATE   ? "wb"  : 0;
+		mode & ZLIB_FILEFUNC_MODE_CREATE   ? "wb"  : nullptr;
 
 	if (filename && mode_fopen)
 		file = fopen(filename, mode_fopen);
@@ -2627,5 +2627,5 @@ void fill_fopen_filefunc (zlib_filefunc_def * const pzlib_filefunc_def)
 	pzlib_filefunc_def->zseek_file  = fseek_file_func;
 	pzlib_filefunc_def->zclose_file = fclose_file_func;
 	pzlib_filefunc_def->zerror_file = ferror_file_func;
-	pzlib_filefunc_def->opaque      = 0;
+	pzlib_filefunc_def->opaque      = nullptr;
 }

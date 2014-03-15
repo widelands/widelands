@@ -98,7 +98,7 @@ void MapGenerator::generate_bobs
 			(fc,
 			 bobKind->getImmovableBob
 			 	(static_cast<size_t>(rng.rand() / (MAX_ELEVATION / num))),
-			 0);
+			 nullptr);
 
 	if (set_moveable and (num = bobKind->getNumMoveableBobs()))
 		m_egbase.create_bob
@@ -107,23 +107,21 @@ void MapGenerator::generate_bobs
 			 	(bobKind->getMoveableBob
 			 	 	(static_cast<size_t>(rng.rand() / (MAX_ELEVATION / num)))
 			 	 .c_str()),
-			 0);
+			 nullptr);
 }
 
-#define set_resource_helper(rnd1, res)                                        \
-   {                                                                          \
-      Resource_Index const res_idx = terr.get_valid_resource(res);            \
-      uint32_t const max_amount    =                                          \
-         m_map.world().get_resource(res_idx)->get_max_amount();                \
-      uint8_t res_val =                                                       \
-         static_cast<uint8_t>(rnd1 / (MAX_ELEVATION / max_amount));           \
-      res_val *= static_cast<uint8_t>(m_mapInfo.resource_amount) + 1;        \
-      res_val /= 3;                                                           \
-      if (Editor_Change_Resource_Tool_Callback(fc, &m_map, res_idx)) {        \
-         fc.field->set_resources(res_idx, res_val);                           \
-         fc.field->set_starting_res_amount(res_val);                          \
-      }                                                                       \
-   }                                                                          \
+#define set_resource_helper(rnd1, res)                                                             \
+	{                                                                                               \
+		Resource_Index const res_idx = terr.get_valid_resource(res);                                 \
+		uint32_t const max_amount = m_map.world().get_resource(res_idx)->get_max_amount();           \
+		uint8_t res_val = static_cast<uint8_t>(rnd1 / (MAX_ELEVATION / max_amount));                 \
+		res_val *= static_cast<uint8_t>(m_mapInfo.resource_amount) + 1;                              \
+		res_val /= 3;                                                                                \
+		if (Editor_Change_Resource_Tool_Callback(fc, m_map, res_idx)) {                              \
+			fc.field->set_resources(res_idx, res_val);                                                \
+			fc.field->set_starting_res_amount(res_val);                                               \
+		}                                                                                            \
+	}
 
 void MapGenerator::generate_resources
 	(uint32_t            const * const random1,
@@ -411,7 +409,7 @@ uint32_t * MapGenerator::generate_random_value_map
 		throw;
 	}
 
-	return 0; // Should not be reached
+	return nullptr; // Should not be reached
 }
 
 
@@ -458,7 +456,6 @@ Terrain_Index MapGenerator::figure_out_terrain
 	bool isDesert  = false;
 	bool isDesertOuter = false;
 	uint32_t landAreaIndex = 0;
-	MapGenAreaInfo::MapGenAreaType landType = MapGenAreaInfo::atLand;
 
 	uint32_t rand2 =
 		random2[c0.x + m_mapInfo.w * c0.y] / 3 +
@@ -559,7 +556,7 @@ Terrain_Index MapGenerator::figure_out_terrain
 
 	uint32_t const coast_h   = mapGenInfo.getLandCoastHeight();
 	if (h1 <= coast_h && h2 <= coast_h && h3 <= coast_h) { //  water or coast...
-		atp = landType;
+		atp = MapGenAreaInfo::atLand;
 		ttp = MapGenAreaInfo::ttLandCoast;
 
 		uint32_t const ocean_h   = mapGenInfo.getWaterOceanHeight();

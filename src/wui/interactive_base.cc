@@ -67,7 +67,7 @@ struct InteractiveBaseInternals {
 
 	InteractiveBaseInternals(QuickNavigation * qnav)
 	:
-	mm(0),
+	mm(nullptr),
 	quicknavigation(qnav)
 	{}
 };
@@ -75,7 +75,7 @@ struct InteractiveBaseInternals {
 Interactive_Base::Interactive_Base
 	(Editor_Game_Base & the_egbase, Section & global_s)
 	:
-	Map_View(0, 0, 0, global_s.get_int("xres", XRES), global_s.get_int("yres", YRES), *this),
+	Map_View(nullptr, 0, 0, global_s.get_int("xres", XRES), global_s.get_int("yres", YRES), *this),
 	m_show_workarea_preview(global_s.get_bool("workareapreview", true)),
 	m
 		(new InteractiveBaseInternals
@@ -91,7 +91,7 @@ Interactive_Base::Interactive_Base
 	m_avg_usframetime             (0),
 	m_jobid                       (Overlay_Manager::Job_Id::Null()),
 	m_road_buildhelp_overlay_jobid(Overlay_Manager::Job_Id::Null()),
-	m_buildroad                   (0),
+	m_buildroad                   (nullptr),
 	m_road_build_player           (0),
 	// Initialize chatoveraly before the toolbar so it is below
 	m_chatOverlay                 (new ChatOverlay(this, 10, 25, get_w() / 2, get_h() - 25)),
@@ -312,8 +312,7 @@ static std::string speedString(uint32_t const speed)
 {
 	if (speed) {
 		char buffer[32];
-		snprintf
-			(buffer, sizeof(buffer), _("%u.%ux"), speed / 1000, speed / 100 % 10);
+		snprintf(buffer, sizeof(buffer), ("%u.%ux"), speed / 1000, speed / 100 % 10);
 		return buffer;
 	}
 	return _("PAUSE");
@@ -333,12 +332,14 @@ void Interactive_Base::update_speedlabel()
 				m_label_speed.set_text
 					(real == 1000 ? std::string() : speedString(real));
 			else {
-				char buffer[128];
-				snprintf
-					(buffer, sizeof(buffer),
-					 _("%s (%s)"),
-					 speedString(real).c_str(), speedString(desired).c_str());
-				m_label_speed.set_text(buffer);
+				m_label_speed.set_text(
+					(format
+						 /** TRANSLATORS: actual_speed (desired_speed) */
+						(_("%1$s (%2$s)"))
+						% speedString(real).c_str()
+						% speedString(desired).c_str()
+					).str().c_str()
+				);
 			}
 		} else
 			m_label_speed.set_text(_("NO GAME CONTROLLER"));
@@ -621,7 +622,7 @@ void Interactive_Base::abort_build_road()
 	m_road_build_player = 0;
 
 	delete m_buildroad;
-	m_buildroad = 0;
+	m_buildroad = nullptr;
 }
 
 
@@ -689,7 +690,7 @@ void Interactive_Base::finish_build_road()
 	}
 
 	delete m_buildroad;
-	m_buildroad = 0;
+	m_buildroad = nullptr;
 }
 
 
@@ -851,7 +852,7 @@ void Interactive_Base::roadb_add_overlay()
 		else
 			slope = endpos.field->get_height() - neighb.field->get_height();
 
-		const char * name = 0;
+		const char * name = nullptr;
 
 		if (slope <= -4)
 			name = "pics/roadb_reddown.png";

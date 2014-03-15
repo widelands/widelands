@@ -28,7 +28,7 @@ class ImageLoaderImpl : public IImageLoader {
 public:
 	virtual ~ImageLoaderImpl() {}
 
-	Surface* load(const std::string& fname, FileSystem* fs = nullptr) const;
+	Surface* load(const std::string& fname, FileSystem* fs = nullptr) const override;
 };
 
 

@@ -23,7 +23,7 @@
 #define Name "Widelands"
 #define VerName "Widelands @WL_VERSION@"
 #define VerNumber "@WL_VERSION_MAJOR@.@WL_VERSION_MINOR@.@WL_VERSION_PATCH@"
-#define Copyright "Widelands Development Team 2001-2012"
+#define Copyright "Widelands Development Team 2001-2014"
 #define SetupFileName "Widelands-@WL_VERSION@-win32"
 
 ;General String
@@ -80,7 +80,7 @@ Name: slovak;    MessagesFile: compiler:Languages\Slovak.isl
 Name: russian;   MessagesFile: compiler:Languages\Russian.isl
 Name: hungarian; MessagesFile: compiler:Languages\Hungarian.isl
 Name: dutch;     MessagesFile: compiler:Languages\Dutch.isl
-Name: galician;  MessagesFile: compiler:Languages\Galician.isl
+Name: gaelic;    MessagesFile: compiler:Languages\ScottishGaelic.isl
 Name: hebrew;    MessagesFile: compiler:Languages\Hebrew.isl
 Name: russian;   MessagesFile: compiler:Languages\Russian.isl
 Name: spanish;   MessagesFile: compiler:Languages\Spanish.isl

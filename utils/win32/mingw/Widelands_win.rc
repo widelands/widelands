@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006-2009 by the Widelands Development Team
+ * Copyright (C) 2006-2014 by the Widelands Development Team
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -32,8 +32,8 @@ A ICON MOVEABLE PURE LOADONCALL DISCARDABLE "../WL.ico"
 // TO CHANGE VERSION INFORMATION, EDIT  OPTIONS BELOW...
 //
 1 VERSIONINFO
-FILEVERSION 0,0,0,17
-PRODUCTVERSION 0,0,0,17
+FILEVERSION 0,0,0,18
+PRODUCTVERSION 0,0,0,18
 FILETYPE VFT_APP
 {
   BLOCK "StringFileInfo"

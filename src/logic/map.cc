@@ -69,10 +69,9 @@ m_nrplayers      (0),
 m_scenario_types (NO_SCENARIO),
 m_width          (0),
 m_height         (0),
-m_world          (0),
-m_starting_pos   (0),
-m_fields         (0),
-m_overlay_manager(0),
+m_world          (nullptr),
+m_starting_pos   (nullptr),
+m_fields         (nullptr),
 m_pathfieldmgr   (new PathfieldManager)
 {
 	m_worldname[0] = '\0';
@@ -82,7 +81,6 @@ m_pathfieldmgr   (new PathfieldManager)
 Map::~Map()
 {
 	cleanup();
-	delete m_overlay_manager;
 }
 
 void Map::recalc_border(const FCoords fc) {
@@ -305,11 +303,11 @@ void Map::cleanup() {
 	m_width = m_height = 0;
 
 	free(m_fields);
-	m_fields = 0;
+	m_fields = nullptr;
 	free(m_starting_pos);
-	m_starting_pos = 0;
+	m_starting_pos = nullptr;
 	delete m_world;
-	m_world = 0;
+	m_world = nullptr;
 
 	m_scenario_tribes.clear();
 	m_scenario_names.clear();
@@ -320,9 +318,7 @@ void Map::cleanup() {
 	m_hint = std::string();
 	m_background = std::string();
 
-	if (m_overlay_manager)
-		m_overlay_manager->reset();
-
+	m_overlay_manager.reset();
 	mom().remove_all();
 
 	//  Remove all extra data. Pay attention here, maybe some freeing would be
@@ -442,6 +438,8 @@ void Map::set_origin(Coords const new_origin) {
 		new_port_spaces.insert(temp);
 	}
 	m_port_spaces = new_port_spaces;
+
+	m_overlay_manager.reset(new Overlay_Manager());
 }
 
 
@@ -464,8 +462,7 @@ void Map::set_size(const uint32_t w, const uint32_t h)
 
 	m_pathfieldmgr->setSize(w * h);
 
-	if (not m_overlay_manager)
-		m_overlay_manager = new Overlay_Manager();
+	m_overlay_manager.reset(new Overlay_Manager());
 }
 
 /*
@@ -544,7 +541,7 @@ Could happen multiple times in the map editor.
 void Map::set_nrplayers(Player_Number const nrplayers) {
 	if (!nrplayers) {
 		free(m_starting_pos);
-		m_starting_pos = 0;
+		m_starting_pos = nullptr;
 		m_nrplayers = 0;
 		return;
 	}
@@ -674,7 +671,7 @@ void Map::find_reachable
 	queue.push_back(area);
 
 	while (queue.size()) {
-		// Pop the last item from the queue
+		// Pop the last ware from the queue
 		FCoords const cur = get_fcoords(*queue.rbegin());
 		queue.pop_back();
 		Pathfield & curpf = pathfields->fields[cur.field - m_fields];
@@ -1164,7 +1161,7 @@ NodeCaps Map::_calc_nodecaps_pass1(FCoords const f, bool consider_mobs) {
 	//  restrictions
 	if (caps & MOVECAPS_WALK) {
 		//  4b) Flags must be at least 2 edges apart
-		if (consider_mobs && find_immovables(Area<FCoords>(f, 1), 0, FindImmovableType(Map_Object::FLAG)))
+		if (consider_mobs && find_immovables(Area<FCoords>(f, 1), nullptr, FindImmovableType(Map_Object::FLAG)))
 			return static_cast<NodeCaps>(caps);
 		caps |= BUILDCAPS_FLAG;
 	}
@@ -1211,9 +1208,9 @@ NodeCaps Map::_calc_nodecaps_pass2(FCoords const f, bool consider_mobs, NodeCaps
 
 	if (buildsize == BaseImmovable::BIG) {
 		if
-			(calc_buildsize(l_n(f),  false, 0, consider_mobs, initcaps) < BaseImmovable::BIG ||
-			 calc_buildsize(tl_n(f), false, 0, consider_mobs, initcaps) < BaseImmovable::BIG ||
-			 calc_buildsize(tr_n(f), false, 0, consider_mobs, initcaps) < BaseImmovable::BIG)
+			(calc_buildsize(l_n(f),  false, nullptr, consider_mobs, initcaps) < BaseImmovable::BIG ||
+			 calc_buildsize(tl_n(f), false, nullptr, consider_mobs, initcaps) < BaseImmovable::BIG ||
+			 calc_buildsize(tr_n(f), false, nullptr, consider_mobs, initcaps) < BaseImmovable::BIG)
 			buildsize = BaseImmovable::MEDIUM;
 	}
 
