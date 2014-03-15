@@ -41,7 +41,7 @@ _[[Black – coal]] .. "<br>" ..
 _[[Red – iron ore]] .. "<br>" ..
 _[[Yellow – gold]] .. "<br>" ..
 _[[Grey – granite]] .. "<br><br>" ..
-_[[Mines can only be built on mountain terrain. Suitable places for mines are displayed as a mining symbol.]]
+_[[Mines can only be built on mountain terrain. Suitable places for mines are displayed as orange mine symbols.]]
    )
 }
 
