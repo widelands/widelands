@@ -191,7 +191,7 @@ void EncyclopediaWindow::prodSiteSelected(uint32_t) {
 							tribe.get_ware_descr(*k)->descname();
 						if (k.advance().empty())
 							break;
-						/** TRANSLATORS: List or wares, e.g. "Fish or Meat" */
+						/** TRANSLATORS: List of wares, e.g. "Fish or Meat" */
 						ware_type_names += _(" or ");
 					}
 

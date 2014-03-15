@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2014-03-06 21:20+0000\n"
+"POT-Creation-Date: 2014-03-12 21:37+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -108,232 +108,232 @@ msgid ""
 "Stones"
 msgstr ""
 
-#: ../../worlds/greenland/conf:46
-msgid ""
-"Aspen"
-msgstr ""
-
 #: ../../worlds/greenland/conf:47
 msgid ""
-"Aspen (medium)"
-msgstr ""
-
-#: ../../worlds/greenland/conf:48
-msgid ""
-"Aspen (small)"
+"Aspen (Old)"
 msgstr ""
 
 #: ../../worlds/greenland/conf:49
 msgid ""
-"Aspen (tiny)"
-msgstr ""
-
-#: ../../worlds/greenland/conf:50
-msgid ""
-"Oak"
+"Aspen (Mature)"
 msgstr ""
 
 #: ../../worlds/greenland/conf:51
 msgid ""
-"Oak (medium)"
-msgstr ""
-
-#: ../../worlds/greenland/conf:52
-msgid ""
-"Oak (small)"
+"Aspen (Pole)"
 msgstr ""
 
 #: ../../worlds/greenland/conf:53
 msgid ""
-"Oak (tiny)"
+"Aspen (Sapling)"
 msgstr ""
 
 #: ../../worlds/greenland/conf:54
 msgid ""
-"Spruce"
+"Oak (Old)"
 msgstr ""
 
 #: ../../worlds/greenland/conf:55
 msgid ""
-"Spruce (medium)"
+"Oak (Mature)"
 msgstr ""
 
 #: ../../worlds/greenland/conf:56
 msgid ""
-"Spruce (small)"
+"Oak (Pole)"
 msgstr ""
 
 #: ../../worlds/greenland/conf:57
 msgid ""
-"Spruce (tiny)"
+"Oak (Sapling)"
 msgstr ""
 
 #: ../../worlds/greenland/conf:58
 msgid ""
-"Alder"
+"Spruce (Old)"
 msgstr ""
 
 #: ../../worlds/greenland/conf:59
 msgid ""
-"Alder (medium)"
+"Spruce (Mature)"
 msgstr ""
 
 #: ../../worlds/greenland/conf:60
 msgid ""
-"Alder (small)"
+"Spruce (Pole)"
 msgstr ""
 
 #: ../../worlds/greenland/conf:61
 msgid ""
-"Alder (tiny)"
+"Spruce (Sapling)"
 msgstr ""
 
 #: ../../worlds/greenland/conf:62
 msgid ""
-"Birch"
+"Alder (Old)"
 msgstr ""
 
 #: ../../worlds/greenland/conf:63
 msgid ""
-"Birch (medium)"
+"Alder (Mature)"
 msgstr ""
 
 #: ../../worlds/greenland/conf:64
 msgid ""
-"Birch (small)"
+"Alder (Pole)"
 msgstr ""
 
 #: ../../worlds/greenland/conf:65
 msgid ""
-"Birch (tiny)"
+"Alder (Sapling)"
 msgstr ""
 
 #: ../../worlds/greenland/conf:66
 msgid ""
-"Beech"
+"Birch (Old)"
 msgstr ""
 
 #: ../../worlds/greenland/conf:67
 msgid ""
-"Beech (medium)"
+"Birch (Mature)"
 msgstr ""
 
 #: ../../worlds/greenland/conf:68
 msgid ""
-"Beech (small)"
+"Birch (Pole)"
 msgstr ""
 
 #: ../../worlds/greenland/conf:69
 msgid ""
-"Beech (tiny)"
+"Birch (Sapling)"
 msgstr ""
 
 #: ../../worlds/greenland/conf:70
 msgid ""
-"Larch"
+"Beech (Old)"
 msgstr ""
 
 #: ../../worlds/greenland/conf:71
 msgid ""
-"Larch (medium)"
+"Beech (Mature)"
 msgstr ""
 
 #: ../../worlds/greenland/conf:72
 msgid ""
-"Larch (small)"
+"Beech (Pole)"
 msgstr ""
 
 #: ../../worlds/greenland/conf:73
 msgid ""
-"Larch (tiny)"
+"Beech (Sapling)"
 msgstr ""
 
 #: ../../worlds/greenland/conf:74
 msgid ""
-"Rowan"
+"Larch (Old)"
 msgstr ""
 
 #: ../../worlds/greenland/conf:75
 msgid ""
-"Rowan (medium)"
+"Larch (Mature)"
 msgstr ""
 
 #: ../../worlds/greenland/conf:76
 msgid ""
-"Rowan (small)"
+"Larch (Pole)"
 msgstr ""
 
 #: ../../worlds/greenland/conf:77
 msgid ""
-"Rowan (tiny)"
+"Larch (Sapling)"
+msgstr ""
+
+#: ../../worlds/greenland/conf:78
+msgid ""
+"Rowan (Old)"
+msgstr ""
+
+#: ../../worlds/greenland/conf:79
+msgid ""
+"Rowan (Mature)"
 msgstr ""
 
 #: ../../worlds/greenland/conf:80
 msgid ""
-"Badger"
+"Rowan (Pole)"
 msgstr ""
 
 #: ../../worlds/greenland/conf:81
 msgid ""
-"Brown Bear"
-msgstr ""
-
-#: ../../worlds/greenland/conf:82
-msgid ""
-"Bunny"
-msgstr ""
-
-#: ../../worlds/greenland/conf:83
-msgid ""
-"Chamois"
+"Rowan (Sapling)"
 msgstr ""
 
 #: ../../worlds/greenland/conf:84
 msgid ""
-"Deer"
+"Badger"
 msgstr ""
 
 #: ../../worlds/greenland/conf:85
 msgid ""
-"Duck"
+"Brown Bear"
 msgstr ""
 
 #: ../../worlds/greenland/conf:86
 msgid ""
-"Elk"
+"Bunny"
 msgstr ""
 
 #: ../../worlds/greenland/conf:87
 msgid ""
-"Fox"
+"Chamois"
 msgstr ""
 
 #: ../../worlds/greenland/conf:88
 msgid ""
-"Lynx"
+"Deer"
 msgstr ""
 
 #: ../../worlds/greenland/conf:89
 msgid ""
-"Marten"
+"Duck"
 msgstr ""
 
 #: ../../worlds/greenland/conf:90
 msgid ""
-"Reindeer"
+"Elk"
 msgstr ""
 
 #: ../../worlds/greenland/conf:91
 msgid ""
-"Sheep"
+"Fox"
 msgstr ""
 
 #: ../../worlds/greenland/conf:92
 msgid ""
-"Wisent"
+"Lynx"
 msgstr ""
 
 #: ../../worlds/greenland/conf:93
+msgid ""
+"Marten"
+msgstr ""
+
+#: ../../worlds/greenland/conf:94
+msgid ""
+"Reindeer"
+msgstr ""
+
+#: ../../worlds/greenland/conf:95
+msgid ""
+"Sheep"
+msgstr ""
+
+#: ../../worlds/greenland/conf:96
+msgid ""
+"Wisent"
+msgstr ""
+
+#: ../../worlds/greenland/conf:97
 msgid ""
 "Wolf"
 msgstr ""

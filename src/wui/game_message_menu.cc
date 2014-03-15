@@ -43,7 +43,7 @@ GameMessageMenu::GameMessageMenu
 	(Interactive_Player & plr, UI::UniqueWindow::Registry & registry)
 	:
 	UI::UniqueWindow
-		(&plr, "messages", &registry, 580, 375, _("Message Menu: Inbox")),
+		(&plr, "messages", &registry, 580, 375, _("Messages: Inbox")),
 	message_body
 		(this,
 		 5, 150, 570, 220,
@@ -363,14 +363,14 @@ void GameMessageMenu::toggle_mode()
 	switch (mode) {
 	case Inbox:
 		mode = Archive;
-		set_title(_("Message Menu: Archive"));
+		set_title(_("Messages: Archive"));
 		m_archivebtn->set_pic(g_gr->images().get("pics/message_restore.png"));
 		m_archivebtn->set_tooltip(_("Restore selected messages"));
 		m_togglemodebtn->set_title(_("Show Inbox"));
 		break;
 	case Archive:
 		mode = Inbox;
-		set_title(_("Message Menu: Inbox"));
+		set_title(_("Messages: Inbox"));
 		m_archivebtn->set_pic(g_gr->images().get("pics/message_archive.png"));
 		m_archivebtn->set_tooltip(_("Archive selected messages"));
 		m_togglemodebtn->set_title(_("Show Archive"));

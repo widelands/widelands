@@ -211,6 +211,7 @@ void Fullscreen_Menu_Editor_MapSelect::fill_list()
 		m_parentdir = m_curdir.substr(0, m_curdir.rfind('\\'));
 #endif
 		std::string parent_string =
+				/** TRANSLATORS: Parent directory */
 				(boost::format("\\<%s\\>") % _("parent")).str();
 		m_list.add
 			(parent_string.c_str(),

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2014-03-06 21:20+0000\n"
+"POT-Creation-Date: 2014-03-12 21:37+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -103,192 +103,192 @@ msgid ""
 "Stones"
 msgstr ""
 
-#: ../../worlds/blackland/conf:45
-msgid ""
-"Aspen"
-msgstr ""
-
 #: ../../worlds/blackland/conf:46
 msgid ""
-"Aspen (medium)"
-msgstr ""
-
-#: ../../worlds/blackland/conf:47
-msgid ""
-"Aspen (small)"
+"Aspen (Old)"
 msgstr ""
 
 #: ../../worlds/blackland/conf:48
 msgid ""
-"Aspen (tiny)"
-msgstr ""
-
-#: ../../worlds/blackland/conf:49
-msgid ""
-"Oak"
+"Aspen (Mature)"
 msgstr ""
 
 #: ../../worlds/blackland/conf:50
 msgid ""
-"Oak (medium)"
-msgstr ""
-
-#: ../../worlds/blackland/conf:51
-msgid ""
-"Oak (small)"
+"Aspen (Pole)"
 msgstr ""
 
 #: ../../worlds/blackland/conf:52
 msgid ""
-"Oak (tiny)"
+"Aspen (Sapling)"
 msgstr ""
 
 #: ../../worlds/blackland/conf:53
 msgid ""
-"Spruce"
+"Oak (Old)"
 msgstr ""
 
 #: ../../worlds/blackland/conf:54
 msgid ""
-"Spruce (medium)"
+"Oak (Mature)"
 msgstr ""
 
 #: ../../worlds/blackland/conf:55
 msgid ""
-"Spruce (small)"
+"Oak (Pole)"
 msgstr ""
 
 #: ../../worlds/blackland/conf:56
 msgid ""
-"Spruce (tiny)"
+"Oak (Sapling)"
 msgstr ""
 
 #: ../../worlds/blackland/conf:57
 msgid ""
-"Maple"
+"Spruce (Old)"
 msgstr ""
 
 #: ../../worlds/blackland/conf:58
 msgid ""
-"Maple (medium)"
+"Spruce (Mature)"
 msgstr ""
 
 #: ../../worlds/blackland/conf:59
 msgid ""
-"Maple (small)"
+"Spruce (Pole)"
 msgstr ""
 
 #: ../../worlds/blackland/conf:60
 msgid ""
-"Maple (tiny)"
+"Spruce (Sapling)"
 msgstr ""
 
 #: ../../worlds/blackland/conf:61
 msgid ""
-"Birch"
+"Maple (Old)"
 msgstr ""
 
 #: ../../worlds/blackland/conf:62
 msgid ""
-"Birch (medium)"
+"Maple (Mature)"
 msgstr ""
 
 #: ../../worlds/blackland/conf:63
 msgid ""
-"Birch (small)"
+"Maple (Pole)"
 msgstr ""
 
 #: ../../worlds/blackland/conf:64
 msgid ""
-"Birch (tiny)"
+"Maple (Sapling)"
 msgstr ""
 
 #: ../../worlds/blackland/conf:65
 msgid ""
-"Beech"
+"Birch (Old)"
 msgstr ""
 
 #: ../../worlds/blackland/conf:66
 msgid ""
-"Beech (medium)"
+"Birch (Mature)"
 msgstr ""
 
 #: ../../worlds/blackland/conf:67
 msgid ""
-"Beech (small)"
+"Birch (Pole)"
 msgstr ""
 
 #: ../../worlds/blackland/conf:68
 msgid ""
-"Beech (tiny)"
+"Birch (Sapling)"
 msgstr ""
 
 #: ../../worlds/blackland/conf:69
 msgid ""
-"Larch"
+"Beech (Old)"
 msgstr ""
 
 #: ../../worlds/blackland/conf:70
 msgid ""
-"Larch (medium)"
+"Beech (Mature)"
 msgstr ""
 
 #: ../../worlds/blackland/conf:71
 msgid ""
-"Larch (small)"
+"Beech (Pole)"
 msgstr ""
 
 #: ../../worlds/blackland/conf:72
 msgid ""
-"Larch (tiny)"
+"Beech (Sapling)"
 msgstr ""
 
 #: ../../worlds/blackland/conf:73
 msgid ""
-"Rowan"
+"Larch (Old)"
 msgstr ""
 
 #: ../../worlds/blackland/conf:74
 msgid ""
-"Rowan (medium)"
+"Larch (Mature)"
 msgstr ""
 
 #: ../../worlds/blackland/conf:75
 msgid ""
-"Rowan (small)"
+"Larch (Pole)"
 msgstr ""
 
 #: ../../worlds/blackland/conf:76
 msgid ""
-"Rowan (tiny)"
+"Larch (Sapling)"
+msgstr ""
+
+#: ../../worlds/blackland/conf:77
+msgid ""
+"Rowan (Old)"
+msgstr ""
+
+#: ../../worlds/blackland/conf:78
+msgid ""
+"Rowan (Mature)"
 msgstr ""
 
 #: ../../worlds/blackland/conf:79
 msgid ""
-"Bunny"
+"Rowan (Pole)"
 msgstr ""
 
 #: ../../worlds/blackland/conf:80
 msgid ""
-"Deer"
-msgstr ""
-
-#: ../../worlds/blackland/conf:81
-msgid ""
-"Duck"
-msgstr ""
-
-#: ../../worlds/blackland/conf:82
-msgid ""
-"Fox"
+"Rowan (Sapling)"
 msgstr ""
 
 #: ../../worlds/blackland/conf:83
 msgid ""
-"Reindeer"
+"Bunny"
 msgstr ""
 
 #: ../../worlds/blackland/conf:84
+msgid ""
+"Deer"
+msgstr ""
+
+#: ../../worlds/blackland/conf:85
+msgid ""
+"Duck"
+msgstr ""
+
+#: ../../worlds/blackland/conf:86
+msgid ""
+"Fox"
+msgstr ""
+
+#: ../../worlds/blackland/conf:87
+msgid ""
+"Reindeer"
+msgstr ""
+
+#: ../../worlds/blackland/conf:88
 msgid ""
 "Sheep"
 msgstr ""

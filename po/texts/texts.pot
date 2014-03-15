@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2014-03-06 21:20+0000\n"
+"POT-Creation-Date: 2014-03-12 21:37+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -104,12 +104,12 @@ msgstr ""
 
 #: ../../txts/README.lua:61
 msgid ""
-"PAGEUP: increases games peed"
+"PAGEUP: increases game speed"
 msgstr ""
 
 #: ../../txts/README.lua:62
 msgid ""
-"PAGEDOWN: decreases games peed"
+"PAGEDOWN: decreases game speed"
 msgstr ""
 
 #: ../../txts/README.lua:63
@@ -118,11 +118,13 @@ msgid ""
 msgstr ""
 
 #: ../../txts/README.lua:64
+#: ../../txts/editor_readme:21
 msgid ""
 "SPACE: toggles if building spaces are shown"
 msgstr ""
 
 #: ../../txts/README.lua:65
+#: ../../txts/editor_readme:31
 msgid ""
 "M: toggles minimap"
 msgstr ""
@@ -133,6 +135,7 @@ msgid ""
 msgstr ""
 
 #: ../../txts/README.lua:67
+#: ../../txts/editor_readme:23
 msgid ""
 "C: toggles census"
 msgstr ""
@@ -554,74 +557,59 @@ msgid ""
 "Keyboard shortcuts"
 msgstr ""
 
-#: ../../txts/editor_readme:21
-msgid ""
-"SPACE    Toggles if building spaces are shown"
-msgstr ""
-
-#: ../../txts/editor_readme:23
-msgid ""
-"C        Toggles census on/off"
-msgstr ""
-
 #: ../../txts/editor_readme:25
 msgid ""
-"E        Toggles event menu"
+"E: toggles event menu"
 msgstr ""
 
 #: ../../txts/editor_readme:27
 msgid ""
-"F        Toggles fullscreen"
+"F: toggles fullscreen"
 msgstr ""
 
 #: ../../txts/editor_readme:29
 msgid ""
-"H        Toggles main menu"
-msgstr ""
-
-#: ../../txts/editor_readme:31
-msgid ""
-"M        Toggles minimap"
+"H: toggles main menu"
 msgstr ""
 
 #: ../../txts/editor_readme:33
 msgid ""
-"P        Toggles player menu"
+"P: toggles player menu"
 msgstr ""
 
 #: ../../txts/editor_readme:35
 msgid ""
-"T        Toggles tools menu"
+"T: toggles tools menu"
 msgstr ""
 
 #: ../../txts/editor_readme:37
 msgid ""
-"I        Activates information tool"
+"I: activates information tool"
 msgstr ""
 
 #: ../../txts/editor_readme:39
 msgid ""
-"CTRL+L   Load Map"
+"CTRL+L: load Map"
 msgstr ""
 
 #: ../../txts/editor_readme:41
 msgid ""
-"CTRL+S   Save Map"
+"CTRL+S: save Map"
 msgstr ""
 
 #: ../../txts/editor_readme:43
 msgid ""
-"1-0      Changes tool size"
+"1-0: changes tool size"
 msgstr ""
 
 #: ../../txts/editor_readme:45
 msgid ""
-"SHIFT    (Hold) Selects first alternative tool while pressed"
+"SHIFT (Hold): selects first alternative tool while pressed"
 msgstr ""
 
 #: ../../txts/editor_readme:47
 msgid ""
-"ALT      (Hold) Selects second alternative tool while pressed"
+"ALT (Hold): Selects second alternative tool while pressed"
 msgstr ""
 
 #: ../../txts/license:1

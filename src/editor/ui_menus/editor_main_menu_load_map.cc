@@ -204,6 +204,7 @@ void Main_Menu_Load_Map::fill_list() {
 		m_parentdir = m_curdir.substr(0, m_curdir.rfind('\\'));
 #endif
 		std::string parent_string =
+				/** TRANSLATORS: Parent directory */
 				(boost::format("\\<%s\\>") % _("parent")).str();
 		m_ls->add
 			(parent_string.c_str(),

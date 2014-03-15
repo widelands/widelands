@@ -125,9 +125,9 @@ obj_make_training_buildings = {
 
 obj_horsefarm_and_warehouse = {
    name = "obj_horsefarm_and_warehouse",
-   title = _"Build a warehouse and a horsefarm",
+   title = _"Build a warehouse and a horse farm",
    number = 2,
-   body = objective_text(_"Warehouse and Horsefarm", _(
+   body = objective_text(_"Warehouse and Horse Farm", _(
 [[As your road network gets longer and more complicated, you should employ horses ]] ..
 [[to help out your carriers. Horses are bred at horse farms using water and corn. ]] ..
 [[A warehouse will also help to ensure that your transportation system does not collapse.]]) .. "<br>" ..
@@ -261,12 +261,12 @@ first_briefing_messages = {
 },
 {
    title = _ "Sidolus Speaks",
-   body = sidolus(_
+   body = sidolus(_(
 [[May Satul warm you, Jundlina! I agree with what Loftomor proposes. ]] ..
 [[We need a good supply of building materials for we have to expand our territory swiftly. ]] ..
 [[I will not feel safe on this island as long as we have not seen all its shores it. ]] ..
 [[I brought plenty of good men from Atlantis. The military might is available. ]] ..
-[[We only need some housing to live in.]]
+[[We only need some housing to live in.]])
    ) ..  new_objectives(obj_expand)
 }
 }
@@ -337,7 +337,7 @@ spidercloth_messages = {
       title = _"A Man Comes to Jundlina",
       body = opol(p(_(
 [[May Satul warm you, Jundlina. ]] ..
-[[My Name is Opol, and I am the highest weaver of the guild abandoning Atlantis and Lutas with you. ]] ..
+[[My name is Opol, and I am the highest weaver of the guild abandoning Atlantis and Lutas with you. ]] ..
 [[I come with sad news indeed: we have no more spidercloth. Not a single piece is to be found in our warehouses. ]] ..
 [[Could you not help the weavers’ guild by arranging the building of a weaving-mill and a spider farm? ]] ..
 [[The spiders deliver the finest silk and we will produce the finest spidercloth from it.]])) .. p(_(

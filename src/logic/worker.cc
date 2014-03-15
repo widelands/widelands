@@ -596,24 +596,20 @@ void Worker::informPlayer
 	if (building.name() == "fish_breeders_house")
 		return;
 
+	// TODO "stone" is defined as "granit" in the worlds
+	if (res_type == "stone") res_type = "granit";
+
 	// Translate the Resource name (if it is defined by the world)
 	const World & world = game.world();
 	int32_t residx = world.get_resource(res_type.c_str());
 	if (residx != -1)
 		res_type = world.get_resource(residx)->descname();
 
-	// NOTE mirroring the above ugly hack.
-	// Avoiding placeholders for the resouce names to avert grammar trouble in translations.
-	std::string out_of_message =_("Out of Resources");
-	if (res_type == "fish") out_of_message =_("Out of Fish");
-	else if (res_type == "stone") out_of_message =_("Out of Stone");
-
 	building.send_message
 		(game,
 		 "mine",
-		 out_of_message,
-		 (boost::format(_("The worker of this building cannot find any more resources "
-		 	 "of the following type: %s")) % res_type).str(),
+		 (boost::format(_("Out of %s")) % res_type).str(),
+		 (boost::format(_("The worker of this building cannot find any more %s.")) % res_type).str(),
 		 true,
 		 1800000, 0);
 }
@@ -1340,19 +1336,6 @@ Ware_Index Worker::level(Game & game) {
 
 	create_needed_experience(game);
 	return old_index; //  So that the caller knows what to replace him with.
-}
-
-/**
- * Change this worker into a different type.
- *
- * \warning Using this function is very dangerous. The only reason it exists
- * is to fix certain savegame compatibility issues.
- */
-void Worker::flash(const std::string & newname)
-{
-	log("WARNING: Flashing worker of type %s to %s\n", name().c_str(), newname.c_str());
-
-	m_descr = tribe().get_worker_descr(tribe().safe_worker_index(newname));
 }
 
 /**
@@ -3053,14 +3036,6 @@ const Bob::Task * Worker::Loader::get_task(const std::string & name)
 const BobProgramBase * Worker::Loader::get_program(const std::string & name)
 {
 	Worker & worker = get<Worker>();
-	const std::string & compatibility = worker.descr().compatibility_program(name);
-
-	if (compatibility == "fail") {
-		if (upcast(Game, game, &egbase()))
-			add_finish(boost::bind(&Worker::send_signal, &worker, boost::ref(*game), "fail"));
-		return nullptr;
-	}
-
 	return worker.descr().get_program(name);
 }
 

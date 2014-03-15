@@ -53,7 +53,7 @@ function _msg(title, text, ...)
    "<rt><p line-spacing=3 font-size=12>" .. reflow(text)
    objs = {...}
    if #objs > 0 then
-      s = s .. "<br><br></p></rt>" .. rt(h2(_"New Objectives")) .. "<rt><p line-spacing=3 font-size=12>"
+      s = s .. "<br><br></p></rt>" .. rt(h2(_"New Objective")) .. "<rt><p line-spacing=3 font-size=12>"
       local i = 1
       while i < #objs do
          s = s .. reflow(objs[i].body) .. "<br>"

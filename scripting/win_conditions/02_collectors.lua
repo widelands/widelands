@@ -4,6 +4,7 @@
 
 use("aux", "coroutine") -- for sleep
 use("aux", "table")
+use("aux", "formatting")
 use("aux", "win_condition_functions")
 
 set_textdomain("win_conditions")
@@ -92,7 +93,7 @@ local function _calc_points(plr)
 	)
 
 	local points = 0
-	local descr = { (_"Status for %s"):format(plr.name) .. "<br>"}
+	local descr = { "</p>" .. h2((_"Status for %s"):format(plr.name)) .. "<p line-spacing=3 font-size=12>"}
 	for idx, ware in ipairs(point_table[plr.tribe_name .. "_order"]) do
 		local value = point_table[plr.tribe_name][ware]
 		local count = 0
@@ -101,12 +102,13 @@ local function _calc_points(plr)
 		end
 		local lpoints = count * value
 		points = points + lpoints
-		-- TRANSLATORS: For example: "gold (3 P) x 4 = 12 P", P meaning "Points"
-		descr[#descr+1] = (_"  %1$s (%2$i P) x %3$i = %4$i P<br>"):bformat(
+		-- TRANSLATORS: For example: 'gold (3 P) x 4 = 12 P", P meaning "Points'
+		descr[#descr+1] = [[• ]] .. (_"  %1$s (%2$i P) x %3$i = %4$i P"):bformat(
 			ware, value, count, lpoints
-		)
+		) .. "<br>"
 	end
-	descr[#descr+1] = (ngettext("Total: %i point", "Total: %i points", points)):format(points)
+	descr[#descr+1] =  "</p>" .. h3(ngettext("Total: %i point", "Total: %i points", points)):format(points)
+			  .. "<p line-spacing=3 font-size=12>"
 	return points, p(table.concat(descr, "\n"))
 end
 
@@ -117,7 +119,7 @@ local function _send_state(remaining_time, plrs)
 	local m = remaining_time % 60
 	local time = ""
 	if h > 0 then
-		-- TRANSLATORS: Context: "The game will end in %s."
+		-- TRANSLATORS: Context: 'The game will end in %s.'
 		time = (_"%1$ih%2$02im"):bformat(h,m)
 	else
 		time = (ngettext("%i minute", "%i minutes", m)):format(m)

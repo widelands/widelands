@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2014-03-06 21:20+0000\n"
+"POT-Creation-Date: 2014-03-12 21:37+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -117,123 +117,123 @@ msgid ""
 "Stones"
 msgstr ""
 
-#: ../../worlds/desert/conf:51
-#: ../../worlds/desert/conf:55
-#: ../../worlds/desert/conf:59
-#: ../../worlds/desert/conf:63
-#: ../../worlds/desert/conf:67
-msgid ""
-"Palm"
-msgstr ""
-
-#: ../../worlds/desert/conf:52
-#: ../../worlds/desert/conf:56
+#: ../../worlds/desert/conf:53
 #: ../../worlds/desert/conf:60
 #: ../../worlds/desert/conf:64
 #: ../../worlds/desert/conf:68
+#: ../../worlds/desert/conf:72
 msgid ""
-"Palm (medium)"
+"Palm (Old)"
 msgstr ""
 
-#: ../../worlds/desert/conf:53
-#: ../../worlds/desert/conf:57
+#: ../../worlds/desert/conf:55
 #: ../../worlds/desert/conf:61
 #: ../../worlds/desert/conf:65
 #: ../../worlds/desert/conf:69
+#: ../../worlds/desert/conf:73
 msgid ""
-"Palm (small)"
+"Palm (Mature)"
 msgstr ""
 
-#: ../../worlds/desert/conf:54
-#: ../../worlds/desert/conf:58
+#: ../../worlds/desert/conf:57
 #: ../../worlds/desert/conf:62
 #: ../../worlds/desert/conf:66
 #: ../../worlds/desert/conf:70
-msgid ""
-"Palm (tiny)"
-msgstr ""
-
-#: ../../worlds/desert/conf:71
-msgid ""
-"Beech"
-msgstr ""
-
-#: ../../worlds/desert/conf:72
-msgid ""
-"Beech (medium)"
-msgstr ""
-
-#: ../../worlds/desert/conf:73
-msgid ""
-"Beech (small)"
-msgstr ""
-
 #: ../../worlds/desert/conf:74
 msgid ""
-"Beech (tiny)"
+"Palm (Pole)"
 msgstr ""
 
+#: ../../worlds/desert/conf:59
+#: ../../worlds/desert/conf:63
+#: ../../worlds/desert/conf:67
+#: ../../worlds/desert/conf:71
 #: ../../worlds/desert/conf:75
 msgid ""
-"Larch"
+"Palm (Sapling)"
 msgstr ""
 
 #: ../../worlds/desert/conf:76
 msgid ""
-"Larch (medium)"
+"Beech (Old)"
 msgstr ""
 
 #: ../../worlds/desert/conf:77
 msgid ""
-"Larch (small)"
+"Beech (Mature)"
 msgstr ""
 
 #: ../../worlds/desert/conf:78
 msgid ""
-"Larch (tiny)"
+"Beech (Pole)"
 msgstr ""
 
 #: ../../worlds/desert/conf:79
 msgid ""
-"Rowan"
+"Beech (Sapling)"
 msgstr ""
 
 #: ../../worlds/desert/conf:80
 msgid ""
-"Rowan (medium)"
+"Larch (Old)"
 msgstr ""
 
 #: ../../worlds/desert/conf:81
 msgid ""
-"Rowan (small)"
+"Larch (Mature)"
 msgstr ""
 
 #: ../../worlds/desert/conf:82
 msgid ""
-"Rowan (tiny)"
+"Larch (Pole)"
+msgstr ""
+
+#: ../../worlds/desert/conf:83
+msgid ""
+"Larch (Sapling)"
+msgstr ""
+
+#: ../../worlds/desert/conf:84
+msgid ""
+"Rowan (Old)"
 msgstr ""
 
 #: ../../worlds/desert/conf:85
 msgid ""
-"Bunny"
+"Rowan (Mature)"
 msgstr ""
 
 #: ../../worlds/desert/conf:86
 msgid ""
-"Deer"
+"Rowan (Pole)"
 msgstr ""
 
 #: ../../worlds/desert/conf:87
 msgid ""
+"Rowan (Sapling)"
+msgstr ""
+
+#: ../../worlds/desert/conf:90
+msgid ""
+"Bunny"
+msgstr ""
+
+#: ../../worlds/desert/conf:91
+msgid ""
+"Deer"
+msgstr ""
+
+#: ../../worlds/desert/conf:92
+msgid ""
 "Duck"
 msgstr ""
 
-#: ../../worlds/desert/conf:88
+#: ../../worlds/desert/conf:93
 msgid ""
 "Fox"
 msgstr ""
 
-#: ../../worlds/desert/conf:89
+#: ../../worlds/desert/conf:94
 msgid ""
 "Sheep"
 msgstr ""

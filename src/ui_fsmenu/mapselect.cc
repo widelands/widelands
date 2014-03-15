@@ -481,8 +481,8 @@ void Fullscreen_Menu_MapSelect::fill_list()
 				mapdata.filename    = name;
 				mapdata.name        = dmap.path.substr(5, dmap.path.size() - 1);
 				mapdata.author      = _("unknown");
-				mapdata.description =
-					_("This map file is not present in your filesystem. The data shown here was sent by the server.");
+				mapdata.description = _("This map file is not present in your filesystem."
+							" The data shown here was sent by the server.");
 				mapdata.hint        = "";
 				mapdata.nrplayers   = dmap.players;
 				mapdata.width       = 1;

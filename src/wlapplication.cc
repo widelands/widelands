@@ -19,7 +19,6 @@
 
 #include "wlapplication.h"
 
-#include <boost/format.hpp>
 #include <cerrno>
 #ifndef _WIN32
 #include <csignal>
@@ -31,6 +30,7 @@
 #include <stdexcept>
 #include <string>
 
+#include <boost/format.hpp>
 #include <config.h>
 #ifdef __APPLE__
 #include <mach-o/dyld.h>
@@ -48,7 +48,6 @@
 #include "io/dedicated_log.h"
 #include "io/filesystem/disk_filesystem.h"
 #include "io/filesystem/layered_filesystem.h"
-#include "journal.h"
 #include "log.h"
 #include "logic/game.h"
 #include "logic/game_data_error.h"
@@ -248,7 +247,6 @@ WLApplication * WLApplication::get(int const argc, char const * * argv) {
 WLApplication::WLApplication(int const argc, char const * const * const argv) :
 m_commandline          (std::map<std::string, std::string>()),
 m_game_type            (NONE),
-journal                (nullptr),
 m_mouse_swapped        (false),
 m_faking_middle_mouse_button(false),
 m_mouse_position       (0, 0),
@@ -480,158 +478,53 @@ void WLApplication::run()
 
 /**
  * Get an event from the SDL queue, just like SDL_PollEvent.
- * Perform the meat of playback/record stuff when needed.
- *
- * Throttle is a hack to stop record files from getting extremely huge.
- * If it is set to true, we will idle loop if we can't get an SDL_Event
- * returned immediately if we're recording. If there is no user input,
- * the actual mainloop will be throttled to 100fps.
  *
  * \param ev the retrieved event will be put here
- * \param throttle Limit recording to 100fps max (not the event loop itself!)
  *
  * \return true if an event was returned inside ev, false otherwise
- *
- * \todo Catch Journalfile_error
  */
-bool WLApplication::poll_event(SDL_Event & ev, bool const throttle) {
-	bool haveevent = false;
-
-restart:
-	//inject synthesized events into the event queue when playing back
-	if (journal->is_playingback()) {
-		try {
-			haveevent = journal->read_event(ev);
-		} catch (const Journalfile_error & e) {
-			// An error might occur here when playing back a file that
-			// was not finalized due to a crash etc.
-			// Since playbacks are intended precisely for debugging such
-			// crashes, we must ignore the error and continue.
-			log("JOURNAL: read error, continue without playback: %s\n", e.what());
-			journal->stop_playback();
-		}
-	} else {
-		haveevent = SDL_PollEvent(&ev);
-
-		if (haveevent) {
-			// We edit mouse motion events in here, so that
-			// differences caused by GrabInput or mouse speed
-			// settings are invisible to the rest of the code
-			switch (ev.type) {
-			case SDL_MOUSEMOTION:
-				ev.motion.xrel += m_mouse_compensate_warp.x;
-				ev.motion.yrel += m_mouse_compensate_warp.y;
-				m_mouse_compensate_warp = Point(0, 0);
-
-				if (m_mouse_locked) {
-					warp_mouse(m_mouse_position);
-
-					ev.motion.x = m_mouse_position.x;
-					ev.motion.y = m_mouse_position.y;
-				}
-
-				break;
-			case SDL_USEREVENT:
-				if (ev.user.code == CHANGE_MUSIC)
-					g_sound_handler.change_music();
-
-				break;
-			case SDL_VIDEOEXPOSE:
-				//log ("SDL Video Window expose event: %i\n", ev.expose.type);
-				g_gr->update_fullscreen();
-				break;
-			default:;
-			}
-		}
+bool WLApplication::poll_event(SDL_Event& ev) {
+	if (!SDL_PollEvent(&ev)) {
+		return false;
 	}
 
-	// log all events into the journal file
-	if (journal->is_recording()) {
-		if (haveevent)
-			journal->record_event(ev);
-		else if (throttle && journal->is_playingback()) {
-			// Implement the throttle to avoid very quick inner mainloops when
-			// recoding a session
-			static int32_t lastthrottle = 0;
-			int32_t const time = SDL_GetTicks();
+	// We edit mouse motion events in here, so that
+	// differences caused by GrabInput or mouse speed
+	// settings are invisible to the rest of the code
+	switch (ev.type) {
+	case SDL_MOUSEMOTION:
+		ev.motion.xrel += m_mouse_compensate_warp.x;
+		ev.motion.yrel += m_mouse_compensate_warp.y;
+		m_mouse_compensate_warp = Point(0, 0);
 
-			if (time - lastthrottle < 10)
-				goto restart;
+		if (m_mouse_locked) {
+			warp_mouse(m_mouse_position);
 
-			lastthrottle = time;
+			ev.motion.x = m_mouse_position.x;
+			ev.motion.y = m_mouse_position.y;
 		}
+		break;
 
-		journal->set_idle_mark();
-	} else if (haveevent) {
-		//  Eliminate any unhandled events to make sure that record and playback
-		//  are _really_ the same. Yes I know, it's overly paranoid but hey...
-		switch (ev.type) {
-		case SDL_KEYDOWN:
-		case SDL_KEYUP:
-		case SDL_MOUSEBUTTONDOWN:
-		case SDL_MOUSEBUTTONUP:
-		case SDL_MOUSEMOTION:
-		case SDL_QUIT:
-			break;
-		default:
-			goto restart;
-		}
+	case SDL_USEREVENT:
+		if (ev.user.code == CHANGE_MUSIC)
+			g_sound_handler.change_music();
+		break;
+
+	case SDL_VIDEOEXPOSE:
+		// log ("SDL Video Window expose event: %i\n", ev.expose.type);
+		g_gr->update_fullscreen();
+		break;
 	}
-
-	return haveevent;
+	return true;
 }
-
 
 /**
  * Pump the event queue, get packets from the network, etc...
  */
 void WLApplication::handle_input(InputCallback const * cb)
 {
-	bool gotevents = false;
-	SDL_Event ev; //  Valgrind says:
-	// Conditional jump or move depends on uninitialised value(s)
-	// at 0x407EEDA: (within /usr/lib/libSDL-1.2.so.0.11.0)
-	// by 0x407F78F: (within /usr/lib/libSDL-1.2.so.0.11.0)
-	// by 0x404FB12: SDL_PumpEvents (in /usr/lib/libSDL-1.2.so.0.11.0)
-	// by 0x404FFC3: SDL_PollEvent (in /usr/lib/libSDL-1.2.so.0.11.0)
-	// by 0x8252545: WLApplication::poll_event(SDL_Event*, bool)
-	//     (wlapplication.cc:309)
-	// by 0x8252EB6: WLApplication::handle_input(InputCallback const*)
-	// (wlapplication.cc:459) by 0x828B56E: UI::Panel::run() (ui_panel.cc:148)
-	// by 0x8252FAB: WLApplication::run() (wlapplication.cc:212)
-	// by 0x81427A6: main (main.cc:39)
-
-	// We need to empty the SDL message queue always, even in playback mode
-	// In playback mode, only F10 for premature exiting works
-	if (journal->is_playingback()) {
-		while (SDL_PollEvent(&ev)) {
-			switch (ev.type) {
-			case SDL_KEYDOWN:
-				// get out of here quickly, overriding playback;
-				// since this is the only key event that works, we don't guard
-				// it by requiring Ctrl to be pressed.
-				if (ev.key.keysym.sym == SDLK_F10)
-					m_should_die = true;
-				break;
-			case SDL_QUIT:
-				m_should_die = true;
-				break;
-			default:;
-			}
-		}
-	}
-
-	// Usual event queue
-	while (poll_event(ev, !gotevents)) {
-
-		gotevents = true;
-
-		// CAREFUL: Record files do not save the entire SDL_Event structure.
-		// Therefore, playbacks are incomplete. When you change the following
-		// code so that it uses previously unused fields in SDL_Event,
-		// please also take a look at Journal::read_event and
-		// Journal::record_event
-
+	SDL_Event ev;
+	while (poll_event(ev)) {
 		switch (ev.type) {
 		case SDL_KEYDOWN:
 		case SDL_KEYUP:
@@ -747,9 +640,6 @@ void WLApplication::_handle_mousebutton
 int32_t WLApplication::get_time() {
 	uint32_t time = SDL_GetTicks();
 
-	//  might change the time when playing back!
-	journal->timestamp_handler(time);
-
 	return time;
 }
 
@@ -758,20 +648,17 @@ int32_t WLApplication::get_time() {
 /// SDL_WarpMouse() *will* create a mousemotion event, which we do not want. As
 /// a workaround, we store the delta in m_mouse_compensate_warp and use that to
 /// eliminate the motion event in poll_event()
-/// \todo Should this method have to care about playback at all???
 ///
 /// \param position The new mouse position
 void WLApplication::warp_mouse(const Point position)
 {
 	m_mouse_position = position;
 
-	if (not journal->is_playingback()) { //  don't warp anything during playback
-		Point cur_position;
-		SDL_GetMouseState(&cur_position.x, &cur_position.y);
-		if (cur_position != position) {
-			m_mouse_compensate_warp += cur_position - position;
-			SDL_WarpMouse(position.x, position.y);
-		}
+	Point cur_position;
+	SDL_GetMouseState(&cur_position.x, &cur_position.y);
+	if (cur_position != position) {
+		m_mouse_compensate_warp += cur_position - position;
+		SDL_WarpMouse(position.x, position.y);
 	}
 }
 
@@ -786,9 +673,6 @@ void WLApplication::warp_mouse(const Point position)
  */
 void WLApplication::set_input_grab(bool grab)
 {
-	if (journal->is_playingback())
-		return; // ignore in playback mode
-
 	if (grab) {
 		SDL_WM_GrabInput(SDL_GRAB_ON);
 	} else {
@@ -841,10 +725,6 @@ void WLApplication::refresh_graphics()
  * parameters sensible default values
  */
 bool WLApplication::init_settings() {
-
-	//create a journal so that handle_commandline_parameters can open the
-	//journal files
-	journal = new Journal();
 
 	//read in the configuration file
 	g_options.read("config", "global");
@@ -927,10 +807,6 @@ void WLApplication::shutdown_settings()
 	} catch (...)                      {
 		log("WARNING: could not save configuration");
 	}
-
-	assert(journal);
-	delete journal;
-	journal = nullptr;
 }
 
 /**
@@ -1280,34 +1156,6 @@ void WLApplication::handle_commandline_parameters()
 		m_commandline.erase("script");
 	}
 
-	// TODO(sirver): this framework has not been useful in a long time. Kill it.
-	if (m_commandline.count("record")) {
-		if (m_commandline["record"].empty())
-			throw Parameter_error("ERROR: --record needs a filename!");
-
-		try {
-			journal->start_recording(m_commandline["record"]);
-		} catch (Journalfile_error & e) {
-			wout << "Journal file error: " << e.what() << endl;
-		}
-
-		m_commandline.erase("record");
-	}
-
-	if (m_commandline.count("playback")) {
-		if (m_commandline["playback"].empty())
-			throw Parameter_error("ERROR: --playback needs a filename!");
-
-		try {
-			journal->start_playback(m_commandline["playback"]);
-		}
-		catch (Journalfile_error & e) {
-			wout << "Journal file error: " << e.what() << endl;
-		}
-
-		m_commandline.erase("playback");
-	}
-
 	//If it hasn't been handled yet it's probably an attempt to
 	//override a conffile setting
 	//With typos, this will create invalid config settings. They
@@ -1341,83 +1189,85 @@ void WLApplication::show_usage()
 	wout << _("Usage: widelands <option0>=<value0> ... <optionN>=<valueN>") << "\n\n";
 	wout << _("Options:") << "\n\n";
 	wout
-		<<	_(" --<config-entry-name>=value overwrites any config file setting") << "\n\n"
-		<<	_(" --logfile=FILENAME   Log output to file FILENAME instead of \n"
+		<< _(" --<config-entry-name>=value overwrites any config file setting") << "\n\n"
+		<< _(" --logfile=FILENAME   Log output to file FILENAME instead of \n"
 			  "                      terminal output") << "\n"
-		<<	_(" --datadir=DIRNAME    Use specified directory for the widelands\n"
+		<< _(" --datadir=DIRNAME    Use specified directory for the widelands\n"
 			  "                      data files") << "\n"
-		<<	_(" --homedir=DIRNAME    Use specified directory for widelands config\n"
+		<< _(" --homedir=DIRNAME    Use specified directory for widelands config\n"
 			  "                      files, savegames and replays") << "\n"
 #ifdef __linux__
-		<<	_("                      Default is ~/.widelands") << "\n"
+		<< _("                      Default is ~/.widelands") << "\n"
 #endif
-		<<	_(" --record=FILENAME    Record all events to the given filename for\n"
-			  "                      later playback") << "\n"
-		<<	_(" --playback=FILENAME  Playback given filename (see --record)") << "\n\n"
-		<<	_(" --coredump=[yes|no]  Generates a core dump on segfaults instead\n"
+		<< "\n"
+		<< _(" --coredump=[yes|no]  Generates a core dump on segfaults instead\n"
 			  "                      of using the SDL") << "\n"
-		<<	_(" --language=[de_DE|sv_SE|...]\n"
+		<< _(" --language=[de_DE|sv_SE|...]\n"
 			  "                      The locale to use.") << "\n"
-		<<	_(" --localedir=DIRNAME  Use DIRNAME as location for the locale") << "\n"
-		<<	_(" --remove_syncstreams=[true|false]\n"
+		<< _(" --localedir=DIRNAME  Use DIRNAME as location for the locale") << "\n"
+		<< _(" --remove_syncstreams=[true|false]\n"
 			  "                      Remove syncstream files on startup") << "\n"
-		<<	_(" --remove_replays=[...]\n"
-			  "                      Remove replays after this number of days.\n"
-			  "                      If this is 0, replays are not deleted.") << "\n\n"
+		<< _(" --remove_replays=[...]\n"
+		     "                      Remove replays after this number of days.\n"
+		     "                      If this is 0, replays are not deleted.") << "\n\n"
 
-		<<	_("Sound options:") << "\n"
-		<<	_(" --nosound            Starts the game with sound disabled.") << "\n"
-		<<	_(" --disable_fx         Disable sound effects.") << "\n"
-		<<	_(" --disable_music      Disable music.") << "\n\n"
-		<<	_(" --nozip              Do not save files as binary zip archives.") << "\n\n"
-		<<	_(" --editor             Directly starts the Widelands editor.\n"
-			  "                      You can add a =FILENAME to directly load\n"
-			  "                      the map FILENAME in editor.") << "\n"
-		<<	_(" --scenario=FILENAME  Directly starts the map FILENAME as scenario\n"
+		<< _("Sound options:") << "\n"
+		<< _(" --nosound            Starts the game with sound disabled.") << "\n"
+		<< _(" --disable_fx         Disable sound effects.") << "\n"
+		<< _(" --disable_music      Disable music.") << "\n\n"
+		<< _(" --nozip              Do not save files as binary zip archives.") << "\n\n"
+		<< _(" --editor             Directly starts the Widelands editor.\n"
+		     "                      You can add a =FILENAME to directly load\n"
+		     "                      the map FILENAME in editor.") << "\n"
+		<< _(" --scenario=FILENAME  Directly starts the map FILENAME as scenario\n"
 			  "                      map.") << "\n"
-		<<	_(" --loadgame=FILENAME  Directly loads the savegame FILENAME.") << "\n"
-		<<	_(" --script=FILENAME    Run the given Lua script after initialization.\n"
-			  "                      Only valid with --scenario, --loadgame, or --editor.") << "\n"
-		<<	_(" --dedicated=FILENAME Starts a dedicated server with FILENAME as map") << "\n"
-		<<	_(" --auto_roadbuild_mode=[yes|no]\n"
-			  "                      Whether to enter roadbuilding mode\n"
-			  "                      automatically after placing a flag that is\n"
-			  "                      not connected to a road.") << "\n\n"
-		<<	_("Graphic options:") << "\n"
-		<<	_(" --fullscreen=[yes|no]\n"
-			  "                      Whether to use the whole display for the\n"
-			  "                      game screen.") << "\n"
-		<<	_(" --xres=[...]         Width of the window in pixel.") << "\n"
-		<<	_(" --yres=[...]         Height of the window in pixel.") << "\n"
-		<<	_(" --opengl=[0|1]       Enables OpenGL rendering") << "\n\n"
-		<<	_("Options for the internal window manager:") << "\n"
-		<<	_(" --border_snap_distance=[0 ...]\n"
-			  "                      Move a window to the edge of the screen\n"
-			  "                      when the edge of the window comes within\n"
-			  "                      this distance from the edge of the screen.") << "\n"
-		<<	_(" --dock_windows_to_edges=[yes|no]\n"
-			  "                      Eliminate a window's border towards the\n"
-			  "                      edge of the screen when the edge of the\n"
-			  "                      window is next to the edge of the screen.") << "\n"
-		<<	_(" --panel_snap_distance=[0 ...]\n"
-			  "                      Move a window to the edge of the panel when\n"
-			  "                      the edge of the window comes within this\n"
-			  "                      distance from the edge of the panel.") << "\n"
-		<<	_(" --snap_windows_only_when_overlapping=[yes|no]\n"
-			  "                      Only move a window to the edge of a panel\n"
-			  "                      if the window is overlapping with the\n"
-			  "                      panel.") << "\n\n";
+		<< _(" --loadgame=FILENAME  Directly loads the savegame FILENAME.") << "\n"
+		<< _(" --script=FILENAME    Run the given Lua script after initialization.\n"
+		     "                      Only valid with --scenario, --loadgame, or --editor.") << "\n"
+		<< _(" --dedicated=FILENAME Starts a dedicated server with FILENAME as map") << "\n"
+		<< _(" --auto_roadbuild_mode=[yes|no]\n"
+		     "                      Whether to enter roadbuilding mode\n"
+		     "                      automatically after placing a flag that is\n"
+		     "                      not connected to a road.") << "\n\n"
+		<< _("Graphic options:") << "\n"
+		<< _(" --fullscreen=[yes|no]\n"
+		     "                      Whether to use the whole display for the\n"
+		     "                      game screen.") << "\n"
+		<< _(" --xres=[...]         Width of the window in pixel.") << "\n"
+		<< _(" --yres=[...]         Height of the window in pixel.") << "\n"
+		<< _(" --opengl=[0|1]       Enables OpenGL rendering") << "\n\n"
+		<< _("Options for the internal window manager:") << "\n"
+		<< _(" --border_snap_distance=[0 ...]\n"
+		     "                      Move a window to the edge of the screen\n"
+		     "                      when the edge of the window comes within\n"
+		     "                      this distance from the edge of the screen.") << "\n"
+		<< _(" --dock_windows_to_edges=[yes|no]\n"
+		     "                      Eliminate a window's border towards the\n"
+		     "                      edge of the screen when the edge of the\n"
+		     "                      window is next to the edge of the screen.") << "\n"
+		<< _(" --panel_snap_distance=[0 ...]\n"
+		     "                      Move a window to the edge of the panel when\n"
+		     "                      the edge of the window comes within this\n"
+		     "                      distance from the edge of the panel.") << "\n"
+		<< _(" --snap_windows_only_when_overlapping=[yes|no]\n"
+		     "                      Only move a window to the edge of a panel\n"
+		     "                      if the window is overlapping with the\n"
+		     "                      panel.") << "\n\n";
 #ifndef NDEBUG
 #ifndef _WIN32
-	wout	<<	_(" --double             Start the game twice (for localhost network\n"
-			  "                      testing)") << "\n\n";
+	wout
+		<< _(" --double             Start the game twice (for localhost network\n"
+		     "                      testing)") << "\n\n";
 #endif
 #endif
-	wout	<<	_(" --verbose            Enable verbose debug messages") << "\n" << endl;
-	wout	<<	_(" --help               Show this help") << "\n" << endl;
-	wout	<<	_("Bug reports? Suggestions? Check out the project website:\n"
-			 "        https://launchpad.net/widelands\n\n"
-			 "Hope you enjoy this game!") << "\n\n";
+	wout
+		<< _(" --verbose            Enable verbose debug messages") << "\n" << endl;
+	wout
+		<< _(" --help               Show this help") << "\n" << endl;
+	wout
+		<< _("Bug reports? Suggestions? Check out the project website:\n"
+		    "        https://launchpad.net/widelands\n\n"
+		    "Hope you enjoy this game!") << "\n\n";
 }
 
 #ifndef NDEBUG
@@ -1878,9 +1728,9 @@ struct SinglePlayerGameSettingsProvider : public GameSettingsProvider {
 		s.players[number].state = PlayerSettings::stateComputer;
 	}
 
-	virtual void setPlayerTribe(uint8_t number,
-	                            const std::string& tribe,
-	                            bool random_tribe) override {
+	virtual void setPlayerTribe
+		(uint8_t const number, const std::string & tribe, bool const random_tribe) override
+	{
 		if (number >= s.players.size())
 			return;
 
@@ -1959,9 +1809,10 @@ struct SinglePlayerGameSettingsProvider : public GameSettingsProvider {
 
 	virtual std::string getWinCondition() override {return s.win_condition;}
 	virtual void setWinCondition(std::string wc) override {s.win_condition = wc;}
-	virtual void nextWinCondition() override {
+	virtual void nextWinCondition() override // not implemented - feel free to do so, if you need it
+	{
 		assert(false);
-	}  // not implemented - feel free to do so, if you need it.
+	}
 
 private:
 	GameSettings s;

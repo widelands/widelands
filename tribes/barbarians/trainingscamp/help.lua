@@ -13,7 +13,7 @@ return {
 		rt("text-align=right",p("font-size=10 font-style=italic", _[[Chief Chat’Karuth in a speech to his army.]])) ..
 	--General Section
 		rt(h2(_"General")) ..
-		text_line(_"Purpose:", _"Trains soldiers in Attack up to level 4, and in Health up to level 2.<br>Equips the soldiers with all necessary weapons and armor parts.") ..
+		text_line(_"Purpose:", _"Trains soldiers in Attack up to level 5, and in Health up to level 3.<br>Equips the soldiers with all necessary weapons and armor parts.") ..
 		rt("<p font-weight=bold font-decoration=underline font-size=12>" .. _"Note:" .. "</p><p font-size=12>" ..
 		   _"Barbarian soldiers cannot be trained in ‘Defense’ and will remain at their initial level."
 		   .. "<br><br></p>") ..
@@ -60,5 +60,5 @@ return {
 		text_line(_"Experience levels:", "n/a") ..
 	--Production Section
 		rt(h2(_"Production")) ..
-		text_line(_"Performance:", _"If all needed wares are delivered in time, a %1$s can train one new soldier in %2$s and %3$s to the final level in %4$s on average.":bformat(_"Training Camp",_"Attack",_"Health",_"%1$im%2$is":bformat(4,40)))
+		text_line(_"Performance:", _"If all needed wares are delivered in time, a Training Camp can train one new soldier in %1$s and %2$s to the final level in %3$s on average.":bformat(_"Attack",_"Health",_"%1$im%2$is":bformat(4,40)))
 }

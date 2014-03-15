@@ -135,10 +135,11 @@ Game_Main_Menu_Save_Game::Game_Main_Menu_Save_Game
 		uint32_t gametime = parent.game().get_gametime();
 		m_gametime.set_text(gametimestring(gametime));
 
-		char buf[200];
-		uint8_t player_nr = parent.game().player_manager()->get_number_of_players();
-		sprintf(buf, "%i %s", player_nr, ngettext(_("player"), _("players"),  player_nr));
-		m_players_label.set_text(buf);
+		int player_nr = parent.game().player_manager()->get_number_of_players();
+		// TODO: This should be ngettext(" %i player" etc. with boost::format, but it refuses to work
+		/** TRANSLATORS: This is preceded by a number */
+		m_players_label.set_text(
+		   (boost::format(ngettext("%i player", "%i players", player_nr)) % player_nr).str());
 		m_win_condition.set_text(parent.game().get_win_condition_displayname());
 	}
 
@@ -175,7 +176,9 @@ void Game_Main_Menu_Save_Game::selected(uint32_t) {
 		char buf[200];
 		sprintf
 			(buf, "%i %s", gpdp.get_number_of_players(),
-			ngettext(_("player"), _("players"), gpdp.get_number_of_players()));
+			// TODO: This should be ngettext(" %i player" etc. with boost::format, but it refuses to work
+			/** TRANSLATORS: This is preceded by a number */
+			ngettext("player", "players", gpdp.get_number_of_players()));
 			m_players_label.set_text(buf);
 	} else {
 		// Keep label empty
@@ -249,7 +252,7 @@ static void dosave
 			 "Reason given:\n");
 		s += error;
 		UI::WLMessageBox mbox
-			(&igbase, _("Save Game Error!!"), s, UI::WLMessageBox::OK);
+			(&igbase, _("Save Game Error!"), s, UI::WLMessageBox::OK);
 		mbox.run();
 	}
 	game.save_handler().set_current_filename(complete_filename);
@@ -261,9 +264,9 @@ struct SaveWarnMessageBox : public UI::WLMessageBox {
 		:
 		UI::WLMessageBox
 			(&parent,
-			 _("Save Game Error!!"),
-			(boost::format(_("A File with the name ‘%s’ already exists. Overwrite?")) % 
-				FileSystem::FS_Filename(filename.c_str())).str(),
+			 _("Save Game Error!"),
+			(boost::format(_("A file with the name ‘%s’ already exists. Overwrite?"))
+				% FileSystem::FS_Filename(filename.c_str())).str(),
 			 YESNO),
 		m_filename(filename)
 	{}
@@ -370,4 +373,3 @@ void Game_Main_Menu_Save_Game::pause_game(bool paused)
 	}
 	igbase().game().gameController()->setPaused(paused);
 }
-

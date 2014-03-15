@@ -9,8 +9,9 @@ return {
 	--Lore Section
 		rt(h2(_"Lore")) ..
 		rt("image=tribes/barbarians/deeper_coalmine/deeper_coalmine_i_00.png", p(--text identical to coalmine
-			_[[Ages ago, the Barbarians learned to delve into mountainsides for that black material that feeds their furnaces. <br>
-			Wood may serve for a household fire and to keep you warm, but when it comes to working with iron or gold, there is no way around coal.]]
+			_([[Ages ago, the Barbarians learned to delve into mountainsides for that black material that feeds their furnaces.<br>
+]] ..
+			[[Wood may serve for a household fire and to keep you warm, but when it comes to working with iron or gold, there is no way around coal.]])
 		)) ..
 	--General Section
 		rt(h2(_"General")) ..

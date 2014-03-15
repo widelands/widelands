@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Widelands svnVERSION\n"
 "Report-Msgid-Bugs-To: widelands-public@lists.sourceforge.net\n"
-"POT-Creation-Date: 2014-03-06 21:20+0000\n"
+"POT-Creation-Date: 2014-03-12 21:37+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <widelands-public@lists.sourceforge.net>\n"
@@ -98,7 +98,8 @@ msgid_plural ""
 msgstr[0] ""
 msgstr[1] ""
 
-#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/multiplayer_init.lua:132
+#: TRANSLATORS: number + resource name, e.g. '1 stone'
+#: ../../maps/MP Scenarios/Island Hopping.wmf/scripting/multiplayer_init.lua:133
 msgid ""
 "%1$i %2$s"
 msgstr ""

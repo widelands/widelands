@@ -152,7 +152,7 @@ bool ProductionProgram::ActReturn::Negation::evaluate
 std::string ProductionProgram::ActReturn::Negation::description
 	(const Tribe_Descr & tribe) const
 {
-	/** TRANSLATORS: %s = e.g. "economy needs ..." Context: "and/or not %s" */
+	/** TRANSLATORS: %s = e.g. 'economy needs ...' Context: 'and/or not %s' */
 	return (boost::format(_("not %s")) % operand->description(tribe)).str();
 }
 
@@ -175,7 +175,7 @@ bool ProductionProgram::ActReturn::Economy_Needs_Ware::evaluate
 std::string ProductionProgram::ActReturn::Economy_Needs_Ware::description
 	(const Tribe_Descr & tribe) const
 {
-	/** TRANSLATORS: e.g. "economy needs water" Context: "and/or (not) economy needs %s" */
+	/** TRANSLATORS: e.g. 'economy needs water' Context: 'and/or (not) economy needs %s' */
 	return (boost::format(_("economy needs %s")) % tribe.get_ware_descr(ware_type)->descname()).str();
 }
 
@@ -197,7 +197,7 @@ bool ProductionProgram::ActReturn::Economy_Needs_Worker::evaluate
 std::string ProductionProgram::ActReturn::Economy_Needs_Worker::description
 	(const Tribe_Descr & tribe) const
 {
-	/** TRANSLATORS: e.g. "economy needs worker" Context: "and/or (not) economy needs %s" */
+	/** TRANSLATORS: e.g. 'economy needs worker' Context: 'and/or (not) economy needs %s' */
 	return (boost::format(_("economy needs %s")) % tribe.get_ware_descr(worker_type)->descname()).str();
 }
 
@@ -230,10 +230,10 @@ std::string ProductionProgram::ActReturn::Site_Has::description
 	std::string condition = "";
 	container_iterate_const(std::set<Ware_Index>, group.first, i) {
 		condition =
-		/** TRANSLATORS: Adds a ware to list of wares in "Failed/Skipped ..." messages. */
+		/** TRANSLATORS: Adds a ware to list of wares in 'Failed/Skipped ...' messages. */
 			(boost::format(_("%1$s %2$s")) % condition % tribe.get_ware_descr(*i.current)->descname())
 			 .str();
-		/** TRANSLATORS: Separator for list of wares in "Failed/Skipped ..." messages. */
+		/** TRANSLATORS: Separator for list of wares in 'Failed/Skipped ...' messages. */
 		condition = (boost::format(_("%s,")) % condition).str();
 	}
 	if (1 < group.second) {
@@ -258,6 +258,7 @@ bool ProductionProgram::ActReturn::Workers_Need_Experience::evaluate
 std::string ProductionProgram::ActReturn::Workers_Need_Experience::description
 	(const Tribe_Descr &) const
 {
+	/** TRANSLATORS: 'Failed/Skipped ... because: workers need experience'. */
 	return _("workers need experience");
 }
 
@@ -424,16 +425,16 @@ void ProductionProgram::ActReturn::execute
 	(Game & game, ProductionSite & ps) const
 {
 	std::string statistics_string =
-		/** TRANSLATORS: "Failed %s because (not): %s {and/or %s}" */
+		/** TRANSLATORS: 'Failed %s because (not): %s {and/or %s}' */
 		m_result == Failed    ? (boost::format(_("Failed %s")) % ps.top_state().program->descname()).str() :
-		/** TRANSLATORS: "Completed %s because (not): %s {and/or %s}" */
+		/** TRANSLATORS: 'Completed %s because (not): %s {and/or %s}' */
 		m_result == Completed ? (boost::format(_("Completed %s")) % ps.top_state().program->descname()).str() :
-		/** TRANSLATORS: "Skipped %s because (not): %s {and/or %s}" */
+		/** TRANSLATORS: 'Skipped %s because (not): %s {and/or %s}' */
 					(boost::format(_("Skipped %s")) % ps.top_state().program->descname()).str();
 
 	if (!m_conditions.empty()) {
 		std::string result_string = statistics_string;
-		if (m_is_when) { //  "when a and b and ..." (all conditions must be true)
+		if (m_is_when) { //  'when a and b and ...' (all conditions must be true)
 			std::string condition_string = "";
 			for (wl_const_range<Conditions> i(m_conditions); i;)
 			{
@@ -444,11 +445,11 @@ void ProductionProgram::ActReturn::execute
 				if (i.advance().empty())
 					break;
 				// TODO  Would prefer "%1$s and %2$s" but getting segfaults, so leaving this for now
-				/** TRANSLATORS: "Failed/Completed/Skipped %s because: %s {and %s}" */
+				/** TRANSLATORS: 'Failed/Completed/Skipped %s because: %s {and %s}' */
 				condition_string = (boost::format(_("%s and ")) % condition_string).str();
 			}
 			result_string =
-				/** TRANSLATORS: "Failed/Completed/Skipped %s because: %s {and %s}" */
+				/** TRANSLATORS: 'Failed/Completed/Skipped %s because: %s {and %s}' */
 				(boost::format(_("%1$s because: %2$s")) % statistics_string % condition_string).str();
 		} else { //  "unless a or b or ..." (all conditions must be false)
 			std::string condition_string = "";
@@ -460,12 +461,12 @@ void ProductionProgram::ActReturn::execute
 				condition_string += i.front()->description(ps.owner().tribe());
 				if (i.advance().empty())
 					break;
-				// TODO  Would prefer "%1$s or %2$s" but getting segfaults, so leaving this for now
-				/** TRANSLATORS: "Failed/Completed/Skipped %s because not: %s {or %s}" */
+				// TODO  Would prefer '%1$s or %2$s' but getting segfaults, so leaving this for now
+				/** TRANSLATORS: 'Failed/Completed/Skipped %s because not: %s {or %s}' */
 				condition_string = (boost::format(_("%s or ")) % condition_string).str();
 			}
 			result_string =
-				/** TRANSLATORS: "Failed/Completed/Skipped %s because not: %s {or %s}" */
+				/** TRANSLATORS: 'Failed/Completed/Skipped %s because not: %s {or %s}' */
 				(boost::format(_("%1$s because not: %2$s")) % statistics_string % condition_string).str();
 		}
 		snprintf
@@ -829,7 +830,7 @@ void ProductionProgram::ActConsume::execute
 	if (uint8_t const nr_missing_groups = l_groups.size()) {
 		const Tribe_Descr & tribe = ps.owner().tribe();
 		std::string result_string =
-			/** TRANSLATORS: e.g. "Failed work because: water, wheat (2) are missing" */
+			/** TRANSLATORS: e.g. 'Failed work because: water, wheat (2) are missing' */
 			(boost::format(_("Failed %s because:")) % ps.top_state().program->descname()).str();
 
 		for (wl_const_range<Groups> i(l_groups); i;)
@@ -838,13 +839,13 @@ void ProductionProgram::ActConsume::execute
 			for (wl_const_range<std::set<Ware_Index> > j(i.current->first); j;)
 			{
 				result_string =
-					/** TRANSLATORS: Adds a ware to list of wares in "Failed/Skipped ..." messages. */
+					/** TRANSLATORS: Adds a ware to list of wares in 'Failed/Skipped ...' messages. */
 					(boost::format(_("%1$s %2$s")) % result_string
 					 % tribe.get_ware_descr(j.front())->descname())
 					 .str();
 				if (j.advance().empty())
 					break;
-				/** TRANSLATORS: Separator for list of wares in "Failed/Skipped ..." messages. */
+				/** TRANSLATORS: Separator for list of wares in 'Failed/Skipped ...' messages. */
 				result_string = (boost::format(_("%s,")) % result_string).str();
 			}
 			{
@@ -852,7 +853,7 @@ void ProductionProgram::ActConsume::execute
 				if (1 < count) {
 					// TODO this should be done with ngettext
 					result_string =
-						/** TRANSLATORS: e.g. "Failed work because: water, wheat (2) are missing" */
+						/** TRANSLATORS: e.g. 'Failed work because: water, wheat (2) are missing' */
 						(boost::format(_("%1$s (%2$i)")) % result_string
 						 % static_cast<unsigned int>(count))
 						 .str();
@@ -863,8 +864,9 @@ void ProductionProgram::ActConsume::execute
 			result_string = (boost::format(_("%s and")) % result_string).str();
 		}
 		result_string =
-			/** TRANSLATORS: e.g. "Failed work because: water, wheat (2) are missing" */
+			/** TRANSLATORS: e.g. %1$s = 'Failed work because: water, wheat (2)' %2$s = 'are missing' */
 			(boost::format(_("%1$s %2$s")) % result_string
+			/** TRANSLATORS: e.g. 'Failed work because: water, wheat (2) are missing' */
 			 % ngettext(" is missing", " are missing", nr_missing_groups))
 			 .str();
 
@@ -959,6 +961,7 @@ void ProductionProgram::ActProduce::execute
 			uint8_t const count = i.current->second;
 			if (1 < count) {
 				char buffer[5];
+				/** TRANSLATORS: Number used in list of wares */
 				sprintf(buffer, _("%u "), count);
 				result_string += buffer;
 			}
@@ -966,9 +969,11 @@ void ProductionProgram::ActProduce::execute
 		result_string += tribe.get_ware_descr(i.current->first)->descname();
 		if (i.advance().empty())
 			break;
+		/** TRANSLATORS: Separator for list of wares */
 		result_string += _(", ");
 	}
 	// Keep translateability in mind!
+	/** TRANSLATORS: %s is a list of wares */
 	result_string = str(format(_("Produced %s")) % result_string);
 	snprintf
 		(ps.m_result_buffer, sizeof(ps.m_result_buffer),
@@ -1055,6 +1060,7 @@ void ProductionProgram::ActRecruit::execute
 			uint8_t const count = i.current->second;
 			if (1 < count) {
 				char buffer[5];
+				/** TRANSLATORS: Number used in list of workers */
 				sprintf(buffer, _("%u "), count);
 				unit_string += buffer;
 			}
@@ -1062,9 +1068,11 @@ void ProductionProgram::ActRecruit::execute
 		unit_string += tribe.get_worker_descr(i.current->first)->descname();
 		if (i.advance().empty())
 			break;
+		/** TRANSLATORS: Separator for list of workers */
 		unit_string += _(", ");
 	}
-	std::string result_string = (boost::format(_("Recruited %s?")) % unit_string).str();
+	/** TRANSLATORS: %s is a lost of workers */
+	std::string result_string = (boost::format(_("Recruited %s")) % unit_string).str();
 	snprintf
 		(ps.m_result_buffer, sizeof(ps.m_result_buffer),
 		 "%s", result_string.c_str());
@@ -1120,7 +1128,7 @@ ProductionProgram::ActMine::ActMine
 					 "percentage", parameters);
 		}
 		std::string description =
-			/** TRANSLATORS: %1$s = name, %2$s = production program, %3$s = resource*/
+			/** TRANSLATORS: %1$s = production site name, %2$s = production program name, %3$s = resource */
 			(boost::format(_("%1$s %2$s mine %3$s")) % descr.descname() % production_program_name
 				% world.get_resource(m_resource)->descname())
 				.str();

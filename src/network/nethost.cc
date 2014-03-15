@@ -444,8 +444,8 @@ struct HostChatProvider : public ChatProvider {
 						c.msg = (format(_("The client %s could not be found.")) % arg1).str();
 					else {
 						kickClient = num;
-						c.msg  = (format(_("Are you sure you want to kick %s?<br>")) % arg1).str();
-						c.msg += (format(_("The stated reason was: %s<br>")) % kickReason).str();
+						c.msg  = (format(_("Are you sure you want to kick %s?")) % arg1).str() + "<br>";
+						c.msg += (format(_("The stated reason was: %s")) % kickReason).str() + "<br>";
 						c.msg += (format(_("If yes, type: /ack_kick %s")) % arg1).str();
 					}
 				}
