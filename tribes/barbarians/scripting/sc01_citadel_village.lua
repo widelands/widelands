@@ -24,12 +24,12 @@ return {
    if not pcall(function()
        place_building_in_region(plr, "warehouse", sf:region(7), {
          wares = {
-            axe = 5,
+            ax = 5,
             bread_paddle = 2,
             blackwood = 32,
             cloth = 5,
             coal = 1,
-            felling_axe = 4,
+            felling_ax = 4,
             fire_tongs = 2,
             fishing_rod = 2,
             grout = 12,
@@ -81,7 +81,7 @@ return {
       place_building_in_region(plr, "metalworks", sf:region(12), {
          wares = { iron = 8 },
       })
-      place_building_in_region(plr, "axefactory", sf:region(12), {
+      place_building_in_region(plr, "axfactory", sf:region(12), {
          wares = { coal = 8 },
       })
       place_building_in_region(plr, "hardener", sf:region(12), {

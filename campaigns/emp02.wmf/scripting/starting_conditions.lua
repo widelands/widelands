@@ -13,7 +13,7 @@ prefilled_buildings(p1,
       wares = {
          helm = 4,
          wood_lance = 5,
-         axe = 6,
+         ax = 6,
          bread_paddle = 2,
          basket = 1,
          bread = 8,
@@ -91,7 +91,7 @@ p2:allow_buildings{
 prefilled_buildings(p2,
    {"headquarters", 60, 65, 
    wares = {
-      axe = 6,
+      ax = 6,
       bread_paddle = 2,
       blackwood = 32,
       cloth = 5,

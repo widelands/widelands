@@ -1,5 +1,5 @@
 size=medium
-output=axe
+output=ax
 output=bread_paddle
 output=fire_tongs
 output=fishing_rod
@@ -45,7 +45,7 @@ produce_shovel=_Produce shovel
 produce_hunting_spear=_Produce hunting spear
 produce_basket=_Produce basket
 produce_saw=_Produce saw
-produce_axe=_Produce ax
+produce_ax=_Produce ax
 work=_Work
 
 [produce_bread_paddle]
@@ -136,13 +136,13 @@ playFX=../../../sound/smiths/toolsmith 192
 animate=working 35000
 produce=saw
 
-[produce_axe]
-return=skipped unless economy needs axe
+[produce_ax]
+return=skipped unless economy needs ax
 consume=iron log
 sleep=32000
 playFX=../../../sound/smiths/toolsmith 192
 animate=working 35000
-produce=axe
+produce=ax
 
 [work]
 call=produce_bread_paddle
@@ -156,7 +156,7 @@ call=produce_shovel
 call=produce_hunting_spear
 call=produce_basket
 call=produce_saw
-call=produce_axe
+call=produce_ax
 return=skipped
 
 [idle]

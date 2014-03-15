@@ -22,7 +22,7 @@ return {
 		rt(h3(_"Incoming:")) ..
 		dependencies({"tribes/barbarians/granitemine/menu.png;tribes/barbarians/quarry/menu.png","tribes/barbarians/raw_stone/menu.png","tribes/barbarians/lime_kiln/menu.png"}) ..
 		rt(p(_"Raw Stone from the Granite Mine or Quarry")) ..
-		dependencies({"tribes/barbarians/coalmine/menu.png;tribes/barbarians/burners_house/menu.png","tribes/barbarians/coal/menu.png","tribes/barbarians/axefactory/menu.png"}) ..
+		dependencies({"tribes/barbarians/coalmine/menu.png;tribes/barbarians/burners_house/menu.png","tribes/barbarians/coal/menu.png","tribes/barbarians/axfactory/menu.png"}) ..
 		rt(p(_"%s from the Coal mine or the Charcoal Burner’s House":format(_"Coal"))) ..
 		dependencies({"tribes/barbarians/well/menu.png","tribes/barbarians/water/menu.png","tribes/barbarians/lime_kiln/menu.png"},p(_"Water from the Well")) ..
 		--rt() ..

@@ -1,5 +1,5 @@
 size=medium
-output=felling_axe
+output=felling_ax
 output=bread_paddle
 output=fire_tongs
 output=fishing_rod
@@ -9,7 +9,7 @@ output=pick
 output=scythe
 output=shovel
 output=hunting_spear
-enhancement=axefactory
+enhancement=axfactory
 
 [buildcost]
 log=1
@@ -35,7 +35,7 @@ build_material=false
 is_basic=true
 
 [programs]
-produce_felling_axe=_Produce felling ax
+produce_felling_ax=_Produce felling ax
 produce_bread_paddle=_Produce bread paddle
 produce_fire_tongs=_Produce fire tongs
 produce_fishing_rod=_Produce fishing rod
@@ -47,13 +47,13 @@ produce_shovel=_Produce shovel
 produce_hunting_spear=_Produce hunting spear
 work=_Work
 
-[produce_felling_axe]
-return=skipped unless economy needs felling_axe
+[produce_felling_ax]
+return=skipped unless economy needs felling_ax
 consume=iron log
 sleep=32000
 playFX=../../../sound/smiths/toolsmith 192
 animate=working 35000
-produce=felling_axe
+produce=felling_ax
 
 [produce_bread_paddle]
 return=skipped unless economy needs bread_paddle
@@ -137,7 +137,7 @@ call=produce_pick
 call=produce_scythe
 call=produce_shovel
 call=produce_hunting_spear
-call=produce_felling_axe
+call=produce_felling_ax
 return=skipped
 
 [build]

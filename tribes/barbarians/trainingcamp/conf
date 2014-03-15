@@ -22,11 +22,11 @@ trainer=1
 pittabread=10
 fish=6
 meat=6
-sharpaxe=2
-broadaxe=2
-bronzeaxe=2
-battleaxe=2
-warriorsaxe=2
+sharpax=2
+broadax=2
+bronzeax=2
+battleax=2
+warriorsax=2
 helm=2
 mask=2
 warhelm=2
@@ -58,35 +58,35 @@ check_soldier=soldier attack 9    # dummy check to get sleep rated as skipped - 
 check_soldier=soldier attack 0 # Fails when aren't any soldier of level 0 attack
 sleep=30000
 check_soldier=soldier attack 0 # Because the soldier can be expulsed by the player
-consume=sharpaxe fish,meat pittabread
+consume=sharpax fish,meat pittabread
 train=soldier attack 0 1
 
 [upgrade_soldier_attack_1]
 check_soldier=soldier attack 1
 sleep=30000
 check_soldier=soldier attack 1
-consume=broadaxe fish,meat pittabread
+consume=broadax fish,meat pittabread
 train=soldier attack 1 2
 
 [upgrade_soldier_attack_2]
 check_soldier=soldier attack 2
 sleep=30000
 check_soldier=soldier attack 2
-consume=bronzeaxe fish,meat pittabread
+consume=bronzeax fish,meat pittabread
 train=soldier attack 2 3
 
 [upgrade_soldier_attack_3]
 check_soldier=soldier attack 3
 sleep=30000
 check_soldier=soldier attack 3
-consume=battleaxe fish,meat:2 pittabread
+consume=battleax fish,meat:2 pittabread
 train=soldier attack 3 4
 
 [upgrade_soldier_attack_4]
 check_soldier=soldier attack 4
 sleep=30000
 check_soldier=soldier attack 4
-consume=warriorsaxe fish,meat pittabread:2
+consume=warriorsax fish,meat pittabread:2
 train=soldier attack 4 5
 
 [upgrade_soldier_hp_0]

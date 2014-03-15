@@ -110,7 +110,7 @@ function init_AI_player(player, f_hq, f_port, f_vineyard, f_shipyard, tribename)
 		prefilled_buildings(player, 
 			{ "port", f_hq.x, f_hq.y, 
 			   wares = {
-				  axe = 6,
+				  ax = 6,
 				  bread_paddle = 2,
 				  coal = 12,
 				  fire_tongs = 2,
@@ -168,7 +168,7 @@ function init_AI_player(player, f_hq, f_port, f_vineyard, f_shipyard, tribename)
 			   wares = {
 				 helm = 4,
 				 wood_lance = 5,
-				 axe = 6,
+				 ax = 6,
 				 bread_paddle = 2,
 				 basket = 2,
 				 bread = 8,

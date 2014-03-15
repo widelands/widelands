@@ -25,9 +25,9 @@ return {
 		dependencies({"tribes/barbarians/soldier/untrained.png","tribes/barbarians/trainingcamp/menu.png","tribes/barbarians/soldier/fulltrained-evade.png"}) ..
 		dependencies({"tribes/barbarians/soldier/untrained+evade.png","tribes/barbarians/trainingcamp/menu.png","tribes/barbarians/soldier/fulltrained.png"}) ..
 		rt(h3(_"Training Attack:")) ..
-		dependencies({"tribes/barbarians/axefactory/menu.png","tribes/barbarians/sharpaxe/menu.png;tribes/barbarians/broadaxe/menu.png","tribes/barbarians/trainingcamp/menu.png"}) ..
+		dependencies({"tribes/barbarians/axfactory/menu.png","tribes/barbarians/sharpax/menu.png;tribes/barbarians/broadax/menu.png","tribes/barbarians/trainingcamp/menu.png"}) ..
 		rt(p(_"Provided by the Axfactory")) ..
-		dependencies({"tribes/barbarians/warmill/menu.png","tribes/barbarians/sharpaxe/menu.png;tribes/barbarians/broadaxe/menu.png;tribes/barbarians/bronzeaxe/menu.png;tribes/barbarians/battleaxe/menu.png;tribes/barbarians/warriorsaxe/menu.png","tribes/barbarians/trainingcamp/menu.png"}) ..
+		dependencies({"tribes/barbarians/warmill/menu.png","tribes/barbarians/sharpax/menu.png;tribes/barbarians/broadax/menu.png;tribes/barbarians/bronzeax/menu.png;tribes/barbarians/battleax/menu.png;tribes/barbarians/warriorsax/menu.png","tribes/barbarians/trainingcamp/menu.png"}) ..
 		rt(p(_"Provided by the War Mill")) ..
 		rt(h3(_"Training Health:")) ..
 		dependencies({"tribes/barbarians/helmsmithy/menu.png","tribes/barbarians/helm/menu.png;tribes/barbarians/mask/menu.png;tribes/barbarians/warhelm/menu.png","tribes/barbarians/trainingcamp/menu.png"}) ..

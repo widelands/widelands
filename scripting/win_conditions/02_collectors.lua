@@ -34,19 +34,19 @@ end
 local point_table = {
 	barbarians = {
 		gold = 3,
-		axe = 2,
-		sharpaxe = 3,
-		broadaxe = 4,
-		bronzeaxe = 4,
-		battleaxe = 6,
-		warriorsaxe = 10,
+		ax = 2,
+		sharpax = 3,
+		broadax = 4,
+		bronzeax = 4,
+		battleax = 6,
+		warriorsax = 10,
 		helm = 2,
 		mask = 3,
 		warhelm = 6,
 	},
 	barbarians_order = {
-		"gold", "axe", "sharpaxe", "broadaxe", "bronzeaxe", "battleaxe",
-		"warriorsaxe", "helm", "mask", "warhelm",
+		"gold", "ax", "sharpax", "broadax", "bronzeax", "battleax",
+		"warriorsax", "helm", "mask", "warhelm",
 	},
 
 	empire = {

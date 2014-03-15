@@ -16,7 +16,7 @@ plr:allow_buildings{
 hq_pos = wl.Game().map:get_field(12,10)
 hq = plr:place_building("headquarters_interim", hq_pos, false, true)
 hq:set_wares{
-   axe=6,
+   ax=6,
    bread_paddle=2,
    blackwood=32,
    coal=12,

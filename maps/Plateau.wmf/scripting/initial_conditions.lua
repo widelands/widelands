@@ -5,7 +5,7 @@ p1:allow_buildings("all")
 
 prefilled_buildings(p1, { "headquarters_interim", 65, 6, 
    wares = {
-      axe = 6,
+      ax = 6,
       bread_paddle = 2,
       blackwood = 32,
       coal = 12,

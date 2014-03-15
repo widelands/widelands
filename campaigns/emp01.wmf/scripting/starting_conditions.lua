@@ -8,7 +8,7 @@ hq = p1:place_building("headquarters_shipwreck",
 hq:set_wares{
    helm = 4,
    wood_lance = 5,
-   axe = 6,
+   ax = 6,
    bread_paddle = 2,
    basket = 1,
    bread = 8,

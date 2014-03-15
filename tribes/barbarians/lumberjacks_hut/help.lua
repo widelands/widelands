@@ -41,7 +41,7 @@ return {
 		rt(h2(_"Workers")) ..
 		rt(h3(_"Crew required:")) ..
 		image_line("tribes/barbarians/lumberjack/menu.png", 1, p(_"Lumberjack")) ..
-		text_line(_"Worker uses:",_"Felling Ax","tribes/barbarians/felling_axe/menu.png") ..
+		text_line(_"Worker uses:",_"Felling Ax","tribes/barbarians/felling_ax/menu.png") ..
 		text_line(_"Experience levels:","n/a") ..
 	--Production Section
 		rt(h2(_"Production")) ..

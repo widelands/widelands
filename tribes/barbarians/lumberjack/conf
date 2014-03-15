@@ -3,7 +3,7 @@ program=chop
 
 [buildcost]
 carrier=1
-felling_axe=1
+felling_ax=1
 
 [chop]
 0=findobject attrib:tree radius:10

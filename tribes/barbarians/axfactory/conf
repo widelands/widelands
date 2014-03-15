@@ -1,8 +1,8 @@
 size=medium
 buildable=no
-output=axe
-output=sharpaxe
-output=broadaxe
+output=ax
+output=sharpax
+output=broadax
 enhanced_building=yes
 enhancement=warmill
 
@@ -29,61 +29,61 @@ iron=8
 coal=8
 
 [programs]
-produce_axe=_Produce ax
-produce_sharpaxe=_Produce sharp ax
-produce_broadaxe=_Produce broad ax
+produce_ax=_Produce ax
+produce_sharpax=_Produce sharp ax
+produce_broadax=_Produce broad ax
 work=_Work
 
-[produce_axe]
-return=skipped unless economy needs axe
+[produce_ax]
+return=skipped unless economy needs ax
 consume=coal iron
 sleep=32000
 playFX=../../../sound/smiths/smith 192
 animate=working 25000
 playFX=../../../sound/smiths/sharpening 192
-produce=axe
+produce=ax
 
-[produce_sharpaxe]
-return=skipped unless economy needs sharpaxe
+[produce_sharpax]
+return=skipped unless economy needs sharpax
 consume=coal iron:2
 sleep=32000
 playFX=../../../sound/smiths/smith 192
 animate=working 25000
 playFX=../../../sound/smiths/sharpening 192
-produce=sharpaxe
+produce=sharpax
 
-[produce_broadaxe]
-return=skipped unless economy needs broadaxe
+[produce_broadax]
+return=skipped unless economy needs broadax
 consume=coal:2 iron:2
 sleep=32000
 playFX=../../../sound/smiths/smith 192
 animate=working 25000
 playFX=../../../sound/smiths/sharpening 192
-produce=broadaxe
+produce=broadax
 
 [work]
-call=produce_axe
-call=produce_sharpaxe
-call=produce_broadaxe
+call=produce_ax
+call=produce_sharpax
+call=produce_broadax
 return=skipped
 
 [build]
-pics=axefactory_b_??.png  # ???
+pics=axfactory_b_??.png  # ???
 hotspot=57 76
 playercolor=true
 
 [unoccupied]
-pics=axefactory_u_??.png  # ???
+pics=axfactory_u_??.png  # ???
 hotspot=57 76
 playercolor=true
 
 [idle]
-pics=axefactory_i_??.png  # ???
+pics=axfactory_i_??.png  # ???
 hotspot=57 76
 playercolor=true
 
 [working]
-pics=axefactory_w_??.png  # ???
+pics=axfactory_w_??.png  # ???
 hotspot=57 76
 playercolor=true
 fps=10

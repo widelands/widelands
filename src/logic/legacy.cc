@@ -31,13 +31,13 @@ namespace Legacy {
 //  These tables are needed for compatibility with requests written in version
 //  <= 3.
 static char const * const barbarian_ware_types[] = {
-	"axe",
+	"ax",
 	"bread_paddle",
-	"battleaxe",
+	"battleax",
 	"beer",
 	"blackwood",
-	"broadaxe",
-	"bronzeaxe",
+	"broadax",
+	"bronzeax",
 	"cloth",
 	"coal",
 	"fire_tongs",
@@ -61,14 +61,14 @@ static char const * const barbarian_ware_types[] = {
 	"ration",
 	"raw_stone",
 	"scythe",
-	"sharpaxe",
+	"sharpax",
 	"shovel",
 	"snack",
 	"strongbeer",
 	"thatchreed",
 	"log",
 	"warhelm",
-	"warriorsaxe",
+	"warriorsax",
 	"water",
 	"wheat"
 };
@@ -104,7 +104,7 @@ static char const * const barbarian_worker_types[] = {
 static char const * const empire_ware_types[] = {
 	"advanced_lance",
 	"armor",
-	"axe",
+	"ax",
 	"bread_paddle",
 	"basket",
 	"beer",
