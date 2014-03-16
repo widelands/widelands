@@ -17,7 +17,6 @@
  *
  */
 
-// NOCOM(#sirver): check for ME also in conf files and therelike.
 #include "graphic/animation.h"
 
 #include <cassert>

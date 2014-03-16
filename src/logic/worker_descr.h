@@ -114,8 +114,6 @@ public:
 	typedef std::map<std::string, WorkerProgram *> Programs;
 	const Programs & programs() const {return m_programs;}
 
-	const std::string & compatibility_program(const std::string & programname) const;
-
 protected:
 
 	std::string       m_helptext;   ///< Short (tooltip-like) help text
@@ -139,14 +137,6 @@ protected:
 	 */
 	Ware_Index  m_becomes;
 	Programs    m_programs;
-
-	/**
-	 * Compatibility hints for loading save games of older versions.
-	 *
-	 * Maps program name to a string that is to be interpreted by the
-	 * game loading logic.
-	 */
-	std::map<std::string, std::string> m_compatibility_programs;
 };
 
 }

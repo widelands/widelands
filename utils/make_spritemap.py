@@ -584,7 +584,7 @@ def add_animation(arg):
     except:
         raise argparse.ArgumentTypeError('must be of the form "<name>,<x>,<y>", where x,y is the hotspot')
 
-# NOCOM(#sirver): support for dirpics.
+# TODO(sirver): support for dirpics
 def parse_args():
     p = argparse.ArgumentParser(description=
         """
@@ -710,7 +710,6 @@ def main():
         if chunkset is None:
             continue
         rects = [(chunk.pic.shape[0], chunk.pic.shape[1]) for chunk in chunkset.chunks]
-        print "#sirver rects: %r\n" % (rects)
         chunk_area = sum([r[0] * r[1] for r in rects])
         print 'Packing chunks of area %d pixels' % (chunk_area)
         ext0, ext1, offsets = pywi.packing.pack(rects)

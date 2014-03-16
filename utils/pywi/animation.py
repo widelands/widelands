@@ -410,7 +410,6 @@ def load_section(directory, section, context=None):
     elif typ == 2:
         anim = AnimationBlits.load(directory, d, context)
     elif typ == 1:
-        # NOCOM(#sirver): kill this?
         anim = load_packed(directory, d, context)
     else:
         raise Exception('cannot load this type of animation yet')

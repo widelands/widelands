@@ -91,7 +91,6 @@ m_click_recursion_protect(false)
 		}
 		assert(box);
 
-		// NOCOM(#sirver): hier ist noch was kaputt
 		UI::Checkbox & cb = *new UI::Checkbox
 			(box, pos,
 			 &g_gr->animations().get_animation(world.get_immovable_descr(i)->main_animation())

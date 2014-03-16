@@ -741,47 +741,29 @@ Map_Object::Loader * Immovable::load
 		uint8_t const version = fr.Unsigned8();
 		if (1 <= version and version <= IMMOVABLE_SAVEGAME_VERSION) {
 
-			char const * const owner = fr.CString ();
-			char const * const name  = fr.CString ();
+			const std::string owner_name = fr.CString();
+			const std::string name = fr.CString();
 			Immovable * imm = nullptr;
 
-			if (strcmp(owner, "world")) { //  It is a tribe immovable.
-				egbase.manually_load_tribe(owner);
+			if (owner_name != "world") { //  It is a tribe immovable.
+				egbase.manually_load_tribe(owner_name);
 
-				if (Tribe_Descr const * const tribe = egbase.get_tribe(owner)) {
-					std::string effective_name = name;
-					const std::vector<std::string> & compat =
-						tribe->compatibility_immovable(name);
-
-					if (compat.size() >= 1) {
-						if (compat[0] == "replace") {
-							if (compat.size() != 2)
-								throw game_data_error
-									("incomplete compatibility_immovable replace for %s",
-									 name);
-
-							effective_name = compat[1];
-						} else
-							throw game_data_error
-								("bad compatibility_immovable code %s for %s",
-								 compat[0].c_str(), name);
-					}
-
-					int32_t const idx = tribe->get_immovable_index(effective_name);
+				if (Tribe_Descr const * const tribe = egbase.get_tribe(owner_name)) {
+					int32_t const idx = tribe->get_immovable_index(name);
 					if (idx != -1)
 						imm = new Immovable(*tribe->get_immovable_descr(idx));
 					else
 						throw game_data_error
 							("tribe %s does not define immovable type \"%s\"",
-							 owner, effective_name.c_str());
+							 owner_name.c_str(), name.c_str());
 				} else
-					throw wexception("unknown tribe %s", owner);
+					throw wexception("unknown tribe %s", owner_name.c_str());
 			} else { //  world immovable
 				const World & world = egbase.map().world();
-				int32_t const idx = world.get_immovable_index(name);
+				int32_t const idx = world.get_immovable_index(name.c_str());
 				if (idx == -1)
 					throw wexception
-						("world does not define immovable type \"%s\"", name);
+						("world does not define immovable type \"%s\"", name.c_str());
 
 				imm = new Immovable(*world.get_immovable_descr(idx));
 			}

@@ -926,49 +926,6 @@ void Map_Buildingdata_Data_Packet::read_productionsite
 			for (uint16_t i = nr_workers; i; --i) {
 				Worker * worker = &mol.get<Worker>(fr.Unsigned32());
 
-				const std::vector<std::string> & compat =
-					pr_descr.compatibility_working_positions(worker->descr().name());
-				if (!compat.empty()) {
-					if (compat[0] == "flash") {
-						if (compat.size() != 2)
-							throw game_data_error
-								("working position '%s' compat usage: flash other-name",
-								 worker->descr().name().c_str());
-
-						worker->flash(compat[1]);
-					} else if (compat[0] == "replace") {
-						if (compat.size() != 2)
-							throw game_data_error
-								("working position '%s' compat usage: replace other-name",
-								 worker->descr().name().c_str());
-
-						const Tribe_Descr & tribe = worker->tribe();
-
-						log
-							("COMPAT(%s): replace '%s' (%u) by '%s' in '%s' (%u)\n",
-							 tribe.name().c_str(),
-							 worker->descr().name().c_str(), worker->serial(),
-							 compat[1].c_str(),
-							 pr_descr.name().c_str(), productionsite.serial());
-
-						mol.schedule_destroy(*worker);
-
-						const Worker_Descr & worker_descr =
-							*tribe.get_worker_descr
-							(tribe.safe_worker_index(compat[1]));
-						worker = &worker_descr.create
-							(game,
-							 productionsite.owner(),
-							 &productionsite,
-							 worker->get_position());
-						worker->start_task_buildingwork(game);
-						mol.schedule_act(*worker);
-					} else
-						throw game_data_error
-							("unknown compat '%s' for working position '%s'",
-							 compat[0].c_str(), worker->descr().name().c_str());
-				}
-
 				//  Find a working position that matches this worker.
 				const Worker_Descr & worker_descr = worker->descr();
 				ProductionSite::Working_Position * wp = &wp_begin;
@@ -1035,20 +992,6 @@ void Map_Buildingdata_Data_Packet::read_productionsite
 				std::transform
 					(program_name.begin(), program_name.end(), program_name.begin(),
 					 tolower);
-				const std::vector<std::string> & compat = pr_descr.compatibility_program(program_name);
-				if (!compat.empty()) {
-					if (compat[0] == "replace") {
-						if (compat.size() != 2)
-							throw game_data_error
-								("Program '%s' compatibility: usage: replace other-name",
-								 program_name.c_str());
-
-						program_name = compat[1];
-					} else
-						throw game_data_error
-							("Unknown compatibility code '%s' for program '%s'",
-							 compat[0].c_str(), program_name.c_str());
-				}
 
 				productionsite.m_stack[i].program =
 					productionsite.descr().get_program(program_name);

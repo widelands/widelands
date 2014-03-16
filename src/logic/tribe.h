@@ -234,8 +234,6 @@ struct Tribe_Descr : boost::noncopyable {
 
 	void resize_ware_orders(size_t maxLength);
 
-	const std::vector<std::string> & compatibility_immovable(const std::string & name) const;
-
 private:
 	const std::string m_name;
 	const World & m_world;
@@ -260,15 +258,6 @@ private:
 	Initializations m_initializations;
 
 	Military_Data   m_military_data;
-
-	typedef std::map<std::string, std::vector<std::string> > Compatibility;
-	/**
-	 * For savegame compatibility, this maps immovable names to strings
-	 * describing the appropriate compatibility preserving action.
-	 */
-	Compatibility m_compatibility_immovable;
-	std::map<std::string, std::string> m_compatibility_wares;
-
 };
 
 }

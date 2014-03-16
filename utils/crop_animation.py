@@ -51,7 +51,7 @@ def crop_images(basepath, section):
     else:
         filepattern=section['dirpics']
 
-    # NOCOM(#sirver): really get rid of this method.
+    # TODO(sirver): playercolor is never used in the conf files anymore. remove this.
     use_playercolor=False
     if 'playercolor' in section and \
        section['playercolor'].upper().strip()=="TRUE":

@@ -39,7 +39,6 @@ class Packer(object):
         can_grow_down = w <= self.root["w"]
         can_grow_right = h <= self.root["h"]
 
-        print "#sirver w: %r, h: %r, self.root['w']: %r, self.root['h']: %r\n" % (w, h, self.root['w'], self.root['h'])
         assert can_grow_down or can_grow_right
 
         # Grow to stay 'squarish'
@@ -100,4 +99,3 @@ def pack(rectangles):
     p = Packer()
     p.fit([Block(r[0], r[1]) for r in rectangles])
     return (p.root['w'], p.root['h'], p.get_result())
-
