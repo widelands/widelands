@@ -152,7 +152,7 @@ Fullscreen_Menu_Internet_Lobby::Fullscreen_Menu_Internet_Lobby
 
 	// prepare the lists
 	clientsonline .set_font(m_fn, m_fs);
-	clientsonline .add_column(22, "°");
+	clientsonline .add_column(22, "°", _("areallylongtooltiptextcrashedwidelandsitseems"));
 	clientsonline .add_column((m_lisw - 22) * 3 / 8, _("Name"));
 	clientsonline .add_column((m_lisw - 22) * 2 / 8, _("Points"));
 	clientsonline .add_column((m_lisw - 22) * 3 / 8, _("Game"));
